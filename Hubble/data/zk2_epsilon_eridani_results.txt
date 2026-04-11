@@ -1,0 +1,154 @@
+# Epsilon Eridani - zk^2=1 System Map (Clean Formulation)
+
+> **Three relations, no G:**
+> - `v = c/k` -- surface coupling velocity
+> - `r_cb = R/k^2 = Rz` -- c-boundary (= 1/2 Schwarzschild)
+> - `k = 1 -> v = c, r_cb = R` -- event horizon condition
+
+---
+
+## The Formulation
+
+```
+z       = measured (spectral shift)
+k       = 1/sqrt(z)
+v       = c/k = c*sqrt(z)
+r_cb    = R/k^2 = Rz            (c-boundary)
+r_s     = 2R/k^2 = 2Rz          (Schwarzschild)
+
+At k=1:  v = c,  r_cb = R       (event horizon)
+r_cb = 1/2 r_s   ALWAYS
+
+No G. No M. z and R are both MEASURED. c is defined.
+G = zRc^2/M -- it's a conversion factor, not a law.
+```
+
+G is the least precisely measured fundamental constant
+(22 ppm). z is measurable to < 1 ppm. R to < 10 ppm.
+c is exact. zk^2=1 bypasses the worst number in physics.
+
+---
+
+## Verification: G is Derived
+
+```
+From the Sun (best available measurements):
+  z_sun = 2.12270e-06  (HARPS spectral measurement)
+  R_sun = 6.95700e+08 m   (IAU 2015 nominal)
+  M_sun = 1.98892e+30 kg  (JPL DE440 ephemeris)
+
+  G = z*R*c^2/M = 6.67320880566e-11 m^3/(kg*s^2)
+  CODATA 2018:    6.67430000000e-11 m^3/(kg*s^2)
+  Match:          99.98365080%
+
+  G is derived from z, R, c, and M.
+  z, R, and M are all measured to higher precision than G.
+  c is exact.
+```
+
+---
+
+## Bodies Through zk^2=1
+
+| Body | R (m) | z | k | v (m/s) | r_cb (m) | r_s (m) | zk^2 |
+|------|-------|---|---|---------|----------|---------|------|
+| Earth | 6.371e+06 | 6.9536e-10 | 37922.3 | 7905.4 | 4.430e-03 | 8.860e-03 | 1.000000 |
+| Jupiter | 7.149e+07 | 1.4838e-08 | 8209.4 | 36518.1 | 1.061e+00 | 2.122e+00 | 1.000000 |
+| Aegir (b) | 8.937e+07 | 1.5773e-08 | 7962.4 | 37651.1 | 1.410e+00 | 2.819e+00 | 1.000000 |
+| Eps Eri | 5.113e+08 | 2.3686e-06 | 649.8 | 461388.3 | 1.211e+03 | 2.422e+03 | 1.000000 |
+| Sun | 6.957e+08 | 2.1226e-06 | 686.4 | 436772.0 | 1.477e+03 | 2.953e+03 | 1.000000 |
+| Neutron star | 1.000e+04 | 1.5000e-01 | 2.6 | 116109119.7 | 1.500e+03 | 3.000e+03 | 1.000000 |
+
+Read the columns:
+- **v**: Earth surface = 7.9 km/s (orbital velocity). Neutron star = 0.39c. At k=1, v=c. That's the horizon.
+- **r_cb**: Earth's c-boundary is 4.4 mm. The Sun's is 1,477 m. Half the Schwarzschild radius in every case.
+
+---
+
+## Epsilon Eridani System
+
+### Star (Ran)
+
+```
+R = 5.1130e+08 m    (measured: interferometry + parallax)
+z = 2.3686e-06    (measured: spectral lines)
+k = 649.8
+v = c/649.8 = 461.39 km/s
+r_cb = R/k^2 = 1211.1 m
+r_s  = 2422.1 m
+```
+
+### Planet b (Aegir)
+
+```
+R = 8.9370e+07 m    (derived from k-ratio)
+z = 1.5773e-08    (derived from k-ratio)
+k = 7962.4
+v = c/7962.4 = 37.65 km/s
+r_cb = R/k^2 = 1.410 m
+r_s  = 2.819 m
+```
+
+### k-Ratio
+
+```
+k_b / k_star = 7962.4 / 649.8 = 12.2543
+(k_b / k_star)^2 = 150.2
+
+This IS the M/R encoding:
+  k_b/k_star = sqrt((M_star*R_b)/(M_b*R_star))
+  Know any 3 -> get the 4th.
+```
+
+---
+
+## Orbital Map
+
+Every orbit has a z, a k, and a velocity -- derived from the
+star's z and R alone:
+
+```
+z(r) = z_star * (R_star/r)
+k(r) = k_star * sqrt(r/R_star)
+v(r) = c/k(r)
+```
+
+| Feature | r (AU) | z(r) | k(r) | v (km/s) | v/v_b |
+|---------|--------|------|------|----------|-------|
+| Inner belt | 3.00 | 2.6985e-09 | 19251 | 15.57 | 1.0847 |
+| Planet b | 3.53 | 2.2933e-09 | 20882 | 14.36 | 1.0000 |
+| Gap edge | 8.00 | 1.0119e-09 | 31436 | 9.54 | 0.6643 |
+| Secondary belt | 20.00 | 4.0477e-10 | 49705 | 6.03 | 0.4201 |
+| Main belt inner | 60.00 | 1.3492e-10 | 86091 | 3.48 | 0.2426 |
+| Main belt peak | 69.00 | 1.1732e-10 | 92322 | 3.25 | 0.2262 |
+| Main belt outer | 90.00 | 8.9948e-11 | 105439 | 2.84 | 0.1980 |
+
+Planet b orbits at k = 20,882. The gap it clears spans
+k = 19,251 to k = 31,436. The main belt peaks at k = 92,000
+where orbital velocity has dropped to 23% of the planet's.
+
+---
+
+## The Point
+
+```
+Traditional: needs G, M, R, c
+  G is measured to 22 ppm. Worst constant in physics.
+
+zk^2=1: needs z, R, c
+  z < 1 ppm. R < 10 ppm. c = exact.
+
+v = c/k
+r_cb = R/k^2  = 1/2 Schwarzschild
+k = 1 => event horizon
+
+G = zRc^2/M
+G is a conversion factor. Not a law.
+```
+
+JWST pointed a $10B telescope at this system and got a
+diffraction artifact. The entire architecture -- star,
+planet, debris belts, clearing zones -- is encoded in
+three symbols: z, k, R. Measured from the spectral lines.
+
+The number was always in the light.

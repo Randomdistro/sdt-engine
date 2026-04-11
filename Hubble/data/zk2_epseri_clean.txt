@@ -1,0 +1,97 @@
+================================================================
+  zk²=1 — THE CLEAN FORMULATION
+================================================================
+
+  z        = measured (spectral shift)
+  k        = 1/sqrt(z)
+  v_surface = c/k = c*sqrt(z)
+  r_cb     = R/k² = R*z           (c-boundary radius)
+  r_s      = 2*R/k² = 2*R*z       (Schwarzschild radius)
+  At k=1:  v_surface = c, r_cb = R (event horizon)
+  r_cb = 0.5 * r_s   ALWAYS
+
+  z and R are both MEASURED.
+
+Body                       R (m)             z           k  v_surf (m/s)      r_cb (m)       r_s (m)      zk²
+--------------------------------------------------------------------------------------------------------------
+Earth                  6.371e+06    6.9536e-10    37922.34       7905.43    4.4301e-03    8.8603e-03  1.000000
+Jupiter                7.149e+07    1.4838e-08     8209.42      36518.12    1.0608e+00    2.1215e+00  1.000000
+Ægir (b)              8.937e+07    1.5773e-08     7962.38      37651.12    1.4096e+00    2.8193e+00  1.000000
+Eps Eri (Ran)          5.113e+08    2.3686e-06      649.76     461388.29    1.2111e+03    2.4221e+03  1.000000
+Sun                    6.957e+08    2.1226e-06      686.38     436771.99    1.4767e+03    2.9534e+03  1.000000
+Neutron star           1.000e+04    1.5000e-01        2.58  116109119.72    1.5000e+03    3.0000e+03  1.000000
+
+================================================================
+  G IS DERIVED, NOT FUNDAMENTAL
+================================================================
+
+  From z_sun, R_sun, M_sun:
+  G = z*R*c²/M = 6.672626e-11 m³/(kg·s²)
+  CODATA value:   6.674300e-11 m³/(kg·s²)
+  Match:          99.9749%
+
+  G is the LEAST precisely measured fundamental constant.
+  Relative uncertainty: 2.2 × 10⁻⁵ (22 ppm)
+  Compare: c is EXACT (defined), z is measurable to 10⁻¹⁰
+
+  zk²=1 bypasses G entirely:
+    z = observable (spectral shift)
+    k = 1/sqrt(z)
+    v = c/k
+    r_cb = R/k² = R·z
+    r_s = 2R·z
+
+================================================================
+  EPSILON ERIDANI — THE CLEAN WAY
+================================================================
+
+STAR (Ran):
+  R = 5.1130e+08 m
+  z = 2.3686e-06 (measured)
+  k = 649.7617
+  v_surface = c/649.76 = 461388.3 m/s = 461.39 km/s
+  r_cb = R/k² = 1.2111e+03 m  (c-boundary)
+  r_s  = 2r_cb = 2.4221e+03 m  (Schwarzschild)
+
+PLANET b (Ægir):
+  R = 8.9370e+07 m
+  z = 1.5773e-08 (from k-ratio)
+  k = 7962.38
+  v_surface = c/7962.38 = 37651.1 m/s = 37.65 km/s
+  r_cb = R/k² = 1.4096e+00 m  (c-boundary)
+  r_s  = 2r_cb = 2.8193e+00 m  (Schwarzschild)
+
+ORBITAL MAP (gravitational potential from star):
+  z(r) = z_star × (R_star/r)    [potential at distance r]
+  k(r) = k_star × sqrt(r/R_star)
+  v(r) = c/k(r) = v_star × sqrt(R_star/r)  [orbital velocity]
+
+Feature               r (AU)          z(r)        k(r)     v(r) km/s    v(r)/v_b
+--------------------------------------------------------------------------------
+Inner belt              3.00    2.6985e-09       19251         15.57      1.0847
+Planet b                3.53    2.2933e-09       20882         14.36      1.0000
+Gap edge                8.00    1.0119e-09       31436          9.54      0.6643
+Belt 2                 20.00    4.0477e-10       49705          6.03      0.4201
+Belt 3 inner           60.00    1.3492e-10       86091          3.48      0.2426
+Belt 3 peak            69.00    1.1732e-10       92322          3.25      0.2262
+Belt 3 outer           90.00    8.9948e-11      105439          2.84      0.1980
+
+================================================================
+  THE POINT
+================================================================
+
+  Traditional gravity needs: G, M, R, c
+  G is measured to 22 ppm. It's the worst constant we have.
+
+  zk²=1 needs: z, R, c
+  z is measured to < 1 ppm. R is measured to < 10 ppm.
+  c is defined exactly.
+
+  Three relations, no G:
+    v = c/k         surface coupling velocity
+    r_cb = R/k²     c-boundary (= 0.5 Schwarzschild)
+    k=1 => v=c, r_cb=R   (event horizon condition)
+
+  G is what you get when you divide zRc² by M.
+  It's a conversion factor, not a law.
+

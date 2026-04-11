@@ -1,0 +1,364 @@
+======================================================================
+  SDT NUCLEAR CONSTRUCTION GRAMMAR — SYSTEMATIC ANALYSIS
+  Rule: Every nucleus = 1 alpha core + deuterons + tritons
+  Neutrons ONLY in deu (p+n) or tri (p+2n) formations
+======================================================================
+
+── PART 1: DECOMPOSITION TABLE ──
+
+  Isotope               Z    A    N  al   d   t   Abund%  SymScore  Status    
+  ──────────────────  ───  ───  ───  ──  ──  ──  ───────  ────────  ──────────
+  Hydrogen              1    1    0   0   0   0   99.989       100  VALID     
+  Deuterium             1    2    1   0   1   0    0.011       100  VALID     
+  Helium-3              2    3    1   0   1   0    0.000        -1  EDGE      
+  Helium-4              2    4    2   1   0   0  100.000       100  VALID     
+  Lithium-6             3    6    3   1   1   0    7.590       100  VALID     
+  Lithium-7             3    7    4   1   0   1   92.410        59  VALID     
+  Beryllium-9           4    9    5   1   1   1  100.000        59  VALID     
+  Boron-10              5   10    5   1   3   0   19.900       100  VALID     
+  Boron-11              5   11    6   1   2   1   80.100        59  VALID     
+  Carbon-12             6   12    6   1   4   0   98.930       100  VALID     
+  Carbon-13             6   13    7   1   3   1    1.070        59  VALID     
+  Nitrogen-14           7   14    7   1   5   0   99.632       100  VALID     
+  Nitrogen-15           7   15    8   1   4   1    0.368        59  VALID     
+  Oxygen-16             8   16    8   1   6   0   99.757       100  VALID     
+  Oxygen-17             8   17    9   1   5   1    0.038        59  VALID     
+  Oxygen-18             8   18   10   1   4   2    0.205        78  VALID     
+  Fluorine-19           9   19   10   1   6   1  100.000        59  VALID     
+  Neon-20              10   20   10   1   8   0   90.480       100  VALID     
+  Neon-21              10   21   11   1   7   1    0.270        59  VALID     
+  Neon-22              10   22   12   1   6   2    9.250        78  VALID     
+  Sodium-23            11   23   12   1   8   1  100.000        59  VALID     
+  Magnesium-24         12   24   12   1  10   0   78.990       100  VALID     
+  Magnesium-25         12   25   13   1   9   1   10.000        59  VALID     
+  Magnesium-26         12   26   14   1   8   2   11.010        78  VALID     
+  Aluminium-27         13   27   14   1  10   1  100.000        59  VALID     
+  Silicon-28           14   28   14   1  12   0   92.223       100  VALID     
+  Silicon-29           14   29   15   1  11   1    4.685        59  VALID     
+  Silicon-30           14   30   16   1  10   2    3.092        78  VALID     
+  Phosphorus-31        15   31   16   1  12   1  100.000        59  VALID     
+  Sulfur-32            16   32   16   1  14   0   94.990       100  VALID     
+  Sulfur-33            16   33   17   1  13   1    0.750        59  VALID     
+  Sulfur-34            16   34   18   1  12   2    4.250        78  VALID     
+  Sulfur-36            16   36   20   1  10   4    0.010        76  VALID     
+  Chlorine-35          17   35   18   1  14   1   75.760        59  VALID     
+  Chlorine-37          17   37   20   1  12   3   24.240        57  VALID     
+  Argon-36             18   36   18   1  16   0    0.337       100  VALID     
+  Argon-38             18   38   20   1  14   2    0.063        78  VALID     
+  Argon-40             18   40   22   1  12   4   99.600        76  VALID     
+  Potassium-39         19   39   20   1  16   1   93.258        59  VALID     
+  Potassium-40         19   40   21   1  15   2    0.012        78  VALID     
+  Potassium-41         19   41   22   1  14   3    6.730        57  VALID     
+  Calcium-40           20   40   20   1  18   0   96.941       100  VALID     
+  Calcium-42           20   42   22   1  16   2    0.647        78  VALID     
+  Calcium-43           20   43   23   1  15   3    0.135        57  VALID     
+  Calcium-44           20   44   24   1  14   4    2.086        76  VALID     
+  Calcium-46           20   46   26   1  12   6    0.004        74  VALID     
+  Calcium-48           20   48   28   1  10   8    0.187        72  VALID     
+  Scandium-45          21   45   24   1  16   3  100.000        57  VALID     
+  Titanium-46          22   46   24   1  18   2    8.250        78  VALID     
+  Titanium-47          22   47   25   1  17   3    7.440        57  VALID     
+  Titanium-48          22   48   26   1  16   4   73.720        76  VALID     
+  Titanium-49          22   49   27   1  15   5    5.410        55  VALID     
+  Titanium-50          22   50   28   1  14   6    5.180        74  VALID     
+  Vanadium-50          23   50   27   1  17   4    0.250        76  VALID     
+  Vanadium-51          23   51   28   1  16   5   99.750        55  VALID     
+  Chromium-50          24   50   26   1  20   2    4.345        78  VALID     
+  Chromium-52          24   52   28   1  18   4   83.789        76  VALID     
+  Chromium-53          24   53   29   1  17   5    9.501        55  VALID     
+  Chromium-54          24   54   30   1  16   6    2.365        74  VALID     
+  Manganese-55         25   55   30   1  18   5  100.000        55  VALID     
+  Iron-54              26   54   28   1  22   2    5.845        78  VALID     
+  Iron-56              26   56   30   1  20   4   91.754        76  VALID     
+  Iron-57              26   57   31   1  19   5    2.119        55  VALID     
+  Iron-58              26   58   32   1  18   6    0.282        74  VALID     
+  Cobalt-59            27   59   32   1  20   5  100.000        55  VALID     
+  Nickel-58            28   58   30   1  24   2   68.077        78  VALID     
+  Nickel-60            28   60   32   1  22   4   26.223        76  VALID     
+  Nickel-61            28   61   33   1  21   5    1.140        55  VALID     
+  Nickel-62            28   62   34   1  20   6    3.634        74  VALID     
+  Nickel-64            28   64   36   1  18   8    0.926        72  VALID     
+  Copper-63            29   63   34   1  22   5   69.170        55  VALID     
+  Copper-65            29   65   36   1  20   7   30.830        53  VALID     
+  Zinc-64              30   64   34   1  24   4   49.170        76  VALID     
+  Zinc-66              30   66   36   1  22   6   27.730        74  VALID     
+  Zinc-67              30   67   37   1  21   7    4.040        53  VALID     
+  Zinc-68              30   68   38   1  20   8   18.450        72  VALID     
+  Zinc-70              30   70   40   1  18  10    0.610        70  VALID     
+
+  GRAMMAR COVERAGE:
+    Valid decompositions: 76 / 77 (98.7%)
+    Edge cases: 1 (H-1, He-3)
+
+  SYMMETRY → ABUNDANCE CORRELATION:
+    Highest symmetry = highest abundance: 22 / 30 elements (73.3%)
+
+
+── PART 2: FAMILIAL CONSTRUCTION CHAINS ──
+
+  Each element builds from its predecessor by adding a deuteron or triton.
+  Parent + deu(+2) or tri(+3) → Child
+
+  Helium-3       ( 0.000%) + tri -> Lithium-6      ( 7.590%)
+  Helium-4       (100.000%) + deu -> Lithium-6      ( 7.590%)
+  Helium-4       (100.000%) + tri -> Lithium-7      (92.410%) *** DOMINANT
+  Lithium-6      ( 7.590%) + tri -> Beryllium-9    (100.000%) *** DOMINANT
+  Lithium-7      (92.410%) + deu -> Beryllium-9    (100.000%) *** DOMINANT
+  Beryllium-9    (100.000%) + deu -> Boron-11       (80.100%) *** DOMINANT
+  Boron-10       (19.900%) + deu -> Carbon-12      (98.930%) *** DOMINANT
+  Boron-10       (19.900%) + tri -> Carbon-13      ( 1.070%)
+  Boron-11       (80.100%) + deu -> Carbon-13      ( 1.070%)
+  Carbon-12      (98.930%) + deu -> Nitrogen-14    (99.632%) *** DOMINANT
+  Carbon-12      (98.930%) + tri -> Nitrogen-15    ( 0.368%)
+  Carbon-13      ( 1.070%) + deu -> Nitrogen-15    ( 0.368%)
+  Nitrogen-14    (99.632%) + deu -> Oxygen-16      (99.757%) *** DOMINANT
+  Nitrogen-14    (99.632%) + tri -> Oxygen-17      ( 0.038%)
+  Nitrogen-15    ( 0.368%) + deu -> Oxygen-17      ( 0.038%)
+  Nitrogen-15    ( 0.368%) + tri -> Oxygen-18      ( 0.205%)
+  Oxygen-16      (99.757%) + tri -> Fluorine-19    (100.000%) *** DOMINANT
+  Oxygen-17      ( 0.038%) + deu -> Fluorine-19    (100.000%) *** DOMINANT
+  Fluorine-19    (100.000%) + deu -> Neon-21        ( 0.270%)
+  Fluorine-19    (100.000%) + tri -> Neon-22        ( 9.250%)
+  Neon-20        (90.480%) + tri -> Sodium-23      (100.000%) *** DOMINANT
+  Neon-21        ( 0.270%) + deu -> Sodium-23      (100.000%) *** DOMINANT
+  Sodium-23      (100.000%) + deu -> Magnesium-25   (10.000%)
+  Sodium-23      (100.000%) + tri -> Magnesium-26   (11.010%)
+  Magnesium-24   (78.990%) + tri -> Aluminium-27   (100.000%) *** DOMINANT
+  Magnesium-25   (10.000%) + deu -> Aluminium-27   (100.000%) *** DOMINANT
+  Aluminium-27   (100.000%) + deu -> Silicon-29     ( 4.685%)
+  Aluminium-27   (100.000%) + tri -> Silicon-30     ( 3.092%)
+  Silicon-28     (92.223%) + tri -> Phosphorus-31  (100.000%) *** DOMINANT
+  Silicon-29     ( 4.685%) + deu -> Phosphorus-31  (100.000%) *** DOMINANT
+  Phosphorus-31  (100.000%) + deu -> Sulfur-33      ( 0.750%)
+  Phosphorus-31  (100.000%) + tri -> Sulfur-34      ( 4.250%)
+  Sulfur-32      (94.990%) + tri -> Chlorine-35    (75.760%) *** DOMINANT
+  Sulfur-33      ( 0.750%) + deu -> Chlorine-35    (75.760%) *** DOMINANT
+  Sulfur-34      ( 4.250%) + tri -> Chlorine-37    (24.240%)
+  Chlorine-35    (75.760%) + tri -> Argon-38       ( 0.063%)
+  Chlorine-37    (24.240%) + tri -> Argon-40       (99.600%) *** DOMINANT
+  Argon-36       ( 0.337%) + tri -> Potassium-39   (93.258%) *** DOMINANT
+  Argon-38       ( 0.063%) + deu -> Potassium-40   ( 0.012%)
+  Argon-38       ( 0.063%) + tri -> Potassium-41   ( 6.730%)
+  Potassium-39   (93.258%) + tri -> Calcium-42     ( 0.647%)
+  Potassium-40   ( 0.012%) + deu -> Calcium-42     ( 0.647%)
+  Potassium-40   ( 0.012%) + tri -> Calcium-43     ( 0.135%)
+  Potassium-41   ( 6.730%) + deu -> Calcium-43     ( 0.135%)
+  Potassium-41   ( 6.730%) + tri -> Calcium-44     ( 2.086%)
+  Calcium-42     ( 0.647%) + tri -> Scandium-45    (100.000%) *** DOMINANT
+  Calcium-43     ( 0.135%) + deu -> Scandium-45    (100.000%) *** DOMINANT
+  Scandium-45    (100.000%) + deu -> Titanium-47    ( 7.440%)
+  Scandium-45    (100.000%) + tri -> Titanium-48    (73.720%) *** DOMINANT
+  Titanium-47    ( 7.440%) + tri -> Vanadium-50    ( 0.250%)
+  Titanium-48    (73.720%) + deu -> Vanadium-50    ( 0.250%)
+  Titanium-48    (73.720%) + tri -> Vanadium-51    (99.750%) *** DOMINANT
+  Titanium-49    ( 5.410%) + deu -> Vanadium-51    (99.750%) *** DOMINANT
+  Vanadium-50    ( 0.250%) + deu -> Chromium-52    (83.789%) *** DOMINANT
+  Vanadium-50    ( 0.250%) + tri -> Chromium-53    ( 9.501%)
+  Vanadium-51    (99.750%) + deu -> Chromium-53    ( 9.501%)
+  Vanadium-51    (99.750%) + tri -> Chromium-54    ( 2.365%)
+  Chromium-52    (83.789%) + tri -> Manganese-55   (100.000%) *** DOMINANT
+  Chromium-53    ( 9.501%) + deu -> Manganese-55   (100.000%) *** DOMINANT
+  Manganese-55   (100.000%) + deu -> Iron-57        ( 2.119%)
+  Manganese-55   (100.000%) + tri -> Iron-58        ( 0.282%)
+  Iron-56        (91.754%) + tri -> Cobalt-59      (100.000%) *** DOMINANT
+  Iron-57        ( 2.119%) + deu -> Cobalt-59      (100.000%) *** DOMINANT
+  Cobalt-59      (100.000%) + deu -> Nickel-61      ( 1.140%)
+  Cobalt-59      (100.000%) + tri -> Nickel-62      ( 3.634%)
+  Nickel-60      (26.223%) + tri -> Copper-63      (69.170%) *** DOMINANT
+  Nickel-61      ( 1.140%) + deu -> Copper-63      (69.170%) *** DOMINANT
+  Nickel-62      ( 3.634%) + tri -> Copper-65      (30.830%)
+  Copper-63      (69.170%) + tri -> Zinc-66        (27.730%)
+  Copper-65      (30.830%) + deu -> Zinc-67        ( 4.040%)
+  Copper-65      (30.830%) + tri -> Zinc-68        (18.450%)
+
+
+── PART 3: FEEDSTOCK CONSUMPTION ANALYSIS ──
+
+  If parent + deu/tri -> child, and child is more abundant than parent,
+  then the parent was CONSUMED to build the child.
+  Current parent abundance = leftover after consumption.
+
+  Ne-21 (0.270% of Ne, cosmic 9.29e+03)
+    + deu -> Na-23 (100.000% of Na, cosmic 6.00e+04)
+    CONSUMED: 5.07e+04 (84.5% of original 6.00e+04)
+    Original parent fraction: 1.744% (vs current 0.270%)
+
+  Ne-20 (90.480% of Ne, cosmic 3.11e+06)
+    + tri -> Na-23 (100.000% of Na, cosmic 6.00e+04)
+    NOT consumed (child rarer than parent)
+
+  N-14 (99.632% of N, cosmic 2.11e+06)
+    + deu -> O-16 (99.757% of O, cosmic 1.57e+07)
+    CONSUMED: 1.35e+07 (86.5% of original 1.57e+07)
+    Original parent fraction: 738.766% (vs current 99.632%)
+
+  N-15 (0.368% of N, cosmic 7.80e+03)
+    + deu -> O-17 (0.038% of O, cosmic 5.97e+03)
+    NOT consumed (child rarer than parent)
+
+  O-16 (99.757% of O, cosmic 1.57e+07)
+    + tri -> F-19 (100.000% of F, cosmic 8.43e+02)
+    NOT consumed (child rarer than parent)
+
+  F-19 (100.000% of F, cosmic 8.43e+02)
+    + deu -> Ne-20 (90.480% of Ne, cosmic 3.11e+06)
+    CONSUMED: 3.11e+06 (100.0% of original 3.11e+06)
+    Original parent fraction: 369218.505% (vs current 100.000%)
+
+
+── PART 4: THE NEON-SODIUM-MAGNESIUM CHAIN ──
+
+  Cosmic abundances (Si = 10^6):
+
+    Ne-20: 3.11e+06 (90.48%)
+    Ne-21: 9.29e+03 ( 0.27%)
+    Ne-22: 3.18e+05 ( 9.25%)
+    Na-23: 6.00e+04 (100%)
+    Mg-24: 8.48e+05 (78.99%)
+    Mg-25: 1.07e+05 (10.00%)
+    Mg-26: 1.18e+05 (11.01%)
+
+  CHAIN ANALYSIS:
+
+  Ne-21 + deu -> Na-23:
+    Current Ne-21: 9.29e+03
+    Na-23 produced: 6.00e+04
+    Original Ne-21: 6.93e+04 (=current + consumed)
+    Original Ne-21 fraction: 1.98% (vs current 0.27%)
+    Consumed: 86.6%
+
+  Ne-22 + deu -> Na-24 (t1/2=15h) -> Mg-24:
+    Ne-22 abundance: 3.18e+05 (9.25%)
+    Mg-24 abundance: 8.48e+05 (78.99%)
+    Mg-24/Ne-22 = 2.7 (destination >> source)
+    -> Ne-22 was NOT the sole feedstock for Mg-24
+    -> Na-23 + deu -> Mg-24 is the dominant pathway
+
+  Na-23 + deu -> Mg-24 (DOMINANT):
+    Na-23: 6.00e+04
+    Mg-24: 8.48e+05
+    This requires most Na-23 to have been further processed.
+    Na-23 is a WAYPOINT, not a destination.
+
+  Ne-22 + tri -> Na-25 (t1/2=59s) -> Mg-25:
+    Ne-22: 3.18e+05 (9.25%)
+    Mg-25: 1.07e+05 (10.00%)
+    Mg-25/Ne-22 = 0.34
+    -> RATIO MATCH: 9.25% Ne-22 maps to 10.00% Mg-25
+    -> The triton-substituted branch PRESERVES its share!
+
+
+── PART 5: SYMMETRY → ABUNDANCE PREDICTIONS ──
+
+  Testing: most symmetric (n_tri=0) isotope is most abundant.
+
+  Z     #    Most Symmetric      Most Abundant       Match?
+  ────  ───  ──────────────────  ──────────────────  ──────
+  1     2    Hydrogen            Hydrogen            YES
+  2     2    Helium-4            Helium-4            YES
+  3     2    Lithium-6           Lithium-7           no
+  5     2    Boron-10            Boron-11            no
+  6     2    Carbon-12           Carbon-12           YES
+  7     2    Nitrogen-14         Nitrogen-14         YES
+  8     3    Oxygen-16           Oxygen-16           YES
+  10    3    Neon-20             Neon-20             YES
+  12    3    Magnesium-24        Magnesium-24        YES
+  14    3    Silicon-28          Silicon-28          YES
+  16    4    Sulfur-32           Sulfur-32           YES
+  17    2    Chlorine-35         Chlorine-35         YES
+  18    3    Argon-36            Argon-40            no
+  19    3    Potassium-40        Potassium-39        no
+  20    6    Calcium-40          Calcium-40          YES
+  22    5    Titanium-46         Titanium-48         no
+  23    2    Vanadium-50         Vanadium-51         no
+  24    4    Chromium-50         Chromium-52         no
+  26    4    Iron-54             Iron-56             no
+  28    5    Nickel-58           Nickel-58           YES
+  29    2    Copper-63           Copper-63           YES
+  30    5    Zinc-64             Zinc-64             YES
+
+  RESULT: Symmetry predicts abundance in 14 / 22 multi-isotope elements (63.6%)
+
+
+── PART 6: CONSTRUCTION GEOMETRY FOR KEY NUCLEI ──
+
+  Helium-4         (Z=2, A=4): 0d + 0t
+    Alpha core (tetrahedron). THE brick.
+
+  Lithium-6        (Z=3, A=6): 1d + 0t
+    Alpha + 1 deuteron. Dumbbell (prolate).
+
+  Lithium-7        (Z=3, A=7): 0d + 1t
+    Alpha + 1 triton. Prolate spheroid.
+
+  Beryllium-9      (Z=4, A=9): 1d + 1t
+    Alpha + 1d + 1t. First mixed construction.
+
+  Boron-10         (Z=5, A=10): 3d + 0t
+    Alpha + 2d. Symmetric pair around core.
+
+  Boron-11         (Z=5, A=11): 2d + 1t
+    Alpha + 1d + 1t. Asymmetric, but dominant (80.1%).
+
+  Carbon-12        (Z=6, A=12): 4d + 0t
+    Alpha + 4d. Triangular pyramid of deuterons. NOT 3 alphas.
+
+  Carbon-13        (Z=6, A=13): 3d + 1t
+    Alpha + 3d + 1t. One triton substitution.
+
+  Nitrogen-14      (Z=7, A=14): 5d + 0t
+    Alpha + 5d. Triangular bipyramid of deuterons.
+
+  Nitrogen-15      (Z=7, A=15): 4d + 1t
+    Alpha + 4d + 1t. One triton substitution (0.368%).
+
+  Oxygen-16        (Z=8, A=16): 6d + 0t
+    Alpha + 6d. Octahedral deuteron shell. NOT 4 alphas.
+
+  Oxygen-17        (Z=8, A=17): 5d + 1t
+    Alpha + 5d + 1t. Rare triton sub (0.038%).
+
+  Oxygen-18        (Z=8, A=18): 4d + 2t
+    Alpha + 4d + 2t. Opposing tritons restore partial symmetry (0.205% > 0.038%).
+
+  Fluorine-19      (Z=9, A=19): 6d + 1t
+    Alpha + 6d + 1t. Odd triton breaks symmetry. Only 1 stable isotope.
+
+  Neon-20          (Z=10, A=20): 8d + 0t
+    Alpha + 8d. Full deuteron cube around core. THE compressor.
+
+  Neon-21          (Z=10, A=21): 7d + 1t
+    Alpha + 7d + 1t. One broken face (0.27% — feedstock).
+
+  Neon-22          (Z=10, A=22): 6d + 2t
+    Alpha + 6d + 2t. Opposing tritons (9.25%). Partially restored.
+
+  Sodium-23        (Z=11, A=23): 8d + 1t
+    Alpha + 8d + 1t. Neon-20 + triton, or Ne-21 + deuteron.
+
+  Iron-56          (Z=26, A=56): 20d + 4t
+    Alpha + 20d + 4t. End of the line (peak binding energy).
+
+
+── PART 7: OPPOSING-TRITON SYMMETRY TEST ──
+
+  If even triton counts are more stable than odd:
+  Then for isotopes with 2 tritons, abundance > 1 triton (same element)
+
+  O-17   (1t,  0.038%) vs O-18   (2t,  0.205%) -> 2t WINS (symmetric)
+  Ne-21  (1t,  0.270%) vs Ne-22  (2t,  9.250%) -> 2t WINS (symmetric)
+  Mg-25  (1t, 10.000%) vs Mg-26  (2t, 11.010%) -> 2t WINS (symmetric)
+  Si-29  (1t,  4.685%) vs Si-30  (2t,  3.092%) -> 1t WINS (asymmetric)
+  S-33   (1t,  0.750%) vs S-34   (2t,  4.250%) -> 2t WINS (symmetric)
+  Ca-43  (1t,  0.135%) vs Ca-44  (2t,  2.086%) -> 2t WINS (symmetric)
+  Ti-47  (1t,  7.440%) vs Ti-48  (2t, 73.720%) -> 2t WINS (symmetric)
+  Cr-53  (1t,  9.501%) vs Cr-54  (2t,  2.365%) -> 1t WINS (asymmetric)
+  Fe-57  (1t,  2.119%) vs Fe-58  (2t,  0.282%) -> 1t WINS (asymmetric)
+
+  RESULT: 2-triton > 1-triton in 6 / 9 cases (66.7%)
+  (Failures may indicate additional symmetry breaking mechanisms)
+
+
+======================================================================
+  INVESTIGATION COMPLETE
+======================================================================
