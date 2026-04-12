@@ -8,10 +8,11 @@
  *   3. Near-Earth Object close approaches (JPL CNEOS dataset)
  *   4. Apophis 2029 keyhole resolution analysis
  *
- * Three correction layers:
+ * Four correction layers:
  *   Layer 1: Anderson geometry  — Δv = K × v∞ × (cos δ_in − cos δ_out)
  *   Layer 2: Altitude falloff   — × (R_E / r_perigee)²
  *   Layer 3: Magnetospheric     — × M(P_dyn)  [solar wind modulation]
+ *   Layer 4: Orbital position   — × O(r_sun)  [perihelion/aphelion]
  *
  * The steradian-to-steradian convergence mapping from the CMB sphere
  * (R_CMB = 9.53e26 m) to each Planck cross-section (ℓ_P²) underpins
@@ -50,6 +51,14 @@ namespace sdt {
     constexpr double r0_quiet_RE = 10.8;
     constexpr double r0_quiet_m  = r0_quiet_RE * R_Earth;
     
+    // Earth orbital parameters (IAU)
+    constexpr double AU           = 1.495'978'707e8;        // km
+    constexpr double r_perihelion = 1.471e8;                // km  (Jan ~3)
+    constexpr double r_aphelion   = 1.521e8;                // km  (Jul ~4)
+    constexpr double r_mean       = AU;                     // km
+    constexpr double e_orbit      = 0.0167086;              // eccentricity
+    constexpr double day_perihelion = 3.0;                  // Jan 3 ≈ day 3
+    
     // Steradian-to-steradian mapping constants
     constexpr double l_P         = 1.616'255e-35;           // m
     constexpr double R_CMB       = 9.527e26;                // m
@@ -83,6 +92,41 @@ MagnetopauseState magnetopause(double P_dyn_nPa) {
 }
 
 // ────────────────────────────────────────────
+//  Earth-Sun distance model
+// ────────────────────────────────────────────
+
+/**
+ * @brief  Earth-Sun distance on a given day-of-year
+ *         r(t) = a(1 − e²) / (1 + e cos(θ))
+ *         Simplified: r ≈ AU × (1 − e × cos(2π(day − day_perihelion)/365.25))
+ * @return distance in km
+ */
+double earth_sun_distance_km(double day_of_year) {
+    double theta = 2.0 * std::numbers::pi * (day_of_year - sdt::day_perihelion) / 365.25;
+    return sdt::AU * (1.0 - sdt::e_orbit * std::cos(theta));
+}
+
+/**
+ * @brief  Orbital convergence modulation factor
+ *         Solar convergence at Earth ∝ 1/r².  Normalised to mean distance.
+ *         O = (r_mean / r_actual)²
+ *         Perihelion (Jan 3):  O ≈ 1.034  (+3.4%)
+ *         Aphelion  (Jul 4):  O ≈ 0.967  (-3.3%)
+ */
+double orbital_modulation(double day_of_year) {
+    double r = earth_sun_distance_km(day_of_year);
+    return (sdt::r_mean / r) * (sdt::r_mean / r);
+}
+
+/**
+ * @brief  Convert month/day to day-of-year (non-leap approximation)
+ */
+int day_of_year(int month, int day) {
+    constexpr int days_before[] = {0, 0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334};
+    return days_before[month] + day;
+}
+
+// ────────────────────────────────────────────
 //  Data structures
 // ────────────────────────────────────────────
 struct Flyby {
@@ -95,6 +139,7 @@ struct Flyby {
     double measured_dv_mm_s;
     double measured_sigma;
     double P_dyn_nPa;       // Estimated solar wind at flyby time
+    int    doy;             // Day of year
 };
 
 struct NEO_Approach {
@@ -107,6 +152,7 @@ struct NEO_Approach {
     double delta_in_est;    // Estimated incoming declination
     double delta_out_est;   // Estimated outgoing declination
     double P_dyn_nPa;       // Estimated solar wind
+    int    doy;             // Day of year
 };
 
 // ────────────────────────────────────────────
@@ -118,16 +164,17 @@ static const std::vector<Flyby> spacecraft_flybys = {
     // SC23 Rise (Jan 1998): ~2-3 nPa, SC23 Max (Aug 1999): ~4-6 nPa
     // SC23 Decl (Mar 2005): ~2-4 nPa, SC23 Decl (Aug 2005): ~3-5 nPa
     // SC24 Min (Nov 2007/2009): ~1-2 nPa, SC24 Weak Max (Oct 2013): ~2-3 nPa
-    {"Galileo I",   "1990-12-08",  960,  8.949, -12.5, -34.2, +3.92,  0.08, 5.0},
-    {"Galileo II",  "1992-12-08",  303,  8.877, -34.3, -4.9,  -4.60,  1.00, 3.5},
-    {"NEAR",        "1998-01-23",  539,  6.851, -20.8, -71.9, +13.46, 0.13, 2.5},
-    {"Cassini",     "1999-08-18", 1175, 16.01,  -12.9, -4.99, -2.00,  1.00, 5.0},
-    {"Rosetta I",   "2005-03-04", 1956,  3.863, -2.8,  -34.3, +1.82,  0.05, 3.0},
-    {"MESSENGER",   "2005-08-02", 2347,  4.056, +31.4, -31.9, +0.02,  0.01, 4.0},
+    //                                                                                  P_dyn  DOY
+    {"Galileo I",   "1990-12-08",  960,  8.949, -12.5, -34.2, +3.92,  0.08, 5.0, 342},  // Dec 8
+    {"Galileo II",  "1992-12-08",  303,  8.877, -34.3, -4.9,  -4.60,  1.00, 3.5, 343},  // Dec 8 (leap)
+    {"NEAR",        "1998-01-23",  539,  6.851, -20.8, -71.9, +13.46, 0.13, 2.5,  23},  // Jan 23
+    {"Cassini",     "1999-08-18", 1175, 16.01,  -12.9, -4.99, -2.00,  1.00, 5.0, 230},  // Aug 18
+    {"Rosetta I",   "2005-03-04", 1956,  3.863, -2.8,  -34.3, +1.82,  0.05, 3.0,  63},  // Mar 4
+    {"MESSENGER",   "2005-08-02", 2347,  4.056, +31.4, -31.9, +0.02,  0.01, 4.0, 214},  // Aug 2
     // Null results
-    {"Rosetta II",  "2007-11-13", 5301,  9.32,  -6.0,  -6.7,   0.0,  0.5,  1.5},
-    {"Rosetta III", "2009-11-13", 2481,  9.36, -34.2, -24.7,   0.0,  0.5,  1.2},
-    {"Juno",        "2013-10-09",  559,  9.87, -17.1, -22.1,   0.0,  0.5,  2.5},
+    {"Rosetta II",  "2007-11-13", 5301,  9.32,  -6.0,  -6.7,   0.0,  0.5,  1.5, 317},  // Nov 13
+    {"Rosetta III", "2009-11-13", 2481,  9.36, -34.2, -24.7,   0.0,  0.5,  1.2, 317},  // Nov 13
+    {"Juno",        "2013-10-09",  559,  9.87, -17.1, -22.1,   0.0,  0.5,  2.5, 282},  // Oct 9
 };
 
 // ────────────────────────────────────────────
@@ -135,19 +182,19 @@ static const std::vector<Flyby> spacecraft_flybys = {
 //  Declination estimates derived from orbital geometry
 // ────────────────────────────────────────────
 static const std::vector<NEO_Approach> neo_approaches = {
-    // Well-tracked objects with known geometry
-    {"2023 BU",     "2023-01-27", 6.66e-05,  9.27,  2.43, 29.7, +15.0, +10.0, 2.0},
-    {"2020 VT4",    "2020-11-13", 4.51e-05, 13.43,  7.88, 28.6, -25.0, +40.0, 3.0},
-    {"2011 CQ1",    "2011-02-04", 7.92e-05,  9.69,  5.17, 32.1, +10.0, -15.0, 2.0},
-    {"2011 MD",     "2011-06-27", 1.25e-04,  6.70,  1.48, 28.0, -30.0, +20.0, 1.8},
-    {"2020 QG",     "2020-08-16", 6.23e-05, 12.33,  8.15, 29.9, +45.0, -20.0, 2.5},
-    {"2008 TS26",   "2008-10-09", 8.45e-05, 15.76, 13.62, 33.2, -10.0, -50.0, 1.5},
-    {"2004 FU162",  "2004-03-31", 8.63e-05, 13.39, 10.84, 29.5, +20.0, -35.0, 3.0},
-    {"2020 JJ",     "2020-05-04", 8.96e-05, 14.36, 12.11, 29.9, -15.0, +25.0, 2.2},
-    {"2018 UA",     "2018-10-19", 9.14e-05, 14.15, 11.91, 30.2, +30.0, -10.0, 2.5},
-    {"2019 UN13",   "2019-10-31", 8.43e-05, 12.85, 10.09, 32.0, -40.0, +15.0, 2.0},
-    {"2024 XA",     "2024-12-01", 5.16e-05, 13.57,  8.99, 31.6, +5.0,  -30.0, 3.0},
-    {"2025 UC11",   "2025-10-30", 4.41e-05, 11.36,  2.89, 34.1, -20.0, +35.0, 2.5},
+    //                                                                              P_dyn DOY
+    {"2023 BU",     "2023-01-27", 6.66e-05,  9.27,  2.43, 29.7, +15.0, +10.0, 2.0,  27},
+    {"2020 VT4",    "2020-11-13", 4.51e-05, 13.43,  7.88, 28.6, -25.0, +40.0, 3.0, 318},
+    {"2011 CQ1",    "2011-02-04", 7.92e-05,  9.69,  5.17, 32.1, +10.0, -15.0, 2.0,  35},
+    {"2011 MD",     "2011-06-27", 1.25e-04,  6.70,  1.48, 28.0, -30.0, +20.0, 1.8, 178},
+    {"2020 QG",     "2020-08-16", 6.23e-05, 12.33,  8.15, 29.9, +45.0, -20.0, 2.5, 229},
+    {"2008 TS26",   "2008-10-09", 8.45e-05, 15.76, 13.62, 33.2, -10.0, -50.0, 1.5, 283},
+    {"2004 FU162",  "2004-03-31", 8.63e-05, 13.39, 10.84, 29.5, +20.0, -35.0, 3.0,  91},
+    {"2020 JJ",     "2020-05-04", 8.96e-05, 14.36, 12.11, 29.9, -15.0, +25.0, 2.2, 125},
+    {"2018 UA",     "2018-10-19", 9.14e-05, 14.15, 11.91, 30.2, +30.0, -10.0, 2.5, 292},
+    {"2019 UN13",   "2019-10-31", 8.43e-05, 12.85, 10.09, 32.0, -40.0, +15.0, 2.0, 304},
+    {"2024 XA",     "2024-12-01", 5.16e-05, 13.57,  8.99, 31.6, +5.0,  -30.0, 3.0, 336},
+    {"2025 UC11",   "2025-10-30", 4.41e-05, 11.36,  2.89, 34.1, -20.0, +35.0, 2.5, 303}
 };
 
 // ────────────────────────────────────────────
@@ -160,14 +207,15 @@ static constexpr double deg_to_rad(double deg) {
 static constexpr double AU_to_km = 1.495'978'707e8;  // km per AU
 
 /**
- * SDT full prediction with three correction layers:
+ * SDT full prediction with four correction layers:
  *   1. Anderson geometry: ε_rot × v∞ × (cos δ_in − cos δ_out)
  *   2. Altitude falloff:  (R_E / r_perigee)²
  *   3. Magnetosphere:     M(P_dyn) = (r₀/r₀_quiet)²
+ *   4. Orbital position:  O(doy) = (r_mean/r_sun)² — perihelion/aphelion
  */
 double sdt_full_prediction(double v_inf_km_s, double perigee_km,
                            double delta_in_deg, double delta_out_deg,
-                           double P_dyn_nPa) {
+                           double P_dyn_nPa, int doy) {
     double v_inf_m_s = v_inf_km_s * 1000.0;
     double h_m       = perigee_km * 1000.0;
     double cos_in    = std::cos(deg_to_rad(delta_in_deg));
@@ -183,7 +231,12 @@ double sdt_full_prediction(double v_inf_km_s, double perigee_km,
     // Layer 3: magnetospheric modulation
     auto mag = magnetopause(P_dyn_nPa);
     
-    return dv_base * alt_factor * mag.modulation * 1000.0;  // mm/s
+    // Layer 4: Earth orbital position
+    //   Solar convergence at Earth ∝ 1/r².  At perihelion the Sun
+    //   is 3.3% closer → 6.9% more convergence pressure.
+    double O = orbital_modulation(static_cast<double>(doy));
+    
+    return dv_base * alt_factor * mag.modulation * O * 1000.0;  // mm/s
 }
 
 double anderson_prediction(double v_inf_km_s, double delta_in_deg, double delta_out_deg) {
@@ -197,10 +250,10 @@ double anderson_prediction(double v_inf_km_s, double delta_in_deg, double delta_
 //  main
 // ────────────────────────────────────────────
 int main() {
-    std::cout << "╔═══════════════════════════════════════════════════════════════════════╗\n";
-    std::cout << "║  SDT Flyby Anomaly Engine v2.0 — Convergent Gradient + Magnetosphere  ║\n";
-    std::cout << "║  James Christopher Tyndall — Melbourne, AU — April 2026                ║\n";
-    std::cout << "╚═══════════════════════════════════════════════════════════════════════╝\n\n";
+    std::cout << "╔═══════════════════════════════════════════════════════════════════════════╗\n";
+    std::cout << "║  SDT Flyby Anomaly Engine v3.0 — Geometry + Alt + Magneto + Orbital Pos  ║\n";
+    std::cout << "║  James Christopher Tyndall — Melbourne, AU — April 2026                   ║\n";
+    std::cout << "╚═══════════════════════════════════════════════════════════════════════════╝\n\n";
 
     // ── Steradian mapping ──
     std::cout << "  STERADIAN-TO-STERADIAN CONVERGENCE MAPPING\n";
@@ -233,6 +286,30 @@ int main() {
     std::cout << "  Extreme (100nPa): r₀ = " << mag_x.r0_RE << " R_E,  M = "
               << std::setprecision(3) << mag_x.modulation << "\n\n";
 
+    // ── Orbital position ──
+    std::cout << "  EARTH ORBITAL POSITION (Solar Convergence Modulation)\n";
+    std::cout << "  ────────────────────────────────────────────────────\n";
+    double O_peri = orbital_modulation(3.0);
+    double O_equi = orbital_modulation(80.0);
+    double O_aph  = orbital_modulation(185.0);
+    double O_aut  = orbital_modulation(266.0);
+    std::cout << std::fixed << std::setprecision(0);
+    std::cout << "  Perihelion (Jan 3):   r = " << earth_sun_distance_km(3.0)
+              << " km,  O = " << std::setprecision(4) << O_peri
+              << "  (+" << std::setprecision(1) << (O_peri - 1.0) * 100.0 << "%)\n";
+    std::cout << std::setprecision(0);
+    std::cout << "  Vernal eq  (Mar 21):  r = " << earth_sun_distance_km(80.0)
+              << " km,  O = " << std::setprecision(4) << O_equi << "\n";
+    std::cout << std::setprecision(0);
+    std::cout << "  Aphelion   (Jul 4):   r = " << earth_sun_distance_km(185.0)
+              << " km,  O = " << std::setprecision(4) << O_aph
+              << "  (" << std::setprecision(1) << (O_aph - 1.0) * 100.0 << "%)\n";
+    std::cout << std::setprecision(0);
+    std::cout << "  Autumnal   (Sep 23):  r = " << earth_sun_distance_km(266.0)
+              << " km,  O = " << std::setprecision(4) << O_aut << "\n";
+    std::cout << "  Range: " << std::setprecision(1)
+              << (O_peri / O_aph - 1.0) * 100.0 << "% variation perihelion vs aphelion\n\n";
+
     // ── Spacecraft flybys ──
     std::cout << "══════════════════════════════════════════════════════════════════════\n";
     std::cout << "  SPACECRAFT FLYBYS — ANDERSON 2008 + LATER NULL RESULTS\n";
@@ -240,49 +317,57 @@ int main() {
     
     std::cout << std::left << std::setw(14) << "Spacecraft"
               << std::right 
-              << std::setw(8) << "P_dyn"
-              << std::setw(8) << "M"
-              << std::setw(10) << "Meas"
-              << std::setw(10) << "Anderson"
-              << std::setw(10) << "SDT+A"
-              << std::setw(10) << "SDT+A+M"
-              << std::setw(10) << "Resid"
+              << std::setw(6) << "DOY"
+              << std::setw(6) << "O"
+              << std::setw(7) << "P_dyn"
+              << std::setw(7) << "M"
+              << std::setw(8) << "Meas"
+              << std::setw(9) << "Andersn"
+              << std::setw(8) << "SDT+A"
+              << std::setw(9) << "SDT+AMO"
+              << std::setw(8) << "Resid"
               << "\n";
     std::cout << std::setw(14) << ""
-              << std::setw(8) << "(nPa)"
-              << std::setw(8) << ""
-              << std::setw(10) << "(mm/s)"
-              << std::setw(10) << "(mm/s)"
-              << std::setw(10) << "(mm/s)"
-              << std::setw(10) << "(mm/s)"
-              << std::setw(10) << "(mm/s)"
+              << std::setw(6) << ""
+              << std::setw(6) << ""
+              << std::setw(7) << "(nPa)"
+              << std::setw(7) << ""
+              << std::setw(8) << "(mm/s)"
+              << std::setw(9) << "(mm/s)"
+              << std::setw(8) << "(mm/s)"
+              << std::setw(9) << "(mm/s)"
+              << std::setw(8) << "(mm/s)"
               << "\n";
-    std::cout << std::string(80, '-') << "\n";
+    std::cout << std::string(84, '-') << "\n";
     
     for (auto const& f : spacecraft_flybys) {
         double ap = anderson_prediction(f.v_inf_km_s, f.delta_in_deg, f.delta_out_deg);
         
-        // SDT with altitude only (M=1)
+        // SDT with altitude only (M=1, O=1 mean)
         double sp_alt = sdt_full_prediction(f.v_inf_km_s, f.perigee_km,
-                          f.delta_in_deg, f.delta_out_deg, 2.0);  // quiet
+                          f.delta_in_deg, f.delta_out_deg, 2.0, 80);  // quiet, mean orbit
         
-        // SDT with altitude + magnetosphere
+        // SDT with ALL four layers
         double sp_full = sdt_full_prediction(f.v_inf_km_s, f.perigee_km,
-                           f.delta_in_deg, f.delta_out_deg, f.P_dyn_nPa);
+                           f.delta_in_deg, f.delta_out_deg, f.P_dyn_nPa, f.doy);
         
         auto mag = magnetopause(f.P_dyn_nPa);
+        double O = orbital_modulation(static_cast<double>(f.doy));
         double resid = f.measured_dv_mm_s - sp_full;
         
         std::cout << std::left << std::setw(14) << f.name
-                  << std::right << std::fixed << std::setprecision(1)
-                  << std::setw(8) << f.P_dyn_nPa
-                  << std::setprecision(3) << std::setw(8) << mag.modulation
+                  << std::right << std::fixed << std::setprecision(0)
+                  << std::setw(6) << f.doy
+                  << std::setprecision(3) << std::setw(6) << O
+                  << std::setprecision(1)
+                  << std::setw(7) << f.P_dyn_nPa
+                  << std::setprecision(3) << std::setw(7) << mag.modulation
                   << std::setprecision(2)
-                  << std::setw(10) << f.measured_dv_mm_s
-                  << std::setw(10) << ap
-                  << std::setw(10) << sp_alt
-                  << std::setw(10) << sp_full
-                  << std::setw(10) << resid
+                  << std::setw(8) << f.measured_dv_mm_s
+                  << std::setw(9) << ap
+                  << std::setw(8) << sp_alt
+                  << std::setw(9) << sp_full
+                  << std::setw(8) << resid
                   << "\n";
     }
 
@@ -315,7 +400,8 @@ int main() {
         
         double ap = anderson_prediction(neo.v_inf_km_s, neo.delta_in_est, neo.delta_out_est);
         double sp = sdt_full_prediction(neo.v_inf_km_s, perigee_km,
-                                        neo.delta_in_est, neo.delta_out_est, neo.P_dyn_nPa);
+                                        neo.delta_in_est, neo.delta_out_est, 
+                                        neo.P_dyn_nPa, neo.doy);
         
         // 1-year trajectory shift
         double shift_km = std::abs(sp / 1000.0) * 365.25 * 24.0 * 3600.0 / 1000.0;
