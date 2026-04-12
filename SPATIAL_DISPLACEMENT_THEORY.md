@@ -22,23 +22,27 @@ This is not a metaphor. This is the mechanical picture from which five laws are 
 
 ### What Space Is
 
-The word "vacuum" comes from the Latin *vacuus*, meaning empty. It is perhaps the most misleading word in physics. The space between galaxies, between stars, between atoms, is not empty. It carries the cosmic microwave background radiation — a sea of photons at 2.7255 Kelvin, filling every cubic metre of the observable universe with an energy density of 4.17 × 10⁻¹⁴ joules per cubic metre.
+The word "vacuum" comes from the Latin *vacuus*, meaning empty. It is perhaps the most misleading word in physics. The space between galaxies, between stars, between atoms, is not empty. It carries the cosmic microwave background radiation — a sea of photons at 2.7255 Kelvin.
 
-Standard physics acknowledges this radiation but treats it as a relic — leftover light from an early hot phase of a once-compressed, now-expanding universe. SDT treats it differently. The CMB is not a relic. It is the operating pressure of the medium. It is the energy content that makes the lattice work.
+The raw energy density of this radiation is 4.17 × 10⁻¹⁴ joules per cubic metre — an unremarkable-sounding number. But that number is misleading, because it measures the local energy content of a single cubic metre. What SDT recognises is what happens when you consider the full convergence. Every Planck-sized point in space sits at the centre of an enormous sphere stretching to the Clearing — approximately 9.53 × 10²⁶ metres away. That sphere contains N ≈ 5.89 × 10⁶¹ nested shells, each one Planck length thick. Every shell relays its energy content inward. The total convergence burden arriving at that single Planck-scale point is:
+
+> Φ = N × ε = 5.89 × 10⁶¹ × 1.76 × 10⁻¹¹⁸ J ≈ 1.04 × 10⁻⁵⁶ joules
+
+This produces a convergence pressure of P_conv = N × u_CMB ≈ 2.46 × 10⁴⁸ pascals — forty-eight orders of magnitude above anything in human engineering. The CMB is not a faint cosmological relic. It is the operating pressure of the universe. Every point in space is under this pressure, from every direction, at every moment.
+
+Standard physics acknowledges the CMB but treats the 4.17 × 10⁻¹⁴ J/m³ figure as the whole story — a cold, dilute relic. SDT says: sum the shells. When you do, the "dilute background" becomes the most intense pressure field in existence — balanced, omnidirectional, and the source of every force.
 
 The spation lattice is a nearest-neighbour relay medium. Think of a grid of ball bearings touching one another. If you push one, the push propagates through the grid at a speed determined by the stiffness and mass of the bearings. The spation lattice is like this, but three-dimensional, extending in every direction, with a relay speed equal to the speed of light. Push the lattice and the disturbance travels at 299,792,458 metres per second. Not because nature chose this number, but because this is how fast energy propagates through the medium.
 
 Light is not a particle riding through empty space. Light is a disturbance propagating through the lattice. So is gravity. So is the electric field. All of them are modes of the same medium — different ways the lattice carries energy.
 
-### The Numbers Behind the Medium
+### Why You Do Not Feel It
 
-The numbers are not large by cosmological standards, but they are specific. The CMB radiation pressure is u/3 = 1.39 × 10⁻¹⁴ pascals. The distance to the Clearing is approximately 9.53 × 10²⁶ metres. Dividing this distance by the Planck length gives the number of relay shells: N ≈ 5.89 × 10⁶¹. Each shell carries a relay content of ε = u × ℓ_P³ ≈ 1.76 × 10⁻¹¹⁸ joules — a number so small it has no analogue in human experience.
+2.46 × 10⁴⁸ pascals is an absurd pressure. It is larger than the pressure at the centre of a neutron star. How can we exist inside it without being crushed?
 
-But multiply N by ε, and you get the total convergence burden: Φ ≈ 1.04 × 10⁻⁵⁶ joules. This is the total energy budget that the lattice delivers to every point, from every direction, at every moment. It is not an assumption. It is a computation from measured values: the CMB temperature (2.7255 K), the Stefan radiation constant, and the Planck length.
+Because it is perfectly balanced. Convergence arrives from every direction equally. The pressure from the left exactly cancels the pressure from the right. The pressure from above exactly cancels the pressure from below. At any point in empty space, the net force is exactly zero. You feel nothing.
 
-From Φ, the convergence pressure at the Planck scale is P_conv = N × u ≈ 2.46 × 10⁴⁸ pascals. This is an immense pressure — larger than anything in human engineering by forty orders of magnitude. But it is balanced. It arrives from every direction equally. At any point in empty space, the convergence from the north cancels the convergence from the south. The net force is zero. You feel nothing.
-
-Until something breaks the symmetry.
+Until something breaks the symmetry. Place an object — any object at all — near you, and it occludes a tiny fraction of the convergent pressure from its direction. Now the pressure from behind you, which is not occluded, pushes you toward the object. This is gravity. This is the Coulomb force. This is the nuclear force. Same mechanism, different scales.
 
 ### What the Casimir Effect Actually Measures
 
