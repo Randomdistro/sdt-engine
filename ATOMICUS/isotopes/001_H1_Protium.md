@@ -88,4 +88,32 @@ H-1 at 99.99% abundance is not because it is hard to convert. It IS being conver
 
 ---
 
+## Electronic Structure (from Hydrogen Atomicus)
+
+**Electron configuration**: 1s1
+
+### Ionisation Series
+
+| Level | Energy (eV) | k-factor | Description |
+|-------|-------------|----------|-------------|
+| 1 | 13.598 | 137.0 | The Rydberg. Universal reference. |
+
+### Spectral Signatures
+
+| Transition | Wavelength | Significance |
+|------------|-----------|-------------|
+| Lyman-alpha (1s-2p) | 121.6 nm (UV) | Strongest emission line in the universe |
+| Balmer-alpha (2-3) | 656.3 nm (red) | Hydrogen red — every nebula |
+| 21-cm hyperfine | 21.1 cm (radio) | Maps the universe |
+
+### Kinematic Properties
+
+- **First ionisation**: 13.598 eV
+- **k-factor (χ = c/v)**: 137.0
+- **Atomic radius**: 53 pm
+- **Electronegativity**: 2.20 (Pauling)
+- **Movement budget**: v²_circ + v² = c²  →  v_circ = c × √(1 − 1/χ²) ≈ c
+
+---
+
 *Hydrogen-1 is not an element. It is the alphabet.*
