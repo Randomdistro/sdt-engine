@@ -1,4 +1,4 @@
-# Build
+# Build artifacts
 build/
 out/
 cmake-build-*/
@@ -7,6 +7,7 @@ cmake-build-*/
 *.pdb
 *.ilk
 *.lib
+*.exp
 
 # IDE
 .vs/
@@ -15,6 +16,18 @@ cmake-build-*/
 *.user
 CMakeSettings.json
 
-# Temp
+# Temp files
 *.txt.bak
 *.tmp
+~$*
+
+# Archive (intermediate outputs, temp conversions)
+Archive/
+
+# Cache
+.cache/
+compile_commands.json
+
+# Separate projects (moved out)
+crmplr/
+crumpiler/
