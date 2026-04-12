@@ -12,6 +12,7 @@
 #include "encoder/binary_crumpler.hpp"
 #include "encoder/image_crumpler.hpp"
 #include "encoder/spiral_scanner.hpp"
+#include "encoder/delta_scanner.hpp"
 #include "decoder/decoder.hpp"
 #include "core/rings.hpp"
 #include <cstdio>
@@ -509,6 +510,217 @@ static int cmd_spiral_scan(int argc, char** argv) {
     return 0;
 }
 
+static int cmd_delta_scan(int argc, char** argv) {
+    if (argc < 3) {
+        std::printf("  Error: no BMP file specified.\n");
+        return 1;
+    }
+
+    std::string input_path = argv[2];
+    std::printf("  Delta scan (stacked encoding): %s\n", input_path.c_str());
+
+    uint32_t width = 0, height = 0;
+    auto pixels = crumpiler::ImageCrumpler::load_bmp(input_path, width, height);
+    if (pixels.empty()) {
+        std::printf("  Error: could not load BMP.\n");
+        return 1;
+    }
+
+    uint32_t total_pixels = width * height;
+    uint64_t raw_size = static_cast<uint64_t>(total_pixels) * 3;
+    std::printf("  Image: %ux%u = %u pixels (%llu bytes)\n\n",
+        width, height, total_pixels,
+        static_cast<unsigned long long>(raw_size));
+
+    crumpiler::DeltaScanner ds;
+    std::printf("  Scanning flat stream for delta chains...\n");
+    auto r = ds.scan(pixels.data(), total_pixels, 3, 4, 3, true);
+
+    std::printf("\n  -- Delta Scan Results (Stacked Encoding) --\n");
+    std::printf("  Raw size:         %10llu bytes (100%%)\n",
+        static_cast<unsigned long long>(r.raw_size));
+    std::printf("  Delta chains:     %10u\n", r.chains_found);
+    std::printf("  Pixels covered:   %10u / %u (%.1f%%)\n",
+        r.total_covered, total_pixels,
+        total_pixels > 0 ? static_cast<double>(r.total_covered) / total_pixels * 100.0 : 0);
+
+    std::printf("\n  -- Cost Breakdown --\n");
+    std::printf("  Dict (shapes):    %10llu bytes  (delta patterns, each stored once)\n",
+        static_cast<unsigned long long>(r.dict_cost));
+    std::printf("  Bases (lowest):   %10llu bytes  (one absolute pixel per chain)\n",
+        static_cast<unsigned long long>(r.base_cost));
+    std::printf("  Distances:        %10llu bytes  (inter-base gaps, packed bits)\n",
+        static_cast<unsigned long long>(r.distance_cost));
+    std::printf("  Positions:        %10llu bytes  (pixel positions)\n",
+        static_cast<unsigned long long>(r.position_cost));
+    std::printf("  Uncovered raw:    %10llu bytes  (pixels not in any chain)\n",
+        static_cast<unsigned long long>(r.uncovered_cost));
+    std::printf("  ----------------------------------------\n");
+    std::printf("  TOTAL encoded:    %10llu bytes (%.1f%%)\n",
+        static_cast<unsigned long long>(r.encoded_size), r.ratio);
+
+    if (!r.top_chains.empty()) {
+        std::printf("\n  Top chains:\n");
+        std::printf("  %4s  %5s  %7s  %10s  %8s\n",
+            "#", "len", "occurs", "covers", "max_dist");
+        for (size_t i = 0; i < r.top_chains.size(); ++i) {
+            auto const& ch = r.top_chains[i];
+            std::printf("  %4zu  %5u  %7u  %10llu  %8u\n",
+                i + 1, ch.length, ch.occurrences,
+                static_cast<unsigned long long>(ch.savings), ch.max_base_dist);
+        }
+    }
+
+    return 0;
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// FULL PIPELINE: Spiral | Crossword | Delta — independent ratios
+// ═══════════════════════════════════════════════════════════════════════
+static int cmd_crumple_full(int argc, char** argv) {
+    if (argc < 3) {
+        std::printf("  Error: no BMP file specified.\n");
+        return 1;
+    }
+
+    std::string input_path = argv[2];
+    const char* t = find_arg(argc, argv, "-t");
+    uint8_t tolerance = t ? static_cast<uint8_t>(std::atoi(t)) : 8;
+
+    std::printf("  CRUMPILER FULL ANALYSIS: %s\n", input_path.c_str());
+    std::printf("  Tolerance: +/-%u per channel\n\n", tolerance);
+
+    uint32_t img_w = 0, img_h = 0;
+    auto pixels = crumpiler::ImageCrumpler::load_bmp(input_path, img_w, img_h);
+    if (pixels.empty()) {
+        std::printf("  Error: could not load BMP.\n");
+        return 1;
+    }
+
+    uint32_t total_pixels = img_w * img_h;
+    uint64_t raw_size = static_cast<uint64_t>(total_pixels) * 3;
+    std::printf("  Image: %ux%u = %u pixels (%llu bytes raw RGB)\n",
+        img_w, img_h, total_pixels,
+        static_cast<unsigned long long>(raw_size));
+    std::printf("  ══════════════════════════════════════════════\n\n");
+
+    // ── LAYER 1: Spiral Scanner ────────────────────────────────────
+    std::printf("  ── LAYER 1: Spiral Scanner (Torah Column) ──\n");
+    uint64_t spiral_enc = raw_size;
+    uint32_t spiral_covered = 0;
+    {
+        crumpiler::SpiralScanner ss;
+        auto hits = ss.scan_all_widths(pixels.data(), total_pixels, 3,
+            tolerance, 0.75, false);
+
+        if (!hits.empty()) {
+            auto const& best = hits[0];
+            spiral_covered = best.rows * best.width;
+            std::printf("  Best width:     %u (%u rows, %.0f%% cols match)\n",
+                best.width, best.rows, best.match_rate * 100.0);
+            std::printf("  Pixels covered: %u / %u (%.1f%%)\n",
+                spiral_covered, total_pixels,
+                static_cast<double>(spiral_covered) / total_pixels * 100.0);
+
+            auto est = ss.estimate_size(best, 3, tolerance, total_pixels);
+            if (est < raw_size) {
+                auto enc = ss.encode(pixels.data(), total_pixels, 3,
+                    tolerance, best);
+                spiral_enc = ss.serialize(enc).size();
+            }
+            std::printf("  Encoded:        %llu bytes (%.1f%%)\n",
+                static_cast<unsigned long long>(spiral_enc),
+                static_cast<double>(spiral_enc) / raw_size * 100.0);
+        } else {
+            std::printf("  No periodic structure found.\n");
+        }
+    }
+
+    // ── LAYER 2: Crossword Scanner ─────────────────────────────────
+    std::printf("\n  ── LAYER 2: Crossword Scanner (8-direction) ──\n");
+    uint64_t cw_enc = raw_size;
+    uint32_t cw_covered = 0;
+    {
+        crumpiler::ImageCrumpler ic;
+        std::vector<uint8_t> cw_output;
+        auto result = ic.crumple(pixels.data(), img_w, img_h, 3,
+            tolerance, cw_output);
+
+        cw_covered = result.pixels_covered;
+        cw_enc = cw_output.size();
+
+        std::printf("  Phrases found:  %u\n", result.phrases_found);
+        std::printf("  Replacements:   %u\n", result.replacements);
+        std::printf("  Pixels covered: %u / %u (%.1f%%)\n",
+            cw_covered, total_pixels,
+            static_cast<double>(cw_covered) / total_pixels * 100.0);
+        std::printf("  Encoded:        %llu bytes (%.1f%%)\n",
+            static_cast<unsigned long long>(cw_enc),
+            static_cast<double>(cw_enc) / raw_size * 100.0);
+    }
+
+    // ── LAYER 3: Delta Scanner ─────────────────────────────────────
+    std::printf("\n  ── LAYER 3: Delta Scanner (gradient shapes) ──\n");
+    uint64_t delta_enc = raw_size;
+    uint32_t delta_covered = 0;
+    {
+        crumpiler::DeltaScanner ds;
+        auto r = ds.scan(pixels.data(), total_pixels, 3, 4, 3, false);
+
+        delta_covered = r.total_covered;
+        delta_enc = r.encoded_size;
+
+        std::printf("  Delta chains:   %u\n", r.chains_found);
+        std::printf("  Pixels covered: %u / %u (%.1f%%)\n",
+            delta_covered, total_pixels,
+            static_cast<double>(delta_covered) / total_pixels * 100.0);
+        std::printf("  Dict (shapes):  %llu bytes\n",
+            static_cast<unsigned long long>(r.dict_cost));
+        std::printf("  Bases+Dist:     %llu bytes\n",
+            static_cast<unsigned long long>(r.base_cost + r.distance_cost));
+        std::printf("  Positions:      %llu bytes\n",
+            static_cast<unsigned long long>(r.position_cost));
+        std::printf("  Uncovered raw:  %llu bytes\n",
+            static_cast<unsigned long long>(r.uncovered_cost));
+        std::printf("  Encoded:        %llu bytes (%.1f%%)\n",
+            static_cast<unsigned long long>(delta_enc),
+            static_cast<double>(delta_enc) / raw_size * 100.0);
+    }
+
+    // ── COMPARISON TABLE ───────────────────────────────────────────
+    uint64_t best_enc = std::min({spiral_enc, cw_enc, delta_enc});
+    const char* best_name = "None";
+    if (best_enc == spiral_enc) best_name = "Spiral";
+    else if (best_enc == cw_enc) best_name = "Crossword";
+    else best_name = "Delta";
+
+    std::printf("\n  ══════════════════════════════════════════════\n");
+    std::printf("  COMPARISON TABLE\n");
+    std::printf("  ══════════════════════════════════════════════\n");
+    std::printf("  %-16s %10s %8s %8s\n", "Layer", "Bytes", "Ratio", "Cover");
+    std::printf("  ──────────────────────────────────────────────\n");
+    std::printf("  %-16s %10llu %7.1f%% %7.1f%%\n", "Raw RGB",
+        static_cast<unsigned long long>(raw_size), 100.0, 100.0);
+    std::printf("  %-16s %10llu %7.1f%% %7.1f%%\n", "Spiral",
+        static_cast<unsigned long long>(spiral_enc),
+        static_cast<double>(spiral_enc) / raw_size * 100.0,
+        static_cast<double>(spiral_covered) / total_pixels * 100.0);
+    std::printf("  %-16s %10llu %7.1f%% %7.1f%%\n", "Crossword",
+        static_cast<unsigned long long>(cw_enc),
+        static_cast<double>(cw_enc) / raw_size * 100.0,
+        static_cast<double>(cw_covered) / total_pixels * 100.0);
+    std::printf("  %-16s %10llu %7.1f%% %7.1f%%\n", "Delta",
+        static_cast<unsigned long long>(delta_enc),
+        static_cast<double>(delta_enc) / raw_size * 100.0,
+        static_cast<double>(delta_covered) / total_pixels * 100.0);
+    std::printf("  ──────────────────────────────────────────────\n");
+    std::printf("  %-16s %10llu %7.1f%%\n", best_name,
+        static_cast<unsigned long long>(best_enc),
+        static_cast<double>(best_enc) / raw_size * 100.0);
+
+    return 0;
+}
+
 int main(int argc, char** argv) {
     print_banner();
 
@@ -524,7 +736,9 @@ int main(int argc, char** argv) {
     if (cmd == "crumple")        return cmd_crumple(argc, argv);
     if (cmd == "uncrumple")      return cmd_uncrumple(argc, argv);
     if (cmd == "crumple-image")  return cmd_crumple_image(argc, argv);
+    if (cmd == "crumple-full")   return cmd_crumple_full(argc, argv);
     if (cmd == "spiral-scan")    return cmd_spiral_scan(argc, argv);
+    if (cmd == "delta-scan")     return cmd_delta_scan(argc, argv);
     if (cmd == "stats")          return cmd_stats(argc, argv);
 
     std::printf("  Unknown command: %s\n", cmd.c_str());
