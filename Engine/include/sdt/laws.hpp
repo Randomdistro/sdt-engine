@@ -461,6 +461,43 @@ namespace bridge {
     inline constexpr double k_Sun = 686.3;
     inline constexpr double koppa_Sun = R_Sun / (k_Sun * k_Sun);
     // ≈ 1477 m
+
+    // ─── General koppa functions ───
+
+    /// c-boundary (koppa): ϟ = R/k² = v²R/c²  [m]
+    /// This single number encodes the entire gravitational field.
+    [[nodiscard]] constexpr auto koppa(double v_surface, double R) noexcept -> double {
+        return v_surface * v_surface * R / (c * c);
+    }
+
+    /// Surface gravitational acceleration: g = v²/R = c²ϟ/R²  [m/s²]
+    /// No G. No M. Just v and R.
+    [[nodiscard]] constexpr auto g_surface(double v_surface, double R) noexcept -> double {
+        return v_surface * v_surface / R;
+    }
+
+    /// Gravitational acceleration at radius r inside body of radius R
+    /// g(r) = v_surf² R frac(r) / r²  where frac = M_enc(r)/M_total
+    [[nodiscard]] inline auto g_interior(
+        double v_surface, double R, double r, double frac_enclosed
+    ) noexcept -> double {
+        if (r < 1.0) return 0.0;
+        return v_surface * v_surface * R * frac_enclosed / (r * r);
+    }
+
+    // ─── Planetary k-values (from measured v_surf) ───
+
+    inline constexpr double v_Earth   = 7909.0;     // [m/s]
+    inline constexpr double R_Earth   = 6.371e6;    // [m]
+    inline constexpr double k_Earth   = c / v_Earth; // ≈ 37905
+    inline constexpr double koppa_Earth = v_Earth * v_Earth * R_Earth / (c * c);
+    // = 4.434e-3 m = 4.43 mm
+
+    inline constexpr double v_Moon    = 1680.0;
+    inline constexpr double R_Moon    = 1.7374e6;
+    inline constexpr double k_Moon    = c / v_Moon;  // ≈ 178448
+    inline constexpr double koppa_Moon = v_Moon * v_Moon * R_Moon / (c * c);
+    // = 5.46e-5 m = 0.055 mm
 }
 
 // ═══════════════════════════════════════════════════════════════════════

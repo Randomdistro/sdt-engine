@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SDT Isobar Occupancy Chart — Nuclear Grammar Visualisation</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600&family=Inter:wght@300;400;600;700&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#0a0a12;color:#e0e0e8;font-family:'Inter',sans-serif;padding:20px 10px}
+  h1{text-align:center;font-size:1.6rem;font-weight:300;color:#a0a0c0;margin-bottom:4px;letter-spacing:2px}
+  .subtitle{text-align:center;font-size:.75rem;color:#606080;margin-bottom:20px;letter-spacing:1px}
+  .legend{display:flex;justify-content:center;gap:20px;margin-bottom:16px;flex-wrap:wrap}
+  .legend-item{display:flex;align-items:center;gap:6px;font-size:.7rem;color:#909098}
+  .legend-swatch{width:18px;height:14px;border-radius:2px}
+  .chart-wrap{max-width:1000px;margin:0 auto;position:relative}
+  .row{display:flex;align-items:center;min-height:22px;position:relative}
+  .left-col{flex:1;display:flex;justify-content:flex-end;gap:3px;padding-right:4px}
+  .center-col{width:48px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:.65rem;font-weight:600;color:#505068;flex-shrink:0;line-height:22px}
+  .right-col{flex:1;display:flex;justify-content:flex-start;gap:3px;padding-left:4px}
+  .iso{font-family:'JetBrains Mono',monospace;font-size:.6rem;font-weight:400;padding:2px 5px;border-radius:3px;white-space:nowrap;cursor:default;transition:transform .15s,box-shadow .15s;line-height:1.3;position:relative}
+  .iso:hover{transform:scale(1.25);z-index:10;box-shadow:0 0 12px rgba(255,255,255,.25)}
+  .iso .tri-info{display:none;position:absolute;bottom:110%;left:50%;transform:translateX(-50%);background:#1a1a2a;border:1px solid #404060;padding:4px 8px;border-radius:4px;font-size:.55rem;white-space:nowrap;z-index:20;pointer-events:none}
+  .iso:hover .tri-info{display:block}
+  .green-box{outline:2px solid #2ecc71;outline-offset:1px}
+  .red-box{outline:2px solid #e74c3c;outline-offset:1px}
+  .empty-row .center-col{color:#e74c3c;font-weight:700}
+  .section-start{border-top:2px solid #303050;margin-top:6px;padding-top:6px}
+  .section-label{position:absolute;left:-60px;font-size:.55rem;color:#707090;writing-mode:vertical-rl;transform:rotate(180deg);letter-spacing:1px;font-weight:600}
+  .section-bar{position:absolute;left:-20px;top:0;bottom:0;width:3px;border-radius:2px}
+  .stats{text-align:center;margin-top:20px;font-size:.7rem;color:#606080}
+  .occ-0{background:rgba(231,76,60,.15);border:1px dashed #e74c3c55}
+  .occ-1{background:rgba(255,255,255,.04)}
+  .occ-2{background:rgba(255,255,255,.06)}
+  .occ-3{background:rgba(255,255,255,.09)}
+</style>
+</head>
+<body>
+<h1>SDT ISOBAR OCCUPANCY CHART</h1>
+<div class="subtitle">STABLE ISOTOPES BY MASS NUMBER · NUCLEAR CONSTRUCTION GRAMMAR v6.0</div>
+<div class="legend">
+  <div class="legend-item"><div class="legend-swatch" style="background:hsl(30,90%,55%)"></div>Pure deuteron (n<sub>tri</sub>=0)</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:hsl(280,60%,50%)"></div>Mixed scaffold</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:hsl(220,80%,55%)"></div>Triton-heavy (n<sub>tri</sub> high)</div>
+  <div class="legend-item"><div class="legend-swatch" style="outline:2px solid #2ecc71;outline-offset:-1px"></div>Even n<sub>tri</sub> (paired)</div>
+  <div class="legend-item"><div class="legend-swatch" style="outline:2px solid #e74c3c;outline-offset:-1px"></div>Odd n<sub>tri</sub> (unpaired, neighbours paired)</div>
+</div>
+<div class="chart-wrap" id="chart"></div>
+<div class="stats" id="stats"></div>
+
+<script>
+const ISO=[
+{z:1,a:1,s:"H"},{z:1,a:2,s:"H"},{z:2,a:3,s:"He"},{z:2,a:4,s:"He"},
+{z:3,a:6,s:"Li"},{z:3,a:7,s:"Li"},{z:4,a:9,s:"Be"},
+{z:5,a:10,s:"B"},{z:5,a:11,s:"B"},{z:6,a:12,s:"C"},{z:6,a:13,s:"C"},
+{z:7,a:14,s:"N"},{z:7,a:15,s:"N"},{z:8,a:16,s:"O"},{z:8,a:17,s:"O"},{z:8,a:18,s:"O"},
+{z:9,a:19,s:"F"},{z:10,a:20,s:"Ne"},{z:10,a:21,s:"Ne"},{z:10,a:22,s:"Ne"},
+{z:11,a:23,s:"Na"},{z:12,a:24,s:"Mg"},{z:12,a:25,s:"Mg"},{z:12,a:26,s:"Mg"},
+{z:13,a:27,s:"Al"},{z:14,a:28,s:"Si"},{z:14,a:29,s:"Si"},{z:14,a:30,s:"Si"},
+{z:15,a:31,s:"P"},{z:16,a:32,s:"S"},{z:16,a:33,s:"S"},{z:16,a:34,s:"S"},{z:16,a:36,s:"S"},
+{z:17,a:35,s:"Cl"},{z:17,a:37,s:"Cl"},
+{z:18,a:36,s:"Ar"},{z:18,a:38,s:"Ar"},{z:18,a:40,s:"Ar"},
+{z:19,a:39,s:"K"},{z:19,a:40,s:"K"},{z:19,a:41,s:"K"},
+{z:20,a:40,s:"Ca"},{z:20,a:42,s:"Ca"},{z:20,a:43,s:"Ca"},{z:20,a:44,s:"Ca"},{z:20,a:46,s:"Ca"},{z:20,a:48,s:"Ca"},
+{z:21,a:45,s:"Sc"},
+{z:22,a:46,s:"Ti"},{z:22,a:47,s:"Ti"},{z:22,a:48,s:"Ti"},{z:22,a:49,s:"Ti"},{z:22,a:50,s:"Ti"},
+{z:23,a:50,s:"V"},{z:23,a:51,s:"V"},
+{z:24,a:50,s:"Cr"},{z:24,a:52,s:"Cr"},{z:24,a:53,s:"Cr"},{z:24,a:54,s:"Cr"},
+{z:25,a:55,s:"Mn"},
+{z:26,a:54,s:"Fe"},{z:26,a:56,s:"Fe"},{z:26,a:57,s:"Fe"},{z:26,a:58,s:"Fe"},
+{z:27,a:59,s:"Co"},
+{z:28,a:58,s:"Ni"},{z:28,a:60,s:"Ni"},{z:28,a:61,s:"Ni"},{z:28,a:62,s:"Ni"},{z:28,a:64,s:"Ni"},
+{z:29,a:63,s:"Cu"},{z:29,a:65,s:"Cu"},
+{z:30,a:64,s:"Zn"},{z:30,a:66,s:"Zn"},{z:30,a:67,s:"Zn"},{z:30,a:68,s:"Zn"},{z:30,a:70,s:"Zn"},
+{z:31,a:69,s:"Ga"},{z:31,a:71,s:"Ga"},
+{z:32,a:70,s:"Ge"},{z:32,a:72,s:"Ge"},{z:32,a:73,s:"Ge"},{z:32,a:74,s:"Ge"},{z:32,a:76,s:"Ge"},
+{z:33,a:75,s:"As"},
+{z:34,a:74,s:"Se"},{z:34,a:76,s:"Se"},{z:34,a:77,s:"Se"},{z:34,a:78,s:"Se"},{z:34,a:80,s:"Se"},{z:34,a:82,s:"Se"},
+{z:35,a:79,s:"Br"},{z:35,a:81,s:"Br"},
+{z:36,a:78,s:"Kr"},{z:36,a:80,s:"Kr"},{z:36,a:82,s:"Kr"},{z:36,a:83,s:"Kr"},{z:36,a:84,s:"Kr"},{z:36,a:86,s:"Kr"},
+{z:37,a:85,s:"Rb"},{z:37,a:87,s:"Rb"},
+{z:38,a:84,s:"Sr"},{z:38,a:86,s:"Sr"},{z:38,a:87,s:"Sr"},{z:38,a:88,s:"Sr"},
+{z:39,a:89,s:"Y"},
+{z:40,a:90,s:"Zr"},{z:40,a:91,s:"Zr"},{z:40,a:92,s:"Zr"},{z:40,a:94,s:"Zr"},{z:40,a:96,s:"Zr"},
+{z:41,a:93,s:"Nb"},
+{z:42,a:92,s:"Mo"},{z:42,a:94,s:"Mo"},{z:42,a:95,s:"Mo"},{z:42,a:96,s:"Mo"},{z:42,a:97,s:"Mo"},{z:42,a:98,s:"Mo"},{z:42,a:100,s:"Mo"},
+{z:44,a:96,s:"Ru"},{z:44,a:98,s:"Ru"},{z:44,a:99,s:"Ru"},{z:44,a:100,s:"Ru"},{z:44,a:101,s:"Ru"},{z:44,a:102,s:"Ru"},{z:44,a:104,s:"Ru"},
+{z:45,a:103,s:"Rh"},
+{z:46,a:102,s:"Pd"},{z:46,a:104,s:"Pd"},{z:46,a:105,s:"Pd"},{z:46,a:106,s:"Pd"},{z:46,a:108,s:"Pd"},{z:46,a:110,s:"Pd"},
+{z:47,a:107,s:"Ag"},{z:47,a:109,s:"Ag"},
+{z:48,a:106,s:"Cd"},{z:48,a:108,s:"Cd"},{z:48,a:110,s:"Cd"},{z:48,a:111,s:"Cd"},{z:48,a:112,s:"Cd"},{z:48,a:113,s:"Cd"},{z:48,a:114,s:"Cd"},{z:48,a:116,s:"Cd"},
+{z:49,a:113,s:"In"},{z:49,a:115,s:"In"},
+{z:50,a:112,s:"Sn"},{z:50,a:114,s:"Sn"},{z:50,a:115,s:"Sn"},{z:50,a:116,s:"Sn"},{z:50,a:117,s:"Sn"},{z:50,a:118,s:"Sn"},{z:50,a:119,s:"Sn"},{z:50,a:120,s:"Sn"},{z:50,a:122,s:"Sn"},{z:50,a:124,s:"Sn"},
+{z:51,a:121,s:"Sb"},{z:51,a:123,s:"Sb"},
+{z:52,a:120,s:"Te"},{z:52,a:122,s:"Te"},{z:52,a:123,s:"Te"},{z:52,a:124,s:"Te"},{z:52,a:125,s:"Te"},{z:52,a:126,s:"Te"},{z:52,a:128,s:"Te"},{z:52,a:130,s:"Te"},
+{z:53,a:127,s:"I"},
+{z:54,a:124,s:"Xe"},{z:54,a:126,s:"Xe"},{z:54,a:128,s:"Xe"},{z:54,a:129,s:"Xe"},{z:54,a:130,s:"Xe"},{z:54,a:131,s:"Xe"},{z:54,a:132,s:"Xe"},{z:54,a:134,s:"Xe"},{z:54,a:136,s:"Xe"},
+{z:55,a:133,s:"Cs"},
+{z:56,a:130,s:"Ba"},{z:56,a:132,s:"Ba"},{z:56,a:134,s:"Ba"},{z:56,a:135,s:"Ba"},{z:56,a:136,s:"Ba"},{z:56,a:137,s:"Ba"},{z:56,a:138,s:"Ba"},
+{z:57,a:138,s:"La"},{z:57,a:139,s:"La"},
+{z:58,a:136,s:"Ce"},{z:58,a:138,s:"Ce"},{z:58,a:140,s:"Ce"},{z:58,a:142,s:"Ce"},
+{z:59,a:141,s:"Pr"},
+{z:60,a:142,s:"Nd"},{z:60,a:143,s:"Nd"},{z:60,a:144,s:"Nd"},{z:60,a:145,s:"Nd"},{z:60,a:146,s:"Nd"},{z:60,a:148,s:"Nd"},{z:60,a:150,s:"Nd"},
+{z:62,a:144,s:"Sm"},{z:62,a:147,s:"Sm"},{z:62,a:148,s:"Sm"},{z:62,a:149,s:"Sm"},{z:62,a:150,s:"Sm"},{z:62,a:152,s:"Sm"},{z:62,a:154,s:"Sm"},
+{z:63,a:151,s:"Eu"},{z:63,a:153,s:"Eu"},
+{z:64,a:152,s:"Gd"},{z:64,a:154,s:"Gd"},{z:64,a:155,s:"Gd"},{z:64,a:156,s:"Gd"},{z:64,a:157,s:"Gd"},{z:64,a:158,s:"Gd"},{z:64,a:160,s:"Gd"},
+{z:65,a:159,s:"Tb"},
+{z:66,a:156,s:"Dy"},{z:66,a:158,s:"Dy"},{z:66,a:160,s:"Dy"},{z:66,a:161,s:"Dy"},{z:66,a:162,s:"Dy"},{z:66,a:163,s:"Dy"},{z:66,a:164,s:"Dy"},
+{z:67,a:165,s:"Ho"},
+{z:68,a:162,s:"Er"},{z:68,a:164,s:"Er"},{z:68,a:166,s:"Er"},{z:68,a:167,s:"Er"},{z:68,a:168,s:"Er"},{z:68,a:170,s:"Er"},
+{z:69,a:169,s:"Tm"},
+{z:70,a:168,s:"Yb"},{z:70,a:170,s:"Yb"},{z:70,a:171,s:"Yb"},{z:70,a:172,s:"Yb"},{z:70,a:173,s:"Yb"},{z:70,a:174,s:"Yb"},{z:70,a:176,s:"Yb"},
+{z:71,a:175,s:"Lu"},{z:71,a:176,s:"Lu"},
+{z:72,a:174,s:"Hf"},{z:72,a:176,s:"Hf"},{z:72,a:177,s:"Hf"},{z:72,a:178,s:"Hf"},{z:72,a:179,s:"Hf"},{z:72,a:180,s:"Hf"},
+{z:73,a:180,s:"Ta"},{z:73,a:181,s:"Ta"},
+{z:74,a:180,s:"W"},{z:74,a:182,s:"W"},{z:74,a:183,s:"W"},{z:74,a:184,s:"W"},{z:74,a:186,s:"W"},
+{z:75,a:185,s:"Re"},{z:75,a:187,s:"Re"},
+{z:76,a:184,s:"Os"},{z:76,a:186,s:"Os"},{z:76,a:187,s:"Os"},{z:76,a:188,s:"Os"},{z:76,a:189,s:"Os"},{z:76,a:190,s:"Os"},{z:76,a:192,s:"Os"},
+{z:77,a:191,s:"Ir"},{z:77,a:193,s:"Ir"},
+{z:78,a:190,s:"Pt"},{z:78,a:192,s:"Pt"},{z:78,a:194,s:"Pt"},{z:78,a:195,s:"Pt"},{z:78,a:196,s:"Pt"},{z:78,a:198,s:"Pt"},
+{z:79,a:197,s:"Au"},
+{z:80,a:196,s:"Hg"},{z:80,a:198,s:"Hg"},{z:80,a:199,s:"Hg"},{z:80,a:200,s:"Hg"},{z:80,a:201,s:"Hg"},{z:80,a:202,s:"Hg"},{z:80,a:204,s:"Hg"},
+{z:81,a:203,s:"Tl"},{z:81,a:205,s:"Tl"},
+{z:82,a:204,s:"Pb"},{z:82,a:206,s:"Pb"},{z:82,a:207,s:"Pb"},{z:82,a:208,s:"Pb"},
+{z:83,a:209,s:"Bi"},
+{z:90,a:232,s:"Th"},{z:92,a:234,s:"U"},{z:92,a:235,s:"U"},{z:92,a:238,s:"U"}
+];
+
+// Block classification
+function getBlock(z) {
+  const sBlock = [1,2,3,4,11,12,19,20,37,38,55,56];
+  const fBlock = []; for(let i=57;i<=71;i++) fBlock.push(i); for(let i=89;i<=103;i++) fBlock.push(i);
+  const dBlock = []; for(let i=21;i<=30;i++) dBlock.push(i); for(let i=39;i<=48;i++) dBlock.push(i); for(let i=72;i<=80;i++) dBlock.push(i);
+  if (sBlock.includes(z)) return {block:'s',color:'#4a90d9'};
+  if (fBlock.includes(z)) return {block:'f',color:'#9b59b6'};
+  if (dBlock.includes(z)) return {block:'d',color:'#e67e22'};
+  return {block:'p',color:'#27ae60'};
+}
+
+// Period boundaries for mega-boxes
+const periodBounds = [
+  {label:'Period 1', start:1, end:4},
+  {label:'Period 2', start:6, end:22},
+  {label:'Period 3', start:23, end:40},
+  {label:'Period 4', start:35, end:86},
+  {label:'Period 5', start:85, end:138},
+  {label:'Period 6', start:130, end:209}
+];
+
+// Grammar
+function grammar(z, a) {
+  if (z < 2) return {nt: a-2*z, nd: 3*z-a-2, valid: false, triFrac: 0};
+  const nt = a - 2*z;
+  const nd = 3*z - a - 2;
+  const total = nt + nd;
+  const valid = nt >= 0 && nd >= 0;
+  const triFrac = total > 0 ? nt / total : 0;
+  return {nt, nd, valid, triFrac};
+}
+
+// Color from triton fraction
+function triColor(frac, valid) {
+  if (!valid) return 'hsl(0, 60%, 40%)';
+  // 0 = orange(30), 0.5 = purple(280), 1.0 = blue(220)
+  const h = frac < 0.5 ? 30 + frac * 2 * 250 : 220 + (1 - frac) * 2 * 60;
+  const hue = 30 + frac * 190;
+  const sat = 70 + frac * 20;
+  const lit = 35 + (1 - Math.abs(frac - 0.5) * 2) * 15;
+  return `hsl(${hue}, ${sat}%, ${lit}%)`;
+}
+
+// Group isotopes by A
+const byA = {};
+ISO.forEach(iso => {
+  if (!byA[iso.a]) byA[iso.a] = [];
+  byA[iso.a].push(iso);
+});
+
+// Check pairing of neighbors for red-box detection
+function hasEvenTriNeighbor(z, a) {
+  // Check if any isobar at A-1 or A+1 has even n_tri
+  for (const da of [-1, 1]) {
+    const na = a + da;
+    if (byA[na]) {
+      for (const nb of byA[na]) {
+        const g = grammar(nb.z, nb.a);
+        if (g.valid && g.nt % 2 === 0) return true;
+      }
+    }
+  }
+  return false;
+}
+
+// Render
+const chart = document.getElementById('chart');
+const maxA = 209;
+let totalIso = 0;
+
+// Section tracking
+const sectionColors = {s:'#4a90d9',p:'#27ae60',d:'#e67e22',f:'#9b59b6'};
+let lastBlock = '';
+
+for (let a = 1; a <= maxA; a++) {
+  const isobars = byA[a] || [];
+  isobars.sort((x, y) => x.z - y.z);
+  const occ = isobars.length;
+  totalIso += occ;
+  
+  const row = document.createElement('div');
+  row.className = 'row' + (occ === 0 ? ' empty-row' : '') + ' occ-' + occ;
+  
+  // Check for section change
+  if (isobars.length > 0) {
+    const mainZ = isobars[Math.floor(isobars.length/2)].z;
+    const bi = getBlock(mainZ);
+    if (bi.block !== lastBlock) {
+      row.classList.add('section-start');
+      lastBlock = bi.block;
+    }
+  }
+  
+  // Left column — lower Z isobars (neutron-heavier)
+  const leftCol = document.createElement('div');
+  leftCol.className = 'left-col';
+  
+  // Center column — A number
+  const centerCol = document.createElement('div');
+  centerCol.className = 'center-col';
+  centerCol.textContent = a;
+  if (occ === 0) centerCol.textContent = '✕ ' + a;
+  if (occ === 3) centerCol.style.color = '#c0a040';
+  
+  // Right column — higher Z isobars (proton-heavier)
+  const rightCol = document.createElement('div');
+  rightCol.className = 'right-col';
+  
+  if (occ === 1) {
+    // Single isobar — put on left (lower Z, neutron side)
+    const iso = isobars[0];
+    const g = grammar(iso.z, iso.a);
+    const el = makeIsoEl(iso, g);
+    leftCol.appendChild(el);
+  } else if (occ === 2) {
+    // Two isobars — lower Z left, higher Z right
+    const g0 = grammar(isobars[0].z, isobars[0].a);
+    const g1 = grammar(isobars[1].z, isobars[1].a);
+    leftCol.appendChild(makeIsoEl(isobars[0], g0));
+    rightCol.appendChild(makeIsoEl(isobars[1], g1));
+  } else if (occ >= 3) {
+    // Three — lowest left, middle stays center-ish, highest right
+    for (let i = 0; i < isobars.length; i++) {
+      const g = grammar(isobars[i].z, isobars[i].a);
+      const el = makeIsoEl(isobars[i], g);
+      if (i === 0) leftCol.appendChild(el);
+      else if (i === isobars.length - 1) rightCol.appendChild(el);
+      else { /* middle ones go left too */ leftCol.appendChild(el); }
+    }
+  }
+  
+  row.appendChild(leftCol);
+  row.appendChild(centerCol);
+  row.appendChild(rightCol);
+  chart.appendChild(row);
+}
+
+function makeIsoEl(iso, g) {
+  const el = document.createElement('div');
+  el.className = 'iso';
+  const bg = triColor(g.triFrac, g.valid);
+  el.style.background = bg;
+  
+  // Text color — ensure contrast
+  const textColor = g.triFrac > 0.4 ? '#e0e8ff' : '#1a1a2a';
+  el.style.color = textColor;
+  
+  // Block accent
+  const bi = getBlock(iso.z);
+  el.style.borderLeft = `3px solid ${bi.color}`;
+  
+  // Green box for even n_tri (paired), red for odd when neighbors are even
+  if (g.valid && g.nt >= 0) {
+    if (g.nt % 2 === 0) {
+      el.classList.add('green-box');
+    } else if (hasEvenTriNeighbor(iso.z, iso.a)) {
+      el.classList.add('red-box');
+    }
+  }
+  
+  el.innerHTML = `<sup>${iso.a}</sup>${iso.s}<sub>${iso.z}</sub>` +
+    `<div class="tri-info">` +
+    `${iso.s}-${iso.a} (Z=${iso.z})<br>` +
+    `n<sub>tri</sub>=${g.nt} n<sub>deu</sub>=${g.nd}<br>` +
+    `Tri%: ${(g.triFrac * 100).toFixed(1)}%<br>` +
+    `Block: ${bi.block}-block` +
+    `</div>`;
+  
+  return el;
+}
+
+// Stats
+document.getElementById('stats').innerHTML = 
+  `${totalIso} stable isotopes · ${maxA} mass numbers · ` +
+  `${Object.values(byA).filter(v=>v.length===0).length + (maxA - Object.keys(byA).filter(k=>k<=maxA).length)} empty · ` +
+  `Green = even n<sub>tri</sub> (paired) · Red = odd n<sub>tri</sub> (unpaired, neighbours paired) · ` +
+  `Left border: <span style="color:#4a90d9">s</span> <span style="color:#27ae60">p</span> <span style="color:#e67e22">d</span> <span style="color:#9b59b6">f</span> block`;
+</script>
+</body>
+</html>
