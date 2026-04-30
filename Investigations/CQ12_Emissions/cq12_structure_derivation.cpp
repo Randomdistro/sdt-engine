@@ -1,7 +1,7 @@
 /**
  * CQ12 Stage C: Unavoidable Structure Derivation
  *
- * Derives shell/void positions from pressure terrain WITHOUT inserting
+ * Derives shell/slot positions from pressure terrain WITHOUT inserting
  * conventional shell labels, orbital names, or electron configurations.
  *
  * Stages: C0(blind segmentation) → C1(excitation) → C2(pair unit)
@@ -371,7 +371,7 @@ int main(){
     for(int c=1;c<15;c++){
         if(cap_count[c]==0) continue;
         const char* interp="?";
-        if(c==1) interp="single void (H-like or outer loose)";
+        if(c==1) interp="single slot (H-like or outer loose)";
         else if(c==2) interp="dyad (1s2, 2s2, counter-wake pair)";
         else if(c==3) interp="triangle (partial p-shell or 3-IE partial)";
         else if(c==4) interp="tetrahedron (half p-shell or s2+p2)";
@@ -385,7 +385,7 @@ int main(){
     std::printf("\n══ HOSTILE-EXAMINER ANSWERS ══\n\n");
     bool caps_emerged = (cap_count[2]>=3 || cap_count[1]>=2);
     bool pair_emerged = (avg_pair > avg_trip);
-    std::printf("  1. Did shell/void positions emerge, or were they inserted?\n");
+    std::printf("  1. Did shell/slot positions emerge, or were they inserted?\n");
     std::printf("     %s\n", caps_emerged?"EMERGED — recurring capacities found from terrain":"WEAK");
     std::printf("  2. What capacities were discovered before reveal?\n     ");
     for(int c=1;c<15;c++) if(cap_count[c]>0) std::printf("%d(x%d) ",c,cap_count[c]);
@@ -420,7 +420,7 @@ int main(){
     std::printf("  7. Which part is still diagnostic rather than first-principles?\n");
     std::printf("     IE data is MEASURED INPUT. Boundary detection is DERIVED.\n");
     std::printf("     Pair unit is DISCOVERED. Grammar modulation is SECONDARY.\n");
-    std::printf("     Forward void-depth derivation (Stage D) not yet attempted.\n");
+    std::printf("     Forward slot-depth derivation (Stage D) not yet attempted.\n");
 
     // ═══ VERDICT ═══
     std::printf("\n══════════════════════════════════════════════════════════════\n");

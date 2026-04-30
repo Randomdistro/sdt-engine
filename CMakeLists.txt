@@ -18,3 +18,6 @@ target_include_directories(sdt-engine INTERFACE
 
 # Benchmarks
 add_subdirectory(Benchmarks)
+
+# Investigation modules (CQ12, etc.)
+add_subdirectory(Investigations)

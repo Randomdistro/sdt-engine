@@ -14,7 +14,12 @@
 ## Nuclear Construction Grammar
 
 | Component | Count |
-|-----------|-------|
+|
+### Proton-electron coupling note
+
+Triton count n_t = 0, unpaired electrons = 0 — **exact match**. Each proton couples to one electron; the triton's extra neutron modulates the convergent pressure at that proton-electron pair.
+
+-----------|-------|
 | Alpha core | 1 |
 | Deuterons | 0 |
 | Tritons | 0 |

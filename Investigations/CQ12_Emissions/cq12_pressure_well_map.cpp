@@ -5,9 +5,9 @@
  * The mechanism is convergent boundary pressure occlusion.
  *
  * Each electron sits in a specific convergent pressure well.
- * Its binding energy = the pressure deficit at its void position.
+ * Its binding energy = the pressure deficit at its slot position.
  * There is no Z_eff. There is no shielding. There is only the
- * NET convergent pressure balance at each geometric void.
+ * NET convergent pressure balance at each geometric slot.
  *
  * Sequential ionisation energies are EXTRACTION DEPTHS:
  * IE₁ = cost to extract electron 1 from neutral atom
@@ -16,8 +16,8 @@
  *
  * IMPORTANT: These are many-body removal energies from successively
  * changed ionic states. They are NOT direct excitation energies.
- * Emission requires two bound void states in the SAME charge state:
- *   E_γ = |B(void_initial; charge_state) - B(void_final; charge_state)|
+ * Emission requires two bound slot states in the SAME charge state:
+ *   E_γ = |B(slot_initial; charge_state) - B(slot_final; charge_state)|
  *
  * Pipeline position: Stage A (diagnostic inversion).
  * Stage B: geometry discovery from pressure-well structure.
@@ -138,7 +138,7 @@ int main() {
     std::printf("  velocity in the atomic frame).\n\n");
     std::printf("  v_circ = internal vortex circulation of the electron.\n");
     std::printf("  When electron is excited: v_orbital decreases\n");
-    std::printf("  (SDT orbital velocity law: wider void = lower velocity).\n");
+    std::printf("  (SDT orbital velocity law: wider slot = lower velocity).\n");
     std::printf("  Therefore v_circ INCREASES (movement budget conservation).\n\n");
     std::printf("  But the ORBITAL angular momentum L = m_e × v × r decreases?\n");
     std::printf("  Let's check. Bohr: v_n ∝ 1/n, r_n ∝ n², so L_n ∝ n.\n");
@@ -162,8 +162,8 @@ int main() {
     std::printf("  because v << c for all bound states.\n\n");
 
     std::printf("  SDT interpretation: the nuclear toroidal wake (Reciprocal\n");
-    std::printf("  Drive) couples to the electron at each void position.\n");
-    std::printf("  When the electron moves to a higher void, the coupling\n");
+    std::printf("  Drive) couples to the electron at each slot position.\n");
+    std::printf("  When the electron moves to a higher slot, the coupling\n");
     std::printf("  weakens (further from nucleus = weaker wake). The nucleus\n");
     std::printf("  experiences LESS drag → its own circulation doesn't slow.\n");
     std::printf("  The atom's TOTAL angular momentum budget redistributes:\n");
@@ -223,7 +223,7 @@ int main() {
         // E_exc1 + E_exc2 < IE₁. Simplified: if both excitations
         // cost the same, then E_exc < IE₁/2.
         // Sufficient conditions also require:
-        //   - both excited voids are pressure-balanced
+        //   - both excited slots are pressure-balanced
         //   - wake coupling remains closed
         //   - no lower extraction channel opens (no autoionisation)
         bool possible = (e.first_exc < e.IE1 / 2.0);
@@ -236,7 +236,7 @@ int main() {
 
     std::printf("\n  ENERGY BUDGET (necessary condition):\n");
     std::printf("  E_exc1 + E_exc2 < IE₁ is NECESSARY but NOT SUFFICIENT.\n");
-    std::printf("  Also required: both excited voids pressure-balanced,\n");
+    std::printf("  Also required: both excited slots pressure-balanced,\n");
     std::printf("  wake coupling closed, no autoionising channel open.\n\n");
     std::printf("  Li: E_exc = 1.85 eV << IE₁/2 = 2.70 eV → energy allows\n");
     std::printf("  Be: E_exc = 2.73 eV << IE₁/2 = 4.66 eV → energy allows\n");
@@ -244,8 +244,8 @@ int main() {
     std::printf("  He: E_exc = 19.82 eV > IE₁/2 = 12.29 eV → energy forbids\n\n");
 
     std::printf("  SDT interpretation: doubly-excited states exist when\n");
-    std::printf("  the lowest excitation void is geometrically CLOSE to\n");
-    std::printf("  the ground void (small energy gap). Alkali metals and\n");
+    std::printf("  the lowest excitation slot is geometrically CLOSE to\n");
+    std::printf("  the ground slot (small energy gap). Alkali metals and\n");
     std::printf("  alkaline earths allow this (loose gears, low ρ).\n");
     std::printf("  Noble gases do NOT (rigid gears, high ρ = E_exc/IE ≈ 0.77).\n\n");
 
@@ -263,27 +263,27 @@ int main() {
 
     std::printf("  1. The nucleus (exclusion volume) creates a convergent\n");
     std::printf("     pressure deficit in specific directions.\n\n");
-    std::printf("  2. This deficit creates geometric voids — positions where\n");
+    std::printf("  2. This deficit creates geometric slots — positions where\n");
     std::printf("     an electron (W=1 vortex) can be pressure-balanced.\n\n");
-    std::printf("  3. Each void has a specific binding energy = the integral\n");
+    std::printf("  3. Each slot has a specific binding energy = the integral\n");
     std::printf("     of the convergent pressure deficit at that position.\n\n");
     std::printf("  4. The electron doesn't orbit due to a 'force'. It is\n");
     std::printf("     mechanically driven by the nuclear toroidal wake\n");
     std::printf("     (Reciprocal Drive, Atomicus Rule §14).\n\n");
-    std::printf("  5. Excitation = photon pushes electron to a higher void.\n");
-    std::printf("     Higher void = wider radius = lower orbital velocity\n");
+    std::printf("  5. Excitation = photon pushes electron to a higher slot.\n");
+    std::printf("     higher slot = wider radius = lower orbital velocity\n");
     std::printf("     (SDT velocity law). Energy difference → photon.\n\n");
-    std::printf("  6. De-excitation = electron falls to lower void.\n");
+    std::printf("  6. De-excitation = electron falls to lower slot.\n");
     std::printf("     Emits photon with E = ½m_e(v_low² - v_high²).\n\n");
-    std::printf("  7. No Z_eff. No shielding. Each void has its own\n");
+    std::printf("  7. No Z_eff. No shielding. Each slot has its own\n");
     std::printf("     convergent pressure binding.\n\n");
     std::printf("  CRITICAL DISTINCTION:\n");
     std::printf("  Sequential IE values are extraction-depths of pressure\n");
     std::printf("  wells from successively changed ionic states. They are\n");
     std::printf("  NOT automatically transition energies.\n\n");
-    std::printf("  Emission energies require two BOUND void states in the\n");
+    std::printf("  Emission energies require two bound slot states in the\n");
     std::printf("  SAME charge configuration:\n");
-    std::printf("    E_γ = |B(void_a; charge_state) - B(void_b; charge_state)|\n");
+    std::printf("    E_γ = |B(slot_a; charge_state) - B(slot_b; charge_state)|\n");
     std::printf("    λ = hc / E_γ\n\n");
 
     // Demonstrate with He: orthohelium transition
@@ -311,11 +311,11 @@ int main() {
     std::printf("               → Z_eff = Z - σN\n\n");
     std::printf("  NEW (correct): convergent pressure arrives from 4π sr\n");
     std::printf("                 → nucleus occludes a solid angle\n");
-    std::printf("                 → electrons sit in pressure-balanced voids\n");
-    std::printf("                 → each void has its own binding energy\n");
-    std::printf("                 → transitions between voids = photons\n\n");
+    std::printf("                 → electrons sit in pressure-balanced slots\n");
+    std::printf("                 → each slot has its own binding energy\n");
+    std::printf("                 → transitions between slots = photons\n\n");
     std::printf("  Excitation INCREASES orbital angular momentum (L = nℏ).\n");
-    std::printf("  Excitation DECREASES orbital velocity (wider void).\n");
+    std::printf("  Excitation DECREASES orbital velocity (wider slot).\n");
     std::printf("  Excitation BARELY changes v_circ (v << c for all states).\n");
     std::printf("  Nuclear rotation is NOT slowed — wake coupling weakens.\n\n");
     std::printf("  Multi-electron excitation is possible for loose-gear\n");

@@ -88,6 +88,11 @@ H-1 at 99.99% abundance is not because it is hard to convert. It IS being conver
 
 ---
 
+
+### Proton-electron coupling note
+
+Bare proton — no hydron scaffold. The single proton-electron pair is the fundamental unit of SDT atomic coupling.
+
 ## Electronic Structure (from Hydrogen Atomicus)
 
 **Electron configuration**: 1s1

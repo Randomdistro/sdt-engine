@@ -83,6 +83,11 @@ This shift was how deuterium was discovered (Urey, 1931). In SDT terms: the heav
 
 ---
 
+
+### Proton-electron coupling note
+
+Single deuteron (1p+1n) — one proton-electron pair. The neutron modulates the convergent pressure at this pair, shifting the slot geometry slightly from protium.
+
 ## Electronic Structure (from Hydrogen Atomicus)
 
 **Electron configuration**: 1s1

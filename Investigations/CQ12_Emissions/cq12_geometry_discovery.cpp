@@ -312,11 +312,11 @@ int main() {
     struct Target { const char* cls; const char* sig; const char* deriv; bool ok; };
     Target tgt[] = {
         {"loose_outer", "OLI>5 & rho<0.4",
-         "derive shallow outer void over closed inner geometry", true},
+         "derive shallow outer slot over closed inner geometry", true},
         {"dyad_closure", "BP=2 & CBI>4",
-         "derive paired two-electron void with core breach beyond", true},
+         "derive paired two-electron slot with core breach beyond", true},
         {"cube_closure", "rho>0.7 & late BP",
-         "derive eight-void closure and high first excitation fraction", true},
+         "derive eight-slot closure and high first excitation fraction", true},
         {"alpha_core_breach", "CBI>5 at inner boundary",
          "derive deep pressure wall at alpha-core transition", true},
         {"tetrahedral", "low rho (indirect)",
@@ -342,7 +342,7 @@ int main() {
     std::printf("     - tetrahedral: C not distinguishable from IE ladder alone\n");
     std::printf("     - d_rearrangement: Cu not clearly distinct from Ni/Zn\n\n");
     std::printf("  4. Nuclear grammar effect: SECONDARY.\n");
-    std::printf("     Primary = void closure geometry.\n");
+    std::printf("     Primary = slot closure geometry.\n");
     std::printf("     Triton fraction does not predict rigidity directly.\n\n");
     std::printf("  5. Stage C permission:\n");
     std::printf("     GRANTED: loose_outer, dyad, cube, alpha_breach\n");
