@@ -59,50 +59,81 @@ static void prove(const char* tag, const char* desc,
 }
 
 // ═══════════════════════════════════════════════════════════════════════
-//  THE MODE EQUATIONS
+//  THE MODE EQUATIONS — Full Mathematical Derivation
 //
-//  For a particle at rest (v_C = 0), the full budget goes to circulation:
-//    v_T^2 + v_P^2 = c^2
+//  STARTING POINT: A particle at rest (v_C = 0) has its entire speed
+//  budget allocated to internal circulation:
 //
-//  Helical coupling (winding number W):
-//    v_P / v_T = W × (a / R)
+//    v_T² + v_P² = c²            ... (A: Movement Budget, Law V)
 //
-//  Self-consistency (the torus IS the de Broglie wavelength):
-//    R = hbar / (m v_T)    (toroidal Compton condition)
-//    a = hbar / (m v_P)    (poloidal Compton condition)
+//  This is not an approximation — it is the exact budget constraint.
+//  The sum of the SQUARES (not the speeds) equals c² because the
+//  three modes are orthogonal: toroidal and poloidal circulations
+//  lie in perpendicular planes on the torus surface.
 //
-//  From the Compton conditions:
-//    a / R = v_T / v_P
+//  HELICAL COUPLING:
+//  The circulation traces a helix on the torus surface. In one
+//  toroidal revolution (path length 2πR), the helix completes W
+//  poloidal loops (path length W × 2πa). Both are traversed in
+//  the same period T, so:
+//    v_T = 2πR / T    and    v_P = W × 2πa / T
+//  Dividing:
+//    v_P / v_T = W × (a / R)     ... (B: Geometric Coupling)
 //
-//  Substituting into the coupling equation:
-//    v_P / v_T = W × (v_T / v_P)
-//    (v_P)^2 = W × (v_T)^2
-//    v_P = sqrt(W) × v_T
+//  SELF-CONSISTENCY:
+//  The torus IS the particle — its dimensions are the de Broglie
+//  wavelengths of its own circulation modes.
+//    2πR = h/(m v_T)  →  R = ℏ/(m v_T)    ... (C: Toroidal Compton)
+//    2πa = h/(m v_P)  →  a = ℏ/(m v_P)    ... (D: Poloidal Compton)
 //
-//  Inserting into the budget v_T^2 + v_P^2 = c^2:
-//    v_T^2 + W × v_T^2 = c^2
-//    v_T^2 (1 + W) = c^2
-//    v_T = c / sqrt(1 + W)
-//    v_P = c sqrt(W) / sqrt(1 + W)
+//  The meaning of (C): the major circumference equals the de Broglie
+//  wavelength of the toroidal mode. This is the standing-wave condition
+//  — the circulation must be phase-coherent after one full revolution.
+//  Similarly (D) for the minor circumference.
 //
-//  The aspect ratio:
-//    a / R = v_T / v_P = 1 / sqrt(W)
-//    R / a = sqrt(W)
+//  Dividing (C) by (D):
+//    R/a = v_P/v_T               ... (E: Aspect = Velocity Ratio)
+//  and therefore:
+//    a/R = v_T/v_P               ... (E')
 //
-//  The mass from the toroidal Compton condition:
-//    R = hbar / (m v_T) = hbar sqrt(1+W) / (m c)
-//    m = hbar sqrt(1+W) / (R c)
+//  SOLVING THE COUPLED SYSTEM:
+//  Substitute (E') into (B):
+//    v_P/v_T = W × (v_T/v_P)
+//  Multiply both sides by v_P:
+//    v_P² = W × v_T²             ... (F)
 //
-//  And from the poloidal:
-//    a = hbar / (m v_P) = hbar sqrt(1+W) / (m c sqrt(W))
-//    m = hbar sqrt(1+W) / (a c sqrt(W))
+//  The physical meaning of (F): the poloidal mode carries W times
+//  the kinetic energy of the toroidal mode. Higher winding numbers
+//  concentrate more of the budget into poloidal rotation.
 //
-//  These are consistent: m_from_R / m_from_a = a sqrt(W) / R = 1  ✓
+//  Substitute (F) into (A):
+//    v_T² + W·v_T² = c²
+//    v_T²(1 + W) = c²
+//    v_T = c / √(1 + W)          ... (G)
+//    v_P = c√W / √(1 + W)        ... (H)  [from (F): v_P = √W · v_T]
 //
-//  So the MASS is determined by W and ONE length scale (R or a).
-//  The discrete mass spectrum comes from:
-//    1. Discrete winding numbers W = 1, 2, 3, ...
-//    2. The length scale R (or a) being fixed by the displacement volume
+//  The √ (square root) appears because the BUDGET is quadratic.
+//  If the budget were linear (v_T + v_P = c), we'd get v_T = c/(1+W)
+//  instead. The quadratic budget — which is the correct physical law —
+//  gives weaker dependence on W.
+//
+//  ASPECT RATIO:
+//    R/a = v_P/v_T = √W          ... (I)  [from (E) and F]
+//
+//  The aspect ratio is the square root of the winding number.
+//  W=1: R/a = 1 (fat torus, equal radii)
+//  W=3: R/a = √3 ≈ 1.732 (elongated torus)
+//  W=9: R/a = 3 (very elongated)
+//
+//  MASS FROM GEOMETRY:
+//  From (C) and (G):  m = ℏ√(1+W) / (Rc)     ... (J)
+//  From (D) and (H):  m = ℏ√(1+W) / (ac√W)   ... (K)
+//  Dividing (J)/(K):  R/(a√W) ≡ 1 ✓  [consistent with (I)]
+//
+//  The mass depends on TWO quantities:
+//    1. W (discrete integer) — the topology
+//    2. R or a (continuous) — the physical size, set by V_disp (Law IV)
+//  Mass spectrum = discrete × continuous = discrete families
 // ═══════════════════════════════════════════════════════════════════════
 
 struct VortexMode {
@@ -297,15 +328,30 @@ static void section3_stability()
     std::puts("  p=2 toroidal wraps, q=3 poloidal wraps.");
     std::puts("  v_T corresponds to the toroidal winding, v_P to poloidal.\n");
 
-    // For a (p,q) torus knot:
-    // v_P/v_T = (q/p) × (a/R)
-    // Compton self-consistency still gives a/R = v_T/v_P
-    // So: v_P/v_T = (q/p)(v_T/v_P)
-    //     (v_P)^2 = (q/p)(v_T)^2
-    //     v_P = sqrt(q/p) v_T
-    // Budget: v_T^2(1 + q/p) = c^2
-    //         v_T = c / sqrt(1 + q/p) = c sqrt(p) / sqrt(p+q)
-    //         v_P = c sqrt(q) / sqrt(p+q)
+    // GENERALISATION TO (p,q) TORUS KNOTS
+    //
+    // For a general (p,q) torus knot, the helix traces p toroidal
+    // and q poloidal wraps before closing. The coupling equation
+    // generalises from W = q (simple winding) to q/p:
+    //
+    //   v_P/v_T = (q/p) × (a/R)    ... (B')
+    //
+    // Self-consistency (a/R = v_T/v_P) is unchanged because the
+    // Compton condition depends only on the individual mode
+    // velocities, not on how many wraps occur:
+    //
+    //   v_P/v_T = (q/p)(v_T/v_P)
+    //   v_P² = (q/p) v_T²           ... (F')
+    //
+    // Budget: v_T²(1 + q/p) = c²
+    //   v_T²(p + q)/p = c²
+    //   v_T² = pc²/(p+q)
+    //   v_T = c√p / √(p+q)          ... (G')
+    //   v_P = c√q / √(p+q)          ... (H')
+    //
+    // Note: √ appears because the budget is quadratic (v²), and
+    // the ratio q/p enters linearly before squaring. The √(p+q)
+    // denominator normalises the total to c².
 
     std::puts("  (p,q) TORUS KNOT EQUILIBRIA:\n");
     std::printf("  %5s | %14s | %14s | %8s | %8s | %8s\n",

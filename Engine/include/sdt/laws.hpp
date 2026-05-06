@@ -20,6 +20,69 @@
  * 9 axioms. 2 lemmas. 17 theorems. Zero free parameters.
  * One medium. One tick. One budget.
  *
+ * Minimal external invariant policy:
+ *   Only c, ℏ, ℓ_P are taken as base external scales.
+ *   Optionally α may be retained as an empirical atomic anchor.
+ *
+ *   Status:
+ *     - Dimensionless invariant (no length/time scale)
+ *     - Allowed in derivations only where electron/atomic structure enters
+ *
+ *   Constraints:
+ *     - α MUST NOT introduce macroscopic scales (r, M, distances)
+ *     - α MUST NOT be used to normalise z(r) or k(r) globally
+ *     - Any appearance of α must be removable without changing
+ *       the gravitational sector (redshift, delay, bending)
+ *
+ *   Required checks:
+ *     - α → 0 limit leaves spation-depth (z) and k-field well-defined
+ *     - α does not alter ∫z dl, ∇⊥z, or endpoint Δz at macroscopic scales
+ *
+ *   Permitted uses:
+ *     - Setting electron-scale ratios (e.g., v_P / v_T in W=1 topology)
+ *     - Internal atomic/quantum structure relations
+ *
+ *   Forbidden uses:
+ *     - Fixing amplitudes or coefficients in z(r) for gravitational tests
+ *     - Back-solving α from macroscopic observables
+ *
+ *   All macroscopic scales (mass, radius, orbital distance, k-values,
+ *   z-fields) must be derived from SDT relations and spation-depth closure
+ *   (zk² = 1). They are NEVER to be introduced as independent inputs.
+ *
+ *   Permitted usage:
+ *     - invariants::* may appear in canonical derivations
+ *     - validation_anchors::* may appear ONLY in validation/benchmark code
+ *
+ *   Forbidden:
+ *     - using validation_anchors::* inside any function that defines z(r),
+ *       k(r), or any core SDT law
+ *     - introducing new dimensional scales not expressible via invariants::*
+ *
+ *   Required proof of closure:
+ *     - Derive k(r) and z(r) from SDT (occlusion/geometry) without anchors
+ *     - Compute observables solely from derived fields:
+ *         redshift  = Δz
+ *         delay     = (2/c) ∫ z dl
+ *         bending   = 2 ∫ ∇⊥z dl
+ *     - Only after derivation, plug validation_anchors::* to compare with data
+ *
+ *   Failure modes (reject if any occur):
+ *     - hidden scale insertion (e.g., r ∼ GM/c² introduced ad hoc)
+ *     - dependence on path-loss or speed reduction (violates local c)
+ *     - lateral non-uniformity across wavefronts (predicts smearing)
+ *     - need for ad hoc coefficients to match benchmarks
+ *
+ *   Optional compile-time guard pattern to enforce separation:
+ *
+ *   #ifdef SDT_CANONICAL
+ *   // No anchors allowed here
+ *   #else
+ *   using namespace validation_anchors; // only in tests/benchmarks
+ *   #endif
+ *
+ * This pins the contract: derive first, then validate—never the reverse.
+ *
  * @author SDT Canonical Engine — James Tyndall, Melbourne, Australia
  * @date March 2026
  * @version 5.0 (Five-Law Framework)
@@ -31,21 +94,35 @@
 namespace sdt::laws {
 
 // ═══════════════════════════════════════════════════════════════════════
-//  MEASURED INPUTS — CODATA 2018 / IAU / FIRAS
-//  These are the ONLY externally sourced values. Everything else derives.
+//  FUNDAMENTAL INVARIANTS + VALIDATION ANCHORS
+//  Only the base invariants below are permitted as external scales.
+//  All macroscopic scales (mass, radius, orbital distance, k-values, z-fields)
+//  must close from these invariants through SDT relations only.
+//
+//  The listed “validation anchors” are currently retained for empirical
+//  checks. They are not part of the minimal invariant set and should be
+//  derived from the base invariants in a fully closed SDT formulation.
 // ═══════════════════════════════════════════════════════════════════════
 
 namespace measured {
-    // SI exact definitions
+    // Fundamental invariants — the external scale set used by SDT.
     inline constexpr double c           = 299'792'458.0;                // [m/s]    Speed of light (SI exact)
-    inline constexpr double h           = 6.626'070'15e-34;             // [J·s]    Planck constant (SI exact)
     inline constexpr double hbar        = 1.054'571'817e-34;            // [J·s]    Reduced Planck constant
+    inline constexpr double l_P         = 1.616'255e-35;                // [m]      Planck length
+    // Optional empirical anchor for atomic-scale closure:
+    inline constexpr double alpha       = 7.297'352'5693e-3;            // [-]      Fine structure constant
+
+    // Unit conversion constants (not fundamental scales)
+    inline constexpr double h           = 6.626'070'15e-34;             // [J·s]    Planck constant (SI exact)
     inline constexpr double k_B         = 1.380'649e-23;               // [J/K]    Boltzmann constant (SI exact)
     inline constexpr double e_charge    = 1.602'176'634e-19;            // [C]      Elementary charge (SI exact)
 
     // CODATA 2018 measured values
-    inline constexpr double alpha       = 7.297'352'5693e-3;            // [-]      Fine structure constant
     inline constexpr double alpha_inv   = 137.035'999'084;              // [-]      1/alpha
+
+    // Validation anchors — currently retained for empirical checks only.
+    // In a fully closed SDT derivation, these should follow from the base
+    // invariants and SDT topology/relational structure.
     inline constexpr double a_0         = 5.291'772'109'03e-11;         // [m]      Bohr radius
     inline constexpr double r_e         = 2.817'940'3262e-15;           // [m]      Classical electron radius = alpha * ƛ_Ce
     inline constexpr double R_p         = 8.414e-16;                    // [m]      Proton charge radius (muonic H, 2019)
@@ -60,8 +137,7 @@ namespace measured {
     inline constexpr double lambda_C_e  = 2.426'310'238'67e-12;         // [m]      Electron Compton wavelength
     inline constexpr double lambda_C_p  = 1.321'410'021'40e-15;         // [m]      Proton Compton wavelength
 
-    // Planck units (CODATA 2018)
-    inline constexpr double l_P         = 1.616'255e-35;                // [m]      Planck length
+    // Planck units (derived from l_P)
     inline constexpr double t_P         = 5.391'24e-44;                 // [s]      Planck time
     inline constexpr double l_P3        = l_P * l_P * l_P;              // [m^3]    Planck volume
 
@@ -77,7 +153,8 @@ namespace measured {
     inline constexpr double eV_to_J     = 1.602'176'634e-19;            // [J/eV]
     inline constexpr double MeV_to_J    = 1.602'176'634e-13;            // [J/MeV]
 
-    // Stellar / solar (IAU)
+    // Validation anchors for astrophysical scaling only.
+    // These values are not part of the minimal external invariant set.
     inline constexpr double R_Sun       = 6.957e8;                      // [m]      Solar radius (IAU 2015)
     inline constexpr double AU          = 1.495'978'707e11;             // [m]      Astronomical unit (IAU 2012)
 

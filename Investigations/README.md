@@ -69,6 +69,7 @@ the investigation derives predictions and compares them to measurements.
 | CQ05_Proton_Electron_Mass_Ratio | m_p/m_e from W=3 vs W=1 equilibrium | Theory/03_Open_Problems |
 | CQ06_Eclipse_Saturation_Model | Missing galactic.hpp — needs implementation | E46 reference |
 | CQ07_Neutrino_Magnetic_Moment | Formalise μ_ν ≡ 0 prediction | neutrino.hpp:9 |
+| CQ15_Spation_Depth_Engine | z(r)=ϟ/r reproduces redshift, Shapiro, bending, cosmological z | laws.hpp:bridge |
 
 ---
 
