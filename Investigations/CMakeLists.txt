@@ -110,6 +110,16 @@ if(MSVC)
     target_compile_options(sdt-cq10b-torus-mass PRIVATE /W3)
 endif()
 
+# ═══ CQ11 Trefoil Confinement ═══
+set(CQ11_DIR ${CMAKE_CURRENT_SOURCE_DIR}/CQ11_Trefoil_Confinement)
+
+add_executable(sdt-cq11-trefoil-confinement ${CQ11_DIR}/cq11_trefoil_confinement.cpp)
+target_link_libraries(sdt-cq11-trefoil-confinement PRIVATE sdt-engine)
+
+if(MSVC)
+    target_compile_options(sdt-cq11-trefoil-confinement PRIVATE /W3)
+endif()
+
 # ═══ CQ13 Emission Prediction Engine ═══
 set(CQ13_DIR ${CMAKE_CURRENT_SOURCE_DIR}/CQ13_Emission_Prediction)
 
