@@ -150,3 +150,13 @@ target_link_libraries(sdt-cq16-k-hierarchy PRIVATE sdt-engine)
 if(MSVC)
     target_compile_options(sdt-cq16-k-hierarchy PRIVATE /W3)
 endif()
+
+# ═══ CQ17 Proton-Electron Mass Ratio ═══
+set(CQ17_DIR ${CMAKE_CURRENT_SOURCE_DIR}/CQ17_Proton_Electron_Mass_Ratio)
+
+add_executable(sdt-cq17-mass-ratio ${CQ17_DIR}/cq17_mass_ratio_solver.cpp)
+target_link_libraries(sdt-cq17-mass-ratio PRIVATE sdt-engine)
+
+if(MSVC)
+    target_compile_options(sdt-cq17-mass-ratio PRIVATE /W3)
+endif()
