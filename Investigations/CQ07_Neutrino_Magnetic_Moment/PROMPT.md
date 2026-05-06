@@ -17,6 +17,9 @@ Formalise the SDT prediction of μ_ν = 0 and compute the experimental sensitivi
 4. PTOLEMY (E01) will measure CνB → does it also constrain μ_ν?
 
 ### Success Criteria
-- [ ] SDT prediction (μ_ν ≡ 0) formally stated with topological argument
-- [ ] Comparison to standard model prediction
-- [ ] Experimental pathway to distinguish the two
+- [x] SDT prediction (μ_ν ≡ 0) formally stated with topological argument
+- [x] Comparison to standard model prediction
+- [x] Experimental pathway to distinguish the two
+
+### Completed: May 2026
+See `INVESTIGATION.md` for the full formal derivation and `cq07_neutrino_magnetic_moment.cpp` for computational verification.
