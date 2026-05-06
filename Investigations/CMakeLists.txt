@@ -160,3 +160,10 @@ target_link_libraries(sdt-cq17-mass-ratio PRIVATE sdt-engine)
 if(MSVC)
     target_compile_options(sdt-cq17-mass-ratio PRIVATE /W3)
 endif()
+
+add_executable(sdt-cq17-28d ${CQ17_DIR}/cq17_28d_formal.cpp)
+target_link_libraries(sdt-cq17-28d PRIVATE sdt-engine)
+
+if(MSVC)
+    target_compile_options(sdt-cq17-28d PRIVATE /W3)
+endif()
