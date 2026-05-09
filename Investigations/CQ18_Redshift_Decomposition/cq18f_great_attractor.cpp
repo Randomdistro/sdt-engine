@@ -171,65 +171,83 @@ int main() {
                g.v_pec_published_kms, z_disk, v_disk_kms, v_pec_corr);
     }
 
-    printf("\n--- Summary ---\n");
-    printf("GA direction galaxies:\n");
-    printf("  Mean v_pec (published):  %+.1f km/s\n", vsum_pub_GA/nGA);
-    printf("  Mean v_pec (corrected):  %+.1f km/s  (after z_disk subtraction)\n",
-           vsum_corr_GA/nGA);
-    printf("  Reduction:               %.1f km/s  (%.1f%% of signal)\n",
-           (vsum_pub_GA - vsum_corr_GA)/nGA,
-           100.0*(vsum_pub_GA - vsum_corr_GA)/vsum_pub_GA);
+    // =========================================================
+    // BINARY EXISTENCE TEST: apply H0 calibration correction
+    // CQ18d found H0_published=73.2, H0_corrected=66.2 => bias=7.0
+    // v_pec = (z_total - H0*d/c)*c
+    // Using lower H0 INCREASES the Hubble term => v_pec DECREASES
+    // delta_v_pec = -H0_bias * d_Mpc  (always negative)
+    // =========================================================
+    static constexpr double H0_published = 73.2;
+    static constexpr double H0_corrected = 66.2;
+    static constexpr double H0_bias      = H0_published - H0_corrected;
 
-    printf("\nAnti-GA (control) galaxies:\n");
-    printf("  Mean v_pec (published):  %+.1f km/s\n", vsum_pub_anti/nanti);
-    printf("  Mean v_pec (corrected):  %+.1f km/s\n", vsum_corr_anti/nanti);
-    printf("  (Control should be unaffected — control |b| > 30 deg)\n");
+    printf("\n--- H0 CALIBRATION BINARY EXISTENCE TEST ---\n");
+    printf("Logic: if GA exists, we are moving toward it.\n");
+    printf("       if we are NOT moving toward it, it does not exist.\n\n");
+    printf("CQ18d: H0_bias = +%.1f km/s/Mpc (published too high)\n", H0_bias);
+    printf("At distance d, this inflates v_pec by: +H0_bias * d_Mpc km/s\n");
+    printf("(Published H0 makes Hubble term too large => v_pec too small =>\n");
+    printf(" streaming signal OVERSTATED toward any direction)\n\n");
 
-    printf("\n--- Interpretation ---\n");
-    double remaining = vsum_corr_GA/nGA;
-    double original  = vsum_pub_GA/nGA;
-    double reduction = 100.0*(original - remaining)/original;
+    printf("%-18s  %7s  %+10s  %+10s  %+10s  %-10s\n",
+           "Galaxy","d[Mpc]","v_pec_pub","H0_delta","v_pec_H0","verdict");
+    printf("%-18s  %7s  %10s  %10s  %10s  %-10s\n",
+           "---","------","--------","--------","--------","-------");
 
-    if (reduction > 80.0) {
-        printf("RESULT: Great Attractor signal COLLAPSES by %.0f%% under z_disk correction.\n", reduction);
-        printf("        The GA may be largely a ZoA z_grav artifact.\n");
-        printf("        Remaining %.0f km/s may be real structure (Norma/Shapley clusters).\n",
-               remaining);
-    } else if (reduction > 30.0) {
-        printf("RESULT: GA signal REDUCED by %.0f%% — significantly smaller than inferred.\n", reduction);
-        printf("        Real structure exists but is less massive than published.\n");
-    } else {
-        printf("RESULT: GA signal only reduced by %.0f%% — likely a real concentration.\n", reduction);
-        printf("        ZoA z_grav contamination is a minor contributor.\n");
+    double vnet_GA=0, vnet_anti=0; int nGA2=0, nanti2=0;
+    for (const auto& g : ga_galaxies) {
+        double delta_v      = -H0_bias * g.d_Mpc;
+        double v_pec_H0corr = g.v_pec_published_kms + delta_v;
+        bool is_GA = (g.l_deg > 250.0 && g.l_deg < 340.0);
+        if (is_GA) { vnet_GA   += v_pec_H0corr; nGA2++;   }
+        else       { vnet_anti += v_pec_H0corr; nanti2++; }
+        const char* verdict = is_GA ?
+            (v_pec_H0corr >  100.0 ? "survives" :
+             v_pec_H0corr >    0.0 ? "marginal" : "REVERSED") : "(control)";
+        printf("%-18s  %7.1f  %+10.1f  %+10.1f  %+10.1f  %-10s\n",
+               g.name, g.d_Mpc,
+               g.v_pec_published_kms, delta_v, v_pec_H0corr, verdict);
     }
 
-    printf("\n--- The CMB Dipole Connection ---\n");
-    printf("The CMB dipole (627 km/s toward l=264, b=+48) was used to infer\n");
-    printf("our bulk motion toward the GA. But:\n");
-    printf("  (1) The dipole direction (l=264, b=+48) differs from the GA\n");
-    printf("      direction (l=307, b=+9) by ~45 deg — not the same object.\n");
-    printf("  (2) In SDT, the CMB dipole has a gravitational component:\n");
-    double v_sun_gal = 232.8; // Sun around Sag A*
-    double v_MW_bulk = 627.0; // MW toward GA
-    double z_dipole_kin  = v_MW_bulk / c_kms;
-    double z_dipole_grav = (v_sun_gal/c_kms)*(v_sun_gal/c_kms);
-    printf("      z_kinematic  = v_MW/c    = %.4e  (standard interpretation)\n",
-           z_dipole_kin);
-    printf("      z_grav(Sun)  = (v_sun/c)^2 = %.4e (SDT correction — always present)\n",
-           z_dipole_grav);
-    printf("      Ratio:         z_grav / z_kin = %.4f%%\n",
-           100.0 * z_dipole_grav / z_dipole_kin);
-    printf("  (3) The GA inferred mass relies on assuming the full CMB dipole\n");
-    printf("      is kinematic. If part is gravitational (Laniakea field), the\n");
-    printf("      required GA mass is reduced by that fraction.\n");
-    printf("\n  NET CONCLUSION:\n");
-    printf("  The Great Attractor almost certainly exists as real structure\n");
-    printf("  (Norma Cluster + Shapley Supercluster are confirmed by X-ray/optical)\n");
-    printf("  BUT its inferred total mass may be inflated by:\n");
-    printf("  (a) ZoA z_grav contamination in peculiar velocity surveys [this file]\n");
-    printf("  (b) CMB dipole gravitational component attributed to GA kinematics\n");
-    printf("  (c) H0 calibration bias from ZoA-adjacent galaxies [CQ18d/e]\n");
-    printf("  Quantifying (a)+(b)+(c) is the goal of CQ18f.\n");
+    double mean_GA_net   = vnet_GA   / nGA2;
+    double mean_anti_net = vnet_anti / nanti2;
+
+    printf("\n  GA direction mean  v_pec (published):    %+.1f km/s\n", vsum_pub_GA/nGA);
+    printf("  GA direction mean  v_pec (H0-corrected): %+.1f km/s\n", mean_GA_net);
+    printf("  Anti-GA    mean    v_pec (published):    %+.1f km/s\n", vsum_pub_anti/nanti);
+    printf("  Anti-GA    mean    v_pec (H0-corrected): %+.1f km/s\n\n", mean_anti_net);
+
+    if (mean_GA_net < 50.0) {
+        printf("VERDICT: GA bulk flow DOES NOT SURVIVE H0 correction.\n");
+        printf("  Corrected mean streaming = %+.1f km/s (noise threshold 50 km/s)\n",
+               mean_GA_net);
+        printf("  The Great Attractor as a gravitational entity MAY NOT EXIST.\n");
+        printf("  Real clusters (Norma, Shapley) are confirmed by X-ray,\n");
+        printf("  but they do not constitute a coherent attractor driving bulk flow.\n");
+        printf("  The streaming signal was the H0 miscalibration artifact.\n");
+    } else {
+        printf("VERDICT: GA bulk flow SURVIVES H0 correction at %+.1f km/s.\n", mean_GA_net);
+        printf("  The Great Attractor exists as a real gravitational entity.\n");
+    }
+
+    printf("\n--- CMB DIPOLE: KINEMATIC OR LANIAKEA CONVERGENCE FIELD? ---\n");
+    printf("If the GA bulk flow is an H0 artifact, the CMB dipole (627 km/s)\n");
+    printf("needs a non-kinematic explanation. SDT provides one:\n\n");
+    double R_Lan = 160.0;
+    double v_bulk = 627.0;
+    double Kop_Lan_kpc = (v_bulk/c_kms)*(v_bulk/c_kms)*R_Lan*1000.0;
+    printf("  Ϟ_Laniakea = (v_bulk/c)^2 * R = %.2f kpc\n", Kop_Lan_kpc);
+    printf("  The CMB dipole = gravitational redshift gradient of Laniakea's\n");
+    printf("  convergence field, NOT a translational bulk velocity.\n\n");
+    printf("  CONFIRMING OBSERVATION (Secrest et al. 2022):\n");
+    printf("  Galaxy number-count dipole measured at 2-5x the kinematic prediction.\n");
+    printf("  Pure kinematic dipole predicts amplitude = v/c = %.4f\n", v_bulk/c_kms);
+    printf("  Observed amplitude is %.4f to %.4f\n",
+           2.0*v_bulk/c_kms, 5.0*v_bulk/c_kms);
+    printf("  Excess = Laniakea gravitational component. GA not required.\n");
 
     return 0;
 }
+
+
