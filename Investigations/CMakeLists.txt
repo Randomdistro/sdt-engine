@@ -167,3 +167,20 @@ target_link_libraries(sdt-cq17-28d PRIVATE sdt-engine)
 if(MSVC)
     target_compile_options(sdt-cq17-28d PRIVATE /W3)
 endif()
+
+# ---- CQ18: Gravitational Redshift Decomposition ----
+set(CQ18_DIR ${CMAKE_CURRENT_SOURCE_DIR}/CQ18_Redshift_Decomposition)
+
+add_executable(sdt-cq18a ${CQ18_DIR}/cq18a_solar_zdecomp.cpp)
+add_executable(sdt-cq18b ${CQ18_DIR}/cq18b_multiplanet_zdecomp.cpp)
+add_executable(sdt-cq18c ${CQ18_DIR}/cq18c_agn_zdecomp.cpp)
+add_executable(sdt-cq18d ${CQ18_DIR}/cq18d_sne_h0_correction.cpp)
+add_executable(sdt-cq18e ${CQ18_DIR}/cq18e_zladder.cpp)
+
+foreach(t sdt-cq18a sdt-cq18b sdt-cq18c sdt-cq18d sdt-cq18e)
+    if(MSVC)
+        target_compile_options(${t} PRIVATE /W3)
+    else()
+        target_compile_options(${t} PRIVATE -O2)
+    endif()
+endforeach()
