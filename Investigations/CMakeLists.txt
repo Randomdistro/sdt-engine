@@ -73,6 +73,54 @@ if(MSVC)
     target_compile_options(sdt-cq03-fine-structure PRIVATE /W3)
 endif()
 
+# ═══ CQ04 State28D Force Ratio Constants (superseded by CQ01+CQ16) ═══
+set(CQ04_DIR ${CMAKE_CURRENT_SOURCE_DIR}/CQ04_State28D_Force_Ratio_Constants)
+
+add_executable(sdt-cq04-force-ratios ${CQ04_DIR}/cq04_force_ratio_constants.cpp)
+target_link_libraries(sdt-cq04-force-ratios PRIVATE sdt-engine)
+
+if(MSVC)
+    target_compile_options(sdt-cq04-force-ratios PRIVATE /W3)
+endif()
+
+# ═══ CQ05 Proton-Electron Mass Ratio (early derivation) ═══
+set(CQ05_DIR ${CMAKE_CURRENT_SOURCE_DIR}/CQ05_Proton_Electron_Mass_Ratio)
+
+add_executable(sdt-cq05-mass-ratio ${CQ05_DIR}/cq05_mass_ratio.cpp)
+target_link_libraries(sdt-cq05-mass-ratio PRIVATE sdt-engine)
+
+if(MSVC)
+    target_compile_options(sdt-cq05-mass-ratio PRIVATE /W3)
+endif()
+
+# ═══ CQ06 Eclipse Saturation Model ═══
+set(CQ06_DIR ${CMAKE_CURRENT_SOURCE_DIR}/CQ06_Eclipse_Saturation_Model)
+
+add_executable(sdt-cq06-eclipse ${CQ06_DIR}/cq06_eclipse_saturation.cpp)
+target_link_libraries(sdt-cq06-eclipse PRIVATE sdt-engine)
+
+if(MSVC)
+    target_compile_options(sdt-cq06-eclipse PRIVATE /W3)
+endif()
+
+# ═══ CQ19 Milky Way Occlusion Map ═══
+set(CQ19_DIR ${CMAKE_CURRENT_SOURCE_DIR}/CQ19_Milky_Way_Occlusion_Map)
+
+add_executable(sdt-cq19     ${CQ19_DIR}/cq19_mw_occlusion_map.cpp)
+add_executable(sdt-cq19b    ${CQ19_DIR}/cq19b_galactic_nucleus_shells.cpp)
+add_executable(sdt-cq19c    ${CQ19_DIR}/cq19c_binding_proof.cpp)
+add_executable(sdt-cq19d    ${CQ19_DIR}/cq19d_baryon_count.cpp)
+add_executable(sdt-cq19e    ${CQ19_DIR}/cq19e_spiral_arms.cpp)
+
+foreach(t sdt-cq19 sdt-cq19b sdt-cq19c sdt-cq19d sdt-cq19e)
+    target_link_libraries(${t} PRIVATE sdt-engine)
+    if(MSVC)
+        target_compile_options(${t} PRIVATE /W3)
+    else()
+        target_compile_options(${t} PRIVATE -O2)
+    endif()
+endforeach()
+
 # ═══ CQ08 Granular Pulse Mechanics ═══
 set(CQ08_DIR ${CMAKE_CURRENT_SOURCE_DIR}/CQ08_Granular_Pulse_Mechanics)
 
@@ -189,3 +237,72 @@ foreach(t sdt-cq18a sdt-cq18b sdt-cq18c sdt-cq18d sdt-cq18e sdt-cq18f sdt-cq18g 
         target_compile_options(${t} PRIVATE -O2)
     endif()
 endforeach()
+
+# ═══ CQ20 Galactic Spation Topology ═══
+set(CQ20_DIR ${CMAKE_CURRENT_SOURCE_DIR}/CQ20_Galactic_Spation_Topology)
+
+add_executable(sdt-cq20 ${CQ20_DIR}/cq20_spation_topology.cpp)
+add_executable(sdt-cq20b ${CQ20_DIR}/cq20b_torus_spation_count.cpp)
+add_executable(sdt-cq20c ${CQ20_DIR}/cq20c_torus_differential.cpp)
+add_executable(sdt-cq20d ${CQ20_DIR}/cq20d_galactic_occlusion.cpp)
+add_executable(sdt-cq20e ${CQ20_DIR}/cq20e_bulge_from_sagA.cpp)
+add_executable(sdt-cq20f ${CQ20_DIR}/cq20f_trefoil_convection.cpp)
+target_link_libraries(sdt-cq20 PRIVATE sdt-engine)
+target_link_libraries(sdt-cq20b PRIVATE sdt-engine)
+target_link_libraries(sdt-cq20c PRIVATE sdt-engine)
+target_link_libraries(sdt-cq20d PRIVATE sdt-engine)
+target_link_libraries(sdt-cq20e PRIVATE sdt-engine)
+target_link_libraries(sdt-cq20f PRIVATE sdt-engine)
+
+if(MSVC)
+    target_compile_options(sdt-cq20 PRIVATE /W3)
+    target_compile_options(sdt-cq20b PRIVATE /W3)
+    target_compile_options(sdt-cq20c PRIVATE /W3)
+    target_compile_options(sdt-cq20d PRIVATE /W3)
+    target_compile_options(sdt-cq20e PRIVATE /W3)
+    target_compile_options(sdt-cq20f PRIVATE /W3)
+else()
+    target_compile_options(sdt-cq20 PRIVATE -O2)
+    target_compile_options(sdt-cq20b PRIVATE -O2)
+    target_compile_options(sdt-cq20c PRIVATE -O2)
+    target_compile_options(sdt-cq20d PRIVATE -O2)
+    target_compile_options(sdt-cq20e PRIVATE -O2)
+    target_compile_options(sdt-cq20f PRIVATE -O2)
+endif()
+
+# ═══ CQ20g Convergence Occlusion (bidirectional gradient differential) ═══
+add_executable(sdt-cq20g ${CQ20_DIR}/cq20g_convergence_occlusion.cpp)
+target_link_libraries(sdt-cq20g PRIVATE sdt-engine)
+if(MSVC)
+    target_compile_options(sdt-cq20g PRIVATE /W3)
+else()
+    target_compile_options(sdt-cq20g PRIVATE -O2)
+endif()
+
+# ═══ CQ21 Proton-Spation Interface: CMB-Derived Ontic Rate ═══
+add_executable(sdt-cq21 ${CQ20_DIR}/cq21_proton_spation_cmb.cpp)
+target_link_libraries(sdt-cq21 PRIVATE sdt-engine)
+if(MSVC)
+    target_compile_options(sdt-cq21 PRIVATE /W3)
+else()
+    target_compile_options(sdt-cq21 PRIVATE -O2)
+endif()
+
+# ═══ CQ22 Galactic Skymap: Lattice Warping & Great Attractor ═══
+add_executable(sdt-cq22 ${CQ20_DIR}/cq22_galactic_skymap.cpp)
+target_link_libraries(sdt-cq22 PRIVATE sdt-engine)
+if(MSVC)
+    target_compile_options(sdt-cq22 PRIVATE /W3)
+else()
+    target_compile_options(sdt-cq22 PRIVATE -O2)
+endif()
+
+# === SDT Galactic Calculator - Universal rotation curve engine ===
+set(GALCALC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/GalacticCalculator)
+add_executable(sdt-galaxy-calc ${GALCALC_DIR}/sdt_galaxy_calc.cpp)
+target_link_libraries(sdt-galaxy-calc PRIVATE sdt-engine)
+if(MSVC)
+    target_compile_options(sdt-galaxy-calc PRIVATE /W3)
+else()
+    target_compile_options(sdt-galaxy-calc PRIVATE -O2)
+endif()

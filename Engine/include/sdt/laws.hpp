@@ -575,6 +575,45 @@ namespace bridge {
     inline constexpr double k_Moon    = c / v_Moon;  // ≈ 178448
     inline constexpr double koppa_Moon = v_Moon * v_Moon * R_Moon / (c * c);
     // = 5.46e-5 m = 0.055 mm
+
+    // ─── Baryon Ϟ quantum — derived from base invariants only ───
+    //
+    // The gravitational c-boundary per proton:
+    //   Ϟ_per_baryon = G m_p / c²
+    //
+    // G is NOT imported. Instead, from the Planck definition:
+    //   G = l_P² c³ / ℏ
+    //
+    // Therefore:
+    //   Ϟ_per_baryon = (l_P² c³ / ℏ) × m_p / c²
+    //                = l_P² × c × m_p / ℏ
+    //
+    // Inputs: l_P [m], c [m/s], m_p [kg], ℏ [J·s] — all base invariants.
+    // No G. No M_Sun. No standard-model mass measurements beyond m_p.
+    //
+    inline constexpr double koppa_per_baryon = l_P * l_P * c * m_p / hbar;
+    // = 1.2421e-54 m / baryon
+
+    /// Baryon count from zk²=1
+    ///
+    /// For any body with observed orbital velocity v at radius R:
+    ///   Ϟ_body = v² R / c²           [bridge law — no G, no M]
+    ///   N_bar  = Ϟ_body / Ϟ_per_baryon
+    ///
+    /// This is the pure SDT baryon census. M_Sun in kg is NEVER needed.
+    /// The only inputs are: v [m/s], R [m], and the base invariants.
+    ///
+    [[nodiscard]] constexpr auto N_baryons_from_koppa(
+        double v_orbital_ms, double R_orbit_m
+    ) noexcept -> double {
+        double koppa_body = v_orbital_ms * v_orbital_ms * R_orbit_m / (c * c);
+        return koppa_body / koppa_per_baryon;
+    }
+
+    /// Baryon count from pre-computed koppa
+    [[nodiscard]] constexpr auto N_baryons(double koppa_body) noexcept -> double {
+        return koppa_body / koppa_per_baryon;
+    }
 }
 
 // ═══════════════════════════════════════════════════════════════════════

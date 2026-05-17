@@ -466,8 +466,7 @@ It is reduced from αc by the ratio R_e/a₀, which is an astronomically small n
         = 5.2918×10⁻¹¹ / 8.027×10⁻²⁵
         = 6.59 × 10¹³
 
-The electron's surface koppa is approximately 6.59 × 10¹³ — not 1.
-The electron is NOT at its own c-boundary.
+The electron's surface koppa is approximately 6.59 × 10¹³
 
 **The electron's c-boundary** would be at:
 
