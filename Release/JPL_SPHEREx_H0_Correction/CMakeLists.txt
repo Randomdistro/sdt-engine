@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.20)
+project(SDT_H0_Correction CXX)
+set(CMAKE_CXX_STANDARD 20)
+include_directories(sdt/include)
+add_executable(cq18d_h0         cq18d_sne_h0_correction.cpp)
+add_executable(cq18e_zladder    cq18e_zladder.cpp)
+add_executable(cq18f_attractor  cq18f_great_attractor.cpp)

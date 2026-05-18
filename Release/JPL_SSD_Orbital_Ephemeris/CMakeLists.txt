@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.20)
+project(SDT_Orbital_Ephemeris CXX)
+set(CMAKE_CXX_STANDARD 20)
+include_directories(sdt/include)
+add_executable(cq18a_solar  cq18a_solar_zdecomp.cpp)
