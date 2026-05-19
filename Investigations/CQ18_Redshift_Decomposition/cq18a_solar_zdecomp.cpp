@@ -70,23 +70,69 @@ int main() {
                p.name, p.r_AU, p.T_days, Koppa_orbital, Koppa_ref, err_pct);
     }
 
-    printf("\n--- Gravitational redshift chain for Earth/Moon system ---\n");
-    // Earth surface g from Moon orbit (no G, no M)
-    double r_moon   = 3.84400e8;  // m  (from laser ranging — pure timing)
-    double T_moon   = 27.3217 * 86400.0; // s
-    double R_earth  = 6.3710e6;   // m  (from eclipse geometry)
+    printf("\n--- Ϟ_Earth: three independent derivations (no G, no M) ---\n\n");
 
-    double g_earth  = 4.0*M_PI*M_PI * r_moon*r_moon*r_moon / (T_moon*T_moon * R_earth*R_earth);
-    double Koppa_earth = g_earth * R_earth*R_earth / (c*c);
-    double z_grav_earth = Koppa_earth / R_earth;
+    // Common Earth radius values
+    double R_mean   = 6.3710e6;   // m — mean radius (eclipse geometry)
+    double R_equat  = 6.3781e6;   // m — equatorial radius (GPS + geodesy)
+    double R_polar  = 6.3568e6;   // m — polar radius (geodesy)
 
-    printf("Moon orbit → g_Earth  = %.4f m/s²  (NASA: 9.807)\n", g_earth);
-    printf("           → Ϟ_Earth  = %.4e m  (%.2f mm)\n", Koppa_earth, Koppa_earth*1000.0);
-    printf("           → z_grav   = %.4e\n", z_grav_earth);
-    printf("           → error in g = %+.2f%%\n\n",
-           100.0*(g_earth-9.807)/9.807);
+    // ── Method 1: Moon orbital period ─────────────────────────────────────
+    double r_moon = 3.84400e8;          // m  (lunar laser ranging)
+    double T_moon = 27.3217 * 86400.0;  // s  (sidereal period)
+    double Koppa_moon = 4.0*M_PI*M_PI * r_moon*r_moon*r_moon / (T_moon*T_moon * c*c);
+    double g_from_moon = Koppa_moon * c*c / (R_mean * R_mean);
 
-    printf("--- Ϟ field consistency: all planets → same Ϟ_sun ---\n");
+    printf("  Method 1 — Moon orbital period (T=%.4f days, r=%.4e m):\n",
+           T_moon/86400.0, r_moon);
+    printf("    Ϟ_Earth = %.6e m\n", Koppa_moon);
+    printf("    g_surface (at R_mean=6371 km) = %.4f m/s²\n", g_from_moon);
+    printf("    Implied R for g=9.807:  %.2f km  (+%.1f km above equatorial)\n\n",
+           sqrt(Koppa_moon*c*c/9.80665)/1000.0,
+           sqrt(Koppa_moon*c*c/9.80665)/1000.0 - R_equat/1000.0);
+
+    // ── Method 2: ISS orbital period (independent, much lower orbit) ──────
+    // ISS: mean altitude 408 km, period 92.68 min — from public tracking data
+    double r_ISS = R_mean + 4.08e5;     // m  (R_earth + 408 km altitude)
+    double T_ISS = 92.68 * 60.0;        // s  (orbital period)
+    double Koppa_ISS = 4.0*M_PI*M_PI * r_ISS*r_ISS*r_ISS / (T_ISS*T_ISS * c*c);
+    double g_from_ISS = Koppa_ISS * c*c / (R_mean * R_mean);
+
+    printf("  Method 2 — ISS orbital period (T=%.2f min, r=%.4e m):\n",
+           T_ISS/60.0, r_ISS);
+    printf("    Ϟ_Earth = %.6e m\n", Koppa_ISS);
+    printf("    g_surface (at R_mean=6371 km) = %.4f m/s²\n", g_from_ISS);
+    printf("    Ϟ agreement vs Moon method:  %+.4f%%\n\n",
+           100.0*(Koppa_ISS - Koppa_moon)/Koppa_moon);
+
+    // ── Method 3: Surface pendulum  Ϟ = g·R²/c²  ─────────────────────────
+    // g = 9.80665 m/s² (SI definition of standard gravity — exact)
+    // R_equat from geodesy (independent of orbital mechanics entirely)
+    double g_std       = 9.80665;
+    double Koppa_pend  = g_std * R_equat*R_equat / (c*c);
+    double g_check     = Koppa_pend * c*c / (R_equat*R_equat);
+
+    printf("  Method 3 — Surface pendulum  Ϟ = g·R²/c²  (g=9.80665, R=R_equat):\n");
+    printf("    Ϟ_Earth = %.6e m\n", Koppa_pend);
+    printf("    g_check (round-trip) = %.5f m/s²\n", g_check);
+    printf("    Ϟ agreement vs Moon method:  %+.4f%%\n\n",
+           100.0*(Koppa_pend - Koppa_moon)/Koppa_moon);
+
+    // ── Convergence summary ───────────────────────────────────────────────
+    double Koppa_earth_true = 3.986004418e14 / (c*c); // GM_E/c² for reference
+    printf("  %-28s  %-14s  %-8s\n", "Method", "Ϟ_Earth [m]", "vs GM/c²");
+    printf("  %-28s  %-14s  %-8s\n", "------", "-----------", "-------");
+    printf("  %-28s  %.6e    %+.3f%%\n", "Moon orbit",        Koppa_moon,  100.0*(Koppa_moon -Koppa_earth_true)/Koppa_earth_true);
+    printf("  %-28s  %.6e    %+.3f%%\n", "ISS orbit",         Koppa_ISS,   100.0*(Koppa_ISS  -Koppa_earth_true)/Koppa_earth_true);
+    printf("  %-28s  %.6e    %+.3f%%\n", "Surface g (equat)", Koppa_pend,  100.0*(Koppa_pend -Koppa_earth_true)/Koppa_earth_true);
+    printf("  %-28s  %.6e    %+.3f%%\n", "GM_E/c² (reference)",Koppa_earth_true, 0.0);
+    printf("\n  All three methods derive Ϟ_Earth from different observables.\n");
+    printf("  No G or M_Earth entered any calculation.\n");
+
+    double z_grav_earth = Koppa_ISS / R_mean;
+    printf("\n  z_grav_Earth (from ISS Ϟ, at mean surface) = %.4e\n", z_grav_earth);
+
+    printf("\n--- Ϟ field consistency: all planets → same Ϟ_sun ---\n");
     printf("Spectroscopic Ϟ_sun = %.4f m\n", Koppa_ref);
     printf("Orbital   avg Ϟ_sun = calculated above (should all agree to < 0.1%%)\n");
 
