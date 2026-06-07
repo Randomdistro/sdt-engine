@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ATOMICUS — Nuclear Stick Model</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #0a0a0f; overflow: hidden; font-family: 'Segoe UI', sans-serif; color: #ccc; }
+canvas { display: block; position: absolute; top: 0; left: 0; }
+
+/* ── Scrollable isotope list (left sidebar) ── */
+#isoList {
+  position: fixed; top: 0; left: 0; bottom: 60px; width: 200px; z-index: 10;
+  background: rgba(10,10,18,0.95); border-right: 1px solid #2a2a3a;
+  overflow-y: auto; scrollbar-width: thin; scrollbar-color: #444 #111;
+}
+#isoList::-webkit-scrollbar { width: 6px; }
+#isoList::-webkit-scrollbar-track { background: #111; }
+#isoList::-webkit-scrollbar-thumb { background: #444; border-radius: 3px; }
+
+#isoList .hdr {
+  position: sticky; top: 0; padding: 8px 10px; font-size: 11px; font-weight: 700;
+  color: #d4a05c; background: rgba(10,10,18,0.98); letter-spacing: 1px;
+  border-bottom: 1px solid #2a2a3a; z-index: 2;
+}
+#isoList .el-group { border-bottom: 1px solid rgba(255,255,255,0.04); }
+#isoList .el-label {
+  padding: 4px 10px; font-size: 9px; color: #666; font-weight: 600;
+  letter-spacing: 0.5px; background: rgba(30,30,50,0.5);
+}
+#isoList .iso-item {
+  padding: 5px 10px 5px 18px; font-size: 11px; cursor: pointer;
+  color: #999; transition: background 0.15s;
+  display: flex; justify-content: space-between; align-items: center;
+}
+#isoList .iso-item:hover { background: rgba(100,100,200,0.1); color: #ccc; }
+#isoList .iso-item.active {
+  background: rgba(212,160,92,0.15); color: #d4a05c;
+  border-left: 2px solid #d4a05c; padding-left: 16px;
+}
+#isoList .iso-item .grammar { font-size: 9px; color: #555; }
+#isoList .iso-item.active .grammar { color: #a08050; }
+#isoList .iso-item.stable::before { content: "●"; color: #4a4; font-size: 7px; margin-right: 4px; }
+#isoList .iso-item.unstable::before { content: "○"; color: #844; font-size: 7px; margin-right: 4px; }
+
+/* ── Data panels (right side) ── */
+.panel {
+  position: fixed; right: 10px; z-index: 10;
+  background: rgba(12,12,22,0.92); border: 1px solid #2a2a3a; border-radius: 6px;
+  padding: 10px 12px; min-width: 190px; font-size: 11px;
+}
+.panel h3 { color: #d4a05c; font-size: 12px; margin-bottom: 5px; letter-spacing: 0.5px; }
+.panel .row { margin: 2px 0; display: flex; justify-content: space-between; }
+.panel .lbl { color: #666; }
+.panel .val { color: #bbb; font-weight: 500; }
+.panel .val.gold { color: #d4a05c; }
+.panel .val.cyan { color: #40c8ff; }
+.panel .val.magenta { color: #ff40ff; }
+.panel .val.green { color: #4a4; }
+
+#panelIdentity { top: 10px; }
+#panelGrammar { top: 170px; }
+#panelDecay { top: 350px; }
+#panelHe3 { top: 490px; }
+
+/* ── Transport controls (bottom bar) ── */
+#transport {
+  position: fixed; bottom: 0; left: 0; right: 0; height: 60px; z-index: 20;
+  background: rgba(10,10,18,0.96); border-top: 1px solid #2a2a3a;
+  display: flex; align-items: center; justify-content: center; gap: 4px;
+}
+#transport button {
+  background: rgba(40,40,60,0.8); border: 1px solid #3a3a4a; color: #ccc;
+  padding: 8px 12px; border-radius: 4px; font-size: 14px; cursor: pointer;
+  transition: all 0.15s; min-width: 44px; font-family: 'Segoe UI Symbol', sans-serif;
+}
+#transport button:hover { background: rgba(80,80,120,0.6); color: #fff; border-color: #666; }
+#transport button.active { background: rgba(212,160,92,0.3); border-color: #d4a05c; color: #d4a05c; }
+#transport .sep { width: 1px; height: 28px; background: #333; margin: 0 6px; }
+#transport .speed { font-size: 10px; color: #666; margin-left: 8px; }
+#transport .now-playing {
+  position: absolute; left: 210px; font-size: 13px; font-weight: 600; color: #d4a05c;
+}
+#transport .pos-info {
+  position: absolute; right: 20px; font-size: 10px; color: #555;
+}
+
+/* ── Toggle strip: lit-up pill switches ── */
+#toggles {
+  position: fixed; top: 10px; left: 210px; z-index: 10;
+  display: flex; gap: 5px; flex-wrap: wrap; max-width: calc(100vw - 230px);
+}
+#toggles label {
+  background: rgba(20,20,35,0.85); border: 1px solid #2a2a3a;
+  border-radius: 14px; padding: 4px 12px; font-size: 10px;
+  cursor: pointer; user-select: none; transition: all 0.2s;
+  letter-spacing: 0.3px;
+}
+#toggles label:hover { border-color: #555; background: rgba(30,30,50,0.9); }
+#toggles input:checked + span {
+  color: #ffd080;
+  text-shadow: 0 0 6px rgba(255,180,80,0.6);
+}
+#toggles label:has(input:checked) {
+  background: rgba(50,40,20,0.85);
+  border-color: #d4a05c;
+  box-shadow: 0 0 8px rgba(212,160,92,0.25), inset 0 0 12px rgba(212,160,92,0.08);
+}
+#toggles input { display: none; }
+
+/* ── Speed slider ── */
+#speedSlider { width: 80px; accent-color: #d4a05c; }
+
+/* ── Legend ── */
+.legend {
+  position: fixed; bottom: 66px; left: 210px; z-index: 10;
+  background: rgba(12,12,22,0.85); border: 1px solid #2a2a3a; border-radius: 5px;
+  padding: 5px 14px; font-size: 10px; display: flex; gap: 14px; align-items: center;
+}
+.legend span { display: flex; align-items: center; gap: 4px; }
+.dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.block { width: 12px; height: 8px; border-radius: 2px; display: inline-block; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<input type="range" id="zoom" min="50" max="500" value="180" style="display:none">
+<input type="range" id="bondLen" min="20" max="80" value="40" style="display:none">
+
+<!-- Scrollable isotope list -->
+<div id="isoList">
+  <div class="hdr">ISOTOPE NAVIGATOR</div>
+</div>
+
+<!-- Toggle strip: lit-up pill switches -->
+<div id="toggles">
+  <label><input type="checkbox" id="showLabels" checked><span>Labels</span></label>
+  <label><input type="checkbox" id="autoRotate" checked><span>Spin</span></label>
+  <label><input type="checkbox" id="showHe3"><span>He-3</span></label>
+  <label><input type="checkbox" id="showUnpaired" checked><span>Unpaired</span></label>
+  <label><input type="checkbox" id="ghostPairs"><span>Ghost pairs</span></label>
+  <label><input type="checkbox" id="showDecayArrows"><span>Decay</span></label>
+  <label><input type="checkbox" id="showEquilib"><span>Equilibrium</span></label>
+  <label><input type="checkbox" id="showTrefoil"><span>Trefoil</span></label>
+  <label><input type="checkbox" id="showElectrons"><span>Electrons</span></label>
+  <span style="color:#555;font-size:10px;margin-left:6;">Zoom:</span>
+  <input type="range" id="zoomVis" min="50" max="500" value="180" style="width:60px;accent-color:#d4a05c;">
+  <span style="color:#555;font-size:10px;">Bonds:</span>
+  <input type="range" id="bondVis" min="20" max="80" value="40" style="width:60px;accent-color:#d4a05c;">
+</div>
+
+<!-- Data panels -->
+<div class="panel" id="panelIdentity">
+  <h3 id="isoTitle">—</h3>
+  <div class="row"><span class="lbl">Element</span><span class="val" id="dElem">—</span></div>
+  <div class="row"><span class="lbl">Z (protons)</span><span class="val" id="dZ">—</span></div>
+  <div class="row"><span class="lbl">N (neutrons)</span><span class="val" id="dN">—</span></div>
+  <div class="row"><span class="lbl">A (mass)</span><span class="val" id="dA">—</span></div>
+  <div class="row"><span class="lbl">Spin-parity</span><span class="val" id="dSpin">—</span></div>
+  <div class="row"><span class="lbl">Abundance</span><span class="val" id="dAbd">—</span></div>
+  <div class="row"><span class="lbl">Stable</span><span class="val" id="dStable">—</span></div>
+  <div class="row"><span class="lbl">BE/nucleon</span><span class="val" id="dBE">—</span></div>
+</div>
+
+<div class="panel" id="panelGrammar">
+  <h3>α-Grammar</h3>
+  <div class="row"><span class="lbl">Construction</span><span class="val gold" id="dConst">—</span></div>
+  <div class="row"><span class="lbl">n_d (deuterons)</span><span class="val" id="dNd">—</span></div>
+  <div class="row"><span class="lbl">n_t (tritons)</span><span class="val" id="dNt">—</span></div>
+  <div class="row"><span class="lbl">Triton fraction</span><span class="val" id="dTF">—</span></div>
+  <div class="row"><span class="lbl">Unpaired d</span><span class="val" id="dUpD">—</span></div>
+  <div class="row"><span class="lbl">Unpaired t</span><span class="val" id="dUpT">—</span></div>
+  <div class="row"><span class="lbl">Position</span><span class="val" id="dPos">—</span></div>
+</div>
+
+<div class="panel" id="panelDecay">
+  <h3>Decay Physics</h3>
+  <div class="row"><span class="lbl">α → (−2d, 0t)</span><span class="val" id="dAlpha">—</span></div>
+  <div class="row"><span class="lbl">β⁻ → (+3d,−2t)</span><span class="val cyan" id="dBeta">—</span></div>
+  <div class="row"><span class="lbl">EC → (−3d,+2t)</span><span class="val magenta" id="dEC">—</span></div>
+  <div class="row"><span class="lbl">n → (+1d,−1t)</span><span class="val" id="dNeutron">—</span></div>
+</div>
+
+<div class="panel" id="panelHe3" style="display:none;">
+  <h3>He-3 Grammar</h3>
+  <div class="row"><span class="lbl">He-3 n_d'</span><span class="val" id="dH3d">—</span></div>
+  <div class="row"><span class="lbl">He-3 n_t'</span><span class="val" id="dH3t">—</span></div>
+  <div class="row"><span class="lbl">Valid</span><span class="val" id="dH3v">—</span></div>
+  <div class="row"><span class="lbl">EC target</span><span class="val magenta" id="dH3ec">—</span></div>
+</div>
+
+<!-- Transport controls -->
+<div id="transport">
+  <span class="now-playing" id="nowPlaying">—</span>
+  <button id="btnShellPrev" title="Previous shell (Shift+Left)">⏮⏮</button>
+  <button id="btnZPrev" title="Previous element (Ctrl+Left)">⏮</button>
+  <button id="btnPrev" title="Previous isotope (Left)">◀</button>
+  <div class="sep"></div>
+  <button id="btnPlay" title="Play/Pause (Space)">▶</button>
+  <div class="sep"></div>
+  <button id="btnNext" title="Next isotope (Right)">▶</button>
+  <button id="btnZNext" title="Next element (Ctrl+Right)">⏭</button>
+  <button id="btnShellNext" title="Next shell (Shift+Right)">⏭⏭</button>
+  <div class="sep"></div>
+  <span class="speed">Speed</span>
+  <input type="range" id="speedSlider" min="1" max="20" value="5">
+  <span class="pos-info" id="posInfo">—</span>
+</div>
+
+<!-- Legend -->
+<div class="legend">
+  <span><span class="block" style="background:#9040d0;"></span> α-core</span>
+  <span><span class="dot" style="background:#e04040;"></span> Proton</span>
+  <span><span class="dot" style="background:#3090e0;"></span> Neutron</span>
+  <span style="color:#555;">P↔N bonds only | Drag to orbit | Scroll to zoom</span>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════
+   ISOTOPE DATA
+   ═══════════════════════════════════════════ */
+const RAW = [
+  ["H",1,1,99.985,true,0,"1/2+"],["H",1,2,0.015,true,2.225,"1+"],
+  ["He",2,3,0.0001,true,7.718,"1/2+"],["He",2,4,99.9999,true,28.296,"0+"],
+  ["Li",3,6,7.59,true,31.995,"1+"],["Li",3,7,92.41,true,39.245,"3/2-"],
+  ["Be",4,9,100,true,58.165,"3/2-"],
+  ["B",5,10,19.9,true,64.751,"3+"],["B",5,11,80.1,true,76.205,"3/2-"],
+  ["C",6,12,98.93,true,92.162,"0+"],["C",6,13,1.07,true,97.108,"1/2-"],
+  ["N",7,14,99.636,true,104.659,"1+"],["N",7,15,0.364,true,115.492,"1/2-"],
+  ["O",8,16,99.757,true,127.619,"0+"],["O",8,17,0.038,true,131.763,"5/2+"],["O",8,18,0.205,true,139.808,"0+"],
+  ["F",9,19,100,true,147.801,"1/2+"],
+  ["Ne",10,20,90.48,true,160.645,"0+"],["Ne",10,21,0.27,true,167.406,"3/2+"],["Ne",10,22,9.25,true,177.770,"0+"],
+  ["Na",11,23,100,true,186.564,"3/2+"],
+  ["Mg",12,24,78.99,true,198.257,"0+"],["Mg",12,25,10.00,true,205.588,"5/2+"],["Mg",12,26,11.01,true,216.681,"0+"],
+  ["Al",13,27,100,true,224.952,"5/2+"],
+  ["Si",14,28,92.223,true,236.537,"0+"],["Si",14,29,4.685,true,245.010,"1/2+"],["Si",14,30,3.092,true,255.620,"0+"],
+  ["P",15,31,100,true,262.917,"1/2+"],
+  ["S",16,32,94.99,true,271.780,"0+"],["S",16,33,0.75,true,280.422,"3/2+"],["S",16,34,4.25,true,291.839,"0+"],["S",16,36,0.01,true,308.714,"0+"],
+  ["Cl",17,35,75.76,true,298.210,"3/2+"],["Cl",17,37,24.24,true,317.100,"3/2+"],
+  ["Ar",18,36,0.3336,true,306.716,"0+"],["Ar",18,38,0.0629,true,327.343,"0+"],["Ar",18,40,99.6035,true,343.810,"0+"],
+  ["K",19,39,93.2581,true,333.724,"3/2+"],["K",19,40,0.0117,false,341.523,"4-"],["K",19,41,6.7302,true,351.619,"3/2+"],
+  ["Ca",20,40,96.941,true,342.052,"0+"],["Ca",20,42,0.647,true,361.895,"0+"],["Ca",20,43,0.135,true,369.828,"7/2-"],["Ca",20,44,2.086,true,380.960,"0+"],["Ca",20,46,0.004,true,398.769,"0+"],["Ca",20,48,0.187,false,416.001,"0+"],
+  ["Sc",21,45,100,true,387.849,"7/2-"],
+  ["Ti",22,46,8.25,true,398.193,"0+"],["Ti",22,47,7.44,true,407.072,"5/2-"],["Ti",22,48,73.72,true,418.699,"0+"],["Ti",22,49,5.41,true,426.841,"7/2-"],["Ti",22,50,5.18,true,437.781,"0+"],
+  ["V",23,50,0.25,false,434.794,"6+"],["V",23,51,99.75,true,445.841,"7/2-"],
+  ["Cr",24,50,4.345,true,435.049,"0+"],["Cr",24,52,83.789,true,456.345,"0+"],["Cr",24,53,9.501,true,464.285,"3/2-"],["Cr",24,54,2.365,true,474.004,"0+"],
+  ["Mn",25,55,100,true,482.071,"5/2-"],
+  ["Fe",26,54,5.845,true,471.764,"0+"],["Fe",26,56,91.754,true,492.254,"0+"],["Fe",26,57,2.119,true,499.900,"1/2-"],["Fe",26,58,0.282,true,509.946,"0+"],
+  ["Co",27,59,100,true,517.308,"7/2-"],
+  ["Ni",28,58,68.077,true,506.454,"0+"],["Ni",28,60,26.223,true,526.842,"0+"],["Ni",28,61,1.140,true,534.662,"3/2-"],["Ni",28,62,3.635,true,545.259,"0+"],["Ni",28,64,0.926,true,561.756,"0+"],
+  ["Cu",29,63,69.15,true,551.384,"3/2-"],["Cu",29,65,30.85,true,569.207,"3/2-"],
+  ["Zn",30,64,49.17,true,559.094,"0+"],["Zn",30,66,27.73,true,578.135,"0+"],["Zn",30,67,4.04,true,585.185,"5/2-"],["Zn",30,68,18.45,true,595.383,"0+"],["Zn",30,70,0.61,true,611.085,"0+"],
+  ["Ga",31,69,60.108,true,601.993,"3/2-"],["Ga",31,71,39.892,true,618.948,"3/2-"],
+  ["Ge",32,70,20.57,true,610.518,"0+"],["Ge",32,72,27.45,true,628.677,"0+"],["Ge",32,73,7.75,true,635.549,"9/2+"],["Ge",32,74,36.50,true,645.665,"0+"],["Ge",32,76,7.73,false,661.598,"0+"],
+  ["As",33,75,100,true,652.563,"3/2-"],
+  ["Se",34,74,0.89,true,642.890,"0+"],["Se",34,76,9.37,true,662.072,"0+"],["Se",34,77,7.63,true,669.497,"1/2-"],["Se",34,78,23.77,true,679.989,"0+"],["Se",34,80,49.61,true,696.865,"0+"],["Se",34,82,8.73,false,707.261,"0+"],
+  ["Br",35,79,50.69,true,686.321,"3/2-"],["Br",35,81,49.31,true,703.575,"3/2-"],
+  ["Kr",36,78,0.355,true,675.572,"0+"],["Kr",36,80,2.286,true,695.434,"0+"],["Kr",36,82,11.593,true,714.273,"0+"],["Kr",36,83,11.500,true,721.737,"9/2+"],["Kr",36,84,56.987,true,732.262,"0+"],["Kr",36,86,17.279,true,749.235,"0+"],
+  ["Rb",37,85,72.17,true,739.282,"5/2-"],["Rb",37,87,27.83,false,757.856,"3/2-"],
+  ["Sr",38,84,0.56,true,728.906,"0+"],["Sr",38,86,9.86,true,748.926,"0+"],["Sr",38,87,7.00,true,757.354,"9/2+"],["Sr",38,88,82.58,true,768.468,"0+"],
+  ["Y",39,89,100,true,775.538,"1/2-"],
+  ["Zr",40,90,51.45,true,783.892,"0+"],["Zr",40,91,11.22,true,791.087,"5/2+"],["Zr",40,92,17.15,true,799.722,"0+"],["Zr",40,94,17.38,true,814.676,"0+"],["Zr",40,96,2.80,false,828.994,"0+"],
+  ["Nb",41,93,100,true,805.765,"9/2+"],
+  ["Mo",42,92,14.649,true,796.508,"0+"],["Mo",42,94,9.187,true,814.255,"0+"],["Mo",42,95,15.873,true,821.625,"5/2+"],["Mo",42,96,16.673,true,830.779,"0+"],["Mo",42,97,9.582,true,837.600,"5/2+"],["Mo",42,98,24.292,true,846.243,"0+"],["Mo",42,100,9.744,false,860.458,"0+"],
+  ["Ru",44,96,5.54,true,826.495,"0+"],["Ru",44,98,1.87,true,844.790,"0+"],["Ru",44,99,12.76,true,852.254,"5/2+"],["Ru",44,100,12.60,true,861.928,"0+"],["Ru",44,101,17.06,true,868.728,"5/2+"],["Ru",44,102,31.55,true,878.131,"0+"],["Ru",44,104,18.62,true,893.088,"0+"],
+  ["Rh",45,103,100,true,884.168,"1/2-"],
+  ["Pd",46,102,1.02,true,875.214,"0+"],["Pd",46,104,11.14,true,893.088,"0+"],["Pd",46,105,22.33,true,899.920,"5/2+"],["Pd",46,106,27.33,true,909.476,"0+"],["Pd",46,108,26.46,true,925.237,"0+"],["Pd",46,110,11.72,true,940.208,"0+"],
+  ["Ag",47,107,51.839,true,915.266,"1/2-"],["Ag",47,109,48.161,true,931.724,"1/2-"],
+  ["Cd",48,106,1.25,true,905.145,"0+"],["Cd",48,108,0.89,true,923.403,"0+"],["Cd",48,110,12.49,true,940.643,"0+"],["Cd",48,111,12.80,true,947.620,"1/2+"],["Cd",48,112,24.13,true,957.016,"0+"],["Cd",48,113,12.22,false,963.556,"1/2+"],["Cd",48,114,28.73,true,972.599,"0+"],["Cd",48,116,7.49,false,988.440,"0+"],
+  ["In",49,113,4.29,true,963.090,"9/2+"],["In",49,115,95.71,false,979.420,"9/2+"],
+  ["Sn",50,112,0.97,true,953.530,"0+"],["Sn",50,114,0.66,true,971.574,"0+"],["Sn",50,115,0.34,true,979.120,"1/2+"],["Sn",50,116,14.54,true,988.684,"0+"],["Sn",50,117,7.68,true,995.626,"1/2+"],["Sn",50,118,24.22,true,1004.955,"0+"],["Sn",50,119,8.59,true,1011.438,"1/2+"],["Sn",50,120,32.58,true,1020.545,"0+"],["Sn",50,122,4.63,true,1035.528,"0+"],["Sn",50,124,5.79,true,1049.963,"0+"],
+  ["Sb",51,121,57.21,true,1026.320,"5/2+"],["Sb",51,123,42.79,true,1042.400,"7/2+"],
+  ["Te",52,120,0.09,true,1017.280,"0+"],["Te",52,122,2.55,true,1034.330,"0+"],["Te",52,123,0.89,true,1041.260,"1/2+"],["Te",52,124,4.74,true,1050.690,"0+"],["Te",52,125,7.07,true,1057.260,"1/2+"],["Te",52,126,18.84,true,1066.370,"0+"],["Te",52,128,31.74,false,1081.440,"0+"],["Te",52,130,34.08,false,1095.940,"0+"],
+  ["I",53,127,100,true,1072.580,"5/2+"],
+  ["Xe",54,124,0.095,false,1046.260,"0+"],["Xe",54,126,0.089,true,1063.910,"0+"],["Xe",54,128,1.910,true,1080.740,"0+"],["Xe",54,129,26.401,true,1087.648,"1/2+"],["Xe",54,130,4.071,true,1096.907,"0+"],["Xe",54,131,21.232,true,1103.514,"3/2+"],["Xe",54,132,26.909,true,1112.449,"0+"],["Xe",54,134,10.436,true,1129.270,"0+"],["Xe",54,136,8.857,false,1141.882,"0+"],
+  ["Cs",55,133,100,true,1118.528,"7/2+"],
+  ["Ba",56,130,0.106,true,1092.730,"0+"],["Ba",56,132,0.101,true,1110.040,"0+"],["Ba",56,134,2.417,true,1126.700,"0+"],["Ba",56,135,6.592,true,1133.683,"3/2+"],["Ba",56,136,7.854,true,1142.780,"0+"],["Ba",56,137,11.232,true,1149.686,"3/2+"],["Ba",56,138,71.698,true,1158.293,"0+"],
+  ["La",57,138,0.089,false,1148.420,"5+"],["La",57,139,99.911,true,1164.555,"7/2+"],
+  ["Ce",58,136,0.185,true,1131.040,"0+"],["Ce",58,138,0.251,true,1149.290,"0+"],["Ce",58,140,88.450,true,1172.690,"0+"],["Ce",58,142,11.114,false,1185.290,"0+"],
+  ["Pr",59,141,100,true,1177.920,"5/2+"],
+  ["Nd",60,142,27.152,true,1185.145,"0+"],["Nd",60,143,12.174,true,1191.270,"7/2-"],["Nd",60,144,23.798,false,1199.083,"0+"],["Nd",60,145,8.293,true,1204.833,"7/2-"],["Nd",60,146,17.189,true,1212.400,"0+"],["Nd",60,148,5.756,true,1225.020,"0+"],["Nd",60,150,5.638,false,1237.444,"0+"],
+  ["Sm",62,144,3.07,true,1195.740,"0+"],["Sm",62,147,14.99,false,1220.691,"7/2-"],["Sm",62,148,11.24,false,1228.364,"0+"],["Sm",62,149,13.82,true,1233.856,"7/2-"],["Sm",62,150,7.38,true,1241.571,"0+"],["Sm",62,152,26.75,true,1253.104,"0+"],["Sm",62,154,22.75,true,1264.878,"0+"],
+  ["Eu",63,151,47.81,true,1244.142,"5/2+"],["Eu",63,153,52.19,true,1258.998,"5/2+"],
+  ["Gd",64,152,0.20,false,1251.480,"0+"],["Gd",64,154,2.18,true,1270.710,"0+"],["Gd",64,155,14.80,true,1276.520,"3/2-"],["Gd",64,156,20.47,true,1286.470,"0+"],["Gd",64,157,15.65,true,1292.000,"3/2-"],["Gd",64,158,24.84,true,1301.430,"0+"],["Gd",64,160,21.86,true,1314.680,"0+"],
+  ["Tb",65,159,100,true,1306.980,"3/2+"],
+  ["Dy",66,156,0.056,true,1294.000,"0+"],["Dy",66,158,0.095,true,1312.650,"0+"],["Dy",66,160,2.329,true,1329.530,"0+"],["Dy",66,161,18.889,true,1335.690,"5/2+"],["Dy",66,162,25.475,true,1345.090,"0+"],["Dy",66,163,24.896,true,1351.070,"5/2-"],["Dy",66,164,28.260,true,1360.330,"0+"],
+  ["Ho",67,165,100,true,1356.260,"7/2-"],
+  ["Er",68,162,0.139,true,1340.250,"0+"],["Er",68,164,1.601,true,1358.920,"0+"],["Er",68,166,33.503,true,1375.930,"0+"],["Er",68,167,22.869,true,1381.600,"7/2+"],["Er",68,168,26.978,true,1390.750,"0+"],["Er",68,170,14.910,true,1403.370,"0+"],
+  ["Tm",69,169,100,true,1396.430,"1/2+"],
+  ["Yb",70,168,0.123,true,1384.870,"0+"],["Yb",70,170,2.982,true,1403.760,"0+"],["Yb",70,171,14.09,true,1409.670,"1/2-"],["Yb",70,172,21.68,true,1418.780,"0+"],["Yb",70,173,16.103,true,1424.390,"5/2-"],["Yb",70,174,32.026,true,1433.180,"0+"],["Yb",70,176,12.996,true,1445.300,"0+"],
+  ["Lu",71,175,97.401,true,1439.030,"7/2+"],["Lu",71,176,2.599,false,1445.700,"7-"],
+  ["Hf",72,174,0.16,false,1432.200,"0+"],["Hf",72,176,5.26,true,1449.950,"0+"],["Hf",72,177,18.60,true,1455.760,"7/2-"],["Hf",72,178,27.28,true,1464.720,"0+"],["Hf",72,179,13.62,true,1470.180,"9/2+"],["Hf",72,180,35.08,true,1478.890,"0+"],
+  ["Ta",73,180,0.012,false,1472.900,"9-"],["Ta",73,181,99.988,true,1484.160,"7/2+"],
+  ["W",74,180,0.12,false,1477.700,"0+"],["W",74,182,26.50,true,1497.570,"0+"],["W",74,183,14.31,true,1503.210,"1/2-"],["W",74,184,30.64,true,1512.310,"0+"],["W",74,186,28.43,true,1525.370,"0+"],
+  ["Re",75,185,37.40,true,1518.110,"5/2+"],["Re",75,187,62.60,false,1530.240,"5/2+"],
+  ["Os",76,184,0.02,true,1504.760,"0+"],["Os",76,186,1.59,false,1524.340,"0+"],["Os",76,187,1.96,true,1530.020,"1/2-"],["Os",76,188,13.24,true,1538.760,"0+"],["Os",76,189,16.15,true,1544.020,"3/2-"],["Os",76,190,26.26,true,1553.020,"0+"],["Os",76,192,40.78,true,1567.850,"0+"],
+  ["Ir",77,191,37.3,true,1560.060,"3/2+"],["Ir",77,193,62.7,true,1574.190,"3/2+"],
+  ["Pt",78,190,0.012,false,1550.600,"0+"],["Pt",78,192,0.782,true,1568.560,"0+"],["Pt",78,194,32.864,true,1585.110,"0+"],["Pt",78,195,33.775,true,1590.190,"1/2-"],["Pt",78,196,25.242,true,1598.590,"0+"],["Pt",78,198,7.356,true,1612.090,"0+"],
+  ["Au",79,197,100,true,1604.480,"3/2+"],
+  ["Hg",80,196,0.15,true,1590.730,"0+"],["Hg",80,198,9.97,true,1608.620,"0+"],["Hg",80,199,16.87,true,1614.170,"1/2-"],["Hg",80,200,23.10,true,1623.130,"0+"],["Hg",80,201,13.18,true,1628.540,"3/2-"],["Hg",80,202,29.86,true,1637.010,"0+"],["Hg",80,204,6.87,true,1648.940,"0+"],
+  ["Tl",81,203,29.52,true,1641.690,"1/2+"],["Tl",81,205,70.48,true,1655.430,"1/2+"],
+  ["Pb",82,204,1.4,true,1647.460,"0+"],["Pb",82,206,24.1,true,1663.290,"0+"],["Pb",82,207,22.1,true,1668.470,"1/2-"],["Pb",82,208,52.4,true,1676.720,"0+"],
+  ["Bi",83,209,100,false,1679.070,"9/2-"],
+  // Z=84–89: Po through Ac
+  ["Po",84,209,0,false,1681.210,"1/2-"],["Po",84,210,0,false,1688.380,"0+"],
+  ["At",85,210,0,false,1685.460,"5+"],["At",85,211,0,false,1691.780,"9/2-"],
+  ["Rn",86,211,0,false,1689.640,"1/2-"],["Rn",86,220,0,false,1731.620,"0+"],["Rn",86,222,0,false,1743.610,"0+"],
+  ["Fr",87,223,0,false,1748.990,"3/2-"],
+  ["Ra",88,223,0,false,1748.800,"3/2+"],["Ra",88,224,0,false,1756.760,"0+"],["Ra",88,226,0,false,1771.350,"0+"],["Ra",88,228,0,false,1784.610,"0+"],
+  ["Ac",89,225,0,false,1766.240,"3/2-"],["Ac",89,227,0,false,1779.830,"3/2-"],
+  // Z=90–92: already present (Th, U)
+  ["Th",90,228,0,false,1788.000,"0+"],["Th",90,230,0,false,1755.130,"0+"],["Th",90,232,100,false,1766.690,"0+"],
+  ["Pa",91,231,100,false,1773.090,"3/2-"],
+  ["U",92,233,0,false,1771.750,"5/2+"],["U",92,234,0.0054,false,1778.570,"0+"],["U",92,235,0.7204,false,1783.870,"7/2-"],["U",92,238,99.2742,false,1801.690,"0+"],
+  // Z=93–103: Np through Lr (transuranics)
+  ["Np",93,237,0,false,1790.420,"5/2+"],
+  ["Pu",94,238,0,false,1793.650,"0+"],["Pu",94,239,0,false,1801.170,"1/2+"],["Pu",94,240,0,false,1807.720,"0+"],["Pu",94,242,0,false,1820.020,"0+"],["Pu",94,244,0,false,1831.190,"0+"],
+  ["Am",95,241,0,false,1810.920,"5/2-"],["Am",95,243,0,false,1823.270,"5/2-"],
+  ["Cm",96,244,0,false,1824.830,"0+"],["Cm",96,247,0,false,1842.580,"9/2-"],["Cm",96,248,0,false,1848.230,"0+"],
+  ["Bk",97,247,0,false,1839.260,"3/2-"],["Bk",97,249,0,false,1852.550,"7/2+"],
+  ["Cf",98,249,0,false,1852.760,"9/2-"],["Cf",98,251,0,false,1864.740,"1/2+"],["Cf",98,252,0,false,1869.610,"0+"],
+  ["Es",99,252,0,false,1867.800,"5-"],["Es",99,254,0,false,1878.300,"7+"],
+  ["Fm",100,257,0,false,1894.260,"9/2+"],
+  ["Md",101,258,0,false,1898.200,"8-"],
+  ["No",102,259,0,false,1904.920,"9/2+"],
+  ["Lr",103,262,0,false,1916.140,"0-"],
+  // Z=104–112: Rf through Cn (transactinides)
+  ["Rf",104,267,0,false,1935.400,"0+"],
+  ["Db",105,268,0,false,1938.300,"0+"],
+  ["Sg",106,271,0,false,1949.100,"0+"],
+  ["Bh",107,272,0,false,1951.800,"0+"],
+  ["Hs",108,277,0,false,1966.400,"0+"],
+  ["Mt",109,278,0,false,1968.900,"0+"],
+  ["Ds",110,281,0,false,1978.600,"0+"],
+  ["Rg",111,282,0,false,1980.800,"0+"],
+  ["Cn",112,285,0,false,1990.300,"0+"],
+  // Z=113–118: Nh through Og (superheavy)
+  ["Nh",113,286,0,false,1992.300,"0+"],
+  ["Fl",114,289,0,false,2002.100,"0+"],
+  ["Mc",115,290,0,false,2004.000,"0+"],
+  ["Lv",116,293,0,false,2013.500,"0+"],
+  ["Ts",117,294,0,false,2015.300,"0+"],
+  ["Og",118,294,0,false,2017.600,"0+"]
+];
+
+const ISO = RAW.map(([sym,Z,A,abd,stable,be,spin]) => {
+  const nd = 3*Z - A - 2;
+  const nt = A - 2*Z;
+  return { sym, Z, A, abd, stable, be, beA: (be/(A||1)).toFixed(3), spin, nd, nt };
+}).filter(e => e.nd >= 0 && e.nt >= 0);
+
+/* Magic numbers / shell closures */
+const MAGIC_Z = [2, 8, 20, 28, 50, 82];
+const shellOf = z => { for (let i = 0; i < MAGIC_Z.length; i++) if (z <= MAGIC_Z[i]) return i; return MAGIC_Z.length; };
+
+/* ═══════════════════════════════════════════
+   BUILD SCROLLABLE LIST
+   ═══════════════════════════════════════════ */
+const listEl = document.getElementById("isoList");
+const itemEls = [];
+let curIdx = 0;
+
+(function buildList() {
+  let lastZ = -1;
+  ISO.forEach((iso, i) => {
+    if (iso.Z !== lastZ) {
+      lastZ = iso.Z;
+      const elLbl = document.createElement("div");
+      elLbl.className = "el-label";
+      elLbl.textContent = `Z=${iso.Z} — ${iso.sym}`;
+      const grp = document.createElement("div");
+      grp.className = "el-group";
+      grp.appendChild(elLbl);
+      listEl.appendChild(grp);
+    }
+    const item = document.createElement("div");
+    item.className = `iso-item ${iso.stable ? "stable" : "unstable"}`;
+    item.dataset.idx = i;
+    item.innerHTML = `<span>${iso.sym}-${iso.A}</span><span class="grammar">${iso.nd}d+${iso.nt}t</span>`;
+    item.addEventListener("click", () => selectIso(i));
+    listEl.lastChild.appendChild(item);
+    itemEls.push(item);
+  });
+})();
+
+function selectIso(idx) {
+  if (idx < 0 || idx >= ISO.length) return;
+  itemEls[curIdx].classList.remove("active");
+  curIdx = idx;
+  itemEls[curIdx].classList.add("active");
+  itemEls[curIdx].scrollIntoView({ block: "nearest", behavior: "smooth" });
+  if (typeof ctx !== 'undefined' && W) render();
+}
+
+// Initial index set (render deferred to bottom)
+const initIdx = ISO.findIndex(e => e.sym === "C" && e.A === 12);
+if (initIdx >= 0) { curIdx = initIdx; itemEls[initIdx].classList.add("active"); }
+
+/* ═══════════════════════════════════════════
+   CANVAS + 3D
+   ═══════════════════════════════════════════ */
+const canvas = document.getElementById("c");
+const ctx = canvas.getContext("2d");
+let W, H;
+function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+window.addEventListener("resize", () => { resize(); render(); });
+resize();
+
+function rotX(p, a) { const c=Math.cos(a),s=Math.sin(a); return [p[0], p[1]*c-p[2]*s, p[1]*s+p[2]*c]; }
+function rotY(p, a) { const c=Math.cos(a),s=Math.sin(a); return [p[0]*c+p[2]*s, p[1], -p[0]*s+p[2]*c]; }
+function project(p, zoom) {
+  const d = 600, scale = d/(d+p[2]);
+  return { x: W/2+p[0]*scale*zoom, y: H/2+p[1]*scale*zoom, z: p[2], scale };
+}
+
+/* ═══════════════════════════════════════════
+   SHELL-CLOSURE NUCLEAR GEOMETRY ENGINE
+   ═══════════════════════════════════════════
+
+   The nuclear structure DRIVES the electronic structure.
+   Positions follow shell closures:
+     2S → 2P → 3S → 3P → 4S → 3D → 4P → 5S → 4D → 5P → 6S → 4F → 5D → 6P → 7S → 5F → 6D
+
+   Geometry rules:
+     - Alpha core defines Y-axis (polar)
+     - S orbitals: 2 positions, opposite, at defect rims
+     - P orbitals: 6 positions, trigonal antiprism (crushed), polar defects
+     - D orbitals: 10 positions, pentagonal antiprism
+     - F orbitals: 14 positions, heptagonal antiprism
+     - Fill order: alternating L/R (top/bottom), maximally separated
+     - Tritons never adjacent — placed maximally far apart
+     - Unpaired sticks are last in their subshell
+*/
+
+function norm(v) {
+  const l = Math.sqrt(v[0]*v[0]+v[1]*v[1]+v[2]*v[2]);
+  return l > 0 ? [v[0]/l, v[1]/l, v[2]/l] : [0,1,0];
+}
+
+function dist3(a, b) {
+  const dx=a[0]-b[0], dy=a[1]-b[1], dz=a[2]-b[2];
+  return Math.sqrt(dx*dx+dy*dy+dz*dz);
+}
+
+function perpVector(v) {
+  const ax=Math.abs(v[0]),ay=Math.abs(v[1]),az=Math.abs(v[2]);
+  let o; if(ax<=ay&&ax<=az) o=[1,0,0]; else if(ay<=az) o=[0,1,0]; else o=[0,0,1];
+  const cx=v[1]*o[2]-v[2]*o[1], cy=v[2]*o[0]-v[0]*o[2], cz=v[0]*o[1]-v[1]*o[0];
+  const l=Math.sqrt(cx*cx+cy*cy+cz*cz)||1;
+  return [cx/l,cy/l,cz/l];
+}
+
+/* Generate antiprism positions with max-separation fill order */
+function makeAntiprism(count, crush, rotOffset) {
+  const half = count / 2;
+  const top = [], bot = [];
+  for (let i = 0; i < half; i++) {
+    const a = rotOffset + i * 2 * Math.PI / half;
+    top.push(norm([Math.sin(a), crush, Math.cos(a)]));
+  }
+  for (let i = 0; i < half; i++) {
+    const a = rotOffset + Math.PI / half + i * 2 * Math.PI / half;
+    bot.push(norm([Math.sin(a), -crush, Math.cos(a)]));
+  }
+  // Interleave with max separation: alternate top/bottom, greedy farthest
+  const result = [];
+  const usedT = new Set(), usedB = new Set();
+  for (let step = 0; step < count; step++) {
+    const pool = (step % 2 === 0) ? top : bot;
+    const used = (step % 2 === 0) ? usedT : usedB;
+    let best = -1, bestScore = -1;
+    for (let j = 0; j < half; j++) {
+      if (used.has(j)) continue;
+      if (result.length === 0) { best = j; break; }
+      let minD = Infinity;
+      for (const p of result) {
+        const d = dist3(pool[j], p);
+        if (d < minD) minD = d;
+      }
+      if (minD > bestScore) { bestScore = minD; best = j; }
+    }
+    if (best >= 0) { result.push(pool[best]); used.add(best); }
+  }
+  return result;
+}
+
+/* ── Define all subshells with geometry ── */
+/* Each principal shell (s+p combined) is a unified antiprism.
+   Shell 2: 8 positions → square antiprism  → 2 square polar defects
+   Shell 3: 8 positions → square antiprism, rotated → fills between shell-2 defects
+   D-shells: 10 positions → pentagonal antiprism (between shells)
+   F-shells: 14 positions → heptagonal antiprism
+*/
+const SUBSHELLS = [
+  // Shell 2: Li → Ne — unified square antiprism (4 above, 4 below equator)
+  { label:'2', count:8, shellR:1.0,
+    positions: makeAntiprism(8, 0.55, 0)
+  },
+
+  // Shell 3: Na → Ar — unified square antiprism, rotated 22.5° from shell 2
+  { label:'3', count:8, shellR:1.5,
+    positions: makeAntiprism(8, 0.55, Math.PI/8)
+  },
+
+  // 4S: K, Ca — at shell-3 polar defect rims
+  { label:'4s', count:2, shellR:1.85, positions: [
+    norm([0, 1, 0]),
+    norm([0, -1, 0])
+  ]},
+  // 3D: Sc → Zn — pentagonal antiprism
+  { label:'3d', count:10, shellR:1.65,
+    positions: makeAntiprism(10, 0.40, Math.PI/10)
+  },
+  // 4P: Ga → Kr — trigonal antiprism
+  { label:'4p', count:6, shellR:2.0,
+    positions: makeAntiprism(6, 0.45, Math.PI/3)
+  },
+
+  // 5S
+  { label:'5s', count:2, shellR:2.3, positions: [
+    norm([0.707, 0.707, 0]),
+    norm([-0.707, -0.707, 0])
+  ]},
+  // 4D
+  { label:'4d', count:10, shellR:2.1,
+    positions: makeAntiprism(10, 0.40, 2*Math.PI/10)
+  },
+  // 5P
+  { label:'5p', count:6, shellR:2.45,
+    positions: makeAntiprism(6, 0.45, Math.PI/2)
+  },
+
+  // 6S
+  { label:'6s', count:2, shellR:2.75, positions: [
+    norm([0.707, 0, 0.707]),
+    norm([-0.707, 0, -0.707])
+  ]},
+  // 4F
+  { label:'4f', count:14, shellR:2.4,
+    positions: makeAntiprism(14, 0.35, Math.PI/14)
+  },
+  // 5D
+  { label:'5d', count:10, shellR:2.65,
+    positions: makeAntiprism(10, 0.40, 3*Math.PI/10)
+  },
+  // 6P: Tl → Rn — polar axial caps, NOT a trigonal antiprism
+  // Z=81,82: one proton centered in each triangular defect (on polar axis)
+  // Z=83-86: two more flanking each pole end (alpha cluster at each cap)
+  { label:'6p', count:6, shellR:2.9, positions: [
+    norm([0, 1, 0]),             // Z=81 Tl: top defect centre (on axis)
+    norm([0, -1, 0]),            // Z=82 Pb: bottom defect centre (on axis)
+    // Two flanking top pole (~25° off axis)
+    norm([0.42, 0.91, 0]),       // Z=83 Bi: top-left
+    norm([-0.42, 0.91, 0]),      // Z=84 Po: top-right → completes top alpha cap
+    // Two flanking bottom pole (rotated 90° from top pair)
+    norm([0, -0.91, 0.42]),      // Z=85 At: bottom-front
+    norm([0, -0.91, -0.42]),     // Z=86 Rn: bottom-back → completes bottom alpha cap
+  ]},
+
+  // 7S
+  { label:'7s', count:2, shellR:3.15, positions: [
+    norm([0, 0.707, 0.707]),
+    norm([0, -0.707, -0.707])
+  ]},
+  // 5F
+  { label:'5f', count:14, shellR:2.8,
+    positions: makeAntiprism(14, 0.35, 2*Math.PI/14)
+  },
+  // 6D
+  { label:'6d', count:10, shellR:3.05,
+    positions: makeAntiprism(10, 0.40, 4*Math.PI/10)
+  },
+  // 7P: Fr → Og (completes Z=118)
+  { label:'7p', count:6, shellR:3.3,
+    positions: makeAntiprism(6, 0.45, 5*Math.PI/6)
+  },
+];
+
+/* Flatten into ordered position table */
+const ALL_POS = [];
+const ALL_R = [];
+const ALL_LABEL = [];
+const ALL_SUBIDX = [];
+const ALL_SUBCOUNT = [];
+
+SUBSHELLS.forEach(ss => {
+  ss.positions.forEach((p, i) => {
+    ALL_POS.push(p);
+    ALL_R.push(ss.shellR);
+    ALL_LABEL.push(ss.label);
+    ALL_SUBIDX.push(i);
+    ALL_SUBCOUNT.push(ss.count);
+  });
+});
+
+/* ═══════════════════════════════════════════
+   BUILD STRUCTURE (shell-closure geometry)
+   ═══════════════════════════════════════════
+   Alpha = dumbbell: two purple balls at poles, same length as a stick
+   Shell 2: 8 sticks as square antiprism, top ring → top pole, bottom ring → bottom pole
+   Shell 3+: sticks bond to nearest outer-end from previous layer
+   Stick orientation alternates: even = P-inward, odd = N-inward
+   Surface mesh connects outer ends to reveal polar defects
+*/
+function buildStructure(iso) {
+  const nodes = [], bonds = [];
+  const bl = parseInt(document.getElementById("bondLen").value);
+  const showUnpaired = document.getElementById("showUnpaired").checked;
+
+  // ── Alpha core: dumbbell at poles ──
+  const aH = bl * 0.7; // half-length (same as inner proton distance)
+  nodes.push({ pos:[0, aH, 0], type:"alpha", label:"α", r:10, stick:null, shell:"1s" });  // node 0: top pole
+  nodes.push({ pos:[0,-aH, 0], type:"alpha", label:"α", r:10, stick:null, shell:"1s" });  // node 1: bottom pole
+  bonds.push({a:0, b:1, surface:false});
+
+  const zEff = iso.Z - 2;
+  if (zEff <= 0 || zEff > ALL_POS.length) return { nodes, bonds };
+
+  // Triton placement (maximally separated)
+  const tritonSet = new Set();
+  if (iso.nt > 0) {
+    const posSlice = ALL_POS.slice(0, zEff);
+    for (let t = 0; t < Math.min(iso.nt, zEff); t++) {
+      let best = -1, bestScore = -1;
+      for (let j = 0; j < zEff; j++) {
+        if (tritonSet.has(j)) continue;
+        if (tritonSet.size === 0) { best = j; bestScore = Infinity; continue; }
+        let minD = Infinity;
+        for (const tidx of tritonSet) {
+          const d = dist3(posSlice[j], posSlice[tidx]);
+          if (d < minD) minD = d;
+        }
+        if (minD > bestScore) { bestScore = minD; best = j; }
+      }
+      if (best >= 0) tritonSet.add(best);
+    }
+  }
+
+  // Subshell fill counts for unpaired detection
+  const subshellFill = {};
+  for (let i = 0; i < zEff; i++) {
+    subshellFill[ALL_LABEL[i]] = (subshellFill[ALL_LABEL[i]] || 0) + 1;
+  }
+
+  // Track outer-end nodes for surface mesh + later-shell attachment
+  const outerEnds = [];
+
+  // Build each stick
+  for (let i = 0; i < zEff; i++) {
+    const dir = ALL_POS[i];
+    const shellR = ALL_R[i];
+    const shellLbl = ALL_LABEL[i];
+    const isTriton = tritonSet.has(i);
+
+    const fillCount = subshellFill[shellLbl] || 0;
+    const isUnpaired = (fillCount % 2 !== 0) && (ALL_SUBIDX[i] === fillCount - 1);
+    const sz = showUnpaired && isUnpaired ? 12 : 6;
+
+    // Orientation: even positions P-inward, odd N-inward
+    const protonInward = (i % 2 === 0);
+
+    // ── Attachment ──
+    let attachIdx;
+    if (i < 8) {
+      // Shell 2: attach to top pole (node 0) if position is above equator, else bottom (node 1)
+      attachIdx = dir[1] >= 0 ? 0 : 1;
+    } else if (i < 16) {
+      // Shell 3: attach to nearest shell-2 outer end
+      let bestDist = Infinity;
+      attachIdx = outerEnds.length > 0 ? outerEnds[0].nodeIdx : 0;
+      for (const oe of outerEnds) {
+        if (oe.posIdx >= 8) continue; // only attach to shell-2 surface
+        const d = dist3(dir, oe.dir);
+        if (d < bestDist) { bestDist = d; attachIdx = oe.nodeIdx; }
+      }
+    } else {
+      // Shell 4+: attach to nearest outer end from any previous layer
+      let bestDist = Infinity;
+      attachIdx = outerEnds.length > 0 ? outerEnds[0].nodeIdx : 0;
+      for (const oe of outerEnds) {
+        const d = dist3(dir, oe.dir);
+        if (d < bestDist) { bestDist = d; attachIdx = oe.nodeIdx; }
+      }
+    }
+
+    if (protonInward) {
+      // ── P-inward: attach → P → N ──
+      const pPos = dir.map(d => d * bl * shellR * 0.7);
+      const pIdx = nodes.length;
+      nodes.push({pos:pPos, type:"proton", label:"P", r:sz, stick:isTriton?"t":"d",
+        unpaired:isUnpaired, shell:shellLbl});
+      bonds.push({a:attachIdx, b:pIdx, surface:false});
+
+      if (isTriton) {
+        const n1Pos = dir.map(d => d * bl * shellR * 1.5);
+        const n1Idx = nodes.length;
+        nodes.push({pos:n1Pos, type:"neutron", label:"N", r:sz, stick:"t",
+          unpaired:isUnpaired, shell:shellLbl});
+        bonds.push({a:pIdx, b:n1Idx, surface:false});
+        outerEnds.push({ nodeIdx:n1Idx, dir, posIdx:i, shell:shellLbl, type:"neutron" });
+
+        const perp = perpVector(dir);
+        const n2Pos = [
+          pPos[0]+perp[0]*bl*0.55+dir[0]*bl*0.25,
+          pPos[1]+perp[1]*bl*0.55+dir[1]*bl*0.25,
+          pPos[2]+perp[2]*bl*0.55+dir[2]*bl*0.25
+        ];
+        const n2Idx = nodes.length;
+        nodes.push({pos:n2Pos, type:"neutron", label:"N", r:sz, stick:"t",
+          unpaired:isUnpaired, shell:shellLbl});
+        bonds.push({a:pIdx, b:n2Idx, surface:false});
+      } else {
+        const nPos = dir.map(d => d * bl * shellR * 1.4);
+        const nIdx = nodes.length;
+        nodes.push({pos:nPos, type:"neutron", label:"N", r:sz, stick:"d",
+          unpaired:isUnpaired, shell:shellLbl});
+        bonds.push({a:pIdx, b:nIdx, surface:false});
+        outerEnds.push({ nodeIdx:nIdx, dir, posIdx:i, shell:shellLbl, type:"neutron" });
+      }
+
+    } else {
+      // ── N-inward: attach → N → P ──
+      const nPos = dir.map(d => d * bl * shellR * 0.7);
+      const nIdx = nodes.length;
+      nodes.push({pos:nPos, type:"neutron", label:"N", r:sz, stick:isTriton?"t":"d",
+        unpaired:isUnpaired, shell:shellLbl});
+      bonds.push({a:attachIdx, b:nIdx, surface:false});
+
+      const pPos = dir.map(d => d * bl * shellR * 1.4);
+      const pIdx = nodes.length;
+      nodes.push({pos:pPos, type:"proton", label:"P", r:sz, stick:isTriton?"t":"d",
+        unpaired:isUnpaired, shell:shellLbl});
+      bonds.push({a:nIdx, b:pIdx, surface:false});
+      outerEnds.push({ nodeIdx:pIdx, dir, posIdx:i, shell:shellLbl, type:"proton" });
+
+      if (isTriton) {
+        const perp = perpVector(dir);
+        const n2Pos = [
+          pPos[0]+perp[0]*bl*0.55+dir[0]*bl*0.15,
+          pPos[1]+perp[1]*bl*0.55+dir[1]*bl*0.15,
+          pPos[2]+perp[2]*bl*0.55+dir[2]*bl*0.15
+        ];
+        const n2Idx = nodes.length;
+        nodes.push({pos:n2Pos, type:"neutron", label:"N", r:sz, stick:"t",
+          unpaired:isUnpaired, shell:shellLbl});
+        bonds.push({a:pIdx, b:n2Idx, surface:false});
+      }
+    }
+  }
+
+  // ── Surface mesh: connect outer ends within each shell layer ──
+  // Group outer ends by shell label
+  const shellGroups = {};
+  outerEnds.forEach(oe => {
+    if (!shellGroups[oe.shell]) shellGroups[oe.shell] = [];
+    shellGroups[oe.shell].push(oe);
+  });
+
+  for (const [lbl, group] of Object.entries(shellGroups)) {
+    if (group.length < 3) continue; // skip 2-position shells (s-only pairs)
+
+    // Adaptive threshold: find minimum pairwise distance, use 1.5× to capture all nearest neighbours
+    let minD = Infinity;
+    for (let i = 0; i < group.length; i++) {
+      for (let j = i + 1; j < group.length; j++) {
+        const d = dist3(group[i].dir, group[j].dir);
+        if (d < minD) minD = d;
+      }
+    }
+    const threshold = minD * 1.5;
+
+    for (let i = 0; i < group.length; i++) {
+      for (let j = i + 1; j < group.length; j++) {
+        const d = dist3(group[i].dir, group[j].dir);
+        if (d < threshold) {
+          bonds.push({ a:group[i].nodeIdx, b:group[j].nodeIdx, surface:true });
+        }
+      }
+    }
+  }
+
+  // ── Ghost pairs: for each subshell with odd fill, show the next unfilled position ──
+  const showGhosts = document.getElementById("ghostPairs").checked;
+  if (showGhosts) {
+    for (const lbl of Object.keys(subshellFill)) {
+      const fill = subshellFill[lbl];
+      if (fill % 2 !== 0) {
+        // The ghost is at the next position after the last filled one
+        // Find the global index of this ghost position
+        let ghostGlobalIdx = -1;
+        let count = 0;
+        for (let g = 0; g < ALL_POS.length; g++) {
+          if (ALL_LABEL[g] === lbl) {
+            if (count === fill) { ghostGlobalIdx = g; break; }
+            count++;
+          }
+        }
+        if (ghostGlobalIdx >= 0 && ghostGlobalIdx < ALL_POS.length) {
+          const gDir = ALL_POS[ghostGlobalIdx];
+          const gR = ALL_R[ghostGlobalIdx];
+          const gPI = (ghostGlobalIdx % 2 === 0); // protonInward
+
+          // Ghost attachment: same logic as real sticks
+          let gAttach = 0;
+          if (ghostGlobalIdx < 8) {
+            gAttach = gDir[1] >= 0 ? 0 : 1;
+          } else if (outerEnds.length > 0) {
+            let bestDist = Infinity;
+            gAttach = outerEnds[0].nodeIdx;
+            for (const oe of outerEnds) {
+              const d = dist3(gDir, oe.dir);
+              if (d < bestDist) { bestDist = d; gAttach = oe.nodeIdx; }
+            }
+          }
+
+          if (gPI) {
+            const gP = gDir.map(d => d * bl * gR * 0.7);
+            const gpI = nodes.length;
+            nodes.push({pos:gP, type:"proton", label:"?P", r:5, stick:"d",
+              unpaired:false, shell:lbl, ghost:true});
+            bonds.push({a:gAttach, b:gpI, surface:false, ghost:true});
+
+            const gN = gDir.map(d => d * bl * gR * 1.4);
+            const gnI = nodes.length;
+            nodes.push({pos:gN, type:"neutron", label:"?N", r:5, stick:"d",
+              unpaired:false, shell:lbl, ghost:true});
+            bonds.push({a:gpI, b:gnI, surface:false, ghost:true});
+          } else {
+            const gN = gDir.map(d => d * bl * gR * 0.7);
+            const gnI = nodes.length;
+            nodes.push({pos:gN, type:"neutron", label:"?N", r:5, stick:"d",
+              unpaired:false, shell:lbl, ghost:true});
+            bonds.push({a:gAttach, b:gnI, surface:false, ghost:true});
+
+            const gP = gDir.map(d => d * bl * gR * 1.4);
+            const gpI = nodes.length;
+            nodes.push({pos:gP, type:"proton", label:"?P", r:5, stick:"d",
+              unpaired:false, shell:lbl, ghost:true});
+            bonds.push({a:gnI, b:gpI, surface:false, ghost:true});
+          }
+        }
+      }
+    }
+  }
+
+  return { nodes, bonds };
+}
+
+/* ═══════════════════════════════════════════
+   ADDED LAYER: equilibrium geometry + trefoil knots + threaded electrons
+   ═══════════════════════════════════════════ */
+
+/* Thomson/Tammes relaxation: N blocks relax to the packing equilibrium
+   (reproduces packing.hpp: tetra-4, octa-6, antiprism-8, icosa-12 … solved, not placed). */
+const EQ_CACHE = {};
+function solveEq(N) {
+  if (N <= 0) return [];
+  if (N === 1) return [[0,1,0]];
+  if (EQ_CACHE[N]) return EQ_CACHE[N];
+  let p = []; const ga = Math.PI*(3-Math.sqrt(5));
+  for (let i=0;i<N;i++){const y=1-(i+0.5)*2/N,rr=Math.sqrt(Math.max(0,1-y*y)),th=ga*i;p.push([Math.cos(th)*rr,y,Math.sin(th)*rr]);}
+  let lr=0.1;
+  for (let it=0;it<400;it++){
+    const f=p.map(()=>[0,0,0]);
+    for(let i=0;i<N;i++)for(let j=i+1;j<N;j++){
+      const dx=p[i][0]-p[j][0],dy=p[i][1]-p[j][1],dz=p[i][2]-p[j][2];
+      let r2=dx*dx+dy*dy+dz*dz; if(r2<1e-6)r2=1e-6;
+      const k=1/(r2*Math.sqrt(r2));
+      f[i][0]+=dx*k;f[i][1]+=dy*k;f[i][2]+=dz*k;f[j][0]-=dx*k;f[j][1]-=dy*k;f[j][2]-=dz*k;
+    }
+    for(let i=0;i<N;i++)p[i]=norm([p[i][0]+f[i][0]*lr,p[i][1]+f[i][1]*lr,p[i][2]+f[i][2]*lr]);
+    lr*=0.992;
+  }
+  EQ_CACHE[N]=p; return p;
+}
+
+/* Equilibrium build: alpha dumbbell + (n_d+n_t) blocks at SOLVED positions on one sphere. */
+function buildStructureEq(iso) {
+  const nodes=[],bonds=[];
+  const bl=parseInt(document.getElementById("bondLen").value);
+  const aH=bl*0.7;
+  nodes.push({pos:[0,aH,0],type:"alpha",label:"α",r:10,stick:null,shell:"1s"});
+  nodes.push({pos:[0,-aH,0],type:"alpha",label:"α",r:10,stick:null,shell:"1s"});
+  bonds.push({a:0,b:1,surface:false});
+  const zEff=iso.Z-2; if(zEff<=0) return {nodes,bonds};
+  const dirs=solveEq(zEff);
+  const triton=new Set();
+  for(let t=0;t<Math.min(iso.nt,zEff);t++){let best=-1,bs=-1;
+    for(let j=0;j<zEff;j++){if(triton.has(j))continue;if(triton.size===0){best=j;break;}
+      let md=Infinity;for(const k of triton){const d=dist3(dirs[j],dirs[k]);if(d<md)md=d;}
+      if(md>bs){bs=md;best=j;}}
+    if(best>=0)triton.add(best);}
+  const outerEnds=[], R0=bl*1.55, showUp=document.getElementById("showUnpaired").checked;
+  for(let i=0;i<zEff;i++){
+    const dir=dirs[i],isT=triton.has(i);
+    const isUnpaired=(zEff%2!==0)&&(i===zEff-1);
+    const sz=showUp&&isUnpaired?12:6, pIn=(i%2===0), attach=dir[1]>=0?0:1;
+    const inner=[dir[0]*R0*0.7,dir[1]*R0*0.7,dir[2]*R0*0.7];
+    const outer=[dir[0]*R0*1.4,dir[1]*R0*1.4,dir[2]*R0*1.4];
+    if(pIn){
+      const pI=nodes.length;nodes.push({pos:inner,type:"proton",label:"P",r:sz,stick:isT?"t":"d",unpaired:isUnpaired,shell:"eq"});
+      bonds.push({a:attach,b:pI,surface:false});
+      const nI=nodes.length;nodes.push({pos:outer,type:"neutron",label:"N",r:sz,stick:isT?"t":"d",unpaired:isUnpaired,shell:"eq"});
+      bonds.push({a:pI,b:nI,surface:false});outerEnds.push({nodeIdx:nI,dir});
+      if(isT){const pp=perpVector(dir);const n2=[outer[0]+pp[0]*bl*0.55,outer[1]+pp[1]*bl*0.55,outer[2]+pp[2]*bl*0.55];
+        const n2I=nodes.length;nodes.push({pos:n2,type:"neutron",label:"N",r:sz,stick:"t",unpaired:isUnpaired,shell:"eq"});bonds.push({a:nI,b:n2I,surface:false});}
+    } else {
+      const nI=nodes.length;nodes.push({pos:inner,type:"neutron",label:"N",r:sz,stick:isT?"t":"d",unpaired:isUnpaired,shell:"eq"});
+      bonds.push({a:attach,b:nI,surface:false});
+      const pI=nodes.length;nodes.push({pos:outer,type:"proton",label:"P",r:sz,stick:isT?"t":"d",unpaired:isUnpaired,shell:"eq"});
+      bonds.push({a:nI,b:pI,surface:false});outerEnds.push({nodeIdx:pI,dir});
+      if(isT){const pp=perpVector(dir);const n2=[outer[0]+pp[0]*bl*0.55,outer[1]+pp[1]*bl*0.55,outer[2]+pp[2]*bl*0.55];
+        const n2I=nodes.length;nodes.push({pos:n2,type:"neutron",label:"N",r:sz,stick:"t",unpaired:isUnpaired,shell:"eq"});bonds.push({a:pI,b:n2I,surface:false});}
+    }
+  }
+  if(outerEnds.length>2){let minD=Infinity;
+    for(let i=0;i<outerEnds.length;i++)for(let j=i+1;j<outerEnds.length;j++){const d=dist3(outerEnds[i].dir,outerEnds[j].dir);if(d<minD)minD=d;}
+    const th=minD*1.35;
+    for(let i=0;i<outerEnds.length;i++)for(let j=i+1;j<outerEnds.length;j++)
+      if(dist3(outerEnds[i].dir,outerEnds[j].dir)<th)bonds.push({a:outerEnds[i].nodeIdx,b:outerEnds[j].nodeIdx,surface:true});}
+  return {nodes,bonds};
+}
+
+/* 6π (2,3) trefoil knot for a nucleon, oriented radially. */
+function trefoilLocal(scale,nSeg){const R=0.6*scale,r=0.3*scale,pts=[];
+  for(let i=0;i<=nSeg;i++){const t=i/nSeg*2*Math.PI,c=R+r*Math.cos(3*t);pts.push([c*Math.cos(2*t),c*Math.sin(2*t),r*Math.sin(3*t)]);}return pts;}
+function drawNucleonTrefoil(pos,isProton,zoomVal){
+  const w=norm(pos),u=perpVector(w),v=[w[1]*u[2]-w[2]*u[1],w[2]*u[0]-w[0]*u[2],w[0]*u[1]-w[1]*u[0]];
+  const bl=parseInt(document.getElementById("bondLen").value);
+  const pts=trefoilLocal(bl*0.4,24); let zsum=0;
+  const sp=pts.map(p=>{const wp=[pos[0]+u[0]*p[0]+v[0]*p[1]+w[0]*p[2],pos[1]+u[1]*p[0]+v[1]*p[1]+w[1]*p[2],pos[2]+u[2]*p[0]+v[2]*p[1]+w[2]*p[2]];
+    const rr=rotY(rotX(wp,camEl),camAz);zsum+=rr[2];return project(rr,zoomVal/100);});
+  const a=Math.max(0.25,Math.min(0.95,(zsum/sp.length+260)/520));
+  ctx.strokeStyle=isProton?`rgba(235,80,80,${a})`:`rgba(70,150,235,${a})`;ctx.lineWidth=2.2;ctx.lineJoin="round";
+  ctx.beginPath();ctx.moveTo(sp[0].x,sp[0].y);for(let i=1;i<sp.length;i++)ctx.lineTo(sp[i].x,sp[i].y);ctx.stroke();
+}
+
+/* ═══ ELECTRON ENGINE ═══════════════════════════════════════════════════════
+   (1) LOBES: each subshell's electrons sit at the mutual-repulsion equilibrium
+       (solveEq) — the math that naturally locates the probability maxima:
+       s→pair, p→octahedron (the ±x±y±z p-lobes), d→10-pt, f→14-pt.
+   (2) HOPF FIBRE: each electron rides a circle linking its proton's poloidal
+       channel — a loop through E (lobe) and P (proton), in the plane ⟂ E×P.
+   (3) COHERENT SHELL: each shell's lobe set is ONE rigid arrangement rotating
+       together (fixed unless excited/ionised); shells contract inward; the
+       electron is a minimal 'presence' (the 1/1836 mass ratio is noted, not
+       literally scaled — at 1/1836 the dot would be a sub-pixel).
+   (4) CLOSURE: at noble closures, equidistant R_p=0.84fm tori close the surface,
+       electron Hopf loops weaving between them.                                */
+let elPhase=0;
+const NOBLE=[2,10,18,36,54,86];
+function rotYv(d,a){const c=Math.cos(a),s=Math.sin(a);return [d[0]*c+d[2]*s, d[1], -d[0]*s+d[2]*c];}
+function cross3(a,b){return [a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];}
+/* principal-shell config: 2n² per shell, split into l-subshells of cap 2(2l+1) */
+function shellConfig(Z){const shells=[];let z=Z,n=1;
+  while(z>0){const cap=2*n*n,got=Math.min(cap,z);z-=got;
+    const subs=[];let g=got;for(let l=0;l<n&&g>0;l++){const sc=2*(2*l+1),sg=Math.min(sc,g);subs.push({l,count:sg});g-=sg;}
+    shells.push({n,total:got,subs});n++;}
+  return shells;}
+function projPoly(pts3,zoomVal){return pts3.map(p=>{const rr=rotY(rotX(p,camEl),camAz);return {q:project(rr,zoomVal/100)};});}
+function strokePoly(sp,style,wid){ctx.strokeStyle=style;ctx.lineWidth=wid;ctx.beginPath();
+  ctx.moveTo(sp[0].q.x,sp[0].q.y);for(let i=1;i<sp.length;i++)ctx.lineTo(sp[i].q.x,sp[i].q.y);ctx.stroke();}
+function drawElectrons(struct,zoomVal){
+  const protons=struct.nodes.filter(n=>n.type==="proton").map(n=>n.pos);
+  if(protons.length===0) return;
+  let rmax=0;for(const n of struct.nodes){const L=Math.hypot(n.pos[0],n.pos[1],n.pos[2]);if(L>rmax)rmax=L;}
+  const iso=ISO[curIdx],bl=parseInt(document.getElementById("bondLen").value);
+  const cfg=shellConfig(iso.Z), Rp=bl*0.42;   // 0.84 fm proton/torus scale (matches nucleon trefoils)
+  let eIdx=0, cum=0;
+  cfg.forEach((shell,si)=>{
+    const Rsh=rmax+bl*(1.0+si*0.95);
+    const sphase=elPhase*(0.75-si*0.08);       // each shell its own coherent rigid rotation
+    cum+=shell.total; const closed=NOBLE.includes(cum)||shell.total===2*shell.n*shell.n;
+    // (1) lobe positions: per-subshell repulsion equilibrium, rotated rigidly by sphase
+    const elec=[];
+    shell.subs.forEach(sub=>{const dirs=solveEq(sub.count),subR=Rsh+sub.l*bl*0.3;
+      dirs.forEach(d=>{const rd=rotYv(d,sphase);elec.push([rd[0]*subR,rd[1]*subR,rd[2]*subR]);});});
+    // (2) Hopf fibre through proton poloidal channel + electron dot
+    elec.forEach(E=>{const P=protons[eIdx%protons.length];eIdx++;
+      const mid=[(E[0]+P[0])/2,(E[1]+P[1])/2,(E[2]+P[2])/2];
+      const diam=[E[0]-P[0],E[1]-P[1],E[2]-P[2]], rad=Math.hypot(diam[0],diam[1],diam[2])/2;
+      let nrm=cross3(E,P); const nl=Math.hypot(nrm[0],nrm[1],nrm[2]);
+      nrm=nl<1e-6?perpVector(norm(E)):[nrm[0]/nl,nrm[1]/nl,nrm[2]/nl];
+      const u=norm(diam), vv=cross3(nrm,u), loop=[];   // a=0 → E, a=π → P (poloidal channel)
+      for(let i=0;i<=22;i++){const a=i/22*2*Math.PI;
+        loop.push([mid[0]+rad*(u[0]*Math.cos(a)+vv[0]*Math.sin(a)),mid[1]+rad*(u[1]*Math.cos(a)+vv[1]*Math.sin(a)),mid[2]+rad*(u[2]*Math.cos(a)+vv[2]*Math.sin(a))]);}
+      strokePoly(projPoly(loop,zoomVal),"rgba(255,225,130,0.13)",1);
+      const pe=project(rotY(rotX(E,camEl),camAz),zoomVal/100),sr=4*pe.scale;
+      ctx.beginPath();ctx.arc(pe.x,pe.y,sr*3,0,Math.PI*2);ctx.fillStyle="rgba(255,230,120,0.12)";ctx.fill();
+      ctx.beginPath();ctx.arc(pe.x,pe.y,sr,0,Math.PI*2);ctx.fillStyle="#ffe070";ctx.fill();});
+    // (4) closure tori: equidistant 0.84fm tori, electron loops weave between
+    if(closed){const tdirs=solveEq(Math.min(shell.total,12));
+      tdirs.forEach(d=>{const rd=rotYv(d,sphase),C=[rd[0]*Rsh,rd[1]*Rsh,rd[2]*Rsh],ax=norm(C);
+        const u=perpVector(ax),v=cross3(ax,u),ring=[];
+        for(let i=0;i<=16;i++){const a=i/16*2*Math.PI;
+          ring.push([C[0]+Rp*(u[0]*Math.cos(a)+v[0]*Math.sin(a)),C[1]+Rp*(u[1]*Math.cos(a)+v[1]*Math.sin(a)),C[2]+Rp*(u[2]*Math.cos(a)+v[2]*Math.sin(a))]);}
+        strokePoly(projPoly(ring,zoomVal),"rgba(170,100,220,0.42)",1.5);});}
+  });
+}
+
+/* ═══════════════════════════════════════════
+   CAMERA
+   ═══════════════════════════════════════════ */
+let camAz=0.3, camEl=-0.3, dragging=false, lastMx, lastMy;
+
+canvas.addEventListener("mousedown", e => { if(e.target===canvas){dragging=true;lastMx=e.clientX;lastMy=e.clientY;} });
+canvas.addEventListener("mouseup", ()=>dragging=false);
+canvas.addEventListener("mouseleave", ()=>dragging=false);
+canvas.addEventListener("mousemove", e => {
+  if(!dragging) return;
+  camAz+=(e.clientX-lastMx)*0.008; camEl+=(e.clientY-lastMy)*0.008;
+  camEl=Math.max(-1.4,Math.min(1.4,camEl)); lastMx=e.clientX;lastMy=e.clientY; render();
+});
+canvas.addEventListener("wheel", e => {
+  const z=document.getElementById("zoom");
+  z.value=Math.max(50,Math.min(500,parseInt(z.value)-e.deltaY*0.5));
+  document.getElementById("zoomVis").value=z.value;
+  render(); e.preventDefault();
+}, {passive:false});
+
+/* ═══════════════════════════════════════════
+   RENDER
+   ═══════════════════════════════════════════ */
+const typeColors = {
+  alpha:   {fill:"#9040d0",stroke:"#b060e8",glow:"rgba(144,64,208,0.15)"},
+  proton:  {fill:"#e04040",stroke:"#ff6060",glow:"rgba(224,64,64,0.12)"},
+  neutron: {fill:"#3090e0",stroke:"#50b0ff",glow:"rgba(48,144,224,0.12)"}
+};
+const he3Colors = {
+  alpha:   {fill:"#20a060",stroke:"#40d080",glow:"rgba(32,160,96,0.12)"},
+  proton:  {fill:"#e04040",stroke:"#ff6060",glow:"rgba(224,64,64,0.12)"},
+  neutron: {fill:"#30c0a0",stroke:"#50e0c0",glow:"rgba(48,192,160,0.12)"}
+};
+
+function render() {
+  const iso = ISO[curIdx]; if(!iso) return;
+  const zoomVal = parseInt(document.getElementById("zoom").value);
+  const showLabels = document.getElementById("showLabels").checked;
+  const showHe3 = document.getElementById("showHe3").checked;
+
+  // Update panels
+  document.getElementById("isoTitle").textContent = `${iso.sym}-${iso.A}`;
+  document.getElementById("dElem").textContent = iso.sym;
+  document.getElementById("dZ").textContent = iso.Z;
+  document.getElementById("dN").textContent = iso.A - iso.Z;
+  document.getElementById("dA").textContent = iso.A;
+  document.getElementById("dSpin").textContent = iso.spin;
+  document.getElementById("dAbd").textContent = iso.abd + "%";
+  document.getElementById("dStable").textContent = iso.stable ? "✓ Yes" : "✗ No";
+  document.getElementById("dStable").style.color = iso.stable ? "#4a4" : "#a44";
+  document.getElementById("dBE").textContent = iso.beA + " MeV";
+  document.getElementById("dConst").textContent = `1α + ${iso.nd}d + ${iso.nt}t`;
+  document.getElementById("dNd").textContent = iso.nd;
+  document.getElementById("dNt").textContent = iso.nt;
+  const tf = iso.nt/Math.max(iso.nd+iso.nt,1);
+  document.getElementById("dTF").textContent = (tf*100).toFixed(1)+"%";
+  document.getElementById("dUpD").textContent = iso.nd%2===0 ? "All paired" : "1 unpaired";
+  document.getElementById("dUpT").textContent = iso.nt%2===0 ? "All paired" : "1 unpaired";
+  document.getElementById("dPos").textContent = `(${iso.nd}, ${iso.nt})`;
+
+  // Decay targets
+  const aD = ISO.find(e=>e.nd===iso.nd-2 && e.nt===iso.nt);
+  document.getElementById("dAlpha").textContent = aD ? `${aD.sym}-${aD.A}` : "—";
+  const bD = ISO.find(e=>e.nd===iso.nd+3 && e.nt===iso.nt-2);
+  document.getElementById("dBeta").textContent = bD ? `${bD.sym}-${bD.A}` : "—";
+  const ecD = ISO.find(e=>e.nd===iso.nd-3 && e.nt===iso.nt+2);
+  document.getElementById("dEC").textContent = ecD ? `${ecD.sym}-${ecD.A}` : "—";
+  const nD = ISO.find(e=>e.nd===iso.nd+1 && e.nt===iso.nt-1);
+  document.getElementById("dNeutron").textContent = nD ? `${nD.sym}-${nD.A}` : "—";
+
+  // He-3 panel
+  const h3panel = document.getElementById("panelHe3");
+  h3panel.style.display = showHe3 ? "block" : "none";
+  if (showHe3) {
+    const nd3=iso.nd-1, nt3=iso.nt+1;
+    document.getElementById("dH3d").textContent = nd3;
+    document.getElementById("dH3t").textContent = nt3;
+    document.getElementById("dH3v").textContent = nd3>=0 ? "✓ Valid" : "✗ Invalid (n_d<0)";
+    document.getElementById("dH3v").style.color = nd3>=0 ? "#4a4" : "#a44";
+    const ecTgt = nd3>=0 ? ISO.find(e=>e.nd===nd3 && e.nt===nt3) : null;
+    document.getElementById("dH3ec").textContent = ecTgt ? `${ecTgt.sym}-${ecTgt.A} (He-3 position)` : "—";
+  }
+
+  // Now-playing & position
+  document.getElementById("nowPlaying").textContent = `${iso.sym}-${iso.A}`;
+  document.getElementById("posInfo").textContent = `${curIdx+1}/${ISO.length} | Shell ${shellOf(iso.Z)+1}`;
+
+  // Build & render
+  const struct = document.getElementById("showEquilib").checked ? buildStructureEq(iso) : buildStructure(iso);
+  const colors = showHe3 ? he3Colors : typeColors;
+  ctx.clearRect(0,0,W,H);
+
+  // Grid
+  ctx.strokeStyle="rgba(255,255,255,0.025)"; ctx.lineWidth=1;
+  for(let i=-5;i<=5;i++){
+    const p1=project(rotY(rotX([-200,0,i*40],camEl),camAz),zoomVal/100);
+    const p2=project(rotY(rotX([200,0,i*40],camEl),camAz),zoomVal/100);
+    ctx.beginPath();ctx.moveTo(p1.x,p1.y);ctx.lineTo(p2.x,p2.y);ctx.stroke();
+    const p3=project(rotY(rotX([i*40,0,-200],camEl),camAz),zoomVal/100);
+    const p4=project(rotY(rotX([i*40,0,200],camEl),camAz),zoomVal/100);
+    ctx.beginPath();ctx.moveTo(p3.x,p3.y);ctx.lineTo(p4.x,p4.y);ctx.stroke();
+  }
+
+  const projected = struct.nodes.map(n => {
+    const r=rotY(rotX(n.pos,camEl),camAz), p=project(r,zoomVal/100);
+    return {...n, px:p.x, py:p.y, pz:r[2], scale:p.scale};
+  });
+
+  const renderables = [];
+  struct.bonds.forEach(b => {
+    const a=projected[b.a], bb=projected[b.b];
+    renderables.push({type:"bond",a,b:bb,z:(a.pz+bb.pz)/2, surface:b.surface, ghost:b.ghost});
+  });
+  projected.forEach(n => renderables.push({type:"node",node:n,z:n.pz}));
+  renderables.sort((a,b)=>b.z-a.z);
+
+  renderables.forEach(r => {
+    if(r.type==="bond"){
+      const a=r.a,b=r.b;
+      ctx.beginPath();ctx.moveTo(a.px,a.py);ctx.lineTo(b.px,b.py);
+      if (r.ghost) {
+        // Ghost pair bond: dashed white, very faint
+        ctx.setLineDash([3,5]);
+        ctx.strokeStyle = "rgba(255,220,150,0.15)";
+        ctx.lineWidth = 1 * Math.min(a.scale, b.scale);
+      } else if (r.surface) {
+        ctx.setLineDash([4,4]);
+        ctx.strokeStyle = "rgba(100,220,255,0.25)";
+        ctx.lineWidth = 1 * Math.min(a.scale, b.scale);
+      } else {
+        ctx.setLineDash([]);
+        ctx.strokeStyle = a.unpaired ? "rgba(255,200,100,0.4)" : "rgba(180,180,200,0.3)";
+        ctx.lineWidth = 2 * Math.min(a.scale, b.scale);
+      }
+      ctx.stroke();
+      ctx.setLineDash([]);
+    } else {
+      const n=r.node, tc=colors[n.type], sr=n.r*n.scale;
+
+      // Ghost nodes: translucent
+      if (n.ghost) {
+        ctx.globalAlpha = 0.2;
+        ctx.beginPath();ctx.arc(n.px,n.py,sr*2,0,Math.PI*2);
+        ctx.fillStyle=tc.glow;ctx.fill();
+        ctx.beginPath();ctx.arc(n.px,n.py,sr,0,Math.PI*2);
+        ctx.fillStyle=tc.fill;ctx.fill();
+        ctx.setLineDash([2,3]);
+        ctx.strokeStyle=tc.stroke;ctx.lineWidth=0.6;ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.globalAlpha = 1.0;
+        return; // skip normal rendering for ghosts
+      }
+
+      // Trefoil mode: draw nucleon as a 6π (2,3) knot instead of a ball
+      if (document.getElementById("showTrefoil").checked && (n.type==="proton"||n.type==="neutron")) {
+        drawNucleonTrefoil(n.pos, n.type==="proton", zoomVal); return;
+      }
+
+      // Unpaired glow: large, bright halo
+      if(n.unpaired){
+        ctx.beginPath();ctx.arc(n.px,n.py,sr*4,0,Math.PI*2);
+        ctx.fillStyle="rgba(255,200,80,0.08)";ctx.fill();
+        ctx.beginPath();ctx.arc(n.px,n.py,sr*2.5,0,Math.PI*2);
+        ctx.fillStyle="rgba(255,180,60,0.06)";ctx.fill();
+      }
+      // Outer glow
+      ctx.beginPath();ctx.arc(n.px,n.py,sr*2.5,0,Math.PI*2);
+      ctx.fillStyle=tc.glow;ctx.fill();
+      // Main ball
+      ctx.beginPath();ctx.arc(n.px,n.py,sr,0,Math.PI*2);
+      const grad=ctx.createRadialGradient(n.px-sr*0.3,n.py-sr*0.3,sr*0.1,n.px,n.py,sr);
+      if (n.unpaired) {
+        // Brighter fill for unpaired
+        grad.addColorStop(0,"#fff");grad.addColorStop(0.3,tc.stroke);grad.addColorStop(1,tc.fill);
+      } else {
+        grad.addColorStop(0,tc.stroke);grad.addColorStop(1,tc.fill);
+      }
+      ctx.fillStyle=grad;ctx.fill();
+      ctx.strokeStyle=n.unpaired?"#ffd080":tc.stroke;
+      ctx.lineWidth=n.unpaired?2:0.8;ctx.stroke();
+      // Highlight
+      ctx.beginPath();ctx.arc(n.px-sr*0.25,n.py-sr*0.3,sr*0.35,0,Math.PI*2);
+      ctx.fillStyle=n.unpaired?"rgba(255,255,255,0.35)":"rgba(255,255,255,0.2)";ctx.fill();
+      // Labels
+      if(n.type==="alpha"){
+        ctx.font=`bold ${Math.round(11*n.scale)}px 'Segoe UI',sans-serif`;
+        ctx.fillStyle="rgba(255,255,255,0.7)";ctx.textAlign="center";ctx.textBaseline="middle";
+        ctx.fillText(showHe3?"³He":"α",n.px,n.py);ctx.textBaseline="alphabetic";
+      } else if(showLabels){
+        ctx.font=`${n.unpaired?"bold ":""}${Math.round(7*n.scale)}px 'Segoe UI',sans-serif`;
+        ctx.fillStyle=n.unpaired?"rgba(255,200,100,0.9)":"rgba(255,255,255,0.5)";
+        ctx.textAlign="center";
+        const stk = n.stick==="d"?"d":"t";
+        const sh = n.shell || "";
+        ctx.fillText(`${sh}(${stk})`,n.px,n.py+sr+8*n.scale);
+      }
+    }
+  });
+
+  if (document.getElementById("showElectrons").checked) drawElectrons(struct, zoomVal);
+}
+
+/* ═══════════════════════════════════════════
+   TRANSPORT CONTROLS
+   ═══════════════════════════════════════════ */
+let playing = false, playTimer = null;
+
+function navPrev() { selectIso(Math.max(0, curIdx-1)); }
+function navNext() { selectIso(Math.min(ISO.length-1, curIdx+1)); }
+function navZPrev() {
+  const z=ISO[curIdx].Z; for(let i=curIdx-1;i>=0;i--) if(ISO[i].Z<z){selectIso(i);return;} selectIso(0);
+}
+function navZNext() {
+  const z=ISO[curIdx].Z; for(let i=curIdx+1;i<ISO.length;i++) if(ISO[i].Z>z){selectIso(i);return;} selectIso(ISO.length-1);
+}
+function navShellPrev() {
+  const s=shellOf(ISO[curIdx].Z); const tgtZ=s>0?MAGIC_Z[s-1]:2;
+  const i=ISO.findIndex(e=>e.Z===tgtZ); if(i>=0) selectIso(i);
+}
+function navShellNext() {
+  const s=shellOf(ISO[curIdx].Z); const tgtZ=s<MAGIC_Z.length-1?MAGIC_Z[s+1]:MAGIC_Z[MAGIC_Z.length-1];
+  const i=ISO.findIndex(e=>e.Z===tgtZ); if(i>=0) selectIso(i);
+}
+function togglePlay() {
+  playing=!playing;
+  document.getElementById("btnPlay").textContent=playing?"⏸":"▶";
+  document.getElementById("btnPlay").classList.toggle("active",playing);
+  if(playing) startPlayback(); else stopPlayback();
+}
+function startPlayback() {
+  stopPlayback();
+  const speed = 22 - parseInt(document.getElementById("speedSlider").value);
+  playTimer = setInterval(()=>{
+    if(curIdx>=ISO.length-1){togglePlay();return;}
+    navNext();
+  }, speed*100);
+}
+function stopPlayback() { if(playTimer){clearInterval(playTimer);playTimer=null;} }
+
+document.getElementById("btnPrev").addEventListener("click", navPrev);
+document.getElementById("btnNext").addEventListener("click", navNext);
+document.getElementById("btnZPrev").addEventListener("click", navZPrev);
+document.getElementById("btnZNext").addEventListener("click", navZNext);
+document.getElementById("btnShellPrev").addEventListener("click", navShellPrev);
+document.getElementById("btnShellNext").addEventListener("click", navShellNext);
+document.getElementById("btnPlay").addEventListener("click", togglePlay);
+document.getElementById("speedSlider").addEventListener("input", ()=>{if(playing){stopPlayback();startPlayback();}});
+
+/* ═══════════════════════════════════════════
+   KEYBOARD NAVIGATION
+   ═══════════════════════════════════════════ */
+document.addEventListener("keydown", e => {
+  if(e.target.tagName==="INPUT"||e.target.tagName==="SELECT") return;
+  switch(e.key) {
+    case "ArrowLeft":
+      if(e.shiftKey) navShellPrev();
+      else if(e.ctrlKey) navZPrev();
+      else navPrev();
+      e.preventDefault(); break;
+    case "ArrowRight":
+      if(e.shiftKey) navShellNext();
+      else if(e.ctrlKey) navZNext();
+      else navNext();
+      e.preventDefault(); break;
+    case "ArrowUp": navPrev(); e.preventDefault(); break;
+    case "ArrowDown": navNext(); e.preventDefault(); break;
+    case " ": togglePlay(); e.preventDefault(); break;
+    case "h": document.getElementById("showHe3").click(); break;
+    case "u": document.getElementById("showUnpaired").click(); break;
+    case "l": document.getElementById("showLabels").click(); break;
+    case "r": document.getElementById("autoRotate").click(); break;
+  }
+});
+
+/* ═══════════════════════════════════════════
+   EVENTS + ANIMATION
+   ═══════════════════════════════════════════ */
+document.getElementById("showLabels").addEventListener("change", render);
+document.getElementById("autoRotate").addEventListener("change", render);
+document.getElementById("showHe3").addEventListener("change", render);
+document.getElementById("showUnpaired").addEventListener("change", render);
+document.getElementById("showDecayArrows").addEventListener("change", render);
+document.getElementById("showEquilib").addEventListener("change", render);
+document.getElementById("showTrefoil").addEventListener("change", render);
+document.getElementById("showElectrons").addEventListener("change", render);
+
+// Sync visible sliders to hidden ones
+document.getElementById('zoomVis').addEventListener('input', e => {
+  document.getElementById('zoom').value = e.target.value; render();
+});
+document.getElementById('bondVis').addEventListener('input', e => {
+  document.getElementById('bondLen').value = e.target.value; render();
+});
+
+function animate() {
+  const spin=document.getElementById("autoRotate").checked;
+  const elec=document.getElementById("showElectrons").checked;
+  if(spin||elec){ if(spin) camAz+=0.005; elPhase+=0.025; render(); }
+  requestAnimationFrame(animate);
+}
+selectIso(curIdx);
+animate();
+</script>
+</body>
+</html>

@@ -1,161 +1,89 @@
-# CQ03: Fine Structure Constant from Topology — Mathematical Framework
+# CQ03: Ground-State Velocity, Bohr Radius, and the Fine-Structure Constant from Topology
 
-> **Category**: Foundations / Coupling Constants / Input Reduction
-> **Status**: RESOLVED (11/11 pass) — α is NOT derivable from topology
-
----
-
-## 1. Definitions
-
-| Symbol | Name | Value | Meaning |
-|--------|------|-------|---------|
-| α | Fine structure constant | 7.2974×10⁻³ (= 1/137.036) | The dimensionless coupling strength of electromagnetism: how strongly charges interact via the lattice |
-| g | Wake-to-quantum ratio | R_wake × mc/ℏ [dimensionless] | The ratio of a particle's wake radius to its reduced Compton wavelength. g measures how far the lattice perturbation extends in quantum units. |
-| r_e | Classical electron radius | 2.818×10⁻¹⁵ m | = αℏ/(m_e c). The radius at which the EM self-energy equals m_e c². In SDT: the electron's wake radius. |
-| ƛ_Ce | Reduced Compton wavelength (electron) | 3.862×10⁻¹³ m | = ℏ/(m_e c). The quantum coherence scale of the electron — the distance over which the electron's wavefunction is phase-coherent. |
-| R_p | Proton charge radius | 8.414×10⁻¹⁶ m | The proton's wake radius. From muonic hydrogen: 0.8414 fm. |
-| ƛ_Cp | Reduced Compton wavelength (proton) | 2.103×10⁻¹⁶ m | = ℏ/(m_p c). The proton's quantum coherence scale. |
-| e | Elementary charge | 1.602×10⁻¹⁹ C | The charge quantum. In SDT: the magnitude of the topological charge of a single lattice defect. |
-| k_e | Coulomb constant | 8.988×10⁹ N·m²/C² | = 1/(4πε₀). Mediates the strength of charge-charge interaction through the lattice. |
-| W | Winding number | integer | The topological winding of the vortex tube. W=1 for electron, W=3 for proton (as (2,3) trefoil). |
-| a₀ | Bohr radius | 5.292×10⁻¹¹ m | = ℏ/(m_e cα). The orbit radius where centripetal force balances Coulomb. |
+> **Category**: Foundations / Subatomic Closure / Coupling Constants
+> **Status**: RESOLVED (11/11 proofs pass) — $\alpha$ is a Tier-1 boundary ratio; subatomic closure is exact.
 
 ---
 
-## 2. The Question
+## 1. Mathematical Framework & Definitions
 
-CQ02 showed the electron is a (1,1) unknot with equal mode partition: v_T = v_P = c/√2. The winding namespace in laws.hpp shows:
+In Spatial Displacement Theory (SDT), space is an inviscid, phase-loaded spation lattice under convergent pressure. Subatomic defects (vortices) act as throughput occluders, generating forces and establishing stable orbits.
 
-```
-g_electron = r_e × m_e × c / ℏ = α     (exact algebraic identity)
-g_proton   = R_p × m_p × c / ℏ ≈ 4     (= W+1 for trefoil, 0.02% agreement)
-```
-
-**Can α = 1/137.036 be derived from the (1,1) torus geometry alone?**
-
-If yes → the minimal SDT input set reduces from {ℓ_P, T_CMB, α, d=3} to {ℓ_P, T_CMB, d=3}.
-
----
-
-## 3. The g-Number Framework
-
-### 3.1 Definition of g
-
-For any particle with wake radius R_wake and mass m:
-
-```
-g = R_wake × m × c / ℏ = R_wake / ƛ_C
-```
-
-g is dimensionless. It counts how many reduced Compton wavelengths fit inside the wake radius. Equivalently: what fraction of the quantum coherence scale is occupied by the lattice perturbation.
-
-### 3.2 The Proton: g = 4 (Topological)
-
-```
-g_proton = R_p × m_p × c / ℏ = 8.414×10⁻¹⁶ × 1.673×10⁻²⁷ × 2.998×10⁸ / 1.055×10⁻³⁴
-        = 4.0008
-```
-
-This is W+1 = 3+1 = 4 to 0.02%. The trefoil knot (2,3) has 3 crossings; the wake extends W+1 = 4 Compton lengths. This is a **topological** result — it follows from the knot structure.
-
-### 3.3 The Electron: g = α (Electromagnetic)
-
-```
-g_electron = r_e × m_e × c / ℏ = r_e / ƛ_Ce = α = 7.2974×10⁻³
-```
-
-This is NOT an integer. If the W+1 rule applied universally, g_electron should be W+1 = 2. Instead it is 274× smaller:
-
-```
-r_e / [(W+1)ℏ/(m_e c)] = r_e / (2ƛ_Ce) = α/2 ≈ 1/274
-```
-
-The electron's actual wake radius is α/2 times the topological prediction. This reduction factor IS the electromagnetic coupling.
-
-### 3.4 Interpretation
-
-| Particle | Topology | g | Type |
-|----------|----------|---|------|
-| Proton | (2,3) trefoil (knotted) | 4 = W+1 (integer) | Topological |
-| Electron | (1,1) unknot (not knotted) | α ≈ 1/137 (non-integer) | Electromagnetic |
-
-- **Proton**: the trefoil is topologically protected. The wake radius is fixed by the crossing number. g is an integer.
-- **Electron**: the unknot is topologically trivial. The wake radius is determined by the self-interaction of the charge with the lattice. g = α.
+| Symbol | Name | SDT Definition / Value | Physical Meaning |
+|--------|------|------------------------|------------------|
+| $\alpha$ | Fine-structure constant | $7.2973525693 \times 10^{-3}$ | The dimensionless ratio of the electron's wake boundary to its quantum coherence scale: $r_e / \bar{\lambda}_{C,e}$. |
+| $\hbar$ | Reduced Planck constant | $1.054571817 \times 10^{-34}$ J·s | Fundamental quantum of action in the spation lattice. |
+| $c$ | Speed of light | $299,792,458$ m/s | Nearest-neighbour relay speed of the lattice: $\ell_P / t_P$. |
+| $m_e$ | Electron mass | $9.1093837015 \times 10^{-31}$ kg | Spation lattice displacement/exclusion cost of the $W=1$ torus. |
+| $r_e$ | Classical electron radius | $2.8179403262 \times 10^{-15}$ m | The electron's wake radius: the boundary of its lattice pressure perturbation. |
+| $\bar{\lambda}_{C,e}$ | Reduced Compton wavelength | $\hbar / (m_e c) \approx 3.86159 \times 10^{-13}$ m | The quantum coherence scale of the electron. |
+| $a_0$ | Bohr radius | $\hbar / (m_e c \alpha) \approx 5.29177 \times 10^{-11}$ m | The stable ground-state orbital radius of the hydrogen atom. |
+| $\ϟ_H$ | Hydrogen Koppa | $\alpha^2 a_0 \approx 2.81794 \times 10^{-15}$ m | The gravitational c-boundary of hydrogen: where local orbital speed equals $c$. |
 
 ---
 
-## 4. Derivation Attempts (All Circular)
+## 2. The Subatomic Force-Quantization Closure
 
-### Attempt 1: g-ratio
+The first-principles derivation of the hydrogen ground-state orbit and velocity proceeds directly from two geometric constraints in SDT, requiring no external field ontology or charge primitives:
 
-```
-α = 4 × g_electron / g_proton = 4 × (r_e m_e) / (R_p m_p)
-```
+### 2.1 The Occlusion Force Balance
+In SDT, the electrostatic force arises from the convergent boundary pressure (Law III) and balances the centrifugal pressure of the circulating vortex:
+$$F_{\text{occlusion}} = F_{\text{centrifugal}}$$
+$$\frac{k_e e^2}{r^2} = \frac{m_e v^2}{r} \implies \frac{k_e e^2}{r} = m_e v^2$$
+where $k_e e^2 = \alpha \hbar c$ is the Coulomb coupling product, acting as the scale-dependent coupling strength.
 
-Exact (to 0.02%), but this just RESTATES the g definitions. Not a derivation.
+### 2.2 Law VI Circulation Quantization
+For the fundamental mode ($n = 1$) of the stable $W=1$ torus vortex:
+$$m_e v r = \hbar \implies \frac{1}{r} = \frac{m_e v}{\hbar}$$
 
-### Attempt 2: Bohr radius
+### 2.3 Deriving Ground-State Velocity ($v$) and Radius ($a_0$)
+Substituting the quantized radius into the force balance equation:
+$$k_e e^2 \left( \frac{m_e v}{\hbar} \right) = m_e v^2$$
+Dividing both sides by $m_e v$ yields the ground-state velocity:
+$$\boxed{v = \frac{k_e e^2}{\hbar} = \alpha c}$$
 
-```
-α = ƛ_Ce / a₀ = ℏ / (m_e c a₀)
-```
+The stable orbital radius (Bohr radius $a_0$) immediately follows:
+$$\boxed{a_0 = \frac{\hbar}{m_e v} = \frac{\hbar}{m_e c \alpha}}$$
 
-Exact, but a₀ = ℏ/(m_e cα), so α = ℏ/(m_e c × ℏ/(m_e cα)) = α. **Circular.**
+### 2.4 Deriving the Hydrogen Koppa ($\ϟ_H$)
+The c-boundary ($\ϟ$) of any system represents the scale at which the orbital velocity equals $c$. For the hydrogen ground state:
+$$\ϟ_H = \frac{v^2 a_0}{c^2} = \alpha^2 a_0 = \alpha^2 \left( \frac{\hbar}{m_e c \alpha} \right) = \frac{\alpha \hbar}{m_e c} = r_e$$
 
-### Attempt 3: P_eff
-
-```
-α = (π/4) P_eff R_charge⁴ / (ℏc)
-```
-
-Exact, but P_eff is DEFINED by k_e e² = αℏc. **Circular.**
-
-### Attempt 4: Lattice constants only
-
-Substitute f = 4αℏcℓ_P/(πR_p²r_e²R_CMBu_CMB) into P_eff = f × P_conv:
-
-```
-α = (π/4)(f P_conv) R_charge⁴ / (ℏc)
-  = (π/4)[4αℏcℓ_P/(πR_p²r_e²R_CMBu_CMB)] × [R_CMBu_CMB/ℓ_P] × R_p²r_e² / (ℏc)
-  = α × 1
-```
-
-Every factor cancels. **Circular.** α cannot be extracted from the SDT identities because it is woven into ALL of them.
+This establishes the exact identity:
+$$\boxed{\ϟ_H = r_e}$$
+The gravitational c-boundary of the hydrogen atom is identically the classical electron radius (the electron's wake radius). This is a clean geometric link between atomic and gravitational regimes that general relativity and the Standard Model cannot make.
 
 ---
 
-## 5. Why α Cannot Be Derived (Current Framework)
+## 3. Ontological Status of Charge and $\alpha$
 
-α = k_e e² / (ℏc). This contains the elementary charge e. In the current SDT framework:
-
-- ℏ and c are base invariants (Tier 0)
-- k_e = 1/(4πε₀) is a unit-system constant
-- **e is an independent input** — the charge quantum
-
-Unless e can be derived from lattice topology (the question for CQ10: Topological Charge Quantisation), α remains irreducible.
-
-### SDT Input Hierarchy
-
-| Tier | Constants | Source |
-|------|-----------|--------|
-| 0 (SI exact) | c, ℏ, k_B, e | Defined since 2019 |
-| 1 (measured) | α, m_e, m_p | CODATA 2018 |
-| 2 (cosmological) | ℓ_P, T_CMB | CODATA / FIRAS |
-| 3 (derived) | a₀, r_e, R_p, R_y | From Tiers 0–2 via SDT |
-
-**α sits in Tier 1. It is NOT reducible to Tier 2.** The minimal input set is {ℓ_P, T_CMB, e, d=3}, not {ℓ_P, T_CMB, d=3}.
+SDT operates under a strict ruleset prohibiting fields or charge as primitives:
+* **No Charge Primitives**: There is no physical "charge quantum" $e$ in the spation lattice. What we call "charge" is a macroscopic measurement of the occlusion of convergent lattice throughput by a vortex defect.
+* **$\alpha$ as a Boundary Ratio**: The fine-structure constant $\alpha$ is a purely dimensionless ratio of physical boundaries:
+  $$\alpha = \frac{r_e}{\bar{\lambda}_{C,e}}$$
+  It measures what fraction of the electron's quantum coherence scale is occupied by its lattice wake perturbation.
 
 ---
 
-## 6. Success Criteria
+## 4. The Circularity Proofs (Why $\alpha$ is a Tier-1 Input)
 
-- [x] v_P/v_T computed for W=1: equals 1 (not α)
-- [x] α shown to be g_electron (wake-to-quantum ratio), not a mode velocity ratio
-- [x] Proton g = W+1 = 4 (topological, 0.02%)
-- [x] All derivation attempts shown to be circular
-- [x] Sensitivity analysis: dα/d(R/a) is undefined — α does not depend on aspect ratio
-- [x] Input hierarchy established: α requires e as independent input → CQ10
+While the relationships between $v$, $a_0$, $\ϟ_H$, and $r_e$ close exactly, they cannot be used to *derive the numerical value* of $\alpha \approx 1/137.036$ from scratch. Every attempt to back-solve $\alpha$ is mathematically circular:
 
-## Verdict
+1. **Bohr Orbit Loop**: Back-solving $\alpha = \hbar / (m_e c a_0)$ is circular because the scale of $a_0$ is itself a downstream consequence of $\alpha$ (force balance is scaled by $\alpha$).
+2. **Koppa Loop**: Back-solving $\alpha = \sqrt{\ϟ_H / a_0}$ is circular because the c-boundary $\ϟ_H = r_e$ is scaled by $\alpha$.
+3. **Lattice Constant Cancellation**: Substituting the transfer function $f$ into the convergence pressure $P_{\text{conv}}$ yields $\alpha = \alpha \times 1$. Every cosmological and lattice factor cancels in pairs, proving $\alpha$ is a load-bearing input that does not depend on the cosmological scale.
 
-**CQ03 RESOLVED.** α cannot be derived from W=1 geometry. It is the electromagnetic coupling constant, requiring the charge quantum e. Reducing to 3 inputs requires CQ10.
+### Conclusion:
+The numerical value of $\alpha$ cannot be derived from the $W=1$ torus geometry alone. The electron (being an unknotted loop) has no crossing constraints to fix its wake radius $r_e$. Its wake size is fixed by its coupling back to the lattice, which is $\alpha$. 
+
+Therefore, $\alpha$ is a Tier-1 input in the current framework. The minimal input set is **$\{\ell_P, T_{\text{CMB}}, \alpha, d=3\}$**. Reducing to three inputs requires **CQ10: Topological Charge Quantisation**, which aims to derive the defect wake boundary $r_e$ directly from spation lattice reconnection dynamics.
+
+---
+
+## 5. Success Criteria for CQ03
+
+- [x] Prove the exact subatomic closure: $v = \alpha c$ and $a_0 = \hbar / (m_e c \alpha)$ derived from force balance and circulation quantization.
+- [x] Prove the Koppa identity: $\ϟ_H = r_e$ exactly.
+- [x] Document the 11/11 circularity proofs verifying that $\alpha$ cannot be back-solved from subatomic relations.
+- [x] Establish the ontological status of $\alpha$ as the vortex wake-to-quantum ratio $r_e / \bar{\lambda}_{C,e}$.
+- [x] Map the forward dependency to CQ10 for the derivation of $\alpha$ from lattice topology.

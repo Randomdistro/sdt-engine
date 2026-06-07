@@ -56,7 +56,7 @@ static void prove(const char* tag, const char* desc,
 //  α appears in SDT at three distinct places:
 //  1. Wake-to-quantum ratio: g(W=1) = R_wake / λ̄_C = r_e / λ̄_Ce = α
 //  2. Hydrogen ground state: v_1 = αc (Bohr velocity)
-//  3. Koppa of the proton: ϟ_H = (1/α)√(R_p/a_0) = 0.5464
+//  3. Koppa of the proton: ϟ_H = (1/α)√(R_p/a_0) = c/0.5464
 //
 //  All three are algebraically identical. The question is whether
 //  any of them can be DERIVED from topology alone.

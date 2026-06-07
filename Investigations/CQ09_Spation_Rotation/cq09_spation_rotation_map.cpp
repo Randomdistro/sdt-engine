@@ -154,8 +154,7 @@ static void part2_state_framework()
     double occlusion_at_a0 = proton.calculate_occlusion(electron, a_0);
     std::printf("  Occlusion factor at Bohr radius: E(a₀) = %.6f\n", occlusion_at_a0);
 
-    double force_ratio = State28D::force_ratio_coulomb_to_gravity(0.0, 0.64);
-    std::printf("  Coulomb/Gravity force ratio estimate: %.3e\n\n", force_ratio);
+    std::printf("  Coulomb/Gravity force ratio estimate is handled by laws::law_III (CQ01/CQ16).\n\n");
 }
 
 static void part3_driven_orbit(double koppa_H)

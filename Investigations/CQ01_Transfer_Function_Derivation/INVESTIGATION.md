@@ -1,8 +1,16 @@
 # CQ01: Transfer Function f — INVESTIGATION RESULTS
 
-> **Status**: RESOLVED
-> **Date**: May 2026
-> **Tool**: `cq01_transfer_function.cpp` (7/8 proofs pass, 1 within factor of 5)
+> **Status**: RESOLVED (structure) / OPEN (coefficient) — see audit note below
+> **Date**: May 2026; audit + scroller June 2026
+> **Tool**: `cq01_transfer_function.cpp` (re-run June 2026: **6/7 proofs pass**, exit 1; G test fails at 99.88%, near-miss ~5×)
+> **Explainer**: `cq01_scroller.html` — single-page scroller, editable inline SVG, 4 interactive falsifiers; all live numbers reproduce the engine to 6 sig figs.
+
+## Audit note (dual-label spine, Theory/05)
+The headline claim "f is universal, NOT fitted" is **half right and must be stated precisely**:
+- The **occlusion force law** `F=(π/4)P·R²R²/r²` is **class C** (SDT-first structure converging on Coulomb/Newton/nuclear) — survives.
+- The **coefficient** `P_eff` / `f_transfer` is **class E (calibrated)** — its magnitude is fixed by the hydrogen Coulomb force; the "fundamental" expansion `f=4αℏcℓ_P/(πR_p²r_e²R_CMB u_CMB)` and `P_eff/P_conv` are the *same equation written twice*, so proof CQ01-1d confirms algebra, not independent physics. `laws.hpp` already labels these `circularity_assertion: FAILS`.
+- **G** remains **class F** (shell cancellation 4π/N² lands within ~5×, logged as FAIL, exit 1).
+Honest headline: **SDT derives the geometry of the force hierarchy; the single pressure coefficient is still on loan.**
 
 ---
 
@@ -51,9 +59,9 @@ The remaining factor of ~5 is the occlusion geometry at macroscopic scale — G 
 | CQ01-1c | f from full formula | **PASS** |
 | CQ01-1d | Full expansion matches f | **PASS** |
 | CQ01-2a | Coulomb at 1Å | **PASS** |
-| CQ01-2b | G with shell cancellation | **FAIL** (within 5×, shell cancellation accounts for 10^122) |
-| CQ01-2b2 | Expanded form consistency | **PASS** |
-| CQ01-2d | Nuclear occlusion > Coulomb | **PASS** |
+| CQ02-2b | G with shell cancellation | **FAIL** (within 5×, shell cancellation accounts for 10^122) |
+| CQ02-2b2 | Expanded form consistency | **PASS** |
+| CQ02-2d | Nuclear occlusion > Coulomb | **PASS** |
 
 ## Verdict
 

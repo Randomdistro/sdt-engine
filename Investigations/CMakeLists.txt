@@ -238,6 +238,28 @@ foreach(t sdt-cq18a sdt-cq18b sdt-cq18c sdt-cq18d sdt-cq18e sdt-cq18f sdt-cq18g 
     endif()
 endforeach()
 
+# ═══ E46 Galaxy Rotation Curves (Eclipse Saturation) ═══
+set(E46_DIR ${CMAKE_CURRENT_SOURCE_DIR}/E46_Galaxy_Rotation_Curves)
+add_executable(sdt-e46 ${E46_DIR}/e46_sparc_rotation_curves.cpp)
+target_link_libraries(sdt-e46 PRIVATE sdt-engine)
+
+if(MSVC)
+    target_compile_options(sdt-e46 PRIVATE /W3)
+else()
+    target_compile_options(sdt-e46 PRIVATE -O2)
+endif()
+
+# ═══ CQ23 3D Volumetric Integration ═══
+set(CQ23_DIR ${CMAKE_CURRENT_SOURCE_DIR}/CQ23_3D_Volumetric_Integration)
+add_executable(sdt-cq23 ${CQ23_DIR}/cq23_3d_volumetric_integration.cpp)
+target_link_libraries(sdt-cq23 PRIVATE sdt-engine)
+
+if(MSVC)
+    target_compile_options(sdt-cq23 PRIVATE /W3)
+else()
+    target_compile_options(sdt-cq23 PRIVATE -O2)
+endif()
+
 # ═══ CQ20 Galactic Spation Topology ═══
 set(CQ20_DIR ${CMAKE_CURRENT_SOURCE_DIR}/CQ20_Galactic_Spation_Topology)
 
@@ -306,3 +328,29 @@ if(MSVC)
 else()
     target_compile_options(sdt-galaxy-calc PRIVATE -O2)
 endif()
+
+# ═══ CQ25 Atomicus Nuclear Grammar ═══════════════════════════════════════════
+# Exact integer coordinate transform (Z,A) → (n_d,n_t) on the nuclear chart.
+# 287-nuclide natural basis, compile-time verified by static_assert ×7.
+# Three-stage investigation: grammar table → fission snap → ASCII nuclide map.
+set(CQ25_DIR ${CMAKE_CURRENT_SOURCE_DIR}/CQ25_Atomicus_Nuclear_Grammar)
+add_executable(sdt-cq25 ${CQ25_DIR}/cq25_atomicus_grammar.cpp)
+target_link_libraries(sdt-cq25 PRIVATE sdt-engine)
+if(MSVC)
+    target_compile_options(sdt-cq25 PRIVATE /W4)
+else()
+    target_compile_options(sdt-cq25 PRIVATE -O2 -Wall)
+endif()
+
+# ═══ CQ27 Stellar Fusion and Nuclear Growth ══════════════════════════════════
+# Evaluates deu/tri fusion, solid-angle occlusion integrals, trefoil rotational
+# spin gearing, temperature-dependent EC, and electronic shell mirror maps.
+set(CQ27_DIR ${CMAKE_CURRENT_SOURCE_DIR}/CQ27_Stellar_Fusion_and_Nuclear_Growth)
+add_executable(sdt-cq27 ${CQ27_DIR}/cq27_stellar_fusion_growth.cpp)
+target_link_libraries(sdt-cq27 PRIVATE sdt-engine)
+if(MSVC)
+    target_compile_options(sdt-cq27 PRIVATE /W4)
+else()
+    target_compile_options(sdt-cq27 PRIVATE -O2 -Wall)
+endif()
+

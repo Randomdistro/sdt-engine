@@ -1,0 +1,3714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ATOMICUS Lab — Nuclear Construction Map</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background:
+      radial-gradient(ellipse at top left, rgba(30,20,80,0.55), transparent 50%),
+      radial-gradient(ellipse at bottom right, rgba(10,40,80,0.45), transparent 55%),
+      linear-gradient(180deg, #070a16, #0b0f22);
+    color: #c8d4f0;
+    font-family:'Inter', 'Segoe UI', system-ui, sans-serif;
+    overflow:hidden;
+  }
+
+  .atomicus-header {
+    position:fixed; top:0; left:0; right:0; z-index:30;
+    display:flex; align-items:center; justify-content:space-between;
+    gap:12px; padding:10px 16px;
+    background:rgba(7,10,22,0.92);
+    backdrop-filter:blur(16px);
+    border-bottom:1px solid rgba(40,60,120,0.50);
+    box-shadow:0 4px 24px rgba(0,0,0,0.50);
+  }
+  .atomicus-header__brand {
+    display:flex; align-items:center; gap:10px;
+    font-family:'Source Serif 4', 'Georgia', serif;
+    font-size:11px; color:var(--copper);
+    font-weight:700; letter-spacing:0.18em; text-transform:uppercase;
+  }
+  .atomicus-header__brand::before { content:'◈'; font-size:14px; color:var(--copper-light); }
+  .atomicus-header__title {
+    font-size:15px; font-weight:700; color:var(--ink);
+    font-family:'Source Serif 4', 'Georgia', serif;
+  }
+  .atomicus-header__meta { display:flex; align-items:center; gap:10px; color:var(--ink-muted); font-size:11px; }
+  .atomicus-header__link {
+    display:inline-flex; align-items:center; justify-content:center;
+    padding:6px 10px; border-radius:999px; background:rgba(176,116,48,0.14);
+    color:var(--ink); text-decoration:none; font-size:11px;
+    border:1px solid rgba(176,116,48,0.38);
+  }
+  .atomicus-header__link:hover { background:rgba(176,116,48,0.24); }
+
+  /* â”€â”€ LEFT COLUMN: controls + info â”€â”€ */
+  #leftCol {
+    position:fixed; top:56px; left:0; bottom:0; width:230px; z-index:10;
+    display:flex; flex-direction:column;
+    background:rgba(8,11,24,0.95);
+    border-right:1px solid rgba(30,50,100,0.55);
+    box-shadow:6px 0 24px rgba(0,0,0,0.40);
+    overflow:hidden;
+  }
+  #info {
+    padding:10px 14px 8px; font-size:12px; border-bottom:1px solid var(--paper-edge);
+    flex-shrink:0;
+  }
+  #info h3 { margin-bottom:4px; color:var(--copper); font-size:13px; font-family:'Source Serif 4', 'Georgia', serif; }
+  #info .dim { color:var(--ink-muted); font-size:11px; line-height:1.55; }
+  #controls {
+    flex:1; overflow-y:auto; padding:0 0 14px;
+    scrollbar-width:thin; scrollbar-color:#333 transparent;
+    font-size:12px;
+  }
+  #controls::-webkit-scrollbar { width:4px; }
+  #controls::-webkit-scrollbar-thumb { background:#333; border-radius:2px; }
+
+  /* â”€â”€ Toggle switches â”€â”€ */
+  .toggle-switch {
+    display:flex; align-items:center; gap:8px; cursor:pointer;
+    padding:3px 10px; user-select:none;
+  }
+  .toggle-track {
+    position:relative; width:36px; height:18px; border-radius:9px;
+    background:rgba(40,50,100,0.55); transition:background 0.2s; flex-shrink:0;
+  }
+  .toggle-track::after {
+    content:''; position:absolute; left:2px; top:2px;
+    width:14px; height:14px; border-radius:50%;
+    background:rgba(140,160,200,0.80); transition:transform 0.2s, background 0.2s;
+  }
+  input[type=checkbox]:checked + .toggle-track { background:rgba(30,160,130,0.70); }
+  input[type=checkbox]:checked + .toggle-track::after {
+    transform:translateX(18px); background:#c0fce8;
+  }
+  input[type=checkbox] { display:none; }
+  .toggle-label { font-size:11px; color:#8898bb; }
+
+  /* â”€â”€ Dropdown sections â”€â”€ */
+  .dropdown-section { border-bottom:1px solid rgba(30,45,90,0.70); }
+  .dropdown-header {
+    cursor:pointer; padding:7px 10px; font-size:11px;
+    font-weight:600; color:var(--ink-muted); text-transform:uppercase;
+    letter-spacing:0.05em; display:flex; justify-content:space-between;
+    align-items:center; user-select:none;
+  }
+  .dropdown-header:hover { color:var(--ink); background:rgba(176,116,48,0.08); }
+  .dropdown-header::after { content:'▴'; font-size:10px; }
+  .dropdown-header.open::after { content:'▾'; }
+  .dropdown-content {
+    display:none; padding:2px 0 6px;
+    flex-direction:column; gap:1px;
+  }
+  .dropdown-content.open { display:flex; }
+
+  /* â”€â”€ Morph buttons â”€â”€ */
+  .morph-btn {
+    flex:1; padding:3px 0; font-size:10px; border-radius:3px;
+    border:1px solid rgba(176,116,48,0.32); background:rgba(255,255,255,0.52); color:var(--ink-muted);
+    cursor:pointer; transition:all 0.15s;
+    font-family:'Segoe UI',sans-serif; letter-spacing:0.3px;
+  }
+  .morph-btn:hover { background:rgba(176,116,48,0.16); color:var(--ink); border-color:rgba(176,116,48,0.48); }
+  .morph-btn.active { background:rgba(176,116,48,0.28); color:var(--ink); border-color:var(--copper); font-weight:700; }
+
+  #exportBtn {
+    margin:8px 10px 0; padding:6px 14px; background:var(--copper); color:var(--cream);
+    border:none; border-radius:4px; cursor:pointer; font-size:12px; font-weight:600;
+    width:calc(100% - 20px);
+  }
+  #exportBtn:hover { background:var(--copper-light); }
+
+  /* â”€â”€ RIGHT COLUMN: element panel + PIP â”€â”€ */
+  #rightCol {
+    position:fixed; top:56px; right:0; bottom:0; width:260px; z-index:10;
+    display:flex; flex-direction:column;
+    background:rgba(255,255,255,0.68);
+    border-left:1px solid var(--paper-edge);
+    box-shadow:-6px 0 24px rgba(30,28,24,0.1);
+    overflow:hidden;
+  }
+  #panel {
+    flex:1; overflow:hidden; display:flex; flex-direction:column;
+    padding:12px 14px; border-bottom:1px solid rgba(232,224,210,0.9);
+    font-size:13px;
+  }
+  #panel .elem-header {
+    display:flex; align-items:baseline; gap:10px;
+    margin-bottom:8px; border-bottom:1px solid rgba(232,224,210,0.9); padding-bottom:8px;
+    flex-shrink:0;
+  }
+  #panel .sym { font-size:30px; font-weight:700; color:var(--copper); line-height:1; }
+  #panel .elem-name { font-size:13px; color:var(--ink-soft); }
+  #panel .elem-z { font-size:11px; color:var(--ink-muted); }
+  #isoScroll {
+    flex:1; overflow-y:auto; scroll-behavior:smooth;
+    scrollbar-width:thin; scrollbar-color:#444 transparent;
+    min-height:0;
+  }
+  #isoScroll::-webkit-scrollbar { width:4px; }
+  #isoScroll::-webkit-scrollbar-thumb { background:#444; border-radius:2px; }
+
+  /* â”€â”€ PIP: nuclear structure mini-view â”€â”€ */
+  #pip {
+    flex-shrink:0; height:200px;
+    border-top:1px solid rgba(232,224,210,0.9);
+    position:relative; cursor:pointer;
+    background:rgba(255,255,255,0.68);
+  }
+  #pip:hover { background:rgba(255,255,255,0.84); }
+  #pipCanvas { display:block; width:100%; height:100%; }
+  #pipLabel {
+    position:absolute; bottom:6px; left:0; right:0;
+    text-align:center; font-size:10px; color:var(--ink-muted); pointer-events:none;
+    font-family:'Segoe UI',sans-serif; letter-spacing:0.3px;
+  }
+  #pipHint {
+    position:absolute; top:6px; right:8px;
+    font-size:9px; color:var(--ink-muted); pointer-events:none;
+    font-family:'Segoe UI',sans-serif;
+  }
+
+  /* â”€â”€ Isotope rows â”€â”€ */
+  .iso-row {
+    padding:5px 8px; border-radius:4px; margin:1px 0;
+    font-size:12px; line-height:1.55; cursor:default;
+    transition:background 0.1s;
+  }
+  .iso-row.context { opacity:0.45; }
+  .iso-row.active {
+    background:rgba(176,116,48,0.16);
+    border-left:3px solid var(--copper);
+    opacity:1; font-weight:700;
+  }
+  .iso-row.active .iso-name { color:var(--copper); font-size:14px; }
+  .iso-row .iso-name { color:var(--ink-soft); }
+  .iso-row .iso-grammar { font-family:monospace; color:var(--ink-muted); font-size:11px; }
+  .iso-row .d { color:var(--steel); }
+  .iso-row .t { color:var(--copper); }
+  .iso-row .a { color:var(--ink); }
+  .iso-row .iso-stable { color:#2b8f6f; }
+  .iso-row .iso-unstable { color:#c76d63; }
+  .iso-row .iso-sole { color:var(--copper); }
+  canvas#c { display:block; cursor:crosshair; }
+
+  /* â”€â”€ Tooltip â”€â”€ */
+  #tooltip {
+    display:none; position:fixed; z-index:20; pointer-events:none;
+    background:rgba(255,255,255,0.94); color:var(--ink); padding:10px 14px;
+    border-radius:6px; font-size:12px; border:1px solid rgba(176,116,48,0.24);
+    box-shadow:0 12px 24px rgba(30,28,24,0.16);
+    max-width:340px; line-height:1.6;
+  }
+
+  /* â”€â”€ Datasheet panel â”€â”€ */
+  #datasheet {
+    display:none; position:fixed; top:56px; right:0; width:380px; height:calc(100vh - 56px);
+    background:rgba(255,255,255,0.9); border-left:1px solid var(--paper-edge);
+    overflow-y:auto; z-index:1000; padding:20px;
+    box-sizing:border-box; font-family:'Segoe UI',sans-serif; color:var(--ink-soft);
+  }
+  #datasheet table { width:100%; border-collapse:collapse; font-size:12px; }
+  #datasheet td { padding:4px 0; border-bottom:1px solid #1a2030; }
+  #datasheet a { color:#4aaddd; text-decoration:none; }
+  #datasheet a:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+
+<div class="atomicus-header" aria-label="Atomicus Lab header">
+  <div class="atomicus-header__brand">Spatial Displacement Theory</div>
+  <div class="atomicus-header__title">ATOMICUS Lab</div>
+  <div class="atomicus-header__meta">
+    <span>Interactive nuclear grammar map</span>
+    <a class="atomicus-header__link" href="index.html#lab">← Back to SDT · Atomicus Lab</a>
+  </div>
+</div>
+
+<!-- LEFT COLUMN -->
+<div id="leftCol">
+  <div id="info">
+    <h3>ATOMICUS â€” Nuclear Map</h3>
+    <div class="dim">
+      X = deuteron excess (n<sub>d</sub>&nbsp;&minus;&nbsp;n<sub>t</sub>)<br>
+      Y = total subunits (n<sub>d</sub>&nbsp;+&nbsp;n<sub>t</sub>)<br>
+      Golden line: n<sub>d</sub>&nbsp;=&nbsp;n<sub>t</sub>
+    </div>
+  </div>
+  <div id="controls">
+
+    <!-- SECTION 1: MORPH & SPINE -->
+    <div class="dropdown-section">
+      <div class="dropdown-header open" id="hdr-morph">Morph &amp; Spine</div>
+      <div class="dropdown-content open" id="sec-morph">
+        <div style="padding:6px 10px 2px;">
+          <div style="display:flex;gap:4px;margin-bottom:5px;">
+            <button class="morph-btn" id="morphBtnMono" data-val="-1000" title="Shift each row so the monoisotope spine is vertical">Mono</button>
+            <button class="morph-btn active" id="morphBtnActual" data-val="0" title="Raw positions â€” golden line is the natural vertical axis">Actual</button>
+            <button class="morph-btn" id="morphBtnEnergy" data-val="1000" title="Shift each row so the BE/A ridge is vertical">Energy</button>
+          </div>
+          <div style="position:relative;margin-bottom:4px;">
+            <span style="font-size:9px;color:#555;display:block;text-align:center;margin-bottom:2px;">â† Mono Â· Actual Â· Energy â†’</span>
+            <div style="position:relative;">
+              <input type="range" id="morphSlider" min="-1000" max="1000" value="0" style="width:100%; cursor:pointer; accent-color:#d4a05c;">
+              <div style="position:absolute;left:50%;top:-2px;width:2px;height:calc(100% + 4px);background:#d4a05c;opacity:0.4;pointer-events:none;transform:translateX(-50%);"></div>
+            </div>
+          </div>
+        </div>
+        <label class="toggle-switch"><input type="checkbox" id="showHighestGS" checked><span class="toggle-track"></span><span class="toggle-label">Highest GS chain</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="showLowestGS" checked><span class="toggle-track"></span><span class="toggle-label">Lowest GS chain</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="showEnergySpine"><span class="toggle-track"></span><span class="toggle-label">Energy spine overlay</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="showMonoSpine"><span class="toggle-track"></span><span class="toggle-label">Mono spine overlay</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="showDeltaUE"><span class="toggle-track"></span><span class="toggle-label">Î”u_E sidebands</span></label>
+        <div style="padding:2px 10px 4px;">
+          <button id="printDiagBtn" style="font-size:10px;padding:3px 8px;background:#222;color:#888;border:1px solid #333;border-radius:3px;cursor:pointer;"
+            title="Print per-row energy spine diagnostic table to browser console (F12)">Print Î”u_E table</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 2: ISOTOPE RANGES -->
+    <div class="dropdown-section">
+      <div class="dropdown-header open" id="hdr-ranges">Isotope Ranges</div>
+      <div class="dropdown-content open" id="sec-ranges">
+        <label class="toggle-switch" style="border-bottom:1px solid rgba(255,255,255,0.07);padding-bottom:6px;margin-bottom:4px;">
+          <input type="checkbox" id="showUnstableAll">
+          <span class="toggle-track"></span>
+          <span class="toggle-label" style="color:#d4a850;font-weight:600;">&#9762; All Unstable</span>
+        </label>
+        <label class="toggle-switch"><input type="checkbox" id="showMissing"><span class="toggle-track"></span><span class="toggle-label">1 Â· Missing Î±-structures</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="showLongLived"><span class="toggle-track"></span><span class="toggle-label">1a Â· Missing &gt;10ky</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="showMid"><span class="toggle-track"></span><span class="toggle-label">1b Â· Missing 1kâ€“10ky</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="showShort"><span class="toggle-track"></span><span class="toggle-label">1c Â· Missing 100â€“1ky</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="showDecade"><span class="toggle-track"></span><span class="toggle-label">1d Â· Missing 10â€“100y</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="showTier4"><span class="toggle-track"></span><span class="toggle-label">1e Â· Short 1â€“10y</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="showTier5"><span class="toggle-track"></span><span class="toggle-label">1f Â· Short 36dâ€“1y</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="showTier6"><span class="toggle-track"></span><span class="toggle-label">1g Â· Short 3.6dâ€“36d</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="showTier7"><span class="toggle-track"></span><span class="toggle-label">1h Â· Short 8.6hâ€“3.6d</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="showTier8"><span class="toggle-track"></span><span class="toggle-label">1i Â· Short 52minâ€“8.6h</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="showTier9"><span class="toggle-track"></span><span class="toggle-label">1j Â· Short &lt;52 min</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="showOddEven"><span class="toggle-track"></span><span class="toggle-label">Odd-A / Even-A</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="showSoleSpread"><span class="toggle-track"></span><span class="toggle-label">Sole vs Spread</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="showSoleChain"><span class="toggle-track"></span><span class="toggle-label">Sole element chain</span></label>
+      </div>
+    </div>
+
+    <!-- SECTION 3: STRUCTURE -->
+    <div class="dropdown-section">
+      <div class="dropdown-header" id="hdr-struct">Structure</div>
+      <div class="dropdown-content" id="sec-struct">
+        <label class="toggle-switch"><input type="checkbox" id="showGoldenLine" checked><span class="toggle-track"></span><span class="toggle-label">nâ‚™=nâ‚œ golden line</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="showShells"><span class="toggle-track"></span><span class="toggle-label">Shell closures (magic Z)</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="showUnstPos" checked><span class="toggle-track"></span><span class="toggle-label">Unstable positions</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="showMagnetic"><span class="toggle-track"></span><span class="toggle-label">Magnetic overlay</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="showFamilies"><span class="toggle-track"></span><span class="toggle-label">Triton families</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="showHe3"><span class="toggle-track"></span><span class="toggle-label">2 Â· He-3 grammar</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="showHe3Missing"><span class="toggle-track"></span><span class="toggle-label">3a Â· Missing He-3</span></label>
+      </div>
+    </div>
+
+    <!-- SECTION 4: DECAY -->
+    <div class="dropdown-section">
+      <div class="dropdown-header" id="hdr-decay">Decay</div>
+      <div class="dropdown-content" id="sec-decay">
+        <label class="toggle-switch"><input type="checkbox" id="showDecayVec"><span class="toggle-track"></span><span class="toggle-label">Decay vectors</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="showDeutChain"><span class="toggle-track"></span><span class="toggle-label">Deuteron chain (nâ‚œ=0)</span></label>
+      </div>
+    </div>
+
+    <!-- SECTION 5: LABELS -->
+    <div class="dropdown-section">
+      <div class="dropdown-header" id="hdr-labels">Labels &amp; Display</div>
+      <div class="dropdown-content" id="sec-labels">
+        <label class="toggle-switch"><input type="checkbox" id="showLabels" checked><span class="toggle-track"></span><span class="toggle-label">Element labels</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="showConnections" checked><span class="toggle-track"></span><span class="toggle-label">Same-element links</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="showUnpaired"><span class="toggle-track"></span><span class="toggle-label">Unpaired electrons</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="showBE"><span class="toggle-track"></span><span class="toggle-label">Binding energy size</span></label>
+      </div>
+    </div>
+
+    <button id="exportBtn">Export PNG</button>
+  </div>
+</div>
+
+<!-- RIGHT COLUMN: element panel + PIP -->
+<div id="rightCol">
+  <div id="panel">
+    <div class="elem-header">
+      <span class="sym" id="pSym">Fe</span>
+      <span class="elem-name" id="pElemName">Iron</span>
+      <span class="elem-z" id="pElemZ">Z=26 Â· 4 stable isotopes</span>
+    </div>
+    <div id="isoScroll"></div>
+  </div>
+  <!-- Nuclear structure PIP -->
+  <div id="pip" title="Click to open Nuclear Stick Model">
+    <canvas id="pipCanvas"></canvas>
+    <div id="pipLabel">Î±-core structure</div>
+    <div id="pipHint">â†— open stick model</div>
+  </div>
+</div>
+
+<!-- DATASHEET PANEL (Change 6) -->
+<div id="datasheet">
+  <button id="datasheetClose" style="position:absolute;top:12px;right:12px;background:none;border:none;color:#667;font-size:18px;cursor:pointer;">âœ•</button>
+  <div id="datasheetContent"></div>
+</div>
+
+<div id="tooltip"></div>
+
+<canvas id="c"></canvas>
+
+<script>
+// === js/data.js ===
+/* â”€â”€ All 287 naturally occurring isotopes â”€â”€
+   [Z, A, sym, stability, BE/nucleon, spin, abundance%]
+   Extracted from sdt-engine/ATOMICUS/isotopes/ */
+const RAW = [
+[1,1,"H","stable",0,"",99.9885],
+[1,2,"H","stable",0,"",0.0115],
+[2,3,"He","stable",2.573,"1/2+",0.000134],
+[2,4,"He","stable",7.074,"0+",99.999866],
+[3,6,"Li","stable",5.332,"1+",7.59],
+[3,7,"Li","stable",5.606,"3/2-",92.41],
+[4,9,"Be","stable",6.463,"3/2-",100],
+[5,10,"B","stable",6.475,"3+",19.9],
+[5,11,"B","stable",6.928,"3/2-",80.1],
+[6,12,"C","stable",7.680,"0+",98.93],
+[6,13,"C","stable",7.470,"1/2-",1.07],
+[7,14,"N","stable",7.476,"1+",99.632],
+[7,15,"N","stable",7.699,"1/2-",0.368],
+[8,16,"O","stable",7.976,"0+",99.757],
+[8,17,"O","stable",7.751,"5/2+",0.038],
+[8,18,"O","stable",7.767,"0+",0.205],
+[9,19,"F","stable",7.779,"1/2+",100],
+[10,20,"Ne","stable",8.032,"0+",90.48],
+[10,21,"Ne","stable",7.972,"3/2+",0.27],
+[10,22,"Ne","stable",8.080,"0+",9.25],
+[11,23,"Na","stable",8.112,"3/2+",100],
+[12,24,"Mg","stable",8.261,"0+",78.99],
+[12,25,"Mg","stable",8.223,"5/2+",10.0],
+[12,26,"Mg","stable",8.334,"0+",11.01],
+[13,27,"Al","stable",8.332,"5/2+",100],
+[14,28,"Si","stable",8.448,"0+",92.223],
+[14,29,"Si","stable",8.449,"1/2+",4.685],
+[14,30,"Si","stable",8.521,"0+",3.092],
+[15,31,"P","stable",8.481,"1/2+",100],
+[16,32,"S","stable",8.493,"0+",94.99],
+[16,33,"S","stable",8.498,"3/2+",0.75],
+[16,34,"S","stable",8.584,"0+",4.25],
+[16,36,"S","stable",8.575,"0+",0.01],
+[17,35,"Cl","stable",8.520,"3/2+",75.76],
+[17,37,"Cl","stable",8.570,"3/2+",24.24],
+[18,36,"Ar","stable",8.520,"0+",0.3336],
+[18,38,"Ar","stable",8.614,"0+",0.0629],
+[18,40,"Ar","stable",8.595,"0+",99.6035],
+[19,39,"K","stable",8.557,"3/2+",93.2581],
+[19,40,"K","unstable",8.538,"4-",0.0117],
+[19,41,"K","stable",8.576,"3/2+",6.7302],
+[20,40,"Ca","stable",8.551,"0+",96.941],
+[20,42,"Ca","stable",8.617,"0+",0.647],
+[20,43,"Ca","stable",8.601,"7/2-",0.135],
+[20,44,"Ca","stable",8.658,"0+",2.086],
+[20,46,"Ca","stable",8.669,"0+",0.004],
+[20,48,"Ca","unstable",8.667,"0+",0.187],
+[21,45,"Sc","stable",8.619,"7/2-",100],
+[22,46,"Ti","stable",8.656,"0+",8.25],
+[22,47,"Ti","stable",8.661,"5/2-",7.44],
+[22,48,"Ti","stable",8.723,"0+",73.72],
+[22,49,"Ti","stable",8.711,"7/2-",5.41],
+[22,50,"Ti","stable",8.756,"0+",5.18],
+[23,50,"V","unstable",8.696,"6+",0.25],
+[23,51,"V","stable",8.742,"7/2-",99.75],
+[24,50,"Cr","stable",8.701,"0+",4.345],
+[24,52,"Cr","stable",8.776,"0+",83.789],
+[24,53,"Cr","stable",8.760,"3/2-",9.501],
+[24,54,"Cr","stable",8.778,"0+",2.365],
+[25,55,"Mn","stable",8.765,"5/2-",100],
+[26,54,"Fe","stable",8.736,"0+",5.845],
+[26,56,"Fe","stable",8.790,"0+",91.754],
+[26,57,"Fe","stable",8.770,"1/2-",2.119],
+[26,58,"Fe","stable",8.792,"0+",0.282],
+[27,59,"Co","stable",8.768,"7/2-",100],
+[28,58,"Ni","stable",8.732,"0+",68.077],
+[28,60,"Ni","stable",8.781,"0+",26.223],
+[28,61,"Ni","stable",8.765,"3/2-",1.14],
+[28,62,"Ni","stable",8.795,"0+",3.634],
+[28,64,"Ni","stable",8.777,"0+",0.926],
+[29,63,"Cu","stable",8.752,"3/2-",69.15],
+[29,65,"Cu","stable",8.757,"3/2-",30.85],
+[30,64,"Zn","stable",8.736,"0+",49.17],
+[30,66,"Zn","stable",8.760,"0+",27.73],
+[30,67,"Zn","stable",8.734,"5/2-",4.04],
+[30,68,"Zn","stable",8.757,"0+",18.45],
+[30,70,"Zn","stable",8.730,"0+",0.61],
+[31,69,"Ga","stable",8.724,"3/2-",60.108],
+[31,71,"Ga","stable",8.717,"3/2-",39.892],
+[32,70,"Ge","stable",8.713,"0+",20.57],
+[32,72,"Ge","stable",8.732,"0+",27.45],
+[32,73,"Ge","stable",8.705,"9/2+",7.75],
+[32,74,"Ge","stable",8.726,"0+",36.50],
+[32,76,"Ge","unstable",8.707,"0+",7.73],
+[33,75,"As","stable",8.701,"3/2-",100],
+[34,74,"Se","stable",8.683,"0+",0.89],
+[34,76,"Se","stable",8.711,"0+",9.37],
+[34,77,"Se","stable",8.684,"1/2-",7.63],
+[34,78,"Se","stable",8.718,"0+",23.77],
+[34,80,"Se","stable",8.711,"0+",49.61],
+[34,82,"Se","unstable",8.689,"0+",8.73],
+[35,79,"Br","stable",8.695,"3/2-",50.69],
+[35,81,"Br","stable",8.696,"3/2-",49.31],
+[36,78,"Kr","stable",8.665,"0+",0.355],
+[36,80,"Kr","stable",8.698,"0+",2.286],
+[36,82,"Kr","stable",8.712,"0+",11.593],
+[36,83,"Kr","stable",8.696,"9/2+",11.500],
+[36,84,"Kr","stable",8.718,"0+",56.987],
+[36,86,"Kr","stable",8.712,"0+",17.279],
+[37,85,"Rb","stable",8.697,"5/2-",72.17],
+[37,87,"Rb","unstable",8.711,"3/2-",27.83],
+[38,84,"Sr","stable",8.672,"0+",0.56],
+[38,86,"Sr","stable",8.708,"0+",9.86],
+[38,87,"Sr","stable",8.695,"9/2+",7.0],
+[38,88,"Sr","stable",8.733,"0+",82.58],
+[39,89,"Y","stable",8.714,"1/2-",100],
+[40,90,"Zr","stable",8.710,"0+",51.45],
+[40,91,"Zr","stable",8.694,"5/2+",11.22],
+[40,92,"Zr","stable",8.697,"0+",17.15],
+[40,94,"Zr","stable",8.667,"0+",17.38],
+[40,96,"Zr","unstable",8.635,"0+",2.80],
+[41,93,"Nb","stable",8.664,"9/2+",100],
+[42,92,"Mo","stable",8.658,"0+",14.53],
+[42,94,"Mo","stable",8.669,"0+",9.15],
+[42,95,"Mo","stable",8.649,"5/2+",15.84],
+[42,96,"Mo","stable",8.654,"0+",16.67],
+[42,97,"Mo","stable",8.643,"5/2+",9.60],
+[42,98,"Mo","stable",8.644,"0+",24.39],
+[42,100,"Mo","unstable",8.615,"0+",9.82],
+[44,96,"Ru","stable",8.630,"0+",5.54],
+[44,98,"Ru","stable",8.615,"0+",1.87],
+[44,99,"Ru","stable",8.610,"5/2+",12.76],
+[44,100,"Ru","stable",8.621,"0+",12.60],
+[44,101,"Ru","stable",8.609,"5/2+",17.06],
+[44,102,"Ru","stable",8.608,"0+",31.55],
+[44,104,"Ru","stable",8.587,"0+",18.62],
+[45,103,"Rh","stable",8.584,"1/2-",100],
+[46,102,"Pd","stable",8.571,"0+",1.02],
+[46,104,"Pd","stable",8.570,"0+",11.14],
+[46,105,"Pd","stable",8.556,"5/2+",22.33],
+[46,106,"Pd","stable",8.560,"0+",27.33],
+[46,108,"Pd","stable",8.541,"0+",26.46],
+[46,110,"Pd","stable",8.524,"0+",11.72],
+[47,107,"Ag","stable",8.554,"1/2-",51.839],
+[47,109,"Ag","stable",8.548,"1/2-",48.161],
+[48,106,"Cd","stable",8.540,"0+",1.25],
+[48,108,"Cd","stable",8.543,"0+",0.89],
+[48,110,"Cd","stable",8.548,"0+",12.49],
+[48,111,"Cd","stable",8.537,"1/2+",12.80],
+[48,112,"Cd","stable",8.545,"0+",24.13],
+[48,113,"Cd","unstable",8.527,"1/2+",12.22],
+[48,114,"Cd","stable",8.525,"0+",28.73],
+[48,116,"Cd","unstable",8.505,"0+",7.49],
+[49,113,"In","stable",8.523,"9/2+",4.281],
+[49,115,"In","unstable",8.516,"9/2+",95.719],
+[50,112,"Sn","stable",8.514,"0+",0.97],
+[50,114,"Sn","stable",8.523,"0+",0.66],
+[50,115,"Sn","stable",8.514,"1/2+",0.34],
+[50,116,"Sn","stable",8.523,"0+",14.54],
+[50,117,"Sn","stable",8.517,"1/2+",7.68],
+[50,118,"Sn","stable",8.517,"0+",24.22],
+[50,119,"Sn","stable",8.500,"1/2+",8.59],
+[50,120,"Sn","stable",8.505,"0+",32.58],
+[50,122,"Sn","stable",8.483,"0+",4.63],
+[50,124,"Sn","stable",8.467,"0+",5.79],
+[51,121,"Sb","stable",8.482,"5/2+",57.21],
+[51,123,"Sb","stable",8.476,"7/2+",42.79],
+[52,120,"Te","stable",8.479,"0+",0.09],
+[52,122,"Te","stable",8.482,"0+",2.55],
+[52,123,"Te","stable",8.472,"1/2+",0.89],
+[52,124,"Te","stable",8.474,"0+",4.74],
+[52,125,"Te","stable",8.460,"1/2+",7.07],
+[52,126,"Te","stable",8.461,"0+",18.84],
+[52,128,"Te","unstable",8.443,"0+",31.74],
+[52,130,"Te","unstable",8.420,"0+",34.08],
+[53,127,"I","stable",8.445,"5/2+",100],
+[54,124,"Xe","unstable",8.443,"0+",0.0952],
+[54,126,"Xe","stable",8.447,"0+",0.0890],
+[54,128,"Xe","stable",8.443,"0+",1.9102],
+[54,129,"Xe","stable",8.431,"1/2+",26.4006],
+[54,130,"Xe","stable",8.438,"0+",4.0710],
+[54,131,"Xe","stable",8.424,"3/2+",21.2324],
+[54,132,"Xe","stable",8.428,"0+",26.9086],
+[54,134,"Xe","stable",8.410,"0+",10.4357],
+[54,136,"Xe","unstable",8.392,"0+",8.8573],
+[55,133,"Cs","stable",8.410,"7/2+",100],
+[56,130,"Ba","stable",8.399,"0+",0.106],
+[56,132,"Ba","stable",8.399,"0+",0.101],
+[56,134,"Ba","stable",8.400,"0+",2.417],
+[56,135,"Ba","stable",8.396,"3/2+",6.592],
+[56,136,"Ba","stable",8.403,"0+",7.854],
+[56,137,"Ba","stable",8.391,"3/2+",11.232],
+[56,138,"Ba","stable",8.394,"0+",71.698],
+[57,138,"La","unstable",8.377,"5+",0.0888],
+[57,139,"La","stable",8.378,"7/2+",99.9119],
+[58,136,"Ce","stable",8.365,"0+",0.185],
+[58,138,"Ce","stable",8.377,"0+",0.251],
+[58,140,"Ce","stable",8.376,"0+",88.450],
+[58,142,"Ce","unstable",8.357,"0+",11.114],
+[59,141,"Pr","stable",8.354,"5/2+",100],
+[60,142,"Nd","stable",8.346,"0+",27.152],
+[60,143,"Nd","stable",8.333,"7/2-",12.174],
+[60,144,"Nd","unstable",8.328,"0+",23.798],
+[60,145,"Nd","stable",8.307,"7/2-",8.293],
+[60,146,"Nd","stable",8.311,"0+",17.189],
+[60,148,"Nd","stable",8.285,"0+",5.756],
+[60,150,"Nd","unstable",8.262,"0+",5.638],
+[62,144,"Sm","stable",8.304,"0+",3.07],
+[62,147,"Sm","unstable",8.278,"7/2-",14.99],
+[62,148,"Sm","unstable",8.277,"0+",11.24],
+[62,149,"Sm","stable",8.259,"7/2-",13.82],
+[62,150,"Sm","stable",8.262,"0+",7.38],
+[62,152,"Sm","stable",8.244,"0+",26.75],
+[62,154,"Sm","stable",8.227,"0+",22.75],
+[63,151,"Eu","stable",8.228,"5/2+",47.81],
+[63,153,"Eu","stable",8.218,"5/2+",52.19],
+[64,152,"Gd","unstable",8.225,"0+",0.20],
+[64,154,"Gd","stable",8.212,"0+",2.18],
+[64,155,"Gd","stable",8.195,"3/2-",14.80],
+[64,156,"Gd","stable",8.199,"0+",20.47],
+[64,157,"Gd","stable",8.184,"3/2-",15.65],
+[64,158,"Gd","stable",8.185,"0+",24.84],
+[64,160,"Gd","stable",8.167,"0+",21.86],
+[65,159,"Tb","stable",8.167,"3/2+",100],
+[66,156,"Dy","stable",8.165,"0+",0.056],
+[66,158,"Dy","stable",8.161,"0+",0.095],
+[66,160,"Dy","stable",8.155,"0+",2.329],
+[66,161,"Dy","stable",8.140,"5/2+",18.889],
+[66,162,"Dy","stable",8.140,"0+",25.475],
+[66,163,"Dy","stable",8.126,"5/2-",24.896],
+[66,164,"Dy","stable",8.123,"0+",28.260],
+[67,165,"Ho","stable",8.108,"7/2-",100],
+[68,162,"Er","stable",8.112,"0+",0.139],
+[68,164,"Er","stable",8.108,"0+",1.601],
+[68,166,"Er","stable",8.098,"0+",33.503],
+[68,167,"Er","stable",8.082,"7/2+",22.869],
+[68,168,"Er","stable",8.079,"0+",26.978],
+[68,170,"Er","stable",8.059,"0+",14.910],
+[69,169,"Tm","stable",8.062,"1/2+",100],
+[70,168,"Yb","stable",8.060,"0+",0.123],
+[70,170,"Yb","stable",8.049,"0+",2.982],
+[70,171,"Yb","stable",8.038,"1/2-",14.09],
+[70,172,"Yb","stable",8.038,"0+",21.68],
+[70,173,"Yb","stable",8.024,"5/2-",16.103],
+[70,174,"Yb","stable",8.022,"0+",32.026],
+[70,176,"Yb","stable",8.005,"0+",12.996],
+[71,175,"Lu","stable",8.007,"7/2+",97.401],
+[71,176,"Lu","unstable",8.000,"7-",2.599],
+[72,174,"Hf","unstable",7.995,"0+",0.16],
+[72,176,"Hf","stable",7.987,"0+",5.26],
+[72,177,"Hf","stable",7.974,"7/2-",18.60],
+[72,178,"Hf","stable",7.974,"0+",27.28],
+[72,179,"Hf","stable",7.960,"9/2+",13.62],
+[72,180,"Hf","stable",7.957,"0+",35.08],
+[73,180,"Ta","unstable",7.946,"1+",0.0120],
+[73,181,"Ta","stable",7.943,"7/2+",99.9880],
+[74,180,"W","unstable",7.942,"0+",0.12],
+[74,182,"W","stable",7.936,"0+",26.50],
+[74,183,"W","stable",7.925,"1/2-",14.31],
+[74,184,"W","stable",7.921,"0+",30.64],
+[74,186,"W","stable",7.907,"0+",28.43],
+[75,185,"Re","stable",7.914,"5/2+",37.40],
+[75,187,"Re","unstable",7.901,"5/2+",62.60],
+[76,184,"Os","stable",7.906,"0+",0.02],
+[76,186,"Os","unstable",7.899,"0+",1.59],
+[76,187,"Os","stable",7.886,"1/2-",1.96],
+[76,188,"Os","stable",7.889,"0+",13.24],
+[76,189,"Os","stable",7.878,"3/2-",16.15],
+[76,190,"Os","stable",7.875,"0+",26.26],
+[76,192,"Os","stable",7.861,"0+",40.78],
+[77,191,"Ir","stable",7.861,"3/2+",37.3],
+[77,193,"Ir","stable",7.851,"3/2+",62.7],
+[78,190,"Pt","unstable",7.858,"0+",0.012],
+[78,192,"Pt","stable",7.849,"0+",0.782],
+[78,194,"Pt","stable",7.840,"0+",32.864],
+[78,195,"Pt","stable",7.829,"1/2-",33.775],
+[78,196,"Pt","stable",7.827,"0+",25.211],
+[78,198,"Pt","stable",7.807,"0+",7.356],
+[79,197,"Au","stable",7.816,"3/2+",100],
+[80,196,"Hg","stable",7.814,"0+",0.15],
+[80,198,"Hg","stable",7.800,"0+",9.97],
+[80,199,"Hg","stable",7.792,"1/2-",16.87],
+[80,200,"Hg","stable",7.789,"0+",23.10],
+[80,201,"Hg","stable",7.778,"3/2-",13.18],
+[80,202,"Hg","stable",7.774,"0+",29.86],
+[80,204,"Hg","stable",7.760,"0+",6.87],
+[81,203,"Tl","stable",7.770,"1/2+",29.52],
+[81,205,"Tl","stable",7.756,"1/2+",70.48],
+[82,204,"Pb","stable",7.750,"0+",1.4],
+[82,206,"Pb","stable",7.739,"0+",24.1],
+[82,207,"Pb","stable",7.730,"1/2-",22.1],
+[82,208,"Pb","stable",7.867,"0+",52.4],
+[83,209,"Bi","unstable",7.848,"9/2-",100],
+// Z=84-89
+[84,209,"Po","unstable",7.835,"1/2-",0],[84,210,"Po","unstable",7.834,"0+",0],
+[85,210,"At","unstable",7.820,"5+",0],[85,211,"At","unstable",7.815,"9/2-",0],
+[86,211,"Rn","unstable",7.810,"1/2-",0],[86,220,"Rn","unstable",7.780,"0+",0],[86,222,"Rn","unstable",7.764,"0+",0],
+[87,223,"Fr","unstable",7.745,"3/2-",0],
+[88,224,"Ra","unstable",7.737,"0+",0],[88,226,"Ra","unstable",7.722,"0+",0],[88,228,"Ra","unstable",7.703,"0+",0],
+[89,225,"Ac","unstable",7.720,"3/2-",0],[89,227,"Ac","unstable",7.701,"3/2-",0],
+// Z=90-92
+[90,228,"Th","unstable",7.700,"0+",0],[90,230,"Th","unstable",7.631,"0+",0],[90,232,"Th","unstable",7.615,"0+",100],
+[91,231,"Pa","unstable",7.608,"3/2-",100],
+[92,233,"U","unstable",7.604,"5/2+",0],[92,234,"U","unstable",7.601,"0+",0.0054],[92,235,"U","unstable",7.591,"7/2-",0.7204],[92,238,"U","unstable",7.570,"0+",99.2742],
+// Z=93-103: Transuranics
+[93,237,"Np","unstable",7.555,"5/2+",0],
+[94,238,"Pu","unstable",7.560,"0+",0],[94,239,"Pu","unstable",7.560,"1/2+",0],[94,240,"Pu","unstable",7.556,"0+",0],[94,242,"Pu","unstable",7.545,"0+",0],[94,244,"Pu","unstable",7.533,"0+",0],
+[95,241,"Am","unstable",7.543,"5/2-",0],[95,243,"Am","unstable",7.531,"5/2-",0],
+[96,244,"Cm","unstable",7.527,"0+",0],[96,247,"Cm","unstable",7.510,"9/2-",0],[96,248,"Cm","unstable",7.504,"0+",0],
+[97,247,"Bk","unstable",7.508,"3/2-",0],[97,249,"Bk","unstable",7.496,"7/2+",0],
+[98,249,"Cf","unstable",7.494,"9/2-",0],[98,251,"Cf","unstable",7.481,"1/2+",0],[98,252,"Cf","unstable",7.475,"0+",0],
+[99,252,"Es","unstable",7.473,"5-",0],[99,254,"Es","unstable",7.460,"7+",0],
+[100,257,"Fm","unstable",7.440,"9/2+",0],
+[101,258,"Md","unstable",7.430,"8-",0],
+[102,259,"No","unstable",7.424,"9/2+",0],
+[103,262,"Lr","unstable",7.408,"0-",0],
+// Z=104-112: Transactinides
+[104,267,"Rf","unstable",7.380,"0+",0],
+[105,268,"Db","unstable",7.370,"0+",0],
+[106,271,"Sg","unstable",7.355,"0+",0],
+[107,272,"Bh","unstable",7.347,"0+",0],
+[108,277,"Hs","unstable",7.328,"0+",0],
+[109,278,"Mt","unstable",7.320,"0+",0],
+[110,281,"Ds","unstable",7.305,"0+",0],
+[111,282,"Rg","unstable",7.297,"0+",0],
+[112,285,"Cn","unstable",7.282,"0+",0],
+// Z=113-118: Superheavy
+[113,286,"Nh","unstable",7.274,"0+",0],
+[114,289,"Fl","unstable",7.260,"0+",0],
+[115,290,"Mc","unstable",7.252,"0+",0],
+[116,293,"Lv","unstable",7.238,"0+",0],
+[117,294,"Ts","unstable",7.230,"0+",0],
+[118,294,"Og","unstable",7.225,"0+",0]
+];
+
+/* â”€â”€ Unpaired electron data by Z â”€â”€ */
+const UNPAIRED = {3:1,4:0,5:1,6:2,7:3,8:2,9:1,10:0,11:1,12:0,13:1,14:2,15:3,16:2,17:1,18:0,19:1,20:0,21:1,22:2,23:3,24:6,25:5,26:4,27:3,28:2,29:1,30:0,31:1,32:2,33:3,34:2,35:1,36:0,37:1,38:0,39:1,40:2,41:4,42:5,44:4,45:3,46:0,47:1,48:0,49:1,50:2,51:3,52:2,53:1,54:0,55:1,56:0,57:1,58:2,59:3,60:4,62:6,63:7,64:8,65:5,66:4,67:3,68:2,69:1,70:0,71:1,72:2,73:3,74:4,75:5,76:4,77:3,78:0,79:1,80:0,81:1,82:2,83:3,84:2,85:1,86:0,87:1,88:0,89:1,90:2,91:3,92:2,93:3,94:4,95:5,96:6,97:7,98:8,99:9,100:10,101:11,102:0,103:1,104:2,105:3,106:4,107:5,108:4,109:3,110:0,111:1,112:0,113:1,114:2,115:3,116:2,117:1,118:0};
+
+/* â”€â”€ Compute grammar for each isotope â”€â”€ */
+const ISO = RAW.map(([Z,A,sym,stab,be,spin,abd]) => {
+  const isStable = stab.toLowerCase().startsWith("stable");
+  if (Z < 2) {
+    // H-1: nd=0, nt=-1  — alpha-invalid (bare proton) but real coords preserved
+    // H-2: nd=-1, nt=0  — excluded by filter below
+    const nt_h = A - 2*Z;
+    const nd_h = 3*Z - A - 2;
+    return { Z, A, sym, stable:isStable, be:be||0, spin, abd, nd:nd_h, nt:nt_h, valid:false,
+             tf:0, total:0, oddA:A%2===1, unpaired:-1, isSole:true };
+  }
+  const nt = A - 2*Z;
+  const nd = 3*Z - A - 2;
+  const valid = nd >= 0 && nt >= 0;
+  const total = nd + nt;
+  const tf = valid ? nt / Math.max(total,1) : 0;
+  const oddA = A % 2 === 1;
+  const unpaired = UNPAIRED[Z] !== undefined ? UNPAIRED[Z] : -1;
+  return { Z, A, sym, stable:isStable, be:be||0, spin, abd, nd, nt, valid, tf, total, oddA, unpaired };
+}).filter(e => e.valid || (e.Z === 1 && e.A === 1)); // keep H-1 as pre-alpha anchor
+
+/* â”€â”€ Classify elements: sole (mono-isotopic) vs spread (poly-isotopic) â”€â”€ */
+const stableCountByZ = {};
+ISO.forEach(iso => {
+  if (iso.stable) stableCountByZ[iso.Z] = (stableCountByZ[iso.Z] || 0) + 1;
+});
+ISO.forEach(iso => {
+  iso.isSole = (stableCountByZ[iso.Z] || 0) === 1;
+  iso.spreadCount = stableCountByZ[iso.Z] || 0;
+});
+
+/* Max abundance per element â€” for relative-abundance ring scaling */
+const maxAbdByZ = {};
+ISO.forEach(iso => {
+  if (iso.abd > 0)
+    maxAbdByZ[iso.Z] = Math.max(maxAbdByZ[iso.Z] || 0, iso.abd);
+});
+// === js/derived.js ===
+/* â”€â”€ Derived constants from ISO â”€â”€ */
+
+/* Sole elements in Z order (for chain drawing) */
+const SOLE_Z = [...new Set(ISO.filter(e => e.isSole && e.stable).map(e => e.Z))].sort((a,b) => a-b);
+
+/* Magic numbers â€” proton shell closures */
+const MAGIC_Z = [2, 8, 20, 28, 50, 82];
+const MAGIC_N = [2, 8, 20, 28, 50, 82, 126];
+
+/* Elements that don't exist naturally (gaps) */
+const GAP_Z = new Set([43, 61, 84, 85, 86, 87, 88, 89]); // Tc, Pm, Po-Ac
+
+/* â”€â”€ Build lookup set for occupied He-4 positions â”€â”€ */
+const occupiedAlpha = new Set();
+ISO.forEach(iso => occupiedAlpha.add(iso.nd + "," + iso.nt));
+
+/* â”€â”€ Generate MISSING He-4 structures â”€â”€ */
+const maxNd = Math.max(...ISO.map(e => e.nd));
+const maxNt = Math.max(...ISO.map(e => e.nt));
+const MISSING_ALPHA = [];
+for (let nd = 0; nd <= maxNd; nd++) {
+  for (let nt = 0; nt <= maxNt; nt++) {
+    if (occupiedAlpha.has(nd + "," + nt)) continue;
+    const Z = 2 + nd + nt;
+    const A = 4 + 2*nd + 3*nt;
+    const N = A - Z;
+    if (Z < 2 || Z > 92) continue;
+    const oddZ = Z % 2 === 1;
+    const oddN = N % 2 === 1;
+    const isMagicZ = MAGIC_Z.includes(Z);
+    const isMagicN = MAGIC_N.includes(N);
+    const isGap = GAP_Z.has(Z);
+    let mtype = "even-even";
+    if (isGap) mtype = "gap";
+    else if (isMagicZ || isMagicN) mtype = "magic";
+    else if (oddZ && oddN) mtype = "odd-odd";
+    else if (oddZ || oddN) mtype = "mixed";
+    MISSING_ALPHA.push({ nd, nt, Z, A, N, mtype });
+  }
+}
+
+/* â”€â”€ He-3 grammar for existing isotopes â”€â”€ */
+const HE3_EXISTING = [];
+const occupiedHe3 = new Set();
+ISO.forEach(iso => {
+  const nd3 = 3*iso.Z - iso.A - 3;
+  const nt3 = iso.A - 2*iso.Z + 1;
+  if (nd3 >= 0 && nt3 >= 0) {
+    HE3_EXISTING.push({ ...iso, nd3, nt3 });
+    occupiedHe3.add(nd3 + "," + nt3);
+  }
+});
+
+/* â”€â”€ Missing He-3 structures â”€â”€ */
+const maxNd3 = HE3_EXISTING.length > 0 ? Math.max(...HE3_EXISTING.map(e => e.nd3)) : 0;
+const maxNt3 = HE3_EXISTING.length > 0 ? Math.max(...HE3_EXISTING.map(e => e.nt3)) : 0;
+const MISSING_HE3 = [];
+for (let nd = 0; nd <= maxNd3; nd++) {
+  for (let nt = 0; nt <= maxNt3; nt++) {
+    if (occupiedHe3.has(nd + "," + nt)) continue;
+    const Z = 2 + nd + nt;
+    const A = 3 + 2*nd + 3*nt;
+    const N = A - Z;
+    if (Z < 2 || Z > 92) continue;
+    const oddZ = Z % 2 === 1;
+    const oddN = N % 2 === 1;
+    const isMagicZ = MAGIC_Z.includes(Z);
+    const isMagicN = MAGIC_N.includes(N);
+    const isGap = GAP_Z.has(Z);
+    let mtype = "even-even";
+    if (isGap) mtype = "gap";
+    else if (isMagicZ || isMagicN) mtype = "magic";
+    else if (oddZ && oddN) mtype = "odd-odd";
+    else if (oddZ || oddN) mtype = "mixed";
+    MISSING_HE3.push({ nd, nt, Z, A, N, mtype });
+  }
+}
+
+/* â”€â”€ Missing isotopes by half-life tier â”€â”€
+   [Z, A, sym, half-life, decay, n_d, n_t, tier]
+   tier: 3 = >10ky, 2 = 1k-10ky, 1 = 100-1ky */
+const LONG_LIVED = [
+  // Tier 3: > 10,000 years
+  [4,  10, "Be", "1.39 My",  "Î²â»",   0,  2,  3],
+  [13, 26, "Al", "717 ky",   "EC",   11, 0,  3],
+  [17, 36, "Cl", "301 ky",   "Î²/EC", 13, 2,  3],
+  [20, 41, "Ca", "99.4 ky",  "EC",   17, 1,  3],
+  [25, 53, "Mn", "3.7 My",   "EC",   20, 3,  3],
+  [28, 59, "Ni", "76 ky",    "EC",   23, 3,  3],
+  [26, 60, "Fe", "2.6 My",   "Î²â»",   16, 8,  3],
+  [34, 79, "Se", "327 ky",   "Î²â»",   21, 11, 3],
+  [36, 81, "Kr", "229 ky",   "EC",   25, 9,  3],
+  [40, 93, "Zr", "1.61 My",  "Î²â»",   25, 13, 3],
+  [41, 92, "Nb", "34.7 My",  "EC",   29, 10, 3],
+  [43, 97, "Tc", "4.21 My",  "EC",   30, 11, 3],
+  [43, 98, "Tc", "4.2 My",   "Î²â»",   29, 12, 3],
+  [43, 99, "Tc", "211 ky",   "Î²â»",   28, 13, 3],
+  [46,107, "Pd", "6.5 My",   "Î²â»",   29, 15, 3],
+  [50,126, "Sn", "230 ky",   "Î²â»",   22, 26, 3],
+  [53,129, "I",  "15.7 My",  "Î²â»",   28, 23, 3],
+  [55,135, "Cs", "2.3 My",   "Î²â»",   28, 25, 3],
+  [62,146, "Sm", "103 My",   "Î±",    38, 22, 3],
+  [82,205, "Pb", "17.3 My",  "EC",   39, 41, 3],
+  [83,208, "Bi", "368 ky",   "EC",   39, 42, 3],
+  [91,231, "Pa", "32.8 ky",  "Î±",    40, 49, 3],
+  [92,233, "U",  "159 ky",   "Î±",    41, 49, 3],
+  [92,236, "U",  "23.4 My",  "Î±",    38, 52, 3],
+  // Tier 2: 1,000 - 10,000 years
+  [6,  14, "C",  "5,730 y",  "Î²â»",   2,  2,  2],
+  [42, 93, "Mo", "4,000 y",  "EC",   31, 9,  2],
+  [67,163, "Ho", "4,570 y",  "EC",   36, 29, 2],
+  [67,166, "Ho", "1,200 y",  "Î²â»",   33, 32, 2],
+  [88,226, "Ra", "1,600 y",  "Î±",    36, 50, 2],
+  [90,229, "Th", "7,917 y",  "Î±",    39, 49, 2],
+  // Tier 1: 100 - 1,000 years
+  [14, 32, "Si", "153 y",    "Î²â»",   8,  4,  1],
+  [18, 39, "Ar", "269 y",    "Î²â»",   13, 3,  1],
+  [28, 63, "Ni", "100 y",    "Î²â»",   19, 7,  1],
+  [41, 91, "Nb", "680 y",    "EC",   30, 9,  1],
+  [47,108, "Ag", "418 y",    "EC",   31, 14, 1],
+  [65,158, "Tb", "180 y",    "EC",   35, 28, 1],
+  [77,192, "Ir", "241 y",    "IT",   37, 38, 1],
+  [80,194, "Hg", "444 y",    "EC",   44, 34, 1],
+  [84,209, "Po", "125 y",    "Î±",    41, 41, 1],
+  // Tier 0: 10 - 100 years
+  [18, 42, "Ar", "32.9 y",   "Î²â»",   10, 6,  0],
+  [22, 44, "Ti", "60 y",     "EC",   20, 0,  0],
+  [36, 85, "Kr", "10.8 y",   "Î²â»",   21, 13, 0],
+  [38, 90, "Sr", "28.8 y",   "Î²â»",   22, 14, 0],
+  [41, 93, "Nb", "16.1 y",   "IT",   28, 11, 0],
+  [48,113, "Cd", "14.1 y",   "Î²â»",   29, 17, 0],
+  [50,121, "Sn", "43.9 y",   "IT",   27, 21, 0],
+  [55,137, "Cs", "30.2 y",   "Î²â»",   26, 27, 0],
+  [56,133, "Ba", "10.5 y",   "EC",   33, 21, 0],
+  [61,145, "Pm", "17.7 y",   "EC",   36, 23, 0],
+  [62,151, "Sm", "90 y",     "Î²â»",   33, 27, 0],
+  [63,150, "Eu", "36.9 y",   "EC",   37, 24, 0],
+  [63,152, "Eu", "13.5 y",   "EC",   35, 26, 0],
+  [64,148, "Gd", "75 y",     "Î±",    42, 20, 0],
+  [65,157, "Tb", "71 y",     "EC",   36, 27, 0],
+  [72,178, "Hf", "31 y",     "IT",   36, 34, 0],
+  [78,193, "Pt", "50 y",     "EC",   39, 37, 0],
+  [82,210, "Pb", "22.2 y",   "Î²â»",   34, 46, 0],
+  [83,207, "Bi", "31.6 y",   "EC",   40, 41, 0],
+  [89,227, "Ac", "21.8 y",   "Î²â»",   38, 49, 0],
+  [92,232, "U",  "68.9 y",   "Î±",    42, 48, 0]
+];
+
+// Short-lived isotope tiers (tiers 4-9)
+const SHORT_LIVED = [
+  // â”€â”€ Tier 4: 1y â€“ 10y â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  [11, 22,"Na","2.60 y", "EC",  9,  0, 4],
+  [26, 55,"Fe","2.73 y", "EC", 21,  3, 4],
+  [27, 60,"Co","5.27 y", "Î²â»",19,  6, 4],
+  [51,125,"Sb","2.76 y", "Î²â»",26, 23, 4],
+  [55,134,"Cs","2.07 y", "Î²â»",29, 24, 4],
+  [61,146,"Pm","5.53 y", "EC", 35, 24, 4],
+  [61,147,"Pm","2.62 y", "Î²â»",34, 25, 4],
+  [63,154,"Eu","8.59 y", "Î²â»",33, 28, 4],
+  [63,155,"Eu","4.75 y", "Î²â»",32, 29, 4],
+  [69,171,"Tm","1.92 y", "Î²â»",34, 33, 4],
+  [71,173,"Lu","1.37 y", "EC", 38, 31, 4],
+  [71,174,"Lu","3.31 y", "EC", 37, 32, 4],
+  [72,172,"Hf","1.87 y", "EC", 42, 28, 4],
+  [73,179,"Ta","1.82 y", "EC", 38, 33, 4],
+  [81,204,"Tl","3.78 y", "Î²â»",37, 42, 4],
+  [84,208,"Po","2.90 y", "Î±",  42, 40, 4],
+  [88,228,"Ra","5.75 y", "Î²â»",34, 52, 4],
+  [98,252,"Cf","2.65 y", "Î±",  40, 56, 4],
+  // â”€â”€ Tier 5: 36d â€“ 1y â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  [16, 35,"S", "87.4 d", "Î²â»",11,  3, 5],
+  [27, 56,"Co","77.2 d", "EC", 25,  2, 5],
+  [30, 65,"Zn","244 d",  "EC", 23,  5, 5],
+  [32, 68,"Ge","271 d",  "EC", 26,  4, 5],
+  [34, 75,"Se","120 d",  "EC", 25,  7, 5],
+  [38, 85,"Sr","64.8 d", "EC", 27,  9, 5],
+  [39, 88,"Y", "107 d",  "EC", 29, 10, 5],
+  [44,106,"Ru","374 d",  "Î²â»",24, 18, 5],
+  [48,109,"Cd","462 d",  "EC", 33, 13, 5],
+  [50,113,"Sn","115 d",  "EC", 35, 13, 5],
+  [53,125,"I", "59.4 d", "EC", 32, 19, 5],
+  [58,139,"Ce","138 d",  "EC", 33, 23, 5],
+  [64,153,"Gd","241 d",  "EC", 37, 25, 5],
+  [69,170,"Tm","129 d",  "Î²â»",35, 32, 5],
+  [74,181,"W", "121 d",  "EC", 39, 33, 5],
+  [75,183,"Re","70.0 d", "EC", 40, 33, 5],
+  [76,185,"Os","93.6 d", "EC", 41, 33, 5],
+  [77,192,"Ir","73.8 d", "Î²â»",37, 38, 5],
+  [79,195,"Au","186 d",  "EC", 40, 37, 5],
+  [84,210,"Po","138 d",  "Î±",  40, 42, 5],
+  // â”€â”€ Tier 6: 3.6d â€“ 36d â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  [15, 32,"P", "14.3 d", "Î²â»",11,  2, 6],
+  [15, 33,"P", "25.4 d", "Î²â»",10,  3, 6],
+  [24, 51,"Cr","27.7 d", "EC", 19,  3, 6],
+  [25, 52,"Mn","5.59 d", "EC", 21,  2, 6],
+  [53,131,"I", "8.02 d", "Î²â»",26, 25, 6],
+  [56,131,"Ba","11.5 d", "EC", 35, 19, 6],
+  [58,141,"Ce","32.5 d", "Î²â»",31, 25, 6],
+  [60,147,"Nd","11.0 d", "Î²â»",31, 27, 6],
+  [68,169,"Er","9.39 d", "EC", 33, 33, 6],
+  [70,169,"Yb","32.0 d", "EC", 39, 29, 6],
+  [83,210,"Bi","5.01 d", "Î²â»",37, 44, 6],
+  [88,223,"Ra","11.4 d", "Î±",  39, 47, 6],
+  [88,224,"Ra","3.66 d", "Î±",  38, 48, 6],
+  [89,225,"Ac","9.92 d", "Î±",  40, 47, 6],
+  [91,233,"Pa","27.0 d", "Î²â»",38, 51, 6],
+  [92,237,"U", "6.75 d", "Î²â»",37, 53, 6],
+  // â”€â”€ Tier 7: 8.64h â€“ 3.6d â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  [11, 24,"Na","14.96 h","Î²â»", 7,  2, 7],
+  [19, 42,"K", "12.36 h","Î²â»",13,  4, 7],
+  [21, 48,"Sc","43.67 h","Î²â»",13,  6, 7],
+  [40, 89,"Zr","78.41 h","Î²â»",29,  9, 7],
+  [42, 99,"Mo","65.94 h","Î²â»",25, 15, 7],
+  [45,105,"Rh","35.36 h","Î²â»",28, 15, 7],
+  [52,131,"Te","33.25 h","Î²â»",23, 27, 7],
+  [55,129,"Cs","32.06 h","Î²â»",34, 19, 7],
+  [57,140,"La","40.28 h","Î²â»",29, 26, 7],
+  [62,153,"Sm","46.50 h","Î²â»",31, 29, 7],
+  [67,166,"Ho","26.82 h","Î²â»",33, 32, 7],
+  [75,186,"Re","90.76 h","Î²â»",37, 36, 7],
+  [77,194,"Ir","19.28 h","Î²â»",35, 40, 7],
+  [81,201,"Tl","72.91 h","EC", 40, 39, 7],
+  [82,212,"Pb","10.64 h","Î²â»",32, 48, 7],
+  [89,226,"Ac","29.37 h","Î²â»",39, 48, 7],
+  [90,231,"Th","25.52 h","Î²â»",37, 51, 7],
+  [86,211,"Rn","14.6 h", "Î±",  47, 39, 7],
+  // â”€â”€ Tier 8: 51.8min â€“ 8.64h â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  [ 9, 18,"F", "109.8 m","EC",  7,  0, 8],
+  [26, 52,"Fe","8.28 h", "EC", 26,  0, 8],
+  [43, 99,"Tc","6.01 h", "IT", 28, 13, 8],
+  [47,112,"Ag","3.13 h", "Î²â»",27, 18, 8],
+  [49,113,"In","1.66 h", "IT", 32, 15, 8],
+  [81,199,"Tl","7.42 h", "EC", 42, 37, 8],
+  [83,213,"Bi","45.6 m", "Î±",  34, 47, 8],
+  [91,234,"Pa","6.70 h", "Î²â»",37, 52, 8],
+  [94,243,"Pu","4.96 h", "Î²â»",37, 55, 8],
+  // â”€â”€ Tier 9: < 51.8 min (grammar-edge, fast decay) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  [ 6, 11,"C", "20.3 m", "EC",  5, -1, 9],
+  [ 7, 13,"N", "9.97 m", "EC",  6, -1, 9],
+  [ 8, 15,"O", "2.04 m", "EC",  9, -1, 9],
+  [10, 19,"Ne","17.3 s", "Î²â»",11, -1, 9],
+  [12, 27,"Mg","9.46 m", "Î²â»", 7,  3, 9],
+  [37, 79,"Rb","22.9 m", "EC", 30,  5, 9],
+  [38, 82,"Sr","25.4 d", "EC", 28,  6, 9],
+  [84,211,"Po","0.516 s","Î±",  41, 43, 9],
+  [84,212,"Po","0.299 Î¼s","Î±", 40, 44, 9],
+  [84,213,"Po","3.72 Î¼s","Î±",  39, 45, 9],
+  [88,219,"Ra","10 ms",  "Î±",  43, 43, 9],
+  [89,217,"Ac","69 ns",  "Î±",  44, 39, 9],
+  [90,227,"Th","18.7 d", "Î²â»",35, 49, 6],
+];
+
+/* Decay vector definitions in grammar space */
+const DECAY_VECTORS = {
+  "Î±":    { dnd: -2, dnt:  0, color: "#ffd040", label: "Î± (âˆ’2d)" },
+  "Î²â»":   { dnd: +3, dnt: -2, color: "#40c8ff", label: "Î²â» (+3d,âˆ’2t)" },
+  "EC":   { dnd: -3, dnt: +2, color: "#ff40ff", label: "EC (âˆ’3d,+2t)" },
+  "Î²âº":   { dnd: -3, dnt: +2, color: "#ff80ff", label: "Î²âº (âˆ’3d,+2t)" },
+  "Î²/EC": { dnd: -3, dnt: +2, color: "#80e0a0", label: "Î²/EC" },
+  "IT":   { dnd:  0, dnt:  0, color: "#ffaa40", label: "IT (same pos)" },
+  "n":    { dnd: +1, dnt: -1, color: "#ff6060", label: "n (+1d,âˆ’1t)" },
+  "p":    { dnd: -2, dnt: +1, color: "#ff9900", label: "p (âˆ’2d,+1t)" },
+  "SF":   { dnd:  0, dnt:  0, color: "#ff4444", label: "SF" },
+};
+
+/* Build fast decay lookup from existing tier tables */
+const DECAY_LOOKUP = new Map();
+[...LONG_LIVED, ...SHORT_LIVED].forEach(([Z,A,,,decay]) => {
+  if (decay) DECAY_LOOKUP.set(`${Z},${A}`, decay);
+});
+
+/* Stability valley for decay mode inference */
+function zStable(A) { return A / (2 + 0.0146 * Math.pow(A, 2/3)); }
+
+/* Infer decay mode from N/Z when no measured data available */
+function inferDecay(Z, A) {
+  if (A < 4 || Z < 2) return 'Î²â»';
+  const Zs = zStable(A);
+  const dz = Z - Zs;
+  if (A > 210 && Z > 82) return 'Î±';
+  if (A > 150 && dz < -1.5) return 'Î±';
+  if (dz > 2.5 && A < 60)  return 'p';
+  if (dz < -2.5 && A < 30) return 'n';
+  if (dz > 0.8)  return 'EC';
+  if (dz < -0.5) return 'Î²â»';
+  return 'stable';
+}
+
+/* Enrich ISO objects with .decay field */
+ISO.forEach(iso => {
+  if (iso.stable) { iso.decay = '-'; return; }
+  const key = `${iso.Z},${iso.A}`;
+  iso.decay = DECAY_LOOKUP.get(key) || inferDecay(iso.Z, iso.A);
+});
+
+/* ISO fast lookup by (nd, nt) */
+const isoByGrammar = new Map();
+ISO.forEach(iso => isoByGrammar.set(`${iso.nd},${iso.nt}`, iso));
+
+/* Follow decay chain â€” returns array of {from, to, decay, color} steps */
+function decayChain(startIso, maxSteps, backward) {
+  if (maxSteps === undefined) maxSteps = 6;
+  if (backward === undefined) backward = false;
+  const steps = [];
+  let cur = startIso;
+  for (let i = 0; i < maxSteps; i++) {
+    const dv = backward ? null : DECAY_VECTORS[cur.decay];
+    if (!dv && !backward) break;
+    if (backward) {
+      const parent = ISO.find(iso => {
+        if (iso.decay === '-' || iso.decay === 'stable') return false;
+        const dv2 = DECAY_VECTORS[iso.decay];
+        if (!dv2) return false;
+        return iso.nd + dv2.dnd === cur.nd && iso.nt + dv2.dnt === cur.nt;
+      });
+      if (!parent) break;
+      steps.push({ from: parent, to: cur, decay: parent.decay,
+                   color: (DECAY_VECTORS[parent.decay]||{color:'#888'}).color });
+      cur = parent;
+    } else {
+      if (cur.decay === '-' || cur.decay === 'stable') break;
+      const nextNd = cur.nd + dv.dnd;
+      const nextNt = cur.nt + dv.dnt;
+      const next = isoByGrammar.get(`${nextNd},${nextNt}`);
+      if (!next) break;
+      steps.push({ from: cur, to: next, decay: cur.decay, color: dv.color });
+      cur = next;
+      if (next.stable) break;
+    }
+  }
+  return steps;
+}
+
+// Find ranges
+const allU = ISO.map(e => e.nd - e.nt);
+const allV = ISO.map(e => e.nd + e.nt);
+const uMin = Math.min(...allU), uMax = Math.max(...allU);
+const vMin = Math.min(...allV), vMax = Math.max(...allV);
+
+// vVals â€” sorted unique v values
+const vVals = [...new Set(ISO.map(e => e.nd + e.nt))].sort((a,b)=>a-b);
+// === js/spine.js ===
+// Monoisotopic Line Fit & Row Shifts
+const monoPts = [];
+const uShiftByV = {};
+
+vVals.forEach(v => {
+  const rowIsos = ISO.filter(e => (e.nd + e.nt) === v);
+  const sole = rowIsos.find(e => e.isSole && e.stable);
+  if (sole) {
+    uShiftByV[v] = sole.nd - sole.nt;
+    monoPts.push({ v: v, u: sole.nd - sole.nt });
+  } else {
+    const stables = rowIsos.filter(e => e.stable);
+    if (stables.length > 0) {
+      let sum = 0; stables.forEach(e => sum += (e.nd - e.nt));
+      uShiftByV[v] = sum / stables.length;
+    } else {
+      let sum = 0; rowIsos.forEach(e => sum += (e.nd - e.nt));
+      uShiftByV[v] = sum / rowIsos.length;
+    }
+  }
+});
+
+// Fallback linear fit for missing alpha structures that don't match any v in ISO
+function linFit(pts) {
+  const n=pts.length; let sx=0,sy=0,sxy=0,sx2=0;
+  pts.forEach(p => { sx+=p.v; sy+=p.u; sxy+=p.v*p.u; sx2+=p.v*p.v; });
+  const m=(n*sxy-sx*sy)/(n*sx2-sx*sx), b=(sy-m*sx)/n;
+  return {m,b};
+}
+const fallbackFit = linFit(monoPts);
+
+function getUFit(v) {
+  if (uShiftByV[v] !== undefined) return uShiftByV[v];
+  return fallbackFit.m * v + fallbackFit.b;
+}
+
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ENERGY FUNCTIONAL SPINE
+const rawMaxSpine      = {};  // { u, be, sym, A }
+const energySpineByV   = {};  // { u: u_E, be: smoothed_BE_max, iso: nearest, confidence }
+const deltaMonoEnergy  = {};  // u_E(v) - u_mono(v)
+
+(function buildEnergySpine() {
+  vVals.forEach(v => {
+    // Gather BE data from this row AND Â±2 neighbouring rows for support
+    const supportRows = [v-2, v-1, v, v+1, v+2];
+    const nodes = [];
+    supportRows.forEach(sv => {
+      ISO.filter(e => (e.nd + e.nt) === sv && e.be > 0).forEach(e => {
+        nodes.push({ u: e.nd - e.nt, be: e.be, v: sv, iso: e });
+      });
+    });
+    if (nodes.length === 0) return;
+
+    // Raw max in THIS row only
+    const rowNodes = nodes.filter(n => n.v === v);
+    if (rowNodes.length > 0) {
+      const bestRaw = rowNodes.reduce((a,b) => b.be > a.be ? b : a);
+      rawMaxSpine[v] = { u: bestRaw.u, be: bestRaw.be, sym: bestRaw.iso.sym, A: bestRaw.iso.A };
+    }
+
+    // Smoothed max â€” weighted parabolic fit over all support nodes
+    const rowWeights = { [v]:1.0, [v-1]:0.4, [v+1]:0.4, [v-2]:0.15, [v+2]:0.15 };
+    if (nodes.length < 2) {
+      const n = nodes[0];
+      energySpineByV[v] = { u: n.u, be: n.be, iso: n.iso, confidence: 'low', source: 'single-node' };
+    } else {
+      // Weighted least-squares parabola: BE = a*u^2 + b*u + c
+      let sw=0, su=0, su2=0, su3=0, su4=0, sbe=0, sube=0, su2be=0;
+      nodes.forEach(n => {
+        const w = rowWeights[n.v] || 0.1;
+        sw   += w;
+        su   += w * n.u;
+        su2  += w * n.u * n.u;
+        su3  += w * n.u * n.u * n.u;
+        su4  += w * n.u * n.u * n.u * n.u;
+        sbe  += w * n.be;
+        sube += w * n.u * n.be;
+        su2be+= w * n.u * n.u * n.be;
+      });
+      const M = [[sw,su,su2],[su,su2,su3],[su2,su3,su4]];
+      const rhs = [sbe, sube, su2be];
+      function det3(m) {
+        return m[0][0]*(m[1][1]*m[2][2]-m[1][2]*m[2][1])
+              -m[0][1]*(m[1][0]*m[2][2]-m[1][2]*m[2][0])
+              +m[0][2]*(m[1][0]*m[2][1]-m[1][1]*m[2][0]);
+      }
+      const D = det3(M);
+      let u_E, be_E, confidence = 'medium', source = 'row-fit';
+      if (Math.abs(D) < 1e-9) {
+        const sorted = [...nodes].sort((a,b)=>b.be-a.be);
+        const top = sorted.slice(0, Math.max(1, Math.ceil(sorted.length/2)));
+        u_E = top.reduce((s,n)=>s+n.u,0)/top.length;
+        be_E = top[0].be;
+        confidence = 'low'; source = 'neighbour-fit';
+      } else {
+        const Ma = [[M[0][0],M[0][1],rhs[0]],[M[1][0],M[1][1],rhs[1]],[M[2][0],M[2][1],rhs[2]]];
+        const Mb = [[M[0][0],rhs[0],M[0][2]],[M[1][0],rhs[1],M[1][2]],[M[2][0],rhs[2],M[2][2]]];
+        const Mc = [[rhs[0],M[0][1],M[0][2]],[rhs[1],M[1][1],M[1][2]],[rhs[2],M[2][1],M[2][2]]];
+        const a = det3(Ma)/D, b_c = det3(Mb)/D, c = det3(Mc)/D;
+        if (Math.abs(a) < 1e-9 || a > 0) {
+          const rw = rowNodes.length > 0 ? rowNodes : nodes;
+          const wSum = rw.reduce((s,n)=>s+n.be,0);
+          u_E = rw.reduce((s,n)=>s+n.u*n.be,0) / wSum;
+          be_E = rw.reduce((s,n)=>s+n.be,0) / rw.length;
+          confidence = 'low'; source = 'no-curvature';
+        } else {
+          u_E = -b_c / (2 * a);
+          be_E = a*u_E*u_E + b_c*u_E + c;
+
+          if (rowNodes.length > 0) {
+            const uMin_r = Math.min(...rowNodes.map(n=>n.u));
+            const uMax_r = Math.max(...rowNodes.map(n=>n.u));
+            const span = Math.max(4, uMax_r - uMin_r);
+            if (u_E < uMin_r - span || u_E > uMax_r + span) {
+              const wSum = rowNodes.reduce((s,n)=>s+n.be,0);
+              u_E = rowNodes.reduce((s,n)=>s+n.u*n.be,0) / wSum;
+              be_E = rowNodes.reduce((a,n)=>a.be>n.be?a:n).be;
+              confidence = 'low'; source = 'clamped';
+            } else {
+              confidence = rowNodes.length >= 3 ? 'high' : 'medium';
+              source = 'row-fit';
+            }
+          } else {
+            confidence = 'medium'; source = 'row-fit';
+          }
+        }
+      }
+      const nearestIso = (rowNodes.length>0 ? rowNodes : nodes)
+        .reduce((best, n) => Math.abs(n.u - u_E) < Math.abs(best.u - u_E) ? n : best);
+      energySpineByV[v] = { u: u_E, be: be_E, iso: nearestIso.iso, confidence, source };
+    }
+
+    // Delta: u_E - u_mono
+    const u_mono = getUFit(v);
+    deltaMonoEnergy[v] = energySpineByV[v] ? energySpineByV[v].u - u_mono : 0;
+  });
+
+  // Diagnostic summary
+  const spineRows = vVals.filter(v => energySpineByV[v]);
+  const rmsSep = Math.sqrt(spineRows.reduce((s,v)=>s+deltaMonoEnergy[v]**2,0)/spineRows.length);
+  const stableDelta = ISO.filter(e=>e.stable && energySpineByV[e.nd+e.nt])
+    .map(e => (e.nd-e.nt) - energySpineByV[e.nd+e.nt].u);
+  const meanStableDelta = stableDelta.reduce((s,d)=>s+d,0)/Math.max(1,stableDelta.length);
+  const sortedSD = [...stableDelta].sort((a,b)=>a-b);
+  const medianStableDelta = sortedSD[Math.floor(sortedSD.length/2)] || 0;
+  window._energySpineDiag = { rmsSep, meanStableDelta, medianStableDelta, nRows: spineRows.length };
+  console.log('[Energy Spine] rows fitted:', spineRows.length,
+    '| RMS mono-energy sep:', rmsSep.toFixed(3),
+    '| stable mean offset from u_E:', meanStableDelta.toFixed(3),
+    '| stable median offset:', medianStableDelta.toFixed(3));
+})();
+// === js/utils.js ===
+/* â”€â”€ Canvas setup â”€â”€ */
+const canvas = document.getElementById("c");
+const ctx = canvas.getContext("2d");
+const dpr = window.devicePixelRatio || 1;
+let W, H;
+
+let morphT = 0;
+let panX = 0, panY = 0, zoom = 0.75;
+let gridScale  = 5; // y px per grid unit â€” updated each frame
+let gridScaleX = 10; // x px per grid unit (2 Ã— gridScale for 2:1 stretch)
+
+let hoveredIso = null;
+let hoveredZ = null;
+let selectedIso = ISO.find(e => e.Z === 26 && e.A === 56);
+
+const LEFT_W  = 230;  // left column width px
+const RIGHT_W = 260;  // right column width px
+
+// Checkbox bindings
+const cbLabels      = document.getElementById("showLabels");
+const cbConn        = document.getElementById("showConnections");
+const cbFam         = document.getElementById("showFamilies");
+const cbMag         = document.getElementById("showMagnetic");
+const cbBE          = document.getElementById("showBE");
+const cbSS          = document.getElementById("showSoleSpread");
+const cbSC          = document.getElementById("showSoleChain");
+const cbShells      = document.getElementById("showShells");
+const cbUnp         = document.getElementById("showUnpaired");
+const cbOddEven     = document.getElementById("showOddEven");
+const cbDeut        = document.getElementById("showDeutChain");
+const cbMissing     = document.getElementById("showMissing");
+const cbHe3         = document.getElementById("showHe3");
+const cbHe3Miss     = document.getElementById("showHe3Missing");
+const cbLongLived   = document.getElementById("showLongLived");
+const cbMid         = document.getElementById("showMid");
+const cbShort       = document.getElementById("showShort");
+const cbDecade      = document.getElementById("showDecade");
+const cbTier4       = document.getElementById("showTier4");
+const cbTier5       = document.getElementById("showTier5");
+const cbTier6       = document.getElementById("showTier6");
+const cbTier7       = document.getElementById("showTier7");
+const cbTier8       = document.getElementById("showTier8");
+const cbTier9       = document.getElementById("showTier9");
+const cbDecayVec    = document.getElementById("showDecayVec");
+const cbGoldenLine  = document.getElementById("showGoldenLine");
+const cbUnstPos     = document.getElementById("showUnstPos");
+const cbEnergySpine = document.getElementById('showEnergySpine');
+const cbMonoSpineOv = document.getElementById('showMonoSpine');
+const cbHighestGS   = document.getElementById('showHighestGS');
+const cbLowestGS    = document.getElementById('showLowestGS');
+const cbDeltaUE     = document.getElementById('showDeltaUE');
+
+[cbLabels,cbConn,cbFam,cbMag,cbBE,cbSS,cbSC,cbShells,cbUnp,cbOddEven,cbDeut,cbMissing,cbHe3,cbHe3Miss,
+ cbLongLived,cbMid,cbShort,cbDecade,cbTier4,cbTier5,cbTier6,cbTier7,cbTier8,cbTier9,cbDecayVec,
+ cbGoldenLine, cbUnstPos
+].forEach(cb => cb && cb.addEventListener("change", draw));
+
+[cbEnergySpine, cbMonoSpineOv, cbHighestGS, cbLowestGS, cbDeltaUE]
+  .forEach(cb => cb && cb.addEventListener('change', draw));
+
+// Pan & zoom events
+let dragging = false, lastX, lastY;
+canvas.addEventListener("mousedown",e=>{dragging=true;lastX=e.clientX;lastY=e.clientY;});
+window.addEventListener("mouseup",()=>dragging=false);
+canvas.addEventListener("mousemove",e=>{
+  if(dragging){panX+=e.clientX-lastX;panY+=e.clientY-lastY;lastX=e.clientX;lastY=e.clientY;draw();}
+});
+canvas.addEventListener("wheel",e=>{
+  const f = e.deltaY > 0 ? 0.92 : 1.08;
+  const mouseX = e.clientX - LEFT_W;
+  const mouseY = e.clientY;
+  panX += (mouseX - W/2) * (1 - f) / (zoom * f);
+  panY += (mouseY - H/2) * (1 - f) / (zoom * f);
+  zoom *= f;
+  draw();
+  e.preventDefault();
+},{passive:false});
+
+function gridPos(nd, nt) {
+  const pad = 80;
+  const actualU = nd - nt;
+  const v = nd + nt;
+
+  // morphT range [-1, +1]; 0 = actual/golden
+  // t = -1  â†’ Mono: shift each row by u_mono(v) â†’ monoisotope spine is vertical
+  // t = +1  â†’ Energy: shift each row by u_E(v)  â†’ BE/A ridge is vertical
+  const fitU = getUFit(v);
+
+  let u;
+  if (morphT < 0) {
+    // toward mono spine
+    const uMono = fitU;
+    const monoTarget = actualU - uMono;
+    u = actualU + (monoTarget - actualU) * (-morphT);
+  } else if (morphT > 0) {
+    // toward energy spine
+    const uEnergy = energySpineByV[v] ? energySpineByV[v].u : fitU;
+    const energyTarget = actualU - uEnergy;
+    u = actualU + (energyTarget - actualU) * morphT;
+  } else {
+    u = actualU;
+  }
+
+  // Use same pixel scale for both axes so columns are as tight as rows.
+  const vRange = (vMax - vMin) || 1;
+  const scale  = (H - pad*2) / vRange;
+  const scaleX = scale * 2;
+  gridScale  = scale;
+  gridScaleX = scaleX;
+
+  // Centre the u axis on screen
+  const uMid = (uMax + uMin) / 2;
+  const bx = W/2 + (u - uMid) * scaleX;
+  const by = pad + (vMax - v) * scale;  // flipped: H at bottom, U at top
+
+  return {
+    x: W/2 + (bx - W/2 + panX) * zoom,
+    y: H/2 + (by - H/2 + panY) * zoom
+  };
+}
+
+function isoPos(iso) {
+  return gridPos(iso.nd, iso.nt);
+}
+
+// Helper: hex color to "r,g,b" string
+function hexToRgb(hex) {
+  const h = hex.replace("#","");
+  return `${parseInt(h.substring(0,2),16)},${parseInt(h.substring(2,4),16)},${parseInt(h.substring(4,6),16)}`;
+}
+
+// â”€â”€ Hexagon geometry helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+function hexPath(ctx, cx, cy, Rx, Ry) {
+  if (Ry === undefined) Ry = Rx;
+  ctx.beginPath();
+  for (let i = 0; i < 6; i++) {
+    const a = (i * Math.PI) / 3;
+    const x = cx + Rx * Math.cos(a);
+    const y = cy + Ry * Math.sin(a);
+    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+  }
+  ctx.closePath();
+}
+
+// Palette defined by user request
+// Twilight jewel-tone palette — vivid, saturated, visible on dark backgrounds
+const Z_PALETTE = [
+  "100,190,255", // sky blue
+  "255,100,175", // rose
+  "60,210,255",  // azure
+  "80,255,120",  // electric green
+  "220,220,255", // lavender white
+  "190,110,255", // violet
+  "255,235,60",  // bright gold
+  "40,220,190",  // cyan-teal
+  "200,70,255",  // purple
+  "255,210,0",   // amber
+  "255,90,80",   // coral red
+  "255,155,40",  // orange
+  "90,255,150",  // mint
+  "60,210,110",  // spring green
+  "160,230,80",  // lime
+  "255,200,150", // peach
+  "255,170,110", // apricot
+  "130,220,160", // sage
+];
+
+function isoColor(iso, alpha) {
+  // Sole/Spread mode overrides
+  if (cbSS.checked) {
+    if (iso.isSole && iso.stable) return `rgba(255,200,70,${alpha})`;
+    if (!iso.stable) return `rgba(160,100,80,${alpha})`;
+    return `rgba(100,150,200,${alpha})`;
+  }
+  // Odd/Even A mode
+  if (cbOddEven.checked) {
+    if (iso.oddA) return `rgba(220,160,80,${alpha})`;
+    return `rgba(80,160,220,${alpha})`;
+  }
+  // Unpaired electron mode
+  if (cbUnp.checked && iso.unpaired >= 0) {
+    const u = iso.unpaired;
+    if (u === 0) return `rgba(80,160,220,${alpha})`;
+    const t = Math.min(u / 7, 1);
+    const r = Math.round(80 + t * 175);
+    const g = Math.round(160 - t * 80);
+    const b = Math.round(220 - t * 150);
+    return `rgba(${r},${g},${b},${alpha})`;
+  }
+  // Single isotope elements: indigo/lavender (visible on dark)
+  if (iso.isSole && iso.stable) {
+    return `rgba(140,110,220,${alpha})`;
+  }
+  // Assign color from rotating jewel-tone palette based on Z
+  const rgb = Z_PALETTE[iso.Z % Z_PALETTE.length];
+  return `rgba(${rgb},${alpha})`;
+}
+
+// â”€â”€â”€ Electron sub-shell bands (Aufbau filling order) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+const SHELL_BANDS = [
+  { name:"1s",   zMin:1,  zMax:2,  fill:"rgba(255, 80,  50,  0.10)", stroke:"rgba(255, 80,  50,  0.55)" },
+  { name:"2s",   zMin:3,  zMax:4,  fill:"rgba(255, 145, 40,  0.09)", stroke:"rgba(255, 145, 40,  0.55)" },
+  { name:"2p",   zMin:5,  zMax:10, fill:"rgba(210, 230, 45,  0.08)", stroke:"rgba(210, 230, 45,  0.55)" },
+  { name:"3s",   zMin:11, zMax:12, fill:"rgba(255, 235, 55,  0.09)", stroke:"rgba(255, 235, 55,  0.55)" },
+  { name:"3p",   zMin:13, zMax:18, fill:"rgba(140, 55,  240, 0.08)", stroke:"rgba(160, 80,  255, 0.55)" },
+  { name:"4s",   zMin:19, zMax:20, fill:"rgba(60,  130, 255, 0.08)", stroke:"rgba(80,  155, 255, 0.55)" },
+  { name:"3d",   zMin:21, zMax:30, fill:"rgba(255, 80,  160, 0.08)", stroke:"rgba(255, 100, 175, 0.55)" },
+  { name:"4p",   zMin:31, zMax:36, fill:"rgba(40,  210, 120, 0.08)", stroke:"rgba(50,  220, 130, 0.55)" },
+  { name:"5s",   zMin:37, zMax:38, fill:"rgba(255, 55,  55,  0.08)", stroke:"rgba(255, 70,  70,  0.55)" },
+  { name:"4d",   zMin:39, zMax:48, fill:"rgba(165, 70,  255, 0.08)", stroke:"rgba(185, 90,  255, 0.55)" },
+  { name:"5p",   zMin:49, zMax:54, fill:"rgba(35,  220, 230, 0.08)", stroke:"rgba(45,  230, 240, 0.55)" },
+  { name:"6s",   zMin:55, zMax:56, fill:"rgba(35,  180, 160, 0.09)", stroke:"rgba(45,  200, 175, 0.55)" },
+  { name:"4f",   zMin:57, zMax:71, fill:"rgba(255, 185, 35,  0.08)", stroke:"rgba(255, 200, 45,  0.55)" },
+  { name:"5d",   zMin:72, zMax:80, fill:"rgba(190, 240, 90,  0.08)", stroke:"rgba(200, 245, 100, 0.55)" },
+  { name:"6p",   zMin:81, zMax:86, fill:"rgba(255, 105, 35,  0.09)", stroke:"rgba(255, 115, 45,  0.55)" },
+  { name:"7s",   zMin:87, zMax:88, fill:"rgba(210, 40,  210, 0.09)", stroke:"rgba(225, 60,  225, 0.55)" },
+  { name:"5f/6d",zMin:89, zMax:103,fill:"rgba(180, 20,  40,  0.08)", stroke:"rgba(200, 40,  60,  0.55)" },
+];
+
+// Pre-build element centroid v (used for label y-position)
+const ELEM_REF_V = {};
+[...new Set(ISO.map(e => e.Z))].forEach(Z => {
+  const stables = ISO.filter(e => e.Z === Z && e.stable);
+  const ref = stables.length > 0
+    ? stables.sort((a,b) => b.abd - a.abd)[0]
+    : ISO.filter(e => e.Z === Z)[0];
+  if (ref) ELEM_REF_V[Z] = ref.nd + ref.nt;
+});
+
+// â”€â”€â”€ Comprehensive unstable isotope positions â”€â”€â”€â”€â”€â”€
+const UNSTABLE_EXTRA = [
+  [4,  [8,10]],
+  [5,  [12,13]],
+  [6,  [14,15,16]],
+  [7,  [16,17,18,19]],
+  [8,  [19,20,21,22]],
+  [9,  [20,21,22]],
+  [10, [23,24,25,26]],
+  [11, [24,25,26]],
+  [12, [27,28,29,30]],
+  [13, [26,28,29,30]],
+  [14, [31,33,34]],
+  [15, [30,34,35]],
+  [16, [37,38]],
+  [17, [34,36,38,39,40]],
+  [18, [37,41,42]],
+  [19, [40,43,44,45]],
+  [20, [45,47,49,50]],
+  [21, [44,46,47,49]],
+  [22, [45,51,52]],
+  [23, [48,49,50,52,53]],
+  [24, [48,55,56]],
+  [25, [54,56,57]],
+  [26, [52,59]],
+  [27, [56,57,58,61,62]],
+  [28, [57,65,66]],
+  [29, [60,61,62,64,66,67]],
+  [30, [62,63,69,71,72]],
+  [31, [66,67,68,72,73]],
+  [32, [67,71,75,77,78]],
+  [33, [72,73,74,76,77,78]],
+  [34, [72,73,83,84]],
+  [35, [76,77,82,83,84]],
+  [36, [76,79,87,88,89]],
+  [37, [81,82,83,84,86,87]],
+  [38, [83,84,87,89,91]],
+  [39, [86,87,90,91]],
+  [40, [86,87,88,95]],
+  [41, [90,92,93,94,95,96]],
+  [42, [90,91,92,95,99,101]],
+  [43, [95,96,97,98]],
+  [44, [97,103,105]],
+  [45, [99,101,102,103]],
+  [46, [100,101,103,107,109]],
+  [47, [104,105,106,108,110,111]],
+  [48, [107,111,115,117]],
+  [49, [111,112,115,116]],
+  [50, [110,111,117,119,121,123,125]],
+  [51, [120,122,124,126,127]],
+  [52, [118,119,121,127,129,132]],
+  [53, [120,121,123,124,128,130,132]],
+  [54, [122,123,125,127,131,133,135]],
+  [55, [128,129,130,131,132,136]],
+  [56, [128,129,130,135,137,139,140]],
+  [57, [136,137,138,140,141]],
+  [58, [134,135,137,141,143,144]],
+  [59, [140,141,142,143,144]],
+  [60, [141,144,145,149,151]],
+  [61, [143,144,145,148,149,150,151]],
+  [62, [144,145,147,153]],
+  [63, [144,145,146,147,148,149,150,152,156]],
+  [64, [146,148,150,151,152,153,159]],
+  [65, [152,153,154,155,156,160,161]],
+  [66, [154,155,156,157,158,159,161,162]],
+  [67, [160,161,162,163,164]],
+  [68, [160,161,162,163,165,166,167]],
+  [69, [163,164,165,166,167,168,170,172]],
+  [70, [162,163,164,165,166,167,168,175,176]],
+  [71, [169,170,171,172,174,176,177,178,179]],
+  [72, [170,171,172,173,174,175,176,177,178,179,180,181,182]],
+  [73, [176,177,178,179,180,181,182,183]],
+  [74, [176,177,178,179,180,181,182,183,184,185,186,187,188]],
+  [75, [181,182,183,184,186,187,188]],
+  [76, [182,183,184,186,187,188,189,190,191,192,193,194]],
+  [77, [186,188,190,191,192,193,194,195]],
+  [78, [188,189,190,191,192,193,195,197,198,199,200,201]],
+  [79, [190,191,193,194,196,198,199,200,201]],
+  [80, [190,191,192,193,194,195,196,197,199,200,203,205,206]],
+  [81, [196,197,198,199,200,202,207,208]],
+  [82, [195,196,197,198,199,200,201,202,203,205,209,210,212,214]],
+  [83, [204,205,206,207,208,210,211,212,213,214]],
+  [84, [207,208,210,211,212,213,214,216,218]],
+  [85, [207,208,209,210,211]],
+  [86, [210,211,212,218,219,220,222]],
+  [87, [218,219,220,221,222,223,224]],
+  [88, [220,221,222,223,224,225,226,227,230]],
+  [89, [223,224,225,226,227,228,229,230]],
+  [90, [226,227,228,229,230,231,232,233,234]],
+  [91, [229,230,231,232,233,234,235]],
+  [92, [229,230,231,232,233,234,235,236,237,240]],
+  [93, [231,232,233,234,235,236,237,238,239,240]],
+  [94, [231,232,233,234,235,236,237,238,239,240,241,242,243,244,246]],
+  [95, [237,238,239,240,241,242,243,244,245,246]],
+  [96, [238,239,240,241,242,243,244,245,246,247,248,250]],
+  [97, [240,241,242,243,244,245,246,247,248,249,250,251]],
+  [98, [240,241,242,243,244,245,246,247,248,249,250,251,253,254]],
+  [99, [243,244,245,246,247,248,249,250,251,252,253,254,255]],
+  [100,[244,245,246,247,248,249,250,251,252,253,254,255,256,257]],
+  [101,[248,249,250,251,252,253,254,255,256,257,258,259,260]],
+  [102,[250,251,252,253,254,255,256,257,258,259,260]],
+  [103,[252,253,254,255,256,257,258,259,260,261,262]],
+];
+// Expand to flat [Z, A, nd, nt] array
+const UNSTABLE_GRID = [];
+UNSTABLE_EXTRA.forEach(([Z, As]) => {
+  As.forEach(A => {
+    const nd = 3*Z - A - 2;
+    const nt = A - 2*Z;
+    if (nd >= 0 && nt >= 0) UNSTABLE_GRID.push([Z, A, nd, nt]);
+  });
+});
+// Also include all SHORT_LIVED and LONG_LIVED entries
+[...SHORT_LIVED, ...LONG_LIVED].forEach(([Z, A,,,, nd, nt]) => {
+  if (nd >= 0 && nt >= 0) UNSTABLE_GRID.push([Z, A, nd, nt]);
+});
+
+// Element name lookup
+const ELEM_NAMES = {
+  1:"Hydrogen",2:"Helium",3:"Lithium",4:"Beryllium",5:"Boron",6:"Carbon",7:"Nitrogen",8:"Oxygen",9:"Fluorine",10:"Neon",
+  11:"Sodium",12:"Magnesium",13:"Aluminium",14:"Silicon",15:"Phosphorus",16:"Sulfur",17:"Chlorine",18:"Argon",19:"Potassium",20:"Calcium",
+  21:"Scandium",22:"Titanium",23:"Vanadium",24:"Chromium",25:"Manganese",26:"Iron",27:"Cobalt",28:"Nickel",29:"Copper",30:"Zinc",
+  31:"Gallium",32:"Germanium",33:"Arsenic",34:"Selenium",35:"Bromine",36:"Krypton",37:"Rubidium",38:"Strontium",39:"Yttrium",40:"Zirconium",
+  41:"Niobium",42:"Molybdenum",43:"Technetium",44:"Ruthenium",45:"Rhodium",46:"Palladium",47:"Silver",48:"Cadmium",49:"Indium",50:"Tin",
+  51:"Antimony",52:"Tellurium",53:"Iodine",54:"Xenon",55:"Caesium",56:"Barium",57:"Lanthanum",58:"Cerium",59:"Praseodymium",60:"Neodymium",
+  61:"Promethium",62:"Samarium",63:"Europium",64:"Gadolinium",65:"Terbium",66:"Dysprosium",67:"Holmium",68:"Erbium",69:"Thulium",70:"Ytterbium",
+  71:"Lutetium",72:"Hafnium",73:"Tantalum",74:"Tungsten",75:"Rhenium",76:"Osmium",77:"Iridium",78:"Platinum",79:"Gold",80:"Mercury",
+  81:"Thallium",82:"Lead",83:"Bismuth",84:"Polonium",85:"Astatine",86:"Radon",87:"Francium",88:"Radium",89:"Actinium",90:"Thorium",
+  91:"Protactinium",92:"Uranium",93:"Neptunium",94:"Plutonium"
+};
+// === js/draw-bg.js ===
+function drawBackground(ctx) {
+  const pad = 80;
+
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // 1. Golden Boundary Line (nd = nt) â€” BACKGROUND VERSION (faint)
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  if (cbGoldenLine.checked) {
+    const goldenPts = [];
+    for (let v = vMin % 2 === 0 ? vMin : vMin + 1; v <= vMax; v += 2) {
+      const half = v / 2;
+      if (half < 0) continue;
+      const p = gridPos(half, half);
+      if (p.x > -200 && p.x < W + 200) goldenPts.push(p);
+    }
+    if (goldenPts.length > 1) {
+      ctx.save();
+      ctx.shadowColor = "rgba(255,220,40,0.5)";
+      ctx.shadowBlur = 10;
+      ctx.strokeStyle = "rgba(255,215,0,0.12)";
+      ctx.lineWidth = 7;
+      ctx.lineJoin = "round";
+      ctx.beginPath();
+      goldenPts.forEach((p,i) => i===0 ? ctx.moveTo(p.x,p.y) : ctx.lineTo(p.x,p.y));
+      ctx.stroke();
+      ctx.restore();
+      ctx.strokeStyle = "rgba(255,210,30,0.40)";
+      ctx.lineWidth = 1.5;
+      ctx.lineJoin = "round";
+      ctx.setLineDash([]);
+      ctx.beginPath();
+      goldenPts.forEach((p,i) => i===0 ? ctx.moveTo(p.x,p.y) : ctx.lineTo(p.x,p.y));
+      ctx.stroke();
+      const topPt = goldenPts[0];
+      ctx.save();
+      ctx.font = "600 10px 'Segoe UI',sans-serif";
+      ctx.fillStyle = "rgba(255,215,0,0.35)";
+      ctx.textAlign = "left";
+      ctx.fillText("n\u2099 = n\u209c  (50/50)", topPt.x + 5, topPt.y + 14);
+      ctx.restore();
+    }
+  }
+
+  // â”€â”€ 2. GS chains + spine coverage stats â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  {
+    const hiByV = new Map(), loByV = new Map();
+    ISO.forEach(iso => {
+      if (iso.abd <= 0 || iso.be <= 0) return;
+      const v   = iso.nd + iso.nt;
+      const tbe = iso.be * iso.A;
+      if (!hiByV.has(v) || tbe > hiByV.get(v).tbe) hiByV.set(v, { iso, tbe });
+      if (!loByV.has(v) || tbe < loByV.get(v).tbe) loByV.set(v, { iso, tbe });
+    });
+
+    // Spine coverage statistics
+    let spNatural = 0, spStable = 0, spUnstable = 0;
+    Object.values(energySpineByV).forEach(sp => {
+      if (!sp.iso) { spUnstable++; return; }
+      if (sp.iso.abd > 0)         spNatural++;
+      else if (sp.iso.stable)     spStable++;
+      else                        spUnstable++;
+    });
+    const spTotal = spNatural + spStable + spUnstable;
+    window._spineCoverage = { spNatural, spStable, spUnstable, spTotal,
+      pctNatural:  spTotal ? (spNatural  / spTotal * 100).toFixed(1) : '?',
+      pctStable:   spTotal ? (spStable   / spTotal * 100).toFixed(1) : '?',
+      pctUnstable: spTotal ? (spUnstable / spTotal * 100).toFixed(1) : '?',
+    };
+
+    // â”€ Highest GS chain (amber)
+    if (cbHighestGS && cbHighestGS.checked) {
+      const pts = [];
+      hiByV.forEach(({ iso }) => {
+        const p = isoPos(iso);
+        if (p.x > -100 && p.x < W + 100 && p.y > -50 && p.y < H + 50)
+          pts.push({ x: p.x, y: p.y });
+      });
+      pts.sort((a, b) => a.y - b.y);
+      if (pts.length > 1) {
+        ctx.save();
+        ctx.strokeStyle = 'rgba(220,170,40,0.65)';
+        ctx.lineWidth   = 1.3;
+        ctx.lineJoin    = 'round'; ctx.lineCap = 'round';
+        ctx.setLineDash([]);
+        ctx.beginPath();
+        pts.forEach((p, i) => i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y));
+        ctx.stroke();
+        ctx.restore();
+      }
+    }
+
+    // â”€ Lowest GS chain (violet)
+    if (cbLowestGS && cbLowestGS.checked) {
+      const pts = [];
+      loByV.forEach(({ iso }) => {
+        const p = isoPos(iso);
+        if (p.x > -100 && p.x < W + 100 && p.y > -50 && p.y < H + 50)
+          pts.push({ x: p.x, y: p.y });
+      });
+      pts.sort((a, b) => a.y - b.y);
+      if (pts.length > 1) {
+        ctx.save();
+        ctx.strokeStyle = 'rgba(180,100,255,0.65)';
+        ctx.lineWidth   = 1.3;
+        ctx.lineJoin    = 'round'; ctx.lineCap = 'round';
+        ctx.setLineDash([]);
+        ctx.beginPath();
+        pts.forEach((p, i) => i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y));
+        ctx.stroke();
+        ctx.restore();
+      }
+    }
+  }
+
+  // â”€â”€ 3. Energy Functional Spine (background) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  if (cbEnergySpine.checked) {
+    const ePts = [];
+    vVals.forEach(v => {
+      const sp = energySpineByV[v]; if (!sp) return;
+      const nd_synth = (v + sp.u) / 2, nt_synth = (v - sp.u) / 2;
+      if (nt_synth >= 0) {
+        const p = gridPos(nd_synth, nt_synth);
+        if (p.x > -100 && p.x < W + 100) ePts.push({ x: p.x, y: p.y });
+      }
+    });
+    if (ePts.length > 1) {
+      ctx.save();
+      ctx.strokeStyle = 'rgba(40,180,180,0.32)';
+      ctx.lineWidth   = 1.2;
+      ctx.lineJoin    = 'round';
+      ctx.lineCap     = 'round';
+      ctx.setLineDash([6, 5]);
+      ctx.shadowBlur  = 0;
+      ctx.beginPath();
+      ePts.forEach((p, i) => i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y));
+      ctx.stroke();
+      ctx.restore();
+    }
+  }
+
+  // â”€â”€ 4. Mono spine overlay (orange, background) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  if (cbMonoSpineOv && cbMonoSpineOv.checked) {
+    const mPts = [];
+    monoPts.forEach(pt => {
+      const nd_m = (pt.v + pt.u) / 2, nt_m = (pt.v - pt.u) / 2;
+      if (nt_m < 0) return;
+      const p = gridPos(nd_m, nt_m);
+      if (p.x > -100 && p.x < W+100) mPts.push({ x:p.x, y:p.y });
+    });
+    if (mPts.length > 1) {
+      ctx.save();
+      ctx.shadowColor = 'rgba(255,160,40,0.25)'; ctx.shadowBlur = 5;
+      ctx.strokeStyle = 'rgba(255,160,40,0.10)'; ctx.lineWidth = 5;
+      ctx.lineJoin = 'round';
+      ctx.beginPath();
+      mPts.forEach((p,i) => i===0 ? ctx.moveTo(p.x,p.y) : ctx.lineTo(p.x,p.y));
+      ctx.stroke();
+      ctx.restore();
+      ctx.strokeStyle = 'rgba(255,170,60,0.35)'; ctx.lineWidth = 1.2;
+      ctx.setLineDash([5,4]);
+      ctx.beginPath();
+      mPts.forEach((p,i) => i===0 ? ctx.moveTo(p.x,p.y) : ctx.lineTo(p.x,p.y));
+      ctx.stroke();
+      ctx.setLineDash([]);
+      if (mPts.length > 0) {
+        ctx.font = "600 9px 'Segoe UI',sans-serif"; ctx.textAlign = 'left';
+        ctx.fillStyle = 'rgba(255,170,60,0.30)';
+        ctx.fillText('u_mono (monoisotope)', mPts[0].x + 6, mPts[0].y - 4);
+      }
+    }
+  }
+
+  // â”€â”€ 5. Sole element chain â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  if (cbSC && cbSC.checked && SOLE_Z.length > 1) {
+    const solePoints = [];
+    for (let i = 0; i < SOLE_Z.length; i++) {
+      const iso = ISO.find(e => e.Z === SOLE_Z[i] && e.stable);
+      if (iso) solePoints.push(isoPos(iso));
+    }
+    if (solePoints.length > 1) {
+      ctx.strokeStyle = "rgba(255,230,70,0.20)";
+      ctx.lineWidth = 1.0;
+      ctx.setLineDash([4,3]);
+      ctx.beginPath();
+      solePoints.forEach((p, i) => i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y));
+      ctx.stroke();
+      ctx.setLineDash([]);
+    }
+  }
+
+  // â”€â”€ 6. Hex lattice grid lines â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  {
+    const lineCol = 'rgba(70,100,180,0.18)';
+    ctx.strokeStyle = lineCol;
+    ctx.lineWidth = 0.7;
+    ctx.setLineDash([]);
+
+    // a) Horizontal: for each v level
+    const byV = new Map();
+    ISO.forEach(iso => {
+      const v = iso.nd + iso.nt;
+      if (!byV.has(v)) byV.set(v, []);
+      byV.get(v).push(iso);
+    });
+    byV.forEach(isos => {
+      const pts = isos.map(iso => isoPos(iso)).sort((a,b) => a.x - b.x);
+      if (pts.length < 2) return;
+      ctx.beginPath();
+      ctx.moveTo(pts[0].x, pts[0].y);
+      pts.forEach((p,i) => { if (i > 0) ctx.lineTo(p.x, p.y); });
+      ctx.stroke();
+    });
+
+    // b) Diagonal-right: constant nt
+    const byNt = new Map();
+    ISO.forEach(iso => {
+      if (!byNt.has(iso.nt)) byNt.set(iso.nt, []);
+      byNt.get(iso.nt).push(iso);
+    });
+    byNt.forEach(isos => {
+      const pts = isos.sort((a,b) => a.nd - b.nd).map(iso => isoPos(iso));
+      if (pts.length < 2) return;
+      ctx.beginPath();
+      ctx.moveTo(pts[0].x, pts[0].y);
+      pts.forEach((p,i) => { if (i > 0) ctx.lineTo(p.x, p.y); });
+      ctx.stroke();
+    });
+
+    // c) Diagonal-left: constant nd
+    const byNd = new Map();
+    ISO.forEach(iso => {
+      if (!byNd.has(iso.nd)) byNd.set(iso.nd, []);
+      byNd.get(iso.nd).push(iso);
+    });
+    byNd.forEach(isos => {
+      const pts = isos.sort((a,b) => a.nt - b.nt).map(iso => isoPos(iso));
+      if (pts.length < 2) return;
+      ctx.beginPath();
+      ctx.moveTo(pts[0].x, pts[0].y);
+      pts.forEach((p,i) => { if (i > 0) ctx.lineTo(p.x, p.y); });
+      ctx.stroke();
+    });
+  }
+
+  // Axis labels
+  ctx.fillStyle = "#666";
+  ctx.textAlign = "center";
+  ctx.font = "400 10px 'Segoe UI',sans-serif";
+  ctx.fillText("deuteron excess  (n_d − n_t)  →", W/2, H - 15);
+  ctx.save();
+  ctx.translate(15, H/2);
+  ctx.rotate(-Math.PI/2);
+  ctx.fillText("← total subunits  (n_d + n_t)  →", 0, 0);
+  ctx.restore();
+
+  // —— 7. Shell bands ————————————————————————————————————————————————————————
+  if (cbShells.checked) {
+    SHELL_BANDS.forEach(sh => {
+      const shIsos = ISO.filter(e => e.Z >= sh.zMin && e.Z <= sh.zMax);
+      if (shIsos.length === 0) return;
+      const vValsInShell = shIsos.map(e => e.nd + e.nt);
+      const vBotRaw = Math.min(...vValsInShell);
+      const vTopRaw = Math.max(...vValsInShell);
+
+      const vRange = (vMax - vMin) || 1;
+      const shPad = 80;
+      const scale = (H - shPad*2) / vRange;
+      // Y-axis is flipped: small v (light elements) → bottom, large v (heavy) → top
+      const byLight = shPad + (vMax - vBotRaw) * scale; // small v → large y (bottom)
+      const byHeavy = shPad + (vMax - vTopRaw) * scale; // large v → small y (top)
+      const yLight = H/2 + (byLight - H/2 + panY) * zoom; // visual bottom of band
+      const yHeavy = H/2 + (byHeavy - H/2 + panY) * zoom; // visual top of band
+      const halfStep = scale * zoom / 2;
+
+      ctx.fillStyle = sh.fill;
+      ctx.fillRect(0, yHeavy - halfStep, W, yLight - yHeavy + scale * zoom);
+
+      ctx.font = "700 11px 'Segoe UI',sans-serif";
+      ctx.fillStyle = sh.stroke;
+      ctx.textAlign = "right";
+      const yMid = (yHeavy + yLight) / 2;
+      ctx.fillText(`Shell ${sh.name}`, W - 6, yMid + 4);
+
+      ctx.strokeStyle = sh.stroke.replace(/[\.\d]+\)$/, "0.25)");
+      ctx.lineWidth = 0.8;
+      ctx.setLineDash([4, 6]);
+      ctx.beginPath();
+      ctx.moveTo(0, yHeavy - halfStep); ctx.lineTo(W, yHeavy - halfStep);
+      ctx.moveTo(0, yLight  + halfStep); ctx.lineTo(W, yLight  + halfStep);
+      ctx.stroke();
+      ctx.setLineDash([]);
+    });
+  }
+
+  // â”€â”€ 8. Golden Boundary Line â€” FOREGROUND VERSION (bright) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  if (cbGoldenLine.checked) {
+    const goldenPts = [];
+    for (let v = vMin % 2 === 0 ? vMin : vMin + 1; v <= vMax; v += 2) {
+      const half = v / 2;
+      if (half < 0) continue;
+      const p = gridPos(half, half);
+      if (p.x > -200 && p.x < W + 200) goldenPts.push(p);
+    }
+    if (goldenPts.length > 1) {
+      ctx.save();
+      ctx.shadowColor = "rgba(255,220,40,0.7)";
+      ctx.shadowBlur = 14;
+      ctx.strokeStyle = "rgba(255,215,0,0.20)";
+      ctx.lineWidth = 7;
+      ctx.lineJoin = "round";
+      ctx.beginPath();
+      goldenPts.forEach((p,i) => i===0 ? ctx.moveTo(p.x,p.y) : ctx.lineTo(p.x,p.y));
+      ctx.stroke();
+      ctx.restore();
+      ctx.strokeStyle = "rgba(255,210,30,0.80)";
+      ctx.lineWidth = 1.5;
+      ctx.lineJoin = "round";
+      ctx.setLineDash([]);
+      ctx.beginPath();
+      goldenPts.forEach((p,i) => i===0 ? ctx.moveTo(p.x,p.y) : ctx.lineTo(p.x,p.y));
+      ctx.stroke();
+      const topPt = goldenPts[0];
+      ctx.save();
+      ctx.font = "600 10px 'Segoe UI',sans-serif";
+      ctx.fillStyle = "rgba(255,215,0,0.60)";
+      ctx.textAlign = "left";
+      ctx.fillText("n\u2099 = n\u209c  (50/50)", topPt.x + 5, topPt.y + 14);
+      ctx.restore();
+    }
+  }
+
+  // â”€â”€ Energy Functional Spine overlay (foreground) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  if (cbEnergySpine.checked) {
+    const ePts = [];
+    vVals.forEach(v => {
+      const sp = energySpineByV[v]; if (!sp) return;
+      const nd_synth = (v + sp.u) / 2, nt_synth = (v - sp.u) / 2;
+      if (nt_synth >= 0) {
+        const p = gridPos(nd_synth, nt_synth);
+        if (p.x > -100 && p.x < W + 100) {
+          ePts.push({ x: p.x, y: p.y, v, sp });
+        }
+      }
+    });
+    if (ePts.length > 1) {
+      ctx.save();
+      ctx.strokeStyle = 'rgba(40,180,180,0.42)';
+      ctx.lineWidth   = 1.2;
+      ctx.lineJoin    = 'round';
+      ctx.lineCap     = 'round';
+      ctx.setLineDash([6, 5]);
+      ctx.shadowBlur  = 0;
+      ctx.beginPath();
+      ePts.forEach((p, i) => i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y));
+      ctx.stroke();
+      ctx.restore();
+    }
+  }
+
+  // â”€â”€ Mono spine overlay (foreground) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  if (cbMonoSpineOv && cbMonoSpineOv.checked) {
+    const mPts = [];
+    monoPts.forEach(pt => {
+      const nd_m = (pt.v + pt.u) / 2, nt_m = (pt.v - pt.u) / 2;
+      if (nt_m < 0) return;
+      const p = gridPos(nd_m, nt_m);
+      if (p.x > -100 && p.x < W+100) mPts.push({ x:p.x, y:p.y });
+    });
+    if (mPts.length > 1) {
+      ctx.save();
+      ctx.shadowColor = 'rgba(255,160,40,0.60)'; ctx.shadowBlur = 8;
+      ctx.strokeStyle = 'rgba(255,160,40,0.22)'; ctx.lineWidth = 5;
+      ctx.lineJoin = 'round';
+      ctx.beginPath();
+      mPts.forEach((p,i) => i===0 ? ctx.moveTo(p.x,p.y) : ctx.lineTo(p.x,p.y));
+      ctx.stroke();
+      ctx.restore();
+      ctx.strokeStyle = 'rgba(255,170,60,0.75)'; ctx.lineWidth = 1.2;
+      ctx.setLineDash([5,4]);
+      ctx.beginPath();
+      mPts.forEach((p,i) => i===0 ? ctx.moveTo(p.x,p.y) : ctx.lineTo(p.x,p.y));
+      ctx.stroke();
+      ctx.setLineDash([]);
+      if (mPts.length > 0) {
+        ctx.font = "600 9px 'Segoe UI',sans-serif"; ctx.textAlign = 'left';
+        ctx.fillStyle = 'rgba(255,170,60,0.60)';
+        ctx.fillText('u_mono (monoisotope)', mPts[0].x + 6, mPts[0].y - 4);
+      }
+    }
+  }
+}
+// === js/draw-nodes.js ===
+function drawNodes(ctx) {
+  const pad = 80;
+  const showFam  = cbFam.checked;
+  const showConn = cbConn.checked;
+  const showMag  = cbMag.checked;
+
+  // â”€â”€ Background position circles for all known unstable isotopes â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  if (cbUnstPos.checked) {
+    const baseR = Math.max(2.5, gridScale * zoom / 2 - 1);
+    UNSTABLE_GRID.forEach(([Z, A, nd, nt]) => {
+      const p = gridPos(nd, nt);
+      if (p.x < 130 || p.x > W - 20 || p.y < 20 || p.y > H - 20) return;
+      const evenA = (A % 2 === 0);
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, baseR, 0, Math.PI*2);
+      ctx.strokeStyle = evenA
+        ? "rgba(100,165,230,0.22)"
+        : "rgba(220,155,70,0.22)";
+      ctx.lineWidth = 0.9;
+      ctx.stroke();
+    });
+  }
+
+  // Triton family connections
+  if (showFam) {
+    const byNt = {};
+    ISO.forEach(iso => { if (!byNt[iso.nt]) byNt[iso.nt] = []; byNt[iso.nt].push(iso); });
+    Object.entries(byNt).forEach(([nt, family]) => {
+      if (family.length < 2) return;
+      family.sort((a,b) => a.nd - b.nd);
+      ctx.strokeStyle = `rgba(200,180,140,0.06)`;
+      ctx.lineWidth = 0.5;
+      ctx.beginPath();
+      family.forEach((iso,i) => { const p = isoPos(iso); i===0 ? ctx.moveTo(p.x,p.y) : ctx.lineTo(p.x,p.y); });
+      ctx.stroke();
+    });
+  }
+
+  // Z-chain connections
+  if (showConn) {
+    const sorted = [...ISO].sort((a,b) => a.Z - b.Z || a.A - b.A);
+    ctx.lineWidth = 0.4;
+    for (let i = 1; i < sorted.length; i++) {
+      if (sorted[i].Z !== sorted[i-1].Z) continue;
+      const a = isoPos(sorted[i-1]), b = isoPos(sorted[i]);
+      ctx.strokeStyle = "rgba(255,255,255,0.07)";
+      ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
+    }
+  }
+
+  // Magnetic overlay
+  if (showMag) {
+    const FERRO_Z    = new Set([26,27,28]);
+    const STRONGPARA_Z = new Set([24,25,23,57,58,59,60,62,64,65,66,67,68,69,70]);
+    const PARA_Z     = new Set([3,8,11,13,15,16,19,20,21,22,23,29,37,38,39,40,41,42,43,44,45,46,47,48,55,56,74,75,76,77,78,79,90,92]);
+    const DIA_Z      = new Set([1,2,4,6,7,9,10,12,14,17,18,30,32,33,34,35,36,50,51,52,53,54,80,82,83]);
+
+    const magTypes = [
+      { label:"Ferromagnetic",   zSet:FERRO_Z,     glow:"rgba(255,60,80,",  ring:"rgba(255,100,120,", haloR:55 },
+      { label:"Strong para.",    zSet:STRONGPARA_Z,glow:"rgba(255,160,40,",  ring:"rgba(255,190,80,",  haloR:38 },
+      { label:"Paramagnetic",    zSet:PARA_Z,      glow:"rgba(120,200,255,", ring:"rgba(150,220,255,", haloR:28 },
+      { label:"Diamagnetic",     zSet:DIA_Z,       glow:"rgba(160,180,220,", ring:"rgba(190,210,240,", haloR:22 },
+    ];
+
+    ISO.forEach(iso => {
+      let mt = null;
+      if (FERRO_Z.has(iso.Z)) mt = magTypes[0];
+      else if (STRONGPARA_Z.has(iso.Z)) mt = magTypes[1];
+      else if (PARA_Z.has(iso.Z)) mt = magTypes[2];
+      else if (DIA_Z.has(iso.Z)) mt = magTypes[3];
+      if (!mt) return;
+      const p = isoPos(iso);
+      const hR = mt.haloR * zoom;
+      const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, hR);
+      grad.addColorStop(0,   mt.glow + "0.22)");
+      grad.addColorStop(0.4, mt.glow + "0.10)");
+      grad.addColorStop(1,   mt.glow + "0.00)");
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, hR, 0, Math.PI*2);
+      ctx.fillStyle = grad;
+      ctx.fill();
+    });
+
+    const ferroIsos = ISO.filter(e => FERRO_Z.has(e.Z));
+    if (ferroIsos.length > 0) {
+      let cx = 0, cy = 0;
+      ferroIsos.forEach(e => { const p = isoPos(e); cx += p.x; cy += p.y; });
+      cx /= ferroIsos.length; cy /= ferroIsos.length;
+
+      ctx.save();
+      for (let ring = 1; ring <= 8; ring++) {
+        const rr = (20 + ring * 22) * zoom;
+        const alpha = Math.max(0, 0.14 - ring * 0.015);
+        const grad2 = ctx.createRadialGradient(cx, cy, rr * 0.7, cx, cy, rr);
+        grad2.addColorStop(0, `rgba(255,60,80,${alpha})`);
+        grad2.addColorStop(1, `rgba(255,60,80,0)`);
+        ctx.beginPath();
+        ctx.arc(cx, cy, rr, 0, Math.PI*2);
+        ctx.fillStyle = grad2;
+        ctx.fill();
+      }
+      const fieldLineCount = 12;
+      for (let i = 0; i < fieldLineCount; i++) {
+        const angle = (i / fieldLineCount) * Math.PI * 2;
+        const r1 = 14 * zoom;
+        const r2 = 140 * zoom;
+        ctx.beginPath();
+        ctx.moveTo(cx + Math.cos(angle) * r1, cy + Math.sin(angle) * r1);
+        ctx.lineTo(cx + Math.cos(angle) * r2, cy + Math.sin(angle) * r2);
+        ctx.strokeStyle = `rgba(255,80,100,0.12)`;
+        ctx.lineWidth = 1.2 * zoom;
+        ctx.stroke();
+      }
+      const hotGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, 30 * zoom);
+      hotGrad.addColorStop(0,   "rgba(255,200,210,0.30)");
+      hotGrad.addColorStop(0.5, "rgba(255,80,100,0.12)");
+      hotGrad.addColorStop(1,   "rgba(255,60,80,0)");
+      ctx.beginPath();
+      ctx.arc(cx, cy, 30 * zoom, 0, Math.PI*2);
+      ctx.fillStyle = hotGrad;
+      ctx.fill();
+      ctx.restore();
+
+      ctx.font = "700 11px 'Segoe UI',sans-serif";
+      ctx.fillStyle = "rgba(255,100,120,0.75)";
+      ctx.textAlign = "center";
+      ctx.fillText("Fe Â· Co Â· Ni", cx, cy + 145 * zoom);
+      ctx.font = "500 9px 'Segoe UI',sans-serif";
+      ctx.fillStyle = "rgba(255,100,120,0.45)";
+      ctx.fillText("ferromagnetic zone", cx, cy + 158 * zoom);
+    }
+
+    const lx = 140, ly = H - 110;
+    ctx.font = "700 10px 'Segoe UI',sans-serif";
+    ctx.fillStyle = "rgba(200,190,180,0.7)";
+    ctx.textAlign = "left";
+    ctx.fillText("Magnetic character", lx, ly - 4);
+    magTypes.forEach((mt, i) => {
+      const gy = ly + 14 + i * 16;
+      const grad3 = ctx.createRadialGradient(lx + 6, gy, 0, lx + 6, gy, 10);
+      grad3.addColorStop(0, mt.glow + "0.7)");
+      grad3.addColorStop(1, mt.glow + "0)");
+      ctx.beginPath(); ctx.arc(lx + 6, gy, 6, 0, Math.PI*2);
+      ctx.fillStyle = grad3; ctx.fill();
+      ctx.beginPath(); ctx.arc(lx + 6, gy, 4, 0, Math.PI*2);
+      ctx.fillStyle = mt.glow + "0.4)"; ctx.fill();
+      ctx.font = "500 9px 'Segoe UI',sans-serif";
+      ctx.fillStyle = mt.ring + "0.85)";
+      ctx.fillText(mt.label, lx + 16, gy + 3);
+    });
+  }
+
+  // Shell closure background bands only
+  if (cbShells.checked) {
+    MAGIC_Z.forEach(mz => {
+      const magIsos = ISO.filter(e => e.Z === mz);
+      if (!magIsos.length) return;
+      const positions = magIsos.map(e => isoPos(e));
+      const minY = Math.min(...positions.map(p => p.y));
+      const maxY = Math.max(...positions.map(p => p.y));
+      ctx.fillStyle = 'rgba(80,200,80,0.03)';
+      ctx.fillRect(0, minY - 6, W, maxY - minY + 12);
+    });
+  }
+
+  // Sole vs Spread legend
+  if (cbSS.checked) {
+    ctx.font = "500 10px 'Segoe UI',sans-serif";
+    ctx.textAlign = "left";
+    ctx.fillStyle = "rgba(230,180,70,0.6)";
+    ctx.fillText("â—  sole (1 stable isotope)", pad + 5, H - pad + 15);
+    ctx.fillStyle = "rgba(90,120,150,0.6)";
+    ctx.fillText("â—  spread (2+ stable isotopes)", pad + 175, H - pad + 15);
+    ctx.fillStyle = "rgba(120,80,70,0.5)";
+    ctx.fillText("â—‹ unstable", pad + 375, H - pad + 15);
+  }
+
+  // Unpaired electrons legend
+  if (cbUnp.checked) {
+    ctx.font = "500 10px 'Segoe UI',sans-serif";
+    ctx.textAlign = "left";
+    for (let u = 0; u <= 7; u++) {
+      const t = u / 7;
+      const cr = Math.round(80 + t * 160);
+      const cg = Math.round(130 - t * 60);
+      const cb2 = Math.round(170 - t * 130);
+      ctx.fillStyle = `rgba(${cr},${cg},${cb2},0.7)`;
+      ctx.beginPath(); ctx.arc(pad + 5 + u * 30, H - pad + 18, 4, 0, Math.PI*2); ctx.fill();
+      ctx.fillStyle = "#888";
+      ctx.fillText(u.toString(), pad + 12 + u * 30, H - pad + 22);
+    }
+    ctx.fillStyle = "#888";
+    ctx.fillText("â†  unpaired electrons", pad + 5 + 8 * 30, H - pad + 22);
+  }
+
+  // Odd/Even legend
+  if (cbOddEven.checked) {
+    ctx.font = "500 10px 'Segoe UI',sans-serif";
+    ctx.textAlign = "left";
+    ctx.fillStyle = "rgba(200,140,80,0.6)";
+    ctx.fillText("â—  odd-A (half-integer spin)", pad + 5, H - pad + 15);
+    ctx.fillStyle = "rgba(80,130,170,0.6)";
+    ctx.fillText("â—  even-A (integer spin)", pad + 220, H - pad + 15);
+  }
+
+  // â”€â”€ CHANGE 4: Pre-compute active group state â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // Build a Set of group keys and find connected components for scaling
+  const groupSet = new Set();
+  activeGroup.forEach(iso => groupSet.add(`${iso.nd},${iso.nt}`));
+
+  // Flat-top hex neighbours in (nd,nt) space
+  const HEX_NEIGHBOURS = [[1,0],[-1,0],[0,1],[0,-1],[1,-1],[-1,1]];
+
+  function hexNeighbours(nd, nt) {
+    return HEX_NEIGHBOURS.map(([dnd,dnt]) => ({nd: nd+dnd, nt: nt+dnt}));
+  }
+
+  // Find connected components among activeGroup members
+  function findComponents(group) {
+    const visited = new Set();
+    const components = [];
+    group.forEach(iso => {
+      const key = `${iso.nd},${iso.nt}`;
+      if (visited.has(key)) return;
+      // BFS
+      const comp = [];
+      const queue = [iso];
+      visited.add(key);
+      while (queue.length) {
+        const cur = queue.shift();
+        comp.push(cur);
+        hexNeighbours(cur.nd, cur.nt).forEach(nb => {
+          const nkey = `${nb.nd},${nb.nt}`;
+          if (!visited.has(nkey) && groupSet.has(nkey)) {
+            visited.add(nkey);
+            const nbIso = group.find(g => g.nd === nb.nd && g.nt === nb.nt);
+            if (nbIso) queue.push(nbIso);
+          }
+        });
+      }
+      components.push(comp);
+    });
+    return components;
+  }
+
+  // Map each iso key â†’ its component's screen centroid
+  const groupCentroidMap = new Map();
+  if (activeGroup.length > 0) {
+    const components = findComponents(activeGroup);
+    components.forEach(comp => {
+      let cx = 0, cy = 0;
+      comp.forEach(iso => { const p = isoPos(iso); cx += p.x; cy += p.y; });
+      cx /= comp.length; cy /= comp.length;
+      comp.forEach(iso => {
+        groupCentroidMap.set(`${iso.nd},${iso.nt}`, { cx, cy, compSize: comp.length });
+      });
+    });
+  }
+
+  // â”€â”€ Draw isotope nodes â€” flat-top hexagons â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  ISO.forEach(iso => {
+    const rawP = isoPos(iso);
+    const isElemHov = hoveredZ !== null && iso.Z === hoveredZ;
+    const isHov = hoveredIso && hoveredIso.Z === iso.Z && hoveredIso.A === iso.A;
+    const isSel = selectedIso && selectedIso.Z === iso.Z && selectedIso.A === iso.A;
+    const isSoleStable = iso.isSole && iso.stable;
+    const isoKey = `${iso.nd},${iso.nt}`;
+    const inGroup = groupSet.has(isoKey);
+
+    const gsY = gridScale * zoom;
+    const R0  = gsY * 0.9375;
+
+    // Determine scale origin and draw position for group members
+    let p = rawP;
+    let R = R0;
+    let scaleFactor = 1.0;
+
+    if (inGroup) {
+      const comp = groupCentroidMap.get(isoKey);
+      if (comp) {
+        scaleFactor = 1.5;
+        const { cx, cy } = comp;
+        // Scale position outward from component centroid
+        const dx = rawP.x - cx;
+        const dy = rawP.y - cy;
+        p = { x: cx + dx * scaleFactor, y: cy + dy * scaleFactor };
+        R = R0 * scaleFactor;
+      }
+    } else {
+      if (isHov || isSel)                R = R0 * 1.06;
+      if (isElemHov && !isHov && !isSel) R = R0 * 1.02;
+    }
+    R = Math.max(R, 4);
+
+    const relAbd = iso.abd > 0 && maxAbdByZ[iso.Z]
+      ? iso.abd / maxAbdByZ[iso.Z] : 0;
+
+    // Group glow / back-glow
+    if (inGroup) {
+      const rgb = isoColor(iso, 1.0);
+      ctx.save();
+      ctx.shadowColor = rgb.replace(/[\d.]+\)$/, '0.6)');
+      ctx.shadowBlur = 20 * zoom;
+      hexPath(ctx, p.x, p.y, R);
+      ctx.fillStyle = 'rgba(0,0,0,0)';
+      ctx.fill();
+      ctx.restore();
+    } else if (isHov || isSel || isElemHov) {
+      // Normal hover glow
+      const gf = isHov ? 1.5 : 1.25;
+      hexPath(ctx, p.x, p.y, R * gf);
+      ctx.fillStyle = isoColor(iso, isHov ? 0.20 : 0.09);
+      ctx.fill();
+    }
+
+    hexPath(ctx, p.x, p.y, R);
+    if (iso.stable) {
+      ctx.fillStyle = isSoleStable
+        ? `rgba(20,20,28,${(isHov||isSel||inGroup) ? 1.0 : 0.92})`
+        : isoColor(iso, (isHov||isSel||inGroup) ? 0.85 : isElemHov ? 0.72 : 0.58);
+    } else {
+      ctx.fillStyle = isoColor(iso, (isHov||isSel||inGroup) ? 0.50 : isElemHov ? 0.30 : 0.20);
+    }
+    ctx.fill();
+
+    // â”€â”€ Border drawing: for group members, skip edges shared with other group members â”€â”€
+    if (inGroup) {
+      // Draw each edge individually, skipping edges adjacent to other group members
+      const R_used = R;
+      ctx.save();
+      ctx.strokeStyle = isoColor(iso, 0.70);
+      ctx.lineWidth = 1.5 * zoom;
+      // Flat-top hex: vertex i is at angle i*PI/3
+      for (let edge = 0; edge < 6; edge++) {
+        // Edge i connects vertex[edge] to vertex[(edge+1)%6]
+        // The neighbour sharing this edge in (nd,nt) space:
+        // For flat-top hex, edge directions map to HEX_NEIGHBOURS
+        const nb = hexNeighbours(iso.nd, iso.nt)[edge];
+        const nbKey = `${nb.nd},${nb.nt}`;
+        if (groupSet.has(nbKey)) continue; // skip shared edge
+        const a1 = (edge * Math.PI) / 3;
+        const a2 = ((edge + 1) * Math.PI) / 3;
+        ctx.beginPath();
+        ctx.moveTo(p.x + R_used * Math.cos(a1), p.y + R_used * Math.sin(a1));
+        ctx.lineTo(p.x + R_used * Math.cos(a2), p.y + R_used * Math.sin(a2));
+        ctx.stroke();
+      }
+      ctx.restore();
+    } else {
+      hexPath(ctx, p.x, p.y, R);
+      ctx.strokeStyle = isoColor(iso, iso.stable
+        ? (isHov||isSel ? 0.80 : 0.40)
+        : (isHov||isSel ? 0.55 : 0.22));
+      ctx.lineWidth = isHov||isSel ? 1.2 * zoom : 0.7 * zoom;
+      ctx.stroke();
+    }
+
+    // Inner abundance hex
+    if (relAbd > 0.01) {
+      const innerR = Math.max(2, R * relAbd * 0.72);
+      hexPath(ctx, p.x, p.y, innerR);
+      ctx.fillStyle = isSoleStable
+        ? `rgba(255,200,40,${(isHov||isSel||inGroup) ? 1.0 : 0.88})`
+        : isoColor(iso, (isHov||isSel||inGroup) ? 1.0 : 0.94);
+      ctx.fill();
+    }
+
+    if (isSoleStable) {
+      hexPath(ctx, p.x, p.y, R + 2 * zoom);
+      ctx.strokeStyle = `rgba(255,215,0,${(isHov||isSel||inGroup) ? 0.85 : 0.50})`;
+      ctx.lineWidth = 1.0 * zoom;
+      ctx.stroke();
+    }
+    if (isSel) {
+      hexPath(ctx, p.x, p.y, R + 4 * zoom);
+      ctx.strokeStyle = 'rgba(255,255,255,0.90)';
+      ctx.lineWidth = 1.8 * zoom;
+      ctx.stroke();
+    }
+
+    // Group dotted ring on outer perimeter of isolated members or at outer edges
+    if (inGroup) {
+      const rgb = isoColor(iso, 1.0);
+      const glowColor = rgb.replace(/rgba\((\d+),(\d+),(\d+),[^)]+\)/, 'rgba($1,$2,$3,0.75)');
+      ctx.save();
+      ctx.shadowColor = glowColor;
+      ctx.shadowBlur = 8 * zoom;
+      ctx.strokeStyle = glowColor;
+      ctx.lineWidth = 2 * zoom;
+      ctx.setLineDash([4, 3]);
+      hexPath(ctx, p.x, p.y, R + 2 * zoom);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.restore();
+    }
+
+    // Î”u_E sideband colour overlay
+    if (cbDeltaUE.checked) {
+      const v = iso.nd + iso.nt;
+      const sp = energySpineByV[v];
+      if (sp) {
+        const du = (iso.nd - iso.nt) - sp.u;
+        const adu = Math.abs(du);
+        let dc;
+        if      (adu < 0.5) dc = 'rgba(40,230,255,';
+        else if (adu < 1.5) dc = 'rgba(40,220,100,';
+        else if (adu < 2.5) dc = 'rgba(190,230,40,';
+        else if (adu < 3.5) dc = 'rgba(255,190,20,';
+        else if (adu < 5.0) dc = 'rgba(255,100,20,';
+        else                dc = 'rgba(130,100,100,';
+        const alpha = iso.stable ? 0.72 : 0.38;
+        hexPath(ctx, p.x, p.y, R * 0.68);
+        ctx.fillStyle = dc + alpha + ')';
+        ctx.fill();
+      }
+    }
+
+    // Periodic-table text: sym + mass number inside hex (Change 2 styling)
+    if (R >= 7) {
+      const symSize = Math.round(Math.min(R * 0.55, 16));
+      const numSize = Math.round(Math.min(R * 0.38, 12));
+
+      // Background pill colour
+      let pillFill, textFill;
+      if (iso.abd > 0) {
+        pillFill = 'rgba(0,0,0,0.88)';      textFill = 'rgba(255,255,255,0.95)';
+      } else if (iso.stable) {
+        pillFill = 'rgba(180,20,20,0.88)';  textFill = 'rgba(255,255,255,0.95)';
+      } else {
+        pillFill = 'rgba(255,255,255,0.88)'; textFill = 'rgba(0,0,0,0.90)';
+      }
+
+      // Measure symbol with Georgia serif
+      ctx.font = `bold ${symSize}px Georgia,'Times New Roman',serif`;
+      const sw = ctx.measureText(iso.sym).width;
+
+      // Draw pill behind symbol
+      const ph = symSize * 1.1, pw = sw + 4;
+      const px2 = p.x - pw/2, py_sym = p.y + R * 0.10;
+      ctx.fillStyle = pillFill;
+      roundRect(ctx, px2, py_sym - ph*0.85, pw, ph, 2);
+      ctx.fill();
+
+      // Mass number above â€” sans-serif
+      ctx.font = `400 ${numSize}px 'Segoe UI',Arial,sans-serif`;
+      const isTextActive = (isHov || isSel || inGroup);
+      ctx.fillStyle = isTextActive ? 'rgba(255,255,255,0.95)' : 'rgba(180,180,180,0.80)';
+      ctx.textAlign = 'center';
+      ctx.fillText(String(iso.A), p.x, p.y - R * 0.12);
+
+      // Symbol â€” serif bold
+      ctx.font = `bold ${symSize}px Georgia,'Times New Roman',serif`;
+      ctx.fillStyle = textFill;
+      ctx.fillText(iso.sym, p.x, py_sym);
+    }
+  });
+
+  // â”€â”€ CHANGE 4: Draw connecting lines between chain members â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  if (activeGroup.length > 1) {
+    ctx.save();
+    ctx.globalAlpha = 0.5;
+    ctx.strokeStyle = 'rgba(255,255,255,0.6)';
+    ctx.lineWidth = 1.5 * zoom;
+    ctx.setLineDash([4, 4]);
+    ctx.shadowColor = 'rgba(255,255,255,0.4)';
+    ctx.shadowBlur = 4;
+    for (let i = 1; i < activeGroup.length; i++) {
+      const a = activeGroup[i-1];
+      const b = activeGroup[i];
+      const aKey = `${a.nd},${a.nt}`;
+      const bKey = `${b.nd},${b.nt}`;
+      const aComp = groupCentroidMap.get(aKey);
+      const bComp = groupCentroidMap.get(bKey);
+      if (!aComp || !bComp) continue;
+      const aRawP = isoPos(a);
+      const bRawP = isoPos(b);
+      const ax = aComp.cx + (aRawP.x - aComp.cx) * 1.5;
+      const ay = aComp.cy + (aRawP.y - aComp.cy) * 1.5;
+      const bx = bComp.cx + (bRawP.x - bComp.cx) * 1.5;
+      const by_ = bComp.cy + (bRawP.y - bComp.cy) * 1.5;
+      // Skip if they are adjacent (already visually merged)
+      const nbrs = HEX_NEIGHBOURS.map(([dnd,dnt]) => `${a.nd+dnd},${a.nt+dnt}`);
+      if (nbrs.includes(bKey)) continue;
+      ctx.beginPath();
+      ctx.moveTo(ax, ay);
+      ctx.lineTo(bx, by_);
+      ctx.stroke();
+    }
+    ctx.setLineDash([]);
+    ctx.restore();
+  }
+
+  // â”€â”€ CHANGE 4: Canvas chain panel on right â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  if (activeGroup.length > 0) {
+    const panX2 = W - 195;
+    const panY2 = 60;
+    const panW = 185;
+    const lineH = 22;
+    const panH2 = 16 + activeGroup.length * lineH + 8;
+
+    ctx.save();
+    ctx.fillStyle = 'rgba(8,10,18,0.85)';
+    roundRect(ctx, panX2, panY2, panW, panH2, 6);
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(212,160,92,0.25)';
+    ctx.lineWidth = 0.8;
+    roundRect(ctx, panX2, panY2, panW, panH2, 6);
+    ctx.stroke();
+
+    ctx.font = '600 10px "Segoe UI",sans-serif';
+    ctx.fillStyle = groupLocked ? 'rgba(212,160,92,0.90)' : 'rgba(170,180,200,0.80)';
+    ctx.textAlign = 'left';
+    ctx.fillText(groupLocked ? 'ðŸ”’ Decay Chain (locked)' : 'Decay Chain', panX2 + 8, panY2 + 12);
+
+    activeGroup.forEach((iso, i) => {
+      const yRow = panY2 + 20 + i * lineH;
+      const rgb = isoColor(iso, 1.0);
+      const dotColor = rgb.replace(/rgba\((\d+),(\d+),(\d+),[^)]+\)/, 'rgba($1,$2,$3,0.85)');
+
+      ctx.fillStyle = dotColor;
+      ctx.beginPath();
+      ctx.arc(panX2 + 10, yRow + 5, 3.5, 0, Math.PI*2);
+      ctx.fill();
+
+      ctx.font = '600 10px "Segoe UI",sans-serif';
+      ctx.fillStyle = 'rgba(220,215,200,0.92)';
+      ctx.fillText(`${iso.sym}-${iso.A}`, panX2 + 18, yRow + 9);
+
+      const decay = iso.stable ? 'stable' : (iso.decay || 'â€”');
+      if (i < activeGroup.length - 1) {
+        ctx.font = '400 9px "Segoe UI",sans-serif';
+        ctx.fillStyle = 'rgba(160,140,100,0.70)';
+        ctx.fillText(`â†’ ${decay}`, panX2 + 58, yRow + 9);
+      }
+
+      const beStr = iso.be > 0 ? iso.be.toFixed(3) + ' MeV' : 'â€”';
+      ctx.font = '400 9px "Segoe UI",sans-serif';
+      ctx.fillStyle = 'rgba(130,150,180,0.70)';
+      ctx.textAlign = 'right';
+      ctx.fillText(beStr, panX2 + panW - 6, yRow + 9);
+      ctx.textAlign = 'left';
+    });
+
+    ctx.restore();
+  }
+}
+
+// Helper roundRect for pill labels
+function roundRect(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x+r, y);
+  ctx.lineTo(x+w-r, y);
+  ctx.arcTo(x+w, y, x+w, y+r, r);
+  ctx.lineTo(x+w, y+h-r);
+  ctx.arcTo(x+w, y+h, x+w-r, y+h, r);
+  ctx.lineTo(x+r, y+h);
+  ctx.arcTo(x, y+h, x, y+h-r, r);
+  ctx.lineTo(x, y+r);
+  ctx.arcTo(x, y, x+r, y, r);
+  ctx.closePath();
+}
+// === js/draw-overlays.js ===
+function drawOverlays(ctx) {
+  // â”€â”€ 1. Grammar Sheets (4 types of tiers) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  const showLL    = cbLongLived.checked;
+  const showMid   = cbMid.checked;
+  const showShort = cbShort.checked;
+  const showDec   = cbDecade.checked;
+  const showT4    = cbTier4.checked;
+  const showT5    = cbTier5.checked;
+  const showT6    = cbTier6.checked;
+  const showT7    = cbTier7.checked;
+  const showT8    = cbTier8.checked;
+  const showT9    = cbTier9.checked;
+
+  // Render LONG_LIVED
+  if (showLL || showMid || showShort || showDec) {
+    LONG_LIVED.forEach(([Z, A, sym, hl, decay, nd, nt, tier]) => {
+      const shouldShow =
+        (tier === 3 && showLL)  ||
+        (tier === 2 && showMid) ||
+        (tier === 1 && showShort) ||
+        (tier === 0 && showDec);
+      if (!shouldShow) return;
+      if (ISO.find(e => e.Z===Z && e.A===A)) return;
+      const p = gridPos(nd, nt);
+      if (p.x < 60 || p.x > W - 10 || p.y < 20 || p.y > H - 20) return;
+      const hR = Math.max(4, gridScale * zoom * 0.9375);
+      const tierCols = ['rgba(220,170,50,','rgba(180,130,40,','rgba(140,100,30,','rgba(100,75,20,'];
+      const col = tierCols[Math.min(tier, 3)];
+      // Draw as hexagon
+      hexPath(ctx, p.x, p.y, hR);
+      ctx.fillStyle = col + '0.28)'; ctx.fill();
+      hexPath(ctx, p.x, p.y, hR);
+      ctx.strokeStyle = col + '0.60)'; ctx.lineWidth = 0.7 * zoom; ctx.stroke();
+      if (hR >= 6) {
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        // A number
+        ctx.font = `500 ${Math.min(hR*0.34,10)}px 'Segoe UI',sans-serif`;
+        ctx.fillStyle = 'rgba(220,200,120,0.80)';
+        ctx.fillText(String(A), p.x, p.y - hR*0.30);
+        // Symbol
+        ctx.font = `bold ${Math.min(hR*0.44,13)}px Georgia,serif`;
+        ctx.fillStyle = 'rgba(255,210,100,0.95)';
+        ctx.fillText(sym, p.x, p.y + hR*0.06);
+        // Z number
+        ctx.font = `400 ${Math.min(hR*0.28,8.5)}px 'Segoe UI',sans-serif`;
+        ctx.fillStyle = 'rgba(200,175,80,0.65)';
+        ctx.fillText(String(Z), p.x, p.y + hR*0.44);
+        ctx.textBaseline = 'alphabetic';
+      }
+    });
+  }
+
+  // Render SHORT_LIVED
+  if (showT4 || showT5 || showT6 || showT7 || showT8 || showT9) {
+    const tierShows = [false, false, false, false, showT4, showT5, showT6, showT7, showT8, showT9];
+    const tierCols = {
+      4:'rgba(160,100,40,', 5:'rgba(140,80,200,', 6:'rgba(60,160,200,',
+      7:'rgba(80,180,80,',  8:'rgba(200,80,180,', 9:'rgba(255,80,80,'
+    };
+    SHORT_LIVED.forEach(([Z, A, sym, hl, decay, nd, nt, tier]) => {
+      if (!tierShows[tier]) return;
+      if (nd < 0 || nt < 0) return;
+      if (ISO.find(e => e.Z===Z && e.A===A)) return;
+      const p = gridPos(nd, nt);
+      if (p.x < 60 || p.x > W - 10 || p.y < 20 || p.y > H - 20) return;
+      const hR = Math.max(3, gridScale * zoom * 0.9375);
+      const col = tierCols[tier] || 'rgba(180,180,200,';
+      // Draw as hexagon
+      hexPath(ctx, p.x, p.y, hR);
+      ctx.fillStyle = col + '0.25)'; ctx.fill();
+      hexPath(ctx, p.x, p.y, hR);
+      ctx.strokeStyle = col + '0.60)'; ctx.lineWidth = 0.6 * zoom; ctx.stroke();
+      if (hR >= 5) {
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        // A number
+        ctx.font = `500 ${Math.min(hR*0.32,9)}px 'Segoe UI',sans-serif`;
+        ctx.fillStyle = col + '0.75)';
+        ctx.fillText(String(A), p.x, p.y - hR*0.30);
+        // Symbol
+        ctx.font = `bold ${Math.min(hR*0.42,12)}px Georgia,serif`;
+        ctx.fillStyle = col + '0.95)';
+        ctx.fillText(sym, p.x, p.y + hR*0.06);
+        // Z number
+        if (hR >= 7) {
+          ctx.font = `400 ${Math.min(hR*0.26,8)}px 'Segoe UI',sans-serif`;
+          ctx.fillStyle = col + '0.60)';
+          ctx.fillText(String(Z), p.x, p.y + hR*0.44);
+        }
+        ctx.textBaseline = 'alphabetic';
+      }
+    });
+  }
+
+  // â”€â”€ 2. Missing Alpha Positions â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  if (cbMissing.checked) {
+    const typeColors = {
+      "even-even": "rgba(80,120,200,0.20)",
+      "magic":     "rgba(80,200,80,0.25)",
+      "odd-odd":   "rgba(200,80,80,0.18)",
+      "mixed":     "rgba(180,140,60,0.18)",
+      "gap":       "rgba(120,120,120,0.18)"
+    };
+    MISSING_ALPHA.forEach(m => {
+      const p = gridPos(m.nd, m.nt);
+      if (p.x < 60 || p.x > W - 10 || p.y < 20 || p.y > H - 20) return;
+      const R = Math.max(1, gridScale * zoom * 0.45);
+      hexPath(ctx, p.x, p.y, R * 0.80);
+      ctx.fillStyle = typeColors[m.mtype] || "rgba(100,100,120,0.18)";
+      ctx.fill();
+      ctx.strokeStyle = ctx.fillStyle.replace(/[\.\d]+\)$/, "0.40)");
+      ctx.lineWidth = 0.5;
+      ctx.stroke();
+    });
+  }
+
+  // â”€â”€ 3. Missing He-3 Structures â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  if (cbHe3Miss && cbHe3Miss.checked) {
+    const typeColors = {
+      "even-even": "rgba(40,220,180,0.20)",
+      "magic":     "rgba(40,220,80,0.25)",
+      "odd-odd":   "rgba(220,80,160,0.18)",
+      "mixed":     "rgba(160,200,60,0.18)",
+      "gap":       "rgba(120,120,120,0.18)"
+    };
+    MISSING_HE3.forEach(m => {
+      const nd3 = m.nd, nt3 = m.nt;
+      const Z  = 2 + nd3 + nt3;
+      const p  = gridPos(nd3, nt3);
+      if (p.x < 60 || p.x > W - 10 || p.y < 20 || p.y > H - 20) return;
+      const R = Math.max(1, gridScale * zoom * 0.38);
+      hexPath(ctx, p.x, p.y, R);
+      ctx.fillStyle = typeColors[m.mtype] || "rgba(80,220,180,0.15)";
+      ctx.fill();
+      ctx.strokeStyle = ctx.fillStyle.replace(/[\.\d]+\)$/, "0.40)");
+      ctx.lineWidth = 0.4;
+      ctx.stroke();
+    });
+  }
+
+  // â”€â”€ 4. He-3 grammar overlay on existing isos â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  if (cbHe3 && cbHe3.checked) {
+    HE3_EXISTING.forEach(iso => {
+      const p = isoPos(iso);
+      if (p.x < 60 || p.x > W - 10 || p.y < 20 || p.y > H - 20) return;
+      const R = Math.max(2, gridScale * zoom * 0.52);
+      hexPath(ctx, p.x, p.y, R);
+      ctx.strokeStyle = 'rgba(40,220,180,0.45)';
+      ctx.lineWidth = 1.2;
+      ctx.stroke();
+    });
+  }
+
+  // â”€â”€ 5. Deuteron Chain â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  if (cbDeut.checked) {
+    const dIsos = ISO.filter(e => e.nt === 0).sort((a,b) => a.nd - b.nd);
+    if (dIsos.length > 1) {
+      ctx.save();
+      ctx.shadowColor = 'rgba(100,180,255,0.5)'; ctx.shadowBlur = 6;
+      ctx.strokeStyle = 'rgba(100,180,255,0.40)'; ctx.lineWidth = 1.2;
+      ctx.setLineDash([6,5]);
+      ctx.beginPath();
+      dIsos.forEach((iso,i) => { const p = isoPos(iso); i===0 ? ctx.moveTo(p.x,p.y) : ctx.lineTo(p.x,p.y); });
+      ctx.stroke();
+      ctx.restore();
+    }
+  }
+
+  // â”€â”€ 6. Decay Pathway Arrows â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  if (cbDecayVec.checked) {
+    const ARROWSZ = Math.max(3, gridScale * zoom * 1.5);
+    const ARROW_ALPHA = 0.65;
+    const isoSel = selectedIso || hoveredIso;
+    if (isoSel && isoSel.decay && isoSel.decay !== '-' && isoSel.decay !== 'stable') {
+      const dv = DECAY_VECTORS[isoSel.decay];
+      if (dv) {
+        const steps = decayChain(isoSel, 8, false);
+        steps.forEach(step => {
+          const from = isoPos(step.from);
+          const to   = isoPos(step.to);
+          if (from.x < 0 || from.x > W || to.x < 0 || to.x > W) return;
+          ctx.save();
+          ctx.strokeStyle = step.color;
+          ctx.lineWidth = 1.8 * zoom;
+          ctx.globalAlpha = ARROW_ALPHA;
+          ctx.beginPath(); ctx.moveTo(from.x, from.y); ctx.lineTo(to.x, to.y); ctx.stroke();
+          const angle = Math.atan2(to.y - from.y, to.x - from.x);
+          const asz = ARROWSZ;
+          ctx.fillStyle = step.color;
+          ctx.beginPath();
+          ctx.moveTo(to.x, to.y);
+          ctx.lineTo(to.x - asz * Math.cos(angle - Math.PI/6), to.y - asz * Math.sin(angle - Math.PI/6));
+          ctx.lineTo(to.x - asz * Math.cos(angle + Math.PI/6), to.y - asz * Math.sin(angle + Math.PI/6));
+          ctx.closePath(); ctx.fill();
+          ctx.restore();
+        });
+      }
+    }
+  }
+
+  // â”€â”€ 7. Energy Functional diagnostics panel â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  if (cbDeltaUE.checked && window._energySpineDiag) {
+    const d = window._energySpineDiag;
+    ctx.save();
+    ctx.fillStyle = 'rgba(0,0,0,0.70)';
+    ctx.fillRect(W - 215, H - 95, 210, 88);
+    ctx.strokeStyle = 'rgba(40,180,180,0.35)';
+    ctx.lineWidth = 0.8;
+    ctx.strokeRect(W - 215, H - 95, 210, 88);
+    ctx.font = '600 10px "Segoe UI",sans-serif';
+    ctx.fillStyle = 'rgba(40,200,200,0.90)';
+    ctx.textAlign = 'left';
+    ctx.fillText('Î”u_E diagnostics', W - 209, H - 78);
+    const lines = [
+      `Rows fitted: ${d.nRows}`,
+      `RMS monoâ€“energy sep: ${d.rmsSep.toFixed(3)}`,
+      `Stable mean offset: ${d.meanStableDelta.toFixed(3)}`,
+      `Stable median offset: ${d.medianStableDelta.toFixed(3)}`,
+    ];
+    ctx.font = '500 9px "Segoe UI",sans-serif';
+    ctx.fillStyle = 'rgba(160,210,210,0.85)';
+    lines.forEach((l,i) => ctx.fillText(l, W - 209, H - 62 + i * 13));
+    ctx.restore();
+
+    // â”€â”€ Î”u_E colour legend strip â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    const legX = W - 215, legY = H - 110;
+    const legendCols = [
+      ['rgba(40,230,255,0.80)','< 0.5'],
+      ['rgba(40,220,100,0.80)','0.5â€“1.5'],
+      ['rgba(190,230,40,0.80)','1.5â€“2.5'],
+      ['rgba(255,190,20,0.80)','2.5â€“3.5'],
+      ['rgba(255,100,20,0.80)','3.5â€“5'],
+      ['rgba(130,100,100,0.80)','> 5'],
+    ];
+    ctx.save();
+    ctx.font = '600 9px "Segoe UI",sans-serif';
+    ctx.fillStyle = 'rgba(40,200,200,0.75)';
+    ctx.textAlign = 'left';
+    ctx.fillText('|Î”u_E|:', legX, legY + 3);
+    legendCols.forEach((lc, i) => {
+      const lx = legX + 40 + i * 28;
+      ctx.fillStyle = lc[0];
+      ctx.fillRect(lx, legY - 8, 22, 12);
+      ctx.fillStyle = 'rgba(200,200,200,0.70)';
+      ctx.font = '8px "Segoe UI",sans-serif';
+      ctx.fillText(lc[1], lx, legY + 12);
+    });
+    ctx.restore();
+  }
+
+  // â”€â”€ 8. BE / nucleon overlay rings â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  if (cbBE.checked) {
+    ISO.forEach(iso => {
+      if (!iso.be || iso.be <= 0) return;
+      const p = isoPos(iso);
+      if (p.x < 60 || p.x > W - 10) return;
+      const R = Math.max(2, gridScale * zoom * 0.9);
+      const t = Math.max(0, Math.min(1, (iso.be - 4) / 5));
+      const r = Math.round(40 + (1-t)*200);
+      const g = Math.round(40 + t*200);
+      const b = 80;
+      ctx.beginPath(); ctx.arc(p.x, p.y, R * 0.9, 0, Math.PI*2);
+      ctx.strokeStyle = `rgba(${r},${g},${b},0.40)`;
+      ctx.lineWidth = R * 0.10;
+      ctx.stroke();
+    });
+  }
+
+  // â”€â”€ 9. Element label column â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  if (cbLabels.checked) {
+    ctx.font = "500 11px 'Segoe UI',sans-serif";
+    ctx.textAlign = "right";
+    const zs = [...new Set(ISO.map(e => e.Z))];
+    zs.forEach(Z => {
+      const ref = ELEM_REF_V[Z];
+      if (ref === undefined) return;
+      const v = ref;
+      const isoRef = ISO.find(e => e.Z === Z && (e.nd + e.nt) === v);
+      if (!isoRef) return;
+      const p = isoPos(isoRef);
+      if (p.y < 20 || p.y > H - 20) return;
+      ctx.fillStyle = Z === (hoveredZ || -1) ? "rgba(255,255,200,0.8)" : "rgba(190,170,140,0.45)";
+      ctx.fillText(isoRef.sym, 122, p.y + 4);
+      ctx.fillStyle = "rgba(130,115,95,0.35)";
+      ctx.font = "400 9px 'Segoe UI',sans-serif";
+      ctx.fillText(Z, 108, p.y + 4);
+      ctx.font = "500 11px 'Segoe UI',sans-serif";
+    });
+  }
+
+  // â”€â”€ 10. Hover panel update â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  const hIso = hoveredIso || selectedIso;
+  if (hIso) updateHoverPanel(hIso);
+}
+// === js/pip.js ===
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   PIP â€” Nuclear Shell Structure Mini-Render
+   
+   The NUCLEAR shell geometry mirrors the ELECTRONIC shell geometry.
+   Carbon (1Î±+4d): 4 L-shell positions + 2 Î±-poles = octahedron âœ“
+   Neon   (1Î±+8d): full square antiprism, 2s defect bonds to alpha âœ“
+   Cr half-fill:   3d pentagonal antiprism half-fill = closure gate âœ“
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+(function initPip() {
+  const pipEl  = document.getElementById("pip");
+  const pipC   = document.getElementById("pipCanvas");
+  const pipCtx = pipC.getContext("2d");
+  const pipLbl = document.getElementById("pipLabel");
+  let pipAngle = 0;
+  let pipIso   = null;
+  let pipTilt  = 0.38; // slight X-tilt for depth
+
+  pipEl.addEventListener("click", () => {
+    if (!pipIso) return;
+    window.open(`atomicus-stick.html#Z=${pipIso.Z}&A=${pipIso.A}`, "_blank");
+  });
+  window.__pipSetIso = function(iso) {
+    pipIso = iso;
+    if (pipLbl) pipLbl.textContent = iso
+      ? `${iso.sym}-${iso.A} Â· 1Î± + ${iso.nd}d + ${iso.nt}t Â· clickâ†’stick`
+      : "hover an isotope";
+  };
+
+  // â”€â”€ Compact geometry helpers â”€â”€
+  function pipV3(x,y,z){ return {x,y,z}; }
+  function pipNorm(v){ const l=Math.sqrt(v.x*v.x+v.y*v.y+v.z*v.z)||1; return {x:v.x/l,y:v.y/l,z:v.z/l}; }
+  function pipScale(v,s){ return {x:v.x*s,y:v.y*s,z:v.z*s}; }
+  function pipAdd(a,b){ return {x:a.x+b.x,y:a.y+b.y,z:a.z+b.z}; }
+  function pipDist(a,b){ const dx=a.x-b.x,dy=a.y-b.y,dz=a.z-b.z; return Math.sqrt(dx*dx+dy*dy+dz*dz); }
+
+  function pipAntiprism(n, crush, rot) {
+    if (rot === undefined) rot = 0;
+    const pts=[];
+    for(let i=0;i<n;i++){const a=(i/n)*2*Math.PI+rot;pts.push(pipV3(Math.cos(a),-crush,Math.sin(a)));}
+    for(let i=0;i<n;i++){const a=(i/n)*2*Math.PI+rot+Math.PI/n;pts.push(pipV3(Math.cos(a),crush,Math.sin(a)));}
+    return pts;
+  }
+
+  function pN(x,y,z){ const l=Math.sqrt(x*x+y*y+z*z); return pipV3(x/l,y/l,z/l); }
+  const L_HUND = [
+    pN( 1, 1, 1), pN( 1,-1,-1),
+    pN(-1, 1,-1), pN(-1,-1, 1),
+    pN(-1,-1,-1),
+    pN(-1, 1, 1), pN( 1,-1, 1), pN( 1, 1,-1),
+  ];
+  const M_HUND = [
+    pN(-1,-1,-1), pN(-1, 1, 1),
+    pN( 1,-1, 1), pN( 1, 1,-1),
+    pN( 1, 1, 1),
+    pN( 1,-1,-1), pN(-1, 1,-1), pN(-1,-1, 1),
+  ];
+  const D_CR = 0.40;
+  const D3_HUND = [
+    ...Array.from({length:5},(_,i)=>{ const a=(i/5)*2*Math.PI; return pN(Math.cos(a),D_CR,Math.sin(a)); }),
+    ...Array.from({length:5},(_,i)=>{ const a=(i/5)*2*Math.PI+Math.PI/5; return pN(Math.cos(a),-D_CR,Math.sin(a)); }),
+  ];
+  const P4_HUND = [pN(1,0,0),pN(0,1,0),pN(0,0,1), pN(-1,0,0),pN(0,-1,0),pN(0,0,-1)];
+  const D4_HUND = [
+    ...Array.from({length:5},(_,i)=>{ const a=(i/5)*2*Math.PI+Math.PI/10; return pN(Math.cos(a),D_CR,Math.sin(a)); }),
+    ...Array.from({length:5},(_,i)=>{ const a=(i/5)*2*Math.PI+Math.PI/10+Math.PI/5; return pN(Math.cos(a),-D_CR,Math.sin(a)); }),
+  ];
+  const F4_CR = 0.36;
+  const F4_HUND = [
+    ...Array.from({length:7},(_,i)=>{ const a=(i/7)*2*Math.PI; return pN(Math.cos(a),F4_CR,Math.sin(a)); }),
+    ...Array.from({length:7},(_,i)=>{ const a=(i/7)*2*Math.PI+Math.PI/7; return pN(Math.cos(a),-F4_CR,Math.sin(a)); }),
+  ];
+
+  const SC = 1.65;
+  const PIP_SHELLS = [
+    {s:'2s', cap:2,  sc:SC,   pts:L_HUND.slice(0,2)},
+    {s:'2p', cap:6,  sc:SC,   pts:L_HUND.slice(2,8)},
+    {s:'3s', cap:2,  sc:2.40, pts:M_HUND.slice(0,2)},
+    {s:'3p', cap:6,  sc:2.40, pts:M_HUND.slice(2,8)},
+    {s:'4s', cap:2,  sc:3.00, pts:[pN(0,1,0),pN(0,-1,0)]},
+    {s:'3d', cap:10, sc:2.80, pts:D3_HUND},
+    {s:'4p', cap:6,  sc:3.15, pts:P4_HUND},
+    {s:'5s', cap:2,  sc:3.75, pts:[pN(0,1,0),pN(0,-1,0)]},
+    {s:'4d', cap:10, sc:3.50, pts:D4_HUND},
+    {s:'5p', cap:6,  sc:3.90, pts:[pN(0,1,0),pN(1,0,0),pN(0,0,1),pN(0,-1,0),pN(-1,0,0),pN(0,0,-1)]},
+    {s:'6s', cap:2,  sc:4.50, pts:[pN(0,1,0),pN(0,-1,0)]},
+    {s:'4f', cap:14, sc:4.20, pts:F4_HUND},
+    {s:'5d', cap:10, sc:4.55, pts:D4_HUND.map(p=>pipV3(p.x,p.y,p.z))},
+  ];
+  const AUFBAU_PIP = ['2s','2p','3s','3p','4s','3d','4p','5s','4d','5p','6s','4f','5d'];
+
+  const SCSS = {'2s':'255,145,40','2p':'210,230,45','3s':'255,235,55','3p':'140,55,240',
+    '4s':'60,130,255','3d':'255,80,160','4p':'40,210,120','5s':'255,55,55',
+    '4d':'165,70,255','5p':'35,230,230','6s':'35,180,160','4f':'255,185,35','5d':'190,228,90'};
+
+  function buildPipGeo(iso) {
+    const Z=iso.Z, nd=iso.nd, nt=iso.nt;
+    const nodes=[], bonds=[];
+
+    const aR=0.82;
+    const alphaTetU=[pN(1,1,1),pN(1,-1,-1),pN(-1,1,-1),pN(-1,-1,1)];
+    alphaTetU.forEach((u,i)=>nodes.push({
+      p:pipV3(u.x*aR,u.y*aR,u.z*aR),
+      r:6.5, isAlpha:true, isProton:i<2, shell:'alpha', slot:-1
+    }));
+    for(let i=0;i<4;i++) for(let j=i+1;j<4;j++) bonds.push({a:i,b:j,col:'rgba(160,60,220,0.65)',w:2,d:'solid'});
+
+    if(nd===0&&nt===0) return {nodes,bonds};
+
+    const slots=[];
+    let rem=Z-2;
+    for(const sn of AUFBAU_PIP){
+      if(rem<=0) break;
+      const def=PIP_SHELLS.find(d=>d.s===sn); if(!def) continue;
+      const nf=Math.min(rem,def.cap);
+      for(let i=0;i<nf;i++) slots.push({unitPos:def.pts[i],s:sn,sc:def.sc});
+      rem-=nf;
+    }
+
+    const triSet=new Set();
+    if(nt>0&&slots.length>0){
+      let si=0,bY=-Infinity;
+      slots.forEach((sl,i)=>{if(sl.unitPos.y>bY){bY=sl.unitPos.y;si=i;}});
+      triSet.add(si);
+      while(triSet.size<Math.min(nt,slots.length)){
+        let best=-1,bd=-1;
+        for(let i=0;i<slots.length;i++){
+          if(triSet.has(i)) continue;
+          let md=Infinity;
+          for(const ti of triSet){const a=slots[i].unitPos,b=slots[ti].unitPos;const dx=a.x-b.x,dy=a.y-b.y,dz=a.z-b.z;const d=dx*dx+dy*dy+dz*dz;if(d<md)md=d;}
+          if(md>bd){bd=md;best=i;}
+        }
+        if(best>=0) triSet.add(best); else break;
+      }
+    }
+
+    const innerMap={'2s':['alpha'],'2p':['2s'],'3s':['2p','2s'],'3p':['3s','2p'],
+      '4s':['3p','3s'],'3d':['4s','3p'],'4p':['3d','4s'],'5s':['4p','3d'],
+      '4d':['5s','4p'],'5p':['4d','5s'],'6s':['5p','4d'],'4f':['6s','5p'],'5d':['4f','6s']};
+
+    slots.forEach((sl,slotIdx)=>{
+      const isTri=triSet.has(slotIdx);
+      const sc=sl.sc, u=sl.unitPos;
+      const ctr=pipScale(u,sc);
+      const pPos=pipAdd(ctr,pipScale(u,0.26));
+      const nPos=pipAdd(ctr,pipScale(u,-0.18));
+      const rgb=SCSS[sl.s]||'40,200,220';
+      const col=isTri?'rgba(220,40,220,0.85)':`rgba(${rgb},0.85)`;
+      const pIdx=nodes.length;
+      nodes.push({p:pPos,r:5.5,isProton:true,shell:sl.s,slot:slotIdx});
+      const n1Idx=nodes.length;
+      nodes.push({p:nPos,r:5,isProton:false,shell:sl.s,slot:slotIdx});
+      bonds.push({a:pIdx,b:n1Idx,col,w:2.2,d:'solid'});
+
+      if(isTri){
+        const lat=pipNorm({x:-u.z,y:0,z:u.x});
+        const n2Pos=pipAdd(pipAdd(ctr,pipScale(u,-0.28)),pipScale(lat,0.22));
+        const n2Idx=nodes.length;
+        nodes.push({p:n2Pos,r:4.5,isProton:false,shell:sl.s,slot:slotIdx,extra:true});
+        bonds.push({a:n1Idx,b:n2Idx,col:'rgba(60,80,160,0.6)',w:1.5,d:'solid'});
+      }
+
+      const targets=innerMap[sl.s]||[];
+      let bt=-1,bd=Infinity;
+      for(let ni=0;ni<pIdx;ni++){
+        if(!nodes[ni].isProton) continue;
+        if(!targets.includes(nodes[ni].shell)) continue;
+        const dp=pipDist(pPos,nodes[ni].p);
+        if(dp<bd){bd=dp;bt=ni;}
+      }
+      if(bt<0){for(let ni=0;ni<pIdx;ni++){if(!nodes[ni].isProton) continue; const dp=pipDist(pPos,nodes[ni].p); if(dp<bd){bd=dp;bt=ni;}}}
+      if(bt>=0){
+        const op=sl.s==='2s'?0.50:0.16;
+        bonds.push({a:bt,b:pIdx,col:`rgba(200,200,255,${op})`,w:sl.s==='2s'?1.5:0.8,d:sl.s==='2s'?'solid':'dashed'});
+      }
+    });
+
+    return {nodes,bonds};
+  }
+
+  function pipProj(v, cx,cy, scl, sinA,cosA) {
+    const rx = v.x*cosA - v.z*sinA;
+    const ry = v.y;
+    const rz = v.x*sinA + v.z*cosA;
+    const sinT=Math.sin(pipTilt), cosT=Math.cos(pipTilt);
+    const ry2 = ry*cosT - rz*sinT;
+    const rz2 = ry*sinT + rz*cosT;
+    const fov=3.5, d=fov/(fov+rz2*0.4);
+    return {sx:cx+rx*scl*d, sy:cy-ry2*scl*d, dz:rz2};
+  }
+
+  function drawPip() {
+    requestAnimationFrame(drawPip);
+    pipAngle += 0.007;
+    const pw=pipC.width/dpr, ph=pipC.height/dpr;
+    pipCtx.setTransform(dpr,0,0,dpr,0,0);
+    pipCtx.clearRect(0,0,pw,ph);
+
+    const iso=pipIso;
+    if(!iso){
+      pipCtx.font="11px 'Segoe UI',sans-serif";
+      pipCtx.fillStyle="rgba(80,70,60,0.55)";
+      pipCtx.textAlign="center";
+      pipCtx.fillText("hover an isotope",pw/2,ph/2-6);
+      pipCtx.fillText("click â†’ open stick model",pw/2,ph/2+8);
+      return;
+    }
+
+    const geo=buildPipGeo(iso);
+    const {nodes,bonds}=geo;
+    const cx=pw/2, cy=ph/2;
+    const maxSc = nodes.reduce((m,n)=>Math.max(m,Math.abs(n.p.x),Math.abs(n.p.y),Math.abs(n.p.z)),0)||1;
+    const scl = Math.min(pw,ph)*0.36 / (maxSc+0.5);
+
+    const sinA=Math.sin(pipAngle), cosA=Math.cos(pipAngle);
+    const projected=nodes.map(n=>{const pr=pipProj(n.p,cx,cy,scl,sinA,cosA);return {...n,...pr};});
+
+    const projBonds=bonds.map(b=>{
+      const A=projected[b.a], B=projected[b.b];
+      return {...b, ax:A.sx,ay:A.sy, bx:B.sx,by:B.sy, dz:(A.dz+B.dz)/2};
+    });
+
+    const allObjs=[
+      ...projBonds.map(b=>({...b,type:'bond'})),
+      ...projected.map(n=>({...n,type:'node'}))
+    ].sort((a,b)=>a.dz-b.dz);
+
+    allObjs.forEach(o=>{
+      if(o.type==='bond'){
+        pipCtx.save();
+        if(o.d==='dashed') pipCtx.setLineDash([3,3]);
+        pipCtx.beginPath();
+        pipCtx.moveTo(o.ax,o.ay);
+        pipCtx.lineTo(o.bx,o.by);
+        pipCtx.strokeStyle=o.col;
+        pipCtx.lineWidth=o.w;
+        pipCtx.stroke();
+        pipCtx.restore();
+      } else {
+        const r=o.r;
+        const g=pipCtx.createRadialGradient(o.sx,o.sy,0,o.sx,o.sy,r*2);
+        const gc=o.isAlpha?'130,50,220':o.isProton?'210,60,40':'40,110,200';
+        g.addColorStop(0,`rgba(${gc},0.15)`); g.addColorStop(1,'transparent');
+        pipCtx.beginPath(); pipCtx.arc(o.sx,o.sy,r*2,0,Math.PI*2);
+        pipCtx.fillStyle=g; pipCtx.fill();
+        const sg=pipCtx.createRadialGradient(o.sx-r*0.3,o.sy-r*0.3,r*0.05,o.sx,o.sy,r);
+        if(o.isAlpha){sg.addColorStop(0,'rgba(200,120,255,0.95)');sg.addColorStop(1,'rgba(100,30,180,0.9)');}
+        else if(o.isProton){sg.addColorStop(0,'rgba(255,120,90,0.95)');sg.addColorStop(1,'rgba(180,40,20,0.9)');}
+        else{sg.addColorStop(0,'rgba(80,160,255,0.9)');sg.addColorStop(1,'rgba(20,60,160,0.85)');}
+        pipCtx.beginPath(); pipCtx.arc(o.sx,o.sy,r,0,Math.PI*2);
+        pipCtx.fillStyle=sg; pipCtx.fill();
+      }
+    });
+
+    const topShell=iso.Z<=2?'K':iso.Z<=10?'L':iso.Z<=18?'M':iso.Z<=36?'N':iso.Z<=54?'O':iso.Z<=86?'P':'Q';
+    pipCtx.font="bold 9px 'Segoe UI',sans-serif";
+    pipCtx.fillStyle="rgba(212,160,92,0.75)";
+    pipCtx.textAlign="left";
+    pipCtx.fillText(`${topShell}-shell`, 6, ph-6);
+  }
+
+  drawPip();
+})();
+// === js/ui.js ===
+/* â”€â”€ UI: hover detection, panel update, element label column â”€â”€ */
+
+const tooltip = document.getElementById("tooltip");
+
+// â”€â”€ Active group state (Change 4) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+let activeGroup = [];    // array of iso objects in the current decay chain
+let groupLocked = false; // true when user has clicked to lock
+
+// â”€â”€ Change 3: Hex hit test (flat-top hexagon) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+function pointInHex(px, py, cx, cy, R) {
+  const x = px - cx, y = py - cy;
+  const s3 = Math.sqrt(3);
+  return Math.abs(x) <= R
+      && Math.abs(x * 0.5 + y * s3 * 0.5) <= R
+      && Math.abs(-x * 0.5 + y * s3 * 0.5) <= R;
+}
+
+function getIsoAtPos(mx, my) {
+  // mx, my are already in canvas coords (no LEFT_W offset needed since
+  // we pass e.clientX directly and the canvas starts at LEFT_W)
+  const corrX = mx - LEFT_W;
+  const hexR = gridScale * zoom * 0.9375;
+  let best = null, bestD = Infinity;
+  ISO.forEach(iso => {
+    const p = isoPos(iso);
+    if (pointInHex(corrX, my, p.x, p.y, hexR)) {
+      // pick the one whose centre is closest (handles overlaps)
+      const d = (p.x - corrX) ** 2 + (p.y - my) ** 2;
+      if (d < bestD) { best = iso; bestD = d; }
+    }
+  });
+  return best;
+}
+
+function buildIsoRow(iso, isActive) {
+  const tfPct = (iso.tf * 100).toFixed(1);
+  const stableSpan = iso.stable
+    ? `<span class="iso-stable">${iso.abd > 0 ? iso.abd+'%' : 'stable'}</span>`
+    : `<span class="iso-unstable">unstable</span>`;
+  const soleSpan = iso.isSole && iso.stable ? ' <span class="iso-sole">SOLE</span>' : '';
+  return `<div class="iso-row ${isActive ? 'active' : 'context'}" data-a="${iso.A}">
+    <span class="iso-name">${iso.sym}-${iso.A}</span>${soleSpan}
+    ${isActive ? `<span style="color:#888;font-weight:400;font-size:11px;margin-left:6px;">Z=${iso.Z} Â· spin ${iso.spin||'â€”'}</span>` : ''}<br>
+    <span class="iso-grammar">
+      <span class="a">1Î±</span> + <span class="d">${iso.nd}d</span> + <span class="t">${iso.nt}t</span>
+      <span style="color:#666;margin-left:6px;">${tfPct}% t</span>
+      ${isActive ? `<span style="color:#555;margin-left:8px;">BE ${iso.be} MeV/n</span>` : ''}
+    </span><br>
+    ${isActive ? `<span style="color:#777;font-size:11px;">${iso.oddA?'odd-A':'even-A'} Â· n_d=${iso.nd} n_t=${iso.nt}</span>` : ''}
+    ${!isActive ? stableSpan : `<span style="font-size:11px;">${stableSpan}</span>`}
+  </div>`;
+}
+
+function updateHoverPanel(activeIso) {
+  const elemIsos = ISO.filter(e => e.Z === activeIso.Z).sort((a,b) => a.A - b.A);
+  const name = ELEM_NAMES[activeIso.Z] || activeIso.sym;
+  const stableCount = elemIsos.filter(e => e.stable).length;
+
+  document.getElementById("pSym").textContent = activeIso.sym;
+  document.getElementById("pElemName").textContent = name;
+  document.getElementById("pElemZ").textContent = `Z=${activeIso.Z} Â· ${stableCount} stable isotope${stableCount!==1?'s':''}`;
+
+  const scroll = document.getElementById("isoScroll");
+  scroll.innerHTML = elemIsos.map(iso => buildIsoRow(iso, iso.A === activeIso.A)).join('');
+
+  const activeRow = scroll.querySelector('.iso-row.active');
+  if (activeRow) activeRow.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+
+  if (window.__pipSetIso) window.__pipSetIso(activeIso);
+}
+
+function updatePanel(iso) {
+  updateHoverPanel(iso);
+}
+
+// â”€â”€ Change 4: Build decay chain group â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+function buildActiveGroup(iso) {
+  if (!iso) return [];
+  const group = [iso];
+  const seen = new Set([`${iso.nd},${iso.nt}`]);
+
+  // Forward chain (up to 8 steps)
+  const fwd = decayChain(iso, 8, false);
+  fwd.forEach(step => {
+    const key = `${step.to.nd},${step.to.nt}`;
+    if (!seen.has(key)) { seen.add(key); group.push(step.to); }
+  });
+
+  // Backward chain (up to 2 steps)
+  const bwd = decayChain(iso, 2, true);
+  bwd.forEach(step => {
+    const key = `${step.from.nd},${step.from.nt}`;
+    if (!seen.has(key)) { seen.add(key); group.unshift(step.from); }
+  });
+
+  return group;
+}
+
+// â”€â”€ Tooltip mousemove â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+canvas.addEventListener("mousemove", e => {
+  const mx = e.clientX, my = e.clientY;
+  const iso = getIsoAtPos(mx, my);
+  const prevZ = hoveredZ;
+  hoveredIso = iso;
+  hoveredZ = iso ? iso.Z : null;
+
+  // Change 4: update activeGroup if not locked
+  if (!groupLocked) {
+    if (iso) {
+      activeGroup = buildActiveGroup(iso);
+    } else {
+      activeGroup = [];
+    }
+  }
+
+  if (hoveredZ !== prevZ) draw();
+  else if (iso) draw();
+
+  if (iso) {
+    updateHoverPanel(iso);
+    canvas.style.cursor = "pointer";
+    tooltip.style.display = "block";
+    tooltip.style.left = (mx + 16) + "px";
+    tooltip.style.top  = (my - 10) + "px";
+    const tfPct = (iso.tf * 100).toFixed(1);
+    const soleTag = iso.isSole && iso.stable ? ' Â· <span style="color:#c8a850;">SOLE</span>' : '';
+    const magicTag = MAGIC_Z.includes(iso.Z) ? ' Â· <span style="color:#82b482;">magic Z</span>' : '';
+    tooltip.innerHTML = `
+      <strong style="font-size:15px;color:#d4a05c;">${iso.sym}-${iso.A}</strong>
+      <span style="color:#888;margin-left:6px;">Z=${iso.Z}</span>
+      ${iso.stable ? '' : '<span style="color:#c55;margin-left:6px;">unstable</span>'}
+      ${soleTag}${magicTag}
+      <br>
+      <span style="color:#d4a05c;">1Î±</span> +
+      <span style="color:#6a95b0;">${iso.nd}d</span> +
+      <span style="color:#c27a5a;">${iso.nt}t</span>
+      <span style="color:#666;margin-left:8px;">${tfPct}% triton</span>
+      <br>
+      <span style="color:#888;">BE: ${iso.be} MeV/n Â· ${iso.abd}% Â· ${iso.spin || 'â€”'}</span>
+      <br><span style="color:#555;font-size:10px;">Click to lock chain Â· Dbl-click for datasheet</span>
+    `;
+  } else {
+    let found = null, foundType = null;
+    const checkDist = 12;
+    if (cbMissing.checked) {
+      for (const m of MISSING_ALPHA) {
+        const p = gridPos(m.nd, m.nt);
+        const corrX = mx - LEFT_W;
+        if (Math.abs(p.x - corrX) < checkDist && Math.abs(p.y - my) < checkDist) { found = m; foundType = "Î±"; break; }
+      }
+    }
+    if (!found && cbHe3Miss.checked) {
+      for (const m of MISSING_HE3) {
+        const p = gridPos(m.nd, m.nt);
+        const corrX = mx - LEFT_W;
+        if (Math.abs(p.x - corrX) < checkDist && Math.abs(p.y - my) < checkDist) { found = m; foundType = "He-3"; break; }
+      }
+    }
+    if (found) {
+      canvas.style.cursor = "help";
+      tooltip.style.display = "block";
+      tooltip.style.left = (mx + 16) + "px";
+      tooltip.style.top  = (my - 10) + "px";
+      const typeLabels = {"odd-odd":"odd-odd","even-even":"even-even","magic":"magic number","gap":"no natural element","mixed":"odd-even"};
+      tooltip.innerHTML = `
+        <strong style="font-size:13px;color:#b040ff;">MISSING ${foundType}-structure</strong><br>
+        <span style="color:#aaa;">Z=${found.Z} Â· A=${found.A} Â· N=${found.N}</span><br>
+        <span style="color:#d4a05c;">1${foundType === "He-3" ? " He-3" : "Î±"}</span> +
+        <span style="color:#6a95b0;">${found.nd}d</span> +
+        <span style="color:#c27a5a;">${found.nt}t</span><br>
+        <span style="color:#888;">${typeLabels[found.mtype] || found.mtype}</span>
+      `;
+    } else {
+      canvas.style.cursor = "crosshair";
+      tooltip.style.display = "none";
+    }
+  }
+});
+
+canvas.addEventListener("mouseleave", () => {
+  hoveredIso = null; tooltip.style.display = "none"; draw();
+});
+
+canvas.addEventListener("mouseleave", () => {
+  if (window.__pipSetIso && !selectedIso) window.__pipSetIso(null);
+}, { capture: false });
+
+// â”€â”€ Change 4: Click to lock/unlock chain â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+canvas.addEventListener("click", e => {
+  const iso = getIsoAtPos(e.clientX, e.clientY);
+  if (iso) {
+    if (!groupLocked) {
+      groupLocked = true;
+      selectedIso = iso;
+      updatePanel(iso);
+    } else {
+      groupLocked = false;
+      activeGroup = buildActiveGroup(iso);
+      selectedIso = iso;
+      updatePanel(iso);
+    }
+    draw();
+  } else {
+    // Clicked outside â€” clear lock
+    groupLocked = false;
+    activeGroup = [];
+    draw();
+  }
+});
+
+// â”€â”€ Change 6: Double-click datasheet â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+canvas.addEventListener("dblclick", e => {
+  const iso = getIsoAtPos(e.clientX, e.clientY);
+  if (!iso) return;
+
+  const name = ELEM_NAMES[iso.Z] || iso.sym;
+  const N = iso.A - iso.Z;
+  const v = iso.nd + iso.nt;
+  const u = iso.nd - iso.nt;
+  const sp = energySpineByV[v];
+  const duE = sp ? (u - sp.u).toFixed(3) : 'â€”';
+  const decayStr = iso.stable ? 'stable (âˆ’)' : (iso.decay || 'â€”');
+  const halfLife = (() => {
+    const key = `${iso.Z},${iso.A}`;
+    for (const row of [...LONG_LIVED, ...SHORT_LIVED]) {
+      if (row[0] === iso.Z && row[1] === iso.A) return row[3];
+    }
+    return iso.stable ? 'stable' : 'â€”';
+  })();
+
+  const ds = document.getElementById('datasheet');
+  document.getElementById('datasheetContent').innerHTML = `
+    <h2 style="margin:0 0 4px;font-size:22px;color:#eef;">${iso.sym}-${iso.A} &nbsp;<span style="font-size:16px;color:#aaa;">${name}</span></h2>
+    <div style="color:#667;font-size:13px;margin-bottom:16px;">Z=${iso.Z} &nbsp; N=${N} &nbsp; A=${iso.A} &nbsp; ${iso.oddA?'odd-A':'even-A'}</div>
+    <table>
+      <tr><td style="color:#889;padding:3px 8px 3px 0;width:48%;">Half-life</td><td style="color:#dde;">${halfLife}</td></tr>
+      <tr><td style="color:#889;padding:3px 8px 3px 0;">Decay mode</td><td style="color:#dde;">${decayStr}</td></tr>
+      <tr><td style="color:#889;padding:3px 8px 3px 0;">BE/A</td><td style="color:#dde;">${iso.be > 0 ? iso.be + ' MeV' : 'â€”'}</td></tr>
+      <tr><td style="color:#889;padding:3px 8px 3px 0;">Natural abundance</td><td style="color:#dde;">${iso.abd > 0 ? iso.abd + '%' : (iso.stable ? 'stable, 0% natural' : 'none')}</td></tr>
+      <tr><td style="color:#889;padding:3px 8px 3px 0;">Spin/parity</td><td style="color:#dde;">${iso.spin || 'â€”'}</td></tr>
+      <tr><td style="color:#889;padding:3px 8px 3px 0;">SDT: nd / nt / v / u</td><td style="color:#dde;">${iso.nd} / ${iso.nt} / ${v} / ${u}</td></tr>
+      <tr><td style="color:#889;padding:3px 8px 3px 0;">Î”u_E</td><td style="color:#dde;">${duE}</td></tr>
+    </table>
+    <h3 style="margin:16px 0 8px;color:#889;font-size:12px;text-transform:uppercase;letter-spacing:0.05em;">References</h3>
+    <div style="display:flex;flex-direction:column;gap:8px;font-size:12px;">
+      <a href="https://www.nndc.bnl.gov/nudat3/indx_sigma.jsp?z=${iso.Z}&a=${iso.A}" target="_blank">NuDat 3.0 (NNDC)</a>
+      <a href="https://en.wikipedia.org/wiki/${iso.sym}-${iso.A}" target="_blank">Wikipedia: ${iso.sym}-${iso.A}</a>
+      <a href="https://www-nds.iaea.org/relnsd/NdsEnsdf/QueryForm?select=levels&nuclides=${iso.A}${iso.sym}" target="_blank">IAEA Nuclear Data</a>
+    </div>
+  `;
+  ds.style.display = 'block';
+});
+
+// â”€â”€ Morph slider (Change 1) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+const slider = document.getElementById("morphSlider");
+slider.addEventListener("input", () => {
+  morphT = +slider.value / 1000;
+  // Update active button highlights
+  document.querySelectorAll('.morph-btn').forEach(b => {
+    b.classList.toggle('active', +b.dataset.val === +slider.value);
+  });
+  draw();
+});
+
+// â”€â”€ Print diagnostic table â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+document.getElementById('printDiagBtn').addEventListener('click', () => {
+  const MAGIC_Z_D = new Set([2,8,20,28,50,82,114]);
+  const MAGIC_N_D = new Set([2,8,20,28,50,82,126]);
+  const rows = [];
+  vVals.forEach(v => {
+    const rowIsos = ISO.filter(e => (e.nd+e.nt)===v && e.be>0);
+    if (!rowIsos.length) return;
+    const raw = rawMaxSpine[v];
+    const sp  = energySpineByV[v];
+    const uMono = getUFit(v);
+    const nearIso = sp ? sp.iso : (raw ? rowIsos.find(e=>e.sym===raw.sym&&e.A===raw.A) : rowIsos[0]);
+    rows.push({
+      v,
+      rawMaxU:  raw ? raw.u.toFixed(2) : 'â€”',
+      smoothU:  sp  ? sp.u.toFixed(2)  : 'â€”',
+      monoU:    uMono.toFixed(2),
+      dRawMono: raw ? (raw.u - uMono).toFixed(2) : 'â€”',
+      dRawGold: raw ? raw.u.toFixed(2) : 'â€”',
+      isotope:  nearIso ? `${nearIso.sym}-${nearIso.A}` : 'â€”',
+      bePerA:   raw ? raw.be.toFixed(4) : 'â€”',
+      magicZ:   nearIso ? MAGIC_Z_D.has(nearIso.Z) : false,
+      magicN:   nearIso ? MAGIC_N_D.has(nearIso.A - nearIso.Z) : false,
+      oddA:     nearIso ? nearIso.oddA : 'â€”',
+      spin:     nearIso ? (nearIso.spin||'â€”') : 'â€”',
+      unpaired: nearIso ? nearIso.unpaired : 'â€”',
+      conf:     sp ? sp.confidence : 'â€”',
+    });
+  });
+  console.table(rows);
+  console.log('[Î”u_E table] printed', rows.length, 'rows. Open DevTools (F12) â†’ Console to view.');
+  alert('Î”u_E table printed to browser console.\nOpen DevTools (F12) â†’ Console tab to view all ' + rows.length + ' rows.');
+});
+
+function resize() {
+  const vw = window.innerWidth - LEFT_W - RIGHT_W;
+  const vh = window.innerHeight;
+  W = vw;
+  H = vh;
+  canvas.width  = W * dpr;
+  canvas.height = H * dpr;
+  canvas.style.width  = W + "px";
+  canvas.style.height = H + "px";
+  canvas.style.position = "fixed";
+  canvas.style.left = LEFT_W + "px";
+  canvas.style.top  = "0px";
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  // Resize PIP canvas
+  const pip = document.getElementById("pip");
+  const pc  = document.getElementById("pipCanvas");
+  if (pip && pc) {
+    pc.width  = pip.offsetWidth  * dpr;
+    pc.height = pip.offsetHeight * dpr;
+    pc.style.width  = pip.offsetWidth  + "px";
+    pc.style.height = pip.offsetHeight + "px";
+  }
+}
+
+// â”€â”€ Element label column (drawn on top, as part of UI layer) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+function drawElemLabels(ctx) {
+  const LABEL_X2 = 6;
+  const LABEL_W2 = 130;
+  ctx.fillStyle = "rgba(18,16,14,0.72)";
+  ctx.fillRect(0, 0, LABEL_W2, H);
+
+  const uniqueZs2 = [...new Set(ISO.map(e => e.Z))].sort((a,b) => a-b);
+  let lastLY = -999;
+  uniqueZs2.forEach(Z => {
+    const v = ELEM_REF_V[Z];
+    if (v === undefined) return;
+    const vRng = (vMax - vMin) || 1;
+    const sP = 80;
+    const sc = (H - sP*2) / vRng;
+    const by = sP + (vMax - v) * sc;  // flipped: H at bottom, U at top
+    const yS = H/2 + (by - H/2 + panY) * zoom;
+    if (yS < 12 || yS > H - 8) return;
+    if (yS - lastLY < 11) return;
+    lastLY = yS;
+
+    const rgb = Z_PALETTE[Z % Z_PALETTE.length];
+    const elemIsos = ISO.filter(e => e.Z === Z);
+    const isSole = elemIsos.filter(e => e.stable).length === 1;
+    const sym = elemIsos[0].sym;
+    const name = ELEM_NAMES[Z] || '';
+    const isHovZ = hoveredZ === Z;
+
+    if (isHovZ) {
+      ctx.fillStyle = "rgba(255,200,40,0.08)";
+      ctx.fillRect(0, yS - 7, LABEL_W2, 14);
+    }
+
+    ctx.beginPath();
+    ctx.arc(LABEL_X2 + 5, yS, 3.5, 0, Math.PI*2);
+    if (isSole) {
+      ctx.fillStyle = "rgba(20,20,28,0.95)"; ctx.fill();
+      ctx.strokeStyle = "rgba(255,200,40,0.9)"; ctx.lineWidth = 1.2; ctx.stroke();
+    } else {
+      ctx.fillStyle = `rgba(${rgb},0.9)`; ctx.fill();
+    }
+
+    ctx.fillStyle = isHovZ ? "#ffe066" : (isSole ? "rgba(255,200,40,0.95)" : `rgba(${rgb},1.0)`);
+    ctx.font = `${isHovZ ? "800" : "700"} 10px 'Segoe UI',sans-serif`;
+    ctx.textAlign = "left";
+    ctx.fillText(sym, LABEL_X2 + 13, yS + 3.5);
+
+    ctx.fillStyle = isHovZ ? "rgba(220,210,190,0.95)" : "rgba(150,140,130,0.65)";
+    ctx.font = `${isHovZ ? "500" : "400"} 9px 'Segoe UI',sans-serif`;
+    ctx.fillText(name, LABEL_X2 + 33, yS + 3.5);
+  });
+}
+// === js/main.js ===
+// Main orchestrator â€” replaces the monolithic draw() function
+function draw() {
+  ctx.clearRect(0, 0, W, H);
+  // Twilight canvas fill
+  ctx.fillStyle = '#07091c';
+  ctx.fillRect(0, 0, W, H);
+  drawBackground(ctx);
+  drawNodes(ctx);
+  drawOverlays(ctx);
+  drawElemLabels(ctx);
+}
+
+// Export PNG
+document.getElementById("exportBtn").addEventListener("click", () => {
+  const link = document.createElement("a");
+  const ts = new Date().toISOString().replace(/[:.]/g,"-").slice(0,19);
+  link.download = `atomicus-v1-${ts}.png`;
+  link.href = canvas.toDataURL("image/png");
+  link.click();
+});
+
+// Dropdown toggle
+function toggleDropdown(id) {
+  document.getElementById(id).classList.toggle('open');
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// ANIMATION SYSTEM
+// ═══════════════════════════════════════════════════════════════════════════
+
+// Valence electron speed relative to Hydrogen (1/137 c).
+// Anchors derived from relativistic orbital velocity estimates:
+// H → Fe → Au (famous golden relativistic effect) → Pb → U → Og
+const VELEC_REFS = [
+  [1,   1  ],   // H : 1/137 c
+  [26,  3.5],   // Fe: 4s shielded, ~3.5× H
+  [79,  55 ],   // Au: relativistic 6s, ~55× H (gives gold its colour)
+  [82,  60 ],   // Pb: 6p²
+  [92,  75 ],   // U : 5f/7s relativistic
+  [118, 105],   // Og: estimated
+];
+
+function valenceSpeedRel(Z) {
+  if (Z <= 1)   return 1;
+  if (Z >= 118) return 105;
+  for (let i = 1; i < VELEC_REFS.length; i++) {
+    const [z0,v0] = VELEC_REFS[i-1], [z1,v1] = VELEC_REFS[i];
+    if (Z <= z1) { const t = (Z-z0)/(z1-z0); return v0 + (v1-v0)*t; }
+  }
+  return 1;
+}
+
+// Rotation period in seconds. H ≈ 20 s/rev, Og ≈ 2 s/rev.
+function rotationPeriod(Z) {
+  return Math.max(2.0, 20 / Math.pow(valenceSpeedRel(Z), 0.38));
+}
+
+// ── State ──────────────────────────────────────────────────────────────────
+let _animStartMs  = 0;     // timestamp when current hover began
+let _prevHovKey   = null;  // to detect hover target changes
+
+function isoAnimKey(iso) { return iso ? iso.Z + '_' + iso.A : null; }
+
+// ── Full golden ring animation (focused isotope) ───────────────────────────
+// p = {x,y}, R = hex radius px, t = elapsed seconds, Z = atomic number
+function drawRingAnim(ctx, p, R, t, Z) {
+  if (t < 0) return;
+  const period = rotationPeriod(Z);
+  const angle  = (Math.PI * 2 * t) / period;
+  ctx.save();
+  ctx.translate(p.x, p.y);
+
+  // ── Blaze phase (peaks at t≈0.28s, gone by t≈0.55s) ────────────────────
+  const BLAZE = 0.55;
+  const blazeT = Math.max(0, Math.min(1, t / BLAZE));
+  const blazeA = blazeT < 0.5 ? blazeT * 2 : Math.max(0, 1 - (blazeT - 0.5) * 2.5);
+  if (blazeA > 0.01) {
+    const numRays = 12, rayLen = R * (1.5 + blazeT * 1.5);
+    for (let i = 0; i < numRays; i++) {
+      const ra = (i / numRays) * Math.PI * 2 + angle * 0.2;
+      const grd = ctx.createLinearGradient(
+        Math.cos(ra)*R*0.3, Math.sin(ra)*R*0.3,
+        Math.cos(ra)*rayLen, Math.sin(ra)*rayLen
+      );
+      grd.addColorStop(0,   `rgba(255,220,80,${blazeA*0.95})`);
+      grd.addColorStop(0.4, `rgba(255,160,30,${blazeA*0.5})`);
+      grd.addColorStop(1,   'rgba(255,80,0,0)');
+      ctx.beginPath();
+      ctx.moveTo(Math.cos(ra)*R*0.3, Math.sin(ra)*R*0.3);
+      ctx.lineTo(Math.cos(ra)*rayLen, Math.sin(ra)*rayLen);
+      ctx.strokeStyle = grd; ctx.lineWidth = 1.5; ctx.stroke();
+    }
+    const fr = R * (0.25 + blazeT * 0.5);
+    const fg = ctx.createRadialGradient(0,0,0, 0,0,fr);
+    fg.addColorStop(0, `rgba(255,245,200,${blazeA})`);
+    fg.addColorStop(1, 'rgba(255,200,60,0)');
+    ctx.beginPath(); ctx.arc(0,0,fr,0,Math.PI*2);
+    ctx.fillStyle = fg; ctx.fill();
+  }
+
+  // ── Ring materialises (starts partway through blaze, stays forever) ─────
+  const ringProg = Math.min(1, Math.max(0, (t - BLAZE*0.4) / 0.9));
+  if (ringProg > 0) {
+    const ringR = R * 1.38;
+    const alpha = ringProg * 0.88;
+    const sparL = ringR * 0.26;
+    ctx.rotate(angle);
+    // Glow halo
+    ctx.beginPath(); ctx.arc(0,0,ringR,0,Math.PI*2);
+    ctx.strokeStyle = `rgba(255,200,50,${alpha*0.28})`;
+    ctx.lineWidth = 5; ctx.stroke();
+    // Ring
+    ctx.beginPath(); ctx.arc(0,0,ringR,0,Math.PI*2);
+    ctx.strokeStyle = `rgba(255,215,80,${alpha})`;
+    ctx.lineWidth = 1.5; ctx.stroke();
+    // Spars at 0° and 180°
+    for (const a of [0, Math.PI]) {
+      ctx.beginPath();
+      ctx.moveTo(Math.cos(a)*(ringR-sparL*1.2), Math.sin(a)*(ringR-sparL*1.2));
+      ctx.lineTo(Math.cos(a)*(ringR+sparL*0.5), Math.sin(a)*(ringR+sparL*0.5));
+      ctx.strokeStyle = `rgba(255,215,80,${alpha})`;
+      ctx.lineWidth = 1.5; ctx.stroke();
+      // Cap dot
+      ctx.beginPath(); ctx.arc(Math.cos(a)*ringR, Math.sin(a)*ringR, 2.2, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(255,235,130,${alpha})`; ctx.fill();
+    }
+  }
+  ctx.restore();
+}
+
+// ── Small ambient ring (unstable isotopes when master toggle ON) ───────────
+function drawSmallRing(ctx, p, R, t, Z) {
+  const period = rotationPeriod(Z);
+  const angle  = (Math.PI * 2 * t) / period;
+  const alpha  = Math.min(0.5, t * 4 * 0.5);
+  const ringR  = R * 1.22;
+  ctx.save();
+  ctx.translate(p.x, p.y);
+  ctx.rotate(angle);
+  ctx.beginPath(); ctx.arc(0,0,ringR,0,Math.PI*2);
+  ctx.strokeStyle = `rgba(200,140,30,${alpha})`;
+  ctx.lineWidth = 1;
+  ctx.setLineDash([2,3]); ctx.stroke(); ctx.setLineDash([]);
+  for (const a of [0, Math.PI]) {
+    ctx.beginPath();
+    ctx.moveTo(Math.cos(a)*ringR*0.82, Math.sin(a)*ringR*0.82);
+    ctx.lineTo(Math.cos(a)*ringR*1.12, Math.sin(a)*ringR*1.12);
+    ctx.strokeStyle = `rgba(200,140,30,${alpha})`;
+    ctx.lineWidth = 1; ctx.stroke();
+  }
+  ctx.restore();
+}
+
+// ── Master unstable toggle: wire up to tier checkboxes ─────────────────────
+const cbUnstableAll = document.getElementById('showUnstableAll');
+if (cbUnstableAll) {
+  const tierIds = ['showLongLived','showMid','showShort','showDecade',
+                   'showTier4','showTier5','showTier6','showTier7','showTier8','showTier9'];
+  cbUnstableAll.addEventListener('change', () => {
+    const on = cbUnstableAll.checked;
+    tierIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.checked = on;
+    });
+    draw();
+  });
+}
+
+// ── rAF render + animation loop ────────────────────────────────────────────
+resize();
+if (selectedIso) updatePanel(selectedIso);
+window.addEventListener('resize', () => { resize(); draw(); });
+
+requestAnimationFrame(function loop(ts) {
+  const nowKey = isoAnimKey(hoveredIso);
+  if (nowKey !== _prevHovKey) { _animStartMs = ts; _prevHovKey = nowKey; }
+
+  draw();  // full redraw each frame
+
+  const R = gridScale * zoom * 0.9375;
+  const elapsed = (ts - _animStartMs) / 1000;
+
+  // Full ring for hovered isotope
+  if (hoveredIso) {
+    const p = isoPos(hoveredIso);
+    if (p) drawRingAnim(ctx, p, R, elapsed, hoveredIso.Z);
+  }
+
+  // Full ring for locked chain members (each with slight time offset)
+  if (typeof activeGroup !== 'undefined' && activeGroup && activeGroup.length > 1) {
+    activeGroup.forEach((iso, i) => {
+      if (iso === hoveredIso) return;
+      const p = isoPos(iso);
+      if (!p) return;
+      drawRingAnim(ctx, p, R, Math.max(0, elapsed - i * 0.06), iso.Z);
+    });
+  }
+
+  // Small ring for hovered unstable when master toggle is on
+  const cbU = document.getElementById('showUnstableAll');
+  if (cbU && cbU.checked && hoveredIso && !hoveredIso.stable && hoveredIso !== hoveredIso) {
+    // Already covered by full ring above — small ring used for non-hovered
+    // visible unstable isotopes (too expensive to animate all; skip here)
+  }
+
+  requestAnimationFrame(loop);
+});
+</script>
+
+<script>
+// â”€â”€ Dropdown toggle (Change 5) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+document.querySelectorAll('.dropdown-header').forEach(h => {
+  h.addEventListener('click', () => {
+    h.classList.toggle('open');
+    h.nextElementSibling.classList.toggle('open');
+  });
+});
+
+// â”€â”€ Morph buttons (Change 1: 3 buttons) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+document.querySelectorAll('.morph-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const val = +btn.dataset.val;
+    document.getElementById('morphSlider').value = String(val);
+    morphT = val / 1000;
+    document.querySelectorAll('.morph-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    draw();
+  });
+});
+
+// â”€â”€ Datasheet close (Change 6) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+document.getElementById('datasheetClose').addEventListener('click', () => {
+  document.getElementById('datasheet').style.display = 'none';
+});
+</script>
+</body>
+</html>

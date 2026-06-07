@@ -1,8 +1,14 @@
 # CQ03: Fine Structure Constant from Topology — INVESTIGATION RESULTS
 
 > **Status**: RESOLVED (NEGATIVE RESULT)
-> **Date**: May 2026
-> **Tool**: `cq03_fine_structure.cpp` (570 lines, 11/11 proofs pass)
+> **Date**: May 2026; re-run + scroller June 2026
+> **Tool**: `cq03_fine_structure.cpp` (11/11 proofs pass, exit 0 — re-verified June 2026)
+> **Explainer**: `cq03_scroller.html` — REFRAMED 2026-06 (see note). Single-page scroller whose thesis is **α is koppa at the hydrogen ground state** — one rung of the k-ladder (ϟ=v²R/c², z·k²=1), not a magic constant. Editable inline ladder SVG; live "hydrogen rung" + "deflation test" widgets. NO QM abstractions (no Compton "coherence scale", no Bohr model, no wavefunction). Live JS reproduces the engine ladder exactly (verified in Node).
+>
+> **Measured anchors (re-run):** g_electron = r_e·m_e·c/ℏ = 7.2973525737e-03 (= α exact); g_proton = R_p·m_p·c/ℏ = 4.0007815131 (= W+1 = 4, 0.0195%). The k-ladder: proton-surface k=0.5464 ϟ=2.818e-15; **hydrogen k=137.04 (=1/α) ϟ=α²a₀=2.818e-15=r_e**; Sun k=686.3 ϟ=1477 m; Earth k=37905 ϟ=4.43 mm; Moon k=178450 ϟ=0.055 mm — z·k²=1 at every rung. Note the engine-confirmed coincidence: hydrogen-ground and proton-surface share the same koppa (2.818e-15 m).
+
+## Framing correction (2026-06, author directive)
+The original scroller leaned on QM abstractions (Compton wavelength as "quantum coherence scale", the Bohr model, "wavefunction phase-coherence") and over-dramatised α as Feynman's magic 1/137. **Both were wrong for SDT.** α is already shown (CQ16 k-hierarchy) to be merely **koppa at the H ground state** — `k_hydrogen = 1/α` (laws.hpp:573), `koppa_hydrogen = α²a₀ = r_e` (laws.hpp:581), sitting in the same `bridge` namespace as `koppa_Sun`. So "derive α from a knot?" is the wrong question: a koppa is set by a body's speed and size, not its topology (topology sets WHICH winding modes exist, not their speed). The honest residue is one mundane input — the charge `e` sets which rung EM lands on (α=k_e e²/ℏc); deriving e from lattice topology is CQ10. **Method principle (author):** do not borrow QM formulations/terms unless the mechanism is literally identical; SDT reaches the same numbers by mechanical/geometric relation. A dedicated FINAL investigation should catalogue all SDT-vs-QM parallels, what each means, and where SDT's view is superior — that synthesis is deferred, not done here.
 
 ---
 

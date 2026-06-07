@@ -200,6 +200,12 @@ namespace law_I {
     /// Distance to the Clearing  [m]
     /// R_CMB = c / H_0 × ln(1 + z_rec)  ≈ 9.527e26 m
     /// (Using the established value from Law I verification)
+    // provenance_status:     calibrated
+    // correspondence_status: known-match
+    // input_dependency:      calibrated-target      // hard-coded, H_0-derived scale
+    // class:                 E
+    // circularity_assertion: FAILS delete-test — asserted value; the Law I chain is conditioned on it
+    // risk_flag:             derive R_CMB from SDT closure, or relabel OBSERVED
     inline constexpr double R_CMB = 9.527e26;
 
     /// Causal depth: N = R_CMB / l_P  (Planck shells from here to the Clearing)
@@ -212,6 +218,12 @@ namespace law_I {
 
     /// Total convergence burden: Φ = N × ε  [J]
     /// Theorem T2: every shell contributes ε (Shell Cancellation Identity T1)
+    // provenance_status:     SDT-derived
+    // correspondence_status: internal-only
+    // input_dependency:      primitive-whitelist
+    // class:                 B
+    // circularity_assertion: SDT-internal; no matched target enters, but conditioned on R_CMB (E)
+    // risk_flag:             magnitude inherits the calibrated R_CMB
     inline constexpr double Phi = N * epsilon;
     // = 1.038e-56 J
 
@@ -269,21 +281,45 @@ namespace law_III {
 
     /// Effective pressure at atomic/nuclear scale (from hydrogen calibration)
     /// P_eff = 4 k_e e² / (π R_p² r_e²)   [Pa]
+    // provenance_status:     calibrated
+    // correspondence_status: known-match
+    // input_dependency:      calibrated-target      // measured R_p, r_e, k_e, e set the magnitude
+    // class:                 E
+    // circularity_assertion: FAILS delete-test — hydrogen calibration fixes the scale
+    // risk_flag:             load-bearing fitted pressure feeds the universal force law
     inline constexpr double P_eff = 4.0 * k_e * e_charge * e_charge
                                   / (std::numbers::pi * R_p * R_p * r_e * r_e);
     // = 5.225e31 Pa
 
     /// Transfer function: f = P_eff / P_conv
+    // provenance_status:     calibrated
+    // correspondence_status: internal-only
+    // input_dependency:      calibrated-target      // inherits P_eff magnitude (does not cancel)
+    // class:                 E
+    // circularity_assertion: FAILS — magnitude inherited from calibrated P_eff
+    // risk_flag:             none
     inline constexpr double f_transfer = P_eff / law_I::P_conv;
     // = 2.125e-17
 
     /// Charge interaction radius: R_charge = sqrt(R_p × r_e)
     /// Resolves e-e / p-p / e-p having same coupling strength
     /// Pre-computed: sqrt(8.414e-16 × 2.8179e-15) = 1.5396e-15 m
+    // provenance_status:     calibrated
+    // correspondence_status: known-match
+    // input_dependency:      measured-observable    // built from measured R_p, r_e
+    // class:                 E
+    // circularity_assertion: FAILS — composed of measured radii (and a hard-coded literal)
+    // risk_flag:             literal 1.5396e-15 drifts from sqrt(R_p*r_e); compute it
     inline constexpr double R_charge = 1.5396e-15;
 
     /// Occlusion force between two bodies (Theorem T4)
     /// F = (π/4) P_eff R1² R2² / r²
+    // provenance_status:     SDT-derived
+    // correspondence_status: known-match            // 1/r² structure: Coulomb, gravity, nuclear
+    // input_dependency:      primitive-whitelist    // STRUCTURE only; the coefficient P_eff is class E
+    // class:                 C
+    // circularity_assertion: 1/r² structure passes delete-test; magnitude via P_eff (E)
+    // risk_flag:             coefficient calibrated (see P_eff)
     [[nodiscard]] inline auto F_occlusion(
         double R1, double R2, double r
     ) noexcept -> double {
@@ -329,6 +365,12 @@ namespace law_IV {
     }
 
     /// Mass from exclusion volume: m = Φ V_disp / (3 l_P³ c²)  [kg]
+    // provenance_status:     SDT-derived
+    // correspondence_status: internal-only
+    // input_dependency:      primitive-whitelist
+    // class:                 B
+    // circularity_assertion: no matched target value enters the derivation
+    // risk_flag:             none
     [[nodiscard]] inline auto mass_from_V_disp(double V_disp) noexcept -> double {
         return law_I::Phi * V_disp / (3.0 * l_P3 * c * c);
     }
@@ -400,6 +442,12 @@ namespace law_V {
 
     /// T10: Movement Budget — v_circ² + v_trans² = c²
     /// Returns circulation velocity for given translational velocity
+    // provenance_status:     SDT-posited
+    // correspondence_status: known-match            // yields all of special relativity downstream
+    // input_dependency:      primitive-whitelist
+    // class:                 A
+    // circularity_assertion: axiom (Operator 6 / M3) — posited, not derived
+    // risk_flag:             none
     [[nodiscard]] inline auto v_circ(double v_trans) noexcept -> double {
         return std::sqrt(c * c - v_trans * v_trans);
     }
@@ -543,12 +591,24 @@ namespace bridge {
 
     /// c-boundary (koppa): ϟ = R/k² = v²R/c²  [m]
     /// This single number encodes the entire gravitational field.
+    // provenance_status:     SDT-posited
+    // correspondence_status: known-match            // = GM/c² as a consequence, not an input
+    // input_dependency:      measured-observable    // v_surface, R of the body
+    // class:                 A
+    // circularity_assertion: definition of the koppa observable
+    // risk_flag:             none
     [[nodiscard]] constexpr auto koppa(double v_surface, double R) noexcept -> double {
         return v_surface * v_surface * R / (c * c);
     }
 
     /// Surface gravitational acceleration: g = v²/R = c²ϟ/R²  [m/s²]
     /// No G. No M. Just v and R.
+    // provenance_status:     SDT-derived
+    // correspondence_status: known-match
+    // input_dependency:      measured-observable    // v_surface, R — no G, no M
+    // class:                 C
+    // circularity_assertion: passes delete-test — recovers surface gravity without G/M
+    // risk_flag:             none
     [[nodiscard]] constexpr auto g_surface(double v_surface, double R) noexcept -> double {
         return v_surface * v_surface / R;
     }
@@ -591,6 +651,12 @@ namespace bridge {
     // Inputs: l_P [m], c [m/s], m_p [kg], ℏ [J·s] — all base invariants.
     // No G. No M_Sun. No standard-model mass measurements beyond m_p.
     //
+    // provenance_status:     SDT-derived
+    // correspondence_status: known-match            // equals G m_p/c²
+    // input_dependency:      primitive-whitelist    // l_P, c, m_p, hbar only — G and M never entered
+    // class:                 C-flagged
+    // circularity_assertion: passes delete-test — no measured G or M is an input
+    // risk_flag:             CODATA l_P conventionally encodes G under standard physics (disclosed, not laundered)
     inline constexpr double koppa_per_baryon = l_P * l_P * c * m_p / hbar;
     // = 1.2421e-54 m / baryon
 
@@ -697,6 +763,12 @@ namespace coulomb_identity {
 
     /// k_e × e² — the physically load-bearing coupling product
     /// Derived: k_e e² = αℏc
+    // provenance_status:     unresolved
+    // correspondence_status: known-match
+    // input_dependency:      definitional-identity  // α ≡ k_e e²/(ℏ c): this line is a tautology
+    // class:                 F
+    // circularity_assertion: FAILS delete-test — vanishes; supply an SDT path NOT using α's definition
+    // risk_flag:             relabel from "Derived (exact, no free parameters)" — it is an identity
     inline constexpr double k_e_e2 = alpha * hbar * c;
     // = 2.307e-28 J·m
 
@@ -734,6 +806,12 @@ namespace winding {
     inline constexpr int W_electron = 1;
 
     /// W+1 predicted proton charge radius: R_p = (W+1) ℏ / (m_p c)
+    // provenance_status:     SDT-derived
+    // correspondence_status: known-match            // 0.02% vs muonic-H proton radius
+    // input_dependency:      primitive-whitelist    // hbar, m_p, c + winding W=3
+    // class:                 C-flagged
+    // circularity_assertion: passes delete-test given the W+1 rule (measured R_p not an input)
+    // risk_flag:             W+1 rule conjectural — not yet proven from trefoil geometry
     inline constexpr double R_p_predicted = static_cast<double>(W_proton + 1)
                                           * hbar / (m_p * c);
     // = 8.4124e-16 m = 0.84124 fm
@@ -754,6 +832,12 @@ namespace winding {
     /// Wake-to-quantum ratio: g(W) = R_wake / ƛ_C
     /// Electron: g(1) = α = 1/137
     /// Proton:   g(3) = 4
+    // provenance_status:     unresolved
+    // correspondence_status: known-match
+    // input_dependency:      definitional-identity  // r_e ≡ α ℏ/(m_e c) ⟹ g_electron ≡ α identically
+    // class:                 F
+    // circularity_assertion: FAILS delete-test — algebraic identity, not a measurement of α
+    // risk_flag:             g(1)=α is definitional; the non-trivial claim is g(3)=4 (proton)
     inline constexpr double g_electron = r_e * m_e * c / hbar;
     // = alpha (exact)
     inline constexpr double g_proton = R_p * m_p * c / hbar;

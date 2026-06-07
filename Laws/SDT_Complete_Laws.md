@@ -61,8 +61,11 @@ At the Clearing, every spation transitioned from non-transmissive to transmissiv
 Axiom R5 — Faithful Relay
 After the Clearing, each spation relays every arriving deformation front to its downstream neighbours without loss, absorption, or scattering. The medium is inviscid:
 εout(xi, n) = εin(xi, n)     (R5)
-Axiom R6 — Occlusion
-A displacement vortex at distance r with occlusion cross-section σ intercepts fraction:
+
+Axiom R6 -- Contact event
+When a kinematic front is passed to a spation in contact with a particle of matter, the spation relays the front with perfect fidelity but the particle absorbs the content. The absorbed content becomes mass-energy of the vortex. The unabsorbed remainder continues with fidelity.
+Axiom R7 — Occlusion
+A particle with a cross-section of σ intercepts fraction: 
 focc = σ / (4πr2)     (R6)
 of any arriving front. The intercepted content is absorbed. The remainder continues with fidelity.
 
@@ -70,7 +73,7 @@ of any arriving front. The intercepted content is absorbed. The remainder contin
 ---
 
 
-3. Definitions
+1. Definitions
 Definition 1 (Shell at depth d). For target spation x0, the shell at depth d is the set of all spations at graph distance exactly d lattice spacings:
 Sd(x0) = { xi ∈ Λ : d(x0, xi) = d }     (D1)
 Definition 2 (Shell population). In the continuum limit of a regular 3D lattice:

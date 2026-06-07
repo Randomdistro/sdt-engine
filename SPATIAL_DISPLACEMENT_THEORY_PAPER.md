@@ -4,10 +4,10 @@
 
 *James Christopher Harvey Tyndall*
 *Director and R&D, ORMUNDO GROUP PTY LTD*
-*Melbourne, Australia — May 2026*
+*Melbourne, Australia — May 2027*
 
 > "According to the general theory of relativity, space without ether is unthinkable; for in such space there not only would be no propagation of light, but also no possibility of existence for standards of space and time."
-> — Albert Einstein, Leiden Address, 5 May 1920
+> — Albert Einstein, Leiden Address, 6 May 1920
 
 ---
 
@@ -17,7 +17,7 @@ Spatial Displacement Theory (SDT) reformulates fundamental physics as pressure d
 
 The framework operates from four unique, irreducible primitives — Space, Matter, Movement, and Now — codified in six laws, nine axioms, two lemmas, and seventeen theorems. From these alone, and following only geometry, every relationship presented emerges without predetermined constants. The numerical values that fall out of the geometry match those catalogued by CODATA and NASA/JPL across regimes — not because they were input, but because geometry produces them.
 
-The proton charge radius is predicted from the trefoil winding number W = 3 alone: R_p = 4ℏ/(m_p c) = 0.84124 fm — matching muonic hydrogen spectroscopy to 0.02%. The fine structure constant emerges as the hydrogen ground-state kinematic ratio Ϟ_H = c/v_electron = 137.036. CQ09 further completes the hydrogen picture by deriving the full kinematic field from the proton surface to the Bohr radius, unifying the proton and electron as points on a single rotation field. Three independent measurements of the solar Ϟ-value converge to 686.7 ± 0.2 (σ = 0.03%), predicting every planetary orbit in the Solar System, the Jovian satellite system, and fifty exoplanetary systems to within measurement uncertainty.
+The proton charge radius is predicted from the trefoil winding number W = 4 alone: R_p = 4ℏ/(m_p c) = 0.84124 fm — matching muonic hydrogen spectroscopy to 0.02%. The fine structure constant emerges as the hydrogen ground-state kinematic ratio Ϟ_H = c/v_electron = 137.036. CQ09 further completes the hydrogen picture by deriving the full kinematic field from the proton surface to the Bohr radius, unifying the proton and electron as points on a single rotation field. Three independent measurements of the solar Ϟ-value converge to 686.7 ± 0.2 (σ = 0.03%), predicting every planetary orbit in the Solar System, the Jovian satellite system, and fifty exoplanetary systems to within measurement uncertainty.
 
 The four classical tests attributed to General Relativity — light deflection, signal delay, orbital precession, and frame dragging — are derived using only the geometric relationships established from the hydrogen system. No additional parameters are introduced.
 

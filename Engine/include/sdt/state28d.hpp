@@ -136,41 +136,7 @@ struct State28D {
         return std::min(1.0, E_mutual * (1.0 + gradation_screening));
     }
     
-    /**
-     * @brief Calculate force ratio: Coulomb / Gravity
-     * 
-     * From master equation: Different E values → different forces
-     * F_C/F_g ≈ [(1-E_C)/(1-E_g)] × amplification
-     * 
-     * Atomic scale: E → 0 → Coulomb dominates
-     * Bulk scale: E → 0.64 → Gravity (screened)
-     * 
-     * Expected ratio: ~10³⁹ for proton-electron vs bulk matter
-     * 
-     * @param E_coulomb Occlusion for Coulomb regime (typically ~0)
-     * @param E_gravity Occlusion for gravity regime (typically ~0.64)
-     * @param kappa_factor Geometric screening κ ≈ 10⁻⁹
-     * @return Force ratio F_C/F_g
-     */
-    static double force_ratio_coulomb_to_gravity(
-        double E_coulomb,
-        double E_gravity,
-        double kappa_factor = 1e-9
-    ) {
-        // Effective source strengths
-        double rho_eff_coulomb = 1.0 - E_coulomb;  // ≈ 1 (full strength)
-        double rho_eff_gravity = (1.0 - E_gravity) * kappa_factor;  // ≈ 0.36 × 10⁻⁹
-        
-        if (rho_eff_gravity < 1e-50) return 1e50;  // Avoid division by very small number
-        
-        // CMB pressure amplification factor for Coulomb (~10³⁰)
-        const double cmb_amplification = 1e30;
-        
-        double ratio = (rho_eff_coulomb / rho_eff_gravity) * cmb_amplification;
-        
-        return ratio;
-    }
-    
+
     /**
      * @brief Calculate accessible phase space volume (related to Φ₄)
      * 

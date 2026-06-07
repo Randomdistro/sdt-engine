@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SDT Investigations — Spatial Displacement Theory</title>
+<meta name="description" content="Formal research investigations derived from SDT's theoretical framework. Browse all CQ and E series investigations with source code and results.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg0:#07090f;--bg1:#0c0f1a;--bg2:#111525;--bg3:#17203a;
+  --border:#1e2a40;--border2:#2a3850;
+  --text:#c8d4e8;--text2:#8899bb;--text3:#556688;
+  --teal:#2dd4bf;--teal2:#14b8a6;--teal-dim:rgba(45,212,191,0.12);
+  --amber:#f59e0b;--amber-dim:rgba(245,158,11,0.12);
+  --violet:#a78bfa;--violet-dim:rgba(167,139,250,0.12);
+  --green:#34d399;--green-dim:rgba(52,211,153,0.10);
+  --red:#f87171;--red-dim:rgba(248,113,113,0.10);
+  --blue:#60a5fa;--blue-dim:rgba(96,165,250,0.10);
+  --orange:#fb923c;--orange-dim:rgba(251,146,60,0.10);
+  --r:8px;
+  --font:'Inter',system-ui,sans-serif;
+  --mono:'JetBrains Mono',monospace;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg0);color:var(--text);min-height:100vh;line-height:1.6}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:var(--bg1)}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+
+/* ── Header ── */
+header{
+  position:sticky;top:0;z-index:100;
+  background:rgba(7,9,15,0.92);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  padding:0 32px;height:60px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.logo-badge{
+  width:32px;height:32px;border-radius:6px;
+  background:linear-gradient(135deg,var(--teal),var(--violet));
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;font-weight:700;color:#fff;letter-spacing:-0.5px;
+}
+.logo-text{font-size:15px;font-weight:600;color:var(--text);letter-spacing:0.01em}
+.logo-sub{font-size:11px;color:var(--text3);margin-left:4px}
+.header-nav{display:flex;align-items:center;gap:8px}
+.header-nav a{
+  padding:6px 14px;border-radius:6px;font-size:12px;font-weight:500;
+  color:var(--text2);text-decoration:none;transition:all 0.15s;
+}
+.header-nav a:hover{background:var(--bg2);color:var(--text)}
+.header-nav a.active{background:var(--teal-dim);color:var(--teal)}
+
+/* ── Layout ── */
+.page{max-width:1400px;margin:0 auto;padding:40px 32px}
+
+/* ── Hero ── */
+.hero{margin-bottom:48px;padding-bottom:40px;border-bottom:1px solid var(--border)}
+.hero h1{
+  font-size:36px;font-weight:700;letter-spacing:-0.03em;
+  background:linear-gradient(135deg,var(--text) 0%,var(--teal) 60%,var(--violet) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:12px;
+}
+.hero p{font-size:15px;color:var(--text2);max-width:640px;line-height:1.7}
+.hero-stats{display:flex;gap:32px;margin-top:24px}
+.hero-stat{display:flex;flex-direction:column;gap:2px}
+.hero-stat .n{font-size:28px;font-weight:700;color:var(--teal);letter-spacing:-0.02em;font-family:var(--mono)}
+.hero-stat .l{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:0.06em}
+
+/* ── Toolbar ── */
+.toolbar{display:flex;align-items:center;gap:12px;margin-bottom:32px;flex-wrap:wrap}
+.search-wrap{position:relative;flex:1;min-width:220px;max-width:380px}
+.search-wrap svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--text3);width:16px;height:16px}
+#searchBox{
+  width:100%;padding:9px 12px 9px 38px;border-radius:var(--r);
+  border:1px solid var(--border2);background:var(--bg2);
+  color:var(--text);font-size:13px;font-family:var(--font);
+  outline:none;transition:border-color 0.15s;
+}
+#searchBox:focus{border-color:var(--teal2)}
+#searchBox::placeholder{color:var(--text3)}
+.filter-pills{display:flex;gap:6px;flex-wrap:wrap}
+.pill{
+  padding:5px 14px;border-radius:20px;font-size:11px;font-weight:600;
+  border:1px solid var(--border2);background:var(--bg2);
+  color:var(--text2);cursor:pointer;transition:all 0.15s;user-select:none;
+  text-transform:uppercase;letter-spacing:0.05em;
+}
+.pill:hover{border-color:var(--teal2);color:var(--teal)}
+.pill.active{background:var(--teal-dim);border-color:var(--teal2);color:var(--teal)}
+.count-badge{
+  margin-left:8px;background:var(--bg3);color:var(--text3);
+  border-radius:10px;padding:1px 7px;font-size:10px;
+}
+.view-toggle{display:flex;gap:2px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:3px}
+.view-btn{
+  padding:5px 10px;border-radius:6px;border:none;cursor:pointer;
+  background:transparent;color:var(--text3);transition:all 0.15s;
+  display:flex;align-items:center;
+}
+.view-btn.active{background:var(--bg3);color:var(--text)}
+.view-btn svg{width:15px;height:15px}
+
+/* ── Section headers ── */
+.section-header{
+  display:flex;align-items:center;gap:10px;
+  margin:36px 0 16px;
+}
+.section-header h2{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;color:var(--text3)}
+.section-line{flex:1;height:1px;background:var(--border)}
+.section-count{font-size:11px;color:var(--text3);font-family:var(--mono)}
+
+/* ── Grid ── */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid.list-view{grid-template-columns:1fr}
+
+/* ── Card ── */
+.card{
+  background:var(--bg1);border:1px solid var(--border);
+  border-radius:var(--r);overflow:hidden;cursor:pointer;
+  transition:border-color 0.2s,box-shadow 0.2s,transform 0.15s;
+  position:relative;
+}
+.card:hover{border-color:var(--border2);box-shadow:0 4px 24px rgba(0,0,0,0.4);transform:translateY(-1px)}
+.card.expanded{border-color:var(--teal2)}
+.card-header{padding:16px 18px 14px;display:flex;flex-direction:column;gap:8px}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+.card-id{
+  font-family:var(--mono);font-size:11px;font-weight:600;
+  padding:2px 8px;border-radius:4px;
+  background:var(--bg3);color:var(--text3);letter-spacing:0.04em;white-space:nowrap;
+}
+.card-badges{display:flex;gap:5px;align-items:center;flex-wrap:wrap}
+.badge{
+  font-size:10px;font-weight:600;padding:2px 7px;border-radius:3px;
+  text-transform:uppercase;letter-spacing:0.04em;
+}
+.badge-resolved{background:var(--green-dim);color:var(--green);border:1px solid rgba(52,211,153,0.25)}
+.badge-open{background:var(--amber-dim);color:var(--amber);border:1px solid rgba(245,158,11,0.25)}
+.badge-calc{background:var(--blue-dim);color:var(--blue);border:1px solid rgba(96,165,250,0.25)}
+.badge-archival{background:var(--violet-dim);color:var(--violet);border:1px solid rgba(167,139,250,0.25)}
+.badge-derivation{background:var(--orange-dim);color:var(--orange);border:1px solid rgba(251,146,60,0.25)}
+.card-title{font-size:14px;font-weight:600;color:var(--text);line-height:1.4;letter-spacing:-0.01em}
+.card-cat{font-size:11px;color:var(--text3)}
+.card-footer{
+  padding:10px 18px;border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.card-files{display:flex;gap:6px;flex-wrap:wrap}
+.file-tag{
+  font-size:10px;font-family:var(--mono);color:var(--text3);
+  background:var(--bg2);border:1px solid var(--border);
+  padding:2px 7px;border-radius:3px;
+}
+.file-tag.md{border-color:rgba(45,212,191,0.2);color:var(--teal)}
+.file-tag.cpp{border-color:rgba(167,139,250,0.2);color:var(--violet)}
+.expand-btn{
+  display:flex;align-items:center;gap:4px;font-size:11px;font-weight:500;
+  color:var(--text3);padding:4px 10px;border-radius:5px;
+  border:1px solid var(--border);background:var(--bg2);
+  cursor:pointer;transition:all 0.15s;white-space:nowrap;
+}
+.expand-btn:hover{border-color:var(--teal2);color:var(--teal)}
+.expand-btn svg{width:12px;height:12px;transition:transform 0.2s}
+.expanded .expand-btn svg{transform:rotate(180deg)}
+
+/* ── Content panel ── */
+.card-content{
+  display:none;border-top:1px solid var(--border);
+  background:var(--bg0);
+}
+.card-content.open{display:block}
+.content-inner{padding:24px 28px;max-height:600px;overflow-y:auto}
+.loading{
+  display:flex;align-items:center;justify-content:center;
+  padding:40px;gap:10px;color:var(--text3);font-size:13px;
+}
+.spinner{
+  width:16px;height:16px;border:2px solid var(--border2);
+  border-top-color:var(--teal);border-radius:50%;
+  animation:spin 0.7s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── Markdown renderer output ── */
+.md-body{font-size:13px;line-height:1.75;color:var(--text2)}
+.md-body h1{font-size:18px;font-weight:700;color:var(--text);margin:0 0 16px;letter-spacing:-0.02em;line-height:1.3}
+.md-body h2{font-size:14px;font-weight:600;color:var(--teal);margin:20px 0 10px;text-transform:uppercase;letter-spacing:0.05em}
+.md-body h3{font-size:13px;font-weight:600;color:var(--text);margin:14px 0 8px}
+.md-body p{margin:0 0 12px;color:var(--text2)}
+.md-body ul,.md-body ol{margin:0 0 12px 20px}
+.md-body li{margin:3px 0}
+.md-body code{font-family:var(--mono);font-size:11px;background:var(--bg3);color:var(--violet);padding:1px 5px;border-radius:3px;border:1px solid var(--border)}
+.md-body pre{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:14px 16px;overflow-x:auto;margin:0 0 14px}
+.md-body pre code{background:none;border:none;color:var(--text);font-size:11px;padding:0}
+.md-body blockquote{border-left:3px solid var(--teal);padding:8px 16px;margin:0 0 14px;background:var(--teal-dim);border-radius:0 4px 4px 0}
+.md-body blockquote p{color:var(--teal);margin:0}
+.md-body strong{color:var(--text);font-weight:600}
+.md-body em{color:var(--amber);font-style:italic}
+.md-body hr{border:none;border-top:1px solid var(--border);margin:16px 0}
+.md-body a{color:var(--teal);text-decoration:none}
+.md-body a:hover{text-decoration:underline}
+.md-body table{width:100%;border-collapse:collapse;margin:0 0 14px;font-size:12px}
+.md-body th{background:var(--bg3);color:var(--text);font-weight:600;padding:8px 12px;border:1px solid var(--border);text-align:left}
+.md-body td{padding:7px 12px;border:1px solid var(--border);color:var(--text2)}
+.md-body tr:nth-child(even) td{background:var(--bg2)}
+.md-body .status-resolved{color:var(--green);font-weight:600}
+.md-body .status-open{color:var(--amber);font-weight:600}
+
+/* ── Content tabs ── */
+.content-tabs{display:flex;gap:0;border-bottom:1px solid var(--border);padding:0 18px}
+.content-tab{
+  padding:10px 16px;font-size:12px;font-weight:500;color:var(--text3);
+  cursor:pointer;border-bottom:2px solid transparent;
+  transition:all 0.15s;margin-bottom:-1px;
+}
+.content-tab:hover{color:var(--text)}
+.content-tab.active{color:var(--teal);border-bottom-color:var(--teal)}
+
+/* ── Source code view ── */
+.source-view{padding:0;background:var(--bg0)}
+.source-inner{max-height:500px;overflow:auto;padding:16px 20px}
+.source-inner pre{margin:0;white-space:pre;font-family:var(--mono);font-size:11px;line-height:1.65;color:var(--text2)}
+.src-kw{color:#c792ea}.src-type{color:#82aaff}.src-str{color:#c3e88d}.src-num{color:#f78c6c}
+.src-cmt{color:#546e7a;font-style:italic}.src-fn{color:#82aaff}.src-pp{color:#c792ea}
+
+/* ── GitHub link ── */
+.gh-link{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:6px 14px;border-radius:6px;font-size:11px;font-weight:500;
+  background:var(--bg3);color:var(--text2);text-decoration:none;
+  border:1px solid var(--border2);transition:all 0.15s;margin:12px 18px;
+}
+.gh-link:hover{border-color:var(--teal2);color:var(--teal)}
+
+/* ── List view card ── */
+.list-view .card-header{flex-direction:row;align-items:center;gap:14px;padding:12px 18px}
+.list-view .card-top{flex-shrink:0;margin:0}
+.list-view .card-title{font-size:13px}
+.list-view .card-cat{display:none}
+.list-view .card-content .content-inner{max-height:400px}
+
+/* ── Empty state ── */
+.empty{padding:60px 20px;text-align:center;color:var(--text3)}
+.empty-icon{font-size:40px;margin-bottom:12px;opacity:0.4}
+.empty p{font-size:13px}
+
+/* ── Animations ── */
+.card{animation:fadeUp 0.2s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── Responsive ── */
+@media(max-width:768px){
+  header{padding:0 16px}
+  .page{padding:24px 16px}
+  .hero h1{font-size:26px}
+  .grid{grid-template-columns:1fr}
+  .hero-stats{gap:20px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="index.html">
+    <div class="logo-badge">SDT</div>
+    <span class="logo-text">Spatial Displacement Theory <span class="logo-sub">/ Research</span></span>
+  </a>
+  <nav class="header-nav">
+    <a href="index.html">Home</a>
+    <a href="atomicus-lab.html">Atomicus Lab</a>
+    <a href="investigations.html" class="active">Investigations</a>
+    <a href="https://github.com/Randomdistro/sdt-engine" target="_blank">GitHub ↗</a>
+  </nav>
+</header>
+
+<div class="page">
+  <div class="hero">
+    <h1>SDT Investigations</h1>
+    <p>Formal research programme derived from SDT's theoretical framework. Each investigation operates within SDT as the governing framework — deriving predictions and comparing them to measurement.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><span class="n" id="statTotal">46</span><span class="l">Total</span></div>
+      <div class="hero-stat"><span class="n" id="statCQ">25</span><span class="l">CQ Series</span></div>
+      <div class="hero-stat"><span class="n" id="statE">21</span><span class="l">E Series</span></div>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <div class="search-wrap">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input id="searchBox" type="search" placeholder="Search investigations…" autocomplete="off">
+    </div>
+    <div class="filter-pills" id="filterPills">
+      <div class="pill active" data-filter="all">All <span class="count-badge" id="countAll">46</span></div>
+      <div class="pill" data-filter="quantum">Quantum</div>
+      <div class="pill" data-filter="spation">Spation</div>
+      <div class="pill" data-filter="nuclear">Nuclear</div>
+      <div class="pill" data-filter="cosmology">Cosmology</div>
+      <div class="pill" data-filter="orbital">Orbital</div>
+    </div>
+    <div class="view-toggle">
+      <button class="view-btn active" id="gridViewBtn" title="Grid view">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+      </button>
+      <button class="view-btn" id="listViewBtn" title="List view">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div id="investigationsContainer"></div>
+</div>
+
+<script>
+// ─────────────────────────────────────────────────────────────────────────────
+// Investigation catalogue
+// ─────────────────────────────────────────────────────────────────────────────
+const INVESTIGATIONS = [
+  // ── Quantum Fundamentals ─────────────────────────────────────────────────
+  { id:'CQ01', folder:'CQ01_Transfer_Function_Derivation',        title:'Transfer Function Derivation',           cat:'quantum',   type:'derivation',  files:['INVESTIGATION.md'] },
+  { id:'CQ02', folder:'CQ02_Vortex_Equilibrium_Quantisation',     title:'Vortex Equilibrium Quantisation',        cat:'quantum',   type:'derivation',  files:['INVESTIGATION.md'] },
+  { id:'CQ03', folder:'CQ03_Fine_Structure_from_Topology',        title:'Fine Structure from Topology',           cat:'quantum',   type:'derivation',  files:['INVESTIGATION.md'] },
+  { id:'CQ04', folder:'CQ04_State28D_Force_Ratio_Constants',      title:'State-28D Force Ratio Constants',        cat:'quantum',   type:'calculation', files:['INVESTIGATION.md'] },
+  { id:'CQ05', folder:'CQ05_Proton_Electron_Mass_Ratio',          title:'Proton-Electron Mass Ratio',             cat:'quantum',   type:'derivation',  files:['INVESTIGATION.md'] },
+  { id:'CQ06', folder:'CQ06_Eclipse_Saturation_Model',            title:'Eclipse Saturation Model',               cat:'quantum',   type:'calculation', files:['INVESTIGATION.md'] },
+  { id:'CQ07', folder:'CQ07_Neutrino_Magnetic_Moment',            title:'Neutrino Magnetic Moment',               cat:'quantum',   type:'derivation',  files:['INVESTIGATION.md'] },
+  { id:'CQ08', folder:'CQ08_Granular_Pulse_Mechanics',            title:'Granular Pulse Mechanics',               cat:'quantum',   type:'derivation',  files:['INVESTIGATION.md'] },
+  { id:'CQ09', folder:'CQ09_Spation_Rotation',                    title:'Spation Rotation',                       cat:'spation',   type:'derivation',  files:['INVESTIGATION.md'] },
+  { id:'CQ09b',folder:'CQ09_Spation_Rotation_Kinematic_Map',      title:'Spation Rotation Kinematic Map',         cat:'spation',   type:'calculation', files:['INVESTIGATION.md'] },
+  { id:'CQ10', folder:'CQ10_Lattice_Pulse_Propagation',           title:'Lattice Pulse Propagation',              cat:'spation',   type:'derivation',  files:['INVESTIGATION.md'] },
+  { id:'CQ11', folder:'CQ11_Trefoil_Confinement',                 title:'Trefoil Confinement',                    cat:'quantum',   type:'derivation',  files:['INVESTIGATION.md','cq11_trefoil_confinement.cpp'], status:'RESOLVED' },
+  { id:'CQ12', folder:'CQ12_Emissions',                           title:'Emissions',                              cat:'quantum',   type:'derivation',  files:['INVESTIGATION.md'] },
+  { id:'CQ13', folder:'CQ13_Emission_Prediction',                 title:'Emission Prediction',                    cat:'quantum',   type:'calculation', files:['INVESTIGATION.md'] },
+  { id:'CQ14', folder:'CQ14_Spation_Traction_from_Trefoil',       title:'Spation Traction from Trefoil',          cat:'spation',   type:'derivation',  files:['INVESTIGATION.md'] },
+  // ── Spation Dynamics ──────────────────────────────────────────────────────
+  { id:'CQ15', folder:'CQ15_Spation_Depth_Engine',                title:'Spation Depth Engine',                   cat:'spation',   type:'calculation', files:['INVESTIGATION.md'] },
+  { id:'CQ16', folder:'CQ16_k_Hierarchy_Advantage',               title:'κ Hierarchy Advantage',                  cat:'spation',   type:'derivation',  files:['INVESTIGATION.md'] },
+  { id:'CQ17', folder:'CQ17_Proton_Electron_Mass_Ratio',          title:'Proton-Electron Mass Ratio (Revised)',   cat:'quantum',   type:'derivation',  files:['INVESTIGATION.md'] },
+  { id:'CQ18a',folder:'CQ18_Redshift_Decomposition',              title:'Redshift Decomposition',                 cat:'cosmology', type:'derivation',  files:['INVESTIGATION.md'] },
+  { id:'CQ18b',folder:'CQ18_ZOA_Lensing',                         title:'ZOA Lensing',                            cat:'cosmology', type:'calculation', files:['INVESTIGATION.md'] },
+  { id:'CQ19', folder:'CQ19_Milky_Way_Occlusion_Map',             title:'Milky Way Occlusion Map',                cat:'cosmology', type:'archival',    files:['INVESTIGATION.md'] },
+  { id:'CQ20', folder:'CQ20_Galactic_Spation_Topology',           title:'Galactic Spation Topology',              cat:'cosmology', type:'derivation',  files:['INVESTIGATION.md'] },
+  { id:'CQ23', folder:'CQ23_Lunar_Orbital_Kinematics',            title:'Lunar Orbital Kinematics',               cat:'orbital',   type:'calculation', files:['INVESTIGATION.md'] },
+  { id:'CQ24', folder:'CQ24_Koppa_Closure',                       title:'Koppa Closure',                          cat:'quantum',   type:'derivation',  files:['INVESTIGATION.md'] },
+  // ── Special ───────────────────────────────────────────────────────────────
+  { id:'ATM',  folder:'Atmospheric_Spallation',                   title:'Atmospheric Spallation',                 cat:'nuclear',   type:'archival',    files:['INVESTIGATION.md'] },
+  { id:'GAL',  folder:'GalacticCalculator',                       title:'Galactic Calculator',                    cat:'cosmology', type:'calculation', files:['INVESTIGATION.md'] },
+  // ── Nuclear Physics ───────────────────────────────────────────────────────
+  { id:'E28',  folder:'E28_Triple_Alpha_Geometric_Packing',        title:'Triple Alpha Geometric Packing',        cat:'nuclear',   type:'calculation', files:['PROMPT.md'] },
+  { id:'E29',  folder:'E29_Deuteron_Binding_from_Occlusion',       title:'Deuteron Binding from Occlusion',       cat:'nuclear',   type:'calculation', files:['PROMPT.md'] },
+  { id:'E30',  folder:'E30_Alpha_Binding_from_Tetrahedral_Occlusion',title:'Alpha Binding from Tetrahedral Occlusion',cat:'nuclear',type:'calculation',files:['PROMPT.md'] },
+  { id:'E31',  folder:'E31_Neutron_Lifetime',                      title:'Neutron Lifetime',                      cat:'nuclear',   type:'derivation',  files:['PROMPT.md'] },
+  { id:'E33',  folder:'E33_Nuclear_Charge_Radius_Scaling',         title:'Nuclear Charge Radius Scaling',         cat:'nuclear',   type:'archival',    files:['PROMPT.md'] },
+  { id:'E35',  folder:'E35_Fe56_vs_Ni62_Grammar_Efficiency',       title:'Fe-56 vs Ni-62 Grammar Efficiency',     cat:'nuclear',   type:'archival',    files:['PROMPT.md'] },
+  { id:'E39',  folder:'E39_Proton_Neutron_Mass_Difference',        title:'Proton-Neutron Mass Difference',        cat:'nuclear',   type:'derivation',  files:['PROMPT.md'] },
+  { id:'E40',  folder:'E40_Nuclear_Magnetic_Moments_from_Vortex',  title:'Nuclear Magnetic Moments from Vortex',  cat:'nuclear',   type:'derivation',  files:['PROMPT.md'] },
+  // ── Cosmology ─────────────────────────────────────────────────────────────
+  { id:'E07',  folder:'E07_Primordial_Lithium_Resolution',         title:'Primordial Lithium Resolution',         cat:'cosmology', type:'calculation', files:['PROMPT.md'] },
+  { id:'E09',  folder:'E09_Le_Sage_Thermal_Budget',                title:'Le Sage Thermal Budget',                cat:'cosmology', type:'calculation', files:['PROMPT.md'] },
+  { id:'E11',  folder:'E11_E45_Pressure_Gradient_Redshift_and_BAO',title:'Pressure Gradient Redshift & BAO',      cat:'cosmology', type:'archival',    files:['PROMPT.md'] },
+  { id:'E42',  folder:'E42_E49_Hubble_Tension_and_Dark_Energy',    title:'Hubble Tension & Dark Energy',          cat:'cosmology', type:'archival',    files:['PROMPT.md'] },
+  { id:'E46',  folder:'E46_Galaxy_Rotation_Curves',                title:'Galaxy Rotation Curves',                cat:'cosmology', type:'archival',    files:['PROMPT.md'] },
+  { id:'E47',  folder:'E47_Gravitational_Lensing',                 title:'Gravitational Lensing',                 cat:'cosmology', type:'archival',    files:['PROMPT.md'] },
+  { id:'E61',  folder:'E61_E63_Blackbody_Radiation_from_Lattice',  title:'Blackbody Radiation from Lattice',      cat:'cosmology', type:'calculation', files:['PROMPT.md'] },
+  { id:'E64',  folder:'E64_Solar_Luminosity',                      title:'Solar Luminosity',                      cat:'cosmology', type:'calculation', files:['PROMPT.md'] },
+  { id:'E65',  folder:'E65_Stellar_Main_Sequence_k_Gradient',      title:'Stellar Main Sequence κ Gradient',      cat:'cosmology', type:'archival',    files:['PROMPT.md'] },
+  { id:'E101', folder:'E101_Solar_System_Convergence_Budget',      title:'Solar System Convergence Budget',       cat:'orbital',   type:'calculation', files:['PROMPT.md'] },
+  // ── Orbital Mechanics ─────────────────────────────────────────────────────
+  { id:'E24',  folder:'E24_Mercury_Precession_from_k_Hierarchy',   title:'Mercury Precession from κ Hierarchy',   cat:'orbital',   type:'calculation', files:['PROMPT.md'] },
+  { id:'E97',  folder:'E97_Earth_Core_Seismic_Speed',              title:'Earth Core Seismic Speed',              cat:'orbital',   type:'calculation', files:['PROMPT.md'] },
+  { id:'E98',  folder:'E98_Three_Body_Lagrange_from_Koppa',        title:'Three-Body Lagrange from Koppa',        cat:'orbital',   type:'derivation',  files:['PROMPT.md'] },
+  { id:'E99',  folder:'E99_Ocean_Tidal_Analysis',                  title:'Ocean Tidal Analysis',                  cat:'orbital',   type:'archival',    files:['PROMPT.md'] },
+];
+
+const CATEGORY_LABELS = {
+  quantum:   'Quantum Fundamentals',
+  spation:   'Spation Dynamics',
+  nuclear:   'Nuclear Physics',
+  cosmology: 'Cosmology',
+  orbital:   'Orbital Mechanics',
+};
+
+const CATEGORY_ORDER = ['quantum','spation','nuclear','cosmology','orbital'];
+
+const RAW_BASE = 'https://raw.githubusercontent.com/Randomdistro/sdt-engine/main/Investigations/';
+const GH_BASE  = 'https://github.com/Randomdistro/sdt-engine/tree/main/Investigations/';
+
+// ── State ────────────────────────────────────────────────────────────────────
+let currentFilter = 'all';
+let currentSearch = '';
+let isListView    = false;
+const contentCache = {};
+
+// ── Minimal markdown → HTML renderer ─────────────────────────────────────────
+function renderMarkdown(md) {
+  let h = md
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+  // Fenced code blocks
+  h = h.replace(/```(\w*)\n([\s\S]*?)```/g, (_, lang, code) =>
+    `<pre><code class="lang-${lang}">${code.trim()}</code></pre>`);
+
+  // Inline code
+  h = h.replace(/`([^`]+)`/g,'<code>$1</code>');
+
+  // Blockquotes
+  h = h.replace(/^> \*\*Status\*\*: (RESOLVED)/gm,'<blockquote><p><strong>Status:</strong> <span class="status-resolved">$1</span></p></blockquote>');
+  h = h.replace(/^> (.+)/gm,'<blockquote><p>$1</p></blockquote>');
+
+  // Headings
+  h = h.replace(/^### (.+)/gm,'<h3>$1</h3>');
+  h = h.replace(/^## (.+)/gm,'<h2>$1</h2>');
+  h = h.replace(/^# (.+)/gm,'<h1>$1</h1>');
+
+  // HR
+  h = h.replace(/^---$/gm,'<hr>');
+
+  // Bold / italic
+  h = h.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
+  h = h.replace(/\*(.+?)\*/g,'<em>$1</em>');
+
+  // Tables
+  h = h.replace(/(^\|.+\n)+/gm, block => {
+    const rows = block.trim().split('\n');
+    if (rows.length < 2) return block;
+    const header = rows[0].split('|').filter((_,i,a)=>i>0&&i<a.length-1).map(c=>`<th>${c.trim()}</th>`).join('');
+    const body = rows.slice(2).map(r => {
+      const cells = r.split('|').filter((_,i,a)=>i>0&&i<a.length-1).map(c=>`<td>${c.trim()}</td>`).join('');
+      return `<tr>${cells}</tr>`;
+    }).join('');
+    return `<table><thead><tr>${header}</tr></thead><tbody>${body}</tbody></table>`;
+  });
+
+  // Unordered lists
+  h = h.replace(/(^[\*\-] .+\n?)+/gm, block => {
+    const items = block.trim().split('\n').map(l=>`<li>${l.replace(/^[\*\-] /,'')}</li>`).join('');
+    return `<ul>${items}</ul>`;
+  });
+
+  // Paragraphs
+  h = h.split(/\n{2,}/).map(p => {
+    p = p.trim();
+    if (!p) return '';
+    if (/^<(h[1-6]|ul|ol|li|pre|table|blockquote|hr)/.test(p)) return p;
+    return `<p>${p.replace(/\n/g,' ')}</p>`;
+  }).join('\n');
+
+  return h;
+}
+
+// ── Simple C++ syntax highlighter ────────────────────────────────────────────
+function highlightCpp(src) {
+  const kws = /\b(auto|break|case|catch|class|const|constexpr|continue|default|delete|do|double|else|enum|explicit|extern|false|float|for|friend|if|inline|int|long|namespace|new|nullptr|operator|override|private|protected|public|return|short|signed|sizeof|static|static_assert|struct|switch|template|this|throw|true|try|typedef|typename|union|unsigned|using|virtual|void|while)\b/g;
+  const types = /\b(std|string|vector|map|set|array|cout|cin|endl|size_t|uint64_t|int64_t|double|float)\b/g;
+
+  return src
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/(\/\/[^\n]*)/g,'<span class="src-cmt">$1</span>')
+    .replace(/(\/\*[\s\S]*?\*\/)/g,'<span class="src-cmt">$1</span>')
+    .replace(/(#\w+[^\n]*)/g,'<span class="src-pp">$1</span>')
+    .replace(/"([^"]*)"/g,'<span class="src-str">"$1"</span>')
+    .replace(/\b(\d+\.?\d*[fFlLuU]*)\b/g,'<span class="src-num">$1</span>')
+    .replace(kws,'<span class="src-kw">$1</span>')
+    .replace(types,'<span class="src-type">$1</span>');
+}
+
+// ── Build a card element ──────────────────────────────────────────────────────
+function buildCard(inv) {
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.dataset.id = inv.id;
+  card.dataset.cat = inv.cat;
+
+  const typeBadge = { calculation:'badge-calc', archival:'badge-archival', derivation:'badge-derivation' }[inv.type] || 'badge-open';
+  const typeLabel = { calculation:'Calculation', archival:'Archival', derivation:'Derivation' }[inv.type] || inv.type;
+
+  const fileTags = inv.files.map(f => {
+    const ext = f.split('.').pop();
+    return `<span class="file-tag ${ext}">${f}</span>`;
+  }).join('');
+
+  const statusBadge = inv.status === 'RESOLVED'
+    ? `<span class="badge badge-resolved">✓ Resolved</span>`
+    : `<span class="badge ${typeBadge}">${typeLabel}</span>`;
+
+  card.innerHTML = `
+    <div class="card-header">
+      <div class="card-top">
+        <span class="card-id">${inv.id}</span>
+        <div class="card-badges">${statusBadge}</div>
+      </div>
+      <div class="card-title">${inv.title}</div>
+      <div class="card-cat">${CATEGORY_LABELS[inv.cat] || inv.cat}</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-files">${fileTags}</div>
+      <button class="expand-btn">
+        View
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+    </div>
+    <div class="card-content">
+      <a class="gh-link" href="${GH_BASE}${inv.folder}" target="_blank">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.1.82-.26.82-.58v-2.03c-3.34.72-4.04-1.61-4.04-1.61-.54-1.38-1.33-1.75-1.33-1.75-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.48 1 .11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02 0 2.04.13 3 .4 2.28-1.55 3.3-1.23 3.3-1.23.66 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.69.83.57C20.57 21.8 24 17.3 24 12 24 5.37 18.63 0 12 0z"/></svg>
+        View on GitHub
+      </a>
+      <div class="content-tabs" id="tabs-${inv.id}"></div>
+      <div class="content-inner" id="content-${inv.id}">
+        <div class="loading"><div class="spinner"></div> Loading…</div>
+      </div>
+    </div>
+  `;
+
+  const expandBtn = card.querySelector('.expand-btn');
+  const contentPanel = card.querySelector('.card-content');
+
+  expandBtn.addEventListener('click', e => {
+    e.stopPropagation();
+    const wasExpanded = card.classList.contains('expanded');
+    // Collapse all
+    document.querySelectorAll('.card.expanded').forEach(c => {
+      c.classList.remove('expanded');
+      c.querySelector('.card-content').classList.remove('open');
+    });
+    if (!wasExpanded) {
+      card.classList.add('expanded');
+      contentPanel.classList.add('open');
+      loadContent(inv, card);
+    }
+  });
+
+  card.querySelector('.card-header').addEventListener('click', () => {
+    expandBtn.click();
+  });
+
+  return card;
+}
+
+// ── Load content for an investigation ────────────────────────────────────────
+async function loadContent(inv, card) {
+  const key = inv.id;
+  if (contentCache[key]) { renderContent(inv, card, contentCache[key]); return; }
+
+  const contentEl = card.querySelector(`#content-${inv.id}`);
+  const tabsEl    = card.querySelector(`#tabs-${inv.id}`);
+  contentEl.innerHTML = '<div class="loading"><div class="spinner"></div> Loading…</div>';
+
+  // Try to fetch all files
+  const results = {};
+  await Promise.all(inv.files.map(async fname => {
+    try {
+      const url = `${RAW_BASE}${inv.folder}/${fname}`;
+      const r = await fetch(url);
+      if (r.ok) results[fname] = await r.text();
+      else results[fname] = null;
+    } catch { results[fname] = null; }
+  }));
+
+  // Check if all failed → try alternate file names
+  const hasContent = Object.values(results).some(v => v !== null);
+  if (!hasContent) {
+    // Try INVESTIGATION.md if PROMPT.md failed and vice versa
+    const alt = inv.files[0] === 'PROMPT.md' ? 'INVESTIGATION.md' : 'PROMPT.md';
+    try {
+      const r = await fetch(`${RAW_BASE}${inv.folder}/${alt}`);
+      if (r.ok) results[alt] = await r.text();
+    } catch {}
+  }
+
+  contentCache[key] = results;
+  renderContent(inv, card, results);
+}
+
+function renderContent(inv, card, results) {
+  const contentEl = card.querySelector(`#content-${inv.id}`);
+  const tabsEl    = card.querySelector(`#tabs-${inv.id}`);
+
+  const fileNames = Object.keys(results).filter(k => results[k] !== null);
+
+  if (fileNames.length === 0) {
+    contentEl.innerHTML = `<div class="loading" style="color:var(--text3)">No content available — <a href="${GH_BASE}${inv.folder}" target="_blank" style="color:var(--teal)">view on GitHub</a></div>`;
+    tabsEl.innerHTML = '';
+    return;
+  }
+
+  // Build tabs if multiple files
+  tabsEl.innerHTML = '';
+  let activeFile = fileNames[0];
+  if (fileNames.length > 1) {
+    fileNames.forEach((fname, i) => {
+      const tab = document.createElement('div');
+      tab.className = 'content-tab' + (i === 0 ? ' active' : '');
+      tab.textContent = fname;
+      tab.addEventListener('click', () => {
+        tabsEl.querySelectorAll('.content-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        activeFile = fname;
+        showFile(fname, results[fname], contentEl);
+      });
+      tabsEl.appendChild(tab);
+    });
+  }
+
+  showFile(activeFile, results[activeFile], contentEl);
+}
+
+function showFile(fname, content, el) {
+  const ext = fname.split('.').pop();
+  if (ext === 'md') {
+    el.innerHTML = `<div class="md-body">${renderMarkdown(content)}</div>`;
+  } else if (ext === 'cpp' || ext === 'h') {
+    el.innerHTML = `<div class="source-inner"><pre>${highlightCpp(content)}</pre></div>`;
+  } else {
+    el.innerHTML = `<pre style="font:11px/1.6 var(--mono);color:var(--text2);white-space:pre-wrap">${content}</pre>`;
+  }
+}
+
+// ── Filter + search logic ─────────────────────────────────────────────────────
+function getFiltered() {
+  const q = currentSearch.toLowerCase();
+  return INVESTIGATIONS.filter(inv => {
+    const catMatch = currentFilter === 'all' || inv.cat === currentFilter;
+    const searchMatch = !q || inv.title.toLowerCase().includes(q) || inv.id.toLowerCase().includes(q) || inv.cat.includes(q);
+    return catMatch && searchMatch;
+  });
+}
+
+function render() {
+  const container = document.getElementById('investigationsContainer');
+  container.innerHTML = '';
+
+  const filtered = getFiltered();
+  if (filtered.length === 0) {
+    container.innerHTML = '<div class="empty"><div class="empty-icon">🔬</div><p>No investigations match your search.</p></div>';
+    return;
+  }
+
+  // Group by category in fixed order
+  const groups = {};
+  CATEGORY_ORDER.forEach(c => groups[c] = []);
+  filtered.forEach(inv => { if (groups[inv.cat]) groups[inv.cat].push(inv); });
+
+  CATEGORY_ORDER.forEach(cat => {
+    const group = groups[cat];
+    if (!group || group.length === 0) return;
+
+    const sec = document.createElement('div');
+    sec.innerHTML = `
+      <div class="section-header">
+        <h2>${CATEGORY_LABELS[cat]}</h2>
+        <div class="section-line"></div>
+        <span class="section-count">${group.length}</span>
+      </div>
+    `;
+
+    const grid = document.createElement('div');
+    grid.className = 'grid' + (isListView ? ' list-view' : '');
+
+    group.forEach((inv, i) => {
+      const card = buildCard(inv);
+      card.style.animationDelay = `${i * 30}ms`;
+      grid.appendChild(card);
+    });
+
+    sec.appendChild(grid);
+    container.appendChild(sec);
+  });
+
+  // Update count badges
+  document.getElementById('statTotal').textContent = INVESTIGATIONS.length;
+  document.getElementById('statCQ').textContent = INVESTIGATIONS.filter(i => i.id.startsWith('CQ')).length;
+  document.getElementById('statE').textContent = INVESTIGATIONS.filter(i => i.id.startsWith('E')).length;
+  document.getElementById('countAll').textContent = filtered.length;
+}
+
+// ── Event wiring ──────────────────────────────────────────────────────────────
+document.getElementById('searchBox').addEventListener('input', e => {
+  currentSearch = e.target.value;
+  render();
+});
+
+document.getElementById('filterPills').addEventListener('click', e => {
+  const pill = e.target.closest('.pill');
+  if (!pill) return;
+  document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+  pill.classList.add('active');
+  currentFilter = pill.dataset.filter;
+  render();
+});
+
+document.getElementById('gridViewBtn').addEventListener('click', () => {
+  isListView = false;
+  document.getElementById('gridViewBtn').classList.add('active');
+  document.getElementById('listViewBtn').classList.remove('active');
+  render();
+});
+
+document.getElementById('listViewBtn').addEventListener('click', () => {
+  isListView = true;
+  document.getElementById('listViewBtn').classList.add('active');
+  document.getElementById('gridViewBtn').classList.remove('active');
+  render();
+});
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+render();
+</script>
+</body>
+</html>

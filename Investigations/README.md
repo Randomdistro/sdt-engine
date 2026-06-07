@@ -70,6 +70,7 @@ the investigation derives predictions and compares them to measurements.
 | CQ06_Eclipse_Saturation_Model | Missing galactic.hpp — needs implementation | E46 reference |
 | CQ07_Neutrino_Magnetic_Moment | Formalise μ_ν ≡ 0 prediction | neutrino.hpp:9 |
 | CQ15_Spation_Depth_Engine | z(r)=ϟ/r reproduces redshift, Shapiro, bending, cosmological z | laws.hpp:bridge |
+| CQ26_Universal_Drafting_Crossover | Is B=Φ(ξ), ξ=g_self/g_floor, one scale-invariant curve across atomic/stellar/galactic/nuclear? 40 examples × 3 types × 4 classes × 4 scales | galactic.hpp:77, CQ13, E101, E46-M4 |
 
 ---
 

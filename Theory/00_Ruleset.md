@@ -85,3 +85,9 @@ The following are **not permitted** in any SDT derivation:
 | CALIBRATED | One parameter fitted (must be documented) |
 | OBSERVED | Validated against measurement, mechanism established |
 | PENDING | Mechanism identified, computation not yet complete |
+
+> **Superseded by the two-axis audit spine.** These single-axis labels conflate
+> *provenance* (where the derivation started) with *correspondence* (what the result
+> matches). New work SHALL carry both `provenance_status` and `correspondence_status`
+> and the projected A–F class; see [`05_Provenance_and_Correspondence.md`](05_Provenance_and_Correspondence.md).
+> The legacy labels above remain valid as a coarse provenance hint and crosswalk.
