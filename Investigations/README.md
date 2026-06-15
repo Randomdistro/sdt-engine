@@ -71,6 +71,7 @@ the investigation derives predictions and compares them to measurements.
 | CQ07_Neutrino_Magnetic_Moment | Formalise μ_ν ≡ 0 prediction | neutrino.hpp:9 |
 | CQ15_Spation_Depth_Engine | z(r)=ϟ/r reproduces redshift, Shapiro, bending, cosmological z | laws.hpp:bridge |
 | CQ26_Universal_Drafting_Crossover | Is B=Φ(ξ), ξ=g_self/g_floor, one scale-invariant curve across atomic/stellar/galactic/nuclear? 40 examples × 3 types × 4 classes × 4 scales | galactic.hpp:77, CQ13, E101, E46-M4 |
+| CQ37_Elementary_Charge_Quantisation | Can e = 1.602e-19 C be derived from {ℓ_P, c, ℏ, k_B, T_CMB, d}? | CQ03 dependency |
 
 ---
 
@@ -79,6 +80,7 @@ the investigation derives predictions and compares them to measurements.
 ```
 CQ02 (R/a quantisation)
   ├── CQ03 (α from topology — needs W=1 equilibrium)
+  │   └── CQ37 (e from topology — depends on CQ03 solution)
   ├── CQ05 (m_p/m_e — needs W=3 vs W=1 ratio)
   └── E40 (magnetic moments — needs circulation modes)
 
