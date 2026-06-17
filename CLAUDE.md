@@ -25,7 +25,7 @@ There is no test runner. Benchmarks self-report PASS/FAIL by comparing SDT-deriv
 
 ## Architectural spine
 
-**`Engine/include/sdt/laws.hpp` is THE single source of truth.** Every numerical constant, every force law, every derivation ultimately flows through this file. Downstream headers (`cosmology.hpp`, `magnetosphere.hpp`, `neutrino.hpp`, `state28d.hpp`) and all benchmark/investigation `.cpp` files `#include <sdt/laws.hpp>` and must not redefine constants it already exposes. Everything lives in `namespace sdt::laws` with sub-namespaces mirroring the Five Laws:
+**`Engine/include/sdt/laws.hpp` is THE single source of truth.** Every numerical constant, every force law, every derivation ultimately flows through this file. Downstream headers (`cosmology.hpp`, `magnetosphere.hpp`, `neutrino.hpp`, `state28d.hpp`) and all benchmark/investigation `.cpp` files `#include <sdt/laws.hpp>` and must not redefine constants it already exposes. Everything lives in `namespace sdt::laws` with sub-namespaces mirroring the Six Laws:
 
 - `sdt::laws::measured` — the ONLY external inputs (CODATA 2018, IAU, FIRAS). A fact not in here is not a measured fact. Do not add fitted values.
 - `sdt::laws::law_I` — cosmological relay throughput (Φ = Nε, P_conv)
@@ -33,10 +33,11 @@ There is no test runner. Benchmarks self-report PASS/FAIL by comparing SDT-deriv
 - `sdt::laws::law_III` — occlusion force: `F = (π/4) P_eff R₁² R₂² / r²` — the universal force law (Coulomb, gravity, nuclear all share this)
 - `sdt::laws::law_IV` — inertial mass as throughput reorganisation cost
 - `sdt::laws::law_V` — movement budget (`v_circ² + v² = c²`), special relativity
+- `sdt::laws::law_VI` — vortex topology quantisation (T18, W+1 conjecture, winding)
 - `sdt::laws::bridge` — k-hierarchy, koppa (ϟ = R/k²), orbital mechanics without G
-- `sdt::laws::atomic`, `nuclear`, `coulomb_identity`, `winding` — domain functions
+- `sdt::laws::atomic`, `nuclear`, `coulomb_identity` — domain functions
 
-When adding a new derivation: put the formula in the appropriate namespace of `laws.hpp`, cite the theorem number (T1–T17) in a comment, and reference it from benchmarks rather than duplicating the math.
+When adding a new derivation: put the formula in the appropriate namespace of `laws.hpp`, cite the theorem number (T1–T18) in a comment, and reference it from benchmarks rather than duplicating the math.
 
 ## The hard constraints ("Prohibitions")
 
@@ -64,7 +65,7 @@ Electron-capture isotopes use the **alternate grammar** (He-3 core instead of He
 
 - `Engine/include/sdt/` — header-only C++20 library. Start with `laws.hpp`.
 - `Theory/` — formal framework, read in order `00_Ruleset.md` → `01_Closure_Derivations.md` → `02_Inputs_and_Derivations.md` → `03_Open_Problems.md` → `04_Notation.md`.
-- `Laws/` — the Five (now Six) Laws as standalone papers (`.md` + `.docx`).
+- `Laws/` — the Six Laws as standalone papers (`.md` + `.docx`).
 - `ATOMICUS/` — atomic/nuclear database and construction grammar; `rules/On the Nature of Atomicus Rules.md` is the nuclear constitution.
 - `Hubble/` — cosmological analysis suite with ~18 `zk²` tools in `tools/` and datasets in `data/`. Independent from the benchmarks CMake build; tools compile standalone.
 - `Experiments/` — falsifiable prediction specs `E01.md` … `E101.md`. Each specifies SDT prediction, standard-model prediction, observable difference.

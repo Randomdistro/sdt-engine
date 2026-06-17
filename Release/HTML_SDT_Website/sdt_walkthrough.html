@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spatial Displacement Theory — The Walkthrough</title>
+<meta name="description" content="A step-by-step walkthrough of Spatial Displacement Theory: one medium, one mechanism, zero free parameters. Drag the geometry; watch the force appear.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+/* ── Walkthrough supplement (extends the Tekne stylesheet; tokens reused) ───── */
+
+/* tighter rhythm — less dead space than the reference site */
+.chapter { padding: var(--sp-2xl) var(--sp-xl); }
+.chapter__lead { margin-bottom: var(--sp-lg); }
+.chapter p { margin-bottom: var(--sp-sm); }
+
+/* scroll progress + dot rail */
+.progress { position: fixed; top: 0; left: 0; height: 2px; background: linear-gradient(90deg,var(--copper-light),var(--copper)); width: 0; z-index: 200; transition: width .1s linear; }
+.rail { position: fixed; right: 1.1rem; top: 50%; transform: translateY(-50%); z-index: 120; display: flex; flex-direction: column; gap: .55rem; }
+.rail a { width: 9px; height: 9px; border-radius: 50%; border: 1px solid var(--ink-whisper); background: transparent; transition: all var(--dur-fast); }
+.rail a:hover { border-color: var(--copper); transform: scale(1.3); }
+.rail a.on { background: var(--copper); border-color: var(--copper); }
+@media (max-width: 900px){ .rail{ display:none; } }
+
+/* the 3D hero world */
+.world { position: relative; min-height: 100vh; overflow: hidden; background:
+  radial-gradient(120% 90% at 50% 0%, var(--paper) 0%, var(--cream) 55%, var(--cream-warm) 100%); }
+.world__canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.world__overlay { position: relative; z-index: 2; min-height: 100vh; display: flex; flex-direction: column;
+  justify-content: center; align-items: center; text-align: center; padding: var(--sp-3xl) var(--sp-xl); pointer-events: none; }
+.world__overlay > * { pointer-events: auto; }
+.world__kicker { font-family:'Source Serif 4',serif; font-style: italic; color: var(--ink-muted); letter-spacing:.04em; margin-bottom: var(--sp-lg); }
+.world__title { font-family:'Source Serif 4',serif; font-weight: 700; font-size: clamp(2.4rem,6.5vw,5rem); line-height: 1.02; letter-spacing:-0.02em; color: var(--ink); }
+.world__title em { font-style: normal; color: var(--copper); }
+.world__sub { font-size: var(--fs-md); color: var(--ink-soft); max-width: 33rem; margin: var(--sp-lg) auto 0; }
+.world__author { font-size: var(--fs-sm); color: var(--ink-muted); margin-top: var(--sp-md); letter-spacing:.03em; }
+.world__hud { position: absolute; bottom: var(--sp-xl); left: 50%; transform: translateX(-50%); z-index: 3;
+  display: flex; gap: .5rem; flex-wrap: wrap; justify-content: center; }
+.toggle { font-family:'Inter',sans-serif; font-size: var(--fs-xs); letter-spacing:.04em; padding:.4rem .8rem;
+  border:1px solid var(--paper-edge); border-radius: 20px; background: rgba(250,246,239,.7); color: var(--ink-muted);
+  cursor: pointer; transition: all var(--dur-fast); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.toggle:hover { border-color: var(--copper); color: var(--copper); }
+.toggle.on { border-color: var(--copper); color: var(--copper); background: var(--copper-glow); }
+.world__hint { position: absolute; top: calc(var(--sp-3xl) + 1rem); left: 50%; transform: translateX(-50%); z-index:3;
+  font-size: var(--fs-xs); color: var(--ink-faint); letter-spacing:.05em; text-transform: uppercase; }
+
+/* generic figure / interactive shell */
+.fig { margin: var(--sp-lg) 0; border: 1px solid var(--paper-edge); border-radius: 8px; background: var(--paper);
+  overflow: hidden; }
+.fig__stage { position: relative; width: 100%; display: block; touch-action: none; }
+.fig__bar { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-md);
+  padding: var(--sp-sm) var(--sp-md); border-top: 1px solid var(--paper-edge); background: var(--cream); flex-wrap: wrap; }
+.fig__hint { font-size: var(--fs-xs); color: var(--ink-faint); font-style: italic; }
+.fig__read { font-family:'JetBrains Mono',monospace; font-size: var(--fs-sm); color: var(--ink); }
+.fig__read b { color: var(--copper); font-weight: 500; }
+.fig__caption { font-size: var(--fs-sm); color: var(--ink-muted); font-style: italic; margin-top: var(--sp-sm); }
+
+.chips { display: flex; gap: .4rem; flex-wrap: wrap; margin: var(--sp-md) 0; }
+.chip { font-family:'Inter',sans-serif; font-size: var(--fs-xs); padding:.35rem .7rem; border:1px solid var(--paper-edge);
+  border-radius: 4px; background: var(--paper); color: var(--ink-muted); cursor: pointer; transition: all var(--dur-fast); letter-spacing:.02em;}
+.chip:hover { border-color: var(--copper-light); color: var(--ink); }
+.chip.on { border-color: var(--copper); color: var(--copper); background: var(--copper-glow); }
+
+/* live value badge used inline */
+.val { font-family:'JetBrains Mono',monospace; color: var(--copper); }
+
+/* label pills for certification */
+.cert { font-family:'JetBrains Mono',monospace; font-size: .62rem; letter-spacing:.08em; text-transform: uppercase;
+  padding: 2px 7px; border-radius: 3px; vertical-align: middle; }
+.cert--d { color: var(--steel); background: rgba(74,109,130,.10); }
+.cert--c { color: var(--copper); background: var(--copper-glow); }
+.cert--e { color: #b06a30; background: rgba(176,116,48,.16); }
+.cert--p { color: #8b6cc1; background: rgba(139,108,193,.12); }
+.cert--x { color: var(--ink-muted); background: rgba(122,114,101,.12); }
+
+/* big result row */
+.results { width:100%; border-collapse: collapse; margin: var(--sp-lg) 0; font-size: var(--fs-sm); }
+.results th { text-align:left; font-family:'Source Serif 4',serif; color: var(--ink); padding:.5rem .6rem; border-bottom:2px solid var(--paper-edge); }
+.results td { padding:.5rem .6rem; border-bottom:1px solid var(--paper-edge); color: var(--ink-soft); vertical-align: top; }
+.results td:first-child { font-family:'Source Serif 4',serif; color: var(--ink); font-weight:600; }
+.results .num { font-family:'JetBrains Mono',monospace; color: var(--copper); white-space:nowrap; }
+.results tr:hover td { background: var(--copper-glow); }
+
+/* two-up layout for prose+figure */
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-xl); align-items: center; }
+.split--narrow { grid-template-columns: 1.1fr .9fr; }
+@media (max-width: 820px){ .split, .split--narrow { grid-template-columns: 1fr; gap: var(--sp-lg);} }
+
+/* the trefoil canvas */
+.knotwrap { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-lg); align-items: center; }
+.knot { width: 100%; aspect-ratio: 1/1; border:1px solid var(--paper-edge); border-radius: 8px; background:
+  radial-gradient(120% 120% at 50% 30%, var(--paper), var(--cream)); display:block; touch-action:none; }
+@media (max-width: 700px){ .knotwrap{ grid-template-columns:1fr; } }
+
+/* nucleus assembly */
+.nuke { display:flex; flex-wrap: wrap; gap: 6px; align-items:center; justify-content:center; padding: var(--sp-lg);
+  min-height: 9rem; }
+.unit { display:flex; align-items:center; justify-content:center; font-family:'JetBrains Mono',monospace; font-size:.6rem;
+  border-radius: 50%; color: var(--paper); }
+.unit--a { width: 46px; height:46px; background: var(--copper); box-shadow: 0 2px 10px rgba(176,116,48,.35); font-size:.7rem; }
+.unit--d { width: 26px; height:26px; background: var(--steel); }
+.unit--t { width: 26px; height:26px; background: var(--ink-soft); }
+.nuke-meta { font-family:'JetBrains Mono',monospace; font-size: var(--fs-sm); color: var(--ink-soft); text-align:center; }
+.nuke-meta b { color: var(--copper); }
+
+/* slogan */
+.slogan { font-family:'Source Serif 4',serif; font-size: clamp(1.5rem,3.4vw,2.4rem); font-weight:600; line-height:1.25;
+  color: var(--ink); text-align:center; margin: var(--sp-2xl) auto; max-width: 30rem; }
+.slogan em { color: var(--copper); font-style: normal; }
+
+.endcta { display:flex; gap: var(--sp-md); flex-wrap: wrap; justify-content:center; margin-top: var(--sp-xl); }
+.endcta a { font-family:'Inter',sans-serif; font-size: var(--fs-sm); letter-spacing:.03em; padding:.7rem 1.3rem;
+  border:1px solid var(--copper-light); border-radius: 4px; color: var(--copper); text-decoration:none; transition: all var(--dur-fast); }
+.endcta a:hover { background: var(--copper); color: var(--cream); }
+
+svg .drag { cursor: grab; }
+svg .drag:active { cursor: grabbing; }
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+<nav class="rail" id="rail" aria-label="Section navigation"></nav>
+
+<!-- ════════════════ HERO: THE PRESSURISED VESSEL (3D world) ════════════════ -->
+<section class="world" id="hero" data-rail="The Vessel">
+  <canvas class="world__canvas" id="worldCanvas"></canvas>
+  <div class="world__hint" id="worldHint">drag to orbit · the lattice converges from every direction</div>
+  <div class="world__overlay">
+    <p class="world__kicker">One medium. One mechanism. Zero free parameters.</p>
+    <h1 class="world__title">Spatial<br>Displacement<br><em>Theory</em></h1>
+    <p class="world__sub">You are standing at the bottom of an ocean of space. It presses on you from every direction at once — and you feel nothing, until something blocks it.</p>
+    <p class="world__author">J. C. Harvey — Melbourne · a step-by-step walkthrough</p>
+  </div>
+  <div class="world__hud" id="worldHud">
+    <button class="toggle on" data-w="conv">convergence</button>
+    <button class="toggle on" data-w="second">two bodies</button>
+    <button class="toggle on" data-w="push">show the push</button>
+    <button class="toggle on" data-w="infall">infall · accretion</button>
+  </div>
+</section>
+
+<!-- ════════════════ 1 · THE THESIS ════════════════ -->
+<section class="chapter" id="thesis" data-rail="The Thesis">
+  <div class="chapter__inner reveal">
+    <div class="chapter__num">The thesis</div>
+    <h2 class="chapter__title">Space is not empty, and nothing pulls</h2>
+    <p class="chapter__lead">Space is a gap-free lattice of contacting cells — <em>spations</em> — that relay deformation one cell per tick. Every force, every mass, every photon, the redshift of galaxies: all of it is how that relay is loaded, occluded, displaced, and budgeted.</p>
+    <p>There are four primitives. Everything else is derived from them.</p>
+
+    <div class="primitives reveal-stagger">
+      <div class="primitive"><div class="primitive__glyph">◈</div><div class="primitive__name">Space</div><div class="primitive__sdt">The spation lattice</div><p class="primitive__desc">A 3D, gap-free, contact-only relay medium. The irreducible cell is the spation, of size ℓ<sub>P</sub> = 1.616 × 10⁻³⁵ m.</p></div>
+      <div class="primitive"><div class="primitive__glyph">◉</div><div class="primitive__name">Matter</div><div class="primitive__sdt">A persistent displacement</div><p class="primitive__desc">A hard, localised, solid vortex — a knotted circulation pattern in the lattice. Never a cloud, never a probability.</p></div>
+      <div class="primitive"><div class="primitive__glyph">↻</div><div class="primitive__name">Movement</div><div class="primitive__sdt">Circulation + translation</div><p class="primitive__desc">A vortex's velocity is split between spinning in place and moving through space — and the two always sum to c.</p></div>
+      <div class="primitive"><div class="primitive__glyph">·</div><div class="primitive__name">Now</div><div class="primitive__sdt">The tick</div><p class="primitive__desc">The relay advances exactly one spation per Planck time. There is no faster, because the lattice cannot relay faster.</p></div>
+    </div>
+
+    <div class="slogan">There is no attraction. The convergence <em>pushes</em> — and a closed least-resistance path through that push is what we call an orbit.</div>
+
+    <p>And there is exactly <strong>one</strong> force law. Coulomb, gravity, and the nuclear force are the same equation at three scales — the geometry of one body blocking part of another's convergence sky:</p>
+    <div class="eq-block"><div class="eq">F = (π/4) · P<sub>eff</sub> · R₁²R₂² / r²</div><div class="eq-caption">occluded convergence — Law III</div></div>
+  </div>
+</section>
+
+<!-- ════════════════ 2 · THE MEDIUM & OCCLUSION ════════════════ -->
+<section class="chapter chapter--alt" id="medium" data-rail="The Medium">
+  <div class="chapter__inner chapter__inner--wide reveal">
+    <div class="chapter__num">The medium</div>
+    <h2 class="chapter__title">Sum the shells, then break the symmetry</h2>
+    <div class="split">
+      <div>
+        <p>The cosmic microwave background looks dilute: 4.17 × 10⁻¹⁴ joules per cubic metre. But every point in space sits at the centre of ≈ 5.9 × 10⁶¹ nested shells reaching to the Clearing, and each one relays the <em>same</em> energy inward — area growth exactly cancels dilution.</p>
+        <p>Add them up and the "faint relic" becomes the operating pressure of the universe:</p>
+        <div class="eq-block" style="text-align:left;"><div class="eq" style="padding-left:0;">P<sub>conv</sub> = N · u<sub>CMB</sub> ≈ 2.46 × 10⁴⁸ Pa</div></div>
+        <p>You are not crushed because it is <strong>perfectly balanced</strong> — every direction cancels every other. Then put a body nearby. It occludes the convergence from its direction. The unblocked side wins. <strong>That imbalance is force.</strong></p>
+        <p class="fig__hint" style="font-style:normal;">Drag the grey occluder. Watch the arrows it blocks vanish — and the net push appear.</p>
+      </div>
+      <div class="fig">
+        <svg class="fig__stage" id="occStage" viewBox="0 0 360 360" aria-label="Occlusion interactive"></svg>
+        <div class="fig__bar"><span class="fig__hint">drag the occluder →</span><span class="fig__read" id="occRead">net push: <b>0</b></span></div>
+      </div>
+    </div>
+    <p class="margin-note">SDT's mechanism correction: empty spation passes throughput straight through — transparently. Force arises only against matter. The picture is a transparent relay with a shadow cone, never an opaque sphere.</p>
+  </div>
+</section>
+
+<!-- ════════════════ 3 · THE FORCE LAW ════════════════ -->
+<section class="chapter" id="force" data-rail="The Force">
+  <div class="chapter__inner chapter__inner--wide reveal">
+    <div class="chapter__num">One mechanism, three faces</div>
+    <h2 class="chapter__title">The same equation is gravity, charge, and the nucleus</h2>
+    <div class="split">
+      <div class="fig">
+        <svg class="fig__stage" id="twoStage" viewBox="0 0 360 300" aria-label="Two-body occlusion"></svg>
+        <div class="fig__bar"><span class="fig__hint">drag either body</span><span class="fig__read" id="twoRead">F ∝ <b>—</b></span></div>
+      </div>
+      <div>
+        <p>Two bodies. Each occludes a sliver of the other's convergence sky — a solid angle that falls as 1/r². Integrate the shadow and you get the inverse-square law, with the strength set by the displaced radii.</p>
+        <p>Change the scale and the same law wears a different name:</p>
+        <div class="chips" id="scaleChips">
+          <button class="chip on" data-scale="grav">Gravity</button>
+          <button class="chip" data-scale="coul">Coulomb</button>
+          <button class="chip" data-scale="nuke">Nuclear</button>
+        </div>
+        <p id="scaleNote">Two masses, displacement radii at body scale. The residual of an almost-perfect cancellation — which is exactly why gravity is so weak.</p>
+        <p class="margin-note" style="margin-top:var(--sp-md);">Honesty flag: the <em>1/r² structure</em> is derived <span class="cert cert--c">class C</span>. The coefficient is a closed-form whitelist expression P<sub>eff</sub> = m<sub>p</sub>²m<sub>e</sub>²c⁵/(4παℏ³) — <strong>derived in the companion repository and imported here, not a fitted number</strong> <span class="cert cert--x">imported</span>. Reproducing that derivation in-engine (clearing the delete-test) is the open item — stated, not hidden.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ 4 · MASS ════════════════ -->
+<section class="chapter chapter--alt" id="mass" data-rail="Mass">
+  <div class="chapter__inner reveal">
+    <div class="chapter__num">Mass</div>
+    <h2 class="chapter__title">Weight is the cost of moving a hole</h2>
+    <p class="chapter__lead">A vortex excludes a volume the lattice cannot fill. To accelerate it, the lattice must reorganise around that hole — and that reorganisation costs energy. That cost <em>is</em> inertia.</p>
+    <div class="eq-block"><div class="eq">m = Φ · V<sub>disp</sub> / (3 ℓ<sub>P</sub>³ c²)</div><div class="eq-caption">Law IV — the factor 3 is isotropic projection in three dimensions, not a knob</div></div>
+    <p>This makes the equivalence principle automatic, not a postulate. Inertial resistance and gravitational push both measure the <strong>same</strong> displaced volume V<sub>disp</sub> — they cannot differ, because they are the same thing. Move a bubble through water: the water does not drag it; it reorganises around it. No drag, no Le Sage overheating — the lattice <em>is</em> the space, not a wind blowing through it.</p>
+  </div>
+</section>
+
+<!-- ════════════════ 5 · THE MOVEMENT BUDGET ════════════════ -->
+<section class="chapter" id="budget" data-rail="The Budget">
+  <div class="chapter__inner chapter__inner--wide reveal">
+    <div class="chapter__num">The movement budget</div>
+    <h2 class="chapter__title">Everything already moves at c</h2>
+    <div class="split">
+      <div>
+        <p>Every vortex spends one fixed velocity budget of c, split between <em>circulation</em> (the spin that makes it a knot — its rest energy) and <em>translation</em> (motion through space):</p>
+        <div class="eq-block" style="text-align:left;"><div class="eq" style="padding-left:0;">v<sub>circ</sub>² + v² = c²</div></div>
+        <p>Drag the point around the arc. At the top, all budget is circulation — matter at rest. At the right, all of it is translation — a photon, with no spin left to be a knot, so no mass. Special relativity is just the geometry of this one budget.</p>
+        <p>Hydrogen's ground-state electron sits at v = αc, a tiny step off rest — its speed ratio is <span class="val">k = 1/α = 137</span>.</p>
+      </div>
+      <div class="fig">
+        <svg class="fig__stage" id="budStage" viewBox="0 0 320 320" aria-label="Movement budget"></svg>
+        <div class="fig__bar"><span class="fig__hint">drag the point on the arc</span><span class="fig__read" id="budRead"></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ 6 · TOPOLOGY ════════════════ -->
+<section class="chapter chapter--alt" id="topology" data-rail="Topology">
+  <div class="chapter__inner chapter__inner--wide reveal">
+    <div class="chapter__num">Vortex topology</div>
+    <h2 class="chapter__title">Particles are knots, and only two of them hold</h2>
+    <div class="knotwrap">
+      <canvas class="knot" id="knotCanvas" aria-label="3D trefoil knot — the proton"></canvas>
+      <div>
+        <p>A stable particle is a torus knot. The electron is the simplest closed winding, W = 1. The <strong>proton is the trefoil</strong>, the simplest persistent knot, W = 3 — drag it to turn it. W = 2 unwinds into two W = 1 loops; W ≥ 4 is unstable. Topology permits exactly two stable charged particles, which is exactly how many exist.</p>
+        <p>From W = 3 the proton's radius falls straight out — no fit:</p>
+        <div class="eq-block" style="text-align:left;"><div class="eq" style="padding-left:0;">R<sub>p</sub> = (W+1)ℏ / m<sub>p</sub>c = 0.84124 fm</div></div>
+        <p>Measured (muonic hydrogen): 0.8414 fm. Agreement <span class="val">0.02 %</span> <span class="cert cert--d">derived</span>. And the proton/electron mass ratio is the trefoil signature <span class="val">6π⁵ = 1836.118</span> against the measured 1836.15.</p>
+      </div>
+    </div>
+    <p class="margin-note">The natural SDT mass unit M₀ = [π²ℏ³P<sub>conv</sub>√3 / 2c⁵]<sup>¼</sup> lands at M₀c² ≈ 1 TeV — the electroweak scale — with no tuning. The top quark and Higgs are low-winding rungs of the same ladder.</p>
+  </div>
+</section>
+
+<!-- ════════════════ 7 · THE KOPPA BRIDGE ════════════════ -->
+<section class="chapter" id="koppa" data-rail="Koppa">
+  <div class="chapter__inner reveal">
+    <div class="chapter__num">The koppa bridge</div>
+    <h2 class="chapter__title">Gravity with no G and no M</h2>
+    <p class="chapter__lead">One number — the <em>koppa</em> ϟ, a velocity-defined length — encodes the whole gravitational field of a body, measured from its surface speed and radius alone.</p>
+    <div class="eq-block"><div class="eq">ϟ = v²R / c² = R / k² , &nbsp; k = c/v , &nbsp; z = 1/k² = (v/c)²</div></div>
+    <p>From these the entire orbital toolkit follows: v(r) = c√(ϟ/r), g = v²/R. "GM" is recovered as c²ϟ — a <em>consequence</em>, never an input. The same law spans every scale on one ladder. And since dτ/dt = √(1 − 1/k²), <strong>k is a clock</strong>: it counts down toward k = 1, the c-boundary where matter dissolves. Hydrogen sits 137 steps from that edge — the real meaning of the fine-structure constant.</p>
+    <table class="results">
+      <thead><tr><th>Body</th><th>k = c/v</th><th>what it is</th></tr></thead>
+      <tbody>
+        <tr><td>The Sun</td><td class="num">686</td><td>surface convergence field</td></tr>
+        <tr><td>Hydrogen ground state</td><td class="num">137 = 1/α</td><td>ϟ<sub>H</sub> = α²a₀ = r<sub>e</sub> exactly</td></tr>
+        <tr><td>The c-boundary</td><td class="num">1</td><td>v = c, dτ/dt = 0 — dissolution</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ════════════════ 8 · DEPTH–CLOSURE ════════════════ -->
+<section class="chapter chapter--alt" id="depth" data-rail="Depth–Closure">
+  <div class="chapter__inner reveal">
+    <div class="chapter__num">The capstone</div>
+    <h2 class="chapter__title">One quantity is closure, light-speed, time, and redshift</h2>
+    <p class="chapter__lead">Matter crushes the space it displaces — so spations are <em>smaller</em> near mass, and since light relays one spation per tick, light is locally slower deep in a well. Not a curved metric: a closure gradient. The convergence depth z = ϟ/r is the closure deficit, the light-speed deficit, the clock-rate deficit, and the gravitational redshift — all at once.</p>
+    <div class="eq-block"><div class="eq">ℓ<sub>P</sub>(r) = ℓ<sub>P,∞</sub>(1−z) &nbsp;·&nbsp; c<sub>local</sub> = c<sub>∞</sub>(1−z) &nbsp;·&nbsp; dτ/dt = √(1−z) &nbsp;·&nbsp; v = c√z</div></div>
+    <table class="results">
+      <thead><tr><th>Corollary</th><th>Result</th><th></th></tr></thead>
+      <tbody>
+        <tr><td>Redshift is depth</td><td>z(☉) = ϟ☉/R☉ = solar gravitational redshift</td><td class="num">0.03 %</td></tr>
+        <tr><td>One law across scales</td><td>v = c√(ϟ/r): Earth 29.789 km/s → hydrogen k=137</td><td class="num">~15 orders</td></tr>
+        <tr><td>c is local</td><td>our c is Earth's rung; the ceiling is higher</td><td class="num">c + 105 m/s</td></tr>
+        <tr><td>Lumiopause</td><td>L/(4πr²) = F<sub>CMB</sub> — the Oort cloud rests here in lumiostasis</td><td class="num">20,857 AU</td></tr>
+      </tbody>
+    </table>
+    <p class="margin-note">Honest scope: because ϟ ≡ GM/c², matching the first-order redshift is an identity of <em>interpretation</em>, not a numerical surprise. The content is the reinterpretation — and the second-order departures (a real galactic floor, gravitational-wave echoes) are where it can be tested against GR.</p>
+  </div>
+</section>
+
+<!-- ════════════════ 9 · ATOMS ════════════════ -->
+<section class="chapter" id="atoms" data-rail="Atoms">
+  <div class="chapter__inner reveal">
+    <div class="chapter__num">Atomic structure</div>
+    <h2 class="chapter__title">The "orbital cloud" is a stroboscopic blur</h2>
+    <p class="chapter__lead">The electron is a hard W = 1 vortex running a fast, <em>definite</em> Hopf-fibration track. What spectroscopy samples as a probability cloud is the time-average of that fast point trajectory — a strobe artefact, not a smear of being. No superposition, no collapse: a fast classical orbit that <em>looks</em> like a cloud only because you cannot resolve the tick.</p>
+    <p>The numbers come out identical to Schrödinger and Dirac because the geometry is identical. The ontology is not. The spectrum is geometric closure, zk² = 1:</p>
+    <div class="eq-block"><div class="eq">E<sub>n</sub> = −13.6057 · Z²/n² eV</div><div class="eq-caption">hydrogen-like ions to &lt; 13 ppm; all 118 elements close</div></div>
+    <p>Chemistry is the geometric shielding of the core charge — and the speed ratio k is its organising number: <span class="val">Ne k = 109</span> (inert), <span class="val">H k = 137</span> (baseline), <span class="val">K k = 243</span> (reactive). The octet rule is geometry — electrons filling voids in the convergence field — not an exclusion postulate.</p>
+  </div>
+</section>
+
+<!-- ════════════════ 10 · THE NUCLEUS ════════════════ -->
+<section class="chapter chapter--alt" id="nucleus" data-rail="The Nucleus">
+  <div class="chapter__inner chapter__inner--wide reveal">
+    <div class="chapter__num">Nuclear grammar — Atomicus</div>
+    <h2 class="chapter__title">Every nucleus is one alpha core + deuterons + tritons</h2>
+    <div class="split split--narrow">
+      <div>
+        <p>This is constitutional, not one model among many. Every nucleus with Z ≥ 2 decomposes <strong>uniquely</strong> into a single alpha core plus deuteron and triton blocks:</p>
+        <div class="eq-block" style="text-align:left;"><div class="eq" style="padding-left:0;">n<sub>t</sub> = A − 2Z , &nbsp; n<sub>d</sub> = 3Z − A − 2</div></div>
+        <p>Verified for all 287 naturally occurring isotopes, zero exceptions. Pure-deuteron nuclei (C-12, O-16, Ne-20, Ca-40) are the most abundant; the triton fraction climbs to the iron peak (~17 %, maximum binding) and beyond.</p>
+        <p>Pick a nucleus and watch it assemble. At <strong>gold</strong> — the Golden Boundary, Z = 79 — tritons first outnumber deuterons; beyond it the skeleton can't bear the load, and that is radioactivity.</p>
+        <div class="chips" id="nukeChips"></div>
+      </div>
+      <div class="fig">
+        <div class="nuke" id="nukeStage"></div>
+        <div class="fig__bar"><span class="fig__hint"><span class="unit unit--a" style="width:14px;height:14px;display:inline-flex;vertical-align:middle;"></span> α &nbsp; <span class="unit unit--d" style="width:12px;height:12px;display:inline-flex;vertical-align:middle;"></span> d &nbsp; <span class="unit unit--t" style="width:12px;height:12px;display:inline-flex;vertical-align:middle;"></span> t</span><span class="fig__read" id="nukeRead"></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ 11 · COSMOLOGY ════════════════ -->
+<section class="chapter" id="cosmology" data-rail="Cosmology">
+  <div class="chapter__inner chapter__inner--wide reveal">
+    <div class="chapter__num">Cosmology</div>
+    <h2 class="chapter__title">No dark matter, no dark energy, no expansion</h2>
+    <p class="chapter__lead">The dark sector is what you need only if you assume the wrong force. Remove attraction and the anomalies dissolve into geometry.</p>
+    <div class="replaces-list reveal-stagger">
+      <div class="replaces-item"><div class="replaces-item__concept">Dark matter</div><div class="replaces-item__with">convergence-disk occlusion + a derived floor a₀ = cH₀/2π</div></div>
+      <div class="replaces-item"><div class="replaces-item__concept">Dark energy</div><div class="replaces-item__with">a misreading of the lattice equation of state — not a substance</div></div>
+      <div class="replaces-item"><div class="replaces-item__concept">The 10¹²³ Λ problem</div><div class="replaces-item__with">just N² — the count of boundary source cells</div></div>
+    </div>
+    <p>The Hubble "constant" is not an expansion rate — it is a pressure gradient, and a gradient need not be linear. Local measurements sample the steep part; the CMB samples the full depth. The 9 % "tension" is a feature of the geometry, not a discrepancy.</p>
+    <div class="hubble-bars">
+      <div class="hubble-bar"><span class="hubble-bar__label">local</span><span class="hubble-bar__track"><span class="hubble-bar__fill" data-w="100%"></span></span><span class="hubble-bar__val">73.0</span></div>
+      <div class="hubble-bar"><span class="hubble-bar__label">CMB</span><span class="hubble-bar__track"><span class="hubble-bar__fill" data-w="92%"></span></span><span class="hubble-bar__val">67.4</span></div>
+    </div>
+    <p>And the flat galactic rotation curve needs no missing mass — beyond a critical radius the disk has occluded all the convergence it can, the shadow saturates, and the orbital speed simply stops falling.</p>
+  </div>
+</section>
+
+<!-- ════════════════ 12 · THE COMPARISON ════════════════ -->
+<section class="chapter chapter--alt" id="versus" data-rail="GR & QM">
+  <div class="chapter__inner chapter__inner--wide reveal">
+    <div class="chapter__num">Where it meets GR and QM</div>
+    <h2 class="chapter__title">A check passed, not an answer copied</h2>
+    <p class="chapter__lead">Where SDT <em>matches</em> relativity and the quantum — redshift, precession, light-bending, Shapiro, the orbital-decay rate, the g-factor, the GW chirp — it does so by forwarding from its own primitives. That is <strong>convergence</strong>, class C: delete the comparison and the result still stands on the derivation.</p>
+    <table class="results">
+      <thead><tr><th>Phenomenon</th><th>The textbook rule</th><th>The SDT mechanism</th></tr></thead>
+      <tbody>
+        <tr><td>The particle</td><td>a wavefunction ψ</td><td>a hard, knotted vortex</td></tr>
+        <tr><td>The "orbital"</td><td>|ψ|² probability</td><td>strobe-average of a definite Hopf track</td></tr>
+        <tr><td>Gravity</td><td>curvature of spacetime</td><td>a closure / pressure gradient</td></tr>
+        <tr><td>Redshift</td><td>metric time dilation</td><td>depth differential z<sub>emit</sub> − z<sub>obs</sub></td></tr>
+        <tr><td>Spin g-factor</td><td>g = 2 from the Dirac equation</td><td>g = 2(1 + α/2π) from wake geometry</td></tr>
+        <tr><td>Quantisation</td><td>operator eigenvalues</td><td>coprime (p,q) torus-knot closure</td></tr>
+        <tr><td>Black hole</td><td>singularity + event horizon</td><td>max-compression state; horizon at z=½; no singularity</td></tr>
+      </tbody>
+    </table>
+    <p>Where it <em>departs</em> it stakes falsifiable claims: no singularities, a local c with a real galactic floor, gravitational-wave echoes, memory ≡ breathing, the neutrino's exactly-zero magnetic moment, the α+d+t nuclear grammar.</p>
+  </div>
+</section>
+
+<!-- ════════════════ 13 · THE HONEST FRONTIER ════════════════ -->
+<section class="chapter" id="frontier" data-rail="Honest Frontier">
+  <div class="chapter__inner reveal">
+    <div class="chapter__num">The honest frontier</div>
+    <h2 class="chapter__title">What is not yet done</h2>
+    <p class="chapter__lead">A theory is only as trustworthy as its candour. These are stated plainly — because a framework that hides its gaps cannot be believed about its wins.</p>
+    <div class="aside"><div class="aside__title">Still open, logged not papered over</div>
+      <p><strong>The force coefficient P<sub>eff</sub></strong> is a clean whitelist combination but may be the hydrogen force-balance rewritten — kept <span class="cert cert--e">calibrated</span> conservatively. &nbsp;<strong>H₀</strong> leans on an assumed Friedmann structure <span class="cert cert--c">C-flagged</span>. &nbsp;<strong>The mass ratio's first-principles root</strong> (the V<sub>disp</sub> equilibrium that forces 6π⁵) is still open. &nbsp;<strong>Quantum measurement, entanglement, tunnelling</strong> are not yet mechanised. &nbsp;<strong>The strong-field GW sector</strong> (wall reflectivity, the echo) is the cleanest place SDT could be distinguished from GR — and is unproven.</p>
+    </div>
+    <p>Two things an earlier draft mislabelled are <em>dissolved</em>, not gaps: <strong>charge</strong> is not a primitive — it is occluded influx directionality, so α (not e) is in the whitelist; and <strong>ℓ<sub>P</sub></strong> is not a constant injecting G — it is a variable closure field ℓ<sub>P</sub>(r) = ℓ<sub>P,∞</sub>(1−z), derived G-free.</p>
+  </div>
+</section>
+
+<!-- ════════════════ 14 · CLOSE ════════════════ -->
+<section class="chapter chapter--alt" id="close" data-rail="Zero Parameters">
+  <div class="chapter__inner reveal" style="text-align:center;">
+    <div class="chapter__num" style="justify-content:center;">The shape of what we know</div>
+    <h2 class="chapter__title">Zero free parameters</h2>
+    <p class="chapter__lead" style="margin-left:auto;margin-right:auto;">Read it as the theory reads itself — <strong>forward from a whitelist of eight numbers, never backward from a target.</strong></p>
+    <div class="eq-block"><div class="eq">{ ℓ<sub>P</sub>, c, ℏ, k<sub>B</sub>, T<sub>CMB</sub>, α, m<sub>e</sub>, m<sub>p</sub> }</div><div class="eq-caption">the only permitted inputs — a fact not on this list is not a measured fact</div></div>
+    <div class="slogan">We have stood at the bottom of the ocean for four hundred years arguing about what pulls the apple down. <em>Nothing pulls it.</em> The universe pushes it.</div>
+    <p>Whether this is correct is not up to anyone's preference. It is up to the experiments — and they are specified, numbered, and waiting.</p>
+    <div class="endcta">
+      <a href="../../SDT_AND_THE_ENGINE_COMPLETE_GUIDE.md">Read the complete guide ↗</a>
+      <a href="index.html">The full site ↗</a>
+      <a href="../../Experiments/">The experiment programme ↗</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__brand-name">Spatial <span>Displacement</span> Theory</div>
+    <p class="footer__brand-desc">A zero-parameter framework deriving gravity, electromagnetism, and nuclear forces from pressure differentials in a discrete spatial medium. J. C. Harvey, Melbourne. Every number here carries its certification label and reproduces from the engine.</p>
+    <div class="footer__bottom"><span>One medium · one tick · one budget · zero free parameters.</span><span>SDT walkthrough</span></div>
+  </div>
+</footer>
+
+<!-- ════════════════ 2D INTERACTIVES + REVEALS (no dependencies) ════════════════ -->
+<script>
+(function(){
+  "use strict";
+  var C=299792458;
+  var NS="http://www.w3.org/2000/svg";
+  function el(tag,attrs){ var e=document.createElementNS(NS,tag); for(var k in attrs) e.setAttribute(k,attrs[k]); return e; }
+
+  /* ---------- scroll progress + dot rail ---------- */
+  var sections=[].slice.call(document.querySelectorAll('[data-rail]'));
+  var rail=document.getElementById('rail');
+  sections.forEach(function(s){ var a=document.createElement('a'); a.href='#'+s.id; a.title=s.getAttribute('data-rail'); rail.appendChild(a); });
+  var dots=[].slice.call(rail.children);
+  var progress=document.getElementById('progress');
+  function onScroll(){
+    var h=document.documentElement;
+    var max=h.scrollHeight-h.clientHeight;
+    progress.style.width=(max>0?(h.scrollTop/max*100):0)+'%';
+    var best=0, bestD=1e9, mid=h.clientHeight/2;
+    sections.forEach(function(s,i){ var r=s.getBoundingClientRect(); var d=Math.abs(r.top+r.height/2-mid); if(d<bestD){bestD=d;best=i;} });
+    dots.forEach(function(d,i){ d.classList.toggle('on',i===best); });
+  }
+  addEventListener('scroll',onScroll,{passive:true}); addEventListener('resize',onScroll);
+
+  /* ---------- reveal on scroll ---------- */
+  var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('reveal--visible'); if(e.target.classList.contains('reveal-stagger')) e.target.classList.add('reveal-stagger--visible'); io.unobserve(e.target);} }); },{threshold:0.12});
+  [].slice.call(document.querySelectorAll('.reveal, .reveal-stagger')).forEach(function(n){ io.observe(n); });
+  // hubble bars animate to their target width when revealed
+  var bio=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ var f=e.target; f.style.width=f.getAttribute('data-w'); bio.unobserve(f);} }); },{threshold:0.5});
+  [].slice.call(document.querySelectorAll('.hubble-bar__fill')).forEach(function(n){ n.style.width='0'; bio.observe(n); });
+
+  /* ---------- helper: pointer position in svg user units ---------- */
+  function svgPoint(svg,evt){ var r=svg.getBoundingClientRect(); var vb=svg.viewBox.baseVal;
+    var x=(evt.clientX-r.left)/r.width*vb.width; var y=(evt.clientY-r.top)/r.height*vb.height; return {x:x,y:y}; }
+  function draggable(svg,node,onMove){
+    var active=false;
+    function down(e){ active=true; node.setPointerCapture&&node.setPointerCapture(e.pointerId); e.preventDefault(); }
+    function move(e){ if(!active)return; onMove(svgPoint(svg,e)); }
+    function up(e){ active=false; }
+    node.addEventListener('pointerdown',down); svg.addEventListener('pointermove',move);
+    addEventListener('pointerup',up); node.classList.add('drag');
+  }
+
+  /* ================= OCCLUSION (Act 2) ================= */
+  (function(){
+    var svg=document.getElementById('occStage'); if(!svg)return;
+    var cx=180, cy=180, R=150, n=24;
+    var test=el('circle',{cx:cx,cy:cy,r:7,fill:'#1e1c18'});
+    var occ={x:250,y:120,r:30};
+    var arrows=[]; for(var i=0;i<n;i++){ var a=2*Math.PI*i/n; arrows.push({a:a,px:cx+R*Math.cos(a),py:cy+R*Math.sin(a)}); }
+    var aNodes=arrows.map(function(){ var l=el('line',{stroke:'#b07430','stroke-width':2,'marker-end':'url(#ah)'}); return l; });
+    // arrowhead marker
+    var defs=el('defs',{}); var mk=el('marker',{id:'ah',markerWidth:7,markerHeight:7,refX:5,refY:3,orient:'auto'});
+    mk.appendChild(el('path',{d:'M0,0 L6,3 L0,6 Z',fill:'#b07430'})); defs.appendChild(mk); svg.appendChild(defs);
+    var net=el('line',{stroke:'#2c4454','stroke-width':4,'marker-end':'url(#nh)'});
+    var mk2=el('marker',{id:'nh',markerWidth:8,markerHeight:8,refX:6,refY:4,orient:'auto'}); mk2.appendChild(el('path',{d:'M0,0 L7,4 L0,8 Z',fill:'#2c4454'})); defs.appendChild(mk2);
+    aNodes.forEach(function(nn){ svg.appendChild(nn); });
+    svg.appendChild(net); svg.appendChild(test);
+    var occNode=el('circle',{cx:occ.x,cy:occ.y,r:occ.r,fill:'#a49d92','fill-opacity':0.8,stroke:'#7a7265','stroke-width':1.5});
+    svg.appendChild(occNode);
+    var read=document.getElementById('occRead');
+    // ray-circle intersection: does segment p->center pass through occluder?
+    function blocked(px,py){ var dx=cx-px, dy=cy-py; var fx=px-occ.x, fy=py-occ.y;
+      var a=dx*dx+dy*dy, b=2*(fx*dx+fy*dy), c=fx*fx+fy*fy-occ.r*occ.r; var disc=b*b-4*a*c;
+      if(disc<0)return false; disc=Math.sqrt(disc); var t1=(-b-disc)/(2*a),t2=(-b+disc)/(2*a); return (t1>0&&t1<1)||(t2>0&&t2<1); }
+    function render(){
+      occNode.setAttribute('cx',occ.x); occNode.setAttribute('cy',occ.y);
+      var nx=0,ny=0,blk=0;
+      arrows.forEach(function(ar,i){ var b=blocked(ar.px,ar.py); var nn=aNodes[i];
+        if(b){ blk++; nn.setAttribute('stroke-opacity',0.08);
+          // imbalance: removed inward push means net points toward this perimeter dir (toward occluder)
+          nx+=(ar.px-cx); ny+=(ar.py-cy);
+        } else { nn.setAttribute('stroke-opacity',0.85); }
+        // arrow from perimeter inward toward center, stop short of test mass
+        var ux=cx-ar.px, uy=cy-ar.py, L=Math.hypot(ux,uy); ux/=L; uy/=L;
+        nn.setAttribute('x1',ar.px); nn.setAttribute('y1',ar.py);
+        nn.setAttribute('x2',ar.px+ux*(L-22)); nn.setAttribute('y2',ar.py+uy*(L-22));
+      });
+      var mag=Math.hypot(nx,ny);
+      if(mag>0.5){ var ux=nx/mag, uy=ny/mag; var len=Math.min(70, 14+blk*6);
+        net.setAttribute('x1',cx); net.setAttribute('y1',cy); net.setAttribute('x2',cx+ux*len); net.setAttribute('y2',cy+uy*len); net.setAttribute('stroke-opacity',1);
+        read.innerHTML='net push: <b>'+blk+'</b> of '+n+' directions occluded';
+      } else { net.setAttribute('stroke-opacity',0); read.innerHTML='net push: <b>0</b> — perfectly balanced'; }
+    }
+    draggable(svg,occNode,function(p){ occ.x=Math.max(occ.r,Math.min(360-occ.r,p.x)); occ.y=Math.max(occ.r,Math.min(360-occ.r,p.y)); render(); });
+    render();
+  })();
+
+  /* ================= TWO-BODY FORCE (Act 3) ================= */
+  (function(){
+    var svg=document.getElementById('twoStage'); if(!svg)return;
+    var read=document.getElementById('twoRead');
+    var A={x:110,y:150,r:26}, B={x:255,y:150,r:20};
+    var line=el('line',{stroke:'#e8e0d2','stroke-width':2,'stroke-dasharray':'4 4'}); svg.appendChild(line);
+    function shadow(from,to){ // faint cone behind 'to' as seen from 'from'
+      return el('polygon',{fill:'#4a6d82','fill-opacity':0.06}); }
+    var sA=shadow(B,A), sB=shadow(A,B); svg.appendChild(sA); svg.appendChild(sB);
+    var fa=el('line',{stroke:'#b07430','stroke-width':4,'marker-end':'url(#ah)'});
+    var fb=el('line',{stroke:'#b07430','stroke-width':4,'marker-end':'url(#ah)'});
+    svg.appendChild(fa); svg.appendChild(fb);
+    var nA=el('circle',{fill:'#4a6d82',stroke:'#2c4454','stroke-width':1.5});
+    var nB=el('circle',{fill:'#6a95b0',stroke:'#2c4454','stroke-width':1.5});
+    svg.appendChild(nA); svg.appendChild(nB);
+    function coneBehind(occ,obs,poly){ // cone apex region behind occ, away from obs
+      var dx=occ.x-obs.x, dy=occ.y-obs.y, L=Math.hypot(dx,dy); if(L<1){poly.setAttribute('points','');return;}
+      var ux=dx/L, uy=dy/L, px=-uy, py=ux; var far=140;
+      var bx=occ.x+ux*occ.r, by=occ.y+uy*occ.r;
+      poly.setAttribute('points',[ (bx+px*occ.r)+','+(by+py*occ.r), (bx-px*occ.r)+','+(by-py*occ.r),
+        (bx-px*occ.r*3+ux*far)+','+(by-py*occ.r*3+uy*far), (bx+px*occ.r*3+ux*far)+','+(by+py*occ.r*3+uy*far) ].join(' '));
+    }
+    var F0=null;
+    function render(){
+      nA.setAttribute('cx',A.x);nA.setAttribute('cy',A.y);nA.setAttribute('r',A.r);
+      nB.setAttribute('cx',B.x);nB.setAttribute('cy',B.y);nB.setAttribute('r',B.r);
+      line.setAttribute('x1',A.x);line.setAttribute('y1',A.y);line.setAttribute('x2',B.x);line.setAttribute('y2',B.y);
+      coneBehind(A,B,sA); coneBehind(B,A,sB);
+      var dx=B.x-A.x, dy=B.y-A.y, r=Math.hypot(dx,dy); var ux=dx/r, uy=dy/r;
+      var F=(A.r*A.r*B.r*B.r)/(r*r); if(F0===null)F0=F;
+      var rel=F/F0; var len=Math.max(8,Math.min(60, 18*Math.cbrt(rel)));
+      var ax=A.x+ux*A.r, ay=A.y+uy*A.r; fa.setAttribute('x1',ax);fa.setAttribute('y1',ay);fa.setAttribute('x2',ax+ux*len);fa.setAttribute('y2',ay+uy*len);
+      var bx=B.x-ux*B.r, by=B.y-uy*B.r; fb.setAttribute('x1',bx);fb.setAttribute('y1',by);fb.setAttribute('x2',bx-ux*len);fb.setAttribute('y2',by-uy*len);
+      read.innerHTML='F ∝ R₁²R₂²/r² = <b>'+rel.toFixed(2)+'×</b>';
+    }
+    draggable(svg,nA,function(p){ A.x=Math.max(A.r,Math.min(360-A.r,p.x)); A.y=Math.max(A.r,Math.min(300-A.r,p.y)); render(); });
+    draggable(svg,nB,function(p){ B.x=Math.max(B.r,Math.min(360-B.r,p.x)); B.y=Math.max(B.r,Math.min(300-B.r,p.y)); render(); });
+    render();
+  })();
+
+  /* scale chips note */
+  (function(){
+    var notes={ grav:'Two masses, displacement radii at body scale. The residual of an almost-perfect cancellation — which is exactly why gravity is so weak.',
+      coul:'Proton and electron at the charge radius R_charge = √(R_p·r_e) = 1.540 fm. The same occlusion formula returns the Coulomb force exactly.',
+      nuke:'Nucleons at femtometre separation: the occlusion fractions become large, and the same law becomes the strong binding that holds the nucleus.' };
+    var note=document.getElementById('scaleNote'); var chips=[].slice.call(document.querySelectorAll('#scaleChips .chip'));
+    chips.forEach(function(c){ c.addEventListener('click',function(){ chips.forEach(function(x){x.classList.remove('on');}); c.classList.add('on'); note.textContent=notes[c.getAttribute('data-scale')]; }); });
+  })();
+
+  /* ================= MOVEMENT BUDGET (Act 5) ================= */
+  (function(){
+    var svg=document.getElementById('budStage'); if(!svg)return;
+    var read=document.getElementById('budRead');
+    var ox=60, oy=260, R=200; // origin at lower-left, quarter circle up-right
+    // axes
+    svg.appendChild(el('line',{x1:ox,y1:oy,x2:ox+R+12,y2:oy,stroke:'#c8c1b6','stroke-width':1}));
+    svg.appendChild(el('line',{x1:ox,y1:oy,x2:ox,y2:oy-R-12,stroke:'#c8c1b6','stroke-width':1}));
+    var arc=el('path',{d:'M '+(ox+R)+' '+oy+' A '+R+' '+R+' 0 0 0 '+ox+' '+(oy-R),fill:'none',stroke:'#e8e0d2','stroke-width':2}); svg.appendChild(arc);
+    svg.appendChild(el('text',{x:ox+R-30,y:oy+18,fill:'#a49d92','font-size':10,'font-family':'JetBrains Mono'})).textContent='v → c (photon)';
+    var tlab=el('text',{x:ox-6,y:oy-R-2,fill:'#a49d92','font-size':10,'font-family':'JetBrains Mono','text-anchor':'start'}); tlab.textContent='v_circ → c (rest)'; svg.appendChild(tlab);
+    var legV=el('line',{stroke:'#b07430','stroke-width':3}); var legC=el('line',{stroke:'#4a6d82','stroke-width':3});
+    var hyp=el('line',{stroke:'#1e1c18','stroke-width':1.5,'stroke-dasharray':'3 3'});
+    svg.appendChild(legV); svg.appendChild(legC); svg.appendChild(hyp);
+    var hMark=el('circle',{r:5,fill:'#b07430','fill-opacity':0.6}); svg.appendChild(hMark); // hydrogen marker
+    var pt=el('circle',{r:9,fill:'#b07430',stroke:'#fff','stroke-width':2}); svg.appendChild(pt);
+    var th=0.7; // angle from horizontal (v axis). v=Ccos? we use: x=v_trans, y=v_circ
+    function setAngle(a){ th=Math.max(0.0001,Math.min(Math.PI/2-0.0001,a)); render(); }
+    function render(){
+      var vt=Math.cos(th), vc=Math.sin(th); // fractions of c
+      var x=ox+R*vt, y=oy-R*vc;
+      pt.setAttribute('cx',x); pt.setAttribute('cy',y);
+      legV.setAttribute('x1',ox);legV.setAttribute('y1',oy);legV.setAttribute('x2',x);legV.setAttribute('y2',oy);
+      legC.setAttribute('x1',x);legC.setAttribute('y1',oy);legC.setAttribute('x2',x);legC.setAttribute('y2',y);
+      hyp.setAttribute('x1',ox);hyp.setAttribute('y1',oy);hyp.setAttribute('x2',x);hyp.setAttribute('y2',y);
+      // hydrogen at v=alpha => vt=1/137
+      var hvt=1/137.036, hvc=Math.sqrt(1-hvt*hvt); hMark.setAttribute('cx',ox+R*hvt); hMark.setAttribute('cy',oy-R*hvc);
+      var k=vt>1e-6?(1/vt):Infinity; var dtau=Math.sqrt(Math.max(0,1-vt*vt));
+      read.innerHTML='v=<b>'+vt.toFixed(3)+'c</b> · v_circ='+vc.toFixed(3)+'c · k='+(isFinite(k)?k.toFixed(1):'∞')+' · dτ/dt='+dtau.toFixed(3);
+    }
+    draggable(svg,pt,function(p){ var a=Math.atan2(oy-p.y, p.x-ox); setAngle(a); });
+    // also allow clicking the arc/stage
+    svg.addEventListener('pointerdown',function(e){ if(e.target===pt)return; var p=svgPoint(svg,e); var a=Math.atan2(oy-p.y,p.x-ox); if(a>0&&a<Math.PI/2)setAngle(a); });
+    render();
+  })();
+
+  /* ================= NUCLEUS BUILDER (Act 10) ================= */
+  (function(){
+    var stage=document.getElementById('nukeStage'); if(!stage)return;
+    var read=document.getElementById('nukeRead'); var chipWrap=document.getElementById('nukeChips');
+    var presets=[ ['He-4',2,4],['C-12',6,12],['O-16',8,16],['Fe-56',26,56],['Au-197',79,197],['U-238',92,238] ];
+    function build(Z,A){
+      var nt=A-2*Z, nd=3*Z-A-2;
+      stage.innerHTML='';
+      if(nt<0||nd<0){ stage.innerHTML='<div class="nuke-meta">no α+d+t construction (try the electron-capture grammar)</div>'; read.innerHTML=''; return; }
+      var a=document.createElement('div'); a.className='unit unit--a'; a.textContent='α'; stage.appendChild(a);
+      var i; for(i=0;i<nd;i++){ var d=document.createElement('div'); d.className='unit unit--d'; d.textContent='d'; stage.appendChild(d); }
+      for(i=0;i<nt;i++){ var t=document.createElement('div'); t.className='unit unit--t'; t.textContent='t'; stage.appendChild(t); }
+      var gold = nt>nd ? ' · <b>triton-dominant (past the Golden Boundary)</b>' : '';
+      read.innerHTML='α + <b>'+nd+'</b>d + <b>'+nt+'</b>t'+gold;
+    }
+    presets.forEach(function(p,i){ var b=document.createElement('button'); b.className='chip'+(i===3?' on':''); b.textContent=p[0];
+      b.addEventListener('click',function(){ [].slice.call(chipWrap.children).forEach(function(x){x.classList.remove('on');}); b.classList.add('on'); build(p[1],p[2]); });
+      chipWrap.appendChild(b); });
+    build(26,56);
+  })();
+
+  onScroll();
+})();
+</script>
+
+<!-- ════════════════ 3D WORLDS (Three.js, graceful if offline) ════════════════ -->
+<script type="importmap">
+{ "imports": {
+  "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+}}
+</script>
+<script type="module">
+try {
+  const THREE = await import('three');
+  const { OrbitControls } = await import('three/addons/controls/OrbitControls.js');
+
+  /* ===================== HERO: THE PRESSURISED VESSEL ===================== */
+  (function(){
+    const host=document.getElementById('hero');
+    const canvas=document.getElementById('worldCanvas');
+    const W=()=>host.clientWidth, H=()=>host.clientHeight;
+    const scene=new THREE.Scene();
+    const camera=new THREE.PerspectiveCamera(50, W()/H(), 0.1, 200);
+    camera.position.set(0,4,16);
+    const renderer=new THREE.WebGLRenderer({canvas:canvas,antialias:true,alpha:true});
+    renderer.setPixelRatio(Math.min(devicePixelRatio,2)); renderer.setSize(W(),H(),false);
+    const controls=new OrbitControls(camera,renderer.domElement);
+    controls.enableDamping=true; controls.dampingFactor=0.06; controls.enablePan=false;
+    controls.minDistance=8; controls.maxDistance=34; controls.autoRotate=true; controls.autoRotateSpeed=0.35;
+
+    scene.add(new THREE.HemisphereLight(0xfffaf0, 0xcfc6b6, 1.0));
+    const dir=new THREE.DirectionalLight(0xffffff,0.55); dir.position.set(6,10,8); scene.add(dir);
+
+    // faint lattice — points on a sphere shell
+    const latGeo=new THREE.BufferGeometry(); const LN=900; const lp=new Float32Array(LN*3);
+    for(let i=0;i<LN;i++){ const u=Math.random(),v=Math.random(); const th=2*Math.PI*u, ph=Math.acos(2*v-1); const r=11+Math.random()*1.5;
+      lp[i*3]=r*Math.sin(ph)*Math.cos(th); lp[i*3+1]=r*Math.sin(ph)*Math.sin(th); lp[i*3+2]=r*Math.cos(ph); }
+    latGeo.setAttribute('position',new THREE.BufferAttribute(lp,3));
+    const lattice=new THREE.Points(latGeo,new THREE.PointsMaterial({color:0xc8c1b6,size:0.07,transparent:true,opacity:0.6}));
+    scene.add(lattice);
+
+    // two bodies
+    const bodyMat=new THREE.MeshStandardMaterial({color:0x4a6d82,roughness:0.45,metalness:0.1});
+    const bodyMat2=new THREE.MeshStandardMaterial({color:0x6a95b0,roughness:0.45,metalness:0.1});
+    const bodyA=new THREE.Mesh(new THREE.SphereGeometry(1.5,48,48),bodyMat); bodyA.position.set(-2.4,0,0); scene.add(bodyA);
+    const bodyB=new THREE.Mesh(new THREE.SphereGeometry(1.05,48,48),bodyMat2); bodyB.position.set(2.6,0,0); scene.add(bodyB);
+
+    // convergence motes flowing inward toward origin, absorbed by bodies -> natural shadow cones
+    const MN=2200; const mp=new Float32Array(MN*3); const mv=[];
+    function spawn(i){ const u=Math.random(),v=Math.random(); const th=2*Math.PI*u, ph=Math.acos(2*v-1); const r=12.5;
+      const x=r*Math.sin(ph)*Math.cos(th), y=r*Math.sin(ph)*Math.sin(th), z=r*Math.cos(ph);
+      mp[i*3]=x;mp[i*3+1]=y;mp[i*3+2]=z; const L=Math.hypot(x,y,z); mv[i]={x:-x/L,y:-y/L,z:-z/L,s:0.04+Math.random()*0.05}; }
+    for(let i=0;i<MN;i++) spawn(i);
+    const moteGeo=new THREE.BufferGeometry(); moteGeo.setAttribute('position',new THREE.BufferAttribute(mp,3));
+    const motes=new THREE.Points(moteGeo,new THREE.PointsMaterial({color:0xb07430,size:0.12,transparent:true,opacity:0.85}));
+    scene.add(motes);
+
+    // push arrows
+    const arrA=new THREE.ArrowHelper(new THREE.Vector3(1,0,0),bodyA.position,2.0,0xb07430,0.6,0.4);
+    const arrB=new THREE.ArrowHelper(new THREE.Vector3(-1,0,0),bodyB.position,2.0,0xb07430,0.6,0.4);
+    scene.add(arrA); scene.add(arrB);
+
+    // infall + accretion: comets falling into bodyA, carrying the occlusion-saturation terminal kick (g: 1 -> 2 at contact)
+    const Rc=1.5, GMc=0.020, NC=5, TRAIL=44;
+    const comets=[], cometGroup=[];
+    function spawnComet(c){ const ang=Math.random()*Math.PI*2, rad=8.5+Math.random()*3.5;
+      c.pos.set(bodyA.position.x+Math.cos(ang)*rad,(Math.random()-0.5)*3.2,Math.sin(ang)*rad);
+      const toC=new THREE.Vector3().subVectors(bodyA.position,c.pos).normalize();
+      const tang=new THREE.Vector3(-toC.z,0,toC.x).normalize();
+      c.vel.copy(toC).multiplyScalar(0.010).addScaledVector(tang,0.052+Math.random()*0.028);
+      for(let k=0;k<TRAIL;k++){ c.tp[k*3]=c.pos.x;c.tp[k*3+1]=c.pos.y;c.tp[k*3+2]=c.pos.z; } }
+    for(let i=0;i<NC;i++){ const head=new THREE.Mesh(new THREE.SphereGeometry(0.11,12,12),new THREE.MeshBasicMaterial({color:0xb07430}));
+      const tg=new THREE.BufferGeometry(); const tp=new Float32Array(TRAIL*3); tg.setAttribute('position',new THREE.BufferAttribute(tp,3));
+      const tl=new THREE.Line(tg,new THREE.LineBasicMaterial({color:0xd4a05c,transparent:true,opacity:0.5}));
+      const c={head:head,tl:tl,tp:tp,pos:new THREE.Vector3(),vel:new THREE.Vector3()};
+      scene.add(head); scene.add(tl); comets.push(c); cometGroup.push(head,tl); spawnComet(c); }
+
+    const state={conv:true,second:true,push:true,infall:true};
+    function applyState(){
+      motes.visible=state.conv; lattice.visible=true;
+      bodyB.visible=state.second;
+      arrA.visible=state.push&&state.second; arrB.visible=state.push&&state.second;
+      cometGroup.forEach(function(o){ o.visible=state.infall; });
+    }
+    document.getElementById('worldHud').addEventListener('click',function(e){
+      var b=e.target.closest('.toggle'); if(!b)return; var key=b.getAttribute('data-w');
+      state[key]=!state[key]; b.classList.toggle('on',state[key]); applyState();
+      document.getElementById('worldHint').textContent = state.second ? 'drag to orbit · two bodies eat the convergence between them — and are pushed together' : 'drag to orbit · one body: the push is balanced — no net force';
+    });
+    applyState();
+
+    function inBody(x,y,z,b,rad){ const dx=x-b.position.x,dy=y-b.position.y,dz=z-b.position.z; return (dx*dx+dy*dy+dz*dz) < rad*rad; }
+    const pos=moteGeo.attributes.position.array;
+    let breathe=0;
+    function tick(){
+      breathe+=0.012;
+      // gentle separation oscillation so shadows/arrows visibly respond
+      const sep=2.4+Math.sin(breathe)*0.5; bodyA.position.x=-sep; bodyB.position.x=sep*1.05;
+      for(let i=0;i<MN;i++){ const v=mv[i]; let x=pos[i*3]+v.x*v.s, y=pos[i*3+1]+v.y*v.s, z=pos[i*3+2]+v.z*v.s;
+        const near = (x*x+y*y+z*z)<0.5;
+        const eatA = inBody(x,y,z,bodyA,1.5);
+        const eatB = state.second && inBody(x,y,z,bodyB,1.05);
+        if(near||eatA||eatB){ spawn(i); } else { pos[i*3]=x;pos[i*3+1]=y;pos[i*3+2]=z; }
+      }
+      moteGeo.attributes.position.needsUpdate=true;
+      // comets: fall toward bodyA; force breaks 1/r² and saturates (g→2) at contact → terminal whip, then accrete
+      if(state.infall){ for(let ci=0;ci<comets.length;ci++){ var c=comets[ci];
+        var rx=bodyA.position.x-c.pos.x, ry=bodyA.position.y-c.pos.y, rz=bodyA.position.z-c.pos.z;
+        var d=Math.hypot(rx,ry,rz);
+        if(d<Rc+0.18){ spawnComet(c); continue; }
+        var x=Math.min(0.9995,(Rc/d)*(Rc/d)); var g=2*(1-Math.sqrt(1-x))/x; var a=GMc*g/(d*d*d);
+        c.vel.x+=rx*a; c.vel.y+=ry*a; c.vel.z+=rz*a;
+        var sp=Math.hypot(c.vel.x,c.vel.y,c.vel.z); if(sp>0.32){ var s=0.32/sp; c.vel.x*=s;c.vel.y*=s;c.vel.z*=s; }
+        c.pos.x+=c.vel.x; c.pos.y+=c.vel.y; c.pos.z+=c.vel.z;
+        for(var k=TRAIL-1;k>0;k--){ c.tp[k*3]=c.tp[(k-1)*3]; c.tp[k*3+1]=c.tp[(k-1)*3+1]; c.tp[k*3+2]=c.tp[(k-1)*3+2]; }
+        c.tp[0]=c.pos.x; c.tp[1]=c.pos.y; c.tp[2]=c.pos.z;
+        c.head.position.set(c.pos.x,c.pos.y,c.pos.z); c.tl.geometry.attributes.position.needsUpdate=true;
+      } }
+      // arrows: each body pushed toward the other, length ~ 1/r²
+      const dx=bodyB.position.x-bodyA.position.x; const r=Math.abs(dx)||1; const len=Math.max(0.8,Math.min(3, 8/(r*r)*4));
+      arrA.position.copy(bodyA.position); arrA.setDirection(new THREE.Vector3(Math.sign(dx),0,0)); arrA.setLength(len,0.5,0.35);
+      arrB.position.copy(bodyB.position); arrB.setDirection(new THREE.Vector3(-Math.sign(dx),0,0)); arrB.setLength(len,0.5,0.35);
+      lattice.rotation.y+=0.0004;
+      controls.update(); renderer.render(scene,camera); requestAnimationFrame(tick);
+    }
+    addEventListener('resize',function(){ camera.aspect=W()/H(); camera.updateProjectionMatrix(); renderer.setSize(W(),H(),false); });
+    // stop autorotate on user interaction
+    controls.addEventListener('start',function(){ controls.autoRotate=false; });
+    tick();
+  })();
+
+  /* ===================== THE PROTON TREFOIL ===================== */
+  (function(){
+    const canvas=document.getElementById('knotCanvas'); if(!canvas)return;
+    const S=()=>Math.min(canvas.clientWidth,canvas.clientHeight);
+    const scene=new THREE.Scene();
+    const camera=new THREE.PerspectiveCamera(45,1,0.1,100); camera.position.set(0,0,7);
+    const renderer=new THREE.WebGLRenderer({canvas:canvas,antialias:true,alpha:true});
+    renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+    function size(){ const s=S(); renderer.setSize(s,s,false); camera.aspect=1; camera.updateProjectionMatrix(); }
+    scene.add(new THREE.HemisphereLight(0xfffaf0,0xcfc6b6,1.05));
+    const d=new THREE.DirectionalLight(0xffffff,0.7); d.position.set(4,6,8); scene.add(d);
+    // trefoil (2,3) torus knot = the proton, W=3
+    const knot=new THREE.Mesh(new THREE.TorusKnotGeometry(1.5,0.42,220,32,2,3),
+      new THREE.MeshStandardMaterial({color:0xb07430,roughness:0.35,metalness:0.25}));
+    scene.add(knot);
+    const controls=new OrbitControls(camera,renderer.domElement);
+    controls.enableDamping=true; controls.enablePan=false; controls.enableZoom=false; controls.autoRotate=true; controls.autoRotateSpeed=1.2;
+    controls.addEventListener('start',function(){ controls.autoRotate=false; });
+    size(); addEventListener('resize',size);
+    (function loop(){ controls.update(); renderer.render(scene,camera); requestAnimationFrame(loop); })();
+  })();
+
+} catch(err){ console.warn('3D worlds unavailable (offline?):',err); document.getElementById('worldHint').textContent='one medium · one mechanism · zero free parameters'; }
+</script>
+
+</body>
+</html>

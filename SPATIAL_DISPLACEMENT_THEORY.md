@@ -14,7 +14,7 @@ This is the central insight of Spatial Displacement Theory (SDT). We live inside
 
 The medium is called the spation lattice. It is not made of particles. It is not a field in the mathematical sense. It is a physical thing that occupies space, that relays energy from neighbour to neighbour, and that has been loaded with a specific energy density since the Clearing. Every point in the lattice receives energy from every other point, shells upon shells of contributions piling up, each shell contributing a tiny amount, the whole sum converging on every location simultaneously.
 
-This is not a metaphor. This is the mechanical picture from which five laws are derived, seventeen theorems proven, and all known physical phenomena reproduced — using nine measured quantities and zero adjustable parameters.
+This is not a metaphor. This is the mechanical picture from which six laws are derived, eighteen theorems proven, and all known physical phenomena reproduced — using nine measured quantities and zero adjustable parameters.
 
 ---
 
@@ -98,7 +98,7 @@ A prediction falls directly out of this framework. The electrostatic coupling co
 
 Where α is the fine structure constant (1/137.036), ℏ is the reduced Planck constant, and c is the speed of light. This identity holds to better than one part in ten billion when checked against CODATA values. The coupling is the product. Neither k_e nor e is separately fundamental — only their combination enters every force law.
 
-SDT derives this. Standard physics postulates it.
+This relationship is an algebraic identity of its inputs (α ≡ k_e e²/ℏc). The non-trivial SDT content is the geometric origin of the 1/r² force structure from occlusion solid angles — not the coupling constant itself.
 
 ### The Transfer Function
 

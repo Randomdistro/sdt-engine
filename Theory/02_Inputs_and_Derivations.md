@@ -20,8 +20,10 @@ The SDT engine requires **6 independent measured inputs** (or 7 if W+1 is unprov
 | Quantity | Formula | Value |
 |----------|---------|-------|
 | $u_{\text{CMB}}$ | $aT^4$ | 4.172 × 10⁻¹⁴ J/m³ |
-| $\ell_P$ | $\sqrt{\hbar G/c^3}$ | 1.616 × 10⁻³⁵ m |
+| $\ell_P$ | 1.616255 × 10⁻³⁵ m (measured) | Planck length |
 | $N$ | $R_{\text{CMB}}/\ell_P$ | 5.894 × 10⁶¹ |
+
+> **Note:** $\ell_P$ is a *measured primitive*, not derived from $G$. SDT prohibits $G$ as a fundamental input. The standard-physics relation $G = \ell_P^2 c^3 / \hbar$ is a *consequence* of the whitelist — $G$ is the output, not the source.
 | $\varepsilon$ | $u_{\text{CMB}} \ell_P^3$ | 1.761 × 10⁻¹¹⁸ J |
 | $\Phi$ | $N\varepsilon$ | 1.038 × 10⁻⁵⁶ J |
 | $P_{\text{conv}}$ | $\Phi/\ell_P^3$ | 2.459 × 10⁴⁸ Pa |

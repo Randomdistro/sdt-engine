@@ -111,8 +111,8 @@
 | 59 | `M₀ = [π²ℏ³P_conv√3/(2c⁵)]^(1/4) ≈ 1 TeV` | Fundamental mass scale | Laws/SDT_Complete_Laws.md:1028 | COMPUTED | T2 |
 | 60 | `v_p² + v_t² = c²` ; `gcd(p,q)=1` | Vortex-boundary budget + toroidal closure | Laws/SDT_Complete_Laws.md:996-1001 | DERIVED | T2 |
 | 61 | `W ∈ {1, 3}` | Admitted winding set (electron unknot, proton trefoil) | Laws/LAW_OF_VORTEX...:267 | DERIVED | T1 |
-| 62 | `m_p/m_e = (q/p)^(q/p)·[2(p+q)]³ − 1 = (3/2)^(3/2)·10³ − 1 = 1836.117` | Mass ratio from (2,3) trefoil (0.002%) | Laws/LAW_OF_VORTEX...:52; CQ17 cq17_mass_ratio_solver.cpp:19 | DERIVED | T1 |
-| 62b | `m_p/m_e = 6π⁵ = 1836.118` (alt. identity) | Mass ratio numerical identity (CQ05) | CQ05 cq05_mass_ratio.cpp:50 | COMPUTED | T1 |
+| 62 | `m_p/m_e = (q/p)^(q/p)·[2(p+q)]³ − 1 = (3/2)^(3/2)·10³ − 1 = 1836.117` | Mass ratio from (2,3) trefoil (0.002%) | Laws/LAW_OF_VORTEX...:52; CQ17 cq17_mass_ratio_solver.cpp:19 | PENDING | T1 |
+| 62b | `m_p/m_e = 6π⁵ = 1836.118` (alt. identity) | Mass ratio numerical identity (CQ05) | CQ05 cq05_mass_ratio.cpp:50 | PENDING | T1 |
 | 63 | `sin²θ* = 1/3, cos²θ* = 2/3` ; `v_p/v_t = √2` | Stable budget angle / velocity partition | Laws/SDT_Complete_Laws.md:1042 | DERIVED | T2 |
 | 64 | `μ_ν ≡ 0` (W=0 → no l=2 wake) | Neutrino/antineutrino zero magnetic moment | Laws/LAW_OF_VORTEX...:735; CQ07 cq07...:126 | DERIVED | T1 |
 

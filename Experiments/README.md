@@ -118,6 +118,7 @@ the observable difference, feasibility, and impact.
 | E99 | Ocean Tidal Analysis: SDT Pressure vs Newton Potential | Gravity / Occlusion | LOW | Archival analysis |
 | E100 | Lattice Dispersion Relation: Frequency-Dependent c | Electromagnetic | LOW | Archival analysis |
 | E101 | Complete Convergence Budget of the Solar System | Cosmology | MODERATE | Calculable now |
+| E102 | Orbital Emitter Depth-Gradient Test (Sundiver Spectrometer) | Convergence Depth / Variable Closure | FEASIBLE | Δλ/λ≈2e-7 @0.046AU; GPS-anchored; galactic-floor falsifier |
 
 ---
 

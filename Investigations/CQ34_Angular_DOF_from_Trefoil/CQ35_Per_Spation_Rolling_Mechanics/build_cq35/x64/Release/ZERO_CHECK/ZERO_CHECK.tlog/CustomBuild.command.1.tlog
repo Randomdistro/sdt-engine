@@ -1,0 +1,10 @@
+^C:\USERS\JIMMI\ONEDRIVE\DESKTOP\SDT-ENGINE\INVESTIGATIONS\CQ35_PER_SPATION_ROLLING_MECHANICS\BUILD_CQ35\CMAKEFILES\9A72898B34C61C2DCFF7B6344DC4B5EA\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/Jimmi/OneDrive/Desktop/sdt-engine/Investigations/CQ35_Per_Spation_Rolling_Mechanics -BC:/Users/Jimmi/OneDrive/Desktop/sdt-engine/Investigations/CQ35_Per_Spation_Rolling_Mechanics/build_cq35 --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/Jimmi/OneDrive/Desktop/sdt-engine/Investigations/CQ35_Per_Spation_Rolling_Mechanics/build_cq35/cq35_rolling_solver.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SDT Depth Topography — heliospheric pressure zones</title>
+<style>
+  :root{
+    --bg:#04060c; --panel:#0a0f1c; --ink:#e8eef8; --dim:#8b97ad; --line:#1a2640;
+    --acc:#ffd24a; --acc2:#a855f7;
+    --mono:"SF Mono",ui-monospace,"Cascadia Code",Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden}
+  #app{position:fixed;inset:0;touch-action:none} canvas{display:block;cursor:grab}
+  canvas:active{cursor:grabbing}
+  #hint{position:fixed;bottom:50px;left:50%;transform:translateX(-50%);z-index:11;
+    font-family:var(--mono);font-size:.72rem;color:var(--dim);background:rgba(10,15,28,.8);
+    border:1px solid var(--line);border-radius:20px;padding:6px 16px;transition:opacity 1s;pointer-events:none}
+  #title{position:fixed;top:16px;left:20px;z-index:10;pointer-events:none}
+  #title h1{margin:0;font-size:1.12rem;font-weight:750;letter-spacing:-.01em}
+  #title .sub{font-size:.73rem;color:var(--dim);font-family:var(--mono);margin-top:3px}
+  #panel{position:fixed;top:16px;right:16px;z-index:10;width:288px;background:rgba(10,15,28,.86);
+    -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:14px;padding:15px 17px;
+    font-size:.82rem;max-height:calc(100vh - 32px);overflow-y:auto}
+  #panel h2{margin:.3em 0 .55em;font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:var(--acc)}
+  .row{display:flex;justify-content:space-between;align-items:center;margin:6px 0;gap:8px}
+  .row label{color:var(--dim);font-family:var(--mono);font-size:.75rem}
+  input[type=range]{width:130px;accent-color:var(--acc)} input[type=checkbox]{accent-color:var(--acc);width:15px;height:15px}
+  .val{font-family:var(--mono);color:var(--ink);font-size:.77rem;min-width:50px;text-align:right}
+  button{background:#16203a;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:5px 11px;
+    font-family:var(--mono);font-size:.76rem;cursor:pointer;transition:.2s}
+  button:hover{background:#22304f} button.on{background:var(--acc);color:#04060c;border-color:var(--acc);font-weight:700}
+  hr{border:0;border-top:1px solid var(--line);margin:11px 0}
+  #hud{position:fixed;bottom:16px;left:20px;z-index:10;font-family:var(--mono);font-size:.73rem;color:var(--dim);
+    background:rgba(10,15,28,.72);border:1px solid var(--line);border-radius:10px;padding:10px 14px;max-width:48ch}
+  #hud b{color:var(--ink)} #hud .k{color:var(--acc)} #hud .v{color:var(--acc2)}
+  /* spation-size gradient legend */
+  #legend{position:fixed;bottom:16px;right:16px;z-index:10;font-family:var(--mono);font-size:.69rem;color:var(--dim);
+    background:rgba(10,15,28,.72);border:1px solid var(--line);border-radius:10px;padding:11px 14px;width:230px}
+  #legend .lt{color:var(--ink);font-size:.74rem;margin-bottom:6px}
+  #legbar{height:14px;border-radius:5px;margin:5px 0;
+    background:linear-gradient(90deg,#fff2c0,#ffd24a,#ff8a3a,#d0398a,#7a2cc0,#2a0a4a,#070710)}
+  .legrow{display:flex;justify-content:space-between;font-size:.66rem}
+  /* spation dot-density strip (visual size gradient) */
+  #spat{height:26px;margin:7px 0 3px;border-radius:5px;border:1px solid var(--line);position:relative;overflow:hidden}
+  #loading{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:20;background:var(--bg);color:var(--dim);font-family:var(--mono)}
+</style>
+</head>
+<body>
+<div id="loading">loading 3D engine…</div>
+<div id="app"></div>
+<div id="hint">drag to orbit · scroll to zoom · right-drag to pan</div>
+
+<div id="title">
+  <h1>SDT Depth Topography</h1>
+  <div class="sub">faint pressure zones · per-body fields · apex teardrop · spation-size gradient</div>
+</div>
+
+<div id="panel">
+  <h2>Time</h2>
+  <div class="row"><label>year</label><input id="yr" type="range" min="0" max="165" step="0.02" value="0"><span class="val" id="yrv">+0.0</span></div>
+  <div class="row"><label>play</label><button id="play" class="on">▶ running</button></div>
+  <div class="row"><label>speed yr/s</label><input id="spd" type="range" min="0.05" max="8" step="0.05" value="1"><span class="val" id="spdv">1.0</span></div>
+  <hr>
+  <h2>Depth zones</h2>
+  <div class="row"><label>Sun field</label><input id="sunf" type="checkbox" checked></div>
+  <div class="row"><label>zone count</label><input id="nz" type="range" min="5" max="16" step="1" value="10"><span class="val" id="nzv">10</span></div>
+  <div class="row"><label>glow intensity</label><input id="glow" type="range" min="0.3" max="2.5" step="0.05" value="1.1"><span class="val" id="glowv">1.1</span></div>
+  <div class="row"><label>planet fields</label><input id="pf" type="checkbox" checked></div>
+  <div class="row"><label>apex teardrop</label><input id="tear" type="checkbox" checked></div>
+  <div class="row"><label>teardrop k</label><input id="tk" type="range" min="0" max="0.7" step="0.01" value="0.45"><span class="val" id="tkv">0.45</span></div>
+  <div class="row"><label>apex frame</label><button id="frame">CMB→Leo</button></div>
+  <hr>
+  <h2>Bodies</h2>
+  <div class="row"><label>planets</label><input id="planets" type="checkbox" checked></div>
+  <div class="row"><label>orbits</label><input id="orbits" type="checkbox" checked></div>
+  <div class="row"><label>labels</label><input id="labels" type="checkbox" checked></div>
+  <div class="row"><label>lumiopause</label><input id="lumio" type="checkbox" checked></div>
+  <div class="row"><label>depth-pause (eq.)</label><input id="eq" type="checkbox" checked></div>
+  <div class="row"><label>apex axis</label><input id="axis" type="checkbox"></div>
+</div>
+
+<div id="hud"></div>
+<div id="legend">
+  <div class="lt">spation size within a zone</div>
+  <div id="spat"></div>
+  <div class="legrow"><span>large (shallow)</span><span>small (deep)</span></div>
+  <div style="margin-top:9px" class="lt">zone depth&nbsp; z = ϟ/r</div>
+  <div id="legbar"></div>
+  <div class="legrow"><span style="color:#ffd24a">z~2e-6 (Sun)</span><span style="color:#9a6ad0">z~5e-13</span></div>
+</div>
+
+<script type="importmap">
+{ "imports": {
+  "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+}}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+// ── physics (CODATA/IAU; matches keystone.js & exclusion_L1.js) ──
+const AU=1.495978707e11, R_Sun=6.957e8, koppaSun=1477.046, c=299792458.0, Msun=1.98847e30;
+const lumio_AU=20857, R_Sun_AU=R_Sun/AU;
+const dispR=(rAU)=>Math.log10(1+rAU/0.05)*2.4;            // log-radial scene units
+const depthZ=(rAU)=>koppaSun/(rAU*AU);
+const pauseAU=(Mrel,aAU)=>aAU*Math.sqrt(Mrel);            // depth-gradient balance ∝√(M/Msun)
+const APEX={'CMB→Leo':new THREE.Vector3(-0.97,0.21,0.12).normalize(),
+            'LSR→Herc':new THREE.Vector3(0.30,0.81,0.50).normalize()};
+let apexKey='CMB→Leo';
+const planets=[
+  {n:'Mercury',a:0.387,T:0.241,Mrel:1.660e-7,c:0xb0a08a,s:0.05},
+  {n:'Venus',  a:0.723,T:0.615,Mrel:2.447e-6,c:0xe8c87a,s:0.07},
+  {n:'Earth',  a:1.000,T:1.000,Mrel:3.003e-6,c:0x4ea8ff,s:0.07},
+  {n:'Mars',   a:1.524,T:1.881,Mrel:3.227e-7,c:0xff7a4a,s:0.06},
+  {n:'Jupiter',a:5.203,T:11.86,Mrel:9.545e-4,c:0xd8a877,s:0.15},
+  {n:'Saturn', a:9.537,T:29.45,Mrel:2.858e-4,c:0xe0c98a,s:0.13},
+  {n:'Uranus', a:19.19,T:84.0, Mrel:4.365e-5,c:0x9fe0e8,s:0.11},
+  {n:'Neptune',a:30.07,T:164.8,Mrel:5.149e-5,c:0x5a78ff,s:0.11},
+];
+
+// ── scene ──
+const app=document.getElementById('app');
+const scene=new THREE.Scene(); scene.background=new THREE.Color(0x04060c);
+const camera=new THREE.PerspectiveCamera(50,innerWidth/innerHeight,0.01,8000);
+camera.position.set(4.5,3.0,5.8);
+const renderer=new THREE.WebGLRenderer({antialias:true});
+renderer.setSize(innerWidth,innerHeight); renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+renderer.toneMapping=THREE.ACESFilmicToneMapping; renderer.toneMappingExposure=1.2;
+app.appendChild(renderer.domElement);
+const controls=new OrbitControls(camera,renderer.domElement);
+controls.enableDamping=true; controls.dampingFactor=0.06;
+controls.target.set(0,0,0);
+controls.rotateSpeed=0.9;
+controls.zoomSpeed=1.2;
+controls.panSpeed=0.8;
+controls.enablePan=true;
+controls.minDistance=0.4;        // can dive right in to the Sun
+controls.maxDistance=400;         // and pull all the way out past the lumiopause
+controls.minPolarAngle=0;         // full vertical sweep — over the top pole...
+controls.maxPolarAngle=Math.PI;   // ...all the way under the bottom pole (true full 3D)
+controls.autoRotate=false;
+// touch: one finger rotate, two finger dolly+pan
+controls.touches={ ONE:THREE.TOUCH.ROTATE, TWO:THREE.TOUCH.DOLLY_PAN };
+controls.mouseButtons={ LEFT:THREE.MOUSE.ROTATE, MIDDLE:THREE.MOUSE.DOLLY, RIGHT:THREE.MOUSE.PAN };
+
+(()=>{ const g=new THREE.BufferGeometry(),n=2600,p=new Float32Array(n*3);
+  for(let i=0;i<n;i++){const r=600+Math.random()*900,th=Math.random()*6.283,ph=Math.acos(2*Math.random()-1);
+    p[i*3]=r*Math.sin(ph)*Math.cos(th);p[i*3+1]=r*Math.cos(ph);p[i*3+2]=r*Math.sin(ph)*Math.sin(th);}
+  g.setAttribute('position',new THREE.BufferAttribute(p,3));
+  scene.add(new THREE.Points(g,new THREE.PointsMaterial({color:0x5a6a88,size:0.6,sizeAttenuation:false})));})();
+
+// ── topographic depth colour: warm/bright deep → cool/dark shallow ──
+function depthColor(t){ // t 0(deep)..1(shallow)
+  const s=[[1.0,0.95,0.72],[1.0,0.82,0.29],[1.0,0.54,0.23],[0.82,0.22,0.54],[0.48,0.17,0.75],[0.16,0.04,0.29],[0.03,0.03,0.06]];
+  const x=Math.min(0.9999,Math.max(0,t))*(s.length-1),i=Math.floor(x),f=x-i,a=s[i],b=s[i+1];
+  return new THREE.Color(a[0]+(b[0]-a[0])*f,a[1]+(b[1]-a[1])*f,a[2]+(b[2]-a[2])*f);
+}
+
+// ── radial GLOW sprite texture (soft falloff — the "heat map" look, no wireframe) ──
+const glowTex=(()=>{
+  const cv=document.createElement('canvas'); cv.width=cv.height=128;
+  const g=cv.getContext('2d'); const grd=g.createRadialGradient(64,64,0,64,64,64);
+  grd.addColorStop(0,'rgba(255,255,255,1)'); grd.addColorStop(0.35,'rgba(255,255,255,0.45)');
+  grd.addColorStop(0.75,'rgba(255,255,255,0.08)'); grd.addColorStop(1,'rgba(255,255,255,0)');
+  g.fillStyle=grd; g.fillRect(0,0,128,128);
+  const t=new THREE.CanvasTexture(cv); return t;
+})();
+
+// the Sun
+const sun=new THREE.Mesh(new THREE.SphereGeometry(0.16,40,40),new THREE.MeshBasicMaterial({color:0xfff0c0}));
+scene.add(sun);
+const sunSprite=new THREE.Sprite(new THREE.SpriteMaterial({map:glowTex,color:0xffd86a,transparent:true,opacity:0.9,blending:THREE.AdditiveBlending,depthWrite:false}));
+sunSprite.scale.setScalar(1.1); scene.add(sunSprite);
+scene.add(new THREE.AmbientLight(0x445066,0.8));
+const pl=new THREE.PointLight(0xfff0c0,2.0,0,0); scene.add(pl);
+
+// ── faint topographic zone glows (concentric translucent shells, soft additive) ──
+let sunZones=new THREE.Group(); scene.add(sunZones);
+let lumioMesh=null;
+function apexVec(){return APEX[apexKey];}
+function deform(geo,tk){
+  const apex=apexVec(),pos=geo.attributes.position,v=new THREE.Vector3();
+  for(let k=0;k<pos.count;k++){v.fromBufferAttribute(pos,k);const d=v.clone().normalize();
+    const s=1-tk*d.dot(apex); v.multiplyScalar(s); pos.setXYZ(k,v.x,v.y,v.z);}
+  pos.needsUpdate=true; geo.computeVertexNormals();
+}
+function buildSunZones(count,tear,tk,glow){
+  sunZones.clear(); lumioMesh=null;
+  for(let i=0;i<count;i++){
+    const f=i/(count-1);
+    const rAU=R_Sun_AU*Math.pow(lumio_AU/R_Sun_AU,f);
+    const R=dispR(rAU), col=depthColor(f), isLast=(i===count-1);
+    const geo=new THREE.SphereGeometry(R,72,40);
+    if(tear&&tk>0) deform(geo,tk);
+    // faint volumetric glow: low opacity, additive, BackSide so it reads as a filled haze
+    const op=(isLast?0.06:0.018+0.05*(1-f))*glow;
+    const m=new THREE.Mesh(geo,new THREE.MeshBasicMaterial({color:col,transparent:true,opacity:op,
+      side:THREE.BackSide,depthWrite:false,blending:THREE.AdditiveBlending}));
+    m.userData={rAU,z:depthZ(rAU),f}; sunZones.add(m);
+    if(isLast){ lumioMesh=m; }
+  }
+}
+
+// ── per-planet pressure fields (small teardrop glows that ride with the planet) ──
+const planetFields=new THREE.Group(); scene.add(planetFields);
+function buildPlanetField(p){
+  const grp=new THREE.Group();
+  const pauseR=dispR(pauseAU(p.Mrel,p.a)); // depth-pause radius (display)
+  const nz=3;
+  for(let i=0;i<nz;i++){
+    const f=i/(nz-1);
+    const R=Math.max(p.s*1.4, pauseR*(0.4+0.6*f));
+    const geo=new THREE.SphereGeometry(R,40,24);
+    // planet teardrop points toward the SUN (its own nose), not the galactic apex
+    grp.add(new THREE.Mesh(geo,new THREE.MeshBasicMaterial({
+      color:depthColor(0.15+0.5*f),transparent:true,opacity:(0.05-0.03*f),
+      side:THREE.BackSide,depthWrite:false,blending:THREE.AdditiveBlending})));
+  }
+  grp.userData={p,pauseR};
+  return grp;
+}
+
+// orbits + planet bodies + labels
+const orbitGroup=new THREE.Group(); scene.add(orbitGroup);
+const bodyGroup=new THREE.Group(); scene.add(bodyGroup);
+const eqGroup=new THREE.Group(); scene.add(eqGroup);
+const labelEls=[];
+function buildOrbits(){ orbitGroup.clear();
+  for(const p of planets){const R=dispR(p.a),seg=256,pts=[];
+    for(let i=0;i<=seg;i++){const th=i/seg*6.283;pts.push(new THREE.Vector3(R*Math.cos(th),0,R*Math.sin(th)));}
+    orbitGroup.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),
+      new THREE.LineBasicMaterial({color:0x2c4a72,transparent:true,opacity:0.4})));}
+}
+function buildBodies(){
+  bodyGroup.clear(); planetFields.clear(); eqGroup.clear();
+  labelEls.forEach(e=>e.remove()); labelEls.length=0;
+  for(const p of planets){
+    const m=new THREE.Mesh(new THREE.SphereGeometry(p.s,28,28),
+      new THREE.MeshStandardMaterial({color:p.c,roughness:0.5,metalness:0.1,emissive:p.c,emissiveIntensity:0.15}));
+    p.mesh=m; bodyGroup.add(m);
+    p.field=buildPlanetField(p); planetFields.add(p.field);
+    // depth-pause marker (the equilibrium "nose" — your wager point)
+    const eqM=new THREE.Mesh(new THREE.SphereGeometry(0.035,12,12),
+      new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:0.8}));
+    p.eq=eqM; eqGroup.add(eqM);
+    const el=document.createElement('div');
+    el.style.cssText='position:fixed;color:#aeb9cf;font-family:var(--mono);font-size:10px;pointer-events:none;z-index:9;text-shadow:0 0 4px #000';
+    el.textContent=p.n; document.body.appendChild(el); p.label=el; labelEls.push(el);
+  }
+}
+
+let apexArrow=null;
+function buildApexAxis(){ if(apexArrow)scene.remove(apexArrow);
+  apexArrow=new THREE.ArrowHelper(apexVec(),new THREE.Vector3(0,0,0),6.4,0xffd24a,0.5,0.28); scene.add(apexArrow);}
+
+// spation-size gradient strip in the legend (dots shrink left→right = shallow→deep)
+(()=>{ const cv=document.createElement('canvas'); cv.width=228; cv.height=26;
+  const g=cv.getContext('2d'); g.fillStyle='#0a0f1c'; g.fillRect(0,0,228,26);
+  for(let x=4;x<224;x+=2){ const t=x/224; const sz=3.2*(1-t)+0.5; // large(shallow)→small(deep)
+    const col=depthColor(t);
+    g.fillStyle='rgb('+(col.r*255|0)+','+(col.g*255|0)+','+(col.b*255|0)+')';
+    g.beginPath(); g.arc(x,13,sz,0,6.283); g.fill(); }
+  document.getElementById('spat').style.background='url('+cv.toDataURL()+')';})();
+
+// ── state + UI ──
+const S={year:0,play:true,speed:1,sunf:true,nz:10,glow:1.1,pf:true,tear:true,tk:0.45,
+  planets:true,orbits:true,labels:true,lumio:true,eq:true,axis:false};
+const $=id=>document.getElementById(id);
+function rebuildSun(){ buildSunZones(S.nz,S.tear,S.tk,S.glow); }
+function syncVis(){
+  sunZones.visible=S.sunf; planetFields.visible=S.pf&&S.planets;
+  orbitGroup.visible=S.orbits; bodyGroup.visible=S.planets; eqGroup.visible=S.eq&&S.planets;
+  if(apexArrow)apexArrow.visible=S.axis; if(lumioMesh)lumioMesh.visible=S.lumio&&S.sunf;
+  labelEls.forEach(e=>e.style.display=(S.labels&&S.planets)?'block':'none');
+}
+$('yr').oninput=e=>{S.year=+e.target.value;$('yrv').textContent='+'+S.year.toFixed(1);S.play=false;$('play').classList.remove('on');$('play').textContent='▶ paused';};
+$('play').onclick=()=>{S.play=!S.play;$('play').classList.toggle('on',S.play);$('play').textContent=S.play?'▶ running':'▶ paused';};
+$('spd').oninput=e=>{S.speed=+e.target.value;$('spdv').textContent=S.speed.toFixed(1);};
+$('sunf').onchange=e=>{S.sunf=e.target.checked;syncVis();};
+$('nz').oninput=e=>{S.nz=+e.target.value;$('nzv').textContent=S.nz;rebuildSun();syncVis();};
+$('glow').oninput=e=>{S.glow=+e.target.value;$('glowv').textContent=S.glow.toFixed(1);rebuildSun();syncVis();};
+$('pf').onchange=e=>{S.pf=e.target.checked;syncVis();};
+$('tear').onchange=e=>{S.tear=e.target.checked;rebuildSun();};
+$('tk').oninput=e=>{S.tk=+e.target.value;$('tkv').textContent=S.tk.toFixed(2);rebuildSun();};
+$('frame').onclick=()=>{apexKey=(apexKey==='CMB→Leo')?'LSR→Herc':'CMB→Leo';$('frame').textContent=apexKey;rebuildSun();buildApexAxis();syncVis();};
+$('planets').onchange=e=>{S.planets=e.target.checked;syncVis();};
+$('orbits').onchange=e=>{S.orbits=e.target.checked;syncVis();};
+$('labels').onchange=e=>{S.labels=e.target.checked;syncVis();};
+$('lumio').onchange=e=>{S.lumio=e.target.checked;syncVis();};
+$('eq').onchange=e=>{S.eq=e.target.checked;syncVis();};
+$('axis').onchange=e=>{S.axis=e.target.checked;syncVis();};
+
+buildOrbits(); buildBodies(); rebuildSun(); buildApexAxis(); syncVis();
+
+const hud=$('hud');
+function updateHUD(){
+  const e=planets[2], z=depthZ(e.a);
+  hud.innerHTML=
+    `year <b>+${S.year.toFixed(1)}</b> · apex <span class="k">${apexKey}</span> · zones <b>${S.nz}</b><br>`+
+    `zone depth <span class="k">z=ϟ/r</span>: Sun-surf <b>2.1e-6</b> → lumiopause <b>4.7e-13</b> (20,857 AU)<br>`+
+    `Earth: z=<b>${z.toExponential(3)}</b> c_local=<b>${(c*(1-z)).toFixed(1)}</b> dτ/dt=<b>${Math.sqrt(1-z).toFixed(9)}</b><br>`+
+    `depth-pause (eq) ∝√(M/M☉): Earth <b>${(pauseAU(3.003e-6,1)*AU/1e6).toFixed(2)}e3 km</b> (inside L1; the strike point)<br>`+
+    `<span style="color:#5a6678">first shell = total baryon+lepton exclusion (legend); teardrop nose×${(1-S.tk).toFixed(2)} tail×${(1+S.tk).toFixed(2)}</span>`;
+}
+
+let last=performance.now();
+function tick(now){
+  const dt=(now-last)/1000; last=now;
+  if(S.play){S.year+=dt*S.speed; if(S.year>165)S.year=0; $('yr').value=S.year; $('yrv').textContent='+'+S.year.toFixed(1);}
+  const apex=apexVec();
+  for(const p of planets){ if(!p.mesh)continue;
+    const R=dispR(p.a), th=(S.year/p.T)*6.283+(p.a*1.7);
+    const pos=new THREE.Vector3(R*Math.cos(th),0,R*Math.sin(th));
+    p.mesh.position.copy(pos);
+    if(p.field){ p.field.position.copy(pos);
+      // planet field teardrops toward the SUN (its own nose points sunward)
+      const toSun=pos.clone().negate().normalize();
+      p.field.quaternion.setFromUnitVectors(new THREE.Vector3(-1,0,0),toSun);
+    }
+    if(p.eq){ // depth-pause marker sunward of planet
+      const toSun=pos.clone().negate().normalize();
+      const pr=dispR(pauseAU(p.Mrel,p.a));
+      p.eq.position.copy(pos).addScaledVector(toSun, Math.min(pr, R*0.4));
+    }
+  }
+  sunSprite.scale.setScalar(1.05+0.04*Math.sin(now*0.001));
+  controls.update(); renderer.render(scene,camera);
+  if(S.labels&&S.planets){ const v=new THREE.Vector3();
+    for(const p of planets){ if(!p.mesh)continue; v.copy(p.mesh.position).project(camera);
+      const x=(v.x*0.5+0.5)*innerWidth,y=(-v.y*0.5+0.5)*innerHeight;
+      p.label.style.display=(v.z<1)?'block':'none';
+      p.label.style.left=(x+8)+'px'; p.label.style.top=(y-6)+'px'; } }
+  updateHUD(); requestAnimationFrame(tick);
+}
+addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);});
+document.getElementById('loading').remove();
+setTimeout(()=>{const h=document.getElementById('hint'); if(h)h.style.opacity='0';},5000);
+requestAnimationFrame(tick);
+</script>
+</body>
+</html>

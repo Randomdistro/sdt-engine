@@ -1,4 +1,4 @@
-﻿# SPATIAL DISPLACEMENT THEORY — COMPLETE LAWS
+# SPATIAL DISPLACEMENT THEORY — COMPLETE LAWS
 
 **James Tyndall**
 **Melbourne, Australia**
@@ -970,7 +970,7 @@ Law
  | T10–T17
  | 
  | 
-Total across all five laws: 9 axioms (R1–R6, M1–M3), 2 lemmas, 17 theorems, and their corollaries. One calibration constant (the hydrogen force match). Built on a single medium with one tick rate.
+Total across all six laws: 9 axioms (R1–R6, M1–M3), 2 lemmas, 18 theorems, and their corollaries. One calibration constant (the hydrogen force match). Built on a single medium with one tick rate.
 
 ---
 
@@ -1340,7 +1340,7 @@ Spatial Displacement Theory — Law Supplementary
 James Tyndall
 Melbourne, Australia
 March 2026
-Every identified open problem in the five-law framework is addressed. V_disp is computed for both particles. The geometric transfer function is expressed in closed form. The marginal stability of T10 is proven as a stable equilibrium. The electron-electron occlusion problem is resolved through charge quantisation. Helium binding is computed from nuclear occlusion geometry. Two problems remain genuinely open: R_p from lattice topology and quantisation of stable vortex topologies.
+Every identified open problem in the six-law framework is addressed. V_disp is computed for both particles. The geometric transfer function is expressed in closed form. The marginal stability of T10 is proven as a stable equilibrium. The electron-electron occlusion problem is resolved through charge quantisation. Helium binding is computed from nuclear occlusion geometry. Two problems remain genuinely open: R_p from lattice topology and quantisation of stable vortex topologies.
 
 
 ---
@@ -1730,11 +1730,11 @@ Gap
 
 
 9. Summary
-Of the six identified gaps in the five-law framework, four are now fully resolved and one is partially resolved:
+Of the six identified gaps in the six-law framework, four are now fully resolved and one is partially resolved:
 Resolved: Vdisp for both particles (computable from the mass equation). The electron-electron occlusion problem (resolved by charge quantisation). The marginal stability of T10 (proven as a stable equilibrium between convergent pressure and the relay bound). Helium binding energy (computed from nuclear occlusion geometry, identical to QM).
 Partially resolved: The transfer function (computed and expressed, but not derived from first principles due to Rp dependence).
 Genuinely open: Rp from lattice topology and quantisation of stable vortex topologies. Both require simulation of toroidal displacement patterns in an inviscid medium under convergent pressure. These are computational problems with well-defined inputs, not conceptual gaps.
-The five-law framework now has: 9 axioms, 2 lemmas, 17 theorems, their corollaries, and the complete gap resolution presented in this document. minimal free parameters beyond the hydrogen calibration (which fixes Peff). Two open problems, both computational. Built on a single medium with one tick rate.
+The six-law framework now has: 9 axioms, 2 lemmas, 18 theorems, their corollaries, and the complete gap resolution presented in this document. Minimal free parameters beyond the hydrogen calibration (which fixes Peff). Two open problems, both computational. Built on a single medium with one tick rate.
 
 ---
 

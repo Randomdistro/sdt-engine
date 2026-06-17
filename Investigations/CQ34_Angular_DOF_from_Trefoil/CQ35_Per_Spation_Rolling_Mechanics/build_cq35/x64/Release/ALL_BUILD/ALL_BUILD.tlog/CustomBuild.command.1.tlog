@@ -1,0 +1,10 @@
+^C:\USERS\JIMMI\ONEDRIVE\DESKTOP\SDT-ENGINE\INVESTIGATIONS\CQ35_PER_SPATION_ROLLING_MECHANICS\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/Jimmi/OneDrive/Desktop/sdt-engine/Investigations/CQ35_Per_Spation_Rolling_Mechanics -BC:/Users/Jimmi/OneDrive/Desktop/sdt-engine/Investigations/CQ35_Per_Spation_Rolling_Mechanics/build_cq35 --check-stamp-file C:/Users/Jimmi/OneDrive/Desktop/sdt-engine/Investigations/CQ35_Per_Spation_Rolling_Mechanics/build_cq35/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
