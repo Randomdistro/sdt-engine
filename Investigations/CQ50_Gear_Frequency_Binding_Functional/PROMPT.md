@@ -1,4 +1,4 @@
-# CQ-41 — THE GEAR-FREQUENCY BINDING FUNCTIONAL
+# CQ-50 — THE GEAR-FREQUENCY BINDING FUNCTIONAL
 ## Successor to CQ-32: test whether binding is `E_bind = ℏ·Δω` (a mesh-coupling frequency *pull*), where the volume-deficit functional failed
 
 **Framework:** Spatial Displacement Theory v6.0+, constitutional ruleset in full force.

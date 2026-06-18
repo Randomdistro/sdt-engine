@@ -352,6 +352,93 @@ Drawing from the uploaded chapters, our conversation history, and the specific d
 
 ---
 
+## The 2026 Enrichment — Force, Charge, and the Atom at Stellar Scale
+
+*Added 2026-06-18 (J. C. Harvey). These laws fold in the results of the CQ46–CQ48 investigations and the
+electropause derivation. Where a result is not yet derived from scratch, the honest status is stated in
+brackets — ATOMICUS prizes honesty over success.*
+
+### **V. The Force Laws (the binding, derived)**
+
+* **15. The Electropause (the binding is derived, not assumed).** The electron is held at the Bohr radius
+  by the **centripetal requirement** — and that requirement *is* the occlusion push (the one force law at
+  atomic scale). The Bohr radius is the **electropause**: the pressure-balance boundary where the inward
+  occlusion gradient equals the outward circulation strength, exactly as the heliopause balances stellar
+  output against the CMB, one rung up. At the electropause (r = a₀, v = αc) the binding force is
+  F = mₑv²/a₀ = **8.239×10⁻⁸ N** — computed from *kinematics alone, with no charge invoked* — and it equals
+  the Coulomb force and the occlusion force to the last digit. Inverting the occlusion law for this balance
+  **derives the effective pressure**: P_eff = m_p²mₑ²c⁵/(4παℏ³) = **5.225×10³¹ Pa**, matching the engine's
+  B22 value. *[Status: this upgrades P_eff from CALIBRATED (E) to DERIVED (C) — the delete-test passes
+  because a₀ = ℏ/(mₑcα) is Coulomb-free — **on the framework's terms**: α is read as the kinematic k-rung
+  (Rule 7's χ), not the Coulomb coupling. α remains the one irreducible input (it does not derive α).]*
+
+* **16. There Is No Charge.** Charge is not a substance, a primitive, or a property a particle "carries."
+  What is *called* charge **is** the handed redirection of the convergent throughpole. "+e" and "−e" are the
+  two **handednesses** — the proton's (2,3) trefoil vs the electron's (1,1) torus (Rule 3's chirality, now
+  named at the source) — not two amounts of a stuff. **e is an SI unit-bridge**, the conversion factor
+  between SDT's redirection magnitude and the Coulomb number; "e is irreducible" means *e is a unit*, and you
+  do not derive a unit. The atom binds with no charge in the books — only χ, the koppa, and the occlusion
+  geometry (Law 15). *[Same eliminative move as "no monopoles" (Law 18) and mass-as-reorganisation-cost.]*
+
+* **17. Repulsion Is the Inverse of the Convergence.** Attraction is a local **deficit** of convergence
+  throughput (the occlusion shadow, a *defocused* redirection — pulled toward); repulsion is a local
+  **surplus** (a *focused* redirection — pushed apart). They are one throughput read with opposite sign, so
+  |F_repel| = |F_attract| is forced (and observed). This is the mechanical origin of "Protons repel" (Rule 5,
+  the Neutron Bridge) and of the Pauli high-energy state (Rule 3). **Gravity is the symmetric, subtractive
+  occlusion** (it can only shadow, never add → deficit-only → attraction-only → *there is no antigravity*);
+  **charge is the handed redirection** (it can focus *or* defocus → both signs). The proton's repulsion that
+  the Neutron Bridge must defeat is the inverse-convergence — the same quantity that detonates a star (Law 22).
+
+* **18. No Monopoles — the Convergence Is a Throughpole.** The CMB convergence influx is **not** a monopole;
+  it is a **throughpole (a twopole)** — pulsed EM phase relayed at c, passing *through* every spation (in one
+  boundary, out the opposite), never terminating in a sink or springing from a source. There are no monopoles
+  of any kind. **Light is an emission** — a propagating phase-impulse of the through-flow — a distinct channel
+  from the steady through-flow and from charge-redirection. Gravity, charge, and light are occlusion,
+  redirection, and emission patterns of the one throughpole; none is a pole in its own right.
+
+### **VI. The Stellar Laws (the Atom at Stellar Scale)**
+
+* **19. A Star Is a Giant Atom.** The construction grammar does not stop at the nucleus. A star is the same
+  architecture at scale: a giant baryonic core inside nested convergence cavities, bound by the one occlusion
+  law. Stellar structure is Atomicus geared *up*, as chemistry is Atomicus geared down (Rule 14).
+
+* **20. Stellar Neutronisation = Mass Electron Capture (the He-3 grammar, en masse).** Near the stellar
+  **c-boundary** the last electrons are pressure-trapped on their protons — they cannot unbind, so the proton
+  **force-captures** its electron (p + e⁻ → n + ν). This is the He-3-core electron-capture grammar
+  (ATOMICUS/ec_investigations) run across ~10⁵⁷ sites. It is charge-**balanced** (a plus and a minus removed
+  together → no imbalance), so it builds the **neutron-star remnant** and fires the **neutrino burst**
+  (≈ 2.7×10⁴⁵ J, order-matching the observed ~10⁴⁶ J) — the burst *is* the capture receipts.
+
+* **21. Fission Causes Electron Capture.** Electron capture is **defect-repair**: the He-3 core is an
+  incomplete tetrahedron (a vacant neutron site), and the nucleus heals it by capturing an electron. What
+  *makes* that defect is **fission/spallation** — splitting a nucleus leaves the exposed He-3 remnant. So
+  fission → He-3 defect → forced EC. The Sun runs the gentle version now: the p-p chain makes He-3 →
+  He-3+He-4 → **Be-7** → Be-7 + e⁻ → Li-7 + ν (Be-7 being the canonical He-3-core EC isotope), and those
+  Be-7 neutrinos are measured. *[Status: the per-isotope "all EC isotopes are fission/spallation remnants"
+  claim needs the full check; the He-3 → EC link is confirmed and ongoing in the Sun.]*
+
+* **22. The Supernova Is the Unscreened Inverse-Convergence.** A star holds only while it stays neutral to
+  about **1 part in 10¹⁸** (the deficit at which the proton repulsion equals the gravitational crush). The
+  electron sea **screens** the proton repulsion (Law 17); when ablation/capture outruns re-screening and the
+  deficit crosses that threshold, the unscreened repulsion detonates. Two channels: the **balanced core**
+  → neutron star + ν burst (Law 20); a **tiny envelope imbalance** (f ≈ 5×10⁻¹⁸) → a **~10⁴⁴ J Coulomb
+  blast** (the visible ejecta). The energy is electromagnetic (EM/gravity ≈ 10³⁶, so the budget is trivially
+  there) — *not* a gravitational bounce, which is why it never stalls. *[Status: the channel-coupling (how
+  the core event induces the envelope unscreening) and the light-curve/Ni-56 reproduction are open; the
+  three energetics — remnant, ν burst, kinetic — are order-consistent. "No remnant" is reserved for the
+  SMBH end-of-cycle event, not ordinary supernovae.]*
+
+### **VII. The Spectral Ladder**
+
+* **23. Redshift Is Octaves; Spectra Live on the Octave Ladder.** A photon's wavelength is its conserved
+  **count** times the **local spation size**: λ = N·ℓ_P(r). Gravitational and cosmological shift is then a
+  ruler comparison, 1 + z = 2^Δn with Δn = log₂(1+z) — redshift measured in **octaves**. The visible band is
+  one octave; atomic transition lines (the α-ladder) sit at definite rungs; the CMB is the recombination
+  spectrum slid ~10 octaves down. Spectra and gravity are the same depth-closure quantity read two ways.
+  *[CQ46. The cosmological *source* of the large-scale ruler gradient is the open frontier.]*
+
+---
+
 
 
 <!-- ========== Source: SDT_Master_Geometric_Table.md ========== -->

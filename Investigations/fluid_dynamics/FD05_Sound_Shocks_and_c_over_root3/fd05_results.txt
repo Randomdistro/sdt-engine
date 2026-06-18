@@ -1,0 +1,147 @@
+﻿############################################################################
+#  FD05 - Sound, Shocks, and the c/sqrt(3) Ceiling                         #
+#  Spatial Displacement Theory  |  J. C. Tyndall, Melbourne                #
+#  Mechanism: sound = compression relay wave, c_s = sqrt(dP/drho)          #
+############################################################################
+
+[ MEASURED-INPUT ledger ]
+  gamma_air = 1.4006   (-)        heat-capacity ratio, dry air
+  R_g_air   = 287.05 (J/kg/K)      specific gas constant, dry air
+  T (20C)   = 293.15 K
+  T (0C)    = 273.15 K
+  K_water   = 2.180e+09 Pa            bulk modulus, water 20C
+  rho_water = 998.2 kg/m^3         density, water 20C
+  lambda    = 68.0 nm            mean free path, air STP
+  [ DERIVED / SDT ]  c = 299792458 m/s (measured::c)  |  P_rad = u/3 (law_I)
+
+============================================================================
+  PHASE 1  -  Ordinary-fluid sound from compressibility
+============================================================================
+  Relay narration: a local densification rho->rho+drho raises lattice
+  pressure by dP=(dP/drho)*drho; the densification heals back into
+  neighbouring cells at c_s = sqrt(dP/drho). [DERIVED mechanism]
+
+  case                          c_s [m/s]      target      err%  class
+  air 20C  sqrt(g R T)            343.306       343.2   +0.031  COMPUTED<-MEASURED-INPUT
+  air 0C   sqrt(g R T)            331.388       331.3   +0.026  COMPUTED<-MEASURED-INPUT
+  water20C sqrt(K/rho)           1477.813      1481.0   -0.215  COMPUTED<-MEASURED-INPUT
+
+  Phase 1 verdict: air20 PASS  air0 PASS  water PASS  ->  PASS (convergence; gamma,R,T,K MEASURED-INPUT) -> Class C
+
+============================================================================
+  PHASE 2  -  The c/sqrt(3) radiation-fluid ceiling (native)
+============================================================================
+  Law I fixes radiation pressure as P_rad = u/3 (isotropic relay gas).
+  Relativistic inertia is the energy density: rho_eff*c^2 = u.
+  -> c_s^2 = dP/d(rho_eff c^2) = d(u/3)/du = 1/3  (ZERO free params).
+
+  law_I::u_CMB      = 4.174783e-14 J/m^3   [DERIVED a*T^4]
+  law_I::P_rad      = 1.391594e-14 Pa      [DERIVED u/3]
+  w = P_rad/u       = 0.3333333333         (exact 1/3 = 0.3333333333)
+  c_s = c*sqrt(w)   = 1.730853e+08 m/s
+  c/sqrt(3) direct  = 1.730853e+08 m/s
+  c_s/c             = 0.577350         (1/sqrt(3) = 0.577350)
+
+  CQ39 cross-check: this c/sqrt(3) IS the coupled-lattice (pre-Clearing)
+  BAO sound speed; FD05 derives it as the high-stiffness asymptote of
+  the SAME c_s = sqrt(dP/drho). [agreement: c_s == c/sqrt(3): EXACT]
+  Phase 2 verdict: slope=1/3 PASS  value(4sf) PASS  CQ39 PASS  ->  PASS (native, zero free params) -> Class A
+
+============================================================================
+  PHASE 3  -  One curve from gas to radiation:  c_s = c*sqrt(w)
+============================================================================
+  Stiffness ratio w = P/(rho c^2) = (c_s/c)^2.  Every fluid is a point
+  on the SAME curve c_s = c*sqrt(w); the ceiling is w = 1/3.
+
+  medium                c_s [m/s]      w=(c_s/c)^2     <= 1/3 ?
+  air 20C                   343.3     1.311355e-12          yes
+  air 0C                    331.4     1.221888e-12          yes
+  water 20C                  1478     2.429951e-11          yes
+  radiation 1/3         1.731e+08     3.333333e-01          yes
+
+  sampled curve c_s = c*sqrt(w):
+  w                     c_s [m/s]
+  1.000e-12          2.997925e+02
+  1.000e-09          9.480270e+03
+  1.000e-06          2.997925e+05
+  1.000e-03          9.480270e+06
+  1.000e-02          2.997925e+07
+  1.000e-01          9.480270e+07
+  3.333e-01          1.730853e+08
+
+  Phase 3 verdict: none exceed c/sqrt(3) PASS  on-curve PASS  ->  PASS (single compressibility law) -> Class A/C
+
+============================================================================
+  PHASE 4  -  Mach cone and the shock criterion
+============================================================================
+  Source at v > c_s: compression wavefronts (each expanding at c_s)
+  pile onto a cone of half-angle theta with sin(theta) = c_s/v = 1/M.
+  [DERIVED relay kinematics]
+
+  M=v/cs      theta [deg]  textbook[deg]       d(deg)
+  1.00            90.0000        90.0000     0.00e+00
+  1.20            56.4427        56.4427     0.00e+00
+  1.50            41.8103        41.8103     0.00e+00
+  2.00            30.0000        30.0000     0.00e+00
+  3.00            19.4712        19.4712     0.00e+00
+  5.00            11.5370        11.5370     0.00e+00
+  10.00            5.7392         5.7392     0.00e+00
+
+  Onset: M = 1 (v = c_s) is the relay-smoothing threshold (theta = 90 deg,
+  cone opens to a plane). For M < 1 the medium relays the compression
+  away ahead of the source: no shock.
+
+  Rankine-Hugoniot note: across the front mass/momentum/energy are
+  conserved (relay book-keeping of a discontinuity). The front cannot
+  be thinner than the relay can re-equilibrate -> delta ~ (3..5)*lambda:
+    delta ~ 204 .. 340 nm  (air STP, lambda=68 nm)  [COMPUTED<-MEASURED-INPUT]
+    measured weak-shock widths ~ 200 nm (few*lambda) -> order-of-magnitude OK.
+
+  Phase 4 verdict: Mach angle (<0.5deg) PASS  thickness O(nm-um) PASS  ->  PASS (relay kinematics; thickness order-of-mag C) -> Class A/C
+
+============================================================================
+  PHASE 5  -  Unify Cherenkov (E57) and the sonic boom
+============================================================================
+  Single criterion: a disturbance forced past the LOCAL relay/smoothing
+  rate forms a conical shock.  v > c_relay(mode).
+    mode = compression  -> c_relay = c_s        -> sonic boom (Mach cone)
+    mode = phase/light  -> c_relay = c_local=c/n -> Cherenkov (E57, VERIFIED)
+
+  E57 Cherenkov (water, n=1.333, beta->1): cos(theta_C)=1/(n*beta)
+    theta_C(max) = acos(1/n) = 41.39 deg   (E57 VERIFIED ~41 deg)
+
+  Same geometry, complementary reference:
+    boom      half-angle from flight line:  sin(theta)   = c_relay/v
+    Cherenkov angle  from flight line:      cos(theta_C) = c_relay/v
+    (theta + theta_C = 90 deg; both encode v > c_relay, ONE mechanism)
+
+  numeric: charge beta=0.9 in water, c_local=2.2490e+08 m/s, v=2.6981e+08 m/s
+    Cherenkov cos-rule  theta_C    = 33.536 deg
+    boom      sin-rule  theta       = 56.464 deg
+    theta_C + theta = 90.000 deg  (expect 90 -> same cone, complementary)
+
+  Phase 5 verdict: recovers E57 angle PASS  one criterion PASS  ->  PASS (boom == Cherenkov, one mechanism) -> Class A (native claim)
+
+============================================================================
+  FD05  -  FINAL VERDICT
+============================================================================
+  Phase 1  ordinary sound c_s=sqrt(dP/drho) ........ PASS
+  Phase 2  c/sqrt(3) ceiling from P=u/3 ............ PASS
+  Phase 3  one curve c_s=c*sqrt(w) ................. PASS
+  Phase 4  Mach cone + shock thickness ............. PASS
+  Phase 5  boom == Cherenkov (E57) unification ..... PASS
+
+  Key numbers:
+    c_s(air,20C) = 343.31 m/s  (target 343.2, +0.031%)
+    c_s(water)   = 1477.8 m/s (target 1481, -0.215%)
+    c/sqrt(3)    = 1.730853e+08 m/s  (= CQ39 BAO sound speed)
+    Mach angle at M=2 = 30.000 deg ; E57 Cherenkov(water,max) = 41.39 deg
+
+  OVERALL: PASS
+  Classification:
+    Phase 1 (air/water c_s) : Class C  (convergence; gamma,R,T,K MEASURED-INPUT,
+                              relay narration native).
+    Phase 2 (c/sqrt(3))     : Class A  (native, zero free params from P=u/3).
+    Phase 5 (boom==Cherenkov): Class A  (distinctive native unification).
+    -> FD05 overall: Class A/C  (native c/sqrt(3) + unification; ordinary
+       sound is a clean compressibility convergence).

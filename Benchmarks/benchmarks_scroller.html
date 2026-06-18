@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The SDT benchmark suite B01–B29 — what each benchmark was, what it showed, what was learned, and how the result was applied.">
+<title>The Benchmark Suite · Spatial Displacement Theory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- the live Tekne website stylesheet (single source of visual truth) -->
+<link rel="stylesheet" href="../Release/HTML_SDT_Website/style.css">
+<style>
+  /* ── Benchmark-specific components, built on the site's own tokens ──
+     All result chips + scoreboard render from BENCH[]/CHECKS[] below,
+     the verbatim captured output of benchmarks_b01_b25.cpp against
+     Engine/include/sdt/laws.hpp (MSVC, 62/73 pass, 0 genuine fail, 11 PENDING). */
+  .board{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--sp-md);margin:var(--sp-xl) 0}
+  .board .cell{padding:var(--sp-lg);border:1px solid var(--paper-edge);border-radius:4px;text-align:center;background:var(--paper)}
+  .board .big{font-family:'JetBrains Mono',monospace;font-size:var(--fs-2xl);font-weight:500;line-height:1}
+  .board .lbl{font-size:var(--fs-xs);color:var(--ink-muted);text-transform:uppercase;letter-spacing:.06em;margin-top:var(--sp-sm)}
+  @media(max-width:600px){.board{grid-template-columns:1fr 1fr}}
+
+  .bench{border:1px solid var(--paper-edge);border-left:3px solid var(--steel-light);border-radius:4px;
+         padding:var(--sp-lg);margin:var(--sp-md) 0;background:var(--paper);
+         transition:border-color var(--dur-med) var(--ease-out),box-shadow var(--dur-med) var(--ease-out)}
+  .bench:hover{border-color:var(--copper-light);box-shadow:0 2px 20px rgba(176,116,48,0.06)}
+  .bench.pend{border-left-color:#8b6cc1}
+  .bench-head{display:flex;align-items:baseline;flex-wrap:wrap;gap:var(--sp-sm);margin-bottom:var(--sp-xs)}
+  .bid{font-family:'JetBrains Mono',monospace;font-weight:500;color:var(--copper);font-size:var(--fs-base);letter-spacing:.02em}
+  .bench-head h4{font-family:'Source Serif 4','Georgia',serif;font-size:var(--fs-md);font-weight:600;
+                 color:var(--ink);margin:0;flex:1 1 55%;line-height:1.3}
+  .cert{font-family:'JetBrains Mono',monospace;font-size:0.625rem;letter-spacing:.06em;text-transform:uppercase;padding:2px 6px;border-radius:2px}
+  .cert--DERIVED{color:var(--steel);background:rgba(74,109,130,0.1)}
+  .cert--COMPUTED{color:var(--copper);background:var(--copper-glow)}
+  .cert--PENDING{color:#8b6cc1;background:rgba(139,108,193,0.1)}
+  .cert--OBSERVED,.cert--CALIBRATED{color:var(--copper);background:var(--copper-glow)}
+  .dom{font-family:'JetBrains Mono',monospace;font-size:0.625rem;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-faint)}
+  .result{font-family:'JetBrains Mono',monospace;font-size:var(--fs-xs);margin-left:auto;white-space:nowrap;color:var(--ink-muted)}
+  .result .ok{color:var(--steel)} .result .pe{color:#8b6cc1} .result .bad{color:var(--rose-code)}
+
+  dl.facets{display:grid;grid-template-columns:auto 1fr;gap:0 var(--sp-md);margin:var(--sp-md) 0 0;font-size:var(--fs-sm)}
+  dl.facets dt{font-family:'JetBrains Mono',monospace;font-size:0.625rem;text-transform:uppercase;letter-spacing:.05em;
+               color:var(--copper);padding-top:.55em;white-space:nowrap}
+  dl.facets dd{margin:0;padding:.4em 0;color:var(--ink-soft);border-bottom:1px solid var(--paper-edge);line-height:1.55}
+  dl.facets dd:last-child{border-bottom:none}
+  dl.facets dd b{color:var(--copper);font-weight:600}
+  @media(max-width:600px){dl.facets{grid-template-columns:1fr}dl.facets dt{padding-top:.7em;border-top:1px solid var(--paper-edge)}}
+
+  details.checks{margin-top:var(--sp-md);border-top:1px solid var(--paper-edge);padding-top:var(--sp-sm)}
+  details.checks summary{cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:var(--fs-xs);color:var(--ink-muted);list-style:none}
+  details.checks summary::-webkit-details-marker{display:none}
+  details.checks summary::before{content:"▸ ";color:var(--copper)}
+  details.checks[open] summary::before{content:"▾ "}
+  table.chk{width:100%;border-collapse:collapse;font-family:'JetBrains Mono',monospace;font-size:var(--fs-xs);margin-top:var(--sp-sm)}
+  table.chk td{padding:3px var(--sp-sm);border-bottom:1px solid var(--paper-edge);color:var(--ink-soft)}
+  table.chk tr:first-child td{color:var(--ink-faint);text-transform:uppercase;font-size:0.625rem;letter-spacing:.04em}
+  table.chk td:first-child{color:var(--ink-muted)}
+  table.chk td.n{text-align:right}
+  table.chk .pp{color:var(--steel)} table.chk .ff{color:var(--rose-code)}
+
+  .legend{font-family:'JetBrains Mono',monospace;font-size:var(--fs-sm);color:var(--ink-muted);display:grid;gap:var(--sp-xs);margin:var(--sp-lg) 0}
+  .legend b{color:var(--ink);font-weight:600}
+  .verdict-line{font-family:'JetBrains Mono',monospace;font-size:var(--fs-md);color:var(--ink);text-align:center;margin:var(--sp-xl) 0 0}
+  .verdict-line .num{color:var(--copper);font-weight:600}
+  .hero-tally{font-family:'JetBrains Mono',monospace;font-size:var(--fs-sm);color:var(--copper-light);margin-top:var(--sp-md)}
+</style>
+</head>
+<body>
+
+  <!-- ═══════════════════════ NAV ═══════════════════════ -->
+  <nav class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="#opening" class="nav__wordmark">Benchmark <span>Suite</span> · SDT</a>
+      <div class="nav__links" id="navLinks">
+        <a href="#grading" class="nav__link">How it grades</a>
+        <a href="#atomic" class="nav__link">Atomic</a>
+        <a href="#gravity" class="nav__link">Gravity</a>
+        <a href="#cosmo" class="nav__link">Cosmos</a>
+        <a href="#particle" class="nav__link">Particle</a>
+        <a href="#capstone" class="nav__link">Capstones</a>
+        <a href="#verdict" class="nav__link">Verdict</a>
+      </div>
+      <button type="button" class="nav__burger" id="navBurger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════ OPENING ═══════════════════════ -->
+  <section id="opening" class="opening">
+    <div class="opening__content">
+      <p class="opening__pretitle">The self-reporting suite — B01 through B29</p>
+      <h1 class="opening__title">Seventy-three numbers.<br>One header.<br><em>Zero free parameters.</em></h1>
+      <hr class="opening__rule">
+      <p class="opening__desc">Every claim in SDT must survive a single executable. The benchmark
+      suite pulls 73 measured quantities — from the hydrogen spectrum to a binary pulsar's decay —
+      out of one source file, <em>laws.hpp</em>, and grades each against experiment. This walkthrough
+      takes every benchmark in turn: what it was, what it was for, what it showed, what was learned,
+      what it meant, and how the result was applied.</p>
+      <p class="opening__author">James Christopher Tyndall — Melbourne, Australia</p>
+      <nav class="opening__nav" aria-label="Contents">
+        <a href="#grading" data-num="00">How it grades</a>
+        <a href="#atomic" data-num="I">Atomic</a>
+        <a href="#thermo" data-num="II">Thermodynamics</a>
+        <a href="#gravity" data-num="III">Gravity</a>
+        <a href="#cosmo" data-num="IV">Stellar &amp; Cosmos</a>
+        <a href="#particle" data-num="V">Particle &amp; Nuclear</a>
+        <a href="#universal" data-num="VI">Closures</a>
+        <a href="#capstone" data-num="VII">Capstones</a>
+        <a href="#verdict" data-num="08">Verdict</a>
+      </nav>
+      <p class="hero-tally" id="hero-tally"></p>
+    </div>
+    <a href="#grading" class="opening__scroll" aria-label="Scroll to begin">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 8l5 5 5-5"/></svg>
+    </a>
+  </section>
+
+  <!-- ═══════════════════════ HOW IT GRADES ═══════════════════════ -->
+  <section id="grading" class="chapter">
+    <div class="chapter__inner chapter__inner--wide reveal">
+      <div class="chapter__num">Method</div>
+      <h2 class="chapter__title">How the suite grades itself</h2>
+      <p class="chapter__lead">One file, five honesty labels, a self-falsifying scoreboard.</p>
+      <p>Each row computes an SDT value purely from <strong>laws.hpp</strong>, compares it to a
+      measured value, and passes only if the error sits under a pre-declared tolerance. Crucially,
+      the suite separates a <em>genuine regression</em> from a <em>known-open problem</em>: a PENDING
+      item that misses is flagged, not buried, and the program returns success only when zero
+      <em>genuine</em> failures remain.</p>
+      <div class="legend">
+        <div><b style="color:var(--steel)">DERIVED</b> — from the axioms, no external input beyond CODATA constants</div>
+        <div><b style="color:var(--copper)">COMPUTED</b> — a deterministic calculation through the Law framework</div>
+        <div><b style="color:var(--copper)">OBSERVED / CALIBRATED</b> — validated against data / one documented fitted parameter</div>
+        <div><b style="color:#8b6cc1">PENDING</b> — mechanism identified, SDT-native derivation not yet implemented (a flagged open item)</div>
+      </div>
+      <div class="board" id="board"></div>
+      <div class="aside">
+        <div class="aside__title">The one calibration</div>
+        <p>The whole suite leans on a single fitted peg — the hydrogen Coulomb force at the Bohr
+        radius, which sets the effective pressure P<sub>eff</sub>. Everything else is derived or
+        computed from there and the permitted constants. No benchmark is individually tuned to pass.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ ACT I — ATOMIC ═══════════════════════ -->
+  <section id="atomic" class="chapter chapter--alt">
+    <div class="chapter__inner chapter__inner--wide reveal">
+      <div class="chapter__num">Act I — Atomic structure</div>
+      <h2 class="chapter__title">The spectrum of hydrogen, from one rotation field</h2>
+      <p class="chapter__lead">The atom is SDT's cleanest proving ground: a single electron in the
+      proton's rotation field <em>v(r)=cα√(a₀/r)</em>, with the Rydberg constant forced by
+      {m<sub>e</sub>, c, α, h}.</p>
+      <div id="benches-atomic"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ ACT II — THERMO ═══════════════════════ -->
+  <section id="thermo" class="chapter">
+    <div class="chapter__inner chapter__inner--wide reveal">
+      <div class="chapter__num">Act II — Thermodynamics</div>
+      <h2 class="chapter__title">Blackbody constants and transport, from spation contact</h2>
+      <p class="chapter__lead">If light is the lattice's relay, the radiation constants and transport
+      scalings fall straight out of {ℏ, k<sub>B</sub>, c} — no kinetic-theory fudge factors.</p>
+      <div id="benches-thermo"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ ACT III — GRAVITY ═══════════════════════ -->
+  <section id="gravity" class="chapter chapter--alt">
+    <div class="chapter__inner chapter__inner--wide reveal">
+      <div class="chapter__num">Act III — Gravity &amp; orbits</div>
+      <h2 class="chapter__title">Newton, Einstein, and a pulsar — with no G and no M</h2>
+      <p class="chapter__lead">SDT replaces GM with the koppa length <em>ϟ = v²R/c²</em>. These rows
+      recover orbital velocity, Mercury's precession, light deflection and the Hulse–Taylor decay
+      from <em>v</em> and <em>R</em> alone.</p>
+      <div id="benches-gravity"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ ACT IV — STELLAR & COSMO ═══════════════════════ -->
+  <section id="cosmo" class="chapter">
+    <div class="chapter__inner chapter__inner--wide reveal">
+      <div class="chapter__num">Act IV — Stellar &amp; cosmological</div>
+      <h2 class="chapter__title">From a star's surface to the cosmic microwave background</h2>
+      <p class="chapter__lead">The same identity <em>zk²=1</em> that fixes an atom fixes a star; the
+      CMB redshift is a temperature ratio, not an expansion; flat rotation and the BAO scale are
+      geometric, not dark.</p>
+      <div id="benches-cosmo"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ ACT V — EM, PARTICLE, NUCLEAR ═══════════════════════ -->
+  <section id="particle" class="chapter chapter--alt">
+    <div class="chapter__inner chapter__inner--wide reveal">
+      <div class="chapter__num">Act V — Electromagnetic, particle &amp; nuclear</div>
+      <h2 class="chapter__title">The electron's moment, the proton's radius, the nucleus's binding</h2>
+      <p class="chapter__lead">Here the vortex topology earns its keep: the g-factor from the wake,
+      the proton radius from the <em>W+1</em> winding rule, beta-decay from the bare mass difference,
+      helium binding from occlusion geometry.</p>
+      <div id="benches-particle"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ ACT VI — CLOSURES ═══════════════════════ -->
+  <section id="universal" class="chapter">
+    <div class="chapter__inner chapter__inner--wide reveal">
+      <div class="chapter__num">Act VI — Universal closures</div>
+      <h2 class="chapter__title">The identities that stitch every scale together</h2>
+      <p class="chapter__lead">The load-bearing identities — the budget closure, the force and
+      pressure hierarchies — that let one mechanism span 33 orders of magnitude.</p>
+      <div id="benches-universal"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ ACT VII — CAPSTONES ═══════════════════════ -->
+  <section id="capstone" class="chapter chapter--alt">
+    <div class="chapter__inner chapter__inner--wide reveal">
+      <div class="chapter__num">Act VII — The investigation capstones</div>
+      <h2 class="chapter__title">Where the CQ investigations became benchmarks</h2>
+      <p class="chapter__lead">The newest rows are earned results folded back from the CQ
+      investigations: the trefoil's topology, c reconstructed from orbital geometry, the
+      depth-closure keystone <em>z=ϟ/r</em>, and a gravitational-wave chirp read as a length.</p>
+      <div id="benches-capstone"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ VERDICT ═══════════════════════ -->
+  <section id="verdict" class="chapter chapter--deep">
+    <div class="chapter__inner chapter__inner--wide reveal">
+      <div class="chapter__num">The verdict</div>
+      <h2 class="chapter__title">What the suite establishes — and what it still owes</h2>
+      <div class="board" id="board2"></div>
+      <p>The headline is not "everything passes." It is that across 73 independent quantities —
+      atomic, thermal, gravitational, stellar, cosmological, nuclear — <strong>nothing genuine is
+      broken</strong>, and the two things that miss are the same two the framework already names as
+      open problems.</p>
+      <div class="aside">
+        <div class="aside__title">The honest debts, kept on the wall</div>
+        <p><strong>B06 — multi-electron atoms.</strong> The hydrogenic (Z−σ)²/n² form with Slater
+        screening is not an SDT derivation and breaks down badly (errors up to ~500%). The
+        geometric-void electron model is the intended SDT route and isn't implemented yet. Logged
+        PENDING, never refit to pass.</p>
+        <p><strong>B11 — planetary oblateness J2.</strong> The uniform-fluid estimate imports GM
+        (against the no-G rule) and overshoots by 1.6×–3× because real planets are centrally
+        condensed. A J2 from the spation displacement-density profile is a would-be CQ. Logged
+        PENDING.</p>
+      </div>
+      <p>Those two are <em>why the labels exist.</em> A theory that can finish a derivation but can't
+      finish a contradiction keeps its unfinished derivations visible — and runs them on every build.</p>
+      <p class="verdict-line" id="verdict-line"></p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ FOOTER ═══════════════════════ -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__grid">
+        <div>
+          <div class="footer__brand-name">Benchmark <span>Suite</span> · SDT</div>
+          <p class="footer__brand-desc">Every result chip and the scoreboard render from BENCH[], the
+          captured output of Benchmarks/B01_B25/benchmarks_b01_b25.cpp compiled against
+          Engine/include/sdt/laws.hpp (MSVC, C++20). Recompile the suite and the numbers move with it.</p>
+        </div>
+        <div>
+          <div class="footer__heading">Acts</div>
+          <a class="footer__link" href="#atomic">Atomic</a>
+          <a class="footer__link" href="#gravity">Gravity</a>
+          <a class="footer__link" href="#cosmo">Cosmos</a>
+          <a class="footer__link" href="#particle">Particle</a>
+        </div>
+        <div>
+          <div class="footer__heading">Source</div>
+          <a class="footer__link" href="../Release/HTML_SDT_Website/index.html">SDT website</a>
+          <a class="footer__link" href="#grading">How it grades</a>
+          <a class="footer__link" href="#verdict">Verdict</a>
+        </div>
+        <div>
+          <div class="footer__heading">Status</div>
+          <a class="footer__link" href="#verdict" id="footer-status" aria-label="suite status">—</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>Spatial Displacement Theory · Benchmark Suite B01–B29</span>
+        <span>James Christopher Tyndall · Melbourne</span>
+      </div>
+    </div>
+  </footer>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════════
+   BENCH[] — verbatim captured output of the suite (62/73 pass, 0 genuine
+   fail, 11 PENDING). Each benchmark: id, domain, cert, facets, checks.
+   check = [name, sdt, exp, errPct, tolPct]. pass = errPct <= tolPct.
+   ═══════════════════════════════════════════════════════════════════ */
+const BENCH = [
+{id:'B01',dom:'Atomic',cert:'DERIVED',title:'Hydrogen energy levels & the Balmer series',
+ facets:{
+  was:'The hydrogen energy ladder <b>E_n = −Ry/n²</b> and the four visible Balmer lines (Hα–Hδ).',
+  for:'To check that SDT’s rotation-field states reproduce the textbook spectrum with no quantised-orbit postulate.',
+  showed:'All eight quantities within <b>0.06%</b> — energies to ~0.05%, wavelengths to ~0.025%.',
+  learned:'The Rydberg ladder is geometry, not a fit: it comes from <b>R∞ = m_e c α²/2h</b> rebuilt from invariants.',
+  meant:'The single most-tested object in physics falls straight out of one velocity law.',
+  applied:'Becomes <b>atomic::rydberg_energy_eV</b> and the CQ12 velocity-state chain — the base every other atomic row builds on.'}},
+{id:'B02',dom:'Atomic',cert:'DERIVED',title:'Rydberg precision in hydrogen-like ions',
+ facets:{
+  was:'The Lyman-α lines of He⁺ (Z=2) and Li²⁺ (Z=3).',
+  for:'To verify the <b>Z²</b> scaling of the velocity law away from hydrogen.',
+  showed:'30.376 nm vs 30.378 and 13.500 vs 13.502 — under <b>0.013%</b>.',
+  learned:'The field does not care which nucleus sits at the centre, only its charge: <b>v_n = Zαc/n</b>.',
+  meant:'One law covers the whole isoelectronic sequence, deep into the extreme ultraviolet.',
+  applied:'Anchors the CQ12 H-like emission engine (<b>emission_wavelength_m</b>, &lt;263 ppm to Z=30).'}},
+{id:'B03',dom:'Atomic',cert:'DERIVED',title:'Fine structure & the ground-state velocity',
+ facets:{
+  was:'The H 2P fine-structure splitting and the check that the ground-state circulation equals <b>αc</b>.',
+  for:'To test the first relativistic correction — the movement-budget z-term — and the velocity anchor.',
+  showed:'Splitting to <b>0.006%</b>; v(1,1) ≡ αc to machine precision.',
+  learned:'Fine structure is the next term of the same budget <b>z=(v/c)²=(Zα)²</b>, with the j-level factor ½ — not a new constant.',
+  meant:'The "fine structure constant" is just the ground-state speed ratio; the splitting is its square.',
+  applied:'Feeds <b>atomic::fine_structure_eV</b> (Sommerfeld α²Z²/n) and the residual story of CQ12.'}},
+{id:'B04',dom:'Atomic',cert:'COMPUTED',title:'The Lamb shift, from the quadrupole wake',
+ facets:{
+  was:'The H 2S–2P splitting, ~1058 MHz.',
+  for:'To replace a former <em>fitted</em> α⁵ formula with a parameter-free SDT mechanism.',
+  showed:'The native CQ38 candidate <b>1051.8 MHz</b> vs measured 1057.85 — <b>0.57%</b>, no tuning.',
+  learned:'The shift is the ℓ=2 quadrupole harmonic of the proton’s trefoil wake acting at a₀ — geometry, not a renormalised loop.',
+  meant:'A quantity long held up as proof of a fluctuating vacuum gets a clean mechanical origin.',
+  applied:'Lives in <b>law_VI::angular::lamb_shift_native_MHz</b>; class C, the active SDT candidate.'}},
+{id:'B05',dom:'Atomic',cert:'DERIVED',title:'Hyperfine structure — the 21 cm line',
+ facets:{
+  was:'The famous neutral-hydrogen 21 cm line, 1420.4 MHz.',
+  for:'To test the proton–electron magnetic coupling through the measured proton moment.',
+  showed:'<b>1421.2 MHz</b> — within <b>0.053%</b>.',
+  learned:'The coupling is <b>(8/3)α²(m_e/m_p)·Ry·g_p</b>; the proton g-factor enters as a measured wake property.',
+  meant:'The line that maps the entire neutral universe is a one-line consequence of the framework.',
+  applied:'Validates the proton magnetic moment as the ℓ=2 wake amplitude used across the nuclear rows.'}},
+{id:'B06',dom:'Atomic',cert:'PENDING',title:'Multi-electron ionisation — the hard problem',
+ facets:{
+  was:'First ionisation energies of He through Ne via hydrogenic <b>(Z−σ)²/n²</b> with Slater screening.',
+  for:'To probe how far the one-electron picture stretches into many-electron atoms.',
+  showed:'It does not: errors run from 6% (Li) to <b>~500%</b> (O,F,Ne). 9/9 fail — and are flagged, not hidden.',
+  learned:'Empirical screening is not an SDT derivation, and the hydrogenic form is the wrong model once electrons share a slot.',
+  meant:'Atoms are genuinely the hard problem; the honest move is to label it PENDING, not refit σ to pass.',
+  applied:'Marks the open frontier the CQ13 drag-factor work and the geometric-void electron model are built to close.'}},
+{id:'B07',dom:'Thermo',cert:'DERIVED',title:'Blackbody constants — Stefan–Boltzmann & Wien',
+ facets:{
+  was:'The Stefan–Boltzmann constant σ and the Wien displacement law.',
+  for:'To check the radiation constants emerge from <b>{ℏ,k_B,c}</b> alone.',
+  showed:'σ exact to printed precision; Wien to <b>0.001%</b>.',
+  learned:'Thermal radiation is bookkeeping on the lattice relay — no extra thermodynamic input is needed.',
+  meant:'The same constants that set the CMB pressure set every blackbody — one medium, one ledger.',
+  applied:'Underwrites <b>law_I::u_CMB</b> and the CMB-pressure chain (P_conv) used by gravity and cosmology.'}},
+{id:'B08',dom:'Gravity',cert:'DERIVED',title:'Orbital mechanics without G or M',
+ facets:{
+  was:'Earth’s orbital velocity and the solar <b>GM</b>, from the koppa law.',
+  for:'To show gravity needs only <b>v</b> and <b>R</b>: <b>v(r)=(c/k)√(R/r)</b>.',
+  showed:'29 789 m/s (0.02%) and GM_Sun to <b>0.04%</b> — with GM appearing only as an output.',
+  learned:'<b>GM ≡ c²R/k²</b> is a derived convenience, not a fundamental product.',
+  meant:'The gravitational constant is demoted from input to consequence.',
+  applied:'<b>bridge::v_orbital</b> / <b>GM_equivalent</b> — the spine of every planetary and stellar row.'}},
+{id:'B09',dom:'Gravity',cert:'DERIVED',title:'Binary pulsar decay — Hulse–Taylor',
+ facets:{
+  was:'The orbital-period decay rate of PSR B1913+16.',
+  for:'To test gravitational radiation as pressure-wave emission from an orbiting occlusion pair.',
+  showed:'<b>−2.4029×10⁻¹² s/s</b> vs observed −2.4025 — <b>0.017%</b>, matching the GR quadrupole.',
+  learned:'"Moving the sea, not making waves": the same quadrupole formula follows from convergence loss.',
+  meant:'The first evidence for gravitational waves is reproduced without spacetime curvature.',
+  applied:'Sets up the CQ44 gravitational-wave-as-length treatment (B29).'}},
+{id:'B10',dom:'Gravity',cert:'DERIVED',title:'Strong field — Mercury precession & light bending',
+ facets:{
+  was:'Mercury’s perihelion precession (42.98″/century) and solar light deflection (1.7505″).',
+  for:'To recover the two classic tests of general relativity from depth, not metric.',
+  showed:'42.99″ (0.03%) and 1.752″ (0.07%).',
+  learned:'Precession is <b>6πz</b> per orbit and bending is <b>2·(depth gradient)</b> — both read off <b>z=v²/c²</b>.',
+  meant:'Einstein’s solar-system triumphs are consequences of the convergence depth field.',
+  applied:'Mercury’s precession later runs <em>backwards</em> in B27 to reconstruct c itself.'}},
+{id:'B11',dom:'Gravity',cert:'PENDING',title:'Planetary oblateness J2 — the GM import',
+ facets:{
+  was:'Earth and Jupiter’s gravitational quadrupole J2 from the uniform-fluid (Maclaurin) estimate.',
+  for:'A coarse spin-flattening check across two very different planets.',
+  showed:'Overshoots by <b>1.6×</b> (Earth) and <b>3×</b> (Jupiter) — 2/2 fail, flagged.',
+  learned:'The uniform-fluid form imports <b>GM</b> and ignores central condensation; it is a textbook estimate, not SDT.',
+  meant:'A real J2 needs the spation displacement-density profile — an open derivation, kept visible.',
+  applied:'Logged PENDING as a would-be CQ; not removed, not fudged.'}},
+{id:'B12',dom:'Stellar',cert:'DERIVED',title:'Stellar structure — zk²=1 across five stars',
+ facets:{
+  was:'The budget closure <b>z·k²=1</b> at the surface of the Sun, Sirius A, α Cen A, Procyon A and Vega.',
+  for:'To show the movement-budget identity is scale-free — atoms and stars obey the same law.',
+  showed:'Exactly <b>1.000000</b> for all five (it is algebraic).',
+  learned:'<b>z=(v/c)²</b> and <b>k=c/v</b> multiply to one by construction, at every scale.',
+  meant:'One conservation law threads the atomic, stellar and galactic regimes onto a single budget.',
+  applied:'The closure check (<b>bridge::zk2_product</b>) is the integrity assertion of the whole galactic engine.'}},
+{id:'B13',dom:'Cosmology',cert:'DERIVED',title:'CMB redshift as a temperature ratio',
+ facets:{
+  was:'The recombination redshift, z ≈ 1089.',
+  for:'To derive z from the lattice temperature drop, not metric expansion.',
+  showed:'<b>z = T_rec/T_CMB − 1 = 1099.7</b> — within <b>1%</b>.',
+  learned:'Redshift here is a ruler comparison (CQ46 octaves), set by the temperature ratio between epochs.',
+  meant:'No expansion is invoked; the CMB is the already-arrived residue of the Clearing.',
+  applied:'Grounds the Release-Cascade cosmology and the pressure-gradient (not Doppler) redshift picture.'}},
+{id:'B14',dom:'Galactic',cert:'COMPUTED',title:'Galactic rotation — the flat-onset radius',
+ facets:{
+  was:'The flat-rotation onset rule <b>R_flat ≈ 2.5 R_d</b> across four disk galaxies.',
+  for:'A coarse single-ratio check of where rotation curves go flat.',
+  showed:'All four within <b>4.2%</b> (against an honest 12% bar).',
+  learned:'The onset radius is geometric; the full curve is fit properly in E46/M4 (SPARC, RMS 23.8%) — no dark matter.',
+  meant:'Flat rotation is convergence geometry, not missing mass.',
+  applied:'The full mechanism lives in <b>galactic.hpp</b> (interior/exterior koppa, bar streak, CMB self-lensing).'}},
+{id:'B15',dom:'Cosmology',cert:'COMPUTED',title:'The BAO scale',
+ facets:{
+  was:'The baryon-acoustic sound horizon, ~147 Mpc.',
+  for:'To place the standard cosmological ruler as a lattice pressure-wave length.',
+  showed:'<b>147 Mpc</b> vs 147.09 — <b>0.06%</b>.',
+  learned:'The horizon is <b>c_s·t</b> with <b>c_s=c/√3</b> in the coupled lattice — a real equilibrium length.',
+  meant:'The BAO ruler is the lattice’s own elasticity scale, not a relic of inflation.',
+  applied:'Sits in <b>cosmology::bao</b> alongside the stellar pressure domains (same √(L/4πF) form).'}},
+{id:'B16',dom:'Thermo',cert:'DERIVED',title:'Transport scaling — the T^½ law',
+ facets:{
+  was:'Thermal conductivity, viscosity and diffusivity all scaling as <b>T^0.5</b>.',
+  for:'To test the contact-shunt transport mechanics of the medium.',
+  showed:'Exponent <b>0.500</b> for all three (R²=1.0000).',
+  learned:'Transport is set by spation contact rate, which scales as √T — no mean-free-path tuning.',
+  meant:'A single mechanical picture replaces three separate kinetic-theory derivations.',
+  applied:'Confirms the contact-mechanics reading of the medium used in the thermodynamic sector.'}},
+{id:'B17',dom:'EM',cert:'DERIVED',title:'The electron g-factor',
+ facets:{
+  was:'The electron magnetic g-factor, 2.00232.',
+  for:'To get the leading anomaly from vortex geometry.',
+  showed:'<b>g = 2(1+α/2π) = 2.00232</b> — within <b>0.0002%</b>.',
+  learned:'The Schwinger term is the first wake correction to the bare g=2 of a circulating vortex.',
+  meant:'The most precisely measured number in physics is reached at leading order from geometry.',
+  applied:'Validates the wake-multipole picture (ℓ=2) that CQ38/CQ14 build the magnetic moment on.'}},
+{id:'B18',dom:'Nuclear',cert:'DERIVED',title:'The proton radius — the W+1 rule',
+ facets:{
+  was:'The proton charge radius, the effective winding, and the He-4 radius.',
+  for:'To test the conjecture <b>R_p=(W+1)ℏ/m_p c</b> for the W=3 trefoil.',
+  showed:'R_p to <b>0.02%</b>, W_eff = 3.001, and R_He = 2R_p to 0.44%.',
+  learned:'The proton radius is a winding quantum: four reduced Compton wavelengths for a trefoil.',
+  meant:'A measured input becomes (nearly) a topological prediction — the smallest scale earns its number.',
+  applied:'<b>winding::R_p_predicted</b>; the W=3 trefoil anchors CQ11/CQ14/CQ17.'}},
+{id:'B19',dom:'Nuclear',cert:'DERIVED',title:'Beta-decay Q-value',
+ facets:{
+  was:'The energy released in free-neutron beta decay, 0.782 MeV.',
+  for:'A pure mass-difference check: <b>Q=(m_n−m_p−m_e)c²</b>.',
+  showed:'<b>0.7823 MeV</b> — within <b>0.04%</b>.',
+  learned:'The endpoint is bare rest-energy bookkeeping; no weak coupling constant is needed for the Q-value.',
+  meant:'Nuclear energetics start from the same E=mc² the movement budget derives.',
+  applied:'Supports the Atomicus reading of the neutron as an exposed triton remnant (nuclear grammar).'}},
+{id:'B20',dom:'Universal',cert:'DERIVED',title:'zk²=1 universality',
+ facets:{
+  was:'The budget closure for hydrogen and for Earth’s orbit, side by side.',
+  for:'To show one identity binds the atomic and the planetary in the same equation.',
+  showed:'Both exactly <b>1.000000</b>.',
+  learned:'Hydrogen (v=αc) and Earth (v=29.8 km/s) are two rungs of one ladder; the product is always one.',
+  meant:'There is no separate "atomic" and "gravitational" law — only the movement budget at different speeds.',
+  applied:'The k-hierarchy (<b>bridge</b>) uses zk²=1 as its defining closure across all scales.'}},
+{id:'B21',dom:'Universal',cert:'COMPUTED',title:'The force hierarchy',
+ facets:{
+  was:'The electromagnetic-to-gravitational force ratio between a proton and electron, ~10³⁹.',
+  for:'To check the famous hierarchy is geometric, not a fine-tuned coupling.',
+  showed:'<b>2.269×10³⁹</b> vs 2.27×10³⁹ — within <b>0.05%</b>.',
+  learned:'The ratio is the charge cross-section over the displacement cross-section — same ocean, different shadows.',
+  meant:'The "why is gravity so weak" puzzle becomes a statement about two occlusion areas.',
+  applied:'Frames the CQ01 transfer-function audit and the occlusion force law (law_III).'}},
+{id:'B22',dom:'Universal',cert:'COMPUTED',title:'The pressure hierarchy',
+ facets:{
+  was:'The effective pressure <b>P_eff</b>, the transfer function <b>f</b>, and the CMB pressure — spanning 45 orders.',
+  for:'To trace the single convergence pressure from the Planck scale down to the nuclear coupling.',
+  showed:'P_eff 5.225×10³¹ Pa, f 2.123×10⁻¹⁷, P_CMB 1.392×10⁻¹⁴ Pa — all under <b>0.08%</b>.',
+  learned:'One pressure, geometrically reduced, sets every force; <b>f=P_eff/P_conv</b> is the bridge (CQ01).',
+  meant:'The 33-orders pressure ladder is one quantity seen at different magnifications.',
+  applied:'<b>law_III::P_eff / f_transfer</b> — the calibrated peg the whole force sector hangs on.'}},
+{id:'B23',dom:'Universal',cert:'DERIVED',title:'The Coulomb coupling identity',
+ facets:{
+  was:'The identity <b>k_e e² = αℏc</b>.',
+  for:'To express the electric coupling in the framework’s own constants.',
+  showed:'Both sides 2.30708×10⁻²⁸ J·m — exact.',
+  learned:'Charge enters force only as the product k_e e²; neither piece is separately fundamental. (This is α’s definition — an identity, flagged as such in the engine.)',
+  meant:'The electric coupling is the fine-structure constant in disguise — one number, not two.',
+  applied:'Lets <b>coulomb_identity</b> and law_III write every force law in α, ℏ, c.'}},
+{id:'B24',dom:'Particle',cert:'COMPUTED',title:'Exclusion volumes & marginal stability',
+ facets:{
+  was:'The displaced volumes <b>V_disp</b> of electron and proton, their ratio, and the stability identity.',
+  for:'To test mass as throughput cost: <b>m=ΦV_disp/3ℓ_P³c²</b>, and that the vortex sits at marginal stability.',
+  showed:'V_e, V_p to 0.07%, ratio ≡ m_p/m_e exactly, and <b>P_cf=P_conv/3</b> exactly.',
+  learned:'Mass is the convergence-reorganisation cost of an exclusion volume; the ½-budget equality is a stable equilibrium.',
+  meant:'Inertial and gravitational mass are one quantity — the same V_disp from two frames.',
+  applied:'<b>law_IV::V_disp_e / V_disp_p</b>; the marginal-stability identity underpins the whole mass law.'}},
+{id:'B25',dom:'Nuclear',cert:'COMPUTED',title:'Alpha-cluster binding — helium-4',
+ facets:{
+  was:'The helium-4 binding energy (variational and exact) and its charge radius.',
+  for:'To show the occlusion force reproduces the standard Coulomb Hamiltonian exactly.',
+  showed:'−77.49 eV (1-parameter, 1.9%), −79.005 eV (exact), R_He=2R_p to 0.44%.',
+  learned:'Because occlusion ≡ Coulomb, helium binding is identical to QM at every order — no new parameter.',
+  meant:'The nucleus is alpha-clustered geometry; the same number falls out without importing a field.',
+  applied:'Confirms the Atomicus alpha-grammar (<b>nuclear.hpp</b>: He-4 = 2R_p, golden boundary).'}},
+{id:'B26',dom:'Particle',cert:'DERIVED',title:'Trefoil topology (CQ02 · CQ14 · CQ17)',
+ facets:{
+  was:'The proton’s (2,3) budget closure, its superluminal surface phase velocity, and m_p/m_e from topology.',
+  for:'To fold three resolved investigations into one falsifiable row.',
+  showed:'Budget ≡ 1, <b>v_phase=1.830c</b> (0.01%), <b>m_p/m_e=6π⁵</b> (0.002%).',
+  learned:'The proton is a trefoil: its mode partition, its traction (1.83c demand) and its mass are all topology.',
+  meant:'Particle identity is knot identity — the heaviest stable structure is the simplest stable knot.',
+  applied:'<b>law_VI::topology / traction / mass_ratio</b> — the CQ02/14/17 results, now benchmarked.'}},
+{id:'B27',dom:'Gravity',cert:'DERIVED',title:'c from orbital geometry (CQ24)',
+ facets:{
+  was:'The Sun’s speed ratio k from Mercury’s precession, and c reconstructed from it.',
+  for:'The headline closure: derive the speed of light as an <em>output</em>, with no c or GM fed in.',
+  showed:'k_Sun=686.4 (0.02%) and <b>c=2.99795×10⁸ m/s</b> — within <b>0.001%</b>.',
+  learned:'Precession encodes the koppa geometry; running it backward yields c from pure orbital observables.',
+  meant:'The speed of light is not assumed — it is recoverable from a planet’s slow turn.',
+  applied:'<b>bridge::c_from_closure</b> — a self-consistency keystone of the k-hierarchy.'}},
+{id:'B28',dom:'Gravity',cert:'COMPUTED',title:'The depth-closure theorem (CQ15 · CQ43)',
+ facets:{
+  was:'The solar gravitational redshift as displacement depth, and the one bound-motion law.',
+  for:'To test the keystone <b>z=ϟ/r</b>: redshift, clock rate and light speed are one quantity.',
+  showed:'Solar redshift ≡ depth z_Sun to <b>0.03%</b>; Earth v=c√(ϟ/r) to 0.02%.',
+  learned:'Gravitational redshift is depth at emission, not slowing in a well — one law spans ~15 orders.',
+  meant:'Depth = closure deficit = light-speed deficit: a single field behind redshift, Shapiro delay and orbits.',
+  applied:'<b>depth_closure</b> — the capstone namespace unifying CQ15/16/24/26/42/43.'}},
+{id:'B29',dom:'Gravity',cert:'COMPUTED',title:'Gravitational-wave chirp as a length (CQ44)',
+ facets:{
+  was:'The GW150914 inspiral frequency at the innermost stable orbit.',
+  for:'To read a chirp as a koppa length, with no G or M in the dynamics.',
+  showed:'<b>f_isco = 67.6 Hz</b> vs ~68 — within <b>0.54%</b> (a ±15% gate).',
+  learned:'The combined c-boundary ϟ_tot ≈ 96 km sets the frequency: <b>f=c/(π·6^{3/2}·ϟ_tot)</b>.',
+  meant:'LIGO is a koppa-meter; the chirp is geometry, not a mass measurement.',
+  applied:'<b>bridge::f_GW_isco</b> — the CQ44 gravitational-wave investigation, benchmarked.'}},
+];
+
+const GROUPS = {
+  'benches-atomic':    ['B01','B02','B03','B04','B05','B06'],
+  'benches-thermo':    ['B07','B16'],
+  'benches-gravity':   ['B08','B09','B10','B11'],
+  'benches-cosmo':     ['B12','B13','B14','B15'],
+  'benches-particle':  ['B17','B18','B19','B23','B24','B25'],
+  'benches-universal': ['B20','B21','B22'],
+  'benches-capstone':  ['B26','B27','B28','B29'],
+};
+
+const CHECKS = {
+ B01:[['H n=1 [eV]',-13.6057,-13.5984,0.0536,0.08],['H n=2 [eV]',-3.40142,-3.3996,0.0536,0.08],
+      ['H n=3 [eV]',-1.51174,-1.5109,0.0558,0.08],['H n=4 [eV]',-0.850356,-0.8499,0.0536,0.08],
+      ['Balmer 3→2 [nm]',656.112,656.281,0.0257,0.08],['Balmer 4→2 [nm]',486.009,486.135,0.0259,0.08],
+      ['Balmer 5→2 [nm]',433.937,434.047,0.0254,0.08],['Balmer 6→2 [nm]',410.07,410.174,0.0253,0.08]],
+ B02:[['He⁺ Lyman-α [nm]',30.3756,30.378,0.0080,0.08],['Li²⁺ Lyman-α [nm]',13.5003,13.502,0.0129,0.08]],
+ B03:[['2P fine-structure [eV]',4.52826e-5,4.528e-5,0.0057,1.0],['Bohr v(1,1)=αc [m/s]',2.18769e6,2.18769e6,0.0000,0.001]],
+ B04:[['2S–2P Lamb [MHz]',1051.8,1057.85,0.5714,1.0]],
+ B05:[['hyperfine 21cm [MHz]',1421.16,1420.4,0.0531,0.08]],
+ B06:[['He ionisation [eV]',39.3205,24.587,59.92,5.0],['Li ionisation [eV]',5.74841,5.392,6.61,5.0],
+      ['Be ionisation [eV]',12.9339,9.323,38.73,5.0],['B ionisation [eV]',19.5922,8.298,136.1,5.0],
+      ['C ionisation [eV]',35.9275,11.26,219.1,5.0],['N ionisation [eV]',58.581,14.534,303.1,5.0],
+      ['O ionisation [eV]',80.01,13.618,487.5,5.0],['F ionisation [eV]',104.772,17.423,501.3,5.0],
+      ['Ne ionisation [eV]',128.65,21.565,496.6,5.0]],
+ B07:[['Stefan–Boltzmann [W/m²K⁴]',5.67037e-8,5.67037e-8,0.0000,0.001],['Wien [m·K]',0.00289777,0.0028978,0.0011,0.01]],
+ B08:[['Earth v_orbital [m/s]',29788.9,29783,0.0199,0.08],['GM_Sun [m³/s²]',1.3275e20,1.327e20,0.0379,0.5]],
+ B09:[['Hulse–Taylor dP/dt [s/s]',-2.4029e-12,-2.4025e-12,0.0166,0.2]],
+ B10:[['Mercury precession [″/c]',42.9914,42.98,0.0265,0.5],['Solar deflection [″]',1.75169,1.7505,0.0680,0.5]],
+ B11:[['Earth J2 (uniform-fluid)',0.00172484,0.0010826,59.32,3.0],['Jupiter J2 (uniform-fluid)',0.0445876,0.014736,202.6,3.0]],
+ B12:[['Sun zk²',1,1,0.0000,0.001],['Sirius A zk²',1,1,0.0000,0.001],['α Cen A zk²',1,1,0.0000,0.001],
+      ['Procyon A zk²',1,1,0.0000,0.001],['Vega zk²',1,1,0.0000,0.001]],
+ B13:[['CMB redshift z',1099.72,1089,0.9840,1.0]],
+ B14:[['Milky Way R_flat [kpc]',6.25,6,4.17,12.0],['NGC 3198 R_flat [kpc]',7,7.2,2.78,12.0],
+      ['NGC 2403 R_flat [kpc]',4.5,4.4,2.27,12.0],['M33 R_flat [kpc]',4,4,0.00,12.0]],
+ B15:[['BAO sound horizon [Mpc]',147,147.09,0.0612,3.0]],
+ B16:[['thermal cond. exponent',0.5,0.5,0.0000,0.05],['viscosity exponent',0.5,0.5,0.0000,0.05],['diffusivity exponent',0.5,0.5,0.0000,0.05]],
+ B17:[['electron g-factor',2.00232,2.00232,0.0002,0.12]],
+ B18:[['R_p (W+1) [m]',8.41236e-16,8.414e-16,0.0195,0.08],['W_eff (→3)',3.00078,3.0,0.0261,0.08],['He-4 = 2R_p [m]',1.6828e-15,1.6755e-15,0.4357,0.5]],
+ B19:[['β-decay Q [MeV]',0.782333,0.782,0.0426,0.08]],
+ B20:[['Hydrogen zk²',1,1,0.0000,0.001],['Earth orbit zk²',1,1,0.0000,0.001]],
+ B21:[['EM/grav force ratio',2.26876e39,2.27e39,0.0545,1.0]],
+ B22:[['P_eff [Pa]',5.22521e31,5.225e31,0.0040,0.5],['f = P_eff/P_conv',2.12336e-17,2.125e-17,0.0772,1.0],['P_CMB [Pa]',1.39159e-14,1.391e-14,0.0427,1.0]],
+ B23:[['k_e·e² [J·m]',2.30708e-28,2.30708e-28,0.0000,0.001]],
+ B24:[['V_disp(e) [m³]',9.98094e-62,9.988e-62,0.0707,0.08],['V_disp(p) [m³]',1.83265e-58,1.834e-58,0.0734,0.08],
+      ['V_p/V_e = m_p/m_e',1836.15,1836.15,0.0000,0.001],['P_cf/(P_conv/3)',1,1,0.0000,0.001]],
+ B25:[['He binding variational [eV]',-77.4887,-79.005,1.9193,2.0],['He binding exact [eV]',-79.0052,-79.005,0.0003,0.001],['R_He=2R_p [fm]',1.6828,1.6755,0.4357,0.5]],
+ B26:[['(2,3) budget vT²+vP²=c²',1,1,0.0000,0.001],['v_phase [c]',1.83016,1.83,0.0088,0.5],['m_p/m_e = 6π⁵',1836.12,1836.15,0.0019,0.01]],
+ B27:[['k_Sun from precession',686.404,686.3,0.0151,0.5],['c from closure [m/s]',2.99795e8,2.99792e8,0.0009,0.01]],
+ B28:[['Solar redshift = depth',2.12311e-6,2.1225e-6,0.0286,0.1],['Earth v=c√(ϟ/r) [m/s]',29788.9,29783,0.0199,0.08]],
+ B29:[['GW150914 f_isco [Hz]',67.6352,68,0.5365,5.0]],
+};
+
+const fmt = x => {
+  const a=Math.abs(x);
+  if(x===0) return '0';
+  if(a>=1e4||a<1e-3) return x.toExponential(4);
+  return (Math.round(x*1e6)/1e6).toString();
+};
+function bstats(id){
+  const c=CHECKS[id]||[]; let pass=0,worst=0;
+  c.forEach(([,,,err,tol])=>{ if(err<=tol) pass++; if(err>worst) worst=err; });
+  return {n:c.length,pass,worst};
+}
+function renderBench(b){
+  const st=bstats(b.id), pend=(b.cert==='PENDING');
+  const art=document.createElement('article');
+  art.className='bench'+(pend?' pend':''); art.id=b.id;
+  const allpass=st.pass===st.n;
+  const resClass=allpass?'ok':(pend?'pe':'bad');
+  const resTxt=`${st.pass}/${st.n} ${allpass?'PASS':(pend?'PENDING':'FAIL')} · worst ${st.worst.toFixed(st.worst<1?2:1)}%`;
+  let rows='';
+  (CHECKS[b.id]||[]).forEach(([nm,sdt,exp,err,tol])=>{
+    const ok=err<=tol;
+    rows+=`<tr><td>${nm}</td><td class="n">${fmt(sdt)}</td><td class="n">${fmt(exp)}</td>`+
+          `<td class="n ${ok?'pp':'ff'}">${err.toFixed(err<1?3:1)}%</td><td class="n">${tol}%</td></tr>`;
+  });
+  art.innerHTML =
+    `<div class="bench-head"><span class="bid">${b.id}</span>`+
+    `<h4>${b.title}</h4>`+
+    `<span class="dom">${b.dom}</span><span class="cert cert--${b.cert}">${b.cert}</span>`+
+    `<span class="result ${resClass}">${resTxt}</span></div>`+
+    `<dl class="facets">`+
+    `<dt>What it was</dt><dd>${b.facets.was}</dd>`+
+    `<dt>What it was for</dt><dd>${b.facets.for}</dd>`+
+    `<dt>What it showed</dt><dd>${b.facets.showed}</dd>`+
+    `<dt>What was learned</dt><dd>${b.facets.learned}</dd>`+
+    `<dt>What it meant</dt><dd>${b.facets.meant}</dd>`+
+    `<dt>How it’s applied</dt><dd>${b.facets.applied}</dd>`+
+    `</dl>`+
+    `<details class="checks"><summary>${st.n} measured check${st.n>1?'s':''}</summary>`+
+    `<table class="chk"><tr><td>quantity</td><td class="n">SDT</td><td class="n">measured</td>`+
+    `<td class="n">err</td><td class="n">tol</td></tr>${rows}</table></details>`;
+  return art;
+}
+Object.entries(GROUPS).forEach(([cid,ids])=>{
+  const host=document.getElementById(cid); if(!host) return;
+  ids.forEach(id=>{ const b=BENCH.find(x=>x.id===id); if(b) host.appendChild(renderBench(b)); });
+});
+
+function tally(){
+  let total=0,passed=0,realFail=0,pendFail=0;
+  BENCH.forEach(b=>{ (CHECKS[b.id]||[]).forEach(([,,,err,tol])=>{
+    total++; if(err<=tol) passed++; else (b.cert==='PENDING'?pendFail++:realFail++);
+  });});
+  return {total,passed,realFail,pendFail};
+}
+function paintBoard(elId){
+  const t=tally(), el=document.getElementById(elId); if(!el) return;
+  const cells=[
+    [`${t.passed}/${t.total}`,'checks passed','var(--steel)'],
+    [`${(100*t.passed/t.total).toFixed(1)}%`,'pass rate','var(--copper)'],
+    [`${t.realFail}`,'genuine failures',t.realFail?'var(--rose-code)':'var(--steel)'],
+    [`${t.pendFail}`,'PENDING (flagged open)','#8b6cc1'],
+  ];
+  el.innerHTML=cells.map(([big,lbl,col])=>
+    `<div class="cell"><div class="big" style="color:${col}">${big}</div><div class="lbl">${lbl}</div></div>`).join('');
+}
+paintBoard('board'); paintBoard('board2');
+(()=>{ const t=tally();
+  const h=document.getElementById('hero-tally');
+  if(h) h.textContent=`${t.passed}/${t.total} pass · ${t.realFail} genuine fail · ${t.pendFail} PENDING`;
+  const v=document.getElementById('verdict-line');
+  if(v) v.innerHTML=`<span class="num">${t.passed}/${t.total}</span> verified · `+
+     `${t.realFail} genuine failures · ${t.pendFail} open problems, on the wall`;
+  const f=document.getElementById('footer-status');
+  if(f) f.textContent=`${t.passed}/${t.total} pass · ${t.pendFail} PENDING`;
+})();
+
+/* ── site-style behaviours: nav scroll, burger, reveal ── */
+(()=>{
+  const nav=document.getElementById('nav');
+  if(nav) addEventListener('scroll',()=>nav.classList.toggle('nav--scrolled',scrollY>60),{passive:true});
+  const burger=document.getElementById('navBurger'), links=document.getElementById('navLinks');
+  if(burger&&links) burger.addEventListener('click',()=>{
+    links.style.display = (links.style.display==='flex') ? '' : 'flex';
+    links.style.flexDirection='column';
+  });
+  const revealObs=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){
+      e.target.classList.add(e.target.classList.contains('reveal-stagger')?'reveal-stagger--visible':'reveal--visible');
+      revealObs.unobserve(e.target);
+    }});
+  },{threshold:0.08,rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.reveal, .reveal-stagger').forEach(el=>revealObs.observe(el));
+})();
+</script>
+</body>
+</html>

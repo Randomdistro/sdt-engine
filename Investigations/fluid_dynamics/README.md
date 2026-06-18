@@ -51,6 +51,33 @@ FD01  Navier–Stokes from spation relay        ← the FD root (rests on ROOT-S
 | **FD10** | Vortex Shedding & Strouhal | lattice relaxation / traction oscillation (CQ41 gear-frequency) | St=fD/U≈0.2 plateau; f∝U/D; lock-in |
 | **FD11** | Tesla Steam Generator *(applied capstone)* | bladeless turbine driven by spation traction (FD06) on smooth disks; composes FD02/FD05/FD08/FD09 | optimal disk gap ~0.4 mm; η_rotor(λ) peak; **viscosity signature** dη/dRe<0 (vs bladed); + modern-materials build spec |
 
+## Crunch status (executed 2026-06-17)
+
+FD01–FD10 are **crunched**: each has a standalone C++20 tool that compiles (MSVC `/utf-8
+/std:c++20`) and runs, plus `_results.txt`, `_DERIVATION.md`, and `_VERDICT.md`. Honest
+audit-spine classes (a forced "PASS" was never the goal):
+
+| ID | Class | Headline result |
+|----|-------|-----------------|
+| FD01 | C | NS terms ← relay coarse-graining; ν recovered from a relay random-walk to 3e-10; Euler/Stokes limits hold (reproduces a known PDE, ν-coefficient pending FD02/ROOT-SIM) |
+| FD02 | C | κ=h/m_He to **0.020%** (clean identity); air ν within 1.44×; lattice exponent n=0.5 exact; η/s floor, 1/(4π) CALIBRATED(1) |
+| FD03 | C | Re=UL/ν **derived** as a like-rate ratio; Re_crit=(L/ℓ_c)² mechanism derived; critical value needs CALIBRATED(1) coherence ratio per geometry |
+| FD04 | **A** (exponent) / C | −5/3 **derived** from constant-flux dimensional analysis (not assumed); microscale η floors at ℓ_P; C_K & intermittency OPEN |
+| FD05 | **A**/C | **c/√3** native from P=u/3 (zero params, = CQ39 BAO); boom ≡ Cherenkov (E57) one-mechanism unification; air c_s +0.031% |
+| FD06 | C | no-slip as a traction fixed point; δ∝√(νx/U) native; Blasius prefactors (f″(0)=0.33206, C_f 0.664) from the similarity ODE (borrowed, flagged) |
+| FD07 | C | L=ρUΓ + lift/Magnus sign from occlusion asymmetry (native); 2π slope is potential-flow geometry (borrowed, flagged) |
+| FD08 | C | Bernoulli ½ρv²+P+ρgz=const from the Law-V budget along a streamline; Venturi/Pitot exact; head via g=v²/R (no G) |
+| FD09 | C | drag = Law III occlusion shadow (form + μRv scaling native); 6π & C_D(Re) curve incl. drag crisis are correlations |
+| FD10 | C | St≈0.205 (+0.61%) from a CQ41 gear/relaxation clock; f∝U/D exact; 0.2 value needs one calibrated O(1) coefficient (not inserted) |
+
+Most land at **Class C** — the honest disposition for reproducing established fluid laws: SDT
+supplies the *mechanism* natively, while a textbook prefactor (6π, 2π, Blasius 5.0, St 0.2) or
+the material EoS is a flagged borrow/MEASURED-INPUT. The two **Class A** wins (FD04's −5/3
+exponent, FD05's c/√3 + boom≡Cherenkov) are zero-parameter native derivations. None were
+forced; every borrowed coefficient is named in its ledger. *(FD11 — the staggered-chamber
+Tesla generator on a 2 km geothermal pinhole — is written up separately in
+`FD11_Tesla_Steam_Generator/FD11_STAGGERED_GEOTHERMAL.md`.)*
+
 ## Engine hooks (single source of truth: `Engine/include/sdt/laws.hpp`)
 
 `law_I::P_conv` · `law_III` occlusion (`F_occlusion`, `solid_angle_occluded`) · `law_IV` `V_disp`

@@ -885,6 +885,78 @@ namespace atomic {
     [[nodiscard]] constexpr auto bohr_radius(int Z, int n) noexcept -> double {
         return a_0 * static_cast<double>(n * n) / static_cast<double>(Z);
     }
+
+    // ─── CQ12 — Emissions: the velocity-state chain (RESOLVED) ──────────────
+    //  The atomic emission spectrum follows from ONE rotation field, with no
+    //  wavefunction and no fit. v(r)=cα√(a₀/r) is the circulation of the
+    //  spation medium about the nucleus; the closed-circulation radii are the
+    //  states, and the Rydberg constant is FORCED by {m_e,c,α,h}. Verified:
+    //  H spectra <12.5 ppm, H-like (Z≤30) <263 ppm vs NIST; zk²=1 exact.
+
+    /// Rotation-field velocity at radius r: v(r) = c α √(a₀/r)  [m/s]
+    // provenance_status:     SDT-derived
+    // correspondence_status: known-match      // v(a₀)=cα; v_n=αc/n at closed radii
+    // input_dependency:      primitive-whitelist
+    // class:                 B
+    // circularity_assertion: passes delete-test
+    // risk_flag:             none
+    [[nodiscard]] inline auto rotation_field_velocity(double r_m) noexcept -> double {
+        return c * alpha * std::sqrt(a_0 / r_m);
+    }
+
+    /// Rydberg constant rebuilt from invariants: R∞ = m_e c α² / (2h)  [m⁻¹]
+    /// Forced by {m_e,c,α,h} before any spectrum is consulted; ≡ measured R_inf.
+    // provenance_status:     SDT-derived
+    // correspondence_status: known-match      // ≡ CODATA R_inf to ~0 ppm
+    // input_dependency:      primitive-whitelist
+    // class:                 B
+    inline constexpr double R_inf_derived = m_e * c * alpha * alpha / (2.0 * h);
+    // = 1.0973732e7 m⁻¹
+
+    /// Finite-nucleus reduced-mass factor μ/m_e = m_nuc/(m_e+m_nuc).
+    /// Classical two-body correction (NOT a QFT/QED term); m_nuc ≈ A·m_p.
+    [[nodiscard]] constexpr auto reduced_mass_factor(double m_nuc_kg) noexcept -> double {
+        return m_nuc_kg / (m_e + m_nuc_kg);
+    }
+
+    /// Hydrogen-like emission wavelength (leading order, reduced-mass corrected):
+    ///   1/λ = R∞·(μ/m_e)·Z²·(1/n₁² − 1/n₂²)   [m]
+    /// The few-ppm residual is the next movement-budget term z=(v/c)²=(Zα)²,
+    /// logged as a remainder — no QED/QFT input.
+    [[nodiscard]] constexpr auto emission_wavelength_m(
+        int Z, int n_low, int n_high, double m_nuc_kg
+    ) noexcept -> double {
+        const double Rn  = R_inf_derived * reduced_mass_factor(m_nuc_kg);
+        const double inv = static_cast<double>(Z * Z)
+            * (1.0 / static_cast<double>(n_low  * n_low)
+             - 1.0 / static_cast<double>(n_high * n_high));
+        return 1.0 / (Rn * inv);
+    }
+
+    /// Outer-electron launch velocity from the first ionisation energy:
+    /// v₁ = √(2 IE₁/m_e). Feeds the zk²=1 closure: z=(v₁/c)², k=c/v₁ ⟹ z·k²=1.
+    [[nodiscard]] inline auto outer_velocity_from_IE(double IE1_J) noexcept -> double {
+        return std::sqrt(2.0 * IE1_J / m_e);
+    }
+
+    // ─── CQ13 — Drag factor: koppa drafting in multi-electron shells ────────
+    //  COMPUTED/OBSERVED trend (a real-data correlation, NOT a zk²-style
+    //  closure). D = λ_meas / [(8/3)·λ_C·k²], k = c/v₁. Tracks the outer-shell
+    //  electron count: lone opener s¹→D≈1.76, paired s²→1.40, full p⁶→1.02.
+    //  The traction wakes (CQ14) of co-shell electrons interfere constructively
+    //  in the shared orbital slot — drafting, like cyclists in a pace-line.
+
+    /// Drag factor D = λ_meas / [(8/3)·λ_C·k²], with k = c/v₁, v₁=√(2 IE₁/m_e)
+    // provenance_status:     SDT-derived geometry + measured IE₁, λ
+    // correspondence_status: novel               // the D(outer-count) trend
+    // input_dependency:      measured-observable  // IE₁ and λ_meas are measured
+    // class:                 D                     // COMPUTED/OBSERVED correlation
+    // circularity_assertion: n/a (a measured trend, not a closure)
+    // risk_flag:             the (8/3) slot weight is not yet derived from geometry
+    [[nodiscard]] inline auto drag_factor(double lambda_meas_m, double IE1_J) noexcept -> double {
+        const double k = c / outer_velocity_from_IE(IE1_J);
+        return lambda_meas_m / ((8.0 / 3.0) * lambda_C_e * k * k);
+    }
 }
 
 // ═══════════════════════════════════════════════════════════════════════
@@ -1035,8 +1107,13 @@ namespace winding {
         return (W_meas - 3.0) * (W_meas - 3.0) < (3.0 * sigma_W) * (3.0 * sigma_W);
         // Passes if W_eff is within 3σ of integer 3
     }
-}
-} // namespace law_VI
+} // namespace winding
+  // NB: law_VI stays OPEN here — the topology/confinement/traction/mass_ratio/
+  //     angular sub-namespaces below are siblings of `winding` inside law_VI,
+  //     which closes at the "} // namespace law_VI" further down.
+  //     Build note: compile UTF-8 sources with MSVC `/utf-8`, else the
+  //     multibyte glyphs in this header mis-tokenise as spurious
+  //     "namespace not found" errors (GCC/Clang are fine without it).
 
 // ───────────────────────────────────────────────────────────────────────
 //  CQ02 — Vortex equilibrium quantisation (torus-knot mode equations)
@@ -1159,7 +1236,7 @@ namespace traction {
     /// Traction ratio (velocity mismatch): T = ω_demand/ω_max = 3R_p/λ_C
     ///                                        = 3(W+1) = 12 for the proton
     inline constexpr double traction_ratio_proton =
-        3.0 * static_cast<double>(winding::W_proton + 1);  // = 12
+        3.0 * static_cast<double>(law_VI::winding::W_proton + 1);  // = 12
 
     /// Gear ratio nuclear→atomic: ω_p/ω_e = 3 a₀ m_p c / (α ℏ) ≈ 1.03e8
     /// ("chemistry is nuclear physics geared down by χ = 137")
