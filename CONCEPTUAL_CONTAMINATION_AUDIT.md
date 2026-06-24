@@ -116,8 +116,8 @@ Provenance traced via `FORMULATIONS_CENSUS.md` (`#n`) and source files.
 | id | claim | developed in | value_status (existing) | concept_status (this audit) |
 |---|---|---|---|---|
 | M1 | wake **ℓ-expansion** `ℓ0 mass · ℓ1 Coulomb 1/r² · ℓ2 magnetic 1/r³ · ℓ≥3 nuclear` | Theory/01 §2 (#29); Law VI §8 (#28) | DERIVED / C | **MIXED** — see workings |
-| M2 | **"magnetic moment"** `μ = I·A = e·v_T·R/2` | CQ07; `sdt-magnetism-advanced.md` | (feeds #64) | **LINGUISTIC-BORROW (+ partial structural)** |
-| M3 | **`μ_ν ≡ 0`** (open winding → no ℓ=2) | Law VI §8; CQ07 (#64) | **D** | **CONVERGENCE/NATIVE result, borrowed narration** |
+| M2 | **"magnetic moment"** `μ = I·A = e·v_T·R/2` | PPT04; `sdt-magnetism-advanced.md` | (feeds #64) | **LINGUISTIC-BORROW (+ partial structural)** |
+| M3 | **`μ_ν ≡ 0`** (open winding → no ℓ=2) | Law VI §8; PPT04 (#64) | **D** | **CONVERGENCE/NATIVE result, borrowed narration** |
 | M4 | nuclear moments `μ_P,μ_N,μ_D,μ_T` in nuclear magnetons | `laws.hpp::measured` | external-input / X | **values external; mechanism native; "moment" borrowed** |
 | M5 | the PRIVATE magnetism docs (`B=−∇×(∇P/P₀)`, χ, Bessel, "quantum correlation function") | `SDT_Framework_PRIVATE/sdt_docs/*` | (not in engine) | **NATIVE kernel + STRUCTURAL-BORROW shell** |
 
@@ -205,7 +205,7 @@ This is the case James named: a flippant phrase standing in for a mechanism.
   *penetrates* the superluminal interior" as a native mechanism. **It is not native — it is QED in
   disguise**, and James caught it. It smuggles in three prohibited QM constructs:
   1. **`|ψ(0)|²` penetration** — a wavefunction's "non-zero probability at the nucleus" promoted to the
-     certainty that the electron is *inside* the core. SDT has **no probability cloud**: in CQ09 the
+     certainty that the electron is *inside* the core. SDT has **no probability cloud**: in FLM03 the
      electron is the **standing-wave node of the one field at a₀**, stationary in the co-rotating frame —
      it does not penetrate anything. "s vs p penetrate differently" is an artifact of a wavefunction SDT
      does not possess.
@@ -240,7 +240,7 @@ returned **did NOT survive — 4/4 refute** — and, usefully, found the contami
   plane couples anisotropically to ℓ=1 only; the missing higher-ℓ coupling IS the Lamb shift.* It fails 3 ways:
   1. **Borrowed ℓ-multipole language.** Stated entirely in the `Y_ℓ^m` coordinate system **M1** already
      flagged STRUCTURAL-BORROW. But **SDT has no native angular DOF**: the rotation field `v(r)=cα√(a₀/r)`
-     depends on **r only** (CQ09). The mechanism cannot even be *stated* without importing the ℓ=0-vs-ℓ=1
+     depends on **r only** (FLM03). The mechanism cannot even be *stated* without importing the ℓ=0-vs-ℓ=1
      distinction it claims to explain — it **assumes its conclusion**.
   2. **A `|ψ(0)|²` repaint.** "ℓ=0 sees structure ℓ=1 cannot" is QED's origin-asymmetry (s nonzero at the
      origin, p vanishes) restated as a *long-range coupling integral* instead of *short-range penetration* —
@@ -278,9 +278,9 @@ returned **did NOT survive — 4/4 refute** — and, usefully, found the contami
 
 ---
 
-## 4b. PASS 2 — CQ09 (Spation Rotation Kinematic Map): misnomenclature
+## 4b. PASS 2 — FLM03 (Spation Rotation Kinematic Map): misnomenclature
 
-**Top-line:** CQ09's spine is **native koppa** (`v(r)=cα√(a₀/r)`, the velocity profile, the
+**Top-line:** FLM03's spine is **native koppa** (`v(r)=cα√(a₀/r)`, the velocity profile, the
 superluminal interior, the one-field thesis). The contamination is ~90% **borrowed labels** over real
 mechanics (re-narrate, keep the numbers) + **one structural borrow** where the number itself is QED.
 
@@ -292,7 +292,7 @@ mechanics (re-narrate, keep the numbers) + **one structural borrow** where the n
 | "Bohr radius/orbit", "Regime: BOHR" (§I.3, §III.4) | **ground-state node** of the field (v=αc) | **ground-state node radius** |
 | "valence electron/shell" (title) | occupant of that node | **ground-state node** |
 | "spin / antiparallel / singlet / triplet / spin-spin" (§IV) | **circulation sense (±)**; counter/co-rotating; circulation–circulation wake coupling | **circulation sense** |
-| "covalent bond" (§IV.3) | rotation-field superposition well (CQ09: "not electron sharing") | **superposition well** |
+| "covalent bond" (§IV.3) | rotation-field superposition well (FLM03: "not electron sharing") | **superposition well** |
 | "frame dragging" (§IV.2) | lattice co-rotation at v(r) | **lattice co-rotation** |
 | "event horizon" (§V.1) | c-boundary | **c-boundary** |
 | "Compton / de Broglie / ƛ_C" (§I.3) | vortex coherence scale ℏ/(mc) | **coherence radius** |
@@ -300,7 +300,7 @@ mechanics (re-narrate, keep the numbers) + **one structural borrow** where the n
 | "fine structure constant α" | here = ground-state koppa 1/ϟ_H=137 (α is permitted primitive) | **ground-state koppa** |
 
 ### B — CONVERGENCE (keep; native math lands on a QM result)
-- **L_n = nℏ** (§III.4): `m·v·r` on the field at r_n=n²a₀ → `n·(m_e αc a₀)=nℏ`. CQ09 narrates it right
+- **L_n = nℏ** (§III.4): `m·v·r` on the field at r_n=n²a₀ → `n·(m_e αc a₀)=nℏ`. FLM03 narrates it right
   ("emerges, not postulated"). Same for r_n=n²a₀ node ladder, v(a₀)=αc, k(a₀)=1/α.
 
 ### C — STRUCTURAL-BORROW (the number is borrowed; renaming won't fix)
@@ -320,7 +320,7 @@ mechanics (re-narrate, keep the numbers) + **one structural borrow** where the n
 superluminal interior (v>c) is also the **EM-deflection-capable zone** (wind/sound criterion: deflection
 threshold = c) — load-bearing for magnetism + the Lamb-shift candidate, not contamination.
 
-**CQ09 verdict:** pristine koppa skeleton + inherited QM/GR/chemistry *names* (re-narrate) + **one** borrowed
+**FLM03 verdict:** pristine koppa skeleton + inherited QM/GR/chemistry *names* (re-narrate) + **one** borrowed
 calculation (hyperfine). Best-case audit outcome — mostly labels to scrape, one number to re-derive.
 
 ---

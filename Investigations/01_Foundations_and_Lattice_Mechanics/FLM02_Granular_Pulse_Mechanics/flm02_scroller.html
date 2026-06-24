@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="FLM02 — Granular Pulse Mechanics & The Dynamic Throughput Law. How F = ma and inertia emerge geometrically from a single spation invariant: the Granular Pulse Invariant.">
+  <title>FLM02 · The Engine Under the Hood — Spatial Displacement Theory</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ════ FLM02 SCROLLER — TEKNE theme. Grounded in Laws/ + Engine/.
+   Sources: laws.hpp, cq08_statistical_inertia.cpp (12/12 PASS),
+   INVESTIGATION.md (Newton's laws from GPI, δ = a ℓ_P / c²). ════ */
+:root{
+  --cream:#f5f0e8; --cream-warm:#efe8dc; --paper:#faf6ef; --paper-edge:#e8e0d2;
+  --ink:#1e1c18; --ink-soft:#3d3830; --ink-muted:#7a7265; --ink-faint:#a49d92; --ink-whisper:#c8c1b6;
+  --copper:#b07430; --copper-light:#d4a05c; --copper-glow:rgba(176,116,48,0.12);
+  --steel:#4a6d82; --steel-light:#6a95b0; --steel-deep:#2c4454;
+  --midnight:#0c0e12; --midnight-up:#141820; --midnight-card:#1a1f28; --midnight-edge:#2a3040;
+  --midnight-text:#c8ccd4; --midnight-mute:#6b7280;
+  --mint:#7ec9a4; --amber-code:#d4a05c; --blue-code:#7aadcc; --rose-code:#c27a8a;
+  --sage:#5f8b6a; --sage-bg:rgba(95,139,106,0.12); --rose:#bb6a7c; --rose-bg:rgba(187,106,124,0.12);
+  --sp-xs:.25rem; --sp-sm:.5rem; --sp-md:1rem; --sp-lg:1.75rem; --sp-xl:3rem; --sp-2xl:5rem; --sp-3xl:8rem;
+  --fs-xs:.75rem; --fs-sm:.8125rem; --fs-base:1.0625rem; --fs-md:1.1875rem; --fs-lg:1.5rem;
+  --fs-xl:2rem; --fs-2xl:2.75rem; --fs-3xl:3.75rem; --fs-4xl:5rem;
+  --content-width:42rem; --wide-width:62rem; --full-width:78rem;
+  --ease-out:cubic-bezier(0.16,1,0.3,1); --ease-in-out:cubic-bezier(0.65,0,0.35,1);
+  --dur-fast:.2s; --dur-med:.4s; --dur-slow:.8s;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;scroll-padding-top:5rem}
+body{font-family:'Inter',-apple-system,sans-serif;font-size:var(--fs-base);line-height:1.75;color:var(--ink);background:var(--cream);overflow-x:hidden}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--cream)}
+::-webkit-scrollbar-thumb{background:var(--ink-whisper);border-radius:3px}::-webkit-scrollbar-thumb:hover{background:var(--ink-muted)}
+#prog{position:fixed;top:0;left:0;height:2px;width:0;z-index:200;background:var(--copper);transition:width .1s}
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:var(--sp-md) var(--sp-xl);transition:background var(--dur-med) var(--ease-out),box-shadow var(--dur-med) var(--ease-out)}
+.nav--scrolled{background:rgba(245,240,232,0.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 1px 0 var(--paper-edge)}
+.nav__inner{max-width:var(--full-width);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:var(--sp-md)}
+.nav__wordmark{font-family:'Source Serif 4','Georgia',serif;font-size:var(--fs-sm);font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--ink);text-decoration:none;white-space:nowrap}
+.nav__wordmark span{color:var(--copper)}
+.nav__links{display:flex;gap:var(--sp-lg)}
+.nav__link{font-size:var(--fs-xs);font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-muted);text-decoration:none;transition:color var(--dur-fast);position:relative}
+.nav__link::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--copper);transition:width var(--dur-med) var(--ease-out)}
+.nav__link:hover{color:var(--ink)}.nav__link:hover::after{width:100%}.nav__link.on{color:var(--ink)}.nav__link.on::after{width:100%}
+@media(max-width:900px){.nav__links{display:none}}
+.opening{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:var(--sp-3xl) var(--sp-xl);position:relative;overflow:hidden}
+.opening__canvas{position:absolute;inset:0;width:100%;height:100%;opacity:.07;pointer-events:none}
+.opening__content{position:relative;z-index:1;max-width:52rem}
+.opening__pretitle{font-family:'Source Serif 4','Georgia',serif;font-size:var(--fs-sm);font-weight:400;font-style:italic;color:var(--ink-muted);letter-spacing:.04em;margin-bottom:var(--sp-xl)}
+.opening__title{font-family:'Source Serif 4','Georgia',serif;font-size:clamp(2.5rem,6vw,var(--fs-4xl));font-weight:700;line-height:1.05;color:var(--ink);letter-spacing:-.02em;margin-bottom:var(--sp-lg)}
+.opening__title em{font-style:normal;color:var(--copper)}
+.opening__rule{width:3rem;height:1px;background:var(--copper);border:none;margin:var(--sp-xl) auto}
+.opening__desc{font-size:var(--fs-md);line-height:1.8;color:var(--ink-soft);max-width:40rem;margin:0 auto var(--sp-lg)}
+.opening__author{font-size:var(--fs-sm);color:var(--ink-muted);letter-spacing:.04em;margin-bottom:var(--sp-2xl)}
+.opening__nav{display:flex;flex-wrap:wrap;justify-content:center;gap:var(--sp-sm) var(--sp-lg);font-size:var(--fs-xs);letter-spacing:.05em;text-transform:uppercase}
+.opening__nav a{color:var(--ink-faint);text-decoration:none;transition:color var(--dur-fast);padding:var(--sp-xs) 0;position:relative}
+.opening__nav a::before{content:attr(data-num);color:var(--copper-light);margin-right:.4em;font-variant-numeric:tabular-nums}
+.opening__nav a:hover{color:var(--ink)}
+.opening__scroll{position:absolute;bottom:var(--sp-xl);left:50%;transform:translateX(-50%);color:var(--ink-whisper);animation:breathe 3s var(--ease-in-out) infinite}
+@keyframes breathe{0%,100%{opacity:.3;transform:translateX(-50%) translateY(0)}50%{opacity:.7;transform:translateX(-50%) translateY(6px)}}
+.status-line{display:flex;gap:var(--sp-md);justify-content:center;flex-wrap:wrap;font-family:'JetBrains Mono',monospace;font-size:var(--fs-xs);color:var(--ink-muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:var(--sp-xl)}
+.status-line .ok{color:var(--sage)}
+.chapter{padding:var(--sp-3xl) var(--sp-xl);position:relative}
+.chapter--alt{background:var(--paper)}
+.chapter--deep{background:var(--midnight);color:var(--midnight-text)}
+.chapter__inner{max-width:var(--content-width);margin:0 auto;position:relative}
+.chapter__inner--wide{max-width:var(--wide-width)}
+.chapter__num{font-family:'Source Serif 4','Georgia',serif;font-size:var(--fs-xs);font-weight:400;color:var(--copper);letter-spacing:.1em;text-transform:uppercase;margin-bottom:var(--sp-lg);display:flex;align-items:center;gap:var(--sp-md)}
+.chapter__num::after{content:'';flex:1;height:1px;background:var(--paper-edge);max-width:4rem}
+.chapter--deep .chapter__num{color:var(--copper-light)}.chapter--deep .chapter__num::after{background:var(--midnight-edge)}
+.chapter__title{font-family:'Source Serif 4','Georgia',serif;font-size:clamp(var(--fs-xl),3.5vw,var(--fs-2xl));font-weight:600;line-height:1.2;color:var(--ink);margin-bottom:var(--sp-lg);letter-spacing:-.01em}
+.chapter--deep .chapter__title{color:#e8ecf2}
+.chapter__lead{font-size:var(--fs-md);line-height:1.85;color:var(--ink-soft);margin-bottom:var(--sp-xl);max-width:38rem}
+.chapter--deep .chapter__lead{color:var(--midnight-mute)}
+.chapter p{margin-bottom:var(--sp-md);color:var(--ink-soft)}
+.chapter p strong{color:var(--ink);font-weight:600}
+.chapter--deep p{color:var(--midnight-text)}.chapter--deep p strong{color:#e0e4ea}
+em.term{font-style:italic;color:var(--copper)}
+.k-mono{font-family:'JetBrains Mono',monospace;font-size:.92em}
+.chapter--deep .k-mono{color:var(--mint)}
+.margin-note{font-size:var(--fs-xs);color:var(--ink-faint);line-height:1.5;padding-left:var(--sp-md);border-left:1px solid var(--paper-edge);margin:var(--sp-lg) 0;font-style:italic}
+.aside{background:var(--copper-glow);border-left:2px solid var(--copper-light);padding:var(--sp-lg);margin:var(--sp-xl) 0;border-radius:0 6px 6px 0}
+.aside--steel{background:rgba(74,109,130,0.08);border-left-color:var(--steel-light)}
+.aside__title{font-family:'Source Serif 4','Georgia',serif;font-size:var(--fs-sm);font-weight:600;color:var(--copper);margin-bottom:var(--sp-sm);letter-spacing:.03em}
+.aside--steel .aside__title{color:var(--steel)}
+.aside p{font-size:var(--fs-sm);color:var(--ink-soft);margin-bottom:0}
+.eq-block{margin:var(--sp-xl) 0;text-align:center;position:relative}
+.eq{font-family:'Source Serif 4','Georgia',serif;font-size:clamp(1.25rem,2.5vw,1.75rem);font-style:italic;color:var(--ink);letter-spacing:.02em;line-height:2;display:inline-block;padding:var(--sp-lg) var(--sp-xl)}
+.chapter--deep .eq{color:#e8ecf2}
+.eq sub,.eq sup{font-size:.65em}
+.eq .res{color:var(--sage);font-style:normal}.eq .zero{color:var(--rose);font-style:normal}.eq .hl{color:var(--copper);font-style:normal}
+.eq-caption{font-size:var(--fs-sm);color:var(--ink-muted);margin-top:var(--sp-sm);font-style:italic;max-width:42rem;margin-inline:auto}
+.lab{border:1px solid var(--paper-edge);border-radius:6px;background:var(--paper);padding:var(--sp-lg) var(--sp-xl);margin:var(--sp-xl) 0;transition:border-color var(--dur-med) var(--ease-out),box-shadow var(--dur-med) var(--ease-out)}
+.lab:hover{border-color:var(--copper-light);box-shadow:0 2px 24px rgba(176,116,48,.06)}
+.lab__title{font-family:'Source Serif 4','Georgia',serif;font-size:var(--fs-base);font-weight:600;color:var(--ink);margin-bottom:var(--sp-xs)}
+.lab__sub{font-size:var(--fs-sm);color:var(--ink-muted);line-height:1.6;margin-bottom:var(--sp-md)}
+.ctl{display:block;font-size:var(--fs-xs);letter-spacing:.04em;text-transform:uppercase;color:var(--ink-muted);margin:var(--sp-md) 0 var(--sp-xs)}
+.ctl .pill{font-family:'JetBrains Mono',monospace;font-size:var(--fs-xs);text-transform:none;letter-spacing:0;color:var(--copper);background:var(--copper-glow);padding:2px 8px;border-radius:3px;margin-left:6px}
+input[type=range]{width:100%;accent-color:var(--copper);height:24px;cursor:pointer}
+.readout{font-family:'JetBrains Mono',monospace;font-size:var(--fs-sm);margin-top:var(--sp-md);display:flex;justify-content:space-between;flex-wrap:wrap;gap:var(--sp-sm);color:var(--ink-muted)}
+.readout b{color:var(--ink);font-weight:600}
+.readout.sep{border-top:1px solid var(--paper-edge);padding-top:var(--sp-sm);margin-top:var(--sp-sm)}
+.chip{display:inline-block;width:10px;height:10px;border-radius:2px;vertical-align:middle;margin-right:6px}
+.verdict{font-family:'Inter',sans-serif;font-size:var(--fs-sm);font-weight:500;padding:8px 14px;border-radius:4px;margin-top:var(--sp-md);display:inline-block;transition:.25s;border:1px solid}
+.verdict.ok{background:var(--sage-bg);color:var(--sage);border-color:rgba(95,139,106,.4)}
+.verdict.bad{background:var(--rose-bg);color:var(--rose);border-color:rgba(187,106,124,.4)}
+.verdict.circ{background:var(--copper-glow);color:var(--copper);border-color:rgba(176,116,48,.4)}
+.chips{display:flex;gap:var(--sp-sm);margin:var(--sp-sm) 0 0;flex-wrap:wrap}
+.chip-btn{font-family:'Inter',sans-serif;font-size:var(--fs-xs);font-weight:500;padding:6px 12px;border:1px solid var(--paper-edge);border-radius:20px;background:none;color:var(--ink-muted);cursor:pointer;transition:all var(--dur-fast)}
+.chip-btn:hover{border-color:var(--copper);color:var(--copper)}
+.chip-btn.active{border-color:var(--copper);color:var(--copper);background:var(--copper-glow)}
+/* Dynamic Asymmetry SVG */
+.asym-svg{width:100%;height:180px;display:block;border:1px solid var(--paper-edge);border-radius:6px;background:linear-gradient(180deg,var(--paper),var(--cream-warm))}
+.tk-table{width:100%;border-collapse:collapse;margin:var(--sp-xl) 0;font-size:var(--fs-sm)}
+.tk-table th{font-family:'Source Serif 4','Georgia',serif;font-weight:600;color:var(--ink);text-align:left;padding:var(--sp-sm) var(--sp-md);border-bottom:2px solid var(--paper-edge)}
+.tk-table td{padding:var(--sp-sm) var(--sp-md);border-bottom:1px solid var(--paper-edge);color:var(--ink-soft)}
+.tk-table td.m{font-family:'JetBrains Mono',monospace;color:var(--ink)}
+.tk-table tr:last-child td{border-bottom:none}
+.tk-table tbody tr:hover td{background:var(--copper-glow)}
+.cell-ok{color:var(--sage);font-weight:600}.cell-wn{color:var(--copper)}.cell-zero{color:var(--rose);font-weight:600}
+.chapter--deep .tk-table th{color:#e8ecf2;border-color:var(--midnight-edge)}
+.chapter--deep .tk-table td{color:var(--midnight-text);border-color:var(--midnight-edge)}
+.chapter--deep .tk-table td.m{color:var(--mint)}
+.golden-callout{display:flex;align-items:center;gap:var(--sp-lg);margin:var(--sp-xl) 0;padding:var(--sp-lg);border:1px solid var(--copper-light);border-radius:4px;background:linear-gradient(135deg,rgba(176,116,48,.06),rgba(176,116,48,.02))}
+.golden-callout__symbol{font-family:'Source Serif 4','Georgia',serif;font-size:var(--fs-xl);font-weight:700;color:var(--copper);line-height:1.1;min-width:4rem;text-align:center}
+.golden-callout__text h4{font-family:'Source Serif 4','Georgia',serif;font-weight:600;color:var(--copper);margin-bottom:var(--sp-xs)}
+.golden-callout__text p{font-size:var(--fs-sm);color:var(--ink-muted);margin-bottom:0}
+.footer{background:var(--ink);color:var(--ink-whisper);padding:var(--sp-2xl) var(--sp-xl) var(--sp-xl)}
+.footer__inner{max-width:var(--full-width);margin:0 auto}
+.footer__brand-name{font-family:'Source Serif 4','Georgia',serif;font-size:var(--fs-lg);font-weight:600;color:var(--cream);margin-bottom:var(--sp-sm)}
+.footer__brand-name span{color:var(--copper-light)}
+.footer__brand-desc{font-size:var(--fs-sm);color:var(--ink-muted);line-height:1.7;max-width:34rem}
+.footer__bottom{padding-top:var(--sp-lg);margin-top:var(--sp-lg);border-top:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center;gap:var(--sp-md);flex-wrap:wrap;font-size:var(--fs-xs);color:var(--ink-muted);font-family:'JetBrains Mono',monospace}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity var(--dur-slow) var(--ease-out),transform var(--dur-slow) var(--ease-out)}
+.reveal--visible{opacity:1;transform:translateY(0)}
+@media(max-width:600px){:root{--sp-xl:2rem;--sp-2xl:3.5rem;--sp-3xl:5rem}.opening__nav{flex-direction:column;align-items:center}.footer__bottom{flex-direction:column;text-align:center}}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+<nav class="nav" id="nav">
+  <div class="nav__inner">
+    <a href="#opening" class="nav__wordmark">Spatial <span>Displacement</span> Theory</a>
+    <div class="nav__links" id="navLinks">
+      <a href="#axiom"    class="nav__link">Axiom</a>
+      <a href="#symmetry" class="nav__link">Newton I</a>
+      <a href="#asymmetry" class="nav__link">Newton II</a>
+      <a href="#reaction"  class="nav__link">Newton III</a>
+      <a href="#verdict"   class="nav__link">Verdict</a>
+    </div>
+  </div>
+</nav>
+
+<!-- OPENING -->
+<section id="opening" class="opening">
+  <canvas id="latticeCanvas" class="opening__canvas"></canvas>
+  <div class="opening__content">
+    <p class="opening__pretitle">Investigation FLM02 — Granular Pulse Mechanics: The Dynamic Throughput Law</p>
+    <h1 class="opening__title">The engine under<br>the <em>hood</em></h1>
+    <hr class="opening__rule">
+    <p class="opening__desc">How does a spation lattice clicking forward in Planck steps produce the continuous laws of mechanics? Here we derive <em>F = ma</em>, inertia, and action-reaction from a single spation invariant. The skateboard rolls because the ground is solid.</p>
+    <div class="status-line">
+      <span>Status: <span class="ok">Complete</span></span>
+      <span>Proofs: 12/12 PASS</span>
+      <span>Base Invariant: 1.148 × 10⁷⁸ Hz/m</span>
+    </div>
+    <p class="opening__author">James Christopher Tyndall — Melbourne, Australia</p>
+    <nav class="opening__nav" aria-label="Contents">
+      <a href="#axiom"    data-num="01">The GPI Axiom</a>
+      <a href="#symmetry"  data-num="02">Constant Velocity is Free</a>
+      <a href="#asymmetry" data-num="03">F = ma from Pulse Asymmetry</a>
+      <a href="#reaction"  data-num="04">The Action-Reaction Relay</a>
+      <a href="#verdict"   data-num="05">Falsification &amp; Verdict</a>
+    </nav>
+  </div>
+  <a href="#axiom" class="opening__scroll" aria-label="Scroll to begin">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 8l5 5 5-5"/></svg>
+  </a>
+</section>
+
+<!-- CH.1 THE GPI AXIOM -->
+<section id="axiom" class="chapter">
+  <div class="chapter__inner reveal">
+    <div class="chapter__num">Chapter One</div>
+    <h2 class="chapter__title">The Granular Pulse Invariant (GPI)</h2>
+    <p class="chapter__lead">All dynamics emerge from a single structural rule in the medium: every cell relays light at an invariant rate.</p>
+
+    <p>In Spatial Displacement Theory, space is not a coordinate grid. It is a lattice of spations. The baseline spation throughput is defined by the <strong>Granular Pulse Invariant (GPI)</strong>:</p>
+
+    <div class="eq-block">
+      <div class="eq">Pulse Rate = 1 / (ℓ<sub>P</sub> · t<sub>P</sub>) = c / ℓ<sub>P</sub>² ≈ <span class="res">1.148 × 10⁷⁸</span> Hz/m</div>
+      <div class="eq-caption">Every spation receives exactly one relay pulse per Planck length per Planck time, from each direction, independently. (Axiom GPI; laws.hpp.)</div>
+    </div>
+
+    <p>From this single mechanical invariant, the speed of light follows as a direct coordinate mapping: a hand-off of one cell displacement per Planck tick. The Planck units are not arbitrary scales; they are the physical boundaries of the spation medium.</p>
+
+    <div class="aside aside--steel">
+      <div class="aside__title">c is a geometric consequence</div>
+      <p>Because each spation relays a deformation to its neighbour in exactly one unit of Planck time, the speed of propagation is locked: <span class="k-mono">c = ℓ_P / t_P</span>. There is no speed limit index to explain; propagation is simply the lattice refresh rate.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CH.2 CONSTANT V IS FREE -->
+<section id="symmetry" class="chapter chapter--alt">
+  <div class="chapter__inner reveal">
+    <div class="chapter__num">Chapter Two</div>
+    <h2 class="chapter__title">Constant Velocity is Free (Newton I)</h2>
+    <p class="chapter__lead">At rest or moving steadily, a vortex feels the same balanced field. Space has no memory of constant speed.</p>
+
+    <p>When a displacement vortex moves through the lattice at constant velocity <span class="k-mono">v</span>, it does not encounter friction. According to the <strong>Constancy Stabilisation Axiom</strong>, the incoming pulse arrivals re-symmetrise around the knot at its current speed:</p>
+
+    <div class="golden-callout">
+      <div class="golden-callout__symbol">☯️</div>
+      <div class="golden-callout__text">
+        <h4>Symmetry Restoration</h4>
+        <p>Once acceleration stops, the omnidirectional inputs re-balance. The forward-facing and backward-facing pulse fluxes match in the particle's own frame. Without asymmetry, there is no net spation reorganisation load, meaning the particle continues in its state of uniform motion. <strong>Newton's First Law</strong> is derived as a steady-state symmetry of the relay field.</p>
+      </div>
+    </div>
+
+    <div class="aside">
+      <div class="aside__title">Why friction is absent</div>
+      <p>Since the spation lattice is a purely elastic relay medium with no mass of its own, it does not store kinetic energy as thermal drift. The vortex is a topological knot. It acts as a moving exclusion zone that passes through the spations without disrupting their elastic baseline.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CH.3 F = MA FROM ASYMMETRY -->
+<section id="asymmetry" class="chapter">
+  <div class="chapter__inner reveal">
+    <div class="chapter__num">Chapter Three</div>
+    <h2 class="chapter__title">F = ma from Pulse Asymmetry (Newton II)</h2>
+    <p class="chapter__lead">Acceleration tilts the balance. The vortex runs into the relay ahead, compressing it, while the relay behind is rarefied. That asymmetry is inertia.</p>
+
+    <p>During acceleration <span class="k-mono">a</span>, the particle moves through a throughput gradient. In the direction of acceleration, the effective pulse rate becomes asymmetric by a factor of <span class="k-mono">δ</span>:</p>
+
+    <div class="eq-block">
+      <div class="eq">δ = a · ℓ<sub>P</sub> / c² = <span class="hl">a / a<sub>P</sub></span></div>
+      <div class="eq-caption">The throughput asymmetry factor is the ratio of local acceleration to the Planck acceleration scale (a_P ≈ 5.56 × 10⁵¹ m/s²).</div>
+    </div>
+
+    <p>This asymmetry creates a mechanical resistance — an inertia — proportional to the displaced volume <span class="k-mono">V_disp</span> of the knot. The resulting push-back force is the reorganisation load:</p>
+
+    <div class="lab">
+      <div class="lab__title">The Acceleration Asymmetry Explorer</div>
+      <div class="lab__sub">Drag the slider to apply acceleration. Symmetrically watch the spation vortex shift in the direction of the force. The ahead pulses (blue, pointing left) compress and grow, while the behind pulses (red, pointing right) rarefy and fade.</div>
+      
+      <div class="chips" style="margin-bottom:var(--sp-md)">
+        <button class="chip-btn active" onclick="setParticle('e')">Electron (m_e)</button>
+        <button class="chip-btn" onclick="setParticle('p')">Proton (m_p)</button>
+      </div>
+
+      <label class="ctl">Acceleration &nbsp;a = 10<sup><span id="lbl-a" class="pill">20</span></sup> m/s²</label>
+      <input id="r-a" type="range" min="5" max="45" step="0.1" value="20">
+
+      <svg id="svgAsym" class="asym-svg" viewBox="0 0 620 180" role="img" aria-label="Spation vortex undergoing acceleration showing pulse asymmetry.">
+        <line x1="40" y1="90" x2="580" y2="90" stroke="var(--paper-edge)" stroke-width="1.5" stroke-dasharray="4 4"/>
+        <g id="asym-pulses-left"></g>
+        <g id="asym-pulses-right"></g>
+        <circle id="asym-vortex" cx="310" cy="90" r="18" fill="url(#g-asym-vortex)"/>
+        <!-- force vector (gold, pointing left, representing inertia push-back) -->
+        <line id="asym-force" x1="310" y1="90" x2="250" y2="90" stroke="var(--copper)" stroke-width="3.5" marker-end="url(#ah-asym)"/>
+        <defs>
+          <radialGradient id="g-asym-vortex" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="var(--copper-light)"/><stop offset="100%" stop-color="var(--copper)"/>
+          </radialGradient>
+          <marker id="ah-asym" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+            <path d="M0,0 L7,3 L0,6 Z" fill="var(--copper)"/>
+          </marker>
+        </defs>
+        <text x="310" y="162" fill="var(--ink-muted)" font-size="12" text-anchor="middle" font-family="monospace">
+          displacement vortex under acceleration → front-back pressure dipole
+        </text>
+      </svg>
+
+      <div class="readout sep">
+        <span>asymmetry δ = <b id="o-delta">0</b></span>
+        <span>inertia force F = <b id="o-force">0</b> N</span>
+      </div>
+      <div id="asym-verdict" class="verdict ok">Balanced baseline</div>
+    </div>
+  </div>
+</section>
+
+<!-- CH.4 ACTION-REACTION -->
+<section id="reaction" class="chapter chapter--alt">
+  <div class="chapter__inner reveal">
+    <div class="chapter__num">Chapter Four</div>
+    <h2 class="chapter__title">The Action-Reaction Relay (Newton III)</h2>
+    <p class="chapter__lead">Forces are not instantaneous fields. They are local deformations that travel through the lattice at the speed of light.</p>
+
+    <p>When you push a vortex, the local asymmetry <span class="k-mono">δ</span> represents a throughput deficit. This deficit does not stay local. The spation relay carries it outward at speed <span class="k-mono">c</span>. When it reaches the pushing object, it delivers an equal-and-opposite reorganisation load:</p>
+
+    <div class="eq-block">
+      <div class="eq">F<sub>AB</sub> = − F<sub>BA</sub></div>
+      <div class="eq-caption">Newton's Third Law is a requirement of local flux balance. What you exclude from one cell is felt as a deficit in the next step. (Theorem GPI-8.)</div>
+    </div>
+
+    <div class="aside aside--steel">
+      <div class="aside__title">The speed of conservation</div>
+      <p>Because the relay travels exactly at <span class="k-mono">c = ℓ_P / t_P</span>, momentum conservation is not instantaneous. If particle A pushes particle B, the reaction force takes a finite time <span class="k-mono">Δt = r/c</span> to reflect back. The intermediate momentum is stored directly in the deformation state of the spation lattice during transit.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CH.5 VERDICT -->
+<section id="verdict" class="chapter chapter--deep">
+  <div class="chapter__inner reveal">
+    <div class="chapter__num">Chapter Five</div>
+    <h2 class="chapter__title">Falsification &amp; Verdict</h2>
+    <p class="chapter__lead">Granular mechanics provides a rigid, verifiable mapping of classical dynamics to spation statistics.</p>
+
+    <p>The entire framework of Newtonian and relativistic mechanics is shown to be a consequence of the spation pulse invariant:</p>
+
+    <table class="tk-table">
+      <thead><tr><th>Observation</th><th>Classical Description</th><th>SDT Mechanical Cause</th></tr></thead>
+      <tbody>
+        <tr><td>Newton I</td><td class="m">v = const</td><td>Pulse symmetry stabilization around the moving exclusion zone</td></tr>
+        <tr><td>Newton II</td><td class="m">F = ma</td><td>V_disp reorganisation load due to pulse asymmetry δ</td></tr>
+        <tr><td>Newton III</td><td class="m">Action = −Reaction</td><td>Local throughput deficit relay propagation through nearest-neighbours</td></tr>
+        <tr><td>Speed Limit</td><td class="m">v &lt; c</td><td>Depletion of the trailing pulse budget as the vortex approaches c</td></tr>
+      </tbody>
+    </table>
+
+    <div class="aside">
+      <div class="aside__title">The Falsification Threshold</div>
+      <p>Because the dynamic mass is linked directly to the spation volume displacement <span class="k-mono">V_disp</span>, any discrepancy between the inertial mass and gravitational mass at extreme accelerations (near the Planck acceleration limit) would falsify the model. SDT predicts a strict, exact equivalence because both are measurements of the same spation exclusion volume.</p>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__brand-name">Spatial <span>Displacement</span> Theory</div>
+    <p class="footer__brand-desc">Investigation FLM02 — Granular Pulse Mechanics &amp; The Dynamic Throughput Law. Grounded in
+    <span style="font-family:'JetBrains Mono',monospace">laws.hpp</span>,
+    <span style="font-family:'JetBrains Mono',monospace">cq08_statistical_inertia.cpp</span>, and
+    <span style="font-family:'JetBrains Mono',monospace">INVESTIGATION.md</span>. Newton's laws derived from the Granular Pulse Invariant (GPI) baseline.</p>
+    <div class="footer__bottom">
+      <span>© 2026 James Christopher Tyndall · Melbourne</span>
+      <span>Themed in Tekne · Built with the SDT Engine</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const $ = id => document.getElementById(id);
+
+/* ════ Core Constants (From laws.hpp) ════ */
+const C = {
+  c: 299792458.0,
+  hbar: 1.054571817e-34,
+  l_P: 1.616255e-35,
+  m_e: 9.1093837015e-31,
+  m_p: 1.67262192369e-27,
+  a_rad: 7.5657e-16,
+  T_CMB: 2.7255,
+  k_B: 1.380649e-23,
+  R_CMB: 9.527e26
+};
+
+C.u_CMB = C.a_rad * Math.pow(C.T_CMB, 4);
+C.N = C.R_CMB / C.l_P;
+C.l_P3 = C.l_P * C.l_P * C.l_P;
+C.eps = C.u_CMB * C.l_P3;
+C.Phi = C.N * C.eps;
+
+// Planck acceleration
+const a_P = (C.c * C.c) / C.l_P; // ~5.56e51
+
+let currentParticle = 'e';
+
+function setParticle(p) {
+  currentParticle = p;
+  document.querySelectorAll('.chips .chip-btn').forEach(b => {
+    b.classList.toggle('active', (p === 'e' && b.textContent.includes('Electron')) || (p === 'p' && b.textContent.includes('Proton')));
+  });
+  updateAsym();
+}
+
+const rA = $('r-a');
+
+function updateAsym() {
+  const logA = parseFloat(rA.value);
+  const a = Math.pow(10, logA);
+  
+  $('lbl-a').textContent = logA.toFixed(1);
+  
+  // Asymmetry parameter delta
+  const delta = a / a_P;
+  $('o-delta').textContent = delta.toExponential(3);
+  
+  // Mass
+  const m = currentParticle === 'e' ? C.m_e : C.m_p;
+  const F = m * a;
+  $('o-force').textContent = F.toExponential(3);
+  
+  // Animate SVG components
+  const vortex = $('asym-vortex');
+  const forceArrow = $('asym-force');
+  
+  // Shift vortex to the right based on acceleration (log scale mapping for visual feedback)
+  const maxShift = 80;
+  // normalized logA between 5 and 45 -> 0..1
+  const normA = (logA - 5) / (45 - 5);
+  const shift = normA * maxShift;
+  const cx = 310 + shift;
+  vortex.setAttribute('cx', cx.toFixed(1));
+  
+  // Force vector arrow (pointing left from the vortex center)
+  const forceLen = 15 + normA * 80;
+  forceArrow.setAttribute('x1', cx.toFixed(1));
+  forceArrow.setAttribute('x2', (cx - forceLen).toFixed(1));
+  forceArrow.setAttribute('stroke-width', (2 + normA * 4).toFixed(1));
+  
+  // Verdict update
+  const v = $('asym-verdict');
+  if (logA < 15) {
+    v.className = 'verdict ok';
+    v.textContent = 'Classical regime: asymmetry is negligible (δ ≈ 0)';
+  } else if (logA < 40) {
+    v.className = 'verdict circ';
+    v.textContent = 'High acceleration: measurable pressure gradient dipole';
+  } else {
+    v.className = 'verdict bad';
+    v.textContent = 'Extreme Planck-scale acceleration: delta is approaching limit';
+  }
+  
+  // Re-draw pulses (ahead vs behind)
+  drawPulses(cx, normA);
+}
+
+function drawPulses(cx, normA) {
+  const leftGroup = $('asym-pulses-left');
+  const rightGroup = $('asym-pulses-right');
+  
+  while(leftGroup.firstChild) leftGroup.removeChild(leftGroup.firstChild);
+  while(rightGroup.firstChild) rightGroup.removeChild(rightGroup.firstChild);
+  
+  const NS = 'http://www.w3.org/2000/svg';
+  const CY = 90;
+  
+  // Behind pulses (coming from left, pointing right)
+  // They shrink, thin, and fade to dim red as acceleration increases
+  const numBehind = 5;
+  const behindLen = Math.max(8, 28 - normA * 20);
+  const behindWidth = Math.max(1, 2.5 - normA * 1.8);
+  const behindOpacity = Math.max(0.15, 0.8 - normA * 0.6);
+  
+  for(let i=0; i<numBehind; i++) {
+    const x = 50 + i * 40;
+    if (x > cx - 25) break;
+    
+    // Draw arrow line
+    const line = document.createElementNS(NS, 'line');
+    line.setAttribute('x1', x);
+    line.setAttribute('y1', CY);
+    line.setAttribute('x2', x + behindLen);
+    line.setAttribute('y2', CY);
+    line.setAttribute('stroke', '#bb6a7c'); // dim red (rose)
+    line.setAttribute('stroke-width', behindWidth.toFixed(1));
+    line.setAttribute('opacity', behindOpacity.toFixed(2));
+    leftGroup.appendChild(line);
+    
+    // Draw small arrowhead
+    const head = document.createElementNS(NS, 'polygon');
+    const pts = `${x+behindLen},${CY} ${x+behindLen-4},${CY-3} ${x+behindLen-4},${CY+3}`;
+    head.setAttribute('points', pts);
+    head.setAttribute('fill', '#bb6a7c');
+    head.setAttribute('opacity', behindOpacity.toFixed(2));
+    leftGroup.appendChild(head);
+  }
+  
+  // Ahead pulses (coming from right, pointing left)
+  // They grow longer, thicker, and bright blue (compression)
+  const numAhead = 5;
+  const aheadLen = 28 + normA * 26;
+  const aheadWidth = 1.5 + normA * 2.8;
+  const aheadOpacity = 0.5 + normA * 0.5;
+  
+  for(let i=0; i<numAhead; i++) {
+    const x = 570 - i * 40;
+    if (x < cx + 25) break;
+    
+    // Draw arrow line (pointing left, so x1 is right, x2 is left)
+    const line = document.createElementNS(NS, 'line');
+    line.setAttribute('x1', x);
+    line.setAttribute('y1', CY);
+    line.setAttribute('x2', x - aheadLen);
+    line.setAttribute('y2', CY);
+    line.setAttribute('stroke', '#5ad1ff'); // bright blue
+    line.setAttribute('stroke-width', aheadWidth.toFixed(1));
+    line.setAttribute('opacity', aheadOpacity.toFixed(2));
+    rightGroup.appendChild(line);
+    
+    // Draw arrowhead
+    const head = document.createElementNS(NS, 'polygon');
+    const pts = `${x-aheadLen},${CY} ${x-aheadLen+4},${CY-3} ${x-aheadLen+4},${CY+3}`;
+    head.setAttribute('points', pts);
+    head.setAttribute('fill', '#5ad1ff');
+    head.setAttribute('opacity', aheadOpacity.toFixed(2));
+    rightGroup.appendChild(head);
+  }
+}
+
+rA.addEventListener('input', updateAsym);
+updateAsym();
+
+/* ════ Tekne chrome ════ */
+const nav = $('nav');
+addEventListener('scroll', ()=>{
+  nav.classList.toggle('nav--scrolled', scrollY > 60);
+  const h = document.documentElement;
+  $('prog').style.width = (h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';
+}, {passive:true});
+
+const revealObs = new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('reveal--visible'); revealObs.unobserve(e.target); } }), {threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el=>revealObs.observe(el));
+
+const navLinks = [...document.querySelectorAll('.nav__link')];
+const secObs = new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ navLinks.forEach(a=>a.classList.toggle('on', a.getAttribute('href')==='#'+e.target.id)); } }), {threshold:0.4});
+document.querySelectorAll('section[id]').forEach(s=>secObs.observe(s));
+
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click', e=>{ const t=document.querySelector(a.getAttribute('href')); if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth',block:'start'}); } }));
+
+// Particle canvas animation
+(function(){
+  const cv = $('latticeCanvas'); if(!cv) return;
+  const ctx = cv.getContext('2d'); let w,h,cols,rows,time=0; const spacing=40;
+  function resize(){const r=window.devicePixelRatio||1;const rect=cv.parentElement.getBoundingClientRect();
+    w=rect.width;h=rect.height;cv.width=w*r;cv.height=h*r;cv.style.width=w+'px';cv.style.height=h+'px';
+    ctx.setTransform(r,0,0,r,0,0);cols=Math.ceil(w/spacing)+2;rows=Math.ceil(h/spacing)+2;}
+  function draw(){ctx.clearRect(0,0,w,h);time+=0.003;const cx=w/2,cy=h/2,maxD=Math.sqrt(cx*cx+cy*cy);
+    for(let i=0;i<cols;i++)for(let j=0;j<rows;j++){const x=i*spacing,y=j*spacing;
+      const dx=Math.sin(time+i*0.3+j*0.2)*2.5,dy=Math.cos(time+j*0.3+i*0.15)*2.5;
+      const dist=Math.sqrt((x-cx)**2+(y-cy)**2),fade=1-Math.min(dist/(maxD*0.8),1),alpha=fade*0.5;
+      if(alpha>0.01){ctx.beginPath();ctx.arc(x+dx,y+dy,1.2,0,Math.PI*2);ctx.fillStyle='rgba(176,116,48,'+alpha+')';ctx.fill();}}
+    requestAnimationFrame(draw);}
+  resize(); addEventListener('resize', resize); draw();
+})();
+</script>
+</body>
+</html>

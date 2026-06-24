@@ -17,7 +17,7 @@ Spatial Displacement Theory (SDT) reformulates fundamental physics as pressure d
 
 The framework operates from four unique, irreducible primitives — Space, Matter, Movement, and Now — codified in six laws, nine axioms, two lemmas, and seventeen theorems. From these alone, and following only geometry, every relationship presented emerges without predetermined constants. The numerical values that fall out of the geometry match those catalogued by CODATA and NASA/JPL across regimes — not because they were input, but because geometry produces them.
 
-The proton charge radius is predicted from the trefoil winding number W = 4 alone: R_p = 4ℏ/(m_p c) = 0.84124 fm — matching muonic hydrogen spectroscopy to 0.02%. The fine structure constant emerges as the hydrogen ground-state kinematic ratio Ϟ_H = c/v_electron = 137.036. CQ09 further completes the hydrogen picture by deriving the full kinematic field from the proton surface to the Bohr radius, unifying the proton and electron as points on a single rotation field. Three independent measurements of the solar Ϟ-value converge to 686.7 ± 0.2 (σ = 0.03%), predicting every planetary orbit in the Solar System, the Jovian satellite system, and fifty exoplanetary systems to within measurement uncertainty.
+The proton charge radius is predicted from the trefoil winding number W = 4 alone: R_p = 4ℏ/(m_p c) = 0.84124 fm — matching muonic hydrogen spectroscopy to 0.02%. The fine structure constant emerges as the hydrogen ground-state kinematic ratio Ϟ_H = c/v_electron = 137.036. FLM03 further completes the hydrogen picture by deriving the full kinematic field from the proton surface to the Bohr radius, unifying the proton and electron as points on a single rotation field. Three independent measurements of the solar Ϟ-value converge to 686.7 ± 0.2 (σ = 0.03%), predicting every planetary orbit in the Solar System, the Jovian satellite system, and fifty exoplanetary systems to within measurement uncertainty.
 
 The four classical tests attributed to General Relativity — light deflection, signal delay, orbital precession, and frame dragging — are derived using only the geometric relationships established from the hydrogen system. No additional parameters are introduced.
 
@@ -317,7 +317,7 @@ The convergence is the fuel. The trefoil is the engine. The spation lattice is t
 
 ## 7. Trefoil Confinement
 
-Three theorems proven from Laws I–VI (see CQ11):
+Three theorems proven from Laws I–VI (see PPT05):
 
 **Theorem A (Harmonic Suppression)**: Angular perturbations of the torus surface have restoring rates proportional to n². The smooth torus is the stable equilibrium. Topology survives in the phase.
 
@@ -347,9 +347,9 @@ The "electron radius" is not a property of the electron — it is the c-boundary
 
 At the proton surface, the notional orbital velocity is v_surface = c/Ϟ_p = c/0.546 = 5.49 × 10⁸ m/s — superluminal. No orbit exists here. The proton surface is a containment boundary, not an orbital shell. The proton resides within its own c-boundary.
 
-### 8.3 The CQ09 Hydrogen Kinematic Map
+### 8.3 The FLM03 Hydrogen Kinematic Map
 
-CQ09 and CQ09b establish the complete hydrogen velocity field from the proton surface through the c-boundary to the Bohr radius. The unified rotation field is:
+FLM03 and CQ09b establish the complete hydrogen velocity field from the proton surface through the c-boundary to the Bohr radius. The unified rotation field is:
 
 > v(r) = c α √(a₀ / r)
 
@@ -365,9 +365,9 @@ This yields three anchor points:
 | c-boundary | r_e = α² a₀ = 2.818 × 10⁻¹⁵ m | 1.000 c | 1.000 |
 | Electron orbit | a₀ = 5.292 × 10⁻¹¹ m | α c = 2.188 × 10⁶ m/s | 137.036 |
 
-CQ09 demonstrates that the proton and electron are not separate fields; they are two radii on the same continuous rotation field. The c-boundary of hydrogen is therefore the classical electron radius, and the Bohr radius is the ground-state resonance of the same field.
+FLM03 demonstrates that the proton and electron are not separate fields; they are two radii on the same continuous rotation field. The c-boundary of hydrogen is therefore the classical electron radius, and the Bohr radius is the ground-state resonance of the same field.
 
-Additional CQ09 verification results:
+Additional FLM03 verification results:
 
 - Angular momentum quantisation emerges exactly: L_n = n ℏ at Bohr radii.
 - Hyperfine splitting is recovered at f_HF = 1.4212 GHz vs measured 1.4204 GHz (0.054% error).

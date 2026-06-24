@@ -183,7 +183,7 @@ interior point is therefore just $N\varepsilon$, and the isotropic pressure it e
 $N^2=3.47\times10^{123}$ — *exactly* the "$10^{123}$" of the so-called cosmological-constant problem. In SDT this
 is not a failed vacuum-energy cancellation; it is simply **the boundary-cell count**.
 
-**CQ40 extension (Class C).** Under expansion the lattice pressure tensor is isotropic and evolves
+**CR05 extension (Class C).** Under expansion the lattice pressure tensor is isotropic and evolves
 adiabatically as $P(z)=P_{\text{conv}}(1+z)^4$, from linking-number density $\tau\propto(1+z)^3$ times
 temperature $T\propto(1+z)$. The polytropic index is $\gamma_{\text{eff}}=4$ (the topologically stiff lattice,
 4 DOFs per cell from the $W\pm1$ modes) — **not** the $4/3$ of a photon gas, yet it recovers the radiation-era
@@ -223,9 +223,9 @@ $F=\tfrac{\pi}{4}P_{\text{eff}}R_{\text{charge}}^4/r^2 = k_e e^2/r^2$.
 **Honesty flag (this is the framework's most load-bearing calibration).** The coefficient $P_{\text{eff}}=
 4k_e e^2/(\pi R_p^2 r_e^2)=5.225\times10^{31}\,\text{Pa}$ and the transfer ratio $f=P_{\text{eff}}/P_{\text{conv}}
 =2.125\times10^{-17}$ are **CALIBRATED (Class E)** — the hydrogen scale fixes their magnitude; they fail the
-delete-test. The $1/r^2$ **structure** is DERIVED (Class C); the **coefficient** is fitted. CQ40 argues $f$
+delete-test. The $1/r^2$ **structure** is DERIVED (Class C); the **coefficient** is fitted. CR05 argues $f$
 upgrades to Class C *if* $R_{\text{CMB}}$ is itself derived from the pressure tensor — contingent on the
-assumed Friedmann structure (still open, CQ43). This is stated, not hidden.
+assumed Friedmann structure (still open, GOM05). This is stated, not hidden.
 
 ### LAW IV — Inertial Mass from Throughput Reorganisation  (`law_IV`, T5–T7)
 
@@ -306,8 +306,8 @@ Everything flows downhill from the whitelist through four stages. This is the sp
 | | $R_p$ | $4\hbar/(m_p c)$ | $8.412\times10^{-16}\,\text{m}$ | DERIVED |
 | | $R_{\text{charge}}$ | $\sqrt{R_p r_e}$ | $1.540\times10^{-15}\,\text{m}$ | DERIVED |
 | **3 Force law** | $k_e e^2$ | $\alpha\hbar c$ | $2.307\times10^{-28}\,\text{J·m}$ | definitional (F) — *defines* $\alpha$ |
-| | $P_{\text{eff}}$ | $m_p^2 m_e^2 c^5/(4\pi\alpha\hbar^3)$ | $5.225\times10^{31}\,\text{Pa}$ | whitelist-algebraic (CQ33); circularity flagged (CQ01) |
-| | $f$ | $P_{\text{eff}}/P_{\text{conv}}$ | $2.125\times10^{-17}$ | E→C argued (CQ40), contingent on Friedmann |
+| | $P_{\text{eff}}$ | $m_p^2 m_e^2 c^5/(4\pi\alpha\hbar^3)$ | $5.225\times10^{31}\,\text{Pa}$ | whitelist-algebraic (CR03); circularity flagged (EMC01) |
+| | $f$ | $P_{\text{eff}}/P_{\text{conv}}$ | $2.125\times10^{-17}$ | E→C argued (CR05), contingent on Friedmann |
 | **4 Mass & stability** | $V_{\text{disp},e}$ | $3m_e\ell_P^3 c^2/\Phi$ | $9.988\times10^{-62}\,\text{m}^3$ | COMPUTED |
 | | $V_{\text{disp},p}$ | $3m_p\ell_P^3 c^2/\Phi$ | $1.834\times10^{-58}\,\text{m}^3$ | COMPUTED |
 | | $P_{cf}$ | $\rho_{\text{eff}}c^2=P_{\text{conv}}/3$ | identity ✓ | DERIVED |
@@ -339,7 +339,7 @@ From these, the entire toolkit of orbital mechanics follows with the closure con
 
 **The point.** A single number — the koppa $\varkappa$ — encodes the *entire* gravitational field of a body, and
 it is measured from $v_{\text{surface}}$ and $R$ alone. "$GM$" is recovered as $c^2\varkappa$ as a *consequence*.
-This is the "c-from-geometry" result (CQ24): $c$ itself was reconstructed from Mercury's precession and orbital
+This is the "c-from-geometry" result (GOM04): $c$ itself was reconstructed from Mercury's precession and orbital
 velocity, with no $GM$ inserted.
 
 **k as a clock and "137 as a countdown."** Since $d\tau/dt=\sqrt{1-1/k^2}$, $k$ is literally a clock-rate index;
@@ -418,7 +418,7 @@ gradient $z(r)$ makes one radial direction the path of least resistance; **orbit
 | Gravitational redshift | $GM/c^2R$ | $z_{\text{spec}}=\varkappa/r$ differential | 0.03 % (solar), B28 |
 | Mercury perihelion precession | $43''/\text{century}$ | from the $k^2$-gradient, $z=v^2/c^2$ | DERIVED, B10 (42.98) |
 | Light deflection at the Sun | $1.75''$ | $\Delta\theta=2R_c/b$ (convergence-gradient refraction) | DERIVED, B10 (1.7505) |
-| Shapiro delay | log formula in a potential | $\Delta t=(2\varkappa/c)\ln(4r_1 r_2/b^2)$ — *accumulated closure*, local $c$ stays $c$ | 0.0000 %, CQ43 |
+| Shapiro delay | log formula in a potential | $\Delta t=(2\varkappa/c)\ln(4r_1 r_2/b^2)$ — *accumulated closure*, local $c$ stays $c$ | 0.0000 %, GOM05 |
 | Hulse–Taylor orbital decay $\dot P$ | quadrupole formula | same (Part 13), via $GM\to c^2\varkappa$ | $-2.4029$ vs $-2.4025\times10^{-12}$, B09 |
 
 ### 8.3 Where SDT departs from GR (falsifiable)
@@ -432,7 +432,7 @@ gradient $z(r)$ makes one radial direction the path of least resistance; **orbit
 Flat rotation curves arise from **convergence-disk occlusion / a derived acceleration floor**
 $a_0=cH_0/2\pi=1.042\times10^{-10}\,\text{m/s}^2$ (no dark matter, no $\Lambda$CDM). On real SPARC data the
 twin-regime convergence-floor law reaches RMS $23.8\%$ with the correct BTFR slope $3.58$ — *honest status:* the
-asymptotes are derived, the crossover shape is still borrowed (CQ26/E46, Part 18).
+asymptotes are derived, the crossover shape is still borrowed (APS03/GD05, Part 18).
 
 ### 8.5 Lumiostasis
 The Oort cloud is not "weakly orbiting" — it is **suspended** at the lumiopause depth surface
@@ -511,7 +511,7 @@ TeV. The low-winding rungs populate the electroweak scale; the proton and electr
 | electron | $0.511$ MeV | $1.48\times10^{25}$ | extreme winding ($W=1$) |
 
 The **neutrino has no magnetic moment** ($\mu_\nu\equiv0$ exactly): it is an *open* winding ($W=0$), so it has
-no EM-deflecting wake (B07/CQ07) — falsifiable against the Standard Model's tiny but nonzero prediction.
+no EM-deflecting wake (B07/PPT04) — falsifiable against the Standard Model's tiny but nonzero prediction.
 Pair production/annihilation are vortex creation/counter-vortex collision ($2\times511$ keV); electron
 diffraction is lattice scattering of the vortex (all VERIFIED in the correspondence catalogue).
 
@@ -522,21 +522,21 @@ diffraction is lattice scattering of the vortex (all VERIFIED in the corresponde
 | Topic | SDT account | Label |
 |---|---|---|
 | CMB redshift | $z=T_{\text{rec}}/T_{\text{CMB}}-1=1089$ | DERIVED (B13) |
-| Pressure evolution | $P(z)=P_{\text{conv}}(1+z)^4$, $\gamma_{\text{eff}}=4$ (topological stiffness) | C (CQ40) |
+| Pressure evolution | $P(z)=P_{\text{conv}}(1+z)^4$, $\gamma_{\text{eff}}=4$ (topological stiffness) | C (CR05) |
 | Hubble constant | $H_0=67.4$ km/s/Mpc via the pressure tensor + (assumed) Friedmann structure | C-flagged |
 | Cosmological "constant problem" | the $10^{123}$ is $N^2=4\pi$-scaled boundary-cell count, not a vacuum-energy failure | DERIVED |
 | BAO sound horizon | $r_s\approx147$ Mpc; topological freeze-out (factor-4 linking drop at recombination) | COMPUTED (B15) |
-| Cosmological redshift | depth accumulation $z=1/k^2$ along the line of sight (CQ15/CQ18, $zk^2=1$) | C |
+| Cosmological redshift | depth accumulation $z=1/k^2$ along the line of sight (GOM01/CR01, $zk^2=1$) | C |
 | Dark matter | replaced by convergence-disk occlusion + derived $a_0$ floor | C/PARTIAL |
 | Dark energy | a pressure-gradient *misreading* of the lattice EOS, not a substance | SPEC |
 
 **Honest flag:** the Friedmann *structure* is currently assumed (not yet SDT-derived) and the $\Omega$
 normalisation is observational — so $H_0$ is **C-flagged**, the one place the cosmology leans on borrowed
-scaffolding (CQ43 is the route to remove it).
+scaffolding (GOM05 is the route to remove it).
 
 ---
 
-## PART 13 — GRAVITATIONAL WAVES (CQ44: "MOVE THE SEA, DON'T MAKE WAVES")
+## PART 13 — GRAVITATIONAL WAVES (GOM06: "MOVE THE SEA, DON'T MAKE WAVES")
 
 SDT's account of LIGO/Virgo events, gate by gate (full investigation in
 `Investigations/CQ44_Gravitational_Wave_Mechanism/`).
@@ -609,25 +609,25 @@ more fundamental.
 | Spin / g-factor | intrinsic, $g=2$ from Dirac eq. | circulation geometry; $g=2(1+\alpha/2\pi)$ from wake perturbation | B17 |
 | Fine-structure $\alpha$ | empirical coupling | koppa of the H ground state; $k_H=1/\alpha=137$ | §9.1 |
 | Energy levels | Schrödinger eigenvalues | $E_n=-13.6\,Z^2/n^2$ from $zk^2=1$ geometry | B01/B02 |
-| Blackbody / Planck | quantised oscillators (postulate) | lattice mode counting — the lattice is *already* discrete at $\ell_P$ | E61–63 |
+| Blackbody / Planck | quantised oscillators (postulate) | lattice mode counting — the lattice is *already* discrete at $\ell_P$ | SAR02–63 |
 | Pair production | QED vertex | creation of a vortex/anti-vortex pair, $2\times511$ keV | E79 |
-| Neutrino moment | tiny but nonzero (SM) | $\mu_\nu\equiv0$ exactly (open $W=0$ winding) | CQ07 |
+| Neutrino moment | tiny but nonzero (SM) | $\mu_\nu\equiv0$ exactly (open $W=0$ winding) | PPT04 |
 | Magnetic monopole | allowed, unobserved | forbidden — a half-vortex is topologically impossible | E58 |
 | Hyperfine / 21 cm | spin-flip with magnetons | whirl-on-whirl overlap of the proton–electron dyad | B05 |
 | Tunnelling, entanglement | nonlocal/indeterminate postulates | *open* — SDT seeks a local lattice mechanism (see Part 18) | — |
 
-**The native angular DOF (CQ34/CQ38 — a 2026-06 closure).** SDT now **does** have a native angular degree of
-freedom: the trefoil's **three-fold ($C_3$) wake multipole** (CQ38) gives the $\ell=0/2/3$ harmonics
+**The native angular DOF (PPT08/APS04 — a 2026-06 closure).** SDT now **does** have a native angular degree of
+freedom: the trefoil's **three-fold ($C_3$) wake multipole** (APS04) gives the $\ell=0/2/3$ harmonics
 ($\Phi_0\sim r^{-1}$, $\Phi_2\sim r^{-3}$, $\Phi_3\sim r^{-4}$) and the selection rule $m_3=3k$, with **no
 imported spherical harmonics**. From it the **Lamb shift falls out at 1051.8 vs 1057.845 MHz (0.57 %) with
 ZERO fitted constants** — the $s$-like (equatorial) vs $p$-like (polar) orbits couple differently to $\Phi_2$,
 giving the correct sign and magnitude. This **supersedes** the old calibrated B04 ($k_{\text{Lamb}}=12.7227$),
-which has not yet been refactored to use the CQ38 mechanism (CQ38 is recorded as the canonical *candidate*,
+which has not yet been refactored to use the APS04 mechanism (APS04 is recorded as the canonical *candidate*,
 Class C, pending benchmark integration).
 
 **The honest boundary that remains.** Two things an earlier draft mislabelled are *dissolved*, not gaps:
 **charge** (a QM abstraction — SDT has *occluded influx directionality*, not a charge primitive; $\alpha$, not
-$e$, is in the whitelist) and the **fixed $\ell_P$** (CQ43 makes it a variable closure *field*
+$e$, is in the whitelist) and the **fixed $\ell_P$** (GOM05 makes it a variable closure *field*
 $\ell_P(r)=\ell_{P,\infty}(1-z)$, derived as the koppa = wake fixed point from hydrogen geometry, not $G$). What genuinely remains:
 multi-electron atoms (**PENDING**, B06); the **$P_{\text{eff}}$ force coefficient calibrated to hydrogen**
 (`laws.hpp` Class E); the **assumed Friedmann structure** behind $H_0$; and **quantum measurement /
@@ -647,7 +647,7 @@ measured constants. The certification status is shown — note the honesty: only
 | B01 | H energy levels | $E_n=-\text{Ry}\,Z^2/n^2$ | DERIVED |
 | B02 | Multi-ion Rydberg (He⁺, Li²⁺) | exact spectral match | DERIVED |
 | B03 | Fine structure, g-factor | $2P$ split $4.528\times10^{-5}$ eV; $g=2.00232$ | DERIVED |
-| B04 | **Lamb shift** | $1051.8$ vs $1057.845$ MHz (0.57 %) | benchmark still **CALIBRATED** ($k_{\text{Lamb}}$); **superseded by CQ38's zero-fit native derivation** (Class C), pending integration |
+| B04 | **Lamb shift** | $1051.8$ vs $1057.845$ MHz (0.57 %) | benchmark still **CALIBRATED** ($k_{\text{Lamb}}$); **superseded by APS04's zero-fit native derivation** (Class C), pending integration |
 | B05 | Hyperfine 21 cm | $1420.405$ MHz | DERIVED (line OBSERVED; mechanism re-narrated) |
 | B06 | Multi-electron ionisation | Slater screening | **PENDING** (open atoms problem) |
 | B07 | Stefan–Boltzmann, Wien | $\sigma_{SB}=5.670\times10^{-8}$; $\lambda_{\max}T=2.898\times10^{-3}$ | DERIVED |
@@ -682,40 +682,40 @@ The `Investigations/` tree pushes open questions to honest conclusions. A repres
 
 | Investigation | Topic | Status |
 |---|---|---|
-| CQ02 | Vortex equilibrium $(p,q)$ knots; electron $(1,1)$, proton $(2,3)$ | RESOLVED |
-| CQ08/CQ10 | Granular pulse mechanics → $F=ma$, Newton I–III | RESOLVED |
-| CQ15/CQ16/CQ24 | Depth engine; k-hierarchy; koppa closure ($c$ from geometry) | RESOLVED |
-| CQ25 | Atomicus nuclear grammar (the constitution) | RESOLVED/frozen |
-| CQ26 | Universal drafting crossover (atomic+stellar+galactic on one curve) | PARTIAL |
-| CQ32 → CQ41 | Nuclear binding: volume-deficit (killed) → gear-frequency pull | ACTIVE |
-| CQ33 | Transfer-function closure (bottleneck for $f$) | EXECUTED |
-| CQ34/CQ38 | **Angular DOF + Lamb shift** from the trefoil $C_3$ wake multipole | **RESOLVED (C, 0.57 %)** |
-| CQ35 | **Per-spation rolling** → $v(r)=v_0\sqrt{R_p/r}$ (the ROOT-SIM) | **RESOLVED (A, $<10^{-15}$)** |
-| CQ36 | **Winding-number stability** (W=1,3-only, OP-2) | **RESOLVED (A, proof)** |
-| CQ37 | Elementary charge $e$ | **Class X (irreducible)** |
-| CQ40 | Spation pressure tensor; $\gamma_{\text{eff}}=4$; $H_0$; $f$ E→C | EXECUTED (C) |
-| CQ42 | Spation-scale closure $\ell_P=\sqrt{\varkappa\lambda}$ (seed theorem) | EXECUTED (**negative** on $\ell_P$ + koppa win) |
-| CQ43 | Variable closure $\ell_P(r)$, the c-gradient, lumiostasis | EXECUTED (4/4) |
-| CQ44 | Gravitational waves ("move the sea") | EXECUTED (C) |
-| OP-1 / OP-3 | full $(R/a)$ mass-spectrum quantisation; $\alpha$ from geometry | **OPEN** (OP-2 now closed by CQ36) |
+| PPT01 | Vortex equilibrium $(p,q)$ knots; electron $(1,1)$, proton $(2,3)$ | RESOLVED |
+| FLM02/FLM05 | Granular pulse mechanics → $F=ma$, Newton I–III | RESOLVED |
+| GOM01/GOM02/GOM04 | Depth engine; k-hierarchy; koppa closure ($c$ from geometry) | RESOLVED |
+| NP01 | Atomicus nuclear grammar (the constitution) | RESOLVED/frozen |
+| APS03 | Universal drafting crossover (atomic+stellar+galactic on one curve) | PARTIAL |
+| NP05 → CQ41 | Nuclear binding: volume-deficit (killed) → gear-frequency pull | ACTIVE |
+| CR03 | Transfer-function closure (bottleneck for $f$) | EXECUTED |
+| PPT08/APS04 | **Angular DOF + Lamb shift** from the trefoil $C_3$ wake multipole | **RESOLVED (C, 0.57 %)** |
+| PPT08A | **Per-spation rolling** → $v(r)=v_0\sqrt{R_p/r}$ (the ROOT-SIM) | **RESOLVED (A, $<10^{-15}$)** |
+| PPT09 | **Winding-number stability** (W=1,3-only, OP-2) | **RESOLVED (A, proof)** |
+| EMC02 | Elementary charge $e$ | **Class X (irreducible)** |
+| CR05 | Spation pressure tensor; $\gamma_{\text{eff}}=4$; $H_0$; $f$ E→C | EXECUTED (C) |
+| FLM06 | Spation-scale closure $\ell_P=\sqrt{\varkappa\lambda}$ (seed theorem) | EXECUTED (**negative** on $\ell_P$ + koppa win) |
+| GOM05 | Variable closure $\ell_P(r)$, the c-gradient, lumiostasis | EXECUTED (4/4) |
+| GOM06 | Gravitational waves ("move the sea") | EXECUTED (C) |
+| OP-1 / OP-3 | full $(R/a)$ mass-spectrum quantisation; $\alpha$ from geometry | **OPEN** (OP-2 now closed by PPT09) |
 
 ---
 
 ## PART 18 — THE HONEST FRONTIER (WHAT IS *NOT* YET DONE)
 
-A theory is only as trustworthy as its candour. This list was substantially **shortened by the CQ34–38 wave
+A theory is only as trustworthy as its candour. This list was substantially **shortened by the PPT08–38 wave
 (2026-06)** — several items below moved from OPEN to a native derivation. What the engine's own Auditor's
 Report (2026-06-16) and the latest verdicts still hold open:
 
 **Recently CLOSED (no longer open — corrected after re-reading the codebase):**
-- ~~The lattice root has never been simulated~~ → **CQ35** derives the per-contact lag $a/r$ from spation
+- ~~The lattice root has never been simulated~~ → **PPT08A** derives the per-contact lag $a/r$ from spation
   rolling/contact mechanics and reproduces $v(r)=v_0\sqrt{R_p/r}$ to **$<10^{-15}$ (Class A)**.
-- ~~Winding quantisation is open (OP-2)~~ → **CQ36** proves W=1,3-only analytically via knot invariants
+- ~~Winding quantisation is open (OP-2)~~ → **PPT09** proves W=1,3-only analytically via knot invariants
   (Alexander polynomial; W=2 metastable, $\sim10^{-21}$ s) — **Class A**.
-- ~~No native angular DOF; Lamb stays calibrated~~ → **CQ38** derives the angular DOF and the **Lamb shift at
+- ~~No native angular DOF; Lamb stays calibrated~~ → **APS04** derives the angular DOF and the **Lamb shift at
   0.57 %, zero fits**, from the trefoil's $C_3$ wake multipole — **Class C** (supersedes B04's $k_{\text{Lamb}}$,
   pending benchmark integration).
-- ~~$f$ is Class E calibrated~~ → **CQ40 Phase 5** upgrades $f$ **E→C** (contingent on the derived $H_0$).
+- ~~$f$ is Class E calibrated~~ → **CR05 Phase 5** upgrades $f$ **E→C** (contingent on the derived $H_0$).
 
 **Two category corrections — dissolved, not open (I earlier mislabelled both by carrying the standard-physics
 frame).**
@@ -723,10 +723,10 @@ frame).**
 - **Charge.** **SDT has no charge primitive.** What QM calls charge is *occluded influx directionality* — the
   directional signature of the convergence inflow a vortex occludes — and the electrostatic force is occlusion
   geometry (Law III). The canonical whitelist contains **$\alpha$, not $e$**, and $k_e e^2=\alpha\hbar c$ is the
-  **definition** of $\alpha$ (Class F). CQ37's "cannot derive $e$" is not a missing derivation — it is the
+  **definition** of $\alpha$ (Class F). EMC02's "cannot derive $e$" is not a missing derivation — it is the
   *expected signature of a QM abstraction*: the whitelist has no current dimension $[\mathrm{A}]$ because the
   ontology has no charge. $e$ appears only as an **SI unit-bridge**.
-- **$\ell_P$ is not a constant — it is a field.** CQ43 derives $\ell_P(r)=\ell_{P,\infty}(1-z)$,
+- **$\ell_P$ is not a constant — it is a field.** GOM05 derives $\ell_P(r)=\ell_{P,\infty}(1-z)$,
   $c_{\text{local}}=c(1-z)$, $z=\varkappa/r$ — exact, parameter-free, **$G$-free** (4/4). The closure tightens
   under compression near mass and relaxes outward, so **light far from mass runs closer to the ceiling**
   $c_\infty\approx c+105$ m/s — our measured $c$ is Earth's slightly-depressed rung, and light past the
@@ -738,13 +738,13 @@ frame).**
   is the choice of *one length unit* — a convention every theory needs, not $G$ and not a fit. "A fixed
   $\ell_P$ that injects $G$" was borrowed framing top to bottom.
 
-**Still genuinely open (after reading CQ01–CQ44):**
-1. **$P_{\text{eff}}$ — whitelist-algebraic, but circularity unresolved.** CQ33 shows
+**Still genuinely open (after reading EMC01–GOM06):**
+1. **$P_{\text{eff}}$ — whitelist-algebraic, but circularity unresolved.** CR03 shows
    $P_{\text{eff}}=m_p^2 m_e^2 c^5/(4\pi\alpha\hbar^3)$ — a pure whitelist combination, *not* a free numerical
-   fit. But CQ01's audit flags it may be the hydrogen force-balance rewritten in whitelist clothing (force
+   fit. But EMC01's audit flags it may be the hydrogen force-balance rewritten in whitelist clothing (force
    magnitude and $f$ being "the same equation twice"); `laws.hpp` keeps Class E conservatively. Not a free
    parameter; not yet a clean delete-test-passing derivation.
-2. **The $f$→C closure rests on an *assumed* Friedmann structure.** CQ40 derives $H_0$ (hence $R_{\text{CMB}}$,
+2. **The $f$→C closure rests on an *assumed* Friedmann structure.** CR05 derives $H_0$ (hence $R_{\text{CMB}}$,
    $P_{\text{conv}}$, $f$→C) *given* the Friedmann equation as structure (not yet SDT-derived) plus an
    observational $\Omega$-normalisation. This is the real remaining cosmology contingency.
 3. **The mass ratio's first-principles root.** $6\pi^5=1836.118$ holds to 0.0019 %, but the
@@ -753,9 +753,9 @@ frame).**
 4. **Quantum measurement / entanglement / tunnelling are not yet mechanised.**
 5. **GW radiative coefficients are convergence; the strong-field sector is open** (native $\Delta M/M$, wall
    reflectivity, the QNM spectrum of a max-compression vortex, a clean echo detection).
-6. **Several investigations are framework/spec, not executed:** CQ06 eclipse-saturation (no implementation —
-   the galactic-rotation answer leans on E46/CQ26 instead), CQ08/CQ10 (granular- / lattice-pulse frameworks),
-   CQ27/CQ28 (stellar-growth + mirror-falsification specs), CQ41 (gear-frequency binding — pending), CQ29B
+6. **Several investigations are framework/spec, not executed:** GD01 eclipse-saturation (no implementation —
+   the galactic-rotation answer leans on GD05/APS03 instead), FLM02/FLM05 (granular- / lattice-pulse frameworks),
+   NP02/NP03 (stellar-growth + mirror-falsification specs), CQ41 (gear-frequency binding — pending), NP04B
    (3n→triton kinetics).
 
 ---

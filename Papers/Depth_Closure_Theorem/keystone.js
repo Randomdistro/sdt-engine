@@ -32,7 +32,7 @@ P("absolute ceiling c_∞=c/(1−z) [m/s]:", (c/(1-z_gal)).toFixed(1)+"  (+"+(c/
 console.log("\n=== V. a₀ DERIVED (the floor scale) ===");
 P("a₀ = cH₀/2π [m/s²]:", L(c*H0/(2*Math.PI)));
 
-console.log("\n=== VI. SPATION FLOOR (koppa form, CQ42) ===");
+console.log("\n=== VI. SPATION FLOOR (koppa form, FLM06) ===");
 const lamCp=hbar/(mp*c);
 P("ℓ_P=√(ϟ_b·ƛ_p), ϟ_b=ℓ_P²cm_p/ℏ:", L(Math.sqrt((lP*lP*c*mp/hbar)*lamCp))+"  (ℓ_P "+L(lP)+")");
 
@@ -40,9 +40,9 @@ console.log("\n=== VII. LUMIOPAUSE (surface-area) ===");
 const F_CMB=c*(7.5657e-16*Math.pow(2.7255,4))/4;
 P("r_lumio=√(L_Sun/4πF_CMB) [AU]:", (Math.sqrt(3.828e26/(4*Math.PI*F_CMB))/AU).toFixed(0));
 
-console.log("\n=== VIII. E46 / CQ26 (galaxy + cross-scale, prior runs) ===");
-P("E46 M4 floor law RMS / BTFR:", "23.8% / 3.58 (SPARC 135 gal)");
-P("CQ26 collapse RMS / neg-control:", "8.8% / 6× worse (3 scales)");
+console.log("\n=== VIII. GD05 / APS03 (galaxy + cross-scale, prior runs) ===");
+P("GD05 M4 floor law RMS / BTFR:", "23.8% / 3.58 (SPARC 135 gal)");
+P("APS03 collapse RMS / neg-control:", "8.8% / 6× worse (3 scales)");
 
 console.log("\n=== IX. mass ratio (6π⁵) — distinct from 1.830c ===");
 P("6π⁵:", (6*Math.pow(Math.PI,5)).toFixed(3)+"  (m_p/m_e=1836.153)");

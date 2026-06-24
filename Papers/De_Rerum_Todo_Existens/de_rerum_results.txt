@@ -1,0 +1,164 @@
+#####################################################################
+#  DE RERUM TODO EXISTENS  —  engine regeneration  (sdt/laws.hpp)    #
+#  J. C. Harvey, Melbourne.  Zero free parameters; #
+#####################################################################
+
+=====================================================================
+  BOOK I — Foundations — the matrix, the relay, the budget
+=====================================================================
+
+  -- The whitelist (the ONLY external inputs) --
+    hbar (reduced Planck)                        =    1.054572e-34 J.s     [input]
+    l_P  (Planck length)                         =    1.616255e-35 m       [input]
+    k_B  (Boltzmann)                             =    1.380649e-23 J/K     [input]
+    T_CMB (FIRAS)                                =    2.725500e+00 K       [input]
+    m_e  (electron mass)                         =    9.109384e-31 kg      [input]
+    m_p  (proton mass)                           =    1.672622e-27 kg      [input]
+    * alpha is SDT's
+      hydrogen koppa-rung chi=c/v=137.036 (PPT02), NOT k_e e^2/hbar c.
+
+  -- The master pressure relay (Law I): Pi = N.epsilon -> P_conv --
+    u_CMB = a_rad T^4 (held energy density)      =    4.174783e-14 J/m^3   [B]
+    P_rad = u_CMB/3 (radiation pressure)         =    1.391594e-14 Pa      [B]
+    epsilon = u_CMB l_P^3 (quantum/relay)        =   1.762640e-118 J       [B]
+    N = R_CMB/l_P (relay count)                  =    5.894491e+61 -       [B]
+    Phi = N.epsilon (throughput)                 =    1.038986e-56 J       [B]
+    P_conv = Phi/l_P^3 (convergence press.)      =    2.460822e+48 Pa      [B]
+    S_boundary = 4 pi N^2 (holographic)          =   4.366188e+124 -       [B]
+
+  -- Movement budget (Law V): v_circ^2 + v^2 = c^2  =>  relativity --
+    gamma(0.6c) Lorentz factor                   =    1.250000e+00 -       [A]
+    v_circ(0.6c) internal circulation            =    2.398340e+08 m/s     [A]
+    budget closes at 0.6c          D= 8.98755e+16  M= 8.98755e+16  rel= 0.00e+00 m2/s2 [A] PASS
+
+  -- Mass as throughput-reorganisation cost (Law IV) --
+    V_disp(electron)                             =    9.980942e-62 m^3     [B]
+    V_disp(proton)                               =    1.832653e-58 m^3     [B]
+    mass<->V_disp invertible (e)   D= 9.10938e-31  M= 9.10938e-31  rel= 1.92e-16 kg   [A] PASS
+
+=====================================================================
+  BOOK II — Atomic & Nuclear architecture
+=====================================================================
+
+  -- The electropause (EMC04): binding = centripetal = occlusion, NO charge --
+    v = alpha c (ground-state circulation)       =    2.187691e+06 m/s     [B]
+    F_centripetal == Coulomb (kinematics) D= 8.23872e-08  M= 8.23872e-08  rel= 4.13e-12 N    [C] PASS
+    F_centripetal == law_III::F_coulomb D= 8.23872e-08  M= 8.23872e-08  rel= 4.13e-12 N    [C] PASS
+    P_eff from balance == engine P_eff D= 5.22521e+31  M= 5.22521e+31  rel= 4.13e-12 Pa   [C] PASS
+    P_eff whitelist m_p^2 m_e^2 c^5/4pi a hbar^3 D= 5.22725e+31  M= 5.22521e+31  rel= 3.91e-04 Pa   [C] PASS
+
+  -- Spectra from one rotation field (APS01): R_inf forced, no wavefunction --
+    R_inf_derived = m_e c alpha^2/2h D= 1.09737e+07  M= 1.09737e+07  rel= 1.95e-12 1/m  [B] PASS
+    H-alpha wavelength (n=3->2)    D= 6.56470e-07  M= 6.56280e-07  rel= 2.89e-04 m    [B] PASS
+    zk^2 = 1 closure at hydrogen rung D= 1.00000e+00  M= 1.00000e+00  rel= 4.44e-12 -    [B] PASS
+
+  -- Proton = trefoil knot (Law VI, PPT09): W=3 protected --
+    W_proton (trefoil winding)                   =    3.000000e+00 -       [A]
+    R_p = (W+1) hbar/(m_p c)       D= 8.41236e-16  M= 8.41400e-16  rel= 1.95e-04 m    [C] PASS
+    W_eff = R_p m_p c/hbar - 1 (->3)             =    3.000782e+00 -       [C]
+
+  -- Proton/electron mass ratio = 6 pi^5 (CQ, pure topology) --
+    6 pi^5 vs measured m_p/m_e     D= 1.83612e+03  M= 1.83615e+03  rel= 1.88e-05 -    [B] PASS
+
+  -- Nuclear occlusion geometry --
+    R_He = 2 R_p                   D= 1.68280e-15  M= 1.67550e-15  rel= 4.36e-03 m    [C] PASS
+    c-boundary of carbon (Z=6) = 6 r_e           =    1.690764e-14 m       [B]
+
+  -- Lamb shift — NATIVE CANDIDATE (class C; amplitude pending), NOT a benchmark --
+    2S-2P native candidate         D= 1.05180e+03  M= 1.05785e+03  rel= 5.71e-03 MHz  [C*] PASS
+
+=====================================================================
+  BOOK III — Electromagnetism & magnetism — the handed redirection
+=====================================================================
+
+  -- There is no charge: the coupling is one product k_e e^2 = alpha hbar c --
+    k_e e^2 == alpha hbar c (CODATA) D= 2.30708e-28  M= 2.30708e-28  rel= 6.14e-10 J.m  [F!] PASS
+    [F!] HONEST: the numbers MATCH (it is an identity), but as a DERIVATION
+         it FAILS the delete-test: alpha := k_e e^2/hbar c, so this line is a
+         tautology, not a derivation of alpha. The physics that survives:
+         only the PRODUCT loads the force law; neither k_e nor e is separately
+         fundamental. 'Charge' = the handedness of the redirected convergence.
+
+  -- Coulomb IS occlusion (Law III): F = (pi/4) P_eff R_charge^4 / r^2 --
+    R_charge = sqrt(R_p r_e)                     =    1.539810e-15 m       [B]
+    F_occlusion(a0) == Coulomb(a0) D= 8.23872e-08  M= 8.23872e-08  rel= 1.61e-16 N    [C] PASS
+
+  -- Repulsion = inverse of convergence (EMC03): |repel| = |attract| --
+    Structural [STRONG]: attraction = throughput DEFICIT (shadow/sink),
+    repulsion = SURPLUS (focused source); one flow, +/- handedness.
+    Magnitude symmetry is exact by construction (same modulation).
+
+  -- Trefoil-wake multipole exponents (APS04): native C3, borrowed Pl language --
+    monopole  ell=0  (occlusion)                 =   -1.000000e+00 r^n     [C]
+    quadrupole ell=2 (rot. wake)                 =   -3.000000e+00 r^n     [C]
+    trefoil   ell=3  (3-fold)                    =   -4.000000e+00 r^n     [C]
+
+  -- Magnetic moments are MEASURED INPUTS, not yet derived (honest) --
+    mu_proton  [input]                           =    2.792847e+00 mu_N    [input]
+    mu_neutron [input]                           =   -1.913043e+00 mu_N    [input]
+    mu_alpha = 0 (spin-0, NATIVE result)         =    0.000000e+00 mu_N    [C]
+
+=====================================================================
+  BOOK IV — Gravitation & stellar structure — koppa, no G, no M
+=====================================================================
+
+  -- The koppa ladder: ONE law koppa = v^2 R / c^2 across 40 orders --
+    koppa_hydrogen = alpha^2 a0 (= r_e)          =    2.817940e-15 m       [B]
+    koppa_hydrogen == r_e          D= 2.81794e-15  M= 2.81794e-15  rel= 1.94e-12 m    [B] PASS
+    k_hydrogen = 1/alpha = 137                   =    1.370360e+02 -       [B]
+    koppa_Earth                                  =    4.434139e-03 m       [B]
+    koppa_Moon                                   =    5.456033e-05 m       [B]
+    koppa_Sun = R_Sun/k_Sun^2                    =    1.477046e+03 m       [B]
+    g_surface(Earth) = v^2/R                     =    9.818283e+00 m/s^2   [B]
+
+  -- c recovered from Mercury precession (GOM04): no G anywhere --
+    c_from_closure == c            D= 2.99795e+08  M= 2.99792e+08  rel= 8.93e-06 m/s  [C] PASS
+
+  -- Depth-Closure (the capstone): z = koppa/r = 1 - c_local/c --
+    solar redshift z_spec = koppa_Sun/R_Sun D= 2.12311e-06  M= 2.12000e-06  rel= 1.47e-03 -    [C] PASS
+    Shapiro delay (Sun grazing, Cassini geom.)   =    1.195055e-04 s       [C]
+    a0 acceleration floor = c H0 / 2pi           =    1.042190e-10 m/s^2   [C]
+
+  -- Gravitational waves = moving the sea (GOM06): LIGO is a koppa-meter --
+    f_GW at ISCO for koppa_tot=3 km              =    2.164326e+03 Hz      [C]
+
+  -- Lumiopause: Oort cloud held in lumiostasis (GOM05) --
+    lumiopause radius L/(4pi r^2)=F_CMB          =    2.085731e+04 AU      [C]
+
+=====================================================================
+  BOOK V — Cosmology & the relay — redshift without expansion
+=====================================================================
+
+  -- The relay throughput sets the cosmological constants (Law I) --
+    H0 (Friedmann-structure caveat)              =    6.740000e+01 km/s/Mpc [C]
+    gamma_eff (freeze-out)                       =    4.000000e+00 -       [C]
+    pressure at z=1100 (recomb.)                 =    3.616008e+60 Pa      [C]
+
+  -- Redshift = octaves (CR07): 1+z = 2^(Dn), no compounding, no expansion --
+    z=1   -> octaves                             =    1.000000e+00 oct     [C]
+    z=1100 (CMB) -> octaves                      =    1.010460e+01 oct     [C]
+    CMB = a ~10-octave slide: recomb ~966 nm (near-IR) -> ~1.06 mm (microwave).
+
+  -- The absolute relay ceiling (GOM05/C4): measured c is only Earth's rung --
+    z_galactic_floor                             =    3.500000e-07 -       [C]
+    c_infinity = c/(1 - z_gal)                   =    2.997926e+08 m/s     [C]
+      ... excess over local c (= z_gal . c)      =    1.049274e+02 m/s     [C]
+
+  -- Scale closure (FLM06): l_P RE-EXPRESSED via koppa — identity, NOT a derivation --
+    l_P = sqrt(koppa_baryon . lambda_p) D= 1.61626e-35  M= 1.61626e-35  rel= 0.00e+00 m    [F!] PASS
+    [F!] HONEST: matches by CONSTRUCTION. koppa_per_baryon := l_P^2 c m_p/hbar,
+         so sqrt(koppa . lambda_p) = sqrt(l_P^2) = l_P is an IDENTITY, not a
+         derivation. FLM06's real result: the Seed Theorem (exactly one dimensional
+         anchor is unavoidable) + re-homing the seed {hbar,G} -> one SDT length.
+         l_P stays Axiom R1 -- it is an input, not an output.
+
+=====================================================================
+  REGENERATION COMPLETE.  checks: 19 PASS / 0 FAIL
+  Every numeric check passes. The class-F rows (k_e e^2 = alpha hbar c, and
+  l_P = sqrt(koppa . lambda_p)) MATCH numerically but are IDENTITIES, not
+  derivations — their honest labels ride in the class column, not the
+  PASS/FAIL count. This is the treatise's standard: a number can be right
+  and still not be earned.
+  Class key: A analytic | B derived | C derived(framework terms)
+             D measured-correlation | F fails delete-test (honest)
+=====================================================================

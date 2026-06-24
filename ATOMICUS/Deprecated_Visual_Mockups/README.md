@@ -1,6 +1,6 @@
 # ⛔ DEPRECATED VISUAL MOCK-UPS — NOT EVIDENCE ⛔
 
-> **These visual models are not evidence. They placed nucleons using electron-shell (Aufbau) geometry and are therefore CONTAMINATED for any nuclear–electronic mirror test (Rule 18 / CQ28).**
+> **These visual models are not evidence. They placed nucleons using electron-shell (Aufbau) geometry and are therefore CONTAMINATED for any nuclear–electronic mirror test (Rule 18 / NP03).**
 
 ## Why these are quarantined
 
@@ -18,8 +18,8 @@ The valid, non-circular pathway lives in
 [`Investigations/CQ28_Nuclear_Electronic_Geometry_Mirror_Falsification/`](../../Investigations/CQ28_Nuclear_Electronic_Geometry_Mirror_Falsification/):
 
 ```
-CQ28B  nuclear geometry generated electron-BLIND (Tammes/Thomson packing)
-CQ28E  scored against the INDEPENDENT electron geometry, with null models + negative controls
+NP03B  nuclear geometry generated electron-BLIND (Tammes/Thomson packing)
+NP03E  scored against the INDEPENDENT electron geometry, with null models + negative controls
 ```
 
 ## Files here

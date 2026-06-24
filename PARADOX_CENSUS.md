@@ -298,7 +298,7 @@ and the shadow has nothing to fall on. SDT's axioms remove the premises wholesal
 | Generating premise (theirs) | SDT's replacement | Paradoxes that lose their root |
 |---|---|---|
 | No preferred frame; simultaneity relative | **Preferred frame: the spation lattice / CMB convergence tick** (absolute simultaneity) | SR 1,2,5,6; GR problem-of-time (4); CTCs (6) |
-| Continuum spacetime, no shortest length | **Discrete spation lattice; minimum closure ℓ_P (CQ42 floor)** | GR singularities (1); SM renormalisation infinities (12), Landau pole (11) |
+| Continuum spacetime, no shortest length | **Discrete spation lattice; minimum closure ℓ_P (FLM06 floor)** | GR singularities (1); SM renormalisation infinities (12), Landau pole (11) |
 | Gravity = attraction sourced by mass | **No attraction; occluded CMB convergence push; orbits = least-resistance paths** | the entire "missing mass" problem → MOND 1,3,4; ΛCDM 2,6 |
 | Wavefunction + collapse (two laws) | **Deterministic relay mechanics; real vortex particles; no ψ, no collapse** | QM 1,2,3,6,7,8,9,10,12 |
 | Local hidden variables only | **Nonlocal substrate: "one tick from every boundary" relay** | QM 4,5 (EPR/Bell) evaded *à la* Bohm via real nonlocality + preferred frame |
@@ -312,7 +312,7 @@ and the shadow has nothing to fall on. SDT's axioms remove the premises wholesal
 
 Two SDT results are worth singling out because they convert a *crisis* into a *prediction*:
 
-- **Charge quantisation** (SM 9) is *derived* in SDT (CQ37): charge is quantised occluded
+- **Charge quantisation** (SM 9) is *derived* in SDT (EMC02): charge is quantised occluded
   influx directionality; integer windings give integer charge. The SM has no reason; SDT has one.
 - **The small-scale CDM crises** (ΛCDM 6) are exactly where "no halo" *helps*: with no cold
   dark matter there are no cusps, no predicted satellite swarm, and filamentary/planar
@@ -357,7 +357,7 @@ exposed and must pay.
    number** without it being either a labelled consistency-check or a circularity. The audit
    spine exists precisely to catch this. The dependency graph must be made *acyclic*: fix the
    genuinely irreducible seed(s) — the programme's own note says *charge e is the one input*
-   (CQ10/CQ37) and *ℓ_P needs one seed length* (CQ42 seed theorem) — and demote everything else
+   (FLM05/EMC02) and *ℓ_P needs one seed length* (FLM06 seed theorem) — and demote everything else
    to **derived** or **consistency-check**. Until that graph is published and acyclic, the
    "zero free parameters" banner is in tension with the 8-entry whitelist. This is the single
    place where SDT could *manufacture* a [LOGICAL] problem for itself if it got sloppy — and the
@@ -376,7 +376,7 @@ exposed and must pay.
    radius), and *no* singularity: the core is the koppa dissolution surface (z=1, r=ϟ=r_s/2, a
    ⅓ golden-spiral winding), throat zero-width/zero-matter. The obligation is to reproduce the
    EHT shadow, the ISCO, and the LIGO ringdown from *this* structure (horizon + koppa surface,
-   no singularity). The ringdown investigation is now drafted (CQ44 line); the koppa-surface
+   no singularity). The ringdown investigation is now drafted (GOM06 line); the koppa-surface
    echo/dissolution signatures are the SDT≠GR test. Narrowing, not yet closed.
 
 ### 8.3 Verdict

@@ -354,7 +354,7 @@ Drawing from the uploaded chapters, our conversation history, and the specific d
 
 ## The 2026 Enrichment — Force, Charge, and the Atom at Stellar Scale
 
-*Added 2026-06-18 (J. C. Harvey). These laws fold in the results of the CQ46–CQ48 investigations and the
+*Added 2026-06-18 (J. C. Harvey). These laws fold in the results of the CR07–CQ48 investigations and the
 electropause derivation. Where a result is not yet derived from scratch, the honest status is stated in
 brackets — ATOMICUS prizes honesty over success.*
 
@@ -435,7 +435,7 @@ brackets — ATOMICUS prizes honesty over success.*
   ruler comparison, 1 + z = 2^Δn with Δn = log₂(1+z) — redshift measured in **octaves**. The visible band is
   one octave; atomic transition lines (the α-ladder) sit at definite rungs; the CMB is the recombination
   spectrum slid ~10 octaves down. Spectra and gravity are the same depth-closure quantity read two ways.
-  *[CQ46. The cosmological *source* of the large-scale ruler gradient is the open frontier.]*
+  *[CR07. The cosmological *source* of the large-scale ruler gradient is the open frontier.]*
 
 ---
 

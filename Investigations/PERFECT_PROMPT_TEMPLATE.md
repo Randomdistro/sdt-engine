@@ -76,12 +76,12 @@ Every investigation PROMPT should have exactly these sections, in this order:
 **Example**:
 > **Phase 1: Pressure Scale Decomposition (1–2 hours)**
 > - Goal: Compute convergence pressure at atomic and nuclear scales
-> - Method: Use Φ = Nε and V_disp from CQ02 to calculate P at electron vs proton radii
+> - Method: Use Φ = Nε and V_disp from PPT01 to calculate P at electron vs proton radii
 > - Success: Pressure gradient dP/da within 1 order of magnitude of 1e10 Pa/m
 > 
 > **Phase 2: Topological Energy (1–2 hours)**
 > - Goal: Derive energy cost of winding transitions
-> - Method: Use kinetic energy m v_T² / 2 with v_T from CQ02 velocity budget
+> - Method: Use kinetic energy m v_T² / 2 with v_T from PPT01 velocity budget
 > - Success: Energy scale within 50% of 1e-20 J
 > 
 > **Phase 3: Numerical Verification (2–3 hours)**
@@ -137,17 +137,17 @@ Every investigation PROMPT should have exactly these sections, in this order:
 
 **Example**:
 > **Upstream (Required)**:
-> - CQ02: Velocity budget and R/a for each winding
+> - PPT01: Velocity budget and R/a for each winding
 > - Law III: Occlusion force definition
 > - Law IV: Displacement volume and mass formula
 > 
 > **Downstream (Blocked)**:
-> - CQ05: Mass ratio m_p/m_e (needs correct V_disp scaling)
-> - CQ06: Galaxy dynamics (needs correct phase transition scale)
+> - PPT03: Mass ratio m_p/m_e (needs correct V_disp scaling)
+> - GD01: Galaxy dynamics (needs correct phase transition scale)
 > 
 > **Related (Informative)**:
-> - CQ01: Transfer function universality
-> - E29–E31: Nuclear binding energies
+> - EMC01: Transfer function universality
+> - NP09–NP11: Nuclear binding energies
 
 ### 8. Falsification Tests (150–250 words)
 
@@ -161,7 +161,7 @@ Every investigation PROMPT should have exactly these sections, in this order:
 **Example**:
 > | Test | Hypothesis | Predicted Outcome | If FAIL |
 > |------|-----------|------------------|--------|
-> | T1 | T_5 is topological (depends on R/a only) | Derive from CQ02 geometry, match ±50% | T_5 depends on unknown parameter |
+> | T1 | T_5 is topological (depends on R/a only) | Derive from PPT01 geometry, match ±50% | T_5 depends on unknown parameter |
 > | T2 | Phi_5 is kinetic (m v_T²) | Compute from m_e, v_T; match ±50% | Phi_5 has different physical basis |
 > | T3 | Both are unique | Try alternative normalisations; none fit | Multiple valid scales exist (ambiguous) |
 
@@ -224,8 +224,8 @@ If a prompt doesn't clearly answer all five, it's not ready to hand to an invest
 ---
 
 **This template was validated against:**
-- CQ01, CQ02, CQ04 (exemplary prompts in sdt-engine)
-- E29–E31 (successful experimental derivations)
+- EMC01, PPT01, FLM01 (exemplary prompts in sdt-engine)
+- NP09–NP11 (successful experimental derivations)
 - Industry research standards (ARPA-E, DoE reviews)
 
 **Status**: GOLD-STANDARD TEMPLATE FOR ALL FUTURE INVESTIGATIONS

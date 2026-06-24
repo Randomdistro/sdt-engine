@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SDT Investigations — Domain Index</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --paper:#f4efe6; --paper-2:#faf6ee; --card:#fffdf8; --ink:#2b2620; --ink-soft:#5c5448;
+    --muted:#857a6c; --line:#e2d8c6; --line-2:#d6c9b2;
+    --copper:#b3672f; --copper-2:#c47a3d; --gold:#a8842c;
+    --steel:#3f6f6b; --blue:#3f5d86; --violet:#6a5a8c; --rose:#a8434b; --slate:#7a7066;
+    --shadow:0 1px 2px rgba(43,38,32,.05);
+    --shadow-lift:0 16px 38px -14px rgba(43,38,32,.32), 0 4px 12px -6px rgba(43,38,32,.18);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:
+      radial-gradient(1200px 600px at 80% -8%, #fbf7ef 0%, rgba(251,247,239,0) 60%),
+      linear-gradient(180deg,var(--paper-2),var(--paper));
+    color:var(--ink); font-family:"Inter",system-ui,sans-serif; line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+
+  /* ── nav ── */
+  .nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:1.2rem;
+    padding:.85rem clamp(1rem,4vw,3rem); backdrop-filter:blur(9px);
+    background:rgba(250,246,238,.72); border-bottom:1px solid transparent; transition:.25s}
+  .nav--scrolled{border-bottom-color:var(--line);background:rgba(250,246,238,.92);box-shadow:var(--shadow)}
+  .nav__wordmark{font-family:"Source Serif 4",serif;font-weight:700;font-size:1.05rem;letter-spacing:.01em}
+  .nav__wordmark em{color:var(--copper);font-style:normal}
+  .nav__spacer{flex:1}
+  .nav__count{font-family:"JetBrains Mono",monospace;font-size:.72rem;color:var(--muted);
+    border:1px solid var(--line-2);border-radius:999px;padding:.25rem .7rem}
+  .nav__link{font-size:.82rem;color:var(--ink-soft)}
+  .nav__link:hover{color:var(--copper)}
+  @media(max-width:720px){.nav__link{display:none}}
+
+  /* ── opening ── */
+  .opening{max-width:980px;margin:0 auto;padding:clamp(2.6rem,7vw,5.5rem) clamp(1.1rem,4vw,2rem) 1.5rem}
+  .opening__kicker{font-family:"JetBrains Mono",monospace;font-size:.74rem;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--copper);margin-bottom:1rem}
+  .opening h1{font-family:"Source Serif 4",serif;font-weight:700;font-size:clamp(2.1rem,6vw,3.5rem);
+    line-height:1.05;letter-spacing:-.015em;margin:0 0 1rem}
+  .opening h1 em{font-style:italic;color:var(--copper)}
+  .opening__lead{font-size:clamp(1rem,2.4vw,1.18rem);color:var(--ink-soft);max-width:62ch}
+  .opening__note{margin-top:1.1rem;font-size:.86rem;color:var(--muted);max-width:62ch}
+
+  /* ── legend ── */
+  .legend{display:flex;flex-wrap:wrap;gap:.5rem .9rem;max-width:980px;margin:1.4rem auto 0;
+    padding:0 clamp(1.1rem,4vw,2rem)}
+  .legend__item{display:inline-flex;align-items:center;gap:.4rem;font-size:.76rem;color:var(--ink-soft)}
+  .dot{width:.62rem;height:.62rem;border-radius:50%}
+
+  /* ── domain TOC ── */
+  .toc{max-width:980px;margin:1.8rem auto 0;padding:1.1rem clamp(1.1rem,4vw,2rem);
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.35rem .9rem}
+  .toc a{display:flex;gap:.55rem;align-items:baseline;font-size:.83rem;color:var(--ink-soft);padding:.18rem 0}
+  .toc a:hover{color:var(--copper)}
+  .toc .toc__n{font-family:"JetBrains Mono",monospace;font-size:.7rem;color:var(--copper);min-width:1.6rem}
+  .toc .toc__c{margin-left:auto;font-family:"JetBrains Mono",monospace;font-size:.68rem;color:var(--muted)}
+
+  /* ── domain section ── */
+  .domain{max-width:1180px;margin:0 auto;padding:clamp(2.2rem,5vw,3.4rem) clamp(1.1rem,4vw,2rem) .6rem}
+  .domain__head{display:flex;align-items:flex-end;gap:1rem;flex-wrap:wrap;
+    padding-bottom:1rem;border-bottom:2px solid var(--line-2);margin-bottom:1.6rem}
+  .domain__n{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:1.1rem;color:var(--copper)}
+  .domain__title{font-family:"Source Serif 4",serif;font-weight:700;font-size:clamp(1.4rem,3.4vw,2rem);
+    letter-spacing:-.01em;margin:0}
+  .domain__blurb{flex:1 1 280px;min-width:240px;color:var(--muted);font-size:.9rem;max-width:60ch}
+  .domain__count{font-family:"JetBrains Mono",monospace;font-size:.72rem;color:var(--muted);
+    border:1px solid var(--line-2);border-radius:999px;padding:.22rem .65rem;white-space:nowrap}
+
+  /* ── grid + cards ── */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(316px,1fr));gap:1rem}
+  .card{position:relative;display:block;background:var(--card);border:1px solid var(--line);
+    border-radius:14px;padding:1.05rem 1.1rem 1.15rem;box-shadow:var(--shadow);
+    transition:transform .22s cubic-bezier(.2,.7,.3,1), box-shadow .22s, border-color .22s;
+    transform-origin:center; will-change:transform}
+  .card:hover,.card:focus-visible{transform:translateY(-5px) scale(1.035);
+    box-shadow:var(--shadow-lift);border-color:var(--copper-2);outline:none;z-index:2}
+  .card::after{content:"↗";position:absolute;top:.85rem;right:.95rem;font-size:.95rem;color:var(--line-2);
+    transition:color .22s,transform .22s}
+  .card:hover::after{color:var(--copper);transform:translate(2px,-2px)}
+  .card__top{display:flex;align-items:center;gap:.55rem;margin-bottom:.5rem}
+  .chip{font-family:"JetBrains Mono",monospace;font-size:.62rem;font-weight:700;letter-spacing:.06em;
+    text-transform:uppercase;padding:.18rem .5rem;border-radius:999px;color:#fff;white-space:nowrap}
+  .card__id{font-family:"JetBrains Mono",monospace;font-size:.7rem;color:var(--muted);font-weight:500}
+  .card__title{font-family:"Source Serif 4",serif;font-weight:600;font-size:1.04rem;line-height:1.2;
+    margin:0 0 .45rem;padding-right:1rem;letter-spacing:-.005em}
+  .card__text{font-size:.83rem;color:var(--ink-soft);margin:0}
+  .card__text b{color:var(--ink);font-weight:600}
+
+  /* status colours */
+  .s-resolved{background:var(--steel)} .s-pass{background:#3f7d52}
+  .s-partial{background:var(--copper)} .s-active{background:var(--blue)}
+  .s-open{background:var(--gold)} .s-negative{background:var(--rose)}
+  .s-spec{background:var(--violet)} .s-superseded{background:var(--slate)}
+
+  .footer{max-width:1180px;margin:2.5rem auto 0;padding:2rem clamp(1.1rem,4vw,2rem) 3rem;
+    border-top:1px solid var(--line);color:var(--muted);font-size:.82rem}
+  .footer b{color:var(--ink-soft)}
+  .backtop{position:fixed;right:1.1rem;bottom:1.1rem;font-family:"JetBrains Mono",monospace;font-size:.72rem;
+    background:var(--ink);color:var(--paper-2);padding:.5rem .8rem;border-radius:999px;opacity:0;
+    pointer-events:none;transition:.25s;box-shadow:var(--shadow-lift)}
+  .backtop.show{opacity:.9;pointer-events:auto}
+  .backtop:hover{background:var(--copper)}
+</style>
+</head>
+<body>
+<nav class="nav" id="nav">
+  <span class="nav__wordmark">SDT&nbsp;·&nbsp;<em>Investigations</em></span>
+  <span class="nav__count" id="navcount">— investigations</span>
+  <span class="nav__spacer"></span>
+  <a class="nav__link" href="#toc">Domains</a>
+  <a class="nav__link" href="INVESTIGATION_STACK.md">Stack</a>
+  <a class="nav__link" href="README.md">Readme</a>
+</nav>
+
+<header class="opening">
+  <div class="opening__kicker">Spatial Displacement Theory · zero free parameters</div>
+  <h1>The investigation programme, sorted <em>like with like</em>.</h1>
+  <p class="opening__lead">Every SDT investigation, grouped by the field of physics it addresses — from the
+  spation lattice substrate up through particles, nuclei, gravity, cosmology, and out to the domains SDT
+  has yet to claim. Each card gives the question and where it landed. Click any card to open the folder.</p>
+  <p class="opening__note">Domains 01–10 hold executed and active work; domains 11–16 are newly opened
+  frontiers, each seeded with its full suite of investigations expanded by implication and necessity.
+  Status reflects the latest verdict on record; “SPEC” means written but not yet crunched.</p>
+</header>
+
+<div class="legend" id="legend">
+  <span class="legend__item"><span class="dot s-resolved"></span>Resolved / earned</span>
+  <span class="legend__item"><span class="dot s-pass"></span>Pass (benchmarked)</span>
+  <span class="legend__item"><span class="dot s-partial"></span>Partial / 1 fitted</span>
+  <span class="legend__item"><span class="dot s-active"></span>Active</span>
+  <span class="legend__item"><span class="dot s-open"></span>Open</span>
+  <span class="legend__item"><span class="dot s-negative"></span>Negative (informative)</span>
+  <span class="legend__item"><span class="dot s-spec"></span>Spec (proposed)</span>
+  <span class="legend__item"><span class="dot s-superseded"></span>Superseded</span>
+</div>
+
+<nav class="toc" id="toc"></nav>
+
+<main id="main"></main>
+
+<footer class="footer">
+  <p><b>SDT Investigations.</b> Author: J.C. Harvey, Melbourne. Single source of truth for all numbers:
+  <b>Engine/include/sdt/laws.hpp</b>. The master dependency stack lives in
+  <a href="INVESTIGATION_STACK.md" style="color:var(--copper)">INVESTIGATION_STACK.md</a>; this index is the
+  by-domain front door. Reorganised into 16 physics domains on 2026-06-20.</p>
+</footer>
+<a href="#" class="backtop" id="backtop">↑ top</a>
+
+<script>
+/* ── data: every investigation, one entry. text = fundamentals + outcome (≤ ~1 short paragraph). ── */
+const DOMAINS = [
+ { n:"01", folder:"01_Foundations_and_Lattice_Mechanics", title:"Foundations & Lattice Mechanics",
+   blurb:"The spation relay lattice itself — the granular substrate every other domain coarse-grains.",
+   items:[
+    {dir:"CQ08_Granular_Pulse_Mechanics",id:"FLM02",title:"Granular Pulse Mechanics",status:"resolved",
+     text:"Does the granular pulse interaction (pulse rate c/ℓ_P²) reproduce mechanics? <b>Resolved 12/12</b> — F=ma and Newton I–III fall out of the relay; the GPI is the dynamical root."},
+    {dir:"CQ10_Lattice_Pulse_Propagation",id:"FLM05",title:"Lattice Pulse Propagation",status:"resolved",
+     text:"Tick-by-tick contact/gap state machine for a propagating pulse. <b>Resolved 15/16</b> — the one intentional failure proves V_torus ≠ V_disp (a torus is not its displaced volume)."},
+    {dir:"CQ09_Spation_Rotation_Kinematic_Map",id:"FLM03",title:"Spation Rotation — Kinematic Map",status:"active",
+     text:"The rotation field v(r)=cα√(a₀/r) and its co-rotation coefficient. <b>Active</b> — framework in place but the coefficient is a flagged candidate; bottoms out at the unbuilt ROOT-SIM per-contact rule."},
+    {dir:"CQ09_Spation_Rotation",id:"FLM03·base",title:"Spation Rotation (code base)",status:"superseded",
+     text:"The original code-only rotation-field tool. <b>Superseded</b> by the Kinematic Map fork above; kept for provenance."},
+    {dir:"CQ42_Spation_Scale_Closure",id:"FLM06",title:"Spation Scale Closure",status:"partial",
+     text:"Can ℓ_P be built SDT-native, with no ℏ and no G? <b>Partial</b> — the Clearing-count route fails (best N≈10³ vs the 10⁶¹ needed), but the koppa form ℓ_P=√(ϟ·ƛ) recovers the floor exactly and mass-independently."},
+    {dir:"CQ04_State28D_Force_Ratio_Constants",id:"FLM01",title:"State-28D Force-Ratio Constants",status:"partial",
+     text:"Are the 28-D manifold's hardcoded scales (10¹⁰ Pa/m, 10⁻²⁰ J) derived or fitted? <b>Partial (Class C)</b> — both sit in physically sensible regimes (softening threshold; topology-flip energy) but aren't uniquely forced from Laws I–VI; marked CALIBRATED pending."},
+   ]},
+ { n:"02", folder:"02_Particle_Physics_and_Topology", title:"Particle Physics & Topology",
+   blurb:"Particles as hard solid vortices; the constants (α, m_p/m_e) as topology, not inputs.",
+   items:[
+    {dir:"CQ02_Vortex_Equilibrium_Quantisation",id:"PPT01",title:"Vortex Equilibrium Quantisation",status:"resolved",
+     text:"Which R/a ratios give stable tori? <b>Resolved 5/5</b> — R/a=√(q/p) for (p,q) knots: electron (1,1), proton (2,3) trefoil; v_T=0.632c, v_P=0.775c. The particle catalogue's geometric root."},
+    {dir:"CQ36_Winding_Number_Stability",id:"PPT09",title:"Winding-Number Stability",status:"pass",
+     text:"Why is W=2 unstable but W=3 protected? <b>Class A</b> — W=2 is an unknot (lifetime ~10⁻²¹ s); W=3 is the trefoil, topologically protected by an Alexander invariant that can't change continuously. Predicts W=1,3-only."},
+    {dir:"CQ11_Trefoil_Confinement",id:"PPT05",title:"Trefoil Confinement",status:"resolved",
+     text:"Confinement and string tension from convergent pressure on the trefoil. <b>Resolved</b> — a linear potential with string-breaking at 0.23 fm, no quarks or gluons imported."},
+    {dir:"CQ14_Spation_Traction_from_Trefoil",id:"PPT06",title:"Spation Traction from Trefoil",status:"resolved",
+     text:"The trefoil's grip on the lattice. <b>Resolved</b> — phase velocity 1.831c at the proton surface; traction ratio T=12=3(W+1); 6π winding and three output channels. Feeds the rotation-field hand-off."},
+    {dir:"CQ07_Neutrino_Magnetic_Moment",id:"PPT04",title:"Neutrino Magnetic Moment ≡ 0",status:"resolved",
+     text:"Formalise μ_ν≡0. <b>Resolved</b> — a W=0 open winding has no closed circulation, so no EM-deflecting wake → μ_ν is exactly zero, falsifiable against the Standard Model's ~10⁻²⁰."},
+    {dir:"CQ17_Proton_Electron_Mass_Ratio",id:"PPT07",title:"Proton/Electron Mass Ratio",status:"partial",
+     text:"m_p/m_e from W=3 vs W=1 equilibrium (canonical, analytical). <b>Partial</b> — the 6π⁵=1836.118 topological identity holds to 0.0019%, but the full derivation is blocked by the V_disp equilibrium solver (OP-1)."},
+    {dir:"CQ34_Angular_DOF_from_Trefoil",id:"PPT08",title:"Angular DOF from Trefoil",status:"partial",
+     text:"Does the trefoil supply a native angular degree of freedom (no imported spherical harmonics)? <b>Partial</b> — three-fold symmetry yields a native m₃=3k quantisation; full closure depends on the APS04 wake multipole."},
+    {dir:"CQ03_Fine_Structure_from_Topology",id:"PPT02",title:"Fine Structure from Topology",status:"negative",
+     text:"Can α come from W=1 geometry alone? <b>Resolved-negative</b> — α is the koppa of hydrogen's ground state (the k=1/α rung), electromagnetic not topological, and still needs charge e. Hydrogen reads its own seat at k≈137.07 off the Lyman limit."},
+    {dir:"CQ05_Proton_Electron_Mass_Ratio",id:"PPT03",title:"Proton/Electron Ratio (early)",status:"superseded",
+     text:"The preliminary mass-ratio derivation. <b>Superseded</b> by the analytical PPT07; retained for provenance."},
+   ]},
+ { n:"03", folder:"03_Electromagnetism_and_Charge", title:"Electromagnetism & Charge",
+   blurb:"The universal occlusion force, its coefficient P_eff, and what 'charge' actually is.",
+   items:[
+    {dir:"CQ49_Electropause_Binding_Derivation",id:"EMC04",title:"Electropause Binding Derivation",status:"resolved",
+     text:"What holds the electron at a₀ without invoking charge? <b>Resolved</b> — the <b>electropause</b> (pressure-balance boundary): F=mₑ(αc)²/a₀ equals Coulomb to ten significant figures, kinematically. P_eff upgrades E→C and the EMC01 circularity is closed."},
+    {dir:"CQ47_Repulsion_Inverse_Convergence",id:"EMC03",title:"Repulsion = Inverse of Convergence",status:"resolved",
+     text:"Occlusion only attracts — where is repulsion? <b>Resolved (structural)</b> — repulsion is the inverse of convergence (local surplus vs deficit), one throughpole redirected by ±handedness. Explains attraction-only gravity and bipolar charge in one move."},
+    {dir:"CQ01_Transfer_Function_Derivation",id:"EMC01",title:"Transfer-Function Derivation",status:"resolved",
+     text:"Is the occlusion-force coefficient f universal or scale-dependent? The force <b>law</b> survives as Class C; its coefficient was a Class-E calibration (a hidden circularity) — now <b>closed</b> by the EMC04 electropause derivation of P_eff."},
+    {dir:"CQ37_Elementary_Charge_Quantisation",id:"EMC02",title:"Elementary Charge Quantisation",status:"open",
+     text:"Can e be derived from {ℓ_P,c,ℏ,k_B,T_CMB,d}? <b>Inconclusive (Class X)</b> — three routes tested; e cannot be dimensionally derived and stays a unit/Tier-1 primitive. A topological linking-number path (via PPT09) remains the only opening."},
+   ]},
+ { n:"04", folder:"04_Atomic_Physics_and_Spectroscopy", title:"Atomic Physics & Spectroscopy",
+   blurb:"Emission spectra, multi-electron drafting, and fine structure from wake geometry — no wavefunctions.",
+   items:[
+    {dir:"CQ12_Emissions",id:"APS01",title:"Emissions Engine",status:"resolved",
+     text:"Atomic spectra from pressure-well geometry. <b>Resolved</b> — hydrogen to <13 ppm, hydrogen-like to <264 ppm, and a 118-element zk²=1 closure, with no quantum wavefunction."},
+    {dir:"CQ38_Trefoil_Wake_Multipole",id:"APS04",title:"Trefoil Wake Multipole",status:"pass",
+     text:"Does the proton's trefoil wake produce native multipoles and the Lamb shift? <b>Pass (Class C)</b> — native Φ₀/Φ₂/Φ₃ harmonics give a Lamb shift of 1051.8 MHz vs 1057.8 measured (0.57%), zero fitted parameters."},
+    {dir:"CQ26_Universal_Drafting_Crossover",id:"APS03",title:"Universal Drafting Crossover",status:"partial",
+     text:"Is there one scale-invariant curve B=Φ(ξ), ξ=g_self/a₀, across scales? <b>Partial</b> — atomic+stellar+galactic collapse onto it at 8.8% RMS and the source asymptote is confirmed across three scales; the floor is galactic-only and nuclear is excluded."},
+    {dir:"CQ13_Emission_Prediction",id:"APS02",title:"Emission Prediction (drag)",status:"active",
+     text:"Drag factor vs outer-shell electron count — multi-electron drafting. <b>Active</b> — the drafting geometry is folded into APS03; awaits a standalone write-up."},
+   ]},
+ { n:"05", folder:"05_Nuclear_Physics", title:"Nuclear Physics",
+   blurb:"The Atomicus construction grammar (1α + n_d deuterons + n_t tritons), binding, decay, and spallation.",
+   items:[
+    {dir:"CQ25_Atomicus_Nuclear_Grammar",id:"NP01",title:"Atomicus Nuclear Grammar",status:"resolved",
+     text:"Every nucleus = 1 alpha core + n_d deuterons + n_t tritons. <b>Resolved / frozen</b> — 287 nuclides classified by the exact integer map (n_t=A−2Z, n_d=3Z−A−2); the constitution for all nuclear work."},
+    {dir:"CQ29_Neutron_Genesis_to_Tritium",id:"NP04",title:"Neutron Genesis to Tritium",status:"partial",
+     text:"Decay ledger and the 3n→triton gate. <b>NP04A resolved</b> (tritium keystone Q_β=18.3 keV, 1836π falsifier passed); <b>NP04B open</b> — the energy gate passes but assembly kinetics/cross-sections are unpredicted."},
+    {dir:"CQ32_Gate_G1_Price_of_Displacement",id:"NP05",title:"Gate G1 — Price of Displacement",status:"negative",
+     text:"Is nuclear binding a geometric deficit × a uniform price (energy ∝ displaced volume)? <b>Falsified</b> — the linear functional can't fit α (over-bound) and the deuteron (under-bound) together. Names its own successor: the mesh-frequency model."},
+    {dir:"CQ50_Gear_Frequency_Binding_Functional",id:"NP06",title:"Gear-Frequency Binding Functional",status:"open",
+     text:"Successor to NP05: binding as a mesh-coupling frequency split, E_bind=ℏΔω from contact geometry alone. <b>Open</b> — protocol set (anchor on H₂, then unseal d/t/h/α/⁶Li/⁹Be); not yet executed."},
+    {dir:"CQ27_Stellar_Fusion_and_Nuclear_Growth",id:"NP02",title:"Stellar Fusion & Nuclear Growth",status:"spec",
+     text:"A five-stage growth pipeline (growth compiler, occlusion bonds, trefoil rotation, EC gate, nucleus↔shell inversion). <b>Spec</b> — stages A–E written, not yet run."},
+    {dir:"CQ27B_Grammar_Chain_Growth",id:"NP02B",title:"Grammar Chain Growth",status:"active",
+     text:"The (n_d,n_t) lattice walk of nuclear growth. <b>Active</b> — inversion test at 14/29; the quantitative map is in progress."},
+    {dir:"CQ28_Nuclear_Electronic_Geometry_Mirror_Falsification",id:"NP03",title:"Nuclear↔Electronic Mirror",status:"spec",
+     text:"A hostile test of 'the proton is the code': build nucleus and electrons independently and compare geometry against null models. <b>Spec</b> — sub-investigations NP03A–E await execution."},
+    {dir:"Atmospheric_Spallation",id:"SPALL",title:"Atmospheric Spallation (suite)",status:"spec",
+     text:"A 12-prompt suite (A01–A06 archival, Q01–Q06 theoretical): event geometry, neutron-ejection selectivity, multiplicity rules, capture, cosmic-ray torus, cosmogenic production. <b>Spec</b> — unstarted."},
+    {dir:"E29_Deuteron_Binding_from_Occlusion",id:"NP09",title:"Deuteron Binding from Occlusion",status:"spec",
+     text:"B_d=2.224 MeV from the occlusion force at the 2.14 fm bond. <b>Spec (calculation)</b> — the root of the binding chain NP09→NP10→NP08."},
+    {dir:"E30_Alpha_Binding_from_Tetrahedral_Occlusion",id:"NP10",title:"Alpha Binding (tetrahedral)",status:"spec",
+     text:"B_α=28.296 MeV from tetrahedral 2p+2n occlusion geometry. <b>Spec</b> — needs the deuteron bond energy from NP09."},
+    {dir:"E28_Triple_Alpha_Geometric_Packing",id:"NP08",title:"Triple-Alpha / Hoyle State",status:"spec",
+     text:"The Hoyle resonance from α+4d packing geometry. <b>Spec</b> — top of the binding chain, needs NP09/NP10 packing energy."},
+    {dir:"E31_Neutron_Lifetime",id:"NP11",title:"Neutron Lifetime",status:"spec",
+     text:"τ_n≈880 s as a topological rearrangement rate; the beam-vs-bottle discrepancy from boundary conditions. <b>Spec (derivation)</b>."},
+    {dir:"E39_Proton_Neutron_Mass_Difference",id:"NP14",title:"Proton–Neutron Mass Difference",status:"open",
+     text:"Δm=1.293 MeV from trefoil circulation. <b>Open</b> — the derivation is incomplete; pairs with the neutron-identity thread (n = p + internal e⁻)."},
+    {dir:"E40_Nuclear_Magnetic_Moments_from_Vortex",id:"NP15",title:"Nuclear Magnetic Moments",status:"spec",
+     text:"μ for p, n, d, t, He-3 from W=3 trefoil + W=1 torus circulation — a native wake, no magneton. <b>Spec</b> — compare to measured ratios."},
+    {dir:"E07_Primordial_Lithium_Resolution",id:"NP07",title:"Primordial Lithium Resolution",status:"spec",
+     text:"The Li-7 problem via ionisation-suppressed electron capture in the early universe. <b>Spec (calculation)</b>."},
+    {dir:"E33_Nuclear_Charge_Radius_Scaling",id:"NP12",title:"Nuclear Charge-Radius Scaling",status:"spec",
+     text:"R_ch=Z·R_p versus the standard r₀A^(1/3). <b>Spec (archival)</b> — a direct discriminating test against NIST radii."},
+    {dir:"E35_Fe56_vs_Ni62_Grammar_Efficiency",id:"NP13",title:"Fe-56 vs Ni-62 Efficiency",status:"spec",
+     text:"Cosmic abundance peak from grammar symmetry rather than binding-energy-per-nucleon alone. <b>Spec (archival)</b>."},
+   ]},
+ { n:"06", folder:"06_Gravitation_and_Orbital_Mechanics", title:"Gravitation & Orbital Mechanics",
+   blurb:"Gravity with no G and no M — from v_surface and R via koppa; depth, orbits, tides, and waves.",
+   items:[
+    {dir:"CQ15_Spation_Depth_Engine",id:"GOM01",title:"Spation Depth Engine",status:"resolved",
+     text:"One scalar field z(r)=ϟ/r. <b>Resolved 27/27</b> — reproduces gravitational redshift, Shapiro delay, light bending, and cosmological z from a single depth law, no metric tensor."},
+    {dir:"CQ16_k_Hierarchy_Advantage",id:"GOM02",title:"k-Hierarchy Advantage",status:"resolved",
+     text:"k=c/v, ϟ=v²R/c², GM=ϟc². <b>Resolved 15/15</b> — the nuclear→galactic conversion spine, with no test particle and no Newton's constant."},
+    {dir:"CQ24_Koppa_Closure",id:"GOM04",title:"Koppa Closure (c from geometry)",status:"resolved",
+     text:"Derive c and ϟ from Mercury's precession plus an orbital velocity, no GM. <b>Resolved</b> — the 'speed of light from geometry' result."},
+    {dir:"CQ43_Variable_Spation_Closure",id:"GOM05",title:"Variable Spation Closure",status:"resolved",
+     text:"Is the lattice closure variable near mass? <b>Resolved (strong)</b> — ℓ_P(r)=ℓ_P,∞(1−z), so c_local=c(1−z): a 637 m/s light deficit at the solar surface. Unifies Shapiro delay with 'lumiostasis' (the Oort cloud suspended at a pressure-balance depth)."},
+    {dir:"CQ44_Gravitational_Wave_Mechanism",id:"GOM06",title:"Gravitational-Wave Mechanism",status:"resolved",
+     text:"A GW as the medium being moved, not a ripple in it. <b>Resolved (Class C)</b> — four gates pass; the chirp is a koppa length (f_isco≈68 Hz, no G/M); tensor polarisation by construction; ringdown echoes ~58 ms are the SDT≠GR test."},
+    {dir:"E97_Earth_Core_Seismic_Speed",id:"GOM09",title:"Earth-Core Seismic Speed",status:"resolved",
+     text:"g(r) from koppa, no G or M. <b>Resolved</b> — 1.82% RMS to the PREM seismic profile; the completed worked exemplar of the depth engine in a planet."},
+    {dir:"CQ23_Lunar_Orbital_Kinematics",id:"GOM03·L",title:"Lunar Orbital Kinematics",status:"active",
+     text:"Recover the Moon's orbit purely kinematically by inverting pendulum-measured tidal acceleration, no mass or G. <b>Active</b> — the occlusion-gradient framework is complete; numerical validation pending."},
+    {dir:"E24_Mercury_Precession_from_k_Hierarchy",id:"GOM08",title:"Mercury Precession",status:"spec",
+     text:"The 42.98″/century perihelion advance from the k²-gradient. <b>Spec (calculation)</b>."},
+    {dir:"E101_Solar_System_Convergence_Budget",id:"GOM12",title:"Solar-System Convergence Budget",status:"spec",
+     text:"The complete k-hierarchy for the solar system, with total convergence balancing CMB influx. <b>Spec (calculation)</b>."},
+    {dir:"E98_Three_Body_Lagrange_from_Koppa",id:"GOM10",title:"Three-Body Lagrange Points",status:"spec",
+     text:"Lagrange-point geometry from the koppa field of two bodies, no G. <b>Spec</b>."},
+    {dir:"E99_Ocean_Tidal_Analysis",id:"GOM11",title:"Ocean Tidal Harmonics",status:"spec",
+     text:"Tidal forcing as the convergence-gradient differential across the Earth. <b>Spec (archival)</b>."},
+   ]},
+ { n:"07", folder:"07_Cosmology_and_Redshift", title:"Cosmology & Redshift",
+   blurb:"Redshift as ruler-rescaling, the Hubble tension, BAO and H₀ — no expansion, no dark energy.",
+   items:[
+    {dir:"CQ40_Spation_Pressure_Tensor_Derivation",id:"CR05",title:"Spation Pressure-Tensor → H₀",status:"resolved",
+     text:"Derive H₀ from the lattice pressure tensor. <b>Resolved (Class C)</b> — P(z)∝(1+z)⁴ with equation of state γ=4 gives H₀=67.4 km/s/Mpc (±1% of Planck) and upgrades the transfer function f from E to C, zero free parameters."},
+    {dir:"CQ46_Redshift_Octave_Ladder",id:"CR07",title:"Redshift Octave Ladder",status:"resolved",
+     text:"Is redshift octave-counting of local spation size? <b>Resolved (solid)</b> — 1+z=2^Δn; the CMB is a 10.10-octave slide (Wien and z agree to 0.01 octave). Non-compounding is proven three ways, which kills tired-light and survives sharp QSO lines."},
+    {dir:"CQ39_Cosmological_Distance_Scale",id:"CR04",title:"Cosmological Distance Scale",status:"partial",
+     text:"Derive R_CMB from first principles. <b>Qualified (C–D)</b> — the BAO scale (147 Mpc) comes out as a lattice resonance and the z≈1100 freeze-out is exact, but the comoving-distance magnitude still needs an independent H₀ (now via CR05)."},
+    {dir:"CQ45_Redshift_Emission_Propagation_Split",id:"CR06",title:"Emission/Propagation Split",status:"partial",
+     text:"Does the emission+propagation split fit Pantheon supernovae without Λ? <b>Partial</b> — the doc's n=4 law is decisively falsified (χ²/dof=424), but a free-n fit lands at n≈0.66 (χ²/dof=2.13), beating Milne/EdS though ΛCDM is still preferred."},
+    {dir:"CQ18_Redshift_Decomposition",id:"CR01",title:"Redshift Decomposition",status:"active",
+     text:"z=1/k² and the zk²=1 ladder from the proton interior to the cosmological scale, with an H₀ correction. <b>Active</b> — code across solar, multi-planet, AGN and SNe decompositions."},
+    {dir:"CQ33_Transfer_Function_Closure",id:"CR03",title:"Transfer-Function Closure",status:"open",
+     text:"Can f=P_eff/P_conv fully close, or is R_CMB an irreducible external scale? <b>Open</b> — P_eff is whitelist-derivable; f's last dependency is R_CMB, which needs an independent H₀ derivation (routed to CR05)."},
+    {dir:"CQ18_ZOA_Lensing",id:"ZOA",title:"Zone-of-Avoidance Lensing",status:"spec",
+     text:"Do redshift residuals carry a Milky-Way foreground signature beyond the Great-Attractor dipole? <b>Spec</b> — null hypotheses and the latitude/mirror/ring tests are specified; awaits the data pipeline."},
+    {dir:"E11_E45_Pressure_Gradient_Redshift_and_BAO",id:"CR08/45",title:"Pressure-Gradient Redshift & BAO",status:"spec",
+     text:"The distance–redshift relation and BAO scale as lattice standing waves. <b>Spec (archival)</b> — vs DESI."},
+    {dir:"E42_E49_Hubble_Tension_and_Dark_Energy",id:"CR09/49",title:"Hubble Tension & Dark Energy",status:"spec",
+     text:"A Pantheon+ fit without Λ, recasting 'dark energy' as a pressure-gradient misreading. <b>Spec (archival)</b> — the χ² with/without Λ comparison."},
+   ]},
+ { n:"08", folder:"08_Galactic_Dynamics", title:"Galactic Dynamics",
+   blurb:"Flat rotation curves and lensing from convergence-disk occlusion — no dark-matter halo.",
+   items:[
+    {dir:"CQ06_Eclipse_Saturation_Model",id:"GD01",title:"Eclipse Saturation Model",status:"resolved",
+     text:"Flat rotation curves from convergence-disk occlusion. <b>Resolved (framework)</b> — recovers a BTFR slope of 4 and the effective G exactly; the basis of galactic.hpp."},
+    {dir:"CQ20_Galactic_Spation_Topology",id:"GD03",title:"Galactic Spation Topology",status:"active",
+     text:"The lattice state across 12 radial zones (10⁻¹⁶ → 10²¹ m). <b>Active</b> — the grand unification of the redshift/occlusion threads; needs PPT07–19 closed."},
+    {dir:"CQ23_3D_Volumetric_Integration",id:"GOM03·3D",title:"3D Volumetric Integration",status:"active",
+     text:"Replace the 2D surface-density saturation with a pure 3D radial occlusion integral. <b>Active/Open</b> — the correct path for low-surface-brightness galaxies (UGC 128, IC 2574); formalisation in progress."},
+    {dir:"E46_Galaxy_Rotation_Curves",id:"GD05",title:"Galaxy Rotation Curves (SPARC)",status:"active",
+     text:"Real SPARC curves. <b>Active</b> — the canonical 3D eclipse model fails on real data (66% RMS); the twin-regime M4 convergence-floor law wins (23.8% RMS, BTFR 3.58) but its crossover shape is still borrowed MOND-simple."},
+    {dir:"CQ19_Milky_Way_Occlusion_Map",id:"GD02",title:"Milky-Way Occlusion Map",status:"spec",
+     text:"Eclipse occlusion at the galactic centre. <b>Spec</b> — sources within 150 pc of Sgr A* catalogued; the binding/baryon/spiral sub-tools are coded."},
+    {dir:"E47_Gravitational_Lensing",id:"GD06",title:"Gravitational Lensing",status:"spec",
+     text:"Lensing as convergence-gradient refraction vs strong-lensing data. <b>Spec (archival)</b> — includes the low-mass-object test."},
+    {dir:"GalacticCalculator",id:"GALC",title:"Galactic Calculator",status:"active",
+     text:"A universal SDT rotation-curve calculator (mass, scale length, bulge, bar → curve), no G and no kg. <b>Active</b> — tool coded; validation on real galaxies pending."},
+   ]},
+ { n:"09", folder:"09_Stellar_Astrophysics_and_Radiation", title:"Stellar Astrophysics & Radiation",
+   blurb:"Luminosity, the main sequence and blackbody radiation from convergence recycling and lattice modes.",
+   items:[
+    {dir:"E61_E63_Blackbody_Radiation_from_Lattice",id:"SAR02/63",title:"Blackbody Radiation from Lattice",status:"spec",
+     text:"Planck, Stefan–Boltzmann and Wien from lattice mode counting — the lattice is already discrete at ℓ_P, so no quantised-oscillator postulate is needed. <b>Spec (derivation)</b>."},
+    {dir:"E64_Solar_Luminosity",id:"SAR03",title:"Solar Luminosity",status:"spec",
+     text:"L_Sun from the convergence-recycling budget. <b>Spec (calculation)</b>."},
+    {dir:"E65_Stellar_Main_Sequence_k_Gradient",id:"SAR04",title:"Main Sequence as k-Gradient",status:"spec",
+     text:"The HR diagram as a k-sequence equilibrium. <b>Spec (archival)</b> — vs GAIA."},
+    {dir:"E09_Le_Sage_Thermal_Budget",id:"SAR01",title:"Le Sage Thermal Budget",status:"spec",
+     text:"The convergence-heating rate vs the measured geothermal budget — the classic Le Sage objection, answered. <b>Spec (calculation)</b>."},
+   ]},
+ { n:"10", folder:"10_Fluid_Dynamics", title:"Fluid Dynamics",
+   blurb:"Classical fluid dynamics as the continuum coarse-graining of spation relay mechanics (FD01–FD11).",
+   items:[
+    {dir:"FD05_Sound_Shocks_and_c_over_root3",id:"FD05",title:"Sound, Shocks & c/√3",status:"pass",
+     text:"The compression-relay wave and its ceiling. <b>Class A</b> — c/√3 is native from P=u/3 (zero parameters, = the BAO sound speed), the sonic boom unifies with Cherenkov, and air's sound speed lands to +0.031%."},
+    {dir:"FD04_Kolmogorov_Cascade_from_Displacement",id:"FD04",title:"Kolmogorov Cascade",status:"pass",
+     text:"Turbulence as the volume-conserved displacement cascade. <b>Class A (exponent)</b> — the −5/3 spectrum is derived from constant-flux dimensional analysis (not assumed), and the microscale floors at ℓ_P."},
+    {dir:"FD02_Viscosity_and_Circulation_Quantum",id:"FD02",title:"Viscosity & Circulation Quantum",status:"partial",
+     text:"Momentum diffusion and the circulation quantum. <b>Class C</b> — κ=h/m to 0.020% (a clean identity), air ν within 1.44×, lattice exponent n=0.5 exact; the η/s floor's 1/4π is calibrated."},
+    {dir:"FD01_Navier_Stokes_from_Spation_Relay",id:"FD01",title:"Navier–Stokes from Relay",status:"partial",
+     text:"The Navier–Stokes equation from per-spation relay coarse-graining. <b>Class C</b> — every NS term maps to a relay process and ν is recovered from a relay random walk; Euler/Stokes limits hold, the ν-coefficient awaits ROOT-SIM."},
+    {dir:"FD03_Reynolds_Transition_Relay_Ratio",id:"FD03",title:"Reynolds Transition",status:"partial",
+     text:"Turbulent transition as a ratio of two rates of one medium. <b>Class C</b> — Re=UL/ν is derived as an advection/relay-smoothing ratio; the critical value needs one calibrated coherence ratio per geometry."},
+    {dir:"FD06_Boundary_Layer_from_Traction",id:"FD06",title:"Boundary Layer from Traction",status:"partial",
+     text:"No-slip from spation traction gripping the wall. <b>Class C</b> — no-slip emerges as a traction fixed point and δ∝√(νx/U) is native; the Blasius prefactors are flagged borrows."},
+    {dir:"FD07_Circulation_Lift_and_Magnus",id:"FD07",title:"Circulation, Lift & Magnus",status:"partial",
+     text:"Lift from differential occlusion. <b>Class C</b> — L=ρUΓ and the lift/Magnus sign are native from wake asymmetry; the 2π thin-airfoil slope is borrowed potential-flow geometry."},
+    {dir:"FD08_Bernoulli_from_Movement_Budget",id:"FD08",title:"Bernoulli from Movement Budget",status:"partial",
+     text:"Bernoulli as the streamline convergence-pressure budget. <b>Class C</b> — ½ρv²+P+ρgz=const from Law V; Venturi and Pitot exact, with head via g=v²/R (no G)."},
+    {dir:"FD09_Drag_as_Occlusion_Cross_Section",id:"FD09",title:"Drag as Occlusion Cross-Section",status:"partial",
+     text:"Drag as the Law-III occlusion of convergent momentum flux. <b>Class C</b> — the form-drag and μRv scaling are native; the 6π Stokes prefactor and the C_D(Re) curve (incl. the drag crisis) are correlations."},
+    {dir:"FD10_Vortex_Shedding_and_Strouhal",id:"FD10",title:"Vortex Shedding & Strouhal",status:"partial",
+     text:"Shedding as lattice relaxation. <b>Class C</b> — St≈0.205 (+0.61%) from a gear/relaxation clock and f∝U/D exact; the 0.2 plateau needs one calibrated O(1) coefficient."},
+    {dir:"FD11_Tesla_Steam_Generator",id:"FD11",title:"Tesla Steam Generator (capstone)",status:"spec",
+     text:"An applied capstone — a bladeless turbine whose drive <i>is</i> spation traction, composing the boundary-layer, viscosity, nozzle and budget results. <b>Spec</b> — optimal disk gap ~0.4 mm and a dη/dRe<0 viscosity-signature falsifier, with a modern-materials build spec."},
+   ]},
+ { n:"11", folder:"11_Thermodynamics_and_Statistical_Mechanics", title:"Thermodynamics & Statistical Mechanics",
+   blurb:"Entropy, temperature and the Second Law as literal counting of spation microstates — the lattice is already discrete.",
+   items:[
+    {dir:"TD01_Entropy_and_Arrow_of_Time_from_Lattice",id:"TD01",title:"Entropy & the Arrow of Time",status:"spec",
+     text:"Seed. S=k_B ln W as a literal count of relay microstates, temperature as throughput-per-DoF, and the arrow of time from the irreversibility of convergence relay. <b>Spec</b> — the domain root."},
+    {dir:"TD02_Temperature_and_Equipartition_from_Throughput",id:"TD02",title:"Temperature & Equipartition",status:"spec",
+     text:"k_BT as the mean disordered relay throughput per spation degree of freedom; ½k_BT per quadratic DoF from even sharing. <b>Spec</b>."},
+    {dir:"TD03_Ideal_Gas_and_Pressure_from_Occlusion",id:"TD03",title:"Ideal Gas & Pressure",status:"spec",
+     text:"PV=Nk_BT from the Law-III occlusion momentum-flux of a relay gas, with no imposed ensemble. <b>Spec</b>."},
+    {dir:"TD04_Heat_Conduction_and_Diffusion_from_Relay",id:"TD04",title:"Heat Conduction & Diffusion",status:"spec",
+     text:"Fourier's law q=−k∇T as throughput diffusion, with thermal conductivity from the relay mean free path. <b>Spec</b>."},
+    {dir:"TD05_Phase_Transitions_and_Latent_Heat_from_Reconfiguration",id:"TD05",title:"Phase Transitions & Latent Heat",status:"spec",
+     text:"Melting and boiling as lattice-packing reconfiguration thresholds; latent heat as the reorganisation cost. <b>Spec</b>."},
+    {dir:"TD06_Blackbody_Thermodynamics_from_Lattice_Modes",id:"TD06",title:"Blackbody Thermodynamics",status:"spec",
+     text:"Planck, Stefan–Boltzmann and Wien from lattice mode counting — no quantised-oscillator postulate. <b>Spec</b> (consolidates SAR02–SAR02 as thermodynamics)."},
+    {dir:"TD07_Information_Thermodynamics_and_Landauer",id:"TD07",title:"Information Thermodynamics",status:"spec",
+     text:"Landauer's k_BT ln2 per erased bit, and Maxwell's demon paying relay throughput to sort. <b>Spec</b>."},
+    {dir:"TD08_Fluctuation_Dissipation_and_Brownian_Motion",id:"TD08",title:"Fluctuation–Dissipation",status:"spec",
+     text:"Relay tick-noise → Brownian motion and the Einstein relation D=μk_BT, fluctuation and dissipation as one relay statistic. <b>Spec</b>."},
+   ]},
+ { n:"12", folder:"12_Condensed_Matter_Physics", title:"Condensed Matter Physics",
+   blurb:"Conduction, superconductivity and crystal order as collective vortex behaviour in the relay lattice.",
+   items:[
+    {dir:"CM01_Superconductivity_as_Phase_Locked_Vortex_Pairs",id:"CM01",title:"Superconductivity",status:"spec",
+     text:"Seed. Zero resistance from phase-locked vortex pairs the lattice defects can't grip; Meissner as swirl expulsion; flux quantum Φ₀=h/2e as a native count; the isotope effect from lattice stiffness. <b>Spec</b>."},
+    {dir:"CM02_Electrical_Conduction_and_Ohms_Law_from_Occlusion_Drag",id:"CM02",title:"Conduction & Ohm's Law",status:"spec",
+     text:"Normal-state resistance as occlusion drag on drifting vortices (a Drude form), dumping organised throughput into heat; defines the ohm natively. <b>Spec</b> — the normal-state root."},
+    {dir:"CM03_Band_Structure_Conductor_Insulator_from_Lattice_Packing",id:"CM03",title:"Band Structure",status:"spec",
+     text:"Conductor/semiconductor/insulator from lattice packing geometry and occlusion gaps, not Bloch wavefunctions. <b>Spec</b>."},
+    {dir:"CM04_Crystal_Lattice_and_Phonons_as_Compression_Waves",id:"CM04",title:"Crystal Lattice & Phonons",status:"spec",
+     text:"Lattice vibrations as native compression waves; the Debye model and the Dulong–Petit→T³ specific heat from mode counting. <b>Spec</b>."},
+    {dir:"CM05_Superfluidity_and_BEC_from_Phase_Lock",id:"CM05",title:"Superfluidity & BEC",status:"spec",
+     text:"He-4 superfluidity and Bose–Einstein condensation as a macroscopic phase-locked wake condensate, circulation quantised at κ=h/m. <b>Spec</b>."},
+    {dir:"CM06_Quantum_Hall_and_Josephson_Metrology",id:"CM06",title:"Quantum Hall & Josephson",status:"spec",
+     text:"The quantum Hall effect (defining the ohm) and Josephson effect (defining the volt) from lattice topology and relay-phase coupling. <b>Spec</b>."},
+    {dir:"CM07_Ferromagnetism_as_Aligned_Vortex_Wakes",id:"CM07",title:"Ferromagnetism",status:"spec",
+     text:"Magnetic domains, the Curie temperature and hysteresis from aligned wake circulation — quoted in native wake-circulation units, never magnetons. <b>Spec</b>."},
+   ]},
+ { n:"13", folder:"13_Quantum_Foundations_and_Measurement", title:"Quantum Foundations & Measurement",
+   blurb:"The biggest standing SDT debt: deterministic relay-wake mechanics for double-slit, Born, spin and Bell.",
+   items:[
+    {dir:"QM01_Deterministic_Double_Slit_from_Lattice_Relay",id:"QM01",title:"Deterministic Double-Slit",status:"spec",
+     text:"Seed. The vortex goes through one slit while its convergence wake passes through both — fringes, the Born rule and single-particle build-up from deterministic relay mechanics. <b>Spec</b> — the census's #1 debt and the domain root."},
+    {dir:"QM02_Uncertainty_as_Relay_Bandwidth",id:"QM02",title:"Uncertainty as Relay Bandwidth",status:"spec",
+     text:"Δx·Δp ≥ ℏ/2 as the wake's joint position/momentum bandwidth — a Fourier-type relay limit, not an operator commutator. <b>Spec</b>."},
+    {dir:"QM03_Tunnelling_as_Wake_Leakage",id:"QM03",title:"Tunnelling as Wake Leakage",status:"spec",
+     text:"Barrier penetration as the wake leaking through an occlusion barrier while the vortex follows; α-decay rates and STM current. <b>Spec</b>."},
+    {dir:"QM04_Born_Rule_from_Residence_Density",id:"QM04",title:"Born Rule from Residence Density",status:"spec",
+     text:"|amplitude|² as the energy density of the superposed convergence-pressure field = the long-run vortex residence density. The square is geometric, not axiomatic. <b>Spec</b>."},
+    {dir:"QM05_Bell_EPR_and_the_Throughpole",id:"QM05",title:"Bell / EPR & the Throughpole",status:"open",
+     text:"The locality audit: can a local relay-wake model reproduce the 2√2 Bell violation, and if not, what throughpole feature is invoked? <b>Open by design</b> — the hardest test; honesty over a forced local story."},
+    {dir:"QM06_Discrete_Spectra_from_Standing_Wakes",id:"QM06",title:"Discrete Spectra from Standing Wakes",status:"spec",
+     text:"Energy quantisation and discrete spectra as standing-wake boundary conditions on the vortex orbit (the n-ladder), connecting to the APS01 emissions engine. <b>Spec</b>."},
+    {dir:"QM07_Spin_and_Stern_Gerlach_from_Handedness",id:"QM07",title:"Spin & Stern–Gerlach",status:"spec",
+     text:"'Spin' as the vortex's intrinsic handedness/circulation, its two-valuedness, and Stern–Gerlach deflection via differential occlusion in a swirl gradient. <b>Spec</b>."},
+   ]},
+ { n:"14", folder:"14_Plasma_Physics_and_Magnetism", title:"Plasma Physics & Magnetism",
+   blurb:"Magnetism as collective vortex circulation; B a swirl field, ∇·B=0 a theorem — never quoted in magnetons.",
+   items:[
+    {dir:"PM01_Magnetism_as_Collective_Vortex_Circulation",id:"PM01",title:"Magnetism as Vortex Circulation",status:"spec",
+     text:"Seed. B as the curl of collective wake circulation; the Lorentz force as differential occlusion (sign from handedness); ∇·B=0 by construction; Earth's magnetosphere from traction. <b>Spec</b> — native units only, the domain root."},
+    {dir:"PM02_Faraday_Induction_and_Lenz_from_Changing_Swirl",id:"PM02",title:"Faraday Induction & Lenz",status:"spec",
+     text:"EMF from a time-varying collective swirl; Lenz's law as the occlusion back-reaction opposing the change. <b>Spec</b>."},
+    {dir:"PM03_EM_Waves_as_Coupled_Relay_Pulses",id:"PM03",title:"EM Waves as Relay Pulses",status:"spec",
+     text:"Maxwell's wave and light as a transverse coupling of swirl and emission phase, propagating at c set by the lattice — recovered without µ₀ε₀ as primitives. <b>Spec</b>."},
+    {dir:"PM04_Plasma_Oscillations_and_Debye_Shielding",id:"PM04",title:"Plasma Oscillations & Debye",status:"spec",
+     text:"The plasma frequency ω_p and Debye length from the collective vortex-population response in the lattice. <b>Spec</b>."},
+    {dir:"PM05_Magnetic_Reconnection_and_Solar_Flares_from_Wake_Topology",id:"PM05",title:"Magnetic Reconnection & Flares",status:"spec",
+     text:"Reconnection as a change in collective wake topology releasing stored throughput; solar flares and CMEs, tied to the magnetosphere engine. <b>Spec</b>."},
+    {dir:"PM06_Cyclotron_and_Synchrotron_from_Differential_Occlusion",id:"PM06",title:"Cyclotron & Synchrotron",status:"spec",
+     text:"Circular vortex motion in a swirl field from the Lorentz-occlusion push; synchrotron radiation as vortex deceleration. <b>Spec</b>."},
+    {dir:"PM07_Magnetohydrodynamics_Coupling_to_the_Fluid_Suite",id:"PM07",title:"Magnetohydrodynamics",status:"spec",
+     text:"MHD as the fluid suite coupled to the swirl field; Alfvén waves as transverse lattice+swirl modes; frozen-in flux as wake advection. <b>Spec</b>."},
+   ]},
+ { n:"15", folder:"15_Optics_and_Photonics", title:"Optics & Photonics",
+   blurb:"Light as a relay emission through a graded-closure lattice; refractive index = closure ratio, so optics ≡ lensing.",
+   items:[
+    {dir:"OP01_Refraction_and_Dispersion_as_Spation_Gradient_Index",id:"OP01",title:"Refraction & Dispersion",status:"spec",
+     text:"Seed. n=c/c_local=1/(1−z) — one gradient-index mechanism for glass and for a mass-graded vacuum, so Snell's law and the 1.75″ solar deflection share a derivation; dispersion seeds the solar lens fold. <b>Spec</b> — the domain root."},
+    {dir:"OP02_Reflection_and_Fresnel_from_Relay_Impedance",id:"OP02",title:"Reflection & Fresnel",status:"spec",
+     text:"Reflection and transmission amplitudes from the closure-impedance mismatch at an interface; the Brewster angle and Fresnel coefficients. <b>Spec</b>."},
+    {dir:"OP03_Diffraction_and_Interference_from_Relay_Huygens",id:"OP03",title:"Diffraction & Interference",status:"spec",
+     text:"Gratings and slit interference for light via relay-Huygens summation, each interface spation re-emitting one tick. <b>Spec</b> — shares the QM01 wake construction."},
+    {dir:"OP04_Polarisation_as_Transverse_Wake_Orientation",id:"OP04",title:"Polarisation",status:"spec",
+     text:"Linear and circular polarisation as the transverse orientation/handedness of the emission; Malus's cos² law and optical activity. <b>Spec</b>."},
+    {dir:"OP05_Photoelectric_and_Compton_as_Emission_Vortex_Exchange",id:"OP05",title:"Photoelectric & Compton",status:"spec",
+     text:"The photoelectric threshold (sub-attosecond relay absorption) and the Compton shift (lattice momentum transfer) as emission↔vortex exchange, no photon-particle. <b>Spec</b>."},
+    {dir:"OP06_Coherence_Lasers_and_Stimulated_Emission",id:"OP06",title:"Coherence & Lasers",status:"spec",
+     text:"Coherence as phase-locked emissions and the laser as a macroscopic relay phase-lock (kin to the superconducting condensate); linewidth and gain. <b>Spec</b>."},
+    {dir:"OP07_Solar_Lens_Artifact_Experiment",id:"OP07",title:"Solar Lens-Artifact Experiment",status:"spec",
+     text:"The falsifier capstone: a false-colour λ-scan where the solar disk grows, then partly vanishes at the ~4400–5000 K temperature-minimum band (a caustic fold), then reappears — one dispersive surface, not 'different Suns'. <b>Spec</b>."},
+   ]},
+ { n:"16", folder:"16_Chemistry_and_Molecular_Bonding", title:"Chemistry & Molecular Bonding",
+   blurb:"Bonds as shared/transferred electropauses; molecular geometry from wake cancellation — no orbitals.",
+   items:[
+    {dir:"CH01_Covalent_Bond_as_Shared_Electropause",id:"CH01",title:"Covalent Bond = Shared Electropause",status:"spec",
+     text:"Seed. The covalent bond as a single electropause enclosing two nuclei; bond length and energy from the shared pressure-balance, and VSEPR angles from wake cancellation — no orbitals, no hybridisation. <b>Spec</b> — the domain root."},
+    {dir:"CH02_Ionic_and_Metallic_Bonding_from_Electropause_Transfer",id:"CH02",title:"Ionic & Metallic Bonding",status:"spec",
+     text:"Ionic bonding as an electropause handed off entirely; metallic bonding as electropauses delocalised into a shared sea (tying to conduction). <b>Spec</b>."},
+    {dir:"CH03_Periodic_Table_and_Valence_from_Shell_Wake_Cancellation",id:"CH03",title:"Periodic Table & Valence",status:"spec",
+     text:"Periodicity, valence and the octet rule from the period-2 wake-cancellation map (paired fore/aft wakes silent, lone wakes active). <b>Spec</b>."},
+    {dir:"CH04_Molecular_Geometry_VSEPR_from_Wake_Balance",id:"CH04",title:"Molecular Geometry (VSEPR)",status:"spec",
+     text:"Bond angles across many molecules as wake-torque equilibria; the lone-pair/bond-pair weighting that gives 104.5°/107°/109.5° and the higher geometries. <b>Spec</b>."},
+    {dir:"CH05_Reaction_Energetics_and_Activation_from_Wake_Reconfiguration",id:"CH05",title:"Reaction Energetics",status:"spec",
+     text:"Reaction enthalpy and the activation barrier as the cost and path of wake reconfiguration; the transition state as a wake saddle, catalysis as a lower-wake path. <b>Spec</b>."},
+    {dir:"CH06_Hydrogen_Bonding_and_van_der_Waals_from_Residual_Wake",id:"CH06",title:"Hydrogen Bonding & van der Waals",status:"spec",
+     text:"Weak intermolecular bonds as residual/fluctuating wake outside the electropause; water's anomalies and the H-bond network. <b>Spec</b>."},
+    {dir:"CH07_Molecular_Spectra_Vibration_and_Rotation",id:"CH07",title:"Molecular Spectra",status:"spec",
+     text:"IR, Raman and microwave spectra as bond-wake oscillation (vibration) and whole-molecule wake rotation; recovering the characteristic frequencies. <b>Spec</b>."},
+   ]},
+];
+
+const STATUS_LABEL = {resolved:"Resolved",pass:"Pass",partial:"Partial",active:"Active",
+  open:"Open",negative:"Negative",spec:"Spec",superseded:"Superseded"};
+
+/* render */
+const main = document.getElementById('main');
+const toc  = document.getElementById('toc');
+let total = 0;
+const enc = s => s.split('/').map(encodeURIComponent).join('/');
+
+DOMAINS.forEach(d=>{
+  total += d.items.length;
+  // TOC entry
+  const t = document.createElement('a');
+  t.href = '#dom-'+d.n;
+  t.innerHTML = `<span class="toc__n">${d.n}</span><span>${d.title}</span><span class="toc__c">${d.items.length}</span>`;
+  toc.appendChild(t);
+  // section
+  const sec = document.createElement('section');
+  sec.className = 'domain'; sec.id = 'dom-'+d.n;
+  let cards = '';
+  d.items.forEach(it=>{
+    const href = enc(d.folder + '/' + it.dir) + '/';
+    cards += `<a class="card" href="${href}">
+        <div class="card__top">
+          <span class="chip s-${it.status}">${STATUS_LABEL[it.status]}</span>
+          <span class="card__id">${it.id}</span>
+        </div>
+        <h3 class="card__title">${it.title}</h3>
+        <p class="card__text">${it.text}</p>
+      </a>`;
+  });
+  sec.innerHTML = `
+    <div class="domain__head">
+      <span class="domain__n">${d.n}</span>
+      <h2 class="domain__title">${d.title}</h2>
+      <p class="domain__blurb">${d.blurb}</p>
+      <span class="domain__count">${d.items.length} investigations</span>
+    </div>
+    <div class="grid">${cards}</div>`;
+  main.appendChild(sec);
+});
+document.getElementById('navcount').textContent = total + ' investigations · 16 domains';
+
+/* nav scroll state + back-to-top */
+const nav = document.getElementById('nav'), bt = document.getElementById('backtop');
+addEventListener('scroll', ()=>{
+  const y = scrollY;
+  nav.classList.toggle('nav--scrolled', y>60);
+  bt.classList.toggle('show', y>700);
+}, {passive:true});
+</script>
+</body>
+</html>

@@ -67,33 +67,33 @@ the investigation derives predictions and compares them to measurements.
 | CQ03_Fine_Structure_from_Topology | Can α be derived from W=1 geometry? | Theory/03_Open_Problems |
 | CQ04_State28D_Force_Ratio_Constants | Derive the 10³⁰ and 10⁻⁹ magic numbers | state28d.hpp:168 |
 | CQ05_Proton_Electron_Mass_Ratio | m_p/m_e from W=3 vs W=1 equilibrium | Theory/03_Open_Problems |
-| CQ06_Eclipse_Saturation_Model | Missing galactic.hpp — needs implementation | E46 reference |
+| CQ06_Eclipse_Saturation_Model | Missing galactic.hpp — needs implementation | GD05 reference |
 | CQ07_Neutrino_Magnetic_Moment | Formalise μ_ν ≡ 0 prediction | neutrino.hpp:9 |
 | CQ15_Spation_Depth_Engine | z(r)=ϟ/r reproduces redshift, Shapiro, bending, cosmological z | laws.hpp:bridge |
-| CQ26_Universal_Drafting_Crossover | Is B=Φ(ξ), ξ=g_self/g_floor, one scale-invariant curve across atomic/stellar/galactic/nuclear? 40 examples × 3 types × 4 classes × 4 scales | galactic.hpp:77, CQ13, E101, E46-M4 |
-| CQ37_Elementary_Charge_Quantisation | Can e = 1.602e-19 C be derived from {ℓ_P, c, ℏ, k_B, T_CMB, d}? | CQ03 dependency |
+| CQ26_Universal_Drafting_Crossover | Is B=Φ(ξ), ξ=g_self/g_floor, one scale-invariant curve across atomic/stellar/galactic/nuclear? 40 examples × 3 types × 4 classes × 4 scales | galactic.hpp:77, APS02, GOM12, GD05-M4 |
+| CQ37_Elementary_Charge_Quantisation | Can e = 1.602e-19 C be derived from {ℓ_P, c, ℏ, k_B, T_CMB, d}? | PPT02 dependency |
 
 ---
 
 ## Dependency Map
 
 ```
-CQ02 (R/a quantisation)
-  ├── CQ03 (α from topology — needs W=1 equilibrium)
-  │   └── CQ37 (e from topology — depends on CQ03 solution)
-  ├── CQ05 (m_p/m_e — needs W=3 vs W=1 ratio)
-  └── E40 (magnetic moments — needs circulation modes)
+PPT01 (R/a quantisation)
+  ├── PPT02 (α from topology — needs W=1 equilibrium)
+  │   └── EMC02 (e from topology — depends on PPT02 solution)
+  ├── PPT03 (m_p/m_e — needs W=3 vs W=1 ratio)
+  └── NP15 (magnetic moments — needs circulation modes)
 
-E29 (deuteron binding)
-  └── E30 (alpha binding — needs bond energy from E29)
-       └── E28 (triple alpha — needs packing energy)
+NP09 (deuteron binding)
+  └── NP10 (alpha binding — needs bond energy from NP09)
+       └── NP08 (triple alpha — needs packing energy)
 
-CQ06 (eclipse saturation model)
-  └── E46 (galaxy rotation curves — needs the model)
+GD01 (eclipse saturation model)
+  └── GD05 (galaxy rotation curves — needs the model)
 
-E42+E49 (Hubble + dark energy)
-  └── E11+E45 (redshift model + BAO — shared cosmology)
+CR09+CR09 (Hubble + dark energy)
+  └── CR08+CR08 (redshift model + BAO — shared cosmology)
 
-CQ01 (transfer function)
-  └── E09 (Le Sage thermal — needs f universality)
+EMC01 (transfer function)
+  └── SAR01 (Le Sage thermal — needs f universality)
 ```

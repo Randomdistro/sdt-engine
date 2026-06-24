@@ -103,7 +103,7 @@ The claims a hostile reviewer attacks, each adjudicated by the delete-test. **Re
 | #24/#25 | `f=P_eff/P_conv`, `R_charge=√(R_p r_e)` | #24 inherits #23's *magnitude* (does not cancel); #25 consumes measured radii | prov `calibrated` · dep `measured-observable`→`calibrated-target` | **E** |
 | #107 | eclipse `κ_area=9.1e-29 m²` | Vanishes without the fitted cross-section | prov `calibrated` · dep `calibrated-target` | **E** |
 | **#49** | **`ϟ_per_baryon=ℓ_P² c m_p/ℏ`** | **Unchanged** — uses only primitive-whitelist `{ℓ_P,c,m_p,ℏ}`; the per-baryon koppa is produced without feeding in any measured `G` or `M`. **`G` is never an input.** | prov `SDT-derived` · corr `known-match` · dep `primitive-whitelist` · **risk_flag: CODATA `ℓ_P` conventionally encodes G under standard physics** | **C-flagged** |
-| M4 | `g_obs=g_bar/(1−e^{−√(g_bar/a₀)})` (e46_twin_regime) | **Split.** `a₀=cH₀/2π` unchanged (C); BTFR deep-limit `v⁴=GM_bar a₀` unchanged (C); the *interpolation shape* is a borrowed MOND form (X) | a₀: prov `SDT-derived` dep `primitive-whitelist` → **C**; shape: prov `external-input` dep `borrowed-function` → **X** | **C-asymptotes / X-shape** |
+| M4 | `g_obs=g_bar/(1−e^{−√(g_bar/a₀)})` (gd05_twin_regime) | **Split.** `a₀=cH₀/2π` unchanged (C); BTFR deep-limit `v⁴=GM_bar a₀` unchanged (C); the *interpolation shape* is a borrowed MOND form (X) | a₀: prov `SDT-derived` dep `primitive-whitelist` → **C**; shape: prov `external-input` dep `borrowed-function` → **X** | **C-asymptotes / X-shape** |
 | #67 | `R_p=4ℏ/(m_p c)` (W=3) | Unchanged given the W+1 *rule* — but the rule is conjectural | prov `SDT-derived` · corr `known-match` · dep `primitive-whitelist` · **risk_flag: W+1 not proven from trefoil geometry** | **C-flagged** |
 | #56 | `c` from Mercury precession | Unchanged — re-derives an input from geometry (closure) | prov `SDT-derived` · corr `known-match` · dep `measured-observable` | **C (closure)** |
 | #74 | `α = 1/ϟ_H` | α is a *permitted primitive*; this expresses it as hydrogen koppa, not a fit | prov `SDT-derived` · dep `primitive-whitelist` · risk_flag: α also an input | **C-flagged** |
@@ -134,7 +134,7 @@ Format: `#census — name — (provenance · correspondence · input_dependency)
 *All pass the delete-test: the matched value never enters the path. Fuel is primitive-whitelist or measured-observable only.*
 - **SR from the budget:** #37 γ · #38 time dilation · #39 length contraction · #40 E₀=mc² · #41 energy–momentum · #42 photon limit · #43 relativistic mass.
 - **Inertial/Newtonian:** #18 Newton I · #36 Newton II (`F=ma` from relay) · #32 equivalence principle.
-- **Gravity/GR from koppa:** #44 Kepler · #45 `g=v²/R` · #46 `R_c=R/k²` · #47 grav. time dilation · #48 `GM` recovery · #51 precession 42.98″ · #52 deflection 1.75″ · #53 Shapiro · #54 frame dragging · #55 Schwarzschild metric · #56 `c` re-derived (closure) · #57 Earth interior (E97, 1.82%, CONFIRMED).
+- **Gravity/GR from koppa:** #44 Kepler · #45 `g=v²/R` · #46 `R_c=R/k²` · #47 grav. time dilation · #48 `GM` recovery · #51 precession 42.98″ · #52 deflection 1.75″ · #53 Shapiro · #54 frame dragging · #55 Schwarzschild metric · #56 `c` re-derived (closure) · #57 Earth interior (GOM09, 1.82%, CONFIRMED).
 - **Atomic (α as permitted input):** #70 Rydberg · #71 ionisation · #72 fine structure · #73 Bohr · #74 α=1/ϟ_H *(C-flagged)* · #75 atomic zk²=1 · #76 21 cm.
 - **Force-law structure / nuclear:** #22 `F=(π/4)P_eff R₁²R₂²/r²` *(1/r² structure C; coefficient via #23 = E)* · #26 Coulomb force · #27 occlusion solid angle · #77/#78 construction grammar (valley of stability) · #84 `R_nuc=Z R_p` · #67 `R_p=4ℏ/m_p c` *(C-flagged: W+1 conjectural)*.
 - **Cosmology:** #16 `S=4πN²` (Λ count) · #91 Hubble law · #93 `c_s=c/√3` · #96 age from BAO · #97 `T(z)` · #99 Hawking T/L from koppa · #100 `a₀=cH₀/2π` (recovers MOND scale).
@@ -144,7 +144,7 @@ Format: `#census — name — (provenance · correspondence · input_dependency)
 
 ### D — SDT-derived novel prediction with test path
 - #34 CMB dipole · #50 baryon census without M · #64 `μ_ν≡0` · #106 universal drafting crossover · #108 `Δz∝cos b` · #114 H₀(ν)<H₀(CMB)<H₀(local) · #128 six-layer SNe Ia decomposition *(partly calibrated → D/E)*.
-- **Experiments (novel, test path):** E13–E20 charge-state EC · E21 orbit-drop · E23 Cavendish interior deficit · E25 Pioneer · E42/E49 H₀ gradient/no-Λ · E76 `G=c²R/k²r` · E94/E96 convergence focusing · E98 pressure-dependent G · E100 `c=c(ω)`.
+- **Experiments (novel, test path):** E13–E20 charge-state EC · E21 orbit-drop · E23 Cavendish interior deficit · E25 Pioneer · CR09/CR09 H₀ gradient/no-Λ · E76 `G=c²R/k²r` · E94/E96 convergence focusing · GOM10 pressure-dependent G · E100 `c=c(ω)`.
 
 ### E — calibrated bridge result (`input_dependency = calibrated-target`)
 - #23 `P_eff` · #24 `f` · #25 `R_charge` · #107 eclipse `κ_area` · `Σ_sat=175` · Shue/Petschek fits · B04 Lamb (`k_Lamb`) · B25 He variational (`Z_eff=Z−5/16`).
@@ -155,7 +155,7 @@ Format: `#census — name — (provenance · correspondence · input_dependency)
 - **Number-fits:** #62 trefoil ratio · #62b 6π⁵.
 - **Unconfirmed:** #59 `M₀≈1 TeV`.
 - **Failed:** T⁴ redshift model.
-- **Pending (spec only; → D on computation):** E07, E09, E28, E29, E30, E31, E33, E39, E40, E61/E63, E64, E99; ATOMICUS `B=kΩ` (#85); CQ18_ZOA_Lensing.
+- **Pending (spec only; → D on computation):** NP07, SAR01, NP08, NP09, NP10, NP11, NP12, NP14, NP15, SAR02/SAR02, SAR03, GOM11; ATOMICUS `B=kΩ` (#85); CQ18_ZOA_Lensing.
 
 ---
 
@@ -180,7 +180,7 @@ Format: `#census — name — (provenance · correspondence · input_dependency)
 ## 9. Code annotation convention (the next move)
 
 Every load-bearing formula gets a six-line block immediately above it. Roll out **in order**, load-bearing files first:
-`laws.hpp` → `galactic.hpp` → `nuclear.hpp` → `cq13_emission_engine.cpp` → `e46_twin_regime.cpp` → `cq26_drafting_crossover.cpp`.
+`laws.hpp` → `galactic.hpp` → `nuclear.hpp` → `cq13_emission_engine.cpp` → `gd05_twin_regime.cpp` → `cq26_drafting_crossover.cpp`.
 
 ```cpp
 // provenance_status:     SDT-derived          // SDT-posited | SDT-derived | calibrated | external-input | unresolved

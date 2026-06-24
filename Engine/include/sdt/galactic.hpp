@@ -71,7 +71,7 @@ inline constexpr double pc_m_         = 3.085677581e16;   ///< [m/pc]  (trailing
 inline constexpr double Msun_kg       = 1.98847e30;       ///< [kg] Solar mass
 inline constexpr double deg2rad       = PI / 180.0;
 
-/// SDT Milgrom scale: a₀ = c H₀ / 2π — derived, not imported (CQ06)
+/// SDT Milgrom scale: a₀ = c H₀ / 2π — derived, not imported (GD01)
 /// H₀ = 67.4 km/s/Mpc (Planck 2018)
 inline constexpr double H_0_SI        = 67.4e3 / 3.085677581e22;  // [s⁻¹]
 inline constexpr double a_0_SDT       = c * H_0_SI / (2.0 * PI);  // ≈ 1.042e-10 m/s²
@@ -619,7 +619,7 @@ namespace regime_disk {
     }
 
     /**
-     * @brief Enclosed disk fraction for exponential disk (CQ06 geometry).
+     * @brief Enclosed disk fraction for exponential disk (GD01 geometry).
      *
      * The fraction of baryonic displacement volume enclosed within R:
      *   f_enc(R) = 1 - (1 + R/h_R) · exp(-R/h_R)
@@ -1086,7 +1086,7 @@ namespace milky_way {
  * @brief Compute the full SDT galactic result at radius R using the eclipse model.
  *
  * For galaxies without a supplied observed RC table. Uses the baryonic Koppa
- * + eclipse fraction model (CQ06) as the velocity source.
+ * + eclipse fraction model (GD01) as the velocity source.
  * For the MW, use compute_from_rc() with milky_way::v_at_kpc instead.
  *
  * @param R_kpc   Galactocentric radius [kpc]
@@ -1135,7 +1135,7 @@ namespace milky_way {
         v_b = (v2 > 0.0) ? std::sqrt(v2) / 1e3 : 0.0;
     }
 
-    // ── Regime II: Disk (eclipse saturation, CQ06) ───────────────────────
+    // ── Regime II: Disk (eclipse saturation, GD01) ───────────────────────
     const double v_d = regime_disk::v_disk_from_koppa(
         R_kpc, profile.h_R_kpc, K_disk, sat_fac);
 
@@ -1328,7 +1328,7 @@ template<typename VelocityFn>
  *
  * The Baryonic Tully-Fisher Relation: M_bar ∝ v_flat⁴
  *
- * From SDT (CQ06): at eclipse saturation, f_enc → constant,
+ * From SDT (GD01): at eclipse saturation, f_enc → constant,
  *   v_flat ∝ (Ϟ_gal)^(1/2) ∝ (M_bar)^(1/2) × (Ϟ_sun/R_flat)^(1/2)
  * Since Ϟ_gal = M_bar × Ϟ_sun and R_flat ∝ h_R ∝ M_bar^(1/4) (empirically):
  *   v_flat ∝ M_bar^(1/4) → slope = 4 in log-log.
@@ -1367,7 +1367,7 @@ template<typename VelocityFn>
 
 // ═════════════════════════════════════════════════════════════════════════════
 //  DEPRECATED FUNCTIONS
-//  Retained for backward compatibility with CQ06, CQ23, E46 investigations.
+//  Retained for backward compatibility with GD01, GOM03, GD05 investigations.
 //  The full CMB-native engine above supersedes all of these.
 // ═════════════════════════════════════════════════════════════════════════════
 
@@ -1380,7 +1380,7 @@ static constexpr double kappa_area_per_baryon = 9.1e-29;
     return M_bar_msun * B::koppa_Sun;
 }
 
-/// CQ23 Galaxy3DProfile — replaced by GalaxyProfile
+/// GOM03 Galaxy3DProfile — replaced by GalaxyProfile
 struct Galaxy3DProfile {
     double baryonic_mass_kg;
     double radial_scale_length_m;
@@ -1389,7 +1389,7 @@ struct Galaxy3DProfile {
     double inclination_rad;
 };
 
-/// CQ23 VolumetricEclipseResult — replaced by GalaxyResult
+/// GOM03 VolumetricEclipseResult — replaced by GalaxyResult
 struct VolumetricEclipseResult {
     double rho0_kg_m3;
     double horizontal_column_kg_m2;

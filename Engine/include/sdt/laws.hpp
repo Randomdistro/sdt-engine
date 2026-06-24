@@ -110,6 +110,18 @@ namespace measured {
     inline constexpr double c           = 299'792'458.0;                // [m/s]    Speed of light (SI exact)
     inline constexpr double hbar        = 1.054'571'817e-34;            // [J·s]    Reduced Planck constant
     inline constexpr double l_P         = 1.616'255e-35;                // [m]      Planck length
+    // provenance_status:     SDT-posited (Axiom R1) — the ONE irreducible dimensional seed
+    // correspondence_status: known-match
+    // input_dependency:      irreducible-seed
+    // class:                 R1 (primitive input — NOT derived)
+    // circularity_assertion: NOT eliminable. The FLM06 koppa-form ℓ_P = √(ϟ·ƛ) RE-HOMES the seed
+    //                        from {ℏ-as-QM, G} to one SDT-native length + W+1 (FLM06 §3b) — a
+    //                        re-expression, not a derivation. depth_closure::lP_from_closure_floor
+    //                        reproduces ℓ_P but is CIRCULAR w.r.t. ℓ_P: koppa_per_baryon is itself
+    //                        defined as ℓ_P²·c·m_p/ℏ (bridge), so √(ϟ·ƛ) = √(ℓ_P²) = ℓ_P is an
+    //                        IDENTITY (consistency check). FLM06 Seed Theorem (§3, PROVEN): exactly
+    //                        one action/mass/length anchor is mathematically unavoidable — ℓ_P is it.
+    // risk_flag:             load-bearing — feeds N = R_CMB/ℓ_P, P_conv = Φ/ℓ_P³, S_boundary = 4πN²
     // Optional empirical anchor for atomic-scale closure:
     inline constexpr double alpha       = 7.297'352'5693e-3;            // [-]      Fine structure constant
 
@@ -117,7 +129,7 @@ namespace measured {
     inline constexpr double h           = 6.626'070'15e-34;             // [J·s]    Planck constant (SI exact)
     inline constexpr double k_B         = 1.380'649e-23;               // [J/K]    Boltzmann constant (SI exact)
     inline constexpr double e_charge    = 1.602'176'634e-19;            // [C]      Elementary charge (SI exact)
-    // CQ37 (INCONCLUSIVE): e is an IRREDUCIBLE Tier-1 input, not derivable. The
+    // EMC02 (INCONCLUSIVE): e is an IRREDUCIBLE Tier-1 input, not derivable. The
     // whitelist {ℓ_P,c,ℏ,k_B,T_CMB,d=3} has no current dimension [A], so no
     // algebraic combination yields [C]; the Coulomb route e=√(αℏc/k_e) is a
     // definitional tautology (class F). e stays a permitted measured observable.
@@ -187,7 +199,7 @@ namespace measured {
     inline constexpr double mu_alpha    = 0.0;                          // [μ_N]    Alpha (spin-0)
 
     // Nuclear binding energies (MeV, measured)
-    // CQ32 (KILLED): binding energy is NOT a displaced-volume difference —
+    // NP05 (KILLED): binding energy is NOT a displaced-volume difference —
     // the volume-price hypothesis E=P·ΔV failed (spread 45× across reactions;
     // a units slip masked it as P_conv). Successor under test: E_bind = ℏ·Δω,
     // the change in meshed-circulation frequency (CQ41 gear-frequency binding).
@@ -223,13 +235,13 @@ namespace law_I {
     inline constexpr double N = R_CMB / l_P;
     // = 5.894e61
     //
-    // CQ42 (spation-scale closure) SEED THEOREM — honest negative: N is
+    // FLM06 (spation-scale closure) SEED THEOREM — honest negative: N is
     // RELATIONALLY fixed (N² = S_boundary/4π below), but it CANNOT be built
     // absolutely (~10⁶¹) from the ℏ/G-free whitelist {R_CMB,c,k_B,T_CMB,z_rec}:
     // every clean ratio bottoms out at ~10³ (z_rec). Deriving ℓ_P from Clearing
     // geometry FAILS; one action/mass seed is dimensionally unavoidable. ℓ_P
-    // therefore remains Axiom R1 (not derived in CQ01–40); a re-homing of ℏ as
-    // the relay-action quantum is deferred to CQ43.
+    // therefore remains Axiom R1 (not derived in EMC01–40); a re-homing of ℏ as
+    // the relay-action quantum is deferred to GOM05.
 
     /// Elementary relay content per shell: ε = u_CMB × l_P³  [J]
     inline constexpr double epsilon = u_CMB * l_P3;
@@ -258,7 +270,7 @@ namespace law_I {
     inline constexpr double u_held = a_rad * T_rec * T_rec * T_rec * T_rec;
     // = 6.13e-2 J/m³
 
-    // ─── CQ40 — spation pressure-tensor evolution (CLASS C) ─────────────
+    // ─── CR05 — spation pressure-tensor evolution (CLASS C) ─────────────
     //
     //  The lattice pressure tensor is isotropic and evolves adiabatically as
     //      P(z) = P_conv · (1+z)⁴
@@ -283,7 +295,7 @@ namespace law_I {
     /// Topological freeze-out at recombination: the linking-number density
     /// (hence lattice pressure) drops by an EXACT factor of 4 when free e⁻+p⁺
     /// (independent W defects) bind into neutral H. This freezes the BAO scale
-    /// and switches H(z) from (1+z)² to (1+z)^{3/2}.  (CQ40 Phase 4; CQ39)
+    /// and switches H(z) from (1+z)² to (1+z)^{3/2}.  (CR05 Phase 4; CR04)
     inline constexpr double freeze_out_factor = 4.0;
 
     /// Hubble constant from the pressure tensor via the bootstrap-FLRW model
@@ -291,7 +303,7 @@ namespace law_I {
     // provenance_status:     SDT-derived (via Friedmann STRUCTURE + topology)
     // correspondence_status: known-match            // 67.4 vs Planck 67.4
     // input_dependency:      pressure tensor + Ω-parameter topology
-    // class:                 C-flagged              // C with Friedmann; own derivation pending CQ43
+    // class:                 C-flagged              // C with Friedmann; own derivation pending GOM05
     // circularity_assertion: passes delete-test — H₀ independent of the observed R_CMB
     // risk_flag:             Friedmann eqn ASSUMED as structure (not yet SDT-derived);
     //                        Ω-normalisation still observational
@@ -359,11 +371,11 @@ namespace law_III {
     // risk_flag:             none
     inline constexpr double f_transfer = P_eff / law_I::P_conv;
     // = 2.125e-17
-    // CQ40 argues this UPGRADES to class C once R_CMB is itself derived from
+    // CR05 argues this UPGRADES to class C once R_CMB is itself derived from
     // the pressure tensor (P(z)=P_conv(1+z)⁴ → H₀ → R_CMB; see law_I). That
     // closure is contingent on (a) the assumed Friedmann structure (own
-    // derivation pending CQ43) and (b) P_eff's own calibration status — so the
-    // local label is kept E here, with the CQ40 closure claim recorded.
+    // derivation pending GOM05) and (b) P_eff's own calibration status — so the
+    // local label is kept E here, with the CR05 closure claim recorded.
 
     /// Charge interaction radius: R_charge = sqrt(R_p × r_e)
     /// Resolves e-e / p-p / e-p having same coupling strength
@@ -754,11 +766,11 @@ namespace bridge {
         return koppa_body / koppa_per_baryon;
     }
 
-    // ─── CQ24 — c from orbital geometry (koppa closure) ─────────────────
+    // ─── GOM04 — c from orbital geometry (koppa closure) ─────────────────
     //
     //  c is NOT a free input: it CLOSES from Mercury's anomalous precession.
     //  NOTE on names: the precession fixes the speed-RATIO k = c/v (dimensionless,
-    //  ≈686.4 for the Sun), NOT koppa-the-length (ϟ = R/k² = 1477 m). The CQ24
+    //  ≈686.4 for the Sun), NOT koppa-the-length (ϟ = R/k² = 1477 m). The GOM04
     //  write-up calls 686.4 "koppa"; by engine convention that quantity is k.
     //  The GR-analogue precession per orbit, δφ = 6πR / (k²·a·(1−e²)) [since
     //  ϟ=R/k²], inverts to give k from pure orbital observables — no c, no GM:
@@ -807,9 +819,9 @@ namespace bridge {
     inline const double c_from_closure = k_Sun_from_precession * v_surface_Sun;
     // = 299,795,136 m/s  (+0.0009% vs measured c) — "c from geometry alone"
 
-    // ─── CQ44 — gravitational-wave chirp as a LENGTH (Gate G2, PASS) ────
-    //  (GW mechanism investigation; renumbered CQ42→CQ44, as CQ42 = spation
-    //   scale closure and CQ43 = variable closure are canonical. See law_I::N.)
+    // ─── GOM06 — gravitational-wave chirp as a LENGTH (Gate G2, PASS) ────
+    //  (GW mechanism investigation; renumbered FLM06→GOM06, as FLM06 = spation
+    //   scale closure and GOM05 = variable closure are canonical. See law_I::N.)
     //
     //  The inspiral chirp is set by the binary's combined c-boundary ϟ_tot
     //  (a LENGTH), with no G and no M in any dynamical relation:
@@ -886,7 +898,7 @@ namespace atomic {
         return a_0 * static_cast<double>(n * n) / static_cast<double>(Z);
     }
 
-    // ─── CQ12 — Emissions: the velocity-state chain (RESOLVED) ──────────────
+    // ─── APS01 — Emissions: the velocity-state chain (RESOLVED) ──────────────
     //  The atomic emission spectrum follows from ONE rotation field, with no
     //  wavefunction and no fit. v(r)=cα√(a₀/r) is the circulation of the
     //  spation medium about the nucleus; the closed-circulation radii are the
@@ -939,11 +951,11 @@ namespace atomic {
         return std::sqrt(2.0 * IE1_J / m_e);
     }
 
-    // ─── CQ13 — Drag factor: koppa drafting in multi-electron shells ────────
+    // ─── APS02 — Drag factor: koppa drafting in multi-electron shells ────────
     //  COMPUTED/OBSERVED trend (a real-data correlation, NOT a zk²-style
     //  closure). D = λ_meas / [(8/3)·λ_C·k²], k = c/v₁. Tracks the outer-shell
     //  electron count: lone opener s¹→D≈1.76, paired s²→1.40, full p⁶→1.02.
-    //  The traction wakes (CQ14) of co-shell electrons interfere constructively
+    //  The traction wakes (PPT06) of co-shell electrons interfere constructively
     //  in the shared orbital slot — drafting, like cyclists in a pace-line.
 
     /// Drag factor D = λ_meas / [(8/3)·λ_C·k²], with k = c/v₁, v₁=√(2 IE₁/m_e)
@@ -1036,7 +1048,7 @@ namespace winding {
     using namespace measured;
 
     // W=1 and W=3 are not asserted — they are the only stable torus-knot
-    // windings (CQ36, CLASS A, analytic). A (p,q) mode is a TRUE KNOT iff
+    // windings (PPT09, CLASS A, analytic). A (p,q) mode is a TRUE KNOT iff
     // gcd(p,q)=1 and min(p,q)≥2; its Alexander polynomial Δ(t)≠1 is a knot
     // invariant that cannot change under continuous deformation:
     //   (1,1) electron: Δ=1            → unknot, confined by V_disp (stable)
@@ -1116,7 +1128,7 @@ namespace winding {
   //     "namespace not found" errors (GCC/Clang are fine without it).
 
 // ───────────────────────────────────────────────────────────────────────
-//  CQ02 — Vortex equilibrium quantisation (torus-knot mode equations)
+//  PPT01 — Vortex equilibrium quantisation (torus-knot mode equations)
 //  RESOLVED 5/5. Stable particles are (p,q) torus knots; the toroidal/
 //  poloidal velocity partition follows EXACTLY from the movement budget
 //  v_T²+v_P²=c² (Law V). Electron = (1,1) unknot, proton = (2,3) trefoil.
@@ -1157,7 +1169,7 @@ namespace topology {
 }
 
 // ───────────────────────────────────────────────────────────────────────
-//  CQ11 — Trefoil confinement (linear potential & string breaking)
+//  PPT05 — Trefoil confinement (linear potential & string breaking)
 //  RESOLVED. Confinement is convergent-pressure GEOMETRY, not a new force:
 //  the isotropic P_conv/3 collimates the deflected throughput into a tube
 //  of constant cross-section πa², so its energy grows linearly, E(L)=σL.
@@ -1198,7 +1210,7 @@ namespace confinement {
 }
 
 // ───────────────────────────────────────────────────────────────────────
-//  CQ14 — Spation traction from the trefoil ("how the gears start")
+//  PPT06 — Spation traction from the trefoil ("how the gears start")
 //  RESOLVED. The proton trefoil demands v_phase=1.831c at R_p; the lattice
 //  relays at ≤c. The mismatch T=3(W+1)=12 is the mechanical origin of the
 //  Coulomb (ℓ=1), magnetic (ℓ=2) and orbital-entrainment (ℓ≥3) wakes.
@@ -1246,7 +1258,7 @@ namespace traction {
 }
 
 // ───────────────────────────────────────────────────────────────────────
-//  CQ17 — Proton/electron mass ratio from topology (RESOLVED, analytic)
+//  PPT07 — Proton/electron mass ratio from topology (RESOLVED, analytic)
 //  m_p/m_e is NOT a free parameter. The (2,3) trefoil organises a phase-
 //  locked displacement zone of exactly 6π⁵ fundamental volume units, which
 //  decomposes as 3·(2π²)·π³ = (W=3 lobes)·(3-sphere surface-volume)·
@@ -1279,7 +1291,7 @@ namespace mass_ratio {
 }
 
 // ───────────────────────────────────────────────────────────────────────
-//  CQ38 — Trefoil wake multipole & NATIVE angular DOF  (PASS, CLASS C)
+//  APS04 — Trefoil wake multipole & NATIVE angular DOF  (PASS, CLASS C)
 //  The proton trefoil's wake carries a native three-fold (C₃) structure
 //  that supplies the angular degree of freedom (s-vs-p) WITHOUT importing
 //  spherical-harmonic ℓ quantum numbers. The native content is the
@@ -1289,7 +1301,7 @@ namespace mass_ratio {
 //   • "multipole / quadrupole / Legendre Pℓ" is borrowed MATHEMATICAL
 //     language; only the C₃ periodicity and the power laws are native.
 //   • The Lamb-shift VALUE rests on a quadrupole amplitude (~α·10⁻²) whose
-//     numerical verification is PENDING a lattice wake solver (CQ38 Phase 2).
+//     numerical verification is PENDING a lattice wake solver (APS04 Phase 2).
 //   • B04 keeps its CALIBRATED k_Lamb=12.7227; this supersedes the refuted
 //     "dyad-first" candidate (2026-06-08) but is a NATIVE CANDIDATE, not yet
 //     a benchmark replacement.
@@ -1333,11 +1345,11 @@ namespace angular {
 //  1. R_p from lattice topology
 //     STATUS: CONJECTURED as R_p = 4ℏ/(m_p c) via W+1 rule (0.02%).
 //     Full derivation requires proving W+1 scaling from trefoil geometry.
-//     CQ36 (CLASS A) grounds W=3: the (2,3) trefoil is topologically
+//     PPT09 (CLASS A) grounds W=3: the (2,3) trefoil is topologically
 //     protected (Alexander Δ≠1), so W cannot jump and R_p cannot drift.
 //
 //  2. Quantisation of stable vortex topologies
-//     RESOLVED (CQ36, analytic): W=1 (unknot, confined) and W=3 (trefoil,
+//     RESOLVED (PPT09, analytic): W=1 (unknot, confined) and W=3 (trefoil,
 //     protected) are the only stable windings; W=2 is unknotted and merely
 //     metastable (≈0.1 GeV barrier, τ~10⁻²¹ s) → never observed. Higher
 //     knots (W=5,7,…) are protected but await discovery. The full lattice
@@ -1345,11 +1357,11 @@ namespace angular {
 //
 //  3. Fine structure constant from topology
 //     α = g(W=1) = r_e / ƛ_Ce. Can this be derived from the W=1 torus
-//     mode partition (v_P / v_T)?  Would eliminate α as input. (CQ03 found
+//     mode partition (v_P / v_T)?  Would eliminate α as input. (PPT02 found
 //     α = koppa of the H ground state — electromagnetic, still needs e.)
 //
 //  4. Proton-electron mass ratio
-//     RESOLVED-analytic (CQ17): m_p/m_e = 6π⁵ = 1836.118 (−0.0019%), the
+//     RESOLVED-analytic (PPT07): m_p/m_e = 6π⁵ = 1836.118 (−0.0019%), the
 //     pure topological identity 3·(2π²)·π³ — see law_VI::mass_ratio. The
 //     6π⁵ ↔ V_disp(3)/V_disp(1) link still awaits the OP-1 equilibrium solver.
 //
@@ -1358,8 +1370,8 @@ namespace angular {
 // ═══════════════════════════════════════════════════════════════════════
 //  THE DEPTH–CLOSURE THEOREM  (capstone — Papers/Depth_Closure_Theorem)
 //
-//  Unifies CQ15 (depth engine) · CQ16 (k-hierarchy) · CQ24 (koppa closure) ·
-//  CQ26/E46 (a₀ floor) · CQ42/CQ43 (variable spation closure). Numbers
+//  Unifies GOM01 (depth engine) · GOM02 (k-hierarchy) · GOM04 (koppa closure) ·
+//  APS03/GD05 (a₀ floor) · FLM06/GOM05 (variable spation closure). Numbers
 //  reproduce from Papers/Depth_Closure_Theorem/keystone.js.
 //
 //  Local closure, local relay speed, local clock rate and the gravitational
@@ -1377,7 +1389,7 @@ namespace angular {
 //  PROVEN content: C1 (redshift = depth, Sun to 0.03%) and C2 (one law across
 //  ~15 orders). CAVEATS (future work, NOT theorem content): the absolute
 //  closure ℓ_P,∞, the galactic-floor magnitude, and the proton/electron
-//  internal radii carry the CQ42-seed/CQ43 caveats (see law_I::N note).
+//  internal radii carry the FLM06-seed/GOM05 caveats (see law_I::N note).
 // ═══════════════════════════════════════════════════════════════════════
 namespace depth_closure {
     using namespace measured;
@@ -1398,7 +1410,7 @@ namespace depth_closure {
         return c * std::sqrt(koppa / r);
     }
 
-    /// CQ15 — Shapiro delay is ACCUMULATED DEPTH, not slowing-in-a-well: the
+    /// GOM01 — Shapiro delay is ACCUMULATED DEPTH, not slowing-in-a-well: the
     /// local light speed stays c. Δt = (2/c)∫ z dl = (2ϟ/c)∫ dl/r, which for a
     /// ray of impact parameter b from r₁ to r₂ gives the standard log form
     /// Δt = (2ϟ/c) ln(4 r₁ r₂ / b²)  — matches GR/observation to 0.0000%.
@@ -1439,12 +1451,12 @@ namespace depth_closure {
     /// = 2.123e-6, equal to the observed GM/(c²R) to 0.03% (a consequence)
     inline const double z_spectral_Sun = bridge::koppa_Sun / R_Sun;
 
-    /// CQ26/E46 acceleration floor: a₀ = c·H₀ / 2π  [m/s²]  (DERIVED)
+    /// APS03/GD05 acceleration floor: a₀ = c·H₀ / 2π  [m/s²]  (DERIVED)
     // provenance_status:     SDT-derived
-    // correspondence_status: known-match            // ≈ MOND a₀; required by the CQ26 collapse
+    // correspondence_status: known-match            // ≈ MOND a₀; required by the APS03 collapse
     // input_dependency:      c + H₀ (law_I::H0_SI)
     // class:                 C-flagged
-    // circularity_assertion: a deliberately wrong floor degrades the CQ26 collapse 6×
+    // circularity_assertion: a deliberately wrong floor degrades the APS03 collapse 6×
     // risk_flag:             inherits H₀'s Friedmann-structure caveat (law_I::H0_SI)
     inline constexpr double a0_floor = c * law_I::H0_SI / (2.0 * std::numbers::pi);
     // ≈ 1.04e-10 m/s²
@@ -1459,13 +1471,17 @@ namespace depth_closure {
 
     /// C5: spation closure floor (koppa form): ℓ_P = √(ϟ_baryon · ƛ_p)
     /// with ϟ_baryon = bridge::koppa_per_baryon and ƛ_p = ℏ/(m_p c).
-    /// Reproduces ℓ_P, reducing the scale-seed from {ℏ,G} to one SDT length.
+    /// HONEST (FLM06): this RE-EXPRESSES ℓ_P, it does NOT derive it. koppa_per_baryon
+    /// is itself defined as ℓ_P²·c·m_p/ℏ (bridge), so √(ϟ·ƛ) = √(ℓ_P²) = ℓ_P is an
+    /// IDENTITY — a consistency check, not an elimination. FLM06's real result is the
+    /// Seed Theorem (one dimensional anchor unavoidable) + re-homing the seed from
+    /// {ℏ,G} to one SDT-native length. ℓ_P stays Axiom R1; see measured::l_P provenance.
     [[nodiscard]] inline auto closure_floor(double koppa, double wake) noexcept -> double {
         return std::sqrt(koppa * wake);
     }
     inline const double lP_from_closure_floor =
         closure_floor(bridge::koppa_per_baryon, hbar / (m_p * c));
-    // ≈ 1.616e-35 m = ℓ_P
+    // ≈ 1.616e-35 m = ℓ_P  (by construction — identity, see HONEST note above)
 
     /// C6: lumiopause radius — a SURFACE-AREA condition where the solar flux
     /// falls to the CMB floor: L_Sun/(4πr²) = F_CMB ⟹ r = √(L_Sun/(4π F_CMB))

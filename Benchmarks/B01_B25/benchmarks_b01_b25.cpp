@@ -177,7 +177,7 @@ static void B04_lamb_shift()
 
     // UPDATED (2026-06): the old benchmark used a fitted k_Lamb=12.7227 in an α⁵ formula
     // that no longer reproduces the value (it returns ~1725 MHz — stale). The engine now
-    // carries a NATIVE Lamb-shift candidate (CQ38): ΔE(2S-2P) ≈ (9/4)·Φ₂(a₀) from the
+    // carries a NATIVE Lamb-shift candidate (APS04): ΔE(2S-2P) ≈ (9/4)·Φ₂(a₀) from the
     // quadrupole (ℓ=2) wake harmonic, with zero fitted parameters — laws.hpp law_VI.
     // It gives 1051.8 MHz vs measured 1057.845 (0.57%), class C, not tuned to the target.
     double Lamb_MHz = law_VI::angular::lamb_shift_native_MHz;
@@ -414,7 +414,7 @@ static void B14_galactic_rotation()
     // TOLERANCE FIX (2026-06): the prior 1% tolerance was never physically justified — the
     // R_flat/R_d ratio intrinsically scatters galaxy-to-galaxy (there is no universal value),
     // so a ~12% tolerance is the honest bar for a single-ratio rule. The full rotation-curve
-    // fit (not just the onset radius) is done properly in E46/M4 (SPARC, RMS 23.8%); this B14
+    // fit (not just the onset radius) is done properly in GD05/M4 (SPARC, RMS 23.8%); this B14
     // is only the coarse onset-radius check and is labelled COMPUTED, not a precision result.
     struct Galaxy { const char* name; double R_d_kpc; double R_flat_obs_kpc; };
     Galaxy galaxies[] = {
@@ -649,7 +649,7 @@ static void B25_alpha_cluster()
 }
 
 // ═══════════════════════════════════════════════════════════════════════
-//  B26 — TREFOIL TOPOLOGY (CQ02 modes · CQ14 traction · CQ17 mass ratio)
+//  B26 — TREFOIL TOPOLOGY (PPT01 modes · PPT06 traction · PPT07 mass ratio)
 // ═══════════════════════════════════════════════════════════════════════
 
 static void B26_trefoil_topology()
@@ -657,23 +657,23 @@ static void B26_trefoil_topology()
     std::puts("\n══ B26: TREFOIL TOPOLOGY ══");
     using namespace sdt::laws;
 
-    // CQ02: proton (2,3) movement-budget closure v_T²+v_P²=c² (exact)
+    // PPT01: proton (2,3) movement-budget closure v_T²+v_P²=c² (exact)
     report("B26", "Proton (2,3) budget vT2+vP2=c2", "Particle",
            law_VI::topology::budget_residual(2, 3), 1.0, 0.001, Certification::DERIVED);
 
-    // CQ14: superluminal phase velocity at the proton surface = c/k = 1.830c
+    // PPT06: superluminal phase velocity at the proton surface = c/k = 1.830c
     report("B26", "Proton surface v_phase [c]", "Particle",
            law_VI::traction::v_phase_proton_surface / measured::c, 1.830, 0.5,
            Certification::COMPUTED);
 
-    // CQ17: m_p/m_e from trefoil topology = 6π⁵ = 1836.118 (distinct from 1.830c)
+    // PPT07: m_p/m_e from trefoil topology = 6π⁵ = 1836.118 (distinct from 1.830c)
     report("B26", "m_p/m_e = 6pi^5 (topology)", "Particle",
            law_VI::mass_ratio::six_pi_5, measured::m_p / measured::m_e, 0.01,
            Certification::DERIVED);
 }
 
 // ═══════════════════════════════════════════════════════════════════════
-//  B27 — KOPPA CLOSURE: c FROM ORBITAL GEOMETRY (CQ24)
+//  B27 — KOPPA CLOSURE: c FROM ORBITAL GEOMETRY (GOM04)
 // ═══════════════════════════════════════════════════════════════════════
 
 static void B27_koppa_closure()
@@ -691,7 +691,7 @@ static void B27_koppa_closure()
 }
 
 // ═══════════════════════════════════════════════════════════════════════
-//  B28 — DEPTH-CLOSURE THEOREM (CQ15 · CQ43; keystone: z = ϟ/r)
+//  B28 — DEPTH-CLOSURE THEOREM (GOM01 · GOM05; keystone: z = ϟ/r)
 // ═══════════════════════════════════════════════════════════════════════
 
 static void B28_depth_closure()
@@ -711,7 +711,7 @@ static void B28_depth_closure()
 }
 
 // ═══════════════════════════════════════════════════════════════════════
-//  B29 — GRAVITATIONAL-WAVE CHIRP AS A LENGTH (CQ44)
+//  B29 — GRAVITATIONAL-WAVE CHIRP AS A LENGTH (GOM06)
 // ═══════════════════════════════════════════════════════════════════════
 
 static void B29_gw_chirp()

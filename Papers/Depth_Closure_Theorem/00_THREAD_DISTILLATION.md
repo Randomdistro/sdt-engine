@@ -8,7 +8,7 @@
 
 ## How the thread moved (chronological spine)
 
-1. **Shapiro delay (CQ15).** SDT reproduces the Shapiro time delay exactly as a
+1. **Shapiro delay (GOM01).** SDT reproduces the Shapiro time delay exactly as a
    *depth integral* `Δt = (2/c)∫z dl` with `z(r)=ϟ/r`, giving the log form and
    matching GR/observation to 0.0000%. Light's local speed stays c; the delay is
    accumulated lattice depth, not slowing-in-a-well.
@@ -17,7 +17,7 @@
    **the spation closure ℓ_P itself shrinks where matter crushes the space it
    displaces.** Nucleons displace volume; that displacement is the depth. Light
    relays one spation per tick, so a smaller local closure = locally slower light.
-   This became **CQ43**: `ℓ_P(r)=ℓ_P,∞(1−z)`, `c_local=c(1−z)`,
+   This became **GOM05**: `ℓ_P(r)=ℓ_P,∞(1−z)`, `c_local=c(1−z)`,
    `z = 1−ℓ_P(r)/ℓ_P,∞ = 1−c_local/c = ϟ/r` — one quantity, three readings.
 
 3. **No attraction; orbits are real.** Nothing is pulled. The CMB convergence
@@ -44,7 +44,7 @@
    **+105 m/s** above our c. The c-boundary radius is ceiling-relative and
    *breathes* with depth (∝(1−z)²).
 
-8. **The spation floor (CQ42), in koppa form.** A length needs one absolute seed
+8. **The spation floor (FLM06), in koppa form.** A length needs one absolute seed
    (proven: {c,T,counts} cannot make a length). Planck's `√(ℏG/c³)` imports both
    forbidden constants. The koppa restatement `ℓ_P = √(ϟ·ƛ)` — geometric mean of a
    koppa and a wake — is **mass-independent** (the spation is the universal fixed
@@ -95,8 +95,8 @@
 | lumiopause √(L/4πF_CMB) | 20,857 AU | Oort edge |
 | 6π⁵ (mass ratio) | 1836.118 | m_p/m_e=1836.153 |
 
-Supporting prior runs: E46 M4 floor law (SPARC, 135 galaxies) RMS 23.8%,
-BTFR 3.58; CQ26 cross-scale collapse RMS 8.8%, negative control 6× worse.
+Supporting prior runs: GD05 M4 floor law (SPARC, 135 galaxies) RMS 23.8%,
+BTFR 3.58; APS03 cross-scale collapse RMS 8.8%, negative control 6× worse.
 
 ---
 
@@ -110,7 +110,7 @@ BTFR 3.58; CQ26 cross-scale collapse RMS 8.8%, negative control 6× worse.
 - lumiopause = √(L/4πF_CMB) = 20,857 AU exactly.
 
 **Open / honest caveats:**
-- The *absolute* ℓ_P,∞ still needs one seed (CQ42 seed theorem); only its
+- The *absolute* ℓ_P,∞ still needs one seed (FLM06 seed theorem); only its
   *variation* (1−z) is fully SDT-native.
 - The galactic floor (+105 m/s) carries the MW-mass uncertainty (~±20%).
 - The 1.830c surface velocity and 6π⁵ mass ratio are *distinct* trefoil

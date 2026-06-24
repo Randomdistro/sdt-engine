@@ -1,0 +1,169 @@
+================================================================================
+ FD06 - The Boundary Layer and No-Slip from Spation Traction
+ RUN LOG (real compile + execution output)
+ Author: James Christopher Tyndall, Melbourne
+ SDT zero-free-parameter framework | Investigations/fluid_dynamics/FD06
+================================================================================
+
+BUILD (MSVC, double precision; /utf-8 required because laws.hpp is UTF-8):
+  vcvars64.bat
+  cl /nologo /utf-8 /std:c++20 /EHsc /O2 /I Engine/include
+     /Fe:fd06.exe fd06_boundary_layer_traction.cpp
+  -> EXIT 0, clean.
+
+NOTE ON /utf-8: Engine/include/sdt/laws.hpp is UTF-8 (no BOM) and contains
+multibyte glyphs (box-drawing, Greek sigma/Delta, koppa). Without /utf-8 MSVC
+mis-parses those bytes and reports spurious "namespace not found" errors at
+laws.hpp lines ~1162/~1300. The /utf-8 flag is the fix; the source is correct.
+
+--------------------------------------------------------------------------------
+ PRE-REGISTERED TARGETS (R1, committed BEFORE comparison)
+--------------------------------------------------------------------------------
+  f''(0)            = 0.33206              (Blasius wall-gradient eigenvalue)
+  delta/x           = 5.0 / sqrt(Re_x)     (99% thickness; true similarity 4.91)
+  C_f               = 0.664 / sqrt(Re_x)   (local skin friction)
+  delta* prefactor  = 1.721 sqrt(nu x/U)   (displacement thickness)
+  theta  prefactor  = 0.664 sqrt(nu x/U)   (momentum thickness)
+  H = delta*/theta  = 2.59                 (shape factor)
+  C_D               = 1.328 / sqrt(Re_L)   (integrated plate drag)
+  delta scaling exponent = 1/2             (SDT-NATIVE result)
+  residual slip length lambda_s ~ l_P      (no-slip in continuum limit)
+
+  Classification of targets: the Blasius constants (5.0/4.91, 0.664, 1.328,
+  0.332, 2.59) are OBSERVED-as-target (analytic similarity-solution outputs).
+  The derivation must PRODUCE them; finding them coded as inputs would be a
+  contamination failure (none are -- see Phase 3, they come from the ODE).
+
+================================================================================
+ PHASE 1 - No-slip as a spation-traction FIXED POINT   [NATIVE / Class C]
+================================================================================
+PPT06 traction ledger (read live from law_VI::traction):
+  omega_demand            = 4.276459e+24 rad/s   [DERIVED 3 m_p c^2 / hbar]
+  omega_max(R_p) = c/R_p  = 3.563019e+23 rad/s   [DERIVED c / R_p]
+  T = omega_demand/omega_max = 12.0023           [DERIVED]
+  traction_ratio_proton 3(W+1) = 12.0000         [DERIVED, engine constant]
+  v_phase at R_p          = 1.8302 c             [DERIVED, superluminal demand]
+
+Grip rate per relay tick: g_tr = 1 - 1/T = 0.9167   [DERIVED from T, cap-bounded <1]
+
+Relaxation of a wall-adjacent layer from a PURE-SLIP start (u0 = U):
+  tick      u/U            deficit U-u
+     0   1.000000e+00     0.000000e+00
+     1   8.333333e-02     9.166667e-01
+     2   6.944444e-03     9.930556e-01
+     3   5.787037e-04     9.994213e-01
+     4   4.822531e-05     9.999518e-01
+     5   4.018776e-06     9.999960e-01
+     6   3.348980e-07     9.999997e-01
+     7   2.790816e-08     1.000000e+00
+     8   2.325680e-09     1.000000e+00
+    10   1.615056e-11     1.000000e+00
+    20   2.608405e-22     1.000000e+00
+    30   4.212720e-33     1.000000e+00
+    40   6.803778e-44     1.000000e+00
+    50   1.098848e-54     1.000000e+00
+    60   1.774701e-65     1.000000e+00
+
+  Settled to within the l_P-scale floor after 33 relay ticks (1.779e-42 s).
+  Residual slip velocity u/U ~ 1.479e-66 ; slip length lambda_s ~ 2.390e-101 m
+    (l_P = 1.616e-35 m  =>  lambda_s << l_P, molecularly negligible).
+  t_relax / t_adv = 1.779e-39  (pinning is instantaneous vs any advection).
+
+  CHECKPOINT C1: PASS.
+  No-slip is the unique stable fixed point u* = u_wall of the relay-traction
+  update u_{n+1} = u_n + g_tr (u_wall - u_n); it is an OUTPUT of the PPT06 grip,
+  NOT an imposed boundary condition. F1 (falsifier) does NOT trigger.
+
+================================================================================
+ PHASE 2 - delta ~ sqrt(nu x/U) SCALING   [NATIVE / Class C; exponent = 1/2]
+================================================================================
+Explicit relay-diffusion lattice (the FD01 normal-diffusion term restricted to
+the half-space, wall pinned by the Phase-1 fixed point). Stable: nu dt/dy^2=0.40.
+Flow: U = 1 m/s, nu = 1.5e-5 m^2/s (air; MEASURED-INPUT units, scale-only).
+
+     x [m]     delta [m]          Re_x      delta*sqrt(Re)/x
+     0.050   3.154862e-03    3.3333e+03         3.6429
+     0.100   4.461539e-03    6.6667e+03         3.6428
+     0.150   5.464222e-03    1.0000e+04         3.6428
+     0.200   6.309527e-03    1.3333e+04         3.6428
+     0.250   7.054255e-03    1.6667e+04         3.6428
+     0.300   7.727481e-03    2.0000e+04         3.6428
+     0.350   8.346637e-03    2.3333e+04         3.6428
+     0.400   8.922928e-03    2.6667e+04         3.6428
+
+  log-log fit slope d(log delta)/d(log x) = 0.5000   (target 0.50)
+  CHECKPOINT C2 (the core gate): PASS.
+
+  The collapsed value delta*sqrt(Re)/x = 3.64 is the prefactor of the PURE 1-D
+  diffusion model (99% locus of an error-function profile). It is NOT the
+  Blasius 4.91 because pure normal-diffusion omits the streamwise advection
+  coupling (the f f'' term). This is reported HONESTLY: Phase 2 certifies the
+  EXPONENT (1/2) -- the SDT-native result -- and HANDS the prefactor to the
+  similarity solution in Phase 3. F2 (slope != 1/2) does NOT trigger.
+
+================================================================================
+ PHASE 3 - Blasius similarity ODE by RK4 + shooting   [REPRODUCED]
+================================================================================
+ODE:  f''' + (1/2) f f'' = 0,   f(0)=f'(0)=0,  f'(inf)=1.
+Method: RK4 (step h = 1e-4, eta_max = 10) + secant shooting on s = f''(0).
+
+HONEST STATEMENT: the prefactors below are the similarity-solution eigenvalue
+and integral outputs. They are NOT derivable from SDT lattice geometry alone --
+they are the universal Blasius numbers the SDT boundary layer must MATCH. The
+SDT-native results are the no-slip fixed point (Phase 1) and the sqrt(nu x/U)
+scaling (Phase 2). Phase 3 is reproduction (R1/R4), not derivation.
+
+  Shooting converged: f''(0) = 0.3320573372
+
+  Reproduced Blasius constants (from the converged profile):
+    f''(0)                = 0.332057   target 0.33206    err -0.001%
+    eta_99 (delta/x pref) = 4.909989   target 5.0/4.91   err -1.800% vs 5.0
+    delta*  prefactor     = 1.720788   target 1.7208     err -0.001%
+    theta   prefactor     = 0.664115   target 0.6641     err +0.002%
+    shape factor H        = 2.591100   target 2.59       err +0.042%
+    C_f prefactor 2f''(0) = 0.664115   target 0.6641     err +0.002%
+    C_D prefactor 4f''(0) = 1.328229   target 1.328      err +0.017%
+
+  CHECKPOINT C3/C4: PASS. f''(0), delta/x, C_f, delta*, theta, H all reproduced.
+  (eta_99 = 4.91 is the EXACT similarity value; "5.0" is the rounded textbook
+   figure, so the -1.8% is the rounding gap, not a model error. F3/F4 do not
+   trigger -- every prefactor within <2x, in fact within 0.05%.)
+
+--------------------------------------------------------------------------------
+ Two-stream dimensional benchmark (Phase-5 style), laminar air flat plate
+--------------------------------------------------------------------------------
+  U = 10.0 m/s, x = 0.20 m, nu = 1.5e-5 m^2/s  ->  Re_x = 1.333e5
+    delta(x) = 2.6893 mm     (= 4.9100 * x / sqrt(Re_x))
+    C_f(x)   = 1.8188e-03    (= 0.6641 / sqrt(Re_x))
+  Transition: Re_x,crit ~ 5e5 (canonical, order-of-magnitude check only; the
+  laminar->turbulent threshold mechanism -- advection outrunning relay-traction
+  smoothing -- is handed to FD03). F5: benchmark closes with CALIBRATED <= 1.
+
+================================================================================
+ EXTERNAL-DATA PROVENANCE (DATA_REQUIREMENTS.md)
+================================================================================
+  Kinematic viscosity nu(air) = 1.5e-5 m^2/s @ ~20 C   [MEASURED-INPUT; NIST]
+    - Used ONLY to turn the dimensionless prediction into mm/Pa in the Phase-5
+      benchmark. The single permitted fluid scale -> CALIBRATED(1).
+    - Preferred path to CALIBRATED(0)/Class A: hand nu from FD02 (lattice
+      nu = coeff * l_P * c). FD02 not yet executed, so nu here is tabulated.
+  Blasius constants 5.0/4.91, 0.664, 1.328, 0.332, 2.59  [OBSERVED-as-target]
+    - Analytic similarity-solution values; reproduced by the ODE solve above,
+      never coded as inputs to the lattice rule.
+  Re_x,crit ~ 3e5-5e5   [OBSERVED, canonical; order-of-magnitude only]
+
+================================================================================
+ CHECKPOINT SUMMARY
+================================================================================
+  C1 (no-slip from traction)        PASS   [NATIVE]
+  C2 (delta ~ sqrt(nu x/U), slope)  PASS   [NATIVE]
+  C3 (skin friction C_f prefactor)  PASS   [REPRODUCED]
+  C4 (self-similarity / H, delta*)  PASS   [REPRODUCED]
+  C5 (transition order + benchmark) PASS   [order-of-magnitude + CALIBRATED(1)]
+
+ OVERALL: Class C (QUALIFIED - convergence).
+  Native mechanism (no-slip fixed point) + native scaling (sqrt(nu x/U)) at
+  CALIBRATED(0); Blasius PREFACTORS reproduced via the universal similarity
+  ODE (not SDT geometry); one fluid scale (nu) CALIBRATED(1) for the metric
+  benchmark only. R5: no fudge factor inserted anywhere.
+================================================================================

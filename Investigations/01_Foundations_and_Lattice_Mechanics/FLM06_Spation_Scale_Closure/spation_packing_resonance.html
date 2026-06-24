@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Spation Packing — Ring vs Valley, Recombination &amp; Coprime Resonances</title>
+<style>
+  :root{
+    --paper:#f7f3ea; --ink:#2b2620; --faint:#7a7163; --rule:#d9cfba;
+    --A:#b5651d;     /* ring / aligned  — terracotta */
+    --B:#2a7f7f;     /* valley / staggered — teal    */
+    --gold:#c19a2e;  /* coprime resonance */
+    --bad:#a33; --good:#3a7d44;
+    --panel:#fffdf8;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);
+       font:16px/1.55 "Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;}
+  header,section,footer{max-width:1180px;margin:0 auto;padding:22px 28px;}
+  header{padding-top:42px}
+  h1{font-size:30px;margin:0 0 6px;letter-spacing:.2px}
+  h2{font-size:22px;margin:34px 0 4px;border-bottom:1px solid var(--rule);padding-bottom:6px}
+  h3{font-size:17px;margin:18px 0 4px;color:var(--faint);text-transform:uppercase;letter-spacing:1.2px;font-weight:600}
+  .sub{color:var(--faint);font-style:italic;margin:0 0 8px}
+  p{margin:8px 0}
+  code,.mono{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:.9em}
+  .A{color:var(--A);font-weight:700}.B{color:var(--B);font-weight:700}.cp{color:var(--gold);font-weight:700}
+  .panel{background:var(--panel);border:1px solid var(--rule);border-radius:10px;padding:18px 20px;margin:14px 0;
+         box-shadow:0 1px 0 #fff inset, 0 2px 8px rgba(80,60,30,.05)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:900px){.grid2{grid-template-columns:1fr}}
+  .ctrl{display:flex;flex-wrap:wrap;gap:14px 22px;align-items:center;margin:10px 0}
+  .ctrl label{font-size:14px;color:var(--faint)}
+  input[type=text]{font-family:monospace;font-size:14px;width:130px;padding:5px 7px;border:1px solid var(--rule);
+       border-radius:6px;background:#fffef9;color:var(--ink)}
+  button{font:inherit;font-size:13px;padding:5px 11px;border:1px solid var(--rule);background:#fffef9;border-radius:6px;
+       cursor:pointer;color:var(--ink)}
+  button:hover{background:#f1e9d6}
+  button.act{background:#efe3c6;border-color:#cdbb90}
+  table{border-collapse:collapse;width:100%;font-size:14px;margin:6px 0}
+  th,td{padding:5px 9px;text-align:right;border-bottom:1px solid var(--rule)}
+  th{color:var(--faint);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.6px}
+  td.l,th.l{text-align:left}
+  tr.cprow{background:rgba(193,154,46,.10)}
+  .verdict{font-size:17px;padding:11px 15px;border-radius:8px;margin:10px 0;border:1px solid}
+  .v-never{background:rgba(163,51,51,.07);border-color:#d8b3b3}
+  .v-recomb{background:rgba(58,125,68,.08);border-color:#b3d2ba}
+  .legend{font-size:13px;color:var(--faint);display:flex;gap:18px;flex-wrap:wrap;margin:4px 0}
+  .swatch{display:inline-block;width:11px;height:11px;border-radius:2px;vertical-align:middle;margin-right:5px}
+  svg{display:block;max-width:100%}
+  .note{font-size:13.5px;color:var(--faint);border-left:3px solid var(--rule);padding:2px 0 2px 12px;margin:10px 0}
+  .kbd{font-family:monospace;background:#efe7d4;padding:1px 5px;border-radius:4px;font-size:12px}
+  .big{font-size:18px}
+  .scaleval{font-family:monospace;font-size:13px}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>The Spation, Packed Two Ways</h1>
+  <p class="sub">Ring-aligned vs valley-staggered growth from a single spation seed — where they cross every length, whether they ever recombine, and the coprime resonances of their near-misses. Every number below is computed live in your browser from the closed-form ratios.</p>
+  <div class="legend">
+    <span><span class="swatch" style="background:var(--A)"></span><b class="A">Method A — ring / aligned</b> &nbsp;λ<sub>A</sub> = (2+√3)² = 7+4√3 ≈ 13.9282 &nbsp;∈ ℚ(√3)</span>
+    <span><span class="swatch" style="background:var(--B)"></span><b class="B">Method B — valley / staggered</b> &nbsp;λ<sub>B</sub> = (√2+√3)² = 5+2√6 ≈ 9.8990 &nbsp;∈ ℚ(√6)</span>
+    <span><span class="swatch" style="background:var(--gold)"></span><b class="cp">coprime resonance</b></span>
+  </div>
+</header>
+
+<!-- ============================================================ PANEL 1 -->
+<section>
+  <h2>1 · The two constructions</h2>
+  <p>Both start from the spation's circular cross-section, cradled in the gap of <b>three mutually-tangent circles</b>. The only difference is how the next shell is placed — and that difference decides everything that follows.</p>
+  <div class="grid2">
+    <div class="panel">
+      <h3 class="A">A — ring · aligned (AAA)</h3>
+      <div id="geoA"></div>
+      <p style="font-size:14px">Circumscribe the triad with a <b>ring</b>, then place the next three circles at the <b>same angles</b> (0°/120°/240°). Each new circle is tangent to the radially-aligned old one. Solving the tangency:</p>
+      <p class="mono" style="font-size:13px">R(2−√3)=2+√3 ⟹ λ<sub>A</sub>=(2+√3)/(2−√3)=(2+√3)²=<b class="A">7+4√3≈13.928</b></p>
+      <p class="note">Everything stays in the number field <b>ℚ(√3)</b>. Eclipsed columns.</p>
+    </div>
+    <div class="panel">
+      <h3 class="B">B — valley · staggered (ABAB)</h3>
+      <div id="geoB"></div>
+      <p style="font-size:14px">No ring. <b>Rotate 180°</b> so the next three drop into the valleys (60°/180°/300°), each tangent to its <b>two</b> flanking circles. That two-circle constraint is the twist — it injects a √2:</p>
+      <p class="mono" style="font-size:13px">⁴⁄₃(R²−R+1)=(R+1)² ⟹ R²−10R+1=0 ⟹ λ<sub>B</sub>=<b class="B">5+2√6=(√2+√3)²≈9.899</b></p>
+      <p class="note">Lands in <b>ℚ(√6)</b> — a <i>different</i> field from A. This is the whole story.</p>
+    </div>
+  </div>
+  <p class="note">Press <b>▶ expand outward</b> and you fly out through the lattice — a self-similar fractal zoom. Circles are drawn at <b>true tangency</b> (each generation's three circles touch each other <i>and</i> the layer below — that contact is what fixes λ). As you expand, larger generations grow in from outside while earlier ones recede into the spation at the centre; the viewing-radius label climbs from ℓ_P upward. <b class="A">A</b> stacks aligned (eclipsed), <b class="B">B</b> staggered into the valleys (close-packed). Both panels are locked to the <i>same physical viewing radius</i>, so you can watch their generations drift out of step (A advances one shell per ×13.93, B one per ×9.90) — the never-recombine result, in motion. <b>⏸ pause</b> to scrub, <b>◀ dive back in</b> to fall toward the seed.</p>
+  <div class="ctrl">
+    <button id="play">▶ expand outward</button>
+    <button id="pause">⏸ pause</button>
+    <button id="dive">◀ dive back in</button>
+    <label>zoom <span id="zoomVal" class="mono">2.00</span> · viewing radius ≈ <span id="zoomScale" class="mono">—</span></label>
+  </div>
+  <div class="ctrl">
+    <input type="range" id="zoom" min="0" max="30" step="0.05" value="2" style="width:360px" title="zoom level (A-steps from the spation)">
+    <label>speed <input type="range" id="speed" min="0.1" max="4" step="0.1" value="0.8" style="width:110px" title="zoom speed"></label>
+  </div>
+</section>
+
+<!-- ============================================================ PANEL 2 -->
+<section>
+  <h2>2 · The radius ladder — where each build crosses every length</h2>
+  <p>From the seed, each step multiplies the radius: <span class="mono"><b class="A">r<sub>A</sub>(n)=r₀·λ<sub>A</sub>ⁿ</b></span> and <span class="mono"><b class="B">r<sub>B</sub>(m)=r₀·λ<sub>B</sub>ᵐ</b></span>. A grows ×13.93/step, B ×9.90/step, so they tick the log axis at <i>incommensurate</i> rates. Drag the cursor (or type a length) to see exactly which two circles bracket it in each build.</p>
+
+  <div class="ctrl">
+    <label>seed r₀ = <input type="text" id="seed" value="1.616255e-35"> m</label>
+    <button data-seed="1.616255e-35">ℓ_P</button>
+    <button data-seed="8.414e-16">R_p</button>
+    <button data-seed="5.29177e-11">a₀</button>
+    <label style="margin-left:18px">target = <input type="text" id="target" value="5.29177e-11"> m</label>
+  </div>
+  <div class="ctrl">
+    <label style="color:var(--faint)">snap target to:</label>
+    <button class="snapt" data-v="8.414e-16">R_p 0.84 fm</button>
+    <button class="snapt" data-v="2.8179403262e-15">r_e</button>
+    <button class="snapt" data-v="5.29177210903e-11">Bohr a₀</button>
+    <button class="snapt" data-v="2.11670884e-10">1st excit</button>
+    <button class="snapt" data-v="4.76259489e-10">2nd excit</button>
+    <button class="snapt" data-v="1e-3">1 mm</button>
+  </div>
+
+  <div class="panel">
+    <div id="ladder"></div>
+  </div>
+
+  <div class="grid2">
+    <div class="panel">
+      <h3>Bracket at the target</h3>
+      <div id="bracketBox"></div>
+    </div>
+    <div class="panel">
+      <h3>All physical scales</h3>
+      <table id="scaleTable"></table>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ PANEL 3 -->
+<section>
+  <h2>3 · Do they ever recombine? — fields, near-misses &amp; coprimes</h2>
+  <p>An <i>exact</i> recombination needs <span class="mono">λ<sub>A</sub>ⁿ = λ<sub>B</sub>ᵐ</span>, i.e. the two ratios must be powers of one common unit. The derived pair are not: <b class="A">(2+√3)ⁿ</b> always lives in ℚ(√3), <b class="B">(√2+√3)ᵐ</b> never does (m≥1). So with the real geometry they <b>never</b> share a circle except the seed — but they come arbitrarily close, and the record near-misses are the continued-fraction convergents of <span class="mono">θ = ln λ<sub>A</sub>/ln λ<sub>B</sub></span>, which are <b class="cp">always coprime</b>.</p>
+
+  <p class="note">Try it yourself: change λ<sub>A</sub>, λ<sub>B</sub> below. Pick <i>commensurate</i> values (e.g. 8 and 2, or 9 and 3) and the verdict flips to exact recombination; pick the derived geometry (or any field-mismatched pair) and it's near-misses forever.</p>
+
+  <div class="ctrl">
+    <label>λ<sub>A</sub> = <input type="text" id="lamA" value="13.928203230275509"></label>
+    <label>λ<sub>B</sub> = <input type="text" id="lamB" value="9.898979485566356"></label>
+    <button id="resetLam" class="act">reset to derived geometry</button>
+    <button data-pair="8,2">try 8 &amp; 2 (commensurate)</button>
+    <button data-pair="9,3">try 9 &amp; 3</button>
+    <button data-pair="13.928203230275509,3.7320508075688772">A=ε², B=ε</button>
+  </div>
+
+  <div id="verdict"></div>
+
+  <div class="grid2">
+    <div class="panel">
+      <h3>Continued-fraction convergents = the resonances</h3>
+      <p class="mono" id="thetaLine" style="font-size:13px"></p>
+      <table id="convTable"></table>
+      <p class="note">Every row is coprime (gcd=1) — forced, because a shared factor g multiplies the log-gap by g, so non-coprime pairs are never records; and consecutive convergents satisfy p<sub>k</sub>q<sub>k−1</sub>−p<sub>k−1</sub>q<sub>k</sub>=±1.</p>
+    </div>
+    <div class="panel">
+      <h3>Near-miss spectrum &amp; where each resonance sits</h3>
+      <div id="resoChart"></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>The two ladders interleaving (log-radius) — every A &amp; B circle, near-misses flagged</h3>
+    <div id="interleave"></div>
+    <p class="note">Each <b class="A">orange</b> tick is an A-circle, each <b class="B">teal</b> tick a B-circle. Where an A and a B tick nearly coincide is a near-miss; the <b class="cp">gold</b> links mark the coprime convergents. They graze but never touch.</p>
+  </div>
+</section>
+
+<footer>
+  <h2>The result, in one line</h2>
+  <p class="big">The ring-build and the valley-build spring from the same spation and grow forever in lockstep <i>nowhere</i> — because the valley step's two-circle tangency drags √2 into the arithmetic, splitting B into ℚ(√6) while A stays in ℚ(√3). Their closest approaches are coprime by necessity (continued-fraction convergents), and the tight ones are pushed past the stars. That is a quasicrystal stated as a packing: locally definite, globally unrepeating.</p>
+  <p class="sub">Self-contained. Math live-computed from λ_A=(2+√3)², λ_B=(√2+√3)². Part of FLM06 (Spation Scale Closure). J. C. Harvey, Melbourne.</p>
+</footer>
+
+<script>
+"use strict";
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const SQ3=Math.sqrt(3), SQ6=Math.sqrt(6);
+const LAM_A0=7+4*SQ3, LAM_B0=5+2*SQ6;      // derived geometry
+const fmt=(x,d=4)=>{ if(x===0)return"0";
+  const e=Math.floor(Math.log10(Math.abs(x)));
+  if(e>=-3&&e<6) return x.toLocaleString(undefined,{maximumSignificantDigits:d+1});
+  return x.toExponential(d); };
+function siLen(m){
+  const u=[[1e-35,'ℓ_P×',1.616255e-35],[1e-12,'fm',1e-15],[1e-9,'pm',1e-12],[1e-6,'nm',1e-9],[1e-3,'µm',1e-6],[1,'mm',1e-3],[1e3,'m',1]];
+  if(m>=1) return (m).toExponential(3)+' m';
+  if(m>=1e-3) return (m/1e-3).toFixed(3)+' mm';
+  if(m>=1e-6) return (m/1e-6).toFixed(3)+' µm';
+  if(m>=1e-9) return (m/1e-9).toFixed(3)+' nm';
+  if(m>=1e-12) return (m/1e-12).toFixed(3)+' pm';
+  if(m>=1e-15) return (m/1e-15).toFixed(3)+' fm';
+  return m.toExponential(3)+' m';
+}
+function gcd(a,b){a=Math.abs(Math.round(a));b=Math.abs(Math.round(b));while(b){[a,b]=[b,a%b];}return a;}
+
+const SCALES=[
+  {n:'R_p (0.84 fm)',S:8.414e-16},
+  {n:'r_e',S:2.8179403262e-15},
+  {n:'Bohr a₀ (n=1)',S:5.29177210903e-11},
+  {n:'1st excit (4a₀)',S:4*5.29177210903e-11},
+  {n:'2nd excit (9a₀)',S:9*5.29177210903e-11},
+  {n:'1 mm',S:1e-3},
+];
+
+// ---- state
+let seed=1.616255e-35, target=5.29177210903e-11, lamA=LAM_A0, lamB=LAM_B0;
+let zoom=2.0, playing=false, dir=1, speed=0.8, _lt=null;   // animated fractal-zoom state
+
+const crossStep=(S,lam)=>Math.ceil(Math.log(S/seed)/Math.log(lam));
+const radius=(step,lam)=>seed*Math.pow(lam,step);
+
+// =================================================== PANEL 1 — geometry (stepped, up to 6)
+// Self-similar fractal zoom: BOTH panels keyed to one physical viewing radius, so they
+// stay at the same scale as we fly out. Generation g has true circle radius seed·λ^g;
+// its on-screen radius = refPx·(true/viewScale) = refPx·λ^(g − gStar). Tangency exact at any zoom.
+function drawGeoZoom(el, mode, viewScale){
+  const W=440,H=340,cx=W/2,cy=H/2,PI=Math.PI;
+  const lam = mode==='A'?LAM_A0:LAM_B0;               // TRUE geometric ratio — tangency demands it
+  const color = mode==='A'?'var(--A)':'var(--B)';
+  const angBase=[90,210,330], angAlt=[30,150,270];
+  const gapRel=1/(3+2*SQ3), viewR=Math.min(W,H)/2, refPx=14;
+  const gStar=Math.log(viewScale/seed)/Math.log(lam);// central generation (real-valued) for this panel
+  let s=`<svg viewBox="0 0 ${W} ${H}">`;
+  s+=`<text x="14" y="20" fill="${color}" font-size="12" font-weight="700">${mode==='A'?'A · aligned (AAA)':'B · staggered (ABAB)'}</text>`;
+  const gc=Math.floor(gStar);
+  for(let g=gc+3; g>=gc-1; g--){                      // outer→inner; inner drawn on top
+    if(g<1) continue;
+    const rr=refPx*Math.pow(lam, g-gStar);
+    if(rr<0.6 || rr>viewR*2.4) continue;
+    const d=(2/SQ3)*rr;                               // centre distance = tangency distance
+    let op=1;
+    if(rr<7) op=Math.max(0,(rr-1.2)/5.8);             // fade out as a shell shrinks into the spation
+    if(rr>viewR) op*=Math.max(0.12,1-(rr-viewR)/(viewR*1.5));
+    const angs = mode==='A'?angBase:(g%2?angAlt:angBase);
+    angs.forEach(a=>{const rad=a*PI/180, x=cx+Math.cos(rad)*d, y=cy-Math.sin(rad)*d;
+      s+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${rr.toFixed(1)}" fill="${color}" fill-opacity="${(0.13*op).toFixed(3)}" stroke="${color}" stroke-width="${Math.min(1.7,Math.max(.4,rr*0.05)).toFixed(2)}" stroke-opacity="${op.toFixed(3)}"/>`;});
+    if(rr>10 && rr<viewR*1.15 && op>0.45) s+=`<text x="${cx}" y="${(cy-d-rr-3).toFixed(1)}" fill="${color}" font-size="9" text-anchor="middle" opacity="${op.toFixed(2)}">step ${g} · ${shortLen(seed*Math.pow(lam,g))}</text>`;
+  }
+  const spR=Math.min(refPx,Math.max(1.5, refPx*Math.pow(lam,1-gStar)*gapRel)); // spation receding at centre
+  s+=`<circle cx="${cx}" cy="${cy}" r="${spR.toFixed(2)}" fill="var(--ink)"/>`;
+  s+=`<text x="${cx}" y="${H-8}" fill="var(--faint)" font-size="8.5" text-anchor="middle">viewing radius ≈ ${shortLen(viewScale)} · ×${lam.toFixed(2)}/step</text>`;
+  s+=`</svg>`;
+  el.innerHTML=s;
+}
+function redrawGeo(){
+  const viewScale = seed*Math.pow(LAM_A0, zoom);      // zoom measured in A-steps from the spation
+  drawGeoZoom($('#geoA'),'A',viewScale);
+  drawGeoZoom($('#geoB'),'B',viewScale);
+  const zv=$('#zoomVal'); if(zv)zv.textContent=zoom.toFixed(2);
+  const zs=$('#zoomScale'); if(zs)zs.textContent=shortLen(viewScale);
+  const zsl=$('#zoom'); if(zsl && document.activeElement!==zsl) zsl.value=zoom;
+}
+
+// =================================================== PANEL 2 — ladder
+function drawLadder(){
+  const W=1120,H=180,padL=60,padR=20,padT=44,padB=40;
+  const rMin=seed, rMax=Math.max(1e-2, target*3, 9*5.29e-11*3);
+  const lo=Math.log10(rMin), hi=Math.log10(rMax);
+  const X=r=>padL+(Math.log10(r)-lo)/(hi-lo)*(W-padL-padR);
+  const axisY=padT+ (H-padT-padB)/2;
+  let s=`<svg viewBox="0 0 ${W} ${H}" id="ladsvg">`;
+  // axis
+  s+=`<line x1="${padL}" y1="${axisY}" x2="${W-padR}" y2="${axisY}" stroke="var(--rule)" stroke-width="1.4"/>`;
+  // decade gridlines
+  for(let e=Math.ceil(lo);e<=Math.floor(hi);e+=3){
+    const x=X(Math.pow(10,e));
+    s+=`<line x1="${x}" y1="${padT}" x2="${x}" y2="${H-padB}" stroke="var(--rule)" stroke-width=".5" stroke-dasharray="2 4"/>`;
+    s+=`<text x="${x}" y="${H-padB+13}" fill="var(--faint)" font-size="10" text-anchor="middle">1e${e}</text>`;
+  }
+  // A ticks (above)
+  for(let n=0;radius(n,lamA)<=rMax;n++){const x=X(radius(n,lamA));
+    s+=`<line x1="${x}" y1="${axisY-6}" x2="${x}" y2="${axisY-22}" stroke="var(--A)" stroke-width="1.6"/>`;
+    if(n%2===0)s+=`<text x="${x}" y="${axisY-25}" fill="var(--A)" font-size="9" text-anchor="middle">${n}</text>`;}
+  s+=`<text x="${padL-6}" y="${axisY-15}" fill="var(--A)" font-size="11" text-anchor="end" font-weight="700">A</text>`;
+  // B ticks (below)
+  for(let m=0;radius(m,lamB)<=rMax;m++){const x=X(radius(m,lamB));
+    s+=`<line x1="${x}" y1="${axisY+6}" x2="${x}" y2="${axisY+22}" stroke="var(--B)" stroke-width="1.6"/>`;
+    if(m%2===0)s+=`<text x="${x}" y="${axisY+32}" fill="var(--B)" font-size="9" text-anchor="middle">${m}</text>`;}
+  s+=`<text x="${padL-6}" y="${axisY+20}" fill="var(--B)" font-size="11" text-anchor="end" font-weight="700">B</text>`;
+  // physical scales
+  SCALES.forEach(sc=>{const x=X(sc.S);
+    s+=`<line x1="${x}" y1="${padT-6}" x2="${x}" y2="${H-padB}" stroke="var(--ink)" stroke-width=".8" stroke-opacity=".45"/>`;
+    s+=`<text x="${x}" y="${padT-9}" fill="var(--ink)" font-size="9.5" text-anchor="middle" opacity=".8">${sc.n.split(' ')[0]}</text>`;});
+  // target cursor (draggable)
+  const tx=X(target);
+  s+=`<line id="cursor" x1="${tx}" y1="${padT-14}" x2="${tx}" y2="${H-padB+2}" stroke="var(--gold)" stroke-width="2"/>`;
+  s+=`<polygon points="${tx-6},${padT-14} ${tx+6},${padT-14} ${tx},${padT-6}" fill="var(--gold)"/>`;
+  s+=`<text x="${tx}" y="${padT-18}" fill="var(--gold)" font-size="11" text-anchor="middle" font-weight="700">${siLen(target)}</text>`;
+  s+=`</svg>`;
+  $('#ladder').innerHTML=s;
+  // drag
+  const svg=$('#ladsvg');
+  const toR=clientX=>{const b=svg.getBoundingClientRect();const px=(clientX-b.left)/b.width*W;
+    const frac=(px-padL)/(W-padL-padR);return Math.pow(10,lo+frac*(hi-lo));};
+  let drag=false;
+  const move=e=>{if(!drag)return;const cx=(e.touches?e.touches[0].clientX:e.clientX);
+    target=Math.min(rMax,Math.max(rMin,toR(cx)));$('#target').value=target.toExponential(4);drawLadder();drawBracket();drawScaleTable();};
+  svg.addEventListener('mousedown',e=>{drag=true;move(e);});
+  window.addEventListener('mousemove',move);
+  window.addEventListener('mouseup',()=>drag=false);
+  svg.addEventListener('touchstart',e=>{drag=true;move(e);},{passive:true});
+  window.addEventListener('touchmove',move,{passive:true});
+  window.addEventListener('touchend',()=>drag=false);
+}
+function bracketFor(S,lam){
+  const up=crossStep(S,lam), lowS=up-1;
+  return {below:{step:lowS,r:radius(lowS,lam)},above:{step:up,r:radius(up,lam)}};
+}
+function drawBracket(){
+  const bA=bracketFor(target,lamA), bB=bracketFor(target,lamB);
+  const row=(c,lab,b)=>`<tr><td class="l"><b class="${c}">${lab}</b></td>
+     <td>step ${b.below.step}<br><span class="scaleval">${siLen(b.below.r)}</span></td>
+     <td style="color:var(--gold)">↑ target ↑<br><span class="scaleval">${siLen(target)}</span></td>
+     <td>step ${b.above.step}<br><span class="scaleval">${siLen(b.above.r)}</span></td></tr>`;
+  $('#bracketBox').innerHTML=`<table>
+    <tr><th class="l"></th><th>circle below</th><th>your length</th><th>circle above</th></tr>
+    ${row('A','A ring',bA)}${row('B','B valley',bB)}</table>
+    <p class="note">A pins it to within ×${fmt(lamA,3)} (${(Math.log2(lamA)).toFixed(2)} octaves); B to within ×${fmt(lamB,3)} (${(Math.log2(lamB)).toFixed(2)} oct). The two bracketing circles are <b>different sizes</b> in A vs B — they never share the circle that brackets a given length.</p>`;
+}
+function drawScaleTable(){
+  let s=`<tr><th class="l">scale</th><th>size</th><th class="A">A step → r</th><th class="B">B step → r</th></tr>`;
+  SCALES.forEach(sc=>{const nA=crossStep(sc.S,lamA),nB=crossStep(sc.S,lamB);
+    s+=`<tr><td class="l">${sc.n}</td><td class="scaleval">${siLen(sc.S)}</td>
+      <td><b class="A">${nA}</b> → ${siLen(radius(nA,lamA))}</td>
+      <td><b class="B">${nB}</b> → ${siLen(radius(nB,lamB))}</td></tr>`;});
+  $('#scaleTable').innerHTML=s;
+}
+
+// =================================================== PANEL 3 — resonance
+function contFrac(x,maxT=14){const cf=[];for(let i=0;i<maxT;i++){const a=Math.floor(x);cf.push(a);
+  const f=x-a;if(f<1e-11){return{cf,rational:true};}x=1/f;if(!isFinite(x))return{cf,rational:true};}return{cf,rational:false};}
+function convergents(cf){const out=[];let pm1=1,qm1=0,p=cf[0],q=1;out.push([p,q]);
+  for(let k=1;k<cf.length;k++){const pn=cf[k]*p+pm1,qn=cf[k]*q+qm1;pm1=p;qm1=q;p=pn;q=qn;out.push([p,q]);}return out;}
+function nearMissRatio(n,m){return Math.pow(10, n*Math.log10(lamA)-m*Math.log10(lamB));}
+
+function drawResonance(){
+  const theta=Math.log(lamA)/Math.log(lamB);
+  const {cf,rational}=contFrac(theta);
+  const conv=convergents(cf);
+  $('#thetaLine').innerHTML=`θ = ln λ<sub>A</sub>/ln λ<sub>B</sub> = <b>${theta.toFixed(9)}</b> &nbsp; CF = [${cf.join('; ')}]${rational?' <b style="color:var(--good)">(terminates → rational)</b>':' (non-terminating → irrational)'}`;
+
+  // verdict
+  const recomb = rational;
+  const vbox=$('#verdict');
+  if(recomb){
+    const last=conv[conv.length-1]; // m/n exact
+    const m=last[0],n=last[1];
+    vbox.className='';vbox.innerHTML=`<div class="verdict v-recomb"><b>They DO recombine.</b> θ = ${m}/${n} is rational, so λ<sub>A</sub><sup>${n}</sup> = λ<sub>B</sub><sup>${m}</sup> exactly — a common radius at every A-step ${n>1?'multiple of '+n:''} (B-step ${m>1?'multiple of '+m:''}). Same number field / common unit.</div>`;
+  } else {
+    vbox.className='';vbox.innerHTML=`<div class="verdict v-never"><b>They NEVER recombine</b> (except the seed). θ is irrational — λ<sub>A</sub> and λ<sub>B</sub> are multiplicatively independent, so no common power exists. Only ever-closer near-misses, at the coprime convergents below.</div>`;
+  }
+
+  // table
+  let t=`<tr><th>conv #</th><th>n (A)</th><th>m (B)</th><th>m/n</th><th>gcd</th><th>near-miss</th><th>radius at A-step</th></tr>`;
+  conv.forEach((pq,i)=>{const m=pq[0],n=pq[1];if(n===0)return;
+    const g=gcd(m,n);const ratio=nearMissRatio(n,m);const pct=Math.abs(ratio-1)*100;
+    const rr=radius(n,lamA);
+    t+=`<tr class="${g===1?'cprow':''}"><td>${i}</td><td><b class="A">${n}</b></td><td><b class="B">${m}</b></td>
+      <td>${(m/n).toFixed(6)}</td><td>${g===1?'<b class="cp">1</b>':g}</td>
+      <td>${pct<0.001?pct.toExponential(2):pct.toFixed(pct<1?4:2)}%</td>
+      <td class="scaleval">${siLen(rr)}</td></tr>`;});
+  $('#convTable').innerHTML=t;
+
+  // reso chart — near-miss % (log) vs convergent, bars; annotate radius scale
+  const W=520,H=300,padL=46,padB=64,padT=14,padR=14;
+  const pts=conv.map((pq,i)=>({i,n:pq[1],m:pq[0],pct:Math.abs(nearMissRatio(pq[1],pq[0])-1)*100,r:radius(pq[1],lamA)})).filter(p=>p.n>0);
+  const maxLog=1, minLog=-5; // 10% .. 1e-5 %
+  const yOf=p=>{const L=Math.log10(Math.max(p.pct,1e-6));return padT+(maxLog-L)/(maxLog-minLog)*(H-padT-padB);};
+  let c=`<svg viewBox="0 0 ${W} ${H}">`;
+  // y gridlines
+  for(let L=maxLog;L>=minLog;L--){const y=padT+(maxLog-L)/(maxLog-minLog)*(H-padT-padB);
+    c+=`<line x1="${padL}" y1="${y}" x2="${W-padR}" y2="${y}" stroke="var(--rule)" stroke-width=".5"/>`;
+    c+=`<text x="${padL-5}" y="${y+3}" fill="var(--faint)" font-size="9" text-anchor="end">1e${L}%</text>`;}
+  const bw=(W-padL-padR)/pts.length;
+  pts.forEach((p,k)=>{const x=padL+k*bw+bw*0.5;const y=yOf(p);
+    c+=`<line x1="${x}" y1="${H-padB}" x2="${x}" y2="${y}" stroke="var(--gold)" stroke-width="${Math.min(14,bw*0.55)}" stroke-opacity=".55"/>`;
+    c+=`<circle cx="${x}" cy="${y}" r="3.4" fill="var(--gold)"/>`;
+    c+=`<text x="${x}" y="${H-padB+13}" fill="var(--ink)" font-size="8.5" text-anchor="middle">(${p.n},${p.m})</text>`;
+    c+=`<text x="${x}" y="${H-padB+26}" fill="var(--faint)" font-size="8" text-anchor="middle">${shortLen(p.r)}</text>`;
+    c+=`<text x="${x}" y="${H-padB+38}" fill="var(--good)" font-size="7.5" text-anchor="middle">gcd1</text>`;});
+  c+=`<text x="${padL}" y="${H-6}" fill="var(--faint)" font-size="10">coprime resonance (A-step, B-step) → its radius</text>`;
+  c+=`</svg>`;
+  $('#resoChart').innerHTML=c;
+
+  drawInterleave(conv);
+}
+function shortLen(m){
+  if(m>=1e-3)return (m/1e-3<1000? (m/1e-3).toFixed(1)+'mm':(m).toExponential(0)+'m');
+  if(m>=1e-9)return (m/1e-9).toFixed(0)+'nm';
+  if(m>=1e-12)return (m/1e-12).toFixed(0)+'pm';
+  if(m>=1e-15)return (m/1e-15).toFixed(0)+'fm';
+  return m.toExponential(0)+'m';}
+
+function drawInterleave(conv){
+  const W=1120,H=150,padL=20,padR=20,padT=30,padB=34;
+  const nMax=34;
+  const rMax=Math.max(radius(nMax,lamA),radius(nMax,lamB)), rMin=seed;
+  const lo=Math.log10(rMin),hi=Math.log10(rMax);
+  const X=r=>padL+(Math.log10(r)-lo)/(hi-lo)*(W-padL-padR);
+  const axisY=H/2;
+  let s=`<svg viewBox="0 0 ${W} ${H}">`;
+  s+=`<line x1="${padL}" y1="${axisY}" x2="${W-padR}" y2="${axisY}" stroke="var(--rule)"/>`;
+  for(let n=0;radius(n,lamA)<=rMax;n++){const x=X(radius(n,lamA));
+    s+=`<line x1="${x}" y1="${axisY-3}" x2="${x}" y2="${axisY-20}" stroke="var(--A)" stroke-width="1.3"/>`;}
+  for(let m=0;radius(m,lamB)<=rMax;m++){const x=X(radius(m,lamB));
+    s+=`<line x1="${x}" y1="${axisY+3}" x2="${x}" y2="${axisY+20}" stroke="var(--B)" stroke-width="1.3"/>`;}
+  // coprime resonance links
+  conv.forEach(pq=>{const m=pq[0],n=pq[1];if(n===0)return;
+    if(radius(n,lamA)>rMax)return;
+    const xa=X(radius(n,lamA)),xb=X(radius(m,lamB));
+    const xm=(xa+xb)/2;
+    s+=`<path d="M${xa},${axisY-20} Q${xm},${axisY-38} ${xb},${axisY+20}" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-opacity=".8"/>`;
+    s+=`<text x="${xm}" y="${axisY-40}" fill="var(--gold)" font-size="8.5" text-anchor="middle">${n},${m}</text>`;});
+  s+=`<text x="${padL}" y="14" fill="var(--A)" font-size="11" font-weight="700">A circles ▲</text>`;
+  s+=`<text x="${padL}" y="${H-8}" fill="var(--B)" font-size="11" font-weight="700">B circles ▼</text>`;
+  s+=`</svg>`;
+  $('#interleave').innerHTML=s;
+}
+
+// =================================================== wiring
+function renderAll(){drawLadder();drawBracket();drawScaleTable();drawResonance();redrawGeo();}
+function readSeed(){const v=parseFloat($('#seed').value);if(isFinite(v)&&v>0)seed=v;}
+function readTarget(){const v=parseFloat($('#target').value);if(isFinite(v)&&v>0)target=v;}
+function readLam(){const a=parseFloat($('#lamA').value),b=parseFloat($('#lamB').value);
+  if(isFinite(a)&&a>1)lamA=a;if(isFinite(b)&&b>1)lamB=b;}
+
+$('#seed').addEventListener('change',()=>{readSeed();renderAll();});
+$('#target').addEventListener('change',()=>{readTarget();drawLadder();drawBracket();drawScaleTable();});
+$$('button[data-seed]').forEach(b=>b.onclick=()=>{$('#seed').value=b.dataset.seed;readSeed();renderAll();});
+$$('.snapt').forEach(b=>b.onclick=()=>{$('#target').value=b.dataset.v;readTarget();drawLadder();drawBracket();drawScaleTable();});
+$('#lamA').addEventListener('change',()=>{readLam();renderAll();});
+$('#lamB').addEventListener('change',()=>{readLam();renderAll();});
+$('#resetLam').onclick=()=>{$('#lamA').value=LAM_A0;$('#lamB').value=LAM_B0;readLam();renderAll();};
+$$('button[data-pair]').forEach(b=>b.onclick=()=>{const[p,q]=b.dataset.pair.split(',');$('#lamA').value=p;$('#lamB').value=q;readLam();renderAll();});
+
+$('#play').onclick =()=>{dir=1; playing=true;};
+$('#dive').onclick =()=>{dir=-1; playing=true;};
+$('#pause').onclick=()=>{playing=false;};
+$('#zoom').addEventListener('input',e=>{zoom=+e.target.value; playing=false; redrawGeo();});
+$('#speed').addEventListener('input',e=>{speed=+e.target.value;});
+function animLoop(t){
+  if(playing){
+    if(_lt!=null) zoom += dir*speed*(t-_lt)/1000;
+    if(zoom>=30){zoom=30; playing=false;} else if(zoom<=0){zoom=0; playing=false;}
+    redrawGeo();
+  }
+  _lt=t;
+  requestAnimationFrame(animLoop);
+}
+requestAnimationFrame(animLoop);
+
+// init
+redrawGeo();renderAll();
+</script>
+</body>
+</html>

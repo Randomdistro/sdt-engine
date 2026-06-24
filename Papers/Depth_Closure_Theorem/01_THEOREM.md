@@ -49,7 +49,7 @@ consistent with `v²/r = g = c²ϟ/r²`.
 - **H1.** Space is a relay lattice with finite tick speed `c`; force is occluded
   convergence (SDT Laws I, III), there is no attraction.
 - **H2.** Matter displaces lattice volume; local closure tightens with local
-  displacement load (CQ42/CQ43).
+  displacement load (FLM06/GOM05).
 - **H3.** The movement budget `v_circ² + v² = c²` holds (Law V).
 
 No `G`, no `M` as fundamentals; `koppa = v²R/c²` is the sole gravitational
@@ -105,10 +105,10 @@ descriptor and equals `GM/c²` as a *consequence*, not an input.
 
 ## Independent corroboration (prior runs, same framework)
 
-- **Galactic rotation (E46).** The depth/convergence-floor law (with derived
+- **Galactic rotation (GD05).** The depth/convergence-floor law (with derived
   `a₀ = cH₀/2π = 1.042×10⁻¹⁰ m/s²`) fits 135 SPARC galaxies at RMS 23.8 %,
   unbiased, BTFR slope 3.58.
-- **Cross-scale collapse (CQ26).** Galactic, atomic, and stellar response collapse
+- **Cross-scale collapse (APS03).** Galactic, atomic, and stellar response collapse
   onto one curve in `ξ = g_self/a₀` at RMS 8.8 %; a deliberately wrong floor
   degrades the collapse 6×, confirming the derived `a₀` is required.
 
