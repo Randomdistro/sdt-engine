@@ -134,7 +134,7 @@ The Coulomb coupling at the nuclear scale then involves the geometric reduction 
 
 $$P_{\mathrm{eff}}(R_p, R_e) = P_{\mathrm{Planck}} \times f(R_p/\ell_P, R_e/\ell_P)$$
 
-where $f$ is the geometric transfer function that accounts for the finite size of the vortices relative to the lattice spacing. The numerical calibration gives $P_{\mathrm{eff}} \approx 1.65 \times 10^{31}$ Pa, which reproduces Coulomb to $< 1\%$.
+where $f$ is the geometric transfer function that accounts for the finite size of the vortices relative to the lattice spacing. The numerical calibration gives $P_{\mathrm{eff}} \approx 1.65 \times 10^{31}$ Pa, which reproduces Coulomb to $< 1\%$. (NOTE: SDT_Complete_Laws.md carries P_eff = 5.225×10³¹ Pa — cross-canon inconsistency, unresolved; flagged 2026-07-03.)
 
 The point: the enormous effective pressure is not mysterious. It is the accumulated relay burden of $10^{61}$ shells of CMB light, all in transit through the same lattice point simultaneously.
 
@@ -214,7 +214,7 @@ In a spation lattice loaded with isotropic CMB radiation at energy density $u_{\
 The throughput of the relay lattice is electromagnetic radiation. The photon is not carried by the medium; the photon is the medium deforming. $c = \ell_P/t_P$.
 
 **Corollary (Measured Foundation).**
-The entire force framework rests on a single measured quantity: $T_{\mathrm{CMB}} = 2.725$ K. No fitting parameters. No free constants. One temperature.
+The entire force framework rests on a single measured quantity: $T_{\mathrm{CMB}} = 2.725$ K. One temperature input and one numerical calibration (P_eff ≈ 1.65×10³¹ Pa, §above); no further free constants.
 
 **Corollary (Gravity is a Shadow).**
 Gravitational attraction is the radiation pressure deficit in the CMB light field caused by matter occluding light from specific directions. $G$ is the calibration constant between occlusion cross-section and conventional mass units.
@@ -233,7 +233,7 @@ The spation lattice carries light. The CMB is that light — real photons, measu
 
 **Measured foundation:** $T_{\mathrm{CMB}} = 2.725$ K (FIRAS/COBE/Planck)
 
-**Free parameters:** None.
+**Free parameters:** one calibration (P_eff).
 
 **Recovers:**
 - Coulomb force ($1/r^2$ from solid-angle occlusion, validated to $< 1\%$)

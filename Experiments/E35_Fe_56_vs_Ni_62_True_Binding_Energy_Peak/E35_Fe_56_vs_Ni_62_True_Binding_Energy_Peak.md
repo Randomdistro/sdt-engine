@@ -1,3 +1,8 @@
+> **⮑ INVESTIGATED — resolved NEGATIVE.**
+> NP13 grammar-efficiency thesis failed openly; see `NP13_VERDICT.md`.
+
+---
+
 # E35: Fe-56 vs Ni-62: True Binding Energy Peak
 
 > **Category**: Nuclear Physics

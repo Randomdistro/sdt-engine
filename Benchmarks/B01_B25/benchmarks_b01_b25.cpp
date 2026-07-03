@@ -31,7 +31,7 @@
 //  BENCHMARK FRAMEWORK
 // ═══════════════════════════════════════════════════════════════════════
 
-enum class Certification { DERIVED, COMPUTED, CALIBRATED, OBSERVED, PENDING };
+enum class Certification { DERIVED, COMPUTED, CALIBRATED, OBSERVED, PENDING, IDENTITY };
 
 struct BenchmarkResult {
     std::string id;
@@ -46,6 +46,7 @@ struct BenchmarkResult {
 };
 
 static int g_total = 0, g_passed = 0, g_failed = 0;
+static int g_identity_pass = 0, g_calibrated_pass = 0;   // shown, but NOT tallied as predictions
 static std::vector<BenchmarkResult> g_results;
 
 static void report(const char* id, const char* name, const char* domain,
@@ -62,6 +63,7 @@ static void report(const char* id, const char* name, const char* domain,
         case Certification::CALIBRATED: cert_str = "CALIBRATED"; break;
         case Certification::OBSERVED:   cert_str = "OBSERVED";   break;
         case Certification::PENDING:    cert_str = "PENDING";    break;
+        case Certification::IDENTITY:   cert_str = "IDENTITY";   break;
         default: break;
     }
 
@@ -69,7 +71,18 @@ static void report(const char* id, const char* name, const char* domain,
                 id, name, sdt_val, exp_val, err, tol_pct, cert_str, status, unit);
 
     g_total++;
-    if (pass) g_passed++; else g_failed++;
+    // HUNTER repair 2026-07-03 (CANON_proposals §3, Harvey-authorized): the pass counter
+    // previously tallied on tolerance alone, so definitional identities and calibrated
+    // fits inflated the headline. IDENTITY/CALIBRATED passes are now shown but counted
+    // separately — the headline reports earned predictions only. A FAILING identity is
+    // still a genuine failure (an engine inconsistency).
+    if (cert == Certification::IDENTITY) {
+        if (pass) g_identity_pass++; else g_failed++;
+    } else if (cert == Certification::CALIBRATED) {
+        if (pass) g_calibrated_pass++; else g_failed++;
+    } else {
+        if (pass) g_passed++; else g_failed++;
+    }
     g_results.push_back({id, name, domain, sdt_val, exp_val, err, tol_pct, cert, pass});
 }
 
@@ -162,7 +175,7 @@ static void B03_fine_structure()
     // Bohr velocity at ground state (should be αc)
     double v1 = atomic::bohr_velocity(1, 1);
     double exp_v = measured::alpha * measured::c;
-    report("B03", "Bohr v(1,1) = alpha*c [m/s]", "Atomic", v1, exp_v, 0.001, Certification::DERIVED);
+    report("B03", "Bohr v(1,1) = alpha*c [m/s]", "Atomic", v1, exp_v, 0.001, Certification::IDENTITY);  // bohr_velocity(1,1) RETURNS αc — αc vs αc, definitional (HUNTER P7)
 }
 
 // ═══════════════════════════════════════════════════════════════════════
@@ -175,14 +188,14 @@ static void B04_lamb_shift()
     std::puts("\n══ B04: LAMB SHIFT ══");
     using namespace sdt::laws;
 
-    // UPDATED (2026-06): the old benchmark used a fitted k_Lamb=12.7227 in an α⁵ formula
-    // that no longer reproduces the value (it returns ~1725 MHz — stale). The engine now
-    // carries a NATIVE Lamb-shift candidate (APS04): ΔE(2S-2P) ≈ (9/4)·Φ₂(a₀) from the
-    // quadrupole (ℓ=2) wake harmonic, with zero fitted parameters — laws.hpp law_VI.
-    // It gives 1051.8 MHz vs measured 1057.845 (0.57%), class C, not tuned to the target.
-    double Lamb_MHz = law_VI::angular::lamb_shift_native_MHz;
-    report("B04", "H 2S-2P Lamb shift [MHz]", "Atomic", Lamb_MHz,
-           law_VI::angular::lamb_shift_measured_MHz, 1.0, Certification::COMPUTED);
+    // RETRACTED (HUNTER 2026-07-02, applied 2026-07-03, Harvey-authorized):
+    // the former "native candidate" 1051.8 MHz was the fabricated APS04 value — a bare
+    // literal in laws.hpp with no evaluating code (the APS04 solver never compiled; the
+    // formula with its own inputs gives ~3145 MHz). No SDT Lamb amplitude exists yet.
+    // No report() call — no tally slot until a derivation is built. PPT08 is OPEN.
+    std::printf("  B04  H 2S-2P Lamb shift: SDT amplitude OPEN (PPT08) — no earned prediction. "
+                "Measured %.3f MHz retained as OBSERVED-INPUT only.\n",
+                law_VI::angular::lamb_shift_measured_MHz);
 }
 
 // ═══════════════════════════════════════════════════════════════════════
@@ -290,12 +303,12 @@ static void B09_gravitational_radiation()
 {
     std::puts("\n══ B09: BINARY PULSAR DECAY ══");
 
-    // PSR B1913+16: orbital period decay rate
-    // dP/dt = -2.4025e-12 s/s (observed)
-    // GR prediction: -2.4029e-12 (agreement 0.13%)
-    // SDT: pressure wave emission from orbiting occlusion pair → same quadrupole formula
-    double sdt_dPdt = -2.4029e-12;  // SDT gives the same as GR quadrupole
-    report("B09", "Hulse-Taylor dP/dt [s/s]", "Gravity", sdt_dPdt, -2.4025e-12, 0.2, Certification::DERIVED);
+    // RETRACTED as a prediction (HUNTER 2026-07-02, applied 2026-07-03, Harvey-authorized):
+    // the previous line typed the GR quadrupole value (-2.4029e-12) and stamped it DERIVED —
+    // a BORROW: nothing SDT was computed. Retained as an OBSERVED comparison only, no tally.
+    // The SDT chirp convergence lives in B29 (koppa-bridge identity, labelled there).
+    std::puts("  B09  Hulse-Taylor dP/dt: observed -2.4025e-12 s/s; GR quadrupole -2.4029e-12."
+              " SDT-native emission integral NOT built — OPEN (no earned prediction).");
 }
 
 // ═══════════════════════════════════════════════════════════════════════
@@ -384,7 +397,7 @@ static void B12_stellar_structure()
         double zk2 = bridge::zk2_product(z, k);
         char name[64];
         std::snprintf(name, sizeof(name), "%-12s zk2", s.name);
-        report("B12", name, "Stellar", zk2, 1.0, 0.001, Certification::DERIVED);
+        report("B12", name, "Stellar", zk2, 1.0, 0.001, Certification::IDENTITY);  // zk²≡1 is the closure DEFINITION z=1/k² — true for any v (HUNTER P8)
     }
 }
 
@@ -531,13 +544,13 @@ static void B20_zk2_universality()
     double z_H = measured::alpha * measured::alpha;
     double k_H = measured::alpha_inv;
     double zk2_H = z_H * k_H * k_H;
-    report("B20", "Hydrogen zk2", "Universal", zk2_H, 1.0, 0.001, Certification::DERIVED);
+    report("B20", "Hydrogen zk2", "Universal", zk2_H, 1.0, 0.001, Certification::IDENTITY);  // definitional closure (HUNTER P9)
 
     // Earth orbit
     double v_earth = 29783.0;
     double z_e = bridge::z_from_v(v_earth);
     double k_e = bridge::k_from_v(v_earth);
-    report("B20", "Earth orbit zk2", "Universal", z_e * k_e * k_e, 1.0, 0.001, Certification::DERIVED);
+    report("B20", "Earth orbit zk2", "Universal", z_e * k_e * k_e, 1.0, 0.001, Certification::IDENTITY);  // definitional closure (HUNTER P9)
 }
 
 // ═══════════════════════════════════════════════════════════════════════
@@ -549,19 +562,14 @@ static void B21_screening()
     std::puts("\n══ B21: FORCE HIERARCHY ══");
     using namespace sdt::laws;
 
-    // EM/Gravitational force ratio at Bohr radius
-    // F_EM = k_e e² / a_0²
-    // F_grav = G m_e m_p / a_0²
-    // Ratio ≈ 2.27e39
-    double F_EM = measured::k_e * measured::e_charge * measured::e_charge
-                / (measured::a_0 * measured::a_0);
-    // G from SDT: GM = c²R/k² → G = c²R/(k²M)
-    // Use GM_Sun and M_Sun to extract G
-    double G_derived = 6.674e-11;  // NIST value (SDT derives same from k-hierarchy)
-    double F_grav = G_derived * measured::m_e * measured::m_p
-                  / (measured::a_0 * measured::a_0);
-    double ratio = F_EM / F_grav;
-    report("B21", "EM/Grav force ratio", "Universal", ratio, 2.27e39, 1.0, Certification::COMPUTED);
+    // RETRACTED as a prediction (HUNTER 2026-07-02, applied 2026-07-03, Harvey-authorized):
+    // the previous line hardcoded NIST G = 6.674e-11 inside a suite whose banner says "No G"
+    // ("SDT derives same from k-hierarchy" was asserted in a comment; the NIST number did the
+    // work). BORROW-SMUGGLE — deleted, no tally. Note: extracting G from any body's k-hierarchy
+    // requires that body's mass in kilograms, which is itself GM/G — the koppa cancels (see the
+    // 2026-07-03 lP-relabel retraction). The native statement is the RATIO of koppas, not G.
+    std::puts("  B21  EM/Grav force ratio ~2.27e39: displayed for orientation only — the split"
+              " of GM into G and kg-mass is unit bookkeeping SDT does not perform. No tally.");
 }
 
 // ═══════════════════════════════════════════════════════════════════════
@@ -574,10 +582,10 @@ static void B22_pressure_hierarchy()
     using namespace sdt::laws;
 
     // Nuclear scale: P_eff
-    report("B22", "P_eff [Pa]", "Universal", law_III::P_eff, 5.225e31, 0.5, Certification::COMPUTED);
+    report("B22", "P_eff [Pa]", "Universal", law_III::P_eff, 5.225e31, 0.5, Certification::CALIBRATED);  // laws.hpp self-labels class E, "FAILS delete-test" — engine's own label restored (HUNTER P10)
 
     // Transfer function
-    report("B22", "f = P_eff/P_conv", "Universal", law_III::f_transfer, 2.125e-17, 1.0, Certification::COMPUTED);
+    report("B22", "f = P_eff/P_conv", "Universal", law_III::f_transfer, 2.125e-17, 1.0, Certification::CALIBRATED);  // class E per laws.hpp (HUNTER P10)
 
     // CMB pressure
     report("B22", "P_CMB [Pa]", "Universal", law_I::P_rad, 1.391e-14, 1.0, Certification::DERIVED);
@@ -593,7 +601,7 @@ static void B23_coulomb_identity()
     using namespace sdt::laws;
 
     report("B23", "k_e*e2 (SDT derived) [J·m]", "Universal",
-           coulomb_identity::k_e_e2, coulomb_identity::k_e_e2_codata, 0.001, Certification::DERIVED);
+           coulomb_identity::k_e_e2, coulomb_identity::k_e_e2_codata, 0.001, Certification::IDENTITY);  // α ≡ k_e e²/ℏc — tautology; laws.hpp itself flags class F "FAILS delete-test" (HUNTER P5)
 }
 
 // ═══════════════════════════════════════════════════════════════════════
@@ -612,13 +620,13 @@ static void B24_exclusion_volumes()
     // Mass ratio preserved
     double ratio = law_IV::V_disp_p / law_IV::V_disp_e;
     double exp_ratio = measured::m_p / measured::m_e;
-    report("B24", "V_p/V_e = m_p/m_e", "Particle", ratio, exp_ratio, 0.001, Certification::DERIVED);
+    report("B24", "V_p/V_e = m_p/m_e", "Particle", ratio, exp_ratio, 0.001, Certification::IDENTITY);  // V_disp ∝ m ⇒ ratio ≡ m_p/m_e by construction (HUNTER P6)
 
     // Marginal stability: P_cf = P_conv / 3
     double P_cf = law_IV::rho_eff_e * measured::c * measured::c;
     double P_target = law_I::P_conv / 3.0;
     double stability_ratio = P_cf / P_target;
-    report("B24", "P_cf / (P_conv/3) = 1.0", "Particle", stability_ratio, 1.0, 0.001, Certification::DERIVED);
+    report("B24", "P_cf / (P_conv/3) = 1.0", "Particle", stability_ratio, 1.0, 0.001, Certification::IDENTITY);  // P_cf ≡ P_conv/3 by the marginal-stability definition (HUNTER P6b)
 }
 
 // ═══════════════════════════════════════════════════════════════════════
@@ -776,10 +784,13 @@ int main()
         }
     }
 
-    // Summary
+    // Summary — earned predictions only in the headline; identities/calibrated shown separately
+    int earned_total = g_total - g_identity_pass - g_calibrated_pass;
     std::puts("\n╔══════════════════════════════════════════════════════════════╗");
-    std::printf("║  RESULTS: %d/%d passed (%.1f%%)                              ║\n",
-                g_passed, g_total, 100.0 * g_passed / g_total);
+    std::printf("║  RESULTS: %d/%d earned predictions passed (%.1f%%)           ║\n",
+                g_passed, earned_total, earned_total > 0 ? 100.0 * g_passed / earned_total : 0.0);
+    std::printf("║  + %d consistency identities (definitional; NOT predictions) ║\n", g_identity_pass);
+    std::printf("║  + %d CALIBRATED (class E, documented; not earned)           ║\n", g_calibrated_pass);
     std::printf("║  %d genuine fail · %d PENDING (known-open, flagged)          ║\n",
                 real_fail, pending_fail);
     std::puts("╚══════════════════════════════════════════════════════════════╝");
@@ -802,6 +813,7 @@ int main()
     std::puts("  CALIBRATED — one parameter fitted (documented at the call site)");
     std::puts("  OBSERVED   — validated against observation, mechanism established");
     std::puts("  PENDING    — mechanism identified, SDT-native derivation not yet implemented");
+    std::puts("  IDENTITY   — true by definition/construction; shown as consistency, never tallied");
 
     // Exit non-zero only on GENUINE regressions; PENDING items are flagged, not failures.
     return real_fail > 0 ? 1 : 0;

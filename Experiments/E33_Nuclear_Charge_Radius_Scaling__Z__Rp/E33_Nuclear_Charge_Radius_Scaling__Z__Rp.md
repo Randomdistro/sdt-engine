@@ -1,3 +1,9 @@
+> **⮑ SPEC LINKED — investigation spec written, NOT yet run.**
+> Methodology spec exists at `Investigations/05_Nuclear_Physics/NP12_Nuclear_Charge_Radius_Scaling` (PROMPT only — no verdict, no result). This experiment remains an OPEN falsifiable prediction.
+> The specification below is the falsifiable prediction.
+
+---
+
 # E33: Nuclear Charge Radius Scaling → Z × R_p
 
 > **Category**: Nuclear Physics

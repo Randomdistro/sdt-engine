@@ -12,6 +12,10 @@ galaxies listed are along effectively the SAME line of sight.
 
 ### 1.1 Representative Galaxy Redshift Ladder
 
+> [ANNOTATION: synthetic arithmetic illustration, not a data sample —
+> the rows below are constructed (1+z)-multiplication examples, not
+> measured HUDF objects]
+
 | Galaxy (HUDF ID) | z | T_CMB(z) (K) | λ_Hα emitted (nm) | λ_Hα observed (nm) | Shift (nm) | Ratio |
 |-----------------|---|-------------|-------------------|-------------------|-----------|-------|
 | Nearby field | 0.10 | 3.00 | 656.3 | 721.9 | 65.6 | 1.100 |
@@ -352,6 +356,10 @@ temperature). It does NOT require ΛCDM. The sound horizon is
 determined by the pre-Clearing acoustic physics, which SDT agrees
 with (same c_s = c/√3, same recombination epoch).
 
+> [CORRECTION: r_s=147 Mpc is a Planck ΛCDM fit output (requires the
+> expansion-history integral H(z)); the 46-Gyr age chain is therefore
+> ΛCDM-machinery-dependent, not SDT-derived]
+
 **So: R_CMB = r_s / θ_s ≈ 46 Gly. This IS derivable from SDT.**
 
 The age of the universe in SDT = 46 Gly / c = **46 Gyr**.
@@ -372,5 +380,5 @@ The age of the universe in SDT = 46 Gly / c = **46 Gyr**.
 | SN 1987A 3-hour lead is emission delay, not propagation | CONFIRMED |
 | Neutrinos should show NO pressure-gradient redshift | SDT PREDICTION |
 | d_L(γ) / d_L(ν) = (1+z) for any co-detected source | SDT PREDICTION |
-| R_CMB derivable from r_s/θ_s = 46 Gly | DERIVED |
-| SDT age = 46 Gyr (not 48) | CORRECTED |
+| R_CMB derivable from r_s/θ_s = 46 Gly | DERIVED [CORRECTION: r_s=147 Mpc is a Planck ΛCDM fit output (requires the expansion-history integral H(z)); the 46-Gyr age chain is therefore ΛCDM-machinery-dependent, not SDT-derived] |
+| SDT age = 46 Gyr (not 48) | CORRECTED [same caveat: ΛCDM-machinery-dependent via r_s] |

@@ -1,0 +1,48 @@
+NP08 — Triple-Alpha / Hoyle State from Geometric Packing (J. C. Harvey, 2026-07-03)
+Engine: sdt/laws.hpp + sdt/nuclear.hpp | anchors AME2020 (OBSERVED, flagged)
+====================================================================
+
+[P0] Constitutional grammar  n_t = A-2Z, n_d = 3Z-A-2
+     Be-8 (Z=4,A=8):  alpha + 2 d + 0 t   (valid=1)
+     C-12 (Z=6,A=12): alpha + 4 d + 0 t   (valid=1)
+     PREMISE CHECK: PROMPT asserted 'Be-8 = 2a + 0d (no scaffold bonds)'.
+     The constitutional formulas give Be-8 = alpha + 2d. The PROMPT text
+     CONTRADICTS the grammar it cites -> PROMPT premise CORRECTED here.
+
+[P1] Grammar ledger (uses measured BEs -> IDENTITY-class bookkeeping,
+     NOT predictions; labelled per RUN_LOG)
+     Be-8: B=  56.4995  blocks(a+2d)= 32.7448  scaffold required =  23.7547 MeV (11.88/d)
+     C-12: B=  92.1618  blocks(a+4d)= 37.1940  scaffold required =  54.9678 MeV (13.74/d)
+     Q(3a->C12) = B(C12)-3B(a) =   7.2747 MeV  (PROMPT: 7.275 — check ok)
+     Be-8 vs 2a =  -0.0918 MeV -> a+2d packing is metastable against 2a by 0.092
+     Rearrangement audit (exact algebra): dissolve 2a -> 4d costs  47.6931 MeV,
+     scaffold formation repays  54.9678 MeV, net  -7.2747 = -Q  (identity check)
+
+[P2] Native tetrahedral-closure attempt (committed geometry, gate 20%)
+     alpha-hbar-c = 1.4400 MeV*fm | D(NP17) = 1.9633 fm | r_cv = 2.6571 fm | s_dd = 4.3391 fm
+     Point-Coulomb REPULSION ledger of a+4d closure = 6.327 MeV (knob-free)
+     ATTRACTIVE side (shared-electron wells d<->a core): electron count and
+     placement are NP17-PENDING (alpha under-binds ~6x on pure electrostatics).
+     Decision rule (RUN_LOG): no signed closure energy can be written knob-free
+     -> P2 = DEFERRED (dependency: NP17-PENDING tetrahedral-lock magnitude).
+     NO number is scored against the 7.654 MeV gate. Inventing electron
+     placements to reach it is forbidden.
+
+[P3] Stability directions from the ledger (sign-only; measured BEs)
+     (i)  Be-8 -> 2a: +0.0918 MeV -> downhill to 2a  (Be-8 decays, tau~1e-16 s)  OK
+     (ii) 3a -> C-12 (a+4d): +7.2747 MeV -> downhill to a+4d (C-12 stable)      OK
+     Both directions come out of the packing comparison with no sign choice.
+     Hoyle = 7.654 MeV = Q (7.2747) + barrier 0.3793 MeV above the 3a threshold;
+     the 0.379 MeV closure barrier is the quantity SDT OWES (geometric
+     threshold of tetrahedral closure) — un-derived until NP17's lock term.
+
+====================================================================
+VERDICT (numeric):
+  P0 grammar        : Be-8 = a+2d, C-12 = a+4d (exact); PROMPT's 'Be-8 = 2a+0d'
+                      premise CONTRADICTS the constitutional grammar -> corrected
+  P1 ledger         : scaffold required: Be-8 23.75 MeV, C-12 54.97 MeV (IDENTITY)
+  P2 Hoyle 7.654    : DEFERRED — dependency NP17-PENDING (no knob-free attractive
+                      side; repulsion ledger alone = 6.33 MeV)
+  P3 directions     : Be-8 unstable / C-12 stable both downhill in the ledger —
+                      consistency, not prediction (measured BEs consumed)
+  Barrier owed      : 0.379 MeV above 3a threshold (the actual Hoyle content)

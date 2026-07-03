@@ -1,5 +1,19 @@
 # INVESTIGATION PROMPT: Deriving the Proton-Electron Mass Ratio (m_p / m_e ≈ 1836.15) from Pure Vortex Topology
 
+> **Author:** J. C. Harvey, Melbourne. **Status:** SPEC (upgrade 2026-06-27).
+> **Inherits:** `PERFECT_PROMPT_TEMPLATE.md` §⓪–§⑩ · `PROMPT_EXECUTION_PROTOCOL.md` · §0 anti-creep (R0–R5).
+> **Engine:** `#include <sdt/laws.hpp>` only — no local constant namespaces.
+> **Run:** Pre-commit thresholds in `RUN_LOG.md` before coding; adjust per pivot table (§⑩).
+---
+
+## ⓪ The Golden Rule — five questions (answer before Phase 0)
+
+1. **What don't we know?** — [PPT07] INVESTIGATION PROMPT: Deriving the Proton-Electron Mass Ratio (m_p / m_e ≈ 1836.15) from Pure Vortex Topology: *(unfilled by the 2026-06-27 bulk template upgrade — write the single measurable gap before the next run)*
+2. **Why does it matter?** — Stack position / downstream blockers (see `INVESTIGATION_STACK.md`).
+3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
+4. **What would prove us wrong?** — §⑧ falsification tests with numeric triggers.
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN).
+
 ## 1. Objective
 To mathematically derive the proton-electron mass ratio ($m_p / m_e \approx 1836.15$) purely from the volumetric and topological scaling of $W=1$ (simple torus) and $W=3$ (trefoil knot) vortices within the SDT spation phase-relay lattice. The goal is to mathematically prove that 1836.15 is not an arbitrary constant, but a strict geometric requirement of spatial topology.
 
@@ -46,3 +60,44 @@ Your task is to build the mathematical proof. You must construct a formal respon
 - **NO EMPIRICAL ANCHORS:** You may not use the measured mass of the proton ($1.672 \times 10^{-27}$ kg) or the electron ($9.109 \times 10^{-31}$ kg) anywhere in your derivation. You must derive the *ratio* purely from geometry.
 - **NO STANDARD MODEL:** Do not invoke Higgs mechanisms, QCD, quarks, or binding energy. The proton is a continuous spation vortex, not a composite of three quarks.
 - **DIMENSIONAL CONSISTENCY:** Ensure all volumetric calculations maintain proper $L^3$ dimensionality and scale correctly with $\ell_P$.
+---
+
+## ⑩ Adaptive Execution Protocol
+
+> *It is a bad plan that cannot be altered.* Failures invoke **PIVOT / KILL / OPEN** — never RETRO-PASS or PLUG.
+> See `PROMPT_EXECUTION_PROTOCOL.md`.
+
+### Pre-Run Commitment Block (copy to `RUN_LOG.md` before coding)
+
+```markdown
+## Pre-Run Commitments — PPT07
+- Prompt completion target: [A|B|C|D]
+- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- CALIBRATED budget: [0 or list each param — max per §⑤]
+- Engine namespaces: law_VI winding, bridge::k_*, PPT01 equilibrium
+- Phase thresholds (committed before run): [commit per phase in RUN_LOG]
+- Forbidden retroactive changes: widen tolerances; plug targets; IDENTITY-PASS; local constant namespaces
+```
+
+### Pivot table (minimum — extend for this investigation)
+
+| Trigger | PIVOT (first) | If pivot fails | Forbidden |
+|---------|---------------|----------------|-----------|
+| Phase 0 sanity check fails | Fix units/engine refs; verify `laws.hpp` symbols | STOP — report blocker | Fit to target |
+| Native mechanism off > committed % | Alternative route in §④; document ADJ-### | **OPEN** or **KILL** hypothesis | RETRO-PASS |
+| `z ≥ 1` in closure formula | Weak-field break (CR10); piecewise or exponential | **OPEN** that regime | Ignore break |
+| Rivals match but SDT doesn't beat | Label **DEGENERATE** honestly | — | Claim Class A |
+| Upstream dependency missing (FLM10, etc.) | **DEFER** phase; cite dependency ID | — | Fake PASS |
+
+### Allowed adjustments
+
+- Finer numerics (mesh, ticks, bracket); phase splits (Na / Nb); filename fix via ADJ entry.
+- Alternative **native** routes already listed in §④ Strategy.
+
+### Disallowed adjustments
+
+- Post-hoc tolerance widening · coefficient plugs · `atomic::`/GM/G in Phase-1 native chain · Snell/reciprocity-only as Fermat PASS.
+
+---
+
+*PPT07 · upgraded 2026-06-27 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*

@@ -61,5 +61,6 @@ Raw exponent difference:      0.6155
 Weighted exponent difference:  9.2342
 
 => The asymmetry is NOT an amplitude effect. It is geometric.
-   The 5/4 and 3/4 exponents are intrinsic to spation coupling.
+   The 5/4 and 3/4 exponents are the fitted values (1.28/0.67 raw);
+   19's honest verdict: PARTIALLY CONSTRAINED, not derived.
 ```

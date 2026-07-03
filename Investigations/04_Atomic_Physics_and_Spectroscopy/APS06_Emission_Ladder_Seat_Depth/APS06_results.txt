@@ -1,0 +1,102 @@
+========================================================================
+APS06 - THE EMISSION LADDER BY SEAT DEPTH
+  seat depth as the native ordering variable; the 13.6 eV ceiling;
+  and the exceptionless neutron-requirement for nuclear gamma.
+========================================================================
+
+[P0] SANITY  R_inf_derived vs measured R_inf
+    R_inf_derived = m_e c alpha^2 / (2h) = 1.0973731568e+07 m^-1   [DERIVED]
+    R_inf (CODATA, laws.hpp:154)         = 1.0973731568e+07 m^-1   [OBSERVED-ANCHOR]
+    |delta|/R_inf = 0.0000 ppm   (gate: ~0 ppm)
+    P0 PASS.
+
+[P1] SEAT-DEPTH LADDER  (s == release energy, Law IV)
+    seat class                                 s (eV)  tag             pred band          obs band
+    molecular (rot/vib)                    1.0000e-01  OBSERVED-ANCHOR microwave-IR       microwave-IR
+    outer-shell electronic (H, Z=1)        1.3606e+01  DERIVED         visible-UV (eV)    UV (91 nm Lyman limit)
+    inner-shell electronic (Pb, Z=82)      9.1485e+04  DERIVED         hard X-ray (keV)   hard X-ray (Pb Ka ~ 75-88 keV)
+    nuclear                                1.3320e+06  OBSERVED-ANCHOR gamma (keV-MeV)    gamma (1.173 + 1.332 MeV)
+    monotone check: s strictly increasing across 4 classes? YES  (inversions = 0)
+    H n=1 ceiling (DERIVED) = 13.605693123 eV vs Ry_eV = 13.605693123 eV
+      -> 0.000 ppm  (gate < 50 ppm: PASS)
+    P1 verdict: PASS-GATE
+
+[P2] HYDROGEN ELECTRONIC CEILING = 13.6 eV  (from geometry)
+    E_ceiling = Z^2 * R_inf_derived * hc, Z=1, n=1 -> infinity
+      = 13.605693123 eV   [DERIVED from m_e,c,alpha,h]
+      vs Ry_eV = 13.605693123 eV  ->  0.000 ppm  (gate < 50 ppm: PASS)
+
+    Alpha-grammar wedge scan on the N=0 line (A = Z), Z = 1..10:
+        Z  A=Z   N   n_d  n_t  alpha-valid?  note
+        1    1   0     0   -1         False  H-1: only bound N=0 nuclide; NO nuclear gamma (13.6 eV electronic)
+        2    2   0     2   -2         False  He-2 diproton: MEASURED UNBOUND (OBSERVED-ANCHOR)
+        3    3   0     4   -3         False  
+        4    4   0     6   -4         False  
+        5    5   0     8   -5         False  
+        6    6   0    10   -6         False  
+        7    7   0    12   -7         False  
+        8    8   0    14   -8         False  
+        9    9   0    16   -9         False  
+       10   10   0    18  -10         False  
+    wedge (Z>=2,N=0) valid nuclides found: 0  (gate = ZERO: PASS)
+
+    X-ray climb: inner-shell (n=1) ceiling Z^2 * Ry, all ELECTRONIC seats:
+        Z elem    E_ceiling (eV) band           requires
+        1 H               13.606 eV (UV)        1 proton (H)
+        2 He              54.423 eV (UV)        more protons -> (past H) neutrons to bind
+        6 C              489.805 eV (UV)        more protons -> (past H) neutrons to bind
+       26 Fe            9197.449 keV (X-ray)    more protons -> (past H) neutrons to bind
+       82 Pb           91484.681 keV (X-ray)    more protons -> (past H) neutrons to bind
+    Z^2 climb monotone in Z? YES
+    P2 verdict: PASS-GATE
+
+[P3] DECISIVE TEST - every nuclear gamma comes from a neutron-bearing nucleus
+    nuclide     Z    A   N  n_d  n_t  gamma keV  N>=1?  provenance
+    Fe-57      26   57  31   19    5     14.413    yes  Fe-57* Mossbauer line (from Co-57 EC)
+    Fe-57      26   57  31   19    5    122.060    yes  Fe-57* 122 keV (from Co-57 EC source)
+    Ni-60      28   60  32   22    4   1332.500    yes  Ni-60* 1332.5 (+1173.2) keV (from Co-60)
+    Ba-137     56  137  81   29   25    661.660    yes  Ba-137* 661.66 keV (from Cs-137 beta-)
+    Ba-133     56  133  77   33   21    356.010    yes  Ba-133* 356 keV (from Ba-133 EC)
+    Ne-22      10   22  12    6    2   1274.500    yes  Ne-22* 1274.5 keV (from Na-22 beta+)
+    Sr-90      38   90  52   22   14      0.000    yes  Sr-90 pure beta- : NO gamma (control)
+    Tc-99      43   99  56   28   13    140.510    yes  Tc-99m isomeric transition (IT)
+    Ar-40      18   40  22   12    4   1460.800    yes  Ar-40* 1460.8 keV (from K-40 EC)
+    Np-237     93  237 144   40   51     59.540    yes  Np-237* 59.54 keV (from Am-241 alpha)
+    Xe-131     54  131  77   29   23    364.490    yes  Xe-131* 364.5 keV (from I-131 beta-)
+    Pb-208     82  208 126   36   44   2614.500    yes  Pb-208* 2614.5 keV (from Tl-208 beta-)
+    U-235      92  235 143   39   51    185.700    yes  U-235 185.7 keV (alpha decay + IT)
+    Pu-239     94  239 145   41   51    129.300    yes  Pu-239 129.3 keV (alpha decay gamma)
+    Nd-144     60  144  84   34   24    696.500    yes  Nd-144* 696.5 keV (from Pr-144 beta-)
+    Mg-26      12   26  14    8    2   1808.700    yes  Mg-26* 1808.7 keV (from Al-26 beta+/EC)
+    Mg-24      12   24  12   10    0   1368.600    yes  Mg-24* 1368.6 keV (from Na-24 beta-)
+    Zn-68      30   68  38   20    8   1077.000    yes  Zn-68* 1077 keV (from Ga-68 beta+)
+    Cd-111     48  111  63   31   15    171.300    yes  Cd-111* 171.3 keV (from In-111 EC)
+
+    gamma emitters surveyed:        18
+    all with N >= 1 ?               YES
+    counterexamples (N=0,Z>=2,gamma): 0  (gate = ZERO: PASS; ONE = KILL)
+    diproton (He-2) bound? NO (measured unbound)
+    P3 verdict: PASS-GATE (zero counterexamples)
+
+[P4] X-RAY / GAMMA OVERLAP  -  provenance, not energy
+    line                               E (keV) seat origin  citation
+    W Ka1 (Z=74) K-shell X-ray          59.320 electronic   W X-ray Ka1 (X-ray Data Booklet)
+    Am-241 nuclear gamma                59.540 nuclear      NNDC A=241
+    energy ratio (nuclear/electronic) = 1.0037  (within factor 2: YES)
+    -> At ~59.5 keV a W K-shell X-ray and the Am-241 nuclear gamma are
+       the SAME photon; only the SEAT (electron vs nucleus) differs.
+       'X-ray' = electron-seat emission; 'gamma' = nucleus-seat emission.
+       The energy-band split is a teaching artifact; SEAT DEPTH is native,
+       PROVENANCE is the native label. (No 'X-rays<gammas' definition used.)
+    P4 verdict: PASS-GATE
+
+========================================================================
+SUMMARY
+  P1 monotone ordering ..... PASS  (inversions=0)
+  P2 ceiling 13.6 eV ....... PASS  (0.000 ppm)
+  P2 wedge (Z>=2,N=0) ...... PASS  (0 found)
+  P3 neutron requirement ... PASS  (0 counterexamples)
+  P4 overlap provenance .... PASS  (ratio=1.0037)
+========================================================================
+
+wrote APS06_results.csv

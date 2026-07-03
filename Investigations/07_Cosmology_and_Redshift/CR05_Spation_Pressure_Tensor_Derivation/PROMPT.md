@@ -1,8 +1,22 @@
 # CR05 Investigation Prompt
 
+> **Author:** J. C. Harvey, Melbourne. **Status:** RETRACTED-FABRICATED → OPEN (header corrected 2026-07-03; was "SPEC" from the bulk template upgrade — see banner in CR05_VERDICT.md; the H₀-from-pressure hypothesis stays OPEN).
+> **Inherits:** `PERFECT_PROMPT_TEMPLATE.md` §⓪–§⑩ · `PROMPT_EXECUTION_PROTOCOL.md` · §0 anti-creep (R0–R5).
+> **Engine:** `#include <sdt/laws.hpp>` only — no local constant namespaces.
+> **Run:** Pre-commit thresholds in `RUN_LOG.md` before coding; adjust per pivot table (§⑩).
+---
+
+## ⓪ The Golden Rule — five questions (answer before Phase 0)
+
+1. **What don't we know?** — *(unfilled by the 2026-06-27 bulk template upgrade — write the single measurable gap before the next run)*
+2. **Why does it matter?** — Stack position / downstream blockers (see `INVESTIGATION_STACK.md`).
+3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
+4. **What would prove us wrong?** — §⑧ falsification tests with numeric triggers.
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN).
+
 **Investigation Code:** CR05  
 **Title:** Spation Pressure Tensor Derivation — H₀ Closure and Transfer Function Completion  
-**Status:** COMPLETE ✓  
+**Status:** COMPLETE ✓ [RETRACTED — see banner in CR05_VERDICT.md]  
 **Date Executed:** June 2026
 
 ---
@@ -108,7 +122,7 @@ This is the final piece. If successful, the transfer function f = P_eff/P_conv u
 
 ### Framework Targets
 
-- ✓ **Zero free parameters in complete derivation** — ACHIEVED
+- ✓ **Zero free parameters in complete derivation** — ACHIEVED [RETRACTED — see banner in CR05_VERDICT.md]
 - ✓ **All dependencies trace to topology or measured fundamentals** — ACHIEVED
 - ✓ **Circular dependencies broken** — ACHIEVED
 - ✓ **Transfer function certified CLASS C** — ACHIEVED
@@ -149,7 +163,7 @@ This is the final piece. If successful, the transfer function f = P_eff/P_conv u
 - H₀ derived analytically to <1% accuracy
 - Clear mechanism at every step
 - Numerical validation converges to Planck value
-- Quality score: 9.8/10 average across phases
+- Quality score: 9.8/10 average across phases [RETRACTED — see banner in CR05_VERDICT.md]
 - **Result exceeds both Class A and Class C targets** ✓
 
 ---
@@ -293,7 +307,7 @@ This is the final piece. If successful, the transfer function f = P_eff/P_conv u
 - Transfer function upgraded from CLASS E to CLASS C
 - H₀ derived to <1% accuracy (target was ±5%)
 - Framework fully closed with zero free parameters
-- Quality score: A-class (9.8/10)
+- Quality score: A-class (9.8/10) [RETRACTED — see banner in CR05_VERDICT.md]
 
 **Status:** INVESTIGATION COMPLETE ✓
 
@@ -324,8 +338,49 @@ This is the final piece. If successful, the transfer function f = P_eff/P_conv u
 ---
 
 **Execution Date:** June 2026  
-**Status:** COMPLETE ✓  
-**Quality:** A-CLASS (9.8/10)  
+**Status:** COMPLETE ✓ [RETRACTED — see banner in CR05_VERDICT.md]  
+**Quality:** A-CLASS (9.8/10) [RETRACTED — see banner in CR05_VERDICT.md]  
 **Classification:** CLASS C (CONVERGENCE)  
 
-**TRANSFER FUNCTION CLOSURE ACHIEVED**
+**TRANSFER FUNCTION CLOSURE ACHIEVED** [RETRACTED — see banner in CR05_VERDICT.md]
+---
+
+## ⑩ Adaptive Execution Protocol
+
+> *It is a bad plan that cannot be altered.* Failures invoke **PIVOT / KILL / OPEN** — never RETRO-PASS or PLUG.
+> See `PROMPT_EXECUTION_PROTOCOL.md`.
+
+### Pre-Run Commitment Block (copy to `RUN_LOG.md` before coding)
+
+```markdown
+## Pre-Run Commitments — CR05
+- Prompt completion target: [A|B|C|D]
+- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- CALIBRATED budget: [0 or list each param — max per §⑤]
+- Engine namespaces: cosmology.hpp, z_spectral, CR10 cubic rung
+- Phase thresholds (committed before run): 5%, 1%, 3%, 1%, 1%
+- Forbidden retroactive changes: widen tolerances; plug targets; IDENTITY-PASS; local constant namespaces
+```
+
+### Pivot table (minimum — extend for this investigation)
+
+| Trigger | PIVOT (first) | If pivot fails | Forbidden |
+|---------|---------------|----------------|-----------|
+| Phase 0 sanity check fails | Fix units/engine refs; verify `laws.hpp` symbols | STOP — report blocker | Fit to target |
+| Native mechanism off > committed % | Alternative route in §④; document ADJ-### | **OPEN** or **KILL** hypothesis | RETRO-PASS |
+| `z ≥ 1` in closure formula | Weak-field break (CR10); piecewise or exponential | **OPEN** that regime | Ignore break |
+| Rivals match but SDT doesn't beat | Label **DEGENERATE** honestly | — | Claim Class A |
+| Upstream dependency missing (FLM10, etc.) | **DEFER** phase; cite dependency ID | — | Fake PASS |
+
+### Allowed adjustments
+
+- Finer numerics (mesh, ticks, bracket); phase splits (Na / Nb); filename fix via ADJ entry.
+- Alternative **native** routes already listed in §④ Strategy.
+
+### Disallowed adjustments
+
+- Post-hoc tolerance widening · coefficient plugs · `atomic::`/GM/G in Phase-1 native chain · Snell/reciprocity-only as Fermat PASS.
+
+---
+
+*CR05 · upgraded 2026-06-27 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*

@@ -142,7 +142,7 @@ namespace measured {
     // invariants and SDT topology/relational structure.
     inline constexpr double a_0         = 5.291'772'109'03e-11;         // [m]      Bohr radius
     inline constexpr double r_e         = 2.817'940'3262e-15;           // [m]      Classical electron radius = alpha * ƛ_Ce
-    inline constexpr double R_p         = 8.414e-16;                    // [m]      Proton charge radius (muonic H, 2019)
+    inline constexpr double R_p         = 8.414e-16;                    // [m]      Proton boundary radius (muonic H, 2019; "charge radius" is the literature's obfuscation)
     // NOTE: R_p ≈ 4ℏ/(m_p c) to 0.02% — see W+1 conjecture below
     inline constexpr double m_e         = 9.109'383'7015e-31;           // [kg]     Electron mass (NIST reference)
     inline constexpr double m_p         = 1.672'621'923'69e-27;         // [kg]     Proton mass (NIST reference)
@@ -185,7 +185,7 @@ namespace measured {
     inline constexpr double AU          = 1.495'978'707e11;             // [m]      Astronomical unit (IAU 2012)
 
     // Nuclear (measured)
-    inline constexpr double R_He        = 1.6755e-15;                   // [m]      He-4 charge radius
+    inline constexpr double R_He        = 1.6755e-15;                   // [m]      He-4 boundary radius (lit.: "charge radius")
 
     // Coulomb constant (derived from SI)
     inline constexpr double k_e         = 8.987'551'7923e9;             // [N·m²/C²] Coulomb constant
@@ -489,7 +489,7 @@ namespace law_IV {
     /// Three radii for each particle
     struct ParticleRadii {
         double R_excl;      // Exclusion radius (actual displaced volume)
-        double R_wake;      // Wake/charge radius (pressure perturbation reach)
+        double R_wake;      // Wake/boundary radius (pressure perturbation reach)
         double R_quantum;   // Compton wavelength (quantum coherence scale)
     };
 
@@ -978,7 +978,7 @@ namespace atomic {
 namespace nuclear {
     using namespace measured;
 
-    /// Nuclear charge radius scaling: R_nuc ≈ Z × R_p
+    /// Nuclear boundary-radius scaling: R_nuc ≈ Z × R_p
     [[nodiscard]] constexpr auto nuclear_charge_radius(int Z) noexcept -> double {
         return static_cast<double>(Z) * R_p;
     }
@@ -1063,7 +1063,7 @@ namespace winding {
     /// Electron winding number (simple torus)
     inline constexpr int W_electron = 1;
 
-    /// W+1 predicted proton charge radius: R_p = (W+1) ℏ / (m_p c)
+    /// W+1 predicted proton boundary radius: R_p = (W+1) ℏ / (m_p c)
     // provenance_status:     SDT-derived
     // correspondence_status: known-match            // 0.02% vs muonic-H proton radius
     // input_dependency:      primitive-whitelist    // hbar, m_p, c + winding W=3
@@ -1325,16 +1325,18 @@ namespace angular {
     inline constexpr double quadrupole_exponent        = -3.0;  // ℓ=2, rotational wake
     inline constexpr double trefoil_harmonic_exponent  = -4.0;  // ℓ=3, three-fold circulation
 
-    /// Native Lamb-shift candidate (CLASS C; amplitude pending — see caveats)
-    /// ΔE(2S–2P) ≈ (9/4) Φ₂(a₀) ⇒ 1051.8 MHz vs measured 1057.845 MHz (0.57%)
-    // provenance_status:     SDT-derived
-    // correspondence_status: known-match
-    // input_dependency:      primitive-whitelist + measured radii (zero fitted params)
-    // class:                 C
-    // circularity_assertion: not tuned to the measured value (emergent)
-    // risk_flag:             quadrupole amplitude awaits numerical (lattice) verification
-    inline constexpr double lamb_shift_native_MHz   = 1051.8;
-    inline constexpr double lamb_shift_measured_MHz = 1057.845;
+    /// Lamb shift (H 2S–2P). SDT amplitude is OPEN (PPT08).
+    /// RETRACTION (HUNTER 2026-07-02, applied 2026-07-03 with J.C.Harvey's authorization):
+    /// the former `lamb_shift_native_MHz = 1051.8` was a bare literal, NOT a derivation —
+    /// the (9/4)Φ₂(a₀) evaluation is not in the code, only the answer was typed. It is the
+    /// APS04 fished value (its own solver never compiled; the formula with its own inputs
+    /// gives ~3145 MHz). Removed. PPT08 (SDT Lamb amplitude) is OPEN.
+    // provenance_status:     OBSERVED-INPUT (measured RF resonance; NOT SDT-derived)
+    // correspondence_status: measured
+    // input_dependency:      measured-observable
+    // class:                 OPEN (native amplitude unbuilt — see PPT08)
+    inline constexpr double lamb_shift_measured_MHz = 1057.845;  // measured, not derived
+    // (lamb_shift_native_MHz DELETED — was fabricated 1051.8; do not restore without a derivation)
 }
 } // namespace law_VI
 

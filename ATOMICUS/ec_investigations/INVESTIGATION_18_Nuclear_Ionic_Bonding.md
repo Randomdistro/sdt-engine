@@ -337,7 +337,7 @@ bearing capacity for every possible Z. No construction grammar can hold.
 |---|-----------|------|
 | 1 | All even-N helium halos (He-6, He-8, He-10) live >10⁵× longer than odd-N halos (He-5, He-7, He-9) | Measured ✓ CONFIRMED |
 | 2 | He-8 + proton-rich target (n_tri = −4) produces pure deuteron in fusion | Nuclear reaction data |
-| 3 | He-8's charge radius exceeds He-6's by more than the A^(1/3) scaling predicts (extended halo) | Laser spectroscopy |
+| 3 | He-8's boundary radius exceeds He-6's by more than the A^(1/3) scaling predicts (extended halo) | Laser spectroscopy |
 | 4 | No nuclear molecular state exists for He-5 + anything (unpaired halo prevents bonding) | Resonance search |
 | 5 | Metallic helium transition pressure correlates with He halo onset energy | High-pressure experiments |
 

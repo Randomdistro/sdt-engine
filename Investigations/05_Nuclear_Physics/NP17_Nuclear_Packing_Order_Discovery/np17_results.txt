@@ -1,0 +1,40 @@
+############################################################################
+#  NP17 — nuclear packing order: 6π-trefoil + SHARED-ELECTRON binding       #
+#  E = -sum q_i q_j (alpha hbar c)/r_ij.  No fitted energy scale.           #
+############################################################################
+
+  k_e e^2 = alpha*hbar*c = 1.4400 MeV*fm   (Coulomb identity)
+  proton boundary R_p     = 0.8414 fm   (= 4 hbar/(m_p c), W+1)
+  trefoil minor radius    = R_p/3 = 0.2805 fm  (electron node gap)
+
+=== DEUTERON  (p + n = p + (p+e) = 2p + 1e) ===
+  geometric D = 2 R_p + R_p/3 = 1.9633 fm
+  E_bind = 2.2004 MeV   (measured 2.224 MeV, -1.06%)   [factor 3 exact]
+  inverse: D giving 2.224 MeV = 3 k_e e^2/E = 1.9424 fm  (= 2R_p + 0.260 fm gap)
+  -> binding SCALE is NOT fitted: it is alpha hbar c / (a geometric length).
+
+=== ALPHA  (He-4 = 2p + 2n = 4p + 2e, tetrahedral) ===
+  electrostatic binding at a = 2R_p = 1.683 fm : 4.454 MeV
+  edge that would give 28.296 MeV electrostatically: a = 0.265 fm  (< 2R_p!)
+  HONEST: shared-electron electrostatics alone UNDER-binds the alpha at
+          physical spacing (~4.5 vs 28.3 MeV). The deuteron is pure
+          shared-electron well; the alpha's remainder is the 'tetrahedral
+          lock' (interlock + occlusion) — mechanism named, magnitude PENDING
+          (needs the imported geometry: NUCLEAR_PACKING_STRUCTURE_AND_DATA.md).
+
+=== ATOMICUS grammar decomposition (1 alpha + n_d d + n_t t) ===
+  iso      Z   A | n_d n_t | internal e (=neutrons) = shared-bond mediators
+  He-4     2   4 |   0   0 | 2 shared electrons
+  C-12     6  12 |   4   0 | 6 shared electrons
+  O-16     8  16 |   6   0 | 8 shared electrons
+  Ne-20   10  20 |   8   0 | 10 shared electrons
+  Ca-40   20  40 |  18   0 | 20 shared electrons
+  -> per-isotope (r,theta,phi) placement + full binding sum is the next stage
+     (port trefoil_mappings.json / icosahedral A<=40 from the companion repo).
+
+=== VERDICT ===
+  [PASS] DEUTERON: shared-electron well E=3 alpha hbar c/D = 2.200 MeV (meas 2.224)
+  [MECHANISM] binding = shared-electron Coulomb well; NO fitted energy scale
+              (closes NP05's killed volume-price gap; uses only alpha hbar c).
+  [PENDING]   alpha + heavy: tetrahedral-lock/occlusion remainder + imported geometry
+  RESULT: the packing order is interleaved 6π trefoils, neutron=p+e, e shared.

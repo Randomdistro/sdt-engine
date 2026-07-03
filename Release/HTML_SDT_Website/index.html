@@ -41,7 +41,7 @@
       <h1 class="opening__title">Spatial<br>Displacement<br><em>Theory</em></h1>
       <hr class="opening__rule">
       <p class="opening__desc">Gravity, electromagnetism, and nuclear forces derived as pressure differentials in a discrete spatial medium. Built from four primitives. No free parameters. Every constant computed.</p>
-      <p class="opening__author">James Christopher Tyndall — Melbourne, Australia</p>
+      <p class="opening__author"><p class="opening_quote">"Any theory that produces paradoxes is either incomplete, or incorrect."—</p>James Christopher Tyndall,  Melbourne, Australia</p>
       <nav class="opening__nav" aria-label="Table of contents">
         <a href="#medium" data-num="01">The Medium</a>
         <a href="#laws" data-num="02">Five Laws</a>
@@ -353,6 +353,40 @@
           <p>Gold is the first element where the triton count (39) exceeds the deuteron count (38). Beyond this threshold, the nuclear construction becomes triton-dominated — magnetically saturated and topologically unstable. The grammar predicts the onset of radioactivity from construction geometry alone.</p>
         </div>
       </div>
+
+      <!-- ── Mass defect as shadow overlap ── -->
+      <div style="margin:var(--sp-2xl) 0 var(--sp-lg);">
+        <h3 style="font-family:'Source Serif 4','Georgia',serif;font-size:var(--fs-lg);font-weight:600;margin-bottom:var(--sp-sm);">The mass defect is a shadow</h3>
+        <p style="max-width:var(--content-width);color:var(--ink-soft);margin-bottom:var(--sp-md);">
+          In SDT, mass is not a substance — it is the <em>occlusion cross-section</em> a displaced volume presents to
+          the convergence field. Each proton boundary casts a shadow of area πR<sub>p</sub>². When nucleons pack, their
+          shadows <strong>overlap</strong>: the assembled nucleus blocks less area than the sum of its free parts. That
+          shadow deficit ΔA is the shared occlusion — and it <em>is</em> the mass defect. Shine one light through the
+          packed trefoils, measure the shadow it throws on the wall, and the binding energy falls straight out of the
+          geometry.
+        </p>
+        <div class="eq-block">
+          <div class="eq">BE ≈ κ · ΔA<sub>shadow</sub>,&nbsp;&nbsp;&nbsp; ΔA = N·πR<sub>p</sub>² − A<sub>∪</sub></div>
+          <div class="eq-caption">One area→energy scale κ, fixed by least squares over 217 isotopes: total binding energy to R² = 0.988, mean error 7%. The α-cluster and the iron peak are the honest residual — that fine structure needs the shared-electron well depth, not geometry alone.</div>
+        </div>
+      </div>
+
+      <div style="margin:var(--sp-lg) 0;border:1px solid rgba(80,140,200,.28);border-radius:8px;background:rgba(80,140,200,.05);padding:var(--sp-lg) var(--sp-xl);display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;">
+        <div>
+          <div style="font-size:10px;font-family:'JetBrains Mono',monospace;color:#7ab4e0;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px;">Interactive · Nuclear Packing Sequencer</div>
+          <div style="font-family:'Source Serif 4','Georgia',serif;font-size:1.15em;font-weight:600;color:var(--ink);margin-bottom:6px;">Sequence the packing, read the mass defect off the shadow</div>
+          <div style="font-size:var(--fs-sm);color:var(--ink-muted);max-width:520px;line-height:1.65;">Build any nucleus one subunit at a time from interleaved trefoils — α tetrahedron, tritons, deuterons — shine the convergence light through it, and watch the shadow-overlap track the measured binding curve. Each subunit that locks in emits its binding energy as a γ-ray chirp.</div>
+        </div>
+        <a href="nuclear-packing-sequencer.html" target="_blank"
+           style="display:inline-flex;align-items:center;gap:8px;padding:11px 22px;
+                  background:rgba(80,140,200,.12);border:1px solid rgba(80,140,200,.4);
+                  border-radius:6px;color:#7ab4e0;font-size:13px;font-family:'Inter',sans-serif;
+                  font-weight:500;text-decoration:none;white-space:nowrap;transition:all .2s;"
+           onmouseover="this.style.background='rgba(80,140,200,.22)'"
+           onmouseout="this.style.background='rgba(80,140,200,.12)'">
+          ⚛️ Open the Sequencer
+        </a>
+      </div>
     </div>
   </section>
 
@@ -381,14 +415,14 @@
            onmouseout="this.style.background='rgba(212,160,92,0.12)'">
           ↗️ Open full screen
         </a>
-        <a href="atomicus-stick.html" target="_blank"
+        <a href="nuclear-packing-sequencer.html" target="_blank"
            style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;
                   background:rgba(80,140,200,0.10);border:1px solid rgba(80,140,200,0.30);
                   border-radius:4px;color:#7ab4e0;font-size:13px;font-family:Inter,sans-serif;
                   text-decoration:none;transition:all 0.2s;"
            onmouseover="this.style.background='rgba(80,140,200,0.20)'"
            onmouseout="this.style.background='rgba(80,140,200,0.10)'">
-          ⚛️ Nuclear Stick Model
+          ⚛️ Nuclear Packing Sequencer
         </a>
       </div>
     </div>

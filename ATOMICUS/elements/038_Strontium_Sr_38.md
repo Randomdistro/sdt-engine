@@ -29,7 +29,7 @@ We derive the kinematic properties of the valence shell from the First Ionizatio
 *   **Origin**: The specific arrangement of the [Kr] 5s² vortices determines the net cancellation or addition of helical wakes. Paramagnetic behavior confirms the geometric placement of electrons (paired vs unpaired).
 
 **5. Conclusion**
-Strontium serves as a testament to the predictive power of geometric packing. Its properties are not random, but strictly derived from the Z=38 constraint.
+Strontium has measured properties consistent with the geometric-packing picture described here; a first-principles derivation from the Z=38 constraint alone is OPEN.
 ________________________________________
 
 ________________________________________
@@ -41,7 +41,7 @@ ________________________________________
 
 **A. Nuclear Cross-Reference**
 - **Nucleus**: Strontium (Z=38, N=)
-- **Geometry**: Geometric Structure derived from Z constraints.
+- **Geometry**: Geometric structure proposed from Z constraints (qualitative picture; not a numeric derivation).
 - **SDT Analysis**: Z=38 defines the electromagnetic lens strength.
 
 **B. Ionization Economics and Kinematics**
@@ -52,7 +52,7 @@ ________________________________________
     - **Geometric k-factor**: $k = c/v = 211.81$
 
 **C. SDT Utilization & Applications**
-Derived from the geometric stability and ionization thresholds:
+Building on the geometric-stability picture and (measured) ionization thresholds -- application potential, not a derivation of the thresholds themselves:
 - **Plasma Genesis Catalysis**: Low ionization threshold (5.6949 eV) allows for efficient creation of conductive plasma channels.
 - **Ionic Propulsion**: Facile electron removal enables high specific impulse ion thrust generation.
 

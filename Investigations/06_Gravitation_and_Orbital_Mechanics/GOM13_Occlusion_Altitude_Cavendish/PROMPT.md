@@ -1,4 +1,34 @@
 # The Occlusion-Altitude Cavendish Experiment
+
+> **Author:** J. C. Harvey, Melbourne. **Status:** SPEC (upgrade 2026-06-27).
+> **Inherits:** `PERFECT_PROMPT_TEMPLATE.md` §⓪–§⑩ · `PROMPT_EXECUTION_PROTOCOL.md` · §0 anti-creep (R0–R5).
+> **Engine:** `#include <sdt/laws.hpp>` only — no local constant namespaces.
+> **Run:** Pre-commit thresholds in `RUN_LOG.md` before coding; adjust per pivot table (§⑩).
+---
+
+## ⓪ The Golden Rule — five questions (answer before Phase 0)
+
+1. **What don't we know?** — Whether the overhead-mass occlusion of the convergent influx is separable, at any accessible altitude, from the Newtonian slab attraction it is degenerate with (the Bouguer term).
+2. **Why does it matter?** — Stack position / downstream blockers (see `INVESTIGATION_STACK.md`).
+3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
+4. **What would prove us wrong?** — §⑧ falsification tests with numeric triggers.
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN).
+
+> **⚠️ FARMER correction (2026-07-03, J.C.Harvey directive) — the sin-dip law below is a
+> TRANSCRIPTION ERROR against the founding occlusion principle.** `ΔF/F = sin δ` counts the planet
+> as a TOTAL occluder of the solid angle it subtends (≈50% of the sky's influx blocked at the
+> surface). But Law III occlusion is **transparent-relay and per-baryon**: blocking is proportional
+> to the **mass column traversed** (R² cross-sections, EMC01 shadow cones) — "unless blocked, which
+> means doing gravitational work." The 2026-07-03 pre-flight run confirmed it: sin-dip is excluded
+> **47×** by existing precision-G records (JILA/LANL scatter ~5×10⁻⁴ vs predicted +2%), while the
+> mass-column-proportional form lands on the **Bouguer gradient (~4.4×10⁻⁷ at the surface)** — the
+> native occlusion signal is already measured in a century of gravimetry, degenerate with the
+> Newtonian slab (honest CONVERGENCE). **The kill applies to the sin-dip transcription only; the
+> branch survives with the per-baryon law.** Its corrected δ(h) ramp is ~10⁻⁹-class — below any
+> current lock-in floor — so this flight as designed does not discriminate; E104's κ-correlation
+> channel is the surviving falsifiable core. Every `sin δ` line below is retained as the historical
+> record of the killed transcription.
+
 ## *A direct, benchtop-to-balloon test that separates SDT from General Relativity*
 
 > **Author:** J.C. Harvey, Melbourne. **Status:** SPEC (flagship — design-complete, unflown).
@@ -270,3 +300,44 @@ the first data point of this experiment may already be sitting in the literature
 **Carry one Cavendish balance up a continuous column of air into vacuum; GR says the needle cannot
 move; SDT says it climbs as `√(2h/R)` while the orientation cone opens to the same number in radians —
 and only one of those is what the needle does.**
+---
+
+## ⑩ Adaptive Execution Protocol
+
+> *It is a bad plan that cannot be altered.* Failures invoke **PIVOT / KILL / OPEN** — never RETRO-PASS or PLUG.
+> See `PROMPT_EXECUTION_PROTOCOL.md`.
+
+### Pre-Run Commitment Block (copy to `RUN_LOG.md` before coding)
+
+```markdown
+## Pre-Run Commitments — GOM13
+- Prompt completion target: [A|B|C|D]
+- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- CALIBRATED budget: [0 or list each param — max per §⑤]
+- Engine namespaces: bridge::koppa_*, depth_closure::, no G/M
+- Phase thresholds (committed before run): 0.03%, 1.8%, 5.3%, 11%, 11.15%
+- Forbidden retroactive changes: widen tolerances; plug targets; IDENTITY-PASS; local constant namespaces
+```
+
+### Pivot table (minimum — extend for this investigation)
+
+| Trigger | PIVOT (first) | If pivot fails | Forbidden |
+|---------|---------------|----------------|-----------|
+| Phase 0 sanity check fails | Fix units/engine refs; verify `laws.hpp` symbols | STOP — report blocker | Fit to target |
+| Native mechanism off > committed % | Alternative route in §④; document ADJ-### | **OPEN** or **KILL** hypothesis | RETRO-PASS |
+| `z ≥ 1` in closure formula | Weak-field break (CR10); piecewise or exponential | **OPEN** that regime | Ignore break |
+| Rivals match but SDT doesn't beat | Label **DEGENERATE** honestly | — | Claim Class A |
+| Upstream dependency missing (FLM10, etc.) | **DEFER** phase; cite dependency ID | — | Fake PASS |
+
+### Allowed adjustments
+
+- Finer numerics (mesh, ticks, bracket); phase splits (Na / Nb); filename fix via ADJ entry.
+- Alternative **native** routes already listed in §④ Strategy.
+
+### Disallowed adjustments
+
+- Post-hoc tolerance widening · coefficient plugs · `atomic::`/GM/G in Phase-1 native chain · Snell/reciprocity-only as Fermat PASS.
+
+---
+
+*GOM13 · upgraded 2026-06-27 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*

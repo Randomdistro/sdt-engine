@@ -17,7 +17,7 @@ v = (c/k)·√(R/r) = c·√z·√(R/r)              (circulation velocity)
 where:
   E_R  = 13.606 eV (Rydberg / hydrogen 1s binding)
   c    = 299,792,458 m/s
-  R    = nuclear charge radius (fm)
+  R    = nuclear boundary radius (fm) (conventionally "charge radius")
   r    = shell radius (pm, computed from IE via Bohr model or measured)
 ```
 

@@ -1,6 +1,6 @@
 # Measured Inputs & Derived Quantities
 
-The SDT engine requires **6 independent measured inputs** (or 7 if W+1 is unproven). Everything else derives.
+The SDT engine requires **8 measured inputs (incl. ℓ_P as the one dimensional seed — Axiom R1 — and k_B via aT⁴)** (or 9 if W+1 is unproven). Everything else derives.
 
 ## Independent Inputs
 

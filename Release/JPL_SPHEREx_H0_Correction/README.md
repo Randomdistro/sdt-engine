@@ -1,6 +1,8 @@
 # JPL SPHEREx H0 Correction
 ## Resolving the Hubble Tension via Gravitational Redshift Decomposition
 
+> **⚠️ RECLASSIFIED: exploratory, NOT a demonstration (2026-07-03).** n=10 hand-picked calibrators at z=0.0008–0.0087 (below any Hubble-flow cut); per-SN `pa_factor` hand-assigned ±0.3–0.8 — contradicting the 'no additional free parameters' line; the solar/MW-bulk subtraction double-counts corrections standard CMB-frame redshifts already apply; `z_cosmo` (expansion) is load-bearing. The 67.1 lands beside Planck by construction. Also mutually exclusive with Hubble/'s κ-gradient tension resolution — the repo cannot claim both.
+
 A C++20 pipeline that decomposes observed redshift into its kinematic, gravitational, and cosmological components — and demonstrates that the Hubble Tension is largely a **systematic bias** introduced by uncorrected local gravitational potentials and Milky Way bulk motion in the SNe Ia calibration sample.
 
 ---

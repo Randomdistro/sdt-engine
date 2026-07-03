@@ -2,7 +2,7 @@
 
 **Theory:** Structural Coding Theorem
 **Version:** 0.0.1
-**Status:** COMPILED
+**Status:** COMPILED [DEFECTIVE TOOL — see Compiler/output/AUDIT_REPORT.md: 'a confident liar in both directions'; badges non-probative]
 **Kernel Hash:** `513782767f2100e394ccd42c3e40748b0385e085075a34f95928f7b28615f347`
 
 ## Summary

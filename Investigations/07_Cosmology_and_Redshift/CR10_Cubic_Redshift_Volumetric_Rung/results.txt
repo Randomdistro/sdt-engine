@@ -1,0 +1,120 @@
+=====================================================================
+  CR10  THE CUBIC REDSHIFT  -  what is z^3 for?  (recursive method)
+  J. C. Harvey, Melbourne, 2026-06-24.  Engine: sdt/laws.hpp
+=====================================================================
+
+[LADDER] z is the LINEAR closure deficit; powers step through dimension.
+    regime                        z            z^2            z^3
+    Earth surface      6.951634e-10   4.832521e-19   3.359392e-28
+    Sun surface        2.120954e-06   4.498444e-12   9.540991e-18
+    proton surface     3.348900e+00   1.121513e+01   3.755835e+01
+
+---------------------------------------------------------------------
+  ARM A  -  z^3 as real-space VOLUME (the density of matter)
+---------------------------------------------------------------------
+  [CLAIM]   A1: spation number density n(r)/n_inf = (1 - z)^-3  (volume compression).
+  [TEST]    ell_P(r)=ell_P,inf (1-z) [depth-closure] => volume ~ (1-z)^3, density ~ (1-z)^-3.
+              Earth   (1-z)^-3 - 1                           = 2.085490e-09 (=~3z)
+              Sun     (1-z)^-3 - 1                           = 6.362888e-06 
+              proton  (1 - z) = 1 - 3.349 = -2.349  -> NEGATIVE
+  [FAIL]    at the proton z = 3.35 > 1, so (1-z)^-3 is the cube of a negative -> unphysical.
+  [WHY]     ell_P=ell_P,inf(1-z) is the FIRST-ORDER (weak-field) closure; invalid once z>=1
+            (super-c internal circulation v=1.830c puts the proton past the linear horizon).
+  [TRY a]   exponential closure ell_P=ell_P,inf e^-z (stays positive; ->(1-z) for small z).
+              proton density e^(3z)                          = 2.307950e+04 (finite, but only ~5e4)
+  [FAIL]    e^(3z) = 4.6e4 does not reach the proton's spation count (~6e59). Wrong handle.
+  [TRY b]   drop the (1-z) form entirely: count cells GEOMETRICALLY, V_proton / ell_P^3,
+            i.e. how many VACUUM spation-cells fit inside the proton's charge radius.
+              R_p / ell_P                                    = 5.205862e+19 
+              N_geo = (4/3)pi R_p^3 / ell_P^3                = 5.909714e+59 spations
+  [PASS]    geometric count reproduces the proton spation number (5.910e+59 vs memory 5.9e59)
+  [ANALYSE] two DIFFERENT proton 'volumes', both z^3-class, settle the long-open ambiguity:
+              N_geo  (charge-radius volume)                  = 5.909714e+59 = how BIG the proton is
+              N_disp (mass-cost displaced vol)               = 4.340608e+46 = how much THROUGHPUT it reorganises
+              R_p (charge)                                   = 8.414000e-16 m
+              R_excl (displacement) = (3V_disp/4pi)^1/3      = 3.523686e-20 m
+              ratio (R_p/R_excl)^3 = N_geo/N_disp            = 1.361494e+13 (~1.4e13)
+            both are V/ell_P^3 (z^3 volume counts); they differ ONLY by which radius is cubed.
+  [CAUSE]   N = V / ell_P^3  <=  counting cells that fill a volume
+  [CAUSE^2] a volume needs THREE lengths multiplied  <=  space is 3-dimensional
+  [ROOT]    z^3 here = REAL-SPACE three-dimensionality (cells per volume).
+
+  [CLAIM]   A2: the weak-field (1-z)^-3 IS useful where it does NOT break - as a GRADIENT.
+  [TEST]    d/dr[(1-z)^-3] = 3(1-z)^-4 dz/dr  is a density gradient = a gradient-index lens.
+              3(1-z)^-4 dz/dr at Sun surface (scale)         = 9.146061e-15 1/m
+  [PASS]    non-zero density gradient -> refraction; this is the solar lens-artifact handle.
+  [ROOT]    z^3's RADIAL DERIVATIVE = the gradient-index optics of the closure medium.
+
+---------------------------------------------------------------------
+  ARM B  -  z^3 as the (1+z)^3 cosmological volume signature
+---------------------------------------------------------------------
+  [CLAIM]   B1: u_CMB ~ (1+z)^4 is read as PROOF of expansion: (1+z)^3 [volume] x (1+z) [energy].
+  [TEST]    does a STATIC SDT universe (uniform octave redshift, NO expansion) give (1+z)^4?
+              a_rad                                          = 7.565733e-16 J/m^3/K^4
+              u_CMB(T0) = a T0^4                             = 4.174801e-14 J/m^3
+              n_gamma(T0) = (2zeta3/pi^2)(kT0/hbar c)^3      = 4.107268e+02 1/cm^3 (~411)
+  [FAIL?]   naive static = redshift only -> u ~ (1+z)^1; the (1+z)^3 looks like it NEEDS expansion.
+  [WHY]     because we ASSUMED (1+z)^3 = REAL-space expansion volume.
+  [TRY]     is the (1+z)^3 actually MOMENTUM/k-space phase volume, not real space?
+            a uniformly-redshifted blackbody stays a blackbody at T'=T0(1+z) [Tolman 1934,
+            true for ANY uniform redshift incl. static]; then n_gamma ~ T^3, u ~ T^4 FOLLOW.
+              z        T(z)=T0(1+z)           n/n0           u/u0
+              0        2.725500e+00   1.000000e+00   1.000000e+00
+              1        5.451000e+00   8.000000e+00   1.600000e+01
+              3        1.090200e+01   6.400000e+01   2.560000e+02
+              1100     3.000775e+03   1.334633e+09   1.469431e+12
+  [PASS]    n/n0 == (1+z)^3 and u/u0 == (1+z)^4 EXACTLY from T(z) alone (max err 0.0e+00)
+  [SUCCEED] STATIC SDT reproduces (1+z)^4 with NO expansion: the (1+z)^3 is n_gamma ~ T^3.
+  [CAUSE]   u ~ (1+z)^4  <=  Stefan-Boltzmann u = a T^4 with T ~ (1+z)
+  [CAUSE^2] blackbody stays blackbody under uniform redshift (Tolman) => T ~ (1+z)
+  [CAUSE^3] n_gamma ~ T^3  <=  density of states g(nu) ~ nu^2, integrated to T^3
+  [CAUSE^4] g(nu) ~ nu^2  <=  a sphere of radius k in 3-D k-space has area ~ k^2
+  [ROOT]    z^3 here = MOMENTUM/k-space three-dimensionality (NOT real-space expansion).
+  [PAYOFF]  'u~(1+z)^4 proves expansion' is FALSE: it proves uniform-redshift + blackbody,
+            which SDT-static has. The (1+z)^3 is k-space phase volume. Evidence is DEGENERATE.
+
+  [CLAIM]   B2: where does z^3 as REAL-space volume actually discriminate static vs expansion?
+  [TEST]    two non-degenerate handles: surface-brightness Tolman, and galaxy number counts.
+  [D1]      Tolman bolometric surface brightness Sigma_bol:
+              expanding (metric, Etherington d_L=(1+z)^2 d_A): Sigma ~ (1+z)^-4
+              naive static Euclidean tired-light (d_L=(1+z) d_A) : Sigma ~ (1+z)^-2
+  [WHY]     the 2-power gap IS the reciprocity factor d_L/d_A = (1+z)^2 vs (1+z)^1.
+  [TRY]     does SDT supply the missing 2 powers WITHOUT expansion? Etherington needs only
+            {effective metric, geodesics, photon conservation}. SDT's closure gradient is a
+            refractive index n(r)=1/(1-z); a gradient-index medium CONSERVES etendue =>
+            reciprocity holds => Sigma ~ (1+z)^-4 statically. [PLAUSIBLE - OPEN: needs the
+            explicit etendue/reciprocity proof in the closure medium.]
+  [D2]      galaxy number counts N(<z) ~ real-space volume ~ d(z)^3:
+              low-z Euclidean baseline N ~ z^3; high-z deviation tests the SDT distance law d(z).
+  [OPEN]    this is the genuine fight (= the CONDENSA Pantheon+ d(z) item). z^3 is the baseline,
+            the deviation is the discriminant. NOT closed here.
+
+  [DATA]    the linchpin is empirical: T_CMB(z) = T0(1+z) is MEASURED to ~(1+z)^1.0
+            (SZ toward clusters + molecular-cloud excitation out to z~3; FIRAS at z=0).
+            Given T~(1+z)^1, u~(1+z)^4 and n~(1+z)^3 are FORCED by blackbody thermodynamics,
+            independent of whether the (1+z) came from expansion or static octave-relaxation.
+
+---------------------------------------------------------------------
+  REDUCTION TO ROOT
+---------------------------------------------------------------------
+  z^3 is the signature of THREE-DIMENSIONALITY itself. It appears wherever the
+  '3' of space enters:
+    * REAL space   : cells per volume  -> matter density, the proton's ~6e59.
+    * MOMENTUM (k) : g(nu)~nu^2 -> T^3 -> the cosmic (1+z)^4.
+  PAYOFF: the cosmological (1+z)^4, read everywhere as 'expansion volume', is in fact
+  k-space phase volume; a STATIC uniformly-redshifting SDT reproduces it exactly, so
+  z^3 shows the (1+z)^4 evidence is DEGENERATE. The non-degenerate fights live in the
+  REAL-space z^3 (number counts; surface-brightness reciprocity) - and there SDT's
+  refractive closure medium plausibly supplies the reciprocity for free (OPEN).
+---------------------------------------------------------------------
+
+SELF-CHECKS:
+  proton geometric count V_p/ell_P^3 ~ 5.9e59                        PASS
+  weak-field (1-z)^-3 breaks at proton (z>1)                         PASS
+  static T(z)=T0(1+z) gives u/u0==(1+z)^4                            PASS
+  static T(z)=T0(1+z) gives n/n0==(1+z)^3                            PASS
+  n_gamma(T0) ~ 411 /cm^3                                            PASS
+
+  checks: 5 PASS / 0 FAIL
+=====================================================================
+

@@ -1,6 +1,6 @@
 # CR04: Cosmological Distance Scale Derivation
 
-**Status:** INVESTIGATION COMPLETE  
+**Status:** INVESTIGATION COMPLETE [PROCESS CORRECTION (HUNTER 2026-07-02): the tool does not compile (`std::puts(std::string)`, missing `<string>`); `cr04_results.txt` is hand-written, not tool output. The physics narrative (r_c −50%, QUALIFIED, R_CMB = CLASS X) is honest and stands; the PASS/COMPLETE/DERIVED process labels do not. Status: NOT-RUN until the two build errors are fixed and results regenerated.]  
 **Classification:** QUALIFIED (Class C-D)  
 **Author:** SDT Canonical Engine — James Tyndall, Melbourne  
 **Date:** June 2026

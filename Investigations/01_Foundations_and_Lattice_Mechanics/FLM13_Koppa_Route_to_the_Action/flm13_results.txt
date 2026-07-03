@@ -1,0 +1,54 @@
+=== FLM13: the koppa route to the action ===
+
+P1  hbar three ladder ways [IDENTITY-CLASS: a0, r_e are hbar-defined lengths]
+    m_e*kappa/2pi   = 1.054571818e-34   ratio to hbar = 1.000000001
+    m_e*(ac)*a0     = 1.054571818e-34   ratio to hbar = 1.000000001
+    r_e*m_e*c/a     = 1.054571818e-34   ratio to hbar = 1.000000001
+    proton path (R_p/0.5464^2)*m_e*c/a = 1.054691620e-34  ratio = 1.000113603
+    [residual on the proton path = stored-constant rounding + R_p measurement,
+     NOT physics. All four forms are the SAME statement: hbar is the action of
+     the ladder's bottom rung. ROLE derived; VALUE not extracted here (R5).]
+
+P2  delete-test table (input | how its number is obtained | encodes hbar?)
+    r_e    | DEFINED a*hbar/(m_e c)                          | YES (definition)
+    a_0    | DEFINED hbar/(m_e c a)                          | YES (definition)
+    R_p    | muonic-H spectroscopy (2S-2P transitions)       | YES (spectroscopy is hbar-metered)
+    psi_H  | ionisation-energy kinematics (spectroscopy)     | YES
+    E_ion  | spectroscopy                                    | YES
+    m_e[kg]| SI-2019 kilogram is DEFINED via fixed h (Kibble)| YES (post-2019)
+    alpha  | dimensionless spectral ratio (APS05 Route B)    | NO
+    c      | Mercury precession inversion (GOM04) / defined  | NO
+    VERDICT P2: no hbar-free VALUE path exists among the atomic inputs.
+    Dimensional theorem: koppa fixes Length, c fixes Length/Time, alpha is a pure
+    number. Action = Mass*Length^2/Time. No combination of lengths, times and pure
+    numbers manufactures the Mass dimension -> no ratio is an action. ROLE-only.
+
+P3  bijection 1 (W=1): hbar/m_e = 1.157676361e-04 m^2/s = kappa/2pi (kg-free observable)
+    bijection 2 (W=3): R_p*m_p*c/hbar = 4.000782  vs 4 (W+1): dev = +0.0195%
+    collapse cross-check: (4/a)*(r_e/R_p) = 1835.794 vs measured m_p/m_e = 1836.153  dev = -0.0195%
+    [CONSISTENCY exhibit of the one-seat collapse, NOT a derivation of the ratio:
+     R_p is measured, and W+1=4 carries its own 0.03%-class residual.]
+    SEAT COUNT: fix ANY ONE of {hbar, m_e, m_p} -> the other two follow from the
+    ladder geometry (W=1 ratio, W=3 trefoil). ONE mass/action seat survives -> FLM12.
+
+P4  hbar-free frontier (macroscopic routes):
+    - He-II circulation (Vinen): measures kappa = h/m_He in m^2/s — kilogram-free,
+      but yields the RATIO h/m only. Absolute hbar needs a mass in kg.
+    - Flux quantum / Josephson: yield h/(2e), 2e/h — ratios against the charge
+      unit-bridge, not an absolute action.
+    - Pre-2019 SI: the kilogram was an ARTIFACT — a counted lump of baryons. That
+      was the one historically hbar-free mass anchor: a BARYON COUNT.
+    VERDICT P4: NO hbar-free path to the VALUE. The irreducible seat is one
+    macroscopic mass anchor == a baryon count times the per-baryon seat; the ladder
+    then distributes it (W=1, W=3). Seed theorem stands. OPEN as pre-committed.
+
+REDUCED WHITELIST after the collapse:
+  { l_P <- koppa(g,rho,R) [length seed],
+    c   <- Mercury precession (GOM04),
+    a   <- pure spectral ratio (PPT02/APS05 Route B),
+    ONE mass/action seat (hbar == m_e == m_p via W=1/W=3) -> FLM12,
+    k_B, T_CMB [thermal seat — its own investigation] }
+
+GATES: P1 PASS (three forms <=1e-6), P3 PASS (W+1 within 1%, cross-check within 0.5%)
+DUAL VERDICT: prompt completion A; physics class NATIVE (ROLE + one-seat collapse);
+VALUE: OPEN behind the seed theorem (as pre-committed in RUN_LOG.md).

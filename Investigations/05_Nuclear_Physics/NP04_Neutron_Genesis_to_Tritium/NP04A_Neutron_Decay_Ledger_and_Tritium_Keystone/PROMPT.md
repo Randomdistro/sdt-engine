@@ -1,9 +1,18 @@
 # NP04A — Neutron Decay Ledger and Tritium Keystone *(free neutron → β-decay → tritium decay)*
 
-> **Scope honesty.** This investigation closes the **decay ledger** and the **tritium-Q keystone** only. The `3n → triton` **genesis** step (assembly) is *energy-gated but kinetically unresolved* and is split out to **NP04B** — do not let this file's narrative arc imply genesis was demonstrated.
+> **Author:** J. C. Harvey, Melbourne. **Status:** SPEC (upgrade 2026-06-27).
+> **Inherits:** `PERFECT_PROMPT_TEMPLATE.md` §⓪–§⑩ · `PROMPT_EXECUTION_PROTOCOL.md` · §0 anti-creep (R0–R5).
+> **Engine:** `#include <sdt/laws.hpp>` only — no local constant namespaces.
+> **Run:** Pre-commit thresholds in `RUN_LOG.md` before coding; adjust per pivot table (§⑩).
+---
 
-> **The arc this ledger traces (decay direction):**
-> a **free neutron** is an unbound, strained, *linked* (W=3 trefoil ⊕ W=1 unknot) object; it **unlinks** by β-decay `n → p + e⁻ + ν̄ₑ`, the antineutrino carrying the released linking strain as a topological receipt; the freed **proton** keeps the (2,3) trefoil and its `R_p = 4ℏ/m_pc`; the released **electron** is the W=1 unknot whose displaced volume is exactly **1/1836** of the proton's; that electron **Hopf-threads** into a 1s loop while the proton **binds two neutrons** into the **triton** — and the result is **tritium**, the first complete atom (¹H isotope: 1p + 2n nucleus + 1 electron). The loop closes when tritium itself β-decays, `³H → ³He + e⁻ + ν̄ₑ`, repeating the split one shell up.
+## ⓪ The Golden Rule — five questions (answer before Phase 0)
+
+1. **What don't we know?** — [NP04A] NP04A — Neutron Decay Ledger and Tritium Keystone *(free neutron → β-decay → tritium decay)*: *(unfilled by the 2026-06-27 bulk template upgrade — write the single measurable gap before the next run)*
+2. **Why does it matter?** — Stack position / downstream blockers (see `INVESTIGATION_STACK.md`).
+3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
+4. **What would prove us wrong?** — §⑧ falsification tests with numeric triggers.
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN).
 
 This is a **constitutional** investigation: it must touch — and remain consistent with — every load-bearing SDT formulation we have (Law IV mass-as-displacement, the W+1 radius, the trefoil topology, the deuteron–triton grammar, the neutrino receipt, occlusion binding, the Hopf/poloidal electron channel) **without breaking a single one**. Any stage that requires a change to a frozen result (`NP01` grammar, `laws.hpp::winding`, `laws.hpp::law_IV`) is a *failure of that stage*, not a license to edit the engine.
 
@@ -211,3 +220,44 @@ The two "honesty numbers" it must *not* fudge:
 8. Final **arc ledger**: `3n → t + e + ν̄ → ³H atom → ³He + e + ν̄`, every conserved quantity balanced, every hero/honesty number printed with its provenance class.
 
 *Author attribution: James Christopher Tyndall, Melbourne.*
+---
+
+## ⑩ Adaptive Execution Protocol
+
+> *It is a bad plan that cannot be altered.* Failures invoke **PIVOT / KILL / OPEN** — never RETRO-PASS or PLUG.
+> See `PROMPT_EXECUTION_PROTOCOL.md`.
+
+### Pre-Run Commitment Block (copy to `RUN_LOG.md` before coding)
+
+```markdown
+## Pre-Run Commitments — NP04A
+- Prompt completion target: [A|B|C|D]
+- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- CALIBRATED budget: [0 or list each param — max per §⑤]
+- Engine namespaces: NP01 grammar, law_III nuclear occlusion, ATOMICUS rules
+- Phase thresholds (committed before run): 1%, 1.0%, 1%, 1%, 1%
+- Forbidden retroactive changes: widen tolerances; plug targets; IDENTITY-PASS; local constant namespaces
+```
+
+### Pivot table (minimum — extend for this investigation)
+
+| Trigger | PIVOT (first) | If pivot fails | Forbidden |
+|---------|---------------|----------------|-----------|
+| Phase 0 sanity check fails | Fix units/engine refs; verify `laws.hpp` symbols | STOP — report blocker | Fit to target |
+| Native mechanism off > committed % | Alternative route in §④; document ADJ-### | **OPEN** or **KILL** hypothesis | RETRO-PASS |
+| `z ≥ 1` in closure formula | Weak-field break (CR10); piecewise or exponential | **OPEN** that regime | Ignore break |
+| Rivals match but SDT doesn't beat | Label **DEGENERATE** honestly | — | Claim Class A |
+| Upstream dependency missing (FLM10, etc.) | **DEFER** phase; cite dependency ID | — | Fake PASS |
+
+### Allowed adjustments
+
+- Finer numerics (mesh, ticks, bracket); phase splits (Na / Nb); filename fix via ADJ entry.
+- Alternative **native** routes already listed in §④ Strategy.
+
+### Disallowed adjustments
+
+- Post-hoc tolerance widening · coefficient plugs · `atomic::`/GM/G in Phase-1 native chain · Snell/reciprocity-only as Fermat PASS.
+
+---
+
+*NP04A · upgraded 2026-06-27 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*

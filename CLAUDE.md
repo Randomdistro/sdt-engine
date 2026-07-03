@@ -68,7 +68,7 @@ Electron-capture isotopes use the **alternate grammar** (He-3 core instead of He
 - `Laws/` — the Six Laws as standalone papers (`.md` + `.docx`).
 - `ATOMICUS/` — atomic/nuclear database and construction grammar; `rules/On the Nature of Atomicus Rules.md` is the nuclear constitution.
 - `Hubble/` — cosmological analysis suite with ~18 `zk²` tools in `tools/` and datasets in `data/`. Independent from the benchmarks CMake build; tools compile standalone.
-- `Experiments/` — falsifiable prediction specs `E01.md` … `GOM12.md`. Each specifies SDT prediction, standard-model prediction, observable difference.
+- `Experiments/` — falsifiable prediction specs `E01.md` … `E102.md`. Each specifies SDT prediction, standard-model prediction, observable difference.
 - `Investigations/` — active research folders; each contains `PROMPT.md` (methodology), optional `DATA_REQUIREMENTS.md`, and `.cpp` tools. `EMC01–PPT04` address open problems in the engine code itself.
 - `Benchmarks/B01_B25/` — the single `benchmarks_b01_b25.cpp` that verifies the framework end-to-end. This is what the CMake build produces.
 - `SPATIAL_DISPLACEMENT_THEORY.md` — the long-form manuscript.

@@ -49,7 +49,7 @@ CH01  Covalent bond = shared electropause     ← the CH root (rests on EMC04, E
 
 | ID | Title | SDT mechanism | Convergence target / falsifier |
 |----|-------|---------------|--------------------------------|
-| **CH01** | Covalent Bond as a Shared Electropause | two nuclei share one merged pressure-balance surface; bond = internuclear electropause well | H₂ R_e=0.741 Å, D_e=4.52 eV; VSEPR ladder; no orbital |
+| **CH01** | Covalent Bond as a Shared Electropause | two nuclei share one merged pressure-balance surface; bond = internuclear electropause well | H₂ R_e=0.741 Å, D_e=4.478 eV; VSEPR ladder; no orbital |
 | **CH02** | Ionic & Metallic Bonding from Electropause Transfer | electropause handed off entirely (ionic) or delocalised into a lattice sea (metallic) | NaCl lattice energy ~787 kJ/mol; Na metallic R; ties conduction CM02 |
 | **CH03** | Periodic Table & Valence from Shell Wake-Cancellation | period-2 wake-cancel map: paired fore/aft silent, lone active → valence = active-wake count | octet rule, valence, B–O/C–F/N–Ne pairing; period lengths 2/8/8 |
 | **CH04** | Molecular Geometry (VSEPR) from Wake Balance | bond angles = wake-torque equilibria; lone-pair wake heavier than bond-pair | 104.5°/107°/109.5°/180°/120°/90° across many molecules; one ratio |

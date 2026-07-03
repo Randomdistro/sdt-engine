@@ -34,7 +34,7 @@ The deuteron's 2.224 MeV binding energy is the cost of separating the two nucleo
 ### Spin and Moment
 
 - **Spin**: 1 (the proton and neutron spins align parallel)
-- **Magnetic moment**: 0.857 μ_N (sum of proton + neutron moments in aligned configuration)
+- **Magnetic moment**: 0.857 μ_N (measured; ≈ sum of proton + neutron moments in aligned configuration, with a ~2.5% binding residual — μ_N is a borrowed unit, SDT-native yardstick owed)
 - **Quadrupole moment**: +2.86 mb (the deuteron is slightly prolate — the two nucleons don't sit concentrically but form a dumbbell)
 
 The non-zero quadrupole moment proves the deuteron is NOT a point particle. It has geometric extension — SDT predicts exactly this from the wake coupling geometry.
@@ -86,7 +86,7 @@ This shift was how deuterium was discovered (Urey, 1931). In SDT terms: the heav
 
 ### Proton-electron coupling note
 
-Single deuteron (1p+1n) � one proton-electron pair. The neutron modulates the convergent pressure at this pair, shifting the slot geometry slightly from protium.
+Single deuteron (1p+1n) � one proton-electron pair. The neutron modulates the convergent pressure at this pair, shifting the slot geometry slightly from protium.
 
 ## Electronic Structure (from Hydrogen Atomicus)
 

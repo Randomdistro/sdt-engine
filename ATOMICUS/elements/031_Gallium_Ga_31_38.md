@@ -3,7 +3,7 @@ On the Nature of Gallium (³¹Ga): The Soft Metal and the Recurring Trigonal Pla
 Author: J.C. Harvey (Independent Researcher)
 Framework Synthesis and Analysis: AI Collaborator
 Abstract
-Gallium (Z=31) is the first element of the p-block following the completion of the first transition series. It is a soft, low-melting-point metal whose properties are a crucial test for the recursive principles of atomic structure. Standard models describe its configuration as [Ar] 3d¹⁰ 4s²4p¹. This paper provides a complete, first-principles derivation of the properties of Gallium within the Spatial Displacement Theory (SDT) framework. We model the Gallium atom as a system with a completed and serene [Ar] 3d¹⁰ core, surrounded by an outer shell of three electron vortices. We demonstrate that these three vortices form a higher-octave, highly "floppy" trigonal plane. This single geometric premise is used to derive Gallium's organization, its multi-layered k-factors, its thermodynamics, and its characteristic +3 oxidation state and metallic character.
+Gallium (Z=31) is the first element of the p-block following the completion of the first transition series. It is a soft, low-melting-point metal whose properties are a crucial test for the recursive principles of atomic structure. Standard models describe its configuration as [Ar] 3d¹⁰ 4s²4p¹. This paper provides a structural characterisation of Gallium under the SDT construction grammar (measured properties quoted as anchors; derivations are OPEN unless explicitly shown). We model the Gallium atom as a system with a completed and serene [Ar] 3d¹⁰ core, surrounded by an outer shell of three electron vortices. We demonstrate that these three vortices form a higher-octave, highly "floppy" trigonal plane. This single geometric premise is used to derive Gallium's organization, its multi-layered k-factors, its thermodynamics, and its characteristic +3 oxidation state and metallic character.
 ________________________________________
 1. Organization: The Echo of Boron and Aluminum
 Gallium's structure is a direct, higher-octave echo of the trigonal planar geometry first seen in Boron and then again in Aluminum.
@@ -25,7 +25,7 @@ Gallium's structure is a direct, higher-octave echo of the trigonal planar geome
 •	Magnetism: The three valence electrons will form one stable dyad, leaving one unpaired electron vortex.
 o	Prediction: Gallium is predicted to be paramagnetic. This is confirmed by observation.
 6. Conclusion
-The analysis of Gallium is a powerful confirmation of the recursive nature of the geometric principles that build the periodic table. It is a perfect higher-octave echo of Boron and Aluminum. Its properties as a soft, low-melting-point metal are a direct and predictable consequence of its three valence electrons forming a "floppy" trigonal plane in the vast n=4 shell.
+The analysis of Gallium is a powerful confirmation of the recursive nature of the geometric principles that build the periodic table. It is a perfect higher-octave echo of Boron and Aluminum. Its measured properties as a soft, low-melting-point metal are consistent with a picture of its three valence electrons forming a "floppy" trigonal plane in the vast n=4 shell; a quantitative derivation of the melting point from this geometry is OPEN.
 ________________________________________
 7.6. Rigorous SDT Mathematical Analysis: Gallium
 **A. Nuclear Cross-Reference**
@@ -70,7 +70,7 @@ ________________________________________
 
 **A. Nuclear Cross-Reference**
 - **Nucleus**: Gallium (Z=31, N=38)
-- **Geometry**: Geometric Structure derived from Z constraints.
+- **Geometry**: Geometric structure proposed from Z constraints (qualitative picture; not a numeric derivation).
 - **SDT Analysis**: Z=31 defines the electromagnetic lens strength.
 
 **B. Ionization Economics and Kinematics**
@@ -81,7 +81,7 @@ ________________________________________
     - **Geometric k-factor**: $k = c/v = 206.37$
 
 **C. SDT Utilization & Applications**
-Derived from the geometric stability and ionization thresholds:
+Building on the geometric-stability picture and (measured) ionization thresholds -- application potential, not a derivation of the thresholds themselves:
 - **Plasma Genesis Catalysis**: Low ionization threshold (5.999 eV) allows for efficient creation of conductive plasma channels.
 - **Ionic Propulsion**: Facile electron removal enables high specific impulse ion thrust generation.
 

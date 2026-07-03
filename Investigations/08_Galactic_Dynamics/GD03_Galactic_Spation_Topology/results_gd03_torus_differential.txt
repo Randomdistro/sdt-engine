@@ -1,0 +1,92 @@
+﻿###################################################################
+   CQ20c: Proton Torus Differential Rotation
+   The proton IS the torus. R_p = 0.84 fm.
+###################################################################
+
+=== PROTON SCALES ===
+
+   R_p              = 8.4140e-16 m  (0.84 fm — the proton)
+   R_p / r_s        = 1.0412e+20    (spations across)
+   v_surface        = 1.8310c = 5.489200e+08 m/s
+
+=== KEPLERIAN VELOCITY AT INNER EQUATOR ===
+   v(r) = v_outer × sqrt(r_outer / r)  from torus axis
+
+   r/R ratio          R [m]  r_tube [m]     r_outer     r_inner   v_inner/c   v_outer/c
+   --------          ------    --------     -------     -------   ---------   ---------
+   r/R = 0.100      8.414e-16   8.414e-17   9.255e-16   7.573e-16      2.0242      1.8310
+   r/R = 0.200      8.414e-16   1.683e-16   1.010e-15   6.731e-16      2.2425      1.8310
+   r/R = 0.250      8.414e-16   2.104e-16   1.052e-15   6.311e-16      2.3638      1.8310
+   r/R = 0.333      8.414e-16   2.805e-16   1.122e-15   5.609e-16      2.5894      1.8310
+   r/R = 0.400      8.414e-16   3.366e-16   1.178e-15   5.048e-16      2.7969      1.8310
+   r/R = 0.500      8.414e-16   4.207e-16   1.262e-15   4.207e-16      3.1714      1.8310
+   r/R = 0.600      8.414e-16   5.048e-16   1.346e-15   3.366e-16      3.6620      1.8310
+   r/R = 0.700      8.414e-16   5.890e-16   1.430e-15   2.524e-16      4.3587      1.8310
+   r/R = 0.800      8.414e-16   6.731e-16   1.515e-15   1.683e-16      5.4930      1.8310
+   r/R = 0.900      8.414e-16   7.573e-16   1.599e-15   8.414e-17      7.9811      1.8310
+
+=== DETAILED CROSS-SECTION: r_tube = R_p / 3 ===
+
+   R (major)  = 8.4140e-16 m
+   r (tube)   = 2.8047e-16 m  (= R_p/3)
+   r_outer    = 1.1219e-15 m  (= 4R_p/3)
+   r_inner    = 5.6093e-16 m  (= 2R_p/3)
+   v_outer    = 1.8310 c  (at outer equator)
+
+   Position           theta    r_axis [m]       v/c             k
+   --------           -----    ----------       ---            --
+   Outer equator        0      1.1219e-15    1.8310  5.461496e-01
+   30 deg              30      1.0843e-15    1.8625  5.369255e-01
+   60 deg              60      9.8163e-16    1.9574  5.108762e-01
+   Top                 90      8.4140e-16    2.1143  4.729795e-01
+   120 deg            120      7.0117e-16    2.3161  4.317692e-01
+   150 deg            150      5.9851e-16    2.5068  3.989112e-01
+   Inner equator      180      5.6093e-16    2.5894  3.861861e-01
+   210 deg            210      5.9851e-16    2.5068  3.989112e-01
+   240 deg            240      7.0117e-16    2.3161  4.317692e-01
+   Bottom             270      8.4140e-16    2.1143  4.729795e-01
+   300 deg            300      9.8163e-16    1.9574  5.108762e-01
+   330 deg            330      1.0843e-15    1.8625  5.369255e-01
+   Outer (= 0)        360      1.1219e-15    1.8310  5.461496e-01
+
+=== KEY RESULTS ===
+
+   v_outer = 1.831000 c  (outer equator)
+   v_mid   = 2.114257 c  (tube centre, on major C)
+   v_inner = 2.589425 c  (inner equator)
+
+   Differential: v_inner/v_outer = 1.414214
+   Shear: v_inner - v_outer = 0.758425 c
+   Angular vel: omega_in/omega_out = 2.828427
+
+   Poloidal roll period:  7.7505e-24 s
+   Toroidal orbit period: 8.3407e-24 s
+   T_tor / T_pol = 1.0762
+   (Trefoil (2,3) expects ratio related to 3/2)
+
+   Torus surface area:    9.3163e-30 m²
+   Spations on surface:   4.5408e+40
+   Each at its local Keplerian velocity.
+
+=== TREFOIL RATIO SCAN ===
+   Looking for r/R where T_tor/T_pol = 3/2 = 1.500
+
+   r/R = 0.05  ->  T_tor/T_pol = 1.0016
+   r/R = 0.10  ->  T_tor/T_pol = 1.0063
+   r/R = 0.15  ->  T_tor/T_pol = 1.0143
+   r/R = 0.20  ->  T_tor/T_pol = 1.0258
+   r/R = 0.25  ->  T_tor/T_pol = 1.0411
+   r/R = 0.30  ->  T_tor/T_pol = 1.0606
+   r/R = 0.35  ->  T_tor/T_pol = 1.0848
+   r/R = 0.40  ->  T_tor/T_pol = 1.1146
+   r/R = 0.45  ->  T_tor/T_pol = 1.1510
+   r/R = 0.50  ->  T_tor/T_pol = 1.1954
+   r/R = 0.55  ->  T_tor/T_pol = 1.2500
+   r/R = 0.60  ->  T_tor/T_pol = 1.3176
+   r/R = 0.65  ->  T_tor/T_pol = 1.4028
+   r/R = 0.70  ->  T_tor/T_pol = 1.5125  <--- NEAR 3:2
+   r/R = 0.75  ->  T_tor/T_pol = 1.6588
+   r/R = 0.80  ->  T_tor/T_pol = 1.8634
+   r/R = 0.85  ->  T_tor/T_pol = 2.1727
+   r/R = 0.90  ->  T_tor/T_pol = 2.7076
+   r/R = 0.95  ->  T_tor/T_pol = 3.9537

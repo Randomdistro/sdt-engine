@@ -7,7 +7,7 @@ Melbourne, Australia
 
 ## Abstract
 
-The speed of light is derived from Mercury's anomalous perihelion precession without electromagnetic measurement. We introduce the kinematic ratio ϟ = *c*/*v* (koppa) and show it is directly computable from four orbital observables: the Sun's radius, Mercury's semi-major axis, Mercury's eccentricity, and Mercury's precession rate. The derivation yields *c* = 299,795,136 m/s, within 0.0009% of the accepted value. No gravitational constant *G*, no mass *M*, and no prior knowledge of *c* is required.
+The speed of light is derived from Mercury's anomalous perihelion precession without electromagnetic measurement. We introduce the kinematic ratio ϟ = *c*/*v* (koppa) and show it is directly computable from four orbital observables: the Sun's radius, Mercury's semi-major axis, Mercury's eccentricity, and Mercury's precession rate. The derivation yields *c* = 299,795,136 m/s, within 0.0009% of the accepted value. No gravitational constant *G*, no mass *M*, and no prior knowledge of *c* is required (the 6π/c² precession form is the GR per-orbit result, adopted as the inversion target).
 
 ---
 
@@ -104,7 +104,7 @@ Using the derived *c* = 299,795,136 m/s:
 | Earth | 7,910 | 37,902 | 6.961 × 10⁻¹⁰ | 1 |
 | Saturn | 25,087 | 11,950 | 7.003 × 10⁻⁹ | 1 |
 
-The same *c* produces exact closure (*z*ϟ² = 1) for every body.
+The same *c* produces exact closure (*z*ϟ² = 1) for every body (closure is definitional — *z* ≡ 1/ϟ²; the earned result is the 9-ppm *c* extraction, not the closure table).
 
 ---
 

@@ -1,8 +1,20 @@
 # FD03 — The Reynolds Transition as a Lattice Relay Ratio
 
-**Domain**: Fluid Dynamics (SDT lattice mechanics)
-**Status**: SPEC
-**Author**: James Christopher Tyndall, Melbourne
+> **Author:** J. C. Harvey, Melbourne. **Status:** SPEC (upgrade 2026-06-27).
+> **Inherits:** `PERFECT_PROMPT_TEMPLATE.md` §⓪–§⑩ · `PROMPT_EXECUTION_PROTOCOL.md` · §0 anti-creep (R0–R5).
+> **Engine:** `#include <sdt/laws.hpp>` only — no local constant namespaces.
+> **Run:** Pre-commit thresholds in `RUN_LOG.md` before coding; adjust per pivot table (§⑩).
+---
+
+## ⓪ The Golden Rule — five questions (answered, not stubbed)
+
+1. **What don't we know?** — Why is `Re` dimensionless and *why* does transition occur near a particular value: does the lattice fix the threshold `Re_crit` from **geometry** (the dominant-mode coherence length and the `2D` neighbour count), or is `Re_crit ≈ 2300` only reproducible by back-solving the coherence length from the measured number?
+2. **Why does it matter?** — `Re` is the most consequential dimensionless group in fluids and standard texts give it no first-principles account; if SDT derives it as one medium's two competing rates, dimensionlessness becomes a *consequence* and transition becomes a *prediction*. Downstream: FD04 (the supra-threshold cascade), FD06 (flat-plate `Re_x`), FD10 (shedding onset).
+3. **How will we find out?** — Four gated phases (§④). The dimensionlessness proof (P1) and the coherence-threshold *derivation* (P2) commit `Re_crit` to the run log **before** any data are read; the multi-geometry test (P3) is the real discriminator because geometry alone must move the threshold.
+4. **What would prove us wrong?** — §⑧, five falsifiers with real failure modes — **the central one (F2) is honest about the trap:** the threshold must come from the coherence-length *computed from lattice geometry*, NOT back-solved from 2300; if `ℓ_c` can only be obtained by inverting the measured `Re_crit`, F2 is a CALIBRATED pass at best (cap at C), and a geometry that yields the *same* `Re_crit` for pipe/plate/Couette (F4) is a clean kill.
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN), per phase, no repainting a fired test.
+
+**Domain**: Fluid Dynamics (SDT lattice mechanics) · **Status**: SPEC · **Author**: J. C. Harvey, Melbourne
 
 *This investigation inherits the §0 anti-creep protocol and rules R0–R5 verbatim (whitelist inputs only; no G/M/GM fundamentals; no fields/wavefunctions/quarks/ΛCDM/magnetons; certification labels on every result; translation test on every borrowed term; honesty over success; anti-numerology).*
 
@@ -68,10 +80,11 @@ Four phases, each gated. Run in order; a failed checkpoint stops the chain (R4: 
 - **Method.** Build both rates from FD01's coarse-grained terms (advection vs `ν∇²v`), with `ν` referenced from FD02. Maintain a parameter ledger (R2) tagging every quantity DERIVED / MEASURED-INPUT / PENDING. State the dimensionlessness argument as a one-line dimensional proof.
 - **Success metric.** `Re = UL/ν` reproduced exactly with both rates traced to lattice mechanisms; dimensionlessness shown as like-rate cancellation. **Checkpoint C1:** identity closed, zero free parameters beyond the FD02-pending `ν` and the geometric `G`.
 
-### Phase 2 — The coherence threshold (transition criterion)
-- **Goal.** Derive the transition condition `τ_relay(ℓ_c) = τ_adv(ℓ_c)` for the dominant mode and express `Re_crit = G(geometry)`.
-- **Method.** Identify the least-damped (dominant) disturbance mode for a confined channel; set the advective rate equal to the relay-smoothing rate at the coherence length `ℓ_c`. Express `G` in terms of the mode wavenumber and the `2D` neighbour count. Predict the pipe `Re_crit` *before* comparing to data (R1) and commit it to the run log.
-- **Success metric.** Predicted pipe `Re_crit` within one order of magnitude of `≈2300` (target: within the 2000–4000 band if `G` is genuinely geometric). **Checkpoint C2 (core gate):** the criterion yields a finite, geometry-set `Re_crit`, not "no transition" and not a fitted `2300`.
+### Phase 2 — The coherence threshold (transition criterion) — *the anti-tautology gate*
+- **Goal.** Derive the transition condition `τ_relay(ℓ_c) = τ_adv(ℓ_c)` for the dominant mode and express `Re_crit = G(geometry)` **where `ℓ_c/L` is computed forward from lattice/mode geometry, never inverted from the measured 2300.**
+- **The trap to avoid (stated plainly).** The relation `Re_crit ≈ (L/ℓ_c)²` lets anyone "predict" 2300 by *setting* `L/ℓ_c = √2300 ≈ 48`. That is a back-solve, not a derivation, and it can never fail F2. **The load-bearing step is computing `ℓ_c` independently:** the dominant-mode coherence length must come from the `2D` contacting-neighbour count and the least-damped wavenumber of a confined channel (a number known *before* the data are unsealed). If `ℓ_c` is obtained only by inverting `Re_crit`, the result is **CALIBRATED(1)** and the grade caps at C — the prompt forbids reporting it as DERIVED.
+- **Method.** Identify the least-damped disturbance mode for a confined channel from the relay-diffusion operator; set the advective rate equal to the relay-smoothing rate at the forward-computed `ℓ_c`. Express `G` in terms of the mode wavenumber and the `2D` neighbour count, with each factor ledgered DERIVED or CALIBRATED. Commit the predicted pipe `Re_crit` to the run log *before* comparing to data (R1).
+- **Success metric.** **A-path:** `ℓ_c/L` computed forward from geometry yields pipe `Re_crit` in the 2000–4000 band with CALIBRATED(0). **C-path:** the *mechanism* is right but `ℓ_c` had to be set from one scale — tag CALIBRATED(1), cap at C, and say so. **Checkpoint C2 (core gate):** a finite, geometry-set `Re_crit` from a forward-computed `ℓ_c`, not "no transition" and not a back-solved 2300.
 
 ### Phase 3 — Geometry dependence (multi-geometry test)
 - **Goal.** Show the *same* criterion yields *different* `Re_crit` across geometries — the strongest evidence the mechanism is real rather than tuned.
@@ -89,8 +102,8 @@ Four phases, each gated. Run in order; a failed checkpoint stops the chain (R4: 
 
 | Class | Verdict | Quantitative metric |
 |---|---|---|
-| **A (PASS — derived)** | Transition derived natively | `Re = τ_relay/τ_adv` proven dimensionless AND `Re_crit = G` with `G` DERIVED from lattice/mode geometry (CALIBRATED(0)) AND pipe value in 2000–4000 band AND flat-plate + Taylor–Couette reproduced within order using the same `ν`. |
-| **C (QUALIFIED — convergence)** | Threshold reproduced, one scale set | Rate-ratio identity exact, multi-geometry ordering reproduced, pipe `Re_crit` within one order of `2300`, with at most CALIBRATED(1) (one geometric/coherence scale fitted, documented). |
+| **A (PASS — derived)** | Transition derived natively | `Re = τ_relay/τ_adv` proven dimensionless AND `Re_crit = G` with `ℓ_c/L` and `G` **computed forward** from lattice/mode geometry (CALIBRATED(0), *not* back-solved from 2300) AND pipe value in 2000–4000 band AND flat-plate + Taylor–Couette reproduced within order using the *same* `ν` and *only* geometric changes. |
+| **C (QUALIFIED — convergence)** | Threshold reproduced, one scale set | Rate-ratio identity exact, multi-geometry ordering reproduced, pipe `Re_crit` within one order of `2300`, with exactly CALIBRATED(1) — the coherence scale `ℓ_c` set from one number (e.g. inverted from the pipe value) and the *same* `ℓ_c`-rule then *predicting* the plate/Couette thresholds. The back-solve is disclosed, not hidden. |
 | **D (QUALIFIED-PENDING — computed)** | Mechanism stated, gap remains | Rate-ratio identity and transition *mechanism* established, but `G` is PENDING the dominant-mode/`ℓ_c` calculation (or FD02 `ν`); dimensionally closed, magnitude not yet pinned. |
 | **F (FAIL)** | Mechanism falsified | `Re_crit` off by >1 order of magnitude with no reconciling geometry, OR the criterion predicts no transition, OR predicts transition independent of geometry (same `Re_crit` for pipe/plate/Couette), OR the ratio is not genuinely dimensionless from like rates. |
 
@@ -128,7 +141,7 @@ Four phases, each gated. Run in order; a failed checkpoint stops the chain (R4: 
 | Test | Hypothesis | Predicted outcome | If FAIL |
 |---|---|---|---|
 | F1 — Dimensionlessness (Phase 1) | `Re` is a ratio of two like rates of one medium | `Re = τ_relay/τ_adv = UL/ν`, dimensions cancel exactly | Ratio not formed from like rates / not dimensionless ⟹ `Re` not a relay-rate ratio ⟹ Class F |
-| F2 — Pipe threshold (Phase 2) | `Re_crit = G(geometry)` lands in measured band | Predicted pipe `Re_crit` within one order of `2300` (target 2000–4000) | Off by >1 order with no reconciling geometry ⟹ Class F |
+| F2 — Pipe threshold (Phase 2, anti-tautology) | `Re_crit = G` from an `ℓ_c` **computed forward** from the `2D` neighbour count + dominant wavenumber | forward-computed pipe `Re_crit` in 2000–4000 | If `ℓ_c` is back-solved from 2300 (`L/ℓ_c = √2300`), F2 **cannot fail** and is a CALIBRATED pass only (cap C); if the forward `ℓ_c` gives `Re_crit` off >1 order with no reconciling geometry ⟹ Class F |
 | F3 — Transition exists (Phase 2) | A finite crossing exists | Finite `Re_crit`, decay below / growth above | Criterion gives no crossing (no transition) ⟹ mechanism falsified |
 | F4 — Geometry dependence (Phase 3) | Same `ν`, different geometry → different `Re_crit` | Pipe ≈2300, plate `Re_x`≈5×10⁵, Couette ≈ critical Taylor number, all within order | Same `Re_crit` for all geometries (geometry-independent) ⟹ Class F |
 | F5 — Crossover (Phase 4) | Lattice crossover = analytic `G` | Lattice perturbation crossover-`Re` matches analytic `Re_crit` <1% in the ratio | >1 order disagreement between lattice crossover and analytic `G` ⟹ relay-ratio not the transition mechanism |
@@ -141,4 +154,54 @@ Four phases, each gated. Run in order; a failed checkpoint stops the chain (R4: 
 - **Testing strategy.** Two-stream (R3): (i) analytic `Re = τ_relay/τ_adv` vs the lattice-measured rate ratio; (ii) analytic `Re_crit = G` vs the lattice perturbation crossover. Predict and commit every `Re_crit` to the run log *before* comparing to the data in `DATA_REQUIREMENTS.md` (R1). Anti-numerology (R5): the threshold `G` must come from the dominant-mode/`2D`-neighbour geometry, never a hand-inserted integer or π chosen to hit `2300` — if it cannot be derived, flag it PENDING and cap the verdict at D.
 - **Standalone compile.** `cl /std:c++20 /EHsc /O2 /I Engine/include fd03_reynolds_relay_ratio.cpp` (MSVC) or `g++ -std=c++20 -IEngine/include fd03_reynolds_relay_ratio.cpp -o fd03` (GCC/Clang). Include only `<sdt/laws.hpp>`; do not redefine any constant it exposes.
 - **Visualisation hints.** Plot the two rates `τ_relay` and `τ_adv` vs `Re` and mark their crossing (`Re_crit`); a log-log bar chart of predicted vs measured `Re_crit` across the three geometries; the lattice perturbation-norm time series for `Re` just below and just above threshold (decay vs growth) on one axis.
-- **Author attribution:** James Christopher Tyndall, Melbourne. The standard-FD result (`Re_crit ≈ 2300`, `Re_x ≈ 5×10⁵`, the critical Taylor number) is the CONVERGENCE target to *reproduce*, never an input to *borrow*.
+- **Author attribution:** J. C. Harvey, Melbourne. The standard-FD result (`Re_crit ≈ 2300`, `Re_x ≈ 5×10⁵`, the critical Taylor number) is the CONVERGENCE target to *reproduce*, never an input to *borrow*.
+
+## 10. Questions This Opens *(generative — log new ones in `FD03_VERDICT.md`)*
+
+1. **Is `Re_crit` genuinely a property of `√(L/ℓ_c)`-type lattice geometry**, or is the transition value irreducibly a property of the *spectrum* of unstable modes (so that no single `ℓ_c` exists)? If the latter, the SDT win is the dimensionlessness proof, and the threshold value stays OPEN.
+2. **Does the same forward-`ℓ_c` rule that fixes the pipe value also predict the *subcritical* nature of pipe transition** (finite-amplitude threshold, hysteresis), which linear theory misses? That would be an SDT-distinct prediction beyond reproducing 2300.
+3. **Why does the flat-plate `Re_x ≈ 5×10⁵` exceed the pipe value by ~200×** purely through `L` = growing boundary-layer thickness — is that ratio itself derivable from the FD06 `δ(x) ∝ √(νx/U)` law, closing FD03↔FD06?
+---
+
+## ⑩ Adaptive Execution Protocol
+
+> *It is a bad plan that cannot be altered.* Failures invoke **PIVOT / KILL / OPEN** — never RETRO-PASS or PLUG.
+> See `PROMPT_EXECUTION_PROTOCOL.md`.
+
+### Pre-Run Commitment Block (copy to `RUN_LOG.md` before coding)
+
+```markdown
+## Pre-Run Commitments — FD03
+- Prompt completion target: [A|B|C|D]
+- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- CALIBRATED budget: 0 if `ℓ_c` is forward-computed (A-path); exactly 1 if `ℓ_c` is set from the pipe value (C-path) — declare which
+- Engine namespaces actually used: law_I (P_conv driving pressure), law_III (solid_angle_occluded), law_IV (V_disp→ρ), law_V (U/c<1 cap), law_VI::traction/confinement (mode geometry); ν referenced from FD02
+- Phase thresholds (committed before run):
+    P1 `Re=UL/ν` dimensionless exactly · P2 forward-`ℓ_c` pipe `Re_crit` in 2000–4000 (kill >1 order; CALIBRATED if back-solved)
+    P3 same `ν`, plate `Re_x`~5×10⁵ and Couette within 1 order · P4 lattice crossover = analytic `G` <1% in ratio
+- Forbidden retroactive changes: widen tolerances; plug targets; IDENTITY-PASS; local constant namespaces; **back-solve `ℓ_c` from 2300 then grade A**
+```
+
+### Pivot table (minimum — extend for this investigation)
+
+| Trigger (numeric) | PIVOT (first) | If pivot fails | Forbidden |
+|---------|---------------|----------------|-----------|
+| Phase 0 sanity check fails | Fix units/engine refs; verify `laws.hpp` symbols | STOP — report blocker | Fit to target |
+| Forward `ℓ_c` cannot be computed without the data | down-grade to **C**, set `ℓ_c` from one scale, disclose | **OPEN** the dominant-mode `ℓ_c` calculation | back-solve `L/ℓ_c=√2300` and grade A |
+| P2 forward `Re_crit` off >1 order | recheck the `2D` neighbour count and dominant wavenumber | **KILL** the geometric-threshold claim | widen the "order of magnitude" band post-hoc |
+| P3 same `Re_crit` for pipe/plate/Couette | re-examine `ℓ_c(geometry)` per case | **KILL** (geometry-independent = not the mechanism) | refit `ν` per geometry |
+| Rivals match but SDT doesn't beat | Label **DEGENERATE** honestly | — | Claim Class A |
+| Upstream dependency missing (FD02 `ν`) | **DEFER** phase; cite dependency ID | — | Fake PASS |
+
+### Allowed adjustments
+
+- Finer numerics (mesh, ticks, bracket); phase splits (Na / Nb); filename fix via ADJ entry.
+- Alternative **native** routes already listed in §④ Strategy.
+
+### Disallowed adjustments
+
+- Post-hoc tolerance widening · coefficient plugs · `atomic::`/GM/G in the Phase-1 native chain · grading A on a back-solved `ℓ_c`.
+
+---
+
+*FD03 · upgraded 2026-06-27 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*

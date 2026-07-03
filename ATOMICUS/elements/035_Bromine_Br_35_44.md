@@ -3,7 +3,7 @@ On the Nature of Bromine (³⁵Br): The Liquid Halogen and the Stressed n=4 Shel
 Author: J.C. Harvey (Independent Researcher)
 Framework Synthesis and Analysis: AI Collaborator
 Abstract
-Bromine (Z=35) is the third halogen, a volatile, reddish-brown liquid at room temperature, and a powerful oxidizing agent. Its properties are an essential test for the recursive principles governing the periodic table. Standard models describe its configuration as [Ar] 3d¹⁰ 4s²4p⁵. This paper provides a complete, first-principles derivation of the properties of Bromine within the Spatial Displacement Theory (SDT) framework. We model the Bromine atom as a mechanical system with a completed [Ar] 3d¹⁰ core, surrounded by an outer shell of seven electron vortices. We demonstrate that this configuration creates a higher-octave "Cube Minus One" geometry in the large n=4 shell. The intense geometric stress caused by this single vacancy, combined with the "floppiness" of the fourth shell, is the direct mechanical origin of Bromine's unique physical and chemical properties.
+Bromine (Z=35) is the third halogen, a volatile, reddish-brown liquid at room temperature, and a powerful oxidizing agent. Its properties are an essential test for the recursive principles governing the periodic table. Standard models describe its configuration as [Ar] 3d¹⁰ 4s²4p⁵. This paper provides a structural characterisation of Bromine under the SDT construction grammar (measured properties quoted as anchors; derivations are OPEN unless explicitly shown). We model the Bromine atom as a mechanical system with a completed [Ar] 3d¹⁰ core, surrounded by an outer shell of seven electron vortices. We demonstrate that this configuration creates a higher-octave "Cube Minus One" geometry in the large n=4 shell. The intense geometric stress caused by this single vacancy, combined with the "floppiness" of the fourth shell, is proposed as a qualitative mechanism for Bromine's unique physical and chemical properties, not a quantitative derivation of them.
 ________________________________________
 1. Organization: The Higher-Octave "Cube Minus One"
 Bromine's structure is a direct, predictable echo of the structures of Fluorine and Chlorine.
@@ -12,8 +12,8 @@ Bromine's structure is a direct, predictable echo of the structures of Fluorine 
 •	The Geometric Revelation: The Stressed Vacancy: The valence shell of Bromine is a "Cube Minus One." It has nearly achieved the perfect, symmetric, low-energy state of the Krypton cube but is frustrated by a single geometric vacancy. This lone hole in a nearly-perfect structure creates a point of immense focal stress in the spation displacement field, driving the atom's chemical behavior.
 2. The Nature of Bromine: Reactivity in a "Floppy" Shell
 The single geometric vacancy is the key to Bromine's identity as a halogen.
-•	The Origin of Electronegativity and Reactivity: Bromine has a high electronegativity and is a strong oxidizing agent. This is a direct consequence of the immense energetic payoff the system achieves by filling its final geometric vacancy to complete the serene Krypton cube. This "geometric hunger" drives it to aggressively seek an electron from other atoms, either by forming a covalent bond (as in HBr) or by capturing an electron to form the bromide anion (Br⁻).
-•	The Origin of its Liquid State: Why is Bromine a liquid at room temperature, while Fluorine and Chlorine are gases? This is a direct consequence of the size and "floppiness" of the n=4 shell. The Bromine atom is much larger than Chlorine. The van der Waals forces—which in SDT are the weak, long-range interactions between the residual, fluctuating displacement fields of even neutral atoms—are much stronger between the larger, more polarizable Bromine atoms. These forces are strong enough to condense the atoms into a liquid at room temperature, but not strong enough to lock them into a rigid solid lattice like Iodine.
+•	The Origin of Electronegativity and Reactivity: Bromine has a high electronegativity (measured) and is a strong oxidizing agent. This is consistent with the immense energetic payoff the system would achieve by filling its final geometric vacancy to complete the serene Krypton cube; a quantitative derivation of the electronegativity value is OPEN. This "geometric hunger" drives it to aggressively seek an electron from other atoms, either by forming a covalent bond (as in HBr) or by capturing an electron to form the bromide anion (Br⁻).
+•	The Origin of its Liquid State: Why is Bromine a liquid at room temperature, while Fluorine and Chlorine are gases? This is consistent with the size and "floppiness" of the n=4 shell; a quantitative derivation of the boiling/melting points from this geometry is OPEN. The Bromine atom is much larger than Chlorine. The van der Waals forces—which in SDT are the weak, long-range interactions between the residual, fluctuating displacement fields of even neutral atoms—are much stronger between the larger, more polarizable Bromine atoms. These forces are strong enough to condense the atoms into a liquid at room temperature, but not strong enough to lock them into a rigid solid lattice like Iodine.
 3. Thermodynamics: Quantifying the n=4 Shell
 •	First Ionization Energy (E<sub>i1</sub> = 11.814 eV): A high value, as expected for a halogen, reflecting the high energy cost of moving away from the completed cube by removing an electron.
 •	Electron Affinity (3.36 eV): A very high value, reflecting the large energetic payoff for completing the cube by gaining an electron. As with Chlorine, the large size of the n=4 shell allows it to accommodate the new electron with minimal repulsion, leading to a very high energy release.
@@ -77,7 +77,7 @@ ________________________________________
 
 **A. Nuclear Cross-Reference**
 - **Nucleus**: Bromine (Z=35, N=44)
-- **Geometry**: Geometric Structure derived from Z constraints.
+- **Geometry**: Geometric structure proposed from Z constraints (qualitative picture; not a numeric derivation).
 - **SDT Analysis**: Z=35 defines the electromagnetic lens strength.
 
 **B. Ionization Economics and Kinematics**
@@ -88,7 +88,7 @@ ________________________________________
     - **Geometric k-factor**: $k = c/v = 147.06$
 
 **C. SDT Utilization & Applications**
-Derived from the geometric stability and ionization thresholds:
+Building on the geometric-stability picture and (measured) ionization thresholds -- application potential, not a derivation of the thresholds themselves:
 - **Variable Geometry Tuning**: Moderate ionization allows for switchable interactions (conductive/insulative) via applied voltage.
 
 

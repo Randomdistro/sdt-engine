@@ -471,7 +471,7 @@ Occlusion force:
 Focc = (π/4) Peff Rp2Re2 / a02 = 8.23 × 10−8 N
 Coulomb force:
 FC = kee2/a02 = 8.24 × 10−8 N
-Relative error: 0.12%. Within numerical precision of the input constants.
+Relative error: 0.12%. Within numerical precision of the input constants. (validated at the hydrogen calibration point — consistency at the anchor, not an independent test)
 4.2 He⁺ at the Bohr Radius
 For Z = 2: force scales as Z². Focc(He⁺) = 4 × 8.23 × 10−8 = 3.29 × 10−7 N.
 FC(He⁺) = 3.30 × 10−7 N. Agreement confirmed.
@@ -982,7 +982,7 @@ Spatial Displacement Theory — Law VI
 James Tyndall
 Melbourne, Australia
 March 2026
-Four conditions—toroidal closure, circulation quantisation, the movement budget, and marginal stability—determine the allowed masses of displacement vortices. The fundamental scale M₀ ≈ 1 TeV emerges from the convergent pressure of the medium combined with ħ and c. This is the electroweak scale, derived from cosmology. All known particles are high-winding topologies below this ceiling.
+Four conditions—toroidal closure, circulation quantisation, the movement budget, and marginal stability—determine the allowed masses of displacement vortices. The fundamental scale M₀ ≈ 1 TeV emerges from the convergent pressure of the medium combined with ħ and c. This is within a factor ~4 of the electroweak vev (246 GeV) — an order-of-magnitude alignment, not a derivation. All known particles are high-winding topologies below this ceiling.
 
 
 ---
@@ -1025,6 +1025,9 @@ The aspect ratio:
 
 
 3. Derivation of the Mass Formula
+
+> **Canon-consistency note (2026-07-03):** this winding-number mass treatment is INCOMPATIBLE with the canonical Law VI trefoil spectrum (electron = W=1 unknot; LAW_OF_VORTEX_TOPOLOGY_QUANTISATION.md) — e.g. it assigns the electron ~10²⁵ winding units. Treat this section as an exploratory alternative, not canon, until reconciled.
+
 Theorem (Vortex Mass). A stable (p,q) torus-knot vortex in the convergent relay lattice has mass:
 m(p,q) = M0 / (p2q)1/4     (T18)
 where the fundamental mass scale is:
@@ -1208,6 +1211,7 @@ This is contrary to the intuition that heavier means more complex. In a converge
 6.3 The Mass Ratio
 The proton-electron mass ratio is:
 mp/me = [(p²q)e/(p²q)p]1/4 = 1836.15     (6.1)
+(the electron's (p²q) value is back-computed from 1836.15⁴ — this displays the definition, it does not derive the ratio; see §7 "Status: OBSERVED. Not derived.")
 Therefore:
 (p²q)e/(p²q)p = 1836.154 = 1.137 × 1013     (6.2)
 The electron has 10¹³ times more topological complexity than the proton. The enormous charge-to-mass ratio of the electron (compared to the proton) reflects this: both carry one quantum of charge, but the electron distributes its circulation over vastly more turns.
@@ -1340,7 +1344,7 @@ Spatial Displacement Theory — Law Supplementary
 James Tyndall
 Melbourne, Australia
 March 2026
-Every identified open problem in the six-law framework is addressed. V_disp is computed for both particles. The geometric transfer function is expressed in closed form. The marginal stability of T10 is proven as a stable equilibrium. The electron-electron occlusion problem is resolved through charge quantisation. Helium binding is computed from nuclear occlusion geometry. Two problems remain genuinely open: R_p from lattice topology and quantisation of stable vortex topologies.
+Every identified open problem in the six-law framework is addressed. V_disp is computed for both particles. The geometric transfer function is expressed in closed form. The marginal stability of T10 is proven as a stable equilibrium. The electron-electron occlusion problem is resolved through charge quantisation. Helium binding is computed from nuclear occlusion geometry (the computation imports the full two-electron QM Hamiltonian and Hylleraas/Pekeris variational results — a rival-machinery import, disclosed at §5; not an SDT-native derivation). Two problems remain genuinely open: R_p from lattice topology and quantisation of stable vortex topologies.
 
 
 ---
@@ -1394,7 +1398,7 @@ Symbol
  | 1.6726 × 10⁻²⁷ kg
  | 
  | R_p
- | Proton charge radius
+ | Proton boundary radius
  | 8.414 × 10⁻¹⁶ m
  | 
  | r_e
@@ -1496,6 +1500,7 @@ The hydrogen calibration (Law III, Theorem 4) equates the Coulomb force to the o
 kee2 = (π/4) Peff Rp2 re2     (3.1)
 This defines the effective pressure at the atomic scale:
 Peff = 4kee2/(π Rp2re2) = 5.225 × 1031 Pa     (3.2)
+(NOTE: LAW_OF_RADIATIVE_PRESSURE_ORIGIN.md quotes P_eff ≈ 1.65×10³¹ Pa for the same quantity — a factor ~π cross-canon inconsistency, unresolved; flagged 2026-07-03.)
 The transfer function is the ratio of this effective pressure to the Planck-scale convergence pressure:
 f ≡ Peff/Pconv = 2.125 × 10−17     (3.3)
 3.2 Closed-Form Expression
@@ -1731,7 +1736,7 @@ Gap
 
 9. Summary
 Of the six identified gaps in the six-law framework, four are now fully resolved and one is partially resolved:
-Resolved: Vdisp for both particles (computable from the mass equation). The electron-electron occlusion problem (resolved by charge quantisation). The marginal stability of T10 (proven as a stable equilibrium between convergent pressure and the relay bound). Helium binding energy (computed from nuclear occlusion geometry, identical to QM).
+Resolved: Vdisp for both particles (computable from the mass equation). The electron-electron occlusion problem (resolved by charge quantisation). The marginal stability of T10 (proven as a stable equilibrium between convergent pressure and the relay bound). Helium binding energy (computed from nuclear occlusion geometry, identical to QM) (the computation imports the full two-electron QM Hamiltonian and Hylleraas/Pekeris variational results — a rival-machinery import, disclosed at §5; not an SDT-native derivation).
 Partially resolved: The transfer function (computed and expressed, but not derived from first principles due to Rp dependence).
 Genuinely open: Rp from lattice topology and quantisation of stable vortex topologies. Both require simulation of toroidal displacement patterns in an inviscid medium under convergent pressure. These are computational problems with well-defined inputs, not conceptual gaps.
 The six-law framework now has: 9 axioms, 2 lemmas, 18 theorems, their corollaries, and the complete gap resolution presented in this document. Minimal free parameters beyond the hydrogen calibration (which fixes Peff). Two open problems, both computational. Built on a single medium with one tick rate.
@@ -2164,7 +2169,7 @@ Three laws. One boundary condition. One mechanism. One calibration (hydrogen Cou
 
 **Measured input:** $T_{\mathrm{CMB}} = 2.725$ K (confirming the spectral form of the convergence state, not defining it)
 
-**Free parameters:** None.
+**Free parameters:** one measured calibration (hydrogen) — see header.
 
 **Critical distinction:** The pressure is not caused by distant radiation. The pressure is the local state of the medium, established by the already-arrived convergence of the transparency transition. The CMB observation confirms the state; it does not create it.
 
@@ -2420,7 +2425,7 @@ Every displacement vortex excludes a volume $V_{\mathrm{disp}}$ of spation from 
 2. Every displacement vortex excludes a definite volume $V_{\mathrm{disp}}$
 3. Acceleration creates a first-order dipole anisotropy in the local throughput frame
 
-**Free parameters:** None. $V_{\mathrm{disp}}$ is a topological property of the vortex, not a fitting parameter. $\Phi$ is determined by the Clearing distance and CMB temperature.
+**Free parameters:** one measured calibration (hydrogen) — see header. $V_{\mathrm{disp}}$ is a topological property of the vortex, not a fitting parameter. $\Phi$ is determined by the Clearing distance and CMB temperature.
 
 **Recovers:**
 - Newton's first law (isotropic throughput → zero force at rest)
@@ -2678,7 +2683,7 @@ The spation lattice carries light. The CMB is that light — real photons, measu
 
 **Measured foundation:** $T_{\mathrm{CMB}} = 2.725$ K (FIRAS/COBE/Planck)
 
-**Free parameters:** None.
+**Free parameters:** one measured calibration (hydrogen) — see header.
 
 **Recovers:**
 - Coulomb force ($1/r^2$ from solid-angle occlusion, validated to $< 1\%$)
@@ -2844,7 +2849,7 @@ But there are $4\pi d^2$ sources on the shell (one per spation on the shell surf
 
 $$\Phi_{\mathrm{shell}}(d) = 4\pi d^2 \times \frac{\varepsilon_0}{4\pi d^2\ell_P^2} \times \ell_P^2 = \varepsilon_0$$
 
-Wait — let me be precise about units. Each source releases $\varepsilon_0$ over $4\pi$ steradians. At distance $d$ lattice spacings, the solid angle subtended by one target spation is $\ell_P^2 / (d\,\ell_P)^2 = 1/d^2$. So the fraction of source $i$'s release arriving at the target:
+Each source releases $\varepsilon_0$ over $4\pi$ steradians. At distance $d$ lattice spacings, the solid angle subtended by one target spation is $\ell_P^2 / (d\,\ell_P)^2 = 1/d^2$. So the fraction of source $i$'s release arriving at the target:
 
 $$f(d) = \frac{1}{4\pi d^2}$$
 

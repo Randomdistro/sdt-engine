@@ -1,10 +1,18 @@
 # APS03: The Universal Drafting Crossover — A Forensic Cross-Scale Investigation
 
-> **Classification:** Cross-scale unification test (atomic ↔ stellar-system ↔ galactic ↔ nuclear)
-> **Prerequisites:** `laws.hpp` (bridge, law_I), `galactic.hpp` (a_0_SDT, regime_*), APS02 emission engine, GOM12 solar pressure-domain marker, GD05 twin-regime result
-> **Provenance of the conjecture:** the GD05 M4 convergence-floor law (RMS 23.8 %, BTFR 3.58, bias −1.6 %) and the APS02 emission drag factor `D` were found to exhibit the *same* two-regime structure: a "source/drafting" regime (B → 1) and a "floor/exposed" regime (B → ξ^(−1/2)), separated by a crossover. The Sun's pressure-domain marker `r_domain = √(L/4πF_CMB) ≈ 20 860 AU` is the same crossover seen radially in a single star.
-> **Author:** James Christopher Tyndall, Melbourne, Australia
-> **Status:** PENDING (specification complete; execution not begun)
+> **Author:** J. C. Harvey, Melbourne. **Status:** SPEC (upgrade 2026-06-27).
+> **Inherits:** `PERFECT_PROMPT_TEMPLATE.md` §⓪–§⑩ · `PROMPT_EXECUTION_PROTOCOL.md` · §0 anti-creep (R0–R5).
+> **Engine:** `#include <sdt/laws.hpp>` only — no local constant namespaces.
+> **Run:** Pre-commit thresholds in `RUN_LOG.md` before coding; adjust per pivot table (§⑩).
+---
+
+## ⓪ The Golden Rule — five questions (answer before Phase 0)
+
+1. **What don't we know?** — [APS03] APS03: The Universal Drafting Crossover — A Forensic Cross-Scale Investigation: *(unfilled by the 2026-06-27 bulk template upgrade — write the single measurable gap before the next run)*
+2. **Why does it matter?** — Stack position / downstream blockers (see `INVESTIGATION_STACK.md`).
+3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
+4. **What would prove us wrong?** — §⑧ falsification tests with numeric triggers.
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN).
 
 ---
 
@@ -290,3 +298,44 @@ For **every** input file, at read time, the engine records and prints: absolute 
 
 ### Appendix B — the one-line statement of the whole investigation
 *Does a single, SDT-derived exposure ratio `ξ = g_self/g_floor` collapse the emission drag of atoms, the orbital boost of bodies, and the rotation excess of galaxies onto one scale-invariant curve `B = Φ(ξ)` whose floor limit `ξ^{-1/2}` is forced by the convergence floor — and is `Φ` derivable from occlusion geometry, or merely the borrowed MOND shape with an SDT-supplied scale?*
+---
+
+## ⑩ Adaptive Execution Protocol
+
+> *It is a bad plan that cannot be altered.* Failures invoke **PIVOT / KILL / OPEN** — never RETRO-PASS or PLUG.
+> See `PROMPT_EXECUTION_PROTOCOL.md`.
+
+### Pre-Run Commitment Block (copy to `RUN_LOG.md` before coding)
+
+```markdown
+## Pre-Run Commitments — APS03
+- Prompt completion target: [A|B|C|D]
+- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- CALIBRATED budget: [0 or list each param — max per §⑤]
+- Engine namespaces: atomic::, measured::R_inf, electropause / APS01
+- Phase thresholds (committed before run): 23.8 %, 1.6 %, 1 %
+- Forbidden retroactive changes: widen tolerances; plug targets; IDENTITY-PASS; local constant namespaces
+```
+
+### Pivot table (minimum — extend for this investigation)
+
+| Trigger | PIVOT (first) | If pivot fails | Forbidden |
+|---------|---------------|----------------|-----------|
+| Phase 0 sanity check fails | Fix units/engine refs; verify `laws.hpp` symbols | STOP — report blocker | Fit to target |
+| Native mechanism off > committed % | Alternative route in §④; document ADJ-### | **OPEN** or **KILL** hypothesis | RETRO-PASS |
+| `z ≥ 1` in closure formula | Weak-field break (CR10); piecewise or exponential | **OPEN** that regime | Ignore break |
+| Rivals match but SDT doesn't beat | Label **DEGENERATE** honestly | — | Claim Class A |
+| Upstream dependency missing (FLM10, etc.) | **DEFER** phase; cite dependency ID | — | Fake PASS |
+
+### Allowed adjustments
+
+- Finer numerics (mesh, ticks, bracket); phase splits (Na / Nb); filename fix via ADJ entry.
+- Alternative **native** routes already listed in §④ Strategy.
+
+### Disallowed adjustments
+
+- Post-hoc tolerance widening · coefficient plugs · `atomic::`/GM/G in Phase-1 native chain · Snell/reciprocity-only as Fermat PASS.
+
+---
+
+*APS03 · upgraded 2026-06-27 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*

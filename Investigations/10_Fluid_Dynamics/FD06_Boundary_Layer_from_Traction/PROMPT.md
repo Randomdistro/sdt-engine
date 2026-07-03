@@ -1,8 +1,20 @@
 # FD06 — The Boundary Layer and No-Slip from Spation Traction
 
-**Domain**: Fluid Dynamics (SDT lattice mechanics)
-**Status**: SPEC
-**Author**: James Christopher Tyndall, Melbourne
+> **Author:** J. C. Harvey, Melbourne. **Status:** SPEC (upgrade 2026-06-27).
+> **Inherits:** `PERFECT_PROMPT_TEMPLATE.md` §⓪–§⑩ · `PROMPT_EXECUTION_PROTOCOL.md` · §0 anti-creep (R0–R5).
+> **Engine:** `#include <sdt/laws.hpp>` only — no local constant namespaces.
+> **Run:** Pre-commit thresholds in `RUN_LOG.md` before coding; adjust per pivot table (§⑩).
+---
+
+## ⓪ The Golden Rule — five questions (answered, not stubbed)
+
+1. **What don't we know?** — Fluid mechanics *imposes* no-slip (`u=0` at a wall) as an empirical boundary condition with no first-principles reason; does SDT spation traction (PPT06) *derive* no-slip as a stable fixed point, with residual slip length `λ_s → 0` (continuum) or `λ_s ∼ ℓ_P` (molecularly negligible)?
+2. **Why does it matter?** — No-slip is the unexplained foundation under every wall-bounded flow; if traction produces it as an output, then skin friction is just the traction shear `τ_w = μ(∂u/∂y)|_w` and the Blasius layer `δ ∼ √(νx/U)` is the diffusion-vs-advection balance — wiring FD06 to FD03 (transition), FD09 (drag crisis), FD10 (separation/shedding).
+3. **How will we find out?** — Five gated phases (§④): start the lattice in *pure slip* (`u=U` everywhere) and show the traction rule alone relaxes the wall layer to zero — no `u=0` hand-set anywhere; the `√(νx/U)` scaling (P2) is the core gate.
+4. **What would prove us wrong?** — §⑧, five falsifiers with real failure modes: finite slip `λ_s ≫ ℓ_P` in the continuum limit; `δ` slope ≠ ½; `C_f`/`δ` prefactor off by >2×; profiles failing to collapse; or no finite transition `Re_x`.
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN), per phase, no repainting a fired test.
+
+**Domain**: Fluid Dynamics (SDT lattice mechanics) · **Status**: SPEC · **Author**: J. C. Harvey, Melbourne
 
 *This investigation inherits the §0 anti-creep protocol and rules R0–R5 verbatim (whitelist inputs only; no G/M/kg fundamentals; no fields/wavefunctions/quarks/ΛCDM; certification labels on every result; translation test on every borrowed term; honesty over success).*
 
@@ -146,4 +158,54 @@ Five phases, each gated. Run them in order; a failed checkpoint stops the chain 
 - **Testing strategy.** Three independent two-stream checks (R3): (i) slip-length relaxation from a pure-slip initial condition (Phase 1); (ii) `δ` vs `x` power-law fit against Blasius `5.0/√Re_x` (Phase 2); (iii) analytic Blasius profile vs lattice profile and `C_f` (Phases 3–4). Predict each number and commit it to the run log *before* comparing (R1). Anti-numerology (R5): no free integer or π inserted to force `C_δ`, `0.664`, or `H` — each must come from the traction/diffusion balance or be flagged CALIBRATED.
 - **Standalone compile.** `cl /std:c++20 /EHsc /O2 /I Engine/include fd06_boundary_layer_traction.cpp` (MSVC) or `g++ -std=c++20 -IEngine/include fd06_boundary_layer_traction.cpp -o fd06` (GCC/Clang). Include only `<sdt/laws.hpp>`; do not redefine any constant it exposes (use `law_VI::traction` directly).
 - **Visualisation hints.** Dump the 2-D `u(x,y)` field to CSV for a heatmap; overlay the predicted `δ(x) = 5.0√(νx/U)` envelope on the `0.99U` locus; plot `C_f` vs `Re_x` log-log against `0.664/√Re_x`; show the rescaled-profile collapse (`u/U` vs `y/δ`) as the self-similarity proof; mark the Phase-5 critical `Re_x` on the `δ(x)` plot.
-- **Author attribution:** James Christopher Tyndall, Melbourne. The standard-FD result (Blasius `δ/x = 5.0/√Re_x`, `C_f = 0.664/√Re_x`, no-slip, the integral thicknesses) is the CONVERGENCE target to *reproduce*, never an input to *borrow* — the no-slip condition in particular must arrive as a traction *output*, not be coded as a wall BC.
+- **Author attribution:** J. C. Harvey, Melbourne. The standard-FD result (Blasius `δ/x = 5.0/√Re_x`, `C_f = 0.664/√Re_x`, no-slip, the integral thicknesses) is the CONVERGENCE target to *reproduce*, never an input to *borrow* — the no-slip condition in particular must arrive as a traction *output*, not be coded as a wall BC.
+
+## 10. Questions This Opens *(generative — log new ones in `FD06_VERDICT.md`)*
+
+1. **Is the residual slip length `λ_s` exactly `∼ ℓ_P`, or does the traction ratio `T = 3(W+1) = 12` set a larger, measurable slip** for specific surfaces? A finite predicted `λ_s` would connect to measured nanoscale slip lengths on superhydrophobic / atomically smooth surfaces — an SDT-distinct, testable number.
+2. **Does the Blasius constant `C_δ ≈ 5.0` emerge fully from the traction/diffusion balance, or does a residual factor stay PENDING?** If it is fully geometric, FD06 is Class A; if one scale must be set from FD02's `ν`, it is honest Class C — the prompt must not paint over the distinction.
+3. **Is the `ℓ=2` rotational traction channel that sets skin friction the same channel FD07 uses for bound circulation/lift?** If wall traction and bound circulation are one mechanism at different boundary conditions, FD06 and FD07 share a single coefficient — a strong internal-consistency test.
+---
+
+## ⑩ Adaptive Execution Protocol
+
+> *It is a bad plan that cannot be altered.* Failures invoke **PIVOT / KILL / OPEN** — never RETRO-PASS or PLUG.
+> See `PROMPT_EXECUTION_PROTOCOL.md`.
+
+### Pre-Run Commitment Block (copy to `RUN_LOG.md` before coding)
+
+```markdown
+## Pre-Run Commitments — FD06
+- Prompt completion target: [A|B|C|D]
+- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- CALIBRATED budget: 0 in the traction/diffusion chain (at most CALIBRATED(1) one fluid scale in P5, documented)
+- Engine namespaces actually used: law_VI::traction (ω_demand, traction_ratio_proton=12, wake channels ℓ=1/2/≥3), law_III (solid_angle_occluded), law_I (P_conv closure), law_V (low-Mach); ν referenced from FD02
+- Phase thresholds (committed before run):
+    P1 no-slip relaxes from pure-slip start, `λ_s ≲ ℓ_P` (kill if `λ_s ≫ ℓ_P`) · P2 `log δ`–`log x` slope 0.50 ± 0.03, `C_δ ≈ 5.0` within 2×
+    P3 `C_f = 0.664/√Re_x` prefactor within 2×, slope −½ · P4 profile collapse <5% RMS, `H ≈ 2.59` · P5 finite `Re_x` (order ~5×10⁵), benchmark <5%, CALIBRATED ≤1
+- Forbidden retroactive changes: widen tolerances; plug targets; IDENTITY-PASS; local constant namespaces; **hand-set `u=0` at the wall instead of deriving it from traction**
+```
+
+### Pivot table (minimum — extend for this investigation)
+
+| Trigger (numeric) | PIVOT (first) | If pivot fails | Forbidden |
+|---------|---------------|----------------|-----------|
+| Phase 0 sanity check fails | Fix units/engine refs; verify `laws.hpp` symbols | STOP — report blocker | Fit to target |
+| P1 finite slip `λ_s ≫ ℓ_P` in continuum limit | strengthen the traction grip via `T=3(W+1)`; recheck the fixed point | **KILL** (traction ≠ no-slip) | code `u=0` as a wall BC |
+| P2 `δ` slope ≠ ½ | recheck the normal-diffusion-vs-advection balance | **KILL** (wrong penetration mechanism) | force the ½ slope |
+| P3 `C_f` prefactor off >2× | recheck `τ_w = μ(∂u/∂y)` from the derived profile | **OPEN** the prefactor, cap at C | refit the drag law |
+| Rivals match but SDT doesn't beat | Label **DEGENERATE** honestly | — | Claim Class A |
+| Upstream dependency missing (FD02 `ν`, FD03 transition) | **DEFER** phase; cite dependency ID | — | Fake PASS |
+
+### Allowed adjustments
+
+- Finer numerics (mesh, ticks, bracket); phase splits (Na / Nb); filename fix via ADJ entry.
+- Alternative **native** routes already listed in §④ Strategy.
+
+### Disallowed adjustments
+
+- Post-hoc tolerance widening · coefficient plugs · `atomic::`/GM/G in the Phase-1 native chain · coding no-slip as a wall BC rather than deriving it.
+
+---
+
+*FD06 · upgraded 2026-06-27 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*

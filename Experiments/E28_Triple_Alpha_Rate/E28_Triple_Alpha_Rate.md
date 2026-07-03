@@ -1,3 +1,9 @@
+> **⮑ SPEC LINKED — investigation spec written, NOT yet run.**
+> Methodology spec exists at `Investigations/05_Nuclear_Physics/NP08_Triple_Alpha_Geometric_Packing` (PROMPT only — no verdict, no result). This experiment remains an OPEN falsifiable prediction.
+> The specification below is the falsifiable prediction.
+
+---
+
 # E28: Triple-Alpha Rate from Geometric Packing
 
 > **Category**: Nuclear Physics

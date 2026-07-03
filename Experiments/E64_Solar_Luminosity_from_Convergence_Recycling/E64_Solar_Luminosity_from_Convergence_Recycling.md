@@ -1,3 +1,9 @@
+> **⮑ SPEC LINKED — investigation spec written, NOT yet run.**
+> Methodology spec exists at `Investigations/09_Stellar_Astrophysics_and_Radiation/SAR03_Solar_Luminosity` (PROMPT only — no verdict, no result). This experiment remains an OPEN falsifiable prediction.
+> The specification below is the falsifiable prediction.
+
+---
+
 # E64: Solar Luminosity from Convergence Recycling
 
 > **Category**: Stellar Physics

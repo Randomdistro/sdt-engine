@@ -1,3 +1,9 @@
+> **⮑ SPEC LINKED — investigation spec written, NOT yet run.**
+> Methodology spec exists at `Investigations/05_Nuclear_Physics/NP15_Nuclear_Magnetic_Moments_from_Vortex` (PROMPT only — no verdict, no result). This experiment remains an OPEN falsifiable prediction.
+> The specification below is the falsifiable prediction.
+
+---
+
 # E40: Nuclear Magnetic Moments from Vortex Geometry
 
 > **Category**: Nuclear Physics

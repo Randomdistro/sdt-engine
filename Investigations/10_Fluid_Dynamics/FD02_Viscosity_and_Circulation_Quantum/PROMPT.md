@@ -1,8 +1,20 @@
 # FD02 — Viscosity and the Quantum of Circulation from Lattice Mechanics
 
-**Domain**: Fluid Dynamics (SDT lattice mechanics)
-**Status**: SPEC
-**Author**: James Christopher Tyndall, Melbourne
+> **Author:** J. C. Harvey, Melbourne. **Status:** SPEC (upgrade 2026-06-27).
+> **Inherits:** `PERFECT_PROMPT_TEMPLATE.md` §⓪–§⑩ · `PROMPT_EXECUTION_PROTOCOL.md` · §0 anti-creep (R0–R5).
+> **Engine:** `#include <sdt/laws.hpp>` only — no local constant namespaces.
+> **Run:** Pre-commit thresholds in `RUN_LOG.md` before coding; adjust per pivot table (§⑩).
+---
+
+## ⓪ The Golden Rule — five questions (answered, not stubbed)
+
+1. **What don't we know?** — Is fluid viscosity genuinely lattice momentum-diffusion `ν = ⅓ λ_mfp v_relay` (with the `⅓` traced to 3-D angular averaging, not borrowed), and does the lattice impose a real dissipation *floor* (`η/s ≳ ħ/(4π k_B)`) whose `1/(4π)` is derivable rather than fitted?
+2. **Why does it matter?** — FD02 supplies the `ν` coefficient FD01 leaves PENDING and the circulation quantum `κ` FD07 needs; if the `⅓` and the floor coefficient are native, viscosity stops being a fitted material property and becomes relay geometry. **Honest caveat:** `κ = h/m` is essentially structural (Law VI winding *defines* one quantum of action per spation), so Phase 4 is a consistency check, not an independent prediction — graded accordingly.
+3. **How will we find out?** — Five gated phases (§④): derive `ν` and its `⅓` (P1) and the `√T` exponent (P3) before reading any tabulated viscosity; the floor coefficient (P5) is DERIVED-or-CALIBRATED(1), never silently inserted.
+4. **What would prove us wrong?** — §⑧, five falsifiers with real failure modes: air/water `ν` off by >2 orders or wrong air>water ordering; fitted `T`-exponent outside `0.5 ± 0.05` (not Sutherland-explained); `κ` reproducible only by inserting a free integer; no floor emerging; FD01 handshake off >10%.
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN), per phase, no repainting a fired test.
+
+**Domain**: Fluid Dynamics (SDT lattice mechanics) · **Status**: SPEC · **Author**: J. C. Harvey, Melbourne
 
 *This investigation inherits the §0 anti-creep protocol and rules R0–R5 verbatim (whitelist inputs only; no G/M/kg fundamentals; no fields/wavefunctions/quarks/ΛCDM; certification labels on every result; translation test on every borrowed term; predict-before-look; honesty over success).*
 
@@ -153,4 +165,54 @@ Five phases, each gated. Run in order; a failed checkpoint stops the chain (R4: 
 - **Testing strategy.** Three independent two-stream checks (R3): (i) `ν = ⅓ λ_mfp v_relay` evaluated two ways — directly and via `μ/ρ` — must agree; (ii) the temperature exponent from the analytic `½`-power vs the numerical fit slope; (iii) `κ = h/m_He` computed from `h/m` vs from `2πℏ/m`. Predict every number and commit it to the run log *before* comparison (R1). Anti-numerology (R5): the `⅓`, the `0.5`, and the `1/(4π)` must each trace to lattice geometry or be flagged CALIBRATED — never inserted to force a match.
 - **Standalone compile.** `cl /std:c++20 /EHsc /O2 /I Engine/include fd02_viscosity_circulation.cpp` (MSVC) or `g++ -std=c++20 -IEngine/include fd02_viscosity_circulation.cpp -o fd02` (GCC/Clang). Include only `<sdt/laws.hpp>`; do not redefine any constant it exposes. `m_He`, tabulated `ν(T)`, and `λ_mfp`/thermal-speed inputs are MEASURED-INPUT and belong in `DATA_REQUIREMENTS.md`, not hard-coded as if derived.
 - **Visualisation hints.** Plot the `ν(T)` log-log line with the fitted slope annotated against the 0.5 reference; a bar chart of predicted-vs-measured `ν` for air and water; and a number-line of kinematic viscosities from air down to superfluid ⁴He with the `ν_min ~ ħ/m` floor marked. A small schematic of momentum flux across a shear plane (GPI relay) makes the `λ_mfp v_relay` mechanism legible.
-- **Author attribution:** James Christopher Tyndall, Melbourne. The standard-FD results (kinetic-theory viscosity, `κ = h/m`, the KSS `η/s` bound) are the CONVERGENCE targets to *reproduce*, never inputs to *borrow*.
+- **Author attribution:** J. C. Harvey, Melbourne. The standard-FD results (kinetic-theory viscosity, `κ = h/m`, the KSS `η/s` bound) are the CONVERGENCE targets to *reproduce*, never inputs to *borrow*.
+
+## 10. Questions This Opens *(generative — log new ones in `FD02_VERDICT.md`)*
+
+1. **Is `κ = h/m` a derivation or a definition?** Law VI assigns one action quantum per spation winding, which makes `κ = h/m` near-tautological. The real open question: does the *value* of the action quantum `ℏ` itself fall out of lattice geometry (FLM06 seed theorem), or is it an irreducible anchor? If the latter, Phase 4 is CONVERGENCE, not NATIVE — say so.
+2. **Can the `1/(4π)` in the `η/s` floor be derived from solid-angle/relay-step counting** (the same `4π` that appears in `exclusion_radius`), or only matched to the measured KSS bound? If only matched, the floor is CALIBRATED(1) and the *physical* claim (a real lattice dissipation minimum) stays OPEN.
+3. **Does the real `√T` law deviate the way the Sutherland correction (~0.7 exponent) predicts**, and is that deviation an SDT coarse-graining limit or an independent knot-scattering temperature dependence in `λ_mfp`?
+---
+
+## ⑩ Adaptive Execution Protocol
+
+> *It is a bad plan that cannot be altered.* Failures invoke **PIVOT / KILL / OPEN** — never RETRO-PASS or PLUG.
+> See `PROMPT_EXECUTION_PROTOCOL.md`.
+
+### Pre-Run Commitment Block (copy to `RUN_LOG.md` before coding)
+
+```markdown
+## Pre-Run Commitments — FD02
+- Prompt completion target: [A|B|C|D]
+- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- CALIBRATED budget: declare it — `κ=h/m` is structural (note 1); the `η/s` `1/(4π)` is the budgeted CALIBRATED(1) candidate
+- Engine namespaces actually used: law_IV (V_disp→ρ, knot density→λ_mfp), law_V (budget/floor analogue), law_VI::topology (winding→κ), law_VI::traction (knot-scattering)
+- Phase thresholds (committed before run):
+    P1 `⅓` traced to angular average · P2 air & water `ν` within factor 10, ordering air>water
+    P3 fitted exponent 0.5 ± 0.05 (vs B16 <1%) · P4 `κ=h/m_He` <1% (consistency, not prediction) · P5 floor within factor 4π
+- Forbidden retroactive changes: widen tolerances; plug targets; IDENTITY-PASS; local constant namespaces; sell `κ=h/m` as an independent prediction
+```
+
+### Pivot table (minimum — extend for this investigation)
+
+| Trigger (numeric) | PIVOT (first) | If pivot fails | Forbidden |
+|---------|---------------|----------------|-----------|
+| Phase 0 sanity check fails | Fix units/engine refs; verify `laws.hpp` symbols | STOP — report blocker | Fit to target |
+| P2 `ν` off >2 orders or wrong air/water order | recheck `λ_mfp`/`v_relay` from knot density | **KILL** (relay diffusion ≠ viscosity) | tune `λ_mfp` to the answer |
+| P3 exponent outside 0.5 ± 0.05 | check for Sutherland correction; report deviation | **OPEN** the thermal-relay model | force a 0.5 fit |
+| P5 `1/(4π)` only matchable, not derivable | flag floor **CALIBRATED(1)**, cap at C | **OPEN** the floor mechanism | claim A with an inserted `1/(4π)` |
+| Rivals match but SDT doesn't beat | Label **DEGENERATE** honestly | — | Claim Class A |
+| Upstream dependency missing (E59, ROOT-SIM) | **DEFER** phase; cite dependency ID | — | Fake PASS |
+
+### Allowed adjustments
+
+- Finer numerics (mesh, ticks, bracket); phase splits (Na / Nb); filename fix via ADJ entry.
+- Alternative **native** routes already listed in §④ Strategy.
+
+### Disallowed adjustments
+
+- Post-hoc tolerance widening · coefficient plugs · `atomic::`/GM/G in the Phase-1 native chain · grading `κ=h/m` as NATIVE when it is structural.
+
+---
+
+*FD02 · upgraded 2026-06-27 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*

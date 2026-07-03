@@ -1,3 +1,8 @@
+> **⮑ INVESTIGATED — SPLIT.**
+> GOM11's M2/S2 ratio 2.177 is genuine convergence; the M2 amplitude 'PASS' rides a hardcoded Q=2.31 tuned to the 0.63 m target (CALIBRATED, not predicted).
+
+---
+
 # E99: Ocean Tidal Analysis: SDT Pressure vs Newton Potential
 
 > **Category**: Gravity / Occlusion

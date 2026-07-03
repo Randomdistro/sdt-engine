@@ -1,0 +1,39 @@
+================================================================
+ TD08 - Fluctuation-Dissipation and Brownian Motion
+ J. C. Harvey, Melbourne - 2026-07-03
+ 1D Rayleigh gas, M/m = 100. One collision stream supplies BOTH
+ kicks and drag; no noise-amplitude parameter exists in this tool.
+================================================================
+
+--- bath temperature T = 1.0 ---
+  P0: <M V^2>/k_BT = 0.9982  (1 +- 2%)  [PASS]   (collision rate 0.802)
+  P1: MSD fit -> D = 0.3175, velocity relaxation tau = 35.4
+      (tau is the TOY bath's collision timescale; the prompt's ~t_P claim
+       is untestable here and is classed OPEN, not asserted.)
+  P2: F = 0.15748 -> V_drift = 0.04970, mu = 0.3156; linearity Vd(F/2)/Vd(F) = 0.496 [ok]
+      D/(mu k_B T) = 1.0061  (1 +- 2%)  [PASS]
+
+--- bath temperature T = 4.0 ---
+  P0: <M V^2>/k_BT = 0.9994  (1 +- 2%)  [PASS]   (collision rate 1.604)
+  P1: MSD fit -> D = 0.6330, velocity relaxation tau = 21.4
+      (tau is the TOY bath's collision timescale; the prompt's ~t_P claim
+       is untestable here and is classed OPEN, not asserted.)
+  P2: F = 0.63195 -> V_drift = 0.09961, mu = 0.1576; linearity Vd(F/2)/Vd(F) = 0.502 [ok]
+      D/(mu k_B T) = 1.0039  (1 +- 2%)  [PASS]
+
+P3: force-noise spectrum at zero frequency (T = 1, V clamped)
+  S_F(0) = 6.2525;  2 gamma k_B T = 6.3376  (gamma = F/V_drift from P2)
+  ratio = 0.9866  (1 +- 3%; O(m/M) = 1% budget declared)  [PASS]
+  (white at low frequency - uncorrelated impulses on a held vortex;
+   roll-off sits at the collision rate, the toy's 'relay tick'.)
+
+P4: Stokes-Einstein closure vs FD02 - DEFERRED as declared in RUN_LOG
+  (1D shot-noise toy has no 6 pi eta R; FD02's eta carries a documented x1.44;
+   producing a closure number here would be fabrication. OPEN.)
+
+================================================================
+ TD08 GATES: P0 PASS | P1 D extracted | P2 PASS | P3 PASS | P4 DEFERRED
+ No noise normalisation exists in this tool; the Einstein ratio and the
+ FDT ratio are OUTPUTS of one collision stream. (k_B bridge: 1.3806e-23 J/K)
+ VERDICT: PASS - see TD08_VERDICT.md
+================================================================

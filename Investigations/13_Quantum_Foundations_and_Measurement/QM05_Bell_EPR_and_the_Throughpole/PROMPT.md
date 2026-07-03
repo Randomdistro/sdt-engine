@@ -1,9 +1,31 @@
 # QM05 — Bell / EPR & the Throughpole
 
-> **Author:** J.C. Harvey, Melbourne. **Status:** SPEC (seed, unstarted). **THE HARDEST / MOST-OPEN.**
-> Inherits the §0 anti-creep protocol and rules R0–R5 verbatim.
-> This is the **locality audit** of the entire domain. A clean kill or an honest OPEN outranks a
-> forced pass (R4). **This investigation is expected to remain OPEN** — do not fabricate a local story.
+> **Author:** J. C. Harvey, Melbourne. **Status:** SPEC (10× upgrade 2026-06-29).
+> **Inherits:** `PERFECT_PROMPT_TEMPLATE.md` §⓪–§⑩ · `PROMPT_EXECUTION_PROTOCOL.md` · §0 anti-creep (R0–R5).
+> **Engine:** `#include <sdt/laws.hpp>` only — no local constant namespaces.
+> **Run:** Pre-commit thresholds in `RUN_LOG.md` before coding; adjust per pivot table (§⑩).
+> **Domain:** Quantum Foundations & Measurement (local-realist relay mechanics; the one non-local candidate is the throughpole).
+---
+
+## ⓪ The Golden Rule — five questions (answered, not stubbed)
+
+1. **What don't we know?** — SDT is local-realist by construction (hard vortices, definite handedness,
+   relay at one tick `c`), so a strictly local relay model **must** obey the CHSH bound `S ≤ 2`, while
+   QM/experiment give `S = 2√2 ≈ 2.828`. The single open question: does the **throughpole** (the
+   never-terminating in/out convergence flow, the only candidate non-locality) lift S to 2√2 **without
+   permitting signalling** (marginals stay 50/50) — making non-locality a *feature SDT already owns* —
+   or does SDT structurally cap at 2, in which case the entanglement debt is real and must be stated?
+2. **Why does it matter?** — This is the verdict node for §8.2 census debt #1. Every downstream claim
+   that SDT is a complete local-realist physics hinges on whether it can reach 2√2 honestly.
+3. **How will we find out?** — Four phases (§④). Phase 1 builds the most honest **local** baseline and
+   **pre-declares** it will fall short of 2√2 (this is correct, not a failure); Phase 2 tests the
+   throughpole channel under a strict no-signalling check; the verdict is classed honestly.
+4. **What would prove us wrong?** — §⑧, three falsifiers with numeric triggers — including the
+   no-signalling guard (if the throughpole route lifts S above 2 but Alice's marginal depends on Bob's
+   setting, it implies FTL signalling and the route is rejected).
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class
+   (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN). **The expected landing is D/OPEN** — pre-declared,
+   not repainted.
 
 ## Question
 
@@ -18,11 +40,24 @@ that constitute a Bell-relevant non-locality, and is it a *feature* or an *unpai
 
 ## SDT mechanism & hypotheses
 
+> **FARMER correction (2026-07-03, J.C.Harvey directive):** the original transcription below reduced
+> the pair to a *static* shared hidden variable ("definite local handedness… plus a shared wake"),
+> which forces Bell's factorised readout form and pre-decides the local kill. That dropped the branch
+> intent. The founding mechanism is the **GEARED ROTATION**: per FLM07 (1:4 void gearing, W+1), the
+> split pair remains ONE mechanically geared rotational system through the lattice — the throughpole
+> is the *channel* (in/out flow never terminates), the gearing is the *machinery* that makes the two
+> wings' landing counts a single joint account. Reading out one wing's rotation against an axis
+> mechanically constrains the geared partner's conjugate state **at readout** — a non-factorising
+> joint mechanism SDT owns natively, not an import. H2 below is to be read with that machinery, and
+> the residence-law debt is specifically: *derive the joint landing weighting from the geared-pair
+> readout mechanics.*
+
 A singlet pair is one shared vortex topology split into two contra-handed halves (EMC03), each
-carrying definite local handedness as a hidden variable plus a shared wake. Detector settings select
-a measurement axis (QM07 SG occlusion). The audit: build the most honest **local** relay model and
-measure its CHSH; then test whether the throughpole's instantaneous through-flow couples the two
-wings without signalling.
+carrying definite local handedness as a hidden variable plus a shared wake — **and remaining geared
+(FLM07) as one rotational system**. Detector settings select a measurement axis (QM07 SG occlusion).
+The audit: build the most honest **local** relay model and measure its CHSH; then test whether the
+throughpole's instantaneous through-flow — as the channel of the pair's geared rotation — couples
+the two wings without signalling.
 
 - **H1 (local cap):** a strictly local relay-wake model with shared hidden handedness obeys `S ≤ 2`
   (it cannot beat Bell) — establish this as the honest baseline, **predicting it falls short**.
@@ -58,16 +93,71 @@ on EPR/GHZ/Leggett–Garg even if Phase 2 fails. *Success metric:* a clear OPEN 
 - **PENDING (D) / OPEN:** local model caps at 2; throughpole route plausible but unproven. **The expected landing.**
 - **FAIL (F):** SDT structurally caps at 2 with no non-local ingredient available — entanglement debt confirmed, stated plainly.
 
-## Falsification tests
+## Falsification tests (each has a real failure mode + numeric kill trigger)
 
-| Test | Predicted outcome | If FAIL |
-|------|-------------------|---------|
-| T1 — local baseline caps | S ≤ 2 for any strictly local relay model | local model already beats Bell (suspect smuggled non-locality) |
-| T2 — throughpole non-signalling | if S>2, Alice marginal independent of Bob setting | would imply FTL signalling → reject the route |
-| T3 — verdict is honest | result classed A/C/D/F with OPEN flag where unproven | a forced "local Bell violation" was fabricated → R4 breach |
+| # | Test | SDT prediction | What kills it (numeric) |
+|---|------|----------------|-------------------------|
+| T1 | local baseline caps at 2 | `S ≤ 2` for any strictly local relay model (expect ~2 / triangle-correlation ceiling, short of 2.828) | if the *local* model returns `S > 2`, non-locality was smuggled in (a hidden shared-setting channel) — suspect the model, do not celebrate |
+| T2 | throughpole non-signalling | if S>2, Alice's marginal `P(A given a,b)` equals `P(A given a)` to numerical precision (marginals fixed 50/50, independent of Bob's setting) | if lifting S above 2 makes Alice's marginal depend on Bob's setting by >statistical noise, it implies FTL signalling → reject the throughpole route |
+| T3 | verdict is honest | result classed A/C/D/F with an explicit OPEN flag where unproven; S reported as measured | if a "local Bell violation" is reported without a no-signalling proof, it is fabricated → R4 breach (auto-F) |
 
 ## Dependencies
 
 **Upstream:** QM01 (relay-wake + steering), QM07 (SG measurement axis), QM04 (correlation = landing counts).
 **Downstream:** the whole [[project_paradox_census]] §8.2 #1 debt verdict hinges here.
 **Related:** [[project_foundational_ontology_influx_monopole]] (the throughpole — the only non-local candidate), [[project_cq47_repulsion_inverse]] (contra-handedness = the shared hidden variable).
+
+## Questions This Opens *(generative — log new ones in `QM05_VERDICT.md`)*
+
+1. **Is the throughpole a *Tsirelson-bounded* channel?** If it lifts S above 2, does it stop exactly at
+   2√2 (the quantum bound) or could it over-shoot toward the algebraic max of 4? A clean stop at 2√2
+   would be a strong native result; an over-shoot would falsify the channel.
+2. **What is the local baseline's exact ceiling?** Does the honest local relay model give the
+   triangle-correlation `S = 2` straight line, or a smoother curve? The *shape* of the shortfall is a
+   measurable signature, not just the number.
+3. **Does the throughpole give GHZ / Leggett–Garg too, or only CHSH?** A genuine structural
+   non-locality should reproduce the three-party GHZ all-or-nothing contradiction; if it only fixes
+   CHSH, it is a patch, not a mechanism.
+4. **Is "no-signalling" automatic or fine-tuned?** If the throughpole respects no-signalling for *any*
+   coupling strength, that is structural; if it only does so for one tuned value, the route is fragile.
+
+## ⑩ Adaptive Execution Protocol
+
+> *It is a bad plan that cannot be altered.* Failures invoke **PIVOT / KILL / OPEN** — never RETRO-PASS or PLUG.
+> See `PROMPT_EXECUTION_PROTOCOL.md`.
+
+### Pre-Run Commitment Block (copy to `RUN_LOG.md` before coding)
+
+```markdown
+## Pre-Run Commitments — QM05
+- Prompt completion target: [A|B|C|D] (expected: D/OPEN — pre-declared)
+- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- CALIBRATED budget: 0 (the throughpole coupling is a structure under test, not a fit)
+- Engine namespaces used: handedness (EMC03 contra-handedness = shared hidden variable), QM07 SG axis, QM04 counts — NO ψ, NO collapse, NO atomic::
+- Phase thresholds (committed before run): P1 local S ≤ 2 (pre-declared shortfall) · P2 no-signalling marginal drift < statistical noise · P3 explicit A/C/D/F + OPEN
+- Forbidden retroactive changes: report S>2 without a no-signalling proof; fabricate a local Bell violation; repaint the pre-declared D/OPEN as A
+```
+
+### Pivot table
+
+| Trigger (numeric) | PIVOT (first) | If pivot fails | Forbidden |
+|---|---|---|---|
+| P0 sanity check fails | Fix units/engine refs; verify `laws.hpp` symbols | STOP — report blocker | Fit to target |
+| P1 local model returns S > 2 | hunt the smuggled non-locality (shared-setting leak) | **OPEN** — model is suspect, not Bell | claim SDT beat Bell locally |
+| P2 throughpole lifts S but breaks no-signalling | re-examine the coupling (must be marginal-preserving) | **reject** the route; entanglement debt **stands** | report FTL signalling as a feature |
+| P2 throughpole caps below 2√2 | report the partial lift honestly (Class C) | **D/OPEN**; the debt is bounded, not paid | pretend 2√2 was reached |
+| Rivals (QM) match but SDT only caps at 2 | label the debt plainly | — | Claim Class A |
+
+### Allowed adjustments
+
+- Finer numerics (angle sweep, sample count); phase splits (Na / Nb); filename fix via ADJ entry.
+- Alternative **native** correlation routes already listed in §④ Strategy.
+
+### Disallowed adjustments
+
+- Post-hoc tolerance widening · a fabricated local Bell violation · reporting S>2 without no-signalling ·
+  `atomic::`/GM/G in any chain · repainting the pre-declared D/OPEN.
+
+---
+
+*QM05 · 10× upgrade 2026-06-29 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*

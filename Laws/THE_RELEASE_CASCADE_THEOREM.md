@@ -140,7 +140,7 @@ But there are $4\pi d^2$ sources on the shell (one per spation on the shell surf
 
 $$\Phi_{\mathrm{shell}}(d) = 4\pi d^2 \times \frac{\varepsilon_0}{4\pi d^2\ell_P^2} \times \ell_P^2 = \varepsilon_0$$
 
-Wait — let me be precise about units. Each source releases $\varepsilon_0$ over $4\pi$ steradians. At distance $d$ lattice spacings, the solid angle subtended by one target spation is $\ell_P^2 / (d\,\ell_P)^2 = 1/d^2$. So the fraction of source $i$'s release arriving at the target:
+Each source releases $\varepsilon_0$ over $4\pi$ steradians. At distance $d$ lattice spacings, the solid angle subtended by one target spation is $\ell_P^2 / (d\,\ell_P)^2 = 1/d^2$. So the fraction of source $i$'s release arriving at the target:
 
 $$f(d) = \frac{1}{4\pi d^2}$$
 

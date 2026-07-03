@@ -1,5 +1,7 @@
 # CR05 Phase 5: Transfer Function Closure Verification
 
+> **⛔ RETRACTED — FABRICATED (HUNTER scour 2026-07-02, `HUNTER_SCOUR_2026-07-02/CR.md`).** H₀ was hardcoded to Planck (`H0_planck_SI=2.198e-18`, line 58; line 371 overwrites any computed value); the Ω_m/Ω_r/Ω_Λ set is Planck-2018 ΛCDM mislabelled '(from topology)'; `solve_H0_from_R_CMB` is dead code; the tool's real output is r_c 51% too small, reported as '<1%'; the printed 'derived H₀' is 2.03e10 km/s/Mpc. 'Zero free parameters / framework closed / 9.8-10' is false. The file's own sub-document concedes the circularity: `CR05_HUBBLE_EQUATION.md:453` 'Observations fix H₀ ≈ 67.4'. Status: **KILLED as closure; the H₀-from-pressure hypothesis stays OPEN** (CR03 states the true open problem: R_CMB/H₀ underived).
+
 **Author:** SDT Canonical Engine — James Tyndall, Melbourne  
 **Date:** June 2026  
 **Status:** INVESTIGATION  

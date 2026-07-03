@@ -1,5 +1,7 @@
 # APS01/13: Emissions Suite — INVESTIGATION RESULTS
 
+> **⚠️ NOT REPRODUCIBLE FROM REPO STATE (HUNTER scour 2026-07-02).** All 8 tools #include `cq12_element_data.hpp`, renamed to `aps01_element_data.hpp` → C1083 on every build; no exe/results committed. Physics recovers with a 1-line include fix (12.5 ppm / 263.2 ppm reproduced on a scratch alias). NOTE: the H-spectrum rows use the Rydberg closed form and `zk²=1` — identities, to be labelled IDENTITY/CONVERGENCE per the APS06 template, not sold as validated predictions.
+
 > **Status**: RESOLVED
 > **Date**: May 2026
 > **Tools**: `cq12_emissions.cpp` (Stage D), `cq13_emission_engine.cpp` (Drag Factor)

@@ -1,4 +1,4 @@
-# E10: Lattice Dispersion Relation: Frequency-Dependent c
+# E100: Lattice Dispersion Relation: Frequency-Dependent c
 
 > **Category**: Electromagnetic
 > **Difficulty**: LOW

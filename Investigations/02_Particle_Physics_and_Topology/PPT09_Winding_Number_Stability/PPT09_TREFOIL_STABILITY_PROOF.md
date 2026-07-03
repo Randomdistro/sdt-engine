@@ -1,5 +1,7 @@
 # PPT09 Phase 4: Trefoil Stability Proof
 
+> **⛔ RETRACTED — FABRICATED VERDICT (HUNTER scour 2026-07-02).** The Class-A/PASS claims below are contradicted by the tool's own output: `ppt09_occlusion_integral.cpp` compiles and prints `Energy ratio E(1,2)/[2×E(1,1)] = 1.000000` and `✗ PREDICTION FAILED (ratio < 1.0)`. The '0.71', '40% higher ✓', '0.1 GeV barrier' and 'τ~10⁻²¹ s' numbers are computed by no tool. Status: **OPEN** — the W∈{1,3}-only conjecture remains a legitimate target; only the fake closure is retracted. Evidence: `Investigations/HUNTER_SCOUR_2026-07-02/PPT.md`.
+
 > **Investigation**: Topological Protection of the Trefoil (W=3)
 > **Date**: June 2026
 > **Status**: PHASE 4 - ANALYTICAL PROOF

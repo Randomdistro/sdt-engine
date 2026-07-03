@@ -1,0 +1,76 @@
+SAR05 provenance checker  |  engine-sourced z<->T, integer 2/5, after-iron scaling
+
+======================================================================
+(i) z<->T LADDER  [T_at_z, z_at_T, wien_peak from cosmology.hpp]
+======================================================================
+  T_CMB = 2.7255 K            [MEASURED-INPUT, laws.hpp:169]
+
+        z |   T_at_z(z) [K] |  wien_peak [nm] | note
+  ------------------------------------------------------------------
+     0.00 |           2.725 |       1063291.1 | present CMB (microwave)   [DERIVED]
+    10.00 |          29.980 |         96662.8 | cold far-IR   [DERIVED]
+    99.22 |         273.150 |         10609.6 | FREEZING 273 K (z_freezing)   [DERIVED]
+   106.56 |         293.150 |          9885.7 | room temp 293 K (z_room_temp)   [DERIVED]
+   135.91 |         373.150 |          7766.3 | BOILING 373 K (z_boiling)   [DERIVED]
+  1100.00 |        3000.775 |           965.8 | recombination (z_rec)   [DERIVED]
+
+  --- P3 GATE: freezing epoch, computed (99/273 are targets, not inputs) ---
+    z_at_T(273.15 K) = 99.2201   [DERIVED from T_CMB]   target 99  -> |diff| = 0.2201
+    T_at_z(99)       = 272.5500 K [DERIVED from T_CMB]   target 273.15 K -> |diff| = 0.6000 K
+    round-trip z_at_T(T_at_z(99)) = 99.000000   [IDENTITY check]
+    PASS |z-99|<1 : True    PASS |T-273.15|<3K : True
+    >>> P3 PASS-GATE (freezing point of water == z~99, from cosmology.hpp)
+
+======================================================================
+(ii) 2/5 SEEDING RATIO  [integer counts, grammar blocks NP02B]
+======================================================================
+      block | baryons | n->p | antineutrinos
+  --------------------------------------------
+   deuteron |       2 |    1 |             1   [DERIVED, integer]
+     triton |       3 |    1 |             1   [DERIVED, integer]
+  --------------------------------------------
+      TOTAL |       5 |      |             2
+
+    (antineutrinos)/(baryons) = 2/5 = 2/5  [DERIVED, EXACT integer arithmetic]
+    Y_e (electron fraction) = 2/5 = 0.4  [DERIVED as decimal FROM the integer ratio, not reverse]
+
+    Y_e = 0.4 is PROTON-RICH / antineutrino-rich.
+    -> makes the FIRST r-process peak (A ~ 80), NOT gold.   [OBSERVED-TARGET]
+    Gold (3rd peak, A ~ 197) needs Y_e ~ 0.1  [OBSERVED-TARGET]
+       -- made by the neutrons you do NOT convert.
+    => 2/5 is the SEEDING cost only. The climb to gold is mostly SILENT
+       strong-force (n,gamma) captures, punctuated by occasional beta-.
+    WITHDRAWN OVERCOUNT: 'beta- on every rung' -- the climb is n,gamma-dominated.
+    >>> P4 PASS-GATE (2/5 exact; Y_e=0.4 -> first peak not gold)
+
+======================================================================
+(iii) AFTER-IRON FORK  self-consuming vs pressure-fed  [order of magnitude]
+======================================================================
+  Event budget E ~ 3.0e+46 J   [OBSERVED-TARGET, NP19 event scale]
+  Collapse/vent timescale ~ 3 s   [ASSUMED, order-of-magnitude]
+  => L_nu(single event) ~ 1.0e+46 W   [COMPUTED, order-of-magnitude]
+     ~ 2.6e+19 L_sun for a few seconds  (matches the ~99% neutrino vent anchor).
+
+  COMMITTED-BEFORE-ESTIMATE scaling (see RUN_LOG P2 pre-commitment):
+    self-consuming : L_nu paid from FIXED internal budget
+                     -> dL_nu/dMdot ~ 0  (FLAT in accretion rate)
+                     -> heavy yield = HARD CLIFF at fixed mass
+    pressure-fed   : L_nu paid by directed-pressure throughput charged by Mdot
+                     -> dL_nu/dMdot > 0  (RISES with accretion rate)
+                     -> heavy yield TRACKS supply duration (yield ~ integral Mdot dt)
+
+  DEGENERACY GUARD (committed before estimate):
+    SINGLE EVENT: pressure battery and internal budget are the SAME
+       gravitational binding energy read through TWO CUTS (NP19).
+       Same ~3e46 J on the same ~seconds -> OBSERVATIONALLY IDENTICAL
+       => the single-event fork is DEGENERATE (declared, not faked).
+    POPULATION at fixed core mass: sign(dL_nu/dMdot) SEPARATES them
+       flat (self-consuming) vs rising (pressure-fed) -> LIVE / NATIVE-eligible.
+
+  Consistency check (c): nova recurrence interval ~ 1/Mdot
+       -> comes out LOCAL under BOTH pictures (confirms local battery either way).
+  >>> P2: single-event DEGENERATE; population-slope LIVE. Both stated honestly.
+
+======================================================================
+ALL ASSERTIONS PASSED  (P3 z~99->273 K; P4 2/5 exact)  -- tool exit 0
+======================================================================

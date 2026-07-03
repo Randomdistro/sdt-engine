@@ -149,12 +149,15 @@ inner Oort distance; we suggest loosely-bound bodies rest at this depth surface
 Within the same framework and the derived acceleration floor
 `a₀ = cH₀/2π = 1.042×10⁻¹⁰ m/s²`: (i) galaxy rotation curves for 135 SPARC
 galaxies are reproduced at 23.8 % RMS, unbiased, with a baryonic Tully–Fisher
-slope of 3.58, using only baryonic input; (ii) the galactic, atomic, and stellar
-convergence response collapse onto a single curve in `ξ = g_self/a₀` at 8.8 %
-RMS, and substituting a deliberately incorrect floor degrades the collapse
-sixfold — establishing that the derived `a₀` is required, not fitted. These are
-reported in full in the supplementary investigations and summarised here as
-consistency evidence.
+slope of 3.58, using only baryonic input and using the MOND 'simple'
+interpolation form for the crossover (the asymptotes are SDT-derived; the
+crossover shape is borrowed and its native derivation is open); (ii) the
+galactic, atomic, and stellar convergence response collapse onto a single curve
+in `ξ = g_self/a₀` at 21.5 % RMS across the atomic and stellar scales (the
+galactic pilot is void pending a data-path repair); substituting a deliberately
+incorrect floor degrades the collapse by a factor 2.4 — consistent with, though
+not yet establishing, a required floor. These are reported in full in the
+supplementary investigations and summarised here as consistency evidence.
 
 ## 7. Falsifiable predictions
 
@@ -196,7 +199,8 @@ row.
 Within SDT, the gravitational redshift is the convergence depth at the emission
 point, and one centripetal law `v = c√z` governs bound motion from the atom to
 the outer solar system, returning `1/α = 137` and `r_e` at the hydrogen scale
-without adjustable parameters. We have stated the result as a theorem, tested its
+without adjustable parameters (the hydrogen closure returns α by construction).
+We have stated the result as a theorem, tested its
 core to 0.03 %, and given three falsifiable predictions that distinguish it from
 metric gravity. The reproducibility script accompanying this paper regenerates
 every numerical claim in a single run.

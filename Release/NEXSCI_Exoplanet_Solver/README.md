@@ -3,6 +3,8 @@
 
 A C++20 pipeline that derives exoplanetary orbital architectures **strictly from photometric observables** — transit timing, angular separation, and *c*. No stellar mass prior. No *G*.
 
+> [CIRCULARITY: archive semi-major axes are derived from stellar mass via Kepler III, so Ϟ=4π²r³/(T²c²) returns the hidden GM★ prior; TRAPPIST-1 scatter <0.05% is guaranteed, not validation. To be predictive, fit raw transit/RV timings directly.]
+
 ---
 
 ## The Method
@@ -24,7 +26,7 @@ From Ϟ alone:
 | Gravitational redshift | `z_grav = Ϟ / R★` |
 | Orbital period cross-check | `T = 2π r / v(r)` |
 
-No stellar mass is assumed or estimated at any stage.
+No stellar mass is assumed or estimated at any stage. [CIRCULARITY caveat: see note above — the archive semi-major axes already embed GM★, so the mass prior enters through the inputs.]
 
 ---
 

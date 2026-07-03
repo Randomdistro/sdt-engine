@@ -1,9 +1,33 @@
 # QM01 — Deterministic Double-Slit from the Lattice Relay
 
-> **Author:** J.C. Harvey, Melbourne. **Status:** SPEC (seed, unstarted).
-> Inherits the §0 anti-creep protocol (`INVESTIGATION_STACK.md` §0) and rules R0–R5 verbatim.
-> **This is the single largest standing debt in the SDT paradox census** (`PARADOX_CENSUS.md` §8.2 #1):
-> SDT owes a *deterministic* account of the double-slit pattern, the Born rule, and Bell correlations.
+> **Author:** J. C. Harvey, Melbourne. **Status:** SPEC (10× upgrade 2026-06-29).
+> **Inherits:** `PERFECT_PROMPT_TEMPLATE.md` §⓪–§⑩ · `PROMPT_EXECUTION_PROTOCOL.md` · §0 anti-creep (R0–R5).
+> **Engine:** `#include <sdt/laws.hpp>` only — no local constant namespaces.
+> **Run:** Pre-commit thresholds in `RUN_LOG.md` before coding; adjust per pivot table (§⑩).
+> **Domain:** Quantum Foundations & Measurement (deterministic relay mechanics, no ψ).
+---
+
+## ⓪ The Golden Rule — five questions (answered, not stubbed)
+
+1. **What don't we know?** — Can the two-slit fringe, *single-particle build-up*, and the
+   amplitude-square (Born) intensity be produced by a **deterministic** relay model — one hard vortex
+   through exactly one slit, its convergence wake through both — to <1% of `cos²(πd sinθ/λ)`, with
+   λ = h/p emerging as the wake's relay period, **without ever instantiating a wavefunction, a
+   superposition-of-states, or a collapse**? Or does the fringe demand a ψ that is genuinely "at both
+   slits", in which case the wave–particle debt is real and must be paid, not narrated away.
+2. **Why does it matter?** — This is debt #1 in `PARADOX_CENSUS.md` §8.2 and the gate for the whole
+   QM block: QM02 (band-limit), QM03 (wake leakage), QM04 (Born square), QM05 (Bell), QM07 (spin) all
+   reuse this engine's vortex-plus-wake steering. If QM01 fails natively, every downstream QM unit
+   inherits the ψ it imports.
+3. **How will we find out?** — Five gated phases (§④). Phase 1 derives λ from tick kinematics
+   **before** any analytic fringe is written; the cos² must *emerge* from summing two relay pulses,
+   never be inserted by hand (the §⑤ anti-tautology gate: writing the cos² into the code caps at C).
+4. **What would prove us wrong?** — §⑧, four falsifiers each with the numeric outcome that kills the
+   thesis (non-native λ; fringe RMS that cannot reach <1% without a hand-placed cos²; build-up that
+   needs the vortex in both slits; decoherence that needs an observer rather than a mechanical
+   wake-spoil).
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class
+   (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN), per phase, no repainting a fired test.
 
 ---
 
@@ -83,16 +107,20 @@ does a *local* relay-wake model evade Bell's theorem, and if not, what non-local
 throughpole's instantaneous in/out, [[project_foundational_ontology_influx_monopole]]) is invoked,
 and is that a debt or a feature? **Mark OPEN if no clean local route exists — do not fabricate.**
 
-## 5 · Success Criteria
+## 5 · Success Criteria (canonical A–F) + anti-tautology gate
 
-- ✅ **PASS (Class A):** Phases 1–4 native; λ=h/p derived; fringe + build-up + decoherence to <1%
-  with zero fitted parameters; Born square shown as superposed-pressure energy density.
-- ✅ **QUALIFIED (Class C):** pattern reproduced but the amplitude-squared step or λ borrows one
-  flagged coefficient; build-up + which-way qualitatively correct. (This is the expected landing.)
+- ✅ **PASS (Class A — NATIVE):** Phases 1–4 native; λ=h/p **derived** from tick kinematics (h traced
+  to `κ=h/m`, FD02); the fringe `cos²·sinc²` *emerges* from summing two relay wake pulses (not
+  inserted), build-up is strictly one-slit-per-vortex, decoherence is mechanical wake-spoiling; all to
+  <1% with zero fitted parameters. Born square shown as superposed-pressure energy density.
+- ✅ **QUALIFIED (Class C — CONVERGENCE):** pattern reproduced but the amplitude-square step or λ
+  borrows one flagged coefficient; build-up + which-way qualitatively correct. **Anti-tautology gate:
+  writing `cos²` (or `|ψ|²`, or a ψ object) into the code and then "recovering" it caps the grade at
+  C — that is the answer imported, not the mechanism derived.** This is the expected landing.
 - ⚠️ **PENDING (Class D):** relay wake diffracts and overlaps, but vortex-steering → Born density
   shown only heuristically; flag the gap.
-- ❌ **FAIL (Class F):** the two-channel model cannot produce fringes without re-importing ψ.
-  Report it honestly; the census debt stands.
+- ❌ **FAIL (Class F):** the two-channel model cannot produce fringes without re-importing ψ /
+  superposition / collapse. Report it honestly; the census debt stands.
 
 ## 6 · Outputs
 
@@ -110,14 +138,14 @@ ROOT-SIM (per-contact rule — the deepest dependency; flag where Phase 1 leans 
 as relay bandwidth). **Related:** `PARADOX_CENSUS.md` §8.2 (#1 debt), E81 (electron diffraction,
 VERIFIED — lattice scattering), [[project_foundational_ontology_influx_monopole]] (no ψ, no collapse).
 
-## 8 · Falsification Tests
+## 8 · Falsification Tests (each has a real failure mode + numeric kill trigger)
 
-| Test | Hypothesis | Predicted outcome | If FAIL |
-|------|-----------|-------------------|---------|
-| T1 | λ is the relay wake period | λ = h/p ± 1% with no fitted scale | de Broglie not native; relay dispersion wrong |
-| T2 | fringe = wake overlap count | cos²·sinc² to <1% over 10⁴ vortices | two-channel model insufficient |
-| T3 | build-up is one-at-a-time | sparse→fringe with strictly one slit per vortex | "both slits" smuggled back in |
-| T4 | decoherence = wake spoiling | V falls continuously with spoiling; V²+D²≤1 | needs observer/collapse → census debt persists |
+| # | Test | SDT prediction | What kills it (numeric) |
+|---|------|----------------|-------------------------|
+| T1 | λ is the relay wake period | λ = h/p ± 1% with h from `κ=h/m`, **no fitted scale** | if the derived wake period misses h/p by >1%, or only matches once a wavelength is fitted, de Broglie is not native — relay dispersion is wrong (→ C at best) |
+| T2 | fringe = wake-overlap **count** | `cos²·sinc²` to RMS <1% over ≥10⁴ landings, cos² **emergent** from summing two pulses | if RMS stays >1% with pulse-summation, **or** <1% is only reached once a `cos²` / `ψ²` term is written into the steering, the two-channel model is insufficient (the latter is an IMPORTED answer → C) |
+| T3 | build-up is one-at-a-time | sparse dots → fringe with **exactly one slit per vortex** (50/50), fringe coherent | if a coherent fringe requires the vortex to traverse both slits (or be a delocalised packet), "both slits at once" is smuggled back in → F |
+| T4 | decoherence = wake spoiling | visibility V falls **continuously** with spoiling strength; `V²+D²≤1` recovered mechanically | if V drops only via an inserted observer/collapse term, or `V²+D²>1`, the which-way result needs ψ-collapse → census debt persists (F on the decoherence sub-claim) |
 
 ## 9 · Implementation Notes
 
@@ -125,5 +153,72 @@ Use double precision; work in dimensionless `x/(λL/d)`. Seed the per-vortex sli
 from a deterministic but varying source (index-derived, **not** `Math.random`) so the build-up is
 reproducible. Plot: (a) landing histogram vs analytic overlay; (b) visibility vs spoiling strength;
 (c) three build-up panels. **Do not** insert the cos² by hand — it must fall out of summing two relay
-pulses. The discipline (R4): a clean Class-C with an honestly-flagged amplitude-square borrow beats a
-forced "A" that hides a ψ.
+pulses. **Guardrail for the central test:** no ψ object, no `superposition` state, no `collapse` call
+anywhere in the steering chain — the vortex carries a definite (x, p, slit) at every tick. The
+discipline (R4): a clean Class-C with an honestly-flagged amplitude-square borrow beats a forced "A"
+that hides a ψ. Author attribution in all generated files: **J. C. Harvey, Melbourne.**
+
+## 10 · Questions This Opens *(generative — log new ones in `QM01_VERDICT.md`)*
+
+These are *not* required for the verdict; they are the point of doing it well.
+
+1. **Is the relay coherence length a measurable cutoff?** The wake must be broad enough to span both
+   slits; that width is set by the relay coherence length. Does it predict a *maximum slit separation*
+   beyond which fringes vanish — a number testable against matter-wave interferometry (C₆₀, large
+   molecules)?
+2. **Does "single slit per vortex" survive delayed-choice?** If which-slit is decided after the vortex
+   passes, the wake-spoiling story (H4) makes a *local mechanical* prediction. Does it differ from the
+   QM delayed-choice result, and is that a fork or a degeneracy?
+3. **Is the Born square here the *same* square as QM04's elastic energy density?** If yes, QM01 and
+   QM04 share one geometric origin; if the coefficients differ, one of them is borrowing.
+4. **Can the build-up rate (dots/second → fringe) be predicted, not just the final pattern?** A
+   relay-steering model has a real per-vortex timescale; does it match observed single-electron
+   build-up movies?
+5. **Does the wake-spoiling `V²+D²≤1` saturate or fall short of the QM equality?** A mechanical model
+   may give an inequality strictly *inside* the QM bound — a measurable deficit, the QM-foundations
+   analogue of QM05's expected Bell shortfall.
+
+---
+
+## ⑩ Adaptive Execution Protocol
+
+> *It is a bad plan that cannot be altered.* Failures invoke **PIVOT / KILL / OPEN** — never RETRO-PASS or PLUG.
+> See `PROMPT_EXECUTION_PROTOCOL.md`.
+
+### Pre-Run Commitment Block (copy to `RUN_LOG.md` before coding)
+
+```markdown
+## Pre-Run Commitments — QM01
+- Prompt completion target: [A|B|C|D]
+- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- CALIBRATED budget: 0 in the native chain (list any flagged borrow, e.g. the amplitude-square step)
+- Engine namespaces used: measured (h via κ=h/m from FD02), law_V, law_VI/traction (wake) — NO ψ, NO atomic:: in the fringe chain
+- Phase thresholds (committed before run): P1 λ ±1% (h from κ=h/m ±0.02%) · P2 sinc² shape · P3 fringe RMS <1% over ≥10⁴ · P4 V continuous, V²+D²≤1
+- Forbidden retroactive changes: write cos²/ψ²/superposition/collapse into the steering then claim A; widen RMS tolerance; plug the fringe; IDENTITY-PASS; local constant namespaces
+```
+
+### Pivot table
+
+| Trigger (numeric) | PIVOT (first) | If pivot fails | Forbidden |
+|---|---|---|---|
+| P0 sanity check fails | Fix units/engine refs; verify `laws.hpp` symbols (h, κ) | STOP — report blocker | Fit to target |
+| P1 derived λ off h/p by >1% | alternative native dispersion route (FLM02 GPI vs FLM05 tick) | **OPEN** the relay-wavelength claim; cap at C | fit a wavelength scale, then claim native |
+| P3 fringe RMS >1% from pulse-summation | refine relay Huygens mesh / steering integrator | **OPEN**; report best RMS, do not insert cos² | hand-place cos²/ψ² to hit <1% (that is IMPORTED → C) |
+| P3 fringe only forms if vortex is in both slits | re-examine the two-channel split (wake width vs slit gap) | **KILL** H1 / mark the both-slits debt | smuggle a delocalised packet and call it the vortex |
+| P4 V²+D²>1, or V needs an observer term | re-derive spoiling as pure wake occlusion | **OPEN**; report the deficit honestly | add a collapse/observer term to force complementarity |
+| Bell route (P5) finds no clean local model | **OPEN** → hand to QM05; do not fabricate | — | claim a local Bell violation (R4 breach) |
+| Rivals match but SDT only reproduces | label **DEGENERATE** honestly | — | Claim Class A |
+
+### Allowed adjustments
+
+- Finer numerics (mesh, ticks, bracket); phase splits (Na / Nb); filename fix via ADJ entry.
+- Alternative **native** routes already listed in §④ Strategy (FLM02 vs FLM05 wake derivation).
+
+### Disallowed adjustments
+
+- Post-hoc tolerance widening · cos²/ψ²/superposition/collapse inserted into the native chain ·
+  `atomic::`/GM/G in the fringe chain · burying the T3/T4 debt outcome.
+
+---
+
+*QM01 · 10× upgrade 2026-06-29 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*

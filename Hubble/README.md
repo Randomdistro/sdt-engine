@@ -19,15 +19,15 @@ Status: **ACTIVE**
 | # | Claim | Status |
 |---|-------|--------|
 | 1 | There is no metric expansion | Axiom (R1) |
-| 2 | Redshift = amplitude-to-wavelength conversion in pressurised lattice | DERIVED |
-| 3 | H₀ measures local compression coefficient κ, not expansion rate | DERIVED |
+| 2 | Redshift = amplitude-to-wavelength conversion in pressurised lattice | POSITED (mechanism; T⁴ realisation falsified by 17) |
+| 3 | H₀ measures local compression coefficient κ, not expansion rate | DEFINITIONAL |
 | 4 | Tension = difference between local and global κ | INDICATED |
 | 5 | Apparent acceleration at z≈0.5 = virial boundary of cosmological gradient | INDICATED |
 | 6 | k=1 at z=1.0 (c-boundary of the cosmological pressure gradient) | DERIVED |
 | 7 | All H₀ measurements ordered by sampled matter density | CONFIRMED (§9.2) |
-| 8 | Required local underdensity δ = −0.077 (within KBC void range) | CONSISTENT |
+| 8 | Required local underdensity δ = −0.077 (within KBC void range) | OUTSIDE the KBC range (see 18_H0_Gradient §4 — honest) |
 | 9 | No dark energy needed | PREDICTION |
-| 10 | Universe age ~46 Gyr (derived from r_s/θ_s) | DERIVED |
+| 10 | Universe age ~46 Gyr (derived from r_s/θ_s) | MODEL-DEPENDENT (rests on Planck ΛCDM r_s=147 Mpc — see data/03 correction) |
 | 11 | JWST "impossible" galaxies explained by longer timeline | CONSISTENT |
 | 12 | Neutrinos experience zero pressure-gradient redshift | PREDICTION |
 | 13 | Amplitude squeeze does NOT slow photons (relay = c, always) | AXIOM |
@@ -38,7 +38,7 @@ Status: **ACTIVE**
 
 | # | Task | Priority |
 |---|------|----------|
-| 1 | Fit zk²=1 distance model to Pantheon+ data | HIGH |
+| 1 | Fit zk²=1 distance model to Pantheon+ data | DONE — SDT lost on the physical model (see 17); native-model fit remains OPEN |
 | 2 | Derive Friedmann-equivalent from throughput cascade | HIGH |
 | 3 | Compute SN Ia residual vs host galaxy density | MEDIUM |
 | 4 | Derive r_s from acoustic physics | MEDIUM |

@@ -1,5 +1,7 @@
 # APS04: Angular Quantisation and Selection Rules from Trefoil Symmetry
 
+> **⛔ RETRACTED — FABRICATED (HUNTER audit 2026-07-02, `APS04_HUNTER_AUDIT.md`).** The solver never compiled (`constexpr std::sqrt`, C2131); the results are hand-typed; the formula with its own inputs yields ≈3145 MHz, not 1051.8; the 1051.8 value was fished. PPT08 remains **OPEN**; the SDT Lamb amplitude is unbuilt.
+
 **Date:** June 2026  
 **Author:** James Tyndall, Melbourne, Australia  
 **Status:** THEORETICAL RESOLUTION — Angular DOF Native Derivation  

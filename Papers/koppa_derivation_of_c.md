@@ -125,6 +125,11 @@ $$c = \sqrt{2 \times 1.32712 \times 10^{20} / 2953.25} = 299{,}792{,}462 \text{ 
 
 This agrees with the accepted value of *c* = 299,792,458 m/s to within **0.000001%**.
 
+> **NOTE:** *r_s* = 2953.25 m is 2*GM*/*c*² computed with the accepted *c*, so
+> the 0.000001% agreement is by construction; the honest independent route is
+> the precession-derived value (≈9 ppm — see
+> `Deriving_c_From_Mercurial_Precession.md`).
+
 ### 3.3 Cross-body validation
 
 Once *c* is determined from the Sun, ϟ follows for every body:
@@ -135,7 +140,7 @@ Once *c* is determined from the Sun, ϟ follows for every body:
 | Earth | 7,910 | 37,901 | 4.435×10⁻³ | 8.870×10⁻³ | 8.870×10⁻³ | ✓ |
 | Saturn | 25,087 | 11,950 | 0.4220 | 0.8441 | 0.8441 | ✓ |
 
-The Schwarzschild relation 2R_c = rₛ holds exactly for all three bodies, confirming that the derived *c* is universally consistent.
+The Schwarzschild relation 2R_c = rₛ holds exactly for all three bodies, confirming that the derived *c* is universally consistent (both columns derive from the same μ/c² — consistency, not confirmation).
 
 ### 3.4 Closure verification
 
@@ -170,7 +175,7 @@ For a given body, ϟ must simultaneously satisfy:
 5. **Redshift**: z = 1/ϟ² = μ/(c²R)
 6. **Closure**: zϟ² = 1
 
-All six are algebraically coupled through ϟ. Perturbation of ϟ breaks the cross-body consensus while remaining internally consistent only at the true value.
+All six are algebraically coupled through ϟ. Perturbation of ϟ breaks the cross-body consensus while remaining internally consistent only at the true value. In short: all six relations are algebraically coupled through ϟ; this is one relation verified six ways, not six independent tests.
 
 ### 4.3 Multi-body consensus
 

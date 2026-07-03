@@ -3,7 +3,7 @@ On the Nature of Arsenic (³³As): The Return of Chemical Duality
 Author: J.C. Harvey (Independent Researcher)
 Framework Synthesis and Analysis: AI Collaborator
 Abstract
-Arsenic (Z=33) is a notoriously toxic metalloid that sits below Phosphorus in the periodic table. Its complex chemistry, including its common +3 and +5 oxidation states, is a hallmark of Group 15. This paper provides a complete, first-principles derivation of the properties of Arsenic within the SDT framework. We model the Arsenic atom as a system with a completed [Ar] 3d¹⁰ core, surrounded by an outer shell of five electron vortices. We demonstrate that this configuration results in a stressed square pyramidal geometry. This geometrically "ambivalent" structure is the direct mechanical origin of its chemical duality and toxicity.
+Arsenic (Z=33) is a notoriously toxic metalloid that sits below Phosphorus in the periodic table. Its complex chemistry, including its common +3 and +5 oxidation states, is a hallmark of Group 15. This paper provides a structural characterisation of Arsenic under the SDT construction grammar (measured properties quoted as anchors; derivations are OPEN unless explicitly shown). We model the Arsenic atom as a system with a completed [Ar] 3d¹⁰ core, surrounded by an outer shell of five electron vortices. We demonstrate that this configuration results in a stressed square pyramidal geometry. This geometrically "ambivalent" structure is proposed as a qualitative mechanism for its chemical duality and toxicity, not a quantitative derivation of either.
 ________________________________________
 1. Organization: The Higher-Octave Stressed Pyramid
 Arsenic's structure is a direct, higher-octave echo of Nitrogen and Phosphorus.
@@ -23,7 +23,7 @@ o	1s² Core Shell (Probed by E<sub>i32</sub> ≈ 12600 eV): v<sub>1s</sub> ≈ 6
 4. Magnetism
 •	Prediction: The five valence electrons will form two stable dyads, leaving one unpaired electron vortex in the standard configuration. (Note: Hund's rule would suggest three unpaired). The ground state is complex, but the atom is predicted to be paramagnetic. This is confirmed.
 5. Conclusion
-Arsenic is a perfect higher-octave echo of Phosphorus. Its properties, including its famous chemical duality and toxicity, are a direct and predictable consequence of its five valence electrons forming a geometrically ambivalent pyramidal structure in the large, floppy n=4 shell.
+Arsenic is a perfect higher-octave echo of Phosphorus. Its measured properties, including its famous chemical duality and toxicity, are consistent with a picture of its five valence electrons forming a geometrically ambivalent pyramidal structure in the large, floppy n=4 shell; a quantitative derivation of these properties is OPEN.
 ________________________________________
 7.6. Rigorous SDT Mathematical Analysis: Arsenic
 **A. Nuclear Cross-Reference**
@@ -68,7 +68,7 @@ ________________________________________
 
 **A. Nuclear Cross-Reference**
 - **Nucleus**: Arsenic (Z=33, N=42)
-- **Geometry**: Geometric Structure derived from Z constraints.
+- **Geometry**: Geometric structure proposed from Z constraints (qualitative picture; not a numeric derivation).
 - **SDT Analysis**: Z=33 defines the electromagnetic lens strength.
 
 **B. Ionization Economics and Kinematics**
@@ -79,7 +79,7 @@ ________________________________________
     - **Geometric k-factor**: $k = c/v = 161.57$
 
 **C. SDT Utilization & Applications**
-Derived from the geometric stability and ionization thresholds:
+Building on the geometric-stability picture and (measured) ionization thresholds -- application potential, not a derivation of the thresholds themselves:
 - **Variable Geometry Tuning**: Moderate ionization allows for switchable interactions (conductive/insulative) via applied voltage.
 
 

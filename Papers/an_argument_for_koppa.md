@@ -14,7 +14,7 @@
 
 This paper introduces two novel algebraic descriptors in the form of the upper- and lower-case Greek symbols Koppa U+03DE **Ϟ** (uppercase), and koppa U+03DF **ϟ** (lowercase), for consideration for adoption by the scientific community. This descriptor, when used as demonstrated in the proceeding research alongside R, the radius of the subject body, performs as a kinematic bridge both within and between physical regimes.
 
-By presenting gravitational dynamics using the observable pair (ϟ,R) we show ϟ≡c/v to be a dimensionless kinematic ratio. The formulation makes explicit a direct scaling with c across orbital and spectral observables spanning 43 orders of magnitude.
+By presenting gravitational dynamics using the observable pair (ϟ,R) we show ϟ≡c/v to be a dimensionless kinematic ratio. The formulation makes explicit a direct scaling with c across orbital and spectral observables spanning 22 orders of magnitude.
 
 The resulting expressions are algebraically equivalent to standard formulations via μ=GM, but replace dependence on the poorly constrained constant G and inferred masses M with directly measured quantities (R,v), improving input precision without altering predictions.
 
@@ -30,7 +30,7 @@ where R is the radius of the central body, and r is the orbital distance. This i
 
 $$GM = \frac{c^2 R}{\text{ϟ}^2} \qquad M = \frac{c^2 R}{\text{ϟ}^2 G} \qquad G = \frac{c^2 R}{\text{ϟ}^2 M}$$
 
-This derivation is a direct, clean extraction of G and M, far more accurate than the current methods, yet ultimately an unnecessary calculation, as there is more encoded in the koppa value than in µ = GM. Koppa gives us:
+This derivation is a direct extraction of the PRODUCT GM (= c²ϟ) — G and M separately still require Cavendish; the split is bookkeeping, not physics — yet ultimately an unnecessary calculation, as there is more encoded in the koppa value than in µ = GM. Koppa gives us:
 
 $$\text{ϟ} = c\sqrt{\frac{R}{\mu}} \qquad \text{ϟ}^2 = \frac{c^2 R}{\mu}$$
 
@@ -84,7 +84,7 @@ The letter *k* is among the most overloaded symbols in physics. It denotes, in s
 
 In each case, the meaning attributed to the letter k depends entirely on context, with notational collision avoided primarily due to said context being domain specific. Substitution is rarely necessary, as a k overlap in a single calculation is something one would almost have to work at to achieve. Of course, k is also occasionally used as a fill or placeholder symbol, much as a and b, and c, or x and y, and z, for a concept in the early stages of its development. On occasion, the concept outgrows the placeholder.
 
-This paper reports the discovery of a dimensionless, kinematic body-dependent ratio that spans domains. It appears identically in atomic spectroscopy, electron kinematics, nuclear geometry, stellar spectroscopy, celestial orbital mechanics and galaxy dynamics. All orbited bodies have a kinematic value that can be derived using **ϟ = c√(R/r) / v**. For example, the Hydrogen atom and its properties can all be derived using the three most precisely measured atomic quantities in physics: the proton charge radius (R), the Bohr radius (r), and the velocity of the electron in its ground state. This is the second-smallest domain we have applied it to so far, producing ϟ = 137.035999084 and an excitation chain that recovers Keplerian orbital mechanics.
+This paper reports the discovery of a dimensionless, kinematic body-dependent ratio that spans domains. It appears identically in atomic spectroscopy, electron kinematics, nuclear geometry, stellar spectroscopy, celestial orbital mechanics and galaxy dynamics. All orbited bodies have a kinematic value that can be derived using **ϟ = c√(R/r) / v**. For example, the Hydrogen atom and its properties can all be derived using the three most precisely measured atomic quantities in physics: the proton boundary radius (R), the Bohr radius (r), and the velocity of the electron in its ground state. This is the second-smallest domain we have applied it to so far, producing ϟ = 137.035999084 and an excitation chain that recovers Keplerian orbital mechanics.
 
 When applied to the internal orbital track — i.e. toward the proton from Bohr's radius where r < R — ϟ will equal 1 when v = c:
 
@@ -94,7 +94,7 @@ This is Koppa, the lightspeed boundary of an orbited body, the position where th
 
 This kinematic ratio cannot be called *k* without causing confusion in every field it touches. We propose the name **koppa** and the symbol **ϟ** (Unicode U+03DF) for all c/v calculations where ϟ > 1, and **Koppa** **Ϟ** (Unicode U+03DE) for the c-boundary radius where ϟ = 1, after the archaic Greek letters that once occupied the position between π and ρ in the alphabet.
 
-The reasons for formally requesting the exclusive use of this symbol and name are inextricably linked to the broad application and importance of this kinematic ratio in every field we have so far applied it to, and the fact that this same scalable value has been derived from seven independent physical systems, each formula arriving at the same value for ϟ from a different measurement, within error tolerance of the mean.
+The reasons for formally requesting the exclusive use of this symbol and name are inextricably linked to the broad application and importance of this kinematic ratio in every field we have so far applied it to, and the fact that this same scalable value has been derived from seven physical systems (not independent — all algebraically coupled through ϟ), each formula arriving at the same value for ϟ from a different measurement, within error tolerance of the mean.
 
 ---
 
@@ -316,7 +316,7 @@ $$\vec{a}_j = \sum_{i \neq j} \frac{c^2 R_i}{\text{ϟ}_i^2} \cdot \frac{\vec{r}_
 
 The trajectory of every body in the system is determined entirely by the set of (ϟ, R, $\vec{r}$) triplets. The gravitational constant G and the concept of mass do not enter the integration. A three-body trajectory requires exactly the same information it always did — initial positions and velocities — but the source strength of each body is specified by two observables (ϟ, R) rather than one unobservable (M) multiplied by a poorly-measured constant (G).
 
-The practical consequence: any N-body integrator can be reformulated in koppa terms by replacing every occurrence of $GM_i$ with $c^2 R_i / \text{ϟ}_i^2$. The dynamics are identical because the substitution is algebraic, but the input precision improves to 11 decimal places because ϟ and R are measured directly, not extracted from GM. The current method is less accurate because M is inferred through G, which can only be held to four decimal places, or 22 ppm.
+The practical consequence: any N-body integrator can be reformulated in koppa terms by replacing every occurrence of $GM_i$ with $c^2 R_i / \text{ϟ}_i^2$. The dynamics are identical because the substitution is algebraic, but precision is bounded by the measured μ = GM.
 
 ---
 
@@ -475,7 +475,7 @@ The coupling is now expressed entirely in terms of observables. Since $GM = c^2 
 
 $$G = \frac{3c^2}{4\pi\, \text{ϟ}^2 R^2 \bar{\rho}} \qquad \Rightarrow \qquad \frac{8\pi G}{c^4} = \frac{6}{\text{ϟ}^2 c^2 R^2 \bar{\rho}}$$
 
-**Differentiation:** We have now shown that the fitted coupling constant G — the least precise fundamental constant in physics — is replaced by a combination of four directly measurable quantities: ϟ (orbital kinematics), R (geometry), c (defined), and $\bar{\rho}$ (material density, measurable in any laboratory without reference to the gravitational constant). G is not eliminated; it is revealed as a derived quantity, not an independent input.
+**Differentiation:** We have now shown that the fitted coupling constant G — the least precise fundamental constant in physics — is replaced by a combination of four directly measurable quantities: ϟ (orbital kinematics), R (geometry), c (defined), and $\bar{\rho}$ (material density, for laboratory bodies; stellar mean densities themselves derive from GM). G is not eliminated; it is revealed as a derived quantity, not an independent input.
 
 ---
 
@@ -635,7 +635,7 @@ The following table summarises the remaining ionisation events across 44 isoelec
 | Isoelectronic sequences | 44 |
 | Koppa ϟ | **0.5464 ± 0.0000 (invariant)** |
 
-Zero spread. From hydrogen to lead. The proton's kinematic ratio ϟ = 0.5464 is not a property of any particular atom. It is a property of the proton itself — the single descriptor from which every ionisation energy in the periodic table is extracted via the same two-parameter formula $(Z_{\text{eff}}, n)$ that describes planetary orbits via $(R, r)$.
+Zero spread. From hydrogen to lead. (Zero spread is guaranteed: the quantity is an algebraic identity, as §L553 states — the table displays consistency, not measurement.) The proton's kinematic ratio ϟ = 0.5464 is not a property of any particular atom. It is a property of the proton itself — the single descriptor from which every ionisation energy in the periodic table is extracted via the same two-parameter formula $(Z_{\text{eff}}, n)$ that describes planetary orbits via $(R, r)$.
 
 ### 10.2 The Reverse Track: Inward to the Speed of Light
 

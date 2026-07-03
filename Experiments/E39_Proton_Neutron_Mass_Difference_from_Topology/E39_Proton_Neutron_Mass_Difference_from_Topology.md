@@ -1,3 +1,9 @@
+> **⮑ SPEC LINKED — investigation spec written, NOT yet run.**
+> Methodology spec exists at `Investigations/05_Nuclear_Physics/NP14_Proton_Neutron_Mass_Difference` (PROMPT only — no verdict, no result). This experiment remains an OPEN falsifiable prediction.
+> The specification below is the falsifiable prediction.
+
+---
+
 # E39: Proton-Neutron Mass Difference from Topology
 
 > **Category**: Nuclear Physics

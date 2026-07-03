@@ -1,3 +1,9 @@
+> **⮑ SPEC LINKED — investigation spec written, NOT yet run.**
+> Methodology spec exists at `Investigations/09_Stellar_Astrophysics_and_Radiation/SAR04_Stellar_Main_Sequence_k_Gradient` (PROMPT only — no verdict, no result). This experiment remains an OPEN falsifiable prediction.
+> The specification below is the falsifiable prediction.
+
+---
+
 # E65: Stellar Main Sequence from k-Gradient Equilibrium
 
 > **Category**: Stellar Physics

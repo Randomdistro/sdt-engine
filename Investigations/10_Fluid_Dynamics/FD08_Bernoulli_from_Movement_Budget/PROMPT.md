@@ -1,8 +1,20 @@
 # FD08 — Bernoulli from the Movement Budget (convergence-pressure conservation along a streamline)
 
-**Domain**: Fluid Dynamics (SDT lattice mechanics)
-**Status**: SPEC
-**Author**: James Christopher Tyndall, Melbourne
+> **Author:** J. C. Harvey, Melbourne. **Status:** SPEC (upgrade 2026-06-27).
+> **Inherits:** `PERFECT_PROMPT_TEMPLATE.md` §⓪–§⑩ · `PROMPT_EXECUTION_PROTOCOL.md` · §0 anti-creep (R0–R5).
+> **Engine:** `#include <sdt/laws.hpp>` only — no local constant namespaces.
+> **Run:** Pre-commit thresholds in `RUN_LOG.md` before coding; adjust per pivot table (§⑩).
+---
+
+## ⓪ The Golden Rule — five questions (answered, not stubbed)
+
+1. **What don't we know?** — Is Bernoulli's `½ρv² + P + ρgz = const` an independent axiom, or does it fall out of the FD01 momentum balance integrated along a streamline as a **budget partition** — directed head vs isotropic static push drawing on one conserved convergence-pressure ledger (the continuum image of Law V's `v_circ² + v² = c²`)?
+2. **Why does it matter?** — Bernoulli is the most-cited fluid invariant; if it is Law V at continuum scale, the pressure–velocity trade *sign* is forced (`dP/dv = −ρv < 0`) and incompressible flow becomes the `M→0` corner of one ceiling-capped budget. It supplies the streamline pressure field to FD07 (lift) and the stagnation relation to FD09 (drag). This is a **genuine native-derivation candidate**.
+3. **How will we find out?** — Five gated phases (§④): integrate the steady inviscid FD01 balance along `s` (P1) and show the budget identity + forced sign (P2, core gate) before touching Venturi/Pitot; the `ρgz` head must be narrated purely via `g = v_surf²/R` (no G/M).
+4. **What would prove us wrong?** — §⑧, five falsifiers with real failure modes: a surplus/missing leading-order term; the wrong trade sign (`dP/dv > 0`); Venturi/Pitot off; the incompressible form not recovered as `M→0`; or the `ρgz` head obtainable only via G/M (R0 violation).
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN), per phase, no repainting a fired test.
+
+**Domain**: Fluid Dynamics (SDT lattice mechanics) · **Status**: SPEC · **Author**: J. C. Harvey, Melbourne
 
 *This investigation inherits the §0 anti-creep protocol and rules R0–R5 verbatim (whitelist inputs only; no G/M/GM as fundamentals; no fields/wavefunctions/quarks/virtual-particles/ΛCDM/magnetons; certification labels on every result; translation test on every borrowed term; honesty over success; never repaint or fabricate — log OPEN.)*
 
@@ -151,4 +163,54 @@ Five phases, each gated. Run them in order; a failed checkpoint stops the chain 
 - **Gravity head guard.** The `ρgz` term MUST be computed from `g = v_surf²/R` (Law-bridge). Any `GM/R²` substitution is an automatic R0 violation — assert it cannot enter the code path; document the `g=v²/R` value used.
 - **Standalone compile.** `cl /std:c++20 /EHsc /O2 /I Engine/include fd08_bernoulli_budget.cpp` (MSVC) or `g++ -std=c++20 -IEngine/include fd08_bernoulli_budget.cpp -o fd08` (GCC/Clang). Include only `<sdt/laws.hpp>`; do not redefine any constant it exposes.
 - **Visualisation hints.** Plot `v(s)`, `P(s)`, and `B(s)` along the streamtube (B flat = pass); the `P`-vs-`v` curve showing the negative trade; and the `P₀/P`-vs-`M` compressible curve with the incompressible `1 + ½γM²` tangent at the origin.
-- **Author attribution:** James Christopher Tyndall, Melbourne. The standard-FD results (Bernoulli, Venturi, Pitot, compressible stagnation) are the CONVERGENCE targets to *reproduce*, never inputs to *borrow*.
+- **Author attribution:** J. C. Harvey, Melbourne. The standard-FD results (Bernoulli, Venturi, Pitot, compressible stagnation) are the CONVERGENCE targets to *reproduce*, never inputs to *borrow*.
+
+## 10. Questions This Opens *(generative — log new ones in `FD08_VERDICT.md`)*
+
+1. **Is the Bernoulli constant `B` literally the per-streamtube share of the convergence-pressure budget `P_conv`** — i.e. can `B` be expressed as a fraction of the ambient `P_conv ≈ 2.46×10⁴⁸ Pa`, making the "constant" a physically-counted ledger rather than an integration constant?
+2. **Does the `c`-ceiling on the budget (Law V) predict a measurable departure from incompressible Bernoulli before `M=1`** that differs from the standard `(1+(γ−1)/2·M²)` correction — an SDT-distinct compressibility signature?
+3. **Is the `ρgz` head expressed via `g = v_surf²/R` exactly equivalent to a depth term `z = ϟ/r`**, and does that reframing remove the need for any `g`-as-input at all, leaving the head as pure geometry?
+---
+
+## ⑩ Adaptive Execution Protocol
+
+> *It is a bad plan that cannot be altered.* Failures invoke **PIVOT / KILL / OPEN** — never RETRO-PASS or PLUG.
+> See `PROMPT_EXECUTION_PROTOCOL.md`.
+
+### Pre-Run Commitment Block (copy to `RUN_LOG.md` before coding)
+
+```markdown
+## Pre-Run Commitments — FD08
+- Prompt completion target: [A|B|C|D]
+- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- CALIBRATED budget: 0 in the streamline-integration chain (at most CALIBRATED(1) one fluid scale to *evaluate* Venturi/Pitot, documented)
+- Engine namespaces actually used: law_V (v_circ²+v²=c² budget, ceiling), law_I (P_conv static field), law_III (occlusion→∇P), law_IV (V_disp→ρ), bridge (g_surface=v²/R, koppa, depth z=ϟ/r for the head); c_s from FD05
+- Phase thresholds (committed before run):
+    P1 invariant closes with no surplus term, `ρgz` purely `g=v²/R` (no G/M) · P2 budget identity holds, `dP/dv = −ρv < 0` (kill if `dP/dv > 0`)
+    P3 Venturi `ΔP` and Pitot `P₀` match reference <1% · P4 compressible correction recovered, incompressible as `M→0`, budget bounded as `v→c` · P5 `B(s)` constant to machine precision
+- Forbidden retroactive changes: widen tolerances; plug targets; IDENTITY-PASS; local constant namespaces; **substitute `g = GM/R²` for the head term (R0 violation)**
+```
+
+### Pivot table (minimum — extend for this investigation)
+
+| Trigger (numeric) | PIVOT (first) | If pivot fails | Forbidden |
+|---------|---------------|----------------|-----------|
+| Phase 0 sanity check fails | Fix units/engine refs; verify `laws.hpp` symbols | STOP — report blocker | Fit to target |
+| P2 `dP/dv > 0` (sign inverted) | recheck the directed/isotropic budget partition | **KILL** (partition mis-mapped) | flip the sign as a tuning knob |
+| P1 surplus/missing leading-order term | re-project the FD01 Euler balance on `ŝ` | **KILL** (Bernoulli not the streamline integral) | drop the surplus term silently |
+| P4 budget unbounded as `v→c` | re-impose the Law-V ceiling in the expansion | **OPEN** the relativistic corner | ignore the ceiling break |
+| Rivals match but SDT doesn't beat | Label **DEGENERATE** honestly | — | Claim Class A |
+| Upstream dependency missing (FD01 Euler limit, FD05 `c_s`) | **DEFER** phase; cite dependency ID | — | Fake PASS |
+
+### Allowed adjustments
+
+- Finer numerics (mesh, ticks, bracket); phase splits (Na / Nb); filename fix via ADJ entry.
+- Alternative **native** routes already listed in §④ Strategy.
+
+### Disallowed adjustments
+
+- Post-hoc tolerance widening · coefficient plugs · `atomic::`/GM/G in any native chain · obtaining the `ρgz` head via `GM/R²`.
+
+---
+
+*FD08 · upgraded 2026-06-27 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*

@@ -1,7 +1,26 @@
 # TD08 — Fluctuation–Dissipation and Brownian Motion
 
-> **Author:** J.C. Harvey, Melbourne. **Status:** SPEC (seed, unstarted).
-> Inherits the §0 anti-creep protocol and rules R0–R5 verbatim.
+> **Author:** J. C. Harvey, Melbourne. **Status:** SPEC (upgrade 2026-06-27).
+> **Inherits:** `PERFECT_PROMPT_TEMPLATE.md` §⓪–§⑩ · `PROMPT_EXECUTION_PROTOCOL.md` · §0 anti-creep (R0–R5).
+> **Engine:** `#include <sdt/laws.hpp>` only — no local constant namespaces.
+> **Run:** Pre-commit thresholds in `RUN_LOG.md` before coding; adjust per pivot table (§⑩).
+---
+
+## ⓪ The Golden Rule — five questions (answer before Phase 0)
+
+1. **What don't we know?** — Do Brownian motion, the Einstein relation `D=µk_BT`, and the
+   fluctuation–dissipation theorem all follow from **one** relay statistic — the same disordered
+   tick-to-tick throughput that *drags* a moving body also *kicks* a resting one — so that noise and
+   friction are not two independent inputs but two faces of the relay bath, with their ratio fixed
+   natively?
+2. **Why does it matter?** — FDT is the deepest "two things are one" claim in transport. If SDT supplies
+   both the kick variance and the drag mobility from a single occlusion-momentum-flux, it earns
+   `D=µk_BT` with no separate noise normalisation — and closes the fluid suite (FD02 viscosity) against
+   the thermal suite via Stokes–Einstein.
+3. **How will we find out?** — Gated phases in §④; the Brownian walk and the drag response measured on
+   the *same* relay bath, then the FDT spectrum and the FD02 closure.
+4. **What would prove us wrong?** — §⑧ falsification tests with numeric triggers and real failure modes.
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN).
 
 ## Question
 
@@ -64,3 +83,64 @@ relay shot-noise, so their ratio is fixed.
 (occlusion kick). **Downstream:** colloid/diffusion modelling, noise floors in measurement, TD04
 (`D` and thermal diffusivity `α` are the same random-walk). **Related:** [[TD01]] (the bath is
 disordered throughput), FD09 (drag as occlusion cross-section — the dissipative half of this statistic).
+---
+
+## ⑩ Adaptive Execution Protocol
+
+> *It is a bad plan that cannot be altered.* Failures invoke **PIVOT / KILL / OPEN** — never RETRO-PASS or PLUG.
+> See `PROMPT_EXECUTION_PROTOCOL.md`.
+
+### Pre-Run Commitment Block (copy to `RUN_LOG.md` before coding)
+
+```markdown
+## Pre-Run Commitments — TD08
+- Prompt completion target: [A|B|C|D]
+- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- CALIBRATED budget: 0 in the FDT ratio (flag the relay correlation-time order-unity factor if needed)
+- Engine namespaces actually used: measured::k_B, TD02 (k_BT scale), TD03 (occlusion kick),
+    FD02 (ν / mobility — same relay momentum-flux)
+- Phase thresholds (committed before run):
+    P1 ⟨x²⟩=2Dt linear, VACF decays at relay correlation time · P2 D/(µk_BT)=1.00 ±2% at two temps
+    P3 S_F(ω)=2k_BT·Re[1/µ(ω)] holds at low ω · P4 Stokes–Einstein D=k_BT/(6πηR) agrees <10% vs FD02
+- Forbidden retroactive changes: normalise the noise to force D=µk_BT; widen tolerances; plug the FDT
+    ratio; IDENTITY-PASS; local constant namespaces
+```
+
+### Pivot table
+
+| Trigger (numeric) | PIVOT (first) | If pivot fails | Forbidden |
+|---|---|---|---|
+| P1 MSD not linear (`⟨x²⟩ ≁ 2Dt`) | check the per-tick kicks are uncorrelated; lengthen the run | **OPEN** anomalous diffusion | rescale to force linearity |
+| P2 `D/(µk_BT) ≠ 1` beyond ±2% | confirm kick variance and drag use the **same** bath statistic | **F** — noise and drag are independent ⇒ FDT not one relay statistic | normalise the noise to hit 1 |
+| P3 FDT spectrum off at low ω | check `µ(ω)` linear-response extraction | **OPEN** the spectrum | fit the prefactor to the FDT |
+| P4 Stokes–Einstein off `> 10%` vs FD02 | reconcile FD02's `η` provenance; check `R` definition | **OPEN** the fluid↔thermal closure | retune `η` to close |
+| Rivals match but SDT only reproduces | label **DEGENERATE** honestly | — | Claim Class A |
+| Upstream missing (FD02 `η` not ready) | **DEFER** P4; cite dependency ID | — | Fake PASS |
+
+### Allowed adjustments
+
+- Finer numerics (particle count, run length, frequency bins); phase splits (Na / Nb); filename fix via ADJ entry.
+- Alternative **native** routes already listed in §④ Strategy.
+
+### Disallowed adjustments
+
+- Normalising the noise to force `D=µk_BT` (the whole point is that the ratio is *fixed*, not fitted) ·
+  post-hoc tolerance widening · plugging the FDT ratio · `atomic::`/GM/G in the native chain.
+
+---
+
+## Questions This Opens *(generative — log new ones in `TD08_VERDICT.md`)*
+
+1. **Is `D=µk_BT` exact, or does the relay correlation time (`~t_P`-scaled) add a tiny native
+   correction at short times?** Standard FDT assumes a delta-correlated bath; the lattice has a finite
+   tick — is there a measurable sub-`t_P` departure?
+2. **Are TD04's `α`, FD02's `ν`, and TD08's `D` literally one `⅓ v_relay λ_mfp` with three prefactors?**
+   If so, heat, momentum, and mass diffusion are a single relay random-walk — a strong cross-suite
+   consistency test.
+3. **Does relay shot-noise set a fundamental measurement noise floor?** If every immersed body is kicked
+   by the bath, is there a native thermal-noise limit (Johnson–Nyquist analogue) derivable from the same
+   statistic, without borrowing circuit theory?
+
+---
+
+*TD08 · 10× upgrade 2026-06-29 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*

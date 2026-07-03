@@ -457,7 +457,7 @@ EC corrects it. The grammar creates the need and provides the fix.
 
 **→ Full analysis: [INVESTIGATION_13_Spectral_Anomalies.md](INVESTIGATION_13_Spectral_Anomalies.md)**
 
-### Nuclear charge radius: Be-7 is LARGER than Be-9
+### Nuclear boundary radius (conventionally "charge radius"): Be-7 is LARGER than Be-9
 
 R(⁷Be) = 2.646 ± 0.016 fm (measured at ISOLDE/CERN, 2009)
 R(⁹Be) = 2.519 ± 0.012 fm
@@ -475,7 +475,7 @@ geometric distortion.
 | ³P splitting = 0.794 eV | Hg | Z⁴ convergence coupling to electron gear sense |
 | 253.7 nm intercombination line | Hg | Convergence field scrambles gear-direction labels |
 | King plot nonlinearity | Yb, Ca, Ba | Nuclear deformation at closure boundaries |
-| Odd-even charge radius staggering | Hg | Unpaired neutrons distort scaffold geometry |
+| Odd-even boundary-radius staggering | Hg | Unpaired neutrons distort scaffold geometry |
 | Metastable electronic t½ ≪ EC t½ | All noble closures | EM gear flip ~50,000× faster than weak |
 
 ---

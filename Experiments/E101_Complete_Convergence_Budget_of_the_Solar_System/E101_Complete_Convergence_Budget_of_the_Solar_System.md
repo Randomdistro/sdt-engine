@@ -1,4 +1,10 @@
-# E10: Complete Convergence Budget of the Solar System
+> **⮑ SPEC LINKED — investigation spec written, NOT yet run.**
+> Methodology spec exists at `Investigations/06_Gravitation_and_Orbital_Mechanics/GOM12_Solar_System_Convergence_Budget` (PROMPT only — no verdict, no result). This experiment remains an OPEN falsifiable prediction.
+> The specification below is the falsifiable prediction.
+
+---
+
+# E101: Complete Convergence Budget of the Solar System
 
 > **Category**: Cosmology
 > **Difficulty**: MODERATE

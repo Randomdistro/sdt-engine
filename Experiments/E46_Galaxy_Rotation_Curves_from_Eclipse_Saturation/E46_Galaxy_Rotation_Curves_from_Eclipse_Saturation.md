@@ -1,3 +1,8 @@
+> **⮑ INVESTIGATED — resolved NEGATIVE (no verdict file).**
+> `Investigations/08_Galactic_Dynamics/GD05_Galaxy_Rotation_Curves/INVESTIGATION.md`: single-regime eclipse model FAILED real SPARC (RMS 66%); twin-regime M4 reaches 23.8% but rides a MOND-borrowed crossover (a₀ = cH₀/2π + 'simple' interpolation). Prediction remains OPEN on SDT-native terms.
+
+---
+
 # E46: Galaxy Rotation Curves from Eclipse Saturation
 
 > **Category**: Cosmology

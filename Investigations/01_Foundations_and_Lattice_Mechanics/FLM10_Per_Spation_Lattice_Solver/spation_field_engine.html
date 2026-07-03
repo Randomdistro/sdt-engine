@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SDT — Spation Field Engine (the 6π trefoil proton in a superfluid)</title>
+<style>
+  :root{ --copper:#b06a3a; }
+  html,body{ margin:0; height:100%; background:#07080c; overflow:hidden;
+    font-family:Inter,system-ui,Segoe UI,sans-serif; color:#e8e6e1; }
+  #app{ position:fixed; inset:0; }
+  #panel{ position:fixed; top:14px; left:14px; width:316px; max-height:92vh; overflow:auto;
+    background:rgba(16,17,22,.82); backdrop-filter:blur(6px); border:1px solid rgba(176,106,58,.45);
+    border-radius:12px; padding:14px 16px; font-size:12.5px; line-height:1.5; z-index:10; }
+  #panel h1{ font:600 14px/1.3 "Source Serif 4",Georgia,serif; margin:0 0 2px; color:#f0d8c4; }
+  #panel .sub{ color:#9aa0aa; font-size:11px; margin-bottom:10px; }
+  #panel h2{ font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--copper);
+    margin:12px 0 4px; border-bottom:1px solid rgba(176,106,58,.25); padding-bottom:3px; }
+  kbd{ background:#2a2c34; border:1px solid #44474f; border-bottom-width:2px; border-radius:4px;
+    padding:0 5px; font:600 11px/1.6 JetBrains Mono,ui-monospace,monospace; color:#f0d8c4; }
+  .row{ display:flex; align-items:center; justify-content:space-between; gap:8px; margin:6px 0; }
+  .row label{ color:#c8ccd2; }
+  input[type=range]{ width:118px; accent-color:var(--copper); }
+  button{ background:#2a2c34; color:#f0d8c4; border:1px solid #44474f; border-radius:7px;
+    padding:5px 9px; cursor:pointer; font:600 11.5px Inter; }
+  button:hover{ border-color:var(--copper); }
+  button.on{ background:var(--copper); color:#1c1109; border-color:var(--copper); }
+  .note{ color:#8a909a; font-size:10.5px; margin-top:10px; border-top:1px dashed #3a3d45; padding-top:8px; }
+  #fps{ position:fixed; top:14px; right:16px; font:600 11px JetBrains Mono,monospace; color:#7a808a; z-index:10; }
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="fps">—</div>
+<div id="panel">
+  <h1>Spation Field Engine — the Proton</h1>
+  <div class="sub">The 6π <b>(2,3) trefoil</b> moving and spinning through the spation superfluid. The field
+    makes way around the <i>knotted tube</i>; the convergence pulse flows <i>onto</i> it.</div>
+
+  <h2>Mouse</h2>  drag <kbd>L</kbd> orbit · drag <kbd>R</kbd> pan · <kbd>wheel</kbd> zoom
+  <h2>Fly the camera</h2>  <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> · <kbd>Q</kbd><kbd>E</kbd> down/up
+  <h2>Move the proton</h2>  <kbd>I</kbd><kbd>J</kbd><kbd>K</kbd><kbd>L</kbd> · <kbd>U</kbd><kbd>O</kbd> · <kbd>Space</kbd> auto-orbit
+
+  <h2>Field</h2>
+  <div class="row"><label>convergence pulse</label><button id="bPulse" class="on">ON</button></div>
+  <div class="row"><label>pulse speed</label><input id="sPulse" aria-label="pulse speed" type="range" min="0" max="4" step="0.05" value="1.1"></div>
+  <div class="row"><label>rotation ⇄ cord length</label><input id="sSpin" aria-label="rotation vs cord length" type="range" min="0" max="1.5" step="0.01" value="0.0"></div>
+  <div class="row"><label>haze opacity</label><input id="sOpac" aria-label="haze opacity" type="range" min="0.4" max="2.6" step="0.05" value="1.25"></div>
+  <div class="row"><label>dipole (bow-wave)</label><input id="sDip" aria-label="dipole strength" type="range" min="0" max="1.6" step="0.05" value="0.8"></div>
+  <div class="row"><label>field depth (peel)</label><input id="sShells" aria-label="field depth" type="range" min="2" max="20" step="1" value="20"></div>
+  <div class="row"><button id="bReset">reset view</button><button id="bSpin" class="on">auto-orbit</button></div>
+
+  <div class="note">
+    The proton is the <b>6π trefoil</b>: thread length = 6π·R_p = <b>15.85 fm</b>, chord width
+    <b>5.8×10⁻²⁰ m</b> — true aspect ≈ <b>273,000 : 1</b>, so the thread is thickened here to be seen at all.
+    Each frame every spation is pushed out of the nearest point on the thread by <kbd>d→√(d²+R²)</kbd>, so the
+    field parts around the knot and <b>closes behind</b> it as it moves — water. Colour-shells <b>hug the
+    thread</b>; the <b>pulse</b> drives them inward onto the proton (the convergence feeding the engine). The
+    <b>dipole</b> slider adds the leading-compression / trailing-rarefaction of the moving occluder = inertia.
+    <br><br>The <b>rotation ⇄ cord length</b> slider is an <b>exchange</b>: wind in rotation and the cord pays
+    out length — it spins faster and contracts. As it <b>spins to a blur</b> it pulls into the <b>donut</b> (the
+    trefoil's spun-fast average) with a <b>phased toroidal flow</b> (2 toroidal × 3 poloidal = the 6π winding);
+    the field then parts around the smooth torus instead of the thread.
+    <br><br>Field is a representative sampling (~15k spations).
+  </div>
+</div>
+
+<script type="importmap">
+{ "imports": {
+  "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+}}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+// ---------- parameters ----------------------------------------------------------------
+// The proton is the 6π trefoil: length = 6π·R_p = 15.85 fm, chord width = 5.8e-20 m
+// (true aspect ~273,000:1 — far too thin to draw, so the thread is thickened for visibility).
+const TREF_SCALE= 3.40;                // scales the rose r=sin(3θ/2) to ~±3.4 units
+const TUBE_VIS  = 0.050;               // thin visible thread radius (sacred-geometry look)
+const R_SMALL   = 0.10;                // spation radius
+const R_TUBE    = 0.40;                // radius the field is parted to, around the thread
+const SHELL_THK = 0.72;                // colour-shell thickness (distance from the thread)
+const N_SHELLS  = 14;
+const R_MAJ     = 2.05;                // donut major radius — the spun-fast average of the trefoil
+const R_MIN     = 0.95;                // donut tube (minor) radius
+const R_FIELD   = 16.0;                // radius of the fixed spation field
+const REST_GAP  = 0.85;
+const NK        = 80;                  // knot curve samples (denser for the thin thread)
+
+// ---------- renderer / scene / camera -------------------------------------------------
+const app=document.getElementById('app');
+const renderer=new THREE.WebGLRenderer({antialias:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2)); renderer.setSize(innerWidth,innerHeight);
+app.appendChild(renderer.domElement);
+const scene=new THREE.Scene(); scene.fog=new THREE.FogExp2(0x07080c,0.011);
+const camera=new THREE.PerspectiveCamera(55,innerWidth/innerHeight,0.1,1000); camera.position.set(0,8,32);
+const controls=new OrbitControls(camera,renderer.domElement);
+controls.enableDamping=true; controls.dampingFactor=0.08; controls.minDistance=3; controls.maxDistance=240;
+
+{ const g=new THREE.BufferGeometry(); const n=1400,p=new Float32Array(n*3);
+  for(let i=0;i<n;i++){ const r=140+Math.random()*340,t=Math.random()*6.283,ph=Math.acos(2*Math.random()-1);
+    p[i*3]=r*Math.sin(ph)*Math.cos(t); p[i*3+1]=r*Math.cos(ph); p[i*3+2]=r*Math.sin(ph)*Math.sin(t); }
+  g.setAttribute('position',new THREE.BufferAttribute(p,3));
+  scene.add(new THREE.Points(g,new THREE.PointsMaterial({color:0x33384a,size:0.7,sizeAttenuation:false}))); }
+
+// ---------- the proton: the 6π trefoil (standard trefoil curve, thin glowing thread) --
+const K_ROSE=1.5;     // r(θ)=sin(kθ), k = b/a = 3/2  (the proton rose — the b=3,a=2 cell)
+const Z_LAYER=0.32;   // top/bottom weave depth (the two layers), as a fraction of the rose radius
+const PT=(t,o)=>{ const th=t*4.0*Math.PI;    // θ over [0,4π] closes the 3/2 rose
+  const r=Math.sin(K_ROSE*th);
+  return (o||new THREE.Vector3()).set(
+    r*Math.cos(th), r*Math.sin(th), Z_LAYER*Math.sin(3.0*th)   // 6 interleaving petals, sharp centre
+  ).multiplyScalar(TREF_SCALE); };
+class TrefoilCurve extends THREE.Curve{ getPoint(t,o=new THREE.Vector3()){ return PT(t,o); } }
+const protonGeo=new THREE.TubeGeometry(new TrefoilCurve(), 520, TUBE_VIS, 12, true);
+protonGeo.rotateX(-Math.PI/2);               // stand the poloidal (pole) axis vertical
+const proton=new THREE.Mesh(protonGeo,
+  new THREE.MeshStandardMaterial({color:0x1a0f06, metalness:0.25, roughness:0.35,
+    emissive:0xff8a2c, emissiveIntensity:1.3, transparent:true, opacity:1.0}));
+scene.add(proton);
+
+// the DONUT — the spun-fast AVERAGE of the trefoil. Bulletproof: MeshBasicMaterial + a CanvasTexture whose
+// 2-toroidal × 3-poloidal helical bands ARE the 6π winding; scrolling the texture = the phased toroidal flow.
+// Additive blending so it glows and is unmissable. (No custom GLSL — cannot fail to compile.)
+const donutGeo=new THREE.TorusGeometry(R_MAJ, R_MIN, 30, 120);
+donutGeo.rotateX(-Math.PI/2);                // same standing pole axis as the trefoil
+const dCanvas=document.createElement('canvas'); dCanvas.width=256; dCanvas.height=64;
+const dctx=dCanvas.getContext('2d'); const dImg=dctx.createImageData(256,64);
+for(let y=0;y<64;y++)for(let x=0;x<256;x++){
+  const u=x/256, v=y/64;
+  const band=Math.sin((2.0*u + 3.0*v)*2*Math.PI);          // 2 around the ring × 3 around the tube = 6π
+  const g=0.30+0.70*Math.max(0,Math.min(1,(band+0.25)/0.9));
+  const i=(y*256+x)*4;
+  dImg.data[i]=255*(0.45+0.55*g); dImg.data[i+1]=255*(0.16+0.50*g); dImg.data[i+2]=255*(0.04+0.22*g); dImg.data[i+3]=255;
+}
+dctx.putImageData(dImg,0,0);
+const donutTex=new THREE.CanvasTexture(dCanvas); donutTex.wrapS=donutTex.wrapT=THREE.RepeatWrapping;
+const donutMat=new THREE.MeshBasicMaterial({ map:donutTex, transparent:true, opacity:0.0,
+  depthWrite:false, blending:THREE.AdditiveBlending });
+const donut=new THREE.Mesh(donutGeo, donutMat); donut.renderOrder=2; scene.add(donut);
+scene.add(new THREE.AmbientLight(0x556070,0.75));
+const kL=new THREE.DirectionalLight(0xffe6cc,1.1); kL.position.set(20,30,25); scene.add(kL);
+const rL=new THREE.DirectionalLight(0x6699ff,0.5); rL.position.set(-25,-10,-15); scene.add(rL);
+
+// sample the trefoil thread (local space) for the field-displacement nearest-point search
+const ROT=new THREE.Matrix4().makeRotationX(-Math.PI/2);
+const knotL=Array.from({length:NK},(_,i)=>PT(i/NK).applyMatrix4(ROT));   // match the standing geometry
+const knotW=Array.from({length:NK},()=>new THREE.Vector3());   // world-space, updated per frame
+
+// ---------- the FIXED spation field --------------------------------------------------
+function fib(n){ const out=[],ga=Math.PI*(3-Math.sqrt(5));
+  for(let i=0;i<n;i++){ const y=1-(i/Math.max(n-1,1))*2,r=Math.sqrt(Math.max(0,1-y*y)),th=ga*i;
+    out.push(new THREE.Vector3(Math.cos(th)*r,y,Math.sin(th)*r)); } return out; }
+const rest=[];
+for(let rr=1.0; rr<=R_FIELD; rr+=REST_GAP){
+  const count=Math.min(1700, Math.max(60, Math.round(7*rr*rr)));
+  for(const u of fib(count)) rest.push(u.multiplyScalar(rr));
+}
+const N=rest.length;
+
+const geo=new THREE.IcosahedronGeometry(R_SMALL*1.5, 0);   // 12-vert low-poly spation
+const m4=new THREE.Matrix4();
+const mat=new THREE.ShaderMaterial({
+  transparent:true, depthWrite:false, blending:THREE.NormalBlending,
+  uniforms:{
+    uKnot:{value:knotW}, uKnotC:{value:new THREE.Vector3()}, uVel:{value:new THREE.Vector3()},
+    uCamDir:{value:new THREE.Vector3(0,0,1)}, uPulse:{value:0}, uShells:{value:N_SHELLS},
+    uThk:{value:SHELL_THK}, uTube:{value:R_TUBE}, uOpac:{value:1.25}, uDip:{value:0.8}, uVis:{value:20.0},
+    uDonut:{value:0.0}, uRmaj:{value:R_MAJ}, uRmin:{value:R_MIN+0.35}
+  },
+  vertexShader:`
+    uniform vec3 uKnot[${NK}]; uniform vec3 uKnotC; uniform vec3 uVel; uniform vec3 uCamDir;
+    uniform float uPulse,uShells,uThk,uTube,uDip,uVis,uDonut,uRmaj,uRmin;
+    varying vec3 vCol; varying float vA; varying float vCull;
+    vec3 hsv(vec3 c){ vec4 K=vec4(1.,2./3.,1./3.,3.);
+      vec3 p=abs(fract(c.xxx+K.xyz)*6.-K.www); return c.z*mix(K.xxx,clamp(p-K.xxx,0.,1.),c.y); }
+    void main(){
+      vec3 r0=(instanceMatrix*vec4(0.,0.,0.,1.)).xyz;       // spation rest position (world)
+      vec3 dirC = normalize(r0-uKnotC); float sp=length(uVel); vec3 vd = sp>1e-4? uVel/sp : vec3(0.);
+      float fore=dot(dirC,vd);                              // +1 ahead of motion, -1 behind (the dipole)
+
+      // (A) thread displacement: part the field out of the nearest point on the trefoil
+      float d=1e9; vec3 Pn=uKnot[0];
+      for(int i=0;i<${NK};i++){ float dd=distance(r0,uKnot[i]); if(dd<d){ d=dd; Pn=uKnot[i]; } }
+      vec3 dir=(d>1e-4)?(r0-Pn)/d:vec3(0.,1.,0.);
+      float Tube=uTube*(1.0+uDip*0.12*fore*min(sp,1.2));
+      float ndA=sqrt(d*d+Tube*Tube); vec3 ncA=Pn+dir*ndA; float distA=ndA-uTube;
+
+      // (B) donut displacement: part the field out of the smooth spun-average torus (axis = up)
+      vec3 pl=r0-uKnotC; float rho=length(pl.xz);
+      vec3 rad=(rho>1e-4)?vec3(pl.x,0.,pl.z)/rho:vec3(1.,0.,0.);
+      vec3 core=uKnotC+rad*uRmaj; float dT=distance(r0,core);
+      vec3 dirT=(dT>1e-4)?(r0-core)/dT:vec3(0.,1.,0.);
+      float Rmin=uRmin*(1.0+uDip*0.12*fore*min(sp,1.2));
+      float ndB=sqrt(dT*dT+Rmin*Rmin); vec3 ncB=core+dirT*ndB; float distB=ndB-uRmin;
+
+      // blend thread -> donut as the spin contracts it (uDonut)
+      vec3 nc=mix(ncA,ncB,uDonut); float distIn=mix(distA,distB,uDonut);
+      float shell=floor(distIn/uThk);
+      vCol=hsv(vec3(fract((shell+uPulse)/uShells),0.74,1.0));
+      float ct=dot(dirC, normalize(uCamDir));
+      vA=(0.25-0.15*abs(ct)) * (1.0 + uDip*0.55*fore*min(sp,1.2));
+      vCull=step(shell,uVis-0.5)*step(0.0,distIn+0.01);
+      gl_Position=projectionMatrix*modelViewMatrix*vec4(nc+position,1.0);   // modelMatrix=identity
+    }`,
+  fragmentShader:`
+    uniform float uOpac; varying vec3 vCol; varying float vA; varying float vCull;
+    void main(){ if(vCull<0.5) discard; gl_FragColor=vec4(vCol, clamp(vA*uOpac,0.0,1.0)); }`
+});
+const field=new THREE.InstancedMesh(geo,mat,N);
+rest.forEach((o,i)=>{ m4.makeTranslation(o.x,o.y,o.z); field.setMatrixAt(i,m4); });
+field.instanceMatrix.needsUpdate=true; field.frustumCulled=false; scene.add(field);
+
+// ---------- keyboard ------------------------------------------------------------------
+const keys={};
+addEventListener('keydown',e=>{ keys[e.code]=true;
+  if(e.code==='Space'){ orbit=!orbit; sync(); e.preventDefault(); } if(e.code==='KeyP'){ pulseOn=!pulseOn; sync(); } });
+addEventListener('keyup',e=>{ keys[e.code]=false; });
+function flyCam(dt){ const s=18*dt,f=new THREE.Vector3(); camera.getWorldDirection(f);
+  const rt=new THREE.Vector3().crossVectors(f,camera.up).normalize(),mv=new THREE.Vector3();
+  if(keys['KeyW'])mv.add(f); if(keys['KeyS'])mv.sub(f); if(keys['KeyD'])mv.add(rt); if(keys['KeyA'])mv.sub(rt);
+  if(keys['KeyE'])mv.y+=1; if(keys['KeyQ'])mv.y-=1;
+  if(mv.lengthSq()>0){ mv.normalize().multiplyScalar(s); camera.position.add(mv); controls.target.add(mv); } }
+function moveProton(dt){ const s=9*dt,mv=new THREE.Vector3();
+  if(keys['KeyI'])mv.z-=1; if(keys['KeyK'])mv.z+=1; if(keys['KeyJ'])mv.x-=1; if(keys['KeyL'])mv.x+=1;
+  if(keys['KeyU'])mv.y-=1; if(keys['KeyO'])mv.y+=1;
+  if(mv.lengthSq()>0){ orbit=false; sync(); proton.position.add(mv.normalize().multiplyScalar(s)); } }
+
+// ---------- UI ------------------------------------------------------------------------
+let pulseOn=true, orbit=true, pulseSpeed=1.1, spinRate=0.0;
+const smoothstep=(a,b,x)=>{ const t=Math.min(1,Math.max(0,(x-a)/(b-a))); return t*t*(3-2*t); };
+const bP=document.getElementById('bPulse'),bS=document.getElementById('bSpin');
+function sync(){ bP.classList.toggle('on',pulseOn); bP.textContent=pulseOn?'ON':'OFF'; bS.classList.toggle('on',orbit); }
+bP.onclick=()=>{pulseOn=!pulseOn;sync();}; bS.onclick=()=>{orbit=!orbit;sync();};
+document.getElementById('sPulse').oninput=e=>pulseSpeed=+e.target.value;
+document.getElementById('sSpin').oninput =e=>spinRate=+e.target.value;
+document.getElementById('sOpac').oninput =e=>mat.uniforms.uOpac.value=+e.target.value;
+document.getElementById('sDip').oninput  =e=>mat.uniforms.uDip.value=+e.target.value;
+document.getElementById('sShells').oninput=e=>mat.uniforms.uVis.value=+e.target.value;
+document.getElementById('bReset').onclick=()=>{ camera.position.set(0,8,32); controls.target.set(0,0,0); };
+
+// ---------- loop ----------------------------------------------------------------------
+const clock=new THREE.Clock(); let pulse=0,t0=performance.now(),frames=0;
+const prev=new THREE.Vector3(), vel=new THREE.Vector3(); const fpsEl=document.getElementById('fps');
+function tick(){
+  const dt=Math.min(clock.getDelta(),0.05);
+  flyCam(dt); moveProton(dt);
+  if(orbit){ const a=clock.elapsedTime*0.5; proton.position.set(Math.cos(a)*6, Math.sin(a*0.8)*2.2, Math.sin(a)*6); }
+  // ROTATION <-> CORD LENGTH exchange: wind in rotation (q) and the cord pays out length (contracts);
+  // as it spins to a blur it pulls into the donut.
+  const q=spinRate;                                   // the slider = how much rotation is wound in
+  const b=smoothstep(0.15,1.00,q);                    // donut forms across the slider travel (not just the top)
+  const sCord=1.0-0.55*b;                             // the trefoil CORD pays in: shrinks + fades as it spins
+  proton.scale.setScalar(sCord);
+  proton.rotation.y += dt*q*6.0;                      // spins faster as q rises
+  proton.updateMatrixWorld();
+  for(let i=0;i<NK;i++) knotW[i].copy(knotL[i]).applyMatrix4(proton.matrixWorld);  // knot->world (incl. scale)
+  vel.copy(proton.position).sub(prev).multiplyScalar(dt>1e-4?1/dt:0); prev.copy(proton.position);
+  if(pulseOn) pulse+=dt*pulseSpeed;
+  // ...while the full-size DONUT (the spun-average ring) blooms in its place with phased toroidal flow
+  donut.position.copy(proton.position);               // donut stays FULL size — it is what the cord became
+  donutTex.offset.x -= dt*(0.05+q*0.30);              // scroll the bands = the phased toroidal flow
+  donutMat.opacity=b;
+  proton.material.opacity=1.0-0.95*b;
+  mat.uniforms.uDonut.value=b;                        // field crossfades thread -> full-size torus
+  mat.uniforms.uKnotC.value.copy(proton.position);
+  mat.uniforms.uVel.value.copy(vel);
+  mat.uniforms.uCamDir.value.copy(camera.position).sub(proton.position).normalize();
+  mat.uniforms.uPulse.value=pulse;
+  controls.update(); renderer.render(scene,camera);
+  frames++; const now=performance.now(); if(now-t0>500){ fpsEl.textContent=Math.round(frames*1000/(now-t0))+' fps · '+N.toLocaleString()+' spations · spin '+q.toFixed(2)+' → donut '+Math.round(b*100)+'%'; frames=0; t0=now; }
+  requestAnimationFrame(tick);
+}
+addEventListener('resize',()=>{ camera.aspect=innerWidth/innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth,innerHeight); });
+sync(); tick();
+</script>
+</body>
+</html>

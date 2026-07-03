@@ -92,6 +92,16 @@ table.data td.r{text-align:right;color:#28e0e6}
 #hero3d{display:block}
 .d3stack{position:relative;width:100%;height:24vw}
 .d3stack canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+#disk3d{z-index:22;cursor:grab;touch-action:none}
+#d6limb{position:absolute;top:3%;right:2%;width:38%;height:auto;z-index:24;pointer-events:none;
+  transform:translateX(125%);transition:transform .7s cubic-bezier(.2,.7,.2,1);
+  filter:drop-shadow(0 4px 16px rgba(0,0,0,.5))}
+#d6limb.in{transform:none}
+.transport{display:flex;align-items:center;gap:.6vw;margin-top:.9vw}
+.transport button{font-family:"JetBrains Mono",monospace;font-size:1vw;color:#28e0e6;background:rgba(40,224,230,.08);
+  border:1px solid var(--gridb);border-radius:.4vw;padding:.25vw .7vw;cursor:pointer;line-height:1}
+.transport button:hover{background:rgba(40,224,230,.18)}
+.transport input[type=range]{flex:1;height:.5vw;accent-color:#28e0e6;cursor:pointer}
 </style>
 </head>
 <body>
@@ -102,9 +112,9 @@ table.data td.r{text-align:right;color:#28e0e6}
   <section class="slide center">
     <canvas id="hero3d" style="position:absolute;inset:0;z-index:1"></canvas>
     <div style="position:absolute;left:5.5%;bottom:13%;z-index:5;text-align:left;max-width:52%">
-      <div class="kicker rise">Spatial Displacement Theory · experiment 06-Δ</div>
+      <div class="kicker rise">Spatial Displacement Theory · investigation GOM13</div>
       <h1 class="rise" style="font-size:7vw"><span class="cy glow">OCCLUSION</span>-ALTITUDE</h1>
-      <p class="sub rise" style="margin:1.4vw 0 0;font-size:1.5vw">Telling gravity from a shadow —<br>a balloon that watches the planet stop blocking the sky.</p>
+      <p class="sub rise" style="margin:1.4vw 0 0;font-size:1.5vw">A balloon-borne Cavendish experiment resolving occlusion gravity from<br>general relativity by the altitude dependence of the two-mass coupling.</p>
       <div class="rise mono" style="margin-top:2.2vw;color:#7d8aa8;font-size:1vw;letter-spacing:.2em">J. C. HARVEY · MELBOURNE</div>
     </div>
     <div class="foot"><span>OCCLUSION-ALTITUDE CAVENDISH</span><span class="num">01</span></div>
@@ -113,34 +123,34 @@ table.data td.r{text-align:right;color:#28e0e6}
   <!-- 2 · THE FORK -->
   <section class="slide">
     <div class="kicker rise">the question</div>
-    <h2 class="rise">Carry a Cavendish balance up.<br>Does the needle move?</h2>
+    <h2 class="rise">Transport a Cavendish balance to altitude.<br>Does the measured coupling change?</h2>
     <div class="row" style="margin-top:1vw">
       <div class="col center rise">
         <div class="pill rd" style="margin-bottom:1vw">General Relativity</div>
         <svg viewBox="0 0 460 260" id="g_flat"></svg>
-        <div class="cap">force between two lab masses = <span class="rd">G m₁m₂/d²</span> · altitude-flat to all orders</div>
+        <div class="cap">two-mass force = <span class="rd">G m₁m₂/d²</span> · independent of altitude to all orders</div>
       </div>
       <div class="col center rise">
         <div class="pill" style="margin-bottom:1vw;color:#62ff8f;border-color:rgba(98,255,143,.4)">Spatial Displacement</div>
         <svg viewBox="0 0 460 260" id="g_rise"></svg>
-        <div class="cap">gravity is a <span class="li">shadow</span> · climb, the shadow shrinks, the force <span class="li">grows as √(2h/R)</span></div>
+        <div class="cap">gravity is <span class="li">mutual occlusion</span> · the horizon depresses, recovered flux raises the coupling <span class="li">as √(2h/R)</span></div>
       </div>
     </div>
-    <div class="foot"><span>THE FORK · no free parameter on either side</span><span class="num">02</span></div>
+    <div class="foot"><span>THE FORK · zero free parameters on either branch</span><span class="num">02</span></div>
   </section>
 
   <!-- 3 · MECHANISM -->
   <section class="slide">
     <div class="kicker rise">mechanism</div>
-    <h2 class="rise">Gravity is two masses shadowing the sky-flux from each other.</h2>
+    <h2 class="rise">Gravity as mutual occlusion of the isotropic convergence flux.</h2>
     <div class="row">
       <div class="col rise">
         <svg viewBox="0 0 520 340" id="occl"></svg>
       </div>
       <div class="col rise">
-        <p class="lead">The lattice streams convergence flux inward from every direction. A mass <b class="cy">occludes</b> it — casts a shadow.</p>
-        <p class="lead" style="margin-top:1vw">Two masses each sit in the other's shadow, so each is pushed toward the other by the unblocked flux behind it.</p>
-        <p class="lead" style="margin-top:1vw"><b class="am">No pull. Blocked push.</b> The strength scales with how much flux is actually arriving.</p>
+        <p class="lead">The spation lattice carries convergence flux inward isotropically. A mass presents an <b class="cy">occlusion cross-section</b>, attenuating the flux transmitted through it.</p>
+        <p class="lead" style="margin-top:1vw">Each mass lies in the other's occlusion shadow; the unattenuated flux on the far side delivers a net push along the line of centres.</p>
+        <p class="lead" style="margin-top:1vw"><b class="am">A momentum imbalance, not an attraction.</b> Its magnitude scales with the incident flux actually reaching the apparatus.</p>
       </div>
     </div>
     <div class="foot"><span>OCCLUSION · Law III</span><span class="num">03</span></div>
@@ -149,14 +159,14 @@ table.data td.r{text-align:right;color:#28e0e6}
   <!-- 4 · EARTH SHADOW + DIP -->
   <section class="slide">
     <div class="kicker rise">the key geometry</div>
-    <h2 class="rise">The Earth blocks the lower sky. You stand in half-shadow.</h2>
+    <h2 class="rise">The planet occludes the lower hemisphere — a one-sided flux field.</h2>
     <div class="row">
       <div class="col rise"><svg viewBox="0 0 560 380" id="dip"></svg></div>
       <div class="col rise">
-        <p class="lead">At the surface the planet fills the lower hemisphere — half your incoming flux is gone.</p>
-        <p class="lead" style="margin-top:1vw">Climb, and the horizon dips by an angle</p>
+        <p class="lead">At the surface the planet subtends a full hemisphere; half of the incident convergence flux is occluded.</p>
+        <p class="lead" style="margin-top:1vw">With altitude the horizon depresses by the angle</p>
         <div class="eq" style="margin-top:.8vw">δ(h) = arccos( R / (R+h) )</div>
-        <p class="lead" style="margin-top:1vw">More clear sky returns. The flux recovers. <b class="li">Gravity's driver grows with altitude.</b></p>
+        <p class="lead" style="margin-top:1vw">Unoccluded sky is recovered and the incident flux increases, so <b class="li">the local coupling grows monotonically with altitude.</b></p>
       </div>
     </div>
     <div class="foot"><span>HORIZON DIP δ = arccos(R/(R+h))</span><span class="num">04</span></div>
@@ -165,7 +175,7 @@ table.data td.r{text-align:right;color:#28e0e6}
   <!-- 5 · PREDICTION CURVE -->
   <section class="slide">
     <div class="kicker rise">the prediction</div>
-    <h2 class="rise">The lab force climbs as <span class="li mono">√(2h/R)</span>. GR says it can't.</h2>
+    <h2 class="rise">The laboratory coupling rises as <span class="li mono">√(2h/R)</span>; GR predicts no altitude dependence.</h2>
     <div class="row">
       <div class="col rise" style="flex:1.4"><svg viewBox="0 0 640 360" id="g_force"></svg></div>
       <div class="col rise">
@@ -180,34 +190,42 @@ table.data td.r{text-align:right;color:#28e0e6}
         </table>
       </div>
     </div>
-    <div class="foot"><span>FORCE-vs-ALTITUDE · the headline number</span><span class="num">05</span></div>
+    <div class="foot"><span>FRACTIONAL FORCE INCREMENT vs ALTITUDE</span><span class="num">05</span></div>
   </section>
 
   <!-- 6 · THE DISK -->
   <section class="slide">
     <div class="kicker rise">the instrument</div>
-    <h2 class="rise">A Cavendish on a disk — four arms, one symmetry.</h2>
+    <h2 class="rise">A stack of five fixed-tilt torsion disks, each engaging when δ reaches its tilt.</h2>
     <div class="row">
-      <div class="col rise"><div class="d3wrap"><canvas id="disk3d"></canvas></div></div>
+      <div class="col rise"><div class="d3wrap"><canvas id="disk3d"></canvas><svg id="d6limb" viewBox="0 0 300 200"></svg></div>
+        <div class="transport">
+          <button id="d6play" title="play / pause">▶</button>
+          <button id="d6back" title="step down">◀◀</button>
+          <button id="d6fwd" title="step up">▶▶</button>
+          <input id="d6slider" type="range" min="0" max="1000" value="0">
+        </div>
+        <div class="cap" style="margin-top:.3vw">drag = rotate · scroll = zoom · slider = climb the altitude</div>
+      </div>
       <div class="col rise">
-        <p class="lead">Four <b class="am">lead bowls</b> and four ball-sets on a perspex disk. 4× the pull, and a symmetry that does the noise rejection in metal, not software:</p>
-        <p class="lead" style="margin-top:1vw">a shake hauls one arm up, pushes its partner down, the pair cancels — <b class="cy">common-mode killed by geometry</b>.</p>
-        <p class="lead" style="margin-top:1vw">The Earth-shadow is <b class="li">asymmetric</b> — it only darkens the one arm beneath the limb. So it survives the cancellation.</p>
+        <p class="lead">Five disks per stack, tilts fixed in increasing increments from horizontal. Lead test cups sit on the rims; the source masses are fixed on <b class="cy">four rigid rods</b> and remain stationary.</p>
+        <p class="lead" style="margin-top:.9vw">As altitude increases the horizon depression <b class="li">δ = arccos(R/(R+h))</b> grows. When δ exceeds a disk's tilt, that disk <b class="li">couples to its source masses and registers</b> — sequentially, from the base upward.</p>
+        <p class="lead" style="margin-top:.9vw">Four identical stacks at 90° azimuth provide passive <b class="am">common-mode rejection</b>; their slight phase offset yields a signature no linear acceleration or drift reproduces.</p>
       </div>
     </div>
-    <div class="foot"><span>4-ARM DISK · linear acceleration self-cancels</span><span class="num">06</span></div>
+    <div class="foot"><span>FOUR STACKS · cups connect as δ=arccos(R/(R+h)) clears each tilt</span><span class="num">06</span></div>
   </section>
 
   <!-- 7 · ARM vs LIMB -->
   <section class="slide">
-    <div class="kicker rise">the trick</div>
-    <h2 class="rise">GR keeps to the radial line. SDT lifts off — its sightlines slide along the limb.</h2>
+    <div class="kicker rise">orientation coupling</div>
+    <h2 class="rise">GR couples only to the radial direction; SDT couples to the receding horizon.</h2>
     <div class="row">
       <div class="col rise" style="flex:1.7"><svg viewBox="0 0 800 440" id="armlimb"></svg></div>
       <div class="col rise">
-        <p class="lead"><b class="rd">Red — GR.</b> Only the radial line, shared with the planet's centre, matters. Lifting off changes nothing.</p>
-        <p class="lead" style="margin-top:1vw"><b class="li">Green — SDT.</b> Lift off and the horizon recedes: the two sightlines stay anchored at the disk and their feet <b class="am">slide outward</b> along the limb. The dip δ on the gauge opens with altitude.</p>
-        <button id="playLimb" class="pill" style="margin-top:1.2vw;cursor:pointer;background:rgba(40,224,230,.08)">▶ lift off</button>
+        <p class="lead"><b class="rd">Red — GR.</b> The coupling depends only on the radial separation from the planet's centre; altitude leaves it unchanged.</p>
+        <p class="lead" style="margin-top:1vw"><b class="li">Green — SDT.</b> As the platform climbs — balloon to 40 km, then sounding rocket beyond 400 km — the horizon recedes and the tangent sightlines sweep <b class="am">outward</b> along the limb. The depression δ increases throughout the ascent.</p>
+        <button id="playLimb" class="pill" style="margin-top:1.2vw;cursor:pointer;background:rgba(40,224,230,.08)">▶ ascend</button>
       </div>
     </div>
     <div class="foot"><span>ARM vs LIMB · radial (GR) vs limb-coupled (SDT)</span><span class="num">07</span></div>
@@ -216,59 +234,59 @@ table.data td.r{text-align:right;color:#28e0e6}
   <!-- 8 · THE LADDER -->
   <section class="slide">
     <div class="kicker rise">the readout</div>
-    <h2 class="rise">A stack of tilts. They light up bottom-to-top as you climb.</h2>
+    <h2 class="rise">Fixed-tilt disks engage in sequence with altitude.</h2>
     <div class="row">
       <div class="col rise" style="flex:1.5"><svg viewBox="0 0 680 380" id="ladder"></svg></div>
       <div class="col rise">
         <div class="eq">h(θ) = R · ( sec θ − 1 )</div>
         <table class="data" style="margin-top:1vw">
-          <tr><th>disk</th><th style="text-align:right">wakes at</th></tr>
+          <tr><th>disk</th><th style="text-align:right">engages at</th></tr>
           <tr><td>1°</td><td class="r">0.97 km</td></tr>
           <tr><td>3°</td><td class="r">8.7 km · Everest</td></tr>
           <tr><td>5°</td><td class="r">24 km</td></tr>
           <tr><td>7°</td><td class="r">48 km · ceiling</td></tr>
           <tr><td>8°</td><td class="r am">63 km · rocket</td></tr>
         </table>
-        <button id="play" class="pill" style="margin-top:1.2vw;cursor:pointer;background:rgba(40,224,230,.08)">▶ run the climb</button>
+        <button id="play" class="pill" style="margin-top:1.2vw;cursor:pointer;background:rgba(40,224,230,.08)">▶ run ascent</button>
       </div>
     </div>
-    <div class="foot"><span>LIGHT-UP LADDER · disks switch on at R(secθ−1)</span><span class="num">08</span></div>
+    <div class="foot"><span>ENGAGEMENT LADDER · disks activate at h = R(sec θ − 1)</span><span class="num">08</span></div>
   </section>
 
   <!-- 9 · FORK VISUALISED -->
   <section class="slide">
     <div class="kicker rise">the discriminator</div>
-    <h2 class="rise">GR leaves the column dark. The shadow lights it from the floor.</h2>
+    <h2 class="rise">GR leaves the stack inert; occlusion engages it from the base.</h2>
     <div class="row center">
       <div class="col center rise">
         <div class="pill rd" style="margin-bottom:1vw">GR · altitude-flat</div>
         <div class="d3stack"><canvas id="stackGR3d"></canvas></div>
-        <div class="cap">boundary never moves · the dark disks stay dark</div>
+        <div class="cap">horizon fixed · no disk engages</div>
       </div>
       <div class="col center rise">
         <div class="pill" style="margin-bottom:1vw;color:#62ff8f;border-color:rgba(98,255,143,.4)">SDT · h = 40 km</div>
         <div class="d3stack"><canvas id="stackSDT3d"></canvas></div>
-        <div class="cap">lit bottom-to-top to δ(40 km)=6.4° · top stays dark</div>
+        <div class="cap">engaged from the base to δ(40 km)=6.4° · higher tilts inactive</div>
       </div>
       <div class="col rise">
-        <p class="lead"><b class="li">A real signal</b> lights the stack from the bottom and leaves the top dark.</p>
-        <p class="lead" style="margin-top:1vw"><b class="rd">A confound</b> lights all of it or none. Nothing fires disks in the <span class="mono">sec θ−1</span> sequence.</p>
+        <p class="lead"><b class="li">A genuine signal</b> engages the stack from the base and leaves the higher tilts inactive.</p>
+        <p class="lead" style="margin-top:1vw"><b class="rd">A systematic</b> acts on all disks or none; none reproduces the <span class="mono">R(sec θ−1)</span> engagement sequence.</p>
       </div>
     </div>
-    <div class="foot"><span>GR vs SDT · the sequence is the fingerprint</span><span class="num">09</span></div>
+    <div class="foot"><span>GR vs SDT · the engagement sequence is the signature</span><span class="num">09</span></div>
   </section>
 
   <!-- 10 · THE LOCK -->
   <section class="slide">
     <div class="kicker rise">the lock</div>
-    <h2 class="rise">A force ratio and an angle — the same number, to under 1%.</h2>
+    <h2 class="rise">Two independent observables — a force ratio and an angle — coincide to &lt;1%.</h2>
     <div class="row">
       <div class="col rise" style="flex:1.4"><svg viewBox="0 0 640 360" id="g_lock"></svg></div>
       <div class="col rise">
         <div class="eq" style="font-size:1.7vw">ΔF/F = sin( β )</div>
-        <p class="lead" style="margin-top:1.2vw">Measure the <b class="cy">force rise</b> (a pure number) and the <b class="am">tilt budget</b> (an angle in radians) two different ways.</p>
-        <p class="lead" style="margin-top:1vw">SDT predicts they are <b class="li">the same value</b> at every altitude.</p>
-        <p class="lead" style="margin-top:1vw">No systematic raises a force by 11% <i>and</i> opens an orientation cone by 0.11 rad in lockstep.</p>
+        <p class="lead" style="margin-top:1.2vw">The <b class="cy">fractional force increment</b> (dimensionless) and the <b class="am">orientation budget</b> (an angle, in radians) are measured independently.</p>
+        <p class="lead" style="margin-top:1vw">SDT requires them <b class="li">equal at every altitude</b>: ΔF/F = sin β.</p>
+        <p class="lead" style="margin-top:1vw">No systematic raises the force by 11% <i>while</i> opening the orientation cone by 0.11 rad in lockstep.</p>
       </div>
     </div>
     <div class="foot"><span>THE LOCK · two observables, one curve</span><span class="num">10</span></div>
@@ -277,16 +295,16 @@ table.data td.r{text-align:right;color:#28e0e6}
   <!-- 11 · NOISE -->
   <section class="slide">
     <div class="kicker rise">acceleration drag</div>
-    <h2 class="rise">Beat the shaking with metal, not electronics.</h2>
+    <h2 class="rise">Reject platform acceleration mechanically, not in software.</h2>
     <div class="row">
       <div class="col rise"><svg viewBox="0 0 460 400" id="gimbal"></svg></div>
       <div class="col rise">
         <ul class="clean">
-          <li><b>4-arm symmetry</b> — uniform drag cancels: one up, one down, left/right equalise.</li>
-          <li><b>Gimbal &amp; self-righting bell</b> — pitch lifts the centre of mass, gravity penalises it, the stack stays vertical to ≪1°.</li>
-          <li><b>Carousel modulation</b> — push the signal to a quiet band; lock-in throws the rest away.</li>
-          <li><b>Measure on the descent</b> — slow, controlled, signal disappearing cleanly.</li>
-          <li><b>Hysteresis null</b> — each disk must go dark on the way down at the <i>same</i> altitude it lit on the way up. Up = down, or it's a lie.</li>
+          <li><b>Four-arm symmetry</b> — uniform acceleration cancels: opposing arms balance to first order.</li>
+          <li><b>Gimbal &amp; self-righting bell</b> — any pitch raises the centre of mass against gravity, restoring vertical to ≪1°.</li>
+          <li><b>Carousel modulation</b> — the signal is encoded at a known rotation frequency and recovered by lock-in detection.</li>
+          <li><b>Descent measurement</b> — a slow, controlled return with the signal decreasing reproducibly.</li>
+          <li><b>Hysteresis null</b> — each disk must disengage on descent at the altitude it engaged on ascent; the two must agree.</li>
         </ul>
       </div>
     </div>
@@ -296,14 +314,14 @@ table.data td.r{text-align:right;color:#28e0e6}
   <!-- 12 · CASCADE BALLOON -->
   <section class="slide">
     <div class="kicker rise">the platform</div>
-    <h2 class="rise">Don't burst — cascade. Four balloons become sixteen.</h2>
+    <h2 class="rise">Staged expansion rather than burst — a cascading balloon manifold.</h2>
     <div class="row">
       <div class="col rise"><svg viewBox="0 0 520 380" id="cascade"></svg></div>
       <div class="col rise">
-        <p class="lead">A pinch-valve manifold: when the primary reaches its stretch limit, the thinning air <b class="cy">prises the next valve open</b> and helium floods the next chamber.</p>
+        <p class="lead">A pinch-valve manifold: as the primary envelope reaches its elastic limit, the falling ambient pressure <b class="cy">opens the next valve</b> and helium fills the subsequent chamber.</p>
         <div class="eq" style="margin-top:1vw">h_float = H · ln( ρ₀ V / m_total )</div>
-        <p class="lead" style="margin-top:1vw">Each stage multiplies the volume and lifts the float ceiling. Honest terminus <b class="am">~50 km</b> — deep in the divergence zone, <span class="li">ΔF/F ≈ +12.5%</span> and still climbing.</p>
-        <p class="lead" style="margin-top:1vw">Each stage is a quiet <b>neutral-buoyancy station</b> — a ladder of floats at the altitudes the disks fire.</p>
+        <p class="lead" style="margin-top:1vw">Each stage increases the displaced volume and raises the float ceiling. Realistic terminus <b class="am">≈ 50 km</b>, where <span class="li">ΔF/F ≈ +12.5%</span> and rising.</p>
+        <p class="lead" style="margin-top:1vw">Each stage is a <b>neutral-buoyancy station</b>, providing dwell points at the altitudes where successive disks engage.</p>
       </div>
     </div>
     <div class="foot"><span>HARVEY STAGED-EXPANSION CASCADE</span><span class="num">12</span></div>
@@ -312,44 +330,44 @@ table.data td.r{text-align:right;color:#28e0e6}
   <!-- 13 · FLIGHT PROFILE -->
   <section class="slide">
     <div class="kicker rise">flight profile</div>
-    <h2 class="rise">Climb · float · bob · then the microgravity coast.</h2>
+    <h2 class="rise">Ascent · float · modulated descent · microgravity coast.</h2>
     <div class="col rise" style="flex:1;display:flex;align-items:center"><svg viewBox="0 0 1100 360" id="profile"></svg></div>
     <div class="row" style="flex:0">
-      <div class="col rise"><p class="lead"><b class="cy">Balloon</b> · step-climb through the disk ladder, dwell at each float, bob on descent for the hysteresis null. Ceiling ~50 km.</p></div>
-      <div class="col rise"><p class="lead"><b class="am">Sounding rocket</b> · 5–15 min of <b class="li">free-fall</b> at apogee — acceleration drag deleted, the whole stack lit, ΔF/F into the tens of percent.</p></div>
+      <div class="col rise"><p class="lead"><b class="cy">Balloon</b> · stepped ascent through the engagement ladder, dwell at each float, modulated descent for the hysteresis null. Ceiling ≈ 50 km.</p></div>
+      <div class="col rise"><p class="lead"><b class="am">Sounding rocket</b> · 5–15 min of <b class="li">free fall</b> near apogee — platform acceleration eliminated, the full stack engaged, ΔF/F in the tens of percent.</p></div>
     </div>
-    <div class="foot"><span>PROFILE · noise smallest and signal largest both live up high</span><span class="num">13</span></div>
+    <div class="foot"><span>PROFILE · minimum noise and maximum signal coincide at altitude</span><span class="num">13</span></div>
   </section>
 
   <!-- 14 · VERDICT GATES -->
   <section class="slide">
     <div class="kicker rise">what decides it</div>
-    <h2 class="rise">Three things must be true at once. Or GR wins clean.</h2>
+    <h2 class="rise">Three criteria must hold jointly; otherwise the result favours GR.</h2>
     <div class="row center">
       <div class="col center rise">
         <svg viewBox="0 0 200 200" class="glow cy"><circle cx="100" cy="100" r="80" fill="none" stroke="currentColor" stroke-width="3" opacity=".5"/><text x="100" y="116" text-anchor="middle" font-family="Chakra Petch" font-size="64" fill="currentColor">↑</text></svg>
-        <div class="cap">lights <b class="cy">bottom-to-top</b> along sec θ−1</div>
+        <div class="cap">engages <b class="cy">base-upward</b> along R(sec θ−1)</div>
       </div>
       <div class="col center rise">
         <svg viewBox="0 0 200 200" class="glow am"><circle cx="100" cy="100" r="80" fill="none" stroke="currentColor" stroke-width="3" opacity=".5"/><text x="100" y="120" text-anchor="middle" font-family="Chakra Petch" font-size="56" fill="currentColor">∅</text></svg>
-        <div class="cap">over-angle disks <b class="am">stay dark</b></div>
+        <div class="cap">disks above current δ <b class="am">stay inactive</b></div>
       </div>
       <div class="col center rise">
         <svg viewBox="0 0 200 200" class="glow li"><circle cx="100" cy="100" r="80" fill="none" stroke="currentColor" stroke-width="3" opacity=".5"/><text x="100" y="120" text-anchor="middle" font-family="Chakra Petch" font-size="48" fill="currentColor">⇅</text></svg>
-        <div class="cap">up <b class="li">=</b> down (no hysteresis)</div>
+        <div class="cap">ascent <b class="li">=</b> descent (no hysteresis)</div>
       </div>
     </div>
-    <p class="sub rise" style="text-align:center;margin:1vw auto 0;font-size:1.2vw">A <span class="rd">flat, dark column through 40 km</span> falsifies the prediction outright — and that's the honesty: it <i>can</i> come back "Einstein was right."</p>
-    <div class="foot"><span>FALSIFICATION GATES</span><span class="num">14</span></div>
+    <p class="sub rise" style="text-align:center;margin:1vw auto 0;font-size:1.2vw">An <span class="rd">inert stack through 40 km</span> falsifies the prediction outright — the test is genuinely two-sided and may confirm general relativity.</p>
+    <div class="foot"><span>FALSIFICATION CRITERIA</span><span class="num">14</span></div>
   </section>
 
   <!-- 15 · CLOSE -->
   <section class="slide center">
-    <div class="kicker rise">the one sentence</div>
-    <h1 class="rise" style="font-size:3.4vw;line-height:1.15;max-width:24ch;margin:0 auto">
-      Carry a Cavendish up a column of air into vacuum.
-      <span class="dm">GR says the needle can't move.</span>
-      <span class="li glow">The shadow says it climbs.</span>
+    <div class="kicker rise">summary</div>
+    <h1 class="rise" style="font-size:3.1vw;line-height:1.18;max-width:32ch;margin:0 auto">
+      A Cavendish balance carried from sea level into near-vacuum.
+      <span class="dm">General relativity predicts an altitude-independent coupling.</span>
+      <span class="li glow">Occlusion predicts a measured rise of √(2h/R).</span>
     </h1>
     <div class="rise mono" style="margin-top:2.4vw;color:#7d8aa8;font-size:1vw;letter-spacing:.2em">OCCLUSION-ALTITUDE CAVENDISH · J. C. HARVEY</div>
     <div class="foot"><span>√(2h/R)</span><span class="num">15</span></div>
@@ -455,58 +473,65 @@ function build(){
     const t=mk('text',{x:c,y:c+5,'text-anchor':'middle','font-family':'JetBrains Mono','font-size':13,fill:'#7d8aa8'});t.textContent='carousel';s.appendChild(t);
   }
 
-  // 7 arm vs limb : tangent sightlines anchored at the green apex, feet slide along the curve + instruments
+  // 7 arm vs limb : flat horizon, two-phase climb (balloon 40km -> rocket 400km), TRUE arccos readout
   (function(){
     const s=document.getElementById('armlimb'); if(!s)return;
-    const Cx=380, Cy=620, ERd=320, Fy=300, topY=140;     // planet = circle radius ERd centred below
-    // planet arc (the slight blue curve we take tangents to)
-    let ad='M ';
-    for(let x=115;x<=645;x+=8){const y=Cy-Math.sqrt(ERd*ERd-(x-Cx)*(x-Cx)); ad+=x+' '+y.toFixed(1)+' L ';}
-    ad=ad.slice(0,-2);
-    s.appendChild(mk('path',{d:ad+' L 645 440 L 115 440 Z',fill:'rgba(22,64,118,.30)'}));
-    s.appendChild(mk('path',{d:ad,fill:'none',stroke:'#3aa0ff','stroke-width':2.5,filter:'drop-shadow(0 0 7px #3aa0ff)'}));
-    const pl=mk('text',{x:380,y:431,'text-anchor':'middle','font-family':'Chakra Petch','font-size':15,fill:'#3aa0ff',opacity:.8});pl.textContent='PLANET';s.appendChild(pl);
-    // radial line + red ball (GR)
-    s.appendChild(mk('line',{x1:Cx,y1:topY,x2:Cx,y2:300,stroke:'#ff5566','stroke-width':1.6,'stroke-dasharray':'4 6',opacity:.55}));
-    const rl=mk('text',{x:Cx+12,y:198,'font-family':'JetBrains Mono','font-size':12,fill:'#ff5566'});rl.textContent='radial (GR)';s.appendChild(rl);
-    s.appendChild(mk('circle',{cx:Cx,cy:228,r:13,fill:'#ff5566',filter:'drop-shadow(0 0 8px #ff5566)'}));
-    // HUD : dip-angle readout
-    s.appendChild(mk('rect',{x:24,y:22,width:150,height:56,rx:6,fill:'rgba(40,224,230,.05)',stroke:'rgba(40,224,230,.3)'}));
-    const a1=mk('text',{x:38,y:45,'font-family':'JetBrains Mono','font-size':12,fill:'#7d8aa8','letter-spacing':2});a1.textContent='DIP  δ';s.appendChild(a1);
-    const angv=mk('text',{x:38,y:70,'font-family':'JetBrains Mono','font-size':22,fill:'#ffb53d'});angv.textContent='0.00°';s.appendChild(angv);
-    const note=mk('text',{x:24,y:94,'font-family':'JetBrains Mono','font-size':10,fill:'#5a6a90'});note.textContent='δ = true arccos(R/(R+h)) · picture exaggerated';s.appendChild(note);
-    // stylised altimeter (right)
-    const aX=748, aT=140, aB=320;
-    s.appendChild(mk('rect',{x:aX-10,y:aT,width:20,height:aB-aT,rx:9,fill:'rgba(40,224,230,.05)',stroke:'rgba(40,224,230,.3)'}));
-    [[aB,'0'],[(aT+aB)/2,'25'],[aT,'50']].forEach(([y,l])=>{s.appendChild(mk('line',{x1:aX-15,y1:y,x2:aX-10,y2:y,stroke:'#7d8aa8'}));
-      const t=mk('text',{x:aX-19,y:y+4,'text-anchor':'end','font-family':'JetBrains Mono','font-size':11,fill:'#7d8aa8'});t.textContent=l;s.appendChild(t);});
-    const al=mk('text',{x:aX,y:aT-12,'text-anchor':'middle','font-family':'JetBrains Mono','font-size':11,fill:'#7d8aa8','letter-spacing':2});al.textContent='ALT km';s.appendChild(al);
-    const altFill=mk('rect',{x:aX-10,width:20,fill:'rgba(40,224,230,.4)'}); s.appendChild(altFill);
-    const altv=mk('text',{x:aX,y:aB+24,'text-anchor':'middle','font-family':'JetBrains Mono','font-size':18,fill:'#28e0e6'});altv.textContent='0 km';s.appendChild(altv);
+    const Cx=400;
+    const curveY=x=>384+8*Math.pow((x-400)/400,2);          // ~8px sag, convex-up "flat" horizon
+    const Yg0=380, Yg40=206, Yg400=48;                      // green-disk y at 0 / 40km / 400km
+    // planet (flat blue curve)
+    let ad='M 20 '+curveY(20).toFixed(1);
+    for(let x=44;x<=780;x+=12) ad+=' L '+x+' '+curveY(x).toFixed(1);
+    s.appendChild(mk('path',{d:ad+' L 780 440 L 20 440 Z',fill:'rgba(22,64,118,.28)'}));
+    s.appendChild(mk('path',{d:ad,fill:'none',stroke:'#3aa0ff','stroke-width':2.5,filter:'drop-shadow(0 0 6px #3aa0ff)'}));
+    const pl=mk('text',{x:400,y:432,'text-anchor':'middle','font-family':'Chakra Petch','font-size':14,fill:'#3aa0ff',opacity:.8});pl.textContent='PLANET';s.appendChild(pl);
+    // radial + red ball (GR)
+    s.appendChild(mk('line',{x1:Cx,y1:40,x2:Cx,y2:384,stroke:'#ff5566','stroke-width':1.6,'stroke-dasharray':'4 6',opacity:.5}));
+    const rl=mk('text',{x:Cx+12,y:300,'font-family':'JetBrains Mono','font-size':12,fill:'#ff5566'});rl.textContent='radial (GR)';s.appendChild(rl);
+    s.appendChild(mk('circle',{cx:Cx,cy:330,r:12,fill:'#ff5566',filter:'drop-shadow(0 0 8px #ff5566)'}));
+    // HUD readouts
+    s.appendChild(mk('rect',{x:22,y:20,width:188,height:80,rx:6,fill:'rgba(40,224,230,.05)',stroke:'rgba(40,224,230,.3)'}));
+    const altL=mk('text',{x:36,y:44,'font-family':'JetBrains Mono','font-size':11,fill:'#7d8aa8','letter-spacing':2});altL.textContent='ALT';s.appendChild(altL);
+    const altv=mk('text',{x:96,y:46,'font-family':'JetBrains Mono','font-size':18,fill:'#28e0e6'});altv.textContent='0 km';s.appendChild(altv);
+    const dipL=mk('text',{x:36,y:76,'font-family':'JetBrains Mono','font-size':11,fill:'#7d8aa8','letter-spacing':2});dipL.textContent='DIP δ';s.appendChild(dipL);
+    const angv=mk('text',{x:96,y:78,'font-family':'JetBrains Mono','font-size':18,fill:'#ffb53d'});angv.textContent='0.00°';s.appendChild(angv);
+    const note=mk('text',{x:22,y:116,'font-family':'JetBrains Mono','font-size':10,fill:'#5a6a90'});note.textContent='δ = true arccos(R/(R+h)) · picture schematic';s.appendChild(note);
+    // altimeter (broken scale 0 / 40 / 400 km)
+    const aX=764,t0=384,t40=206,t400=48;
+    s.appendChild(mk('line',{x1:aX,y1:t400,x2:aX,y2:t0,stroke:'rgba(40,224,230,.3)','stroke-width':2}));
+    [[t0,'0'],[t40,'40'],[t400,'400']].forEach(([y,l])=>{s.appendChild(mk('line',{x1:aX-7,y1:y,x2:aX,y2:y,stroke:'#7d8aa8'}));
+      const t=mk('text',{x:aX-11,y:y+4,'text-anchor':'end','font-family':'JetBrains Mono','font-size':11,fill:'#7d8aa8'});t.textContent=l;s.appendChild(t);});
+    const aU=mk('text',{x:aX,y:t400-10,'text-anchor':'middle','font-family':'JetBrains Mono','font-size':10,fill:'#7d8aa8'});aU.textContent='km';s.appendChild(aU);
+    const ind=mk('polygon',{fill:'#28e0e6'}); s.appendChild(ind);
     // dynamic (SDT)
-    const horiz=mk('line',{stroke:'#7d8aa8','stroke-width':1.3,'stroke-dasharray':'5 5',opacity:.45});
-    const arc=mk('path',{fill:'none',stroke:'#ffb53d','stroke-width':2.4});
+    const horiz=mk('line',{stroke:'#7d8aa8','stroke-width':1.2,'stroke-dasharray':'5 5',opacity:.4});
     const A=mk('line',{stroke:'#62ff8f','stroke-width':3,filter:'drop-shadow(0 0 6px #62ff8f)'});
     const B=mk('line',{stroke:'#62ff8f','stroke-width':3,filter:'drop-shadow(0 0 6px #62ff8f)'});
-    const cL=mk('circle',{r:6,fill:'#62ff8f'}), cR=mk('circle',{r:6,fill:'#62ff8f'});
-    const green=mk('circle',{r:13,fill:'#62ff8f',filter:'drop-shadow(0 0 9px #62ff8f)'});
-    const dl=mk('text',{'font-family':'JetBrains Mono','font-size':15,fill:'#ffb53d'});dl.textContent='δ';
-    [horiz,A,B,arc,cL,cR,green,dl].forEach(e=>s.appendChild(e));
-    function set(p){const e=1-Math.pow(1-p,2);
-      const Yo=Fy-(Fy-topY)*e, d=Cy-Yo, dv=Math.acos(Math.min(1,ERd/d));
-      const sx=ERd*Math.sin(dv), Ty=Cy-ERd*Math.cos(dv), TRx=Cx+sx, TLx=Cx-sx;
-      green.setAttribute('cx',Cx);green.setAttribute('cy',Yo);
-      A.setAttribute('x1',Cx);A.setAttribute('y1',Yo);A.setAttribute('x2',TRx.toFixed(1));A.setAttribute('y2',Ty.toFixed(1));
-      B.setAttribute('x1',Cx);B.setAttribute('y1',Yo);B.setAttribute('x2',TLx.toFixed(1));B.setAttribute('y2',Ty.toFixed(1));
-      cR.setAttribute('cx',TRx.toFixed(1));cR.setAttribute('cy',Ty.toFixed(1));cL.setAttribute('cx',TLx.toFixed(1));cL.setAttribute('cy',Ty.toFixed(1));
-      horiz.setAttribute('x1',Cx-150);horiz.setAttribute('y1',Yo);horiz.setAttribute('x2',Cx+150);horiz.setAttribute('y2',Yo);
-      const ang=Math.atan2(Ty-Yo,TRx-Cx),rr=46;
-      arc.setAttribute('d',`M ${Cx+rr} ${Yo} A ${rr} ${rr} 0 0 1 ${(Cx+Math.cos(ang)*rr).toFixed(1)} ${(Yo+Math.sin(ang)*rr).toFixed(1)}`);
-      dl.setAttribute('x',Cx+rr+6);dl.setAttribute('y',Yo+22);
-      const aY=aB-(aB-aT)*e; altFill.setAttribute('y',aY.toFixed(1)); altFill.setAttribute('height',(aB-aY).toFixed(1));
-      const hkm=50*e;                                  // stylised altitude 0..50 km
-      altv.textContent=Math.round(hkm)+' km';
-      angv.textContent=(Math.acos(R/(R+hkm))*R2D).toFixed(2)+'°';   // TRUE dip arccos(R/(R+h)); picture is exaggerated
+    const cL=mk('circle',{r:5,fill:'#62ff8f'}), cR=mk('circle',{r:5,fill:'#62ff8f'});
+    const balloon=mk('ellipse',{rx:21,ry:26,fill:'none',stroke:'#62ff8f','stroke-width':2});
+    const rocket=mk('path',{fill:'#dfe9ff'}); const flame=mk('path',{fill:'#ffb53d'});
+    const green=mk('circle',{r:12,fill:'#62ff8f',filter:'drop-shadow(0 0 9px #62ff8f)'});
+    [horiz,A,B,cL,cR,balloon,flame,rocket,green].forEach(e=>s.appendChild(e));
+    function set(p){
+      let alt,Yo,ph;
+      if(p<=0.5){ph=1; const q=1-Math.pow(1-p/0.5,2); alt=40*q; Yo=Yg0+(Yg40-Yg0)*q;}
+      else{ph=2; const q=1-Math.pow(1-(p-0.5)/0.5,2); alt=40+360*q; Yo=Yg40+(Yg400-Yg40)*q;}
+      green.setAttribute('cx',Cx);green.setAttribute('cy',Yo.toFixed(1));
+      const spread=80+p*310, fLx=Cx-spread, fRx=Cx+spread, fLy=curveY(Math.max(18,fLx)), fRy=curveY(Math.min(782,fRx));
+      A.setAttribute('x1',Cx);A.setAttribute('y1',Yo.toFixed(1));A.setAttribute('x2',fRx.toFixed(1));A.setAttribute('y2',fRy.toFixed(1));
+      B.setAttribute('x1',Cx);B.setAttribute('y1',Yo.toFixed(1));B.setAttribute('x2',fLx.toFixed(1));B.setAttribute('y2',fLy.toFixed(1));
+      cR.setAttribute('cx',fRx.toFixed(1));cR.setAttribute('cy',fRy.toFixed(1));cL.setAttribute('cx',fLx.toFixed(1));cL.setAttribute('cy',fLy.toFixed(1));
+      horiz.setAttribute('x1',Cx-120);horiz.setAttribute('y1',Yo.toFixed(1));horiz.setAttribute('x2',Cx+120);horiz.setAttribute('y2',Yo.toFixed(1));
+      // balloon (phase 1) -> rocket (phase 2)
+      balloon.setAttribute('cx',Cx);balloon.setAttribute('cy',(Yo-32).toFixed(1));balloon.setAttribute('opacity',ph===1?0.95:Math.max(0,0.95-(p-0.5)*8));
+      const ro=ph===2?Math.min(1,(p-0.5)*6):0;
+      rocket.setAttribute('opacity',ro);flame.setAttribute('opacity',ro);
+      rocket.setAttribute('d',`M ${Cx} ${(Yo-20).toFixed(1)} l 6 15 l -12 0 z`);
+      flame.setAttribute('d',`M ${Cx-4} ${(Yo+5).toFixed(1)} L ${Cx+4} ${(Yo+5).toFixed(1)} L ${Cx} ${(Yo+17).toFixed(1)} z`);
+      altv.textContent=Math.round(alt)+' km';
+      angv.textContent=(Math.acos(R/(R+alt))*R2D).toFixed(2)+'°';
+      const iy=Math.max(t400,Math.min(t0,Yo));
+      ind.setAttribute('points',`${aX-10},${iy.toFixed(1)} ${aX-3},${(iy-6).toFixed(1)} ${aX-3},${(iy+6).toFixed(1)}`);
     }
     set(0); window._limbSet=set;
   })();
@@ -603,7 +628,7 @@ function runLadder(){
 let limbAnim=null;
 function runLimb(){ if(!window._limbSet)return; cancelAnimationFrame(limbAnim);
   const t0=performance.now();
-  (function step(now){const p=Math.min(1,(now-t0)/2000); window._limbSet(p); if(p<1)limbAnim=requestAnimationFrame(step);})(t0);
+  (function step(now){const p=Math.min(1,(now-t0)/3800); window._limbSet(p); if(p<1)limbAnim=requestAnimationFrame(step);})(t0);
 }
 
 /* ---------- navigation ---------- */
@@ -614,6 +639,7 @@ function go(n){ i=Math.max(0,Math.min(slides.length-1,n));
   slides.forEach((s,k)=>s.classList.toggle('on',k===i));
   [...nav.children].forEach((b,k)=>b.classList.toggle('on',k===i));
   document.querySelector('#bar i').style.width=(100-100*(i)/(slides.length-1))+'%';
+  if(i===5 && typeof d6enter==='function') d6enter();
   if(i===6) setTimeout(runLimb,350);
   if(i===7) setTimeout(runLadder,400);
 }
@@ -629,31 +655,76 @@ document.getElementById('playLimb').onclick=runLimb;
 
 /* ---------- 3D scenes (Three.js) : the paddle-cross disk ---------- */
 function leadMat(lit){return new THREE.MeshStandardMaterial({color:0x33353c,metalness:.5,roughness:.5,side:THREE.DoubleSide,emissive:lit?0x0f3a20:0x000000,emissiveIntensity:lit?.9:0});}
-function makeDisk(lit){
+function makeDisk(lit,noBalls){
   const g=new THREE.Group(), Rd=1.5;
+  const spin=new THREE.Group(); g.add(spin); g.userData.spin=spin; g.userData.cups=[]; g.userData.rims=[];
   const disk=new THREE.Mesh(new THREE.CylinderGeometry(Rd,Rd,0.08,56),
     new THREE.MeshStandardMaterial({color:lit?0x123b2a:0x10243c,metalness:.1,roughness:.2,transparent:true,opacity:.34,emissive:lit?0x0a3d22:0x000000,emissiveIntensity:lit?.5:0}));
-  g.add(disk);
+  spin.add(disk);
   const rim=new THREE.Mesh(new THREE.TorusGeometry(Rd,0.022,8,64),new THREE.MeshBasicMaterial({color:lit?0x62ff8f:0x274058}));
-  rim.rotation.x=Math.PI/2; g.add(rim);
+  rim.rotation.x=Math.PI/2; spin.add(rim); g.userData.rims.push(rim);
+  const upY=new THREE.Vector3(0,1,0);
   for(let i=0;i<4;i++){
     const a=i*Math.PI/2, dir=new THREE.Vector3(Math.cos(a),0,Math.sin(a)), tang=new THREE.Vector3(-Math.sin(a),0,Math.cos(a));
-    // paddle arm extending past the rim
+    // paddle arm extending past the rim (twists with the disk)
     const arm=new THREE.Mesh(new THREE.BoxGeometry(1.05,0.05,0.12),new THREE.MeshStandardMaterial({color:0x2b2d33,metalness:.55,roughness:.5}));
-    arm.position.copy(dir).multiplyScalar(1.72); arm.rotation.y=-a; g.add(arm);
-    // lead bowl (open hemisphere, opening up) at the paddle end
-    const bowl=new THREE.Mesh(new THREE.SphereGeometry(0.26,24,12,0,Math.PI*2,Math.PI/2,Math.PI/2),leadMat(lit));
-    bowl.position.copy(dir).multiplyScalar(2.15); bowl.position.y=0.16; g.add(bowl);
-    // attractor ball offset tangentially beside the bowl
-    const ball=new THREE.Mesh(new THREE.SphereGeometry(0.2,24,16),new THREE.MeshStandardMaterial({color:0x9fb4d6,metalness:.9,roughness:.18}));
-    ball.position.copy(dir).multiplyScalar(2.15).add(tang.clone().multiplyScalar(0.62)); ball.position.y=0.18; g.add(ball);
+    arm.position.copy(dir).multiplyScalar(1.72); arm.rotation.y=-a; spin.add(arm);
+    // lead bowl — opening rotated to face TANGENTIALLY (one handedness around the rim), toward its ball
+    const bowl=new THREE.Mesh(new THREE.SphereGeometry(0.27,24,12,0,Math.PI*2,Math.PI/2,Math.PI/2),leadMat(lit));
+    bowl.position.copy(dir).multiplyScalar(2.18); bowl.position.y=0.16;
+    bowl.quaternion.setFromUnitVectors(upY,tang);                 // hemisphere opening (+Y) -> +tangent
+    spin.add(bowl); g.userData.cups.push(bowl);
+    if(!noBalls){ // per-disk ball on a short fixed rod (hero + slide-9 stacks)
+      const bp=dir.clone().multiplyScalar(2.18).add(tang.clone().multiplyScalar(0.40)); bp.y=0.16;
+      const ball=new THREE.Mesh(new THREE.SphereGeometry(0.19,24,16),new THREE.MeshStandardMaterial({color:0x9fb4d6,metalness:.9,roughness:.18}));
+      ball.position.copy(bp); g.add(ball);
+      const rod=new THREE.Mesh(new THREE.CylinderGeometry(0.022,0.022,1.15,8),new THREE.MeshStandardMaterial({color:0x5a6680,metalness:.6,roughness:.45}));
+      rod.position.copy(bp); rod.position.y-=0.64; g.add(rod);
+    }
   }
   const fib=new THREE.Mesh(new THREE.CylinderGeometry(0.012,0.012,2.6,6),new THREE.MeshBasicMaterial({color:0x28e0e6,transparent:true,opacity:.45}));
-  fib.position.y=1.35; g.add(fib);
+  fib.position.y=1.35; spin.add(fib);
   return g;
+}
+// recolour a disk to "engaged/lit" (green) or dark
+function setDiskLit(d,on){
+  d.userData.cups.forEach(c=>{c.material.emissive.setHex(on?0x0f3a20:0x000000);c.material.emissiveIntensity=on?.9:0;});
+  d.userData.rims.forEach(r=>r.material.color.setHex(on?0x62ff8f:0x274058));
 }
 function makeStack(litMaxDeg){ const grp=new THREE.Group();
   for(let th=0;th<=7;th++){const d=makeDisk(th<=litMaxDeg); d.position.y=(th-3.5)*0.92; d.rotation.z=th*(4*Math.PI/180); d.scale.setScalar(.48); grp.add(d);}
+  return grp;
+}
+// tilt of each disk (deg): the climb's dip δ=arccos(R/(R+h)) reaches that tilt at liteAlt(tilt).
+// bottom disk is flat (0° → connects at the ground); the rest light up as altitude passes them.
+const D6TILT=[0,2,4,6,8];
+const D6VIS=2.4;                          // visual tilt exaggeration for the 3D view only
+const D6MAXALT=70;                        // km — slider top; all five disks connected
+// a stack of 5 disks (bottom flat) threaded by FOUR continuous vertical rods, each carrying five
+// ascending balls. Disks carry no balls of their own; cups start twisted OFF (restTwist) and swing
+// on to "cup" their ball as the climb's arccos passes each disk's tilt.
+function makeCupStack(){
+  const grp=new THREE.Group(); grp.userData.disks=[];
+  const RR=2.18*0.5;                                   // cup radius after the .5 disk scale
+  const rodMat=new THREE.MeshStandardMaterial({color:0x5a6680,metalness:.6,roughness:.45});
+  const ballMat=new THREE.MeshStandardMaterial({color:0x9fb4d6,metalness:.9,roughness:.18});
+  for(let k=0;k<5;k++){
+    const wrap=new THREE.Group(); wrap.position.y=k*1.16; wrap.rotation.x=D6TILT[k]*D6VIS*Math.PI/180;
+    const d=makeDisk(false,true); d.scale.setScalar(.5);
+    d.userData.restTwist=-22*Math.PI/180; d.userData.spin.rotation.y=d.userData.restTwist;
+    wrap.add(d); grp.add(wrap); grp.userData.disks.push(d);
+  }
+  for(let i=0;i<4;i++){
+    const a=i*Math.PI/2, dir=new THREE.Vector3(Math.cos(a),0,Math.sin(a));
+    const rod=new THREE.Mesh(new THREE.CylinderGeometry(0.03,0.03,6.0,10),rodMat);
+    rod.position.set(dir.x*RR,2.4,dir.z*RR); grp.add(rod);
+    for(let k=0;k<5;k++){
+      const phi=D6TILT[k]*D6VIS*Math.PI/180;
+      const yoff=-dir.z*RR*Math.sin(phi);        // tilt drops the outer (+Z) cup & lifts the inner (−Z) cup — match the balls to it
+      const ball=new THREE.Mesh(new THREE.SphereGeometry(0.12,20,14),ballMat);
+      ball.position.set(dir.x*RR,k*1.16+0.08+yoff,dir.z*RR); grp.add(ball);
+    }
+  }
   return grp;
 }
 function scene3d(canvas,setup){
@@ -665,9 +736,48 @@ function scene3d(canvas,setup){
   const p1=new THREE.PointLight(0x28e0e6,.7,40); p1.position.set(-7,3,5); scene.add(p1);
   const p2=new THREE.PointLight(0xffb53d,.45,40); p2.position.set(7,-2,-4); scene.add(p2);
   const root=setup(scene,cam);
-  return {root,render:()=>{const w=canvas.clientWidth,h=canvas.clientHeight; if(w&&h){renderer.setSize(w,h,false); cam.aspect=w/h; cam.updateProjectionMatrix();} renderer.render(scene,cam);}};
+  return {root,cam,scene,render:()=>{const w=canvas.clientWidth,h=canvas.clientHeight; if(w&&h){renderer.setSize(w,h,false); cam.aspect=w/h; cam.updateProjectionMatrix();} renderer.render(scene,cam);}};
 }
 let heroS=null,diskS=null,grStackS=null,sdStackS=null,T0=performance.now();
+let disk6={alt:0,playing:false,yaw:0,dist:16,dragging:false,lastX:0,_last:0};
+// connect each disk as the climb's altitude passes the altitude where δ=arccos reaches its tilt;
+// the four stacks are offset a touch (q*0.9 km) so they engage "just out of sync".
+function applyCupping(alt){ if(!diskS)return;
+  diskS.root.userData.stacks.forEach((st,q)=>st.userData.disks.forEach((d,k)=>{
+    const need=liteAlt(D6TILT[k]), w=Math.max(2,need*0.12+1.5);
+    const eng=Math.max(0,Math.min(1,(alt-need-q*0.9)/w));
+    d.userData.spin.rotation.y=d.userData.restTwist*(1-eng);
+    setDiskLit(d,eng>0.5);
+  }));
+}
+function setD6Playing(on){ disk6.playing=on; const b=document.getElementById('d6play'); if(b)b.textContent=on?'❚❚':'▶'; if(on&&disk6.alt>=D6MAXALT)disk6.alt=0; }
+function syncD6Slider(){ const s=document.getElementById('d6slider'); if(s)s.value=Math.round(disk6.alt/D6MAXALT*1000); }
+function d6enter(){ disk6.alt=0; disk6.yaw=0; disk6.dist=16; const l=document.getElementById('d6limb'); if(l)l.classList.add('in'); setD6Playing(true); syncD6Slider(); applyCupping(0); updateD6Limb(0); }
+// mini altitude->limb HUD that slides in over the 3D view (the slide-7 graphic, compact)
+function buildD6Limb(){ const s=document.getElementById('d6limb'); if(!s)return;
+  const ey=x=>150+6*Math.pow((x-150)/150,2);
+  let ad='M 6 '+ey(6).toFixed(1); for(let x=20;x<=294;x+=10) ad+=' L '+x+' '+ey(x).toFixed(1);
+  s.appendChild(mk('rect',{x:0,y:0,width:300,height:200,rx:8,fill:'rgba(8,12,22,.82)',stroke:'rgba(40,224,230,.25)'}));
+  s.appendChild(mk('path',{d:ad+' L 294 194 L 6 194 Z',fill:'rgba(22,64,118,.32)'}));
+  s.appendChild(mk('path',{d:ad,fill:'none',stroke:'#3aa0ff','stroke-width':2}));
+  s.appendChild(mk('line',{x1:150,y1:60,x2:150,y2:150,stroke:'#ff5566','stroke-width':1.2,'stroke-dasharray':'3 5',opacity:.5}));
+  s._A=mk('line',{stroke:'#62ff8f','stroke-width':2,filter:'drop-shadow(0 0 4px #62ff8f)'});
+  s._B=mk('line',{stroke:'#62ff8f','stroke-width':2,filter:'drop-shadow(0 0 4px #62ff8f)'});
+  s._g=mk('circle',{r:6,fill:'#62ff8f',filter:'drop-shadow(0 0 6px #62ff8f)'});
+  [s._A,s._B,s._g].forEach(e=>s.appendChild(e));
+  s._alt=mk('text',{x:12,y:26,'font-family':'JetBrains Mono','font-size':16,fill:'#28e0e6'}); s._alt.textContent='0 km'; s.appendChild(s._alt);
+  s._ang=mk('text',{x:12,y:48,'font-family':'JetBrains Mono','font-size':16,fill:'#ffb53d'}); s._ang.textContent='δ 0.00°'; s.appendChild(s._ang);
+}
+function updateD6Limb(alt){ const s=document.getElementById('d6limb'); if(!s||!s._g)return;
+  const Cx=150, base=150, top=66, ey=x=>150+6*Math.pow((x-150)/150,2);
+  const f=Math.min(1,alt/D6MAXALT), Yo=base-(base-top)*f, sp=26+f*120;
+  const rx=Math.min(294,Cx+sp), lx=Math.max(6,Cx-sp);
+  s._g.setAttribute('cx',Cx); s._g.setAttribute('cy',Yo.toFixed(1));
+  s._A.setAttribute('x1',Cx); s._A.setAttribute('y1',Yo.toFixed(1)); s._A.setAttribute('x2',rx.toFixed(1)); s._A.setAttribute('y2',ey(rx).toFixed(1));
+  s._B.setAttribute('x1',Cx); s._B.setAttribute('y1',Yo.toFixed(1)); s._B.setAttribute('x2',lx.toFixed(1)); s._B.setAttribute('y2',ey(lx).toFixed(1));
+  s._alt.textContent=Math.round(alt)+' km';
+  s._ang.textContent='δ '+(Math.acos(R/(R+alt))*R2D).toFixed(2)+'°';
+}
 function init3d(){
   if(typeof THREE==='undefined')return;
   const hc=document.getElementById('hero3d');
@@ -676,15 +786,45 @@ function init3d(){
     for(let k=-3;k<=3;k++){const d=makeDisk(k<=1); d.position.y=k*1.18; d.rotation.z=k*(6*Math.PI/180); d.scale.setScalar(.6); grp.add(d);}
     scene.add(grp); return grp;});
   const dc=document.getElementById('disk3d');
-  if(dc) diskS=scene3d(dc,(scene,cam)=>{cam.position.set(0,3.1,6.2); cam.lookAt(0,-0.1,0); const d=makeDisk(false); scene.add(d); return d;});
+  if(dc) diskS=scene3d(dc,(scene,cam)=>{cam.position.set(0,1.6,7.5); cam.lookAt(0,1.4,0);
+    const root=new THREE.Group(); const stacks=[];
+    for(let q=0;q<4;q++){ const st=makeCupStack();
+      const ang=q*Math.PI/2;
+      st.position.set(Math.sin(ang)*2.9, 0, Math.cos(ang)*2.9);  // four stacks around a centre
+      st.rotation.y=ang;                                          // each leans OUTWARD (away from each other)
+      root.add(st); stacks.push(st); }
+    root.position.y=-2.3; root.userData.stacks=stacks; scene.add(root); return root;});
   const gc=document.getElementById('stackGR3d');
   if(gc) grStackS=scene3d(gc,(scene,cam)=>{cam.position.set(2.2,1.3,9.4); cam.lookAt(0,0,0); const g=makeStack(0); scene.add(g); return g;});
   const sc=document.getElementById('stackSDT3d');
   if(sc) sdStackS=scene3d(sc,(scene,cam)=>{cam.position.set(2.2,1.3,9.4); cam.lookAt(0,0,0); const g=makeStack(6); scene.add(g); return g;});
+  // slide-6 interaction: click-drag = rotate about vertical, scroll = zoom, transport = scrub altitude
+  buildD6Limb();
+  const cv=document.getElementById('disk3d');
+  if(cv){
+    cv.addEventListener('pointerdown',e=>{disk6.dragging=true;disk6.lastX=e.clientX;cv.style.cursor='grabbing';try{cv.setPointerCapture(e.pointerId);}catch(_){}});
+    cv.addEventListener('pointermove',e=>{if(disk6.dragging){disk6.yaw+=(e.clientX-disk6.lastX)*0.01;disk6.lastX=e.clientX;}});
+    const rel=()=>{disk6.dragging=false;cv.style.cursor='grab';};
+    cv.addEventListener('pointerup',rel); cv.addEventListener('pointerleave',rel);
+    cv.addEventListener('wheel',e=>{e.preventDefault();disk6.dist=Math.max(7,Math.min(30,disk6.dist+e.deltaY*0.012));},{passive:false});
+  }
+  const pb=document.getElementById('d6play'); if(pb)pb.onclick=()=>setD6Playing(!disk6.playing);
+  const stepD6=v=>{setD6Playing(false);disk6.alt=Math.max(0,Math.min(D6MAXALT,disk6.alt+v));syncD6Slider();applyCupping(disk6.alt);updateD6Limb(disk6.alt);};
+  const bb=document.getElementById('d6back'); if(bb)bb.onclick=()=>stepD6(-D6MAXALT/10);
+  const fb=document.getElementById('d6fwd'); if(fb)fb.onclick=()=>stepD6(D6MAXALT/10);
+  const sb=document.getElementById('d6slider'); if(sb)sb.oninput=()=>{setD6Playing(false);disk6.alt=+sb.value/1000*D6MAXALT;applyCupping(disk6.alt);updateD6Limb(disk6.alt);};
 }
 function render3d(now){const t=(now-T0)/1000;
   if(heroS&&slides[0].classList.contains('on')){heroS.root.rotation.y=t*0.32; heroS.render();}
-  if(diskS&&slides[5].classList.contains('on')){diskS.root.rotation.y=t*0.5; diskS.root.rotation.x=Math.sin(t*0.45)*0.1; diskS.render();}
+  if(diskS&&slides[5].classList.contains('on')){
+    const dt=Math.min(0.05,(now-(disk6._last||now))/1000); disk6._last=now;
+    if(disk6.playing){ disk6.alt=Math.min(D6MAXALT,disk6.alt+dt*D6MAXALT/9); if(disk6.alt>=D6MAXALT)setD6Playing(false); syncD6Slider(); }
+    applyCupping(disk6.alt); updateD6Limb(disk6.alt);
+    diskS.root.rotation.y=disk6.yaw;                 // object vertical axis stays screen-vertical; drag = yaw
+    diskS.cam.position.set(0,3.4,disk6.dist);        // scroll = zoom (dist)
+    diskS.cam.lookAt(0,0.6,0);
+    diskS.render();
+  }
   if(slides[8].classList.contains('on')){ if(grStackS){grStackS.root.rotation.y=t*0.3; grStackS.render();} if(sdStackS){sdStackS.root.rotation.y=t*0.3; sdStackS.render();} }
   requestAnimationFrame(render3d);
 }

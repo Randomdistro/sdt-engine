@@ -415,9 +415,13 @@ dispersion σ ≈ 300 km/s, so v_esc ≈ 3σ ≈ 900 km/s at the
 centre, but the luminosity-weighted average potential gives
 an effective v_esc of several thousand km/s).
 
+> [gap: needs v≈9,400 km/s; own estimate v_esc≈900 km/s — unresolved ×10]
+
 The SDT prediction: the SN Ia host galaxy mass step correlates
 with the luminosity-weighted mean displacement field of
 the host galaxy, via zk²=1.
+
+> [KILLED by 20_Host_Mass_Step: mechanisms A/B short by 10³–10⁵; C qualitative/OPEN]
 
 ---
 

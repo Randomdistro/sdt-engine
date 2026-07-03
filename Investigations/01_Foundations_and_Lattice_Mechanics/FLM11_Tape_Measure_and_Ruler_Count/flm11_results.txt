@@ -1,0 +1,66 @@
+==============================================================================
+FLM11 - RULER COUNT (Tape-Measure Principle)
+Author: J. C. Harvey, Melbourne.  Whitelist inputs only; no G/M/GM.
+==============================================================================
+
+[LAW V INDEPENDENCE CHECK]  v_T^2 + v_P^2 = c^2  (must close = 1.0)
+  electron (1,1): v_T=0.707107c  v_P=0.707107c  residual=1.000000000000   T=3(W+1)=6
+  proton   (2,3): v_T=0.632456c  v_P=0.774597c  residual=1.000000000000   T=3(W+1)=12
+  neutrino (open): W=0  -> no closed (p,q) budget; the straight line
+
+[AXIS TABLE]  name | grip | property | independent? | constraint
+------------------------------------------------------------------------------
+-- GRIPPABLE RULERS (grip != NONE, independent) --
+  GRIP=RESISTANCE  | indep=YES | mass
+      axis: tube swelling / reorganisation cost (T_2, Level5; Law IV)
+      SDT : reorganisation-cost, Phi*V_disp/(l_P^3 c^2) (Law IV)
+      test: Law IV cost axis; orthogonal to circulation/handedness/oscillation (a static structural DoF)
+  GRIP=HANDEDNESS  | indep=YES | charge (handed redirection; NOT a substance)
+      axis: handedness Phi_3 = +/-1 (Level6, chirality)
+      SDT : Phi_3 chirality +/-1; handed redirection of through-flow (R2)
+      test: discrete Z_2 sign; orthogonal to any continuous circulation magnitude (a sign, not a rate)
+  GRIP=CIRCULATION | indep=YES | magnetic flux (motion of medium)
+      axis: toroidal circulation v_T (Law V; law_VI::topology)
+      SDT : v_T = c*sqrt(p/(p+q)); toroidal circulation of the wake
+      test: free continuous circulation rate; the single surviving flux axis once v_P is removed by Law V
+  GRIP=OSCILLATION | indep=YES | electromagnetism (propagating wake)
+      axis: oscillation Phi_2 (Level6; periodic reversal/precession)
+      SDT : Phi_2 oscillation [Hz]; bond-switch / wake propagation
+      test: temporal propagating mode; distinct from a static circulation (a frequency, not a steady flow)
+-- DEPENDENT (grip present but fixed by a native constraint) --
+  GRIP=CIRCULATION | indep=NO  | (would be a 2nd flux ruler)
+      axis: poloidal circulation v_P (Law V; law_VI::topology)
+      SDT : v_P = c*sqrt(q/(p+q))
+      test: Law V budget closes (proton residual=1.000000000000, electron residual=1.000000000000) => v_P=sqrt(c^2 - v_T^2) is fixed by v_T; NOT an independent circulation ruler
+-- ZERO-GRIP RESIDUE (grip == NONE, real but unrulered) --
+  GRIP=NONE        | indep=n/a | - (no native ruler)
+      axis: through / straight axis (open line, W=0)
+      SDT : open winding W=0; pure through-flow along the core axis
+      test: grip=NONE: pure through-flow, no circulation/handedness/resistance to grip => zero-grip residue, W=0 open line (neutrino)
+-- EXCLUDED as property rulers (kinematic / frame / internal) --
+  core-ring translation (T_1 / Level2 position)
+      reason: kinematic POSITION of the whole form, not an intrinsic property axis; externally ungrippable as an identity ruler
+  surface orientation (Level4 xi_s3 / axis direction)
+      reason: a FRAME choice (direction of the already-counted circulation/handedness axes), not a new independent grippable property
+
+==============================================================================
+RESULT
+==============================================================================
+  PROPERTY COUNT  P = 4   (grippable rulers)
+  PROPERTY MAP      = {mass, charge, magnetic flux, electromagnetism}
+  DEPENDENT axes    = 1   (poloidal circulation v_P)
+  ZERO-GRIP RESIDUE = 1   (must be exactly 1)
+  FIFTH INDEPENDENT RULER? NO  (v_P dependent via Law V budget => no 5th grippable axis)
+
+  [P3 FLAG] exactly-one-zero-grip : PASS
+  [P3 FLAG] residue = straight axis: PASS
+  [P3 FLAG] residue maps to W=0     : PASS (neutrino = open winding)
+
+  [PRE-COMMIT RECONCILIATION]  (RUN_LOG committed BEFORE running)
+    P == 4?          MATCH
+    residue == 1?    MATCH
+    fifth == NO?      MATCH
+
+==============================================================================
+  OVERALL: ALL GATES MET (P2+P3 reproduce pre-commit)
+==============================================================================

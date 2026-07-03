@@ -1,6 +1,6 @@
-# E98 — Lead Sphere Displacement Field: Directional Gas Tube Array & Vacuum Persistence Test
+# E103 — Lead Sphere Displacement Field: Directional Gas Tube Array & Vacuum Persistence Test
 
-## Experiment ID: E98
+## Experiment ID: E103
 ## Status: PROPOSED (laboratory)
 ## Domain: Gravity / Occlusion / Displacement Field / Molecular Persistence
 ## Axiom Compliance: ✅ No G, No M, No GM

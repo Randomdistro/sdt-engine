@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nuclear Packing Sequencer — SDT</title>
+<meta name="description" content="Pack a nucleus from SDT trefoil protons, shine the convergence light through it, and read the mass defect straight off the shadow it casts.">
+<style>
+:root{
+  --bg:#050508; --panel:rgba(8,8,16,0.92); --edge:rgba(64,64,92,0.7);
+  --gold:#d4a05c; --gold-bright:#ffd080; --steel:#7ab4e0; --mint:#44eebb;
+  --ink:#cbd0dc; --ink-soft:#8b93a6; --ink-dim:#565d70; --red:#e06a6a; --grn:#57d98a;
+  --mono:'JetBrains Mono','SF Mono',Consolas,monospace;
+  --sans:'Inter','Segoe UI',system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden}
+canvas{display:block}
+#scene{position:fixed;inset:0;width:100%;height:100%}
+
+/* ── title ── */
+#title{position:fixed;top:12px;left:216px;z-index:20;pointer-events:none}
+#title h1{font-size:15px;font-weight:700;letter-spacing:.5px;color:var(--ink)}
+#title h1 span{color:var(--gold)}
+#title p{font-size:10px;color:var(--ink-dim);font-family:var(--mono);letter-spacing:.5px;margin-top:2px}
+
+/* ── left isotope rail ── */
+#rail{position:fixed;top:0;left:0;bottom:56px;width:204px;z-index:15;
+  background:rgba(6,6,13,0.97);border-right:1px solid var(--edge);
+  overflow-y:auto;scrollbar-width:thin;scrollbar-color:#333 #060 }
+#rail::-webkit-scrollbar{width:5px}#rail::-webkit-scrollbar-thumb{background:#2a2a40;border-radius:3px}
+#rail .rhdr{position:sticky;top:0;z-index:2;background:rgba(6,6,13,0.99);padding:9px 10px;
+  border-bottom:1px solid var(--edge)}
+#rail .rhdr b{font-size:10px;letter-spacing:1.5px;color:var(--gold);text-transform:uppercase}
+#search{width:100%;margin-top:7px;background:rgba(20,20,34,.8);border:1px solid var(--edge);
+  border-radius:5px;color:var(--ink);font-size:11px;padding:5px 8px;font-family:var(--sans)}
+#search:focus{outline:none;border-color:var(--gold)}
+.elGroup .elName{padding:3px 10px;font-size:9px;color:var(--ink-dim);font-weight:600;
+  letter-spacing:.5px;background:rgba(20,20,36,.55)}
+.iso{padding:4px 10px 4px 16px;font-size:11px;cursor:pointer;color:var(--ink-soft);
+  display:flex;justify-content:space-between;align-items:center;transition:background .12s}
+.iso:hover{background:rgba(80,80,160,.12);color:var(--ink)}
+.iso.on{background:rgba(212,160,92,.14);color:var(--gold);border-left:2px solid var(--gold);padding-left:14px}
+.iso .g{font-size:9px;color:var(--ink-dim);font-family:var(--mono)}
+.iso.on .g{color:#9a7038}
+.iso.stable::before{content:"●";color:var(--grn);font-size:6px;margin-right:5px}
+.iso.unstable::before{content:"○";color:#8a4444;font-size:6px;margin-right:5px}
+
+/* ── right panels ── */
+.panel{position:fixed;right:10px;z-index:15;background:var(--panel);
+  border:1px solid var(--edge);border-radius:8px;padding:10px 13px;width:230px;
+  font-size:11px;-webkit-backdrop-filter:blur(9px);backdrop-filter:blur(9px);box-shadow:0 6px 26px rgba(0,0,0,.5)}
+.panel h3{color:var(--gold);font-size:9.5px;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:7px;
+  display:flex;justify-content:space-between;align-items:baseline}
+.panel h3 em{font-style:normal;color:var(--ink-dim);font-size:9px;letter-spacing:0}
+.row{display:flex;justify-content:space-between;gap:8px;margin:3px 0}
+.row .l{color:var(--ink-dim);flex-shrink:0}
+.row .v{color:var(--ink);font-weight:500;text-align:right;font-family:var(--mono)}
+.v.gold{color:var(--gold)}.v.steel{color:var(--steel)}.v.mint{color:var(--mint)}
+.v.red{color:var(--red)}.v.grn{color:var(--grn)}
+.sep{height:1px;background:var(--edge);margin:7px 0;opacity:.6}
+#pIdentity{top:44px}
+#pShadow{top:212px}
+#pDefect{top:406px}
+#pFit{top:628px}
+.idhead{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.idsym{font-size:30px;font-weight:700;color:var(--gold);line-height:1;font-family:var(--sans)}
+.idmeta .z{font-size:10px;color:var(--ink-dim);font-family:var(--mono)}
+.idmeta .nm{font-size:13px;color:var(--ink)}
+.grammar{font-family:var(--mono);font-size:13px;text-align:center;padding:5px 0;letter-spacing:.5px}
+.grammar .a{color:#c060e0}.grammar .d{color:var(--steel)}.grammar .t{color:var(--gold-bright)}.grammar .o{color:var(--ink-dim)}
+#curve{width:100%;height:66px;display:block;margin-top:4px;border-radius:4px;background:rgba(0,0,0,.25)}
+.big{font-size:15px;font-weight:600}
+.tag{font-size:9px;font-family:var(--mono);padding:1px 6px;border-radius:9px;letter-spacing:.5px}
+.tag.good{background:rgba(87,217,138,.14);color:var(--grn)}
+.tag.mid{background:rgba(212,160,92,.14);color:var(--gold)}
+.tag.off{background:rgba(224,106,106,.14);color:var(--red)}
+
+/* ── top toggles ── */
+#toggles{position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:20;
+  display:flex;gap:5px;flex-wrap:wrap;justify-content:center;max-width:calc(100vw - 720px)}
+#toggles label{background:rgba(12,12,24,.88);border:1px solid var(--edge);border-radius:13px;
+  padding:4px 11px;font-size:10px;cursor:pointer;-webkit-user-select:none;user-select:none;transition:all .18s;letter-spacing:.3px;color:var(--ink-soft)}
+#toggles label:hover{border-color:#666}
+#toggles label:has(input:checked){background:rgba(50,40,15,.9);border-color:var(--gold);color:var(--gold-bright);
+  box-shadow:0 0 9px rgba(212,160,92,.3),inset 0 0 12px rgba(212,160,92,.08)}
+#toggles input{display:none}
+
+/* ── bottom transport (the sequencer) ── */
+#transport{position:fixed;bottom:0;left:0;right:0;height:56px;z-index:20;
+  background:rgba(6,6,13,.97);border-top:1px solid var(--edge);
+  display:flex;align-items:center;gap:14px;padding:0 18px 0 216px}
+#transport button{background:rgba(28,28,48,.85);border:1px solid var(--edge);color:var(--ink);
+  width:34px;height:30px;border-radius:6px;font-size:13px;cursor:pointer;transition:all .15s}
+#transport button:hover{border-color:var(--gold);color:var(--gold-bright)}
+#transport button.play{width:44px;color:var(--mint)}
+#seqWrap{flex:1;display:flex;align-items:center;gap:12px}
+#seqCanvas{flex:1;height:42px;min-width:120px;background:rgba(18,18,30,.6);border:1px solid var(--edge);border-radius:5px;cursor:pointer;display:block}
+#seqLabel{font-family:var(--mono);font-size:10.5px;line-height:1.45;color:var(--gold);min-width:216px}
+#seqLabel b{color:var(--gold)}
+.ctlGrp{display:flex;align-items:center;gap:6px;font-size:10px;color:var(--ink-dim);font-family:var(--mono)}
+.ctlGrp input[type=range]{width:64px;accent-color:var(--gold);vertical-align:middle}
+#loadErr{position:fixed;bottom:64px;left:216px;z-index:30;font-family:var(--mono);font-size:10px;color:var(--ink-dim)}
+</style>
+</head>
+<body>
+
+<canvas id="scene"></canvas>
+
+<div id="title">
+  <h1>Nuclear <span>Packing Sequencer</span></h1>
+  <p>trefoil protons · convergence light · mass defect from the shadow</p>
+  <p style="color:var(--ink-dim);max-width:560px">each proton = one <b style="color:#ff5a5a">6π trefoil</b> — six windings weaving under·over·under·over·under·over on the torus they ride — the shape it tightens to at 1.83c. Built by volume from <b>1836</b> electrons (m<sub>p</sub>/m<sub>e</sub> = 6π⁵ = 1836): take one electron's ring in hydrogen (radius a₀), draw it as a tube the electron's own width, and pack 1836 of those volumes into the knot. <span style="color:#ff5a5a">proton red</span> · <span style="color:#5a80ff">neutron blue</span>. Shown representationally — the real thread is vastly finer than the drawn knot.</p>
+</div>
+
+<div id="toggles">
+  <label><input type="checkbox" id="tWall" checked> back wall</label>
+  <label><input type="checkbox" id="tShadow" checked> shadow</label>
+  <label><input type="checkbox" id="tKnots" checked> trefoil topology</label>
+  <label><input type="checkbox" id="tInflux"> CMB influx</label>
+  <label><input type="checkbox" id="tCoul" checked> Coulomb spread</label>
+  <label><input type="checkbox" id="tSpin" checked> rotate</label>
+  <label><input type="checkbox" id="tChirp"> chirp audio</label>
+</div>
+
+<div id="rail">
+  <div class="rhdr"><b>Isotopes · α-grammar</b>
+    <input id="search" placeholder="search symbol / Z / A…" autocomplete="off">
+  </div>
+  <div id="isoList"></div>
+</div>
+
+<!-- ── panels ── -->
+<div class="panel" id="pIdentity">
+  <h3>Identity</h3>
+  <div class="idhead">
+    <div class="idsym" id="idSym">Fe</div>
+    <div class="idmeta"><div class="z" id="idZ">Z = 26</div><div class="nm" id="idName">Iron</div></div>
+  </div>
+  <div class="grammar" id="idGrammar"></div>
+  <div class="row"><span class="l">mass number A</span><span class="v" id="idA">56</span></div>
+  <div class="row"><span class="l">nucleons shown</span><span class="v gold" id="idShown">56 / 56</span></div>
+  <div class="row"><span class="l">deuterons · tritons</span><span class="v" id="idDT">20 · 4</span></div>
+</div>
+
+<div class="panel" id="pShadow">
+  <h3>Occlusion Shadow <em>π R<sub>p</sub>² each</em></h3>
+  <div class="row"><span class="l">R<sub>p</sub> (W+1 boundary)</span><span class="v">0.8414 fm</span></div>
+  <div class="row"><span class="l">one nucleon a₁</span><span class="v" id="shA1">2.224 fm²</span></div>
+  <div class="row"><span class="l">Σ separate  N·a₁</span><span class="v" id="shSum">—</span></div>
+  <div class="row"><span class="l">packed shadow A<sub>∪</sub></span><span class="v steel" id="shUnion">—</span></div>
+  <div class="sep"></div>
+  <div class="row"><span class="l">shared occlusion ΔA</span><span class="v mint big" id="shDelta">—</span></div>
+  <div class="row"><span class="l">overlap fraction</span><span class="v" id="shPct">—</span></div>
+</div>
+
+<div class="panel" id="pDefect">
+  <h3>Mass Defect <em>ΔA → energy</em></h3>
+  <div class="row"><span class="l">measured binding</span><span class="v" id="dfMeas">— MeV</span></div>
+  <div class="row"><span class="l">measured  BE/A</span><span class="v" id="dfMeasA">—</span></div>
+  <div class="sep"></div>
+  <div class="row"><span class="l">shadow  κ·ΔA</span><span class="v gold" id="dfPred">— MeV</span></div>
+  <div class="row"><span class="l">shadow  BE/A</span><span class="v gold" id="dfPredA">—</span></div>
+  <div class="row"><span class="l">agreement</span><span class="v" id="dfErr">—</span> </div>
+  <canvas id="curve" width="230" height="66"></canvas>
+  <div class="row" style="margin-top:5px"><span class="l">κ (area→energy)</span><span class="v" id="dfKappa">—</span></div>
+</div>
+
+<div class="panel" id="pFit">
+  <h3>Mass-defect fit <em>N = <span id="fitN">–</span></em></h3>
+  <div class="row"><span class="l">total binding  R²</span><span class="v grn big" id="fitR2tot">—</span></div>
+  <div class="row"><span class="l">mean |error|</span><span class="v" id="fitErr">—</span></div>
+  <div class="sep"></div>
+  <div style="font-size:9.5px;color:var(--ink-dim);line-height:1.5">
+    One scale κ, fixed by least squares. The shadow-overlap <b style="color:var(--mint)">is</b> the mass
+    defect to ~8%. Honest residual: pure boundary overlap slightly <b style="color:#c060e0">over-binds the
+    light α-cluster nuclei</b> and does not resolve the Fe peak — that fine structure needs the shared-electron
+    well depth (NP17), not geometry alone.
+  </div>
+  <div class="sep"></div>
+  <div style="font-size:9.5px;color:var(--ink-dim);line-height:1.5">
+    <b style="color:var(--gold)">Geometry of the weave.</b> The ideal trefoil's three tips sit exactly
+    <b>120° apart, coplanar</b> — the bowl a real strand pulls into is the over·under weave buckling out of
+    plane. That buckle is an angular defect, and Descartes fixes the total: a closed shell carries
+    <b>720°</b> — twelve 60° trefoil caps close an <b>icosahedral shell</b> (12 units · 12 vertices), which
+    is why the wire bowls and why nuclear shells want to be spheres. At the 1.83c seat the six windings
+    tighten onto their torus.
+  </div>
+</div>
+
+<div id="transport">
+  <button type="button" id="btnFirst" title="reset to α-core">⏮</button>
+  <button type="button" id="btnPrev" title="remove a subunit">◀</button>
+  <button type="button" id="btnPlay" class="play" title="sequence the packing">▶</button>
+  <button type="button" id="btnNext" title="add a subunit">▶</button>
+  <button type="button" id="btnLast" title="full nucleus">⏭</button>
+  <div id="seqWrap">
+    <canvas id="seqCanvas" height="42" title="binding-energy chirp — height = ΔE released as each subunit locks in. Click to seek."></canvas>
+    <span id="seqLabel">α core</span>
+  </div>
+  <div class="ctlGrp">tightness<input type="range" id="rTight" title="packing tightness (nn distance / R_p)" aria-label="packing tightness" min="1.15" max="1.95" step="0.01" value="1.45"><span id="rTightV">1.45</span></div>
+  <div class="ctlGrp">light°<input type="range" id="rLight" title="light azimuth (degrees)" aria-label="light azimuth" min="-60" max="60" step="1" value="-38"><span id="rLightV">-38</span></div>
+  <div class="ctlGrp">bright<input type="range" id="rBright" title="light brightness" aria-label="light brightness" min="0.2" max="6" step="0.1" value="2.4"><span id="rBrightV">2.4</span></div>
+  <div class="ctlGrp">spin<input type="range" id="rSpin" title="nucleon rotation rate — complementary: p one sense, n the other; fast spin reads as the 1.83c tight torus" aria-label="spin rate" min="0" max="4" step="0.05" value="1.8"><span id="rSpinV">1.8</span></div>
+  <div class="ctlGrp">knot&nbsp;α<input type="range" id="rKA" title="knot opacity" aria-label="knot opacity" min="0.05" max="1" step="0.05" value="1"><span id="rKAV">1.00</span></div>
+  <div class="ctlGrp">torus&nbsp;α<input type="range" id="rTA" title="spun-torus shell opacity (scales with spin)" aria-label="torus opacity" min="0" max="0.9" step="0.02" value="0.34"><span id="rTAV">0.34</span></div>
+  <div class="ctlGrp" title="colours: proton / neutron / electron">
+    p<input type="color" id="cP" value="#ff2626" aria-label="proton colour">
+    n<input type="color" id="cN" value="#2f6bff" aria-label="neutron colour">
+    e⁻<input type="color" id="cE" value="#7fe7ff" aria-label="electron colour">
+  </div>
+  <div class="ctlGrp">
+    <label title="time-average torus shells"><input type="checkbox" id="tTorus" checked>torus</label>
+    <label title="internal e⁻ (every neutron) + shared e⁻ strings on p–n bonds"><input type="checkbox" id="tE" checked>e⁻</label>
+    <label title="shell radius line-and-label"><input type="checkbox" id="tShell" checked>shells</label>
+  </div>
+</div>
+<div id="loadErr"></div>
+
+<!-- ═══════════════ DATA (single source: same be[] as the site) ═══════════════ -->
+<script>
+// [sym,Z,A,abundance,stable,bindingEnergyMeV,spin]
+const RAW = [
+ ["He",2,4,99.9999,true,28.296,"0+"],
+ ["Li",3,7,92.41,true,39.245,"3/2-"],
+ ["Be",4,9,100,true,58.165,"3/2-"],
+ ["B",5,10,19.9,true,64.751,"3+"],["B",5,11,80.1,true,76.205,"3/2-"],
+ ["C",6,12,98.93,true,92.162,"0+"],["C",6,13,1.07,true,97.108,"1/2-"],
+ ["N",7,14,99.636,true,104.659,"1+"],["N",7,15,0.364,true,115.492,"1/2-"],
+ ["O",8,16,99.757,true,127.619,"0+"],["O",8,17,0.038,true,131.763,"5/2+"],["O",8,18,0.205,true,139.808,"0+"],
+ ["F",9,19,100,true,147.801,"1/2+"],
+ ["Ne",10,20,90.48,true,160.645,"0+"],["Ne",10,21,0.27,true,167.406,"3/2+"],["Ne",10,22,9.25,true,177.770,"0+"],
+ ["Na",11,23,100,true,186.564,"3/2+"],
+ ["Mg",12,24,78.99,true,198.257,"0+"],["Mg",12,25,10.00,true,205.588,"5/2+"],["Mg",12,26,11.01,true,216.681,"0+"],
+ ["Al",13,27,100,true,224.952,"5/2+"],
+ ["Si",14,28,92.223,true,236.537,"0+"],["Si",14,29,4.685,true,245.010,"1/2+"],["Si",14,30,3.092,true,255.620,"0+"],
+ ["P",15,31,100,true,262.917,"1/2+"],
+ ["S",16,32,94.99,true,271.780,"0+"],["S",16,33,0.75,true,280.422,"3/2+"],["S",16,34,4.25,true,291.839,"0+"],["S",16,36,0.01,true,308.714,"0+"],
+ ["Cl",17,35,75.76,true,298.210,"3/2+"],["Cl",17,37,24.24,true,317.100,"3/2+"],
+ ["Ar",18,36,0.3336,true,306.716,"0+"],["Ar",18,38,0.0629,true,327.343,"0+"],["Ar",18,40,99.6035,true,343.810,"0+"],
+ ["K",19,39,93.2581,true,333.724,"3/2+"],["K",19,41,6.7302,true,351.619,"3/2+"],
+ ["Ca",20,40,96.941,true,342.052,"0+"],["Ca",20,42,0.647,true,361.895,"0+"],["Ca",20,43,0.135,true,369.828,"7/2-"],["Ca",20,44,2.086,true,380.960,"0+"],["Ca",20,46,0.004,true,398.769,"0+"],["Ca",20,48,0.187,false,416.001,"0+"],
+ ["Sc",21,45,100,true,387.849,"7/2-"],
+ ["Ti",22,46,8.25,true,398.193,"0+"],["Ti",22,47,7.44,true,407.072,"5/2-"],["Ti",22,48,73.72,true,418.699,"0+"],["Ti",22,49,5.41,true,426.841,"7/2-"],["Ti",22,50,5.18,true,437.781,"0+"],
+ ["V",23,51,99.75,true,445.841,"7/2-"],
+ ["Cr",24,50,4.345,true,435.049,"0+"],["Cr",24,52,83.789,true,456.345,"0+"],["Cr",24,53,9.501,true,464.285,"3/2-"],["Cr",24,54,2.365,true,474.004,"0+"],
+ ["Mn",25,55,100,true,482.071,"5/2-"],
+ ["Fe",26,54,5.845,true,471.764,"0+"],["Fe",26,56,91.754,true,492.254,"0+"],["Fe",26,57,2.119,true,499.900,"1/2-"],["Fe",26,58,0.282,true,509.946,"0+"],
+ ["Co",27,59,100,true,517.308,"7/2-"],
+ ["Ni",28,58,68.077,true,506.454,"0+"],["Ni",28,60,26.223,true,526.842,"0+"],["Ni",28,61,1.140,true,534.662,"3/2-"],["Ni",28,62,3.635,true,545.259,"0+"],["Ni",28,64,0.926,true,561.756,"0+"],
+ ["Cu",29,63,69.15,true,551.384,"3/2-"],["Cu",29,65,30.85,true,569.207,"3/2-"],
+ ["Zn",30,64,49.17,true,559.094,"0+"],["Zn",30,66,27.73,true,578.135,"0+"],["Zn",30,67,4.04,true,585.185,"5/2-"],["Zn",30,68,18.45,true,595.383,"0+"],["Zn",30,70,0.61,true,611.085,"0+"],
+ ["Ga",31,69,60.108,true,601.993,"3/2-"],["Ga",31,71,39.892,true,618.948,"3/2-"],
+ ["Ge",32,70,20.57,true,610.518,"0+"],["Ge",32,72,27.45,true,628.677,"0+"],["Ge",32,73,7.75,true,635.549,"9/2+"],["Ge",32,74,36.50,true,645.665,"0+"],["Ge",32,76,7.73,false,661.598,"0+"],
+ ["As",33,75,100,true,652.563,"3/2-"],
+ ["Se",34,74,0.89,true,642.890,"0+"],["Se",34,76,9.37,true,662.072,"0+"],["Se",34,77,7.63,true,669.497,"1/2-"],["Se",34,78,23.77,true,679.989,"0+"],["Se",34,80,49.61,true,696.865,"0+"],["Se",34,82,8.73,false,707.261,"0+"],
+ ["Br",35,79,50.69,true,686.321,"3/2-"],["Br",35,81,49.31,true,703.575,"3/2-"],
+ ["Kr",36,80,2.286,true,695.434,"0+"],["Kr",36,82,11.593,true,714.273,"0+"],["Kr",36,83,11.500,true,721.737,"9/2+"],["Kr",36,84,56.987,true,732.262,"0+"],["Kr",36,86,17.279,true,749.235,"0+"],
+ ["Rb",37,85,72.17,true,739.282,"5/2-"],
+ ["Sr",38,86,9.86,true,748.926,"0+"],["Sr",38,87,7.00,true,757.354,"9/2+"],["Sr",38,88,82.58,true,768.468,"0+"],
+ ["Y",39,89,100,true,775.538,"1/2-"],
+ ["Zr",40,90,51.45,true,783.892,"0+"],["Zr",40,91,11.22,true,791.087,"5/2+"],["Zr",40,92,17.15,true,799.722,"0+"],["Zr",40,94,17.38,true,814.676,"0+"],
+ ["Nb",41,93,100,true,805.765,"9/2+"],
+ ["Mo",42,92,14.649,true,796.508,"0+"],["Mo",42,94,9.187,true,814.255,"0+"],["Mo",42,95,15.873,true,821.625,"5/2+"],["Mo",42,96,16.673,true,830.779,"0+"],["Mo",42,97,9.582,true,837.600,"5/2+"],["Mo",42,98,24.292,true,846.243,"0+"],
+ ["Ru",44,99,12.76,true,852.254,"5/2+"],["Ru",44,100,12.60,true,861.928,"0+"],["Ru",44,101,17.06,true,868.728,"5/2+"],["Ru",44,102,31.55,true,878.131,"0+"],["Ru",44,104,18.62,true,893.088,"0+"],
+ ["Rh",45,103,100,true,884.168,"1/2-"],
+ ["Pd",46,105,22.33,true,899.920,"5/2+"],["Pd",46,106,27.33,true,909.476,"0+"],["Pd",46,108,26.46,true,925.237,"0+"],["Pd",46,110,11.72,true,940.208,"0+"],
+ ["Ag",47,107,51.839,true,915.266,"1/2-"],["Ag",47,109,48.161,true,931.724,"1/2-"],
+ ["Cd",48,110,12.49,true,940.643,"0+"],["Cd",48,111,12.80,true,947.620,"1/2+"],["Cd",48,112,24.13,true,957.016,"0+"],["Cd",48,114,28.73,true,972.599,"0+"],
+ ["In",49,115,95.71,false,979.420,"9/2+"],
+ ["Sn",50,116,14.54,true,988.684,"0+"],["Sn",50,118,24.22,true,1004.955,"0+"],["Sn",50,120,32.58,true,1020.545,"0+"],["Sn",50,122,4.63,true,1035.528,"0+"],["Sn",50,124,5.79,true,1049.963,"0+"],
+ ["Sb",51,121,57.21,true,1026.320,"5/2+"],["Sb",51,123,42.79,true,1042.400,"7/2+"],
+ ["Te",52,126,18.84,true,1066.370,"0+"],["Te",52,128,31.74,false,1081.440,"0+"],["Te",52,130,34.08,false,1095.940,"0+"],
+ ["I",53,127,100,true,1072.580,"5/2+"],
+ ["Xe",54,129,26.401,true,1087.648,"1/2+"],["Xe",54,131,21.232,true,1103.514,"3/2+"],["Xe",54,132,26.909,true,1112.449,"0+"],["Xe",54,134,10.436,true,1129.270,"0+"],["Xe",54,136,8.857,false,1141.882,"0+"],
+ ["Cs",55,133,100,true,1118.528,"7/2+"],
+ ["Ba",56,135,6.592,true,1133.683,"3/2+"],["Ba",56,136,7.854,true,1142.780,"0+"],["Ba",56,137,11.232,true,1149.686,"3/2+"],["Ba",56,138,71.698,true,1158.293,"0+"],
+ ["La",57,139,99.911,true,1164.555,"7/2+"],
+ ["Ce",58,140,88.450,true,1172.690,"0+"],["Ce",58,142,11.114,false,1185.290,"0+"],
+ ["Pr",59,141,100,true,1177.920,"5/2+"],
+ ["Nd",60,142,27.152,true,1185.145,"0+"],["Nd",60,144,23.798,false,1199.083,"0+"],["Nd",60,146,17.189,true,1212.400,"0+"],["Nd",60,148,5.756,true,1225.020,"0+"],
+ ["Sm",62,147,14.99,false,1220.691,"7/2-"],["Sm",62,149,13.82,true,1233.856,"7/2-"],["Sm",62,152,26.75,true,1253.104,"0+"],["Sm",62,154,22.75,true,1264.878,"0+"],
+ ["Eu",63,151,47.81,true,1244.142,"5/2+"],["Eu",63,153,52.19,true,1258.998,"5/2+"],
+ ["Gd",64,155,14.80,true,1276.520,"3/2-"],["Gd",64,156,20.47,true,1286.470,"0+"],["Gd",64,157,15.65,true,1292.000,"3/2-"],["Gd",64,158,24.84,true,1301.430,"0+"],["Gd",64,160,21.86,true,1314.680,"0+"],
+ ["Tb",65,159,100,true,1306.980,"3/2+"],
+ ["Dy",66,161,18.889,true,1335.690,"5/2+"],["Dy",66,162,25.475,true,1345.090,"0+"],["Dy",66,163,24.896,true,1351.070,"5/2-"],["Dy",66,164,28.260,true,1360.330,"0+"],
+ ["Ho",67,165,100,true,1356.260,"7/2-"],
+ ["Er",68,166,33.503,true,1375.930,"0+"],["Er",68,167,22.869,true,1381.600,"7/2+"],["Er",68,168,26.978,true,1390.750,"0+"],["Er",68,170,14.910,true,1403.370,"0+"],
+ ["Tm",69,169,100,true,1396.430,"1/2+"],
+ ["Yb",70,172,21.68,true,1418.780,"0+"],["Yb",70,173,16.103,true,1424.390,"5/2-"],["Yb",70,174,32.026,true,1433.180,"0+"],["Yb",70,176,12.996,true,1445.300,"0+"],
+ ["Lu",71,175,97.401,true,1439.030,"7/2+"],
+ ["Hf",72,177,18.60,true,1455.760,"7/2-"],["Hf",72,178,27.28,true,1464.720,"0+"],["Hf",72,179,13.62,true,1470.180,"9/2+"],["Hf",72,180,35.08,true,1478.890,"0+"],
+ ["Ta",73,181,99.988,true,1484.160,"7/2+"],
+ ["W",74,182,26.50,true,1497.570,"0+"],["W",74,183,14.31,true,1503.210,"1/2-"],["W",74,184,30.64,true,1512.310,"0+"],["W",74,186,28.43,true,1525.370,"0+"],
+ ["Re",75,185,37.40,true,1518.110,"5/2+"],["Re",75,187,62.60,false,1530.240,"5/2+"],
+ ["Os",76,188,13.24,true,1538.760,"0+"],["Os",76,189,16.15,true,1544.020,"3/2-"],["Os",76,190,26.26,true,1553.020,"0+"],["Os",76,192,40.78,true,1567.850,"0+"],
+ ["Ir",77,191,37.3,true,1560.060,"3/2+"],["Ir",77,193,62.7,true,1574.190,"3/2+"],
+ ["Pt",78,194,32.864,true,1585.110,"0+"],["Pt",78,195,33.775,true,1590.190,"1/2-"],["Pt",78,196,25.242,true,1598.590,"0+"],["Pt",78,198,7.356,true,1612.090,"0+"],
+ ["Au",79,197,100,true,1604.480,"3/2+"],
+ ["Hg",80,199,16.87,true,1614.170,"1/2-"],["Hg",80,200,23.10,true,1623.130,"0+"],["Hg",80,201,13.18,true,1628.540,"3/2-"],["Hg",80,202,29.86,true,1637.010,"0+"],["Hg",80,204,6.87,true,1648.940,"0+"],
+ ["Tl",81,203,29.52,true,1641.690,"1/2+"],["Tl",81,205,70.48,true,1655.430,"1/2+"],
+ ["Pb",82,206,24.1,true,1663.290,"0+"],["Pb",82,207,22.1,true,1668.470,"1/2-"],["Pb",82,208,52.4,true,1676.720,"0+"],
+ ["Bi",83,209,100,false,1679.070,"9/2-"],
+ ["Th",90,232,100,false,1766.690,"0+"],
+ ["U",92,235,0.7204,false,1783.870,"7/2-"],["U",92,238,99.2742,false,1801.690,"0+"],
+];
+const NAMES=[,"Hydrogen","Helium","Lithium","Beryllium","Boron","Carbon","Nitrogen","Oxygen","Fluorine","Neon","Sodium","Magnesium","Aluminium","Silicon","Phosphorus","Sulfur","Chlorine","Argon","Potassium","Calcium","Scandium","Titanium","Vanadium","Chromium","Manganese","Iron","Cobalt","Nickel","Copper","Zinc","Gallium","Germanium","Arsenic","Selenium","Bromine","Krypton","Rubidium","Strontium","Yttrium","Zirconium","Niobium","Molybdenum","Technetium","Ruthenium","Rhodium","Palladium","Silver","Cadmium","Indium","Tin","Antimony","Tellurium","Iodine","Xenon","Cesium","Barium","Lanthanum","Cerium","Praseodymium","Neodymium","Promethium","Samarium","Europium","Gadolinium","Terbium","Dysprosium","Holmium","Erbium","Thulium","Ytterbium","Lutetium","Hafnium","Tantalum","Tungsten","Rhenium","Osmium","Iridium","Platinum","Gold","Mercury","Thallium","Lead","Bismuth","Polonium","Astatine","Radon","Francium","Radium","Actinium","Thorium","Protactinium","Uranium","Neptunium","Plutonium","Americium","Curium","Berkelium","Californium","Einsteinium","Fermium","Mendelevium","Nobelium","Lawrencium","Rutherfordium","Dubnium","Seaborgium","Bohrium","Hassium","Meitnerium","Darmstadtium","Roentgenium","Copernicium","Nihonium","Flerovium","Moscovium","Livermorium","Tennessine","Oganesson"];
+
+// SDT α-grammar: 1α + nd deuterons + nt tritons  (nt=A-2Z, nd=3Z-A-2)
+const ISO = RAW.map(([sym,Z,A,abd,stable,be,spin])=>{
+  const nd=3*Z-A-2, nt=A-2*Z;
+  return {sym,Z,A,abd,stable,be,spin,nd,nt,name:NAMES[Z]};
+}).filter(e=>e.nd>=0 && e.nt>=0 && e.be>0);
+</script>
+
+<!-- ═══════════════ PHYSICS: packing + shadow + mass defect ═══════════════ -->
+<script>
+const R_p = 0.8414;                 // fm — derived W+1 proton boundary
+const A1  = Math.PI*R_p*R_p;        // fm² — single-nucleon occlusion cross-section
+const E_NUC = 931.494;              // MeV per u — nucleon rest-energy scale (for BE/A context)
+
+/* ---- subunit-centric packing: each subunit is an INTERLEAVED cluster of trefoils
+   whose holes face a shared-electron centre (NP17: interleaved 6π trefoils, n = p + one
+   internal electron shared between adjacent protons). Subunit centres sit on a close pack;
+   α = tetrahedral 4-trefoil (2p·2n), triton = 3-trefoil (1p·2n), deuteron = 2-trefoil (1p·1n).
+   Counts honour the α-grammar exactly (p = 2+nd+nt = Z, N = 4+2nd+3nt = A). */
+const KSUB=1.5, KINTRA=0.65;   // subunit spacing & intra-subunit interleave radius (× dnn)
+function vnorm(v){const l=Math.hypot(v[0],v[1],v[2])||1;return[v[0]/l,v[1]/l,v[2]/l];}
+function packNucleus(A, Z, dnn, coulSpread){
+  const nd=3*Z-A-2, nt=A-2*Z;
+  const kinds=['alpha'];
+  for(let s=0;s<nd;s++) kinds.push('deuteron');
+  for(let s=0;s<nt;s++) kinds.push('triton');
+  const nSub=kinds.length;
+  // subunit centres — FCC crop to the nSub nearest sites, dilated by Coulomb spread
+  const spread=1+coulSpread*(Z*Z)/Math.pow(A,4/3);
+  const Dsub=dnn*spread*KSUB, a=Dsub*Math.SQRT2;
+  const pts=[]; const R=Math.ceil(Math.cbrt(nSub))+3;
+  for(let i=-R;i<=R;i++)for(let j=-R;j<=R;j++)for(let k=-R;k<=R;k++)
+    if(((i+j+k)&1)===0){const x=i*a/2,y=j*a/2,z=k*a/2;pts.push([x,y,z,x*x+y*y+z*z]);}
+  pts.sort((p,q)=>p[3]-q[3]); const C=pts.slice(0,nSub);
+  const iR=dnn*KINTRA; const nuc=[]; let di=0,ti=0;
+  kinds.forEach((kind,si)=>{
+    const c=[C[si][0],C[si][1],C[si][2]];
+    const add=(v,r)=>[c[0]+v[0]*r,c[1]+v[1]*r,c[2]+v[2]*r];
+    const toC=p=>vnorm([c[0]-p[0],c[1]-p[1],c[2]-p[2]]);   // trefoil hole faces shared centre → interleave
+    if(kind==='alpha'){                                     // two ⟂ deuterons = tetrahedron
+      // interleave (Harvey 2026-07-03): neutron to proton, proton to neutron — the two
+      // perpendicular pairs are each a p–n deuteron (was p–p/n–n: a transcription slip)
+      const tv=[[1,1,1],[1,-1,-1],[-1,1,-1],[-1,-1,1]].map(vnorm), ty=['p','n','p','n'];
+      tv.forEach((v,k)=>{const pos=add(v,iR);nuc.push({pos,type:ty[k],group:'alpha',sub:0,axis:toC(pos)});});
+    }else if(kind==='deuteron'){                            // one proton + one shared-electron neutron
+      const th=si*2.399963, ax=vnorm([Math.cos(th),Math.sin(th)*0.8,Math.sin(th*1.7)]);
+      const p1=add(ax,iR),p2=add(ax,-iR);
+      nuc.push({pos:p1,type:'p',group:'deuteron',sub:di,axis:toC(p1)});
+      nuc.push({pos:p2,type:'n',group:'deuteron',sub:di,axis:toC(p2)}); di++;
+    }else{                                                  // triton: 1p + 2n interleaved triangle
+      const th=si*2.399963, e1=vnorm([Math.cos(th),0,Math.sin(th)]), e2=vnorm([Math.sin(th)*0.3,1,Math.cos(th)*0.3]);
+      const tri=[[0,1],[0.866,-0.5],[-0.866,-0.5]], ty=['p','n','n'];
+      tri.forEach((uv,k)=>{const v=vnorm([e1[0]*uv[0]+e2[0]*uv[1],e1[1]*uv[0]+e2[1]*uv[1],e1[2]*uv[0]+e2[2]*uv[1]]);
+        const pos=add(v,iR);nuc.push({pos,type:ty[k],group:'triton',sub:ti,axis:toC(pos)});}); ti++;
+    }
+  });
+  return nuc;
+}
+
+/* ---- number of subunits, for the sequencer ---- */
+function subunitCount(iso){ return 1 + iso.nd + iso.nt; }   // α + deuterons + tritons
+// nucleons revealed when `k` subunits are shown
+function nucleonsForSubunits(iso, nuc, k){
+  if(k<=0) return [];
+  if(k===1) return nuc.filter(n=>n.group==='alpha');
+  const out=nuc.filter(n=>n.group==='alpha');
+  let shown=1;
+  for(let s=0;s<iso.nd && shown<k;s++,shown++) out.push(...nuc.filter(n=>n.group==='deuteron'&&n.sub===s));
+  for(let s=0;s<iso.nt && shown<k;s++,shown++) out.push(...nuc.filter(n=>n.group==='triton'&&n.sub===s));
+  return out;
+}
+
+/* ---- SHADOW: project boundary disks ⊥ to the light, rasterise the union ---- */
+const _shCanvas = document.createElement('canvas'); _shCanvas.width=_shCanvas.height=300;
+const _shCtx = _shCanvas.getContext('2d',{willReadFrequently:true});
+function normalize(v){const l=Math.hypot(v[0],v[1],v[2])||1;return[v[0]/l,v[1]/l,v[2]/l];}
+function cross(a,b){return[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];}
+function dot(a,b){return a[0]*b[0]+a[1]*b[1]+a[2]*b[2];}
+
+function measureShadow(centres, lightDir){
+  const N=centres.length;
+  if(N===0) return {Asum:0,Aunion:0,dA:0,pct:0};
+  const L=normalize(lightDir);
+  const up = Math.abs(L[1])>0.9 ? [1,0,0] : [0,1,0];
+  const u=normalize(cross(up,L)), v=cross(L,u);
+  // project
+  const P=centres.map(c=>[dot(c.pos,u),dot(c.pos,v)]);
+  let minx=1e9,maxx=-1e9,miny=1e9,maxy=-1e9;
+  for(const[x,y]of P){minx=Math.min(minx,x);maxx=Math.max(maxx,x);miny=Math.min(miny,y);maxy=Math.max(maxy,y);}
+  minx-=R_p;maxx+=R_p;miny-=R_p;maxy+=R_p;
+  const spanx=maxx-minx, spany=maxy-miny, span=Math.max(spanx,spany,1e-6);
+  const S=290;                                   // px used
+  const fmPerPx = span/S;
+  const pxR = R_p/fmPerPx;
+  const cx=(minx+maxx)/2, cy=(miny+maxy)/2;
+  _shCtx.clearRect(0,0,300,300);
+  _shCtx.fillStyle='#fff';
+  for(const[x,y]of P){
+    const sx=150+(x-cx)/fmPerPx, sy=150+(y-cy)/fmPerPx;
+    _shCtx.beginPath(); _shCtx.arc(sx,sy,pxR,0,Math.PI*2); _shCtx.fill();
+  }
+  const img=_shCtx.getImageData(0,0,300,300).data;
+  let hit=0; for(let i=3;i<img.length;i+=4) if(img[i]>10) hit++;
+  const cellArea=fmPerPx*fmPerPx;
+  const Aunion=hit*cellArea;
+  const Asum=N*A1;
+  return {Asum,Aunion,dA:Asum-Aunion,pct:(Asum-Aunion)/Asum};
+}
+
+/* ---- calibrate κ (MeV per fm² of shared occlusion) once, over all isotopes ----
+   least-squares through the origin:  BE ≈ κ·ΔA .  Also report the honest fit. */
+const DEFAULT_LIGHT=[-0.4925,0.80,0.62];   // high-left-foreground (matches default light°=-38)
+let KAPPA=5.0, FIT={r2tot:0,r2a:0,mErr:0,n:0};
+function calibrate(dnn, coul){
+  let sxy=0,sxx=0; const rec=[];
+  for(const iso of ISO){
+    const nuc=packNucleus(iso.A,iso.Z,dnn,coul);
+    const {dA}=measureShadow(nuc,DEFAULT_LIGHT);
+    rec.push({iso,dA}); sxy+=iso.be*dA; sxx+=dA*dA;
+  }
+  KAPPA=sxy/sxx;
+  let meanBE=0,meanBEA=0; for(const r of rec){meanBE+=r.iso.be;meanBEA+=r.iso.be/r.iso.A;}
+  meanBE/=rec.length; meanBEA/=rec.length;
+  let sseT=0,sstT=0,sseA=0,sstA=0,mErr=0;
+  for(const r of rec){ const bp=KAPPA*r.dA;
+    sseT+=(r.iso.be-bp)**2; sstT+=(r.iso.be-meanBE)**2;
+    sseA+=(r.iso.be/r.iso.A-bp/r.iso.A)**2; sstA+=(r.iso.be/r.iso.A-meanBEA)**2;
+    mErr+=Math.abs(bp-r.iso.be)/r.iso.be; }
+  FIT={r2tot:1-sseT/sstT, r2a:1-sseA/sstA, mErr:mErr/rec.length, n:rec.length};
+}
+</script>
+
+<!-- ═══════════════ UI + 3D ═══════════════ -->
+<script type="importmap">
+{ "imports": {
+  "three":"https://unpkg.com/three@0.160.0/build/three.module.js",
+  "three/addons/":"https://unpkg.com/three@0.160.0/examples/jsm/"
+}}
+</script>
+<script type="module">
+// ---------- state ----------
+const state = {
+  iso: ISO.find(e=>e.sym==='Fe'&&e.A===56) || ISO[0],
+  dnn: 1.45*R_p, coul: 0.30, coulOn:true,
+  lightAz: -38, bright: 2.4,
+  reveal: 0,            // subunits shown; set to full on select
+  playing:false, chirpAudio:false, chirp:[],
+  showWall:true, showShadow:true, showKnots:true, showInflux:false, spin:true,
+  spinRate:1.8,                                  // per-nucleon rotation (complementary p/n senses)
+  knotA:1.0, torA:0.34,                          // transparency: knots, spun-torus shells
+  colP:'#ff2626', colN:'#2f6bff', colE:'#7fe7ff',// colour controls
+  showTorus:true, showE:true, showShellLbl:true, // visibility controls
+  nuc: [], nucShown: []
+};
+
+// ---------- element list ----------
+const isoListEl=document.getElementById('isoList');
+function buildList(filter=''){
+  isoListEl.innerHTML='';
+  const f=filter.trim().toLowerCase();
+  const byEl={};
+  for(const e of ISO){
+    if(f && !(`${e.sym}${e.A}`.toLowerCase().includes(f) || String(e.Z)===f || e.name.toLowerCase().includes(f))) continue;
+    (byEl[e.Z]=byEl[e.Z]||[]).push(e);
+  }
+  for(const Z of Object.keys(byEl).map(Number).sort((a,b)=>a-b)){
+    const g=document.createElement('div'); g.className='elGroup';
+    g.innerHTML=`<div class="elName">${Z} · ${NAMES[Z]}</div>`;
+    for(const e of byEl[Z]){
+      const d=document.createElement('div');
+      d.className=`iso ${e.stable?'stable':'unstable'}`+(e===state.iso?' on':'');
+      d.innerHTML=`<span>${e.sym}-${e.A}</span><span class="g">${e.nd}d·${e.nt}t</span>`;
+      d.onclick=()=>selectIso(e);
+      g.appendChild(d);
+    }
+    isoListEl.appendChild(g);
+  }
+}
+document.getElementById('search').oninput=ev=>buildList(ev.target.value);
+
+// ---------- select / recompute ----------
+function rebuildPacking(){
+  state.nuc = packNucleus(state.iso.A, state.iso.Z, state.dnn, state.coulOn?state.coul:0);
+}
+function refreshShown(){
+  state.nucShown = nucleonsForSubunits(state.iso, state.nuc, state.reveal);
+}
+function selectIso(e){
+  state.iso=e;
+  rebuildPacking(); computeChirp();
+  buildList(document.getElementById('search').value);
+  setReveal(subunitCount(e));   // full nucleus; updates 3D, panels, chirp + label
+}
+
+// ---------- the light direction ----------
+function lightDir(){
+  const az=state.lightAz*Math.PI/180;
+  // high, foreground, azimuth swings left(−)↔right(+)
+  return [Math.sin(az)*0.8, 0.72, 0.62];
+}
+
+// ---------- panels ----------
+const $=id=>document.getElementById(id);
+function tagFor(err){const a=Math.abs(err);return a<6?'good':a<15?'mid':'off';}
+function updateAll(){
+  const iso=state.iso;
+  $('idSym').textContent=iso.sym;
+  $('idZ').textContent=`Z = ${iso.Z}`;
+  $('idName').textContent=iso.name;
+  $('idA').textContent=iso.A;
+  $('idDT').textContent=`${iso.nd} · ${iso.nt}`;
+  $('idGrammar').innerHTML=`<span class="a">1α</span><span class="o"> + </span>`+
+    `<span class="d">${iso.nd}d</span><span class="o"> + </span><span class="t">${iso.nt}t</span>`;
+  $('idShown').textContent=`${state.nucShown.length} / ${iso.A}`;
+
+  // shadow of what is currently shown
+  const sh=measureShadow(state.nucShown, lightDir());
+  $('shA1').textContent=A1.toFixed(3)+' fm²';
+  $('shSum').textContent=sh.Asum.toFixed(2)+' fm²';
+  $('shUnion').textContent=sh.Aunion.toFixed(2)+' fm²';
+  $('shDelta').textContent=sh.dA.toFixed(2)+' fm²';
+  $('shPct').textContent=(sh.pct*100).toFixed(1)+' %';
+
+  // mass defect
+  const bePred=KAPPA*sh.dA;
+  const full = state.nucShown.length===iso.A;
+  $('dfMeas').textContent = full ? iso.be.toFixed(1)+' MeV' : `(${iso.be.toFixed(1)} full)`;
+  $('dfMeasA').textContent=(iso.be/iso.A).toFixed(3)+' MeV';
+  $('dfPred').textContent=bePred.toFixed(1)+' MeV';
+  $('dfPredA').textContent=(bePred/Math.max(1,state.nucShown.length)).toFixed(3)+' MeV';
+  const err=100*(bePred-iso.be)/iso.be;
+  const eEl=$('dfErr');
+  if(full){ eEl.innerHTML=`<span class="tag ${tagFor(err)}">${err>=0?'+':''}${err.toFixed(1)}%</span>`; }
+  else { eEl.innerHTML=`<span class="tag mid">sequencing…</span>`; }
+  $('dfKappa').textContent=KAPPA.toFixed(3)+' MeV/fm²';
+
+  drawCurve();
+}
+
+// ---------- binding curve sparkline ----------
+const curveEl=$('curve'), cctx=curveEl.getContext('2d');
+let CURVE_CACHE=null;
+function computeCurve(){
+  CURVE_CACHE=ISO.map(iso=>{
+    const nuc=packNucleus(iso.A,iso.Z,state.dnn,state.coulOn?state.coul:0);
+    const {dA}=measureShadow(nuc,DEFAULT_LIGHT);
+    return {A:iso.A, meas:iso.be/iso.A, pred:KAPPA*dA/iso.A};
+  });
+}
+function drawCurve(){
+  if(!CURVE_CACHE) computeCurve();
+  const W=curveEl.width,H=curveEl.height; cctx.clearRect(0,0,W,H);
+  const maxA=245, maxY=10;
+  const px=A=>6+(A/maxA)*(W-10), py=y=>H-6-(y/maxY)*(H-12);
+  // measured dots
+  cctx.fillStyle='rgba(122,180,224,.75)';
+  for(const p of CURVE_CACHE){ cctx.beginPath(); cctx.arc(px(p.A),py(p.meas),1.1,0,7); cctx.fill(); }
+  // predicted line
+  const sorted=[...CURVE_CACHE].sort((a,b)=>a.A-b.A);
+  cctx.strokeStyle='rgba(212,160,92,.95)'; cctx.lineWidth=1.4; cctx.beginPath();
+  sorted.forEach((p,i)=>{ const X=px(p.A),Y=py(p.pred); i?cctx.lineTo(X,Y):cctx.moveTo(X,Y); }); cctx.stroke();
+  // current isotope marker
+  const cur=CURVE_CACHE[ISO.indexOf(state.iso)];
+  if(cur){ cctx.strokeStyle='rgba(68,238,187,.9)'; cctx.lineWidth=1; cctx.beginPath();
+    cctx.moveTo(px(cur.A),4); cctx.lineTo(px(cur.A),H-4); cctx.stroke(); }
+  cctx.fillStyle='rgba(150,160,180,.5)'; cctx.font='8px monospace';
+  cctx.fillText('BE/A vs A — dots measured · line shadow',6,9);
+}
+
+// ---------- fit panel ----------
+function updateFit(){
+  $('fitN').textContent=FIT.n;
+  $('fitR2tot').textContent=FIT.r2tot.toFixed(3);
+  $('fitErr').textContent=(FIT.mErr*100).toFixed(1)+' %';
+}
+
+// ---------- recalibrate on geometry change ----------
+function recalibrate(){
+  calibrate(state.dnn, state.coulOn?state.coul:0);
+  CURVE_CACHE=null; updateFit();
+}
+
+// =================== 3D scene ===================
+let THREE, scene, camera, renderer, controls, nucleusGroup, wall, dl, motes, moteGeo, moteVel, knotGeo, sphGeo;
+let threeOK=false;
+
+/* Build the proton as a coiled rope on the 6π trefoil path.
+   Centreline = (2,3) trefoil (three crossings → six arcs weaving under/over/under…).
+   Physical construction: ONE thread, 1836 electrons in series, each 1/1836 of the total
+   windings, each a tube ≈2.9e-21 m wide (R_excl_e). 1836 × V_disp_e = the proton's
+   displaced volume (Law IV) → m_p/m_e. The NP_PLY plies here are only a renderable
+   stand-in for that 1836-electron thread (the real one is ~1400× finer than R_p). */
+function makeTrefoilRope(THREE, mergeGeometries){
+  // v3 — ROPE OF SEPARATE STRANDS (Harvey's wire model, 2026-07-03).
+  // v2's single tube with brightness banding still read as "the same single line".
+  // The wire model shows the truth: a BUNDLE of distinct parallel strands with daylight
+  // between them, travelling the knot path together in a slow lay, weaving over·under
+  // as a group. So: K=4 strand tubes on parallel-transported offset curves around the
+  // pretzel centreline (holonomy-corrected so strands close), each strand its own tint.
+  // Verified (rope_v3_check.mjs): knot self-clearance 0.484 ≫ 2×envelope 0.21 (crossings
+  // never merge); inter-strand daylight 1.5·r_s; envelope/hump 0.22 (six arcs countable).
+  const SEG=420, RSEG=6, ZAMP=1.45, K=4, LAY=2;          // LAY = rope twists per circuit (slow)
+  const RB=0.075, RS_=0.030;                              // bundle radius, strand radius (normalized)
+  const cl=t=>{const a=2*Math.PI*t; return new THREE.Vector3(
+    Math.sin(a)+2*Math.sin(2*a), Math.cos(a)-2*Math.cos(2*a), -ZAMP*Math.sin(3*a));};
+  let maxr=0; for(let i=0;i<=SEG;i++) maxr=Math.max(maxr,cl(i/SEG).length());
+  // parallel-transport frames along the centreline, holonomy-corrected
+  const P=[],T=[],N=[];
+  for(let i=0;i<SEG;i++)P.push(cl(i/SEG));
+  for(let i=0;i<SEG;i++){const a=P[(i-1+SEG)%SEG],b=P[(i+1)%SEG];
+    T.push(new THREE.Vector3().subVectors(b,a).normalize());}
+  let n0=new THREE.Vector3(0,0,1);
+  if(Math.abs(T[0].dot(n0))>0.9)n0.set(0,1,0);
+  n0=new THREE.Vector3().crossVectors(T[0],n0).normalize();
+  N.push(n0.clone());
+  const q=new THREE.Quaternion();
+  for(let i=1;i<SEG;i++){q.setFromUnitVectors(T[i-1],T[i]);
+    N.push(N[i-1].clone().applyQuaternion(q).normalize());}
+  q.setFromUnitVectors(T[SEG-1],T[0]);
+  const nEnd=N[SEG-1].clone().applyQuaternion(q).normalize();
+  const hol=Math.atan2(nEnd.clone().cross(N[0]).dot(T[0]), nEnd.dot(N[0]));
+  const B=[];
+  for(let i=0;i<SEG;i++){const b0=new THREE.Vector3().crossVectors(T[i],N[i]).normalize();
+    const c=Math.cos(-hol*i/SEG),s=Math.sin(-hol*i/SEG);
+    const nn=N[i].clone().multiplyScalar(c).addScaledVector(b0,s);
+    N[i]=nn; B.push(new THREE.Vector3().crossVectors(T[i],nn).normalize());}
+  // four strand tints (multiply the nucleon identity colour): countable like the Cat5 pairs
+  const TINT=[[1,1,1],[1,0.68,0.42],[0.55,0.78,1],[0.55,0.42,0.34]];
+  const parts=[];
+  for(let k=0;k<K;k++){
+    const phi0=2*Math.PI*k/K, pts=[];
+    for(let i=0;i<SEG;i++){const th=phi0+LAY*2*Math.PI*i/SEG;
+      pts.push(P[i].clone()
+        .addScaledVector(N[i], RB*maxr*Math.cos(th))
+        .addScaledVector(B[i], RB*maxr*Math.sin(th)));}
+    const curve=new THREE.CatmullRomCurve3(pts,true,'centripetal');
+    const g=new THREE.TubeGeometry(curve,SEG,RS_*maxr,RSEG,true);
+    const cols=new Float32Array(g.attributes.position.count*3),[r,gg,b]=TINT[k];
+    for(let v=0;v<g.attributes.position.count;v++){cols[v*3]=r;cols[v*3+1]=gg;cols[v*3+2]=b;}
+    g.setAttribute('color',new THREE.BufferAttribute(cols,3));
+    parts.push(g);
+  }
+  const merged=mergeGeometries(parts,false);
+  parts.forEach(g=>g.dispose&&g.dispose());
+  merged.scale(1/maxr,1/maxr,1/maxr); merged.computeVertexNormals();
+  return merged;
+}
+async function initThree(){
+  try{
+    THREE = await import('three');
+    const {OrbitControls}=await import('three/addons/controls/OrbitControls.js');
+    const {mergeGeometries}=await import('three/addons/utils/BufferGeometryUtils.js');
+    const canvas=$('scene');
+    scene=new THREE.Scene(); scene.fog=new THREE.Fog(0x050508,26,60);
+    camera=new THREE.PerspectiveCamera(46,innerWidth/innerHeight,0.1,300); camera.position.set(1,4,26);
+    renderer=new THREE.WebGLRenderer({canvas,antialias:true});
+    renderer.setPixelRatio(Math.min(devicePixelRatio,2)); renderer.setSize(innerWidth,innerHeight);
+    renderer.shadowMap.enabled=true; renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+    controls=new OrbitControls(camera,renderer.domElement);
+    controls.enableDamping=true; controls.dampingFactor=0.07; controls.minDistance=10; controls.maxDistance=60;
+    controls.target.set(0,0,0);
+
+    scene.add(new THREE.HemisphereLight(0x8090b0,0x101018,0.55));
+    dl=new THREE.DirectionalLight(0xfff2dc,state.bright);
+    dl.castShadow=true; dl.shadow.mapSize.set(2048,2048);
+    const sc=dl.shadow.camera; sc.left=-18;sc.right=18;sc.top=18;sc.bottom=-18;sc.near=1;sc.far=80;
+    dl.shadow.bias=-0.0006;
+    scene.add(dl); scene.add(dl.target);
+    // subtle fill from front-right so the nucleus reads
+    const fill=new THREE.DirectionalLight(0x6688cc,0.5); fill.position.set(8,2,10); scene.add(fill);
+
+    // back wall (low-right-background) — receives the shadow
+    const wallMat=new THREE.MeshStandardMaterial({color:0x141824,roughness:0.96,metalness:0});
+    wall=new THREE.Mesh(new THREE.PlaneGeometry(70,48),wallMat);
+    wall.position.set(6,-3,-13); wall.receiveShadow=true; scene.add(wall);
+    // faint floor grid feel
+    const floor=new THREE.Mesh(new THREE.PlaneGeometry(80,80),new THREE.MeshStandardMaterial({color:0x0a0c12,roughness:1}));
+    floor.rotation.x=-Math.PI/2; floor.position.y=-11; floor.receiveShadow=true; scene.add(floor);
+
+    // shared geometry — the proton is a thin COILED ROPE on the 6π trefoil path,
+    // not a fat tube: fine plied fibres, 6 arcs weaving alternately under/over.
+    knotGeo=makeTrefoilRope(THREE,mergeGeometries);
+    sphGeo=new THREE.SphereGeometry(1,20,16);
+
+    // CMB influx motes
+    const MN=1400; const mp=new Float32Array(MN*3); moteVel=[];
+    function spawnMote(i){const u=Math.random(),v=Math.random();const th=2*Math.PI*u,ph=Math.acos(2*v-1);const r=22;
+      const x=r*Math.sin(ph)*Math.cos(th),y=r*Math.sin(ph)*Math.sin(th),z=r*Math.cos(ph);
+      mp[i*3]=x;mp[i*3+1]=y;mp[i*3+2]=z;const L=Math.hypot(x,y,z);moteVel[i]={x:-x/L,y:-y/L,z:-z/L,s:0.08+Math.random()*0.09};}
+    for(let i=0;i<MN;i++)spawnMote(i);
+    moteGeo=new THREE.BufferGeometry(); moteGeo.setAttribute('position',new THREE.BufferAttribute(mp,3));
+    moteGeo._spawn=spawnMote;
+    motes=new THREE.Points(moteGeo,new THREE.PointsMaterial({color:0xd4a05c,size:0.16,transparent:true,opacity:0.6}));
+    motes.visible=false; scene.add(motes);
+
+    nucleusGroup=new THREE.Group(); scene.add(nucleusGroup);
+    threeOK=true;
+    rebuild3D(); updateLight3D();
+    addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);});
+    animate();
+  }catch(err){
+    console.warn('3D unavailable:',err);
+    $('loadErr').textContent='3D view offline — numeric shadow/mass-defect analysis still live.';
+  }
+}
+
+const SCENE=1.9;  // fm → scene units
+let spinReg=null;      // per-nucleon spin registry rebuilt each rebuild3D; consumed by animate()
+let torMatP=null, torMatN=null;
+function makeLabelSprite(text){
+  const cv=document.createElement('canvas'); cv.width=256; cv.height=48;
+  const cx=cv.getContext('2d'); cx.font='24px "Inter",monospace';
+  cx.fillStyle='rgba(200,205,220,0.92)'; cx.textBaseline='middle'; cx.fillText(text,6,24);
+  const tex=new THREE.CanvasTexture(cv); tex.minFilter=THREE.LinearFilter;
+  const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:tex,transparent:true,depthWrite:false}));
+  sp.scale.set(4.6,0.86,1); return sp;
+}
+function rebuild3D(){
+  if(!threeOK) return;
+  while(nucleusGroup.children.length) nucleusGroup.remove(nucleusGroup.children[0]);
+  const shown=state.nucShown;
+  const N=shown.length; if(!N) return;
+  // instanced boundary spheres (the ONLY shadow casters — the measured ΔA story stays
+  // boundary-only) + instanced trefoil ropes (identity) + spun-torus shells + electrons.
+  const boundMat=new THREE.MeshStandardMaterial({color:0x9fb0c8,roughness:0.5,metalness:0.1,transparent:true,opacity:0.10,depthWrite:false});
+  const bound=new THREE.InstancedMesh(sphGeo,boundMat,N); bound.castShadow=true;
+  const kA=state.knotA;
+  const knotP=new THREE.MeshStandardMaterial({color:new THREE.Color(state.colP),roughness:0.34,metalness:0.38,
+    emissive:new THREE.Color(state.colP).multiplyScalar(0.28),emissiveIntensity:0.45,vertexColors:true,
+    transparent:kA<1,opacity:kA});
+  const knotN=new THREE.MeshStandardMaterial({color:new THREE.Color(state.colN),roughness:0.36,metalness:0.36,
+    emissive:new THREE.Color(state.colN).multiplyScalar(0.28),emissiveIntensity:0.45,vertexColors:true,
+    transparent:kA<1,opacity:kA});
+  const nP=shown.filter(n=>n.type==='p').length, nN=N-nP;
+  const knotsP=new THREE.InstancedMesh(knotGeo,knotP,Math.max(1,nP));
+  const knotsN=new THREE.InstancedMesh(knotGeo,knotN,Math.max(1,nN));
+  knotsP.castShadow=knotsN.castShadow=true;
+  // spun-torus shells: the time-average the rope becomes at speed (1.83c tight torus).
+  // Opacity scales with spin rate in animate(). Never cast shadow (visual, not occluder).
+  torMatP=new THREE.MeshStandardMaterial({color:new THREE.Color(state.colP),transparent:true,opacity:0,
+    roughness:0.55,metalness:0.2,emissive:new THREE.Color(state.colP).multiplyScalar(0.2),depthWrite:false});
+  torMatN=new THREE.MeshStandardMaterial({color:new THREE.Color(state.colN),transparent:true,opacity:0,
+    roughness:0.55,metalness:0.2,emissive:new THREE.Color(state.colN).multiplyScalar(0.2),depthWrite:false});
+  const torGeo=new THREE.TorusGeometry(0.66,0.24,10,48);
+  const toriP=new THREE.InstancedMesh(torGeo,torMatP,Math.max(1,nP));
+  const toriN=new THREE.InstancedMesh(torGeo,torMatN,Math.max(1,nN));
+  toriP.castShadow=toriN.castShadow=false;
+  const m=new THREE.Matrix4(), q=new THREE.Quaternion(), s=new THREE.Vector3(R_p*SCENE,R_p*SCENE,R_p*SCENE);
+  const kv=R_p*SCENE*0.95; const sk=new THREE.Vector3(kv,kv,kv);   // rope extent ≈ boundary; interleaves with neighbours
+  const ZAX=new THREE.Vector3(0,0,1), ax=new THREE.Vector3();
+  let ip=0,in_=0;
+  spinReg={P:{mesh:knotsP,tor:toriP,items:[]},N:{mesh:knotsN,tor:toriN,items:[]},scale:sk};
+  shown.forEach((n,i)=>{
+    const p=new THREE.Vector3(n.pos[0]*SCENE,n.pos[1]*SCENE,n.pos[2]*SCENE);
+    ax.set(n.axis[0],n.axis[1],n.axis[2]);
+    q.setFromUnitVectors(ZAX,ax);                 // trefoil hole faces the shared-electron centre
+    m.compose(p,q,s); bound.setMatrixAt(i,m);      // boundary sphere (orientation irrelevant)
+    m.compose(p,q,sk);                             // interleaved trefoil
+    // complementary rotations (Harvey): proton spins +, neutron spins − about its own axis
+    const reg = n.type==='p' ? spinReg.P : spinReg.N;
+    reg.items.push({pos:p.clone(), quat:q.clone(), sense:n.type==='p'?+1:-1, slot:(n.type==='p'?ip:in_)});
+    if(n.type==='p'){ knotsP.setMatrixAt(ip,m); toriP.setMatrixAt(ip,m); ip++; }
+    else            { knotsN.setMatrixAt(in_,m); toriN.setMatrixAt(in_,m); in_++; }
+  });
+  bound.instanceMatrix.needsUpdate=true;
+  nucleusGroup.add(bound);
+  if(state.showKnots){ knotsP.instanceMatrix.needsUpdate=true; knotsN.instanceMatrix.needsUpdate=true;
+    nucleusGroup.add(knotsP); nucleusGroup.add(knotsN); }
+  if(state.showTorus){ toriP.instanceMatrix.needsUpdate=true; toriN.instanceMatrix.needsUpdate=true;
+    nucleusGroup.add(toriP); nucleusGroup.add(toriN); }
+  bound.material.opacity = state.showKnots?0.16:0.5;
+
+  // ---- electrons (NP17): internal e⁻ inside every neutron; shared e⁻ on every
+  // intra-subunit p–n bond, strung knot-to-knot. Visual only — castShadow=false. ----
+  if(state.showE){
+    const eCol=new THREE.Color(state.colE);
+    const eMat=new THREE.MeshStandardMaterial({color:eCol,emissive:eCol.clone().multiplyScalar(0.85),
+      emissiveIntensity:1.2,roughness:0.25,metalness:0.0});
+    const neutrons=shown.filter(n=>n.type==='n');
+    if(neutrons.length){
+      const eInt=new THREE.InstancedMesh(sphGeo,eMat,neutrons.length); eInt.castShadow=false;
+      const es=new THREE.Vector3(0.14*kv,0.14*kv,0.14*kv);
+      neutrons.forEach((n,i)=>{ m.compose(new THREE.Vector3(n.pos[0]*SCENE,n.pos[1]*SCENE,n.pos[2]*SCENE),q.identity(),es); eInt.setMatrixAt(i,m); });
+      eInt.instanceMatrix.needsUpdate=true; nucleusGroup.add(eInt);
+    }
+    // shared e⁻: p–n pairs in the SAME subunit (grammar bonds: d→1, t→2, α→4)
+    const bonds=[];
+    for(let i=0;i<N;i++)for(let j=i+1;j<N;j++){
+      const a=shown[i],b=shown[j];
+      if(a.type===b.type) continue;
+      if(a.group!==b.group || a.sub!==b.sub) continue;
+      bonds.push([a,b]);
+    }
+    if(bonds.length){
+      const eSh=new THREE.InstancedMesh(sphGeo,eMat,bonds.length); eSh.castShadow=false;
+      const es2=new THREE.Vector3(0.10*kv,0.10*kv,0.10*kv);
+      const linePts=new Float32Array(bonds.length*6);
+      bonds.forEach(([a,b],i)=>{
+        const pa=new THREE.Vector3(a.pos[0]*SCENE,a.pos[1]*SCENE,a.pos[2]*SCENE);
+        const pb=new THREE.Vector3(b.pos[0]*SCENE,b.pos[1]*SCENE,b.pos[2]*SCENE);
+        const mid=pa.clone().add(pb).multiplyScalar(0.5);
+        m.compose(mid,q.identity(),es2); eSh.setMatrixAt(i,m);
+        linePts.set([pa.x,pa.y,pa.z,pb.x,pb.y,pb.z],i*6);
+      });
+      eSh.instanceMatrix.needsUpdate=true; nucleusGroup.add(eSh);
+      const lg=new THREE.BufferGeometry(); lg.setAttribute('position',new THREE.BufferAttribute(linePts,3));
+      const strings=new THREE.LineSegments(lg,new THREE.LineBasicMaterial({color:eCol,transparent:true,opacity:0.45}));
+      nucleusGroup.add(strings);
+    }
+  }
+
+  // ---- shell position: small line-and-label per radial band of subunit centres ----
+  if(state.showShellLbl){
+    const cent={};   // subunit centres from shown nucleons
+    shown.forEach(n=>{ const k=n.group+n.sub; (cent[k]=cent[k]||[]).push(n.pos); });
+    const radii=Object.values(cent).map(ps=>{
+      const c=[0,1,2].map(ax=>ps.reduce((s,p)=>s+p[ax],0)/ps.length);
+      return Math.hypot(c[0],c[1],c[2]); });
+    radii.sort((a,b)=>a-b);
+    const bands=[]; const tol=0.45*state.dnn;
+    radii.forEach(r=>{ const b=bands[bands.length-1];
+      if(b && r-b.r<=tol){ b.r=(b.r*b.n+r)/(b.n+1); b.n++; } else bands.push({r,n:1}); });
+    const dir=new THREE.Vector3(1,0.22,0).normalize();
+    bands.forEach((b,k)=>{
+      const r0=Math.max(b.r*SCENE, 0.6), r1=r0+2.0, r2=r1+0.35;
+      const pts=new Float32Array([dir.x*r0,dir.y*r0,dir.z*r0, dir.x*r1,dir.y*r1,dir.z*r1]);
+      const lg=new THREE.BufferGeometry(); lg.setAttribute('position',new THREE.BufferAttribute(pts,3));
+      const ln=new THREE.Line(lg,new THREE.LineBasicMaterial({color:0x8892a8,transparent:true,opacity:0.6}));
+      nucleusGroup.add(ln);
+      const sp=makeLabelSprite(`shell ${k} · r≈${b.r.toFixed(2)} fm · ×${b.n}`);
+      sp.position.set(dir.x*r2+2.0,dir.y*r2,dir.z*r2);
+      nucleusGroup.add(sp);
+    });
+  }
+}
+
+function updateLight3D(){
+  if(!threeOK) return;
+  const L=lightDir(); // direction from origin toward light
+  dl.position.set(L[0]*24,L[1]*24,L[2]*24);
+  dl.target.position.set(0,0,0);
+  wall.visible=state.showWall;
+  renderer.shadowMap.enabled=state.showShadow;
+  dl.castShadow=state.showShadow;
+  motes.visible=state.showInflux;
+}
+
+const _spinM=null;
+function animate(){
+  requestAnimationFrame(animate);
+  if(state.spin) nucleusGroup.rotation.y+=0.0025;
+  // per-nucleon complementary rotation: p spins +, n spins − about its own trefoil axis;
+  // fast spin reads as the tight torus (the 1.83c time-average), so the torus shells
+  // fade in with rate.
+  if(spinReg && state.spinRate>0){
+    const t=performance.now()/1000, w=state.spinRate*2.2;
+    const m=new THREE.Matrix4(), qz=new THREE.Quaternion(), qq=new THREE.Quaternion();
+    const Z=new THREE.Vector3(0,0,1);
+    for(const key of ['P','N']){
+      const reg=spinReg[key]; if(!reg.items.length) continue;
+      for(const it of reg.items){
+        qz.setFromAxisAngle(Z, it.sense*w*t);
+        qq.copy(it.quat).multiply(qz);
+        m.compose(it.pos,qq,spinReg.scale);
+        reg.mesh.setMatrixAt(it.slot,m);
+      }
+      reg.mesh.instanceMatrix.needsUpdate=true;
+    }
+  }
+  if(torMatP){ const o=state.showTorus? state.torA*Math.min(1,state.spinRate/2.2) : 0;
+    torMatP.opacity=o; torMatN.opacity=o; }
+  if(state.showInflux && motes){
+    const pos=moteGeo.attributes.position.array;
+    for(let i=0;i<moteVel.length;i++){const v=moteVel[i];
+      let x=pos[i*3]+v.x*v.s,y=pos[i*3+1]+v.y*v.s,z=pos[i*3+2]+v.z*v.s;
+      if(x*x+y*y+z*z<9){moteGeo._spawn(i);}else{pos[i*3]=x;pos[i*3+1]=y;pos[i*3+2]=z;}}
+    moteGeo.attributes.position.needsUpdate=true;
+  }
+  controls.update(); renderer.render(scene,camera);
+}
+
+// =================== controls wiring ===================
+function bindToggle(id,key,after){ $(id).addEventListener('change',e=>{state[key]=e.target.checked; (after||(()=>{}))();}); }
+bindToggle('tWall','showWall',updateLight3D);
+bindToggle('tShadow','showShadow',updateLight3D);
+bindToggle('tKnots','showKnots',()=>rebuild3D());
+bindToggle('tInflux','showInflux',updateLight3D);
+bindToggle('tSpin','spin');
+bindToggle('tChirp','chirpAudio');
+$('tCoul').addEventListener('change',e=>{state.coulOn=e.target.checked; onGeom();});
+
+$('rTight').addEventListener('input',e=>{state.dnn=parseFloat(e.target.value)*R_p; $('rTightV').textContent=parseFloat(e.target.value).toFixed(2); onGeom();});
+$('rLight').addEventListener('input',e=>{state.lightAz=parseFloat(e.target.value); $('rLightV').textContent=e.target.value; onLight();});
+$('rBright').addEventListener('input',e=>{state.bright=parseFloat(e.target.value); $('rBrightV').textContent=state.bright.toFixed(1); if(threeOK) dl.intensity=state.bright;});
+$('rSpin').addEventListener('input',e=>{state.spinRate=parseFloat(e.target.value); $('rSpinV').textContent=state.spinRate.toFixed(2);});
+$('rKA').addEventListener('input',e=>{state.knotA=parseFloat(e.target.value); $('rKAV').textContent=state.knotA.toFixed(2); rebuild3D();});
+$('rTA').addEventListener('input',e=>{state.torA=parseFloat(e.target.value); $('rTAV').textContent=state.torA.toFixed(2);});
+$('cP').addEventListener('input',e=>{state.colP=e.target.value; rebuild3D();});
+$('cN').addEventListener('input',e=>{state.colN=e.target.value; rebuild3D();});
+$('cE').addEventListener('input',e=>{state.colE=e.target.value; rebuild3D();});
+bindToggle('tTorus','showTorus',()=>rebuild3D());
+bindToggle('tE','showE',()=>rebuild3D());
+bindToggle('tShell','showShellLbl',()=>rebuild3D());
+
+let geomTimer=null;
+function onGeom(){ // geometry change → recalibrate (debounced) + rebuild
+  rebuildPacking(); refreshShown(); rebuild3D();
+  clearTimeout(geomTimer); geomTimer=setTimeout(()=>{recalibrate(); computeChirp(); updateAll(); drawChirp();},120);
+  updateAll();
+}
+function onLight(){ rebuild3D(); updateLight3D(); updateAll(); }
+
+// sequencer transport + binding-energy CHIRP
+const seqCanvas=$('seqCanvas'), sctx=seqCanvas.getContext('2d'), seqLabel=$('seqLabel');
+const H_PLANCK=6.62607015e-34, MeV_J=1.602176634e-13;
+const stepFreqHz=dE=>dE*MeV_J/H_PLANCK;             // a subunit locks in → emits a photon f = ΔE/h (a γ)
+function subunitLabel(k){
+  if(k<=0) return 'empty';
+  if(k===1) return 'α core (2p·2n)';
+  const iso=state.iso;
+  if(k<=1+iso.nd) return `α + <b>${k-1}</b>/${iso.nd} deuterons`;
+  return `α + ${iso.nd}d + <b>${k-1-iso.nd}</b>/${iso.nt} tritons`;
+}
+// incremental binding per packing step = the chirp: ΔE(k) = κ·[ΔA(k) − ΔA(k−1)]
+function computeChirp(){
+  const iso=state.iso, nSub=subunitCount(iso);
+  const arr=new Array(nSub+1).fill(0); let prev=0;
+  for(let k=1;k<=nSub;k++){
+    const {dA}=measureShadow(nucleonsForSubunits(iso,state.nuc,k), DEFAULT_LIGHT);
+    const cum=KAPPA*dA; arr[k]=Math.max(0,cum-prev); prev=cum;
+  }
+  state.chirp=arr;
+}
+function drawChirp(){
+  seqCanvas.width=seqCanvas.clientWidth||300;
+  const W=seqCanvas.width,H=seqCanvas.height; sctx.clearRect(0,0,W,H);
+  const arr=state.chirp||[]; const n=arr.length-1; if(n<1) return;
+  const maxE=Math.max(...arr.slice(1),1e-6), bw=W/n;
+  for(let k=1;k<=n;k++){
+    const h=Math.max(1,(arr[k]/maxE)*(H-6)), on=k<=state.reveal;
+    sctx.fillStyle = on ? (k===1?'rgba(192,96,224,.92)':k<=1+state.iso.nd?'rgba(122,180,224,.88)':'rgba(255,208,128,.88)')
+                        : 'rgba(96,96,128,.32)';
+    sctx.fillRect((k-1)*bw+0.4, H-3-h, Math.max(0.8,bw-0.8), h);
+  }
+  const x=state.reveal*bw;
+  sctx.strokeStyle='rgba(68,238,187,.95)'; sctx.lineWidth=1.3;
+  sctx.beginPath(); sctx.moveTo(x,0); sctx.lineTo(x,H); sctx.stroke();
+}
+function setReveal(k){
+  const max=subunitCount(state.iso);
+  state.reveal=Math.max(0,Math.min(max,k));
+  refreshShown(); rebuild3D(); drawChirp();
+  const dE=(state.chirp&&state.reveal>0)?state.chirp[state.reveal]:0;
+  seqLabel.innerHTML=`${subunitLabel(state.reveal)}<br>`+
+    `<span style="color:var(--ink-soft)">ΔE ${dE.toFixed(2)} MeV · f ${stepFreqHz(dE).toExponential(2)} Hz · γ</span>`;
+  if(state.reveal>0 && dE>0 && state.chirpAudio) beep(dE);
+  updateAll();
+}
+// audible chirp: map ΔE (log) to a tone as each subunit locks in
+let AC=null;
+function beep(dE){
+  try{ AC=AC||new (window.AudioContext||window.webkitAudioContext)();
+    const o=AC.createOscillator(), g=AC.createGain();
+    o.type='sine';
+    o.frequency.value=170*Math.pow(1500/170, Math.min(1,Math.log10(dE+1)/Math.log10(31)));
+    g.gain.setValueAtTime(0.0001,AC.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.12,AC.currentTime+0.012);
+    g.gain.exponentialRampToValueAtTime(0.0001,AC.currentTime+0.19);
+    o.connect(g); g.connect(AC.destination); o.start(); o.stop(AC.currentTime+0.2);
+  }catch(e){}
+}
+$('btnFirst').onclick=()=>{stopPlay();setReveal(1);};
+$('btnLast').onclick=()=>{stopPlay();setReveal(subunitCount(state.iso));};
+$('btnPrev').onclick=()=>{stopPlay();setReveal(state.reveal-1);};
+$('btnNext').onclick=()=>{stopPlay();setReveal(state.reveal+1);};
+$('seqCanvas').onclick=e=>{stopPlay();const r=e.currentTarget.getBoundingClientRect();
+  setReveal(Math.round((e.clientX-r.left)/r.width*subunitCount(state.iso)));};
+addEventListener('resize',drawChirp);
+let playTimer=null;
+function stopPlay(){state.playing=false;$('btnPlay').textContent='▶';clearInterval(playTimer);playTimer=null;}
+$('btnPlay').onclick=()=>{
+  if(state.playing){stopPlay();return;}
+  state.playing=true; $('btnPlay').textContent='⏸';
+  if(state.reveal>=subunitCount(state.iso)) setReveal(1);
+  playTimer=setInterval(()=>{
+    if(state.reveal>=subunitCount(state.iso)){stopPlay();return;}
+    setReveal(state.reveal+1);
+  }, 260);
+};
+
+// =================== boot ===================
+recalibrate();
+buildList();
+rebuildPacking(); computeChirp();
+setReveal(subunitCount(state.iso));   // full nucleus; sets panels, chirp + label (3D still off)
+$('rTightV').textContent='1.45'; $('rLightV').textContent='-38';
+initThree();
+</script>
+</body>
+</html>

@@ -1,3 +1,9 @@
+> **⮑ GRADUATED — investigated — honest convergence (Class C).**
+> Resolved in `Investigations/08_Galactic_Dynamics/GD06_Gravitational_Lensing` — see its `*_VERDICT.md` for the result.
+> The specification below is the original falsifiable prediction, preserved as the record.
+
+---
+
 # E47: Gravitational Lensing from Convergence Gradient
 
 > **Category**: Cosmology

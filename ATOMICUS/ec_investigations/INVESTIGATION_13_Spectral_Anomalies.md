@@ -20,7 +20,7 @@ frequency between two isotopes of the same element: δν = ν(A) − ν(A').
 
 IS has two components:
 1. **Mass shift** (MS): From finite nuclear mass → higher mass = smaller shift
-2. **Field shift** (FS): From nuclear charge radius → larger nucleus = different
+2. **Field shift** (FS): From nuclear boundary radius (conventionally "charge radius") → larger nucleus = different
    electron density at nucleus → line shift
 
 ### IS across EC closure elements
@@ -45,9 +45,9 @@ between ⁷Be and ⁹Be). This is because:
 **SDT implication**: The enormous IS for Be-7 means its spectral lines
 are MEASURABLY different from stable Be-9. If you could do laser
 spectroscopy on Be-7 atoms, the line positions would reveal the
-nuclear charge radius of Be-7 directly — mapping the scaffold geometry.
+nuclear boundary radius of Be-7 directly — mapping the scaffold geometry.
 
-### Be-7 charge radius: measured
+### Be-7 boundary radius: measured
 
 R(⁷Be) = 2.646 ± 0.016 fm (laser spectroscopy at ISOLDE/CERN, 2009)
 R(⁹Be) = 2.519 ± 0.012 fm
@@ -57,7 +57,7 @@ isotope (n_tri = −1) has a BIGGER nucleus than the grammar-valid
 stable isotope (n_tri = 1). The extra proton (which should be a
 neutron) puffs up the scaffold.
 
-### Nuclear charge radius anomalies across EC isotopes
+### Nuclear boundary-radius anomalies across EC isotopes
 
 | Isotope pair | ΔR (fm) | EC isotope bigger? | Grammar explanation |
 |-------------|---------|-------------------|---------------------|
@@ -129,7 +129,7 @@ at high Z.
 
 **Relevance to EC**: Hg-197 EC produces Au-197. The 253.7 nm line
 of Hg depends on the spin-orbit coupling strength, which depends
-on the nuclear charge radius. If the Hg-197 radius differs from
+on the nuclear boundary radius. If the Hg-197 radius differs from
 stable Hg isotopes, the 253.7 nm line shifts — detectable by
 high-resolution spectroscopy.
 
@@ -157,7 +157,7 @@ either:
 ### Yb⁺ anomaly (EC relevant)
 
 The ytterbium isotope chain shows dramatic King plot deviations.
-The nuclear charge radius does NOT change monotonically with neutron
+The nuclear boundary radius does NOT change monotonically with neutron
 number — there are "kinks" at specific N values (N=82, N=100).
 
 For Yb-169 (the EC isotope), N=99 — ONE neutron short of the

@@ -1,3 +1,8 @@
+> **⮑ INVESTIGATED — resolved NEGATIVE.**
+> NP09 occlusion route FAILED (E_bind −97.3% vs 2.224 MeV; see `NP09_VERDICT.md`). The successful sibling route is NP17 (shared-electron packing: 2.200 MeV, −1.06%, no fitted scale).
+
+---
+
 # E29: Deuteron Binding from Occlusion Geometry
 
 > **Category**: Nuclear Physics

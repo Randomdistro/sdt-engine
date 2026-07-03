@@ -70,7 +70,7 @@ The decisive result. **M3 is the only SDT disk law that beats the Newtonian bary
 a(R) = c²·Ϟ_disk·f_enc(R)/(h_R·R)   →   v²(R) = a·R = c²·Ϟ_disk·f_enc(R)/h_R   →   FLAT
 ```
 
-The *only* change from the failing spherical law is `/R` → `/h_R`: a point-source 1/r² kernel replaced by an extended-line 1/r³ kernel integrated over the disk. `h_R` is measured geometry and `Ϟ_disk = G·M_disk/c²` is parameter-free — **no fitted constant, no dark matter, no MOND a₀.** This is exactly the mechanism the user pointed to ("1/r³").
+The *only* change from the failing spherical law is `/R` → `/h_R`: a point-source 1/r² kernel replaced by an extended-line 1/r³ kernel integrated over the disk. `h_R` is measured geometry and `Ϟ_disk = G·M_disk/c²` is parameter-free — **no fitted constant, no dark matter** — [CORRECTED: "no MOND a₀" does not survive M4 below (§5c): a₀ = cH₀/2π is numerically the Milgrom scale and its crossover shape is a borrowed MOND-simple interpolation; NOT zero-parameter until the crossover is derived natively]. This is exactly the mechanism the user pointed to ("1/r³").
 
 **5b. Where M3 wins.** On the 31 **bulge galaxies** it reaches **RMS 24.1 %, bias +4.6 %** — and individually fits many massive spirals at dark-matter-model quality with zero free parameters: UGC06614 10.0 %, UGC03546 11.1 %, NGC4138 11.9 %, UGC11914 12.0 %, UGC03205 14.9 %, UGC08699 14.5 %, UGC09133 15.2 %, NGC2841 15.8 %, NGC6674 16.0 %, NGC5033 16.4 %, NGC7814 16.2 %. The flat-curve mechanism is genuinely working.
 
@@ -85,7 +85,7 @@ This is the decisive step, and it came directly from the GOM12 solar pressure-do
 
 An LSB is diffuse, so its baryonic wake is thin from the start — it lives almost entirely *below* the floor, the way Oort objects live outside the Sun's domain. So its velocity is **not** set by its own baryon density (which is what M1–M3 all assumed); it is set by the universal floor `a_0 = c·H₀/2π ≈ 1.042×10⁻¹⁰ m/s²` (already DERIVED in `galactic.hpp:77`, not fitted).
 
-**The law (zero free parameters):**
+**The law** [CORRECTED: not zero free parameters — one borrowed structure (MOND-simple interpolation) + a₀ = cH₀/2π (numerically the Milgrom scale): asymptotes SDT-derived, crossover borrowed — NOT zero-parameter until the crossover is derived natively; see §5c/§8]:
 ```text
 g_obs = g_bar / (1 − exp(−√(g_bar/a_0))) ,   g_bar = v_bar²/R
 ```
@@ -116,7 +116,7 @@ The same convergence-floor crossover that fixes the Oort cloud's location fixes 
 - [x] BTFR ≈ 4 — **PASS** (M4 = 3.58; observed 3.14, theory ~4)
 - [x] Identify which class fails and why — solved for dwarfs/LSB via the floor; residual outliers are edge-on/disturbed kinematics
 
-**Conclusion.** Two user hints, each correct, compounded into a near-complete result. (1) The `1/r³` transverse-gradient kernel (GOM01) turns the declining spherical disk term into a naturally **flat** one. (2) The **convergence-floor** marker — the same `r_domain = √(L/4πF_CMB)` physics that places the Oort cloud at ~20,860 AU — says diffuse galaxies live *below* the universal floor `a_0 = c·H₀/2π` and are governed by it, not by their own baryon density. Applying that floor transition (M4) makes the model **unbiased (−1.6 %)**, fits the previously-failing dwarfs/LSBs (bulgeless bias −3.8 %), and recovers the **BTFR slope (3.58, PASS)** — all with **zero free parameters** (`a_0` is derived in-engine, `koppa` is `GM/c²`). SDT now reproduces galaxy rotation curves across the full SPARC sample to ~24 % RMS with no dark matter and no fitted halo. The bulge sector is exact; the disk/dwarf sector is governed by the convergence floor.
+**Conclusion.** Two user hints, each correct, compounded into a near-complete result. (1) The `1/r³` transverse-gradient kernel (GOM01) turns the declining spherical disk term into a naturally **flat** one. (2) The **convergence-floor** marker — the same `r_domain = √(L/4πF_CMB)` physics that places the Oort cloud at ~20,860 AU — says diffuse galaxies live *below* the universal floor `a_0 = c·H₀/2π` and are governed by it, not by their own baryon density. Applying that floor transition (M4) makes the model **unbiased (−1.6 %)**, fits the previously-failing dwarfs/LSBs (bulgeless bias −3.8 %), and recovers the **BTFR slope (3.58, PASS)** — with **one borrowed structure (MOND-simple interpolation) + a₀ = cH₀/2π (numerically the Milgrom scale): asymptotes SDT-derived, crossover borrowed — NOT zero-parameter until the crossover is derived natively** (`koppa` is `GM/c²`, but the crossover function is not native — see §5c/§8). SDT now reproduces galaxy rotation curves across the full SPARC sample to ~24 % RMS with no dark matter and no fitted halo, but the tool's own gate prints `[FAIL] M4 RMS<20% (got 23.8%)`. The bulge sector is exact; the disk/dwarf sector is governed by the convergence floor, pending native derivation of the crossover.
 
 ## 8. Where a fix must live next
 

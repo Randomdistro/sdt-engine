@@ -249,7 +249,7 @@ The pressure is primary. The CMB spectrum is secondary. The convergence has alre
 **Law 3: Inertial Mass from Throughput Asymmetry.**
 $F = ma$ is the rate of convergence condensation across an exclusion volume. $m_{\mathrm{inert}} = m_{\mathrm{grav}}$ because both are $V_{\mathrm{disp}}$. The speed limit is convergence hemisphere evacuation.
 
-Three laws. One boundary condition. One mechanism. No free parameters.
+Three laws. One boundary condition. One mechanism. No free parameters beyond the acknowledged underived inputs (G-correspondence and V_disp — see "What remains" below).
 
 ---
 
@@ -259,7 +259,7 @@ Three laws. One boundary condition. One mechanism. No free parameters.
 
 **Measured input:** $T_{\mathrm{CMB}} = 2.725$ K (confirming the spectral form of the convergence state, not defining it)
 
-**Free parameters:** None.
+**Free parameters:** none fitted here; G and V_disp remain underived inputs (§below).
 
 **Critical distinction:** The pressure is not caused by distant radiation. The pressure is the local state of the medium, established by the already-arrived convergence of the transparency transition. The CMB observation confirms the state; it does not create it.
 

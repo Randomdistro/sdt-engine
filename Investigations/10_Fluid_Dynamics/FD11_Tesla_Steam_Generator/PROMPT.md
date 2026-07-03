@@ -1,8 +1,20 @@
 # FD11 — Tesla Steam Generator (the bladeless boundary-layer turbine as a spation-traction engine)
 
-**Domain**: Fluid Dynamics (SDT lattice mechanics)
-**Status**: SPEC
-**Author**: James Christopher Tyndall, Melbourne
+> **Author:** J. C. Harvey, Melbourne. **Status:** SPEC (upgrade 2026-06-27).
+> **Inherits:** `PERFECT_PROMPT_TEMPLATE.md` §⓪–§⑩ · `PROMPT_EXECUTION_PROTOCOL.md` · §0 anti-creep (R0–R5).
+> **Engine:** `#include <sdt/laws.hpp>` only — no local constant namespaces.
+> **Run:** Pre-commit thresholds in `RUN_LOG.md` before coding; adjust per pivot table (§⑩).
+---
+
+## ⓪ The Golden Rule — five questions (answered, not stubbed)
+
+1. **What don't we know?** — Can SDT spation traction (PPT06/FD06), composed with FD02/FD05/FD08, predict from first principles the *optimal disk gap*, *torque–speed curve*, and *rotor-efficiency-vs-tip-speed* of a **superheated-steam-driven Tesla disc turbine**, and does its signature inversion hold (Tesla rotor efficiency *rises* as `Re_b` falls / viscosity rises — opposite to bladed machines)?
+2. **Why does it matter?** — The Tesla disc turbine is a real, buildable device whose drive *is* boundary-layer traction; it is the integration test of the whole FD branch and a concrete falsifier of the traction mechanism (the `dη_rotor/dRe_b < 0` signature is unique to traction drive).
+3. **How will we find out?** — Five gated phases (§④) on the **superheated-steam disc-turbine scope** (`(P₀,T₀)` steam inlet, choked nozzle, co-rotating disc stack). **SCOPE LOCK (read before coding):** this prompt is the steam disc turbine; it is NOT a geothermal pinhole-orifice / low-grade-flash study. If the working fluid, inlet state, or device geometry drifts from "superheated-steam Tesla disc turbine", that is an out-of-scope **ADJ** that must be logged and either justified or reverted — do not silently re-scope and then grade against the new device.
+4. **What would prove us wrong?** — §⑧, five falsifiers with real failure modes; in particular F1 (`b_opt`) has a **hard, self-consistent trigger:** the prompt's own kill line is `b_opt` off by `>2×`, so a result `>2×` off is a FAIL, not a graded success — no moving that goal post.
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN), per phase, with a **single, non-contradictory CALIBRATED count** carried identically across §⑤, §⑩, and the VERDICT.
+
+**Domain**: Fluid Dynamics (SDT lattice mechanics) · **Status**: SPEC · **Author**: J. C. Harvey, Melbourne
 
 *This investigation inherits the §0 anti-creep protocol and rules R0–R5 verbatim (whitelist inputs only; no G/M/kg fundamentals; no fields/wavefunctions/quarks/ΛCDM; certification labels on every result; translation test on every borrowed term; honesty over success). It is the applied capstone of the FD series.*
 
@@ -55,8 +67,8 @@ Five gated phases (R4: a clean kill outranks a forced pass). Each predicts its n
 
 ### Phase 1 — Inter-disk traction flow & the optimal gap
 - **Goal.** Solve the laminar flow between two co-rotating disks driven by a radial pressure gradient; obtain `u(y,r)`, `τ_w(r)`, and the gap `b_opt` at which traction coupling peaks.
-- **Method.** Reduce Navier–Stokes (FD01) for the thin-gap, axisymmetric, steady case; non-dimensionalise; identify `b_opt ≈ k_b√(ν t_res)` with `t_res` from the spiral path. Ledger `ν` as MEASURED-INPUT (steam tables at the working state).
-- **Success.** `b_opt` predicted within **20%** of Tesla's measured optimum (~0.4 mm for steam; ~0.8–2 mm for air). **Checkpoint C1.**
+- **Method.** Reduce Navier–Stokes (FD01) for the thin-gap, axisymmetric, steady case; non-dimensionalise; identify `b_opt ≈ k_b√(ν t_res)` with `t_res` from the spiral path. Ledger `ν` as MEASURED-INPUT (steam tables at the working state), and ledger `k_b` explicitly — DERIVED if it comes from the FD06 boundary-layer-thickness criterion, else CALIBRATED(1) (and then it is *the* one calibration the device is allowed; see §⑤).
+- **Success / trigger (self-consistent with F1).** `b_opt` predicted within **20%** of Tesla's measured steam optimum (~0.4 mm) is an A-class hit; between 20% and 2× is a Class-C/D partial; **`b_opt` off by `>2×` is a Phase-1 FAIL (F1), full stop** — it is not re-graded as success by widening the band or re-scoping the device. **Checkpoint C1.**
 
 ### Phase 2 — Torque, power & the efficiency curve
 - **Goal.** Produce `τ(ω)`, `Ẇ(ω)`, and `η_rotor(λ)` for a given disk stack.
@@ -84,10 +96,10 @@ Five gated phases (R4: a clean kill outranks a forced pass). Each predicts its n
 
 | Class | Verdict | Quantitative metric |
 |---|---|---|
-| **A (PASS — derived)** | Device predicted from SDT | `b_opt` <20%, `η_rotor(λ)` peak location & magnitude matched, viscosity signature confirmed, CALIBRATED(0) beyond steam-table inputs. |
-| **C (QUALIFIED — convergence)** | Reproduced, one loss fitted | Gap & efficiency within tolerance with exactly one CALIBRATED(1) loss coefficient, documented; signature confirmed. |
-| **D (QUALIFIED-PENDING — computed)** | Trends reproduced | `τ(ω)` and `η(λ)` shapes correct but a loss coefficient PENDING a fuller wake/exhaust model. |
-| **F (FAIL)** | Mechanism falsified | `b_opt` off by >2×, OR `η_rotor` rises with `Re_b` (signature inverted) ⟹ traction is not the drive mechanism for this device. |
+| **A (PASS — derived)** | Device predicted from SDT | `b_opt` <20%, `η_rotor(λ)` peak location & magnitude matched, viscosity signature confirmed, **CALIBRATED(0)** beyond steam-table MEASURED-INPUT (i.e. `k_b` and all loss coefficients DERIVED). |
+| **C (QUALIFIED — convergence)** | Reproduced, **exactly one** calibration | Gap & efficiency within tolerance with **CALIBRATED(1)** — *one and only one* fitted scalar, which is **either** the gap constant `k_b` **or** one lumped loss coefficient, named in the ledger and identical across §⑤/§⑩/VERDICT; signature confirmed. Two fitted scalars ⟹ this is **not** Class C. |
+| **D (QUALIFIED-PENDING — computed)** | Trends reproduced | `τ(ω)` and `η(λ)` shapes correct but a coefficient is PENDING a fuller wake/exhaust model; calibration count stated. |
+| **F (FAIL)** | Mechanism falsified | `b_opt` off by **>2×** (no re-grading, no re-scoping), OR `η_rotor` rises with `Re_b` (signature inverted) ⟹ traction is not the drive mechanism for this device. |
 
 ---
 
@@ -122,7 +134,7 @@ Five gated phases (R4: a clean kill outranks a forced pass). Each predicts its n
 
 | Test | Hypothesis | Predicted outcome | If FAIL |
 |---|---|---|---|
-| F1 — Optimal gap | `b_opt ≈ k_b√(ν t_res)` | Predicted gap within 20% of Tesla's ~0.4 mm (steam) | Off by >2× ⟹ gap not set by boundary-layer diffusion |
+| F1 — Optimal gap (hard trigger) | `b_opt ≈ k_b√(ν t_res)` | Predicted gap within 20% of Tesla's ~0.4 mm (steam); 20%–2× = partial (C/D) | **Off by >2× ⟹ Class F for the gap claim** — this trigger is fixed; a `>2×` miss is never graded a success, and the device is not re-scoped (e.g. to a geothermal pinhole) to make a different gap "pass" |
 | F2 — Efficiency curve | traction drive ⟹ peaked `η_rotor(λ)` at `λ≈0.4–0.6` | Curve shape & peak location match data | Wrong peak `λ` or monotone curve ⟹ momentum-transfer model wrong |
 | F3 — Viscosity signature | `dη_rotor/dRe_b < 0` (rises with viscosity) | Confirmed across ≥3 fluids; crosses bladed baseline | Efficiency rises with `Re_b` ⟹ **traction falsified** (Class F) |
 | F4 — Choked mass flow | nozzle throat chokes (FD05) | `ṁ(P₀,T₀)` matches choked-flow value <5% | Mis-predicted `ṁ` ⟹ compressible coupling wrong |
@@ -137,4 +149,55 @@ Five gated phases (R4: a clean kill outranks a forced pass). Each predicts its n
 - **Testing.** Three two-stream checks: analytic vs discretised torque integral; choked `ṁ` vs isentropic table; `η_rotor(λ)` peak vs a coarse parameter sweep. Commit predictions to the run log before unsealing data (R1). No free integer/π inserted to hit Tesla's numbers (R5).
 - **Standalone compile.** `cl /std:c++20 /EHsc /O2 /I Engine/include fd11_tesla_turbine.cpp` (MSVC) or `g++ -std=c++20 -IEngine/include fd11_tesla_turbine.cpp -o fd11` (GCC/Clang). Include only `<sdt/laws.hpp>`.
 - **Plots.** `η_rotor` vs `λ` (with peak marked); `τ` and `Ẇ` vs `ω`; `η_rotor` vs `Re_b` overlaid with a bladed-turbine baseline (the signature); `b_opt` vs `ν`.
-- **Author attribution:** James Christopher Tyndall, Melbourne. The Tesla-turbine performance data are the CONVERGENCE target to *reproduce*, never inputs to *borrow*.
+- **Author attribution:** J. C. Harvey, Melbourne. The Tesla-turbine performance data are the CONVERGENCE target to *reproduce*, never inputs to *borrow*.
+
+## 10. Questions This Opens *(generative — log new ones in `FD11_VERDICT.md`)*
+
+1. **Is the `dη_rotor/dRe_b < 0` signature large enough to measure cleanly across steam/air/viscous-gas**, or is the crossover with the bladed baseline so gentle that the discriminating falsifier needs a wide viscosity range? The *steepness* of the inversion is itself an SDT prediction.
+2. **Can `k_b` be derived from the FD06 boundary-layer-thickness criterion alone** (gap = a fixed number of `δ`), making `b_opt` a zero-calibration prediction? If so FD11 reaches Class A; if `k_b` must be fitted, it is the one allowed CALIBRATED(1).
+3. **Does the same traction wall-shear that drives the Tesla disc set the no-slip layer in FD06 with one shared coefficient?** A single traction constant spanning a passive boundary layer (FD06) and an active engine (FD11) would be strong internal-consistency evidence.
+4. **Is there a working-fluid regime (very high viscosity / very low `Re_b`) where the Tesla disc out-performs every bladed machine**, and is that the natural SDT application niche the device was always best suited to?
+---
+
+## ⑩ Adaptive Execution Protocol
+
+> *It is a bad plan that cannot be altered.* Failures invoke **PIVOT / KILL / OPEN** — never RETRO-PASS or PLUG.
+> See `PROMPT_EXECUTION_PROTOCOL.md`.
+
+### Pre-Run Commitment Block (copy to `RUN_LOG.md` before coding)
+
+```markdown
+## Pre-Run Commitments — FD11
+- Prompt completion target: [A|B|C|D]
+- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- CALIBRATED budget: **exactly one number total** for Class C — either `k_b` or one lumped loss coefficient (0 for Class A). State it once; it must read identically in §⑤, §⑩, and the VERDICT.
+- Engine namespaces actually used: law_VI::traction (PPT06 wall shear, ω_demand), law_III (occlusion), law_V (movement-budget partition for the loss ledger), bridge (koppa); ν from FD02 (steam-table MEASURED-INPUT), choked flow from FD05, energy budget from FD08
+- Phase thresholds (committed before run):
+    P1 `b_opt` within 20% of ~0.4 mm steam (**>2× = FAIL**, no re-scope) · P2 `η_rotor(λ)` peak at `λ≈0.4–0.6`, analytic vs discretised torque <1%
+    P3 `η_overall` in the historical band (~20–40%), CALIBRATED ≤1 · P4 sign `dη_rotor/dRe_b < 0` confirmed across ≥3 viscosities (sign test, not %) · P5 predicted output within tolerance of ≥1 dataset, rpm ≤ hoop-stress limit
+- Forbidden retroactive changes: widen tolerances; plug targets; IDENTITY-PASS; local constant namespaces; **re-scope from the superheated-steam disc turbine to a different device to rescue a failing `b_opt`**; let the CALIBRATED count differ between sections
+```
+
+### Pivot table (minimum — extend for this investigation)
+
+| Trigger (numeric) | PIVOT (first) | If pivot fails | Forbidden |
+|---------|---------------|----------------|-----------|
+| Phase 0 sanity check fails | Fix units/engine refs; verify `laws.hpp` symbols | STOP — report blocker | Fit to target |
+| P1 `b_opt` 20%–2× off | recheck `k_b` from the FD06 `δ` criterion and `t_res` | **report partial (C/D)**; if `>2×`, **Class F** | widen the band, or re-scope the device to make a different gap "pass" |
+| P4 `dη_rotor/dRe_b ≥ 0` (signature inverted) | recheck the traction wall-shear integral | **KILL** — traction is not the drive mechanism | bury the inverted sign |
+| Working fluid / inlet state drifts off steam | log an out-of-scope **ADJ**; justify or revert | **STOP** and re-confirm scope with §⓪ lock | silently re-scope and grade the new device |
+| Rivals (bladed model) match but SDT doesn't beat | Label **DEGENERATE** honestly | — | Claim Class A |
+| Upstream dependency missing (FD05 choked flow, FD06 traction) | **DEFER** phase; cite dependency ID | — | Fake PASS |
+
+### Allowed adjustments
+
+- Finer numerics (mesh, ticks, bracket); phase splits (Na / Nb); filename fix via ADJ entry.
+- Alternative **native** routes already listed in §④ Strategy.
+
+### Disallowed adjustments
+
+- Post-hoc tolerance widening · coefficient plugs · `atomic::`/GM/G in the native chain · re-scoping to rescue a failing gap · self-contradicting calibration counts.
+
+---
+
+*FD11 · upgraded 2026-06-27 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*

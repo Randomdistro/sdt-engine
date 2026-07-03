@@ -3,7 +3,7 @@ On the Nature of Selenium (³⁴Se): The Semi-Metallic Octahedron and the Geomet
 Author: J.C. Harvey (Independent Researcher)
 Framework Synthesis and Analysis: AI Collaborator
 Abstract
-Selenium (Z=34) is a nonmetal that sits below Sulfur in the periodic table and is a crucial micronutrient for life. Its most famous property is its photoconductivity—its ability to conduct electricity much more effectively when exposed to light—which made it foundational to early electronics and photocopiers. Standard models describe its configuration as [Ar] 3d¹⁰ 4s²4p⁴. This paper provides a complete, first-principles derivation of the properties of Selenium within the Spatial Displacement Theory (SDT) framework. We model the Selenium atom as a system with a completed [Ar] 3d¹⁰ core, surrounded by an outer shell of six electron vortices. We demonstrate that these six vortices lock into a higher-octave octahedral geometry, leaving two primary vacancies. The unique energetic properties of this large, "floppy" n=4 shell structure are shown to be the direct mechanical origin of its photoconductivity.
+Selenium (Z=34) is a nonmetal that sits below Sulfur in the periodic table and is a crucial micronutrient for life. Its most famous property is its photoconductivity—its ability to conduct electricity much more effectively when exposed to light—which made it foundational to early electronics and photocopiers. Standard models describe its configuration as [Ar] 3d¹⁰ 4s²4p⁴. This paper provides a structural characterisation of Selenium under the SDT construction grammar (measured properties quoted as anchors; derivations are OPEN unless explicitly shown). We model the Selenium atom as a system with a completed [Ar] 3d¹⁰ core, surrounded by an outer shell of six electron vortices. We demonstrate that these six vortices lock into a higher-octave octahedral geometry, leaving two primary vacancies. The unique energetic properties of this large, "floppy" n=4 shell structure are proposed as a qualitative mechanism for its photoconductivity; the 1.74 eV gap itself is a measured value, not a derived one.
 ________________________________________
 1. Organization: The Higher-Octave Echo of the Octahedron
 Selenium's structure is a direct, predictable echo of the structure of Sulfur and Oxygen.
@@ -26,7 +26,7 @@ o	1s² Core Shell (Probed by E<sub>i33</sub> ≈ 13200 eV): v<sub>1s</sub> ≈ 6
 4. Magnetism
 •	Prediction: The six valence electrons in the octahedron will form two stable dyads, leaving two unpaired electron vortices. Selenium is predicted to be paramagnetic. This is confirmed.
 5. Conclusion: A Predictable Echo with Novel Properties
-Selenium perfectly demonstrates the power of the SDT framework. It is a predictable higher-octave echo of Oxygen and Sulfur, with the same octahedral geometry leading to the same divalency and paramagnetic signature. However, the theory also provides a direct, mechanical explanation for its unique emergent property—photoconductivity—by modeling it as the resonant unlocking of electron vortices from their stable geometric configurations by the energy of incoming light waves.
+Selenium perfectly demonstrates the power of the SDT framework. It is a predictable higher-octave echo of Oxygen and Sulfur, with the same octahedral geometry leading to the same divalency and paramagnetic signature. However, the theory also offers a qualitative mechanical picture for its unique emergent property—photoconductivity—by modeling it as the resonant unlocking of electron vortices from their stable geometric configurations by the energy of incoming light waves; the 1.74 eV gap is a measured anchor in this picture, not a quantity derived from geometry.
 ________________________________________
 7.6. Rigorous SDT Mathematical Analysis: Selenium
 **A. Nuclear Cross-Reference**
@@ -80,7 +80,7 @@ ________________________________________
 
 **A. Nuclear Cross-Reference**
 - **Nucleus**: Selenium (Z=34, N=46)
-- **Geometry**: Geometric Structure derived from Z constraints.
+- **Geometry**: Geometric structure proposed from Z constraints (qualitative picture; not a numeric derivation).
 - **SDT Analysis**: Z=34 defines the electromagnetic lens strength.
 
 **B. Ionization Economics and Kinematics**
@@ -91,7 +91,7 @@ ________________________________________
     - **Geometric k-factor**: $k = c/v = 161.86$
 
 **C. SDT Utilization & Applications**
-Derived from the geometric stability and ionization thresholds:
+Building on the geometric-stability picture and (measured) ionization thresholds -- application potential, not a derivation of the thresholds themselves:
 - **Variable Geometry Tuning**: Moderate ionization allows for switchable interactions (conductive/insulative) via applied voltage.
 
 

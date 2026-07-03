@@ -17,7 +17,7 @@ Honest headline: **SDT derives the geometry of the force hierarchy; the single p
 ## Primary Question
 Is `f = P_eff / P_conv = 2.125e-17` a fitted parameter or a universal constant?
 
-## Answer: f IS Universal, NOT Fitted
+## Answer (RETRACTED by audit note above): f is class E (calibrated) — the 'universality' rows are the same equation written twice
 
 **f is the exact ratio:**
 

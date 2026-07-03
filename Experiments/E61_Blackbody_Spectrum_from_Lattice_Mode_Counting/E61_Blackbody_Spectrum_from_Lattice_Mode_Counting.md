@@ -1,3 +1,9 @@
+> **⮑ GRADUATED — investigated — honest convergence (Class C).**
+> Resolved in `Investigations/09_Stellar_Astrophysics_and_Radiation/SAR02_Blackbody_Radiation_from_Lattice` — see its `*_VERDICT.md` for the result.
+> The specification below is the original falsifiable prediction, preserved as the record.
+
+---
+
 # E61: Blackbody Spectrum from Lattice Mode Counting
 
 > **Category**: Radiation

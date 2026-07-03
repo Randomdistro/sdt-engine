@@ -1,8 +1,20 @@
 # FD01 — Navier–Stokes from Spation Relay (the Fluid-Dynamics root)
 
-**Domain**: Fluid Dynamics (SDT lattice mechanics)
-**Status**: SPEC
-**Author**: James Christopher Tyndall, Melbourne
+> **Author:** J. C. Harvey, Melbourne. **Status:** SPEC (upgrade 2026-06-27).
+> **Inherits:** `PERFECT_PROMPT_TEMPLATE.md` §⓪–§⑩ · `PROMPT_EXECUTION_PROTOCOL.md` · §0 anti-creep (R0–R5).
+> **Engine:** `#include <sdt/laws.hpp>` only — no local constant namespaces.
+> **Run:** Pre-commit thresholds in `RUN_LOG.md` before coding; adjust per pivot table (§⑩).
+---
+
+## ⓪ The Golden Rule — five questions (answered, not stubbed)
+
+1. **What don't we know?** — Does the continuum coarse-graining of nearest-neighbour spation relay reproduce incompressible Navier–Stokes **term-for-term** (no surplus term, no missing term), or does the relay update produce a leading-order PDE that differs from NS?
+2. **Why does it matter?** — FD01 is the *root* of the entire FD branch (FD02–FD11). If NS is a borrowed axiom rather than a coarse-grained relay result, every downstream fluid investigation inherits the borrow; conversely a clean bijection makes viscosity (FD02), sound (FD05), and turbulence (FD04) all native consequences of one lattice.
+3. **How will we find out?** — Five gated phases (§④): write the discrete relay rule (P1) and Taylor/Chapman–Enskog expand it (P2) **before** declaring any NS term recovered; the term↔mechanism bijection (P2) is the core gate.
+4. **What would prove us wrong?** — §⑧, five falsifiers with real failure modes: a surplus leading-order term NS lacks (and not a defensible SDT-distinct prediction), a dropped term, `‖∇·v‖` finite as `Ma→0`, or the emitted `ν` disagreeing with FD02 by >10% — each a clean kill.
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN), per phase, no repainting a fired test.
+
+**Domain**: Fluid Dynamics (SDT lattice mechanics) · **Status**: SPEC · **Author**: J. C. Harvey, Melbourne
 
 *This investigation inherits the §0 anti-creep protocol and rules R0–R5 verbatim (whitelist inputs only; no G/M/kg fundamentals; no fields/wavefunctions/quarks/ΛCDM; certification labels on every result; translation test on every borrowed term; honesty over success).*
 
@@ -145,4 +157,56 @@ Five phases, each gated. Run them in order; a failed checkpoint stops the chain 
 - **Testing strategy.** Three independent two-stream checks (R3): (i) conservation of cell count and throughput to machine precision; (ii) `∇·v` vs `Ma` power-law fit; (iii) analytic Stokes solution vs lattice relaxation. Predict each number and commit it to the run log *before* comparing (R1). Anti-numerology (R5): no free integer or π inserted to force the coefficient — it must come from lattice geometry or be flagged CALIBRATED.
 - **Standalone compile.** `cl /std:c++20 /EHsc /O2 /I Engine/include fd01_navier_stokes_relay.cpp` (MSVC) or `g++ -std=c++20 -IEngine/include fd01_navier_stokes_relay.cpp -o fd01` (GCC/Clang). Include only `<sdt/laws.hpp>`; do not redefine any constant it exposes.
 - **Visualisation hints.** Dump the 2-D velocity field and `∇·v` to CSV for a quick quiver/heatmap; plot the Taylor–Green vortex decay envelope (predicted vs measured) and the `‖∇·v‖`-vs-`Ma` log-log fit. A side-by-side of the same initial condition under Euler (`ν=0`) and NS (`ν>0`) makes the limit recovery visually obvious.
-- **Author attribution:** James Christopher Tyndall, Melbourne. The standard-FD result (NS, Euler, Stokes) is the CONVERGENCE target to *reproduce*, never an input to *borrow*.
+- **Author attribution:** J. C. Harvey, Melbourne. The standard-FD result (NS, Euler, Stokes) is the CONVERGENCE target to *reproduce*, never an input to *borrow*.
+
+## 10. Questions This Opens *(generative — log new ones in `FD01_VERDICT.md`)*
+
+These are *not* required for the verdict; they are the payoff of doing it well.
+
+1. **Is the dropped `Ma²` compressible term the only surplus, or does the relay expansion carry an odd-order dispersion term at `k ∼ 1/ℓ_P`?** Such a term would be an SDT-distinct prediction (a tiny NS deviation at the lattice cutoff), not a kill — does it survive the continuum limit?
+2. **Does the relay update naturally produce a *finite* propagation speed for momentum (no instantaneous diffusion), unlike parabolic NS?** If `ν∇²v` is the long-wavelength limit of a hyperbolic relay (telegrapher-type) equation, SDT predicts a relativistic-causal viscosity — testable at extreme shear rates.
+3. **Is incompressibility `∇·v=0` exactly `O(Ma²)`, or does the lattice frustration (FLM08) shift the exponent?** A measured deviation would fingerprint the granularity.
+---
+
+## ⑩ Adaptive Execution Protocol
+
+> *It is a bad plan that cannot be altered.* Failures invoke **PIVOT / KILL / OPEN** — never RETRO-PASS or PLUG.
+> See `PROMPT_EXECUTION_PROTOCOL.md`.
+
+### Pre-Run Commitment Block (copy to `RUN_LOG.md` before coding)
+
+```markdown
+## Pre-Run Commitments — FD01
+- Prompt completion target: [A|B|C|D]
+- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- CALIBRATED budget: 0 in the P2 bijection chain (at most CALIBRATED(1) one fluid scale in P5, documented)
+- Engine namespaces actually used: law_I (P_conv), law_III (solid_angle_occluded), law_IV (V_disp→ρ), law_V (budget), bridge (koppa)
+- Phase thresholds (committed before run):
+    P1 conservation to machine precision · P2 bijection exact (zero surplus/missing leading-order term)
+    P3 ‖∇·v‖ ∝ Ma² (exponent 2.0 ± 0.1) · P4 Stokes relaxation <1% vs analytic · P5 FD01↔FD02 ν agree <1% (kill >10%)
+- Forbidden retroactive changes: widen tolerances; plug targets; IDENTITY-PASS; local constant namespaces; relabel a surplus term as "feature" without characterising it
+```
+
+### Pivot table (minimum — extend for this investigation)
+
+| Trigger (numeric) | PIVOT (first) | If pivot fails | Forbidden |
+|---------|---------------|----------------|-----------|
+| Phase 0 sanity check fails | Fix units/engine refs; verify `laws.hpp` symbols | STOP — report blocker | Fit to target |
+| P2 surplus leading-order term appears | characterise it: defensible SDT-distinct prediction or artefact? | **KILL** if it contradicts NS and is not predictive | silently drop the term |
+| P3 `‖∇·v‖` exponent ≠ 2 | re-derive continuity from spation-number conservation | **OPEN** the compressible correction | force the Ma² fit |
+| P5 FD01 `ν` ≠ FD02 `ν` by >10% | recheck the relay-diffusion coefficient against FD02's derivation | **KILL** (relay diffusion ≠ viscosity) | retro-tune one coefficient to the other |
+| Rivals match but SDT doesn't beat | Label **DEGENERATE** honestly | — | Claim Class A |
+| Upstream dependency missing (FD02 ν, ROOT-SIM) | **DEFER** phase; cite dependency ID | — | Fake PASS |
+
+### Allowed adjustments
+
+- Finer numerics (mesh, ticks, bracket); phase splits (Na / Nb); filename fix via ADJ entry.
+- Alternative **native** routes already listed in §④ Strategy.
+
+### Disallowed adjustments
+
+- Post-hoc tolerance widening · coefficient plugs · `atomic::`/GM/G in the Phase-1/Phase-2 native chain · grading A while the FD02 `ν` handshake is unmet.
+
+---
+
+*FD01 · upgraded 2026-06-27 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*

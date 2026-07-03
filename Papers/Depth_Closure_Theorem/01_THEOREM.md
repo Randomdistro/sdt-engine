@@ -81,7 +81,8 @@ descriptor and equals `GM/c²` as a *consequence*, not an input.
 - **C5 (closure floor, koppa form).** The spation closure is the mass-independent
   fixed point where koppa equals wake: `ℓ_P = √(ϟ·ƛ)`, reproducing the Planck
   length, with the irreducible scale-seed reduced from `{ℏ, G}` to one measured SDT
-  length.
+  length (algebraic identity with Planck's √(ℏG/c³) — a re-homing of the seed, not
+  a derivation; see FLM06 Seed Theorem).
 
 - **C6 (lumiopause / lumiostasis).** The solar depth domain ends at the
   surface-area condition `L_sun/(4πr²) = F_CMB`, i.e. `r = √(L_sun/4πF_CMB) =
@@ -107,10 +108,12 @@ descriptor and equals `GM/c²` as a *consequence*, not an input.
 
 - **Galactic rotation (GD05).** The depth/convergence-floor law (with derived
   `a₀ = cH₀/2π = 1.042×10⁻¹⁰ m/s²`) fits 135 SPARC galaxies at RMS 23.8 %,
-  unbiased, BTFR slope 3.58.
+  unbiased, BTFR slope 3.58 — crossover shape borrowed from the MOND 'simple'
+  interpolation; not zero-parameter until derived natively.
 - **Cross-scale collapse (APS03).** Galactic, atomic, and stellar response collapse
-  onto one curve in `ξ = g_self/a₀` at RMS 8.8 %; a deliberately wrong floor
-  degrades the collapse 6×, confirming the derived `a₀` is required.
+  onto one curve in `ξ = g_self/a₀` at RMS 21.5 % (the galactic pilot is void
+  pending a data-path fix); a deliberately wrong floor degrades the collapse
+  2.4×, consistent with a shared floor, though the collapse is not yet decisive.
 
 ---
 

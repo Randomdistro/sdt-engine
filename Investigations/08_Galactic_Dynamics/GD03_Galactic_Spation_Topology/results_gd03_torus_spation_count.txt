@@ -1,0 +1,158 @@
+﻿###################################################################
+   CQ20b: Proton Torus — Spation Surface Count
+   SDT Framework — James Tyndall, Melbourne
+###################################################################
+
+=== FUNDAMENTAL SCALES ===
+
+   Spation radius:        r_s = l_P/2 = 8.081275e-36 m
+   Spation diameter:      l_P       = 1.616255e-35 m
+   Proton charge radius:  R_p       = 8.414000e-16 m
+   Classical electron R:  r_e       = 2.817940e-15 m
+   Proton Compton:        lambda_Cp = 1.321410e-15 m
+   R_p / r_s = 1.0412e+20  (spations across proton radius)
+   r_e / r_s = 3.4870e+20  (spations across c-boundary)
+
+   Proton exclusion volume:  V_disp = 1.8327e-58 m³
+   Proton exclusion radius:  R_excl = 3.5250e-20 m
+   R_excl / r_s = 4.3619e+15  (spations across exclusion)
+
+=== TORUS CONFIGURATIONS ===
+
+   --- A: Horn torus ---
+   R=R_p, r=R_p (equal radii)
+   R = 8.4140e-16 m,  r = 8.4140e-16 m
+   Surface area    = 2.7949e-29 m²
+   Volume          = 1.1758e-44 m²
+
+   SPATION COUNTS:
+     Surface total:    1.3622e+41 spations
+     Major circ:       3.2709e+20 spations (toroidal ring)
+     Minor circ:       3.2709e+20 spations (poloidal ring)
+     Outer circ:       6.5419e+20 spations
+     Inner circ:       0.0000e+00 spations
+
+   DIFFERENTIAL ROTATION:
+     C_inner / C_outer = 0.000000
+
+   THREE ROTATIONS:
+     1. Toroidal (major C):   3.2709e+20 contact spations/rev
+     2. Poloidal (minor C):   3.2709e+20 contact spations/rev
+     3. Differential:       inner 0.0000x faster than outer
+
+   TREFOIL (2,3) KNOT:
+     Knot length = sqrt((3×C_maj)² + (2×C_min)²) = 1.9061e-14 m
+     Spations along knot: 1.1794e+21
+
+   --- B: c-boundary maj ---
+   R=r_e, r=R_p (c-boundary outer, charge tube)
+   R = 2.8179e-15 m,  r = 8.4140e-16 m
+   Surface area    = 9.3604e-29 m²
+   Volume          = 3.9379e-44 m²
+
+   SPATION COUNTS:
+     Surface total:    4.5623e+41 spations
+     Major circ:       1.0955e+21 spations (toroidal ring)
+     Minor circ:       3.2709e+20 spations (poloidal ring)
+     Outer circ:       1.4226e+21 spations
+     Inner circ:       7.6838e+20 spations
+
+   DIFFERENTIAL ROTATION:
+     C_inner / C_outer = 0.540136
+     Inner spations travel SHORTER path in same period
+     → angular velocity ratio = C_outer/C_inner = 1.8514
+     → inner rotates 1.85x FASTER than outer
+
+   THREE ROTATIONS:
+     1. Toroidal (major C):   1.0955e+21 contact spations/rev
+     2. Poloidal (minor C):   3.2709e+20 contact spations/rev
+     3. Differential:       inner 1.8514x faster than outer
+
+   TREFOIL (2,3) KNOT:
+     Knot length = sqrt((3×C_maj)² + (2×C_min)²) = 5.4159e-14 m
+     Spations along knot: 3.3509e+21
+
+   --- C: Charge/excl ---
+   R=R_p, r=R_excl (charge outer, physical tube)
+   R = 8.4140e-16 m,  r = 3.5250e-20 m
+   Surface area    = 1.1709e-33 m²
+   Volume          = 2.0637e-53 m²
+
+   SPATION COUNTS:
+     Surface total:    5.7071e+36 spations
+     Major circ:       3.2709e+20 spations (toroidal ring)
+     Minor circ:       1.3703e+16 spations (poloidal ring)
+     Outer circ:       3.2711e+20 spations
+     Inner circ:       3.2708e+20 spations
+
+   DIFFERENTIAL ROTATION:
+     C_inner / C_outer = 0.999916
+     Inner spations travel SHORTER path in same period
+     → angular velocity ratio = C_outer/C_inner = 1.0001
+     → inner rotates 1.00x FASTER than outer
+
+   THREE ROTATIONS:
+     1. Toroidal (major C):   3.2709e+20 contact spations/rev
+     2. Poloidal (minor C):   1.3703e+16 contact spations/rev
+     3. Differential:       inner 1.0001x faster than outer
+
+   TREFOIL (2,3) KNOT:
+     Knot length = sqrt((3×C_maj)² + (2×C_min)²) = 1.5860e-14 m
+     Spations along knot: 9.8128e+20
+
+   --- D: Compton/charge ---
+   R=reduced_Compton, r=R_p
+   R = 2.1031e-16 m,  r = 8.4140e-16 m
+   Surface area    = 6.9859e-30 m²
+   Volume          = 2.9390e-45 m²
+
+   SPATION COUNTS:
+     Surface total:    3.4049e+40 spations
+     Major circ:       8.1758e+19 spations (toroidal ring)
+     Minor circ:       3.2709e+20 spations (poloidal ring)
+     Outer circ:       4.0885e+20 spations
+     Inner circ:       -2.4534e+20 spations
+
+   DIFFERENTIAL ROTATION:
+     C_inner / C_outer = 0.000000
+
+   THREE ROTATIONS:
+     1. Toroidal (major C):   8.1758e+19 contact spations/rev
+     2. Poloidal (minor C):   3.2709e+20 contact spations/rev
+     3. Differential:       inner 0.0000x faster than outer
+
+   TREFOIL (2,3) KNOT:
+     Knot length = sqrt((3×C_maj)² + (2×C_min)²) = 1.1292e-14 m
+     Spations along knot: 6.9866e+20
+
+
+=== CONTACT POINT ANALYSIS ===
+
+   Spation radius:             r_s = 8.0813e-36 m
+   Spation cross-section:      A_s = 2.0517e-70 m²
+   Spation surface area:       S_s = 8.2067e-70 m²
+   Convergence pressure:       P   = 2.4608e+48 Pa
+
+   Force per contact (12 neighbours): 1.6829e-22 N
+   (P_conv × 4π r_s² / 12)
+
+   n= 5: r_contact = 8.08e-41 m, A = 2.05e-80 m², P_contact = 8.20e+57 Pa
+   n=10: r_contact = 8.08e-46 m, A = 2.05e-90 m², P_contact = 8.20e+67 Pa
+   n=15: r_contact = 8.08e-51 m, A = 2.05e-100 m², P_contact = 8.20e+77 Pa
+   n=20: r_contact = 8.08e-56 m, A = 2.05e-110 m², P_contact = 8.20e+87 Pa
+   n=25: r_contact = 8.08e-61 m, A = 2.05e-120 m², P_contact = 8.20e+97 Pa
+
+=== DRAG WAKE INITIATION ===
+
+   Using Config B: R=r_e, r=R_p
+   Surface spations:         4.5623e+41
+   External traction points: 2.7374e+42 (×6 hemisphere)
+   Proton surface velocity:  5.4892e+08 m/s (1.831c)
+
+   Each of these 2.74e+42 contact points displaces convergence for one external spation.
+   Those spations form Shell 1 of the convergence occlusion gradient.
+   Shell 1 has ~4π(r_e + l_P)²/A_spation ≈ 4.8637e+41 spations.
+   Engagement fraction: N_ext / N_shell1 = 5.6282e+00
+
+   This fraction determines how much of Shell 1 is directly driven
+   by the engine's displacement, setting the initial occlusion solid angle.

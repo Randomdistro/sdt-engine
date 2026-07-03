@@ -47,11 +47,11 @@ Metrology tells us that Lithium-7 (92.5% abundance) has a nuclear spin of 3/2- a
 **The Alpha-Triton Assembly**
 The Lithium-7 nucleus is constructed by fusing a **Triton** ($^3H$: p-n-n) to an **Alpha Particle** ($^4He$: 2p-2n).
 1.  **The Alpha Base:** A perfect tetrahedron. Spin 0. Magnetic Moment 0.
-2.  **The Triton Cap:** A triangular cluster. Spin 1/2. Magnetic Moment +2.98 $\mu_N$.
+2.  **The Triton Cap:** A triangular cluster. Spin 1/2. Magnetic Moment +2.98 $\mu_N$ (measured; $\mu_N$ is a borrowed unit — SDT-native yardstick owed).
 3.  **The Fusion:** The Triton "caps" one face of the Alpha tetrahedron.
     -   **Result:** A **Prolate Spheroid** (Pear Shape).
-    -   **Spin Sum:** The Alpha is inert. The Triton's spin dominates. The measured spin of Li-7 is 3/2-, which arises from the orbital coupling of the Triton cap to the Alpha base.
-    -   **Quadrupole Moment:** The pear shape naturally creates the observed electric quadrupole moment ($-40 \text{ mb}$). A spherical nucleus would have zero. The measure of this moment is the measure of the Triton's geometric protrusion.
+    -   **Spin Sum:** The Alpha is inert. The Triton's spin dominates. The measured spin of Li-7 is 3/2-, consistent with orbital coupling of the Triton cap to the Alpha base; a quantitative derivation of the spin value from this geometry is OPEN.
+    -   **Quadrupole Moment:** The pear shape is consistent with the observed electric quadrupole moment (measured, $-40 \text{ mb}$) being nonzero — a spherical nucleus would give zero — but a quantitative derivation of the $-40 \text{ mb}$ value from the Triton's geometric protrusion is OPEN.
 
 ---
 

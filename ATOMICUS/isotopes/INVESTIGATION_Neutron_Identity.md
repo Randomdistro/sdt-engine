@@ -134,7 +134,7 @@ The magnetic moment of a charge circulating in a loop:
 
 $$\mu = \frac{ev \cdot r_{\text{eff}}}{2}$$
 
-In nuclear magnetons ($\mu_N = e\hbar / 2m_p$):
+In nuclear magnetons ($\mu_N = e\hbar / 2m_p$ — borrowed comparison unit, used only to compare against CODATA convention; SDT-native yardstick owed):
 
 $$\frac{\mu}{\mu_N} = \frac{v \cdot r_{\text{eff}} \cdot m_p}{\hbar}
 = \frac{v}{c} \cdot \frac{r_{\text{eff}}}{\bar{\lambda}_p}$$
@@ -172,20 +172,20 @@ ring extends to the trefoil's outer rim. ∎
 
 ---
 
-## Part IV: The Neutron Charge Radius
+## Part IV: The Neutron Boundary Radius
 
-$$\langle r^2 \rangle_n = -0.1161 \pm 0.0022 \text{ fm}^2$$
+$$\langle r^2 \rangle_n = -0.1161 \pm 0.0022 \text{ fm}^2$$ (measured; conventionally termed "charge radius" in the literature — termed boundary radius here per SDT convention, since SDT has no charge substance)
 
-The negative mean-square charge radius is direct evidence: negative charge
-(the internal electron) has a larger mean radius than positive charge (the
-proton's trefoil core). The electron ring orbits OUTSIDE the charge-weighted
+The negative mean-square boundary radius is direct evidence: the negatively-signed
+component (the internal electron) has a larger mean radius than the positively-signed
+component (the proton's trefoil core). The electron ring orbits OUTSIDE the boundary-weighted
 centre, at the trefoil's rim.
 
 The sign pattern is diagnostic:
-- Proton: $\langle r^2 \rangle_p > 0$ (positive charge distributed around a centre)
-- Neutron: $\langle r^2 \rangle_n < 0$ (negative charge at LARGER radius than positive)
-- This IS the internal electron: a negatively charged ring at r ≈ 0.99 fm,
-  surrounding a positive core at r ≈ 0.84 fm
+- Proton: $\langle r^2 \rangle_p > 0$ (positive-signed boundary distributed around a centre)
+- Neutron: $\langle r^2 \rangle_n < 0$ (negative-signed component at LARGER radius than positive)
+- This IS the internal electron: a negatively-signed ring at r ≈ 0.99 fm,
+  surrounding a positively-signed core at r ≈ 0.84 fm
 
 ---
 
@@ -376,7 +376,7 @@ EC requires a PAIRED ring because:
 | Quantity | SDT Prediction | Measured | Agreement |
 |----------|---------------|----------|-----------|
 | \|Δμ\| | 3π/2 = 4.7124 μ_N | 4.7059 μ_N | **0.14%** |
-| r_eff | 3πλ̄_p/2 = 0.990 fm | (charge radius consistent) | ✓ |
+| r_eff | 3πλ̄_p/2 = 0.990 fm | (boundary radius consistent) | ✓ |
 | k_internal | 1 (exact) | (from v_circ → c) | exact |
 | z_internal | 1 (complete redshift) | (no photon escape) | exact |
 | μ signs | +, +, −, 0 | +, +, −, 0 | **4/4** |

@@ -131,7 +131,12 @@ struct State28D {
         
         // Additional screening from aspect gradation T₅ (internal shadowing)
         // Higher T₅ → more internal pressure variation → more self-screening
-        double gradation_screening = std::tanh(std::abs(T_5) / 1e10);  // Normalize to ~1e10 Pa/m scale
+        // OPEN/PENDING (HUNTER P11, 2026-07-03, Harvey-authorized flag): the 1e10 [Pa/m]
+        // screening scale is un-derived (FLM01: not uniquely derivable from Laws I–IV).
+        // Closure candidate: S ~ P_conv/R_torus (both native). Kept per the Closure
+        // Principle — a closure debt, not deleted. Dormant today (T_5 = 0 from both
+        // factories); LIVE only where magnetosphere sets T_5.
+        double gradation_screening = std::tanh(std::abs(T_5) / 1e10);  // un-derived scale — see note above
         
         return std::min(1.0, E_mutual * (1.0 + gradation_screening));
     }
@@ -156,7 +161,11 @@ struct State28D {
         double variance_factor = 1.0 + std::abs(Phi_4);
         
         // Phase transition potential (Phi_5) opens new regions
-        double transition_factor = 1.0 + std::abs(Phi_5) / 1e-20;  // Normalize to ~1e-20 J scale
+        // OPEN/DEAD (HUNTER P12, 2026-07-03, Harvey-authorized flag): un-derived 1e-20 [J]
+        // scale (~1e6 below the binding-energy scale it was reached for — FLM01), and the
+        // enclosing function is uncalled anywhere in the tree. Quarantine candidate: needs
+        // a caller AND a derivation before it is trusted. Recorded, not deleted.
+        double transition_factor = 1.0 + std::abs(Phi_5) / 1e-20;  // un-derived scale — see note above
         
         // Energy distribution (Level 7) - more energy modes → more states
         double energy_modes = 1.0;

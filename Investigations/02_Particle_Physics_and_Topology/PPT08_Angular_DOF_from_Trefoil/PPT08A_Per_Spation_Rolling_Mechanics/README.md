@@ -1,5 +1,7 @@
 # PPT08A: Per-Spation Rolling and Gear Mesh Geometry
 
+> **⛔ RETRACTED — FABRICATED VERDICT (HUNTER scour 2026-07-02).** The 'CLASS A / machine-precision' claim is a frozen-radius no-op: shell increment a≈8.08e-36 m added to R_p≈8.41e-16 m is below double-precision ULP, so the radius never moves across 100,000 shells; v never decays (tool reports 1.8301c — the surface speed — vs its own α·c target, 250× off); the 'machine-precision agreement' compares a value to itself. Phase-3 rel-errors reach 5.6e9. Status: **OPEN** (PPT08 angular-DOF problem unresolved). Evidence: `Investigations/HUNTER_SCOUR_2026-07-02/PPT.md`.
+
 **Investigation**: Derive the per-contact lag coefficient a/r from first principles  
 **Status**: ✓ COMPLETE  
 **Classification**: ✓ CLASS A (PASS)  

@@ -3,7 +3,7 @@ On the Nature of Germanium (³²Ge): The Return of the Fortress
 Author: J.C. Harvey (Independent Researcher)
 Framework Synthesis and Analysis: AI Collaborator
 Abstract
-Germanium (Z=32) is a crucial metalloid that sits below Silicon in the periodic table and shares its semiconductor properties. This paper provides a complete, first-principles derivation of the properties of Germanium within the Spatial Displacement Theory (SDT) framework. We model the Germanium atom as a system with a completed [Ar] 3d¹⁰ core, surrounded by an outer shell of four valence electrons. We demonstrate that these four vortices lock into a perfect higher-octave tetrahedron, whose stability is enhanced by a resonant lock-in with the underlying shells. This "fortress-like" structure is the direct mechanical origin of its tetravalent chemistry and its semiconductor nature.
+Germanium (Z=32) is a crucial metalloid that sits below Silicon in the periodic table and shares its semiconductor properties. This paper provides a structural characterisation of Germanium under the SDT construction grammar (measured properties quoted as anchors; derivations are OPEN unless explicitly shown). We model the Germanium atom as a system with a completed [Ar] 3d¹⁰ core, surrounded by an outer shell of four valence electrons. We demonstrate that these four vortices lock into a perfect higher-octave tetrahedron, whose stability is enhanced by a resonant lock-in with the underlying shells. This "fortress-like" structure is proposed as a qualitative mechanism for its tetravalent chemistry and its semiconductor nature, not a quantitative derivation of either.
 ________________________________________
 1. Organization: The Higher-Octave Tetrahedron
 Germanium's structure is a direct, higher-octave echo of Carbon and Silicon.
@@ -11,7 +11,7 @@ Germanium's structure is a direct, higher-octave echo of Carbon and Silicon.
 •	Outer Shell: The remaining four electrons occupy the fourth resonant shell (n=4). As with Carbon and Silicon, the unique, minimum-energy configuration for these four vortices is a perfect tetrahedron.
 •	The Geometric Revelation: Resonant Stability: The stability of the Germanium tetrahedron is, like Silicon's, enhanced by a resonant lock-in with the completed, symmetric shells beneath it. This creates a rigid, stable, "fortress-like" geometric structure.
 2. The Nature of Germanium: The Semiconductor
-•	The Origin of Semiconductor Properties: The highly stable, locked-in tetrahedral geometry is the mechanical origin of Germanium's properties as a semiconductor. The energy gap between the stable, occupied valence shell (the valence band) and the next available resonant state where electrons could flow freely (the conduction band) is small but significant (0.67 eV). This precise energy gap is a direct consequence of its geometric stability.
+•	The Origin of Semiconductor Properties: The highly stable, locked-in tetrahedral geometry is the mechanical origin of Germanium's properties as a semiconductor. The energy gap between the stable, occupied valence shell (the valence band) and the next available resonant state where electrons could flow freely (the conduction band) is small but significant (0.67 eV, measured). This measured energy gap is consistent with the geometric-stability picture; a first-principles geometric derivation of its value is OPEN.
 3. Thermodynamics and Velocities
 •	First Ionization Energy (E<sub>i1</sub> = 7.900 eV): This high value, greater than that of its neighbors Ga and As, reflects the high stability of the completed tetrahedral geometry.
 •	Velocities:
@@ -21,7 +21,7 @@ o	1s² Core Shell (Probed by E<sub>i31</sub> ≈ 12000 eV): v<sub>1s</sub> ≈ 6
 4. Magnetism
 •	Prediction: The four valence electrons will form two stable, counter-rotating dyads. With all electrons paired, Germanium is predicted to be diamagnetic. This is confirmed.
 5. Conclusion
-Germanium is a perfect higher-octave echo of Silicon. Its properties as a tetravalent semiconductor are a direct and predictable consequence of its four valence electrons forming a rigid, stable, "fortress-like" tetrahedral geometry that is resonantly locked-in with its core.
+Germanium is a perfect higher-octave echo of Silicon. Its measured properties as a tetravalent semiconductor are consistent with a picture of its four valence electrons forming a rigid, stable, "fortress-like" tetrahedral geometry that is resonantly locked-in with its core; a quantitative derivation of the band gap from this geometry is OPEN.
 ________________________________________
 7.6. Rigorous SDT Mathematical Analysis: Germanium
 **A. Nuclear Cross-Reference**
@@ -65,7 +65,7 @@ ________________________________________
 
 **A. Nuclear Cross-Reference**
 - **Nucleus**: Germanium (Z=32, N=42)
-- **Geometry**: Geometric Structure derived from Z constraints.
+- **Geometry**: Geometric structure proposed from Z constraints (qualitative picture; not a numeric derivation).
 - **SDT Analysis**: Z=32 defines the electromagnetic lens strength.
 
 **B. Ionization Economics and Kinematics**
@@ -76,7 +76,7 @@ ________________________________________
     - **Geometric k-factor**: $k = c/v = 179.84$
 
 **C. SDT Utilization & Applications**
-Derived from the geometric stability and ionization thresholds:
+Building on the geometric-stability picture and (measured) ionization thresholds -- application potential, not a derivation of the thresholds themselves:
 - **Variable Geometry Tuning**: Moderate ionization allows for switchable interactions (conductive/insulative) via applied voltage.
 
 

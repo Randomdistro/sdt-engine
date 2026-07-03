@@ -1,0 +1,34 @@
+============================================================
+ FLM09  ARM A G현 the light mode (local reconnection)
+   A1''  bond-switch saturation / opacity threshold
+============================================================
+  CLAIM: the medium goes opaque when the field nucleates a real defect.
+  ONE FORM:  E(L) = hbar*c / (e * L^2),  L = nucleating-defect size.
+
+  electron Compton   lam_C = hbar/(m_e c)  = 3.8616e-13 m
+  Schwinger (standard)  m_e^2 c^3/(e hbar) = 1.3233e+18 V/m
+  Schwinger (as form)   hbar c/(e lam_C^2) = 1.3233e+18 V/m
+  self-consistency ratio                   = 1.000000  [PASS]
+
+  threshold vs nucleating-defect length L:
+    L = lam_C (electron / W=1 defect)  3.862e-13 m  ->  E = 1.323e+18 V/m
+    L = r_e   (classical e- radius)    2.818e-15 m  ->  E = 2.485e+22 V/m
+    L = l_P   (bare lattice ceiling)   1.616e-35 m  ->  E = 7.554e+62 V/m
+
+  FINDING G현 two distinct scales:
+   * observed vacuum nonlinearity (Schwinger) = ELECTRON-defect scale (L=lam_C).
+   * bare-lattice saturation (L=l_P) is 5.71e+44 x higher G현 a ceiling, NOT Schwinger.
+   => opacity onset is governed by nucleating the W=1 (electron) defect, not the
+      bare hinge lattice. SDT recovers E_S by that identification; the number is
+      all-whitelist (m_e,c,hbar,e) G현 inherited, not newly derived.
+
+  LEDGER (ARM A, A1''):
+    [FORM]           E(L) = hbar*c/(e L^2)   (threshold shape)
+    [IDENTIFICATION] opacity defect = the electron (W=1), L = lam_C
+    [INHERITED]      E_S = 1.323e18 V/m      (standard, all-whitelist)
+    [KILLED]         'bare-lattice saturation = Schwinger'  (off by 6e+44)
+
+------------------------------------------------------------
+ FLM09  ARM A G현 A2 dispersion omega(k)      [OPEN G현 pending step 1]
+ FLM09  ARM B G현 CMB boundary arrival        [OPEN G현 separate ledger]
+------------------------------------------------------------

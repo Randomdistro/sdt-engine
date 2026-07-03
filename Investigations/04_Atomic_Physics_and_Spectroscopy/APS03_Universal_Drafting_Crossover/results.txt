@@ -1,0 +1,89 @@
+aps03.exe : === APS03 provenance log ===
+At C:\Users\Jimmi\AppData\Local\Temp\ps-script-38e3c90a-deff-4593-ad1b-d05d90793c62.ps1:132 char:10
++   $out = & ../../../build/aps03.exe 2>&1 | Out-String
++          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (=== APS03 provenance log ===:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+a_0 (DERIVED c H_0/2pi) = 1.0422e-10 m/s^2
+[provenance] MISSING ./../E46_Galaxy_Rotation_Curves/sparc_rotmod.csv
+[provenance] MISSING ./../E46_Galaxy_Rotation_Curves/sparc_175.csv
+[C] galactic SHORT (data missing)
+[provenance] ./stellar_orbits.csv : 78 lines
+  first: planet,Mercury,Sun,0.38709927,0,0.240847,0,1.0,0,47.360,JPL_approx_pos+NSSDC_factsheet,planet:Mercury
+  last : substellar,445473 (2010 VZ98),Sun,160,0.01,2020.53,0.1916,1.0,0,2.359,JPL_SBDB,sbdb:445473
+[B] stellar: 77 rows ingested
+[provenance] ./nuclear_binding.csv : 396 lines
+  first: 1,1,H,0.0000,0.0000,0,-1,constituent,AME2020
+  last : 99,252,Es,7457.2428,0.1986,42,55,EC_alt,AME2020
+[D] nuclear: 394 rows ingested
+
+================================================================
+ APS03: UNIVERSAL DRAFTING CROSSOVER  GÇö  B = Phi(xi)
+ xi = g_self/g_floor ; g_floor=a_0=1.042e-10 m/s^2 (DERIVED)
+================================================================
+
+=== PILOT STOP-CHECK (Scale C must reproduce GD05 M4) ===
+  M4 = v_bar*sqrt(Phi_simple(g_bar/a_0)), per SPARC radial point
+  points = 0
+  RMS  = -1.0%   (GD05 M4 reference: 23.8%)
+  BTFR = 0.00     (GD05 M4 reference: 3.58)
+  PILOT: FAIL GÇö harness disagrees with M4, results VOID
+
+=== PER-SCALE ASYMPTOTE TESTS (sec.6.A) ===
+  scale C: NO DATA (SHORT)
+  [A] ATOMIC    N=  37 (S=4 T=26 F=7)
+       A-S  <B>_source =   1.021   PASS (PASS if |.-1|<=0.10)
+       A-F  d(logB)/d(logxi)_floor = +0.250   -- (PASS if in [-0.60,-0.40])
+       vs Phi_simple: rms relative resid =   37.3% over 37 pts
+  [B] STELLAR   N=  77 (S=76 T=1 F=0)
+       A-S  <B>_source =   1.042   PASS (PASS if |.-1|<=0.10)
+       A-F  d(logB)/d(logxi)_floor = +0.000   no-F (PASS if in [-0.60,-0.40])
+       vs Phi_simple: rms relative resid =   19.1% over 77 pts
+  [D] NUCLEAR   N= 394 (S=10 T=381 F=3)
+       A-S  <B>_source =   7.448   -- (PASS if |.-1|<=0.10)
+       A-F  d(logB)/d(logxi)_floor = +0.000   no-F (PASS if in [-0.60,-0.40])
+       vs Phi_simple: rms relative resid =  447.7% over 391 pts
+
+=== CROSS-SCALE COLLAPSE (sec.6.C/6.D) ===
+  bin(log10 xi) :   <B>     Phi_simple   scales-present  N
+   -1.5 ..  -1.0 :   1.876     4.737      A               7
+   -1.0 ..  -0.5 :   1.958     2.906      AD              9
+   -0.5 ..  +0.0 :   6.372     1.895      AD              87
+   +0.0 ..  +0.5 :   7.369     1.358      AD              255
+   +0.5 ..  +1.0 :   7.178     1.103      ABD             57
+   +1.0 ..  +1.5 :   5.305     1.015      ABD             15
+   +1.5 ..  +2.0 :   1.000     1.001      B               1
+   +2.0 ..  +2.5 :   1.001     1.000      B               3
+   +2.5 ..  +3.0 :   1.002     1.000      B               4
+   +3.0 ..  +3.5 :   1.003     1.000      B               1
+   +3.5 ..  +4.0 :   1.002     1.000      B               2
+   +4.0 ..  +4.5 :   0.997     1.000      B               6
+   +4.5 ..  +5.0 :   1.000     1.000      B               5
+   +5.0 ..  +5.5 :   0.996     1.000      B               2
+   +5.5 ..  +6.0 :   1.007     1.000      B               1
+   +6.0 ..  +6.5 :   1.000     1.000      B               2
+   +6.5 ..  +7.0 :   1.001     1.000      B               1
+   +7.0 ..  +7.5 :   0.998     1.000      B               4
+   +7.5 ..  +8.0 :   1.163     1.000      B               14
+   +8.0 ..  +8.5 :   1.121     1.000      B               8
+   +8.5 ..  +9.0 :   0.989     1.000      B               4
+   +9.0 ..  +9.5 :   1.004     1.000      B               4
+   +9.5 .. +10.0 :   1.013     1.000      B               2
+  +10.0 .. +10.5 :   0.997     1.000      B               6
+  +10.5 .. +11.0 :   1.000     1.000      B               4
+  +11.5 .. +12.0 :   1.000     1.000      B               1
+
+  binned <B> vs Phi_simple: RMS = 208.5% over 17 bins (ALL scales)
+  binned <B> vs Phi_simple: RMS = 21.5% over 17 bins (C+A+B, nuclear excluded)
+  NEG-CONTROL wrong floor (100*a0): RMS = 51.5% over 17 bins (must be WORSE than 21.5%)
+  control verdict: PASS (true floor collapses better -> test has power)
+
+  corpus written: ./cq26_corpus.csv  (508 rows)
+
+=== HONEST STATUS ===
+  Scale C galactic: real SPARC, pilot FAIL.
+  Scale A atomic:   real APS02/NIST resonance lines; xi rule STATED (sec.7.3 open).
+  Scale B stellar / D nuclear: present only if CSV fetched (else SHORT above).
+  Phi crossover shape is BORROWED (MOND-simple); only asymptotes DERIVED.
+

@@ -26,9 +26,9 @@ This reference provides the **exact** constants that Atomicus entries should use
 | Bohr radius | $a_0$ | $\hbar / (\alpha m_e c)$ | 5.29177 × 10⁻¹¹ m |
 | Compton wavelength (e) | $\lambdabar_e$ | $\hbar / (m_e c)$ | 3.86159 × 10⁻¹³ m |
 | Classical electron radius | $r_e$ | $\alpha \hbar / (m_e c)$ | 2.81794 × 10⁻¹⁵ m |
-| Proton charge radius | $R_p$ | $4\hbar / (m_p c)$ | 8.41236 × 10⁻¹⁶ m |
-| He-4 charge radius | $R_\text{He}$ | $2 R_p$ | 1.6828 × 10⁻¹⁵ m |
-| Charge radius | $R_\text{charge}$ | $\sqrt{R_p \cdot r_e}$ | 1.540 × 10⁻¹⁵ m |
+| Proton boundary radius (conventionally "charge radius") | $R_p$ | $4\hbar / (m_p c)$ | 8.41236 × 10⁻¹⁶ m |
+| He-4 boundary radius | $R_\text{He}$ | $2 R_p$ | 1.6828 × 10⁻¹⁵ m |
+| Boundary radius (geometric mean; legacy symbol) | $R_\text{charge}$ | $\sqrt{R_p \cdot r_e}$ | 1.540 × 10⁻¹⁵ m |
 | $\alpha$ inverse | $1/\alpha$ | — | 137.036 |
 | Mass ratio | $m_p/m_e$ | — | 1836.15 |
 

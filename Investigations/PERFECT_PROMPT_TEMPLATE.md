@@ -1,18 +1,45 @@
-﻿# THE PERFECT INVESTIGATION PROMPT — A Template for Directing Claude
+﻿# THE PERFECT INVESTIGATION PROMPT — Template & Inheritance Root
+
+> **Status:** GOLD-STANDARD for all `Investigations/**/PROMPT.md` files (2026-06-27 revision).
+> **Execution:** When *running* any prompt, also follow `PROMPT_EXECUTION_PROTOCOL.md` verbatim.
+> **Principle:** *It is a bad plan that cannot be altered* — every prompt includes §⑩ pivot tables
+> and pre-committed thresholds so failures become **PIVOT / KILL / OPEN**, not silent rewrites.
 
 ## What This Document Is
 
-This is a **meta-guide**: a document that describes the structure and quality of an exemplary investigation prompt. Use this to:
+This is the **inheritance root** for investigation prompts. Use it to:
 
-1. **Review existing CQ/E investigations** — measure them against this standard
-2. **Direct Claude to create new investigations** — copy this structure and fill in the blanks
-3. **Improve vague research questions** into actionable investigations
+1. **Review** existing prompts — measure against §①–§⑩
+2. **Author** new prompts — copy structure; fill domain content; **mandatory §⑩**
+3. **Run** investigations — pre-commit thresholds → execute → adjust per protocol
+
+**Standard header for every `PROMPT.md`:**
+
+```markdown
+> **Author:** J. C. Harvey, Melbourne. **Status:** SPEC | ACTIVE | RESOLVED.
+> **Inherits:** `PERFECT_PROMPT_TEMPLATE.md` §⓪–§⑩ · `PROMPT_EXECUTION_PROTOCOL.md` · §0 anti-creep (R0–R5).
+> **Engine:** `#include <sdt/laws.hpp>` only — no local constant namespaces.
+```
+
+---
+
+## ⓪ The Golden Rule — five questions answered up front
+
+Every prompt opens with these five answers (FLM10 pattern):
+
+1. **What don't we know?** (the gap — one sentence)
+2. **Why does it matter?** (stack position, downstream blockers)
+3. **How will we find out?** (phases, native mechanism first)
+4. **What would prove us wrong?** (≥3 falsifiers with numeric triggers)
+5. **How will we know we're done?** (dual verdict: prompt completion + physics class)
+
+If any answer is missing, the prompt is **not runnable**.
 
 ---
 
 ## The Gold-Standard Structure
 
-Every investigation PROMPT should have exactly these sections, in this order:
+Every investigation PROMPT must have exactly these sections, in this order:
 
 ### 1. Executive Summary (100–150 words)
 
@@ -63,15 +90,18 @@ Every investigation PROMPT should have exactly these sections, in this order:
 > 
 > Constraint: All scales must be expressible using only {ℏ, c, e, m_e, m_p, ℓ_P, T_CMB}.
 
-### 4. Investigation Strategy (600–800 words)
+### 4. Investigation Strategy (800–1200 words — be excessive)
 
-**Purpose**: Break the problem into concrete phases. A reader should be able to hand this to a programmer and get executable work.
+**Purpose**: Break the problem into concrete phases. A reader must implement without guessing.
 
-**Must include**:
-- **Phase 1, 2, 3, ...** — serial or parallel work blocks
-- **For each phase**: Goal, Method, Success metric (quantitative!)
+**Must include for EACH phase**:
+- **Goal** — one measurable outcome
+- **Method** — exact equations, `laws.hpp` namespaces/functions, algorithm steps
+- **Pre-committed success metric** — numeric threshold written **before** run (e.g. `< 1%`, not "close")
+- **Failure trigger** — what relative error or sign failure invokes PIVOT
+- **Gate** — Phase N+1 forbidden until PASS-GATE or documented DEFER
 - **Expected duration** — rough estimate
-- **Intermediate checkpoints** — when to verify, when to pivot
+- **Explicitly OUT OF SCOPE** for this phase (prevents scope creep in both directions)
 
 **Example**:
 > **Phase 1: Pressure Scale Decomposition (1–2 hours)**
@@ -111,14 +141,15 @@ Every investigation PROMPT should have exactly these sections, in this order:
 > 
 > ⚠️ **QUALIFIED PENDING**: Constants traced to specific SDT laws. Match to ±1 order of magnitude. Physical interpretation incomplete.
 
-### 6. Outputs (100–200 words)
+### 6. Outputs (150–300 words)
 
 **Purpose**: Be specific about what files the investigation will produce.
 
 **Must include**:
-- File names (exact)
+- File names (**exact** — if renamed, ADJ entry required)
 - Format (CSV, markdown, C++, etc.)
 - What each contains
+- **`RUN_LOG.md`** — mandatory for every run (see `PROMPT_EXECUTION_PROTOCOL.md`)
 
 **Example**:
 > 1. **CQ04_DERIVATION.md** — Step-by-step symbolic derivation from Laws I–IV
@@ -186,6 +217,39 @@ Every investigation PROMPT should have exactly these sections, in this order:
 
 ---
 
+### ⑩ Adaptive Execution Protocol (300–600 words — MANDATORY)
+
+**Purpose**: The plan must survive contact with numbers. Define **what may change** when a phase fails.
+
+**Must include**:
+
+1. **Pre-Run Commitment Block** (copy into `RUN_LOG.md` before coding):
+
+```markdown
+## Pre-Run Commitments — <ID>
+- Prompt completion target: [A|B|C|D]
+- Physics class hoped: [NATIVE|CONVERGENCE|…]
+- CALIBRATED budget: [0 or list each param]
+- Phase thresholds: [P1: …, P2: …, …]
+- Forbidden retroactive changes: [list]
+```
+
+2. **Pivot table** — for each falsification test / phase failure, list:
+
+| Trigger (numeric) | First response (PIVOT) | If pivot fails | Forbidden response |
+|-------------------|------------------------|----------------|--------------------|
+
+3. **Allowed adjustments** — numerics, alternative native routes, phase splits
+
+4. **Disallowed adjustments** — retro-PASS, PLUG, IDENTITY-PASS, borrow-smuggle
+
+5. **Dual verdict reminder** — Prompt completion vs Physics class (see execution protocol)
+
+**Example pivot row:**
+> Phase 1 T1 FAIL (|n_water − n_pred| > 5%): **PIVOT** to bound-vortex z from `bridge::koppa_hydrogen` and `atomic::bohr_radius` — not to input `n=1.333`. If still >5%: **OPEN** matter-index mechanism; do not PASS Phase 1.
+
+---
+
 ## How to Use This Template
 
 ### **To direct Claude to create an investigation:**
@@ -206,26 +270,13 @@ Run through this checklist:
 - [ ] Dependencies map upstream/downstream/related
 - [ ] Falsification tests would actually disprove the hypothesis
 - [ ] Implementation notes are actionable (not "test it good")
+- [ ] §⑩ pivot table exists with numeric triggers
+- [ ] Pre-run commitment block is copy-paste ready
+- [ ] `RUN_LOG.md` listed in §⑥ outputs
+- [ ] Dual verdict (prompt vs physics) specified in §⑤
 
 ---
 
-## The Golden Rule
+**Validated against:** FLM10 (excessive detail + gates), CR10 (recursive pivot), FD01 (honest Class C demo), physics audit 2026-06-27.
 
-**Every investigation prompt must answer these five questions in the first two pages:**
-
-1. **What don't we know?** (the gap)
-2. **Why does it matter?** (the stakes)
-3. **How will we find out?** (the method)
-4. **What would prove us wrong?** (the falsification)
-5. **How will we know we're done?** (the success metric)
-
-If a prompt doesn't clearly answer all five, it's not ready to hand to an investigator.
-
----
-
-**This template was validated against:**
-- EMC01, PPT01, FLM01 (exemplary prompts in sdt-engine)
-- NP09–NP11 (successful experimental derivations)
-- Industry research standards (ARPA-E, DoE reviews)
-
-**Status**: GOLD-STANDARD TEMPLATE FOR ALL FUTURE INVESTIGATIONS
+**Status**: GOLD-STANDARD · inherits `PROMPT_EXECUTION_PROTOCOL.md` on every run.

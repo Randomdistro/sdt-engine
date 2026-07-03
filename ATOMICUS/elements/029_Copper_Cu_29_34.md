@@ -3,7 +3,7 @@ On the Nature of Copper (²⁹Cu): The Anomaly of the Completed Inner Cube
 Author: J.C. Harvey (Independent Researcher)
 Framework Synthesis and Analysis: AI Collaborator
 Abstract
-Copper (Z=29) is the second famously anomalous element in the first transition series. Its [Ar] 4s¹3d¹⁰ ground state configuration violates the simple filling rules, and its properties as an exceptional electrical conductor are fundamental to technology. Standard models explain this via the special stability of a "filled d-subshell." This paper provides a complete, first-principles derivation of this anomaly within the Spatial Displacement Theory (SDT) framework. We demonstrate that the 4s¹3d¹⁰ configuration is the inevitable, lowest-energy geometric solution. The immense energetic payoff from achieving a perfectly serene, completed inner 3d¹⁰ cube is so great that it forces the promotion of a 4s electron. This geometric trade-off is the direct mechanical origin of both Copper's stability and its high conductivity. From this premise, we derive its organization, thermodynamics, and diamagnetic nature.
+Copper (Z=29) is the second famously anomalous element in the first transition series. Its [Ar] 4s¹3d¹⁰ ground state configuration violates the simple filling rules, and its properties as an exceptional electrical conductor are fundamental to technology. Standard models explain this via the special stability of a "filled d-subshell." This paper provides a structural characterisation of this anomaly within the Spatial Displacement Theory (SDT) framework (measured configuration and properties quoted as anchors; a first-principles energetic derivation is OPEN unless explicitly shown). We propose that the 4s¹3d¹⁰ configuration is the lowest-energy geometric solution. The immense energetic payoff from achieving a perfectly serene, completed inner 3d¹⁰ cube is proposed as great enough to force the promotion of a 4s electron. This geometric trade-off is offered as a qualitative mechanism for both Copper's stability and its high conductivity, not a quantitative derivation of either. From this premise, we describe its organization, thermodynamics, and diamagnetic nature.
 ________________________________________
 1. Organization: The Overwhelming Drive for Inner Serenity
 The structure of Copper is the result of the system making a powerful and decisive "economic" choice to achieve a state of profound inner stability.
@@ -32,7 +32,7 @@ This specific geometric solution is the direct mechanical reason for Copper's mo
 7. Conclusion
 The analysis of Copper provides a powerful conclusion to the story of the filling 3d shell.
 1.	The "Anomaly" is a Geometric Imperative: The 4s¹3d¹⁰ configuration is the predicted lowest-energy state, driven by the immense stability gain of completing the inner 3d shell's geometric structure.
-2.	Conductivity is a Geometric Consequence: The high electrical conductivity of Copper is a direct result of the 4s electron being "pushed out" and made highly mobile by the formation of the serene 3d¹⁰ inner shell.
+2.	Conductivity is Consistent with a Geometric Picture: Copper's high electrical conductivity (measured) is consistent with the 4s electron being "pushed out" and made highly mobile by the formation of the serene 3d¹⁰ inner shell; a quantitative derivation of the conductivity value from this geometry is OPEN.
 Copper is a perfect example of how the internal, geometric decision-making of an atom can give rise to its most important macroscopic and technological properties.
 ________________________________________
 7.6. Rigorous SDT Mathematical Analysis: Copper
@@ -77,7 +77,7 @@ ________________________________________
 
 **A. Nuclear Cross-Reference**
 - **Nucleus**: Copper (Z=29, N=34)
-- **Geometry**: Geometric Structure derived from Z constraints.
+- **Geometry**: Geometric structure proposed from Z constraints (qualitative picture; not a numeric derivation).
 - **SDT Analysis**: Z=29 defines the electromagnetic lens strength.
 
 **B. Ionization Economics and Kinematics**
@@ -88,7 +88,7 @@ ________________________________________
     - **Geometric k-factor**: $k = c/v = 181.85$
 
 **C. SDT Utilization & Applications**
-Derived from the geometric stability and ionization thresholds:
+Building on the geometric-stability picture and (measured) ionization thresholds -- application potential, not a derivation of the thresholds themselves:
 - **Variable Geometry Tuning**: Moderate ionization allows for switchable interactions (conductive/insulative) via applied voltage.
 
 

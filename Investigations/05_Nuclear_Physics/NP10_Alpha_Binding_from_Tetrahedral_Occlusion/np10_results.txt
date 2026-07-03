@@ -1,0 +1,43 @@
+NP10 — Alpha Binding, NP17 shared-electron premise (J. C. Harvey, 2026-07-03)
+E = -sum q_i q_j (alpha hbar c)/r_ij | alpha-hbar-c = 1.4400 MeV*fm | R_p = 0.8414 fm
+====================================================================
+
+[G2] R_He = 2 R_p = 1.6828 fm  vs meas 1.6755 fm  (+0.44%)  PASS(1%)
+     NOTE: existing laws.hpp result (nuclear::R_He_predicted, class C-flagged)
+     — re-verified here, NOT claimed as a new NP10 discovery.
+
+[G1] alpha (config 1, NP17-exact, a = 2R_p = 1.6828 fm): E = 4.454 MeV
+     vs 28.296 MeV: -84.3%  -> FAIL(20%) -> OPEN
+     alpha (config 2, a = D = 1.9633 fm): E = 3.817 MeV (-86.5%)
+     LOCK REMAINDER (what the tetrahedral lock must supply):
+       R_lock = 28.296 - 4.454 = 23.842 MeV  (84.3% of the total;
+       boost factor needed on electrostatics: x6.35)
+
+[G5] edge required for 28.296 MeV electrostatically: a = 0.265 fm  (< 2R_p = 1.683 fm -> UNPHYSICAL: lock remainder is real, not a spacing choice)
+
+[G3] triton (chain p-e-p-e-p, spacing D): E = 4.278 MeV (meas 8.482, -49.6%)
+     triton (triangle variant):           E = 3.894 MeV (-54.1%)
+     ratio B_alpha/B_triton: measured = 3.336, gate +/-20%
+       config1/chain (2R_p vs D) = 1.041  (-68.8%)  FAIL
+       config2/chain (D vs D)    = 0.892  (-73.3%)  FAIL
+       config2/triangle (D vs D) = 0.980  (-70.6%)  FAIL
+     -> ALL ratio pairings FAIL: the missing lock term is NOT a common
+        multiplicative factor — it grows with coordination/interlock number.
+        (alpha needs a much larger boost than the triton.)
+
+     implied boost factors: alpha x6.35 (cfg1), triton x1.98 (chain),
+     deuteron x1.011 (NP17: 2.200 vs 2.224) -> lock grows super-linearly
+     with interleave count (d:1.01, t:1.98, a:6.35).
+
+[G4] mu_alpha = 0: two interlocked deuteron units with opposed circulation
+     -> moments cancel pairwise. Consistent, but DEGENERATE (declared in
+     RUN_LOG: every model predicts 0 for spin-0). No SDT-discriminating content.
+
+====================================================================
+VERDICT (numeric):
+  G1 headline 28.296 : E_es = 4.454 MeV (-84.3%) FAIL -> OPEN;
+                       lock remainder = 23.84 MeV (84% of total)
+  G2 R_He = 2R_p     : +0.44% PASS(1%) — pre-existing engine result, re-verified
+  G3 ratio 3.336     : ALL FAIL -> lock is coordination-dependent (new constraint)
+  G4 mu_alpha = 0    : consistent — DEGENERATE
+  G5 inversion       : required edge < 2R_p -> unphysical -> remainder real

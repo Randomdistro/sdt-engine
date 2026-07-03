@@ -1,112 +1,231 @@
 # CH01 — The Covalent Bond as a Shared Electropause
 
-> **Author:** J.C. Harvey, Melbourne. **Status:** SPEC (seed, unstarted).
-> Inherits the §0 anti-creep protocol and rules R0–R5 verbatim.
+> **Author:** J. C. Harvey, Melbourne. **Status:** SPEC → **ACTIVE** on first gated run.
+> **Inherits:** `PERFECT_PROMPT_TEMPLATE.md` §⓪–§⑩ · `PROMPT_EXECUTION_PROTOCOL.md` · §0 anti-creep (R0–R5).
+> **Engine:** `#include <sdt/laws.hpp>` — Law III occlusion, EMC04 electropause, Law V budget.
+> **Prior audit (2026-06-27):** `ch01_covalent_bond.cpp` used `R=2a₀`, `Ry/2` with 35% PASS — prompt
+> fidelity **F**. This prompt supersedes that path.
 
 ---
 
-## 1 · Executive Summary
+## ⓪ The Golden Rule — five questions (answered, not stubbed)
 
-EMC04 showed the Bohr radius is an **electropause** — the pressure-balance boundary where the inward
-convergence push on an electron equals the outward movement-budget, holding it kinematically with no
-charge invoked ([[project_electropause_peff_derivation.md]]). **Can the covalent bond be derived as a
-*shared* electropause — two nuclei whose convergence wakes overlap so that one electropause surface
-encloses both, with bond length, bond energy, and molecular geometry following from wake overlap and
-the period-2 wake-cancellation map, no orbitals and no valence-bond wavefunction?** This extends the
-electropause from atom to molecule and turns the dyad/wake-cancellation notes
-([[project_foundational_ontology_influx_monopole]]) into quantitative chemistry. **We expect:** H₂'s
-bond length and dissociation energy fall out of the two-proton shared-electropause balance; the
-covalent bond is "shared" because the merged wake has one common pressure-balance surface; and
-molecular shape (VSEPR-like angles) follows from **wake cancellation** — paired fore/aft wakes go
-silent, lone wakes repel — reproducing the bent/pyramidal/tetrahedral geometries natively.
+1. **What don't we know?** — Whether the H₂ bond is a **genuine native consequence of two convergence
+   wakes sharing one electropause** — i.e. whether root-finding the axial balance `F_in(R)=F_out(R)`
+   from Law III occlusion + Law V budget, with **no orbital and no scaled-Bohr guess**, *lands* the
+   measured `R_e = 0.741 Å` and `D_e = 4.478 eV` — or whether the only way to hit those numbers is to
+   pre-set the answer (the superseded `R=2a₀`, `D_e=Ry/2` prototype, which missed by 43% / 52%).
+2. **Why does it matter?** — This is the **root of the whole CH suite**: CH02 (transfer), CH03
+   (valence), CH04 (VSEPR), CH05–CH07 all inherit "the bond = a shared electropause" from here. If the
+   covalent bond is native, molecular chemistry follows with no wavefunctions; if it is only a fit,
+   every downstream prompt is built on sand. It also closes the EMC04 electropause → molecule step.
+3. **How will we find out?** — Five gated phases (§④): reproduce the single-atom electropause at `a₀`
+   (P0 gate), **root-find the two-proton axial balance** with no `2a₀` shortcut (P1), integrate the
+   well-depth difference for `D_e` (P2), and only then the VSEPR ladder (P3) and a novel angle (P4).
+4. **What would prove us wrong?** — §⑧, with numeric kill-triggers: **no** sign change of `F_in−F_out`
+   anywhere in 0.4–1.2 Å; a root that lands `R_e` off by >20%; a **negative or zero** `D_e` (anti-bound);
+   or VSEPR angles that cannot be reproduced without importing hybridisation. Each can genuinely fire.
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class
+   (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN), per phase, with **no repainting a fired test**
+   and **no widening the committed 5% / 20% tolerances after the run**.
 
-## 2 · Physical Context
+---
 
-An isolated atom holds its electron(s) at the electropause: convergence push inward, movement budget
-outward, balanced at a₀-scale. Bring two nuclei close and their convergence wakes overlap; between
-them the combined inward push deepens, and a **single** electropause surface can enclose the shared
-electron pair sitting in the internuclear well. That shared boundary *is* the covalent bond — its
-length is where the net axial push between the nuclei balances their mutual occlusion repulsion
-(EMC03 like-pair surplus), its depth is the bond energy. Molecular geometry then comes from how the
-remaining wakes around a central atom **cancel or reinforce**: the period-2 map (B–O, C–F, N–Ne;
-paired fore/aft = silent, lone = active) generalises to bonding/lone-pair directions, giving the
-familiar 104.5°/107°/109.5° angles as wake-balance equilibria, not hybridised orbitals.
+## ⓪⁺ Anti-Tautology Firewall *(the load-bearing constraint)*
 
-Variables: internuclear distance `R`; shared-electropause radius; bond energy `D_e`; equilibrium
-angle θ; lone-pair vs bond-pair wake strength; reduced electropause balance `F_in(R)=F_out(R)`.
-Targets: H₂ (R_e = 0.741 Å, D_e = 4.52 eV), H₂O (104.5°), NH₃ (107°), CH₄ (109.5°), bond-length
-trends down a group.
+The mechanism (shared electropause) and the *number* (`0.741 Å`, `4.478 eV`) must be kept apart. The
+load-bearing derivation is **finding the crossing** `F_in(R)=F_out(R)` from independently-grounded
+occlusion (Law III) and budget (Law V) forces — `R_e` is then *output*, not input. The trivial identity
+to avoid is **importing the answer**: hard-coding `R_e=2a₀`, setting `D_e=Ry/2`, or tuning `f_overlap`
+post-hoc so the root sits on 0.741 Å. **Importing the answer caps the grade at C** — it is the guess,
+not the derivation. The `zk²=1` H-atom ground check (§③) is acknowledged as an **IDENTITY**, never a
+PASS. The firewall: the P1 root-finder must not reference `2a₀` or `Ry/2` as the equilibrium; any such
+reference is tagged `IMPORTED` and forfeits NATIVE.
 
-## 3 · Theoretical Framework
+---
 
-Build on: EMC04 (electropause, P_eff from centripetal balance), EMC03 (like/unlike surplus-deficit,
-handedness sign), PPT06/APS04 (wakes/multipole), the period-2 wake-cancellation map (memory), Law III
-(occlusion), Law V (movement budget). **Forbidden:** molecular orbitals, LCAO, hybridisation,
-valence-bond wavefunctions, exchange integrals, electron "clouds." The bond length/energy and VSEPR
-angles are **targets**.
+## ① Executive Summary
 
-Working hypotheses:
-- **H1 (shared electropause):** for two protons the combined convergence field has a single
-  pressure-balance surface enclosing the electron pair; solve `F_in(R)=F_out(R)` for R_e.
-- **H2 (bond energy = electropause well depth):** `D_e` = work to separate the shared electropause
-  back into two atomic ones; predict H₂ `D_e` from the merged-vs-separate budget.
-- **H3 (geometry = wake balance):** around a central atom, bonding wakes + lone wakes settle into
-  the angular configuration that cancels net wake torque; lone pairs (stronger, no second nucleus to
-  share) push bonds closer → 104.5° (2 lone), 107° (1 lone), 109.5° (0 lone) — the VSEPR ladder.
-- **H4 (trends):** bond length grows down a group as the core electropause radius grows (APS01 k-factors).
+EMC04: Bohr radius = **electropause** — inward convergence vs outward movement budget. **Question:** For
+H₂, do two proton convergence wakes overlap so one shared electropause encloses the electron pair, with
+`R_e` and `D_e` from **occlusion + budget balance** (no LCAO, no exchange integral)?
 
-## 4 · Investigation Strategy
+**Stakes:** If `F_in(R)=F_out(R)` crosses near 0.741 Å without orbital input, covalency is native. If
+only `2a₀` scaling works, label **CONVERGENCE** not NATIVE.
 
-**Phase 1 — H₂ shared electropause.** Two-proton convergence field; find the single pressure-balance
-surface; solve for R_e. *Success:* R_e within a few % of 0.741 Å, no charge, no orbital.
+---
 
-**Phase 2 — Bond energy.** Merged-vs-separate movement-budget difference. *Success:* `D_e` within
-~20% of 4.52 eV; correct sign (bound).
+## ② Physical Context
 
-**Phase 3 — VSEPR geometry.** Central atom + N bonding wakes + L lone wakes; minimise net wake
-torque. *Success:* H₂O 104.5°, NH₃ 107°, CH₄ 109.5° recovered to a few degrees from the lone/bond
-wake-strength ratio (one calibrated ratio allowed, flagged).
+**Mechanism.** Internuclear region: combined inward occlusion push vs (a) mutual like-pair repulsion
+(EMC03 surplus) and (b) electron dyad movement budget outward. Equilibrium `R_e` where net axial force
+vanishes. `D_e` = work to separate shared surface back to two atomic electropauses.
 
-**Phase 4 — Trends + falsifier.** Bond length down a group via core electropause radius; predict one
-**novel** number (e.g. a bond angle or length not used to calibrate) as a falsifier.
+**Variables:**
 
-## 5 · Success Criteria
+| Symbol | Meaning |
+|--------|---------|
+| `R` | Internuclear distance [m] |
+| `F_in` | Inward convergence + binding occlusion |
+| `F_out` | Outward repulsion + budget |
+| `D_e` | Dissociation energy [eV] |
+| `a₀` | Atomic electropause scale |
 
-- ✅ **PASS (Class A):** H₂ R_e and D_e and the VSEPR ladder from electropause + wake balance, ≤1
-  flagged ratio; a correct novel prediction.
-- ✅ **QUALIFIED (Class C):** R_e and angles recovered with the lone/bond ratio CALIBRATED(1); D_e to
-  ~20%. (Expected landing.)
-- ⚠️ **PENDING (Class D):** shared electropause + R_e shown; geometry only qualitative.
-- ❌ **FAIL (Class F):** cannot bind two atoms without importing an orbital/exchange term.
+**Targets (OBSERVED-TARGET):** `R_e = 0.741 Å`, `D_e = 4.478 eV`; H₂O 104.5°, NH₃ 107°, CH₄ 109.5°.
 
-## 6 · Outputs
+**Forbidden:** MO/LCAO, hybridisation, ψ, exchange integrals, electron clouds.
 
-1. `CH01_DERIVATION.md` — shared electropause; R_e; D_e; VSEPR from wake cancellation; trends.
-2. `ch01_covalent_bond.cpp` — standalone C++20: H₂ balance solver, VSEPR angle minimiser, trend table.
-3. `ch01_results.txt` — R_e/D_e vs measured; H₂O/NH₃/CH₄ angles; one novel falsifier value.
-4. `CH01_VERDICT.md` — A/C/D/F; ledger confirming no orbital/wavefunction entered.
+---
 
-## 7 · Dependencies & References
+## ③ Theoretical Framework
 
-**Upstream:** EMC04 (electropause/P_eff), EMC03 (surplus/deficit sign), PPT06/APS04 (wakes), APS01
-(k-factor core radii), period-2 wake-cancellation map. **Downstream:** ionic/metallic bonding, the
-PV_canon chemistry/molecules volumes, reaction energetics, crystal geometry (12_Condensed_Matter).
-**Related:** the Li–Be "loosest dyad" and "Be waits for O" notes ([[project_foundational_ontology_influx_monopole]]).
+**Balance (commit in RUN_LOG before coding):**
 
-## 8 · Falsification Tests
+```
+F_in(R)  = (π/4) P_eff R_p² R_e² / R²   × f_overlap(R)   [Law III, two-proton geometry]
+F_out(R) = F_rep(R) + F_budget(R)        [EMC03 surplus + Law V at shared dyad]
+```
 
-| Test | Hypothesis | Predicted outcome | If FAIL |
-|------|-----------|-------------------|---------|
-| T1 | bond = shared electropause | H₂ R_e ≈ 0.741 Å from balance | bond not an electropause merge |
-| T2 | D_e = well-depth difference | H₂ D_e ≈ 4.5 eV, bound sign | binding has another basis |
-| T3 | geometry = wake cancellation | 104.5/107/109.5° from lone/bond ratio | VSEPR needs hybrid orbitals |
-| T4 | novel prediction | an un-calibrated angle/length matches | model only fits, doesn't predict |
+**Hypotheses:**
+- **H1:** ∃ unique root `R_e` in [0.4, 1.2] Å.
+- **H2:** `D_e = U_merged(R_e) − 2 U_atomic` from same potentials.
+- **H3:** VSEPR angles from wake vector balance (Phase 3; lone/bond weight ratio = max CALIBRATED(1)).
 
-## 9 · Implementation Notes
+**zk² = 1:** Verify H atom ground once — **IDENTITY**.
 
-Double precision; work in a₀ and eV. Solve the H₂ balance by root-finding `F_in(R)−F_out(R)=0` (bracket
-around 0.7–0.8 Å). For VSEPR, represent each wake as a unit vector with a strength weight and minimise
-Σ pairwise wake-interaction over angles (lone weight > bond weight is the one allowed calibrated knob).
-Plot: (a) F_in/F_out vs R crossing at R_e; (b) D_e well; (c) angle vs lone/bond ratio with the three
-molecules marked. The discipline: a bent water molecule from *wake cancellation* is the native win —
-do not reach for sp³ hybridisation to "explain" 104.5°; that is the borrowed picture this replaces.
+---
+
+## ④ Investigation Strategy
+
+### Phase 0 — Atomic electropause baseline (GATE)
+
+- Reproduce single-H electropause at `a₀` from EMC04 relations (document which `P_eff`, radii).
+- Success: `|r − a₀|/a₀ < 1%` for balance point.
+
+### Phase 1 — H₂ root find (GATE — no `2a₀` shortcut)
+
+- **Method:** Bracket `F_in − F_out` on [0.4, 1.2] Å; bisection or secant to |F| < 1e−12 N scale.
+- **Success:** `|R_e − 0.741 Å|/0.741 Å < 0.05` (**5% committed** — not 35%).
+- **Failure >5%:** PIVOT overlap factor `f_overlap`; if >20% → **OPEN**; forbidden: hardcode `2a₀`.
+
+### Phase 2 — Bond energy
+
+- Integrate or evaluate well depth difference.
+- **Success:** `|D_e − 4.478|/4.478 < 0.20`, sign bound (D_e > 0).
+- **Failure:** **OPEN** or CALIBRATED(1) on overlap only — document.
+
+### Phase 3 — VSEPR wake balance (DEFER if Phase 1 OPEN)
+
+- Unit vectors; lone weight `w_L`, bond `w_B`; minimise torque.
+- **Success:** H₂O/NH₃/CH₄ within 3° with one `w_L/w_B` ratio (CALIBRATED(1) if used).
+
+### Phase 4 — Novel falsifier
+
+- Predict one angle/length **not** used in calibration (e.g. H₂S angle) — compare OBSERVED.
+
+---
+
+## ⑤ Success Criteria — dual verdict
+
+| Prompt | Requirement |
+|--------|-------------|
+| **A** | Ph 1–4; R_e 5%; D_e 20%; VSEPR 3°; novel hit |
+| **B** | Ph 1–2 PASS; Ph 3 DEFER |
+| **C** | Root found but >5% R_e; honest OPEN |
+| **D** | Qualitative only |
+| **F** | `2a₀` / `Ry/2` without root find |
+
+| Physics | Condition |
+|---------|-----------|
+| **NATIVE** | Ph 1–2 from occlusion/budget |
+| **CONVERGENCE** | Scaling matches |
+| **OPEN** | No root in bracket |
+
+---
+
+## ⑥ Outputs
+
+1. `CH01_DERIVATION.md` — F_in, F_out definitions
+2. `ch01_covalent_bond.cpp` — root finder + energy + optional VSEPR
+3. `ch01_results.txt` — F vs R table around root
+4. `RUN_LOG.md`
+5. `CH01_VERDICT.md`
+
+---
+
+## ⑦ Dependencies
+
+**Upstream:** EMC04, EMC03, PPT06/APS04 wakes, APS01 k-factors.
+**Downstream:** CH04, ionic/metallic bonding.
+
+---
+
+## ⑧ Falsification Tests *(each states the numeric outcome that kills it)*
+
+| ID | Test | SDT prediction (numeric) | Kill trigger — what FAIL looks like |
+|----|------|--------------------------|-------------------------------------|
+| T1 | Axial balance has a root | `F_in−F_out` changes sign exactly once in [0.4, 1.2] Å, at `R_e` within **5%** of 0.741 Å | **no** sign change anywhere in the bracket, OR the only root sits >20% off 0.741 Å ⇒ shared-electropause **KILLED/OPEN**, not a balance |
+| T2 | Bond is bound, right depth | `D_e = U_merged(R_e) − 2U_atomic > 0`, within **20%** of 4.478 eV | `D_e ≤ 0` (anti-bound) ⇒ **KILL** the bind; `abs(D_e−4.478)/4.478 > 0.20` after f_overlap pivot ⇒ **OPEN** well depth |
+| T3 | VSEPR ladder from one ratio | H₂O 104.5° / NH₃ 107° / CH₄ 109.5° to ≤3° with a single `w_L/w_B` (CALIBRATED(1)) | needs a *second* fitted knob, or only reproduces with sp³ hybridisation imported ⇒ **KILL H3**, angles are not wake-torque |
+| T4 | Novel angle, not fit | predict an angle never used to set `w_L/w_B` (e.g. H₂S ≈ 92°) within a few ° | the model only reproduces the angles it was tuned on ⇒ fit-only, no predictive content (caps at C) |
+| T5 | No imported answer (firewall) | `R_e` is the *output* of the root-find; code contains no `2a₀`/`Ry/2` equilibrium | if the only way to hit 0.741 Å is to seed `2a₀` ⇒ **IDENTITY-PASS**, grade capped at **C** |
+
+---
+
+## ⑨ Implementation Notes
+
+- Plot `F_in − F_out` vs R in results (minimum 20 points).
+- Use `law_III::F_occlusion` with documented radii — no G/M.
+- Angstrom print, SI internal.
+- Author attribution in all generated files: **J. C. Harvey, Melbourne.**
+
+---
+
+## ⑪ Questions This Opens *(generative — log new ones in `CH01_VERDICT.md`)*
+
+Not required for the verdict; they are the payoff of doing it well.
+
+1. **Is `R_e` a fixed fraction of `a₀`, or does it shift per element?** If the native crossing lands
+   near `1.4 a₀` (not `2 a₀`) for H₂, is the same crossing-fraction predictive for the homonuclear
+   series (Li₂, N₂, F₂), or does each need its own occlusion geometry? A universal fraction would be a
+   strong NATIVE signal; a per-element fudge would not.
+2. **What sets `f_overlap`?** Is the overlap factor a *derivable* geometric quantity (the fraction of
+   each proton's convergence cone the other proton occludes) rather than a knob — and if so does CH01
+   have *zero* calibrated parameters in the bond length/energy chain?
+3. **Does the shared electropause have a measurable size?** If two protons share one pressure-balance
+   surface, that surface has an extent — does it predict the H₂ bond *polarisability* or quadrupole that
+   CH06 (van der Waals) and CH07 (spectra) then consume natively?
+4. **Where does the singlet/triplet split come from with no spin postulate?** Bound H₂ vs anti-bound
+   H₂ (the repulsive state) — is the difference a *handedness* of the two convergence wakes (EMC03
+   surplus vs deficit, fore/aft pairing) rather than a Pauli/exchange term?
+5. **Does the well curvature at `R_e` predict the CH07 vibration directly?** If `k = d²U/dR²|_{R_e}`
+   from this same potential lands the CO/H₂ stretch frequency, then bond length, bond energy, and the
+   IR line all fall out of one curve — one mechanism, three observables. CH07 should consume this `k`.
+
+---
+
+## ⑩ Adaptive Execution Protocol
+
+### Pre-Run Commitments
+
+```markdown
+- R_e tolerance: 5% (NOT 35%)
+- D_e tolerance: 20%
+- CALIBRATED budget: 1 (w_L/w_B only, Phase 3)
+- Bracket: [0.4, 1.2] Å
+- Forbidden: 2a0 as R_e; Ry/2 as D_e without well integral
+```
+
+### Pivot table
+
+| Trigger | PIVOT | If fail | Forbidden |
+|---------|-------|---------|-----------|
+| No sign change in bracket | Revise F_out; add EMC03 repulsion term | OPEN | Widen bracket post-hoc |
+| R_e off 5–20% | Adjust f_overlap geometry (geometric, documented) | OPEN | RETRO-PASS at 35%; hardcode 2a₀ |
+| D_e wrong sign | Fix integration limits | KILL H2 bind | Negative D_e PASS |
+| VSEPR needs a 2nd knob (Phase 3) | re-examine lone vs bond wake weight from EMC03 | KILL H3; CH04 takes it over | sneak hybridisation in as the "ratio" |
+| EMC04 overlap relation unavailable | DEFER P1 with dependency ID; finish P0 | — | fabricate f_overlap to hit 0.741 Å |
+
+---
+
+*CH01 · the bond is where the electropauses merge — find the crossing, don't guess 2a₀.*

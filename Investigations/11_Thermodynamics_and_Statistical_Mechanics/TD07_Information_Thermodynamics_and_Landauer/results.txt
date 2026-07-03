@@ -1,0 +1,60 @@
+================================================================
+ TD07 - Information Thermodynamics and Landauer
+ J. C. Harvey, Melbourne - 2026-07-03
+ Joint microcanonical register+bath; symmetric proposals; p_R from
+ counting - no Boltzmann factor is input anywhere.
+================================================================
+
+bath: N=2000, E=20000 -> kT = 10.4921 eps, kT ln2 = 7.2725 eps
+
+P1: Landauer ledger
+  exact quasi-static work (trapezoid, ramp 0->80): W = 7.2688 eps
+  W/(kT ln2) = 0.9995  (gate 1%)  [PASS]
+    E_R    p_exact     p_sim      dev/sigma
+      5   0.38311    0.38211    0.01
+     10   0.27831    0.27926    0.02
+     20   0.12941    0.12714    0.05
+     40   0.02158    0.02076    0.04
+  sim occupation matches counting (3 sigma)  [PASS]
+  finite-time bound (trajectories, ramp 0->80):
+    n_eq/step   <W>/eps    SE      W/(kT ln2)
+        200     7.7400   0.1401    1.0643
+       2000     7.4333   0.1330    1.0221
+      20000     7.5133   0.1343    1.0331
+  dissipation monotone with speed [PASS]; slowest within 3SE of/above bound [PASS]
+
+P2: demon closure (extract by lowering a KNOWN state, erase to reset)
+  exact stepped ledgers: erase pays 7.5186 eps, extraction yields 7.0190 eps
+  net = -0.4995 eps = -[p_R(0)-p_R(80)] = -0.4995 eps  (<= 0)  [PASS]
+  NOTE (lattice-flavoured, not oversold): the strictly negative quasi-static
+  net is the integer-step overhead - on a relay lattice the potential moves in
+  units of eps, so THIS protocol class loses >= eps*[p(0)-p(Emax)] ~ 0.5 eps per
+  cycle (~6.9% of kT ln2 at kT=10.5 eps). It vanishes as eps/kT -> 0; a
+  continuous-protocol demon closes at exactly 0. Claim scope: stepped protocols.
+    n_eq/step   <net>/eps   SE      (gate: net < 0 by 3SE or |net|<3SE&<=0 mean)
+        200     -0.7833   0.1912
+       2000     -0.7133   0.1909
+      20000     -0.4633   0.1952
+  demon nets <= 0 at all speeds  [PASS]
+
+P3: partial erasure - HEAT to bath vs kT[ln2 - H(p)]
+  (ADJ-0, pre-compile: the Landauer-form quantity for PARTIAL erasure is the
+   heat Q = W - dU_register, not the work W = dF; they coincide only at full
+   erasure. Category error caught before any run; gate value unchanged.)
+    E_t    W_ledger    dU=E_t*p     Q=W-dU     kT(ln2-H)   dev/kTln2
+      2     0.9525      0.9050      0.0474      0.0474    0.0005%
+      5     2.2052      1.9155      0.2896      0.2894    0.0032%
+     10     3.8519      2.7831      1.0688      1.0680    0.0104%
+     20     5.8203      2.5883      3.2320      3.2303    0.0243%
+     40     7.0452      0.8632      6.1820      6.1800    0.0271%
+  cost = kT * Delta(configurational entropy), -> 0 at the reversible end
+  (E_t = 0: W = 0 exactly - trivial and labelled so; a swap/relabel gate
+  changes no state count: cost 0, near-definitional Bennett recovery). [PASS]
+
+P4: delete test - every bound above is (kT/eps) x pure number (ln2, H);
+  kelvin conversion uses k_B = 1.380649e-23 J/K as the only bridge. [PASS]
+
+================================================================
+ TD07 GATES: P1 PASS | P2 PASS | P3 PASS | P4 PASS
+ VERDICT: PASS - see TD07_VERDICT.md
+================================================================

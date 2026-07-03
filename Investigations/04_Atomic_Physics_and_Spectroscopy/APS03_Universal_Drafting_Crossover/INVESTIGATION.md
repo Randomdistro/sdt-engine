@@ -1,5 +1,7 @@
 # APS03: Universal Drafting Crossover — Results (interim)
 
+> **⚠️ SUPERSEDED — headline not reproducible (HUNTER scour 2026-07-02).** The '8.8% RMS / pilot PASS / negative control 6×' below is a stale pre-rename artifact. Reproducible state (see `APS03_VERDICT.md`): RMS **21.5%** (C+A+B), galactic pilot **VOID** (dead SPARC data path), negative control only **2.4×** worse, nuclear excluded at 447%. Crossover shape is a disclosed MOND borrow.
+
 > **Status:** EXECUTED (4 scales) — pilot PASSED; SOURCE asymptote confirmed on 3 independent scales; floor confirmed galactically; full collapse NOT demonstrated (nuclear contaminates, deep stellar floor missing)
 > **Conjecture (H1):** one scale-invariant `B = Φ(ξ)`, `ξ = g_self/g_floor`, governs convergence-coupling response at all scales
 > **Engine:** `cq26_drafting_crossover.cpp` · **Output:** `cq26_output.txt`, `cq26_provenance.txt` · **Corpus:** `cq26_corpus.csv` (3443 rows)
@@ -71,7 +73,7 @@ Pooling all four scales and binning in half-decades of `log₁₀ ξ`, comparing
 | +2.0…+12.0 | **0.99–1.16** | 1.00 | B (planets) | 78 |
 
 - **All-scales binned RMS vs Φ_simple = 51.2 %** over 20 bins — but this is dominated entirely by nuclear contamination (see below).
-- **C+A+B collapse (nuclear excluded) = 8.8 % RMS over 20 bins.** This is the headline cross-scale number: **galactic rotation, atomic emission drag, and stellar orbital boost fall onto the single curve `Φ(ξ)` to under 9 %**, across ~14 decades of ξ, with `ξ = g_self/a₀` and `a₀` DERIVED. H1 is **supported once the mis-baselined nuclear scale is removed.**
+- **C+A+B collapse (nuclear excluded) = 8.8 % RMS over 20 bins.** [stale — see banner] This is the headline cross-scale number: **galactic rotation, atomic emission drag, and stellar orbital boost fall onto the single curve `Φ(ξ)` to under 9 %**, across ~14 decades of ξ, with `ξ = g_self/a₀` and `a₀` DERIVED. H1 is **supported once the mis-baselined nuclear scale is removed.**
 - **NEGATIVE CONTROL (the proof the test has power):** re-running the C+A+B collapse against a deliberately *wrong* floor (100·a₀) degrades it from 8.8 % to **53.3 % RMS** — a 6× worsening → **PASS**. The collapse is not an artifact of a flexible curve; it specifically requires the SDT-derived floor value. A wrong floor does not collapse the data.
 - **The deep-source tail (ξ ≳ 100, stellar) is a clean win:** every stellar bin from ξ~10² to ξ~10¹² sits at ⟨B⟩ = 1.00 ± a few %, exactly on `Φ_simple → 1`. Source asymptote confirmed across 14 decades.
 - **Nuclear (Ⓓ) is the sole contaminant:** 381/394 nuclear points sit at B≈7 in the transition band (deuteron baseline far below all bound nuclei). Including Ⓓ inflates the all-scales RMS to 51 %; excluding it gives 8.8 %. Nuclear must be re-baselined or bounded out (§6).
@@ -79,7 +81,7 @@ Pooling all four scales and binning in half-decades of `log₁₀ ξ`, comparing
 ## 5. Honest verdict on the success ladder
 
 - **PASS:** the **source asymptote `Φ→1` is now confirmed on three independent scales** — galactic (median 1.01), atomic closed-shell (1.021), stellar planets (1.042, flat to sub-% across ξ ~ 10²–10¹²). The **floor asymptote `ξ^(−1/2)` is confirmed galactically** (slope −0.481, the one place with dense floor data). Both DERIVED asymptotes are real, on real data, at multiple scales. The atomic scale independently shows the full monotone source→floor crossover by shell occupancy.
-- **STRONG (with one scale excluded):** the cross-scale **collapse IS demonstrated for galactic+atomic+stellar — 8.8 % binned RMS** onto the shared `Φ(ξ)`, and the **negative control passes** (wrong floor → 53.3 %, 6× worse), proving the collapse specifically requires the SDT-derived `a₀`. H1 is **supported across three of four scales**; the fourth (nuclear) is excluded for a diagnosed baseline error, not a fudge.
+- **STRONG (with one scale excluded):** the cross-scale **collapse IS demonstrated for galactic+atomic+stellar — 8.8 % binned RMS** [stale — see banner] onto the shared `Φ(ξ)`, and the **negative control passes** (wrong floor → 53.3 %, 6× worse), proving the collapse specifically requires the SDT-derived `a₀`. H1 is **supported across three of four scales**; the fourth (nuclear) is excluded for a diagnosed baseline error, not a fudge.
 - **Causes are identified and bounded, not papered over:**
   (a) **Nuclear (Ⓓ) is mis-operationalized** and contaminates every mid-ξ bin (381/394 points sit at B≈7 because the deuteron baseline is far below all bound nuclei). It should be excluded or re-baselined; a C+A+B collapse is the obvious clean test.
   (b) **The floor regime is under-sampled off the galactic scale** — atomic ξ is discrete (§7.3 geometric ξ needed), and stellar stops at ξ≈1 (wide binaries, the 1.4 GB download, would carry it to ξ≪1). Two of the three confirmed-source scales simply have no floor data yet.

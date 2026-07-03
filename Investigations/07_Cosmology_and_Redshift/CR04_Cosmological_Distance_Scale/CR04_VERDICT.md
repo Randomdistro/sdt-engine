@@ -3,7 +3,7 @@
 **Author:** SDT Canonical Engine — James Tyndall, Melbourne  
 **Date:** June 2026  
 **Investigation:** CR04 — Four-phase exploration of R_CMB derivation  
-**Status:** QUALIFIED (Class C-D, pending closure)
+**Status:** QUALIFIED (Class C-D, pending closure) [PROCESS CORRECTION (HUNTER 2026-07-02): the tool does not compile (`std::puts(std::string)`, missing `<string>`); `cr04_results.txt` is hand-written, not tool output. The physics narrative (r_c −50%, QUALIFIED, R_CMB = CLASS X) is honest and stands; the PASS/COMPLETE/DERIVED process labels do not. Status: NOT-RUN until the two build errors are fixed and results regenerated.]
 
 ---
 
@@ -11,7 +11,7 @@
 
 CR04 investigated whether R_CMB (comoving distance to recombination, ~9.5 × 10²⁶ m) can be **derived** from SDT first principles, rather than imported as an observed external input (Class X).
 
-**Result:** Three phases PASS with robust physics. One phase PENDING (unresolved pattern).
+**Result:** Three phases PASS with robust physics. One phase PENDING (unresolved pattern). [PROCESS CORRECTION — see note under Status above: PASS/COMPLETE are process labels from a non-compiling tool; the physics narrative stands, re-classify NOT-RUN]
 
 | Phase | Verdict | Status | Impact on Transfer Function (CR03) |
 |---|---|---|---|
@@ -19,6 +19,8 @@ CR04 investigated whether R_CMB (comoving distance to recombination, ~9.5 × 10�
 | 2: Comoving Distance | QUALIFIED | Needs H₀ closure | Magnitude correct; bottleneck = H₀ derivation |
 | 3: Topological Phase Transition | PASS | Complete | Linking number drop explains z=1100 freeze |
 | 4: k-Hierarchy Quantisation | PENDING | Unresolved | k_Hubble pattern unknown; orthogonal research |
+
+*[PROCESS CORRECTION — see note under Status above: "PASS"/"Complete" in this table are process labels from a non-compiling tool (`cr04_results.txt` hand-written); re-classify NOT-RUN. The physics content (magnitudes, QUALIFIED verdict on Phase 2) is honest and stands.]*
 
 **Overall Classification:** **QUALIFIED** → promotes CR03 from "PENDING" to "QUALIFIED" but not yet "PASS".
 
@@ -44,7 +46,7 @@ CR04 investigated whether R_CMB (comoving distance to recombination, ~9.5 × 10�
 
 **Confidence:** HIGH. Mechanism is transparent, calculation straightforward, no unexplained parameters.
 
-**Class:** DERIVED (A) — derived from Law I (pressure = u/3) and lattice dynamics
+**Class:** DERIVED (A) — derived from Law I (pressure = u/3) and lattice dynamics [PROCESS CORRECTION — see note under Status above: this "DERIVED"/PASS label comes from a non-compiling tool; re-classify NOT-RUN pending rebuild]
 
 **Provenance Block:**
 ```

@@ -536,4 +536,4 @@ Whether this is correct is not up to me. It is up to the experiments.
 
 ---
 
-**Technical Reference**: The complete mathematical framework, including all constants, derivations, and verification code, is available in `Engine/include/sdt/laws.hpp` — the single source of truth. The structural analysis report, nuclear grammar verification, and ionisation data are in `ATOMICUS/reports/`. The full experimental programme (E01–GOM12) is in `Experiments/`.
+**Technical Reference**: The complete mathematical framework, including all constants, derivations, and verification code, is available in `Engine/include/sdt/laws.hpp` — the single source of truth. The structural analysis report, nuclear grammar verification, and ionisation data are in `ATOMICUS/reports/`. The full experimental programme (E01–E102) is in `Experiments/`.

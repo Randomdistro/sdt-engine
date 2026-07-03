@@ -1,25 +1,84 @@
-# PPT04: Neutrino Magnetic Moment Prediction — Codebase Question
+# PPT04 — Neutrino Magnetic Moment (μ_ν ≡ 0)
 
-## THE QUESTION
-neutrino.hpp (line 9): "No toroidal flow → no charge (l=1) → no magnetic moment (l=2)"
+> **Author:** J. C. Harvey, Melbourne. **Status:** RESOLVED (narrative) → **re-run** for §0 compliance.
+> **Inherits:** `PERFECT_PROMPT_TEMPLATE.md` §⓪–§⑩ · `PROMPT_EXECUTION_PROTOCOL.md` · §0 anti-creep (R0–R5).
+> **Engine:** `#include <sdt/laws.hpp>` **only** — refactor `ppt04_neutrino_magnetic_moment.cpp` (no local constants).
+> **Prior audit:** Local `namespace constants`, `G_F`, `mass_kg` driver — **protocol fail**.
 
-SDT predicts neutrinos have ZERO magnetic moment. This is a FALSIFIABLE prediction. Current experimental bound: |μ_ν| < 2.9×10⁻¹¹ μ_B (GEMMA, 2012). Standard model predicts μ_ν ~ 3×10⁻¹⁹ μ_B.
+---
 
-## INVESTIGATION PROMPT
+## ⓪ The Golden Rule
 
-### Target
-Formalise the SDT prediction of μ_ν = 0 and compute the experimental sensitivity needed to distinguish SDT (exactly zero) from standard model (~10⁻¹⁹ μ_B).
+1. **Gap:** μ_ν = 0 from W=0 (no ℓ=2 wake) — falsifiable vs SM ~10⁻²⁰ μ_B.
+2. **Stakes:** PPT09 winding; charge-moment correlation; E58 monopole thread.
+3. **How:** Phase 0 refactor to laws.hpp; Phase 1 topology table W=0,1,3; Phase 2 SM comparison column (OBSERVED); Phase 3 sensitivity gap.
+4. **Falsify:** Any non-zero μ_ν at 10⁻²⁰; W=0 assignment wrong for neutron (composite caveat documented).
+5. **Done:** **B** = compliant code + topology argument; physics already **RESOLVED** narratively.
 
-### Methodology
-1. Show explicitly: W=0 (open winding) → no toroidal circulation → no ℓ=2 wake → μ = 0
-2. The standard model prediction μ_ν ~ 3×10⁻¹⁹ μ_B comes from loop diagrams → in SDT, these diagrams don't exist (no quarks, no W bosons, no loops)
-3. Current sensitivity gap: GEMMA measures to 10⁻¹¹ μ_B. SDT needs sensitivity to 10⁻¹⁹ μ_B to distinguish from standard model.
-4. PTOLEMY (E01) will measure CνB → does it also constrain μ_ν?
+---
 
-### Success Criteria
-- [x] SDT prediction (μ_ν ≡ 0) formally stated with topological argument
-- [x] Comparison to standard model prediction
-- [x] Experimental pathway to distinguish the two
+## ① Executive Summary
 
-### Completed: May 2026
-See `INVESTIGATION.md` for the full formal derivation and `cq07_neutrino_magnetic_moment.cpp` for computational verification.
+**SDT prediction:** μ_ν ≡ 0 exactly (W=0 open winding → no toroidal circuit → ℓ=2 = 0).
+
+**SM (comparison only):** μ_ν ~ 3×10⁻¹⁹ (m_ν/eV) μ_B — use **OBSERVED** formula in comparison table, **not** in SDT chain. **G_F forbidden** in SDT derivation.
+
+---
+
+## ③ Framework
+
+Use `law_VI::winding`, wake narrative from `neutrino.hpp` / PPT09.
+
+**Neutron caveat:** Q=0 but μ≠0 because W=3 composite — document in Phase 1 table.
+
+---
+
+## ④ Phases
+
+### Phase 0 — Refactor (GATE)
+
+- Remove `namespace constants`; use `sdt::laws::measured::`.
+- **GATE:** compiles; zero local redefinitions of c, ℏ, α, m_e, m_p.
+
+### Phase 1 — Topology table (GATE)
+
+| Particle | W | μ prediction |
+|----------|---|--------------|
+| e⁻ | 1 | ≠0 |
+| p | 3 | ≠0 |
+| ν | 0 | **0** |
+
+### Phase 2 — SM comparison (OBSERVED column only)
+
+Print SM μ_ν for m_ν = 0.06 eV using **literature formula** — tag OBSERVED-TARGET, not DERIVED.
+
+### Phase 3 — Experimental landscape
+
+GEMMA, XENONnT bounds — OBSERVED; discrimination at 10⁻²⁰.
+
+---
+
+## ⑤ Dual verdict
+
+| Prompt | Refactor + table |
+| Physics | **RESOLVED** if μ_ν=0 argument intact; **KILLED** if W=0 abandoned |
+
+---
+
+## ⑥ Outputs
+
+`ppt04_neutrino_magnetic_moment.cpp` (refactored), `PPT04_VERDICT.md`, `RUN_LOG.md`, `results.txt`.
+
+---
+
+## ⑩ Pivot table
+
+| Trigger | Action |
+|---------|--------|
+| Local constants remain | **FAIL** Phase 0 |
+| G_F in SDT chain | Remove; SM column only |
+| User wants full wake integral | DEFER to FLM10/PPT07 |
+
+---
+
+*PPT04 · the prediction stands; the implementation must obey the whitelist.*

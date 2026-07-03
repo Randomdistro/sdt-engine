@@ -42,12 +42,13 @@ c_local = c(1−z), and the absolute ceiling c_∞ is a derived quantity, not an
 k_B only converts temperature to energy. In SDT temperature *is* lattice agitation energy
 directly; set k_B = 1 and it disappears. *Stood on:* Boltzmann. *Eliminated as a parameter.*
 
-### m_p — the proton mass — **[DERIVED]**
-The proton/electron mass ratio is the trefoil topological signature **6π⁵ = 1836.118**
-(measured 1836.153, 0.002%). Given the electron mass, m_p is *output*, not input. It is removed
-from the seed set entirely. *Stood on:* the measured ratio. *Flew away:* 6π⁵ from the (2,3)
-trefoil. (Honest: the 0.002% residual and the 1.830c-vs-6π⁵ "shared digits" caveat stand — see
-`Papers/Depth_Closure_Theorem` §9.)
+### m_p — the proton mass — **[OPEN]**
+[CORRECTED 2026-07-03: previously classed [DERIVED] — 6π⁵ is a privileged, unexplained 19-ppm
+match (ROOTSIM verdict), not a derivation.]
+The proton/electron mass ratio matches the trefoil topological signature **6π⁵ = 1836.118**
+(measured 1836.153, 0.002%). Until a mechanism produces 6π⁵ from the (2,3) trefoil, m_p stays
+an input. *Stood on:* the measured ratio. (Honest: the 0.002% residual and the
+1.830c-vs-6π⁵ "shared digits" caveat stand — see `Papers/Depth_Closure_Theorem` §9.)
 
 ### α — the fine-structure constant — **[DERIVED, PARTIAL]**
 α is koppa at the hydrogen ground state: the depth-ladder rung k_H = 1/α = 137, with
@@ -103,15 +104,17 @@ seed**, expressible as m_e or equivalently e, with the other derivable through t
                            ├─► (spation size, scales, depths)
                            │
    ② mass–charge seed     ─┬─► e, charge quantisation (CQ37)
-      (m_e ≡ e)            ├─► m_p = m_e · 6π⁵           [derived]
+      (m_e ≡ e)            ├─► m_p = m_e · 6π⁵           [OPEN — unexplained match]
                            └─► (Law IV masses)
                                                          α = 1/k_H rung  [derived, 137 PARTIAL]
    BOUNDARY:  T_CMB  (measured epoch state; candidate Law I output)
 ```
 
 **Tally: 8 whitelist entries → 2 irreducible seeds + 1 boundary**, with two pure unit
-conventions (c, k_B) and three genuine derivations (m_p, α, charge quantisation) removed from the
-input column. Compare the Standard Model's ~19–26 fitted parameters. No number is both assumed
+conventions (c, k_B) removed from the input column. [CORRECTED 2026-07-03: previously counted
+"three genuine derivations (m_p, α, charge quantisation)" — m_p is [OPEN], not derived: 6π⁵ is
+a privileged, unexplained 19-ppm match (ROOTSIM verdict), not a derivation; α remains [PARTIAL].]
+Compare the Standard Model's ~19–26 fitted parameters. No number is both assumed
 and derived **except** the flagged 137-origin [PARTIAL], which is the single remaining cycle to
 break.
 

@@ -1,5 +1,7 @@
 # The Hubble Tension: An SDT Investigation
 
+> **⚠️ PARTIALLY SUPERSEDED (2026-07-03).** The T⁴/(1+z)⁴ luminosity-distance model (§ lines ~254-255, 505) was FALSIFIED by the Pantheon+ run (17: BIC 271 vs ΛCDM 8). The κ-gradient emission/propagation split survives as the live interpretation; the 'only 1 free parameter' claim does not. δ=−0.077 is OUTSIDE the KBC range [−0.15,−0.46] (the §~636-639 'comfortably within' is arithmetically false — see 18_H0_Gradient which states it honestly). The '§~650 SDT predicts CMB acoustic peaks' claim corresponds to no existing computation. Age figure inconsistent across files (46 vs 48 Gyr) and ΛCDM-dependent (see data/03).
+
 > Status: ACTIVE INVESTIGATION
 >
 > SDT Laws: [Throughput Cascade](../SDT%20laws/LAW_OF_CONVERGENT_BOUNDARY_PRESSURE.md) ·

@@ -1,0 +1,102 @@
+==============================================================================
+NP21 — Binding curve as a resistance landscape (iron at the floor)
+==============================================================================
+AME2020 nuclides loaded              : 3554
+engine natural_basis (Z,A) parsed    : 287  [scan domain = valley of stability]
+alpha-valid stable rows (Z in [2,92]): 284
+Fe-56 present : True   B/A=8.7904 MeV [OBSERVED-TARGET]
+Ni-62 present : True   B/A=8.7946 MeV [OBSERVED-TARGET]
+
+------------------------------------------------------------------------------
+RUN G — geometric-ratio coefficients  (0 fitted ratios) [DERIVED-attempt]
+  a_S = kiss/2 = 6.0  (cuboctahedron coordination 12, packing.hpp)
+  a_C = alpha  = 7.297353e-03  (whitelist redirection constant)
+  a_A = 1.0  (grammar unit)
+------------------------------------------------------------------------------
+  Spearman(-R~/A, B/A_meas)  = -0.5740   [COMPUTED]
+  DERIVED FLOOR (argmin R~/A) = U-238  (Z=92, A=238)   [DERIVED]
+  target Fe/Ni window A in [54,64]; |A_floor-56| = 182
+
+------------------------------------------------------------------------------
+RUN F — ratios least-squares-FITTED to AME B/A  [CALIBRATED — caps at Class C]
+  fitted a_V=14.5323  a_S=14.9454  a_C=0.7314  a_A=-2.9205  (MeV)
+------------------------------------------------------------------------------
+  Spearman(-R~/A, B/A_meas)  = +0.9073   [COMPUTED]
+  RMS(model B/A vs AME)      = 0.2031 MeV/n   [COMPUTED]
+  FITTED-run floor (argmin)  = Ca-48  (Z=20, A=48)   [CALIBRATED]
+  |A_floor-56| = 8
+
+------------------------------------------------------------------------------
+FLOOR vs a_C/a_S RATIO  (the crux: floor location IS this ratio) [COMPUTED]
+------------------------------------------------------------------------------
+     a_C/a_S   floor(Z-A)   |A-56|
+      0.0010   U-234      178
+      0.0030   U-234      178
+      0.0100   U-234      178
+      0.0200   Yb-176      120
+      0.0300   Xe-136       80
+      0.0388   Te-130       74
+      0.0500   Ca-48         8
+      0.0800   Ca-48         8
+      0.1500   O-18        38
+      0.3000   Be-9         47
+      0.6000   Li-7         49
+
+  geometric guess a_C/a_S (alpha / (kiss/2)) = 0.00122
+  ratio needed to land floor in Fe/Ni window ~ None
+  SEMF a_C/a_S (OBSERVED comparison, NOT an input) = 0.03880
+  => floor-at-iron requires ratio ~0.039; geometric guess gives 0.0012  (factor 31.9 off)
+
+------------------------------------------------------------------------------
+P3 robustness — perturb Run-G geometric ratios; track the floor [COMPUTED]
+------------------------------------------------------------------------------
+    aS x   aC x   aA x   floor
+    0.80   0.80   1.00   U-238  [OFF]
+    0.80   1.20   1.00   U-238  [OFF]
+    1.00   0.80   1.00   U-238  [OFF]
+    1.00   1.20   1.00   U-238  [OFF]
+    1.20   0.80   1.00   U-238  [OFF]
+    1.20   1.20   1.00   U-238  [OFF]
+  floor within A in [54,64] for 0/45 perturbations (0%)
+
+------------------------------------------------------------------------------
+R~/A profile near the floor  (Run G, geometric ratios)  A=48..70 [COMPUTED]
+  (lowest-R~ nuclide printed per A; * marks global floor)
+------------------------------------------------------------------------------
+    A     nuc       R~/A      -R~/A  B/A_meas
+   48   Ca-48    1.66860   -1.66860    8.6667
+   49   Ti-49    1.70011   -1.70011    8.7112
+   50   Ti-50    1.67255   -1.67255    8.7557
+   51    V-51    1.68398   -1.68398    8.7421
+   52   Cr-52    1.70074   -1.70074    8.7760
+   53   Cr-53    1.66882   -1.66882    8.7602
+   54   Cr-54    1.64143   -1.64143    8.7780
+   55   Mn-55    1.65452   -1.65452    8.7650
+   56   Fe-56    1.67205   -1.67205    8.7904
+   57   Fe-57    1.64100   -1.64100    8.7703
+   58   Fe-58    1.61397   -1.61397    8.7923
+   59   Co-59    1.62817   -1.62817    8.7680
+   60   Ni-60    1.64611   -1.64611    8.7808
+   61   Ni-61    1.61597   -1.61597    8.7650
+   62   Ni-62    1.58943   -1.58943    8.7946
+   63   Cu-63    1.60435   -1.60435    8.7521
+   64   Ni-64    1.54596   -1.54596    8.7775
+   65   Cu-65    1.55494   -1.55494    8.7571
+   66   Zn-66    1.56727   -1.56727    8.7596
+   67   Zn-67    1.54426   -1.54426    8.7342
+   68   Zn-68    1.52401   -1.52401    8.7557
+   69   Ga-69    1.53409   -1.53409    8.7246
+   70   Zn-70    1.49092   -1.49092    8.7298
+
+------------------------------------------------------------------------------
+P4 — Fe-56 vs Ni-62 ordering [COMPUTED]
+------------------------------------------------------------------------------
+  Fe-56: (n_d=20, n_t=4)  sigma=0.667  R~/A=1.67205  B/A_meas=8.7904 MeV
+  Ni-62: (n_d=20, n_t=6)  sigma=0.538  R~/A=1.58943  B/A_meas=8.7946 MeV
+  Landscape places DEEPER (more bound): Ni-62
+  Measured B/A deeper: Ni-62 (8.7946 > 8.7904)
+  Grammar sigma smaller (more symmetric): Ni-62 (0.538 < 0.667)
+
+Wrote CSV: C:\Users\Jimmi\OneDrive\Desktop\sdt-engine\Investigations\05_Nuclear_Physics\NP21_Binding_Curve_Resistance_Landscape\NP21_results.csv
+
+DONE.

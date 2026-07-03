@@ -1,9 +1,13 @@
+> **⮑ INVESTIGATED — PARTIAL.**
+> GOM09's g(r) matches PREM to 1.82% RMS, but the named seismic-velocity target FAILS its own committed gate (v_p RMS 11.5%, v_s 28.0% per its RESULTS.md; rebuilt run 6.24%/6.69%). Not resolved.
+
+---
+
 # E97: Earth Core Seismic Speed from Lattice Compression
 
 > **Category**: Gravity / Occlusion
 > **Difficulty**: LOW
-> **Status**: ✅ COMPLETED — 15 April 2026
-> **Result**: CONFIRMED — koppa framework reproduces g(r) to 1.82% RMS
+> **Status**: PARTIAL — g(r) 1.82% RMS; seismic-velocity target FAILED its gate (v_p 11.5%, v_s 28.0% RMS)
 
 ---
 
@@ -155,9 +159,6 @@ Blocked convergence splits three ways:
   gravitational interior of Earth to 1.82% RMS without using G or M.
 - **CONFIRMED**: Smooth PREM density polynomials produce better results
   than discrete shell models, validating the continuous gradient approach.
-- **EXTENDED**: E98 (Three-Body Lagrange from Koppa) uses the same
-  framework to compute L1–L5 for Sun–Earth, Earth–Moon, and Sun–Jupiter.
-  All match known positions to < 1%.
 - **ENGINE ENRICHED**: laws.hpp now includes bridge::koppa(),
   bridge::g_surface(), bridge::g_interior(), koppa_Earth, koppa_Moon.
 
@@ -172,8 +173,8 @@ Blocked convergence splits three ways:
 
 ## 10. Code
 
-- [e97_backward.cpp](file:///c:/Users/Jimmi/sdt-engine/Investigations/E97_Earth_Core_Seismic_Speed/e97_backward.cpp) — smooth PREM + koppa (main model)
-- [e97_trefoil_test.cpp](file:///c:/Users/Jimmi/sdt-engine/Investigations/E97_Earth_Core_Seismic_Speed/e97_trefoil_test.cpp) — trefoil partition tests
-- [e97_seismic.cpp](file:///c:/Users/Jimmi/sdt-engine/Investigations/E97_Earth_Core_Seismic_Speed/e97_seismic.cpp) — v3 material model
-- [RESULTS.md](file:///c:/Users/Jimmi/sdt-engine/Investigations/E97_Earth_Core_Seismic_Speed/RESULTS.md) — full results document
-- [laws.hpp](file:///c:/Users/Jimmi/sdt-engine/Engine/include/sdt/laws.hpp) — enriched bridge namespace
+- [gom09_backward.cpp](../../Investigations/06_Gravitation_and_Orbital_Mechanics/GOM09_Earth_Core_Seismic_Speed/gom09_backward.cpp) — smooth PREM + koppa (main model)
+- [gom09_trefoil_test.cpp](../../Investigations/06_Gravitation_and_Orbital_Mechanics/GOM09_Earth_Core_Seismic_Speed/gom09_trefoil_test.cpp) — trefoil partition tests
+- [gom09_seismic.cpp](../../Investigations/06_Gravitation_and_Orbital_Mechanics/GOM09_Earth_Core_Seismic_Speed/gom09_seismic.cpp) — v3 material model
+- [RESULTS.md](../../Investigations/06_Gravitation_and_Orbital_Mechanics/GOM09_Earth_Core_Seismic_Speed/RESULTS.md) — full results document
+- [laws.hpp](../../Engine/include/sdt/laws.hpp) — enriched bridge namespace

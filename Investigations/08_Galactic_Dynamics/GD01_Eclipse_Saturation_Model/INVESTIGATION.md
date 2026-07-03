@@ -1,5 +1,7 @@
 # GD01: Eclipse Saturation Model — INVESTIGATION RESULTS
 
+> **⛔ RETRACTED — STALE/NON-REPRODUCIBLE (HUNTER scour 2026-07-02).** The cited tool is absent; the present tool no longer compiles against the engine (Sigma_sat symbols deprecated); the v_flat 'results' echo the observed inputs. Superseded by GD05's honest run: single-regime RMS 66%, BTFR 1.33 (negative); twin-regime M4 23.8% rides a MOND-borrowed crossover. 'FRAMEWORK RESOLVED / YES / BTFR=4 / no free parameters' is retracted.
+>
 > **Status**: FRAMEWORK RESOLVED (implementation milestone reached)
 > **Date**: May 2026
 > **Tool**: `cq06_eclipse_saturation.cpp`

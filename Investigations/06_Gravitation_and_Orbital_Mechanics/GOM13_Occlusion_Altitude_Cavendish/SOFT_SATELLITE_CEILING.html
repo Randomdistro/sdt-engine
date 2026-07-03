@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SUBTLELIGHT · soft-satellite ceiling simulator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#05070e;--ink:#dfe9ff;--dim:#7d8aa8;--cyan:#28e0e6;--amber:#ffb53d;--lime:#62ff8f;--red:#ff5566;--violet:#9d7bff;
+  --grid:rgba(40,224,230,.06);--gridb:rgba(40,224,230,.16);}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:"Inter",system-ui,sans-serif;line-height:1.5;
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:34px 34px;}
+.wrap{max-width:1180px;margin:0 auto;padding:2.6rem 1.5rem 4rem}
+.kick{font-family:"JetBrains Mono",monospace;font-size:.72rem;letter-spacing:.26em;text-transform:uppercase;color:var(--amber)}
+h1{font-family:"Chakra Petch",sans-serif;font-weight:700;font-size:clamp(1.7rem,4vw,2.7rem);line-height:1.04;margin:.4rem 0 .3rem}
+h1 .cy{color:var(--cyan)}
+.lead{color:var(--dim);font-size:1rem;max-width:80ch}
+.eq{font-family:"JetBrains Mono",monospace;background:rgba(40,224,230,.06);border:1px solid var(--gridb);border-radius:.4rem;padding:.35rem .6rem;display:inline-block;font-size:.85rem}
+.main{display:grid;grid-template-columns:300px 1fr;gap:1.6rem;margin-top:1.8rem}
+@media(max-width:880px){.main{grid-template-columns:1fr}}
+.panel{background:rgba(8,12,22,.6);border:1px solid var(--gridb);border-radius:12px;padding:1rem}
+.ctrl{margin-bottom:1.1rem}
+.ctrl label{display:flex;justify-content:space-between;font-family:"JetBrains Mono",monospace;font-size:.78rem;color:var(--dim)}
+.ctrl label b{color:var(--cyan)}
+input[type=range]{width:100%;accent-color:var(--cyan);height:6px;margin-top:.35rem;cursor:pointer}
+.readout{display:grid;grid-template-columns:1fr 1fr;gap:.5rem .7rem;margin-top:.4rem}
+.cell{background:rgba(40,224,230,.05);border:1px solid var(--gridb);border-radius:.4rem;padding:.45rem .6rem;font-family:"JetBrains Mono",monospace}
+.cell .k{font-size:.58rem;letter-spacing:.12em;color:var(--dim);text-transform:uppercase}
+.cell .v{font-size:1.15rem;color:var(--cyan)} .v.am{color:var(--amber)} .v.li{color:var(--lime)} .v.rd{color:var(--red)} .v.vi{color:var(--violet)}
+.verdict{margin-top:1rem;padding:.6rem .8rem;border-radius:.5rem;font-family:"JetBrains Mono",monospace;font-size:.85rem;border:1px solid var(--gridb)}
+svg{display:block;width:100%;height:auto;overflow:visible}
+h3{font-family:"Chakra Petch",sans-serif;font-size:1rem;color:var(--amber);margin:0 0 .5rem;letter-spacing:.02em}
+.small{font-family:"JetBrains Mono",monospace;font-size:.72rem;color:var(--dim)}
+.foot{margin-top:2.4rem;color:var(--dim);font-family:"JetBrains Mono",monospace;font-size:.76rem;border-top:1px solid var(--gridb);padding-top:.9rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kick">Spatial Displacement Theory · GOM13 · sub-orbital lift platform</div>
+  <h1>SUBTLELIGHT — the <span class="cy">soft-satellite</span> ceiling</h1>
+  <p class="lead">A balloon's ceiling is set by <b>mass loading</b> — total mass per cubic metre of fully-expanded lift gas —
+  not by helium "escaping." Float condition: <span class="eq">0.862 · ρ_air(h) · V = m_total</span>. Lighter, or bigger, floats higher.</p>
+
+  <div class="main">
+    <div class="panel">
+      <div class="ctrl"><label>structure + payload <b id="lm">250 kg</b></label><input id="mf" type="range" min="50" max="700" value="250" step="5"></div>
+      <div class="ctrl"><label>lift-balloon film <b id="lf">3.0 g/m²</b></label><input id="ff" type="range" min="15" max="100" value="30" step="1"><div class="small">≈ film thickness <span id="lt">3.0</span> µm</div></div>
+      <div class="ctrl"><label>total lift volume <b id="lv">1.0×10⁷ m³</b></label><input id="vv" type="range" min="0" max="1000" value="640" step="1"><div class="small">expanded, at float</div></div>
+      <div class="readout">
+        <div class="cell"><div class="k">FLOAT CEILING</div><div class="v li" id="o_h">— km</div></div>
+        <div class="cell"><div class="k">balloon Ø</div><div class="v" id="o_d">— m</div></div>
+        <div class="cell"><div class="k">helium mass</div><div class="v am" id="o_he">— kg</div></div>
+        <div class="cell"><div class="k">all-up mass</div><div class="v" id="o_m">— kg</div></div>
+        <div class="cell"><div class="k">limb range</div><div class="v vi" id="o_r">— km</div></div>
+        <div class="cell"><div class="k">solar (40 m disk)</div><div class="v am" id="o_pw">— kW</div></div>
+      </div>
+      <div class="verdict" id="verdict">—</div>
+    </div>
+
+    <div>
+      <div class="panel" style="display:grid;grid-template-columns:150px 1fr;gap:1rem;align-items:stretch">
+        <div><h3>altitude band</h3><svg id="band" viewBox="0 0 150 430"></svg></div>
+        <div><h3>ceiling vs lift volume</h3><svg id="curve" viewBox="0 0 560 430"></svg></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">SUBTLELIGHT soft-satellite · GOM13 · J. C. HARVEY — atmosphere: US Standard Atmosphere 1976 · float = neutral buoyancy of fully-expanded lift gas</div>
+</div>
+
+<script>
+const SVGNS="http://www.w3.org/2000/svg";
+const mk=(t,a={})=>{const e=document.createElementNS(SVGNS,t);for(const k in a)e.setAttribute(k,a[k]);return e;};
+const g=9.80665,Mair=0.0289644,Rs=8.31447;
+const L=[[0,288.15,-0.0065,101325],[11000,216.65,0,22632.06],[20000,216.65,0.001,5474.89],
+ [32000,228.65,0.0028,868.02],[47000,270.65,0,110.91],[51000,270.65,-0.0028,66.939],[71000,214.65,-0.002,3.9564]];
+// thermosphere density (MSIS-ish mean solar), log-linear above 84.852 km
+const HI=[[84852,6.96e-6],[90000,3.42e-6],[100000,5.60e-7],[110000,9.71e-8],[120000,2.22e-8],[130000,8.15e-9]];
+function atmos(h){
+ if(h>=84852){let i=0;for(;i<HI.length-1;i++){if(h<HI[i+1][0])break;}const[a,ra]=HI[i],[b,rb]=HI[Math.min(i+1,HI.length-1)];
+   const f=(h-a)/(b-a);return Math.exp(Math.log(ra)+f*(Math.log(rb)-Math.log(ra)));}
+ let i=0;for(;i<L.length-1;i++){if(h<L[i+1][0])break;}const[hb,Tb,lr,Pb]=L[i];
+ const T=Tb+lr*(h-hb);let P;if(Math.abs(lr)<1e-9)P=Pb*Math.exp(-g*Mair*(h-hb)/(Rs*Tb));else P=Pb*Math.pow(T/Tb,-g*Mair/(Rs*lr));
+ return P*Mair/(Rs*T);}
+function ceilingFor(rt){let lo=0,hi=130000;if(rt>=atmos(0))return 0;if(rt<=atmos(130000))return 130000;
+ for(let k=0;k<80;k++){const m=(lo+hi)/2;if(atmos(m)>rt)lo=m;else hi=m;}return (lo+hi)/2;}
+const Asph=V=>Math.cbrt(36*Math.PI)*Math.pow(V,2/3);
+const diaOf=V=>2*Math.cbrt(3*V/(4*Math.PI));
+function solve(mFixed,filmGM2,V){const mDry=mFixed+(filmGM2/1000)*Asph(V);
+ const h=ceilingFor(mDry/(0.862*V));return {mDry,h,He:mDry/6.236,d:diaOf(V)};}
+const vmap=s=>Math.pow(10,5+ (s/1000)*(9-5));   // slider 0..1000 -> 1e5 .. 1e9 m3
+
+/* band axis */
+const band=document.getElementById('band'), bH=400, bTop=15, kmY=km=>bTop+(1-km/130)*bH;
+function drawBand(){band.innerHTML='';
+ const bands=[[0,12,'rgba(63,93,134,.45)','weather'],[12,20,'rgba(255,181,61,.20)','airspace'],
+   [20,60,'rgba(98,255,143,.13)','soft-sat window'],[60,100,'rgba(157,123,255,.20)','ionosphere'],
+   [100,130,'rgba(255,85,102,.16)','buoyancy fails']];
+ bands.forEach(([a,b,c,l])=>{band.appendChild(mk('rect',{x:30,y:kmY(b),width:96,height:kmY(a)-kmY(b),fill:c}));
+   const t=mk('text',{x:78,y:(kmY(a)+kmY(b))/2+3,'text-anchor':'middle','font-family':'JetBrains Mono','font-size':8,fill:'#9fb0cc'});t.textContent=l;band.appendChild(t);});
+ for(const km of [0,20,40,60,80,100,120]){const y=kmY(km);
+   band.appendChild(mk('line',{x1:26,y1:y,x2:30,y2:y,stroke:'#7d8aa8'}));
+   const t=mk('text',{x:23,y:y+3,'text-anchor':'end','font-family':'JetBrains Mono','font-size':9,fill:'#7d8aa8'});t.textContent=km;band.appendChild(t);}
+ [[53,'#28e0e6','record 53'],[70,'#ffb53d','target 70'],[100,'#ff5566','Kármán 100']].forEach(([km,c,l])=>{
+   band.appendChild(mk('line',{x1:30,y1:kmY(km),x2:126,y2:kmY(km),stroke:c,'stroke-dasharray':'4 4',opacity:.85}));
+   band.appendChild(Object.assign(mk('text',{x:126,y:kmY(km)-3,'text-anchor':'end','font-family':'JetBrains Mono','font-size':8,fill:c}),{textContent:l}));});
+ band._mk=mk('polygon',{fill:'#62ff8f',filter:'drop-shadow(0 0 5px #62ff8f)'});band.appendChild(band._mk);
+ band._lbl=mk('text',{'font-family':'JetBrains Mono','font-size':10,fill:'#62ff8f','font-weight':'700'});band.appendChild(band._lbl);
+}
+/* ceiling-vs-volume curve */
+const cv=document.getElementById('curve'),cW=560,cH=400,cL=46,cB=40;
+const cX=lv=>cL+ (lv-5)/(9-5)*(cW-cL-12);
+const cY=km=>15+(1-km/130)*(cH-15-cB);
+function drawCurve(mFixed,film,Vcur){cv.innerHTML='';
+ cv.appendChild(mk('line',{x1:cL,y1:15,x2:cL,y2:cH-cB,stroke:'rgba(40,224,230,.4)'}));
+ cv.appendChild(mk('line',{x1:cL,y1:cH-cB,x2:cW-8,y2:cH-cB,stroke:'rgba(40,224,230,.4)'}));
+ for(const km of [0,20,40,60,80,100,120]){const y=cY(km);cv.appendChild(mk('line',{x1:cL-4,y1:y,x2:cL,y2:y,stroke:'#7d8aa8'}));
+   const t=mk('text',{x:cL-7,y:y+3,'text-anchor':'end','font-family':'JetBrains Mono','font-size':10,fill:'#7d8aa8'});t.textContent=km;cv.appendChild(t);}
+ for(const e of [5,6,7,8,9]){const x=cX(e);cv.appendChild(mk('line',{x1:x,y1:cH-cB,x2:x,y2:cH-cB+4,stroke:'#7d8aa8'}));
+   const t=mk('text',{x,y:cH-cB+16,'text-anchor':'middle','font-family':'JetBrains Mono','font-size':10,fill:'#7d8aa8'});t.textContent='10^'+e;cv.appendChild(t);}
+ cv.appendChild(Object.assign(mk('text',{x:(cW)/2,y:cH-6,'text-anchor':'middle','font-family':'JetBrains Mono','font-size':10,fill:'#7d8aa8','letter-spacing':1}),{textContent:'total lift volume (m³)'}));
+ cv.appendChild(Object.assign(mk('text',{x:14,y:(cH)/2,'text-anchor':'middle','font-family':'JetBrains Mono','font-size':10,fill:'#7d8aa8',transform:`rotate(-90 14 ${cH/2})`}),{textContent:'ceiling (km)'}));
+ [[53,'#28e0e6','record'],[70,'#ffb53d','target'],[100,'#ff5566','Kármán']].forEach(([km,c,l])=>{cv.appendChild(mk('line',{x1:cL,y1:cY(km),x2:cW-8,y2:cY(km),stroke:c,'stroke-dasharray':'5 5',opacity:.6}));
+   cv.appendChild(Object.assign(mk('text',{x:cW-10,y:cY(km)-4,'text-anchor':'end','font-family':'JetBrains Mono','font-size':9,fill:c}),{textContent:l}));});
+ let d='';for(let e=5;e<=9;e+=0.05){const V=Math.pow(10,e);const h=solve(mFixed,film,V).h/1000;d+=(d?'L':'M')+cX(e).toFixed(1)+' '+cY(h).toFixed(1)+' ';}
+ cv.appendChild(mk('path',{d,fill:'none',stroke:'#62ff8f','stroke-width':2.5,filter:'drop-shadow(0 0 4px #62ff8f)'}));
+ const e0=Math.log10(Vcur),h0=solve(mFixed,film,Vcur).h/1000;
+ cv.appendChild(mk('circle',{cx:cX(e0),cy:cY(h0),r:6,fill:'#ffb53d',stroke:'#fff','stroke-width':1.5}));
+}
+function update(){
+ const mFixed=+document.getElementById('mf').value;
+ const film=+document.getElementById('ff').value/10;
+ const V=vmap(+document.getElementById('vv').value);
+ document.getElementById('lm').textContent=mFixed+' kg';
+ document.getElementById('lf').textContent=film.toFixed(1)+' g/m²';
+ document.getElementById('lt').textContent=(film/0.94).toFixed(1);   // PE density ~0.94 g/cm3 -> microns
+ document.getElementById('lv').textContent=V.toExponential(1).replace('e+',' ×10^')+' m³';
+ const r=solve(mFixed,film,V), hkm=r.h/1000;
+ const R=6371000,los=Math.sqrt(2*R*r.h+r.h*r.h)/1000;
+ const solar=1257*1361*0.15*0.7/1000;   // 40 m disk, 15% eff, 0.7 packing
+ document.getElementById('o_h').textContent=hkm.toFixed(1)+' km';
+ document.getElementById('o_d').textContent=r.d.toFixed(0)+' m';
+ document.getElementById('o_he').textContent=r.He.toFixed(0)+' kg';
+ document.getElementById('o_m').textContent=r.mDry.toFixed(0)+' kg';
+ document.getElementById('o_r').textContent=los.toFixed(0)+' km';
+ document.getElementById('o_pw').textContent=solar.toFixed(0)+' kW';
+ const vd=document.getElementById('verdict');
+ if(hkm>=100){vd.style.borderColor='rgba(255,85,102,.6)';vd.style.background='rgba(255,85,102,.10)';vd.style.color='#ff5566';
+   vd.textContent='at/above the Kármán line — mean free path ~ metres, the air stops being a fluid (homopause). Archimedes fails: this is the physical wall. A '+r.d.toFixed(0)+' m envelope.';}
+ else if(hkm>=70){vd.style.borderColor='rgba(255,181,61,.5)';vd.style.background='rgba(255,181,61,.08)';vd.style.color='#ffb53d';
+   vd.textContent='≥70 km — into the lower ionosphere. Above airspace, flightpaths, weather; a megaballoon ('+r.d.toFixed(0)+' m). Returns are now logarithmic in size.';}
+ else if(hkm>=60){vd.style.borderColor='rgba(157,123,255,.5)';vd.style.background='rgba(157,123,255,.10)';vd.style.color='#9d7bff';
+   vd.textContent='in the lower ionosphere (60–100 km) — radio-reflective plasma overhead; still below satellites.';}
+ else if(hkm>=20){vd.style.borderColor='rgba(98,255,143,.5)';vd.style.background='rgba(98,255,143,.08)';vd.style.color='#62ff8f';
+   vd.textContent='soft-satellite window — above national airspace (~20 km), below the ionosphere. The clean band.';}
+ else{vd.style.borderColor='rgba(255,85,102,.5)';vd.style.background='rgba(255,85,102,.08)';vd.style.color='#ff5566';
+   vd.textContent='still in controlled airspace / flight levels — needs more volume or less mass.';}
+ // band marker
+ const y=bTop+(1-hkm/130)*bH;
+ band._mk.setAttribute('points',`28,${y} 20,${y-5} 20,${y+5}`);
+ band._lbl.setAttribute('x',2);band._lbl.setAttribute('y',y-7);band._lbl.textContent=hkm.toFixed(0)+'km';
+ drawCurve(mFixed,film,V);
+}
+drawBand();
+['mf','ff','vv'].forEach(id=>document.getElementById(id).addEventListener('input',update));
+update();
+</script>
+</body>
+</html>

@@ -2,7 +2,7 @@
 
 **Theory:** SDT
 **Version:** 0.0.1
-**Status:** COMPILED
+**Status:** COMPILED [DEFECTIVE TOOL — see Compiler/output/AUDIT_REPORT.md: 'a confident liar in both directions'; badges non-probative]
 **Kernel Hash:** `b0042ba2ed12cdc73f8d96e04b16902872e6587fd693222a58254a6e63903bd8`
 
 ## Summary

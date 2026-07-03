@@ -1,8 +1,20 @@
 # FD04 — The Kolmogorov −5/3 Cascade as the Displacement Cascade
 
-**Domain**: Fluid Dynamics (SDT lattice mechanics)
-**Status**: SPEC
-**Author**: James Christopher Tyndall, Melbourne
+> **Author:** J. C. Harvey, Melbourne. **Status:** SPEC (upgrade 2026-06-27).
+> **Inherits:** `PERFECT_PROMPT_TEMPLATE.md` §⓪–§⑩ · `PROMPT_EXECUTION_PROTOCOL.md` · §0 anti-creep (R0–R5).
+> **Engine:** `#include <sdt/laws.hpp>` only — no local constant namespaces.
+> **Run:** Pre-commit thresholds in `RUN_LOG.md` before coding; adjust per pivot table (§⑩).
+---
+
+## ⓪ The Golden Rule — five questions (answered, not stubbed)
+
+1. **What don't we know?** — Is the turbulent inertial-range `E(k) ∝ k^{−5/3}` law *postulated* (as in Kolmogorov's 1941 similarity hypotheses) or does the SDT volume-conserved displacement cascade **force** the `−5/3` exponent through the chain volume-conservation → constant flux → `u_ℓ ∝ ℓ^{1/3}` — with nothing fitted but the prefactor `C_K`?
+2. **Why does it matter?** — SDT already owns a *verified* shell-by-shell conservation law (`u ∝ 1/r²`, strain `∝ 1/r³`); if turbulence is that same law in the continuum, the most robust empirical fact in fluid mechanics becomes a native consequence, and the dissipation microscale `η = (ν³/ε)^{1/4}` gains a hard `ℓ_P` floor. This is a **genuine native-derivation candidate**, not a borrow — the exponent is the deliverable.
+3. **How will we find out?** — Five gated phases (§④): the constant-flux ledger (P1) yields `u_ℓ ∝ ℓ^{1/3}` *before* the spectrum is read; the −5/3 closure (P2) is the core gate; any exponent ≠ −5/3 from the flux argument is a clean kill, **not** a retrofit.
+4. **What would prove us wrong?** — §⑧, five falsifiers with real failure modes: non-constant `ε_n`; flux argument yielding any exponent ≠ −5/3; no finite dissipation scale; a derived `η < ℓ_P`; or measured slopes irreconcilable beyond ±0.10.
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN), per phase, with `C_K` and intermittency held honestly OPEN.
+
+**Domain**: Fluid Dynamics (SDT lattice mechanics) · **Status**: SPEC · **Author**: J. C. Harvey, Melbourne
 
 *This investigation inherits the §0 anti-creep protocol and rules R0–R5 verbatim (whitelist inputs {ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p} + measured observables in their measured units; no G/M/GM fundamentals; no fields/wavefunctions/quarks/gluons/virtual-particles/dark-matter/ΛCDM/magnetons; certification labels DERIVED / COMPUTED / CALIBRATED(n) / OBSERVED / PENDING on every result; audit spine A–F; translation test on every borrowed term; honesty over success — gaps stay OPEN, never repainted or fabricated).*
 
@@ -151,4 +163,55 @@ Five gated phases. Run in order; a failed checkpoint stops the chain (R4: a clea
 - **Testing strategy (R3 two-stream).** Three independent checks: (i) `ε_n` constancy to machine precision; (ii) analytic slope vs numerically fitted slope agree to `±0.03`; (iii) derived `η` vs a dataset's reported microscale. Each predicted and logged before comparison.
 - **Standalone compile.** `cl /std:c++20 /EHsc /I Engine/include fd04_kolmogorov_cascade.cpp` (MSVC) or `g++ -std=c++20 -IEngine/include fd04_kolmogorov_cascade.cpp -o fd04` (GCC/Clang). Include only `<sdt/laws.hpp>`; do not redefine any constant it exposes.
 - **Visualisation hints.** (1) Compensated spectrum `E(k)·k^{5/3}/ε^{2/3}` vs `k` — a flat plateau at `C_K` is the cleanest −5/3 signature. (2) Raw `log E(k)` vs `log k` with the fitted `−5/3` line and the fit window shaded. (3) `L/η` vs `Re` log-log with the `3/4` reference slope.
-- **Author attribution:** James Christopher Tyndall, Melbourne. The standard-FD result (Kolmogorov K41, the `−5/3` law, `C_K ≈ 1.5`, the microscale) is the CONVERGENCE target to *reproduce*, never an input to *borrow*.
+- **Author attribution:** J. C. Harvey, Melbourne. The standard-FD result (Kolmogorov K41, the `−5/3` law, `C_K ≈ 1.5`, the microscale) is the CONVERGENCE target to *reproduce*, never an input to *borrow*.
+
+## 10. Questions This Opens *(generative — log new ones in `FD04_VERDICT.md`)*
+
+1. **Does the `1/r³` strain law that recurs in galactic line-kernels and tidal gradients literally equal the turbulent cascade's volume-conservation law?** If one strain exponent underlies both, FD04 ties turbulence to galactic dynamics through a single SDT conservation statement — a cross-domain test of the exponent's universality.
+2. **Is the Kolmogorov constant `C_K ≈ 1.5` a derivable shell count** (the number of nested displacements per octave times a geometric factor), or irreducibly empirical? A derived `C_K` would lift FD04 from a clean exponent-derivation to a full prefactor-derivation.
+3. **Is intermittency (anomalous higher-order scaling) an SDT-predicted correction** arising from the discreteness of the shell ledger, or genuinely OPEN? Do not fabricate a correction — but the lattice granularity is the natural place to look.
+4. **Does the `ℓ_P` floor on the microscale predict a maximum achievable Reynolds number** for any real flow (`Re_max ∼ (L/ℓ_P)^{4/3}`)? That ceiling, though astronomically large, is an SDT-distinct statement absent from continuum K41.
+---
+
+## ⑩ Adaptive Execution Protocol
+
+> *It is a bad plan that cannot be altered.* Failures invoke **PIVOT / KILL / OPEN** — never RETRO-PASS or PLUG.
+> See `PROMPT_EXECUTION_PROTOCOL.md`.
+
+### Pre-Run Commitment Block (copy to `RUN_LOG.md` before coding)
+
+```markdown
+## Pre-Run Commitments — FD04
+- Prompt completion target: [A|B|C|D]
+- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- CALIBRATED budget: 0 in the exponent chain (`C_K` is COMPUTED or PENDING, never silently fitted to 1.5)
+- Engine namespaces actually used: law_I (P_conv, Φ/u_CMB), law_IV (V_disp→displaced volume), law_V (v_circ²+v_trans²=c² budget), bridge (koppa/z, the 1/r vs 1/r³ distinction); ν referenced from FD02
+- Phase thresholds (committed before run):
+    P1 `ε_n` constant to machine precision, `u_ℓ ∝ ℓ^{1/3}` (0.333 ± 0.02) · P2 analytic slope = −5/3 exact, numerical −1.667 ± 0.03 (kill if flux gives ≠ −5/3)
+    P3 `L/η ∝ Re^{3/4}` (0.75 ± 0.05), deep-limit `η ≥ ℓ_P` · P4 measured slope −1.667 ± 0.05, `C_K` within 30% (COMPUTED) else PENDING · P5 intermittency OPEN or DERIVED-correction
+- Forbidden retroactive changes: widen tolerances; plug targets; IDENTITY-PASS; local constant namespaces; insert 5/3 or fit `C_K` to 1.5
+```
+
+### Pivot table (minimum — extend for this investigation)
+
+| Trigger (numeric) | PIVOT (first) | If pivot fails | Forbidden |
+|---------|---------------|----------------|-----------|
+| Phase 0 sanity check fails | Fix units/engine refs; verify `laws.hpp` symbols | STOP — report blocker | Fit to target |
+| P2 flux argument yields exponent ≠ −5/3 | recheck the constant-flux closure on `{ε,k}` | **KILL** (clean — displacement cascade ≠ turbulent cascade) | retrofit the exponent to −5/3 |
+| P3 deep-limit `η < ℓ_P` | recheck `ν → ν_lattice` and the `Re∼1` balance | **KILL** (lattice ontology violated) | floor `η` to `ℓ_P` by hand |
+| P4 `C_K` not derivable from a shell count | flag `C_K` **PENDING/COMPUTED**, cap at C | **OPEN** the prefactor | silently fit `C_K` to 1.5 |
+| Rivals match but SDT doesn't beat | Label **DEGENERATE** honestly | — | Claim Class A |
+| Upstream dependency missing (FD02 `ν`) | **DEFER** phase; cite dependency ID | — | Fake PASS |
+
+### Allowed adjustments
+
+- Finer numerics (mesh, ticks, bracket); phase splits (Na / Nb); filename fix via ADJ entry.
+- Alternative **native** routes already listed in §④ Strategy.
+
+### Disallowed adjustments
+
+- Post-hoc tolerance widening · coefficient plugs · `atomic::`/GM/G in the Phase-1 native chain · inserting the −5/3 exponent rather than deriving it.
+
+---
+
+*FD04 · upgraded 2026-06-27 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*

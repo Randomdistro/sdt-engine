@@ -4,6 +4,8 @@
 > **Date**: May 2026
 > **Tool**: `cq08_statistical_inertia.cpp` (this file — 12/12 PASS)
 
+> **Label correction (HUNTER 2026-07-02):** the 'm_p/m_e from V_disp' rows in the 12/12 table are definitional identities (V_disp ≡ 3mℓ_P³c²/Φ ⇒ round-trip cannot fail) — relabelled IDENTITY, not Law-IV verification. The lattice geometry (⟨cos²θ⟩=1/3) and GPI→c results stand.
+
 ---
 
 ## Question

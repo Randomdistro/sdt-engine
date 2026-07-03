@@ -1,0 +1,42 @@
+================================================================
+ TD04 - Heat Conduction and Diffusion from Relay
+ J. C. Harvey, Melbourne - 2026-07-03
+ Units: v = lambda = k_B = 1. All results pure numbers.
+================================================================
+
+P1: relay random walk -> D
+  D_fit = 0.33683  (v*lambda/3 = 0.33333)  dev 1.05%  [PASS]
+
+P2: diffusion equation from stripe release
+    t        var(x)/2t   kurtosis
+      50     0.32670     2.9758
+     100     0.33223     3.0086
+     200     0.33207     2.9727
+     400     0.33444     2.9990
+  worst |alpha/(vl/3)-1| = 1.99% (<2%), worst |kurt-3| = 0.027 (<0.1) [PASS]
+
+P3: Fourier slab (L=100 lambda, diffuse walls, tag carriers)
+  J_sim = 6.5511e-06   J_pred = k_th*dT/(L+2 z0 l) = 6.5733e-06   dev 0.34%  [PASS]
+  linearity: J(dT/2)/J(dT) = 0.5043 (0.5 +- 3%)  [PASS]
+  sqrt(T) (lattice fixed-lambda limit): J(4T)/(4 J(T)) = 1.9971 (2.0 +- 3%) [PASS]
+  (FD02 caveat restated: real gases at fixed P have lambda(T); Sutherland ~0.7)
+
+P4: real materials (OBSERVED inputs; elementary kinetic formula)
+  argon: k_pred = 0.0054 W/mK  vs measured 0.0177  -> factor 3.30  [FAIL (>2x, reported)]
+  air  : k_pred = 0.0089 W/mK  vs measured 0.0262  -> factor 2.96  [FAIL (>2x, reported)]
+  copper: DEFERRED/OPEN - a native metal channel needs degenerate carrier
+  statistics SDT has not derived; importing v_F, lambda_e would be a borrow.
+
+P5: Wiedemann-Franz (declared before run; no native route yet)
+  one-channel classical relay carriers: L = (3/2)(k_B/e)^2 = 1.114e-08 WOhm/K^2
+  measured Sommerfeld value:             L = 2.440e-08  (ratio 2.19)
+  T3 falsifier status: FIRED at the 10% gate. The pi^2/3 prefactor needs
+  degenerate carrier statistics; SDT has no native derivation -> OPEN (grade D
+  on this sub-claim). Constancy across metals is untestable natively (no
+  metal-specific native input exists). Reported, not buried.
+
+================================================================
+ TD04 GATES: P1 PASS | P2 PASS | P3 PASS | P4 argon FAIL, air FAIL, Cu DEFERRED | P5 OPEN (fired, reported)
+ Core mechanism gates (P1-P3): PASS. Exit code reflects core only;
+ P4/P5 outcomes are graded in TD04_VERDICT.md, not laundered into the exit.
+================================================================

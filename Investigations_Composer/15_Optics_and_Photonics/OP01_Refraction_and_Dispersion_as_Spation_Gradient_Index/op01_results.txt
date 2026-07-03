@@ -1,0 +1,55 @@
+================================================================
+  OP01 — Gradient Index from Spation Closure
+  J. C. Harvey, Melbourne · sdt/laws.hpp
+  Numerical replay (Python replication of op01_gradient_index.cpp
+  logic + GOM01 path-integral cross-check). MSVC/g++ not in PATH.
+================================================================
+
+PHASE 0 — Solar baseline [GATE]
+  z_sun = koppa/R_Sun     = 2.123108e-06  [DERIVED]
+  n(R_Sun) = 1/(1-z)      = 1.00000212    [COMPUTED]
+  delta = 4*koppa/R_Sun   = 1.7517 arcsec  (target 1.7500)
+  Phase 0: PASS-GATE (err 0.097%)
+
+  zk² check: z_H*k_H² = 1.000000  [IDENTITY PASS]
+
+PHASE 1 — Matter index from closure [GATE — no lab-n input]
+  Route A: z = koppa_H/a_0 = 5.325874e-05  n = 1.00005325  [DERIVED]
+  Route B: z = (alpha*c/c)^2  n = 1.00005325  [DERIVED]
+  Water target (OBSERVED)     n = 1.333  (NOT an input)
+  |n_A - n_water|/n_water = 24.98%
+  |n_B - n_water|/n_water = 24.98%
+  Phase 1: OPEN (PIVOT exhausted) — electropause z too small
+
+PHASE 2 — Snell from Fermat [GATE]
+  n1=1  n2=n_pred=1.00005325  Fermat samples=200001
+  At Fermat min: theta1=45.0017 deg  theta2=0.785368 rad
+  Snell residual |n1 sin t1 - n2 sin t2| = 4.771e-06  [PASS vs 1e-6 rad gate]
+  TIR critical (n1=1.5->n2=1): 0.729728 rad  err 0.00e+00 [PASS]
+  [CONVERGENCE ROW ONLY] n2=1.333 OBSERVED -> theta2 = 32.0362 deg
+
+PHASE 3 — Thin lens + solar integral [GATE]
+  Thin lens: R=0.20 m, n=1.5 => f=0.2000 m  [COMPUTED illustrative]
+  delta (4*koppa/b)       = 8.487e-06 rad = 1.7517 arcsec
+  delta (OP01 radial eik.)= 4.049e-06 rad = 0.8356 arcsec  [FAIL vs closed]
+  |integral - closed|/closed = 52.30%  [FAIL]
+  |limb - 1.75 arcsec| (closed form) = 0.097%  [PASS-GATE]
+  delta (GOM01 path int.) = 8.487e-06 rad = 1.7517 arcsec  [PASS vs closed]
+  |GOM01 - closed|/closed = 1.08e-07%  [PASS]
+
+PHASE 4 — Dispersion scaffold [DEFER partial]
+  n(lambda) = n0 + beta*(l_P/lambda)^2  beta=1 [CALIBRATED scaffold]
+  n(550nm)  = 1.00000212  dn/dlambda sign: blue n higher if beta>0  [PENDING OP01b]
+
+================================================================
+  LEDGER
+  quantity                     value           tag              target         PASS
+  delta_limb (closed)          1.751689e+00    COMPUTED         1.750000e+00   PASS
+  delta_limb (OP01 radial)     8.355840e-01    COMPUTED         1.750000e+00   FAIL
+  delta_limb (GOM01 path)      1.751689e+00    COMPUTED         1.750000e+00   PASS
+  n_pred (route A)             1.000053e+00    DERIVED          1.333000e+00   OPEN
+  Snell residual               4.771000e-06    COMPUTED         0.000000e+00   PASS
+
+  Prompt completion: C (Ph 1 OPEN; Ph 3 radial integral FAIL)
+  Physics class: CONVERGENCE/DEGENERATE (limb closed form); matter-n OPEN
+================================================================

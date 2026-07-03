@@ -52,9 +52,11 @@ The proton-electron mass ratio is resolved from pure (2,3) trefoil topology:
             = (3/2)^(3/2) × 10³ - 1
             = 1836.117...
 
-Error: -0.002% against measured 1836.15267. Open Problem 4 is closed.
+Error: -0.002% against measured 1836.15267.
 
-The electron wake radius is derived from tidal locking, not assumed:
+**Open Problem 4 remains OPEN.** The factors I₂ = [2(p+q)]³ = 1000 and I₃ = −1 ("exhaust unit") have no independent derivation — they are reverse-engineered from the target. The companion volume SDT_Complete_Laws.md grades this same ratio honestly: "Status: OBSERVED (0.053%). Not derived." That grading governs.
+
+The electron wake radius is empirically inferred (see §, R_e ≈ 10⁻²² m) — an input, not an output:
 
     R_e = a₀ × ϟ_H² / (1/ϟ_H²) ... see Section 5c for full derivation.
     R_e ≈ 1.1 × 10⁻²² m
@@ -320,8 +322,8 @@ configuration dissolves on a timescale ≈ t_P.
 
 The W=1 mode-locked spectrum (electron family):
     Ground state (R/a)_{e,0} → electron (m_e)
-    First excited (R/a)_{e,1} → muon (m_μ = 206.77 m_e), predicted
-    Second excited (R/a)_{e,2} → tau (m_τ = 3477 m_e), predicted
+    First excited (R/a)_{e,1} → muon (m_μ = 206.77 m_e), measured values, restated; the winding-enumeration that would predict them has not been run (Open Problem 1)
+    Second excited (R/a)_{e,2} → tau (m_τ = 3477 m_e), measured values, restated; the winding-enumeration that would predict them has not been run (Open Problem 1)
 
 The W=3 mode-locked spectrum (proton family):
     Ground state (R/a)_{p,0} → proton (m_p)
@@ -579,6 +581,8 @@ In the relay-state ledger, the exhaust takes exactly 1 unit:
 
     neutron = 1838 units = proton (1836) + electron (1) + exhaust (1)
 
+(Arithmetic check fails: m_n/m_e = 1838.684, and the n−p−e defect is 0.782 MeV = 1.53 electron-units, not 1. The integer ledger is falsified as stated.)
+
 The correction to the mass ratio formula:
 
     I₃ = -1    (the exhaust unit removed from the proton's self-ratio)
@@ -790,7 +794,7 @@ Extension to W=1 not asserted.
 
     m_p/m_e = (q/p)^(q/p) × [2(p+q)]³ - 1 = (3/2)^(3/2) × 10³ - 1 = 1836.117
 
-Error: −0.002% from measured 1836.15267. No empirical masses used in derivation.
+Error: −0.002% from measured 1836.15267. The measured ratio 1836.15267 is the selection target for the integer factors; the construction is not mass-free.
 
 **Corollary (C-Boundary Identification).** The quantity 2.81794 fm, formerly
 "classical electron radius", is the proton's c-boundary Ϟ_H = R_p/ϟ_H². It is a

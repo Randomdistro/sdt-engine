@@ -1,3 +1,9 @@
+> **⮑ SPEC LINKED — investigation spec written, NOT yet run.**
+> Methodology spec exists at `Investigations/07_Cosmology_and_Redshift/CR08_Pressure_Gradient_Redshift_and_BAO` (PROMPT only — no verdict, no result). This experiment remains an OPEN falsifiable prediction.
+> The specification below is the falsifiable prediction.
+
+---
+
 # E45: BAO as Lattice Standing Waves
 
 > **Category**: Cosmology

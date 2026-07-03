@@ -1,5 +1,7 @@
 # Spation Geometry from Solar Multi-Wavelength Radii
 
+> **DATA PROVENANCE WARNING:** the solar R(λ) table below is uncited round numbers; the entire 5/4–3/4 exponent chain (10→11→15→19) rests on it. Source or replace before citing.
+
 > Full mathematical analysis of the wavelength-dependent
 > solar radius as a map of spation compression.
 

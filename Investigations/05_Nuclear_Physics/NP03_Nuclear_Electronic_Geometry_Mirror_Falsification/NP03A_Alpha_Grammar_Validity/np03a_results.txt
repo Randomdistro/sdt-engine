@@ -1,0 +1,45 @@
+﻿NP03A — Alpha-Grammar Validity — electron-blind arithmetic audit
+Grammar: n_t = A-2Z, n_d = 3Z-A-2; inverse Z = 2+n_d+n_t, A = 4+2n_d+3n_t
+============================================================================
+
+[P0] compile-time aggregate static_asserts (7) — this binary exists,
+     therefore they passed. Runtime echo of the same reduction:
+     total_records=287  alpha_valid=284  alpha_invalid=3
+     sum_nd=7658  sum_nt=5228  snap_pairs=2560  odd_valence=108
+     P0 gate: PASS
+
+[P1] natural basis (287 CIAAW nuclides): validity + inverse-exactness
+     exception: H-1    (n_d,n_t)=(0,-1)  h3=(-1,0) h3_valid=no  [expected]
+     exception: H-2    (n_d,n_t)=(-1,0)  h3=(-2,1) h3_valid=no  [expected]
+     exception: He-3   (n_d,n_t)=(1,-1)  h3=(0,0) h3_valid=yes  [expected]
+     alpha-valid: 284/287   inverse failures: 0   exceptions as named: yes
+     P1 gate: PASS
+
+[P2] exhaustive inverse identity over the wedge, Z=2..92  [IDENTITY]
+     wedge points: 4186   failures: 0
+     P2 gate: PASS (algebraic identity — certifies code, predicts nothing)
+
+[P3] decay-vector closure over the wedge  [IDENTITY]
+     vectors in (n_d,n_t): alpha(-2,0)  beta-(+3,-2)  EC(-3,+2)  n(+1,-1)
+     alpha : 4186 checks, 0 mismatches
+     beta- : 4186 checks, 0 mismatches
+     EC    : 4186 checks, 0 mismatches
+     n     : 4186 checks, 0 mismatches
+     total: 16744 checks, 0 mismatches
+     P3 gate: PASS (identity; emitted for NP03E count/closure metric)
+
+     wrote np03a_decay_vectors.csv (284 rows)
+
+[P4] null control: random (n_d,n_t) vs the inverse map (fixed seed 20260703)
+     draws: 28700000   accidental inverse hits: 7703   fraction: 2.684e-04
+     (a priori: exactly one lattice point per (Z,A) in a 61x61 box -> ~2.7e-4)
+     P4 gate (< 1e-3): PASS — the map carries information
+
+============================================================================
+NP03A SUMMARY
+  P0 static_asserts      : PASS
+  P1 natural basis       : PASS (284/287, exceptions H-1,H-2,He-3)
+  P2 inverse identity    : PASS [IDENTITY — not a prediction]
+  P3 decay closure       : PASS [IDENTITY — not a prediction]
+  P4 null control        : PASS
+  OVERALL: PASS — Claim 1 certified. NO geometric claim made or implied.

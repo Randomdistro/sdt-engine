@@ -3,7 +3,7 @@ On the Nature of Krypton (³⁶Kr): The Fourth Serenity and the Closing of a Gra
 Author: J.C. Harvey (Independent Researcher)
 Framework Synthesis and Analysis: AI Collaborator
 Abstract
-Krypton (Z=36) is the fourth noble gas, marking the definitive energetic and geometric end of the fourth period. Its profound chemical inertness provides a crucial benchmark for atomic stability at a higher level of complexity. Standard models describe its configuration as [Ar] 3d¹⁰ 4s²4p⁶. This paper provides a complete, first-principles derivation of the properties of Krypton within the Spatial Displacement Theory (SDT) framework. We model the Krypton atom as a mechanical system with a completed [Ar] 3d¹⁰ core, surrounded by an outer resonant cavity occupied by eight electron vortices. We demonstrate that these eight vortices lock into the minimum-energy configuration of a perfect, higher-octave cube. This state of perfect geometric symmetry and balance is the direct mechanical origin of Krypton's profound stability.
+Krypton (Z=36) is the fourth noble gas, marking the definitive energetic and geometric end of the fourth period. Its profound chemical inertness provides a crucial benchmark for atomic stability at a higher level of complexity. Standard models describe its configuration as [Ar] 3d¹⁰ 4s²4p⁶. This paper provides a structural characterisation of Krypton under the SDT construction grammar (measured properties quoted as anchors; derivations are OPEN unless explicitly shown). We model the Krypton atom as a mechanical system with a completed [Ar] 3d¹⁰ core, surrounded by an outer resonant cavity occupied by eight electron vortices. We demonstrate that these eight vortices lock into the minimum-energy configuration of a perfect, higher-octave cube. This state of perfect geometric symmetry and balance is proposed as a qualitative mechanism for Krypton's profound stability, not a quantitative derivation of it.
 ________________________________________
 1. Organization: The Completed Fourth Shell
 Krypton's structure represents the ultimate state of low-energy serenity for the 36-electron system. It is the destination that all the elements from Potassium to Bromine were, in their various ways, striving to reach.
@@ -20,7 +20,7 @@ The completed cubic structure of the n=4 shell is the key to Krypton's identity 
 •	The Origin of Inertness: Krypton has no geometric or energetic motivation to engage in chemical reactions. It cannot gain an electron, as there are no stable vacancies in its completed shell. It will not lose an electron, as this would require an immense amount of energy to shatter the profound stability of the perfect cube. Its self-contained, symmetric displacement field presents no attraction to other atoms.
 •	Prediction: Krypton will be a chemically inert noble gas, with an extremely high ionization energy and a negative electron affinity. This is confirmed by observation. (While a few highly unstable compounds of Krypton have been synthesized under extreme laboratory conditions with the most electronegative element, Fluorine, its natural state is one of absolute non-reactivity).
 3. Thermodynamics: The Energetic Signature of the Completed n=4 Cube
-•	First Ionization Energy (E<sub>i1</sub> = 13.9996 eV): This is the energy required to break the perfect n=4 cube. It is the highest first ionization energy of any element in the fourth period, a direct quantitative measure of the cube's geometric stability.
+•	First Ionization Energy (E<sub>i1</sub> = 13.9996 eV): This is the energy required to break the perfect n=4 cube. It is the highest first ionization energy of any element in the fourth period, consistent with — but not a derivation of — the cube's geometric-stability picture; the 13.9996 eV value itself is measured, not computed from geometry.
 4. Atomic k-factors and Velocities
 •	4s/4p Valence Shell (Probed by E<sub>i1</sub>):
 o	E<sub>i1</sub> = 14.00 eV = 2.243 x 10⁻¹⁸ J.
@@ -129,7 +129,7 @@ ________________________________________
 
 **A. Nuclear Cross-Reference**
 - **Nucleus**: Krypton (Z=36, N=48)
-- **Geometry**: Geometric Structure derived from Z constraints.
+- **Geometry**: Geometric structure proposed from Z constraints (qualitative picture; not a numeric derivation).
 - **SDT Analysis**: Z=36 defines the electromagnetic lens strength.
 
 **B. Ionization Economics and Kinematics**
@@ -140,7 +140,7 @@ ________________________________________
     - **Geometric k-factor**: $k = c/v = 135.09$
 
 **C. SDT Utilization & Applications**
-Derived from the geometric stability and ionization thresholds:
+Building on the geometric-stability picture and (measured) ionization thresholds -- application potential, not a derivation of the thresholds themselves:
 - **Variable Geometry Tuning**: Moderate ionization allows for switchable interactions (conductive/insulative) via applied voltage.
 - **Superluminal/Relativistic Boundary Testing**: Low k-factor implies electron velocities approaching relativistic limits, useful for validating SDT high-velocity drag equations.
 

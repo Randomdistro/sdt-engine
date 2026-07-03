@@ -1,3 +1,9 @@
+> **⮑ GRADUATED — investigated — honest convergence (Class C).**
+> Resolved in `Investigations/06_Gravitation_and_Orbital_Mechanics/GOM08_Mercury_Precession_from_k_Hierarchy` — see its `*_VERDICT.md` for the result.
+> The specification below is the original falsifiable prediction, preserved as the record.
+
+---
+
 # E24: Mercury Perihelion Precession from k-Hierarchy
 
 > **Category**: Orbital Mechanics

@@ -1,7 +1,24 @@
 # TD04 — Heat Conduction and Diffusion from Relay
 
-> **Author:** J.C. Harvey, Melbourne. **Status:** SPEC (seed, unstarted).
-> Inherits the §0 anti-creep protocol and rules R0–R5 verbatim.
+> **Author:** J. C. Harvey, Melbourne. **Status:** SPEC (upgrade 2026-06-27).
+> **Inherits:** `PERFECT_PROMPT_TEMPLATE.md` §⓪–§⑩ · `PROMPT_EXECUTION_PROTOCOL.md` · §0 anti-creep (R0–R5).
+> **Engine:** `#include <sdt/laws.hpp>` only — no local constant namespaces.
+> **Run:** Pre-commit thresholds in `RUN_LOG.md` before coding; adjust per pivot table (§⑩).
+---
+
+## ⓪ The Golden Rule — five questions (answer before Phase 0)
+
+1. **What don't we know?** — Is the thermal conductivity `k` a *derived* relay random-walk coefficient
+   `k = ⅓ c_v v_relay λ_mfp` (with the `1/3` from lattice isotropy and `v_relay ∝ √T` from B16), so that
+   Fourier's law and the diffusion equation fall out of throughput diffusion — or must `k` and `λ_mfp` be
+   borrowed un-derived from kinetic theory?
+2. **Why does it matter?** — TD04 is the thermal twin of FD02's viscosity: if conduction is the *same*
+   `λ_mfp v_relay` machinery applied to energy, then heat transport, momentum transport (FD02), and mass
+   diffusion (TD08) are one relay statistic. It also tests Wiedemann–Franz natively. Downstream: TD05,
+   TD06, TD08.
+3. **How will we find out?** — Gated phases in §④; native relay random-walk before any borrowed `λ_mfp`.
+4. **What would prove us wrong?** — §⑧ falsification tests with numeric triggers and real failure modes.
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN).
 
 ## Question
 
@@ -62,3 +79,63 @@ momentum, applied now to energy.
 machinery for energy). **Downstream:** TD05 (latent heat halts conduction at a front), TD06 (radiative
 vs conductive transport), TD08 (`D` and `α` are the same random-walk). **Related:** [[TD02]]
 (`c_v=3/2 k_B`), [[TD03]] (the `1/3` isotropy factor).
+---
+
+## Questions This Opens *(generative — log new ones in `TD04_VERDICT.md`)*
+
+1. **Is the Lorenz number `L` exactly `π²/3·(k_B/e)²`, and is the `e` here the unit-bridge, not a
+   charge substance?** If one relay channel carries heat and handed redirection together, `L` should be
+   pure geometry — can TD04 derive it without a borrowed channel-count?
+2. **Does a finite relay tick set a second-sound / ballistic regime?** At scales below `λ_mfp`, Fourier
+   should break into a wave-like heat pulse. Is that the native prediction, and does it match observed
+   second sound?
+3. **Is thermal diffusivity `α` literally TD08's mass diffusivity `D` up to a `c_v` factor?** If both are
+   `⅓ v_relay λ_mfp`, heat, momentum (FD02), and mass diffusion are one number with three prefactors.
+
+---
+
+## ⑩ Adaptive Execution Protocol
+
+> *It is a bad plan that cannot be altered.* Failures invoke **PIVOT / KILL / OPEN** — never RETRO-PASS or PLUG.
+> See `PROMPT_EXECUTION_PROTOCOL.md`.
+
+### Pre-Run Commitment Block (copy to `RUN_LOG.md` before coding)
+
+```markdown
+## Pre-Run Commitments — TD04
+- Prompt completion target: [A|B|C|D]
+- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- CALIBRATED budget: 0 in the native chain (flag the Lorenz/Wiedemann–Franz channel-count if it needs one)
+- Engine namespaces actually used: measured::k_B, B16 (v_relay∝√T), FD02 (ν=⅓λ_mfp v_relay machinery)
+- Phase thresholds (committed before run):
+    P1 fitted k vs ⅓c_v v_relay λ_mfp within 2% · P2 variance ∝ t, α=⅓v_relay λ_mfp (no free knob)
+    P3 k_air,k_Cu within 2×, gas k∝√T slope 0.5 · P4 Lorenz k/(σT)=L const within 10% (prefactor flagged)
+- Forbidden retroactive changes: borrow λ_mfp un-derived then claim native; import a phonon/field model;
+    widen tolerances; plug k; IDENTITY-PASS; local constant namespaces
+```
+
+### Pivot table
+
+| Trigger (numeric) | PIVOT (first) | If pivot fails | Forbidden |
+|---|---|---|---|
+| P1 fitted `k` off `⅓c_v v_relay λ_mfp` by `> 2%` | refine the per-tick exchange / `1/3` axis-average | **OPEN** the coefficient | hand-tune `k` to the slab current |
+| P2 variance not `∝ t` (sub/super-diffusive) | check the relay update is an unbiased random walk | **OPEN** the anomalous-transport regime | rescale time to force `∝ t` |
+| P3 `k∝√T` slope ≠ 0.5 | confirm `v_relay∝√T` (B16) is the only T-dependence | **OPEN** a second T-law | swap in a fitted exponent |
+| P4 `λ_mfp` must be borrowed un-derived | label that step **PENDING/borrowed**; grade D on the Lorenz claim | — | call a borrowed `λ_mfp` native |
+| Rivals match but SDT only reproduces | label **DEGENERATE** honestly | — | Claim Class A |
+| Upstream missing (FD02 `ν` not ready) | **DEFER** the closure phase; cite dependency ID | — | Fake PASS |
+
+### Allowed adjustments
+
+- Finer numerics (slab size, tick count, profile bins); phase splits (Na / Nb); filename fix via ADJ entry.
+- Alternative **native** routes already listed in §④ Strategy.
+
+### Disallowed adjustments
+
+- Borrowing `λ_mfp` from kinetic theory un-derived and grading native · importing a phonon/field
+  conduction model SDT forbids · post-hoc tolerance widening · coefficient plugs on `k`/`L` ·
+  `atomic::`/GM/G in the native chain.
+
+---
+
+*TD04 · 10× upgrade 2026-06-29 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*

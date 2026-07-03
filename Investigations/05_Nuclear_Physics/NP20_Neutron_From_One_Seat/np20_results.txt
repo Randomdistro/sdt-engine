@@ -1,0 +1,50 @@
+================================================================
+ NP20 — The Neutron from One Seat  (execute)
+ ONE geometry, two readers, zero-knob ledger.
+================================================================
+
+PHASE 1 — FROZEN SEAT GEOMETRY (declared before any number)
+  R_p     = 8.4140e-16 m            [MEASURED-INPUT]  proton BOUNDARY radius (not 'charge')
+  v_seat  = 1.830161 c            [DERIVED]         = c / k_proton_surface (traction/PPT06)
+  v_bound = 1.830057 c            [DERIVED]         = c*sqrt(r_e/R_p) (depth-closure v=c*sqrt(z))
+  agree   = 0.0057%  (gate <1%)  -> PASS-GATE
+  z_seat  = 3.3495                [DERIVED]         = (v_seat/c)^2  (v>c depth-closure regime, NOT SR gamma)
+  sense   = -1 (counter)         [ASSUMED]         sign convention; makes moment increment negative
+
+OBSERVED-TARGETS (measured anchors):
+  n-p gap      = 1.2933 MeV       [OBSERVED-TARGET]  (m_n - m_p)c^2
+  m_e c^2      = 0.5110 MeV       [OBSERVED-TARGET]  electron rest budget
+  decay surplus= 0.7823 MeV       [OBSERVED-TARGET]  gap - m_e c^2 (subtraction rail)
+  mu_N         = -1.91304 mu_N     [OBSERVED-TARGET]  neutron moment (mu_N = BORROWED unit)
+  mu_P         = +2.79285 mu_N     [OBSERVED-TARGET]  proton moment (mu_N = BORROWED unit)
+
+PHASE 2 — MASS reader (form-resistance step, NP19)
+  native factor  = (z_seat - 1) = 2.3495   [DERIVED]  depth factors offered: (z-1)=2.349, sqrt(z)=1.830, ln(z)=1.209
+  native pred    = 0.6003 MeV     [COMPUTED]  0.5*(z-1)*m_e c^2  (0.5 two-body split ASSUMED)
+  vs 0.782 MeV   = -23.3%        (gate <=15%)  -> MISS
+  required factor= 1.5310          [OBSERVED-TARGET]  0.782/0.511 — geometry does NOT emit this
+  KNOB NEEDED    = x1.3033         [CALIBRATED(1)]  coeff to force native->0.782  => per-number knob
+
+PHASE 3 — MOMENT reader (composite flux, SAME geometry)
+  mu_electron    = 1836.15 mu_N     [DERIVED]  m_p/m_e (bare electron moment in borrowed mu_N)
+  required incr  = -4.7059 mu_N    [OBSERVED-TARGET]  mu_N - mu_P (what the seat must add)
+  required gearing = -0.002563       [OBSERVED-TARGET]  incr/mu_e ; alpha=0.00730 k_ps^2=0.2986 — matches NEITHER
+  composite mu   = -1.91304 mu_N    [IDENTITY]  uses required gearing => re-expression, not prediction
+  SIGN           = NEGATIVE              (T1 hard gate: must be NEGATIVE) -> survives-sign
+  NOTE: sign is CARRIED by sense=-1 (assumed), magnitude needs a KNOB -> not a native prediction.
+
+PHASE 4 — ZERO-KNOB LEDGER (the closure test)
+  shared geometry consumed by BOTH: {R_p, v_seat, z_seat, sense}  [whitelist/derived]
+  per-number knob used by MASS only  : x1.3033  (CALIBRATED(1))
+  per-number knob used by MOMENT only: gearing -0.002563  (CALIBRATED(1))
+  knob count beyond shared geometry  : 2   (committed pass = 0)
+  --> CLOSURE VERDICT: FALSE. Each number needs its OWN per-number coefficient.
+      The geometry BRACKETS both targets but PREDICTS neither (FLM12-D1 precedent: UNPAID).
+
+RESULTS TABLE  [quantity | SDT native | anchor | %err | sign | label]
+  v_seat reconcile | 1.83016c | 1.83006c(v_bound) | 0.0057% | + | DERIVED(PASS)
+  mass surplus     | 0.6003 MeV | 0.7823 MeV | -23.3% | + | COMPUTED(MISS, knob x1.303)
+  neutron moment   | -1.91304 | -1.91304 | +0.0% | NEG | IDENTITY(knob gearing)
+
+  ONE genuine non-circular result: v_seat == v_bound to 0.0057% (P1).
+  Neither physical number is generated knob-free. Closure NOT paid.

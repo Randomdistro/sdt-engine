@@ -74,7 +74,7 @@ Oxygen-16 is the "King of Stability." It makes up 99.76% of all oxygen. Why? Bec
 
 **The Magnetic Conundrum**
 If the nucleus is Spin 0, why is Oxygen magnetic?
--   **Answer:** The magnetism comes entirely from the **Electron Shell**. The two unpaired electrons in the valence shell create a net magnetic moment of $\sim 2.8 \mu_B$.
+-   **Answer:** The magnetism comes entirely from the **Electron Shell**. The two unpaired electrons in the valence shell create a net magnetic moment of $\sim 2.8 \mu_B$ (measured; $\mu_B$ is a borrowed unit — SDT-native yardstick owed).
 -   **Liquid Oxygen:** This is why you can pick up a drop of liquid oxygen with a magnet. The random thermal motion is overcome by the strong alignment of these atomic dipoles.
 
 ---

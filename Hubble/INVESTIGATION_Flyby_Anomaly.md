@@ -196,7 +196,7 @@ These objects traversed the full convergence gradient. Their trajectories should
 
 ---
 
-## 5. The Anderson Formula — SDT Derivation
+## 5. The Anderson Formula — SDT Re-parameterisation of Anderson's empirical formula (K=2ωR/c relabelled, not derived)
 
 ### 5.1 The Empirical Formula
 
@@ -308,7 +308,7 @@ If the convergence gradient produces a velocity shift of Δv at closest approach
 
 > δx ≈ Δv × t    (for small Δv)
 
-For Δv = 0.058 mm/s and t = 1 year = 3.156 × 10⁷ s:
+For Δv = 0.058 mm/s [no provenance — source or strike] and t = 1 year = 3.156 × 10⁷ s:
 
 > δx ≈ 5.8 × 10⁻⁵ × 3.156 × 10⁷ ≈ 1,830 m ≈ 1.8 km
 
@@ -377,7 +377,7 @@ Current planetary defence systems (DART, future kinetic impactors) could benefit
 4. The magnetosphere defines the clean convergence boundary — solar wind modulates it
 5. Spacecraft and asteroids traversing asymmetric declinations experience Δv ∝ v∞ × (cos δ_in − cos δ_out)
 6. The altitude correction (R_E/r_perigee)² explains why high flybys show smaller anomalies
-7. The magnetospheric correction M(P_dyn) explains the solar-cycle dependence
+7. The magnetospheric correction M(P_dyn) explains the solar-cycle dependence [contradicts §3.4's own resolution — the post-2005 nulls are explained by better tracking, not P_dyn]
 8. NEO close approaches provide 50+ clean test masses with no thermal/propulsion confounders
 9. The trajectory correction exceeds keyhole widths, with implications for planetary defence
 

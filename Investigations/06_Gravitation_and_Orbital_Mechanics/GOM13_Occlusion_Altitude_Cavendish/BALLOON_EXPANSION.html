@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Balloon expansion · cascade platform — GOM13</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#05070e;--bg2:#080c16;--ink:#dfe9ff;--dim:#7d8aa8;--cyan:#28e0e6;--amber:#ffb53d;
+  --lime:#62ff8f;--red:#ff5566;--grid:rgba(40,224,230,.06);--gridb:rgba(40,224,230,.16);}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:"Inter",system-ui,sans-serif;line-height:1.55;
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:34px 34px;}
+.wrap{max-width:1120px;margin:0 auto;padding:3.4rem 1.6rem 5rem}
+.kick{font-family:"JetBrains Mono",monospace;font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--amber)}
+h1{font-family:"Chakra Petch",sans-serif;font-weight:700;font-size:clamp(1.8rem,4.4vw,2.9rem);line-height:1.04;margin:.5rem 0 .4rem}
+h1 .cy{color:var(--cyan)}
+.lead{color:var(--dim);font-size:1.04rem;max-width:70ch}
+.eq{font-family:"JetBrains Mono",monospace;color:var(--ink);background:rgba(40,224,230,.06);
+  border:1px solid var(--gridb);border-radius:.5rem;padding:.5rem .8rem;display:inline-block;font-size:.95rem}
+section{margin-top:2.8rem;border-top:1px solid var(--gridb);padding-top:1.8rem}
+h2{font-family:"Chakra Petch",sans-serif;font-weight:700;font-size:1.5rem;margin-bottom:.3rem}
+h2 .n{font-family:"JetBrains Mono",monospace;color:var(--amber);font-size:1rem;margin-right:.6rem}
+.sub{color:var(--dim);font-size:.95rem;margin-bottom:1.2rem;max-width:74ch}
+.grid2{display:grid;grid-template-columns:1.05fr .95fr;gap:2rem;align-items:start}
+@media(max-width:820px){.grid2{grid-template-columns:1fr}}
+svg{display:block;width:100%;height:auto;overflow:visible}
+.panel{background:rgba(8,12,22,.6);border:1px solid var(--gridb);border-radius:12px;padding:1rem}
+.readout{display:grid;grid-template-columns:1fr 1fr;gap:.5rem .9rem;font-family:"JetBrains Mono",monospace;margin-top:1rem}
+.cell{background:rgba(40,224,230,.05);border:1px solid var(--gridb);border-radius:.45rem;padding:.5rem .7rem}
+.cell .k{font-size:.62rem;letter-spacing:.14em;color:var(--dim);text-transform:uppercase}
+.cell .v{font-size:1.25rem;color:var(--cyan)}
+.cell .v.am{color:var(--amber)} .cell .v.li{color:var(--lime)} .cell .v.rd{color:var(--red)}
+input[type=range]{width:100%;accent-color:var(--cyan);height:6px;margin-top:.4rem;cursor:pointer}
+.status{font-family:"JetBrains Mono",monospace;font-size:.85rem;margin-top:.8rem;padding:.5rem .7rem;border-radius:.45rem;
+  border:1px solid var(--gridb);background:rgba(98,255,143,.06);color:var(--lime)}
+.status.burst{background:rgba(255,85,102,.08);color:var(--red);border-color:rgba(255,85,102,.4)}
+ul.clean{list-style:none;display:flex;flex-direction:column;gap:.65rem;margin-top:.4rem}
+ul.clean li{font-size:.96rem;padding-left:1.3rem;position:relative}
+ul.clean li::before{content:"▸";position:absolute;left:0;color:var(--cyan)}
+ul.clean li b{color:var(--amber);font-weight:600}
+.small{font-family:"JetBrains Mono",monospace;font-size:.72rem;color:var(--dim)}
+.foot{margin-top:3rem;color:var(--dim);font-family:"JetBrains Mono",monospace;font-size:.78rem;letter-spacing:.06em;
+  border-top:1px solid var(--gridb);padding-top:1rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kick">Spatial Displacement Theory · investigation GOM13 · supporting figure</div>
+  <h1>Why a balloon <span class="cy">expands, bursts</span>, and how a cascade gets past it</h1>
+  <p class="lead">A flexible envelope holds its gas at ≈ ambient pressure, so a rising parcel grows as the air thins.
+  One cubic metre of sea-level helium becomes a small house by the mid-stratosphere — and that growth is exactly
+  what tears a single latex balloon apart.</p>
+
+  <!-- A · EXPANSION -->
+  <section>
+    <h2><span class="n">A</span>Expansion of 1 m³ of sea-level helium</h2>
+    <div class="sub">Combined gas law for a pressure-matched envelope: <span class="eq">V₂/V₁ = (P₁/P₂)·(T₂/T₁)</span>
+      &nbsp; diameter scales as the cube root. The pressure ratio dominates; the cold only trims a few percent.</div>
+    <div class="grid2">
+      <div class="panel">
+        <svg id="balloon" viewBox="0 0 380 460"></svg>
+      </div>
+      <div>
+        <div class="small">DRAG THE ALTITUDE</div>
+        <input id="alt" type="range" min="0" max="50000" value="0" step="100">
+        <div class="readout">
+          <div class="cell"><div class="k">altitude</div><div class="v" id="r_alt">0 km</div></div>
+          <div class="cell"><div class="k">ambient pressure</div><div class="v" id="r_p">101 kPa</div></div>
+          <div class="cell"><div class="k">temperature</div><div class="v" id="r_t">15 °C</div></div>
+          <div class="cell"><div class="k">volume × sea level</div><div class="v am" id="r_v">1×</div></div>
+          <div class="cell"><div class="k">balloon diameter</div><div class="v li" id="r_d">1.24 m</div></div>
+          <div class="cell"><div class="k">pressure vs sea level</div><div class="v" id="r_pct">100%</div></div>
+        </div>
+        <div class="status" id="r_state">intact · the latex is stretching with the gas</div>
+        <div class="small" style="margin-top:1rem">scale snapshot · diameter to scale, burst disk marked red</div>
+        <svg id="multi" viewBox="0 0 760 150"></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- B · BURST -->
+  <section>
+    <h2><span class="n">B</span>Why weather balloons pop</h2>
+    <div class="sub">It is never the cold air "popping" it — the envelope runs out of stretch. Ambient pressure halves
+      about every 5.5 km, so the skin keeps thinning until it reaches its tensile limit.</div>
+    <div class="grid2">
+      <div class="panel"><svg id="skin" viewBox="0 0 420 300"></svg></div>
+      <div>
+        <ul class="clean">
+          <li><b>Expansion thins the skin.</b> Volume up 100×+ means the latex membrane stretches and thins to a few microns; surface area can only grow so far.</li>
+          <li><b>Latex has a hard elongation limit.</b> Natural-rubber latex ruptures near ~600–700 % strain — the diameter can grow roughly 5–7× before the material fails.</li>
+          <li><b>Cold embrittles it.</b> At the tropopause (≈ −55 °C) the rubber stiffens and loses elasticity, so it reaches that limit at a smaller stretch.</li>
+          <li><b>UV and ozone attack it.</b> Stratospheric ozone chemically cracks latex (ozone cracking), seeding the tear.</li>
+          <li><b>The tear runs in milliseconds.</b> When the weakest, most-stretched spot exceeds the tensile limit, a rupture initiates and propagates around the envelope — the "pop". Typical burst: <b>28–38 km</b>.</li>
+        </ul>
+        <div class="status burst" style="margin-top:1rem">A latex sounding balloon's ceiling is set by its skin, not the sky — so it cannot dwell; it bursts and falls.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- C · CASCADE -->
+  <section>
+    <h2><span class="n">C</span>The cascade platform — staged expansion, not one burst</h2>
+    <div class="sub">If a single envelope must survive the entire expansion it will always reach its limit. A cascade
+      spreads the expansion across chambers that open in turn, so the system keeps lift at altitude without a catastrophic rupture.</div>
+    <div class="grid2">
+      <div class="panel"><svg id="cascade" viewBox="0 0 460 360"></svg></div>
+      <div>
+        <ul class="clean">
+          <li><b>Pinch-valve manifold.</b> The primary envelope fills first; as it nears its elastic limit the falling ambient pressure prises the next valve open and helium floods the next chamber.</li>
+          <li><b>Float ceiling.</b> <span class="eq">h_float = H · ln( ρ₀V / m_total )</span> — each stage adds displaced volume V and lifts the ceiling.</li>
+          <li><b>Neutral-buoyancy stations.</b> Each stage settles at its own float altitude, giving stable dwell points — the altitudes where the instrument's disks engage.</li>
+          <li><b>No single point of rupture.</b> The expansion that bursts one balloon is distributed; spent chambers can vent rather than tear. Realistic terminus ≈ 50 km.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="foot">OCCLUSION-ALTITUDE CAVENDISH · GOM13 · J. C. HARVEY · MELBOURNE — atmosphere model: US Standard Atmosphere 1976</div>
+</div>
+
+<script>
+const SVGNS="http://www.w3.org/2000/svg";
+const mk=(t,a={})=>{const e=document.createElementNS(SVGNS,t);for(const k in a)e.setAttribute(k,a[k]);return e;};
+const g=9.80665,M=0.0289644,Rs=8.31447,P0=101325,T0=288.15;
+const d0=Math.cbrt(1/(4/3*Math.PI))*2;              // 1.241 m — diameter of a 1 m^3 sphere
+function atmos(h){const L=[[0,288.15,-0.0065,101325],[11000,216.65,0,22632.06],[20000,216.65,0.001,5474.89],
+  [32000,228.65,0.0028,868.02],[47000,270.65,0,110.91],[51000,270.65,-0.0028,66.94]];
+  let i=0;for(;i<L.length-1;i++){if(h<L[i+1][0])break;}const[hb,Tb,lr,Pb]=L[i];const T=Tb+lr*(h-hb);
+  let P;if(Math.abs(lr)<1e-9)P=Pb*Math.exp(-g*M*(h-hb)/(Rs*Tb));else P=Pb*Math.pow(T/Tb,-g*M/(Rs*lr));return{P,T};}
+const Vratio=h=>{const{P,T}=atmos(h);return (P0/P)*(T/T0);};
+const BURST=34000;                                  // representative latex burst altitude (m)
+
+/* ---- A: growing balloon ---- */
+const bsv=document.getElementById('balloon');
+// altitude scale (left)
+bsv.appendChild(mk('line',{x1:40,y1:30,x2:40,y2:420,stroke:'rgba(40,224,230,.4)','stroke-width':1.4}));
+for(const km of [0,10,20,30,40,50]){const y=420-(km/50)*390;
+  bsv.appendChild(mk('line',{x1:35,y1:y,x2:40,y2:y,stroke:'#7d8aa8'}));
+  const t=mk('text',{x:31,y:y+4,'text-anchor':'end','font-family':'JetBrains Mono','font-size':11,fill:'#7d8aa8'});t.textContent=km;bsv.appendChild(t);}
+const axu=mk('text',{x:40,y:18,'text-anchor':'middle','font-family':'JetBrains Mono','font-size':10,fill:'#7d8aa8'});axu.textContent='km';bsv.appendChild(axu);
+// burst band
+const by1=420-(38000/50000)*390, by2=420-(28000/50000)*390;
+bsv.appendChild(mk('rect',{x:40,y:by1,width:300,height:by2-by1,fill:'rgba(255,85,102,.10)'}));
+const bbt=mk('text',{x:330,y:by1-4,'text-anchor':'end','font-family':'JetBrains Mono','font-size':10,fill:'#ff5566'});bbt.textContent='latex burst band 28–38 km';bsv.appendChild(bbt);
+const marker=mk('circle',{cx:40,r:5,fill:'#ffb53d',filter:'drop-shadow(0 0 5px #ffb53d)'});bsv.appendChild(marker);
+const Bcx=210, Bcy=250, baseR=15;
+const env=mk('ellipse',{cx:Bcx,fill:'rgba(40,224,230,.10)',stroke:'#28e0e6','stroke-width':2});
+const neck=mk('path',{fill:'none',stroke:'#28e0e6','stroke-width':2});
+const pay=mk('rect',{width:18,height:12,fill:'#0e2a44',stroke:'#ffb53d','stroke-width':1.5});
+bsv.appendChild(env);bsv.appendChild(neck);bsv.appendChild(pay);
+function drawBalloon(h){
+  const V=Vratio(h), df=Math.cbrt(V);
+  let r=baseR*df, clamp=false; if(r>168){r=168;clamp=true;}
+  const ry=r*1.08;
+  env.setAttribute('cy',Bcy);env.setAttribute('rx',r.toFixed(1));env.setAttribute('ry',ry.toFixed(1));
+  const burst=h>=BURST;
+  env.setAttribute('stroke',burst?'#ff5566':'#28e0e6');
+  env.setAttribute('stroke-dasharray',clamp?'6 5':'none');
+  env.setAttribute('fill',burst?'rgba(255,85,102,.07)':'rgba(40,224,230,.10)');
+  neck.setAttribute('d',`M ${Bcx-7} ${Bcy+ry-2} L ${Bcx} ${Bcy+ry+12} L ${Bcx+7} ${Bcy+ry-2}`);
+  neck.setAttribute('stroke',burst?'#ff5566':'#28e0e6');
+  pay.setAttribute('x',Bcx-9);pay.setAttribute('y',Bcy+ry+12);
+  marker.setAttribute('cy',420-(h/50000)*390);
+}
+/* ---- A: small multiples ---- */
+const msv=document.getElementById('multi');
+const pts=[0,30000,35000,40000,50000];
+const dmax=Math.cbrt(Vratio(50000));                 // largest diameter factor
+pts.forEach((h,i)=>{const x=80+i*160; const df=Math.cbrt(Vratio(h)); const r=8+ (df/dmax)*62;
+  const V=Vratio(h); const burst=h>=BURST&&h<=40000 && i>0 && pts[i]===35000;
+  msv.appendChild(mk('circle',{cx:x,cy:70,r:r.toFixed(1),fill:'rgba(40,224,230,.08)',stroke:i===2?'#ff5566':'#28e0e6','stroke-width':2}));
+  const t1=mk('text',{x:x,y:128,'text-anchor':'middle','font-family':'JetBrains Mono','font-size':12,fill:'#dfe9ff'});t1.textContent=(h/1000)+' km';msv.appendChild(t1);
+  const t2=mk('text',{x:x,y:144,'text-anchor':'middle','font-family':'JetBrains Mono','font-size':11,fill:i===2?'#ff5566':'#7d8aa8'});
+  t2.textContent='×'+Math.round(V)+(i===2?' burst':'');msv.appendChild(t2);
+});
+
+function update(){
+  const h=+document.getElementById('alt').value;
+  const {P,T}=atmos(h), V=Vratio(h), df=Math.cbrt(V);
+  document.getElementById('r_alt').textContent=(h/1000).toFixed(1)+' km';
+  document.getElementById('r_p').textContent=P>=1000?(P/1000).toFixed(1)+' kPa':P.toFixed(0)+' Pa';
+  document.getElementById('r_t').textContent=(T-273.15).toFixed(0)+' °C';
+  document.getElementById('r_v').textContent=(V<10?V.toFixed(1):Math.round(V))+'×';
+  document.getElementById('r_d').textContent=(d0*df).toFixed(1)+' m';
+  document.getElementById('r_pct').textContent=(P/P0*100).toFixed(P/P0*100<1?2:1)+'%';
+  const st=document.getElementById('r_state');
+  if(h>=BURST){st.className='status burst';st.textContent='LATEX BURST (~34 km) · gas shown unconfined — a single envelope is gone';}
+  else{st.className='status';st.textContent='intact · the latex is stretching with the gas';}
+  drawBalloon(h);
+}
+document.getElementById('alt').addEventListener('input',update);
+
+/* ---- B: skin thinning diagram ---- */
+const ssv=document.getElementById('skin');
+[['sea level',70,46,3.2,'#28e0e6'],['~20 km',210,86,1.2,'#ffb53d'],['burst ~34 km',350,120,0.35,'#ff5566']].forEach(([lab,cx,r,th,c])=>{
+  ssv.appendChild(mk('circle',{cx,cy:130,r,fill:'none',stroke:c,'stroke-width':Math.max(1,th*3)}));
+  const t=mk('text',{x:cx,y:250,'text-anchor':'middle','font-family':'JetBrains Mono','font-size':12,fill:c});t.textContent=lab;ssv.appendChild(t);
+  const t2=mk('text',{x:cx,y:268,'text-anchor':'middle','font-family':'JetBrains Mono','font-size':10,fill:'#7d8aa8'});t2.textContent='skin '+th+' (rel)';ssv.appendChild(t2);
+});
+ssv.appendChild(mk('path',{d:'M 116 70 Q 230 30 300 60',fill:'none',stroke:'#7d8aa8','stroke-width':1,'stroke-dasharray':'4 4','marker-end':'none'}));
+const gt=mk('text',{x:230,y:24,'text-anchor':'middle','font-family':'JetBrains Mono','font-size':12,fill:'#7d8aa8'});gt.textContent='diameter ↑   skin thickness ↓';ssv.appendChild(gt);
+
+/* ---- C: cascade manifold ---- */
+const csv=document.getElementById('cascade');
+csv.appendChild(mk('line',{x1:230,y1:70,x2:230,y2:300,stroke:'#7d8aa8','stroke-width':2}));
+const stages=[[230,80,46,'#62ff8f','primary'],[120,150,30,'#28e0e6','stage 2'],[340,150,30,'#28e0e6','stage 2'],[160,235,22,'#ffb53d','stage 3'],[300,235,22,'#ffb53d','stage 3']];
+stages.forEach(([x,y,r,c,lab],i)=>{
+  if(i){csv.appendChild(mk('line',{x1:230,y1:90,x2:x,y2:y,stroke:'#7d8aa8','stroke-width':1.3,opacity:.5}));
+    csv.appendChild(mk('rect',{x:(230+x)/2-5,y:(90+y)/2-5,width:10,height:10,fill:'#ff4d97',transform:`rotate(45 ${(230+x)/2} ${(90+y)/2})`}));}
+  csv.appendChild(mk('ellipse',{cx:x,cy:y,rx:r,ry:r*1.08,fill:'rgba(40,224,230,.07)',stroke:c,'stroke-width':2,filter:i?'none':'drop-shadow(0 0 5px #62ff8f)'}));
+});
+csv.appendChild(mk('rect',{x:212,y:300,width:36,height:26,fill:'#0e2a44',stroke:'#ffb53d','stroke-width':1.5}));
+const gtx=mk('text',{x:230,y:317,'text-anchor':'middle','font-family':'JetBrains Mono','font-size':11,fill:'#dfe9ff'});gtx.textContent='gondola';csv.appendChild(gtx);
+const pv=mk('text',{x:60,y:120,'font-family':'JetBrains Mono','font-size':12,fill:'#ff4d97'});pv.textContent='◆ pinch valves';csv.appendChild(pv);
+const pp=mk('text',{x:230,y:58,'text-anchor':'middle','font-family':'JetBrains Mono','font-size':12,fill:'#62ff8f'});pp.textContent='primary fills first';csv.appendChild(pp);
+
+update();
+</script>
+</body>
+</html>

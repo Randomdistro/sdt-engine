@@ -1,0 +1,50 @@
+================================================================
+ TD06 - Blackbody Thermodynamics from Lattice Modes
+ J. C. Harvey, Melbourne - 2026-07-03
+ Whitelist: k_B; c and h enter ONLY as Law-I bridges (eps = h*nu).
+================================================================
+
+P1a: counted mode density vs 8 pi nu^2/c^3 (periodic bulk modes)
+  octant (walled-cavity) contrast — the boundary term:
+    R= 200: dev = -0.7219%   dev*R = -1.44 (const => 1/R boundary term)
+    R= 400: dev = -0.3731%   dev*R = -1.49 (const => 1/R boundary term)
+    R= 800: dev = -0.1868%   dev*R = -1.49 (const => 1/R boundary term)
+  periodic bulk count vs 4 pi R^2 dR: mean |dev| = 0.0030% (<0.1%), worst 0.0099%  [PASS]
+  x2 polarisations (transverse relay branches) -> g(nu) = 8 pi nu^2/c^3.
+
+P1b: occupation from ln W maximisation (native counting)
+  hill-climb from non-Bose start (1195331 moves accepted):
+  ln(1+g/q) vs eps: R^2 = 1.000000 (>0.9999), intercept 1.74e-05; beta = 0.25604
+  RMS occupation dev from Bose(beta) = 0.006% (<1%)  [PASS]
+  single-mode marginal in band 3: p_(j+1)/p_j constant to 0.014% (<1%)
+  -> the 'geometric series' is COUNTED (multiple quanta per mode), not lifted. [PASS]
+
+P2: Planck curve from counted modes x occupation (periodic bulk)
+  counted vs continuum Planck, theta=50: mean |dev| = 0.0014% (<0.1%) [PASS]
+  RJ limit x=0.05: occupation*x = 0.9752 (1 within 1%: yes); Wien tail x=10: ratio to x e^-x = 1.0000 [PASS]
+
+P3: Stefan-Boltzmann from the counted sum (periodic bulk)
+  mode-sum E(theta=50) vs 8 pi theta^4*(pi^4/15): dev 0.0086%  [PASS]
+  fitted T-exponent over theta 40..60: 4.0000 (4.00 +- 0.02)  [PASS]
+  integral I3 = 6.493383 from the mode sum (pi^4/15 = 6.493939)
+  sigma_SI = 2 pi^5 k_B^4/(15 h^3 c^2) = 5.670374e-08 W/m^2K^4
+  a = 4 sigma/c = 7.565733e-16 vs measured::a_rad = 7.565700e-16 (dev 4.4 ppm)
+
+P4: Wien displacement from the spectral extremum
+  root of 5(1-e^-x)=x by bisection: x* = 4.965114 (4.965114 +- 1e-5) [PASS]
+  b = hc/(x* k_B) = 2.897772e-03 m K  (2.898e-3, dev 0.008%)  [PASS]
+
+P5: UV honesty
+  l_P mode cutoff: nu_max ~ c/(2 l_P) = 9.274e+42 Hz; at T=300 K,
+  x = h nu/kT = 1.484e+30 -> occupation e^-x UNDERFLOWS: the cutoff does ZERO
+  numerical work at physical temperatures. Finiteness of the spectrum is
+  carried by eps = h nu quantisation - i.e. Planck's postulate, carried
+  into SDT as the Law-I bridge, ASSERTED not derived. Disclosed.
+
+================================================================
+ TD06 GATES: P1a PASS | P1b PASS | P2 PASS | P3 PASS | P4 PASS | P5 disclosed
+ SAR02 cross-check: a_rad agreement reported above (consistency ONLY,
+ not the pass). Occupation inherited from TD02 (native counting,
+ class CONVERGENCE) -> TD06 capped at CONVERGENCE.
+ VERDICT: PASS - see TD06_VERDICT.md
+================================================================

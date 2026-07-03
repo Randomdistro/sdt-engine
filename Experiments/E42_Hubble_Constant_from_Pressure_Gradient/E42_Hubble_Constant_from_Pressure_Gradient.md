@@ -1,3 +1,9 @@
+> **⮑ SPEC LINKED — investigation spec written, NOT yet run.**
+> Methodology spec exists at `Investigations/07_Cosmology_and_Redshift/CR09_Hubble_Tension_and_Dark_Energy` (PROMPT only — no verdict, no result). This experiment remains an OPEN falsifiable prediction.
+> The specification below is the falsifiable prediction.
+
+---
+
 # E42: Hubble Constant from Pressure Gradient
 
 > **Category**: Cosmology

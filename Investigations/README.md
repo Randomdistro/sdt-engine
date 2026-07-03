@@ -1,8 +1,16 @@
 # SDT Investigations
 
 Formal research programme derived from SDT's theoretical framework and experimental catalogue.
-Each investigation folder contains a PROMPT.md (detailed methodology and success criteria) and,
-where applicable, a DATA_REQUIREMENTS.md (all constants, databases, and sources needed).
+Each investigation folder contains a **PROMPT.md** (methodology, gates, pivot tables — built from
+`PERFECT_PROMPT_TEMPLATE.md`), optional **DATA_REQUIREMENTS.md**, and on run: **RUN_LOG.md** +
+tool + **`*_VERDICT.md`**.
+
+**Prompt standards (2026-06-27):**
+- Author / extend prompts using `Investigations/PERFECT_PROMPT_TEMPLATE.md` (§⓪–§⑩).
+- Execute using `Investigations/PROMPT_EXECUTION_PROTOCOL.md` — pre-commit thresholds, adjust on failure.
+- **Batch upgrade:** `python Investigations/tools/prompt_upgrade.py` — applied to **125/128** prompts (§⑩ + header + dual verdict + RUN_LOG).
+- **Full exemplar rewrites** (audit-driven, excruciating detail): `OP01`, `QM06`, `CH01`, `CM02`, `PM03`, `GD06`, `PPT04`, `TD01`.
+- Re-run upgrade after editing prompts: `python Investigations/tools/prompt_upgrade.py --dry-run` to preview.
 
 All investigations operate WITHIN SDT as the governing framework. SDT is the ruleset;
 the investigation derives predictions and compares them to measurements.

@@ -3,7 +3,7 @@
 **Question:** What holds the electron at the Bohr radius, and can the binding (hence `P_eff`) be
 derived without invoking charge?
 
-**Verdict:** **RESOLVED [STRONG]** — *on the framework's terms.*
+**Verdict:** **RESOLVED [IDENTITY-QUALIFIED]** — *on the framework's terms.*
 
 The Bohr radius is the **electropause** (pressure-balance boundary). The binding is the **centripetal
 requirement**, `F = mₑ(αc)²/a₀ = 8.2387×10⁻⁸ N`, computed from **kinematics with no charge term** and
@@ -19,7 +19,7 @@ P_eff = 4 F a₀² / (π R_charge⁴) = 5.2252×10³¹ Pa   (= engine law_III::P
 The **delete-test passes**: P_eff computes with `k_e` and `e` removed from the inputs.
 
 **Status change:** `P_eff` **E (CALIBRATED) → C (DERIVED)**. Closes the [[EMC01]] coefficient
-circularity and completes the [[EMC03]] "two-locks" step.
+circularity and completes the [[EMC03]] "two-locks" step. [Qualified: the tool's own output prints 'm_e(αc)²/a₀ == k_e e²/a₀² is an algebraic identity'; the delete-test removes the symbol e but keeps α, a₀, r_e, R_p which encode e. Genuine content: the closed form; not an independent derivation of the scale.]
 
 **Honest residual (the entire caveat):** α is read as the kinematic k-rung ([[PPT02]]), not the Coulomb
 coupling — so the closure holds on SDT's own terms; **the model does not derive α**, which remains the

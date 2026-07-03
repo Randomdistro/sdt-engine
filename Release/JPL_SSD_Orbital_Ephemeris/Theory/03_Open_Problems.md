@@ -1,6 +1,6 @@
 # Open Problems
 
-Three computational problems remain. Zero conceptual gaps.
+Open problems remain in both computation and concept: α-from-topology (Conjecture, :29), R_p closure (02_Inputs:61 'Conjectured'), PPT08 angular DOF (OPEN), galaxy rotation on SDT-native terms (GD05 negative), neutron barrier depth (OPEN).
 
 ## 1. R/a Quantisation
 

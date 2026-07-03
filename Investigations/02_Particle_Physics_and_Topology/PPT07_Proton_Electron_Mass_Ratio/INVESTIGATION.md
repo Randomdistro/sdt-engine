@@ -1,5 +1,7 @@
 # PPT07: Deriving Proton-Electron Mass Ratio from Topology — INVESTIGATION RESULTS
 
+> **⚠️ SUPERSEDED by `ROOTSIM_VERDICT.md` (grade: [OPEN — privileged, unexplained, 19-ppm]).** 6π⁵ is neither derived nor killed. The sibling `ppt07_28d_formal.cpp` prints 19819 vs 1836.15 (+979%) while stamping PASS — quarantined as numerology; do not cite it.
+
 > **Status**: RESOLVED (Analytical Phase Complete)
 > **Date**: May 2026
 > **Tool**: `cq17_mass_ratio_solver.cpp`

@@ -1,5 +1,7 @@
 # CQ01-CQ40 Complete Dependency Graph
 
+> **⛔ STALE — PREDATES THE HUNTER SCOUR (2026-07-02); DO NOT CITE.** The CQ40 rows ('H₀=67.4 derived to <1%') and CQ38 rows ('Lamb 0.57%') propagate FABRICATED results (CR05, APS04 — both retracted); 'FRAMEWORK CLOSURE' claims are false; 'CQ15 VALIDATED 27/27' and Class-A gradings are pre-audit. Ground truth: `Investigations/HUNTER_SCOUR_2026-07-02/MASTER_LEDGER.md`.
+
 **Date:** 2026-06-16  
 **Scope:** CQ01–CQ40 (23 focus investigations) + identified unresolved branches  
 **Method:** Extracted from INVESTIGATION.md, PROMPT.md, and VERDICT.md files; cross-referenced with memory and audit logs  
@@ -164,7 +166,7 @@ CQ02 → {CQ03, CQ05, CQ17, CQ36, CQ38}
     CQ38 [C]  Trefoil Wake Multipole
     ├─ Depends: CQ02, CQ34 (trefoil structure)
     ├─ Class: C (derived mechanism, validated)
-    ├─ Result: Lamb shift 0.57% error; three-fold symmetry from topology
+    ├─ Result: Lamb shift 0.57% error [RETRACTED — see banner]; three-fold symmetry from topology
     ├─ Laws: VI
     └─ Enables: Angular quantisation closure
 ```
@@ -247,7 +249,7 @@ CQ40 [C]  Spation Pressure Tensor Derivation
 ├─ Depends: CQ39 (BAO scale, topological transition)
 ├─ Uses Laws: I, II, III, IV, V, VI (all six)
 ├─ Class: C (convergence achieved, framework closure)
-├─ Result: H₀ = 67.4 km/s/Mpc derived to <1% accuracy
+├─ Result: H₀ = 67.4 km/s/Mpc derived to <1% accuracy [RETRACTED — see banner]
 ├─ Transfers: CQ01/CQ33 transfer function f from CLASS E→C
 ├─ Breaks: H₀ circularity (CQ39 Phase 2)
 └─ **FRAMEWORK CLOSURE**: End of Tier 2 dependency chain
@@ -346,7 +348,7 @@ Recovery: Requires rethinking torus knot spectrum (Law VI)
 Impact: CQ16, CQ18, CQ19, CQ20, CQ26, CQ39, CQ40 all fail
 Severity: CRITICAL (entire spation depth framework)
 Recovery: Requires foundational metric rework
-Note: Currently VALIDATED (27/27 benchmarks pass)
+Note: Currently VALIDATED (27/27 benchmarks pass) [RETRACTED — see banner]
 ```
 
 **If CQ39 fails (cosmological distance scale):**
@@ -362,7 +364,7 @@ Current status: Phase 1 & 3 PASS; Phase 2 qualified (will be broken by CQ40)
 Impact: CQ33 (transfer function) + CQ01 f coefficient stay CLASS E/D
 Severity: CRITICAL (framework does NOT close)
 Recovery: Requires alternative H₀ derivation method
-Current status: CONVERGENCE ACHIEVED — H₀ = 67.4 km/s/Mpc to <1%
+Current status: CONVERGENCE ACHIEVED — H₀ = 67.4 km/s/Mpc to <1% [RETRACTED — see banner]
 ```
 
 **If CQ32 successor (mesh-frequency model) is not implemented:**
@@ -476,9 +478,9 @@ These CQs are mentioned in file structure but not extracted:
 | 34 | Angular DOF | D | VI | CQ02,CQ14 | Lamb shift | Multipole (via CQ38) |
 | 36 | Winding Stability | A | VI | CQ02 | CQ37 | NO (W=1,3 only) |
 | 37 | Charge Quantisation | X | VI | CQ36 | Closure? | e kept as input |
-| 38 | Trefoil Wake | C | VI | CQ02,CQ34 | Angular closure | NO (0.57% error) |
+| 38 | Trefoil Wake | C | VI | CQ02,CQ34 | Angular closure | NO (0.57% error) [RETRACTED — see banner] |
 | 39 | Cosmological Scale | C | I,II,VI | CQ26,CQ15 | CQ40 | Phase 4 pending |
-| 40 | Pressure Tensor | C | I,II,III,IV,V,VI | CQ39 | **CLOSURE** | NO (H₀ derived) |
+| 40 | Pressure Tensor | C | I,II,III,IV,V,VI | CQ39 | **CLOSURE** | NO (H₀ derived) [RETRACTED — see banner] |
 
 ---
 
@@ -513,7 +515,7 @@ CQ02 [A]
 ├─→ CQ05 [D] (P/E mass 6π⁵, V_disp pending)
 ├─→ CQ17 [A] (Topology Solver, 1836.118 ✓)
 ├─→ CQ36 [A] (W=1,3 only ✓)
-└─→ CQ38 [C] (Trefoil wake, Lamb 0.57% ✓)
+└─→ CQ38 [C] (Trefoil wake, Lamb 0.57% ✓) [RETRACTED — see banner]
 ```
 
 ### Tier-2 (CQ15+CQ16 Enabled Spation Framework)
@@ -528,7 +530,7 @@ CQ15+CQ16 [A]
 │   └─→ CQ39, CQ40
 ├─→ CQ39 [C] (Cosmological distance, Phases 1,3 ✓; Phase 4 pending)
 │   └─→ CQ40
-└─→ CQ40 [C] (Pressure tensor, H₀=67.4 <1%, CLOSURE ✓)
+└─→ CQ40 [C] (Pressure tensor, H₀=67.4 <1%, CLOSURE ✓) [RETRACTED — see banner]
     └─→ FRAMEWORK CLOSURE
 ```
 
@@ -559,7 +561,7 @@ CQ33 [D→C] (Transfer function closure)
 
 ### Primary Bottleneck: CQ40 (Spation Pressure Tensor)
 
-**Current Status:** CONVERGENCE ACHIEVED (H₀ = 67.4 km/s/Mpc derived)
+**Current Status:** CONVERGENCE ACHIEVED (H₀ = 67.4 km/s/Mpc derived) [RETRACTED — see banner]
 
 **Blocks:**
 - CQ33 (Transfer Function Closure) — waiting for R_CMB derivation
@@ -605,7 +607,7 @@ CQ33 [D→C] (Transfer function closure)
 
 ### Closure Statement
 
-**Framework is logically consistent and acyclic.** Closure requires:
+**Framework is logically consistent and acyclic.** [RETRACTED — see banner] Closure requires:
 1. CQ40 completion (convergence achieved; pending final documentation)
 2. CQ39 Phase 4 completion (optional; for quantisation closure)
 3. CQ32 successor implementation (optional; for nuclear applications)

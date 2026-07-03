@@ -9,6 +9,7 @@
 ## 1. Background
 
 SDT predicts the same temperature formula (T = ℏc³/8πkGM) because the surface mode spectrum matches the quantum calculation.
+(SM-side formula quoted for comparison; the SDT chain must use the koppa form GM→c²ϟ.)
 
 ## 2. SDT Prediction
 

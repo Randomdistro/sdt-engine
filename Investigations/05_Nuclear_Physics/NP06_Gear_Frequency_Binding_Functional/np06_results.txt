@@ -1,0 +1,72 @@
+NP06 (CQ-50) — Gear-Frequency Binding Functional (J. C. Harvey, 2026-07-03)
+Hypothesis: E_bind = hbar * d_omega from a no-slip mesh-coupling pull.
+==========================================================================
+
+[R5] hbar*Omega_rim = 938.2721 MeV = m_p c^2 EXACTLY -> any 'Delta omega' that
+     reduces to Delta(mc^2)/hbar restates E=mc^2 and 'predicts' binding by
+     definition. FORBIDDEN-IDENTITY. Not used anywhere below.
+
+[D2] kappa_geom from the committed no-slip contact geometry (ring contact s=2R):
+     available dimensionless inventory (committed in RUN_LOG before running):
+       overlap depth / R        = 0        (tangent contact)
+       contact-arc fraction     = 0        (point contact)
+       axis-angle cosines       = O(1), bounded by 1
+       winding / rim-speed ratio= 1        (identical rotors)
+     A rigid no-slip constraint LOCKS PHASE but stores no energy; a normal-mode
+     SPLIT requires a stiffness U(dphi). No inventory item supplies an energy
+     scale: every derivable kappa is 0 or O(1).
+     REQUIRED couplings (reverse ledger, REQUIRED-NOT-DERIVED, see below):
+       kappa_req(d)  = 2.371e-03   kappa_req(t/bond) = 3.013e-03
+       kappa_req(a/bond) = 5.026e-03   kappa_req(H2) = 4.817e-09
+     -> spread d..a = x2.12 at IDENTICAL committed contact geometry;
+        spread H2..d = x4.9e+05 with NO kinematic quantity to carry it.
+     VERDICT D2: kappa_geom is NOT derivable at CALIBRATED(0) from the no-slip
+     mesh. Gate G-omega is DEAD AT THE DERIVATION STAGE (committed rule).
+
+[D3] H2 anchor (committed prediction BEFORE comparison):
+     protons at 1.4 a0 = 7.408e+04 fm; rim radius R_p = 0.841 fm -> s/2R_p = 44025
+     rims DO NOT TOUCH -> contact-mesh prediction: epsilon(H2) = 0
+     measured: 4.52 eV  -> structural FAIL (0 vs 4.52 eV; +/-15% gate)
+     borrowed-kappa check (kappa_d, CALIBRATED(1)): epsilon = 2.225 MeV vs 4.52 eV
+     -> off by x4.9e+05. The anchor fails BOTH ways: a contact mesh gives zero,
+     a contact-blind mesh gives 10^6 too much. The coupling must be carried by
+     a RANGED interaction (a 1/r wake) — which is not a frequency pull.
+
+[D4] Nuclear set — failure-shape demo with epsilon locked to the deuteron
+     (CALIBRATED(1); per RUN_LOG this CANNOT pass G-omega even if it landed):
+     d    bonds= 1  pred =   2.225  sealed =   2.225  (   +0.0%)  within 15%
+     t    bonds= 3  pred =   6.674  sealed =   8.482  (  -21.3%)  FAIL(15%)
+     h    bonds= 3  pred =   6.674  sealed =   7.718  (  -13.5%)  within 15%
+     a    bonds= 6  pred =  13.347  sealed =  28.296  (  -52.8%)  FAIL(15%)
+     Li6  bonds= 9  pred =  20.021  sealed =  31.995  (  -37.4%)  FAIL(15%)
+     Be9  bonds=14  pred =  31.144  sealed =  58.165  (  -46.5%)  FAIL(15%)
+     R1 dd->a    pred Q =   8.898  sealed =  23.847  (  -62.7%)  FAIL(15%)
+     R2 tp->a    pred Q =   6.674  sealed =  19.814  (  -66.3%)  FAIL(15%)
+     R3 hn->a    pred Q =   6.674  sealed =  20.578  (  -67.6%)  FAIL(15%)
+     R4 dt->an   pred Q =   4.449  sealed =  17.589  (  -74.7%)  FAIL(15%)
+     R5 dd->tp   pred Q =   2.225  sealed =   4.033  (  -44.8%)  FAIL(15%)
+     R6 dd->hn   pred Q =   2.225  sealed =   3.269  (  -31.9%)  FAIL(15%)
+     R7 ad->Li6  pred Q =   4.449  sealed =   1.474  ( +201.8%)  FAIL(15%)
+     R8 2an->Be9 pred Q =   4.449  sealed =   1.574  ( +182.7%)  FAIL(15%)
+     -> 8 of 8 Q-values FAIL at +/-15% even WITH the CALIBRATED(1) crutch.
+     Diagnostic (a): alpha under-binds at -52.8% — the even mesh does NOT
+     naturally over-bind alpha; the volume-form's alpha anomaly persists.
+     Diagnostic (b): Li6/Be9 over-bind per contact (+202%/+183% on R7/R8) —
+     loose clusters need contacts SOFTER than the core, again geometry-blind.
+
+==========================================================================
+VERDICT (numeric):
+  D2 kappa_geom      : NOT DERIVABLE at CALIBRATED(0) — no energy scale in the
+                       kinematic no-slip mesh -> G-omega DEAD at derivation
+  D3 H2 anchor       : contact mesh predicts 0 vs 4.52 eV (structural FAIL);
+                       borrowed kappa off by ~10^6
+  D4 nuclear shape   : with CALIBRATED(1) crutch: 8/8 Q FAIL, alpha -52.8%,
+                       per-bond kappa spread x2.12 at identical contact geometry
+  KILL               : E_bind = hbar*d_omega (kinematic mesh pull) is KILLED.
+  SUCCESSOR (named in RUN_LOG before the run, already partly paid): NP17
+  shared-electron Coulomb well — supplies the missing interaction scale
+  (alpha hbar c) and range (1/r); deuteron already lands at -1.06%.
+  STRUCTURAL RESULT (PROMPT section 5): TWO clean kills — binding is neither a
+  static volume price (NP05/CQ-32) nor a kinematic frequency pull (NP06). It
+  requires a mediated ranged interaction: the shared-electron well + the
+  coordination-dependent lock term (NP10's constraint curve).
