@@ -1,0 +1,48 @@
+PM01 — Magnetism as Collective Vortex Circulation (J. C. Harvey, 2026-07-03)
+Native chain: NO B-in-tesla / NO qv:B / NO mu_B,mu_N anywhere before final SI map.
+
+P1  per-vortex circulation quantum  kappa = 1 (native) = h/m_e = 7.273895e-04 m^2/s [FD02]
+P1  electron moment stays a WAKE-CIRCULATION quantity; g-factor (B17) = 2.0023 (dimensionless).
+P1  magneton count used anywhere in this tool: 0
+
+P2a aligned bundle (N=20000): |w| exponent (r=2..20)  = -1.0000   (gate -1 +/- 2%)
+P2a enclosed-circulation count, worst rel. err     = 1.273e-15 (gate <1e-3)
+P2a reading: the -1 is FORCED by conservation of the enclosed circulation count
+    (Law VI quantisation: loop integral of w = N_enc * kappa, independent of r).
+
+P2b wire, conserving wake w_z ~ 1/s : B_phi exponent = -1.0000 (gate -1 +/- 2%)
+P2b wire, CONTROL wake  w_z ~ 1/s^2: B_phi exponent = -2.0000 (must FAIL Ampere, ~ -2)
+P2b reading: Ampere's -1 is FORCED by per-carrier momentum-flux conservation
+    (FD02 relay drag); a non-conserving wake cannot produce it.
+P2b sign caveat: the DIRECTION of B_phi flips with carrier drift x handedness;
+    the per-carrier axial-wake amplitude for + vs - carriers is the HANDED GAIN (see P3).
+
+P2c max|div B| * h / max|B| = 1.465e-16   (gate <= 1e-9)
+P2c PRE-FLAGGED: div(curl) = 0 is vector calculus (discrete central differences
+    commute). The SDT content is ONLY the identification B == curl(w); given it,
+    'no monopole' (E58) is a theorem. This gate is a consistency check, not a discovery.
+
+P3 four-cell sign matrix. EM target: deflection ~ f(h*Omega) — flips with EITHER sign.
+    cell (h,Om)      Magnus vy-sign   Coriolis vy-sign   EM-target sign f(h*Om)
+    (+1,+1)          +1              -1                 +1
+    (+1,-1)          +1              +1                 -1
+    (-1,+1)          -1              -1                 -1
+    (-1,-1)          -1              +1                 +1
+P3 Magnus channel matches EM bilinear pattern in 2/4 cells (signed by h only).
+P3 Coriolis channel matches EM bilinear pattern in 2/4 cells (signed by Om only).
+P3 Magnus gyration freq: Om=0 -> 1.0000 ; Om=1 -> 0.5000 ; Om=10 -> 0.5000
+    (freq set by OWN kappa*rho/m; saturates, never proportional to field. Note: the
+    co-handed cell is dynamically UNSTABLE in rigid ambient swirl — runaway, not orbit.)
+P3 Coriolis gyration freq: Omega=1 -> 1.0000 ; Omega=10 -> 10.0000 (ratio 10.000; = field, h-blind)
+P3 CONCLUSION: Magnus = signed (own h), field-magnitude-blind. Coriolis = field-
+    proportional, handedness-blind. The qv x B pattern needs a BILINEAR h*swirl
+    coupling that NEITHER native channel supplies. That bilinear handed gain is
+    dimensionally e-shaped -> the EMC02 wall (e irreducible). Recorded OPEN.
+
+SI map [IMPORTED — appears only here, per firewall]:
+[IMPORTED] wire field form    B(r) = mu0 I / (2 pi r); per-carrier axial-wake
+[IMPORTED] amplitude map      gamma_carrier <-> mu0 e v_drift  (the un-derived handed gain).
+[IMPORTED] P4 context: Chapman-Ferraro standoff = 8.13 R_E (observed ~10 R_E;
+           order-correct; textbook pressure balance, NOT claimed native. P4 DEFERRED.)
+
+PM01 done. Verdict: PM01_VERDICT.md

@@ -38,7 +38,7 @@
     <canvas id="latticeCanvas" class="opening__canvas"></canvas>
     <div class="opening__content">
       <p class="opening__pretitle">A zero-parameter framework for all of physics</p>
-      <h1 class="opening__title">Spatial<br>Displacement<br><em>Theory</em></h1>
+      <h1 class="opening__title" data-i18n="hero_title">Spatial<br>Displacement<br><em>Theory</em></h1>
       <hr class="opening__rule">
       <p class="opening__desc">Gravity, electromagnetism, and nuclear forces derived as pressure differentials in a discrete spatial medium. Built from four primitives. No free parameters. Every constant computed.</p>
       <p class="opening__author"><p class="opening_quote">"Any theory that produces paradoxes is either incomplete, or incorrect."—</p>James Christopher Tyndall,  Melbourne, Australia</p>
@@ -65,11 +65,11 @@
     <div class="chapter__inner reveal">
       <div class="chapter__num">Chapter One</div>
       <h2 class="chapter__title">The Medium</h2>
-      <p class="chapter__lead">Imagine standing at the bottom of the ocean.</p>
+      <p class="chapter__lead">You are being pressed — right now, from every direction at once.</p>
 
-      <p>Water presses on you equally from every direction — you feel nothing. Now place a boulder nearby. It blocks pressure from one side. The unblocked pressure from the opposite side pushes you toward the boulder.</p>
+      <p>At every point a convergence is arriving: an inward pressure from all around you and from every depth beyond, the same from one side as from the other. Perfectly answered on every side, it moves you nowhere — you feel nothing, and call the space around you empty. It is not empty. It is balanced. Now let a body settle nearby. It stands in the path of the convergence coming from its direction and casts a shadow — a cone where the inward push falls short. The push from the opposite side, with nothing left to answer it, has its way, and you drift toward the body.</p>
 
-      <p><strong>You are not attracted. You are pushed.</strong></p>
+      <p><strong>You are not attracted. Nothing pulls you. You are pushed — by the pressure the other body fails to block.</strong></p>
 
       <p>Spatial Displacement Theory proposes that all of space is filled with a discrete, gap-free relay medium — the <em>spation lattice</em> — structured at Planck-length scale. Energy propagates through nearest-neighbour contact at exactly <em>c</em>. Light, gravity, electric fields — all are different modes of the same medium. Every force is a pressure differential.</p>
 
@@ -377,14 +377,83 @@
           <div style="font-family:'Source Serif 4','Georgia',serif;font-size:1.15em;font-weight:600;color:var(--ink);margin-bottom:6px;">Sequence the packing, read the mass defect off the shadow</div>
           <div style="font-size:var(--fs-sm);color:var(--ink-muted);max-width:520px;line-height:1.65;">Build any nucleus one subunit at a time from interleaved trefoils — α tetrahedron, tritons, deuterons — shine the convergence light through it, and watch the shadow-overlap track the measured binding curve. Each subunit that locks in emits its binding energy as a γ-ray chirp.</div>
         </div>
-        <a href="nuclear-packing-sequencer.html" target="_blank"
-           style="display:inline-flex;align-items:center;gap:8px;padding:11px 22px;
-                  background:rgba(80,140,200,.12);border:1px solid rgba(80,140,200,.4);
-                  border-radius:6px;color:#7ab4e0;font-size:13px;font-family:'Inter',sans-serif;
-                  font-weight:500;text-decoration:none;white-space:nowrap;transition:all .2s;"
-           onmouseover="this.style.background='rgba(80,140,200,.22)'"
-           onmouseout="this.style.background='rgba(80,140,200,.12)'">
-          ⚛️ Open the Sequencer
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <a href="nuclear-packing-sequencer.html" target="_blank"
+             style="display:inline-flex;align-items:center;gap:8px;padding:11px 22px;
+                    background:rgba(80,140,200,.12);border:1px solid rgba(80,140,200,.4);
+                    border-radius:6px;color:#7ab4e0;font-size:13px;font-family:'Inter',sans-serif;
+                    font-weight:500;text-decoration:none;white-space:nowrap;transition:all .2s;"
+             onmouseover="this.style.background='rgba(80,140,200,.22)'"
+             onmouseout="this.style.background='rgba(80,140,200,.12)'">
+            ⚛️ Open the Sequencer
+          </a>
+          <a href="nuclear-packing-walkthrough.html" target="_blank"
+             style="display:inline-flex;align-items:center;gap:8px;padding:11px 22px;
+                    background:rgba(80,140,200,.12);border:1px solid rgba(80,140,200,.4);
+                    border-radius:6px;color:#7ab4e0;font-size:13px;font-family:'Inter',sans-serif;
+                    font-weight:500;text-decoration:none;white-space:nowrap;transition:all .2s;"
+             onmouseover="this.style.background='rgba(80,140,200,.22)'"
+             onmouseout="this.style.background='rgba(80,140,200,.12)'">
+            📖 Open the Walkthrough
+          </a>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:var(--sp-sm);margin:var(--sp-md) 0 0;flex-wrap:wrap;align-items:center;">
+        <span style="font-size:10px;font-family:'JetBrains Mono',monospace;color:var(--ink-muted);letter-spacing:.12em;text-transform:uppercase;">Scrollthrough series ·</span>
+        <a href="st_00_primitives.html" target="_blank"
+           style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;
+                  background:rgba(80,140,200,0.10);border:1px solid rgba(80,140,200,0.30);
+                  border-radius:4px;color:#7ab4e0;font-size:13px;font-family:Inter,sans-serif;
+                  text-decoration:none;transition:all 0.2s;"
+           onmouseover="this.style.background='rgba(80,140,200,0.20)'"
+           onmouseout="this.style.background='rgba(80,140,200,0.10)'">
+          ⬡ The Primitives
+        </a>
+        <a href="st_01_law1.html" target="_blank"
+           style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;
+                  background:rgba(80,140,200,0.10);border:1px solid rgba(80,140,200,0.30);
+                  border-radius:4px;color:#7ab4e0;font-size:13px;font-family:Inter,sans-serif;
+                  text-decoration:none;transition:all 0.2s;"
+           onmouseover="this.style.background='rgba(80,140,200,0.20)'"
+           onmouseout="this.style.background='rgba(80,140,200,0.10)'">
+          Ⅰ Convergent Relay
+        </a>
+        <a href="st_02_law2.html" target="_blank"
+           style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;
+                  background:rgba(80,140,200,0.10);border:1px solid rgba(80,140,200,0.30);
+                  border-radius:4px;color:#7ab4e0;font-size:13px;font-family:Inter,sans-serif;
+                  text-decoration:none;transition:all 0.2s;"
+           onmouseover="this.style.background='rgba(80,140,200,0.20)'"
+           onmouseout="this.style.background='rgba(80,140,200,0.10)'">
+          Ⅱ Release Cascade
+        </a>
+        <a href="st_03_law3.html" target="_blank"
+           style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;
+                  background:rgba(80,140,200,0.10);border:1px solid rgba(80,140,200,0.30);
+                  border-radius:4px;color:#7ab4e0;font-size:13px;font-family:Inter,sans-serif;
+                  text-decoration:none;transition:all 0.2s;"
+           onmouseover="this.style.background='rgba(80,140,200,0.20)'"
+           onmouseout="this.style.background='rgba(80,140,200,0.10)'">
+          Ⅲ Boundary Pressure
+        </a>
+        <a href="st_04_law4.html" target="_blank"
+           style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;
+                  background:rgba(80,140,200,0.10);border:1px solid rgba(80,140,200,0.30);
+                  border-radius:4px;color:#7ab4e0;font-size:13px;font-family:Inter,sans-serif;
+                  text-decoration:none;transition:all 0.2s;"
+           onmouseover="this.style.background='rgba(80,140,200,0.20)'"
+           onmouseout="this.style.background='rgba(80,140,200,0.10)'">
+          Ⅳ Inertial Mass
+        </a>
+        <a href="st_flm01.html" target="_blank"
+           style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;
+                  background:rgba(80,140,200,0.10);border:1px solid rgba(80,140,200,0.30);
+                  border-radius:4px;color:#7ab4e0;font-size:13px;font-family:Inter,sans-serif;
+                  text-decoration:none;transition:all 0.2s;"
+           onmouseover="this.style.background='rgba(80,140,200,0.20)'"
+           onmouseout="this.style.background='rgba(80,140,200,0.10)'">
+          ⧉ FLM01 · The 28D State
         </a>
       </div>
     </div>
@@ -423,6 +492,15 @@
            onmouseover="this.style.background='rgba(80,140,200,0.20)'"
            onmouseout="this.style.background='rgba(80,140,200,0.10)'">
           ⚛️ Nuclear Packing Sequencer
+        </a>
+        <a href="nuclear-packing-walkthrough.html" target="_blank"
+           style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;
+                  background:rgba(80,140,200,0.10);border:1px solid rgba(80,140,200,0.30);
+                  border-radius:4px;color:#7ab4e0;font-size:13px;font-family:Inter,sans-serif;
+                  text-decoration:none;transition:all 0.2s;"
+           onmouseover="this.style.background='rgba(80,140,200,0.20)'"
+           onmouseout="this.style.background='rgba(80,140,200,0.10)'">
+          📖 Packing Walkthrough
         </a>
       </div>
     </div>
@@ -834,5 +912,7 @@
   </footer>
 
   <script src="main.js"></script>
+  <script src="i18n_dict.js"></script>
+  <script src="i18n.js"></script>
 </body>
 </html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Law III of Spatial Displacement Theory — Convergent Boundary Pressure. Balanced convergence is silent; matter occludes a cone of it, and the leftover push is force. One formula for gravity, electricity, and the nuclear bond.">
+<title>Law III · Convergent Boundary Pressure — SDT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- the website stylesheet is the basis -->
+<link rel="stylesheet" href="style.css">
+<style>
+  /* ── LAW III signature: garnet — the infrared moment the medium clears, and force awakens ── */
+  :root{ --copper:#b23a4a; --copper-light:#d97088; --copper-glow:rgba(178,58,74,0.12); }
+  .inv-tag{ font-family:'JetBrains Mono',monospace; font-size:0.7rem; letter-spacing:0.18em;
+    text-transform:uppercase; color:var(--copper); }
+  .cert{ display:inline-block; font-family:'JetBrains Mono',monospace; font-size:0.66rem;
+    letter-spacing:0.1em; padding:2px 9px; border-radius:3px; text-transform:uppercase;
+    border:1px solid rgba(178,58,74,0.4); color:var(--copper); background:rgba(178,58,74,0.08); }
+  .cert--d{ border-color:rgba(126,201,164,0.5); color:#2f6f52; background:rgba(126,201,164,0.10); }
+  .cert--c{ border-color:rgba(176,116,48,0.5); color:#8a6030; background:rgba(176,116,48,0.09); }
+
+  .inv-hero{ padding:var(--sp-3xl) var(--sp-xl) var(--sp-2xl); text-align:center;
+    background:linear-gradient(180deg,var(--cream) 0%, var(--paper) 100%); }
+  .inv-hero h1{ font-family:'Source Serif 4',Georgia,serif; font-weight:300; font-size:var(--fs-3xl);
+    line-height:1.06; letter-spacing:-0.01em; color:var(--ink); margin:var(--sp-md) 0; }
+  .inv-hero h1 em{ font-style:italic; color:var(--copper); }
+  .inv-hero .lead{ max-width:var(--content-width); margin:var(--sp-md) auto var(--sp-xl);
+    color:var(--ink-muted); font-size:var(--fs-md); line-height:1.7; }
+
+  /* ── the DESIGN ELEMENT: the frustrated medium, cooling to the Clearing ── */
+  .medium{ max-width:var(--wide-width); margin:0 auto; }
+  .medium canvas{ width:100%; height:400px; display:block; border-radius:6px; cursor:grab; touch-action:none; }
+  .medium canvas:active{ cursor:grabbing; }
+  .medium figcaption{ font-family:'JetBrains Mono',monospace; font-size:0.68rem; color:var(--ink-faint);
+    letter-spacing:0.05em; margin-top:0.7rem; text-align:center; }
+
+  .backlink{ position:fixed; top:0; left:0; right:0; z-index:100; padding:0.7rem 1.4rem;
+    display:flex; justify-content:space-between; align-items:center;
+    background:rgba(245,240,232,0.86); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--paper-edge); font-size:0.72rem; }
+  .backlink a{ color:var(--copper); text-decoration:none; letter-spacing:0.04em; }
+  .backlink .who{ font-family:'Source Serif 4',serif; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--ink-soft); font-weight:600; }
+  .step{ font-family:'JetBrains Mono',monospace; color:var(--copper); font-size:0.72rem; letter-spacing:0.12em; }
+  .regimes{ display:grid; grid-template-columns:repeat(3,1fr); gap:var(--sp-md); max-width:var(--wide-width);
+    margin:var(--sp-lg) auto 0; }
+  .regimes .r{ padding:var(--sp-md); border:1px solid var(--paper-edge); border-radius:6px; background:var(--paper); }
+  .regimes .r .k{ font-family:'JetBrains Mono',monospace; font-size:0.64rem; letter-spacing:0.1em;
+    text-transform:uppercase; color:var(--copper); }
+  .regimes .r .s{ font-size:0.8rem; color:var(--ink-muted); line-height:1.6; margin-top:4px; }
+  @media(max-width:640px){ .regimes{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+
+<div class="backlink">
+  <span class="who">Spatial <span style="color:var(--copper)">Displacement</span> Theory</span>
+  <a href="investigations.html">← the whole picture</a>
+</div>
+
+<!-- ═══════════════════ HERO ═══════════════════ -->
+<header class="inv-hero reveal">
+  <div class="inv-tag">The Laws · III · Convergent Boundary Pressure</div>
+  <h1>Where the Balance Breaks<br>and <em>Force</em> Is Born</h1>
+  <p class="lead">The pressure of the first two Laws arrives from every side at once, and so it is silent — you feel nothing. This Law is the turn on which everything else rests: set a body in the way, spoil the balance, and the push that no longer arrives from one direction becomes a force pulling toward it. Gravity, electricity, and the nuclear bond are one mechanism seen at three scales.</p>
+
+  <figure class="medium" id="med">
+    <canvas id="medCanvas"></canvas>
+    <figcaption id="medCap">the held, frustrated medium — cooling toward the Clearing at 2997 K, where every point discharges and begins to relay · drag to lift into three dimensions</figcaption>
+  </figure>
+</header>
+
+<!-- ═══════════════════ CH.1 ═══════════════════ -->
+<section class="chapter">
+  <div class="chapter__inner reveal">
+    <div class="chapter__num">One</div>
+    <h2 class="chapter__title">A pressure so even it hides</h2>
+    <p class="chapter__lead">When arrival comes equally from all directions, the pushes answer one another, and nothing is left over.</p>
+    <p>The relay leaves every point steeped in convergence that is perfectly <strong>isotropic</strong> — a word meaning <em>the same in every direction</em>, and it matters here because sameness in every direction is exactly what makes a pressure silent. Add up the push from all sides and the vector sum is zero. A body at rest stays at rest; a body in motion holds its course. What Newton had to declare as a first law arrives here as a plain consequence of even arrival.</p>
+    <p>Yet the space is not slack. It is under enormous compression, pressed inward from everywhere at once. The stillness is not absence of pressure — it is the perfect balance of it.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════ CH.2 ═══════════════════ -->
+<section class="chapter chapter--alt">
+  <div class="chapter__inner reveal">
+    <div class="chapter__num">Two</div>
+    <h2 class="chapter__title">Occlusion — a body casts a shadow in the pressure</h2>
+    <p class="chapter__lead">Stand on the seabed and you feel nothing. Set a boulder beside you, and it blocks the water pressing from that side.</p>
+    <p>The same happens in the convergent medium. A second body sits at a distance and <strong>occludes</strong> — blocks — a cone of the directions from which pressure would otherwise arrive. Occlusion is simply this shadowing of arrival. The push from the shadowed cone goes missing; the push from the opposite, unshadowed side is now unanswered. The unanswered push carries you toward the body that cast the shadow. You are not pulled. You are pushed by what remains.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════ CH.3 ═══════════════════ -->
+<section class="chapter">
+  <div class="chapter__inner reveal">
+    <div class="chapter__num">Three</div>
+    <h2 class="chapter__title">The one force law</h2>
+    <p class="chapter__lead">Measure the shadowed cone, count the pressure it withholds, and the force writes itself.</p>
+    <p>A body of reach R₁ at distance r blocks a cone of angular size πR₁²/r² — larger when the body is big or near, vanishing when it is small or far. That withheld pressure presses on the second body's own reach, its cross-section πR₂². Multiply the deficit by the area it acts upon, and out comes the whole of it:</p>
+    <div class="eq-block">
+      <div class="eq">F = (π/4) · P<sub>conv</sub> · R₁² R₂² / r²</div>
+      <div class="eq-caption">Theorem 4 — the universal occlusion force</div>
+    </div>
+    <p>Two things fall out for free. The <strong>inverse-square</strong> falloff is not a law bolted on; it is the plain geometry of a cone's shrinking with distance in flat space — no field, no messenger particle, no action reaching across the gap. And because the formula is unchanged when the two bodies swap places, the push each feels from the other is exactly equal and opposite: Newton's third law, made a symmetry rather than a decree.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════ CH.4 ═══════════════════ -->
+<section class="chapter chapter--alt">
+  <div class="chapter__inner--wide reveal" style="max-width:var(--wide-width);margin:0 auto;">
+    <div class="chapter__num">Four</div>
+    <h2 class="chapter__title">One mechanism, three faces</h2>
+    <p class="chapter__lead" style="max-width:var(--content-width)">The same formula becomes electricity, gravity, or the nuclear bond, according only to what does the shadowing.</p>
+    <p style="max-width:var(--content-width)">Nothing changes but the reaches R and the effective pressure. What is usually laid at the door of electric charge is, here, occlusion at the scale of a proton and its electron — a matter of shadowed pressure and its handedness, not of any charged substance. At planetary scale the shadow is cast by whole displaced volumes; at the femtometre it is cast by vortices in direct contact.</p>
+    <div class="regimes">
+      <div class="r"><div class="k">Electric</div><div class="s">The proton–electron attraction, from occlusion at atomic reach. At the Bohr radius the occlusion force gives 8.23×10⁻⁸ N against a measured 8.24×10⁻⁸ N.</div></div>
+      <div class="r"><div class="k">Gravitational</div><div class="s">Shadowing by entire displaced volumes. Weak only because a body's cross-section is a vanishing sliver of the sky it could block.</div></div>
+      <div class="r"><div class="k">Nuclear</div><div class="s">Vortices meshing in contact at the femtometre — the shortest, sharpest shadow of all.</div></div>
+    </div>
+    <p class="margin-note" style="max-width:var(--content-width)">Honesty demands the caveat: that 0.12% electric agreement is the framework's single <em>calibration point</em>, not an independent triumph. It is where the one free coefficient is fixed — consistency at the anchor, which the rest of the theory must then earn elsewhere.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════ VERDICT / BRIDGE ═══════════════════ -->
+<section class="chapter chapter--deep">
+  <div class="chapter__inner reveal">
+    <div class="chapter__num">Standing</div>
+    <h2 class="chapter__title">What is earned, and what is next</h2>
+    <p class="chapter__lead">The mechanism is derived; one coefficient is calibrated. Both said plainly.</p>
+    <div style="display:flex;gap:0.6rem;justify-content:center;margin:var(--sp-lg) 0;flex-wrap:wrap;">
+      <span class="cert cert--d">DERIVED — mechanism &amp; inverse-square</span>
+      <span class="cert cert--c">CALIBRATED — the coefficient P<sub>eff</sub></span>
+      <span class="cert">1 ANCHOR · hydrogen</span>
+    </div>
+    <p>The shape of the law — occlusion, the inverse square, action equal to reaction — follows from geometry and delete-tests cleanly: strip away the comparison to Coulomb and the derivation still stands. The single <em>coefficient</em> that sets the absolute strength is fixed at the hydrogen anchor, and carries the honest CALIBRATED mark until it is derived from the medium alone.</p>
+    <p>One quiet observation opens the next Law. The very shadow a body casts on others — its gravitational weight — is the same displacement that resists being shoved. Weight and stubbornness are one geometric thing. <strong>That</strong> is why inertial and gravitational mass are equal, and it is where we go next.</p>
+    <p class="step">Next → The Laws · IV — Inertial Mass</p>
+    <div class="margin-note">The Laws · III · Convergent Boundary Pressure. Author: J. C. Harvey, Melbourne.</div>
+  </div>
+</section>
+
+<footer style="padding:var(--sp-xl);text-align:center;background:var(--midnight);color:var(--midnight-mute);font-size:var(--fs-sm);">
+  <a href="investigations.html" style="color:var(--copper-light);text-decoration:none;">← the whole picture</a>
+</footer>
+
+<script>
+(function(){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    if(e.isIntersecting){ e.target.classList.add('reveal--visible'); io.unobserve(e.target);} });},{threshold:0.12});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+
+  // ── design element: the frustrated medium cooling to the Clearing (2D → 3D on drag) ──
+  //   The phyllotactic lattice holds a frustrated oscillation. A gauge cools it and the
+  //   background slides ultraviolet → infrared. At 2997 K every dot discharges a pulse and
+  //   then relays every pulse handed to it. Drag lifts the same spiral into three dimensions.
+  var cv=document.getElementById('medCanvas'), ctx=cv.getContext('2d'), cap=document.getElementById('medCap');
+  var dpr=Math.min(window.devicePixelRatio||1,2), W=0,H=0,cx=0,cy=0,R=1,Rdisk=1,P=[],N=0;
+  var GOLD=Math.PI*(3-Math.sqrt(5)), FOCAL=560;
+  var THOT=30000, TCLR=2997;
+  function build(){ W=cv.clientWidth;H=cv.clientHeight;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
+    cx=W*0.46;cy=H/2; R=Math.min(W*0.26,H*0.42); Rdisk=Math.min(W*0.40,H*0.46); P=[];
+    var shells=6, baseN=10, total=0, s,i; for(s=1;s<=shells;s++) total+=baseN*s*s; var idx=0;
+    for(s=1;s<=shells;s++){ var rad=(s/shells)*R, n=baseN*s*s;
+      for(i=0;i<n;i++){ var y=1-2*(i+0.5)/n, rxy=Math.sqrt(Math.max(0,1-y*y)), th=i*GOLD;
+        var rr=Rdisk*Math.sqrt(idx/total), a2=idx*GOLD;
+        P.push({x:Math.cos(th)*rxy*rad, y:y*rad, z:Math.sin(th)*rxy*rad, d2:rr,
+                x2:Math.cos(a2)*rr, y2:Math.sin(a2)*rr, ph:(idx*2.3994)%6.2832, samp:(idx%13===0)});
+        idx++; } }
+    N=P.length;
+  }
+  build(); window.addEventListener('resize',build);
+
+  var flat=1, flatTarget=1, yaw=0.5, pitch=-0.3, dragging=false, lx=0, ly=0, idle=0;
+  var tc=0, phase='cool', clearAt=0, COOL=7.5, RELAY=4.5, flash=0;
+  cv.addEventListener('pointerdown',function(e){ dragging=true; flatTarget=0; lx=e.clientX; ly=e.clientY; try{cv.setPointerCapture(e.pointerId);}catch(_){} });
+  cv.addEventListener('pointermove',function(e){ if(!dragging)return; yaw+=(e.clientX-lx)*0.008; pitch+=(e.clientY-ly)*0.008; pitch=Math.max(-1.3,Math.min(1.3,pitch)); lx=e.clientX; ly=e.clientY; idle=0; });
+  window.addEventListener('pointerup',function(){ dragging=false; idle=0; });
+
+  function tempCol(frac,L){ var hue=frac*280; return 'hsl('+hue.toFixed(0)+',55%,'+L+'%)'; }
+  function frame(ts){
+    if(frame._t===undefined)frame._t=ts; var dt=Math.min(0.05,(ts-frame._t)/1000); frame._t=ts;
+    flat += (flatTarget-flat)*Math.min(1,dt*3.0);
+    if(!dragging){ idle+=dt; if(idle>4) flatTarget=1; }
+    var interacting = flat<0.5;
+    // thermal clock (paused while lifted into 3D)
+    if(!interacting){ tc+=dt;
+      if(phase==='cool' && tc>=COOL){ phase='relay'; clearAt=tc; flash=1; }
+      if(phase==='relay' && tc-clearAt>RELAY){ phase='cool'; tc=0; }
+    }
+    var frac = phase==='cool' ? Math.max(0,1-tc/COOL) : 0;    // 1 hot(UV) → 0 clear(IR)
+    var T = TCLR + frac*(THOT-TCLR);
+    flash=Math.max(0,flash-dt*1.6);
+
+    // background — the cooling spectrum, UV → IR
+    ctx.fillStyle=tempCol(frac, 13+frac*7); ctx.fillRect(0,0,W,H);
+    if(flash>0){ ctx.fillStyle='rgba(255,240,235,'+flash*0.5+')'; ctx.fillRect(0,0,W,H); }
+
+    // relay fronts (sampled) — every dot discharged, pulses handed onward
+    var relT = phase==='relay' ? (tc-clearAt) : -1, RSP=(R*2.2)/RELAY;
+    var cosY=Math.cos(yaw),sinY=Math.sin(yaw),cosP=Math.cos(pitch),sinP=Math.sin(pitch);
+    var amp = (1-flat)*0 + flat*(frac*7);     // frustrated jitter, only in 2D, scales with heat
+
+    var draw=[];
+    for(var i=0;i<N;i++){ var p=P[i];
+      var jx=amp*Math.sin(ts*0.006+p.ph), jy=amp*Math.cos(ts*0.0053+p.ph*1.7);
+      // 3D
+      var x=p.x*cosY - p.z*sinY, z=p.x*sinY + p.z*cosY;
+      var y1=p.y*cosP - z*sinP, z1=p.y*sinP + z*cosP;
+      var persp=FOCAL/(FOCAL+z1);
+      var sx3=cx+x*persp, sy3=cy+y1*persp;
+      var sx=sx3+(cx+p.x2 - sx3)*flat + jx, sy=sy3+(cy+p.y2 - sy3)*flat + jy;
+      var depth=z1*(1-flat);
+      // relay brightness: a front expanding to radius relT*RSP lights dots as it passes
+      var b=0;
+      if(relT>=0){ var wr=relT*RSP; var near=Math.abs(p.d2-wr); b=Math.exp(-(near*near)/(2*14*14))*(1-relT/RELAY); }
+      var lit = 0.5 + b*0.5 + flash*0.4;
+      draw.push({sx:sx,sy:sy,depth:depth,s:1.5+b*2.2, a:Math.min(1,lit)});
+      // sampled discharge rings
+      if(relT>=0 && p.samp){ var rr=relT*RSP;
+        ctx.beginPath(); ctx.arc(sx,sy,rr*0.5,0,6.2832);
+        ctx.strokeStyle='rgba(255,225,210,'+(0.25*(1-relT/RELAY))+')'; ctx.lineWidth=1; ctx.stroke(); }
+    }
+    draw.sort(function(a,b){return b.depth-a.depth;});
+    for(var k=0;k<draw.length;k++){ var q=draw[k];
+      ctx.beginPath(); ctx.arc(q.sx,q.sy,q.s,0,6.2832);
+      ctx.fillStyle='rgba(248,240,235,'+q.a*0.85+')'; ctx.fill(); }
+
+    // temperature gauge (right side)
+    var gx=W-40, gtop=cy-R*0.95, gbot=cy+R*0.95, gh=gbot-gtop;
+    ctx.strokeStyle='rgba(255,255,255,0.35)'; ctx.lineWidth=1.5;
+    ctx.strokeRect(gx-7,gtop,14,gh);
+    var fh=frac*gh; ctx.fillStyle=tempCol(frac,52);
+    ctx.fillRect(gx-5,gbot-fh,10,fh);
+    ctx.beginPath(); ctx.arc(gx,gbot+8,9,0,6.2832); ctx.fillStyle=tempCol(frac,52); ctx.fill();
+    ctx.font='11px "JetBrains Mono",monospace'; ctx.fillStyle='rgba(255,255,255,0.85)'; ctx.textAlign='right';
+    ctx.fillText(Math.round(T).toLocaleString()+' K', gx-14, gtop+4);
+
+    if(cap){ cap.textContent = phase==='relay'
+      ? 'the Clearing — every point has discharged, and now relays every pulse handed to it · drag to lift into three dimensions'
+      : 'the held, frustrated medium — cooling: '+Math.round(T).toLocaleString()+' K → 2997 K, where it clears · drag to lift into three dimensions'; }
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

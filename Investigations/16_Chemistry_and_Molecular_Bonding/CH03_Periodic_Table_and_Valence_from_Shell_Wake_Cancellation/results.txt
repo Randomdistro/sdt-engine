@@ -1,0 +1,62 @@
+﻿====================================================================
+  CH03 - Valence from Wake Cancellation (M0 seeded / M1 native / M2)
+  Author: J. C. Harvey, Melbourne - 2026-07-05
+====================================================================
+
+M0  SEEDED TALLY  active(n)=min(n, 2S-n) on capacities {2,8,8}
+    Z  El  n_in_period  active  standard  
+     1  H    1/2         1       1      [ok]
+     2  He   2/2         0       0      [ok]
+     3  Li   1/8         1       1      [ok]
+     4  Be   2/8         2       2      [ok]
+     5  B    3/8         3       3      [ok]
+     6  C    4/8         4       4      [ok]
+     7  N    5/8         3       3      [ok]
+     8  O    6/8         2       2      [ok]
+     9  F    7/8         1       1      [ok]
+    10  Ne   8/8         0       0      [ok]
+    11  Na   1/8         1       1      [ok]
+    12  Mg   2/8         2       2      [ok]
+    13  Al   3/8         3       3      [ok]
+    14  Si   4/8         4       4      [ok]
+    15  P    5/8         3       3      [ok]
+    16  S    6/8         2       2      [ok]
+    17  Cl   7/8         1       1      [ok]
+    18  Ar   8/8         0       0      [ok]
+    M0: 18/18 match. NOTE: capacities are CALIBRATED(1) input ->
+    matching is a RE-LABELLING unless M1 derives the filling (firewall).
+
+P2  OCTET/INERTNESS: noble = all-paired fixed point (active = 0)
+    He: active = 0  [ok]
+    Ne: active = 0  [ok]
+    Ar: active = 0  [ok]
+
+M1  NATIVE FILLING (period 2: Li..Ne as n=1..8 on cube seats, kernel 1/d)
+    n  E_min      active(min-E cfg)  needed(M0)  
+    1   0.00000   1                  1          [ok]
+    2   0.28868   0                  2          [X]  <-- native filling disagrees
+    3   1.06066   3                  3          [ok]
+    4   2.12132   4                  4          [ok]
+    5   3.91000   3                  3          [ok]
+    6   5.98735   0                  2          [X]  <-- native filling disagrees
+    7   8.54801   1                  1          [ok]
+    8  11.39734   0                  0          [ok]
+    M1: 6/8 � committed prediction: <8 means the tally is SEEDED,
+    not derived from the 1/d seat machinery -> firewall fires, cap C.
+
+M2  DIATOMIC PAIRING MAP (all mutually pairable wakes pair fore/aft)
+    N2: actives 3+3 -> residual 0 -> diamagnetic   measured diamagnetic  [ok]
+    O2: actives 2+2 -> residual 0 -> diamagnetic   measured PARAMAGNETIC [X]  KILL TRIGGER
+    NO: actives 3+2 -> residual 1 -> PARAMAGNETIC  measured PARAMAGNETIC [ok]
+    Gate anchors: chi_mol(O2) = +3449e-6 cm3/mol (paramagnetic, measured);
+    chi_mol(N2) = -12e-6 cm3/mol (diamagnetic, measured).
+
+====================================================================
+  CH03 SUMMARY
+  M0 seeded tally     : 18/18 (re-labelling unless M1 holds)
+  P2 octet fixed point: nobles zero-active (arithmetic of M0)
+  M1 native filling   : 6/8 FAIL - tally is seeded
+  M2 pairing->magnetism: FAIL on M2-O2
+  Committed-gate failures: ['M1-native-filling', 'M2-O2']
+  Exit: 1
+====================================================================

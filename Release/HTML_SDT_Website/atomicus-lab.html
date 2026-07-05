@@ -2856,12 +2856,12 @@ function drawOverlays(ctx) {
 
   pipEl.addEventListener("click", () => {
     if (!pipIso) return;
-    window.open(`atomicus-stick.html#Z=${pipIso.Z}&A=${pipIso.A}`, "_blank");
+    window.open(`nuclear-packing-sequencer.html#Z=${pipIso.Z}&A=${pipIso.A}`, "_blank");
   });
   window.__pipSetIso = function(iso) {
     pipIso = iso;
     if (pipLbl) pipLbl.textContent = iso
-      ? `${iso.sym}-${iso.A} Â· 1Î± + ${iso.nd}d + ${iso.nt}t Â· clickâ†’stick`
+      ? `${iso.sym}-${iso.A} · 1α + ${iso.nd}d + ${iso.nt}t · click→sequencer`
       : "hover an isotope";
   };
 
@@ -3090,6 +3090,16 @@ function drawOverlays(ctx) {
       }
     });
 
+    // light high-left · shadow low-right — the sequencer's signature, so the PIP image
+    // reads as the same physics (shadow = the resistance profile; overlap = the defect)
+    const spread=Math.min(pw,ph)*0.34;
+    const shg=pipCtx.createRadialGradient(cx+spread*0.5,cy+spread*0.62,spread*0.1,cx+spread*0.5,cy+spread*0.62,spread*0.9);
+    shg.addColorStop(0,'rgba(0,0,0,0.30)'); shg.addColorStop(1,'transparent');
+    pipCtx.save(); pipCtx.translate(cx+spread*0.5,cy+spread*0.62); pipCtx.scale(1,0.42); pipCtx.translate(-(cx+spread*0.5),-(cy+spread*0.62));
+    pipCtx.beginPath(); pipCtx.arc(cx+spread*0.5,cy+spread*0.62,spread*0.9,0,Math.PI*2);
+    pipCtx.fillStyle=shg; pipCtx.fill(); pipCtx.restore();
+    pipCtx.font="10px 'Segoe UI',sans-serif"; pipCtx.fillStyle="rgba(255,236,200,0.5)";
+    pipCtx.textAlign="left"; pipCtx.fillText("☀",6,12);
     const topShell=iso.Z<=2?'K':iso.Z<=10?'L':iso.Z<=18?'M':iso.Z<=36?'N':iso.Z<=54?'O':iso.Z<=86?'P':'Q';
     pipCtx.font="bold 9px 'Segoe UI',sans-serif";
     pipCtx.fillStyle="rgba(212,160,92,0.75)";

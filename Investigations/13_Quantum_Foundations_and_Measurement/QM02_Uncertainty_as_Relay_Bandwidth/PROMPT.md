@@ -150,3 +150,22 @@ time axis; map to natural linewidth Γτ ≈ ℏ. *Success:* Γ = ℏ/τ reprodu
 ---
 
 *QM02 · 10× upgrade 2026-06-29 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*
+
+---
+
+**REASSESSMENT (2026-07-04, Harvey directive — §G GATE-CONTRABAND check) — two-channel scope note,
+appended before the run completes.** The RUN_LOG commitments (frozen 2026-07-03) are untouched — no
+gate moves. This note scopes the premise only:
+
+- The band-limit thesis is a statement about the **energy/pulse channel**: the wake is a relayed
+  displacement field, and relay at c (measured light speed — unchanged) is what makes Δx·Δk ≥ ½ a
+  physical bandwidth statement. That stays.
+- Under the two-channel architecture (FLM14 RUN_LOG ADJ-7; Synchrony Theorem, FARMER_PASS
+  2026-07-03 refinements 5–6), **constraint through gear-locked clusters propagates uncapped** and
+  is not subject to the wake's Fourier band-limit. Grading consequences: (a) any FAIL/cap earned
+  here is a verdict on the *wake spectrum*, not a global "SDT cannot beat ℏ/2" — do not extrapolate
+  the bound to constraint-channel phenomena (EPR steering, QM05 joint readout, FLM14 gear phase);
+  (b) T3's determinism claim (vortex x, p sharp every tick) is if anything strengthened — the sharp
+  per-tick values are constraint-side facts, the spread is a pulse-side (readout/wake) fact. A
+  ruling conflating the two channels would be §G GATE-CONTRABAND (enforcing the rival's "all
+  information is c-capped wave content").

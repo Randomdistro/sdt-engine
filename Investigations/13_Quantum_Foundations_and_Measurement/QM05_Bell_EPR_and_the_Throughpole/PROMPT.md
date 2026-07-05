@@ -1,6 +1,9 @@
 # QM05 — Bell / EPR & the Throughpole
 
-> **Author:** J. C. Harvey, Melbourne. **Status:** SPEC (10× upgrade 2026-06-29).
+> **Author:** J. C. Harvey, Melbourne. **Status:** EXECUTED 2026-07-03 · FARMER-corrected 2026-07-03 —
+> verdict **OPEN**, cascade root **RESIDENCE-LAW** (`QM05_VERDICT.md`: local machinery caps at S = 2.0000
+> saturated; the geared-rotation mechanism, dropped in transcription, is restored in the banner below).
+> *(Spec history: 10× upgrade 2026-06-29.)*
 > **Inherits:** `PERFECT_PROMPT_TEMPLATE.md` §⓪–§⑩ · `PROMPT_EXECUTION_PROTOCOL.md` · §0 anti-creep (R0–R5).
 > **Engine:** `#include <sdt/laws.hpp>` only — no local constant namespaces.
 > **Run:** Pre-commit thresholds in `RUN_LOG.md` before coding; adjust per pivot table (§⑩).
@@ -21,8 +24,13 @@
    **pre-declares** it will fall short of 2√2 (this is correct, not a failure); Phase 2 tests the
    throughpole channel under a strict no-signalling check; the verdict is classed honestly.
 4. **What would prove us wrong?** — §⑧, three falsifiers with numeric triggers — including the
-   no-signalling guard (if the throughpole route lifts S above 2 but Alice's marginal depends on Bob's
-   setting, it implies FTL signalling and the route is rejected).
+   marginal-flatness check. **(Amended 2026-07-04, Harvey: the old wording rejected the route for
+   "implying FTL" — that imported Einstein locality, the rival's axiom, as a kill-standard (§B).
+   SDT's forms natively carry v>c CONSTRAINT propagation — the 1.83c seat, superluminal k inside
+   R_p, the instantaneous throughpole, rigid hinge units — while energy/pulses relay at c. The
+   honest gate: marginal flatness ≤0.002 as a comparison to MEASURED Bell marginals. Deviation =
+   disagrees-with-data FAIL; flat marginals WITH v>c constraint = the emergent result, since a
+   rigidity constraint carries no free energy and controllability must be shown, not presumed.)**
 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class
    (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN). **The expected landing is D/OPEN** — pre-declared,
    not repainted.
@@ -98,7 +106,7 @@ on EPR/GHZ/Leggett–Garg even if Phase 2 fails. *Success metric:* a clear OPEN 
 | # | Test | SDT prediction | What kills it (numeric) |
 |---|------|----------------|-------------------------|
 | T1 | local baseline caps at 2 | `S ≤ 2` for any strictly local relay model (expect ~2 / triangle-correlation ceiling, short of 2.828) | if the *local* model returns `S > 2`, non-locality was smuggled in (a hidden shared-setting channel) — suspect the model, do not celebrate |
-| T2 | throughpole non-signalling | if S>2, Alice's marginal `P(A given a,b)` equals `P(A given a)` to numerical precision (marginals fixed 50/50, independent of Bob's setting) | if lifting S above 2 makes Alice's marginal depend on Bob's setting by >statistical noise, it implies FTL signalling → reject the throughpole route |
+| T2 | throughpole marginal flatness | if S>2, Alice's marginal `P(A given a,b)` equals `P(A given a)` to numerical precision (marginals fixed 50/50, independent of Bob's setting) — an OBSERVED comparison to measured Bell marginals | ~~if lifting S above 2 makes Alice's marginal depend on Bob's setting by >statistical noise, it implies FTL signalling → reject the throughpole route~~ **[STRUCK 2026-07-04 per Harvey's amendment above** — that wording enforced Einstein locality, the rival's axiom (GATE-CONTRABAND, HUNTER §A/§G). Standing gate: marginal deviation >0.002 = disagrees-with-MEASURED-Bell-marginals → data-FAIL; flat marginals WITH the v>c constraint channel = the emergent result**]** |
 | T3 | verdict is honest | result classed A/C/D/F with an explicit OPEN flag where unproven; S reported as measured | if a "local Bell violation" is reported without a no-signalling proof, it is fabricated → R4 breach (auto-F) |
 
 ## Dependencies
@@ -144,7 +152,7 @@ on EPR/GHZ/Leggett–Garg even if Phase 2 fails. *Success metric:* a clear OPEN 
 |---|---|---|---|
 | P0 sanity check fails | Fix units/engine refs; verify `laws.hpp` symbols | STOP — report blocker | Fit to target |
 | P1 local model returns S > 2 | hunt the smuggled non-locality (shared-setting leak) | **OPEN** — model is suspect, not Bell | claim SDT beat Bell locally |
-| P2 throughpole lifts S but breaks no-signalling | re-examine the coupling (must be marginal-preserving) | **reject** the route; entanglement debt **stands** | report FTL signalling as a feature |
+| P2 throughpole lifts S but marginals deviate from measured Bell data (>0.002) | re-examine the coupling (must be marginal-preserving) | report **data-FAIL** (disagrees with measured marginals); debt **stands** | ~~report FTL signalling as a feature~~ **[STRUCK 2026-07-04 per Harvey's amendment above** — FTL-as-forbidden was the rival's axiom in the gate (GATE-CONTRABAND); SDT natively carries uncapped CONSTRAINT propagation in gear-locked clusters (FLM14 ADJ-7) while pulses relay at c. Forbidden now: claiming constraint-channel *controllability* (signalling) without machinery — controllability is assessed, not presumed**]** |
 | P2 throughpole caps below 2√2 | report the partial lift honestly (Class C) | **D/OPEN**; the debt is bounded, not paid | pretend 2√2 was reached |
 | Rivals (QM) match but SDT only caps at 2 | label the debt plainly | — | Claim Class A |
 

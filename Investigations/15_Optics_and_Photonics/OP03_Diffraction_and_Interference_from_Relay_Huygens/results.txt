@@ -1,0 +1,59 @@
+OP03 — Diffraction & interference from relay-Huygens summation (J. C. Harvey, 2026-07-04)
+Machinery only: arrival-time register sums over re-emitting sites.
+LAMBDA ENTRY POINT: assumed tick periodicity of the emission (see RUN_LOG).
+
+Phase 1a — discrete relay sum -> continuum envelope as site count M grows
+  M =    16   max |I_discrete - sinc^2| = 1.367e-03
+  M =    64   max |I_discrete - sinc^2| = 8.163e-05
+  M =   256   max |I_discrete - sinc^2| = 5.087e-06
+  M =  1024   max |I_discrete - sinc^2| = 3.179e-07
+  M =  4096   max |I_discrete - sinc^2| = 1.987e-08
+  [PASS] P1a-converge  monotone convergence to the continuum envelope (gate 1e-5, committed pre-run)
+
+Phase 1b — does an obliquity factor EMERGE from isotropic relay re-emission?
+  I(forward 30deg) = 4.447210e-32   I(backward 150deg) = 4.447210e-32   ratio = 1.000000
+  -> isotropic relay re-emission gives backward/forward = 1 IDENTICALLY.
+     The obliquity factor does NOT emerge; the backward wave is not suppressed.
+     Committed honest outcome: row OPEN (forward-directionality of the relay
+     rule is the unbuilt piece — same OP-root debt as OP02's pairing rule).
+  [PASS] P1b-obliquity  demonstrated non-emergence (honest OPEN, not a pass of emergence)
+
+Phase 2 — two-source and N-source geometry (d = 20 lambda)
+  two-source maxima m=1..5: worst relative error vs m*lambda/d = 0.000e+00
+  [PASS] P2-two  fringe angles from geometry (gate 0.1%)
+  grating N=10, m=1: peak at sinth = 0.05000000 (target 0.05000000)
+  peak-to-first-zero offset = 5.00000030e-03 vs lambda/(Nd) = 5.00000000e-03  (rel err 6.043e-08)
+  -> resolving power R = sinth_peak/offset = 10.000 = mN = 10 (counting statement)
+  [PASS] P2-grating  principal maxima + R = mN from site counting
+
+Phase 3 — finite apertures
+  slit a=50lambda: first null at sinth = 0.02000000 vs lambda/a = 0.02000000  (rel err 2.250e-08)
+  [PASS] P3-slit  first null (gate 0.1%)
+  disk D=40lambda (20000 site-count columns): first dark ring at sinth = 0.03049175 vs 1.21967 lambda/D = 0.03049175 (rel err 1.138e-16)
+  [PASS] P3-airy  Airy first ring (gate 0.1%)
+
+Phase 4 — lattice-granularity deviation (discrete spacing s)
+  spacing s = lambda/8     |I_discrete - I_cont| = 4.319313e-07
+  spacing s = lambda/16    |I_discrete - I_cont| = 1.075058e-07
+  spacing s = lambda/32    |I_discrete - I_cont| = 2.684678e-08
+  spacing s = lambda/64    |I_discrete - I_cont| = 6.709842e-09
+  fitted deviation exponent vs s: 2.003 (committed gate 2.0 +/- 0.2)
+  extrapolation to s = l_P (1.6163e-35 m) at 500 nm: deviation ~ 2.4e-62
+  -> HONEST NULL: ~1e-57-scale; no reachable experiment bounds it. No SDT-vs-
+     continuum-optics signature here; reported, not inflated.
+  [PASS] P4-scaling  midpoint-discretisation s^2 law; extrapolation reported
+
+HONESTY FLAGS:
+  1. Huygens summation IS interference by construction. lambda entered as the assumed
+     tick periodicity; the earned content is geometry only. CLASS: CONVERGENCE, cap C.
+  2. Obliquity/backward-wave: demonstrated NON-emergence from isotropic re-emission.
+     OPEN, traced to the OP-root debt (explicit transverse relay rule / forward
+     directionality on the discrete lattice). Not bolted on by fiat.
+  3. Sub-wavelength apertures / near-field: NOT gated (SS G) — constraint-channel
+     territory (FLM14 ADJ-7); owed a two-channel treatment, not legislated away.
+  4. Single-emission build-up (F4): the relay sum is a real disturbance sampling all
+     paths; nothing here needed a collapse. But this tool does not SIMULATE one-
+     emission arrival statistics — that is QM01's residence-histogram job. F4 = OPEN
+     here, deferred to QM01, not claimed.
+
+OP03 exit: ALL COMMITTED GATES PASS (0 gate failures)

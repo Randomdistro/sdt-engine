@@ -61,3 +61,18 @@ The poem was right: **the binary moves the sea (quadrupolar shear → tensor wav
 volume stays moved (memory = the radiated koppa), and — if the closure floor reflects — the pulse keeps coming
 back (echoes).** SDT reproduces every measured GW number without G or M, and stakes two falsifiable claims GR
 does not make.
+
+---
+
+**NOTE (2026-07-04, Harvey directive — OBSERVED-comparison, not a derivation).** Two-channel split
+made explicit. G1's speed-=-c ruling concerns the **radiative shear pulse** (energy channel) and is
+anchored to measurement (GW170817-class multi-messenger timing) — it stands untouched, as do the
+chirp, memory, and echo claims (all pulse-channel results). The **static trace** (`z = ϟ/r`, the
+sea's volume) is a *constraint*, and its effective action speed is a separate question. The
+classical Laplace aberration bound is measured-anchor-class support here: stable planetary orbits
+require the static field's effective propagation to be ≫ c (Laplace/Lightman-class aberration
+analyses give > 10⁸–10¹⁰ c), else aberration torque would disrupt orbits on short timescales. The
+rival (GR) handles this with velocity-dependent field-momentum cancellation terms; SDT's rigid
+constraint channel (FLM14 RUN_LOG ADJ-7; GOM05 rigid hinge units) handles it natively — the trace
+is a lattice constraint, not a relayed pulse, so no aberration is generated that needs cancelling.
+Label: **OBSERVED-comparison** supporting the uncapped constraint channel. No GOM06 ruling changes.

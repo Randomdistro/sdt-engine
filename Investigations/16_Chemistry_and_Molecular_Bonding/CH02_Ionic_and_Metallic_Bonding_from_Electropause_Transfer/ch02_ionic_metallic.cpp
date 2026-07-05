@@ -110,7 +110,9 @@ int main() {
     // ------------------------------------------------------------------
     std::printf("P2  GEOMETRIC OCCLUSION SUM (Evjen expanding cubes, rock salt)\n");
     double M = 0.0;
-    for (int n : {1, 2, 3, 4, 6, 8}) {
+    const int cubes[6] = {1, 2, 3, 4, 6, 8};
+    for (int ci = 0; ci < 6; ++ci) {
+        const int n = cubes[ci];
         M = evjen_madelung(n);
         std::printf("    cube n=%d : M = %.9f\n", n, M);
     }

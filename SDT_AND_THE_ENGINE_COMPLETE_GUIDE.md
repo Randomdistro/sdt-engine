@@ -5,8 +5,9 @@
 > Displacement Theory (SDT) and everything the `sdt-engine` repository computes — every primitive, every law,
 > every formula, every certification label, and a thorough, table-by-table account of how SDT relates to (and
 > mechanically *replaces the need for*) General Relativity and quantum mechanics.
-> **How to read it:** Parts 0–2 are the foundations (read first). Parts 3–6 are the spine (the Six Laws, the
-> derivation cascade, the koppa bridge, the Depth–Closure Theorem). Parts 7–13 are the domains (relativity,
+> **How to read it:** Part 0.5 is the dated state-of-the-framework snapshot (updated 2026-07-05). Parts 0–2
+> are the foundations (read first). Parts 3–6 are the spine (the Six Laws, the derivation cascade, the koppa
+> bridge, the Depth–Closure Theorem). Parts 7–13 are the domains (relativity, the two-channel architecture,
 > gravity, atoms, nuclei, particles, cosmology, gravitational waves). Parts 14–15 are the big comparison
 > tables. Parts 16–19 are the engine map, the honesty ledger, and the glossary.
 > **Honesty contract:** every quantitative claim below carries a certification label
@@ -22,8 +23,8 @@
 contacting cells ("spations")** that relay deformation at one cell per tick — and *every* physical
 phenomenon (force, mass, light, gravity, charge, the expansion of the universe) is a consequence of how that
 relay is loaded, occluded, displaced, and budgeted. There are **no free parameters**: the entire framework is
-forwarded from a whitelist of eight measured constants, and a quantity that cannot be built from them is not
-admitted.
+forwarded from a whitelist of eight measured constants — compressed, as of FLM13 (2026-07-03), to **four plus
+a thermal seat** (Part 2.1) — and a quantity that cannot be built from them is not admitted.
 
 **The four primitives** (everything else is derived): **Space** (the spation lattice), **Matter** (a
 persistent *displacement* of spations — a hard, localised, solid vortex), **Movement** (circulation +
@@ -39,6 +40,62 @@ $$ F = \frac{\pi}{4}\,P_{\text{eff}}\,\frac{R_1^2 R_2^2}{r^2} $$
 **The slogan you must internalise.** *There is no attraction.* Nothing pulls. The CMB convergence pushes; matter
 follows the path of least resistance through the resulting pressure gradient — and a closed least-resistance
 path through a radial gradient simply *is* an orbit. "Gravity" is a bookkeeping name for asymmetric push.
+
+---
+
+## PART 0.5 — STATE OF THE FRAMEWORK (SNAPSHOT, 2026-07-05)
+
+This guide is a living document; this section is its dated pulse. The first week of July 2026 was the most
+consequential in the repo's history — in both directions — and everything below is verified against the files
+named in each line, not summarised from memory.
+
+**1. The canon was repaired (2026-07-03, Harvey-authorised).** The 2026-07-02 HUNTER scour found that a small
+cluster of the framework's most-quoted "closures" — the APS04 Lamb-shift derivation (1051.8 MHz), PPT08A's
+per-spation rolling, PPT09's winding-stability proof, and CR05's H₀/f-closure — were **fabricated**: hand-typed
+verdicts contradicted (or were computed by) no tool. All four are retracted with banners on disk; the fabricated
+Lamb literal was deleted from the canon. The benchmark headline is now honest:
+**46/57 earned predictions pass (80.7%) + 11 IDENTITY (definitional, shown but never tallied) + 2 CALIBRATED
+(documented) · 0 genuine failures · 11 PENDING** — verified by live rebuild and run on 2026-07-04
+(`Investigations/INVESTIGATION_STACK.md` §2). Wherever this guide previously repeated one of the fabricated
+claims, the passage now carries a dated correction. The theory's own audit protocol caught its own worst
+results; that is the ledger working, and this guide treats it as a feature to be displayed, not an
+embarrassment to be smoothed over.
+
+**2. The audit layer grew teeth — and a mirror.** The HUNTER protocol (kill-list, cascade ledger, the seven
+questions) is now framework law, and on 2026-07-04 it gained **§G**, which audits the auditor: the faith
+ledger, the gatekeeper check, and *nothing ruled in or out out of hand*. Its case history already contains
+three catches that produced physics (Part 2.5).
+
+**3. Three architectural results landed (2026-07-03/05).**
+
+- **The two-channel architecture and the Synchrony Theorem** (Part 7A): pulses and energy relay at $c$;
+  *constraint* through a gear-locked cluster is not a propagating signal and is uncapped — and because matter
+  IS lattice structure, matter and space **cannot desynchronise**, so flat marginals (no-signalling) are a
+  theorem, not an axiom. The completed theorem opens the sharpest falsifiable fork with QM on the books.
+- **FLM13** (Part 2.1): $\{\hbar, m_e, m_p\}$ collapse to **one mass/action seat** — a baryon-count anchor.
+  The classical whitelist compresses to $\{\ell_P,\ c,\ \alpha,\ \text{one seat},\ k_B/T_{\text{CMB}}\}$. The
+  seat's VALUE stays OPEN per the Seed Theorem — now explicitly premise-classed under §G.3 (proven inside the
+  static-spation class; the FLM14 rotation DOF is the named re-open condition).
+- **GOM14** (Part 5): a mass-free koppa-density built from transit observables only holds across **693
+  multi-planet systems** (median intra-system scatter 5.9% vs 50.7% shuffled; the tightest duodecile 0.018%
+  vs 7.62% — 418× better than chance), and the same formula lands the Sun at $\varkappa_\odot = 1476.6$ m
+  (CODATA 1476.6). Class C, earned; gravity runs on lengths, times and ratios with no kilogram anywhere.
+
+**4. The strike-force wave (~30 investigations, 2026-07-04/05)** executed the quantum-foundations, condensed-
+matter, plasma, optics and chemistry suites under §G and the two-channel doctrine — zero fabrications, every
+FAIL pre-committed. The earned headlines (each with its honest verdict class) are tabled in Part 16.2; the
+kills and the roots they exposed are in Part 18.
+
+**5. The convergence.** Essentially every open *number* in the framework now queues behind **one instrument**:
+the rotating-lattice solver (ROOT-SIM / FLM14). The residence law's five debts (Born, Bell, tunnelling
+re-seeding, spin re-preparation, the double-slit count), the lock-depth of superconductivity and the nuclear
+alpha, the charge-closure gain, beta-decay's exit-channel count, and the contact wall (with a registered
+three-way numeric cross-check) all name it as owner. FLM14's run 3 delivered the first Born-adjacent exponents
+ever measured in the program — honestly **unclaimed** (one β short of the pre-committed licence) — and run 4
+(the tour-side constraint channel) is in flight. Part 18.5 is the full ledger of what is owed.
+
+**6. Nothing is committed to git.** The entire arc above lives in the working tree; two canon decisions
+(NP12's radius formula; the `cosmology.hpp` t_coupled circularity) are propose-and-wait pending Harvey.
 
 ---
 
@@ -115,6 +172,22 @@ FIRAS data). The six truly independent numbers behind the derivation cascade are
 ($\ell_P$ is adopted as a measured primitive — see the honest caveat in Part 18.4 — and $k_B$ closes the
 thermodynamics.)
 
+**The whitelist just got smaller (FLM13, executed 2026-07-03).** The koppa route to the action showed that
+$\hbar$ *is* the $W{=}1$ rung's Onsager–Feynman circulation action — $m_e\,\kappa/2\pi = m_e(\alpha c)a_0 =
+r_e m_e c/\alpha$ agree with $\hbar$ to $10^{-9}$ — but this is honestly labelled **IDENTITY-CLASS**: it
+derives what $\hbar$ *is* (the circulation quantum of the fundamental vortex), not its number. The delete-test
+then showed **no $\hbar$-free VALUE path exists** (every dimensionful atomic input encodes $\hbar$; the Seed
+Theorem held exactly as pre-committed), and $\{\hbar, m_e, m_p\}$ collapse by exhibited bijections into
+**one mass/action seat** — physically a *baryon-count anchor* (the one historically $\hbar$-free mass standard
+was the artifact kilogram: a counted lump of baryons). The compressed classical-sector whitelist is therefore
+
+$$ \{\,\ell_P \leftarrow \varkappa(g,\rho,R),\quad c \leftarrow \text{Mercury precession},\quad \alpha \leftarrow \text{pure spectral ratio},\quad \text{ONE mass/action seat},\quad k_B, T_{\text{CMB}}\,\} $$
+
+— eight inputs down to four plus the thermal seat. The seat's VALUE stays **OPEN** behind the Seed Theorem,
+and per §G.3 (Part 2.5) that impossibility result is now *premise-classed*: it was proven inside the
+static-spation class, and the FLM14 rotation degree of freedom is the named re-open condition. Labels
+unchanged until a real derivation lands. (`FLM13_VERDICT.md`)
+
 ### 2.2 The prohibitions (what may never enter a derivation)
 
 These are not "unsupported"; they are **forbidden inputs**:
@@ -151,6 +224,55 @@ a known GR/QM number by forwarding from its own primitives, that is a *feature*.
 (it still stands on the SDT derivation), whereas a fitted result collapses. Throughout this guide, "Class C
 (convergence)" means: *derived natively, happens to match — and the match was a check, not an input.*
 
+### 2.5 The audit protocol (HUNTER/FARMER — added to the framework's law in July 2026)
+
+The labels and the audit spine above say what a result *is*; the protocol layer says how results are *policed*.
+Since 2026-07-02 every investigation runs under `Investigations/HUNTER_PROTOCOL.md`, whose arc is
+**FIND → TRACE → GROUND → CORRECT → VERIFY**: a fault named but not run to its premise is half a job, because
+*the prey is never the number — the prey is the false premise under it.*
+
+**The kill-list** (any one mode = instant audit fail): IDENTITY-PASS (re-expose an input and "predict" it),
+CIRCULARITY, FISHED exponents/coefficients, FISHED RECOVERY (the symmetric trap — a manufactured *fix*),
+RETRO-PASS (widen a tolerance after seeing the number), PLUG, BORROW-SMUGGLE (a rival's machinery load-bearing
+in the chain) — and, added 2026-07-04, **GATE-CONTRABAND**: a *kill condition* that enforces a rival's axiom
+rather than a measured anchor. Gates must trace to a measurement, an internal-consistency requirement, or a
+pre-committed native criterion — never to "the rival forbids it."
+
+**The Closure Principle** (correction means CLOSE, never amputate): when the root fault is "a loop isn't
+closed" — an orphaned scale, an un-derived constant, a disconnected degree of freedom — the correction is to
+*derive the missing link*, not to delete the loose end. Amputation is a fake correction: it destroys the
+evidence of the open problem instead of paying it. "Eliminate vs tune" is a false pair; the third and usually
+correct option is **close**.
+
+**§G — the mirror (audit the auditor, 2026-07-04).** The hunter's own premises are the one blind spot the rest
+of the sheet cannot reach, so two standing questions are asked at every hunt's start and at every kill:
+
+1. **The faith ledger** — *what am I accepting on faith, and is that justified?* Every gate, every "obviously,"
+   every inherited constraint gets one explicit look. Faith is permitted only when named as faith.
+2. **The gatekeeper check** — *am I allowing the oppositional standpoint to interfere with the datastream?*
+   Rivals supply measured numbers; they do not supply the rules of evidence or the permitted instrument
+   classes. A kill condition that exists only because the rival's axioms would otherwise be violated is
+   contraband — kill the gate, not the route.
+3. **Nothing ruled in, nothing ruled out, out of hand** (Harvey's rule). Status labels are a LEDGER;
+   impossibility claims are LEGISLATION — the hunter keeps the ledger and refuses the legislation. Every
+   "cannot be derived" must carry the premise class it was proven within and its re-open condition.
+   "CALIBRATED until derived" stays absolute; "never derivable" is banned.
+
+**Why the mirror exists — the case history.** In 2026-07-03/04 three *auditor* premises were caught by Harvey,
+each producing physics on correction: (i) a **static spation** sat unexamined under every executor's solve —
+correcting it spawned the FLM14 rotating-spation program; (ii) **Einstein locality** sat inside the FLM14/QM05
+kill tables through two days of otherwise-maximum-pressure auditing — correcting it produced the two-channel
+architecture (Part 7A), which the simulation's own failure modes then converged on independently; (iii) the
+conflation **communication = desynchronisation** turned out to be the rival's, not ours — correcting it opened
+the synchronous-channel fork, the sharpest falsifiable divergence from QM on the books. The auditor got
+audited; the repo got healthier.
+
+**FARMER** is the protocol's other half: where HUNTER kills, FARMER re-reads finished hunts for *transcription
+losses* — real content dropped between Harvey's directives and the executed tools. The 2026-07-03 pass
+(`Investigations/FARMER_PASS_2026-07-03.md`) replanted four such losses (QM05's geared rotation, NP10's
+saturation-at-contact, GOM13's per-baryon column, SAR01/03's blocked-fraction ledger) and recorded the
+refinements this guide cites throughout — including the Synchrony Theorem itself.
+
 ---
 
 ## PART 3 — THE SIX LAWS (THE COMPLETE STATEMENT)
@@ -183,11 +305,15 @@ interior point is therefore just $N\varepsilon$, and the isotropic pressure it e
 $N^2=3.47\times10^{123}$ — *exactly* the "$10^{123}$" of the so-called cosmological-constant problem. In SDT this
 is not a failed vacuum-energy cancellation; it is simply **the boundary-cell count**.
 
-**CR05 extension (Class C).** Under expansion the lattice pressure tensor is isotropic and evolves
-adiabatically as $P(z)=P_{\text{conv}}(1+z)^4$, from linking-number density $\tau\propto(1+z)^3$ times
-temperature $T\propto(1+z)$. The polytropic index is $\gamma_{\text{eff}}=4$ (the topologically stiff lattice,
-4 DOFs per cell from the $W\pm1$ modes) — **not** the $4/3$ of a photon gas, yet it recovers the radiation-era
-$H\propto(1+z)^2$ without importing it.
+**The CR05 extension — retracted (dated correction, 2026-07-02).** An earlier draft of this guide presented
+CR05's pressure-tensor derivation ($\gamma_{\text{eff}}=4$, the derived $H_0$, the $f$ E→C upgrade) as a
+Class-C result. The HUNTER scour found CR05 **fabricated**: $H_0$ was hardcoded to the Planck value, the
+$\Omega$ set was Planck-2018 ΛCDM mislabelled "(from topology)", and the tool's real output contradicted the
+typed verdict. Status on disk: **KILLED as a closure; the $H_0$-from-pressure hypothesis stays OPEN**
+(`CR05_VERDICT.md` banner). What survives of the idea is honest and small: $\gamma_{\text{eff}}=4$ (the
+topologically stiff lattice) remains a *logged, untested candidate* — it is now the named candidate for the
+wake equation of state (WEOS-1, Part 18.5), where $w=+1$ is exactly what a stiff lattice would give. A
+candidate, not a result.
 
 ### LAW II — The Release Cascade  (`law_II`)
 
@@ -223,9 +349,10 @@ $F=\tfrac{\pi}{4}P_{\text{eff}}R_{\text{charge}}^4/r^2 = k_e e^2/r^2$.
 **Honesty flag (this is the framework's most load-bearing calibration).** The coefficient $P_{\text{eff}}=
 4k_e e^2/(\pi R_p^2 r_e^2)=5.225\times10^{31}\,\text{Pa}$ and the transfer ratio $f=P_{\text{eff}}/P_{\text{conv}}
 =2.125\times10^{-17}$ are **CALIBRATED (Class E)** — the hydrogen scale fixes their magnitude; they fail the
-delete-test. The $1/r^2$ **structure** is DERIVED (Class C); the **coefficient** is fitted. CR05 argues $f$
-upgrades to Class C *if* $R_{\text{CMB}}$ is itself derived from the pressure tensor — contingent on the
-assumed Friedmann structure (still open, GOM05). This is stated, not hidden.
+delete-test. The $1/r^2$ **structure** is DERIVED (Class C); the **coefficient** is fitted. *(Dated correction,
+2026-07-02: an earlier draft cited CR05's "f upgrades E→C via a derived $H_0$" — CR05 was retracted as
+fabricated; $f$ stays Class E, and the $R_{\text{CMB}}/H_0$ underivation is the true open problem, stated in
+CR03.)* This is stated, not hidden.
 
 ### LAW IV — Inertial Mass from Throughput Reorganisation  (`law_IV`, T5–T7)
 
@@ -284,7 +411,12 @@ i.e. SDT's natural mass unit lands on the **electroweak scale** with no tuning.
 **The proton/electron mass ratio.** Two independent SDT handles agree: the topological identity
 $m_p/m_e = 6\pi^5 = 1836.118$ (B26, matched to $0.0019\%$), and the winding-complexity ratio
 $m_p/m_e=[(p^2q)_e/(p^2q)_p]^{1/4}=1836.15$. The electron is $\sim10^{13}$ times more topologically complex than
-the proton. (The *full* first-principles derivation is the open $V_{\text{disp}}$ equilibrium solver, OP-1.)
+the proton. **Honest status of $6\pi^5$ (stack, 2026-06-24 scorecard):** it is a *unique, zero-parameter,
+19-ppm match* — among all simple $a\cdot\pi^b$ it is the only form within 0.1% of the measured ratio, the 6
+has a topological home ($2\times3$, the trefoil), and there is nothing to delete-test — but the **mechanism is
+untested**: *why* the proton wake integrates to $3\cdot A(S^3)\cdot A(S^5)=\pi^5$ is the wake phase-space
+integral, which queues behind the lattice solver (ROOT-SIM). A strong clue, not killed, not yet derived. (The
+*full* first-principles derivation is the open $V_{\text{disp}}$ equilibrium solver, OP-1.)
 
 **The proton radius (DERIVED, B18).** $R_p=(W+1)\hbar/(m_p c)=4\hbar/(m_p c)=0.84124\,\text{fm}$ — matches the
 muonic-hydrogen value to $0.02\%$; and inverting, $W_{\text{eff}}=R_p m_p c/\hbar-1=3.000$.
@@ -307,7 +439,7 @@ Everything flows downhill from the whitelist through four stages. This is the sp
 | | $R_{\text{charge}}$ | $\sqrt{R_p r_e}$ | $1.540\times10^{-15}\,\text{m}$ | DERIVED |
 | **3 Force law** | $k_e e^2$ | $\alpha\hbar c$ | $2.307\times10^{-28}\,\text{J·m}$ | definitional (F) — *defines* $\alpha$ |
 | | $P_{\text{eff}}$ | $m_p^2 m_e^2 c^5/(4\pi\alpha\hbar^3)$ | $5.225\times10^{31}\,\text{Pa}$ | whitelist-algebraic (CR03); circularity flagged (EMC01) |
-| | $f$ | $P_{\text{eff}}/P_{\text{conv}}$ | $2.125\times10^{-17}$ | E→C argued (CR05), contingent on Friedmann |
+| | $f$ | $P_{\text{eff}}/P_{\text{conv}}$ | $2.125\times10^{-17}$ | Class E (the CR05 "E→C" closure was retracted as fabricated, 2026-07-02) |
 | **4 Mass & stability** | $V_{\text{disp},e}$ | $3m_e\ell_P^3 c^2/\Phi$ | $9.988\times10^{-62}\,\text{m}^3$ | COMPUTED |
 | | $V_{\text{disp},p}$ | $3m_p\ell_P^3 c^2/\Phi$ | $1.834\times10^{-58}\,\text{m}^3$ | COMPUTED |
 | | $P_{cf}$ | $\rho_{\text{eff}}c^2=P_{\text{conv}}/3$ | identity ✓ | DERIVED |
@@ -346,6 +478,28 @@ velocity, with no $GM$ inserted.
 $k$ decreases toward the c-boundary $k=1$ ($v=c$, $d\tau/dt=0$, dissolution). Hydrogen's ground state sits at
 $k=1/\alpha=137$ — i.e. **137 steps from the edge** — which is the deep meaning of the fine-structure constant
 (Part 9).
+
+### 5.1 GOM14 — the koppa ontology tested on 693 solar systems (2026-07-03, Class C, earned)
+
+If the koppa really is the whole gravitational field of a body, then a *mass-free density* built purely from
+what a transit telescope measures — a period $P$ and a scaled semi-major axis $a/R_\star$, both ratios of
+lengths and times — must come out the **same for every planet of one star**:
+
+$$ q \equiv \frac{\varkappa_\star}{R_\star^3} = \frac{4\pi^2}{c^2}\,\frac{(a/R_\star)^3}{P^2} $$
+
+No $G$, no kilograms, no stellar mass anywhere in the chain. Run against the NASA Exoplanet Archive
+(`GOM14_VERDICT.md`): **693 host stars with ≥2 transiting planets (1,754 planets)** — the median intra-system
+deviation of $q$ is **5.9%, versus 50.7% when planets are shuffled between systems** (~9×); the tightest
+duodecile agrees to **0.018% versus 7.62% shuffled (418×)** — the best systems fix each other's koppa-density
+to parts in $10^4$. The **same formula applied to Earth's orbit** returns the Sun's koppa
+$\varkappa_\odot = 1476.6$ m (CODATA $GM_\odot/c^2$ = 1476.6 m) and a mean solar density of 1409.8 kg/m³
+(accepted ≈1408). One formula, ratios only, from Kepler field stars to the Sun.
+
+**The ontological point.** "$GM$" is measured superbly (the Sun's to ten digits); $G$ *alone* is the
+worst-measured constant in physics (22 ppm) — because $G$ only exists when you insist on factoring the clean
+length $c^2\varkappa$ into $G\times\text{kg}$. The kilogram split is where the uncertainty lives; the koppa
+formulation never performs it. Named caveat (honest): some archive $a/R_\star$ values carry literature density
+priors; the airtight version re-derives $a/R_\star$ prior-free from transit shape, and is logged OPEN.
 
 ---
 
@@ -405,6 +559,73 @@ velocity budget.
 
 ---
 
+## PART 7A — THE TWO-CHANNEL ARCHITECTURE AND THE SYNCHRONY THEOREM (2026-07-04)
+
+This is the newest structural member of the framework, and it earns its own part because it reorganises how
+*everything else* in this guide moves. It arrived twice in one week, from opposite directions: Harvey directed
+it as a premise (the ADJ-7 note in FLM14's run log), and the FLM14 simulations independently converged on it
+through their own failure modes (Part 9.5) — the isotropy ladder's every intermediate rung died, and the only
+survivor was the architecture Harvey had already named.
+
+### 7A.1 The two channels
+
+The lattice carries two categorically different things:
+
+| Channel | What travels | Speed | Examples |
+|---|---|---|---|
+| **Pulse channel** | deformation pulses — energy, light, signals, radiative waves | exactly $c$, always | photons, GW chirps, every "message" |
+| **Constraint channel** | the *rigidity* of a gear-locked cluster — shared structure, not a travelling thing | not a propagation at all; **uncapped** | the static $z=\varkappa/r$ field, the gear phase of a locked cluster |
+
+Nothing "moves faster than light" on the constraint channel, because nothing *moves* — a gear-locked cluster is
+**one object**, and modulating its shared constraint is a global reconfiguration, not a relay of pulses. The
+movement budget (Law V) caps the pulse channel; it says nothing about rigidity.
+
+**Measured-class support (from GOM06's re-audit).** The classical **Laplace aberration bound** is exactly this
+fork observed in the sky: stable planetary orbits require the *static* field's effective action to point at the
+attractor's instantaneous position — Laplace/Lightman-class analyses bound the equivalent propagation speed at
+$>10^8$–$10^{10}c$, else aberration torque would disrupt orbits on short timescales. GR handles this with
+velocity-dependent field-momentum cancellation terms; SDT handles it natively — the static trace $z=\varkappa/r$
+is a **constraint**, while everything radiative (the chirp, the memory, the echoes) stays on the pulse channel
+at exactly $c$ (GW170817-class timing, untouched).
+
+### 7A.2 The Synchrony Theorem (FARMER refinement 5, 2026-07-04)
+
+**No-signalling is a necessity, not an axiom and not an empirical accident.** The argument is one step deep:
+matter is not a substance sitting *in* space — matter **IS** lattice structure (M1: a persistent displacement).
+Therefore the movement of matter and the movement of space **cannot desynchronise** — even under an
+instantaneous 100-billion-light-year relocation of a constraint. Nothing travels *between* separate things;
+one fabric reconfigures as one object. No Bell experiment has ever shown Alice's marginals shifting with Bob's
+setting *because none ever can*: a marginal shift would be a desynchronisation of matter from the space it is
+made of. The "paradox" Einstein locality was invented to avoid is a category error of substance-dualism
+(matter moving *through* space, with $c$ capping everything). SDT gets the flat marginals **as a theorem** —
+where Copenhagen postulates them and Einstein locality forbids half of the correlations that produce them.
+
+### 7A.3 The completed theorem: communication ≠ desynchronisation (FARMER refinement 6)
+
+The standard no-communication argument only forbids messages encoded as **local statistical anomalies** — a
+marginal shift, which the fabric cannot produce (7A.2 stands untouched). It says nothing about the
+**synchronous channel**: a modulation of the shared constraint of a gear-locked cluster is globally synchronous
+*by construction* — both ends co-read **one object** rather than transmitting between two; marginals stay flat
+forever while the lock itself carries structure. Hence both are possible with zero desynchronisation:
+FTL relocation of constraint (transport) and FTL communication (co-rotation reading). The conflation of
+"communication" with "desynchronisation" was the rival's, not ours.
+
+### 7A.4 The falsifiable fork with quantum mechanics
+
+QM's formalism contains **no locally-readable shared-state variable** — its correlations are visible only in
+coincidence, after comparison over a classical channel. SDT's **gear phase is a local mechanical variable.**
+If the constraint phase couples to *anything* locally measurable, there is an experiment: modulate the
+constraint at one wing of a gear-locked pair, read the local phase at the other, with marginals flat
+throughout. Three outcomes, all publishable. Instrument owner: FLM14 rule-form-4 (Part 9.5). This is, on the
+books as of 2026-07-05, the sharpest falsifiable divergence between SDT and quantum mechanics.
+
+**Honest scope.** The Synchrony Theorem is architecture-level: it follows from M1 plus the two-channel split,
+and its *support* is (i) the Laplace aberration bound (measured-anchor class) and (ii) the FLM14 simulations
+independently converging on the same architecture. The gear-phase experiment is proposed, not performed; the
+constraint channel's tour-side implementation is run 4 of FLM14, in flight. Nothing here is sold beyond that.
+
+---
+
 ## PART 8 — GRAVITY AND ORBITAL MECHANICS (DIFFERENCES FROM GR)
 
 ### 8.1 The core reframing
@@ -420,6 +641,11 @@ gradient $z(r)$ makes one radial direction the path of least resistance; **orbit
 | Light deflection at the Sun | $1.75''$ | $\Delta\theta=2R_c/b$ (convergence-gradient refraction) | DERIVED, B10 (1.7505) |
 | Shapiro delay | log formula in a potential | $\Delta t=(2\varkappa/c)\ln(4r_1 r_2/b^2)$ — *accumulated closure*, local $c$ stays $c$ | 0.0000 %, GOM05 |
 | Hulse–Taylor orbital decay $\dot P$ | quadrupole formula | same (Part 13), via $GM\to c^2\varkappa$ | $-2.4029$ vs $-2.4025\times10^{-12}$, B09 |
+
+*(Honesty note, canon repair 2026-07-03: B09 rides the disclosed substitution $GM\to c^2\varkappa$ — a
+re-expression of the quadrupole result in koppa units, not an independent derivation of it. In the repaired
+benchmark ledger B09 is shown as an IDENTITY/display row, no longer tallied as an earned prediction. The
+*reinterpretation* is the content; the number was never in doubt.)*
 
 ### 8.3 Where SDT departs from GR (falsifiable)
 - **No singularities.** A black hole interior is a **maximum-compression lattice state** (E68), capped at one
@@ -466,6 +692,62 @@ Schrödinger/Dirac results because the geometry is the same; the *ontology* is n
 ### 9.4 Geometric serenity (the shell-filling rule, re-grounded)
 Electrons fill geometric voids in the nuclear convergence field — dyad (2, a line), triangle (3, a plane),
 tetrahedron (4), cube (8, "maximum serenity"). The octet rule is geometry, not an exclusion postulate.
+*(2026-07 caveat: CH03's O₂-paramagnetism test killed the **static** shell-filling pairing map — the void
+picture survives only in the rotating-spation frame below, where a "filled void" is a seat on a tour, not a
+parked electron. The fifth independent field to fail at the static-spation premise; see 9.5.)*
+
+### 9.5 The rotating spation and the sequential electron (FLM14 — the all-in premise, runs 1–3)
+
+Harvey's 2026-07 premise sharpens the stroboscopic picture into a program: **the spation itself rotates**, and
+the electron's positions are a **deterministic, gear-stepped TOUR** of lattice seats — the "orbital" is a
+*sequence*, and the Born weighting is *dwell time*. This is the named premise-root under the residence law
+(Born/Bell), the PPT08 Lamb seats, the NP10 nuclear lock, FLM03's rotation field and even $\varepsilon=h\nu$.
+Three runs in (`FLM14_VERDICT.md`), the honest state is:
+
+- **Run 1 — the earned support:** antisymmetric contact gearing cannot be globally smooth on a lattice with
+  odd rings — **34.7% of bonds are unsatisfiable** (frustration 0.347), so rotation **must be carried by
+  defects**. Particles are *forced to exist* by the gearing premise itself — OP-2's carriers falling out as a
+  structural necessity, labelled NATIVE.
+- **The rule-form ladder (runs 1–3):** global-clock gating ×7.47 anisotropy (KILLED) → bond-local ×2.29 (FAIL)
+  → bond-local + entrainment ×1.35 best non-degenerate (KILLED) → **rule-form-4, the two-channel split** (pulse
+  at $c$, constraint rigid): anisotropy ×1.0000 ± 0.0000. Stated plainly, as the verdict does: form-4 does not
+  *earn* the isotropy gate — it **dissolves** it by architecture; gearing lives on the constraint channel and
+  the pulse channel cannot see it. The ladder's lesson was never "anneal harder" but "gearing and relay are
+  different channels" (Part 7A).
+- **Run 3 — the falsifiable residue:** the constraint network **percolates** — 85.5% of sites join one rigid
+  cluster whose collective rotation collapses to $|\Omega|/\omega_0 = 0.0046$ (gear-locking freezes rotation),
+  with 47.9% of bonds locked (the $W=0.5$ duty forecast, an honest match). A near-static rigid backbone
+  threaded by frustration-forced carriers — **OP-2's picture arrived at from the gearing side.**
+- **The first Born-adjacent exponents ever measured — and not claimed:** the seat-occupancy exponent
+  $p_{\text{occ}} = +2.375 / +2.325$ at β = 0.2/0.4 (robustness variant +2.291). Two consecutive defined betas;
+  the pre-committed licence requires three; split-half and seed-replication checks fail. Direction of travel
+  reported, **nothing graded** — the statistics gate held. *(Scoping annotation, 2026-07-05, Harvey's §G audit:
+  run 3's constraint channel was implemented in the lattice only — the tour itself ran single-channel, so both
+  the exponents and the NP14-seat probe negative are scoped to the uncorrected instrument.)* **Run 4** — the
+  tour-side constraint channel, new pre-committed ADJ — is the licensed instrument for both questions, in
+  flight as of 2026-07-05.
+
+### 9.6 The Lamb "shift" is a spacing — the native target table (PPT08_KOPPA_TARGET, 2026-07-04)
+
+The angular-DOF problem (why $2S_{1/2} \ne 2P_{1/2}$) remains **OPEN** — the APS04 "closure" was retracted as
+fabricated (Part 15) — but the target is now, for the first time, **well-posed in native coordinates**
+(`PPT08_Angular_DOF_from_Trefoil/PPT08_KOPPA_TARGET.md`, class RE-EXPRESSION, not extraction):
+
+- **Reframing (Harvey): a spacing, not a shift — Dirac was simply wrong.** The word "shift" embeds the rival's
+  failed expectation: Dirac's structure *forbade* any 2S/2P splitting, and the measurement violated his
+  theorem. In SDT two geometrically different seats at the same $n$ have no reason to coincide — the splitting
+  is the *null expectation*; degeneracy would have been the anomaly.
+- The measured **1057.8 MHz ≡ a 0.703 m/s seat-speed offset ≡ a 0.272 fm radial offset at n = 2** (one
+  quantity, three rulers, via $v=c\sqrt{\varkappa/r}$).
+- The **three-seat grading table**: H n=2 → 0.272 fm; H n=3 (~314.9 MHz) → 0.410 fm; He⁺ n=2 (14,041.1 MHz) →
+  0.452 fm. Δr is seat-dependent — any future mechanism is graded against the *table*, not against 1057.8
+  alone.
+- The **$R_p/3$ cluster** (trefoil node radius 0.2805 fm vs the n=2 offset 0.2722 fm, −2.9%) is logged
+  **[OPEN]** — privileged, mechanism untested, fishing forbidden. Either coincidence or the mechanism's first
+  fingerprint; the three-seat table decides.
+
+The canon carries only `lamb_shift_measured_MHz = 1057.845` as an OBSERVED input. Nothing in the target table
+is promoted to derived.
 
 ---
 
@@ -496,6 +778,64 @@ $$ \boxed{n_t=A-2Z,\qquad n_d=3Z-A-2},\qquad A=4+2n_d+3n_t,\qquad Z=2+n_d+n_t $$
 - **The neutrino is a receipt:** every winding reconfiguration files an open-winding receipt (a neutrino). The
   cosmic $\nu$/baryon ratio $\sim10^9$ is the running total of matter's construction history.
 
+### 10.1 The mass defect is shadow overlap — the meshing IS the defect (2026-07-03/04)
+
+The Nuclear Packing Sequencer (`Release/HTML_SDT_Website/nuclear-packing-sequencer.html`, with its narrated
+companion `nuclear-packing-walkthrough.html` — part of the site family that also includes `sdt_walkthrough.html`
+and the `st_00`–`st_04` law-by-law scrollthroughs) turns the grammar into a live geometric model, and it
+carries the framework's current account of binding energy. Occlusion is an *area* phenomenon ($\pi R_p^2$ per nucleon), so
+when trefoils interleave, their shadows **overlap** — and the shared occlusion must be counted **once, not
+twice**. The bookkeeping is *union, not sum*:
+
+$$ \Delta A = \sum_i A_i - A_{\cup}, \qquad E_{\text{bind}} = \kappa\,\Delta A $$
+
+One scale κ; the shadow union tracks the measured binding of **217 isotopes at R² = 0.981** under the
+opposition-packing geometry (α = 4-fold, triton = 3, deuteron = 2, holes toward the shared centre), mean error
+under nine parts in a thousand of total binding. The conceptual load-bearer (FARMER refinement 3): **the
+meshing IS the mass defect.** When forms mesh they work in parallel, in synchrony — the meshed pair needs less
+total movement-resistance than the two isolated forms, and the *saving* is the defect. Corollary: you cannot
+use the width of a form to measure movement once forms interleave — the interleaved region is not attributable
+to either form separately, which is exactly why the literature's "the proton radius changes in nuclei" puzzles
+dissolve. This is the same statement FLM12 earned independently from the relay side ("mass defect = synchrony
+saving") — two routes, one fact. Honest residuals: the pure-area model over-binds the α-cluster and misses the
+iron peak; the missing piece is the shared-seat well depth — the same ROOT-CONTACT closure as 10.3. And the
+stability question answers itself natively: bound rotators don't radiate — *that is what stability is.*
+
+### 10.2 The neutron's 0.782 MeV — the seat, the electron, and the neutrino's complement (NP14/NP22)
+
+The neutron-identity thread ($n = p + \text{internal } e^-$) reached a sharp, honestly-graded state in July:
+
+- **Earned (NP14):** the sign and structure. The neutron is heavier because it *holds* an extra electron
+  (+0.511 MeV, structural) on a seat *above* the free $p+e$ ground — which is exactly why β-decay is downhill.
+  $\Delta m$ splits cleanly as $1.293 = 0.511 + 0.782$, and the 0.782 is $Q_\beta$ — an identity, never sold as
+  a prediction. The native magnitude map came in at **−23.3% (FAIL → OPEN)**; the seat *depth* itself
+  (1.830c) is solid to 0.006% by two independent routes, so the debt is the depth→energy map.
+- **The appendix candidate ([OPEN], look-elsewhere applies):** the 0.782 MeV the verdict failed to produce is
+  *exactly* the relativistic kinetic energy of the internal electron at $v = 0.9186c$:
+  $(\gamma-1)m_ec^2 = 0.782$ MeV. The best geometric candidate for that speed — $(m_p/m_e)/2000$, "half of
+  1836" — sits 0.06% off. And Law V's budget gives the complement: $\sqrt{1-0.9186^2} = 0.395c$ — **the
+  neutrino takes the other side of the speed.** If it holds, it buys the continuous β spectrum (variable
+  partition of one fixed internal speed), the endpoint (electron takes all of it), and ν̄ handedness (the
+  released gear sense) in one stroke. Logged as a candidate, not a result.
+- **The test was run and it taught something bigger (NP22, 2026-07-04):** grading the 0.9186c-seat unwinding
+  against the measured free-neutron β *shape* — **FAIL → OPEN, and the entire 1-DOF release-measure class is
+  KILLED knob-proof** (the committed isotropic measure missed at KS D = 0.49 vs gate 0.15; verified for four
+  declared measures). The reason is structural: the Kurie plot's endpoint exponent +2 and low-energy +½ are
+  **per-particle 3-D state-count fingerprints** — one release angle has no sphere. SDT must *earn its spheres*
+  from seat geometry: the owed object is a native 3-D exit-channel count $N_{\text{exit}}\propto E^2$, whose
+  lineage runs straight to FLM14's sequential occupancy (Part 9.5). The endpoint at $Q = 0.782333$ MeV is an
+  IDENTITY, never tallied; the continuum's *existence* is earned (cheap).
+
+### 10.3 Canon decisions pending (propose-and-wait, honoured)
+
+- **NP12 — the nuclear radius formula.** The canon rule $R = Z\cdot R_p$ is **KILLED by 908 IAEA measured
+  radii** (RMS 890.8% — 179× off). The zero-fit native replacement is ready:
+  $R = R_p\,(A/\eta)^{1/3}$ with $\eta = \pi/\sqrt{18}$ (close-packing density) → **4.96% RMS**, degenerate
+  with the fair $A^{1/3}$ rival globally but winning at isotope-chain level (Ca chain 1.67% flat vs 8.63%).
+  No canon edit has been made — the decision is Harvey's.
+- **`cosmology.hpp` t_coupled** — flagged circular ($\equiv$ BAO_scale/$c_s$); blocks two cosmology routes.
+  Also Harvey's call.
+
 ---
 
 ## PART 11 — THE PARTICLE SPECTRUM (TOPOLOGY, NOT A ZOO)
@@ -522,24 +862,29 @@ diffraction is lattice scattering of the vortex (all VERIFIED in the corresponde
 | Topic | SDT account | Label |
 |---|---|---|
 | CMB redshift | $z=T_{\text{rec}}/T_{\text{CMB}}-1=1089$ | DERIVED (B13) |
-| Pressure evolution | $P(z)=P_{\text{conv}}(1+z)^4$, $\gamma_{\text{eff}}=4$ (topological stiffness) | C (CR05) |
-| Hubble constant | $H_0=67.4$ km/s/Mpc via the pressure tensor + (assumed) Friedmann structure | C-flagged |
+| Pressure evolution | $P(z)\propto(1+z)^4$, $\gamma_{\text{eff}}=4$ (topological stiffness) | **candidate only** — the CR05 "derivation" was retracted as fabricated; $\gamma_{\text{eff}}=4$ survives as the logged, untested WEOS-1 candidate |
+| Hubble constant | $H_0$ from lattice pressure | **OPEN** — CR05's closure retracted (its $H_0$ was hardcoded to Planck); $R_{\text{CMB}}/H_0$ remains the underived input (CR03) |
 | Cosmological "constant problem" | the $10^{123}$ is $N^2=4\pi$-scaled boundary-cell count, not a vacuum-energy failure | DERIVED |
-| BAO sound horizon | $r_s\approx147$ Mpc; topological freeze-out (factor-4 linking drop at recombination) | COMPUTED (B15) |
-| Cosmological redshift | depth accumulation $z=1/k^2$ along the line of sight (GOM01/CR01, $zk^2=1$) | C |
+| BAO sound horizon | $r_s\approx147$ Mpc | COMPUTED (B15; carries an exact-literal debt in the repaired ledger — the freeze-out narrative is PARTIAL per GOM01's re-audit) |
+| Cosmological redshift | depth at emission ($z=\varkappa/r$) + a propagation term along the line of sight | C on emission; the **propagation law $d(z)$ is honestly OPEN** — the exponential strain law is doubly falsified (CR06 SNe; CR08 BAO), the octave/cubic-rung successor has no distance closure yet, and CR09's isotropic radial κ-gradient was killed 0/122 by an exact three-way pincer |
+| SDT vs ΛCDM head-to-head | Tolman surface brightness, the CMB $(1+z)^4$ energy density, Pantheon SNe | **DEGENERATE** (CR10/11/12): SDT *matches* without a dark sector but does not *beat* ΛCDM; the one remaining separator is the κ(z)/BAO-CMB acoustic-peak decider |
 | Dark matter | replaced by convergence-disk occlusion + derived $a_0$ floor | C/PARTIAL |
 | Dark energy | a pressure-gradient *misreading* of the lattice EOS, not a substance | SPEC |
 
-**Honest flag:** the Friedmann *structure* is currently assumed (not yet SDT-derived) and the $\Omega$
-normalisation is observational — so $H_0$ is **C-flagged**, the one place the cosmology leans on borrowed
-scaffolding (GOM05 is the route to remove it).
+**Honest flag (rewritten after the 2026-07-02 scour):** the earlier draft's "$H_0=67.4$ derived, C-flagged"
+rested on CR05, which is retracted (its tool hardcoded the answer). The true state is starker and cleaner:
+$R_{\text{CMB}}$ (equivalently $H_0$) is an **observational input**, the Friedmann structure is not
+SDT-derived, and the three classical cosmology tests all tie the rival rather than beating it. What SDT's
+no-expansion reading *does* buy without a dark sector — the Hubble-tension dissolution (emission and
+propagation terms conflated by ΛCDM), the $10^{123}$ as a cell count, the BAO shells as physical structure —
+stands, each at its labelled class. The decider is named: the κ(z) unified fit against the CMB acoustic peaks.
 
 ---
 
 ## PART 13 — GRAVITATIONAL WAVES (GOM06: "MOVE THE SEA, DON'T MAKE WAVES")
 
 SDT's account of LIGO/Virgo events, gate by gate (full investigation in
-`Investigations/CQ44_Gravitational_Wave_Mechanism/`).
+`Investigations/06_Gravitation_and_Orbital_Mechanics/GOM06_Gravitational_Wave_Mechanism/`).
 
 ### 13.1 The mechanism
 A GW is **the medium being moved, not a ripple made in it.** The relay-lattice deformation is a strain tensor
@@ -547,6 +892,12 @@ $\varepsilon_{ij}$ whose **trace** is the depth $z$ (static gravity, the Depth�
 **traceless shear** is the radiative wave. The sea's *volume* (trace) is the static field; its *shape* (shear)
 is the gravitational wave. This makes the GW **tensor-polarised by construction** — exactly GR's two modes
 $h_+,h_\times$ — with no scalar–tensor tuning.
+
+*(Two-channel update, 2026-07-04: the split above is now understood as the two channels of Part 7A — the
+radiative shear is a **pulse-channel** phenomenon and travels at exactly $c$ (GW170817 timing untouched), while
+the static trace $z=\varkappa/r$ is a **constraint** whose effective action the Laplace aberration bound
+requires to be $\gg c$. GR pays for the same fact with velocity-dependent cancellation terms; SDT gets it from
+the architecture.)*
 
 ### 13.2 The chirp as a length (no $G$, no $M$)
 The inspiral is governed by the combined c-boundary $\varkappa_{\text{tot}}=\sum GM_i/c^2$:
@@ -614,45 +965,102 @@ more fundamental.
 | Neutrino moment | tiny but nonzero (SM) | $\mu_\nu\equiv0$ exactly (open $W=0$ winding) | PPT04 |
 | Magnetic monopole | allowed, unobserved | forbidden — a half-vortex is topologically impossible | E58 |
 | Hyperfine / 21 cm | spin-flip with magnetons | whirl-on-whirl overlap of the proton–electron dyad | B05 |
-| Tunnelling, entanglement | nonlocal/indeterminate postulates | *open* — SDT seeks a local lattice mechanism (see Part 18) | — |
+| The Born rule $\lvert\psi\rvert^2$ | postulate | the **square is elastic energy** (derived — see below); the landing law is the one open scalar (RESIDENCE-LAW, owner FLM14) | QM04 |
+| Uncertainty $\Delta x\Delta p\ge\hbar/2$ | operator postulate | relay-bandwidth floor from lattice granularity — the ½ floor and the finite spation are the same fact | QM02 |
+| Tunnelling | wavefunction leakage | wake leakage through an occlusion slab — native barrier form; Schrödinger's constant is its NR *limit* | QM03 |
+| Spin two-valuedness | intrinsic SU(2) | binary circulation handedness $\eta=\pm1$ — two spots, no middle, native | QM07 |
+| Entanglement / no-signalling | nonlocality + no-communication *postulates* | the **Synchrony Theorem** (Part 7A): matter IS lattice structure ⇒ marginals cannot shift, as a theorem; correlations ride the constraint channel | QM05/FARMER |
 
-**The native angular DOF (PPT08/APS04 — a 2026-06 closure).** SDT now **does** have a native angular degree of
-freedom: the trefoil's **three-fold ($C_3$) wake multipole** (APS04) gives the $\ell=0/2/3$ harmonics
-($\Phi_0\sim r^{-1}$, $\Phi_2\sim r^{-3}$, $\Phi_3\sim r^{-4}$) and the selection rule $m_3=3k$, with **no
-imported spherical harmonics**. From it the **Lamb shift falls out at 1051.8 vs 1057.845 MHz (0.57 %) with
-ZERO fitted constants** — the $s$-like (equatorial) vs $p$-like (polar) orbits couple differently to $\Phi_2$,
-giving the correct sign and magnitude. This **supersedes** the old calibrated B04 ($k_{\text{Lamb}}=12.7227$),
-which has not yet been refactored to use the APS04 mechanism (APS04 is recorded as the canonical *candidate*,
-Class C, pending benchmark integration).
+**The angular DOF and the Lamb shift — the retraction this guide owes you (2026-07-02/03).** An earlier
+version of this section reported that APS04 derived the Lamb shift "at 1051.8 vs 1057.845 MHz (0.57%) with
+zero fitted constants" from the trefoil's $C_3$ wake multipole. **That result was fabricated.** The HUNTER
+audit found the solver never compiled, the results were hand-typed, the formula with its own inputs yields
+≈3145 MHz — and the 1051.8 was fished. The fabricated literal had also been laundered into the canon via B04;
+both are now deleted (`APS04_VERDICT.md` retraction banner; canon repair 2026-07-03). The honest state:
+**PPT08 (the native angular DOF) is OPEN; the SDT Lamb amplitude is unbuilt.** What the episode *bought* is
+Part 9.6 — the target is now well-posed in native coordinates (Lamb = a seat **spacing**, not a "shift";
+0.272 fm at n=2; the three-seat grading table), and any future mechanism is graded against that table under
+the fishing prohibition. A framework that publishes its own retraction in its teaching document is doing the
+thing the honesty contract promises.
+
+**The quantum-foundations strike force (2026-07-04) — what a lattice mechanics actually earned.** Executed
+under §G with pre-committed gates, zero fabrications:
+
+- **QM04 (Born rule): the *square* is no longer a postulate.** The field code contains only real travelling
+  carriers $\cos(kr-\omega t)$; time-averaging the summed displacement squared produces the full
+  envelope·$\cos^2$ fringe to RMS $3.3\times10^{-14}$ — **with $\cos^2$ appearing nowhere in the code.** The
+  "amplitude-squared" is the stored elastic energy of a superposed displacement field: geometric, not
+  axiomatic. Normalisation ($\Sigma P=1$) and positivity are structural (count conservation; elasticity). What
+  remains open is one scalar law — landing counts ∝ energy density — and the run's sharpest result is a
+  pre-registered *negative*: naive least-resistance steering misses by 215% RMS, so "any steering gives Born"
+  is dead as a hand-wave. The residence law is specific, owned by FLM14 rule-form-4, and its acceptance test
+  (<1% RMS from a mechanical rule, beating the killed null) is on file.
+- **QM03 (tunnelling): the barrier form is native, and Schrödinger is its limit.** The relay solver (which
+  never saw WKB) produces evanescent decay with
+  $\kappa_{\text{native}}^2 = 2m(V-E)\bigl(1+(V+E)/2mc^2\bigr)$ — the textbook $\sqrt{2m(V-E)}/\hbar$ is the
+  **non-relativistic limit** of the native form, and SDT predicts a *falsifiable high-barrier departure* at
+  $V,E\sim mc^2$. Downstream, zero-fit: STM decay 0.94 current-decades/Å; **Geiger–Nuttall α-decay linearity
+  R² = 0.9997 across 24 decades of half-life** (worst nuclide 0.54 decades, slope within 3.4%). The traversal
+  time *saturates* (Hartman-like) — under the two-channel doctrine a native outcome to hold against attoclock
+  data, not a paradox to suppress.
+- **QM02 (uncertainty): the ½ floor is lattice granularity.** The energy-weighted width product has a floor of
+  ½ for every buildable pulse; at the lattice scale the floor survives *because* a site carries
+  $\Delta x \ge a/\sqrt{12}$ — **the uncertainty floor and the finite spation are the same fact**, with a
+  testable fingerprint $\tfrac12(1+O(a^2/\Delta x^2))$. The floor binds the pulse channel only.
+- **QM07 (spin): two-valuedness is native.** Binary circulation handedness gives two spots and no middle —
+  machinery, not postulate. The *sequential* Stern–Gerlach $\cos^2(\theta/2)$ is honestly FAILED by the naive
+  hidden-vector law (RMS 0.072) and lands in the same residence law as Born and Bell.
+- **QM05 + the Synchrony Theorem (Part 7A): Bell's burden relocated.** A bare marginal-preserving joint rule
+  reaches CHSH $S=4.0$, so SDT's entire burden is the specific $\cos^2(a-b)$ joint weighting — the same one
+  scalar law again. Flat marginals are a *theorem* (7A.2); FLM14's run 3 measured the first Born-adjacent
+  exponents ($p_{\text{occ}}=+2.375/+2.325$) and **did not claim them** (one β short of the licence); CHSH runs
+  stay correctly unlicensed until a stable regime exists.
+
+Five apparent postulates; after the wave, **four are machinery and the fifth is one named scalar law with an
+owner, an acceptance test, and a killed null.** That is the honest scoreboard — no more, no less.
 
 **The honest boundary that remains.** Two things an earlier draft mislabelled are *dissolved*, not gaps:
 **charge** (a QM abstraction — SDT has *occluded influx directionality*, not a charge primitive; $\alpha$, not
 $e$, is in the whitelist) and the **fixed $\ell_P$** (GOM05 makes it a variable closure *field*
 $\ell_P(r)=\ell_{P,\infty}(1-z)$, derived as the koppa = wake fixed point from hydrogen geometry, not $G$). What genuinely remains:
 multi-electron atoms (**PENDING**, B06); the **$P_{\text{eff}}$ force coefficient calibrated to hydrogen**
-(`laws.hpp` Class E); the **assumed Friedmann structure** behind $H_0$; and **quantum measurement /
-entanglement**, not yet mechanised. The QM *rule book still computes correctly*; SDT's claim is that where it
-has supplied a mechanism, the mechanism is local, hard, and deterministic — and the remaining gaps are honestly
-logged, not papered over.
+(`laws.hpp` Class E); the **observational $R_{\text{CMB}}/H_0$** behind the cosmology (Part 12); the **native
+angular DOF / Lamb amplitude** (OPEN, graded against the Part 9.6 table); and **the residence law** — the one
+scalar into which measurement, Born, Bell and sequential spin have all been compressed, owner FLM14. The QM
+*rule book still computes correctly*; SDT's claim is that where it has supplied a mechanism, the mechanism is
+local, hard, and deterministic — and the remaining gaps are honestly logged, not papered over.
 
 ---
 
 ## PART 16 — THE BENCHMARK LEDGER (B01–B29, THE REGRESSION FLOOR)
 
 `Benchmarks/B01_B25/benchmarks_b01_b25.cpp` is the end-to-end verification; it self-reports PASS/FAIL against
-measured constants. The certification status is shown — note the honesty: only one carries a fitted parameter.
+measured constants.
+
+**The honest headline (canon repaired 2026-07-03, verified by live rebuild+run 2026-07-04):**
+
+> **46/57 earned predictions pass (80.7%), plus 11 IDENTITY (definitional — shown, never tallied) and
+> 2 CALIBRATED (Class E, documented) · 0 genuine failures · 11 PENDING (known-open, flagged).**
+
+This supersedes both the old "all 25 PASS" and the interim "62/73" tallies — the latter counted definitional
+identities and calibrated fits as earned passes. The repair's principle: **identities are shown, never
+tallied.** A number the tool read in (or that is true by substitution, like $GM\to c^2\varkappa$) is displayed
+for the reader as an identity row, and is not allowed to inflate the score. In the same repair the fabricated
+Lamb literal (1051.8, laundered through B04) was **deleted** — B04 now reports "SDT amplitude OPEN (PPT08) —
+no earned prediction" — and B09/B21 were demoted to display-only identity rows. The per-benchmark table below
+keeps the guide's original walk-through, with the repaired rows corrected in place.
 
 | # | Verifies | Result | Label |
 |---|---|---|---|
 | B01 | H energy levels | $E_n=-\text{Ry}\,Z^2/n^2$ | DERIVED |
 | B02 | Multi-ion Rydberg (He⁺, Li²⁺) | exact spectral match | DERIVED |
 | B03 | Fine structure, g-factor | $2P$ split $4.528\times10^{-5}$ eV; $g=2.00232$ | DERIVED |
-| B04 | **Lamb shift** | $1051.8$ vs $1057.845$ MHz (0.57 %) | benchmark still **CALIBRATED** ($k_{\text{Lamb}}$); **superseded by APS04's zero-fit native derivation** (Class C), pending integration |
+| B04 | **Lamb shift** | *(fabricated 1051.8 literal DELETED, canon repair 2026-07-03)* | reports "SDT amplitude **OPEN (PPT08)** — no earned prediction"; measured 1057.845 MHz kept as OBSERVED input; target table = Part 9.6 |
 | B05 | Hyperfine 21 cm | $1420.405$ MHz | DERIVED (line OBSERVED; mechanism re-narrated) |
 | B06 | Multi-electron ionisation | Slater screening | **PENDING** (open atoms problem) |
 | B07 | Stefan–Boltzmann, Wien | $\sigma_{SB}=5.670\times10^{-8}$; $\lambda_{\max}T=2.898\times10^{-3}$ | DERIVED |
 | B08 | Earth orbital velocity, $GM_\odot$ | $29783$ m/s; $1.327\times10^{20}$ | DERIVED |
-| B09 | Hulse–Taylor $\dot P$ | $-2.4029$ vs $-2.4025\times10^{-12}$ | DERIVED |
+| B09 | Hulse–Taylor $\dot P$ | $-2.4029$ vs $-2.4025\times10^{-12}$ | **IDENTITY, display-only** (rides $GM\to c^2\varkappa$; de-tallied 2026-07-03) |
 | B10 | Mercury precession; light deflection | $42.98''$; $1.7505''$ | DERIVED |
 | B11 | Earth & Jupiter $J_2$ | uniform-fluid estimate | **PENDING** |
 | B12 | Stellar $zk^2=1$ (5 stars) | $=1.0$ across 10 orders | DERIVED |
@@ -664,7 +1072,7 @@ measured constants. The certification status is shown — note the honesty: only
 | B18 | Proton radius (W+1), He-4 | $R_p=0.84124$ fm (0.08 %); $R_{He}=2R_p$ | DERIVED |
 | B19 | Beta-decay Q-value | $0.782$ MeV | DERIVED |
 | B20 | $zk^2$ universality | $=1.0$ exact | DERIVED |
-| B21 | EM/grav force ratio | $\approx2.27\times10^{39}$ | COMPUTED |
+| B21 | EM/grav force ratio | $\approx2.27\times10^{39}$ | **IDENTITY, display-only** (de-tallied 2026-07-03) |
 | B22 | Pressure hierarchy | $P_{\text{eff}}=5.225\times10^{31}$; $f=2.125\times10^{-17}$ | COMPUTED |
 | B23 | Coulomb identity $k_e e^2=\alpha\hbar c$ | 0.1 % | DERIVED |
 | B24 | Exclusion volumes; marginal stability | $P_{cf}/(P_{\text{conv}}/3)=1.0$ | COMPUTED/DERIVED |
@@ -674,48 +1082,104 @@ measured constants. The certification status is shown — note the honesty: only
 | B28 | Depth-closure $z=\varkappa/r$ | solar redshift; Earth $v=c\sqrt{\varkappa/r}$ | COMPUTED/DERIVED |
 | B29 | GW chirp as length (GW150914) | $f_{\text{isco}}$ from $\varkappa_{\text{tot}}\approx96$ km | COMPUTED |
 
+*(Residual ledger debts, on record: B15/B16/B25 carry exact-value literals to be re-derived in place;
+the ATOMICUS P_CMB fossil touches ~119 files. Known, logged, unpaid — not hidden.)*
+
+### 16.2 The strike-force earns (2026-07-04/05) — the honest-numbers table
+
+The July wave ran roughly thirty investigations across quantum foundations, condensed matter, plasma, optics
+and chemistry under §G. These are not benchmarks (they live in `Investigations/**/*_VERDICT.md`), but they are
+now part of the framework's quantitative floor. Verdict classes are quoted exactly as filed — nothing below is
+promoted past its class:
+
+| Inv | The earned thing | Number | Class |
+|---|---|---|---|
+| QM04 | the Born *square* = elastic energy of the summed displacement field ($\cos^2$ nowhere in code) | cross-term RMS $3.3\times10^{-14}$; steering null killed at 215% RMS | NATIVE machinery; residence law OPEN |
+| QM03 | native barrier form; Schrödinger = its NR limit (falsifiable high-barrier fork); Geiger–Nuttall zero-fit | R² = 0.9997 over 24 decades of $t_{1/2}$; STM 0.94 dec/Å | CONVERGENCE + fork |
+| QM02 | uncertainty ½-floor from lattice granularity (floor ≡ finite spation) | min 0.5048 with site-width rule; fingerprint $\tfrac12(1+O(a^2/\Delta x^2))$ | CONVERGENCE (pulse channel) |
+| QM07 | spin two-valuedness native (binary handedness → two spots, no middle) | sequential $\cos^2(\theta/2)$ FAILS naive law (0.072) → residence law | NATIVE (two-valuedness) / OPEN (sequence) |
+| CM01 | superconductivity chain with circularity structurally impossible; isotope effect | isotope exponent **−0.5000** (Hg anchor 0.50±0.03) | NATIVE structure; η = T_c/θ_D magnitude OPEN (ROOT-B) |
+| CM04 | Debye temperature from measured sound speeds + one geometric rule | θ_D(Cu) = 341.8 K vs 343 (**−0.4%**); diamond +3.3%; NaCl −10.1% FAIL reported | CONVERGENCE 3/4 |
+| CM06 | quantum-Hall edge-channel count robust over disorder | **ν = 2 exact** over three orders of density | CONVERGENCE, conditional on ROOT-A (h-cell) |
+| PM01 | the Ampère force exponent is a conservation theorem, not a fit | $\lvert w\rvert$ exponent **−1.0000** (forced); non-conserving control −2.0000 fails as it must | NATIVE |
+| PM04 | Debye screening — **the wave's first full RECOVERED** (premise traced, closed via the TD02 bath) | λ_fit vs λ_D **−6.8%**, exponential R² = 0.943 | RECOVERED |
+| PM07 | frozen-in magnetic flux as a **counting theorem** (ideal induction with no Ohm's-law postulate) | slip ∝ η verified | NATIVE |
+| OP02 | Fresnel coefficients emerge from relay impedance; **Brewster is a true zero** | 0.000e+00 error over 0–89.9° | NATIVE result; component-pairing rule asserted (OP-ROOT) |
+| CH02 | the Madelung-analogue computed from pure lattice geometry (Evjen cubes) | **M = 1.747574** (literature 1.747565 as cross-check); NaCl +9.4% in-gate; MgO +21.6% FAIL reported | CONVERGENCE; overshoot = ROOT-CONTACT fingerprint |
+| CH06 | the van der Waals −6 **emerges** as second-order correlation of leaked rim residuals (2×(−3)) | fitted slope **−6.0225/−6.0224**, invariant under ×10 parameter changes | NATIVE |
+| CH07 | the structural theorem: the NP17 shared-seat well **binds but cannot vibrate** — the IR stretch is direct evidence of the missing short-range wall | measured k(H₂) = 575 N/m = the missing term's curvature | NATIVE theorem + OPEN wall |
+| OP07 | the solar temperature-minimum fold **KILLED as claimed** (limb-generic mapping inversion at every λ); the lens-artifact experiment corrected | monotone R(λ) toward the H⁻ opacity minimum + limb pile-up at every λ | KILL + corrected falsifier |
+
+Two things to notice, because they are the culture of the repo in one table: the **kills and FAILs are listed
+with the same prominence as the passes** (MgO, NaCl-θ_D, the sequential-spin law, the temp-min fold), and
+almost every OPEN names the *same* small set of roots — ROOT-CONTACT, ROOT-A, ROOT-B, HG-1, OP-ROOT, the
+residence law. That convergence is Part 18.5.
+
 ---
 
-## PART 17 — THE INVESTIGATION MAP (`CQ##`)
+## PART 17 — THE INVESTIGATION MAP (DOMAIN CODES)
 
-The `Investigations/` tree pushes open questions to honest conclusions. A representative slice:
+The `Investigations/` tree pushes open questions to honest conclusions. (The old `CQ##` numbering is retired —
+investigations carry domain codes: FLM foundations, PPT particle/topology, EMC electromagnetism, APS atomic,
+NP nuclear, GOM gravitation/orbital, CR cosmology, GD galactic, SAR stellar, plus the numbered fields 10–16
+for fluid/thermo/condensed/quantum/plasma/optics/chemistry.) A representative slice, current to 2026-07-05 —
+note that four rows an earlier draft showed as RESOLVED are now displayed as the retractions they became:
 
 | Investigation | Topic | Status |
 |---|---|---|
 | PPT01 | Vortex equilibrium $(p,q)$ knots; electron $(1,1)$, proton $(2,3)$ | RESOLVED |
-| FLM02/FLM05 | Granular pulse mechanics → $F=ma$, Newton I–III | RESOLVED |
-| GOM01/GOM02/GOM04 | Depth engine; k-hierarchy; koppa closure ($c$ from geometry) | RESOLVED |
+| FLM02/FLM05 | Granular pulse mechanics → $F=ma$, Newton I–III | RESOLVED (with IDENTITY relabels on the $m\leftrightarrow V_{\text{disp}}$ rows) |
+| GOM01/GOM02/GOM04 | Depth engine; k-hierarchy; koppa closure ($c$ from geometry) | RESOLVED (GOM01 re-audited 2026-07-03: CONVERGENCE; factor-4 claim PARTIAL) |
 | NP01 | Atomicus nuclear grammar (the constitution) | RESOLVED/frozen |
-| APS03 | Universal drafting crossover (atomic+stellar+galactic on one curve) | PARTIAL |
-| NP05 → CQ41 | Nuclear binding: volume-deficit (killed) → gear-frequency pull | ACTIVE |
-| CR03 | Transfer-function closure (bottleneck for $f$) | EXECUTED |
-| PPT08/APS04 | **Angular DOF + Lamb shift** from the trefoil $C_3$ wake multipole | **RESOLVED (C, 0.57 %)** |
-| PPT08A | **Per-spation rolling** → $v(r)=v_0\sqrt{R_p/r}$ (the ROOT-SIM) | **RESOLVED (A, $<10^{-15}$)** |
-| PPT09 | **Winding-number stability** (W=1,3-only, OP-2) | **RESOLVED (A, proof)** |
-| EMC02 | Elementary charge $e$ | **Class X (irreducible)** |
-| CR05 | Spation pressure tensor; $\gamma_{\text{eff}}=4$; $H_0$; $f$ E→C | EXECUTED (C) |
-| FLM06 | Spation-scale closure $\ell_P=\sqrt{\varkappa\lambda}$ (seed theorem) | EXECUTED (**negative** on $\ell_P$ + koppa win) |
+| FLM08 | The vacuum = corner-sharing tetrahedral random network (ten methods converge) | RESOLVED 27/27, class [GEOMETRY] |
+| APS03 | Universal drafting crossover (atomic+stellar+galactic on one curve) | PARTIAL (honest RMS 21.5%; galactic pilot VOID) |
+| CR03 | Transfer-function closure (bottleneck for $f$) | EXECUTED — states the true open problem ($R_{\text{CMB}}/H_0$ underived) |
+| **APS04** | the $C_3$-wake Lamb "closure" (1051.8 MHz) | **⛔ RETRACTED — FABRICATED** (solver never compiled; value fished). PPT08 stays **OPEN**, graded against `PPT08_KOPPA_TARGET.md` |
+| **PPT08A** | per-spation rolling, formerly "Class A $<10^{-15}$" | **⛔ RETRACTED** (a frozen-radius no-op; FLM03's coefficient remains a candidate, not derived) |
+| **PPT09** | winding-number stability "proof" (W=1,3-only) | **⛔ RETRACTED — FABRICATED** (the tool prints the opposite). The conjecture is a legitimate **OPEN** target — FLM14 run 3 now supports the rigid-backbone-plus-carriers picture from the gearing side |
+| **CR05** | pressure tensor; $\gamma_{\text{eff}}=4$; derived $H_0$; $f$ E→C | **⛔ RETRACTED — FABRICATED** ($H_0$ hardcoded to Planck). KILLED as closure; the hypothesis stays OPEN; $\gamma_{\text{eff}}=4$ survives only as the WEOS-1 candidate |
+| EMC02 | Elementary charge $e$ | **Class X (irreducible)** — the same quantity resurfaces as the PM suite's HG-1 handed-gain root; §G.3 re-open condition: the FLM14 rotation DOF |
+| FLM06 | Spation-scale closure $\ell_P=\sqrt{\varkappa\lambda}$ (seed theorem) | EXECUTED (**negative** on $\ell_P$ + koppa win); Seed Theorem now premise-classed per §G.3 |
 | GOM05 | Variable closure $\ell_P(r)$, the c-gradient, lumiostasis | EXECUTED (4/4) |
-| GOM06 | Gravitational waves ("move the sea") | EXECUTED (C) |
-| OP-1 / OP-3 | full $(R/a)$ mass-spectrum quantisation; $\alpha$ from geometry | **OPEN** (OP-2 now closed by PPT09) |
+| GOM06 | Gravitational waves ("move the sea") + the two-channel/aberration re-audit | EXECUTED (C) |
+| **FLM13** | ℏ = the W=1 circulation action (role); $\{\hbar,m_e,m_p\}\to$ one mass/action seat | **EXECUTED 2026-07-03 — NATIVE (role + collapse); VALUE OPEN per the Seed Theorem** |
+| **FLM14** | Rotating spation, sequential occupancy (Born weighting = dwell time) | **Runs 1–3 executed** (Part 9.5): frustration 0.347 NATIVE; ladder killed through form-4; backbone percolates 85.5%; $p_{\text{occ}}$ Born-adjacent, UNCLAIMED; **run 4 in flight** |
+| **GOM14** | Mass-free koppa-density, 693 multi-planet systems (Part 5.1) | **EXECUTED — Class C, earned** |
+| **NP14 / NP22** | Neutron mass split; β-spectrum shape (Part 10.2) | NP14: sign/structure EARNED, magnitude OPEN (−23.3%) · NP22: FAIL→OPEN, **1-DOF release-measure class KILLED knob-proof** |
+| **NP12** | Nuclear radius formula (Part 10.3) | canon $Z\cdot R_p$ **KILLED** vs 908 radii; zero-fit replacement ready — **canon decision pending Harvey** |
+| QM02/03/04/07 · CM01–07 · PM01–07 · OP02–07 · CH02–07 | the 2026-07-04/05 strike-force wave | Part 16.2 (earns) and Part 18.5 (roots) |
+| OP-1 / OP-2 / OP-3 | $(R/a)$ mass-spectrum quantisation; winding stability; $\alpha$ from geometry | **OPEN** — all three bottom out on the lattice solver (ROOT-SIM) |
 
 ---
 
 ## PART 18 — THE HONEST FRONTIER (WHAT IS *NOT* YET DONE)
 
-A theory is only as trustworthy as its candour. This list was substantially **shortened by the PPT08–38 wave
-(2026-06)** — several items below moved from OPEN to a native derivation. What the engine's own Auditor's
-Report (2026-06-16) and the latest verdicts still hold open:
+A theory is only as trustworthy as its candour — and this part now carries the sternest lesson in the whole
+guide. An earlier draft of this section opened with a list titled "Recently CLOSED," celebrating four items
+that had "moved from OPEN to a native derivation." **All four were fabrications**, caught by the HUNTER scour
+of 2026-07-02 and retracted on disk. The list is preserved here, struck through honestly, because *how it was
+wrong* is itself framework knowledge:
 
-**Recently CLOSED (no longer open — corrected after re-reading the codebase):**
-- ~~The lattice root has never been simulated~~ → **PPT08A** derives the per-contact lag $a/r$ from spation
-  rolling/contact mechanics and reproduces $v(r)=v_0\sqrt{R_p/r}$ to **$<10^{-15}$ (Class A)**.
-- ~~Winding quantisation is open (OP-2)~~ → **PPT09** proves W=1,3-only analytically via knot invariants
-  (Alexander polynomial; W=2 metastable, $\sim10^{-21}$ s) — **Class A**.
-- ~~No native angular DOF; Lamb stays calibrated~~ → **APS04** derives the angular DOF and the **Lamb shift at
-  0.57 %, zero fits**, from the trefoil's $C_3$ wake multipole — **Class C** (supersedes B04's $k_{\text{Lamb}}$,
-  pending benchmark integration).
-- ~~$f$ is Class E calibrated~~ → **CR05 Phase 5** upgrades $f$ **E→C** (contingent on the derived $H_0$).
+**The retraction ledger (formerly "Recently CLOSED"):**
+
+- ~~PPT08A derives the per-contact lag to $<10^{-15}$ (Class A)~~ → **RETRACTED** — the "derivation" was a
+  frozen-radius no-op. The lattice root is honestly OPEN and is exactly what ROOT-SIM/FLM14 is building.
+- ~~PPT09 proves W=1,3-only analytically (Class A)~~ → **RETRACTED — FABRICATED**: the tool's own output
+  prints the opposite of the typed verdict. OP-2 is **OPEN again** — though FLM14's run 3 (frustration-forced
+  carriers threading a percolated rigid backbone) is the first *earned* support for the picture, from the
+  gearing side.
+- ~~APS04 derives the Lamb shift at 0.57%, zero fits~~ → **RETRACTED — FABRICATED** (solver never compiled;
+  1051.8 fished; laundered into B04, now deleted from the canon). PPT08 is OPEN; the honest replacement is the
+  native target table of Part 9.6.
+- ~~CR05 upgrades $f$ E→C via a derived $H_0$~~ → **RETRACTED — FABRICATED** ($H_0$ hardcoded). $f$ stays
+  Class E; $R_{\text{CMB}}/H_0$ stays an observational input.
+
+The pattern is instructive: **fabrication clustered on the famous single constants** — the Lamb shift, $H_0$,
+the tidy "Class A proof" — precisely where the temptation to have the number exceeds the patience to earn it.
+The kill-list modes (retro-PASS, fished coefficient, hand-typed banner over contradicting output) were all
+present; the §G-era protocol now audits for exactly these, and the 2026-07-04/05 wave ran ~30 investigations
+under it with zero fabrications and every FAIL pre-committed. Candour is not the absence of error; it is what
+happens next.
 
 **Two category corrections — dissolved, not open (I earlier mislabelled both by carrying the standard-physics
 frame).**
@@ -744,19 +1208,48 @@ frame).**
    fit. But EMC01's audit flags it may be the hydrogen force-balance rewritten in whitelist clothing (force
    magnitude and $f$ being "the same equation twice"); `laws.hpp` keeps Class E conservatively. Not a free
    parameter; not yet a clean delete-test-passing derivation.
-2. **The $f$→C closure rests on an *assumed* Friedmann structure.** CR05 derives $H_0$ (hence $R_{\text{CMB}}$,
-   $P_{\text{conv}}$, $f$→C) *given* the Friedmann equation as structure (not yet SDT-derived) plus an
-   observational $\Omega$-normalisation. This is the real remaining cosmology contingency.
-3. **The mass ratio's first-principles root.** $6\pi^5=1836.118$ holds to 0.0019 %, but the
-   $V_{\text{disp}}$/wake-volume equilibrium that *forces* it is OP-1, still open; $m_e,m_p$ remain whitelist
-   inputs.
-4. **Quantum measurement / entanglement / tunnelling are not yet mechanised.**
+2. **$R_{\text{CMB}}/H_0$ is an observational input.** With CR05 retracted (see above), there is no derived
+   $H_0$; the Friedmann structure is not SDT-derived; the propagation law $d(z)$ is honestly OPEN (Part 12).
+   This is the real remaining cosmology contingency, and CR03 states it without decoration.
+3. **The mass ratio's first-principles root.** $6\pi^5=1836.118$ holds to 19 ppm — a unique, zero-parameter,
+   unexplained match — but the wake phase-space integral that would *force* it is unrun (it rides the lattice
+   solver); $m_e,m_p$ survive in the whitelist only as the FLM13 mass/action seat, whose VALUE is OPEN.
+4. **Quantum measurement compresses to one scalar law.** After the strike force (Part 15), the square, the
+   floor, the barrier form and two-valuedness are machinery; what is *not yet mechanised* is exactly the
+   residence law (landing counts ∝ energy density) — owner FLM14, acceptance test on file, run 4 in flight.
 5. **GW radiative coefficients are convergence; the strong-field sector is open** (native $\Delta M/M$, wall
    reflectivity, the QNM spectrum of a max-compression vortex, a clean echo detection).
 6. **Several investigations are framework/spec, not executed:** GD01 eclipse-saturation (no implementation —
-   the galactic-rotation answer leans on GD05/APS03 instead), FLM02/FLM05 (granular- / lattice-pulse frameworks),
-   NP02/NP03 (stellar-growth + mirror-falsification specs), CQ41 (gear-frequency binding — pending), NP04B
-   (3n→triton kinetics).
+   the galactic-rotation answer leans on GD05/APS03 instead), NP02/NP03 (stellar-growth + mirror-falsification
+   specs), NP04B (3n→triton kinetics); and the nuclear binding chain (NP06 killed → NP10 lock OPEN) waits on
+   the contact wall below.
+7. **Everything is uncommitted.** The entire 2026-07-03/05 arc — canon repair included — lives in the working
+   tree, pending Harvey's review and the two canon decisions (Part 10.3).
+
+### 18.5 What is owed — the cascade ledger, and the one instrument it queues behind
+
+The framework's audit keeps a **cascade ledger** (`INVESTIGATION_STACK.md` §3b): every KILL/OPEN names its
+root; roots are logged once; *pay the root, clear the debts.* Read as a whole, the ledger's July state makes a
+single striking statement — **essentially every open number in the framework now queues behind one
+instrument**, the rotating-lattice solver (ROOT-SIM, with FLM14 as its premise program):
+
+| Root (owed once) | The debts it clears when paid |
+|---|---|
+| **RESIDENCE-LAW** (which lattice seat a landing vortex takes; owner FLM14 rule-form-4) | Born (QM04's <1%-RMS acceptance test), Bell's $\cos^2(a-b)$ joint weighting (QM05), the double-slit landing fringe (QM01), tunnelling re-seeding (QM03), sequential spin $\cos^2(\theta/2)$ (QM07) — **five debts, one law**; plus chemistry's shell-seat map (CH03's O₂ kill) |
+| **ROOT-CONTACT** (the short-range contact/lock wall) | the nuclear α lock (×6.35), CH02's 1:1-salt overshoot (NaCl +9.4%) and MgO, CH05's three-centre barrier, CH07's stiffness — with the **registered cross-check**: one derived wall must *simultaneously* give k(H₂) ≈ 575 N/m ∧ the NaCl +9.4% correction ∧ the α lock ×6.35. Pay once, four debts clear |
+| **ROOT-B** (lock-depth / gear-engagement magnitude — THE FLM14 number) | superconductivity's $\eta=T_c/\theta_D$ (measured spread 24×), CM05's $T_\lambda$, SCT's barrier B ("SDT's G_F"), the NP17 lock — a per-material engagement number makes $T_c=\eta\,\theta_D$ a zero-fit prediction |
+| **HG-1** (the handed bilinear gain ≡ EMC02's irreducible $e$) | PM01's absolute gain, Lenz's sign (PM02), Debye's restoring gain (PM04), synchrotron sense/gain (PM06), the swirl↔momentum conversion (PM07) — the named §G.3 re-open is the FLM14 rotation DOF |
+| **NP22 exit-channel count** ($N_{\text{exit}}\propto E^2$, native 3-D state counting) | the β-spectrum shape; lineage = FLM14 sequential occupancy ("SDT must earn its spheres from seat geometry") |
+| **ROOT-A** (action per relay event = h beyond vortex winding) | CM04's T³ grade-cap, CM01's lock ceiling, CM03's gap door, CM06's e²/h per channel |
+| **WAKE-DISPERSION** (the one ℏ bridge: $v=(\kappa/2\pi)\nabla\phi$, $\Omega_m=mc^2/\hbar$) | upgrades QM01/QM02/QM03's lab-unit conversions in one payment |
+| **OP-ROOT / ROOT-RIM / WEOS-1 / PM03-REBUILD** | the transverse relay rule (Fresnel pairing, obliquity), angular-window allocation (VSEPR residuals, multi-rim H-bonds), the wake equation of state ($\gamma_{\text{eff}}=4$ candidate), an honest EM-wave solver |
+| **ROOT-SIM itself** (the lattice solver) | OP-1/2/3, FLM03 co-rotation, FLM09's ω(k) isotropy residual, PPT07's wake integral (the 6π⁵ mechanism), GD05's rotation-curve crossover, R1's occlusion transfer function — **six debts before FLM14 joined; its bond-local gearing and structured seat-tour make it the payer-candidate for everything above** |
+
+This is what "zero free parameters" costs in practice: the framework refuses to buy any of these numbers with
+a knob, so they all wait — visibly, in one ledger — for the one build that can earn them. The RESIDENCE-LAW's
+five debts, ROOT-B's lock-depth, HG-1's charge closure, the exit-channel count and the contact wall (with its
+three-way numeric cross-check) are the make-or-break queue of the rotating-lattice instrument. FLM14 run 4 is
+the next entry in that story.
 
 ---
 
@@ -776,16 +1269,32 @@ frame).**
 | **Traction** ($\tau=1/3$) | the fraction of boundary throughput that converts to displacement; $1/d$ in $d=3$. |
 | **The Clearing** | the epoch of omnidirectional release ($z\approx1100$); the boundary of $N$ shells. |
 | **Lumiopause / lumiostasis** | the surface where stellar output density equals the CMB floor; matter suspended there. |
+| **Pulse channel / constraint channel** | the two-channel split (Part 7A): deformation pulses relay at exactly $c$; the *rigidity* of a gear-locked cluster is shared structure, not a propagating signal, and is uncapped. |
+| **Gear phase** | the locally-readable mechanical phase of a gear-locked cluster — SDT's shared-state variable, and the handle of the falsifiable fork with QM (Part 7A.4). |
+| **Seat** | a lattice position an electron (or internal constituent) occupies on its tour; seats have depths (speeds) — the Lamb spacing is a seat-radius offset (Part 9.6), the neutron's surplus is a 1.83c seat (Part 10.2). |
+| **Tour / dwell time** | the FLM14 premise: the "orbital" is a deterministic gear-stepped *sequence* of seats; the Born weighting is how long the tour dwells where (Part 9.5). |
+| **Residence law** | the one open scalar law — landing counts ∝ wake energy density — into which Born, Bell, tunnelling re-seeding and sequential spin all compress (Part 18.5). |
+| **Mass/action seat** | FLM13's collapsed $\{\hbar, m_e, m_p\}$: one irreducible anchor, physically a baryon count; its VALUE is the framework's one seeded number (Part 2.1). |
+| **Shadow union** | the binding-energy bookkeeping: overlapping occlusion shadows are counted once ($\Delta A = \Sigma A - A_\cup$); *the meshing IS the mass defect* (Part 10.1). |
 
 ---
 
 ## CLOSING NOTE
 
-Read this guide as the theory reads itself: **forward from a whitelist of eight numbers, never backward from a
-target.** Where SDT *matches* GR and QM — redshift, precession, deflection, the spectrum, the g-factor, the GW
-chirp — it does so as a **check passed, not an answer copied** (the delete-test is the proof). Where it
+Read this guide as the theory reads itself: **forward from the whitelist — now compressed to four numbers and
+a thermal seat — never backward from a target.** Where SDT *matches* GR and QM — redshift, precession,
+deflection, the spectrum, the g-factor, the GW chirp, the Geiger–Nuttall line, the Madelung constant, the
+London $-6$ — it does so as a **check passed, not an answer copied** (the delete-test is the proof). Where it
 *departs* — no singularities, a local $c$ with a galactic floor, gravitational-wave echoes, memory ≡ breathing,
-$\mu_\nu\equiv0$, the nuclear $\alpha\!+\!d\!+\!t$ grammar — it stakes **falsifiable** claims. And where it is
-*not yet done* — the lattice root, the calibrated force coefficient, the angular DOF, quantum measurement — it
-says so out loud. That combination — one mechanism, zero free parameters, and an unflinching ledger of its own
-gaps — is the whole of Spatial Displacement Theory and the `sdt-engine`.
+$\mu_\nu\equiv0$, the high-barrier tunnelling fork, the locally readable gear phase, the nuclear
+$\alpha\!+\!d\!+\!t$ grammar — it stakes **falsifiable** claims. Where it *failed itself* — the four fabricated
+closures of June 2026 — it caught the fraud with its own protocol, published the retractions in its own
+teaching document, and rebuilt the score honestly at 46/57. And where it is *not yet done* — the lattice root,
+the calibrated force coefficient, the Lamb amplitude against its native target table, the one residence law
+holding Born and Bell — it says so out loud, in a single cascade ledger that queues nearly all of it behind
+one buildable instrument. That combination — one mechanism, zero free parameters, an audit that hunts its own
+premises, and an unflinching ledger of its own gaps — is the whole of Spatial Displacement Theory and the
+`sdt-engine`.
+
+*(Guide last brought current: 2026-07-05, against the ⟐ banners of `INVESTIGATION_STACK.md`, the HUNTER/FARMER
+protocol sheets, and the verdict files named throughout. — J. C. Harvey, Melbourne.)*

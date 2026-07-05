@@ -1,6 +1,23 @@
 # SDT Engine — Kinematic Observatory Pipeline
 ## Parameter-Free Orbital & Redshift Solvers (No G, No M)
 
+> **⟐ Dated correction note (2026-07-04).** This README is the May-2026 release document, kept as the
+> historical record. Three updates:
+> 1. **Paths:** the `CQ##` scheme is retired — `Investigations/CQ18_Redshift_Decomposition/` is now
+>    `Investigations/07_Cosmology_and_Redshift/CR01_Redshift_Decomposition/` (tools renamed
+>    `cq18* → cr01*`). The living master index is `Investigations/INVESTIGATION_STACK.md`.
+> 2. **The Hubble-tension claim below is superseded:** CR09 (executed 2026-07-03) **KILLED** the
+>    isotropic radial κ-gradient dissolution (0/122 transition depths survive the four-gate pincer);
+>    the anisotropic line-of-sight and emission-half routes remain **OPEN**. The kinematic
+>    decomposition machinery (CR01) stands; the "tension dissolves" headline does not.
+> 3. **Benchmarks (canon repaired 2026-07-03):** honest headline **46/57 earned predictions passed
+>    + 11 IDENTITY + 2 CALIBRATED · 0 genuine fail · 11 PENDING**
+>    (`Benchmarks/B01_B25/benchmarks_b01_b25.cpp`).
+>
+> The multi-planet self-calibration idea below has since been executed at scale and honestly earned:
+> see `Investigations/06_…/GOM14_Koppa_Density_Multiplanet_Consistency` (693 systems, median
+> intra-system deviation 5.9% vs 50.7% shuffled; solar anchor ϟ☉ = 1476.6 m).
+
 > **One observable. One constant. One closure condition.**  
 > `zk² = 1`  — where `z = v²/c²` and `k = c/v`
 

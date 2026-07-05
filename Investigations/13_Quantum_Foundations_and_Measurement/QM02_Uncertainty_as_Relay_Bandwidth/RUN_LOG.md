@@ -56,3 +56,11 @@ if (ii) fails; claim Class A while the k→p bridge is borrowed.
 
 - 2026-07-03: commitments frozen. Tool `qm02_relay_bandwidth.py` written after this block.
   → `qm02_results.txt` (real stdout), `QM02_VERDICT.md`.
+- **ADJ-1 (2026-07-04, PRE-RUN — scope note added before any number was produced):** per FLM14
+  ADJ-7 two-channel doctrine and HUNTER §G: the Δx·Δk floor tested here is a **PULSE-CHANNEL
+  statement only** (real wake pulses relaying at c). It asserts NOTHING about the geared
+  CONSTRAINT channel (phase constraint through gear-locked clusters, uncapped), which carries no
+  free energy and no pulse bandwidth. §G faith-ledger at hunt start: accepted machinery = elastic
+  energy ∝ f² (internal consistency, Law I strain energy), discrete Fourier analysis of real
+  signals (mathematics, not a rival's formalism); flagged faith = the k→p bridge (named borrow,
+  Phase 2). No gate below traces to a rival axiom. Thresholds unchanged.

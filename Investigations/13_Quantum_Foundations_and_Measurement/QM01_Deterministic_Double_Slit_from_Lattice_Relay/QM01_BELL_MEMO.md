@@ -62,3 +62,30 @@ fixed by one design choice: throughpole in the readout, or not.
 **QM01 Phase-5 — the Bell debt is now quantified, not waved.** Open work: derive (or refute) the
 throughpole's joint readout from the foundational ontology, then — once FLM10 has dynamics — run the
 full two-vortex lattice CHSH as the heavy confirmation. Pairs with QM01 Phases 1–4 (double-slit/Born).
+
+---
+
+**REASSESSMENT (2026-07-04, Harvey directive — §G GATE-CONTRABAND check)**
+*Appended below the original; nothing above this line is altered.*
+
+- **The arithmetic stands.** Local readout S = 2.0000 (saturated), throughpole readout S = 2.8284,
+  debt = 0.828 — unchanged. The local branch's kill (sub-quantum vs measured ≈ 2.4) is
+  measured-anchor-class and stands.
+- **Two clauses were c-interferative and are reclassified, not deleted:**
+  1. *"non-local in structure, local in dynamics ⇒ no-signalling for free"* — this grounded marginal
+     flatness in a c-capped dynamics, i.e. the rival's axiom doing the guaranteeing. Under the
+     two-channel architecture (FLM14 RUN_LOG ADJ-7) energy/pulses relay at c (unchanged), but
+     CONSTRAINT through a gear-locked pair propagates uncapped (canon precedents: the 1.83c seat,
+     k<1 inside R_p, the instantaneous throughpole, GOM05 rigid hinge units). Marginal flatness is
+     instead guaranteed by the **Synchrony Theorem** (FARMER_PASS 2026-07-03 refinements 5–6):
+     matter IS lattice structure, so matter/space cannot desynchronise — a theorem-check, not a
+     c-relay consequence; and a synchronous constraint channel can carry structure with marginals
+     flat forever (communication ≠ desynchronisation).
+  2. The framing that the joint (throughpole) readout is an assumption to be *earned from local
+     primitives*. The channel is native canon; what is unearned is the **weighting** (QM05's S = 4
+     sign-copy probe proved the channel alone fixes nothing). The well-posed problem restates as:
+     not "derive non-locality" but "derive the cos² residence weighting of the constraint channel."
+     Owner: RESIDENCE-LAW root (QM04/05/07); instrument: FLM14 rule-form-4 / ADJ-6.
+- **Classification change:** "the entanglement debt lives entirely in the (assumed) non-local
+  readout" → **OPEN — re-opened under the two-channel/constraint framework.** The honesty line
+  (2.8284 was fed, not derived) stands verbatim.

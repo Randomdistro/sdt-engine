@@ -53,4 +53,89 @@ throughput expressed as: **geared rotation** (quantum pair), **saturated shadowi
 contact), **per-baryon column** (planetary), **blocked-fraction work ledger** (stellar/thermal).
 That IS the hierarchy-of-forces claim, recovered from the seeds that failed.
 
-— FARMER · 2026-07-03 · J. C. Harvey directive · repo health is the only demand
+## Rules refinements (Harvey, 2026-07-03, spoken — recorded verbatim in intent)
+
+1. **Electron capture is two things, not one.** The He-3-core alternate grammar describes the
+   *naturally occurring* EC isotopes — the built architecture. But in **fissile/unstable
+   material, capture is REPAIR**: the electron is passed *in and in and in* along the new path
+   into the nucleus, toward the broken stability — a dynamic process, potentially repeated,
+   patching instability hop by hop. The grammar describes the destination; the repair describes
+   the mechanism. (Owner: ATOMICUS ec_investigations + NP04-class decay work.)
+2. **Sub-unit arrangement is OPEN — angle is the premium, not area.** The
+   tetrahedron/triangle/pair placements are renderings, not settled structure: *"who knows what
+   arrangement the units maintain."* The real constraint: the **limited rim distance of the
+   poloidal flow** gives the structures **very small contact area**, so **contact ANGLE is the
+   scarce resource**. Binding engagement happens in narrow rim-windows (gears mesh at a line,
+   not a face — cf. FLM07 glancing-transfer locus), which reframes the NP10 coordination lock
+   (×1/×2/×6.35) as an *angular-window allocation* problem: simultaneous good alignment for
+   many partners is geometrically scarce, hence nonlinear in coordination. Complementary
+   rotation of neighbours is required for the windows to mesh at all.
+
+3. **The meshing IS the mass defect** (or one of its expressions). MeV is a measure of
+   MOVEMENT — all energy is movement, harnessed to do work. When forms mesh they work
+   **parallel, in synchrony** — the meshed pair needs less total movement-resistance than the
+   two isolated forms, and the saving is the defect. Corollary: **you cannot use the width of a
+   form to measure movement once forms interleave without interfering** — the interleaved
+   region is not attributable to either form separately, which is why the literature's "charge
+   radius" *doesn't compute* for bound nucleons (a separable-width assumption on top of a
+   charge-substance assumption). The SDT bookkeeping that handles it: **union, not sum** — the
+   shadow union counts shared occlusion once, and ΔA = ΣA_single − A_union is exactly the
+   overcount the isolated-width picture makes. This is the same statement FLM12 earned
+   independently from the relay side ("mass defect = synchrony saving") — two routes, one fact.
+   The angular-window meshing (refinement 2) is therefore not a mechanism owed ON TOP of the
+   defect; it is an expression OF it.
+
+4. **THE ROOT UNDER THE ROOTS (2026-07-04, the reason for the halt): the spation MUST
+   rotate, and all electron positions are SEQUENTIAL.** The problems that "escaped their
+   solves" — RESIDENCE-LAW (QM04/05/07), the Lamb seat geometry (PPT08), the angular-window
+   lock (NP10), FLM03's co-rotation, ε=hν (TD-ROOT-3) — share one premise: a static spation.
+   Harvey's commitment: the cell carries rotation as a real DOF, geared neighbour-to-neighbour,
+   and the electron runs a deterministic gear-stepped TOUR of seats (the orbital is a
+   sequence, not a cloud; the Born weighting is dwell time; the split pair is one tour on two
+   wings; S vs P are different routes). Program spec with pre-committed kill gates:
+   `FLM14_Rotating_Spation_Sequential_Occupancy/PROMPT.md` — graded against the three-seat
+   Lamb table, the lock ladder, FLM10 isotropy, and the one-rule-throughout condition (F6).
+
+5. **THE SYNCHRONY THEOREM (2026-07-04): no-signalling is a NECESSITY, not an axiom and not
+   an empirical accident.** No Bell experiment shows Alice's marginals shifting with Bob's
+   setting *because none ever can*: matter IS structure in the lattice, so **the movement of
+   matter and the movement of space cannot desynchronise — even under an instantaneous
+   100-BLY relocation of a constraint.** Nothing travels between separate things; one fabric
+   reconfigures as one object. The "paradox" that Einstein locality exists to avoid is a
+   category error of substance-dualism (matter moving THROUGH space with c capping the
+   interactions of separates). Consequences: (a) the marginal-flatness check in FLM14/QM05 is
+   a THEOREM-check — if a simulation ever shows marginal deviation, the *implementation* has
+   broken the monism, not discovered a physics outcome; (b) SDT *derives* the exact
+   experimental pattern — correlations unconstrained by c, controllable signals impossible —
+   where Copenhagen postulates it and Einstein-locality forbids half of it. The rigid
+   constraint channel (ADJ-7) is the mechanism; this is its guarantee.
+
+6. **SYNCHRONY THEOREM, COMPLETED (2026-07-04): communication ≠ desynchronisation — the
+   conflation was the rival's.** The no-communication argument only forbids messages encoded
+   as LOCAL STATISTICAL ANOMALIES (a marginal shift = a desynchronisation, which the fabric
+   cannot produce — refinement 5 stands untouched). It says nothing about the **synchronous
+   channel**: a modulation of the shared constraint of a gear-locked cluster is globally
+   synchronous by construction — both ends co-read ONE object rather than transmit between
+   two; marginals stay flat forever while the lock itself carries structure. Hence BOTH are
+   possible: FTL relocation of constraint (transport) AND FTL communication (co-rotation
+   reading) — with zero desynchronisation in either. **The falsifiable fork this opens vs QM:**
+   QM's formalism contains no locally-readable shared-state variable (correlations are visible
+   only in coincidence, via a classical channel); SDT's gear phase IS a local mechanical
+   variable. If the constraint phase couples to anything locally measurable, there is an
+   experiment. Instrument owner: FLM14 rule-form-4 (modulate constraint at one wing, read
+   local phase at the other, marginals flat throughout — three outcomes, all publishable).
+
+7. **NOTHING RULED IN OR OUT, OUT OF HAND (2026-07-04, Harvey's personal rule, adopted into
+   HUNTER §G.3).** Ledger ≠ legislation: "calibrated today" is honest status; "never derivable"
+   is foreclosure and is banned. Every impossibility claim must name its premise class and its
+   re-open condition. **Immediately re-opened under the FLM14 rotation DOF** (labels unchanged
+   until derivations actually land): (a) **α** — PPT02's "cannot be derived / all paths
+   circular" was proven in the static class; the rotation candidates are native (FLM07's 1:4
+   gearing = W+1; the frustration geometry; k=1/α as a gear rung); (b) **the ℏ VALUE / Seed
+   Theorem** — "one anchor unavoidable" was proven over {length, time, dimensionless}; a
+   rotating floor adds action-per-turn as a carrier (FLM14 P5 is the live door); (c) P_eff /
+   f_transfer class-E prose that says "fails delete-test" is status and stays; any prose
+   implying permanence is to be read as premise-classed. The anti-fake discipline is untouched:
+   nothing gets promoted without a derivation — but nothing is forbidden from being attempted.
+
+— FARMER · 2026-07-03/04 · J. C. Harvey directive · repo health is the only demand

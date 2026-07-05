@@ -1,0 +1,60 @@
+﻿================================================================
+  CH02 — Ionic & Metallic Bonding from Electropause Transfer
+  Author: J. C. Harvey, Melbourne · 2026-07-03
+  Coupling: alpha*hbar*c = 2.307078e-28 J*m (engine coulomb_identity,
+            labelled class F identity in laws.hpp — declared)
+================================================================
+
+P1  TRANSFER CRITERION (well-depth asymmetry)
+    pair    dChi[eV]   measured   split-call
+    NaCl      5.447    ionic      ionic    [ok]
+    NaF       7.568    ionic      ionic    [ok]
+    KCl       5.869    ionic      ionic    [ok]
+    KBr       5.168    ionic      ionic    [ok]
+    LiF       7.407    ionic      ionic    [ok]
+    CsF       8.229    ionic      ionic    [ok]
+    MgO       3.717    ionic      ionic    [ok]
+    CaO       4.470    ionic      ionic    [ok]
+    H2        0.000    covalent   covalent [ok]
+    CH4       0.915    covalent   covalent [ok]
+    O2        0.000    covalent   covalent [ok]
+    N2        0.000    covalent   covalent [ok]
+    Cl2       0.000    covalent   covalent [ok]
+    HCl       1.114    covalent   covalent [ok]
+    H2O       0.364    covalent   covalent [ok]
+    gap: max covalent dChi = 1.114 eV < min ionic dChi = 3.717 eV -> CLEAN GAP (threshold not critical)
+    split correct: 15 / 15 (committed >= 13)  [PASS]
+
+P2  GEOMETRIC OCCLUSION SUM (Evjen expanding cubes, rock salt)
+    cube n=1 : M = 1.456029926
+    cube n=2 : M = 1.751769133
+    cube n=3 : M = 1.747041565
+    cube n=4 : M = 1.747721110
+    cube n=6 : M = 1.747595517
+    cube n=8 : M = 1.747574382
+    converged geometric sum M = 1.747574 (literature cross-check 1.747565 — output, not input)
+    NaCl: U_L =   861.0 kJ/mol  (measured   787.0, err  +9.4%, tol 15%) [PASS]
+    KCl : U_L =   771.8 kJ/mol  (measured   715.0, err  +7.9%, tol 20%) [PASS]
+    MgO : U_L =  4611.6 kJ/mol  (measured  3791.0, err +21.6%, tol 20%) [FAIL]
+          MgO miss reported honestly: no Born repulsion is derived in SDT;
+          the 2+/2- compression makes the missing short-range term largest here.
+    NOTE: systematic overshoot ~ +8..10% on the 1:1 salts = the underived Born
+    repulsion closure (missing (1-1/n) factor). Logged as owed, not plugged.
+
+P3  METALLIC SEA (Na, Wigner-Seitz occlusion balance)
+    E_coh(occlusion only) = 6.231 eV/atom  (measured 1.113, err +460%) [FAIL]
+    HONEST RESULT: the pure occlusion sum overbinds ~5.6x. The missing piece
+    is the movement-budget (Law V) cost of confining the delocalised sea to
+    the lattice cell. That cost is NOT yet derived -> P3 OPEN (named closure).
+
+================================================================
+  CH02 SUMMARY
+  P1 transfer split      : PASS (15/15, clean gap)
+  P2 NaCl lattice energy : within 15% gate -> see line above
+  P4 KCl novel           : within 20% gate -> see line above; MgO honest miss
+  P3 metallic sea        : FAIL -> OPEN (Law V confinement cost underived)
+  Physics class: CONVERGENCE (coupling = alpha*hbar*c identity; geometric sum
+  is real, but the same sum IS classical ionic electrostatics — delete-test:
+  survives without SDT). Metallic cohesion: OPEN.
+  Gate exit: 0 (committed gates met)
+================================================================

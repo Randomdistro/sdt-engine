@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Law I of Spatial Displacement Theory — Convergent Relay Throughput. Why every shell of the universe presses on you with the same weight, and how Φ = Nε follows from geometry alone.">
+<title>Law I · Convergent Relay Throughput — SDT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- the website stylesheet is the basis -->
+<link rel="stylesheet" href="style.css">
+<style>
+  /* ── LAW I signature: deep copper — the colour of the pressure itself ── */
+  :root{ --copper:#b07430; --copper-light:#d4a05c; --copper-glow:rgba(176,116,48,0.12); }
+  .inv-tag{ font-family:'JetBrains Mono',monospace; font-size:0.7rem; letter-spacing:0.18em;
+    text-transform:uppercase; color:var(--copper); }
+  .cert{ display:inline-block; font-family:'JetBrains Mono',monospace; font-size:0.66rem;
+    letter-spacing:0.1em; padding:2px 9px; border-radius:3px; text-transform:uppercase;
+    border:1px solid rgba(176,116,48,0.4); color:var(--copper); background:rgba(176,116,48,0.08); }
+  .cert--d{ border-color:rgba(126,201,164,0.5); color:#2f6f52; background:rgba(126,201,164,0.10); }
+
+  .inv-hero{ padding:var(--sp-3xl) var(--sp-xl) var(--sp-2xl); text-align:center;
+    background:linear-gradient(180deg,var(--cream) 0%, var(--paper) 100%); }
+  .inv-hero h1{ font-family:'Source Serif 4',Georgia,serif; font-weight:300; font-size:var(--fs-3xl);
+    line-height:1.06; letter-spacing:-0.01em; color:var(--ink); margin:var(--sp-md) 0; }
+  .inv-hero h1 em{ font-style:italic; color:var(--copper); }
+  .inv-hero .lead{ max-width:var(--content-width); margin:var(--sp-md) auto var(--sp-xl);
+    color:var(--ink-muted); font-size:var(--fs-md); line-height:1.7; }
+
+  /* ── the DESIGN ELEMENT: the shell cancellation ── */
+  .shells{ max-width:var(--wide-width); margin:0 auto; }
+  .shells canvas{ width:100%; height:340px; display:block; border-radius:6px; }
+  .shells figcaption{ font-family:'JetBrains Mono',monospace; font-size:0.68rem; color:var(--ink-faint);
+    letter-spacing:0.05em; margin-top:0.7rem; text-align:center; }
+
+  .backlink{ position:fixed; top:0; left:0; right:0; z-index:100; padding:0.7rem 1.4rem;
+    display:flex; justify-content:space-between; align-items:center;
+    background:rgba(245,240,232,0.86); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--paper-edge); font-size:0.72rem; }
+  .backlink a{ color:var(--copper); text-decoration:none; letter-spacing:0.04em; }
+  .backlink .who{ font-family:'Source Serif 4',serif; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--ink-soft); font-weight:600; }
+
+  .invar{ width:100%; max-width:var(--wide-width); margin:var(--sp-lg) auto; border-collapse:collapse;
+    font-size:var(--fs-sm); font-family:'JetBrains Mono',monospace; }
+  .invar th,.invar td{ text-align:right; padding:0.55rem 0.9rem; border-bottom:1px solid var(--paper-edge); }
+  .invar th{ font-size:0.64rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-muted); }
+  .invar td:last-child{ color:var(--copper); }
+  .step{ font-family:'JetBrains Mono',monospace; color:var(--copper); font-size:0.72rem; letter-spacing:0.12em; }
+</style>
+</head>
+<body>
+
+<div class="backlink">
+  <span class="who">Spatial <span style="color:var(--copper)">Displacement</span> Theory</span>
+  <a href="investigations.html">← the whole picture</a>
+</div>
+
+<!-- ═══════════════════ HERO ═══════════════════ -->
+<header class="inv-hero reveal">
+  <div class="inv-tag">The Laws · I · Convergent Relay Throughput</div>
+  <h1>The Pressure That<br>Presses <em>Everywhere</em></h1>
+  <p class="lead">You are being pressed, right now, from every direction at once — and the press arriving from the farthest edge of the sky is exactly as strong as the press from the space beside you. This is the first Law, and it is the moment the pressurised universe announces itself.</p>
+
+  <figure class="shells" id="sh">
+    <canvas id="shCanvas"></canvas>
+    <figcaption id="shCap">a shell of sources arriving from depth d — its parcel of pressure, ε, is the same however deep it lies</figcaption>
+  </figure>
+</header>
+
+<!-- ═══════════════════ CH.1 ═══════════════════ -->
+<section class="chapter">
+  <div class="chapter__inner reveal">
+    <div class="chapter__num">One</div>
+    <h2 class="chapter__title">Why the far sky should not matter — and does</h2>
+    <p class="chapter__lead">Distance thins things out. So why should the most distant universe press on us at all?</p>
+    <p>Recall the medium: a seamless lattice that hands energy inward, neighbour to neighbour, from every depth at once. Our instinct, trained by the <em>inverse-square law</em> — the rule that a source grows fainter as the square of its distance — says the far reaches should fade to nothing long before they reach us.</p>
+    <p>They do not. What follows is a cancellation so clean it can look like a conspiracy, and it is nothing of the kind. It is only the geometry of a sphere.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════ CH.2 ═══════════════════ -->
+<section class="chapter chapter--alt">
+  <div class="chapter__inner reveal">
+    <div class="chapter__num">Two</div>
+    <h2 class="chapter__title">Two opposing tides</h2>
+    <p class="chapter__lead">Gather every source that lies at exactly one depth, and two things pull against each other.</p>
+    <p>Call that set a <strong>shell</strong> — all the points sitting exactly <em>d</em> relay-steps away. As the shell lies deeper, it holds <strong>more</strong> sources: their number grows with the shell's surface, as 4π<em>d</em>². Yet each of those sources arrives <strong>fainter</strong>: its share is thinned by that same distance, as 1/(4π<em>d</em>²). One tide rises with depth; the other falls with it.</p>
+    <div class="eq-block">
+      <div class="eq">sources ∝ 4π<em>d</em>² &nbsp;&nbsp;·&nbsp;&nbsp; each arrives ∝ 1 / 4π<em>d</em>²</div>
+      <div class="eq-caption">the more numerous they grow, the more faintly each one lands</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ CH.3 ═══════════════════ -->
+<section class="chapter">
+  <div class="chapter__inner reveal">
+    <div class="chapter__num">Three</div>
+    <h2 class="chapter__title">The shell cancellation</h2>
+    <p class="chapter__lead">Multiply the rising tide by the falling one. They meet and cancel — exactly.</p>
+    <p>The growth in number and the loss in strength are the very same factor, one over the other. Their product carries no trace of depth at all. Every shell — the one at your elbow and the one at the rim of the observable — delivers the identical quiet parcel of arrival, which we name <strong>ε</strong>.</p>
+    <div class="eq-block">
+      <div class="eq">Φ<sub>shell</sub>(<em>d</em>) = 4π<em>d</em>² × ε ⁄ 4π<em>d</em>² = ε</div>
+      <div class="eq-caption">Theorem 1 — the same at every depth, exactly</div>
+    </div>
+    <p>This is not an approximation that improves with care. It is an identity, and it holds from the nearest neighbour out across <strong>sixty-one orders of magnitude</strong> to the edge of the sky. It asks only three things: that the original release went out evenly in all directions, that the relay loses nothing on the way, and that space is flat enough for a sphere's area to be 4π<em>d</em>². All three hold.</p>
+    <table class="invar">
+      <thead><tr><th>depth <em>d</em></th><th>sources 4π<em>d</em>²</th><th>dilution 1/4π<em>d</em>²</th><th>shell = ε</th></tr></thead>
+      <tbody>
+        <tr><td>10⁰</td><td>1.3×10¹</td><td>8.0×10⁻²</td><td>1.76×10⁻¹¹⁸ J</td></tr>
+        <tr><td>10¹⁰</td><td>1.3×10²¹</td><td>8.0×10⁻²²</td><td>1.76×10⁻¹¹⁸ J</td></tr>
+        <tr><td>10³⁰</td><td>1.3×10⁶¹</td><td>8.0×10⁻⁶²</td><td>1.76×10⁻¹¹⁸ J</td></tr>
+        <tr><td>10⁶¹</td><td>1.3×10¹²³</td><td>8.0×10⁻¹²⁴</td><td>1.76×10⁻¹¹⁸ J</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ═══════════════════ CH.4 ═══════════════════ -->
+<section class="chapter chapter--alt">
+  <div class="chapter__inner reveal">
+    <div class="chapter__num">Four</div>
+    <h2 class="chapter__title">Add the shells, and you have the pressure</h2>
+    <p class="chapter__lead">If every shell brings the same ε, the whole burden is just ε counted once per shell.</p>
+    <p>So count the shells — from here outward to the <strong>Clearing</strong>, the single event that first lit the medium. There are about <strong>5.9 × 10⁶¹</strong> of them. The total arriving at every interior point is therefore ε multiplied by that count:</p>
+    <div class="eq-block">
+      <div class="eq">Φ = N ε ≈ 1.04 × 10⁻⁵⁶ J</div>
+      <div class="eq-caption">the convergent throughput at every point in space</div>
+    </div>
+    <p>Read as a pressure, that figure is <strong>P<sub>conv</sub> ≈ 2.46 × 10⁴⁸ pascals</strong> — some thirty-seven orders of magnitude beyond the strongest pressure engineering has ever produced. You stand steeped in it and feel not a thing, because it arrives in equal measure from every side, and each direction's push is answered exactly by its opposite. That perfect balance is why empty space seems empty. Disturb the balance — set matter in the way — and the leftover push is <em>force</em>. But that is a later Law.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════ CH.5 ═══════════════════ -->
+<section class="chapter">
+  <div class="chapter__inner reveal">
+    <div class="chapter__num">Five</div>
+    <h2 class="chapter__title">A hundred-year embarrassment, dissolved</h2>
+    <p class="chapter__lead">One number has haunted physics longer than most careers last.</p>
+    <p>The quantum account of empty space predicts a vacuum energy that overshoots what is actually observed by a factor near <strong>10¹²³</strong> — the largest wrong prediction in the history of the subject. In this framework that number is not a failed cancellation to be explained away. It is a <em>census</em>. The count of source cells on the boundary of the Clearing is N², and N² ≈ 3.5 × 10¹²³.</p>
+    <p>The energy was never stored inside the vacuum, waiting to be found. It is in <strong>transit</strong> through it — the throughput of every boundary cell, passing through every interior point, every tick. The old catastrophe was a correct grand total with nowhere to live. Here, at last, it has an address.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════ VERDICT / BRIDGE ═══════════════════ -->
+<section class="chapter chapter--deep">
+  <div class="chapter__inner reveal">
+    <div class="chapter__num">Standing</div>
+    <h2 class="chapter__title">What is earned, and what is next</h2>
+    <p class="chapter__lead">The shell cancellation is not a hopeful fit. It is geometry, and geometry does not negotiate.</p>
+    <div style="display:flex;gap:0.6rem;justify-content:center;margin:var(--sp-lg) 0;flex-wrap:wrap;">
+      <span class="cert cert--d">DERIVED — exact identity</span>
+      <span class="cert">1 CALIBRATION · hydrogen</span>
+    </div>
+    <p>The cancellation itself follows from a sphere's area and a faithful relay; nothing is tuned to make it work. The wider framework asks for exactly one measured anchor — the force between a proton and its electron in hydrogen — and no more. Everything above is derived from that discipline.</p>
+    <p>So the pressure is real, immense, and everywhere, in perfect balance. One question is left standing: <strong>what lit it?</strong> A single event, whose arrival still washes over every point in the cosmos. That is the next Law.</p>
+    <p class="step"><a href="st_02_law2.html" style="color:var(--copper);text-decoration:none;">Next → The Laws · II — The Release Cascade</a></p>
+    <div class="margin-note">The Laws · I · Convergent Relay Throughput. Author: J. C. Harvey, Melbourne.</div>
+  </div>
+</section>
+
+<footer style="padding:var(--sp-xl);text-align:center;background:var(--midnight);color:var(--midnight-mute);font-size:var(--fs-sm);">
+  <a href="investigations.html" style="color:var(--copper-light);text-decoration:none;">← the whole picture</a>
+</footer>
+
+<script>
+(function(){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    if(e.isIntersecting){ e.target.classList.add('reveal--visible'); io.unobserve(e.target);} });},{threshold:0.12});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+
+  // ── design element: the shell cancellation ──
+  // Shells of sources arrive from every depth. As a front sweeps inward, its source-count
+  // swells and its per-source strength thins — but the parcel it deposits, ε, never changes.
+  var cv=document.getElementById('shCanvas'), ctx=cv.getContext('2d'), cap=document.getElementById('shCap');
+  var dpr=Math.min(window.devicePixelRatio||1,2), W=0,H=0,cx=0,cy=0,Rmax=1;
+  function build(){ W=cv.clientWidth;H=cv.clientHeight;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
+    cx=W*0.34; cy=H/2; Rmax=Math.min(W*0.30,H*0.42); }
+  build(); window.addEventListener('resize',build);
+  var t0=null, PERIOD=3.4, fronts=[], lastSpawn=-1e9;
+  var EPS='1.76×10⁻¹¹⁸ J';
+  function fmtE(e){ e=Math.round(e); return '10'+String(e).split('').map(function(d){return '⁰¹²³⁴⁵⁶⁷⁸⁹'[+d];}).join(''); }
+  function frame(ts){
+    if(t0===null)t0=ts; var t=(ts-t0)/1000;
+    if(t-lastSpawn>PERIOD/2.2){ fronts.push({born:t}); lastSpawn=t; }
+    fronts=fronts.filter(function(f){ return (t-f.born)<PERIOD; });
+    ctx.clearRect(0,0,W,H);
+    // faint standing shells
+    ctx.strokeStyle='rgba(200,193,182,0.5)'; ctx.lineWidth=1;
+    for(var s=1;s<=5;s++){ ctx.beginPath(); ctx.arc(cx,cy,Rmax*s/5,0,6.2832); ctx.stroke(); }
+    // arriving fronts (convergence inward)
+    var lead=null;
+    for(var i=0;i<fronts.length;i++){ var ph=(t-fronts[i].born)/PERIOD; var rf=Rmax*(1-ph);
+      var alpha=Math.sin(ph*Math.PI)*0.9;
+      // dots on the front — a fixed sample; count-label reflects true 4πd²
+      var nd=Math.max(10,Math.round(10+ph*70));
+      for(var k=0;k<nd;k++){ var a=k/nd*6.2832 + fronts[i].born; var x=cx+Math.cos(a)*rf, y=cy+Math.sin(a)*rf*0.9;
+        ctx.beginPath(); ctx.arc(x,y,1.6,0,6.2832); ctx.fillStyle='rgba(176,116,48,'+alpha*0.8+')'; ctx.fill(); }
+      ctx.beginPath(); ctx.arc(cx,cy,rf,0,6.2832); ctx.strokeStyle='rgba(176,116,48,'+alpha*0.5+')'; ctx.lineWidth=1.4; ctx.stroke();
+      if(lead===null||ph>lead.ph) lead={ph:ph,rf:rf};
+    }
+    // the central point being pressed
+    ctx.beginPath(); ctx.arc(cx,cy,4.4,0,6.2832); ctx.fillStyle='rgba(30,28,24,0.85)'; ctx.fill();
+
+    // right panel: the invariant ε bar + the two swinging tides (log scale, honest)
+    var px=W*0.72, top=cy-Rmax*0.9, bot=cy+Rmax*0.9, mid=cy;
+    var e = lead? 61*lead.rf/Rmax : 30;                 // depth exponent from the lead front
+    // sources bar UP by ∝e, dilution bar DOWN by ∝e (log-symmetric about ε)
+    var h = (e/61)*(Rmax*0.85);
+    ctx.fillStyle='rgba(176,116,48,0.25)'; ctx.fillRect(px-26, mid-h, 20, h);      // sources ↑
+    ctx.fillStyle='rgba(74,109,130,0.22)'; ctx.fillRect(px-2, mid, 20, h);         // dilution ↓
+    // the ε line — dead level, always
+    ctx.strokeStyle='rgba(176,116,48,0.95)'; ctx.lineWidth=2.5;
+    ctx.beginPath(); ctx.moveTo(px-40, mid); ctx.lineTo(px+40, mid); ctx.stroke();
+    ctx.font='11px "JetBrains Mono",monospace'; ctx.fillStyle='rgba(122,114,101,1)'; ctx.textAlign='left';
+    ctx.fillText('sources ↑', px+48, mid-h*0.5);
+    ctx.fillText('dilution ↓', px+48, mid+h*0.5+4);
+    ctx.fillStyle='rgba(176,116,48,1)'; ctx.fillText('shell = ε  (level, always)', px-40, mid-8);
+
+    if(cap) cap.textContent = 'a shell of sources arriving from depth d ≈ '+fmtE(e)+' — its parcel of pressure, ε = '+EPS+', is the same however deep it lies';
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

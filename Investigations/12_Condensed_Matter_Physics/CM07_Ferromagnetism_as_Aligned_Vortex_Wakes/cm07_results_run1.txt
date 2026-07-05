@@ -1,0 +1,51 @@
+CM07 - Ferromagnetism as Aligned Vortex Wakes
+J. C. Harvey, Melbourne - 2026-07-04
+Units: aligned-wake counts; kappa_e = h/m_e = 7.2739e-04 m^2/s.
+ZERO magnetons anywhere in this output.
+
+== P1: exchange magnitude native; SIGN honestly OPEN ==
+  Fe  |J| = alpha * hbar^2/(2 m_e d^2) = 4.5132e-03 eV  [DERIVED, no knob]
+  Co  |J| = alpha * hbar^2/(2 m_e d^2) = 4.4236e-03 eV  [DERIVED, no knob]
+  Ni  |J| = alpha * hbar^2/(2 m_e d^2) = 4.4771e-03 eV  [DERIVED, no knob]
+  Sign (why Fe/Co/Ni co-rotate, Cr/MnO contra-rotate): NOT derivable
+  from the magnitude formula. Naive rim-shear favours CONTRA-rotation
+  (facing rims of co-rotating wakes counter-move) - i.e. the pairing
+  channel of CM01/NP17; the co-rotation window needs the on-seat vs
+  off-seat balance, unbuilt. P1 sign: OPEN (pivot row 'report both
+  signs'). Ferro/antiferro classes enter as OBSERVED anchors only.
+
+== P2: Curie points  k_B T_C = z * n_w * J  (zero fitted params) ==
+  el   z    n_w   J[meV]   Tc_pred[K]  Tc_obs[K]    ratio gate 2x
+  Fe   8  2.220    4.513        930.2     1043.0    0.892 PASS
+  Co  12  1.720    4.424       1059.5     1388.0    0.763 PASS
+  Ni  12  0.606    4.477        377.8      627.0    0.603 PASS
+  Gd  12  7.630    2.178       2314.0      293.0    7.897 [OUT-OF-SCOPE EXHIBIT - 4f indirect]
+  ordering pred: Co > Fe > Ni  (obs Co > Fe > Ni)  PASS
+  [inputs: z, d, n_w measured; alpha, hbar, m_e whitelist. No fit.]
+
+== P3: M(T) in native wake counts; mean-field exponent ==
+  M(T)/M(0) = aligned fraction (Fe: M(0) = 2.22 wakes/atom):
+    T/T_C = 0.20 : m = 0.9999  -> 2.220 wakes/atom
+    T/T_C = 0.50 : m = 0.9575  -> 2.126 wakes/atom
+    T/T_C = 0.80 : m = 0.7104  -> 1.577 wakes/atom
+    T/T_C = 0.95 : m = 0.3795  -> 0.842 wakes/atom
+    T/T_C = 0.99 : m = 0.1725  -> 0.383 wakes/atom
+    T/T_C = 1.00 : m = 0.0000  -> 0.000 wakes/atom
+  M(T) -> 0 at T_C: PASS (0.0000 at T/T_C = 1)
+  effective beta = 0.2109  (gate 0.5 +/- 0.1)  FAIL
+
+== P4: hysteresis - domain wall in a seeded pinning landscape ==
+  sweep h: +1 -> -1 -> +1 (native handedness-field units)
+  remanence M(h=0) = 0.067 of saturation  (gate > 0.5)  FAIL
+  coercive field h_c = 0.300 (native units)  (gate > 0)  PASS
+  [COMPUTED-toy: loop opens because unpinning is irreversible -
+   occlusion-pinned walls, EMC03 handedness field; deterministic
+   index-derived pinning, no RNG]
+
+== Ledger ==
+  DERIVED : |J| formula (committed, no knob), T_C chain, beta, loop.
+  NAMED FAITH ITEM: the alpha gear-down (look-elsewhere duty carried;
+            out-of-family falsifier = Gd exhibit + future alloys).
+  OPEN    : exchange SIGN (ferro vs antiferro seating criterion).
+  MEASURED-INPUT: z, d, n_w (saturation wake counts). OBSERVED: T_C.
+  CALIBRATED: none (0 of 0). MAGNETONS: zero, as committed.

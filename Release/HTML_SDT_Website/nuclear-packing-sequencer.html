@@ -333,13 +333,42 @@ function packNucleus(A, Z, dnn, coulSpread){
   for(let s=0;s<nd;s++) kinds.push('deuteron');
   for(let s=0;s<nt;s++) kinds.push('triton');
   const nSub=kinds.length;
-  // subunit centres — FCC crop to the nSub nearest sites, dilated by Coulomb spread
+  // subunit centres — OPPOSITION SHELLS (Harvey 2026-07-03, replacing the FCC crop that
+  // lopsided carbon): the α sits at the origin on the shared rotation axis; satellites take
+  // MAXIMUM-SPREAD geometries around it — the nuclear–electronic mirror. 1 = lone valence
+  // pole (Li, following the α's rotation) · 2 = the tense dyad, antipodal, furthest spread,
+  // chasing each other around the α (Be) · 3 = trigonal · 4 = tetrahedral (C — where 2p²
+  // should be) · 5 = trigonal bipyramid (N) · 6 = octahedral · … · 12 = the icosahedral
+  // shell (the 720° twelve-cap closure). Beyond 12 the next shell opens, same logic.
   const spread=1+coulSpread*(Z*Z)/Math.pow(A,4/3);
-  const Dsub=dnn*spread*KSUB, a=Dsub*Math.SQRT2;
-  const pts=[]; const R=Math.ceil(Math.cbrt(nSub))+3;
-  for(let i=-R;i<=R;i++)for(let j=-R;j<=R;j++)for(let k=-R;k<=R;k++)
-    if(((i+j+k)&1)===0){const x=i*a/2,y=j*a/2,z=k*a/2;pts.push([x,y,z,x*x+y*y+z*z]);}
-  pts.sort((p,q)=>p[3]-q[3]); const C=pts.slice(0,nSub);
+  const Dsub=dnn*spread*KSUB;
+  const PHI=(1+Math.sqrt(5))/2;
+  function shellDirs(m){
+    const V={
+      1:[[0,0,1]],
+      2:[[0,0,1],[0,0,-1]],
+      3:[[1,0,0],[-0.5,0.8660254,0],[-0.5,-0.8660254,0]],
+      4:[[1,1,1],[1,-1,-1],[-1,1,-1],[-1,-1,1]],
+      5:[[0,0,1],[0,0,-1],[1,0,0],[-0.5,0.8660254,0],[-0.5,-0.8660254,0]],
+      6:[[1,0,0],[-1,0,0],[0,1,0],[0,-1,0],[0,0,1],[0,0,-1]],
+      12:[[0,1,PHI],[0,-1,PHI],[0,1,-PHI],[0,-1,-PHI],[1,PHI,0],[-1,PHI,0],
+          [1,-PHI,0],[-1,-PHI,0],[PHI,0,1],[-PHI,0,1],[PHI,0,-1],[-PHI,0,-1]]
+    };
+    if(V[m]) return V[m].map(vnorm);
+    // Fibonacci sphere fallback (near-maximum spread for the in-between counts)
+    const out=[]; for(let i=0;i<m;i++){ const zz=1-(2*i+1)/m, r=Math.sqrt(Math.max(0,1-zz*zz)),
+      th=2*Math.PI*i/(PHI*PHI); out.push([r*Math.cos(th),r*Math.sin(th),zz]); }
+    return out;
+  }
+  const C=[[0,0,0]];                               // α core on the shared axis
+  let remaining=nSub-1, shell=0;
+  while(remaining>0){
+    const cap=(shell===0)?12:12+8*shell;           // shell capacities: 12, 20, 28, …
+    const m=Math.min(remaining,cap);
+    const rad=Dsub*(1+0.9*shell);
+    shellDirs(m).forEach(v=>C.push([v[0]*rad,v[1]*rad,v[2]*rad]));
+    remaining-=m; shell++;
+  }
   const iR=dnn*KINTRA; const nuc=[]; let di=0,ti=0;
   kinds.forEach((kind,si)=>{
     const c=[C[si][0],C[si][1],C[si][2]];
@@ -347,9 +376,13 @@ function packNucleus(A, Z, dnn, coulSpread){
     const toC=p=>vnorm([c[0]-p[0],c[1]-p[1],c[2]-p[2]]);   // trefoil hole faces shared centre → interleave
     if(kind==='alpha'){                                     // two ⟂ deuterons = tetrahedron
       // interleave (Harvey 2026-07-03): neutron to proton, proton to neutron — the two
-      // perpendicular pairs are each a p–n deuteron (was p–p/n–n: a transcription slip)
+      // perpendicular pairs are each a p–n deuteron (was p–p/n–n: a transcription slip).
+      // OPPOSITION (same day): He is a tetrahedral interleaving of POLES that rotate along
+      // the SHARED axis — trefoil axes lie along ±Z (p up, n down), not toward the centre;
+      // the complementary p/n spin senses then gear the poles against each other.
       const tv=[[1,1,1],[1,-1,-1],[-1,1,-1],[-1,-1,1]].map(vnorm), ty=['p','n','p','n'];
-      tv.forEach((v,k)=>{const pos=add(v,iR);nuc.push({pos,type:ty[k],group:'alpha',sub:0,axis:toC(pos)});});
+      tv.forEach((v,k)=>{const pos=add(v,iR);
+        nuc.push({pos,type:ty[k],group:'alpha',sub:0,axis:[0,0,ty[k]==='p'?1:-1]});});
     }else if(kind==='deuteron'){                            // one proton + one shared-electron neutron
       const th=si*2.399963, ax=vnorm([Math.cos(th),Math.sin(th)*0.8,Math.sin(th*1.7)]);
       const p1=add(ax,iR),p2=add(ax,-iR);
@@ -492,6 +525,12 @@ function rebuildPacking(){
 }
 function refreshShown(){
   state.nucShown = nucleonsForSubunits(state.iso, state.nuc, state.reveal);
+}
+// deep-link: nuclear-packing-sequencer.html#Z=..&A=..  (the atomicus-lab PIP ties each
+// isotope's image here)
+function isoFromHash(){
+  const m=/Z=(\d+)&A=(\d+)/.exec(location.hash||''); if(!m) return null;
+  return ISO.find(e=>e.Z===+m[1]&&e.A===+m[2])||null;
 }
 function selectIso(e){
   state.iso=e;
@@ -659,7 +698,7 @@ async function initThree(){
     const {OrbitControls}=await import('three/addons/controls/OrbitControls.js');
     const {mergeGeometries}=await import('three/addons/utils/BufferGeometryUtils.js');
     const canvas=$('scene');
-    scene=new THREE.Scene(); scene.fog=new THREE.Fog(0x050508,26,60);
+    scene=new THREE.Scene(); scene.background=new THREE.Color(0x0d1119); scene.fog=new THREE.Fog(0x0d1119,28,64);
     camera=new THREE.PerspectiveCamera(46,innerWidth/innerHeight,0.1,300); camera.position.set(1,4,26);
     renderer=new THREE.WebGLRenderer({canvas,antialias:true});
     renderer.setPixelRatio(Math.min(devicePixelRatio,2)); renderer.setSize(innerWidth,innerHeight);
@@ -668,17 +707,17 @@ async function initThree(){
     controls.enableDamping=true; controls.dampingFactor=0.07; controls.minDistance=10; controls.maxDistance=60;
     controls.target.set(0,0,0);
 
-    scene.add(new THREE.HemisphereLight(0x8090b0,0x101018,0.55));
+    scene.add(new THREE.HemisphereLight(0x9fadc9,0x1a1f2b,0.95));
     dl=new THREE.DirectionalLight(0xfff2dc,state.bright);
     dl.castShadow=true; dl.shadow.mapSize.set(2048,2048);
     const sc=dl.shadow.camera; sc.left=-18;sc.right=18;sc.top=18;sc.bottom=-18;sc.near=1;sc.far=80;
     dl.shadow.bias=-0.0006;
     scene.add(dl); scene.add(dl.target);
     // subtle fill from front-right so the nucleus reads
-    const fill=new THREE.DirectionalLight(0x6688cc,0.5); fill.position.set(8,2,10); scene.add(fill);
+    const fill=new THREE.DirectionalLight(0x7d9bd4,0.75); fill.position.set(8,2,10); scene.add(fill);
 
     // back wall (low-right-background) — receives the shadow
-    const wallMat=new THREE.MeshStandardMaterial({color:0x141824,roughness:0.96,metalness:0});
+    const wallMat=new THREE.MeshStandardMaterial({color:0x232b3d,roughness:0.96,metalness:0});
     wall=new THREE.Mesh(new THREE.PlaneGeometry(70,48),wallMat);
     wall.position.set(6,-3,-13); wall.receiveShadow=true; scene.add(wall);
     // faint floor grid feel
@@ -998,6 +1037,8 @@ $('btnPlay').onclick=()=>{
 
 // =================== boot ===================
 recalibrate();
+const hashIso=isoFromHash(); if(hashIso) state.iso=hashIso;   // PIP deep-link honoured
+addEventListener('hashchange',()=>{const h=isoFromHash(); if(h) selectIso(h);});
 buildList();
 rebuildPacking(); computeChirp();
 setReveal(subunitCount(state.iso));   // full nucleus; sets panels, chirp + label (3D still off)

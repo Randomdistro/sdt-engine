@@ -1,5 +1,27 @@
 # SDT Investigations
 
+> **⟐ Master index = `INVESTIGATION_STACK.md`** (this README's dependency map and CQ## tables below
+> are legacy, kept as the historical record — the CQ## scheme is RETIRED; use domain codes).
+>
+> **State as of 2026-07-03/04:**
+> - **The execution wave:** 26 investigations executed honestly (no fake PASS) — GOM01/03/10/12/13,
+>   GD03/GD04 (killed), TD02–TD08, NP06/08/10/12/14/15, CR03/08/09, SAR01/03/04, QM05, FLM13. Each
+>   folder now carries its `*_VERDICT.md`; every KILL/OPEN names its cascade root in
+>   `INVESTIGATION_STACK.md` §3b. **Batch 2 (CM/PM/OP/CH + remaining QM) is STOPPED by Harvey's
+>   order** (QM05 excepted — executed and FARMER-corrected).
+> - **New folders:** `01_…/FLM13_Koppa_Route_to_the_Action` (EXECUTED — ℏ ROLE NATIVE, one
+>   mass/action seat; VALUE OPEN per the Seed Theorem) ·
+>   `01_…/FLM14_Rotating_Spation_Sequential_Occupancy` (SPEC + run 1: frustration 0.347 ⇒ rotation
+>   defect-carried NATIVE; rule-form ladder ×7.47→×2.88 both fail the isotropy gate; solver build in
+>   flight) · `06_…/GOM14_Koppa_Density_Multiplanet_Consistency` (EXECUTED — Class C: 693 systems,
+>   median 5.9% vs 50.7% shuffled, Sun anchor 1476.6 m).
+> - **`FARMER_PASS_2026-07-03.md`** — four transcription losses found and replanted (QM05 gearing,
+>   NP10 saturation, GOM13/E104 per-baryon column ⇒ Bouguer, SAR01/SAR03 blocked-fraction), plus
+>   Harvey's rules refinements (EC=repair in fissiles; angle is the premium; the meshing IS the mass
+>   defect; the FLM14 rotating-spation premise).
+> - `PPT08_Angular_DOF_from_Trefoil/PPT08_KOPPA_TARGET.md` is PPT08's grading table (Lamb = spacing,
+>   not shift: 1057.8 MHz ≡ 0.703 m/s ≡ 0.272 fm at n=2).
+
 Formal research programme derived from SDT's theoretical framework and experimental catalogue.
 Each investigation folder contains a **PROMPT.md** (methodology, gates, pivot tables — built from
 `PERFECT_PROMPT_TEMPLATE.md`), optional **DATA_REQUIREMENTS.md**, and on run: **RUN_LOG.md** +

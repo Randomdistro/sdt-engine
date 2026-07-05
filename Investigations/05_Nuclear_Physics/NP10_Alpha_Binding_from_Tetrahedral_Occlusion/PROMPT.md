@@ -34,6 +34,14 @@ He-4 (the alpha particle) has binding energy 28.296 MeV — anomalously large co
 > scaling measured by the 2026-07-03 run (×1.01 deuteron → ×1.98 triton → ×6.35 alpha, flat
 > per-bond factors falsified). **The next run must test the saturated-occlusion solid-angle ledger
 > as the lock term.**
+>
+> **Refinement (Harvey, same day):** the ledger is likely NOT a broad solid-angle area — the
+> limited rim distance of the poloidal flow means contact area is very small and **contact ANGLE
+> is the premium resource**. Treat the lock as an *angular-window allocation* problem: engagement
+> in narrow rim-windows (FLM07 glancing-transfer locus), where simultaneous alignment for many
+> partners is geometrically scarce — a native route to nonlinear coordination-dependence. The
+> tetrahedral placement itself is a rendering, not settled structure — do not hard-code it as a
+> premise; let the angle budget pick the arrangement.
 
 ### Step 1: Tetrahedral geometry
 

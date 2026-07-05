@@ -102,3 +102,22 @@ Until at least (1)+(2) are paid, PPT11 ships as: **length foothold (Class D), me
 ---
 
 *PPT11 · length foothold (Class D), mechanism [OPEN] · accommodate ≠ derive · no number fished, no mechanism fabricated.*
+
+---
+
+**REASSESSMENT (2026-07-04, Harvey directive — §G GATE-CONTRABAND check)**
+
+- **The ruling stands: OPEN (Class-D length foothold).** Checked for c-interference: the class was
+  capped by the imported `1/(4ℏE)` phase factor and the partial mass circularity — neither clause
+  enforced the rival's locality/c-cap axiom. Nothing above is altered.
+- **One kill-hinge is scoped, not moved:** T1's OPEN-vs-KILL trigger ("if FLM11's actual run grants
+  **zero** such DoF, the naive beat is KILLED") tacitly assumed the only possible internal clock is
+  an energy-channel *circulation* (a grip-carrying flow — the thing FLM11's zero-grip definition
+  zeroes out). Under the two-channel architecture (FLM14 RUN_LOG ADJ-7; Synchrony Theorem,
+  FARMER_PASS 2026-07-03 refinements 5–6), a **gear-locked constraint phase is a locally-readable
+  internal variable that carries zero grip** — it survives the zero-grip definition by
+  construction. Re-open condition (per §G.3, premise-class named): premise class =
+  single-channel/static-spation; if FLM14 rule-form-4 establishes the rotation DoF, an FLM11
+  "zero circulation DoF" result downgrades that KILL to **OPEN — beat-clock candidate transfers to
+  the constraint-channel gear phase**. The load-bearing debt (native derivation of the phase
+  factor) is unchanged either way.

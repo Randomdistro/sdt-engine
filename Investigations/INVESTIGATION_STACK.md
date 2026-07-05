@@ -62,6 +62,39 @@
 > [testable, unproven]; FLM11↔PPT11 reconciled (the 0.02 eV **mass gap = the neutrino's residual clock**).
 > ⇒ **FLM10's acceptance test is now concrete:** derive ρ_eng(r), its ~34× handed/scalar split, its coherence length.
 
+> **⟐ 2026-07-03/04 — the execution wave + canon repair + FARMER pass.**
+> 1. **26 investigations executed honestly** (no fake PASS): GOM01/03/10/12/13 · GD03/GD04 (both KILLED,
+>    fabricated banners documented in their §D blocks) · TD02–TD08 · NP06/08/10/12/14/15 · CR03/08/09 ·
+>    SAR01/03/04 · QM05 · FLM13. Every KILL/OPEN names its cascade root in §3b. **Batch 2 (CM/PM/OP/CH +
+>    remaining QM) is STOPPED by Harvey's order** — except QM05, which was executed and FARMER-corrected.
+> 2. **Benchmarks canon REPAIRED (2026-07-03, Harvey-authorised):** fabricated Lamb 1051.8 deleted;
+>    B04/B09/B21 de-tallied; honest headline **46/57 earned + 11 IDENTITY + 2 CALIBRATED, 0 genuine fail,
+>    11 PENDING** (verified by live rebuild+run 2026-07-04). See §2.
+> 3. **New results:** **GOM14** (koppa-density across 693 multi-planet systems, median 5.9% vs 50.7%
+>    shuffled, duodecile core 0.018%, Sun anchor 1476.6 m — Class C) · **FLM13** (ℏ ROLE NATIVE; {ℏ, m_e,
+>    m_p} collapse to ONE mass/action seat = a baryon-count anchor; VALUE stays OPEN per the Seed Theorem) ·
+>    **FLM14** run 1 (frustration 0.347 ⇒ rotation is defect-carried, NATIVE; rule-form ladder ×7.47 → ×2.88
+>    both FAIL the ≤1.2 isotropy gate; P2 instrument-limited; FLM10-grade solver build dispatched 2026-07-04) ·
+>    **PPT08_KOPPA_TARGET.md** (the Lamb spacing in native coordinates — PPT08's grading table).
+> 4. **FARMER pass (`FARMER_PASS_2026-07-03.md`):** four transcription losses replanted — QM05 geared
+>    rotation, NP10 saturation-at-contact (+ angle-is-the-premium), GOM13+E104 per-baryon column (⇒ Bouguer
+>    convergence; flight-as-designed doesn't discriminate), SAR01/SAR03 blocked-fraction ledger. Refinements:
+>    EC = repair in fissiles; **the meshing IS the mass defect** (union-not-sum ≡ FLM12's synchrony saving);
+>    FLM14's all-in premise (rotating spation, sequential occupancy) is the root under RESIDENCE-LAW,
+>    PPT08-seats, NP10-lock, FLM03 and ε=hν.
+> 5. **Two canon decisions PENDING Harvey:** NP12 radius formula (Z·R_p KILLED vs 908 radii; zero-fit
+>    R_p·(A/η)^⅓, η=π/√18, 4.96% RMS ready) · `cosmology.hpp` t_coupled circularity. Residual debts:
+>    ATOMICUS P_CMB fossil ×119 files, stale `ATOMICUS_COMPLETE.md`, B15/B16/B25-exact literals,
+>    `structural_analysis.cpp` charge-radius strings. **Nothing is committed to git.**
+> 6. **NP22 · Beta_Spectrum_from_Partition_Geometry (2026-07-04, EXECUTED — NP14's named test):**
+>    does the 0.9186c seat unwinding (electron keeps a release-angle share, neutrino takes the Law-V
+>    complement) reproduce the free-neutron β SHAPE? **FAIL→OPEN, and the whole 1-DOF release-measure
+>    class is KILLED** (committed isotropic measure KS D=0.49 vs gate 0.15; endpoint exponent +2 and
+>    low-E +½ of the anchor are per-particle **3D state-count fingerprints** — one angle has no sphere;
+>    knob-proof, verified numerically for 4 declared measures). Endpoint at Q=0.782333 = IDENTITY, never
+>    sold. Continuum existence earned (cheap); cascade root: native 3D exit-channel count
+>    N_exit ∝ E² — **FLM14** sequential-occupancy lineage + PPT10/PPT11 budget-speed→E_ν map debt.
+
 ---
 
 ## 0 · The SDT-constrained framework (every build-prompt inherits this)
@@ -156,6 +189,18 @@ See `FLM03.../DEEPTHINK_PROMPT.md`.
   `0.072` and falling with N (0.43 at N=64); **1 longitudinal + 2 transverse** acoustic branches present —
   class **C/PENDING**, decay exponent not pinned (needs gold-standard glass at N≥512 + finite-k `ω(k)`);
   `PHASE1_RESULTS.md`). *Build next:* C++ engine `flm10_lattice_solver.cpp` for N≥512 + `ω(k)`, then P2 wake.
+- **FLM13 — Koppa Route to the Action (ℏ)** `[EXECUTED 2026-07-03 — NATIVE (ROLE); VALUE OPEN]` · FLM06,
+  FLM12. ℏ **is** the W=1 rung's Onsager–Feynman circulation action (`m_e·κ/2π` agrees to 1e-9, labelled
+  IDENTITY-CLASS — derives what ℏ *is*, not its number); the delete-test shows **no ℏ-free VALUE path
+  exists** (every dimensionful atomic input encodes ℏ; the Seed Theorem holds, exactly as pre-committed);
+  `{ℏ, m_e, m_p}` collapse to **ONE mass/action seat** — a baryon-count anchor, handed to FLM12 (§3b).
+- **FLM14 — Rotating Spation & Sequential Occupancy** `[SPEC + RUN 1, 2026-07-04]` · FLM07, FLM10. Harvey's
+  all-in premise (FARMER refinement 4): the spation MUST rotate; electron positions are a deterministic
+  gear-stepped TOUR (orbital = sequence, Born weighting = dwell time). Run 1: **frustration 0.347 ⇒
+  rotation is defect-carried (NATIVE — OP-2's carriers forced by the gearing premise itself)**; rule-form
+  ladder ×7.47 (global-clock, KILLED) → ×2.88 (bond-local) — both FAIL the ≤1.2 isotropy gate; P2 dwell
+  exponent instrument-limited. FLM10-grade solver (`flm14_solver.py` = rule-form-3) dispatched 2026-07-04;
+  graded against the PPT08 three-seat Lamb table, the NP10 lock ladder, FLM10 isotropy, one-rule-throughout (F6).
 
 ## L1 · Lattice mechanics
 
@@ -211,11 +256,15 @@ See `FLM03.../DEEPTHINK_PROMPT.md`.
 - **PPT04 — Neutrino has no magnetic moment** `[RESOLVED]` · Law VI. W=0 open winding → μ_ν≡0 exactly;
   re-narrate natively (open winding → no EM-deflecting wake), drop the borrowed "moment". Falsifiable vs SM
   ~10⁻²⁰. Pairs with **E58** (monopole forbidden by half-vortex impossibility).
-- **NP15 — Nuclear magnetic moments** `[SPEC]` · PPT01, PPT06. *Build:* μ for p, n, d, t, He-3 from W=3 trefoil +
-  W=1 torus circulation geometry (native wake, **no magneton**); compare to measured ratios.
+- **NP15 — Nuclear magnetic moments** `[EXECUTED 2026-07-03 — OPEN; composites DEGENERATE]` · PPT01, PPT06.
+  No committed trefoil formula lands μ_p (modes bracket −9.4%/+11.0%); block-addition reproduces only what
+  the rival's impulse approximation also gives and breaks beyond A=4; the post-hoc C5 candidate is
+  quarantined (§3b TREFOIL CURRENT-TO-MOMENT MAP). Native wake, **no magneton** — that rule held.
 - **E32 — Proton radius** `[VERIFIED]` · R_p = 0.841 fm from W+1; matches muonic value (B18).
-- **NP14 — Proton–neutron mass difference** `[OPEN]` · 1.293 MeV from trefoil circulation; derivation
-  incomplete. Pairs with the ATOMICUS **neutron-identity** thread (n = p + internal e⁻).
+- **NP14 — Proton–neutron mass difference** `[EXECUTED 2026-07-03 — OPEN: sign/mechanism EARNED, magnitude
+  OWED]` · the neutron is heavier because it *contains* an extra electron (+0.511 MeV, structural) plus a
+  positive seat surplus; the surplus magnitude is not paid natively (−23.3% — §3b RESISTANCE-MAGNITUDE root);
+  legacy Hyp A KILLED. Pairs with the ATOMICUS **neutron-identity** thread (n = p + internal e⁻).
 - **E79/E80 — Pair production / annihilation** `[VERIFIED]` · 2×511 keV from vortex creation / counter-vortex
   collision. **E81 — electron diffraction** `[VERIFIED]` (lattice scattering of the vortex).
 - **ANGULAR-DOF — native angular (l) degree of freedom** `[OPEN · foundational]` · **blocks all L3 fine
@@ -225,7 +274,13 @@ See `FLM03.../DEEPTHINK_PROMPT.md`.
   audit M1, STRUCTURAL-BORROW). *Build:* derive an angular / orbital-shape DOF from the torus/helix/occlusion
   geometry itself (not imported Y_ℓ^m). **Until it exists, no Lamb shift, no fine structure, no s-vs-p
   splitting — and not even the sign 2S₁/₂ > 2P₁/₂ — can be computed natively.** (Surfaced by the Lamb-dyad
-  refutation workflow, 2026-06-08.)
+  refutation workflow, 2026-06-08.) **⟐ 2026-07-04 — the target is now well-posed:**
+  `PPT08_Angular_DOF_from_Trefoil/PPT08_KOPPA_TARGET.md` is PPT08's grading table — the Lamb is a
+  **spacing, not a shift** (Dirac's degeneracy theorem was the failed "should"); the measured
+  **1057.8 MHz ≡ 0.703 m/s seat-speed offset ≡ 0.272 fm radial offset at n=2** (RE-EXPRESSION, R5
+  respected); three-seat table 0.272/0.410/0.452 fm; the R_p/3 cluster (0.2722 vs 0.2805 fm, −2.9%)
+  is logged [OPEN] — privileged, mechanism untested, fishing forbidden. PPT08 stays OPEN; FLM14 is
+  graded against this table.
 
 ## L3 · Atomic structure, emission & radiation
 
@@ -302,10 +357,17 @@ See `FLM03.../DEEPTHINK_PROMPT.md`.
   gamma rearrangement, **E19** He-3/He-4 King-plot nonlinearity, **E20** neutron-budget verification, **E37**
   double-EC Xe-124, **E38** universal EC cessation at full ionisation. Each: SDT EC-grammar prediction vs
   charge state → measurable t½ change.
-- **Nuclear binding/structure [SPEC/Calc]:** **NP08** triple-alpha/Hoyle (α+4d packing), **NP09** `[EXECUTED — RESOLVED-NEGATIVE, −97.3%, see NP09_VERDICT.md]` deuteron
-  binding (occlusion at 2.14 fm), **NP10** alpha binding (tetrahedral 2p+2n), **NP11** neutron lifetime
-  (beam vs bottle from boundary conditions), **NP12** charge-radius scaling Z·R_p vs r₀A^(1/3) (NIST
-  archival), **E34** Li-7 quadrupole (α+t separation), **NP13** `[EXECUTED — RESOLVED-NEGATIVE, thesis not confirmed, see NP13_VERDICT.md]` Fe-56 vs Ni-62 grammar efficiency, **E36**
+- **Nuclear binding/structure (2026-07-03 wave — see each `NP##_VERDICT.md`):** **NP06** `[EXECUTED —
+  KILLED]` (E_bind = ℏΔω kinematic mesh pull; H₂ anchor fails structurally; feeds the corrected NP10 frame),
+  **NP08** `[EXECUTED — OPEN/DEFERRED]` triple-alpha/Hoyle (no knob-free route to 7.654 MeV until the
+  tetrahedral lock is paid; 0.379 MeV closure barrier isolated; Be-8 premise corrected to the grammar),
+  **NP09** `[EXECUTED — RESOLVED-NEGATIVE, −97.3%, see NP09_VERDICT.md]` deuteron binding (occlusion at
+  2.14 fm), **NP10** `[EXECUTED — OPEN; FARMER-replanted]` alpha binding (shared-electron electrostatics
+  under-binds ×6.35; lock is coordination-dependent ×1.01/×1.98/×6.35 — §3b NP17-PENDING LOCK; FARMER
+  restored **saturation-at-contact** as the primary bond mechanism for the next run), **NP11** `[SPEC]`
+  neutron lifetime (beam vs bottle from boundary conditions), **NP12** `[EXECUTED — canon Z·R_p KILLED
+  ×179 vs 908 IAEA radii; zero-fit native R_p·(A/η)^⅓ at 4.96% RMS ready — CANON DECISION PENDING HARVEY]`,
+  **E34** Li-7 quadrupole (α+t separation), **NP13** `[EXECUTED — RESOLVED-NEGATIVE, thesis not confirmed, see NP13_VERDICT.md]` Fe-56 vs Ni-62 grammar efficiency, **E36**
   O-16 pure-deuteron scaffold. Dependency: NP09 → NP10 → NP08.
 - **Atmospheric Spallation** `[SPEC, 12 items]` · NP01. **Q01** event geometry · **Q02** neutron-ejection
   selectivity (ℓ=1 wake) · **Q03** multiplicity rule (EXFOR) · **Q04** capture mechanism / 1-over-v · **Q05**
@@ -318,14 +380,17 @@ See `FLM03.../DEEPTHINK_PROMPT.md`.
 
 - **GOM02 — k-Hierarchy Advantage** `[RESOLVED 15/15]` · EMC01, PPT01. k=c/v, ϟ=v²R/c², GM=ϟc²; nuclear→galactic
   ladder, no test particle. The conversion spine.
-- **GOM01 — Spation Depth Engine** `[RESOLVED 27/27]` · GOM02, Law I. z(r)=ϟ/r reproduces redshift, Shapiro,
-  bending, cosmological z from one scalar field.
+- **GOM01 — Spation Depth Engine** `[RESOLVED 27/27 · re-audited 2026-07-03: CONVERGENCE, factor-4 claim
+  PARTIAL]` · GOM02, Law I. z(r)=ϟ/r reproduces redshift, Shapiro, bending, cosmological z from one scalar
+  field — weak-field GR optics with ϟ≡GM/c² substituted (disclosed); the un-derived occlusion transfer
+  function is §3b R1's root (see `GOM01_Spation_Depth_Engine/VERDICT.md`).
 - **GOM04 — Koppa Closure** `[RESOLVED]` · Law I, GOM02. c and ϟ derived from Mercury precession + orbital
   velocity, no GM (the "c from geometry" result).
-- **CQ23_Lunar — Lunar Orbital Kinematics** `[ACTIVE]` · GOM01, Law III. Lunar orbit from pendulum
-  acceleration time-series via tidal occlusion gradient; no G/M. **(Number collides with CQ23_3D — propose
-  renumber, see §3.)**
-- **Gravity tests [SPEC]:** **GOM08** Mercury precession 42.98″/cy from k²-gradient (Calc) · **E21** orbital
+- **GOM03 — Lunar Orbital Kinematics** (ex-CQ23_Lunar; collision resolved by the domain-code migration)
+  `[EXECUTED 2026-07-03 — CONVERGENCE (disclosed identity) on the ϟ-bridge; OPEN on the native remainder]` ·
+  GOM01, Law III. Lunar orbit from pendulum acceleration time-series via tidal occlusion gradient; no G/M
+  (see `GOM03_Lunar_Orbital_Kinematics/VERDICT.md`).
+- **Gravity tests:** **GOM08** Mercury precession 42.98″/cy from k²-gradient `[EXECUTED — Class C]` · **E21** orbital
   velocity drop / frame-dragging lateral drift · **E23** Cavendish bell (shielding inside dense shell) ·
   **E26** lunar laser ranging k-residuals (archival) · **E27** solar oblateness J₂ (archival) · **E70**
   gravitational redshift `[VERIFIED]` · **E71** gravitational Casimir · **E73** local c near dense object ·
@@ -335,10 +400,24 @@ See `FLM03.../DEEPTHINK_PROMPT.md`.
   **E96** artificial gravity `[not-runnable: planetary-scale]`.
 - **GOM09 — Earth core seismic speed** `[RESOLVED ✅ 1.82% RMS to PREM, 15 Apr 2026]` · GOM01. g(r) from koppa,
   no G/M. (The completed exemplar.)
-- **GOM11 — Ocean tidal harmonics** `[SPEC archival]` · convergence gradient differential. **GOM10 — Lead-sphere
-  displacement field** `[SPEC]` (near-field topology; note two GOM10 files — keep the multi-gas version).
-- **GOM12 — Solar-system convergence budget** `[SPEC]` · GOM02. Total convergence balances CMB influx; full
-  k-hierarchy. **CR08/CR08 redshift+BAO** also feed here (shared cosmology).
+- **GOM11 — Ocean tidal harmonics** `[EXECUTED — Class C CONVERGENCE]` · convergence gradient differential
+  (`GOM11_VERDICT.md`). *(The old lead-sphere displacement-field idea is now experiment **E103**.)*
+- **GOM10 — Three-Body Lagrange from Koppa** `[EXECUTED 2026-07-03 — IDENTITY (μ substitution) +
+  CONVERGENCE (all L-point positions); PARTIAL on the μ_ϟ gate −0.122%]` · GOM02 (§3b R2 input-precision —
+  payment is one ephemeris-grade input block; see `GOM10_Three_Body_Lagrange_from_Koppa/VERDICT.md`).
+- **GOM12 — Solar-system convergence budget** `[EXECUTED 2026-07-03 — CONVERGENCE (census, ϟ≡GM/c²
+  disclosed); PARTIAL on Kepler 0.351% / ϟ_Sun 0.301% gates (§3b R2)]` · GOM02. Total convergence balances
+  CMB influx; full k-hierarchy. **CR08/CR08 redshift+BAO** also feed here (shared cosmology).
+- **GOM13 — Occlusion-Altitude Cavendish** `[EXECUTED 2026-07-03 — flagship sin-dip law KILLED pre-flight
+  (47× vs G records); FARMER-replanted]` · Law III. The kill hit a transcription foreign to Law III
+  (total-opacity cone); the native **per-baryon mass-column** form lands on the measured **Bouguer gradient
+  (~4.4×10⁻⁷) — honest CONVERGENCE**; corrected δ(h) is ~10⁻⁹-class, so E104's flight-as-designed doesn't
+  discriminate (κ-correlation channel survives). See `FARMER_PASS_2026-07-03.md` loss 3.
+- **GOM14 — Koppa-Density Multi-Planet Consistency** `[EXECUTED 2026-07-03 — Class C, earned]` · GOM02,
+  mass-free gauge q≡ϟ★/R★³ from transit observables only (no G, no kg). **693 hosts: median intra-system
+  deviation 5.9% vs 50.7% shuffled (~9×); duodecile core 0.018% vs 7.62% (418×); solar anchor ϟ☉=1476.6 m**
+  (CODATA 1476.6). Named caveat: literature `pl_ratdor` density priors — airtight version = prior-free
+  light-curve refit [OPEN]. (`GOM14_Koppa_Density_Multiplanet_Consistency/GOM14_VERDICT.md`.)
 - **SATURN — Gradient / ring persistence** `[ACTIVE: analysis done, writeup pending]` · GOM02.
   `saturn_gradient_check.cpp`: Saturn's surface gradient ϟ/R² ≈79× the Sun's at Saturn → local domination →
   rings protected from solar-wind erosion; only Jupiter/Saturn dominate (Uranus/Neptune don't). *Build:* write
@@ -349,8 +428,10 @@ See `FLM03.../DEEPTHINK_PROMPT.md`.
 
 - **GD01 — Eclipse Saturation Model** `[RESOLVED-framework]` · GOM02, Law I. Flat rotation curves from
   convergence-disk occlusion; BTFR slope 4; G_eff exact. (`galactic.hpp`.)
-- **CQ23_3D — 3D Volumetric Integration** `[ACTIVE]` · GD01. Pure 3D radial occlusion integral replacing the
-  2D Σ_sat anchor (fixes LSB galaxies).
+- **GD04 — 3D Volumetric Integration** (ex-CQ23_3D) `[EXECUTED 2026-07-03 — KILLED]` · GD01. Pure 3D radial
+  occlusion integral: RMS 71.39% on real data; the hand-typed [SUCCESS] banner over that number is documented
+  as the June-2026 fabrication mode (§3b process root; `GD04_3D_Volumetric_Integration/VERDICT.md`). No
+  recovery as built — the debt is §3b R1 (occlusion transfer function); GD05 twin-regime is the partial stand-in.
 - **GD05 — Galaxy rotation curves (SPARC)** `[ACTIVE archival]` · GD01. **NOTE (memory):** canonical 3D eclipse
   FAILS real SPARC (RMS 66%); the **twin-regime / M4 convergence-floor** law wins (RMS 23.8%, BTFR 3.58) but
   its crossover shape is borrowed MOND-simple. *Build:* derive the crossover natively (ties to APS03 floor).
@@ -362,8 +443,10 @@ See `FLM03.../DEEPTHINK_PROMPT.md`.
   redshift residuals. **(Number collides with CQ18_Redshift — propose renumber, §3.)**
 - **GD02 — Milky Way Occlusion Map** `[SPEC]` · GD01, GD03. Catalogued sources within 150 pc of Sgr A*; eclipse
   occlusion at the galactic centre.
-- **GD03 — Galactic Spation Topology** `[ACTIVE]` · GOM02, GOM01. Lattice state across 12 radial zones
-  (10⁻¹⁶ → 10²¹ m); grand unification of PPT07–19. *Build:* requires PPT07–19 closed.
+- **GD03 — Galactic Spation Topology** `[EXECUTED 2026-07-03 — CIRCULAR (koppa census) / KILLED (rotation-curve
+  claims)]` · GOM02, GOM01. The hand-typed "PASS" banner over the tool's own printed "Level 3 FAIL" is
+  documented in §D (§3b process root). No recovery as built; the debt is §3b R1
+  (`GD03_Galactic_Spation_Topology/VERDICT.md`).
 - **Hubble suite** `[ACTIVE]` · GOM01/GOM02/CR01. ~19 zk² tools → investigations: **Pantheon+ distance
   relation** (now done — see CR12), **host-mass step** (weakest link), **lattice/H₀-gradient
   inference**, **solar/stellar surface-gravity zk²** (M31, ε Eridani), **planetary/Jovian dynamics** (flyby
@@ -388,16 +471,32 @@ See `FLM03.../DEEPTHINK_PROMPT.md`.
 - **κ(z) unified fit / BAO+CMB acoustic peaks** `[OPEN — the real decider]` · CR12, FLM09-B. The one
   cosmological test where SDT and ΛCDM genuinely diverge (number counts + acoustic structure). *Build that next
   in cosmology.*
-- **Cosmology experiments [SPEC archival]:** **E41** T_CMB from zk²=1 closure · **CR09** H₀ tension
-  (Pantheon+) · **E43** SN Ia mass step · **E44** CMB dipole (observer motion vs expansion) · **CR08** BAO as
-  lattice standing waves (DESI) · **CR09** dark energy as pressure-gradient misreading (χ² with/without Λ) ·
+- **CR03 — Transfer-function closure** `[EXECUTED 2026-07-03 — OPEN]` · blocked on one class-X scale
+  (Route B blocked by the `cosmology.hpp` t_coupled circularity — CANON FLAG pending Harvey, §3b); the
+  algebra itself is verified and earned (`CR03_Transfer_Function_Closure/CR03_VERDICT.md`).
+- **CR08 — BAO as lattice standing waves** `[EXECUTED 2026-07-03 — KILLED (static exponential-strain law:
+  χ² 131.7 vs ΛCDM 8.2; CMB acoustic angle off ×2.21) / IDENTITY (147 Mpc "derivation" as coded)]` — the
+  kill *confirms* CR07/CR10 canon (redshift does not compound); native successor = octave/cubic rung,
+  distance closure owed (§3b NO-DERIVED-d(z) root). FARMER-checked: prompt clean, no transcription loss.
+- **CR09 — H₀ tension / dark energy** `[EXECUTED 2026-07-03 — KILLED (isotropic radial κ-gradient: 0/122
+  transition depths survive the four-gate pincer) / OPEN (anisotropic line-of-sight version + the
+  emission-half route, out of scope)]` (§3b EMISSION/PROPAGATION SPLIT root; `CR09_VERDICT.md`).
+- **Cosmology experiments [SPEC archival]:** **E41** T_CMB from zk²=1 closure · **E43** SN Ia mass step ·
+  **E44** CMB dipole (observer motion vs expansion) ·
   **E50** Cν background T_ν `[awaits PTOLEMY]` · **E48** GW speed = c `[VERIFIED GW170817]` · **E90** GZK
   cutoff `[VERIFIED Auger]` · **E100** lattice dispersion (GRB photon timing) · **E72** c in dense media.
 
 ## L7 · Stellar & compact objects
 
-- **SAR03** Solar luminosity (convergence recycling budget) `[SPEC]` · GOM02/GOM12.
-- **SAR04** Stellar main sequence as k-gradient equilibrium (GAIA) `[SPEC archival]`.
+- **SAR01** Le Sage thermal budget `[EXECUTED 2026-07-03 — KILLED (absorption sub-mechanism, ×2.3×10¹⁷) /
+  OPEN (relay evasion)]` — earned ceiling: thermalisation η < 4.4×10⁻¹⁸; FARMER-replanted (loss 4: occlusion
+  = redirection, only the blocked fraction does work); the missing closure is the Law-II release-rate law
+  (§3b RELAY ENERGY-COUPLING root).
+- **SAR03** Solar luminosity (convergence recycling budget) `[EXECUTED 2026-07-03 — KILLED (the prompt's
+  derivation chain, ×2.5×10⁴³ overshoot of a formula the branch never intended — FARMER loss 4) / OPEN
+  (framework question; budget closes only at the SB identity — no release-rate law exists)]` · GOM02/GOM12.
+- **SAR04** Stellar main sequence as k-gradient equilibrium (GAIA) `[EXECUTED 2026-07-03 — CONVERGENCE
+  (ordering) / KILLED as stated (the L∝M^3.5 emergence claim)]`.
 - **E66** White-dwarf Chandrasekhar 1.44 M_⊙ from occlusion saturation `[SPEC]`.
 - **E67** Neutron-star TOV ~2.2 M_⊙ from lattice compression limit `[SPEC]`.
 - **E68** Black-hole interior = max-compression state (no singularity); LIGO ringdown echoes `[SPEC archival]`.
@@ -430,11 +529,14 @@ gives the measured number, name the falsifier where SDT departs.* Compact list:
 
 ## 2 · Benchmarks (the verified base — not investigations, the floor they stand on)
 
-`Benchmarks/B01_B25/benchmarks_b01_b25.cpp` — real tally **62/73 passed (84.9%)**, 0 genuine fail, 11 PENDING;
-this corrects the former "all 25 PASS" headline, which predates the domain-code migration and the HUNTER audit.
+`Benchmarks/B01_B25/benchmarks_b01_b25.cpp` — honest headline (canon repaired 2026-07-03, verified by live
+rebuild+run 2026-07-04): **46/57 earned predictions passed (80.7%) + 11 IDENTITY (definitional, shown but
+never tallied) + 2 CALIBRATED (class E, documented) · 0 genuine fail · 11 PENDING (known-open, flagged)**.
+This supersedes both the old "all 25 PASS" and the interim "62/73 (84.9%)" tallies — the 62/73 counted
+definitional identities and calibrated fits as earned passes (HUNTER P5–P9).
 **B04 Lamb shift**: the fabricated 1051.8 literal was **KILLED and has now been removed** (canon fix applied
 2026-07-03 — B04 reports "SDT amplitude OPEN (PPT08) — no earned prediction"; B09 and B21 likewise demoted to
-display-only) → see L3 Lamb. Honest earned count ≈46/70 per
+display-only) → see L3 Lamb and `PPT08_KOPPA_TARGET.md`. Full ledger:
 `HUNTER_REPAIR_2026-07-02/CANON_proposals.md`. The rest (B01 Rydberg, B03 α, B05 21-cm*, B07 thermo, B08–B12
 orbital/stellar, B13 CMB, B14 rotation, B15 BAO, B17 g-factor, B18 R_p, B19 β-decay Q, B20 zk², B21–B22
 hierarchies, B23 Coulomb identity, B24 V_disp, B25 He-4) are DERIVED/COMPUTED. *(B05's value passes — the
@@ -462,6 +564,16 @@ Next new investigation = the **next free domain code** in the relevant field (e.
 
 > Opened 2026-07-03 during the execution wave. Every KILL/OPEN/FAIL verdict names its cascade
 > root; roots are logged here only (single-point), never per-folder.
+
+> **⟐ 2026-07-04/05 — strike-force wave.** ~30 investigations executed under §G + the two-channel
+> doctrine: QM02/03/04/07 (QM05 2026-07-03, prior wave, consolidated here) · CM01/CM03–07 ·
+> PM01/02/04–07 · OP02–07 · CH02–07 · NP22 · FLM14 runs 2–3. **PM04 Debye = the wave's first full
+> RECOVERED** (P2 premise traced and closed via the TD02 bath, verified −6.8%). Zero fabrications;
+> every FAIL was pre-committed or ADJ-logged before running. New roots ledgered below:
+> WAKE-DISPERSION · ROOT-A (h-cell) · ROOT-B (lock-depth) · HG-1 · WEOS-1 · PM03-REBUILD ·
+> ROOT-RIM · ROOT-BUDGET · OP-ROOT · OP01-MATTER-INDEX · NP22 exit-channel count. RESIDENCE-LAW
+> consolidated to FIVE debts under FLM14 rule-form-4; ROOT-CONTACT gained a registered
+> quantitative cross-check; ROOT-SEAT (CH03) merged into the FLM14/RESIDENCE-LAW cluster.
 
 - **R1 · OCCLUSION-MECHANISM** — the un-derived occlusion transfer function: how a mass column
   converts to blocked convergence flux (drag/decay coefficient; per-baryon cross-section; the
@@ -496,7 +608,14 @@ Next new investigation = the **next free domain code** in the relevant field (e.
   MeV closure barrier isolated), NP10 (α −84.3%; implied boosts ×1.01/×1.98/×6.35 d/t/α — flat
   per-bond boosts pre-falsified; lock must supply ≈0.02/4.2/23.8 MeV), NP15-composites
   (block-addition dies beyond A=2), NP06-residuals. The lock is now a sharp numeric target,
-  not a vibe.
+  not a vibe. **⟐ 2026-07-04/05 CH extension — ROOT-CONTACT (= NP10 saturated occlusion):**
+  CH02's 1:1 overshoot (NaCl **+9.4%** PASS-in-gate ±15%; MgO **+21.6%** FAIL, reported) and
+  CH07's missing restoring stiffness (measured k(H₂) = 575 N/m = the missing term's curvature)
+  are the same underived contact/lock term at Å scale; CH05's missing barrier is its rim sibling
+  (see ROOT-RIM). **REGISTERED CROSS-CHECK (CH07 §D7):** one derived wall must *simultaneously*
+  give k(H₂) ≈ 575 N/m AND the NaCl +9.4% correction AND the alpha lock ×6.35 — pay once,
+  four debts clear (NP17-alpha, CH02 overshoot/MgO, CH05 contact-side, CH07 k). Convergence
+  with ROOT-B (below) noted: the same lock-depth question, condensed-matter coordination.
 - **NP19/NP21 RESISTANCE-MAGNITUDE law** (FLM10/FLM12 lineage) — NP14's −23.3% surplus miss
   (shared with NP20-T2). Sign earned; magnitude owed.
 - **TREFOIL CURRENT-TO-MOMENT MAP** *(new; owner NP15)* — μ_p modes bracket −9.4%/+11.0%;
@@ -520,6 +639,118 @@ Next new investigation = the **next free domain code** in the relevant field (e.
 - **CANON FLAG (propose-only): `cosmology.hpp` t_coupled ≡ BAO_scale/c_s** — circular; blocks
   CR03 Route B and CR08 G2. Also `strain::` comment oversells ("steeper near massive
   structures"). Harvey's call.
+- **RESIDENCE-LAW** *(root; owner FLM14 rule-form-4; consolidated 2026-07-04/05 to FIVE debts)*
+  — the un-derived law of which lattice seat a landing vortex takes. Members: **QM01** (the
+  landing-count fringe), **QM03** (re-seeding — T-as-particle-count deferred), **QM04** Phase-2
+  (residence ∝ energy density), **QM05** (the cos²(a−b) joint-landing weighting — Bell 2√2 gap —
+  *plus* SDT's owed "why not S=4" exclusion: a bare marginal-preserving joint rule reaches
+  S = 4.0000, so the entire burden is the specific weighting), **QM07** (sequential-SG
+  cos²(θ/2)). All five are one law. **QM04 holds the acceptance test:** landing histogram ∝ I(x)
+  to **<1% RMS** from a *mechanical* rule, uniform start, no probability assignment — and it must
+  beat QM04's pre-registered null (naive gradient steering, killed at 215% RMS). FARMER gave it a
+  mechanism owner: derive the joint landing weighting from **geared-pair readout mechanics**
+  (FLM07 1:4 gearing = the machinery, throughpole = the channel); per FARMER refinement 4, its
+  premise-root is FLM14 (rotating spation, sequential occupancy: Born weighting = dwell time).
+  **Status after FLM14 run 3:** first Born-adjacent exponents ever measured — p_occ = **+2.375 /
+  +2.325** at β = 0.2/0.4 (T_W-robust +2.291) — **UNCLAIMED** (2 of the committed 3 consecutive
+  betas; split-half first halves undefined; geometry seed 2 fails replication |r| = 0.47).
+  CHSH/Part C correctly NOT RUN (unlicensed until a stable regime exists). **ROOT-SEAT merged
+  in (CH03):** the O₂ paramagnetism kill of static shell-filling (M2 pairing map
+  KILLED-in-static-class) is the fifth field failing at the static-spation premise — chemistry
+  joins QM residence, PPT08 Lamb seats, the NP10 lock and FLM03 in the FLM14 cluster.
+- **ROOT-SIM (priority 1) — new member/payer-candidate: FLM14** — run 1 earned
+  frustration-forced carriers (0.347 — NATIVE) but its rule-form ladder (global-clock ×7.47
+  KILLED → bond-local ×2.88) FAILS the ≤1.2 isotropy gate; rule-form-3 (annealing texture)
+  REQUIRES the FLM10-grade solver (`flm14_solver.py` dispatched 2026-07-04, gates unmoved:
+  must beat 1.2, not merely 2.88). The solver's debt scope is now SIX: OP-1/2/3+FLM03 ·
+  FLM09-A2 isotropy · PPT07 wake (6π⁵ mechanism) · GD05 crossover · R1 occlusion transfer ·
+  **FLM14 bond-local gearing + structured seat-tour** (which in turn owes RESIDENCE-LAW,
+  the PPT08 three-seat table, the NP10 lock ladder and ε=hν their premise).
+  **⟐ FLM14 runs 2–3 (2026-07-04, `FLM14_VERDICT.md`):** rule-form-2 FAIL (×2.29 ± 0.12 on the
+  CRN control); rule-form-3 KILLED at every non-degenerate β (ladder ×7.47 → ×2.88/×2.29 →
+  ×1.35 → ×1.00-degenerate; run-2's SELF-TRAPPING and F6-tension roots logged); **rule-form-4
+  (two-channel: pulse at c, constraint rigid — Harvey's ADJ-7 directive) DISSOLVES the P1
+  isotropy gate by architecture** (×1.0000 ± 0.0000, max|t_g−t_u| = 0.00e+00 — stated plainly:
+  not earned, the gate loses discriminating power; F6-tension CLOSED structurally). The
+  falsifiable content moved to the residual gearing signature, measured: **the constraint
+  network PERCOLATES — 85.5% of sites in one rigid cluster, collective rate |Ω|/ω₀ = 0.0046
+  (gear-locking freezes rotation), locked-bond fraction 47.9%** (W = 0.5 duty forecast, honest
+  match) = **OP-2's rigid-backbone-plus-carriers picture arrived at from the gearing side**.
+  ADJ-9 probe: the NP14 0.9186 seat **NOT FOUND** in locked-cluster kinematics (a miss is a
+  miss). P2 exponent status lives under RESIDENCE-LAW above (Born-adjacent, unclaimed); next
+  instrument named twice over: statistics (3rd β + replication) and the tour-side constraint
+  channel (new ADJ required).
+- **PPT08 grading table** — `PPT08_Angular_DOF_from_Trefoil/PPT08_KOPPA_TARGET.md` is the
+  pre-committed target any Lamb mechanism must hit: 0.272 fm / 0.703 m/s at n=2 with the
+  observed 2S>2P sign (three-seat table 0.272/0.410/0.452 fm; R_p/3 cluster logged [OPEN],
+  fishing forbidden). Lamb = spacing, not shift.
+- **WAKE-DISPERSION** *(new 2026-07-04; owner ROOT-SIM/FLM14 rotation dynamics)* — the single
+  ℏ bridge: FD02's measured circulation κ = h/m (OBSERVED anchor, 0.02%) + the substrate
+  phase-gradient identity v = (κ/2π)∇φ (a postulate of the substrate model, NOT yet derived
+  from tick mechanics); equivalently Ω_m = mc²/ℏ (the vortex's internal rest rate). It is the
+  ONE entry point by which ℏ attaches to QM01's λ = h/p, QM02's ½-floor (the Δk→Δp line), and
+  QM03's lab-unit conversions (STM, Geiger–Nuttall). Everything dimensionless in those runs is
+  ℏ-free machinery; `[x,p]=iℏ` appears nowhere. Pay this one identity → three folders upgrade.
+- **ROOT-A · h-cell (action per relay event = h beyond vortex winding)** *(new, CM suite)* —
+  the Law-VI-extension premise: one carrier configuration per winding cell at cell rate Δμ/h.
+  Registered members (CM06 §D7 — "pay once, four debts clear"): **CM04 T³** (grade-cap only;
+  no gate fail traces to it), **CM01 lock ceiling** (T_c ∝ ℏω_D), **CM03 gap door** (the Law
+  VI/FD02 ℏ-door in E_g = f·ℏ²/(m_e d²); CM03's magnitude factor f is a separate LOCAL root —
+  grip-depth/second-length, PPT06 owes it), **CM06 e²/h per channel** (CONVERGENCE conditional
+  on this premise; edge-channel count held exactly ν = 2 over three orders of density).
+- **ROOT-B · lock-depth / gear-engagement magnitude** *(new, CM suite)* — THE FLM14
+  gear-engagement number: how strongly a material's lattice gears two wakes on the constraint
+  channel. Owed by: **CM01 η = T_c/θ_D** (measured spread **24×**, 0.0028–0.0685; the
+  deformation-well "polaron" branch died material-blind), **CM05 T_λ** magnitude (honestly
+  failed), **SCT's barrier B** ("what sets B" = SDT's G_F), **NP17 lock** — NOTE the
+  convergence with the NP17-PENDING LOCK entry above: the same lock-depth question at nuclear
+  coordination (×1.01/×1.98/×6.35). Re-open: FLM14 delivers a per-material engagement number →
+  T_c = η·θ_D becomes a zero-fit prediction.
+- **HG-1 · handed bilinear gain (≡ EMC02 charge closure)** *(new, PM suite)* — the underived
+  *signed* carrier–swirl coupling coefficient; dimensionally e-shaped — the SAME quantity EMC02
+  certified as irreducible Tier-1. Blocks: **PM01-P3** (bilinear gain), **PM02** (Lenz sign —
+  the K2-over-K1 drive-rule selection), **PM04** (restoring gain via the α anchor; the
+  collisionless screening channel), **PM05** (energy conversion, with ORPHAN-1), **PM06**
+  (orbit sense + SI gain), **PM07 ORPHAN-1** (swirl↔momentum conversion ρ_a·u_w² ↔ B²/µ₀).
+  §G.3 re-open condition: FLM14 rotation DOF / PPT06 ℓ=2 traction gearing (named native
+  candidates, not knobs; nothing foreclosed).
+- **WEOS-1 · wake equation of state** *(new; PM07 ORPHAN-3)* — the ⊥-pressure closure: Maxwell
+  ⊥ pressure = FULL energy density (w = +1), while a cold stream gives 0 and FD05 radiation
+  gives u/3. One EoS statement owed; named candidate: **CR05's γ_eff = 4 stiff lattice**
+  (w = +1 is exactly what a topologically stiff lattice would give) — logged, untested.
+- **PM03-REBUILD** *(new)* — an honest EM-wave solver (evolving fields, no plugged closed
+  forms; the existing PM03 is DO-NOT-TRUST). Blocks **PM06** absolute synchrotron power
+  (coefficient) and gates **PM07**'s wave/dispersion sector.
+- **ROOT-RIM · angular-window allocation** *(new, CH suite; = the NP10/FLM07 angular-window
+  root, FARMER "angle is the premium")* — wakes engage through limited poloidal-rim windows,
+  not as weighted points on a sphere. Members: **CH04-P4** (H₂S +12.5°, PH₃ +13.3° — the
+  fit-only trigger fired as pre-registered; no central-atom dependence in the point-wake
+  class), **CH04-P3** (XeF₄ cis/trans miss — window allocation, not chord distance, decides
+  trans), **CH05-P2** (three-centre no-saddle — the root's three-centre expression), **CH06**
+  (multi-rim truncation: H₂O/NH₃ ~40% under while single-rim HF lands; registered prediction —
+  full-rim sum moves H₂O/NH₃ up, HF stays fixed).
+- **ROOT-BUDGET** *(new; CH02-P3)* — the Law V movement-budget cost of confining a delocalised
+  shared electropause (metallic cohesion): native in kind, underived in magnitude (nothing
+  calibrated; phase left OPEN). **Feeds the CM02 redo** (whose honest normal state is now
+  templated by CM01-P1). Re-open: FLM14 seat-tour cost or a Law V confinement derivation.
+- **OP-ROOT · directional/transverse relay rule** *(new, OP suite)* — the explicit rule for
+  WHICH displacement/impulse components the discrete lattice relays across a step or aperture.
+  Members: **OP02** pairing (Fresnel earned to 0.000e+00 over 0–89.9° + Brewster as a true
+  zero, but the component-pairing is asserted), **OP03** obliquity (the inclination factor),
+  **OP04** component carriage. One derived transverse relay rule pays all three.
+- **OP01-MATTER-INDEX** *(pre-existing OP01 debt, now a ledgered root)* — no native T→closure
+  (matter refractivity) term exists. It **KILLED OP07's H2/H3 temp-min fold as claimed**: the
+  fold is a limb-generic mapping inversion present at EVERY λ, the only T-tracking term is
+  buried, and total n(h) is monotone (no dn/dh sign flip at the temperature minimum). Harvey's
+  dated solar lens-artifact priority claim **inherits the corrected experiment**: monotone
+  R(λ) increasing toward the H⁻ opacity minimum + a limb pile-up band at every λ, amplitude
+  bounded by the helioseismic-vs-limb 0.5″ consistency. Shared with OP04-magnitude.
+- **NP22 · 3-D EXIT-CHANNEL COUNT** *(2026-07-04)* — the free-neutron β SHAPE demands a native
+  per-particle 3-D state count N_exit ∝ E² (endpoint exponent +2 and low-E +½ are per-particle
+  3D fingerprints); the whole **1-DOF release-measure class is KILLED knob-proof** (committed
+  isotropic measure KS D = 0.49 vs gate 0.15; verified for 4 declared measures — one angle has
+  no sphere). Lineage: **FLM14 sequential occupancy** (SDT must earn its spheres from seat
+  geometry) + the PPT10/PPT11 budget-speed→E_ν map debt.
 - *(standing, pre-wave)* **MASS/ACTION SEAT** — FLM13 collapsed {ℏ, m_e, m_p} → one seat
   (= a baryon-count anchor); owner FLM12. **APS03-DATA-PATH** — the dead SPARC path that
   voided the galactic pilot; repointing it re-opens the cross-scale collapse test.
@@ -533,9 +764,11 @@ predictions (P1–P6). **`CONDENSA_Spation_Lattice_Unification.md`** (repo root)
 
 **Build-priority (where the leverage is):**
 1. **THE LATTICE SOLVER** (ROOT-SIM / OP-1/2/3) — the per-spation dynamics on the now-identified corner-sharing
-   CRN (FLM08). **Five debts bottom out here:** OP-1/2/3, FLM03 co-rotation, **FLM09-A2 isotropy residual**,
-   **PPT07 wake-volume** (the only honest `m_p/m_e`), **GD05 crossover**. Highest leverage by far — build once,
-   pay five. (DeepThink prompt ready.) The cheap sub-step worth doing first: the **finite-N isotropy residual**
+   CRN (FLM08). **Six debts bottom out here** (2026-07-04 count): OP-1/2/3 + FLM03 co-rotation, **FLM09-A2
+   isotropy residual**, **PPT07 wake-volume** (the only honest `m_p/m_e`), **GD05 crossover**, **R1 occlusion
+   transfer function**, and now **FLM14 bond-local gearing + structured seat-tour** (rule-form-3 dispatched
+   2026-07-04 — the solver build is in flight). Highest leverage by far — build once, pay six. The cheap
+   sub-step worth doing first: the **finite-N isotropy residual**
    (small CRN → elastic tensor → how fast Zener-anisotropy decays to isotropic) — the one *earned* root.
 2. **κ(z) unified fit + BAO/CMB acoustic peaks** — after CR10/11/12 showed surface-brightness and the CMB
    `(1+z)⁴` both **[DEGENERATE]**, this is the *only* cosmological test that separates SDT from ΛCDM. The real

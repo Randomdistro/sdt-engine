@@ -76,3 +76,45 @@
 > **Prompt completion B · Physics class OPEN (sign EARNED; legacy Hyp-A KILLED) · Recovery PARTIAL · Cascade root: NP19/NP21 resistance-magnitude law (FLM10/FLM12 lineage; shared with NP20-T2)**
 
 *NP14 · executed 2026-07-03 · honest OPEN · sign earned, magnitude owed to NP19/NP21.*
+
+---
+
+## CANDIDATE APPENDED (2026-07-04, Harvey's scan, run verbatim — [OPEN], look-elsewhere applies)
+
+The 0.782 MeV surplus this verdict FAILED to produce natively (−23.3%) is exactly the
+relativistic kinetic energy of the internal electron at **v = 0.91859c**:
+(γ−1)·m_ec² = 0.7820 MeV. Geometric-origin candidates for that speed, measured against it:
+
+| candidate | speed | dev (speed) | KE | dev vs Q_β |
+|---|---|---|---|---|
+| (m_p/m_e)/2000 — "half of 1836" | 0.91808c | −0.06% | 0.7781 MeV | −0.50% |
+| seat/2 (1.8302c/2, derived NP20) | 0.91511c | −0.38% | 0.7563 MeV | −3.29% |
+| 0.9c flat | 0.90000c | −2.02% | 0.6613 MeV | −15.4% |
+
+**Discipline:** the inversion Q_β → v is an identity and earns nothing. The seat-half (the
+derived quantity) MISSES by 3.3% in energy; the near-match belongs to the mass-ratio echo —
+which has no right to appear as a speed unless the rotation ontology puts it there (a geared
+internal electron pacing against the proton's count). Cashable only by a mechanism that
+FORCES v ≈ 0.918c natively (FLM14 gearing is the candidate instrument); until then this is
+a privileged, unexplained near-match, same ledger class as the R_p/3 cluster
+(PPT08_KOPPA_TARGET). If forced, this verdict's FAIL recovers on the spot.
+
+**Extension (Harvey, same day): "the neutrino takes the other side of the speed."** Law V's
+movement budget (v_circ² + v_trans² = c²) partitions the unbinding: the electron's side is
+0.91859c, the complementary side is √(1−0.91859²) = **0.39522c** — and at decay the split
+between the freed electron and the neutrino varies with release geometry. What this buys
+natively, if it holds: (a) the CONTINUOUS β spectrum = the variable partition of one fixed
+internal speed; (b) the endpoint = the electron taking the whole 0.782 MeV (neutrino → 0);
+(c) neutrino near-masslessness = the unwound remainder travelling straight (PPT10: W=0,
+no grip, no mass-cost); (d) ν̄ handedness = the released gear sense. **The named test (real
+data exists):** derive the β-spectrum SHAPE from the partition geometry of a 0.9186c seat
+unwinding and grade it against the measured Kurie plot — the rival gets that shape from
+phase-space integrals; a geared-release geometry that reproduces it would be NATIVE class.
+[OPEN — same ledger discipline as above; nothing promoted until the shape test runs.]
+
+**⟐ 2026-07-04 — the shape test RAN: `NP22_Beta_Spectrum_from_Partition_Geometry` — FAIL→OPEN,
+and the whole 1-DOF release-measure class is KILLED** (committed isotropic measure KS D = 0.49
+vs gate 0.15; the anchor's endpoint (Q−T)² and low-E √T zeros are per-particle 3D state-count
+fingerprints no single release angle can produce — knob-proof). Nothing here is promoted; the
+partition continuum survives, the shape is owed to a native 3D exit-channel count (FLM14
+lineage). See `../NP22_Beta_Spectrum_from_Partition_Geometry/NP22_VERDICT.md`.

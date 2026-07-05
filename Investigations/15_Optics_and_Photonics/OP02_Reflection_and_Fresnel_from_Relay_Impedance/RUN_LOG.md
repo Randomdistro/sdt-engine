@@ -27,12 +27,17 @@
 
 ## Gate decisions (to be filled ONLY from real tool stdout after the run)
 
-| Phase | Result | Notes |
+| Phase | Result | Notes (verbatim from `results.txt`, run 2026-07-04, exit 0) |
 |-------|--------|-------|
-| P1 | PENDING | |
-| P2 | PENDING | |
-| P3 | PENDING | |
-| P4 | DEFER (committed) | |
+| P1 | **PASS-GATE** | r = −0.2000000000, R = 0.0400000000; glass→air r = +0.2 (no inversion); Stokes r′ = −r emerged from the same system |
+| P2 | **PASS-GATE** | max dev vs Fresnel column: s 0.000e+00, p 0.000e+00; Brewster root of solved r_p = 56.309932° = arctan(1.5), residual 6.67e-17 |
+| P3 | **PASS-GATE** | max \|R+T−1\| = 4.441e-16 (gate 1e-12); AR path-sum minimum n_c = 1.2245 vs √1.5 = 1.224745 (0.02%), R_min = 4.0e-08 |
+| P4 | DEFER (committed) | lossy-closure model owed; conduction-model import forbidden |
+
+§G mirror check (2026-07-04): all gates trace to measured anchors (R=0.0400, arctan(n₂/n₁), √(n₁n₂));
+no gate legislates against sub-cycle/constraint-channel behaviour. The TIR/evanescent region (beyond
+critical angle, glass→air) was deliberately NOT gated — it is constraint-channel territory (FLM14
+ADJ-7) and is logged OPEN in the verdict, not ruled out.
 
 ### ERRATUM (self-caught, 2026-07-03, pre-run)
 

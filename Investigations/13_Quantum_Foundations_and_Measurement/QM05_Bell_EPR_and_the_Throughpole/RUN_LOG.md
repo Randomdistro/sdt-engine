@@ -54,3 +54,13 @@ claim P2's 2.828 as "SDT reproduces entanglement".
   measured Bell-experiment correlation (data, not the rival's formalism), used per HUNTER §B as a
   comparison/probe only, never as SDT machinery. All S values, marginals, and gates stand exactly
   as first produced.
+- **ADJ-2 (2026-07-04, per Harvey's PROMPT.md banner amendment + FLM14 ADJ-7 + HUNTER §G — class
+  change only, NO number moved):** this log's P2-NS gate is reclassified from a route-rejection
+  condition to an **OBSERVED comparison against measured Bell marginals** (the marginal-flatness /
+  Synchrony-Theorem check). The 0.002 threshold and the measured results (worst dev 0.0011; ≤0.0009
+  across the s-sweep) stand unchanged; what changed is what a violation would have MEANT (data-FAIL,
+  not an FTL-axiom kill — Einstein locality is GATE-CONTRABAND). The two stale FTL rows in
+  `PROMPT.md` (§⑧ T2 kill cell, §⑩ pivot P2 forbidden cell) struck with annotations this date.
+  Consequence for the verdict: unchanged (OPEN · PARTIAL · RESIDENCE-LAW); the throughpole/geared
+  constraint channel is uncapped by canon precedent, and the owed machinery is still the joint
+  residence weighting (FLM14 rule-form-4 in flight owns it).

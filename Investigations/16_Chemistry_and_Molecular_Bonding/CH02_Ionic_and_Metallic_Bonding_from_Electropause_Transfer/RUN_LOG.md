@@ -1,6 +1,26 @@
 # RUN_LOG — CH02 Ionic & Metallic Bonding from Electropause Transfer
 
-**Author:** J. C. Harvey, Melbourne. **Date:** 2026-07-03. **Status:** pre-commit written BEFORE coding.
+**Author:** J. C. Harvey, Melbourne. **Date:** 2026-07-04. **Status:** pre-commit written BEFORE coding.
+
+## Grounding correction (Harvey directive, 2026-07-04)
+
+The CH01 electropause-balance branch (F_in=F_out root-find) is the **failed branch** — NP17 is its
+death knell: binding = **shared-electron well at scale αℏc** (deuteron 3αℏc/D, factor 3 exact, no
+fitted scale; "chemistry geared down by 137" is literal, so chemistry IS the same machinery at Å).
+This run stands on NP17's bones: pure point-source Σ±(αℏc)/r machinery. Corrected frames honoured:
+occlusion **saturation at contact** (NP10/FARMER), **angle is the premium** (limited poloidal rim
+contact), shared electrons = the binding. No QM machinery anywhere in the chain (HUNTER §G:
+rivals supply measured NUMBERS only).
+
+## Faith ledger (§G.1 — named before the run)
+
+1. αℏc as the pairwise coupling: engine `coulomb_identity` (class F identity in-engine); NP17
+   carries it as the load-bearing mechanism. Accepted as the cluster's coupling — named.
+2. Ion = whole-electropause handoff leaves point-like ±1 handed cores at crystal sites: geometric
+   idealisation (point sources for extended forms) — named as faith, size effects unmodelled.
+3. Short-range repulsion (what stops the lattice collapsing) is NOT derived here — it is the
+   contact-saturation closure (NP10 root). The sum is evaluated at the MEASURED r₀ (OBSERVED
+   anchor); the expected systematic overshoot is declared below, before the run.
 
 ## Pre-Run Commitments — CH02
 

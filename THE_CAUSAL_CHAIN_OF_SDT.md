@@ -369,10 +369,15 @@ ones beneath it and, in the honest cases, adds no new pegs of its own.
 **Atoms (APS).** The full emission spectrum of hydrogen and beyond comes from the
 electron's rotation field and the movement budget — the Rydberg constant emerges
 geometrically, with no fitted parameters, and the engine reproduces the spectral
-lines of 118 elements. The fine structure and the Lamb shift come from the
+lines of 118 elements. ~~The fine structure and the Lamb shift come from the
 *shape of the proton's wake* — its trefoil three-fold symmetry — rather than from
 quantum-field corrections, and the Lamb shift lands within 0.6% with nothing tuned
-(**APS04**). Atoms inherit `α`, the budget, and the knot; they invent nothing.
+(**APS04**).~~ **[CORRECTION 2026-07-03: the APS04 Lamb claim was FABRICATED and is
+retracted (HUNTER scour; the 1051.8 literal was deleted from canon 2026-07-03). The
+Lamb amplitude is OPEN — the well-posed native target is
+`Investigations/02_…/PPT08_Angular_DOF_from_Trefoil/PPT08_KOPPA_TARGET.md`
+(a spacing, not a shift: 1057.8 MHz ≡ 0.703 m/s ≡ 0.272 fm at n=2).]**
+Atoms inherit `α`, the budget, and the knot; they invent nothing.
 
 **Nuclei (NP).** Every nucleus is built from one rule — one alpha core plus so many
 deuterons and tritons, with the counts fixed by simple arithmetic in the proton and
@@ -491,7 +496,9 @@ Strip the framework to its skeleton and this is what holds it up:
 Everything below the second row is *earned where it is geometry* — the movement
 budget, the koppa bridge, the inverse-square shape of the force, the speed of light
 read out of Mercury's orbit, the sound limit `c/√3`, the nuclear grammar's
-arithmetic, the Rydberg constant, the Lamb shift to a fraction of a percent. These
+arithmetic, the Rydberg constant ~~, the Lamb shift to a fraction of a percent~~
+**[CORRECTION 2026-07-03: the Lamb entry is struck — APS04 was fabricated and
+retracted; the Lamb amplitude is OPEN (see PPT08_KOPPA_TARGET.md)]**. These
 are the framework's real assets, and they are substantial.
 
 Everything that is still *owed* sits in a few sharp places, and they are exactly the
@@ -539,8 +546,12 @@ Mercury's orbit (GOM04); depth-closure unifying redshift/Shapiro/bending (GOM01,
 GOM05); the inverse-square *shape* of the one force (EMC01); `P_eff` via the
 electropause (EMC04, conditional on `α`); the sound limit `c/√3` (FD05); the nuclear
 grammar's arithmetic for all stable isotopes (NP01); the Rydberg constant and spectra
-(APS01); the Lamb shift to 0.6% (APS04); neutrino magnetic moment exactly zero
-(PPT04); knot stability selecting the particle spectrum (PPT09).
+(APS01); ~~the Lamb shift to 0.6% (APS04)~~ **[struck 2026-07-03 — APS04 fabricated,
+retracted; Lamb OPEN, target = PPT08_KOPPA_TARGET.md]**; neutrino magnetic moment
+exactly zero (PPT04); ~~knot stability selecting the particle spectrum (PPT09)~~
+**[struck 2026-07-03 — the PPT09 Class-A closure was fabricated and is retracted
+(HUNTER scour); the W∈{1,3}-only conjecture itself remains a legitimate OPEN
+target]**.
 
 **Owed (magnitudes, seeds, leaks):** the three pegs themselves (FLM06, EMC02, PPT07);
 the nuclear binding-energy scale (NP05 killed the first attempt; successor unbuilt);

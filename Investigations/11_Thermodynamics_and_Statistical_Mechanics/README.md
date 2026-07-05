@@ -1,7 +1,12 @@
 # Thermodynamics & Statistical Mechanics — SDT lattice statistics (TD01–TD08)
 
-> **Author:** J.C. Harvey, Melbourne. **Status:** SPEC (8 prompts, unstarted).
-> Every prompt inherits the §0 anti-creep protocol and rules R0–R5 verbatim.
+> **Author:** J.C. Harvey, Melbourne. **Status:** EXECUTED — TD01 (earlier run, Class C qualified);
+> **TD02–TD08 executed 2026-07-03** (see each `TD##_VERDICT.md`): all land **CONVERGENCE-class**
+> (TD07/TD08 partially NULL-SDT-CONTENT; TD05's count-ledger KILLED at fixed density), capped by the
+> shared cascade roots **TD-ROOT-1** (ε-scale invisibility — the suite's mechanisms are substrate-blind)
+> and **TD-ROOT-3** (ε = hν asserted, not derived) — logged once in `../INVESTIGATION_STACK.md` §3b.
+> The one NATIVE, falsifiable lattice fingerprint: TD03's rank-4 FLM08 observable ([1/9, 7/27] band vs
+> continuum 1/5). Every prompt inherits the §0 anti-creep protocol and rules R0–R5 verbatim.
 
 ## The through-line
 

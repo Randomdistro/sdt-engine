@@ -151,4 +151,8 @@ print("    (Dx ~ 1e-10 m, a = lP ~ 1.6e-35 m) the correction is ~1e-50: real but
 print("    any measurement. Honest status: prediction, unfalsifiable at current precision;")
 print("  * hbar enters ONCE (k->p bridge via measured kappa=h/m + substrate kinematics).")
 print("    'Uncertainty' is wake bandwidth; the vortex keeps sharp (x,p) at every tick.")
+print("  * SCOPE (FLM14 ADJ-7 two-channel doctrine): this floor binds the PULSE channel")
+print("    only (real wake pulses at c). The geared CONSTRAINT channel (phase constraint")
+print("    through gear-locked clusters, uncapped) carries no pulse bandwidth and is NOT")
+print("    bound by this theorem. No statement about it is made here.")
 print("="*78)

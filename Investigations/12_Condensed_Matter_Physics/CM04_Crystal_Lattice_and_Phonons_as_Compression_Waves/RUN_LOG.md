@@ -47,12 +47,17 @@
 
 Cu C_p anchors for P4 [J/mol/K]: 50 K: 6.25 · 100 K: 16.01 · 200 K: 22.63 · 300 K: 24.47.
 
-## Phase gate record (to be filled ONLY from real tool stdout after execution)
+## Phase gate record (from real tool stdout, run 2026-07-04, `cm04_results.txt`)
 
-- P1: [pending run]
-- P2: [pending run]
-- P3: [pending run]
-- P4: [pending run]
+- P1: mode count **EXACT 3N** (L=2..6 enumerated); model limit C_v(10θ)/3R = 0.9995 **PASS**;
+  empirical band **4/4** (Cu 0.980, Al 0.970, Pb 1.068, NaCl 1.012). **PASS-GATE.**
+- P2: g(ω) slope **1.924** (gate 2.0±0.1) PASS. **Firewall finding confirmed:** continuous-exchange
+  branch gives C_v = 3R at ALL T — no freeze-out, no T³. Discrete-relay branch p = **2.9950** PASS.
+  Grade capped **C** as committed (named premise: action-per-reconnection = h, Law VI extension).
+- P3: committed four — Cu **−0.4%** PASS · Al **−6.7%** PASS · diamond **+3.3%** PASS ·
+  NaCl **−10.1% FAIL** (0.1 over gate). Exhibit Pb (not in committed set): −28.7%.
+  **3/4 — reported as fell; no input touched post-run.** Seven questions in VERDICT.
+- P4: 50 K **−20.2% FAIL** (0.2 over band) · 100 K −7.8% · 200 K −4.4% · 300 K −4.4%. **3/4.**
 
 ### ADJ register
 

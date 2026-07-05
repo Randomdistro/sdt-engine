@@ -1,0 +1,48 @@
+OP06 — Coherence & lasing as macroscopic relay phase-lock (J. C. Harvey, 2026-07-04)
+Machinery only: summed real registers, in-phase triggers, random dumps.
+
+Phase 1 — g2(0) from lock-vs-independent emitters (N=200, M=200000 realisations)
+  independent (thermal): g2(0) = 2.0000  vs 2 - 1/N = 1.9950
+  phase-locked (laser):  g2(0) = 1.0000  vs 1.00
+  [PASS] P1-thermal  bunched statistics from independence alone
+  [PASS] P1-locked  flat statistics from the lock alone
+  -> NOTE (committed): this is CLASSICAL summed-register statistics. The boson
+     story was never needed for g2=2 vs 1 — and equally, matching it here is
+     CONVERGENCE with classical stochastic optics, not a native triumph.
+
+Phase 2 — threshold from in-phase trigger gain vs cavity loss (structural gates)
+  P = 20.0 (2x threshold): n2 = 9.9990 vs clamp kappa/G = 10.0000  (0.010%)
+  [PASS] P2-clamp  excitation clamps at gain=loss above threshold
+  slope linearity above 1.5x threshold: R^2 = 1.000000 ;  I(1.6 Pth)/I(0.8 Pth) = 1504
+  [PASS] P2-knee  sharp turn-on at gain=loss; linear slope above
+
+Phase 3 — linewidth = phase diffusion from residual random dumps
+  A =   10 (P ~   100): D_sim = 2.3739e-04  vs kick-ledger R_sp/(2A^2) = 2.5000e-04 (x0.95)
+  A =   20 (P ~   400): D_sim = 5.9762e-05  vs kick-ledger R_sp/(2A^2) = 6.2500e-05 (x0.96)
+  A =   40 (P ~  1600): D_sim = 1.4629e-05  vs kick-ledger R_sp/(2A^2) = 1.5625e-05 (x0.94)
+  A =   80 (P ~  6400): D_sim = 3.8693e-06  vs kick-ledger R_sp/(2A^2) = 3.9063e-06 (x0.99)
+  linewidth-vs-power exponent: -0.992 (committed gate -1 +/- 0.1)
+  [PASS] P3-exponent  Schawlow-Townes 1/P SCALING earned classically
+  -> ABSOLUTE prefactor pi*h*nu*(dnu_c)^2/P needs the h*nu emission quantum:
+     the FLM12/hbar-entry root. Comparison note only — NOT gated (would smuggle
+     the hbar debt in as if paid).
+
+Phase 4 — coherence time from field autocorrelation of the walked phase
+  e-fold lag = 7865 ticks vs 2/D = 8425 ticks  (ratio 0.934)
+  [PASS] P4-coherence  tau_c = 2/D; coherence length c*tau_c follows, ~P
+
+HONESTY FLAGS:
+  1. g2 = 2 vs 1 from independence-vs-lock is CLASSICAL summed-register statistics
+     (HBT already had the classical account). CLASS: CONVERGENCE. The lock model's
+     unification with CM01's order parameter is a structural narration, untested
+     here: F4 row OPEN.
+  2. ANTIBUNCHING g2(0) < 1 is unreachable by ANY classical summed-field model,
+     including this one. It is the real quantum discriminator. SDT's candidate
+     (single-vortex re-arm dead-time between dumps) is a NATIVE mechanism in kind
+     but was NOT built here: row OPEN, logged as the make-or-break follow-up.
+  3. Rate-equation constants are MODEL-SCALE; only structure was gated (knee at
+     gain=loss, clamping, exponents). Nothing was tuned to a lab magnitude.
+  4. The ST prefactor hangs on the h*nu emission quantum -> FLM12/hbar-entry root
+     (same debt as OP05).
+
+OP06 exit: ALL COMMITTED GATES PASS (0 gate failures)

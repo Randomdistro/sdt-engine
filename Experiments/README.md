@@ -27,11 +27,14 @@ measured values only — no interpretive frameworks imported.
 
 ## Recommended run order (yet-to-run, by readiness × discriminating power)
 
-**Graduated ≠ done.** Of the "Graduated to Investigations" links below, 13 point
-at investigation folders holding only an unrun `PROMPT.md` (no verdict, no
-result), 2 resolved to honest negative results, 2 are partial or ride an
-inflated/calibrated target, and only 4 are genuine honest convergences
-(Class C). This section is the priority queue for what is **left to run**,
+**Graduated ≠ done.** *(Counts updated 2026-07-04 after the 2026-07-03 execution
+wave.)* Of the "Graduated to Investigations" links below, nearly all now carry a
+real `*_VERDICT.md`: the wave executed NP08/NP10/NP12/NP14/NP15, CR08/CR09,
+SAR01/SAR03/SAR04, GOM12 honestly (mostly KILLED/OPEN — cascade roots logged in
+`Investigations/INVESTIGATION_STACK.md` §3b), joining the earlier
+GOM08/GOM09/GOM11/GD06/SAR02 convergences and the NP09/NP13 honest negatives.
+Still unrun: **NP11** (PROMPT only) and **GD05** has partial results without a
+formal verdict. This section is the priority queue for what is **left to run**,
 highest value-per-effort first. ★ = clean SDT ≠ GR/SM discriminator.
 
 ### Tier 1 — Do now (archival data or pure calculation)

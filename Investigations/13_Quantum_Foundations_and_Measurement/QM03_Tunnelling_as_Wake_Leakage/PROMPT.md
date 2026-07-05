@@ -163,3 +163,20 @@ slope within ~10% for a U/Th/Po series.
 ---
 
 *QM03 · 10× upgrade 2026-06-29 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*
+
+---
+
+**REASSESSMENT (2026-07-04, Harvey directive — §G GATE-CONTRABAND check) — two-channel note,
+appended before the run.** No committed gate exists yet for the traversal-time question
+(§Questions #2, Hartman territory); this note pre-empts a contraband one:
+
+- The κ-decay leakage mechanics (Phases 1–4) are **pulse-channel** physics and are unaffected —
+  energy flux through the barrier stays c-capped; all committed falsifiers (T1–T3) stand as written.
+- **Do not import "traversal time ≥ d/c" as a kill gate.** That would enforce the rival's c-cap
+  axiom on constraint propagation (§G GATE-CONTRABAND — kill the gate, not the route). Under the
+  two-channel architecture (FLM14 RUN_LOG ADJ-7), a barrier slab whose spations are gear-locked
+  with both faces can update the far-face re-seeding constraint in the same tick — apparent
+  sub-d/c (Hartman-saturated) traversal is then a candidate *native* SDT outcome, not a paradox
+  and not a kill. Attoclock / Hartman-effect data enter as MEASURED anchors to compare against,
+  never as a locality axiom. If a run lands superluminal group delay, report where it lands; if it
+  lands ≥ d/c, report that — both publishable.
