@@ -77,6 +77,7 @@ index below.)*
 | E106 | Oort-Cloud Lumiostasis | Convergence Depth | GOM05, E101/GOM12 |
 | E107 | Reflected-Light Gravitational-Redshift Fork | Convergence Depth | GOM07 |
 | E108 | Galactic-Floor Redshift | Cosmology / Depth | depth-closure, E102 §6 |
+| E109 | Solar Spectral Prism (pre-registered FIR-minimum fork) | Solar / Optics / Displacement | OP07-R2, SAR03/06, APS07 |
 
 ---
 
