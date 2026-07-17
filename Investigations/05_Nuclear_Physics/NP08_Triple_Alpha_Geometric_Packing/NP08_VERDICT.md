@@ -86,3 +86,21 @@
 > **Prompt completion C · Physics class OPEN/DEFERRED (premise-correction EARNED; ledger IDENTITY-labelled) · Recovery PARTIAL · Cascade root: NP17-PENDING tetrahedral-lock magnitude (shared with NP10)**
 
 *NP08 · executed 2026-07-03 · OPEN/DEFERRED · premise corrected, Hoyle content isolated (0.379 MeV), no fake pass.*
+
+---
+
+## ⟐ RE-OPENED (2026-07-06) — the named dependency MOVED (Harvey order)
+
+**Trigger:** NP08 deferred on "NP17-PENDING tetrahedral-lock magnitude — unpaid." NP10 run 2
+(2026-07-05) put a lock candidate ON RECORD: the **(Z−1)! closed-tour count** (d −1.1% /
+t +0.9% / α −5.6%, zero constants, post-diction declared; falsifier Z=5 → ×24). The dependency
+is no longer "absent" — it is "candidate awaiting derivation" (owner: FLM14 sequential tour).
+Refinement 8 adds the mechanism class for the OWED number itself: the **0.379 MeV Hoyle
+closure barrier is an alignment search cost** — three alphas rolling on mutual firewalls,
+hunting the α+4d mesh attitude — and the Be-8 0.092 MeV metastability margin is the same
+quantity at A=8 (packing competition = two attitudes with nearly equal frustration).
+**Committed shape for the re-run (stated now, no code exists):** derived lock + this file's
+knob-free repulsion ledger (6.327 MeV, on record) must land the 0.379 MeV barrier AND the
+0.092 MeV Be-8 margin from the same rule — two zero-freedom targets, one mechanism.
+**What this does NOT do:** DEFERRED stands until the lock is derived, not pattern-matched;
+the 20% Hoyle gate remains unscored.

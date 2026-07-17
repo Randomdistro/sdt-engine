@@ -31,6 +31,38 @@
 
 ---
 
+## §K ADDENDUM (2026-07-13) — this prompt was already §K-grade; two current-§K additions
+
+> **This prompt is gold-standard** (the 2026-06-29 10× upgrade — filled §⓪, anti-tautology gate, five gated
+> phases, four falsifiers, downstream QM-block dependency map). No rewrite. Two additions only:
+
+**(1) Harvey's framing (2026-07-13) — Bell violation is INEVITABLE, not a debt to fear.** *"It is all movement.
+All the energy in the universe is movement under a perfect pressure regime so precise that Bell's-theorem
+violations are an inevitability."* → **Phase 5 (Bell) is no longer tentative.** The perfect pressure regime is
+**one synchronised medium**; correlations exceed the local-hidden-variable bound **because the medium is not a
+collection of separate locals** — it is a single throughpole ledger (in one side, out the other; the synchronous
+channel, memory: *communication = desynchronisation*). So the honest Phase-5 position is: a *strictly local* relay
+model **cannot** evade Bell — and that is **correct and predicted**, not a failure. The non-local feature (the
+throughpole's instantaneous in/out) is the **FEATURE** (SDT's sharpest falsifiable divergence from QM: the
+synchronous-channel fork), not a liability. **Do NOT** narrate it away or fabricate a local route; **do** state it
+as a prediction and name the experiment that separates synchronous-channel from standard QM.
+- *Anti-fake guard:* "inevitable" is a licence to *derive the CHSH value from the pressure regime*, **not** to
+  assert it. Phase 5 must show the S > 2 correlation *emerges* from the shared-medium relay, or mark it OPEN.
+
+**(2) The mislabel proof — Born-as-count IS movement.** H3's "Born rule as residence density" is the local
+instance of the general proof Harvey names: **every "energy/charge/amplitude" is movement.** The Born intensity is
+a *count of vortex landings* = a residence rate = **movement counted at the screen**. The "charge-handedness the
+vortex carries" (§2) is likewise **a rate at a distance** — it *will* degenerate to movement (handed redirection),
+exactly as "charge radius" does. Keep the interchange test live: if any step needs |ψ|² as an abstract amplitude
+rather than a movement count, that is the imported term popping out.
+
+**Four-root error-refinement loop (§K.2):** on every fired falsifier, sort before the next phase —
+root-1 claim false (two-channel can't make fringes → ψ debt real) · root-2 dependency (FLM02/FLM05 relay, FD02 κ,
+FLM10 isotropy) · root-3 prompt (phase mis-scoped, cos² hand-placed) · root-4 contraband (ψ / superposition /
+observer-collapse smuggled as a "mechanical" phrase). Log per failure; the ψ-debt root once in `PARADOX_CENSUS`.
+
+---
+
 ## 1 · Executive Summary
 
 A particle in SDT is a **hard, localised solid vortex** travelling through a granular relay

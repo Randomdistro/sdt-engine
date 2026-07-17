@@ -19,7 +19,7 @@ Atomicus operates under the SDT v6.0 framework:
 
 ### 1. The Alpha Core
 
-Every nucleus has exactly **one alpha particle** ($^4$He) at its centre. The alpha is the irreducible nuclear unit: a perfect tetrahedral assembly of 2 protons and 2 neutrons, a W=3 trefoil quartet with 4 nucleons sharing a single toroidal circulation cell. Binding energy = 28.3 MeV per alpha.
+Every nucleus has exactly **one alpha particle** ($^4$He) at its centre. The alpha is the irreducible nuclear unit: a perfect tetrahedral assembly of 2 protons and 2 neutrons, a W=3 trefoil quartet with 4 nucleons sharing a single toroidal circulation cell. Binding energy = 28.3 MeV per alpha. (Read as a DISCOUNT, not a deposit: 28.3 MeV is the movement four nucleons no longer need when sharing one circulation — nothing is stored in the alpha; NP08's Q-ledger trap is the cautionary case.) *(interchange sweep 2026-07-07, Harvey-authorized)*
 
 **Correction from v5.0**: Nuclei are NOT built by "stacking alpha bricks." Carbon-12 is NOT 3 alphas. Oxygen-16 is NOT 4 alphas. Neon-20 is NOT 5 alphas. Each nucleus has ONE alpha core; all additional nucleons are organised as deuterons and tritons around that core.
 

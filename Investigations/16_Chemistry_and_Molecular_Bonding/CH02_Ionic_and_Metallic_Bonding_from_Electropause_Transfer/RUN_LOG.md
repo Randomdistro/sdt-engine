@@ -55,3 +55,47 @@ rivals supply measured NUMBERS only).
 - Tool: `ch02_ionic_metallic.cpp` (single file, `#include <sdt/laws.hpp>`)
 - Compile: MSVC cl /std:c++20 /EHsc /O2 /utf-8 /I Engine\include
 - Output: `results.txt` = verbatim stdout.
+
+---
+
+# RUN 2 — ADJ-R2-1 (2026-07-06, committed BEFORE any tool exists): Phase A, the isoelectronic fork
+
+Executes RUN 2 PROMPT Phase A (GATE-A verbatim in PROMPT.md §R2 A.3 — not restated, not modified).
+
+## Declared instrument (sources chosen NOW)
+
+- **S1 (range):** Shannon (1976) effective ionic radii, 6-coordinate, three isoelectronic
+  series — He-shell {Li+, Be2+, B3+}, Ne-shell {O2-, F-, Na+, Mg2+, Al3+, Si4+}, Ar-shell
+  {S2-, Cl-, K+, Ca2+, Sc3+, Ti4+}. Test: radius strictly decreasing with Z within each shell.
+- **S2 (hardness):** measured bulk moduli B0 of STRUCTURE-MATCHED (rocksalt) isoelectronic
+  crystal pairs at fixed shell pair: NaF vs MgO [Ne/Ne], KF vs CaO [Ar-cation/Ne-anion],
+  KCl vs CaS [Ar/Ar]. Test: B0 rises with cation Z in every pair. LiF vs BeO EXCLUDED from
+  the gate (BeO is wurtzite — structure mismatch); reported as a caveat row only.
+- **Null:** Z-shuffled Monte-Carlo on each series (exact permutation probabilities also printed).
+- **Diagnostic column (REPORT-ONLY, declared with a §G.1 disclosure):** the z-deconvolved
+  Born exponent n from the compressibility relation n = 1 + 18*B0*r0^4/(alpha_M*k_e*e^2*z+z-).
+  **DISCLOSURE:** during ADJ design this column was previewed by hand for NaF (~7) and MgO
+  (~4.5) and found NON-monotone-downward. It is not being buried: it is printed prominently
+  as a TENSION row. It is excluded from the gate for a reason stated now, before the tool
+  runs: n is the z^2-deconvolved power-law SHAPE of the total equilibrium stiffness, while
+  GATE-A's claim concerns the wall's stiffness at engagement; deconvolving by the rival's
+  z^2 Coulomb prefactor contaminates the shape parameter with the attraction ledger. If the
+  reader judges this exclusion special pleading, the gate may be re-scored with S3 included —
+  the verdict will print both scorings. Nothing is hidden.
+
+## §G.2 rival-degeneracy declaration (BEFORE results)
+
+The rival (Z_eff contraction of a fixed shell) predicts the SAME sign: smaller, harder ions
+with rising Z at fixed shell. Therefore: **a PASS here is CONVERGENCE-class evidence** —
+consistent with transmission, not discriminating against the rival. **Only a FAIL
+discriminates** (flat hardness/range at fixed shell would kill the transmission claim's
+chemistry expression outright). This run is a KILL-GATE for refinement 8's chemistry leg,
+not a NATIVE earn. Any stronger claim in the verdict is contraband.
+
+## Data provenance
+
+All inputs are measured literature values in their measured units (Å, GPa) — data-boundary
+per the no-borrowed-units rule; 2–4 s.f.; each row carries its source tag in the tool.
+No G, M, or GM anywhere (none is needed). Gates: GATE-A as committed in PROMPT.md — not
+widened, not narrowed. Tool: `ch02_r2_isoelectronic_fork.py` → teed
+`ch02_r2_isoelectronic_results.txt`.

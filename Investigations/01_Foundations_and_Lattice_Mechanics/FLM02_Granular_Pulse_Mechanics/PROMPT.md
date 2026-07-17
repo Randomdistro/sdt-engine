@@ -1,192 +1,98 @@
 # FLM02 — Granular Pulse Mechanics: The Dynamic Throughput Law
 
-> **Author:** J. C. Harvey, Melbourne. **Status:** SPEC (upgrade 2026-06-27).
-> **Inherits:** `PERFECT_PROMPT_TEMPLATE.md` §⓪–§⑩ · `PROMPT_EXECUTION_PROTOCOL.md` · §0 anti-creep (R0–R5).
-> **Engine:** `#include <sdt/laws.hpp>` only — no local constant namespaces.
-> **Run:** Pre-commit thresholds in `RUN_LOG.md` before coding; adjust per pivot table (§⑩).
+> **Author:** J. C. Harvey, Melbourne. **Status:** WORKED-DERIVATION, UN-VERDICTED · **§K-DEEPENED 2026-07-13** (HUNTER §K.3).
+> **Inherits:** `PERFECT_PROMPT_TEMPLATE.md` §⓪–§⑩ · `PROMPT_EXECUTION_PROTOCOL.md` · `HUNTER_PROTOCOL.md` §K.
+> **Engine:** `#include <sdt/laws.hpp>` only. **Propose-only** on any canon flag (incl. the "add a law section" criterion).
+> **This one is different:** the derivation (GPI → F=ma → SR suite, 8 theorems) is *worked on paper*. §K here is **adversarial verification + reconciliation with FLM12**, then verdict. No auto-agents.
 ---
 
-## ⓪ The Golden Rule — five questions (answer before Phase 0)
+## ⓪ The Golden Rule — five questions (answered)
 
-1. **What don't we know?** — [FLM02] FLM02 — Granular Pulse Mechanics: The Dynamic Throughput Law: *(unfilled by the 2026-06-27 bulk template upgrade — write the single measurable gap before the next run)*
-2. **Why does it matter?** — Stack position / downstream blockers (see `INVESTIGATION_STACK.md`).
-3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
-4. **What would prove us wrong?** — §⑧ falsification tests with numeric triggers.
-5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN).
+1. **What don't we know?** — **Whether F=ma and the SR suite genuinely *derive* from the Granular Pulse Invariant (GPI), or whether a step (GPI-3's δ = a·ℓ_P/c², GPI-8's Newton III) is asserted.** And whether FLM02's mechanism is the *same* as FLM12's (mass = field-resistance to vector change) — one root or two.
+2. **Why does it matter?** — If GPI is the root, Laws III/IV/V are *consequences*, not independent posits — a major economy. But it must not double-count FLM12.
+3. **How will we find out?** — Verify each theorem's algebra from `laws.hpp` symbols; check GPI-3/GPI-8 for hidden assertions; reconcile with FLM12 (§④ C3).
+4. **What would prove us wrong?** — §⑧: if δ = a·ℓ_P/c² is posited (not derived from pulse-timing), or the SR suite quietly imports γ, the "derivation" is a restatement.
+5. **How will we know we're done?** — Dual verdict; each theorem graded DERIVED / ASSUMED; FLM02↔FLM12 relationship named (shared root or distinct).
 
-## Classification: Codebase Question / Theoretical Derivation
-## Source: Conversation 701fe685, April 2026
-## Depends on: Law I (Φ, ε, N), Law III (force), Law IV (V_disp), Law V (budget)
+## Question (unchanged — the real target)
 
----
+Laws III (force = occluded convergence), IV (mass = V_disp cost), V (v_circ²+v²=c²) each describe a different face of dynamics. **What MECHANISM connects them?** How does the granular pulse produce F=ma? Why is constant velocity free, acceleration costly? What is inertia, mechanistically?
 
-## Question
+## Answer — GPI axioms → theorems (to be graded, not re-assumed)
 
-Laws III, IV, and V each describe a DIFFERENT aspect of dynamics:
-- Law III: Force = occluded convergence (mechanism)
-- Law IV: Mass = V_disp reorganisation cost (definition)
-- Law V: v_circ² + v² = c² (budget)
+- **Axiom GPI:** every spation receives one relay pulse per ℓ_P per t_P, per direction, invariant under velocity/acceleration/gravity. Rate = 1/(ℓ_P·t_P). *c, ℏ, Planck units are consequences.*
+- **Axiom CS:** after a velocity change ceases, omnidirectional input re-symmetrises at the new velocity (the new v becomes the resting state).
+- **Axiom FL:** matter sits at the centre of its own flux; inertia is local to the throughput environment.
 
-**What is the MECHANISM that connects them?**
+**Movement-only reading (FARMER PASS/BECOME/PRESS — already native):**
+- constant v → symmetric pulse input → no reorganisation → **PASS** → free (Newton I).
+- acceleration → pulse asymmetry δ → reorganisation load on V_disp → **PRESS** ("movement that cannot move" = the cost) → F=ma.
+- CS re-symmetrisation → the reaction propagates back through the relay → Newton III.
 
-How does the granular pulse structure of the relay produce F = ma?
-Why is constant velocity free? Why does acceleration cost energy?
-What is inertia, mechanistically?
+Theorems GPI-1..8: c=ℓ_P/t_P; Newton I (symmetry); δ=a·ℓ_P/c² (asymmetry); **F = [Φ V_disp/(3ℓ_P³c²)]·a = m·a**; E_kin = ½mv² → (γ−1)mc²; time dilation v_circ=c/γ; Doppler; Newton III.
 
-## Answer (Axioms → Theorems → Proofs)
+## Dependency Map (§K.3)
 
-### Axiom GPI: The Granular Pulse Invariant
+| Item | Where | Enters as | Live? |
+|------|-------|-----------|-------|
+| Law I Φ, ε, N | `laws.hpp` law_I | mechanism | ✔ |
+| Law IV m = Φ V_disp/(3ℓ_P³c²) | `laws.hpp` law_IV | the mass in F=ma | ✔ |
+| Law V v_circ²+v²=c² | `laws.hpp` law_V | the SR budget | ✔ |
+| **FLM12 mass = field-resistance to vector change** | Investigations/01 | **same mechanism? (C3 reconcile)** | ⚠ dep |
+| FLM08 `lattice_structure.hpp` | Engine | relay geometry | ✔ |
+| FARMER §8 PASS/BECOME/PRESS | Investigations | movement modes | ✔ |
+| "add law section to laws.hpp" (old criterion 4) | this prompt | **propose-only** — needs Harvey | ⚠ flag |
 
-> Every spation receives one relay pulse per Planck length per Planck time,
-> from each direction, independently. This rate is invariant under all
-> conditions — velocity, acceleration, gravitational state.
+## ④ Strategy — three checks
 
-Formally:
-```
-Pulse rate per direction = 1/(l_P × t_P) = 1.148 × 10⁷⁸ Hz/m
-```
+**C1 — Verify F=ma.** Derive GPI-4 from GPI + V_disp in code; confirm the /3 quadrature share (Interchange flag #2 warns the banner sometimes drops it). *Metric:* F=ma exact, units close.
+**C2 — Audit the SR suite for circular γ.** GPI-5/6/7 must produce γ from the budget (v_circ=c/γ), not assume it. *Kill:* if γ is imported to derive time dilation, it's a restatement (root-3).
+**C3 — Reconcile with FLM12.** FLM12: mass = the field's resistance to a change of vector (relay-Doppler imbalance = inertia). GPI-4: pulse asymmetry δ = reorganisation load. **These look like one mechanism.** Determine: shared root (log once in STACK) or genuinely distinct. Do not present both as independent confirmations of inertia.
 
-This is the FUNDAMENTAL INVARIANT. c, ℏ, and all Planck units are consequences.
+## ⑧ Falsifiers
 
-### Axiom CS: Constancy Stabilisation
+| Test | Predicted | If FAIL → root |
+|------|-----------|----------------|
+| T1 | GPI-4 gives F=ma with /3 share, units close | root-3 (dropped /3) |
+| T2 | δ = a·ℓ_P/c² derived from pulse-timing, not posited | root-1 (asserted) |
+| T3 | SR suite derives γ, doesn't import it | root-4 (γ contraband) |
+| T4 | FLM02 mechanism ≡ FLM12 (one root) | root-2 (double-count if treated independent) |
+| T5 | Newton III mechanism (CS re-symmetrisation) is real, not narrated | root-1 |
 
-> Once a velocity change ceases, the omnidirectional input re-symmetrises
-> around the knot at the new velocity. The new velocity becomes the
-> stable resting state.
+## ⑨.E Four-root sort
+root-1 claim false (a theorem is asserted) · root-2 dependency (FLM12 shared root) · root-3 prompt/algebra (/3 share, units) · root-4 contraband (imported γ). Log per FAIL; FLM02↔FLM12 root once in STACK.
 
-### Axiom FL: Flux Locality
+## Brainstorm — overlooked factors
+- **FLM02 and FLM12 are almost certainly one mechanism** (inertia = relay asymmetry cost). The §K value here is *merging* them, not stacking two "derivations of F=ma."
+- **GPI as the true root** would make Laws III/IV/V consequences — state that ambition, but only claim it if C1–C3 all pass without imports.
+- **The /3 quadrature share** (Interchange #2) is a known doc/code slip in Law IV — make sure FLM02's F=ma carries it correctly.
+- **"Add a law section to laws.hpp" is propose-only** — FLM02 may *propose* the GPI law block, but it cannot be written to the engine without Harvey.
 
-> All matter sits at the centre of its own flux. Inertia is relative
-> to the local throughput environment. Mass is local — determined by
-> V_disp (topology) and the local throughput density.
+## ⑤ Success / ⑥ Outputs
+Class A: F=ma + SR suite derived from GPI with no imported γ, FLM12 reconciled to one root. Class C: F=ma clean, SR suite partially imports. Outputs: `RUN_LOG.md`, `flm02_*.cpp` (verify), `FLM02_DERIVATION.md`, `FLM02_VERDICT.md`, proposed GPI law block (for Harvey), STACK root entry.
 
----
-
-## Theorems
-
-### Theorem GPI-1: c is a consequence
-
-```
-c = l_P / t_P [exact]
-```
-
-The relay propagation speed equals one Planck length per Planck time because
-each spation passes the pulse to its neighbour in one tick.
-
-### Theorem GPI-2: Omnidirectional symmetry at constant velocity
-
-At constant velocity v, the particle's frame sees symmetric pulse input.
-No pulse asymmetry → no net reorganisation → no force → no cost.
-
-This IS Newton's First Law, derived from GPI.
-
-### Theorem GPI-3: Pulse asymmetry during acceleration
-
-During acceleration a, the particle is pushed through a throughput gradient.
-In the direction of acceleration:
-```
-Effective pulse rate = (1 + δ)/(l_P × t_P)
-```
-where:
-```
-δ = a × t_P / c = a × l_P / c²
-```
-
-### Theorem GPI-4: F = ma from pulse asymmetry
-
-The net throughput asymmetry δ creates a reorganisation load on V_disp:
-```
-F = [Φ V_disp / (3 l_P³ c²)] × a = m × a
-```
-
-Proof: See FLM02 proof file.
-
-### Theorem GPI-5: Kinetic energy is circulation deficit
-
-```
-E_kinetic = E_circ(rest) - E_circ(v) = ½m(c² - (c² - v²)) = ½mv²
-```
-
-Relativistically: E_kinetic = (γ - 1)mc²
-
-### Theorem GPI-6: Time dilation from budget partition
-
-```
-v_circ = c/γ → T_clock = γ T_rest
-```
-
-The clock slows because the circulation velocity drops as translation increases.
-
-### Theorem GPI-7: Doppler from frame-dependent observation
-
-```
-f_observed = f_rest × √((1 ± β)/(1 ∓ β))
-```
-
-Derived from the invariant pulse rate combined with closure velocity and
-time dilation.
-
-### Theorem GPI-8: Constancy stabilisation is Newton's Third Law
-
-When acceleration stops, the asymmetry δ → 0. The flux re-symmetrises.
-The reaction: every action (δ) on the knot produces an equal reorganisation
-cost on the source of the force (the thing doing the pushing), because
-the pushed knot's V_disp reorganisation propagates back through the relay.
-
----
-
-## Success Criteria
-
-1. F = ma derived algebraically from GPI + V_disp
-2. All 5 existing laws shown to be consequences of GPI
-3. Numerical verification against 8+ experimental measurements
-4. Formal law section added to laws.hpp
-5. C++ implementation with constexpr verification functions
-
----
-
-## Data Requirements
-
-All constants from laws.hpp — no external data needed.
-This is a purely theoretical derivation from existing axioms.
 ---
 
 ## ⑩ Adaptive Execution Protocol
 
-> *It is a bad plan that cannot be altered.* Failures invoke **PIVOT / KILL / OPEN** — never RETRO-PASS or PLUG.
-> See `PROMPT_EXECUTION_PROTOCOL.md`.
-
-### Pre-Run Commitment Block (copy to `RUN_LOG.md` before coding)
-
 ```markdown
-## Pre-Run Commitments — FLM02
-- Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
-- CALIBRATED budget: [0 or list each param — max per §⑤]
-- Engine namespaces: FLM08 `lattice_structure.hpp`, FLM02/FLM05 relay mechanics
-- Phase thresholds (committed before run): [commit per phase in RUN_LOG]
-- Forbidden retroactive changes: widen tolerances; plug targets; IDENTITY-PASS; local constant namespaces
+## Pre-Run Commitments — FLM02 (§K verify-and-reconcile)
+- Prompt completion target: [A|B|C]
+- Physics class hoped: [NATIVE|CONVERGENCE]
+- CALIBRATED budget: 0
+- Checks: C1 F=ma(/3 share) · C2 SR-γ audit · C3 FLM12 reconcile
+- Forbidden: import γ to derive time dilation; present FLM02 & FLM12 as independent; write laws.hpp
 ```
 
-### Pivot table (minimum — extend for this investigation)
+| Trigger | PIVOT | If fails | Forbidden |
+|---------|-------|----------|-----------|
+| SR suite imports γ | derive γ from budget | downgrade CONVERGENCE | claim NATIVE |
+| FLM02 = FLM12 | merge, log one root | — | double-count |
+| δ asserted | derive from pulse timing | OPEN the asymmetry law | posit and call derived |
+| criterion 4 tempts engine edit | write a proposal block | — | edit laws.hpp |
 
-| Trigger | PIVOT (first) | If pivot fails | Forbidden |
-|---------|---------------|----------------|-----------|
-| Phase 0 sanity check fails | Fix units/engine refs; verify `laws.hpp` symbols | STOP — report blocker | Fit to target |
-| Native mechanism off > committed % | Alternative route in §④; document ADJ-### | **OPEN** or **KILL** hypothesis | RETRO-PASS |
-| `z ≥ 1` in closure formula | Weak-field break (CR10); piecewise or exponential | **OPEN** that regime | Ignore break |
-| Rivals match but SDT doesn't beat | Label **DEGENERATE** honestly | — | Claim Class A |
-| Upstream dependency missing (FLM10, etc.) | **DEFER** phase; cite dependency ID | — | Fake PASS |
-
-### Allowed adjustments
-
-- Finer numerics (mesh, ticks, bracket); phase splits (Na / Nb); filename fix via ADJ entry.
-- Alternative **native** routes already listed in §④ Strategy.
-
-### Disallowed adjustments
-
-- Post-hoc tolerance widening · coefficient plugs · `atomic::`/GM/G in Phase-1 native chain · Snell/reciprocity-only as Fermat PASS.
+**Disallowed:** post-hoc tolerance widening · imported γ · double-counting FLM12 · editing `laws.hpp`.
 
 ---
 
-*FLM02 · upgraded 2026-06-27 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*
+*FLM02 · §K-deepened 2026-07-13 · worked derivation to be graded; FLM02↔FLM12 is likely one inertia mechanism (reconcile, don't stack); the "add a law" criterion is propose-only.*

@@ -89,7 +89,24 @@ struct State28D {
     // ===================================================================
     // LEVEL 7: ENERGY (7 aspects) - FORCE MANIFESTATION
     // ===================================================================
-    
+    //
+    // DESIGN FLAG (interchange sweep 2026-07-07, Harvey-authorized):
+    // Under the movement ledger, energy IS movement already counted in
+    // Levels 2-6 — these seven slots are re-reads of prior coordinates,
+    // not independent state dimensions, so Level 7 double-books the
+    // ledger as a state vector. Specific issues, flagged not changed:
+    //   - Nothing here enforces the Law V budget (v_circ² + v² = c²)
+    //     between the eps slots and the velocity coordinates they
+    //     re-express; the two can silently disagree.
+    //   - eps_0 (gravitational/positional PE) is POSITIONAL — it has no
+    //     local address on one locus and does not belong in a per-locus
+    //     state vector.
+    //   - eps_b (binding) is a property of the UNION (the mesh discount
+    //     shared across the bound pair), not of one locus.
+    //   - eps_4 is dimensionally odd man out: [W] (a rate) sitting in a
+    //     row of [J] slots — check its units before any use.
+    // Restructure = Harvey's call; nothing altered below.
+
     double eps_0;  ///< Potential - energy of position/configuration [J]
     double eps_1;  ///< Kinetic - energy of bulk motion [J]
     double eps_2;  ///< Rotational - energy of unencumbered motion [J]

@@ -152,7 +152,8 @@ This is the KEY reaction. It is unusual: most (n,thermal) reactions are
 
 3. Does the C-14 grammar predict β⁻ decay?
    - C-14 decays to N-14 by β⁻ (t½ = 5,730 y)
-   - In grammar: β⁻ converts a neutron to a proton (Δn_tri = −1, Δn_deu = +1)
+   - In grammar: β⁻ converts a neutron to a proton (**Δn_tri = −2, Δn_deu = +3**
+     — corrected 2026-07-13; the old −1/+1 gave A′=A−1, Z′=Z, which is not β⁻)
    - Check: C-14 should have higher triton fraction than N-14
    - The beta decay restores the original N-14 grammar — the complete
      cycle is: N-14 → [+n, −p] → C-14 → [β⁻] → N-14

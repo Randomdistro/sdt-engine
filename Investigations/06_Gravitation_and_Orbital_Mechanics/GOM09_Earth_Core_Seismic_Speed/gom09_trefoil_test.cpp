@@ -2,6 +2,23 @@
  * @file gom09_trefoil_test.cpp
  * @brief Test: trefoil partition of convergence into heat/sound/movement
  *
+ * ⚠ HUNTER AUDIT (2026-07-06): LEGACY EXPLORATORY SCRATCH — DO NOT CITE, DO NOT RERUN AS-IS.
+ *   (1) Scan-for-coincidence by construction: eight ad-hoc formula candidates ratio'd
+ *       against g=9.81/G with a reverse-solving DIAGNOSTIC block; no pre-committed gate,
+ *       no null. Fishing-class instrument; kept only as a record of the search.
+ *   (2) Violates the 2026-07-05 standing rule: M_Earth (kg) is load-bearing in every g
+ *       line and Tests 5–6 construct "G_SDT" against G_measured. Any successor must be
+ *       kinematic (g = c²ϟ/r², ϟ from (a,T)) — the honest owner of this question is now
+ *       §3b R1 (occlusion transfer function) + GOM17's exchange ledger.
+ *   (3) Internal faults, logged not fixed (file frozen as scratch): electron displacement
+ *       double-counted (~×2.2 vs Z/A≈0.46 at the file's own A_avg=26, which is declared
+ *       and never used); "per tick" asserted in comments but t_P absent from every force
+ *       line (Test 8 exposes the ×N ambiguity and leaves it open); V_excl computed twice;
+ *       b_surface/E_per_sr_per_tick/n_electrons/hbar/k_B dead; constants duplicated
+ *       instead of <sdt/laws.hpp>.
+ *   GOM09's verdict cites gom09_seismic.cpp only; RESULTS.md uses the W=3 split as
+ *   narrative concept, no numbers from this file are claimed anywhere.
+ *
  * Per excluded Planck cell, per Planck tick:
  *   - CMB deposits ε = u_CMB × l_P³ of energy
  *   - Trefoil splits it 3 ways: heat, sound, movement

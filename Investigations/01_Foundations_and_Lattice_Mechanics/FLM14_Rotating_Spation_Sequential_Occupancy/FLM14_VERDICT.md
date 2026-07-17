@@ -359,3 +359,147 @@ named as WAKE-MEMORY debt) / Part C NOT LICENSED (ADJ-11 conjunction unmet) / AD
 probe on the licensed two-channel instrument: 0.9186 NOT FOUND (Q1–Q4 all miss) ·
 Recovery PARTIAL (unconditional seed-2; T_W diagnosis — new ADJ) · Cascade: WAKE-MEMORY
 root opened; RESIDENCE-LAW instrument upgraded; ROOT-SIM unchanged.**
+
+---
+
+# FLM14 — VERDICT, Run 5 (2026-07-05, recorded 2026-07-06): the claim decision
+
+> Tool: `flm14_form5.py` (exit 0; `flm14_form5_results.txt` = real stdout). Spec = RUN_LOG
+> ADJ-12, committed before code, ordered by Harvey. Machinery = flm14_form4b verbatim;
+> machinery anchors reproduced run-4's +2.596/+2.040/+1.620 exactly at the declared
+> tolerance. Nothing re-tuned; the pre-declared honesty note (refusal expected from run-4's
+> table; unconditional legs run anyway) held.
+
+## CLAIM DECISION: REFUSED — blockers named per ADJ-12
+
+- **Leg (i) stable regime: FAIL** (run-4 table cited, not re-run — β=0.05 drift-FAIL and
+  β=0.40 band-break pincer the grid).
+- **Leg (ii) split-half: FAIL at β=0.10** (one half undefined; β=0.20 passes).
+- **Leg (iii) seed-2 replication: FAIL at β=0.10** (+2.871 vs +2.109, band and split-half
+  both broken); **PASS at β=0.20** (+2.186 vs +2.040, band OK; split-half +1.983/+2.176 OK).
+- **Part C: NOT RUN** (committed condition). No Born claim; no CHSH licence.
+
+## What run 5 nevertheless settled (evidence standing alone, as ordered)
+
+1. **The β=0.40 upturn is instrument, not dynamics — MASK-EROSION SUPPORTED.** On the FIXED
+   β=0.20 seat mask the β=0.40 slope is +2.270, within the declared 0.3 of the centre
+   +2.040 (own-mask +2.855). One of leg (i)'s two pincers is now diagnosed as seat-selection
+   artifact. Run-4 §D-1's hypothesis is paid.
+2. **The centre reading replicates across geometry.** β=0.20: seed-2 pooled +2.186 against
+   seed-1 +2.040, both split-halves defined and tight. The ~2 exponent is not a property of
+   one glass realisation. Honest caveat, not hidden: seed-2 fails the <1% closure drift at
+   BOTH betas (0.0298/0.0639) — the drift criterion is geometry-sensitive; the replication
+   PASS is per ADJ-12's committed definition, which did not include drift.
+3. **WAKE-MEMORY hardened from slide to dissolution.** T_W scan {13.5, 27, 54, 108}:
+   +2.596 / +2.040 / +1.620 / **undefined** (|r| = 0.43 < 0.6 at T_W=108). The declared
+   convergence rule cannot evaluate (Δ2 undefined) → diagnosis INCONCLUSIVE as committed —
+   but the honest reading is worse than a monotone slide: at long memory the log-log
+   relation itself dissolves. p is a window property of the wake-amplitude instrument.
+
+## §D — seven questions
+
+1. **Why exactly?** The measured amplitude A integrates T_W of wake history; the exponent
+   inherits the integration window and vanishes when the window blurs the seat contrast.
+2. **Recoverable?** Named, one route ranked first: **a memory-free residence measure** —
+   occupancy against dwell-count fraction (a counting measure, no instrument constant),
+   which is verbatim the spec's own ontology ("Born = dwell time"). Second: derive a native
+   T_W from FLM03 co-rotation / FLM09 reconnection lifetimes. Neither attempted this run
+   (neither was declared — attempting one post-hoc would be fishing).
+3. **What did the target fail to account for?** That A imports an instrument constant; a
+   residence LAW must survive with none.
+4. **Errored premise?** None new; ADJ-12 executed clean; run-4's "(expected zero)" fault
+   was already owned.
+5. **What freedom corrects it?** The dwell-count measure is native (§0 R-seq, verbatim); a
+   per-run T_W choice would be a knob — refused.
+6. **Native or knob?** Nothing moved; anchors exact; scan, bands, and the fixed-mask test
+   all pre-declared in ADJ-12.
+7. **Cascade?** WAKE-MEMORY deepened (dissolution, not slide). MASK-EROSION closed (paid).
+   RESIDENCE-LAW unpaid, instrument now geometry-replicated at the centre. NEW DEBT NAMED —
+   **DRIFT-GEOMETRY**: the closure-drift criterion fails on seed-2 at betas where seed-1
+   passes; either the criterion or the glass generation carries a geometry sensitivity that
+   must be understood before any future leg (i) can be trusted.
+
+**Named next step (requires a new pre-committed ADJ — run 6):** re-run the β grid with the
+memory-free dwell-count measure, seed-1 AND seed-2, claim conjunction unchanged. If p ≈ 2
+survives with no instrument constant, the claim is live again; if it does not, rule-form-4's
+Born story dies honestly.
+
+---
+**Prompt completion A (ADJ-12 executed in full; unconditional legs honoured) · Physics
+class: P2 claim REFUSED (three blockers named) / MASK-EROSION SUPPORTED (β=0.40 pincer =
+artifact) / seed-2 centre replication PASS-with-caveat / T_W diagnosis INCONCLUSIVE-hardened
+(p undefined at T_W=108) / Part C NOT RUN · Recovery NAMED (run-6 memory-free dwell measure)
+· Cascade: WAKE-MEMORY deepened · MASK-EROSION closed · DRIFT-GEOMETRY opened.**
+
+---
+
+# FLM14 — VERDICT, Run 6 (computed 2026-07-07 00:35; verdict recorded same day): the memory-free measure
+
+> Tool: `flm14_form6.py` (exit 0; `flm14_form6_results.txt` = teed stdout). Spec: ADJ-13,
+> committed before code. Machinery = flm14_form4b VERBATIM, dynamics untouched (T_W=27 stays
+> in the dynamics); THE ONE CHANGE: A → A_mf = per-hop |net wake deposit| — no decay, no
+> history, no T_W in the measure. **Anchors exemplary:** imported form4b reproduces run-4's
+> +2.040 exactly; this tool on the old measure differs by 0.00e+00 — the tours are
+> bit-identical, the measure switch is licensed.
+
+## CLAIM DECISION: REFUSED (ADJ-11 verbatim; blocker named)
+
+- **Leg (i) stable regime: FAIL.** β=0.05 drift-fails (0.0766); the only possible 3-window
+  {0.10, 0.20, 0.40} breaks the ±0.3 band — p_MF = +2.382 / +2.585 / **+4.191**.
+- **Part C: NOT RUN** (committed condition). Seed-2: all four betas drift-FAIL
+  (0.019–0.064) — the DRIFT-GEOMETRY debt reproduced bit-exactly from run 5, as it must be
+  (dynamics unchanged).
+
+## What run 6 settled (and it is load-bearing)
+
+1. **WAKE-MEMORY is PAID — and the payment convicts the old centre value.** The memory-free
+   exponent at the committed centre is **+2.585**, which is the T_W→0 limit of run-5's own
+   family (2.596 @ T_W=13.5 → 2.040 @ 27 → 1.620 @ 54): instrument-coherent. The celebrated
+   p ≈ 2.040 was the T_W=27 window's value, not the dynamics'. **With no instrument constant
+   anywhere in the measure, the residence exponent reads ≈ 2.4–2.6 at the drift-passing
+   centre and is NOT 2.**
+2. **NEW DEBT — BETA-DEPENDENCE:** p_MF rises monotonically with kick strength on both seeds
+   (seed 1: 2.109→2.382→2.585→4.191; seed 2: 2.227→2.966→3.376→3.487). Under the memory-free
+   measure the exploratory β is exposed as load-bearing: no residence LAW exists until β is
+   derived natively (FLM03's open co-rotation coefficient) or a β-independent regime is
+   exhibited (system-size route, 3-D CRN seats — named since run 2, still unbuilt).
+3. **DWELL-LEG NULL:** p_dwell(MF) is undefined at every arm on both seeds (|r| = 0.01–0.54).
+   Against the instantaneous wake, dwell-TIME carries no power law — only occupancy (visit
+   counts) does. Honest tension with the program's own "Born = dwell time" phrasing: as
+   instrumented, Born-weight-as-occupancy survives partially; Born-weight-as-dwell-duration
+   does not. Reported, not resolved.
+4. **MASK-EROSION splits by geometry:** seed 1 CONTRADICTED (fixed-mask +4.542 — the MF
+   dynamics genuinely steepen at β=0.40), seed 2 SUPPORTED (+3.487, within 0.3 of centre).
+   The run-5 closure of this question was measure-specific; under MF it re-opens,
+   geometry-dependent. Filed under DRIFT-GEOMETRY.
+5. **THE EXPORT SHIPPED (the CH07 stake):** `flm14_run6_dwell_table.txt` — per-seat dwell
+   fractions at β=0.20, both geometry seeds. **Labelled honestly: leads-grade input** — the
+   dwell table is real measured output of an instrument whose residence law is UNCLAIMED, so
+   any CH07 dwell-weighted well rerun it feeds is exploratory class until a residence law
+   lands, per the re-open condition's own wording.
+
+## §D — seven questions
+
+1. **Why exactly?** Removing the T_W integration removes the smoothing that made p look
+   β-stable; the raw per-hop deposit tracks kick strength directly.
+2. **Recoverable?** Two named routes, both requiring new ADJs: (a) derive β from FLM03
+   co-rotation (the coefficient has been open since the program began — it is now the SINGLE
+   blocking unknown); (b) 3-D CRN seat geometry at larger N (the 42-seat annulus caps usable
+   seats at 12–18 every run).
+3. **What did the target fail to account for?** That "stability across β" under the old
+   measure was window-borrowed, not dynamical.
+4. **Errored premise?** None new; ADJ-13 executed clean; anchors 0.00e+00.
+5. **What freedom corrects it?** A native β only. A fitted β would be the knob this program
+   has refused five runs running — still refused.
+6. **Native or knob?** Nothing tuned; one change, declared; diagnostics carried both measures
+   side by side at every arm.
+7. **Cascade?** WAKE-MEMORY closed (paid by construction). BETA-DEPENDENCE opened (owner:
+   FLM03 coefficient). DWELL-LEG NULL logged against the program's own ontology wording.
+   DRIFT-GEOMETRY unchanged, still open. RESIDENCE-LAW remains UNPAID — five debts stand.
+
+---
+**Prompt completion A (ADJ-13 executed in full; anchors 0.00e+00; claim rule verbatim) ·
+Physics class: CLAIM REFUSED (leg-i blocker named) / WAKE-MEMORY PAID (memory-free exponent
+≈ 2.4–2.6 at centre — the 2.040 was window-dependent) / BETA-DEPENDENCE opened / DWELL-LEG
+NULL reported / Part C NOT RUN · Export delivered (leads-grade) · Recovery NAMED (native β
+from FLM03, or 3-D CRN at scale — new ADJ required) · Cascade: RESIDENCE-LAW unpaid.**

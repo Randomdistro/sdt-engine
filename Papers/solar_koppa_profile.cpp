@@ -11,6 +11,15 @@
  *
  * @author James Tyndall, Melbourne, Australia
  * @date April 2026
+ *
+ * ⚠ HUNTER GM-SWEEP (2026-07-06): CONTRABAND — FROZEN PENDING KINEMATIC RE-RUN.
+ *   The headline r_Ϟ = GM_sun/c² (line ~26) AND the ALMA/SDO layer depths
+ *   z = GM/(R_λ c²) are seeded from raw GM_sun, so the "invariance across layers"
+ *   result is GM-fed and circular (Δr_Ϟ ≡ 0 by construction). Only the measured
+ *   velocity-shift layers (638 / 633.1 m/s spectroscopy) are GM-free. Named repair:
+ *   seed r_Ϟ kinematically — ϟ_Sun = 4π²a³/(T²c²) from Earth's (a,T) = 1476.63 m —
+ *   and keep ONLY layers whose z comes from measured spectra, not from GM/(R_λc²).
+ *   Blast radius: contained — cited by no VERDICT/RESULTS/STACK entry (grep-verified).
  */
 
 #include <cstdio>

@@ -300,7 +300,8 @@ namespace law_III {
     [[nodiscard]] inline auto F_nuclear_electron(
         int Z, double r
     ) noexcept -> double {
-        double R_nuc = static_cast<double>(Z) * R_p;
+        // CORRECTED 2026-07-07 (vendored clone of canon fix): area ~ Z => R = sqrt(Z)*R_p, F ~ Z (Coulomb scaling)
+        double R_nuc = std::sqrt(static_cast<double>(Z)) * R_p;
         return F_occlusion(R_nuc, r_e, r);
     }
 

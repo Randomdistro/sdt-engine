@@ -55,3 +55,20 @@
 ## Phase execution record
 
 *(to be appended AFTER the run, from the real stdout in `np07_results.txt` — never before)*
+### Phase record (appended from real stdout, np07_results.txt — run 2026-07-12, Fable direct, NO agent)
+
+- Build: MSVC BuildTools 2022 x64, `cl /std:c++20 /EHsc /O2 /I Engine\include`. BUILD_EXIT=0, RUN_EXIT=0.
+- **P0 grammar gate: PASS** — Be-7 α-grammar (3,−1) INVALID (underflow); H3-grammar (2,0) valid;
+  Li-7 (0,1), Li-6 (1,0) on-lattice; EC vector (−3,+2) maps Be-7 → Li-7 EXACT. [NATIVE]
+- **P1 seat scale: PASS** — engine `atomic::bohr_velocity`: v_seat(Z=4)=8.7508e6 m/s →
+  strip cost 217.69 eV vs 217.7 eV ref (err 0.004%). EC-blocking rule: stripped Be-7 cannot EC;
+  the EC clock starts at the ~218 eV seat (~16× H). [COMPUTED, scale-setting]
+- **P2 rival-comparison bookkeeping**: f = 66.2% ± 8.2% pre-EC destruction required IF the rival
+  production number is taken at face value. SIGN analysis shown: delayed EC conserves mass-7;
+  reduction requires destruction during the ionised window (p+Be-7→B-8→2α); the SDT EC-block
+  LENGTHENS the window — right sign. [RIVAL-COMPARISON only]
+- **P3: OPEN** per pre-commit — no native thermal history (i), no σ(p+Be-7) data in repo (ii).
+  No final Li-7/H claimed. Deliverable = mechanism map + named data needs.
+
+**Honest outcome: mechanism map earned (P0/P1), quantitative resolution OPEN. No ADJ needed —
+run followed pre-commitments exactly.**

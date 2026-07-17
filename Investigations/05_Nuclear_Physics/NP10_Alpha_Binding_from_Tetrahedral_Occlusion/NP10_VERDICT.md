@@ -82,3 +82,106 @@ unphysical-inversion result showing no spacing choice rescues electrostatics.
 > **Prompt completion B · Physics class OPEN (G1 FAIL quantified; G3 constraint EARNED; G2 re-verified; G4 DEGENERATE) · Recovery PARTIAL · Cascade root: NP17-PENDING tetrahedral-lock magnitude (shared with NP08)**
 
 *NP10 · executed 2026-07-03 · honest OPEN · the lock term is now a quantified, falsifiable target.*
+
+---
+---
+
+# NP10 — RUN 2 VERDICT: ROOT-CONTACT, the shared-seat contact wall
+
+> **Author:** J. C. Harvey, Melbourne. **Run:** 2026-07-05. **Engine:** `sdt/laws.hpp` only.
+> Tool: `np10_contact_wall.cpp` (MSVC exit 1 — honest) → `np10_contact_wall_results.txt`.
+> Mission: the REGISTERED THREE-FIELD CROSS-CHECK (STACK §3b / CH07 §D7) — one wall
+> mechanism, one constant set {αℏc, a₀, R_p}, three fields, no per-target tuning.
+> Mechanism, gates (25% each) and expectations committed in RUN_LOG.md BEFORE coding.
+
+## Dual verdict header
+
+| Axis | Grade | One-line |
+|------|-------|----------|
+| **Prompt completion** | **B** | All three registered targets scored against pre-committed gates; expected failures confirmed and structurally diagnosed; no tolerance widened, nothing re-chosen after numbers. |
+| **Physics class** | **KILLED** (Face R as the chemistry wall) / **OPEN-candidate** (Face T lock, −5.6% α) / **conjunction FAIL** | The saturated-occlusion radial ledger cannot be the contact wall — it *enhances* attraction identically everywhere above deep interpenetration. The lock ladder is quantitatively the FLM14 sequential-tour count (Z−1)!. |
+
+## The registered cross-check score (all gates committed pre-run)
+
+| Target | Predicted | Anchor (OBSERVED) | Gate 25% |
+|---|---|---|---|
+| (a) k(H₂), Face-R wall | 17 801 N/m at R_min = 0.315 Å (−57.6%) | 575 N/m at 0.7414 Å | **FAIL (+2996%)** |
+| (b) NaCl correction, Face-R | **+40.6 kJ/mol (adds binding)** | −74.0 kJ/mol (861.0 → 787) | **FAIL (sign wrong)** |
+| (c) alpha lock, Face T (Z−1)! | ×6 | ×6.354 required | **PASS (−5.57%)** |
+| **CONJUNCTION (the cross-check)** | | | **FAIL** |
+
+Face T support rows: deuteron (Z=2) ×1 → 2.200 MeV (−1.06%); triton (Z=3) ×2 → 8.557 MeV
+(+0.88%); alpha (Z=4) ×6 → 26.721 MeV (−5.57%) — three nuclei, zero constants.
+Diagnostics: **D2** cage rule holds (nuclear ledger shifts the deuteron only +0.23%; the
+ledger does not break NP17). **D1** budget-wall rival (ℏ²/2m_e confinement, flagged
+formally degenerate with the QM zero-point form): R_min 0.579 Å (−22%), k 2697 N/m
+(+369%) — an order of magnitude closer than Face R; fences the chemistry wall's true
+scale for ROOT-BUDGET; earns nothing here (CONVERGENCE cap declared pre-run).
+
+## The kill — Face R (saturated-occlusion ledger as the contact wall)
+
+The failure is **structural, not numerical**: the exact solid-angle energy obeys
+E_exact/E_point = ρ(π−2ρ) ≥ 1 for all ρ = r/R̂ > 0.444. Exact occlusion **deepens**
+attraction — it cannot generate Born-type repulsion, cannot soften a well, and its only
+"wall" is the untouched surplus 1/R divergence (hence H₂ collapses to 0.31 Å at 31× the
+measured stiffness). At NaCl the enhancement is long-ranged (per-pair difference ~
+αℏc R̂²/12r³, lattice sum log-divergent: +34.4/+40.6/+46.8 kJ/mol at cutoff 20/40/80 —
+magnitude cutoff-dependent, **sign unconditionally wrong**: every term adds binding).
+**Kill scope (declared):** this committed form — exact-solid-angle deficit ledger +
+ceiling extension + cage rule — as the *chemistry-scale contact wall*. NOT killed: the
+two-regime G(x) law in its own regime (gravitational grazing, E105/GOM13 — no
+interpenetration there), and NOT the coordination-dependence itself (which survives as
+Face T). GATE-CONTRABAND check: all three gates are measured anchors (575 N/m, 787 vs
+861 kJ/mol, 28.296 MeV) — no rival axiom sits in any kill condition.
+
+### §D Seven questions (on the Face-R kill)
+
+1. **Why exactly?** GA +2996% (minimum at 0.315 Å, k 17 801 N/m); GB sign inverted (+40.6 predicted vs −74.0 required). Both were pre-declared from the identity ρ(π−2ρ) ≥ 1 and confirmed by the run.
+2. **Recoverable?** Not by any sub-boundary shape choice: the enhancement identity holds for r > 0.444 R̂ regardless of the extension; no R̂ assignment flips it (checked: ionic-contact R̂ makes it worse). Recovery requires a *different resource*, not a different profile.
+3. **What did the target fail to account for?** A short-range cost that REMOVES binding at contact. Occlusion geometry supplies only shadow (deficit → attraction); the wall must be paid from a non-shadow ledger.
+4. **Which premise erred?** FARMER's "saturation at contact IS the lock/wall" — at the *pair* level. The saturated pair correction is +0.23% at the deuteron and attractive at Å scale: too small for the lock, wrong sign for the wall.
+5. **What freedom corrects it?** The seat's movement/residence budget (Law V / FLM14 tour cost): D1 shows the ℏ²/2m_e confinement scale lands within ×4.7 of k(H₂) where occlusion misses by ×31.
+6. **Native or knob?** Native in kind (FLM12's confinement cost, Law-IV/V); underived in magnitude and formally degenerate with the QM zero-point form — flagged, capped CONVERGENCE, not gated, not tuned.
+7. **Cascades?** Yes — ROOT-CONTACT **splits** (see below). CH02's overshoot, CH07's k, and CH05's barrier are NOT cleared by this run; the alpha lock leaves the contact cluster entirely.
+
+**Recovery grade: PARTIAL** (mechanism killed with the disqualifying identity named; the
+replacement resource fenced by D1 but not derived).
+
+## What is earned
+
+**Face T — the (Z−1)! sequential-tour lock (the run's positive product):** the number of
+distinct closed tours of Z destinations (FLM14 rotating-spation sequential occupancy;
+Harvey's scarce-rim-angle premium read as *sequential* engagement) reproduces the entire
+run-1 ladder with **zero constants**: d −1.06%, t +0.88%, α −5.57%. It is superlinear in
+coordination exactly as run-1's G3 demanded, vanishes for two-centre systems ((2−1)! = 1
+— natively explaining why pairwise chemistry needs no lock), and the tetrahedron was not
+hard-coded (only the destination count Z enters). **Honesty labels:** POST-DICTION of a
+published ladder (declared pre-run); look-elsewhere logged (Catalan −21%, 2^C(n,2) +26%,
+(Z−2)!! dead — (Z−1)! is the only committed survivor of ~5 simple forms); the energy-law
+"B = tour-count × electrostatics" is UNDERIVED (§G item 3). **Falsifiers registered:**
+Z=5 seat-tour lock must be ×24; He-3 (alternate grammar, 3p+1e) untested; the FLM14
+residence law must produce energy ∝ tour multiplicity or this dies.
+
+## §G faith ledger (what the committed wall accepted on faith)
+
+1. **Surplus-no-ceiling asymmetry** (EMC03): accepted; it alone produced any wall at all. Still underived.
+2. **Ceiling-force linear extension below R̂:** accepted; shown irrelevant to the kill (the enhancement identity lives above R̂).
+3. **Energy ∝ tour count** for Face T: pure faith — now the named debt owed to FLM14.
+4. **Cage rule R̂ = min(a₀, half-gap):** held at the deuteron (+0.23%); untested elsewhere.
+5. **The CH07 point well retained to contact:** its −81.5 eV depth at Re is 2.5× the measured total electronic binding (31.95 eV) — the *well*, not only the wall, fails at contact. MIRROR: the gates were measured anchors, the rival (D1) was flagged and not gated; nothing oppositional policed the datastream.
+
+## Cascade roots (reported; STACK edit left to owner)
+
+**ROOT-CONTACT SPLITS:**
+- **ROOT-LOCK (nuclear, many-body):** candidate paid at first order by FLM14 tour
+  multiplicity (Z−1)! — owner FLM14; owed: the residence-energy derivation + Z=5 and
+  He-3 falsifiers. Supersedes "saturated solid-angle ledger" as the lock route.
+- **ROOT-WALL (chemistry contact repulsion):** NOT occlusion-saturation (killed here);
+  converges with **ROOT-BUDGET** (Law V confinement/residence cost — D1 fences its scale
+  at ℏ²/2m_e). CH02 overshoot / CH07 k / MgO remain OPEN under this root.
+
+## Canonical line
+
+**Prompt completion B (registered three-field cross-check executed; GA/GB honest FAIL as pre-declared, GC PASS) · Physics class KILLED (radial saturated-occlusion wall — enhancement identity ρ(π−2ρ)≥1 disqualifies it at chemistry scale) / OPEN-candidate (Face T (Z−1)! tour lock: d −1.1%, t +0.9%, α −5.6%, zero constants, post-diction declared) · Conjunction FAIL — ROOT-CONTACT splits into ROOT-LOCK (→FLM14) + ROOT-WALL (→ROOT-BUDGET) · Recovery PARTIAL**
+
+*NP10 run 2 · executed 2026-07-05 · the wall and the lock are not one mechanism; the lock now has a zero-constant candidate and two registered falsifiers.*

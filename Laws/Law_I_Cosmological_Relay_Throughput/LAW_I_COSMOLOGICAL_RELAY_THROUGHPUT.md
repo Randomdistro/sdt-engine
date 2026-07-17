@@ -26,7 +26,7 @@ where `Φ` is the local throughput burden, `N` is the cosmological shell count, 
 P_conv = Φ / ℓ_P^3
 ```
 
-Law I is primitive because no later SDT mechanism can operate without it. Occlusion cannot create force unless there is convergence to occlude. Inertial mass cannot be throughput reorganisation cost unless throughput exists. Movement-budget relativity cannot be substrate-mechanical unless the relay medium is first defined. Vortex topology cannot become stable matter unless the medium carries deformation burden. Therefore Law I is not a specialised cosmological side-claim; it is the pressure-source law of the entire SDT framework.
+Law I is primitive because no later SDT mechanism can operate without it. Occlusion cannot create force unless there is convergence to occlude. Inertial mass cannot be throughput reorganisation cost unless throughput exists. Movement-budget relativity cannot be substrate-mechanical unless the relay medium is first defined. Vortex topology cannot exist unless the medium possesses delocation. Therefore Law I is not a specialised cosmological side-claim; it is the pressure-source law of the entire SDT framework.
 
 This paper defines the law, traces its development within SDT, explains why it is primitive, derives its core equation chain, distinguishes scalar convergence burden from vector force, establishes its relationship to Laws II–VI, defines its applications, and lists its hostile-review obligations and falsification modes.
 
@@ -73,13 +73,13 @@ If SDT says force is pressure imbalance, then it must explain the origin, scale,
 
 The developmental sequence is:
 
-1. Matter is persistent displacement, not point substance.
-2. Displacement requires a medium capable of being displaced.
+1. Matter is persistent point substance displacing a medium of persistent point substance roughly 1.1*10^-21 smaller.
+2. Displacement requires this medium must be capable of being displaced.
 3. The medium must be contact-coupled, otherwise displacement has no local mechanism.
 4. Radiation and influence require relay through the medium.
 5. Relay requires a finite update interval, or tick.
 6. Each relay element must carry deformation content.
-7. Local physical conditions therefore depend on the amount of deformation content converging through the medium.
+7. Local physical conditions therefore depend on both the amount and the type of deformation content converging through the medium.
 8. The cosmological shell structure determines how much content is presented locally.
 9. Shell cancellation prevents isotropic convergence from producing direct vector force.
 10. The surviving scalar burden is `Φ = Nε`.
@@ -226,13 +226,14 @@ A spation is the fundamental relay element of physical space in SDT. It is not a
 
 A spation has three relevant roles:
 
-1. it occupies no gap relative to neighbouring spations;
-2. it relays deformation state to adjacent spations;
-3. it participates in the phase-loaded structure of the medium.
+1. it occupies no gap relative to neighbouring spations. Interstitial voids are not natural;
+2. it relays deformation state to adjacent spations. That deformation state must provide a mechanism for deformation by displacement, and to satisfy role 1;
+3. it participates in the phase-loaded structure of the medium at an identical rate regardless of the amount of deformation exerted upon it.
+4. It maintains a spherical structure throughout. This spherical structure increases or decreases the local pressure in response to the local deformation by displacement state, interstitial state, flow state and "gravitational wave" event. This spherical structure is a particle different to material particles; a localised geometric object of the spation lattice, with the localised pressure cascade within the lattice previously interpreted as Planck Foam.
 
 ### 6.2 Spation Lattice
 
-The spation lattice is the complete contact network of spations. It is not a Cartesian grid. It is the continuous contact structure of space.
+The spation lattice is the complete contact network of spations. It is not a Cartesian grid. It is the continuous contact structure of space, it grows and shrinks based on the localised pressure state.
 
 The lattice is:
 
@@ -260,7 +261,7 @@ The tick is the elementary relay interval:
 t_P = ℓ_P / c
 ```
 
-This makes time operational inside SDT. Time is not first treated as an independent flowing entity; it appears as the ordering of relay updates.
+This makes time operational inside SDT based on the rate of relay. Time is not first treated as an independent flowing entity; it appears as the ordering of relay updates.
 
 ### 6.5 Deformation Content
 

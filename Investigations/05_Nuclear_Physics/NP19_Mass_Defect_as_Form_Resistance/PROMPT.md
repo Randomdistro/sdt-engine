@@ -58,7 +58,7 @@ This is not a new equation; it is a *renaming with a claim*: the right-hand side
 where `τ` is the manufacturing toll for any *new* form that must be built (the electron, here). A transformation runs **only if `ΔR > 0`** (downhill in form-resistance) — this is the *path of least resistance*, the SDT statement of spontaneity. **No external feed, no battery, no toll-collector at the event:** the surplus was already the difference in grip.
 
 **The flipped-sign neutron (the crux).** In SDT the *bound/heavier* form is the *higher*-resistance form (NP14: neutron has the larger V_disp). So:
-- `R(n) > R(p)` ⟹ `ΔR = R(n) − R(p) > 0` ⟹ free neutron is *uphill stored*, relaxes spontaneously.
+- `R(n) > R(p)` ⟹ `ΔR = R(n) − R(p) > 0` ⟹ free neutron is *uphill — a running over-payment (higher maintenance rate)*, relaxes spontaneously. *(word "stored" repaired — interchange sweep 2026-07-07, Harvey-authorized)*
 - The toll to make the daughter electron form is `τ = m_e c² = 0.511 MeV`.
 - The exhaust is `Q = ΔR − τ = 1.293 − 0.511 = 0.782 MeV` — matches the measured β⁻ endpoint to data error.
 

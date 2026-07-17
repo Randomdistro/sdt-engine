@@ -27,7 +27,10 @@ triton count, n_tri, n_deu) for EVERY known spallation product and verify:
    (extends E20 beyond the 2 known cases)
 3. **Grammar trajectory**: The sequence of grammar states from product
    through decay chain to stable endpoint follows the known grammar
-   rules (EC: Δn_tri = +2, Δn_deu = −3; β⁻: Δn_tri = −1, Δn_deu = +1)
+   rules (EC: Δn_tri = +2, Δn_deu = −3; β⁻: Δn_tri = **−2**, Δn_deu = **+3**)
+   [CORRECTED 2026-07-13: the former "β⁻: −1/+1" was WRONG — it gives A′=A−1 and
+    Z′=Z, i.e. it loses a nucleon and fails to change Z. Derive from n_t=A−2Z,
+    n_d=3Z−A−2 with Z→Z+1, A fixed. Conservation check: A = 4+2n_d+3n_t.]
 
 ---
 
@@ -73,22 +76,25 @@ For each entry, record:
 For each isotope encountered (target, product, intermediate, endpoint),
 compute:
 
+**THE CANONICAL FORMULA (corrected 2026-07-13 — the old pseudocode here was
+self-admittedly broken and is deleted). One alpha core, Z ≥ 3 (the grammar
+begins AFTER helium — He is the core, not a construction on it):**
+
 ```
-alpha_core = floor(min(Z, N) / 2)
-remaining_Z = Z − 2 × alpha_core
-remaining_N = N − 2 × alpha_core
+n_tri = A − 2Z   ( ≡ N − Z )
+n_deu = 3Z − A − 2   ( ≡ 2Z − N − 2 )
 
-If remaining_Z ≤ remaining_N:
-    n_d = remaining_Z   (each paired as p+n with a remaining neutron)
-    n_t = remaining_N − remaining_Z  (wait — this isn't right)
+Grammar VALID  ⟺  n_tri ≥ 0  AND  n_deu ≥ 0
+
+MANDATORY conservation check on EVERY row (this catches all arithmetic slips):
+    A == 4 + 2·n_deu + 3·n_tri
+    Z == 2 + n_deu + n_tri
+Any row failing either identity is a computation error, NOT a finding.
 ```
 
-**USE THE EXACT GRAMMAR FORMULA FROM ATOMICUS**. Do not improvise.
-Cross-check against at least 10 known ATOMICUS isotope files to validate
-the formula.
-
-Compute: n_tri = N − Z (or the equivalent per ATOMICUS convention)
-Compute: n_deu = (cross-check formula)
+*(Provenance note: the ec_investigations tables were audited 2026-07-13 and
+every n_deu in the light-isotope tables was wrong — all failed the A-identity
+above. Compute n_deu from the formula; never transcribe it.)*
 
 ### Step 3: Track decay chains
 
@@ -96,7 +102,7 @@ For each spallation product that is radioactive:
 
 1. Look up the decay mode from NNDC
 2. If EC: apply grammar rule (Z → Z−1, N → N+1, Δn_tri = +2, Δn_deu = −3)
-3. If β⁻: apply grammar rule (Z → Z+1, N → N−1, Δn_tri = −1, Δn_deu = +1)
+3. If β⁻: apply grammar rule (Z → Z+1, N → N−1, **Δn_tri = −2, Δn_deu = +3**)
 4. If β⁺: apply grammar rule (same as EC for grammar purposes)
 5. If α: apply grammar rule (Z → Z−2, N → N−2, Δn_deu = −2, Δn_tri = 0)
    per Triton Overload

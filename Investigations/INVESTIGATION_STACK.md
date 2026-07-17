@@ -398,8 +398,11 @@ See `FLM03.../DEEPTHINK_PROMPT.md`.
   `[VERIFIED]` · **E78** time dilation `[VERIFIED]` · **E94** convergence lens (gravity on shadow side) ·
   **E92** solar-sail convergence harvesting · **E25** Pioneer `[not-runnable: thermal recoil explains it]` ·
   **E96** artificial gravity `[not-runnable: planetary-scale]`.
-- **GOM09 — Earth core seismic speed** `[RESOLVED ✅ 1.82% RMS to PREM, 15 Apr 2026]` · GOM01. g(r) from koppa,
-  no G/M. (The completed exemplar.)
+- **GOM09 — Earth core seismic speed** `[PARTIAL — g(r) 1.82% RMS PASS; the named seismic gate FAILS
+  (v_p 11.5% / v_s 28.0%; rebuilt run 6.24%/6.69%) — metric-swap corrected in GOM09_VERDICT.md]` · GOM01.
+  g(r) from koppa, no G/M. *(Stale "RESOLVED ✅" line corrected 2026-07-06 to match the repaired verdict;
+  `gom09_trefoil_test.cpp` audited same day: legacy pre-ban fishing scratch, uncited by the verdict — see
+  its header note.)*
 - **GOM11 — Ocean tidal harmonics** `[EXECUTED — Class C CONVERGENCE]` · convergence gradient differential
   (`GOM11_VERDICT.md`). *(The old lead-sphere displacement-field idea is now experiment **E103**.)*
 - **GOM10 — Three-Body Lagrange from Koppa** `[EXECUTED 2026-07-03 — IDENTITY (μ substitution) +
@@ -575,6 +578,35 @@ Next new investigation = the **next free domain code** in the relevant field (e.
 > consolidated to FIVE debts under FLM14 rule-form-4; ROOT-CONTACT gained a registered
 > quantitative cross-check; ROOT-SEAT (CH03) merged into the FLM14/RESIDENCE-LAW cluster.
 
+> **⟐ 2026-07-05/06 — landings wave.** (1) **FLM14 runs 4–5** (`FLM14_VERDICT.md`): licensed
+> two-channel tour; centre reading **p_occ = +2.040** (β=0.20, split-half +2.015/+2.128,
+> seed-2 +2.186 replication PASS-with-drift-caveat) — Born-adjacent, **CLAIM REFUSED per
+> ADJ-11/12** (blockers named); Part C stays unlicensed. **MASK-EROSION CLOSED** (β=0.40
+> upturn = seat-selection, fixed-mask +2.270); **NEW ROOT — WAKE-MEMORY**: p slides
+> 2.596→2.040→1.620 with T_W and DISSOLVES at T_W=108 (|r|=0.43) — the exponent is not a law
+> until the wake-amplitude memory constant is derived or eliminated; named successor = run-6
+> memory-free dwell-count measure (Born = dwell fraction, §0 R-seq verbatim). **NEW DEBT —
+> DRIFT-GEOMETRY**: closure drift fails on geometry seed 2 where seed 1 passes. 0.9186 probe:
+> NOT FOUND on either instrument. (2) **NP10 run 2** (`NP10_VERDICT.md`): the radial
+> saturated-occlusion wall **KILLED structurally** (enhancement identity — it can only deepen
+> attraction, never repel); Face-T (Z−1)! tour lock **PASS d −1.1% / t +0.9% / α −5.6%, zero
+> constants** [OPEN, post-diction declared]. **ROOT-CONTACT SPLITS: ROOT-LOCK** ((Z−1)! →
+> owner FLM14 sequential tour) **+ ROOT-WALL** (chemistry contact repulsion ≠ occlusion; →
+> ROOT-BUDGET, ~ℏ²/2m_e curvature). (3) **GOM15/16/17 arc** (kinematic ϟ only, GM banned
+> in-chain): GOM15 = gearing frame CONVENTION; Finding 1 [OPEN unclaimed] Sol rotation =
+> gear ratio R/ϟ (+0.28% Carrington; gas giants fail ×677/×1496); all ladder/octave/twelfth
+> constructions NULL/IDENTITY vs committed combs. GOM16 Vulcan composition-by-inference
+> WITHDRAWN (Harvey; mechanism-first gate set). **GOM17 = the mechanism, Parts A–D all gates
+> PASS**: conservation line z_t − 2z_d(r) = −z_d(a) machine-precision; factor-1 exchange
+> licensed by measured aberration (½ excluded ×400); **Jupiter's system detected in the
+> Sun's ledger** (+8.86e-4 vs +9.55e-4 predicted); **CROSS-SCALE LEDGER PARALLEL** — one
+> two-body line twenty orders apart: Sun–Jupiter pair-sum +9.547e-4 vs p–e(H) pair-share
+> −5.468e-4 (target −5.446, 0.4%); k_seat(H) = 137.0726 vs composed 137.0724 (1.2e-6);
+> screening ledger monotone 10/10 with orbital-free subshell dip (B) + pairing dip (O)
+> [OPEN, unfitted]; hydrogenic drift residual = measured radiative reduction, carried OPEN
+> → owner FLM14 route geometry. Pre-registered: **H-ENCLOSED 8+ s.f. rerun** (Jupiter +9.27 /
+> Saturn +15.29 / Uranus +14.02 / Neptune +14.05 e-4 on record — cuts both ways).
+
 - **R1 · OCCLUSION-MECHANISM** — the un-derived occlusion transfer function: how a mass column
   converts to blocked convergence flux (drag/decay coefficient; per-baryon cross-section; the
   opacity-vs-mass-proportional fork). **Members:** GOM01 (factor-4 claim, PARTIAL), GOM13
@@ -639,6 +671,132 @@ Next new investigation = the **next free domain code** in the relevant field (e.
 - **CANON FLAG (propose-only): `cosmology.hpp` t_coupled ≡ BAO_scale/c_s** — circular; blocks
   CR03 Route B and CR08 G2. Also `strain::` comment oversells ("steeper near massive
   structures"). Harvey's call.
+- **⟐ GM-SWEEP (2026-07-06, Harvey-ordered; 4 parallel auditors, ~70 files with G/M/GM/6.674
+  hits graded load-bearing vs rival-column vs conversion):** repo core is CLEAN — laws.hpp,
+  galactic.hpp, all GOM01–GOM14 tools, GD suite, FLM/EMC/NP/FD/PPT tools, website, paper
+  interactives keep G/M out of the SDT chain (koppa kinematic or labelled rival columns; two
+  "6.674" hits were a MeV Q-value and a fm nuclear radius — coincidences). **CONTRABAND (5),
+  all frozen with header notes:** `gom09_trefoil_test.cpp` (fishing scratch, uncited);
+  `Papers/solar_koppa_profile.cpp` (GM_sun seeds headline r_Ϟ AND layer depths — invariance
+  circular; uncited, contained); `Hubble/tools/zk2_jovian_integers.cpp` +
+  `zk2_jov_scan.cpp` (raw GM_jup seeds the whole z/k/v/T chain — **live dependent
+  `Hubble/data/13_Jovian_Integers.md` now banner-UNLICENSED** pending kinematic reseed
+  ϟ_jup(Io) = 1.40987 m, ~0.02% shift, integers must re-verify); **CANON FLAG (propose-only):
+  `magnetosphere.hpp`** — GM_earth·M_earth load-bearing in State28D ε₀/ε₁/ε₂/ε_b energy
+  terms; DEAD header (no compiled target includes it) so the benchmark verdict is untouched,
+  but the contraband is resident in canon — Harvey's call (kinematic repair: ε from
+  c²ϟ_Earth·(counts), ϟ_Earth from Moon (a,T)). **Watch-class (disclosed, not contraband):**
+  B11 J₂ imports GM_e (honestly PENDING-flagged in-bench; kinematic swap c²ϟ_Earth is
+  one line); GD01/04/05/07 + `redshift_ruler.js` route mass→koppa via M(M☉)×koppa_Sun /
+  koppa_per_baryon (C-flagged, disclosed CONVERGENCE — migration target: L→baryon-count
+  without kg); 3 stale `Release/*/sdt/include/laws.hpp` copies still carry pre-repair
+  "charge radius" labels; `neutrino_investigation.cpp` L648 Newtonian column needs an
+  explicit RIVAL tag.
+- **⟐ RE-OPEN WAVE (2026-07-06, Harvey order, §G.3): FARMER refinement 8 changed premise
+  classes** (movement triad PASS/BECOME/PRESS — "pressure is movement that cannot move";
+  rolling-vs-meshing wake firewall; activation = alignment search cost; electron repulsion =
+  nuclear repulsion transmitted, shell = gearbox; Born = running-alignment statistics;
+  recorded in `FARMER_PASS_2026-07-03.md` §8). **Six verdicts carry ⟐ RE-OPENED notices —
+  no label moved anywhere; every re-run needs its own pre-committed ADJ:**
+  **CH02** (recorded condition FIRED — NP10 run-2 landed; MgO = Mg²⁺/O²⁻ isoelectronic pair
+  ⇒ the +21.6% fail is the nuclear-transmission fork's first data point; NEW DECIDABLE
+  pre-registered: isoelectronic Born–Mayer series Ne/Na⁺/Mg²⁺ — hardness tracks Z at fixed
+  shell vs flat) · **CH03** (O₂ pairing map: static-class kill stands; mesh-class successor
+  named — O₂ = incomplete closure, gate = TWO unpaired defects for O₂ and ZERO for N₂ from
+  one rule) · **CH05** (barrier = alignment search cost; committed shape: derived rolling
+  cost gives Eₐ(H+H₂) ≈ 40 kJ/mol with H₃ unbound; catalysis = provided alignment) ·
+  **CH07** (owner corrected ROOT-CONTACT-saturation → ROOT-WALL after NP10's negative;
+  k(H₂)=575 N/m stays the anchor; vibration = bond breathing against rolling contact) ·
+  **NP08** (dependency MOVED: (Z−1)! lock candidate on record; committed shape: lock +
+  6.327 MeV repulsion ledger must land 0.379 MeV Hoyle barrier AND 0.092 MeV Be-8 margin
+  from one rule) · **NP15** (composites only: block-addition falsified → mesh-circulation
+  successor; Be-9 −62% = sharpest target; μ_p map and C5 quarantine untouched).
+  Watch-class re-open candidates (no verdict edit): CM01 η=T_c/θ_D 24× spread and CM05 T_λ
+  magnitude (ROOT-B lock-depth ↔ meshing quality); SCT barrier B (metastable mesh frame).
+  **⟐ EXECUTED same day — all six RUN-2 prompts rewritten** (investigative/error-resistant,
+  Phase-0 base-mining + disqualified-data-as-leads clause per Harvey; gates pre-committed in
+  each PROMPT.md §R2) **+ CH02-R2 Phase A RUN: GATE-A PASS at CONVERGENCE** — Shannon radii
+  monotone 3/3 shells, B₀ rises 3/3 structure-matched pairs (×3.2–3.7); **shell-only wall
+  KILLED** (at fixed N_e the wall tracks the core); rival Z_eff-degenerate (declared pre-run,
+  PASS ≠ native). **Tension row [OPEN → Phase-B reproduction target]: deconvolved wall
+  exponent FALLS with Z (≈7→4.5–5.2 in all three pairs)** while B₀ rises — ROOT-WALL now owes
+  a SHAPE, not just a point (instrument validated: NaF/KF/KCl reproduce Born n = 7/8/9).
+  **⟐ NP23 (NEW, 2026-07-06, Harvey's monoisotopy prediction): G1 PASS 24/26** — zero-freedom
+  V1 rule picks the stable A for 24/26 monoisotopic elements (capped CONVERGENCE/CALIBRATED
+  as pre-declared; misses La-139/Ho-165 OPEN; Bi-209 unscored hit; In tie resolved by the
+  committed deuteron-rich tie-break). **EARNED: the even-Z pinch** — whole-α reassembly is
+  grammatically possible ONLY at even Z, and the unique even-Z sign-flip (NP08's Be-8 loses
+  to 2α by 0.092 MeV) is the unique even-Z single (Be-9): Harvey's "the reason should jump
+  out" landed exactly there, on a result already in the record. Odd-Z skeleton = Mattauch in
+  grammar coordinates (declared CONVERGENCE, not claimed). Window MECHANISM stays owed →
+  NP17-lock/FLM14. Leads: n_d plateaus 30/34/38 unexplained [OPEN].
+- **⟐ CH07-R2 EXECUTED (2026-07-06) — G-A FAIL for all six declared wall candidates, zero
+  fitted parameters, and the FAIL is the finding: NEW ROOT — WELL-DEPTH-AT-CONTACT.** The
+  run-1 shared-seat well is −81.5 eV at Re = **×17.2 the measured D_e (4.75 eV), and depth
+  pins curvature** (k·R_min³ = (n−1)|g*|αℏc is a class invariant ⇒ k = 2376 N/m even for a
+  wall landing exactly at Re — the 575 N/m box is structurally unreachable ON THIS WELL for
+  the whole ℏ²/2m_e·R⁻ⁿ class; KILLED-as-scored). **Earned along the way:** V-ion-A rolling
+  wall = FIRST wall in the program with the correct SIGN everywhere (NaCl 861→584 overshoots
+  ×3.7; MgO +21.6%→+8.5%; Face R never had the sign); anharmonicity sign PASS (Morse-like,
+  ratio 0.0186 vs 0.0276 report-only); isotope block + Face-T lock untouched (+0.00%).
+  **CONVERGENCE OF PAYERS: the well is ×17 deep because every seat counts at FULL weight —
+  the sequential-occupancy fix (seats weighted by dwell fraction) is exactly FLM14 run-6's
+  memory-free dwell measure. Born and the wall now name ONE instrument.** Re-open condition
+  recorded: dwell-weighted well lands → rerun the same tool, gates unchanged. Members:
+  CH07-P1 (k), CH02 wall legs, CH05 barrier (its saddle sits on the same well), NP17-alpha
+  depth. Shape constraint (exponent falls with Z) untouched — still owed by any future wall.
+- **⟐ QM05 RUN 2 (2026-07-07, Harvey's action/reaction split — ALL GATES PASS, ADJ-R2-1
+  pre-committed): TSIRELSON = CONSERVATION × CHSH GEOMETRY.** The four CHSH direction combos
+  in doubled-angle director space sum to a vector of length exactly 2√2; one conserved unit
+  kick projected onto it gives S(ψ) = 2√2·cos ψ — ceiling 2.8282 measured, per-pair |E| =
+  1/√2 as predicted (= the measured per-pair value in real experiments), marginals flat
+  everywhere. **Control: conservation OFF (per-pair kick renewal) → S = 4.0000 exactly** —
+  the PR box = reaction-free OVERDRAW, unrealisable at conserved norm. **Run-1's owed
+  "why-not-4" exclusion PAID (NATIVE-conditional on the conserved-kick channel).** Bonuses:
+  classical bound S=2 = the 45° projection; ×2 identity mechanical (independent wings pay the
+  projection twice, one object pays once). **BRIDGE CORRECTION: cos²(Δ) ≡ (1+cos 2Δ)/2 — the
+  Bell readout is LINEAR in the kick; ADJ-6's C^p/(C^p+S^p) retired as mis-transcription; NO
+  residence exponent enters Bell ⇒ FLM14 run-6's super-quantum tension (p≈2.6→S≈3.26)
+  DISSOLVED. Born question re-scoped: not "why exponent 2" but "why is readout power the
+  quadrature sum of one conserved kick" — Law-V form.** Part C license criteria to be
+  re-drafted against the corrected bridge (new ADJ required). Not claimed: ψ-lock mechanism;
+  the channel model itself (still FLM14's residence program, now decoupled from the ceiling).
+- **CANON FLAG (propose-only, NP23 Phase A): ATOMICUS rules §8 "Golden Boundary at Au"
+  FAILS the constitutional formulas** — Au-197 is n_d=38 < n_t=39 (the last d>t stable is
+  Hg-198 by the grammar's own arithmetic); the boundary as written contradicts n_d=3Z−A−2 /
+  n_t=A−2Z. Propose-and-wait; no edit made. Harvey's call.
+- **⟐ THE INTERCHANGE SWEEP (2026-07-07, Harvey directive: reduce all energetics to
+  dynamics — full report `GOM15_.../INTERCHANGE_SWEEP_2026-07-07.md`): 24 POP-OUT ·
+  12 HIDDEN-CLAIM · earned core translates SNUG without residue; every defect sits on an
+  untranslated import.** Headlines: (1) the Z² force bug has THREE unflagged vendored
+  clones (Release×3 laws.hpp:300) + its root = radius-typed force arguments (handed force
+  = count × unit-area; per-body radii valid only for gravity-class occlusion); (2)
+  **cosmology.hpp carries the CR07-forbidden compounding d(z) LOAD-BEARING** (σ₀
+  per-distance → R_CMB → N → Φ/P_conv → S_boundary/10¹²³ line) + tired-light narration +
+  the CR09-killed strain oversell; (3) **23.8 MeV missed identity**: NP10's lock magnitude
+  (23.842) = NP08's Be-8 scaffold (23.755) to 0.4% — CROSS-GATE pre-registered (one rule
+  pays both); (4) **one barrier grammar**: QM03 tunnelling ≡ CH05 activation — decidable:
+  Arrhenius→tunnelling crossover from one grammar, zero parameters; (5) the wall becomes
+  FOUR-field (add CH05's Eₐ; TD05 already measured the family's first number, 32%
+  discount-loss/contact); (6) ROOT-BUDGET dissolution test (one dwell fraction must
+  shallow ×17.2 ∧ ×5.6); (7) root mergers proposed: TD-ROOT-3 ≡ ROOT-A (six debts, one
+  door) · SEAT-STATISTICS (TD04+CM05 → FLM14) · lock-depth → engagement COUNT; (8)
+  W_per_spation "order unity" DEFLATED (unit-basis numerology); (9) canon-flag batch of
+  11 items for Harvey's one-sitting call (Law IV doc 3× slip, pion literal contraband +
+  (1,1) collision, neutrino γ hybrid + "measured::m_nu", state28d Level-7 tanks, E83
+  kill/rewrite, deposit phrasings). Dictionary self-corrected twice (PRESS scoped to
+  refusal surfaces; zero-point two-mode row added).
+- **CANON FLAG (propose-only, referee round-2 2026-07-07): `laws.hpp` F_nuclear_electron
+  (:412–417)** — (a) inlines the KILLED `Z·R_p` geometry, bypassing the NP12 deprecation
+  and `nuclear_boundary_radius(A)` (found by the external referee, verified in-session);
+  (b) worse, found on verification: its force scales as **Z² where measured electrostatics
+  demands ∝ Z** (factor 2 wrong at helium) — the native fix is occlusion AREA ∝ Z
+  (handedness count), not radius ∝ Z; (c) `:405` "charge radii" comment survived the
+  vocabulary repair. No edit made; Harvey's call. Cross-filed:
+  `Audits/SDT_REFEREE_COUNTER_AUDIT.md` Round 2 (paired with
+  `Audits/SDT_ADVERSARIAL_REFEREE_REPORT.md`). Also pending from that exchange: the
+  referee's Jupiter-H₃⁺ degeneracy arithmetic (~3.17 m/s constant observer offset) owed
+  as an on-file GOM07 addendum before the discriminator downgrade is canonical.
 - **RESIDENCE-LAW** *(root; owner FLM14 rule-form-4; consolidated 2026-07-04/05 to FIVE debts)*
   — the un-derived law of which lattice seat a landing vortex takes. Members: **QM01** (the
   landing-count fringe), **QM03** (re-seeding — T-as-particle-count deferred), **QM04** Phase-2

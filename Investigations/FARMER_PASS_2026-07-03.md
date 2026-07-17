@@ -138,4 +138,44 @@ That IS the hierarchy-of-forces claim, recovered from the seeds that failed.
    implying permanence is to be read as premise-classed. The anti-fake discipline is untouched:
    nothing gets promoted without a derivation — but nothing is forbidden from being attempted.
 
-— FARMER · 2026-07-03/04 · J. C. Harvey directive · repo health is the only demand
+8. **THE MOVEMENT TRIAD + FIREWALL CHAIN (2026-07-06, Harvey, spoken — recorded in intent).**
+   Movement is invariant because the spation embodies pressure; there are exactly three modes
+   of the one conserved movement: **PASS** (spation relays it — kinetic/light), **BECOME**
+   (matter is movement folded onto a closed path — rotation along a path), and **PRESS** —
+   Harvey's closing line verbatim in effect: **"pressure itself is movement that cannot
+   move."** Frustrated movement: demanded by the ledger, denied a path, pushing on everything
+   because it must move and can't. Occlusion never creates movement — it TRANSFERS movement
+   that was already there, on time, every time. Consequences he chained: (a) repulsion =
+   more movement — electron repulsion is proton repulsion TRANSMITTED (nuclear mode
+   paramount, shell = gearbox; amended in-session: every rotor defends with its own wake,
+   the nuclear rotor dominates when present — bare-electron repulsion requires this);
+   (b) the wake FIREWALL: desynchronised/oversynchronised rotations ROLL across each other
+   (roll = repulsion) vs cadence-locked rotations MESH (mesh = bond = movement saved);
+   (c) **aligned → bond → wake movement RELEASED → follows path of least resistance** —
+   exothermic release = frustrated interface movement finding a path; activation energy =
+   the alignment search cost paid before release; (d) attraction/repulsion = ONE signed
+   frustration ledger (shadow = frustration deficit between bodies, rolling interface =
+   frustration surplus — EMC03 restated); (e) **Born's rule = RUNNING ALIGNMENT**: chemistry
+   is the regime where the alignment search terminates (NaCl deterministic complementarity;
+   noble gases roll through) — Born statistics is the dwell-statistics of an UNTERMINATED
+   search, misread by QM as ontology. Instrument owners: FLM14 run-6 (dwell-count = the
+   search statistics), ROOT-WALL (new decidable fork named in-session: isoelectronic
+   Born–Mayer series Ne/Na⁺/Mg²⁺ splits nuclear-transmission from electron-count — same
+   shell, different nucleus); substrate-scale echo: FLM14 run-1's earned frustration 0.347
+   (rotation that cannot be uniform ⇒ carriers forced) = "movement that cannot move" at the
+   lattice floor — particles are the relief channels of frustrated movement.
+
+9. **THE TWO MODES (2026-07-07, Harvey, verbatim in effect): "if you want to get to the
+   truth, simplify. if you want to get to the question, elucidate, pontificate,
+   form-fabricate, and anchor."** Terms carry ontology; a term with the wrong ontology makes
+   errors invisible and breeds question-literature about ITSELF ("charge radius" → the
+   proton-radius puzzle industry; in-house: F_nuclear_electron's Z²-vs-Z defect survived
+   three audits because the TERM licensed R ∝ Z — re-asked in movement primitives, the
+   correct scaling (area ∝ handedness count) is one line). The energy→movement table is the
+   executed prophylaxis: every quantity reduced to movement/count/length; a term that cannot
+   be written in primitives is carrying hidden claims. Discipline: form-fabrication is
+   permitted as SCAFFOLDING (gates, targets, instruments — anchored, then allowed to die);
+   the rival's sin is granting forms TENURE. Practice going forward: state every
+   investigation's question in primitives before any inherited term is admitted.
+
+— FARMER · 2026-07-03/04/06/07 · J. C. Harvey directive · repo health is the only demand

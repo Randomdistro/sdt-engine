@@ -1,3 +1,11 @@
+// ⚠ HUNTER GM-SWEEP (2026-07-06): CONTRABAND — FROZEN PENDING KINEMATIC RE-RUN.
+// The entire Jupiter chain below is seeded by raw GM_jup = 1.26687e17 (z = GM/Rc²) —
+// a load-bearing celestial GM in an SDT chain, violating the 2026-07-05 standing rule.
+// Named repair: reseed with the kinematic koppa from Io's (a,T):
+//   ϟ_jup = 4π²a³/(T²c²) = 1.40987 m (GOM15)  →  z_jup = ϟ_jup/J_R.
+// (GM_jup/c² = 1.40958 m; shift ~0.02% — the integer results in
+// Hubble/data/13_Jovian_Integers.md must be re-verified at the kinematic seed before
+// any claim from that file is used. Until the re-run, its numbers are UNLICENSED.)
 #define _USE_MATH_DEFINES
 #include <iostream>
 #include <cmath>

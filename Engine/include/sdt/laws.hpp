@@ -402,17 +402,24 @@ namespace law_III {
         return (std::numbers::pi / 4.0) * P_eff * R1 * R1 * R2 * R2 / (r * r);
     }
 
-    /// Coulomb force using charge radii
+    /// Coulomb force using the interaction radii (boundary radii — no charge substance)
     /// F_coulomb = (π/4) P_eff R_charge⁴ / r² = k_e e² / r²
     [[nodiscard]] inline auto F_coulomb(double r) noexcept -> double {
         return F_occlusion(R_charge, R_charge, r);
     }
 
-    /// Nuclear occlusion force for charge Z nucleus on electron at distance r
+    /// Occlusion force of a Z-nucleus on an electron at distance r.
+    /// CORRECTED 2026-07-07 (interchange sweep, Harvey-authorized): the handed force
+    /// transfers movement through redirection COUNT — occluded AREA ∝ Z, so the effective
+    /// radius is √Z·R_p, giving F = Z·k_e e²/r² identically (measured Coulomb scaling).
+    /// The previous R_nuc = Z·R_p (killed NP12 geometry, inlined here and missed by three
+    /// audits) gave F ∝ Z² — factor Z wrong for every Z ≥ 2. Per-body radii in F_occlusion
+    /// are physical only for gravity-class occlusion (real boundaries); the handed force
+    /// signature is (Z₁·Z₂)·(R_p²r_e²) — count product × one universal unit-area.
     [[nodiscard]] inline auto F_nuclear_electron(
         int Z, double r
     ) noexcept -> double {
-        double R_nuc = static_cast<double>(Z) * R_p;
+        double R_nuc = std::sqrt(static_cast<double>(Z)) * R_p;
         return F_occlusion(R_nuc, r_e, r);
     }
 
@@ -427,7 +434,9 @@ namespace law_III {
 // ═══════════════════════════════════════════════════════════════════════
 //  LAW IV — INERTIAL MASS (Theorems T5–T7)
 //
-//  m = Φ V_disp / (l_P³ c²)  — mass is throughput reorganisation cost.
+//  m = Φ V_disp / (3 l_P³ c²)  — mass is throughput reorganisation cost.
+//  (/3 = the angular-averaging quadrature share, T10 — banner corrected 2026-07-07:
+//   the doc formula had dropped the /3 the code below always carried.)
 //  m_inert = m_grav because both measure the same V_disp.
 // ═══════════════════════════════════════════════════════════════════════
 
@@ -481,7 +490,7 @@ namespace law_IV {
     inline constexpr double P_cf_e = rho_eff_e * c * c;
     // Should equal P_conv/3 = 8.197e47 Pa
 
-    /// Rest energy: E₀ = Φ V_disp / (l_P³)  [J]
+    /// Rest energy: E₀ = Φ V_disp / (3 l_P³) = m c²  [J]  (/3 restored 2026-07-07)
     [[nodiscard]] constexpr auto rest_energy(double mass_kg) noexcept -> double {
         return mass_kg * c * c;
     }
@@ -978,7 +987,25 @@ namespace atomic {
 namespace nuclear {
     using namespace measured;
 
-    /// Nuclear boundary-radius scaling: R_nuc ≈ Z × R_p
+    /// Nuclear boundary radius — NP12 canon change (2026-07-05, Harvey-authorized).
+    /// R(A) = R_p · (A/η)^(1/3),  η = π/√18 ≈ 0.74048 (close-packing fraction) — ZERO-FIT:
+    /// close-packed nucleon volume V = A·(4/3)πR_p³/η  ⇒  R = R_p (A/η)^(1/3).
+    /// Graded against 908 measured radii (IAEA / Angeli & Marinova 2013): RMS 4.96%
+    /// (statistically degenerate with the empirical 0.93·A^(1/3) rival at 5.00%, but wins
+    /// 5× on isotope chains: Ca 1.67% flat where A^(1/3) predicts +8.63%; Sn 3.20%; Pb 3.28%).
+    /// provenance_status:     SDT-derived (packing geometry; no fitted constant)
+    /// correspondence_status: known-match (4.96% RMS, N=908)
+    /// evidence:              Investigations/05_Nuclear_Physics/NP12_.../NP12_VERDICT.md
+    [[nodiscard]] inline auto nuclear_boundary_radius(int A) noexcept -> double {
+        constexpr double eta = std::numbers::pi / 4.242640687119285;  // π/√18
+        return R_p * std::cbrt(static_cast<double>(A) / eta);
+    }
+
+    /// ⛔ DEPRECATED — RETRACTED AS A LAW (NP12, 2026-07-05): R = Z·R_p was KILLED against
+    /// the same 908 measured radii (RMS 890.8%, 179× the pre-committed kill threshold —
+    /// the 1D-stacking premise is dead). Retained only so legacy callers still compile;
+    /// use nuclear_boundary_radius(A). (Function name kept for compatibility; the physical
+    /// quantity is a BOUNDARY radius — no charge substance.)
     [[nodiscard]] constexpr auto nuclear_charge_radius(int Z) noexcept -> double {
         return static_cast<double>(Z) * R_p;
     }
@@ -1174,6 +1201,21 @@ namespace topology {
 //  the isotropic P_conv/3 collimates the deflected throughput into a tube
 //  of constant cross-section πa², so its energy grows linearly, E(L)=σL.
 // ───────────────────────────────────────────────────────────────────────
+// ⛔ CONTRABAND-FLAG (interchange sweep 2026-07-07, Harvey-authorized):
+//  TWO problems in this section, flagged not fixed — values left untouched
+//  pending Harvey's call:
+//  (1) SILENT IMPORT: the pion mass 139.57 MeV is baked into the typed
+//      literal below (string_breaking_m = 2·m_π·c²/σ = 0.23 fm) but m_π
+//      appears NOWHERE in sdt::laws::measured — the whitelist of external
+//      inputs. A fact not in measured:: is not a measured fact; this is
+//      an unlicensed import riding inside a derived constant.
+//  (2) MODE-TABLE COLLISION: the pair-snap prose assigns the pion to the
+//      (1,1)+(1,1)̄ mode, but the winding mode table (law_VI::winding,
+//      ~line 1081) already assigns (1,1) = electron (0.511 MeV). One mode
+//      cannot be both a 0.511 MeV electron and a 139.57 MeV pion — either
+//      the pair-snap assignment or the mode table is wrong; both cannot
+//      stand. Which one gives is a physics fork = Harvey's call.
+// ───────────────────────────────────────────────────────────────────────
 namespace confinement {
     using namespace measured;
 
@@ -1228,7 +1270,7 @@ namespace traction {
     // ≈ 5.488e8 m/s = 1.831 c
 
     /// Angular velocity demanded of a contact spation:
-    /// ω_demand = 6π / T_circ = 3c/λ_C = 3 m_p c² / ℏ
+    /// ω_demand = 6π / T_circ = 3c/ƛ_C = 3 m_p c² / ℏ   (ƛ = reduced; λ/2π — fixed 2026-07-07)
     // provenance_status:     SDT-derived
     // correspondence_status: internal-only
     // input_dependency:      primitive-whitelist   // m_p, c, ℏ + winding q=3

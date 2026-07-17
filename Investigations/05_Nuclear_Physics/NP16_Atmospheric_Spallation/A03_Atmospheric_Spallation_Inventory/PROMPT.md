@@ -94,7 +94,8 @@ Product → (decay mode, t½) → Intermediate → ... → Stable endpoint
 At each step:
 - Record grammar
 - Verify grammar rule: EC (Δn_tri = +2, Δn_deu = −3),
-  β⁻ (Δn_tri = −1, Δn_deu = +1), α (Δn_deu = −2, Δn_tri = 0)
+  β⁻ (**Δn_tri = −2, Δn_deu = +3** — corrected 2026-07-13; the old −1/+1
+  violated A and Z conservation), α (Δn_deu = −2, Δn_tri = 0)
 - Verify consistency
 
 ### Phase C: Production rate computation

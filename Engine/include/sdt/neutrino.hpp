@@ -35,6 +35,15 @@ using namespace sdt::laws::measured;
 
 namespace measured {
     // Mass eigenstates — normal ordering best estimates
+    //
+    // NOTE (interchange sweep 2026-07-07, Harvey-authorized): oscillation
+    // data fix only the SPLITTINGS Δ(m²) below — they do NOT fix absolute
+    // masses. The absolute values 0.02/0.029/0.06 eV are CONVENTION PICKS
+    // (a chosen lightest-mass anchor propagated through the splittings),
+    // not measurements, and sit in measured:: on borrowed credentials.
+    // Anything built on the absolutes (e.g. mass_gap::N_min) is unanchored
+    // until a KATRIN/cosmology bound or a native SDT derivation lands.
+    // Values left untouched; flagged only.
     inline constexpr double m_nu1_eV  = 0.02;
     inline constexpr double m_nu2_eV  = 0.029;
     inline constexpr double m_nu3_eV  = 0.06;
@@ -117,13 +126,18 @@ namespace mass_gap {
     return std::sqrt(c * c - v_trans * v_trans);
 }
 
-[[nodiscard]] inline auto v_from_energy(double E_eV, double m_eV) noexcept -> double {
-    double gamma = (E_eV > m_eV) ? E_eV / m_eV : 1.0 + E_eV / m_eV;
-    return c * std::sqrt(1.0 - 1.0 / (gamma * gamma));
+/// CONVENTION FIXED 2026-07-07 (interchange sweep, Harvey-authorized): E_eV is KINETIC
+/// energy, one ledger — γ = 1 + E_kin/mc², exact at all E and continuous. The previous
+/// hybrid (E/m above m, 1+E/m below) treated E as total in one branch and kinetic in the
+/// other: γ was discontinuous at E = m (v jumped 0 → 0.87c). For E ≫ m the conventions
+/// converge (γ ≈ E/m); any caller holding TOTAL energy must pass E_tot − m.
+[[nodiscard]] inline auto gamma_from_energy(double E_eV, double m_eV) noexcept -> double {
+    return 1.0 + E_eV / m_eV;
 }
 
-[[nodiscard]] inline auto gamma_from_energy(double E_eV, double m_eV) noexcept -> double {
-    return (E_eV > m_eV) ? E_eV / m_eV : 1.0 + E_eV / m_eV;
+[[nodiscard]] inline auto v_from_energy(double E_eV, double m_eV) noexcept -> double {
+    double gamma = gamma_from_energy(E_eV, m_eV);
+    return c * std::sqrt(1.0 - 1.0 / (gamma * gamma));
 }
 
 // =====================================================================

@@ -1,5 +1,12 @@
 # Jovian Integers — Jupiter in Jupiter's Own Units
 
+> ⚠ **HUNTER GM-SWEEP (2026-07-06): UNLICENSED PENDING KINEMATIC RE-RUN.** Every
+> Jupiter-side number below descends from `zk2_jovian_integers.cpp` / `zk2_jov_scan.cpp`,
+> whose z/k/v/T chain is seeded by raw **GM_jup = 1.26687e17** (z = GM/Rc²) — load-bearing
+> celestial GM, contraband under the 2026-07-05 standing rule. Named repair: reseed with
+> the kinematic ϟ_jup = 4π²a³/(T²c²) from Io's (a,T) = 1.40987 m (~0.02% shift) and
+> re-verify the integer landings survive. Until then, cite nothing from this file.
+
 > Same RATIO as Earth's units are to Earth
 
 ---

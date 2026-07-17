@@ -64,3 +64,74 @@ claim P2's 2.828 as "SDT reproduces entanglement".
   Consequence for the verdict: unchanged (OPEN · PARTIAL · RESIDENCE-LAW); the throughpole/geared
   constraint channel is uncapped by canon precedent, and the owed machinery is still the joint
   residence weighting (FLM14 rule-form-4 in flight owns it).
+
+---
+
+# RUN 2 — ADJ-R2-1 (2026-07-07, committed BEFORE any tool exists): the action/reaction quadrature split
+
+**Provenance:** Harvey, this date, on run-1's Phase-4: "no one in there thought to split that
+into action and reaction? 2 out the back gives 2 forward." Formalised in-session BEFORE code;
+ONE construction declared (look-elsewhere: no alternates tried; any future variant gets its own ADJ).
+
+## The declared model (all primitives named)
+
+- Pair = ONE rotor (run-1's throughpole ontology, unchanged): hidden phase λ uniform per trial;
+  Alice's outcome = run-1's local sign rule (marginal-flat by construction); Bob = A·g.
+- **Doubled-angle director space (native: a gear/rotor orientation is a DIRECTOR — alignment at
+  Δ and Δ+180° are the same tooth engagement — so channel geometry lives at 2Δ).**
+- **The constraint channel carries ONE CONSERVED KICK per trial: a unit vector k̂ at orientation
+  ψ in director space. Conservation = action books its reaction = |k̂| = 1, fixed. The joint
+  readout at relative setting Δ receives the LINEAR PROJECTION: E(Δ) = k̂ · û(2Δ).**
+  g = ±1 sampled with P(g=+1) = (1 + E)/2. NO cos² anywhere; cosine enters ONLY as dot product
+  (projection geometry — the same licensed status as ADJ-6's C,S).
+- **DISCLOSURE (committed now, because it is the point):** cos²(Δ) ≡ (1 + cos 2Δ)/2. The model's
+  P(same) is ALGEBRAICALLY IDENTICAL to run-1's imported Malus weighting. This run therefore
+  changes the PROVENANCE, not the numbers: Born's square at the Bell readout re-derives as
+  "mean + linear projection of a conserved kick in director space." The square dissolves.
+  Machinery anchor: the model must reproduce run-1's S = 2.8286 ± 0.005.
+- **The vector theorem under test (stated before running):** for CHSH angles a=0°,a′=45°,
+  b=22.5°,b′=67.5°, the four director-space readout combinations sum to the vector
+  û(−45°)−û(−135°)+û(45°)+û(−45°) = (2√2, 0) EXACTLY. Hence S(ψ) = k̂·(2√2,0) = 2√2·cos ψ:
+  **Tsirelson = |one conserved unit kick| × |the CHSH direction sum|. S = 4 requires |k̂| = √2 —
+  an overdraw: more comes forward than was booked out the back.** Run-1's sign-copy rule = the
+  conservation-free limit (kick renewed per setting pair).
+
+## Committed gates (never widened)
+
+- **G-A (anchor):** run-1 Phase-2 machinery reproduced: S = 2.8286 ± 0.005, marginals < 0.002.
+- **G-1 (ceiling from conservation):** with |k̂| = 1 enforced, scan ψ over the full circle:
+  max S = 2√2 ± 0.005 and NO ψ exceeds 2.8334 (2√2 + 5σ). The per-pair correlations at the
+  optimum must land at |E| = 1/√2 ± 0.005 each (the model's own prediction; also the measured
+  per-pair value in real Bell experiments).
+- **G-2 (control — conservation OFF):** allow the channel to renew its kick per setting pair
+  (each pair gets its own optimally-aligned unit kick): S must reach 4.000 ± 0.005 with marginals
+  still flat — proving the ceiling in G-1 comes from CONSERVATION, not from a smuggled weighting.
+- **G-3 (no-signalling):** every arm, every setting pair: marginal deviation < 0.002 (4σ at
+  N = 10⁶/cell; seed 13; σ_E ≈ 0.001).
+- **G-4 (the ×2 identity, report row):** independent-Malus arm (run-1 L3 machinery) vs joint arm:
+  the correlation ratio must be 2.000 ± 0.01 (one projection paid once vs paid twice).
+- **Overdraw row (report):** S(|k|) for |k| ∈ {0.5, 1/√2, 1, √2}: linearity S = 2√2·|k| shown;
+  the |k|=√2 row prints as ALGEBRAIC ONLY (per-pair |E| > 1 is unrealisable with ±1 outcomes —
+  the PR box is not just conservation-violating, it is outcome-impossible at fixed norm).
+
+## Pre-declared class ceiling and implications
+
+- Best case = **NATIVE-conditional**: conditional on (a) the throughpole channel model (run-1)
+  and (b) director-space geometry (gear-tooth doubling) — both pre-existing canon. If the
+  projection-cosine is judged an import, the result caps at CONSTRUCTION like run-1; either way
+  the CONSERVATION⇔CEILING link (G-1 vs G-2) is the new falsifiable content.
+- **If G-1∧G-2 land:** (i) run-1's owed "what excludes S=4" exclusion is PAID (S=4 = reaction-free
+  overdraw, outcome-unrealisable at conserved norm); (ii) the ADJ-6 bridge C^p/(C^p+S^p) is
+  exposed as a MIS-TRANSCRIPTION — the Bell readout is linear in the conserved kick, so NO
+  residence exponent p enters Bell at all, dissolving run-6's super-quantum tension (p_occ ≈ 2.6
+  and Bell's p_eff = 2 stop being in conflict: Bell never consumed p_occ); (iii) the residence
+  law's Born question re-poses as "why is the readout power the sum of two orthogonal
+  projections" — quadrature, Law V form. Each implication is CONDITIONAL and none is claimed
+  before the gates print.
+
+Tool: `qm05_r2_quadrature.py` → teed `qm05_r2_results.txt`. PYTHONIOENCODING=utf-8.
+
+**Cross-note (2026-07-07):** run-2's bridge correction is now acted on — FLM14 ADJ-14
+re-drafts Part C as the emergent-channel test (license = conservation + native counting
+readout + flat marginals; gates = cos-form shape, 2√2 ceiling, locked-vs-unlocked control).
+ADJ-6's C^p transcription is SUPERSEDED for Part C; it remains in this record unedited.

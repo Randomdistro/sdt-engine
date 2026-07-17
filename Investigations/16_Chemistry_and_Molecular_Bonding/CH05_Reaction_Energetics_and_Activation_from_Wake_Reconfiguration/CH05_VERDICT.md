@@ -32,3 +32,22 @@ The refusal is the result: a mis-cancellation cost term with a tuned magnitude w
 ## Canonical line
 
 **Prompt completion D (P1 done and correctly down-labelled; P2 failed its committed gate; P3/P4 deferred with the dependency named) · Physics class CONVERGENCE/IDENTITY (P1) / OPEN (P2 barrier) · Recovery PARTIAL · Cascade root ROOT-RIM**
+
+---
+
+## ⟐ RE-OPENED (2026-07-06) — §G.3 premise-class event (Harvey order)
+
+**Trigger:** FARMER refinement 8 names the barrier's mechanism class: **activation energy =
+the alignment search cost** — the movement paid rolling through the firewall hunting the mesh
+attitude, before the bond's release pays it back. The three-centre positive cost this verdict
+isolated ("one shared electron facing two partners with neither window fully meshed") is the
+MIS-MESH/rolling penalty of exactly that picture: the middle atom is forced into rolling
+contact on both faces at once — frustrated movement held at two interfaces, which is a
+positive energy by the triad (pressure = movement that cannot move). Partial support already
+on record: NP10 run 2 landed the (Z−1)! tour-window count the window-allocation route needs.
+**What this does NOT do:** P2 stays OPEN/FAILED-at-gate; no magnitude exists until the rolling
+cost is derived (the refused γ·b(1−b) knob stays refused). **Committed shape for the re-run:**
+the same derived rolling/mis-mesh cost must give Eₐ(H+H₂) ≈ 40 kJ/mol with H₃ UNBOUND, and
+then P3's catalysis test runs free: a catalyst = a partner that keeps windows meshed
+(alignment provided, search cost bypassed) ⇒ lower Eₐ at fixed ΔH — the mechanism's own
+signature, stated before any tool exists.

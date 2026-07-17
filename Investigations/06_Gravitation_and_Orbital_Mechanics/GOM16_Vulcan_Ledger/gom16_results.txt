@@ -1,0 +1,34 @@
+================================================================================================
+ GOM16 - the shaken box. Native force a=c^2*kop/r^2; interior shadow by quadrature;
+ apsidal response by direct integration. kop_b seed declared. No G/M anywhere.
+================================================================================================
+# NULL (kv=0): drift = -2.715e+03 arcsec/cy  (numerical floor)
+# linearity @0.10 AU: kv=1.0 -> 25473.9953; kv=0.3 -> 4714.2156  ratio 5.404 (expect ~3.33)
+# small-x cross-check (calculus limit): analytic ~3164.8126 vs integrated 25473.9953
+
+# Sensitivity S(a_v) and koppa ceilings for the two DECLARED residual bounds:
+#  a_v[AU]   S[arcsec/cy per m]   kop_max(0.03")[m]  kop_max(0.005")[m]  iron-R[km]  sil-R[km]
+#   0.060       9598.5938        3.125e-06       5.209e-07         501.8      673.0
+#   0.080      16180.1489        1.854e-06       3.090e-07         421.6      565.5
+#   0.100      25473.9953        1.178e-06       1.963e-07         362.4      486.1
+#   0.125      42171.2692        7.114e-07       1.186e-07         306.4      410.9
+#   0.150      67025.3377        4.476e-07       7.460e-08         262.5      352.1
+#   0.175     104801.7576        2.863e-07       4.771e-08         226.2      303.4
+#   0.210     198908.2444        1.508e-07       2.514e-08         182.7      245.0
+
+# Discriminator (for ANY announced Vulcan at a_v, size s): its koppa ceiling from the
+# ledger -> mean baryon density n = 3*kop/(4*pi*kop_b*s^3) -> class: n>3e30 iron-like,
+# ~2e30 silicate, <1e30 rubble/ice(excluded by survival physics inside 0.21 AU anyway).
+# Imaged-class vulcanoid (s = 6 km, IRON): 
+#   N = 4.301e+42 baryons  kop = 5.344e-12 m  -> drift -2.715e+03 arcsec/cy: INVISIBLE to the apsides.
+# CONCLUSION: precession bounds the TOTAL interior shadow (Pluto-class ceilings above);
+# for km-class bodies the ledger cannot discriminate composition - SURVIVAL physics does:
+# at 0.06-0.21 AU (600-1500 K) ice is excluded, silicates marginal inside ~0.1 AU ->
+# PREDICTION: any true Vulcan is refractory, iron-dominant; density class n ~ 4.8e30 b/m^3.
+================================================================================================
+ ADJ-1 RERUN: RK4 + differential (drift(kv) - drift(0)). Gates re-tested first.
+================================================================================================
+# RK4 null floor: 1.2834e-05 arcsec/cy
+# differential @0.10AU: kv=1 -> 28711.40; kv=0.3 -> 7441.11; linearity 3.858 (expect 3.333)
+# cross-check: analytic small-x ~3164.81 vs differential 28711.40  (+807.2%)
+# GATES: FAIL - inversion NOT licensed

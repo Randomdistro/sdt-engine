@@ -89,3 +89,71 @@ Principle: the fix is to CLOSE the residence-law loop, not to amputate the throu
 ---
 **Prompt completion B · Physics class OPEN (local branch KILLED; probe branch = OBSERVED-data
 diagnostic, not SDT machinery) · Recovery PARTIAL · Cascade root RESIDENCE-LAW**
+
+---
+
+# QM05 — RUN 2 VERDICT (2026-07-07): the action/reaction quadrature split
+
+> **Provenance:** Harvey, verbatim: "no one in there thought to split that into action and
+> reaction? 2 out the back gives 2 forward." Spec: RUN_LOG ADJ-R2-1, committed before code.
+> Tool: `qm05_r2_quadrature.py` (exit 0; `qm05_r2_results.txt` = teed stdout; seed 13,
+> N = 10^6/cell). One instrument fault, caught by its own gate and logged: the anchor arm's
+> first build squared cos(2Δ) instead of doubling cos²(Δ) → S ≈ 0; one-line fix, no other
+> arm touched (the ψ=0 physics arm is algebraically the anchor and had already landed 2.8282).
+
+## Gates (committed in ADJ-R2-1; none widened)
+
+| Gate | Result | Call |
+|---|---|---|
+| G-A anchor (run-1 P2 weighting reproduced) | S = +2.8269, marg dev 0.0010 | **PASS** |
+| G-1 ceiling: conserved unit kick, full ψ scan | max S = **+2.8282** at ψ=0; no ψ above 2.8334; S(ψ) tracks 2√2·cos ψ at every point | **PASS** |
+| G-1 per-pair prediction (|E| = 1/√2 each) | +0.7076 / −0.7076 / +0.7058 / +0.7077 | **PASS** |
+| G-2 control: conservation OFF (per-pair kick renewal) | S = **+4.0000**, marginals flat (0.0003) | **PASS** |
+| G-3 no-signalling, every arm every pair | worst dev 0.0013 (< 0.002) | **PASS** |
+| G-4 the ×2 identity (joint vs independent Malus) | ratio = 2.0003 | **PASS** |
+
+## What is now on the record
+
+1. **The vector theorem (pure algebra, printed):** the four CHSH direction combinations in
+   doubled-angle director space sum to a vector of length **exactly 2√2**, pointing along the
+   symmetric axis. Hence for ONE conserved unit kick k̂: S(ψ) = k̂·Σ = 2√2·cos ψ. **Tsirelson
+   = |one conserved kick| × |the CHSH geometry's own vector sum|.** Nothing else enters.
+2. **The conservation⇔ceiling link (the new falsifiable content):** |k̂| = 1 enforced →
+   ceiling 2√2, measured. Kick renewed per setting pair (reaction-free limit) → 4.0000,
+   measured, marginals still flat. **S = 4 is an overdraw — per-pair |E| = 1 at four pairs of
+   one conserved vector is unrealisable at unit norm.** Run-1's owed exclusion ("what
+   machinery stops nature at 2.828 instead of 4") is **PAID, conditionally**: conditional on
+   the conserved-kick channel model. The PR box is not exotic; it is a gearbox with no
+   reaction torque.
+3. **The observed correlation law re-derives with its square dissolved:** P(same) = cos²(Δ)
+   ≡ (1 + cos 2Δ)/2 = mean + LINEAR projection of the conserved kick (disclosure committed in
+   ADJ before running). The Bell readout is linear in the kick. **Consequently the ADJ-6
+   bridge C^p/(C^p+S^p) is a MIS-TRANSCRIPTION: no residence exponent p enters the Bell
+   readout at all.** FLM14 run-6's super-quantum tension (p_occ ≈ 2.6 ⇒ S ≈ 3.26) DISSOLVES —
+   Bell never consumed p_occ. The Born question re-poses as channel geometry: why the readout
+   is the projection of ONE conserved kick (quadrature/Law-V form), not why a power law has
+   exponent 2.
+4. **Structural bonus rows (report):** the classical bound S = 2 appears at ψ = 45° — the
+   local ceiling is the half-way projection of the same conserved kick; and the per-pair
+   optimum |E| = 1/√2 = 0.7071 is the model's own prediction and the measured per-pair value
+   in real Bell experiments. The ×2 identity (2√2 = 2×√2) is mechanical: independent wings
+   pay the projection twice; one object pays it once.
+
+## Honest class and what is NOT claimed
+
+**Class: NATIVE-conditional** — conditional on (a) the throughpole/one-object channel (run-1
+ontology) and (b) doubled-angle director geometry (gear-tooth alignment; native). If the
+projection-cosine is judged an import, the result caps at CONSTRUCTION — but the
+conservation⇔ceiling link and its control survive either judgement, and they are new. NOT
+claimed: why the kick locks to the pair's director (ψ = 0; any misalignment only LOWERS S —
+sub-quantum, never super); a derivation of the channel model itself (that remains FLM14's
+residence program, now decoupled from the Bell ceiling); "SDT reproduces entanglement" (the
+run-1 prohibition stands).
+
+---
+**Prompt completion A (all committed gates PASS; instrument fault self-caught and logged) ·
+Physics class NATIVE-conditional (Tsirelson = conservation × CHSH geometry; S=4 = reaction-free
+overdraw — run-1's owed exclusion PAID conditionally) / the ADJ-6 bridge retired as
+mis-transcription (Bell is linear in the kick; run-6's super-quantum tension dissolved) ·
+Recovery n/a · Cascade: RESIDENCE-LAW re-scoped (Born question → channel quadrature geometry,
+Law-V form); FLM14 Part C license criteria to be re-drafted against the corrected bridge.**

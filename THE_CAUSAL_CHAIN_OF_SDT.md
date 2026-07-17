@@ -125,6 +125,32 @@ So the three pegs are not a stylistic choice. They are three independent places
 where the investigations went looking for a derivation and came back with a proof
 that none exists. **Everything else in SDT is built on these three, plus the sky.**
 
+### The pegs got fewer (FLM13, 2026-07-03) — the seat collapse
+
+**[ENRICHMENT 2026-07-05.]** The mass peg and the action bridge turned out to be *one
+peg wearing three names*. FLM13 first showed what `ℏ` **is**: the circulation action of
+the fundamental `W=1` vortex — `m_e·κ/2π = m_e(αc)a₀` agrees with `ℏ` to one part in
+10⁹ — honestly labelled IDENTITY-CLASS, because it derives the constant's *role*, not
+its number. The delete-test then confirmed that no `ℏ`-free value path exists (the Seed
+Theorem held exactly as pre-committed), and `{ℏ, m_e, m_p}` collapse, by exhibited
+bijections, into **one mass/action seat** — physically a *baryon-count anchor* (the one
+historically `ℏ`-free mass standard was the artifact kilogram: a counted lump of
+baryons). The whitelist of eight therefore compresses to **four plus the thermal seat**:
+
+```
+{ ℓ_P,   c,   α,   one mass/action seat,   k_B / T_CMB }
+```
+
+Cause → consequence: *because* the mass scale and the action quantum are the same
+irreducible anchor, the chain rests not on three pegs plus unit-bridges but on exactly
+a length, a coupling, one seat, and the sky. The seat's VALUE stays **[OPEN]** behind
+the Seed Theorem — and the audit protocol's §G.3 now *premise-classes* that
+impossibility: it was proven **inside the static-spation class**, and the FLM14
+rotation degree of freedom (§7½) is the named re-open condition. In this framework
+"cannot be derived" is a ledger entry that must carry the premise it was proven
+within — never legislation. (`FLM13_VERDICT.md`; NATIVE for the role and the collapse,
+OPEN for the value.)
+
 ---
 
 ## 2. From a grain to a universe
@@ -388,7 +414,10 @@ pegs — and the binding *energies* it should predict are still owed: the simple
 hypothesis (binding equals a universal price times a volume) was tested and
 **cleanly killed** (**NP05**), and its successor is not yet built. The nuclear domain,
 honestly assessed, has strong conservation ledgers and one good falsification, and an
-unpaid bill for the energy scale.
+unpaid bill for the energy scale. **[ENRICHMENT 2026-07-05: the successor is now
+built — binding as *shadow union*, one scale, 217 isotopes at R² = 0.981; see the
+mass-defect triangle in §7½. The residual (α-cluster over-binding, the missed iron
+peak) names its own missing term: the shared-seat well depth, ROOT-CONTACT — [OPEN].]**
 
 **Fluids, heat, materials, optics, chemistry (FD–CH).** These are the leaves of the
 tree, and they are almost pure inheritance — across more than sixty investigations in
@@ -426,6 +455,118 @@ the bridging curve is not yet. This is logged as an open debt, not painted over.
 
 ---
 
+## 7½. The links forged in July
+
+**[ENRICHMENT 2026-07-05.]** The first week of July 2026 added links to the chain
+itself — not new pegs, new *consequences*. Each is written here the way the rest of
+this document is written: what causes what, carrying the verdict class it actually
+earned and an [OPEN] marker wherever a debt remains. (Ground truth:
+`SDT_AND_THE_ENGINE_COMPLETE_GUIDE.md` Part 0.5; the verdict files named per link.)
+
+**Frustration ⇒ carriers ⇒ particles must exist.** Let the grain itself rotate — the
+FLM14 premise — and demand antisymmetric contact gearing, every touching pair
+counter-rotating like meshed gears. On a lattice with odd rings this *cannot be
+globally smooth*: **34.7% of bonds are unsatisfiable** (frustration 0.347). The
+consequence is forced, not chosen: rotation **must be carried by defects** — localised
+carriers threading a bulk that cannot gear. Particles stop being an assumption and
+become a *structural necessity* of the gearing premise (FLM14 run 1, P1-G2, class
+NATIVE). Run 3 sharpened the picture: the constraint network **percolates** — 85.5% of
+sites join one rigid cluster whose collective rotation collapses to |Ω|/ω₀ = 0.0046 —
+a near-static rigid backbone threaded by frustration-forced carriers. That is OP-2's
+conjecture (the retracted PPT09's legitimate target) arrived at honestly, from the
+gearing side.
+
+**Two channels ⇒ the Synchrony Theorem ⇒ Bell without desynchronisation.** The lattice
+carries two categorically different things. Deformation *pulses* — energy, light,
+every message — relay at exactly `c`; the *rigidity* of a gear-locked cluster is
+shared structure, not a propagating signal, and is uncapped — nothing "moves faster
+than light" on the constraint channel because nothing *moves*: one object
+reconfigures. The budget of §2 caps the pulse channel; it says nothing about rigidity.
+From this split plus the matter axiom (matter *is* lattice structure — a persistent
+displacement, never a substance sitting *in* space) comes a one-step theorem: matter
+and space **cannot desynchronise**, so Alice's marginals can never shift with Bob's
+setting — flat marginals (no-signalling) as a *theorem*, where Copenhagen postulates
+them and Einstein locality forbids half the correlations that produce them. Bell
+correlations ride the constraint channel. Class: architecture, with measured-class
+support — the Laplace aberration bound (stable orbits require the static field's
+effective action at ≫ c; GR pays with cancellation terms, SDT gets it natively) — and
+with FLM14's own failure ladder converging on the same split independently: rule-forms
+1–3 all died on anisotropy, and the two-channel form-4 dissolves the gate at ×1.0000.
+Worth recording in a map of debts: **Einstein locality sat inside this framework's own
+kill tables for two days** before §G caught it — GATE-CONTRABAND, a rival's axiom
+enforced as a gate. What remains owed is the one scalar that turns correlations into
+numbers: the **residence law** (the `cos²(a−b)` joint weighting; owner FLM14) —
+**[OPEN]**.
+
+**The seat collapse ⇒ a shorter whitelist.** Because `{ℏ, m_e, m_p}` are one
+mass/action seat (FLM13 — the full link is §1), everything downstream of the pegs now
+descends from four numbers and the sky. The seat's VALUE is **[OPEN]**, premise-classed
+under §G.3 with the FLM14 rotation DOF as its named re-open condition.
+
+**The mass-defect triangle: union-not-sum = meshing = synchrony-saving.** Three routes
+met at one fact. From the *occlusion* side: binding energy is **shadow overlap** —
+occlusion is an area (πR_p² per nucleon), so when trefoils interleave their shadows
+must be counted **once, not twice**: `ΔA = ΣAᵢ − A∪`, `E_bind = κ·ΔA`. One scale κ
+tracks the measured binding of **217 isotopes at R² = 0.981** under the
+opposition-packing geometry. From the *geometry* side: **the meshing IS the mass
+defect** — meshed forms work in synchrony and need less total movement-resistance than
+the same forms isolated; the *saving* is the defect (corollary: once forms interleave,
+the interleaved region is not attributable to either form separately — which is why
+the literature's "the proton radius changes in nuclei" puzzles dissolve). From the
+*relay* side, FLM12 earned the same sentence independently: **mass defect = synchrony
+saving** — mass is the relay's resistance to reorganisation, and a meshed pair costs
+less to hold than two loners. Two derivations, one identity; the honest residual is
+that the pure-area model over-binds the α-cluster and misses the iron peak, and the
+missing term is the shared-seat well depth (ROOT-CONTACT) — **[OPEN]**, with a
+registered three-way numeric cross-check: one derived wall must simultaneously give
+k(H₂) ≈ 575 N/m, the NaCl +9.4% correction, and the nuclear α lock ×6.35.
+
+**Lamb is a spacing, not a shift.** Two geometrically different seats at the same `n`
+have no reason to coincide — on the koppa ladder the 2S/2P *splitting is the null
+expectation*, and degeneracy would have been the anomaly. The word "shift" embeds the
+rival's failed expectation: Dirac's structure *forbade* the splitting, and the
+measurement violated his theorem. The measured 1057.8 MHz is one quantity in three
+rulers (class RE-EXPRESSION, not extraction): **1057.8 MHz ≡ a 0.703 m/s seat-speed
+offset ≡ a 0.272 fm radial offset at n = 2**, graded against the three-seat table
+(H n=2 → 0.272 fm; H n=3 → 0.410 fm; He⁺ n=2 → 0.452 fm) — any future mechanism must
+hit the *table*, not 1057.8 alone. The R_p/3 cluster (trefoil node radius 0.2805 fm vs
+the 0.2722 offset, −2.9%) is logged **[OPEN]** — privileged, mechanism untested,
+fishing forbidden. The amplitude itself remains the debt §7 records
+(`PPT08_KOPPA_TARGET.md`).
+
+**The β-partition: one internal speed, two takers.** The neutron is a proton holding
+an internal electron on a seat (NP14 — earned as *sign and structure*): Δm splits
+cleanly as 1.293 = 0.511 + 0.782 MeV, the 0.782 being Q_β — an identity, never sold as
+a prediction; the native magnitude map came in at **−23.3% (FAIL → OPEN)**. The
+candidate on the appendix: 0.782 MeV is exactly the relativistic kinetic energy of
+that electron at **0.9186c**, and the movement budget of §2 hands the complement to
+the neutrino — `√(1 − 0.9186²) = 0.395c`: **the neutrino takes the other side of the
+speed.** If it holds, it buys the continuous β spectrum (a variable partition of one
+fixed internal speed), the endpoint (the electron taking all of it), and antineutrino
+handedness (the released gear sense) in one stroke — logged **[OPEN]**,
+look-elsewhere applies. The test was run and taught something bigger (**NP22**): the
+committed release measure missed the measured spectrum shape at KS D = 0.49 vs a 0.15
+gate, and the entire **1-DOF release-measure class is KILLED knob-proof**. The Kurie
+plot's exponents are per-particle 3-D state-count fingerprints — one release angle has
+no sphere — so SDT must *earn its spheres* from seat geometry: the owed object is a
+native exit-channel count `N_exit ∝ E²` — **[OPEN]**, lineage running straight to
+FLM14's sequential occupancy.
+
+**Where the chain now points.** Almost every [OPEN] above names the same instrument:
+the rotating-lattice solver (ROOT-SIM, with FLM14 as its premise program). The
+residence law's five debts (Born, Bell, the double-slit count, tunnelling re-seeding,
+sequential spin), the contact wall's four, the lock-depth of superconductivity and the
+nuclear α, the charge-closure gain, and NP22's exit-channel count all queue behind it.
+Run 3 delivered the first Born-adjacent exponents ever measured in the program
+(p_occ = +2.375/+2.325) and **did not claim them** — one β short of the pre-committed
+licence. Run 4 — the two-channel tour — has now run: **p_occ = +2.040 at β = 0.20**
+(split-half consistent), but **no stable regime by the committed rule** (the β = 0.40
+upturn breaks the band; seed-2 unreached). Born-adjacent, moved toward 2 by the
+two-channel architecture, **UNCLAIMED**. The statistics gate held; nothing is graded
+until the licence is earned.
+
+---
+
 ## 8. The honest loops
 
 If you draw the whole dependency graph and look for cycles — places where A needs B
@@ -457,6 +598,18 @@ started* (did it begin from the pegs, or lean on an outside number?) and one for
 spine is to make the honest graph **acyclic** — to push every loop down onto the
 three pegs and the sky, and declare those, and only those, as the things held fixed
 by hand.
+
+**[ENRICHMENT 2026-07-05.]** Since July the graph is *policed*, not just drawn. Every
+investigation runs under the HUNTER/FARMER protocol (`Investigations/HUNTER_PROTOCOL.md`
+— FIND → TRACE → GROUND → CORRECT → VERIFY, with a kill-list for fished coefficients,
+retro-passes and smuggled rivals), and since 2026-07-04 the protocol carries **§G, the
+mirror**: the auditor audits its own premises — a faith ledger, a gatekeeper check, and
+Harvey's rule that *nothing is ruled in or out out of hand* (impossibility claims must
+carry their premise class and a re-open condition). The mirror has already paid for
+itself three times — a static spation, Einstein locality in the kill tables, and the
+conflation communication = desynchronisation were all auditor's contraband, and
+correcting each produced physics (FLM14, the two-channel architecture, the synchronous
+channel — see §7½).
 
 ---
 
@@ -512,7 +665,10 @@ So the answer to "what is SDT's reality made of, and in what order?" is this. It
 made of **a single grain of space**, **a single strength for electromagnetism**, and
 **a single unit of mass** — three things it proves it cannot derive and therefore
 holds fixed by hand, exactly as the metre and the kilogram were once held fixed by a
-meridian and a litre of water. To those three it adds **one boundary condition from
+meridian and a litre of water **[ENRICHMENT 2026-07-05: and per FLM13 the mass and the
+action are one seat — read "three pegs" as a length, a coupling, and one mass/action
+seat, with every impossibility premise-classed and carrying its re-open condition
+(§1, §7½)]**. To those three it adds **one boundary condition from
 the sky**, the temperature and reach of the cosmic background. From that short list,
 and from a handful of geometric rules about pressure, shadow, and motion, it builds —
 honestly where it can, with the loans clearly marked where it cannot — time, gravity,
@@ -538,6 +694,11 @@ The remaining whitelist members — `c`, `ℏ`, `k_B`, `h`, `e` — are best rea
 extra pegs but as **unit-converters** between SDT's natural counting and SI: `c`
 between space and time, `ℏ`/`h` for action, `k_B` for temperature, `e` for the electromagnetic unit.
 
+**[ENRICHMENT 2026-07-05:** FLM13 collapsed the mass row and the action bridge into
+**one mass/action seat** (a baryon-count anchor) — the table above compresses to a
+length, a coupling, one seat, and the sky. The seat's VALUE is [OPEN], premise-classed
+under §G.3 with the FLM14 rotation DOF as the named re-open condition (§1, §7½).**]**
+
 ### Appendix B — earned vs. owed, at a glance
 
 **Earned (geometry, derived):** the movement budget and all of special relativity
@@ -559,6 +720,25 @@ the proton's true grain-count (the "two-volume" ambiguity); the galaxy-rotation
 crossover shape, currently borrowed from MOND (GD05); and the cosmological re-import
 of `G` via `ℓ_P` and of `H₀` via `R_CMB` (CR03–CR05).
 
+**Added 2026-07-05 — earned:** frustration-forced carriers, particles as structural
+necessity (FLM14 run 1, NATIVE); flat marginals as a theorem — the Synchrony Theorem
+(architecture + the Laplace aberration bound); the `{ℏ, m_e, m_p}` → one-seat collapse
+(FLM13, NATIVE for role and collapse); the shadow-union binding law, 217 isotopes at
+R² = 0.981, converging with FLM12's synchrony-saving (§7½); the Born *square* as
+elastic energy (QM04, `cos²` nowhere in the code); the native tunnelling barrier form
+with zero-fit Geiger–Nuttall R² = 0.9997 over 24 decades (QM03); the mass-free
+koppa-density across 693 multi-planet systems, 5.9% vs 50.7% shuffled (GOM14, class C).
+
+**Added 2026-07-05 — owed:** the residence law (one scalar holding Born, Bell, the
+double slit, tunnelling re-seeding and sequential spin — owner FLM14, [OPEN]); the
+seat's VALUE (FLM13/Seed Theorem, premise-classed); the short-range contact wall
+(ROOT-CONTACT, with its three-way numeric cross-check); the lock-depth magnitude
+(ROOT-B); the exit-channel count `N_exit ∝ E²` (NP22); the Lamb amplitude against the
+three-seat table (PPT08); the β-partition candidate 0.9186c/0.395c ([OPEN],
+look-elsewhere applies). Essentially all of it queues behind one instrument —
+ROOT-SIM/FLM14, whose run-4 Born-adjacent exponent (+2.040 at β = 0.20) remains
+honestly **UNCLAIMED** (§7½).
+
 ---
 
 *Draft. Built from the SDT engine (`Engine/include/sdt/laws.hpp`) and a full pass
@@ -566,3 +746,8 @@ over the investigation record (domains 01–16). Every claim of "earned" or "owe
 above is traceable to a named investigation's own verdict; where an investigation
 killed a hypothesis or flagged a circularity, this document inherits that verdict
 rather than softening it.*
+
+*Enriched 2026-07-05 against `SDT_AND_THE_ENGINE_COMPLETE_GUIDE.md` (Part 0.5 state
+snapshot) and the July verdict files: `FLM13_VERDICT.md`, `FLM14_VERDICT.md` (runs
+1–4), `GOM14_VERDICT.md`, `NP14_VERDICT.md`, `NP22_VERDICT.md`,
+`PPT08_KOPPA_TARGET.md`, `FARMER_PASS_2026-07-03.md`, `HUNTER_PROTOCOL.md` §G.*

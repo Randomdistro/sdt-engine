@@ -50,3 +50,71 @@ The earned content: the Madelung-analogue is **computed from lattice geometry** 
 ## Canonical line
 
 **Prompt completion C · Physics class CONVERGENCE (P1, P2, P4-KCl earned; the geometric sum survives the delete-test without SDT — it is honest convergence, not NATIVE) / OPEN (P3 metallic) · Recovery PARTIAL · Cascade root ROOT-CONTACT + ROOT-BUDGET**
+
+---
+
+## ⟐ RE-OPENED (2026-07-06) — recorded condition FIRED + §G.3 premise-class event (Harvey order)
+
+**Trigger 1 (the recorded condition fired):** the MgO §D re-open condition named "NP10
+saturated-occlusion run lands its lock ladder" — NP10 run 2 (2026-07-05) landed it, both ways:
+the (Z−1)! Face-T lock PASSED (d −1.1% / t +0.9% / α −5.6%, zero constants) AND the radial
+saturation wall was KILLED structurally (it can only deepen attraction). So the missing MgO/1:1
+contact term is now known NOT to be occlusion saturation — its named successor is **ROOT-WALL**
+(rolling wake firewall, ~ℏ²/2m_e curvature budget).
+**Trigger 2 (refinement 8):** electron repulsion = nuclear repulsion TRANSMITTED (shell =
+gearbox). Sharp consequence for THIS file: **Mg²⁺ and O²⁻ are both neon-shell — MgO is an
+isoelectronic pair.** If the wall is nuclear-transmitted, the wall stiffens with Z under the
+same shell, and the overshoot growing with charge product (NaCl +9.4% → MgO +21.6%) is that
+prediction's first uncontrolled data point. **Named decidable (pre-registered here):** fit the
+wall on isoelectronic series (Ne / Na⁺ / Mg²⁺ vs measured Born–Mayer hardness/range from
+crystallography) — nuclear transmission predicts hardness tracks Z at fixed shell; the
+electron-source rival predicts flat. **What this does NOT do:** P2/P4 labels unchanged; the
+MgO FAIL stands until a derived wall (registered cross-check: k(H₂)=575 N/m ∧ NaCl +9.4% ∧
+α ×6.35) is computed, not fitted. P3 metallic stays OPEN — refinement 8's "press" mode
+(pressure = movement that cannot move) is the named frame for the ROOT-BUDGET confinement
+cost, still underived.
+
+---
+
+# CH02 — RUN 2 VERDICT, Phase A (2026-07-06): the isoelectronic fork
+
+> Tool: `ch02_r2_isoelectronic_fork.py` (exit 0; `ch02_r2_isoelectronic_results.txt` = teed
+> stdout). Spec: PROMPT.md §R2 Phase A, GATE-A verbatim; ADJ-R2-1 committed in RUN_LOG before
+> the tool existed, including the rival-degeneracy declaration and the S3 design-preview
+> disclosure. All inputs measured literature values (Shannon 1976 radii; standard elastic B₀),
+> data-boundary units. No G/M/GM anywhere.
+
+## GATE-A: PASS on the committed scoring — the shell-only wall is dead
+
+- **S1 (range):** Shannon radii strictly decreasing with Z in ALL THREE shells — He {0.76→0.45
+  →0.27}, Ne {1.40→1.33→1.02→0.72→0.535→0.40}, Ar {1.84→1.81→1.38→1.00→0.745→0.605}. Exact
+  permutation nulls 1/6, 1/720, 1/720.
+- **S2 (hardness):** measured B₀ rises with cation Z in all three structure-matched rocksalt
+  pairs: NaF→MgO ×3.44, KF→CaO ×3.70, KCl→CaS ×3.22 (sign-test null 1/8). LiF→BeO same
+  direction, excluded as committed (wurtzite).
+- **Machinery validation:** the deconvolution instrument reproduces the classical Born
+  exponents where they are known — NaF n = 6.98 (convention: 7), KF 7.96 (8), KCl 8.61 (9).
+
+**What is settled:** at fixed electron count, the wall tracks what is UNDER the shell. The
+"electron shell alone sets the wall" model is killed — and note the collinearity is a feature:
+at fixed N_e, net charge ≡ nuclear surplus (z = Z − N_e), so ANY Z-dependence at fixed shell
+refutes shell-only walls regardless of bookkeeping. **Class (fixed pre-run): CONVERGENCE** —
+the rival's Z_eff contraction predicts the same sign, so this PASS is consistent-with
+transmission, not native evidence for it. The kill-gate did not fire; the claim lives.
+
+## The tension row (reported prominently, per ADJ disclosure)
+
+The z²-deconvolved wall exponent n FALLS with Z in every pair (6.98→4.51, 7.96→5.22,
+8.61→5.09) — the alternate scoring WITH S3 fails on this leg (both scorings printed in the
+results file). Under transmission this reads: the wall's onset moves inward faster than its
+power-law steepens. **Flagged OPEN as a required reproduction target for Phase B:** any
+derived rolling-firewall W(R) must produce BOTH the B₀ rise AND the exponent fall, or explain
+which measurement it disowns. This is now the sharpest quantitative constraint the wall has —
+sharper than the three-field cross-check alone, because it is a SHAPE constraint, not a point.
+
+---
+**Prompt completion A (Phase A executed as committed; nulls honoured; disclosure printed) ·
+Physics class: GATE-A PASS at CONVERGENCE (shell-only wall KILLED; transmission consistent,
+rival-degenerate — declared pre-run) · Tension: n falls with Z [OPEN → Phase-B reproduction
+target] · Recovery n/a · Cascade: ROOT-WALL gains two quantitative targets (B₀ ratios ~×3.4;
+exponent fall ~7→4.5).**

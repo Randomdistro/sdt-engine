@@ -63,7 +63,7 @@ From `measured::` masses (rest energies via `× c² ÷ MeV_to_J`; `m_n − m_p` 
 **The flipped-sign neutron (the crux, T1).**
 
 - `R(n) = 939.56542 > R(p) = 938.27209` ⟹ **`ΔR = +1.293 MeV > 0`.** `[DERIVED sign]`
-  The *bound/heavier* neutron-form is the **higher-resistance** form (consistent with NP14 larger-V_disp). A free neutron is therefore *uphill stored*; it relaxes spontaneously — no trigger.
+  The *bound/heavier* neutron-form is the **higher-resistance** form (consistent with NP14 larger-V_disp). A free neutron is therefore *uphill — a running over-payment (higher maintenance rate)*; it relaxes spontaneously — no trigger. *(word "stored" repaired — interchange sweep 2026-07-07, Harvey-authorized)*
 - Toll to build the daughter electron form: `τ = m_e c² = 0.511 MeV`.
 - Exhaust: `Q = ΔR − τ = 0.782 MeV` — the measured β⁻ endpoint.
 - **Spontaneity inequality:** decay runs iff `ΔR > τ`. Here `1.293 > 0.511` ⟹ TRUE. If instead `ΔR < τ`, the free neutron-form would be stable — the SM threshold condition, here read as a least-resistance inequality, **not imported**. `[DERIVED as an inequality; the numbers themselves are measured]`

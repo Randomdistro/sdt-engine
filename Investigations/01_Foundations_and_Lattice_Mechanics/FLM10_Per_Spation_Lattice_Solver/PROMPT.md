@@ -22,6 +22,39 @@
 
 ---
 
+## §K ADDENDUM (2026-07-13) — this prompt is the gold-standard reference; three current-§K additions
+
+> **FLM10 is the exemplar** the `PERFECT_PROMPT_TEMPLATE` was validated against (excessive detail + gates,
+> reproduce-not-plug, prohibitions, 5-debt dependency map). No rewrite. Three additions only:
+
+**(1) FLM10 is the cascade ROOT (HUNTER §E) — build once, pay many.** Beyond the 5 debts named in §⓪.2, the
+2026-07-02 cascade ledger ran **D1 (deuteron), NP20-mass, NP21, NP18 all to ground at the FLM10 influx/engagement
+profile.** So FLM10 is the single upstream that unblocks a large fraction of the un-verdicted stack (PPT03 V_disp,
+EMC01 R_p geometry, FLM05 packing, the nuclear synchrony debts). **Priority-order Phase 1 (isotropy) — it is the
+most-earned and the widest-paying.** A negative result is still a PASS (measure, don't confirm).
+
+**(2) Harvey's framing (2026-07-13) — isotropy IS the perfect pressure regime, and that is why Bell is
+inevitable.** *"All energy is movement under a perfect pressure regime so precise that Bell's-theorem violations
+are an inevitability."* Phase 1's **isotropy residual → 0** is the *quantitative statement of that precision*: the
+network relaxes to a single synchronised medium (one longitudinal + two transverse, Lorentz-linear). **The Zener
+ratio → 1 is the mechanism behind QM05/QM01's Bell inevitability** — a medium this isotropic is not a collection of
+separate locals, so its correlations are non-local by construction (the throughpole/synchronous channel). Log the
+FLM10 isotropy ↔ Bell-inevitability link once in `INVESTIGATION_STACK.md`; it converts "why is Bell violated?" from
+a debt into a *measured* consequence of the substrate.
+
+**(3) The substrate is a reconfigurable superfluid, not a frozen glass** (2026-06-25 upgrade). FLM10's "rigid
+tetrahedra + RUM hinges" is the rigid-contact *limit*; the bulk actually flows (bond-switch = flow; CRN =
+transient structure). Phase 0's WWW bond-switching already models this — keep the superfluid reading of the CRN, do
+not quench it into a static glass (this is also FLM05's flag C: reconcile rigid-limit ↔ superfluid).
+
+**Four-root loop (§K.2):** on each failed validation problem, sort — root-1 claim false (network won't isotropise /
+v(r) won't decay / wake ratio needs a plug) · root-2 dependency (FLM08 geometry, the whitelist radii) · root-3
+prompt (Hessian/discretisation mis-scoped) · root-4 contraband (a wavefunction/probability smuggled as a
+"mechanical" phrase, per the §③ prohibition). **KILL-DEEPEN (§K):** because five debts hang on FLM10, a premature
+KILL here cascades — no KILLED verdict on a first-pass gate; re-run unanchored, old agent results deleted first.
+
+---
+
 ## ① Executive Summary
 
 The bottom of the SDT stack — the **dynamics of the spation lattice itself** — has never been simulated; every

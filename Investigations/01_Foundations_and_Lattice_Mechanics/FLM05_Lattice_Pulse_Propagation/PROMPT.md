@@ -1,292 +1,112 @@
 # FLM05: Lattice Pulse Propagation — The Non-Contact Mechanism
 
-> **Author:** J. C. Harvey, Melbourne. **Status:** SPEC (upgrade 2026-06-27).
-> **Inherits:** `PERFECT_PROMPT_TEMPLATE.md` §⓪–§⑩ · `PROMPT_EXECUTION_PROTOCOL.md` · §0 anti-creep (R0–R5).
-> **Engine:** `#include <sdt/laws.hpp>` only — no local constant namespaces.
-> **Run:** Pre-commit thresholds in `RUN_LOG.md` before coding; adjust per pivot table (§⑩).
+> **Author:** J. C. Harvey, Melbourne. **Status:** RICH-SPEC · **§K-DEEPENED 2026-07-13** (300% rule, HUNTER §K.3).
+> **Inherits:** `PERFECT_PROMPT_TEMPLATE.md` §⓪–§⑩ · `PROMPT_EXECUTION_PROTOCOL.md` · `HUNTER_PROTOCOL.md` §K.
+> **Engine:** `#include <sdt/laws.hpp>`, `<sdt/lattice_structure.hpp>` (FLM08) only. **Propose-only** on canon flags.
+> **Run:** Pre-commit per Part in `RUN_LOG.md`; four-root sort (§⑨.E) on every FAIL.
 ---
 
-## ⓪ The Golden Rule — five questions (answer before Phase 0)
+## ⓪ The Golden Rule — five questions (answered)
+
+1. **What don't we know?** — **The tick-by-tick relay mechanism that MAKES 1/r² from ~10²⁴ discrete Planck-shell handoffs** (CQ09b showed the smooth field v(r)=cα√(a₀/r) is algebra, not mechanism), AND the gap width g₀ (sphere/gap fraction of ℓ_P) — currently under-determined (Part V).
+2. **Why does it matter?** — This is the substrate's operating manual: gap = medium, matter = forced contact, gravity = gap reasserting, light = transverse gap. Everything downstream (occlusion, redshift, light) inherits it.
+3. **How will we find out?** — Parts I–V (§structure), each gated; geometry (1/r² from d=3) is earned, the g₀ determination and the redshift form are the open/flagged pieces.
+4. **What would prove us wrong?** — §⑧: if 1/r² needs anything beyond d=3 solid angle; if g₀ can't be fixed from f; if the rigid-sphere premise contradicts the superfluid substrate (see PREMISE FLAG).
+5. **How will we know we're done?** — Dual verdict; the three canon flags below resolved or logged; g₀ determination graded DERIVED/OPEN.
+
+> ### ⚠ THREE FLAGS (fixed in-prompt this pass; verify on run)
+> **(A) "charge radius" → boundary radius.** Old §DEEP-STRUCTURE said *"Its surface IS the charge radius."*
+> **Corrected:** the contact-zone surface is the particle's **boundary/displacement radius** (`laws.hpp:145`
+> already: "'charge radius' is the literature's obfuscation"). No charge substance (handed redirection).
+> **(B) Redshift is ENDPOINT, non-compounding (CR07).** Old Part IV said *"Accumulated stretch = z"* (photon
+> cycles stretching *in transit*). **This is the transit-narration bug the Interchange Sweep struck.** SDT
+> redshift is **emission depth z = ϟ/r** (Depth-Closure), endpoint counting — octaves telescope, they do NOT
+> accumulate per-gap along the path. Reconcile the stray **z = 1/ϟ²** form against canonical **z = ϟ/r**
+> (they are not the same; one is wrong or mis-normalised — resolve, don't carry both).
+> **(C) PREMISE TENSION — rigid spheres vs superfluid substrate.** FLM05 treats spations as *inert,
+> incompressible, indeformable* Planck spheres (frozen glass). The **substrate-superfluid upgrade
+> (2026-06-25)** holds the substrate is a **reconfigurable lightspeed superfluid** — CRN = *transient*
+> structure, bond-switch = flow, particles = quantised vortices — **not a frozen glass; don't quench.** And
+> **FLM10** found periodic FCC is anisotropic (wrong) vs amorphous-icosahedral (isotropic, frustrated, gap
+> 0.103). FLM05's "12-around-1 recursive infinite tessellation" is exactly FLM10's packing fork. **Reconcile:
+> is the inert-sphere gap model an effective/rigid-limit picture of the superfluid, or superseded by it?**
+
+## The mechanism (earned core — keep)
+
+Gap `g₀ = d − ℓ_P` between incompressible spheres is the medium; relay ε crosses at c. Displacement δ compresses the gap (0 ≤ δ ≤ g₀). **Mode A** (δ<g₀) = gravity (asymmetric relay, Δv/c≈δ/g₀); **Mode B** (δ=g₀, contact) = matter. From the contact zone outward the gap reopens; flux over 4πn² shells ⟹ **1/r² is FORCED by d=3 geometry, not dynamics.** Transverse gap perturbation = light (cannot convert to longitudinal); longitudinal = gravity.
+
+## Structure (Parts I–V, gated)
+
+- **I — One tick:** gap geometry, displacement mechanics, Modes A/B. *Metric:* δ hard-bounded [0,g₀]; contact=matter.
+- **II — Shell-by-shell:** δ_n = F₀/(4πn²) → 1/r²; g(r) profile; test at R_p, r_e, a₀. *Metric:* g→g₀ at ∞, g→0 at R_matter.
+- **III — Rotorpause:** r_rp/(a₀−r_rp)=√(m_p/m_e)=42.85 → r_rp=0.9772 a₀; flail-tail θ≈√(m_e/m_p)≈1.34°. *(Cross-ref the electron domain; movement-only.)*
+- **IV — Pulse as light:** transverse survives (orthogonality), longitudinal absorbed. **Redshift per FLAG (B): z=ϟ/r endpoint, NOT accumulated transit stretch.**
+- **V — Gap width g₀:** the open. c=ℓ_P/t_P with d=ℓ_P gives g₀=0 (problem). Resolution: ℓ_P = lattice constant (sphere fraction f_sphere < 1); gap = ℓ_P(1−f_sphere). *Does f = P_eff/P_conv = 2.125×10⁻¹⁷ fix f_gap?* — **the real Part-V question, currently a "relates to," not a derivation.**
+
+## Dependency Map (§K.3)
+
+| Item | Where | Enters as | Live? |
+|------|-------|-----------|-------|
+| FLM08 lattice_structure.hpp | Engine | relay geometry | ✔ |
+| **FLM10 per-spation solver (FCC vs icosahedral, gap 0.103)** | Investigations/01 | **packing fork — FLAG C** | ⚠ dep |
+| substrate-superfluid upgrade (2026-06-25) | project note | **premise reconciliation — FLAG C** | ⚠ dep |
+| f = P_eff/P_conv = 2.125e-17 | `laws.hpp` (EMC01) | Part V g₀ constraint | ✔ |
+| CR07 non-compounding redshift | Investigations/cosmology | **FLAG B** (z=ϟ/r endpoint) | ✔ |
+| z = ϟ/r Depth-Closure | GOM/Depth-Closure paper | canonical redshift form | ✔ |
+| CQ09b smooth field v(r)=cα√(a₀/r) | prior | the algebra FLM05 must mechanise | ✔ |
+
+## ④ Strategy — routes/parts with pre-committed metrics
+Run Parts I→II (earned geometry, verify 1/r² at H scales), then the two open/flagged pieces:
+**Route V (g₀ from f):** does f constrain f_gap to a definite value, or is "f relates to f_gap" hand-waving? *Metric:* g₀ pinned to <10% from f, or declare OPEN.
+**Route C (premise reconciliation):** run the rigid-sphere gap model AND the superfluid picture on the isotropy test; do they agree in the rigid limit? *Metric:* FLM05 gap model = superfluid effective limit, or one is superseded (name which).
+
+## ⑧ Falsifiers
+
+| Test | Predicted | If FAIL → root |
+|------|-----------|----------------|
+| T1 | 1/r² from d=3 solid angle alone | root-1 (needs extra assumption) |
+| T2 | g₀ pinned from f | root-3 (Part V is "relates to", not derived) → OPEN |
+| T3 | redshift z=ϟ/r endpoint, no transit accumulation | root-4 (CR07 contraband if compounding kept) |
+| T4 | rigid-sphere = superfluid rigid limit | root-2 (premise superseded by FLM10/superfluid) |
+| T5 | rotorpause 0.9772 a₀ independent of fitted inputs | root-1 |
+
+## ⑨.E Four-root sort
+root-1 claim false · root-2 dependency (FLM10 packing, superfluid substrate) · root-3 prompt (g₀ under-determined) · root-4 contraband (compounding redshift; charge-substance). The g₀ gap is a **named OPEN closure** (§D), not a kill. FLAG C is root-2 — CLOSE by reconciling, don't amputate FLM05.
+
+## Brainstorm — overlooked/newly-discovered factors
+- **The superfluid upgrade is the biggest overlooked factor.** FLM05 predates it. "Inert incompressible spheres" may be the *rigid-limit cartoon* of a reconfigurable superfluid — useful pedagogically, but the real substrate flows (bond-switch). Say which FLM05 claims survive the upgrade (1/r²=d=3 does; "spheres never deform" may not).
+- **Redshift form.** z=1/ϟ² (Part IV) vs z=ϟ/r (canon) must be reconciled — a genuine inconsistency, not cosmetic. Depth-Closure (z=ϟ/r at emission) is the earned form.
+- **1/r² = d=3 is the crown jewel** — it's geometry not dynamics, survives every premise change. Lead with it.
+- **Transverse-survives-longitudinal-absorbed** is the light/gravity split; check against FLM09 (light = transient bond-switch wave) — same phenomenon, two descriptions; reconcile.
+- **f → f_gap** would be a beautiful closure (the transfer function fixing the lattice geometry) — but only if it's a derivation, not a coincidence of magnitude.
+
+## ⑤ Success / ⑥ Outputs
+Class A: 1/r² + rotorpause + light-split clean, g₀ pinned from f, three flags resolved, superfluid reconciled. **Honest floor:** geometry earned, g₀ OPEN, redshift+charge-radius+premise flags logged. Outputs: `RUN_LOG.md`, `flm05_lattice_pulse.cpp`, `flm05_torus_derives_mass.cpp`, `FLM05_DERIVATION.md`, `FLM05_VERDICT.md`, CANON_FLAGS/STACK entries.
 
-1. **What don't we know?** — [FLM05] FLM05: Lattice Pulse Propagation — The Non-Contact Mechanism: *(unfilled by the 2026-06-27 bulk template upgrade — write the single measurable gap before the next run)*
-2. **Why does it matter?** — Stack position / downstream blockers (see `INVESTIGATION_STACK.md`).
-3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
-4. **What would prove us wrong?** — §⑧ falsification tests with numeric triggers.
-5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN).
-
-## THE PROBLEM WITH CQ09b
-
-CQ09b showed that the proton field and the electron field are algebraically identical: v(r) = cα√(a₀/r). But this is physically meaningless because it treats the field as a smooth, pre-existing thing at every point simultaneously. In reality, the "field" is built one tick at a time, through 3.27 × 10²⁴ Planck shells of spations, and at every shell there is a dissipation, a phase lag, a reaction. The combined effect of those 10²⁴ discrete handoffs is what MAKES the inverse square law — not a magical smooth function written on paper.
-
-This investigation does the real work: the tick-by-tick mechanism.
-
----
-
-## THE LATTICE: PLANCK SPHERES WITH A REACTIVE GAP
-
-### The spheres
-
-These are **Planck spheres**. The Planck length l_P = 1.616 × 10⁻³⁵ m is the smallest scale before breaking. Each spation sphere has:
-
-- **Radius: r_s = l_P / 2**
-- **Diameter: l_P**
-- **The sphere IS the Planck scale. It cannot be compressed further. It is the floor.**
-
-If you try to go below l_P, you break the lattice. The sphere is incompressible, indeformable, structureless. It is the quantum of space.
-
-### The equilibrium gap
-
-In the free lattice (no matter), 12 spheres surround each central sphere. The centres are NOT at l_P separation — they are at some d > l_P. The gap between any two adjacent spheres is:
-
-$$g_0 = d - 2r_s = d - l_P$$
-
-This gap is:
-- **Identical in all directions** — isotropy demands it.
-- **Reactive** — it is not empty. It is the channel through which relay content ε passes.
-- **The medium** — the gap IS the physics. The spheres are inert. The gaps carry the relay.
-
-The gap provides two things that solid contact cannot:
-
-1. **Deformability without compression.** The gap can narrow or widen. The spheres do not change shape. The lattice is soft because the gaps are soft, not because the spheres are soft.
-
-2. **Compression without deformation.** The gap can be compressed (narrowed) all the way to zero without deforming the spheres. The spheres stay at r_s = l_P/2. Only the gap changes.
-
-### The contact condition: MATTER
-
-**Matter is where the gap has been forced to zero.**
-
-When displacement is large enough, the gap between adjacent spations is fully compressed. The spheres are now in physical contact. This is a qualitatively different state:
-
-| State | Gap width | Regime | Physics |
-|-------|----------|--------|---------|
-| Free lattice | g = g₀ (equilibrium) | Vacuum | Relay at c, isotropic, no force |
-| Compressed | 0 < g < g₀ | Gravitational field | Asymmetric relay, convergence gradient |
-| Contact | g = 0 | **Matter** | Spheres touching, displacement saturated |
-| Below contact | g < 0 (impossible) | Forbidden | Would require compressing Planck spheres |
-
-**The "surface" of matter is where the gap just barely reopens.** Inside: contact. Outside: the gap gradually reasserts itself. This gradient — from zero gap to equilibrium gap — IS the gravitational field.
-
-### Why inverse square is inevitable
-
-From the contact zone outward, the gap must reassert itself. The displacement flux emanating from the contact zone spreads over the surface area of concentric shells:
-
-- At shell n (radius n × l_P from the contact surface): area ≈ 4πn²l_P²
-- The total displacement flux F is conserved (what went in must come out).
-- Displacement per spation at shell n: δ_n = F / (4πn²) → **1/r²**
-
-This is not dynamics. This is **geometry**. The 1/r² relationship is the solid angle of a sphere. It follows from three spatial dimensions, not from any force law.
-
-### The infinite recursion
-
-For the gap to be self-consistent:
-- The 12 spheres around the central sphere must be at equal angular spacing.
-- The lateral spread required for even angular distribution lifts them off the surface.
-- But this lift is only consistent if EACH of the 12 also has 12 around it, at the same gap.
-- And each of those 12 must have 12.
-- **The structure must tessellate infinitely.** There is no outer boundary. The lattice is infinite, recursive, and self-consistent at every scale.
-
-This recursive tessellation is what gives the lattice its:
-- **Rigidity** (every spation is locked by its 12 neighbours, each locked by their 12, etc.)
-- **Isotropy** (the gap is the same in all 12 directions at every point)
-- **Invariance** (the relay content ε is the same in every gap, every tick)
-
----
-
-## INVESTIGATION STRUCTURE
-
-### Part I: One Tick — The Anatomy of a Pulse
-
-Model a single relay event across one gap.
-
-**Tasks:**
-1. Define the gap geometry:
-   - Spation radius: r_s = l_P / 2. The sphere diameter IS the Planck length.
-   - Centre-to-centre distance: d (the lattice constant; d ≥ l_P)
-   - Equilibrium gap width: g₀ = d - l_P
-   - The gap is the FREE SPACE between surfaces of adjacent Planck spheres.
-   - In the gap: relay content ε traverses at c.
-   - Inside the sphere: structureless. At the Planck limit. Cannot be subdivided.
-
-2. Displacement mechanics:
-   - A displaced spation has its centre shifted by δ from equilibrium.
-   - Gap toward displacement: g₀ - δ (compressed)
-   - Gap away from displacement: g₀ + δ (expanded)
-   - **When δ = g₀: gap is ZERO. CONTACT. This is MATTER.**
-   - **When δ > g₀: IMPOSSIBLE. The sphere cannot compress. Planck scale is the floor.**
-   - So δ is hard-bounded: 0 ≤ δ ≤ g₀.
-
-3. Two modes — the only two that exist:
-
-   **Mode A: Gap compression (δ < g₀) — GRAVITY**
-   - The gap narrows. Relay arrives earlier from compressed side, later from opposite.
-   - Phase velocity asymmetry: Δv/c ≈ δ/g₀
-   - Spheres do not deform. Only the gap changes.
-   - Deformability without compression of the spheres.
-   - Compression of the gap without deformation of the spheres.
-
-   **Mode B: Contact (δ = g₀) — MATTER**
-   - Gap = zero. Surface-to-surface contact.
-   - A contact event in an otherwise contactless medium.
-   - The displacement is saturated. The pressure is at P_conv maximum.
-   - This IS what matter is: a region of forced contact in a non-contact lattice.
-
-### Part II: Shell-by-Shell — The Gap Reasserts Itself
-
-From the contact zone (matter) outward, the gap reopens. This gradient IS gravity.
-
-**Tasks:**
-1. At the surface of matter: g = 0 (just at contact).
-2. Moving outward: the gap reopens. The displacement δ(r) decreases from g₀ toward 0.
-3. Flux conservation:
-   - Shell n has ≈ 4πn² spations.
-   - Total displacement flux: F_n = 4πn² × δ_n = constant.
-   - **δ_n = F₀ / (4πn²) → 1/r² law is FORCED by geometry.**
-
-4. Gap profile: g(r) = g₀ − δ(r) = g₀ − F₀/(4πr²/d²)
-   - g → g₀ at r → ∞ (free lattice recovered)
-   - g → 0 at r = R_matter (the contact surface)
-
-5. Test: compute g(r) for hydrogen at R_p, r_e, a₀.
-
-### Part III: The Rotorpause
-
-The proton and electron are both contact zones. Between them: a hard equilibrium surface.
-
-**Tasks:**
-1. Proton displacement: δ_p(r) = F₀_p / (4πr²)
-2. Electron displacement: δ_e(r') = F₀_e / (4πr'²) where r' = distance from electron
-3. Rotorpause at r_rp where δ_p = δ_e:
-   - r_rp / (a₀ − r_rp) = √(m_p/m_e) = 42.85
-   - **r_rp = 0.9772 a₀** (proton dominates 97.7% of the interior)
-
-4. Electron's domain: thin shell 0.977 a₀ to a₀ (thickness ≈ 0.023 a₀)
-5. **Flail tail:** beyond the electron, its displacement flux dominates in a compressed cone.
-   - Opening angle θ ≈ √(m_e/m_p) ≈ 1.34°
-   - Like a planet's magnetotail in the solar wind.
-
-### Part IV: The Pulse as Light
-
-A transverse gap perturbation propagates at c. This IS a photon.
-
-**Tasks:**
-1. TRANSVERSE: gap narrows perpendicular to propagation → cannot be absorbed by radial relay → propagates without loss. This is LIGHT.
-2. LONGITUDINAL: gap narrows along propagation → absorbed into the convergence field → this is GRAVITY.
-3. Why transverse survives: centrosymmetric lattice (GPI axiom) cannot convert transverse → longitudinal. Orthogonality is preserved.
-4. Wavelength = gap crossings per oscillation cycle.
-5. Redshift: in a displacement zone, outgoing gaps are wider. Each photon cycle is stretched. Accumulated stretch = z = 1/ϟ².
-
-### Part V: Determining the Gap Width g₀
-
-**r_s = l_P/2 is fixed.** What remains: the centre-to-centre distance d, hence g₀ = d − l_P.
-
-**Tasks:**
-1. c = d/t_P defines d = c × t_P = l_P.
-   - This gives g₀ = 0. Contact everywhere. PROBLEM.
-
-2. **Resolution**: l_P is the LATTICE CONSTANT (sphere + gap). The sphere is a fraction of l_P:
-   - Sphere diameter = l_P × f_sphere (f_sphere < 1)
-   - Gap = l_P × f_gap = l_P × (1 − f_sphere)
-   - c = l_P/t_P includes both sphere traversal and gap crossing.
-
-3. The gap fraction f_gap determines displacement sensitivity:
-   - δ_max = g₀ = l_P × f_gap (contact threshold)
-   - Sensitivity: Δv/c ≈ δ/(l_P × f_gap) = (δ/l_P) / f_gap
-
-4. From the transfer function f = P_eff/P_conv = 2.125 × 10⁻¹⁷:
-   - If f relates to f_gap, this constrains the sphere/gap ratio.
-
----
-
-## THE DEEP STRUCTURE
-
-1. **THE GAP IS THE MEDIUM.** Planck spheres are inert, incompressible. All physics is in the gap.
-
-2. **MATTER IS FORCED CONTACT.** A contact event in an otherwise contactless medium. The contact zone IS the particle. Its surface IS the charge radius.
-
-3. **GRAVITY IS THE GAP REASSERTING ITSELF.** From contact outward, the gap reopens as 1/r². The gradient is the force. No mystery.
-
-4. **LIGHT IS TRANSVERSE GAP OSCILLATION.** Perpendicular to radial displacement, cannot be absorbed, propagates forever.
-
-5. **REDSHIFT IS GAP STRETCHING.** Photon cycles stretch as they climb wider gaps. z = 1/ϟ².
-
-6. **INVERSE SQUARE IS d=3.** Flux over 4πr² = 1/r² per spation. Geometry, not dynamics.
-
-7. **c IS ONE HOP PER TICK.** Lattice constant / Planck time. Cannot be exceeded. Cannot be skipped.
-
----
-
-## SUCCESS CRITERIA
-
-- [ ] Gap geometry: r_s = l_P/2, g₀ = d − l_P, contact condition defined
-- [ ] Single-tick anatomy: gap compression → relay asymmetry → force
-- [ ] Contact → matter: proton as a contact zone
-- [ ] Shell-by-shell gap reopening: δ_n ∝ 1/n² from flux conservation
-- [ ] Rotorpause location: r_rp ≈ 0.9772 a₀
-- [ ] Flail tail opening angle: θ ≈ 1.34°
-- [ ] Light as transverse gap oscillation
-- [ ] Redshift from gap stretching = z = 1/ϟ²
-- [ ] Gap fraction constrained by transfer function
-- [ ] All from {l_P, t_P, ε, d=3} — NO fitted parameters
-
-## TEMPERATURE THRESHOLDS — THE GAP CONNECTION
-
-The interspation gap may have direct temperature correlates:
-
-| Temperature | What happens | Gap interpretation |
-|-------------|-------------|-------------------|
-| **T_CMB = 2.7255 K** | Present-day background. Free lattice. | Full equilibrium gap g₀. Relay at c. No displacement. |
-| **T_rec = 3000 K** | Recombination. Neutral atoms form. The Clearing. | The gap CLOSES at this energy density. Below 3000K the gap reopens. Above 3000K the gap is consumed — all spations in contact — no atoms can form because the lattice is in the contact regime everywhere. This IS why recombination happens at 3000K: it is the temperature at which the interspation gap first appears. |
-| **T_solar_trough = 4400 K** | The solar temperature "trough" — the minimum in the solar atmosphere, crossable only by CME. | A SECOND gap threshold? The gap between the photosphere (5800K) and the corona (1-2 MK) has a hard minimum at 4400K. If the gap has a secondary resonance at this energy, it would explain why the transition region is so thin and why energy must be injected violently (CME/flares) to cross it. |
-| **T_photosphere = 5800 K** | Solar surface. | Gap fully compressed locally. Continuous emission. |
-
-### The connection
-
-If T_rec = 3000K is the temperature at which the interspation gap first opens:
-- u_gap = a_rad × T_rec⁴ = 6.13 × 10⁻² J/m³
-- u_CMB = a_rad × T_CMB⁴ = 4.17 × 10⁻¹⁴ J/m³
-- Ratio: u_gap / u_CMB = T_rec⁴ / T_CMB⁴ = (3000/2.7255)⁴ = 1.46 × 10¹²
-
-The gap opened when the energy density dropped by a factor of 10¹² from the contact regime. The present-day gap is the FULLY RELAXED state, 10¹² times wider than at the threshold.
-
-This connects the CMB temperature, the recombination epoch, the solar transition region, and the interspation gap in a single framework. FLM05 must test this quantitatively.
 ---
 
 ## ⑩ Adaptive Execution Protocol
 
-> *It is a bad plan that cannot be altered.* Failures invoke **PIVOT / KILL / OPEN** — never RETRO-PASS or PLUG.
-> See `PROMPT_EXECUTION_PROTOCOL.md`.
-
-### Pre-Run Commitment Block (copy to `RUN_LOG.md` before coding)
-
 ```markdown
-## Pre-Run Commitments — FLM05
+## Pre-Run Commitments — FLM05 (§K-deepened)
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
-- CALIBRATED budget: [0 or list each param — max per §⑤]
-- Engine namespaces: FLM08 `lattice_structure.hpp`, FLM02/FLM05 relay mechanics
-- Phase thresholds (committed before run): 97.7%
-- Forbidden retroactive changes: widen tolerances; plug targets; IDENTITY-PASS; local constant namespaces
+- Physics class hoped: [NATIVE|CONVERGENCE|OPEN]
+- CALIBRATED budget: 0 (g₀ from f, not fitted)
+- Parts this session: I,II (geometry) · V (g₀ from f) · C (superfluid reconcile)
+- Flags to resolve: (A) charge→boundary radius (B) redshift endpoint z=ϟ/r (C) rigid vs superfluid
+- Verify on file: FLM10 packing result, substrate-superfluid note, f value
+- Forbidden: "charge radius"; accumulated transit redshift; asserting spheres never deform if superfluid says otherwise
 ```
 
-### Pivot table (minimum — extend for this investigation)
+| Trigger | PIVOT | If fails | Forbidden |
+|---------|-------|----------|-----------|
+| g₀ won't pin from f | declare OPEN (Part V) | ship geometry-only | claim f fixes g₀ by hand-wave |
+| redshift wants transit accumulation | enforce CR07 endpoint | flag & strike (root-4) | keep compounding z |
+| rigid-sphere ≠ superfluid | reconcile as rigid limit / name superseded | OPEN premise (root-2) | ignore the upgrade |
+| "charge radius" appears | boundary/displacement radius | — | say charge radius |
 
-| Trigger | PIVOT (first) | If pivot fails | Forbidden |
-|---------|---------------|----------------|-----------|
-| Phase 0 sanity check fails | Fix units/engine refs; verify `laws.hpp` symbols | STOP — report blocker | Fit to target |
-| Native mechanism off > committed % | Alternative route in §④; document ADJ-### | **OPEN** or **KILL** hypothesis | RETRO-PASS |
-| `z ≥ 1` in closure formula | Weak-field break (CR10); piecewise or exponential | **OPEN** that regime | Ignore break |
-| Rivals match but SDT doesn't beat | Label **DEGENERATE** honestly | — | Claim Class A |
-| Upstream dependency missing (FLM10, etc.) | **DEFER** phase; cite dependency ID | — | Fake PASS |
-
-### Allowed adjustments
-
-- Finer numerics (mesh, ticks, bracket); phase splits (Na / Nb); filename fix via ADJ entry.
-- Alternative **native** routes already listed in §④ Strategy.
-
-### Disallowed adjustments
-
-- Post-hoc tolerance widening · coefficient plugs · `atomic::`/GM/G in Phase-1 native chain · Snell/reciprocity-only as Fermat PASS.
+**Disallowed:** post-hoc tolerance widening · "charge radius" · compounding/transit redshift · asserting incompressible spheres against the superfluid upgrade without reconciliation.
 
 ---
 
-*FLM05 · upgraded 2026-06-27 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*
+*FLM05 · §K-deepened 2026-07-13 · 1/r²=d=3 is the earned crown; three flags fixed/logged (charge→boundary radius, redshift endpoint z=ϟ/r not transit-accumulated, rigid-sphere vs reconfigurable-superfluid); g₀-from-f is the live open.*

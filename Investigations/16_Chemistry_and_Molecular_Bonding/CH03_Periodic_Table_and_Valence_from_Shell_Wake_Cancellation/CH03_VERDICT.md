@@ -34,3 +34,19 @@ The honest content: the min(n, 2S−n) arithmetic reproduces every main-group va
 ## Canonical line
 
 **Prompt completion C (tally + octet + one novel call, capacities CALIBRATED(1), firewall honoured) · Physics class LINGUISTIC (M0/P2: re-labelling of the measured table) / KILLED-in-static-class (M2 pairing map at O₂) · Recovery PARTIAL · Cascade root ROOT-SEAT (FLM14)**
+
+---
+
+## ⟐ RE-OPENED (2026-07-06) — §G.3 premise-class event (Harvey order)
+
+**Trigger:** FARMER refinement 8 (movement triad + rolling/meshing wake firewall). The M2 kill
+was recorded KILLED-in-static-class; the mesh class now NAMES the missing mechanism: pairing
+is a **cadence/closure constraint, not a distance choice** — a shell closes only when its tours
+mesh completely, and **O₂ is a structure that cannot fully close with one identical partner**
+(two residual unpaired defects = the measured paramagnetism, stated before any model run).
+N₂'s complete triple-mesh closure vs O₂'s incomplete closure is the committed qualitative
+fork. **What this does NOT do:** no label changes — M1/M2 stay killed-in-static-class until a
+pre-committed mesh-class run lands; the original re-open condition (FLM14 sequential-occupancy
+rule) remains the full payer and is still unpaid (run-5 claim REFUSED; run-6 dwell measure is
+the named instrument). Quantitative gate for any re-run, committed now: the mesh-closure model
+must produce O₂'s TWO unpaired defects and N₂'s zero with the same rule, no per-molecule freedom.

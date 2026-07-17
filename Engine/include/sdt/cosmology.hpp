@@ -59,7 +59,10 @@ namespace pre_clearing {
     inline constexpr double P_conv_rec = Phi_rec / l_P3;  // ~3.61e60 Pa
 
     /// Power per spation at recombination [W]
-    /// This is ORDER UNITY in SI watts — a deep structural result
+    /// ("Order unity — deep structural result" STRUCK 2026-07-07, interchange sweep: in
+    /// native units this is ~10⁻⁵⁴ of the Planck handover rate ℏ/t_P²; the quantity sweeps
+    /// ~12 orders across epochs and necessarily crosses 1 W somewhere. Unit-basis
+    /// coincidence, not structure.)
     inline constexpr double W_per_spation = Phi_rec / t_P;  // ~0.283 W
 
     /// BAO sound speed in coupled lattice [m/s]
@@ -67,9 +70,16 @@ namespace pre_clearing {
 
     /// Coupled epoch duration required for BAO scale [s]
     /// 147 Mpc = c_s * t_coupled -> t_coupled ~ 830 Myr
+    /// ⚠ PROVENANCE GUARD (2026-07-05, Harvey-authorized; CR03/CR08 audit): CIRCULAR AS
+    /// WRITTEN — t_coupled is DEFINED from the measured BAO scale (147 Mpc, class-X observed
+    /// input), so NO tool may cite t_coupled (or any quantity built on it) as an SDT
+    /// derivation of the BAO scale. It blocks CR03 Route B and CR08 G2 as derivations; both
+    /// remain honest as consistency displays. The open closure that would convert this to
+    /// DERIVED: a native coupled-epoch duration from the Law II release-rate / opacity-
+    /// clearing mechanism (see CR13, SAR03 root) — until then, class X.
     inline constexpr double Mpc = 3.085'677'581e22;
-    inline constexpr double BAO_scale = 147.0 * Mpc;        // [m]
-    inline constexpr double t_coupled = BAO_scale / c_s;     // [s] ~ 2.62e16
+    inline constexpr double BAO_scale = 147.0 * Mpc;        // [m]  (measured, class X)
+    inline constexpr double t_coupled = BAO_scale / c_s;     // [s] ~ 2.62e16  (class X — see guard)
 
     /// BAO scale in Planck lengths
     inline constexpr double BAO_in_lP = BAO_scale / l_P;    // ~2.81e59
@@ -78,22 +88,29 @@ namespace pre_clearing {
 // =====================================================================
 //  SDT STRAIN RATE (replaces Hubble parameter)
 //
-//  H_0 is not an expansion rate. It is the present-epoch strain rate
-//  of the pressure gradient: sigma_0 = H_0/c [m^-1]
-//  This is the rate of wavelength stretching per unit distance.
+//  H_0 is not an expansion rate. σ₀ = H₀/c is carried here as an inverse
+//  length — a MEASURED-INPUT unit conversion, class X.
+//  ⚠ PROVENANCE GUARD (2026-07-07, interchange sweep, Harvey-authorized): the former
+//  "wavelength stretching per unit distance" reading is an in-flight COMPOUNDING law —
+//  the exact class CR07 canon falsifies (octaves telescope; redshift = endpoint ruler
+//  ratio; nothing happens in transit). NO tool may cite a σ₀-integrated distance (e.g.
+//  R_CMB = ln(1+z)/σ₀) as an SDT derivation: the shell count N and everything on it
+//  (Φ, P_conv, S_boundary/10¹²³) inherits class X until a CR07-compatible d(z) exists
+//  (NO-DERIVED-d(z) root).
 // =====================================================================
 
 namespace strain {
-    /// Hubble parameter [s^-1] — measured value, SDT reinterpretation
+    /// Hubble parameter [s^-1] — measured value (class X input)
     inline constexpr double H0_CMB   = 67.4e3 / pre_clearing::Mpc;    // Planck
     inline constexpr double H0_local = 73.04e3 / pre_clearing::Mpc;   // SH0ES
 
-    /// SDT strain rate [m^-1]
+    /// H₀/c as inverse length [m^-1] — unit conversion only (see guard above)
     inline constexpr double sigma_CMB   = H0_CMB / c;    // ~7.29e-27
     inline constexpr double sigma_local = H0_local / c;  // ~7.90e-27
 
-    /// Strain rate tension (SDT: expected, not anomalous)
-    /// Local pressure gradient is steeper near massive structures
+    /// Planck-vs-SH0ES tension, per cent. (The "steeper near massive structures"
+    /// radial-gradient reading was KILLED by CR09, 0/122 — the tension must route
+    /// through the emission half; oversell struck 2026-07-07.)
     inline constexpr double tension_pct = (sigma_local - sigma_CMB) / sigma_CMB * 100.0;
     // ~8.4%
 }
@@ -176,9 +193,10 @@ namespace bao {
 //  At z ~ 10:   T = 30 K, cold far-IR
 //  At z = 0:    T = 2.73 K, microwave
 //
-//  UV-tail photons from the Clearing traversed the full visible
-//  spectrum on their way to becoming microwaves:
-//  UV -> violet -> blue -> green -> yellow -> orange -> red -> IR -> uW
+//  (REWORDED 2026-07-07, interchange sweep: the octave law is an ENDPOINT count —
+//  nothing "happens on the way", no in-flight sliding down the spectrum; and CR13 puts
+//  the bath edge at ~975 nm, not UV. The table above maps T(z) per emission epoch; it
+//  is not a transit history of any photon.)
 // =====================================================================
 
 /// Temperature at given redshift [K]

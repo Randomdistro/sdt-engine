@@ -87,3 +87,19 @@
 > **Prompt completion B · Physics class OPEN (composites DEGENERATE; C5 quarantined numerology-risk) · Recovery PARTIAL · Cascade roots: trefoil current-to-moment map (NEW, owned by NP15); NP20 flux-composition (μ_n); NP17-PENDING (composites)**
 
 *NP15 · executed 2026-07-03 · honest OPEN/DEGENERATE · the bracket is real, the landing is owed.*
+
+---
+
+## ⟐ RE-OPENED, composites route only (2026-07-06) — §G.3 premise-class event (Harvey order)
+
+**Trigger:** the composite FAILs were traced to "grammar blocks are magnetically rigid and
+independent" — block-ADDITION, which this run falsified monotonically (+2.6% → −62.4% with A).
+FARMER refinement 8 + NP10 run 2 name the successor structure: packed blocks MESH (the
+(Z−1)! interleaved-tour lock is now on record), and **a meshed pair's circulation is a shared
+tour, not two summed loops** — so composite moments must be computed from the mesh circulation
+(shared-electron path through the interleaved geometry), with the Be-9 −62% miss as the
+sharpest committed target (its α blocks cannot be magnetically silent under meshing).
+**What this does NOT do:** μ_p's current-to-moment map is UNTOUCHED (still NP15's own debt;
+C5 stays quarantined until derived — this re-open supplies no route to it); μ_n still
+inherits NP20. Only the A ≥ 3 composition rule re-opens, instrument = the NP17/FLM14
+interleaved-tour geometry once the lock derivation lands.

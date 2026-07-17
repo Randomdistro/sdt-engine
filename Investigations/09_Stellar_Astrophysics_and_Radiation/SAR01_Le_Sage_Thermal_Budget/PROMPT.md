@@ -1,101 +1,112 @@
 # SAR01: Le Sage Thermal Budget — Data/Prompt
 
-> **Author:** J. C. Harvey, Melbourne. **Status:** SPEC (upgrade 2026-06-27).
-> **Inherits:** `PERFECT_PROMPT_TEMPLATE.md` §⓪–§⑩ · `PROMPT_EXECUTION_PROTOCOL.md` · §0 anti-creep (R0–R5).
-> **Engine:** `#include <sdt/laws.hpp>` only — no local constant namespaces.
-> **Run:** Pre-commit thresholds in `RUN_LOG.md` before coding; adjust per pivot table (§⑩).
+> **Author:** J. C. Harvey, Melbourne. **Status:** §K KILL-DEEPEN RE-RUN (old verdict/runlog/results/cpp DELETED 2026-07-12 per §K.4) · **§K-DEEPENED 2026-07-13**.
+> **Inherits:** `PERFECT_PROMPT_TEMPLATE.md` §⓪–§⑩ · `PROMPT_EXECUTION_PROTOCOL.md` · `HUNTER_PROTOCOL.md` §H (Adjudicator) + §K.
+> **Engine:** `#include <sdt/laws.hpp>` only. **Propose-only** on canon flags.
+> **This is a KILL-DEEPEN re-run.** The prior artifacts are gone by design so this run is unanchored (§K.4). Re-execute **direct, no auto-agents** (§K.4). The Adjudicator has already ruled once on the SAR01 kill — its trichotomy (buffer / throughpole / terminus) is the spine below.
 ---
 
-## ⓪ The Golden Rule — five questions (answer before Phase 0)
+## ⓪ The Golden Rule — five questions (answered)
 
-1. **What don't we know?** — *(unfilled by the 2026-06-27 bulk template upgrade — write the single measurable gap before the next run)*
-2. **Why does it matter?** — Stack position / downstream blockers (see `INVESTIGATION_STACK.md`).
-3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
-4. **What would prove us wrong?** — §⑧ falsification tests with numeric triggers.
-5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN).
+1. **What don't we know?** — **Does the elastic redirection of convergence flux have ANY thermalisation leakage η, and what recharges the redirected flux's isotropy?** (NOT "how much is absorbed" — absorption was a transcription error; see below.)
+2. **Why does it matter?** — Le Sage died because its corpuscles must be *absorbed* (a terminus), which melts everything. SDT's occlusion is *redirection* (a throughpole) — but only if the leakage η is below the geothermal budget. This is the gate between SDT-gravity-is-viable and SDT-has-a-heating-problem.
+3. **How will we find out?** — Three routes (§④): A the leakage ceiling η from the 47 TW geothermal budget; B the Maxwell recharge/refill mechanism (what restores isotropy); C the buffer-vs-terminus accounting (§H trichotomy).
+4. **What would prove us wrong?** — §⑧: η > 4.4×10⁻¹⁸ exceeds the 47 TW geothermal budget → SDT heating problem. A redirection that is secretly a terminus (no efflux) → Le Sage's death applies to SDT too.
+5. **How will we know we're done?** — Dual verdict + the η ceiling on record + the recharge mechanism named (or flagged OPEN as the Law-II release-rate root).
+
+## FARMER CORRECTION (Harvey 2026-07-03) — the premise fix that this re-run enforces
+
+> The premise "matter **absorbs** convergence flux" is a **transcription error** against the founding
+> occlusion principle. Influx is a **throughpole** (in/out, never terminates); occlusion is
+> **redirection/blocking**, not capture; the work is pressure-asymmetry work, not energy deposition.
+> The branch's real question is: **does the elastic redirection have any thermalisation leakage η?**
+
+## §H TRICHOTOMY (the Adjudicator's ruling — the spine of this re-run)
+
+Every flux path must be sorted into exactly one:
+- **THROUGHPOLE** — movement passes through (in one side, out the other); nothing stored or destroyed. *Occlusion gravity is this.* PASS. **No heat.**
+- **BUFFER** — movement banked *reversibly* and returned (excitation, angular momentum, bond PE). Ledger balanced. Native — violates no conservation. **A buffer is NOT a heat sink.**
+- **TERMINUS** — movement destroyed / removed with no efflux. **FORBIDDEN** ("movement has no sink"). *Le Sage's net push requires one; that is why it dies.*
+
+**The single question η measures:** what fraction of the redirected flux leaks from THROUGHPOLE/BUFFER into TERMINUS-like thermalisation (disordered heat with no efflux)? Absorption into a *store* (buffer) is native; absorption into *heat* (terminus) is forbidden. η is the forbidden fraction.
 
 ## DATA REQUIREMENTS
+
 | Data | Value | Source |
 |------|-------|--------|
 | Solar luminosity | 3.828×10²⁶ W | IAU 2015 |
-| Solar convergence absorbed | L_conv = ∫ F_conv · dA over solar surface | SDT derivation |
 | CMB flux F_CMB | 3.131×10⁻⁶ W/m² | law_II |
-| Solar surface area | 6.08×10¹⁸ m² | From R_Sun |
-| Total intercepted CMB | F_CMB × πR²_Sun ≈ 4.77×10⁷ W | Computed |
-| Earth thermal budget | 173 PW solar + 47 TW geothermal | Measured |
-| Convergence heating prediction | Depends on occlusion fraction | To compute |
+| Earth thermal budget | 173 PW solar + **47 TW geothermal** | measured (the ceiling) |
+| Prior earned ceiling | **η < 4.4×10⁻¹⁸** | 2026-07-03 run (deleted; re-derive clean) |
 
-## INVESTIGATION PROMPT
+## Dependency Map (§K.3)
 
-**Target**: Compute the thermal budget of an eclipsing body in the convergence field. Does convergence absorption produce detectable heating?
+| Item | Where | Enters as | Live? |
+|------|-------|-----------|-------|
+| occlusion = redirection (throughpole) | founding principle / FARMER | **the corrected premise** | ✔ |
+| f (transfer/pressure ratio) | `laws.hpp` (EMC01) | **pressure ratio, NOT energy efficiency** | ✔ |
+| 47 TW geothermal | measured | the leakage ceiling | ✔ |
+| Maxwell elastic-refill / recharge | Law-II release-rate law (STACK §3b) | **the named OPEN** (isotropy restoration) | ⚠ open |
+| buffer/throughpole/terminus | HUNTER §H.LEASH | the accounting spine | ✔ |
+| P_heat = f·P_conv·V_disp·N | prior draft | **KILLED** (an absorption formula; f is a pressure ratio, not efficiency) | ✖ dead |
 
-### The Le Sage Problem
+## ④ Strategy — three routes
 
-> **⚠️ FARMER correction (2026-07-03, J.C.Harvey directive):** the premise line below —
-> "matter **absorbs** convergence flux" — is a TRANSCRIPTION ERROR against the founding
-> occlusion principle. The influx is a **throughpole** (in/out, never terminates); occlusion is
-> **redirection/blocking**, not capture; the work is pressure-asymmetry work, not energy
-> deposition. The branch's real question is therefore NOT "how much is absorbed" but: **does the
-> elastic redirection have ANY thermalisation leakage?** The 2026-07-03 run earned the ceiling:
-> η < 4.4×10⁻¹⁸ (any larger leakage exceeds the 47 TW geothermal budget) — that ceiling is the
-> branch's falsifiable number. The named remaining open is Maxwell's elastic-refill objection:
-> what restores the isotropy of the redirected flux (the recharge mechanism) — same root as the
-> Law-II release-rate law (STACK §3b, RELAY ENERGY-COUPLING MICROPHYSICS).
+**Route A — The leakage ceiling η (re-derive clean).** Redirected throughput intercepted by Earth vs 47 TW: η_max = 47 TW / (occluded throughput). Re-derive the ceiling (prior: η < 4.4×10⁻¹⁸) **without** reading the deleted result. *Metric:* ceiling reproduced from geothermal budget alone. **Guard:** f is a *pressure ratio*, not an energy efficiency — do not multiply it in as a heat term (that was the killed formula).
+**Route B — The recharge mechanism (the Maxwell objection).** What restores the isotropy of the redirected flux? This is the same root as the Law-II release-rate law (relay energy-coupling microphysics). *Metric:* name a native recharge mechanism, or flag it OPEN with its root ID. This is the honest open — do not fabricate a refill.
+**Route C — Buffer/terminus accounting.** Trace the redirected flux ledger *in, through, and out* (§H Phase 1). Show it closes as throughpole+buffer with η→terminus bounded. *Kill condition (§H):* if any step requires a terminus (destruction with no efflux) to produce a net push, Le Sage's death applies — SDT gravity would need that same forbidden sink. Show it does NOT (occlusion is a pressure *shadow*, not a captured flux).
 
-If gravity = convergence occlusion, then matter ~~absorbs~~ **redirects (occludes)** convergence flux. Classical Le Sage theories fail because their corpuscles must be absorbed (momentum transfer by capture) and the absorption would melt everything. SDT's structural difference:
+## ⑧ Falsifiers
 
-1. The transfer function f = 2.125×10⁻¹⁷ means only a TINY fraction of convergence is coupled
-2. The convergence flux is redirected through the throughpole (relay-conserving), not absorbed as heat — the honest open is the leakage fraction η of that redirection
-3. ~~The heating rate is: P_heat = f × P_conv × V_disp × (number of nucleons)~~ **[KILLED as transcribed — an absorption formula; the run rejected it as a heat term (f is a pressure ratio, not an energy efficiency). The earned form: P_heat = η × (occluded throughput), with measured ceiling η < 4.4×10⁻¹⁸]**
+| Test | Predicted | If FAIL → root |
+|------|-----------|----------------|
+| T1 | η ceiling < 4.4×10⁻¹⁸ from 47 TW budget | root-1 if leakage exceeds → SDT heating problem |
+| T2 | occlusion push needs NO terminus (throughpole+buffer only) | root-1 (Le Sage death applies) |
+| T3 | f used as pressure ratio, never as heat efficiency | root-3 (the killed absorption formula returns) |
+| T4 | recharge mechanism named or flagged OPEN (not faked) | root-2 (Law-II release-rate root) |
+| T5 | no rival-axiom gate (e.g. "must re-radiate isotropically") smuggled | root-4 (§G contraband) |
 
-### Calculation
-1. Compute total convergence power intercepted by Earth: (π R_E²) × P_conv × c × f
-2. Compare to geothermal heat flow (47 TW)
-3. If convergence heating << geothermal: Le Sage heating is undetectable (SDT passes)
-4. If convergence heating >> geothermal: SDT has a heating problem
+## ⑨.E Four-root sort
+root-1 claim false (leakage real / terminus required → SDT heating problem) · root-2 dependency (Law-II recharge microphysics) · root-3 prompt (absorption formula, f-as-efficiency) · root-4 contraband (isotropic-re-radiation demand as a rival axiom). §H.LEASH: **name the mechanism of harm** before striking or confirming — buffers are not termini.
 
-### Success Criteria
-- [ ] Convergence heating rate computed for Earth
-- [ ] Ratio to geothermal heat quantified
-- [ ] Either: heating is negligible → no Le Sage problem; OR: mechanism for recycling identified
+## Brainstorm — overlooked factors
+- **The buffer/terminus distinction is the whole game.** "Movement has sinks" (buffers exist) and "movement has no sink" (no termini) are BOTH true; the SAR01 kill conflated them. η measures only the terminus fraction.
+- **f is a pressure ratio, not an efficiency** — the single most important guard. The killed P_heat = f·P_conv·V_disp·N multiplied a pressure ratio as if it were a heat-coupling efficiency. Do not resurrect it.
+- **Recharge = Law-II release rate.** The Maxwell "what refills the isotropy" objection is not unique to SAR01 — it's the relay energy-coupling microphysics that several branches owe. Pay it once at the root (STACK).
+- **Sungrazer test (two-regime memory):** occlusion saturation g→2 near contact (+6.8% sungrazer) is a *separate* observable of the same redirection — a possible independent check the thermal budget doesn't touch.
+
+## ⑤ Success / ⑥ Outputs
+Class A: η ceiling re-derived clean, occlusion shown terminus-free (throughpole+buffer), recharge named. **Honest floor:** η < 4.4×10⁻¹⁸ on record + recharge flagged OPEN (Law-II root). Outputs: `RUN_LOG.md`, `sar01_lesage_budget.cpp` (re-created clean), `SAR01_VERDICT.md`, `results.txt`, `KILL_READJUDICATION_REGISTER.md` entry.
+
 ---
 
 ## ⑩ Adaptive Execution Protocol
 
-> *It is a bad plan that cannot be altered.* Failures invoke **PIVOT / KILL / OPEN** — never RETRO-PASS or PLUG.
-> See `PROMPT_EXECUTION_PROTOCOL.md`.
-
-### Pre-Run Commitment Block (copy to `RUN_LOG.md` before coding)
-
 ```markdown
-## Pre-Run Commitments — SAR01
-- Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
-- CALIBRATED budget: [0 or list each param — max per §⑤]
-- Engine namespaces: law_I luminosity, SAR02 mode counting
-- Phase thresholds (committed before run): [commit per phase in RUN_LOG]
-- Forbidden retroactive changes: widen tolerances; plug targets; IDENTITY-PASS; local constant namespaces
+## Pre-Run Commitments — SAR01 (§K KILL-DEEPEN re-run)
+- Prompt completion target: [A|B|C]
+- Physics class hoped: [NATIVE|OPEN]
+- CALIBRATED budget: 0
+- Routes: A η-ceiling · B recharge(Law-II) · C buffer/terminus ledger
+- Re-run UNANCHORED: do NOT read the deleted verdict/results before committing the ceiling
+- No auto-agents (§K.4) — direct execution
+- Forbidden: absorption formula; f-as-efficiency; fabricated recharge; isotropic-re-radiation as a required axiom
 ```
 
-### Pivot table (minimum — extend for this investigation)
+| Trigger | PIVOT | If fails | Forbidden |
+|---------|-------|----------|-----------|
+| leakage > 4.4×10⁻¹⁸ | trace which step thermalises (root-1) | SDT heating problem — report it | hide the exceedance |
+| push needs a terminus | Le Sage death applies (root-1) | KILL the push mechanism | pretend a buffer is the sink |
+| recharge unknown | flag OPEN, cite Law-II root | ship OPEN honest | fabricate a refill |
+| a gate demands isotropic re-radiation | check §G contraband | kill the gate (root-4) | enforce the rival axiom |
 
-| Trigger | PIVOT (first) | If pivot fails | Forbidden |
-|---------|---------------|----------------|-----------|
-| Phase 0 sanity check fails | Fix units/engine refs; verify `laws.hpp` symbols | STOP — report blocker | Fit to target |
-| Native mechanism off > committed % | Alternative route in §④; document ADJ-### | **OPEN** or **KILL** hypothesis | RETRO-PASS |
-| `z ≥ 1` in closure formula | Weak-field break (CR10); piecewise or exponential | **OPEN** that regime | Ignore break |
-| Rivals match but SDT doesn't beat | Label **DEGENERATE** honestly | — | Claim Class A |
-| Upstream dependency missing (FLM10, etc.) | **DEFER** phase; cite dependency ID | — | Fake PASS |
-
-### Allowed adjustments
-
-- Finer numerics (mesh, ticks, bracket); phase splits (Na / Nb); filename fix via ADJ entry.
-- Alternative **native** routes already listed in §④ Strategy.
-
-### Disallowed adjustments
-
-- Post-hoc tolerance widening · coefficient plugs · `atomic::`/GM/G in Phase-1 native chain · Snell/reciprocity-only as Fermat PASS.
+**Disallowed:** the killed absorption formula · f-as-heat-efficiency · reading the deleted results pre-commit · fabricated recharge · rival-axiom kill gate.
 
 ---
 
-*SAR01 · upgraded 2026-06-27 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*
+## KILL-READJUDICATION outcome space (§K.5 — record in `KILL_READJUDICATION_REGISTER.md`)
+KILL-CONFIRMED (leakage real / terminus required — SDT heating problem, scope named) · ROOT-RELOCATED (recharge microphysics was the gap — returns OPEN with Law-II root flagged) · KILL-OVERTURNED (gate demanded isotropic re-radiation = contraband; occlusion is terminus-free, branch clean).
+
+---
+
+*SAR01 · §K KILL-DEEPEN re-run 2026-07-13 · prior artifacts deleted by design; absorption→redirection premise fixed; buffer/throughpole/terminus is the spine; f is a pressure ratio not an efficiency; recharge = Law-II release-rate root.*

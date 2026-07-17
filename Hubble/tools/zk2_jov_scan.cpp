@@ -1,3 +1,8 @@
+// ⚠ HUNTER GM-SWEEP (2026-07-06): CONTRABAND — FROZEN PENDING KINEMATIC RE-RUN.
+// z is seeded from raw GM_jup = 1.26687e17 (load-bearing celestial GM in an SDT chain;
+// violates the 2026-07-05 standing rule). Named repair: ϟ_jup = 4π²a³/(T²c²) from Io's
+// (a,T) = 1.40987 m → z = ϟ_jup/R. Sibling of zk2_jovian_integers.cpp — same
+// investigation (Hubble/data/13_Jovian_Integers.md), same unlicensed status until rerun.
 #define _USE_MATH_DEFINES
 #include <iostream>
 #include <cmath>

@@ -1,63 +1,45 @@
-# SAR03 — Verdict: Solar Luminosity from Convergence Recycling
+# SAR03 — Solar Luminosity from Convergence Recycling · VERDICT (§K rebuild)
 
-**Author:** J. C. Harvey, Melbourne. **Date:** 2026-07-03.
-**Tool:** `sar03_solar_luminosity.cpp` → `results.txt` (real stdout). Chains pre-registered in `RUN_LOG.md`; gate 20% (prompt's own); no exponent fishing.
+> **§K outcome: ROOT-RELOCATED → OPEN, with two live leads and one quantified null.**
+> **Prompt completion: B** · **Physics class: OPEN (leads named)** · **CALIBRATED: 0**
+> Executed 2026-07-12 by Fable **directly** (agent-run kill voided per
+> KILL_READJUDICATION_REGISTER.md #7; old results deleted pre-run; git preserves them).
 
-## Dual verdict
+## The original kill, root-sorted (§K.2)
 
-**Prompt completion: B** (every chain the prompt names was computed and graded; nothing invented).
-**Physics class: KILLED** (the prompt's derivation chain) / the framework question stays **OPEN**.
+The 2026-07-03 agent kill fired on a chain line Harvey's FARMER correction had already
+marked as a **transcription error** (full-throughput × z instead of occluded-fraction,
+×2.5×10⁴³). Root class: **PROMPT-DEFICIT + DEPENDENCY-MISSING** (the Law-II release-rate
+law), NOT claim-false. The claim — the Sun as convergence recycler — was never tested by
+the killed chain. The kill is dissolved as a verdict on the physics.
 
-## The numbers
+## What the deepened hunts earned (results.txt, RUN_LOG.md)
 
-| Chain (pre-registered) | L [W] | vs L_Sun = 3.828e26 W | Grade |
-|---|---|---|---|
-| C1: z_Sun·4πR²·P_conv·c (prompt "Derivation Chain") | 9.53e69 | ×2.5e43 | **KILLED** |
-| C2: C1 × f_transfer | 2.02e53 | ×5.3e26 | **KILLED** |
-| C3: πR²·F_CMB (CMB interception) | 4.76e12 | ×1.2e-14 | **KILLED** as source |
-| C4: 4πR²σT_eff⁴ | 3.84e26 | 1.004 | **IDENTITY** — excluded |
-| C5: r_domain = √(L/4πF_CMB) = 20,857 AU vs Oort ~20,000 AU | — | ratio 1.04 | CONSISTENT, but consumes L |
+1. **H1 LEAD — interior movement floor.** The un-tuned koppa rotation map (v_surf = c/k_Sun
+   extended inward) produces core-CLASS temperatures at interior radii: √(R/r) → 1.5×10⁷ K
+   at r/R≈0.5; hybrid → 1.9×10⁷ K at r/R≈0.25. Solid-rotor profile fails (reported).
+2. **H1 UNSCRIPTED FIND — the corona.** The surface movement floor is 7.7×10⁶ K — corona
+   class, three orders above the photosphere. Lead: *the koppa floor is the corona; the
+   photosphere is matter's radiative release riding on the medium's hotter movement floor.*
+   The coronal-heating anomaly (SM-unsolved) is the shape such a floor would produce.
+   → decidable successor: does c/k(r) track measured coronal T(r) with no new inputs?
+3. **H2 — the demanded alignment probability is now a number: p_align = 1.3×10⁻²⁵** per
+   core encounter (zero-fit, from L + census + footprint + thermal movement). Candidates
+   within 10×: Σf³, f_transfer·α⁴, 1/k⁹, α¹² — LEADS ONLY, each owed a mechanism. The SM's
+   weak-interaction bottleneck sits in the same 10⁻²⁵ class (comparison column) — the
+   grammar's alignment-search reading is quantitatively viable.
+4. **H3 — quantified NULL.** The 6-gear ±3 exponent space hits any target ~450 times within
+   an order: **the gear-arithmetic space is degenerate and can never by itself certify a
+   decomposition.** This is the look-elsewhere effect measured, and it hardens the
+   mechanism-required rule for every future gear claim (repo-wide moral).
+5. **H4** — r_domain = 20,857 AU, forward-checkable against Oort structure (open).
 
-Also flagged: the PROMPT's data table gives 4.77e7 W for the intercepted-CMB row — arithmetic
-error of ~10⁵ (correct: 4.76e12 W).
+## What remains owed
 
-## What this settles
+The **Law-II release-rate law** (cascade root RELAY ENERGY-COUPLING MICROPHYSICS): the
+mechanism selecting which movement is engaged (p_align's mechanism) and how engaged
+movement converts to the release ledger. H1's corona lead and H2's p_align number are the
+two handles the rate law must fit AT ONCE — that simultaneity is the next test's spine.
 
-1. **The prompt's convergence-recycling chain does not produce L_Sun.** Not by 20%, not by an
-   order of magnitude — by 43 orders (C1) or 27 orders (C2). The Sun radiates 8×10¹³ times more
-   than the CMB flux it intercepts (C3), so "recycling the ambient convergence flux" cannot be
-   the luminosity source under any linear reading of Law II.
-2. **The only place the budget closes is the Stefan–Boltzmann identity (C4)** — which is a
-   definition of T_eff, not a prediction. Diagnostic: the required radiating pressure
-   L/(4πR²c) = 0.210 Pa equals u(T_eff)/4 = 0.211 Pa. There is a 47-order gap down from P_conv
-   and a 14-order gap up from F_CMB, and no pre-registered SDT quantity spans either gap.
-3. **The one earned line: C5.** The pressure-domain radius (where solar flux falls to the CMB
-   floor) is 20,857 AU ≈ the Oort-cloud centreline (ratio 1.04). That is a real SDT-native
-   *scale* statement — but it takes L as an input; it says nothing about where L comes from.
-
-## §D — Seven questions (on the KILLED chains)
-
-1. **Why fail?** C1 multiplies the full Planck-scale convergence pressure P_conv (2.46e48 Pa)
-   by a macroscopic area — but P_conv is a Planck-cell quantity; applying it over 6e18 m² counts
-   each shell ~10⁴³ times. C3 fails oppositely: the ambient CMB flux is 14 orders too dilute.
-4. **Errored premise?** "The Sun re-radiates what it intercepts, scaled by z or f." Both scalings
-   are *pressure ratios*, not power-conversion efficiencies; the prompt chain has no dimensional
-   mechanism connecting interception to emission. (Same premise-class as SAR01 Ledger B —
-   pressure ratios misused as energy couplings.)
-5/6. **What freedom corrects it?** A per-nucleon release rate (Law II cascade applied to the
-   Sun's N_baryons ≈ 1.2e57 with the nuclear rearrangement energetics of NP17), i.e. luminosity
-   from *held-content release during fusion rearrangement*, not from ambient-flux recycling.
-   That is a native route but it is **unbuilt** — nothing in `law_II::` computes a release rate.
-7. **Cascade?** YES — runs to ground at the same root as SAR01: **the energy-coupling
-   microphysics of the relay (what converts held content to radiated power, and at what rate)
-   is not in the engine.** Law II names stars "convergence recyclers" but provides no rate law.
-
-**Recovery: PARTIAL** — premise error named (pressure ratio ≠ power efficiency), native route
-named (per-nucleon release rate via nuclear rearrangement), freedom not yet built. The Closure
-Principle applies: do not delete Law II's "recycler" language — derive its rate law or retire it
-explicitly at canon level (Harvey's call, not this cluster's).
-
-**earned:** clean 43/27/14-order kills; prompt table error caught; C5 Oort-scale consistency restated with honest input-labelling; σ_SB whitelist cross-check (a_rad·c/4, −0.0004%).
-**owed:** Law II rate law (release cascade → W per nucleon); C5 upgrade blocked until L is derivable.
-
-> **Prompt completion B · Physics class KILLED (prompt chain; framework question OPEN) · Recovery PARTIAL · Cascade root: Law II release-rate law unbuilt (shared with SAR01 energy-ledger root).**
+*Verdict recorded by Fable, 2026-07-12. Sources: PROMPT.md (§K deepened, ADJ-001),
+RUN_LOG.md, results.txt, sar03_v2_ledgers.cpp.*

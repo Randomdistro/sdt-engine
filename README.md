@@ -1,8 +1,8 @@
 # SDT Engine — Kinematic Observatory Pipeline
 ## Parameter-Free Orbital & Redshift Solvers (No G, No M)
 
-> **⟐ Dated correction note (2026-07-04).** This README is the May-2026 release document, kept as the
-> historical record. Three updates:
+> **⟐ Dated correction & currency note (2026-07-05).** This README is the May-2026 release document,
+> kept as the historical record. Updates:
 > 1. **Paths:** the `CQ##` scheme is retired — `Investigations/CQ18_Redshift_Decomposition/` is now
 >    `Investigations/07_Cosmology_and_Redshift/CR01_Redshift_Decomposition/` (tools renamed
 >    `cq18* → cr01*`). The living master index is `Investigations/INVESTIGATION_STACK.md`.
@@ -11,12 +11,46 @@
 >    the anisotropic line-of-sight and emission-half routes remain **OPEN**. The kinematic
 >    decomposition machinery (CR01) stands; the "tension dissolves" headline does not.
 > 3. **Benchmarks (canon repaired 2026-07-03):** honest headline **46/57 earned predictions passed
->    + 11 IDENTITY + 2 CALIBRATED · 0 genuine fail · 11 PENDING**
->    (`Benchmarks/B01_B25/benchmarks_b01_b25.cpp`).
+>    (80.7%) + 11 IDENTITY (shown, never tallied) + 2 CALIBRATED (documented) · 0 genuine fail ·
+>    11 PENDING** (`Benchmarks/B01_B25/benchmarks_b01_b25.cpp`; verified by live rebuild 2026-07-04).
+> 4. **State of the framework (July 2026, one paragraph).** The 2026-07-02 HUNTER scour found four
+>    fabricated closures (APS04 Lamb, PPT08A, PPT09, CR05); all are retracted on disk and the canon
+>    was repaired 2026-07-03 with the author's authorisation — the theory's own audit protocol caught
+>    its own worst results. Since then: the **two-channel architecture + Synchrony Theorem** (pulses
+>    relay at c; constraint through a gear-locked cluster is rigid structure, not a signal — so flat
+>    marginals / no-signalling is a *theorem*, and the locally readable gear phase is the sharpest
+>    falsifiable fork with QM on the books); **FLM13** compressed the whitelist ({ℏ, m_e, m_p} → one
+>    mass/action seat; eight inputs → four + the thermal seat; the seat's VALUE stays OPEN); **GOM14**
+>    (below) earned the mass-free koppa ontology at scale; and a ~30-investigation strike-force wave
+>    (quantum foundations, condensed matter, plasma, optics, chemistry) executed 2026-07-04/05 with
+>    zero fabrications and every FAIL pre-committed. Essentially every open number now queues behind
+>    one instrument: the rotating-lattice solver (ROOT-SIM / **FLM14**).
+> 5. **FLM14 program status (runs 1–4).** Run 1: gearing frustration 0.347 — rotation must be carried
+>    by defects; particles as structural necessity (NATIVE). Runs 2–3: the rule-form ladder died into
+>    the two-channel split; the constraint backbone percolates (85.5%); run 3's Born-adjacent
+>    exponents (+2.375/+2.325) were honestly UNCLAIMED (one β short of the pre-committed licence).
+>    Run 4 (the two-channel tour, completed 2026-07-05): **p_occ = +2.040 at β = 0.20** (split-half
+>    consistent) but **no stable regime by the committed rule** (the β = 0.40 upturn breaks the band;
+>    seed-2 unreached) — Born-adjacent, moved toward 2 by the two-channel architecture, **UNCLAIMED**.
+>    Nothing is graded until the licence is earned.
 >
 > The multi-planet self-calibration idea below has since been executed at scale and honestly earned:
 > see `Investigations/06_…/GOM14_Koppa_Density_Multiplanet_Consistency` (693 systems, median
 > intra-system deviation 5.9% vs 50.7% shuffled; solar anchor ϟ☉ = 1476.6 m).
+>
+> **Where to read (current to 2026-07-05):**
+> - `SDT_AND_THE_ENGINE_COMPLETE_GUIDE.md` — the verified long-form guide; **PART 0.5** is the dated
+>   state-of-framework snapshot (honest-numbers table: Part 16.2; the owed/cascade ledger: Part 18.5).
+> - `THE_CAUSAL_CHAIN_OF_SDT.md` — what rests on what; the July links are its new §7½.
+> - `Investigations/INVESTIGATION_STACK.md` — living master index and cascade ledger (§3b roots).
+> - `Investigations/HUNTER_PROTOCOL.md` — the audit law; **§G** audits the auditor.
+>   `Investigations/FARMER_PASS_2026-07-03.md` — the transcription-loss replant pass.
+> - Website tools (`Release/HTML_SDT_Website/`): `nuclear-packing-sequencer.html` (+
+>   `nuclear-packing-walkthrough.html`), `sdt_walkthrough.html`, and the `st_00`–`st_04`
+>   law-by-law scrollthroughs.
+>
+> Nothing in the July arc is committed to git; two canon decisions (NP12's radius formula;
+> `cosmology.hpp` t_coupled) are propose-and-wait pending the author.
 
 > **One observable. One constant. One closure condition.**  
 > `zk² = 1`  — where `z = v²/c²` and `k = c/v`
