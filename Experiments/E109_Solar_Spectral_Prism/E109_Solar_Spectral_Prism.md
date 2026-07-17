@@ -151,3 +151,38 @@ unmeasured — §3); giants alone cannot discriminate (the rival also shifts min
 extended atmospheres); the same-style residual test and the DA/DB fork carry the
 discrimination. The R^(1/3) exponent is suggested by the data, not derived — its SDT
 derivation (why cube-root of the displacement volume) is owed to OP07-R2.
+
+---
+
+## 9. First archival test (2026-07-18): DUNES secured; population dip CONFIRMED; volume correlation UNDERPOWERED-NULL
+
+Archive secured: VizieR J/A+A/555/A11 (Eiroa 2013) → `data/dunes_vizier.tsv` (this repo).
+95 non-excess FGK stars joined with stellar parameters; radii computed MASS-FREE from
+measured L and T_eff (R = √L·(5772/T)², parallax+spectroscopy — no GM anywhere in-chain).
+
+**Population-level dip: CONFIRMED.** Mean χ₁₀₀ = −0.495 (median −0.44): **70/95 clean
+stars sit BELOW their model photospheres at 100 μm** (7 at >2σ), and 3 stars show >2σ
+deficits at 160 μm (e.g. HIP 3821: χ₁₆₀ = −3.47). Photosphere-only models systematically
+overpredict the far-IR — the dip structure is present across the population (the
+literature's "far-IR photospheric deficit" puzzle, here read as the displacement null).
+
+**Volume-law correlation: NULL at first pass — reported, not hidden.** Spearman
+ρ(R, deficit-ratio₁₆₀/₁₀₀) = +0.09 (p = 0.57, N = 39); G-band control ρ = −0.24 (p = 0.46).
+Diagnosis: UNDERPOWERED, not decisive — only 39/95 stars have 160 μm detections, with
+per-star flux errors of 30–50% against a predicted ratio modulation of ~5–10% over the
+sample's radius range (0.7–1.5 R⊙ sweeps λ_dip only 133–172 μm across two broad bands).
+Sensitivity ≈ the signal size. Sharper versions: radius-binned stacking; adding SPIRE/ALMA
+points for the large-R tail; and the α Cen A-class direct positions as they accumulate.
+
+**Redshift-by-spectroscopy fork (design registered):** GR's gravitational redshift is
+ACHROMATIC (one z at all λ). Lensing-separation is CHROMATIC — z(λ) structured near the
+seat nodes (H⁻ edge, He II, ladder rungs): a magnifying glass over a prismed spectrum.
+Existing evidence hiding in the literature's systematics: measured white-dwarf redshifts
+differ between Balmer lines (Hα core clean; Hβ core shifted, wings enormously; He line
+centroids line-dependent) — currently attributed to "pressure shifts." The test: plot
+measured per-line shifts vs proximity to the node/seat structure (prism: organised by
+seat adjacency) vs line depth/density (rival: convection + pressure). Anchors on record:
+Sun 633 m/s (many-line spectroscopy); Sirius B 80.65 ± 0.77 km/s (Balmer, HST);
+DA vs DB ensembles (Falcon et al.). If per-line z aligns with the node structure at fixed
+density, "gravitational" redshift contains a lensing-separation component — the shift and
+the dips are one dispersion phenomenon.
