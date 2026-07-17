@@ -113,3 +113,41 @@ bands the eye calls empty).
 ---
 *E109 · J. C. Harvey · pre-registered 2026-07-18 · engine: sdt/laws.hpp · related:
 SAR03, SAR06, APS07, OP07-R2 (pending), Investigations/KILL_READJUDICATION_REGISTER.md*
+
+---
+
+## 8. Cross-stellar addendum (2026-07-18, same day): displacement is a volume phenomenon
+
+**Correction of principle (Harvey):** the nulls are displacement structure, and displacement
+is a VOLUME phenomenon — so stars of the same spectral style will have DIFFERENT dips.
+Hydrogen's ladder supplies the universal rail network (rungs everywhere, spacing ∝ n³);
+the star's displacement selects WHICH rung-pair the null sits between and where.
+
+**The observed record (positions band-limited, flagged):**
+
+| star | R (R⊙) | dip observed | λ_dip = 150 μm·(R/R⊙)^(1/3) | rung pair |
+|---|---|---|---|---|
+| Sun (G2V) | 1.00 | "near 150 μm" | 150.0 | H14α–H15α |
+| α Cen A (G2V) | 1.22 | near 160 μm (Herschel PACS; T_min/T_eff = 0.67±0.06, Liseau 2013) | **160.3** | H14α–H15α |
+| Betelgeuse (M2Iab) | ~900 | ALMA "probing very close to the temperature minimum" at ~1.3 mm; lukewarm ~2000 K chromosphere | **1448** (ratio 0.90) | **H30α–H31α** (H30α = 1.293 mm = ALMA band 6) |
+
+Two G2V stars — same style — differ by 6.7% in dip position; the volume law predicts 6.9%.
+Rung-number scaling: n_dip ∝ R^(1/9): Sun 14.5 → Betelgeuse predicted 30.9, observed band ≈ 30.
+Temperature-minimum evidence exists for ~2/3 of 133 FGK stars (Herschel 100/160 μm surveys).
+
+**PRE-REGISTERED λ_dip predictions (unmeasured):** DA white dwarf (0.01 R⊙): ~32 μm;
+M dwarf (0.3 R⊙): ~100 μm; Arcturus-class K giant (25 R⊙): ~440 μm; H-envelope neutron
+star: ~3.6 μm. **DB (helium-atmosphere) white dwarfs: the H-skeleton nodes ABSENT** —
+the DA/DB pair is the controlled experiment nature already built.
+
+**The clean statistical decidable (archival):** in the Herschel FGK sample at FIXED
+spectral type, the 100/160 μm colour (which encodes the dip position between the bands)
+must correlate with stellar radius as R^(1/3) under the displacement law; the layered
+rival predicts no residual radius correlation beyond T_eff/log g. Data exists
+(DEBRIS/DUNES); nobody has asked the question.
+
+**Honesty flags:** three anchor points, all band-limited (the Sun's own position is
+unmeasured — §3); giants alone cannot discriminate (the rival also shifts minima for
+extended atmospheres); the same-style residual test and the DA/DB fork carry the
+discrimination. The R^(1/3) exponent is suggested by the data, not derived — its SDT
+derivation (why cube-root of the displacement volume) is owed to OP07-R2.
