@@ -222,3 +222,33 @@ archival HARPS/IAG data. (3) White-dwarf per-line z (Sirius B Hα vs Hβ) — th
 s(λ) at 10⁵× solar depth. Cross-star: normalising by LINE z does not align dips
 (0.91 vs 1.07 between Sun and α Cen A) — two meters, one shell, read at different
 distances from resonance.
+
+---
+
+## 11. STRICT AUDIT (2026-07-18, Harvey standard: 0.8% pass, >2% catastrophic, no fitting)
+
+Full table: `data/dunes_koppa_table.txt` — 125 stars, mass-free chain (v_surf = √(gR) from
+spectroscopic g; k = c/v; ϟ = R/k²; C_ϟ = 2πϟ), NASA-archive planet crossmatch (31 hosts,
+58 planets; automated — rows α Cen A/B "2" and 55 Cnc "7" flagged suspicious, verify
+before use). One star excluded as internally inconsistent (HIP 73182: SpType K5V vs
+L = 0.027 L⊙), flagged not fudged.
+
+**Dip laws under the standard — BOTH FAIL:**
+- λ ∝ R^(1/3): α Cen A 0.2% (pass), Betelgeuse **11% — CATASTROPHIC**. Law rejected as stated.
+- λ ∝ ϟ (c-boundary): α Cen A **4.4%**, Betelgeuse **7.8% — both CATASTROPHIC**. Rejected.
+- Further: the anchor dip positions themselves are band-limited (±5–10%), so **no
+  cross-stellar law can currently pass a 0.8% test against them**. The cross-stellar
+  dip-position law is OPEN — §8's suggestive framing is downgraded accordingly. The
+  callout ("reaching") was correct.
+
+**Correlation sweep (Spearman, N=124):** T–L–R inter-correlations (+0.80 to +0.95) are
+main-sequence structure; v↔k (−1.00) and ϟ↔C_ϟ (+1.00) are construction identities.
+**n_planets correlates with NOTHING: all |ρ| ≤ 0.09, all p > 0.3**; host vs non-host
+medians indistinguishable on every koppa quantity (all p ≥ 0.34). Honest null: planet
+occurrence in this sample does not track k, ϟ, C_ϟ, v_surf, L, or T_eff.
+
+**Sub-0.8% survivors in the E109 arc (exact, unfitted):** the UV null geometric-mean
+retrodiction (0.03%); the He II/H⁻ ratio identity (10.022, exact arithmetic of measured
+constants); the zk²=1 chain (identity by construction, now tabulated for 124 stars).
+The SDT-A far-IR prediction (153.3 μm) remains a prediction — unmeasured, and the only
+class of claim the standard permits going forward: exact numbers awaiting resolved data.
