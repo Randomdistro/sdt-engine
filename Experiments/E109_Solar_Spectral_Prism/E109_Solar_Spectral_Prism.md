@@ -186,3 +186,39 @@ Sun 633 m/s (many-line spectroscopy); Sirius B 80.65 ± 0.77 km/s (Balmer, HST);
 DA vs DB ensembles (Falcon et al.). If per-line z aligns with the node structure at fixed
 density, "gravitational" redshift contains a lensing-separation component — the shift and
 the dips are one dispersion phenomenon.
+
+---
+
+## 10. The normalisation method (Harvey, 2026-07-18): the stretch function s(λ)
+
+**Protocol:** for each star, shift all spectral lines to match the hydrogen rest frame
+(Lyman + Balmer + Paschen/Brackett + the FIR rungs). To first order one multiplicative
+stretch aligns them (the classical z). The RESIDUAL per-line stretch after that baseline
+is the function s(λ) — and s(λ) IS the displacement shell's dispersion curve, measured
+directly from lines.
+
+**The structural finding (computed):** a single global stretch CANNOT align lines and
+dips — lines sit at the ppm level (Sun: 1+2.121×10⁻⁶; α Cen A: 1+1.934×10⁻⁶, mass-free
+from spectroscopic g × interferometric R) while dip positions differ at the % level
+(×1.070 between the same two stars). Five orders apart ⇒ **s must be λ-dependent**:
+flat ppm baseline far from seats (the thing history named "gravitational redshift"),
+rising toward %-class excursions near the seat nodes (anomalous-dispersion wings; the
+magnifying glass over the prismed spectrum). The dips align not under one number but
+under each star's own s(λ) — the nulls sit where s(λ) diverges.
+
+**Why hydrogen normalisation is the perfect probe:** the H series ladder right through
+all three nodes — Lyman flanks the UV null, Paschen/Brackett flank the H⁻ caustic,
+the n=14/15 rungs flank the FIR null. Normalising on hydrogen reads the shell at
+exactly the places the dips live.
+
+**Executable with existing data:** (1) IAG solar FTS atlas — per-line absolute
+convective shifts, thousands of lines, m/s precision: test whether residual shifts
+organise by SEAT PROXIMITY at fixed line depth (shell) or by line depth at fixed λ
+(convection — the rival's confound, separable in large samples). (2) The solar LIMB
+EFFECT (centre-to-limb line-shift variation, ~600 m/s swing, currently "granulation
+geometry"): the shell predicts the limb-effect amplitude grows with path length AND
+toward seat edges — the λ-dependence of the limb effect is an unasked question in
+archival HARPS/IAG data. (3) White-dwarf per-line z (Sirius B Hα vs Hβ) — the same
+s(λ) at 10⁵× solar depth. Cross-star: normalising by LINE z does not align dips
+(0.91 vs 1.07 between Sun and α Cen A) — two meters, one shell, read at different
+distances from resonance.
