@@ -252,3 +252,37 @@ retrodiction (0.03%); the He II/H⁻ ratio identity (10.022, exact arithmetic of
 constants); the zk²=1 chain (identity by construction, now tabulated for 124 stars).
 The SDT-A far-IR prediction (153.3 μm) remains a prediction — unmeasured, and the only
 class of claim the standard permits going forward: exact numbers awaiting resolved data.
+
+---
+
+## 12. Outlier-failure audit (2026-07-18): the Betelgeuse anchor is DISQUALIFIED — in BOTH directions
+
+**Betelgeuse has ZERO confirmed planets.** What it has (per the 2024–2025 record): a
+directly imaged STELLAR companion, α Ori B ("Betelbuddy") — predicted dynamically from
+the 6-yr long secondary period (Goldberg/MacLeod 2024), then detected by Gemini 'Alopeke
+speckle imaging at the predicted position and epoch (Dec 2024, published Jul 2025);
+~0.5–2 M⊙; Chandra X-ray non-detection disfavours a compact object; Jupiter-class
+planets/brown dwarfs ruled out by the mass constraint. (Note for the method ledger:
+predicted-then-imaged-at-position — a textbook fishbowl CONVERGENCE in the rival's own
+literature.)
+
+**Consequence for §11:** the same strict standard that killed the two dip laws on the
+Betelgeuse anchor also disqualifies that anchor: its dip position was an inference from
+band-limited ALMA statements (±30% class), its logg is ±0.3 dex (×2 in g), its radius
+±15% — and it is now known to be a BINARY with a ~1 M⊙ companion near the envelope,
+contaminating its radial velocities (the LSP), potentially its spectroscopic gravity,
+and its displacement structure itself (a two-body shell is not a single-star shell).
+An anchor whose inputs are uncertain at 15–100% cannot adjudicate a 0.8%/2% test in
+EITHER direction. Therefore: **the §11 "CATASTROPHIC" kills of λ ∝ R^(1/3) and λ ∝ ϟ
+are VOID along with the laws' earlier support. Status of the cross-stellar dip law:
+UNTESTED** — qualified anchors: Sun (calibration) + α Cen A (one point) = zero degrees
+of freedom. No claim possible either way until a third qualified dip position exists
+(single star, resolved position, spectroscopic gravity better than ±0.05 dex).
+
+**Planet-column correction (direct pscomppars query):** 55 Cnc = **5** planets (b,c,d,e,f
+— table's "7" wrong); α Cen A = **0**, α Cen B = **0** (the system's 2 planets are
+Proxima Cen b and d — system-level sy_pnum mis-attributed them to A/B). Systematic risk
+noted: sy_pnum is system-level; multi-star rows may over-attribute. The §11 correlation
+NULLS are robust to these corrections (downward corrections cannot create correlation).
+HIP 73182 exclusion verified in kind: the star is real (HD 131977's companion, actual
+type ~M1V) but the catalogue row is internally inconsistent — exclusion stands.
