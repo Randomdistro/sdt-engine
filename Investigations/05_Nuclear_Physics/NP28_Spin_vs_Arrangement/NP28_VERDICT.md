@@ -55,3 +55,27 @@ SDT positional moment formula OWED · Recovery: mechanism named (handed-circulat
 cancellation), number unrun.** Harvey's thesis: not refuted, and now with the rival's
 own model failing on its own turf — but won only as "spin insufficient," not yet
 "arrangement predicts."
+
+---
+
+## BUILD-AND-RUN-BLIND result (2026-07-19) — HONEST NEGATIVE
+
+Built the arrangement moment model from committed rules (grammar decomposition +
+opposition-shell packing positions + free sub-unit moments along body-axes), ZERO
+nuclear-moment input. Ran blind vs 16 nuclei. **Result: correlation(|meas|,|pred|)
+= −0.40 — FAIL.** Pb-207 (cleanest single-hole case, meas 0.59) predicted 3.55 (×6 off).
+
+**Diagnosis (the value of the negative):** the gap is NOT positions — it is
+ORIENTATIONS. The packing supplies where sub-units sit (all mass-splitting needs);
+a moment is an orientation quantity, and the grammar has NO handedness-alignment law.
+The only defined orientation rule ("unpaired unit → j, rest cancel") collapses to
+Schmidt. So: SDT cannot predict nuclear moments blind beyond the single-particle
+Schmidt floor (0.12 μN blind, real). The collective quench needs either a FITTED 0.6
+(refused — construct-to-match) or a DERIVED handedness-alignment law (does not exist).
+
+**Standing on the spin question:** intrinsic-spin sufficiency remains FALSIFIED (Schmidt
+fails collective); spin-as-bookkeeping remains CONSISTENT-WITH; but SDT has NOT converted
+it to a blind win. The owed object is now named precisely: a handedness-ALIGNMENT law
+(not a packing) that fixes sub-unit circulation orientations from the arrangement. Until
+that exists, both frameworks predict single-particle blind and neither predicts the
+quench blind. Level, both floored at Schmidt.
