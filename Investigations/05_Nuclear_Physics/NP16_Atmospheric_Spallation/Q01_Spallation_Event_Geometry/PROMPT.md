@@ -80,9 +80,11 @@ The description must cover:
    projectile relative to the target's internal circulation speeds?
 
 5. **Neutron ejection**: The actual moment of neutron release. The neutron
-   is NOT a fundamental particle in SDT — it is a neutron (W=3 torus,
-   uncharged, metastable). When a neutron is "ejected", what happens
-   geometrically?
+   is NOT a fundamental particle in SDT — it is a proton (W=3 torus) with
+   an internal electron (NP17/SCT canon; uncharged as a pair, metastable
+   when free — an exposed triton remnant). [Sentence corrected 2026-07-19;
+   the file previously read "it is a neutron", circular.] When a neutron
+   is "ejected", what happens geometrically?
    - Does a triton block lose its connecting neutron?
    - Does a deuteron block lose its only neutron, leaving a bare proton?
    - Does the ejection break a scaffold bond?

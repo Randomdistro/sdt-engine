@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ATOMICUS — Fission Impact Map</title>
+<style>
+:root{--paper:#f2ede4;--paper2:#faf7f1;--edge:#e2d9c9;--ink:#1c1a16;--ink2:#3a352d;--ink3:#7b7266;
+--copper:#b07430;--steel:#4a6d82;--mint:#3f8f6f;--rose:#c0503a;--gold:#c9a227;--peel:#c0503a;--keep:#c9a227;}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:13.5px/1.5 'Segoe UI',system-ui,sans-serif;
+display:grid;grid-template-columns:250px 1fr 300px;height:100vh;overflow:hidden;user-select:none;-webkit-user-select:none}
+@media(max-width:1080px){body{grid-template-columns:1fr;height:auto;overflow:auto}}
+.pane{overflow-y:auto;padding:12px}
+#left{background:var(--paper2);border-right:1px solid var(--edge)}
+#right{background:var(--paper2);border-left:1px solid var(--edge)}
+#mid{padding:0;position:relative;overflow:hidden;background:linear-gradient(#faf8f4,#ece5d8)}
+h1{font:600 14px/1.2 'Segoe UI'}h1 small{display:block;font:400 10px/1.4;color:var(--ink3);margin-top:2px}
+h2{font:600 9.5px/1 'Segoe UI';text-transform:uppercase;letter-spacing:.1em;color:var(--copper);
+margin:15px 0 6px;padding-bottom:3px;border-bottom:1px solid var(--edge)}
+h2:first-of-type{margin-top:6px}
+.row{display:flex;justify-content:space-between;padding:2.5px 0;font-size:11.5px;border-bottom:1px solid rgba(226,217,201,.6)}
+.row .l{color:var(--ink3)}.row .v{font:600 11.5px ui-monospace,monospace}
+.btn{padding:5px 8px;border:1px solid var(--edge);background:#fff;color:var(--ink2);border-radius:4px;cursor:pointer;font-size:11px}
+.btn:hover{border-color:var(--copper);color:var(--copper)}.btn.on{background:var(--copper);color:#fff;border-color:var(--copper)}
+select{width:100%;padding:5px;border:1px solid var(--edge);border-radius:4px;background:#fff;font-size:12px}
+.chip{display:inline-block;padding:2px 7px;border-radius:10px;font-size:9.5px;font-weight:600;margin:2px 3px 2px 0}
+.peelc{background:rgba(192,80,58,.15);color:var(--peel)}.keepc{background:rgba(201,162,39,.2);color:#846a10}
+.info{background:rgba(74,109,130,.13);color:var(--steel)}
+.note{font-size:10px;line-height:1.55;color:var(--ink3);margin-top:6px}.note b{color:var(--ink2)}
+#hud{position:absolute;top:0;left:0;right:0;padding:11px 15px;pointer-events:none;display:flex;justify-content:space-between}
+#title{font:700 26px/1 ui-monospace,monospace}#sub{font-size:11px;color:var(--ink3);margin-top:2px}
+#tip{position:absolute;pointer-events:none;background:rgba(28,26,22,.92);color:#f4efe6;padding:5px 9px;
+border-radius:5px;font:11px ui-monospace;display:none;z-index:5;white-space:nowrap}#tip b{color:var(--gold)}
+#foot{position:absolute;bottom:0;left:0;right:0;padding:8px 15px;font-size:10px;color:var(--ink3);
+display:flex;justify-content:space-between;pointer-events:none}
+canvas{display:block;cursor:grab}canvas:active{cursor:grabbing}
+.legend{display:flex;gap:5px;align-items:center;font-size:10.5px;margin:3px 0}
+.dot{width:11px;height:11px;border-radius:50%;flex:none}
+.warn{background:rgba(201,162,39,.12);border:1px solid rgba(201,162,39,.4);border-radius:5px;padding:7px 9px;font-size:10px;line-height:1.5;color:#6a560d;margin-top:8px}
+</style></head><body>
+
+<div class="pane" id="left">
+  <h1>ATOMICUS · Fission Impact Map
+    <small>²³⁵U in opposition-shell packing · where the proton must strike</small></h1>
+
+  <h2>Produce this larger daughter</h2>
+  <select id="target"></select>
+  <div class="note">Ranked by real IAEA thermal-fission yield. The tool orients the cut to leave this
+    fragment intact and marks where the light piece must be peeled off.</div>
+
+  <h2>Show</h2>
+  <div style="display:flex;gap:4px;flex-wrap:wrap">
+    <button class="btn on" id="vImpact">Impact zone</button>
+    <button class="btn on" id="vNames">Names</button>
+    <button class="btn" id="vPlane">Cut plane</button>
+    <button class="btn" id="vSpin">Spin</button>
+  </div>
+  <div class="legend"><span class="dot" style="background:#c9a227"></span> heavy daughter — retained (snaps closed)</div>
+  <div class="legend"><span class="dot" style="background:#c0503a"></span> light fragment — peeled away</div>
+  <div class="legend"><span class="dot" style="background:#4a6d82"></span> impact zone — proton entry</div>
+
+  <div class="warn"><b>Honesty:</b> subunit <b>counts</b> are exact (α + n_d deuterons + n_t tritons).
+    The opposition-shell <b>positions</b> are the model's assignment (Harvey 2026-07-03), not proven unique.
+    The cut's absolute <b>orientation</b> is free — what is rigid is the <b>triton partition</b>
+    (heavy daughter locks near n_t = 31–32, the N = 82 shell), shown live below.</div>
+</div>
+
+<div class="pane" id="mid">
+  <canvas id="cv"></canvas>
+  <div id="hud"><div><div id="title">²³⁵U</div><div id="sub"></div></div><div id="chips" style="text-align:right"></div></div>
+  <div id="tip"></div>
+  <div id="foot"><span id="fL"></span><span id="fR">drag orbit · wheel zoom · hover a nucleon</span></div>
+</div>
+
+<div class="pane" id="right">
+  <h2>Parent</h2>
+  <div class="row"><span class="l">²³⁵U + n → ²³⁶U*</span><span class="v">Z=92 A=236</span></div>
+  <div class="row"><span class="l">α core + n_d d + n_t t</span><span class="v" id="pGram">—</span></div>
+  <div class="row"><span class="l">subunits placed</span><span class="v" id="pSub">—</span></div>
+
+  <h2>Heavy daughter — retained</h2>
+  <div class="row"><span class="l">nuclide</span><span class="v" id="hName">—</span></div>
+  <div class="row"><span class="l">Z / N / A</span><span class="v" id="hZNA">—</span></div>
+  <div class="row"><span class="l">n_d / <b>n_t</b></span><span class="v" id="hG">—</span></div>
+  <div class="row"><span class="l">N = 82 shell lock?</span><span class="v" id="hLock">—</span></div>
+
+  <h2>Light fragment — peeled</h2>
+  <div class="row"><span class="l">nuclide</span><span class="v" id="lName">—</span></div>
+  <div class="row"><span class="l">Z / N / A</span><span class="v" id="lZNA">—</span></div>
+  <div class="row"><span class="l">n_d / n_t</span><span class="v" id="lG">—</span></div>
+
+  <h2>The impact</h2>
+  <div class="row"><span class="l">nucleons in impact zone</span><span class="v" id="iN">—</span></div>
+  <div class="row"><span class="l">balance A_L+A_H+ν</span><span class="v" id="iBal">—</span></div>
+  <div id="verdict" class="note"></div>
+</div>
+
+<script src="nucdata.js"></script>
+<script>
+const el=id=>document.getElementById(id);
+const IDX=new Map(); (typeof NUC!=='undefined'?NUC:[]).forEach(r=>IDX.set(r[0]+','+r[1],r));
+const SYMB=(typeof SYM!=='undefined')?SYM:[];
+const nm=(Z,A)=>((SYMB[Z]||'Z'+Z)+'-'+A);
+
+/* ═══ opposition-shell packing — ported from nuclear-packing-sequencer.html ═══ */
+const PHI=(1+Math.sqrt(5))/2, KSUB=1.5, KINTRA=0.65, dnn=1.45*0.8414, coulSpread=0.30;
+function vnorm(v){const l=Math.hypot(v[0],v[1],v[2])||1;return[v[0]/l,v[1]/l,v[2]/l];}
+function shellDirs(m){
+  const V={1:[[0,0,1]],2:[[0,0,1],[0,0,-1]],3:[[1,0,0],[-.5,.8660254,0],[-.5,-.8660254,0]],
+    4:[[1,1,1],[1,-1,-1],[-1,1,-1],[-1,-1,1]],5:[[0,0,1],[0,0,-1],[1,0,0],[-.5,.8660254,0],[-.5,-.8660254,0]],
+    6:[[1,0,0],[-1,0,0],[0,1,0],[0,-1,0],[0,0,1],[0,0,-1]],
+    12:[[0,1,PHI],[0,-1,PHI],[0,1,-PHI],[0,-1,-PHI],[1,PHI,0],[-1,PHI,0],[1,-PHI,0],[-1,-PHI,0],[PHI,0,1],[-PHI,0,1],[PHI,0,-1],[-PHI,0,-1]]};
+  if(V[m]) return V[m].map(vnorm);
+  const out=[]; for(let i=0;i<m;i++){const zz=1-(2*i+1)/m,r=Math.sqrt(Math.max(0,1-zz*zz)),th=2*Math.PI*i/(PHI*PHI);
+    out.push([r*Math.cos(th),r*Math.sin(th),zz]);} return out;
+}
+function packNucleus(A,Z){
+  const nd=3*Z-A-2, nt=A-2*Z;
+  const kinds=['alpha']; for(let s=0;s<nd;s++)kinds.push('deuteron'); for(let s=0;s<nt;s++)kinds.push('triton');
+  const spread=1+coulSpread*(Z*Z)/Math.pow(A,4/3), Dsub=dnn*spread*KSUB;
+  const C=[[0,0,0]]; let rem=kinds.length-1, shell=0;
+  while(rem>0){const cap=(shell===0)?12:12+8*shell, m=Math.min(rem,cap), rad=Dsub*(1+0.9*shell);
+    shellDirs(m).forEach(v=>C.push([v[0]*rad,v[1]*rad,v[2]*rad])); rem-=m; shell++;}
+  const iR=dnn*KINTRA, nuc=[]; let di=0,ti=0;
+  kinds.forEach((kind,si)=>{
+    const c=C[si], add=(v,r)=>[c[0]+v[0]*r,c[1]+v[1]*r,c[2]+v[2]*r];
+    if(kind==='alpha'){
+      const tv=[[1,1,1],[1,-1,-1],[-1,1,-1],[-1,-1,1]].map(vnorm), ty=['p','n','p','n'];
+      tv.forEach((v,k)=>nuc.push({pos:add(v,iR),type:ty[k],group:'α',sub:0,si,name:'α·'+ty[k]}));
+    }else if(kind==='deuteron'){
+      const th=si*2.399963, ax=vnorm([Math.cos(th),Math.sin(th)*0.8,Math.sin(th*1.7)]);
+      nuc.push({pos:add(ax,iR),type:'p',group:'d',sub:di,si,name:'d'+(di+1)+'·p'});
+      nuc.push({pos:add(ax,-iR),type:'n',group:'d',sub:di,si,name:'d'+(di+1)+'·n'}); di++;
+    }else{
+      const th=si*2.399963, e1=vnorm([Math.cos(th),0,Math.sin(th)]), e2=vnorm([Math.sin(th)*.3,1,Math.cos(th)*.3]);
+      const tri=[[0,1],[.866,-.5],[-.866,-.5]], ty=['p','n','n'];
+      tri.forEach((uv,k)=>{const v=vnorm([e1[0]*uv[0]+e2[0]*uv[1],e1[1]*uv[0]+e2[1]*uv[1],e1[2]*uv[0]+e2[2]*uv[1]]);
+        nuc.push({pos:add(v,iR),type:ty[k],group:'t',sub:ti,si,name:'t'+(ti+1)+'·'+ty[k]});}); ti++;
+    }
+  });
+  return {nuc, nSub:kinds.length};
+}
+
+/* ═══ parent = 236U* (235U + n); pack it ═══ */
+const PZ=92, PA=236;
+const {nuc:NUCL, nSub} = packNucleus(PA,PZ);
+el('pGram').textContent='α + '+(3*PZ-PA-2)+'d + '+(PA-2*PZ)+'t';
+el('pSub').textContent=nSub+'  ('+NUCL.length+' nucleons)';
+
+/* ═══ cleave: find the plane whose light side best matches target (Z_L,A_L) ═══ */
+function fibDirs(n){const out=[];for(let i=0;i<n;i++){const z=1-(2*i+1)/n,r=Math.sqrt(Math.max(0,1-z*z)),t=2*Math.PI*i/(PHI*PHI);out.push([r*Math.cos(t),r*Math.sin(t),z]);}return out;}
+const DIRS=fibDirs(240);
+function bestCleave(ZL,AL){
+  let best=null;
+  for(const d of DIRS){
+    const proj=NUCL.map(n=>({n,s:n.pos[0]*d[0]+n.pos[1]*d[1]+n.pos[2]*d[2]}));
+    proj.sort((a,b)=>b.s-a.s);          // peel from the +d surface inward
+    // accumulate outermost nucleons until we reach AL nucleons
+    let A=0,Z=0,cut=0;
+    for(let i=0;i<proj.length;i++){A++; if(proj[i].n.type==='p')Z++; if(A>=AL){cut=i+1;break;}}
+    const err=Math.abs(A-AL)*2+Math.abs(Z-ZL)*3;
+    const set=new Set(proj.slice(0,cut).map(p=>p.n));
+    if(!best||err<best.err) best={err,dir:d,set,A,Z,thresh:proj[cut-1].s};
+  }
+  return best;
+}
+
+/* ═══ target daughters (real high-yield heavy fragments) ═══ */
+const HEAVY=[[56,144,'Ba-144'],[54,138,'Xe-138'],[54,139,'Xe-139'],[52,134,'Te-134'],[54,140,'Xe-140'],
+[56,143,'Ba-143'],[55,141,'Cs-141'],[56,142,'Ba-142'],[53,137,'I-137'],[50,132,'Sn-132 (double-magic)']];
+const tgt=el('target');
+HEAVY.forEach((h,i)=>{const o=document.createElement('option');o.value=i;
+  const y=IDX.get(h[0]+','+h[1]); o.textContent=h[2]; tgt.appendChild(o);});
+let cur=null;
+function selectTarget(i){
+  const [ZH,AH]=HEAVY[i]; const NU=2;                 // prompt neutrons (ν̄≈2.4)
+  const ZL=PZ-ZH, AL=PA-AH-NU;
+  cur={ZH,AH,ZL,AL,NU, cleave:bestCleave(ZL,AL)};
+  render();
+}
+
+/* ═══ 3D view ═══ */
+const cv=el('cv'),cx=cv.getContext('2d');
+let yaw=-0.6,pitch=0.5,zoom=1,W=0,H=0,spin=false,showImpact=true,showNames=true,showPlane=false;
+function fit(){const r=el('mid').getBoundingClientRect(),dp=Math.min(devicePixelRatio,2);
+  W=r.width;H=r.height||520;cv.width=W*dp;cv.height=H*dp;cv.style.width=W+'px';cv.style.height=H+'px';cx.setTransform(dp,0,0,dp,0,0);}
+function proj(p){
+  const cyw=Math.cos(yaw),syw=Math.sin(yaw),cp=Math.cos(pitch),sp=Math.sin(pitch);
+  const x=p[0]*cyw-p[1]*syw,y=p[0]*syw+p[1]*cyw,z=p[2];
+  const y2=y*cp-z*sp,dep=y*sp+z*cp,S=Math.min(W,H)*0.30*zoom/6.5;
+  return{x:W/2+x*S,y:H/2-y2*S,d:dep,S};
+}
+const COL={p:'#c0503a',n:'#4a6d82'};
+function shadeDark(c){const n=parseInt(c.slice(1),16);return'#'+[16,8,0].map(s=>Math.max(0,((n>>s)&255)-70).toString(16).padStart(2,'0')).join('');}
+let hoverN=null;
+function draw(){
+  fit();cx.clearRect(0,0,W,H);
+  if(!cur)return;
+  const items=NUCL.map(n=>{const pr=proj(n.pos);
+    const peeled=cur.cleave.set.has(n);
+    const onSurf=peeled && isSurface(n);
+    return{n,pr,peeled,onSurf};});
+  items.sort((a,b)=>a.pr.d-b.pr.d);
+  // cut plane
+  if(showPlane){
+    const d=cur.cleave.dir, th=cur.cleave.thresh;
+    const up=Math.abs(d[1])>.9?[1,0,0]:[0,1,0];
+    const u=vnorm([up[1]*d[2]-up[2]*d[1],up[2]*d[0]-up[0]*d[2],up[0]*d[1]-up[1]*d[0]]);
+    const v=[d[1]*u[2]-d[2]*u[1],d[2]*u[0]-d[0]*u[2],d[0]*u[1]-d[1]*u[0]];
+    cx.beginPath();
+    for(let a=0;a<=32;a++){const t=a/32*2*Math.PI,R=4.6;
+      const pt=[d[0]*th+ (u[0]*Math.cos(t)+v[0]*Math.sin(t))*R, d[1]*th+(u[1]*Math.cos(t)+v[1]*Math.sin(t))*R, d[2]*th+(u[2]*Math.cos(t)+v[2]*Math.sin(t))*R];
+      const pr=proj(pt); a?cx.lineTo(pr.x,pr.y):cx.moveTo(pr.x,pr.y);}
+    cx.closePath();cx.fillStyle='rgba(74,109,130,.10)';cx.fill();cx.strokeStyle='rgba(74,109,130,.5)';cx.lineWidth=1;cx.stroke();
+  }
+  const d0=items[0].pr.d, ds=(items[items.length-1].pr.d-d0)||1;
+  for(const it of items){
+    const dim=0.5+0.5*((it.pr.d-d0)/ds), R=it.pr.S*0.34;
+    let col = it.peeled? '#c0503a' : '#c9a227';
+    if(it.n.group==='α') col=it.peeled?'#c0503a':'#b8901f';
+    // base ball
+    const g=cx.createRadialGradient(it.pr.x-R*.35,it.pr.y-R*.4,R*.1,it.pr.x,it.pr.y,R);
+    g.addColorStop(0,'#fff');g.addColorStop(.3,col);g.addColorStop(1,shadeDark(col));
+    cx.globalAlpha=it.peeled?0.92:0.82;cx.beginPath();cx.arc(it.pr.x,it.pr.y,R,0,7);cx.fillStyle=g;cx.fill();
+    cx.strokeStyle=(it.n===hoverN)?'#1c1a16':'rgba(0,0,0,.2)';cx.lineWidth=(it.n===hoverN)?2:.7;cx.stroke();cx.globalAlpha=1;
+    // impact-zone ring + arrow
+    if(showImpact && it.onSurf){
+      cx.beginPath();cx.arc(it.pr.x,it.pr.y,R+3,0,7);cx.strokeStyle='#4a6d82';cx.lineWidth=2;cx.stroke();
+    }
+    if(showNames && it.pr.S*zoom>0 && (it.n===hoverN)){}
+  }
+  // impact arrows along beam dir toward the light cap
+  if(showImpact){
+    const d=cur.cleave.dir;
+    const surf=NUCL.filter(n=>cur.cleave.set.has(n)&&isSurface(n));
+    surf.sort((a,b)=>(b.pos[0]*d[0]+b.pos[1]*d[1]+b.pos[2]*d[2])-(a.pos[0]*d[0]+a.pos[1]*d[1]+a.pos[2]*d[2]));
+    surf.slice(0,7).forEach(n=>{
+      const tail=[n.pos[0]+d[0]*3.4,n.pos[1]+d[1]*3.4,n.pos[2]+d[2]*3.4];
+      const a=proj(tail), b=proj([n.pos[0]+d[0]*0.6,n.pos[1]+d[1]*0.6,n.pos[2]+d[2]*0.6]);
+      cx.strokeStyle='#2f5064';cx.lineWidth=2.2;cx.beginPath();cx.moveTo(a.x,a.y);cx.lineTo(b.x,b.y);cx.stroke();
+      const ang=Math.atan2(b.y-a.y,b.x-a.x);
+      cx.beginPath();cx.moveTo(b.x,b.y);cx.lineTo(b.x-9*Math.cos(ang-.4),b.y-9*Math.sin(ang-.4));
+      cx.lineTo(b.x-9*Math.cos(ang+.4),b.y-9*Math.sin(ang+.4));cx.closePath();cx.fillStyle='#2f5064';cx.fill();
+    });
+  }
+  if(showNames && hoverN){const pr=proj(hoverN.pos);
+    cx.fillStyle='#1c1a16';cx.font='600 12px ui-monospace';cx.textAlign='center';
+    cx.fillText(hoverN.name,pr.x,pr.y-proj(hoverN.pos).S*0.34-6);cx.textAlign='left';}
+}
+// surface test: a nucleon with few neighbours within 1.6*dnn on the outward side
+let _surfCache=new Map();
+function isSurface(n){
+  if(_surfCache.has(n))return _surfCache.get(n);
+  const r=n.pos, R2=Math.hypot(r[0],r[1],r[2]);
+  let out=0,tot=0;
+  for(const m of NUCL){if(m===n)continue;const dx=m.pos[0]-r[0],dy=m.pos[1]-r[1],dz=m.pos[2]-r[2];
+    const dd=dx*dx+dy*dy+dz*dz; if(dd<(1.7*dnn)*(1.7*dnn)){tot++; if(Math.hypot(m.pos[0],m.pos[1],m.pos[2])>R2)out++;}}
+  const s = out<=1 && R2>2.0;   // little material further out
+  _surfCache.set(n,s);return s;
+}
+
+/* ═══ render readouts ═══ */
+function render(){
+  if(!cur)return;
+  const c=cur.cleave, ZL=c.Z, AL=c.A, ZH=PZ-ZL, AH=PA-AL-cur.NU;
+  const ndH=3*ZH-AH-2, ntH=AH-2*ZH, ndL=3*ZL-AL-2, ntL=AL-2*ZL;
+  el('title').textContent='²³⁶U*  →  '+nm(ZH,AH)+'  +  '+nm(ZL,AL)+'  + '+cur.NU+'n';
+  el('sub').textContent='peel the light fragment (red); the larger daughter (gold) snaps closed';
+  el('chips').innerHTML='<span class="chip keepc">keep '+nm(ZH,AH)+'</span><span class="chip peelc">peel '+nm(ZL,AL)+'</span>';
+  el('hName').textContent=nm(ZH,AH); el('hZNA').textContent=ZH+' / '+(AH-ZH)+' / '+AH;
+  el('hG').textContent=ndH+' / '+ntH+' t';
+  const lock=(AH-ZH===82)||(ZH===50)||(ntH>=31&&ntH<=32);
+  el('hLock').innerHTML=lock?'<span class="chip keepc">N='+(AH-ZH)+' — LOCKED</span>':'N='+(AH-ZH);
+  el('lName').textContent=nm(ZL,AL); el('lZNA').textContent=ZL+' / '+(AL-ZL)+' / '+AL;
+  el('lG').textContent=ndL+' / '+ntL+' t';
+  const iz=NUCL.filter(n=>c.set.has(n)&&isSurface(n)).length;
+  el('iN').textContent=iz+' surface nucleons';
+  el('iBal').textContent=AL+' + '+AH+' + '+cur.NU+' = '+(AL+AH+cur.NU)+(AL+AH+cur.NU===PA?' ✓':' ✗');
+  el('fL').textContent='cut error '+c.err+' · peeled '+c.A+' nucleons ('+c.Z+'p) · '+iz+' in impact zone';
+  el('verdict').innerHTML='To leave <b>'+nm(ZH,AH)+'</b> intact, the proton must strike the <b>red cap</b> '
+    +'— the deuteron-rich light lobe furthest from the rigid N='+(AH-ZH)+' triton core. '
+    +(lock?'This daughter sits on the <b>N=82 shell lock</b>: the tightest, most-repeated cut in the whole spectrum.':'')
+    +' The triton count of the daughter (n_t='+ntH+') is the quantity fission holds rigid (NP25-Y).';
+  draw();
+}
+
+/* ═══ interaction ═══ */
+let drag=false,lx=0,ly=0;
+cv.addEventListener('mousedown',e=>{drag=true;lx=e.clientX;ly=e.clientY;});
+addEventListener('mouseup',()=>drag=false);
+addEventListener('mousemove',e=>{
+  if(drag){yaw+=(e.clientX-lx)*.008;pitch=Math.max(-1.4,Math.min(1.4,pitch+(e.clientY-ly)*.008));lx=e.clientX;ly=e.clientY;draw();return;}
+  const r=cv.getBoundingClientRect(),mx=e.clientX-r.left,my=e.clientY-r.top;let best=null,bd=16;
+  for(const n of NUCL){const pr=proj(n.pos);const dd=Math.hypot(pr.x-mx,pr.y-my);if(dd<bd){bd=dd;best=n;}}
+  const tip=el('tip');
+  if(best!==hoverN){hoverN=best;draw();}
+  if(best){tip.style.display='block';tip.style.left=(mx+14)+'px';tip.style.top=(my+12)+'px';
+    tip.innerHTML='<b>'+best.name+'</b> · '+(best.type==='p'?'proton':'neutron')+' · '+(cur&&cur.cleave.set.has(best)?'peeled':'retained');}
+  else tip.style.display='none';
+});
+cv.addEventListener('mouseleave',()=>{el('tip').style.display='none';});
+cv.addEventListener('wheel',e=>{e.preventDefault();zoom=Math.max(.5,Math.min(3,zoom*(e.deltaY>0?.9:1.11)));draw();},{passive:false});
+const tog=(id,f)=>el(id).onclick=()=>{el(id).classList.toggle('on');f(el(id).classList.contains('on'));draw();};
+tog('vImpact',v=>showImpact=v);tog('vNames',v=>showNames=v);tog('vPlane',v=>showPlane=v);
+tog('vSpin',v=>{spin=v;});
+tgt.addEventListener('change',e=>selectTarget(+e.target.value));
+addEventListener('resize',draw);
+function loop(){if(spin){yaw+=0.004;draw();}requestAnimationFrame(loop);}
+selectTarget(0); loop();
+</script></body></html>

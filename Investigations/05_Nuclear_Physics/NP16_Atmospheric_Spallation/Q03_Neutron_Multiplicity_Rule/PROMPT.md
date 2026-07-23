@@ -25,7 +25,9 @@ physics describes this through:
 
 1. **Compound nucleus evaporation**: The excitation energy E* = T_p + Q
    is shared among all nucleons. Neutrons evaporate one at a time, each
-   carrying away ~2T MeV (where T = E*/a, a = A/8 MeV⁻¹). The number
+   carrying away ~2T MeV (where T = √(E*/a), a = A/8 MeV⁻¹ — corrected
+   2026-07-19; the file previously wrote T = E*/a, which is not the
+   Fermi-gas relation E* = aT²). The number
    ejected ≈ E* / (S_n + 2T). This is a fitted statistical model.
 
 2. **Intranuclear cascade**: At higher energies (> 200 MeV), the proton

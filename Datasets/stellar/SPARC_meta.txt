@@ -1,0 +1,102 @@
+#
+#   VizieR Astronomical Server vizier.cds.unistra.fr
+#    Date: 2026-05-30T03:05:04 [V7.5.6]
+#   In case of problem, please report to:	cds-question@unistra.fr
+#
+#
+#Coosys	J2000:	eq_FK5 J2000
+#INFO	service_protocol=ASU	  IVOID of the protocol through which the data was retrieved
+#INFO	request_date=2026-05-30T03:05:04	  Query execution date
+#INFO	request=https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J/AJ/152/157&-meta.all	  Full request URL
+#INFO	contact=cds-question@unistra.fr	  Email or URL to contact publisher
+#INFO	server_software=VizieR/7.5.6	  Software version
+#INFO	publisher=CDS	  Data centre that produced the VOTable
+#INFO	MaxTuples=50000	
+
+#RESOURCE=yCat_51520157
+#Name: J/AJ/152/157
+#Title: Mass models for 175 disk galaxies with SPARC (Lelli+, 2016)
+#INFO	ivoid=ivo://cds.vizier/j/aj/152/157	    IVOID of underlying data collection
+#INFO	data_ivoid=ivo://cds.vizier/j/aj/152/157	    IVOID of underlying data collection
+#INFO	creator=Lelli F.	    First author or institution
+#INFO	cites=bibcode:2016AJ....152..157L	    Article or Data origin sources
+#INFO	journal=AJ	    Journal name
+#INFO	original_date=2016	    Year of the article publication
+#INFO	reference_url=https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/152/157	    Dataset landing page
+#INFO	citation=doi:10.26093/cds/vizier.51520157	    Dataset identifier that can be used for citation
+#INFO	rights_uri=https://cds.unistra.fr/vizier-org/licences_vizier.html	    Licence URI
+#INFO	ipopu=0.493567	popularity index
+#INFO	cpopu=3415	number of calls
+#INFO	-kw.Wavelength=optical	
+#INFO	-kw.Wavelength=Radio	
+#INFO	-kw.Astronomy=Galaxies	
+#INFO	-density=0	    (link)
+#Table	yCat_51520157_1:
+#Name: J/AJ/152/157/table1
+#Title:
+#INFO	nrows=175	Number of rows of the table
+#      *Galaxy sample
+#
+#Param.	-c=	(a32)	[ucd=]	
+#    Query from a celestial position according to ASU syntax:
+#      {RA{+|-}Dec|object_name}[,eq=equinox][,ep=epoch][,rm=[min/]max]
+#      (see http://vizier.cds.unistra.fr/doc/asu.html)
+#          (link)       Action to Query the current RESOURCE, to be completed by PARAMs and FIELDs contents
+#Column	recno	(I8)	Record number assigned by the VizieR team. Should Not be used for identification.	[ucd=meta.record]
+#Column	Name	(a11)	Galaxy name	[ucd=meta.id;meta.main]
+#Column	Nvel	(I3)	Number of velocities (table2)	[ucd=meta.number]
+#Column	Type	(I2)	[0/11] Numerical Hubble type (1)	[ucd=meta.note]
+#Column	Dist	(F6.2)	[0.98/127.8] Assumed distance	[ucd=pos.distance;pos.heliocentric]
+#Column	e_Dist	(F5.2)	[0.05/12.8] Mean error on Dist	[ucd=stat.error]
+#Column	f_Dist	(I1)	[1/5] Flag giving the distance method (2)	[ucd=meta.code]
+#Column	i	(F4.1)	[15/90] Assumed inclination angle (3)	[ucd=src.orbital.inclination;pos.posAng]
+#Column	e_i	(F4.1)	[1/10] Mean error on i	[ucd=stat.error]
+#Column	L3.6	(F7.3)	[0/490] Total luminosity at 3.6{mu}m (L_[3.6]_)	[ucd=phys.luminosity;em.IR]
+#Column	e_L3.6	(F7.3)	[0/6.2] Mean error on L3.6	[ucd=stat.error]
+#Column	Reff	(F5.2)	[0/12.4] Effective radius (R_eff_) encompassing half of the total 3.6{mu}m luminosity	[ucd=phys.size.radius]
+#Column	SBeff	(F8.2)	[5.3/3317.7] Effective 3.6{mu}m surface brightness ({Sigma}_eff_), i.e., the average surface brightness within R_eff_	[ucd=phot.mag.sb]
+#Column	Rdisk	(F5.2)	[0.18/18.8] The 3.6{mu}m scale length of the stellar disk (R_d_)	[ucd=src.morph.scLength]
+#Column	SBdisk	(F8.2)	[12/23813.9] Extrapolated 3.6{mu}m central surface brightness of the stellar disk ({Sigma}_d_)	[ucd=phot.mag.sb]
+#Column	MHI	(F7.3)	[0.01/40.1] Total HI mass (M_HI_)	[ucd=phys.mass]
+#Column	RHI	(F5.2)	[0/74.3] HI radius (R_HI_) (4)	[ucd=phys.size.radius]
+#Column	Vflat	(F5.1)	[0/332] Asymptotically velocity along the flat part of the rotation curve (V_f_) (5)	[ucd=phys.veloc]
+#Column	e_Vflat	(F5.1)	[0/20.7] Mean error on Vflat	[ucd=stat.error]
+#Column	Qual	(I3)	[1/3] Rotation-curve quality flag (1=high, 2=medium, or 3=low) (6)	[ucd=meta.code.qual]
+#Column	Ref	(a14)	References for HI and H{alpha} data; in refs.dat file	[ucd=pos.frame]
+#Column	L16a	(I3)	Indicates a galaxy in the SPARC paper of Lelli et al. 2016 (Cat. J/ApJ/816/L14)	[ucd=meta.number]
+#Column	L16b	(I3)	Indicates a galaxy in the SPARC paper of Lelli et al. 2016 (Cat. J/ApJ/827/L19)	[ucd=meta.number]
+#Column	S4G	(I3)	Indicates an object from the Spitzer Survey for Stellar Structure in Galaxies (S4G; Sheth et al. 2010, Cat. J/PASP/122/1397)	[ucd=meta.number]
+#Column	EDD	(I3)	Indicates an object from the Extragalactic Distance Database (EDD; Jacobs et al. 2009, Cat. J/PASP/138/332)	[ucd=meta.number]
+#Column	RC	(A2)	Rotation Curve	[ucd=meta.ref.url]
+#Column	SimbadName	(a13)	Simbad column added by the CDS	[ucd=meta.id]
+#Column	NEDname	(a13)	Simbad column added by the CDS	[ucd=meta.id]
+#Column	_RA	(F9.5)	Position from SIMBAD database (right ascension part)	[ucd=pos.eq.ra;meta.main]
+#Column	_DE	(F9.5)	Position from SIMBAD database (declination part)	[ucd=pos.eq.dec;meta.main]
+#Table	yCat_51520157_2:
+#Name: J/AJ/152/157/table2
+#Title:
+#INFO	nrows=3391	Number of rows of the table
+#      Mass models
+#     (link)       Action to Query the current RESOURCE, to be completed by PARAMs and FIELDs contents
+#Column	recno	(I8)	Record number assigned by the VizieR team. Should Not be used for identification.	[ucd=meta.record]
+#Column	Name	(a11)	Galaxy identifier	[ucd=meta.id;meta.main]
+#Column	Dist	(F6.2)	[0.98/127.8] Assumed distance	[ucd=pos.distance;pos.heliocentric]
+#Column	Rad	(F6.2)	[0.08/108.31] Galactocentric radius	[ucd=phys.size.radius;pos.galactocentric]
+#Column	Vobs	(F6.2)	[1.4/383] Observed circular velocity (V_obs_)	[ucd=phys.veloc]
+#Column	e_Vobs	(F5.2)	[0.2/75] Uncertainty in Vobs (1)	[ucd=stat.error]
+#Column	Vgas	(F6.2)	[-17/87] Gas velocity contribution (V_gas_) (2)	[ucd=phys.veloc]
+#Column	Vdisk	(F6.2)	[1/372] Disk velocity contribution V_disk_ (3)	[ucd=phys.veloc]
+#Column	Vbulge	(F6.2)	[0/390] Bulge velocity contribution V_bul_ (3)	[ucd=phys.veloc]
+#Column	SBdisk	(F7.2)	[0/7394] Disk surface brightness {Sigma}_disk_	[ucd=phot.flux.sb]
+#Column	SBbulge	(F8.2)	[0/50763] Bulge surface brightness {Sigma}_bul_	[ucd=phot.flux.sb]
+#Table	yCat_51520157_3:
+#Name: J/AJ/152/157/refs
+#Title:
+#INFO	nrows=56	Number of rows of the table
+#      References
+#     (link)       Action to Query the current RESOURCE, to be completed by PARAMs and FIELDs contents
+#Column	recno	(I8)	Record number assigned by the VizieR team. Should Not be used for identification.	[ucd=meta.record]
+#Column	Ref	(A4)	Reference identifier	[ucd=pos.frame]
+#Column	Aut	(a24)	Author's name	[ucd=meta.bib.author]
+#Column	BibCode	(A19)	Bibliographic Code	[ucd=meta.bib.bibcode]
+#Column	Com	(a41)	Additional comments	[ucd=meta.note]

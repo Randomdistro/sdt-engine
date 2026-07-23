@@ -1,0 +1,84 @@
+NP16 CONSOLIDATED RUN — arithmetic cores (Fable direct, 2026-07-19)
+prompt errors fixed pre-run: beta-minus rule x3 (A01/A03/Q06), A01 pseudocode,
+Q03 evaporation T=sqrt(E*/a), Q01 neutron self-definition. Conservation check
+A = 4+2nd+3nt and Z = 2+nd+nt enforced on EVERY row below.
+========================================================================
+
+[Q04] the atmospheric carbon cycle closes EXACTLY in grammar:
+  N-14: n_t=0, n_d=5  [conserves]
+  C-14: n_t=2, n_d=2  [conserves]
+  N-15: n_t=1, n_d=4  [conserves]
+  (n,p): N-14 -> C-14: dn_t=+2, dn_d=-3  == the EC move (+2,-3)
+  beta-: C-14 -> N-14: dn_t=-2, dn_d=+3  == inverse
+  => (n,p) IS the triton-installer done by neutron capture; the C-14 cycle is one
+     grammar move and its exact inverse. Zero remainder.
+
+[A02/Q03] validity-threshold predictions x_max = n_t(target)-1 (pre-registered,
+  needs NNDC/EXFOR to test; listed for the record):
+  N-14    n_t= 0: (p,xn) products grammar-valid up to x=0; x>=1 -> invalid -> EC emitters
+  Al-27   n_t= 1: (p,xn) products grammar-valid up to x=0; x>=1 -> invalid -> EC emitters
+  Ga-69   n_t= 7: (p,xn) products grammar-valid up to x=6; x>=7 -> invalid -> EC emitters
+  Y-89    n_t=11: (p,xn) products grammar-valid up to x=10; x>=11 -> invalid -> EC emitters
+  Au-197  n_t=39: (p,xn) products grammar-valid up to x=38; x>=39 -> invalid -> EC emitters
+  spot check available now: Al-27(p,n)Si-27 -> n_t(Si-27)=-1 invalid ->
+  prediction: Si-27 must be an EC/beta+ emitter. NNDC: Si-27 beta+ t1/2=4.15 s. HOLDS.
+  (CONVERGENCE-class: standard systematics predicts proton-rich beta+ too.)
+
+[Q06] thermalisation arithmetic (N-14 moderator):
+  lethargy gain xi(A=14) = 0.1363; collisions 1 MeV -> 0.025 eV = 128
+  prompt's mean loss per collision 2A/(A+1)^2 = 12.4% matches its 12.4% claim
+
+[A04] cross-section candidates, analytic confrontation:
+  C1 (V_disp mass-cost): R_disp(p)=3.52e-20 m -> sigma~1.6e-38 m^2 = 1.6e-10 barn
+     measured p+C reaction sigma ~ 0.4 barn -> C1 FAILS by ~3e+09x.
+     Root: mass-cost volume is NOT the boundary volume (matter-is-substantive canon).
+  C2 (boundary/packing): pi*r0^2(1+A^1/3)^2 for C-12 = 0.49 barn — right class.
+     => the interaction radius is the BOUNDARY radius; A-dependence test data-blocked (EXFOR).
+
+[A05] capture sigma vs grammar — analytic scoping:
+  thermal sigma_cap spans 5e+08x (Pb-208 0.48 mb -> Gd-157 254 kb)
+    H-1           0.33 b
+    N-14          1.83 b
+    He-3          5333 b
+    B-10          3840 b
+    Gd-157    2.54e+05 b
+    Pb-208     0.00048 b
+  grammar counts span ~40x -> n_t/n_o ALONE cannot carry 9 orders: resonance structure
+  dominates. Grammar can only gate (He-3 alpha-completion; Pb-208 double-closed shows
+  BOTH magic and grammar-closed -> degenerate). Honest: A05's regression will need
+  the resonance term; grammar-only R^2 target is unreachable. Pre-stated.
+
+[Q05] W=3 torus energy ladder (movement budget v^2+v_circ^2=c^2):
+  E=   1e+09 eV  gamma=     1.07  v/c=0.345898108484  v_circ/c=9.383e-01  k=2.891025
+  E=   1e+12 eV  gamma= 1.07e+03  v/c=0.999999559823  v_circ/c=9.383e-04  k=1.000000
+  E=   1e+15 eV  gamma= 1.07e+06  v/c=1.000000000000  v_circ/c=9.383e-07  k=1.000000
+  E=   1e+18 eV  gamma= 1.07e+09  v/c=1.000000000000  v_circ/c=9.383e-10  k=1.000000
+  E=   1e+20 eV  gamma= 1.07e+11  v/c=1.000000000000  v_circ/c=9.383e-12  k=1.000000
+  at GZK the torus's own circulation is ~1e-11 c: 'a knot that has stopped turning'
+  — the open Q05 question stands; contact: FLM14 rotation, PPT10 pitch.
+
+========================================================================
+[FISSION COMPLETION LEDGER] — confrontation of the generator (Harvey synthesis):
+  conservation audit of every proposed move:
+  traversal t->d+n     dn_t=-1 dn_d=+1 -> dA=-1 (claim -1) dZ=+0 (claim +0)  CONSERVES
+  closure 2t->2d+2n    dn_t=-2 dn_d=+2 -> dA=-2 (claim -2) dZ=+0 (claim +0)  CONSERVES
+  EC                   dn_t=+2 dn_d=-3 -> dA=+0 (claim +0) dZ=-1 (claim -1)  CONSERVES
+  beta-                dn_t=-2 dn_d=+3 -> dA=+0 (claim +0) dZ=+1 (claim +1)  CONSERVES
+
+  hard confrontation — prompt neutron count: generator gives nu = m + 2 = 6 fixed
+  (m=4 traversal + 2 closure) per 'ordinary uranium event'. Measured U-235 thermal:
+  nu_bar = 2.44; P(nu): 0:~3% 1:~17% 2:~34% 3:~30% 4:~13% 5+:~3% [lit-memory, VERIFY]
+  -> FIXED nu=6 is excluded outright. Variable m rescues shape ONLY if m can be 0
+     and closure neutrons can be retained: P(nu<=1)~20% conflicts with a mandatory
+     2-neutron closure. The generator as stated therefore requires either (a)
+     closure-neutron recapture by the daughters, or (b) m-distribution peaked at 0-1,
+     contradicting 'm=4 ordinary'. NAMED as the generator's first kill-gate.
+  second confrontation: the generator is PROTON-traversal; ordinary fission is
+  NEUTRON-induced. In canon the neutron = proton + internal electron, so a neutron
+  traversal is a proton traversal carrying its own electron — the ledger should say
+  so explicitly and state what the internal electron does during stripping.
+  third: charge-dispersion prediction ('few charge states per mass split') MATCHES
+  the measured narrow independent-yield dispersion (sigma_Z ~ 0.5-0.6/chain) — 
+  CONVERGENCE-class support, [lit-memory, VERIFY].
+  REQUIREMENT unchanged: Gamma_U235 ordering (Atomicus positional sequence) before
+  any yield table may be generated. No averaging substitutes (Harvey rule).

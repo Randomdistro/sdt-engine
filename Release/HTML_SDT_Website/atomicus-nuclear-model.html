@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ATOMICUS — The SDT Nuclear Model, built one finding at a time</title>
+<style>
+:root{--paper:#f2ede4;--paper2:#faf7f1;--edge:#e2d9c9;--ink:#1c1a16;--ink2:#3a352d;--ink3:#7b7266;
+--copper:#b07430;--steel:#4a6d82;--mint:#3f8f6f;--rose:#c0503a;--gold:#c9a227;}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:13.5px/1.55 'Segoe UI',system-ui,sans-serif;
+display:grid;grid-template-columns:270px 1fr 322px;height:100vh;overflow:hidden;user-select:none;-webkit-user-select:none}
+@media(max-width:1080px){body{grid-template-columns:1fr;height:auto;overflow:auto}}
+.pane{overflow-y:auto;padding:13px}
+#left{background:var(--paper2);border-right:1px solid var(--edge)}
+#right{background:var(--paper2);border-left:1px solid var(--edge)}
+#mid{padding:0;position:relative;overflow:hidden;background:linear-gradient(#faf8f4,#ece5d8)}
+h1{font:600 14px/1.2 'Segoe UI'}h1 small{display:block;font:400 10px/1.4;color:var(--ink3);margin-top:2px}
+h2{font:600 9.5px/1 'Segoe UI';text-transform:uppercase;letter-spacing:.1em;color:var(--copper);margin:14px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--edge)}
+.step{display:flex;gap:8px;align-items:flex-start;padding:6px 7px;border-radius:5px;cursor:pointer;font-size:11.5px;opacity:.45;transition:.15s}
+.step:hover{background:rgba(176,116,48,.07)}
+.step.done{opacity:1}.step.cur{opacity:1;background:rgba(176,116,48,.11);box-shadow:inset 2px 0 0 var(--copper)}
+.step .n{width:18px;height:18px;border-radius:50%;flex:none;background:var(--edge);color:#fff;font:600 10px/18px ui-monospace;text-align:center}
+.step.done .n,.step.cur .n{background:var(--copper)}
+.step .t{line-height:1.25}.step .t b{display:block}
+.status{display:inline-block;padding:1px 6px;border-radius:9px;font-size:8.5px;font-weight:700;letter-spacing:.03em;margin-top:2px}
+.NATIVE{background:rgba(63,143,111,.16);color:var(--mint)}
+.CONFIRMED{background:rgba(63,143,111,.16);color:var(--mint)}
+.DEGENERATE{background:rgba(201,162,39,.2);color:#846a10}
+.KILLED{background:rgba(192,80,58,.14);color:var(--rose)}
+.OPEN{background:rgba(74,109,130,.14);color:var(--steel)}
+.SELECTION{background:rgba(74,109,130,.14);color:var(--steel)}
+.row{display:flex;justify-content:space-between;padding:2.5px 0;font-size:11.5px;border-bottom:1px solid rgba(226,217,201,.6)}
+.row .l{color:var(--ink3)}.row .v{font:600 11.5px ui-monospace,monospace}
+.btn{padding:6px 12px;border:1px solid var(--edge);background:#fff;color:var(--ink2);border-radius:5px;cursor:pointer;font-size:12px}
+.btn:hover{border-color:var(--copper);color:var(--copper)}.btn.p{background:var(--copper);color:#fff;border-color:var(--copper)}
+.btn:disabled{opacity:.4;cursor:default}
+#hud{position:absolute;top:0;left:0;right:0;padding:12px 16px;pointer-events:none;display:flex;justify-content:space-between}
+#stepTitle{font:700 20px/1.15 'Segoe UI'}#stepNo{font:600 10px ui-monospace;color:var(--ink3)}
+#tip{position:absolute;pointer-events:none;background:rgba(28,26,22,.92);color:#f4efe6;padding:5px 9px;border-radius:5px;font:11px ui-monospace;display:none;z-index:6;white-space:nowrap}#tip b{color:var(--gold)}
+canvas{display:block}
+#overlay{position:absolute;inset:0;pointer-events:none}
+#panel2d{position:absolute;inset:44px 16px 60px;pointer-events:none}
+.nav{position:absolute;bottom:0;left:0;right:0;padding:11px 16px;display:flex;gap:8px;align-items:center;justify-content:space-between}
+.statement{font-size:12.5px;line-height:1.6;color:var(--ink2)}
+.statement b{color:var(--ink)}.statement code{background:rgba(176,116,48,.1);padding:0 4px;border-radius:3px;font-size:11.5px}
+.check{font-size:11px;margin-top:8px;padding:8px 10px;border-radius:5px;background:#fff;border:1px solid var(--edge)}
+.check .h{font-weight:700;font-size:9.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink3);margin-bottom:4px}
+.ledger{font-size:10.5px}
+.ledger div{display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px solid rgba(226,217,201,.5)}
+select{padding:4px;border:1px solid var(--edge);border-radius:4px;background:#fff;font-size:12px}
+.note{font-size:10px;color:var(--ink3);line-height:1.5;margin-top:6px}
+</style></head><body>
+
+<div class="pane" id="left">
+  <h1>The SDT Nuclear Model
+    <small>every finding, built one at a time — each shown live against measured data</small></h1>
+  <h2>Build order</h2>
+  <div id="steps"></div>
+  <h2>Specimen</h2>
+  <select id="iso"></select>
+  <div class="note">Findings 1–7 & 9 track this nucleus live. Findings 8, 10–12 use ²³⁶U* (fission).</div>
+</div>
+
+<div class="pane" id="mid">
+  <canvas id="cv"></canvas>
+  <svg id="overlay"></svg>
+  <div id="panel2d"></div>
+  <div id="hud"><div><div id="stepTitle">—</div><div id="stepNo"></div></div><div id="statusChip"></div></div>
+  <div id="tip"></div>
+  <div class="nav">
+    <button class="btn" id="prev">◂ Back</button>
+    <div id="dots" style="font:600 11px ui-monospace;color:var(--ink3)"></div>
+    <button class="btn p" id="next">Add next finding ▸</button>
+  </div>
+</div>
+
+<div class="pane" id="right">
+  <h2 id="curH">Finding</h2>
+  <div class="statement" id="statement">—</div>
+  <div class="check" id="check"><div class="h">live check</div><div id="checkBody">—</div></div>
+  <h2>Model ledger — locked in</h2>
+  <div class="ledger" id="ledger"></div>
+</div>
+
+<script src="nucdata.js"></script>
+<script>
+const el=id=>document.getElementById(id);
+const IDX=new Map(); (typeof NUC!=='undefined'?NUC:[]).forEach(r=>IDX.set(r[0]+','+r[1],r));
+const SYMB=(typeof SYM!=='undefined')?SYM:[];
+const nm=(Z,A)=>((SYMB[Z]||'Z'+Z)+'-'+A);
+const gram=(Z,A)=>[3*Z-A-2,A-2*Z];
+
+/* real IAEA U-235(n_th,f) summary (pulled 2026-07-21) */
+const FYtop=[["Te-134",6.00],["Xe-138",4.95],["Zr-100",4.90],["Sr-94",4.70],["Sr-95",4.67],["Xe-139",4.57],["Kr-90",4.50],["Ba-144",4.21],["Zr-99",3.99],["Ba-143",3.98],["Sr-96",3.85],["Xe-140",3.80]];
+const FYhump={lightA:[84,105],heavyA:[131,149],valleyPct:0.06,heavyNt:[30.9,1.5],heavyNd:[21.3,2.1]};
+
+/* ═══ opposition-shell packing (canonical, from the sequencer) ═══ */
+const PHI=(1+Math.sqrt(5))/2,KSUB=1.5,KINTRA=0.65,dnn=1.45*0.8414,coulSpread=0.30;
+function vnorm(v){const l=Math.hypot(v[0],v[1],v[2])||1;return[v[0]/l,v[1]/l,v[2]/l];}
+function shellDirs(m){
+  const V={1:[[0,0,1]],2:[[0,0,1],[0,0,-1]],3:[[1,0,0],[-.5,.8660254,0],[-.5,-.8660254,0]],
+    4:[[1,1,1],[1,-1,-1],[-1,1,-1],[-1,-1,1]],5:[[0,0,1],[0,0,-1],[1,0,0],[-.5,.8660254,0],[-.5,-.8660254,0]],
+    6:[[1,0,0],[-1,0,0],[0,1,0],[0,-1,0],[0,0,1],[0,0,-1]],
+    12:[[0,1,PHI],[0,-1,PHI],[0,1,-PHI],[0,-1,-PHI],[1,PHI,0],[-1,PHI,0],[1,-PHI,0],[-1,-PHI,0],[PHI,0,1],[-PHI,0,1],[PHI,0,-1],[-PHI,0,-1]]};
+  if(V[m])return V[m].map(vnorm);
+  const o=[];for(let i=0;i<m;i++){const z=1-(2*i+1)/m,r=Math.sqrt(Math.max(0,1-z*z)),t=2*Math.PI*i/(PHI*PHI);o.push([r*Math.cos(t),r*Math.sin(t),z]);}return o;
+}
+function pack(A,Z){
+  const nd=3*Z-A-2,nt=A-2*Z;if(nd<0||nt<0)return{nuc:[],nSub:0,nd,nt};
+  const kinds=['alpha'];for(let s=0;s<nd;s++)kinds.push('deuteron');for(let s=0;s<nt;s++)kinds.push('triton');
+  const spread=1+coulSpread*(Z*Z)/Math.pow(A,4/3),Dsub=dnn*spread*KSUB;
+  const C=[[0,0,0]];let rem=kinds.length-1,shell=0;
+  while(rem>0){const cap=(shell===0)?12:12+8*shell,m=Math.min(rem,cap),rad=Dsub*(1+0.9*shell);
+    shellDirs(m).forEach(v=>C.push([v[0]*rad,v[1]*rad,v[2]*rad]));rem-=m;shell++;}
+  const iR=dnn*KINTRA,nuc=[];let di=0,ti=0;
+  kinds.forEach((kind,si)=>{const c=C[si],add=(v,r)=>[c[0]+v[0]*r,c[1]+v[1]*r,c[2]+v[2]*r];
+    if(kind==='alpha'){const tv=[[1,1,1],[1,-1,-1],[-1,1,-1],[-1,-1,1]].map(vnorm),ty=['p','n','p','n'];
+      tv.forEach((v,k)=>nuc.push({pos:add(v,iR),type:ty[k],group:'α',name:'α·'+ty[k],sc:c}));}
+    else if(kind==='deuteron'){const th=si*2.399963,ax=vnorm([Math.cos(th),Math.sin(th)*.8,Math.sin(th*1.7)]);
+      nuc.push({pos:add(ax,iR),type:'p',group:'d',name:'d'+(di+1)+'·p',sc:c});nuc.push({pos:add(ax,-iR),type:'n',group:'d',name:'d'+(di+1)+'·n',sc:c});di++;}
+    else{const th=si*2.399963,e1=vnorm([Math.cos(th),0,Math.sin(th)]),e2=vnorm([Math.sin(th)*.3,1,Math.cos(th)*.3]);
+      const tri=[[0,1],[.866,-.5],[-.866,-.5]],ty=['p','n','n'];
+      tri.forEach((uv,k)=>{const v=vnorm([e1[0]*uv[0]+e2[0]*uv[1],e1[1]*uv[0]+e2[1]*uv[1],e1[2]*uv[0]+e2[2]*uv[1]]);
+        nuc.push({pos:add(v,iR),type:ty[k],group:'t',name:'t'+(ti+1)+'·'+ty[k],sc:c});});ti++;}
+  });
+  // ── electron economy: A protons + A electrons. N stabled inside (neutrons), Z fielded out (shell) ──
+  const elec=[];
+  // internal (stabled) electron for each neutron — sits between the neutron and its shared subunit centre (NP17)
+  nuc.filter(n=>n.type==='n').forEach((n,i)=>{
+    const p=[n.pos[0]*0.55+n.sc[0]*0.45, n.pos[1]*0.55+n.sc[1]*0.45, n.pos[2]*0.55+n.sc[2]*0.45];
+    elec.push({pos:p,kind:'internal',name:'e (stabled in neutron '+(i+1)+')'});
+  });
+  // fielded (atomic) electron for each of the Z net protons — the shell, on an outer sphere
+  const Rshell=Math.max(...nuc.map(n=>Math.hypot(n.pos[0],n.pos[1],n.pos[2])))*1.9+2;
+  shellDirs(Z<=12?Z:12).concat(Z>12?fibDirs(Z-12):[]).slice(0,Z).forEach((v,i)=>{
+    const u=vnorm(v);elec.push({pos:[u[0]*Rshell,u[1]*Rshell,u[2]*Rshell],kind:'fielded',name:'atomic e '+(i+1)+' (fielded by a proton)'});
+  });
+  return{nuc,elec,nSub:kinds.length,nd,nt};
+}
+function fibDirs(n){const o=[];for(let i=0;i<n;i++){const z=1-(2*i+1)/n,r=Math.sqrt(Math.max(0,1-z*z)),t=2*Math.PI*i/(PHI*PHI);o.push([r*Math.cos(t),r*Math.sin(t),z]);}return o;}
+
+/* ═══ FINDINGS — the build ═══ */
+const F=[
+ {t:'The grammar',s:'NATIVE',mode:'pack',
+  st:'Every nucleus with Z≥3 is <b>one α core + n_d deuterons + n_t tritons</b>. Nothing else. '+
+     '<code>A = 4+2n_d+3n_t</code>, <code>Z = 2+n_d+n_t</code>. Free neutrons are forbidden — a "free neutron" is an exposed triton remnant.',
+  chk:iso=>{const [nd,nt]=gram(iso.Z,iso.A);return `α + ${nd}d + ${nt}t → A=${4+2*nd+3*nt}=${iso.A} ✓, Z=${2+nd+nt}=${iso.Z} ✓`;}},
+
+ {t:'The coordinate truth',s:'DEGENERATE',mode:'coord',
+  st:'The counts are an <b>invertible relabelling of (Z,N)</b>: <code>n_t = N−Z</code>, <code>n_d = 2Z−N−2</code>, <code>v = Z−2</code>. '+
+     'So any law that is a <b>pure function of the counts</b> is a (Z,N) law in disguise — it can restate physics but cannot be independent evidence for the grammar. This guard is applied to everything below.',
+  chk:iso=>{const N=iso.A-iso.Z,[nd,nt]=gram(iso.Z,iso.A);return `n_t=${nt}=N−Z=${N-iso.Z} ✓ · v=${nd+nt}=Z−2=${iso.Z-2} ✓ — no new information`;}},
+
+ {t:'Pairing & magnetism',s:'DEGENERATE',mode:'data',
+  st:'A nucleus is magnetic exactly when it has an <b>unpaired subunit</b>: μ=0 ⟺ n_d even ∧ n_t even. '+
+     '<b>98.5%</b> over 3043 spin-known nuclides; the boxed rows are exceptionless. But n_d even∧n_t even <i>is</i> even-even and n_t odd <i>is</i> odd-A — so this is the 1930s pairing rule, real but not native (NP24-A).',
+  chk:iso=>{const [nd,nt]=gram(iso.Z,iso.A),paired=(nd%2===0&&nt%2===0),r=IDX.get(iso.Z+','+iso.A);
+    let s=paired?'predict μ=0 (all paired)':'predict μ≠0 (unpaired subunit)';
+    if(r&&r[4]>=0)s+=` · measured J=${r[4]} ${paired===(r[4]===0)?'✓':'✗'}`;return s;}},
+
+ {t:'The stability band',s:'OPEN',mode:'band',
+  st:'Stable nuclei obey <code>f_t = n_t/(n_d+n_t) ≤ 0.551</code> — holds for <b>98.8%</b> of stable isotopes. '+
+     'But it also holds for 65% of unstable ones: <b>necessary, not sufficient</b>. It restates the valley of stability; it cannot pin a decay endpoint.',
+  chk:iso=>{const [nd,nt]=gram(iso.Z,iso.A),ft=(nd+nt)?nt/(nd+nt):0,r=IDX.get(iso.Z+','+iso.A);
+    return `f_t=${ft.toFixed(3)} ${ft<=0.551?'inside band':'OUTSIDE'} · this nuclide is ${r?(r[3]?'STABLE':'unstable'):'unobserved'}`;}},
+
+ {t:'The radius law',s:'CONFIRMED',mode:'pack',
+  st:'Boundary radius <code>R(A) = R_p·(A/η)^⅓</code>, η=π/√18 (close-packing fraction). <b>Zero fitted constants.</b> '+
+     'RMS 4.96% vs 908 measured radii; wins 5× on isotope chains where A^⅓ drifts (NP12 canon).',
+  chk:iso=>{const R=0.8414*Math.pow(iso.A/(Math.PI/Math.sqrt(18)),1/3);return `R(${iso.A}) = ${R.toFixed(2)} fm (rms) — from R_p and packing geometry alone`;}},
+
+ {t:'The packing',s:'OPEN',mode:'pack',
+  st:'Subunits sit on <b>opposition shells</b> — α on the axis, satellites at maximum spread (12, 20, 28…). '+
+     'Counts are exact; the (r,θ,φ) placement is <b>the model’s assignment, not proven unique</b>. Neutron = proton + one shared internal electron; the shared electron between protons <i>is</i> the binding (NP17).',
+  chk:iso=>{const p=pack(iso.A,iso.Z);return `${p.nSub} subunits placed = ${p.nuc.length} nucleons (${p.nuc.filter(n=>n.type==='p').length}p ${p.nuc.filter(n=>n.type==='n').length}n)`;}},
+
+ {t:'Binding from overlap',s:'KILLED',mode:'pack',
+  st:'The shadow-overlap picture (mass defect = shared occlusion area, ΔA=A_sum−A_∪) gives total-BE R²=0.988 — '+
+     'but on <b>per-nucleon</b> binding it scores <b>R²=−12.2</b>, worse than the mean, finding the ridge in 1 of 116 rows. '+
+     'It counts area; binding is nearly flat because every baryon circulates identically and drag is shared. <b>No overlap model reproduces it.</b>',
+  chk:iso=>{const r=IDX.get(iso.Z+','+iso.A);return r?`measured BE/A = ${(r[2]/iso.A).toFixed(3)} MeV — the flat ~8.5 plateau the area model can’t make`:'—';}},
+
+ {t:'The scission invariant',s:'NATIVE',mode:'scission',
+  st:'When a heavy nucleus splits, each half needs an α core but the parent had one. Conservation forces it with no freedom: '+
+     '<b>tritons preserved exactly, deuterons drop by exactly two</b> → the only scission move is <code>2d → α</code>, emitting <b>zero neutrons</b>. '+
+     'Prompt neutrons come later, from the hot fragments (ν×t→d+n, ν̄≈2.4). Proved from A,Z conservation, verified on 8 pairs.',
+  chk:()=>'²³⁶U*(38d,52t) → two α-cored lobes; the second α built from 2 deuterons; 0 neutrons at the neck'},
+
+ {t:'The G_core selection',s:'SELECTION',mode:'scission',
+  st:'Which cut is preferred: <code>G_core = |n_d−n_t| + (n_t mod 2)</code>. G_core=0 puts the light fragment on the '+
+     'golden line (n_d=n_t, even) — and the only member whose partner is doubly-magic is <b>¹⁰⁴Mo + ¹³²Sn + 2n</b> (Z=50, N=82).',
+  chk:()=>'golden-line light fragment ⇒ doubly-magic ¹³²Sn heavy partner falls out automatically'},
+
+ {t:'The fission spectrum',s:'CONFIRMED',mode:'yields',
+  st:'Real IAEA ²³⁵U(n_th,f) yields: <b>two tight humps</b> (light A=84–105, heavy A=131–149), the symmetric valley '+
+     'suppressed <b>750×</b> — one cut, repeated. And the <b>triton count is the rigid coordinate</b>: heavy hump n_t=30.9±1.5 (4.9%) vs n_d 10%. '+
+     'Not forced by conservation — a genuine hit for "no variation in pairing" (NP25-Y).',
+  chk:()=>`heavy fragment locks n_t≈31–32 = N=82 (¹³²Sn shell); triton spread 4.9% is the tightest number in the spectrum`},
+
+ {t:'The impact & kinematics',s:'CONFIRMED',mode:'impact',
+  st:'The nucleus surface whirls at the universal <b>1.83c</b> counter-seat. A 1 A GeV proton arrives at β=0.875; the movement '+
+     'budget <code>v_circ²+v_trans²=c²</code> stalls its gear to v_circ=1/γ=0.484c. In one ~5.7e-23 s transit the surface turns <b>309°</b>. '+
+     'To leave the larger daughter, the proton must strike the <b>light lobe off the rigid triton core</b>. (Ekin(Z) fine-tune was Coulomb-degenerate — killed.)',
+  chk:()=>'central hit → symmetric fission · grazing hit → spallation shave · impact on the deuteron lobe leaves the N=82 daughter'},
+
+ {t:'Every proton fields an electron',s:'NATIVE',mode:'electron',
+  st:'There is no neutron <i>stuff</i>. Matter is <b>protons and electrons only</b>. Each of the Z net protons '+
+     '<b>fields an electron</b> outward — the atomic shell, by handed redirection. That fielded electron is chemistry; '+
+     'nuclear and atomic are <b>one system geared by 137</b> (ω_p/ω_e ≈ 1.03e8).',
+  chk:iso=>`${iso.Z} protons field ${iso.Z} atomic electrons — the shell (yellow halo). Neutral atom.`},
+
+ {t:'Every neutron stables one',s:'NATIVE',mode:'electron',
+  st:'A <b>neutron is a proton that has stabled an electron internally</b> — which is exactly why β⁻ releases it: '+
+     '<code>n → p + e + ν̄</code>, Q = 0.782 MeV (the exact SDT value). The N neutrons carry N internal electrons. '+
+     'Total: <b>A protons, A electrons</b> — N stabled inside, Z fielded out.',
+  chk:iso=>{const N=iso.A-iso.Z;return `${iso.A} protons + ${iso.A} electrons: ${N} stabled inside (neutrons) + ${iso.Z} fielded out (shell)`;}},
+
+ {t:'They all interact — the shared electron IS the binding',s:'NATIVE',mode:'electron',
+  st:'Adjacent protons <b>share</b> the stabled electrons; that shared electron is the bond — a molecular H₂⁺ '+
+     'geared down by 137. One coupling <code>α·ℏc</code>, no fitted scale. Deuteron: <b>2.200 vs 2.224 MeV</b> (NP17), factor-3 exact. '+
+     'Binding is not overlap area (that was killed) — it is the shared-electron well, which is why BE/A is nearly flat.',
+  chk:iso=>{const r=IDX.get(iso.Z+','+iso.A);return r?`shared-electron binding · deuteron 2.20/2.22 MeV · this nucleus BE/A = ${(r[2]/iso.A).toFixed(2)} MeV`:'shared-electron well, geared by 137'}},
+
+ {t:'The honest ledger',s:'OPEN',mode:'ledger',
+  st:'The whole model, with each piece carrying its true status. <b>Native and proved:</b> the grammar, the scission invariant, '+
+     'the radius law, and the proton–electron economy (neutron = p + stabled e; shared e = binding). '+
+     '<b>Real but degenerate</b> (restates (Z,N)): pairing/magnetism, the stability band. <b>Killed:</b> binding-from-overlap, the Ekin fine-tune, ferromagnetism-from-triton. '+
+     '<b>Open:</b> the true nucleon coordinates, and what sets the helical-peel depth.',
+  chk:()=>'protons + electrons, one coupled mesh: N stabled inside, Z fielded out, shared electrons binding'}
+];
+
+/* ═══ specimen selector ═══ */
+const SPECS=[[3,7],[6,12],[8,16],[20,40],[26,56],[28,58],[50,132],[54,136],[82,208],[92,235]];
+const isoSel=el('iso');
+SPECS.forEach(([Z,A],i)=>{const o=document.createElement('option');o.value=i;o.textContent=nm(Z,A);isoSel.appendChild(o);});
+isoSel.value=4;
+let iso={Z:26,A:56}, step=0, PACK=pack(56,26);
+isoSel.addEventListener('change',e=>{const [Z,A]=SPECS[+e.target.value];iso={Z,A};PACK=pack(A,Z);_surf=new Map();render();});
+
+/* ═══ 3D ═══ */
+const cv=el('cv'),cx=cv.getContext('2d');
+let yaw=-0.6,pitch=0.5,zoom=1,W=0,H=0,spin=true;
+function fit(){const r=el('mid').getBoundingClientRect(),dp=Math.min(devicePixelRatio,2);W=r.width;H=r.height||520;
+  cv.width=W*dp;cv.height=H*dp;cv.style.width=W+'px';cv.style.height=H+'px';cx.setTransform(dp,0,0,dp,0,0);}
+function proj(p,pk){const cyw=Math.cos(yaw),syw=Math.sin(yaw),cp=Math.cos(pitch),sp=Math.sin(pitch);
+  const x=p[0]*cyw-p[1]*syw,y=p[0]*syw+p[1]*cyw,z=p[2];const y2=y*cp-z*sp,dep=y*sp+z*cp;
+  const n=Math.max(1,Math.cbrt((pk||PACK).nuc.length)/3),S=Math.min(W,H)*0.34*zoom/n/2.2;
+  return{x:W/2+x*S,y:H/2-y2*S,d:dep,S};}
+function shadeDark(c){const n=parseInt(c.slice(1),16);return'#'+[16,8,0].map(s=>Math.max(0,((n>>s)&255)-70).toString(16).padStart(2,'0')).join('');}
+let hoverN=null,_surf=new Map(),UPACK=pack(236,92),_usurf=new Map();
+function isSurf(n,pk,cache){if(cache.has(n))return cache.get(n);const r=n.pos,R2=Math.hypot(r[0],r[1],r[2]);let out=0;
+  for(const m of pk.nuc){if(m===n)continue;const dx=m.pos[0]-r[0],dy=m.pos[1]-r[1],dz=m.pos[2]-r[2];
+    if(dx*dx+dy*dy+dz*dz<(1.7*dnn)**2 && Math.hypot(m.pos[0],m.pos[1],m.pos[2])>R2)out++;}
+  const s=out<=1&&R2>2;cache.set(n,s);return s;}
+function cleaveU(ZL,AL){let best=null;const D=shellDirs(200);
+  for(const d of D){const pr=UPACK.nuc.map(n=>({n,s:n.pos[0]*d[0]+n.pos[1]*d[1]+n.pos[2]*d[2]}));pr.sort((a,b)=>b.s-a.s);
+    let A=0,Z=0,cut=0;for(let i=0;i<pr.length;i++){A++;if(pr[i].n.type==='p')Z++;if(A>=AL){cut=i+1;break;}}
+    const err=Math.abs(A-AL)*2+Math.abs(Z-ZL)*3;if(!best||err<best.err)best={err,dir:d,set:new Set(pr.slice(0,cut).map(p=>p.n))};}
+  return best;}
+let UCLEAVE=cleaveU(40,100); // Te-134 + Zr-100
+function drawNucleus(pk,cache,mode){
+  const items=pk.nuc.map(n=>({n,pr:proj(n.pos,pk)}));items.sort((a,b)=>a.pr.d-b.pr.d);
+  const d0=items[0].pr.d,ds=(items[items.length-1].pr.d-d0)||1;
+  for(const it of items){const dim=0.5+0.5*((it.pr.d-d0)/ds),R=it.pr.S*0.34;
+    let col=it.n.type==='p'?'#c0503a':'#4a6d82';
+    if(mode==='scission'||mode==='impact'){const peeled=UCLEAVE.set.has(it.n);col=peeled?'#c0503a':'#c9a227';}
+    if(mode==='pack'&&it.n.group==='α')col=it.n.type==='p'?'#d0603a':'#5a7d92';
+    const g=cx.createRadialGradient(it.pr.x-R*.35,it.pr.y-R*.4,R*.1,it.pr.x,it.pr.y,R);
+    g.addColorStop(0,'#fff');g.addColorStop(.3,col);g.addColorStop(1,shadeDark(col));
+    cx.globalAlpha=.86;cx.beginPath();cx.arc(it.pr.x,it.pr.y,R,0,7);cx.fillStyle=g;cx.fill();
+    cx.strokeStyle=(it.n===hoverN)?'#1c1a16':'rgba(0,0,0,.2)';cx.lineWidth=(it.n===hoverN)?2:.6;cx.stroke();cx.globalAlpha=1;
+    if(mode==='impact'&&UCLEAVE.set.has(it.n)&&isSurf(it.n,pk,cache)){cx.beginPath();cx.arc(it.pr.x,it.pr.y,R+3,0,7);cx.strokeStyle='#2f5064';cx.lineWidth=2;cx.stroke();}
+  }
+  if(mode==='impact'){const d=UCLEAVE.dir,surf=pk.nuc.filter(n=>UCLEAVE.set.has(n)&&isSurf(n,pk,cache));
+    surf.sort((a,b)=>(b.pos[0]*d[0]+b.pos[1]*d[1]+b.pos[2]*d[2])-(a.pos[0]*d[0]+a.pos[1]*d[1]+a.pos[2]*d[2]));
+    surf.slice(0,7).forEach(n=>{const a=proj([n.pos[0]+d[0]*3.4,n.pos[1]+d[1]*3.4,n.pos[2]+d[2]*3.4],pk),b=proj([n.pos[0]+d[0]*.6,n.pos[1]+d[1]*.6,n.pos[2]+d[2]*.6],pk);
+      cx.strokeStyle='#2f5064';cx.lineWidth=2.2;cx.beginPath();cx.moveTo(a.x,a.y);cx.lineTo(b.x,b.y);cx.stroke();
+      const ang=Math.atan2(b.y-a.y,b.x-a.x);cx.beginPath();cx.moveTo(b.x,b.y);cx.lineTo(b.x-9*Math.cos(ang-.4),b.y-9*Math.sin(ang-.4));cx.lineTo(b.x-9*Math.cos(ang+.4),b.y-9*Math.sin(ang+.4));cx.closePath();cx.fillStyle='#2f5064';cx.fill();});}
+  // electron layer — internal (stabled) + fielded (shell) + shared-bond links
+  if(mode==='electron' && pk.elec){
+    // faint links from each internal electron to its shared centre (the bond)
+    cx.strokeStyle='rgba(63,143,111,.35)';cx.lineWidth=1;
+    pk.nuc.filter(n=>n.type==='n').forEach(n=>{const a=proj(n.pos,pk),b=proj(n.sc,pk);
+      cx.beginPath();cx.moveTo(a.x,a.y);cx.lineTo(b.x,b.y);cx.stroke();});
+    pk.elec.forEach(e=>{const pr=proj(e.pos,pk);
+      if(e.kind==='fielded'){const R=pr.S*0.16;cx.globalAlpha=.85;cx.beginPath();cx.arc(pr.x,pr.y,Math.max(2.5,R),0,7);
+        cx.fillStyle='#c9a227';cx.fill();cx.strokeStyle='rgba(120,90,10,.5)';cx.lineWidth=.6;cx.stroke();cx.globalAlpha=1;}
+      else{const R=pr.S*0.15;cx.beginPath();cx.arc(pr.x,pr.y,Math.max(2,R),0,7);
+        cx.fillStyle='#3f8f6f';cx.fill();cx.strokeStyle='#fff';cx.lineWidth=.7;cx.stroke();}
+      if(e===hoverN){cx.fillStyle='#1c1a16';cx.font='600 11px ui-monospace';cx.textAlign='center';cx.fillText(e.name,pr.x,pr.y-8);cx.textAlign='left';}
+    });
+  }
+  if(hoverN&&hoverN.pos&&!hoverN.kind){const pr=proj(hoverN.pos,pk);cx.fillStyle='#1c1a16';cx.font='600 12px ui-monospace';cx.textAlign='center';cx.fillText(hoverN.name,pr.x,pr.y-pr.S*.34-6);cx.textAlign='left';}
+}
+function draw(){fit();cx.clearRect(0,0,W,H);const m=F[step].mode;
+  if(m==='pack'||m==='coord'||m==='data'||m==='band')drawNucleus(PACK,_surf,'pack');
+  else if(m==='scission')drawNucleus(UPACK,_usurf,'scission');
+  else if(m==='impact')drawNucleus(UPACK,_usurf,'impact');
+  else if(m==='electron')drawNucleus(PACK,_surf,'electron');
+  else cx.clearRect(0,0,W,H);
+  draw2d(m);
+}
+/* 2D panels for data-heavy findings */
+function draw2d(m){const p=el('panel2d');p.innerHTML='';
+  if(m==='band'){ // f_t map of all nuclei
+    const c=document.createElement('canvas');c.width=560;c.height=360;c.style.cssText='width:100%;max-width:560px;background:#fff;border:1px solid #e2d9c9;border-radius:6px;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)';
+    p.appendChild(c);const g=c.getContext('2d');
+    NUC.forEach(r=>{const [nd,nt]=gram(r[0],r[1]);const ft=(nd+nt)?nt/(nd+nt):0;const x=20+r[0]/103*520,y=340-Math.min(ft,0.8)/0.8*320;
+      g.fillStyle=r[3]?'rgba(63,143,111,.8)':'rgba(122,114,101,.12)';g.fillRect(x,y,2,2);});
+    g.strokeStyle='#c9a227';g.lineWidth=1.5;const yb=340-0.551/0.8*320;g.beginPath();g.moveTo(20,yb);g.lineTo(540,yb);g.stroke();
+    g.fillStyle='#846a10';g.font='10px ui-monospace';g.fillText('f_t = 0.551  (upper bound of the stable band)',24,yb-5);
+    g.fillStyle='#7b7266';g.fillText('green = stable · x: Z 3→103 · y: f_t',24,355);
+    if(iso){const [nd,nt]=gram(iso.Z,iso.A),ft=nt/(nd+nt);g.strokeStyle='#b07430';g.lineWidth=2;g.beginPath();g.arc(20+iso.Z/103*520,340-ft/0.8*320,6,0,7);g.stroke();}
+  }
+  if(m==='yields'){
+    const box=document.createElement('div');box.style.cssText='position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:92%;max-width:600px;background:#fff;border:1px solid #e2d9c9;border-radius:8px;padding:16px';
+    let bars=FYtop.map(([n,y])=>`<div style="display:flex;align-items:center;gap:8px;margin:2px 0;font:11px ui-monospace"><span style="width:58px">${n}</span><span style="height:11px;background:#b07430;border-radius:2px;width:${y/6*100}%"></span><span>${y}%</span></div>`).join('');
+    box.innerHTML=`<div style="font-weight:700;font-size:12px;margin-bottom:8px">Most common fission products — U-235(n_th,f), real IAEA data</div>${bars}
+      <div style="margin-top:12px;font-size:11px;line-height:1.7;color:#3a352d">
+      <b>Two humps</b>, valley 750× suppressed → one repeated cut.<br>
+      Light A=84–105 &nbsp;·&nbsp; heavy A=131–149 &nbsp;·&nbsp; symmetric only 0.06%.<br>
+      <b>Triton count is rigid:</b> heavy n_t=30.9±1.5 (4.9%) vs n_d ±2.1 (10%) → locks N=82.</div>`;
+    p.appendChild(box);
+  }
+  if(m==='ledger'){
+    const box=document.createElement('div');box.style.cssText='position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:92%;max-width:560px;max-height:88%;overflow:auto';
+    const rows=F.slice(0,F.length-1).map((f,i)=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:4px 10px;background:#fff;border:1px solid #e2d9c9;border-radius:5px;margin:3px 0;font-size:11.5px"><span>${i+1}. ${f.t}</span><span class="status ${f.s}">${f.s}</span></div>`).join('');
+    box.innerHTML=rows;p.appendChild(box);
+  }
+}
+/* interaction */
+let drag=false,lx=0,ly=0;
+cv.addEventListener('mousedown',e=>{drag=true;spin=false;lx=e.clientX;ly=e.clientY;});
+addEventListener('mouseup',()=>drag=false);
+addEventListener('mousemove',e=>{const pk=(F[step].mode==='scission'||F[step].mode==='impact')?UPACK:PACK;
+  if(drag){yaw+=(e.clientX-lx)*.008;pitch=Math.max(-1.4,Math.min(1.4,pitch+(e.clientY-ly)*.008));lx=e.clientX;ly=e.clientY;draw();return;}
+  const r=cv.getBoundingClientRect(),mx=e.clientX-r.left,my=e.clientY-r.top;let b=null,bd=15;
+  for(const n of pk.nuc){const pr=proj(n.pos,pk);const dd=Math.hypot(pr.x-mx,pr.y-my);if(dd<bd){bd=dd;b=n;}}
+  if(F[step].mode==='electron'&&pk.elec)for(const el2 of pk.elec){const pr=proj(el2.pos,pk);const dd=Math.hypot(pr.x-mx,pr.y-my);if(dd<bd){bd=dd;b=el2;}}
+  const tip=el('tip');if(b!==hoverN){hoverN=b;draw();}
+  if(b){tip.style.display='block';tip.style.left=(mx+14)+'px';tip.style.top=(my+12)+'px';
+    tip.innerHTML='<b>'+b.name+'</b>'+(b.kind?'':' · '+(b.type==='p'?'proton':'neutron'));}else tip.style.display='none';});
+cv.addEventListener('mouseleave',()=>el('tip').style.display='none');
+cv.addEventListener('wheel',e=>{e.preventDefault();zoom=Math.max(.5,Math.min(3,zoom*(e.deltaY>0?.9:1.11)));draw();},{passive:false});
+
+/* ═══ steps UI ═══ */
+function buildSteps(){el('steps').innerHTML=F.map((f,i)=>
+  `<div class="step ${i<step?'done':i===step?'cur':''}" data-i="${i}"><div class="n">${i+1}</div><div class="t"><b>${f.t}</b><span class="status ${f.s}">${f.s}</span></div></div>`).join('');
+  document.querySelectorAll('.step').forEach(s=>s.onclick=()=>{step=+s.dataset.i;render();});}
+function render(){
+  const f=F[step];
+  el('stepTitle').textContent=f.t;el('stepNo').textContent=`finding ${step+1} of ${F.length}`;
+  el('statusChip').innerHTML=`<span class="status ${f.s}">${f.s}</span>`;
+  el('curH').textContent=`Finding ${step+1}`;
+  el('statement').innerHTML=f.st;
+  el('checkBody').innerHTML=f.chk(iso);
+  el('ledger').innerHTML=F.slice(0,step+1).map((x,i)=>`<div><span>${i+1}. ${x.t}</span><span class="status ${x.s}">${x.s}</span></div>`).join('');
+  el('dots').textContent=F.map((_,i)=>i===step?'●':(i<step?'•':'·')).join(' ');
+  el('prev').disabled=step===0;el('next').disabled=step===F.length-1;
+  el('next').textContent=step===F.length-1?'complete':'Add next finding ▸';
+  buildSteps();draw();
+}
+el('next').onclick=()=>{if(step<F.length-1){step++;render();}};
+el('prev').onclick=()=>{if(step>0){step--;render();}};
+addEventListener('keydown',e=>{if(e.key==='ArrowRight')el('next').click();if(e.key==='ArrowLeft')el('prev').click();});
+addEventListener('resize',draw);
+function loop(){if(spin&&(F[step].mode!=='band'&&F[step].mode!=='yields'&&F[step].mode!=='ledger')){yaw+=0.003;draw();}requestAnimationFrame(loop);}
+render();loop();
+</script></body></html>

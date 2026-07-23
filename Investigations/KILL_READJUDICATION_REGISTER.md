@@ -43,3 +43,17 @@ are downgraded to UNCONFIRMED-FAIL**; re-adjudication after the kill class clear
    two home-team biases; the cure is the named mechanism, not the swing).
 
 — Register opened by Fable, 2026-07-12, on Harvey's voiding ruling.
+
+---
+
+## METHOD B deployments (recovery front)
+
+- **Run 001 (2026-07-23) — magnetism/moment cluster** → METHOD_B_RUN_001_moment_magnetism.md
+  - overlap-binding (AREA): **CONFIRMED-DEAD** (area ≠ binding; radius well NP17 is separate/live)
+  - NP28 blind moment run: **RE-OPENED** (trigger 1 — golden-angle orientations contradicted the
+    documented p+/n− law; the test was blind to the mesh circulation)
+  - magnitude/quench: **RE-OPENED-OWED** (trigger 3 — native mesh mechanism vs SM fitted g_s^eff;
+    corrected test = around-projection of the radius overlap, pre-committed cc≥0.6 with NO quench
+    knob; blocked on the unique packed positions — same class as triton-contraction-magnitude)
+  - μ=0 presence rule: **STAYS DEGENERATE** (genuinely even-even pairing)
+  - Leash: 1 re-open / 0 recoveries / 2 dead-or-degenerate — not a resurrection engine.
