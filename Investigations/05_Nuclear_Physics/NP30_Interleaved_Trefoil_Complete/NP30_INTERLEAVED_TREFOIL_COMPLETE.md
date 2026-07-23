@@ -143,3 +143,35 @@ slope's deuteron-offset; the shell-modulation magnitude; the moment-quench numbe
 > (ϟ=r_e ⇒ v=c√(r_e/r)) — that spine is derived and exact. The radius *limit* is derived to
 > 0.16%. What remains owed is the unique 3D placement — pin §4 and the moment-quench and the
 > contraction-slope close in one move.
+
+## §9. PROBE — the smallest cases: where static positions hold, where they don't [HUNTER]
+
+The disciplined attack on the §4 master blocker is not another packing guess — it is to run
+the position principle where symmetry **forces** the geometry (deuteron collinear, alpha
+tetrahedral) and read off exactly what regenerates and what does not. Zero-fit, whitelist
+constants only. Result splits clean:
+
+**Regenerates [D]:**
+- **Deuteron binding** = 3αℏc/D with D=(7/3)R_p = **(9/7)·αℏc/R_p = 2.200 MeV** vs 2.2246
+  measured (**−1.1%**) — the contact geometry, no fitted scale.
+- **Heavy radii** — R(A)=R_p(A/η)^⅓ hits Pb-208 at 5.510 vs 5.501 (**+0.2%**); r0→0.9300.
+
+**Does NOT regenerate — names the owed piece [O]:**
+- Read as **static** point positions, the same contact geometry under-predicts light-nucleus
+  **size**: deuteron √(R_p²+(D/2)²)=1.29 fm vs 2.142 measured (**−40%**); the close-pack law
+  is a **heavy-A asymptote** — err −45%(A=2) → −24%(³H) → −12%(⁴He) → −8%(⁴⁰Ca) → **+0.2%(²⁰⁸Pb)**.
+- **The split is the finding:** binding is the contact *minimum*; size is the dynamic
+  *tour-averaged extent*. The same p–e–p pair binds at the 1.96 fm contact but sweeps a
+  diffuse ~2.1 fm envelope. **Binding energy ⇐ contact geometry (shown); rms size ⇐ tour
+  average (owed).** Static positions were never going to give the size — that is the precise
+  boundary of the master blocker, not a failure of the spine.
+
+**Bonus consistency [D]:** ³H (1.759 fm) < ³He (1.966 fm) — the neutron-richer A=3 nuclide is
+**tighter**, exactly the triton-contraction direction (§6). The A-only law is blind to it
+(predicts both 1.341); the contraction rule is the correction the bare law needs. One more
+independent check the direction is right.
+
+> **§9 verdict:** the master blocker's "static positions" reading regenerates *binding* and
+> *heavy radii* zero-fit, but *light-nucleus size* requires the tour-average — which is owed,
+> not broken. The spine (§1) is untouched; what §4 owes is narrowed to one named object: the
+> dynamic extent of the forced contact geometry.
