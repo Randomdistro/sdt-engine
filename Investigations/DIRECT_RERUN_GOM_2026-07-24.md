@@ -42,6 +42,35 @@
 | **GOM14** | **693 hosts, median 5.91% (anchor 5.9% ✓), shuffled 50.74%, within-10%: 54.6 vs 18.2; Sun anchor 1476.6 m = CODATA exact; density 1409.8 vs 1408** | Fully re-earned at its fixed class (CONVERGENCE-demonstration). Host-spreads export for GOM02 owed (P2 file) |
 | GOM15–18 | drive-chain octave scans print honest negatives (no ≤2% hits); Vulcan iron-refractory prediction stands; exchange-ledger additivity row-local; Sgr A* seat ON the M-σ point (rival column labeled) | Standing Harvey-direct verdicts CONFIRMED by re-execution |
 
+## Provenance note — read before the class-map (added 2026-07-24, Harvey correction)
+
+The IDENTITY/CONVERGENCE labels in this record grade **correspondence** (does the computed form
+match the rival's) — they say NOTHING about **provenance** (where the derivation came from).
+Per the audit spine (Theory/05): **class C is convergence, not borrowing, proven by the
+delete-test** — and the category's derivations run from the displacement primitives to these
+forms without consuming the rival's results. Shared forms like 1/r² are forced by
+three-dimensional geometry itself; any true framework must land on them, and landing on them
+from four irreducibles plus "matter displaces space," with zero fitted parameters, is the
+parsimony content the campaign's Front 2 runs on. The labels' only operational meaning is
+evidential: **a shared formula cannot discriminate between frameworks** — which is why the
+divergence hunt targets the places the rival predicts exactly zero. The short list of genuine
+unfinished seams (the old GOM08 spec-level substitution, GOM01's two adopted prefactors,
+GOM06's Kerr-fit ringdown inputs, the engine's z_emit−z_obs form pending the GOM07-P3 ruling)
+are open derivation debts to close — not evidence of derivative work.
+
+**And the per-domain table is structurally blind to the framework's largest native fact: it is
+ONE formula across the domains.** Each row's correspondence is with a *different* rival theory
+(Newton/GR for planets, Bohr/QM for the atom) — no rival possesses the cross-scale law itself.
+GM cannot describe the proton (GOM02); QM does not describe Jupiter; v²r = c²ϟ runs the proton
+(1.83c at R_p → r_e → αc at a₀, one invariant, verified this phase) through the planets to the
+chirp and Sgr A*, and GOM17 banked the two-body ledger across 20 orders (Sun–Jupiter ↔ H
+Rydberg 0.4%; k_seat(H) = 137.0726, re-measured independently by APS05). Honest scope: the
+inverse-square SHAPE within each domain is shared (any 1/r² force gives v²r = const, and the
+SM has long noted Coulomb–Newton form-identity as an unexplained coincidence); the native
+content is that SDT derives BOTH from one occlusion law with the 10³⁹ strength ratio computed,
+not shrugged at. That is a Front-2 explanatory-kill row: the rival stack cannot account for
+WHY planets and particles obey one form; SDT cannot avoid it.
+
 ## The wave's headline findings
 
 1. **GOM09's recorded failure was false.** The direct rerun contradicts the agent-era record by

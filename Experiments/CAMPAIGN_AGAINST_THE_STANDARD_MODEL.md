@@ -109,6 +109,7 @@ candidate into the first banked SM kill prosecutable without a telescope.
 | muon g−2 4.2σ | possible BSM | HVP-compute, no new particle | resolving *toward* SDT via lattice HVP; unquantified in SDT — **quantify it** |
 | BH interior | singularity | max-compression state, ringdown echoes | DISC-ish (echo search, LIGO archival; generic to exotic-compact-object models) |
 | Hubble 73 vs 67 | new physics / systematics | emission + propagation redshift conflated; H₀ distance-dependent | **soft — degenerate** (Pantheon prefers ΛCDM ΔAIC~90; do not oversell) |
+| **Coulomb–Newton form identity** (planets and particles obey ONE inverse-square form) | unexplained coincidence between two unrelated couplings; no cross-scale law exists (GM meaningless for the proton, QM silent on Jupiter) | one occlusion law (Law III) covers both; the 10³⁹ strength ratio computed from geometry; one ledger v²r = c²ϟ verified proton→Sgr A* (GOM17 0.4% across 20 orders; k_seat(H)=137.0726 = APS05's measured seat) | **explanatory-kill row (added 2026-07-24)** — the rival cannot account for the unification; SDT cannot avoid it. Honest scope: per-domain shapes are shared; the ONE-mechanism claim + derived ratio is the native content |
 
 ---
 
