@@ -52,8 +52,13 @@ are downgraded to UNCONFIRMED-FAIL**; re-adjudication after the kill class clear
   - overlap-binding (AREA): **CONFIRMED-DEAD** (area ≠ binding; radius well NP17 is separate/live)
   - NP28 blind moment run: **RE-OPENED** (trigger 1 — golden-angle orientations contradicted the
     documented p+/n− law; the test was blind to the mesh circulation)
-  - magnitude/quench: **RE-OPENED-OWED** (trigger 3 — native mesh mechanism vs SM fitted g_s^eff;
-    corrected test = around-projection of the radius overlap, pre-committed cc≥0.6 with NO quench
-    knob; blocked on the unique packed positions — same class as triton-contraction-magnitude)
+  - magnitude/quench: **TARGET STRUCK 2026-07-23 (Harvey, direct) — "moment quench" is an SM
+    object.** *Quench* presupposes an intrinsic spin that is then reduced (shell-model
+    g_s^eff≈0.7); SDT has no intrinsic spin to quench (NP28). Setting it as an SDT deliverable
+    was **GATE-CONTRABAND — the rival's axiom defining our target.** Replaced by the native
+    deliverable (NP30 §10): compute μ as the around-projection of the **three motions**
+    (toroidal + poloidal + twist), zero knobs. The Schmidt deviation is the poloidal
+    component, not a suppression. Blocker also re-diagnosed: not "unique positions" but the
+    **6-vs-0.74 bridge** (connection law gives 6-fold; density law fits close-pack).
   - μ=0 presence rule: **STAYS DEGENERATE** (genuinely even-even pairing)
   - Leash: 1 re-open / 0 recoveries / 2 dead-or-degenerate — not a resurrection engine.
