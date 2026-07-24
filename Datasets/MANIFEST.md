@@ -27,6 +27,10 @@
 | `nuclear/NIST_ionisation_snapshot.txt` | raw HTML snapshot of a NIST ASD ionisation-energy page (UNPARSED — not clean data) | NIST ASD (web snapshot) | provenance backup for ionisation ladders | `a18139668194` | 3,262 |
 | `nuclear/ionisation_energies.json` | parsed ionisation-energy ladders keyed by Z (eV) | parsed from NIST/CRC compilation | valence / ionisation tooling | `ff53c50eeeb3` | 6,784 |
 | `nuclear/magnetic_moments_compact.txt` | raw HTML snapshot of a nuclear magnetic-moments reference page (UNPARSED — measured anchors only) | web reference snapshot | NP15 moment audits (OBSERVED anchors) | `217ded58b36c` | 1,954 |
+| `nuclear/UVaNCD_SOG_data.dat` | Sum-of-Gaussians **movement-distribution** parameters (Z, A, rms, width, 12 R/Q pairs per nuclide) | UVa Nuclear Charge Density archive, `discovery.phys.virginia.edu/research/groups/ncd/dldata/` — De Vries, de Jager & de Vries 1987 (ADNDT 36, 495) | NP30 §12 radial-load test (F9) | `ac270d4f603b` | 3,585 |
+| `nuclear/UVaNCD_SOG_normalized_columns.dat` | **pre-computed ρ_mv(r) profiles**, SOG, 17 nuclides incl. ¹⁶O/⁴⁰Ca/⁴⁸Ca/¹²⁴Sn/²⁰⁸Pb; r=0–10 fm at 0.01 fm. **Integrates to A** (0.997–0.999), i.e. movement density per nucleon count, NOT per Z | as above | NP30 §12 (the file the verdict was computed from) | `02186bfbc73e` | 272,054 |
+| `nuclear/UVaNCD_FB_data.dat` | Fourier-Bessel movement-distribution coefficients | as above | NP30 §12 cross-check; ⁹⁰Zr available here (absent from SOG set) | `e977046004c9` | 18,306 |
+| `nuclear/UVaNCD_FB_normalized_columns.dat` | pre-computed ρ_mv(r) profiles, Fourier-Bessel, ~90 nuclides incl. ⁹⁰Zr | as above | NP30 §12 cross-check / ladder completion | `781c672721f3` | 1,219,845 |
 
 ## External cache (large files, outside OneDrive)
 

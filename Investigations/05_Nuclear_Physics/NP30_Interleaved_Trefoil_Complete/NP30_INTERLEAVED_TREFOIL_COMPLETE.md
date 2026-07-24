@@ -286,8 +286,59 @@ form factors**, not rms radii. Global saturation is *consistent* with the borne-
 
 > **§11 verdict:** triton-exchange contraction is metric-neutral and real (−6 mid / −10 closure
 > mfm); the tightness **compounds shell-by-shell and saturates precisely at the derived close-pack
-> floor** (0.9300, hard wall, no overshoot) — bankable, zero-param. The inner-shell radial-load
-> compounding is consistent but owed a form-factor dataset.
+> floor** (0.9300, hard wall, no overshoot) — bankable, zero-param.
+> ⚠ **§12 UPDATE:** the *measurements* above all stand. Their reading as **progressive inner
+> compression is REFUTED** by the movement-density profiles — see §12.
+
+## §12. THE RADIAL-LOAD TEST — run, and the strong form is REFUTED [F9, data landed]
+
+> **It is MOVEMENT** (Harvey, mid-run). What elastic e-scattering maps is neither "charge" nor a
+> substance — it is the distribution of **movement**: ρ_mv(r). Energy = movement only.
+> Data: **UVa Nuclear Charge Density archive** (De Vries–de Jager–de Vries 1987 SOG profiles),
+> now cached at `Datasets/nuclear/UVaNCD_*.dat`. Criterion pre-committed and frozen before the
+> data was opened (`NP30_F9_PRECOMMIT_radial_load.md`).
+
+**Normalization trap, closed empirically:** every profile integrates to **A** (0.997–0.999),
+not Z — these are movement densities per nucleon count in fm⁻³. The A/Z conversion I was
+prepared to apply would have been an **error**; measuring the integral instead of assuming
+caught it.
+
+**Measured interior movement density** (window 1.5 fm → R_sharp−2):
+```
+ 16O 0.1372   40Ca 0.1524   48Ca 0.1757   124Sn 0.1612   208Pb 0.1584   (fm⁻³)
+```
+**Non-monotone — it peaks at ⁴⁸Ca and falls.** ²⁰⁸Pb's interior (0.1584) is **less** dense than
+⁴⁸Ca's (0.1757); among nuclei with a genuine bulk interior (Sn, Pb) it is flat to ~2%.
+
+> **VERDICT: "borne down from above" — the strong form — is REFUTED.** Stacking further closed
+> shells does **not** progressively compress the interior. The interior **saturates**; it does
+> not compound. [pre-committed, reported as it fell]
+
+**Near-miss on a false confirm (recorded):** endpoint-only, ¹⁶O→²⁰⁸Pb reads **+15.5%**, which
+would have tripped the pre-committed ">15% ⇒ fork" clause. The **monotonicity conjunction** in
+the criterion is what caught it — and ¹⁶O's interior window (1.5–2.0 fm) is too narrow to
+trust regardless. Had the criterion been written on endpoints alone, this would have been
+banked as a fork against saturation. It is not one.
+
+**What survives — and it is the real result [D, zero-param]:** close-packing of proton
+boundaries **derives the textbook nuclear radius constant r₀ ≈ 1.2 fm**, and with it the mean
+nuclear movement density:
+```
+r0 = R_p/η^⅓ = 0.9300 → sharp r₀ = √(5/3)·r0 = 1.2007 fm → mean ρ_mv = 0.1379 fm⁻³
+canonical r₀ = 1.2 fm → 0.1382  (0.2%)      measured ²⁰⁸Pb mean = 0.1385  (0.4%)
+```
+Every liquid-drop / Fermi-gas treatment **inputs** r₀. SDT **derives** it from R_p and η alone.
+Explanatory result by the corrected criterion — **but not a fork**, and it does not license the
+inner-compression claim the same data kills.
+⚠ **Pre-commit flaw, stated not hidden:** my ρ₀ band (0.14–0.17) was set against the *central*
+density when close-packing predicts the **mean**. By the letter 0.1379 narrowly misses it;
+like-for-like it is a 0.2% hit. The band was mis-specified — recorded, not quietly moved.
+
+**Physical resolution — what §11's compounding actually was:** r0 compounds to the floor because
+the **surface fraction shrinks**, not because the interior compresses. Light nuclei are nearly
+all surface (low *mean* movement density); heavy nuclei approach the bulk value. **The floor
+r0=0.9300 IS the bulk saturation density expressed as a radius constant.** §11's measurements
+stand exactly as measured; the inner-compression *interpretation* does not.
 
 ### The moment, in native terms — "quench" is struck
 > **RETRACTION (Harvey, direct): "moment quench" is an SM object and is removed as an SDT
