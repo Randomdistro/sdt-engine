@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Law IV of Spatial Displacement Theory — Inertial Mass. Mass is the medium's reluctance to reorganise the convergence around a moving displacement; inertial and gravitational mass are one geometric thing.">
+<title>Law IV · Inertial Mass — SDT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  /* ── LAW IV signature: deep blue — motion through the convergence rest frame ── */
+  :root{ --copper:#35618e; --copper-light:#6f9bc4; --copper-glow:rgba(53,97,142,0.12); }
+  body{ overflow-x:hidden; }
+  .inv-tag{ font-family:'JetBrains Mono',monospace; font-size:0.7rem; letter-spacing:0.18em;
+    text-transform:uppercase; color:var(--copper); }
+  .cert{ display:inline-block; font-family:'JetBrains Mono',monospace; font-size:0.66rem;
+    letter-spacing:0.1em; padding:2px 9px; border-radius:3px; text-transform:uppercase;
+    border:1px solid rgba(53,97,142,0.4); color:var(--copper); background:rgba(53,97,142,0.08); }
+  .cert--d{ border-color:rgba(126,201,164,0.5); color:#2f6f52; background:rgba(126,201,164,0.10); }
+
+  /* forward reveals — content arrives toward the reader, not up from below */
+  .fwd{ opacity:0; transform:translateY(38px) scale(0.965); transition:opacity 1s var(--ease-out), transform 1.1s var(--ease-out); }
+  .fwd.on{ opacity:1; transform:none; }
+
+  /* parallax geometry, set far back */
+  .par-field{ position:absolute; top:0; left:0; right:0; height:100%; pointer-events:none; z-index:0; }
+  .par{ position:absolute; will-change:transform; opacity:0.5; }
+  .par svg{ display:block; }
+  .chapter, .inv-hero, .band, .pull{ position:relative; z-index:1; }
+
+  .inv-hero{ padding:var(--sp-3xl) var(--sp-xl) var(--sp-2xl); text-align:center;
+    background:linear-gradient(180deg,var(--cream) 0%, var(--paper) 100%); overflow:hidden; }
+  .inv-hero h1{ font-family:'Source Serif 4',Georgia,serif; font-weight:300; font-size:var(--fs-3xl);
+    line-height:1.06; letter-spacing:-0.01em; color:var(--ink); margin:var(--sp-md) 0; }
+  .inv-hero h1 em{ font-style:italic; color:var(--copper); }
+  .inv-hero .lead{ max-width:var(--content-width); margin:var(--sp-md) auto var(--sp-xl);
+    color:var(--ink-muted); font-size:var(--fs-md); line-height:1.7; }
+
+  /* the DESIGN ELEMENT: the convergence dipole */
+  .dipole{ max-width:var(--wide-width); margin:0 auto; }
+  .dipole canvas{ width:100%; height:360px; display:block; border-radius:6px; }
+  .dipole figcaption{ font-family:'JetBrains Mono',monospace; font-size:0.68rem; color:var(--ink-faint);
+    letter-spacing:0.05em; margin-top:0.7rem; text-align:center; }
+
+  /* passing pull-quote — scales in from a distance */
+  .pull{ padding:var(--sp-2xl) var(--sp-xl); text-align:center; }
+  .pull blockquote{ max-width:34rem; margin:0 auto; font-family:'Source Serif 4',Georgia,serif;
+    font-weight:300; font-style:italic; font-size:var(--fs-2xl); line-height:1.28; color:var(--ink);
+    opacity:0; transform:scale(0.82); transition:opacity 1.1s var(--ease-out), transform 1.2s cubic-bezier(.16,1,.3,1); }
+  .pull blockquote.on{ opacity:1; transform:none; }
+  .pull blockquote span{ color:var(--copper); }
+
+  /* full-bleed banner — the microwave dipole, our motion written in the sky */
+  .band{ height:56vh; min-height:340px; display:flex; align-items:flex-end; overflow:hidden;
+    background:linear-gradient(100deg, #2a63b8 0%, #143a6e 26%, #0a0d1a 50%, #4a1420 74%, #8f2a2f 100%); }
+  .band canvas{ position:absolute; inset:0; width:100%; height:100%; }
+  .band .cap{ position:relative; z-index:2; padding:var(--sp-lg) var(--sp-xl); color:rgba(255,255,255,0.92);
+    max-width:38rem; }
+  .band .cap .k{ font-family:'JetBrains Mono',monospace; font-size:0.66rem; letter-spacing:0.14em;
+    text-transform:uppercase; color:rgba(255,255,255,0.7); }
+  .band .cap p{ font-family:'Source Serif 4',serif; font-size:var(--fs-lg); line-height:1.4; margin-top:6px; color:#fff; }
+
+  .backlink{ position:fixed; top:0; left:0; right:0; z-index:100; padding:0.7rem 1.4rem;
+    display:flex; justify-content:space-between; align-items:center;
+    background:rgba(245,240,232,0.86); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--paper-edge); font-size:0.72rem; }
+  .backlink a{ color:var(--copper); text-decoration:none; letter-spacing:0.04em; }
+  .backlink .who{ font-family:'Source Serif 4',serif; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--ink-soft); font-weight:600; }
+  .step{ font-family:'JetBrains Mono',monospace; color:var(--copper); font-size:0.72rem; letter-spacing:0.12em; }
+</style>
+</head>
+<body>
+
+<div class="backlink">
+  <span class="who">Spatial <span style="color:var(--copper)">Displacement</span> Theory</span>
+  <a href="investigations.html">← the whole picture</a>
+</div>
+
+<!-- parallax geometry -->
+<div class="par-field" aria-hidden="true">
+  <div class="par" data-par="0.14" style="top:8%;left:-4%;">
+    <svg width="360" height="360" viewBox="0 0 360 360"><circle cx="180" cy="180" r="176" fill="none" stroke="#35618e" stroke-width="1"/><circle cx="180" cy="180" r="120" fill="none" stroke="#35618e" stroke-width="1"/><circle cx="180" cy="180" r="64" fill="none" stroke="#35618e" stroke-width="1"/></svg>
+  </div>
+  <div class="par" data-par="-0.10" style="top:120%;right:-5%;">
+    <svg width="300" height="300" viewBox="0 0 300 300"><polygon points="150,10 290,230 10,230" fill="none" stroke="#6f9bc4" stroke-width="1"/></svg>
+  </div>
+  <div class="par" data-par="0.08" style="top:220%;left:6%;">
+    <svg width="260" height="260" viewBox="0 0 260 260"><line x1="0" y1="130" x2="260" y2="130" stroke="#35618e"/><line x1="130" y1="0" x2="130" y2="260" stroke="#35618e"/><circle cx="130" cy="130" r="90" fill="none" stroke="#35618e"/></svg>
+  </div>
+</div>
+
+<!-- ═══════════════════ HERO ═══════════════════ -->
+<header class="inv-hero">
+  <div class="fwd on">
+    <div class="inv-tag">The Laws · IV · Inertial Mass</div>
+    <h1>The Medium's<br><em>Reluctance</em> to Let You Move</h1>
+    <p class="lead">Mass has always been treated as a thing a body simply <em>has</em>. Here it is not a possession but a relationship — the cost of shifting the convergent pressure out of the way of a moving displacement. From that single idea come Newton's second law, the reason weight and stubbornness are the same, the speed limit, and why a fast thing grows heavy.</p>
+  </div>
+  <figure class="dipole fwd">
+    <canvas id="dipCanvas"></canvas>
+    <figcaption id="dipCap">at rest the arrival is even; set the body moving and it tilts — dense ahead, thin behind</figcaption>
+  </figure>
+</header>
+
+<!-- pull-quote -->
+<section class="pull"><blockquote>The shadow a body casts on others is the <span>same displacement</span> that resists being moved.</blockquote></section>
+
+<!-- ═══════════════════ CH.1 ═══════════════════ -->
+<section class="chapter">
+  <div class="chapter__inner fwd">
+    <div class="chapter__num">One</div>
+    <h2 class="chapter__title">The diverted river</h2>
+    <p class="chapter__lead">A particle is a volume the convergence cannot cross. What would have flowed through must flow around.</p>
+    <p>Recall that matter is a <strong>displacement</strong> — a knot that excludes a small volume of the lattice from the relay. The convergent throughput that would have passed straight through that volume is turned aside and made to flow around its boundary. That diverted flow is not incidental; it is the particle's <strong>rest energy</strong>. The famous E₀ = m₀c² is, read this way, simply the bookkeeping of how much convergence a displacement holds out of its path.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════ CH.2 ═══════════════════ -->
+<section class="chapter chapter--alt">
+  <div class="chapter__inner fwd">
+    <div class="chapter__num">Two</div>
+    <h2 class="chapter__title">The dipole of motion</h2>
+    <p class="chapter__lead">Standing still, the body is pressed evenly and feels nothing. Set it moving, and the balance tips.</p>
+    <p>A moving displacement runs <em>into</em> the fronts arriving ahead and <em>away</em> from those arriving behind. The even pressure of rest acquires a lean — heavier in front, lighter behind. This lean is a <strong>dipole</strong>, a one-sidedness, and it is not a metaphor: it is measured. Our own motion through the convergence rest frame is written across the microwave sky as a dipole of exactly this kind, a warmth ahead and a coolness behind of size ΔT/T = v/c ≈ 1.23 × 10⁻³.</p>
+  </div>
+</section>
+
+<!-- full-bleed banner -->
+<section class="band">
+  <canvas id="bandCanvas"></canvas>
+  <div class="cap">
+    <div class="k">the microwave dipole</div>
+    <p>Our motion through the convergence rest frame, written in the sky — a warmth ahead, a coolness behind.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════ CH.3 ═══════════════════ -->
+<section class="chapter">
+  <div class="chapter__inner fwd">
+    <div class="chapter__num">Three</div>
+    <h2 class="chapter__title">Inertia is the reluctance</h2>
+    <p class="chapter__lead">The tilted pressure pushes back against whatever tilted it.</p>
+    <p>Because the arrival is now heavier in front, it presses against the acceleration that made it so. That backward press is <strong>inertia</strong> — not a property stored inside the body, but the medium's resistance to having its flow reorganised. Measure it and you recover Newton's second law exactly, with the mass laid bare as a geometric quantity:</p>
+    <div class="eq-block">
+      <div class="eq">F = − m a, &nbsp; m = Φ V<sub>disp</sub> / (3 ℓ<sub>P</sub>³ c²)</div>
+      <div class="eq-caption">mass is the convergence-reorganisation cost of the displaced volume</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ CH.4 ═══════════════════ -->
+<section class="chapter chapter--alt">
+  <div class="chapter__inner fwd">
+    <div class="chapter__num">Four</div>
+    <h2 class="chapter__title">Why the two masses are one</h2>
+    <p class="chapter__lead">For three centuries it was a coincidence begging to be explained. Here it cannot be otherwise.</p>
+    <p>A body's <em>gravitational</em> mass is the size of the shadow it casts in the pressure of others. Its <em>inertial</em> mass is the cost of reorganising that same pressure when it accelerates. But both are set by one and the same thing — the volume it displaces. Same volume, same medium, same number. The equivalence that Einstein had to elevate to a principle arrives here as a plain identity: the shadow and the stubbornness are two views of one geometry.</p>
+  </div>
+</section>
+
+<!-- pull-quote -->
+<section class="pull"><blockquote>Mass is not a substance a thing contains. It is the medium's <span>reluctance</span> to let the thing be moved.</blockquote></section>
+
+<!-- ═══════════════════ CH.5 ═══════════════════ -->
+<section class="chapter">
+  <div class="chapter__inner fwd">
+    <div class="chapter__num">Five</div>
+    <h2 class="chapter__title">The ceiling, and the swelling</h2>
+    <p class="chapter__lead">There is a limit to how far the balance can tip — and the closer you push it, the harder it fights.</p>
+    <p>The pressure arriving from behind can thin, but it cannot fall below nothing. When a body's speed approaches <em>c</em>, the trailing arrival empties entirely: there is no pressure left behind to reorganise, and so no way to push faster. That is the speed limit, and it is a consequence, not a decree. And as the rear empties, the cost of each further increment of speed climbs without bound — the body's resistance swells as m(v) = γ m₀. Relativistic mass is nothing but the emptying of the angular budget.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════ VERDICT / BRIDGE ═══════════════════ -->
+<section class="chapter chapter--deep">
+  <div class="chapter__inner fwd">
+    <div class="chapter__num">Standing</div>
+    <h2 class="chapter__title">What is earned, and what is next</h2>
+    <p class="chapter__lead">Newton's second law, the equivalence principle, the speed limit, and relativistic mass — from one dipole.</p>
+    <div style="display:flex;gap:0.6rem;justify-content:center;margin:var(--sp-lg) 0;flex-wrap:wrap;">
+      <span class="cert cert--d">DERIVED — F=ma, equivalence, v≤c, γm₀</span>
+      <span class="cert">CONFIRMED · the CMB dipole</span>
+    </div>
+    <p>Each result follows from the convergence dipole of a moving displacement, and the tilt itself is not assumed — it is the very dipole COBE and Planck measured in our motion through the rest frame. What remains open is honest and named: the displaced volume of the proton and electron, still to be read from the lattice topology.</p>
+    <p>That emptying angular budget is the thread into the next Law. Every particle is handed one allowance of speed, and must spend it on two things at once — turning inside itself, and travelling through the world. <strong>That</strong> is the Movement Budget.</p>
+    <p class="step">Next → The Laws · V — The Movement Budget</p>
+    <div class="margin-note">The Laws · IV · Inertial Mass. Author: J. C. Harvey, Melbourne.</div>
+  </div>
+</section>
+
+<footer style="padding:var(--sp-xl);text-align:center;background:var(--midnight);color:var(--midnight-mute);font-size:var(--fs-sm);position:relative;z-index:1;">
+  <a href="investigations.html" style="color:var(--copper-light);text-decoration:none;">← the whole picture</a>
+</footer>
+
+<script>
+(function(){
+  // forward reveals
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target);} });},{threshold:0.16});
+  document.querySelectorAll('.fwd, .pull blockquote').forEach(function(el){io.observe(el);});
+
+  // parallax on scroll (depth — moving forward through the field)
+  var pars=[].slice.call(document.querySelectorAll('.par'));
+  var ticking=false;
+  function par(){ var y=window.scrollY;
+    for(var i=0;i<pars.length;i++){ var s=parseFloat(pars[i].getAttribute('data-par'))||0;
+      pars[i].style.transform='translate3d(0,'+(y*s).toFixed(1)+'px,0)'; }
+    ticking=false; }
+  addEventListener('scroll',function(){ if(!ticking){ requestAnimationFrame(par); ticking=true; } },{passive:true});
+  par();
+
+  // ── design element: the convergence dipole ──
+  var cv=document.getElementById('dipCanvas'), ctx=cv.getContext('2d'), cap=document.getElementById('dipCap');
+  var dpr=Math.min(window.devicePixelRatio||1,2), W=0,H=0,cx=0,cy=0,R=1,M=[];
+  function build(){ W=cv.clientWidth;H=cv.clientHeight;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
+    cx=W/2;cy=H/2; R=Math.min(W*0.42,H*0.44); M=[];
+    for(var i=0;i<220;i++){ var a=Math.random()*6.2832; M.push({a:a, r:R*(0.5+Math.random()*0.6), sp:0.5+Math.random()*0.7}); }
+  }
+  build(); window.addEventListener('resize',build);
+  function frame(ts){
+    if(frame._t===undefined)frame._t=ts; var dt=Math.min(0.05,(ts-frame._t)/1000); frame._t=ts; var t=ts/1000;
+    var v=0.5-0.5*Math.cos(t*0.6); v*=0.92;              // v/c, slow accelerate–coast
+    var g=1/Math.sqrt(1-v*v);
+    ctx.clearRect(0,0,W,H);
+    // hemisphere haze: blue ahead (right), red behind (left)
+    var gA=ctx.createRadialGradient(cx+R*0.5,cy,10,cx+R*0.5,cy,R*0.9);
+    gA.addColorStop(0,'rgba(60,110,190,'+(0.05+v*0.16)+')'); gA.addColorStop(1,'rgba(60,110,190,0)');
+    ctx.fillStyle=gA; ctx.fillRect(0,0,W,H);
+    var gB=ctx.createRadialGradient(cx-R*0.5,cy,10,cx-R*0.5,cy,R*0.9);
+    gB.addColorStop(0,'rgba(180,60,70,'+(0.05+v*0.10)+')'); gB.addColorStop(1,'rgba(180,60,70,0)');
+    ctx.fillStyle=gB; ctx.fillRect(0,0,W,H);
+    // motes converging; density/brightness leans front(+x)
+    for(var i=0;i<M.length;i++){ var m=M[i]; var lean=Math.cos(m.a);        // +1 ahead, -1 behind
+      var speed=(40+v*90*(0.6+0.5*lean))*dt; m.r-=speed*m.sp;
+      if(m.r<8){ m.a=Math.random()*6.2832; m.r=R*(0.8+Math.random()*0.4); }
+      var x=cx+Math.cos(m.a)*m.r, y=cy+Math.sin(m.a)*m.r*0.92;
+      var bright=0.3+0.5*(0.5+0.5*lean)*(0.4+v);
+      var col = lean>0 ? '90,150,220' : '200,110,120';
+      ctx.beginPath(); ctx.arc(x,y,1.5,0,6.2832); ctx.fillStyle='rgba('+col+','+bright.toFixed(2)+')'; ctx.fill();
+    }
+    // the body
+    ctx.beginPath(); ctx.arc(cx,cy,7,0,6.2832); ctx.fillStyle='rgba(30,28,24,0.9)'; ctx.fill();
+    // resistive push (backward, ∝ dipole)
+    var L=20+v*90;
+    ctx.strokeStyle='rgba(53,97,142,0.9)'; ctx.lineWidth=2.5; ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(cx-L,cy); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx-L,cy); ctx.lineTo(cx-L+8,cy-5); ctx.lineTo(cx-L+8,cy+5); ctx.closePath(); ctx.fillStyle='rgba(53,97,142,0.9)'; ctx.fill();
+    // motion arrow (forward)
+    ctx.strokeStyle='rgba(90,150,220,0.7)'; ctx.lineWidth=2; ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(cx+L*0.7,cy); ctx.stroke();
+    ctx.font='11px "JetBrains Mono",monospace'; ctx.fillStyle='rgba(122,114,101,0.9)'; ctx.textAlign='left';
+    ctx.fillText('v = '+v.toFixed(2)+' c', 14, 22);
+    ctx.fillText('γ = '+g.toFixed(2), 14, 38);
+    if(cap) cap.textContent = v<0.06 ? 'at rest — arrival is even, and the body feels nothing'
+      : 'moving at '+v.toFixed(2)+'c — arrival tilts (blue ahead, red behind); the push resists · γ = '+g.toFixed(2);
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+
+  // ── banner: a drifting starfield over the dipole gradient ──
+  var bc=document.getElementById('bandCanvas'), bx=bc.getContext('2d'), stars=[], bw=0,bh=0;
+  function bbuild(){ bw=bc.clientWidth;bh=bc.clientHeight;bc.width=bw*dpr;bc.height=bh*dpr;bx.setTransform(dpr,0,0,dpr,0,0);
+    stars=[]; for(var i=0;i<160;i++) stars.push({x:Math.random()*bw,y:Math.random()*bh,z:0.3+Math.random(),ph:Math.random()*6.28}); }
+  bbuild(); window.addEventListener('resize',bbuild);
+  function bframe(ts){ var t=ts/1000; bx.clearRect(0,0,bw,bh);
+    for(var i=0;i<stars.length;i++){ var s=stars[i]; s.x-=s.z*0.25; if(s.x<0)s.x=bw;
+      var tw=0.5+0.5*Math.sin(t*1.5+s.ph);
+      bx.beginPath(); bx.arc(s.x,s.y,s.z*1.1,0,6.2832); bx.fillStyle='rgba(255,255,255,'+(0.15+tw*0.4*s.z)+')'; bx.fill(); }
+    requestAnimationFrame(bframe); }
+  requestAnimationFrame(bframe);
+})();
+</script>
+</body>
+</html>

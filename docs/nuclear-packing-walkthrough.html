@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Shadow Is the Mass Defect — SDT Nuclear Packing</title>
+<link rel="stylesheet" href="style.css">
+<style>
+/* light walkthrough — Tekne base from style.css; accent chosen for the subject: copper
+   (the light) against steel (the forms). One design element that IS the physics: every
+   figure is lit high-left and shadowed low-right, the sequencer's signature. */
+body{ background:var(--paper,#faf6ef); color:var(--ink,#1e1c18); font-family:'Inter','Segoe UI',sans-serif; margin:0; }
+.wt-top{ position:fixed; top:0; left:0; right:0; z-index:50; display:flex; justify-content:space-between; align-items:center;
+  padding:10px 22px; background:rgba(250,246,239,0.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--paper-edge,#e8e0d2); font-size:12px; }
+.wt-top .crumb{ letter-spacing:.12em; text-transform:uppercase; font-weight:600; color:var(--copper,#b07430); }
+.wt-top a{ color:var(--steel,#4a6d82); text-decoration:none; margin-left:14px; }
+.wt-top a:hover{ color:var(--copper,#b07430); }
+.chap{ max-width:860px; margin:0 auto; padding:84px 26px 40px; }
+.chap h1{ font-size:34px; line-height:1.25; color:var(--ink,#1e1c18); margin:0 0 6px; }
+.chap h2{ font-size:22px; color:var(--ink-soft,#3d3830); margin:44px 0 10px; }
+.chap .kicker{ font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--copper,#b07430); font-weight:700; margin-bottom:10px; }
+.chap p{ font-size:16px; line-height:1.75; color:var(--ink-soft,#3d3830); margin:14px 0; }
+.chap .gloss{ color:var(--ink-muted,#7a7265); font-style:italic; }
+.fig{ margin:26px 0; border:1px solid var(--paper-edge,#e8e0d2); border-radius:10px; background:var(--cream,#f5f0e8);
+  box-shadow:0 10px 30px rgba(30,28,24,0.07); overflow:hidden; }
+.fig canvas{ display:block; width:100%; height:340px; }
+.fig .cap{ padding:9px 14px; font-size:12.5px; color:var(--ink-muted,#7a7265); border-top:1px solid var(--paper-edge,#e8e0d2); }
+.badge{ display:inline-block; font-size:10px; font-weight:700; letter-spacing:.1em; padding:2px 8px; border-radius:4px; margin-right:6px;
+  background:var(--copper-glow,rgba(176,116,48,0.12)); color:var(--copper,#b07430); border:1px solid rgba(176,116,48,0.3); }
+.badge.steel{ background:rgba(74,109,130,0.10); color:var(--steel,#4a6d82); border-color:rgba(74,109,130,0.3); }
+.reveal{ opacity:0; transform:translateY(22px); transition:opacity .7s ease, transform .7s ease; }
+.reveal.on{ opacity:1; transform:none; }
+.linkrow{ display:flex; gap:14px; flex-wrap:wrap; margin:20px 0 60px; }
+.linkrow a{ padding:10px 16px; border-radius:8px; text-decoration:none; font-size:13.5px; font-weight:600;
+  border:1px solid var(--paper-edge,#e8e0d2); color:var(--ink-soft,#3d3830); background:var(--paper,#faf6ef); }
+.linkrow a:hover{ border-color:var(--copper,#b07430); color:var(--copper,#b07430); }
+</style>
+</head>
+<body>
+<div class="wt-top">
+  <span class="crumb">Spatial Displacement Theory · the packing, taught</span>
+  <span><a href="index.html">home</a><a href="nuclear-packing-sequencer.html">the sequencer (dark)</a><a href="atomicus-lab.html">atomicus lab</a></span>
+</div>
+
+<!-- ═══════ 1 · THE INFLUX ═══════ -->
+<section class="chap">
+  <div class="kicker reveal">One · The influx</div>
+  <h1 class="reveal">The shadow is the mass defect.</h1>
+  <p class="reveal">Begin with the sky. From every direction, always, space delivers a converging
+  press — the influx from the boundary of the visible universe, a sphere that grows two
+  light-years wider every year. Nothing needs to be added for this press to exist; it is what
+  space is doing. Stand anywhere and the whole sky pushes inward on that point, evenly, from
+  all sides at once.</p>
+  <p class="reveal">Evenly — unless something blocks a part of it. <span class="gloss">Occlusion —
+  one body blocking part of the pressure converging on another, so the unblocked side wins —
+  matters because that imbalance is every force in this theory.</span> Blocking is not a
+  side-effect here. Blocking is the work.</p>
+  <div class="fig reveal"><canvas id="cvInflux"></canvas>
+    <div class="cap">The influx: the sky's press converging on a proton. Where the flow is caught, a shadow forms behind — high light to the left, shadow low-right. Drag to nudge the proton.</div>
+  </div>
+</section>
+
+<!-- ═══════ 2 · THE FORM ═══════ -->
+<section class="chap">
+  <div class="kicker reveal">Two · The form</div>
+  <h2 class="reveal">A proton is a rope tied in a knot.</h2>
+  <p class="reveal">What does the catching? A form. The proton is a loop of moving substance tied
+  as a trefoil — <span class="gloss">a knot of three crossings, the simplest loop that cannot be
+  undone without cutting; topology, the study of shape that survives bending, matters here
+  because an untieable knot is a particle that cannot decay away.</span> Follow the path and you
+  cross six arcs: under, over, under, over, under, over.</p>
+  <p class="reveal">And the rope itself is built, not asserted. Take the electron's standing loop
+  in hydrogen, drawn as a tube of the electron's own width. Pack one thousand eight hundred and
+  thirty-six of those volumes into the knot's length — the proton-to-electron mass ratio,
+  written as geometry. The strands travel together in a slow lay, like paired wires, weaving as
+  one group.</p>
+  <div class="fig reveal"><canvas id="cvRope"></canvas>
+    <div class="cap">Four visible strands stand in for the 1836-electron thread — the real thread is far finer than any screen. Watch the six arcs draw themselves: under, over, under, over, under, over.</div>
+  </div>
+</section>
+
+<!-- ═══════ 3 · THE MESH ═══════ -->
+<section class="chap">
+  <div class="kicker reveal">Three · The mesh</div>
+  <h2 class="reveal">Meshed forms work in synchrony — and spin makes the torus.</h2>
+  <p class="reveal">Bring two forms together and ask what binding is. Not glue. Gearing. A proton
+  and a neutron — a proton carrying one electron inside — mesh at their rims, and the rims are
+  narrow: the poloidal flow allows only a small window of contact, so <em>angle</em> is the
+  premium, not area. For the windows to mesh at all, neighbours must turn in opposite senses —
+  proton one way, neutron the other. Complementary, or grinding.</p>
+  <p class="reveal">Spin the meshed pair fast and each knot blurs into the tight ring it truly
+  occupies at speed. Meshed, they work parallel, in synchrony — and a pair working in synchrony
+  needs <em>less total movement</em> than two working alone. Energy is movement; the megaelectronvolt
+  is a bookkeeping unit for movement. The movement saved by meshing has a value. Hold that thought.</p>
+  <div class="fig reveal"><canvas id="cvMesh"></canvas>
+    <div class="cap">Two knots, complementary rotation, meshing at the rim windows. The slider is the spin: fast spin reads as the tight torus. Proton warm, neutron cool.</div>
+  </div>
+</section>
+
+<!-- ═══════ 4 · UNION, NOT SUM ═══════ -->
+<section class="chap">
+  <div class="kicker reveal">Four · Union, not sum</div>
+  <h2 class="reveal">Why the old radius stopped computing.</h2>
+  <p class="reveal">Here is the question this page exists to answer: when two forms interleave
+  without interfering, whose width is the shared region? It belongs to neither separately. Any
+  measure that assumes each nucleon keeps a private, separable width must fail for bound
+  nucleons — and the literature's "charge radius" assumed exactly that, on top of assuming a
+  charge-substance the theory does not contain. It doesn't compute. It never could.</p>
+  <p class="reveal">The bookkeeping that survives interleaving is the union. Light the packed
+  nucleus and read its one shadow: where forms overlap along the light, the shadow counts the
+  shared region <em>once</em>. Sum the shadows of the isolated forms, subtract the shadow of the
+  union, and the difference — call it ΔA — is precisely what the private-width picture
+  overcounts. That overcount, priced in movement, is the mass defect. The shadow is not a
+  picture of the defect. The shadow's arithmetic <em>is</em> the defect's arithmetic.</p>
+  <div class="fig reveal"><canvas id="cvUnion"></canvas>
+    <div class="cap">Slide the forms together: Σ singles stays fixed, the union shrinks, and ΔA — the shared occlusion, shown in copper — grows. ΔA × κ is the binding energy released.</div>
+  </div>
+</section>
+
+<!-- ═══════ 5 · THE LADDER ═══════ -->
+<section class="chap">
+  <div class="kicker reveal">Five · The ladder of shells</div>
+  <h2 class="reveal">Opposition builds the elements.</h2>
+  <p class="reveal">The alpha — two proton–neutron pairs — sits at the centre as four interleaved
+  poles turning on one shared axis. Around it, satellites take the most-spread positions
+  opposition allows: one lone valence riding above (lithium); a tense dyad at opposite poles,
+  chasing each other around the core (beryllium); then trigonal, then tetrahedral — carbon's four
+  deuterons standing where its chemistry says they should — then the five-fold bipyramid, the
+  octahedron, and so on, until twelve close the icosahedral shell and the next shell opens.
+  <span class="gloss">The 720° rule — a closed shell must carry exactly 720 degrees of angular
+  defect — is why twelve sixty-degree caps close a sphere, why the wire model pulls itself into
+  a bowl, and why nuclei want to be round.</span></p>
+  <div class="fig reveal"><canvas id="cvShells"></canvas>
+    <div class="cap">The opposition ladder, element by element: press ▶ to walk Li → Be → B → C → N → O. Grey ring: the shell radius, with its line-and-label.</div>
+  </div>
+</section>
+
+<!-- ═══════ 6 · THE HONEST NUMBERS ═══════ -->
+<section class="chap">
+  <div class="kicker reveal">Six · What is earned, what is owed</div>
+  <h2 class="reveal">The numbers, with their labels on.</h2>
+  <p class="reveal"><span class="badge">CALIBRATED</span> One scale converts shadow-area to
+  movement: κ, fixed once by least squares across the table — 12.9 MeV per square femtometre on
+  the opposition packing. One dial, declared.</p>
+  <p class="reveal"><span class="badge steel">MEASURED</span> With that single dial, the shadow
+  union tracks the measured binding of 217 isotopes at R² = 0.981, mean error under nine
+  percent — and the law held when the packing geometry was completely rearranged, which is what
+  you would expect if the defect belongs to the overlap and not to any one arrangement.</p>
+  <p class="reveal"><span class="badge steel">OPEN</span> What is owed, plainly: the light
+  alpha-cluster nuclei bind a little less than pure overlap suggests, and the iron peak's fine
+  structure does not fall out of geometry alone — both point at the depth of the shared-electron
+  well, the angular-window ledger still to be built. A gap named clearly is a kind of teaching too.</p>
+  <div class="linkrow reveal">
+    <a href="nuclear-packing-sequencer.html">Open the full sequencer (dark) →</a>
+    <a href="atomicus-lab.html">Browse every isotope in the lab →</a>
+    <a href="sdt_walkthrough.html">Start from the primitives →</a>
+  </div>
+</section>
+
+<script>
+/* ───────────────────────── reveal on scroll ───────────────────────── */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on');}),{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+function fit(cv){ const r=cv.getBoundingClientRect(), d=Math.min(devicePixelRatio,2);
+  cv.width=r.width*d; cv.height=340*d; cv.getContext('2d').setTransform(d,0,0,d,0,0); return [r.width,340]; }
+const TAU=Math.PI*2;
+/* trefoil path (pretzel), shared by figures */
+function tre(t,S,zamp=1.45){ const a=TAU*t;
+  return [Math.sin(a)+2*Math.sin(2*a), Math.cos(a)-2*Math.cos(2*a), -zamp*Math.sin(3*a)].map(v=>v*S); }
+
+/* ── 1 · influx: motes converge; caught flow shades a low-right shadow ── */
+(()=>{ const cv=document.getElementById('cvInflux'); let [W,H]=fit(cv); const cx0=W*0.44,cy0=H*0.52;
+  let px=cx0,py=cy0, drag=false;
+  cv.addEventListener('pointerdown',e=>{drag=true;}); addEventListener('pointerup',()=>drag=false);
+  cv.addEventListener('pointermove',e=>{ if(!drag)return; const r=cv.getBoundingClientRect();
+    px=e.clientX-r.left; py=e.clientY-r.top; });
+  const M=160, motes=[];
+  for(let i=0;i<M;i++) motes.push({a:Math.random()*TAU, r:Math.max(W,H)*(0.3+Math.random()*0.5), s:0.4+Math.random()*0.8});
+  const g=cv.getContext('2d');
+  (function tick(){ requestAnimationFrame(tick); [W,H]=[cv.getBoundingClientRect().width,340];
+    g.clearRect(0,0,W,H);
+    // back wall shading + cast shadow low-right of the proton
+    const shx=px+86, shy=py+64;
+    const sg=g.createRadialGradient(shx,shy,6,shx,shy,90);
+    sg.addColorStop(0,'rgba(60,50,40,0.32)'); sg.addColorStop(1,'transparent');
+    g.save(); g.translate(shx,shy); g.scale(1,0.45); g.translate(-shx,-shy);
+    g.beginPath(); g.arc(shx,shy,90,0,TAU); g.fillStyle=sg; g.fill(); g.restore();
+    // light glyph high-left
+    g.fillStyle='rgba(176,116,48,0.85)'; g.font='16px serif'; g.fillText('☀', 18, 26);
+    // motes converging on the proton point
+    g.fillStyle='rgba(74,109,130,0.55)';
+    for(const m of motes){ m.r-=m.s; if(m.r<14){ m.r=Math.max(W,H)*(0.55+Math.random()*0.3); m.a=Math.random()*TAU; }
+      const x=px+m.r*Math.cos(m.a), y=py+m.r*0.62*Math.sin(m.a);
+      g.beginPath(); g.arc(x,y,1.6,0,TAU); g.fill(); }
+    // the proton: small trefoil glyph
+    g.strokeStyle='rgba(176,116,48,0.9)'; g.lineWidth=2.4; g.beginPath();
+    for(let i=0;i<=140;i++){ const [x,y]=tre(i/140,9); const X=px+x,Y=py+y*0.9;
+      i?g.lineTo(X,Y):g.moveTo(X,Y); } g.stroke();
+  })();
+})();
+
+/* ── 2 · rope: four strands draw the six arcs, over–under visible ── */
+(()=>{ const cv=document.getElementById('cvRope'); let [W,H]=fit(cv); const g=cv.getContext('2d');
+  const TINT=['#b07430','#4a6d82','#8a5a30','#6a95b0']; let prog=0;
+  (function tick(){ requestAnimationFrame(tick); [W,H]=[cv.getBoundingClientRect().width,340];
+    prog=Math.min(1,prog+0.0035);
+    g.clearRect(0,0,W,H);
+    const cx=W/2, cy=H/2, S=Math.min(W,H)*0.145;
+    // shadow of the knot on the low-right
+    g.save(); g.translate(cx+70,cy+92); g.scale(1,0.4);
+    g.strokeStyle='rgba(60,50,40,0.22)'; g.lineWidth=10;
+    g.beginPath(); for(let i=0;i<=120;i++){const[x,y]=tre(i/120,S*0.9);i?g.lineTo(x,y):g.moveTo(x,y);} g.stroke(); g.restore();
+    // strands: draw far halves first (under), then near (over) via z-sort segments
+    const N=560, segs=[];
+    for(let k=0;k<4;k++){ const off=(k-1.5)*4.6;
+      for(let i=1;i<=N*prog;i++){ const t0=(i-1)/N,t1=i/N;
+        const [x0,y0,z0]=tre(t0,S), [x1,y1,z1]=tre(t1,S);
+        const nx=-(y1-y0),ny=x1-x0,nl=Math.hypot(nx,ny)||1;
+        segs.push({x0:cx+x0+off*nx/nl,y0:cy+y0*0.92+off*ny/nl,x1:cx+x1+off*nx/nl,y1:cy+y1*0.92+off*ny/nl,z:(z0+z1)/2,k}); } }
+    segs.sort((a,b)=>a.z-b.z);
+    for(const s of segs){ g.strokeStyle=TINT[s.k]; g.lineWidth=3.1; g.lineCap='round';
+      g.globalAlpha=0.55+0.45*(s.z/(1.45*S)+1)/2;
+      g.beginPath(); g.moveTo(s.x0,s.y0); g.lineTo(s.x1,s.y1); g.stroke(); }
+    g.globalAlpha=1; g.fillStyle='rgba(176,116,48,0.85)'; g.font='16px serif'; g.fillText('☀',18,26);
+    if(prog>=1&&Math.random()<0.002)prog=0;   // redraw occasionally
+  })();
+})();
+
+/* ── 3 · mesh: two counter-rotating knots; spin slider → torus blur ── */
+(()=>{ const cv=document.getElementById('cvMesh'); let [W,H]=fit(cv); const g=cv.getContext('2d');
+  let spin=1.2; let t0=performance.now();
+  cv.addEventListener('pointermove',e=>{ const r=cv.getBoundingClientRect();
+    if(e.buttons||e.pressure>0) spin=Math.max(0,Math.min(4,(e.clientX-r.left)/r.width*4)); });
+  cv.addEventListener('pointerdown',e=>{ const r=cv.getBoundingClientRect();
+    spin=Math.max(0,Math.min(4,(e.clientX-r.left)/r.width*4)); });
+  function knot(cx,cy,S,ang,col){
+    g.save(); g.translate(cx,cy); g.rotate(ang);
+    g.strokeStyle=col; g.lineWidth=2.6;
+    g.beginPath(); for(let i=0;i<=150;i++){const[x,y]=tre(i/150,S);i?g.lineTo(x,y*0.92):g.moveTo(x,y*0.92);} g.stroke();
+    g.restore();
+  }
+  (function tick(now){ requestAnimationFrame(tick); [W,H]=[cv.getBoundingClientRect().width,340];
+    const t=(now-t0)/1000; g.clearRect(0,0,W,H);
+    const S=Math.min(W,H)*0.11, gap=S*2.35, cx=W/2, cy=H/2;
+    // torus rings fade in with spin (the 1.83c read)
+    const tor=Math.min(1,spin/2.2);
+    for(const [dx,col] of [[-gap/2,'rgba(176,116,48,'],[gap/2,'rgba(74,109,130,']]){
+      if(tor>0.02){ g.strokeStyle=col+(0.30*tor)+')'; g.lineWidth=S*0.75;
+        g.beginPath(); g.ellipse(cx+dx,cy,S*1.55,S*1.42,0,0,TAU); g.stroke(); }
+    }
+    knot(cx-gap/2,cy,S, +spin*t*1.4,'rgba(176,116,48,'+(1-0.6*tor)+')');   // proton +
+    knot(cx+gap/2,cy,S, -spin*t*1.4,'rgba(74,109,130,'+(1-0.6*tor)+')');   // neutron −
+    // shared-electron string at the meshing window
+    g.strokeStyle='rgba(90,150,170,0.7)'; g.setLineDash([3,4]);
+    g.beginPath(); g.moveTo(cx-gap/2+S*1.4,cy); g.lineTo(cx+gap/2-S*1.4,cy); g.stroke(); g.setLineDash([]);
+    g.fillStyle='rgba(90,150,170,0.9)'; g.beginPath(); g.arc(cx,cy,4,0,TAU); g.fill();
+    g.fillStyle='rgba(122,114,101,0.9)'; g.font='12px Inter,sans-serif'; g.textAlign='center';
+    g.fillText(`spin ${(spin).toFixed(1)} — click/drag horizontally`,cx,H-14); g.textAlign='left';
+  })(t0);
+})();
+
+/* ── 4 · union not sum: two shadow disks, ΔA live ── */
+(()=>{ const cv=document.getElementById('cvUnion'); let [W,H]=fit(cv); const g=cv.getContext('2d');
+  let sep=1.0;  // 1 = apart, 0 = deuteron distance
+  cv.addEventListener('pointermove',e=>{ if(!(e.buttons||e.pressure>0))return;
+    const r=cv.getBoundingClientRect(); sep=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width)); });
+  cv.addEventListener('pointerdown',e=>{ const r=cv.getBoundingClientRect();
+    sep=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width)); });
+  (function tick(){ requestAnimationFrame(tick); [W,H]=[cv.getBoundingClientRect().width,340];
+    g.clearRect(0,0,W,H);
+    const R=Math.min(W,H)*0.16, cx=W/2, cy=H*0.46;
+    const d=R*(0.6+1.9*sep);                       // centre distance
+    const x1=cx-d/2, x2=cx+d/2;
+    // lens (shared occlusion) area for circle-circle overlap
+    let dA=0;
+    if(d<2*R){ const q=d/(2*R);
+      dA=2*R*R*Math.acos(q)-(d/2)*Math.sqrt(4*R*R-d*d); }
+    // draw singles (outline), union (fill), lens (copper)
+    g.fillStyle='rgba(74,109,130,0.16)';
+    g.beginPath(); g.arc(x1,cy,R,0,TAU); g.fill();
+    g.beginPath(); g.arc(x2,cy,R,0,TAU); g.fill();
+    if(dA>0){ g.save(); g.beginPath(); g.arc(x1,cy,R,0,TAU); g.clip();
+      g.beginPath(); g.arc(x2,cy,R,0,TAU); g.fillStyle='rgba(176,116,48,0.55)'; g.fill(); g.restore(); }
+    g.strokeStyle='rgba(44,68,84,0.8)'; g.lineWidth=1.6;
+    g.beginPath(); g.arc(x1,cy,R,0,TAU); g.stroke();
+    g.beginPath(); g.arc(x2,cy,R,0,TAU); g.stroke();
+    // ledger
+    const A1=Math.PI*R*R, Asum=2*A1, Auni=Asum-dA;
+    const kap=12.86, sc=(0.8414*0.8414)/(R*R);     // px² → fm² at R≡R_p
+    g.fillStyle='rgba(61,56,48,0.95)'; g.font='13px Inter,sans-serif';
+    const ly=H-64;
+    g.fillText(`Σ singles = ${(Asum*sc).toFixed(2)} fm²`, 24, ly);
+    g.fillText(`union = ${(Auni*sc).toFixed(2)} fm²`, 24, ly+18);
+    g.fillStyle='rgba(176,116,48,1)';
+    g.fillText(`ΔA (shared, counted once) = ${(dA*sc).toFixed(3)} fm²  →  κ·ΔA ≈ ${(dA*sc*kap).toFixed(2)} MeV`, 24, ly+36);
+    g.fillStyle='rgba(122,114,101,0.9)'; g.font='12px Inter,sans-serif';
+    g.fillText('drag horizontally — bring the forms together', 24, 24);
+  })();
+})();
+
+/* ── 5 · the opposition ladder: Li → O shells with line-and-label ── */
+(()=>{ const cv=document.getElementById('cvShells'); let [W,H]=fit(cv); const g=cv.getContext('2d');
+  const SEQ=[['Li',1],['Be',2],['B',3],['C',4],['N',5],['O',6]];
+  let idx=0, ang=0, playing=true;
+  cv.addEventListener('pointerdown',()=>{ playing=!playing; });
+  setInterval(()=>{ if(playing) idx=(idx+1)%SEQ.length; },2600);
+  function dirs(m){ const P=[[0,0,1]];
+    const V={1:[[0,0,1]],2:[[0,0,1],[0,0,-1]],3:[[1,0,0],[-0.5,0.866,0],[-0.5,-0.866,0]],
+      4:[[1,1,1],[1,-1,-1],[-1,1,-1],[-1,-1,1]],
+      5:[[0,0,1],[0,0,-1],[1,0,0],[-0.5,0.866,0],[-0.5,-0.866,0]],
+      6:[[1,0,0],[-1,0,0],[0,1,0],[0,-1,0],[0,0,1],[0,0,-1]]};
+    return (V[m]||V[6]).map(v=>{const l=Math.hypot(...v);return v.map(c=>c/l);});
+  }
+  (function tick(){ requestAnimationFrame(tick); [W,H]=[cv.getBoundingClientRect().width,340];
+    ang+=0.008; g.clearRect(0,0,W,H);
+    const [sym,m]=SEQ[idx]; const cx=W/2, cy=H*0.5, RS=Math.min(W,H)*0.27;
+    const ca=Math.cos(ang), sa=Math.sin(ang);
+    // shell ring + line-and-label
+    g.strokeStyle='rgba(122,114,101,0.4)'; g.lineWidth=1;
+    g.beginPath(); g.ellipse(cx,cy,RS,RS*0.62,0,0,TAU); g.stroke();
+    g.beginPath(); g.moveTo(cx+RS,cy); g.lineTo(cx+RS+34,cy-16); g.stroke();
+    g.fillStyle='rgba(122,114,101,0.9)'; g.font='12px Inter,sans-serif';
+    g.fillText(`shell 1 · ×${m}`, cx+RS+38, cy-14);
+    // α core: 4 poles on the shared axis
+    for(const [dz,ty] of [[-0.5,'p'],[0.5,'n'],[-0.17,'n'],[0.17,'p']]){
+      g.fillStyle= ty==='p' ? 'rgba(176,116,48,0.95)' : 'rgba(74,109,130,0.95)';
+      g.beginPath(); g.arc(cx,cy+dz*34,7.5,0,TAU); g.fill(); }
+    g.strokeStyle='rgba(61,56,48,0.35)';
+    g.beginPath(); g.moveTo(cx,cy-30); g.lineTo(cx,cy+30); g.stroke();   // the shared axis
+    // satellites at opposition positions, revolving (following the α)
+    dirs(m).forEach((v,i)=>{
+      const x=v[0]*ca-v[1]*sa, y=v[0]*sa+v[1]*ca, z=v[2];
+      const X=cx+x*RS, Y=cy+z*RS*0.62 + y*RS*0.18;
+      const front=y>-0.2;
+      g.globalAlpha=front?1:0.45;
+      g.fillStyle= i%2 ? 'rgba(74,109,130,0.9)' : 'rgba(176,116,48,0.9)';
+      g.beginPath(); g.arc(X,Y,10,0,TAU); g.fill();
+      g.strokeStyle='rgba(90,150,170,0.5)'; g.setLineDash([2,3]);
+      g.beginPath(); g.moveTo(cx,cy); g.lineTo(X,Y); g.stroke(); g.setLineDash([]);
+      g.globalAlpha=1; });
+    g.fillStyle='rgba(61,56,48,0.95)'; g.font='bold 15px Inter,sans-serif'; g.textAlign='center';
+    g.fillText(`${sym} — α + ${m} satellite${m>1?'s':''}`, cx, H-16); g.textAlign='left';
+    g.fillStyle='rgba(122,114,101,0.8)'; g.font='11px Inter,sans-serif';
+    g.fillText(playing?'▶ playing — click to pause':'❚❚ paused — click to play', 18, 22);
+  })();
+})();
+</script>
+</body>
+</html>

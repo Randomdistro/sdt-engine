@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Law II of Spatial Displacement Theory — The Release Cascade. The Clearing, the one universal discharge whose overlapping fronts still arrive at every point as pressure.">
+<title>Law II · The Release Cascade — SDT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- the website stylesheet is the basis -->
+<link rel="stylesheet" href="style.css">
+<style>
+  /* ── LAW II signature: ember — the recombination glow of the Clearing, cooling to the residue ── */
+  :root{ --copper:#bb5a3e; --copper-light:#db8a6b; --copper-glow:rgba(187,90,62,0.12); }
+  .inv-tag{ font-family:'JetBrains Mono',monospace; font-size:0.7rem; letter-spacing:0.18em;
+    text-transform:uppercase; color:var(--copper); }
+  .cert{ display:inline-block; font-family:'JetBrains Mono',monospace; font-size:0.66rem;
+    letter-spacing:0.1em; padding:2px 9px; border-radius:3px; text-transform:uppercase;
+    border:1px solid rgba(187,90,62,0.4); color:var(--copper); background:rgba(187,90,62,0.08); }
+  .cert--d{ border-color:rgba(126,201,164,0.5); color:#2f6f52; background:rgba(126,201,164,0.10); }
+
+  .inv-hero{ padding:var(--sp-3xl) var(--sp-xl) var(--sp-2xl); text-align:center;
+    background:linear-gradient(180deg,var(--cream) 0%, var(--paper) 100%); }
+  .inv-hero h1{ font-family:'Source Serif 4',Georgia,serif; font-weight:300; font-size:var(--fs-3xl);
+    line-height:1.06; letter-spacing:-0.01em; color:var(--ink); margin:var(--sp-md) 0; }
+  .inv-hero h1 em{ font-style:italic; color:var(--copper); }
+  .inv-hero .lead{ max-width:var(--content-width); margin:var(--sp-md) auto var(--sp-xl);
+    color:var(--ink-muted); font-size:var(--fs-md); line-height:1.7; }
+
+  /* ── the DESIGN ELEMENT: the release cascade ── */
+  .cascade{ max-width:var(--wide-width); margin:0 auto; }
+  .cascade canvas{ width:100%; height:360px; display:block; border-radius:6px; }
+  .cascade figcaption{ font-family:'JetBrains Mono',monospace; font-size:0.68rem; color:var(--ink-faint);
+    letter-spacing:0.05em; margin-top:0.7rem; text-align:center; }
+
+  .backlink{ position:fixed; top:0; left:0; right:0; z-index:100; padding:0.7rem 1.4rem;
+    display:flex; justify-content:space-between; align-items:center;
+    background:rgba(245,240,232,0.86); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--paper-edge); font-size:0.72rem; }
+  .backlink a{ color:var(--copper); text-decoration:none; letter-spacing:0.04em; }
+  .backlink .who{ font-family:'Source Serif 4',serif; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--ink-soft); font-weight:600; }
+  .step{ font-family:'JetBrains Mono',monospace; color:var(--copper); font-size:0.72rem; letter-spacing:0.12em; }
+  .domain{ display:grid; grid-template-columns:1fr 1fr; gap:var(--sp-md); max-width:var(--wide-width);
+    margin:var(--sp-lg) auto 0; }
+  .domain .d{ padding:var(--sp-md); border:1px solid var(--paper-edge); border-radius:6px; background:var(--paper); }
+  .domain .d .k{ font-family:'JetBrains Mono',monospace; font-size:0.64rem; letter-spacing:0.1em;
+    text-transform:uppercase; color:var(--ink-muted); }
+  .domain .d .v{ font-family:'Source Serif 4',serif; font-size:1.5rem; color:var(--copper); margin:3px 0; }
+  .domain .d .n{ font-size:0.8rem; color:var(--ink-muted); line-height:1.6; }
+  @media(max-width:640px){ .domain{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+
+<div class="backlink">
+  <span class="who">Spatial <span style="color:var(--copper)">Displacement</span> Theory</span>
+  <a href="investigations.html">← the whole picture</a>
+</div>
+
+<!-- ═══════════════════ HERO ═══════════════════ -->
+<header class="inv-hero reveal">
+  <div class="inv-tag">The Laws · II · The Release Cascade</div>
+  <h1>The One Event Whose<br>Light <em>Still Arrives</em></h1>
+  <p class="lead">Law I measured the pressure and found it immense and everywhere. This Law asks the plain next question — where did it come from? The answer is a single event, long past and yet never finished: its light is washing over you as you read.</p>
+
+  <figure class="cascade" id="cas">
+    <canvas id="casCanvas"></canvas>
+    <figcaption id="casCap">the Clearing — every point released its light at once; their overlapping fronts still arrive together</figcaption>
+  </figure>
+</header>
+
+<!-- ═══════════════════ CH.1 ═══════════════════ -->
+<section class="chapter">
+  <div class="chapter__inner reveal">
+    <div class="chapter__num">One</div>
+    <h2 class="chapter__title">Before the Clearing, the medium was shut</h2>
+    <p class="chapter__lead">There was a time when light could not cross the lattice at all.</p>
+    <p>In the young, hot cosmos the medium was <strong>opaque</strong> — so crowded that a disturbance could not travel any real distance before being caught and held. Every spation held the deformation content pressed into it and could pass none of it on. The word for the moment this changed is <strong>recombination</strong>: the epoch, at a temperature near 3000 kelvin, when the crowding eased and the medium could at last transmit.</p>
+    <p>Standard cosmology calls this "the surface of last scattering," and treats it as a distant wall we look back upon. This Law treats it as something that happened <em>here</em>, at every point, and whose consequence is still present.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════ CH.2 ═══════════════════ -->
+<section class="chapter chapter--alt">
+  <div class="chapter__inner reveal">
+    <div class="chapter__num">Two</div>
+    <h2 class="chapter__title">The Clearing — a single discharge</h2>
+    <p class="chapter__lead">Not merely "transparency began." Every spation, everywhere, let go at once.</p>
+    <p>When the coupling broke, each spation released the content it had been holding — <strong>omnidirectionally</strong>, evenly over the whole sphere of directions around it. This is the <strong>Clearing</strong>: a universal discharge, every point a source, all firing together. Each release set off as an expanding spherical front, travelling ever outward at the one speed the medium allows.</p>
+    <div class="eq-block">
+      <div class="eq">every spation releases ε<sub>held</sub> = a·T<sub>rec</sub>⁴·ℓ<sub>P</sub>³ &nbsp; over 4π</div>
+      <div class="eq-caption">the discharge — isotropic, simultaneous, universal</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ CH.3 ═══════════════════ -->
+<section class="chapter">
+  <div class="chapter__inner reveal">
+    <div class="chapter__num">Three</div>
+    <h2 class="chapter__title">Every point is both source and relay</h2>
+    <p class="chapter__lead">A spation gives up its own light, and faithfully passes on everyone else's.</p>
+    <p>Two roles at once. Each point released its own front at the Clearing — that is its life as a <em>source</em>. And ever after, when another point's front sweeps through, it hands that front onward without adding or subtracting a thing — that is its life as a <em>relay</em>. Nothing is lost in the passing; the medium takes no toll. The single exception is matter, which intercepts the fronts that strike it — and out of that interception, in a later Law, force and mass are born.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════ CH.4 ═══════════════════ -->
+<section class="chapter chapter--alt">
+  <div class="chapter__inner reveal">
+    <div class="chapter__num">Four</div>
+    <h2 class="chapter__title">Why the pressure is many, not one</h2>
+    <p class="chapter__lead">The fronts do not replace one another. They overlap.</p>
+    <p>Stand at any point and count what crosses it in a single instant. The front from the nearest neighbour, released one tick ago. The front from two ticks out. The front from the boundary of the Clearing itself, released and travelling for the whole age of the cosmos. All of them, together, right now. This is <strong>superposition</strong> — the piling-up of every arrived front — and it is exactly why the burden of Law I was N parcels of ε and not merely one.</p>
+    <div class="eq-block">
+      <div class="eq">Φ = N ε &nbsp; — &nbsp; one ε for every shell that has ever arrived</div>
+      <div class="eq-caption">the pressure is an immersion, not a single touch</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ CH.5 ═══════════════════ -->
+<section class="chapter">
+  <div class="chapter__inner reveal">
+    <div class="chapter__num">Five</div>
+    <h2 class="chapter__title">The cosmic microwave background, re-seen</h2>
+    <p class="chapter__lead">Our instruments are lenses. They tell us a true story about optics, and a misleading one about mechanics.</p>
+    <p>When the faint 2.7-kelvin light arrives from every direction, a telescope collimates it and assigns it a distance, reconstructing a glowing surface some 46 billion light-years away. As <em>optics</em> this is correct — the light did set out from there. But the mechanical reality at your location is not a far-off wall; it is the immersion just described, N overlapping fronts that have already arrived.</p>
+    <p>So the cosmic microwave background is not best understood as a distant blackbody surrounding us. It is the <strong>spectral residue</strong> — the cooled fingerprint — of an already-arrived boundary transition, whose local presence is simply the isotropic pressure of Law I. The glow of the Clearing has faded from 3000 kelvin to 2.7 by the plain cooling of an expanding record, exactly the factor (1 + z)⁴ the redshift demands.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════ CH.6 ═══════════════════ -->
+<section class="chapter chapter--alt">
+  <div class="chapter__inner--wide reveal" style="max-width:var(--wide-width);margin:0 auto;">
+    <div class="chapter__num">Six</div>
+    <h2 class="chapter__title">Stars recycle it; each rules a domain</h2>
+    <p class="chapter__lead" style="max-width:var(--content-width)">Nothing is created and nothing is destroyed — only intercepted, thermalised, and released again.</p>
+    <p style="max-width:var(--content-width)">A star is not an isolated furnace but a <strong>convergence recycler</strong>. It intercepts the cosmological pressure falling upon it, thermalises that arrival in its core, and re-releases it from its surface as its own local Clearing. And out to a certain radius its released light outshines the background — that radius is its <strong>pressure domain</strong>, set by balancing the star's flux against the background flux:</p>
+    <div class="eq-block">
+      <div class="eq">r<sub>domain</sub> = √( L ⁄ 4π F<sub>CMB</sub> )</div>
+      <div class="eq-caption">where F<sub>CMB</sub> = c·u<sub>CMB</sub>/4 ≈ 3.13 × 10⁻⁶ W/m²</div>
+    </div>
+    <div class="domain">
+      <div class="d"><div class="k">The Sun's pressure domain</div><div class="v">≈ 20,800 AU</div><div class="n">Beyond this the background convergence outweighs the Sun's — the true radiative edge of the solar system.</div></div>
+      <div class="d"><div class="k">The heliopause, for contrast</div><div class="v">≈ 120 AU</div><div class="n">A boundary of particles, not of radiation — nearly two hundred times nearer, and a different kind of edge entirely.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ VERDICT / BRIDGE ═══════════════════ -->
+<section class="chapter chapter--deep">
+  <div class="chapter__inner reveal">
+    <div class="chapter__num">Standing</div>
+    <h2 class="chapter__title">What is earned, and what is next</h2>
+    <p class="chapter__lead">The origin of the pressure is a measured epoch and a faithful relay — not a story added to fit.</p>
+    <div style="display:flex;gap:0.6rem;justify-content:center;margin:var(--sp-lg) 0;flex-wrap:wrap;">
+      <span class="cert cert--d">DERIVED — from CMB observables + geometry</span>
+      <span class="cert">1 CALIBRATION · hydrogen</span>
+    </div>
+    <p>The cascade rests on quantities the sky already gives us — the recombination temperature, its redshift, the present background — and on the same faithful relay as Law I. The cooling from the Clearing to today matches the redshift's (1 + z)⁴ exactly; the solar domain of 20,800 AU falls straight out of the flux balance. Nothing here is tuned.</p>
+    <p>We now have the pressure, and we know its source. It arrives from every side, perfectly balanced, and so we feel nothing. Which sets up the sharpest turn in the whole account: <strong>put a body in the way, and the balance breaks.</strong> That leftover push is force — and it is the next Law.</p>
+    <p class="step">Next → The Laws · III — Convergent Boundary Pressure</p>
+    <div class="margin-note">The Laws · II · The Release Cascade. Author: J. C. Harvey, Melbourne.</div>
+  </div>
+</section>
+
+<footer style="padding:var(--sp-xl);text-align:center;background:var(--midnight);color:var(--midnight-mute);font-size:var(--fs-sm);">
+  <a href="investigations.html" style="color:var(--copper-light);text-decoration:none;">← the whole picture</a>
+</footer>
+
+<script>
+(function(){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    if(e.isIntersecting){ e.target.classList.add('reveal--visible'); io.unobserve(e.target);} });},{threshold:0.12});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+
+  // ── design element: the release cascade ──
+  // A field of sources (spations) that all discharge; each sends expanding fronts. Where a
+  // front's radius equals its distance to the centre, that front is *arriving* — so the
+  // central point is bathed by many overlapping arrivals at once. Superposition, made visible.
+  var cv=document.getElementById('casCanvas'), ctx=cv.getContext('2d'), cap=document.getElementById('casCap');
+  var dpr=Math.min(window.devicePixelRatio||1,2), W=0,H=0,cx=0,cy=0,Rmax=1,S=[];
+  var GOLD=Math.PI*(3-Math.sqrt(5));
+  function build(){ W=cv.clientWidth;H=cv.clientHeight;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
+    cx=W/2;cy=H/2; Rmax=Math.min(W*0.46,H*0.46); S=[];
+    var N=64;
+    for(var i=0;i<N;i++){ var rr=Rmax*Math.sqrt((i+0.5)/N), a=i*GOLD;
+      var x=cx+Math.cos(a)*rr, y=cy+Math.sin(a)*rr*0.94;
+      S.push({x:x,y:y, d:Math.hypot(x-cx,y-cy), ph:(i*0.137)%1}); }
+  }
+  build(); window.addEventListener('resize',build);
+  var t0=null, SPEED, MAXR, K=3;
+  function frame(ts){
+    if(t0===null)t0=ts; var t=(ts-t0)/1000;
+    MAXR=Rmax*1.15; SPEED=MAXR/3.0;                 // a front crosses the field in ~3 s
+    ctx.clearRect(0,0,W,H);
+    var arriving=0;
+    // fronts: expanding rings from each source
+    for(var i=0;i<S.length;i++){ var s=S[i];
+      // faint source
+      ctx.beginPath(); ctx.arc(s.x,s.y,1.5,0,6.2832); ctx.fillStyle='rgba(187,90,62,0.35)'; ctx.fill();
+      for(var m=0;m<K;m++){
+        var rad=((t*SPEED + s.ph*MAXR + m*MAXR/K) % MAXR);
+        var near=Math.abs(rad - s.d);
+        var glow=Math.exp(-(near*near)/(2*10*10));   // brightest as the front reaches the centre
+        var a=0.05 + glow*0.5;
+        ctx.beginPath(); ctx.arc(s.x,s.y,rad,0,6.2832);
+        ctx.strokeStyle='rgba(187,90,62,'+a+')'; ctx.lineWidth=1; ctx.stroke();
+        if(near<6) arriving++;
+      }
+    }
+    // the central point, bathed by arrivals
+    var g=Math.min(1,arriving/10);
+    ctx.beginPath(); ctx.arc(cx,cy,10+g*10,0,6.2832); ctx.fillStyle='rgba(219,138,107,'+(0.10+g*0.18)+')'; ctx.fill();
+    ctx.beginPath(); ctx.arc(cx,cy,5,0,6.2832); ctx.fillStyle='rgba(30,28,24,0.9)'; ctx.fill();
+    if(cap) cap.textContent='the Clearing — every point released its light at once; fronts arriving together now: '+arriving;
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

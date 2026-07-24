@@ -1,0 +1,2914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ATOMICUS — Nuclear Stick Model v2</title>
+<style>
+/* ── Reset ── */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #050508; overflow: hidden; font-family: 'Segoe UI', sans-serif; color: #ccc; }
+canvas { display: block; position: absolute; top: 0; left: 0; }
+
+/* ── Scrollable isotope list (left sidebar 200px) ── */
+#isoList {
+  position: fixed; top: 0; left: 0; bottom: 60px; width: 200px; z-index: 10;
+  background: rgba(8,8,18,0.97); border-right: 1px solid rgba(40,40,60,0.8);
+  overflow-y: auto; scrollbar-width: thin; scrollbar-color: #333 #080810;
+}
+#isoList::-webkit-scrollbar { width: 5px; }
+#isoList::-webkit-scrollbar-track { background: #080810; }
+#isoList::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+#isoList .hdr {
+  position: sticky; top: 0; padding: 8px 10px; font-size: 10px; font-weight: 700;
+  color: #d4a05c; background: rgba(8,8,18,0.99); letter-spacing: 1.5px;
+  border-bottom: 1px solid rgba(40,40,60,0.8); z-index: 2; text-transform: uppercase;
+}
+#isoList .el-group { border-bottom: 1px solid rgba(255,255,255,0.03); }
+#isoList .el-label {
+  padding: 3px 10px; font-size: 9px; color: #555; font-weight: 600;
+  letter-spacing: 0.5px; background: rgba(20,20,36,0.6);
+}
+#isoList .iso-item {
+  padding: 4px 10px 4px 18px; font-size: 11px; cursor: pointer;
+  color: #888; transition: background 0.15s; display: flex;
+  justify-content: space-between; align-items: center;
+}
+#isoList .iso-item:hover { background: rgba(80,80,160,0.12); color: #bbb; }
+#isoList .iso-item.active {
+  background: rgba(212,160,92,0.12); color: #d4a05c;
+  border-left: 2px solid #d4a05c; padding-left: 16px;
+}
+#isoList .iso-item .grammar { font-size: 9px; color: #444; }
+#isoList .iso-item.active .grammar { color: #8a6030; }
+#isoList .iso-item.stable::before   { content: "●"; color: #3a8; font-size: 6px; margin-right: 4px; }
+#isoList .iso-item.unstable::before { content: "○"; color: #733; font-size: 6px; margin-right: 4px; }
+
+/* ── Data panels (right side) — frosted glass ── */
+.panel {
+  position: fixed; right: 10px; z-index: 10; backdrop-filter: blur(8px);
+  background: rgba(8,8,16,0.92); border: 1px solid rgba(40,40,60,0.8);
+  border-radius: 8px; padding: 10px 13px; min-width: 195px; font-size: 11px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+}
+.panel h3 { color: #d4a05c; font-size: 10px; margin-bottom: 6px; letter-spacing: 1px; text-transform: uppercase; }
+.panel .row { margin: 2px 0; display: flex; justify-content: space-between; gap: 6px; }
+.panel .lbl { color: #555; flex-shrink: 0; }
+.panel .val { color: #aaa; font-weight: 500; text-align: right; }
+.panel .val.gold { color: #d4a05c; }
+.panel .val.cyan { color: #40c8ff; }
+.panel .val.mag  { color: #ff40ff; }
+.panel .val.grn  { color: #44cc66; }
+.panel .val.red  { color: #cc4444; }
+.panel .val.orn  { color: #ff8844; }
+.panel .val.dim  { color: #555; }
+.panel .val.snap { color: #ffdd44; text-shadow: 0 0 8px rgba(255,220,40,0.6); }
+.panel .val.delayed { color: #ff7733; text-shadow: 0 0 8px rgba(255,100,30,0.5); }
+.panel .val.prompt  { color: #44eebb; text-shadow: 0 0 8px rgba(40,220,160,0.5); }
+.panel .sep { height: 1px; background: rgba(40,40,60,0.6); margin: 5px 0; }
+
+#panelIdentity { top: 10px; }
+#panelGrammar  { top: 200px; }
+#panelDecay    { top: 390px; }
+#panelElectron { top: 530px; }
+#panelShell    { top: 645px; }
+#panelGrammarIntel {
+  top: 760px;
+  max-height: calc(100vh - 840px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #333 transparent;
+}
+.panel .val.spike {
+  color: #ffee00;
+  font-weight: bold;
+  text-shadow: 0 0 10px rgba(255,230,0,0.8), 0 0 20px rgba(255,150,0,0.4);
+  animation: spikeGlow 1.8s ease-in-out infinite;
+}
+@keyframes spikeGlow {
+  0%,100% { text-shadow: 0 0 10px rgba(255,230,0,0.8); }
+  50% { text-shadow: 0 0 18px rgba(255,200,0,1), 0 0 30px rgba(255,100,0,0.6); }
+}
+
+/* ── Toggle strip: pill switches ── */
+#toggles {
+  position: fixed; top: 10px; left: 210px; z-index: 10;
+  display: flex; gap: 5px; flex-wrap: wrap; max-width: calc(100vw - 420px);
+}
+#toggles label {
+  background: rgba(12,12,24,0.88); border: 1px solid rgba(40,40,60,0.7);
+  border-radius: 14px; padding: 4px 13px; font-size: 10px;
+  cursor: pointer; user-select: none; transition: all 0.2s; letter-spacing: 0.3px;
+}
+#toggles label:hover { border-color: #555; background: rgba(20,20,40,0.9); }
+#toggles label:has(input:checked) {
+  background: rgba(50,40,15,0.9); border-color: #d4a05c;
+  box-shadow: 0 0 10px rgba(212,160,92,0.3), inset 0 0 14px rgba(212,160,92,0.1);
+}
+#toggles input { display: none; }
+#toggles label:has(input:checked) span { color: #ffd080; text-shadow: 0 0 8px rgba(255,180,80,0.7); }
+.zoom-lbl { color: #555; font-size: 10px; line-height: 26px; margin-left: 4px; }
+#toggles input[type=range] { width: 65px; accent-color: #d4a05c; vertical-align: middle; }
+
+/* ── Transport controls ── */
+#transport {
+  position: fixed; bottom: 0; left: 0; right: 0; height: 60px; z-index: 20;
+  background: rgba(8,8,16,0.97); border-top: 1px solid rgba(40,40,60,0.8);
+  display: flex; align-items: center; justify-content: center; gap: 4px;
+}
+#transport button {
+  background: rgba(30,30,50,0.8); border: 1px solid rgba(50,50,70,0.8);
+  color: #bbb; padding: 7px 11px; border-radius: 5px; font-size: 13px;
+  cursor: pointer; transition: all 0.15s; min-width: 40px;
+  font-family: 'Segoe UI Symbol', sans-serif;
+}
+#transport button:hover { background: rgba(70,70,110,0.6); color: #fff; border-color: #666; }
+#transport button.active { background: rgba(212,160,92,0.25); border-color: #d4a05c; color: #d4a05c; }
+#transport .tsep { width: 1px; height: 28px; background: rgba(40,40,60,0.8); margin: 0 5px; }
+#transport .now-playing { position: absolute; left: 210px; font-size: 14px; font-weight: 700; color: #d4a05c; }
+#transport .pos-info { position: absolute; right: 18px; font-size: 10px; color: #444; }
+#speedSlider { width: 75px; accent-color: #d4a05c; }
+.speed-lbl { font-size: 10px; color: #555; }
+
+/* ── Legend ── */
+.legend {
+  position: fixed; bottom: 65px; left: 210px; z-index: 10;
+  background: rgba(8,8,16,0.88); border: 1px solid rgba(40,40,60,0.6); border-radius: 5px;
+  padding: 4px 14px; font-size: 10px; display: flex; gap: 12px; align-items: center;
+}
+.legend span { display: flex; align-items: center; gap: 4px; color: #666; }
+.ldot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.lblk { width: 12px; height: 5px; border-radius: 2px; display: inline-block; }
+
+/* ── Story overlay ── */
+#storyOverlay {
+  position: fixed; left: 210px; bottom: 100px; z-index: 15; max-width: 400px;
+  background: rgba(6,6,14,0.95); border: 1px solid rgba(212,160,92,0.4);
+  border-radius: 8px; padding: 14px 18px; display: none; backdrop-filter: blur(6px);
+  box-shadow: 0 6px 32px rgba(0,0,0,0.7);
+}
+#storyOverlay h4 { color: #d4a05c; font-size: 12px; margin-bottom: 6px; letter-spacing: 0.5px; }
+#storyOverlay p  { color: #aaa; font-size: 11px; line-height: 1.65; }
+#storyPlot {
+  position: fixed; right: 220px; bottom: 70px; z-index: 15;
+  width: 200px; height: 120px; display: none;
+  border-radius: 6px; box-shadow: 0 3px 16px rgba(0,0,0,0.5);
+}
+</style>
+</head>
+<body>
+<!-- SUPERSEDED banner (2026-07-03) -->
+<div style="position:fixed;top:34px;left:0;right:0;z-index:199;padding:6px 16px;background:rgba(120,70,20,0.92);color:#ffe9c9;font-family:'Inter',sans-serif;font-size:11.5px;text-align:center;border-bottom:1px solid rgba(212,160,92,0.5);">
+  ⚠ This stick builder is <b>superseded</b> by the
+  <a href="nuclear-packing-sequencer.html" style="color:#ffd27a;font-weight:700;">Nuclear Packing Sequencer</a>
+  — woven 6π trefoil protons, light→back-wall shadow, shadow-area ΔA = mass defect (κ·ΔA, R²≈0.995).
+  Kept as the historical record.
+</div>
+<!-- Back to site breadcrumb -->
+<div style="position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:7px 16px;background:rgba(5,5,8,0.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(212,160,92,0.2);font-family:'Inter',sans-serif;font-size:11px;">
+  <div style="display:flex;align-items:center;gap:8px;color:rgba(212,160,92,0.7);">
+    <span style="letter-spacing:.12em;text-transform:uppercase;font-weight:600;">Spatial Displacement Theory</span>
+    <span style="opacity:.4;">›</span>
+    <span style="color:rgba(212,160,92,0.5);">Atomicus Lab</span>
+    <span style="opacity:.4;">›</span>
+    <span style="color:#c8ccd4;">Nuclear Stick Model</span>
+  </div>
+  <a href="index.html#lab" style="display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;background:rgba(212,160,92,0.1);border:1px solid rgba(212,160,92,0.3);color:#d4a05c;text-decoration:none;font-size:11px;transition:background .2s;" onmouseover="this.style.background='rgba(212,160,92,0.2)'" onmouseout="this.style.background='rgba(212,160,92,0.1)'">← Back to SDT · Atomicus Lab</a>
+</div>
+<canvas id="c" style="margin-top:34px;"></canvas>
+<input type="range" id="zoom"    min="50" max="500" value="200" style="display:none">
+<input type="range" id="bondLen" min="20" max="80"  value="40"  style="display:none">
+
+<!-- Isotope navigator -->
+<div id="isoList"><div class="hdr">Isotope Navigator</div></div>
+
+<!-- Toggle strip -->
+<div id="toggles">
+  <label><input type="checkbox" id="showLabels" checked><span>Labels</span></label>
+  <label><input type="checkbox" id="autoRotate" checked><span>Spin</span></label>
+  <label><input type="checkbox" id="showHe3"><span>He-3</span></label>
+  <label><input type="checkbox" id="showElectrons"><span>Electrons</span></label>
+  <label><input type="checkbox" id="showHopf"><span>Hopf</span></label>
+  <label><input type="checkbox" id="showShells"><span>Shells</span></label>
+  <label><input type="checkbox" id="showMagnetics"><span>Magnetics</span></label>
+  <label><input type="checkbox" id="showAffinity" checked><span>Affinity</span></label>
+  <label><input type="checkbox" id="showDecay"><span>Decay</span></label>
+  <label><input type="checkbox" id="showStory"><span>Story</span></label>
+  <span class="zoom-lbl">Zoom:</span>
+  <input type="range" id="zoomVis" min="50" max="500" value="200">
+  <span class="zoom-lbl">Bonds:</span>
+  <input type="range" id="bondVis" min="20" max="80" value="40">
+</div>
+
+<!-- Right panels -->
+<div class="panel" id="panelIdentity">
+  <h3 id="isoTitle">—</h3>
+  <div class="row"><span class="lbl">Element</span><span class="val" id="dElem">—</span></div>
+  <div class="row"><span class="lbl">Z (protons)</span><span class="val" id="dZ">—</span></div>
+  <div class="row"><span class="lbl">N (neutrons)</span><span class="val" id="dN">—</span></div>
+  <div class="row"><span class="lbl">A (mass)</span><span class="val" id="dA">—</span></div>
+  <div class="row"><span class="lbl">Spin-parity</span><span class="val" id="dSpin">—</span></div>
+  <div class="row"><span class="lbl">Abundance</span><span class="val" id="dAbd">—</span></div>
+  <div class="row"><span class="lbl">Stable</span><span class="val" id="dStable">—</span></div>
+  <div class="row"><span class="lbl">BE/nucleon</span><span class="val" id="dBE">—</span></div>
+  <div class="row" title="Bernas 2003: 238U+p 1A GeV GSI FRS measured kinetic energy for this Z"><span class="lbl">Bernas Ekin</span><span class="val" id="dBernas">—</span></div>
+</div>
+
+
+<div class="panel" id="panelGrammar">
+  <h3>α-Grammar</h3>
+  <div class="row"><span class="lbl">Formula</span><span class="val gold" id="dConst">—</span></div>
+  <div class="row"><span class="lbl">n_d</span><span class="val cyan" id="dNd">—</span></div>
+  <div class="row"><span class="lbl">n_t</span><span class="val mag"  id="dNt">—</span></div>
+  <div class="row"><span class="lbl">Triton %</span><span class="val" id="dTF">—</span></div>
+  <div class="sep"></div>
+  <div class="row"><span class="lbl">Paired d</span><span class="val" id="dPairD">—</span></div>
+  <div class="row"><span class="lbl">Paired t</span><span class="val" id="dPairT">—</span></div>
+  <div class="row"><span class="lbl">Position</span><span class="val dim" id="dPos">—</span></div>
+</div>
+
+<div class="panel" id="panelDecay">
+  <h3>Decay Grammar</h3>
+  <div class="row"><span class="lbl">α (−2d,0t)</span><span class="val gold" id="dAlpha">—</span></div>
+  <div class="row"><span class="lbl">β⁻ (+3d,−2t)</span><span class="val cyan" id="dBeta">—</span></div>
+  <div class="row"><span class="lbl">EC (−3d,+2t)</span><span class="val mag"  id="dEC">—</span></div>
+  <div class="row"><span class="lbl">n (+1d,−1t)</span><span class="val orn"  id="dNeutron">—</span></div>
+</div>
+
+<div class="panel" id="panelElectron">
+  <h3>Electrons</h3>
+  <div class="row"><span class="lbl">Count (Z)</span><span class="val" id="eCount">—</span></div>
+  <div class="row"><span class="lbl">Valence shell</span><span class="val" id="eLastFill">—</span></div>
+  <div class="row"><span class="lbl">Config</span><span class="val" id="eConfig" style="font-size:9px;max-width:120px;text-align:right;word-break:break-all;">—</span></div>
+  <div class="row"><span class="lbl">Unpaired e⁻</span><span class="val" id="eUnpaired">—</span></div>
+</div>
+
+<div class="panel" id="panelShell">
+  <h3>Electron / Nuclear Shell</h3>
+  <div class="row"><span class="lbl">Principal shell</span><span class="val gold" id="sShell">—</span></div>
+  <div class="row"><span class="lbl">Next noble gas</span><span class="val" id="sNextMagic">Z=—</span></div>
+  <div class="row"><span class="lbl">Gap</span><span class="val" id="sGap">—</span></div>
+  <div class="sep"></div>
+  <div class="row"><span class="lbl">Config type</span><span class="val dim" id="sClosureGate">—</span></div>
+</div>
+
+<!-- Grammar Intelligence (validated from fission/decay analysis) -->
+<div class="panel" id="panelGrammarIntel">
+  <h3>Grammar Intelligence</h3>
+  <!-- Parity class — the headline validated result -->
+  <div class="row"><span class="lbl">Parity class</span><span class="val" id="giParity">—</span></div>
+  <div class="row"><span class="lbl">Triton excess</span><span class="val" id="giExcess">—</span></div>
+  <!-- G_core = |nd-nt| + (nt%2) — structural closure score -->
+  <div class="row"><span class="lbl">G_core</span><span class="val" id="giGcore">—</span></div>
+  <div class="row"><span class="lbl">Fragment class</span><span class="val" id="giFragClass">—</span></div>
+  <div class="sep"></div>
+  <!-- Snap mechanics -->
+  <div class="row"><span class="lbl">Snap pairs</span><span class="val snap" id="giSnap">—</span></div>
+  <div class="row"><span class="lbl">Valence t</span><span class="val" id="giValence">—</span></div>
+  <div class="row"><span class="lbl">Snap 2n pot.</span><span class="val" id="giSnapN">—</span></div>
+  <div class="sep"></div>
+  <!-- Canonical decay vectors (dnd = 3dZ-dA, dnt = dA-2dZ) -->
+  <div class="row"><span class="lbl">n-pop (+1d,−1t)</span><span class="val orn" id="giNpop">—</span></div>
+  <div class="row"><span class="lbl">β⁻ (+3d,−2t)</span><span class="val cyan" id="giBeta">—</span></div>
+  <div class="row"><span class="lbl">EC (−3d,+2t)</span><span class="val mag" id="giEC">—</span></div>
+  <div class="row"><span class="lbl">α (−4A,−2Z)</span><span class="val gold" id="giAlpha">—</span></div>
+  <div class="row"><span class="lbl">2n-snap (−2t)</span><span class="val snap" id="gi2n">—</span></div>
+  <!-- Fission Channels (heavy parents only, Z≥60) -->
+  <div class="sep" id="fissionSep" style="display:none"></div>
+  <div id="fissionRows" style="display:none">
+    <div style="color:#666;font-size:9px;letter-spacing:0.5px;margin:2px 0 4px;">FISSION CHANNELS (2n, ΔD=0)</div>
+    <div style="color:#444;font-size:8px;margin-bottom:3px;">Ranked by G_core = |nd−nt|+(nt%2)</div>
+    <div id="fCh0" class="row" style="font-size:9px;"></div>
+    <div id="fCh1" class="row" style="font-size:9px;"></div>
+    <div id="fCh2" class="row" style="font-size:9px;"></div>
+    <div id="fCh3" class="row" style="font-size:9px;"></div>
+    <div id="fCh4" class="row" style="font-size:9px;"></div>
+    <div style="color:#333;font-size:8px;margin-top:3px;" id="fChNote"></div>
+  </div>
+</div>
+
+<!-- Transport -->
+<div id="transport">
+  <span class="now-playing" id="nowPlaying">—</span>
+  <button id="btnShellPrev" title="Prev shell (Shift+Left)">⏮⏮</button>
+  <button id="btnZPrev"     title="Prev element (Ctrl+Left)">⏮</button>
+  <button id="btnPrev"      title="Prev isotope (Left)">◀</button>
+  <div class="tsep"></div>
+  <button id="btnPlay"      title="Play/Pause (Space)">▶</button>
+  <div class="tsep"></div>
+  <button id="btnNext"      title="Next isotope (Right)">▶</button>
+  <button id="btnZNext"     title="Next element (Ctrl+Right)">⏭</button>
+  <button id="btnShellNext" title="Next shell (Shift+Right)">⏭⏭</button>
+  <div class="tsep"></div>
+  <span class="speed-lbl">Speed</span>
+  <input type="range" id="speedSlider" min="1" max="20" value="5">
+  <span class="pos-info" id="posInfo">—</span>
+</div>
+
+<!-- Legend -->
+<div class="legend">
+  <span><span class="lblk" style="background:#9040d0;"></span>α-core</span>
+  <span><span class="ldot" style="background:#dc3c28;"></span>Proton</span>
+  <span><span class="ldot" style="background:#3278c8;"></span>Neutron</span>
+  <span><span class="lblk" style="background:#28c8dc;height:3px;"></span>Deuteron</span>
+  <span><span class="lblk" style="background:#dc28dc;height:3px;"></span>Triton</span>
+  <span><span class="lblk" style="background:rgba(60,80,160,0.7);height:2px;border-style:dotted;"></span>Stability path (n-n)</span>
+  <span><span class="ldot" style="background:rgba(255,210,40,0.7);box-shadow:0 0 4px #ffdd44;"></span>Snap-ready (paired t)</span>
+  <span><span class="ldot" style="background:rgba(255,100,20,0.7);box-shadow:0 0 5px #ff7733;"></span>Valence t (isolated)</span>
+  <span><span class="lblk" style="background:rgba(255,200,80,0.7);height:2px;"></span>Magnetic helix</span>
+  <span><span class="ldot" style="background:rgba(60,180,255,0.6);box-shadow:0 0 4px rgba(60,180,255,0.4);"></span>Bond site (affinity)</span>
+  <span style="color:#333;">| Drag=orbit · Scroll=zoom · Hover panel for tooltips</span>
+</div>
+
+
+<!-- Story overlay -->
+<div id="storyOverlay">
+  <h4 id="storyTitle">—</h4>
+  <p id="storyText">—</p>
+</div>
+<canvas id="storyPlot"></canvas>
+
+<script>
+'use strict';
+/* ═══════════════════════════════════════════════════════════════════
+   ATOMICUS Nuclear Stick Model v2
+   SDT Grammar: Z≥2 → 1α-core + nd deuterons + nt tritons
+   nd = 3Z−A−2,  nt = A−2Z
+   Rendering: Canvas2D, manual perspective projection, painter's z-sort
+   Electrons: Hopf fibration paths through proton tori (from hopf_fibration.js)
+   Electron config: Aufbau + known anomalies (from electron_config.js)
+   ═══════════════════════════════════════════════════════════════════ */
+
+// ─────────────────────────────────────────────────────────────────
+// §1  ISOTOPE DATA
+// ─────────────────────────────────────────────────────────────────
+const RAW = [
+  ["H",1,1,99.985,true,0,"1/2+"],["H",1,2,0.015,true,2.225,"1+"],
+  ["He",2,3,0.0001,true,7.718,"1/2+"],["He",2,4,99.9999,true,28.296,"0+"],
+  ["Li",3,6,7.59,true,31.995,"1+"],["Li",3,7,92.41,true,39.245,"3/2-"],
+  ["Be",4,9,100,true,58.165,"3/2-"],
+  ["B",5,10,19.9,true,64.751,"3+"],["B",5,11,80.1,true,76.205,"3/2-"],
+  ["C",6,12,98.93,true,92.162,"0+"],["C",6,13,1.07,true,97.108,"1/2-"],
+  ["N",7,14,99.636,true,104.659,"1+"],["N",7,15,0.364,true,115.492,"1/2-"],
+  ["O",8,16,99.757,true,127.619,"0+"],["O",8,17,0.038,true,131.763,"5/2+"],["O",8,18,0.205,true,139.808,"0+"],
+  ["F",9,19,100,true,147.801,"1/2+"],
+  ["Ne",10,20,90.48,true,160.645,"0+"],["Ne",10,21,0.27,true,167.406,"3/2+"],["Ne",10,22,9.25,true,177.770,"0+"],
+  ["Na",11,23,100,true,186.564,"3/2+"],
+  ["Mg",12,24,78.99,true,198.257,"0+"],["Mg",12,25,10.00,true,205.588,"5/2+"],["Mg",12,26,11.01,true,216.681,"0+"],
+  ["Al",13,27,100,true,224.952,"5/2+"],
+  ["Si",14,28,92.223,true,236.537,"0+"],["Si",14,29,4.685,true,245.010,"1/2+"],["Si",14,30,3.092,true,255.620,"0+"],
+  ["P",15,31,100,true,262.917,"1/2+"],
+  ["S",16,32,94.99,true,271.780,"0+"],["S",16,33,0.75,true,280.422,"3/2+"],["S",16,34,4.25,true,291.839,"0+"],["S",16,36,0.01,true,308.714,"0+"],
+  ["Cl",17,35,75.76,true,298.210,"3/2+"],["Cl",17,37,24.24,true,317.100,"3/2+"],
+  ["Ar",18,36,0.3336,true,306.716,"0+"],["Ar",18,38,0.0629,true,327.343,"0+"],["Ar",18,40,99.6035,true,343.810,"0+"],
+  ["K",19,39,93.2581,true,333.724,"3/2+"],["K",19,40,0.0117,false,341.523,"4-"],["K",19,41,6.7302,true,351.619,"3/2+"],
+  ["Ca",20,40,96.941,true,342.052,"0+"],["Ca",20,42,0.647,true,361.895,"0+"],["Ca",20,43,0.135,true,369.828,"7/2-"],["Ca",20,44,2.086,true,380.960,"0+"],["Ca",20,46,0.004,true,398.769,"0+"],["Ca",20,48,0.187,false,416.001,"0+"],
+  ["Sc",21,45,100,true,387.849,"7/2-"],
+  ["Ti",22,46,8.25,true,398.193,"0+"],["Ti",22,47,7.44,true,407.072,"5/2-"],["Ti",22,48,73.72,true,418.699,"0+"],["Ti",22,49,5.41,true,426.841,"7/2-"],["Ti",22,50,5.18,true,437.781,"0+"],
+  ["V",23,50,0.25,false,434.794,"6+"],["V",23,51,99.75,true,445.841,"7/2-"],
+  ["Cr",24,50,4.345,true,435.049,"0+"],["Cr",24,52,83.789,true,456.345,"0+"],["Cr",24,53,9.501,true,464.285,"3/2-"],["Cr",24,54,2.365,true,474.004,"0+"],
+  ["Mn",25,55,100,true,482.071,"5/2-"],
+  ["Fe",26,54,5.845,true,471.764,"0+"],["Fe",26,56,91.754,true,492.254,"0+"],["Fe",26,57,2.119,true,499.900,"1/2-"],["Fe",26,58,0.282,true,509.946,"0+"],
+  ["Co",27,59,100,true,517.308,"7/2-"],
+  ["Ni",28,58,68.077,true,506.454,"0+"],["Ni",28,60,26.223,true,526.842,"0+"],["Ni",28,61,1.140,true,534.662,"3/2-"],["Ni",28,62,3.635,true,545.259,"0+"],["Ni",28,64,0.926,true,561.756,"0+"],
+  ["Cu",29,63,69.15,true,551.384,"3/2-"],["Cu",29,65,30.85,true,569.207,"3/2-"],
+  ["Zn",30,64,49.17,true,559.094,"0+"],["Zn",30,66,27.73,true,578.135,"0+"],["Zn",30,67,4.04,true,585.185,"5/2-"],["Zn",30,68,18.45,true,595.383,"0+"],["Zn",30,70,0.61,true,611.085,"0+"],
+  ["Ga",31,69,60.108,true,601.993,"3/2-"],["Ga",31,71,39.892,true,618.948,"3/2-"],
+  ["Ge",32,70,20.57,true,610.518,"0+"],["Ge",32,72,27.45,true,628.677,"0+"],["Ge",32,73,7.75,true,635.549,"9/2+"],["Ge",32,74,36.50,true,645.665,"0+"],["Ge",32,76,7.73,false,661.598,"0+"],
+  ["As",33,75,100,true,652.563,"3/2-"],
+  ["Se",34,74,0.89,true,642.890,"0+"],["Se",34,76,9.37,true,662.072,"0+"],["Se",34,77,7.63,true,669.497,"1/2-"],["Se",34,78,23.77,true,679.989,"0+"],["Se",34,80,49.61,true,696.865,"0+"],["Se",34,82,8.73,false,707.261,"0+"],
+  ["Br",35,79,50.69,true,686.321,"3/2-"],["Br",35,81,49.31,true,703.575,"3/2-"],
+  ["Kr",36,78,0.355,true,675.572,"0+"],["Kr",36,80,2.286,true,695.434,"0+"],["Kr",36,82,11.593,true,714.273,"0+"],["Kr",36,83,11.500,true,721.737,"9/2+"],["Kr",36,84,56.987,true,732.262,"0+"],["Kr",36,86,17.279,true,749.235,"0+"],
+  ["Rb",37,85,72.17,true,739.282,"5/2-"],["Rb",37,87,27.83,false,757.856,"3/2-"],
+  ["Sr",38,84,0.56,true,728.906,"0+"],["Sr",38,86,9.86,true,748.926,"0+"],["Sr",38,87,7.00,true,757.354,"9/2+"],["Sr",38,88,82.58,true,768.468,"0+"],
+  ["Y",39,89,100,true,775.538,"1/2-"],
+  ["Zr",40,90,51.45,true,783.892,"0+"],["Zr",40,91,11.22,true,791.087,"5/2+"],["Zr",40,92,17.15,true,799.722,"0+"],["Zr",40,94,17.38,true,814.676,"0+"],["Zr",40,96,2.80,false,828.994,"0+"],
+  ["Nb",41,93,100,true,805.765,"9/2+"],
+  ["Mo",42,92,14.649,true,796.508,"0+"],["Mo",42,94,9.187,true,814.255,"0+"],["Mo",42,95,15.873,true,821.625,"5/2+"],["Mo",42,96,16.673,true,830.779,"0+"],["Mo",42,97,9.582,true,837.600,"5/2+"],["Mo",42,98,24.292,true,846.243,"0+"],["Mo",42,100,9.744,false,860.458,"0+"],
+  ["Ru",44,96,5.54,true,826.495,"0+"],["Ru",44,98,1.87,true,844.790,"0+"],["Ru",44,99,12.76,true,852.254,"5/2+"],["Ru",44,100,12.60,true,861.928,"0+"],["Ru",44,101,17.06,true,868.728,"5/2+"],["Ru",44,102,31.55,true,878.131,"0+"],["Ru",44,104,18.62,true,893.088,"0+"],
+  ["Rh",45,103,100,true,884.168,"1/2-"],
+  ["Pd",46,102,1.02,true,875.214,"0+"],["Pd",46,104,11.14,true,893.088,"0+"],["Pd",46,105,22.33,true,899.920,"5/2+"],["Pd",46,106,27.33,true,909.476,"0+"],["Pd",46,108,26.46,true,925.237,"0+"],["Pd",46,110,11.72,true,940.208,"0+"],
+  ["Ag",47,107,51.839,true,915.266,"1/2-"],["Ag",47,109,48.161,true,931.724,"1/2-"],
+  ["Cd",48,106,1.25,true,905.145,"0+"],["Cd",48,108,0.89,true,923.403,"0+"],["Cd",48,110,12.49,true,940.643,"0+"],["Cd",48,111,12.80,true,947.620,"1/2+"],["Cd",48,112,24.13,true,957.016,"0+"],["Cd",48,113,12.22,false,963.556,"1/2+"],["Cd",48,114,28.73,true,972.599,"0+"],["Cd",48,116,7.49,false,988.440,"0+"],
+  ["In",49,113,4.29,true,963.090,"9/2+"],["In",49,115,95.71,false,979.420,"9/2+"],
+  ["Sn",50,112,0.97,true,953.530,"0+"],["Sn",50,114,0.66,true,971.574,"0+"],["Sn",50,115,0.34,true,979.120,"1/2+"],["Sn",50,116,14.54,true,988.684,"0+"],["Sn",50,117,7.68,true,995.626,"1/2+"],["Sn",50,118,24.22,true,1004.955,"0+"],["Sn",50,119,8.59,true,1011.438,"1/2+"],["Sn",50,120,32.58,true,1020.545,"0+"],["Sn",50,122,4.63,true,1035.528,"0+"],["Sn",50,124,5.79,true,1049.963,"0+"],
+  ["Sb",51,121,57.21,true,1026.320,"5/2+"],["Sb",51,123,42.79,true,1042.400,"7/2+"],
+  ["Te",52,120,0.09,true,1017.280,"0+"],["Te",52,122,2.55,true,1034.330,"0+"],["Te",52,123,0.89,true,1041.260,"1/2+"],["Te",52,124,4.74,true,1050.690,"0+"],["Te",52,125,7.07,true,1057.260,"1/2+"],["Te",52,126,18.84,true,1066.370,"0+"],["Te",52,128,31.74,false,1081.440,"0+"],["Te",52,130,34.08,false,1095.940,"0+"],
+  ["I",53,127,100,true,1072.580,"5/2+"],
+  ["Xe",54,124,0.095,false,1046.260,"0+"],["Xe",54,126,0.089,true,1063.910,"0+"],["Xe",54,128,1.910,true,1080.740,"0+"],["Xe",54,129,26.401,true,1087.648,"1/2+"],["Xe",54,130,4.071,true,1096.907,"0+"],["Xe",54,131,21.232,true,1103.514,"3/2+"],["Xe",54,132,26.909,true,1112.449,"0+"],["Xe",54,134,10.436,true,1129.270,"0+"],["Xe",54,136,8.857,false,1141.882,"0+"],
+  ["Cs",55,133,100,true,1118.528,"7/2+"],
+  ["Ba",56,130,0.106,true,1092.730,"0+"],["Ba",56,132,0.101,true,1110.040,"0+"],["Ba",56,134,2.417,true,1126.700,"0+"],["Ba",56,135,6.592,true,1133.683,"3/2+"],["Ba",56,136,7.854,true,1142.780,"0+"],["Ba",56,137,11.232,true,1149.686,"3/2+"],["Ba",56,138,71.698,true,1158.293,"0+"],
+  ["La",57,138,0.089,false,1148.420,"5+"],["La",57,139,99.911,true,1164.555,"7/2+"],
+  ["Ce",58,136,0.185,true,1131.040,"0+"],["Ce",58,138,0.251,true,1149.290,"0+"],["Ce",58,140,88.450,true,1172.690,"0+"],["Ce",58,142,11.114,false,1185.290,"0+"],
+  ["Pr",59,141,100,true,1177.920,"5/2+"],
+  ["Nd",60,142,27.152,true,1185.145,"0+"],["Nd",60,143,12.174,true,1191.270,"7/2-"],["Nd",60,144,23.798,false,1199.083,"0+"],["Nd",60,145,8.293,true,1204.833,"7/2-"],["Nd",60,146,17.189,true,1212.400,"0+"],["Nd",60,148,5.756,true,1225.020,"0+"],["Nd",60,150,5.638,false,1237.444,"0+"],
+  ["Sm",62,144,3.07,true,1195.740,"0+"],["Sm",62,147,14.99,false,1220.691,"7/2-"],["Sm",62,148,11.24,false,1228.364,"0+"],["Sm",62,149,13.82,true,1233.856,"7/2-"],["Sm",62,150,7.38,true,1241.571,"0+"],["Sm",62,152,26.75,true,1253.104,"0+"],["Sm",62,154,22.75,true,1264.878,"0+"],
+  ["Eu",63,151,47.81,true,1244.142,"5/2+"],["Eu",63,153,52.19,true,1258.998,"5/2+"],
+  ["Gd",64,152,0.20,false,1251.480,"0+"],["Gd",64,154,2.18,true,1270.710,"0+"],["Gd",64,155,14.80,true,1276.520,"3/2-"],["Gd",64,156,20.47,true,1286.470,"0+"],["Gd",64,157,15.65,true,1292.000,"3/2-"],["Gd",64,158,24.84,true,1301.430,"0+"],["Gd",64,160,21.86,true,1314.680,"0+"],
+  ["Tb",65,159,100,true,1306.980,"3/2+"],
+  ["Dy",66,156,0.056,true,1294.000,"0+"],["Dy",66,158,0.095,true,1312.650,"0+"],["Dy",66,160,2.329,true,1329.530,"0+"],["Dy",66,161,18.889,true,1335.690,"5/2+"],["Dy",66,162,25.475,true,1345.090,"0+"],["Dy",66,163,24.896,true,1351.070,"5/2-"],["Dy",66,164,28.260,true,1360.330,"0+"],
+  ["Ho",67,165,100,true,1356.260,"7/2-"],
+  ["Er",68,162,0.139,true,1340.250,"0+"],["Er",68,164,1.601,true,1358.920,"0+"],["Er",68,166,33.503,true,1375.930,"0+"],["Er",68,167,22.869,true,1381.600,"7/2+"],["Er",68,168,26.978,true,1390.750,"0+"],["Er",68,170,14.910,true,1403.370,"0+"],
+  ["Tm",69,169,100,true,1396.430,"1/2+"],
+  ["Yb",70,168,0.123,true,1384.870,"0+"],["Yb",70,170,2.982,true,1403.760,"0+"],["Yb",70,171,14.09,true,1409.670,"1/2-"],["Yb",70,172,21.68,true,1418.780,"0+"],["Yb",70,173,16.103,true,1424.390,"5/2-"],["Yb",70,174,32.026,true,1433.180,"0+"],["Yb",70,176,12.996,true,1445.300,"0+"],
+  ["Lu",71,175,97.401,true,1439.030,"7/2+"],["Lu",71,176,2.599,false,1445.700,"7-"],
+  ["Hf",72,174,0.16,false,1432.200,"0+"],["Hf",72,176,5.26,true,1449.950,"0+"],["Hf",72,177,18.60,true,1455.760,"7/2-"],["Hf",72,178,27.28,true,1464.720,"0+"],["Hf",72,179,13.62,true,1470.180,"9/2+"],["Hf",72,180,35.08,true,1478.890,"0+"],
+  ["Ta",73,180,0.012,false,1472.900,"9-"],["Ta",73,181,99.988,true,1484.160,"7/2+"],
+  ["W",74,180,0.12,false,1477.700,"0+"],["W",74,182,26.50,true,1497.570,"0+"],["W",74,183,14.31,true,1503.210,"1/2-"],["W",74,184,30.64,true,1512.310,"0+"],["W",74,186,28.43,true,1525.370,"0+"],
+  ["Re",75,185,37.40,true,1518.110,"5/2+"],["Re",75,187,62.60,false,1530.240,"5/2+"],
+  ["Os",76,184,0.02,true,1504.760,"0+"],["Os",76,186,1.59,false,1524.340,"0+"],["Os",76,187,1.96,true,1530.020,"1/2-"],["Os",76,188,13.24,true,1538.760,"0+"],["Os",76,189,16.15,true,1544.020,"3/2-"],["Os",76,190,26.26,true,1553.020,"0+"],["Os",76,192,40.78,true,1567.850,"0+"],
+  ["Ir",77,191,37.3,true,1560.060,"3/2+"],["Ir",77,193,62.7,true,1574.190,"3/2+"],
+  ["Pt",78,190,0.012,false,1550.600,"0+"],["Pt",78,192,0.782,true,1568.560,"0+"],["Pt",78,194,32.864,true,1585.110,"0+"],["Pt",78,195,33.775,true,1590.190,"1/2-"],["Pt",78,196,25.242,true,1598.590,"0+"],["Pt",78,198,7.356,true,1612.090,"0+"],
+  ["Au",79,197,100,true,1604.480,"3/2+"],
+  ["Hg",80,196,0.15,true,1590.730,"0+"],["Hg",80,198,9.97,true,1608.620,"0+"],["Hg",80,199,16.87,true,1614.170,"1/2-"],["Hg",80,200,23.10,true,1623.130,"0+"],["Hg",80,201,13.18,true,1628.540,"3/2-"],["Hg",80,202,29.86,true,1637.010,"0+"],["Hg",80,204,6.87,true,1648.940,"0+"],
+  ["Tl",81,203,29.52,true,1641.690,"1/2+"],["Tl",81,205,70.48,true,1655.430,"1/2+"],
+  ["Pb",82,204,1.4,true,1647.460,"0+"],["Pb",82,206,24.1,true,1663.290,"0+"],["Pb",82,207,22.1,true,1668.470,"1/2-"],["Pb",82,208,52.4,true,1676.720,"0+"],
+  ["Bi",83,209,100,false,1679.070,"9/2-"],
+  ["Po",84,209,0,false,1681.210,"1/2-"],["Po",84,210,0,false,1688.380,"0+"],
+  ["At",85,210,0,false,1685.460,"5+"],["At",85,211,0,false,1691.780,"9/2-"],
+  ["Rn",86,211,0,false,1689.640,"1/2-"],["Rn",86,220,0,false,1731.620,"0+"],["Rn",86,222,0,false,1743.610,"0+"],
+  ["Fr",87,223,0,false,1748.990,"3/2-"],
+  ["Ra",88,223,0,false,1748.800,"3/2+"],["Ra",88,224,0,false,1756.760,"0+"],["Ra",88,226,0,false,1771.350,"0+"],["Ra",88,228,0,false,1784.610,"0+"],
+  ["Ac",89,225,0,false,1766.240,"3/2-"],["Ac",89,227,0,false,1779.830,"3/2-"],
+  ["Th",90,228,0,false,1788.000,"0+"],["Th",90,230,0,false,1755.130,"0+"],["Th",90,232,100,false,1766.690,"0+"],
+  ["Pa",91,231,100,false,1773.090,"3/2-"],
+  ["U",92,233,0,false,1771.750,"5/2+"],["U",92,234,0.0054,false,1778.570,"0+"],["U",92,235,0.7204,false,1783.870,"7/2-"],["U",92,238,99.2742,false,1801.690,"0+"],
+  ["Np",93,237,0,false,1790.420,"5/2+"],
+  ["Pu",94,238,0,false,1793.650,"0+"],["Pu",94,239,0,false,1801.170,"1/2+"],["Pu",94,240,0,false,1807.720,"0+"],["Pu",94,242,0,false,1820.020,"0+"],["Pu",94,244,0,false,1831.190,"0+"],
+  ["Am",95,241,0,false,1810.920,"5/2-"],["Am",95,243,0,false,1823.270,"5/2-"],
+  ["Cm",96,244,0,false,1824.830,"0+"],["Cm",96,247,0,false,1842.580,"9/2-"],["Cm",96,248,0,false,1848.230,"0+"],
+  ["Bk",97,247,0,false,1839.260,"3/2-"],["Bk",97,249,0,false,1852.550,"7/2+"],
+  ["Cf",98,249,0,false,1852.760,"9/2-"],["Cf",98,251,0,false,1864.740,"1/2+"],["Cf",98,252,0,false,1869.610,"0+"],
+  ["Es",99,252,0,false,1867.800,"5-"],["Es",99,254,0,false,1878.300,"7+"],
+  ["Fm",100,257,0,false,1894.260,"9/2+"],
+  ["Md",101,258,0,false,1898.200,"8-"],["No",102,259,0,false,1904.920,"9/2+"],
+  ["Lr",103,262,0,false,1916.140,"0-"],["Rf",104,267,0,false,1935.400,"0+"],
+  ["Db",105,268,0,false,1938.300,"0+"],["Sg",106,271,0,false,1949.100,"0+"],
+  ["Bh",107,272,0,false,1951.800,"0+"],["Hs",108,277,0,false,1966.400,"0+"],
+  ["Mt",109,278,0,false,1968.900,"0+"],["Ds",110,281,0,false,1978.600,"0+"],
+  ["Rg",111,282,0,false,1980.800,"0+"],["Cn",112,285,0,false,1990.300,"0+"],
+  ["Nh",113,286,0,false,1992.300,"0+"],["Fl",114,289,0,false,2002.100,"0+"],
+  ["Mc",115,290,0,false,2004.000,"0+"],["Lv",116,293,0,false,2013.500,"0+"],
+  ["Ts",117,294,0,false,2015.300,"0+"],["Og",118,294,0,false,2017.600,"0+"],
+];
+
+// Grammar filter: keep only nd≥0 and nt≥0
+const ISO = RAW.map(([sym,Z,A,abd,stable,be,spin]) => {
+  const nd = 3*Z - A - 2;
+  const nt = A - 2*Z;
+  return { sym, Z, A, abd, stable, be, beA:(be/(A||1)).toFixed(3), spin, nd, nt };
+}).filter(e => e.nd >= 0 && e.nt >= 0);
+
+
+// ─────────────────────────────────────────────────────────────────
+// BERNAS 2003 REFERENCE DATASET
+// ─────────────────────────────────────────────────────────────────
+// Source: Bernas et al., Nucl. Phys. A (2003), "Fission-residues produced
+//   in the spallation reaction 238U + p at 1 A GeV"
+//   GSI FRS experiment, inverse kinematics, 733 identified fragments.
+//
+// This is the DIRECT experimental test of the G_core grammar predictions.
+// Fragment range measured: Z = 28 (Ni) to Z = 63 (Eu).
+// Isotopic cross sections, fragment velocities, and TKE all measured.
+//
+// KEY RESULTS FOR GRAMMAR VALIDATION:
+//   • Total fission σ = 1.53 ± 0.15 b
+//   • Symmetric fission σ = 1.42 ± 0.15 b (dominant channel)
+//   • Asymmetric fission σ = 105 ± 10 mb (each wing)
+//   • Mean fragment mass: Ā = 108.0 ± 0.3 (σ_A = 17.5)
+//   • Mean fragment Z: Z̄ = 45 (fissioning parent ≈ ⁹⁰Th + pre-fission evaporation)
+//   • Mean parent before fission: A₀ ≈ 220, Z₀ ≈ 90, with ν=6 post-scission neutrons
+//   • Mean TKE: 152 ± 6 MeV (76 ± 3 MeV per fragment)
+//   • Z-distribution: Gaussian with shoulder at Z≈52 (asymmetric fission)
+//
+// G_core=0 PREDICTION vs BERNAS DATA:
+//   Primary channel: ¹⁰⁴Mo (Z=42) + ¹³²Sn (Z=50) + 2n
+//   • Z=42 (Mo): WITHIN Bernas range, Ekin = 80.8 ± 1.5 MeV (Table 3)
+//   • Z=50 (Sn): WITHIN Bernas range, Ekin = 69.9 ± 1.6 MeV (Table 3)
+//   • A=104: 0.23σ below mean (108) — visible above smooth background ✓
+//   • A=132: in heavy ASYMMETRIC fission peak (~A=134) AND ¹³²Sn is double-magic
+//     (Z=50, N=82) — TWO independent enhancements reinforce the same prediction
+//
+// HOSTILE-EXAMINER TEST (from grammar analysis):
+//   Y(Mo-104) > [Y(Mo-103) + Y(Mo-105)] / 2
+//   Enhancement should GROW at higher proton energies (deeper penetration = more core exposure)
+//   Claude's Zr+Te pick had G_core=10, not 0. Wrong Z assignment.
+//
+// CLASSIC ASYMMETRIC COMPARATOR: ⁹⁰Kr + ¹⁴⁶Ba + 2n (G_core_L=2, already in yield peak)
+// SYMMETRIC COMPARATOR: ¹¹⁸Pd + ¹¹⁸Pd + 2n (G_core_L=8)
+// ─────────────────────────────────────────────────────────────────
+
+// Table 3: Mean kinetic energies (MeV) per single fission fragment, Bernas 2003
+const BERNAS_EKIN = {
+  28:92.2, 29:89.0, 30:84.9, 31:86.4, 32:86.3, 33:87.3, 34:86.2, 35:85.7,
+  36:85.3, 37:85.3, 38:83.3, 39:84.4, 40:81.8, 41:81.8, 42:80.8, 43:79.7,
+  44:77.9, 45:75.9, 46:75.6, 47:74.5, 48:73.6, 49:72.1, 50:69.9, 51:69.4,
+  52:67.0, 53:64.2, 54:64.1, 55:61.1, 56:60.5, 57:55.2, 58:52.7, 59:51.3,
+  60:49.1, 61:46.9, 62:45.1, 63:41.5, 64:39.7,
+};
+
+// Bernas 2003: experimental mass distribution parameters
+const BERNAS = {
+  // Measured mass distribution (symmetric mode dominant)
+  meanA: 108.0, sigmaA: 17.5,
+  // Elemental range
+  Zmin: 28, Zmax: 64,
+  // Cross sections (mb)
+  totalFission: 1530, symFission: 1420, asymFission: 105,
+  // Mean fissioning system
+  meanParentA: 220, meanParentZ: 90, nuBar: 6,
+  // Total kinetic energy
+  meanTKE: 152, meanEkin: 76,
+  // Mean fragments
+  meanZ: 45.0, meanA_frag: 108.0,
+  // The primary G_core=0 prediction channels
+  primarySpike: { A_L:104, Z_L:42, A_H:132, Z_H:50, label:'¹⁰⁴Mo+¹³²Sn+2n' },
+  comparatorAsym: { A_L:90,  Z_L:36, A_H:146, Z_H:56, label:'⁹⁰Kr+¹⁴⁶Ba+2n' },
+  comparatorSym:  { A_L:118, Z_L:46, A_H:118, Z_H:46, label:'¹¹⁸Pd+¹¹⁸Pd+2n' },
+};
+
+// Bernas 2003 mass yield model (cross section in mb, approximate shape)
+// Symmetric mode: Gaussian at Ā=108, σ=17.5
+// Asymmetric mode: two Gaussians (light peak ~A=88, σ=8; heavy peak ~A=134, σ=8)
+function bernasMassYield(A) {
+  const symY  = BERNAS.symFission  * Math.exp(-0.5 * Math.pow((A - 108.0) / 17.5, 2));
+  const asmLY = BERNAS.asymFission * Math.exp(-0.5 * Math.pow((A -  88.0) /  8.0, 2));
+  const asmHY = BERNAS.asymFission * Math.exp(-0.5 * Math.pow((A - 134.0) /  8.0, 2));
+  return symY + asmLY + asmHY; // total yield at mass A (mb)
+}
+
+// Fragment class from Bernas data context
+function bernasFragClass(Z, A) {
+  const inRange = Z >= BERNAS.Zmin && Z <= BERNAS.Zmax;
+  const ekin = BERNAS_EKIN[Z];
+  const yieldMb = bernasMassYield(A);
+  // Asymmetric fission peak test (known heavy peak ~A=134 ± 10)
+  const isAsymHeavy = Math.abs(A - 134) <= 12;
+  const isAsymLight = Math.abs(A -  88) <= 12;
+  const distFromMean = (A - BERNAS.meanA) / BERNAS.sigmaA;
+  // Magic number test (Z=50,N=82 = doubly-magic; N=82 at A=132 for Z=50)
+  const isDoublyMagic = (Z === 50 && A - Z === 82) || (Z === 28 && A - Z === 50);
+  return { inRange, ekin, yieldMb, isAsymHeavy, isAsymLight, distFromMean, isDoublyMagic };
+}
+
+
+// ─────────────────────────────────────────────────────────────────
+// §2  3D MATH  (Vec3 + Mat3 — hand-coded, no external deps)
+// ─────────────────────────────────────────────────────────────────
+class Vec3 {
+  constructor(x=0,y=0,z=0){ this.x=x; this.y=y; this.z=z; }
+  add(v){ return new Vec3(this.x+v.x,this.y+v.y,this.z+v.z); }
+  sub(v){ return new Vec3(this.x-v.x,this.y-v.y,this.z-v.z); }
+  scale(s){ return new Vec3(this.x*s,this.y*s,this.z*s); }
+  dot(v){ return this.x*v.x+this.y*v.y+this.z*v.z; }
+  cross(v){ return new Vec3(this.y*v.z-this.z*v.y,this.z*v.x-this.x*v.z,this.x*v.y-this.y*v.x); }
+  len(){ return Math.sqrt(this.x*this.x+this.y*this.y+this.z*this.z); }
+  norm(){ const l=this.len()||1; return this.scale(1/l); }
+  distTo(v){ return this.sub(v).len(); }
+  toArr(){ return [this.x,this.y,this.z]; }
+  static fromArr([x,y,z]){ return new Vec3(x,y,z); }
+  static lerp(a,b,t){ return a.add(b.sub(a).scale(t)); }
+}
+
+class Mat3 {
+  constructor(d){ this.d = d || [1,0,0,0,1,0,0,0,1]; }
+  mul(m){
+    const a=this.d,b=m.d,r=new Array(9);
+    for(let i=0;i<3;i++) for(let j=0;j<3;j++)
+      r[i*3+j]=a[i*3+0]*b[0+j]+a[i*3+1]*b[3+j]+a[i*3+2]*b[6+j];
+    return new Mat3(r);
+  }
+  apply(v){
+    const d=this.d;
+    return new Vec3(d[0]*v.x+d[1]*v.y+d[2]*v.z,
+                    d[3]*v.x+d[4]*v.y+d[5]*v.z,
+                    d[6]*v.x+d[7]*v.y+d[8]*v.z);
+  }
+  static rotX(a){ const c=Math.cos(a),s=Math.sin(a); return new Mat3([1,0,0,0,c,-s,0,s,c]); }
+  static rotY(a){ const c=Math.cos(a),s=Math.sin(a); return new Mat3([c,0,s,0,1,0,-s,0,c]); }
+}
+
+// Perspective projection: returns screen {x,y} and depth info
+function project(v, zoom) {
+  const d=700, sc=d/(d+v.z);
+  return { x: W/2+v.x*sc*zoom, y: H/2+v.y*sc*zoom, z:v.z, scale:sc };
+}
+
+
+// ─────────────────────────────────────────────────────────────────
+// §3  ELECTRON CONFIG  (from electron_config.js — anomalies included)
+// ─────────────────────────────────────────────────────────────────
+const AUFBAU = [
+  {name:'1s',cap:2},{name:'2s',cap:2},{name:'2p',cap:6},{name:'3s',cap:2},{name:'3p',cap:6},
+  {name:'4s',cap:2},{name:'3d',cap:10},{name:'4p',cap:6},{name:'5s',cap:2},{name:'4d',cap:10},
+  {name:'5p',cap:6},{name:'6s',cap:2},{name:'4f',cap:14},{name:'5d',cap:10},{name:'6p',cap:6},
+  {name:'7s',cap:2},{name:'5f',cap:14},{name:'6d',cap:10},{name:'7p',cap:6},
+];
+
+// Closure-gate configurations (NOT anomalies — these are the EXPECTED
+// states where half-filled or full d/f antiprisms reach their lowest
+// gear-lock energy. The nuclear pentagonal antiprism half-fill (5 of 10
+// positions) is the SAME mechanism that pulls Cr to 3d⁵4s¹).
+const CLOSURE_GATES = {
+  24: [['1s',2],['2s',2],['2p',6],['3s',2],['3p',6],['3d',5],['4s',1]],
+  29: [['1s',2],['2s',2],['2p',6],['3s',2],['3p',6],['3d',10],['4s',1]],
+  41: [['1s',2],['2s',2],['2p',6],['3s',2],['3p',6],['4s',2],['3d',10],['4p',6],['4d',4],['5s',1]],
+  42: [['1s',2],['2s',2],['2p',6],['3s',2],['3p',6],['4s',2],['3d',10],['4p',6],['4d',5],['5s',1]],
+  44: [['1s',2],['2s',2],['2p',6],['3s',2],['3p',6],['4s',2],['3d',10],['4p',6],['4d',7],['5s',1]],
+  45: [['1s',2],['2s',2],['2p',6],['3s',2],['3p',6],['4s',2],['3d',10],['4p',6],['4d',8],['5s',1]],
+  46: [['1s',2],['2s',2],['2p',6],['3s',2],['3p',6],['4s',2],['3d',10],['4p',6],['4d',10]],
+  47: [['1s',2],['2s',2],['2p',6],['3s',2],['3p',6],['4s',2],['3d',10],['4p',6],['4d',10],['5s',1]],
+  57: [['1s',2],['2s',2],['2p',6],['3s',2],['3p',6],['4s',2],['3d',10],['4p',6],['5s',2],['4d',10],['5p',6],['5d',1],['6s',2]],
+  58: [['1s',2],['2s',2],['2p',6],['3s',2],['3p',6],['4s',2],['3d',10],['4p',6],['5s',2],['4d',10],['5p',6],['4f',1],['5d',1],['6s',2]],
+  64: [['1s',2],['2s',2],['2p',6],['3s',2],['3p',6],['4s',2],['3d',10],['4p',6],['5s',2],['4d',10],['5p',6],['6s',2],['4f',7],['5d',1]],
+  78: [['1s',2],['2s',2],['2p',6],['3s',2],['3p',6],['4s',2],['3d',10],['4p',6],['5s',2],['4d',10],['5p',6],['6s',1],['4f',14],['5d',9]],
+  79: [['1s',2],['2s',2],['2p',6],['3s',2],['3p',6],['4s',2],['3d',10],['4p',6],['5s',2],['4d',10],['5p',6],['6s',1],['4f',14],['5d',10]],
+};
+
+function getElectronConfig(Z) {
+  if (CLOSURE_GATES[Z]) return CLOSURE_GATES[Z].map(([name,electrons]) => ({name,electrons}));
+  let remaining=Z; const config=[];
+  for (const s of AUFBAU) {
+    if (remaining<=0) break;
+    const n=Math.min(remaining,s.cap);
+    if (n>0) config.push({name:s.name, electrons:n});
+    remaining-=n;
+  }
+  return config;
+}
+
+function getValenceShell(Z) {
+  const c=getElectronConfig(Z); return c.length>0 ? c[c.length-1].name : '1s';
+}
+
+function getPrincipalShell(Z) {
+  if(Z<=2)  return 'K (n=1)';
+  if(Z<=10) return 'L (n=2)';
+  if(Z<=18) return 'M (n=3)';
+  if(Z<=36) return 'N (n=4)';
+  if(Z<=54) return 'O (n=5)';
+  if(Z<=86) return 'P (n=6)';
+  return 'Q (n=7)';
+}
+
+function countUnpairedElectrons(Z) {
+  const c=getElectronConfig(Z); if(!c.length) return 0;
+  const last=c[c.length-1];
+  const shell=AUFBAU.find(s=>s.name===last.name); if(!shell) return 0;
+  const half=shell.cap/2;
+  return last.electrons<=half ? last.electrons : shell.cap-last.electrons;
+}
+
+// Noble gas (electron shell closure) Z values
+const MAGIC_Z_ELEC = [2,10,18,36,54,86,118];
+function nextNobleGas(Z) { return MAGIC_Z_ELEC.find(m=>m>Z)||'—'; }
+
+// ─────────────────────────────────────────────────────────────────
+// §4b  OPPOSITIONAL GEOMETRY — The maximum-separation principle
+// ─────────────────────────────────────────────────────────────────
+// Nuclear positions ARE arranged at maximum angular separation on a sphere.
+// Unpaired valence positions inherit this exact geometry.
+// As above (nucleus), so below (molecule).
+//   1 unpaired → single valence → linear (one pole, 180° with lone pair)
+//   2 unpaired → strained dyad → bent 104.5° (lone pairs compress the ideal 109.5°)
+//   3 unpaired → trigonal pyramidal → 107° (NH₃: 3 corners of tetrahedron)
+//   4 unpaired → equidistant tetrahedral → 109.5° (perfect max-separation)
+//   5 unpaired → trigonal bipyramidal → 120°/90°
+//   6 unpaired → octahedral → 90° (all 6 octahedron vertices)
+const OPPOSITIONAL_GEOMETRY = {
+  0: { name:'Closed shell',      angle: null,  sym:'●',  examples:'Noble gas · inert',              colour:'#aaaaff' },
+  1: { name:'Linear',            angle: 180,   sym:'—',  examples:'HF · HCl · CO · diatomic',      colour:'#ff9128' },
+  2: { name:'Strained dyad',     angle: 104.5, sym:'∧',  examples:'H₂O · O₂ · SO₂ · O₃',          colour:'#d2e62d' },
+  3: { name:'Trigonal pyramidal',angle: 107,   sym:'△',  examples:'NH₃ · PCl₃ · AsCl₃',           colour:'#28d278' },
+  4: { name:'Tetrahedral',       angle: 109.5, sym:'✦',  examples:'CH₄ · SiH₄ · NH₄⁺ · CCl₄',    colour:'#3c82ff' },
+  5: { name:'Trigonal bipyr.',   angle: 120,   sym:'⬡',  examples:'PCl₅ · PF₅ · AsF₅',            colour:'#ff50a0' },
+  6: { name:'Octahedral',        angle: 90,    sym:'⬡⬡', examples:'SF₆ · WF₆ · [Fe(CN)₆]³⁻',      colour:'#23b4a0' },
+  7: { name:'Pentagonal bipyr.', angle: 72,    sym:'⬢',  examples:'IF₇ · ReF₇',                    colour:'#d228d2' },
+};
+
+// Principal shell metadata: colour and label for each subshell
+const PRINCIPAL_SHELL_INFO = {
+  'alpha':{ n:1, label:'K', colour:'#9040d0' },
+  '2s':   { n:2, label:'L', colour:'#ff9128' }, '2p':{ n:2, label:'L', colour:'#ff9128' },
+  '3s':   { n:3, label:'M', colour:'#8c37f0' }, '3p':{ n:3, label:'M', colour:'#8c37f0' }, '3d':{ n:3, label:'M', colour:'#8c37f0' },
+  '4s':   { n:4, label:'N', colour:'#3c82ff' }, '4p':{ n:4, label:'N', colour:'#3c82ff' }, '4d':{ n:4, label:'N', colour:'#3c82ff' },
+  '5s':   { n:5, label:'O', colour:'#ff50a0' }, '5p':{ n:5, label:'O', colour:'#ff50a0' }, '5d':{ n:5, label:'O', colour:'#ff50a0' }, '5f':{ n:5, label:'O', colour:'#ff50a0' },
+  '6s':   { n:6, label:'P', colour:'#23b4a0' }, '6p':{ n:6, label:'P', colour:'#23b4a0' }, '6d':{ n:6, label:'P', colour:'#23b4a0' }, '4f':{ n:6, label:'P', colour:'#23b4a0' },
+  '7s':   { n:7, label:'Q', colour:'#d228d2' }, '7p':{ n:7, label:'Q', colour:'#d228d2' },
+};
+
+// Get the valence affinity for element Z:
+//   - which subshell is the valence (outermost partially-filled)
+//   - how many positions are singly occupied (Hund's rule)
+//   - which oppositional geometry that implies
+function getValenceAffinity(Z) {
+  const config = getElectronConfig(Z);
+  if (!config.length) return null;
+  const valEntry = config[config.length - 1];
+  const valShell = AUFBAU.find(s => s.name === valEntry.name);
+  if (!valShell) return null;
+  const half = valShell.cap / 2;
+  const fill = valEntry.electrons;
+  // Hund's rule: first half fills SINGLY (max separation), second half PAIRS
+  const singly = fill <= half ? fill : valShell.cap - fill;
+  const geo = OPPOSITIONAL_GEOMETRY[Math.min(singly, 7)] || OPPOSITIONAL_GEOMETRY[0];
+  return { shell: valEntry.name, fill, cap: valShell.cap, half, singly, geo };
+}
+
+// Subshell colour palette — matching Atomicus Lab exactly
+const SUBSHELL_COLORS = {
+  '1s':'#ff5032','2s':'#ff9128','2p':'#d2e62d','3s':'#ffeb37','3p':'#8c37f0',
+  '4s':'#3c82ff','3d':'#ff50a0','4p':'#28d278','5s':'#ff3737','4d':'#a546ff',
+  '5p':'#23e6e6','6s':'#23b4a0','4f':'#ffb923','5d':'#bee45a','6p':'#ff6923',
+  '7s':'#d228d2','5f':'#b41428','6d':'#e87840','7p':'#90e0ff',
+};
+
+// Superscript digits for electron config display
+function sup(n){const S='⁰¹²³⁴⁵⁶⁷⁸⁹';return String(n).split('').map(c=>S[+c]||c).join('');}
+
+
+// ─────────────────────────────────────────────────────────────────
+// §4  HOPF FIBRATION PATH MATH  (from hopf_fibration.js)
+// ─────────────────────────────────────────────────────────────────
+
+// Shell orbital radii (in abstract units — scaled to pixels later)
+const SHELL_RADII = {
+  '1s':0.45,'2s':0.90,'2p':0.85,'3s':1.35,'3p':1.30,'3d':1.25,
+  '4s':1.80,'4p':1.75,'4d':1.70,'4f':1.65,'5s':2.25,'5p':2.20,
+  '5d':2.15,'5f':2.10,'6s':2.70,'6p':2.65,'6d':2.60,'7s':3.15,'7p':3.10,
+};
+
+function orbitalType(name){ return name[name.length-1]; }
+
+function lobeCount(name){
+  switch(orbitalType(name)){
+    case 's': return 1;
+    case 'p': return 3;
+    case 'd': return 5;
+    case 'f': return 7;
+    default:  return 1;
+  }
+}
+
+// Build orthonormal frame {A,B,C} given one axis vector [x,y,z]
+function buildFrame(axis) {
+  const [ax,ay,az]=axis;
+  let bx,by,bz;
+  if(Math.abs(ax)<0.9){bx=1;by=0;bz=0;} else{bx=0;by=1;bz=0;}
+  const dot=bx*ax+by*ay+bz*az;
+  bx-=dot*ax; by-=dot*ay; bz-=dot*az;
+  const bl=Math.sqrt(bx*bx+by*by+bz*bz); bx/=bl;by/=bl;bz/=bl;
+  return { A:[ax,ay,az], B:[bx,by,bz], C:[ay*bz-az*by, az*bx-ax*bz, ax*by-ay*bx] };
+}
+
+// Rodrigues rotation of v around axis by theta
+function rotAround(v,axis,theta){
+  const [vx,vy,vz]=v, [kx,ky,kz]=axis;
+  const co=Math.cos(theta), si=Math.sin(theta);
+  const dot=vx*kx+vy*ky+vz*kz;
+  return [vx*co+(ky*vz-kz*vy)*si+kx*dot*(1-co),
+          vy*co+(kz*vx-kx*vz)*si+ky*dot*(1-co),
+          vz*co+(kx*vy-ky*vx)*si+kz*dot*(1-co)];
+}
+
+/**
+ * hopfPoint — compute one point on the Hopf fibration path.
+ * protonPos:   Vec3 centre of proton (in model-space units, pixels)
+ * protonAxis:  [x,y,z] unit vector (proton's outward radial direction)
+ * subshell:    string e.g. '2p'
+ * lobeIdx:     which lobe (0-indexed)
+ * t:           animation parameter [0, 2π]
+ * returns:     Vec3 position
+ */
+function hopfPoint(protonPos, protonAxis, subshell, lobeIdx, t) {
+  const r = (SHELL_RADII[subshell] || 1.0) * 50; // scale: abstract → pixels
+  const { A, B, C } = buildFrame(protonAxis);
+  const type = orbitalType(subshell);
+
+  // Tilt B toward A axis so ellipse cuts through proton hole (63° from equatorial)
+  const TILT = Math.PI * 0.35;
+  const B2 = rotAround(B, C, TILT);
+
+  // Lobe rotation around proton axis A
+  const lobeAngle = (2*Math.PI*lobeIdx) / lobeCount(subshell);
+  const Br = rotAround(B2, A, lobeAngle);
+  const Cr = rotAround(C,  A, lobeAngle);
+
+  let px, py, pz;
+  if (type === 's') {
+    // Simple tilted ring
+    px = r*Math.cos(t)*B2[0] + r*0.6*Math.sin(t)*C[0];
+    py = r*Math.cos(t)*B2[1] + r*0.6*Math.sin(t)*C[1];
+    pz = r*Math.cos(t)*B2[2] + r*0.6*Math.sin(t)*C[2];
+  } else if (type === 'p') {
+    // Figure-8 lobe through proton
+    const rr = r*(0.75+0.25*Math.cos(2*t));
+    px = rr*Math.cos(t)*Br[0] + r*0.5*Math.sin(t)*Cr[0];
+    py = rr*Math.cos(t)*Br[1] + r*0.5*Math.sin(t)*Cr[1];
+    pz = rr*Math.cos(t)*Br[2] + r*0.5*Math.sin(t)*Cr[2];
+  } else if (type === 'd') {
+    if (lobeIdx === 4) {
+      // dz²: figure-8 along proton axis
+      const rr = r*0.9*Math.cos(t);
+      px = rr*A[0] + r*0.35*Math.sin(t)*B2[0];
+      py = rr*A[1] + r*0.35*Math.sin(t)*B2[1];
+      pz = rr*A[2] + r*0.35*Math.sin(t)*B2[2];
+    } else {
+      const rr = r*(0.7+0.3*Math.cos(2*t));
+      px = rr*Math.cos(t)*Br[0] + r*0.45*Math.sin(t)*Cr[0];
+      py = rr*Math.cos(t)*Br[1] + r*0.45*Math.sin(t)*Cr[1];
+      pz = rr*Math.cos(t)*Br[2] + r*0.45*Math.sin(t)*Cr[2];
+    }
+  } else {
+    // f-orbital
+    const rr = r*(0.65+0.35*Math.cos(2*t));
+    px = rr*Math.cos(t)*Br[0] + r*0.4*Math.sin(t)*Cr[0];
+    py = rr*Math.cos(t)*Br[1] + r*0.4*Math.sin(t)*Cr[1];
+    pz = rr*Math.cos(t)*Br[2] + r*0.4*Math.sin(t)*Cr[2];
+  }
+
+  return protonPos.add(new Vec3(px,py,pz));
+}
+
+// Shell speed: ∝ 1/n² (Bohr velocity)
+function shellSpeed(subshell) { const n=parseInt(subshell[0]); return 1.0/(n*n); }
+
+
+// ─────────────────────────────────────────────────────────────────
+// §5  NUCLEAR GEOMETRY ENGINE
+//
+// Core insight: the NUCLEAR shell structure IS the electronic shell
+// structure. The same antiprism geometry that defines the electron
+// orbitals defines where the nucleon dumbbells sit.
+//
+// Carbon (1α + 4d): 2 alpha poles + 4 L-shell antiprism = octahedron
+// Neon   (1α + 8d): full L-shell square antiprism, 2s bonds to alpha
+// Cr     (1α + 22d + 6t): 3d half-fill = closure gate (not anomaly)
+// ─────────────────────────────────────────────────────────────────
+const MAGIC_Z = [2,8,20,28,50,82,114];
+function shellOf(z){ for(let i=0;i<MAGIC_Z.length;i++) if(z<=MAGIC_Z[i]) return i; return MAGIC_Z.length; }
+
+/**
+ * makeAntiprismPositions — generate 2n positions of an antiprism:
+ *   n positions in top ring, n in bottom ring, offset by π/n.
+ *   crush: half-height / equatorial-radius ratio
+ *   rotOff: extra rotation of top ring
+ * Returns array of unit Vec3s.
+ */
+function makeAntiprismPositions(n, crush, rotOff=0) {
+  const pts = [];
+  const half = n; // bottom ring
+  for (let i=0; i<half; i++) {
+    const a = (i/half)*2*Math.PI + rotOff;
+    pts.push(new Vec3(Math.cos(a), -crush, Math.sin(a)));
+  }
+  // top ring — offset by π/half
+  for (let i=0; i<half; i++) {
+    const a = (i/half)*2*Math.PI + rotOff + Math.PI/half;
+    pts.push(new Vec3(Math.cos(a), crush, Math.sin(a)));
+  }
+  return pts;
+}
+
+/**
+ * greedyMaxSep — sort positions by farthest-first greedy algorithm
+ * so the first k positions are maximally spread apart.
+ */
+function greedyMaxSep(pts) {
+  if (!pts.length) return [];
+  const n = pts.length;
+  const used = new Uint8Array(n);
+  const result = [0]; used[0] = 1;
+  while (result.length < n) {
+    let best = -1, bestDist = -1;
+    for (let i=0; i<n; i++) {
+      if (used[i]) continue;
+      let minD = Infinity;
+      for (const ri of result) {
+        const dx = pts[i].x-pts[ri].x, dy = pts[i].y-pts[ri].y, dz = pts[i].z-pts[ri].z;
+        const d = dx*dx+dy*dy+dz*dz;
+        if (d < minD) minD = d;
+      }
+      if (minD > bestDist) { bestDist = minD; best = i; }
+    }
+    result.push(best); used[best] = 1;
+  }
+  return result.map(i => pts[i]);
+}
+
+/**
+ * Shell position table — each entry: { cap, positions[], scale, subshell }
+ *
+ * ═══════════════════════════════════════════════════════════════
+ *  HUND'S RULE GEOMETRY
+ * ═══════════════════════════════════════════════════════════════
+ *  Each shell fills positions in max-separation order BEFORE
+ *  pairing with the antipodal position (nuclear Hund's rule):
+ *
+ *  L-shell (2s+2p, 8 positions):
+ *    Uses the 8 vertices of a CUBE in Hund's rule fill order.
+ *    — 2s pair: first 2 cube vertices  (Li,Be)
+ *    — 2p singly × 2:  next 2 cube vertices  (B, C)
+ *    → After 4 positions (Carbon): TETRAHEDRON ✓
+ *    — 2p singly × 1 more: 5th position  (N) — Hund half-fill of 2p
+ *    — 2p pairs × 3: remaining 3  (O,F,Ne)
+ *    → After all 8 (Neon): CUBE = square antiprism ✓
+ *
+ *  M-shell (3s+3p, 8 positions):
+ *    Same cube geometry, rotated 45° around Y for visual distinction.
+ *    — 3s pair: first 2  (Na,Mg)
+ *    → After 4 (Si): TETRAHEDRON again ✓
+ *    → After all 8 (Ar): CUBE ✓
+ *
+ *  3d (10 positions, pentagonal antiprism):
+ *    — First 5: one per top-ring vertex (singly filled — Hund)
+ *    → 5-fill = Cr CLOSURE GATE: pentagonal half-fill = gear-lock ✓
+ *    — Next 5: bottom-ring, paired with top-ring
+ *
+ *  p-shells (6 positions, octahedron Hund order):
+ *    — First 3: equilateral triangle (±x,±y,±z, singly)
+ *    — Next 3: antipodal to first 3 (pairing)
+ *
+ *  f-shells (14 positions, heptagonal antiprism):
+ *    — First 7: top ring (singly)
+ *    — Next 7: bottom ring (paired) — half-fill = f-closure gate
+ * ═══════════════════════════════════════════════════════════════
+ */
+const SHELL_DEFS = (function buildShellDefs() {
+  const defs = [];
+
+  // Helper: normalize Vec3
+  const N = v => v.normalize ? v.normalize() : v.scale(1/Math.sqrt(v.x*v.x+v.y*v.y+v.z*v.z));
+  const V = (x,y,z) => new Vec3(x,y,z);
+
+  // ── L-shell cube (8 vertices, Hund's rule order) ──
+  // Tet-A: {(1,1,1),(1,−1,−1),(−1,1,−1),(−1,−1,1)} → regular tetrahedron (all d²=8)
+  // Tet-B: {(−1,−1,−1),(−1,1,1),(1,−1,1),(1,1,−1)} → complementary tetrahedron
+  // Fill order: 2s pair (first 2 Tet-A) → 2p singly (next 2 Tet-A) → 2p singly (first Tet-B)
+  //             → 2p paired (remaining 3 Tet-B)
+  // Positions 0..3 = Tet-A = REGULAR TETRAHEDRON = Carbon sp³ geometry ✓
+  const L_CUBE_HUND = [
+    N(V( 1, 1, 1)),  // 2s¹  (Li)       ┐ Tet-A
+    N(V( 1,-1,-1)),  // 2s²  (Be) paired┘ 2s complete
+    N(V(-1, 1,-1)),  // 2p¹  (B)  single ┐
+    N(V(-1,-1, 1)),  // 2p²  (C)  single ┤ → TETRAHEDRON at this point ✓
+    N(V(-1,-1,-1)),  // 2p³  (N)  single ┘ Hund half-fill of 2p (first Tet-B)
+    N(V(-1, 1, 1)),  // 2p⁴  (O)  pairs 2p¹
+    N(V( 1,-1, 1)),  // 2p⁵  (F)  pairs 2p²
+    N(V( 1, 1,-1)),  // 2p⁶  (Ne) pairs 2p³  → full cube = Neon ✓
+  ];
+  const L_SC = 1.65; // single L-shell radius (2s and 2p at same distance)
+  defs.push({ subshell:'2s', cap:2, scale:L_SC, positions: L_CUBE_HUND.slice(0,2) });
+  defs.push({ subshell:'2p', cap:6, scale:L_SC, positions: L_CUBE_HUND.slice(2,8) });
+
+  // ── M-shell cube (same geometry, rotated 90° around Z so 2s/3s bonds are distinct) ──
+  // Using the OTHER inscribed tetrahedra: Tet-B first, then Tet-A
+  const M_CUBE_HUND = [
+    N(V(-1,-1,-1)),  // 3s¹  (Na)        ┐ Tet-B (max-sep from Neon L-shell positions)
+    N(V(-1, 1, 1)),  // 3s²  (Mg) paired ┘ 3s complete
+    N(V( 1,-1, 1)),  // 3p¹  (Al) single  ┐
+    N(V( 1, 1,-1)),  // 3p²  (Si) single  ┤ → TETRAHEDRON (Si sp³ = tetrahedral bonds) ✓
+    N(V( 1, 1, 1)),  // 3p³  (P)  single  ┘ Hund half-fill of 3p (first Tet-A)
+    N(V( 1,-1,-1)),  // 3p⁴  (S)  pairs 3p¹
+    N(V(-1, 1,-1)),  // 3p⁵  (Cl) pairs 3p²
+    N(V(-1,-1, 1)),  // 3p⁶  (Ar) pairs 3p³  → full cube = Argon ✓
+  ];
+  const M_SC = 2.40;
+  defs.push({ subshell:'3s', cap:2, scale:M_SC, positions: M_CUBE_HUND.slice(0,2) });
+  defs.push({ subshell:'3p', cap:6, scale:M_SC, positions: M_CUBE_HUND.slice(2,8) });
+
+  // ── 4s: 2 axial (begin N-shell before 3d) ──
+  defs.push({ subshell:'4s', cap:2, scale:3.00,
+    positions: [N(V(0,1,0)), N(V(0,-1,0))] });
+
+  // ── 3d: pentagonal antiprism, Hund's rule order ──
+  // First 5 = top ring, singly filled (each a separate pentagon vertex)
+  // → 5-fill = Cr CLOSURE GATE: one electron per vertex, max angular momentum ✓
+  // Next 5 = bottom ring, paired with top-ring vertices (Cu: full 3d)
+  const D3_CRUSH = 0.40;
+  const d3top = Array.from({length:5}, (_,i) => {
+    const a = (i/5)*2*Math.PI;
+    return N(V(Math.cos(a), D3_CRUSH, Math.sin(a)));
+  });
+  const d3bot = Array.from({length:5}, (_,i) => {
+    const a = (i/5)*2*Math.PI + Math.PI/5; // offset 36° = antiprism
+    return N(V(Math.cos(a), -D3_CRUSH, Math.sin(a)));
+  });
+  // Hund order: all 5 singly first, THEN 5 paired
+  defs.push({ subshell:'3d', cap:10, scale:2.80,
+    positions: [...d3top, ...d3bot] });
+
+  // ── 4p: octahedral Hund order (3 singly → 3 paired) ──
+  // ±x,±y,±z but fill +x,+y,+z first (singly), then −x,−y,−z (pairing)
+  const P4_POS = [
+    N(V( 1, 0, 0)), N(V( 0, 1, 0)), N(V( 0, 0, 1)),  // 3 singly (Hund)
+    N(V(-1, 0, 0)), N(V( 0,-1, 0)), N(V( 0, 0,-1)),  // 3 paired
+  ];
+  defs.push({ subshell:'4p', cap:6, scale:3.15, positions: P4_POS });
+
+  // ── 5s: 2 axial ──
+  defs.push({ subshell:'5s', cap:2, scale:3.75,
+    positions: [N(V(0,1,0)), N(V(0,-1,0))] });
+
+  // ── 4d: pentagonal antiprism, Hund order ──
+  const D4_CRUSH = 0.40;
+  const d4top = Array.from({length:5}, (_,i) => {
+    const a = (i/5)*2*Math.PI + Math.PI/10;
+    return N(V(Math.cos(a), D4_CRUSH, Math.sin(a)));
+  });
+  const d4bot = Array.from({length:5}, (_,i) => {
+    const a = (i/5)*2*Math.PI + Math.PI/10 + Math.PI/5;
+    return N(V(Math.cos(a), -D4_CRUSH, Math.sin(a)));
+  });
+  defs.push({ subshell:'4d', cap:10, scale:3.50,
+    positions: [...d4top, ...d4bot] });
+
+  // ── 5p: octahedral Hund order (rotated for visual distinction) ──
+  const P5_POS = [
+    N(V( 0, 1, 0)), N(V( 1, 0, 0)), N(V( 0, 0, 1)),
+    N(V( 0,-1, 0)), N(V(-1, 0, 0)), N(V( 0, 0,-1)),
+  ];
+  defs.push({ subshell:'5p', cap:6, scale:3.90, positions: P5_POS });
+
+  // ── 6s: 2 axial ──
+  defs.push({ subshell:'6s', cap:2, scale:4.50,
+    positions: [N(V(0,1,0)), N(V(0,-1,0))] });
+
+  // ── 4f: heptagonal antiprism, Hund order (7 singly → 7 paired) ──
+  // Half-fill (7/14) = f-shell closure gate (Gd, etc.)
+  const F4_CRUSH = 0.36;
+  const f4top = Array.from({length:7}, (_,i) => {
+    const a = (i/7)*2*Math.PI;
+    return N(V(Math.cos(a), F4_CRUSH, Math.sin(a)));
+  });
+  const f4bot = Array.from({length:7}, (_,i) => {
+    const a = (i/7)*2*Math.PI + Math.PI/7;
+    return N(V(Math.cos(a), -F4_CRUSH, Math.sin(a)));
+  });
+  defs.push({ subshell:'4f', cap:14, scale:4.20,
+    positions: [...f4top, ...f4bot] });
+
+  // ── 5d: pentagonal antiprism ──
+  const d5top = Array.from({length:5}, (_,i) => {
+    const a = (i/5)*2*Math.PI + Math.PI/15;
+    return N(V(Math.cos(a), D3_CRUSH, Math.sin(a)));
+  });
+  const d5bot = Array.from({length:5}, (_,i) => {
+    const a = (i/5)*2*Math.PI + Math.PI/15 + Math.PI/5;
+    return N(V(Math.cos(a), -D3_CRUSH, Math.sin(a)));
+  });
+  defs.push({ subshell:'5d', cap:10, scale:4.55,
+    positions: [...d5top, ...d5bot] });
+
+  // ── 6p: octahedral Hund ──
+  defs.push({ subshell:'6p', cap:6, scale:4.80,
+    positions: [N(V(1,0,0)),N(V(0,1,0)),N(V(0,0,1)),N(V(-1,0,0)),N(V(0,-1,0)),N(V(0,0,-1))] });
+
+  // ── 7s: 2 axial ──
+  defs.push({ subshell:'7s', cap:2, scale:5.40,
+    positions: [N(V(0,1,0)), N(V(0,-1,0))] });
+
+  // ── 5f: heptagonal antiprism, Hund order ──
+  const f5top = Array.from({length:7}, (_,i) => {
+    const a = (i/7)*2*Math.PI + Math.PI/14;
+    return N(V(Math.cos(a), F4_CRUSH, Math.sin(a)));
+  });
+  const f5bot = Array.from({length:7}, (_,i) => {
+    const a = (i/7)*2*Math.PI + Math.PI/14 + Math.PI/7;
+    return N(V(Math.cos(a), -F4_CRUSH, Math.sin(a)));
+  });
+  defs.push({ subshell:'5f', cap:14, scale:5.10,
+    positions: [...f5top, ...f5bot] });
+
+  // ── 6d: pentagonal antiprism ──
+  const d6top = Array.from({length:5}, (_,i) => {
+    const a = (i/5)*2*Math.PI + Math.PI/20;
+    return N(V(Math.cos(a), D3_CRUSH, Math.sin(a)));
+  });
+  const d6bot = Array.from({length:5}, (_,i) => {
+    const a = (i/5)*2*Math.PI + Math.PI/20 + Math.PI/5;
+    return N(V(Math.cos(a), -D3_CRUSH, Math.sin(a)));
+  });
+  defs.push({ subshell:'6d', cap:10, scale:5.50,
+    positions: [...d6top, ...d6bot] });
+
+  // ── 7p: octahedral Hund ──
+  defs.push({ subshell:'7p', cap:6, scale:5.80,
+    positions: [N(V(1,0,0)),N(V(0,1,0)),N(V(0,0,1)),N(V(-1,0,0)),N(V(0,-1,0)),N(V(0,0,-1))] });
+
+  return defs;
+})();
+
+/**
+ * buildShellPositions — for element Z, produce an ordered list of
+ * 3D positions for all Z-2 post-alpha nucleon sites (one site per proton).
+ * Each entry: { pos:Vec3 (unit sphere), subshell, scale }
+ *
+ * Bridge bonds: each shell position connects inward to the nearest proton
+ * in the parent shell. Since 2s positions are at Tet-A cube-vertex directions
+ * (same as the alpha proton directions, but at L-shell radius), the 2s bridge
+ * bond is a clean radial outward extension of the α→2s direction.
+ */
+function buildShellPositions(Z) {
+  const positions = [];  // { pos:Vec3(unit), subshell, scale, bridgeTo }
+  let remaining = Z - 2; // Z-2 positions after alpha core
+
+  // Closure-gate aware fill: for d subshells, half-fill IS a valid state
+  // (Cr rule: fill to half before pairing — same energy sequence)
+  // The ANOMALIES table handles this for electron config.
+  // For NUCLEAR geometry we use the same Aufbau order as AUFBAU:
+  const aufbauOrder = ['2s','2p','3s','3p','4s','3d','4p','5s','4d','5p','6s','4f','5d','6p','7s','5f','6d','7p'];
+
+  for (const shellName of aufbauOrder) {
+    if (remaining <= 0) break;
+    const def = SHELL_DEFS.find(d => d.subshell === shellName);
+    if (!def) continue;
+    const nFill = Math.min(remaining, def.cap);
+    for (let i=0; i<nFill; i++) {
+      const unitPos = def.positions[i]; // already greedy-sorted
+      positions.push({ pos: unitPos, subshell: shellName, scale: def.scale });
+    }
+    remaining -= nFill;
+  }
+
+  return positions;
+}
+
+/**
+ * buildNucleusGeometry — construct all nucleons and bonds.
+ * Returns { nucleons:[], bonds:[] } in model-space pixel coordinates.
+ *
+ * Physics rules:
+ * 1. Alpha core: tetrahedral 4-nucleon cluster at center
+ * 2. Each of the Z-2 remaining protons occupies a shell-geometry position
+ * 3. nt tritons placed with greedy max-separation among filled positions
+ * 4. Remaining positions (nd) are deuterons
+ * 5. Each stick: proton + neutron(s) along the outward radial
+ * 6. Bonds: nucleon-to-nucleon within each stick, bridge to nearest parent
+ */
+function buildNucleusGeometry(iso, BL, t) {
+  const nucleons = [], bonds = [];
+  const nd = iso.nd, nt = iso.nt;
+
+  // ── Subshell closure table — must be defined BEFORE shellRotRate() uses closedShells ──
+  // Z-value at which each subshell becomes completely filled (cumulative Aufbau fill).
+  const SUBSHELL_CLOSURE_Z = {
+    '2s': 4, '2p': 10, '3s': 12, '3p': 18, '4s': 20, '3d': 30,
+    '4p': 36, '5s': 38, '4d': 48, '5p': 54, '6s': 56, '4f': 70,
+    '5d': 80, '6p': 86, '7s': 88, '5f': 102, '6d': 112, '7p': 118,
+  };
+  // Which subshells are fully closed at the current Z?
+  const closedShells = new Set(
+    Object.entries(SUBSHELL_CLOSURE_Z).filter(([,cz]) => iso.Z >= cz).map(([s]) => s)
+  );
+
+  // ── Shell rotation: each nuclear shell rotates INDEPENDENTLY ──
+  // Speed ∝ 1/n² (Bohr velocity). Closed shells spin 2× faster (rigid compact units).
+  const tt = t || 0;
+  function shellRotRate(shellName) {
+    const BASE = {
+      'alpha': 3.00,
+      '2s': 0.75, '2p': 0.75,
+      '3s': 0.33, '3p': 0.33,
+      '4s': 0.19, '3d': 0.19, '4p': 0.19,
+      '5s': 0.12, '4d': 0.12, '5p': 0.12,
+      '6s': 0.083,'4f': 0.083,'5d': 0.083,'6p': 0.083,
+      '7s': 0.061,'5f': 0.061,'6d': 0.061,'7p': 0.061,
+    };
+    const base = BASE[shellName] || 0.05;
+    // Closed subshells become rigid compact units and spin faster
+    const isClosed = closedShells && closedShells.has(shellName);
+    return base * (isClosed ? 2.0 : 1.0);
+  }
+  const SHELL_ROT = {};
+  ['alpha','2s','2p','3s','3p','4s','3d','4p','5s','4d','5p','6s','4f','5d','6p','7s','5f','6d','7p'].forEach(s => {
+    SHELL_ROT[s] = Mat3.rotY(tt * shellRotRate(s));
+  });
+  function rotatePos(pos, shellName) {
+    const mat = SHELL_ROT[shellName] || SHELL_ROT['7p'];
+    return mat.apply(pos);
+  }
+
+  // ─────────────────────────────────────────────────────────────────
+  // Shell condensation: each magic-Z closure pulls subsequent shells inward.
+  // This explains the size-energy discrepancy without screening:
+  // closed shells are rigid, tightly-packed, and exert higher occlusion pressure
+  // on the shells above them, reducing the effective bond radius.
+  // Visual: magic-Z nuclei (He-4, O-16, Ca-40, Ni-58, Sn-120, Pb-208) appear
+  // visibly more compact than their neighbours.
+  // ─────────────────────────────────────────────────────────────────
+  const CLOSURE_Z = [2, 8, 18, 28, 36, 50, 82, 114];
+  const COMPRESS   = 0.91;  // 9% reduction per completed inner shell
+  let condensation = 1.0;
+  for (const mz of CLOSURE_Z) {
+    if (iso.Z > mz) condensation *= COMPRESS;
+  }
+
+  // ── §A: Alpha core (tetrahedral) ──
+  // Alpha core radius — condensed by shell closures
+  const aR = 0.88 * BL * condensation;
+  // Tet-A vertices: p0, p1, n0, n1
+  //
+  // The alpha is two PERPENDICULAR deuterons:
+  //   D1: p0(1,1,1) + n1(-1,-1,1)  — axis = (1,1,0)/√2
+  //   D2: p1(1,-1,-1) + n0(-1,1,-1) — axis = (1,-1,0)/√2
+  //
+  // Reading the 4 nucleons in deuteron sequence: n1, p0 (D1), n0, p1 (D2)
+  //   = n, p, n, p = npnp ✓
+  //
+  // Proton torus holes face OUTWARD along the deuteron axis (toward shell bonds).
+  // Neutron torus holes face INWARD along the deuteron axis (toward nucleus core).
+  // This is the SDT model: the electron Hopf-loop enters through the proton hole
+  // and curves inward through the neutron hole toward the convergent pressure centre.
+  //
+  // Proton positions: kept at (1,1,1) and (1,-1,-1) so L-shell (2s) bridge bonds
+  // attach to the correct outward alpha proton directions.
+  const tet = [
+    new Vec3( 1,  1,  1).norm().scale(aR),  // idx 0: alpha proton 0  (2s¹ bridge dir)
+    new Vec3( 1, -1, -1).norm().scale(aR),  // idx 1: alpha proton 1  (2s² bridge dir)
+    new Vec3(-1,  1, -1).norm().scale(aR),  // idx 2: alpha neutron 0 (D2 inner end)
+    new Vec3(-1, -1,  1).norm().scale(aR),  // idx 3: alpha neutron 1 (D1 inner end)
+  ];
+  // Torus axes for alpha nucleons:
+  //   p0 axis = D1 outward direction = (p0 - n1) normalised = (1,1,0)/√2
+  //   p1 axis = D2 outward direction = (p1 - n0) normalised = (1,-1,0)/√2
+  //   n0 axis = D2 inward direction  = -(p1 - n0) normalised = (-1,1,0)/√2
+  //   n1 axis = D1 inward direction  = -(p0 - n1) normalised = (-1,-1,0)/√2
+  const ALPHA_AXES = [
+    new Vec3( 1,  1, 0).norm(),  // p0: outward along D1
+    new Vec3( 1, -1, 0).norm(),  // p1: outward along D2
+    new Vec3(-1,  1, 0).norm(),  // n0: inward along D2 (toward p1)
+    new Vec3(-1, -1, 0).norm(),  // n1: inward along D1 (toward p0)
+  ];
+  const ALPHA_P0 = 0, ALPHA_P1 = 1; // indices of alpha protons
+  tet.forEach((pos, i) => {
+    const rpos = rotatePos(pos, 'alpha');
+    const axis = rotatePos(ALPHA_AXES[i], 'alpha');
+    nucleons.push({ pos:rpos, axis, type: i<2?'proton':'neutron', isAlpha:true,
+                    ring:'alpha', label:i<2?'αp':'αn', idx:nucleons.length });
+  });
+
+  // Alpha bonds: 2 deuteron bonds (thick, bright) + 4 cross-bonds (thin, dim)
+  // D1 = (p0=0, n1=3), D2 = (p1=1, n0=2)
+  for (let i = 0; i < 4; i++) {
+    for (let j = i+1; j < 4; j++) {
+      const isDeuteron = (i===0 && j===3) || (i===1 && j===2);
+      bonds.push({
+        a:i, b:j,
+        color: isDeuteron ? 'rgba(210,90,255,0.92)' : 'rgba(100,40,160,0.32)',
+        width: isDeuteron ? 4.0 : 1.2,
+        style: 'solid', ring: 'alpha',
+      });
+    }
+  }
+
+  if (nd === 0 && nt === 0) return { nucleons, bonds, closedShells }; // He-4: pure alpha
+
+  // ── §B: Shell positions for Z-2 sticks ──
+  const shellPts = buildShellPositions(iso.Z);
+  // shellPts.length should equal nd+nt (= Z-2 for grammar-valid isotopes)
+
+  // ── §C: Assign triton positions — OUTERMOST SHELLS FIRST ──
+  // Physics: as Z increases past the N≈Z 'golden line', it is the VALENCE
+  // (outermost) nucleon positions that accumulate extra neutrons. Inner shells
+  // that closed at low Z did so near N≈Z, so they are predominantly deuterons.
+  // Only the unfinished/outer shells carry the nt triton excess.
+  //
+  // Algorithm: reverse the aufbau fill order. Assign the LAST nt positions
+  // in the shellPts array (which is filled in aufbau order, innermost first)
+  // as triton sticks. All earlier positions are deuterons.
+  //
+  // Example: Fe-56 (Z=26, A=56): nd=20, nt=4.
+  //   shellPts[0..19] = 2s,2p,3s,3p,4s sticks  → deuterons (inner, closed shells)
+  //   shellPts[20..23] = first 4 of 3d shell    → tritons (outer, valence shell)
+  //
+  // U-238 (Z=92, A=238): nd=36, nt=54.
+  //   shellPts[0..35] = 2s through part of 4f   → deuterons
+  //   shellPts[36..89] = rest of 4f, 5d, 6p, 7s, 5f, 6d, 7p → all tritons
+  //   Visual: the outer three shells are entirely triton-loaded.
+  const tritonSlots = new Set();
+  const totalSticks = shellPts.length; // = nd + nt = Z - 2
+  for (let i = totalSticks - nt; i < totalSticks; i++) {
+    if (i >= 0) tritonSlots.add(i); // last nt slots are tritons
+  }
+
+  // ── §D: Build each stick (deuteron or triton) ──
+  const shellColors = { '2s':'rgba(255,145,40,0.9)','2p':'rgba(210,230,45,0.9)',
+    '3s':'rgba(255,235,55,0.9)','3p':'rgba(140,55,240,0.9)',
+    '4s':'rgba(60,130,255,0.9)','3d':'rgba(255,80,160,0.9)',
+    '4p':'rgba(40,210,120,0.9)','5s':'rgba(255,55,55,0.9)',
+    '4d':'rgba(165,70,255,0.9)','5p':'rgba(35,230,230,0.9)',
+    '6s':'rgba(35,180,160,0.9)','4f':'rgba(255,185,35,0.9)',
+    '5d':'rgba(190,228,90,0.9)','6p':'rgba(255,105,35,0.9)',
+    '7s':'rgba(210,40,210,0.9)','5f':'rgba(180,20,40,0.9)',
+  };
+
+  const stickBase = nucleons.length;
+
+  shellPts.forEach((sp, slotIdx) => {
+    const isTriton = tritonSlots.has(slotIdx);
+    const sc = sp.scale * BL;
+    const unitPos = sp.pos;
+    const radial = unitPos; // outward unit direction
+
+    // Centre of this stick, with shell rotation AND condensation applied
+    const centreBase = unitPos.scale(sc * condensation);
+    const centre = rotatePos(centreBase, sp.subshell);
+    const radialRot = rotatePos(radial, sp.subshell).norm();
+    // Shorter sticks: proton at +0.13 BL outward, neutron at -0.09 BL inward.
+    // Compact geometry makes the nuclear structure clear and distinct from
+    // the electron arcs which extend far beyond.
+    const pPos  = centre.add(radialRot.scale( 0.13 * BL));
+    const nPos  = centre.add(radialRot.scale(-0.09 * BL));
+
+    const bondColor  = shellColors[sp.subshell] || 'rgba(40,200,220,0.75)';
+    const shellLabel = sp.subshell;
+
+    const pIdx = nucleons.length;
+    nucleons.push({ pos:pPos, axis: radialRot,              type:'proton',  ring:shellLabel, stickIdx:slotIdx,
+                    isTriton, label:`${shellLabel}p`, idx:pIdx });
+    const n1Idx = nucleons.length;
+    // Neutron torus hole faces INWARD (antiparallel to proton's outward axis):
+    // The neutron is the inner end of the deuteron stick. Its Hopf-loop
+    // enters from the proton side and converges inward toward the alpha core.
+    nucleons.push({ pos:nPos, axis: radialRot.scale(-1),    type:'neutron', ring:shellLabel, stickIdx:slotIdx,
+                    isTriton, label:`${shellLabel}n`, idx:n1Idx });
+    // P-N bond (coloured by shell/subshell)
+    bonds.push({ a:pIdx, b:n1Idx,
+      color: isTriton ? 'rgba(220,40,220,0.80)' : bondColor,
+      width:3, style:'solid', ring:shellLabel });
+
+    if (isTriton) {
+      // Extra neutron: offset laterally, also condensed
+      const lat = rotatePos(new Vec3(-unitPos.z, 0, unitPos.x).norm(), sp.subshell);
+      const n2Pos = centre.add(radialRot.scale(-0.17*BL)).add(lat.scale(0.16*BL));
+      const n2Idx = nucleons.length;
+      nucleons.push({ pos:n2Pos, axis: lat,  type:'neutron', ring:shellLabel, stickIdx:slotIdx,
+                      isTriton, extraN:true, label:`${shellLabel}n2`, idx:n2Idx });
+      bonds.push({ a:n1Idx, b:n2Idx, color:'rgba(60,80,160,0.65)', width:2, style:'solid', ring:shellLabel+'-nn' });
+    }
+
+    // ── Bridge bond to parent shell ──
+    // 2s → connects to nearest alpha proton (the "defect bond" in Neon)
+    // 2p → connects to nearest 2s proton
+    // 3s → connects to nearest 2p proton
+    // Higher shells → nearest proton in any inner shell
+    let bridgeTarget = -1, bridgeDist = Infinity;
+    const bridgeSearchEnd = pIdx;
+    const innerShells = { '2s':['alpha'], '2p':['2s'], '3s':['2p','2s'],
+      '3p':['3s','2p'], '4s':['3p','3s'], '3d':['4s','3p'], '4p':['3d','4s'],
+      '5s':['4p','3d'], '4d':['5s','4p'], '5p':['4d','5s'], '6s':['5p','4d'],
+      '4f':['6s','5p'], '5d':['4f','6s'], '6p':['5d','4f'], '7s':['6p','5d'],
+      '5f':['7s','6p'], '6d':['5f','7s'], '7p':['6d','5f'] };
+    const targets = innerShells[sp.subshell] || [];
+    for (let ni=0; ni<bridgeSearchEnd; ni++) {
+      const n = nucleons[ni];
+      if (!n || n.type !== 'proton') continue;
+      const isTargetShell = targets.includes(n.ring) || targets.includes('alpha');
+      if (!isTargetShell) continue;
+      const dp = pPos.distTo(n.pos);
+      if (dp < bridgeDist) { bridgeDist = dp; bridgeTarget = ni; }
+    }
+    if (bridgeTarget < 0) {
+      // Fallback: nearest any proton
+      for (let ni=0; ni<bridgeSearchEnd; ni++) {
+        if (nucleons[ni]?.type !== 'proton') continue;
+        const dp = pPos.distTo(nucleons[ni].pos);
+        if (dp < bridgeDist) { bridgeDist=dp; bridgeTarget=ni; }
+      }
+    }
+    if (bridgeTarget >= 0) {
+      const bridgeOpacity = sp.subshell==='2s' ? 0.45 : 0.18;
+      bonds.push({ a:bridgeTarget, b:pIdx,
+        color:`rgba(160,160,255,${bridgeOpacity})`, width:1.2,
+        style:sp.subshell==='2s'?'solid':'dashed', ring:'bridge' });
+    }
+  });
+
+  // ── §E: Paired-stick dashed links (deuterons only, within same subshell) ──
+  // Deuteron pairs share a faint dashed link to show pairing
+  const deuteronSticks = [];
+  shellPts.forEach((sp, slotIdx) => {
+    if (!tritonSlots.has(slotIdx)) deuteronSticks.push({ slotIdx, subshell: sp.subshell });
+  });
+  for (let i=0; i<deuteronSticks.length-1; i+=2) {
+    if (deuteronSticks[i].subshell !== deuteronSticks[i+1].subshell) continue;
+    const pA = stickBase + deuteronSticks[i].slotIdx * 2;
+    const pB = stickBase + deuteronSticks[i+1].slotIdx * 2;
+    if (pA < nucleons.length && pB < nucleons.length)
+      bonds.push({ a:pA, b:pB, color:'rgba(40,200,220,0.14)', width:1, style:'dashed', ring:'d-pair' });
+  }
+
+  return { nucleons, bonds, closedShells };
+}
+
+
+// ─────────────────────────────────────────────────────────────────
+// §6  ELECTRON PATH BUILDER
+// ─────────────────────────────────────────────────────────────────
+/**
+ * Build one entry per (electron × lobe) for the current isotope.
+ * Returns array of:
+ *   { subshell, color, speed, protonPos, protonAxis, lobeIdx, eOffset }
+ * where protonPos/protonAxis are in model space (pixels), and
+ * eOffset is an extra phase offset so electrons within the same
+ * subshell are spread apart on their orbit.
+ */
+function buildElectronPathDescs(iso, nucleons) {
+  const config  = getElectronConfig(iso.Z);
+  const protons = nucleons.filter(n => n.type==='proton');
+  const paths   = [];
+  let pPtr = 0; // proton pointer (cycles through protons)
+
+  for (const { name, electrons } of config) {
+    const color   = SUBSHELL_COLORS[name] || '#ffffff';
+    const speed   = shellSpeed(name) * 2.0;
+    const lCount  = lobeCount(name);
+    const capForShell = AUFBAU.find(s=>s.name===name)?.cap || 2;
+    const lobesUsed = Math.min(lCount, Math.ceil(electrons / (capForShell/lCount)));
+
+    // Each filled lobe gets one (or two) animated dots
+    const electronsPerLobe = capForShell / lCount;      // 2 for s/p/d/f
+    let eFilled = electrons;
+
+    for (let li=0; li<lobesUsed && eFilled>0; li++) {
+      const eInThisLobe = Math.min(electronsPerLobe, eFilled);
+      eFilled -= eInThisLobe;
+
+      const pNucleon = protons[pPtr % protons.length];
+      pPtr++;
+      const pPos  = pNucleon ? pNucleon.pos : new Vec3(0,0,0);
+      const pLen  = pPos.len();
+      const pAxis = pLen>0.01 ? pPos.toArr().map(c=>c/pLen) : [0,1,0];
+
+      // Add one animated dot per electron in this lobe
+      for (let ei=0; ei<eInThisLobe; ei++) {
+        const eOffset = (ei / eInThisLobe) * Math.PI; // π phase offset for paired electrons
+        paths.push({ subshell:name, color, speed, protonPos:pPos, protonAxis:pAxis, lobeIdx:li, eOffset });
+      }
+    }
+  }
+  return paths;
+}
+
+
+// ─────────────────────────────────────────────────────────────────
+// §7  DECAY DAUGHTERS
+// ─────────────────────────────────────────────────────────────────
+function computeDecayDaughters(iso) {
+  const check = (nd, nt) => {
+    if (nd<0||nt<0) return {valid:false,nd,nt,reason:nd<0?'n_d<0':'n_t<0'};
+    const match = ISO.find(e=>e.nd===nd&&e.nt===nt);
+    return {valid:!!match,iso:match||null,nd,nt};
+  };
+  return {
+    alpha:     {type:'α',  ...check(iso.nd-2,iso.nt),   color:'rgba(255,210,40,1)',  cls:'gold'},
+    betaMinus: {type:'β⁻', ...check(iso.nd+3,iso.nt-2), color:'rgba(40,200,255,1)',  cls:'cyan'},
+    ec:        {type:'EC', ...check(iso.nd-3,iso.nt+2), color:'rgba(255,40,255,1)',  cls:'mag'},
+    neutron:   {type:'n',  ...check(iso.nd+1,iso.nt-1), color:'rgba(255,100,40,1)',  cls:'orn'},
+  };
+}
+
+
+// ─────────────────────────────────────────────────────────────────
+// §8  STORY MODE DATA
+// ─────────────────────────────────────────────────────────────────
+const STORY_STEPS = [
+  {sym:'He',A:4,  text:'Pure alpha core. Z=2, A=4. The foundation of all matter in SDT. Two protons and two neutrons at tetrahedral corners. nd=0, nt=0.'},
+  {sym:'Li',A:6,  text:'One deuteron added. Simplest 3-proton nucleus. nd=1, nt=0. Single p-n dumbbell in the equatorial deuteron ring.'},
+  {sym:'Li',A:7,  text:'First triton! nd=0, nt=1. Asymmetric — gives lithium its ½⁻ magnetic moment. The extra neutron points inward, the magnetic moment source.'},
+  {sym:'Be',A:9,  text:'Beryllium-9: nd=1, nt=1. Both rings active. Slightly asymmetric in grammar; real Be-9 is stable due to clustering.'},
+  {sym:'B', A:10, text:'Boron-10: nd=2, nt=0. Two paired deuterons. Even nd → magnetically quiet. Spin=3, stable, 20% natural abundance.'},
+  {sym:'C', A:12, text:'Carbon-12: nd=4, nt=0. Four deuterons. THE OCTAHEDRON: 2 alpha protons (axial, ±Y) + 4 L-shell deuteron protons (equatorial, 2p positions) = perfect 6-vertex octahedron. Nuclear shell geometry = electronic shell geometry. Spin=0.'},
+  {sym:'N', A:14, text:'Nitrogen-14: nd=5, nt=0. Five deuterons in L-shell positions. The 5th fills the last 2p slot — odd nd → one unpaired proton → spin=1, slight magnetic moment. L-shell fills toward octahedral closure.'},
+  {sym:'O', A:16, text:'Oxygen-16: nd=6, nt=0. Six deuterons = full 2p shell (6 octahedral equatorial) + 2s (axial). Together with the 2 alpha protons = 8-vertex cube/antiprism. Double magic L-shell closure. Spin=0.'},
+  {sym:'Ne',A:20, text:'Neon-20: nd=8, nt=0. Full L-shell: 2 axial (2s) + 6 equatorial (2p) = 8 positions. Square antiprism geometry. The 2s deuterons form solid bonds (defect bonds) down to the alpha-core protons, completing the structural shell. Noble gas = nuclear shell closure.'},
+  {sym:'Na',A:23, text:'Sodium-23: nd=8, nt=1. First triton beyond neon. The Na magnetic moment arises from this one lonely triton asymmetry.'},
+  {sym:'Mg',A:24, text:'Magnesium-24: nd=9, nt=0. Nine deuterons, no tritons. The deuteron ring starts to crowd and curve outward.'},
+  {sym:'Fe',A:56, text:'PEAK BINDING ENERGY! nd=20, nt=4. Twenty deuterons + four tritons = the geometric optimum of the universe. BE/A = 8.79 MeV. The universe\'s preferred nucleus.'},
+  {sym:'Au',A:197,text:'THE GOLDEN BOUNDARY. nd=38, nt=39. Tritons now outnumber deuterons for the first time in grammar. Z=79 marks the Coulomb tipping point where extra neutrons must cluster in tritons.'},
+  {sym:'Pb',A:208,text:'Lead-208: nd=38, nt=44. Double magic shell closure (Z=82, N=126). Heaviest fully stable nucleus. 54% triton grammar. The endpoint of all decay chains.'},
+  {sym:'U', A:238,text:'Uranium-238: nd=42, nt=52. 55.3% triton fraction. Maximum stable grammar. 52 tritons provide mechanical spacing against Z=92 Coulomb repulsion. Half-life: 4.5 billion years.'},
+];
+
+let storyStep=0;
+const storyPlotData = STORY_STEPS.map(s=>{
+  const m=ISO.find(e=>e.sym===s.sym&&e.A===s.A);
+  return m ? {Z:m.Z, tf:m.nt/Math.max(m.nd+m.nt,1), label:`${m.sym}-${m.A}`} : null;
+}).filter(Boolean);
+
+
+// ─────────────────────────────────────────────────────────────────
+// §9  UI — BUILD ISOTOPE LIST
+// ─────────────────────────────────────────────────────────────────
+const listEl  = document.getElementById('isoList');
+const itemEls = [];
+let curIdx    = 0;
+
+(function buildList(){
+  let lastZ=-1;
+  ISO.forEach((iso,i)=>{
+    if(iso.Z!==lastZ){
+      lastZ=iso.Z;
+      const lbl=document.createElement('div'); lbl.className='el-label';
+      lbl.textContent = `Z=${iso.Z} — ${elemName(iso.Z) || iso.sym} (${iso.sym})`;
+      const grp=document.createElement('div'); grp.className='el-group';
+      grp.appendChild(lbl); listEl.appendChild(grp);
+    }
+    const item=document.createElement('div');
+    item.className=`iso-item ${iso.stable?'stable':'unstable'}`;
+    item.dataset.idx=i;
+    item.innerHTML=`<span>${iso.sym}-${iso.A}</span><span class="grammar">${iso.nd}d+${iso.nt}t</span>`;
+    item.addEventListener('click',()=>selectIso(i));
+    listEl.lastChild.appendChild(item);
+    itemEls.push(item);
+  });
+})();
+
+function selectIso(idx){
+  if(idx<0||idx>=ISO.length) return;
+  itemEls[curIdx].classList.remove('active');
+  curIdx=idx;
+  itemEls[curIdx].classList.add('active');
+  itemEls[curIdx].scrollIntoView({block:'nearest',behavior:'smooth'});
+  // Reset electron trails on element change
+  electronTrails=[];
+  electronPathDescs=null; // will be rebuilt on next render
+}
+
+// Start at C-12
+{
+  const i0=ISO.findIndex(e=>e.sym==='C'&&e.A===12);
+  if(i0>=0){curIdx=i0; itemEls[i0].classList.add('active');}
+}
+
+
+// ─────────────────────────────────────────────────────────────────
+// §10  CANVAS + TRACKBALL CAMERA
+// ─────────────────────────────────────────────────────────────────
+const canvas=document.getElementById('c');
+const ctx   =canvas.getContext('2d');
+let W,H;
+
+function resize(){ W=canvas.width=window.innerWidth; H=canvas.height=window.innerHeight; }
+window.addEventListener('resize',resize); resize();
+
+let camMat  = Mat3.rotX(-0.25).mul(Mat3.rotY(0.3));
+let dragging=false, lastMx=0, lastMy=0;
+
+canvas.addEventListener('mousedown',e=>{ if(e.target!==canvas)return; dragging=true;lastMx=e.clientX;lastMy=e.clientY; });
+canvas.addEventListener('mouseup',  ()=>dragging=false);
+canvas.addEventListener('mouseleave',()=>dragging=false);
+canvas.addEventListener('mousemove',e=>{
+  if(!dragging) return;
+  const dx=(e.clientX-lastMx)*0.009, dy=(e.clientY-lastMy)*0.009;
+  camMat=Mat3.rotY(dx).mul(Mat3.rotX(dy)).mul(camMat);
+  lastMx=e.clientX; lastMy=e.clientY;
+});
+canvas.addEventListener('wheel',e=>{
+  const z=document.getElementById('zoom');
+  z.value=Math.max(50,Math.min(500,+z.value-e.deltaY*0.5));
+  document.getElementById('zoomVis').value=z.value;
+  e.preventDefault();
+},{passive:false});
+
+
+// ─────────────────────────────────────────────────────────────────
+// §11  ELECTRON PATH STATE + TRAILS
+// ─────────────────────────────────────────────────────────────────
+let electronPathDescs = null; // rebuilt when iso changes
+let electronTrails    = [];   // array of arrays of {x,y} screen points
+const TRAIL_LEN = 24;
+
+
+// ─────────────────────────────────────────────────────────────────
+// §12  SPHERE DRAWING HELPER
+// ─────────────────────────────────────────────────────────────────
+// FISSION CHANNEL SCANNER
+// ─────────────────────────────────────────────────────────────────
+// Key physics:
+//   ΔD=0 and ΔT=-2 with 2n emission are CONSERVATION IDENTITIES —
+//   they are automatically satisfied for any grammar-valid 2n split.
+//   (Proof: nd_L+nd_H = 3Z_p-A_p-2 = nd_p. Same for nt.)
+//   So the discriminator is NOT conservation — it is GEOMETRY.
+//
+//   G_core = |nd_L - nt_L| + (nt_L % 2)
+//
+//   G_core = 0: small fragment is grammar-balanced (nd=nt) with even nt.
+//              = DEEP CORE / PROMPT-SNAP class (yield spike refuted by Bernas 2003 — tested wrong observable).
+//              NOTE: Bernas doesn't count neutrons — infers them. Timing prediction still open.
+//              ¹³²Sn is double-magic (Z=50, N=82) — independent yield enhancement from shell model
+//
+//   G_core odd (nt_L odd): shallow/shell-material, delayed-n precursor.
+//   G_core even >0: near-balance, intermediate.
+//
+//   The alternating A pattern (84, 87, 90, 93, 96...) is the grammar
+//   stepping through this closure lattice one mass unit at a time.
+//
+//   NOTE on Claude's ¹⁰⁴Zr + ¹³²Te suggestion:
+//     ¹⁰⁴Zr (Z=40): nd=14, nt=24 → G_core = |14-24|+0 = 10 (wrong, not a spike)
+//     ¹⁰⁴Mo (Z=42): nd=20, nt=20 → G_core = 0 ✓ (this is the predicted spike)
+//   The mass A=104 prediction is sharp. The Z=42 (Mo) assignment is exact.
+// ─────────────────────────────────────────────────────────────────
+
+let _fissionScanCache = null;
+let _fissionScanKey = '';
+
+function fissionChannelScan(iso) {
+  const ckey = `${iso.Z}_${iso.A}`;
+  if (_fissionScanKey === ckey && _fissionScanCache !== null) return _fissionScanCache;
+  _fissionScanKey = ckey;
+
+  if (iso.Z < 56 || iso.A < 130) { _fissionScanCache = null; return null; }
+
+  const Z_p = iso.Z, A_p = iso.A, nd_p = iso.nd, nt_p = iso.nt;
+  const candidates = [];
+
+  // Compact element symbol lookup from ISO array
+  const symForZ = z => { const e = ISO.find(i => i.Z === z); return e ? e.sym : `Z${z}`; };
+
+  // Scan A_L from 60 to floor((A_p-2)/2) — all possible small fragments
+  const A_L_max = Math.floor((A_p - 2) / 2);
+  for (let A_L = 60; A_L <= A_L_max; A_L++) {
+    const A_H = A_p - A_L - 2; // heavy fragment mass (2n emission)
+
+    // Valid Z_L range for grammar validity:
+    //   nd_L = 3Z_L - A_L - 2 ≥ 0  →  Z_L ≥ ceil((A_L+2)/3)
+    //   nt_L = A_L - 2*Z_L ≥ 0     →  Z_L ≤ floor(A_L/2)
+    const zLmin = Math.ceil((A_L + 2) / 3);
+    const zLmax = Math.min(Math.floor(A_L / 2), Z_p - 2);
+
+    for (let Z_L = zLmin; Z_L <= zLmax; Z_L++) {
+      const Z_H = Z_p - Z_L;
+      if (Z_H < 2) continue;
+
+      const nd_L = 3*Z_L - A_L - 2;
+      const nt_L = A_L - 2*Z_L;
+      const nd_H = 3*Z_H - A_H - 2;
+      const nt_H = A_H - 2*Z_H;
+
+      // Grammar validity for heavy fragment
+      if (nd_H < 0 || nt_H < 0) continue;
+
+      // Verify conservation identities (should always pass — sanity check)
+      // nd_L + nd_H should = nd_p (ΔD=0 identity)
+      // nt_L + nt_H should = nt_p - 2 (ΔT=-2 identity)
+      if (nd_L + nd_H !== nd_p) continue;      // catches edge cases
+      if (nt_L + nt_H !== nt_p - 2) continue; // catches edge cases
+
+      // THE DISCRIMINATOR: G_core of small fragment
+      const G_core_L = Math.abs(nd_L - nt_L) + (nt_L % 2);
+      const G_core_H = Math.abs(nd_H - nt_H) + (nt_H % 2);
+      const G_total  = G_core_L + G_core_H; // combined grammar tension
+
+      const sym_L = symForZ(Z_L);
+      const sym_H = symForZ(Z_H);
+
+      // Fragment class (nt_L parity determines prompt vs delayed)
+      const parityClass = nt_L % 2 === 0
+        ? (G_core_L === 0 ? 'PROMPT (sealed)' : 'PROMPT')
+        : 'DELAYED';
+
+      candidates.push({
+        A_L, Z_L, nd_L, nt_L, sym_L,
+        A_H, Z_H, nd_H, nt_H, sym_H,
+        G_core_L, G_core_H, G_total,
+        parityClass
+      });
+    }
+  }
+
+  // Sort: primary = G_core_L (spike predictor for small fragment)
+  // secondary = G_total (combined tension), tertiary = A_L
+  candidates.sort((a, b) =>
+    a.G_core_L - b.G_core_L ||
+    a.G_total  - b.G_total  ||
+    a.A_L      - b.A_L
+  );
+
+  _fissionScanCache = candidates.slice(0, 8);
+  return _fissionScanCache;
+}
+
+// ─────────────────────────────────────────────────────────────────
+// drawNucleonTorus
+// ─────────────────────────────────────────────────────────────────
+// Each SDT nucleon is a (2,3) torus knot whose equilibrium surface
+// is a smooth solid torus (CQ11 Theorem A). The torus hole axis =
+// radial outward from nucleus centre. The electron Hopf-fibration
+// loop threads inward through this hole toward the core.
+//
+// Rendering: the torus ring is constructed in MODEL SPACE, then
+// each sample is projected through the full camera pipeline:
+//   ringPt(u) = center + Rb*(cos(u)·e1 + sin(u)·e2)   [model space]
+//   camPt(u)  = camMat.apply(ringPt(u))
+//   screenPt  = project(camPt, zoomVal)
+//
+// This is the ONLY correct approach — bypassing the camera pipeline
+// (using camera-space components directly as screen coords) produces
+// the morphing/twisting observed in the previous broken version.
+//
+// Parameters:
+//   centerModelPos — Vec3, nucleon centre in model space
+//   axisModel      — Vec3, unit outward radial direction (model space)
+//   Rb_px          — major ring radius, base pixels (scaled by perspective)
+//   rb_px          — tube half-width, base pixels
+//   strokeCol      — RGBA string for bright front face
+//   glowCol        — RGBA string for outer glow
+//   zoomVal        — zoom slider value (same as used by project())
+// ─────────────────────────────────────────────────────────────────
+function drawNucleonTorus(centerModelPos, axisModel, Rb_px, rb_px, strokeCol, glowCol, zoomVal) {
+  // Build two perpendicular unit vectors in model space
+  // e1, e2 span the plane of the torus ring (perpendicular to axisModel)
+  const ax = axisModel.x, ay = axisModel.y, az = axisModel.z;
+  // Choose a helper vector not parallel to axis
+  const helper = Math.abs(ay) < 0.85 ? new Vec3(0, 1, 0) : new Vec3(1, 0, 0);
+  const e1raw = helper.sub(axisModel.scale(helper.dot(axisModel))); // Gram-Schmidt
+  const e1 = e1raw.norm();
+  const e2 = axisModel.cross(e1).norm();
+
+  const N = 40; // ring sample count
+
+  // Project all ring points through the full camera pipeline
+  const pts = [];
+  for (let i = 0; i < N; i++) {
+    const u = (i / N) * Math.PI * 2;
+    const ringPt = centerModelPos
+      .add(e1.scale(Rb_px * Math.cos(u)))
+      .add(e2.scale(Rb_px * Math.sin(u)));
+    const camPt = camMat.apply(ringPt);
+    const sc = project(camPt, zoomVal);
+    pts.push({ sx: sc.x, sy: sc.y, sz: camPt.z, scale: sc.scale });
+  }
+
+  // Use average projected scale for tube width
+  const avgScale = pts.reduce((s, p) => s + p.scale, 0) / N;
+  const tubeW = rb_px * avgScale;
+  if (tubeW < 0.3) return; // too small to see
+
+  // Find median depth to split front vs back
+  const sortedZ = pts.map(p => p.sz).sort((a, b) => a - b);
+  const medZ = sortedZ[Math.floor(N / 2)];
+
+  // ── 1. Outer glow: full ring, very wide, dim ──
+  ctx.beginPath();
+  pts.forEach((p, i) => i === 0 ? ctx.moveTo(p.sx, p.sy) : ctx.lineTo(p.sx, p.sy));
+  ctx.closePath();
+  ctx.strokeStyle = glowCol;
+  ctx.lineWidth = tubeW * 5.0;
+  ctx.stroke();
+
+  // ── 2. Back face: segments where sz > medZ (far from camera = dimmer) ──
+  const cm = strokeCol.match(/[\d.]+/g);
+  const [r, g, b] = cm ? [cm[0], cm[1], cm[2]] : [180, 180, 180];
+  ctx.strokeStyle = `rgba(${r},${g},${b},0.15)`;
+  ctx.lineWidth = tubeW * 1.4;
+  let drawing = false;
+  ctx.beginPath();
+  for (let i = 0; i <= N; i++) {
+    const p = pts[i % N];
+    if (p.sz > medZ) {
+      drawing ? ctx.lineTo(p.sx, p.sy) : (ctx.moveTo(p.sx, p.sy), drawing = true);
+    } else {
+      drawing = false;
+    }
+  }
+  ctx.stroke();
+
+  // ── 3. Front face: segments where sz <= medZ (near camera = bright) ──
+  ctx.strokeStyle = strokeCol;
+  ctx.lineWidth = tubeW * 2.8;
+  drawing = false;
+  ctx.beginPath();
+  for (let i = 0; i <= N; i++) {
+    const p = pts[i % N];
+    if (p.sz <= medZ) {
+      drawing ? ctx.lineTo(p.sx, p.sy) : (ctx.moveTo(p.sx, p.sy), drawing = true);
+    } else {
+      drawing = false;
+    }
+  }
+  ctx.stroke();
+
+  // ── 4. Torus hole: dark fill at centre ──
+  // The electron Hopf-loop threads inward through this hole toward the nucleus core.
+  // We render it as a small filled circle at the projected nucleon centre.
+  // (A proper ellipse would require knowing the screen-space shape of the axis,
+  //  but a filled circle at the centre is visually correct for the hole indication.)
+  const cCam = camMat.apply(centerModelPos);
+  const cScr = project(cCam, zoomVal);
+  const holeR = Rb_px * 0.38 * cScr.scale; // inner hole radius = 38% of ring radius
+  if (holeR > 1.5) {
+    ctx.beginPath();
+    ctx.arc(cScr.x, cScr.y, holeR, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(2,2,16,0.92)';
+    ctx.fill();
+  }
+}
+
+const NC = {
+  proton:       {fill:'rgba(200,50,30,1)',  stroke:'rgba(255,110,80,1)',  glow:'rgba(220,60,40,0.22)'},
+  neutron:      {fill:'rgba(30,100,190,1)', stroke:'rgba(60,160,240,1)', glow:'rgba(40,130,210,0.20)'},
+  alphaProton:  {fill:'rgba(155,50,210,1)', stroke:'rgba(210,110,255,1)',glow:'rgba(150,50,200,0.24)'},
+
+  alphaNeutron: {fill:'rgba(80,40,175,1)',  stroke:'rgba(145,80,235,1)', glow:'rgba(100,50,190,0.22)'},
+};
+
+
+// ─────────────────────────────────────────────────────────────────
+// §12b  ELEMENT FULL NAMES
+// ─────────────────────────────────────────────────────────────────
+const ELEM_NAMES = {
+   1:'Hydrogen',   2:'Helium',     3:'Lithium',    4:'Beryllium',  5:'Boron',
+   6:'Carbon',     7:'Nitrogen',   8:'Oxygen',     9:'Fluorine',  10:'Neon',
+  11:'Sodium',    12:'Magnesium', 13:'Aluminium', 14:'Silicon',   15:'Phosphorus',
+  16:'Sulfur',    17:'Chlorine',  18:'Argon',     19:'Potassium', 20:'Calcium',
+  21:'Scandium',  22:'Titanium',  23:'Vanadium',  24:'Chromium',  25:'Manganese',
+  26:'Iron',      27:'Cobalt',    28:'Nickel',    29:'Copper',    30:'Zinc',
+  31:'Gallium',   32:'Germanium', 33:'Arsenic',   34:'Selenium',  35:'Bromine',
+  36:'Krypton',   37:'Rubidium',  38:'Strontium', 39:'Yttrium',   40:'Zirconium',
+  41:'Niobium',   42:'Molybdenum',43:'Technetium',44:'Ruthenium', 45:'Rhodium',
+  46:'Palladium', 47:'Silver',    48:'Cadmium',   49:'Indium',    50:'Tin',
+  51:'Antimony',  52:'Tellurium', 53:'Iodine',    54:'Xenon',     55:'Caesium',
+  56:'Barium',    57:'Lanthanum', 58:'Cerium',    59:'Praseodymium',60:'Neodymium',
+  61:'Promethium',62:'Samarium',  63:'Europium',  64:'Gadolinium',65:'Terbium',
+  66:'Dysprosium',67:'Holmium',   68:'Erbium',    69:'Thulium',   70:'Ytterbium',
+  71:'Lutetium',  72:'Hafnium',   73:'Tantalum',  74:'Tungsten',  75:'Rhenium',
+  76:'Osmium',    77:'Iridium',   78:'Platinum',  79:'Gold',      80:'Mercury',
+  81:'Thallium',  82:'Lead',      83:'Bismuth',   84:'Polonium',  85:'Astatine',
+  86:'Radon',     87:'Francium',  88:'Radium',    89:'Actinium',  90:'Thorium',
+  91:'Protactinium',92:'Uranium', 93:'Neptunium', 94:'Plutonium', 95:'Americium',
+  96:'Curium',    97:'Berkelium', 98:'Californium',99:'Einsteinium',100:'Fermium',
+ 101:'Mendelevium',102:'Nobelium',103:'Lawrencium',104:'Rutherfordium',105:'Dubnium',
+ 106:'Seaborgium',107:'Bohrium',  108:'Hassium',  109:'Meitnerium',110:'Darmstadtium',
+ 111:'Roentgenium',112:'Copernicium',113:'Nihonium',114:'Flerovium',115:'Moscovium',
+ 116:'Livermorium',117:'Tennessine',118:'Oganesson',
+};
+function elemName(Z){ return ELEM_NAMES[Z] || ''; }
+
+
+// ─────────────────────────────────────────────────────────────────
+// §13  PANEL UPDATER
+// ─────────────────────────────────────────────────────────────────
+function updatePanels(iso){
+  // Identity
+  const name = elemName(iso.Z);
+  document.getElementById('isoTitle').textContent = name ? `${name}-${iso.A}` : `${iso.sym}-${iso.A}`;
+  document.getElementById('dElem').textContent = name ? `${name} (${iso.sym})` : iso.sym;
+  document.getElementById('dZ').textContent=iso.Z;
+  document.getElementById('dN').textContent=iso.A-iso.Z;
+  document.getElementById('dA').textContent=iso.A;
+  document.getElementById('dSpin').textContent=iso.spin;
+  document.getElementById('dAbd').textContent=iso.abd+'%';
+  const sEl=document.getElementById('dStable');
+  sEl.textContent=iso.stable?'✓ Yes':'✗ No'; sEl.className='val '+(iso.stable?'grn':'red');
+  document.getElementById('dBE').textContent=iso.beA+' MeV';
+
+  // Bernas 2003 experimental reference (Ekin, if within measured range)
+  const dBerEl = document.getElementById('dBernas');
+  if (dBerEl) {
+    const ekin = BERNAS_EKIN[iso.Z];
+    if (ekin && iso.Z >= BERNAS.Zmin && iso.Z <= BERNAS.Zmax) {
+      const bf = bernasFragClass(iso.Z, iso.A);
+      let bernasText = `${ekin} MeV`;
+      if (bf.isDoublyMagic) bernasText += ' ⚡2×magic';
+      if (bf.isAsymHeavy)   bernasText += ' [asym-H]';
+      if (bf.isAsymLight)   bernasText += ' [asym-L]';
+      dBerEl.textContent = bernasText;
+      dBerEl.className = 'val ' + (bf.isDoublyMagic ? 'spike' : 'grn');
+      dBerEl.title = `Bernas 2003 (238U+p 1A GeV, GSI): measured Ekin(Z=${iso.Z}) = ${ekin} ± ~2 MeV. `
+        + `Mass yield at A=${iso.A} ≈ ${bf.yieldMb.toFixed(1)} mb (model). `
+        + `G_core = ${Math.abs(iso.nd - iso.nt) + (iso.nt % 2)} for this isotope as a fission fragment.`;
+    } else {
+      dBerEl.textContent = iso.Z < BERNAS.Zmin ? `Z<${BERNAS.Zmin} (below range)` : `Z>${BERNAS.Zmax} (above range)`;
+      dBerEl.className = 'val dim';
+      dBerEl.title = 'Outside Bernas 2003 measurement range (Z=28–64).';
+    }
+  }
+
+  // Grammar
+  document.getElementById('dConst').textContent=`1α + ${iso.nd}d + ${iso.nt}t`;
+  document.getElementById('dNd').textContent=iso.nd;
+  document.getElementById('dNt').textContent=iso.nt;
+  const tf=iso.nt/Math.max(iso.nd+iso.nt,1);
+  const tfEl=document.getElementById('dTF');
+  tfEl.textContent=(tf*100).toFixed(1)+'%';
+  tfEl.className='val '+(tf>0.5?'mag':tf>0.3?'orn':'cyan');
+  document.getElementById('dPairD').textContent=iso.nd%2===0?'All paired ✓':`${Math.floor(iso.nd/2)} pairs +1 free`;
+  document.getElementById('dPairT').textContent=iso.nt%2===0?'All paired ✓':`${Math.floor(iso.nt/2)} pairs +1 free`;
+  document.getElementById('dPos').textContent=`(${iso.nd}, ${iso.nt})`;
+
+  // Decay
+  const dd=computeDecayDaughters(iso);
+  const dm={dAlpha:'alpha',dBeta:'betaMinus',dEC:'ec',dNeutron:'neutron'};
+  for(const [elId,key] of Object.entries(dm)){
+    const d=dd[key], el=document.getElementById(elId);
+    if(d.valid&&d.iso){ el.textContent=`${d.iso.sym}-${d.iso.A} ✓`; el.className='val '+d.cls; }
+    else if(!d.valid){ el.textContent=`✗ (nd=${d.nd},nt=${d.nt})`; el.className='val dim'; }
+    else { el.textContent='— not in data'; el.className='val dim'; }
+  }
+
+  // Electron
+  const config=getElectronConfig(iso.Z);
+  const valence=getValenceShell(iso.Z);
+  document.getElementById('eCount').textContent=iso.Z;
+  document.getElementById('eLastFill').textContent=valence;
+  const cfgStr=config.map(c=>`${c.name}${sup(c.electrons)}`).join(' ');
+  document.getElementById('eConfig').textContent=cfgStr.slice(0,60)+(cfgStr.length>60?'…':'');
+  document.getElementById('eUnpaired').textContent=countUnpairedElectrons(iso.Z);
+
+  // Shell
+  document.getElementById('sShell').textContent=getPrincipalShell(iso.Z);
+  const nm=nextNobleGas(iso.Z);
+  document.getElementById('sNextMagic').textContent='Z='+nm;
+  document.getElementById('sGap').textContent=nm!=='—' ? nm-iso.Z+' protons' : 'closed';
+  // Closure gate indicator (Cr/Cu/Mo/Pd-type)
+  const cgEl = document.getElementById('sClosureGate');
+  if (cgEl) {
+    if (CLOSURE_GATES[iso.Z]) {
+      cgEl.textContent = '⚙ closure gate';
+      cgEl.className = 'val gold';
+      cgEl.title = 'This configuration is a structural gear-lock: the d-shell antiprism half-fill or full-fill reduces the system to minimum rotational energy, pulling one electron from the s-shell. This is NOT an anomaly — it is the expected lowest-energy state.';
+    } else {
+      cgEl.textContent = '—';
+      cgEl.className = 'val dim';
+      cgEl.title = '';
+    }
+  }
+
+  // ─────────────────────────────────────────────────────
+  // Grammar Intelligence (validated from fission/decay analysis)
+  // Key result: odd-nt → delayed neutron precursor
+  //             even-nt → prompt 2n-snap candidate
+  //             nt-nd = triton excess → drives neutron multiplicity
+  // ─────────────────────────────────────────────────────
+  {
+    const nd=iso.nd, nt=iso.nt;
+    const snapPairs = Math.floor(nt / 2);   // paired tritons ready to snap
+    const valenceT  = nt % 2;               // lone triton (cannot self-snap)
+    const excess    = nt - nd;              // triton load above deuteron baseline
+    const snapNpot  = snapPairs * 2;        // maximum prompt neutrons from full snap
+
+    // Parity class — the headline validated finding from fission analysis:
+    // U-238 peak yield: ALL 13/13 pairs have even fragment nt sum (from even parent nt)
+    // Odd-nt fragments are *always* delayed-neutron precursors in the literature.
+    // Mixed (odd+even) pairs never appear with 2n emission — parity is conserved.
+    const parEl = document.getElementById('giParity');
+    if (nt === 0) {
+      parEl.textContent = 'ZERO — stable grammar';
+      parEl.className = 'val grn';
+      parEl.title = 'No tritons. Pure deuteron grammar. No snap potential, no neutron discharge.';
+    } else if (nt % 2 === 0) {
+      parEl.textContent = `EVEN-nt (${nt}) — prompt snap`;
+      parEl.className = 'val prompt';
+      parEl.title = 'Even triton count: all tritons are paired. Binary fission from this grammar class emits PROMPT neutrons at cleavage. Cleavage plane sits BETWEEN triton pairs — both pairs snap cleanly into their respective fragments, emitting 2 prompt neutrons each. Validated: 13/13 peak-yield U-238 pairs.';
+    } else {
+      parEl.textContent = `ODD-nt (${nt}) — delayed precursor`;
+      parEl.className = 'val delayed';
+      parEl.title = 'Odd triton count: one valence triton cannot pair. Fission from this grammar class produces a stranded triton in each fragment → delayed neutron precursor. Every odd-nt fragment in U-238 peak yield is a confirmed delayed-neutron emitter in the literature.';
+    }
+
+    // Triton excess
+    const exEl = document.getElementById('giExcess');
+    exEl.textContent = excess >= 0 ? `+${excess} (triton-heavy)` : `${excess} (deuteron-heavy)`;
+    exEl.className = 'val ' + (excess > 10 ? 'mag' : excess > 0 ? 'orn' : 'cyan');
+    exEl.title = `U-238 triton excess = +18, U-235 = +12. Higher excess → stronger preference for neutron-rich 2n-snap cleavage channels.`;
+
+    // ── G_core = |nd-nt| + (nt%2) — structural closure score ──
+    const G_core = Math.abs(nd - nt) + (nt % 2);
+    const gcEl = document.getElementById('giGcore');
+    gcEl.textContent = G_core === 0 ? '0 ✓ SEALED CORE' : G_core;
+    gcEl.className = 'val ' + (G_core === 0 ? 'spike' : G_core <= 2 ? 'prompt' : G_core % 2 === 0 ? 'snap' : 'delayed');
+    gcEl.title = G_core === 0
+      ? 'G_core=0: nd=nt and nt is even. Grammar-sealed core fragment — all tritons paired, perfect balance. '
+        + 'This is the STRUCTURAL deep-core exposure class. '
+        + 'NOTE: Bernas 2003 tested Mo-104 (G_core=0) — it showed a LOCAL MINIMUM in yield, not a spike. '
+        + 'The yield-spike prediction is refuted. The timing prediction (prompt vs delayed neutrons) is still open: '
+        + 'Bernas does not count neutrons — it infers them. The correct test is reactor-physics delayed-n precursor yields.'
+      : `G_core=${G_core} = |nd(${nd})-nt(${nt})| + (nt%2). Spike condition: G_core=0. Even G_core → prompt-snap class. Odd → delayed-neutron precursor class.`;
+
+    const fcEl = document.getElementById('giFragClass');
+    if (G_core === 0) {
+      fcEl.textContent = '⬡ DEEP CORE / PROMPT';
+      fcEl.className = 'val snap';
+      fcEl.title = 'G_core=0: nd=nt with even nt. Structurally sealed — all tritons paired. '
+        + 'Depth-gated core-exposure class: deep cleavage exposes this as a discrete closed fragment. '
+        + 'YIELD SPIKE: REFUTED by Bernas 2003 (Mo-104 is a local minimum at 9.9 mb vs neighbours at 15-16 mb). '
+        + 'TIMING PREDICTION (open): even-nt fragments emit PROMPT neutrons; odd-nt emit DELAYED. '
+        + 'This requires neutron-timing data — Bernas infers ν, not counts it.';
+    } else if (nt % 2 === 0 && G_core <= 4) {
+      fcEl.textContent = 'PROMPT / near-balance';
+      fcEl.className = 'val prompt';
+      fcEl.title = `Even nt, G_core=${G_core}. Near-balanced grammar. Prompt 2n emission expected at fission cleavage.`;
+    } else if (nt % 2 === 0) {
+      fcEl.textContent = 'PROMPT / shell-material';
+      fcEl.className = 'val prompt';
+    } else {
+      fcEl.textContent = 'DELAYED / valence triton';
+      fcEl.className = 'val delayed';
+      fcEl.title = 'Odd nt: lone valence triton. If this is a fission fragment, it is a delayed-neutron precursor. Validated: every odd-nt U-238 peak fragment is in the delayed-n emitter literature.';
+    }
+
+    // Snap mechanics
+    document.getElementById('giSnap').textContent = snapPairs > 0 ? `${snapPairs} pair${snapPairs>1?'s':''} (×2n each)` : '0 — none';
+    document.getElementById('giSnapN').textContent = snapNpot > 0 ? `${snapNpot}n potential` : '0n';
+
+    const valEl = document.getElementById('giValence');
+    if (valenceT === 1) {
+      valEl.textContent = '1 valence t (isolated)';
+      valEl.className = 'val delayed';
+      valEl.title = 'Lone triton: no snap partner. Cannot self-close into alpha. Must correct via n-pop (t→d+n) or beta-minus, or wait for a cleavage partner from the other fragment.';
+    } else {
+      valEl.textContent = '0 — all paired';
+      valEl.className = 'val prompt';
+    }
+
+    // Canonical decay vector results (dnd = 3dZ-dA, dnt = dA-2dZ)
+    // These are the algebra-derived transforms, validated against 291 alpha-valid nodes.
+    const setGI = (id, nd2, nt2, label) => {
+      const el = document.getElementById(id);
+      if (nd2 < 0 || nt2 < 0) { el.textContent = '✗ invalid'; el.className='val dim'; return; }
+      const match = ISO.find(e => e.nd===nd2 && e.nt===nt2 && e.Z===iso.Z+(id==='giBeta'?1:id==='giEC'?-1:id==='giAlpha'?-2:0));
+      if (match) { el.textContent = `${match.sym}-${match.A} ✓`; el.className='val grn'; }
+      else { el.textContent = `nd=${nd2},nt=${nt2}`; el.className='val dim'; }
+    };
+
+    // n-pop: (+1d, -1t) — triton converts to deuteron + free neutron
+    if (nt >= 1) setGI('giNpop', nd+1, nt-1, 'n-pop');
+    else { document.getElementById('giNpop').textContent='nt=0, N/A'; document.getElementById('giNpop').className='val dim'; }
+
+    // β⁻: (+3d, -2t) — two tritons reorganise into three deuterons
+    if (nt >= 2) setGI('giBeta', nd+3, nt-2, 'β⁻');
+    else { document.getElementById('giBeta').textContent='nt<2, N/A'; document.getElementById('giBeta').className='val dim'; }
+
+    // EC/β⁺: (-3d, +2t) — corrects He-3 seed; three deuterons → two tritons
+    if (nd >= 3) setGI('giEC', nd-3, nt+2, 'EC');
+    else { document.getElementById('giEC').textContent='nd<3, N/A'; document.getElementById('giEC').className='val dim'; }
+
+    // α: (-2d, -2t, -2Z, -4A) — remove one alpha unit
+    const aEl = document.getElementById('giAlpha');
+    if (nd >= 2 && nt >= 2 && iso.Z >= 4) {
+      const aMatch = ISO.find(e => e.Z===iso.Z-2 && e.nd===nd-2 && e.nt===nt-2);
+      if (aMatch) { aEl.textContent=`${aMatch.sym}-${aMatch.A} ✓`; aEl.className='val gold'; }
+      else { aEl.textContent=`Z=${iso.Z-2}, nd=${nd-2}, nt=${nt-2}`; aEl.className='val dim'; }
+    } else { aEl.textContent='N/A'; aEl.className='val dim'; }
+
+    // 2n-snap: paired triton-pair discharge (ΔD=0, ΔT=-2) — the clean fission channel
+    // Validated: 34 clean-2n snap pairs across U-238 valley, all ΔD=0, ΔT=-2
+    const snapEl = document.getElementById('gi2n');
+    if (snapPairs >= 1) {
+      const snapMatch = ISO.find(e => e.Z===iso.Z && e.nd===nd && e.nt===nt-2);
+      if (snapMatch) {
+        snapEl.textContent = `${snapMatch.sym}-${snapMatch.A} + 2n ✓`;
+        snapEl.className = 'val snap';
+        snapEl.title = 'Clean 2n-snap: ΔD=0, ΔT=−2. Two paired tritons discharge as 2 prompt neutrons while the deuteron scaffold is conserved. Validated as the dominant channel in U-238 peak-yield fission (13/13 pairs). Closure score C = |ΔD| + |ΔT+n| = 0.';
+      } else {
+        snapEl.textContent = `nd=${nd}, nt=${nt-2} (unlisted)`;
+        snapEl.className = 'val dim';
+      }
+    } else {
+      snapEl.textContent = 'nt<2 — no snap available';
+      snapEl.className = 'val dim';
+    }
+
+    // ── Fission Channel Scan (heavy parents only) ──
+    const fsep = document.getElementById('fissionSep');
+    const frows = document.getElementById('fissionRows');
+    const channels = fissionChannelScan(iso);
+    if (channels && channels.length > 0) {
+      fsep.style.display = '';
+      frows.style.display = '';
+      const chIds = ['fCh0','fCh1','fCh2','fCh3','fCh4'];
+      const show = channels.slice(0, 5);
+      show.forEach((ch, i) => {
+        const el = document.getElementById(chIds[i]);
+        if (!el) return;
+        const isSpike = ch.G_core_L === 0;
+        const star = isSpike ? ' ★' : '';
+        const cls = isSpike ? 'spike' : ch.parityClass === 'DELAYED' ? 'delayed' : 'prompt';
+
+        // Cross-reference with Bernas 2003 experimental data
+        const bL = bernasFragClass(ch.Z_L, ch.A_L);
+        const bH = bernasFragClass(ch.Z_H, ch.A_H);
+        const ekinL = bL.ekin ? `${bL.ekin}MeV` : '–';
+        const ekinH = bH.ekin ? `${bH.ekin}MeV` : '–';
+        const measured = bL.inRange && bH.inRange;
+        const yL = bL.yieldMb.toFixed(1);
+
+        // Build badges
+        let badges = '';
+        if (!measured) badges += '⚠ outside range';
+        if (bL.isAsymLight) badges += ' asym-L';
+        if (bH.isAsymHeavy) badges += ' asym-H';
+        if (bH.isDoublyMagic) badges += ' ⚡2×magic';
+
+        el.innerHTML = `<span class="lbl" style="font-size:8px;">${ch.sym_L}-${ch.A_L}+${ch.sym_H}-${ch.A_H}+2n</span>`
+          + `<span class="val ${cls}" style="font-size:8px;">G=${ch.G_core_L}${star}</span>`;
+
+        // Build comprehensive tooltip with Bernas data
+        let tip = `GRAMMAR: ${ch.sym_L}-${ch.A_L} (Z=${ch.Z_L}, nd=${ch.nd_L}, nt=${ch.nt_L}) + ${ch.sym_H}-${ch.A_H} (Z=${ch.Z_H}, nd=${ch.nd_H}, nt=${ch.nt_H}) + 2n`;
+        tip += `\nG_core_L=${ch.G_core_L} | G_core_H=${ch.G_core_H} | G_total=${ch.G_total} | Class: ${ch.parityClass}`;
+        tip += `\n\nBERNAS 2003 DATA (238U+p 1A GeV, GSI FRS):`;
+        tip += `\n  ${ch.sym_L}-${ch.A_L}: ${bL.inRange ? '✓ MEASURED' : '✗ outside Z=28–64 range'}`;
+        if (bL.ekin) tip += `, Ekin=${bL.ekin} MeV, yield≈${yL} mb`;
+        if (bL.isAsymLight) tip += ` | ⬡ in ASYMMETRIC light peak (~A=88)`;
+        tip += `\n  ${ch.sym_H}-${ch.A_H}: ${bH.inRange ? '✓ MEASURED' : '✗ outside range'}`;
+        if (bH.ekin) tip += `, Ekin=${bH.ekin} MeV, yield≈${bH.yieldMb.toFixed(1)} mb`;
+        if (bH.isAsymHeavy) tip += ` | ⬡ in ASYMMETRIC heavy peak (~A=134)`;
+        if (bH.isDoublyMagic) tip += ` | ⚡ DOUBLY MAGIC (Z=50,N=82) — known yield spike`;
+
+        if (isSpike) {
+          tip += `\n\n⬡ SEALED CORE (G_core=0):`;
+          tip += `\n  nd=nt=${ch.nd_L} — grammar balance axis — deep core exposure class`;
+          tip += `\n  BERNAS RESULT: local minimum (9.9 mb). Yield spike = refuted.`;
+          tip += `\n  TIMING PRED (open): even-nt → prompt 2n; test requires neutron-count data.`;
+          tip += `\n\nFALSIFIABLE TEST (Bernas Fig 11 for Z=42):`;
+          tip += `\n  Y(${ch.sym_L}-${ch.A_L}) > [Y(${ch.sym_L}-${ch.A_L-1}) + Y(${ch.sym_L}-${ch.A_L+1})] / 2`;
+          tip += `\n  Enhancement must GROW with proton energy (deeper = more core exposure)`;
+        }
+        el.title = tip;
+
+      });
+      // Clear unused rows
+      for (let i = show.length; i < 5; i++) {
+        const el = document.getElementById(chIds[i]);
+        if (el) el.innerHTML = '';
+      }
+      const spikeCount = channels.filter(c => c.G_core_L === 0).length;
+      const noteEl = document.getElementById('fChNote');
+      if (noteEl) {
+        // Find the primary spike channel for U-238 reference
+        const primarySpike = channels.find(c => c.G_core_L === 0);
+        let note = '';
+        if (spikeCount > 0 && primarySpike) {
+          const bSp = bernasFragClass(primarySpike.Z_L, primarySpike.A_L);
+          const bSpH = bernasFragClass(primarySpike.Z_H, primarySpike.A_H);
+          const inBernas = bSp.inRange && bSpH.inRange;
+          note = `${spikeCount} G=0 sealed core${spikeCount>1?'s':''}`;
+          if (inBernas) note += ` | ✓ Bernas range`;
+          if (bSpH.isDoublyMagic) note += ` | ⚡ doubly-magic partner`;
+          noteEl.style.color = '#886600';
+        } else {
+          note = 'No G_core=0 channel at this grammar';
+          noteEl.style.color = '#333';
+        }
+        noteEl.textContent = note;
+        noteEl.title = 'Bernas 2003: 238U+p 1A GeV, GSI FRS. 733 fragments, Z=28–64. '
+          + 'Ā=108.0±0.3, σ=17.5. σ_fission=1.53b. '
+          + 'G_core=0 test: Y(A) > [Y(A-1)+Y(A+1)]/2 at the predicted Z.';
+      }
+
+    } else {
+      if (fsep) fsep.style.display = 'none';
+      if (frows) frows.style.display = 'none';
+    }
+  }
+
+  // Transport
+  document.getElementById('nowPlaying').textContent=`${iso.sym}-${iso.A}`;
+  document.getElementById('posInfo').textContent=`${curIdx+1}/${ISO.length} | Shell ${shellOf(iso.Z)+1}`;
+}
+
+
+// ─────────────────────────────────────────────────────────────────
+// §14  MAIN RENDER
+// ─────────────────────────────────────────────────────────────────
+let globalT=0;
+
+function render(){
+  const iso=ISO[curIdx]; if(!iso) return;
+  const zoomVal=+document.getElementById('zoom').value/100;
+  const BL=+document.getElementById('bondLen').value;
+  const showLbls    = document.getElementById('showLabels').checked;
+  const showEl      = document.getElementById('showElectrons').checked;
+  const showHopf    = document.getElementById('showHopf').checked;
+  const showShells  = document.getElementById('showShells').checked;
+  const showMagnetics = document.getElementById('showMagnetics').checked;
+  const showAffinity = document.getElementById('showAffinity').checked;
+  const showDecay   = document.getElementById('showDecay').checked;
+  const showStory   = document.getElementById('showStory').checked;
+
+  updatePanels(iso);
+
+  // ── Background: radial gradient, dark purple at nucleus ──
+  const bg=ctx.createRadialGradient(W/2,H/2,40,W/2,H/2,Math.max(W,H)*0.72);
+  bg.addColorStop(0,'#0e0520'); bg.addColorStop(0.4,'#060610'); bg.addColorStop(1,'#050508');
+  ctx.fillStyle=bg; ctx.fillRect(0,0,W,H);
+
+  // ── Subtle grid ──
+  ctx.strokeStyle='rgba(255,255,255,0.016)';ctx.lineWidth=1;ctx.setLineDash([4,9]);
+  for(let i=-8;i<=8;i++){
+    const pA=camMat.apply(new Vec3(-300,0,i*38)),pB=camMat.apply(new Vec3(300,0,i*38));
+    const qA=project(pA,zoomVal),qB=project(pB,zoomVal);
+    ctx.beginPath();ctx.moveTo(qA.x,qA.y);ctx.lineTo(qB.x,qB.y);ctx.stroke();
+    const pC=camMat.apply(new Vec3(i*38,0,-300)),pD=camMat.apply(new Vec3(i*38,0,300));
+    const qC=project(pC,zoomVal),qD=project(pD,zoomVal);
+    ctx.beginPath();ctx.moveTo(qC.x,qC.y);ctx.lineTo(qD.x,qD.y);ctx.stroke();
+  }
+  ctx.setLineDash([]);
+
+  // ── Build nucleus geometry with time for independent shell rotation ──
+  const geo=buildNucleusGeometry(iso,BL,globalT);
+
+  // ── Shell spheres (translucent, drawn BEFORE nucleons) ──
+  // Each sphere represents a principal quantum number shell (K,L,M,N,O,P,Q).
+  // Drawn back-to-front so inner shells are visible through outer ones.
+  // Radius = max projected nucleon distance + margin → perspective-correct.
+  if (showShells) {
+    // Project equatorial samples to get sphere screen radius for each shell scale
+    function shellScreenR(modelR) {
+      let maxR = 0;
+      for (let a = 0; a < Math.PI * 2; a += Math.PI / 6) {
+        const eq = camMat.apply(new Vec3(modelR * Math.cos(a), 0, modelR * Math.sin(a)));
+        const sp = project(eq, zoomVal);
+        maxR = Math.max(maxR, Math.abs(sp.x - W/2), Math.abs(sp.y - H/2));
+      }
+      return maxR;
+    }
+    // Build principal shell groups from occupied nucleons
+    const pShellGroups = {};
+    // K-shell = alpha core
+    if (iso.Z >= 2) {
+      const psi = PRINCIPAL_SHELL_INFO['alpha'];
+      const r = shellScreenR(0.88 * BL * 1.0) + 10;
+      pShellGroups[1] = { label:'K', colour:psi.colour, r };
+    }
+    // Shell n=2..7 from SHELL_DEFS occupied shells
+    const aufbauNamesUsed = new Set();
+    ['2s','2p','3s','3p','3d','4s','4p','4d','5s','5p','5d','5f','6s','6p','6d','4f','7s','7p'].forEach(sn => {
+      const def = SHELL_DEFS.find(d => d.subshell === sn);
+      if (!def) return;
+      const psi = PRINCIPAL_SHELL_INFO[sn];
+      if (!psi) return;
+      const n = psi.n;
+      if (!pShellGroups[n]) {
+        // Check if this shell has any nucleons in current iso
+        const shellPos = buildShellPositions(iso.Z);
+        const hasNucleons = shellPos.some(sp => sp.subshell === sn);
+        if (!hasNucleons) return;
+        const r = shellScreenR(def.scale * BL) + 10;
+        pShellGroups[n] = { label: psi.label, colour: psi.colour, r };
+      } else {
+        // Expand to max radius of this principal group
+        const r2 = shellScreenR(def.scale * BL) + 10;
+        if (r2 > pShellGroups[n].r) pShellGroups[n].r = r2;
+      }
+    });
+    // Draw outermost first (painter's algorithm: big circles behind small ones)
+    const shellArr = Object.values(pShellGroups).sort((a,b) => b.r - a.r);
+    shellArr.forEach(sg => {
+      const [sr,sg2,sb] = hexToRgba(sg.colour,1).match(/[\d.]+/g) || ['160','80','255'];
+      ctx.beginPath(); ctx.arc(W/2, H/2, sg.r, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(${sr},${sg2},${sb},0.055)`; ctx.fill();
+      ctx.strokeStyle = `rgba(${sr},${sg2},${sb},0.30)`; ctx.lineWidth = 0.8;
+      ctx.stroke();
+      // Shell label at top of sphere
+      ctx.font = '9px "Segoe UI",sans-serif'; ctx.textAlign = 'center';
+      ctx.fillStyle = `rgba(${sr},${sg2},${sb},0.50)`;
+      ctx.fillText(`Shell ${sg.label}`, W/2, H/2 - sg.r - 4);
+    });
+  }
+
+  // Project all nucleons (simple: just need screen coords + raw model pos for torus)
+  const projected=geo.nucleons.map(n=>{
+    const r=camMat.apply(n.pos), p=project(r,zoomVal);
+    return {...n, px:p.x, py:p.y, pz:r.z, scale:p.scale, rPos:r};
+  });
+
+  // Build renderable list, z-sort (painter's algorithm: back→front)
+  const renderables=[];
+  geo.bonds.forEach(b=>{
+    if(b.a<0||b.b<0||b.a>=projected.length||b.b>=projected.length) return;
+    const pa=projected[b.a],pb=projected[b.b];
+    renderables.push({kind:'bond',pa,pb,z:(pa.pz+pb.pz)/2,bond:b});
+  });
+  projected.forEach(n=>renderables.push({kind:'nucleon',n,z:n.pz}));
+  renderables.sort((a,b)=>b.z-a.z);
+
+  // ── Draw bonds ──
+  renderables.forEach(r=>{
+    if(r.kind!=='bond') return;
+    const {pa,pb,bond}=r;
+    const sc=Math.min(pa.scale,pb.scale);
+    ctx.beginPath();ctx.moveTo(pa.px,pa.py);ctx.lineTo(pb.px,pb.py);
+    ctx.setLineDash(bond.style==='dashed'?[4,5]:[]);
+    ctx.strokeStyle=bond.color; ctx.lineWidth=bond.width*sc; ctx.stroke();
+  });
+  ctx.setLineDash([]);
+
+  // ── Draw nucleons ──
+  // Identify the valence (lone) triton neutron when nt is odd.
+  // The valence triton = the extra neutron (extraN:true) of the LAST triton stick.
+  // It cannot snap-close (no partner) → delayed-neutron precursor in fission.
+  const tritonExtraNeutrons = projected.filter(n => !n.isAlpha && n.isTriton && n.extraN);
+  const isOddNt = iso.nt % 2 === 1;
+  const valenceNeutronIdx = isOddNt && tritonExtraNeutrons.length > 0
+    ? tritonExtraNeutrons[tritonExtraNeutrons.length - 1].idx : -1;
+
+
+  renderables.forEach(r=>{
+    if(r.kind!=='nucleon') return;
+    const n=r.n, sc=n.scale;
+    // SDT torus radii (in base screen-space pixels, before perspective scale):
+    // Proton radius = 0.84 fm. Alpha core tori are more compact.
+    // Shell tori are larger (electron Hopf-loop threads through the bigger opening).
+    const isAlpha = !!n.isAlpha;
+    const Rb = isAlpha ? (n.type==='proton' ? 5.5 : 4.5) : (n.type==='proton' ? 8.0 : 6.5);
+    const rb = isAlpha ? (n.type==='proton' ? 2.5 : 2.0) : (n.type==='proton' ? 3.5 : 2.8);
+    const haloR = (Rb + rb) * sc;
+
+    const clr = n.isAlpha ? (n.type==='proton'?NC.alphaProton:NC.alphaNeutron) : NC[n.type];
+    // Torus axis: use explicit per-nucleon axis if stored (set by buildNucleusGeometry).
+    // Proton: axis faces OUTWARD (electron Hopf-loop exits here toward the shell).
+    // Neutron: axis faces INWARD (electron Hopf-loop converges here toward the core).
+    // Fallback: radially outward from nucleus centre.
+    const axisModel = n.axis || (n.pos.len() > 0.5 ? n.pos.norm() : new Vec3(0, 1, 0));
+
+    // ── Snap-pair glow (paired triton extra-neutrons — prompt snap ready) ──
+    if (!n.isAlpha && n.isTriton && n.extraN && n.idx !== valenceNeutronIdx && iso.nt >= 2) {
+      const snapAlpha = 0.28 + 0.12 * Math.sin(globalT * 0.8 + n.idx);
+      ctx.beginPath(); ctx.arc(n.px, n.py, haloR*1.7, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(255,210,40,${snapAlpha})`; ctx.fill();
+    }
+
+    // ── Valence triton halo (lone triton — delayed precursor, cannot snap) ──
+    if (n.idx === valenceNeutronIdx) {
+      const pulse = 0.45 + 0.35 * Math.sin(globalT * 2.4);
+      ctx.beginPath(); ctx.arc(n.px, n.py, haloR*2.3, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(255,100,20,${pulse * 0.5})`; ctx.fill();
+      ctx.beginPath(); ctx.arc(n.px, n.py, haloR*1.8, 0, Math.PI*2);
+      ctx.strokeStyle = `rgba(255,130,30,${pulse})`; ctx.lineWidth = 1.5*sc; ctx.stroke();
+    }
+
+    // ── Draw nucleon as torus (SDT: superluminally-contracted (2,3) trefoil) ──
+    // Ring constructed in model space, each sample projected through camMat+project().
+    // No more morphing: the axis is fixed in model space, camera rotation is applied
+    // correctly per-sample through the full perspective pipeline.
+    drawNucleonTorus(n.pos, axisModel, Rb, rb, clr.stroke, clr.glow, zoomVal);
+
+    if(showLbls){
+      const fs=Math.max(7,Math.round(8*sc));
+      ctx.font=`${fs}px 'Segoe UI',sans-serif`;
+      ctx.textAlign='center'; ctx.textBaseline='middle';
+      ctx.fillStyle='rgba(255,255,255,0.6)';
+      const lbl=n.isAlpha?(n.type==='proton'?'αp':'αn'):n.type==='proton'?'p':'n';
+      ctx.fillText(lbl,n.px,n.py); ctx.textBaseline='alphabetic';
+
+      // Valence triton label
+      if (n.idx === valenceNeutronIdx) {
+        ctx.font=`bold ${Math.max(7,Math.round(7*sc))}px 'Segoe UI',sans-serif`;
+        ctx.fillStyle='rgba(255,160,60,0.9)';
+        ctx.fillText('valence', n.px, n.py + haloR*2.0);
+      }
+    }
+  });
+
+
+  // ── Magnetic vortex helices: one per intra-stick nucleon bond ──
+  // In SDT, the nuclear magnetic moment arises from the spation vortex coupling
+  // between paired nucleon tori. The helix traces the vortex axis winding
+  // between proton and neutron. Intra-shell triton n-n bonds represent the
+  // INTERNAL STABILITY PATHWAYS the user identified — extra neutrons are not
+  // free particles; they are coupled to the proton via a secondary helix lobe.
+  if (showMagnetics) {
+    // Draw a helix in model space between two nucleon model positions
+    function drawMagneticHelix(PA, PB, colStr, turns, radius_frac, handedness) {
+      const ax = PB.sub(PA), axLen = ax.len();
+      if (axLen < 0.1) return;
+      const axN = ax.scale(1/axLen);
+      const helper = Math.abs(axN.y) < 0.85 ? new Vec3(0,1,0) : new Vec3(1,0,0);
+      const e1 = helper.sub(axN.scale(helper.dot(axN))).norm();
+      const e2 = axN.cross(e1).norm();
+      const helR = axLen * radius_frac;
+      const N = Math.round(turns * 16);
+      const pts = [];
+      for (let i = 0; i <= N; i++) {
+        const t = i / N, angle = handedness * t * turns * Math.PI * 2;
+        const p = PA.add(axN.scale(t * axLen))
+                     .add(e1.scale(helR * Math.cos(angle)))
+                     .add(e2.scale(helR * Math.sin(angle)));
+        const sp = project(camMat.apply(p), zoomVal);
+        pts.push(sp);
+      }
+      ctx.beginPath();
+      pts.forEach((p,i) => i===0 ? ctx.moveTo(p.x,p.y) : ctx.lineTo(p.x,p.y));
+      ctx.strokeStyle = colStr; ctx.lineWidth = 0.75; ctx.stroke();
+    }
+
+    geo.bonds.forEach((b, bi) => {
+      if (!b.ring || b.ring === 'alpha' || b.ring === 'd-pair') return;
+      const nA = geo.nucleons[b.a], nB = geo.nucleons[b.b];
+      if (!nA || !nB) return;
+      const isNN = b.ring.endsWith('-nn'); // triton n-n bond (internal path)
+      const handedness = (nA.stickIdx % 2 === 0) ? 1 : -1; // alternating alignment
+      if (isNN) {
+        // Internal stability path: secondary blue helix
+        drawMagneticHelix(nA.pos, nB.pos, 'rgba(80,160,255,0.45)', 1.5, 0.45, -handedness);
+      } else {
+        // Proton-neutron coupling: amber vortex helix
+        const pulse = 0.50 + 0.18 * Math.sin(globalT * 1.2 + nA.stickIdx * 0.7);
+        drawMagneticHelix(nA.pos, nB.pos, `rgba(255,200,80,${pulse.toFixed(2)})`, 1.5, 0.45, handedness);
+      }
+    });
+    // Alpha core helices (the fundamental deuteron coupling)
+    const alphaP = geo.nucleons.filter(n => n.isAlpha && n.type === 'proton');
+    const alphaN = geo.nucleons.filter(n => n.isAlpha && n.type === 'neutron');
+    if (alphaP.length >= 2 && alphaN.length >= 2) {
+      const ap = 0.55 + 0.20 * Math.sin(globalT * 2.2);
+      drawMagneticHelix(alphaP[0].pos, alphaN[1].pos, `rgba(220,120,255,${ap.toFixed(2)})`, 2, 0.50, 1);
+      drawMagneticHelix(alphaP[1].pos, alphaN[0].pos, `rgba(220,120,255,${ap.toFixed(2)})`, 2, 0.50,-1);
+    }
+  }
+
+  // ── Electron affinity + oppositional geometry overlay ──
+  // The nuclear Hund's-rule positions map directly to molecular bonding geometry.
+  // Singly-occupied valence positions → bonding rays → molecular shape.
+  // Maximum separation in the nucleus IS maximum separation in the molecule.
+  if (showAffinity) {
+    const va = getValenceAffinity(iso.Z);
+    if (va && va.singly > 0) {
+      const g = va.geo;
+      const gCol = g.colour || '#aaaaff';
+      const [gr, gg, gb] = hexToRgba(gCol, 1).match(/[\d.]+/g) || ['170','170','255'];
+
+      // Find protons in the valence shell, singly occupied (first `va.singly` in fill order)
+      // The valence subshell protons in shellPts order → take first va.singly of them
+      const valProtons = projected
+        .filter(n => !n.isAlpha && n.type === 'proton' && n.ring === va.shell)
+        .sort((a,b) => a.stickIdx - b.stickIdx)
+        .slice(0, va.singly);
+
+      // Draw outward bonding rays from each singly-occupied proton
+      valProtons.forEach((n, ri) => {
+        const axisModel = n.axis || n.pos.norm();
+        const rayLen = n.pos.len() * 3.2; // extend 3× beyond shell
+        const rayEnd = axisModel.scale(rayLen);
+        const P0 = n.pos;
+        const P2 = rayEnd;
+        const NPTS = 20;
+        const rayPts = [];
+        for (let i = 0; i <= NPTS; i++) {
+          const t = i / NPTS;
+          const pt = P0.scale(1-t).add(P2.scale(t));
+          rayPts.push(project(camMat.apply(pt), zoomVal));
+        }
+        ctx.lineWidth = 2.2;
+        for (let i = 0; i < NPTS; i++) {
+          const alpha = 0.85 * (1 - rayPts[i].t !== undefined ? 0 : 0) * Math.pow(1 - i/NPTS, 0.3);
+          const a2 = (0.85 * Math.pow(1 - i/NPTS, 0.3)).toFixed(3);
+          ctx.beginPath();
+          ctx.moveTo(rayPts[i].x, rayPts[i].y);
+          ctx.lineTo(rayPts[i+1].x, rayPts[i+1].y);
+          ctx.strokeStyle = `rgba(${gr},${gg},${gb},${a2})`;
+          ctx.stroke();
+        }
+        // Glow ring at the bonding site (proton screen pos)
+        const pulse2 = 0.55 + 0.25 * Math.sin(globalT * 1.8 + ri * 1.2);
+        ctx.beginPath(); ctx.arc(n.px, n.py, n.scale * 18, 0, Math.PI*2);
+        ctx.strokeStyle = `rgba(${gr},${gg},${gb},${(pulse2 * 0.60).toFixed(2)})`;
+        ctx.lineWidth = 1.5; ctx.stroke();
+        // Bond site label
+        ctx.font = `bold 8px 'Segoe UI',sans-serif`; ctx.textAlign = 'center';
+        ctx.fillStyle = `rgba(${gr},${gg},${gb},0.80)`;
+        ctx.fillText('bond', n.px, n.py - n.scale * 22);
+      });
+
+      // ── On-canvas annotation box: oppositional geometry ──
+      const BOX_X = 18, BOX_Y = H - 90, BOX_W = 220, BOX_H = 78;
+      ctx.fillStyle = 'rgba(0,0,0,0.72)';
+      ctx.beginPath(); ctx.roundRect(BOX_X, BOX_Y, BOX_W, BOX_H, 6); ctx.fill();
+      ctx.strokeStyle = `rgba(${gr},${gg},${gb},0.55)`;
+      ctx.lineWidth = 1; ctx.beginPath(); ctx.roundRect(BOX_X, BOX_Y, BOX_W, BOX_H, 6); ctx.stroke();
+
+      ctx.textAlign = 'left';
+      ctx.font = `bold 11px 'Segoe UI',sans-serif`;
+      ctx.fillStyle = `rgba(${gr},${gg},${gb},0.95)`;
+      ctx.fillText(`${g.sym}  ${g.name}`, BOX_X + 10, BOX_Y + 18);
+
+      ctx.font = `10px 'Segoe UI',sans-serif`;
+      ctx.fillStyle = 'rgba(220,220,220,0.85)';
+      const angleStr = g.angle ? `${g.angle}°` : 'inert';
+      ctx.fillText(`${va.singly} unpaired · ${va.shell} · ${angleStr}`, BOX_X + 10, BOX_Y + 34);
+
+      ctx.font = `9px 'Segoe UI',sans-serif`;
+      ctx.fillStyle = 'rgba(180,180,180,0.75)';
+      ctx.fillText(g.examples, BOX_X + 10, BOX_Y + 50);
+
+      ctx.font = `italic 8px 'Segoe UI',sans-serif`;
+      ctx.fillStyle = `rgba(${gr},${gg},${gb},0.45)`;
+      ctx.fillText('As above (nucleus) · so below (molecule)', BOX_X + 10, BOX_Y + 66);
+    }
+  }
+
+  // ── Shell closure rings ──
+  // For each fully-closed subshell: draw a faint colored torus-path through
+  // all nucleon positions of that shell, making the closed shell visually distinct.
+  // Closed shells are rigid compact units with 2× rotation speed.
+  // Collect shell nucleon positions by subshell
+  const shellNucleons = {};
+  projected.forEach(n => {
+    if (n.isAlpha) return;
+    const s = n.ring;
+    if (!shellNucleons[s]) shellNucleons[s] = [];
+    shellNucleons[s].push(n);
+  });
+  // Draw closure ring for each closed subshell
+  Object.entries(shellNucleons).forEach(([sName, snArr]) => {
+    if (!geo.closedShells.has(sName)) return; // only closed subshells
+    // Centroid of this shell’s nucleon screen positions
+    const cx = snArr.reduce((s,n)=>s+n.px,0)/snArr.length;
+    const cy = snArr.reduce((s,n)=>s+n.py,0)/snArr.length;
+    // Average screen scale of this shell
+    const avgSc = snArr.reduce((s,n)=>s+n.scale,0)/snArr.length;
+    // Draw a faint ring encircling all positions: radius = max dist from centroid + margin
+    const r = snArr.reduce((mx,n)=>Math.max(mx,Math.hypot(n.px-cx,n.py-cy)),0) + 8*avgSc;
+    const col = SUBSHELL_COLORS[sName] || '#aaaaff';
+    const rgba = hexToRgba(col, 0.18);
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, 0, Math.PI*2);
+    ctx.strokeStyle = rgba;
+    ctx.lineWidth = 1.8 * avgSc;
+    ctx.setLineDash([4*avgSc, 6*avgSc]);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    // "CLOSED" label at the ring top
+    if (avgSc > 0.5) {
+      ctx.font = `${Math.max(7, Math.round(6.5*avgSc))}px 'Segoe UI',sans-serif`;
+      ctx.textAlign = 'center';
+      ctx.fillStyle = hexToRgba(col, 0.55);
+      ctx.fillText(`${sName} ◁`, cx, cy - r - 3*avgSc);
+    }
+  });
+
+  // ── Electron arcs: one per proton, THROUGH the proton torus hole ──
+  // The Hopf-fibration thread starts INSIDE the nucleus (behind the proton),
+  // passes through the proton’s torus hole, and extends far out to the electron
+  // shell. The proton lies ON the arc — the arc genuinely threads through it.
+  // Alpha protons → 1s. Shell protons → their subshell.
+  if (showEl) {
+    const ARC_SCALE = 200;
+    projected.filter(n => n.type === 'proton').forEach(n => {
+      const subshell = n.isAlpha ? '1s' : (n.ring || '1s');
+      const eR = (SHELL_RADII[subshell] || 0.45) * ARC_SCALE;
+      const axisModel = n.axis || (n.pos.len() > 0.5 ? n.pos.norm() : new Vec3(0, 1, 0));
+
+      // Arc geometry: thread through the proton
+      // P0 = start inside nucleus (behind proton along axis, on the inward side)
+      // n.pos = proton position = ON the arc (between P0 and P2)
+      // P2 = electron orbital (far outward along axis)
+      const protonDist = n.pos.len();
+      const inwardLen = protonDist * 1.15; // start slightly past the nucleus centre, far side
+      const P0 = axisModel.scale(-inwardLen);  // inside nucleus, opposite side of proton
+      const P2 = axisModel.scale(eR);           // electron orbital
+
+      // Bezier control points — we use a cubic bezier:
+      // P1 near P0 (outward from interior), P3 near P2
+      // We need the curve to pass close to n.pos (proton)
+      // Quadratic bezier through P0, n.pos, P2 requires:
+      //   n.pos = (1-t)²P0 + 2(1-t)t·Pm + t²P2  at t = protonDist/(protonDist+eR)
+      // Solve for control point Pm:
+      const tP = protonDist / (protonDist + eR + 0.001);
+      const tmP = 1 - tP;
+      // Pm = (n.pos - tmP²P0 - tP²P2) / (2·tmP·tP)
+      const denom = 2 * tmP * tP;
+      const Pm = denom > 0.001
+        ? n.pos.sub(P0.scale(tmP*tmP)).sub(P2.scale(tP*tP)).scale(1/denom)
+        : n.pos;
+
+      const NARC = 32;
+      const arcPts = [];
+      for (let i = 0; i <= NARC; i++) {
+        const tt2 = i / NARC, tm = 1 - tt2;
+        const bx = tm*tm*P0.x + 2*tm*tt2*Pm.x + tt2*tt2*P2.x;
+        const by = tm*tm*P0.y + 2*tm*tt2*Pm.y + tt2*tt2*P2.y;
+        const bz = tm*tm*P0.z + 2*tm*tt2*Pm.z + tt2*tt2*P2.z;
+        const camPt = camMat.apply(new Vec3(bx, by, bz));
+        const sp2 = project(camPt, zoomVal);
+        arcPts.push({ sx: sp2.x, sy: sp2.y, t: tt2 });
+      }
+
+      const col = SUBSHELL_COLORS[subshell] || '#aaaaff';
+      const colRgba = hexToRgba(col, 1.0);
+      const cm2 = colRgba.match(/[\d.]+/g) || ['170','170','255'];
+      const [cr, cg, cb2] = cm2;
+
+      // Inner segment (nucleus interior → proton): dimmer, shows the threading
+      const tProton = tP;
+      const innerSeg = Math.round(tProton * NARC);
+      ctx.lineWidth = 0.8;
+      for (let i = 0; i < innerSeg; i++) {
+        const alpha = 0.25 * (i / innerSeg); // fades in toward proton
+        ctx.beginPath(); ctx.moveTo(arcPts[i].sx, arcPts[i].sy);
+        ctx.lineTo(arcPts[i+1].sx, arcPts[i+1].sy);
+        ctx.strokeStyle = `rgba(${cr},${cg},${cb2},${alpha.toFixed(3)})`;
+        ctx.stroke();
+      }
+      // Outer segment (proton → electron shell): bright near proton, fades outward
+      ctx.lineWidth = 1.2;
+      for (let i = innerSeg; i < NARC; i++) {
+        const outerT = (i - innerSeg) / (NARC - innerSeg);
+        const alpha = 0.75 * Math.pow(1 - outerT, 0.4);
+        ctx.beginPath(); ctx.moveTo(arcPts[i].sx, arcPts[i].sy);
+        ctx.lineTo(arcPts[i+1].sx, arcPts[i+1].sy);
+        ctx.strokeStyle = `rgba(${cr},${cg},${cb2},${alpha.toFixed(3)})`;
+        ctx.stroke();
+      }
+      // Glow dot at electron orbital end
+      const ep = arcPts[NARC];
+      ctx.beginPath(); ctx.arc(ep.sx, ep.sy, 2.5, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(${cr},${cg},${cb2},0.55)`; ctx.fill();
+      const eg = ctx.createRadialGradient(ep.sx,ep.sy,0,ep.sx,ep.sy,7);
+      eg.addColorStop(0,`rgba(${cr},${cg},${cb2},0.25)`); eg.addColorStop(1,'rgba(0,0,0,0)');
+      ctx.beginPath(); ctx.arc(ep.sx, ep.sy, 7, 0, Math.PI*2);
+      ctx.fillStyle = eg; ctx.fill();
+    });
+  }
+
+  // ── Hopf path animation (showHopf: animated electron point on the fibration path) ──
+  if (showHopf) {
+    if (!electronPathDescs) {
+      electronPathDescs = buildElectronPathDescs(iso, geo.nucleons);
+      electronTrails = electronPathDescs.map(() => []);
+    }
+    renderElectrons(zoomVal, true, geo.nucleons);
+  } else {
+    electronPathDescs = null; electronTrails = [];
+  }
+
+  // ── Decay overlay ──
+  if(showDecay) renderDecayOverlay(iso);
+
+  // ── Story overlay ──
+  if(showStory){ renderStoryOverlay(iso); }
+  else { document.getElementById('storyOverlay').style.display='none'; document.getElementById('storyPlot').style.display='none'; }
+}
+
+
+// ─────────────────────────────────────────────────────────────────
+// §15  ELECTRON RENDERING (Hopf paths, lobes, trails, threading)
+// ─────────────────────────────────────────────────────────────────
+function hexToRgba(hex,a){
+  if(hex.startsWith('rgba')){return hex.replace(/[\d.]+\)$/,a+')');}
+  if(hex.startsWith('rgb(')){return hex.replace('rgb(','rgba(').replace(')',`,${a})`);}
+  let c=hex.replace('#','');
+  if(c.length===3)c=c.split('').map(x=>x+x).join('');
+  const r=parseInt(c.slice(0,2),16),g=parseInt(c.slice(2,4),16),b=parseInt(c.slice(4,6),16);
+  return `rgba(${r},${g},${b},${a})`;
+}
+
+function renderElectrons(zoomVal, showHopf, nucleons){
+  if(!electronPathDescs||electronPathDescs.length===0) return;
+
+  electronPathDescs.forEach((ep,ei)=>{
+    // Current electron position in model space
+    const t = globalT*ep.speed + ep.eOffset;
+    const pos3 = hopfPoint(ep.protonPos, ep.protonAxis, ep.subshell, ep.lobeIdx, t);
+    const rot  = camMat.apply(pos3);
+    const proj = project(rot,zoomVal);
+
+    // Update trail
+    if(!electronTrails[ei]) electronTrails[ei]=[];
+    electronTrails[ei].push({x:proj.x,y:proj.y});
+    if(electronTrails[ei].length>TRAIL_LEN) electronTrails[ei].shift();
+
+    // Draw fading trail
+    const trail=electronTrails[ei];
+    if(trail.length>1){
+      for(let ti=1;ti<trail.length;ti++){
+        const alpha=(ti/trail.length)*0.45;
+        ctx.beginPath();ctx.moveTo(trail[ti-1].x,trail[ti-1].y);ctx.lineTo(trail[ti].x,trail[ti].y);
+        ctx.strokeStyle=hexToRgba(ep.color,alpha);ctx.lineWidth=1.5;ctx.stroke();
+      }
+    }
+
+    // ── Hopf ring: draw orbital path, threading THROUGH the proton ──
+    if(showHopf){
+      const pRotated = camMat.apply(ep.protonPos);
+      const pZ       = pRotated.z; // proton screen depth
+      const SAMPLES  = 52;
+
+      // Two segments: behind (dim) and in-front (bright) of the proton
+      let prevPt=null, prevFront=false;
+      for(let si=0;si<=SAMPLES;si++){
+        const tt=(si/SAMPLES)*Math.PI*2;
+        const p3=hopfPoint(ep.protonPos,ep.protonAxis,ep.subshell,ep.lobeIdx,tt);
+        const pr=camMat.apply(p3);
+        const pp=project(pr,zoomVal);
+        if(prevPt!==null){
+          const inFront = (pr.z < pZ);      // in front of proton → bright
+          const alpha   = inFront ? 0.55 : 0.20;  // behind at 20% → threading visual
+          ctx.beginPath();ctx.moveTo(prevPt.x,prevPt.y);ctx.lineTo(pp.x,pp.y);
+          ctx.strokeStyle=hexToRgba(ep.color,alpha);ctx.lineWidth=1.2;ctx.stroke();
+        }
+        prevPt={x:pp.x,y:pp.y}; prevFront=(rot.z<pZ);
+      }
+    }
+
+    // ── Electron dot with glow ──
+    const eR=Math.max(3,4*proj.scale);
+    const eg=ctx.createRadialGradient(proj.x-eR*0.3,proj.y-eR*0.3,eR*0.1,proj.x,proj.y,eR);
+    eg.addColorStop(0,'#ffffff');eg.addColorStop(0.3,ep.color);eg.addColorStop(1,hexToRgba(ep.color,0.1));
+    ctx.beginPath();ctx.arc(proj.x,proj.y,eR,0,Math.PI*2);ctx.fillStyle=eg;ctx.fill();
+    const gg=ctx.createRadialGradient(proj.x,proj.y,eR,proj.x,proj.y,eR*2.6);
+    gg.addColorStop(0,hexToRgba(ep.color,0.32));gg.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.beginPath();ctx.arc(proj.x,proj.y,eR*2.6,0,Math.PI*2);ctx.fillStyle=gg;ctx.fill();
+  });
+}
+
+
+// ─────────────────────────────────────────────────────────────────
+// §16  DECAY OVERLAY
+// ─────────────────────────────────────────────────────────────────
+function renderDecayOverlay(iso){
+  const dd=computeDecayDaughters(iso);
+  const cx=W/2, cy=H/2;
+  // Arrow directions for four decay types
+  const dirs={alpha:[1,0.5],betaMinus:[-1,0.5],ec:[-1,-0.5],neutron:[1,-0.5]};
+  const LEN=85;
+
+  for(const [key,d] of Object.entries(dd)){
+    const [dx,dy]=dirs[key];
+    const ax=cx+dx*LEN, ay=cy+dy*LEN;
+    ctx.save();
+    if(d.valid&&d.iso){
+      // Dashed arrow to daughter
+      ctx.setLineDash([6,3]);ctx.strokeStyle=d.color;ctx.lineWidth=2.2;
+      ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(ax,ay);ctx.stroke();
+      ctx.setLineDash([]);
+      // Arrowhead
+      const ang=Math.atan2(dy,dx);
+      ctx.beginPath();ctx.moveTo(ax,ay);
+      ctx.lineTo(ax-11*Math.cos(ang-0.4),ay-11*Math.sin(ang-0.4));
+      ctx.lineTo(ax-11*Math.cos(ang+0.4),ay-11*Math.sin(ang+0.4));
+      ctx.closePath();ctx.fillStyle=d.color;ctx.fill();
+      // Label
+      ctx.font='bold 11px Segoe UI';ctx.fillStyle=d.color;ctx.textAlign='center';
+      ctx.fillText(`${d.type}: ${d.iso.sym}-${d.iso.A}`,ax+dx*26,ay+dy*14);
+    } else {
+      // Invalid: faint dashed red
+      ctx.setLineDash([3,5]);ctx.strokeStyle='rgba(180,40,40,0.35)';ctx.lineWidth=1.2;
+      ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+dx*LEN*0.55,cy+dy*LEN*0.55);ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.font='10px Segoe UI';ctx.fillStyle='rgba(180,40,40,0.45)';ctx.textAlign='center';
+      ctx.fillText(`${d.type} ✗`,cx+dx*LEN*0.55+dx*16,cy+dy*LEN*0.55+dy*12);
+    }
+    ctx.restore();
+  }
+}
+
+
+// ─────────────────────────────────────────────────────────────────
+// §17  STORY OVERLAY + TRITON FRACTION MINI-PLOT
+// ─────────────────────────────────────────────────────────────────
+function renderStoryOverlay(iso){
+  const ov=document.getElementById('storyOverlay'); ov.style.display='block';
+  // Find nearest story step to current isotope
+  let best=0,bestScore=Infinity;
+  STORY_STEPS.forEach((s,i)=>{
+    const m=ISO.find(e=>e.sym===s.sym&&e.A===s.A); if(!m) return;
+    const dist=Math.abs(m.Z-iso.Z)+Math.abs(m.A-iso.A)*0.5;
+    if(dist<bestScore){bestScore=dist;best=i;}
+  });
+  storyStep=best;
+  const step=STORY_STEPS[best];
+  document.getElementById('storyTitle').textContent=`${step.sym}-${step.A}  ·  Step ${best+1}/${STORY_STEPS.length}`;
+  document.getElementById('storyText').textContent=step.text;
+
+  // Mini triton-fraction plot
+  const pc2=document.getElementById('storyPlot');
+  pc2.style.display='block'; pc2.width=200; pc2.height=120;
+  drawStoryPlot(pc2.getContext('2d'),best);
+}
+
+function drawStoryPlot(pc,step){
+  const pw=200,ph=120;
+  pc.clearRect(0,0,pw,ph);
+  pc.fillStyle='rgba(6,6,14,0.92)';pc.fillRect(0,0,pw,ph);
+  pc.strokeStyle='rgba(40,40,60,0.9)';pc.lineWidth=1;pc.strokeRect(1,1,pw-2,ph-2);
+  pc.font='9px Segoe UI';pc.fillStyle='#555';pc.textAlign='left';
+  pc.fillText('Triton fraction vs Z',4,12);
+  const mx=18,my=10,mw=pw-mx-5,mh=ph-my-16;
+  pc.strokeStyle='rgba(60,60,80,0.7)';pc.lineWidth=1;
+  pc.beginPath();pc.moveTo(mx,my);pc.lineTo(mx,my+mh);pc.lineTo(mx+mw,my+mh);pc.stroke();
+  const maxZ=92;
+  if(storyPlotData.length<2) return;
+  // Golden line tf=0.5
+  pc.beginPath();pc.moveTo(mx,my+mh*0.5);pc.lineTo(mx+mw,my+mh*0.5);
+  pc.strokeStyle='rgba(212,160,92,0.22)';pc.lineWidth=1;pc.setLineDash([3,4]);pc.stroke();
+  pc.setLineDash([]);
+  // Plot line
+  pc.beginPath();
+  storyPlotData.forEach(({Z,tf},i)=>{
+    const px=mx+(Z/maxZ)*mw, py=my+mh-tf*mh;
+    if(i===0) pc.moveTo(px,py); else pc.lineTo(px,py);
+  });
+  pc.strokeStyle='rgba(212,160,92,0.65)';pc.lineWidth=1.5;pc.stroke();
+  // Dots
+  storyPlotData.forEach(({Z,tf},i)=>{
+    const px=mx+(Z/maxZ)*mw, py=my+mh-tf*mh;
+    pc.beginPath();pc.arc(px,py,i===step?4:2,0,Math.PI*2);
+    pc.fillStyle=i===step?'#d4a05c':'rgba(180,130,60,0.5)';pc.fill();
+  });
+  pc.font='8px Segoe UI';pc.fillStyle='#444';
+  pc.textAlign='left';pc.fillText('Z=2',mx,my+mh+11);
+  pc.textAlign='right';pc.fillText(`Z=${maxZ}`,mx+mw,my+mh+11);
+}
+
+
+// ─────────────────────────────────────────────────────────────────
+// §18  TRANSPORT + KEYBOARD NAVIGATION
+// ─────────────────────────────────────────────────────────────────
+const MAGIC_Z_NAV=[2,8,20,28,50,82];
+function navPrev(){ selectIso(Math.max(0,curIdx-1)); }
+function navNext(){ selectIso(Math.min(ISO.length-1,curIdx+1)); }
+function navZPrev(){
+  const z=ISO[curIdx].Z;
+  for(let i=curIdx-1;i>=0;i--) if(ISO[i].Z<z){selectIso(i);return;}
+  selectIso(0);
+}
+function navZNext(){
+  const z=ISO[curIdx].Z;
+  for(let i=curIdx+1;i<ISO.length;i++) if(ISO[i].Z>z){selectIso(i);return;}
+  selectIso(ISO.length-1);
+}
+function navShellPrev(){
+  const s=shellOf(ISO[curIdx].Z);
+  const tgtZ=s>0?MAGIC_Z_NAV[s-1]:2;
+  const i=ISO.findIndex(e=>e.Z===tgtZ); if(i>=0) selectIso(i);
+}
+function navShellNext(){
+  const s=shellOf(ISO[curIdx].Z);
+  const tgtZ=s<MAGIC_Z_NAV.length-1?MAGIC_Z_NAV[s+1]:MAGIC_Z_NAV[MAGIC_Z_NAV.length-1];
+  const i=ISO.findIndex(e=>e.Z===tgtZ); if(i>=0) selectIso(i);
+}
+let playing=false,playTimer=null;
+function togglePlay(){
+  playing=!playing;
+  document.getElementById('btnPlay').textContent=playing?'⏸':'▶';
+  document.getElementById('btnPlay').classList.toggle('active',playing);
+  if(playing) startPlayback(); else stopPlayback();
+}
+function startPlayback(){
+  stopPlayback();
+  const speed=22-+document.getElementById('speedSlider').value;
+  playTimer=setInterval(()=>{ if(curIdx>=ISO.length-1){togglePlay();return;} navNext(); },speed*100);
+}
+function stopPlayback(){ if(playTimer){clearInterval(playTimer);playTimer=null;} }
+
+document.getElementById('btnPrev').addEventListener('click',navPrev);
+document.getElementById('btnNext').addEventListener('click',navNext);
+document.getElementById('btnZPrev').addEventListener('click',navZPrev);
+document.getElementById('btnZNext').addEventListener('click',navZNext);
+document.getElementById('btnShellPrev').addEventListener('click',navShellPrev);
+document.getElementById('btnShellNext').addEventListener('click',navShellNext);
+document.getElementById('btnPlay').addEventListener('click',togglePlay);
+document.getElementById('speedSlider').addEventListener('input',()=>{if(playing){stopPlayback();startPlayback();}});
+
+document.addEventListener('keydown',e=>{
+  if(e.target.tagName==='INPUT'||e.target.tagName==='SELECT') return;
+  switch(e.key){
+    case 'ArrowLeft':  if(e.shiftKey)navShellPrev(); else if(e.ctrlKey)navZPrev(); else navPrev(); e.preventDefault(); break;
+    case 'ArrowRight': if(e.shiftKey)navShellNext(); else if(e.ctrlKey)navZNext(); else navNext(); e.preventDefault(); break;
+    case 'ArrowUp':    navPrev(); e.preventDefault(); break;
+    case 'ArrowDown':  navNext(); e.preventDefault(); break;
+    case ' ':          togglePlay(); e.preventDefault(); break;
+    case 'l': document.getElementById('showLabels').click();   break;
+    case 'e': document.getElementById('showElectrons').click();break;
+    case 'h': document.getElementById('showHopf').click();     break;
+    case 'd': document.getElementById('showDecay').click();    break;
+    case 's': document.getElementById('showStory').click();    break;
+    case 'r': document.getElementById('autoRotate').click();   break;
+  }
+});
+
+// Sync visible sliders to hidden inputs
+document.getElementById('zoomVis').addEventListener('input',e=>{document.getElementById('zoom').value=e.target.value;});
+document.getElementById('bondVis').addEventListener('input',e=>{
+  document.getElementById('bondLen').value=e.target.value;
+  electronPathDescs=null; // rebuild on bond length change
+});
+
+// Electron toggle rebuilds paths
+['showElectrons','showHopf'].forEach(id=>{
+  document.getElementById(id).addEventListener('change',()=>{ electronPathDescs=null; });
+});
+
+
+// ─────────────────────────────────────────────────────────────────
+// §19  ANIMATION LOOP
+// ─────────────────────────────────────────────────────────────────
+const DT = 0.018; // seconds per frame (60fps target)
+
+function animate(){
+  if(document.getElementById('autoRotate').checked){
+    camMat=Mat3.rotY(0.004).mul(camMat);
+  }
+  globalT+=DT;
+  render();
+  requestAnimationFrame(animate);
+}
+
+selectIso(curIdx);
+animate();
+</script>
+</body>
+</html>
