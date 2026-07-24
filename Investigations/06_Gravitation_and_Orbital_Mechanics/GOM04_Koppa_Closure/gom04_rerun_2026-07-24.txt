@@ -1,0 +1,102 @@
+﻿###################################################################
+   GOM04: DERIVING c FROM ORBITAL GEOMETRY
+   c is NOT an input. c is the output.
+   GM is NOT used. EVER.
+###################################################################
+
+═══════════════════════════════════════════════════════════════════
+  STEP 1: ϟ FROM MERCURY'S PRECESSION
+═══════════════════════════════════════════════════════════════════
+
+  Inputs (all orbital/geometric):
+    R_Sun              = 6.9570e+08 m   (angular diameter)
+    a_Mercury          = 5.7909e+10 m   (orbital geometry)
+    e_Mercury          = 0.20563     (orbital geometry)
+    Precession         = 42.98 arcsec/century (Le Verrier, 1859)
+    δφ per orbit       = 5.0186e-07 rad/orbit
+
+  ϟ² = 6πR / (δφ × a × (1−e²))
+  ϟ² = 6π × 6.9570e+08 / (5.0186e-07 × 5.5460e+10)
+  ϟ² = 471150
+  ϟ  = 686.40
+
+  Known ϟ☉ = c/v = 686.40
+  Error: +0.00%
+
+═══════════════════════════════════════════════════════════════════
+  STEP 2: ITERATIVE CONVERGENCE
+═══════════════════════════════════════════════════════════════════
+
+  Start at ϟ = 600. Predict precession. Compare to observed.
+  Adjust until closure.
+
+  ϟ_guess  δφ predicted  δφ observed       ratio  status
+  ────────  ────────────  ────────────  ──────────  ──────
+     600.0    6.5681e-07    5.0186e-07      1.3088  too much precession
+     650.0    5.5965e-07    5.0186e-07      1.1151  too much precession
+     680.0    5.1135e-07    5.0186e-07      1.0189  too much precession
+     686.0    5.0245e-07    5.0186e-07      1.0012  too much precession
+     686.4    5.0186e-07    5.0186e-07      1.0000  ← LOCKED
+     690.0    4.9664e-07    5.0186e-07      0.9896  too little precession
+     700.0    4.8255e-07    5.0186e-07      0.9615  too little precession
+     750.0    4.2036e-07    5.0186e-07      0.8376  too little precession
+     800.0    3.6945e-07    5.0186e-07      0.7362  too little precession
+
+═══════════════════════════════════════════════════════════════════
+  STEP 3: c = ϟ × v_surface
+═══════════════════════════════════════════════════════════════════
+
+  ϟ☉ = 686.40  (from precession — no c, no GM)
+  v☉ = 436762.0 m/s  (from Earth's orbit — no c, no GM)
+
+  ╔═══════════════════════════════════════════════════════════╗
+  ║  c = ϟ × v = 299795136 m/s                          ║
+  ╚═══════════════════════════════════════════════════════════╝
+
+  Known c = 299792458 m/s
+  Error:    +0.0009%
+
+═══════════════════════════════════════════════════════════════════
+  STEP 4: CROSS-BODY VALIDATION
+═══════════════════════════════════════════════════════════════════
+
+  Using c = 299795136 (derived), compute ϟ for each body:
+
+  Body              v*          ϟ    R_c = R/ϟ²           zϟ²          
+  ────────  ──────────  ──────────  ──────────────  ──────────────  ────────
+  Sun         436762.0      686.40      1.4766e+03        1.000000  ✓ CLOSED
+  Earth         7909.8    37901.73      4.4350e-03        1.000000  ✓ CLOSED
+  Saturn       25087.4    11950.03      4.2204e-01        1.000000  ✓ CLOSED
+
+═══════════════════════════════════════════════════════════════════
+  STEP 5: ADVERSARIAL PERTURBATION
+═══════════════════════════════════════════════════════════════════
+
+  Perturb ϟ☉. Does c still agree across bodies?
+
+     ϟ☉      c from Sun    c from Earth   c from Saturn   consensus
+  ────────  ──────────────  ──────────────  ──────────────  ──────────
+    684.40       298921612             —             —  ✗ precession BROKEN
+    685.40       299358374             —             —  ✗ precession BROKEN
+    686.40       299795136             —             —  ✓ precession matches
+    687.40       300231898             —             —  ✗ precession BROKEN
+    688.40       300668660             —             —  ✗ precession BROKEN
+
+═══════════════════════════════════════════════════════════════════
+  SUMMARY
+═══════════════════════════════════════════════════════════════════
+
+  ϟ = √(6πR / (δφ × a × (1−e²)))
+
+  Inputs:
+    R   — Sun's radius            (angular diameter)
+    a   — Mercury's semi-major     (orbital geometry)
+    e   — Mercury's eccentricity   (orbital geometry)
+    δφ  — Mercury's precession     (Le Verrier, 1859)
+
+  No c. No G. No M. No electromagnetic measurement.
+
+  c = ϟ × v_surface = 299795136 m/s
+
+  The speed of light emerges from the geometry of gravity.
+

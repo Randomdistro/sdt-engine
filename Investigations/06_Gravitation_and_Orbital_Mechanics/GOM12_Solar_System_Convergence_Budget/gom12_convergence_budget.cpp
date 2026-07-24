@@ -18,6 +18,7 @@
 
 #include <sdt/laws.hpp>
 #include <cstdio>
+#include <cstring>  // ADJ 2026-07-24: build repair only — std::strcmp used at line ~168; MSVC pulled it transitively, g++ does not
 #include <cmath>
 
 using namespace sdt::laws;

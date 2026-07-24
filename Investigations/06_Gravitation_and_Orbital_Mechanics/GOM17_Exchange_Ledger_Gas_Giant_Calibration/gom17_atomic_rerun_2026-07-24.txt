@@ -1,0 +1,84 @@
+﻿====================================================================================================
+ GOM17 PART D - ATOMIC EXCHANGE LEDGER (H..Ne). Same ledger, twenty orders down.
+ v_n = sqrt(2 IE_n/m_e); k = c/v; z = v^2/c^2. No QM machinery; measured numbers only.
+====================================================================================================
+
+--- D1. hydrogenic anchor: drift(Z) = IE_final/(Z^2*Ry) - 1  [units e-4] ---
+ el   Z  IE_final eV  drift e4 depth (Za)^2/4  -me/M_nuc  pred e4  resid e4
+ H    1     13.59843    -5.335          0.133     -5.446   -5.313    -0.022
+ He   2     54.41777    -0.920          0.533     -1.371   -0.838    -0.082
+ Li   3    122.45436     0.255          1.198     -0.782    0.416    -0.161
+ Be   4    217.71858     1.263          2.130     -0.609    1.521    -0.258
+ B    5    340.22602     2.461          3.328     -0.498    2.830    -0.369
+ C    6    489.99320     3.843          4.793     -0.457    4.335    -0.492
+ N    7    667.04612     5.507          6.523     -0.392    6.131    -0.624
+ O    8    871.40990     7.413          8.520     -0.343    8.177    -0.764
+ F    9   1103.11748     9.585         10.783     -0.289   10.495    -0.909
+ Ne  10   1362.19916    11.979         13.313     -0.274   13.038    -1.059
+ D-GATE-1(a) sign structure (Z<=2 neg, Z>=3 pos): PASS
+ D-GATE-1(b) Z>=4 drift within 25% of [(Za)^2/4 - me/M]: PASS
+ D-GATE-1(c) residual sign uniform Z>=4: PASS (all negative)
+ Reading: the drift curve = movement-budget depth term (Zalpha)^2/4 (Law V class - the
+ atomic analog of the oblate-shadow form term, growing with depth) MINUS the dependent's
+ own shadow me/M. The uniform ~-10% residual = the measured radiative reduction (route-
+ geometry class, FLM14) - carried OPEN, not fitted.
+
+--- D2. the self-term: same two-body ledger line at both scales ---
+ extracted self(Z) = drift - (Za)^2/4  vs  -me/M_nucleus:
+  H   extracted   -5.468 e-4   target -me/M =   -5.446 e-4   miss   0.4%
+  He  extracted   -1.453 e-4   target -me/M =   -1.371 e-4   miss   6.0%
+  Li  extracted   -0.943 e-4   target -me/M =   -0.782 e-4   miss  20.6%
+ D-GATE-2: H within 5%: PASS;  He within 15%: PASS;  Li reported (unmodeled next order).
+
+  CROSS-SCALE PARALLEL TABLE (dependent's own shadow in the two-body closure):
+  pair             dependent     self-term  ledger side
+  Sun-Jupiter      Jupiter-sys    +9.547e-4  pair-SUM  (row above clean parent; GOM17 B/C)
+  Sun-Saturn       Saturn-sys    +2.859e-4  pair-SUM  (kinematic, own moons)
+  Earth-Moon       Moon          +1.230e-2  pair-SUM  (barycentre split 4671 km)
+  p-e              electron      -5.468e-4  pair-SHARE (measured line below the infinite-parent ideal)
+  alpha-e          electron      -1.453e-4  pair-SHARE (measured line below the infinite-parent ideal)
+  Li7-e            electron      -0.943e-4  pair-SHARE (measured line below the infinite-parent ideal)
+  One bookkeeping: the pair carries the dependent's own shadow at first order = the
+  mass/koppa ratio. Planetary (a,T) rows read the pair's SUMMED shadow (+); atomic energy
+  rows read the pair's SHARED movement (-). Twenty orders apart, same ledger line.
+
+--- D3. enclosed-count ledger: Z_eff,j = t*sqrt(IE_j/Ry); t = 1 if (Z-j+1)<=2 else 2 ---
+  H   Z= 1 Z_eff:  1.000   monotone: PASS
+  He  Z= 2 Z_eff:  1.344  2.000   monotone: PASS
+  Li  Z= 3 Z_eff:  1.259  2.358  3.000   monotone: PASS
+  Be  Z= 4 Z_eff:  1.656  2.314  3.363  4.000   monotone: PASS
+  B   Z= 5 Z_eff:  1.562  2.719  3.339  4.366  5.001   monotone: PASS
+  C   Z= 6 Z_eff:  1.819  2.677  3.752  4.354  5.368  6.001   monotone: PASS
+  N   Z= 7 Z_eff:  2.067  2.950  3.735  4.773  5.365  6.370  7.002   monotone: PASS
+  O   Z= 8 Z_eff:  2.001  3.213  4.019  4.771  5.787  6.372  7.372  8.003   monotone: PASS
+  F   Z= 9 Z_eff:  2.263  3.206  4.294  5.063  5.796  6.797  7.379  8.373  9.004   monotone: PASS
+  Ne  Z=10 Z_eff:  2.518  3.470  4.318  5.345  6.092  6.814  7.806  8.384  9.375 10.006   monotone: PASS
+ D-GATE-3(a) monotone within every atom: PASS 10/10
+ D-GATE-3(b1) absolute reach Z_eff,1 across row 2: Li:1.259 Be:1.656 B:1.562 C:1.819 N:2.067 O:2.001 F:2.263 Ne:2.518
+              largest = Ne: PASS (Ne shell closure = deepest outer seat)
+ D-GATE-3(b2) enclosure FRACTION Z_eff,1/Z (report line): Li:0.420 Be:0.414 B:0.312 C:0.303 N:0.295 O:0.250 F:0.251 Ne:0.252
+              The fraction FALLS along the row (each added same-tier electron shadows
+              at ~0.35 < 1, so absolute reach grows while the fraction of the full nuclear
+              shadow falls). Reported as found - no stretching.
+ Screening structure (found, native reading OPEN): dips in Z_eff,1 at B (1.562 < Be) and
+ at O (2.001 < N) - the subshell step and the pairing step, visible in the raw ledger.
+
+--- D4. exchange table, outermost seat of the neutral atom (the atomic gearing rungs) ---
+  el    IE_1 eV   z_t = z_d   k = c/v
+  H     13.5984  5.3223e-05   137.073
+  He    24.5874  9.6233e-05   101.939
+  Li     5.3917  2.1103e-05   217.687
+  Be     9.3227  3.6488e-05   165.548
+  B      8.2980  3.2478e-05   175.472
+  C     11.2603  4.4072e-05   150.633
+  N     14.5341  5.6885e-05   132.587
+  O     13.6181  5.3300e-05   136.974
+  F     17.4228  6.8191e-05   121.098
+  Ne    21.5645  8.4402e-05   108.849
+  D-GATE-4 anchor: k_seat(H) measured = 137.0726;  (1/alpha)*sqrt(1+me/mp)/sqrt(1+a^2/4) = 137.0724
+           relative miss = 1.24e-06  gate <=2e-5: PASS
+           = the PPT02 anchor 137.036 carrying HALF the self-term + the depth term -
+           the same ledger line, third appearance. Residence:release = 1:2 holds here too
+           (IE is the release cost of a seat holding half its release requirement).
+
+ done. exit 0

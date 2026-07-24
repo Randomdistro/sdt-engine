@@ -1,0 +1,293 @@
+﻿================================================================
+  GOM02: THE k-HIERARCHY ADVANTAGE
+  GM needs an orbit. k needs only the body itself.
+  SDT Canonical Engine — James Tyndall, Melbourne
+================================================================
+
+================================================================
+  PART I — THE k-HIERARCHY LADDER
+  One variable, from nuclear to planetary scale
+================================================================
+
+  Body                 k         v/c         R (m)     koppa (m)        zk^2    GM?
+  ----------  ----------  ----------  ------------  ------------  ----------  -----
+  Proton          0.5464    1.830161    8.4140e-16    2.8183e-15    1.000000  NO   
+  Electron      137.0360    0.007297    2.8179e-15    1.5006e-19    1.000000  NO   
+  Hydrogen      137.0360    0.007297    5.2918e-11    2.8179e-15    1.000000  NO   
+  Sun           686.3000    0.001457    6.9570e+08    1.4770e+03    1.000000  YES  
+  Earth       37905.2292    0.000026    6.3710e+06    4.4341e-03    1.000000  YES  
+  Moon        178447.8917    0.000006    1.7374e+06    5.4560e-05    1.000000  YES  
+
+  PASS GOM02-I.Proton: zk^2 = 1 for Proton
+    Derived:  1.000000e+00   Expected: 1.000000e+00   Err: 0.0000%
+
+  PASS GOM02-I.Electron: zk^2 = 1 for Electron
+    Derived:  1.000000e+00   Expected: 1.000000e+00   Err: 0.0000%
+
+  PASS GOM02-I.Hydrogen: zk^2 = 1 for Hydrogen
+    Derived:  1.000000e+00   Expected: 1.000000e+00   Err: 0.0000%
+
+  PASS GOM02-I.Sun: zk^2 = 1 for Sun
+    Derived:  1.000000e+00   Expected: 1.000000e+00   Err: 0.0000%
+
+  PASS GOM02-I.Earth: zk^2 = 1 for Earth
+    Derived:  1.000000e+00   Expected: 1.000000e+00   Err: 0.0000%
+
+  PASS GOM02-I.Moon: zk^2 = 1 for Moon
+    Derived:  1.000000e+00   Expected: 1.000000e+00   Err: 0.0000%
+
+  k-SPAN: 0.5464 to 178448 (factor of 326588)
+  ONE formula: k = c/v. No boundaries. No regime changes.
+  GM has NO equivalent: it's a different number for each body
+  with zero connection between entries.
+
+  GM AVAILABILITY:
+    Proton:    NO — nothing orbits a proton gravitationally
+    Electron:  NO — GM_e = 6e-41 m^3/s^2, never measured
+    Hydrogen:  NO — no gravitational test particle at atomic scale
+    Sun:       YES — planets orbit it
+    Earth:     YES — satellites orbit it
+    Moon:      YES — LLR gives GM_Moon
+
+  k is defined for ALL six. GM is defined for only THREE.
+  SDT covers the full hierarchy. GR covers half of it.
+
+================================================================
+  PART II — THE KOPPA IDENTITY: koppa_hydrogen = r_e
+  The prediction GM can never make
+================================================================
+
+  DERIVATION:
+
+    v_electron    = alpha * c = 2.187691e+06 m/s
+    k_hydrogen    = 1/alpha   = 137.035999
+    R (orbit)     = a_0       = 5.291772e-11 m
+
+    koppa = v^2 R / c^2
+          = (alpha*c)^2 * a_0 / c^2
+          = alpha^2 * a_0
+          = 2.817940e-15 m
+
+    r_e (classical electron radius) = 2.817940e-15 m
+    koppa_H / r_e = 1.0000000000
+
+  PASS GOM02-II.1: koppa_hydrogen = r_e (exact identity)
+    Derived:  2.817940e-15   Expected: 2.817940e-15   Err: 0.0000%
+
+  PASS GOM02-II.2: bridge::koppa_hydrogen matches alpha^2*a_0
+    Derived:  2.817940e-15   Expected: 2.817940e-15   Err: 0.0000%
+
+  WHAT GM GIVES:
+
+    G           = 6.67430e-11 m^3 kg^-1 s^-2  (22 ppm)
+    m_p         = 1.672622e-27 kg
+    GM_proton   = 1.116358e-37 m^3/s^2
+    GM/c^2      = 1.242116e-54 m
+
+    This is 8e-20 times SMALLER than the Planck length.
+    It is 4.407886e-40 times smaller than koppa_H.
+    It has NO physical meaning at any measurable scale.
+
+  GM says: the proton's gravitational field is ~1e-54 m.
+  SDT says: the proton's c-boundary is r_e = 2.818 fm.
+  One of these is a measurable, verified, physical scale.
+  The other is sub-Planckian numerological noise.
+
+  THREE-WAY IDENTITY:
+    alpha^2 * a_0        = 2.817940e-15 m
+    alpha * lambda_bar_C = 2.817940e-15 m
+    r_e                  = 2.817940e-15 m
+    All equal to < 0.01%
+
+  PASS GOM02-II.3: alpha * lambda_bar_C = r_e (intermediate check)
+    Derived:  2.817940e-15   Expected: 2.817940e-15   Err: 0.0000%
+
+================================================================
+  PART III — THE G-UNCERTAINTY PROBLEM
+  G is the worst-measured constant in physics
+================================================================
+
+  PRECISION COMPARISON:
+
+  Constant      Value               Rel. Uncertainty    Sig. Figs
+  ------------- ------------------- ------------------- ---------
+  c             2.99792458e8  m/s   EXACT (SI def)      infinite
+  G             6.67430(15)e-11     2.2e-5  (22 ppm)    5
+  GM_Sun        1.32712440e20       ~1e-10              10
+  M_Sun (=GM/G) 1.9890e+30 kg         2.2e-5  (22 ppm)    5
+
+  THE PROBLEM:
+    GM_Sun is known to 10 significant figures.
+    G is known to 5 significant figures.
+    Therefore M_Sun is limited to 5 significant figures.
+    We LOSE 5 orders of magnitude of precision by decomposing GM.
+
+  SDT APPROACH:
+    koppa_Sun = v^2 R / c^2 = 1.477046e+03 m
+    Uses v (from Kepler, ~6 sig figs), R (IAU, ~4 sig figs), c (exact)
+    Precision limited by R: ~4 sig figs
+    No G needed. No M needed. koppa IS the gravitational field.
+
+  PASS GOM02-III.1: G relative uncertainty = 22 ppm
+    Derived:  2.247427e+01   Expected: 2.200000e+01   Err: 2.1558%
+
+  WHY G IS THE WORST CONSTANT:
+    G combines P_eff (lattice convergence pressure),
+    R^2 (body cross-section), and M (displacement volume)
+    into a single number that hides the physics.
+    Every measurement of G is contaminated by systematic
+    uncertainty because the apparatus conflates these factors.
+    SDT predicts: G will NEVER be measured to better than ~10 ppm
+    because it is not a single physical quantity.
+
+================================================================
+  PART IV — CROSS-SCALE PREDICTIONS GM CANNOT MAKE
+================================================================
+
+  IV.1: SHARED KOPPA
+
+    koppa_proton = R_p / k_p^2 = 2.818260e-15 m
+    koppa_hydrogen = alpha^2 * a_0 = 2.817940e-15 m
+    r_e = 2.817940e-15 m
+
+  PASS GOM02-IV.1: koppa_proton = koppa_hydrogen = r_e
+    Derived:  2.818260e-15   Expected: 2.817940e-15   Err: 0.0114%
+
+    The proton surface and the electron orbit share the SAME c-boundary.
+    This is invisible in GM: GM_proton has no relation to GM_hydrogen_atom.
+    In k-space: k_proton * k_hydrogen = (0.5464)(137.036) ≠ anything obvious
+    BUT their koppas are IDENTICAL. Same gravitational depth. Different velocities.
+
+  IV.2: PROTON SURFACE VELOCITY
+
+    k_proton = 0.5464
+    v = c/k = 5.4867e+08 m/s = 1.8302 c
+
+    GM says: nothing. There is no gravitational measurement of the proton.
+    k says: the proton surface has a phase rotation at 1.831c.
+    This is confirmed by FLM03 — the kinematic map reproduces
+    nuclear physics from this single number.
+
+  IV.3: W+1 RADIUS PREDICTION
+
+    W = 3 (trefoil)
+    R_p = (W+1) hbar / (m_p c) = 4 hbar/(m_p c)
+    Predicted: 8.412356e-16 m
+    Measured:  8.414000e-16 m
+    Agreement: 0.0195%
+
+  PASS GOM02-IV.3: R_p from W+1 conjecture (0.02%)
+    Derived:  8.412356e-16   Expected: 8.414000e-16   Err: 0.0195%
+
+    GM cannot predict R_p. It does not know what a proton IS.
+    k + W predicts R_p from topology.
+
+  IV.4: STELLAR ROTATION FROM v
+
+    v_rot = pi * v^2 / c
+    v_Sun = c / k_Sun = 436824.21 m/s
+    v_rot_predicted = 1999.60 m/s = 2.00 km/s
+    v_rot_measured  ~ 2.0 km/s (solar equator)
+
+  PASS GOM02-IV.4: Solar rotation from v (order of magnitude)
+    Derived:  1.999597e+00   Expected: 2.000000e+00   Err: 0.0201%
+
+    GM does not predict stellar rotation. Period.
+    k gives it from the surface velocity alone.
+
+  IV.5: PRESSURE DOMAIN
+
+    r_domain = sqrt(L_Sun / (4 pi F_CMB)) = 3.1200e+15 m
+    = 20856 AU
+    Beyond this, CMB convergence exceeds solar convergence.
+
+    GM says nothing about where solar gravity 'ends'.
+    k says: at r_domain, the lattice background dominates.
+
+================================================================
+  PART V — v AND R ARE THE OBSERVABLES
+  GM needs an orbit. k needs only the body.
+================================================================
+
+  WHAT IS DIRECTLY MEASURED:
+
+  Quantity      Method                          Precision           
+  ------------  ------------------------------  --------------------
+  T (period)    timing                          ~1e-12 (atomic clock)
+  a (distance)  radar / parallax                ~1e-11 (radar)      
+  R (radius)    angular + distance / radar      ~1e-4               
+  v = 2pi a/T   derived from T and a            ~1e-10              
+
+  WHAT IS DERIVED:
+  GM = v^2 r    Kepler from v and r             ~1e-10              
+  G             torsion balance (lab)           2.2e-5 (22 ppm)     
+  M = GM/G      division                        2.2e-5 (22 ppm)     
+
+  SDT SAYS: stop at v^2 R / c^2 = koppa.
+  The decomposition GM = G * M is lossy:
+    It injects G-uncertainty into a quantity (GM) that was known
+    10x more precisely BEFORE the decomposition.
+
+  FOR BODIES WITHOUT ORBITERS:
+
+  Body            v measured via                  R measured via             GM?
+  --------------  ------------------------------  -------------------------  ----
+  Proton          k = (1/alpha)sqrt(R_p/a_0)      muonic H spectroscopy      NO
+  Neutron star    spin period P → v = 2piR/P    X-ray radius               NO
+  White dwarf     spectral line width             mass-radius relation       NO
+  Free electron   Bohr velocity = alpha*c         classical radius r_e       NO
+
+  ALL of these have k = c/v and koppa = v^2 R / c^2.
+  NONE of them have a measurable GM.
+  k works. GM does not.
+
+  PASS GOM02-V.1: k defined for proton (no GM available)
+    Derived:  1.000000e+00   Expected: 1.000000e+00   Err: 0.0000%
+
+================================================================
+  PART VI — THE INDICTMENT
+================================================================
+
+  GM tells you ONE thing:
+    The strength of the gravitational field at distance r.
+
+  k tells you:
+    1. The velocity ratio (v = c/k)
+    2. The c-boundary (koppa = R/k^2)
+    3. The spation depth (z = 1/k^2)
+    4. The regime: k < 1 = superluminal, k > 1 = subluminal
+    5. The connection to alpha: k_hydrogen = 1/alpha
+    6. The proton charge radius: R_p = 4*hbar/(m_p*c) via W+1
+    7. The pressure domain: where lattice background dominates
+    8. The stellar rotation: v_rot = pi*v^2/c
+    9. The bridge to ALL scales: one formula, proton to Moon
+
+  GM is koppa * c^2. It is a DERIVED quantity.
+  k is the fundamental variable.
+
+  Capability                      k/koppa     GM        
+  ------------------------------  ----------  ----------
+  Describe proton                 YES         NO        
+  Describe electron               YES         NO        
+  Describe isolated body          YES         NO        
+  Connect nuclear → astro       YES         NO        
+  Predict R_p                     YES         NO        
+  Predict stellar rotation        YES         NO        
+  Predict pressure domain         YES         NO        
+  Predict orbital dynamics        YES         YES       
+  Need G (22 ppm)                 NO          YES       
+  Need M separately               NO          YES       
+  Need test particle              NO          YES       
+
+  VERDICT:
+    GM is a special case of koppa * c^2, applicable only when
+    a test particle orbits the body. k is universal.
+    Newton found the projection. SDT found the source.
+
+  PASS GOM02-VI.1: koppa*c^2 recovers GM_Sun exactly
+    Derived:  1.327503e+20   Expected: 1.327503e+20   Err: 0.0000%
+
+================================================================
+  FINAL: 15/15 proofs passed
+================================================================
+

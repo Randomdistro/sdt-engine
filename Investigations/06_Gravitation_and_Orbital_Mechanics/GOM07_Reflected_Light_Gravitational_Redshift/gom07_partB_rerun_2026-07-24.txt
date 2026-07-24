@@ -1,0 +1,23 @@
+﻿Jupiter depth koppa_J = 1.4096 m   (from v_surf,R; NO GM)
+GR-climb-predicted extra redshift per body (m/s)  [SDT predicts 0 for all]:
+  Moon      x=0.000   measured RV   99.39 +- 0.68 (SE)  [N=6]
+  Vesta     x=0.000   measured RV  101.68 +- 0.69 (SE)  [N=24]
+  Pallas    x=0.000   measured RV   99.41 +- 1.50 (SE)  [N=7]
+  Iris      x=0.000   measured RV   97.57 +- 1.93 (SE)  [N=5]
+  Ganymede  x=0.395   measured RV   99.07 +- 0.38 (SE)  [N=17]
+  Europa    x=0.630   measured RV  101.32 +- 0.97 (SE)  [N=10]
+  Io        x=1.002   measured RV   90.18 +- 1.27 (SE)  [N=7]
+  Ceres     x=0.000   measured RV   98.21 +- 2.49 (SE)  [N=7]
+
+--- GATE: slope of RV vs Jupiter-well extra.  SDT (flat) predicts 0.0 ; GR (climb) predicts 1.0 ---
+clean set ['Moon', 'Vesta', 'Pallas', 'Iris', 'Ganymede', 'Europa']
+  slope = -1.11 +- 1.28   intercept = 100.00 +- 0.44 m/s
+  -> distance from SDT(0): 0.9sigma ;  from GR(1): 1.6sigma
+
+with Io added back (its +1.0 lever, but albedo-artifact): slope = -5.20 +- 1.04
+
+Europa - Ganymede  measured = +2.25 +- 1.04 m/s    GR-climb predicts +0.23 ; SDT 0
+  -> 2.2sigma from 0 (sign matches GR-climb; but 10x the 0.23 predicted = systematic)
+
+SYSTEMATIC FLOOR: the 4 zero-well bodies (identical under BOTH theories) span 97.57-101.68, scatter 1.46 m/s
+  vs the GR-climb signal being tested: 0.63-1.00 m/s.  Floor >> signal.
