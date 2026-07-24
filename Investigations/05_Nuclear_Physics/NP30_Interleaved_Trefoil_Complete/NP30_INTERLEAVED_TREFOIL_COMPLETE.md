@@ -248,6 +248,47 @@ Two independent routes, one count: **6 discrete connection orientations per nucl
   it.** The honest state: the connection law predicts 6; the density that fits is 0.74; the
   bridge between them is the next owed object.
 
+## §11. COMPOUNDING TO THE FLOOR — the triton exchange, shell-by-shell [measured, this phase]
+
+> Harvey, direct: *"check that +.11 when exchanging a triton for a deuteron … full compression
+> at the top of the closed shell … do they compound the tightness as they are borne down upon
+> from above?"* Run on the 281-isotope boundary-radius table (IAEA/Angeli–Marinova).
+
+**The metric trap, cleared first.** r0 = R/A^⅓ falls *mechanically* with every added neutron
+(A↑ grows the denominator), so "88% of chains contract" is half-rigged. Stripping it — measuring
+ΔR against the pure A^⅓ expectation ΔR_pred = R[(A+1)/A]^⅓ − R — the tightening **survives**:
+the radius rises **slower than A^⅓ requires** in 86% of one-neutron (t→d) steps. Clean A≥40
+regime: **excess = −5.9 mfm mid-shell, −9.6 mfm at a closure.** The +11 is the **closure-maximal**
+value, not the typical one — the exchange bites hardest exactly where a shell closes. [D — real
+signal, not a denominator artifact]
+
+**Do they compound as shells close atop shells? YES — then saturate at the derived floor.**
+Tightest r0 reached at each successive closure, excess above the derived limit r0=R_p/η^⅓=0.9300:
+```
+N=20 → +69.0 mfm   N=28 → +26.8   N=50 → +17.6   N=82 → +2.7   N=126 → −1.5 (Pb-208, AT floor)
+```
+Monotone collapse (the light regime N=2,8 is off-trend per §9). Each closing shell drives the
+whole-nucleus floor further toward the limit — and it **stops there**. [D]
+
+**The floor is a hard wall — the decisive check.** Only **5/281** nuclei sit below 0.9300, all
+by ≤1.5 mfm (0.16%, inside measurement error), all clustered at **Tl/Pb/Hg, N=122–126**; the ten
+tightest nuclei in the whole chart are that one cluster; **nothing overshoots**. The compounding
+is real *and terminates exactly at the derived floor* — close-packing has no more slack, Pb-208
+has reached it. **This is §6's r0=0.9300 seen as the wall the compounding converges to, not just
+a point-match.** [D, zero-param]
+
+**Honest boundary — NOT banked.** Whole-nucleus rms radius shows the *global* density compounding
+to the floor. It **cannot** resolve the literal "borne down from above": whether the *inner* shells
+of Pb-208 are compressed *further* than the same core in a lighter nucleus — that averages out of an
+rms number. The direct radial-load test needs **elastic e-scattering charge-density profiles /
+form factors**, not rms radii. Global saturation is *consistent* with the borne-down picture but is
+**not a direct test of it**; the form-factor pull is the owed object. [O]
+
+> **§11 verdict:** triton-exchange contraction is metric-neutral and real (−6 mid / −10 closure
+> mfm); the tightness **compounds shell-by-shell and saturates precisely at the derived close-pack
+> floor** (0.9300, hard wall, no overshoot) — bankable, zero-param. The inner-shell radial-load
+> compounding is consistent but owed a form-factor dataset.
+
 ### The moment, in native terms — "quench" is struck
 > **RETRACTION (Harvey, direct): "moment quench" is an SM object and is removed as an SDT
 > target.** *Quench* presupposes an intrinsic spin that is then reduced — the shell model's
