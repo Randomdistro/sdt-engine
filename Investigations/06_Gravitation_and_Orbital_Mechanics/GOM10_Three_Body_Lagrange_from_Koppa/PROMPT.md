@@ -1,302 +1,161 @@
-# GOM10: Three-Body Lagrange Points from Koppa — Investigation Prompt
+# GOM10: Lagrange Points from Koppa — the identity run, the shadow-cone divergence hunt, and the tractability claim on trial
 
-> **Author:** J. C. Harvey, Melbourne. **Status:** SPEC (upgrade 2026-06-27).
-> **Inherits:** `PERFECT_PROMPT_TEMPLATE.md` §⓪–§⑩ · `PROMPT_EXECUTION_PROTOCOL.md` · §0 anti-creep (R0–R5).
-> **Engine:** `#include <sdt/laws.hpp>` only — no local constant namespaces.
-> **Run:** Pre-commit thresholds in `RUN_LOG.md` before coding; adjust per pivot table (§⑩).
----
-
-## ⓪ The Golden Rule — five questions (answer before Phase 0)
-
-1. **What don't we know?** — *(unfilled by the 2026-06-27 bulk template upgrade — write the single measurable gap before the next run)*
-2. **Why does it matter?** — Stack position / downstream blockers (see `INVESTIGATION_STACK.md`).
-3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
-4. **What would prove us wrong?** — §⑧ falsification tests with numeric triggers.
-5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN).
+> **Author:** J. C. Harvey, Melbourne. **Status:** SPEC — **full upgrade 2026-07-24** (supersedes
+> 2026-06-27). **Register/stack status:** PARTIAL on input precision (Kepler 0.351%, μ_ϟ −0.122%
+> — "near-certain to clear with ephemeris-grade inputs"); this run must clear it or find out why
+> not. **Inherits:** `PERFECT_PROMPT_TEMPLATE.md` · `PROMPT_EXECUTION_PROTOCOL.md` · HUNTER
+> §0/§G. **Engine:** `#include <sdt/laws.hpp>` only. **Execution: DIRECT ONLY — no agents.**
+> Prior agent-era VERDICT/RUN_LOG/results deleted 2026-07-24 (git-recoverable).
+> Companion spec `PROMPT_nbody_equilibria.md` remains as the extended n-body appendix.
 
 ---
 
-## 1. Objective
+## ⓪ The Golden Rule — five questions
 
-Derive the positions of all five Lagrange points (L1–L5) for the Sun–Earth and
-Earth–Moon systems using ONLY the koppa framework:
+1. **What don't we know?** — Three cleanly separated things:
+   (a) *the identity leg:* nothing — μ_ϟ = ϟ₂/(ϟ₁+ϟ₂) equals the mass ratio **algebraically**
+   through the bridge, so L1–L5 landing on the classical positions is IDENTITY-class and its
+   only open item is clearing the input-precision PARTIAL with ephemeris-grade v, R;
+   (b) *the divergence leg (the actual question):* Newton's field is a POINT-DEFICIT with no
+   internal geometry; SDT's is a **shadow cone with finite width and saturation behaviour**
+   (two-regime: g → 2× near contact). L2 sits INSIDE Earth's umbra along the Sun line — does
+   cone geometry (finite angular width, saturation onset, penumbra profile) shift L2 relative
+   to the point-field prediction by ANY computable amount? That is a place the rival predicts
+   exactly zero (the firing-log targeting rule's shape);
+   (c) *the tractability claim on trial:* the old §2.3 asserted three-body chaos is "resolution
+   limit, not fundamental" because smooth fields superpose smoothly. As stated this is
+   UNSUPPORTED — Newtonian fields are equally smooth away from their sources, and chaos is a
+   property of the dynamics, not of field singularities. The claim is demoted to a hypothesis
+   with a falsifier or it is struck.
+2. **Why does it matter?** — The identity leg guards the bridge at 5+ digits with ephemeris
+   inputs (feeds GOM02's invariance case). The shadow-cone leg is one of the few candidate
+   zero-vs-nonzero forks in weak-field orbital mechanics — and spacecraft (SOHO, JWST) sit AT
+   the exact point in question with cm-class tracking. The tractability claim, if kept
+   unearned, is exactly the over-claim class HUNTER exists to purge.
+3. **How will we find out?** — §④: P1 identity leg with ephemeris-grade inputs (clears the
+   PARTIAL); P2 the shadow-cone L2 computation (the divergence hunt, with a pre-committed
+   magnitude-vs-tracking-precision decision rule); P3 the tractability trial (state the
+   mechanism-level claim precisely, derive one falsifiable consequence, or strike);
+   P4 Sun–Earth–Moon superposition map (bookkeeping, labeled).
+4. **What would prove us wrong?** — §⑧: identity leg missing at ephemeris precision (bridge
+   error — serious); P2 predicting a measurable L2 shift already excluded by JWST/SOHO
+   station-keeping (that cone-geometry variant KILLED — with the bound recorded); P3 producing
+   no falsifiable consequence (claim struck as prose).
+5. **How will we know we're done?** — Dual verdict; the three legs reported under their own
+   labels (IDENTITY / DIVERGENCE-HUNT / TRIAL), never blended.
 
-    ϟ = v²R/c²     (c-boundary)
-    g = v²/R        (surface acceleration)
+## §0 Reader's contract
 
-The classical three-body problem requires G and M. SDT replaces these with
-throughput transit-time equalisation: the Lagrange points are where the
-phase delay through one body's shadow cone equals the phase delay through
-the other's.
+1. **The identity rule.** μ_ϟ ≡ μ and Φ_eff(koppa) ≡ Φ_eff(Newton) under the bridge. Every P1
+   output line carries `[IDENTITY — bridge algebra]`. The honest content of P1 is precision
+   (does the kinematic route reproduce ephemeris L-points at their known precision), not truth.
+2. **The mechanism story (transit-time equalisation / phase-delay interference) is a READING
+   until it computes something the point-field does not.** P2 is where it gets its chance. A
+   reading that only re-derives the classical equilibria stays LINGUISTIC.
+3. **Saturation input:** the two-regime saturation function G(x) = 2(1−√(1−x)) is the
+   pre-registered E105 form (campaign-locked); if P2 uses it, cite it — do not refit it.
+4. **No G, no M in-chain**; ephemeris L-point positions and station-keeping envelopes are
+   OBSERVED anchors (rival-fit; comparison only).
+5. **Direct only; teed stdout; fresh dated verdict.**
 
-The "unsolvable" three-body problem becomes DETERMINISTIC when restated as
-a pressure-field superposition problem.
+## §1 Definitions and anchors
 
----
+| Quantity | Value | Label |
+|---|---|---|
+| ϟ_Sun · ϟ_Earth · ϟ_Moon | 1477 m · 4.434 mm · 0.0546 mm | COMPUTED (kinematics; ephemeris-grade v, R this run) |
+| μ_ϟ (Sun–Earth) | ϟ_E/(ϟ_S+ϟ_E) ≈ 3.00×10⁻⁶ | IDENTITY with mass ratio |
+| L1/L2 (Sun–Earth) | ≈ 1.50×10⁶ km from Earth (Hill: a(μ/3)^{1/3}) | OBSERVED-anchor |
+| L4/L5 | 60° (geometric) · stability μ < 0.0385 | OBSERVED-anchor / classical |
+| Earth umbra length | ~1.4×10⁶ km (R_E·D/(R_☉−R_E)) | geometry — NOTE: comparable to the L2 distance; this coincidence is why P2 exists |
+| JWST/SOHO station-keeping envelopes | ~10³–10⁴ km halo, tracking to ~km | OBSERVED-anchor (the P2 decision scale) |
 
-## 2. Background
+## §④ Phases
 
-### 2.1 The Classical Problem
+**P0 — Sanity + input upgrade.** Ephemeris-grade v_orb and R per body (DE-class values, cited);
+recompute all ϟ; z·k² = 1 printed [IDENTITY].
 
-The restricted three-body problem (two massive bodies + test particle)
-admits five equilibrium points (Lagrange 1772). Their positions depend on
-the mass ratio μ = M₂/(M₁ + M₂):
+**P1 — The identity leg at full precision (clears the register PARTIAL).** Solve ∇Φ_eff = 0 in
+the rotating frame with Φ_eff = −c²ϟ_S/r_S − c²ϟ_E/r_E − ½Ω²r² for Sun–Earth and Earth–Moon.
+Gates: L1/L2 within 0.1% of classical (was 1% — tightened because the PARTIAL was
+input-precision-limited); L4/L5 at 60.000°; stability threshold 0.0385 reproduced; μ_ϟ = μ to
+<0.01% (was 0.1%). Labels per contract §1. Failing at ephemeris precision = bridge defect —
+escalate immediately (this cannot honestly fail).
 
-- **L1**: between the bodies, distance r₁ from M₂ where:
-  `r₁/a ≈ (μ/3)^(1/3)` (Hill sphere)
-- **L2**: beyond M₂, same approximate distance
-- **L3**: opposite M₂, behind M₁
-- **L4, L5**: 60° ahead/behind M₂ in its orbit (equilateral triangle)
+**P2 — The shadow-cone divergence hunt (the native question).** The point-field treats Earth's
+occlusion as a 1/r² deficit from a point. The SDT picture is a CONE: angular radius R_E/d,
+penumbra structure, and saturation (G(x), x = occlusion fraction) as the line Sun–Earth–L2 is
+approached. Compute, with the cone geometry and the E105 saturation form, the effective axial
+force at the L2 region vs the point-field value, and locate the equilibrium shift Δr_L2.
+Pre-committed decision rule (write in RUN_LOG before the number):
+- |Δr_L2| ≥ 10³ km (inside halo scales): almost certainly already excluded — check against
+  JWST/SOHO orbit determination; if excluded, THIS CONE VARIANT IS KILLED, bound recorded;
+- 1 km ≤ |Δr_L2| < 10³ km: potentially testable — escalate to campaign as a candidate fork
+  with the number (rare, valuable);
+- |Δr_L2| < 1 km: unmeasurable — parked with the number; the mechanism reading stays
+  LINGUISTIC but now with a computed magnitude attached.
+Also compute the same for L1 (SOHO side — outside the umbra: the cone asymmetry between L1
+and L2 is itself a signature Newton lacks; report the L1/L2 shift asymmetry).
 
-The full three-body problem (three comparable masses) is chaotic in
-Newtonian gravity. No general closed-form solution exists.
+**P3 — The tractability claim on trial.** Restate §2.3's old claim as a mechanism: "phase-delay
+interference gives closed contours where point-gravity gives chaos." Derive ONE concrete,
+checkable consequence (e.g. a bound on Lyapunov time in the Sun–Earth–Moon restricted problem
+differing from the Newtonian value; or a stability-island boundary at a computable μ beyond
+0.0385). If no such consequence can be derived in this run: **the claim is STRUCK from the
+spec's assertions and recorded as prose-only** — the verdict says so in one line. No third
+option (keeping it as unearned assertion is the forbidden state).
 
-### 2.2 SDT Interpretation
+**P4 — Superposition map (bookkeeping).** The Sun–Earth–Moon g(x,y) field from summed koppa
+terms; equilibrium points located; compared to classical. Labeled CONVERGENCE (linear
+superposition is shared with Newton at this order; GR's nonlinearity is below relevance here —
+note it, magnitude included, as part of GOM01-P3's residue ledger).
 
-In SDT, there are no "masses" and no "gravitational force." There is:
-1. Each body's **koppa** (shadow depth): ϟᵢ = vᵢ²Rᵢ/c²
-2. Each body's **shadow cone**: the region of reduced throughput behind it
-3. The **transit time** of convergent throughput through each body
+## §⑧ Falsifiers
 
-The Lagrange points are where:
-- **L1**: Transit time through body A's shadow = transit time through body B's
-  shadow, along the connecting axis
-- **L4/L5**: Throughput from A and B arrives at the test point with EQUAL
-  phase delay from both directions
+| # | trigger | consequence |
+|---|---|---|
+| F1 | P1 misses at ephemeris precision | bridge defect — STOP, escalate (root-2 first: inputs) |
+| F2 | P2 shift ≥ 10³ km | cone variant EXCLUDED by existing tracking — killed with bound |
+| F3 | P2 machinery cannot close (saturation form inapplicable at 10⁻⁶ occlusion fractions) | say so — the hunt returns "no computable divergence"; mechanism stays LINGUISTIC |
+| F4 | P3 yields no falsifiable consequence | tractability claim STRUCK |
+| F5 | any per-system refit | identity leg VOID (nothing may be fit — it is algebra) |
 
-The key insight: the "mass ratio" μ is NUMERICALLY IDENTICAL to the
-"koppa ratio" ϟ₂/(ϟ₁ + ϟ₂) because mass IS throughput reorganisation
-cost (Law IV). But the SDT derivation uses ϟ, not M.
+## §⑨.E Four-root sort
+root-1 (cone geometry genuinely adds nothing measurable — respectable negative) · root-2
+(ephemeris inputs; E105 G(x) dependency) · root-3 (spec: penumbra profile under-specified —
+state the assumption, compute both bracketing cases) · root-4 (gate contraband — none expected).
 
-### 2.3 Why SDT Makes the Three-Body Problem Tractable
+## §⑤ Outputs
+Fresh `RUN_LOG.md` · re-audited `gom10_lagrange.cpp` (+ P2 extension) · `gom10_rerun_<date>.txt`
+· `GOM10_VERDICT_DIRECT_<date>.md` (three legs, three labels, the P2 number and its decision).
 
-The classical three-body problem is chaotic because three point-mass
-gravitational fields superpose nonlinearly. In SDT:
-
-1. The convergence field is CONTINUOUS (no point singularities)
-2. Each body's contribution is a smooth pressure deficit (shadow cone)
-3. The superposition of smooth fields is smooth
-4. The dynamics reduce to pressure-wave interference
-
-For three comparable-mass bodies, SDT predicts:
-- Stable orbits exist where the phase-delay contours form closed surfaces
-- The "chaos" arises from the RESOLUTION LIMIT of the phase-delay
-  interference pattern, not from fundamental indeterminacy
-- At sufficiently large separations, the three-body system is always
-  reducible to nested two-body shadow interactions
-
----
-
-## 3. Derivation
-
-### Step 1: Koppa for each body
-
-For each body i in the system:
-```
-ϟᵢ = vᵢ² Rᵢ / c²
-gᵢ = vᵢ² / Rᵢ = c² ϟᵢ / Rᵢ²
-```
-
-Sun–Earth:
-```
-ϟ_Sun   = 437000² × 6.957e8 / c² = 1.478 × 10⁶ m = 1478 km
-ϟ_Earth = 7909² × 6.371e6 / c²   = 4.434 × 10⁻³ m = 4.43 mm
-```
-
-Earth–Moon:
-```
-ϟ_Earth = 4.434 × 10⁻³ m
-ϟ_Moon  = 1680² × 1.7374e6 / c²  = 5.456 × 10⁻⁵ m = 0.055 mm
-```
-
-### Step 2: The koppa ratio replaces the mass ratio
-
-Classical: μ = M₂/(M₁ + M₂)
-SDT:      μ_ϟ = ϟ₂/(ϟ₁ + ϟ₂)
-
-Since ϟ = v²R/c² and GM = v²R (bridge law):
-ϟ = GM/c² → μ_ϟ = GM₂/(G(M₁+M₂)) = M₂/(M₁+M₂) = μ
-
-The koppa ratio IS the mass ratio. But derived from v and R, not G and M.
-
-### Step 3: L1 from transit-time equalisation
-
-At L1, the throughput transit time from the Sun equals the transit time
-from the Earth along the connecting axis. The transit time through a
-body's shadow at distance d is:
-
-```
-τ(d) = ϟ / d     (dimensionless phase delay fraction)
-```
-
-At L1 (distance d₁ from Earth, D-d₁ from Sun):
-
-```
-ϟ_Sun / (D - d₁) = ϟ_Earth / d₁
-d₁ = D × ϟ_Earth / (ϟ_Sun + ϟ_Earth)
-```
-
-Wait — this gives the barycentric position, not L1. The L1 condition is
-the GRADIENT equality:
-
-```
-d(τ_Sun)/dr = d(τ_Earth)/dr  at r = r_L1
-ϟ_Sun / (D - r)² = ϟ_Earth / r²
-r³ / (D - r)³... → Hill sphere formula
-```
-
-This reduces to the classical result but derived from ϟ, not M.
-
-### Step 4: L4/L5 stability from shadow interference
-
-L4 and L5 are stable (for μ < 0.0385) because the throughput from both
-bodies arrives with equal phase delay. The test particle sits in a
-pressure minimum (saddle point) where perturbations are restored by
-the Coriolis-equivalent of the rotating pressure field.
-
-In SDT, the stability criterion is:
-```
-ϟ₂ / (ϟ₁ + ϟ₂) < 0.0385
-```
-
-### Step 5: Full three-body (Sun–Earth–Moon)
-
-Compute the throughput field at every point on the Sun–Earth–Moon plane:
-```
-g(x,y) = Σᵢ c²ϟᵢ rᵢ_hat / rᵢ²
-```
-
-where rᵢ is the distance from point (x,y) to body i. Find the equilibrium
-points (∇g = 0) and compare to the measured Lagrange positions.
-
-### Step 6: Shadow cone geometry
-
-The user's key insight: gravity = depth of shadow cone × transit speed
-along separation distance.
-
-For two bodies separated by distance D:
-```
-F₁₂ = c² ϟ₁ ϟ₂ / D²
-```
-
-This is Newton's law but expressed in koppa:
-```
-F = GMm/D² = (c²ϟ₁)(c²ϟ₂)/(c²D²)... 
-```
-
-The force between two bodies IS the product of their shadow depths
-divided by the square of their separation, scaled by c².
+## §6 Dependencies
+Upstream: bridge · E105 pre-registration (the saturation form — cite, never refit) ·
+two-regime/occlusion-saturation thread. Anchors: DE ephemerides, JWST/SOHO orbit determination
+(rival-fit, comparison only). Downstream: GOM02 (precision case), GOM01-P3 (residue ledger),
+campaign (if P2's middle band ever fires).
 
 ---
 
-## 4. The Calculation (Numerical Procedure)
-
-1. **Set up the Sun–Earth system**:
-   - Compute ϟ_Sun, ϟ_Earth from measured v_surf and R
-   - D = 1 AU = 1.496 × 10¹¹ m
-   - Compute μ_ϟ = ϟ_Earth / (ϟ_Sun + ϟ_Earth)
-
-2. **Find L1–L5** by solving ∇Φ_eff = 0 in the rotating frame:
-   - Φ_eff(r) = -c²ϟ_Sun/r_Sun - c²ϟ_Earth/r_Earth - ½Ω²r²
-   - Ω = v_Earth_orbital / D (= 2π/year)
-
-3. **Compare to measured positions**:
-   - L1 (SOHO): ~1.5 × 10⁶ km from Earth
-   - L2 (JWST): ~1.5 × 10⁶ km from Earth
-   - L4/L5 (Trojans): 60° ahead/behind Earth
-
-4. **Repeat for Earth–Moon**:
-   - D = 3.844 × 10⁸ m
-   - Compute all five Lagrange points
-
-5. **Full three-body** (Sun–Earth–Moon):
-   - Superpose all three shadow cones
-   - Find equilibrium and stability regions
-   - Compare to measured lunar orbit perturbations
-
----
-
-## 5. Required Outputs
-
-1. **L1–L5 positions** for Sun–Earth from koppa ratio, vs classical values
-2. **L1–L5 positions** for Earth–Moon from koppa ratio, vs classical values
-3. **Stability criterion** for L4/L5 in koppa units
-4. **Shadow cone depth map** for the Sun–Earth–Moon plane
-5. **Comparison**: SDT vs Newton for orbital perturbation amplitudes
-6. **Transit-time map**: contour plot showing τ_Sun, τ_Earth, τ_Moon
-
----
-
-## 6. Success Criteria
-
-- [ ] L1 distance matches classical Hill sphere to < 1%
-- [ ] L4/L5 at exactly 60° (geometric necessity)
-- [ ] Stability criterion μ < 0.0385 reproduced from koppa ratio
-- [ ] No G, No M anywhere in the derivation — only v, R, c
-- [ ] Three-body equilibrium points correctly superpose two-body shadow cones
-- [ ] Barycentric positions from koppa ratios match mass-ratio predictions
-
----
-
-## 7. Falsification Conditions
-
-- If the koppa ratio does NOT equal the mass ratio to < 0.1%: the bridge
-  law v²R = GM has a systematic error
-- If L4/L5 stability depends on quantities beyond ϟ₁/ϟ₂: the shadow
-  cone model is incomplete
-- If the three-body superposition produces equilibrium points that don't
-  match observation: SDT's pressure-field linearisation is wrong
-
----
-
-## 8. Connection to GOM09
-
-This investigation is a direct extension of GOM09, which established:
-- ϟ = v²R/c² encodes the full gravitational field
-- g = v²/R at the surface, g(r) = v²R frac(r)/r² in the interior
-- Phase delay through excluded cells is the mechanism
-
-GOM10 extends this to MULTIPLE bodies: the gravitational interaction between
-two bodies is the interference of their phase-delay fields. The Lagrange
-points are nodes in this interference pattern.
----
-
-## ⑩ Adaptive Execution Protocol
-
-> *It is a bad plan that cannot be altered.* Failures invoke **PIVOT / KILL / OPEN** — never RETRO-PASS or PLUG.
-> See `PROMPT_EXECUTION_PROTOCOL.md`.
-
-### Pre-Run Commitment Block (copy to `RUN_LOG.md` before coding)
+## ⑩ Pre-Run Commitment Block (copy to `RUN_LOG.md` before coding)
 
 ```markdown
-## Pre-Run Commitments — GOM10
-- Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
-- CALIBRATED budget: [0 or list each param — max per §⑤]
-- Engine namespaces: bridge::koppa_*, depth_closure::, no G/M
-- Phase thresholds (committed before run): 1%, 0.1%
-- Forbidden retroactive changes: widen tolerances; plug targets; IDENTITY-PASS; local constant namespaces
+## Pre-Run Commitments — GOM10 (2026-07-24 spec)
+- Prompt completion target: [A|B|C]
+- Legs and labels: P1 IDENTITY (precision only) · P2 DIVERGENCE-HUNT (decision rule below) ·
+  P3 TRIAL (derive-or-strike) · P4 CONVERGENCE bookkeeping
+- CALIBRATED budget: 0 (saturation form cited from E105, not fit)
+- Gates: P1 0.1%/60.000°/0.0385/0.01% · P2 decision bands 1e3 km / 1 km pre-committed ·
+  P3 one consequence or STRUCK
+- Forbidden: blending legs; refitting G(x); keeping §2.3 as assertion if P3 fails; agents.
 ```
 
-### Pivot table (minimum — extend for this investigation)
-
 | Trigger | PIVOT (first) | If pivot fails | Forbidden |
-|---------|---------------|----------------|-----------|
-| Phase 0 sanity check fails | Fix units/engine refs; verify `laws.hpp` symbols | STOP — report blocker | Fit to target |
-| Native mechanism off > committed % | Alternative route in §④; document ADJ-### | **OPEN** or **KILL** hypothesis | RETRO-PASS |
-| `z ≥ 1` in closure formula | Weak-field break (CR10); piecewise or exponential | **OPEN** that regime | Ignore break |
-| Rivals match but SDT doesn't beat | Label **DEGENERATE** honestly | — | Claim Class A |
-| Upstream dependency missing (FLM10, etc.) | **DEFER** phase; cite dependency ID | — | Fake PASS |
-
-### Allowed adjustments
-
-- Finer numerics (mesh, ticks, bracket); phase splits (Na / Nb); filename fix via ADJ entry.
-- Alternative **native** routes already listed in §④ Strategy.
-
-### Disallowed adjustments
-
-- Post-hoc tolerance widening · coefficient plugs · `atomic::`/GM/G in Phase-1 native chain · Snell/reciprocity-only as Fermat PASS.
+|---|---|---|---|
+| P1 0.1% miss | upgrade inputs to DE-grade, re-run | F1 escalation | loosening to 1% |
+| P2 penumbra ambiguity | compute umbra-only and full-penumbra brackets | report the bracket | picking one silently |
+| P3 derivation stalls | narrow to the restricted 3-body Lyapunov bound only | STRUCK | asserting anyway |
 
 ---
 
-*GOM10 · upgraded 2026-06-27 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*
+*GOM10 · upgraded 2026-07-24 · the equilibria are free through the bridge; the cone is not the
+point — and L2 lives in the shadow. Compute the difference or admit there is none.*

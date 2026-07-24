@@ -1,304 +1,183 @@
-# GOM09: Earth Core Seismic Speed from Lattice Compression — Investigation Prompt
+# GOM09: Earth-Core Seismic Speeds from Occlusion Stiffness — the re-adjudication run, with the NP30 shear route
 
-> **Author:** J. C. Harvey, Melbourne. **Status:** SPEC (upgrade 2026-06-27).
-> **Inherits:** `PERFECT_PROMPT_TEMPLATE.md` §⓪–§⑩ · `PROMPT_EXECUTION_PROTOCOL.md` · §0 anti-creep (R0–R5).
-> **Engine:** `#include <sdt/laws.hpp>` only — no local constant namespaces.
-> **Run:** Pre-commit thresholds in `RUN_LOG.md` before coding; adjust per pivot table (§⑩).
----
-
-## ⓪ The Golden Rule — five questions (answer before Phase 0)
-
-1. **What don't we know?** — *(unfilled by the 2026-06-27 bulk template upgrade — write the single measurable gap before the next run)*
-2. **Why does it matter?** — Stack position / downstream blockers (see `INVESTIGATION_STACK.md`).
-3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
-4. **What would prove us wrong?** — §⑧ falsification tests with numeric triggers.
-5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN).
+> **Author:** J. C. Harvey, Melbourne. **Status:** SPEC — **full upgrade 2026-07-24** (supersedes
+> 2026-06-27). **Register status: this investigation's prior FAIL (v_p 11.5%, v_s 28.0% — E97
+> PARTIAL) was agent-run and stands as UNCONFIRMED-FAIL under Harvey's 2026-07-12 voiding ruling.
+> The direct re-run specified here IS the re-adjudication** — outcome space per the register:
+> KILL-CONFIRMED / OVERTURNED→OPEN / OVERTURNED→PASS, with the §H.LEASH check both ways.
+> **Inherits:** `PERFECT_PROMPT_TEMPLATE.md` · `PROMPT_EXECUTION_PROTOCOL.md` · HUNTER §0/§G ·
+> register re-adjudication rules (READ SOURCE · RE-RUN · GATE AUDIT · MECHANISM).
+> **Engine:** `#include <sdt/laws.hpp>` only. **Execution: DIRECT ONLY — no agents.**
+> Prior agent-era VERDICT/RESULTS/outputs deleted 2026-07-24 (git-recoverable).
 
 ---
 
-## 1. Objective
+## ⓪ The Golden Rule — five questions
 
-Derive the seismic P-wave velocity profile v_p(r) inside Earth from the SDT
-convergence-field compression gradient. The derivation must use ONLY SDT
-quantities (P_conv, f, k, ℓ_P, V_disp) and the measured PREM density profile
-ρ(r). No bulk modulus or shear modulus from material science may be invoked as
-inputs — they must EMERGE from the convergence gradient if SDT is correct.
+1. **What don't we know?** — Three separated questions the prior run blurred into one FAIL:
+   (a) the **convergent leg**: does the koppa-only interior profile g(r), P(r) still land at
+   ~2% RMS on PREM when run direct (it should — the enclosed-mass integral is shared algebra
+   with Newton via the bridge; that part is CONVERGENCE and was never the problem);
+   (b) the **native leg**: can the bulk stiffness K(r) really be built from occlusion at nuclear
+   scale (P_eff, R_p, internuclear spacing) with no material-science modulus — or was the
+   11.5%/28% miss structural, meaning bare occlusion cannot price matter stiffness without the
+   packing grammar; and
+   (c) the **new route that did not exist in June**: NP30 §10's connection law (a contact must be
+   shear-free in BOTH poloidal and toroidal rotation → exactly SIX connection orientations per
+   nucleon) supplies, for the first time, a native origin for **directed** bonds — i.e. for the
+   shear modulus G(r) as a derived FRACTION of K(r) set by connection geometry, and for the
+   outer-core G = 0 criterion (connections unlocked past the lock distance). Does that close the
+   v_s gap the old run failed at 28%?
+2. **Why does it matter?** — E97 sits in the campaign graveyard on its seismic leg while its g(r)
+   leg is one of the honest interior results; the register owes this item a direct ruling; and
+   the K/G question is the macroscopic face of the NP30 packing program — if connection geometry
+   prices shear here, the nuclear and geophysical sectors close on one mechanism. The falsifiable
+   SDT≠GR interior claim (centre-of-Earth: crushed vs weightless) also lives downstream of an
+   earned interior profile.
+3. **How will we find out?** — §④: P0 source+GM audit (the trefoil tool carries a standing
+   GM-sweep suspicion — that audit is now a gate); P1 convergent leg re-earned; P2 the occlusion
+   K route with every coefficient labeled; P3 the NP30 shear route (new); P4 discontinuities,
+   outer-core unlock, anisotropy (stretch); P5 travel times (stretch).
+4. **What would prove us wrong?** — §⑧: P2/P3 missing PREM by >30% anywhere after honest
+   calculation kills the occlusion-stiffness route (KILL-CONFIRMED — the honest outcome the
+   re-adjudication must be ready to file); G > 0 in the outer core kills the unlock criterion;
+   the GM audit finding load-bearing GM in the "native" chain voids the prior g(r) credit too.
+5. **How will we know we're done?** — Dual verdict + the register ruling line (one of the three
+   outcomes, with the mechanism named) + the K/G provenance ledger.
 
-The measured PREM profile (v_p from 5.8 km/s at the surface to 13.7 km/s at
-the CMB mantle-side, dropping to 8.1 km/s in the liquid outer core, rising
-again to 11.3 km/s at the centre) must be reproduced or else the discrepancy
-must be precisely quantified.
+## §0 Reader's contract
 
----
+1. **Re-adjudication discipline (register rules, verbatim duty):** read the tool sources fully;
+   re-run direct; audit every kill-gate for contraband; no ruling without naming the mechanism.
+   The prior FAIL numbers (11.5%/28%) are declared here as anchors of the OLD run — the new run
+   may not steer toward or away from them; they exist so the re-adjudication can say whether the
+   old numbers reproduce.
+2. **The split labels.** g(r)/P(r) = CONVERGENCE (shared integral; the bridge makes it Newton's).
+   K_SDT, G_SDT = the NATIVE claims. Never quote the 1.82% g(r) as evidence for the native leg.
+3. **PREM provenance.** PREM values in-tool must carry their citation (Dziewonski & Anderson
+   1981) and a printed row-count/checksum at run; the clean path is MUST_FETCH **F7** (the
+   electronic PREM table → `Datasets/geophysics/`) — fetch it, manifest it, and point the tools
+   at the cached copy. Hand-embedded arrays without citation = provenance violation.
+4. **No material moduli as inputs.** K and G must EMERGE (P2/P3). ⟨A⟩ per layer (22 silicate /
+   56 iron) is an OBSERVED-ANCHOR composition fact, labeled. Any laboratory K or G appearing in
+   the chain = instant fail of the native claim (they may appear in rival columns).
+5. **GM-sweep audit is a gate, not a note** (the register lists this folder under suspicion):
+   grep all three tools for G, M_E, GM, 6.674, 5.972e24; every hit classified in-chain vs
+   rival-column; in-chain hits patched or the affected leg is relabeled TRANSPLANT.
+6. **Direct only; teed stdout; fresh dated files; the deleted June layer is not evidence.**
 
-## 2. Background
+## §1 Definitions and anchors
 
-### 2.1 Standard Physics
+| Quantity | Value/form | Label |
+|---|---|---|
+| g_surface | 9.81 m/s² via c²R_E/(k_E²·R_E²) scaling | CONVERGENCE leg |
+| PREM v_p | 5.8 (surf) / 13.7 (CMB mantle) / 8.1 (outer core) / 11.3 km/s (centre) | OBSERVED-anchor (F7) |
+| PREM v_s | 0 in outer core; 3.6–7.3 km/s elsewhere | OBSERVED-anchor |
+| lattice compression δη | ~1.5×10⁻³⁷ at 364 GPa | DEAD ROUTE (recorded — the lattice is rigid at these pressures; kept as the honest Step-2 self-refutation) |
+| K_SDT(r) | (π/4)·P_eff·n^{2/3}·R_p²·R_n²/d(r)² -form (to be re-derived, chain labeled) | NATIVE claim |
+| G_SDT(r) | K_SDT × f_shear(connection geometry) — **f_shear from NP30 §10 six-orientation law** | NATIVE claim (new route) |
+| prior-run anchors | v_p RMS 11.5% · v_s RMS 28.0% · g(r) 1.82% | OLD-RUN anchors (reproduce-or-explain) |
+| 410/670/2891 km transitions | 13.4 / 23.8 / 136 GPa | OBSERVED-anchor (stretch phase) |
 
-Standard seismology derives wave speeds entirely from material properties:
+## §④ Phases
 
-$$v_p = \sqrt{\frac{K + \frac{4}{3}G}{\rho}} \qquad v_s = \sqrt{\frac{G}{\rho}}$$
+**P0 — Source + GM audit (gate).** Read `gom09_seismic.cpp`, `gom09_backward.cpp`,
+`gom09_trefoil_test.cpp` in full. Deliver: (a) the GM-sweep table (every G/M literal, in-chain vs
+rival-column, disposition); (b) the PREM-data provenance report (embedded vs F7); (c) what each
+tool actually computes (the backward and trefoil tools' roles stated — the register suspicion
+attaches to the trefoil test specifically). No physics phase opens until P0 files.
 
-Where K is the bulk modulus (incompressibility), G is the shear modulus
-(rigidity), and ρ is the density. These are measured in high-pressure
-laboratory experiments (diamond anvil cells, shock compression) on candidate
-mantle and core minerals.
+**P1 — Convergent leg re-earned (direct).** g(r) and P(r) against PREM. Pre-registered gates:
+g(r) RMS < 3% (old: 1.82%); P(centre) within 5% of 364 GPa. Labels per contract §2. If the old
+1.82% does NOT reproduce, the re-adjudication has found the prior run's g-leg unreliable too —
+report either way.
 
-The approach works remarkably well — PREM matches observed travel times to
-within ~0.5 seconds over paths of 1000+ seconds. The question is whether SDT
-can DERIVE K(r) and G(r) from first principles rather than measuring them.
+**P2 — The occlusion bulk-stiffness route (native, re-derived not re-trusted).** Re-derive
+K_SDT(r) from occlusion at nuclear scale with EVERY factor labeled (P_eff — cite EMC04's
+direct-run derivation; R_p, R_n; n(r) from ρ/⟨A⟩m_u; d(r) = n^{-1/3}; the geometric prefactor's
+origin stated or marked ASSUMED). Then v_p = √((K + 4G/3)/ρ) using P3's G. Pre-registered gates
+(same as the old spec — the re-adjudication re-tests the same claim): v_p RMS < 5% = PASS;
+5–30% = FAIL-as-posed with the residual localised and attributed; > 30% anywhere = KILL of the
+route. **The old run's 11.5% must be reproduced or the discrepancy explained (root-sorted) —
+that reproduction check IS the UNCONFIRMED-FAIL adjudication.**
 
-### 2.2 SDT Interpretation
+**P3 — The shear route via the connection law (NEW — the June run had no native G at all).**
+From NP30 §10: a nucleon-nucleon contact locks only in the six D₃/lcm(2,3) orientations; in
+condensed matter the analogous statement prices how many of a site's contacts are ORIENTED
+(shear-bearing) vs free. Derive f_shear = G/K from connection-count geometry per lattice class
+(the crystal grammar of the mineral layer — coordination number vs the six-fold lock), with
+zero material inputs. Pre-commits: (a) f_shear ∈ (0,1) derived per layer BEFORE comparing to
+PREM's K/G ratios; (b) outer core: T above the unlock threshold → zero locked orientations →
+G = 0 EMERGES (the criterion stated as a lock-distance/temperature condition, not asserted);
+(c) v_s RMS gate: < 10% = the new route lands; 10–30% = partial (localise); > 30% = the shear
+claim stays dead (old 28% confirmed at mechanism level).
 
-In SDT, the spation lattice is the medium through which ALL waves propagate.
-Seismic waves are NOT vibrations of "atoms connected by bonds" — they are
-low-frequency lattice disturbances propagating through the same medium that
-carries light, but modulated by the local matter distribution.
+**P4 — STRETCH (only after P1–P3 verdicts filed).** (i) 410/670 km: do the transition pressures
+sit at derivable occlusion/packing thresholds (link NP30's interpenetration bridge)? Look-elsewhere
+flagged. (ii) Inner-core anisotropy: compute the axial convergence component's magnitude
+honestly (the old spec's own estimate: ~1e-13 of local pressure — probably nothing; print it and
+say so). (iii) Centre-of-Earth state: the SDT≠GR "crushed vs weightless" claim restated with the
+earned profile — flagged as the falsifiable interior fork, magnitude and observable named or
+parked.
 
-The convergence gradient compresses the lattice toward Earth's centre:
-- At the surface: lattice is at background pressure P_surf
-- At depth r: the convergence from all overlying matter compresses the lattice
-- At the centre: maximum lattice compression → maximum local relay speed
+**P5 — STRETCH.** PKP/PKIKP/PcP travel times vs ISC (< 2 s over 1000+ s paths) — only if P2+P3
+both land; otherwise meaningless.
 
-The seismic wave speed should therefore depend on TWO quantities:
-1. The local lattice compression (from convergence gradient) → sets the "stiffness"
-2. The local matter density ρ(r) → sets the inertia
+## §⑧ Falsifiers
 
-The wave speed is then:
+| # | trigger | consequence |
+|---|---|---|
+| F1 | P0 finds load-bearing GM in a "native" chain | affected leg → TRANSPLANT label; if it's the g-leg, the prior 1.82% credit is VOID too |
+| F2 | P1 fails 3% | interior integral broken — STOP (this leg cannot honestly fail if inputs are right) |
+| F3 | P2 > 30% anywhere | occlusion-K route KILL-CONFIRMED (register ruling filed with mechanism: bare occlusion cannot price matter stiffness) |
+| F4 | P3 predicts G > 0 in outer core | unlock criterion wrong — shear route KILLED |
+| F5 | P3 f_shear needs a fitted fraction | route is CALIBRATED at best — label or drop; no silent knob |
+| F6 | PREM provenance unverifiable | run VOID until F7 cached |
 
-$$v_p(r) = \sqrt{\frac{P_{\text{lattice}}(r)}{\rho(r)}}$$
+## §⑨.E Four-root sort
+root-1 (occlusion genuinely cannot price stiffness — the physical negative, respectable) ·
+root-2 (P_eff/R_p inputs; PREM data; NP30 §10 dependency) · root-3 (spec: prefactor/geometry
+under-specified — mark ASSUMED, don't guess silently) · root-4 (gate contraband — none expected;
+PREM is measured-world, not a rival axiom).
 
-where P_lattice(r) is the effective lattice stiffness at radius r, set by
-the convergence gradient.
+## §⑤ Outputs
+Fresh `RUN_LOG.md` · P0 audit report `GOM09_P0_AUDIT_<date>.md` · patched tools + teed
+`gom09_*_rerun_<date>.txt` · `GOM09_VERDICT_DIRECT_<date>.md` (dual verdict + **register ruling
+line** + K/G provenance ledger) · F7 fetch + `Datasets/MANIFEST.md` row when pulled · register
+QUEUED cell update (propose in verdict; Harvey ratifies).
 
----
-
-## 3. Derivation
-
-### Step 1: Convergence pressure profile inside Earth
-
-Earth's convergence gradient creates a radially varying convergence pressure.
-At the surface, the convergence from the entire planet produces the
-gravitational acceleration g ≈ 9.81 m/s². At depth, the convergence from
-the overlying shell is balanced by the convergence from the core below.
-
-The SDT convergence pressure at radius r (distance from centre):
-
-$$P_{\text{conv}}(r) = \frac{4\pi f P_{\text{conv,cosmo}}}{3} \int_0^r \rho(r') \, r'^2 \, dr' \times \frac{1}{r^2}$$
-
-This is the SDT analog of the gravitational potential integral. The
-difference from Newton: the prefactor uses f × P_conv (SDT coupling)
-instead of G (gravitational constant).
-
-Actually, since GM_equiv = c²R/k² (bridge law):
-
-$$g(r) = \frac{c^2 R_E}{k^2 r^2} \times \frac{M(\le r)}{M_E}$$
-
-The enclosed-mass correction ensures g(r) is correct at all depths.
-This gives us the local gravitational acceleration profile g(r), which
-we can integrate to get the pressure:
-
-$$P(r) = \int_r^{R_E} \rho(r') \, g(r') \, dr'$$
-
-### Step 2: Lattice compression from convergence pressure
-
-The spation lattice spacing at depth is altered by the local convergence
-pressure. Define the lattice compression ratio:
-
-$$\eta(r) = \frac{\ell_s(r)}{\ell_P} = 1 - \frac{P_{\text{local}}(r)}{P_{\text{conv,cosmo}}}$$
-
-Since P_local << P_conv,cosmo (363 GPa << 2.459×10⁴⁸ Pa), η ≈ 1 to
-extraordinary precision. The fractional compression is:
-
-$$\delta\eta = \frac{P_{\text{local}}}{P_{\text{conv}}} \approx \frac{364 \times 10^9}{2.459 \times 10^{48}} \approx 1.48 \times 10^{-37}$$
-
-This is INFINITESIMAL. Direct lattice compression cannot explain the
-seismic velocity profile — the spation lattice is effectively rigid on
-these pressure scales.
-
-### Step 3: Alternative SDT mechanism — effective bulk modulus from occlusion geometry
-
-If lattice compression is negligible, the seismic velocity must come from
-the MATTER's response to pressure, mediated through the convergence field.
-
-The SDT-derived bulk modulus K(r) is:
-
-$$K_{\text{SDT}}(r) = \frac{\pi}{4} P_{\text{eff}} \times n(r)^{2/3} \times R_p^2 \times R_n^2 / d(r)^2$$
-
-where:
-- n(r) = number density of nucleons at depth r (from ρ(r) and mean atomic mass)
-- d(r) = mean internuclear spacing ≈ n^(-1/3)
-- R_p, R_n = wake radii of constituent nucleons
-- P_eff = effective pressure at nuclear scale (law_III)
-
-This gives K as the cumulative occlusion stiffness of the material — how
-much convergence pressure is needed to compress the internuclear spacing
-by a fractional amount.
-
-### Step 4: Compute v_p(r) from SDT
-
-$$v_p(r) = \sqrt{\frac{K_{\text{SDT}}(r)}{\rho(r)}}$$
-
-Tabulate this at every depth point in the PREM model and compare to
-the measured v_p(r).
-
-### Step 5: Phase transitions
-
-The 410 km and 670 km discontinuities show abrupt v_p jumps. In SDT,
-these arise when the convergence pressure crosses a threshold that causes
-a structural rearrangement of the scaffold (crystal structure change =
-grammar transition at the mineral scale).
-
-Compute: at what pressures do the discontinuities occur? Are these related
-to simple ratios of P_eff or the occlusion force thresholds for common
-minerals?
-
-- 410 km (P ≈ 13.4 GPa): olivine → wadsleyite (coordination change)
-- 670 km (P ≈ 23.8 GPa): ringwoodite → bridgmanite (major restructuring)
-- 2891 km (P ≈ 136 GPa): CMB — solid → liquid iron interface
-
-### Step 6: The outer core S=0 constraint
-
-S-waves (shear) have v_s = 0 in the outer core because it is liquid (G=0).
-SDT must explain: why does G → 0 in the outer core? In SDT, shear rigidity
-requires a FIXED scaffold structure. A liquid has no scaffold — the
-constituent topologies (iron nuclei) are free to translate and rotate.
-v_s = 0 because the ℓ≥3 wake bonds are broken (internuclear distance
-exceeds the occlusion lock distance).
-
-### Step 7: Inner core anisotropy
-
-The inner core has v_p ~3% faster along the polar axis than in the
-equatorial plane. Standard explanation: preferred crystal alignment of
-hcp-iron from solidification conditions.
-
-SDT offers an additional mechanism: Earth's ℓ=2 quadrupole wake (magnetic
-field) provides a preferred axis. If the convergence gradient has an
-axial component from the core's toroidal circulation, the lattice
-compression would be slightly anisotropic → v_p(polar) > v_p(equatorial).
-
-Compute: does the magnetic dipole field's energy density (B²/2μ₀ ~ 
-10⁻² Pa at the ICB) produce a detectable anisotropy? It's ~10⁻¹³ of
-the local pressure → probably too small. The anisotropy is more likely
-structural (crystal alignment), which SDT can address through grammar-
-based crystal packing preferences.
+## §6 Dependencies
+Upstream: EMC04 (P_eff, direct-class) · NP30 §10 (connection law — the new shear engine) · NP30
+§11 (compression floor — the density side of the same packing) · bridge. Data: **F7 PREM**
+(MUST_FETCH — currently WANTED; fetch before P1). Downstream: E97 campaign row; the interior
+fork (P4-iii); GOM19 P5 (compression-floor cross-checks).
 
 ---
 
-## 4. The Calculation (Numerical Procedure)
-
-1. **Input**: PREM ρ(r) at 50 radial points, logarithmically spaced from
-   r = 0 to r = R_E
-
-2. **For each radius r**:
-   a. Compute enclosed mass M(≤r) from density integral
-   b. Compute g(r) = c²R_E/(k² r²) × M(≤r)/M_E
-   c. Compute hydrostatic pressure P(r) from surface integral of ρg
-   d. Compute number density n(r) = ρ(r) / ⟨A⟩ m_u (where ⟨A⟩ is mean
-      atomic mass: 22 for mantle silicates, 56 for core iron)
-   e. Compute mean interatomic spacing d(r) = n(r)^(-1/3)
-   f. Compute K_SDT(r) = occlusion stiffness from the nuclear-scale
-      occlusion force integrated over the local crystal structure
-   g. For solids: compute G_SDT(r) = shear resistance from directed
-      occlusion bonds (subset of K_SDT based on scaffold geometry)
-   h. Compute v_p(r) = √((K_SDT + 4G_SDT/3) / ρ)
-   i. Compute v_s(r) = √(G_SDT / ρ) (= 0 in liquid regions)
-
-3. **Output**: v_p(r) and v_s(r) profiles from SDT, plotted alongside
-   PREM reference profiles
-
-4. **Residual**: Δv(r) = v_p,SDT(r) − v_p,PREM(r) at each depth
-
----
-
-## 5. Required Outputs
-
-1. **SDT seismic velocity profile**: v_p(r) and v_s(r) from surface to centre,
-   plotted as a function of depth alongside PREM data
-
-2. **Bulk modulus profile**: K_SDT(r) vs K_PREM(r) — does SDT derive the
-   correct stiffness at each depth?
-
-3. **Phase transition pressures**: Do the 410 km and 670 km discontinuities
-   fall at SDT-predicted convergence thresholds?
-
-4. **Outer core G=0**: Explicit demonstration that the outer core's liquid
-   state corresponds to broken scaffold bonds in SDT
-
-5. **Inner core anisotropy**: Quantification of the convergence anisotropy
-   contribution vs crystal alignment contribution
-
-6. **Residual map**: Depth-by-depth comparison with RMS deviation
-
-7. **Travel time verification**: Compute P-wave travel times for standard
-   ray paths (PKP, PKIKP, PcP) using the SDT velocity profile and compare
-   to ISC catalogue travel times
-
----
-
-## 6. Success Criteria
-
-- [ ] SDT v_p profile matches PREM to within 5% RMS across all depths
-- [ ] Surface v_p (5.8 km/s), CMB v_p (13.7/8.1 km/s), and centre v_p
-      (11.3 km/s) all reproduced within 10%
-- [ ] Phase transitions at 410/670 km correspond to SDT convergence thresholds
-- [ ] v_s = 0 in outer core derived from scaffold-breaking criterion
-- [ ] PKP travel times match ISC observations within 2 seconds over 1000+ km paths
-- [ ] NO material-science bulk modulus used as input — all stiffness derived
-      from occlusion force at nuclear scale
-- [ ] If residuals exceed 10% anywhere: the discrepancy is localised and
-      attributed to a specific SDT limitation
-
----
-
-## 7. Falsification Conditions
-
-- If SDT cannot match the PREM profile to within 30% at any depth after
-  honest calculation: the lattice compression model needs fundamental
-  revision for macroscopic wave propagation
-- If the phase transition pressures show no correlation with SDT thresholds:
-  seismic discontinuities are purely material phenomena with no lattice
-  coupling
-- If SDT predicts G > 0 in the outer core: the scaffold-breaking criterion
-  is wrong
----
-
-## ⑩ Adaptive Execution Protocol
-
-> *It is a bad plan that cannot be altered.* Failures invoke **PIVOT / KILL / OPEN** — never RETRO-PASS or PLUG.
-> See `PROMPT_EXECUTION_PROTOCOL.md`.
-
-### Pre-Run Commitment Block (copy to `RUN_LOG.md` before coding)
+## ⑩ Pre-Run Commitment Block (copy to `RUN_LOG.md` before coding)
 
 ```markdown
-## Pre-Run Commitments — GOM09
-- Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
-- CALIBRATED budget: [0 or list each param — max per §⑤]
-- Engine namespaces: bridge::koppa_*, depth_closure::, no G/M
-- Phase thresholds (committed before run): 3%, 5%, 10%, 10%, 30%
-- Forbidden retroactive changes: widen tolerances; plug targets; IDENTITY-PASS; local constant namespaces
+## Pre-Run Commitments — GOM09 (2026-07-24 spec; register re-adjudication run)
+- Prompt completion target: [A|B|C]
+- Register outcome space: KILL-CONFIRMED / OVERTURNED→OPEN / OVERTURNED→PASS — LEASH both ways
+- Physics class: P1 CONVERGENCE · P2/P3 NATIVE claims · P4 stretch
+- CALIBRATED budget: 0 (F5 enforces)
+- Gates: P0 audit filed · P1 g<3% · P2 v_p <5% PASS / >30% KILL + reproduce-or-explain 11.5% ·
+  P3 f_shear derived, G=0 emerges, v_s <10% / >30% dead
+- Old-run anchors declared: 11.5% / 28.0% / 1.82% (reproduce-or-explain, never steer)
+- Forbidden: material moduli in-chain; silent shear fraction; quoting g-leg for the native leg;
+  agents.
 ```
 
-### Pivot table (minimum — extend for this investigation)
-
 | Trigger | PIVOT (first) | If pivot fails | Forbidden |
-|---------|---------------|----------------|-----------|
-| Phase 0 sanity check fails | Fix units/engine refs; verify `laws.hpp` symbols | STOP — report blocker | Fit to target |
-| Native mechanism off > committed % | Alternative route in §④; document ADJ-### | **OPEN** or **KILL** hypothesis | RETRO-PASS |
-| `z ≥ 1` in closure formula | Weak-field break (CR10); piecewise or exponential | **OPEN** that regime | Ignore break |
-| Rivals match but SDT doesn't beat | Label **DEGENERATE** honestly | — | Claim Class A |
-| Upstream dependency missing (FLM10, etc.) | **DEFER** phase; cite dependency ID | — | Fake PASS |
-
-### Allowed adjustments
-
-- Finer numerics (mesh, ticks, bracket); phase splits (Na / Nb); filename fix via ADJ entry.
-- Alternative **native** routes already listed in §④ Strategy.
-
-### Disallowed adjustments
-
-- Post-hoc tolerance widening · coefficient plugs · `atomic::`/GM/G in Phase-1 native chain · Snell/reciprocity-only as Fermat PASS.
+|---|---|---|---|
+| P0 GM hits in-chain | patch to kinematic form, ADJ-log, re-run | leg relabeled TRANSPLANT | leaving it |
+| P2 lands 5–30% | localise residual by depth/layer; root-sort | FAIL-as-posed recorded | tolerance widening |
+| P3 f_shear underdetermined for a layer | state the lattice-class assumption as ASSUMED, compute both candidates | partial verdict | picking the better-fitting one silently |
+| F7 fetch blocked | BLOCKED-route row; embedded-PREM path with full citation + checksum | — | uncited arrays |
 
 ---
 
-*GOM09 · upgraded 2026-06-27 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*
+*GOM09 · upgraded 2026-07-24 · the g-profile was never the question; the question is whether
+occlusion can price stiffness — and NP30's six locks are the first native tool for the shear
+half. File the register ruling either way.*

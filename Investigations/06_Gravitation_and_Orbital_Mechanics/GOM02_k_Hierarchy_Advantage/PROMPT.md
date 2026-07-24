@@ -1,217 +1,171 @@
-# GOM02: The k-Hierarchy Advantage — Mathematical Framework
+# GOM02: The k-Hierarchy Advantage — what one formula spans, what that proves, and the identity audit
 
-> **Author:** J. C. Harvey, Melbourne. **Status:** SPEC (upgrade 2026-06-27).
-> **Inherits:** `PERFECT_PROMPT_TEMPLATE.md` §⓪–§⑩ · `PROMPT_EXECUTION_PROTOCOL.md` · §0 anti-creep (R0–R5).
-> **Engine:** `#include <sdt/laws.hpp>` only — no local constant namespaces.
-> **Run:** Pre-commit thresholds in `RUN_LOG.md` before coding; adjust per pivot table (§⑩).
----
-
-## ⓪ The Golden Rule — five questions (answer before Phase 0)
-
-1. **What don't we know?** — *(unfilled by the 2026-06-27 bulk template upgrade — write the single measurable gap before the next run)*
-2. **Why does it matter?** — Stack position / downstream blockers (see `INVESTIGATION_STACK.md`).
-3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
-4. **What would prove us wrong?** — §⑧ falsification tests with numeric triggers.
-5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN).
+> **Author:** J. C. Harvey, Melbourne. **Status:** SPEC — **full upgrade 2026-07-24** (supersedes the
+> 2026-06-27 bulk-template version; Golden-Rule Q1 was unfilled, the koppa identity was mislabeled a
+> "prediction," and the spec said "proton charge radius" — all corrected below).
+> **Inherits:** `PERFECT_PROMPT_TEMPLATE.md` §⓪–§⑩ · `PROMPT_EXECUTION_PROTOCOL.md` · HUNTER §0/§G.
+> **Engine:** `#include <sdt/laws.hpp>` only. **Execution: DIRECT ONLY — no agents.**
+> **Run:** §⑩ commitments to `RUN_LOG.md` before code. Prior agent-era verdict deleted 2026-07-24.
 
 ---
 
-## 1. Definitions
+## ⓪ The Golden Rule — five questions
 
-| Symbol | Name | Formula | Meaning |
-|--------|------|---------|---------|
-| k | Velocity ratio | c / v | The ratio of the speed of light to the characteristic velocity v at a body's surface. k is dimensionless and runs continuously across all scales. |
-| v | Surface velocity | c / k | The velocity of circulation or orbital motion at the body's surface. For superluminal bodies (k < 1), this is a phase velocity, not a group velocity. |
-| z | Spation depth | v² / c² = 1/k² | The fractional convergence deficit at the body's surface. z measures how "loaded" the lattice is. |
-| ϟ (koppa) | c-boundary | v²R / c² = R/k² | The radius at which v = c. One number encodes the entire gravitational field. Units: metres. |
-| G | Newton's constant | 6.674×10⁻¹¹ m³kg⁻¹s⁻² | The coupling constant in F = Gm₁m₂/r². Known to only 22 ppm — the worst-measured fundamental constant. |
-| M | Mass | kg | The "gravitational mass" of a body. Only knowable via GM/G, inheriting G's 22 ppm uncertainty. |
-| GM | Gravitational parameter | m³/s² | The product G×M, measurable to ~10⁻¹⁰ relative precision from orbital dynamics. In SDT: GM = ϟc². |
-| α | Fine structure constant | 7.297×10⁻³ | = e²/(4πε₀ℏc). In SDT: k_hydrogen = 1/α. |
-| r_e | Classical electron radius | 2.818×10⁻¹⁵ m | = α²a₀ = αƛ_Ce. In SDT: ϟ_hydrogen = r_e (the koppa identity). |
-| a₀ | Bohr radius | 5.292×10⁻¹¹ m | Radius of the hydrogen ground-state orbit. |
-| R_p | Proton charge radius | 8.414×10⁻¹⁶ m | From muonic hydrogen spectroscopy. SDT predicts: R_p = 4ℏ/(m_p c) to 0.02%. |
-
----
-
-## 2. The Thesis
-
-**GM requires an orbital test particle to exist as a measurement.**
-
-If nothing orbits a body — no satellite, no flyby, no radar bounce — then GM is operationally undefined. You cannot measure it.
-
-**k = c/v requires only the body itself.**
-
-Every body with a surface velocity v has a well-defined k. Every body with a radius R has a well-defined ϟ = v²R/c². No test particle needed.
-
-This means:
-- k describes the proton (GM_proton ≈ 10⁻³⁷ — never measured, never will be)
-- k describes the electron (GM_electron ≈ 10⁻⁴¹ — meaningless)
-- k describes isolated neutron stars (GM requires a companion)
-- k connects nuclear physics to stellar physics (GM has no cross-scale bridge)
+1. **What don't we know?** — Whether the k-hierarchy's claimed *advantage* over G/M is
+   (a) **demonstrable as measurement**, not rhetoric: koppa recovered independently from every
+   dependent of a host must agree to ephemeris-class precision, beating G's 22 ppm wall — the
+   spread IS the thesis, and it has never been gated; and (b) **honestly sorted**: which rows of
+   the showcase table are IDENTITIES (algebra), which are COMPUTED (kinematics), and which are
+   the two genuinely earned items (the W+1 boundary-radius landing; the cross-scale reach where
+   GM is undefined). The prior spec sold the whole table at one price.
+2. **Why does it matter?** — The k-hierarchy is the campaign's Front-2 precision argument: SDT
+   discards the worst-measured constant in physics and keeps full ephemeris precision. If the
+   koppa-invariance gate passes at 1e-8-class spread, that is a *measured* superiority no rival
+   bookkeeping shares; if it only passes at percent-class, the "advantage" is bookkeeping
+   elegance and must be sold as that. Downstream: GOM14 (the dataset), GOM17 (the ledger),
+   GOM19 (chirp-as-ϟ), the website copy.
+3. **How will we find out?** — §④: P1 identity audit of every table row (label before compute);
+   P2 the koppa-invariance gate on the GOM14 multiplanet dataset (693 dependents, cached);
+   P3 the cross-scale bridge with per-rung labels; P4 the G-comparison stated in measurement
+   terms only.
+4. **What would prove us wrong?** — §⑧: host-wise koppa spread worse than the G-route for clean
+   systems (advantage FAILS as measurement); any identity row found load-bearing in a claimed
+   prediction (relabel + strike); the W+1 row failing its 0.02% window on recompute.
+5. **How will we know we're done?** — Dual verdict; the showcase table republished with a LABEL
+   COLUMN (IDENTITY / COMPUTED / DERIVED / OBSERVED-anchor) and the invariance number banked.
 
 ---
 
-## 3. Mathematical Framework
+## §0 Reader's contract
 
-### 3.1 The k-Hierarchy Table
+1. **The identity rule (fired-ledger lesson, 2026-07-23).** ϟ_H = r_e is an exact algebraic
+   identity: ϟ_H = (αc)²a₀/c² = α²a₀ = αℏ/(m_e c) ≡ r_e by definition of r_e. It is a
+   *unification reading* — the same object appearing on two rungs — and it may NEVER be scored
+   as a prediction. Same for z·k² = 1. The identity audit (P1) exists precisely to stop this
+   class of oversell, in both directions: an identity is not evidence, and it is also not
+   nothing — it is the ledger's internal consistency, printed and labeled.
+2. **Boundary radius**, never "charge radius" (no charge substance; R_p is the proton
+   displacement boundary). The prior spec violated this; corrected throughout.
+3. **Rhetoric is not a gate.** "GM_proton is 10³⁹ below ℓ_P, meaningless" is commentary — it may
+   appear in prose, never as a scored result. Scored results are numbers with pre-registered
+   tolerances.
+4. **The stricken claim.** The old capability table asserted "predict stellar rotation
+   (v_rot = πv²/c)" with no source anywhere in the repo. STRUCK — do not carry it. If a rotation
+   law is wanted, it gets its own investigation with its own derivation.
+5. **No G, no M in-chain.** G appears exactly twice, both as OBSERVED rival columns: its 22 ppm
+   uncertainty (the thing the thesis beats) and the GM ≡ ϟc² conversion check.
+6. **Direct execution only; teed stdout; verdict quotes today's output.**
 
-k = c/v is one formula applied at every scale:
+## §1 Definitions
 
-| Body | v | k = c/v | R | ϟ = v²R/c² | ϟ equals... |
-|------|---|---------|---|------------|-------------|
-| Proton surface | 1.831c | 0.5464 | 8.414×10⁻¹⁶ m | 2.818×10⁻¹⁵ m | **r_e** |
-| Hydrogen (n=1) | αc | 137.036 | 5.292×10⁻¹¹ m | 2.818×10⁻¹⁵ m | **r_e** (same!) |
-| Sun | 4.368×10⁵ m/s | 686.3 | 6.957×10⁸ m | 1477 m | r_S/2 |
-| Earth | 7909 m/s | 37,905 | 6.371×10⁶ m | 4.43×10⁻³ m | 4.43 mm |
-| Moon | 1680 m/s | 178,448 | 1.737×10⁶ m | 5.46×10⁻⁵ m | 0.055 mm |
+| Symbol | Form | Label |
+|---|---|---|
+| k = c/v | velocity ratio | COMPUTED per body |
+| z = 1/k² | depth | IDENTITY with k (one quantity, three views) |
+| ϟ = v²R/c² = R/k² | koppa | COMPUTED from kinematics (no G/M) |
+| ϟ_H = r_e | hydrogen koppa | **IDENTITY** (contract §1) |
+| R_p = 4ℏ/(m_p c) | proton **boundary radius**, W+1 rule | DERIVED-conjectural (Law VI; 0.02% vs muonic-H; the campaign's strongest ledger row, delete-test per EMC04) |
+| GM = ϟc² | rival bridge | conversion only, labeled |
+| G = 6.67430(15)e-11 | rival constant | OBSERVED — 22 ppm, the comparison target |
 
-**k spans from 0.5464 to 178,448 — a factor of 326,000 — with ONE formula.**
-GM has a different, unrelated value for each body with no connection between entries.
+Anchors: DE440-class GM_host precision ~1e-10 relative (planetary ephemerides); G at 22 ppm;
+muonic-H R_p = 0.84087(39) fm; the GOM14 dataset `koppa_multiplanet.csv` (cached in-folder,
+112,586 bytes — dependents' (a, T) pairs per host).
 
-### 3.2 The Koppa Identity: ϟ_hydrogen = r_e
+## §④ Phases
 
-This is the central prediction that GM structurally cannot make.
+**P0 — Sanity.** Engine symbols; recompute the five-row hierarchy table (proton, H, Sun, Earth,
+Moon) from kinematic inputs; k spans 0.5464 → 1.78×10⁵ printed.
 
-**Derivation:**
+**P1 — The identity audit (label BEFORE compute).** For every row/claim in the prior showcase:
+mark IDENTITY / COMPUTED / DERIVED / OBSERVED / STRUCK. Pre-committed outcomes of this audit —
+written here so the run can only confirm-or-correct the labels, not invent them:
+z·k² = 1 → IDENTITY. ϟ_H = r_e → IDENTITY. ϟ_Sun = r_s/2 correspondence → IDENTITY (given
+ϟ≡GM/c²). R_p = 4ℏ/(m_p c) landing at 0.02% → DERIVED-conjectural (the one row with a measured
+target it did not consume — cite EMC04's delete-test). Proton k = 0.5464 → COMPUTED (from the
+1.83c seat, NP27-supported). GM_proton commentary → prose only. v_rot claim → STRUCK.
+**Gate: the published table carries the label column; any relabel found necessary is ADJ-logged.**
 
-The hydrogen ground state has v = αc (the Bohr velocity), R = a₀ (the Bohr radius).
+**P2 — The koppa-invariance gate (the thesis, finally measured).** Using `koppa_multiplanet.csv`
+(GOM14's pull): for every host with ≥2 dependents, compute ϟ_host = 4π²a³/(T²c²) from EACH
+dependent independently. Per host: median ϟ, per-dependent residuals, and the host-wise
+fractional spread s_host. Pre-registered gates:
+- **G2a (clean systems):** for hosts with ≥4 well-tracked dependents (Sun, Jupiter, Saturn,
+  Uranus, Neptune, Earth), s_host < 1×10⁻⁴ after excluding flagged irregulars (exclusions listed
+  with reasons BEFORE residuals are inspected: ring-moons inside Roche interactions, captured
+  irregulars with poor elements — the exclusion rule is orbit-quality class, never residual size).
+- **G2b (the advantage number):** best-host spread s_min < 2.2×10⁻⁵ (i.e. **beats G's 22 ppm** —
+  the thesis stated as a measurement). Expected from DE440-class inputs: ~1e-8 reachable; gate set
+  loose of expectation, tight of the rival.
+- **G2c (honesty):** report the WORST host too; a cherry-picked best without the distribution is
+  VOID.
+**This phase turns the prompt's rhetoric into one number: the measured invariance of ϟ across
+independent dependents, side by side with 22 ppm.**
 
-```
-ϟ_hydrogen = v² R / c²
-           = (αc)² · a₀ / c²
-           = α² · a₀
-```
+**P3 — The cross-scale bridge (labels attached per rung).** One formula, five rungs:
+proton (1.83c seat, NP27) → hydrogen (αc, APS05's measured seat 137.0726) → Sun (686.3) →
+Earth → Moon. Print k, z, ϟ per rung with the P1 label on each line. The bridge's honest claim:
+*reach* (GM is undefined for four of the five rungs), not *prediction*.
 
-Now, α² · a₀ can be rewritten using the definition of a₀:
+**P4 — The G-comparison, measurement terms only.** Table: [route | what it needs | precision].
+ϟ-route: (a,T) or (v,R) only → P2's measured spread. G-route: GM (1e-10) ÷ G (22 ppm) → M at
+22 ppm. One sentence of prose permitted: decomposing GM through G *destroys five orders of
+precision and buys nothing the dynamics ever uses*. That sentence must cite P2's number.
 
-```
-a₀ = ℏ / (m_e α c)     [Bohr radius from ℏ, m_e, α, c]
-```
+## §⑧ Falsifiers
 
-Substituting:
+| # | trigger | consequence |
+|---|---|---|
+| F1 | G2a fails on a clean system (spread ≥1e-4, no orbit-quality cause) | koppa invariance FAILS — the advantage thesis is bookkeeping only; record and stop selling it as measurement |
+| F2 | G2b fails (no host beats 22 ppm) | the headline is retracted to "matches GM precision, discards G" — weaker, stated honestly |
+| F3 | any P1 IDENTITY row found scored as prediction anywhere downstream (grep the repo) | flag the downstream file to CANON_FLAGS (propose-only) |
+| F4 | R_p recompute misses 0.02% window | Law VI row broken — escalate to stack (root-2, W+1) |
+| F5 | exclusion rule touched after residuals seen | run VOID (anti-cherry-pick) |
 
-```
-α² · a₀ = α² · ℏ / (m_e α c) = α ℏ / (m_e c)
-```
+## §⑨.E Four-root sort
+root-1 thesis false (invariance genuinely fails) · root-2 dependency (ephemeris input quality;
+W+1) · root-3 spec (exclusion rule under-specified — fix rule, full re-run) · root-4 gate
+contraband (a gate protecting G's role — kill the gate).
 
-But αℏ/(m_e c) = α × ƛ_Ce (the reduced Compton wavelength of the electron). And by definition:
+## §⑤ Outputs
+`RUN_LOG.md` (fresh) · `gom02_k_hierarchy.cpp` re-audited against THIS spec (it predates the
+identity audit — patch its print-labels, ADJ-log) + a P2 driver (new: `gom02_koppa_invariance.py`
+or extend the .cpp to ingest the CSV) · `gom02_rerun_<date>.txt` · `GOM02_VERDICT_DIRECT_<date>.md`
+(dual verdict + labeled table + the invariance number).
 
-```
-r_e = α × ƛ_Ce = α ℏ / (m_e c) = 2.818 × 10⁻¹⁵ m
-```
-
-Therefore:
-
-```
-ϟ_hydrogen = α² a₀ = α ƛ_Ce = r_e     ✓
-```
-
-**The c-boundary of the hydrogen atom IS the classical electron radius.** This is an exact algebraic identity.
-
-**What does GM give?** GM_proton = G × m_p = 6.674×10⁻¹¹ × 1.673×10⁻²⁷ = 1.12×10⁻³⁷ m³/s². Dividing by c²: 1.24×10⁻⁵⁴ m. This is 10³⁹ times SMALLER than the Planck length. It has no physical meaning at any measurable scale.
-
-### 3.3 The G-Uncertainty Problem
-
-G = 6.67430(15)×10⁻¹¹ m³ kg⁻¹ s⁻².
-
-The number in parentheses (15) is the standard uncertainty in the last two digits. The relative uncertainty is:
-
-```
-δG/G = 0.00015×10⁻¹¹ / 6.67430×10⁻¹¹ = 2.2×10⁻⁵ = 22 ppm
-```
-
-This makes G the **worst-measured fundamental constant in physics**. Every other constant (c, ℏ, e, α, k_B) is known to parts per billion or better.
-
-GM_Sun is known to ~10 significant figures from planetary ephemerides (DE440, via radar ranging to spacecraft). But:
-
-```
-M_Sun = GM_Sun / G
-```
-
-This division injects G's 22 ppm uncertainty into M_Sun, destroying 5 orders of magnitude of precision. We LOSE information by decomposing GM.
-
-**SDT's approach**: ϟ = v²R/c². No G. No M. No decomposition. No precision loss.
-
-### 3.4 The (p,q) Proton Radius Prediction
-
-From the winding namespace:
-
-```
-R_p = (W+1) ℏ / (m_p c) = 4ℏ / (m_p c)
-```
-
-where W = 3 is the trefoil winding number. This predicts:
-
-```
-R_p = 4 × 1.0546×10⁻³⁴ / (1.6726×10⁻²⁷ × 2.998×10⁸) = 8.412×10⁻¹⁶ m
-```
-
-Measured: 8.414×10⁻¹⁶ m. **Agreement: 0.02%.**
-
-GM cannot predict the proton charge radius. It does not know what a proton IS.
-
----
-
-## 4. Capability Comparison
-
-| Capability | k / ϟ | GM |
-|------------|-------|-----|
-| Describe the proton | **YES** (k=0.546) | NO (GM unmeasurable) |
-| Describe the electron | **YES** (k=137) | NO (GM meaningless) |
-| Describe isolated bodies | **YES** (v and R suffice) | NO (needs orbiter) |
-| Connect nuclear → stellar | **YES** (one formula) | NO (different numbers) |
-| Predict R_p | **YES** (0.02%) | NO |
-| Predict stellar rotation | **YES** (v_rot=πv²/c) | NO |
-| Predict pressure domain | **YES** (r_domain) | NO |
-| Predict orbital dynamics | **YES** (ϟc²=GM) | YES |
-| Need G (22 ppm) | **NO** | YES |
-| Need separate M | **NO** | YES |
-| Need test particle | **NO** | YES |
+## §6 Dependencies
+Upstream: laws.hpp bridge:: · NP27 (1.83c) · EMC04 (R_p delete-test) · APS05 (measured H seat).
+Data: `../GOM14_Koppa_Density_Multiplanet_Consistency/koppa_multiplanet.csv` (cached; cite by
+path; hash at read). Downstream: GOM14 (shares the dataset — GOM02 gates invariance, GOM14 gates
+density-consistency), GOM17/GOM19 (ledger users), website copy (the honest version of the
+"no G" pitch).
 
 ---
 
-## 5. Verdict
-
-GM is ϟ × c². It is a **derived quantity** — the projection of the c-boundary onto the macroscopic measurement scale. Newton found the projection. SDT found the source.
----
-
-## ⑩ Adaptive Execution Protocol
-
-> *It is a bad plan that cannot be altered.* Failures invoke **PIVOT / KILL / OPEN** — never RETRO-PASS or PLUG.
-> See `PROMPT_EXECUTION_PROTOCOL.md`.
-
-### Pre-Run Commitment Block (copy to `RUN_LOG.md` before coding)
+## ⑩ Pre-Run Commitment Block (copy to `RUN_LOG.md` before coding)
 
 ```markdown
-## Pre-Run Commitments — GOM02
-- Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
-- CALIBRATED budget: [0 or list each param — max per §⑤]
-- Engine namespaces: bridge::koppa_*, depth_closure::, no G/M
-- Phase thresholds (committed before run): 0.02%, 0.02%, 0.02%
-- Forbidden retroactive changes: widen tolerances; plug targets; IDENTITY-PASS; local constant namespaces
+## Pre-Run Commitments — GOM02 (2026-07-24 spec)
+- Prompt completion target: [A|B|C]
+- Physics class ceiling: the advantage is a MEASUREMENT claim (P2) + a REACH claim (P3);
+  identities are labeled and never scored
+- CALIBRATED budget: 0
+- Gates: G2a <1e-4 clean-host spread · G2b best-host < 2.2e-5 (beat G) · G2c full distribution
+  · P1 labels as pre-committed · R_p window 0.02%
+- Exclusion rule (frozen now): orbit-quality class only — ring-region moons, captured irregulars
+  with GRADE<B elements; NEVER by residual size
+- Forbidden: scoring identities; "charge radius"; v_rot claim; touching exclusions post-hoc;
+  G/M in-chain; agents.
 ```
 
-### Pivot table (minimum — extend for this investigation)
-
 | Trigger | PIVOT (first) | If pivot fails | Forbidden |
-|---------|---------------|----------------|-----------|
-| Phase 0 sanity check fails | Fix units/engine refs; verify `laws.hpp` symbols | STOP — report blocker | Fit to target |
-| Native mechanism off > committed % | Alternative route in §④; document ADJ-### | **OPEN** or **KILL** hypothesis | RETRO-PASS |
-| `z ≥ 1` in closure formula | Weak-field break (CR10); piecewise or exponential | **OPEN** that regime | Ignore break |
-| Rivals match but SDT doesn't beat | Label **DEGENERATE** honestly | — | Claim Class A |
-| Upstream dependency missing (FLM10, etc.) | **DEFER** phase; cite dependency ID | — | Fake PASS |
-
-### Allowed adjustments
-
-- Finer numerics (mesh, ticks, bracket); phase splits (Na / Nb); filename fix via ADJ entry.
-- Alternative **native** routes already listed in §④ Strategy.
-
-### Disallowed adjustments
-
-- Post-hoc tolerance widening · coefficient plugs · `atomic::`/GM/G in Phase-1 native chain · Snell/reciprocity-only as Fermat PASS.
+|---|---|---|---|
+| CSV schema surprise | inspect header, ADJ-log parse fix | P2 BLOCKED — report | hand-editing data |
+| clean host misses G2a | check element quality (root-2) per dependent, documented | F1 fires — record | residual-based pruning |
+| best host between 2.2e-5 and 1e-4 | report as-is; F2 retraction applies | — | widening G2b |
+| .cpp won't take labels cleanly | new P2 driver script, ADJ-logged | — | skipping the label column |
 
 ---
 
-*GOM02 · upgraded 2026-06-27 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*
+*GOM02 · upgraded 2026-07-24 · the advantage becomes one measured number or it becomes prose;
+the identities get named either way. Newton found the projection; prove the source measures better.*

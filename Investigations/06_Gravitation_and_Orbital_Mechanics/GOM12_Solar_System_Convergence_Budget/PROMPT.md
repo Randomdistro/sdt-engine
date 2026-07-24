@@ -1,103 +1,158 @@
-# GOM12: Complete Convergence Budget of the Solar System — Data/Prompt
+# GOM12: The Solar-System Convergence Budget — a labeled audit, one gated question, and a numerology fence
 
-> **Author:** J. C. Harvey, Melbourne. **Status:** SPEC (upgrade 2026-06-27).
-> **Inherits:** `PERFECT_PROMPT_TEMPLATE.md` §⓪–§⑩ · `PROMPT_EXECUTION_PROTOCOL.md` · §0 anti-creep (R0–R5).
-> **Engine:** `#include <sdt/laws.hpp>` only — no local constant namespaces.
-> **Run:** Pre-commit thresholds in `RUN_LOG.md` before coding; adjust per pivot table (§⑩).
+> **Author:** J. C. Harvey, Melbourne. **Status:** SPEC — **full upgrade 2026-07-24** (supersedes
+> 2026-06-27). **Register/stack status:** PARTIAL on input precision (with GOM10 — clears with
+> ephemeris-grade inputs). **Inherits:** `PERFECT_PROMPT_TEMPLATE.md` ·
+> `PROMPT_EXECUTION_PROTOCOL.md` · HUNTER §0/§G. **Engine:** `#include <sdt/laws.hpp>` only.
+> **Execution: DIRECT ONLY — no agents.** Prior agent-era VERDICT/RUN_LOG/results deleted
+> 2026-07-24 (git-recoverable).
+
 ---
 
-## ⓪ The Golden Rule — five questions (answer before Phase 0)
+## ⓪ The Golden Rule — five questions
 
-1. **What don't we know?** — *(unfilled by the 2026-06-27 bulk template upgrade — write the single measurable gap before the next run)*
-2. **Why does it matter?** — Stack position / downstream blockers (see `INVESTIGATION_STACK.md`).
-3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
-4. **What would prove us wrong?** — §⑧ falsification tests with numeric triggers.
-5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN).
+1. **What don't we know?** — The old spec was a grab-bag; sorted, it contains exactly one gated
+   physical question and a set of labeled audits:
+   **The question (E101/Law II):** does the solar system's total convergence budget BALANCE —
+   i.e. does the summed throughput bookkeeping of the Sun's domain close against the Sun's
+   output (L☉) as Law II requires? This has never been computed with labels on every term.
+   **The audits:** zk² = 1 per body (IDENTITY — consistency print); v(r) = (c/k_☉)√(R_☉/r)
+   across nine planets (CONVERGENCE — Kepler in koppa dress; the PARTIAL to clear at 0.1%);
+   ϟ per body (COMPUTED); planetary convergence cross-contributions at Earth (bookkeeping —
+   are any dynamically significant?); the solar pressure domain r_domain = √(L☉/4πF_CMB) vs
+   the Oort inner edge (CONVERGENT-derivation, E106-linked — its DATA test is INCONCLUSIVE
+   per the campaign firing log and stays that way here).
+   **The fence:** the old "integer patterns in k² ratios between adjacent planets" item is a
+   look-elsewhere trap (resonance numerology). It runs ONLY under a pre-registered protocol or
+   not at all.
+2. **Why does it matter?** — The budget question is Law II's solar-system face: if the ledger
+   does not close, Law II's relay bookkeeping has a hole at the scale we know best; if it
+   closes, the same bookkeeping that runs the CMB relay runs the heliosphere, and E101
+   graduates from spec to computed consistency. The audits feed GOM02's precision case and
+   clear this folder's register PARTIAL.
+3. **How will we find out?** — §④: P1 the audit table with per-row labels (ephemeris-grade);
+   P2 the budget computation with every term's provenance printed; P3 the domain/Oort
+   comparison (factor-2 gate, honest E106 status attached); P4 the fenced pattern-scan
+   (optional, protocol-gated).
+4. **What would prove us wrong?** — §⑧: v(r) failing 0.1% with DE-grade inputs (Kepler-in-koppa
+   broken — bridge defect); the budget failing closure by an order of magnitude with all terms
+   labeled (Law II's solar-system bookkeeping has a named hole — record it; do NOT plug it);
+   planetary cross-terms found significant but contradicting known ephemeris residuals.
+5. **How will we know we're done?** — Dual verdict; the budget ledger printed term by term;
+   the one gated question answered with a closure ratio and its uncertainty.
 
-## DATA REQUIREMENTS
+## §0 Reader's contract
 
-| Body | v_orbital (km/s) | k = c/v | R (m) | Source |
-|------|-------------------|---------|--------|--------|
-| Sun | — (source) | 686.3 | 6.957e8 | IAU 2015 |
-| Mercury | 47.87 | 6263 | 2.440e6 | JPL |
-| Venus | 35.02 | 8563 | 6.052e6 | JPL |
-| Earth | 29.78 | 10066 | 6.371e6 | JPL |
-| Mars | 24.08 | 12451 | 3.390e6 | JPL |
-| Jupiter | 13.07 | 22935 | 6.991e7 | JPL |
-| Saturn | 9.68 | 30969 | 5.823e7 | JPL |
-| Uranus | 6.80 | 44087 | 2.536e7 | JPL |
-| Neptune | 5.43 | 55215 | 2.462e7 | JPL |
+1. **Label every row.** zk²=1 lines print `[IDENTITY]`. v(r) lines print `[CONVERGENCE —
+   Kepler via bridge]`. Budget terms print their provenance (COMPUTED/OBSERVED-anchor/ASSUMED).
+   An unlabeled number is a defect.
+2. **The numerology fence.** The k-ratio pattern scan may run only with: the hypothesis class
+   written first (which ratios, which integer families), the null model stated (how often
+   near-integers occur by chance among 36 pairs), and a Bonferroni-style correction applied.
+   Otherwise §P4 is skipped and the verdict says "not run (fence)". The measured-anchors
+   memory-rule (look-elsewhere BEFORE killing or crowning) applies in both directions.
+3. **No G, no M**; GM = c²R/k² appears once as the bridge conversion check, labeled.
+4. **E106 honesty:** the 20,857 AU domain radius is a clean derivation whose FIRST DATA TEST
+   was negative/ambiguous (osculating-aphelia, campaign firing log 2026-07-23). P3 compares
+   derivations and known structure scales; it may NOT claim observational confirmation while
+   the original-1/a retest (MUST_FETCH F3) is pending.
+5. **Direct only; teed stdout; fresh dated verdict.**
 
-| Quantity | Formula | Purpose |
-|----------|---------|---------|
-| z = 1/k² | Bridge law | Convergence coupling per body |
-| ϟ = R/k² | c-boundary | Size of c-boundary |
-| GM = c²R/k² | Bridge | Equivalence check |
-| Pressure domain | √(L/(4π F_CMB)) | Sun's domain vs Oort cloud |
-| v × r = const? | Kepler check | Verify v ∝ 1/√r across system |
+## §1 Definitions and anchors
 
-## INVESTIGATION PROMPT
+| Quantity | Form/value | Label |
+|---|---|---|
+| k per planet | c/v_orb (DE-grade v) | COMPUTED |
+| z = 1/k² | — | IDENTITY with k |
+| ϟ per body | R/k² (planets: from host-orbit v at surface? NO — from the body's OWN dependents where available; bodies without dependents: v_surf-orbit equivalent, stated) | COMPUTED — the per-body route stated explicitly in-run |
+| v(r) profile | (c/k_☉)√(R_☉/r) | CONVERGENCE gate |
+| r_domain | √(L☉/(4π F_CMB)) = 20,857 AU | DERIVED (E106-linked; data status per contract §4) |
+| L☉ | 3.828×10²⁶ W | OBSERVED-anchor (IAU) |
+| F_CMB | c·u_CMB/4 (laws.hpp:247) | DERIVED-from-anchors |
+| budget closure ratio | Σ(term)/L☉ | THE gated output (P2) |
 
-**Target**: Compute the complete k-hierarchy and convergence budget for the solar system using SDT's bridge law.
+## §④ Phases
 
-### Methodology
+**P0 — Sanity + input upgrade.** DE-grade v_orb, R per body (cited); engine symbols; the ϟ-route
+per body stated (contract table) BEFORE computing.
 
-1. For each planet: compute k from orbital velocity, verify z × k² = 1
-2. Verify v(r) = (c/k_Sun)√(R_Sun/r) for each planet
-3. Compute ϟ (c-boundary) for each body — where does v_orbital = c?
-4. Compute the total convergence budget: sum of all z values → total displacement fraction
-5. Verify: the Sun's pressure domain (r_domain ≈ 20,800 AU) matches the Oort cloud inner edge
-6. Compute convergence contribution of each planet at Earth's orbit → are any significant?
-7. Map the k-hierarchy: Sun → planets → moons → asteroids
+**P1 — The audit table (clears the PARTIAL).** Nine planets × {v_obs, v_pred, k, z, ϟ, zk²}:
+gates — zk² = 1 to machine precision `[IDENTITY]`; v(r) within **0.1%** per planet (DE-grade;
+the old run's misses were input-precision — reproduce-or-explain); bridge conversion check
+GM = c²R/k² vs published GM per body `[conversion, labeled]`.
 
-### Specific predictions
-- Jupiter's convergence contribution at Earth ≈ (R_J/r_JE)² × z_J × (solid angle)
-- Does the combined planetary convergence explain the ~10⁻⁸ residual in Earth's orbit?
-- Does the k² ratio between adjacent planets show integer patterns (E21 from Jovian investigation)?
+**P2 — The budget (the question).** Define the ledger explicitly, then compute:
+- influx: the CMB convergence throughput intercepted by the Sun's domain (from F_CMB and the
+  domain cross-section — each factor labeled);
+- outflux: L☉ (anchor) + solar wind kinetic-energy flux (anchor, ~10⁻⁴ of L☉ — include and
+  label) + the planets' interception bookkeeping (computed; expected tiny — print anyway);
+- closure ratio C = influx/outflux with propagated input uncertainties.
+Pre-registered reading (written before the number): **C within a factor 2 of 1 = Law II
+bookkeeping closes at this scale** (E101 graduates to computed-consistency, CONVERGENCE class);
+C off by 2–10× = structured discrepancy — localise which term, root-sort, report OPEN;
+C off by >10× = Law II's solar face has a named hole — report it plainly, no plugging.
+(Note the honest possibility, stated now: the lumiostasis construction r_domain = √(L☉/4πF_CMB)
+makes interception ≈ output NEAR-TAUTOLOGICALLY at the domain boundary — P2 must check whether
+the closure is an identity of the construction before crediting it as physics. If it is, the
+verdict says IDENTITY, not consistency — the vocal-cords rule applied to ourselves.)
 
-### Success Criteria
-- [ ] z × k² = 1 verified for every planet to machine precision
-- [ ] v(r) = (c/k)√(R/r) reproduces all orbital velocities to < 0.1%
-- [ ] Solar pressure domain matches Oort cloud to within factor of 2
-- [ ] Complete convergence budget tabulated
+**P3 — Domain vs system structure.** r_domain = 20,857 AU printed against: Oort inner-edge
+estimates (2,000–20,000 AU literature band — cite), heliopause (~120 AU — a DIFFERENT boundary,
+say why: particle-wind pressure balance vs radiative), and the E106 status line (contract §4).
+Factor-2 gate against the Oort band's upper region; no confirmation language.
+
+**P4 — OPTIONAL, fenced.** The k-ratio pattern scan under the contract-§2 protocol, or the
+explicit line "not run (fence)".
+
+## §⑧ Falsifiers
+
+| # | trigger | consequence |
+|---|---|---|
+| F1 | zk² ≠ 1 anywhere | algebra bug — STOP |
+| F2 | v(r) > 0.1% with DE inputs | bridge/Kepler defect — escalate (cannot honestly fail) |
+| F3 | P2 closure fails >10× with labeled terms | Law II solar hole — recorded OPEN, unplugged |
+| F4 | P2 closure found tautological | verdict line: IDENTITY-of-construction (not consistency) — the honest downgrade |
+| F5 | P4 run without its protocol | that section VOID |
+
+## §⑨.E Four-root sort
+root-1 (Law II bookkeeping genuinely fails here) · root-2 (anchors: L☉, u_CMB, DE inputs) ·
+root-3 (spec: ledger term-definition ambiguous — fix definition, full re-run) · root-4 (gate
+contraband — none expected).
+
+## §⑤ Outputs
+Fresh `RUN_LOG.md` · re-audited `gom12_convergence_budget.cpp` · `gom12_rerun_<date>.txt` ·
+`GOM12_VERDICT_DIRECT_<date>.md` (audit table + the budget ledger + closure ratio + P3/P4 lines).
+
+## §6 Dependencies
+Upstream: bridge · Law I/II (laws.hpp) · GOM05 (lumiostasis construction — the tautology check
+targets its form). Anchors: IAU L☉, DE ephemerides, FIRAS u_CMB. Siblings: E101 (this computes
+it), E106 (domain data status), GOM02 (audit rows feed the ledger case), GOM10/12 register
+PARTIAL (cleared by P1).
+
 ---
 
-## ⑩ Adaptive Execution Protocol
-
-> *It is a bad plan that cannot be altered.* Failures invoke **PIVOT / KILL / OPEN** — never RETRO-PASS or PLUG.
-> See `PROMPT_EXECUTION_PROTOCOL.md`.
-
-### Pre-Run Commitment Block (copy to `RUN_LOG.md` before coding)
+## ⑩ Pre-Run Commitment Block (copy to `RUN_LOG.md` before coding)
 
 ```markdown
-## Pre-Run Commitments — GOM12
-- Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
-- CALIBRATED budget: [0 or list each param — max per §⑤]
-- Engine namespaces: bridge::koppa_*, depth_closure::, no G/M
-- Phase thresholds (committed before run): 0.1%
-- Forbidden retroactive changes: widen tolerances; plug targets; IDENTITY-PASS; local constant namespaces
+## Pre-Run Commitments — GOM12 (2026-07-24 spec)
+- Prompt completion target: [A|B|C]
+- The one gated question: budget closure ratio C, reading bands 2× / 10× pre-registered,
+  WITH the tautology check (F4) run before any consistency credit
+- CALIBRATED budget: 0
+- Gates: P1 machine-precision identities + 0.1% v(r) · P2 bands + tautology check ·
+  P3 factor-2, no confirmation language · P4 fenced
+- Forbidden: plugging the budget; confirmation language on E106-linked items; unlabeled rows;
+  unfenced pattern-scans; agents.
 ```
 
-### Pivot table (minimum — extend for this investigation)
-
 | Trigger | PIVOT (first) | If pivot fails | Forbidden |
-|---------|---------------|----------------|-----------|
-| Phase 0 sanity check fails | Fix units/engine refs; verify `laws.hpp` symbols | STOP — report blocker | Fit to target |
-| Native mechanism off > committed % | Alternative route in §④; document ADJ-### | **OPEN** or **KILL** hypothesis | RETRO-PASS |
-| `z ≥ 1` in closure formula | Weak-field break (CR10); piecewise or exponential | **OPEN** that regime | Ignore break |
-| Rivals match but SDT doesn't beat | Label **DEGENERATE** honestly | — | Claim Class A |
-| Upstream dependency missing (FLM10, etc.) | **DEFER** phase; cite dependency ID | — | Fake PASS |
-
-### Allowed adjustments
-
-- Finer numerics (mesh, ticks, bracket); phase splits (Na / Nb); filename fix via ADJ entry.
-- Alternative **native** routes already listed in §④ Strategy.
-
-### Disallowed adjustments
-
-- Post-hoc tolerance widening · coefficient plugs · `atomic::`/GM/G in Phase-1 native chain · Snell/reciprocity-only as Fermat PASS.
+|---|---|---|---|
+| P1 0.1% miss | DE-grade input check (root-2) | F2 escalation | widening |
+| P2 term ambiguous | fix ledger definition, ADJ, full re-run | root-3 recorded | quiet redefinition mid-run |
+| P2 closes suspiciously exactly | run F4 tautology check FIRST | IDENTITY verdict | banking it |
+| P3 Oort band unclear | cite the band with sources, gate against upper region | INCONCLUSIVE stated | cherry-picking an edge |
 
 ---
 
-*GOM12 · upgraded 2026-06-27 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*
+*GOM12 · upgraded 2026-07-24 · one real question under the bookkeeping: does the ledger close —
+and if it closes by construction, say that instead. The fence stays up either way.*
