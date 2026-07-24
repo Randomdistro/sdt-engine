@@ -67,6 +67,19 @@ This is the siege engine. The SM takes ~26 numbers from the bench and cannot say
 Every one SDT derives from structure is a place the SM is blind. **Fine-tuning builds this front** — fit
 the structural relation, certify it, validate out-of-sample.
 
+**The whitelist itself is NOT claimed derived — say so plainly (added 2026-07-23 after an external
+audit flagged exactly this).** SDT's inputs are the 8 measured anchors {ℓ_P, c, ℏ, k_B, T_CMB, α,
+m_e, m_p}. **No member of the whitelist has a validated derivation from deeper structure.** That
+statement rests on direct grounds only: no direct-run derivation exists in the repo, and anything
+in that class authored by the agent waves is void either way — **including the FLM06 "Seed
+Theorem" impossibility claim, which is agent-era and equally unconfirmed until re-run directly.**
+Neither "derived" nor "underivable" is banked for any whitelist member; α and m_p/m_e are OPEN
+targets in the table below, not results. The honest banner is therefore **zero FITTED parameters
+downstream of 8 measured inputs** — never "zero inputs." The siege is 26 fitted → 0 fitted, not
+26 → 0 inputs; any prose reading otherwise (including the repo's own "zero-free-parameter"
+shorthand) means *no downstream knob is turned to match a target*, and gets corrected on sight
+where it could read as more.
+
 ### 2a. Parameters the SM inputs — SDT status (honest labels)
 
 | quantity | SM | SDT | status (FIRED & delete-tested 2026-07-23) |
@@ -118,14 +131,18 @@ candidate into the first banked SM kill prosecutable without a telescope.
 
 ## THE PLAN OF ATTACK (sequenced, reproducible)
 
+*(Re-sequenced 2026-07-23 — the Firing log at the foot of this file is controlling; E107 is dead
+on the strict front and no longer appears below.)*
+
 1. **Cash the archival forks first — cheapest decisive tests.**
-   - **E107**: pull existing Jovian H₃⁺ (3.4–4 µm) spectra; measure absolute redshift to ±1 m/s; SDT +6.6 vs GR +3.7. *Pre-register the threshold before touching the data.*
-   - **E105**: stack SOHO/LASCO + Parker sungrazer kinematics; fit the universal G(x); test +6.8% vs zero, universality vs stochastic.
-   - **E106/E108**: Horizons/MPC aphelion clustering at 20,857 AU; Gaia/APOGEE depth-gradient redshift.
+   - **E105**: stack SOHO/LASCO + Parker sungrazer kinematics (`Datasets/MUST_FETCH_2026-07-23.md` F1/F2); test the pre-registered **+6.69%** and the exact G(x) shape vs zero; universality vs stochastic outgassing.
+   - **E106**: fetch **ORIGINAL** 1/a elements (MUST-FETCH F3); pre-commit the pile-up pass/fail *before* opening the data; disambiguate a vs Q.
+   - **E108**: Gaia/APOGEE depth-gradient redshift (MUST-FETCH F4) — gradient form only; the absolute +105 m/s is model-dependent (see Firing log).
    - Each gets a reproducible pipeline + a pre-committed pass/fail written *first*. HUNTER-gated.
 
-2. **Formalize the pre-registered numbers.** E109 (153.3 µm) and E107 (+6.6 m/s) as dated, unfitted
-   prediction notes — priority-stamped before anyone measures. These are the SM-style capstones.
+2. **Formalize the pre-registered numbers.** E109 (153.26 µm, dated 2026-07-18) and E105 (+6.69%,
+   `E105_Sungrazer_Occlusion_Saturation_Terminal_Kick/E105_PRE_REGISTRATION_2026-07-23.md`) —
+   priority-stamped before anyone measures. These are the SM-style capstones.
 
 3. **Build the parameter ledger as a living document** — the "~26 → N" table, each row with an explicit
    delete-test proving no SM input was smuggled in. Fine-tune the OPEN targets (α, m_p/m_e) honestly:
@@ -136,7 +153,8 @@ candidate into the first banked SM kill prosecutable without a telescope.
 
 5. **Quarantine the graveyard** — listed above with reasons, so no dead claim resurfaces as ammunition.
 
-**The order that actually sinks it:** E107 is the single best shot — run it. In parallel, the ledger is the
+**The order that actually sinks it:** E105 is the spearhead; E106's original-1/a retest is the nearest
+live data test; the W+1-from-geometry proof is the nearest desk kill. In parallel, the ledger is the
 slow siege that takes the walls. The forks win battles; the ledger wins the war.
 
 ---
