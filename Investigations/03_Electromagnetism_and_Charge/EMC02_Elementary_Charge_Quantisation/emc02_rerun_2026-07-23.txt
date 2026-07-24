@@ -1,0 +1,162 @@
+﻿╔════════════════════════════════════════════════════════════════╗
+║ EMC02: Elementary Charge Quantisation from Lattice Topology    ║
+║ Task: Derive e from {ℓ_P, c, ℏ, k_B, T_CMB, d=3}             ║
+╚════════════════════════════════════════════════════════════════╝
+
+RESEARCH SETUP:
+  Whitelist: ℓ_P = 1.616255e-35 m
+             c = 2.997925e+08 m/s
+             ℏ = 1.054572e-34 J·s
+             k_B = 1.380649e-23 J/K
+             T_CMB = 2.725500 K
+             d = 3
+  P_conv = 2.460822e+48 Pa (from Law I)
+  Target: e_measured = 1.602177e-19 C
+
+
+=== DIMENSIONAL ANALYSIS: e from Whitelist ===
+Available: {ℓ_P, c, ℏ, k_B, T_CMB, d=3}
+
+Whitelist dimensions:
+  ℓ_P: [m]           Planck length
+  c:   [m/s]         Speed of light
+  ℏ:   [J·s]         Reduced Planck constant
+  k_B: [J/K]         Boltzmann constant
+  T_CMB: [K]         CMB temperature (dimensionless count)
+  d:   [-]           Spatial dimension (dimensionless)
+
+Target dimension: [C] = [A·s]
+
+Possible constructs:
+  ℏ c = 3.161527e-26 J·m
+  k_B T_CMB = 3.762959e-23 J
+  P_conv ℏ c = 7.779954e+22 J²/m²
+  √(P_conv ℏ c) = 2.789257e+11 J/m
+
+PROBLEM: No dimension-preserving combination of whitelist
+constants yields [C] without knowing ε₀ or k_e (which encode e).
+
+INSIGHT: The dimensional closure requires either:
+  (1) A lattice constant with dimension [C], OR
+  (2) A mechanism that produces [C] from geometric quantisation
+
+HYPOTHESIS: e arises from the topology, not from pressure × volume.
+The winding number W and linking number Lk determine the charge
+through the coupling between the vortex topology and the lattice.
+This is similar to how magnetic charge would appear in a monopole.
+
+
+=== CANDIDATE 1: e² from Convergence Pressure × Volume ===
+Hypothesis: e² = k × P_conv × ℓ_P⁴ / ε₀
+where k is dimensionless (trying k = 1, 2π, 4π, π², etc.)
+
+Pressure × volume product:
+  P_conv = 2.460822e+48 Pa
+  ℓ_P⁴ = 6.824008e-140 m⁴
+  P_conv × ℓ_P⁴ = 1.679267e-91 J·m
+  ε₀ = 8.854188e-12 C²·m/(N·m²) = 8.854188e-12 F/m
+  P_conv × ℓ_P⁴ / ε₀ = 1.896579e-80
+  √(P_conv × ℓ_P⁴ / ε₀) = 1.377163e-40 [attempt at e]
+  e_measured = 1.602177e-19 C
+
+Testing e² = k × P_conv × ℓ_P⁴ / ε₀:
+  k =    1: e = 1.377163e-40 C, error = -100.000%
+  k =    2: e = 1.947603e-40 C, error = -100.000%
+  k =   π: e = 2.440959e-40 C, error = -100.000%
+  k =  2π: e = 3.452037e-40 C, error = -100.000%
+  k =  4π: e = 4.881917e-40 C, error = -100.000%
+  k = π²: e = 4.326486e-40 C, error = -100.000%
+
+From coulomb identity: k_e e² = α ℏ c
+  α ℏ c = 2.307078e-28 J·m
+  e = √(α ℏ c / k_e) = 1.602177e-19 C
+  Relative error: -0.000%
+
+OBSERVATION: Direct pressure-volume approach fails.
+The coupling k_e e² ≡ α ℏ c is a definitional identity,
+and α = r_e / λ_C_e is the W=1 torus wake-to-quantum ratio.
+
+=== CANDIDATE 2: e from Linking Number Topology ===
+Hypothesis: e = e₀ × √Lk where Lk is electron-proton linking number
+
+STATUS: DEFERRED to PPT09
+Requires computation of linking number for hydrogen bound state.
+Lk should relate to the winding intertwine between W=1 and W=3 topologies.
+
+Placeholder: If Lk = 3 (trefoil like proton),
+  √Lk = 1.732051
+  Required e₀ = e / √Lk = 9.250171e-20 C
+  Can e₀ be expressed from {ℓ_P, c, ℏ, k_B, T_CMB}? UNKNOWN.
+
+
+=== CANDIDATE 3: e from W=1 Boundary Radius (Electron Wake) ===
+Hypothesis: r_e = f(W=1, lattice geometry) ⟹ e
+
+KEY CONSTRAINT: Coulomb Identity
+  k_e e² = α ℏ c (exact, from SDT force law)
+  α = r_e / λ_C_e = r_e × m_e c / ℏ
+  Therefore: e² = α ℏ c / k_e
+
+Measured values:
+  r_e = 2.817940e-15 m (classical electron radius)
+  m_e = 9.109384e-31 kg
+  ℏ = 1.054572e-34 J·s
+  c = 2.997925e+08 m/s
+  k_e = 8.987552e+09 N·m²/C²
+  α = 7.297353e-03 (dimensionless)
+
+From coulomb identity:
+  e = √(α ℏ c / k_e) = 1.602177e-19 C
+  e_measured = 1.602177e-19 C
+  Relative error: -0.0000000307%
+
+Electron radius from winding ratio:
+  g(W=1) = r_e × m_e c / ℏ = α (exact identity)
+  r_e = α ℏ / (m_e c)
+  r_e_computed = 2.817940e-15 m
+  r_e_measured = 2.817940e-15 m
+  Match: 0.000%
+
+CIRCULARITY DETECTION:
+  r_e is DEFINED as α × ℏ / (m_e c) in the standard model.
+  We cannot derive e from r_e without already knowing α.
+  And PPT02 proved α cannot be derived from W=1 torus geometry alone.
+  Therefore, Candidate 3 REQUIRES solving PPT02 first.
+
+ALTERNATIVE: e as a flux quantum from lattice
+  Magnetic flux quantum: Φ₀ = h / (2e) = (2π ℏ) / (2e) = π ℏ / e
+  Electric flux quantum: e = ?
+  If e is the fundamental charge quantum, it appears in:
+    (1) Coulomb coupling: k_e e² = α ℏ c
+    (2) Magnetic moment: μ = e ℏ / (2m)
+    (3) Flux quantisation: ψ ∝ exp(i e φ / ℏ c)
+
+
+╔════════════════════════════════════════════════════════════════╗
+║ CONCLUSION FROM EMC02 ANALYSIS                                 ║
+╚════════════════════════════════════════════════════════════════╝
+
+CANDIDATE 1 (Pressure × Volume): FAILS dimensional analysis.
+  The product P_conv × ℓ_P⁴ / ε₀ is dimensionally incorrect
+  and requires knowing ε₀ (which encodes e).
+
+CANDIDATE 2 (Linking Number): DEFERRED to PPT09.
+  Requires topological linking number computation for hydrogen.
+  If Lk exists, e = e₀ × √Lk could work if e₀ is lattice-derived.
+
+CANDIDATE 3 (W=1 Boundary): REQUIRES solving PPT02 first.
+  The coulomb identity e² = α ℏ c / k_e is exact but circular.
+  r_e = α ℏ / (m_e c) defines α, and PPT02 showed α is a Tier-1 input.
+
+ROOT CAUSE: The elementary charge e appears fundamentally through
+the coupling between the vortex topology (winding W, linking Lk)
+and the spation lattice impedance. Without a lattice-scale
+"impedance quantum" or "flux quantum" with dimension [C],
+e cannot be dimensionally derived from {ℓ_P, c, ℏ, k_B, T_CMB}.
+
+RECOMMENDATION:
+  1. Complete PPT09: compute Lk(hydrogen) explicitly.
+  2. Define lattice impedance Z_lattice = P_conv / (c × ρ_spation).
+  3. Test if e = f(Lk, Z_lattice, W) produces correct magnitude.
+  4. If successful: e becomes Class B (derived from topology).
+  5. If unsuccessful: e remains Tier-1 input (Class X).
