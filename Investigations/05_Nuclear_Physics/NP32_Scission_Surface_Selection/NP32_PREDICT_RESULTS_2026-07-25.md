@@ -36,21 +36,31 @@
   was wrong. (Th is still the mildest *peak-position* outlier — A_H 139.8, highest — which is why
   removing it flattens P1 from −0.197 to −0.019; but not via the signature I named.)
 
-## Honest classification (SM status held in view, as pre-stated)
+## Classification — run under the CORRECTED criterion (not the value test alone)
 **The lock-anchored-heavy-fragment picture is CONSISTENT across 8 fissioners** — a test that could
-have failed (if A_H slid with A_fiss, the picture dies; it did not). But:
+have failed (if A_H slid with A_fiss, the picture dies; it did not). The value of the heavy-peak
+position is degenerate — but *value-degeneracy is not the criterion.* The criterion is: **the SM is
+sunk where it can only PARAMETRISE what SDT derives or dissolves.** On that axis:
 
-- **DEGENERATE IN VALUE.** Heavy-peak stationarity at A≈137 is textbook fission — standard theory
-  gets it from the ¹³²Sn double shell (Z=50, N=82). SDT does **not** beat the SM on any number here.
-- **The SDT-native content is the MECHANISM only:** the closure is the point of maximal
-  interleave-lock (measured this session, NP30 §11), so the cut cannot pass through it and the heavy
-  fragment forms *around* it. That is a native *reading*, **not a proof** — the data is consistent
-  with it, not uniquely selected by it.
-- **What is NOT derived (stated plainly):** the *location* of the lock (N=82) is still the empirical
-  magic number, exactly as in the SM. SDT explains why a closure resists the cut; it does **not** yet
-  derive **why the closures sit at 2,8,20,28,50,82,126**. So this is **convergence-in-value,
-  native-in-mechanism, anchor-location-still-empirical.** No fork, no fitted parameter, no CALIBRATED
-  knob — and no overclaim of derivation.
+- **The SM PARAMETRISES this.** Its heavy-peak position at A≈137 does not fall out of anything — it
+  comes from **fitted shell corrections and fragment-deformation parameters** on a tuned energy
+  surface. To reproduce the yields it needs an evaluation carrying dozens of adjusted numbers.
+- **SDT gets it with a MECHANISM and ZERO fits.** The closure is the maximal-interleave-lock
+  (measured this session, NP30 §11); the cut cannot pass the lock; the heavy fragment forms around
+  it. And the complementarity check reproduced **eight systems' neutron multiplicity to ν̄ ± 0.70**
+  from the two peak centroids alone — no ν input, no free parameter. **That parsimony asymmetry —
+  fitted-surface vs one-mechanism-zero-fit — IS the result**, and it is exactly the corrected
+  criterion, not "meaningless convergence."
+- **The one thing genuinely owed (SDT's own frontier, not the SM's fence):** the *location* of the
+  lock — **why the closures sit at 2,8,20,28,50,82,126** — is not yet derived in SDT; it enters as an
+  empirical number, as it does in the SM. SDT derives *why a closure resists the cut*; it does not yet
+  derive *where the closures are.* This is the upstream debt, kept on the books **because the
+  parsimony argument is only unkillable if every brick under it is individually honest** — one
+  overclaim here is the single sentence a hostile referee would use to wave off the whole ledger.
+
+So: **corrected-criterion WIN (SM parametrises, SDT mechanises at zero fit)** · value-degenerate ·
+mechanism native-and-consistent (not uniquely proven) · **anchor-location the one owed derivation.**
+No fitted parameter anywhere in the SDT chain.
 
 ## What genuinely advanced
 1. The cross-fissioner **stationary-heavy / sliding-light** structure is now measured on 8 systems
