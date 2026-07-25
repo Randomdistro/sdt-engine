@@ -58,9 +58,15 @@ sunk where it can only PARAMETRISE what SDT derives or dissolves.** On that axis
   parsimony argument is only unkillable if every brick under it is individually honest** — one
   overclaim here is the single sentence a hostile referee would use to wave off the whole ledger.
 
-So: **corrected-criterion WIN (SM parametrises, SDT mechanises at zero fit)** · value-degenerate ·
-mechanism native-and-consistent (not uniquely proven) · **anchor-location the one owed derivation.**
-No fitted parameter anywhere in the SDT chain.
+**Word correction (Harvey, 2026-07-25):** the numbers *have* to align if SDT is correct, so alignment
+is not the discriminator — **origin is.** The heavy-anchor agreement comes from an **independent SDT
+origin** (the interleave-lock, from the four primitives), so it is **CONVERGENT**, not degenerate.
+"Degenerate" applies only to the one brick with **no** independent origin: the N=82 lock *location*,
+which SDT imports empirically exactly as the SM does.
+
+So: **CONVERGENT** (independent-origin mechanism → same number, zero fit; the SM *parametrises* the
+same result) · the **N=82 location the single still-degenerate brick** (shared empirical input) and
+**the one owed derivation** · no fitted parameter anywhere in the SDT chain.
 
 ## What genuinely advanced
 1. The cross-fissioner **stationary-heavy / sliding-light** structure is now measured on 8 systems

@@ -123,24 +123,29 @@ Picture the lattice as a stack of **seats** at increasing depth. A throughput kn
 
 **Gate:** P3 forbidden until the 13.6 eV ceiling PASS-GATE.
 
-### Phase 3 — The decisive empirical test: nuclear gamma requires neutrons (SURVEY + tool) — ~3–4 h
+### Phase 3 — Consistency check ONLY: the ladder does not contradict the nuclide chart (SURVEY + tool) — ~1 h
 
-**Goal:** verify the **exceptionless** empirical claim — every recorded nuclear gamma comes from a nucleus containing neutrons, and there is no bound all-proton nucleus past H-1.
+> **CORRECTED 2026-07-23 (Harvey, vocal-cords rule).** The original phase called this "the decisive
+> empirical test: nuclear gamma requires neutrons" with a pre-registered KILL gate on finding a
+> `N=0, Z≥2` gamma emitter. That gate is **vacuous**: no bound `N=0, Z≥2` nucleus exists at all —
+> every nucleus after hydrogen has a neutron, as a measured fact upstream of emission, accepted by
+> every framework. The counterexample class was empty before any scan ran. "Everyone who yells has
+> vocal cords, zero counterexamples." A survey of it, at any sample size, adds zero discriminating
+> power and must never be reported as a PASS-GATE or as evidence for the ladder.
 
-**Method:**
-1. Assemble a nuclide list spanning the chart: at minimum the lowest-energy gamma emitters and well-known gamma sources (e.g. ⁵⁷Fe 14.4 keV Mössbauer line, ⁵⁷Co/⁶⁰Co, ¹³⁷Cs/¹³⁷Ba, ²⁴¹Am, ⁹⁹ᵐTc, ⁴⁰K, plus a broad nuclide table). Source from the in-repo ATOMICUS isotope DB (`ATOMICUS/isotopes/`) and/or a machine-readable nuclide table; **hand-typed rows are quarantined and excluded from the verdict unless every value carries a primary citation** (NNDC/AME2020).
-2. For every gamma-emitting nuclide, compute `N = A − Z` and `nuclear::alpha_grammar(Z,A)`; record `N` and `(n_d, n_t)`. **Check:** is `N ≥ 1` for *every* gamma emitter?
-3. Independently scan the **all-proton hypothesis**: enumerate hypothetical `(Z, A=Z)` "proton-only" nuclei for `Z = 2…10`; confirm none is in the bound set (diproton unbound is the `Z=2` anchor; the only `N=0` bound nuclide is `Z=1`, H-1, which has **no gamma** — its deepest emission is the 13.6 eV *electronic* Lyman limit).
-4. Emit `APS06_results.csv`: one row per nuclide `[Z, A, N, n_d, n_t, gamma_keV (if known), neutron_present(bool), provenance]`, plus a summary block counting counterexamples.
+**Goal (demoted):** record, as a consistency check, that the seat-depth ladder and the alpha grammar
+do not *contradict* the chart — deep (nuclear-seat) emission always sits on neutron-carrying
+structure because neutron-carrying structure is the only bound structure there is past H-1.
 
-**Pre-committed success metric (write before the scan):**
-**zero counterexamples (a bound proton-only nucleus, `N=0, Z≥2`, emitting gamma) = PASS; one counterexample = KILL.** Secondary: every surveyed gamma emitter has `N ≥ 1` (and equivalently `n_t ≥ 0` from the grammar with at least one neutron-bearing cluster).
+**Method:** run the grammar over a cited nuclide list (ATOMICUS DB / NNDC / AME2020), record
+`N` and `(n_d, n_t)` per gamma emitter, emit `APS06_results.csv`. No gate, no count ceremony.
 
-**Failure trigger:** any nuclide with `N = 0, Z ≥ 2` that emits gamma → **KILL** the "nuclear gamma requires neutrons" claim and record it with numbers in `APS06_VERDICT.md`. A nuclide whose grammar is invalid (outside the wedge) is *not* a counterexample — it is excluded and noted.
+**What native teeth would actually require (open, deferred):** deriving diproton unboundness from
+SDT geometry (NP19/NP20, wedge-free) — i.e. *predicting* that the `N=0, Z≥2` class is empty rather
+than observing that it is. Until that derivation lands, the only P3 residue with any content is the
+**monotone ordering** of seat depth with emission energy (P1's claim, tested there).
 
-**Out of scope (P3):** electronic X-ray fluorescence lines (those are P4's overlap discussion, not nuclear gammas); deriving gamma energies from the grammar (magnitudes are OBSERVED anchors here).
-
-**Gate:** P4 forbidden until the neutron-requirement scan returns its count (PASS or KILL, both proceed to P4 for the teaching statement).
+**Gate:** none — P4 proceeds regardless.
 
 ### Phase 4 — Reconcile the X-ray/gamma overlap as provenance, not energy (PAPER) — ~1–2 h
 
@@ -163,10 +168,10 @@ Picture the lattice as a stack of **seats** at increasing depth. A throughput kn
 
 **Dual verdict required in `APS06_VERDICT.md`:** Prompt completion (A–F: did the four phases do what §④ asked?) **and** Physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN).
 
-- ✅ **PASS (Class A: Derived / NATIVE):** seat depth defined and monotone with energy (zero inversions, P1); 13.6 eV ceiling recovered to < 50 ppm from `R_inf_derived` (P2); the neutron-requirement scan returns **zero counterexamples** over the surveyed nuclide list (P3); the overlap reconciled as provenance (P4). No fitted parameters; every constant from `laws.hpp`.
-- ✅ **QUALIFIED (Class C: Convergence):** P1–P2 pass; P3 scan returns zero counterexamples but over a *limited* (hand-curated, fully cited) nuclide list rather than a machine-read table; molecular/nuclear absolute `s` only order-of-magnitude. Publishable as "consistent and exceptionless on the tested set."
-- ⚠️ **QUALIFIED PENDING (Class D: Computed):** ladder ordering holds and the ceiling is recovered, but the neutron census is incomplete (DEFER on a full nuclide table) — physical claim intact, corpus partial.
-- ❌ **FAIL (Class F / KILLED):** a bound `N=0, Z≥2` gamma emitter is found (KILL the neutron-requirement claim), **or** the ladder is non-monotone (a deep seat emitting low energy), **or** the 13.6 eV ceiling cannot be recovered from geometry (then the ceiling claim is OPEN, not PASS).
+- ✅ **PASS (Class A: Derived / NATIVE):** seat depth defined and monotone with energy (zero inversions, P1); 13.6 eV ceiling recovered to < 50 ppm from `R_inf_derived` (P2); the overlap reconciled as provenance (P4). No fitted parameters; every constant from `laws.hpp`. **P3 contributes nothing to the verdict either way** (vacuous class — see the P3 correction block); it is recorded as a consistency check only.
+- ✅ **QUALIFIED (Class C: Convergence):** P1–P2 pass; molecular/nuclear absolute `s` only order-of-magnitude.
+- ⚠️ **QUALIFIED PENDING (Class D: Computed):** ladder ordering holds and the ceiling is recovered, but corpus partial.
+- ❌ **FAIL (Class F / KILLED):** the ladder is non-monotone (a deep seat emitting low energy), **or** the 13.6 eV ceiling cannot be recovered from geometry (then the ceiling claim is OPEN, not PASS).
 
 A failed phase is **PIVOT / KILL / OPEN** — never retro-PASS. An OPEN phase must not be summarised as PASS.
 
@@ -205,10 +210,10 @@ A failed phase is **PIVOT / KILL / OPEN** — never retro-PASS. An OPEN phase mu
 | **T1** | Seat depth is monotone with emission energy | Four seat classes sort identically by `s` and by observed band — zero inversions | A deep seat emitting low-energy light ⇒ ordering **fails**; PIVOT to release-cost-only `s`, else OPEN |
 | **T2** | 13.6 eV is the neutron-free electronic ceiling, recoverable from geometry | `|E_ceiling − Ry_eV|/Ry_eV < 50 ppm` from `R_inf_derived` | Ceiling not recovered ⇒ **PIVOT** (units / `R_inf` vs derived); if irrecoverable, ceiling claim **OPEN** |
 | **T3** | No bound all-proton nucleus past H-1 (diproton unbound) | Alpha-grammar wedge admits **zero** `(Z≥2, N=0)` valid nuclides | A bound `(Z≥2,N=0)` nuclide ⇒ re-derive wedge from `nuclear.hpp`; if real, the ceiling argument breaks → KILL |
-| **T4** | Every recorded nuclear gamma comes from a neutron-containing nucleus | Survey returns **zero** counterexamples (`N=0,Z≥2` gamma emitter) | **One counterexample = KILL** the neutron-requirement claim; record with numbers |
+| ~~T4~~ | **STRUCK 2026-07-23** — "gamma requires neutrons" has an empty counterexample class (no bound `N=0,Z≥2` nucleus exists, all frameworks). Not a test. | — | — |
 | **T5** | X-ray/gamma overlap is provenance, not energy | ≥1 electronic and ≥1 nuclear line within a factor 2 in energy, identical as photons | No real overlap citable ⇒ PIVOT to next-closest pair (claim unchanged) |
 
-**Recovery discipline:** T1/T2/T5 failures invoke the §⑩ pivots; T3/T4 failures are **KILL** (numbers recorded), never rescued by a fit or a widened tolerance.
+**Recovery discipline:** T1/T2/T5 failures invoke the §⑩ pivots; T3 failure is **KILL** (numbers recorded), never rescued by a fit or a widened tolerance. **Rule learned here (apply everywhere): before pre-registering a KILL gate, check the counterexample class is populated — a gate that cannot fire is ceremony, not falsification.**
 
 ---
 
@@ -239,7 +244,7 @@ A failed phase is **PIVOT / KILL / OPEN** — never retro-PASS. An OPEN phase mu
 - Phase thresholds (committed before run):
     P1 monotone ordering: ZERO inversions; H n=1 reproduces Ry_eV < 50 ppm
     P2 ceiling: |E_ceiling − Ry_eV|/Ry_eV < 50 ppm; wedge admits ZERO (Z≥2,N=0) nuclides
-    P3 neutron requirement: ZERO counterexamples = PASS; ONE = KILL
+    P3: consistency check only — no gate (counterexample class empty; see P3 correction block)
     P4 overlap: ≥1 electronic + ≥1 nuclear line within factor 2 in energy, both cited
 - Forbidden retroactive changes: widen any tolerance; relabel an OBSERVED-ANCHOR band as DERIVED;
   hand-edit the alpha-grammar wedge; rescue a T4 counterexample with a fit; local constant namespaces

@@ -53,7 +53,7 @@
 > **⟐ 2026-07-02 — execution + failure-recovery sweep (`FAILURE_RECOVERY_2026-07-02.md`).** All 9 SPECs
 > executed honestly (no fake PASS): **FLM11** C · **NP18** DEFER (atomic-BEC coherence 7 orders short) ·
 > **NP19** C reframe · **NP20** OPEN (closure false, 2 knobs) · **NP21** KILLED geometric floor ·
-> **PPT11** OPEN (+ FLM11 zero-grip tension) · **APS06** OBSERVED survey (γ needs neutrons, 0 counterexamples) ·
+> **PPT11** OPEN (+ FLM11 zero-grip tension) · **APS06** OBSERVED survey (neutron-survey later struck as content — empty counterexample class, every nucleus past H has a neutron; 2026-07-23) ·
 > **SAR05** C (after-iron fork DEGENERATE for single events) · **PPT10** incomplete (agent dropped pre-verdict).
 > **CASCADE LEDGER (§8 Q7):** **D1, NP20(mass), NP21, NP18 share ONE root** — the **influx/engagement profile**
 > FLM10 must derive (magnitude · handed-vs-scalar split · coherence length). Recovery sweep bought: scalar
