@@ -1,5 +1,12 @@
-# Thermodynamics & Statistical Mechanics — SDT lattice statistics (TD01–TD08)
+# Thermodynamics & Statistical Mechanics — SDT lattice statistics (TD01–TD09)
 
+> **DIRECT RE-RUN 2026-07-26** (see `../DIRECT_RERUN_FD_TD_2026-07-26.md` and each
+> `TD##_VERDICT_DIRECT_2026-07-26.md`): agent-era verdict layer deleted and re-earned in the
+> main loop. **TD09 added (Harvey 2026-07-26): the Freedom Ledger of Binding** — second law
+> restated as freedom-seeking (no math change); gate PASSED: ledger flip T = 0.0624 MeV lands
+> inside the measured BBN deuterium bottleneck (0.06–0.09 MeV), zero fits; Saha-convergent,
+> disclosed. TD01's arrow-of-time debt RE-POSED as the freedom-climb theorem.
+>
 > **Author:** J.C. Harvey, Melbourne. **Status:** EXECUTED — TD01 (earlier run, Class C qualified);
 > **TD02–TD08 executed 2026-07-03** (see each `TD##_VERDICT.md`): all land **CONVERGENCE-class**
 > (TD07/TD08 partially NULL-SDT-CONTENT; TD05's count-ledger KILLED at fixed density), capped by the

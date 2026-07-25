@@ -45,7 +45,7 @@ So FLM06 succeeds **iff** an ℏ/G/ℓ_P-free construction yields
 
 ## 2. The attempt — every SDT-native candidate for N (measured)
 
-`cq42_closure.js`, run 2026-06. Each candidate is flagged for hidden
+`flm06_closure.js`, run 2026-06. Each candidate is flagged for hidden
 ℏ / G / ℓ_P contamination. **No number below is asserted that the script
 did not print.**
 
@@ -98,7 +98,7 @@ The Clearing route (§2) is the wrong subdivision. Following Planck's
 *actual* logic — the floor is where a body's two characteristic lengths
 coincide — but written in SDT's koppa relations
 (`ϟ = v²R/c² = R/k²`, `zk² = 1`, `v = (c/k)√(R/r)`) gives a far cleaner
-form. Run: `cq42_koppa.js`, measured, reproduced.
+form. Run: `flm06_koppa.js`, measured, reproduced.
 
 **The two lengths of any body, in SDT terms:**
 - its **koppa** (c-boundary, where v→c): `ϟ = v²R/c²` — the engine's
@@ -149,7 +149,7 @@ point of the exercise.
 
 ## 3c. Phase 3 — FIVE ROUTES, all in SDT primitives (the one-seed proof) ✓
 
-`cq42_five_routes.cpp` (consumes `laws.hpp`; output `cq42_five_routes_results.txt`;
+`flm06_five_routes.cpp` (consumes `laws.hpp`; output `flm06_five_routes_results.txt`;
 5/5 exact, exit 0). ℓ_P is reachable five physically-distinct ways. Written in SDT
 primitives ONLY — Newton's G replaced by its SDT identity `G = ℓ_P²c³/ℏ` — every
 route collapses to `ℓ_P = ℓ_P`, exactly.
@@ -226,11 +226,11 @@ locate the missing seed exactly; both are done.
 
 ## 6. Files
 
-- `CQ42_CLEARING_GEOMETRY_FLOOR.md` — this file (measured negative + theorem).
-- `cq42_closure.js` — the closure attempt (all N candidates, contamination flags).
-- `cq42_koppa.js` — Phase 2 koppa restatement ℓ_P = √(ϟ·ƛ), mass-independent.
-- `cq42_five_routes.cpp` — Phase 3 (§3c): five routes to ℓ_P in SDT primitives;
-  the precision-flip one-seed proof. Consumes `laws.hpp`; out `cq42_five_routes_results.txt`.
+- `FLM06_CLEARING_GEOMETRY_FLOOR.md` — this file (measured negative + theorem).
+- `flm06_closure.js` — the closure attempt (all N candidates, contamination flags).
+- `flm06_koppa.js` — Phase 2 koppa restatement ℓ_P = √(ϟ·ƛ), mass-independent.
+- `flm06_five_routes.cpp` — Phase 3 (§3c): five routes to ℓ_P in SDT primitives;
+  the precision-flip one-seed proof. Consumes `laws.hpp`; out `flm06_five_routes_results.txt`.
 - Inputs: `R_CMB`, `T_CMB`, `T_rec`, `z_rec` from `laws.hpp::measured`; targets
   `ℓ_P`, `N_engine` from the same. ℏ, G used only as contamination references.
 

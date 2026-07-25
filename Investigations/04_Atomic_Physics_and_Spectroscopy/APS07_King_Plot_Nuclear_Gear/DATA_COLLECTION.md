@@ -226,12 +226,17 @@ linear at that precision. Knollmann et al. PRA: 729/733 nm shifts. (Superseded b
 5. **Mass tables were wrong** (Yb-168 off by ~2×10⁻⁹) — Penning-trap masses are now a
    mandatory input.
 
-## 6. Open hooks for the SDT/grammar analysis (NOT yet performed — next step)
+## 6. Open hooks for the SDT/grammar analysis
 
-- Sort every residual by **triton count n_t** instead of neutron number. Ca chain spans
-  n_t = 0 → 8 (including the triton-free 40); Yb chain spans n_t = 28 → 36 crossing
-  **n_t = n_d at A=174**. Question: do the "second source" (Yb) and "polarization"
-  (Ca) residuals organize on the grammar coordinates?
+- ~~Sort every residual by **triton count n_t** instead of neutron number.~~ **Bare SORT struck
+  2026-07-25** (see `APS07_VERDICT_DIRECT_2026-07-25.md`): at fixed Z, n_t is monotone in N, so
+  the re-sort reproduces the N-sort — order adds nothing. **The landmark content stays live**:
+  the neutron ledger runs N = 2 + n_d + 2·n_t (each triton carries TWO neutrons — the triton
+  pool moves at 2n while the count steps by one), and the grammar picks absolute positions no
+  count-sort distinguishes — the triton-free anchor n_t = 0 (Ca-40; the 40→42 first-triton step
+  is the opposite-sign residual), the **n_t = n_d crossing at 2A = 5Z − 2 → A = 174 for Yb**, and
+  EC-lineage offsets. Cross-element landmark test + the magnitude targets (kHz scale at the Ca
+  46/48 flip, δ⟨r⁴⟩ per pair-step from trefoil packing, naming Yb's second source) are the moves.
 - The Λ₊ zigzag vs Λ₋ curve basis is exactly a "pairing-parity vs smooth-drift"
   decomposition — compare with grammar parity (even/odd deuteron-triton exchange steps).
 - EC-grammar isotopes (He-3 core) are ODD-Z/odd-A mostly — excluded from all current

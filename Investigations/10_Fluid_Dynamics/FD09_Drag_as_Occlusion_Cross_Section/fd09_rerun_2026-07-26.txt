@@ -1,0 +1,68 @@
+============================================================
+ FD09 - Drag as an Occlusion Cross-Section  (Law III shadow)
+ Author: James Christopher Tyndall, Melbourne
+============================================================
+
+[PHASE 1] Occlusion-drag integral (mechanism, C1)
+  F_D = C_D . (1/2 rho v^2) . A ,  A = pi R^2 = occluded shadow
+  R=0.01 m  ->  A = pi R^2 = 3.141593e-04 m^2 ; engine solid_angle(R,1m)=3.141593e-04 sr
+  at v=0 : q=1/2 rho v^2 = 0  ->  F_D = 0  (balanced bombardment) OK
+  free parameters introduced by Phase 1: 0  -> C1 PASS
+
+[PHASE 2] Low-Re Stokes limit  (F = 6 pi mu R v ; C_D = 24/Re)
+  SDT NATIVE   : drag ~ mu.R.v scaling (relay diffusion)  [Class C]
+  CORRELATION  : prefactor 6*pi = full Stokes-flow soln (4pi skin + 2pi form)
+  test sphere R=5.0e-04 m, v=1.0e-03 m/s in water@20C -> Re=0.9962
+  F(6piMuRv)   = 9.443628e-09 N
+  F(C_D=24/Re) = 9.443628e-09 N   (must equal above)
+  ratio        = 1.0000000000  (1.0 = exact identity 6pi <-> 24/Re)
+  prefactor used = 18.8495559215 ; 6*pi = 18.8495559215 ; |dev| = 0.00e+00 %  -> C2 OK
+
+[PHASE 3/4] Form plateau + drag crisis : composite C_D(Re)
+  (composite curve is a CORRELATION/reproduction target, not SDT-derived)
+    Re           C_D(model)     C_D(ref)       regime    
+    0.1          247.4          240            Stokes    
+    1            27.6           24             Stokes    
+    10           4.146          4.1            intermed. 
+    100          1.07           1.07           intermed. 
+    1e+03        0.4541         0.47           plateau   
+    1e+04        0.4608         0.41           plateau   
+    1e+05        0.4694         0.47           plateau   
+    3e+05        0.2893         0.2            crisis    
+    5e+05        0.127          0.1            post-crisis
+    1e+06        0.1401         0.18           post-crisis
+
+  Phase-3 plateau C_D(Re=1e4)=0.461  in [0.4,0.5]? YES
+  Phase-4 crisis: pre C_D(1e5)=0.469 ; min C_D=0.125 at Re=5.62e+05
+  crisis located within x2 of 3e5? YES ; post-crisis C_D in [0.07,0.15]? YES
+
+[WEIGHT] SDT g = v_surf^2 / R_body  (no G, no M as fundamentals)
+  to reproduce g=9.81 m/s^2 with R_body=6.371e+06 m -> v_surf=7905.7 m/s
+  (weight enters terminal balance as m.g; g supplied via v^2/R, not G*M)
+
+[PHASE 5] Terminal velocity : F_D(v_t) = m g  (regime self-selected)
+    case                       D[m]         v_t[m/s]     v_Stokes     Re         C_D       
+    steel 1mm / water          0.001        0.42475      3.7268       423.1      0.5701    
+    glass 3mm / water          0.003        0.47296      7.3516       1414       0.4393    
+    steel 5mm / water          0.005        1.0667       93.169       5313       0.452     
+    water drop 1mm / air       0.001        3.967        29.827       261.7      0.6903    
+    water drop 3mm / air       0.003        8.639        268.44       1710       0.4367    
+
+  (v_Stokes = closed-form buoyant Stokes; agrees with v_t only when Re<~1)
+  measured refs (MEASURED-INPUT, comparison only):
+    3mm water drop in air ~ 8.0-8.1 m/s (Gunn-Kinzer 1949)
+    1mm water drop in air ~ 4.0-4.5 m/s (Gunn-Kinzer 1949)
+
+============================================================
+ VERDICT
+------------------------------------------------------------
+  Mechanism (drag = Law III occlusion shadow, front-minus-wake) : Class C
+    - C_D.(1/2 rho v^2).A FORM .......... NATIVE (occlusion integral)
+    - mu.R.v Stokes SCALING ............. NATIVE (relay diffusion)
+    - 6*pi Stokes prefactor ............ CORRELATION (full Stokes flow)
+    - C_D(Re) curve / 0.47 plateau ..... MEASURED-INPUT (Schlichting)
+    - drag crisis Re~3e5, C_D~0.1 ...... MEASURED-INPUT (Achenbach)
+  CALIBRATED count : 1 (wake-shrink / crisis-shape scale).
+  Honest class : C (QUALIFIED - convergence; form+scaling native,
+                 prefactor & curve reproduced not derived).
+============================================================

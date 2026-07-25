@@ -11,11 +11,13 @@
 **CLEAN of rival axioms** (the prompt explicitly forbids QM/SM in the chain). **Two flags carried:**
 1. **Naming violation:** the prompt says "Charge radius: R_p" — canon rule: **boundary/displacement
    radius**, never "charge radius" (no charge substance). Fix on next prompt edit.
-2. **Identity risk (load-bearing):** the H/H-like chain v_n = Zαc/n → E_n = −Ry·Z²/n² **is the
-   Rydberg/Bohr algebra**. Agreement with NIST at ppm level is **CONVERGENCE/IDENTITY**, not an
-   independent prediction — the integer-n ladder is imported structure, and the tool's closing
-   banner "No quantum mechanics. No fitting. No free parameters." **overstates**. Honest labels
-   applied below.
+2. **Shared-form flag (load-bearing), corrected 2026-07-25:** the H/H-like chain
+   v_n = Zαc/n → E_n = −Ry·Z²/n² lands on the same closed form as the Rydberg algebra. Shared
+   form = **cannot discriminate** — the ppm match is real but selects neither reading, because
+   the number must come out the same wherever the algebra is correct. SDT's origin is its own
+   (velocity seats from the movement budget; λ = 2L·(c/v) runs the ladder) — **CONVERGENCE**,
+   not imported structure. What must not be claimed is that the match is evidence *for* the
+   velocity-state reading over the rival; the tool's banner overstates only there.
 
 ## Run matrix (today's output)
 
@@ -35,13 +37,16 @@
 - **Prompt completion: C** (Phases 1–2 + zk² closure re-earned; Phase 3 multi-electron partial —
   Eex-anchored first-resonance only; Phase 5 novel-prediction untouched; one tool unrunnable).
 - **Physics class (split by claim):**
-  - H + H-like spectra: **CONVERGENCE** (shared algebra with Rydberg; the SDT reading is the
-    velocity-state mechanism, the numbers are not independent evidence).
+  - H + H-like spectra: **CONVERGENCE** (shared closed form with Rydberg — cannot discriminate;
+    SDT's own origin is the velocity-seat chain, and the numbers bank as accuracy, not as a win
+    over the rival).
   - Terrain/structure discovery (blind recovery 7/9, emergent capacities, pair-unit=2): **the
     genuinely native results of this suite** — structure forced by measured IE terrain without
     labels. Class C-strong, with named failure modes (diamagnetic-CANCEL 30%).
   - Triton/d-f coincidence (void_geometry): **OBSERVED-pattern, suggestive** — "the tritons ARE
-    the d/f slots" is a hypothesis the pattern motivates, not yet a derivation. NOTE: grammar
-    coords are an invertible map of (Z,N) (NP24-A rule) — a pure function of the counts cannot be
-    independent evidence; this pattern needs an observable beyond the counts before it upgrades.
+    the d/f slots" is a hypothesis the pattern motivates, not yet a derivation. Scope of NP24-A
+    here (corrected 2026-07-25): the pattern's content is a **cross-ledger correlation** —
+    nuclear excess stepping up exactly where the electronic terrain opens d/f voids — and that
+    content is NOT exhausted by the counts, so the rule does not deflate it. Owed: a mechanism
+    and an out-of-sample test before it upgrades.
 - **Recovery:** n/a · **Cascade root:** none (forward_derivation crash is a tooling blocker, logged).

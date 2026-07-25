@@ -1,0 +1,62 @@
+================================================================
+ TD02 - Temperature and Equipartition from Throughput
+ J. C. Harvey, Melbourne - 2026-07-03
+ Whitelisted input: measured::k_B only. Energies in relay quanta eps.
+================================================================
+
+P1: two-definition concordance
+  finite-size scaling of the concordance gap (E/N=100 fixed):
+    N=  250 : rel.gap = 4.000e-03   gap*N = 1.000
+    N=  500 : rel.gap = 2.000e-03   gap*N = 1.000
+    N= 2000 : rel.gap = 5.000e-04   gap*N = 1.000
+    N= 8000 : rel.gap = 1.250e-04   gap*N = 1.000
+  => gap = 1/N (discretisation of dS/dE); definitions coincide as N->inf.
+
+  gate at N=8000 cells:
+    E/N      beta_budget    beta_count     rel.gap    T_kin/T_ent
+      10   0.09531018   0.09529825   1.25e-04   0.953102
+      30   0.03278982   0.03278572   1.25e-04   0.983695
+     100   0.00995033   0.00994909   1.25e-04   0.995033
+     300   0.00332779   0.00332738   1.24e-04   0.998337
+    1000   0.00099950   0.00099937   1.32e-04   0.999500
+    2000   0.00049988   0.00049981   1.21e-04   0.999750
+  beta gates: worst |beta_budget-beta_count|/beta = 1.32e-04 (<1e-3) [PASS]
+  T_kin=T_ent in classical regime <j> >= 1000 [PASS]
+  NOTE (predicted, not absorbed): for <j> ~ 1 the two definitions separate;
+  <eps> = eps/(e^(eps/kBT)-1) is the discrete-cell freeze-out (Einstein form),
+  a consequence of quantised throughput, reported as a feature curve:
+    <j>= 0.5 : T_kin/T_ent = 0.5493  (freeze-out regime)
+    <j>= 1.0 : T_kin/T_ent = 0.6931  (freeze-out regime)
+    <j>= 3.0 : T_kin/T_ent = 0.8630  (freeze-out regime)
+
+P2: equipartition from pair-rotation mixing (M=500 DoFs)
+  init=concentrated: global<e_i>=2.00000 (target 2.00000), RMS dev 0.686%, worst 2.005% (2.2 sigma_stat)
+             velocity kurtosis 2.9879 (Gaussian 3.0) -> MB marginal
+  init=uniform    : global<e_i>=2.00000 (target 2.00000), RMS dev 0.693%, worst 2.183% (2.4 sigma_stat)
+             velocity kurtosis 2.9892 (Gaussian 3.0) -> MB marginal
+  equipartition <e_i> = (1/2)k_B T per quadratic DoF, init-independent [PASS]
+  c_v: 3 quadratic DoF/particle => c_v = 3/2 k_B  (near-definitional given
+  equipartition; flagged as such, not sold as an independent prediction)
+
+P3: Boltzmann factor from native counting (N=500, E=5000, <j>=10)
+  (b) exact marginal p_j = W(E-j,N-1)/W(E,N), j=0..95
+      ln p_j vs j : slope=-0.095807  (-beta_budget=-0.095310)  gap 0.522%  R^2=0.999994
+  (c) relay-exchange dynamics (5e+07 ticks): slope=-0.094728  R^2=0.999909
+      occupancy histogram vs exact marginal: max |dev| = 3.62 sigma (correlated-sample estimate)
+  (a) Lagrange route (analytic): n_j/N = (1-e^-b)e^-bj with b = ln(1+N/E) = 0.095310
+      = beta from P1 budget; the exponential is an OUTPUT of relay counting.
+  FIREWALL: no S_res(E-eps) expansion, no predefined T, no partition-function
+  object was instantiated anywhere in P3. Route (b) is an exact complement
+  count under TD01's uniform measure; beta is read off AFTER the fact. [PASS]
+
+P4: delete test - k_B appears only as a unit bridge
+  All P1-P3 numbers above are pure numbers (energies in eps units).
+  Example kelvin conversion (only place k_B enters): a bath with
+  <eps_dis> = 1 eV/DoF-pair  =>  T = (1 eV)/k_B = 11604.5 K = k_B^-1 x pure number.
+  No h, no Z, no ensemble object in the chain. [PASS by construction]
+
+================================================================
+ TD02 GATES: P1 PASS | P2 PASS | P3 PASS | P4 PASS
+ Firewall T4: NOT FIRED (no reservoir used on any route)
+ VERDICT: PASS - see TD02_VERDICT.md for the physics class
+================================================================

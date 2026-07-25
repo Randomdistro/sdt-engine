@@ -1,0 +1,39 @@
+================================================================
+ FD12 - The Poloidal Parcel Operation  (gates pre-committed)
+ Author: J. C. Harvey, Melbourne - direct run
+================================================================
+----------------------------------------------------------------
+ PHASE 1  slug -> poloidal roll  (2-D poloidal plane, Re_slug=150)
+----------------------------------------------------------------
+  grid 288x144, a=0.150 U=1.0 nu=1.000e-03 (Re_slug=150 committed)
+  pair extrema |w+|/|w-| dev      = 0.000   (gate <0.15)
+  centroid travel (advective)     = 1.380 a  (gate >=1.0a)
+  centroid travel (control)       = 0.000 a  (gate <0.1a)
+  pair speed U_pair (late)        = 0.086 U
+  flank min u (1.5a..3a off-axis) = -1.097 U_pair (gate < -0.05)
+  centre jet u_core/U_pair        = 3.422   (gate >= 1.3)
+  G1a formation PASS | G1b self-propulsion PASS | G1c roll-back PASS | G1d closed cell PASS
+  (P1 ceiling: consistency/convergence - Lamb-dipole physics is known;
+   what is banked: the relay lattice performs the operation natively.)
+----------------------------------------------------------------
+ PHASE 2  DISCRIMINATOR: transient-gain wavelength selection
+          plane channel U(y)=U0(1-(2y/L)^2), Re=1000, no-slip
+          instrument v2 (ADJ-1): spectral mode + tilt sweep
+----------------------------------------------------------------
+  committed: T_obs=10 L/U0, l_c = lambda*/2, tilts {0,2,4,8,12}x(+/-)
+  lambda/L      gain G(lambda)   best tilt
+     0.25            1.000      -0
+     0.50            1.569      +2
+     1.00            2.124      +4
+     2.00            1.422      +8
+     4.00            1.090      +12
+     8.00            1.001      +12
+    16.00            1.000      -0
+  selected lambda* = 1.00 L  ->  l_c = lambda*/2 = 0.500 L
+  L/l_c = 2.0   ->  exported Re_crit = (L/l_c)^2 = 4
+  pipe back-solve target: L/l_c = 48 (Re_crit 2300)
+  G2 verdict: FAIL (outside [10,200]) - identification dead as posed
+================================================================
+ grading in FD12_VERDICT_DIRECT (P1 capped at consistency;
+ P2 is the discriminator; no re-scoping after the numbers)
+================================================================

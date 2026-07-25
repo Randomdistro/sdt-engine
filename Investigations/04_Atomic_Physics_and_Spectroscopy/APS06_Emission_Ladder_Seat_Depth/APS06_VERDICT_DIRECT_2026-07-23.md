@@ -43,5 +43,6 @@ by ID), no "X-rays < gammas" definitional import.
 - **Where real teeth would come from (both unpaid):** (1) derive diproton unboundness natively
   from pressure/interleave geometry with a magnitude (NP19/NP20) — WITHOUT the grammar wedge
   (counts-degeneracy rule: the wedge is an invertible map of (Z,N) built from the observed chart);
-  (2) a measurable seat-depth consequence that is not a pure function of the counts.
+  (2) a measurable seat-depth consequence whose content is not exhausted by the counts — an
+  unfitted magnitude with SDT origin qualifies even when it is indexed by (Z,N).
 - **Recovery:** n/a · **Cascade root:** none.

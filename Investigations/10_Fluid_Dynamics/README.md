@@ -50,6 +50,7 @@ FD01  Navier–Stokes from spation relay        ← the FD root (rests on ROOT-S
 | **FD09** | Drag as an Occlusion Cross-Section | Law III occlusion of convergent momentum flux (front−wake) | Stokes 6πμRv; C_D(Re) curve incl. drag crisis at Re≈3×10⁵ |
 | **FD10** | Vortex Shedding & Strouhal | lattice relaxation / traction oscillation (CQ41 gear-frequency) | St=fD/U≈0.2 plateau; f∝U/D; lock-in |
 | **FD11** | Tesla Steam Generator *(applied capstone)* | bladeless turbine driven by spation traction (FD06) on smooth disks; composes FD02/FD05/FD08/FD09 | optimal disk gap ~0.4 mm; η_rotor(λ) peak; **viscosity signature** dη/dRe<0 (vs bladed); + modern-materials build spec |
+| **FD12** | Poloidal Parcel Operation *(Harvey 2026-07-26)* | ALL fluid movement = one poloidal roll (forward core, stall-aside, roll-back, carried cell), molecule → volume | P1 four-signature roll from the relay lattice: **PASS**; P2 roll = FD03's ℓ_c via 2-D transient selection: **KILLED as posed** (selects L/2, not L/48; 3-D streak re-pose owed its own pre-commit) |
 
 ## Crunch status (executed 2026-06-17)
 

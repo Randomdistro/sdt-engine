@@ -8,7 +8,7 @@
 
 ## ⓪ The Golden Rule — five questions (answer before Phase 0)
 
-1. **What don't we know?** — [FLM01] Investigation: *(unfilled by the 2026-06-27 bulk template upgrade — write the single measurable gap before the next run)*
+1. **What don't we know?** — Are the two hard-coded normalisation scales in `state28d.hpp` — `1e10` Pa/m (line 134, occlusion screening) and `1e-20` J (line 159, phase transition) — **derived** from Laws I–IV (Φ=Nε, occlusion force, velocity budget), or **fitted**? The single measurable gap: does either fall out of the nuclear↔atomic displacement-volume ratio to within the committed tolerance, with zero free parameters?
 2. **Why does it matter?** — Stack position / downstream blockers (see `INVESTIGATION_STACK.md`).
 3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
 4. **What would prove us wrong?** — §⑧ falsification tests with numeric triggers.
@@ -44,7 +44,7 @@ where:
 - T₀ = 2.725 K (CMB temperature)
 - ℓ_P = 1.616255 × 10⁻³⁵ m (Planck length)
 
-This gives: ε ≈ 6.5 × 10⁻¹¹² J
+This gives: ε ≈ 1.76 × 10⁻¹¹⁸ J   *(= u_CMB·ℓ_P³ = 4.17×10⁻¹⁴ J/m³ × 4.22×10⁻¹⁰⁵ m³; corrected 2026-07-23 — the prior 6.5×10⁻¹¹² was wrong by ~6 orders)*
 
 ### Convergence Burden at Any Point
 
@@ -182,10 +182,12 @@ Check whether the hardcoded values respect this and scale properly with particle
 
 ## Outputs
 
-1. **CQ04_DERIVATION.md** — Complete symbolic derivation from Laws I–IV
-2. **cq04_scales_from_sdt.cpp** — C++ tool computing scales from convergence pressure
-3. **cq04_results.txt** — Numerical table: theory values vs hardcoded
-4. **CQ04_VERDICT.md** — Pass/Qualified classification
+1. **FLM01_DERIVATION.md** — Complete symbolic derivation from Laws I–IV
+2. **flm01_scales_from_sdt.cpp** — C++ tool computing scales from convergence pressure
+3. **flm01_results.txt** — Numerical table: theory values vs hardcoded
+4. **FLM01_VERDICT.md** — Pass/Qualified classification
+
+*(output names corrected 2026-07-23 from the retired CQ04_* scheme.)*
 
 ---
 
@@ -197,7 +199,7 @@ Check whether the hardcoded values respect this and scale properly with particle
 - **Law V**: Velocity budget v_T² + v_P² = c²
 - **Law VI**: Topology determines stability (W=1, W=3 only)
 - **PPT01**: Derived v_T, v_P, R/a for each winding
-- **Theory/02**: Convergence pressure and coupling constants
+- **`laws.hpp` `law_I` / `law_III`**: convergence pressure Φ=Nε and the occlusion coupling (the retired `Theory/02` doc's content now lives in the engine header)
 
 ---
 

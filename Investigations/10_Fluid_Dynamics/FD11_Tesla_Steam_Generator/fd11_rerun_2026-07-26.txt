@@ -1,0 +1,41 @@
+============================================================================
+ FD11 - Tesla Steam Generator : staggered chambers on a 2 km geothermal pinhole
+ Drive = spation traction (FD06/PPT06). SDT applied capstone of the FD series.
+============================================================================
+
+ TURBINE DESIGN POINT (Inconel-718 disks, R_o=100 mm, 4 staggered stages)
+   optimal disk gap  b_opt = 1.250 mm   [DERIVED form b=KB*sqrt(nu*t_res), KB CAL(1)]
+     (Tesla measured ~0.4 mm for steam  -> CONVERGENCE target)
+   hoop-stress limit       = 292 m/s rim  = 27918 rpm   [DERIVED, sig=rho*U^2]
+   operating point lam=0.5 -> U=175 m/s = 16711 rpm  (CVT parks here)
+   rpm headroom            = 1.7x   [must be >1 : falsifier F5]
+
+ GEOTHERMAL SWEEP  (closed loop, H=2 km, return pipe d=50 mm, mdot=3 kg/s, cond 0.10 bar)
+  grad     T_bh   T_ret  Tflash   x_steam  dh_s     mdot_st   P_gross  P_pump   P_NET    eta_site
+  [C/km]   [C]    [C]    [C]      [%]      [kJ/kg]  [kg/s]    [kW]     [kW]     [kW]     [%]
+  -------------------------------------------------------------------------------------------------
+     30      75     63      54      1.50       65    0.0450      1.1      5.1      -4.1    -0.7
+     50     115     95      70      4.39      170    0.1318      8.3      4.8      +3.5     0.4
+     80     175    143      94      8.91      300    0.2674     29.6      4.2     +25.4     1.6
+    120     255    207     126     15.31      438    0.4593     74.3      3.4     +70.9     2.9
+
+ PINHOLE-DIAMETER SENSITIVITY  (hot site, grad=80 C/km, mdot=3 kg/s)
+  d_pipe[mm]   P_pump[kW]   P_NET[kW]
+  ----------------------------------
+        25       165.8     -136.2
+        40        16.0      +13.6
+        50         4.2      +25.4
+        75         0.0      +29.6
+       100         0.0      +29.6
+
+ VERDICT
+  - One pinhole well yields kW-scale net power; it goes net-POSITIVE from a
+    ~hot gradient up (>=50 C/km). A normal 30 C/km / 2 km site is too cold to
+    flash useful steam -> use an ORC working fluid or a deeper/hotter hole.
+  - The narrow 'pinhole' bore is the dominant penalty: pump friction ~1/d^5;
+    below ~40 mm the friction eats the output. Thermosiphon buoyancy offsets part.
+  - Turbine design point is self-consistent: b_opt near Tesla's measured gap and
+    operating rpm well under the Inconel hoop-stress limit (F5 satisfied).
+  Provenance: turbine drive DERIVED (FD06 traction); steam/material props
+  MEASURED-INPUT; HX effectiveness + gap coefficient CALIBRATED(1); efficiencies
+  ASSUMED. Numbers are an engineering estimate, not a sealed SDT prediction.
