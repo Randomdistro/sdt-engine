@@ -8,9 +8,9 @@ window.SDT_I18N = {
 /* ─────────────────────────── DEUTSCH ─────────────────────────── */
 "de": {
   "@hero_title": "Theorie der<br>räumlichen<br><em>Verschiebung</em>",
-  "A zero-parameter framework for all of physics": "Ein Rahmenwerk ohne freie Parameter für die gesamte Physik",
-  "Gravity, electromagnetism, and nuclear forces derived as pressure differentials in a discrete spatial medium. Built from four primitives. No free parameters. Every constant computed.":
-    "Gravitation, Elektromagnetismus und Kernkräfte, hergeleitet als Druckunterschiede in einem diskreten räumlichen Medium. Aus vier Urelementen aufgebaut. Keine freien Parameter. Jede Konstante berechnet.",
+  "All of physics. No fitted parameters.": "Die gesamte Physik. Keine angepassten Parameter.",
+  "Gravity, electromagnetism, the nuclear force — one push, read three ways, in a discrete spatial medium. Four primitives. One new idea: matter displaces space. Every constant computed, nothing fitted.":
+    "Gravitation, Elektromagnetismus, Kernkraft — ein Druck, auf drei Arten gelesen, in einem diskreten räumlichen Medium. Vier Urelemente. Eine neue Idee: Materie verdrängt den Raum. Jede Konstante berechnet, nichts angepasst.",
   "The Medium": "Das Medium", "Five Laws": "Fünf Gesetze", "Topology": "Topologie",
   "Lab": "Labor", "Engine": "Engine", "Cosmology": "Kosmologie", "Experiments": "Experimente", "Glossary": "Glossar",
   "The Five Laws": "Die fünf Gesetze", "What Matter Is": "Was Materie ist", "Atomicus Lab": "Atomicus-Labor",
@@ -32,9 +32,9 @@ window.SDT_I18N = {
 /* ─────────────────────────── FRANÇAIS ─────────────────────────── */
 "fr": {
   "@hero_title": "Théorie du<br>Déplacement<br><em>Spatial</em>",
-  "A zero-parameter framework for all of physics": "Un cadre sans paramètre libre pour toute la physique",
-  "Gravity, electromagnetism, and nuclear forces derived as pressure differentials in a discrete spatial medium. Built from four primitives. No free parameters. Every constant computed.":
-    "La gravité, l'électromagnétisme et les forces nucléaires, dérivés comme des différences de pression dans un milieu spatial discret. Construite à partir de quatre primitives. Aucun paramètre libre. Chaque constante calculée.",
+  "All of physics. No fitted parameters.": "Toute la physique. Aucun paramètre ajusté.",
+  "Gravity, electromagnetism, the nuclear force — one push, read three ways, in a discrete spatial medium. Four primitives. One new idea: matter displaces space. Every constant computed, nothing fitted.":
+    "La gravité, l'électromagnétisme, la force nucléaire — une seule poussée, lue de trois façons, dans un milieu spatial discret. Quatre primitives. Une idée neuve : la matière déplace l'espace. Chaque constante calculée, rien d'ajusté.",
   "The Medium": "Le milieu", "Five Laws": "Cinq lois", "Topology": "Topologie",
   "Lab": "Labo", "Engine": "Moteur", "Cosmology": "Cosmologie", "Experiments": "Expériences", "Glossary": "Glossaire",
   "The Five Laws": "Les cinq lois", "What Matter Is": "Ce qu'est la matière", "Atomicus Lab": "Laboratoire Atomicus",
@@ -56,9 +56,9 @@ window.SDT_I18N = {
 /* ─────────────────────────── ESPAÑOL ─────────────────────────── */
 "es": {
   "@hero_title": "Teoría del<br>Desplazamiento<br><em>Espacial</em>",
-  "A zero-parameter framework for all of physics": "Un marco sin parámetros libres para toda la física",
-  "Gravity, electromagnetism, and nuclear forces derived as pressure differentials in a discrete spatial medium. Built from four primitives. No free parameters. Every constant computed.":
-    "La gravedad, el electromagnetismo y las fuerzas nucleares, derivadas como diferencias de presión en un medio espacial discreto. Construida a partir de cuatro primitivos. Sin parámetros libres. Cada constante calculada.",
+  "All of physics. No fitted parameters.": "Toda la física. Sin parámetros ajustados.",
+  "Gravity, electromagnetism, the nuclear force — one push, read three ways, in a discrete spatial medium. Four primitives. One new idea: matter displaces space. Every constant computed, nothing fitted.":
+    "La gravedad, el electromagnetismo, la fuerza nuclear: un solo empuje, leído de tres maneras, en un medio espacial discreto. Cuatro primitivas. Una idea nueva: la materia desplaza el espacio. Cada constante calculada, nada ajustado.",
   "The Medium": "El medio", "Five Laws": "Cinco leyes", "Topology": "Topología",
   "Lab": "Laboratorio", "Engine": "Motor", "Cosmology": "Cosmología", "Experiments": "Experimentos", "Glossary": "Glosario",
   "The Five Laws": "Las cinco leyes", "What Matter Is": "Qué es la materia", "Atomicus Lab": "Laboratorio Atomicus",
@@ -80,9 +80,9 @@ window.SDT_I18N = {
 /* ─────────────────────────── 日本語 ─────────────────────────── */
 "ja": {
   "@hero_title": "空間<br>変位<br><em>理論</em>",
-  "A zero-parameter framework for all of physics": "全物理学のためのゼロパラメータの枠組み",
-  "Gravity, electromagnetism, and nuclear forces derived as pressure differentials in a discrete spatial medium. Built from four primitives. No free parameters. Every constant computed.":
-    "重力、電磁気力、核力を、離散的な空間媒質における圧力差として導く。四つの原素から構築。自由パラメータなし。すべての定数を計算。",
+  "All of physics. No fitted parameters.": "物理学のすべて。当てはめのパラメータはゼロ。",
+  "Gravity, electromagnetism, the nuclear force — one push, read three ways, in a discrete spatial medium. Four primitives. One new idea: matter displaces space. Every constant computed, nothing fitted.":
+    "重力、電磁気力、核力——ひとつの押しを、三通りに読む。離散的な空間媒質のなかで。原素は四つ。新しい考えはひとつ：物質は空間を押しのける。すべての定数は計算され、当てはめは何もない。",
   "The Medium": "媒質", "Five Laws": "五つの法則", "Topology": "トポロジー",
   "Lab": "ラボ", "Engine": "エンジン", "Cosmology": "宇宙論", "Experiments": "実験", "Glossary": "用語集",
   "The Five Laws": "五つの法則", "What Matter Is": "物質とは何か", "Atomicus Lab": "アトミクス・ラボ",
@@ -104,9 +104,9 @@ window.SDT_I18N = {
 /* ─────────────────────────── 中文 ─────────────────────────── */
 "zh": {
   "@hero_title": "空间<br>位移<br><em>理论</em>",
-  "A zero-parameter framework for all of physics": "一个用于全部物理学的零参数框架",
-  "Gravity, electromagnetism, and nuclear forces derived as pressure differentials in a discrete spatial medium. Built from four primitives. No free parameters. Every constant computed.":
-    "引力、电磁力与核力，皆导出为离散空间介质中的压强差。由四个基元构建。没有自由参数。每个常数皆经计算。",
+  "All of physics. No fitted parameters.": "全部物理。没有拟合参数。",
+  "Gravity, electromagnetism, the nuclear force — one push, read three ways, in a discrete spatial medium. Four primitives. One new idea: matter displaces space. Every constant computed, nothing fitted.":
+    "引力、电磁力、核力——同一种推压，三种读法，在离散的空间介质中。四个基元。一个新想法：物质排开空间。每个常数都经计算，没有一个是拟合的。",
   "The Medium": "介质", "Five Laws": "五大定律", "Topology": "拓扑",
   "Lab": "实验室", "Engine": "引擎", "Cosmology": "宇宙学", "Experiments": "实验", "Glossary": "术语表",
   "The Five Laws": "五大定律", "What Matter Is": "物质是什么", "Atomicus Lab": "Atomicus 实验室",
@@ -128,9 +128,9 @@ window.SDT_I18N = {
 /* ─────────────── SCHWEIZER HOCHDEUTSCH (Swiss Standard German) ─────────────── */
 "de-CH": {
   "@hero_title": "Theorie der<br>räumlichen<br><em>Verschiebung</em>",
-  "A zero-parameter framework for all of physics": "Ein Rahmenwerk ohne freie Parameter für die ganze Physik",
-  "Gravity, electromagnetism, and nuclear forces derived as pressure differentials in a discrete spatial medium. Built from four primitives. No free parameters. Every constant computed.":
-    "Gravitation, Elektromagnetismus und Kernkräfte, hergeleitet als Druckunterschiede in einem diskreten räumlichen Medium. Aus vier Urelementen aufgebaut. Keine freien Parameter. Jede Konstante berechnet.",
+  "All of physics. No fitted parameters.": "Die ganze Physik. Keine angepassten Parameter.",
+  "Gravity, electromagnetism, the nuclear force — one push, read three ways, in a discrete spatial medium. Four primitives. One new idea: matter displaces space. Every constant computed, nothing fitted.":
+    "Gravitation, Elektromagnetismus, Kernkraft — ein Druck, auf drei Arten gelesen, in einem diskreten räumlichen Medium. Vier Urelemente. Eine neue Idee: Materie verdrängt den Raum. Jede Konstante berechnet, nichts angepasst.",
   "The Medium": "Das Medium", "Five Laws": "Fünf Gesetze", "Topology": "Topologie",
   "Lab": "Labor", "Engine": "Engine", "Cosmology": "Kosmologie", "Experiments": "Experimente", "Glossary": "Glossar",
   "The Five Laws": "Die fünf Gesetze", "What Matter Is": "Was Materie ist", "Atomicus Lab": "Atomicus-Labor",
@@ -152,9 +152,9 @@ window.SDT_I18N = {
 /* ─────────────── SCHWIIZERDÜTSCH (Swiss German dialect — approximate) ─────────────── */
 "gsw": {
   "@hero_title": "Theorie vo dr<br>ruumliche<br><em>Verschiebig</em>",
-  "A zero-parameter framework for all of physics": "Es Rahmewärch ohni freii Parameter für di ganzi Physik",
-  "Gravity, electromagnetism, and nuclear forces derived as pressure differentials in a discrete spatial medium. Built from four primitives. No free parameters. Every constant computed.":
-    "Schwärchraft, Elektromagnetismus und Chärnchräft — hergleitet as Druckunterschiid in eme diskrete ruumliche Medium. Us vier Urelemänt ufboue. Kei freii Parameter. Jedi Konstante brächnet.",
+  "All of physics. No fitted parameters.": "Di ganzi Physik. Kei aapassti Parameter.",
+  "Gravity, electromagnetism, the nuclear force — one push, read three ways, in a discrete spatial medium. Four primitives. One new idea: matter displaces space. Every constant computed, nothing fitted.":
+    "Schwärchraft, Elektromagnetismus, Chärnchraft — ei Druck, uf drüü Arte gläse, in eme diskrete ruumliche Medium. Vier Urelemänt. Ei neui Idee: d Materie verdrängt dr Ruum. Jedi Konstante brächnet, nüt aapasst.",
   "The Medium": "S Medium", "Five Laws": "Föif Gsetz", "Topology": "Topologie",
   "Lab": "Labor", "Engine": "D Engine", "Cosmology": "Kosmologie", "Experiments": "Experimänt", "Glossary": "Glossar",
   "The Five Laws": "Di föif Gsetz", "What Matter Is": "Was Materie isch", "Atomicus Lab": "Atomicus-Labor",
@@ -176,11 +176,11 @@ window.SDT_I18N = {
 /* ─────────────────────────── עברית ─────────────────────────── */
 "he": {
   "@hero_title": "תזוזה<br>מרחבית<br><em>התיאוריה</em>",
-  "A zero-parameter framework for all of physics": "מסגרת ללא פרמטרים חופשיים לכל הפיזיקה",
-  "Gravity, electromagnetism, and nuclear forces derived as pressure differentials in a discrete spatial medium. Built from four primitives. No free parameters. Every constant computed.":
-    "כבידה, אלקטרומגנטיות והכוחות הגרעיניים — כולם נגזרים כהפרשי לחץ בתווך מרחבי בדיד. בנויים מארבעה יסודות. ללא פרמטרים חופשיים. כל קבוע מחושב.",
-  "\"Any theory that produces paradoxes is either incomplete, or incorrect.\"—":
-    "\"כל תיאוריה שמייצרת פרדוקסים היא בלתי-שלמה, או שגויה.\"—",
+  "All of physics. No fitted parameters.": "כל הפיזיקה. בלי פרמטרים מכוילים.",
+  "Gravity, electromagnetism, the nuclear force — one push, read three ways, in a discrete spatial medium. Four primitives. One new idea: matter displaces space. Every constant computed, nothing fitted.":
+    "כבידה, אלקטרומגנטיות, הכוח הגרעיני — דחיפה אחת, שלוש קריאות, בתווך מרחבי בדיד. ארבעה יסודות. רעיון חדש אחד: החומר דוחק את המרחב. כל קבוע מחושב, דבר לא כויל.",
+  "\"Any theory that produces paradoxes is either incomplete, or incorrect.\"":
+    "\"כל תיאוריה שמייצרת פרדוקסים היא בלתי-שלמה, או שגויה.\"",
   "The Medium": "התווך", "Five Laws": "חמשת החוקים", "Topology": "טופולוגיה",
   "Lab": "מעבדה", "Engine": "מנוע", "Cosmology": "קוסמולוגיה", "Experiments": "ניסויים", "Glossary": "מילון מונחים",
   "The Five Laws": "חמשת החוקים", "What Matter Is": "מהו החומר", "Atomicus Lab": "מעבדת אטומיקוס",
