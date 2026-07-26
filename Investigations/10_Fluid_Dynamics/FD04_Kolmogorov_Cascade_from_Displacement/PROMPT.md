@@ -214,4 +214,46 @@ Five gated phases. Run in order; a failed checkpoint stops the chain (R4: a clea
 
 ---
 
-*FD04 · upgraded 2026-06-27 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*
+## P6 — RE-POSE (Harvey 2026-07-26): intermittency as the bath's refusal fraction
+
+> Added AFTER the direct re-run recorded the live tension (measured slope ≈ −1.70/−1.71 vs the
+> as-posed −5/3) and BEFORE the P6 tool was written. Gates below are pre-commitments.
+
+**The mechanism (Harvey, two dictated sentences, 2026-07-26):**
+1. *"The 2D torus forward motion is the 2D topology upgraded to torus level, where it wraps
+   around."* — the torus is the poloidal roll wrapped closed on the 1:4 gearing (W+1 = 4):
+   four poloidal turns per toroidal circuit ⇒ **R = 4r**, aspect pinned, and the generation
+   scale-step is the wrap's own ratio: **λ = 4** (children live at the tube scale r = R/4).
+2. *"Nothing happens by itself. There is an entire body of water the slug has entered, that has
+   its own pressure, its own resistance and mixing rules, and it allows the freedoms of
+   movement that an oppositional drag can instil in the stationary medium."* — the handoff is
+   **drag-mediated and bath-limited**: each generation is a fresh negotiation with the SAME
+   scale-free medium, whose acceptance of organised circulation is capped by its own packing.
+   **The cascade leaks the lattice's packing shortfall at every generation.** Intermittency is
+   the medium's refusal fraction — flux concentrates because the frustrated fraction cannot
+   carry it.
+
+**The committed chain (zero fitted parameters):**
+- active fraction per generation β = 1 − g, with **g = 0.103** — the icosahedral frustration
+  gap, the canon's lattice packing shortfall (primary; the single-pair edge-gap 0.0515 reported
+  as sensitivity only);
+- scale step **λ = 4** (from the wrap; λ = 5 enclosing-extent convention reported as
+  sensitivity only);
+- β-model closure: 3 − D = ln(1/β)/ln λ; spectral slope = −5/3 − (3−D)/3;
+  ζ_p = p/3 + (3−D)(1 − p/3) as the SECONDARY (structure functions).
+
+**Pre-committed gates:**
+- **G6 (primary):** predicted slope correction μ_pred = (3−D)/3 ∈ [0.01, 0.10] (the committed
+  kill band from the reopen docket), compared against the measured anomaly μ ≈ 0.03–0.05;
+  the honest distance from the measured CENTRE is reported, not absorbed.
+- **G6-kill:** μ_pred outside [0.01, 0.10]; or the rule-(a) chain (tube-in-influence-sphere,
+  f = 0.151, slope −2.06) turns out to be the forced reading — recorded dead, no rescue.
+- **Secondary (report, not gate):** ζ_2, ζ_4, ζ_6 vs measured (~0.70, ~1.28, ~1.78). The
+  single-leak β-model's known high-order shortfall is expected and must be printed, not hidden.
+
+**Forbidden:** choosing g or λ after seeing μ; averaging the two conventions; upgrading the
+secondary to a pass; silence about the distance from the measured centre.
+
+---
+
+*FD04 · upgraded 2026-06-27 · P6 re-pose added 2026-07-26 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*

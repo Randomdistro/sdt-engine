@@ -1,0 +1,40 @@
+================================================================
+ FD04-P6  intermittency = the bath's refusal fraction
+ (aspect from the wrap; leak from the lattice; nothing fitted)
+================================================================
+
+ icosahedral 12-around-1 (unit spheres touching the centre):
+   edge/circumradius a/R = 1.05146 -> single-pair linear gap = 0.05146
+   canon frustration gap g = 0.103 (lattice-fork canon; = 2 x 0.0515 = 0.1029)
+
+ PRIMARY (committed):
+   g=0.103 (canon), lam=4       beta=0.8970 lam=4 : 3-D=0.07841  mu=0.02614  slope=-1.69280
+
+ sensitivities (reported only, per pre-commit):
+   g=0.103, lam=5 (extent conv.) beta=0.8970 lam=5 : 3-D=0.06754  mu=0.02251  slope=-1.68918
+   g=2x edge gap computed       beta=0.8971 lam=4 : 3-D=0.07835  mu=0.02612  slope=-1.69278
+   g=single-pair gap 0.0515     beta=0.9485 lam=4 : 3-D=0.03811  mu=0.01270  slope=-1.67937
+
+ dead branch (rule (a), tube-in-influence-sphere) printed as committed:
+   f=0.1508  ->  3-D=1.1755  slope=-2.058   [DEAD vs measured -1.71 - as pre-computed]
+
+ G6 (primary gate): mu_pred = 0.02614 ; committed band [0.01, 0.10]
+   predicted slope = -1.69280 ; measured anomaly mu ~ 0.03-0.05 (slope ~ -1.70/-1.71)
+   distance from measured centre (mu=0.04): factor 1.53 UNDER (reported, not absorbed)
+   G6 verdict: PASS (in committed band)
+
+ SECONDARY (report only): beta-model zeta_p = p/3 + (3-D)(1-p/3), 3-D=0.07841
+   zeta_2 = 0.6928  (measured ~0.70-0.71)
+   zeta_4 = 1.3072  (measured ~1.28)
+   zeta_6 = 1.9216  (measured ~1.78)  <- single-leak model's KNOWN high-order
+      shortfall, printed as committed: one fixed leak under-corrects p>=6;
+      if the refusal COMPOUNDS (frustrated routes, not volume), higher orders
+      steepen - that refinement needs its own pre-commit, not a patch here.
+
+================================================================
+ chain: aspect R=4r from the 1:4 gearing (wrap) ; leak g=0.103 from
+ the lattice's own packing shortfall ; per generation because every
+ generation re-negotiates with the SAME scale-free medium (the bath
+ allows only the freedoms oppositional drag can instil). Rival
+ account: fitted multifractal spectrum. Here: nothing fitted.
+================================================================

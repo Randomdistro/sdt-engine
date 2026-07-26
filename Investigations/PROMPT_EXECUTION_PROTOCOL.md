@@ -93,7 +93,34 @@ Separate **whether the prompt was executed** from **what physics class resulted*
 | Axis | Grades | Question |
 |------|--------|----------|
 | **Prompt completion** | A / B / C / D / F | Did the tool do what §④–§⑥ asked, phase by phase? |
-| **Physics class** | NATIVE / CONVERGENCE / DEGENERATE / LINGUISTIC-BORROW / KILLED / OPEN | Did SDT derive, tie, or fail vs rivals? |
+| **Physics class** | NATIVE / CONVERGENCE / DEGENERATE / LINGUISTIC-BORROW / KILLED / OPEN | What is the ORIGIN of the result — native, independently-convergent, imported, or dead? |
+
+> **CORRECTED 2026-07-26 (Harvey's loaded-gates discovery; origin rule ratified 2026-07-25).**
+> The 2026-06-27 bulk upgrade stamped an ALIGNMENT-based degeneracy test ("matches rival
+> without beating") and the pivot row "Rivals match but SDT doesn't beat → DEGENERATE" into
+> ~88 prompts. That test is CONTRABAND: numbers MUST align when both accounts are correct, so
+> alignment can never be the discriminator — **origin is**. The stamped pivot rows are
+> SUPERSEDED wherever they appear; this section is controlling.
+>
+> **Adjudication (origin decides):**
+> - Independent SDT origin + same number as rival → **CONVERGENCE** (meaningful; both live;
+>   discrimination pending a distinct prediction — from EITHER side).
+> - Shared input / invertible relabelling of the rival's quantities → **DEGENERATE**.
+> - SDT lands where the rival cannot, unfitted → **NATIVE-distinct**.
+> - Rival lands where SDT cannot → **recorded miss** (never buried).
+>
+> **Symmetric refereeing (mandatory in every comparison):**
+> 1. **Both parameter ledgers on the table.** A rival matching with n fitted parameters scores
+>    n fitted parameters; "ΛCDM preferred" from its own fitting machinery is not a gate —
+>    the rival's apparatus may never referee the contest it is party to.
+> 2. **Raw measurables only as anchors.** A rival's THEORY-DERIVED decomposition of a
+>    measurement (component allocations, subtracted "known" terms) is not data and may not
+>    adjudicate an SDT fork (GATE-CONTRABAND).
+> 3. **SDT's own derived laws are legal inputs.** Using `law_I`/`law_III`/… in an SDT chain is
+>    not circularity; the law's own provenance is audited once, in its own investigation —
+>    not re-litigated as a cap in every downstream prompt.
+> 4. Gates on first-pass models are set against the rival's SAME-fidelity model, never against
+>    data only the rival's refined machinery reaches.
 
 Example (OP01 stub run): Prompt completion **F** (Phases 3–4 missing); Physics class **CONVERGENCE** on Snell identity only.
 
@@ -128,7 +155,9 @@ Update `INVESTIGATION_STACK.md` status tag when:
 - **RESOLVED** — Prompt completion ≥ B and physics class NATIVE or honest CONVERGENCE
 - **ACTIVE** — Partial run with OPEN/DEFER documented
 - **KILLED** — KILL decision with numbers
-- **DEGENERATE** — Matches rival without beating (CR10, GOM08 pattern)
+- **DEGENERATE** — shared-input / relabelling of the rival's quantities ONLY (origin rule,
+  corrected 2026-07-26; alignment alone NEVER degrades — see §4. Items previously tagged
+  under the old "matches without beating" test are queued for re-adjudication by origin.)
 
 ---
 

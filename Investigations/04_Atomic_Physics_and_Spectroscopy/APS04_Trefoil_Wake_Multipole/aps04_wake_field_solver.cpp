@@ -1,447 +1,348 @@
-/**
- * @file cq38_wake_field_solver.cpp
- * @brief Trefoil Wake Field Computation and Multipole Decomposition
- *
- * Computes the velocity/pressure field induced by a (2,3) torus knot (proton trefoil)
- * at large radius r >> R_p, decomposes into multipole components native to three-fold
- * symmetry, and predicts the Lamb shift energy splitting.
- *
- * **Method:**
- * 1. Parametrize the (2,3) torus knot in 3D space
- * 2. Compute the velocity field on a lattice using a Biot-Savart-type circulation source
- * 3. Sample the field at multiple radii; extract equatorial vs polar components
- * 4. Fit to power laws Φ_ℓ(r) ~ A_ℓ r^{-α_ℓ}
- * 5. Extract Lamb shift energy splitting
- *
- * **No imported spherical harmonics.** Decomposition respects C₃ symmetry only.
- *
- * @author SDT Canonical Engine — James Tyndall, Melbourne, Australia
- * @date June 2026
- */
-
-#include <cmath>
-#include <numbers>
+// APS04 - Trefoil wake multipole solver, REBUILT 2026-07-26 per the rewritten spec.
+// The 2026-07-23 crash class (near-field domination, normalisation error, fit-window
+// abuse -> Phi0 exponent -2.99, Phi2 overflow, "Lamb" -2e16 MHz) is addressed by:
+//   P0 instrument validation on THREE analytic targets before the trefoil is touched;
+//   committed far-field window r/R_p in [10,1e5] with a0 INSIDE it;
+//   Kahan-compensated line integrals; SI units ledger printed at stage boundaries;
+//   sub-window drift + grid-convergence + aspect-sensitivity checks.
+// Gates and coupling form committed in PROMPT.md / RUN_LOG.md / APS04_WAKE_GEOMETRY.md
+// BEFORE this file was written. Author: J. C. Harvey, Melbourne. Direct run.
 #include <cstdio>
+#include <cmath>
 #include <vector>
-#include <algorithm>
-#include <numeric>
+#include <array>
+#include <numbers>
 
-// ─────────────────────────────────────────────────────────────────────────
-//  CONSTANTS
-// ─────────────────────────────────────────────────────────────────────────
+static const double PI = std::numbers::pi;
+// --- CODATA / measured (SI) ---
+static const double c0    = 299792458.0;
+static const double hbar  = 1.054571817e-34;
+static const double hP    = 6.62607015e-34;
+static const double m_e   = 9.1093837015e-31;
+static const double m_p   = 1.67262192369e-27;
+static const double alpha = 7.2973525693e-3;
+static const double eV    = 1.602176634e-19;
+static const double a0_m  = 5.29177210903e-11;
+static const double Rp_m  = 4.0*hbar/(m_p*c0);          // W+1 rule boundary radius
 
-namespace constants {
-    constexpr double c              = 299'792'458.0;           // [m/s]
-    constexpr double hbar           = 1.054'571'817e-34;       // [J·s]
-    constexpr double l_P            = 1.616'255e-35;           // [m]
-    constexpr double alpha          = 7.297'352'5693e-3;       // [-]
-    constexpr double m_p            = 1.672'621'923'69e-27;    // [kg]
-    constexpr double m_e            = 9.109'383'7015e-31;      // [kg]
-    constexpr double a_0            = 5.291'772'109'03e-11;    // [m]
-    constexpr double R_p            = 8.414e-16;               // [m]
-    constexpr double r_e            = 2.817'940'3262e-15;      // [m]
-    constexpr double lambda_C_p     = hbar / (m_p * c);        // ≈ 1.321e-15 m
-    constexpr double k_surface      = 1.0 / alpha * std::sqrt(R_p / a_0);  // ≈ 0.5464
-    constexpr double v_phase_R_p    = c / k_surface;           // ≈ 1.831c
+struct V3 { double x,y,z; };
+static V3 sub(V3 a, V3 b){ return {a.x-b.x, a.y-b.y, a.z-b.z}; }
+static double nrm(V3 a){ return std::sqrt(a.x*a.x+a.y*a.y+a.z*a.z); }
 
-    constexpr double pi             = std::numbers::pi;
-    constexpr double h              = 6.626'070'15e-34;        // [J·s]
-    constexpr double k_e            = 8.987'551'7923e9;        // [N·m²/C²]
-    constexpr double e_charge       = 1.602'176'634e-19;       // [C]
-    constexpr double h_bar_meV_ns   = 6.582119569e-1;          // ℏ in meV·ns
+// ---------------- knot geometry (aspect rho committed = 1/4) ----------------
+struct Curve { std::vector<V3> p, dl; };                 // midpoint segments
+static Curve make_trefoil(double rho, int N){
+    // R + r = 1 (R_p units), r/R = rho
+    double R = 1.0/(1.0+rho), r = rho*R;
+    Curve c; c.p.resize(N); c.dl.resize(N);
+    for (int i=0;i<N;++i){
+        double t = 2.0*PI*(i+0.5)/N, dt = 2.0*PI/N;
+        double w = R + r*std::cos(3*t);
+        c.p[i]  = { w*std::cos(2*t), w*std::sin(2*t), r*std::sin(3*t) };
+        // derivative
+        double dw = -3*r*std::sin(3*t);
+        c.dl[i] = { (dw*std::cos(2*t) - 2*w*std::sin(2*t))*dt,
+                    (dw*std::sin(2*t) + 2*w*std::cos(2*t))*dt,
+                    (3*r*std::cos(3*t))*dt };
+    }
+    return c;
+}
+static Curve make_loop(double a, int N){                 // plain circle, radius a
+    Curve c; c.p.resize(N); c.dl.resize(N);
+    for (int i=0;i<N;++i){
+        double t = 2.0*PI*(i+0.5)/N, dt = 2.0*PI/N;
+        c.p[i]  = { a*std::cos(t), a*std::sin(t), 0.0 };
+        c.dl[i] = { -a*std::sin(t)*dt, a*std::cos(t)*dt, 0.0 };
+    }
+    return c;
+}
+// Kahan-compensated scalar line integral  Phi(x) = sum |dl| / dist
+static double phi_line(const Curve& c, V3 x){
+    double s=0, comp=0;
+    for (size_t i=0;i<c.p.size();++i){
+        double d = nrm(sub(x, c.p[i]));
+        double term = nrm(c.dl[i])/d;
+        double y = term - comp, t = s + y; comp = (t - s) - y; s = t;
+    }
+    return s;
+}
+// Biot-Savart magnitude (Gamma=1):  v = (1/4pi) sum dl x (x-p)/d^3
+static double bs_mag(const Curve& c, V3 x){
+    double vx=0, vy=0, vz=0;
+    for (size_t i=0;i<c.p.size();++i){
+        V3 rr = sub(x, c.p[i]); double d = nrm(rr); double d3 = d*d*d;
+        vx += (c.dl[i].y*rr.z - c.dl[i].z*rr.y)/d3;
+        vy += (c.dl[i].z*rr.x - c.dl[i].x*rr.z)/d3;
+        vz += (c.dl[i].x*rr.y - c.dl[i].y*rr.x)/d3;
+    }
+    return std::sqrt(vx*vx+vy*vy+vz*vz)/(4.0*PI);
 }
 
-using namespace constants;
-
-// ─────────────────────────────────────────────────────────────────────────
-//  TREFOIL PARAMETERIZATION: (2,3) Torus Knot
-// ─────────────────────────────────────────────────────────────────────────
-
-/**
- * Parametrize a (p,q) = (2,3) torus knot in normalized coordinates.
- * @param t Parameter ∈ [0, 2π], full cycle covers 3 toroidal turns (q=3)
- * @return 3D position [x, y, z] in units of R_p
- */
-struct Point3D {
-    double x, y, z;
-    Point3D() = default;
-    Point3D(double x_, double y_, double z_) : x(x_), y(y_), z(z_) {}
-    Point3D operator+(const Point3D& p) const {
-        return Point3D(x + p.x, y + p.y, z + p.z);
+// ---------------- shared extraction pipeline (the instrument) ----------------
+// ADJ-2 (finer numerics, allowed class; window/gates untouched): the first run's
+// midpoint theta-grid left an O(h^2) P2-projection floor ~1e-4 relative — the
+// monopole leaked into c2 and alpha2 fitted the FLOOR (0.93, sub-window sliding
+// to 1.0, c2 moving 3x with resolution = its own convergence check firing).
+// Replaced with Gauss–Legendre quadrature in cos(theta): spectrally exact
+// projections for smooth fields. First-run output preserved as
+// aps04_results_2026-07-26_run1.txt.
+static void gauss_legendre(int n, std::vector<double>& x, std::vector<double>& w){
+    x.resize(n); w.resize(n);
+    for (int i=0;i<n;++i){
+        double xi = std::cos(PI*(i+0.75)/(n+0.5));            // initial guess
+        for (int it=0; it<100; ++it){
+            double p0=1, p1=0;                                // P_n and derivative by recurrence
+            for (int k=0;k<n;++k){ double p2=p1; p1=p0; p0=((2*k+1)*xi*p1 - k*p2)/(k+1); }
+            double dp = n*(xi*p0 - p1)/(xi*xi - 1.0);
+            double dx_ = -p0/dp; xi += dx_;
+            if (std::fabs(dx_) < 1e-15) break;
+        }
+        double p0=1, p1=0;
+        for (int k=0;k<n;++k){ double p2=p1; p1=p0; p0=((2*k+1)*xi*p1 - k*p2)/(k+1); }
+        double dp = n*(xi*p0 - p1)/(xi*xi - 1.0);
+        x[i] = xi; w[i] = 2.0/((1.0-xi*xi)*dp*dp);
     }
-    Point3D operator*(double s) const {
-        return Point3D(x * s, y * s, z * s);
+}
+struct ShellDecomp { double mono, dip_rel, c2, a3; };
+template<typename F>
+static ShellDecomp decompose(F&& f, double r, int Nth=48, int Nph=72){
+    std::vector<double> gx, gw; gauss_legendre(Nth, gx, gw);
+    double s0=0, sz=0, s2=0, a3acc=0;
+    for (int j=0;j<Nth;++j){
+        double ct = gx[j], st = std::sqrt(1.0-ct*ct), w = gw[j];
+        double A3=0, B3=0, srow=0;
+        for (int k=0;k<Nph;++k){
+            double ph = 2.0*PI*k/Nph;
+            V3 x = { r*st*std::cos(ph), r*st*std::sin(ph), r*ct };
+            double v = f(x);
+            srow += v;
+            A3 += v*std::cos(3*ph); B3 += v*std::sin(3*ph);
+        }
+        double vbar = srow/Nph;
+        s0 += w*vbar;
+        sz += w*vbar*ct;
+        s2 += w*vbar*0.5*(3.0*ct*ct-1.0);
+        a3acc += w*2.0*std::sqrt(A3*A3+B3*B3)/Nph;
     }
-    double dot(const Point3D& p) const {
-        return x * p.x + y * p.y + z * p.z;
+    ShellDecomp d;
+    d.mono = 0.5*s0;                                   // int dx/2 over [-1,1]
+    d.dip_rel = std::fabs(1.5*sz)/std::max(1e-300, d.mono);
+    // ADJ-4 (normalisation bug caught by the P3 two-stream): Legendre coefficient
+    // A = int(f P2)/int(P2^2) = s2/(2/5) = 2.5*s2 — the first GL run used 1.25*s2
+    // (half), which the direct-vs-fitted factor-2.03 exposed. Exponent gates
+    // unaffected (prefactor only).
+    d.c2  = 2.5*s2;
+    d.a3  = 0.5*a3acc;
+    return d;
+}
+// log-log LSQ fit y = A r^-alpha over shells [i0,i1)
+static void fitpow(const std::vector<double>& r, const std::vector<double>& y,
+                   int i0, int i1, double& alpha_out, double& lnA){
+    double n=0, sx=0, sy=0, sxx=0, sxy=0;
+    for (int i=i0;i<i1;++i){
+        if (y[i]<=0) continue;
+        double X = std::log(r[i]), Y = std::log(y[i]);
+        n++; sx+=X; sy+=Y; sxx+=X*X; sxy+=X*Y;
     }
-    double norm() const {
-        return std::sqrt(x * x + y * y + z * z);
-    }
-};
-
-/**
- * (2,3) torus knot parametrization.
- * Major radius (around z-axis): R_major ≈ 1.0 (in knot-relative units)
- * Minor radius (cross-section): r_minor ≈ 0.3
- * The knot winds p=2 times poloidally, q=3 times toroidally.
- */
-Point3D trefoil_knot(double t, double R_major = 1.0, double r_minor = 0.3) {
-    const int p = 2;  // Poloidal winding
-    const int q = 3;  // Toroidal winding
-
-    // Poloidal angle (around the minor circle)
-    double u = p * t;
-    // Toroidal angle (around the major axis)
-    double v = q * t;
-
-    // Circle in the meridian plane, offset by R_major
-    double x_circ = R_major + r_minor * std::cos(u);
-    double z_circ = r_minor * std::sin(u);
-
-    // Rotate around the z-axis
-    double x = x_circ * std::cos(v);
-    double y = x_circ * std::sin(v);
-    double z = z_circ;
-
-    return Point3D(x, y, z);
+    double slope = (n*sxy - sx*sy)/(n*sxx - sx*sx);
+    alpha_out = -slope; lnA = (sy - slope*sx)/n;
 }
 
-// ─────────────────────────────────────────────────────────────────────────
-//  VELOCITY FIELD COMPUTATION
-// ─────────────────────────────────────────────────────────────────────────
+int main(){
+    printf("================================================================\n");
+    printf(" APS04 wake-field solver - REBUILT (spec 2026-07-26, gates committed)\n");
+    printf("================================================================\n");
+    printf("[UNITS LEDGER 0] R_p = 4*hbar/(m_p c) = %.6e m ; a0 = %.6e m\n", Rp_m, a0_m);
+    double a0R = a0_m/Rp_m;
+    printf("               a0/R_p = %.4e  (committed window [1e1,1e5]: INSIDE)\n", a0R);
 
-/**
- * Velocity at a point r due to circulation around the trefoil.
- * Uses a simplified Biot-Savart-type model:
- * Each element of the trefoil filament acts as a circulation source.
- * The velocity field is the superposition of contributions from the knot curve.
- *
- * For a vortex filament with circulation Γ at position r_source, the velocity
- * at position r is:
- *   v(r) = (Γ / 4π) ∮ (dl × (r - r_source)) / |r - r_source|³
- *
- * Here we use a simplified model: the velocity field of a trefoil wake
- * decays radially as v(r) ∝ 1/r (monopole-like for the axial component).
- * The azimuthal component has multipole structure.
- */
-struct VelocityField {
-    double v_r;        // Radial component
-    double v_theta;    // Poloidal (meridian) component
-    double v_phi;      // Toroidal (azimuthal) component
-};
-
-/**
- * Compute the circulating velocity field of the trefoil.
- * Approximation: the proton circulates at phase velocity v_phase ≈ 1.831c
- * with 6π winding per cycle. The effective "circulation" is Γ ~ R_p × v_phase.
- *
- * @param obs_point Observation point [x, y, z] in meters
- * @param knot_samples Number of samples along the knot
- * @return VelocityField at obs_point
- */
-VelocityField compute_trefoil_velocity(Point3D obs_point, int knot_samples = 128) {
-    VelocityField v_accum{0.0, 0.0, 0.0};
-
-    // Circulation strength (related to phase velocity mismatch)
-    double Gamma = 2.0 * pi * R_p * v_phase_R_p;  // Circulation = 2πRv
-
-    // Sample the trefoil knot
-    for (int i = 0; i < knot_samples; ++i) {
-        double t = 2.0 * pi * i / knot_samples;
-        Point3D knot_pt = trefoil_knot(t, 1.0, 0.3);  // Normalized
-        knot_pt = knot_pt * R_p;  // Scale to physical units (meters)
-
-        // Vector from knot segment to observation point
-        Point3D dr = obs_point + (knot_pt * (-1.0));
-        double r_dist = dr.norm();
-
-        if (r_dist < 1e-20) continue;  // Skip singularity
-
-        // Biot-Savart contribution (simplified)
-        // The full Biot-Savart is complex for a 3D curve; here we approximate
-        // by summing the dipole-like field from each segment.
-
-        // Tangent direction (discretized)
-        double dt = 2.0 * pi / knot_samples;
-        Point3D knot_pt_next = trefoil_knot(t + dt, 1.0, 0.3) * R_p;
-        Point3D tangent = (knot_pt_next + (knot_pt * (-1.0))) * (1.0 / dt);
-
-        // Biot-Savart kernel: (tangent × dr) / r³
-        Point3D cross_prod{
-            tangent.y * dr.z - tangent.z * dr.y,
-            tangent.z * dr.x - tangent.x * dr.z,
-            tangent.x * dr.y - tangent.y * dr.x
+    // ================= P0 - INSTRUMENT VALIDATION =================
+    printf("\n--- P0a: point source (analytic r^-1) through the full pipeline ---\n");
+    {
+        std::vector<double> rs, mono;
+        for (int i=0;i<=24;++i){ double r = std::pow(10.0, 1.0 + 3.0*i/24.0); rs.push_back(r);
+            auto d = decompose([](V3 x){ return 1.0/nrm(x); }, r);
+            mono.push_back(d.mono); }
+        double al, lnA; fitpow(rs, mono, 0, (int)rs.size(), al, lnA);
+        printf("  alpha0 = %.5f  (gate 1.00 +/- 0.02) -> %s\n", al, (std::fabs(al-1)<0.02)?"G0b PASS":"G0b FAIL");
+    }
+    printf("--- P0b/c: circular loop, Biot-Savart (analytic dipole r^-3) ---\n");
+    {
+        double a = 1.0; Curve L = make_loop(a, 720);
+        std::vector<double> rs, mag;
+        for (int i=0;i<=24;++i){ double z = std::pow(10.0, 1.0 + 2.0*i/24.0); rs.push_back(z);
+            mag.push_back(bs_mag(L, {0,0,z})); }
+        double al, lnA; fitpow(rs, mag, 0, (int)rs.size(), al, lnA);
+        // analytic on-axis far field: v = a^2/(2 z^3) * (1/1)  [Gamma=1, our 1/4pi conv: a^2/(2z^3)]
+        double coef = std::exp(lnA), coef_an = a*a/2.0;
+        printf("  loop exponent = %.5f (gate 3.00 +/- 0.05) ; coeff = %.6f vs analytic %.6f (%.2f%%)\n",
+               al, coef, coef_an, 100.0*std::fabs(coef/coef_an-1.0));
+        bool g0a = std::fabs(al-3.0)<0.05 && std::fabs(coef/coef_an-1.0)<0.02;
+        printf("  -> %s\n", g0a?"G0a PASS":"G0a FAIL");
+        auto d = decompose([&](V3 x){ return bs_mag(L,x); }, 30.0);
+        double m3rel = d.a3/std::max(1e-300,d.mono);
+        printf("  loop m=3 content at r=30a: %.2e relative (gate <1e-3) -> %s\n",
+               m3rel, (m3rel<1e-3)?"G0c PASS":"G0c FAIL");
+    }
+    printf("--- P0d: three point sources at 120deg (two-stream on the m=3 machinery) ---\n");
+    {
+        double dpl = 1.0;
+        std::array<V3,3> pts = { V3{dpl,0,0},
+                                 V3{dpl*std::cos(2*PI/3), dpl*std::sin(2*PI/3), 0},
+                                 V3{dpl*std::cos(4*PI/3), dpl*std::sin(4*PI/3), 0} };
+        auto exact = [&](V3 x){ double s=0; for (auto&p:pts) s += 1.0/nrm(sub(x,p)); return s; };
+        // analytic multipole sum to l=3 (moments of three points, m=0 and m=3 terms)
+        // M0=3 ; Q20 = sum(3z^2-r^2)/2 = -3d^2/2 ; M33: sum (x+iy)^3 = 3 d^3
+        auto approx = [&](V3 x){
+            double r = nrm(x), ct = x.z/r, ph = std::atan2(x.y,x.x), st = std::sqrt(1-ct*ct);
+            double P2 = 0.5*(3*ct*ct-1);
+            double mono = 3.0/r;
+            double quad = (-1.5*dpl*dpl)*P2/(r*r*r);
+            // l=3,m=3 term of 1/|x-x'|: (15/  ... ) use real solid-harmonic form:
+            // sum_l (r'^l/r^{l+1}) P_l(cos gamma); the m=3 part for equatorial points:
+            // (1/4) * (r'^3/r^4) * ... — validated numerically by the two-stream itself:
+            double oct = (dpl*dpl*dpl)*(std::pow(st,3)*std::cos(3*ph))*(3.0*(5.0/8.0))/(r*r*r*r);
+            return mono + quad + oct;
         };
-
-        double factor = (Gamma / (4.0 * pi)) * (1.0 / (r_dist * r_dist * r_dist));
-
-        v_accum.v_r     += factor * cross_prod.x;  // Radial
-        v_accum.v_theta += factor * cross_prod.y;  // Meridian
-        v_accum.v_phi   += factor * cross_prod.z;  // Azimuthal
+        auto de = decompose(exact,  30.0);
+        auto da = decompose(approx, 30.0);
+        double dev = std::fabs(de.a3-da.a3)/std::max(1e-300, de.a3);
+        printf("  m=3 amplitude at r=30d: exact-pipeline %.4e vs multipole-pipeline %.4e (dev %.2f%%)\n",
+               de.a3, da.a3, 100*dev);
+        printf("  -> %s (gate <1%% on the m=3 machinery two-stream)\n", (dev<0.01)?"G0d PASS":"G0d FAIL");
     }
 
-    return v_accum;
-}
-
-// ─────────────────────────────────────────────────────────────────────────
-//  MULTIPOLE ANALYSIS
-// ─────────────────────────────────────────────────────────────────────────
-
-/**
- * Wake potential components at a radius r, decomposed into multipole modes.
- * We extract:
- *   Φ₀(r) — monopole (ℓ=0): integrated potential
- *   Φ₂(r) — quadrupole (ℓ=2): P₂(cos θ) modulation
- *   Φ₃(r) — trefoil (ℓ=3): cos(3φ) modulation
- */
-struct MultipoleComponents {
-    double Phi_0;   // Monopole
-    double Phi_2;   // Quadrupole
-    double Phi_3;   // Trefoil harmonic
-    double Phi_2_fit_exp;  // Fitted exponent for Φ₂(r)
-    double Phi_3_fit_exp;  // Fitted exponent for Φ₃(r)
-};
-
-/**
- * Extract multipole components from velocity field samples at radius r.
- * Sample at θ ∈ {0, π/2, π} and average over φ.
- */
-MultipoleComponents extract_multipoles(double r, int theta_samples = 3, int phi_samples = 12) {
-    MultipoleComponents mp{0.0, 0.0, 0.0, 0.0, 0.0};
-
-    // Sample at equatorial (θ = π/2) and polar (θ = 0, π) positions
-    std::vector<double> phi_eq(phi_samples), phi_pol(phi_samples);
-
-    for (int j = 0; j < phi_samples; ++j) {
-        double phi = 2.0 * pi * j / phi_samples;
-
-        // Equatorial position
-        Point3D eq_pt{r * std::cos(phi), r * std::sin(phi), 0.0};
-        VelocityField v_eq = compute_trefoil_velocity(eq_pt);
-        double speed_eq = std::sqrt(v_eq.v_r * v_eq.v_r + v_eq.v_theta * v_eq.v_theta + v_eq.v_phi * v_eq.v_phi);
-        phi_eq[j] = speed_eq;
-
-        // Polar position (north pole)
-        Point3D pol_pt{0.0, 0.0, r};
-        VelocityField v_pol = compute_trefoil_velocity(pol_pt);
-        double speed_pol = std::sqrt(v_pol.v_r * v_pol.v_r + v_pol.v_theta * v_pol.v_theta + v_pol.v_phi * v_pol.v_phi);
-        phi_pol[j] = speed_pol;
+    // ================= P2 - TREFOIL EXTRACTION =================
+    printf("\n--- P2: trefoil (rho=1/4 committed), window r/R_p in [1e1,1e5] ---\n");
+    Curve K = make_trefoil(0.25, 720);
+    const int NS = 49;
+    std::vector<double> rs(NS), mono(NS), diprel(NS), q2(NS), a3(NS);
+    for (int i=0;i<NS;++i){
+        double r = std::pow(10.0, 1.0 + 4.0*i/(NS-1)); rs[i]=r;
+        auto d = decompose([&](V3 x){ return phi_line(K,x); }, r);
+        mono[i]=d.mono; diprel[i]=d.dip_rel; q2[i]=std::fabs(d.c2); a3[i]=d.a3;
+    }
+    double al0, al2, al3, lnA0, lnA2, lnA3;
+    fitpow(rs, mono, 0, NS, al0, lnA0);
+    fitpow(rs, q2,   0, NS, al2, lnA2);
+    // m=3 falls fast: fit only where amplitude is above double-precision noise floor
+    int i3max = NS; for (int i=0;i<NS;++i) if (a3[i] < 1e-13*mono[i]) { i3max = i; break; }
+    fitpow(rs, a3, 0, i3max, al3, lnA3);
+    double dipmax=0; for (double v: diprel) dipmax = std::max(dipmax, v);
+    printf("  alpha0 = %.4f (gate 1.0+/-0.2) | alpha2 = %.4f (gate 3.0+/-0.5) | alpha3 = %.4f (gate 4.0+/-0.5, %d shells)\n",
+           al0, al2, al3, i3max);
+    printf("  dipole content max = %.2e relative (gate <1e-3, analytic ZERO)\n", dipmax);
+    // G2e sub-window drift
+    double al0a, al0b, al2a, al2b, dumm;
+    fitpow(rs, mono, 0, NS/2, al0a, dumm); fitpow(rs, mono, NS/2, NS, al0b, dumm);
+    fitpow(rs, q2,   0, NS/2, al2a, dumm); fitpow(rs, q2,   NS/2, NS, al2b, dumm);
+    printf("  G2e sub-windows: alpha0 %.4f|%.4f  alpha2 %.4f|%.4f (drift flags if bands split)\n",
+           al0a, al0b, al2a, al2b);
+    // grid convergence: halve knot step, double angles at one mid shell
+    {
+        Curve K2 = make_trefoil(0.25, 1440);
+        double rmid = 1.0e3;
+        auto dA = decompose([&](V3 x){ return phi_line(K, x); }, rmid, 36, 72);
+        auto dB = decompose([&](V3 x){ return phi_line(K2,x); }, rmid, 72, 144);
+        printf("  grid convergence @r=1e3: mono %.3e vs %.3e (%.2e rel) ; c2 %.3e vs %.3e (%.2e rel)\n",
+               dA.mono, dB.mono, std::fabs(dA.mono/dB.mono-1),
+               dA.c2, dB.c2, std::fabs(dA.c2/dB.c2-1));
+    }
+    // G2f aspect sensitivity (exponents must not move)
+    for (double rho : {0.125, 0.5}){
+        Curve Ka = make_trefoil(rho, 720);
+        std::vector<double> m2(NS), m3v(NS);
+        for (int i=0;i<NS;++i){
+            auto d = decompose([&](V3 x){ return phi_line(Ka,x); }, rs[i]);
+            m2[i]=std::fabs(d.c2); m3v[i]=d.a3;
+        }
+        double b2, b3, dl_;
+        fitpow(rs, m2, 0, NS, b2, dl_);
+        int j3 = NS; for (int i=0;i<NS;++i) if (m3v[i] < 1e-13) { j3 = i; break; }
+        fitpow(rs, m3v, 0, j3, b3, dl_);
+        printf("  G2f rho=%.3f : alpha2 = %.4f, alpha3 = %.4f (exponents must stay in-band)\n", rho, b2, b3);
+    }
+    // circulation channel, report-only (ADJ-0)
+    {
+        std::vector<double> mg(25), rr(25);
+        for (int i=0;i<25;++i){ rr[i]=std::pow(10.0, 1.0+2.0*i/24.0);
+            mg[i]=bs_mag(K, {0,0,rr[i]}); }
+        double av, dl_; fitpow(rr, mg, 0, 25, av, dl_);
+        printf("  [report-only ADJ-0] circulation-channel on-axis exponent = %.4f (dipole 3 expected)\n", av);
     }
 
-    // Monopole: average over all positions
-    double avg_eq = std::accumulate(phi_eq.begin(), phi_eq.end(), 0.0) / phi_samples;
-    double avg_pol = std::accumulate(phi_pol.begin(), phi_pol.end(), 0.0) / phi_samples;
-    mp.Phi_0 = (avg_eq + avg_pol) / 2.0;
-
-    // Quadrupole: difference between equatorial and polar
-    // P₂(cos π/2) = −1/2, P₂(cos 0) = 1
-    // Φ₂(r) P₂(cos θ) contributes: −(3/2) Φ₂(r) at equator, 0 at pole
-    mp.Phi_2 = (avg_eq - avg_pol) * 2.0 / 3.0;  // Proportional to difference
-
-    // Trefoil (ℓ=3): cos(3φ) modulation in equatorial plane
-    std::vector<double> phi_eq_3fold(phi_samples);
-    for (int j = 0; j < phi_samples; ++j) {
-        double phi = 2.0 * pi * j / phi_samples;
-        phi_eq_3fold[j] = phi_eq[j] * std::cos(3.0 * phi);
-    }
-    mp.Phi_3 = std::sqrt(std::accumulate(phi_eq_3fold.begin(), phi_eq_3fold.end(), 0.0,
-                                          [](double a, double b) { return a + b * b; }) / phi_samples);
-
-    return mp;
-}
-
-// ─────────────────────────────────────────────────────────────────────────
-//  POWER-LAW FITTING
-// ─────────────────────────────────────────────────────────────────────────
-
-/**
- * Fit data points (r, Φ) to a power law Φ(r) = A r^{-n}.
- * Returns the fitted exponent n (should be 1, 3, 4 for Φ₀, Φ₂, Φ₃).
- */
-struct PowerLawFit {
-    double amplitude;  // A in Φ(r) = A r^{-n}
-    double exponent;   // n in Φ(r) = A r^{-n}
-    double rms_error;  // RMS fit error
-};
-
-PowerLawFit fit_power_law(const std::vector<double>& r_values, const std::vector<double>& Phi_values) {
-    if (r_values.size() < 2) return {0.0, 0.0, 1e99};
-
-    // Log-log fit: log Φ = log A − n log r
-    // Linear regression in log space
-    double sum_log_r = 0.0, sum_log_Phi = 0.0;
-    double sum_log_r_sq = 0.0, sum_log_r_log_Phi = 0.0;
-    int count = 0;
-
-    for (size_t i = 0; i < r_values.size(); ++i) {
-        if (Phi_values[i] <= 0.0) continue;  // Skip non-positive
-        double log_r = std::log(r_values[i]);
-        double log_Phi = std::log(Phi_values[i]);
-        sum_log_r += log_r;
-        sum_log_Phi += log_Phi;
-        sum_log_r_sq += log_r * log_r;
-        sum_log_r_log_Phi += log_r * log_Phi;
-        count++;
+    // ================= P3 - ENERGY SPLIT AT a0 =================
+    printf("\n--- P3: split at a0 (bands committed; coupling committed in P1) ---\n");
+    // ADJ-3 (finer numerics): band averages computed at TWO resolutions to
+    // separate instrument from convention; both printed.
+    for (int res=1; res<=2; ++res)
+    {
+        double r = a0R;                        // exact a0 shell, inside window
+        int Nth=72*res, Nph=144*res;
+        printf("  [P3 resolution %dx: %d x %d]\n", res, Nth, Nph);
+        double seq=0, neq=0, spol=0, npol=0, sall=0, nall=0;
+        for (int j=0;j<Nth;++j){
+            double th = PI*(j+0.5)/Nth, w = std::sin(th), thd = th*180.0/PI;
+            for (int k=0;k<Nph;++k){
+                double ph = 2.0*PI*k/Nph;
+                V3 x = { r*std::sin(th)*std::cos(ph), r*std::sin(th)*std::sin(ph), r*std::cos(th) };
+                double v = phi_line(K, x);
+                sall += w*v; nall += w;
+                if (thd>=80 && thd<=100){ seq += w*v; neq += w; }
+                if (thd<=20 || thd>=160){ spol+= w*v; npol+= w; }
+            }
+        }
+        double phibar = sall/nall;
+        double d_eq  = (seq/neq)/phibar - 1.0;
+        double d_pol = (spol/npol)/phibar - 1.0;
+        double ddiff = d_eq - d_pol;
+        printf("[UNITS LEDGER 3] phibar(a0) [R_p^-1 units, sigma=1] = %.9e\n", phibar);
+        printf("  <delta>_eq = %+.6e   <delta>_pol = %+.6e   diff = %+.6e\n", d_eq, d_pol, ddiff);
+        bool valid = std::fabs(d_eq)<0.1 && std::fabs(d_pol)<0.1;
+        printf("  G3-valid (|delta|<0.1): %s\n", valid?"PASS":"FAIL - STOP");
+        if (valid){
+            double E0 = m_e*(alpha*c0)*(alpha*c0);          // J
+            double dE = E0*ddiff;                            // J
+            double nu_MHz = dE/hP/1e6;
+            printf("[UNITS LEDGER 3b] m_e(alpha c)^2 = %.6f eV ; dE = %+.6e eV ; nu = %+.6e MHz\n",
+                   E0/eV, dE/eV, nu_MHz);
+            printf("  G3-sign  (E(s=eq) > E(p=pol) <=> diff>0): %s\n", (ddiff>0)?"PASS":"FAIL");
+            double anu = std::fabs(nu_MHz);
+            printf("  G3-order (|nu| in [1e-3,1e5] MHz): %s\n", (anu>=1e-3&&anu<=1e5)?"PASS":"FAIL");
+            printf("  G3-fork report (analyst does NOT choose):\n");
+            printf("    Fork-B (whole shift 1057.845 MHz): ratio = %.3e\n", anu/1057.845);
+            printf("    Fork-C (nuclear line 0.145 MHz)  : ratio = %.3e\n", anu/0.145);
+            // cross-check via fitted power laws (two-stream inside window).
+            // c2 is NEGATIVE (oblate knot, derived P1); fits ran on |c2| -> restore sign.
+            // Band-averaged P2 factors for the committed bands (computed, not idealised):
+            // <P2>_eq([80,100]) = -0.4938 ; <P2>_pol([0,20]u[160,180]) = +0.9024
+            double q2_a0  = -std::exp(lnA2)*std::pow(r, -al2);   // signed
+            double mono_a0=  std::exp(lnA0)*std::pow(r, -al0);
+            double ddiff_fit = (q2_a0/mono_a0)*(-0.4938 - 0.9024);
+            printf("  two-stream: delta-diff direct %.4e vs fitted-P2-route %.4e (rel dev %.2f%%)\n",
+                   ddiff, ddiff_fit, 100.0*std::fabs(ddiff_fit/ddiff-1.0));
+        }
     }
 
-    if (count < 2) return {0.0, 0.0, 1e99};
-
-    double avg_log_r = sum_log_r / count;
-    double avg_log_Phi = sum_log_Phi / count;
-
-    double numerator = sum_log_r_log_Phi - count * avg_log_r * avg_log_Phi;
-    double denominator = sum_log_r_sq - count * avg_log_r * avg_log_r;
-
-    double exponent = -numerator / denominator;  // Negative slope
-    double amplitude = std::exp(avg_log_Phi + exponent * avg_log_r);  // Back to linear space
-
-    // Compute RMS error
-    double sum_sq_error = 0.0;
-    for (size_t i = 0; i < r_values.size(); ++i) {
-        if (Phi_values[i] <= 0.0) continue;
-        double Phi_fit = amplitude / std::pow(r_values[i], exponent);
-        double error = (Phi_values[i] - Phi_fit) / Phi_values[i];
-        sum_sq_error += error * error;
+    // ================= P5 - SCALING (fork selection by data) =================
+    printf("\n--- P5: scaling discriminator (powers from the committed coupling) ---\n");
+    {
+        double mmu_me = 206.768, a0_amu = 185.84;   // reduced-mass ratio (RUN_LOG anchors)
+        double pred = mmu_me * a0_amu * a0_amu;     // Delta-E ratio, quad term: m * (1/a^2)
+        double meas_forkC = (3.7e-3*eV) / (0.145e6*hP);   // muonic size term / electronic size line
+        double meas_forkB = (202e-3*eV) / (1057.845e6*hP);
+        printf("  predicted muonic/electronic (quad term, m/a^2) = %.3e\n", pred);
+        printf("  measured Fork-C ratio (3.7 meV / 0.145 MHz)    = %.3e  -> pred/meas = %.2f\n",
+               meas_forkC, pred/meas_forkC);
+        printf("  measured Fork-B ratio (202 meV / 1057.845 MHz) = %.3e  -> pred/meas = %.1f\n",
+               meas_forkB, pred/meas_forkB);
+        bool g5 = (pred/meas_forkC < 3.0) && (pred/meas_forkC > 1.0/3.0);
+        printf("  G5 (Fork-C tracks within factor 3): %s ; Fork-B: %s\n",
+               g5? "PASS":"FAIL",
+               (pred/meas_forkB>3.0||pred/meas_forkB<1.0/3.0)? "DIES on scaling (as derived)":"survives");
     }
-    double rms_error = std::sqrt(sum_sq_error / count) * 100.0;  // As percentage
-
-    return {amplitude, exponent, rms_error};
-}
-
-// ─────────────────────────────────────────────────────────────────────────
-//  LAMB SHIFT PREDICTION
-// ─────────────────────────────────────────────────────────────────────────
-
-/**
- * Predict the Lamb shift energy splitting.
- * ΔE = E(equatorial) − E(polar)
- *     ≈ [−3/2 Φ₂(a₀) P₂(−1/2)] − [−3/2 Φ₂(a₀) P₂(+1)]
- *     = Φ₂(a₀) [−3/2(−1/2) + 3/2(1)]
- *     = Φ₂(a₀) × 9/4
- * Plus correction from trefoil harmonic Φ₃.
- */
-double predict_lamb_shift_MHz(double Phi_2_at_a0, double Phi_3_at_a0) {
-    // Energy scale factor: α² × Rydberg energy
-    double E_ry_eV = 13.605693122994;  // Rydberg energy in eV
-    double alpha_sq = alpha * alpha;
-
-    // Multipole contributions to energy splitting
-    // The quadrupole coupling (ℓ=2) dominates
-    double Delta_E_eV = alpha_sq * E_ry_eV * (Phi_2_at_a0 / r_e) * (9.0 / 4.0);
-
-    // Trefoil correction (smaller, ℓ=3)
-    double Delta_E_trefoil = alpha * alpha_sq * E_ry_eV * (Phi_3_at_a0 / r_e) * 0.5;
-    Delta_E_eV += Delta_E_trefoil;
-
-    // Convert to frequency
-    double Delta_E_J = Delta_E_eV * e_charge;  // eV to Joules
-    double Delta_nu_Hz = Delta_E_J / h;
-    double Delta_nu_MHz = Delta_nu_Hz / 1e6;
-
-    return Delta_nu_MHz;
-}
-
-// ─────────────────────────────────────────────────────────────────────────
-//  MAIN
-// ─────────────────────────────────────────────────────────────────────────
-
-int main() {
-    std::printf("═══════════════════════════════════════════════════════════════════════════════\n");
-    std::printf("  APS04: Trefoil Wake Multipole Expansion and Lamb Shift Prediction\n");
-    std::printf("═══════════════════════════════════════════════════════════════════════════════\n\n");
-
-    // Phase 1: Trefoil Wake Geometry
-    std::printf("PHASE 1: Trefoil Wake Geometry Computation\n");
-    std::printf("──────────────────────────────────────────\n");
-    std::printf("Proton radius R_p = %.6e m\n", R_p);
-    std::printf("Bohr radius a_0 = %.6e m\n", a_0);
-    std::printf("Proton phase velocity = %.4f c\n", v_phase_R_p / c);
-    std::printf("Traction ratio = %.1f × c/c\n\n", v_phase_R_p / c);
-
-    // Sample the wake field at multiple radii
-    std::vector<double> r_sample, Phi_0_vals, Phi_2_vals, Phi_3_vals;
-
-    // Radial range: 1 fm to 1000 fm
-    for (double log_r_fm = 0.0; log_r_fm <= 3.0; log_r_fm += 0.25) {
-        double r_fm = std::pow(10.0, log_r_fm);
-        double r_m = r_fm * 1e-15;
-        r_sample.push_back(r_m);
-    }
-
-    std::printf("Sampling wake field at %zu radii...\n", r_sample.size());
-
-    for (double r : r_sample) {
-        MultipoleComponents mp = extract_multipoles(r, 3, 12);
-        Phi_0_vals.push_back(mp.Phi_0);
-        Phi_2_vals.push_back(mp.Phi_2);
-        Phi_3_vals.push_back(mp.Phi_3);
-    }
-
-    // Phase 2: Multipole Power-Law Fitting
-    std::printf("\nPHASE 2: Multipole Power-Law Fitting\n");
-    std::printf("────────────────────────────────────\n");
-
-    PowerLawFit fit_0 = fit_power_law(r_sample, Phi_0_vals);
-    PowerLawFit fit_2 = fit_power_law(r_sample, Phi_2_vals);
-    PowerLawFit fit_3 = fit_power_law(r_sample, Phi_3_vals);
-
-    std::printf("Φ₀(r) ∝ r^{−%.2f}  (expect −1.0 for Coulomb)  [RMS: %.1f%%]\n",
-                fit_0.exponent, fit_0.rms_error);
-    std::printf("Φ₂(r) ∝ r^{−%.2f}  (expect −3.0 for magnetic) [RMS: %.1f%%]\n",
-                fit_2.exponent, fit_2.rms_error);
-    std::printf("Φ₃(r) ∝ r^{−%.2f}  (expect −4.0 for trefoil) [RMS: %.1f%%]\n\n",
-                fit_3.exponent, fit_3.rms_error);
-
-    // Phase 3: Energy Splitting at a₀
-    std::printf("PHASE 3: Orbital Energy Splitting at r = a_0\n");
-    std::printf("────────────────────────────────────────────\n");
-
-    MultipoleComponents mp_a0 = extract_multipoles(a_0, 3, 12);
-
-    std::printf("Φ₀(a_0) = %.6e  [normalized]\n", mp_a0.Phi_0);
-    std::printf("Φ₂(a_0) = %.6e  [quadrupole]\n", mp_a0.Phi_2);
-    std::printf("Φ₃(a_0) = %.6e  [trefoil]\n\n", mp_a0.Phi_3);
-
-    // Phase 4: Lamb Shift Prediction
-    std::printf("PHASE 4: Lamb Shift Prediction\n");
-    std::printf("───────────────────────────────\n");
-
-    double Delta_E_Lamb_pred_MHz = predict_lamb_shift_MHz(mp_a0.Phi_2, mp_a0.Phi_3);
-    double Delta_E_Lamb_obs_MHz = 1057.845;  // Measured (NIST)
-    double error_pct = (Delta_E_Lamb_pred_MHz - Delta_E_Lamb_obs_MHz) / Delta_E_Lamb_obs_MHz * 100.0;
-
-    std::printf("Measured Lamb shift (2S₁/₂ − 2P₁/₂): %.3f MHz\n", Delta_E_Lamb_obs_MHz);
-    std::printf("Predicted Lamb shift (from trefoil): %.3f MHz\n", Delta_E_Lamb_pred_MHz);
-    std::printf("Error: %.1f%%\n\n", error_pct);
-
-    // Verdict
-    std::printf("═══════════════════════════════════════════════════════════════════════════════\n");
-    std::printf("VERDICT\n");
-    std::printf("═══════════════════════════════════════════════════════════════════════════════\n");
-
-    bool pass_multipole = (fit_0.rms_error < 5.0) && (fit_2.rms_error < 5.0) && (fit_3.rms_error < 10.0);
-    bool pass_power_laws = (std::abs(fit_0.exponent - (-1.0)) < 0.2) &&
-                           (std::abs(fit_2.exponent - (-3.0)) < 0.5) &&
-                           (std::abs(fit_3.exponent - (-4.0)) < 0.5);
-    bool pass_lamb = (std::abs(error_pct) < 5.0);
-
-    std::printf("✓ Multipole decomposition: %s\n", pass_multipole ? "PASS" : "PARTIAL/FAIL");
-    std::printf("✓ Power-law exponents:     %s\n", pass_power_laws ? "PASS" : "PARTIAL/FAIL");
-    std::printf("✓ Lamb shift prediction:   %s (±%.1f%%)\n",
-                pass_lamb ? "PASS" : "PARTIAL/FAIL", std::abs(error_pct));
-
-    if (pass_multipole && pass_power_laws && pass_lamb) {
-        std::printf("\nCQ38 VERDICT: PASS — Trefoil wake mechanism derived natively.\n");
-        std::printf("Angular DOF unblocked. Fine structure closure candidate for Class C.\n");
-        return 0;
-    } else if (pass_multipole && pass_lamb) {
-        std::printf("\nCQ38 VERDICT: QUALIFIED — Magnitude and mechanism correct; power laws partial.\n");
-        std::printf("Suggests numerical simulation refinement needed for higher accuracy.\n");
-        return 1;
-    } else {
-        std::printf("\nCQ38 VERDICT: PARTIAL/FAIL — See detailed diagnostics above.\n");
-        std::printf("Trefoil wake decomposition may require full lattice simulation.\n");
-        return 2;
-    }
+    printf("\n================================================================\n");
+    printf(" grading in APS04_VERDICT_DIRECT (no gate moved after numbers)\n");
+    printf("================================================================\n");
+    return 0;
 }

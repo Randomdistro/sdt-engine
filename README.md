@@ -1,6 +1,33 @@
 # SDT Engine — Kinematic Observatory Pipeline
 ## Parameter-Free Orbital & Redshift Solvers (No G, No M)
 
+> **⟐ Dated correction & currency note (2026-07-26).** Latest first; the 2026-07-05 note below still
+> holds except where updated here.
+> 1. **Notation — koppa → Om.** "Koppa" is the *dimensionless gear* **k = c/v** (kept; the `zk²=1`
+>    surface identity is unchanged). The *length* formerly written ϟ (= v²R/c² = R/k², e.g. 1476.6 m for
+>    the Sun) is renamed **Om**, symbol **Ѻ** (Cyrillic round omega, U+047A), lit "Om/om". A repo-wide
+>    ϟ→Ѻ / "koppa"→"Om" sweep is **propose-and-wait** (not yet run — `k` is NOT swept; it *is* the gear).
+>    The stray term "k-rung" (~12 files) is drift for `k`/k-value and should be retired.
+> 2. **CR09 fully rewritten (capstone).** The 2026-07-05 note's "CR09 killed the tension dissolution"
+>    refers to the OLD isotropic radial-κ CR09. The new CR09
+>    (`Investigations/07_…/CR09_Hubble_Tension_and_Dark_Energy/PROMPT.md`) reframes on the
+>    **two-component redshift** — emission depth `Ѻ/r` + propagation octaves (`1+z = 2^Δn`) — with **no
+>    expansion, no Λ**, integrating all twelve sibling CRs.
+> 3. **Methodology correction (applies beyond CR09).** Do NOT grade SDT against ΛCDM's *processed
+>    products* — θ* (a sound horizon), r_drag, bias-corrected SN magnitudes (`m_b_corr`), or a ΔAIC
+>    computed on ΛCDM-cooked data. That uses the old model's rules to test the claim the old model's
+>    rules are flawed (circular). Test the **raw observables** (C_ℓ peak *angles*, BAO Δθ(z)/Δz(z), raw
+>    `mB`) through SDT's own rules; ΛCDM is a second interpreter of the same photons, not the yardstick.
+> 4. **Honest cosmology standing.** On the raw-er `mB` (SDT's own standardization, not `m_b_corr`), SDT
+>    coasting still **loses** to ΛCDM on the SN Hubble diagram (Δχ² ≈ 90–226, ΛCDM-favoured — raw or
+>    cooked). The SNe are conceded. SDT's live shots are the **tension SIGN** (local > CMB from the
+>    gradient, no fit) and the **raw acoustic/BAO angles** (physical shell vs metric sound horizon). "No
+>    dark energy" is a live hypothesis with the SNe behind, **not a claim**.
+> 5. **SAR section completed direct (2026-07-26).** SAR01 (Le Sage) completed — η leakage ceiling
+>    4.43×10⁻¹⁸ re-derived native, occlusion terminus-free (kill overturned). SAR05 re-issued DIRECT
+>    (agent-provenance removed; z≈99→273 K + 2/5 seeding verified). SAR02/03/04/06 figure-verified. Root
+>    build litter (106 `.obj/.exe`) cleaned; `.gitignore` extended.
+>
 > **⟐ Dated correction & currency note (2026-07-05).** This README is the May-2026 release document,
 > kept as the historical record. Updates:
 > 1. **Paths:** the `CQ##` scheme is retired — `Investigations/CQ18_Redshift_Decomposition/` is now
