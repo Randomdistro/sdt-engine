@@ -311,6 +311,49 @@
       </div>
     </div>
 
+    <!-- SECTION: MAGIC LINES -->
+    <div class="dropdown-section">
+      <div class="dropdown-header" id="hdr-magic">Magic Lines</div>
+      <div class="dropdown-content" id="sec-magic">
+        <label class="toggle-switch"><input type="checkbox" id="magN"><span class="toggle-track"></span><span class="toggle-label" style="color:#ffb26e;">Neutron-magic diagonals (N)</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="magZ"><span class="toggle-track"></span><span class="toggle-label" style="color:#7cbcff;">Proton-magic lines (Z)</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="magDM"><span class="toggle-track"></span><span class="toggle-label" style="color:#ffe878;">Doubly-magic markers</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="magWidth" checked><span class="toggle-track"></span><span class="toggle-label">Line width = stability count</span></label>
+      </div>
+    </div>
+
+    <!-- SECTION: GROUPS & LINE PICKER -->
+    <div class="dropdown-section">
+      <div class="dropdown-header" id="hdr-groups">Groups &amp; Line Picker</div>
+      <div class="dropdown-content" id="sec-groups">
+        <label class="toggle-switch"><input type="checkbox" id="grp-noble"><span class="toggle-track"></span><span class="toggle-label" style="color:#58c8ff;">Noble gases</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="grp-alkali"><span class="toggle-track"></span><span class="toggle-label" style="color:#ff8a5c;">Alkali metals</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="grp-alkEarth"><span class="toggle-track"></span><span class="toggle-label" style="color:#ffd45c;">Alkaline earth</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="grp-trans"><span class="toggle-track"></span><span class="toggle-label" style="color:#7affc0;">Transition metals</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="grp-lanth"><span class="toggle-track"></span><span class="toggle-label" style="color:#c58bff;">Lanthanides</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="grp-actin"><span class="toggle-track"></span><span class="toggle-label" style="color:#ff6bcb;">Actinides</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="grp-halogen"><span class="toggle-track"></span><span class="toggle-label" style="color:#c3ff6b;">Halogens</span></label>
+        <div style="padding:8px 10px 4px;border-top:1px solid rgba(255,255,255,0.07);margin-top:4px;">
+          <div style="font-size:10px;color:#8898bb;margin-bottom:4px;">Pull any line:</div>
+          <div style="display:flex;gap:4px;align-items:center;margin-bottom:5px;">
+            <select id="linePickAxis" style="background:#141826;color:#cdd6e6;border:1px solid #33405c;border-radius:3px;font-size:10px;padding:3px;flex:1;">
+              <option value="Z">Element Z</option>
+              <option value="N">Isotone N</option>
+              <option value="nt">Triton n&#8348;</option>
+              <option value="nd">Deuteron n&#8340;</option>
+              <option value="A">Isobar A</option>
+            </select>
+            <input id="linePickVal" type="text" placeholder="50 / Sn" style="width:60px;background:#141826;color:#cdd6e6;border:1px solid #33405c;border-radius:3px;font-size:10px;padding:3px;">
+          </div>
+          <label class="toggle-switch"><input type="checkbox" id="linePickOn"><span class="toggle-track"></span><span class="toggle-label">Highlight this line</span></label>
+        </div>
+        <div style="padding:8px 10px 6px;border-top:1px solid rgba(255,255,255,0.07);">
+          <div style="font-size:10px;color:#8898bb;margin-bottom:3px;">Dim the rest: <span id="dimVal" style="color:#d4a05c;">80%</span></div>
+          <input type="range" id="dimSlider" min="0" max="95" value="80" style="width:100%;accent-color:#d4a05c;cursor:pointer;">
+        </div>
+      </div>
+    </div>
+
     <!-- SECTION 4: DECAY -->
     <div class="dropdown-section">
       <div class="dropdown-header" id="hdr-decay">Decay</div>
@@ -1290,6 +1333,15 @@ const cbDeltaUE     = document.getElementById('showDeltaUE');
 [cbEnergySpine, cbMonoSpineOv, cbHighestGS, cbLowestGS, cbDeltaUE]
   .forEach(cb => cb && cb.addEventListener('change', draw));
 
+// Magic-line overlays, element-group highlights, line picker
+['magN','magZ','magDM','magWidth','linePickOn',
+ 'grp-noble','grp-alkali','grp-alkEarth','grp-trans','grp-lanth','grp-actin','grp-halogen']
+  .forEach(id => { const el = document.getElementById(id); if (el) el.addEventListener('change', draw); });
+{ const el = document.getElementById('linePickAxis'); if (el) el.addEventListener('change', draw); }
+{ const el = document.getElementById('linePickVal'); if (el) el.addEventListener('input', draw); }
+{ const d = document.getElementById('dimSlider'), dv = document.getElementById('dimVal');
+  if (d) d.addEventListener('input', () => { if (dv) dv.textContent = d.value + '%'; draw(); }); }
+
 // Pan & zoom events
 let dragging = false, lastX, lastY;
 canvas.addEventListener("mousedown",e=>{dragging=true;lastX=e.clientX;lastY=e.clientY;});
@@ -1987,6 +2039,11 @@ function drawNodes(ctx) {
   const showConn = cbConn.checked;
   const showMag  = cbMag.checked;
 
+  // Emphasis (element groups + line picker) — dims the rest so highlights stand out
+  const EMPH = emphasisState();
+  const _ds = document.getElementById('dimSlider');
+  EMPH.dimMul = _ds ? (1 - (+_ds.value)/100) : 0.2;
+
   // â”€â”€ Background position circles for all known unstable isotopes â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   if (cbUnstPos.checked) {
     const baseR = Math.max(2.5, gridScale * zoom / 2 - 1);
@@ -2249,6 +2306,8 @@ function drawNodes(ctx) {
     const isSoleStable = iso.isSole && iso.stable;
     const isoKey = `${iso.nd},${iso.nt}`;
     const inGroup = groupSet.has(isoKey);
+    const _emphCol = EMPH.active ? isoEmphColor(iso, EMPH) : null;
+    ctx.globalAlpha = (EMPH.active && !_emphCol) ? EMPH.dimMul : 1;
 
     const gsY = gridScale * zoom;
     const R0  = gsY * 0.9375;
@@ -2305,6 +2364,18 @@ function drawNodes(ctx) {
       ctx.fillStyle = isoColor(iso, (isHov||isSel||inGroup) ? 0.50 : isElemHov ? 0.30 : 0.20);
     }
     ctx.fill();
+
+    // Emphasis ring — element-group / line-picker highlight
+    if (_emphCol){
+      ctx.save();
+      ctx.globalAlpha = 1;
+      ctx.strokeStyle = _emphCol;
+      ctx.lineWidth = Math.max(1.5, 2.2*zoom);
+      ctx.shadowColor = _emphCol; ctx.shadowBlur = 8*zoom;
+      hexPath(ctx, p.x, p.y, R + 2.5*zoom);
+      ctx.stroke();
+      ctx.restore();
+    }
 
     // â”€â”€ Border drawing: for group members, skip edges shared with other group members â”€â”€
     if (inGroup) {
@@ -2439,6 +2510,7 @@ function drawNodes(ctx) {
   });
 
   // â”€â”€ CHANGE 4: Draw connecting lines between chain members â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  ctx.globalAlpha = 1;
   if (activeGroup.length > 1) {
     ctx.save();
     ctx.globalAlpha = 0.5;
@@ -3486,12 +3558,109 @@ function drawElemLabels(ctx) {
 }
 // === js/main.js ===
 // Main orchestrator â€” replaces the monolithic draw() function
+// ══ Element groups, line-picker & magic-line overlays ═══════════════════════
+function _rangeSet(a, b){ const s = new Set(); for (let z = a; z <= b; z++) s.add(z); return s; }
+const GROUPS = {
+  noble:    { zs: new Set([2,10,18,36,54,86]),  col:'#58c8ff' },
+  alkali:   { zs: new Set([3,11,19,37,55,87]),  col:'#ff8a5c' },
+  alkEarth: { zs: new Set([4,12,20,38,56,88]),  col:'#ffd45c' },
+  trans:    { zs: new Set([..._rangeSet(21,30), ..._rangeSet(39,48), ..._rangeSet(72,80), ..._rangeSet(104,112)]), col:'#7affc0' },
+  lanth:    { zs: _rangeSet(57,71),  col:'#c58bff' },
+  actin:    { zs: _rangeSet(89,103), col:'#ff6bcb' },
+  halogen:  { zs: new Set([9,17,35,53,85]), col:'#c3ff6b' },
+};
+const SYM2Z = {}; ISO.forEach(i => { if (!(i.sym in SYM2Z)) SYM2Z[i.sym] = i.Z; });
+const stableCountByN = {}; ISO.forEach(i => { if (i.stable){ const N = i.A - i.Z; stableCountByN[N] = (stableCountByN[N]||0) + 1; } });
+
+function emphasisState(){
+  const zs = new Set(), grpCols = {}; let any = false;
+  for (const k in GROUPS){
+    const cb = document.getElementById('grp-'+k);
+    if (cb && cb.checked){ any = true; GROUPS[k].zs.forEach(z => { zs.add(z); grpCols[z] = GROUPS[k].col; }); }
+  }
+  let line = null;
+  const lp = document.getElementById('linePickOn');
+  if (lp && lp.checked){
+    const axis = (document.getElementById('linePickAxis')||{}).value || 'Z';
+    const raw  = (((document.getElementById('linePickVal')||{}).value) || '').trim();
+    let val = parseInt(raw, 10);
+    if (axis === 'Z' && isNaN(val) && raw){
+      const sym = raw.charAt(0).toUpperCase() + raw.slice(1).toLowerCase();
+      if (sym in SYM2Z) val = SYM2Z[sym];
+    }
+    if (!isNaN(val)){ line = { axis, val }; any = true; }
+  }
+  return { active: any, zs, grpCols, line };
+}
+function isoEmphColor(iso, st){
+  if (st.zs.has(iso.Z)) return st.grpCols[iso.Z] || '#ffffff';
+  if (st.line){
+    const a = st.line.axis, v = st.line.val, N = iso.A - iso.Z;
+    if ((a==='Z' && iso.Z===v) || (a==='N' && N===v) || (a==='nt' && iso.nt===v) ||
+        (a==='nd' && iso.nd===v) || (a==='A' && iso.A===v)) return '#ffe08a';
+  }
+  return null;
+}
+function gridPosUV(u, v){ return gridPos((v+u)/2, (v-u)/2); }
+
+function drawMagicLines(ctx){
+  const cN = document.getElementById('magN'), cZ = document.getElementById('magZ'),
+        cDM = document.getElementById('magDM'), cW = document.getElementById('magWidth');
+  const byStab = !cW || cW.checked;
+  ctx.save();
+  ctx.lineJoin = 'round';
+  // Proton-magic — horizontal lines at v = Z-2
+  if (cZ && cZ.checked){
+    MAGIC_Z.forEach(Z => {
+      const row = ISO.filter(e => e.Z === Z); if (!row.length) return;
+      const us = row.map(e => e.nd - e.nt), v = Z - 2;
+      const a = gridPosUV(Math.min(...us)-1, v), b = gridPosUV(Math.max(...us)+1, v);
+      const w = byStab ? Math.max(1, (stableCountByZ[Z]||1)*0.9) : 2;
+      ctx.strokeStyle = 'rgba(120,190,255,0.55)'; ctx.lineWidth = w*zoom*0.5 + 0.5;
+      ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
+      ctx.font = '700 10px "Segoe UI",sans-serif'; ctx.fillStyle = 'rgba(150,205,255,0.9)'; ctx.textAlign = 'left';
+      ctx.fillText('Z='+Z+(byStab?'  ('+(stableCountByZ[Z]||0)+')':''), b.x+5, b.y+3);
+    });
+  }
+  // Neutron-magic — slope-1/3 diagonals (fixed N, varying Z)
+  if (cN && cN.checked){
+    MAGIC_N.forEach(N => {
+      const iso = ISO.filter(e => (e.A - e.Z) === N);
+      let Zlo, Zhi;
+      if (iso.length){ const zs = iso.map(e=>e.Z); Zlo = Math.min(...zs)-1; Zhi = Math.max(...zs)+1; }
+      else { Zlo = Math.max(2, Math.ceil(N*0.55)); Zhi = Math.min(118, N+2); }
+      const pa = gridPosUV(3*Zlo-2*N-2, Zlo-2), pb = gridPosUV(3*Zhi-2*N-2, Zhi-2);
+      const w = byStab ? Math.max(1, (stableCountByN[N]||1)*0.9) : 2;
+      ctx.strokeStyle = 'rgba(255,175,90,0.5)'; ctx.lineWidth = w*zoom*0.5 + 0.5;
+      ctx.beginPath(); ctx.moveTo(pa.x,pa.y); ctx.lineTo(pb.x,pb.y); ctx.stroke();
+      ctx.font = '700 10px "Segoe UI",sans-serif'; ctx.fillStyle = 'rgba(255,190,110,0.9)'; ctx.textAlign = 'right';
+      ctx.fillText('N='+N+(byStab?'  ('+(stableCountByN[N]||0)+')':''), pa.x-5, pa.y+3);
+    });
+  }
+  // Doubly-magic markers — only where a real nuclide sits
+  if (cDM && cDM.checked){
+    MAGIC_Z.forEach(Z => MAGIC_N.forEach(N => {
+      const nd = 2*Z-N-2, nt = N-Z;
+      if (!occupiedAlpha.has(nd+','+nt)) return;
+      const p = gridPos(nd, nt);
+      if (p.x < 130 || p.x > W-20 || p.y < 20 || p.y > H-20) return;
+      const r = Math.max(6, gridScale*zoom*0.95);
+      ctx.strokeStyle = 'rgba(255,235,120,0.95)'; ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.arc(p.x,p.y,r,0,Math.PI*2); ctx.stroke();
+      ctx.strokeStyle = 'rgba(255,235,120,0.30)'; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.arc(p.x,p.y,r+4,0,Math.PI*2); ctx.stroke();
+    }));
+  }
+  ctx.restore();
+}
+
 function draw() {
   ctx.clearRect(0, 0, W, H);
   // Twilight canvas fill
   ctx.fillStyle = '#07091c';
   ctx.fillRect(0, 0, W, H);
   drawBackground(ctx);
+  drawMagicLines(ctx);
   drawNodes(ctx);
   drawOverlays(ctx);
   drawElemLabels(ctx);
