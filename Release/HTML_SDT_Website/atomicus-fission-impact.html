@@ -39,24 +39,26 @@ canvas{display:block;cursor:grab}canvas:active{cursor:grabbing}
 </style></head><body>
 
 <div class="pane" id="left">
-  <h1>ATOMICUS · Fission Impact Map
-    <small>²³⁵U in opposition-shell packing · where the proton must strike</small></h1>
+  <h1>ATOMICUS · Fission Scission Map
+    <small>²³⁵U in opposition-shell packing · central hit → two-lobe scission at a neck</small></h1>
 
   <h2>Produce this larger daughter</h2>
   <select id="target"></select>
-  <div class="note">Ranked by real IAEA thermal-fission yield. The tool orients the cut to leave this
-    fragment intact and marks where the light piece must be peeled off.</div>
+  <div class="note">Ranked by real IAEA thermal-fission yield. A <b>central</b> proton hit (b≈0) makes the
+    compound nucleus <b>scission</b> into two lobes at a neck; the tool orients the scission plane so the
+    heavy lobe is this daughter. (A grazing hit b→R shaves the surface instead → spallation, NP27.)</div>
 
   <h2>Show</h2>
   <div style="display:flex;gap:4px;flex-wrap:wrap">
-    <button class="btn on" id="vImpact">Impact zone</button>
+    <button class="btn on" id="vImpact">Impact &amp; neck</button>
     <button class="btn on" id="vNames">Names</button>
     <button class="btn" id="vPlane">Cut plane</button>
     <button class="btn" id="vSpin">Spin</button>
   </div>
-  <div class="legend"><span class="dot" style="background:#c9a227"></span> heavy daughter — retained (snaps closed)</div>
-  <div class="legend"><span class="dot" style="background:#c0503a"></span> light fragment — peeled away</div>
-  <div class="legend"><span class="dot" style="background:#4a6d82"></span> impact zone — proton entry</div>
+  <div class="legend"><span class="dot" style="background:#c9a227"></span> heavy lobe — forms around the N=82 lock</div>
+  <div class="legend"><span class="dot" style="background:#c0503a"></span> light lobe — the complementary fragment</div>
+  <div class="legend"><span class="dot" style="background:#3f8f6f"></span> neck — where the lobes part (bonds sever, tritons strip → ν)</div>
+  <div class="legend"><span class="dot" style="background:#2f5064"></span> central proton hit (b≈0)</div>
 
   <div class="warn"><b>Honesty:</b> subunit <b>counts</b> are exact (α + n_d deuterons + n_t tritons).
     The opposition-shell <b>positions</b> are the model's assignment (Harvey 2026-07-03), not proven unique.
@@ -83,13 +85,13 @@ canvas{display:block;cursor:grab}canvas:active{cursor:grabbing}
   <div class="row"><span class="l">n_d / <b>n_t</b></span><span class="v" id="hG">—</span></div>
   <div class="row"><span class="l">N = 82 shell lock?</span><span class="v" id="hLock">—</span></div>
 
-  <h2>Light fragment — peeled</h2>
+  <h2>Light fragment — complementary lobe</h2>
   <div class="row"><span class="l">nuclide</span><span class="v" id="lName">—</span></div>
   <div class="row"><span class="l">Z / N / A</span><span class="v" id="lZNA">—</span></div>
   <div class="row"><span class="l">n_d / n_t</span><span class="v" id="lG">—</span></div>
 
   <h2>The impact</h2>
-  <div class="row"><span class="l">nucleons in impact zone</span><span class="v" id="iN">—</span></div>
+  <div class="row"><span class="l">nucleons at the neck</span><span class="v" id="iN">—</span></div>
   <div class="row"><span class="l">balance A_L+A_H+ν</span><span class="v" id="iBal">—</span></div>
   <div id="verdict" class="note"></div>
 </div>
@@ -153,7 +155,7 @@ function bestCleave(ZL,AL){
   let best=null;
   for(const d of DIRS){
     const proj=NUCL.map(n=>({n,s:n.pos[0]*d[0]+n.pos[1]*d[1]+n.pos[2]*d[2]}));
-    proj.sort((a,b)=>b.s-a.s);          // peel from the +d surface inward
+    proj.sort((a,b)=>b.s-a.s);          // the light lobe = the +d side of the scission plane (through-cut, two lobes)
     // accumulate outermost nucleons until we reach AL nucleons
     let A=0,Z=0,cut=0;
     for(let i=0;i<proj.length;i++){A++; if(proj[i].n.type==='p')Z++; if(A>=AL){cut=i+1;break;}}
@@ -195,10 +197,15 @@ let hoverN=null;
 function draw(){
   fit();cx.clearRect(0,0,W,H);
   if(!cur)return;
-  const items=NUCL.map(n=>{const pr=proj(n.pos);
-    const peeled=cur.cleave.set.has(n);
-    const onSurf=peeled && isSurface(n);
-    return{n,pr,peeled,onSurf};});
+  const gap=1.7;
+  const items=NUCL.map(n=>{
+    const dd=cur.cleave.dir;
+    const light=cur.cleave.set.has(n);
+    const s=n.pos[0]*dd[0]+n.pos[1]*dd[1]+n.pos[2]*dd[2];
+    const off=light?gap/2:-gap/2;                        // scission: pull the two lobes apart along the cut axis
+    const pr=proj([n.pos[0]+dd[0]*off,n.pos[1]+dd[1]*off,n.pos[2]+dd[2]*off]);
+    const neck=Math.abs(s-cur.cleave.thresh)<0.85;       // nucleons straddling the cut plane = the neck
+    return{n,pr,light,neck};});
   items.sort((a,b)=>a.pr.d-b.pr.d);
   // cut plane
   if(showPlane){
@@ -215,32 +222,32 @@ function draw(){
   const d0=items[0].pr.d, ds=(items[items.length-1].pr.d-d0)||1;
   for(const it of items){
     const dim=0.5+0.5*((it.pr.d-d0)/ds), R=it.pr.S*0.34;
-    let col = it.peeled? '#c0503a' : '#c9a227';
-    if(it.n.group==='α') col=it.peeled?'#c0503a':'#b8901f';
+    let col = it.light? '#c0503a' : '#c9a227';                 // light lobe (copper) vs heavy lobe (gold)
+    if(it.n.group==='α') col=it.light?'#d06a4a':'#b8901f';
     // base ball
     const g=cx.createRadialGradient(it.pr.x-R*.35,it.pr.y-R*.4,R*.1,it.pr.x,it.pr.y,R);
     g.addColorStop(0,'#fff');g.addColorStop(.3,col);g.addColorStop(1,shadeDark(col));
-    cx.globalAlpha=it.peeled?0.92:0.82;cx.beginPath();cx.arc(it.pr.x,it.pr.y,R,0,7);cx.fillStyle=g;cx.fill();
+    cx.globalAlpha=it.light?0.9:0.82;cx.beginPath();cx.arc(it.pr.x,it.pr.y,R,0,7);cx.fillStyle=g;cx.fill();
     cx.strokeStyle=(it.n===hoverN)?'#1c1a16':'rgba(0,0,0,.2)';cx.lineWidth=(it.n===hoverN)?2:.7;cx.stroke();cx.globalAlpha=1;
-    // impact-zone ring + arrow
-    if(showImpact && it.onSurf){
-      cx.beginPath();cx.arc(it.pr.x,it.pr.y,R+3,0,7);cx.strokeStyle='#4a6d82';cx.lineWidth=2;cx.stroke();
+    // neck ring — nucleons straddling the scission plane (bonds sever here; tritons strip → ν)
+    if(showImpact && it.neck){
+      cx.beginPath();cx.arc(it.pr.x,it.pr.y,R+3,0,7);cx.strokeStyle='#3f8f6f';cx.lineWidth=2;cx.stroke();
     }
-    if(showNames && it.pr.S*zoom>0 && (it.n===hoverN)){}
   }
-  // impact arrows along beam dir toward the light cap
+  // central proton impact (b≈0) → compound nucleus → scission. (grazing hit b→R = surface shave = spallation.)
   if(showImpact){
-    const d=cur.cleave.dir;
-    const surf=NUCL.filter(n=>cur.cleave.set.has(n)&&isSurface(n));
-    surf.sort((a,b)=>(b.pos[0]*d[0]+b.pos[1]*d[1]+b.pos[2]*d[2])-(a.pos[0]*d[0]+a.pos[1]*d[1]+a.pos[2]*d[2]));
-    surf.slice(0,7).forEach(n=>{
-      const tail=[n.pos[0]+d[0]*3.4,n.pos[1]+d[1]*3.4,n.pos[2]+d[2]*3.4];
-      const a=proj(tail), b=proj([n.pos[0]+d[0]*0.6,n.pos[1]+d[1]*0.6,n.pos[2]+d[2]*0.6]);
-      cx.strokeStyle='#2f5064';cx.lineWidth=2.2;cx.beginPath();cx.moveTo(a.x,a.y);cx.lineTo(b.x,b.y);cx.stroke();
-      const ang=Math.atan2(b.y-a.y,b.x-a.x);
-      cx.beginPath();cx.moveTo(b.x,b.y);cx.lineTo(b.x-9*Math.cos(ang-.4),b.y-9*Math.sin(ang-.4));
-      cx.lineTo(b.x-9*Math.cos(ang+.4),b.y-9*Math.sin(ang+.4));cx.closePath();cx.fillStyle='#2f5064';cx.fill();
-    });
+    const bw=[-6.2,0.7,0], bc=[-2.2,0.25,0];   // beam enters centrally, toward the core (not the surface cap)
+    const a=proj(bw), b=proj(bc);
+    cx.strokeStyle='#2f5064';cx.lineWidth=3.2;cx.beginPath();cx.moveTo(a.x,a.y);cx.lineTo(b.x,b.y);cx.stroke();
+    const ang=Math.atan2(b.y-a.y,b.x-a.x);
+    cx.beginPath();cx.moveTo(b.x,b.y);cx.lineTo(b.x-12*Math.cos(ang-.4),b.y-12*Math.sin(ang-.4));
+    cx.lineTo(b.x-12*Math.cos(ang+.4),b.y-12*Math.sin(ang+.4));cx.closePath();cx.fillStyle='#2f5064';cx.fill();
+    cx.fillStyle='#2f5064';cx.font='600 11px ui-monospace';cx.textAlign='left';
+    cx.fillText('proton · central hit (b≈0)',a.x+4,a.y-6);
+    // scission axis — the two lobes part along this line
+    const d=cur.cleave.dir, sA=proj([d[0]*5,d[1]*5,d[2]*5]), sB=proj([-d[0]*5,-d[1]*5,-d[2]*5]);
+    cx.strokeStyle='rgba(63,143,111,.55)';cx.lineWidth=1.4;cx.setLineDash([5,5]);
+    cx.beginPath();cx.moveTo(sA.x,sA.y);cx.lineTo(sB.x,sB.y);cx.stroke();cx.setLineDash([]);
   }
   if(showNames && hoverN){const pr=proj(hoverN.pos);
     cx.fillStyle='#1c1a16';cx.font='600 12px ui-monospace';cx.textAlign='center';
@@ -264,22 +271,24 @@ function render(){
   const c=cur.cleave, ZL=c.Z, AL=c.A, ZH=PZ-ZL, AH=PA-AL-cur.NU;
   const ndH=3*ZH-AH-2, ntH=AH-2*ZH, ndL=3*ZL-AL-2, ntL=AL-2*ZL;
   el('title').textContent='²³⁶U*  →  '+nm(ZH,AH)+'  +  '+nm(ZL,AL)+'  + '+cur.NU+'n';
-  el('sub').textContent='peel the light fragment (red); the larger daughter (gold) snaps closed';
-  el('chips').innerHTML='<span class="chip keepc">keep '+nm(ZH,AH)+'</span><span class="chip peelc">peel '+nm(ZL,AL)+'</span>';
+  el('sub').textContent='central scission — the two lobes part at the neck: heavy daughter (gold) forms around the N=82 lock, light lobe (copper) takes the remainder';
+  el('chips').innerHTML='<span class="chip keepc">heavy '+nm(ZH,AH)+'</span><span class="chip peelc">light '+nm(ZL,AL)+'</span>';
   el('hName').textContent=nm(ZH,AH); el('hZNA').textContent=ZH+' / '+(AH-ZH)+' / '+AH;
   el('hG').textContent=ndH+' / '+ntH+' t';
   const lock=(AH-ZH===82)||(ZH===50)||(ntH>=31&&ntH<=32);
   el('hLock').innerHTML=lock?'<span class="chip keepc">N='+(AH-ZH)+' — LOCKED</span>':'N='+(AH-ZH);
   el('lName').textContent=nm(ZL,AL); el('lZNA').textContent=ZL+' / '+(AL-ZL)+' / '+AL;
   el('lG').textContent=ndL+' / '+ntL+' t';
-  const iz=NUCL.filter(n=>c.set.has(n)&&isSurface(n)).length;
-  el('iN').textContent=iz+' surface nucleons';
+  const iz=NUCL.filter(n=>Math.abs(n.pos[0]*c.dir[0]+n.pos[1]*c.dir[1]+n.pos[2]*c.dir[2]-c.thresh)<0.85).length;
+  el('iN').textContent=iz+' neck nucleons (bonds sever here)';
   el('iBal').textContent=AL+' + '+AH+' + '+cur.NU+' = '+(AL+AH+cur.NU)+(AL+AH+cur.NU===PA?' ✓':' ✗');
-  el('fL').textContent='cut error '+c.err+' · peeled '+c.A+' nucleons ('+c.Z+'p) · '+iz+' in impact zone';
-  el('verdict').innerHTML='To leave <b>'+nm(ZH,AH)+'</b> intact, the proton must strike the <b>red cap</b> '
-    +'— the deuteron-rich light lobe furthest from the rigid N='+(AH-ZH)+' triton core. '
-    +(lock?'This daughter sits on the <b>N=82 shell lock</b>: the tightest, most-repeated cut in the whole spectrum.':'')
-    +' The triton count of the daughter (n_t='+ntH+') is the quantity fission holds rigid (NP25-Y).';
+  el('fL').textContent='cut error '+c.err+' · light lobe '+c.A+' nucleons ('+c.Z+'p) · '+iz+' at the neck';
+  el('verdict').innerHTML='Central hit (b≈0) → the compound nucleus <b>scissions</b> into two lobes, '
+    +'each keeping an α seed (2d→α forms the second core, NP25). The cut runs through the <b>neck</b> '
+    +'(green ring), leaving <b>'+nm(ZH,AH)+'</b> as the heavy lobe. '
+    +(lock?'It sits on the <b>N=82 shell lock</b> — the tightest, most-repeated cut in the whole spectrum (NP32).':'')
+    +' The daughter triton count (n_t='+ntH+') is what fission holds rigid (NP25-Y). '
+    +'<i>A grazing hit (b→R) would instead shave the surface → spallation, a different regime (NP27).</i>';
   draw();
 }
 
@@ -294,7 +303,7 @@ addEventListener('mousemove',e=>{
   const tip=el('tip');
   if(best!==hoverN){hoverN=best;draw();}
   if(best){tip.style.display='block';tip.style.left=(mx+14)+'px';tip.style.top=(my+12)+'px';
-    tip.innerHTML='<b>'+best.name+'</b> · '+(best.type==='p'?'proton':'neutron')+' · '+(cur&&cur.cleave.set.has(best)?'peeled':'retained');}
+    tip.innerHTML='<b>'+best.name+'</b> · '+(best.type==='p'?'proton':'neutron')+' · '+(cur&&cur.cleave.set.has(best)?'light lobe':'heavy lobe');}
   else tip.style.display='none';
 });
 cv.addEventListener('mouseleave',()=>{el('tip').style.display='none';});
