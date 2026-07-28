@@ -183,7 +183,48 @@ Non-shell ⁸Be won't hold; the residual grows as the mesh fills toward the **Z=
 
 > **⁶Li: first dock, weak by 1.47 MeV = few teeth = no shell closed. Exactly what the mesh predicts.**
 
-## §7. Where the iteration stands / next
+## §7. STEP 6 — ¹⁶O (Z=N=8): the first completed shell — magic-8 as a tetrahedron of alphas [D-data / O-rigor]
+
+¹⁶O is Z=8,N=8 ⇒ grammar **α + 6 deuterons** (n_t=0) = **four alpha-rings.** It is the first
+doubly-magic closure above the alpha — the test of whether the mesh's *shell completion* (§1)
+reproduces a magic number and its **location**.
+
+**Prediction (meshing law §1):** at a completed shell every tooth is engaged, so the last nucleon is
+deep-locked; the next nucleon starts a new shell with few teeth, so it is weakly bound. The
+separation energy must **step down sharply right after the magic count.**
+
+**Data — computed here from the cached AME2020 binding energies:**
+```
+S_n(¹⁶O,N=8)=15.66 MeV  →  S_n(¹⁷O,N=9)=4.14 MeV    DROP ×3.8   at N=8→9
+S_p(¹⁶O,Z=8)=12.13 MeV  →  S_p(¹⁷F,Z=9)=0.60 MeV    DROP ×20    at Z=8→9   (¹⁷F is a proton halo)
+```
+The 8th nucleon of each type is deep-locked; the 9th is barely held. **The shell-completion step
+lands exactly at count 8, and it is sharp.** The alpha-ladder residual confirms the fill toward it:
+⁸Be −0.09 (won't hold) → ¹²C +7.27 → **¹⁶O +14.44.** [D — from measured binding]
+
+**Why 8 — the geometric closure [D-mechanism / O-rigor]:** the alpha is a p–n–p–n **ring**; **four
+rings close into a TETRAHEDRON** — the first closed polyhedron (4 vertices, each meshing its 3
+neighbours, every outward tooth engaged). Three alphas (¹²C) make only an **open triangle** (bound,
+not shell-complete); the **fourth alpha closes the tetrahedron → all teeth engaged → Z=N=8 complete
+shell**; a fifth alpha (²⁰Ne) can only dock **peripherally** on the closed surface → weak, starting
+the next shell. So **magic-8 falls out as the tetrahedral closure of four alpha-rings** — an
+independent geometric origin, matching the ¹⁶O-as-alpha-tetrahedron of cluster models.
+
+**Honest status [convergent / owed]:**
+- **Confirmed [D]:** the shell-completion *pattern* — the sharp separation-energy step at count 8
+  (S_n ×3.8, S_p ×20), measured.
+- **Convergent [origin]:** magic-8 = four-alpha tetrahedron is SDT's *own* mechanism; same value as
+  the shell model's 8 but **independent origin** (tetrahedral alpha-ring closure vs fitted HO +
+  spin-orbit) ⇒ convergent, not degenerate.
+- **Owed [O]:** proving the tetrahedral closure is *forced* by the mesh (not merely available), and
+  that the **same closure principle continues** to 20 (¹⁰ alphas, ⁴⁰Ca), 28, 50, 82, 126. If it does,
+  the whole magic sequence is derived from mesh geometry — the NP32 location debt paid in full.
+
+> **¹⁶O: magic-8 = a tetrahedron of four alpha-rings; the shell-completion step is confirmed in the
+> measured separation energies (×3.8 / ×20 drop at 8→9). First magic number above the alpha shown to
+> be a mesh closure — origin geometric and independent, full-sequence rigor still owed.**
+
+## §8. Where the iteration stands / next
 
 - **Done & meshing:** ¹H · ²H (p↔n gear) · ³H/³He (3-gear rods, 6.26) · ⁴He (p–n–p–n ring, 23.85) ·
   **⁶Li (first dock, 1.47).** Every lock is a measured binding difference — the traction picture keeps
@@ -200,10 +241,18 @@ Non-shell ⁸Be won't hold; the residual grows as the mesh fills toward the **Z=
   completion shows the jump and, later, ⁴⁰Ca (Z=N=20) and beyond do too, the magic numbers are
   **derived** from shell completion of the p↔n mesh — the NP32 location debt paid.
 
-> **Standing at:** A=6 complete; ⁶Li is a weak peripheral dock (1.47 MeV, few teeth) — first
-> confirmation that *incomplete dock ⇒ weak binding*. The shell-completion signature is already
-> visible in the alpha ladder (⁸Be unbound → ¹⁶O deep). Next on your word: climb toward ¹⁶O (Z=N=8),
-> the first completed shell — the real test of magic-from-meshing.
+- **⁶Li→¹⁶O climb, done:** the shell-completion selector made its first prediction and the measured
+  separation energies confirmed it — **magic-8 is a tetrahedron of four alpha-rings**, deep-locked,
+  with a sharp S-step (×3.8 / ×20) at 8→9.
+- **The one test that would pay the NP32 debt in full:** does the **same closure principle continue?**
+  ⁴⁰Ca (Z=N=20, ¹⁰ alphas) is the next doubly-magic — if magic-20 also falls out as a closed
+  alpha-ring polyhedron *and* shows the sharp S-step, and then 28/50/82/126 follow, the magic
+  sequence is **derived**, not imported. That is the make-or-break for magic-from-meshing.
+
+> **Standing at:** ¹⁶O complete — magic-8 shown as the tetrahedral closure of four alpha-rings, the
+> shell-completion step confirmed in measured separation energies (first magic number above the alpha
+> derived-ish from the mesh; origin geometric and independent, full-sequence rigor owed). Next on your
+> word: ⁴⁰Ca (Z=N=20) — does the closure principle continue to the next magic number?
 
 ---
 
@@ -237,3 +286,24 @@ slightly opened, its like-like pairs hovering just off contact.** This reconcile
 diagonals just barely disengaged. If compactness drives the pucker to its limit, the alpha's
 shape is a zero-parameter geometric prediction sitting just short of regular — checkable
 against the measured He-4 form factor when the rms-size debt (§4 [O]) is paid.
+
+**⁶Li ADDENDUM (checker, same day).** Arithmetic verified: 1.4738 ✓ (= measured α–d separation
+1.4743), ⁷Li 2.467 ✓, ⁸Be −0.092 ✓, ¹²C +7.274 ✓, ¹⁶O +14.435 ✓. Mesh geometry clean: the
+bridge dock forms a second alternating 4-cycle; bipartite holds; rolls.
+
+**Label drift — catch it now:** §6 tags the 1.474 MeV docking lock **[D]**. It is not derived;
+it is a measured mass-table difference the picture *names*. The log's own key says [D] =
+derived from the ϟ ladder — the only number in this log that has earned [D] remains the
+deuteron's 2.200. Every dock/lock so far is honest as **[measured, mesh-named]**; keep the key
+clean or the whole ledger inflates one tag at a time.
+
+**Sharpening the §7 test so it can actually be won:** every binding energy in the chart is
+already known, so "the step appears at 8" cannot be a forward discovery — read post-hoc it is
+counts-indexed narration (the NP24-A trap). The escape is quantitative and single-pass:
+**pre-commit the teeth-counting rule** (what counts as an engaged tooth, from the mesh geometry
+alone), then compute the ENTIRE docking-lock curve Z=3→20 in one sweep from that rule, and
+compare the whole curve — magnitudes, flats, and the steps at 8 and 20 — against the table
+once. No per-nuclide re-reading, no rule adjustment mid-curve. If the curve lands, magic-from-
+meshing is derived; if it needs re-tuning at any rung, that is the finding. (Quick caution from
+the current entries: 1.47/2 teeth, 2.47/~3, 2.20/1 give no constant per-tooth energy — the
+counting rule must carry geometry, not a flat per-tooth quantum.)
