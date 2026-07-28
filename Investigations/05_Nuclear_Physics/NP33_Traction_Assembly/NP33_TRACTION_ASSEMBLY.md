@@ -122,16 +122,48 @@ makes "the entire object move as one."
 
 ---
 
-## §5. Where the iteration stands / next
+## §5. STEP 4 — A = 3: the triton (³H, n–p–n) and helion (³He, p–n–p) [D-lock / C-geometry]
 
-- **Done & meshing:** ¹H (seed) · ²H (one p–e–p rod) · **⁴He (two rods interleaved, lock = 23.85 MeV,
-  frustration resolved by subunit formation).**
-- **Next — ³H triton (n–p–n) and ³He (p–n–p):** the odd-A rungs. A triton = p sandwiched between two
-  neutrons; in rotor terms it is a **longer gear-train** (n–p–n, i.e. (p·e)–p–(p·e)) — verify it
-  closes as one rod and defines the triton subunit that packs *inner* (the rigid core, NP-fission).
-- **Then the growth law:** assemble α + deuterons + tritons as pre-meshed rods and ask **at which
-  total counts the whole rod-network admits a global traction assignment** — the closure conjecture
-  (§1). If those counts are 2, 8, 20, 28, 50, 82, 126, the magic numbers are *derived*, not imported.
+**A triton is a proton sandwiched between two neutrons** — a **3-rotor gear-train rod**. Grammar of
+the electron economy: ³H is Z=1,N=2 ⇒ **3 protons + 2 stabled electrons** (the two neutrons' internal
+electrons, each at its node, 3.17c); the central proton is bare.
+```
+triton  n(−)  p(+)  n(−)        helion  p(+)  n(−)  p(+)
+```
+- **Traction:** the central rotor counter-rotates to both ends ⇒ **two (+)/(−) contacts**, and the two
+  end-rotors never touch each other (the middle one holds them apart). Path graph, bipartite,
+  **fully-traction, moves as one rod. ✓** ³He is the exact mirror (neutron sandwiched between two
+  protons), 3 protons + 1 stabled electron.
+- **The third-rotor lock is a measured number — 6.26 MeV [D, convergent]:**
+```
+  ³H binding 8.482 − ²H binding 2.225 = 6.257 MeV  =  the third-rotor lock (adding one neutron rotor)
+```
+  This is **exactly NP25's "t → d + n" cost (6.26 MeV)** — reached here as the traction-lock of the
+  third gear, there as the neutron-strip energy at the fission neck. Independent origins, same number
+  ⇒ **CONVERGENT.** (Adding a *proton* rotor instead gives ³He: ³He−²H = 5.49 MeV; the mirror split
+  ³H−³He = 0.764 MeV sits beside the neutron Q_β = 0.782.)
+- **Why the triton packs INNER (the rigid core):** it is the longer, heavier, *fully-locked* rod —
+  a 3-gear train with both contacts saturated, no free end to re-mesh. Deuterons (2-gear) have more
+  compliance and seat outward; tritons seat inward and set the core. This is the traction origin of
+  the fission core-shell (tritons inner, deuterons the calving skin) **and** of the triton-contraction
+  rule (more tritons ⇒ tighter boundary): the rigid rods pull the packing in.
 
-> **Standing at:** ⁴He complete — alpha = two interleaved p–e–p rods, moves as one, lock 23.85 MeV
-> (convergent with NP25). Next on your word: the triton (n–p–n) rod.
+> **A=3 rods close as clean 3-gear trains. Triton lock 6.26 MeV (convergent NP25). Triton = the rigid
+> inner rod; deuteron = the compliant outer rod. The two subunits of the whole grammar are now built.**
+
+## §6. Where the iteration stands / next
+
+- **Done & meshing:** ¹H (seed) · ²H (p–e–p rod) · ³H/³He (3-gear rods, lock 6.26) · ⁴He (two rods
+  interleaved, lock 23.85). Every lock so far is a measured binding difference **and** convergent with
+  an NP25 line-item — the traction picture is reproducing the energy ledger step by step.
+- **The two building rods are now defined:** the **deuteron** (compliant, outer) and the **triton**
+  (rigid, inner). From here nuclei assemble as **α + n_d deuteron-rods + n_t triton-rods**.
+- **Next rung — A=5 is empty (no stable nuclide), then A=6: ⁶Li = α + one deuteron.** The first test of
+  a rod docking onto the alpha core with traction: does the deuteron-rod find a counter-rotating seat
+  on the two-rod alpha, or is it frustrated? Then ⁷Li = α + triton.
+- **The horizon — the growth/closure law (§1):** as α + rods accumulate, **at which total counts does
+  the whole rod-network admit a global traction assignment?** If those counts are 2, 8, 20, 28, 50, 82,
+  126, the magic numbers are **derived from the meshing**, not imported (the NP32 debt).
+
+> **Standing at:** A=3 complete. Both subunit rods built (triton rigid/inner, deuteron compliant/outer).
+> Next on your word: ⁶Li — the first rod docking onto the alpha core.
