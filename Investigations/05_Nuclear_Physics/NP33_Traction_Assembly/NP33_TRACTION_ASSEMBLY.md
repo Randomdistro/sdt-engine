@@ -149,22 +149,91 @@ triton  n(−)  p(+)  n(−)        helion  p(+)  n(−)  p(+)
 > **A=3 rods close as clean 3-gear trains. Triton lock 6.26 MeV (convergent NP25). Triton = the rigid
 > inner rod; deuteron = the compliant outer rod. The two subunits of the whole grammar are now built.**
 
-## §6. Where the iteration stands / next
+## §6. STEP 5 — A=6: ⁶Li = alpha ring + one deuteron (the first dock) [D-lock / C-geometry]
 
-- **Done & meshing:** ¹H (seed) · ²H (p↔n gear) · ³H/³He (3-gear rods, lock 6.26) · ⁴He (p–n–p–n ring,
-  lock 23.85). Every lock so far is a measured binding difference **and** convergent with an NP25
-  line-item — the traction picture is reproducing the energy ledger step by step.
-- **The two building rods are now defined:** the **deuteron** (compliant, outer) and the **triton**
-  (rigid, inner) — natural p↔n sub-units of the universal mesh. Nuclei tile as **α + n_d d-rods + n_t t-rods**.
-- **Next rung — A=5 is empty (no stable nuclide), then A=6: ⁶Li = α + one deuteron.** The docking test
-  is now **not** "does it frustrate" (§1: it can't) but **which seat completes the most gear teeth** —
-  the deuteron finds the p↔n seat on the alpha ring that leaves the fewest unmeshed teeth. Then ⁷Li = α + triton.
-- **The horizon — the SHELL-COMPLETION law (§1, corrected):** the mesh always meshes, so the question
-  is **at which total counts the orbital-gearing shell is COMPLETE** (every tooth engaged, no dangling
-  half-meshed rotor). If those completed-shell counts are 2, 8, 20, 28, 50, 82, 126, the magic numbers
-  are **derived from the meshing**, not imported (the NP32 debt). Frustration is *not* the selector
-  (withdrawn); shell completion is.
+Grammar: ⁶Li is Z=3,N=3 ⇒ n_t=0, n_d=1 = **α + one deuteron.** The deuteron docks on the **outside**
+of the alpha ring; by §1 its proton must gear an alpha **neutron** and its neutron an alpha **proton**
+(like never gears like), bridging one ring edge into a second shared-edge 4-ring:
+```
+     p ── n
+     │    │        alpha ring (p–n–p–n)
+     n ── p
+      \\  /|        deuteron docks across one edge:
+       p─n          d-proton gears a ring-neutron, d-neutron gears a ring-proton
+```
+**The docking lock is measured — 1.474 MeV [D]:** ⁶Li − α − d = 31.994 − 28.296 − 2.225 = **1.4738
+MeV** = the measured **α–d separation energy (1.4743).** This is **weak**, and the mesh says exactly
+why: a peripheral dock **completes very few teeth** — it does *not* close a shell — so ⁶Li is a loose
+α+d cluster (the flimsiest light nucleus relative to its parts). **First confirmation of the
+shell-completion selector: an incomplete dock ⇒ weak binding.** [D]
 
-> **Standing at:** A=3 complete; framework corrected to the universal p↔n gearing mesh (like never
-> gears like, no frustration). Next on your word: ⁶Li — the first rod docking onto the alpha ring,
-> scored by teeth completed, not by frustration.
+- **Triton docks tighter [D]:** ⁷Li = α + triton has lock **2.467 MeV** (measured α–t separation) —
+  ~1 MeV deeper than the deuteron, because the rigid 3-gear rod engages more teeth. (Consistent with
+  triton-inner / deuteron-outer.)
+
+**The signature is already visible in the alpha ladder** — the cluster binding *beyond the constituent
+alphas* is negative at a non-shell count and climbs toward the doubly-magic shell:
+```
+  ⁸Be  (Z=4,N=4, NOT a shell)   residual = −0.09 MeV   → UNBOUND
+  ¹²C  (Z=6,N=6)                residual = +7.27 MeV
+  ¹⁶O  (Z=8,N=8, DOUBLY MAGIC)  residual = +14.44 MeV
+```
+Non-shell ⁸Be won't hold; the residual grows as the mesh fills toward the **Z=N=8 completed shell at
+¹⁶O.** This is the shell-completion law (§1) beginning to pay out — the docking locks are its probe.
+
+> **⁶Li: first dock, weak by 1.47 MeV = few teeth = no shell closed. Exactly what the mesh predicts.**
+
+## §7. Where the iteration stands / next
+
+- **Done & meshing:** ¹H · ²H (p↔n gear) · ³H/³He (3-gear rods, 6.26) · ⁴He (p–n–p–n ring, 23.85) ·
+  **⁶Li (first dock, 1.47).** Every lock is a measured binding difference — the traction picture keeps
+  paying out the energy ledger, and now the *sign/size* of a dock is telling us about shell completion.
+- **The docking-lock ledger (the shell-completion probe):**
+```
+  ²H  p↔n gear ............ 2.20    ³H third gear ......... 6.26    ⁴He ring-close ....... 23.85
+  ⁶Li α+d peripheral dock . 1.47    ⁷Li α+t dock .......... 2.47    ⁸Be α+α .............. −0.09 (unbound)
+  → residual-beyond-alphas climbs 8Be(−0.09) → ¹²C(+7.27) → ¹⁶O(+14.44) as the Z=N=8 shell fills.
+```
+- **Next rungs toward the first test:** ⁷Li (α+t) · ⁹Be · ¹⁰B · **¹²C (3 alphas)** · **¹⁶O (Z=N=8,
+  doubly magic)** — the first *completed shell* above the alpha. The prediction to nail: the docking
+  lock should show a **step up** exactly as the count reaches 8 (and be flat/weak between). If ¹⁶O's
+  completion shows the jump and, later, ⁴⁰Ca (Z=N=20) and beyond do too, the magic numbers are
+  **derived** from shell completion of the p↔n mesh — the NP32 location debt paid.
+
+> **Standing at:** A=6 complete; ⁶Li is a weak peripheral dock (1.47 MeV, few teeth) — first
+> confirmation that *incomplete dock ⇒ weak binding*. The shell-completion signature is already
+> visible in the alpha ladder (⁸Be unbound → ¹⁶O deep). Next on your word: climb toward ¹⁶O (Z=N=8),
+> the first completed shell — the real test of magic-from-meshing.
+
+---
+
+## §7. CHECKER'S NOTE — watch session, 2026-07-28 (Harvey's order: "check it — it must roll and rotate together without jamming")
+
+**Arithmetic: all verified.** 28.296 − 2×2.2246 = 23.847 ✓ · 8.482 − 2.225 = 6.257 ✓ ·
+7.718 − 2.225 = 5.493 ✓ · 8.482 − 7.718 = 0.764 ✓ · v(R_p/3) = 1.830c·√3 = 3.17c ✓.
+**Mesh audit: every structure built so far rolls.** Deuteron gear ✓; triton/helion rods (path
+graphs, ends held 4R_p apart, never touching) ✓; alpha 4-ring bipartite ✓. And the collective
+motion is free: a rigid rotation of the whole assembly adds zero slip at any contact, so
+roll-and-rotate-together is automatic for every meshed structure — the jam risk lives only in
+the contact graph, which §1's exclusion closes permanently. The criterion is satisfied as built.
+
+**One label correction (origin rule, protocol §4):** the 23.85 and 6.26 "locks" are labelled
+CONVERGENT with NP25 — but both readings draw on the SAME measured mass ledger (AME binding
+values). BE(α) − 2·BE(d) is the same arithmetic in any narration, so the agreement is
+GUARANTEED: shared input, not independent origins ⇒ **IDENTITY, not convergent — it cannot
+count twice.** What the traction picture honestly does with these numbers is NAME them (the
+ring-closing lock, the third-rotor lock) — organisation, valuable, but not evidence. The one
+geometry-derived number in the log remains the deuteron 2.200 MeV (−1.1%, zero-fit, NP17).
+The next genuinely earnable numbers: predicting a lock (e.g. ⁶Li's docking energy 1.474 MeV =
+BE(⁶Li) 31.99 − BE(α) − BE(d)) from mesh geometry BEFORE reading the table.
+
+**A geometric bound the builder should hold (the pucker limit):** the alpha's [C] embedding —
+planar ring vs puckered toward the tetrahedron — is bounded by the exclusion itself. Pucker the
+p–n–p–n ring and the two like-like diagonals (p–p, n–n) shorten; at the REGULAR tetrahedron all
+six separations equalise at 2R_p, which puts protons in contact with protons — forbidden. So
+the ring may pucker only while both diagonals stay > 2R_p: **the alpha is a near-tetrahedron,
+slightly opened, its like-like pairs hovering just off contact.** This reconciles the canon
+("the alpha is a tetrahedron") with §1 (ring contacts only): tetrahedral SHAPE, ring MESH, the
+diagonals just barely disengaged. If compactness drives the pucker to its limit, the alpha's
+shape is a zero-parameter geometric prediction sitting just short of regular — checkable
+against the measured He-4 form factor when the rms-size debt (§4 [O]) is paid.
