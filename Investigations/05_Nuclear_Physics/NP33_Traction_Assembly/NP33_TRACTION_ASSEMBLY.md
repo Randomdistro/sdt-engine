@@ -32,22 +32,32 @@ no-slip:  v_A = v_B  ⇒  ω_A = −ω_B   ⇒  COUNTER-ROTATION
 without slipping, the surfaces lock; that lock *is* the binding (NP17's shared electron sits exactly
 at this rolling node, E = (9/7)·αℏc/R_p = 2.200 MeV for the deuteron gap D=(7/3)R_p — [D]).
 
-## §1. The rule the traction law forces — 2-colouring and frustration [D]
+## §1. The universal orbital gearing mesh — like never gears like [D] (Harvey correction, 2026-07-27)
 
-Every touching pair must counter-rotate. So the nucleons **2-colour** into a (+) set and a (−) set,
-and **a contact is a valid bond only if it joins a (+) to a (−).** Therefore:
+> **Harvey:** *"it's a universal orbital gearing mesh. protons do not touch, neutrons do not touch.
+> no frustration."*
 
-> **A structure can be fully-traction iff its contact graph is BIPARTITE.**
-> An **odd cycle** (e.g. a triangle of three mutually-touching nucleons) **cannot be 2-coloured** —
-> at least one contact is forced (+)/(+) or (−)/(−) = a slipping, frustrated contact.
+**The governing rule is not "check for traction" — it is a hard exclusion:** a **proton gears only
+with neutrons; a neutron gears only with protons.** Two protons never touch; two neutrons never touch.
+The electron is the internal component that makes a proton into a neutron and seats at the mesh node.
+Consequences, all forced:
+- **Every contact is p↔n**, i.e. (+)↔(−) — so **every contact already counter-rotates = traction.**
+  Traction is not a condition to satisfy; it is guaranteed by the exclusion.
+- **The contact graph is bipartite by construction** (proton set / neutron set, only p–n edges). A
+  bipartite graph has **no odd cycles**, so **there is NO FRUSTRATION — ever.** The mesh always closes.
 
-This is the engine we have been missing. **Frustration is not a defect to avoid — it is the selector.**
-A configuration where the frustration cancels or closes (every nucleon finds a consistent counter-
-rotating seat) is a **closure**; one that cannot is strained. **Conjecture [O]: the magic numbers are
-the nucleon counts at which the interleaved-trefoil contact graph admits a globally consistent
-traction assignment** — the counts where the gear-train closes. This is the non-circular route to the
-magic-number *locations* that NP32 flagged as still-owed. Not proven; it is the thing this log is built
-to test as the structures grow.
+**Retraction [HUNTER]:** §1 previously conjectured that *frustration* (odd cycles that can't 2-colour)
+is what *selects* the magic numbers. **That is wrong and is withdrawn.** With like-never-gears-like the
+mesh is unconditionally traction-consistent; frustration is not available as a selector. The earlier
+"alpha as two skew rods *avoiding a tetrahedral triangle*" framing (§4) is corrected below — the alpha
+never had a triangle to avoid; a p–n–p–n **ring** has no p–p or n–n edge in the first place.
+
+**So where do the magic numbers come from, if not frustration? — SHELL COMPLETION of the mesh [O].**
+Since the mesh always meshes, the distinction between counts is not *can it gear* but *is the gear
+shell complete* — every tooth engaged, no dangling half-meshed rotor. A **closure/magic number is a
+completed orbital-gearing shell**; a non-magic count leaves an unmeshed tooth (a compliant, reactive
+site). This is the corrected, still-owed route to the magic-number *locations* (NP32 debt): count the
+completed shells of the universal p–n gearing mesh, not the frustration.
 
 ---
 
@@ -60,65 +70,53 @@ reference rotor. Its handedness defines (+). Nothing to mesh yet.
 - boundary R_p = 0.8414 fm · seat 1.830c · period 9.64×10⁻²⁴ s
 - one fielded electron outward at a₀ (v=αc); zero stabled electrons (N=0).
 
-## §3. STEP 2 — Deuterium (²H): the p–e–p gear train [D-traction / C-orientation]
+## §3. STEP 2 — Deuterium (²H): the first p↔n gear [D]
 
-The ²H **nucleus** is **2 protons + 1 stabled electron** (Z=1,N=1 ⇒ A protons=2, N stabled e=1) —
-i.e. **proton–electron–proton (p–e–p)**, the shared electron between the two protons. (The "neutron"
-is just one of these protons carrying the shared electron; +1 fielded electron sits outside at a₀.)
+²H = **one proton + one neutron**. A **neutron is a proton with a stabled electron** at its node
+(3.17c) — so the particle content is 2 protons + 1 electron ("proton–electron–proton"), but the
+**gearing is a single p↔n mesh:** the bare proton gears the neutron, the electron riding the rolling
+node between them (it is at once the neutron-maker and the binding mediator). +1 fielded electron sits
+outside at a₀.
 
-**Traction of a 3-rotor line = a gear train.** p—e—p is three meshing rotors in a row; a gear train
-makes the two **outer** rotors **co-rotate** and the **middle** one counter-rotate:
-```
-p(+)  e(−)  p(+)      both p–e contacts are (+)/(−) ⇒ both roll, no slip ⇒ TRACTION on both
-```
-Two (+)/(−) contacts, the graph is a path (bipartite), **fully-traction ✓**, and the whole rod
-**moves as one**. The electron (at the node, 3.17c) is the (−) idler that locks the two protons.
+By §1 the contact is p↔n = (+)↔(−) = counter-rotating = **traction, automatically** (nothing to
+"check"). One gear, the rod **moves as one**.
 
 - **The bond = the roll.** binding (9/7)·αℏc/R_p = **2.200 MeV** vs 2.2246 (−1.1%), zero-fit [D];
-  the shared electron rides the rolling node at v(D/2)=1.69c. Gap D=(7/3)R_p=1.963 fm.
-- Grammar: n_d=n_t=0 — ²H is the bare first rung, below the α-core threshold.
+  the electron rides the node at v(D/2)=1.69c; gap D=(7/3)R_p=1.963 fm.
+- Grammar: n_d=n_t=0 — ²H is the bare first rung.
 
-> **Deuterium = one p–e–p gear-train rod, 2/2 contacts meshing, moves as one.**
+> **Deuterium = one p↔n gear, traction automatic (§1), moves as one.**
 
-## §4. STEP 3 — Helium-4 (alpha): TWO p–e–p rods, interleaved [D-lock / C-geometry]
+## §4. STEP 3 — Helium-4 (alpha): the p–n–p–n ring [D-lock / C-geometry]
 
-Harvey's spec: *"proton electron proton, proton electron proton, seated correctly so the windings
-interleave with traction and the entire object moves as one."* So **α = two deuterons** —
-(p–e–p)+(p–e–p) = **4 protons + 2 stabled electrons** (Z=2,N=2: A protons=4, N stabled e=2). This
-is the whole of it; there are no "free" nucleons to arrange.
-
-**This is the alpha frustration test — and the deuteron grouping is what passes it.** Four *free*
-nucleons packed tetrahedrally would give every nucleon three neighbours ⇒ **triangles (odd cycles)
-⇒ un-2-colourable ⇒ frustrated**. The alpha does **not** do that. It organises into **two rods**,
-and two rods counter-rotate as units:
+Harvey: *"proton electron proton, proton electron proton … the windings interleave with traction and
+the entire object moves as one."* So **α = two deuterons = 2 protons + 2 neutrons** (+2 electrons,
+one inside each neutron). By §1 (like never gears like) the four rotors mesh as a **p–n–p–n ring**
+(a 4-cycle):
 ```
-rod A:  p(+) e(−) p(+)          rod B:  p(−) e(+) p(−)
+   p ── n          each proton gears its TWO neutron neighbours and vice-versa;
+   │    │          no p–p edge, no n–n edge — bipartite by construction.
+   n ── p          every contact p↔n = counter-rotating = traction. No frustration to avoid.
 ```
-Seat B on the **opposite skew edge** (⊥, non-intersecting) so the trefoil **windings interleave**
-(the 6π filaments weave through each other, not surface-butt). At every interleave contact an
-**A-proton(+) meets a B-proton(−) ⇒ (+)/(−) ⇒ TRACTION.** The contact graph is now **two units =
-bipartite (even), NOT a triangle** — **frustration avoided by subunit formation.** [D-topology]
+The two deuterons interleave their 6π windings into this ring and **move as one** — one coherent
+rotor. *(The earlier "skew rods avoiding a tetrahedral triangle" framing is **withdrawn** per §1: a
+p–n–p–n ring has no like-like edge, so there was never a triangle to avoid.)*
 
-> **This is why the grammar is built from deuterons and tritons:** they are the *traction-consistent
-> building blocks* — the sub-units whose internal gear-train already closes, so larger nuclei assemble
-> from them without frustration instead of from free nucleons that cannot 2-colour.
-
-**The lock energy is a measured number — and it is 23.85 MeV [D, convergent]:**
+**The ring's closing lock is measured — 23.85 MeV [D, convergent]:**
 ```
-He-4 binding 28.296 − two deuterons (2×2.2246 = 4.449) = 23.847 MeV  =  the alpha interleave-LOCK
+He-4 binding 28.296 − two deuterons (2×2.2246 = 4.449) = 23.847 MeV  =  the ring-closing lock
 ```
-This is **exactly NP25's "2d → α" line-item (23.85 MeV)** — reached here from a *completely
-independent origin* (the traction-lock that fuses two rods into one rotor) versus there (scission
-conservation). Same number, two roads ⇒ **CONVERGENT**, not degenerate. The lock *is* the bond that
-makes "the entire object move as one."
+Exactly **NP25's "2d → α" line-item (23.85 MeV)** — reached here as the lock that closes the p–n–p–n
+ring into one rotor, there as scission conservation. Independent origins, same number ⇒ **CONVERGENT.**
 
-- **Moves as one [D]:** the two counter-rotating rods phase-lock at the interleave (their surfaces
-  co-move there, 1.830c each), so the alpha is a single coherent rotor — the tightest, most
-  traction-saturated small structure (which is why it is the core every Z≥2 nucleus is built around).
-- **Geometry [C]:** the skew-perpendicular seating (opposite tetrahedron edges, edge 2R_p) is the
-  model's placement; what is *forced* is the two-rod counter-rotation and the winding interleave.
-- **Owed [O]:** the *rms size* (light-nucleus swept extent, NP30 §9) and whether the interleave
-  winding is uniquely fixed (chirality of the weave).
+- **Moves as one [D]:** the ring's four surfaces co-move at their contacts (1.830c each) — the
+  tightest small structure, the core every Z≥2 nucleus is built around.
+- **Geometry [C]:** the ring's embedding (planar vs puckered tetrahedron-of-contacts) is the model's
+  placement; *forced* is the p–n–p–n alternation and the winding interleave.
+- **Owed [O]:** rms size (NP30 §9); weave chirality.
+
+> **This is why the grammar is built from deuterons and tritons:** they are the natural **p↔n
+> sub-rings/rods** of the universal mesh — pre-meshed units the larger nuclei tile from.
 
 ---
 
@@ -153,17 +151,20 @@ triton  n(−)  p(+)  n(−)        helion  p(+)  n(−)  p(+)
 
 ## §6. Where the iteration stands / next
 
-- **Done & meshing:** ¹H (seed) · ²H (p–e–p rod) · ³H/³He (3-gear rods, lock 6.26) · ⁴He (two rods
-  interleaved, lock 23.85). Every lock so far is a measured binding difference **and** convergent with
-  an NP25 line-item — the traction picture is reproducing the energy ledger step by step.
+- **Done & meshing:** ¹H (seed) · ²H (p↔n gear) · ³H/³He (3-gear rods, lock 6.26) · ⁴He (p–n–p–n ring,
+  lock 23.85). Every lock so far is a measured binding difference **and** convergent with an NP25
+  line-item — the traction picture is reproducing the energy ledger step by step.
 - **The two building rods are now defined:** the **deuteron** (compliant, outer) and the **triton**
-  (rigid, inner). From here nuclei assemble as **α + n_d deuteron-rods + n_t triton-rods**.
-- **Next rung — A=5 is empty (no stable nuclide), then A=6: ⁶Li = α + one deuteron.** The first test of
-  a rod docking onto the alpha core with traction: does the deuteron-rod find a counter-rotating seat
-  on the two-rod alpha, or is it frustrated? Then ⁷Li = α + triton.
-- **The horizon — the growth/closure law (§1):** as α + rods accumulate, **at which total counts does
-  the whole rod-network admit a global traction assignment?** If those counts are 2, 8, 20, 28, 50, 82,
-  126, the magic numbers are **derived from the meshing**, not imported (the NP32 debt).
+  (rigid, inner) — natural p↔n sub-units of the universal mesh. Nuclei tile as **α + n_d d-rods + n_t t-rods**.
+- **Next rung — A=5 is empty (no stable nuclide), then A=6: ⁶Li = α + one deuteron.** The docking test
+  is now **not** "does it frustrate" (§1: it can't) but **which seat completes the most gear teeth** —
+  the deuteron finds the p↔n seat on the alpha ring that leaves the fewest unmeshed teeth. Then ⁷Li = α + triton.
+- **The horizon — the SHELL-COMPLETION law (§1, corrected):** the mesh always meshes, so the question
+  is **at which total counts the orbital-gearing shell is COMPLETE** (every tooth engaged, no dangling
+  half-meshed rotor). If those completed-shell counts are 2, 8, 20, 28, 50, 82, 126, the magic numbers
+  are **derived from the meshing**, not imported (the NP32 debt). Frustration is *not* the selector
+  (withdrawn); shell completion is.
 
-> **Standing at:** A=3 complete. Both subunit rods built (triton rigid/inner, deuteron compliant/outer).
-> Next on your word: ⁶Li — the first rod docking onto the alpha core.
+> **Standing at:** A=3 complete; framework corrected to the universal p↔n gearing mesh (like never
+> gears like, no frustration). Next on your word: ⁶Li — the first rod docking onto the alpha ring,
+> scored by teeth completed, not by frustration.
