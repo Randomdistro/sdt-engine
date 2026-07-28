@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paper 01 — Foundations &amp; Lattice Mechanics</title>
+<style>
+:root{--paper:#faf8f4;--edge:#e5e0d4;--ink:#1c1e20;--soft:#45484c;--mute:#6d7177;--mint:#0d7a5f;--rust:#a4552e;--gold:#8a6d1f;--steel:#4a6d82}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:'Source Serif 4',Georgia,serif;line-height:1.75;padding:3rem 1.5rem}
+main{max-width:46rem;margin:0 auto}
+.series{font-family:Consolas,monospace;font-size:.68rem;letter-spacing:.28em;color:var(--mute);text-transform:uppercase;margin-bottom:1.2rem}
+h1{font-size:1.85rem;line-height:1.25;font-weight:700;margin-bottom:1rem}
+.byline{font-size:1rem;margin-bottom:.2rem}
+.affil{font-family:Consolas,monospace;font-size:.72rem;color:var(--mute);margin-bottom:2rem}
+h2{font-size:1.12rem;font-weight:700;margin:2.2rem 0 .7rem}
+p{margin-bottom:.9rem;color:var(--soft)}
+strong{color:var(--ink)}
+.abstract{border:1px solid var(--edge);border-left:3px solid var(--mint);padding:1.1rem 1.3rem;background:#fff;margin:1.5rem 0}
+.abstract p{margin-bottom:0}
+.eq{font-family:Consolas,monospace;font-size:.9rem;background:#fff;border:1px solid var(--edge);border-radius:3px;padding:.8rem 1.1rem;margin:1rem 0;display:flex;justify-content:space-between;gap:1rem;overflow-x:auto}
+.eq .no{color:var(--mute)}
+table{width:100%;border-collapse:collapse;font-size:.85rem;margin:1rem 0}
+th,td{border:1px solid var(--edge);padding:.45rem .6rem;text-align:left;vertical-align:top}
+th{font-family:Consolas,monospace;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+.decl{border:1px solid var(--edge);background:#fff;padding:1rem 1.2rem;margin:1.5rem 0;font-size:.92rem}
+.refs ol{margin-left:1.2rem}
+.refs li{font-size:.85rem;color:var(--soft);margin-bottom:.4rem}
+footer{max-width:46rem;margin:3rem auto 0;padding-top:1.2rem;border-top:1px solid var(--edge)}
+footer a{color:var(--mint);text-decoration:none;font-family:Consolas,monospace;font-size:.75rem;letter-spacing:.06em}
+sub,sup{line-height:0}
+</style>
+</head>
+<body>
+<main>
+<p class="series">Spatial Displacement Theory · Paper 01 · Prepared for Submission</p>
+<h1>The Spation Lattice as a Discrete Relay Substrate: Axiomatic Basis, the Convergence Burden Φ = Nε, and the Seed Theorem</h1>
+<p class="byline">J. C. Harvey</p>
+<p class="affil">Melbourne, Australia · July 2026 · Domain 01 — Foundations &amp; Lattice Mechanics</p>
+
+<div class="abstract">
+<p><strong>Abstract.</strong> We formalise the substrate of Spatial Displacement Theory: a discrete, gap-free, contact-only relay lattice of pitch ℓ<sub>P</sub>, individually incompressible and collectively deformable, on which all propagation is nearest-neighbour transfer at exactly c = ℓ<sub>P</sub>/t<sub>P</sub>. From the axiom set R1–R6 and the Shell Cancellation Identity we derive the local convergence burden Φ = Nε, the convergence pressure P<sub>conv</sub> = Φ/ℓ<sub>P</sub>³ = 2.459 × 10⁴⁸ Pa, and the boundary source count S = 4πN² = 4.366 × 10¹²⁴, which resolves the 10¹²³ vacuum-energy discrepancy as a shell-counting artefact. We log the ℓ<sub>P</sub>-derivation attempt as an honest negative: the FLM06 closure fails and ℓ<sub>P</sub> remains Axiom R1, not a derived quantity; whether any framework can derive its own first length — the "Seed" question — is held OPEN, not claimed as settled impossibility. Inertia is exhibited as relay-Doppler imbalance of the convergent field (FLM12), from which the first and second laws of motion, E₀ = mc², and the equivalence of inertial and gravitational response follow as theorems.</p>
+</div>
+<p><strong>Keywords:</strong> spation lattice · relay propagation · convergence burden · Shell Cancellation Identity · Seed Theorem · icosahedral packing frustration</p>
+
+<h2>1. Axiomatic setting</h2>
+<p>The substrate is postulated as a countable set of spations in permanent mutual contact (gap-free), each individually incompressible, the ensemble collectively deformable, close-packed icosa-dodecahedrally at one pitch (Axiom R1). The single admissible transport operation is nearest-neighbour relay of movement at one pitch per tick:</p>
+<div class="eq"><span>c = ℓ<sub>P</sub>/t<sub>P</sub>,&nbsp;&nbsp;ℓ<sub>P</sub> = 1.616255 × 10⁻³⁵ m</span><span class="no">(1)</span></div>
+<p>The permitted external inputs of the entire framework are {ℓ<sub>P</sub>, c, ℏ, k<sub>B</sub>, T<sub>CMB</sub>, α, m<sub>e</sub>, m<sub>p</sub>} together with directly measured observables in their measured units. No other quantity may enter any derivation.</p>
+
+<h2>2. The convergence burden</h2>
+<p>Partition the substrate between an arbitrary point and the boundary of the Clearing at R<sub>CMB</sub> = 9.527 × 10²⁶ m (an observed cosmological scale; certification class X — it conditions the Law-I chain and does not pass the delete-test) into N nested Planck-thick shells:</p>
+<div class="eq"><span>N = R<sub>CMB</sub>/ℓ<sub>P</sub> = 5.894 × 10⁶¹</span><span class="no">(2)</span></div>
+<p>The Shell Cancellation Identity (Theorem T1) states that the inverse-square dilution of a shell's relayed content is cancelled exactly by the quadratic growth of its cell count, so every shell delivers the same elementary content ε = u<sub>CMB</sub>·ℓ<sub>P</sub>³ = 1.761 × 10⁻¹¹⁸ J. Theorem T2 then fixes the local burden and its pressure:</p>
+<div class="eq"><span>Φ = Nε = 1.038 × 10⁻⁵⁶ J</span><span class="no">(3)</span></div>
+<div class="eq"><span>P<sub>conv</sub> = Φ/ℓ<sub>P</sub>³ = N·u<sub>CMB</sub> = 2.459 × 10⁴⁸ Pa</span><span class="no">(4)</span></div>
+<p>The burden is isotropic; the resultant at every unoccluded point vanishes identically. Force appears only under partial occlusion (Paper 03; Theorems T3–T4).</p>
+
+<h2>3. The counting resolution of the vacuum discrepancy</h2>
+<p>The boundary source count is</p>
+<div class="eq"><span>S = 4πN² = 4.366 × 10¹²⁴</span><span class="no">(5)</span></div>
+<p>The notorious 10¹²³ mismatch between a naïve per-cell energy estimate and the observed cosmic energy density is, in this accounting, the square of the causal depth N — a bookkeeping quantity, not a physical energy awaiting cancellation. No renormalisation is performed because no divergent field is ever introduced.</p>
+
+<h2>4. The Seed Theorem (honest negative)</h2>
+<p>FLM06 attempted to derive ℓ<sub>P</sub> from Clearing geometry using the whitelist {R<sub>CMB</sub>, c, k<sub>B</sub>, T<sub>CMB</sub>, z<sub>rec</sub>}. The attempt fails: every clean dimensionless ratio bottoms out near 10³ (z<sub>rec</sub>), ten orders short per factor of the required 10⁶¹. The stronger claim — that exactly one action/mass/length anchor is unavoidable in <em>any</em> closure of this type (the "Seed Theorem") — is stated here as OPEN: the failure above is evidence toward it, not a proof of it. The koppa-form ℓ<sub>P</sub> = √(ϟ<sub>baryon</sub>·ƛ<sub>p</sub>) re-homes the seed to one SDT-native length but is an identity, not an elimination: ϟ<sub>baryon</sub> ≡ ℓ<sub>P</sub>²·c·m<sub>p</sub>/ℏ, so the root reproduces its own input. ℓ<sub>P</sub> therefore stands as Axiom R1, with the derivation attempt logged as a negative result.</p>
+
+<h2>5. Packing frustration and the shaped interstices</h2>
+<p>Twelve spations about one cannot close: the icosahedral 12-around-1 edge gap is 0.05146, and the canonical lattice frustration gap is exactly twice it, g = 0.1029 ≈ 0.103, to four figures. Because the substrate is everywhere in relay motion, this slack does not remain distributed: it gathers into shaped interstices (tetrahedral and octahedral pockets). These pockets recur throughout the framework — as electron seats in atomic structure and as the tetrahedral α-core geometry of nuclear construction (Paper 05). The same gap g = 0.103 re-enters as the per-generation leak of the displacement cascade (Paper 10), where it yields the first zero-parameter intermittency number.</p>
+
+<h2>6. Inertia as relay-Doppler imbalance (FLM12)</h2>
+<p>A displacement structure at rest receives the convergent relay symmetrically. Under translation at v, the fore/aft relay rates de-tune: the field resists the <em>change of the structure's vector</em>, and the resistance is proportional to the excluded volume. This single mechanism yields, as theorems rather than postulates: (i) uniform motion is force-free (first law); (ii) F ∝ dv/dt with the coefficient m = Φ·V<sub>disp</sub>/(3ℓ<sub>P</sub>³c²) (second law; the factor 3 is the angular-averaging quadrature share P<sub>cf</sub> = P<sub>conv</sub>/3, an algebraic identity); (iii) E₀ = mc²; (iv) equality of inertial and gravitational response, since both read the same V<sub>disp</sub>. The construction dissolves the demand for a vacuum-energy reservoir: nothing is stored in "empty" space beyond the relay burden already counted in (3).</p>
+
+<h2>7. Certification</h2>
+<table>
+<tr><th>Result</th><th>Value</th><th>Status</th></tr>
+<tr><td>ℓ<sub>P</sub> (Axiom R1)</td><td>1.616255 × 10⁻³⁵ m</td><td>PRIMITIVE INPUT — not derived; the Seed question held OPEN</td></tr>
+<tr><td>N, ε, Φ, P<sub>conv</sub></td><td>eqs. (2)–(4)</td><td>DERIVED (class B); magnitude conditioned on R<sub>CMB</sub> (class X input, disclosed)</td></tr>
+<tr><td>S = 4πN²</td><td>4.366 × 10¹²⁴</td><td>DERIVED — counting identity</td></tr>
+<tr><td>ℓ<sub>P</sub> from Clearing geometry</td><td>—</td><td>FAILED (FLM06) — honest negative, logged</td></tr>
+<tr><td>Inertia mechanism (FLM12)</td><td>Newton I/II, E₀ = mc², equivalence</td><td>DERIVED as theorems; D1/D2 quantitative gates OWED</td></tr>
+<tr><td>Frustration gap g</td><td>0.1029</td><td>DERIVED — geometric identity (2 × icosahedral edge gap)</td></tr>
+</table>
+
+<div class="decl">
+<p><strong>Methodological declaration.</strong> No quantum wavefunction, no field operator, no curved metric, no cosmological-constant term, and no postulated transformation group enters any step above. Where a rival formalism's number is mentioned (the 10¹²³ discrepancy), it enters only as the discrepancy to be dissolved, never as machinery. All inputs are drawn from the stated whitelist; the one non-whitelist scale (R<sub>CMB</sub>) is disclosed as an observed input with its certification class.</p>
+</div>
+
+<h2 class="refs">References</h2>
+<div class="refs"><ol>
+<li>Engine/include/sdt/laws.hpp — namespaces sdt::laws::measured, law_I, law_IV; provenance blocks in situ.</li>
+<li>Theory/00_Ruleset.md; Theory/01_Closure_Derivations.md; Theory/02_Inputs_and_Derivations.md.</li>
+<li>Investigations/01_Foundations_and_Lattice_Mechanics — FLM06 (spation-scale closure, Seed Theorem), FLM12 (mass mechanism), FLM08 (lattice structure), FLM14 (rotating spation, pre-committed kill set F1–F6).</li>
+<li>CODATA 2018 recommended values (measured inputs); FIRAS/COBE/Planck T<sub>CMB</sub> = 2.7255 K (measured input).</li>
+<li>Benchmarks/B01_B25/benchmarks_b01_b25.cpp — numerical verification of eqs. (2)–(5).</li>
+</ol></div>
+</main>
+<footer><a href="atlas.html#medium">← RETURN TO THE ATLAS · THE RELAY SUBSTRATE</a></footer>
+</body>
+</html>

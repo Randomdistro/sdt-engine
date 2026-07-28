@@ -205,14 +205,17 @@ canvas{display:block}
   <div class="ctlGrp">spin<input type="range" id="rSpin" title="nucleon rotation rate — complementary: p one sense, n the other; fast spin reads as the 1.83c tight torus" aria-label="spin rate" min="0" max="4" step="0.05" value="1.8"><span id="rSpinV">1.8</span></div>
   <div class="ctlGrp">knot&nbsp;α<input type="range" id="rKA" title="knot opacity" aria-label="knot opacity" min="0.05" max="1" step="0.05" value="1"><span id="rKAV">1.00</span></div>
   <div class="ctlGrp">torus&nbsp;α<input type="range" id="rTA" title="spun-torus shell opacity (scales with spin)" aria-label="torus opacity" min="0" max="0.9" step="0.02" value="0.34"><span id="rTAV">0.34</span></div>
-  <div class="ctlGrp" title="colours: proton / neutron / electron">
+  <div class="ctlGrp" title="colours: proton / neutron / electron / neutrino">
     p<input type="color" id="cP" value="#ff2626" aria-label="proton colour">
     n<input type="color" id="cN" value="#2f6bff" aria-label="neutron colour">
     e⁻<input type="color" id="cE" value="#7fe7ff" aria-label="electron colour">
+    ν<input type="color" id="cNu" value="#86ffb0" aria-label="neutrino colour">
   </div>
   <div class="ctlGrp">
     <label title="time-average torus shells"><input type="checkbox" id="tTorus" checked>torus</label>
-    <label title="internal e⁻ (every neutron) + shared e⁻ strings on p–n bonds"><input type="checkbox" id="tE" checked>e⁻</label>
+    <label title="internal e⁻ (every neutron, at the R_p/3 node) + shared e⁻ strings on p–n bonds"><input type="checkbox" id="tE" checked>e⁻</label>
+    <label title="ν — one persistent un-closable winding per neutron, along its throughpole axis"><input type="checkbox" id="tNu" checked>ν</label>
+    <label title="Z fielded e⁻ on the atomic shell a₀ (drawn off-scale)"><input type="checkbox" id="tFielded">fielded e⁻</label>
     <label title="shell radius line-and-label"><input type="checkbox" id="tShell" checked>shells</label>
   </div>
 </div>
@@ -489,8 +492,9 @@ const state = {
   showWall:true, showShadow:true, showKnots:true, showInflux:false, spin:true,
   spinRate:1.8,                                  // per-nucleon rotation (complementary p/n senses)
   knotA:1.0, torA:0.34,                          // transparency: knots, spun-torus shells
-  colP:'#ff2626', colN:'#2f6bff', colE:'#7fe7ff',// colour controls
+  colP:'#ff2626', colN:'#2f6bff', colE:'#7fe7ff', colNu:'#86ffb0',// colour controls
   showTorus:true, showE:true, showShellLbl:true, // visibility controls
+  showNu:true, showFielded:false,                // ν per-neutron throughpole · Z fielded e (a0 off-scale)
   nuc: [], nucShown: []
 };
 
@@ -629,6 +633,7 @@ function recalibrate(){
 
 // =================== 3D scene ===================
 let THREE, scene, camera, renderer, controls, nucleusGroup, wall, dl, motes, moteGeo, moteVel, knotGeo, sphGeo;
+let nuReg=null, fieldReg=null, nuHelixGeo=null;   // ν throughpole windings · fielded-e shell · canonical ν helix
 let threeOK=false;
 
 /* Build the proton as a coiled rope on the 6π trefoil path.
@@ -692,6 +697,16 @@ function makeTrefoilRope(THREE, mergeGeometries){
   merged.scale(1/maxr,1/maxr,1/maxr); merged.computeVertexNormals();
   return merged;
 }
+function makeNeutrinoHelix(THREE){
+  // The neutrino: ONE open winding that never closes — threaded along the neutron's
+  // THROUGHPOLE (Z here), poking out BOTH poles (in one side, out the other; never terminates,
+  // so it persists as axial flow). Canonical along +Z; oriented per-neutron in rebuild3D and
+  // screwed along its axis in animate(). NP30: the 1838th un-closable winding.
+  const L=1.15, R=0.27, TURNS=3.0, SEG=110, pts=[];
+  for(let i=0;i<=SEG;i++){ const u=i/SEG, z=(u-0.5)*2*L, a=u*TURNS*2*Math.PI;
+    pts.push(new THREE.Vector3(R*Math.cos(a),R*Math.sin(a),z)); }
+  return new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts,false),SEG,0.05,5,false);
+}
 async function initThree(){
   try{
     THREE = await import('three');
@@ -728,6 +743,7 @@ async function initThree(){
     // not a fat tube: fine plied fibres, 6 arcs weaving alternately under/over.
     knotGeo=makeTrefoilRope(THREE,mergeGeometries);
     sphGeo=new THREE.SphereGeometry(1,20,16);
+    nuHelixGeo=makeNeutrinoHelix(THREE);
 
     // CMB influx motes
     const MN=1400; const mp=new Float32Array(MN*3); moteVel=[];
@@ -827,7 +843,10 @@ function rebuild3D(){
     if(neutrons.length){
       const eInt=new THREE.InstancedMesh(sphGeo,eMat,neutrons.length); eInt.castShadow=false;
       const es=new THREE.Vector3(0.14*kv,0.14*kv,0.14*kv);
-      neutrons.forEach((n,i)=>{ m.compose(new THREE.Vector3(n.pos[0]*SCENE,n.pos[1]*SCENE,n.pos[2]*SCENE),q.identity(),es); eInt.setMatrixAt(i,m); });
+      const nodeOff=(R_p/3)*SCENE;   // NP30: the stabled e seats at the trefoil NODE (R_p/3), toward the bond — not the nucleon centre
+      neutrons.forEach((n,i)=>{ const ep=new THREE.Vector3(
+          n.pos[0]*SCENE+n.axis[0]*nodeOff, n.pos[1]*SCENE+n.axis[1]*nodeOff, n.pos[2]*SCENE+n.axis[2]*nodeOff);
+        m.compose(ep,q.identity(),es); eInt.setMatrixAt(i,m); });
       eInt.instanceMatrix.needsUpdate=true; nucleusGroup.add(eInt);
     }
     // shared e⁻: p–n pairs in the SAME subunit (grammar bonds: d→1, t→2, α→4)
@@ -854,6 +873,47 @@ function rebuild3D(){
       const strings=new THREE.LineSegments(lg,new THREE.LineBasicMaterial({color:eCol,transparent:true,opacity:0.45}));
       nucleusGroup.add(strings);
     }
+  }
+
+  // ---- neutrinos (NP30): one persistent, un-closable winding per NEUTRON, along its
+  // throughpole axis. Instanced open helix, oriented on the nucleon axis; screwed in animate(). ----
+  nuReg=null;
+  if(state.showNu){
+    const nu=shown.filter(n=>n.type==='n');
+    if(nu.length){
+      const nuCol=new THREE.Color(state.colNu);
+      const nuMat=new THREE.MeshBasicMaterial({color:nuCol,transparent:true,opacity:0.72,
+        blending:THREE.AdditiveBlending,depthWrite:false});
+      const nuMesh=new THREE.InstancedMesh(nuHelixGeo,nuMat,nu.length); nuMesh.castShadow=false;
+      const nsc=new THREE.Vector3(R_p*SCENE,R_p*SCENE,R_p*SCENE);
+      nuReg={mesh:nuMesh,items:[],scale:nsc};
+      nu.forEach((n,i)=>{
+        const p=new THREE.Vector3(n.pos[0]*SCENE,n.pos[1]*SCENE,n.pos[2]*SCENE);
+        ax.set(n.axis[0],n.axis[1],n.axis[2]); q.setFromUnitVectors(ZAX,ax);
+        m.compose(p,q,nsc); nuMesh.setMatrixAt(i,m);
+        nuReg.items.push({pos:p.clone(),quat:q.clone(),slot:i});
+      });
+      nuMesh.instanceMatrix.needsUpdate=true; nucleusGroup.add(nuMesh);
+    }
+  }
+
+  // ---- fielded electrons (NP30 economy: A p, A e = N stabled inward + Z fielded OUTWARD to
+  // a0). a0 is ~63,000x the nuclear radius, so this shell is SCHEMATIC (just outside the
+  // nucleus, labelled off-scale) — completes the electron count, not to scale. Default off. ----
+  fieldReg=null;
+  if(state.showFielded){
+    const Zc=state.iso.Z; let rmax=0;
+    shown.forEach(n=>{ rmax=Math.max(rmax,Math.hypot(n.pos[0],n.pos[1],n.pos[2])); });
+    const shellR=Math.max(rmax*SCENE+3.0,6.0), fCol=new THREE.Color(state.colE);
+    const fMat=new THREE.MeshStandardMaterial({color:fCol,emissive:fCol.clone().multiplyScalar(0.7),
+      emissiveIntensity:0.9,roughness:0.3,metalness:0,transparent:true,opacity:0.85});
+    const fMesh=new THREE.InstancedMesh(sphGeo,fMat,Zc); fMesh.castShadow=false;
+    const fs=new THREE.Vector3(0.16*kv,0.16*kv,0.16*kv), PHI2=(1+Math.sqrt(5))/2;
+    for(let i=0;i<Zc;i++){ const zz=1-(2*i+1)/Zc, rr=Math.sqrt(Math.max(0,1-zz*zz)), th=2*Math.PI*i/(PHI2*PHI2);
+      m.compose(new THREE.Vector3(rr*Math.cos(th)*shellR,rr*Math.sin(th)*shellR,zz*shellR),q.identity(),fs); fMesh.setMatrixAt(i,m); }
+    fMesh.instanceMatrix.needsUpdate=true; nucleusGroup.add(fMesh); fieldReg={mesh:fMesh};
+    const sp=makeLabelSprite('Z='+Zc+' fielded e · a0 off-scale (x63k)');
+    sp.position.set(0,shellR+1.2,0); nucleusGroup.add(sp);
   }
 
   // ---- shell position: small line-and-label per radial band of subunit centres ----
@@ -914,6 +974,15 @@ function animate(){
       reg.mesh.instanceMatrix.needsUpdate=true;
     }
   }
+  // neutrino throughpole flow: screw each open helix about its own axis (reads as axial flow;
+  // it persists even with nucleon spin off — the un-closable winding never stops).
+  if(nuReg && nuReg.items.length){
+    const tn=performance.now()/1000, wv=state.spinRate*3.0+0.8;
+    const mn=new THREE.Matrix4(), qzn=new THREE.Quaternion(), qqn=new THREE.Quaternion(), Zn=new THREE.Vector3(0,0,1);
+    for(const it of nuReg.items){ qzn.setFromAxisAngle(Zn,wv*tn); qqn.copy(it.quat).multiply(qzn);
+      mn.compose(it.pos,qqn,nuReg.scale); nuReg.mesh.setMatrixAt(it.slot,mn); }
+    nuReg.mesh.instanceMatrix.needsUpdate=true;
+  }
   if(torMatP){ const o=state.showTorus? state.torA*Math.min(1,state.spinRate/2.2) : 0;
     torMatP.opacity=o; torMatN.opacity=o; }
   if(state.showInflux && motes){
@@ -945,9 +1014,12 @@ $('rTA').addEventListener('input',e=>{state.torA=parseFloat(e.target.value); $('
 $('cP').addEventListener('input',e=>{state.colP=e.target.value; rebuild3D();});
 $('cN').addEventListener('input',e=>{state.colN=e.target.value; rebuild3D();});
 $('cE').addEventListener('input',e=>{state.colE=e.target.value; rebuild3D();});
+$('cNu').addEventListener('input',e=>{state.colNu=e.target.value; rebuild3D();});
 bindToggle('tTorus','showTorus',()=>rebuild3D());
 bindToggle('tE','showE',()=>rebuild3D());
 bindToggle('tShell','showShellLbl',()=>rebuild3D());
+bindToggle('tNu','showNu',()=>rebuild3D());
+bindToggle('tFielded','showFielded',()=>rebuild3D());
 
 let geomTimer=null;
 function onGeom(){ // geometry change → recalibrate (debounced) + rebuild

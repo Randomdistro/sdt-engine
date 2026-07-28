@@ -15,6 +15,7 @@
   var LS='sdt_lang';
   var LANGS=[
     {code:'en',    label:'English'},
+    {code:'tp',    label:'Technical Physics'},
     {code:'de',    label:'Deutsch'},
     {code:'fr',    label:'Français'},
     {code:'es',    label:'Español'},

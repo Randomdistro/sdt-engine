@@ -64,11 +64,11 @@
 <header class="inv-hero reveal">
   <div class="inv-tag">The Laws · III · Convergent Boundary Pressure</div>
   <h1>Where the Balance Breaks<br>and <em>Force</em> Is Born</h1>
-  <p class="lead">The pressure of the first two Laws arrives from every side at once, and so it is silent — you feel nothing. This Law is the turn on which everything else rests: set a body in the way, spoil the balance, and the push that no longer arrives from one direction becomes a force pulling toward it. Gravity, electricity, and the nuclear bond are one mechanism seen at three scales.</p>
+  <p class="lead">The pressure of the first two Laws arrives from every side at once, and so it is silent — you feel nothing. This Law is the turn on which everything else rests: set a body in the way, spoil the balance, and the push that no longer arrives from one direction leaves its opposite unanswered — you are driven toward the body by what remains. Nothing pulls. Gravity, electricity, and the nuclear bond are one mechanism seen at three scales.</p>
 
   <figure class="medium" id="med">
     <canvas id="medCanvas"></canvas>
-    <figcaption id="medCap">the held, frustrated medium — cooling toward the Clearing at 2997 K, where every point discharges and begins to relay · drag to lift into three dimensions</figcaption>
+    <figcaption id="medCap">the held, frustrated medium — cooling toward the Clearing at 3000 K, where every point discharges and begins to relay · drag to lift into three dimensions</figcaption>
   </figure>
 </header>
 
@@ -101,9 +101,13 @@
     <p class="chapter__lead">Measure the shadowed cone, count the pressure it withholds, and the force writes itself.</p>
     <p>A body of reach R₁ at distance r blocks a cone of angular size πR₁²/r² — larger when the body is big or near, vanishing when it is small or far. That withheld pressure presses on the second body's own reach, its cross-section πR₂². Multiply the deficit by the area it acts upon, and out comes the whole of it:</p>
     <div class="eq-block">
-      <div class="eq">F = (π/4) · P<sub>conv</sub> · R₁² R₂² / r²</div>
-      <div class="eq-caption">Theorem 4 — the universal occlusion force</div>
+      <div class="eq">F = (π/4) · P<sub>eff</sub> · R₁² R₂² / r²</div>
+      <div class="eq-caption">Theorem 4 — the universal occlusion force. P<sub>eff</sub> is the effective pressure at interaction scale; its coefficient is the calibrated piece, declared below.</div>
     </div>
+    <figure style="max-width:30rem;margin:1.4rem auto 0;text-align:center">
+      <svg id="occPlay" viewBox="0 0 360 240" style="width:100%;height:auto;touch-action:none;cursor:grab" aria-label="Drag the occluding body — blocked arrivals vanish and the leftover push appears"></svg>
+      <figcaption style="font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--ink-faint);margin-top:0.6rem">drag the grey body — the shadowed cone goes missing, and the unanswered push carries you toward it</figcaption>
+    </figure>
     <p>Two things fall out for free. The <strong>inverse-square</strong> falloff is not a law bolted on; it is the plain geometry of a cone's shrinking with distance in flat space — no field, no messenger particle, no action reaching across the gap. And because the formula is unchanged when the two bodies swap places, the push each feels from the other is exactly equal and opposite: Newton's third law, made a symmetry rather than a decree.</p>
   </div>
 </section>
@@ -159,7 +163,7 @@
   var cv=document.getElementById('medCanvas'), ctx=cv.getContext('2d'), cap=document.getElementById('medCap');
   var dpr=Math.min(window.devicePixelRatio||1,2), W=0,H=0,cx=0,cy=0,R=1,Rdisk=1,P=[],N=0;
   var GOLD=Math.PI*(3-Math.sqrt(5)), FOCAL=560;
-  var THOT=30000, TCLR=2997;
+  var THOT=30000, TCLR=3000;
   function build(){ W=cv.clientWidth;H=cv.clientHeight;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
     cx=W*0.46;cy=H/2; R=Math.min(W*0.26,H*0.42); Rdisk=Math.min(W*0.40,H*0.46); P=[];
     var shells=6, baseN=10, total=0, s,i; for(s=1;s<=shells;s++) total+=baseN*s*s; var idx=0;
@@ -244,6 +248,50 @@
     requestAnimationFrame(frame);
   }
   requestAnimationFrame(frame);
+})();
+
+// ── Ch.3 interactive: occlusion — drag the body, watch the balance break ──
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e}
+  var svg=document.getElementById('occPlay'); if(!svg)return;
+  var defs=el('defs',{});
+  var mb=el('marker',{id:'op-b',markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
+  mb.appendChild(el('path',{d:'M0,0 L6,3 L0,6 Z',fill:'#4a6d82'}));defs.appendChild(mb);
+  var mr=el('marker',{id:'op-r',markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
+  mr.appendChild(el('path',{d:'M0,0 L6,3 L0,6 Z',fill:'#b07430'}));defs.appendChild(mr);
+  svg.appendChild(defs);
+  var n=18,cx=180,cy=120,R=100,arrows=[];
+  for(var i=0;i<n;i++){var l=el('line',{stroke:'#4a6d82','stroke-width':1.7,'marker-end':'url(#op-b)'});arrows.push(l);svg.appendChild(l);}
+  var net=el('line',{stroke:'#b07430','stroke-width':3.6,'marker-end':'url(#op-r)'});svg.appendChild(net);
+  svg.appendChild(el('circle',{cx:cx,cy:cy,r:9,fill:'#1e1c18'}));
+  var occ={x:265,y:78,r:18};
+  var on=el('circle',{cx:occ.x,cy:occ.y,r:occ.r,fill:'#a49d92',stroke:'#7a7265','stroke-width':1.5});svg.appendChild(on);
+  function blocked(px,py){var dx=cx-px,dy=cy-py,fx=px-occ.x,fy=py-occ.y;
+    var a=dx*dx+dy*dy,b=2*(fx*dx+fy*dy),c=fx*fx+fy*fy-occ.r*occ.r,disc=b*b-4*a*c;
+    if(disc<0)return false;disc=Math.sqrt(disc);var t1=(-b-disc)/(2*a),t2=(-b+disc)/(2*a);
+    return (t1>0&&t1<1)||(t2>0&&t2<1);}
+  function render(){on.setAttribute('cx',occ.x);on.setAttribute('cy',occ.y);
+    var nx=0,ny=0,blk=0;
+    for(var i=0;i<n;i++){var a=i/n*Math.PI*2,px=cx+Math.cos(a)*R,py=cy+Math.sin(a)*R;
+      var b=blocked(px,py),l=arrows[i];
+      l.setAttribute('stroke-opacity',b?0.08:0.8);if(b){blk++;nx+=px-cx;ny+=py-cy;}
+      var ux=cx-px,uy=cy-py,L=Math.hypot(ux,uy);ux/=L;uy/=L;
+      l.setAttribute('x1',px);l.setAttribute('y1',py);
+      l.setAttribute('x2',px+ux*(L-16));l.setAttribute('y2',py+uy*(L-16));}
+    var m=Math.hypot(nx,ny);
+    if(m>0.5){var ux=nx/m,uy=ny/m,len=12+blk*6;
+      net.setAttribute('stroke-opacity',1);net.setAttribute('x1',cx);net.setAttribute('y1',cy);
+      net.setAttribute('x2',cx+ux*len);net.setAttribute('y2',cy+uy*len);}
+    else net.setAttribute('stroke-opacity',0);}
+  var down=false;
+  svg.addEventListener('pointerdown',function(e){down=true;svg.setPointerCapture&&svg.setPointerCapture(e.pointerId);mv(e);});
+  svg.addEventListener('pointermove',function(e){if(down)mv(e);});
+  window.addEventListener('pointerup',function(){down=false;});
+  function mv(e){var r=svg.getBoundingClientRect();
+    occ.x=Math.max(occ.r,Math.min(360-occ.r,(e.clientX-r.left)/r.width*360));
+    occ.y=Math.max(occ.r,Math.min(240-occ.r,(e.clientY-r.top)/r.height*240));render();}
+  render();
 })();
 </script>
 </body>

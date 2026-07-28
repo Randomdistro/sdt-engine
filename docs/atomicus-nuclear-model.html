@@ -220,6 +220,10 @@ const F=[
      'Binding is not overlap area (that was killed) — it is the shared-electron well, which is why BE/A is nearly flat.',
   chk:iso=>{const r=IDX.get(iso.Z+','+iso.A);return r?`shared-electron binding · deuteron 2.20/2.22 MeV · this nucleus BE/A = ${(r[2]/iso.A).toFixed(2)} MeV`:'shared-electron well, geared by 137'}},
 
+ {t:'The β⁻ release',s:'NATIVE',mode:'release',
+  st:'β⁻ decay is a neutron letting go. <b>Two things leave the proton’s skin at once</b> — the electron and the neutrino, both born at the <b>1.83c seat</b> (r = R_p). The electron is released <i>bound</i> and <b>drops to the ground state</b> in femtoseconds, taking up the local displacement — that is the β electron. The neutrino is the <b>one winding that never closes</b> (W→0); it cannot seat, so it goes. <b>They cross the c-boundary together</b> — r_e = 2.818 fm, the electron’s own size, its 0.511 MeV rest shell — at the <b>same instant</b>. And the neutrino <b>deforms</b>: the universe bears harder on its tail than its nose, so it runs <b>fat-nosed, thin-tailed</b>. That lopsidedness is the shove — <b>nothing pulls it; it leaves because it is crooked</b> — a <b>watermelon seed</b> the convergence pinches by the thin tail, squirting it out nose-first past the escape shell (2r_e). The <b>1/√2 compression is the launch</b>; the whole thing is a <b>~10⁻²⁹ m</b> splinter, and nothing it crosses can slow it. Drag the ν or the e⁻ below; they step together.',
+  chk:()=>'seat 1.83c → c-boundary r_e=2.818 fm (0.511 MeV) → escape 2r_e · e⁻ → ground state, ν escapes · both cross c together · ν compresses 1/√2 (~10⁻²⁹ m)'},
+
  {t:'The honest ledger',s:'OPEN',mode:'ledger',
   st:'The whole model, with each piece carrying its true status. <b>Native and proved:</b> the grammar, the scission invariant, '+
      'the radius law, and the proton–electron economy (neutron = p + stabled e; shared e = binding). '+
@@ -239,6 +243,7 @@ isoSel.addEventListener('change',e=>{const [Z,A]=SPECS[+e.target.value];iso={Z,A
 /* ═══ 3D ═══ */
 const cv=el('cv'),cx=cv.getContext('2d');
 let yaw=-0.6,pitch=0.5,zoom=1,W=0,H=0,spin=true;
+let relTau=0.3, relDrag=null;   // β⁻ release scrubber
 function fit(){const r=el('mid').getBoundingClientRect(),dp=Math.min(devicePixelRatio,2);W=r.width;H=r.height||520;
   cv.width=W*dp;cv.height=H*dp;cv.style.width=W+'px';cv.style.height=H+'px';cx.setTransform(dp,0,0,dp,0,0);}
 function proj(p,pk){const cyw=Math.cos(yaw),syw=Math.sin(yaw),cp=Math.cos(pitch),sp=Math.sin(pitch);
@@ -291,13 +296,84 @@ function drawNucleus(pk,cache,mode){
   }
   if(hoverN&&hoverN.pos&&!hoverN.kind){const pr=proj(hoverN.pos,pk);cx.fillStyle='#1c1a16';cx.font='600 12px ui-monospace';cx.textAlign='center';cx.fillText(hoverN.name,pr.x,pr.y-pr.S*.34-6);cx.textAlign='left';}
 }
+/* the β⁻ release interactive (abstracted path — a₀ is 63,000× r_e, so not to scale) */
+function relSmooth(a,b,x){const t=Math.max(0,Math.min(1,(x-a)/(b-a)));return t*t*(3-2*t);}
+function relLayout(){return{xSeat:W*0.135,xC:W*0.47,xEsc:W*0.635,xGS:W*0.88,xEnd:W*1.05,yNu:H*0.37,yE:H*0.63};}
+function relX(who,t){const g=relLayout(),end=(who==='e')?g.xGS:g.xEnd;
+  return (t<=0.5)? g.xSeat+(g.xC-g.xSeat)*(t/0.5) : g.xC+(end-g.xC)*((t-0.5)/0.5);}
+function relTauFromX(who,x){const g=relLayout(),end=(who==='e')?g.xGS:g.xEnd;
+  return (x<=g.xC)? Math.max(0,0.5*(x-g.xSeat)/(g.xC-g.xSeat)) : Math.min(1,0.5+0.5*(x-g.xC)/(end-g.xC));}
+function relDot(x,y,R,col){const g=cx.createRadialGradient(x-R*.35,y-R*.4,R*.1,x,y,R);
+  g.addColorStop(0,'#fff');g.addColorStop(.35,col);g.addColorStop(1,shadeDark(col));
+  cx.beginPath();cx.arc(x,y,R,0,7);cx.fillStyle=g;cx.fill();cx.strokeStyle='rgba(0,0,0,.2)';cx.lineWidth=.6;cx.stroke();}
+function drawNeutrinoGlyph(cxp,cyp,t){
+  const R0=Math.min(W,H)*0.05, d=relSmooth(0.05,0.5,t), comp=1-(1-1/Math.SQRT2)*relSmooth(0.5,0.72,t);
+  const noseR=R0*(0.48+1.25*d), L=R0*2.3*(0.6+0.7*d)*comp, xN=cxp+L*0.5, xT=cxp-L*0.5, Cnx=xN-noseR;
+  const topY=cyp-noseR, botY=cyp+noseR;
+  cx.beginPath(); cx.moveTo(xT,cyp);
+  cx.quadraticCurveTo(cxp,topY,Cnx,topY);
+  cx.arc(Cnx,cyp,noseR,-Math.PI/2,Math.PI/2,false);
+  cx.quadraticCurveTo(cxp,botY,xT,cyp); cx.closePath();
+  const grd=cx.createLinearGradient(xT,cyp,xN,cyp);
+  grd.addColorStop(0,'rgba(125,91,166,.14)');grd.addColorStop(.55,'rgba(125,91,166,.55)');grd.addColorStop(1,'#7d5ba6');
+  cx.fillStyle=grd;cx.fill();cx.strokeStyle='rgba(74,44,110,.6)';cx.lineWidth=1;cx.stroke();
+  const pinch=relSmooth(0.45,0.74,t);
+  if(d>0.15){ // convergence bearing on the thin TAIL, tightening into a PINCH across the escape gap
+    const ticks=3+Math.round(pinch*4);
+    cx.strokeStyle='rgba(74,44,110,'+(0.35+0.5*pinch).toFixed(2)+')';cx.lineWidth=1+pinch*1.2;
+    for(let k=0;k<ticks;k++){const f=ticks>1?(k/(ticks-1)-0.5):0, yy=cyp+f*noseR*1.4*(1-0.45*pinch);
+      cx.beginPath();cx.moveTo(xT-noseR*(1.6-0.5*pinch),yy);cx.lineTo(xT-noseR*0.25,cyp+f*noseR*0.2);cx.stroke();}
+  }
+  if(pinch>0.04){ // the launch: the 1/sqrt2 squeeze becoming velocity, streaks fired off the nose
+    cx.strokeStyle='rgba(125,91,166,'+(0.55*pinch).toFixed(2)+')';cx.lineWidth=1.6;
+    for(let k=-1;k<=1;k++){const yy=cyp+k*noseR*0.42, len=noseR*(0.8+3.2*pinch);
+      cx.beginPath();cx.moveTo(xN+3,yy);cx.lineTo(xN+3+len,yy);cx.stroke();}
+  }
+  cx.fillStyle='#4a2c6e';cx.font='700 12px ui-monospace';cx.textAlign='center';cx.fillText('\u03bd',cxp,cyp-noseR-7);cx.textAlign='left';
+}
+function drawRelease(){
+  cx.clearRect(0,0,W,H);
+  const g=relLayout(), t=relTau, midY=H*0.5, pR=Math.min(W,H)*0.05;
+  cx.strokeStyle='rgba(28,26,22,.10)';cx.lineWidth=1;cx.beginPath();cx.moveTo(g.xSeat,midY);cx.lineTo(g.xEnd,midY);cx.stroke();
+  function wp(x,label,sub,strong){
+    cx.strokeStyle=strong?'rgba(201,162,39,.9)':'rgba(74,109,130,.4)';cx.setLineDash(strong?[]:[4,4]);cx.lineWidth=strong?2:1;
+    cx.beginPath();cx.moveTo(x,H*0.22);cx.lineTo(x,H*0.74);cx.stroke();cx.setLineDash([]);
+    cx.fillStyle=strong?'#846a10':'#4a6d82';cx.font='700 11px ui-monospace';cx.textAlign='center';cx.fillText(label,x,H*0.19);
+    cx.fillStyle='#7b7266';cx.font='9.5px ui-monospace';cx.fillText(sub,x,H*0.775);cx.textAlign='left';
+  }
+  wp(g.xC,'c-boundary','r_e 2.818 fm \u00b7 v=c \u00b7 0.511 MeV',true);
+  wp(g.xEsc,'escape \u00b7 2r_e','v_esc=c \u00b7 orbit 0.707c',false);
+  cx.fillStyle='#7b7266';cx.font='9.5px ui-monospace';cx.textAlign='center';
+  cx.fillText('ground state a\u2080',g.xGS,H*0.19);cx.fillText('(\u03b1c \u00b7 \u00d763,000 off-scale)',g.xGS,H*0.775);cx.textAlign='left';
+  cx.strokeStyle='rgba(192,80,58,.45)';cx.setLineDash([3,3]);cx.lineWidth=1;cx.beginPath();cx.arc(g.xSeat,midY,pR*1.55,0,7);cx.stroke();cx.setLineDash([]);
+  relDot(g.xSeat,midY,pR,'#c0503a');
+  cx.fillStyle='#8a2f22';cx.font='700 10px ui-monospace';cx.textAlign='center';
+  cx.fillText('proton',g.xSeat,midY-pR*1.55-14);cx.fillText('seat R_p \u00b7 1.83c',g.xSeat,midY-pR*1.55-3);cx.textAlign='left';
+  const ex=relX('e',t);
+  cx.strokeStyle='rgba(63,143,111,.25)';cx.lineWidth=1.5;cx.beginPath();cx.moveTo(g.xSeat,g.yE);cx.lineTo(ex,g.yE);cx.stroke();
+  relDot(ex,g.yE,pR*0.32,'#3f8f6f');
+  cx.fillStyle='#2c6b52';cx.font='700 12px ui-monospace';cx.textAlign='center';cx.fillText('e\u207b',ex,g.yE+pR*0.32+15);cx.textAlign='left';
+  const nx=relX('nu',t);
+  cx.strokeStyle='rgba(125,91,166,.22)';cx.lineWidth=1.5;cx.beginPath();cx.moveTo(g.xSeat,g.yNu);cx.lineTo(nx,g.yNu);cx.stroke();
+  drawNeutrinoGlyph(nx,g.yNu,t);
+  const cap = (t<0.02)?'both born at the 1.83c seat \u2014 drag either one'
+    : (Math.abs(t-0.5)<0.03)?'crossing the c-boundary \u2014 together, at the same instant'
+    : (t<0.5)?'climbing the gradient \u2014 the \u03bd deforms into a watermelon seed'
+    : (t<0.74)?'the convergence pinches the tail \u2014 the \u03bd is spat out (1/\u221a2); e\u207b settling'
+    : '\u03bd spat clear (~10\u207b\u00b2\u2079 m splinter) \u00b7 e\u207b at the ground state';
+  cx.fillStyle='#1c1a16';cx.font='600 13px ui-monospace';cx.textAlign='center';cx.fillText(cap,W/2,H*0.855);
+  cx.fillStyle='#7b7266';cx.font='11px ui-monospace';cx.fillText('drag the \u03bd or the e\u207b \u2014 they step together, and cross c at the same time',W/2,H*0.895);
+  cx.textAlign='left';
+}
 function draw(){fit();cx.clearRect(0,0,W,H);const m=F[step].mode;
   if(m==='pack'||m==='coord'||m==='data'||m==='band')drawNucleus(PACK,_surf,'pack');
   else if(m==='scission')drawNucleus(UPACK,_usurf,'scission');
   else if(m==='impact')drawNucleus(UPACK,_usurf,'impact');
   else if(m==='electron')drawNucleus(PACK,_surf,'electron');
+  else if(m==='release')drawRelease();
   else cx.clearRect(0,0,W,H);
   draw2d(m);
+  cv.style.cursor=(m==='release')?'ew-resize':'default';
 }
 /* 2D panels for data-heavy findings */
 function draw2d(m){const p=el('panel2d');p.innerHTML='';
@@ -329,9 +405,9 @@ function draw2d(m){const p=el('panel2d');p.innerHTML='';
 }
 /* interaction */
 let drag=false,lx=0,ly=0;
-cv.addEventListener('mousedown',e=>{drag=true;spin=false;lx=e.clientX;ly=e.clientY;});
-addEventListener('mouseup',()=>drag=false);
-addEventListener('mousemove',e=>{const pk=(F[step].mode==='scission'||F[step].mode==='impact')?UPACK:PACK;
+cv.addEventListener('mousedown',e=>{if(F[step].mode==='release'){const rr=cv.getBoundingClientRect(),mx=e.clientX-rr.left,my=e.clientY-rr.top,g=relLayout();const ex=relX('e',relTau),nx=relX('nu',relTau);relDrag=(Math.hypot(mx-nx,my-g.yNu)<32)?'nu':(Math.hypot(mx-ex,my-g.yE)<32)?'e':null;return;}drag=true;spin=false;lx=e.clientX;ly=e.clientY;});
+addEventListener('mouseup',()=>{drag=false;relDrag=null;});
+addEventListener('mousemove',e=>{if(F[step].mode==='release'){if(relDrag){const rr=cv.getBoundingClientRect();relTau=relTauFromX(relDrag,e.clientX-rr.left);draw();}return;}const pk=(F[step].mode==='scission'||F[step].mode==='impact')?UPACK:PACK;
   if(drag){yaw+=(e.clientX-lx)*.008;pitch=Math.max(-1.4,Math.min(1.4,pitch+(e.clientY-ly)*.008));lx=e.clientX;ly=e.clientY;draw();return;}
   const r=cv.getBoundingClientRect(),mx=e.clientX-r.left,my=e.clientY-r.top;let b=null,bd=15;
   for(const n of pk.nuc){const pr=proj(n.pos,pk);const dd=Math.hypot(pr.x-mx,pr.y-my);if(dd<bd){bd=dd;b=n;}}
@@ -363,6 +439,6 @@ el('next').onclick=()=>{if(step<F.length-1){step++;render();}};
 el('prev').onclick=()=>{if(step>0){step--;render();}};
 addEventListener('keydown',e=>{if(e.key==='ArrowRight')el('next').click();if(e.key==='ArrowLeft')el('prev').click();});
 addEventListener('resize',draw);
-function loop(){if(spin&&(F[step].mode!=='band'&&F[step].mode!=='yields'&&F[step].mode!=='ledger')){yaw+=0.003;draw();}requestAnimationFrame(loop);}
+function loop(){if(spin&&(F[step].mode!=='band'&&F[step].mode!=='yields'&&F[step].mode!=='ledger'&&F[step].mode!=='release')){yaw+=0.003;draw();}requestAnimationFrame(loop);}
 render();loop();
 </script></body></html>

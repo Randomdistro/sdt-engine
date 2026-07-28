@@ -65,7 +65,7 @@
 
   <figure class="shells" id="sh">
     <canvas id="shCanvas"></canvas>
-    <figcaption id="shCap">a shell of sources arriving from depth d — its parcel of pressure, ε, is the same however deep it lies</figcaption>
+    <figcaption id="shCap">a shell of sources arriving from depth d — its parcel of pressure, ε, is the same however deep it lies · drag on the figure to hold a shell at any depth</figcaption>
   </figure>
 </header>
 
@@ -179,6 +179,14 @@
   function build(){ W=cv.clientWidth;H=cv.clientHeight;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
     cx=W*0.34; cy=H/2; Rmax=Math.min(W*0.30,H*0.42); }
   build(); window.addEventListener('resize',build);
+  // drag on the figure to hold a shell at a chosen depth — the parcel ε never moves
+  var userE=null, shDown=false;
+  cv.style.touchAction='none'; cv.style.cursor='grab';
+  cv.addEventListener('pointerdown',function(e){shDown=true;cv.setPointerCapture&&cv.setPointerCapture(e.pointerId);shSet(e);});
+  cv.addEventListener('pointermove',function(e){if(shDown)shSet(e);});
+  window.addEventListener('pointerup',function(){shDown=false;setTimeout(function(){if(!shDown)userE=null;},2200);});
+  function shSet(e){var r=cv.getBoundingClientRect();var dx=(e.clientX-r.left)-cx,dy=(e.clientY-r.top)-cy;
+    userE=Math.max(1,Math.min(61,61*Math.hypot(dx,dy)/Rmax));}
   var t0=null, PERIOD=3.4, fronts=[], lastSpawn=-1e9;
   var EPS='1.76×10⁻¹¹⁸ J';
   function fmtE(e){ e=Math.round(e); return '10'+String(e).split('').map(function(d){return '⁰¹²³⁴⁵⁶⁷⁸⁹'[+d];}).join(''); }
@@ -207,6 +215,9 @@
     // right panel: the invariant ε bar + the two swinging tides (log scale, honest)
     var px=W*0.72, top=cy-Rmax*0.9, bot=cy+Rmax*0.9, mid=cy;
     var e = lead? 61*lead.rf/Rmax : 30;                 // depth exponent from the lead front
+    if(userE!==null){ e=userE;                          // …or held where the reader is pointing
+      ctx.beginPath(); ctx.arc(cx,cy,Rmax*e/61,0,6.2832);
+      ctx.strokeStyle='rgba(176,116,48,0.9)'; ctx.lineWidth=2; ctx.stroke(); }
     // sources bar UP by ∝e, dilution bar DOWN by ∝e (log-symmetric about ε)
     var h = (e/61)*(Rmax*0.85);
     ctx.fillStyle='rgba(176,116,48,0.25)'; ctx.fillRect(px-26, mid-h, 20, h);      // sources ↑

@@ -85,7 +85,7 @@
     <div class="prim" data-prim="space" role="button" tabindex="0"><div class="glyph">◈</div><div class="nm">Space</div><div class="sdt">the lattice</div></div>
     <div class="prim" data-prim="matter" role="button" tabindex="0"><div class="glyph">◉</div><div class="nm">Matter</div><div class="sdt">a displacement</div></div>
     <div class="prim" data-prim="movement" role="button" tabindex="0"><div class="glyph">⟳</div><div class="nm">Movement</div><div class="sdt">the relay</div></div>
-    <div class="prim" data-prim="now" role="button" tabindex="0"><div class="glyph">⧖</div><div class="nm">Now</div><div class="sdt">the count</div></div>
+    <div class="prim" data-prim="now" role="button" tabindex="0"><div class="glyph">⧖</div><div class="nm">The Present</div><div class="sdt">the plane · "now" is its count</div></div>
   </div>
 </header>
 
@@ -95,7 +95,7 @@
     <div class="chapter__num">One</div>
     <h2 class="chapter__title">Four, and no more</h2>
     <p class="chapter__lead">A theory is honest in proportion to how little it asks you to grant it without proof.</p>
-    <p>So we ask for four things only. Space, matter, movement, and the passing of the moment we call <em>now</em>. Everything else that physics usually hands you as given — mass, warmth, the flow of time, the pull between bodies — is not granted here. It is <strong>derived</strong>: shown to follow, step by step, from these four and from a short list of measured numbers. If a thing is not one of the four, and cannot be built from them, it does not belong in the account.</p>
+    <p>So we ask for four things only. Space, matter, movement, and <em>the present</em> — the plane of existence itself. Everything else that physics usually hands you as given — mass, warmth, the flow of time, the pull between bodies — is not granted here. It is <strong>derived</strong>: shown to follow, step by step, from these four and from a short list of measured numbers. If a thing is not one of the four, and cannot be built from them, it does not belong in the account.</p>
     <p>Hold that discipline in mind as we go. It is the whole reason the picture will feel inevitable rather than assembled.</p>
   </div>
 </section>
@@ -120,6 +120,10 @@
     <p class="chapter__lead">Matter is not a thing sitting <em>in</em> space. It is a knot made <em>of</em> space.</p>
     <p>Take the lattice and give it a twist that it cannot shake out — a loop that closes on itself and holds. That standing twist is a particle. The word for shape that survives such handling is <strong>topology</strong>: the study of forms that bending and stretching cannot change. It matters here for one reason above all — a knot cannot be undone by squeezing, and that is precisely why a particle endures instead of dissolving back into plain lattice.</p>
     <p>Resist the old temptation to think of matter as a hole, an absence, a place where space has been removed. It is the opposite. Where matter sits, the medium is <strong>crowded and reorganised</strong>, dense and present — a region working harder than the calm lattice around it, not a gap in it. Matter is substance, wound tight.</p>
+    <figure style="max-width:30rem;margin:1.4rem auto 0;text-align:center">
+      <svg id="knotTry" viewBox="0 0 360 180" style="width:100%;height:auto;touch-action:none;cursor:pointer" aria-label="Press either loop to shake it — the open loop dissolves back into lattice; the knot holds"></svg>
+      <figcaption style="font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--ink-faint);margin-top:0.6rem">press a loop to shake it — the untied loop dissolves; the knot cannot be undone by squeezing</figcaption>
+    </figure>
   </div>
 </section>
 
@@ -139,10 +143,10 @@
 <section class="chapter">
   <div class="chapter__inner reveal">
     <div class="chapter__num">Five</div>
-    <h2 class="chapter__title">Now — the count</h2>
-    <p class="chapter__lead">Time is not a road already laid down ahead of us. It is a tally.</p>
-    <p>The lattice oscillates; each oscillation is one tick. <em>Now</em> is nothing more mysterious than the current count of those ticks. There is no separate dimension of time threaded through space — there is only a medium that cycles, and a running total of its cycles. The arrow that seems to point from past to future is simply the direction in which the count rises.</p>
-    <p>This is a demotion, and a deliberate one. Time joins mass and warmth on the list of things that are <strong>counted or derived</strong>, not assumed. The universe keeps no clock but its own beating.</p>
+    <h2 class="chapter__title">The Present — and its count</h2>
+    <p class="chapter__lead">Not a moment sliding along a line. The plane of existence itself, with everything inside it moving, always moving.</p>
+    <p>The lattice oscillates; each oscillation is one tick. <em>Now</em> is nothing more mysterious than the current count of those ticks — a tally the present keeps, not a territory it sits in. There is no separate dimension of time threaded through space: the past is the tally kept, the future the tally expected, and neither is a place. And there is no arrow to explain, because un-happening is not an operation the relay has.</p>
+    <p>This is a demotion, and a deliberate one. Time joins mass and warmth on the list of things that are <strong>counted or derived</strong>, not assumed. Only the plane is — and the plane does not elapse.</p>
   </div>
 </section>
 
@@ -246,6 +250,43 @@
     requestAnimationFrame(frame);
   }
   lift(); requestAnimationFrame(frame);
+})();
+
+// ── Ch.3 interactive: shake the loop, shake the knot — only the knot survives ──
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e}
+  var svg=document.getElementById('knotTry'); if(!svg)return;
+  function loopPath(cx,jit){var d='';for(var i=0;i<=90;i++){var t=i/90*Math.PI*2;
+    var r=42+jit*10*Math.sin(7*t+jit*9);
+    d+=(i?'L':'M')+(cx+Math.cos(t)*r)+' '+(90+Math.sin(t)*r*0.8)+' ';}return d+'Z';}
+  function trePath(cx,jit){var d='';for(var i=0;i<=140;i++){var t=i/140*Math.PI*2;
+    var r=26+13*Math.cos(3*t)+jit*6*Math.sin(9*t+jit*7);
+    d+=(i?'L':'M')+(cx+Math.cos(t)*r*1.45)+' '+(90+Math.sin(t)*r*1.1)+' ';}return d+'Z';}
+  var loop=el('path',{d:loopPath(95,0),fill:'none',stroke:'#4a4f8c','stroke-width':2.4});
+  var tre =el('path',{d:trePath(255,0),fill:'none',stroke:'#4a4f8c','stroke-width':2.4});
+  svg.appendChild(loop);svg.appendChild(tre);
+  var ll=el('text',{x:95,y:168,'text-anchor':'middle','font-family':'JetBrains Mono,monospace','font-size':'10px',fill:'#7a7265'});ll.textContent='an untied loop';
+  var tl=el('text',{x:255,y:168,'text-anchor':'middle','font-family':'JetBrains Mono,monospace','font-size':'10px',fill:'#7a7265'});tl.textContent='the trefoil — a particle';
+  svg.appendChild(ll);svg.appendChild(tl);
+  var state={loop:{jit:0,alive:true},tre:{jit:0}};
+  svg.addEventListener('pointerdown',function(e){
+    var r=svg.getBoundingClientRect(),x=(e.clientX-r.left)/r.width*360;
+    if(x<180){state.loop.jit=1;}else{state.tre.jit=1;}
+  });
+  (function tick(){
+    var L=state.loop,T=state.tre;
+    if(L.jit>0){L.jit*=0.97;
+      if(L.alive&&L.jit<0.5){L.alive=false;}
+      if(!L.alive){loop.setAttribute('stroke-opacity',Math.max(0,L.jit*2-0.2));ll.textContent='…dissolved back into plain lattice';}
+      loop.setAttribute('d',loopPath(95,L.jit));
+      if(L.jit<0.02&&!L.alive){L.jit=0;setTimeout(function(){L.alive=true;loop.setAttribute('stroke-opacity',1);ll.textContent='an untied loop';loop.setAttribute('d',loopPath(95,0));},1400);}
+    }
+    if(T.jit>0){T.jit*=0.95;tre.setAttribute('d',trePath(255,T.jit));
+      tl.textContent=T.jit>0.3?'shaken — and still a knot':'the trefoil — a particle';
+      if(T.jit<0.02){T.jit=0;tre.setAttribute('d',trePath(255,0));}}
+    requestAnimationFrame(tick);
+  })();
 })();
 </script>
 </body>

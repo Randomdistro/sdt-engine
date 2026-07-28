@@ -193,8 +193,8 @@
         </div>
         <div>
           <div class="stage">
-            <canvas id="tideCv"></canvas>
-            <div class="stage__bar"><label for="tideR">orbital distance r</label><input type="range" id="tideR" min="120" max="600" step="1" value="480"><span class="rd" id="tideRd">stable</span></div>
+            <canvas id="tideCv" style="touch-action:none;cursor:grab"></canvas>
+            <div class="stage__bar"><label>drag the moon in and out</label><input type="range" id="tideR" min="120" max="600" step="1" value="480" style="display:none"><span class="rd" id="tideRd">stable</span></div>
             <div class="stage__note" id="tideNote">cross the Roche limit and the ball becomes a spoke, then rubble.</div>
           </div>
         </div>
@@ -376,6 +376,14 @@ paint();
     else{for(let i=0;i<40;i++){const a=(i/40)*6.283,rr=roche*42+(Math.random()-0.5)*28;c.fillStyle='rgba(190,200,150,0.8)';c.beginPath();c.arc(px+Math.cos(a)*rr,py+Math.sin(a)*rr*0.9,2+Math.random()*2,0,6.283);c.fill();}rd.textContent='disrupted → rubble';}
     note.textContent=inside?'inside the Roche limit: tidal stretch beats the body\'s own gravity — a ring of rubble (Saturn\'s rings, Shoemaker–Levy 9).':'a_tidal ≈ '+((roche/r)**3).toFixed(2)+'× self-gravity. A pure pull only stretches; something must push back to keep the ball.';}
   sl.oninput=draw;addEventListener('resize',draw);draw();
+  // drag the moon itself — no slider: r follows the pointer
+  var down=false;
+  cv.addEventListener('pointerdown',function(e){down=true;cv.setPointerCapture&&cv.setPointerCapture(e.pointerId);mv(e);});
+  cv.addEventListener('pointermove',function(e){if(down)mv(e);});
+  addEventListener('pointerup',function(){down=false;});
+  function mv(e){var r=cv.getBoundingClientRect(),w=cv.clientWidth;
+    var px=w*0.18, x=(e.clientX-r.left);
+    sl.value=Math.max(120,Math.min(600,(x-px)/42*100));draw();}
 })();
 
 /* ── LE SAGE ── */

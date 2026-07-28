@@ -101,7 +101,7 @@
   </div>
   <figure class="dipole fwd">
     <canvas id="dipCanvas"></canvas>
-    <figcaption id="dipCap">at rest the arrival is even; set the body moving and it tilts — dense ahead, thin behind</figcaption>
+    <figcaption id="dipCap">at rest the arrival is even; set the body moving and it tilts — dense ahead, thin behind · drag across the figure to drive the speed yourself</figcaption>
   </figure>
 </header>
 
@@ -220,9 +220,17 @@
     for(var i=0;i<220;i++){ var a=Math.random()*6.2832; M.push({a:a, r:R*(0.5+Math.random()*0.6), sp:0.5+Math.random()*0.7}); }
   }
   build(); window.addEventListener('resize',build);
+  // drag horizontally to set the body's speed yourself (release to resume the slow cycle)
+  var userV=null,dipDown=false;
+  cv.style.touchAction='none'; cv.style.cursor='grab';
+  cv.addEventListener('pointerdown',function(e){dipDown=true;cv.setPointerCapture&&cv.setPointerCapture(e.pointerId);dipSet(e);});
+  cv.addEventListener('pointermove',function(e){if(dipDown)dipSet(e);});
+  window.addEventListener('pointerup',function(){dipDown=false;setTimeout(function(){if(!dipDown)userV=null;},2600);});
+  function dipSet(e){var r=cv.getBoundingClientRect();userV=Math.max(0,Math.min(0.92,(e.clientX-r.left)/r.width*1.1-0.09));}
   function frame(ts){
     if(frame._t===undefined)frame._t=ts; var dt=Math.min(0.05,(ts-frame._t)/1000); frame._t=ts; var t=ts/1000;
     var v=0.5-0.5*Math.cos(t*0.6); v*=0.92;              // v/c, slow accelerate–coast
+    if(userV!==null)v=userV;                              // …unless the reader is driving
     var g=1/Math.sqrt(1-v*v);
     ctx.clearRect(0,0,W,H);
     // hemisphere haze: blue ahead (right), red behind (left)

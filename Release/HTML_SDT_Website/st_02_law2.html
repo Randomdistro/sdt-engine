@@ -127,7 +127,7 @@
     <h2 class="chapter__title">The cosmic microwave background, re-seen</h2>
     <p class="chapter__lead">Our instruments are lenses. They tell us a true story about optics, and a misleading one about mechanics.</p>
     <p>When the faint 2.7-kelvin light arrives from every direction, a telescope collimates it and assigns it a distance, reconstructing a glowing surface some 46 billion light-years away. As <em>optics</em> this is correct — the light did set out from there. But the mechanical reality at your location is not a far-off wall; it is the immersion just described, N overlapping fronts that have already arrived.</p>
-    <p>So the cosmic microwave background is not best understood as a distant blackbody surrounding us. It is the <strong>spectral residue</strong> — the cooled fingerprint — of an already-arrived boundary transition, whose local presence is simply the isotropic pressure of Law I. The glow of the Clearing has faded from 3000 kelvin to 2.7 by the plain cooling of an expanding record, exactly the factor (1 + z)⁴ the redshift demands.</p>
+    <p>So the cosmic microwave background is not best understood as a distant blackbody surrounding us. It is the <strong>spectral residue</strong> — the cooled fingerprint — of an already-arrived boundary transition, whose local presence is simply the isotropic pressure of Law I. The glow of the Clearing has faded from 3000 kelvin to 2.7 not by any expansion, but by the propagation ladder itself: temperature falls as (1 + z), and 3000/2.7255 ≈ 1100 is exactly 2^10.10 — ten octaves and a tenth, the depth of the Clearing in halvings.</p>
   </div>
 </section>
 
@@ -146,6 +146,10 @@
       <div class="d"><div class="k">The Sun's pressure domain</div><div class="v">≈ 20,800 AU</div><div class="n">Beyond this the background convergence outweighs the Sun's — the true radiative edge of the solar system.</div></div>
       <div class="d"><div class="k">The heliopause, for contrast</div><div class="v">≈ 120 AU</div><div class="n">A boundary of particles, not of radiation — nearly two hundred times nearer, and a different kind of edge entirely.</div></div>
     </div>
+    <figure style="max-width:34rem;margin:1.6rem auto 0;text-align:center">
+      <svg id="domainPlay" viewBox="0 0 560 170" style="width:100%;height:auto;touch-action:none;cursor:grab" aria-label="Drag the probe away from the star — inside the domain the star's release wins; outside, the background does"></svg>
+      <figcaption style="font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--ink-faint);margin-top:0.6rem">drag the probe — where the two pushes balance is the domain edge, r = √(L/4πF_CMB)</figcaption>
+    </figure>
   </div>
 </section>
 
@@ -159,7 +163,7 @@
       <span class="cert cert--d">DERIVED — from CMB observables + geometry</span>
       <span class="cert">1 CALIBRATION · hydrogen</span>
     </div>
-    <p>The cascade rests on quantities the sky already gives us — the recombination temperature, its redshift, the present background — and on the same faithful relay as Law I. The cooling from the Clearing to today matches the redshift's (1 + z)⁴ exactly; the solar domain of 20,800 AU falls straight out of the flux balance. Nothing here is tuned.</p>
+    <p>The cascade rests on quantities the sky already gives us — the recombination temperature, its redshift, the present background — and on the same faithful relay as Law I. The cooling from the Clearing to today matches the redshift's (1 + z) exactly, 3000 K to 2.7255 K at z = 1100; the solar domain of 20,800 AU falls straight out of the flux balance. Nothing here is tuned.</p>
     <p>We now have the pressure, and we know its source. It arrives from every side, perfectly balanced, and so we feel nothing. Which sets up the sharpest turn in the whole account: <strong>put a body in the way, and the balance breaks.</strong> That leftover push is force — and it is the next Law.</p>
     <p class="step">Next → The Laws · III — Convergent Boundary Pressure</p>
     <div class="margin-note">The Laws · II · The Release Cascade. Author: J. C. Harvey, Melbourne.</div>
@@ -219,6 +223,43 @@
     requestAnimationFrame(frame);
   }
   requestAnimationFrame(frame);
+})();
+
+// ── Ch.6 interactive: the pressure domain — drag the probe; two pushes compete ──
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e}
+  var svg=document.getElementById('domainPlay'); if(!svg)return;
+  var defs=el('defs',{});
+  var mo=el('marker',{id:'dpo',markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
+  mo.appendChild(el('path',{d:'M0,0 L6,3 L0,6 Z',fill:'#b07430'}));defs.appendChild(mo);
+  var mi=el('marker',{id:'dpi',markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
+  mi.appendChild(el('path',{d:'M0,0 L6,3 L0,6 Z',fill:'#4a6d82'}));defs.appendChild(mi);
+  svg.appendChild(defs);
+  svg.appendChild(el('circle',{cx:60,cy:85,r:20,fill:'#b07430'}));
+  var edgeX=60+330;
+  svg.appendChild(el('line',{x1:edgeX,y1:25,x2:edgeX,y2:145,stroke:'#a49d92','stroke-dasharray':'5 4'}));
+  var el1=el('text',{x:edgeX,y:18,'text-anchor':'middle','font-family':'JetBrains Mono,monospace','font-size':'10px',fill:'#7a7265'});
+  el1.textContent='the domain edge · 20,800 AU';svg.appendChild(el1);
+  var out=el('line',{stroke:'#b07430','stroke-width':3,'marker-end':'url(#dpo)'});
+  var inn=el('line',{stroke:'#4a6d82','stroke-width':3,'marker-end':'url(#dpi)'});
+  svg.appendChild(out);svg.appendChild(inn);
+  var probe=el('circle',{cy:85,r:7,fill:'#1e1c18'});svg.appendChild(probe);
+  var read=el('text',{x:280,y:162,'text-anchor':'middle','font-family':'JetBrains Mono,monospace','font-size':'10px',fill:'#7a7265'});
+  svg.appendChild(read);
+  var x=200,on=false;
+  function render(){probe.setAttribute('cx',x);
+    var sun=Math.min(40,26*Math.pow(330/(x-60),1.0));       // star's outward push ∝ 1/r²(display-compressed)
+    var bg =Math.min(40,26*Math.pow((x-60)/330,1.0));        // background's inward share grows relatively
+    out.setAttribute('x1',x+10);out.setAttribute('y1',85);out.setAttribute('x2',x+10+sun);out.setAttribute('y2',85);
+    inn.setAttribute('x1',x-10);inn.setAttribute('y1',85);inn.setAttribute('x2',x-10-bg);inn.setAttribute('y2',85);
+    read.textContent = x<edgeX ? 'inside the domain — the star’s release wins; the Oort cloud rests where they balance (lumiostasis)'
+                               : 'outside — the background convergence wins: the true radiative edge is crossed';}
+  svg.addEventListener('pointerdown',function(e){on=true;svg.setPointerCapture&&svg.setPointerCapture(e.pointerId);move(e);});
+  svg.addEventListener('pointermove',function(e){if(on)move(e);});
+  window.addEventListener('pointerup',function(){on=false;});
+  function move(e){var r=svg.getBoundingClientRect();x=Math.max(110,Math.min(540,(e.clientX-r.left)/r.width*560));render();}
+  render();
 })();
 </script>
 </body>

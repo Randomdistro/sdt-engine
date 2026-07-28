@@ -122,6 +122,14 @@ the ledger words, not academic hedges.
   it is a writer's.
 - **Borrowed vocabulary leaking back in**: one "spacetime" or "attraction" un-refused breaks
   the ontological spine.
+- **LLM fear (Harvey, 2026-07-27: "stinks of LLM fear")**: falsification apparatus worn on
+  public copy — "breaks if" on every screen, kill/gate/verdict vocabulary, defensive preambles
+  ("those are not slogans…", "I say so without flinching"), self-audit as showroom decor. The
+  discipline lives in the repo; the page speaks from calm confidence. Honesty appears ONCE, in
+  voice, as craft ("shows its joinery"), never as armour on every paragraph.
+- **Script-smell**: copy generated through template slots reads as slot-filling. Public prose
+  is WRITTEN, as prose, by a mind holding the whole page — the contracts guide coverage, never
+  cadence.
 
 ## VII. Calibration samples (written to the model — judge these, then the model)
 

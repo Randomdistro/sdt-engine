@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paper 02 — Particle Physics &amp; Topology</title>
+<style>
+:root{--paper:#faf8f4;--edge:#e5e0d4;--ink:#1c1e20;--soft:#45484c;--mute:#6d7177;--mint:#0d7a5f;--rust:#a4552e;--gold:#8a6d1f;--steel:#4a6d82}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:'Source Serif 4',Georgia,serif;line-height:1.75;padding:3rem 1.5rem}
+main{max-width:46rem;margin:0 auto}
+.series{font-family:Consolas,monospace;font-size:.68rem;letter-spacing:.28em;color:var(--mute);text-transform:uppercase;margin-bottom:1.2rem}
+h1{font-size:1.85rem;line-height:1.25;font-weight:700;margin-bottom:1rem}
+.byline{font-size:1rem;margin-bottom:.2rem}
+.affil{font-family:Consolas,monospace;font-size:.72rem;color:var(--mute);margin-bottom:2rem}
+h2{font-size:1.12rem;font-weight:700;margin:2.2rem 0 .7rem}
+p{margin-bottom:.9rem;color:var(--soft)}
+strong{color:var(--ink)}
+.abstract{border:1px solid var(--edge);border-left:3px solid var(--mint);padding:1.1rem 1.3rem;background:#fff;margin:1.5rem 0}
+.abstract p{margin-bottom:0}
+.eq{font-family:Consolas,monospace;font-size:.9rem;background:#fff;border:1px solid var(--edge);border-radius:3px;padding:.8rem 1.1rem;margin:1rem 0;display:flex;justify-content:space-between;gap:1rem;overflow-x:auto}
+.eq .no{color:var(--mute)}
+table{width:100%;border-collapse:collapse;font-size:.85rem;margin:1rem 0}
+th,td{border:1px solid var(--edge);padding:.45rem .6rem;text-align:left;vertical-align:top}
+th{font-family:Consolas,monospace;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+.decl{border:1px solid var(--edge);background:#fff;padding:1rem 1.2rem;margin:1.5rem 0;font-size:.92rem}
+.refs ol{margin-left:1.2rem}
+.refs li{font-size:.85rem;color:var(--soft);margin-bottom:.4rem}
+footer{max-width:46rem;margin:3rem auto 0;padding-top:1.2rem;border-top:1px solid var(--edge)}
+footer a{color:var(--mint);text-decoration:none;font-family:Consolas,monospace;font-size:.75rem;letter-spacing:.06em}
+sub,sup{line-height:0}
+</style>
+</head>
+<body>
+<main>
+<p class="series">Spatial Displacement Theory · Paper 02 · Prepared for Submission</p>
+<h1>Torus-Knot Quantisation of Persistent Displacement Vortices: The Winding Spectrum, the W+1 Radius Relation, and the 6π⁵ Identity</h1>
+<p class="byline">J. C. Harvey</p>
+<p class="affil">Melbourne, Australia · July 2026 · Domain 02 — Particle Physics &amp; Topology</p>
+
+<div class="abstract">
+<p><strong>Abstract.</strong> Stable particles are persistent (p,q) torus-knot circulation states of the relay substrate (Theorem T18). We prove the winding spectrum from knot invariants: a (p,q) mode is a true knot iff gcd(p,q) = 1 and min(p,q) ≥ 2, and its Alexander polynomial Δ(t) ≠ 1 is invariant under continuous deformation. The (1,1) unknot (electron, W = 1) is stable by displacement confinement; the (1,2) mode is unknotted and merely metastable, hence never observed; the (2,3) trefoil (proton, W = 3) is topologically protected. The mode-velocity partition follows exactly from the movement budget, v<sub>T</sub> = c√(p/(p+q)), v<sub>P</sub> = c√(q/(p+q)). The W+1 relation R<sub>wake</sub> = (W+1)ℏ/(mc) reproduces the measured proton boundary radius to 0.02% with no adjustable parameter, and the topological identity 6π⁵ = 3·(2π²)·π³ = 1836.118 matches the proton-to-electron mass ratio to −0.0019%. All conjectural links are flagged.</p>
+</div>
+<p><strong>Keywords:</strong> winding number · Alexander polynomial · trefoil · movement budget partition · traction ratio · mass ratio 6π⁵</p>
+
+<h2>1. The winding spectrum from knot invariants (PPT09, class A)</h2>
+<p>Let a circulation state occupy a (p,q) torus mode. It is a true knot iff gcd(p,q) = 1 and min(p,q) ≥ 2; its Alexander polynomial is then a deformation invariant:</p>
+<div class="eq"><span>(1,1): Δ = 1 — unknot; stable only by V<sub>disp</sub> confinement (electron)</span><span class="no">(1)</span></div>
+<div class="eq"><span>(1,2): Δ = 1 — unknot; metastable, barrier ≈ 0.1 GeV, τ ~ 10⁻²¹ s — never observed</span><span class="no">(2)</span></div>
+<div class="eq"><span>(2,3): Δ(t) = t⁻² − t⁻¹ + 1 − t + t² ≠ 1 — protected; τ<sub>p</sub> &gt; 10³⁴ yr</span><span class="no">(3)</span></div>
+<p>Exactly two stable charged configurations exist. This is a theorem of the substrate topology, not a parameter choice, and it is the whole of the framework's particle taxonomy: W = 0 open winding (neutrino), W = 1 unknot (electron/positron by circulation sense), W = 3 trefoil (proton/antiproton). Higher protected knots (W = 5, 7, …) are permitted and await discovery.</p>
+
+<h2>2. Mode-velocity partition from the movement budget (PPT01)</h2>
+<p>The budget v<sub>T</sub>² + v<sub>P</sub>² = c² (Law V) fixes the toroidal/poloidal partition of any (p,q) state exactly:</p>
+<div class="eq"><span>v<sub>T</sub> = c√(p/(p+q)),&nbsp;&nbsp;v<sub>P</sub> = c√(q/(p+q)),&nbsp;&nbsp;R/a = √(q/p)</span><span class="no">(4)</span></div>
+<p>Electron (1,1): v<sub>T</sub> = v<sub>P</sub> = c/√2. Proton (2,3): v<sub>T</sub> = c√(2/5) = 0.632c, v<sub>P</sub> = c√(3/5) = 0.775c. The budget residual (v<sub>T</sub>² + v<sub>P</sub>²)/c² is identically 1 for all (p,q).</p>
+
+<h2>3. The W+1 radius relation</h2>
+<div class="eq"><span>R<sub>wake</sub> = (W+1)·ℏ/(mc) ⟹ R<sub>p</sub> = 4ℏ/(m<sub>p</sub>c) = 0.84124 fm</span><span class="no">(5)</span></div>
+<p>Against the muonic-hydrogen boundary radius 0.8414 fm the residual is 0.02%; the effective winding read from measurement is W<sub>eff</sub> = R<sub>p</sub>·m<sub>p</sub>·c/ℏ − 1 = 3.0008. Certification: class C-flagged — the W+1 scaling is conjectural pending derivation from trefoil geometry; the falsification gate is pre-committed (the conjecture dies if W<sub>eff</sub> departs from the integer 3 beyond 3σ). We record the boundary radius as a boundary radius; the literature's term for the observable obscures that no charge substance is involved.</p>
+
+<h2>4. Traction: how the substrate is driven</h2>
+<p>The trefoil demands phase velocity v<sub>phase</sub> = c/k<sub>p-surf</sub> = 1.831c at R<sub>p</sub>, while the substrate relays at ≤ c. The demanded angular rate and the relay ceiling are</p>
+<div class="eq"><span>ω<sub>demand</sub> = 3m<sub>p</sub>c²/ℏ = 4.27 × 10²⁴ s⁻¹,&nbsp;&nbsp;ω<sub>max</sub> = c/R<sub>p</sub> = 3.56 × 10²³ s⁻¹</span><span class="no">(6)</span></div>
+<div class="eq"><span>T = ω<sub>demand</sub>/ω<sub>max</sub> = 3(W+1) = 12</span><span class="no">(7)</span></div>
+<p>This mismatch is the mechanical origin of the wake hierarchy: the ℓ = 1 (Coulomb), ℓ = 2 (dipole circulation), and ℓ ≥ 3 (short-reach) components are the substrate's graded response to a rotation it cannot fully relay. The nuclear-to-atomic gear ratio 3a₀m<sub>p</sub>c/(αℏ) = 1.03 × 10⁸ places atomic structure as nuclear circulation geared down through k = 1/α = 137.036.</p>
+
+<h2>5. Confinement as collimated convergence (PPT05)</h2>
+<p>The isotropic share P<sub>conv</sub>/3 collimates deflected throughput into a tube of constant cross-section, so tube energy grows linearly, E(L) = σL with σ = 1.23 GeV/fm. The community lattice-computation value ≈ 0.9 GeV/fm is cited only as a convergence target: the SDT figure is 37% above it — a convergence on mechanism and scale, not an exact match, and it is labelled so. Two contraband flags recorded in the canon are reproduced here verbatim rather than hidden: (i) the string-breaking length 0.23 fm carries a silent import of the pion mass, which is not in the measured whitelist; (ii) the pair-snap mode assignment collides with the winding table's assignment of (1,1). Both stand flagged, unresolved, awaiting adjudication — neither is used downstream in this paper.</p>
+
+<h2>6. The 6π⁵ identity</h2>
+<div class="eq"><span>6π⁵ = 3·(2π²)·π³ = 1836.1181&nbsp;&nbsp;vs&nbsp;&nbsp;m<sub>p</sub>/m<sub>e</sub> = 1836.15267&nbsp;&nbsp;(−0.0019%)</span><span class="no">(8)</span></div>
+<p>The decomposition reads: 3 (winding lobes) × 2π² (unit 3-sphere surface-volume) × π³ (isotropic-pressure factor). No mass measurement enters the left-hand side. Certification: class B-flagged — the identity is exact and parameter-free, but the mapping 6π⁵ ↔ V<sub>disp</sub>(W=3)/V<sub>disp</sub>(W=1) is asserted, not derived; it remains OPEN pending the equilibrium solver (OP-1). The same discipline applies to g(1) = r<sub>e</sub>m<sub>e</sub>c/ℏ ≡ α: this is a definitional identity (class F), disclosed as such; the non-trivial claim in the wake-ratio family is g(3) = 4.0008 (proton).</p>
+
+<h2>7. Certification</h2>
+<table>
+<tr><th>Result</th><th>Value</th><th>Status</th></tr>
+<tr><td>Winding spectrum (1,1)/(2,3) only</td><td>eqs. (1)–(3)</td><td>DERIVED — class A, analytic (PPT09)</td></tr>
+<tr><td>Mode partition v<sub>T</sub>, v<sub>P</sub></td><td>eq. (4)</td><td>DERIVED — class A, exact from budget</td></tr>
+<tr><td>R<sub>p</sub> = 4ℏ/(m<sub>p</sub>c)</td><td>0.84124 fm (0.02%)</td><td>C-flagged — W+1 conjectural; kill gate pre-committed</td></tr>
+<tr><td>Traction T = 3(W+1) = 12</td><td>eq. (7)</td><td>DERIVED — class C</td></tr>
+<tr><td>σ = 1.23 GeV/fm</td><td>+37% vs convergence target</td><td>class C — mechanism-level convergence; 2 contraband flags disclosed</td></tr>
+<tr><td>6π⁵ mass-ratio identity</td><td>−0.0019%</td><td>B-flagged — mapping to V<sub>disp</sub> OPEN</td></tr>
+<tr><td>g(1) ≡ α</td><td>identity</td><td>class F — definitional, not evidence</td></tr>
+</table>
+
+<div class="decl">
+<p><strong>Methodological declaration.</strong> No quark or gluon degrees of freedom, no gauge field, no wavefunction, and no quantised-action postulate appear at any step. Knot theory is used as mathematics, not as imported physics. Community lattice-computation and measured-radius values enter exclusively as convergence targets and falsification anchors. Both canon contraband flags in the confinement sector are disclosed above rather than laundered.</p>
+</div>
+
+<h2 class="refs">References</h2>
+<div class="refs"><ol>
+<li>Engine/include/sdt/laws.hpp — namespace sdt::laws::law_VI (winding, topology, confinement, traction, mass_ratio, angular), with in-situ provenance blocks and contraband flags.</li>
+<li>Investigations/02_Particle_Physics_and_Topology — PPT01 (mode equations), PPT05 (confinement), PPT06 (traction), PPT09 (winding spectrum, class A).</li>
+<li>Antognini et al., muonic-hydrogen proton boundary-radius determination (measured anchor, 2019 adjustment).</li>
+<li>CODATA 2018 (m<sub>p</sub>/m<sub>e</sub> = 1836.15267 — comparison datum only).</li>
+<li>Laws/ — Law VI paper (vortex topology quantisation).</li>
+</ol></div>
+</main>
+<footer><a href="atlas.html#topology">← RETURN TO THE ATLAS · TOPOLOGICAL CLASSIFICATION OF MATTER</a></footer>
+</body>
+</html>

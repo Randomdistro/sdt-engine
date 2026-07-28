@@ -148,20 +148,24 @@ svg .drag:active { cursor: grabbing; }
   <div class="chapter__inner reveal">
     <div class="chapter__num">The thesis</div>
     <h2 class="chapter__title">Space is not empty, and nothing pulls</h2>
-    <p class="chapter__lead">Space is a gap-free lattice of contacting cells — <em>spations</em> — that relay deformation one cell per tick. Every force, every mass, every photon, the redshift of galaxies: all of it is how that relay is loaded, occluded, displaced, and budgeted.</p>
+    <p class="chapter__lead">Space is a lattice of permanently contacting cells — <em>spations</em> — that relay deformation one cell per tick. The contact never breaks; the packing still leaves shaped voids, and movement herds them. Every force, every mass, every photon, the redshift of galaxies: all of it is how that relay is loaded, occluded, displaced, and budgeted.</p>
     <p>There are four primitives. Everything else is derived from them.</p>
 
     <div class="primitives reveal-stagger">
-      <div class="primitive"><div class="primitive__glyph">◈</div><div class="primitive__name">Space</div><div class="primitive__sdt">The spation lattice</div><p class="primitive__desc">A 3D, gap-free, contact-only relay medium. The irreducible cell is the spation, of size ℓ<sub>P</sub> = 1.616 × 10⁻³⁵ m.</p></div>
+      <div class="primitive"><div class="primitive__glyph">◈</div><div class="primitive__name">Space</div><div class="primitive__sdt">The spation lattice</div><p class="primitive__desc">A 3D, contact-only relay medium. The irreducible cell is the spation, of size ℓ<sub>P</sub> = 1.616 × 10⁻³⁵ m.</p></div>
       <div class="primitive"><div class="primitive__glyph">◉</div><div class="primitive__name">Matter</div><div class="primitive__sdt">A persistent displacement</div><p class="primitive__desc">A hard, localised, solid vortex — a knotted circulation pattern in the lattice. Never a cloud, never a probability.</p></div>
       <div class="primitive"><div class="primitive__glyph">↻</div><div class="primitive__name">Movement</div><div class="primitive__sdt">Circulation + translation</div><p class="primitive__desc">A vortex's velocity is split between spinning in place and moving through space — and the two always sum to c.</p></div>
-      <div class="primitive"><div class="primitive__glyph">·</div><div class="primitive__name">Now</div><div class="primitive__sdt">The tick</div><p class="primitive__desc">The relay advances exactly one spation per Planck time. There is no faster, because the lattice cannot relay faster.</p></div>
+      <div class="primitive"><div class="primitive__glyph">·</div><div class="primitive__name">The Present</div><div class="primitive__sdt">The plane · "now" is its count</div><p class="primitive__desc">Not a moment — the plane of existence, everything inside it moving. The relay advances one spation per tick; "time" is the tally of those ticks, nothing more.</p></div>
     </div>
 
     <div class="slogan">There is no attraction. The convergence <em>pushes</em> — and a closed least-resistance path through that push is what we call an orbit.</div>
 
     <p>And there is exactly <strong>one</strong> force law. Coulomb, gravity, and the nuclear force are the same equation at three scales — the geometry of one body blocking part of another's convergence sky:</p>
     <div class="eq-block"><div class="eq">F = (π/4) · P<sub>eff</sub> · R₁²R₂² / r²</div><div class="eq-caption">occluded convergence — Law III</div></div>
+    <figure class="fig">
+      <svg class="fig__stage" id="relayStage" viewBox="0 0 360 130" aria-label="Press a cell — the relay hands the pulse on, one cell per tick"></svg>
+      <div class="fig__bar"><span class="fig__hint">press any cell — one handoff per tick is c, and the tally of handoffs is time</span><span class="fig__read" id="relayRead">handoffs · 0</span></div>
+    </figure>
   </div>
 </section>
 
@@ -220,6 +224,10 @@ svg .drag:active { cursor: grabbing; }
     <p class="chapter__lead">A vortex is a knot the lattice must make way for — a hard presence, not an absence. To accelerate it, the lattice has to reorganise around it, and the reorganisation is paid for. That price <em>is</em> inertia.</p>
     <div class="eq-block"><div class="eq">m = Φ · V<sub>disp</sub> / (3 ℓ<sub>P</sub>³ c²)</div><div class="eq-caption">Law IV — the factor 3 is isotropic projection in three dimensions, not a knob</div></div>
     <p>This makes the equivalence principle automatic, not a postulate. Inertial resistance and gravitational push both measure the <strong>same</strong> displaced volume V<sub>disp</sub> — they cannot differ, because they are the same thing. Move a bubble through water: the water does not drag it; it reorganises around it. No drag, no Le Sage overheating — the lattice <em>is</em> the space, not a wind blowing through it.</p>
+    <figure class="fig">
+      <svg class="fig__stage" id="inertStage" viewBox="0 0 360 170" aria-label="Drag the knot — while it accelerates the arrivals pile heavier ahead; that imbalance is inertia"></svg>
+      <div class="fig__bar"><span class="fig__hint">drag the knot — the pile-up ahead is the medium presenting the bill</span><span class="fig__read" id="inertRead">at rest — arrivals even</span></div>
+    </figure>
   </div>
 </section>
 
@@ -251,13 +259,12 @@ svg .drag:active { cursor: grabbing; }
     <div class="knotwrap">
       <canvas class="knot" id="knotCanvas" aria-label="3D trefoil knot — the proton"></canvas>
       <div>
-        <p>A stable particle is a torus knot. The electron is the simplest closed winding, W = 1. The <strong>proton is the trefoil</strong>, the simplest persistent knot, W = 3 — drag it to turn it. W = 2 unwinds into two W = 1 loops; W ≥ 4 is unstable. Topology permits exactly two stable charged particles, which is exactly how many exist.</p>
+        <p>A stable particle is a torus knot, and the classification is knot theory, not a choice. The electron is the (1,1) <strong>unknot</strong>, W = 1, confined by its own displacement. The <strong>proton is the trefoil</strong>, the first protected knot, W = 3 — drag it to turn it. W = 2 is an unknot too: merely metastable (≈0.1 GeV barrier, ~10⁻²¹ s), which is why it is never observed. Higher odd knots (W = 5, 7, …) are protected as well and await discovery.</p>
         <p>From W = 3 the proton's radius falls straight out — no fit:</p>
         <div class="eq-block" style="text-align:left;"><div class="eq" style="padding-left:0;">R<sub>p</sub> = (W+1)ℏ / m<sub>p</sub>c = 0.84124 fm</div></div>
-        <p>Measured (muonic hydrogen): 0.8414 fm. Agreement <span class="val">0.02 %</span> <span class="cert cert--d">derived</span>. And the proton/electron mass ratio sits 19 ppm from the zero-parameter expression <span class="val">6π⁵ = 1836.118</span> (measured 1836.15) — a unique closed form, mechanism still open.</p>
+        <p>Measured (muonic hydrogen): 0.8414 fm. Agreement <span class="val">0.02 %</span> <span class="cert cert--c">class C — the W+1 rule is a conjecture, not yet proven from trefoil geometry</span>. And the proton/electron mass ratio sits 19 ppm from the zero-parameter expression <span class="val">6π⁵ = 1836.118</span> (measured 1836.15) — a unique closed form, OPEN: mechanism still owed.</p>
       </div>
     </div>
-    <p class="margin-note">The natural SDT mass unit M₀ = [π²ℏ³P<sub>conv</sub>√3 / 2c⁵]<sup>¼</sup> lands at M₀c² ≈ 1 TeV — the scale where the colliders' heaviest resonances live — with no tuning. Those resonances sit on the low-winding rungs of the same ladder.</p>
   </div>
 </section>
 
@@ -277,6 +284,10 @@ svg .drag:active { cursor: grabbing; }
         <tr><td>The c-boundary</td><td class="num">1</td><td>v = c, dτ/dt = 0 — dissolution</td></tr>
       </tbody>
     </table>
+    <figure class="fig">
+      <svg class="fig__stage" id="kopStage" viewBox="0 0 360 210" aria-label="Drag the rider in and out of the wake — the same law seats a moon and an electron"></svg>
+      <div class="fig__bar"><span class="fig__hint">drag the rider in and out — one law, every seat</span><span class="fig__read" id="kopRead"></span></div>
+    </figure>
   </div>
 </section>
 
@@ -297,6 +308,10 @@ svg .drag:active { cursor: grabbing; }
       </tbody>
     </table>
     <p class="margin-note">Honest scope: because ϟ ≡ GM/c², matching the first-order redshift is an identity of <em>interpretation</em>, not a numerical surprise. The content is the reinterpretation — and the second-order departures (a real galactic floor, gravitational-wave echoes) are where it can be tested against GR.</p>
+    <figure class="fig">
+      <svg class="fig__stage" id="depthStage" viewBox="0 0 360 200" aria-label="Drag the emitter into the well — the clock slows and the light leaves stretched"></svg>
+      <div class="fig__bar"><span class="fig__hint">drag the emitter in and out of the well</span><span class="fig__read" id="depthRead"></span></div>
+    </figure>
   </div>
 </section>
 
@@ -305,9 +320,13 @@ svg .drag:active { cursor: grabbing; }
   <div class="chapter__inner reveal">
     <div class="chapter__num">Atomic structure</div>
     <h2 class="chapter__title">The "orbital cloud" is a stroboscopic blur</h2>
-    <p class="chapter__lead">The electron is a hard W = 1 vortex running a fast, <em>definite</em> Hopf-fibration track. What spectroscopy samples as a probability cloud is the time-average of that fast point trajectory — a strobe artefact, not a smear of being. No superposition, no collapse: a fast classical orbit that <em>looks</em> like a cloud only because you cannot resolve the tick.</p>
-    <p>The numbers land where the textbook machinery lands them, because the geometry is identical. The ontology is not. The spectrum is geometric closure, zk² = 1:</p>
-    <div class="eq-block"><div class="eq">E<sub>n</sub> = −13.6057 · Z²/n² eV</div><div class="eq-caption">hydrogen-like ions to &lt; 13 ppm; all 118 elements close</div></div>
+    <p class="chapter__lead">The electron is a hard W = 1 vortex running a fast, <em>definite</em> closed track. What spectroscopy samples as a probability cloud is the time-average of that fast point trajectory — a strobe artefact, not a smear of being. No superposition, no collapse: a fast definite orbit that <em>looks</em> like a cloud only because you cannot resolve the tick.</p>
+    <p>The numbers land where the textbook machinery lands them, because the geometry is identical. The ontology is not. One rotation field, v(r) = cα√(a₀/r), forces the Rydberg constant from {m<sub>e</sub>, c, α, h} before any spectrum is consulted:</p>
+    <div class="eq-block"><div class="eq">E<sub>n</sub> = −13.6057 · Z²/n² eV</div><div class="eq-caption">hydrogen to &lt; 12.5 ppm; hydrogen-like ions (Z ≤ 30) to &lt; 263 ppm vs NIST [APS01]</div></div>
+    <figure class="fig">
+      <svg class="fig__stage" id="strobeStage" viewBox="0 0 360 240" aria-label="A definite fast orbit strobed into a cloud"></svg>
+      <div class="fig__bar"><span class="fig__hint">press and hold — the strobe accumulates; release — the point resolves</span><span class="fig__read" id="strobeRead">the point</span></div>
+    </figure>
     <p>Chemistry is the geometric shielding of the core charge — and the speed ratio k is its organising number: <span class="val">Ne k = 109</span> (inert), <span class="val">H k = 137</span> (baseline), <span class="val">K k = 243</span> (reactive). The octet rule is geometry — electrons filling voids in the convergence field — not an exclusion postulate.</p>
   </div>
 </section>
@@ -321,7 +340,7 @@ svg .drag:active { cursor: grabbing; }
       <div>
         <p>This is constitutional, not one model among many. Every nucleus with Z ≥ 2 decomposes <strong>uniquely</strong> into a single alpha core plus deuteron and triton blocks:</p>
         <div class="eq-block" style="text-align:left;"><div class="eq" style="padding-left:0;">n<sub>t</sub> = A − 2Z , &nbsp; n<sub>d</sub> = 3Z − A − 2</div></div>
-        <p>Verified for all 287 naturally occurring isotopes, zero exceptions. Pure-deuteron nuclei (C-12, O-16, Ne-20, Ca-40) are the most abundant; the triton fraction climbs to the iron peak (~17 %, maximum binding) and beyond.</p>
+        <p>The counts are fixed by (Z, N) arithmetic — unique wherever both are non-negative — so the grammar's content is the structure built on it; ATOMICUS characterises 290 isotopes on this decomposition. Pure-deuteron nuclei (C-12, O-16, Ne-20, Ca-40) are the most abundant; the triton fraction climbs to the iron peak (~17 %, maximum binding) and beyond.</p>
         <p>Pick a nucleus and watch it assemble. At <strong>gold</strong> — the Golden Boundary, Z = 79 — tritons first outnumber deuterons; beyond it the skeleton can't bear the load, and that is radioactivity.</p>
         <div class="chips" id="nukeChips"></div>
       </div>
@@ -344,12 +363,16 @@ svg .drag:active { cursor: grabbing; }
       <div class="replaces-item"><div class="replaces-item__concept">Dark energy</div><div class="replaces-item__with">a misreading of the lattice equation of state — not a substance</div></div>
       <div class="replaces-item"><div class="replaces-item__concept">The 10¹²³ Λ problem</div><div class="replaces-item__with">just N² — the count of boundary source cells</div></div>
     </div>
-    <p>The Hubble "constant" is not an expansion rate — it is a pressure gradient, and a gradient need not be linear. Local measurements sample the steep part; the CMB samples the full depth. The 9 % "tension" is a feature of the geometry, not a discrepancy.</p>
+    <p>The Hubble "constant" is not an expansion rate. Redshift is two native effects — a depth stamp at emission (z = ϟ/r) and a propagation squeeze in octaves (1+z = 2^Δn) — and the 9 % "tension" is what you get when one number is asked to carry both. Split them and the tension is not resolved; it is dissolved.</p>
     <div class="hubble-bars">
       <div class="hubble-bar"><span class="hubble-bar__label">local</span><span class="hubble-bar__track"><span class="hubble-bar__fill" data-w="100%"></span></span><span class="hubble-bar__val">73.0</span></div>
       <div class="hubble-bar"><span class="hubble-bar__label">CMB</span><span class="hubble-bar__track"><span class="hubble-bar__fill" data-w="92%"></span></span><span class="hubble-bar__val">67.4</span></div>
     </div>
-    <p>And the flat galactic rotation curve needs no missing mass — beyond a critical radius the disk has occluded all the convergence it can, the shadow saturates, and the orbital speed simply stops falling.</p>
+    <p>And the honest frontier, stated as the theory states it: the eclipse-saturation rotation model <strong>failed</strong> the real SPARC data on direct rerun (RMS 66% — GD05; the earlier "success" was a circular mock). What stands is the derived floor a₀ = cH₀/2π and the 8.8% cross-scale collapse, re-earned on real data with a control six times worse — while the crossover's shape is still on loan and full galactic rotation is OPEN on these books. A theory that cannot say "not yet" is not measuring itself.</p>
+    <figure class="fig">
+      <svg class="fig__stage" id="octStage" viewBox="0 0 360 220" aria-label="Drag the photon across the Clearing — the wave halves each octave"></svg>
+      <div class="fig__bar"><span class="fig__hint">drag the photon — no recession anywhere</span><span class="fig__read" id="octRead"></span></div>
+    </figure>
   </div>
 </section>
 
@@ -363,7 +386,7 @@ svg .drag:active { cursor: grabbing; }
       <thead><tr><th>Phenomenon</th><th>The textbook rule</th><th>The SDT mechanism</th></tr></thead>
       <tbody>
         <tr><td>The particle</td><td>a wavefunction ψ</td><td>a hard, knotted vortex</td></tr>
-        <tr><td>The "orbital"</td><td>|ψ|² probability</td><td>strobe-average of a definite Hopf track</td></tr>
+        <tr><td>The "orbital"</td><td>|ψ|² probability</td><td>strobe-average of a definite closed track</td></tr>
         <tr><td>Gravity</td><td>curvature of spacetime</td><td>a closure / pressure gradient</td></tr>
         <tr><td>Redshift</td><td>metric time dilation</td><td>depth differential z<sub>emit</sub> − z<sub>obs</sub></td></tr>
         <tr><td>Spin g-factor</td><td>g = 2 from the Dirac equation</td><td>the same α/2π correction, read as wake geometry — form matched, native derivation open</td></tr>
@@ -605,6 +628,136 @@ svg .drag:active { cursor: grabbing; }
       b.addEventListener('click',function(){ [].slice.call(chipWrap.children).forEach(function(x){x.classList.remove('on');}); b.classList.add('on'); build(p[1],p[2]); });
       chipWrap.appendChild(b); });
     build(26,56);
+  })();
+
+  /* ================= RELAY (Act 1) — one handoff per tick IS c ================= */
+  (function(){
+    var svg=document.getElementById('relayStage'); if(!svg)return;
+    var read=document.getElementById('relayRead'), count=0, cells=[];
+    for(var i=0;i<7;i++){var r=el('rect',{x:18+i*48,y:38,width:36,height:36,rx:4,fill:'#faf6ef',stroke:'#a49d92'});cells.push(r);svg.appendChild(r);}
+    var pulse=el('circle',{r:7,fill:'#b07430',opacity:0});svg.appendChild(pulse);
+    var anim=null;
+    svg.addEventListener('pointerdown',function(e){var p=svgPoint(svg,e);
+      var idx=Math.max(0,Math.min(6,Math.floor((p.x-18)/48)));
+      if(anim)cancelAnimationFrame(anim);var t0=null,from=idx;
+      function step(ts){if(t0===null)t0=ts;var k=idx+(ts-t0)/240;
+        if(k>=6.999){pulse.setAttribute('opacity',0);return;}
+        var f=Math.floor(k);if(f>from){count++;from=f;read.innerHTML='handoffs · <b>'+count+'</b> — the tally is the clock';}
+        pulse.setAttribute('opacity',1);pulse.setAttribute('cx',36+k*48);pulse.setAttribute('cy',56);
+        anim=requestAnimationFrame(step);}
+      anim=requestAnimationFrame(step);});
+  })();
+
+  /* ================= INERTIA (Act 4) — relay-arrival dipole of a dragged knot ================= */
+  (function(){
+    var svg=document.getElementById('inertStage'); if(!svg)return;
+    var read=document.getElementById('inertRead');
+    var defs=el('defs',{}),mk=el('marker',{id:'inh',markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
+    mk.appendChild(el('path',{d:'M0,0 L6,3 L0,6 Z',fill:'#4a6d82'}));defs.appendChild(mk);svg.appendChild(defs);
+    var ahead=[],behind=[];
+    for(var i=0;i<3;i++){var a=el('line',{stroke:'#4a6d82','marker-end':'url(#inh)'}),b=el('line',{stroke:'#a49d92','marker-end':'url(#inh)'});
+      ahead.push(a);behind.push(b);svg.appendChild(a);svg.appendChild(b);}
+    var body=el('circle',{r:16,fill:'#1e1c18'});svg.appendChild(body);
+    var x=180,y=85,vx=0,tgx=180,tgy=85;
+    draggable(svg,body,function(p){tgx=Math.max(60,Math.min(300,p.x));tgy=Math.max(45,Math.min(125,p.y));});
+    svg.addEventListener('pointerdown',function(e){var p=svgPoint(svg,e);tgx=Math.max(60,Math.min(300,p.x));tgy=Math.max(45,Math.min(125,p.y));});
+    (function tick(){var nvx=(tgx-x)*0.12;vx=vx*0.8+nvx*0.2;x+=nvx;y+=(tgy-y)*0.12;
+      body.setAttribute('cx',x);body.setAttribute('cy',y);
+      var sp=Math.max(-1,Math.min(1,vx/6));
+      for(var i=0;i<3;i++){var dy=(i-1)*16;
+        var lenA=34+Math.max(0,sp)*34,lenB=34+Math.max(0,-sp)*34;
+        ahead[i].setAttribute('stroke-width',2.2+Math.max(0,sp)*3.4);
+        ahead[i].setAttribute('x1',x+26+lenA);ahead[i].setAttribute('y1',y+dy-sp*6);
+        ahead[i].setAttribute('x2',x+22);ahead[i].setAttribute('y2',y+dy*0.6);
+        behind[i].setAttribute('stroke-width',2.2+Math.max(0,-sp)*3.4);
+        behind[i].setAttribute('x1',x-26-lenB);behind[i].setAttribute('y1',y+dy+sp*6);
+        behind[i].setAttribute('x2',x-22);behind[i].setAttribute('y2',y+dy*0.6);}
+      read.innerHTML=Math.abs(sp)>0.06?'accelerating — arrivals pile <b>'+(sp>0?'ahead':'behind')+'</b>: the press back is inertia':'at rest — arrivals even, no bill to pay';
+      requestAnimationFrame(tick);})();
+  })();
+
+  /* ================= KOPPA (Act 7) — one seat law, v = c√(ϟ/r) ================= */
+  (function(){
+    var svg=document.getElementById('kopStage'); if(!svg)return;
+    var read=document.getElementById('kopRead');
+    var defs=el('defs',{}),mk=el('marker',{id:'kph',markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
+    mk.appendChild(el('path',{d:'M0,0 L6,3 L0,6 Z',fill:'#2c4454'}));defs.appendChild(mk);svg.appendChild(defs);
+    svg.appendChild(el('circle',{cx:100,cy:105,r:22,fill:'#b07430','fill-opacity':.85}));
+    var orbit=el('circle',{cx:100,cy:105,fill:'none',stroke:'#e8e0d2','stroke-width':1.4});svg.appendChild(orbit);
+    var varr=el('line',{stroke:'#2c4454','stroke-width':2.6,'marker-end':'url(#kph)'});svg.appendChild(varr);
+    var rider=el('circle',{r:7,fill:'#1e1c18'});svg.appendChild(rider);
+    var r=140;
+    function render(){orbit.setAttribute('r',r);
+      rider.setAttribute('cx',100+r);rider.setAttribute('cy',105);
+      var z=30/r, v=Math.sqrt(z), k=1/v;
+      varr.setAttribute('x1',100+r);varr.setAttribute('y1',105);
+      varr.setAttribute('x2',100+r);varr.setAttribute('y2',105-16-v*80);
+      read.innerHTML='v = c√(ϟ/r) = <b>'+v.toFixed(2)+'c</b> · k = '+k.toFixed(1)+' — the same line seats a moon and an electron';}
+    draggable(svg,rider,function(p){r=Math.max(30,Math.min(250,Math.hypot(p.x-100,p.y-105)));render();});
+    svg.addEventListener('pointerdown',function(e){var p=svgPoint(svg,e);r=Math.max(30,Math.min(250,Math.hypot(p.x-100,p.y-105)));render();});
+    render();
+  })();
+
+  /* ================= DEPTH (Act 8) — z = ϟ/r: clock, closure, redshift, one number ================= */
+  (function(){
+    var svg=document.getElementById('depthStage'); if(!svg)return;
+    var read=document.getElementById('depthRead');
+    svg.appendChild(el('circle',{cx:90,cy:100,r:26,fill:'#b07430','fill-opacity':.85}));
+    var rings=[];for(var i=1;i<=4;i++){var c=el('circle',{cx:90,cy:100,r:26+i*30,fill:'none',stroke:'#e8e0d2','stroke-width':1});rings.push(c);svg.appendChild(c);}
+    var emit=el('circle',{r:7,fill:'#1e1c18'});svg.appendChild(emit);
+    var wave=el('path',{fill:'none',stroke:'#2f6f52','stroke-width':2});svg.appendChild(wave);
+    var x=200;
+    function render(){var r=Math.max(34,x-90);
+      emit.setAttribute('cx',90+r);emit.setAttribute('cy',100);
+      var z=Math.min(0.8,30/r), lam=13/(1-z);
+      var d='';for(var i=0;i<=70;i++){var xx=90+r+10+i*1.9;
+        d+=(i?'L':'M')+xx+' '+(60-8*Math.sin(xx/lam*Math.PI*2))+' ';}
+      wave.setAttribute('d',d);
+      read.innerHTML='z = ϟ/r = <b>'+z.toFixed(2)+'</b> · clock dτ/dt = '+Math.sqrt(1-z).toFixed(2)+' · the light leaves already stretched';}
+    draggable(svg,emit,function(p){x=Math.max(124,Math.min(340,p.x));render();});
+    svg.addEventListener('pointerdown',function(e){var p=svgPoint(svg,e);x=Math.max(124,Math.min(340,p.x));render();});
+    render();
+  })();
+
+  /* ================= STROBE (Act 9) — the definite point, sampled into a cloud ================= */
+  (function(){
+    var svg=document.getElementById('strobeStage'); if(!svg)return;
+    var read=document.getElementById('strobeRead');
+    svg.appendChild(el('circle',{cx:180,cy:120,r:5,fill:'#b07430'}));
+    var trail=el('g',{});svg.appendChild(trail);
+    var ptl=el('circle',{r:4.5,fill:'#1e1c18'});svg.appendChild(ptl);
+    var holding=false,ang=0,samples=[];
+    svg.addEventListener('pointerdown',function(){holding=true;});
+    addEventListener('pointerup',function(){holding=false;});
+    (function tick(){ang+=0.11;
+      var rx=120,ry=74;
+      var x=180+Math.cos(ang)*rx,y=120+Math.sin(ang)*ry;
+      ptl.setAttribute('cx',x);ptl.setAttribute('cy',y);
+      if(holding){var c=el('circle',{cx:x,cy:y,r:3,fill:'#4a6d82','fill-opacity':0.18});
+        trail.appendChild(c);samples.push(c);
+        if(samples.length>400)trail.removeChild(samples.shift());
+        read.innerHTML='<b>'+samples.length+'</b> samples — the "cloud" is the strobe, not the electron';}
+      else if(samples.length){trail.removeChild(samples.shift());
+        if(!samples.length)read.textContent='the point — a definite route all along';}
+      requestAnimationFrame(tick);})();
+  })();
+
+  /* ================= OCTAVES (Act 11) — 1+z = 2^Δn, nothing recedes ================= */
+  (function(){
+    var svg=document.getElementById('octStage'); if(!svg)return;
+    var read=document.getElementById('octRead');
+    var wave=el('path',{fill:'none',stroke:'#2f6f52','stroke-width':2});svg.appendChild(wave);
+    var ph=el('circle',{cy:150,r:7,fill:'#1e1c18'});svg.appendChild(ph);
+    var x=80;
+    function render(){ph.setAttribute('cx',x);
+      var dn=(x-50)/80, lam=11*Math.pow(2,dn);
+      var d='';for(var i=0;i<=140;i++){var xx=30+i/140*(x-30);
+        d+=(i?'L':'M')+xx+' '+(90-10*Math.sin(xx/lam*Math.PI*2))+' ';}
+      wave.setAttribute('d',d);
+      read.innerHTML='Δn = '+dn.toFixed(1)+' octaves · 1+z = 2^Δn = <b>'+Math.pow(2,dn).toFixed(1)+'</b> — the CMB sits 10.10 octaves down';}
+    draggable(svg,ph,function(p){x=Math.max(80,Math.min(340,p.x));render();});
+    svg.addEventListener('pointerdown',function(e){var p=svgPoint(svg,e);x=Math.max(80,Math.min(340,p.x));render();});
+    render();
   })();
 
   onScroll();

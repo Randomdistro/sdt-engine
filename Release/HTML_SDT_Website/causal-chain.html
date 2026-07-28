@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Causal Chain of Reality — Spatial Displacement Theory</title>
+<meta name="description" content="What rests on what, in Spatial Displacement Theory: four irreducibles, one action, one directed pressure — the complete causal chain from the grain of space to the cosmos, narrated by J. C. Harvey.">
+<style>
+:root{
+  --paper:#faf8f4; --paper-deep:#f2efe8; --paper-edge:#e3ded2;
+  --ink:#1d1f21; --ink-soft:#43464a; --ink-muted:#6b6f75; --ink-whisper:#9a9ea5;
+  --mint:#0d7a5f; --steel:#4a6d82; --rust:#a4552e; --gold:#8a6d1f;
+  --fs-xs:.72rem; --fs-sm:.86rem; --fs-md:1.02rem; --fs-lg:1.35rem; --fs-xl:2.1rem; --fs-hero:3.1rem;
+  --content:46rem; --wide:72rem;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:'Source Serif 4',Georgia,serif;line-height:1.75}
+.mono{font-family:'JetBrains Mono',Consolas,monospace}
+a{color:var(--mint);text-decoration:none}
+a:hover{text-decoration:underline}
+.link-sec{min-height:100vh;display:flex;align-items:center;padding:4.5rem 1.4rem;border-bottom:1px solid var(--paper-edge)}
+.link-sec:nth-child(even){background:var(--paper-deep)}
+.link-inner{max-width:var(--wide);margin:0 auto;display:grid;grid-template-columns:1.15fr .85fr;gap:3rem;align-items:center;width:100%}
+@media(max-width:900px){.link-inner{grid-template-columns:1fr}}
+.chip{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:var(--fs-xs);letter-spacing:.12em;padding:.18rem .6rem;border:1px solid var(--paper-edge);border-radius:2px;color:var(--ink-muted);margin-right:.5rem}
+.chip--earned{color:var(--mint);border-color:var(--mint)}
+.chip--conv{color:var(--steel);border-color:var(--steel)}
+.chip--open{color:var(--rust);border-color:var(--rust)}
+.chip--axiom{color:var(--gold);border-color:var(--gold)}
+.link-title{font-size:var(--fs-xl);font-weight:600;margin:.7rem 0 1.1rem;letter-spacing:-.01em}
+.narr{font-size:var(--fs-md);color:var(--ink-soft);max-width:var(--content)}
+.narr p{margin-bottom:.9rem}
+.narr strong{color:var(--ink)}
+.form-strip{font-family:'JetBrains Mono',monospace;font-size:var(--fs-sm);background:var(--paper-deep);border:1px solid var(--paper-edge);border-radius:3px;padding:.7rem .9rem;margin:1rem 0 .6rem;color:var(--ink-soft);overflow-x:auto}
+.link-sec:nth-child(even) .form-strip{background:var(--paper)}
+.num-strip{font-size:var(--fs-sm);color:var(--ink-muted);margin:.35rem 0}
+.num-strip b{color:var(--ink);font-weight:600}
+.breaks{font-size:var(--fs-xs);color:var(--ink-whisper);margin-top:.8rem;font-style:italic}
+figure{text-align:center}
+figure svg{max-width:100%;height:auto}
+figcaption{font-size:var(--fs-xs);color:var(--ink-whisper);margin-top:.6rem;font-family:'JetBrains Mono',monospace;letter-spacing:.05em}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:3rem 1.4rem;border-bottom:1px solid var(--paper-edge)}
+.hero h1{font-size:var(--fs-hero);font-weight:700;letter-spacing:-.02em;max-width:60rem}
+.hero .sub{font-size:var(--fs-lg);color:var(--ink-soft);margin-top:1.2rem;max-width:44rem}
+.hero .by{margin-top:2rem;font-size:var(--fs-sm);color:var(--ink-muted);font-family:'JetBrains Mono',monospace;letter-spacing:.08em}
+.footings{background:var(--ink);color:var(--paper);padding:5rem 1.4rem}
+.footings .inner{max-width:var(--wide);margin:0 auto}
+.footings h2{font-size:var(--fs-xl);margin-bottom:2rem;font-weight:600}
+.foot-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}
+@media(max-width:900px){.foot-grid{grid-template-columns:1fr}}
+.foot-card{border:1px solid rgba(250,248,244,.25);border-radius:4px;padding:1.6rem}
+.foot-card h3{font-size:var(--fs-md);margin-bottom:.7rem;color:#9fd8c5;font-family:'JetBrains Mono',monospace;letter-spacing:.06em}
+.foot-card p{font-size:var(--fs-sm);color:rgba(250,248,244,.85);line-height:1.7}
+.wt{padding:5rem 1.4rem;background:var(--paper-deep)}
+.wt .inner{max-width:var(--wide);margin:0 auto}
+.wt h2{font-size:var(--fs-xl);font-weight:600;margin-bottom:.6rem}
+.wt .lead{color:var(--ink-soft);max-width:var(--content);margin-bottom:2.2rem}
+.wt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(19rem,1fr));gap:1rem}
+.wt-card{background:var(--paper);border:1px solid var(--paper-edge);border-radius:4px;padding:1.1rem 1.2rem}
+.wt-card .wid{font-family:'JetBrains Mono',monospace;font-size:var(--fs-xs);color:var(--ink-whisper);letter-spacing:.1em}
+.wt-card h4{font-size:var(--fs-md);font-weight:600;margin:.3rem 0 .4rem}
+.wt-card p{font-size:var(--fs-sm);color:var(--ink-muted);line-height:1.6}
+.debts{padding:5rem 1.4rem}
+.debts .inner{max-width:var(--content);margin:0 auto}
+.debts h2{font-size:var(--fs-xl);font-weight:600;margin-bottom:1rem}
+.debts p.lead{color:var(--ink-soft);margin-bottom:1.6rem}
+.debt-list{list-style:none}
+.debt-list li{padding:.55rem 0;border-bottom:1px dashed var(--paper-edge);font-size:var(--fs-sm);color:var(--ink-soft)}
+.debt-list b{color:var(--rust);font-weight:600}
+.svg-lab{font-family:'JetBrains Mono',monospace;font-size:11px;fill:#6b6f75}
+.svg-lab2{font-family:'JetBrains Mono',monospace;font-size:10px;fill:#9a9ea5}
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="chip mono">THE MASTER SPINE · L0 → L20</div>
+  <h1>The Causal Chain of Reality</h1>
+  <p class="sub">What rests on what, in Spatial Displacement Theory. Every number in physics is a promise that something earlier was settled first. I am going to keep those promises in order — from the one thing I assume, to everything that falls out of it. And where a promise is still unpaid, I will say so on the page.</p>
+  <p class="by">J. C. HARVEY · MELBOURNE · NARRATED EDITION</p>
+</section>
+
+<!-- ============ THE FOOTINGS ============ -->
+<section class="footings">
+  <div class="inner">
+    <h2>Three footings. Nothing else.</h2>
+    <div class="foot-grid">
+      <div class="foot-card">
+        <h3>FOUR IRREDUCIBLES</h3>
+        <p><strong>Space. Matter. Movement. The present.</strong> The medium itself; the knots wound in it; the one currency — relayed, circulated, spent, never minted; and the present — not a moment, but the plane of existence itself, with everything inside it moving, always moving. No time among them: what you call time is a tally the present keeps, not a territory it sits in. The laboratory reads this structure through four numbers — ℓ_P, α, m_p, T_CMB — and the rest of the input list (c, ℏ, k_B, e) is unit bridges. Everything else is derived, or it is owed.</p>
+      </div>
+      <div class="foot-card">
+        <h3>ONE ACTION</h3>
+        <p>Matter displaces space. That is the theory's single new idea and its only activity. There is no second mechanism waiting in a drawer: every phenomenon on this page — falling apples, spectral lines, melting ice, the shape of a wake — is this one action, somewhere, at some scale.</p>
+      </div>
+      <div class="foot-card">
+        <h3>ONE DIRECTED PRESSURE</h3>
+        <p>The convergence push, arriving from the boundary of the Clearing — from the CMB, all around us, every tick. Nothing in this physics pulls. Everything is this one pressure: shadowed into what you call forces, geared into what you call orbits, stored into what you call matter.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ L0 ============ -->
+<section class="link-sec" id="L0">
+  <div class="link-inner">
+    <div>
+      <span class="chip">L0</span><span class="chip chip--axiom">AXIOM — ASSUMED, SAID SO</span>
+      <h2 class="link-title">The seed: one grain of length</h2>
+      <div class="narr">
+        <p>Every theory buys its first ruler on credit. Mine is one length — the size of a single grain of space, ℓ_P. I did not derive it. I tried; the attempt failed honestly, and whether any theory <em>can</em> derive its own first length is a question I hold open, not a theorem I claim. So here is the deal, stated plainly: give me one grain, and I will build you the rest.</p>
+        <p>Every distance that follows on this page is, underneath, a count of grains. That is what a metre is here: bookkeeping.</p>
+      </div>
+      <div class="form-strip">ℓ_P = 1.616255×10⁻³⁵ m &nbsp;[Axiom R1 · sdt::laws::measured]</div>
+    </div>
+    <figure>
+      <svg viewBox="0 0 300 170" width="300">
+        <line x1="30" y1="100" x2="270" y2="100" stroke="#43464a" stroke-width="1.5"/>
+        <g stroke="#9a9ea5" stroke-width="1">
+          <line x1="60" y1="93" x2="60" y2="107"/><line x1="90" y1="93" x2="90" y2="107"/>
+          <line x1="120" y1="93" x2="120" y2="107"/><line x1="180" y1="93" x2="180" y2="107"/>
+          <line x1="210" y1="93" x2="210" y2="107"/><line x1="240" y1="93" x2="240" y2="107"/>
+        </g>
+        <line x1="150" y1="88" x2="150" y2="112" stroke="#8a6d1f" stroke-width="2.5"/>
+        <text x="150" y="130" text-anchor="middle" class="svg-lab">ℓ_P — the grain</text>
+        <text x="150" y="146" text-anchor="middle" class="svg-lab2">assumed · every distance = a count of these</text>
+      </svg>
+      <figcaption>L0-D1 · the one bought ruler</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ L1 ============ -->
+<section class="link-sec" id="L1">
+  <div class="link-inner">
+    <div>
+      <span class="chip">L1</span><span class="chip chip--earned">SUBSTRATE</span>
+      <h2 class="link-title">The substrate: a superfluid of grains</h2>
+      <div class="narr">
+        <p>Space is made of spations — grains of the one length, packed shoulder to shoulder. Not a frozen scaffold: a reconfigurable, lightspeed superfluid. Pack twelve around one and the crowding never quite closes — a <em>static</em> packing would carry a shortfall of about a tenth, smeared through the medium as frustration.</p>
+        <p>But the medium is never static — movement is one of the four irreducibles, and movement herds the slack. The gaps do not sit where the frozen picture puts them: they bunch, into shaped pockets — tetrahedral, octahedral, and larger still. So the substrate runs tighter than the static count says wherever it is packed, and its whole shortfall collects into structured voids. Hold onto both halves: the voids are where seats live and cores nest — the alpha is a tetrahedron for a reason — and the total slack, the tenth, is what the bath refuses the cascade, fifteen links from now, in a wind tunnel.</p>
+      </div>
+      <div class="form-strip">static shortfall g ≈ 0.103 (total, conserved) · movement bunches it: tetrahedral, octahedral, larger · the voids downstream: cores (L13), seats (L14), refusal (L15)</div>
+    </div>
+    <figure>
+      <svg viewBox="0 0 300 190" width="300">
+        <g fill="#faf8f4" stroke="#6b6f75">
+          <circle cx="75" cy="62" r="15"/><circle cx="105" cy="62" r="15"/><circle cx="135" cy="62" r="15"/>
+          <circle cx="165" cy="62" r="15"/><circle cx="195" cy="62" r="15"/><circle cx="225" cy="62" r="15"/>
+          <circle cx="60" cy="88" r="15"/><circle cx="90" cy="88" r="15"/><circle cx="120" cy="88" r="15"/>
+          <circle cx="150" cy="88" r="15"/><circle cx="240" cy="88" r="15"/>
+          <circle cx="75" cy="114" r="15"/><circle cx="105" cy="114" r="15"/><circle cx="135" cy="114" r="15"/>
+          <circle cx="165" cy="114" r="15"/><circle cx="195" cy="114" r="15"/><circle cx="225" cy="114" r="15"/>
+        </g>
+        <polygon points="105,68 96,82 114,82" fill="#a4552e" opacity=".85"/>
+        <polygon points="195,72 178,88 195,104 212,88" fill="none" stroke="#a4552e" stroke-width="2" stroke-dasharray="4 3"/>
+        <text x="70" y="40" class="svg-lab" fill="#a4552e">tetra pocket</text>
+        <text x="212" y="40" class="svg-lab" fill="#a4552e">octa void, and larger</text>
+        <text x="150" y="150" text-anchor="middle" class="svg-lab2">movement herds the slack — packed tight where packed,</text>
+        <text x="150" y="166" text-anchor="middle" class="svg-lab2">the whole shortfall bunched into shaped voids</text>
+      </svg>
+      <figcaption>L1-D1 · the slack, herded — voids with shapes</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ L2 ============ -->
+<section class="link-sec" id="L2">
+  <div class="link-inner">
+    <div>
+      <span class="chip">L2</span><span class="chip chip--earned">DERIVED FRAME</span>
+      <h2 class="link-title">The tick: nothing but now</h2>
+      <div class="narr">
+        <p>Each grain hands its content to its neighbours, one handoff per tick. The speed of that relay is the only speed the medium owns: c, which is nothing deeper than one grain per tick — ℓ_P over t_P. Light is not a thing that travels <em>through</em> the medium. Light is the relay, relaying.</p>
+        <p>And the present — the fourth irreducible — is not a moment. It is the plane of existence itself, with everything inside it moving, always moving. The handoffs happen on it; every front from everything that ever let go arrives onto it; every knot pays its keep on it, this tick — nothing exists by having existed. What you call time is nothing but the tally of that movement. Movement causes it; change causes it; it has no arrow to explain, because un-happening is not an operation the relay has. The past is the tally kept. The future is the tally expected. Neither is a place. Only the plane is — and the plane does not elapse.</p>
+      </div>
+      <div class="form-strip">c = ℓ_P / t_P = 299 792 458 m/s &nbsp;[relay invariant · FLM02 GPI]</div>
+    </div>
+    <figure>
+      <svg viewBox="0 0 300 150" width="300">
+        <defs><marker id="ar" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#0d7a5f"/></marker></defs>
+        <g fill="#faf8f4" stroke="#6b6f75">
+          <rect x="25" y="55" width="36" height="36" rx="4"/><rect x="75" y="55" width="36" height="36" rx="4"/>
+          <rect x="125" y="55" width="36" height="36" rx="4"/><rect x="175" y="55" width="36" height="36" rx="4"/>
+          <rect x="225" y="55" width="36" height="36" rx="4"/>
+        </g>
+        <g stroke="#0d7a5f" stroke-width="2" marker-end="url(#ar)">
+          <line x1="63" y1="73" x2="73" y2="73"/><line x1="113" y1="73" x2="123" y2="73"/>
+          <line x1="163" y1="73" x2="173" y2="73"/><line x1="213" y1="73" x2="223" y2="73"/>
+        </g>
+        <text x="150" y="35" text-anchor="middle" class="svg-lab">one handoff per tick — that IS c</text>
+        <text x="150" y="120" text-anchor="middle" class="svg-lab2">the present is the venue · "time" is the tally of handoffs, nothing more</text>
+      </svg>
+      <figcaption>L2-D1 · the relay and the clock are one machine</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ L3 ============ -->
+<section class="link-sec" id="L3">
+  <div class="link-inner">
+    <div>
+      <span class="chip">L3</span><span class="chip chip--earned">LAW I</span>
+      <h2 class="link-title">The Clearing, and the push that never stopped</h2>
+      <div class="narr">
+        <p>Once, every grain held its charge and let it go at once — the detonation. What that opened is the Clearing: the region we live in, ringed by a boundary of grains still releasing. The CMB is not an afterglow of something finished. It is the sound of the boundary still going — the push, arriving from every direction, every tick, right now.</p>
+        <p>That arriving flood is the convergence pressure, P_conv. It is the budget every force on this page spends. About what stood before the detonation, I make no claim — the theory starts where its evidence starts.</p>
+      </div>
+      <div class="form-strip">Φ = N·ε &nbsp;·&nbsp; P_conv = Φ/ℓ_P³ ≈ 2.46×10⁴⁸ Pa &nbsp;[law_I · T_CMB the thermometer peg]</div>
+    </div>
+    <figure>
+      <svg viewBox="0 0 300 210" width="300">
+        <defs><marker id="ar2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#4a6d82"/></marker></defs>
+        <circle cx="150" cy="105" r="88" fill="none" stroke="#e3ded2" stroke-width="10"/>
+        <g stroke="#4a6d82" stroke-width="1.8" marker-end="url(#ar2)">
+          <line x1="150" y1="22" x2="150" y2="52"/><line x1="150" y1="188" x2="150" y2="158"/>
+          <line x1="67" y1="105" x2="97" y2="105"/><line x1="233" y1="105" x2="203" y2="105"/>
+          <line x1="91" y1="46" x2="112" y2="67"/><line x1="209" y1="46" x2="188" y2="67"/>
+          <line x1="91" y1="164" x2="112" y2="143"/><line x1="209" y1="164" x2="188" y2="143"/>
+        </g>
+        <circle cx="150" cy="105" r="4" fill="#1d1f21"/>
+        <text x="150" y="12" text-anchor="middle" class="svg-lab">the boundary, still releasing</text>
+        <text x="150" y="205" text-anchor="middle" class="svg-lab2">the push arrives from everywhere · P_conv ≈ 2.5×10⁴⁸ Pa</text>
+      </svg>
+      <figcaption>L3-D1 · the ontic pressure, all around us</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ L4 ============ -->
+<section class="link-sec" id="L4">
+  <div class="link-inner">
+    <div>
+      <span class="chip">L4</span><span class="chip chip--earned">LAW III — THE ONLY FORCE</span>
+      <h2 class="link-title">Occlusion: nothing pulls</h2>
+      <div class="narr">
+        <p>Put two bodies in that flood. Each one blocks some of what would have reached the other. Between them, the arriving push is thinner; outside, it is full strength. So the flood shoves them together — not because anything reached out, but because each stands in the other's weather.</p>
+        <p>That is the only force law I own, and I use it everywhere: <strong>the apple falls because the universe pushes it.</strong> Write it once, and Coulomb, gravity, and the nuclear grip become one law read at three reaches — the ratio of their strengths is a ratio of cross-sections, not a mystery.</p>
+      </div>
+      <div class="form-strip">F = (π/4) · P_eff · R₁²R₂² / r² &nbsp;[law_III · P_eff closed-form via the electropause, α the one input]</div>
+    </div>
+    <figure>
+      <svg viewBox="0 0 300 170" width="300">
+        <defs><marker id="ar3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#4a6d82"/></marker></defs>
+        <polygon points="95,85 205,60 205,110" fill="#e3ded2" opacity=".7"/>
+        <circle cx="90" cy="85" r="16" fill="#1d1f21"/>
+        <circle cx="212" cy="85" r="10" fill="#1d1f21"/>
+        <g stroke="#4a6d82" stroke-width="1.8" marker-end="url(#ar3)">
+          <line x1="30" y1="55" x2="62" y2="70"/><line x1="30" y1="115" x2="62" y2="100"/><line x1="20" y1="85" x2="60" y2="85"/>
+          <line x1="280" y1="55" x2="242" y2="72"/><line x1="280" y1="115" x2="242" y2="98"/><line x1="288" y1="85" x2="238" y2="85"/>
+        </g>
+        <text x="150" y="35" text-anchor="middle" class="svg-lab">full push outside · thinned push between</text>
+        <text x="150" y="150" text-anchor="middle" class="svg-lab2">each stands in the other's weather — the shadow is the "force"</text>
+      </svg>
+      <figcaption>L4-D1 · occlusion — one law, three reaches</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ L5 ============ -->
+<section class="link-sec" id="L5">
+  <div class="link-inner">
+    <div>
+      <span class="chip">L5</span><span class="chip chip--earned">THE ONE NEW IDEA</span>
+      <h2 class="link-title">Matter: the knot that displaces</h2>
+      <div class="narr">
+        <p>Here is the theory's one new concept, and the only action it will ever need: <strong>matter displaces space.</strong> A particle is a knot — a trefoil wound on a torus, circulation locked by its own winding — and the space it displaces has to go somewhere. The knot is not a cloud and not a point: it is wound tight, the hardest presence there is, crushing the grains it stands in.</p>
+        <p>The proton's boundary sits at R_p = 4ℏ/(m_p c) — a radius the winding rule sets and muonic hydrogen confirms — and its surface runs its circulation at 1.83 lights. This year we measured the knot's signature in its own wake: a three-lobed harmonic, falling as r⁻⁴, that a plain ring cannot have. The knot is not a metaphor. It photographs.</p>
+      </div>
+      <div class="form-strip">R_p = 4ℏ/(m_p c) = 0.8412 fm [W+1 rule] · surface seat 1.83c [PPT06] · m=3 wake term ∝ r⁻⁴·cos3φ [APS04, direct 2026-07-26]</div>
+    </div>
+    <figure>
+      <svg viewBox="0 0 300 210" width="300">
+        <path d="M150,45 C205,45 235,95 205,130 C180,158 120,158 95,130 C65,95 95,45 150,45" fill="none" stroke="#e3ded2" stroke-width="1.2"/>
+        <path d="M150,60 C120,90 180,90 150,150 C120,90 180,90 150,60" fill="none" stroke="#1d1f21" stroke-width="2.5"/>
+        <path d="M118,105 C150,75 150,135 182,105" fill="none" stroke="#1d1f21" stroke-width="2.5"/>
+        <circle cx="150" cy="105" r="78" fill="none" stroke="#8a6d1f" stroke-dasharray="4 4"/>
+        <text x="150" y="18" text-anchor="middle" class="svg-lab">the trefoil — wound, locked, displacing</text>
+        <text x="248" y="105" class="svg-lab2">R_p</text>
+        <text x="150" y="200" text-anchor="middle" class="svg-lab2">boundary radius, never "charge radius" — nothing here is a substance called charge</text>
+      </svg>
+      <figcaption>L5-D1 · the knot and its boundary</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ L6 ============ -->
+<section class="link-sec" id="L6">
+  <div class="link-inner">
+    <div>
+      <span class="chip">L6</span><span class="chip chip--conv">LAW IV · D1/D2 OWED</span>
+      <h2 class="link-title">Mass: the cost of moving a hole in the weather</h2>
+      <div class="narr">
+        <p>Push a knot, and the medium must reorganise around it — the displacement has to be re-dug ahead and re-filled behind, every tick. That reorganisation cost is what you have been weighing all your life. Mass is not a substance the knot contains; it is the bill the medium presents for carrying it.</p>
+        <p>Accelerate, and the arriving relay piles asymmetric — heavier ahead, thinner behind — and that asymmetry presses back. That backward press is inertia. And because the same displacement that resists shoving is the shadow that pushes other bodies, inertial and gravitational mass are one geometric fact — an equality other physics must postulate, and this one inherits.</p>
+      </div>
+      <div class="form-strip">m ∝ reorganisation cost of V_disp [law_IV] · equivalence = theorem, not postulate [FLM12 — its two make-or-break derivations still OWED, said so]</div>
+    </div>
+    <figure>
+      <svg viewBox="0 0 300 160" width="300">
+        <defs><marker id="ar4" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#4a6d82"/></marker></defs>
+        <circle cx="150" cy="80" r="18" fill="#1d1f21"/>
+        <g stroke="#4a6d82" stroke-width="2.4" marker-end="url(#ar4)">
+          <line x1="245" y1="60" x2="180" y2="74"/><line x1="252" y1="80" x2="176" y2="80"/><line x1="245" y1="100" x2="180" y2="86"/>
+        </g>
+        <g stroke="#9a9ea5" stroke-width="1.1" marker-end="url(#ar4)">
+          <line x1="55" y1="66" x2="115" y2="76"/><line x1="48" y1="80" x2="120" y2="80"/><line x1="55" y1="94" x2="115" y2="84"/>
+        </g>
+        <text x="150" y="30" text-anchor="middle" class="svg-lab">moving right → arrivals pile heavier ahead</text>
+        <text x="150" y="140" text-anchor="middle" class="svg-lab2">the imbalance presses back — that press is inertia</text>
+      </svg>
+      <figcaption>L6-D1 · inertia as relay imbalance</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ L7 ============ -->
+<section class="link-sec" id="L7">
+  <div class="link-inner">
+    <div>
+      <span class="chip">L7</span><span class="chip chip--earned">LAW V</span>
+      <h2 class="link-title">The movement budget: one purse, two spends</h2>
+      <div class="narr">
+        <p>Every knot runs its whole allowance at c, always. Standing still, all of it goes to the inner turning — the circulation that makes it a knot at all. Move, and the travel is paid out of the spin: v_circ² + v² = c², one purse, no credit.</p>
+        <p>That single sentence carries the slowed clocks, the shortened rods, E = mc², the speed nothing passes — all of them theorems of a budget, with nothing dilating but the bookkeeping. A photon is the corner case: all travel, no spin left to be a knot, so no mass. Nothing in this physics ever stops. It only changes what it spends its movement on.</p>
+      </div>
+      <div class="form-strip">v_circ² + v_trans² = c² [law_V] · eight theorems from three axioms · at max W, translation trades into spin — nothing halts</div>
+    </div>
+    <figure>
+      <svg viewBox="0 0 300 180" width="300">
+        <defs><marker id="ar5" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#0d7a5f"/></marker></defs>
+        <path d="M 60 140 A 90 90 0 0 1 240 140" fill="none" stroke="#e3ded2" stroke-width="2"/>
+        <line x1="150" y1="140" x2="150" y2="52" stroke="#0d7a5f" stroke-width="2.2" marker-end="url(#ar5)"/>
+        <line x1="150" y1="140" x2="228" y2="118" stroke="#a4552e" stroke-width="2.2" marker-end="url(#ar5)"/>
+        <text x="150" y="42" text-anchor="middle" class="svg-lab" fill="#0d7a5f">v_circ (the spin)</text>
+        <text x="252" y="112" class="svg-lab" fill="#a4552e">v (the travel)</text>
+        <text x="150" y="168" text-anchor="middle" class="svg-lab2">one arc of radius c — every particle lives on it</text>
+      </svg>
+      <figcaption>L7-D1 · the budget arc — relativity as bookkeeping</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ L8 ============ -->
+<section class="link-sec" id="L8">
+  <div class="link-inner">
+    <div>
+      <span class="chip">L8</span><span class="chip chip--earned">LAW II</span>
+      <h2 class="link-title">Release: the cascade</h2>
+      <div class="narr">
+        <p>What a grain holds, it can let go — and release runs downhill in an ordered cascade, each pressure domain handing to the next. This is the law that turns storage into light and binding into heat: whenever a configuration lets go of held movement, the cascade carries it out through the domains until it reaches the open relay and leaves as emission.</p>
+        <p>Keep this link in mind when we reach binding (L16): whatever a bound state releases, the bath receives — and what the bath receives opens routes. The cascade is the theory's cashier.</p>
+      </div>
+      <div class="form-strip">release cascade, ordered pressure domains [law_II]</div>
+    </div>
+    <figure>
+      <svg viewBox="0 0 300 160" width="300">
+        <defs><marker id="ar6" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#0d7a5f"/></marker></defs>
+        <g fill="#e3ded2" stroke="#6b6f75">
+          <rect x="30" y="30" width="60" height="26" rx="3"/><rect x="95" y="60" width="60" height="26" rx="3"/>
+          <rect x="160" y="90" width="60" height="26" rx="3"/><rect x="225" y="120" width="50" height="26" rx="3"/>
+        </g>
+        <g stroke="#0d7a5f" stroke-width="2" marker-end="url(#ar6)">
+          <line x1="90" y1="48" x2="100" y2="62"/><line x1="155" y1="78" x2="165" y2="92"/><line x1="220" y1="108" x2="230" y2="122"/>
+        </g>
+        <text x="150" y="18" text-anchor="middle" class="svg-lab">held → domain → domain → out as emission</text>
+      </svg>
+      <figcaption>L8-D1 · the cascade — storage becomes light</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ L9 ============ -->
+<section class="link-sec" id="L9">
+  <div class="link-inner">
+    <div>
+      <span class="chip">L9</span><span class="chip chip--earned">THE BRIDGE</span>
+      <h2 class="link-title">Koppa: the gear that is a length</h2>
+      <div class="narr">
+        <p>Now the bridge that carries this physics from particles to planets in one step. Around any body, the wake runs slower with distance; the gear ratio is k = c/v. And ϟ — koppa, the ancient Greek k, same letter, same object — is that gear read as a length: ϟ = R/k² = v²R/c². One number, in metres, carries a body's entire gravitational field.</p>
+        <p>Where the old physics writes GM/c² — a constant nobody derives times a mass nobody can weigh directly — I write a length you can measure with a clock and a ruler. And then the fact that pays for everything: <strong>v²r = c²ϟ holds from the proton to Sagittarius A*.</strong> Twenty orders of magnitude, one formula, the same fistful of pegs. I use the same formulas for planets as I do for particles, because there was only ever one push.</p>
+      </div>
+      <div class="form-strip">k = c/v · ϟ = R/k² = v²R/c² [bridge::koppa] · GOM17: Sun–Jupiter ↔ H Rydberg ledger, 0.4% over 20 orders · koppa invariance across Jovian moons σ/μ = 0.010% [GOM12 direct]</div>
+    </div>
+    <figure>
+      <svg viewBox="0 0 300 190" width="300">
+        <circle cx="95" cy="95" r="46" fill="none" stroke="#1d1f21" stroke-width="2"/>
+        <g stroke="#1d1f21" stroke-width="2">
+          <line x1="95" y1="42" x2="95" y2="30"/><line x1="95" y1="148" x2="95" y2="160"/>
+          <line x1="42" y1="95" x2="30" y2="95"/><line x1="148" y1="95" x2="160" y2="95"/>
+          <line x1="58" y1="58" x2="49" y2="49"/><line x1="132" y1="58" x2="141" y2="49"/>
+          <line x1="58" y1="132" x2="49" y2="141"/><line x1="132" y1="132" x2="141" y2="141"/>
+        </g>
+        <text x="95" y="99" text-anchor="middle" class="svg-lab">k = c/v</text>
+        <line x1="185" y1="95" x2="272" y2="95" stroke="#8a6d1f" stroke-width="4"/>
+        <line x1="185" y1="88" x2="185" y2="102" stroke="#8a6d1f" stroke-width="2"/>
+        <line x1="272" y1="88" x2="272" y2="102" stroke="#8a6d1f" stroke-width="2"/>
+        <text x="228" y="82" text-anchor="middle" class="svg-lab" fill="#8a6d1f">ϟ = R/k²</text>
+        <text x="150" y="178" text-anchor="middle" class="svg-lab2">one object, two readings — the gear and the length it closes</text>
+      </svg>
+      <figcaption>L9-D1 · k IS ϟ</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ L10 ============ -->
+<section class="link-sec" id="L10">
+  <div class="link-inner">
+    <div>
+      <span class="chip">L10</span><span class="chip chip--earned">THE HYDROGEN CHAIN</span>
+      <h2 class="link-title">Hydrogen: three lengths, one invariant</h2>
+      <div class="narr">
+        <p>Watch the bridge work at atomic scale, with no new inputs. Start at the proton's boundary, spinning at 1.83 lights. Square that seat and you land on the electron's own scale: 1.83² × R_p = r_e. Scale r_e by the coupling squared and you land on the atom: r_e = α² a₀. Ride out to a₀ and ask how fast the wake runs there: exactly αc — one hundred and thirty-seven gears down. That seat is hydrogen.</p>
+        <p>The closure zk² = 1 holds at every rung to machine precision. The coupling α itself I read off the spectrum, two independent ways, to a tenth of a percent — an honest peg, not yet a derivation, and I say so here rather than in a footnote.</p>
+      </div>
+      <div class="form-strip">1.83²·R_p = r_e = α²·a₀ · v(a₀) = αc · k(H) = 137 · zk² = 1 (exact) · 1/α = 136.912 / 137.0726 two routes [APS05 direct]</div>
+    </div>
+    <figure>
+      <svg viewBox="0 0 300 180" width="300">
+        <line x1="40" y1="140" x2="270" y2="140" stroke="#e3ded2" stroke-width="2"/>
+        <g>
+          <rect x="48" y="118" width="8" height="22" fill="#1d1f21"/>
+          <rect x="128" y="96" width="8" height="44" fill="#4a6d82"/>
+          <rect x="238" y="52" width="8" height="88" fill="#0d7a5f"/>
+        </g>
+        <text x="52" y="110" text-anchor="middle" class="svg-lab">R_p</text>
+        <text x="132" y="88" text-anchor="middle" class="svg-lab">r_e = 1.83²R_p</text>
+        <text x="242" y="44" text-anchor="middle" class="svg-lab">a₀ = r_e/α²</text>
+        <text x="150" y="165" text-anchor="middle" class="svg-lab2">three rungs, zero new inputs · at a₀ the wake runs at exactly αc</text>
+      </svg>
+      <figcaption>L10-D1 · the ladder from boundary to atom</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ L11 ============ -->
+<section class="link-sec" id="L11">
+  <div class="link-inner">
+    <div>
+      <span class="chip">L11</span><span class="chip chip--conv">EMISSION · ε=hν OWED</span>
+      <h2 class="link-title">Emission: a path times a gear</h2>
+      <div class="narr">
+        <p>Every line in every spectrum is the same sentence: λ = 2L·(c/v). A path length, times the local gear, read out at c. Seven floors of emission — from radio hyperfine whispers to nuclear gammas — and the ratio holds at 1.0000 on each. The X-ray/gamma distinction falls out as provenance, not energy: the same photon, named by which seat let it go.</p>
+        <p>The honest cap, stated in the open: the quantum of the emission itself — why energy comes in hν parcels — is carried into this theory as a bridge, asserted, not yet derived. It is the deepest unpaid line in the ledger, and it stays on this page until it is paid.</p>
+      </div>
+      <div class="form-strip">λ = 2L·(c/v) — seven floors, ratio 1.0000 · seats and gears from L9/L10 · ε = hν: ASSERTED (Law-I bridge), derivation OWED</div>
+    </div>
+    <figure>
+      <svg viewBox="0 0 300 160" width="300">
+        <path d="M40,80 q13,-26 26,0 t26,0 t26,0 t26,0 t26,0 t26,0 t26,0 t26,0" fill="none" stroke="#0d7a5f" stroke-width="2"/>
+        <line x1="40" y1="112" x2="248" y2="112" stroke="#8a6d1f" stroke-width="3"/>
+        <text x="144" y="132" text-anchor="middle" class="svg-lab" fill="#8a6d1f">the path L</text>
+        <text x="150" y="40" text-anchor="middle" class="svg-lab">λ = 2L × (c/v) — the gear stretches the path into the line</text>
+        <text x="150" y="152" text-anchor="middle" class="svg-lab2">every spectral line: a route and a ratio, read out at c</text>
+      </svg>
+      <figcaption>L11-D1 · the emission law</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ L12 ============ -->
+<section class="link-sec" id="L12">
+  <div class="link-inner">
+    <div>
+      <span class="chip">L12</span><span class="chip chip--earned">CHARGE & EM</span>
+      <h2 class="link-title">Charge: a handedness, not a substance</h2>
+      <div class="narr">
+        <p>There is no substance called charge anywhere in this theory. What the world calls charge is handed redirection — a knot turns the arriving flood left or right, and two knots of matching hand crowd each other's redirected flow into a surplus that shoves them apart, while opposite hands leave a deficit the flood closes. Repulsion is a surplus; what you call attraction is the push, thinned. The elementary "e" is a unit bridge to laboratory bookkeeping, nothing more.</p>
+        <p>This is also where the force law's pressure coefficient comes from: derived in closed form at the electropause, with α the one input — the delete-test passes, and the coefficient stopped being a mystery.</p>
+      </div>
+      <div class="form-strip">P_eff = m_p²m_e²c⁵/(4παℏ³) [electropause derivation, EMC04 direct-class] · magnetism = the ℓ=2 face of the wake · e = unit bridge</div>
+    </div>
+    <figure>
+      <svg viewBox="0 0 300 170" width="300">
+        <path d="M85,85 m-30,0 a30,30 0 1,1 60,0 a22,22 0 1,0 -44,0 a14,14 0 1,1 28,0" fill="none" stroke="#1d1f21" stroke-width="2"/>
+        <path d="M215,85 m30,0 a30,30 0 1,0 -60,0 a22,22 0 1,1 44,0 a14,14 0 1,0 -28,0" fill="none" stroke="#1d1f21" stroke-width="2"/>
+        <text x="85" y="140" text-anchor="middle" class="svg-lab">left-handed</text>
+        <text x="215" y="140" text-anchor="middle" class="svg-lab">right-handed</text>
+        <text x="150" y="30" text-anchor="middle" class="svg-lab">two hands of one redirection</text>
+        <text x="150" y="160" text-anchor="middle" class="svg-lab2">same hands → surplus between → shoved apart · no substance anywhere</text>
+      </svg>
+      <figcaption>L12-D1 · handed redirection</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ L13 ============ -->
+<section class="link-sec" id="L13">
+  <div class="link-inner">
+    <div>
+      <span class="chip">L13</span><span class="chip chip--earned">THE NUCLEAR FLOOR</span>
+      <h2 class="link-title">Nuclei: castings from the stellar foundry</h2>
+      <div class="narr">
+        <p>Every nucleus past hydrogen is built from three bricks and nothing else: one alpha core, n_d deuterons, n_t tritons — n_t = A−2Z, n_d = 3Z−A−2, one way to be per nucleus. A neutron is not a separate species; it is a proton with a seated electron, and a "free neutron" is an exposed triton remnant. The neutron ledger reads N = 2 + n_d + 2n_t: each triton carries two.</p>
+        <p>And the bricks have a birthplace. Deuterons and tritons are forged in the cores of stars; the heavy elements are assembled behind the stellar c-boundary, where the deep pressure runs the foundry. Each nucleus is cast once, one way to be — chart neighbours are different castings from the same brick stock, a catalogue, never a biography. The measured rule rides on top: add a triton and the boundary draws IN — tightest at the closed shells.</p>
+      </div>
+      <div class="form-strip">grammar: 1α + n_d·d + n_t·t · N = 2 + n_d + 2n_t · EC grammar on He-3 cores · contraction rule: 88% of chains comply [direct 2026-07-23] · NP27 beam-peel confirms the 1.83c surface zero-fit</div>
+    </div>
+    <figure>
+      <svg viewBox="0 0 300 200" width="300">
+        <polygon points="70,60 100,45 130,60 100,78" fill="#e3ded2" stroke="#6b6f75"/>
+        <text x="100" y="97" text-anchor="middle" class="svg-lab">α core</text>
+        <g fill="#faf8f4" stroke="#4a6d82"><rect x="165" y="42" width="44" height="20" rx="3"/><rect x="165" y="68" width="44" height="20" rx="3"/></g>
+        <text x="232" y="66" class="svg-lab" fill="#4a6d82">d × n_d</text>
+        <g fill="#faf8f4" stroke="#a4552e"><rect x="165" y="100" width="58" height="20" rx="3"/></g>
+        <text x="240" y="115" class="svg-lab" fill="#a4552e">t × n_t</text>
+        <path d="M40,160 q20,-14 40,0 q-20,14 -40,0" fill="#8a6d1f" opacity=".8"/>
+        <text x="60" y="185" text-anchor="middle" class="svg-lab2">the foundry</text>
+        <line x1="88" y1="158" x2="150" y2="140" stroke="#8a6d1f" stroke-width="1.6"/>
+        <text x="205" y="152" class="svg-lab2">bricks forged in stars,</text>
+        <text x="205" y="166" class="svg-lab2">assembled behind the</text>
+        <text x="205" y="180" class="svg-lab2">c-boundary — castings</text>
+      </svg>
+      <figcaption>L13-D1 · three bricks, one foundry, one way to be</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ L14 ============ -->
+<section class="link-sec" id="L14">
+  <div class="link-inner">
+    <div>
+      <span class="chip">L14</span><span class="chip chip--conv">SEATS</span>
+      <h2 class="link-title">Atoms and metals: exclusive seats</h2>
+      <div class="narr">
+        <p>An electron rides a seat — a closed route in the wake that costs nothing to hold — and a seat takes one rider. The octet is not a postulate; it is void-filling geometry. And in a metal the outer seats pool into one crystal-spanning network, so a cold crowd of electrons has no choice but to stack: every low seat filled, one each, up to a top set by how many there are, not how hot it is.</p>
+        <p>The stack explains what a classical gas never could: carriers fast at any temperature (the stack is tall, the bath is not), a heat capacity a hundredfold too small (only the top band has anywhere to go), and a full stack that answers compression by pushing back — <strong>PRESS: movement that cannot move</strong> — which is what holds a white dwarf up. The counting that carries this picture down to the measured numbers of the metals is the next room being built.</p>
+      </div>
+      <div class="form-strip">one seat, one electron · metal = percolating open-seat network · degeneracy pressure = PRESS</div>
+    </div>
+    <figure>
+      <svg viewBox="0 0 300 190" width="300">
+        <g stroke="#6b6f75" fill="#1d1f21">
+          <rect x="60" y="140" width="180" height="14"/><rect x="60" y="122" width="180" height="14"/>
+          <rect x="60" y="104" width="180" height="14"/><rect x="60" y="86" width="180" height="14"/>
+        </g>
+        <g stroke="#6b6f75" fill="#faf8f4">
+          <rect x="60" y="68" width="180" height="14"/><rect x="60" y="50" width="180" height="14"/>
+        </g>
+        <line x1="48" y1="82" x2="252" y2="82" stroke="#a4552e" stroke-dasharray="5 4" stroke-width="1.6"/>
+        <text x="150" y="34" text-anchor="middle" class="svg-lab">open seats above · filled stack below · the top does all the work</text>
+        <text x="150" y="176" text-anchor="middle" class="svg-lab2">full seats cannot move — compression raises the top — that push is PRESS</text>
+      </svg>
+      <figcaption>L14-D1 · the seat stack</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ L15 ============ -->
+<section class="link-sec" id="L15">
+  <div class="link-inner">
+    <div>
+      <span class="chip">L15</span><span class="chip chip--earned">FLUIDS</span>
+      <h2 class="link-title">Fluids: one poloidal operation, molecule to storm</h2>
+      <div class="narr">
+        <p>All fluid movement is one operation: the centre carries momentum forward, pushes what is ahead, stalls aside, clears the bath for what is coming, rolls back along the flank, and is caught into the turning ring. We released a slug of momentum on the relay lattice and watched the whole operation assemble itself — self-propelled, roll-back at the flank, a carried cell — with nothing imposed. Wrap that 2-D roll closed on the 1:4 gearing and you have the torus, R = 4r.</p>
+        <p>Nothing happens by itself. The bath the slug enters has its own pressure, its own mixing rules, and it accepts only the freedoms an oppositional drag can instil — short, at every scale, by the packing gap from L1. Feed that refusal into the cascade and the turbulence spectrum steepens past its ideal slope by exactly the medium's shortfall: predicted −1.693, measured −1.70, nothing fitted anywhere in the chain.</p>
+      </div>
+      <div class="form-strip">FD12-P1: four signatures, all landed · wrap: R = 4r [1:4 gearing] · FD04-P6: g = 0.103/generation → slope −1.6928 vs measured ≈ −1.70, zero parameters · Re = τ_relay/τ_adv (dimensionlessness derived) · c_s ceiling c/√3</div>
+    </div>
+    <figure>
+      <svg viewBox="0 0 300 190" width="300">
+        <defs><marker id="ar7" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#0d7a5f"/></marker></defs>
+        <ellipse cx="150" cy="95" rx="95" ry="52" fill="none" stroke="#e3ded2" stroke-width="1.4"/>
+        <path d="M150,50 C205,50 230,80 225,95 C230,110 205,140 150,140" fill="none" stroke="#1d1f21" stroke-width="2.2" marker-end="url(#ar7)"/>
+        <path d="M150,140 C95,140 70,110 75,95 C70,80 95,50 150,50" fill="none" stroke="#1d1f21" stroke-width="2.2"/>
+        <line x1="150" y1="95" x2="196" y2="95" stroke="#0d7a5f" stroke-width="2.6" marker-end="url(#ar7)"/>
+        <ellipse cx="150" cy="95" rx="22" ry="13" fill="none" stroke="#a4552e" stroke-width="1.6"/>
+        <text x="150" y="24" text-anchor="middle" class="svg-lab">forward core · stall aside · roll back · carried cell</text>
+        <text x="150" y="178" text-anchor="middle" class="svg-lab2">rings hand to rings in their cores — minus the medium's refusal, 0.103 each generation</text>
+      </svg>
+      <figcaption>L15-D1 · the poloidal operation, wrapped</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ L16 ============ -->
+<section class="link-sec" id="L16">
+  <div class="link-inner">
+    <div>
+      <span class="chip">L16</span><span class="chip chip--earned">HEAT & FREEDOM</span>
+      <h2 class="link-title">Freedom: entropy with its costume off</h2>
+      <div class="narr">
+        <p>Heat is disordered relay throughput — movement not organised into a knot or a wake. And the count S = k_B ln W was never a measure of decay: W counts arrangements. Routes. <strong>Freedom.</strong> The second law, said straight, is that things move toward greater freedom, for no deeper reason than that more routes are more travelled. Nothing descends. Heat death, read natively, is a bath at maximum circulation — everything spinning flat out, nothing stopped.</p>
+        <p>And the climb of matter into structure is the same law, not its exception: binding closes a few routes for the pair and opens millions in the bath — the released movement is the payment. Run that ledger with zero fitted parameters and it names the temperature where the universe's first assembly step became affordable: 0.0624 MeV, inside the measured deuterium bottleneck window. The freedom books balance on the first thing that ever formed.</p>
+      </div>
+      <div class="form-strip">S = k_B lnW = freedom count · TD09: flip T = 0.0624 MeV vs measured 0.06–0.09 MeV window, zero fits (equilibrium-counting convergent, disclosed) · freedom-climb theorem: OWED · TD03: pressure 1/3 symmetry-protected; lattice fingerprint at rank-4 moments — live prediction</div>
+    </div>
+    <figure>
+      <svg viewBox="0 0 300 180" width="300">
+        <circle cx="60" cy="90" r="10" fill="#1d1f21"/>
+        <g stroke="#0d7a5f" stroke-width="1.6">
+          <line x1="70" y1="86" x2="120" y2="50"/><line x1="70" y1="90" x2="124" y2="82"/><line x1="70" y1="94" x2="120" y2="128"/>
+          <line x1="124" y1="50" x2="180" y2="34"/><line x1="124" y1="50" x2="180" y2="60"/>
+          <line x1="128" y1="82" x2="184" y2="94"/><line x1="124" y1="128" x2="180" y2="118"/><line x1="124" y1="128" x2="180" y2="146"/>
+          <line x1="184" y1="34" x2="240" y2="26"/><line x1="184" y1="60" x2="240" y2="66"/><line x1="188" y1="94" x2="244" y2="100"/>
+          <line x1="184" y1="118" x2="240" y2="112"/><line x1="184" y1="146" x2="240" y2="152"/>
+        </g>
+        <text x="150" y="20" text-anchor="middle" class="svg-lab">routes open ahead — more routes are more travelled</text>
+        <text x="150" y="172" text-anchor="middle" class="svg-lab2">W is a freedom count · binding pays the bath in released movement</text>
+      </svg>
+      <figcaption>L16-D1 · the freedom tree</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ L17 ============ -->
+<section class="link-sec" id="L17">
+  <div class="link-inner">
+    <div>
+      <span class="chip">L17</span><span class="chip chip--earned">GRAVITY & ORBITS</span>
+      <h2 class="link-title">Gravity: depth, not warping</h2>
+      <div class="narr">
+        <p>A planet orbits because it drafts on the wake of its star — the same seat-riding as an electron at a₀, twenty orders up, on the same formula (L9). No G is ever written; no mass is ever weighed. The dynamics needed a length, and koppa is that length.</p>
+        <p>Light climbing out of a wake arrives stretched: the depth redshift z = ϟ/r, read at emission. It spans the Sun's photosphere — confirmed to 0.03% — down to the proton, one expression. The classic numbers come out of the wake as they must: the precession, the bending, the delay, each landing where the measurements put it, because correct accounts land together. Where the mechanisms part company, the measurements that will decide between them are named in the gravitation walkthrough.</p>
+      </div>
+      <div class="form-strip">z = ϟ/r at emission · v = c√z spans Earth → proton · solar limb deflection 1.750″ computed vs 1.751″ measured [convergent — origin native, stated] · GM never written</div>
+    </div>
+    <figure>
+      <svg viewBox="0 0 300 190" width="300">
+        <defs><marker id="ar8" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#4a6d82"/></marker></defs>
+        <circle cx="150" cy="95" r="26" fill="#8a6d1f" opacity=".85"/>
+        <circle cx="150" cy="95" r="78" fill="none" stroke="#e3ded2" stroke-width="1.4"/>
+        <circle cx="228" cy="95" r="7" fill="#1d1f21"/>
+        <g stroke="#4a6d82" stroke-width="1.6" marker-end="url(#ar8)">
+          <line x1="150" y1="8" x2="150" y2="42"/><line x1="150" y1="182" x2="150" y2="148"/>
+          <line x1="63" y1="95" x2="97" y2="95"/><line x1="262" y1="60" x2="240" y2="82"/><line x1="262" y1="130" x2="240" y2="108"/>
+        </g>
+        <text x="150" y="30" text-anchor="middle" class="svg-lab" x="150">the push, shadowed by the star</text>
+        <text x="150" y="178" text-anchor="middle" class="svg-lab2" >the planet drafts the wake · z = ϟ/r is the depth of the seat</text>
+      </svg>
+      <figcaption>L17-D1 · orbit as drafting, redshift as depth</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ L18 ============ -->
+<section class="link-sec" id="L18">
+  <div class="link-inner">
+    <div>
+      <span class="chip">L18</span><span class="chip chip--open">STARS & GALAXIES · OPEN</span>
+      <h2 class="link-title">Stars and galaxies: the honest frontier</h2>
+      <div class="narr">
+        <p>A star is a displacement engine: the foundry of L13, the wake of L17, the cascade of L8 running at full throat. The crossover scale where drafting begins — a₀ = cH₀/2π, the cosmos's own floor — collapses galactic and atomic response onto one curve at 8.8%, re-earned on real rotation data with a control that fails six times worse.</p>
+        <p>And here is the frontier, stated the way a working theory states it: the SHAPE of that crossover is still borrowed from a rival's empirical fit, and full galactic rotation is unsolved on my books. I am not touching galactic until the shape is native. A theory that cannot say "not yet" about anything is not measuring itself. This link is the proof this page does.</p>
+      </div>
+      <div class="form-strip">a₀ = cH₀/2π [derived floor] · cross-scale collapse 8.8% RMS, control 6× worse [APS03 direct] · crossover SHAPE: BORROWED, OPEN · galactic rotation: OPEN</div>
+    </div>
+    <figure>
+      <svg viewBox="0 0 300 180" width="300">
+        <g fill="#9a9ea5">
+          <circle cx="150" cy="90" r="5"/>
+          <circle cx="120" cy="80" r="2.4"/><circle cx="100" cy="95" r="2"/><circle cx="85" cy="72" r="1.7"/>
+          <circle cx="180" cy="100" r="2.4"/><circle cx="200" cy="85" r="2"/><circle cx="215" cy="108" r="1.7"/>
+          <circle cx="135" cy="60" r="2"/><circle cx="165" cy="120" r="2"/><circle cx="110" cy="120" r="1.7"/><circle cx="190" cy="60" r="1.7"/>
+        </g>
+        <path d="M60,90 C90,40 210,140 240,90" fill="none" stroke="#e3ded2" stroke-width="1.4"/>
+        <rect x="196" y="28" width="86" height="20" rx="3" fill="none" stroke="#a4552e"/>
+        <text x="239" y="42" text-anchor="middle" class="svg-lab" fill="#a4552e">OPEN — said so</text>
+        <text x="150" y="168" text-anchor="middle" class="svg-lab2">the floor is derived · the shape is on loan · the honesty is load-bearing</text>
+      </svg>
+      <figcaption>L18-D1 · the frontier, labelled</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ L19 ============ -->
+<section class="link-sec" id="L19">
+  <div class="link-inner">
+    <div>
+      <span class="chip">L19</span><span class="chip chip--earned">COSMOLOGY</span>
+      <h2 class="link-title">The cosmos: nothing recedes</h2>
+      <div class="narr">
+        <p>Redshift is two native effects and no recession: the depth stamp at emission (L17), and the propagation squeeze across the Clearing. The ladder is octaves — 1+z = 2^Δn — and the CMB sits 10.10 octaves down, exactly where the boundary's synchronized release puts it. The famous "tension" in the expansion rate is what you get when one number is asked to carry two different mechanisms; split them and the tension is not resolved, it is dissolved.</p>
+        <p>No expansion. No dark matter. No dark energy. A medium that pushes, shadows, and gears needs none of that furniture to carry the same sky — each refusal was earned upstream, link by link, and by the time you reach this one there is nothing left for the furniture to do. What came before the detonation, and whether the cycle turns again — that I hold as conjecture, and say so.</p>
+      </div>
+      <div class="form-strip">1+z = 2^Δn · CMB at 10.10 octaves · redshift = emission depth + propagation, conflation = the "tension" · cyclic recharge: CONJECTURE, uncommitted</div>
+    </div>
+    <figure>
+      <svg viewBox="0 0 300 180" width="300">
+        <g stroke="#0d7a5f" stroke-width="2" fill="none">
+          <path d="M30,120 q8,-16 16,0 t16,0"/>
+          <path d="M95,120 q12,-22 24,0 t24,0"/>
+          <path d="M180,120 q20,-30 40,0 t40,0"/>
+        </g>
+        <text x="46" y="145" text-anchor="middle" class="svg-lab2">emitted</text>
+        <text x="131" y="145" text-anchor="middle" class="svg-lab2">one octave down</text>
+        <text x="235" y="145" text-anchor="middle" class="svg-lab2">two octaves down</text>
+        <text x="150" y="40" text-anchor="middle" class="svg-lab">1 + z = 2^Δn — the ladder is octaves, not recession</text>
+        <text x="150" y="168" text-anchor="middle" class="svg-lab2">the CMB: 10.10 octaves below its release — the boundary, heard today</text>
+      </svg>
+      <figcaption>L19-D1 · the octave ladder</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ L20 / DEBTS ============ -->
+<section class="debts" id="L20">
+  <div class="inner">
+    <span class="chip">L20</span><span class="chip chip--open">THE LEDGER OF DEBTS</span>
+    <h2>What is still owed</h2>
+    <p class="lead">A theory's debts belong on its front page, in its own voice. These are mine. Each one names what would pay it — and each one is a place this physics can still lose. That is not a weakness of the chain; it is the chain, still under construction, telling you where the next rung goes.</p>
+    <ul class="debt-list">
+      <li><b>ℓ_P</b> — the seed itself: assumed. Whether any theory can do better is held open.</li>
+      <li><b>α</b> — read off the spectrum two ways to 0.1%; not yet derived. The one coupling peg.</li>
+      <li><b>ε = hν</b> — the emission quantum, carried as a bridge. The deepest unpaid line.</li>
+      <li><b>The transport coefficient</b> — ν from knot density; one derivation unblocks five investigations.</li>
+      <li><b>The forward coherence length</b> — pipe demands L/ℓ_c = 48; the gear-chain candidate waits on its mechanism sentence.</li>
+      <li><b>The freedom-climb theorem</b> — W monotone under the relay rule alone; the arrow question, retired properly.</li>
+      <li><b>The seat-stack run</b> — capped counting → the Lorenz number; metals open or the seat claim takes the hit.</li>
+      <li><b>Intermittency's high orders</b> — the single-leak model under-corrects; the compounding-refusal re-pose is specified.</li>
+      <li><b>The galactic shape</b> — the crossover's form is on loan; not touching galactic until it is native.</li>
+      <li><b>FLM12 D1/D2</b> — the make-or-break derivations under mass-as-reorganisation.</li>
+      <li><b>The Lamb magnitude</b> — the wake carries a nuclear-geometry term (sign, order, scaling all landed); the bulk routes to route-geometry, unbuilt.</li>
+      <li><b>6π⁵</b> — the mass-ratio hook: unique, zero-parameter, 19 ppm — OPEN, with the look-elsewhere caution attached.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ WALKTHROUGH INDEX ============ -->
+<section class="wt" id="walkthroughs">
+  <div class="inner">
+    <h2>Sixteen fields, walked end to end</h2>
+    <p class="lead">Each field of physics gets the full treatment: every phenomenon, every action drawn, and the textbook account set calmly beside mine, so a reader can weigh two ways of building the same world. Pages arrive as each walkthrough is finished; the one-breath claims stand now.</p>
+    <div class="wt-grid">
+      <div class="wt-card"><div class="wid">W01</div><h4>Foundations &amp; Lattice</h4><p>The grain, the tick, the packing — and the honest seed. Where every other page borrows its floor.</p></div>
+      <div class="wt-card"><div class="wid">W02</div><h4>Particles &amp; Topology</h4><p>Knots, windings, the 1.83c seat — and the trefoil's three-lobed fingerprint, now measured in its own wake.</p></div>
+      <div class="wt-card"><div class="wid">W03</div><h4>Electromagnetism &amp; Charge</h4><p>Handed redirection, no substance; the force coefficient derived in closed form at the electropause.</p></div>
+      <div class="wt-card"><div class="wid">W04</div><h4>Atoms &amp; Spectra</h4><p>The hydrogen chain, seats and gears, every line a path times a ratio — and a struck gate kept on display.</p></div>
+      <div class="wt-card"><div class="wid">W05</div><h4>Nuclear Physics</h4><p>Three bricks, one grammar, castings from the stellar foundry; the triton that draws the boundary in.</p></div>
+      <div class="wt-card"><div class="wid">W06</div><h4>Gravitation &amp; Orbits</h4><p>Koppa mechanics without G or M; one two-body ledger holding across twenty orders of magnitude.</p></div>
+      <div class="wt-card"><div class="wid">W07</div><h4>Cosmology &amp; Redshift</h4><p>Depth plus propagation, octaves not recession; the tension dissolved by splitting what was conflated.</p></div>
+      <div class="wt-card"><div class="wid">W08</div><h4>Galactic Dynamics</h4><p>The cosmos's own floor, a₀ = cH₀/2π — and the frontier honestly marked OPEN until the shape is native.</p></div>
+      <div class="wt-card"><div class="wid">W09</div><h4>Stars &amp; Radiation</h4><p>Displacement engines and the foundry behind the c-boundary, where every heavy nucleus was cast.</p></div>
+      <div class="wt-card"><div class="wid">W10</div><h4>Fluid Dynamics</h4><p>One poloidal operation from molecule to storm; the bath's refusal, measured in the turbulence spectrum.</p></div>
+      <div class="wt-card"><div class="wid">W11</div><h4>Thermodynamics</h4><p>Freedom counted, the Boltzmann factor counted not lifted, and the universe's first assembly step dated by ledger.</p></div>
+      <div class="wt-card"><div class="wid">W12</div><h4>Condensed Matter</h4><p>Exclusive seats, the stack, PRESS — metals as topology, with the decisive counting run owed and said so.</p></div>
+      <div class="wt-card"><div class="wid">W13</div><h4>Quantum Foundations</h4><p>Definite routes strobed into clouds; the tick too fast to resolve — no collapse, no dice, no ghost.</p></div>
+      <div class="wt-card"><div class="wid">W14</div><h4>Plasma &amp; Magnetism</h4><p>Collective circulation as the ℓ=2 face of one wake; the identity c = 1/√(μ₀ε₀) as relay bookkeeping.</p></div>
+      <div class="wt-card"><div class="wid">W15</div><h4>Optics &amp; Photonics</h4><p>Light as emission, never a thing in transit between things; one criterion uniting boom and Cherenkov.</p></div>
+      <div class="wt-card"><div class="wid">W16</div><h4>Chemistry &amp; Bonding</h4><p>The octet as void geometry, activation as alignment search — and Avogadro's −6.022 arriving uninvited.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLOSE ============ -->
+<section class="hero" style="min-height:60vh">
+  <div class="narr" style="max-width:44rem;text-align:center">
+    <p style="font-size:var(--fs-lg);color:var(--ink)">Space. Matter. Movement. The present. One action. One push, arriving from everywhere, forever.</p>
+    <p style="color:var(--ink-muted)">Everything above either follows from that, or is listed as a debt in my own hand. Pull any link and see what hangs from it — that is what the chain is for.</p>
+    <p class="by" style="margin-top:2rem">J. C. HARVEY · MELBOURNE · <a href="index.html">← THE MAIN SITE</a></p>
+  </div>
+</section>
+
+<script>
+/* ── every link's figure, rebuilt as a working mechanism ─────────────────────
+   Each diagram becomes the thing it depicts: drag the grain, stir the slack,
+   block the flood, wind the gear, seat the electron. Shapes and directions
+   only — the static figures above remain the no-script fallback.           */
+(function(){
+"use strict";
+var NS='http://www.w3.org/2000/svg';
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e}
+function tx(a,s){var e=el('text',a);e.textContent=s;return e}
+function fig(id){var s=document.querySelector('#'+id+' figure svg');return s||null}
+function hint(id,s){var c=document.querySelector('#'+id+' figure figcaption');if(c)c.textContent=c.textContent+' · '+s}
+function pt(svg,evt){var r=svg.getBoundingClientRect(),vb=svg.viewBox.baseVal;
+  return {x:(evt.clientX-r.left)/r.width*vb.width,y:(evt.clientY-r.top)/r.height*vb.height}}
+function drag(svg,onMove,onDown){var on=false;
+  svg.style.touchAction='none'; svg.style.cursor='grab';
+  svg.addEventListener('pointerdown',function(e){on=true;svg.setPointerCapture&&svg.setPointerCapture(e.pointerId);
+    var p=pt(svg,e);if(onDown)onDown(p);onMove(p);e.preventDefault();});
+  svg.addEventListener('pointermove',function(e){if(on)onMove(pt(svg,e));});
+  window.addEventListener('pointerup',function(){on=false;});}
+function wipe(svg,w,h){while(svg.firstChild)svg.removeChild(svg.firstChild);svg.setAttribute('viewBox','0 0 '+w+' '+h);}
+function marker(svg,id,col){var d=el('defs',{}),m=el('marker',{id:id,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
+  m.appendChild(el('path',{d:'M0,0 L6,3 L0,6 z',fill:col}));d.appendChild(m);svg.appendChild(d);return 'url(#'+id+')'}
+var LAB={'font-family':'JetBrains Mono,monospace','font-size':'11px',fill:'#6b6f75'};
+function lab(x,y,s,anchor){var a={x:x,y:y};for(var k in LAB)a[k]=LAB[k];if(anchor)a['text-anchor']=anchor;return tx(a,s)}
+
+/* L0 — the bought ruler: sweep a span, every distance is a count of grains */
+(function(){var s=fig('L0');if(!s)return;wipe(s,300,170);
+  s.appendChild(el('line',{x1:20,y1:100,x2:280,y2:100,stroke:'#43464a','stroke-width':1.5}));
+  var ticks=[];for(var i=0;i<27;i++){var x=20+i*10;
+    ticks.push(x);s.appendChild(el('line',{x1:x,y1:94,x2:x,y2:106,stroke:'#9a9ea5','stroke-width':1}));}
+  var band=el('rect',{x:20,y:92,width:0,height:16,fill:'#8a6d1f',opacity:.35});s.appendChild(band);
+  var read=lab(150,138,'sweep along the ruler',
+    'middle');s.appendChild(read);
+  s.appendChild(lab(150,156,'a metre is bookkeeping — ℓ_P per tick of the count','middle'));
+  var x0=null;
+  drag(s,function(p){var a=Math.max(20,Math.min(280,p.x));if(x0===null)x0=a;
+    var lo=Math.min(x0,a),hi=Math.max(x0,a);
+    lo=Math.round((lo-20)/10)*10+20;hi=Math.round((hi-20)/10)*10+20;
+    band.setAttribute('x',lo);band.setAttribute('width',Math.max(0,hi-lo));
+    read.textContent='that distance = '+Math.round((hi-lo)/10)+' grains of ℓ_P';
+  },function(p){x0=Math.max(20,Math.min(280,p.x));});
+})();
+
+/* L1 — stir the grains: the slack does not sit; it herds into shaped voids */
+(function(){var s=fig('L1');if(!s)return;wipe(s,300,190);
+  var G=[];for(var row=0;row<3;row++)for(var col=0;col<7;col++){
+    var hx=60+col*30+(row%2?15:0),hy=62+row*26;if(hx>250)continue;
+    var c=el('circle',{cx:hx,cy:hy,r:14,fill:'#faf8f4',stroke:'#6b6f75'});G.push({n:c,hx:hx,hy:hy,x:hx,y:hy});s.appendChild(c);}
+  var tet=el('polygon',{fill:'#a4552e',opacity:.3});var oct=el('polygon',{fill:'none',stroke:'#a4552e','stroke-width':2,'stroke-dasharray':'4 3',opacity:.3});
+  s.appendChild(tet);s.appendChild(oct);
+  var cap=lab(150,166,'still — the shortfall lies smeared (≈0.103, conserved)','middle');s.appendChild(cap);
+  var sx=150,sy=90,stir=0;
+  drag(s,function(p){stir=Math.min(1,stir+Math.hypot(p.x-sx,p.y-sy)/60);sx=p.x;sy=p.y;});
+  (function tick(){stir*=0.985;
+    for(var i=0;i<G.length;i++){var g=G[i],dx=g.hx-sx,dy=g.hy-sy,d=Math.hypot(dx,dy)||1;
+      var push=Math.max(0,1-d/60)*stir*12;
+      g.x+=((g.hx+dx/d*push)-g.x)*0.18;g.y+=((g.hy+dy/d*push)-g.y)*0.18;
+      g.n.setAttribute('cx',g.x);g.n.setAttribute('cy',g.y);}
+    var vx=Math.max(80,Math.min(230,sx)),vy=Math.max(55,Math.min(125,sy)),z=8+stir*12;
+    tet.setAttribute('points',(vx-22)+','+(vy+z*0.5)+' '+(vx-22-z)+','+(vy+z*1.8)+' '+(vx-22+z)+','+(vy+z*1.8));
+    oct.setAttribute('points',(vx+24)+','+(vy-z)+' '+(vx+24-z)+','+vy+' '+(vx+24)+','+(vy+z)+' '+(vx+24+z)+','+vy);
+    tet.setAttribute('opacity',0.2+stir*0.65);oct.setAttribute('opacity',0.2+stir*0.65);
+    cap.textContent=stir>0.12?'movement herds the slack — tetrahedral, octahedral, larger still':'stir the grains — the shortfall bunches into shaped voids';
+    requestAnimationFrame(tick);})();
+})();
+
+/* L2 — the relay IS the clock: press a cell; every handoff raises the count */
+(function(){var s=fig('L2');if(!s)return;wipe(s,300,150);
+  var mk=marker(s,'cc-l2','#0d7a5f');
+  var cells=[],i;for(i=0;i<5;i++){var r=el('rect',{x:25+i*50,y:55,width:36,height:36,rx:4,fill:'#faf8f4',stroke:'#6b6f75'});cells.push(r);s.appendChild(r);}
+  var pulse=el('circle',{r:7,fill:'#0d7a5f',opacity:0});s.appendChild(pulse);
+  var count=0,cap=lab(150,32,'press any cell — one handoff per tick, and that IS c','middle');s.appendChild(cap);
+  var tally=lab(150,128,'time = the count of handoffs · 0','middle');s.appendChild(tally);
+  var anim=null;
+  s.addEventListener('pointerdown',function(e){var p=pt(s,e);
+    var idx=Math.max(0,Math.min(4,Math.floor((p.x-25)/50)));
+    if(anim)cancelAnimationFrame(anim);var t0=null,from=idx;
+    function step(ts){if(t0===null)t0=ts;var t=(ts-t0)/260;var k=from+t;
+      if(k>=4.999){pulse.setAttribute('opacity',0);return;}
+      var f=Math.floor(k);if(f>from){count++;from=f;tally.textContent='time = the count of handoffs · '+count;}
+      pulse.setAttribute('opacity',1);pulse.setAttribute('cx',43+k*50);pulse.setAttribute('cy',73);
+      anim=requestAnimationFrame(step);}
+    anim=requestAnimationFrame(step);});
+})();
+
+/* L3 — the push, balanced anywhere: drag the point; the arrivals always cancel */
+(function(){var s=fig('L3');if(!s)return;wipe(s,300,210);
+  var mk=marker(s,'cc-l3','#4a6d82');
+  s.appendChild(el('circle',{cx:150,cy:105,r:88,fill:'none',stroke:'#e3ded2','stroke-width':10}));
+  var arrows=[],i;for(i=0;i<8;i++){var l=el('line',{stroke:'#4a6d82','stroke-width':1.8,'marker-end':mk});arrows.push(l);s.appendChild(l);}
+  var dot=el('circle',{r:4,fill:'#1d1f21'});s.appendChild(dot);
+  s.appendChild(lab(150,12,'the boundary, still releasing','middle'));
+  var cap=lab(150,203,'drag the point anywhere inside — the push still cancels: you feel nothing','middle');s.appendChild(cap);
+  var x=150,y=105;
+  function render(){dot.setAttribute('cx',x);dot.setAttribute('cy',y);
+    for(var i=0;i<8;i++){var a=i/8*Math.PI*2;
+      var bx=150+Math.cos(a)*84,by=105+Math.sin(a)*84;
+      var dx=x-bx,dy=y-by,d=Math.hypot(dx,dy)||1;
+      arrows[i].setAttribute('x1',bx);arrows[i].setAttribute('y1',by);
+      arrows[i].setAttribute('x2',bx+dx/d*(d-14));arrows[i].setAttribute('y2',by+dy/d*(d-14));}}
+  drag(s,function(p){var dx=p.x-150,dy=p.y-105,d=Math.hypot(dx,dy);
+    if(d>66){dx*=66/d;dy*=66/d;}x=150+dx;y=105+dy;render();});
+  render();
+})();
+
+/* L4 — occlusion: drag the small body; blocked arrivals vanish, the leftover push appears */
+(function(){var s=fig('L4');if(!s)return;wipe(s,300,210);
+  var mk=marker(s,'cc-l4','#4a6d82'),mr=marker(s,'cc-l4r','#a4552e');
+  var n=16,cx=150,cy=105,R=92,arrows=[],i;
+  for(i=0;i<n;i++){var l=el('line',{stroke:'#4a6d82','stroke-width':1.7,'marker-end':mk});arrows.push(l);s.appendChild(l);}
+  var net=el('line',{stroke:'#a4552e','stroke-width':3.4,'marker-end':mr});s.appendChild(net);
+  var body=el('circle',{cx:cx,cy:cy,r:11,fill:'#1d1f21'});s.appendChild(body);
+  var occ={x:225,y:70,r:17};
+  var on=el('circle',{cx:occ.x,cy:occ.y,r:occ.r,fill:'#1d1f21',opacity:.85});s.appendChild(on);
+  var cap=lab(150,203,'drag the second body — each stands in the other’s weather','middle');s.appendChild(cap);
+  function blocked(px,py){var dx=cx-px,dy=cy-py,fx=px-occ.x,fy=py-occ.y;
+    var a=dx*dx+dy*dy,b=2*(fx*dx+fy*dy),c=fx*fx+fy*fy-occ.r*occ.r,disc=b*b-4*a*c;
+    if(disc<0)return false;disc=Math.sqrt(disc);var t1=(-b-disc)/(2*a),t2=(-b+disc)/(2*a);
+    return (t1>0&&t1<1)||(t2>0&&t2<1);}
+  function render(){on.setAttribute('cx',occ.x);on.setAttribute('cy',occ.y);
+    var nx=0,ny=0,blk=0;
+    for(var i=0;i<n;i++){var a=i/n*Math.PI*2,px=cx+Math.cos(a)*R,py=cy+Math.sin(a)*R;
+      var b=blocked(px,py),l=arrows[i];
+      l.setAttribute('stroke-opacity',b?0.08:0.8);if(b){blk++;nx+=px-cx;ny+=py-cy;}
+      var ux=cx-px,uy=cy-py,L=Math.hypot(ux,uy);ux/=L;uy/=L;
+      l.setAttribute('x1',px);l.setAttribute('y1',py);
+      l.setAttribute('x2',px+ux*(L-18));l.setAttribute('y2',py+uy*(L-18));}
+    var m=Math.hypot(nx,ny);
+    if(m>0.5){var ux=nx/m,uy=ny/m,len=14+blk*7;
+      net.setAttribute('stroke-opacity',1);net.setAttribute('x1',cx);net.setAttribute('y1',cy);
+      net.setAttribute('x2',cx+ux*len);net.setAttribute('y2',cy+uy*len);
+      cap.textContent=blk+' of '+n+' directions occluded — the leftover push is the “force”';}
+    else{net.setAttribute('stroke-opacity',0);cap.textContent='drag the second body between the flood and the first';}}
+  drag(s,function(p){occ.x=Math.max(occ.r,Math.min(300-occ.r,p.x));occ.y=Math.max(occ.r,Math.min(210-occ.r,p.y));render();});
+  render();
+})();
+
+/* L5 — the knot: turn the trefoil; its three lobes pass; the boundary holds at R_p */
+(function(){var s=fig('L5');if(!s)return;wipe(s,300,210);
+  s.appendChild(el('circle',{cx:150,cy:105,r:78,fill:'none',stroke:'#8a6d1f','stroke-dasharray':'4 4'}));
+  var g=el('g',{});s.appendChild(g);
+  var seat=el('circle',{r:4.5,fill:'#a4552e'});s.appendChild(seat);
+  s.appendChild(lab(248,105,'R_p'));
+  s.appendChild(lab(150,16,'turn the trefoil — three lobes, m₃ = 3k, a knot that cannot un-knot','middle'));
+  var cap=lab(150,200,'the seat on the boundary runs at 1.83c — faster than the lattice relays','middle');s.appendChild(cap);
+  var rot=0,seatA=0;
+  function path(rot){var d='',i;for(i=0;i<=140;i++){var t=i/140*Math.PI*2;
+    var r=34+16*Math.cos(3*t+rot),x=150+Math.cos(t)*r*1.55,y=105+Math.sin(t)*r*1.15;
+    d+=(i?'L':'M')+x.toFixed(1)+' '+y.toFixed(1)+' ';}return d+'Z';}
+  var tre=el('path',{d:path(0),fill:'none',stroke:'#1d1f21','stroke-width':2.5});g.appendChild(tre);
+  drag(s,function(p){rot=Math.atan2(p.y-105,p.x-150)*3;tre.setAttribute('d',path(rot));});
+  (function tick(){seatA+=0.045;
+    seat.setAttribute('cx',150+Math.cos(seatA)*78);seat.setAttribute('cy',105+Math.sin(seatA)*78);
+    requestAnimationFrame(tick);})();
+})();
+
+/* L6 — inertia: drag the knot; while it accelerates, the arrivals pile heavier ahead */
+(function(){var s=fig('L6');if(!s)return;wipe(s,300,160);
+  var mk=marker(s,'cc-l6','#4a6d82');
+  var ahead=[],behind=[],i;
+  for(i=0;i<3;i++){var a=el('line',{stroke:'#4a6d82','marker-end':mk}),b=el('line',{stroke:'#9a9ea5','marker-end':mk});
+    ahead.push(a);behind.push(b);s.appendChild(a);s.appendChild(b);}
+  var body=el('circle',{r:16,fill:'#1d1f21'});s.appendChild(body);
+  var cap=lab(150,148,'drag the knot — the faster it moves, the heavier the arrivals ahead','middle');s.appendChild(cap);
+  s.appendChild(lab(150,18,'the imbalance presses back: that press is inertia','middle'));
+  var x=150,y=82,vx=0,tgx=150,tgy=82;
+  drag(s,function(p){tgx=Math.max(50,Math.min(250,p.x));tgy=Math.max(45,Math.min(120,p.y));});
+  (function tick(){var nvx=(tgx-x)*0.12;vx=vx*0.8+nvx*0.2;x+=nvx;y+=(tgy-y)*0.12;
+    body.setAttribute('cx',x);body.setAttribute('cy',y);
+    var sp=Math.max(-1,Math.min(1,vx/6));
+    for(var i=0;i<3;i++){var dy=(i-1)*16;
+      var wA=2.2+Math.max(0,sp)*3.2,wB=2.2+Math.max(0,-sp)*3.2;
+      var lenA=34+Math.max(0,sp)*30,lenB=34+Math.max(0,-sp)*30;
+      ahead[i].setAttribute('stroke-width',wA);
+      ahead[i].setAttribute('x1',x+28+lenA);ahead[i].setAttribute('y1',y+dy-sp*6);
+      ahead[i].setAttribute('x2',x+24);ahead[i].setAttribute('y2',y+dy*0.6);
+      behind[i].setAttribute('stroke-width',wB);
+      behind[i].setAttribute('x1',x-28-lenB);behind[i].setAttribute('y1',y+dy+sp*6);
+      behind[i].setAttribute('x2',x-24);behind[i].setAttribute('y2',y+dy*0.6);}
+    requestAnimationFrame(tick);})();
+})();
+
+/* L7 — the budget arc: drag the point; spin pays for travel */
+(function(){var s=fig('L7');if(!s)return;wipe(s,300,180);
+  var mk=marker(s,'cc-l7','#0d7a5f'),mr=marker(s,'cc-l7r','#a4552e');
+  var ox=150,oy=140,R=90;
+  s.appendChild(el('path',{d:'M '+(ox-R)+' '+oy+' A '+R+' '+R+' 0 0 1 '+(ox+R)+' '+oy,fill:'none',stroke:'#e3ded2','stroke-width':2}));
+  var spin=el('line',{stroke:'#0d7a5f','stroke-width':2.2,'marker-end':mk});
+  var trav=el('line',{stroke:'#a4552e','stroke-width':2.2,'marker-end':mr});
+  s.appendChild(spin);s.appendChild(trav);
+  var dot=el('circle',{r:7,fill:'#1d1f21',stroke:'#faf8f4','stroke-width':2});s.appendChild(dot);
+  var read=lab(150,170,'','middle');s.appendChild(read);
+  drag(s,function(p){var a=Math.atan2(oy-p.y,p.x-ox);a=Math.max(0.001,Math.min(Math.PI-0.001,a));render(a);});
+  function render(a){var vt=Math.cos(a),vc=Math.sin(a);
+    dot.setAttribute('cx',ox+R*vt);dot.setAttribute('cy',oy-R*vc);
+    spin.setAttribute('x1',ox);spin.setAttribute('y1',oy);spin.setAttribute('x2',ox);spin.setAttribute('y2',oy-R*vc);
+    trav.setAttribute('x1',ox);trav.setAttribute('y1',oy);trav.setAttribute('x2',ox+R*vt);trav.setAttribute('y2',oy);
+    read.textContent='v_circ = '+Math.abs(vc).toFixed(3)+'c · v = '+vt.toFixed(3)+'c · v_circ²+v² = c², always';}
+  render(1.15);
+})();
+
+/* L8 — release: press the held store; the parcel cascades domain to domain and leaves as emission */
+(function(){var s=fig('L8');if(!s)return;wipe(s,300,160);
+  var boxes=[],i;for(i=0;i<4;i++){var r=el('rect',{x:30+i*65,y:30+i*30,width:56,height:26,rx:3,fill:'#e3ded2',stroke:'#6b6f75'});boxes.push(r);s.appendChild(r);}
+  var parcel=el('circle',{r:6,fill:'#0d7a5f',opacity:0});s.appendChild(parcel);
+  var wave=el('path',{d:'',fill:'none',stroke:'#0d7a5f','stroke-width':2,opacity:0});s.appendChild(wave);
+  s.appendChild(lab(150,16,'press the first domain — storage becomes light','middle'));
+  var cap=lab(150,150,'held → domain → domain → out as emission','middle');s.appendChild(cap);
+  var anim=null;
+  s.addEventListener('pointerdown',function(){
+    if(anim)cancelAnimationFrame(anim);var t0=null;
+    function step(ts){if(t0===null)t0=ts;var t=(ts-t0)/1600;
+      if(t>=1.25){wave.setAttribute('opacity',0);parcel.setAttribute('opacity',0);return;}
+      if(t<1){var k=t*3,f=Math.min(2.999,k),i0=Math.floor(f),fr=f-i0;
+        var x0=58+i0*65,y0=43+i0*30,x1=58+(i0+1)*65,y1=43+(i0+1)*30;
+        parcel.setAttribute('opacity',1);
+        parcel.setAttribute('cx',x0+(x1-x0)*fr);parcel.setAttribute('cy',y0+(y1-y0)*fr);
+        boxes[Math.min(3,i0)].setAttribute('fill','#cfe3d9');
+      } else {parcel.setAttribute('opacity',0);
+        var d='M258 148 ';for(var j=0;j<=30;j++){d+='L'+(258+j*1.2)+' '+(148-6*Math.sin(j/30*Math.PI*4))+' ';}
+        wave.setAttribute('d',d);wave.setAttribute('opacity',1);}
+      anim=requestAnimationFrame(step);}
+    boxes.forEach(function(b){b.setAttribute('fill','#e3ded2');});
+    anim=requestAnimationFrame(step);});
+})();
+
+/* L9 — koppa: wind the gear; the length ϟ = R/k² closes as the gear climbs */
+(function(){var s=fig('L9');if(!s)return;wipe(s,300,190);
+  var gear=el('g',{});s.appendChild(gear);
+  var ring=el('circle',{cx:95,cy:95,r:46,fill:'none',stroke:'#1d1f21','stroke-width':2});gear.appendChild(ring);
+  var teeth=[],i;for(i=0;i<8;i++){var l=el('line',{stroke:'#1d1f21','stroke-width':2});teeth.push(l);gear.appendChild(l);}
+  var kread=tx({x:95,y:99,'text-anchor':'middle','font-family':'JetBrains Mono,monospace','font-size':'12px',fill:'#1d1f21'},'k = 2');s.appendChild(kread);
+  var bar=el('line',{x1:185,y1:95,x2:272,y2:95,stroke:'#8a6d1f','stroke-width':4});s.appendChild(bar);
+  s.appendChild(el('line',{x1:185,y1:88,x2:185,y2:102,stroke:'#8a6d1f','stroke-width':2}));
+  var barEnd=el('line',{x1:272,y1:88,x2:272,y2:102,stroke:'#8a6d1f','stroke-width':2});s.appendChild(barEnd);
+  var kop=lab(228,78,'ϟ = R/k²','middle');s.appendChild(kop);
+  s.appendChild(lab(150,16,'wind the gear — drag around it','middle'));
+  var cap=lab(150,178,'one object, two readings: the slower the wake, the shorter the length','middle');s.appendChild(cap);
+  var ang=0,k=2;
+  function render(){for(var i=0;i<8;i++){var a=ang+i/8*Math.PI*2;
+      teeth[i].setAttribute('x1',95+Math.cos(a)*46);teeth[i].setAttribute('y1',95+Math.sin(a)*46);
+      teeth[i].setAttribute('x2',95+Math.cos(a)*58);teeth[i].setAttribute('y2',95+Math.sin(a)*58);}
+    var len=87*(4/(k*k));len=Math.max(4,Math.min(87,len));
+    bar.setAttribute('x2',185+len);barEnd.setAttribute('x1',185+len);barEnd.setAttribute('x2',185+len);
+    kop.setAttribute('x',185+len/2);
+    kread.textContent='k = '+k.toFixed(1);
+    cap.textContent='k = '+k.toFixed(1)+' → ϟ = R/'+(k*k).toFixed(1)+' — the gear read as a length';}
+  var lastA=null;
+  drag(s,function(p){var a=Math.atan2(p.y-95,p.x-95);
+    if(lastA!==null){var da=a-lastA;if(da>Math.PI)da-=2*Math.PI;if(da<-Math.PI)da+=2*Math.PI;
+      ang+=da;k=Math.max(2,Math.min(12,k+da*0.8));}
+    lastA=a;render();},function(p){lastA=Math.atan2(p.y-95,p.x-95);});
+  render();
+})();
+
+/* L10 — the hydrogen ladder: press a rung; the wake speed at that rung is its gear */
+(function(){var s=fig('L10');if(!s)return;wipe(s,300,180);
+  s.appendChild(el('line',{x1:40,y1:140,x2:270,y2:140,stroke:'#e3ded2','stroke-width':2}));
+  var rungs=[{x:52,h:22,c:'#1d1f21',n:'R_p',v:'1.83c',k:'k = 0.55 — inside the c-boundary'},
+             {x:132,h:44,c:'#4a6d82',n:'r_e = 1.83²R_p',v:'c',k:'the electron’s own scale'},
+             {x:242,h:88,c:'#0d7a5f',n:'a₀ = r_e/α²',v:'αc',k:'k = 137 — the ground seat of hydrogen'}];
+  var sel=2,bars=[];
+  rungs.forEach(function(r,i){var b=el('rect',{x:r.x-4,y:140-r.h,width:8,height:r.h,fill:r.c,style:'cursor:pointer'});
+    bars.push(b);s.appendChild(b);
+    s.appendChild(lab(r.x,140-r.h-8,r.n,'middle'));});
+  var arrow=el('line',{stroke:'#a4552e','stroke-width':2.6,'marker-end':marker(s,'cc-l10','#a4552e')});s.appendChild(arrow);
+  var cap=lab(150,168,'','middle');s.appendChild(cap);
+  s.appendChild(lab(150,16,'press a rung — same chain, zero new inputs','middle'));
+  function render(){var r=rungs[sel];
+    bars.forEach(function(b,i){b.setAttribute('opacity',i===sel?1:0.45);});
+    var L={2:26,1:52,0:78}[sel];
+    arrow.setAttribute('x1',r.x);arrow.setAttribute('y1',146);arrow.setAttribute('x2',r.x+L);arrow.setAttribute('y2',146);
+    cap.textContent='wake speed at this rung: '+r.v+' · '+r.k;}
+  s.addEventListener('pointerdown',function(e){var p=pt(s,e);var best=0,bd=1e9;
+    rungs.forEach(function(r,i){var d=Math.abs(p.x-r.x);if(d<bd){bd=d;best=i;}});sel=best;render();});
+  render();
+})();
+
+/* L11 — emission: stretch the path; the line is the path times the gear, read out at c */
+(function(){var s=fig('L11');if(!s)return;wipe(s,300,160);
+  var y=112,x0=40;var Lpx=120,k=2;
+  var bar=el('line',{x1:x0,y1:y,x2:x0+Lpx,y2:y,stroke:'#8a6d1f','stroke-width':3});s.appendChild(bar);
+  var handle=el('circle',{cy:y,r:8,fill:'#8a6d1f',stroke:'#faf8f4','stroke-width':2});s.appendChild(handle);
+  var wave=el('path',{fill:'none',stroke:'#0d7a5f','stroke-width':2});s.appendChild(wave);
+  s.appendChild(lab(150,16,'drag the end of the path L','middle'));
+  var cap=lab(150,148,'','middle');s.appendChild(cap);
+  function render(){bar.setAttribute('x2',x0+Lpx);handle.setAttribute('cx',x0+Lpx);
+    var lam=2*Lpx*(k/2);var d='M'+x0+' '+(y-42)+' ';
+    for(var i=0;i<=120;i++){var x=x0+i/120*230;d+='L'+x+' '+(y-42-10*Math.sin((x-x0)/lam*Math.PI*2))+' ';}
+    wave.setAttribute('d',d);
+    cap.textContent='λ = 2L·(c/v) — longer path, longer line · seven floors, ratio 1.0000';}
+  drag(s,function(p){Lpx=Math.max(30,Math.min(230,p.x-x0));render();});
+  render();
+})();
+
+/* L12 — handedness: press either knot to flip its hand; same hands shove apart */
+(function(){var s=fig('L12');if(!s)return;wipe(s,300,170);
+  var mk=marker(s,'cc-l12','#a4552e'),mb=marker(s,'cc-l12b','#4a6d82');
+  function spiral(cx,hand){var d='';for(var i=0;i<=90;i++){var t=i/90*Math.PI*4,r=6+t*3.4;
+    d+=(i?'L':'M')+(cx+Math.cos(t*hand)*r)+' '+(85+Math.sin(t*hand)*r)+' ';}return d;}
+  var A={h:1,p:el('path',{fill:'none',stroke:'#1d1f21','stroke-width':2,style:'cursor:pointer'})},
+      B={h:1,p:el('path',{fill:'none',stroke:'#1d1f21','stroke-width':2,style:'cursor:pointer'})};
+  s.appendChild(A.p);s.appendChild(B.p);
+  var mid=[],i;for(i=0;i<4;i++){var l=el('line',{});mid.push(l);s.appendChild(l);}
+  var cap=lab(150,158,'','middle');s.appendChild(cap);
+  s.appendChild(lab(150,16,'press a knot to flip its hand','middle'));
+  function render(){A.p.setAttribute('d',spiral(85,A.h));B.p.setAttribute('d',spiral(215,B.h));
+    var same=A.h===B.h;
+    for(var i=0;i<4;i++){var l=mid[i],yy=70+i*11;
+      if(same){l.setAttribute('x1',150-16);l.setAttribute('x2',150-34);l.setAttribute('y1',yy);l.setAttribute('y2',yy);
+        l.setAttribute('stroke','#a4552e');l.setAttribute('stroke-width',2);l.setAttribute('marker-end',mk);
+        if(i%2){l.setAttribute('x1',150+16);l.setAttribute('x2',150+34);}}
+      else{l.setAttribute('x1',i%2?150+40:150-40);l.setAttribute('x2',i%2?150+18:150-18);l.setAttribute('y1',yy);l.setAttribute('y2',yy);
+        l.setAttribute('stroke','#4a6d82');l.setAttribute('stroke-width',2);l.setAttribute('marker-end',mb);}}
+    cap.textContent=same?'same hands → surplus between → shoved apart · no substance anywhere'
+                        :'opposite hands → the push between thins → pressed together';}
+  A.p.addEventListener('pointerdown',function(e){A.h*=-1;render();e.stopPropagation();});
+  B.p.addEventListener('pointerdown',function(e){B.h*=-1;render();e.stopPropagation();});
+  render();
+})();
+
+/* L13 — the castings: add a brick; a triton draws the boundary IN; the ledger stays true */
+(function(){var s=fig('L13');if(!s)return;wipe(s,300,200);
+  var bound=el('circle',{cx:110,cy:95,r:34,fill:'none',stroke:'#8a6d1f','stroke-width':1.6,'stroke-dasharray':'4 3'});s.appendChild(bound);
+  s.appendChild(el('polygon',{points:'96,86 110,78 124,86 110,94',fill:'#e3ded2',stroke:'#6b6f75'}));
+  var units=el('g',{});s.appendChild(units);
+  var dBtn=el('g',{style:'cursor:pointer'}),tBtn=el('g',{style:'cursor:pointer'});
+  dBtn.appendChild(el('rect',{x:200,y:52,width:64,height:24,rx:3,fill:'#faf8f4',stroke:'#4a6d82'}));
+  dBtn.appendChild(tx({x:232,y:68,'text-anchor':'middle','font-family':'JetBrains Mono,monospace','font-size':'11px',fill:'#4a6d82'},'+ deuteron'));
+  tBtn.appendChild(el('rect',{x:200,y:86,width:64,height:24,rx:3,fill:'#faf8f4',stroke:'#a4552e'}));
+  tBtn.appendChild(tx({x:232,y:102,'text-anchor':'middle','font-family':'JetBrains Mono,monospace','font-size':'11px',fill:'#a4552e'},'+ triton'));
+  s.appendChild(dBtn);s.appendChild(tBtn);
+  var read=lab(150,168,'','middle');s.appendChild(read);
+  var cap=lab(150,186,'','middle');s.appendChild(cap);
+  s.appendChild(lab(150,16,'cast a nucleus — each brick placed once, one way to be','middle'));
+  var nd=0,nt=0;
+  function render(){var Z=2+nd+nt,N=2+nd+2*nt,A=Z+N;
+    while(units.firstChild)units.removeChild(units.firstChild);
+    var i;for(i=0;i<nd;i++){var a=i*2.4;units.appendChild(el('rect',{x:110+Math.cos(a)*20-5,y:95+Math.sin(a)*20-3,width:10,height:6,rx:2,fill:'#4a6d82'}));}
+    for(i=0;i<nt;i++){var a2=i*2.4+1.2;units.appendChild(el('rect',{x:110+Math.cos(a2)*26-6,y:95+Math.sin(a2)*26-3,width:12,height:6,rx:2,fill:'#a4552e'}));}
+    var base=20+7*Math.cbrt(A/0.740);
+    bound.setAttribute('r',Math.max(24,base-nt*1.6));
+    read.textContent='1α + '+nd+'d + '+nt+'t → Z='+Z+', A='+A+' · N = 2+n_d+2n_t = '+N+' ✓';
+    cap.textContent=nt>0?'the triton just drew the boundary IN — the contraction rule':'add bricks — tritons draw the boundary in';}
+  dBtn.addEventListener('pointerdown',function(){if(nd<12)nd++;render();});
+  tBtn.addEventListener('pointerdown',function(){if(nt<10)nt++;render();});
+  render();
+})();
+
+/* L14 — exclusive seats: press to seat electrons, one per seat; press the full stack and it presses back */
+(function(){var s=fig('L14');if(!s)return;wipe(s,300,190);
+  var rows=6,seats=[],filled=0;
+  for(var i=0;i<rows;i++){var r=el('rect',{x:60,y:140-i*18,width:180,height:14,fill:'#faf8f4',stroke:'#6b6f75',style:'cursor:pointer'});seats.push(r);s.appendChild(r);}
+  var press=el('line',{x1:150,y1:0,x2:150,y2:0,stroke:'#a4552e','stroke-width':3,'marker-end':marker(s,'cc-l14','#a4552e'),opacity:0});s.appendChild(press);
+  s.appendChild(lab(150,16,'press the stack — one electron per seat, lowest first','middle'));
+  var cap=lab(150,178,'','middle');s.appendChild(cap);
+  function render(){for(var i=0;i<rows;i++)seats[i].setAttribute('fill',i<filled?'#1d1f21':'#faf8f4');
+    if(filled>=rows){press.setAttribute('opacity',1);
+      press.setAttribute('y1',140-rows*18+2);press.setAttribute('y2',140-rows*18-22);
+      cap.textContent='full — movement that cannot move: PRESS pushes back · press again to reset';}
+    else{press.setAttribute('opacity',0);
+      cap.textContent=filled+' of '+rows+' seats taken · a seat takes one rider';}}
+  s.addEventListener('pointerdown',function(){filled=filled>=rows?0:filled+1;render();});
+  render();
+})();
+
+/* L15 — the poloidal operation: launch a slug; forward core, stall aside, roll back, carried cell */
+(function(){var s=fig('L15');if(!s)return;wipe(s,300,190);
+  var mk=marker(s,'cc-l15','#0d7a5f');
+  var ring=el('ellipse',{cx:150,cy:95,rx:0,ry:0,fill:'none',stroke:'#1d1f21','stroke-width':2.2,opacity:0});s.appendChild(ring);
+  var core=el('line',{stroke:'#0d7a5f','stroke-width':2.6,'marker-end':mk,opacity:0});s.appendChild(core);
+  var slug=el('circle',{r:7,fill:'#0d7a5f',opacity:0});s.appendChild(slug);
+  s.appendChild(lab(150,16,'press to release a slug of momentum','middle'));
+  var cap=lab(150,178,'forward core · stall aside · roll back · carried cell — nothing imposed','middle');s.appendChild(cap);
+  var anim=null;
+  s.addEventListener('pointerdown',function(){if(anim)cancelAnimationFrame(anim);var t0=null;
+    function step(ts){if(t0===null)t0=ts;var t=(ts-t0)/2400;
+      if(t>=1){ring.setAttribute('opacity',0.9);core.setAttribute('opacity',0.9);slug.setAttribute('opacity',0);
+        cap.textContent='wrapped on the 1:4 gearing → the torus, R = 4r · each generation hands down, minus the refusal 0.103';return;}
+      var x=40+t*110;
+      slug.setAttribute('opacity',1);slug.setAttribute('cx',x);slug.setAttribute('cy',95);
+      var k=Math.min(1,t*1.6);
+      ring.setAttribute('opacity',k*0.9);ring.setAttribute('cx',x);ring.setAttribute('cy',95);
+      ring.setAttribute('rx',14+k*60);ring.setAttribute('ry',8+k*38);
+      core.setAttribute('opacity',k);core.setAttribute('x1',x-16);core.setAttribute('y1',95);core.setAttribute('x2',x+26);core.setAttribute('y2',95);
+      anim=requestAnimationFrame(step);}
+    cap.textContent='forward core · stall aside · roll back · carried cell — nothing imposed';
+    anim=requestAnimationFrame(step);});
+})();
+
+/* L16 — freedom: press to open routes; more routes are more travelled — that is the whole second law */
+(function(){var s=fig('L16');if(!s)return;wipe(s,300,180);
+  var gen=1,cap=lab(150,170,'press to open the next generation of routes','middle');
+  var g=el('g',{});s.appendChild(g);s.appendChild(cap);
+  s.appendChild(lab(150,16,'W counts routes — freedom, not decay','middle'));
+  function render(){while(g.firstChild)g.removeChild(g.firstChild);
+    var W=1,x0=40,nodes=[[90,1]];
+    g.appendChild(el('circle',{cx:x0,cy:90,r:8,fill:'#1d1f21'}));
+    var prev=[90];
+    for(var d=1;d<=gen;d++){var x=40+d*62,next=[],count=Math.min(8,Math.pow(2,d));
+      for(var i=0;i<count;i++){var y=90+(i-(count-1)/2)*(110/count);
+        next.push(y);
+        var py=prev[Math.floor(i/2)]||90;
+        g.appendChild(el('line',{x1:x-62+6,y1:py,x2:x-4,y2:y,stroke:'#0d7a5f','stroke-width':1.5}));
+        g.appendChild(el('circle',{cx:x,cy:y,r:3.4,fill:'#0d7a5f'}));}
+      prev=next;W=count*d===0?1:W*2;}
+    cap.textContent='routes open: '+Math.pow(2,gen)+' · S = k_B ln W is a count of these · press for more';}
+  s.addEventListener('pointerdown',function(){gen=gen>=4?1:gen+1;render();});
+  render();
+})();
+
+/* L17 — depth: drag the planet; deeper seats run faster, and light climbing out arrives stretched */
+(function(){var s=fig('L17');if(!s)return;wipe(s,300,190);
+  s.appendChild(el('circle',{cx:80,cy:95,r:24,fill:'#8a6d1f',opacity:.85}));
+  var orbit=el('circle',{cx:80,cy:95,fill:'none',stroke:'#e3ded2','stroke-width':1.2});s.appendChild(orbit);
+  var mk=marker(s,'cc-l17','#4a6d82');
+  var varr=el('line',{stroke:'#4a6d82','stroke-width':2.4,'marker-end':mk});s.appendChild(varr);
+  var pl=el('circle',{r:7,fill:'#1d1f21'});s.appendChild(pl);
+  var wave=el('path',{fill:'none',stroke:'#0d7a5f','stroke-width':1.8});s.appendChild(wave);
+  s.appendChild(lab(150,14,'drag the planet in and out','middle'));
+  var cap=lab(150,180,'','middle');s.appendChild(cap);
+  var r=110;
+  function render(){orbit.setAttribute('r',r);
+    pl.setAttribute('cx',80+r);pl.setAttribute('cy',95);
+    var z=30/r; var v=Math.sqrt(z);
+    varr.setAttribute('x1',80+r);varr.setAttribute('y1',95);
+    varr.setAttribute('x2',80+r);varr.setAttribute('y2',95-20-v*70);
+    var lam=14/(1-z*0.85);
+    var d='';for(var i=0;i<=60;i++){var x=80+r+8+i*1.9;
+      d+=(i?'L':'M')+x+' '+(130-7*Math.sin((x)/lam*Math.PI*2))+' ';}
+    wave.setAttribute('d',d);
+    cap.textContent='z = ϟ/r = '+(z).toFixed(2)+' · v = c√z — deeper is faster, and the light leaves stretched';}
+  drag(s,function(p){r=Math.max(34,Math.min(200,Math.hypot(p.x-80,p.y-95)));render();});
+  render();
+})();
+
+/* L18 — the honest frontier: drag the test star; inside the floor the claim holds, outside it is OPEN */
+(function(){var s=fig('L18');if(!s)return;wipe(s,300,180);
+  var open=el('rect',{x:170,y:30,width:120,height:120,fill:'#a4552e',opacity:.06});s.appendChild(open);
+  s.appendChild(el('line',{x1:170,y1:30,x2:170,y2:150,stroke:'#a4552e','stroke-dasharray':'5 4','stroke-width':1.6}));
+  s.appendChild(lab(96,24,'a₀ = cH₀/2π — derived floor','middle'));
+  s.appendChild(lab(230,24,'shape on loan — OPEN','middle'));
+  var star=el('circle',{cy:90,r:6,fill:'#1d1f21'});s.appendChild(star);
+  var cap=lab(150,168,'','middle');s.appendChild(cap);
+  var x=100;
+  function render(){star.setAttribute('cx',x);
+    cap.textContent = x<170 ? 'inside the floor: the collapse is re-earned at 8.8% — claimed'
+                            : 'past the crossover: the SHAPE is borrowed — not claimed until native';}
+  drag(s,function(p){x=Math.max(40,Math.min(270,p.x));render();});
+  render();
+})();
+
+/* L19 — octaves: drag the photon away; the wave halves each octave, never recedes */
+(function(){var s=fig('L19');if(!s)return;wipe(s,300,180);
+  var wave=el('path',{fill:'none',stroke:'#0d7a5f','stroke-width':2});s.appendChild(wave);
+  var ph=el('circle',{cy:120,r:7,fill:'#1d1f21'});s.appendChild(ph);
+  s.appendChild(lab(150,16,'drag the photon across the Clearing','middle'));
+  var cap=lab(150,168,'','middle');s.appendChild(cap);
+  var x=60;
+  function render(){ph.setAttribute('cx',x);
+    var dn=(x-40)/70; var lam=10*Math.pow(2,dn);
+    var d='';for(var i=0;i<=120;i++){var xx=30+i/120*(x-30);
+      d+=(i?'L':'M')+xx+' '+(80-9*Math.sin(xx/lam*Math.PI*2))+' ';}
+    wave.setAttribute('d',d);
+    cap.textContent='Δn = '+dn.toFixed(1)+' octaves → 1+z = 2^Δn = '+Math.pow(2,dn).toFixed(1)+' · the CMB sits 10.10 octaves down';}
+  drag(s,function(p){x=Math.max(60,Math.min(280,p.x));render();});
+  render();
+})();
+
+hint('L0','sweep the ruler');
+hint('L1','stir the grains');
+hint('L2','press a cell');
+hint('L3','drag the point');
+hint('L4','drag the body');
+hint('L5','turn the knot');
+hint('L6','drag the knot');
+hint('L7','drag the point');
+hint('L8','press the domain');
+hint('L9','wind the gear');
+hint('L10','press a rung');
+hint('L11','stretch the path');
+hint('L12','flip a hand');
+hint('L13','add bricks');
+hint('L14','press the stack');
+hint('L15','release the slug');
+hint('L16','open routes');
+hint('L17','drag the planet');
+hint('L18','drag the star');
+hint('L19','drag the photon');
+})();
+</script>
+</body>
+</html>
