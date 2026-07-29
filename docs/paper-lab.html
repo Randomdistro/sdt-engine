@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Section Paper — The Census Instrument</title>
+<style>
+:root{--paper:#faf8f4;--edge:#e5e0d4;--ink:#1c1e20;--soft:#45484c;--mute:#6d7177;--mint:#0d7a5f;--rust:#a4552e;--gold:#8a6d1f;--steel:#4a6d82}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:'Source Serif 4',Georgia,serif;line-height:1.75;padding:3rem 1.5rem}
+main{max-width:46rem;margin:0 auto}
+.series{font-family:Consolas,monospace;font-size:.68rem;letter-spacing:.28em;color:var(--mute);text-transform:uppercase;margin-bottom:1.2rem}
+h1{font-size:1.85rem;line-height:1.25;font-weight:700;margin-bottom:1rem}
+.byline{font-size:1rem;margin-bottom:.2rem}
+.affil{font-family:Consolas,monospace;font-size:.72rem;color:var(--mute);margin-bottom:2rem}
+h2{font-size:1.12rem;font-weight:700;margin:2.2rem 0 .7rem}
+p{margin-bottom:.9rem;color:var(--soft)}
+strong{color:var(--ink)}
+.abstract{border:1px solid var(--edge);border-left:3px solid var(--mint);padding:1.1rem 1.3rem;background:#fff;margin:1.5rem 0}
+.abstract p{margin-bottom:0}
+.eq{font-family:Consolas,monospace;font-size:.9rem;background:#fff;border:1px solid var(--edge);border-radius:3px;padding:.8rem 1.1rem;margin:1rem 0;display:flex;justify-content:space-between;gap:1rem;overflow-x:auto}
+.eq .no{color:var(--mute)}
+table{width:100%;border-collapse:collapse;font-size:.85rem;margin:1rem 0}
+th,td{border:1px solid var(--edge);padding:.45rem .6rem;text-align:left;vertical-align:top}
+th{font-family:Consolas,monospace;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+.decl{border:1px solid var(--edge);background:#fff;padding:1rem 1.2rem;margin:1.5rem 0;font-size:.92rem}
+.refs ol{margin-left:1.2rem}
+.refs li{font-size:.85rem;color:var(--soft);margin-bottom:.4rem}
+footer{max-width:46rem;margin:3rem auto 0;padding-top:1.2rem;border-top:1px solid var(--edge)}
+footer a{color:var(--mint);text-decoration:none;font-family:Consolas,monospace;font-size:.75rem;letter-spacing:.06em}
+sub,sup{line-height:0}
+</style>
+</head>
+<body>
+<main>
+<p class="series">Spatial Displacement Theory · Section Paper V · Prepared for Submission</p>
+<h1>The Grammar-Space Census Instrument: Coordinates, Enrichment, and the Instrumented Radius Ledger</h1>
+<p class="byline">J. C. Harvey</p>
+<p class="affil">Melbourne, Australia · July 2026 · Atlas Chapter Four (Interactive) — The Lab</p>
+
+<div class="abstract">
+<p><strong>Abstract.</strong> The census instrument plots every catalogued isotope in grammar space — abscissa n<sub>d</sub> − n<sub>t</sub> (deuteron excess), ordinate n<sub>d</sub> + n<sub>t</sub> (total subunit count). Because (n<sub>t</sub>, n<sub>d</sub>) ↔ (Z, N) is an invertible map, the plane is a lossless re-coordinatisation of the nuclide chart, and the display discipline follows from that fact: overlays expressible purely in the counts (magnetic character among them) are presented as views of the ledger, never as independent laws. This paper documents the instrument's data layer: 290 characterised isotopes; the 284-block boundary-radius enrichment (idempotent tool, reference dataset); the per-nuclide closure-schedule lines added under the 2026-07-30 canon alignment; half-life tier rendering; the two-grammar (He-4 / He-3) lineage sheets; decay vectors; and the n<sub>d</sub> = n<sub>t</sub> boundary. Two instrumented results ride on this layer: the triton-contraction rule (a triton draws the boundary radius inward — 88% of isotope chains, 90% of isobar steps, maximal at shell closures) and the closure-kink isotone census (instrument validated on known answers; constant kink along magic-N isotones; odd-N inward staggering at 83.1% with its shared-form scope stated).</p>
+</div>
+<p><strong>Keywords:</strong> grammar coordinates · invertibility discipline · isotope enrichment · half-life tiers · triton contraction · closure-kink instrument</p>
+
+<h2>1. Coordinates and the invertibility discipline</h2>
+<div class="eq"><span>x = n<sub>d</sub> − n<sub>t</sub>,&nbsp;y = n<sub>d</sub> + n<sub>t</sub>;&nbsp;&nbsp;(n<sub>t</sub>, n<sub>d</sub>, v) = (N−Z, 2Z−N−2, Z−2) ↔ (Z, N)</span><span class="no">(1)</span></div>
+<p>The map is invertible; the plane is the nuclide chart re-coordinatised so that construction lineages appear as lattice lines (horizontal families share triton count, vertical families share deuteron count). The discipline (NP24-A) is enforced at the instrument level: any regularity expressible purely in the counts restates the neutron ledger; the magnetic-character overlay is therefore labelled a view. What the coordinates buy is legibility of structure — lineages, the two-grammar split, the belts.</p>
+
+<h2>2. The data layer</h2>
+<table>
+<tr><th>Layer</th><th>Content</th><th>Provenance</th></tr>
+<tr><td>Isotope corpus</td><td>290 characterised isotopes (ATOMICUS/isotopes/)</td><td>measured masses, radii, half-lives; grammar decomposition per (1)</td></tr>
+<tr><td>Boundary-radius enrichment</td><td>284 per-nuclide blocks + reference dataset</td><td>tools/enrich_boundary_radius.py — idempotent, regenerable</td></tr>
+<tr><td>Closure-schedule lines</td><td>per-nuclide tier/belt position (e.g. Ca-48: "completes the first triton belt — 4 antipodal pairs" beside its measured −29 milli-fm kink)</td><td>canon alignment 2026-07-30; engine schedule (Section Paper IV)</td></tr>
+<tr><td>Half-life tiers</td><td>stability rendering 1a–1j; stable isotopes saturate</td><td>measured half-lives</td></tr>
+<tr><td>Lineage sheets</td><td>He-4 vs He-3 grammar; missing-α structures; decay vectors</td><td>grammar arithmetic + measured decay modes</td></tr>
+<tr><td>Golden boundary</td><td>n<sub>d</sub> = n<sub>t</sub> overlay (Z = 79 onset)</td><td>grammar arithmetic</td></tr>
+</table>
+
+<h2>3. Instrumented results carried by the census</h2>
+<div class="eq"><span>triton contraction: ΔR &lt; 0 on adding a triton — 88% of chains, 90% of isobar steps, maximal at closures</span><span class="no">(2)</span></div>
+<div class="eq"><span>closure kink: constant along magic-N isotones (−31.8 / −22.2 / −12.3 milli-fm at N = 28/50/82); odd-N inward 83.1%</span><span class="no">(3)</span></div>
+<p>Both results are single-pass, whole-range, on instruments validated against known answers before use (Ca-48 −29.0, Cr-52 −28.4 milli-fm for the kink tool). The contraction rule is the radius-level face of the seat law — the interleave takes the least-resistance path inward. The kink census carries its scope on its face: the pairing account predicts the same staggering sign, so the two accounts share the form and the census cannot discriminate between them; its content is the direction, which is what the seat law asserts. Earlier isotope-blind instrumentation in this sector produced a reversed reading that was corrected when the isotope-resolved test was run — the correction is part of the record.</p>
+
+<h2>4. Interface</h2>
+<p>Pan middle-drag · zoom scroll · hover for the per-isotope decomposition panel (Z, symbol, grammar terms, subunit counts, closure-schedule line). Overlays toggle independently: element labels, shell bands, magnetic character (a count re-projection), decay vectors, lineage sheets, the golden boundary. The morph slider deforms grammar space back onto the conventional (N, Z) chart, making the re-coordinatisation visible as a continuous map.</p>
+
+<h2>5. Certification</h2>
+<table>
+<tr><th>Item</th><th>Value</th><th>Status</th></tr>
+<tr><td>Coordinate invertibility</td><td>eq. (1)</td><td>ARITHMETIC — display discipline enforced (NP24-A)</td></tr>
+<tr><td>Enrichment layer</td><td>284 blocks, idempotent</td><td>REGENERABLE — tool is the source, report is output</td></tr>
+<tr><td>Triton-contraction rule</td><td>88% / 90%</td><td>RULE — native mechanism; convergent numbers</td></tr>
+<tr><td>Closure-kink census</td><td>eq. (3)</td><td>SUPPORTED under pre-registered criteria; Q2 shared-form scope stated</td></tr>
+<tr><td>Magnetic overlay</td><td>—</td><td>VIEW of the counts — not an independent law</td></tr>
+</table>
+
+<div class="decl">
+<p><strong>Methodological declaration.</strong> The instrument displays measured data in grammar coordinates; nothing on the canvas is fitted. Instruments are validated on known answers before use; comparisons are whole-range and single-pass; overlays that re-project the ledger are labelled views. Where an account shares its predicted form with a rival's (the staggering sign), the census claims the direction only.</p>
+</div>
+
+<h2 class="refs">References</h2>
+<div class="refs"><ol>
+<li>atomicus-lab.html — the instrument; nuclear-packing-sequencer.html — the mesh construction sequencer.</li>
+<li>ATOMICUS/isotopes/ (290 characterisations); ATOMICUS/tools/enrich_boundary_radius.py; ATOMICUS/tools/closure_kink_isotone.py; ATOMICUS/reports/CLOSURE_KINK_ISOTONE_REPORT.md.</li>
+<li>Angeli &amp; Marinova (2013) / IAEA radii; NUBASE half-lives (measured layers).</li>
+<li>Section Paper IV (grammar, schedule); practice paper 04 · Atomic Physics &amp; Spectroscopy (isotope-shift spectroscopy on the same corpus).</li>
+</ol></div>
+</main>
+<footer><a href="atlas.html#lab">← RETURN TO THE ATLAS · THE LAB</a></footer>
+</body>
+</html>

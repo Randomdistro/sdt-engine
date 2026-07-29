@@ -20,7 +20,7 @@ canvas{display:block}
 #scene{position:fixed;inset:0;width:100%;height:100%}
 
 /* ── title ── */
-#title{position:fixed;top:12px;left:216px;z-index:20;pointer-events:none}
+#title{position:fixed;top:62px;left:216px;z-index:20;pointer-events:none}
 #title h1{font-size:15px;font-weight:700;letter-spacing:.5px;color:var(--ink)}
 #title h1 span{color:var(--gold)}
 #title p{font-size:10px;color:var(--ink-dim);font-family:var(--mono);letter-spacing:.5px;margin-top:2px}
@@ -78,7 +78,7 @@ canvas{display:block}
 .tag.off{background:rgba(224,106,106,.14);color:var(--red)}
 
 /* ── top toggles ── */
-#toggles{position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:20;
+#toggles{position:fixed;top:62px;left:50%;transform:translateX(-50%);z-index:20;
   display:flex;gap:5px;flex-wrap:wrap;justify-content:center;max-width:calc(100vw - 720px)}
 #toggles label{background:rgba(12,12,24,.88);border:1px solid var(--edge);border-radius:13px;
   padding:4px 11px;font-size:10px;cursor:pointer;-webkit-user-select:none;user-select:none;transition:all .18s;letter-spacing:.3px;color:var(--ink-soft)}
@@ -87,14 +87,18 @@ canvas{display:block}
   box-shadow:0 0 9px rgba(212,160,92,.3),inset 0 0 12px rgba(212,160,92,.08)}
 #toggles input{display:none}
 
-/* ── bottom transport (the sequencer) ── */
-#transport{position:fixed;bottom:0;left:0;right:0;height:56px;z-index:20;
-  background:rgba(6,6,13,.97);border-top:1px solid var(--edge);
-  display:flex;align-items:center;gap:14px;padding:0 18px 0 216px}
-#transport button{background:rgba(28,28,48,.85);border:1px solid var(--edge);color:var(--ink);
+/* ── top chirp bar (sequencer transport — moved up so the sliders fit below) ── */
+#chirpbar{position:fixed;top:0;left:204px;right:266px;height:52px;z-index:19;
+  background:rgba(6,6,13,.94);border-bottom:1px solid var(--edge);border-left:1px solid var(--edge);
+  display:flex;align-items:center;gap:12px;padding:0 14px}
+#chirpbar button{background:rgba(28,28,48,.85);border:1px solid var(--edge);color:var(--ink);
   width:34px;height:30px;border-radius:6px;font-size:13px;cursor:pointer;transition:all .15s}
-#transport button:hover{border-color:var(--gold);color:var(--gold-bright)}
-#transport button.play{width:44px;color:var(--mint)}
+#chirpbar button:hover{border-color:var(--gold);color:var(--gold-bright)}
+#chirpbar button.play{width:44px;color:var(--mint)}
+/* ── bottom bar (the control sliders) ── */
+#transport{position:fixed;bottom:0;left:0;right:0;z-index:20;
+  background:rgba(6,6,13,.97);border-top:1px solid var(--edge);
+  display:flex;align-items:center;flex-wrap:wrap;gap:10px 14px;padding:8px 18px 8px 216px;min-height:44px}
 #seqWrap{flex:1;display:flex;align-items:center;gap:12px}
 #seqCanvas{flex:1;height:42px;min-width:120px;background:rgba(18,18,30,.6);border:1px solid var(--edge);border-radius:5px;cursor:pointer;display:block}
 #seqLabel{font-family:var(--mono);font-size:10.5px;line-height:1.45;color:var(--gold);min-width:216px}
@@ -110,8 +114,9 @@ canvas{display:block}
 
 <div id="title">
   <h1>Nuclear <span>Packing Sequencer</span></h1>
-  <p>trefoil protons · convergence light · mass defect from the shadow</p>
-  <p style="color:var(--ink-dim);max-width:560px">each proton = one <b style="color:#ff5a5a">6π trefoil</b> — six windings weaving under·over·under·over·under·over on the torus they ride — the shape it tightens to at 1.83c. Built by volume from <b>1836</b> electrons (m<sub>p</sub>/m<sub>e</sub> = 6π⁵ = 1836): take one electron's ring in hydrogen (radius a₀), draw it as a tube the electron's own width, and pack 1836 of those volumes into the knot. <span style="color:#ff5a5a">proton red</span> · <span style="color:#5a80ff">neutron blue</span>. Shown representationally — the real thread is vastly finer than the drawn knot.</p>
+  <p>trefoil protons · bipartite mesh — every contact p↔n, traction by construction · mass defect from the shadow</p>
+  <p id="meshStat" style="color:#44eebb;font-size:.78rem;letter-spacing:.04em">mesh —</p>
+  <p style="color:var(--ink-dim);max-width:560px">in the mesh, each proton presents as a <b style="color:#ff5a5a">RING</b> — wedding-band proportions, wide and flat — four very skinny strands twisting around each other as they run the band (the free proton's 6π trefoil, tightened at 1.83c; the mass is still the packed <b>1836</b> electron volumes, m<sub>p</sub>/m<sub>e</sub> = 6π⁵). A <b style="color:#5a80ff">neutron</b> is the same band with its electron seated <em>inside</em> at the node, facing the bond — the electron is the mesh-maker. <span style="color:#ff5a5a">proton red</span> · <span style="color:#5a80ff">neutron blue</span>. Shown representationally — the real strands are vastly finer.</p>
 </div>
 
 <div id="toggles">
@@ -189,7 +194,7 @@ canvas{display:block}
   </div>
 </div>
 
-<div id="transport">
+<div id="chirpbar">
   <button type="button" id="btnFirst" title="reset to α-core">⏮</button>
   <button type="button" id="btnPrev" title="remove a subunit">◀</button>
   <button type="button" id="btnPlay" class="play" title="sequence the packing">▶</button>
@@ -199,6 +204,9 @@ canvas{display:block}
     <canvas id="seqCanvas" height="42" title="binding-energy chirp — height = ΔE released as each subunit locks in. Click to seek."></canvas>
     <span id="seqLabel">α core</span>
   </div>
+</div>
+
+<div id="transport">
   <div class="ctlGrp">tightness<input type="range" id="rTight" title="packing tightness (nn distance / R_p)" aria-label="packing tightness" min="1.15" max="1.95" step="0.01" value="1.45"><span id="rTightV">1.45</span></div>
   <div class="ctlGrp">light°<input type="range" id="rLight" title="light azimuth (degrees)" aria-label="light azimuth" min="-60" max="60" step="1" value="-38"><span id="rLightV">-38</span></div>
   <div class="ctlGrp">bright<input type="range" id="rBright" title="light brightness" aria-label="light brightness" min="0.2" max="6" step="0.1" value="2.4"><span id="rBrightV">2.4</span></div>
@@ -323,81 +331,132 @@ const R_p = 0.8414;                 // fm — derived W+1 proton boundary
 const A1  = Math.PI*R_p*R_p;        // fm² — single-nucleon occlusion cross-section
 const E_NUC = 931.494;              // MeV per u — nucleon rest-energy scale (for BE/A context)
 
-/* ---- subunit-centric packing: each subunit is an INTERLEAVED cluster of trefoils
-   whose holes face a shared-electron centre (NP17: interleaved 6π trefoils, n = p + one
-   internal electron shared between adjacent protons). Subunit centres sit on a close pack;
-   α = tetrahedral 4-trefoil (2p·2n), triton = 3-trefoil (1p·2n), deuteron = 2-trefoil (1p·1n).
-   Counts honour the α-grammar exactly (p = 2+nd+nt = Z, N = 4+2nd+3nt = A). */
-const KSUB=1.5, KINTRA=0.65;   // subunit spacing & intra-subunit interleave radius (× dnn)
+/* ---- SPHERICAL TIER packing (Harvey spec 2026-07-30, superseding the cubic grid):
+   the α is a wireframe tetrahedron with the two proton RINGS on the faces flanking
+   one edge and the two neutron rings on the faces flanking the OPPOSITE edge — each
+   ring touches its face's other two edges, never the shared one, so the contact
+   graph is p–n–p–n by geometry. Around it the shell schedule made literal:
+   deuterons are RADIAL rods (n inward, p outward — the bipartite double layer) on
+   spherical tiers of capacity 6, 12, 12, 20, 30; tritons are COHERENT radial n–p–n
+   rods on equatorial belts, antipodal pairs, the lone odd rod inward on the pole.
+   Bond length D < 2R_p ⇒ boundaries INTERLACE — the overlap IS the mass defect the
+   shadow measures. Circulation differs per layer (tier field, consumed by animate).
+   Contacts are the EXPLICIT engineered list (nuc.contacts) — all p↔n, frustration
+   zero by construction; centre distance is not the contact criterion (the α rings
+   sit close but never touch their own kind). */
+const KSUB=1.5, KINTRA=0.65;   // legacy spacing constants (kept for compatibility)
 function vnorm(v){const l=Math.hypot(v[0],v[1],v[2])||1;return[v[0]/l,v[1]/l,v[2]/l];}
 function packNucleus(A, Z, dnn, coulSpread){
+  // ═══ SPHERICAL TIER PACKING (Harvey spec 2026-07-30) — see block comment above ═══
   const nd=3*Z-A-2, nt=A-2*Z;
-  const kinds=['alpha'];
-  for(let s=0;s<nd;s++) kinds.push('deuteron');
-  for(let s=0;s<nt;s++) kinds.push('triton');
-  const nSub=kinds.length;
-  // subunit centres — OPPOSITION SHELLS (Harvey 2026-07-03, replacing the FCC crop that
-  // lopsided carbon): the α sits at the origin on the shared rotation axis; satellites take
-  // MAXIMUM-SPREAD geometries around it — the nuclear–electronic mirror. 1 = lone valence
-  // pole (Li, following the α's rotation) · 2 = the tense dyad, antipodal, furthest spread,
-  // chasing each other around the α (Be) · 3 = trigonal · 4 = tetrahedral (C — where 2p²
-  // should be) · 5 = trigonal bipyramid (N) · 6 = octahedral · … · 12 = the icosahedral
-  // shell (the 720° twelve-cap closure). Beyond 12 the next shell opens, same logic.
   const spread=1+coulSpread*(Z*Z)/Math.pow(A,4/3);
-  const Dsub=dnn*spread*KSUB;
+  const D=dnn*spread;                                   // p–n bond length (< 2R_p ⇒ interlace)
+  const nuc=[]; nuc.contacts=[]; nuc.bondD=D;
+  const push=(pos,type,group,sub,axis,tier)=>{
+    const n={pos,type,group,sub,axis,tier:tier||0,id:nuc.length}; nuc.push(n); return n.id; };
+  const bond=(i,j)=>nuc.contacts.push([i,j]);
+
+  // ── α core: the tetrahedron spec. Two proton rings on the faces flanking edge AB
+  // (each touching its face's other two edges, clear of AB); two neutron rings on the
+  // faces flanking the opposite edge CD. Ring centre = 93% of the way from the face's
+  // bisector vertex to its incircle seat — tangent to the two near edges, clear of the
+  // shared one. Adjacent-face rings meet near their common tangent edge: p–n–p–n. ──
+  const aEdge=2.4*D;                                     // tetra edge (ring-centre spread ≈ 0.8·D)
+  const sV=aEdge/(2*Math.sqrt(2));
+  const VT=[[sV,sV,sV],[sV,-sV,-sV],[-sV,sV,-sV],[-sV,-sV,sV]];   // A,B,C,D
+  // faces: {vertex triple, bisector vertex (opposite the avoided edge), type}
+  const FACES=[ {v:[0,1,2],w:2,t:'p'}, {v:[0,1,3],w:3,t:'p'},     // flank AB → protons
+                {v:[0,2,3],w:0,t:'n'}, {v:[1,2,3],w:1,t:'n'} ];   // flank CD → neutrons
+  const alphaIds=[];
+  for(const f of FACES){
+    const w=VT[f.w], oth=f.v.filter(i=>i!==f.w).map(i=>VT[i]);
+    const mid=[(oth[0][0]+oth[1][0])/2,(oth[0][1]+oth[1][1])/2,(oth[0][2]+oth[1][2])/2];
+    const s=(2/3)*0.93;                                  // toward the bisector vertex, off the shared edge
+    const c=[w[0]+(mid[0]-w[0])*s, w[1]+(mid[1]-w[1])*s, w[2]+(mid[2]-w[2])*s];
+    // ring plane = face plane ⇒ nucleon axis = outward face normal
+    const cen=[(VT[f.v[0]][0]+VT[f.v[1]][0]+VT[f.v[2]][0])/3,
+               (VT[f.v[0]][1]+VT[f.v[1]][1]+VT[f.v[2]][1])/3,
+               (VT[f.v[0]][2]+VT[f.v[1]][2]+VT[f.v[2]][2])/3];
+    alphaIds.push(push(c,f.t,'alpha',0,vnorm(cen),0));
+  }
+  // the spec's contact graph: each p ring meets each n ring at their shared tangent edge
+  bond(alphaIds[0],alphaIds[2]); bond(alphaIds[0],alphaIds[3]);
+  bond(alphaIds[1],alphaIds[2]); bond(alphaIds[1],alphaIds[3]);
+  nuc.alphaTetra=VT;                                     // rebuild3D draws the wireframe
+  const alphaOut=Math.max(...alphaIds.map(i=>Math.hypot(...nuc[i].pos)));
+
+  // ── deuteron tiers: radial rods (n in, p out), schedule capacities 6,12,12,20,30 ──
+  const CAP=[6,12,12,20,30,42,56];
   const PHI=(1+Math.sqrt(5))/2;
-  function shellDirs(m){
-    const V={
-      1:[[0,0,1]],
-      2:[[0,0,1],[0,0,-1]],
-      3:[[1,0,0],[-0.5,0.8660254,0],[-0.5,-0.8660254,0]],
-      4:[[1,1,1],[1,-1,-1],[-1,1,-1],[-1,-1,1]],
-      5:[[0,0,1],[0,0,-1],[1,0,0],[-0.5,0.8660254,0],[-0.5,-0.8660254,0]],
-      6:[[1,0,0],[-1,0,0],[0,1,0],[0,-1,0],[0,0,1],[0,0,-1]],
-      12:[[0,1,PHI],[0,-1,PHI],[0,1,-PHI],[0,-1,-PHI],[1,PHI,0],[-1,PHI,0],
-          [1,-PHI,0],[-1,-PHI,0],[PHI,0,1],[-PHI,0,1],[PHI,0,-1],[-PHI,0,-1]]
-    };
-    if(V[m]) return V[m].map(vnorm);
-    // Fibonacci sphere fallback (near-maximum spread for the in-between counts)
-    const out=[]; for(let i=0;i<m;i++){ const zz=1-(2*i+1)/m, r=Math.sqrt(Math.max(0,1-zz*zz)),
-      th=2*Math.PI*i/(PHI*PHI); out.push([r*Math.cos(th),r*Math.sin(th),zz]); }
+  const DIRS={
+    6:[[1,0,0],[-1,0,0],[0,1,0],[0,-1,0],[0,0,1],[0,0,-1]],
+    12:[[0,1,PHI],[0,-1,PHI],[0,1,-PHI],[0,-1,-PHI],[1,PHI,0],[-1,PHI,0],
+        [1,-PHI,0],[-1,-PHI,0],[PHI,0,1],[-PHI,0,1],[PHI,0,-1],[-PHI,0,-1]].map(vnorm)
+  };
+  function tierDirs(m,seed){                             // exact polyhedra where owned, else even spread
+    if(DIRS[m]) return DIRS[m];
+    const out=[]; for(let i=0;i<m;i++){ const zz=1-(2*i+1)/m, rr=Math.sqrt(Math.max(0,1-zz*zz)),
+      th=2*Math.PI*((i+(seed||0)*0.37)%m)/(PHI*PHI); out.push([rr*Math.cos(th),rr*Math.sin(th),zz]); }
     return out;
   }
-  const C=[[0,0,0]];                               // α core on the shared axis
-  let remaining=nSub-1, shell=0;
-  while(remaining>0){
-    const cap=(shell===0)?12:12+8*shell;           // shell capacities: 12, 20, 28, …
-    const m=Math.min(remaining,cap);
-    const rad=Dsub*(1+0.9*shell);
-    shellDirs(m).forEach(v=>C.push([v[0]*rad,v[1]*rad,v[2]*rad]));
-    remaining-=m; shell++;
-  }
-  const iR=dnn*KINTRA; const nuc=[]; let di=0,ti=0;
-  kinds.forEach((kind,si)=>{
-    const c=[C[si][0],C[si][1],C[si][2]];
-    const add=(v,r)=>[c[0]+v[0]*r,c[1]+v[1]*r,c[2]+v[2]*r];
-    const toC=p=>vnorm([c[0]-p[0],c[1]-p[1],c[2]-p[2]]);   // trefoil hole faces shared centre → interleave
-    if(kind==='alpha'){                                     // two ⟂ deuterons = tetrahedron
-      // interleave (Harvey 2026-07-03): neutron to proton, proton to neutron — the two
-      // perpendicular pairs are each a p–n deuteron (was p–p/n–n: a transcription slip).
-      // OPPOSITION (same day): He is a tetrahedral interleaving of POLES that rotate along
-      // the SHARED axis — trefoil axes lie along ±Z (p up, n down), not toward the centre;
-      // the complementary p/n spin senses then gear the poles against each other.
-      const tv=[[1,1,1],[1,-1,-1],[-1,1,-1],[-1,-1,1]].map(vnorm), ty=['p','n','p','n'];
-      tv.forEach((v,k)=>{const pos=add(v,iR);
-        nuc.push({pos,type:ty[k],group:'alpha',sub:0,axis:[0,0,ty[k]==='p'?1:-1]});});
-    }else if(kind==='deuteron'){                            // one proton + one shared-electron neutron
-      const th=si*2.399963, ax=vnorm([Math.cos(th),Math.sin(th)*0.8,Math.sin(th*1.7)]);
-      const p1=add(ax,iR),p2=add(ax,-iR);
-      nuc.push({pos:p1,type:'p',group:'deuteron',sub:di,axis:toC(p1)});
-      nuc.push({pos:p2,type:'n',group:'deuteron',sub:di,axis:toC(p2)}); di++;
-    }else{                                                  // triton: 1p + 2n interleaved triangle
-      const th=si*2.399963, e1=vnorm([Math.cos(th),0,Math.sin(th)]), e2=vnorm([Math.sin(th)*0.3,1,Math.cos(th)*0.3]);
-      const tri=[[0,1],[0.866,-0.5],[-0.866,-0.5]], ty=['p','n','n'];
-      tri.forEach((uv,k)=>{const v=vnorm([e1[0]*uv[0]+e2[0]*uv[1],e1[1]*uv[0]+e2[1]*uv[1],e1[2]*uv[0]+e2[2]*uv[1]]);
-        const pos=add(v,iR);nuc.push({pos,type:ty[k],group:'triton',sub:ti,axis:toC(pos)});}); ti++;
+  let rTier=alphaOut+D*1.05, left=nd, tierIdx=0, dSub=0;
+  let lastP=[];                                          // outer-p ids of the current tier
+  while(left>0){
+    const m=Math.min(left,CAP[Math.min(tierIdx,CAP.length-1)]);
+    const dirs=tierDirs(m,tierIdx);
+    const newP=[];
+    for(const v of dirs){
+      const nIn =push([v[0]*(rTier-D/2),v[1]*(rTier-D/2),v[2]*(rTier-D/2)],'n','deuteron',dSub,[ v[0], v[1], v[2]],tierIdx+1);
+      const pOut=push([v[0]*(rTier+D/2),v[1]*(rTier+D/2),v[2]*(rTier+D/2)],'p','deuteron',dSub,[-v[0],-v[1],-v[2]],tierIdx+1);
+      bond(nIn,pOut); newP.push(pOut);
+      // rest the rod on the layer below: nearest inner-boundary p (or the α ring)
+      let bi=-1,bd_=1e18;
+      const rest=tierIdx===0?alphaIds.filter(i=>nuc[i].type==='p'):lastP;
+      for(const i of rest){ const q=nuc[i].pos,
+        dd=Math.hypot(q[0]-nuc[nIn].pos[0],q[1]-nuc[nIn].pos[1],q[2]-nuc[nIn].pos[2]);
+        if(dd<bd_){bd_=dd;bi=i;} }
+      if(bi>=0&&bd_<=1.6*D) bond(bi,nIn);
+      dSub++;
     }
-  });
+    lastP=newP; left-=m; tierIdx++; rTier+=2*D;
+  }
+  const rBelt0=(nd>0?rTier-2*D:alphaOut)+1.6*D;
+
+  // ── triton belts: coherent radial n–p–n rods, antipodal pairs on equators;
+  //    the lone odd rod seats inward on the pole (the mono-isotopic grip) ──
+  const BELT_PAIRS=[4,5,6,7,8,9];
+  let tLeft=nt, tSub=0, beltIdx=0, rB=rBelt0;
+  const beltPlane=b=>b%3===0?['x','y']:b%3===1?['x','z']:['y','z'];
+  const rodAt=(dir,rc,sub,tier)=>{
+    const n1=push([dir[0]*(rc-D),dir[1]*(rc-D),dir[2]*(rc-D)],'n','triton',sub,[ dir[0], dir[1], dir[2]],tier);
+    const p =push([dir[0]* rc,   dir[1]* rc,   dir[2]* rc   ],'p','triton',sub,[-dir[0],-dir[1],-dir[2]],tier);
+    const n2=push([dir[0]*(rc+D),dir[1]*(rc+D),dir[2]*(rc+D)],'n','triton',sub,[-dir[0],-dir[1],-dir[2]],tier);
+    bond(n1,p); bond(p,n2);
+    // rest the rod's inner n on the nearest outer p below
+    let bi=-1,bd_=1e18;
+    const rest=lastP.length?lastP:alphaIds.filter(i=>nuc[i].type==='p');
+    for(const i of rest){ const q=nuc[i].pos,
+      dd=Math.hypot(q[0]-nuc[n1].pos[0],q[1]-nuc[n1].pos[1],q[2]-nuc[n1].pos[2]);
+      if(dd<bd_){bd_=dd;bi=i;} }
+    if(bi>=0&&bd_<=1.8*D) bond(bi,n1);
+    return [n1,p,n2];
+  };
+  if(tLeft%2===1){ rodAt([0,0,1],rB,tSub++,tierIdx+1); tLeft--; }   // the lone rod, poleward-in
+  while(tLeft>0){
+    const pairs=Math.min(tLeft/2,BELT_PAIRS[Math.min(beltIdx,BELT_PAIRS.length-1)]);
+    const [u1,u2]=beltPlane(beltIdx);
+    for(let k=0;k<pairs;k++){
+      const th=Math.PI*k/pairs + beltIdx*0.35;
+      const dir=[0,0,0];
+      const ax1={x:0,y:1,z:2}[u1], ax2={x:0,y:1,z:2}[u2];
+      dir[ax1]=Math.cos(th); dir[ax2]=Math.sin(th);
+      rodAt(dir,rB,tSub++,tierIdx+1+beltIdx);
+      rodAt([-dir[0],-dir[1],-dir[2]],rB,tSub++,tierIdx+1+beltIdx);   // the antipodal partner
+      tLeft-=2;
+      if(tLeft<=0)break;
+    }
+    beltIdx++; rB+=2.2*D;
+  }
   return nuc;
 }
 
@@ -484,7 +543,7 @@ function calibrate(dnn, coul){
 <script type="module">
 // ---------- state ----------
 const state = {
-  iso: ISO.find(e=>e.sym==='Fe'&&e.A===56) || ISO[0],
+  iso: ISO.find(e=>e.sym==='He'&&e.A===4) || ISO[0],   // start with Helium — the tetrahedral counter-rotating shell
   dnn: 1.45*R_p, coul: 0.30, coulOn:true,
   lightAz: -38, bright: 2.4,
   reveal: 0,            // subunits shown; set to full on select
@@ -642,6 +701,34 @@ let threeOK=false;
    windings, each a tube ≈2.9e-21 m wide (R_excl_e). 1836 × V_disp_e = the proton's
    displaced volume (Law IV) → m_p/m_e. The NP_PLY plies here are only a renderable
    stand-in for that 1836-electron thread (the real one is ~1400× finer than R_p). */
+function makeRingBand(THREE, mergeGeometries){
+  // Harvey 2026-07-30: in the mesh the proton is a RING — wedding-band proportions
+  // (wide and flat: diameter ≫ band width ≫ thickness) — represented as FOUR very
+  // skinny tubes twisting around each other as they run the band. The free proton's
+  // 6π trefoil tightens into this band at 1.83c; the four strands keep the weave
+  // visible. A neutron is the same band with its electron seated inside at the node.
+  const R=1.0, aRad=0.055, bAx=0.17, TW=3, SEG=180, TUBE=0.045;
+  const TINT=[[1,1,1],[0.80,0.80,0.80],[0.92,0.92,0.92],[0.70,0.70,0.70]];
+  const parts=[];
+  for(let k=0;k<4;k++){
+    const pts=[];
+    for(let i=0;i<=SEG;i++){
+      const th=i/SEG*2*Math.PI, ph=TW*th+k*Math.PI/2;
+      const rr=R+aRad*Math.cos(ph);
+      pts.push(new THREE.Vector3(rr*Math.cos(th), rr*Math.sin(th), bAx*Math.sin(ph)));
+    }
+    const g=new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts,true),SEG,TUBE,6,true);
+    const cols=new Float32Array(g.attributes.position.count*3),[r,gg,b]=TINT[k];
+    for(let v=0;v<g.attributes.position.count;v++){cols[v*3]=r;cols[v*3+1]=gg;cols[v*3+2]=b;}
+    g.setAttribute('color',new THREE.BufferAttribute(cols,3));
+    parts.push(g);
+  }
+  const merged=mergeGeometries(parts,false);
+  parts.forEach(g=>g.dispose&&g.dispose());
+  const maxr=R+aRad+TUBE;
+  merged.scale(1/maxr,1/maxr,1/maxr); merged.computeVertexNormals();
+  return merged;
+}
 function makeTrefoilRope(THREE, mergeGeometries){
   // v3 — ROPE OF SEPARATE STRANDS (Harvey's wire model, 2026-07-03).
   // v2's single tube with brightness banding still read as "the same single line".
@@ -713,23 +800,25 @@ async function initThree(){
     const {OrbitControls}=await import('three/addons/controls/OrbitControls.js');
     const {mergeGeometries}=await import('three/addons/utils/BufferGeometryUtils.js');
     const canvas=$('scene');
-    scene=new THREE.Scene(); scene.background=new THREE.Color(0x0d1119); scene.fog=new THREE.Fog(0x0d1119,28,64);
+    // fog pushed FAR out (was 28→64 while the orbit reached 60 — zooming out sank the
+    // nucleus into shadow); it now only softens the extreme distance, never the subject.
+    scene=new THREE.Scene(); scene.background=new THREE.Color(0x0d1119); scene.fog=new THREE.Fog(0x0d1119,90,220);
     camera=new THREE.PerspectiveCamera(46,innerWidth/innerHeight,0.1,300); camera.position.set(1,4,26);
     renderer=new THREE.WebGLRenderer({canvas,antialias:true});
     renderer.setPixelRatio(Math.min(devicePixelRatio,2)); renderer.setSize(innerWidth,innerHeight);
     renderer.shadowMap.enabled=true; renderer.shadowMap.type=THREE.PCFSoftShadowMap;
     controls=new OrbitControls(camera,renderer.domElement);
-    controls.enableDamping=true; controls.dampingFactor=0.07; controls.minDistance=10; controls.maxDistance=60;
+    controls.enableDamping=true; controls.dampingFactor=0.07; controls.minDistance=10; controls.maxDistance=85;
     controls.target.set(0,0,0);
 
-    scene.add(new THREE.HemisphereLight(0x9fadc9,0x1a1f2b,0.95));
+    scene.add(new THREE.HemisphereLight(0xaebde0,0x2b3140,1.30));
     dl=new THREE.DirectionalLight(0xfff2dc,state.bright);
     dl.castShadow=true; dl.shadow.mapSize.set(2048,2048);
     const sc=dl.shadow.camera; sc.left=-18;sc.right=18;sc.top=18;sc.bottom=-18;sc.near=1;sc.far=80;
     dl.shadow.bias=-0.0006;
     scene.add(dl); scene.add(dl.target);
-    // subtle fill from front-right so the nucleus reads
-    const fill=new THREE.DirectionalLight(0x7d9bd4,0.75); fill.position.set(8,2,10); scene.add(fill);
+    // fill from front-right so the nucleus reads at any zoom
+    const fill=new THREE.DirectionalLight(0x7d9bd4,0.95); fill.position.set(8,2,10); scene.add(fill);
 
     // back wall (low-right-background) — receives the shadow
     const wallMat=new THREE.MeshStandardMaterial({color:0x232b3d,roughness:0.96,metalness:0});
@@ -741,7 +830,7 @@ async function initThree(){
 
     // shared geometry — the proton is a thin COILED ROPE on the 6π trefoil path,
     // not a fat tube: fine plied fibres, 6 arcs weaving alternately under/over.
-    knotGeo=makeTrefoilRope(THREE,mergeGeometries);
+    knotGeo=makeRingBand(THREE,mergeGeometries);   // the meshed proton presents as the band (trefoil builder retained above)
     sphGeo=new THREE.SphereGeometry(1,20,16);
     nuHelixGeo=makeNeutrinoHelix(THREE);
 
@@ -768,6 +857,7 @@ async function initThree(){
 }
 
 const SCENE=1.9;  // fm → scene units
+let meshStats=null;    // contact-mesh tally rebuilt each rebuild3D (like-like is structurally 0)
 let spinReg=null;      // per-nucleon spin registry rebuilt each rebuild3D; consumed by animate()
 let torMatP=null, torMatN=null;
 function makeLabelSprite(text){
@@ -804,7 +894,9 @@ function rebuild3D(){
     roughness:0.55,metalness:0.2,emissive:new THREE.Color(state.colP).multiplyScalar(0.2),depthWrite:false});
   torMatN=new THREE.MeshStandardMaterial({color:new THREE.Color(state.colN),transparent:true,opacity:0,
     roughness:0.55,metalness:0.2,emissive:new THREE.Color(state.colN).multiplyScalar(0.2),depthWrite:false});
-  const torGeo=new THREE.TorusGeometry(0.66,0.24,10,48);
+  // the spun time-average: a thin solid band AT the strand radius — the ring the
+  // four twisting strands blur into at speed, never a fat flat disc
+  const torGeo=new THREE.TorusGeometry(0.86,0.13,12,64);
   const toriP=new THREE.InstancedMesh(torGeo,torMatP,Math.max(1,nP));
   const toriN=new THREE.InstancedMesh(torGeo,torMatN,Math.max(1,nN));
   toriP.castShadow=toriN.castShadow=false;
@@ -821,12 +913,50 @@ function rebuild3D(){
     m.compose(p,q,sk);                             // interleaved trefoil
     // complementary rotations (Harvey): proton spins +, neutron spins − about its own axis
     const reg = n.type==='p' ? spinReg.P : spinReg.N;
-    reg.items.push({pos:p.clone(), quat:q.clone(), sense:n.type==='p'?+1:-1, slot:(n.type==='p'?ip:in_)});
+    reg.items.push({pos:p.clone(), quat:q.clone(), sense:n.type==='p'?+1:-1, slot:(n.type==='p'?ip:in_), tier:n.tier||0});
     if(n.type==='p'){ knotsP.setMatrixAt(ip,m); toriP.setMatrixAt(ip,m); ip++; }
     else            { knotsN.setMatrixAt(in_,m); toriN.setMatrixAt(in_,m); in_++; }
   });
   bound.instanceMatrix.needsUpdate=true;
   nucleusGroup.add(bound);
+
+  // ---- THE MESH (canon 2026-07-30): every lattice contact drawn; parity makes
+  // every one p↔n, so with complementary spins every line is a tractioned gear
+  // contact. The readout counts them and reports the like-like total — which is
+  // structurally ZERO. ----
+  {
+    // the EXPLICIT engineered contact list (nuc.contacts, by id) — centre distance is
+    // not the criterion: the α rings sit close but never touch their own kind.
+    const full=state.nuc, pts=[]; let nC=0, like=0;
+    if(full&&full.contacts){
+      const vis=new Set(shown.map(n=>n.id));
+      for(const [ci,cj] of full.contacts){
+        if(!vis.has(ci)||!vis.has(cj)) continue;
+        const a=full[ci],b=full[cj]; nC++; if(a.type===b.type)like++;
+        pts.push(a.pos[0]*SCENE,a.pos[1]*SCENE,a.pos[2]*SCENE,b.pos[0]*SCENE,b.pos[1]*SCENE,b.pos[2]*SCENE);
+      }
+    }
+    if(pts.length){
+      const lg=new THREE.BufferGeometry();
+      lg.setAttribute('position',new THREE.BufferAttribute(new Float32Array(pts),3));
+      nucleusGroup.add(new THREE.LineSegments(lg,
+        new THREE.LineBasicMaterial({color:0x44eebb,transparent:true,opacity:0.42})));
+    }
+    meshStats={contacts:nC,like};
+    const el=document.getElementById('meshStat');
+    if(el) el.textContent = nC ? `mesh ${nC} contacts · like-like ${like} · traction ${like?'BROKEN':'100%'} · frustration 0`
+                               : 'mesh —';
+  }
+  // the α scaffold: the spec's wireframe tetrahedron
+  if(state.nuc&&state.nuc.alphaTetra&&shown.some(n=>n.group==='alpha')){
+    const V=state.nuc.alphaTetra, E=[[0,1],[0,2],[0,3],[1,2],[1,3],[2,3]];
+    const tp=[]; for(const [i,j] of E) tp.push(
+      V[i][0]*SCENE,V[i][1]*SCENE,V[i][2]*SCENE, V[j][0]*SCENE,V[j][1]*SCENE,V[j][2]*SCENE);
+    const tg=new THREE.BufferGeometry();
+    tg.setAttribute('position',new THREE.BufferAttribute(new Float32Array(tp),3));
+    nucleusGroup.add(new THREE.LineSegments(tg,
+      new THREE.LineBasicMaterial({color:0xd4a05c,transparent:true,opacity:0.55})));
+  }
   if(state.showKnots){ knotsP.instanceMatrix.needsUpdate=true; knotsN.instanceMatrix.needsUpdate=true;
     nucleusGroup.add(knotsP); nucleusGroup.add(knotsN); }
   if(state.showTorus){ toriP.instanceMatrix.needsUpdate=true; toriN.instanceMatrix.needsUpdate=true;
@@ -966,7 +1096,9 @@ function animate(){
     for(const key of ['P','N']){
       const reg=spinReg[key]; if(!reg.items.length) continue;
       for(const it of reg.items){
-        qz.setFromAxisAngle(Z, it.sense*w*t);
+        // circulation differs per layer: each tier runs its own rate, fading outward
+        const wl=w*(1-0.10*Math.min(it.tier||0,6));
+        qz.setFromAxisAngle(Z, it.sense*wl*t);
         qq.copy(it.quat).multiply(qz);
         m.compose(it.pos,qq,spinReg.scale);
         reg.mesh.setMatrixAt(it.slot,m);
@@ -1060,6 +1192,21 @@ function drawChirp(){
     sctx.fillStyle = on ? (k===1?'rgba(192,96,224,.92)':k<=1+state.iso.nd?'rgba(122,180,224,.88)':'rgba(255,208,128,.88)')
                         : 'rgba(96,96,128,.32)';
     sctx.fillRect((k-1)*bw+0.4, H-3-h, Math.max(0.8,bw-0.8), h);
+  }
+  // closure ticks (canon 2026-07-30): the neutron ledger N = 2 + d + 2t crossing a
+  // magic number as the subunits lock in — the shell schedule read straight off the build.
+  const MAGIC=[2,8,20,28,50,82,126];
+  sctx.strokeStyle='rgba(68,238,187,.85)'; sctx.fillStyle='rgba(68,238,187,.85)';
+  sctx.font='8px monospace'; sctx.lineWidth=1;
+  for(let k=1;k<=n;k++){
+    const d=Math.min(k-1,state.iso.nd), t=Math.max(0,k-1-state.iso.nd);
+    const Nled=2+d+2*t, dPrev=Math.min(k-2,state.iso.nd), tPrev=Math.max(0,k-2-state.iso.nd);
+    const NPrev=k===1?0:2+dPrev+2*tPrev;
+    for(const M of MAGIC) if(Nled>=M && NPrev<M){
+      const X=(k-0.5)*bw;
+      sctx.beginPath(); sctx.moveTo(X,2); sctx.lineTo(X,9); sctx.stroke();
+      sctx.fillText(String(M),X+2,8);
+    }
   }
   const x=state.reveal*bw;
   sctx.strokeStyle='rgba(68,238,187,.95)'; sctx.lineWidth=1.3;
