@@ -313,8 +313,25 @@ footer .by{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing
       var c=el('circle',{cx:hx,cy:hy,r:10,fill:'#f3f0e9',stroke:'#c9c3b4','stroke-width':1});
       G.push({n:c,hx:hx,hy:hy,x:hx,y:hy}); svg.appendChild(c);}
     var knot=el('g',{});
-    knot.appendChild(el('path',{d:'M0,-50 C-32,-15 32,-15 0,45 C-32,-15 32,-15 0,-50',fill:'none',stroke:'#1c1e20','stroke-width':2.6}));
-    knot.appendChild(el('path',{d:'M-36,3 C0,-31 0,29 36,3',fill:'none',stroke:'#1c1e20','stroke-width':2.6}));
+    // the REAL trefoil (x=sin t+2sin 2t, y=cos t−2cos 2t, z=−sin 3t): three
+    // crossings woven over–under. The old two-bezier squiggle was not a knot.
+    (function(){
+      var halo=(function(){var e=svg.parentElement;
+        while(e&&getComputedStyle(e).backgroundColor==='rgba(0, 0, 0, 0)')e=e.parentElement;
+        return e?getComputedStyle(e).backgroundColor:'#f5f2ea';})();
+      var P=[],N=200,i;
+      for(i=0;i<=N;i++){var t=i/N*Math.PI*2;
+        P.push([(Math.sin(t)+2*Math.sin(2*t))*17,(Math.cos(t)-2*Math.cos(2*t))*15.5,-Math.sin(3*t)]);}
+      var runs=[],cur=null;
+      for(i=0;i<P.length;i++){var ov=P[i][2]>=0;
+        if(!cur||cur.ov!==ov){cur={ov:ov,p:[]};runs.push(cur);}
+        cur.p.push(P[i]);
+        if(i<P.length-1&&(P[i+1][2]>=0)!==ov)cur.p.push(P[i+1]);}
+      function dOf(ps){var d='',j;for(j=0;j<ps.length;j++)d+=(j?'L':'M')+ps[j][0].toFixed(1)+' '+ps[j][1].toFixed(1)+' ';return d;}
+      function pass(ov,st,w){var j;for(j=0;j<runs.length;j++)if(runs[j].ov===ov)
+        knot.appendChild(el('path',{d:dOf(runs[j].p),fill:'none',stroke:st,'stroke-width':w,'stroke-linecap':'round'}));}
+      pass(false,'#1c1e20',2.6); pass(true,halo,7); pass(true,'#1c1e20',2.6);
+    })();
     knot.appendChild(el('circle',{cx:0,cy:0,r:58,fill:'none',stroke:'#8a6d1f','stroke-width':1,'stroke-dasharray':'3 4'}));
     svg.appendChild(knot);
     svg.appendChild(txt(null,{x:160,y:200,'text-anchor':'middle','class':'lab2'},'the medium reorganises around it — like a bubble through water'));

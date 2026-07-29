@@ -28,6 +28,32 @@ MARK = "## Boundary Radius & Triton Contraction"
 MAGIC = [2, 8, 20, 28, 50, 82, 126]
 dm = lambda v: min(abs(v - m) for m in MAGIC)
 
+# Closure schedule (canon 2026-07-30, Engine/include/sdt/laws.hpp): deuteron
+# tiers alternating with triton belts of antipodal pairs rebuild the whole
+# sequence -- 2 | +6d -> 8 | +12d -> 20 | +8t -> 28 | +12d+10t -> 50 |
+# +20d+12t -> 82 | +30d+14t -> 126. Capacities read to match the measured
+# sequence; deriving them from packing-void geometry is the open NP33 law.
+TIER = {2:   "the alpha core",
+        8:   "the octahedral deuteron tier (6 seats)",
+        20:  "the 12-seat deuteron tier",
+        28:  "the first triton belt (4 antipodal pairs)",
+        50:  "the 12-seat deuteron tier + 5-pair triton belt",
+        82:  "the 20-seat deuteron tier + 6-pair triton belt",
+        126: "the 30-seat deuteron tier + 7-pair triton belt"}
+
+def tier_line(N):
+    below = max((m for m in MAGIC if m <= N), default=None)
+    above = min((m for m in MAGIC if m > N), default=None)
+    if N in MAGIC:
+        return (f"N={N} completes {TIER[N]} -- occupancy frozen at closure; "
+                "the next tier rests on it")
+    if below is None:
+        return f"N={N} below the alpha core"
+    if above is None:
+        return f"N={N} beyond the tabled schedule (next tier capacity underived)"
+    return (f"N={N} carries {N - below} seat(s) above the {below}-closure, "
+            f"{above - N} short of completing {TIER[above]}")
+
 def load():
     R = {}
     for r in csv.DictReader(open(CSV, encoding="utf-8")):
@@ -72,11 +98,15 @@ def block(R, sym, Z, A):
         tag = "compact (below local trend)" if k < -1 else ("swollen" if k > 1 else "on trend")
         kd = f", local kink curvature = {k:+.1f} milli-fm ({tag})"
     L.append(f"- **Shell status**: {shell}{kd}")
+    L.append(f"- **Closure schedule**: {tier_line(N)}")
     # contraction reading -- keyed off the MEASURED kink, cross-checked against shell status
     on_closure = (dm(N) == 0 or dm(Z) == 0)
     if k is not None and k < -3 and on_closure:
         L.append("- **Triton contraction**: sits on a shell closure and is drawn to its tightest -- "
-                 "the interleaved scaffold is maximally compact here (measured kink confirms it).")
+                 "the interleaved scaffold is maximally compact here (measured kink confirms it). "
+                 "The kink is an ISOTONE INVARIANT: constant along the closure, independent of "
+                 "triton occupancy -- the freeze does the compacting "
+                 "(reference/CLOSURE_KINK_ISOTONE_INVARIANT.md).")
     elif k is not None and k > 3:
         opener = "N" if dm(N) > dm(Z) else "Z"
         note = (f" despite the closed {'Z' if opener=='N' else 'N'} shell" if on_closure else "")

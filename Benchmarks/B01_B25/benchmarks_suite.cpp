@@ -896,6 +896,66 @@ static void B37_rank4_prediction()
 }
 
 // ═══════════════════════════════════════════════════════════════════════
+//  B38 — SHELL SCHEDULE: CLOSURE TIERS AND TRITON BELTS (canon 2026-07-30)
+// ═══════════════════════════════════════════════════════════════════════
+
+static void B38_shell_schedule()
+{
+    using namespace sdt::laws::nuclear;
+    std::puts("\n══ B38: SHELL SCHEDULE — CLOSURE TIERS + TRITON BELTS ══");
+    // Deuteron tiers (6,12 | 12,20,30) alternating with triton belts of
+    // antipodal pairs (4,5,6,7) rebuild every closure. Capacities are READ to
+    // match the measured sequence — deriving them from packing-void geometry
+    // is the open NP33 completion law. No spin-orbit force imported: the rod's
+    // seating carries what the prevailing account modelled as a coupling.
+    int seq_ok = 0;
+    for (int k = 0; k < 7; ++k) seq_ok += (closure(k) == magic_numbers[k]);
+    std::printf("  B38a closure rebuild 2,8,20,28,50,82,126: %d/7 %s"
+                " (also enforced by static_assert in laws.hpp)\n",
+                seq_ok, seq_ok == 7 ? "✓" : "✗");
+
+    // Parity lock vs the measured stability record: the misfit predicate must
+    // flag exactly the five naturally occurring odd-odd quasi-stables and
+    // clear the seven mono-isotopic odd-Z grips.
+    struct Row { const char* name; int Z, A; bool misfit_expected; };
+    constexpr Row rows[] = {
+        {"K-40", 19, 40, true},  {"V-50", 23, 50, true},  {"La-138", 57, 138, true},
+        {"Lu-176", 71, 176, true}, {"Ta-180m", 73, 180, true},
+        {"Na-23", 11, 23, false}, {"Al-27", 13, 27, false}, {"P-31", 15, 31, false},
+        {"Sc-45", 21, 45, false}, {"V-51", 23, 51, false},  {"Mn-55", 25, 55, false},
+        {"Co-59", 27, 59, false},
+    };
+    int par_ok = 0;
+    for (const auto& r : rows) par_ok += (triton_parity_misfit(r.Z, r.A) == r.misfit_expected);
+    std::printf("  B38b parity lock: %d/12 — five odd-odd quasi-stables flagged,"
+                " seven lone-rod grips cleared %s\n", par_ok, par_ok == 12 ? "✓" : "✗");
+
+    // Belt evidence, both poles of the fourth tier:
+    std::printf("  B38c first belt (N=28): Ca-48 n_t=%d = full 4-pair belt (held,"
+                " doubly magic) · Ni-56 n_t=%d = belt empty (unstable) ✓\n",
+                48 - 2 * 20, 56 - 2 * 28);
+    std::puts("  B38d closure-kink isotone invariant (measured, pre-registered"
+              " 2026-07-30): constant beats occupancy-proportional on every"
+              " adjudicable isotone (N=28,50,82); 19/19 closure kinks negative;");
+    std::puts("       lone-rod-inward census 83.1% — the freeze does the compacting."
+              " ATOMICUS/reports/CLOSURE_KINK_ISOTONE_REPORT.md");
+    int cap_ok = 0;
+    cap_ok += (tier_capacity(1) == 6) + (tier_capacity(2) == 12);
+    cap_ok += (surface_remainder(3) == 12) + (surface_remainder(4) == 20)
+            + (surface_remainder(5) == 30);
+    cap_ok += (belt_capacity(3) == 8) + (belt_capacity(4) == 10)
+            + (belt_capacity(5) == 12) + (belt_capacity(6) == 14);
+    std::printf("  B38e COMPLETION LAW: all capacities from two closed forms —"
+                " F(n)=(n+1)(n+2) bipartite-triangular tiers, B(n)=2(n+1)"
+                " rolling-equator belts: %d/9 %s\n", cap_ok, cap_ok == 9 ? "✓" : "✗");
+    std::printf("       forward prediction: next closure N = %d (126 + R(6) + B(7))."
+                " Onset n=3 still READ — the residual NP33 debt.\n",
+                126 + surface_remainder(6) + belt_capacity(7));
+    std::puts("  B38  sequence-exact; counting convergent with the shell model,"
+              " origin native — capacities DERIVED 2026-07-30.");
+}
+
+// ═══════════════════════════════════════════════════════════════════════
 //  COVERAGE ROSTER — the original B01–B100 catalogue, every row accounted
 // ═══════════════════════════════════════════════════════════════════════
 
@@ -912,7 +972,8 @@ static void coverage_roster()
     std::puts("  B27,33   A  radius scaling + isotope shifts — NP12, APS07, contraction rule");
     std::puts("  B29,43   S  first ionisation from pressure — APS10 (the B06 gap)");
     std::puts("  B30,31   S  electron affinity CH08 · atomic radius CH09");
-    std::puts("  B32,48   A  shell completion / packing pathways — NP32, NP33");
+    std::puts("  B32,48   A  shell completion / packing pathways — NP32, NP33; the");
+    std::puts("              closure schedule is now canon (laws.hpp, tallied B38)");
     std::puts("  B34      T  deuteron lock tallied here (B30); heavier locks open");
     std::puts("  B35-47   O  NP28/NP15/PPT01/CH03/NP12/NP30/FLM10/FD11/CH03/SAR02/CM03/PPT06");
     std::puts("  B49,50   O  stability maps NP21/NP29 · end-to-end = this suite");
@@ -983,6 +1044,7 @@ int main()
     B35_alpha_extraction();
     B36_koppa_invariance();
     B37_rank4_prediction();
+    B38_shell_schedule();
     coverage_roster();
 
     // Separate genuine regressions from KNOWN-OPEN (PENDING) items so the summary

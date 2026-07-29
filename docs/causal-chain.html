@@ -892,20 +892,40 @@ function lab(x,y,s,anchor){var a={x:x,y:y};for(var k in LAB)a[k]=LAB[k];if(ancho
   render();
 })();
 
-/* L5 — the knot: turn the trefoil; its three lobes pass; the boundary holds at R_p */
+/* L5 — the knot: a REAL trefoil projection (x=sin t+2sin 2t, y=cos t−2cos 2t,
+   z=−sin 3t) — three crossings, drawn woven over–under; turn it by dragging */
 (function(){var s=fig('L5');if(!s)return;wipe(s,300,210);
   s.appendChild(el('circle',{cx:150,cy:105,r:78,fill:'none',stroke:'#8a6d1f','stroke-dasharray':'4 4'}));
   var g=el('g',{});s.appendChild(g);
   var seat=el('circle',{r:4.5,fill:'#a4552e'});s.appendChild(seat);
   s.appendChild(lab(248,105,'R_p'));
-  s.appendChild(lab(150,16,'turn the trefoil — three lobes, m₃ = 3k, a knot that cannot un-knot','middle'));
+  s.appendChild(lab(150,16,'turn the trefoil — three crossings, woven over–under: it cannot un-knot','middle'));
   var cap=lab(150,200,'the seat on the boundary runs at 1.83c — faster than the lattice relays','middle');s.appendChild(cap);
+  var halo=(function(){var e=s.closest('.link-sec');
+    return e?getComputedStyle(e).backgroundColor:'#faf8f4';})();
   var rot=0,seatA=0;
-  function path(rot){var d='',i;for(i=0;i<=140;i++){var t=i/140*Math.PI*2;
-    var r=34+16*Math.cos(3*t+rot),x=150+Math.cos(t)*r*1.55,y=105+Math.sin(t)*r*1.15;
-    d+=(i?'L':'M')+x.toFixed(1)+' '+y.toFixed(1)+' ';}return d+'Z';}
-  var tre=el('path',{d:path(0),fill:'none',stroke:'#1d1f21','stroke-width':2.5});g.appendChild(tre);
-  drag(s,function(p){rot=Math.atan2(p.y-105,p.x-150)*3;tre.setAttribute('d',path(rot));});
+  function pts(rot){var out=[],N=240,i;
+    for(i=0;i<=N;i++){var t=i/N*Math.PI*2;
+      var X=Math.sin(t)+2*Math.sin(2*t),Y=Math.cos(t)-2*Math.cos(2*t),Z=-Math.sin(3*t);
+      var xr=X*Math.cos(rot)-Y*Math.sin(rot),yr=X*Math.sin(rot)+Y*Math.cos(rot);
+      out.push([150+xr*24,105+yr*21,Z]);}
+    return out;}
+  function weave(rot){
+    while(g.firstChild)g.removeChild(g.firstChild);
+    var P=pts(rot),runs=[],cur=null,i;
+    for(i=0;i<P.length;i++){var ov=P[i][2]>=0;
+      if(!cur||cur.ov!==ov){cur={ov:ov,p:[]};runs.push(cur);}
+      cur.p.push(P[i]);
+      if(i<P.length-1&&(P[i+1][2]>=0)!==ov)cur.p.push(P[i+1]);}
+    function dOf(ps){var d='',j;for(j=0;j<ps.length;j++)d+=(j?'L':'M')+ps[j][0].toFixed(1)+' '+ps[j][1].toFixed(1)+' ';return d;}
+    function pass(ov,st,w){var j;for(j=0;j<runs.length;j++)if(runs[j].ov===ov)
+      g.appendChild(el('path',{d:dOf(runs[j].p),fill:'none',stroke:st,'stroke-width':w,'stroke-linecap':'round'}));}
+    pass(false,'#1d1f21',2.5);   // under strands
+    pass(true,halo,7);           // background halo carves the under-strand gaps
+    pass(true,'#1d1f21',2.5);    // over strands on top
+  }
+  weave(0);
+  drag(s,function(p){rot=Math.atan2(p.y-105,p.x-150);weave(rot);});
   (function tick(){seatA+=0.045;
     seat.setAttribute('cx',150+Math.cos(seatA)*78);seat.setAttribute('cy',105+Math.sin(seatA)*78);
     requestAnimationFrame(tick);})();

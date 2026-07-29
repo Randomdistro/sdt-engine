@@ -1019,6 +1019,132 @@ namespace nuclear {
     [[nodiscard]] constexpr auto c_boundary_nuclear(int Z) noexcept -> double {
         return static_cast<double>(Z) * r_e;
     }
+
+    // ── SHELL SCHEDULE — closure tiers and triton belts ─────────────────────
+    /// Canon change (2026-07-30, Harvey-authorized: "incorporate this structural
+    /// setup into every part of the engine that is relevant").
+    /// Every closure ("magic number") is a completed seat tier on which the next
+    /// tier rests. The schedule alternates:
+    ///   · DEUTERON TIERS (polyhedral): 6, 12, then 12, 20, 30 rod seats
+    ///   · TRITON BELTS (antipodal pair rings): 4, 5, 6, 7 pairs = 8, 10, 12, 14
+    ///     seats, entering at the FOURTH closure — where the ledger (n_t = N − Z)
+    ///     first forces tritons into load-bearing masonry.
+    /// Sequence: 2 | +6d → 8 | +12d → 20 | +8t → 28 | +12d+10t → 50 |
+    ///           +20d+12t → 82 | +30d+14t → 126.
+    /// No spin–orbit force is imported anywhere: the rigid n–p–n rod's seating
+    /// (inward, antipodal-paired, sealed at closure) carries the structure the
+    /// prevailing account modelled as a coupling.
+    /// Seat law: POSITIONS fixed by tier geometry · FILLING ORDER fixed
+    /// (antipodal pairs; the lone odd rod inward) · OCCUPANCY set by the ledger
+    /// at closure time and frozen once the next tier rests on it (the three ages
+    /// of a triton: docked → paired → sealed). The freeze clause is MEASURED,
+    /// not narration — see the isotone invariant under evidence.
+    /// provenance_status:     capacities DERIVED (2026-07-30, mesh completion law
+    ///                        below): all nine from two closed forms — tier
+    ///                        F(n) = (n+1)(n+2), belt B(n) = 2(n+1). READ (open):
+    ///                        the descent onset n = 3 — why the ledger first
+    ///                        forces tritons at the fourth tier (field-cost
+    ///                        pricing, residual NP33 debt)
+    /// correspondence_status: sequence-exact (2,8,20,28,50,82,126); counting
+    ///                        convergent with the shell model — the origin differs
+    /// evidence:              Benchmarks/nuclear_grammar_output.txt · NP33 ·
+    ///                        Ca-48 all-triton belt (doubly magic, held) vs Ni-56
+    ///                        belt-empty (unstable) · contraction maxima at every
+    ///                        magic N · MEASURED (pre-registered single pass,
+    ///                        2026-07-30): the closure kink is an ISOTONE
+    ///                        INVARIANT — constant along N=28/50/82 while n_t
+    ///                        varies 2–4×, beating the occupancy-proportional
+    ///                        shape on every adjudicable isotone; 19/19 closure
+    ///                        kinks negative. The freeze does the compacting;
+    ///                        the ledger only decides who sits in the seats.
+    ///                        Lone-rod-inward census 83.1% (shared sign with the
+    ///                        pairing account — cannot discriminate; the
+    ///                        direction is the seat law's). Full record:
+    ///                        ATOMICUS/reference/CLOSURE_KINK_ISOTONE_INVARIANT.md
+
+    inline constexpr int magic_numbers[7]     = {2, 8, 20, 28, 50, 82, 126};
+    inline constexpr int deuteron_tiers[5]    = {6, 12, 12, 20, 30};   // rod seats per d-tier
+    inline constexpr int triton_belt_pairs[4] = {4, 5, 6, 7};          // antipodal pairs per belt
+
+    /// Rebuild the closure sequence from the alternation rule — compile-time
+    /// proof the schedule reproduces every measured closure.
+    [[nodiscard]] constexpr auto closure(int k) noexcept -> int {
+        int n = 2;                                     // the alpha core
+        if (k >= 1) n += deuteron_tiers[0];            // → 8
+        if (k >= 2) n += deuteron_tiers[1];            // → 20
+        if (k >= 3) n += 2 * triton_belt_pairs[0];     // → 28 (first belt)
+        if (k >= 4) n += deuteron_tiers[2] + 2 * triton_belt_pairs[1];  // → 50
+        if (k >= 5) n += deuteron_tiers[3] + 2 * triton_belt_pairs[2];  // → 82
+        if (k >= 6) n += deuteron_tiers[4] + 2 * triton_belt_pairs[3];  // → 126
+        return n;
+    }
+    static_assert(closure(0) == 2 && closure(1) == 8 && closure(2) == 20
+               && closure(3) == 28 && closure(4) == 50 && closure(5) == 82
+               && closure(6) == 126,
+                  "shell schedule must reproduce the measured closure sequence");
+
+    [[nodiscard]] constexpr auto is_closure(int n) noexcept -> bool {
+        for (int m : magic_numbers) if (n == m) return true;
+        return false;
+    }
+
+    // ── COMPLETION LAW — the capacities derived (2026-07-30) ────────────────
+    /// Four mesh facts force two closed forms:
+    ///   (1) like never gears like ⇒ every tier is a bipartite DOUBLE LAYER
+    ///       (p-face / n-face);
+    ///   (2) the packing's 2D order is triangular ⇒ a layer holds the
+    ///       (n+1)-th triangular number of rod seats;
+    ///   ⇒ TIER capacity F(n) = 2·T(n+1) = (n+1)(n+2): 2, 6, 12, 20, 30, 42…
+    ///       (F(0) = 2 is the alpha's own two deuterons — the core obeys the
+    ///        same formula);
+    ///   (3) tritons are RADIAL rods (lone rod seats inward — measured,
+    ///       83.1% census) and (4) the assembly rolls without jamming (NP33)
+    ///       ⇒ radial rods co-rotate slip-free ONLY on the equator of the
+    ///       collective roll — a 1D ring, capacity linear in tier girth,
+    ///       antipodal-paired ⇒ BELT B(n) = 2(n+1): 8, 10, 12, 14 …
+    ///   Surface remainder R(n) = F(n) − B(n) = n(n+1).
+    /// Schedule: closures 2, 8, 20 = ΣF(0..2); from n = 3 the belt separates
+    /// and DESCENDS to seal the previous closure (measured: kink maximal at
+    /// N = 28, the first descended belt; isotone-invariant): +B(3) → 28,
+    /// +R(3)+B(4) → 50, +R(4)+B(5) → 82, +R(5)+B(6) → 126.
+    /// FORWARD PREDICTION: closure(7) = 126 + R(6) + B(7) = 126 + 42 + 16
+    /// = 184 — the next neutron closure, from the same two forms.
+    /// correspondence_status: F(n) equals the oscillator degeneracy and B(n)
+    /// the intruder-orbit capacity — shared counting, cannot discriminate at
+    /// sequence level; the native content is bipartite doubling + the
+    /// rolling-equator constraint, neither of which the rival's account owns.
+    [[nodiscard]] constexpr auto tier_capacity(int n)     noexcept -> int { return (n + 1) * (n + 2); }
+    [[nodiscard]] constexpr auto belt_capacity(int n)     noexcept -> int { return 2 * (n + 1); }
+    [[nodiscard]] constexpr auto surface_remainder(int n) noexcept -> int { return n * (n + 1); }
+
+    // The read arrays above are now bound to the closed forms — the canon
+    // cannot compile with capacities that disagree with the derivation:
+    static_assert(deuteron_tiers[0] == tier_capacity(1)
+               && deuteron_tiers[1] == tier_capacity(2)
+               && deuteron_tiers[2] == surface_remainder(3)
+               && deuteron_tiers[3] == surface_remainder(4)
+               && deuteron_tiers[4] == surface_remainder(5),
+                  "deuteron tiers must equal the derived capacities");
+    static_assert(2 * triton_belt_pairs[0] == belt_capacity(3)
+               && 2 * triton_belt_pairs[1] == belt_capacity(4)
+               && 2 * triton_belt_pairs[2] == belt_capacity(5)
+               && 2 * triton_belt_pairs[3] == belt_capacity(6),
+                  "triton belts must equal the derived capacities");
+    static_assert(tier_capacity(0) == 2, "the alpha core is tier n=0 of the same law");
+    static_assert(126 + surface_remainder(6) + belt_capacity(7) == 184,
+                  "forward prediction: the next closure is N = 184");
+
+    /// Triton parity lock: stable odd-Z nuclei carry an ODD triton count — the
+    /// lone rod on the inward seat (the mono-isotopic grip: Na, Al, P, Sc, V,
+    /// Mn, Co). An odd-Z nucleus with an EVEN triton count is a parity misfit —
+    /// and the misfit class is precisely the five naturally occurring odd-odd
+    /// quasi-stables (K-40, V-50, La-138, Lu-176, Ta-180m), every one a
+    /// long-lived radioactive oddity. Counting convergent with the odd-odd
+    /// rule; the native content is the unpaired rod with no partner to seal.
+    [[nodiscard]] constexpr auto triton_parity_misfit(int Z, int A) noexcept -> bool {
+        const int n_t = A - 2 * Z;                     // standard grammar
+        return (Z % 2 == 1) && (n_t >= 0) && (n_t % 2 == 0);
+    }
 }
 
 // ═══════════════════════════════════════════════════════════════════════

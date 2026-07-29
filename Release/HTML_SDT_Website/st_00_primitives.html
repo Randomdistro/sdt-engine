@@ -260,12 +260,33 @@
   function loopPath(cx,jit){var d='';for(var i=0;i<=90;i++){var t=i/90*Math.PI*2;
     var r=42+jit*10*Math.sin(7*t+jit*9);
     d+=(i?'L':'M')+(cx+Math.cos(t)*r)+' '+(90+Math.sin(t)*r*0.8)+' ';}return d+'Z';}
-  function trePath(cx,jit){var d='';for(var i=0;i<=140;i++){var t=i/140*Math.PI*2;
-    var r=26+13*Math.cos(3*t)+jit*6*Math.sin(9*t+jit*7);
-    d+=(i?'L':'M')+(cx+Math.cos(t)*r*1.45)+' '+(90+Math.sin(t)*r*1.1)+' ';}return d+'Z';}
+  // the REAL trefoil projection (x=sin t+2sin 2t, y=cos t−2cos 2t, z=−sin 3t):
+  // three crossings, drawn woven over–under. The shake perturbs it; the weave survives.
+  var treHalo=(function(){var e=svg.parentElement;
+    while(e&&getComputedStyle(e).backgroundColor==='rgba(0, 0, 0, 0)')e=e.parentElement;
+    return e?getComputedStyle(e).backgroundColor:'#faf8f4';})();
+  function trePts(cx,jit){var out=[],N=200,i;
+    for(i=0;i<=N;i++){var t=i/N*Math.PI*2;
+      var X=Math.sin(t)+2*Math.sin(2*t),Y=Math.cos(t)-2*Math.cos(2*t),Z=-Math.sin(3*t);
+      if(jit){var w=jit*0.32*Math.sin(9*t+jit*7);X+=w*Math.cos(5*t);Y+=w*Math.sin(7*t);}
+      out.push([cx+X*15,90+Y*13.5,Z]);}
+    return out;}
+  function treWeave(g,cx,jit){
+    while(g.firstChild)g.removeChild(g.firstChild);
+    var P=trePts(cx,jit),runs=[],cur=null,i;
+    for(i=0;i<P.length;i++){var ov=P[i][2]>=0;
+      if(!cur||cur.ov!==ov){cur={ov:ov,p:[]};runs.push(cur);}
+      cur.p.push(P[i]);
+      if(i<P.length-1&&(P[i+1][2]>=0)!==ov)cur.p.push(P[i+1]);}
+    function dOf(ps){var d='';for(var j=0;j<ps.length;j++)d+=(j?'L':'M')+ps[j][0].toFixed(1)+' '+ps[j][1].toFixed(1)+' ';return d;}
+    function pass(ov,st,w){for(var j=0;j<runs.length;j++)if(runs[j].ov===ov)
+      g.appendChild(el('path',{d:dOf(runs[j].p),fill:'none',stroke:st,'stroke-width':w,'stroke-linecap':'round'}));}
+    pass(false,'#4a4f8c',2.4); pass(true,treHalo,6.5); pass(true,'#4a4f8c',2.4);
+  }
   var loop=el('path',{d:loopPath(95,0),fill:'none',stroke:'#4a4f8c','stroke-width':2.4});
-  var tre =el('path',{d:trePath(255,0),fill:'none',stroke:'#4a4f8c','stroke-width':2.4});
+  var tre =el('g',{});
   svg.appendChild(loop);svg.appendChild(tre);
+  treWeave(tre,255,0);
   var ll=el('text',{x:95,y:168,'text-anchor':'middle','font-family':'JetBrains Mono,monospace','font-size':'10px',fill:'#7a7265'});ll.textContent='an untied loop';
   var tl=el('text',{x:255,y:168,'text-anchor':'middle','font-family':'JetBrains Mono,monospace','font-size':'10px',fill:'#7a7265'});tl.textContent='the trefoil — a particle';
   svg.appendChild(ll);svg.appendChild(tl);
@@ -282,9 +303,9 @@
       loop.setAttribute('d',loopPath(95,L.jit));
       if(L.jit<0.02&&!L.alive){L.jit=0;setTimeout(function(){L.alive=true;loop.setAttribute('stroke-opacity',1);ll.textContent='an untied loop';loop.setAttribute('d',loopPath(95,0));},1400);}
     }
-    if(T.jit>0){T.jit*=0.95;tre.setAttribute('d',trePath(255,T.jit));
+    if(T.jit>0){T.jit*=0.95;treWeave(tre,255,T.jit);
       tl.textContent=T.jit>0.3?'shaken — and still a knot':'the trefoil — a particle';
-      if(T.jit<0.02){T.jit=0;tre.setAttribute('d',trePath(255,0));}}
+      if(T.jit<0.02){T.jit=0;treWeave(tre,255,0);}}
     requestAnimationFrame(tick);
   })();
 })();

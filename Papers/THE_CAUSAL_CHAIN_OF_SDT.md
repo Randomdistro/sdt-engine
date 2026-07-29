@@ -6,16 +6,16 @@
 
 ---
 
-> Every number in physics is a promise that something earlier was settled first.
-> This document traces those promises, in order, for SDT — from the one or two
-> things the theory is honest enough to *assume*, up through everything it claims
-> to *derive*. It is a map of debts: who owes their existence to whom.
+> Every number in physics is a value correlation, values that were provided by calculating something beforehand, a measurement that was required to be settled first. That measurement then came from a value, a number; an enumeration representing something that exists in reality. Not the thing that exists, just a concept to embody it.
+> "Follow the numbers", then, becomes a fraught, dangerous journey filled with assumptions, descriptions based in culture and belief, propped up by emotion and the need to understand. But... what if those somethings were not things that exist? Then the measurements would be errored, the numbers would be wrong and the assumptions would be false. A chain of dependence built from a perception, and not from a causation.
+> We are not the only thing in the universe to stand on the shoulders of giants, it seems. 
+> The Causal Chain Of Reality is a very big claim, yet not bigger than any other in the neighbourhood. It seeks to demonstrate, in order and from the viewpoint of SDT, what actually happens, and the mathematical abstractions that calculate it faithfully, reproducing and then exceeding most of General Relativity, Newtonian mechanics, atomic physics and Quantum Mechanics.  From the one or two things the theory assumes up through everything it derives, the Causal Chain is a map of dependencies, a ledger of what rests on what, and a record of what is still owed, and the name of the giant we ride next.
 
 ---
 
 ## 0. A litre of water
 
-Begin with something everybody trusts: the density of water, about one thousand
+Let's begin with something everybody trusts: the density of water, about one thousand
 kilograms per cubic metre. It feels like a brute fact of the world. It is not. It
 is the last link in a chain of decisions, and if you pull on it the whole chain
 comes up out of the ground.
@@ -418,6 +418,25 @@ unpaid bill for the energy scale. **[ENRICHMENT 2026-07-05: the successor is now
 built — binding as *shadow union*, one scale, 217 isotopes at R² = 0.981; see the
 mass-defect triangle in §7½. The residual (α-cluster over-binding, the missed iron
 peak) names its own missing term: the shared-seat well depth, ROOT-CONTACT — [OPEN].]**
+**[ENRICHMENT 2026-07-30: the magic numbers are derived. Every closure
+(2, 8, 20, 28, 50, 82, 126) is a completed seat tier on which the next tier rests,
+and the capacities come from two closed forms forced by four mesh facts: a proton
+gears only with neutrons, so every tier is a bipartite double layer of the packing's
+triangular order — tier capacity F(n) = (n+1)(n+2), with F(0) = 2 the alpha core
+itself; tritons are radial rods that can roll true only on the equator of the
+collective rotation — belt capacity B(n) = 2(n+1), one antipodal pair more per tier.
+From n = 3 the belt separates and descends to seal the previous closure:
+2 | +6d → 8 | +12d → 20 | +8t → 28 | +12d+10t → 50 | +20d+12t → 82 | +30d+14t → 126,
+and the same forms predict the next neutron closure at N = 184. The descent is
+measured, pre-registered: the closure compaction kink is an *isotone invariant* —
+constant along N = 28, 50, 82 while the triton count varies two- to four-fold
+(19/19 closure kinks negative) — the freeze does the compacting; the ledger only
+decides who sits in the seats. Disclosed: the counting is convergent with the shell
+model's oscillator-plus-intruder bookkeeping and cannot discriminate at sequence
+level; the native content is the bipartite doubling and the rolling-equator
+constraint, with no strength parameter anywhere. Residual: the descent onset n = 3
+is read, not derived. Canon: `laws.hpp` `sdt::laws::nuclear` (static-asserted);
+suite row B38; NP33 §9; ATOMICUS reference/CLOSURE_KINK_ISOTONE_INVARIANT.md.]**
 
 **Fluids, heat, materials, optics, chemistry (FD–CH).** These are the leaves of the
 tree, and they are almost pure inheritance — across more than sixty investigations in

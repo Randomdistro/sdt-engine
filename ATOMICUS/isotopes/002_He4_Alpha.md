@@ -126,6 +126,7 @@ This is the mechanical basis of electron pairing. Not an abstract exclusion prin
 - **Grammar / triton fraction**: alpha + 0d + 0t, f_t = 0.00
 - **Electron economy**: 4 protons, 4 electrons -- 2 stabled inward (read as neutrons) + 2 fielded outward (the shell)
 - **Shell status**: **doubly-magic -- full compaction**
+- **Closure schedule**: N=2 completes the alpha core -- occupancy frozen at closure; the next tier rests on it
 - **Triton contraction**: pure-deuteron build (n_t = 0) -- the loose end of the rule; no triton scaffold to contract.
 
 *Triton-contraction rule (phase 2026-07-23): pressure makes the interleaved packing the path of least resistance; tritons interleave tighter than deuterons, so the boundary contracts as the triton count climbs -- maximally at shell closures. See reference/BOUNDARY_RADIUS_TRITON_CONTRACTION.md.*

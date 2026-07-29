@@ -307,3 +307,84 @@ once. No per-nuclide re-reading, no rule adjustment mid-curve. If the curve land
 meshing is derived; if it needs re-tuning at any rung, that is the finding. (Quick caution from
 the current entries: 1.47/2 teeth, 2.47/~3, 2.20/1 give no constant per-tooth energy — the
 counting rule must carry geometry, not a flat per-tooth quantum.)
+
+---
+
+## §8 — CANON ALIGNMENT (checker, 2026-07-30): the closure schedule is now in the engine
+
+Harvey-authorized incorporation. `Engine/include/sdt/laws.hpp` (`sdt::laws::nuclear`) now
+carries the **shell schedule**: deuteron tiers alternating with triton belts of antipodal
+pairs —
+
+```
+2 | +6d → 8 | +12d → 20 | +8t → 28 | +12d+10t → 50 | +20d+12t → 82 | +30d+14t → 126
+```
+
+— with a compile-time `static_assert` that the alternation rebuilds every measured closure,
+and the parity-lock predicate (odd-Z + even-t = misfit) that flags exactly the five
+naturally occurring odd-odd quasi-stables (K-40, V-50, La-138, Lu-176, Ta-180m) and clears
+the seven mono-isotopic lone-rod grips. Suite row B38 tallies all of it (7/7, 12/12). The
+284-isotope enrichment blocks now carry a per-nuclide closure-schedule line; Ca-48's reads
+"completes the first triton belt (4 antipodal pairs)" beside its measured −29 milli-fm
+compaction kink.
+
+**What this means for the mesh build.** The teeth-counting pre-registration in §7 is now
+aimed at a named target: the tier/belt **capacities** (6, 12 | 12, 20, 30 deuteron seats;
+4, 5, 6, 7 belt pairs) are READ from the measured sequence, not yet derived. The completion
+law this log owes is exactly: show the mesh/void geometry FORCES those capacities, in one
+pass, with no per-tier choices. If the traction assembly's rolling constraint produces the
+belt-pair progression +1 pair per closure and the deuteron-tier polyhedra, magic-from-meshing
+graduates from named to derived. Status: sequence-exact, counting convergent with the
+shell model, origin native, capacities [measured, schedule-named] — the same tag discipline
+as the docking locks.
+
+**§8 addendum (checker, same day) — the freeze clause is now measured.** Pre-registered
+single-pass sweep over the full radius dataset (`ATOMICUS/tools/closure_kink_isotone.py`):
+the closure compaction kink is an ISOTONE INVARIANT — constant along N=28, 50, 82 while
+n_t varies 2–4×; constant model beats occupancy-proportional on every adjudicable isotone;
+19/19 closure kinks negative against a zero-centred background; lone-rod-inward census
+83.1% (shared sign with the pairing account — cannot discriminate; direction is ours).
+Post-hoc, flagged: closure grip PEAKS at the first triton belt (N=28, −31.8 mean) and
+fades up the schedule — a mesh derivation of that trend would be belt evidence of the
+strongest kind.
+
+---
+
+## §9 — THE COMPLETION LAW: capacities derived (2026-07-30, Harvey-directed)
+
+The §1 debt ("count the completed shells of the universal p–n gearing mesh") is paid in
+closed form. Four mesh facts, all already in this log or measured:
+
+1. **Like never gears like** (§1) ⇒ every tier is a bipartite **double layer** — a p-face
+   and an n-face.
+2. **The packing's 2D order is triangular** ⇒ one layer of tier n holds the (n+1)-th
+   triangular number of rod seats.
+3. **Tritons are radial rods** — the lone rod seats inward (measured, 83.1% whole-range
+   census).
+4. **The assembly rolls without jamming** (§0) ⇒ a radial rod can co-rotate slip-free
+   ONLY on the equator of the collective roll — a 1D ring.
+
+(1)+(2) force the tier capacity **F(n) = 2·T(n+1) = (n+1)(n+2)**: 2, 6, 12, 20, 30, 42 …
+— and F(0) = 2 is the alpha's own two deuterons, so the core obeys the same formula.
+(3)+(4) force the belt capacity **B(n) = 2(n+1)** — linear in tier girth, antipodal-paired:
+8, 10, 12, 14. Surface remainder R(n) = F(n) − B(n) = n(n+1).
+
+**Schedule:** 2, 8, 20 = ΣF(0..2); from n = 3 the belt separates and descends to seal the
+previous closure: +B(3) → 28, +R(3)+B(4) → 50, +R(4)+B(5) → 82, +R(5)+B(6) → 126. All
+seven magic numbers, all nine capacities, two closed forms. The descent is the measured
+part: kink maximal at N = 28 (the first descended belt), isotone-invariant (§8).
+
+**Forward prediction:** closure(7) = 126 + R(6) + B(7) = **N = 184** — from the same two
+forms, nothing added.
+
+**Audit — derived / read / convergent:**
+- DERIVED: all nine capacities (two closed forms from four mesh facts). Canonized in
+  `laws.hpp` with `static_assert`s binding the schedule arrays to the formulas.
+- READ (the residual debt): the descent onset n = 3 — why the ledger first forces tritons
+  at the fourth tier. The field-cost pricing of a triton vs a deuteron at given Z is the
+  one thing this law still owes.
+- CONVERGENT (disclosed): F(n) equals the oscillator degeneracy and B(n) the
+  intruder-orbit capacity — shared counting, cannot discriminate at sequence level. The
+  native content is the bipartite doubling and the rolling-equator constraint; the rival
+  needs a fitted spin–orbit strength to place its intruders, this law needs no strength
+  parameter at all — the belt's location is geometric.
