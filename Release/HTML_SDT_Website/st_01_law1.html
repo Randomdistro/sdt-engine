@@ -212,7 +212,7 @@
     // the central point being pressed
     ctx.beginPath(); ctx.arc(cx,cy,4.4,0,6.2832); ctx.fillStyle='rgba(30,28,24,0.85)'; ctx.fill();
 
-    // right panel: the invariant ε bar + the two swinging tides (log scale, honest)
+    // right panel: the invariant ε bar + the two swinging tides (log scale)
     var px=W*0.72, top=cy-Rmax*0.9, bot=cy+Rmax*0.9, mid=cy;
     var e = lead? 61*lead.rf/Rmax : 30;                 // depth exponent from the lead front
     if(userE!==null){ e=userE;                          // …or held where the reader is pointing

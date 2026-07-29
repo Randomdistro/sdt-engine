@@ -104,7 +104,7 @@ Before any investigation is built or run, it obeys:
 1. **`PERFECT_PROMPT_TEMPLATE.md`** (§⓪–§⑩) — structure, pre-committed thresholds, pivot tables.
 2. **`PROMPT_EXECUTION_PROTOCOL.md`** — adaptive run loop: pre-commit → execute → **PIVOT/KILL/OPEN**;
    dual verdict (prompt completion vs physics class); `RUN_LOG.md` mandatory.
-3. **§0 anti-creep protocol** (`CONCEPTUAL_CONTAMINATION_AUDIT.md`; legacy `CQ09.../PROMPT.md` §0):
+3. **§0 anti-creep protocol** (`Audits/CONCEPTUAL_CONTAMINATION_AUDIT.md`; legacy `CQ09.../PROMPT.md` §0):
 
 *It is a bad plan that cannot be altered* — prompts define **what may change** when numbers disagree;
 forbidden: retro-PASS, PLUG, IDENTITY-PASS (see execution protocol).

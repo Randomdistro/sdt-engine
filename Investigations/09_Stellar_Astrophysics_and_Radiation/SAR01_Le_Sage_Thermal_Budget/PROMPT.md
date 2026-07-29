@@ -76,7 +76,7 @@ root-1 claim false (leakage real / terminus required → SDT heating problem) ·
 - **Sungrazer test (two-regime memory):** occlusion saturation g→2 near contact (+6.8% sungrazer) is a *separate* observable of the same redirection — a possible independent check the thermal budget doesn't touch.
 
 ## ⑤ Success / ⑥ Outputs
-Class A: η ceiling re-derived clean, occlusion shown terminus-free (throughpole+buffer), recharge named. **Honest floor:** η < 4.4×10⁻¹⁸ on record + recharge flagged OPEN (Law-II root). Outputs: `RUN_LOG.md`, `sar01_lesage_budget.cpp` (re-created clean), `SAR01_VERDICT.md`, `results.txt`, `KILL_READJUDICATION_REGISTER.md` entry.
+Class A: η ceiling re-derived clean, occlusion shown terminus-free (throughpole+buffer), recharge named. **Honest floor:** η < 4.4×10⁻¹⁸ on record + recharge flagged OPEN (Law-II root). Outputs: `RUN_LOG.md`, `sar01_lesage_budget.cpp` (re-created clean), `SAR01_VERDICT.md`, `results.txt`, `ADJUDICATION_REGISTER.md` entry.
 
 ---
 
@@ -104,7 +104,7 @@ Class A: η ceiling re-derived clean, occlusion shown terminus-free (throughpole
 
 ---
 
-## KILL-READJUDICATION outcome space (§K.5 — record in `KILL_READJUDICATION_REGISTER.md`)
+## KILL-READJUDICATION outcome space (§K.5 — record in `ADJUDICATION_REGISTER.md`)
 KILL-CONFIRMED (leakage real / terminus required — SDT heating problem, scope named) · ROOT-RELOCATED (recharge microphysics was the gap — returns OPEN with Law-II root flagged) · KILL-OVERTURNED (gate demanded isotropic re-radiation = contraband; occlusion is terminus-free, branch clean).
 
 ---

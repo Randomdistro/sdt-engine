@@ -1,6 +1,6 @@
 # NP02B — Provenance Classification
 
-Labels per the project scheme (`FORMULATIONS_PROVENANCE_AUDIT.md`): `provenance` · `correspondence` · `input_dependency` · `class` (A/B/C/D/E/X/F).
+Labels per the project scheme (`Audits/FORMULATIONS_PROVENANCE_AUDIT.md`): `provenance` · `correspondence` · `input_dependency` · `class` (A/B/C/D/E/X/F).
 
 | # | Formula / claim | provenance | correspondence | input_dependency | class |
 |---|---|---|---|---|---|

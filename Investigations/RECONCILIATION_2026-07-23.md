@@ -63,5 +63,5 @@ summary · full list of proposed label movements · CP2 commit proposal, gated.)
 
 ## §5 — Register transcription checklist
 
-*(After Harvey ratifies: every adjudicated ruling → its `KILL_READJUDICATION_REGISTER.md` line
+*(After Harvey ratifies: every adjudicated ruling → its `ADJUDICATION_REGISTER.md` line
 with mechanism; QUEUED cells updated; `INVESTIGATION_STACK.md` status tags updated LAST.)*

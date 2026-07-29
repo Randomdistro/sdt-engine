@@ -62,7 +62,7 @@ There was never a computation behind the claim (`HUNTER_SCOUR_2026-07-02/MASTER_
 
 **SDT currently has only radial structure.** The orbital law v(r) = (c/k)√(R/r) knows r only.
 Nothing native distinguishes an s-seat (isotropic) from a p-seat (lobed). The angular language
-in use is borrowed (flagged M1 in `CONCEPTUAL_CONTAMINATION_AUDIT.md`); the canon now speaks
+in use is borrowed (flagged M1 in `Audits/CONCEPTUAL_CONTAMINATION_AUDIT.md`); the canon now speaks
 natively of **angular order** — the lobe count of the wake — and this investigation must earn
 that language or lose it.
 

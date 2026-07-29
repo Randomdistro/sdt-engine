@@ -1,6 +1,6 @@
 # NP04A — Provenance Classification *(corrected)*
 
-Per `FORMULATIONS_PROVENANCE_AUDIT.md`: `provenance` · `correspondence` · `input_dependency` · `class`. The delete-test (§4) was applied to every C/D claim. **Two corrections vs the first draft:** (1) the keystone **H1 is split** into the *arithmetic* (pure mass-energy accounting, not uniquely SDT) and the *interpretation* (the SDT mechanism claim); (2) the mass-ratio **D1 is downgraded** — the *form* is at best C-flagged, and the **full ratio is F** until the lever `a_p/a_e` is derived.
+Per `Audits/FORMULATIONS_PROVENANCE_AUDIT.md`: `provenance` · `correspondence` · `input_dependency` · `class`. The delete-test (§4) was applied to every C/D claim. **Two corrections vs the first draft:** (1) the keystone **H1 is split** into the *arithmetic* (pure mass-energy accounting, not uniquely SDT) and the *interpretation* (the SDT mechanism claim); (2) the mass-ratio **D1 is downgraded** — the *form* is at best C-flagged, and the **full ratio is F** until the lever `a_p/a_e` is derived.
 
 | # | result | provenance | correspondence | input_dependency | class |
 |---|---|---|---|---|---|

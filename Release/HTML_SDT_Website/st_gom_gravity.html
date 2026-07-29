@@ -224,7 +224,7 @@
         <div>
           <div class="stage">
             <canvas id="lesageCv"></canvas>
-            <div class="stage__note" style="background:rgba(255,255,255,.04);color:#9fb0d6">the sea presses from all sides · matter shadows it · the imbalance pushes — no pull anywhere</div>
+            <div class="stage__note" style="background:rgba(255,255,255,.04);color:#9fb0d6">drag either body — the sea presses from all sides, matter shadows it, and the imbalance pushes (closer = harder, as the square) · no pull anywhere</div>
           </div>
         </div>
       </div>
@@ -234,7 +234,7 @@
   <!-- 7 · THE OBJECTIONS DISSOLVED -->
   <section class="panel panel--press" data-t="Both were the answer">
     <div class="panel__in">
-      <div class="eyebrow">Five · they killed it on two counts</div>
+      <div class="eyebrow">Five · ruled out on two counts</div>
       <h2 class="big">Both objections were the answer.</h2>
       <div class="reframe" style="margin-top:var(--sp-lg)">
         <div class="refr"><div class="obj"><s>Fatal flaw #1</s> · Thermalisation</div><h4>The battering would cook a body <em>white-hot</em>.</h4><p>And there it is — the <b style="color:var(--copper-light)">molten core</b>, the geothermal gradient with no clean source, the furnace of every star. Le Sage's "impossible" heat is the heat that is <em>already there</em>, unexplained.</p></div>
@@ -386,22 +386,37 @@ paint();
     sl.value=Math.max(120,Math.min(600,(x-px)/42*100));draw();}
 })();
 
-/* ── LE SAGE ── */
+/* ── LE SAGE — drag either body: the shadow and the push follow the geometry ── */
 (function(){const cv=document.getElementById('lesageCv');if(!cv)return;const c=cv.getContext('2d');
   const dpr=Math.min(devicePixelRatio,2);function sz(){cv.width=cv.clientWidth*dpr;cv.height=cv.clientHeight*dpr;}sz();addEventListener('resize',sz);
   let m=[];function edge(w,h){const s=Math.floor(Math.random()*4),sp=1.2+Math.random()*0.7;let x,y,vx,vy;
     if(s===0){x=Math.random()*w;y=-4;vx=(Math.random()-0.5)*0.3;vy=sp;}else if(s===1){x=w+4;y=Math.random()*h;vx=-sp;vy=(Math.random()-0.5)*0.3;}
     else if(s===2){x=Math.random()*w;y=h+4;vx=(Math.random()-0.5)*0.3;vy=-sp;}else{x=-4;y=Math.random()*h;vx=sp;vy=(Math.random()-0.5)*0.3;}return{x,y,vx,vy};}
   const hit=(p,b)=>{const dx=p.x-b.x,dy=p.y-b.y;return dx*dx+dy*dy<b.r*b.r;};
+  const P={a:{fx:0.4,fy:0.5,r:25},b:{fx:0.6,fy:0.5,r:21}};
+  let hold=null;
+  cv.style.touchAction='none';cv.style.cursor='grab';
+  function pf(e){const r=cv.getBoundingClientRect();return{x:(e.clientX-r.left)/r.width,y:(e.clientY-r.top)/r.height};}
+  cv.addEventListener('pointerdown',e=>{const p=pf(e);
+    const da=Math.hypot(p.x-P.a.fx,p.y-P.a.fy),db=Math.hypot(p.x-P.b.fx,p.y-P.b.fy);
+    hold=da<db?P.a:P.b;cv.setPointerCapture&&cv.setPointerCapture(e.pointerId);});
+  cv.addEventListener('pointermove',e=>{if(!hold)return;const p=pf(e);
+    hold.fx=Math.max(0.08,Math.min(0.92,p.x));hold.fy=Math.max(0.15,Math.min(0.85,p.y));});
+  addEventListener('pointerup',()=>{hold=null;});
   (function loop(){c.setTransform(dpr,0,0,dpr,0,0);const w=cv.clientWidth,h=cv.clientHeight;c.clearRect(0,0,w,h);c.fillStyle='#0e1a3a';c.fillRect(0,0,w,h);
-    const a={x:w*0.4,y:h*0.5,r:25},b={x:w*0.6,y:h*0.5,r:21};
+    const a={x:w*P.a.fx,y:h*P.a.fy,r:25},b={x:w*P.b.fx,y:h*P.b.fy,r:21};
     while(m.length<210)m.push(edge(w,h));
     for(let i=m.length-1;i>=0;i--){const p=m[i];p.x+=p.vx*1.7;p.y+=p.vy*1.7;const in_=hit(p,a)||hit(p,b);
       if(!in_){c.fillStyle='rgba(138,166,232,0.5)';c.beginPath();c.arc(p.x,p.y,1.2,0,6.283);c.fill();}
       if(in_||p.x<-8||p.x>w+8||p.y<-8||p.y>h+8)m.splice(i,1);}
     c.fillStyle='rgba(20,30,70,0.55)';c.beginPath();c.moveTo(a.x,a.y-a.r);c.lineTo(b.x,b.y-b.r);c.lineTo(b.x,b.y+b.r);c.lineTo(a.x,a.y+a.r);c.closePath();c.fill();
     [a,b].forEach(o=>{const g=c.createRadialGradient(o.x-7,o.y-7,3,o.x,o.y,o.r);g.addColorStop(0,'#cfe0a8');g.addColorStop(1,'#6a8d3e');c.fillStyle=g;c.beginPath();c.arc(o.x,o.y,o.r,0,6.283);c.fill();});
-    c.strokeStyle='#e8b06a';c.lineWidth=2.4;c.beginPath();c.moveTo(a.x+a.r+6,a.y);c.lineTo(a.x+a.r+28,a.y);c.stroke();c.beginPath();c.moveTo(b.x-b.r-6,b.y);c.lineTo(b.x-b.r-28,b.y);c.stroke();
+    // push arrows: each body driven toward the other, length ∝ 1/r² of the gap
+    const gdx=b.x-a.x,gdy=b.y-a.y,gr=Math.hypot(gdx,gdy)||1,gux=gdx/gr,guy=gdy/gr;
+    const glen=Math.max(10,Math.min(46,90000/(gr*gr)));
+    c.strokeStyle='#e8b06a';c.lineWidth=2.4;
+    c.beginPath();c.moveTo(a.x+gux*(a.r+4),a.y+guy*(a.r+4));c.lineTo(a.x+gux*(a.r+4+glen),a.y+guy*(a.r+4+glen));c.stroke();
+    c.beginPath();c.moveTo(b.x-gux*(b.r+4),b.y-guy*(b.r+4));c.lineTo(b.x-gux*(b.r+4+glen),b.y-guy*(b.r+4+glen));c.stroke();
     requestAnimationFrame(loop);})();
 })();
 </script>

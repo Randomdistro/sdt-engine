@@ -15,7 +15,7 @@
    λ = h/p emerging as the wake's relay period, **without ever instantiating a wavefunction, a
    superposition-of-states, or a collapse**? Or does the fringe demand a ψ that is genuinely "at both
    slits", in which case the wave–particle debt is real and must be paid, not narrated away.
-2. **Why does it matter?** — This is debt #1 in `PARADOX_CENSUS.md` §8.2 and the gate for the whole
+2. **Why does it matter?** — This is debt #1 in `Audits/PARADOX_CENSUS.md` §8.2 and the gate for the whole
    QM block: QM02 (band-limit), QM03 (wake leakage), QM04 (Born square), QM05 (Bell), QM07 (spin) all
    reuse this engine's vortex-plus-wake steering. If QM01 fails natively, every downstream QM unit
    inherits the ψ it imports.
@@ -167,7 +167,7 @@ and is that a debt or a feature? **Mark OPEN if no clean local route exists — 
 **Upstream:** FLM02 (GPI), FLM05 (tick state machine), PPT06/APS04 (the wake), FD02 (κ=h/m clean),
 ROOT-SIM (per-contact rule — the deepest dependency; flag where Phase 1 leans on its unproven core).
 **Downstream:** QM measurement/Bell follow-ons; any "quantum" correspondence (tunnelling, uncertainty
-as relay bandwidth). **Related:** `PARADOX_CENSUS.md` §8.2 (#1 debt), E81 (electron diffraction,
+as relay bandwidth). **Related:** `Audits/PARADOX_CENSUS.md` §8.2 (#1 debt), E81 (electron diffraction,
 VERIFIED — lattice scattering), [[project_foundational_ontology_influx_monopole]] (no ψ, no collapse).
 
 ## 8 · Falsification Tests (each has a real failure mode + numeric kill trigger)

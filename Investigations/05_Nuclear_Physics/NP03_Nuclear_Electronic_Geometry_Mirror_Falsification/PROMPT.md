@@ -145,7 +145,7 @@ electron-threading solver       (NP03D)
 mirror-score falsification framework (NP03E)
 ```
 
-## 6. Provenance discipline (`FORMULATIONS_PROVENANCE_AUDIT.md`)
+## 6. Provenance discipline (`Audits/FORMULATIONS_PROVENANCE_AUDIT.md`)
 - NP03A grammar maps: **C** (SDT-derived, known-match, isotope integers).
 - NP03B positions: **B** (SDT-derived, internal-only) — *electron-blind by construction*.
 - NP03E mirror score: **D** (novel-prediction) if it beats nulls; **F (falsified)** if it does not — **either outcome is a result**. The delete-test (`§4`) is automatic here: the nuclear geometry is generated with the electron data *deleted*, so a surviving score cannot be circular.

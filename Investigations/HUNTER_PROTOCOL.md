@@ -316,7 +316,7 @@ When any investigation reaches a kill gate:
 5. **Outcome space:** KILL-CONFIRMED (with scope named — WHAT exactly died) /
    ROOT-RELOCATED (a dependency was to blame; claim returns to OPEN with the root fixed
    or flagged) / KILL-OVERTURNED (gate contraband or prompt failure; claim re-runs clean).
-   Registry: `Investigations/KILL_READJUDICATION_REGISTER.md`.
+   Registry: `Investigations/ADJUDICATION_REGISTER.md`.
 
 ## The verdict line (every hunt ends here)
 

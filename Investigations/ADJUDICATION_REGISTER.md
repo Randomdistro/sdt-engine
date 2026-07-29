@@ -1,4 +1,9 @@
-# KILL RE-ADJUDICATION REGISTER
+# ADJUDICATION REGISTER
+
+> **Vocabulary (2026-07-26):** this register now runs on the axis verdicts of
+> `TERMINOLOGY.md` — **ACCURATE/INACCURATE · CONSISTENT/INCONSISTENT · CONGRUENT/INCONGRUENT**.
+> A refutation must name its axis. Legacy "KILL" wording inside dated entries below is
+> historical evidence, read via the TERMINOLOGY mapping; it is not rewritten retroactively.
 
 > **Harvey ruling 2026-07-12: all kill reports executed by auto-agents are FAULTY.**
 > Every kill ruling below is **VOID — PENDING RE-ADJUDICATION**. Voiding a kill does NOT
@@ -10,7 +15,7 @@
 > as each re-adjudication completes. Precedent: the SAR01 voiding (auditor confabulated
 > on an unread source; all rulings void) — this extends that to the whole agent-run class.
 
-## The kill class (11 rulings)
+## The voided agent-refutation class (11 rulings)
 
 | # | Investigation | Ruling on file | Known provenance / notes | Re-adjudication |
 |---|---|---|---|---|
@@ -63,14 +68,15 @@ the verdict files say. Verifiable by reading each file.
 paraphrase. The PM02 failure mode — lifting the word "KILLED" out of a *rival-branch elimination*
 and recording it as the investigation's verdict — is the exact error to guard against.
 
-## Rules for re-adjudication (per rebuilt HUNTER_PROTOCOL §0)
+## Rules for re-adjudication (per rebuilt HUNTER_PROTOCOL §0 · TERMINOLOGY.md vocabulary)
 
 1. READ THE SOURCE — PROMPT.md, RUN_LOG.md, tool source, results files. No summaries.
 2. RE-RUN — compile and execute the tool directly; diff stdout against the logged claims.
-3. GATE AUDIT — every kill condition checked for GATE-CONTRABAND (rival-axiom enforcement).
-4. MECHANISM — no ruling without naming the mechanism in the drop's terms.
-5. Outcome space: KILL-CONFIRMED / KILL-OVERTURNED→OPEN / KILL-OVERTURNED→PASS —
-   with the §H.LEASH check both ways (protect-the-kill vs overturn-when-pushed are the
+3. GATE AUDIT — every refutation gate checked for GATE-CONTRABAND (rival-axiom enforcement).
+4. MECHANISM + AXIS — no ruling without naming the mechanism AND the failed axis
+   (INACCURATE / INCONSISTENT / INCONGRUENT) in the claim's own terms.
+5. Outcome space: REFUTATION-CONFIRMED (axis named) / OVERTURNED→OPEN / OVERTURNED→ACCURATE —
+   with the §H.LEASH check both ways (protect-the-refutation vs overturn-when-pushed are the
    two home-team biases; the cure is the named mechanism, not the swing).
 
 — Register opened by Fable, 2026-07-12, on Harvey's voiding ruling.

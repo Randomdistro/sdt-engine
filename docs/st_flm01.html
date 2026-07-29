@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="FLM01 — an honest audit of the two hardcoded constants in the 28-dimensional particle state: the T₅ softening gate and the Φ₅ flip barrier.">
+<meta name="description" content="FLM01 — an audit of the two hardcoded constants in the 28-dimensional particle state: the T₅ softening gate and the Φ₅ flip barrier.">
 <title>FLM01 · The Two Constants of the 28D State — SDT</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -80,7 +80,7 @@
 <header class="inv-hero reveal">
   <div class="inv-tag">Foundations &amp; Lattice Mechanics · FLM01</div>
   <h1>The Two Constants of<br>the <em>28-Dimensional</em> State</h1>
-  <p class="lead">Deep in every particle's 28-component state vector sit two numbers that were never derived — a pressure-gradient threshold and an energy barrier. Are they physics, or scaffolding? An honest audit.</p>
+  <p class="lead">Deep in every particle's 28-component state vector sit two numbers that were never derived — a pressure-gradient threshold and an energy barrier. Are they physics, or scaffolding? An audit.</p>
 
   <!-- DESIGN ELEMENT: the T₅ softening gate -->
   <div class="gate" id="gate">
@@ -113,7 +113,7 @@
       <div class="eq">T₅ = 1 × 10¹⁰ Pa/m &nbsp;·&nbsp; Φ₅ = 1 × 10⁻²⁰ J</div>
       <div class="eq-caption">state28d.hpp lines 134 and 159 — a pressure gradient and an energy</div>
     </div>
-    <p>Neither is a fitted observable, and neither is a first-principles result. FLM01 asks the only honest question: <strong>are these physics to be derived, or scaffolding to keep the manifold numerically stable?</strong></p>
+    <p>Neither is a fitted observable, and neither is a first-principles result. FLM01 asks the direct question: <strong>are these physics to be derived, or scaffolding to keep the manifold numerically stable?</strong></p>
   </div>
 </section>
 
@@ -165,7 +165,7 @@
         <tr><td>Density of states</td><td class="lands">10⁻¹⁶ J</td><td>off by 10⁻⁴</td></tr>
       </tbody>
     </table>
-    <p class="margin-note" style="max-width:var(--content-width)">Every route brackets the constant; not one derives it. Bracketing is not predicting — so the honest label is not <em>derived</em>.</p>
+    <p class="margin-note" style="max-width:var(--content-width)">Every route brackets the constant; not one derives it. Bracketing is not predicting — so the label is not <em>derived</em>.</p>
   </div>
 </section>
 
@@ -174,8 +174,8 @@
   <div class="chapter__inner reveal">
     <div class="chapter__num">Verdict</div>
     <h2 class="chapter__title">Qualified, pending</h2>
-    <p class="chapter__lead">Not a magic number. Not a derivation. Named scaffolding, honestly labelled.</p>
-    <p>T₅ and Φ₅ are <strong>physically sensible</strong>, <strong>documented with purpose</strong>, and <strong>necessary</strong> to keep the 28-D components in a stable range — but they are <strong>not uniquely fixed</strong> by Laws I–IV. So they carry the honest tag:</p>
+    <p class="chapter__lead">Not a magic number. Not a derivation. Named scaffolding, labelled.</p>
+    <p>T₅ and Φ₅ are <strong>physically sensible</strong>, <strong>documented with purpose</strong>, and <strong>necessary</strong> to keep the 28-D components in a stable range — but they are <strong>not uniquely fixed</strong> by Laws I–IV. So they carry the tag:</p>
     <div style="display:flex;gap:0.6rem;justify-content:center;margin:var(--sp-lg) 0;flex-wrap:wrap;">
       <span class="cert cert--pending">CALIBRATED</span>
       <span class="cert cert--pending">PENDING DERIVATION</span>
@@ -222,10 +222,25 @@
   function sweep(){
     var t0=null, DUR=2200;
     function step(ts){ if(!t0)t0=ts; var k=Math.min(1,(ts-t0)/DUR);
+      if(userHold) return;
       var x=k*XT, y=Math.tanh(x); dot.setAttribute('cx',px(x)); dot.setAttribute('cy',py(y));
       if(k<1) requestAnimationFrame(step); }
     requestAnimationFrame(step);
   }
+  // drag along the curve: set the internal gradient yourself and read the gate
+  var svgEl=gate.querySelector('svg'), userHold=false;
+  svgEl.style.touchAction='none'; svgEl.style.cursor='grab';
+  function setFromEvent(e){
+    var r=svgEl.getBoundingClientRect(), vb=svgEl.viewBox.baseVal;
+    var ux=(e.clientX-r.left)/r.width*vb.width;
+    var x=Math.max(0,Math.min(XT,(ux-X0)/(X1-X0)*XT)), y=Math.tanh(x);
+    dot.setAttribute('cx',px(x)); dot.setAttribute('cy',py(y));
+    var lb=document.getElementById('gateThreshLab');
+    if(lb) lb.textContent = x<1 ? 'below T₅ — the occlusion passes' : 'past T₅ — the gate throttles: screening = '+y.toFixed(2);
+  }
+  svgEl.addEventListener('pointerdown',function(e){userHold=true;svgEl.setPointerCapture&&svgEl.setPointerCapture(e.pointerId);setFromEvent(e);});
+  svgEl.addEventListener('pointermove',function(e){if(userHold)setFromEvent(e);});
+  window.addEventListener('pointerup',function(){userHold=false;});
 })();
 </script>
 </body>

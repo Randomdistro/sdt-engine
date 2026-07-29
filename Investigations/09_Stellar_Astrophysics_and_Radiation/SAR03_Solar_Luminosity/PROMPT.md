@@ -1,7 +1,7 @@
 # SAR03: Solar Luminosity from Convergence Recycling — DEEPENED SPEC (§K rebuild)
 
 > **Author:** J. C. Harvey, Melbourne. **Deepened:** 2026-07-12 under HUNTER §K (kill-deepen,
-> 300% rule) after the agent-run kill was voided (KILL_READJUDICATION_REGISTER.md #7).
+> 300% rule) after the agent-run kill was voided (ADJUDICATION_REGISTER.md #7).
 > **Prior state:** the 2026-07-03 agent kill fired on chain line 2 — which Harvey's FARMER
 > correction had already identified as a TRANSCRIPTION ERROR (full-throughput instead of
 > occluded-fraction, ×2.5×10⁴³). A kill that fires on a known typo kills the typo, not the

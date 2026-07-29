@@ -3,7 +3,7 @@
 > **§K outcome: ROOT-RELOCATED → OPEN, with two live leads and one quantified null.**
 > **Prompt completion: B** · **Physics class: OPEN (leads named)** · **CALIBRATED: 0**
 > Executed 2026-07-12 by Fable **directly** (agent-run kill voided per
-> KILL_READJUDICATION_REGISTER.md #7; old results deleted pre-run; git preserves them).
+> ADJUDICATION_REGISTER.md #7; old results deleted pre-run; git preserves them).
 
 ## The original kill, root-sorted (§K.2)
 

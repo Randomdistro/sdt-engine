@@ -2,7 +2,7 @@
 
 *(Single copy — no duplication. The `3n→t` genesis inputs `Q(3n)` and the 3n-kinetics unknown live in NP04B, not here.)*
 
-Inputs grouped by `input_dependency` (per `FORMULATIONS_PROVENANCE_AUDIT.md`). The keystone (`Q_β(³H)`) and the conservation spine consume **only measured masses + binding energies** — no fitted scale — which is why they reach class **C**. Stage A's link energy and Stage F's binding are the only `calibrated-target` consumers.
+Inputs grouped by `input_dependency` (per `Audits/FORMULATIONS_PROVENANCE_AUDIT.md`). The keystone (`Q_β(³H)`) and the conservation spine consume **only measured masses + binding energies** — no fitted scale — which is why they reach class **C**. Stage A's link energy and Stage F's binding are the only `calibrated-target` consumers.
 
 ## 1. `primitive-whitelist` (CODATA, `sdt::laws::measured`)
 | symbol | value | used by |

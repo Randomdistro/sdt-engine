@@ -1,7 +1,7 @@
 # Direct re-run — categories 10 (Fluid Dynamics) + 11 (Thermodynamics), 2026-07-26
 
 > **Run class: DIRECT** (main session, no agents), per the standing voiding ruling
-> (`KILL_READJUDICATION_REGISTER.md`): agent-written records carry zero evidentiary weight.
+> (`ADJUDICATION_REGISTER.md`): agent-written records carry zero evidentiary weight.
 > Provenance of the deleted layer: FD = June de-rerum era (last touched 2026-07-03, the sweep
 > that "stopped halfway through due to drift"); TD = 2026-07-05 strike-force wave.
 > **Method per investigation:** prompt read + contraband check → agent-era outcome files deleted

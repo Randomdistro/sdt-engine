@@ -4,7 +4,7 @@
 > **Purpose:** retire the permitted-inputs whitelist `{ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p}`
 > one entry at a time — showing what each is *derived from* inside SDT, and what minimal,
 > **acyclic** seed set actually remains. This discharges the "input/derivation circularity"
-> tension named in `PARADOX_CENSUS.md` §8.2(3).
+> tension named in `Audits/PARADOX_CENSUS.md` §8.2(3).
 
 ---
 
@@ -130,5 +130,5 @@ break.
 
 ---
 
-*Companion to `PARADOX_CENSUS.md` §8.2(3) and `Theory/05_Provenance_and_Correspondence.md`.
+*Companion to `Audits/PARADOX_CENSUS.md` §8.2(3) and `Theory/05_Provenance_and_Correspondence.md`.
 Every "[DERIVED]" here carries its certification label in the engine and its CQ provenance.*

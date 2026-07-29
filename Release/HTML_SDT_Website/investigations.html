@@ -150,11 +150,11 @@ header{position:sticky;top:0;z-index:100;background:color-mix(in srgb,var(--bg0)
   <div class="hero">
     <div class="kick">The research programme</div>
     <h1>Every field, tested against the same four irreducibles.</h1>
-    <p>SDT holds space, matter, movement and now, and derives the rest. Each investigation below works inside that framework — deriving a prediction and gating it against measurement, with an honest verdict on the record. Open any card to read it in full.</p>
+    <p>SDT holds space, matter, movement and now, and derives the rest. Each investigation below works inside that framework — deriving a prediction and gating it against measurement, with the assessment on the record. Open any card to read it in full.</p>
     <div class="hero-stats">
       <div class="hstat"><div class="n" id="sTotal">—</div><div class="l">Investigations</div></div>
       <div class="hstat"><div class="n" id="sFields">—</div><div class="l">Fields</div></div>
-      <div class="hstat"><div class="n" id="sVerdicts">—</div><div class="l">Verdicts filed</div></div>
+      <div class="hstat"><div class="n" id="sVerdicts">—</div><div class="l">Assessments filed</div></div>
     </div>
   </div>
 
@@ -229,7 +229,7 @@ function render(){
 }
 function card(f,inv,i){
   const c=document.createElement('div');c.className='card';c.style.animationDelay=(i*22)+'ms';
-  const badge=inv.verdict?'<span class="badge b-verdict">✓ verdict</span>':'<span class="badge b-spec">spec</span>';
+  const badge=inv.verdict?'<span class="badge b-verdict">✓ assessed</span>':'<span class="badge b-spec">spec</span>';
   const fileTags=inv.files.filter(x=>/\.(md|cpp|hpp|h)$/i.test(x)).slice(0,4).map(x=>{const e=x.split('.').pop().toLowerCase();return `<span class="ft ${e}">${x}</span>`;}).join('');
   c.innerHTML=`
     <div class="chead">

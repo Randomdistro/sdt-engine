@@ -174,7 +174,7 @@ canvas{display:block}
   <div class="sep"></div>
   <div style="font-size:9.5px;color:var(--ink-dim);line-height:1.5">
     One scale κ, fixed by least squares. The shadow-overlap <b style="color:var(--mint)">is</b> the mass
-    defect to ~8%. Honest residual: pure boundary overlap slightly <b style="color:#c060e0">over-binds the
+    defect to ~8%. Residual: pure boundary overlap slightly <b style="color:#c060e0">over-binds the
     light α-cluster nuclei</b> and does not resolve the Fe peak — that fine structure needs the shared-electron
     well depth (NP17), not geometry alone.
   </div>
@@ -452,7 +452,7 @@ function measureShadow(centres, lightDir){
 }
 
 /* ---- calibrate κ (MeV per fm² of shared occlusion) once, over all isotopes ----
-   least-squares through the origin:  BE ≈ κ·ΔA .  Also report the honest fit. */
+   least-squares through the origin:  BE ≈ κ·ΔA .  Also report the full residuals. */
 const DEFAULT_LIGHT=[-0.4925,0.80,0.62];   // high-left-foreground (matches default light°=-38)
 let KAPPA=5.0, FIT={r2tot:0,r2a:0,mErr:0,n:0};
 function calibrate(dnn, coul){

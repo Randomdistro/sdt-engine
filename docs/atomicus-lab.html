@@ -45,7 +45,7 @@
   }
   .atomicus-header__link:hover { background:rgba(176,116,48,0.24); }
 
-  /* â”€â”€ LEFT COLUMN: controls + info â”€â”€ */
+  /* ── LEFT COLUMN: controls + info ── */
   #leftCol {
     position:fixed; top:56px; left:0; bottom:0; width:230px; z-index:10;
     display:flex; flex-direction:column;
@@ -68,7 +68,7 @@
   #controls::-webkit-scrollbar { width:4px; }
   #controls::-webkit-scrollbar-thumb { background:#333; border-radius:2px; }
 
-  /* â”€â”€ Toggle switches â”€â”€ */
+  /* ── Toggle switches ── */
   .toggle-switch {
     display:flex; align-items:center; gap:8px; cursor:pointer;
     padding:3px 10px; user-select:none;
@@ -89,7 +89,7 @@
   input[type=checkbox] { display:none; }
   .toggle-label { font-size:11px; color:#8898bb; }
 
-  /* â”€â”€ Dropdown sections â”€â”€ */
+  /* ── Dropdown sections ── */
   .dropdown-section { border-bottom:1px solid rgba(30,45,90,0.70); }
   .dropdown-header {
     cursor:pointer; padding:7px 10px; font-size:11px;
@@ -106,7 +106,7 @@
   }
   .dropdown-content.open { display:flex; }
 
-  /* â”€â”€ Morph buttons â”€â”€ */
+  /* ── Morph buttons ── */
   .morph-btn {
     flex:1; padding:3px 0; font-size:10px; border-radius:3px;
     border:1px solid rgba(176,116,48,0.32); background:rgba(255,255,255,0.52); color:var(--ink-muted);
@@ -123,7 +123,7 @@
   }
   #exportBtn:hover { background:var(--copper-light); }
 
-  /* â”€â”€ RIGHT COLUMN: element panel + PIP â”€â”€ */
+  /* ── RIGHT COLUMN: element panel + PIP ── */
   #rightCol {
     position:fixed; top:56px; right:0; bottom:0; width:260px; z-index:10;
     display:flex; flex-direction:column;
@@ -153,7 +153,7 @@
   #isoScroll::-webkit-scrollbar { width:4px; }
   #isoScroll::-webkit-scrollbar-thumb { background:#444; border-radius:2px; }
 
-  /* â”€â”€ PIP: nuclear structure mini-view â”€â”€ */
+  /* ── PIP: nuclear structure mini-view ── */
   #pip {
     flex-shrink:0; height:200px;
     border-top:1px solid rgba(232,224,210,0.9);
@@ -173,7 +173,7 @@
     font-family:'Segoe UI',sans-serif;
   }
 
-  /* â”€â”€ Isotope rows â”€â”€ */
+  /* ── Isotope rows ── */
   .iso-row {
     padding:5px 8px; border-radius:4px; margin:1px 0;
     font-size:12px; line-height:1.55; cursor:default;
@@ -196,7 +196,7 @@
   .iso-row .iso-sole { color:var(--copper); }
   canvas#c { display:block; cursor:crosshair; }
 
-  /* â”€â”€ Tooltip â”€â”€ */
+  /* ── Tooltip ── */
   #tooltip {
     display:none; position:fixed; z-index:20; pointer-events:none;
     background:rgba(255,255,255,0.94); color:var(--ink); padding:10px 14px;
@@ -205,7 +205,7 @@
     max-width:340px; line-height:1.6;
   }
 
-  /* â”€â”€ Datasheet panel â”€â”€ */
+  /* ── Datasheet panel ── */
   #datasheet {
     display:none; position:fixed; top:56px; right:0; width:380px; height:calc(100vh - 56px);
     background:rgba(255,255,255,0.9); border-left:1px solid var(--paper-edge);
@@ -232,7 +232,7 @@
 <!-- LEFT COLUMN -->
 <div id="leftCol">
   <div id="info">
-    <h3>ATOMICUS â€” Nuclear Map</h3>
+    <h3>ATOMICUS — Nuclear Map</h3>
     <div class="dim">
       X = deuteron excess (n<sub>d</sub>&nbsp;&minus;&nbsp;n<sub>t</sub>)<br>
       Y = total subunits (n<sub>d</sub>&nbsp;+&nbsp;n<sub>t</sub>)<br>
@@ -248,11 +248,11 @@
         <div style="padding:6px 10px 2px;">
           <div style="display:flex;gap:4px;margin-bottom:5px;">
             <button class="morph-btn" id="morphBtnMono" data-val="-1000" title="Shift each row so the monoisotope spine is vertical">Mono</button>
-            <button class="morph-btn active" id="morphBtnActual" data-val="0" title="Raw positions â€” golden line is the natural vertical axis">Actual</button>
+            <button class="morph-btn active" id="morphBtnActual" data-val="0" title="Raw positions — golden line is the natural vertical axis">Actual</button>
             <button class="morph-btn" id="morphBtnEnergy" data-val="1000" title="Shift each row so the BE/A ridge is vertical">Energy</button>
           </div>
           <div style="position:relative;margin-bottom:4px;">
-            <span style="font-size:9px;color:#555;display:block;text-align:center;margin-bottom:2px;">â† Mono Â· Actual Â· Energy â†’</span>
+            <span style="font-size:9px;color:#555;display:block;text-align:center;margin-bottom:2px;">← Mono · Actual · Energy →</span>
             <div style="position:relative;">
               <input type="range" id="morphSlider" min="-1000" max="1000" value="0" style="width:100%; cursor:pointer; accent-color:#d4a05c;">
               <div style="position:absolute;left:50%;top:-2px;width:2px;height:calc(100% + 4px);background:#d4a05c;opacity:0.4;pointer-events:none;transform:translateX(-50%);"></div>
@@ -263,10 +263,10 @@
         <label class="toggle-switch"><input type="checkbox" id="showLowestGS" checked><span class="toggle-track"></span><span class="toggle-label">Lowest GS chain</span></label>
         <label class="toggle-switch"><input type="checkbox" id="showEnergySpine"><span class="toggle-track"></span><span class="toggle-label">Energy spine overlay</span></label>
         <label class="toggle-switch"><input type="checkbox" id="showMonoSpine"><span class="toggle-track"></span><span class="toggle-label">Mono spine overlay</span></label>
-        <label class="toggle-switch"><input type="checkbox" id="showDeltaUE"><span class="toggle-track"></span><span class="toggle-label">Î”u_E sidebands</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="showDeltaUE"><span class="toggle-track"></span><span class="toggle-label">Δu_E sidebands</span></label>
         <div style="padding:2px 10px 4px;">
           <button id="printDiagBtn" style="font-size:10px;padding:3px 8px;background:#222;color:#888;border:1px solid #333;border-radius:3px;cursor:pointer;"
-            title="Print per-row energy spine diagnostic table to browser console (F12)">Print Î”u_E table</button>
+            title="Print per-row energy spine diagnostic table to browser console (F12)">Print Δu_E table</button>
         </div>
       </div>
     </div>
@@ -280,17 +280,17 @@
           <span class="toggle-track"></span>
           <span class="toggle-label" style="color:#d4a850;font-weight:600;">&#9762; All Unstable</span>
         </label>
-        <label class="toggle-switch"><input type="checkbox" id="showMissing"><span class="toggle-track"></span><span class="toggle-label">1 Â· Missing Î±-structures</span></label>
-        <label class="toggle-switch"><input type="checkbox" id="showLongLived"><span class="toggle-track"></span><span class="toggle-label">1a Â· Missing &gt;10ky</span></label>
-        <label class="toggle-switch"><input type="checkbox" id="showMid"><span class="toggle-track"></span><span class="toggle-label">1b Â· Missing 1kâ€“10ky</span></label>
-        <label class="toggle-switch"><input type="checkbox" id="showShort"><span class="toggle-track"></span><span class="toggle-label">1c Â· Missing 100â€“1ky</span></label>
-        <label class="toggle-switch"><input type="checkbox" id="showDecade"><span class="toggle-track"></span><span class="toggle-label">1d Â· Missing 10â€“100y</span></label>
-        <label class="toggle-switch"><input type="checkbox" id="showTier4"><span class="toggle-track"></span><span class="toggle-label">1e Â· Short 1â€“10y</span></label>
-        <label class="toggle-switch"><input type="checkbox" id="showTier5"><span class="toggle-track"></span><span class="toggle-label">1f Â· Short 36dâ€“1y</span></label>
-        <label class="toggle-switch"><input type="checkbox" id="showTier6"><span class="toggle-track"></span><span class="toggle-label">1g Â· Short 3.6dâ€“36d</span></label>
-        <label class="toggle-switch"><input type="checkbox" id="showTier7"><span class="toggle-track"></span><span class="toggle-label">1h Â· Short 8.6hâ€“3.6d</span></label>
-        <label class="toggle-switch"><input type="checkbox" id="showTier8"><span class="toggle-track"></span><span class="toggle-label">1i Â· Short 52minâ€“8.6h</span></label>
-        <label class="toggle-switch"><input type="checkbox" id="showTier9"><span class="toggle-track"></span><span class="toggle-label">1j Â· Short &lt;52 min</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="showMissing"><span class="toggle-track"></span><span class="toggle-label">1 · Missing α-structures</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="showLongLived"><span class="toggle-track"></span><span class="toggle-label">1a · Missing &gt;10ky</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="showMid"><span class="toggle-track"></span><span class="toggle-label">1b · Missing 1k–10ky</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="showShort"><span class="toggle-track"></span><span class="toggle-label">1c · Missing 100–1ky</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="showDecade"><span class="toggle-track"></span><span class="toggle-label">1d · Missing 10–100y</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="showTier4"><span class="toggle-track"></span><span class="toggle-label">1e · Short 1–10y</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="showTier5"><span class="toggle-track"></span><span class="toggle-label">1f · Short 36d–1y</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="showTier6"><span class="toggle-track"></span><span class="toggle-label">1g · Short 3.6d–36d</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="showTier7"><span class="toggle-track"></span><span class="toggle-label">1h · Short 8.6h–3.6d</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="showTier8"><span class="toggle-track"></span><span class="toggle-label">1i · Short 52min–8.6h</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="showTier9"><span class="toggle-track"></span><span class="toggle-label">1j · Short &lt;52 min</span></label>
         <label class="toggle-switch"><input type="checkbox" id="showOddEven"><span class="toggle-track"></span><span class="toggle-label">Odd-A / Even-A</span></label>
         <label class="toggle-switch"><input type="checkbox" id="showSoleSpread"><span class="toggle-track"></span><span class="toggle-label">Sole vs Spread</span></label>
         <label class="toggle-switch"><input type="checkbox" id="showSoleChain"><span class="toggle-track"></span><span class="toggle-label">Sole element chain</span></label>
@@ -301,13 +301,68 @@
     <div class="dropdown-section">
       <div class="dropdown-header" id="hdr-struct">Structure</div>
       <div class="dropdown-content" id="sec-struct">
-        <label class="toggle-switch"><input type="checkbox" id="showGoldenLine" checked><span class="toggle-track"></span><span class="toggle-label">nâ‚™=nâ‚œ golden line</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="showGoldenLine" checked><span class="toggle-track"></span><span class="toggle-label">nₙ=nₜ golden line</span></label>
         <label class="toggle-switch"><input type="checkbox" id="showShells"><span class="toggle-track"></span><span class="toggle-label">Shell closures (magic Z)</span></label>
         <label class="toggle-switch"><input type="checkbox" id="showUnstPos" checked><span class="toggle-track"></span><span class="toggle-label">Unstable positions</span></label>
         <label class="toggle-switch"><input type="checkbox" id="showMagnetic"><span class="toggle-track"></span><span class="toggle-label">Magnetic overlay</span></label>
         <label class="toggle-switch"><input type="checkbox" id="showFamilies"><span class="toggle-track"></span><span class="toggle-label">Triton families</span></label>
-        <label class="toggle-switch"><input type="checkbox" id="showHe3"><span class="toggle-track"></span><span class="toggle-label">2 Â· He-3 grammar</span></label>
-        <label class="toggle-switch"><input type="checkbox" id="showHe3Missing"><span class="toggle-track"></span><span class="toggle-label">3a Â· Missing He-3</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="showHe3"><span class="toggle-track"></span><span class="toggle-label">2 · He-3 grammar</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="showHe3Missing"><span class="toggle-track"></span><span class="toggle-label">3a · Missing He-3</span></label>
+      </div>
+    </div>
+
+    <!-- SECTION: MAGIC LINES -->
+    <div class="dropdown-section">
+      <div class="dropdown-header" id="hdr-magic">Magic Lines</div>
+      <div class="dropdown-content" id="sec-magic">
+        <label class="toggle-switch"><input type="checkbox" id="magN"><span class="toggle-track"></span><span class="toggle-label" style="color:#ffb26e;">Neutron-magic diagonals (N)</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="magZ"><span class="toggle-track"></span><span class="toggle-label" style="color:#7cbcff;">Proton-magic lines (Z)</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="magDM"><span class="toggle-track"></span><span class="toggle-label" style="color:#ffe878;">Doubly-magic markers</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="magWidth" checked><span class="toggle-track"></span><span class="toggle-label">Line width = stability count</span></label>
+      </div>
+    </div>
+
+    <!-- SECTION: GROUPS & LINE PICKER -->
+    <div class="dropdown-section">
+      <div class="dropdown-header" id="hdr-groups">Groups &amp; Line Picker</div>
+      <div class="dropdown-content" id="sec-groups">
+        <label class="toggle-switch"><input type="checkbox" id="grp-noble"><span class="toggle-track"></span><span class="toggle-label" style="color:#58c8ff;">Noble gases</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="grp-alkali"><span class="toggle-track"></span><span class="toggle-label" style="color:#ff8a5c;">Alkali metals</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="grp-alkEarth"><span class="toggle-track"></span><span class="toggle-label" style="color:#ffd45c;">Alkaline earth</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="grp-trans"><span class="toggle-track"></span><span class="toggle-label" style="color:#7affc0;">Transition metals</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="grp-lanth"><span class="toggle-track"></span><span class="toggle-label" style="color:#c58bff;">Lanthanides</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="grp-actin"><span class="toggle-track"></span><span class="toggle-label" style="color:#ff6bcb;">Actinides</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="grp-halogen"><span class="toggle-track"></span><span class="toggle-label" style="color:#c3ff6b;">Halogens</span></label>
+        <div style="padding:8px 10px 4px;border-top:1px solid rgba(255,255,255,0.07);margin-top:4px;">
+          <div style="font-size:10px;color:#8898bb;margin-bottom:4px;">Pull any line:</div>
+          <div style="display:flex;gap:4px;align-items:center;margin-bottom:5px;">
+            <select id="linePickAxis" style="background:#141826;color:#cdd6e6;border:1px solid #33405c;border-radius:3px;font-size:10px;padding:3px;flex:1;">
+              <option value="Z">Element Z</option>
+              <option value="N">Isotone N</option>
+              <option value="nt">Triton n&#8348;</option>
+              <option value="nd">Deuteron n&#8340;</option>
+              <option value="A">Isobar A</option>
+            </select>
+            <input id="linePickVal" type="text" placeholder="50 / Sn" style="width:60px;background:#141826;color:#cdd6e6;border:1px solid #33405c;border-radius:3px;font-size:10px;padding:3px;">
+          </div>
+          <label class="toggle-switch"><input type="checkbox" id="linePickOn"><span class="toggle-track"></span><span class="toggle-label">Highlight this line</span></label>
+        </div>
+        <div style="padding:8px 10px 6px;border-top:1px solid rgba(255,255,255,0.07);">
+          <div style="font-size:10px;color:#8898bb;margin-bottom:3px;">Dim the rest: <span id="dimVal" style="color:#d4a05c;">80%</span></div>
+          <input type="range" id="dimSlider" min="0" max="95" value="80" style="width:100%;accent-color:#d4a05c;cursor:pointer;">
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION: PARTITIONS, MONOISOTOPES & SIZE -->
+    <div class="dropdown-section">
+      <div class="dropdown-header" id="hdr-partition">Partitions &amp; Envelope</div>
+      <div class="dropdown-content" id="sec-partition">
+        <label class="toggle-switch"><input type="checkbox" id="partND"><span class="toggle-track"></span><span class="toggle-label" style="color:#b98cff;">Deuteron families (n&#8340;) &mdash; reverse</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="partNT"><span class="toggle-track"></span><span class="toggle-label" style="color:#54d6ac;">Triton families (n&#8348;)</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="partMono"><span class="toggle-track"></span><span class="toggle-label" style="color:#ffffff;">Monoisotope markers (n&#8348;=1 gold)</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="partSwitch"><span class="toggle-track"></span><span class="toggle-label" style="color:#ffb84a;">Stability switchback envelope</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="radCol"><span class="toggle-track"></span><span class="toggle-label" style="color:#5fd0c0;">Triton contraction (r&#8320; colour)</span></label>
       </div>
     </div>
 
@@ -316,7 +371,7 @@
       <div class="dropdown-header" id="hdr-decay">Decay</div>
       <div class="dropdown-content" id="sec-decay">
         <label class="toggle-switch"><input type="checkbox" id="showDecayVec"><span class="toggle-track"></span><span class="toggle-label">Decay vectors</span></label>
-        <label class="toggle-switch"><input type="checkbox" id="showDeutChain"><span class="toggle-track"></span><span class="toggle-label">Deuteron chain (nâ‚œ=0)</span></label>
+        <label class="toggle-switch"><input type="checkbox" id="showDeutChain"><span class="toggle-track"></span><span class="toggle-label">Deuteron chain (nₜ=0)</span></label>
       </div>
     </div>
 
@@ -341,31 +396,32 @@
     <div class="elem-header">
       <span class="sym" id="pSym">Fe</span>
       <span class="elem-name" id="pElemName">Iron</span>
-      <span class="elem-z" id="pElemZ">Z=26 Â· 4 stable isotopes</span>
+      <span class="elem-z" id="pElemZ">Z=26 · 4 stable isotopes</span>
     </div>
     <div id="isoScroll"></div>
   </div>
   <!-- Nuclear structure PIP -->
   <div id="pip" title="Click to open Nuclear Stick Model">
     <canvas id="pipCanvas"></canvas>
-    <div id="pipLabel">Î±-core structure</div>
-    <div id="pipHint">â†— open stick model</div>
+    <div id="pipLabel">α-core structure</div>
+    <div id="pipHint">↗ open stick model</div>
   </div>
 </div>
 
 <!-- DATASHEET PANEL (Change 6) -->
 <div id="datasheet">
-  <button id="datasheetClose" style="position:absolute;top:12px;right:12px;background:none;border:none;color:#667;font-size:18px;cursor:pointer;">âœ•</button>
+  <button id="datasheetClose" style="position:absolute;top:12px;right:12px;background:none;border:none;color:#667;font-size:18px;cursor:pointer;">✕</button>
   <div id="datasheetContent"></div>
 </div>
 
 <div id="tooltip"></div>
 
 <canvas id="c"></canvas>
+<script src="atomicus_radii.js"></script>
 
 <script>
 // === js/data.js ===
-/* â”€â”€ All 287 naturally occurring isotopes â”€â”€
+/* ── All 287 naturally occurring isotopes ──
    [Z, A, sym, stability, BE/nucleon, spin, abundance%]
    Extracted from sdt-engine/ATOMICUS/isotopes/ */
 const RAW = [
@@ -694,10 +750,10 @@ const RAW = [
 [118,294,"Og","unstable",7.225,"0+",0]
 ];
 
-/* â”€â”€ Unpaired electron data by Z â”€â”€ */
+/* ── Unpaired electron data by Z ── */
 const UNPAIRED = {3:1,4:0,5:1,6:2,7:3,8:2,9:1,10:0,11:1,12:0,13:1,14:2,15:3,16:2,17:1,18:0,19:1,20:0,21:1,22:2,23:3,24:6,25:5,26:4,27:3,28:2,29:1,30:0,31:1,32:2,33:3,34:2,35:1,36:0,37:1,38:0,39:1,40:2,41:4,42:5,44:4,45:3,46:0,47:1,48:0,49:1,50:2,51:3,52:2,53:1,54:0,55:1,56:0,57:1,58:2,59:3,60:4,62:6,63:7,64:8,65:5,66:4,67:3,68:2,69:1,70:0,71:1,72:2,73:3,74:4,75:5,76:4,77:3,78:0,79:1,80:0,81:1,82:2,83:3,84:2,85:1,86:0,87:1,88:0,89:1,90:2,91:3,92:2,93:3,94:4,95:5,96:6,97:7,98:8,99:9,100:10,101:11,102:0,103:1,104:2,105:3,106:4,107:5,108:4,109:3,110:0,111:1,112:0,113:1,114:2,115:3,116:2,117:1,118:0};
 
-/* â”€â”€ Compute grammar for each isotope â”€â”€ */
+/* ── Compute grammar for each isotope ── */
 const ISO = RAW.map(([Z,A,sym,stab,be,spin,abd]) => {
   const isStable = stab.toLowerCase().startsWith("stable");
   if (Z < 2) {
@@ -718,7 +774,7 @@ const ISO = RAW.map(([Z,A,sym,stab,be,spin,abd]) => {
   return { Z, A, sym, stable:isStable, be:be||0, spin, abd, nd, nt, valid, tf, total, oddA, unpaired };
 }).filter(e => e.valid || (e.Z === 1 && e.A === 1)); // keep H-1 as pre-alpha anchor
 
-/* â”€â”€ Classify elements: sole (mono-isotopic) vs spread (poly-isotopic) â”€â”€ */
+/* ── Classify elements: sole (mono-isotopic) vs spread (poly-isotopic) ── */
 const stableCountByZ = {};
 ISO.forEach(iso => {
   if (iso.stable) stableCountByZ[iso.Z] = (stableCountByZ[iso.Z] || 0) + 1;
@@ -728,30 +784,30 @@ ISO.forEach(iso => {
   iso.spreadCount = stableCountByZ[iso.Z] || 0;
 });
 
-/* Max abundance per element â€” for relative-abundance ring scaling */
+/* Max abundance per element — for relative-abundance ring scaling */
 const maxAbdByZ = {};
 ISO.forEach(iso => {
   if (iso.abd > 0)
     maxAbdByZ[iso.Z] = Math.max(maxAbdByZ[iso.Z] || 0, iso.abd);
 });
 // === js/derived.js ===
-/* â”€â”€ Derived constants from ISO â”€â”€ */
+/* ── Derived constants from ISO ── */
 
 /* Sole elements in Z order (for chain drawing) */
 const SOLE_Z = [...new Set(ISO.filter(e => e.isSole && e.stable).map(e => e.Z))].sort((a,b) => a-b);
 
-/* Magic numbers â€” proton shell closures */
+/* Magic numbers — proton shell closures */
 const MAGIC_Z = [2, 8, 20, 28, 50, 82];
 const MAGIC_N = [2, 8, 20, 28, 50, 82, 126];
 
 /* Elements that don't exist naturally (gaps) */
 const GAP_Z = new Set([43, 61, 84, 85, 86, 87, 88, 89]); // Tc, Pm, Po-Ac
 
-/* â”€â”€ Build lookup set for occupied He-4 positions â”€â”€ */
+/* ── Build lookup set for occupied He-4 positions ── */
 const occupiedAlpha = new Set();
 ISO.forEach(iso => occupiedAlpha.add(iso.nd + "," + iso.nt));
 
-/* â”€â”€ Generate MISSING He-4 structures â”€â”€ */
+/* ── Generate MISSING He-4 structures ── */
 const maxNd = Math.max(...ISO.map(e => e.nd));
 const maxNt = Math.max(...ISO.map(e => e.nt));
 const MISSING_ALPHA = [];
@@ -776,7 +832,7 @@ for (let nd = 0; nd <= maxNd; nd++) {
   }
 }
 
-/* â”€â”€ He-3 grammar for existing isotopes â”€â”€ */
+/* ── He-3 grammar for existing isotopes ── */
 const HE3_EXISTING = [];
 const occupiedHe3 = new Set();
 ISO.forEach(iso => {
@@ -788,7 +844,7 @@ ISO.forEach(iso => {
   }
 });
 
-/* â”€â”€ Missing He-3 structures â”€â”€ */
+/* ── Missing He-3 structures ── */
 const maxNd3 = HE3_EXISTING.length > 0 ? Math.max(...HE3_EXISTING.map(e => e.nd3)) : 0;
 const maxNt3 = HE3_EXISTING.length > 0 ? Math.max(...HE3_EXISTING.map(e => e.nt3)) : 0;
 const MISSING_HE3 = [];
@@ -813,190 +869,190 @@ for (let nd = 0; nd <= maxNd3; nd++) {
   }
 }
 
-/* â”€â”€ Missing isotopes by half-life tier â”€â”€
+/* ── Missing isotopes by half-life tier ──
    [Z, A, sym, half-life, decay, n_d, n_t, tier]
    tier: 3 = >10ky, 2 = 1k-10ky, 1 = 100-1ky */
 const LONG_LIVED = [
   // Tier 3: > 10,000 years
-  [4,  10, "Be", "1.39 My",  "Î²â»",   0,  2,  3],
+  [4,  10, "Be", "1.39 My",  "β⁻",   0,  2,  3],
   [13, 26, "Al", "717 ky",   "EC",   11, 0,  3],
-  [17, 36, "Cl", "301 ky",   "Î²/EC", 13, 2,  3],
+  [17, 36, "Cl", "301 ky",   "β/EC", 13, 2,  3],
   [20, 41, "Ca", "99.4 ky",  "EC",   17, 1,  3],
   [25, 53, "Mn", "3.7 My",   "EC",   20, 3,  3],
   [28, 59, "Ni", "76 ky",    "EC",   23, 3,  3],
-  [26, 60, "Fe", "2.6 My",   "Î²â»",   16, 8,  3],
-  [34, 79, "Se", "327 ky",   "Î²â»",   21, 11, 3],
+  [26, 60, "Fe", "2.6 My",   "β⁻",   16, 8,  3],
+  [34, 79, "Se", "327 ky",   "β⁻",   21, 11, 3],
   [36, 81, "Kr", "229 ky",   "EC",   25, 9,  3],
-  [40, 93, "Zr", "1.61 My",  "Î²â»",   25, 13, 3],
+  [40, 93, "Zr", "1.61 My",  "β⁻",   25, 13, 3],
   [41, 92, "Nb", "34.7 My",  "EC",   29, 10, 3],
   [43, 97, "Tc", "4.21 My",  "EC",   30, 11, 3],
-  [43, 98, "Tc", "4.2 My",   "Î²â»",   29, 12, 3],
-  [43, 99, "Tc", "211 ky",   "Î²â»",   28, 13, 3],
-  [46,107, "Pd", "6.5 My",   "Î²â»",   29, 15, 3],
-  [50,126, "Sn", "230 ky",   "Î²â»",   22, 26, 3],
-  [53,129, "I",  "15.7 My",  "Î²â»",   28, 23, 3],
-  [55,135, "Cs", "2.3 My",   "Î²â»",   28, 25, 3],
-  [62,146, "Sm", "103 My",   "Î±",    38, 22, 3],
+  [43, 98, "Tc", "4.2 My",   "β⁻",   29, 12, 3],
+  [43, 99, "Tc", "211 ky",   "β⁻",   28, 13, 3],
+  [46,107, "Pd", "6.5 My",   "β⁻",   29, 15, 3],
+  [50,126, "Sn", "230 ky",   "β⁻",   22, 26, 3],
+  [53,129, "I",  "15.7 My",  "β⁻",   28, 23, 3],
+  [55,135, "Cs", "2.3 My",   "β⁻",   28, 25, 3],
+  [62,146, "Sm", "103 My",   "α",    38, 22, 3],
   [82,205, "Pb", "17.3 My",  "EC",   39, 41, 3],
   [83,208, "Bi", "368 ky",   "EC",   39, 42, 3],
-  [91,231, "Pa", "32.8 ky",  "Î±",    40, 49, 3],
-  [92,233, "U",  "159 ky",   "Î±",    41, 49, 3],
-  [92,236, "U",  "23.4 My",  "Î±",    38, 52, 3],
+  [91,231, "Pa", "32.8 ky",  "α",    40, 49, 3],
+  [92,233, "U",  "159 ky",   "α",    41, 49, 3],
+  [92,236, "U",  "23.4 My",  "α",    38, 52, 3],
   // Tier 2: 1,000 - 10,000 years
-  [6,  14, "C",  "5,730 y",  "Î²â»",   2,  2,  2],
+  [6,  14, "C",  "5,730 y",  "β⁻",   2,  2,  2],
   [42, 93, "Mo", "4,000 y",  "EC",   31, 9,  2],
   [67,163, "Ho", "4,570 y",  "EC",   36, 29, 2],
-  [67,166, "Ho", "1,200 y",  "Î²â»",   33, 32, 2],
-  [88,226, "Ra", "1,600 y",  "Î±",    36, 50, 2],
-  [90,229, "Th", "7,917 y",  "Î±",    39, 49, 2],
+  [67,166, "Ho", "1,200 y",  "β⁻",   33, 32, 2],
+  [88,226, "Ra", "1,600 y",  "α",    36, 50, 2],
+  [90,229, "Th", "7,917 y",  "α",    39, 49, 2],
   // Tier 1: 100 - 1,000 years
-  [14, 32, "Si", "153 y",    "Î²â»",   8,  4,  1],
-  [18, 39, "Ar", "269 y",    "Î²â»",   13, 3,  1],
-  [28, 63, "Ni", "100 y",    "Î²â»",   19, 7,  1],
+  [14, 32, "Si", "153 y",    "β⁻",   8,  4,  1],
+  [18, 39, "Ar", "269 y",    "β⁻",   13, 3,  1],
+  [28, 63, "Ni", "100 y",    "β⁻",   19, 7,  1],
   [41, 91, "Nb", "680 y",    "EC",   30, 9,  1],
   [47,108, "Ag", "418 y",    "EC",   31, 14, 1],
   [65,158, "Tb", "180 y",    "EC",   35, 28, 1],
   [77,192, "Ir", "241 y",    "IT",   37, 38, 1],
   [80,194, "Hg", "444 y",    "EC",   44, 34, 1],
-  [84,209, "Po", "125 y",    "Î±",    41, 41, 1],
+  [84,209, "Po", "125 y",    "α",    41, 41, 1],
   // Tier 0: 10 - 100 years
-  [18, 42, "Ar", "32.9 y",   "Î²â»",   10, 6,  0],
+  [18, 42, "Ar", "32.9 y",   "β⁻",   10, 6,  0],
   [22, 44, "Ti", "60 y",     "EC",   20, 0,  0],
-  [36, 85, "Kr", "10.8 y",   "Î²â»",   21, 13, 0],
-  [38, 90, "Sr", "28.8 y",   "Î²â»",   22, 14, 0],
+  [36, 85, "Kr", "10.8 y",   "β⁻",   21, 13, 0],
+  [38, 90, "Sr", "28.8 y",   "β⁻",   22, 14, 0],
   [41, 93, "Nb", "16.1 y",   "IT",   28, 11, 0],
-  [48,113, "Cd", "14.1 y",   "Î²â»",   29, 17, 0],
+  [48,113, "Cd", "14.1 y",   "β⁻",   29, 17, 0],
   [50,121, "Sn", "43.9 y",   "IT",   27, 21, 0],
-  [55,137, "Cs", "30.2 y",   "Î²â»",   26, 27, 0],
+  [55,137, "Cs", "30.2 y",   "β⁻",   26, 27, 0],
   [56,133, "Ba", "10.5 y",   "EC",   33, 21, 0],
   [61,145, "Pm", "17.7 y",   "EC",   36, 23, 0],
-  [62,151, "Sm", "90 y",     "Î²â»",   33, 27, 0],
+  [62,151, "Sm", "90 y",     "β⁻",   33, 27, 0],
   [63,150, "Eu", "36.9 y",   "EC",   37, 24, 0],
   [63,152, "Eu", "13.5 y",   "EC",   35, 26, 0],
-  [64,148, "Gd", "75 y",     "Î±",    42, 20, 0],
+  [64,148, "Gd", "75 y",     "α",    42, 20, 0],
   [65,157, "Tb", "71 y",     "EC",   36, 27, 0],
   [72,178, "Hf", "31 y",     "IT",   36, 34, 0],
   [78,193, "Pt", "50 y",     "EC",   39, 37, 0],
-  [82,210, "Pb", "22.2 y",   "Î²â»",   34, 46, 0],
+  [82,210, "Pb", "22.2 y",   "β⁻",   34, 46, 0],
   [83,207, "Bi", "31.6 y",   "EC",   40, 41, 0],
-  [89,227, "Ac", "21.8 y",   "Î²â»",   38, 49, 0],
-  [92,232, "U",  "68.9 y",   "Î±",    42, 48, 0]
+  [89,227, "Ac", "21.8 y",   "β⁻",   38, 49, 0],
+  [92,232, "U",  "68.9 y",   "α",    42, 48, 0]
 ];
 
 // Short-lived isotope tiers (tiers 4-9)
 const SHORT_LIVED = [
-  // â”€â”€ Tier 4: 1y â€“ 10y â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Tier 4: 1y – 10y ──────────────────────────────────────────────────────
   [11, 22,"Na","2.60 y", "EC",  9,  0, 4],
   [26, 55,"Fe","2.73 y", "EC", 21,  3, 4],
-  [27, 60,"Co","5.27 y", "Î²â»",19,  6, 4],
-  [51,125,"Sb","2.76 y", "Î²â»",26, 23, 4],
-  [55,134,"Cs","2.07 y", "Î²â»",29, 24, 4],
+  [27, 60,"Co","5.27 y", "β⁻",19,  6, 4],
+  [51,125,"Sb","2.76 y", "β⁻",26, 23, 4],
+  [55,134,"Cs","2.07 y", "β⁻",29, 24, 4],
   [61,146,"Pm","5.53 y", "EC", 35, 24, 4],
-  [61,147,"Pm","2.62 y", "Î²â»",34, 25, 4],
-  [63,154,"Eu","8.59 y", "Î²â»",33, 28, 4],
-  [63,155,"Eu","4.75 y", "Î²â»",32, 29, 4],
-  [69,171,"Tm","1.92 y", "Î²â»",34, 33, 4],
+  [61,147,"Pm","2.62 y", "β⁻",34, 25, 4],
+  [63,154,"Eu","8.59 y", "β⁻",33, 28, 4],
+  [63,155,"Eu","4.75 y", "β⁻",32, 29, 4],
+  [69,171,"Tm","1.92 y", "β⁻",34, 33, 4],
   [71,173,"Lu","1.37 y", "EC", 38, 31, 4],
   [71,174,"Lu","3.31 y", "EC", 37, 32, 4],
   [72,172,"Hf","1.87 y", "EC", 42, 28, 4],
   [73,179,"Ta","1.82 y", "EC", 38, 33, 4],
-  [81,204,"Tl","3.78 y", "Î²â»",37, 42, 4],
-  [84,208,"Po","2.90 y", "Î±",  42, 40, 4],
-  [88,228,"Ra","5.75 y", "Î²â»",34, 52, 4],
-  [98,252,"Cf","2.65 y", "Î±",  40, 56, 4],
-  // â”€â”€ Tier 5: 36d â€“ 1y â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-  [16, 35,"S", "87.4 d", "Î²â»",11,  3, 5],
+  [81,204,"Tl","3.78 y", "β⁻",37, 42, 4],
+  [84,208,"Po","2.90 y", "α",  42, 40, 4],
+  [88,228,"Ra","5.75 y", "β⁻",34, 52, 4],
+  [98,252,"Cf","2.65 y", "α",  40, 56, 4],
+  // ── Tier 5: 36d – 1y ──────────────────────────────────────────────────────
+  [16, 35,"S", "87.4 d", "β⁻",11,  3, 5],
   [27, 56,"Co","77.2 d", "EC", 25,  2, 5],
   [30, 65,"Zn","244 d",  "EC", 23,  5, 5],
   [32, 68,"Ge","271 d",  "EC", 26,  4, 5],
   [34, 75,"Se","120 d",  "EC", 25,  7, 5],
   [38, 85,"Sr","64.8 d", "EC", 27,  9, 5],
   [39, 88,"Y", "107 d",  "EC", 29, 10, 5],
-  [44,106,"Ru","374 d",  "Î²â»",24, 18, 5],
+  [44,106,"Ru","374 d",  "β⁻",24, 18, 5],
   [48,109,"Cd","462 d",  "EC", 33, 13, 5],
   [50,113,"Sn","115 d",  "EC", 35, 13, 5],
   [53,125,"I", "59.4 d", "EC", 32, 19, 5],
   [58,139,"Ce","138 d",  "EC", 33, 23, 5],
   [64,153,"Gd","241 d",  "EC", 37, 25, 5],
-  [69,170,"Tm","129 d",  "Î²â»",35, 32, 5],
+  [69,170,"Tm","129 d",  "β⁻",35, 32, 5],
   [74,181,"W", "121 d",  "EC", 39, 33, 5],
   [75,183,"Re","70.0 d", "EC", 40, 33, 5],
   [76,185,"Os","93.6 d", "EC", 41, 33, 5],
-  [77,192,"Ir","73.8 d", "Î²â»",37, 38, 5],
+  [77,192,"Ir","73.8 d", "β⁻",37, 38, 5],
   [79,195,"Au","186 d",  "EC", 40, 37, 5],
-  [84,210,"Po","138 d",  "Î±",  40, 42, 5],
-  // â”€â”€ Tier 6: 3.6d â€“ 36d â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-  [15, 32,"P", "14.3 d", "Î²â»",11,  2, 6],
-  [15, 33,"P", "25.4 d", "Î²â»",10,  3, 6],
+  [84,210,"Po","138 d",  "α",  40, 42, 5],
+  // ── Tier 6: 3.6d – 36d ────────────────────────────────────────────────────
+  [15, 32,"P", "14.3 d", "β⁻",11,  2, 6],
+  [15, 33,"P", "25.4 d", "β⁻",10,  3, 6],
   [24, 51,"Cr","27.7 d", "EC", 19,  3, 6],
   [25, 52,"Mn","5.59 d", "EC", 21,  2, 6],
-  [53,131,"I", "8.02 d", "Î²â»",26, 25, 6],
+  [53,131,"I", "8.02 d", "β⁻",26, 25, 6],
   [56,131,"Ba","11.5 d", "EC", 35, 19, 6],
-  [58,141,"Ce","32.5 d", "Î²â»",31, 25, 6],
-  [60,147,"Nd","11.0 d", "Î²â»",31, 27, 6],
+  [58,141,"Ce","32.5 d", "β⁻",31, 25, 6],
+  [60,147,"Nd","11.0 d", "β⁻",31, 27, 6],
   [68,169,"Er","9.39 d", "EC", 33, 33, 6],
   [70,169,"Yb","32.0 d", "EC", 39, 29, 6],
-  [83,210,"Bi","5.01 d", "Î²â»",37, 44, 6],
-  [88,223,"Ra","11.4 d", "Î±",  39, 47, 6],
-  [88,224,"Ra","3.66 d", "Î±",  38, 48, 6],
-  [89,225,"Ac","9.92 d", "Î±",  40, 47, 6],
-  [91,233,"Pa","27.0 d", "Î²â»",38, 51, 6],
-  [92,237,"U", "6.75 d", "Î²â»",37, 53, 6],
-  // â”€â”€ Tier 7: 8.64h â€“ 3.6d â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-  [11, 24,"Na","14.96 h","Î²â»", 7,  2, 7],
-  [19, 42,"K", "12.36 h","Î²â»",13,  4, 7],
-  [21, 48,"Sc","43.67 h","Î²â»",13,  6, 7],
-  [40, 89,"Zr","78.41 h","Î²â»",29,  9, 7],
-  [42, 99,"Mo","65.94 h","Î²â»",25, 15, 7],
-  [45,105,"Rh","35.36 h","Î²â»",28, 15, 7],
-  [52,131,"Te","33.25 h","Î²â»",23, 27, 7],
-  [55,129,"Cs","32.06 h","Î²â»",34, 19, 7],
-  [57,140,"La","40.28 h","Î²â»",29, 26, 7],
-  [62,153,"Sm","46.50 h","Î²â»",31, 29, 7],
-  [67,166,"Ho","26.82 h","Î²â»",33, 32, 7],
-  [75,186,"Re","90.76 h","Î²â»",37, 36, 7],
-  [77,194,"Ir","19.28 h","Î²â»",35, 40, 7],
+  [83,210,"Bi","5.01 d", "β⁻",37, 44, 6],
+  [88,223,"Ra","11.4 d", "α",  39, 47, 6],
+  [88,224,"Ra","3.66 d", "α",  38, 48, 6],
+  [89,225,"Ac","9.92 d", "α",  40, 47, 6],
+  [91,233,"Pa","27.0 d", "β⁻",38, 51, 6],
+  [92,237,"U", "6.75 d", "β⁻",37, 53, 6],
+  // ── Tier 7: 8.64h – 3.6d ──────────────────────────────────────────────────
+  [11, 24,"Na","14.96 h","β⁻", 7,  2, 7],
+  [19, 42,"K", "12.36 h","β⁻",13,  4, 7],
+  [21, 48,"Sc","43.67 h","β⁻",13,  6, 7],
+  [40, 89,"Zr","78.41 h","β⁻",29,  9, 7],
+  [42, 99,"Mo","65.94 h","β⁻",25, 15, 7],
+  [45,105,"Rh","35.36 h","β⁻",28, 15, 7],
+  [52,131,"Te","33.25 h","β⁻",23, 27, 7],
+  [55,129,"Cs","32.06 h","β⁻",34, 19, 7],
+  [57,140,"La","40.28 h","β⁻",29, 26, 7],
+  [62,153,"Sm","46.50 h","β⁻",31, 29, 7],
+  [67,166,"Ho","26.82 h","β⁻",33, 32, 7],
+  [75,186,"Re","90.76 h","β⁻",37, 36, 7],
+  [77,194,"Ir","19.28 h","β⁻",35, 40, 7],
   [81,201,"Tl","72.91 h","EC", 40, 39, 7],
-  [82,212,"Pb","10.64 h","Î²â»",32, 48, 7],
-  [89,226,"Ac","29.37 h","Î²â»",39, 48, 7],
-  [90,231,"Th","25.52 h","Î²â»",37, 51, 7],
-  [86,211,"Rn","14.6 h", "Î±",  47, 39, 7],
-  // â”€â”€ Tier 8: 51.8min â€“ 8.64h â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  [82,212,"Pb","10.64 h","β⁻",32, 48, 7],
+  [89,226,"Ac","29.37 h","β⁻",39, 48, 7],
+  [90,231,"Th","25.52 h","β⁻",37, 51, 7],
+  [86,211,"Rn","14.6 h", "α",  47, 39, 7],
+  // ── Tier 8: 51.8min – 8.64h ───────────────────────────────────────────────
   [ 9, 18,"F", "109.8 m","EC",  7,  0, 8],
   [26, 52,"Fe","8.28 h", "EC", 26,  0, 8],
   [43, 99,"Tc","6.01 h", "IT", 28, 13, 8],
-  [47,112,"Ag","3.13 h", "Î²â»",27, 18, 8],
+  [47,112,"Ag","3.13 h", "β⁻",27, 18, 8],
   [49,113,"In","1.66 h", "IT", 32, 15, 8],
   [81,199,"Tl","7.42 h", "EC", 42, 37, 8],
-  [83,213,"Bi","45.6 m", "Î±",  34, 47, 8],
-  [91,234,"Pa","6.70 h", "Î²â»",37, 52, 8],
-  [94,243,"Pu","4.96 h", "Î²â»",37, 55, 8],
-  // â”€â”€ Tier 9: < 51.8 min (grammar-edge, fast decay) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  [83,213,"Bi","45.6 m", "α",  34, 47, 8],
+  [91,234,"Pa","6.70 h", "β⁻",37, 52, 8],
+  [94,243,"Pu","4.96 h", "β⁻",37, 55, 8],
+  // ── Tier 9: < 51.8 min (grammar-edge, fast decay) ─────────────────────────
   [ 6, 11,"C", "20.3 m", "EC",  5, -1, 9],
   [ 7, 13,"N", "9.97 m", "EC",  6, -1, 9],
   [ 8, 15,"O", "2.04 m", "EC",  9, -1, 9],
-  [10, 19,"Ne","17.3 s", "Î²â»",11, -1, 9],
-  [12, 27,"Mg","9.46 m", "Î²â»", 7,  3, 9],
+  [10, 19,"Ne","17.3 s", "β⁻",11, -1, 9],
+  [12, 27,"Mg","9.46 m", "β⁻", 7,  3, 9],
   [37, 79,"Rb","22.9 m", "EC", 30,  5, 9],
   [38, 82,"Sr","25.4 d", "EC", 28,  6, 9],
-  [84,211,"Po","0.516 s","Î±",  41, 43, 9],
-  [84,212,"Po","0.299 Î¼s","Î±", 40, 44, 9],
-  [84,213,"Po","3.72 Î¼s","Î±",  39, 45, 9],
-  [88,219,"Ra","10 ms",  "Î±",  43, 43, 9],
-  [89,217,"Ac","69 ns",  "Î±",  44, 39, 9],
-  [90,227,"Th","18.7 d", "Î²â»",35, 49, 6],
+  [84,211,"Po","0.516 s","α",  41, 43, 9],
+  [84,212,"Po","0.299 μs","α", 40, 44, 9],
+  [84,213,"Po","3.72 μs","α",  39, 45, 9],
+  [88,219,"Ra","10 ms",  "α",  43, 43, 9],
+  [89,217,"Ac","69 ns",  "α",  44, 39, 9],
+  [90,227,"Th","18.7 d", "β⁻",35, 49, 6],
 ];
 
 /* Decay vector definitions in grammar space */
 const DECAY_VECTORS = {
-  "Î±":    { dnd: -2, dnt:  0, color: "#ffd040", label: "Î± (âˆ’2d)" },
-  "Î²â»":   { dnd: +3, dnt: -2, color: "#40c8ff", label: "Î²â» (+3d,âˆ’2t)" },
-  "EC":   { dnd: -3, dnt: +2, color: "#ff40ff", label: "EC (âˆ’3d,+2t)" },
-  "Î²âº":   { dnd: -3, dnt: +2, color: "#ff80ff", label: "Î²âº (âˆ’3d,+2t)" },
-  "Î²/EC": { dnd: -3, dnt: +2, color: "#80e0a0", label: "Î²/EC" },
+  "α":    { dnd: -2, dnt:  0, color: "#ffd040", label: "α (−2d)" },
+  "β⁻":   { dnd: +3, dnt: -2, color: "#40c8ff", label: "β⁻ (+3d,−2t)" },
+  "EC":   { dnd: -3, dnt: +2, color: "#ff40ff", label: "EC (−3d,+2t)" },
+  "β⁺":   { dnd: -3, dnt: +2, color: "#ff80ff", label: "β⁺ (−3d,+2t)" },
+  "β/EC": { dnd: -3, dnt: +2, color: "#80e0a0", label: "β/EC" },
   "IT":   { dnd:  0, dnt:  0, color: "#ffaa40", label: "IT (same pos)" },
-  "n":    { dnd: +1, dnt: -1, color: "#ff6060", label: "n (+1d,âˆ’1t)" },
-  "p":    { dnd: -2, dnt: +1, color: "#ff9900", label: "p (âˆ’2d,+1t)" },
+  "n":    { dnd: +1, dnt: -1, color: "#ff6060", label: "n (+1d,−1t)" },
+  "p":    { dnd: -2, dnt: +1, color: "#ff9900", label: "p (−2d,+1t)" },
   "SF":   { dnd:  0, dnt:  0, color: "#ff4444", label: "SF" },
 };
 
@@ -1011,15 +1067,15 @@ function zStable(A) { return A / (2 + 0.0146 * Math.pow(A, 2/3)); }
 
 /* Infer decay mode from N/Z when no measured data available */
 function inferDecay(Z, A) {
-  if (A < 4 || Z < 2) return 'Î²â»';
+  if (A < 4 || Z < 2) return 'β⁻';
   const Zs = zStable(A);
   const dz = Z - Zs;
-  if (A > 210 && Z > 82) return 'Î±';
-  if (A > 150 && dz < -1.5) return 'Î±';
+  if (A > 210 && Z > 82) return 'α';
+  if (A > 150 && dz < -1.5) return 'α';
   if (dz > 2.5 && A < 60)  return 'p';
   if (dz < -2.5 && A < 30) return 'n';
   if (dz > 0.8)  return 'EC';
-  if (dz < -0.5) return 'Î²â»';
+  if (dz < -0.5) return 'β⁻';
   return 'stable';
 }
 
@@ -1034,7 +1090,7 @@ ISO.forEach(iso => {
 const isoByGrammar = new Map();
 ISO.forEach(iso => isoByGrammar.set(`${iso.nd},${iso.nt}`, iso));
 
-/* Follow decay chain â€” returns array of {from, to, decay, color} steps */
+/* Follow decay chain — returns array of {from, to, decay, color} steps */
 function decayChain(startIso, maxSteps, backward) {
   if (maxSteps === undefined) maxSteps = 6;
   if (backward === undefined) backward = false;
@@ -1074,7 +1130,7 @@ const allV = ISO.map(e => e.nd + e.nt);
 const uMin = Math.min(...allU), uMax = Math.max(...allU);
 const vMin = Math.min(...allV), vMax = Math.max(...allV);
 
-// vVals â€” sorted unique v values
+// vVals — sorted unique v values
 const vVals = [...new Set(ISO.map(e => e.nd + e.nt))].sort((a,b)=>a-b);
 // === js/spine.js ===
 // Monoisotopic Line Fit & Row Shifts
@@ -1113,7 +1169,7 @@ function getUFit(v) {
   return fallbackFit.m * v + fallbackFit.b;
 }
 
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─────────────────────────────────────────────────────────────────
 // ENERGY FUNCTIONAL SPINE
 const rawMaxSpine      = {};  // { u, be, sym, A }
 const energySpineByV   = {};  // { u: u_E, be: smoothed_BE_max, iso: nearest, confidence }
@@ -1121,7 +1177,7 @@ const deltaMonoEnergy  = {};  // u_E(v) - u_mono(v)
 
 (function buildEnergySpine() {
   vVals.forEach(v => {
-    // Gather BE data from this row AND Â±2 neighbouring rows for support
+    // Gather BE data from this row AND ±2 neighbouring rows for support
     const supportRows = [v-2, v-1, v, v+1, v+2];
     const nodes = [];
     supportRows.forEach(sv => {
@@ -1138,7 +1194,7 @@ const deltaMonoEnergy  = {};  // u_E(v) - u_mono(v)
       rawMaxSpine[v] = { u: bestRaw.u, be: bestRaw.be, sym: bestRaw.iso.sym, A: bestRaw.iso.A };
     }
 
-    // Smoothed max â€” weighted parabolic fit over all support nodes
+    // Smoothed max — weighted parabolic fit over all support nodes
     const rowWeights = { [v]:1.0, [v-1]:0.4, [v+1]:0.4, [v-2]:0.15, [v+2]:0.15 };
     if (nodes.length < 2) {
       const n = nodes[0];
@@ -1230,7 +1286,7 @@ const deltaMonoEnergy  = {};  // u_E(v) - u_mono(v)
     '| stable median offset:', medianStableDelta.toFixed(3));
 })();
 // === js/utils.js ===
-/* â”€â”€ Canvas setup â”€â”€ */
+/* ── Canvas setup ── */
 const canvas = document.getElementById("c");
 const ctx = canvas.getContext("2d");
 const dpr = window.devicePixelRatio || 1;
@@ -1238,8 +1294,8 @@ let W, H;
 
 let morphT = 0;
 let panX = 0, panY = 0, zoom = 0.75;
-let gridScale  = 5; // y px per grid unit â€” updated each frame
-let gridScaleX = 10; // x px per grid unit (2 Ã— gridScale for 2:1 stretch)
+let gridScale  = 5; // y px per grid unit — updated each frame
+let gridScaleX = 10; // x px per grid unit (2 × gridScale for 2:1 stretch)
 
 let hoveredIso = null;
 let hoveredZ = null;
@@ -1290,6 +1346,16 @@ const cbDeltaUE     = document.getElementById('showDeltaUE');
 [cbEnergySpine, cbMonoSpineOv, cbHighestGS, cbLowestGS, cbDeltaUE]
   .forEach(cb => cb && cb.addEventListener('change', draw));
 
+// Magic-line overlays, element-group highlights, line picker
+['magN','magZ','magDM','magWidth','linePickOn',
+ 'partND','partNT','partMono','partSwitch','radCol',
+ 'grp-noble','grp-alkali','grp-alkEarth','grp-trans','grp-lanth','grp-actin','grp-halogen']
+  .forEach(id => { const el = document.getElementById(id); if (el) el.addEventListener('change', draw); });
+{ const el = document.getElementById('linePickAxis'); if (el) el.addEventListener('change', draw); }
+{ const el = document.getElementById('linePickVal'); if (el) el.addEventListener('input', draw); }
+{ const d = document.getElementById('dimSlider'), dv = document.getElementById('dimVal');
+  if (d) d.addEventListener('input', () => { if (dv) dv.textContent = d.value + '%'; draw(); }); }
+
 // Pan & zoom events
 let dragging = false, lastX, lastY;
 canvas.addEventListener("mousedown",e=>{dragging=true;lastX=e.clientX;lastY=e.clientY;});
@@ -1314,8 +1380,8 @@ function gridPos(nd, nt) {
   const v = nd + nt;
 
   // morphT range [-1, +1]; 0 = actual/golden
-  // t = -1  â†’ Mono: shift each row by u_mono(v) â†’ monoisotope spine is vertical
-  // t = +1  â†’ Energy: shift each row by u_E(v)  â†’ BE/A ridge is vertical
+  // t = -1  → Mono: shift each row by u_mono(v) → monoisotope spine is vertical
+  // t = +1  → Energy: shift each row by u_E(v)  → BE/A ridge is vertical
   const fitU = getUFit(v);
 
   let u;
@@ -1361,7 +1427,7 @@ function hexToRgb(hex) {
   return `${parseInt(h.substring(0,2),16)},${parseInt(h.substring(2,4),16)},${parseInt(h.substring(4,6),16)}`;
 }
 
-// â”€â”€ Hexagon geometry helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Hexagon geometry helpers ─────────────────────────────────────────────────
 function hexPath(ctx, cx, cy, Rx, Ry) {
   if (Ry === undefined) Ry = Rx;
   ctx.beginPath();
@@ -1428,7 +1494,7 @@ function isoColor(iso, alpha) {
   return `rgba(${rgb},${alpha})`;
 }
 
-// â”€â”€â”€ Electron sub-shell bands (Aufbau filling order) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Electron sub-shell bands (Aufbau filling order) ────────────────────────
 const SHELL_BANDS = [
   { name:"1s",   zMin:1,  zMax:2,  fill:"rgba(255, 80,  50,  0.10)", stroke:"rgba(255, 80,  50,  0.55)" },
   { name:"2s",   zMin:3,  zMax:4,  fill:"rgba(255, 145, 40,  0.09)", stroke:"rgba(255, 145, 40,  0.55)" },
@@ -1459,7 +1525,7 @@ const ELEM_REF_V = {};
   if (ref) ELEM_REF_V[Z] = ref.nd + ref.nt;
 });
 
-// â”€â”€â”€ Comprehensive unstable isotope positions â”€â”€â”€â”€â”€â”€
+// ─── Comprehensive unstable isotope positions ──────
 const UNSTABLE_EXTRA = [
   [4,  [8,10]],
   [5,  [12,13]],
@@ -1593,9 +1659,9 @@ const ELEM_NAMES = {
 function drawBackground(ctx) {
   const pad = 80;
 
-  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-  // 1. Golden Boundary Line (nd = nt) â€” BACKGROUND VERSION (faint)
-  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ────────────────────────────────────────────────────────────────────────────
+  // 1. Golden Boundary Line (nd = nt) — BACKGROUND VERSION (faint)
+  // ────────────────────────────────────────────────────────────────────────────
   if (cbGoldenLine.checked) {
     const goldenPts = [];
     for (let v = vMin % 2 === 0 ? vMin : vMin + 1; v <= vMax; v += 2) {
@@ -1632,7 +1698,7 @@ function drawBackground(ctx) {
     }
   }
 
-  // â”€â”€ 2. GS chains + spine coverage stats â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── 2. GS chains + spine coverage stats ──────────────────────────────────
   {
     const hiByV = new Map(), loByV = new Map();
     ISO.forEach(iso => {
@@ -1658,7 +1724,7 @@ function drawBackground(ctx) {
       pctUnstable: spTotal ? (spUnstable / spTotal * 100).toFixed(1) : '?',
     };
 
-    // â”€ Highest GS chain (amber)
+    // ─ Highest GS chain (amber)
     if (cbHighestGS && cbHighestGS.checked) {
       const pts = [];
       hiByV.forEach(({ iso }) => {
@@ -1680,7 +1746,7 @@ function drawBackground(ctx) {
       }
     }
 
-    // â”€ Lowest GS chain (violet)
+    // ─ Lowest GS chain (violet)
     if (cbLowestGS && cbLowestGS.checked) {
       const pts = [];
       loByV.forEach(({ iso }) => {
@@ -1703,7 +1769,7 @@ function drawBackground(ctx) {
     }
   }
 
-  // â”€â”€ 3. Energy Functional Spine (background) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── 3. Energy Functional Spine (background) ──────────────────────────────
   if (cbEnergySpine.checked) {
     const ePts = [];
     vVals.forEach(v => {
@@ -1729,7 +1795,7 @@ function drawBackground(ctx) {
     }
   }
 
-  // â”€â”€ 4. Mono spine overlay (orange, background) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── 4. Mono spine overlay (orange, background) ────────────────────────────
   if (cbMonoSpineOv && cbMonoSpineOv.checked) {
     const mPts = [];
     monoPts.forEach(pt => {
@@ -1761,7 +1827,7 @@ function drawBackground(ctx) {
     }
   }
 
-  // â”€â”€ 5. Sole element chain â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── 5. Sole element chain ─────────────────────────────────────────────────
   if (cbSC && cbSC.checked && SOLE_Z.length > 1) {
     const solePoints = [];
     for (let i = 0; i < SOLE_Z.length; i++) {
@@ -1779,7 +1845,7 @@ function drawBackground(ctx) {
     }
   }
 
-  // â”€â”€ 6. Hex lattice grid lines â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── 6. Hex lattice grid lines ─────────────────────────────────────────────
   {
     const lineCol = 'rgba(70,100,180,0.18)';
     ctx.strokeStyle = lineCol;
@@ -1883,7 +1949,7 @@ function drawBackground(ctx) {
     });
   }
 
-  // â”€â”€ 8. Golden Boundary Line â€” FOREGROUND VERSION (bright) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── 8. Golden Boundary Line — FOREGROUND VERSION (bright) ────────────────
   if (cbGoldenLine.checked) {
     const goldenPts = [];
     for (let v = vMin % 2 === 0 ? vMin : vMin + 1; v <= vMax; v += 2) {
@@ -1920,7 +1986,7 @@ function drawBackground(ctx) {
     }
   }
 
-  // â”€â”€ Energy Functional Spine overlay (foreground) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Energy Functional Spine overlay (foreground) ──────────────────────────
   if (cbEnergySpine.checked) {
     const ePts = [];
     vVals.forEach(v => {
@@ -1948,7 +2014,7 @@ function drawBackground(ctx) {
     }
   }
 
-  // â”€â”€ Mono spine overlay (foreground) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Mono spine overlay (foreground) ──────────────────────────────────────
   if (cbMonoSpineOv && cbMonoSpineOv.checked) {
     const mPts = [];
     monoPts.forEach(pt => {
@@ -1987,7 +2053,13 @@ function drawNodes(ctx) {
   const showConn = cbConn.checked;
   const showMag  = cbMag.checked;
 
-  // â”€â”€ Background position circles for all known unstable isotopes â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // Emphasis (element groups + line picker) — dims the rest so highlights stand out
+  const EMPH = emphasisState();
+  const _ds = document.getElementById('dimSlider');
+  EMPH.dimMul = _ds ? (1 - (+_ds.value)/100) : 0.2;
+  const _radColOn = !!(document.getElementById('radCol') || {}).checked;
+
+  // ── Background position circles for all known unstable isotopes ──────────
   if (cbUnstPos.checked) {
     const baseR = Math.max(2.5, gridScale * zoom / 2 - 1);
     UNSTABLE_GRID.forEach(([Z, A, nd, nt]) => {
@@ -2107,7 +2179,7 @@ function drawNodes(ctx) {
       ctx.font = "700 11px 'Segoe UI',sans-serif";
       ctx.fillStyle = "rgba(255,100,120,0.75)";
       ctx.textAlign = "center";
-      ctx.fillText("Fe Â· Co Â· Ni", cx, cy + 145 * zoom);
+      ctx.fillText("Fe · Co · Ni", cx, cy + 145 * zoom);
       ctx.font = "500 9px 'Segoe UI',sans-serif";
       ctx.fillStyle = "rgba(255,100,120,0.45)";
       ctx.fillText("ferromagnetic zone", cx, cy + 158 * zoom);
@@ -2151,11 +2223,11 @@ function drawNodes(ctx) {
     ctx.font = "500 10px 'Segoe UI',sans-serif";
     ctx.textAlign = "left";
     ctx.fillStyle = "rgba(230,180,70,0.6)";
-    ctx.fillText("â—  sole (1 stable isotope)", pad + 5, H - pad + 15);
+    ctx.fillText("●  sole (1 stable isotope)", pad + 5, H - pad + 15);
     ctx.fillStyle = "rgba(90,120,150,0.6)";
-    ctx.fillText("â—  spread (2+ stable isotopes)", pad + 175, H - pad + 15);
+    ctx.fillText("●  spread (2+ stable isotopes)", pad + 175, H - pad + 15);
     ctx.fillStyle = "rgba(120,80,70,0.5)";
-    ctx.fillText("â—‹ unstable", pad + 375, H - pad + 15);
+    ctx.fillText("○ unstable", pad + 375, H - pad + 15);
   }
 
   // Unpaired electrons legend
@@ -2173,7 +2245,7 @@ function drawNodes(ctx) {
       ctx.fillText(u.toString(), pad + 12 + u * 30, H - pad + 22);
     }
     ctx.fillStyle = "#888";
-    ctx.fillText("â†  unpaired electrons", pad + 5 + 8 * 30, H - pad + 22);
+    ctx.fillText("↑  unpaired electrons", pad + 5 + 8 * 30, H - pad + 22);
   }
 
   // Odd/Even legend
@@ -2181,12 +2253,12 @@ function drawNodes(ctx) {
     ctx.font = "500 10px 'Segoe UI',sans-serif";
     ctx.textAlign = "left";
     ctx.fillStyle = "rgba(200,140,80,0.6)";
-    ctx.fillText("â—  odd-A (half-integer spin)", pad + 5, H - pad + 15);
+    ctx.fillText("●  odd-A (half-integer spin)", pad + 5, H - pad + 15);
     ctx.fillStyle = "rgba(80,130,170,0.6)";
-    ctx.fillText("â—  even-A (integer spin)", pad + 220, H - pad + 15);
+    ctx.fillText("●  even-A (integer spin)", pad + 220, H - pad + 15);
   }
 
-  // â”€â”€ CHANGE 4: Pre-compute active group state â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── CHANGE 4: Pre-compute active group state ──────────────────────────────
   // Build a Set of group keys and find connected components for scaling
   const groupSet = new Set();
   activeGroup.forEach(iso => groupSet.add(`${iso.nd},${iso.nt}`));
@@ -2226,7 +2298,7 @@ function drawNodes(ctx) {
     return components;
   }
 
-  // Map each iso key â†’ its component's screen centroid
+  // Map each iso key → its component's screen centroid
   const groupCentroidMap = new Map();
   if (activeGroup.length > 0) {
     const components = findComponents(activeGroup);
@@ -2240,7 +2312,7 @@ function drawNodes(ctx) {
     });
   }
 
-  // â”€â”€ Draw isotope nodes â€” flat-top hexagons â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Draw isotope nodes — flat-top hexagons ──────────────────────────────
   ISO.forEach(iso => {
     const rawP = isoPos(iso);
     const isElemHov = hoveredZ !== null && iso.Z === hoveredZ;
@@ -2249,6 +2321,8 @@ function drawNodes(ctx) {
     const isSoleStable = iso.isSole && iso.stable;
     const isoKey = `${iso.nd},${iso.nt}`;
     const inGroup = groupSet.has(isoKey);
+    const _emphCol = EMPH.active ? isoEmphColor(iso, EMPH) : null;
+    ctx.globalAlpha = (EMPH.active && !_emphCol) ? EMPH.dimMul : 1;
 
     const gsY = gridScale * zoom;
     const R0  = gsY * 0.9375;
@@ -2304,9 +2378,22 @@ function drawNodes(ctx) {
     } else {
       ctx.fillStyle = isoColor(iso, (isHov||isSel||inGroup) ? 0.50 : isElemHov ? 0.30 : 0.20);
     }
+    if (_radColOn){ const rc = r0Color(iso, iso.stable ? 0.9 : 0.55); if (rc) ctx.fillStyle = rc; }
     ctx.fill();
 
-    // â”€â”€ Border drawing: for group members, skip edges shared with other group members â”€â”€
+    // Emphasis ring — element-group / line-picker highlight
+    if (_emphCol){
+      ctx.save();
+      ctx.globalAlpha = 1;
+      ctx.strokeStyle = _emphCol;
+      ctx.lineWidth = Math.max(1.5, 2.2*zoom);
+      ctx.shadowColor = _emphCol; ctx.shadowBlur = 8*zoom;
+      hexPath(ctx, p.x, p.y, R + 2.5*zoom);
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    // ── Border drawing: for group members, skip edges shared with other group members ──
     if (inGroup) {
       // Draw each edge individually, skipping edges adjacent to other group members
       const R_used = R;
@@ -2377,7 +2464,7 @@ function drawNodes(ctx) {
       ctx.restore();
     }
 
-    // Î”u_E sideband colour overlay
+    // Δu_E sideband colour overlay
     if (cbDeltaUE.checked) {
       const v = iso.nd + iso.nt;
       const sp = energySpineByV[v];
@@ -2424,21 +2511,22 @@ function drawNodes(ctx) {
       roundRect(ctx, px2, py_sym - ph*0.85, pw, ph, 2);
       ctx.fill();
 
-      // Mass number above â€” sans-serif
+      // Mass number above — sans-serif
       ctx.font = `400 ${numSize}px 'Segoe UI',Arial,sans-serif`;
       const isTextActive = (isHov || isSel || inGroup);
       ctx.fillStyle = isTextActive ? 'rgba(255,255,255,0.95)' : 'rgba(180,180,180,0.80)';
       ctx.textAlign = 'center';
       ctx.fillText(String(iso.A), p.x, p.y - R * 0.12);
 
-      // Symbol â€” serif bold
+      // Symbol — serif bold
       ctx.font = `bold ${symSize}px Georgia,'Times New Roman',serif`;
       ctx.fillStyle = textFill;
       ctx.fillText(iso.sym, p.x, py_sym);
     }
   });
 
-  // â”€â”€ CHANGE 4: Draw connecting lines between chain members â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── CHANGE 4: Draw connecting lines between chain members ─────────────────
+  ctx.globalAlpha = 1;
   if (activeGroup.length > 1) {
     ctx.save();
     ctx.globalAlpha = 0.5;
@@ -2473,7 +2561,7 @@ function drawNodes(ctx) {
     ctx.restore();
   }
 
-  // â”€â”€ CHANGE 4: Canvas chain panel on right â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── CHANGE 4: Canvas chain panel on right ────────────────────────────────
   if (activeGroup.length > 0) {
     const panX2 = W - 195;
     const panY2 = 60;
@@ -2509,14 +2597,14 @@ function drawNodes(ctx) {
       ctx.fillStyle = 'rgba(220,215,200,0.92)';
       ctx.fillText(`${iso.sym}-${iso.A}`, panX2 + 18, yRow + 9);
 
-      const decay = iso.stable ? 'stable' : (iso.decay || 'â€”');
+      const decay = iso.stable ? 'stable' : (iso.decay || '—');
       if (i < activeGroup.length - 1) {
         ctx.font = '400 9px "Segoe UI",sans-serif';
         ctx.fillStyle = 'rgba(160,140,100,0.70)';
-        ctx.fillText(`â†’ ${decay}`, panX2 + 58, yRow + 9);
+        ctx.fillText(`→ ${decay}`, panX2 + 58, yRow + 9);
       }
 
-      const beStr = iso.be > 0 ? iso.be.toFixed(3) + ' MeV' : 'â€”';
+      const beStr = iso.be > 0 ? iso.be.toFixed(3) + ' MeV' : '—';
       ctx.font = '400 9px "Segoe UI",sans-serif';
       ctx.fillStyle = 'rgba(130,150,180,0.70)';
       ctx.textAlign = 'right';
@@ -2544,7 +2632,7 @@ function roundRect(ctx, x, y, w, h, r) {
 }
 // === js/draw-overlays.js ===
 function drawOverlays(ctx) {
-  // â”€â”€ 1. Grammar Sheets (4 types of tiers) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── 1. Grammar Sheets (4 types of tiers) ────────────────────────────────
   const showLL    = cbLongLived.checked;
   const showMid   = cbMid.checked;
   const showShort = cbShort.checked;
@@ -2636,7 +2724,7 @@ function drawOverlays(ctx) {
     });
   }
 
-  // â”€â”€ 2. Missing Alpha Positions â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── 2. Missing Alpha Positions ─────────────────────────────────────────
   if (cbMissing.checked) {
     const typeColors = {
       "even-even": "rgba(80,120,200,0.20)",
@@ -2658,7 +2746,7 @@ function drawOverlays(ctx) {
     });
   }
 
-  // â”€â”€ 3. Missing He-3 Structures â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── 3. Missing He-3 Structures ────────────────────────────────────────
   if (cbHe3Miss && cbHe3Miss.checked) {
     const typeColors = {
       "even-even": "rgba(40,220,180,0.20)",
@@ -2682,7 +2770,7 @@ function drawOverlays(ctx) {
     });
   }
 
-  // â”€â”€ 4. He-3 grammar overlay on existing isos â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── 4. He-3 grammar overlay on existing isos ──────────────────────────
   if (cbHe3 && cbHe3.checked) {
     HE3_EXISTING.forEach(iso => {
       const p = isoPos(iso);
@@ -2695,7 +2783,7 @@ function drawOverlays(ctx) {
     });
   }
 
-  // â”€â”€ 5. Deuteron Chain â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── 5. Deuteron Chain ─────────────────────────────────────────────────
   if (cbDeut.checked) {
     const dIsos = ISO.filter(e => e.nt === 0).sort((a,b) => a.nd - b.nd);
     if (dIsos.length > 1) {
@@ -2710,7 +2798,7 @@ function drawOverlays(ctx) {
     }
   }
 
-  // â”€â”€ 6. Decay Pathway Arrows â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── 6. Decay Pathway Arrows ──────────────────────────────────────────
   if (cbDecayVec.checked) {
     const ARROWSZ = Math.max(3, gridScale * zoom * 1.5);
     const ARROW_ALPHA = 0.65;
@@ -2742,7 +2830,7 @@ function drawOverlays(ctx) {
     }
   }
 
-  // â”€â”€ 7. Energy Functional diagnostics panel â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── 7. Energy Functional diagnostics panel ───────────────────────────
   if (cbDeltaUE.checked && window._energySpineDiag) {
     const d = window._energySpineDiag;
     ctx.save();
@@ -2754,10 +2842,10 @@ function drawOverlays(ctx) {
     ctx.font = '600 10px "Segoe UI",sans-serif';
     ctx.fillStyle = 'rgba(40,200,200,0.90)';
     ctx.textAlign = 'left';
-    ctx.fillText('Î”u_E diagnostics', W - 209, H - 78);
+    ctx.fillText('Δu_E diagnostics', W - 209, H - 78);
     const lines = [
       `Rows fitted: ${d.nRows}`,
-      `RMS monoâ€“energy sep: ${d.rmsSep.toFixed(3)}`,
+      `RMS mono–energy sep: ${d.rmsSep.toFixed(3)}`,
       `Stable mean offset: ${d.meanStableDelta.toFixed(3)}`,
       `Stable median offset: ${d.medianStableDelta.toFixed(3)}`,
     ];
@@ -2766,21 +2854,21 @@ function drawOverlays(ctx) {
     lines.forEach((l,i) => ctx.fillText(l, W - 209, H - 62 + i * 13));
     ctx.restore();
 
-    // â”€â”€ Î”u_E colour legend strip â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── Δu_E colour legend strip ──────────────────────────────────────────
     const legX = W - 215, legY = H - 110;
     const legendCols = [
       ['rgba(40,230,255,0.80)','< 0.5'],
-      ['rgba(40,220,100,0.80)','0.5â€“1.5'],
-      ['rgba(190,230,40,0.80)','1.5â€“2.5'],
-      ['rgba(255,190,20,0.80)','2.5â€“3.5'],
-      ['rgba(255,100,20,0.80)','3.5â€“5'],
+      ['rgba(40,220,100,0.80)','0.5–1.5'],
+      ['rgba(190,230,40,0.80)','1.5–2.5'],
+      ['rgba(255,190,20,0.80)','2.5–3.5'],
+      ['rgba(255,100,20,0.80)','3.5–5'],
       ['rgba(130,100,100,0.80)','> 5'],
     ];
     ctx.save();
     ctx.font = '600 9px "Segoe UI",sans-serif';
     ctx.fillStyle = 'rgba(40,200,200,0.75)';
     ctx.textAlign = 'left';
-    ctx.fillText('|Î”u_E|:', legX, legY + 3);
+    ctx.fillText('|Δu_E|:', legX, legY + 3);
     legendCols.forEach((lc, i) => {
       const lx = legX + 40 + i * 28;
       ctx.fillStyle = lc[0];
@@ -2792,7 +2880,7 @@ function drawOverlays(ctx) {
     ctx.restore();
   }
 
-  // â”€â”€ 8. BE / nucleon overlay rings â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── 8. BE / nucleon overlay rings ────────────────────────────────────
   if (cbBE.checked) {
     ISO.forEach(iso => {
       if (!iso.be || iso.be <= 0) return;
@@ -2810,7 +2898,7 @@ function drawOverlays(ctx) {
     });
   }
 
-  // â”€â”€ 9. Element label column â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── 9. Element label column ──────────────────────────────────────────
   if (cbLabels.checked) {
     ctx.font = "500 11px 'Segoe UI',sans-serif";
     ctx.textAlign = "right";
@@ -2832,19 +2920,19 @@ function drawOverlays(ctx) {
     });
   }
 
-  // â”€â”€ 10. Hover panel update â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── 10. Hover panel update ─────────────────────────────────────────
   const hIso = hoveredIso || selectedIso;
   if (hIso) updateHoverPanel(hIso);
 }
 // === js/pip.js ===
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   PIP â€” Nuclear Shell Structure Mini-Render
+/* ═══════════════════════════════════════════════════════════════════
+   PIP — Nuclear Shell Structure Mini-Render
    
    The NUCLEAR shell geometry mirrors the ELECTRONIC shell geometry.
-   Carbon (1Î±+4d): 4 L-shell positions + 2 Î±-poles = octahedron âœ“
-   Neon   (1Î±+8d): full square antiprism, 2s defect bonds to alpha âœ“
-   Cr half-fill:   3d pentagonal antiprism half-fill = closure gate âœ“
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   Carbon (1α+4d): 4 L-shell positions + 2 α-poles = octahedron ✓
+   Neon   (1α+8d): full square antiprism, 2s defect bonds to alpha ✓
+   Cr half-fill:   3d pentagonal antiprism half-fill = closure gate ✓
+   ═══════════════════════════════════════════════════════════════════ */
 (function initPip() {
   const pipEl  = document.getElementById("pip");
   const pipC   = document.getElementById("pipCanvas");
@@ -2865,7 +2953,7 @@ function drawOverlays(ctx) {
       : "hover an isotope";
   };
 
-  // â”€â”€ Compact geometry helpers â”€â”€
+  // ── Compact geometry helpers ──
   function pipV3(x,y,z){ return {x,y,z}; }
   function pipNorm(v){ const l=Math.sqrt(v.x*v.x+v.y*v.y+v.z*v.z)||1; return {x:v.x/l,y:v.y/l,z:v.z/l}; }
   function pipScale(v,s){ return {x:v.x*s,y:v.y*s,z:v.z*s}; }
@@ -3040,7 +3128,7 @@ function drawOverlays(ctx) {
       pipCtx.fillStyle="rgba(80,70,60,0.55)";
       pipCtx.textAlign="center";
       pipCtx.fillText("hover an isotope",pw/2,ph/2-6);
-      pipCtx.fillText("click â†’ open stick model",pw/2,ph/2+8);
+      pipCtx.fillText("click → open stick model",pw/2,ph/2+8);
       return;
     }
 
@@ -3110,15 +3198,15 @@ function drawOverlays(ctx) {
   drawPip();
 })();
 // === js/ui.js ===
-/* â”€â”€ UI: hover detection, panel update, element label column â”€â”€ */
+/* ── UI: hover detection, panel update, element label column ── */
 
 const tooltip = document.getElementById("tooltip");
 
-// â”€â”€ Active group state (Change 4) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Active group state (Change 4) ────────────────────────────────────────────
 let activeGroup = [];    // array of iso objects in the current decay chain
 let groupLocked = false; // true when user has clicked to lock
 
-// â”€â”€ Change 3: Hex hit test (flat-top hexagon) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Change 3: Hex hit test (flat-top hexagon) ────────────────────────────────
 function pointInHex(px, py, cx, cy, R) {
   const x = px - cx, y = py - cy;
   const s3 = Math.sqrt(3);
@@ -3152,13 +3240,13 @@ function buildIsoRow(iso, isActive) {
   const soleSpan = iso.isSole && iso.stable ? ' <span class="iso-sole">SOLE</span>' : '';
   return `<div class="iso-row ${isActive ? 'active' : 'context'}" data-a="${iso.A}">
     <span class="iso-name">${iso.sym}-${iso.A}</span>${soleSpan}
-    ${isActive ? `<span style="color:#888;font-weight:400;font-size:11px;margin-left:6px;">Z=${iso.Z} Â· spin ${iso.spin||'â€”'}</span>` : ''}<br>
+    ${isActive ? `<span style="color:#888;font-weight:400;font-size:11px;margin-left:6px;">Z=${iso.Z} · spin ${iso.spin||'—'}</span>` : ''}<br>
     <span class="iso-grammar">
-      <span class="a">1Î±</span> + <span class="d">${iso.nd}d</span> + <span class="t">${iso.nt}t</span>
+      <span class="a">1α</span> + <span class="d">${iso.nd}d</span> + <span class="t">${iso.nt}t</span>
       <span style="color:#666;margin-left:6px;">${tfPct}% t</span>
       ${isActive ? `<span style="color:#555;margin-left:8px;">BE ${iso.be} MeV/n</span>` : ''}
     </span><br>
-    ${isActive ? `<span style="color:#777;font-size:11px;">${iso.oddA?'odd-A':'even-A'} Â· n_d=${iso.nd} n_t=${iso.nt}</span>` : ''}
+    ${isActive ? `<span style="color:#777;font-size:11px;">${iso.oddA?'odd-A':'even-A'} · n_d=${iso.nd} n_t=${iso.nt}</span>` : ''}
     ${!isActive ? stableSpan : `<span style="font-size:11px;">${stableSpan}</span>`}
   </div>`;
 }
@@ -3170,7 +3258,7 @@ function updateHoverPanel(activeIso) {
 
   document.getElementById("pSym").textContent = activeIso.sym;
   document.getElementById("pElemName").textContent = name;
-  document.getElementById("pElemZ").textContent = `Z=${activeIso.Z} Â· ${stableCount} stable isotope${stableCount!==1?'s':''}`;
+  document.getElementById("pElemZ").textContent = `Z=${activeIso.Z} · ${stableCount} stable isotope${stableCount!==1?'s':''}`;
 
   const scroll = document.getElementById("isoScroll");
   scroll.innerHTML = elemIsos.map(iso => buildIsoRow(iso, iso.A === activeIso.A)).join('');
@@ -3185,7 +3273,7 @@ function updatePanel(iso) {
   updateHoverPanel(iso);
 }
 
-// â”€â”€ Change 4: Build decay chain group â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Change 4: Build decay chain group ───────────────────────────────────────
 function buildActiveGroup(iso) {
   if (!iso) return [];
   const group = [iso];
@@ -3208,7 +3296,7 @@ function buildActiveGroup(iso) {
   return group;
 }
 
-// â”€â”€ Tooltip mousemove â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Tooltip mousemove ───────────────────────────────────────────────────────
 canvas.addEventListener("mousemove", e => {
   const mx = e.clientX, my = e.clientY;
   const iso = getIsoAtPos(mx, my);
@@ -3235,21 +3323,21 @@ canvas.addEventListener("mousemove", e => {
     tooltip.style.left = (mx + 16) + "px";
     tooltip.style.top  = (my - 10) + "px";
     const tfPct = (iso.tf * 100).toFixed(1);
-    const soleTag = iso.isSole && iso.stable ? ' Â· <span style="color:#c8a850;">SOLE</span>' : '';
-    const magicTag = MAGIC_Z.includes(iso.Z) ? ' Â· <span style="color:#82b482;">magic Z</span>' : '';
+    const soleTag = iso.isSole && iso.stable ? ' · <span style="color:#c8a850;">SOLE</span>' : '';
+    const magicTag = MAGIC_Z.includes(iso.Z) ? ' · <span style="color:#82b482;">magic Z</span>' : '';
     tooltip.innerHTML = `
       <strong style="font-size:15px;color:#d4a05c;">${iso.sym}-${iso.A}</strong>
       <span style="color:#888;margin-left:6px;">Z=${iso.Z}</span>
       ${iso.stable ? '' : '<span style="color:#c55;margin-left:6px;">unstable</span>'}
       ${soleTag}${magicTag}
       <br>
-      <span style="color:#d4a05c;">1Î±</span> +
+      <span style="color:#d4a05c;">1α</span> +
       <span style="color:#6a95b0;">${iso.nd}d</span> +
       <span style="color:#c27a5a;">${iso.nt}t</span>
       <span style="color:#666;margin-left:8px;">${tfPct}% triton</span>
       <br>
-      <span style="color:#888;">BE: ${iso.be} MeV/n Â· ${iso.abd}% Â· ${iso.spin || 'â€”'}</span>
-      <br><span style="color:#555;font-size:10px;">Click to lock chain Â· Dbl-click for datasheet</span>
+      <span style="color:#888;">BE: ${iso.be} MeV/n · ${iso.abd}% · ${iso.spin || '—'}</span>
+      <br><span style="color:#555;font-size:10px;">Click to lock chain · Dbl-click for datasheet</span>
     `;
   } else {
     let found = null, foundType = null;
@@ -3258,7 +3346,7 @@ canvas.addEventListener("mousemove", e => {
       for (const m of MISSING_ALPHA) {
         const p = gridPos(m.nd, m.nt);
         const corrX = mx - LEFT_W;
-        if (Math.abs(p.x - corrX) < checkDist && Math.abs(p.y - my) < checkDist) { found = m; foundType = "Î±"; break; }
+        if (Math.abs(p.x - corrX) < checkDist && Math.abs(p.y - my) < checkDist) { found = m; foundType = "α"; break; }
       }
     }
     if (!found && cbHe3Miss.checked) {
@@ -3276,8 +3364,8 @@ canvas.addEventListener("mousemove", e => {
       const typeLabels = {"odd-odd":"odd-odd","even-even":"even-even","magic":"magic number","gap":"no natural element","mixed":"odd-even"};
       tooltip.innerHTML = `
         <strong style="font-size:13px;color:#b040ff;">MISSING ${foundType}-structure</strong><br>
-        <span style="color:#aaa;">Z=${found.Z} Â· A=${found.A} Â· N=${found.N}</span><br>
-        <span style="color:#d4a05c;">1${foundType === "He-3" ? " He-3" : "Î±"}</span> +
+        <span style="color:#aaa;">Z=${found.Z} · A=${found.A} · N=${found.N}</span><br>
+        <span style="color:#d4a05c;">1${foundType === "He-3" ? " He-3" : "α"}</span> +
         <span style="color:#6a95b0;">${found.nd}d</span> +
         <span style="color:#c27a5a;">${found.nt}t</span><br>
         <span style="color:#888;">${typeLabels[found.mtype] || found.mtype}</span>
@@ -3297,7 +3385,7 @@ canvas.addEventListener("mouseleave", () => {
   if (window.__pipSetIso && !selectedIso) window.__pipSetIso(null);
 }, { capture: false });
 
-// â”€â”€ Change 4: Click to lock/unlock chain â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Change 4: Click to lock/unlock chain ────────────────────────────────────
 canvas.addEventListener("click", e => {
   const iso = getIsoAtPos(e.clientX, e.clientY);
   if (iso) {
@@ -3313,14 +3401,14 @@ canvas.addEventListener("click", e => {
     }
     draw();
   } else {
-    // Clicked outside â€” clear lock
+    // Clicked outside — clear lock
     groupLocked = false;
     activeGroup = [];
     draw();
   }
 });
 
-// â”€â”€ Change 6: Double-click datasheet â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Change 6: Double-click datasheet ────────────────────────────────────────
 canvas.addEventListener("dblclick", e => {
   const iso = getIsoAtPos(e.clientX, e.clientY);
   if (!iso) return;
@@ -3330,14 +3418,14 @@ canvas.addEventListener("dblclick", e => {
   const v = iso.nd + iso.nt;
   const u = iso.nd - iso.nt;
   const sp = energySpineByV[v];
-  const duE = sp ? (u - sp.u).toFixed(3) : 'â€”';
-  const decayStr = iso.stable ? 'stable (âˆ’)' : (iso.decay || 'â€”');
+  const duE = sp ? (u - sp.u).toFixed(3) : '—';
+  const decayStr = iso.stable ? 'stable (−)' : (iso.decay || '—');
   const halfLife = (() => {
     const key = `${iso.Z},${iso.A}`;
     for (const row of [...LONG_LIVED, ...SHORT_LIVED]) {
       if (row[0] === iso.Z && row[1] === iso.A) return row[3];
     }
-    return iso.stable ? 'stable' : 'â€”';
+    return iso.stable ? 'stable' : '—';
   })();
 
   const ds = document.getElementById('datasheet');
@@ -3347,11 +3435,11 @@ canvas.addEventListener("dblclick", e => {
     <table>
       <tr><td style="color:#889;padding:3px 8px 3px 0;width:48%;">Half-life</td><td style="color:#dde;">${halfLife}</td></tr>
       <tr><td style="color:#889;padding:3px 8px 3px 0;">Decay mode</td><td style="color:#dde;">${decayStr}</td></tr>
-      <tr><td style="color:#889;padding:3px 8px 3px 0;">BE/A</td><td style="color:#dde;">${iso.be > 0 ? iso.be + ' MeV' : 'â€”'}</td></tr>
+      <tr><td style="color:#889;padding:3px 8px 3px 0;">BE/A</td><td style="color:#dde;">${iso.be > 0 ? iso.be + ' MeV' : '—'}</td></tr>
       <tr><td style="color:#889;padding:3px 8px 3px 0;">Natural abundance</td><td style="color:#dde;">${iso.abd > 0 ? iso.abd + '%' : (iso.stable ? 'stable, 0% natural' : 'none')}</td></tr>
-      <tr><td style="color:#889;padding:3px 8px 3px 0;">Spin/parity</td><td style="color:#dde;">${iso.spin || 'â€”'}</td></tr>
+      <tr><td style="color:#889;padding:3px 8px 3px 0;">Spin/parity</td><td style="color:#dde;">${iso.spin || '—'}</td></tr>
       <tr><td style="color:#889;padding:3px 8px 3px 0;">SDT: nd / nt / v / u</td><td style="color:#dde;">${iso.nd} / ${iso.nt} / ${v} / ${u}</td></tr>
-      <tr><td style="color:#889;padding:3px 8px 3px 0;">Î”u_E</td><td style="color:#dde;">${duE}</td></tr>
+      <tr><td style="color:#889;padding:3px 8px 3px 0;">Δu_E</td><td style="color:#dde;">${duE}</td></tr>
     </table>
     <h3 style="margin:16px 0 8px;color:#889;font-size:12px;text-transform:uppercase;letter-spacing:0.05em;">References</h3>
     <div style="display:flex;flex-direction:column;gap:8px;font-size:12px;">
@@ -3363,7 +3451,7 @@ canvas.addEventListener("dblclick", e => {
   ds.style.display = 'block';
 });
 
-// â”€â”€ Morph slider (Change 1) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Morph slider (Change 1) ─────────────────────────────────────────────────
 const slider = document.getElementById("morphSlider");
 slider.addEventListener("input", () => {
   morphT = +slider.value / 1000;
@@ -3374,7 +3462,7 @@ slider.addEventListener("input", () => {
   draw();
 });
 
-// â”€â”€ Print diagnostic table â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Print diagnostic table ───────────────────────────────────────────────────
 document.getElementById('printDiagBtn').addEventListener('click', () => {
   const MAGIC_Z_D = new Set([2,8,20,28,50,82,114]);
   const MAGIC_N_D = new Set([2,8,20,28,50,82,126]);
@@ -3388,24 +3476,24 @@ document.getElementById('printDiagBtn').addEventListener('click', () => {
     const nearIso = sp ? sp.iso : (raw ? rowIsos.find(e=>e.sym===raw.sym&&e.A===raw.A) : rowIsos[0]);
     rows.push({
       v,
-      rawMaxU:  raw ? raw.u.toFixed(2) : 'â€”',
-      smoothU:  sp  ? sp.u.toFixed(2)  : 'â€”',
+      rawMaxU:  raw ? raw.u.toFixed(2) : '—',
+      smoothU:  sp  ? sp.u.toFixed(2)  : '—',
       monoU:    uMono.toFixed(2),
-      dRawMono: raw ? (raw.u - uMono).toFixed(2) : 'â€”',
-      dRawGold: raw ? raw.u.toFixed(2) : 'â€”',
-      isotope:  nearIso ? `${nearIso.sym}-${nearIso.A}` : 'â€”',
-      bePerA:   raw ? raw.be.toFixed(4) : 'â€”',
+      dRawMono: raw ? (raw.u - uMono).toFixed(2) : '—',
+      dRawGold: raw ? raw.u.toFixed(2) : '—',
+      isotope:  nearIso ? `${nearIso.sym}-${nearIso.A}` : '—',
+      bePerA:   raw ? raw.be.toFixed(4) : '—',
       magicZ:   nearIso ? MAGIC_Z_D.has(nearIso.Z) : false,
       magicN:   nearIso ? MAGIC_N_D.has(nearIso.A - nearIso.Z) : false,
-      oddA:     nearIso ? nearIso.oddA : 'â€”',
-      spin:     nearIso ? (nearIso.spin||'â€”') : 'â€”',
-      unpaired: nearIso ? nearIso.unpaired : 'â€”',
-      conf:     sp ? sp.confidence : 'â€”',
+      oddA:     nearIso ? nearIso.oddA : '—',
+      spin:     nearIso ? (nearIso.spin||'—') : '—',
+      unpaired: nearIso ? nearIso.unpaired : '—',
+      conf:     sp ? sp.confidence : '—',
     });
   });
   console.table(rows);
-  console.log('[Î”u_E table] printed', rows.length, 'rows. Open DevTools (F12) â†’ Console to view.');
-  alert('Î”u_E table printed to browser console.\nOpen DevTools (F12) â†’ Console tab to view all ' + rows.length + ' rows.');
+  console.log('[Δu_E table] printed', rows.length, 'rows. Open DevTools (F12) → Console to view.');
+  alert('Δu_E table printed to browser console.\nOpen DevTools (F12) → Console tab to view all ' + rows.length + ' rows.');
 });
 
 function resize() {
@@ -3432,7 +3520,7 @@ function resize() {
   }
 }
 
-// â”€â”€ Element label column (drawn on top, as part of UI layer) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Element label column (drawn on top, as part of UI layer) ───────────────
 function drawElemLabels(ctx) {
   const LABEL_X2 = 6;
   const LABEL_W2 = 130;
@@ -3485,14 +3573,200 @@ function drawElemLabels(ctx) {
   });
 }
 // === js/main.js ===
-// Main orchestrator â€” replaces the monolithic draw() function
+// Main orchestrator — replaces the monolithic draw() function
+// ══ Element groups, line-picker & magic-line overlays ═══════════════════════
+function _rangeSet(a, b){ const s = new Set(); for (let z = a; z <= b; z++) s.add(z); return s; }
+const GROUPS = {
+  noble:    { zs: new Set([2,10,18,36,54,86]),  col:'#58c8ff' },
+  alkali:   { zs: new Set([3,11,19,37,55,87]),  col:'#ff8a5c' },
+  alkEarth: { zs: new Set([4,12,20,38,56,88]),  col:'#ffd45c' },
+  trans:    { zs: new Set([..._rangeSet(21,30), ..._rangeSet(39,48), ..._rangeSet(72,80), ..._rangeSet(104,112)]), col:'#7affc0' },
+  lanth:    { zs: _rangeSet(57,71),  col:'#c58bff' },
+  actin:    { zs: _rangeSet(89,103), col:'#ff6bcb' },
+  halogen:  { zs: new Set([9,17,35,53,85]), col:'#c3ff6b' },
+};
+const SYM2Z = {}; ISO.forEach(i => { if (!(i.sym in SYM2Z)) SYM2Z[i.sym] = i.Z; });
+const stableCountByN = {}; ISO.forEach(i => { if (i.stable){ const N = i.A - i.Z; stableCountByN[N] = (stableCountByN[N]||0) + 1; } });
+
+function emphasisState(){
+  const zs = new Set(), grpCols = {}; let any = false;
+  for (const k in GROUPS){
+    const cb = document.getElementById('grp-'+k);
+    if (cb && cb.checked){ any = true; GROUPS[k].zs.forEach(z => { zs.add(z); grpCols[z] = GROUPS[k].col; }); }
+  }
+  let line = null;
+  const lp = document.getElementById('linePickOn');
+  if (lp && lp.checked){
+    const axis = (document.getElementById('linePickAxis')||{}).value || 'Z';
+    const raw  = (((document.getElementById('linePickVal')||{}).value) || '').trim();
+    let val = parseInt(raw, 10);
+    if (axis === 'Z' && isNaN(val) && raw){
+      const sym = raw.charAt(0).toUpperCase() + raw.slice(1).toLowerCase();
+      if (sym in SYM2Z) val = SYM2Z[sym];
+    }
+    if (!isNaN(val)){ line = { axis, val }; any = true; }
+  }
+  return { active: any, zs, grpCols, line };
+}
+function isoEmphColor(iso, st){
+  if (st.zs.has(iso.Z)) return st.grpCols[iso.Z] || '#ffffff';
+  if (st.line){
+    const a = st.line.axis, v = st.line.val, N = iso.A - iso.Z;
+    if ((a==='Z' && iso.Z===v) || (a==='N' && N===v) || (a==='nt' && iso.nt===v) ||
+        (a==='nd' && iso.nd===v) || (a==='A' && iso.A===v)) return '#ffe08a';
+  }
+  return null;
+}
+function gridPosUV(u, v){ return gridPos((v+u)/2, (v-u)/2); }
+
+// ── Radius / triton-contraction colour (own channel: NODE FILL gradient) ──────
+function isoR0(iso){
+  const R = (typeof RADII !== 'undefined') ? RADII[iso.Z+'_'+iso.A] : null;
+  return R ? R / Math.cbrt(iso.A) : null;
+}
+function r0Color(iso, alpha){
+  const r0 = isoR0(iso); if (r0 == null) return null;
+  const t = Math.max(0, Math.min(1, (r0 - 0.93) / (1.30 - 0.93))); // 0=tight(floor) .. 1=puffy
+  const r = Math.round( 70 + (245- 70)*t);
+  const g = Math.round(210 + ( 95-210)*t);
+  const b = Math.round(190 + ( 70-190)*t);
+  return `rgba(${r},${g},${b},${alpha})`;
+}
+
+// ── Partition families + monoisotopes (own channels: dashed/dotted lines, diamonds) ──
+function drawPartitions(ctx){
+  const cND = document.getElementById('partND'), cNT = document.getElementById('partNT'),
+        cMono = document.getElementById('partMono');
+  ctx.save(); ctx.lineJoin = 'round';
+  // Deuteron families (fixed n_d) — REVERSE diagonal, DASHED violet
+  if (cND && cND.checked){
+    const by = {}; ISO.forEach(e => { (by[e.nd] = by[e.nd] || []).push(e); });
+    ctx.setLineDash([7,5]); ctx.strokeStyle = 'rgba(185,140,255,0.7)'; ctx.lineWidth = 1.3*zoom + 0.4;
+    ctx.shadowColor = 'rgba(185,140,255,0.5)'; ctx.shadowBlur = 4*zoom;
+    Object.values(by).forEach(fam => { if (fam.length < 2) return; fam.sort((a,b)=>a.nt-b.nt);
+      ctx.beginPath(); fam.forEach((e,i)=>{ const p=isoPos(e); i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y); }); ctx.stroke(); });
+    ctx.setLineDash([]); ctx.shadowBlur = 0;
+  }
+  // Triton families (fixed n_t) — diagonal, DOTTED teal
+  if (cNT && cNT.checked){
+    const by = {}; ISO.forEach(e => { (by[e.nt] = by[e.nt] || []).push(e); });
+    ctx.setLineDash([2,4]); ctx.strokeStyle = 'rgba(84,214,172,0.7)'; ctx.lineWidth = 1.3*zoom + 0.4;
+    ctx.shadowColor = 'rgba(84,214,172,0.5)'; ctx.shadowBlur = 4*zoom;
+    Object.values(by).forEach(fam => { if (fam.length < 2) return; fam.sort((a,b)=>a.nd-b.nd);
+      ctx.beginPath(); fam.forEach((e,i)=>{ const p=isoPos(e); i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y); }); ctx.stroke(); });
+    ctx.setLineDash([]); ctx.shadowBlur = 0;
+  }
+  // Monoisotopes — WHITE diamond outline; the n_t=1 five get a GOLD diamond
+  if (cMono && cMono.checked){
+    ISO.forEach(e => {
+      if (!(e.isSole && e.stable)) return;
+      const p = isoPos(e); if (p.x < 130 || p.x > W-20 || p.y < 20 || p.y > H-20) return;
+      const r = Math.max(5, gridScale*zoom*0.75), gold = (e.nt === 1);
+      ctx.strokeStyle = gold ? 'rgba(255,220,90,0.98)' : 'rgba(255,255,255,0.9)';
+      ctx.lineWidth = gold ? 2.4 : 1.5;
+      ctx.shadowColor = gold ? 'rgba(255,220,90,0.7)' : 'rgba(255,255,255,0.4)'; ctx.shadowBlur = gold ? 8*zoom : 2*zoom;
+      ctx.beginPath();
+      ctx.moveTo(p.x, p.y-r); ctx.lineTo(p.x+r, p.y); ctx.lineTo(p.x, p.y+r); ctx.lineTo(p.x-r, p.y); ctx.closePath();
+      ctx.stroke();
+    });
+    ctx.shadowBlur = 0;
+  }
+  ctx.restore();
+}
+
+// ── Stability switchback envelope (own channel: bright amber stepped outline + corner dots) ──
+function drawSwitchback(ctx){
+  const cSw = document.getElementById('partSwitch'); if (!cSw || !cSw.checked) return;
+  const byV = {}; ISO.forEach(e => { if (e.stable) (byV[e.nd+e.nt] = byV[e.nd+e.nt] || []).push(e); });
+  const vs = Object.keys(byV).map(Number).sort((a,b)=>a-b);
+  ctx.save(); ctx.lineJoin = 'round';
+  [+1, -1].forEach(sign => {              // sign +1 = neutron-poor (max u) edge, -1 = neutron-rich (min u)
+    const pts = vs.map(v => {
+      const row = byV[v].map(e => ({ u: e.nd-e.nt, e }));
+      row.sort((a,b) => sign>0 ? b.u-a.u : a.u-b.u);
+      return { v, u: row[0].u };
+    });
+    ctx.strokeStyle = 'rgba(255,184,74,0.9)'; ctx.lineWidth = 2.2*zoom + 0.6;
+    ctx.shadowColor = 'rgba(255,184,74,0.5)'; ctx.shadowBlur = 5*zoom;
+    ctx.beginPath(); pts.forEach((pt,i)=>{ const p=gridPosUV(pt.u,pt.v); i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y); }); ctx.stroke();
+    // corner dots where the edge reverses horizontal direction (a switchback)
+    ctx.shadowBlur = 0; ctx.fillStyle = 'rgba(255,214,120,0.95)';
+    for (let i=1;i<pts.length-1;i++){
+      const d1 = pts[i].u-pts[i-1].u, d2 = pts[i+1].u-pts[i].u;
+      if ((d1>0)!==(d2>0) || (d1===0)!==(d2===0)){
+        const p = gridPosUV(pts[i].u, pts[i].v);
+        ctx.beginPath(); ctx.arc(p.x,p.y, Math.max(3,gridScale*zoom*0.35), 0, Math.PI*2); ctx.fill();
+      }
+    }
+  });
+  ctx.restore();
+}
+
+function drawMagicLines(ctx){
+  const cN = document.getElementById('magN'), cZ = document.getElementById('magZ'),
+        cDM = document.getElementById('magDM'), cW = document.getElementById('magWidth');
+  const byStab = !cW || cW.checked;
+  ctx.save();
+  ctx.lineJoin = 'round';
+  // Proton-magic — horizontal lines at v = Z-2
+  if (cZ && cZ.checked){
+    MAGIC_Z.forEach(Z => {
+      const row = ISO.filter(e => e.Z === Z); if (!row.length) return;
+      const us = row.map(e => e.nd - e.nt), v = Z - 2;
+      const a = gridPosUV(Math.min(...us)-1, v), b = gridPosUV(Math.max(...us)+1, v);
+      const w = byStab ? Math.max(1, (stableCountByZ[Z]||1)*0.9) : 2;
+      ctx.strokeStyle = 'rgba(120,195,255,0.9)'; ctx.lineWidth = w*zoom*0.5 + 1.0;
+      ctx.shadowColor = 'rgba(120,195,255,0.6)'; ctx.shadowBlur = 6*zoom;
+      ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
+      ctx.shadowBlur = 0;
+      ctx.font = '700 10px "Segoe UI",sans-serif'; ctx.fillStyle = 'rgba(160,210,255,0.95)'; ctx.textAlign = 'left';
+      ctx.fillText('Z='+Z+(byStab?'  ('+(stableCountByZ[Z]||0)+')':''), b.x+5, b.y+3);
+    });
+  }
+  // Neutron-magic — slope-1/3 diagonals (fixed N, varying Z)
+  if (cN && cN.checked){
+    MAGIC_N.forEach(N => {
+      const iso = ISO.filter(e => (e.A - e.Z) === N);
+      let Zlo, Zhi;
+      if (iso.length){ const zs = iso.map(e=>e.Z); Zlo = Math.min(...zs)-1; Zhi = Math.max(...zs)+1; }
+      else { Zlo = Math.max(2, Math.ceil(N*0.55)); Zhi = Math.min(118, N+2); }
+      const pa = gridPosUV(3*Zlo-2*N-2, Zlo-2), pb = gridPosUV(3*Zhi-2*N-2, Zhi-2);
+      const w = byStab ? Math.max(1, (stableCountByN[N]||1)*0.9) : 2;
+      ctx.strokeStyle = 'rgba(255,170,80,0.9)'; ctx.lineWidth = w*zoom*0.5 + 1.0;
+      ctx.shadowColor = 'rgba(255,170,80,0.6)'; ctx.shadowBlur = 6*zoom;
+      ctx.beginPath(); ctx.moveTo(pa.x,pa.y); ctx.lineTo(pb.x,pb.y); ctx.stroke();
+      ctx.shadowBlur = 0;
+      ctx.font = '700 10px "Segoe UI",sans-serif'; ctx.fillStyle = 'rgba(255,195,115,0.95)'; ctx.textAlign = 'right';
+      ctx.fillText('N='+N+(byStab?'  ('+(stableCountByN[N]||0)+')':''), pa.x-5, pa.y+3);
+    });
+  }
+  // Doubly-magic markers — only where a real nuclide sits
+  if (cDM && cDM.checked){
+    MAGIC_Z.forEach(Z => MAGIC_N.forEach(N => {
+      const nd = 2*Z-N-2, nt = N-Z;
+      if (!occupiedAlpha.has(nd+','+nt)) return;
+      const p = gridPos(nd, nt);
+      if (p.x < 130 || p.x > W-20 || p.y < 20 || p.y > H-20) return;
+      const r = Math.max(6, gridScale*zoom*0.95);
+      ctx.strokeStyle = 'rgba(255,235,120,0.95)'; ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.arc(p.x,p.y,r,0,Math.PI*2); ctx.stroke();
+      ctx.strokeStyle = 'rgba(255,235,120,0.30)'; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.arc(p.x,p.y,r+4,0,Math.PI*2); ctx.stroke();
+    }));
+  }
+  ctx.restore();
+}
+
 function draw() {
   ctx.clearRect(0, 0, W, H);
   // Twilight canvas fill
   ctx.fillStyle = '#07091c';
   ctx.fillRect(0, 0, W, H);
   drawBackground(ctx);
+  drawMagicLines(ctx);
+  drawPartitions(ctx);
   drawNodes(ctx);
+  drawSwitchback(ctx);
   drawOverlays(ctx);
   drawElemLabels(ctx);
 }
@@ -3695,7 +3969,7 @@ requestAnimationFrame(function loop(ts) {
 </script>
 
 <script>
-// â”€â”€ Dropdown toggle (Change 5) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Dropdown toggle (Change 5) ──────────────────────────────────────────────
 document.querySelectorAll('.dropdown-header').forEach(h => {
   h.addEventListener('click', () => {
     h.classList.toggle('open');
@@ -3703,7 +3977,7 @@ document.querySelectorAll('.dropdown-header').forEach(h => {
   });
 });
 
-// â”€â”€ Morph buttons (Change 1: 3 buttons) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Morph buttons (Change 1: 3 buttons) ────────────────────────────────────
 document.querySelectorAll('.morph-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     const val = +btn.dataset.val;
@@ -3715,7 +3989,7 @@ document.querySelectorAll('.morph-btn').forEach(btn => {
   });
 });
 
-// â”€â”€ Datasheet close (Change 6) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Datasheet close (Change 6) ──────────────────────────────────────────────
 document.getElementById('datasheetClose').addEventListener('click', () => {
   document.getElementById('datasheet').style.display = 'none';
 });

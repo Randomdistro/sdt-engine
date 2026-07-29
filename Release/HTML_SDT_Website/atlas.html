@@ -400,7 +400,7 @@
         </p>
         <div class="eq-block">
           <div class="eq">BE ≈ κ · ΔA<sub>shadow</sub>,&nbsp;&nbsp;&nbsp; ΔA = N·πR<sub>p</sub>² − A<sub>∪</sub></div>
-          <div class="eq-caption">One area→energy scale κ, fixed by least squares over 217 isotopes: total binding energy to R² = 0.988, mean error 7%. The α-cluster and the iron peak are the honest residual — that fine structure needs the shared-electron well depth, not geometry alone.</div>
+          <div class="eq-caption">One area→energy scale κ, fixed by least squares over 217 isotopes: total binding energy to R² = 0.988, mean error 7%. The α-cluster and the iron peak are the residual — that fine structure needs the shared-electron well depth, not geometry alone.</div>
         </div>
       </div>
 
@@ -658,7 +658,7 @@
         </div>
         <div class="cosmo-card">
           <h4 class="cosmo-card__title">Galaxy Rotation Curves</h4>
-          <div class="cosmo-card__body" data-i18n="c_rot"><strong>Honest status: OPEN.</strong> The eclipse-saturation rotation model failed the real SPARC data on direct rerun (RMS 66%, BTFR slope 1.33 — GD05; the earlier "success" was a circular mock). What stands: the derived acceleration floor a₀ = cH₀/2π and the 8.8% cross-scale collapse, re-earned on real rotation data with a control 6× worse. The crossover's SHAPE is still borrowed, and full galactic rotation is unsolved on SDT's books — said here, not in a footnote.</div>
+          <div class="cosmo-card__body" data-i18n="c_rot"><strong>Status: OPEN.</strong> The eclipse-saturation rotation model failed the real SPARC data on direct rerun (RMS 66%, BTFR slope 1.33 — GD05; the earlier "success" was a circular mock). What stands: the derived acceleration floor a₀ = cH₀/2π and the 8.8% cross-scale collapse, re-earned on real rotation data with a control 6× worse. The crossover's SHAPE is still borrowed, and full galactic rotation is unsolved on SDT's books — said here, not in a footnote.</div>
         </div>
         <div class="cosmo-card">
           <h4 class="cosmo-card__title">Redshift Without Recession</h4>
@@ -695,12 +695,17 @@
         </div>
       </div>
 
+      <figure style="margin:var(--sp-xl) 0;text-align:center;">
+        <svg id="atlasOctaves" viewBox="0 0 640 200" style="max-width:640px;width:100%;height:auto;touch-action:none;cursor:grab" aria-label="Drag the photon across the Clearing — the wave halves each octave; nothing recedes"></svg>
+        <figcaption style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-faint);margin-top:8px;">drag the photon — 1+z = 2^Δn, the ladder is octaves, not recession · the CMB sits 10.10 octaves down</figcaption>
+      </figure>
+
       <!-- CQ06 Investigation Link -->
       <div style="margin:var(--sp-xl) 0;border:1px solid rgba(56,232,216,.25);border-radius:8px;background:rgba(56,232,216,.04);padding:var(--sp-lg) var(--sp-xl);display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;">
         <div>
           <div style="font-size:10px;font-family:'JetBrains Mono',monospace;color:#38e8d8;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px;">CQ06 · Investigation · Superseded — kept as history</div>
           <div style="font-family:'Source Serif 4','Georgia',serif;font-size:1.15em;font-weight:600;color:var(--ink);margin-bottom:6px;">The Eclipse Saturation Model</div>
-          <div style="font-size:var(--fs-sm);color:var(--ink-muted);max-width:520px;line-height:1.65;">The original interactive derivation, kept on display with its verdict attached: on direct rerun against real SPARC rotation curves the model FAILED (RMS 66%, BTFR slope 1.33 — GD05). Galactic rotation is OPEN on SDT's books. The page remains as the historical derivation and as proof the theory grades itself.</div>
+          <div style="font-size:var(--fs-sm);color:var(--ink-muted);max-width:520px;line-height:1.65;">The original interactive derivation, kept on display with its assessment attached: on direct rerun against real SPARC rotation curves the model FAILED (RMS 66%, BTFR slope 1.33 — GD05). Galactic rotation is OPEN on SDT's books. The page remains as the historical derivation and as proof the theory grades itself.</div>
         </div>
         <a href="cq06-eclipse.html" target="_blank"
            style="display:inline-flex;align-items:center;gap:8px;padding:11px 22px;
@@ -788,7 +793,7 @@
             <span class="exp-card__diff exp-card__diff--moderate">Moderate</span>
           </div>
           <h4 class="exp-card__title">Galaxy Rotation Curves</h4>
-          <p class="exp-card__desc">Honest status: the eclipse rotation model FAILED real SPARC on direct rerun (GD05, RMS 66%). The derived floor a₀ = cH₀/2π and the 8.8% collapse stand; the rotation shape is OPEN.</p>
+          <p class="exp-card__desc">Status: the eclipse rotation model FAILED real SPARC on direct rerun (GD05, RMS 66%). The derived floor a₀ = cH₀/2π and the 8.8% collapse stand; the rotation shape is OPEN.</p>
         </div>
         <div class="exp-card" data-cat="frontier">
           <div class="exp-card__head">
@@ -885,7 +890,7 @@
         </div>
         <div class="gloss-entry" data-term="eclipse saturation">
           <h4 class="gloss-term">Eclipse Saturation</h4>
-          <p class="gloss-def">Historical model: a galactic disk's total occlusion saturating was proposed to flatten rotation curves. FAILED on direct rerun against real SPARC data (GD05: RMS 66%). Kept in the glossary because the theory keeps its verdicts; galactic rotation is OPEN.</p>
+          <p class="gloss-def">Historical model: a galactic disk's total occlusion saturating was proposed to flatten rotation curves. FAILED on direct rerun against real SPARC data (GD05: RMS 66%). Kept in the glossary because the theory keeps its assessments; galactic rotation is OPEN.</p>
         </div>
         <div class="gloss-entry" data-term="golden boundary">
           <h4 class="gloss-term">Golden Boundary</h4>
@@ -1032,6 +1037,23 @@
         fb.setAttribute('x1',B.x-ux*B.r);fb.setAttribute('y1',B.y-uy*B.r);
         fb.setAttribute('x2',B.x-ux*(B.r+len));fb.setAttribute('y2',B.y-uy*(B.r+len));
         read.textContent='F ∝ R₁²R₂²/r² = '+rel.toFixed(2)+'× — gravity, Coulomb, nuclear: one law, three reaches';}
+      render();
+    })();
+
+    /* Cosmology — the octave ladder, dragged by hand */
+    (function(){
+      var s=document.getElementById('atlasOctaves'); if(!s)return;
+      var wave=el('path',{fill:'none',stroke:'#2f6f52','stroke-width':2});s.appendChild(wave);
+      var ph=el('circle',{cy:140,r:8,fill:'#1d1f21'});s.appendChild(ph);
+      var read=tx({x:320,y:24,'text-anchor':'middle','font-family':'JetBrains Mono,monospace','font-size':'12px',fill:'#6b6f75'},'');s.appendChild(read);
+      var x=140;
+      function render(){ph.setAttribute('cx',x);
+        var dn=(x-80)/140, lam=16*Math.pow(2,dn);
+        var d='';for(var i=0;i<=200;i++){var xx=40+i/200*(x-40);
+          d+=(i?'L':'M')+xx+' '+(90-12*Math.sin(xx/lam*Math.PI*2))+' ';}
+        wave.setAttribute('d',d);
+        read.textContent='Δn = '+dn.toFixed(1)+' octaves → 1+z = 2^Δn = '+Math.pow(2,dn).toFixed(1)+' — no recession anywhere';}
+      drag(s,function(p){x=Math.max(140,Math.min(620,p.x));render();});
       render();
     })();
   })();

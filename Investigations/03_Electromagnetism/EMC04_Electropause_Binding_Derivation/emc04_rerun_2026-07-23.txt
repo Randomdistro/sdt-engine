@@ -1,0 +1,41 @@
+﻿=====================================================================
+  EMC04  THE ELECTROPAUSE  -  binding (and P_eff) from kinematics
+  J. C. Harvey, Melbourne, 2026-06-18.  Engine: sdt/laws.hpp
+=====================================================================
+
+[1] ELECTROPAUSE BINDING (kinematics only)
+    r  = a_0          = 5.291772e-11 m   (electropause radius)
+    v  = alpha*c      = 2.187691e+06 m/s (chi = c/v = 137.0360)
+    F_centripetal = m_e v^2 / a_0 = 8.238723e-08 N
+    (computed with NO charge term -- delete-test for charge passes)
+
+[2] CROSS-CHECK against the force laws
+    k_e e^2 / a_0^2            (Coulomb)   = 8.238723e-08 N
+    law_III::F_coulomb(a_0)    (occlusion) = 8.238723e-08 N
+    F_centripetal / F_coulomb             = 1.0000000000
+    F_centripetal / F_occlusion(engine)   = 1.0000000000
+    => the binding IS the centripetal requirement IS occlusion.
+
+[3] INVERT OCCLUSION LAW -> P_eff from the electropause balance
+    R_charge = sqrt(R_p r_e)              = 1.539810e-15 m
+    P_eff = 4 F_cen a_0^2 / (pi R_charge^4) = 5.225210e+31 Pa
+    engine law_III::P_eff                   = 5.225210e+31 Pa
+    rel. error                              = 4.130e-12
+
+[4] SYMBOLIC REDUCTIONS (DELETE-TEST: no k_e, no e below)
+    (a) 4 alpha hbar c/(pi R_p^2 r_e^2)        = 5.225210e+31 Pa  [rel 6.14e-10]
+    (b) m_p^2 m_e^2 c^5/(4 pi alpha hbar^3)    = 5.227252e+31 Pa  [rel 3.91e-04]
+        (form (b) uses R_p = 4 hbar/(m_p c); engine R_p matches to 1.95e-04)
+
+[5] WHY IT IS EXACT:  a_0 = hbar/(m_e c alpha) = 5.291772e-11 m  [rel 6.10e-10]
+    With this, m_e (alpha c)^2/a_0 == k_e e^2/a_0^2 is an algebraic identity.
+
+---------------------------------------------------------------------
+  VERDICT
+    binding == Coulomb (kinematics, no charge) : PASS
+    P_eff recovered from electropause balance  : PASS
+    closed form 4 a hbar c/(pi R_p^2 r_e^2)    : PASS
+    whitelist m_p^2 m_e^2 c^5/(4 pi a hbar^3)  : PASS
+    => P_eff DERIVED (delete-test clean): E -> C, on framework terms.
+       Residual input = alpha (the one k-rung); the model does NOT derive alpha.
+---------------------------------------------------------------------

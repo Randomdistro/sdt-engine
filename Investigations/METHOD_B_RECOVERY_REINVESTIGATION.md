@@ -71,7 +71,7 @@ When Method A says KILLED and Method B says LIVE, that disagreement *is* an Adju
 - both agree KILLED → **confirmed dead** (graveyard, with reason).
 - both agree LIVE → **route re-opens** under a named premise-class trigger.
 - they disagree → **Adjudicator rules**, naming the faulty premise (and its mechanism) on whichever side.
-Log every reconciliation in `Investigations/KILL_READJUDICATION_REGISTER.md` with the mechanism, not the verdict alone.
+Log every reconciliation in `Investigations/ADJUDICATION_REGISTER.md` with the mechanism, not the verdict alone.
 
 ## First work-list (the current graveyard, from the SM campaign)
 Feed these in, highest-value first (see `Experiments/CAMPAIGN_AGAINST_THE_STANDARD_MODEL.md`):

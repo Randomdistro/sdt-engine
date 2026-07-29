@@ -24,8 +24,8 @@ h2{font:600 9.5px/1 'Segoe UI';text-transform:uppercase;letter-spacing:.1em;colo
 .status{display:inline-block;padding:1px 6px;border-radius:9px;font-size:8.5px;font-weight:700;letter-spacing:.03em;margin-top:2px}
 .NATIVE{background:rgba(63,143,111,.16);color:var(--mint)}
 .CONFIRMED{background:rgba(63,143,111,.16);color:var(--mint)}
-.DEGENERATE{background:rgba(201,162,39,.2);color:#846a10}
-.KILLED{background:rgba(192,80,58,.14);color:var(--rose)}
+.SHARED-INPUT{background:rgba(201,162,39,.2);color:#846a10}
+.EXCLUDED{background:rgba(192,80,58,.14);color:var(--rose)}
 .OPEN{background:rgba(74,109,130,.14);color:var(--steel)}
 .SELECTION{background:rgba(74,109,130,.14);color:var(--steel)}
 .row{display:flex;justify-content:space-between;padding:2.5px 0;font-size:11.5px;border-bottom:1px solid rgba(226,217,201,.6)}
@@ -145,12 +145,12 @@ const F=[
      '<code>A = 4+2n_d+3n_t</code>, <code>Z = 2+n_d+n_t</code>. Free neutrons are forbidden — a "free neutron" is an exposed triton remnant.',
   chk:iso=>{const [nd,nt]=gram(iso.Z,iso.A);return `α + ${nd}d + ${nt}t → A=${4+2*nd+3*nt}=${iso.A} ✓, Z=${2+nd+nt}=${iso.Z} ✓`;}},
 
- {t:'The coordinate truth',s:'DEGENERATE',mode:'coord',
+ {t:'The coordinate truth',s:'SHARED-INPUT',mode:'coord',
   st:'The counts are an <b>invertible relabelling of (Z,N)</b>: <code>n_t = N−Z</code>, <code>n_d = 2Z−N−2</code>, <code>v = Z−2</code>. '+
      'So any law that is a <b>pure function of the counts</b> is a (Z,N) law in disguise — it can restate physics but cannot be independent evidence for the grammar. This guard is applied to everything below.',
   chk:iso=>{const N=iso.A-iso.Z,[nd,nt]=gram(iso.Z,iso.A);return `n_t=${nt}=N−Z=${N-iso.Z} ✓ · v=${nd+nt}=Z−2=${iso.Z-2} ✓ — no new information`;}},
 
- {t:'Pairing & magnetism',s:'DEGENERATE',mode:'data',
+ {t:'Pairing & magnetism',s:'SHARED-INPUT',mode:'data',
   st:'A nucleus is magnetic exactly when it has an <b>unpaired subunit</b>: μ=0 ⟺ n_d even ∧ n_t even. '+
      '<b>98.5%</b> over 3043 spin-known nuclides; the boxed rows are exceptionless. But n_d even∧n_t even <i>is</i> even-even and n_t odd <i>is</i> odd-A — so this is the 1930s pairing rule, real but not native (NP24-A).',
   chk:iso=>{const [nd,nt]=gram(iso.Z,iso.A),paired=(nd%2===0&&nt%2===0),r=IDX.get(iso.Z+','+iso.A);
@@ -173,7 +173,7 @@ const F=[
      'Counts are exact; the (r,θ,φ) placement is <b>the model’s assignment, not proven unique</b>. Neutron = proton + one shared internal electron; the shared electron between protons <i>is</i> the binding (NP17).',
   chk:iso=>{const p=pack(iso.A,iso.Z);return `${p.nSub} subunits placed = ${p.nuc.length} nucleons (${p.nuc.filter(n=>n.type==='p').length}p ${p.nuc.filter(n=>n.type==='n').length}n)`;}},
 
- {t:'Binding from overlap',s:'KILLED',mode:'pack',
+ {t:'Binding from overlap',s:'EXCLUDED',mode:'pack',
   st:'The shadow-overlap picture (mass defect = shared occlusion area, ΔA=A_sum−A_∪) gives total-BE R²=0.988 — '+
      'but on <b>per-nucleon</b> binding it scores <b>R²=−12.2</b>, worse than the mean, finding the ridge in 1 of 116 rows. '+
      'It counts area; binding is nearly flat because every baryon circulates identically and drag is shared. <b>No overlap model reproduces it.</b>',
@@ -199,7 +199,7 @@ const F=[
  {t:'The impact & kinematics',s:'CONFIRMED',mode:'impact',
   st:'The nucleus surface whirls at the universal <b>1.83c</b> counter-seat. A 1 A GeV proton arrives at β=0.875; the movement '+
      'budget <code>v_circ²+v_trans²=c²</code> stalls its gear to v_circ=1/γ=0.484c. In one ~5.7e-23 s transit the surface turns <b>309°</b>. '+
-     'To leave the larger daughter, the proton must strike the <b>light lobe off the rigid triton core</b>. (Ekin(Z) fine-tune was Coulomb-degenerate — killed.)',
+     'To leave the larger daughter, the proton must strike the <b>light lobe off the rigid triton core</b>. (Ekin(Z) fine-tune was Coulomb-degenerate — excluded.)',
   chk:()=>'central hit → symmetric fission · grazing hit → spallation shave · impact on the deuteron lobe leaves the N=82 daughter'},
 
  {t:'Every proton fields an electron',s:'NATIVE',mode:'electron',
@@ -217,17 +217,17 @@ const F=[
  {t:'They all interact — the shared electron IS the binding',s:'NATIVE',mode:'electron',
   st:'Adjacent protons <b>share</b> the stabled electrons; that shared electron is the bond — a molecular H₂⁺ '+
      'geared down by 137. One coupling <code>α·ℏc</code>, no fitted scale. Deuteron: <b>2.200 vs 2.224 MeV</b> (NP17), factor-3 exact. '+
-     'Binding is not overlap area (that was killed) — it is the shared-electron well, which is why BE/A is nearly flat.',
+     'Binding is not overlap area (that was excluded) — it is the shared-electron well, which is why BE/A is nearly flat.',
   chk:iso=>{const r=IDX.get(iso.Z+','+iso.A);return r?`shared-electron binding · deuteron 2.20/2.22 MeV · this nucleus BE/A = ${(r[2]/iso.A).toFixed(2)} MeV`:'shared-electron well, geared by 137'}},
 
  {t:'The β⁻ release',s:'NATIVE',mode:'release',
   st:'β⁻ decay is a neutron letting go. <b>Two things leave the proton’s skin at once</b> — the electron and the neutrino, both born at the <b>1.83c seat</b> (r = R_p). The electron is released <i>bound</i> and <b>drops to the ground state</b> in femtoseconds, taking up the local displacement — that is the β electron. The neutrino is the <b>one winding that never closes</b> (W→0); it cannot seat, so it goes. <b>They cross the c-boundary together</b> — r_e = 2.818 fm, the electron’s own size, its 0.511 MeV rest shell — at the <b>same instant</b>. And the neutrino <b>deforms</b>: the universe bears harder on its tail than its nose, so it runs <b>fat-nosed, thin-tailed</b>. That lopsidedness is the shove — <b>nothing pulls it; it leaves because it is crooked</b> — a <b>watermelon seed</b> the convergence pinches by the thin tail, squirting it out nose-first past the escape shell (2r_e). The <b>1/√2 compression is the launch</b>; the whole thing is a <b>~10⁻²⁹ m</b> splinter, and nothing it crosses can slow it. Drag the ν or the e⁻ below; they step together.',
   chk:()=>'seat 1.83c → c-boundary r_e=2.818 fm (0.511 MeV) → escape 2r_e · e⁻ → ground state, ν escapes · both cross c together · ν compresses 1/√2 (~10⁻²⁹ m)'},
 
- {t:'The honest ledger',s:'OPEN',mode:'ledger',
+ {t:'The ledger as it stands',s:'OPEN',mode:'ledger',
   st:'The whole model, with each piece carrying its true status. <b>Native and proved:</b> the grammar, the scission invariant, '+
      'the radius law, and the proton–electron economy (neutron = p + stabled e; shared e = binding). '+
-     '<b>Real but degenerate</b> (restates (Z,N)): pairing/magnetism, the stability band. <b>Killed:</b> binding-from-overlap, the Ekin fine-tune, ferromagnetism-from-triton. '+
+     '<b>Real but not independent</b> (restates (Z,N)): pairing/magnetism, the stability band. <b>Excluded:</b> binding-from-overlap, the Ekin fine-tune, ferromagnetism-from-triton. '+
      '<b>Open:</b> the true nucleon coordinates, and what sets the helical-peel depth.',
   chk:()=>'protons + electrons, one coupled mesh: N stabled inside, Z fielded out, shared electrons binding'}
 ];

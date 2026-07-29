@@ -194,7 +194,7 @@ The two "honesty numbers" it must *not* fudge:
 | P6 | di-neutron unbound; proton is the triton keystone | known (²n unbound) | C |
 | P7 | `1836π` geometric winding ⟹ `R_p = 193 fm` (falsified) | self-consistency | C (falsification) |
 
-## 5. Provenance discipline (apply `FORMULATIONS_PROVENANCE_AUDIT.md` to every new formula)
+## 5. Provenance discipline (apply `Audits/FORMULATIONS_PROVENANCE_AUDIT.md` to every new formula)
 
 - `ε_link = Q_n` (Stage A): `provenance: calibrated` (uses `P_eff`) · `class: E` until a parameter-free link energy is found.
 - `a_p/a_e = 11.44` (Stage D): the **crucible** — `class: C` if derived from knot geometry, else **`class: F`** (and the existing `(3/2)^{3/2}·10³−1` stays F, not promoted).

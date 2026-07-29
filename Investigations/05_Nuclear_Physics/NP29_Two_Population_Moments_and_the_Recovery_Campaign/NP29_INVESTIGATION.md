@@ -54,7 +54,7 @@ populations, two moments:
 
 ## PART B — The 11 recovery targets (Method B queue, the campaign this sits in)
 
-The agent-killed graveyard (KILL_READJUDICATION_REGISTER.md), re-investigated under
+The agent-killed graveyard (ADJUDICATION_REGISTER.md), re-investigated under
 Method B (dig deeper; recover only with a named mechanism of the kill's error; most stay
 dead). Fed highest-doubt first.
 

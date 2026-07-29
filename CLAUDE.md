@@ -21,7 +21,7 @@ cl /std:c++20 /EHsc /O2 /I Engine/include /Fe:tool.exe path/to/tool.cpp
 # or: g++ -std=c++20 -IEngine/include path/to/tool.cpp -o tool
 ```
 
-There is no test runner. Benchmarks self-report PASS/FAIL by comparing SDT-derived values to measured constants within a tolerance (`report()` in `Benchmarks/B01_B25/benchmarks_b01_b25.cpp`). Investigations are standalone `.cpp` files that each print their own verdict; run them individually.
+There is no test runner. Benchmarks self-report PASS/FAIL by comparing SDT-derived values to measured constants within a tolerance (`report()` in `Benchmarks/B01_B25/benchmarks_suite.cpp`). Investigations are standalone `.cpp` files that each print their own assessment; run them individually.
 
 ## Architectural spine
 
@@ -38,6 +38,17 @@ There is no test runner. Benchmarks self-report PASS/FAIL by comparing SDT-deriv
 - `sdt::laws::atomic`, `nuclear`, `coulomb_identity` — domain functions
 
 When adding a new derivation: put the formula in the appropriate namespace of `laws.hpp`, cite the theorem number (T1–T18) in a comment, and reference it from benchmarks rather than duplicating the math.
+
+## Gateways (binding on every session)
+
+`GATEWAY_BEHAVIOURAL.md` (register, terminology, conduct) and `GATEWAY_PROCEDURAL.md`
+(execution procedure) bind all LLM work in this repository. Core points: professional physics
+vocabulary — **excluded / ruled out / falsified / withdrawn**, never "KILLED";
+**pre-registered**, never "pre-commit"; **shared-input (not independent)**, never the evidence
+label "DEGENERATE"; the word **"honest" is banned as a modifier** (state the fact; use Scope /
+Limitations / Residuals). Direct execution only — delegated-agent output is not citable.
+Pre-registration before instrumentation; instruments validated on known answers before use;
+whole-range single-pass comparisons. `VOICE_MODEL_HARVEY.md` governs public copy.
 
 ## The hard constraints ("Prohibitions")
 
@@ -70,8 +81,8 @@ Electron-capture isotopes use the **alternate grammar** (He-3 core instead of He
 - `Hubble/` — cosmological analysis suite with ~18 `zk²` tools in `tools/` and datasets in `data/`. Independent from the benchmarks CMake build; tools compile standalone.
 - `Experiments/` — falsifiable prediction specs `E01.md` … `E102.md`. Each specifies SDT prediction, standard-model prediction, observable difference.
 - `Investigations/` — active research folders; each contains `PROMPT.md` (methodology), optional `DATA_REQUIREMENTS.md`, and `.cpp` tools. `EMC01–PPT04` address open problems in the engine code itself.
-- `Benchmarks/B01_B25/` — the single `benchmarks_b01_b25.cpp` that verifies the framework end-to-end. This is what the CMake build produces.
-- `SPATIAL_DISPLACEMENT_THEORY.md` — the long-form manuscript.
+- `Benchmarks/B01_B25/` — the single `benchmarks_suite.cpp` (B01 and up) that verifies the framework end-to-end. This is what the CMake build produces.
+- `Papers/SPATIAL_DISPLACEMENT_THEORY.md` — the long-form manuscript.
 
 ## Editing conventions
 

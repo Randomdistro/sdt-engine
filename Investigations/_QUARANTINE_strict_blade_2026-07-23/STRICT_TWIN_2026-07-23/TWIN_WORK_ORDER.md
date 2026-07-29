@@ -60,7 +60,7 @@ You share a repo with the other front, so blinding is by discipline, not by wall
 
 **Explicitly FORBIDDEN (the other front's material and this campaign's rulings):**
 `METHOD_B_RECOVERY_REINVESTIGATION.md` · any `METHOD_B_RUN_*.md` ·
-`KILL_READJUDICATION_REGISTER.md` · `RECONCILIATION_2026-07-23.md` ·
+`ADJUDICATION_REGISTER.md` · `RECONCILIATION_2026-07-23.md` ·
 `Experiments/CAMPAIGN_AGAINST_THE_STANDARD_MODEL.md` (its firing log rules on D05/D06) ·
 `INVESTIGATION_STACK.md` · `KILL_REVIEW_2026-07-08.md` · the `HUNTER_SCOUR_*` / `HUNTER_REPAIR_*`
 directories · session distillation / repair-ledger / canon-flag files. If a search or listing

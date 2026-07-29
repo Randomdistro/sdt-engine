@@ -57,7 +57,7 @@ The energy being available says nothing about the rate. F0b requires what SDT ha
 | **`Q(3n→t+e+ν̄) = Q_n + B(³H)`** | **≈ 9.264 MeV** | **F0** |
 | 3n capture kinetics (rate/barrier/σ) | **UNRESOLVED** — energy allowed, rate not predicted | **F0b** |
 
-## 6. Provenance (`FORMULATIONS_PROVENANCE_AUDIT.md`)
+## 6. Provenance (`Audits/FORMULATIONS_PROVENANCE_AUDIT.md`)
 | # | result | provenance | correspondence | input_dependency | class |
 |---|---|---|---|---|---|
 | F0 | `Q(3n→t+e+ν̄) = Q_n + B(t) = 9.264 MeV` | conservation-derived | novel-pathway energy gate | measured masses + B(t) | **C-flagged** |

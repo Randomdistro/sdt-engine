@@ -350,7 +350,7 @@ no pre-loaded expected outcome, appears anywhere in the verdict.
 `RUN_LOG.md` (pre-commits + four-root sorts) · `cr09_hubble_darkenergy.py` — Routes A–H, consuming
 `cosmology.hpp` + the raw `PantheonPlusSH0ES.dat` columns · `CR09_DERIVATION.md` (the two-component law, each
 step tagged DERIVED/CONVERGENCE/OPEN) · `CR09_VERDICT.md` (dual verdict + §⑧ table, attempt-vs-raw-datum
-throughout) · consistency ledger (Route E) · `KILL_READJUDICATION_REGISTER.md` entry.
+throughout) · consistency ledger (Route E) · `ADJUDICATION_REGISTER.md` entry.
 
 ---
 

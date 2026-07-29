@@ -1,5 +1,5 @@
 add_executable(sdt-benchmarks
-    B01_B25/benchmarks_b01_b25.cpp
+    B01_B25/benchmarks_suite.cpp
 )
 
 target_link_libraries(sdt-benchmarks PRIVATE sdt-engine)

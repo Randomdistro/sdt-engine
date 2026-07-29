@@ -37,8 +37,14 @@ namespace constants {
     // Radiation
     inline constexpr double a_rad   = 7.565'7e-16;
     inline constexpr double T_CMB   = 2.7255;
-    inline constexpr double T_rec   = 3000.0;
-    inline constexpr double z_rec   = 1100.0;
+    // Boundary-release frame (native): the CMB is the Clearing boundary's
+    // synchronized release, not a "the boundary release epoch". The previous round
+    // ballparks here (3000 K, z = 1100 — the epoch-frame figures) are replaced
+    // with the measured-consistent pair; the native derivation chain (release
+    // wavelength ≈ 975 nm, octave count ≈ 10.1, CR07/opacity programme) is the
+    // open route to deriving rather than reading them.
+    inline constexpr double z_rel   = 1089.0;               // OBSERVED (FIRAS-frame)
+    inline constexpr double T_rel   = T_CMB * (1.0 + z_rel); // = 2971 K, computed not typed
     inline constexpr double sigma_SB= 5.670'374'419e-8;  // Stefan-Boltzmann
 
     // Cosmological
@@ -54,7 +60,7 @@ namespace constants {
     inline constexpr double epsilon = u_CMB * l_P3;
     inline constexpr double Phi     = N * epsilon;
     inline constexpr double P_conv  = Phi / l_P3;
-    inline constexpr double u_held  = a_rad * T_rec * T_rec * T_rec * T_rec;
+    inline constexpr double u_held  = a_rad * T_rel * T_rel * T_rel * T_rel;
 
     // Neutrino mass estimates (normal ordering)
     inline constexpr double m_nu1   = 0.02 * eV_to_J / (c * c);   // lightest eigenstate
@@ -319,22 +325,22 @@ void part_II() {
     double P_now = P_rad;
     double P_rec = u_rec / 3.0;
     double ratio_u = u_rec / u_now;
-    double ratio_T = T_rec / T_CMB;
+    double ratio_T = T_rel / T_CMB;
 
     printf("  Present epoch:\n");
     printf("    T_CMB           = %.4f K\n", T_CMB);
     printf("    u_CMB           = %.4e J/m³\n", u_now);
     printf("    P_rad           = %.4e Pa\n", P_now);
     printf("\n");
-    printf("  At recombination (z = %.0f):\n", z_rec);
-    printf("    T_rec           = %.0f K\n", T_rec);
+    printf("  At the boundary release (z = %.0f):\n", z_rel);
+    printf("    T_rel           = %.0f K\n", T_rel);
     printf("    u_held          = %.4e J/m³\n", u_rec);
     printf("    P_held          = %.4e Pa\n", P_rec);
     printf("\n");
     printf("  Ratios:\n");
     printf("    u_rec/u_now     = %.4e (×%.2e)\n", ratio_u, ratio_u);
-    printf("    T_rec/T_now     = %.2f\n", ratio_T);
-    printf("    (T_rec/T_now)⁴  = %.4e (should match u ratio)\n", ratio_T*ratio_T*ratio_T*ratio_T);
+    printf("    T_rel/T_now     = %.2f\n", ratio_T);
+    printf("    (T_rel/T_now)⁴  = %.4e (should match u ratio)\n", ratio_T*ratio_T*ratio_T*ratio_T);
     printf("\n");
 
     // Held content per spation
@@ -415,7 +421,7 @@ void part_III() {
     printf("  Standard model:   13.8 Gyr\n\n");
 
     // Investigate the 48 Gyr figure
-    // R_CMB = ln(1 + z_rec) / (H_0/c) = 7.003 / (H_0/c)
+    // R_CMB = ln(1 + z_rel) / (H_0/c) = 7.003 / (H_0/c)
     // But the PHYSICAL distance in SDT (no expansion) would be different from
     // the comoving distance. Let's check what H_0 gives 48 Gyr:
     double H0_68 = 68e3 / Mpc;  // 68 km/s/Mpc in s^-1
@@ -431,7 +437,7 @@ void part_III() {
     printf("  SDT strain rate σ₀ = H₀/c = %.4e m⁻¹\n", sigma_0);
 
     // R_CMB = ln(1101) / sigma_0
-    double R_check = std::log(1.0 + z_rec) / sigma_0;
+    double R_check = std::log(1.0 + z_rel) / sigma_0;
     printf("  R_CMB = ln(1+z)/σ₀ = %.4e m ✓\n", R_check);
 
     // The physical light-travel time in SDT:
@@ -466,14 +472,14 @@ void part_III() {
     // In SDT, neutrinos decoupled at an EARLIER epoch (higher z, higher T)
     // The ratio depends on when the dinosaur cascade occurred
     printf("  SDT prediction depends on z_cascade (dinosaur decay epoch).\n");
-    printf("  If neutrinos decoupled at z_cas and photons at z_rec = 1100:\n");
+    printf("  If neutrinos decoupled at z_cas and photons at z_rel = 1100:\n");
     printf("  T_ν/T_CMB would differ from standard (4/11)^(1/3) ≈ 0.7138\n\n");
 
     // What z_cascade gives T_ν = T_nu_std? (matching standard prediction)
     // In SDT, if both neutrinos and photons simply cool as 1/(1+z),
     // then T_ν now = T_cascade / (1 + z_cascade)
-    // and T_CMB now = T_rec / (1 + z_rec)
-    // For T_ν/T_CMB = (T_cas/T_rec) × (1+z_rec)/(1+z_cas)
+    // and T_CMB now = T_rel / (1 + z_rel)
+    // For T_ν/T_CMB = (T_cas/T_rel) × (1+z_rel)/(1+z_cas)
     // At z_cascade, T = T_CMB × (1 + z_cascade) (same thermal bath before decoupling)
     // So T_cas = T_CMB × (1 + z_cascade)
     // T_ν now = T_CMB × (1 + z_cas) / (1 + z_cas) = T_CMB ??? That can't be right.
@@ -505,7 +511,7 @@ void part_III() {
 
     // Neutrinos at various production energies
     printf("  If CνB neutrinos were produced in dinosaur cascade at T ~ 3000K:\n");
-    double E_thermal_clearing = 1.5 * k_B * T_rec;  // (3/2)kT in Joules
+    double E_thermal_clearing = 1.5 * k_B * T_rel;  // (3/2)kT in Joules
     double E_clearing_eV = E_thermal_clearing / eV_to_J;
     printf("    E_thermal(3000K) = (3/2)kT = %.4f eV\n", E_clearing_eV);
     double gamma_clearing = E_clearing_eV / 0.02;  // E/mc² if E >> mc²
@@ -518,7 +524,7 @@ void part_III() {
     printf("    1 - v_prod/c     = %.4e\n", 1.0 - v_prod / c);
     printf("\n");
 
-    // If produced at much higher T (pre-recombination dinosaur epoch)
+    // If produced at much higher T (pre-the boundary release dinosaur epoch)
     struct Epoch {
         const char* name;
         double T;

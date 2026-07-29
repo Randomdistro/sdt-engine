@@ -66,9 +66,9 @@
 > intra-system deviation 5.9% vs 50.7% shuffled; solar anchor ϟ☉ = 1476.6 m).
 >
 > **Where to read (current to 2026-07-05):**
-> - `SDT_AND_THE_ENGINE_COMPLETE_GUIDE.md` — the verified long-form guide; **PART 0.5** is the dated
+> - `Papers/SDT_AND_THE_ENGINE_COMPLETE_GUIDE.md` — the verified long-form guide; **PART 0.5** is the dated
 >   state-of-framework snapshot (honest-numbers table: Part 16.2; the owed/cascade ledger: Part 18.5).
-> - `THE_CAUSAL_CHAIN_OF_SDT.md` — what rests on what; the July links are its new §7½.
+> - `Papers/THE_CAUSAL_CHAIN_OF_SDT.md` — what rests on what; the July links are its new §7½.
 > - `Investigations/INVESTIGATION_STACK.md` — living master index and cascade ledger (§3b roots).
 > - `Investigations/HUNTER_PROTOCOL.md` — the audit law; **§G** audits the auditor.
 >   `Investigations/FARMER_PASS_2026-07-03.md` — the transcription-loss replant pass.

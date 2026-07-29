@@ -112,7 +112,7 @@ bands the eye calls empty).
 
 ---
 *E109 · J. C. Harvey · pre-registered 2026-07-18 · engine: sdt/laws.hpp · related:
-SAR03, SAR06, APS07, OP07-R2 (pending), Investigations/KILL_READJUDICATION_REGISTER.md*
+SAR03, SAR06, APS07, OP07-R2 (pending), Investigations/ADJUDICATION_REGISTER.md*
 
 ---
 

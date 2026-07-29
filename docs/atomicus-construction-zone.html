@@ -116,7 +116,7 @@ canvas{display:block;cursor:crosshair}
   <div class="note">Ω = open slots / total slots over a 12-neighbour close packing.
     Ω→0 is bulk, Ω→1 is all surface. This is a <b>geometric</b> readout only —
     binding-from-overlap was tested and <b>failed</b> (R² = −12.2 on BE/A; it found the ridge in 1 of 116 rows).
-    Shown because it is honest geometry, not because it predicts binding.</div>
+    Shown because it is the geometry as it stands, not because it predicts binding.</div>
 
   <h2>Grammar</h2>
   <div class="row"><span class="l">α + n<sub>d</sub>d + n<sub>t</sub>t</span><span class="v" id="gG">α</span></div>
@@ -198,7 +198,7 @@ function lawList(d,t){
   const paired=(d%2===0&&t%2===0);
   const mag={n:'Magnetism',ok:null,
     s:(paired?'μ = 0 — every subunit paired':'μ ≠ 0 — unpaired subunit')+
-      ' — 98.5% over 3043, but <b>DEGENERATE</b>: n_d even ∧ n_t even IS even-even, '+
+      ' — 98.5% over 3043, but <b>NOT INDEPENDENT</b>: n_d even ∧ n_t even IS even-even, '+
       'and n_t odd IS odd-A. This is the pairing rule plus a tautology, not a grammar result. (NP24-A)'};
   if(rec&&rec[4]>=0){ const obs=(rec[4]===0); mag.ok=(paired===obs);
     mag.s=(paired?'μ = 0 predicted':'μ ≠ 0 predicted')+' · measured J = '+rec[4]+(mag.ok?' ✓':' ✗'); }
