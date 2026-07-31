@@ -956,6 +956,34 @@ static void B38_shell_schedule()
 }
 
 // ═══════════════════════════════════════════════════════════════════════
+//  B39 — RELAY-SPEED PROFILE FROM THE SHAPIRO DELAY (GOM22 repair, canon)
+// ═══════════════════════════════════════════════════════════════════════
+
+static void B39_relay_speed_profile()
+{
+    using namespace sdt::laws;
+    std::puts("\n══ B39: RELAY-SPEED PROFILE (GOM22 canon repair) ══");
+    const double koppa = 1476.625;                 // ϟ_Sun = GM/c² [m]
+    const double R_Sun = 6.957e8, AU = 1.495'978'707e11;
+    const double z = koppa / R_Sun;
+    // (i) Shapiro delay, grazing Earth–Mars superior conjunction
+    const double dt = 2.0 * depth_closure::shapiro_delay(koppa, AU, 1.524 * AU, R_Sun);
+    report("B39", "Shapiro round-trip, grazing (Viking/Cassini)", "Gravitation",
+           1e6 * dt, 247.24, 0.5, Certification::DERIVED, "us");
+    // (ii) the same profile must return the solar gravitational redshift
+    const double v_grav = measured::c * (1.0 / depth_closure::clock_rate(z) - 1.0);
+    report("B39", "Solar gravitational redshift", "Gravitation",
+           v_grav, 633.0, 1.0, Certification::DERIVED, "m/s");
+    // (iii) the superseded relation, printed so the fault stays visible
+    std::printf("  B39  superseded c_local=c(1-z) would give %.2f us "
+                "(ratio %.4f) — retained only for legacy callers.\n",
+                1e6 * dt * 0.5, 0.5);
+    std::puts("  B39  OPEN FORK (second-order): c(1-z)^2 [adopted, wall at r=koppa]");
+    std::puts("       vs c(1-2z) [Schwarzschild form, horizon at r_s]. A 1.4 Msun");
+    std::puts("       NS surface splits them by 8.6% — the named discriminator.");
+}
+
+// ═══════════════════════════════════════════════════════════════════════
 //  COVERAGE ROSTER — the original B01–B100 catalogue, every row accounted
 // ═══════════════════════════════════════════════════════════════════════
 
@@ -1045,6 +1073,7 @@ int main()
     B36_koppa_invariance();
     B37_rank4_prediction();
     B38_shell_schedule();
+    B39_relay_speed_profile();
     coverage_roster();
 
     // Separate genuine regressions from KNOWN-OPEN (PENDING) items so the summary

@@ -10,8 +10,17 @@
 //      result (ϟ_f = final koppa). f̂ ≈ 0.53 is the ⟦Kerr-fit⟧ O(1) factor
 //      (CONVERGENCE, like G2's 96/5 — native shear-mode derivation OPEN).
 //
+//  ⚠ GOM22 DEPENDENCY (2026-07-30): the echo prediction below rests on WHERE
+//    the relay speed vanishes, and that is now an OPEN second-order fork. The
+//    repaired canon adopts c_far = c(1−z)², which still vanishes at r = ϟ and
+//    so PRESERVES this prediction. The rival first-order-identical form
+//    c(1−2z) vanishes at r = 2ϟ = r_s exactly — a horizon — and would kill it.
+//    Nothing here is evidence for either form; the discriminator is strong-field
+//    (a 1.4 M☉ NS surface splits them by 8.6%). Read this section as
+//    CONDITIONAL on form (a). Record: GOM22_Shapiro_Velocity_Profile/.
+//
 //  (B) ECHOES (DISTINCTIVE — SDT ≠ GR) — GR has a perfectly-absorbing horizon;
-//      SDT has NO horizon. The relay speed c_local = c(1−z) → 0 only at z=1
+//      SDT has NO horizon. The relay speed c_far = c(1−z)² → 0 only at z=1
 //      (r = ϟ), and CQ-42's closure floor (z=1 self-boundary) is a HARD WALL:
 //      the spation cannot compress below ℓ_P. So the ringdown partially
 //      REFLECTS off that wall and re-emerges as delayed echoes, spaced by the

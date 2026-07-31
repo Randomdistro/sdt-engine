@@ -1,0 +1,106 @@
+==============================================================================
+CR14 - IONISATION BALANCE AND THE CLEARING RUNG
+Pre-registered: PROMPT.md.  Criteria R1-R4, validation V1-V3.
+==============================================================================
+
+Binding energy B          = 13.605693 eV   [from laws.hpp Ry_eV]
+  as a temperature theta  = 157887.5 K
+Saha prefactor A          = 2.414683e+21 m^-3 K^-1.5
+Present baryon density    = 0.2512 m^-3  [comparator-sourced]
+
+------------------------------------------------------------------------------
+VALIDATION (must pass before any branch result is reportable)
+------------------------------------------------------------------------------
+V1  limits on LCDM densities:
+      T =  100000.0 K   n_b = 1.2407e+13 m^-3   x_e = 1.000000
+      T =   10000.0 K   n_b = 1.2407e+10 m^-3   x_e = 1.000000
+      T =    5000.0 K   n_b = 1.5509e+09 m^-3   x_e = 0.999906
+      T =    3000.0 K   n_b = 3.3500e+08 m^-3   x_e = 0.004051
+      T =    1000.0 K   n_b = 1.2407e+07 m^-3   x_e = 0.000000
+    V1 PASS  (x_e -> 1 at 1e5 K, x_e -> 0 at 1e3 K)
+
+V2  known answer - LCDM Saha half-ionisation:
+      T_half = 3762.0 K   ->  z_half = 1379.3   (window 1250-1450, textbook ~1370)
+    V2 PASS
+
+V3  two-route sensitivity  d ln T_half / d ln n_b   at T = 2504.2 K:
+      analytic  1/(3/2 + theta/T) = 0.015492
+      numerical central diff      = 0.015492
+    deviation 0.0000 %   V3 PASS
+
+All validation gates PASS. Proceeding to the object.
+
+==============================================================================
+BRANCHES  (identical solver, single pass)
+==============================================================================
+
+crit    branch                                n_b [m^-3]  T_half [K]    N=T/T0
+------------------------------------------------------------------------------
+0.50    A  LCDM  n_b ~ (1+z)^3                6.6058e+08      3762.0    1380.3
+        B  SDT static  n_b = n_b0             2.5120e-01      2504.2     918.8
+0.10    A  LCDM  n_b ~ (1+z)^3                5.0464e+08      3439.0    1261.8
+        B  SDT static  n_b = n_b0             2.5120e-01      2364.7     867.6
+0.01    A  LCDM  n_b ~ (1+z)^3                3.7335e+08      3110.4    1141.2
+        B  SDT static  n_b = n_b0             2.5120e-01      2212.2     811.7
+------------------------------------------------------------------------------
+
+Branch C - inverse question: what density puts the criterion at N = 1100?
+      T(N=1100) = 1100 x 2.7255 = 2998.05 K
+      x_e = 0.50   requires n_b = 1.0659e+04 m^-3   (static vessel has 0.2512, ratio 4.243e+04)
+      x_e = 0.10   requires n_b = 4.7966e+05 m^-3   (static vessel has 0.2512, ratio 1.909e+06)
+      x_e = 0.01   requires n_b = 5.2763e+07 m^-3   (static vessel has 0.2512, ratio 2.100e+08)
+
+Branch D - how far does T_half move when the density moves?
+      n_b [m^-3]      T_half [K]    N = T/T0
+      1e-06               2099.1       770.2
+      1e-04               2233.0       819.3
+      1e-02               2385.0       875.1
+      1e+00               2559.0       938.9
+      1e+02               2759.9      1012.6
+      1e+04               2994.5      1098.7
+      1e+06               3272.1      1200.5
+      1e+08               3605.3      1322.8
+      1e+10               4012.5      1472.2
+      1e+12               4521.1      1658.8
+      1e+14               5173.3      1898.1
+
+      density spans 20 orders of magnitude; T_half moves by a factor 2.465
+      mean d ln T_half / d ln n_b over the sweep = 0.0196
+
+==============================================================================
+PRE-REGISTERED CRITERIA
+==============================================================================
+
+R1  reproduced?  Branch B N_half = 918.8  vs imported 1100  ->  16.5 % off
+    R1 does NOT fire (+-10 %)
+
+R2  not reproduced?  R2 FIRES - z_rec stays MEASURED-INPUT, 2998 K is CALIBRATED(1)
+
+R3  non-discriminating?  d ln T_half / d ln n_b = 0.0230 (branch A), 0.0155 (branch B)
+    the two branches disagree by 2.630e+09 in density (9.4 orders)
+    and by only a factor 1.502 in T_half (50.2 % in N)
+    R3 FIRES - [DEGENERATE], may NOT be cited as evidence for pressurised space
+
+R4  contraband: registered unconditionally. The Saha phase-space factor is imported
+    statistical mechanics. No outcome here is labelled DERIVED; best available label
+    for a Branch-B success is COMPUTED (consistency check).
+
+Branch E (post-hoc, not a pre-registered criterion) - Thomson optical depth.
+      A last-scattering surface needs tau = n_e sigma_T L ~ 1 for the bath to
+      decouple from a scattering medium. Fully ionised, n_e = n_b.
+      A  LCDM at its own T_half  n_e = 6.6058e+08 m^-3   mean free path = 2.2756e+19 m
+                                 tau over R_CMB = 4.1866e+07   (needs ~1)
+      B  SDT static vessel       n_e = 2.5120e-01 m^-3   mean free path = 5.9841e+28 m
+                                 tau over R_CMB = 1.5921e-02   (needs ~1)
+      -> the static vessel is optically THIN by a factor 62.8 over the whole
+         vessel radius: no scattering surface forms at present baryon density.
+
+Named trap (PROMPT): is Branch C's required density near the geometric mean of A and B?
+      geometric mean sqrt(n_A x n_B) = 1.2882e+04 m^-3
+      Branch C required             = 1.0659e+04 m^-3   (ratio 0.827)
+      -> this proximity is a TAUTOLOGY of T_half being linear in ln n_b.
+         It is not evidence for any geometric-midpoint claim.
+
+==============================================================================
+OUTCOME: R2 fires together with R3.  R3 outranks R1 for evidential purposes (PROMPT).
+==============================================================================

@@ -162,9 +162,30 @@ namespace measured {
     inline constexpr double a_rad       = 7.565'7e-16;                  // [J/m³/K⁴] Stefan radiation constant
 
     // CMB (FIRAS/COBE/Planck)
-    inline constexpr double T_CMB       = 2.7255;                       // [K]      Present CMB temperature
-    inline constexpr double T_rec       = 3000.0;                       // [K]      Temperature at recombination
-    inline constexpr double z_rec       = 1100.0;                       // [-]      Recombination redshift
+    inline constexpr double T_CMB       = 2.7255;                       // [K]      Present CMB temperature — MEASURED (FIRAS)
+
+    // ── BOUNDARY-RELEASE FRAME — reclassified 2026-07-30 (Harvey-authorized) ──
+    // T_rec and z_rec are NOT measured facts. They are the round textbook
+    // epoch-frame ballparks (3000 K, 1100) and they were sitting inside the
+    // measured whitelist, which by the ruleset admits only CODATA / IAU / FIRAS
+    // values. Found by the derivelist audit (F2): scoring a native result against
+    // a round number penalised it — the CR13 release chain reads −0.90% against
+    // 3000 K and +0.07% against the FIRAS-frame anchor below.
+    // They are RETAINED at their legacy values so the ~10 downstream tools that
+    // consume them do not silently change output; they are relabelled, not
+    // re-valued. New work uses the *_release pair. Migration is OWED.
+    // provenance_status:     epoch-frame ballpark — NOT a measured input
+    // correspondence_status: round-number convention of the rival account
+    inline constexpr double T_rec       = 3000.0;                       // [K]  LEGACY ballpark — do not cite as measured
+    inline constexpr double z_rec       = 1100.0;                       // [-]  LEGACY ballpark — do not cite as measured
+
+    /// The native boundary release: the CMB is the Clearing boundary's
+    /// synchronized release, not a "recombination epoch". z is the FIRAS-frame
+    /// observed value; the temperature is COMPUTED from it, never typed in.
+    /// The native derivation chain (release wavelength ≈ 975 nm, octave count
+    /// 1+z = 2^Δn ≈ 10.09 — CR07/CR13) is the open route to deriving both.
+    inline constexpr double z_release   = 1089.0;                       // [-]  OBSERVED (FIRAS frame)
+    inline constexpr double T_release   = T_CMB * (1.0 + z_release);    // [K]  = 2970.8 K, computed
 
     // Cosmological scale (observed, not SDT-derived; conditions Law I chain)
     // provenance_status:     external-input
@@ -1551,10 +1572,36 @@ namespace angular {
 //    z ≡ 1/k² = (v/c)² = ϟ/r,   ϟ ≡ v²R/c² = R/k²   (koppa: a velocity-defined length)
 //
 //    (1) ℓ_P(r)     = ℓ_P,∞ · (1 − z)        local spation closure
-//    (2) c_local(r) = c_∞   · (1 − z)        local relay speed ⇒ z = 1 − c_local/c_∞
-//    (3) dτ/dt      = √(1 − z)                local clock rate (Law V budget)
+//    (2) c_far(r)   = c_∞   · (1 − z)²        far-frame relay speed  [REPAIRED — see below]
+//    (3) dτ/dt      = (1 − z)                 local clock rate (Law V budget) [REPAIRED]
 //    (4) z_spec     = z(r_emit) − z(r_obs)    "gravitational redshift" = depth differential
 //    (5) v(r)       = c √(ϟ/r) = c √z         bound-motion law (g = v²/r = c²ϟ/r²)
+//
+//  ── GOM22 REPAIR (2026-07-30, Harvey-authorized) ──────────────────────────
+//  Relations (2) and (3) previously read c_∞(1−z) and √(1−z). Both were short
+//  by exactly a factor of 2 against measurement:
+//    · Shapiro delay: c(1−z) integrates to 123.62 μs where 247.24 μs is
+//      measured (Viking ~250 μs; Cassini fixes the coefficient to 2.3e-5).
+//      Ratio 0.5000 — falsified, not a residual.
+//    · Solar gravitational redshift: √(1−z) gives 318 m/s where 633 is
+//      measured. Ratio 0.500 — and it contradicted relation (4), which
+//      reproduces the measurement (the C1 result, 0.03%, UNTOUCHED).
+//  ROOT: GOM05 derived the speed as c·ℓ_P(r)/ℓ_P,∞ — scaling the hop LENGTH by
+//  the closure while leaving the hop DURATION at its far-frame value. A
+//  mixed-frame slip. Speed is length per time, and (3) says the tick closes
+//  too, so the closure factor enters TWICE:
+//        c_far = c · [ℓ_P(r)/ℓ_P,∞] · [t_P,∞/t_P(r)] = c (1 − z)²
+//  Native repair: nothing imported, one relation made consistent with another
+//  already on the books. shapiro_delay()'s factor 2 is now DERIVED, not inserted.
+//  OPEN FORK (second-order, undecided): (a) c(1−z)² [native, adopted here] vs
+//  (b) c(1−2z) [Schwarzschild coordinate speed — shared form, CANNOT
+//  DISCRIMINATE]. Identical to first order. They differ on where the relay
+//  speed vanishes: (a) r = ϟ, (b) r = 2ϟ = r_s exactly — i.e. whether SDT has a
+//  horizon, and whether GOM06's echo prediction survives. That (a) preserves an
+//  SDT prediction is a consequence, NOT evidence for it. Discriminator: a
+//  1.4 M☉ neutron-star surface splits them by 8.6% (NICER-class hot-spot
+//  modelling); the solar limb splits them by 1.06e-6 — below reach.
+//  Record: Investigations/06_.../GOM22_Shapiro_Velocity_Profile/
 //
 //  PROVEN content: C1 (redshift = depth, Sun to 0.03%) and C2 (one law across
 //  ~15 orders). CAVEATS (future work, NOT theorem content): the absolute
@@ -1580,22 +1627,42 @@ namespace depth_closure {
         return c * std::sqrt(koppa / r);
     }
 
-    /// GOM01 — Shapiro delay is ACCUMULATED DEPTH, not slowing-in-a-well: the
-    /// local light speed stays c. Δt = (2/c)∫ z dl = (2ϟ/c)∫ dl/r, which for a
-    /// ray of impact parameter b from r₁ to r₂ gives the standard log form
-    /// Δt = (2ϟ/c) ln(4 r₁ r₂ / b²)  — matches GR/observation to 0.0000%.
+    /// GOM01/GOM22 — Shapiro delay is the integrated relay-speed deficit.
+    /// The factor 2 below is DERIVED, not inserted: with the repaired profile
+    /// c_far = c(1−z)², the integrand 1/c_far − 1/c = (2z + O(z²))/c, so
+    ///     Δt = (2/c)∫ z dl = (2ϟ/c)∫ dl/r = (2ϟ/c) ln(4 r₁ r₂ / b²)
+    /// for a ray of impact parameter b from r₁ to r₂ — 247.24 μs round-trip at
+    /// grazing Earth–Mars, against Viking ~250 μs and Cassini's coefficient at
+    /// 2.3e-5. (The previous header asserted "the local light speed stays c",
+    /// which contradicted relation (2); withdrawn 2026-07-30.)
     [[nodiscard]] inline auto shapiro_delay(
         double koppa, double r1, double r2, double b
     ) noexcept -> double {
         return (2.0 * koppa / c) * std::log(4.0 * r1 * r2 / (b * b));
     }
 
-    /// (3) Local clock rate: dτ/dt = √(1 − z)   (Law V movement budget)
-    [[nodiscard]] inline auto clock_rate(double z) noexcept -> double {
-        return std::sqrt(1.0 - z);
+    /// (3) Local clock rate: dτ/dt = (1 − z)   (Law V movement budget)
+    /// GOM22 repair: was √(1 − z), which gave half the measured solar
+    /// gravitational redshift (318 vs 633 m/s) and contradicted relation (4).
+    /// (1 − z) reproduces it: 636.3 m/s against 633 measured.
+    [[nodiscard]] constexpr auto clock_rate(double z) noexcept -> double {
+        return 1.0 - z;
     }
 
-    /// (2) Local relay speed: c_local = c_∞ (1 − z); inverse z = 1 − c_local/c_∞
+    /// (2) Far-frame relay speed: c_far = c_∞ (1 − z)²
+    /// The closure enters twice — once shortening the hop, once dilating the
+    /// tick (GOM22). Inverse: z = 1 − √(c_far/c_∞).
+    [[nodiscard]] constexpr auto c_far(double c_inf, double z) noexcept -> double {
+        return c_inf * (1.0 - z) * (1.0 - z);
+    }
+    [[nodiscard]] inline auto depth_from_c_far(double c_far_val, double c_inf) noexcept -> double {
+        return 1.0 - std::sqrt(c_far_val / c_inf);
+    }
+
+    /// ⛔ SUPERSEDED (GOM22, 2026-07-30): c_local = c(1−z) delivers exactly half
+    /// the measured Shapiro delay. Retained so legacy callers compile; use
+    /// c_far(). Named c_local because the old text read it as a *local* speed —
+    /// the repaired quantity is explicitly the FAR-frame relay speed.
     [[nodiscard]] constexpr auto c_local(double c_inf, double z) noexcept -> double {
         return c_inf * (1.0 - z);
     }

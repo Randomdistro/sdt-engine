@@ -1,0 +1,53 @@
+[LOAD] stitched Kepler PDCSAP: 65268 cadences, BKJD 120.5–1591.0
+
+══ V1: DIP CENSUS RECOVERY ══
+  dip: BKJD   792.720  depth  14.25%
+  dip: BKJD  1519.523  depth  20.72%
+  dip: BKJD  1568.482  depth   7.70%
+  V1a D792 : found BKJD 792.720 depth 14.25% vs published ~16%  -> PASS
+  V1b D1519: found BKJD 1519.523 depth 20.72% vs published ~21%  -> PASS
+
+══ V2: ROTATION RECOVERY ══
+  peak period 0.8782 d vs published 0.88 d -> PASS
+
+══ V3 + Q1: THE INFRARED LEDGER ══
+  photosphere scale from JHKs: rel spread 2.9% · model floor 0.08 mag (ADJ-1)
+  W1: measured   20.927 mJy  photosphere   21.122 mJy  Δm +0.010 (+0.1σ)
+  W2: measured   11.497 mJy  photosphere   12.335 mJy  Δm +0.076 (+0.9σ)
+  W3: measured    1.838 mJy  photosphere    2.094 mJy  Δm +0.142 (+1.0σ)
+  W4: measured    1.423 mJy (UPPER LIMIT)  photosphere    0.647 mJy
+  V3 photosphere anchor (W1,W2 within 3σ): PASS
+  budget: steady screen f_abs = 0.03 of L* (the measured Kepler-era deficit)
+   r [AU]  T_d [K]  ΔW3 [mag]  ΔW4 [mag]
+      0.1     1294      1.565      1.728
+      0.3      747      2.713      3.112
+      1.0      409      3.658      4.560
+      3.0      236      3.677      5.500
+     10.0      129      1.931      5.589
+  measured W3 offset from photosphere: +0.142 ± 0.123 mag
+
+══ Q3: SPIN-PHASE COHERENCE ══
+  P_rot power in D792 window : 0.0060
+  P_rot power in D1519 window: 0.0232
+  95th percentile of 39 quiet windows: 0.0104
+  coherence in BOTH deep dips: NO — structure is exterior to the spin (field-locked variant excluded)
+
+══ Q4: BRIGHTENING CENSUS (no gate) ══
+  sustained brightenings (+0.1%, >1 d): 2 — recorded, no verdict attached
+
+══ Q2: CHROMATIC RATIO VARIABILITY (GTC per-pointing, single pass) ══
+  GTC pointings parsed: 14 (paper's own exclusions honoured)
+  BJD 57891.6709: A556   9.05 mmag  A868   4.24 mmag  ratio  2.13 ± 0.85
+  BJD 57893.6921: A556  13.22 mmag  A868   6.21 mmag  ratio  2.13 ± 0.37
+  BJD 57895.6698: A556   7.30 mmag  A868   4.35 mmag  ratio  1.68 ± 0.39
+  BJD 57896.6644: A556   5.44 mmag  A868   3.15 mmag  ratio  1.73 ± 0.70
+  BJD 57921.6949: A556  20.50 mmag  A868   7.30 mmag  ratio  2.81 ± 0.56
+  BJD 57922.5738: A556  11.13 mmag  A868   4.79 mmag  ratio  2.32 ± 0.56
+  BJD 57980.5654: A556   6.75 mmag  A868   3.26 mmag  ratio  2.07 ± 1.09
+  BJD 58007.3854: A556  24.15 mmag  A868  13.22 mmag  ratio  1.83 ± 0.24
+  max−min ratio: 1.13 ± 0.68  (1.7σ joint)
+  Q2: ratios consistent with constant — one grain population stands
+  scope: per-event grain populations remain an absorption escape — stated.
+  literature corroboration (quoted, not computed here): Bodman+ 2018 — 'a single
+  wavelength dependence does not fit the entire light curve'; dimming 'non-gray
+  and varies in time'. Meng+ 2017 — secular extinction wavelength-dependent.

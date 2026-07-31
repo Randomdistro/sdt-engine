@@ -1,0 +1,124 @@
+====================================================================================
+CR15 - IONISATION TRILEMMA AND THE COLD DENSE PAST
+Pre-registered: PROMPT.md.  Tests T1-T5.
+====================================================================================
+
+theta = B/k_B = 157887.5 K      B_0/(k_B T_0) = 57929.7  (today's Boltzmann argument)
+
+------------------------------------------------------------------------------------
+VALIDATION GATES (re-run from CR14; no result reportable if any fails)
+------------------------------------------------------------------------------------
+  V1  x_e(1e5 K) = 1.000000 ,  x_e(1e3 K) = 0.000000   -> PASS
+  V2  LCDM Saha half-ionisation z = 1379.3  (window 1250-1450) -> PASS
+  V3  d lnT/d ln n_b  analytic 0.015492  numerical 0.015492  -> PASS
+  all gates PASS
+
+====================================================================================
+T1 - ARITHMETIC AUDIT of the document's [D]-tagged numbers
+====================================================================================
+  Part VI - bounds of the vessel:
+    N_max = (P_conf/P_0)^1/4     recomputed 1.548e+12     stated 1.55e+12            dev    0.10 %  OK
+    v_min = c/N_max              recomputed 0.0001936     stated 0.00019    m/s      dev    1.90 %  OK
+    T_max = N_max T_0            recomputed 4.22e+12      stated 4.2e+12    K        dev    0.48 %  OK
+    rho_s = 2 P_conf/c^2         recomputed 1.78e+18      stated 2.3e+17    kg/m3    dev  674.02 %  ** MISMATCH **
+  Part IX / Hypothesis H:
+    P_min = P_0^2/P_conf         recomputed 2.421e-63     stated 2.4e-63    Pa       dev    0.86 %  OK
+    T_end = T_0/N_max            recomputed 1.76e-12      stated 1.8e-12    K        dev    2.21 %  OK
+    v_dec = c^2/v_min            recomputed 4.642e+20     stated 4.7e+20    m/s      dev    1.23 %  OK
+  Part VII - the clock:
+    1/H_0                        recomputed 13.96         stated 14         Gyr      dev    0.29 %  OK
+    t_lb(1100) = ln(1100)/H_0    recomputed 97.76         stated 98         Gyr      dev    0.25 %  OK
+    t_lb(N_max)                  recomputed 391.8         stated 390        Gyr      dev    0.47 %  OK
+    D_CMB = (c/H_0)(1-1/N_r)     recomputed 13.95         stated 14         Glyr     dev    0.38 %  OK
+    tau_now = 1/(2 H_0)          recomputed 6.98          stated 7          Gyr      dev    0.29 %  OK
+  Part VIII - BAO shell:
+    u_r = H_0 r_com/N_r          recomputed 9.552         stated 9.5        km/s     dev    0.54 %  OK
+    u_r / (c/N_r)                recomputed 3.505         stated 3.5        %        dev    0.13 %  OK
+
+  T1: 13/14 reproduce; 1 MISMATCH
+  -> rho_s defect traced: rho = 2P/c^2 with P_conf = 8e34 Pa gives 1.78e+18 kg/m3,
+     a factor 7.74 above the stated 2.3e17. To make the stated value true,
+     P_conf would have to be 1.034e+34 Pa, which moves N_max to 9.283e+11 (not 1.55e12)
+     and rescales every Hypothesis-H prediction. P_conf is [C] and load-bearing.
+
+====================================================================================
+T2 - TRILEMMA legs (i)+(ii):  B(N) = B_0/N^2 ,  T(N) = T_0 N ,  n_b(N) = n_b0 N^3
+====================================================================================
+  Boltzmann argument runs as B/(k_B T) = (theta/T_0)/N^3 = 5.793e+04 / N^3
+  half-ionisation epoch  N = 10.554   (z = 9.554)
+  vs the CMB identification N = 1100:  99.0 % off  (factor 104.2)
+  T2 FAIL - the trilemma is REAL; exactly one leg must be withdrawn
+
+  ionisation history under (i)+(ii)   [N > 1 is the past]
+      N          T_local [K]  B/(k_B T)      x_e         
+      1          2.725        5.793e+04      0           
+      3          8.176        2146           0           
+      10         27.25        57.93          0.00969629  
+      30         81.77        2.146          1           
+      100        272.5        0.05793        1           
+      1100       2998         4.352e-05      1           
+      1e+04      2.725e+04    5.793e-08      1           
+  -> under (i)+(ii) the past is HOTTER and binding is WEAKER, so ionisation runs away:
+     the transition is pushed to N ~ 10, and at N = 1100 hydrogen is fully ionised with
+     B/(k_B T) = 4.352e-05 - there is no neutral epoch to identify with the CMB.
+
+  NAMED TRAP (PROMPT): 1100^(1/3) = 10.323 sits near the observed reionisation epoch.
+  This is the cube root of an imported number and is NOT reported as a match.
+
+====================================================================================
+T3 - PROP 5 TAKEN AT FACE VALUE: bath quanta track atoms, T_local ~ N^-2,
+     so B/(k_B T) is epoch-INVARIANT at its present value 5.793e+04
+====================================================================================
+      N          T_local [K]    B/(k_B T)      n_b [m^-3]     x_e         
+      0.001      2.726e+06      5.793e+04      2.512e-10      0           
+      1          2.725          5.793e+04      0.2512         0           
+      10         0.02725        5.793e+04      251.2          0           
+      100        0.0002725      5.793e+04      2.512e+05      0           
+      1100       2.252e-06      5.793e+04      3.343e+08      0           
+      1e+06      2.725e-12      5.793e+04      2.512e+17      0           
+
+  x_e is monotonically DECREASING toward the past: True
+  the Boltzmann factor exp(-5.793e+04) = 0 (underflow) at EVERY epoch
+  T3 REGISTERED OUTCOME: NO ionised era exists at any epoch - no recombination event, so the CMB cannot be a
+     last-scattering surface, and z_rec / T_rec must leave the `measured` namespace.
+
+====================================================================================
+T4 - CR14 CORRECTION: Branch B rerun with Prop 13's coasting dilution n_b ~ N^3
+====================================================================================
+  Prop 13 gives r(t) ~ 1/N for coasting matter, so n_b ~ N^3 WITHOUT expanding space.
+  CR14 Branch B assumed n_b = const ('static, so no dilution'). That was the wrong law.
+
+  corrected Branch B half-ionisation:  T = 3762.0 K , N = 1380.3
+  -> IDENTICAL to the LCDM comparator (same T(N), same n_b(N), same solver)
+  n_b at that epoch = 6.6058e+08 m^-3 ;  tau = n_e sigma_T R_CMB = 4.1866e+07
+
+  CR14 Branch E said: static vessel optically THIN by 62.8 (tau = 0.01592).
+  With Prop 13, tau = 4.187e+07 >> 1: optically THICK, a scattering surface DOES form.
+  T4 REGISTERED OUTCOME: CR14 Branch E objection WITHDRAWN
+
+====================================================================================
+T5 - THE BRIDGE EXPONENT OWED (PENDING 1):  n ~ P^s = N^(4s)
+====================================================================================
+  Only meaningful for the reading that survives T2/T3. Under T3 the Boltzmann factor is
+  epoch-invariant, so the transition is set purely by density - a genuine density trigger,
+  exactly as Prop 5 requires. Ask what n(N) a density trigger needs.
+
+  optical depth tau = 1 at N=1100    needs n = 1.5778e+01 m^-3  (6.281e+01 x today)
+                                     -> n ~ N^0.5912 , i.e. s = 0.1478  (P^s)
+  CR14 Branch C thermal rung         needs n = 1.0659e+04 m^-3  (4.243e+04 x today)
+                                     -> n ~ N^1.5216 , i.e. s = 0.3804  (P^s)
+
+  Prop 13's coasting law gives n ~ N^3 exactly (s = 3/4), which OVERSHOOTS both targets:
+      n(1100) = 6.6058e+08 m^-3 vs the ~1e4 m^-3 a density trigger would need
+  So Prop 13 and a pure density trigger are not simultaneously satisfiable at N = 1100:
+      Prop 13 supplies 6.197e+04 times more density than the trigger wants.
+
+====================================================================================
+SUMMARY
+====================================================================================
+  T1  13/14 reproduce, 1 mismatch (rho_s)
+  T2  FAIL - trigger at N = 10.55, not 1100 (factor 104)
+  T3  no ionised era at any epoch under Prop 5 -> CMB is not a recombination surface
+  T4  CR14 Branch E WITHDRAWN (Prop 13 restores optical thickness, tau = 4.19e+07)
+  T5  density trigger wants n ~ N^1.52 (s = 0.38); Prop 13 delivers N^3 (s = 0.75)
+====================================================================================

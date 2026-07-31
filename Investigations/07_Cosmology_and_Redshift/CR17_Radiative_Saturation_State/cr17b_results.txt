@@ -1,0 +1,82 @@
+========================================================================================
+CR17b - CLOSING THE lambda_sat DEBT
+========================================================================================
+
+  baryon density sourced from BBN, not from the CMB fit:
+    eta (deuterium)  = 6.100e-10
+    n_gamma,0        = 4.1073e+08 m^-3
+    n_b,0            = 2.5054e-01 m^-3   (Planck Omega_b route gives 0.2512 - agrees to 0.3 %)
+    rho_b,0/rho_g,0  = 902.17
+  Prop 13 coasting dilution: n_b ~ N^3 ,  rho_gamma ~ N^4  -> the ratio falls as 1/N
+
+----------------------------------------------------------------------------------------
+CANDIDATE DEPINNING CONDITIONS - all evaluated, failures reported
+----------------------------------------------------------------------------------------
+  condition                      N            lambda [nm]   T [K]       verdict
+  ------------------------------------------------------------------------------------
+  C1  Ioffe-Regel  k*mfp = 1     1.883e+16    5.646e-11     5.132e+16   excluded
+  C2  n_e sigma_T v = H_0        21.31        4.988e+04     58.09       excluded
+  C3  tau = 1 over R_CMB         3.979        2.672e+05     10.84       excluded
+  C4  obstacle loading R = 1     676.6        1571          1844        IN near-IR band
+  C5  rho_b = rho_gamma          902.2        1179          2459        IN near-IR band
+
+    C1                             off the band centre by x5.4e-14   (wave delocalisation in a scattering medium)
+    C2                             off the band centre by x47.7   (relay traffic outruns the decompression clock)
+    C3                             off the band centre by x256   (single-scattering horizon)
+
+========================================================================================
+CLOSURE - Harvey's stated mechanism is C4: the jam releases when obstacle loading R = 1
+========================================================================================
+  R(N) = (3/4) rho_b/rho_gamma = (3/4)(rho_b0/rho_g0)/N = 676.62 / N
+  R = 1  ->  N = 676.62
+
+                                     C4  R = 1        C5  rho_b = rho_g
+  epoch index N                      676.62           902.17          
+  saturation wavelength [nm]         1571.3           1178.5          
+  matrix temperature T [K]           1844.1           2458.9          
+  speed of light v = c/N [m/s]       4.4307e+05       3.3230e+05      
+  radiation pressure P [Pa]          2.9168e-03       9.2185e-03      
+  v as % of c                        0.1478           0.1108          
+
+  The two differ only by the 3/4 in the loading convention. Both land in the near-IR.
+  Quoted closure = C4 (Harvey's stated R), with C5 as the convention bound.
+
+  sound speed at the transition, c_s = c/sqrt(3(1+R)):
+    R = 1  (C4)                  c_s = 1.2239e+08 m/s = 0.4082 c
+    R = 0.6 (CR13 drag epoch)    c_s = 1.3684e+08 m/s = 0.4564 c
+    R -> 0 (pure radiation)      c_s = 1.7309e+08 m/s = 0.5774 c
+
+----------------------------------------------------------------------------------------
+WHY THIS IS A DISCRIMINATOR, NOT A RESTATEMENT
+----------------------------------------------------------------------------------------
+  C4/C5 are matter-radiation equality with BARYONS ONLY, because SDT has no dark matter.
+  LCDM's equality is CDM-dominated: rho_m/rho_b = (Omega_c+Omega_b)/Omega_b ~ 6.0,
+  so its equality sits ~6x earlier in N and cannot coincide with the Clearing.
+    SDT  (baryons only)   equality at N = 902
+    LCDM (CDM + baryons)  equality at N = 5413  -> lambda = 196 nm (deep UV, NOT the band)
+  So 'the jam releases at obstacle loading unity' lands in the near-IR ONLY if there is
+  no dark matter. The no-dark-matter premise is doing the work, and it is falsifiable:
+  add CDM to the obstacle budget and the prediction leaves the band by a factor ~6.
+
+----------------------------------------------------------------------------------------
+WHAT THE CLOSURE BUYS - the CR17 spread collapses
+----------------------------------------------------------------------------------------
+  quantity                   CR17 (band convention)   CR17b (closed at R=1)   
+  speed v [m/s]              2.20e5 ... 3.95e5        4.4307e+05              
+  radiation pressure [Pa]    4.63e-3 ... 4.80e-2      2.9168e-03              
+  temperature [K]            2070 ... 3715            1844.1                  
+  epoch index N              759 ... 1363             676.6                   
+
+  P_rad was the loose one (x10.4 across the band). It is now a single number.
+  Inputs consumed by the closure: T_0 (FIRAS) and eta (BBN deuterium). Both measured,
+  neither from a CMB fit. Fitted parameters used: ZERO.
+
+========================================================================================
+CLOSED STATE
+========================================================================================
+    saturation wavelength   lambda = 1571 nm     (near-IR, from R = 1)
+    speed of light          v      = 4.4307e+05 m/s  = 0.1478 % of c
+    radiation pressure      P      = 2.9168e-03 Pa
+    matrix temperature      T      = 1844 K
+    epoch index             N      = 677
+========================================================================================

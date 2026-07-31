@@ -155,7 +155,14 @@ int main(){
   std::puts("================================================================");
   std::printf("  RESULTS: %d/%d proofs passed\n", passed, total);
   std::puts("================================================================\n");
-  std::puts("  VERDICT: one mechanism — ℓ_P(r) = ℓ_P,∞(1−z), c_local = c(1−z),");
+  std::puts("  ⛔ SUPERSEDED IN PART — GOM22 (2026-07-30): the relay-speed line");
+  std::puts("  below, c_local = c(1−z), is FALSIFIED by the measured Shapiro");
+  std::puts("  delay (it delivers 123.62 μs where 247.24 μs is measured; ratio");
+  std::puts("  0.5000). Root: this file scales the hop LENGTH by the closure but");
+  std::puts("  leaves the hop DURATION at far-frame value — a mixed-frame slip.");
+  std::puts("  Repaired canon: c_far = c(1−z)², dτ/dt = (1−z). The closure and");
+  std::puts("  lumiopause content below stands; only the speed exponent changed.");
+  std::puts("  VERDICT (as written, superseded): one mechanism — ℓ_P(r) = ℓ_P,∞(1−z), c_local = c(1−z),");
   std::puts("  z = ϟ/r. Light's gradient, Shapiro, and the lumiopause surface");
   std::puts("  all follow with no attraction — convergence pushing, matter taking");
   std::puts("  the least-resistance path (orbits included). The Oort cloud rests");

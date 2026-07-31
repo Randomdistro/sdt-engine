@@ -1,5 +1,0 @@
-﻿cmake_minimum_required(VERSION 3.20)
-project(cq35_rolling_solver)
-set(CMAKE_CXX_STANDARD 20)
-include_directories("\/../../Engine/include")
-add_executable(cq35_rolling_solver cq35_rolling_solver.cpp)
