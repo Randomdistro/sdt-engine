@@ -112,7 +112,7 @@ window.SDT_I18N = {
   "The mass defect is a shadow": "The mass defect as occlusion overlap",
   "@a_shadow":
     "Mass is occlusion cross-section, not substance: each nucleon boundary presents area πR<sub>p</sub>² to the convergent flux. Under close packing the cross-sections <strong>overlap</strong>, so the assembled nuclide occludes less than the sum of its free constituents; the deficit ΔA = N·πR<sub>p</sub>² − A<sub>∪</sub> is shared occlusion, and it <em>is</em> the mass defect. Packing radius: R(A) = R<sub>p</sub>·(A/η)<sup>1/3</sup>, η = π/√18 = 0.74048 — zero-fit; RMS 4.96% over 908 measured boundary radii (NP12).",
-  "One area→energy scale κ, fixed by least squares over 217 isotopes: total binding energy to R² = 0.988, mean error 7%. The α-cluster and the iron peak are the honest residual — that fine structure needs the shared-electron well depth, not geometry alone.":
+  "One area→energy scale κ, fixed by least squares over 217 isotopes: total binding energy to R² = 0.988, mean error 7%. The α-cluster and the iron peak are the residual — that fine structure needs the shared-electron well depth, not geometry alone.":
     "One area-to-energy coefficient κ ≈ 10.7 MeV/fm², fixed by least squares over 217 nuclides — CALIBRATED, disclosed. Total binding energy R² = 0.988, mean error 7%; honest residual: per-nucleon BE/A fine structure (α-cluster, Fe peak) is NOT reproduced by geometry alone and requires the shared-electron well depth. The volume-price hypothesis E = P·ΔV is KILLED (NP05); successor E_bind = ℏ·Δω under test (CQ41).",
 
   /* ── ch.4b — lab ── */
@@ -147,7 +147,7 @@ window.SDT_I18N = {
     "The k-hierarchy closure δφ = 6πR_☉/(k²·a·(1−e²)) returns 42.98″/cy from ϟ = R/k² with G and M absent from the formalism; measured 42.98. CONVERGENT with the rival's value — independent origins, one number; inverting the same closure reconstructs c from orbital observables alone to +0.0009% (GOM04, class C).",
   "Light deflection at solar limb: 1.750 arcsec computed vs 1.751 measured. Derived from convergence gradient, not spacetime curvature.":
     "Solar-limb deflection 1.750″ computed from the accumulated depth gradient, 2∫∇⊥z dl with z = ϟ/r, vs 1.751″ measured — flat substrate, no metric curvature.",
-  "Honest status: the eclipse rotation model FAILED real SPARC on direct rerun (GD05, RMS 66%). The derived floor a₀ = cH₀/2π and the 8.8% collapse stand; the rotation shape is OPEN.":
+  "Status: the eclipse rotation model FAILED real SPARC on direct rerun (GD05, RMS 66%). The derived floor a₀ = cH₀/2π and the 8.8% collapse stand; the rotation shape is OPEN.":
     "Audited status: the eclipse-saturation rotation construction FAILED real SPARC photometry on direct rerun (GD05; RMS 66%). Surviving content: the derived floor a₀ = c·H₀/2π (wrong-floor control 6×) and the 8.8% cross-scale collapse. The rotation-curve shape remains OPEN.",
   "SDT predicts mechanical signal propagation through vacuum between Casimir plates — sound through empty space via the lattice.":
     "Mechanical signal propagation through evacuated space between Casimir plates — acoustic transmission via the substrate. Field-theoretic vacuum predicts a null; positive detection is SDT-specific.",
@@ -179,7 +179,7 @@ window.SDT_I18N = {
     "Multipole decomposition of a vortex's pressure disturbance by angular order ℓ: ℓ = 0 isotropic (mass), ℓ = 1 ∝ 1/r² (Coulomb), ℓ = 2 ∝ 1/r³ (magnetic dipole), ℓ ≥ 3 ∝ 1/r^(ℓ+1) (nuclear form factors).",
   "Topological classification of vortex structures. W=0: neutrino (open winding). W=1: electron (unknot, confined). W=3: proton (trefoil, protected). W=2 is an unknot — metastable only (≈0.1 GeV barrier, ~10⁻²¹ s), never observed. Higher odd knots (W=5, 7, …) are protected and await discovery.":
     "Topological class of the circulation state, with radius relation R_wake = (W+1)·ℏ/(mc). W = 0: open phase path (neutrino). W = 1: (1,1) unknot, Δ = 1, V_disp-confined (electron). W = 3: (2,3) trefoil, Δ ≠ 1, protected (proton). W = 2: unknot, metastable (≈0.1 GeV barrier, τ ~ 10⁻²¹ s), never observed. Higher odd windings: protected, unobserved to date.",
-  "Historical model: a galactic disk's total occlusion saturating was proposed to flatten rotation curves. FAILED on direct rerun against real SPARC data (GD05: RMS 66%). Kept in the glossary because the theory keeps its verdicts; galactic rotation is OPEN.":
+  "Historical model: a galactic disk's total occlusion saturating was proposed to flatten rotation curves. FAILED on direct rerun against real SPARC data (GD05: RMS 66%). Kept in the glossary because the theory keeps its assessments; galactic rotation is OPEN.":
     "Historical construction: saturation of integrated disk occlusion, proposed as the rotation-flattening mechanism. FAILED on direct rerun against real SPARC photometry (GD05: RMS 66%); the verdict is retained in the nomenclature because the ledger keeps its kills. Galactic rotation: OPEN.",
   "Z = 79 (Gold). The first element where triton count exceeds deuteron count (39t vs 38d). The onset of topological instability in nuclear construction grammar.":
     "Z = 79: first nuclide family with n_t > n_d (39 vs 38). Onset of triton-dominated construction and of natural radioactivity, located by grammar geometry alone.",

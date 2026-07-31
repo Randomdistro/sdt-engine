@@ -1,0 +1,89 @@
+DERIVELIST — re-derivation of the measured whitelist (direct run)
+=================================================================
+
+[1] c — speed of light (relay speed, Law V)
+  c = (cR_inf freq)/(R_inf wavenumber), H ladder        2.9979245800e+08  ref  2.9979245800e+08  dev   -0.0000%  [IDENTITY (CODATA tabulates cR_inf = c*R_inf)]
+  c = k_Sun*v_surface (Mercury closure, GOM04)          2.9979513579e+08  ref  2.9979245800e+08  dev   +0.0009%  [CONSISTENCY-ONLY (withdrawn as derivation)]
+  note: SI 1983 defines the metre from c — the numerical value is
+        definitional; the physical content is ONE relay speed closing
+        every hydrogen line (Law V movement budget).
+
+[2] alpha — fine-structure ratio (koppa rung of hydrogen)
+  Route B: alpha^2 = 16*(dnu_2P/cR_inf)  -> 1/alpha     1.3691197478e+02  ref  1.3703599908e+02  dev   -0.0905%  [EXTRACTED (pure ratio)]
+  Route A: alpha = sqrt(2*E_ion/m_e c^2) -> 1/alpha     1.3707257052e+02  ref  1.3703599908e+02  dev   +0.0267%  [EXTRACTED (proton-free seat 137.07)]
+  koppa_H = alpha^2*a_0  vs  r_e (same length)          2.8179403262e-15  ref  2.8179403262e-15  dev   +0.0000%  [IDENTITY-CLASS (the rung reading)]
+  status: read off the spectrum two ways (0.1%); geometric derivation
+          OPEN. The CONDENSA closed-form search is excluded (no clean
+          a*pi^b form exists for alpha — contrast 6pi^5).
+
+[3] hbar — action quantum (FLM13: W=1 circulation, one seat)
+  hbar = m_e*(alpha c)*a_0 (W=1 circulation)            1.0545718176e-34  ref  1.0545718170e-34  dev   +0.0000%  [IDENTITY-CLASS (role, not value)]
+  hbar = r_e*m_e*c/alpha (same rung, restated)          1.0545718176e-34  ref  1.0545718170e-34  dev   +0.0000%  [IDENTITY-CLASS]
+  hbar/m_e = kappa/2pi [m^2/s] (kg-free observable)     1.1576763605e-04  ref  1.1576763500e-04  dev   +0.0000%  [OBSERVED]
+  R_p*m_p*c/hbar (should be W+1 = 4)                    4.0007815131e+00  ref  4.0000000000e+00  dev   +0.0195%  [DERIVED (W+1)]
+  status: ROLE derived; VALUE has no hbar-free path (FLM13 dimensional
+          theorem). {hbar, m_e, m_p} collapse to ONE mass/action seat —
+          a baryon-count anchor. Two constants leave the list; one seat stays.
+
+[4] l_P — Planck length (Axiom R1, the one dimensional seed)
+  cleanest hbar/G-free subdivision N = z_rec = 1100; required N = 5.894e+61
+  shortfall factor = 5.359e+58  -> route EXCLUDED (FLM06 Phase 1 negative)
+  l_P = sqrt(koppa_per_baryon * lambdabar_p)            1.6162550000e-35  ref  1.6162550000e-35  dev   +0.0000%  [CIRCULAR (re-expression, not derivation)]
+  status: NOT derivable from SDT-native quantities — Seed Theorem
+          (FLM06, PROVEN): exactly one action/mass/length anchor is
+          unavoidable. l_P stays AXIOM R1. No line drawn.
+
+[5] m_e — electron mass (velocity-resistance form, FLM12/FLM13)
+  m_e = hbar/(v_seat*a_0), v_seat = alpha*c             9.1093836959e-31  ref  9.1093837015e-31  dev   -0.0000%  [IDENTITY-CLASS (seat form)]
+  m_e = Phi*V_disp_e/(3 l_P^3 c^2) (Law IV role)        9.1093837015e-31  ref  9.1093837015e-31  dev   +0.0000%  [CIRCULAR (round trip: V_disp from m, m from V_disp)]
+  status: MECHANISM native (FLM12: mass = field resistance to change
+          of vector; recovers Newton I/II, E=mc^2, equivalence as
+          theorem). VALUE = the one seat (shared with hbar, m_p).
+
+[6] m_p — proton mass (occlusion formula + W+1 boundary route)
+  m_p = Phi*V_disp_p/(3 l_P^3 c^2) (occlusion cost)     1.6726219237e-27  ref  1.6726219237e-27  dev   +0.0000%  [CIRCULAR (round trip)]
+  m_p = 4*hbar/(R_p*c) (W+1, muonic R_p input)          1.6722951935e-27  ref  1.6726219237e-27  dev   -0.0195%  [DERIVED (from measured boundary radius)]
+  m_p = 6*pi^5*m_e (topological ratio)                  1.6725904374e-27  ref  1.6726219237e-27  dev   -0.0019%  [OPEN (privileged 19-ppm match, mechanism owed)]
+  m_p/m_e = (4/alpha)*(r_e/R_p) (hbar eliminated)       1.8357940003e+03  ref  1.8361526734e+03  dev   -0.0195%  [DERIVED (pure ratio, one 0.02% residual)]
+  status: role + boundary-radius route drawn; ratio mechanism (wake
+          phase-space integral -> 6pi^5) is the named open problem.
+
+[7] k_B — Boltzmann constant (TD02: kelvin unit bridge)
+  a_rad = pi^2 k_B^4/(15 hbar^3 c^3) (TD06 4.4ppm)      7.5657332642e-16  ref  7.5657000000e-16  dev   +0.0004%  [DERIVED (blackbody suite from counted modes)]
+  status: SI-exact since 2019 — k_B DEFINES the kelvin. Reclassified
+          UNIT BRIDGE: no physical content to derive. Line drawn by
+          reclassification (TD02 P4 delete-test).
+
+[8] T_CMB — CMB temperature (boundary state, not a constant)
+  T_rec = b/lambda_emit (CR13, 974.7 nm edge)           2.9729885657e+03  ref  3.0000000000e+03  dev   -0.9004%  [COMPUTED (convergence chain)]
+  T_CMB = T_rec/(1+z_rec) (shared-input check)          2.7002620942e+00  ref  2.7255000000e+00  dev   -0.9260%  [CONSISTENCY (z_rec shared input — not a derivation)]
+  octave count (CR07): log2(1+z_rec) = 10.105 octaves
+  status: remains MEASURED (FIRAS). Reclassified: a boundary-state
+          reading (the present convergence temperature — a clock, not
+          a constant of nature). Absolute value not derivable from
+          within; it is the state the cycle is currently in.
+
+[9] e — elementary charge (EMC02: irreducible unit bridge)
+  e = sqrt(alpha*hbar*c/k_e) (Coulomb identity)         1.6021766335e-19  ref  1.6021766340e-19  dev   -0.0000%  [CIRCULAR (definitional, printed as such)]
+  P_eff = m_p^2 m_e^2 c^5/(4 pi alpha hbar^3) (EMC04)   5.2272515465e+31  ref  5.2250000000e+31  dev   +0.0431%  [DERIVED (the physical target behind e)]
+  status: whitelist {l_P,c,hbar,k_B,T_CMB} has no current dimension [A];
+          no combination yields coulombs (EMC02 dimensional result).
+          e is a UNIT BRIDGE (no charge substance — handed redirection);
+          line drawn by reclassification, not by derivation.
+
+=================================================================
+REDUCED WHITELIST (after the lines are drawn):
+  l_P            AXIOM R1 — the one dimensional seed (Seed Theorem)
+  ONE mass seat  {hbar = m_e = m_p} collapsed via W=1/W=3 (FLM13)
+  alpha          extracted from the H spectrum; derivation open
+  a_0            MEASURED — the length the seat form rides on
+                 (audit F3: m_e = hbar/(alpha c a_0) consumes it;
+                  no derived route for a_0 exists in laws.hpp)
+  T_CMB          boundary state (thermal seat), measured
+  c, k_B, e      unit bridges — SI definitions, no physics to derive
+  [R_p == m_p    one fact, not two: the 0.02% residual is shared]
+  => FIVE external inputs, not four. The collapse moves the
+     mystery from a mass to a length; closing a_0 (c^2/C_H) or
+     the 6pi^5 wake integral is what would actually shorten it.
+Open mechanisms owed: 6pi^5 wake integral; alpha geometric route;
+the seat's absolute magnitude (FLM12 D-series).

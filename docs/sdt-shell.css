@@ -1,0 +1,210 @@
+/* ════════════════════════════════════════════════════════════════════════════
+   SDT SITE SHELL — three menus, same on every screen.
+   J. C. Harvey, Melbourne.
+
+     LEFT   vertical COLUMN  — Navigation (the medium, six laws, topology, …)
+     RIGHT  vertical COLUMN  — Scrollers (scrollthroughs, sequencer, lab)
+     TOP    bar              — Settings
+
+   Collapse:  ≤1080px  → three buttons [Navigation] [Settings] [Scrollers]
+              ≤600px   → three hamburgers on a row below "S.D.T."
+
+   Palette inherited from style.css (--paper / --ink / --copper).
+   ════════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  --sdtq-off: 20px;          /* distance off the side of the screen */
+  --sdtq-col: 208px;         /* column width */
+  --sdtq-top: 46px;          /* settings bar height */
+}
+
+/* fallbacks so the shell also works on pages that don't load style.css */
+.sdtq {
+  --sq-paper: var(--paper, #faf6ef);
+  --sq-edge: var(--paper-edge, #e8e0d2);
+  --sq-ink: var(--ink, #1e1c18);
+  --sq-muted: var(--ink-muted, #7a7265);
+  --sq-faint: var(--ink-faint, #a49d92);
+  --sq-copper: var(--copper, #b07430);
+  --sq-glow: var(--copper-glow, rgba(176, 116, 48, .12));
+  font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color: var(--sq-ink);
+}
+
+.sdtq, .sdtq * { box-sizing: border-box; }
+.sdtq a { text-decoration: none; color: inherit; }
+.sdtq button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+
+/* the legacy horizontal nav row is replaced by the left column */
+.nav { display: none !important; }
+
+/* ── TOP: settings bar ───────────────────────────────────────────────────── */
+.sdtq-bar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 9000;
+  min-height: var(--sdtq-top);
+  display: flex; align-items: center; gap: 1.25rem;
+  padding: 0 var(--sdtq-off);
+  background: rgba(250, 246, 239, .93);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--sq-edge);
+}
+.sdtq-brand {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: .8125rem; font-weight: 600; letter-spacing: .18em;
+  text-transform: uppercase; white-space: nowrap;
+}
+.sdtq-brand span { color: var(--sq-copper); }
+
+.sdtq-settings { display: flex; align-items: center; gap: 1.25rem; margin-left: auto; }
+.sdtq-settings label {
+  display: flex; align-items: center; gap: .45rem;
+  font-size: .6875rem; letter-spacing: .09em; text-transform: uppercase;
+  color: var(--sq-muted);
+}
+.sdtq-seg { display: flex; border: 1px solid var(--sq-edge); border-radius: 4px; overflow: hidden; }
+.sdtq-seg button {
+  padding: .2rem .5rem; font-size: .6875rem; letter-spacing: .05em;
+  color: var(--sq-muted); background: #fff; transition: all var(--dur-fast, .2s);
+}
+.sdtq-seg button + button { border-left: 1px solid var(--sq-edge); }
+.sdtq-seg button[aria-pressed="true"] { background: var(--sq-copper); color: #fff; }
+
+/* ── LEFT + RIGHT: the two vertical columns ──────────────────────────────── */
+.sdtq-column {
+  position: fixed;
+  top: calc(var(--sdtq-top) + var(--sdtq-off));
+  bottom: var(--sdtq-off);
+  width: var(--sdtq-col);
+  z-index: 8900;
+  display: flex;              /* ← a COLUMN: items stack vertically */
+  flex-direction: column;
+  gap: 1px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: .75rem .6rem 1.25rem;
+  background: rgba(250, 246, 239, .82);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--sq-edge);
+  border-radius: 3px;
+  scrollbar-width: thin;
+}
+.sdtq-column::-webkit-scrollbar { width: 6px; }
+.sdtq-column::-webkit-scrollbar-thumb { background: var(--sq-whisper, #c8c1b6); border-radius: 3px; }
+
+.sdtq-left  { left:  var(--sdtq-off); }
+.sdtq-right { right: var(--sdtq-off); }
+
+.sdtq-column h2 {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: .6875rem; font-weight: 600; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--sq-copper);
+  margin: 0 0 .5rem; padding-bottom: .5rem;
+  border-bottom: 1px solid var(--sq-edge);
+}
+.sdtq-column h3 {
+  font-size: .625rem; font-weight: 600; letter-spacing: .13em;
+  text-transform: uppercase; color: var(--sq-faint);
+  margin: .9rem 0 .3rem; padding: 0 .4rem;
+}
+.sdtq-column h3:first-of-type { margin-top: .15rem; }
+
+/* one link per line — the vertical stack */
+.sdtq-column a {
+  display: block;
+  padding: .34rem .45rem;
+  font-size: .75rem; letter-spacing: .04em;
+  color: var(--sq-muted);
+  border-left: 2px solid transparent;
+  border-radius: 2px;
+  transition: color var(--dur-fast, .2s), background var(--dur-fast, .2s);
+}
+.sdtq-column a:hover { color: var(--sq-ink); background: var(--sq-glow); border-left-color: var(--sq-copper); }
+.sdtq-column a[aria-current="page"],
+.sdtq-column a.sdtq-active {
+  color: var(--sq-ink); font-weight: 600;
+  background: var(--sq-glow); border-left-color: var(--sq-copper);
+}
+
+.sdtq-close {
+  display: none;
+  position: absolute; top: .5rem; right: .5rem;
+  width: 26px; height: 26px; border: 1px solid var(--sq-edge); border-radius: 3px;
+  background: #fff; font-size: 1rem; line-height: 1;
+}
+
+/* ── collapsed triggers ──────────────────────────────────────────────────── */
+.sdtq-tabs { display: none; align-items: center; gap: .5rem; margin-left: auto; }
+.sdtq-tabs button {
+  padding: .35rem .7rem; border: 1px solid var(--sq-edge); border-radius: 3px;
+  background: #fff; font-size: .6875rem; letter-spacing: .09em; text-transform: uppercase;
+  color: var(--sq-muted);
+}
+.sdtq-tabs button[aria-expanded="true"] {
+  background: var(--sq-copper); border-color: var(--sq-copper); color: #fff;
+}
+
+.sdtq-burgers { display: none; gap: .9rem; width: 100%; justify-content: center; padding: 0 0 .55rem; }
+.sdtq-burgers button {
+  width: 48px; height: 34px; border: 1px solid var(--sq-edge); border-radius: 3px;
+  background: #fff; display: grid; place-content: center; gap: 4px;
+}
+.sdtq-burgers button i { display: block; width: 18px; height: 1.5px; background: var(--sq-ink); }
+.sdtq-burgers button[aria-expanded="true"] { background: var(--sq-copper); border-color: var(--sq-copper); }
+.sdtq-burgers button[aria-expanded="true"] i { background: #fff; }
+
+/* keep page content clear of the columns on wide screens */
+@media (min-width: 1081px) {
+  body { padding-top: var(--sdtq-top); }
+}
+
+/* ── MEDIUM: three buttons ───────────────────────────────────────────────── */
+@media (max-width: 1080px) {
+  .sdtq-settings { display: none; }
+  .sdtq-tabs { display: flex; }
+  body { padding-top: var(--sdtq-top); }
+
+  .sdtq-column, .sdtq-panel {
+    display: none;
+    top: calc(var(--sdtq-top) + .5rem);
+    bottom: auto;
+    max-height: calc(100vh - var(--sdtq-top) - 1.5rem);
+    width: min(330px, calc(100vw - 1.5rem));
+    box-shadow: 0 10px 40px rgba(30, 28, 24, .16);
+  }
+  .sdtq-column.sdtq-open, .sdtq-panel.sdtq-open { display: flex; }
+  .sdtq-close { display: grid; place-content: center; }
+
+  .sdtq-panel {
+    position: fixed; z-index: 8900;
+    left: 50%; transform: translateX(-50%);
+    flex-direction: column; gap: 1rem;
+    padding: 1.1rem;
+    background: rgba(250, 246, 239, .96);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--sq-edge); border-radius: 3px;
+  }
+  .sdtq-panel .sdtq-settings {
+    display: flex; flex-direction: column; align-items: stretch;
+    gap: .9rem; margin: 0;
+  }
+  .sdtq-panel .sdtq-settings label { justify-content: space-between; }
+}
+
+/* ── SMALL PHONE: three hamburgers below "S.D.T." ────────────────────────── */
+@media (max-width: 600px) {
+  .sdtq-bar { flex-wrap: wrap; padding: .5rem .75rem 0; row-gap: .4rem; }
+  .sdtq-brand { width: 100%; text-align: center; font-size: .9375rem; }
+  .sdtq-tabs { display: none; }
+  .sdtq-burgers { display: flex; }
+  body { padding-top: 92px; }
+  .sdtq-column, .sdtq-panel { top: 96px; max-height: calc(100vh - 108px); }
+}
+
+/* reduced motion */
+html[data-sdt-motion="off"] *,
+html[data-sdt-motion="off"] *::before,
+html[data-sdt-motion="off"] *::after {
+  animation: none !important; transition: none !important; scroll-behavior: auto !important;
+}
+
+@media print { .sdtq { display: none !important; } body { padding-top: 0 !important; } }

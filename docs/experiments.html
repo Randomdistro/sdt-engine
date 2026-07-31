@@ -1,0 +1,1571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Falsifiable Predictions — Spatial Displacement Theory</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .xp { max-width: 82rem; margin: 0 auto; padding: 5rem 1.5rem 6rem; }
+  .xp__head { max-width: 46rem; margin-bottom: 2.5rem; }
+  .xp__kicker { font-family: "JetBrains Mono", monospace; font-size: .75rem; letter-spacing: .2em;
+        text-transform: uppercase; color: var(--copper); }
+  .xp__title { font-family: "Source Serif 4", Georgia, serif; font-size: clamp(2rem,5vw,3rem);
+        font-weight: 600; margin: .8rem 0 1rem; line-height: 1.1; }
+  .xp__lead { color: var(--ink-muted); font-size: 1.0625rem; line-height: 1.8; }
+  .xp__stats { display: flex; gap: 2.5rem; flex-wrap: wrap; margin: 2rem 0 1.5rem;
+        padding: 1.2rem 0; border-top: 1px solid var(--paper-edge); border-bottom: 1px solid var(--paper-edge); }
+  .xp__stat b { display: block; font-family: "Source Serif 4", Georgia, serif; font-size: 1.9rem; color: var(--ink); }
+  .xp__stat span { font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-faint); }
+  .xp__filters { display: flex; gap: .45rem; flex-wrap: wrap; margin-bottom: 1.8rem; align-items: center; }
+  .xp__filters button { padding: .35rem .8rem; border: 1px solid var(--paper-edge); border-radius: 3px;
+        background: #fff; font-size: .7rem; letter-spacing: .08em; text-transform: uppercase;
+        color: var(--ink-muted); cursor: pointer; transition: all .2s; }
+  .xp__filters button:hover { color: var(--ink); border-color: var(--copper); }
+  .xp__filters button[aria-pressed="true"] { background: var(--copper); border-color: var(--copper); color: #fff; }
+  .xp__filters input { padding: .4rem .7rem; border: 1px solid var(--paper-edge); border-radius: 3px;
+        font: inherit; font-size: .8125rem; min-width: 13rem; }
+  .xp__count { font-size: .75rem; color: var(--ink-faint); letter-spacing: .06em; }
+  .xc { border: 1px solid var(--paper-edge); border-radius: 3px; margin-bottom: .7rem; background: #fffefb; }
+  .xc__bar { display: flex; align-items: baseline; gap: .8rem; padding: .8rem 1rem; cursor: pointer; }
+  .xc__id { font-family: "JetBrains Mono", monospace; font-size: .8125rem; color: var(--copper); font-weight: 500; }
+  .xc__t { font-family: "Source Serif 4", Georgia, serif; font-size: 1.0625rem; flex: 1; }
+  .xc__tag { font-size: .625rem; letter-spacing: .1em; text-transform: uppercase; padding: .15rem .5rem;
+        border-radius: 2px; background: var(--copper-glow); color: var(--copper); white-space: nowrap; }
+  .xc__body { display: none; padding: 0 1rem 1.1rem; border-top: 1px solid var(--paper-edge); }
+  .xc.open .xc__body { display: grid; gap: .9rem; grid-template-columns: 1fr 1fr; padding-top: 1rem; }
+  .xc__f h4 { font-size: .625rem; letter-spacing: .13em; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 .3rem; }
+  .xc__f p { font-size: .875rem; line-height: 1.7; color: var(--ink-soft); margin: 0; }
+  .xc__f--sdt { border-left: 2px solid var(--copper); padding-left: .8rem; }
+  .xc__f--std { border-left: 2px solid var(--ink-whisper); padding-left: .8rem; }
+  @media (max-width: 720px) { .xc.open .xc__body { grid-template-columns: 1fr; } }
+</style>
+<meta name="description" content="98 falsifiable predictions. Each states what SDT predicts, what standard physics predicts, and the observable that separates them.">
+<link rel="canonical" href="https://spatialdisplacementtheory.com/experiments">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/favicon.ico" sizes="64x64">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#b07430">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Spatial Displacement Theory">
+<meta property="og:title" content="Falsifiable Predictions — Spatial Displacement Theory">
+<meta property="og:description" content="98 falsifiable predictions. Each states what SDT predicts, what standard physics predicts, and the observable that separates them.">
+<meta property="og:url" content="https://spatialdisplacementtheory.com/experiments">
+<meta property="og:image" content="https://spatialdisplacementtheory.com/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_AU">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Falsifiable Predictions — Spatial Displacement Theory">
+<meta name="twitter:description" content="98 falsifiable predictions. Each states what SDT predicts, what standard physics predicts, and the observable that separates them.">
+<meta name="twitter:image" content="https://spatialdisplacementtheory.com/og-card.png">
+</head>
+<body>
+<main class="xp">
+  <div class="xp__head">
+    <p class="xp__kicker">The falsification catalogue</p>
+    <h1 class="xp__title">Every prediction, and what would kill it</h1>
+    <p class="xp__lead">A theory earns its keep by saying what would prove it wrong. Each entry below states the SDT prediction, the standard-physics prediction, and the observable that separates them. Where the two agree, the experiment cannot discriminate — and that is recorded too.</p>
+  </div>
+  <div class="xp__stats">
+    <div class="xp__stat"><b>98</b><span>specifications</span></div>
+    <div class="xp__stat"><b>13</b><span>categories</span></div>
+    <div class="xp__stat"><b>0</b><span>free parameters</span></div>
+  </div>
+  <div class="xp__filters" id="xpFilters">
+    <button data-cat="*" aria-pressed="true">All</button>
+    <button data-cat="Atomic Physics" aria-pressed="false">Atomic Physics</button>
+    <button data-cat="Convergence Depth" aria-pressed="false">Convergence Depth</button>
+    <button data-cat="Cosmology" aria-pressed="false">Cosmology</button>
+    <button data-cat="Electromagnetic" aria-pressed="false">Electromagnetic</button>
+    <button data-cat="Engineering" aria-pressed="false">Engineering</button>
+    <button data-cat="Gravity" aria-pressed="false">Gravity</button>
+    <button data-cat="Nuclear Physics" aria-pressed="false">Nuclear Physics</button>
+    <button data-cat="Orbital Mechanics" aria-pressed="false">Orbital Mechanics</button>
+    <button data-cat="Radiation" aria-pressed="false">Radiation</button>
+    <button data-cat="Solar Physics" aria-pressed="false">Solar Physics</button>
+    <button data-cat="Stellar Physics" aria-pressed="false">Stellar Physics</button>
+    <button data-cat="Unclassified" aria-pressed="false">Unclassified</button>
+    <button data-cat="Vacuum" aria-pressed="false">Vacuum</button>
+    <input type="search" id="xpSearch" placeholder="search predictions..." aria-label="Search predictions">
+    <span class="xp__count" id="xpCount">98 shown</span>
+  </div>
+  <div id="xpList">
+  <article class="xc" data-cat="Unclassified" data-txt="e13 charge-state ec rate scan (ge-68) if the outer electron at the damaged nuclear position participates in the rearrangement coupling (even though the k-shell electron performs the capture), then stripping the corresponding outer electron should produce a measurable discontinuity in the ec rate. predicted rate profile: null hypothesis: ec rate tracks… measure the ec half-life of ge-68 at the following charge states: - ge⁰ (neutral, reference) - ge⁴⁺ (4p electrons stripped) - ge¹⁰⁺ (4p + 4s stripped) - ge¹⁴⁺ (4p + 4s + 3d partially stripped) - ge³⁰⁺ (he-like, only 1s² remaining) - ge³¹⁺ (h-like, single 1s electron) - ge³²⁺ (bare, if achievable) compare the measured…">
+    <div class="xc__bar">
+      <span class="xc__id">E13</span>
+      <span class="xc__t">Charge-State EC Rate Scan (Ge-68)</span>
+      <span class="xc__tag">Unclassified</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>If the outer electron at the damaged nuclear position participates in the rearrangement coupling (even though the K-shell electron performs the capture), then stripping the corresponding outer electron should produce a measurable discontinuity in the EC rate. Predicted rate profile: Null hypothesis: EC rate tracks…</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Measure the EC half-life of Ge-68 at the following charge states: - Ge⁰ (neutral, reference) - Ge⁴⁺ (4p electrons stripped) - Ge¹⁰⁺ (4p + 4s stripped) - Ge¹⁴⁺ (4p + 4s + 3d partially stripped) - Ge³⁰⁺ (He-like, only 1s² remaining) - Ge³¹⁺ (H-like, single 1s electron) - Ge³²⁺ (bare, if achievable) Compare the measured…</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>- Ion source capable of producing Ge-68 at controlled charge states - Storage ring or ion trap to contain ions for time periods comparable to the EC half-life (t½ = 270.9 d for neutral Ge-68) - Particle detector to identify EC events (daughter Ga-68 has different mass-to-charge ratio) - Facility: GSI/FAIR (Darmstadt)…</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Unclassified" data-txt="e14 ionisation-controlled ec halt for nuclear medicine ### part i: ec rate suppression by charge state for any ec isotope at charge state q: - q &lt; (z−2): rate ≈ 100% (k-shell intact) - q = (z−2): rate ≈ 91% (he-like, 2 k electrons) - q = (z−1): rate ≈ 45% (h-like, 1 k electron) - q = z: rate = 0% (bare, no electrons) this predicts that delivering a medical ec isotope in a… ### part i measurement measure ec half-life of ga-67 (t½ = 3.26 d, z=31) at: - ga⁰ (neutral) - ga²⁹⁺ (he-like) - ga³⁰⁺ (h-like) - ga³¹⁺ (bare) the half-life should scale inversely with the total k-shell electron density at the nucleus: t½(h-like) ≈ 2 × t½(neutral).">
+    <div class="xc__bar">
+      <span class="xc__id">E14</span>
+      <span class="xc__t">Ionisation-Controlled EC Halt for Nuclear Medicine</span>
+      <span class="xc__tag">Unclassified</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>### Part I: EC rate suppression by charge state For any EC isotope at charge state q: - q &lt; (Z−2): rate ≈ 100% (K-shell intact) - q = (Z−2): rate ≈ 91% (He-like, 2 K electrons) - q = (Z−1): rate ≈ 45% (H-like, 1 K electron) - q = Z: rate = 0% (bare, no electrons) This predicts that delivering a medical EC isotope in a…</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>### Part I measurement Measure EC half-life of Ga-67 (t½ = 3.26 d, Z=31) at: - Ga⁰ (neutral) - Ga²⁹⁺ (He-like) - Ga³⁰⁺ (H-like) - Ga³¹⁺ (bare) The half-life should scale inversely with the total K-shell electron density at the nucleus: t½(H-like) ≈ 2 × t½(neutral).</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>- ECR ion source or accelerator stripping foil for H-like ions - Ion trap or storage ring (CRYRING at GSI, or ELENA at CERN) - Single-ion detection for EC event identification - Electron cooler or recombination target for Part II - Ga-67 source (commercially available, used in SPECT imaging)</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Unclassified" data-txt="e15 magnetic field effect on be-7 ec rate standard model: ec rate of be-7 is independent of external magnetic fields at any achievable strength. the weak interaction coupling constant is not affected by electromagnetism. sdt prediction: at sufficiently high fields (&gt;10 t), the 1s orbital distortion may produce a measurable change in ec rate. the magnitude… measure the be-7 ec half-life (t½ = 53.22 ± 0.06 d) in: - zero field (reference) - 10 t (superconducting magnet) - 20 t (hybrid magnet) - 45 t (pulsed field, if duration permits counting statistics) required precision: better than 0.01% (100 ppm) to detect a magnetic field effect at the predicted magnitude.">
+    <div class="xc__bar">
+      <span class="xc__id">E15</span>
+      <span class="xc__t">Magnetic Field Effect on Be-7 EC Rate</span>
+      <span class="xc__tag">Unclassified</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>Standard model: EC rate of Be-7 is independent of external magnetic fields at any achievable strength. The weak interaction coupling constant is not affected by electromagnetism. SDT prediction: At sufficiently high fields (&gt;10 T), the 1s orbital distortion may produce a measurable change in EC rate. The magnitude…</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Measure the Be-7 EC half-life (t½ = 53.22 ± 0.06 d) in: - Zero field (reference) - 10 T (superconducting magnet) - 20 T (hybrid magnet) - 45 T (pulsed field, if duration permits counting statistics) Required precision: better than 0.01% (100 ppm) to detect a magnetic field effect at the predicted magnitude.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>- Be-7 source (produced by Li-7(p,n)Be-7, commercially available) - High-field magnet facility (NHMFL Tallahassee: 45 T steady-state; Los Alamos: 100 T pulsed; Nijmegen: 38 T) - Gamma-ray detector (HPGe) to count 477.6 keV photons from Be-7 EC - Temperature-controlled sample holder (EC rate has known ~0.1% chemical…</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Unclassified" data-txt="e16 se-68 cascade timer — selective step arrest at any point in the cascade, ionising the current isotope to a bare charge state halts ec for that step. re-supplying electrons (recombination) resumes the cascade. predicted control matrix: | ion state | se-68 ec | as-68 ec | ge-68 ec | ga-68 ec | |-----------|---------|---------|---------|---------| | neutral |… ### part i: freeze at ge-68 1. produce se-68 (heavy-ion reaction) 2. allow first 2 ec events (se→as→ge) to proceed (~5 minutes total) 3. fully strip ge-68 to ge³²⁺ 4. store in esr/cryring 5. verify: no ec events during storage (ge-68 half-life should be effectively infinite while bare) 6. inject electrons…">
+    <div class="xc__bar">
+      <span class="xc__id">E16</span>
+      <span class="xc__t">Se-68 Cascade Timer — Selective Step Arrest</span>
+      <span class="xc__tag">Unclassified</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>At any point in the cascade, ionising the current isotope to a bare charge state halts EC for that step. Re-supplying electrons (recombination) resumes the cascade. Predicted control matrix: | Ion state | Se-68 EC | As-68 EC | Ge-68 EC | Ga-68 EC | |-----------|---------|---------|---------|---------| | Neutral |…</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>### Part I: Freeze at Ge-68 1. Produce Se-68 (heavy-ion reaction) 2. Allow first 2 EC events (Se→As→Ge) to proceed (~5 minutes total) 3. Fully strip Ge-68 to Ge³²⁺ 4. Store in ESR/CRYRING 5. Verify: no EC events during storage (Ge-68 half-life should be effectively infinite while bare) 6. Inject electrons…</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>- Heavy-ion accelerator (GSI/FAIR SIS18 or RIKEN RIBF) for Se-68 production - Gas-filled separator for isotope selection - Stripping foil or ECR charge breeder for full ionisation - Storage ring (ESR or CRYRING) with electron cooler - Schottky detector or particle detector for daughter identification - Electron target…</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Unclassified" data-txt="e17 ba-133 anion ec rate test in sdt, the ec mechanism captures a 1s (k-shell) electron. an extra electron in ba⁻ occupies the 6p orbital — far from the nucleus. the 6p electron has negligible wavefunction density at r = 0. sdt prediction: the extra electron does not alter the ec rate. the k-shell electron density is unchanged by the addition of a… measure the ec half-life of ba-133 in two states: - ba-133⁰ (neutral, reference: t½ = 10.551 ± 0.011 y) - ba-133⁻ (anion) required precision: better than 0.1% to be meaningful. the known chemical-environment effect on ec rates is ~0.01–0.1%, so the measurement must exceed this sensitivity or use identical chemical…">
+    <div class="xc__bar">
+      <span class="xc__id">E17</span>
+      <span class="xc__t">Ba-133 Anion EC Rate Test</span>
+      <span class="xc__tag">Unclassified</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>In SDT, the EC mechanism captures a 1s (K-shell) electron. An extra electron in Ba⁻ occupies the 6p orbital — far from the nucleus. The 6p electron has negligible wavefunction density at r = 0. SDT prediction: The extra electron does NOT alter the EC rate. The K-shell electron density is unchanged by the addition of a…</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Measure the EC half-life of Ba-133 in two states: - Ba-133⁰ (neutral, reference: t½ = 10.551 ± 0.011 y) - Ba-133⁻ (anion) Required precision: better than 0.1% to be meaningful. The known chemical-environment effect on EC rates is ~0.01–0.1%, so the measurement must exceed this sensitivity or use identical chemical…</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>- Ba-133 source (commercially available) - Anion source: Ba⁻ can be produced by Cs-sputter negative ion sources (standard in AMS facilities) - Ion trap for Ba-133⁻ storage (Paul trap or Penning trap) - Gamma-ray detector (HPGe) for 356 keV and 81 keV lines from Ba-133 EC decay - Alternative: embed Ba-133 in a matrix…</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Unclassified" data-txt="e18 co-56 gamma-ray spectroscopy for nuclear rearrangement in the sdt model, the ni-56 ec mechanism operates differently from the he-3 core single-ec: - ni-56 has an intact he-4 core (n=z=28 means 1s is complete) - the damage is the n=z structure itself — 2 neutron positions are &quot;missing&quot; relative to the stable fe-56 configuration - the ec converts 2 protons at the outermost… ### part i: gamma spectrum analysis 1. obtain co-56 from ni-56 decay (or directly from ec of ni-56) 2. record high-resolution gamma spectrum using hpge detector 3. measure relative intensities of all gamma lines 4. identify which nuclear levels are populated and their orbital character (from nuclear structure…">
+    <div class="xc__bar">
+      <span class="xc__id">E18</span>
+      <span class="xc__t">Co-56 Gamma-Ray Spectroscopy for Nuclear Rearrangement</span>
+      <span class="xc__tag">Unclassified</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>In the SDT model, the Ni-56 EC mechanism operates differently from the He-3 core single-EC: - Ni-56 has an intact He-4 core (N=Z=28 means 1s is complete) - The damage is the N=Z structure itself — 2 neutron positions are &quot;missing&quot; relative to the stable Fe-56 configuration - The EC converts 2 protons at the outermost…</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>### Part I: Gamma spectrum analysis 1. Obtain Co-56 from Ni-56 decay (or directly from EC of Ni-56) 2. Record high-resolution gamma spectrum using HPGe detector 3. Measure relative intensities of all gamma lines 4. Identify which nuclear levels are populated and their orbital character (from nuclear structure…</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>### Part I (spectrum) - Co-56 source (produced by Ni-58(p,3n) or from Ni-56 decay) - HPGe detector with resolution &lt; 2 keV FWHM at 1 MeV - Lead shielding and Compton suppression - Standard nuclear spectroscopy setup</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Unclassified" data-txt="e19 spectral diagnostics of the he-3/he-4 core transition the he-3 core has a bare proton at 1s2 (no neutron partner). the he-4 core has a matched deuteron at 1s2 (proton + neutron). this structural difference changes: 1. nuclear charge radius: he-3 has a different charge radius from he-4 (measured: r(he-3) = 1.966 fm, r(he-4) = 1.681 fm). he-3 core is ~17% larger. 2.… ### part i: isotope shift measurement measure the optical transition frequencies of: - be-7 (he-3 core parent, t½ = 53.22 d) - be-9 (he-4 core, stable) - li-7 (he-4 core, ec daughter of be-7) the be-7 ↔ be-9 isotope shift isolates the nuclear structure effect (same z, different a and core structure). the difference…">
+    <div class="xc__bar">
+      <span class="xc__id">E19</span>
+      <span class="xc__t">Spectral Diagnostics of the He-3/He-4 Core Transition</span>
+      <span class="xc__tag">Unclassified</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>The He-3 core has a bare proton at 1s2 (no neutron partner). The He-4 core has a matched deuteron at 1s2 (proton + neutron). This structural difference changes: 1. Nuclear charge radius: He-3 has a different charge radius from He-4 (measured: r(He-3) = 1.966 fm, r(He-4) = 1.681 fm). He-3 core is ~17% larger. 2.…</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>### Part I: Isotope shift measurement Measure the optical transition frequencies of: - Be-7 (He-3 core parent, t½ = 53.22 d) - Be-9 (He-4 core, stable) - Li-7 (He-4 core, EC daughter of Be-7) The Be-7 ↔ Be-9 isotope shift isolates the nuclear structure effect (same Z, different A and core structure). The difference…</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>### Parts I &amp; II - Be-7 source from Li-7(p,n)Be-7 (proton cyclotron) - Laser spectroscopy setup (collinear or fluorescence) - Facility: ISOLDE (CERN) — Be-7 spectroscopy has been performed here (Nörtershäuser et al., 2009) - Reference: Be-9 measured in same apparatus</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Unclassified" data-txt="e20 spallation neutron budget verification for any spallation reaction that produces an ec-decaying product, the number of ec events in the subsequent decay chain equals the number of &quot;excess&quot; protons relative to the stable endpoint. this number is not always equal to the number of ejected neutrons — it depends on the reaction channel: | reaction type |… ### part i: literature survey for each of the 56 ec isotopes in the master table, identify the production reaction (where artificial) and compute: - n_target - n_product - number of ejected neutrons - number of ec events to stability - n_endpoint - verify: ec events = δz_product − δz_endpoint">
+    <div class="xc__bar">
+      <span class="xc__id">E20</span>
+      <span class="xc__t">Spallation Neutron Budget Verification</span>
+      <span class="xc__tag">Unclassified</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>For ANY spallation reaction that produces an EC-decaying product, the number of EC events in the subsequent decay chain equals the number of &quot;excess&quot; protons relative to the stable endpoint. This number is NOT always equal to the number of ejected neutrons — it depends on the reaction channel: | Reaction type |…</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>### Part I: Literature survey For each of the 56 EC isotopes in the master table, identify the production reaction (where artificial) and compute: - N_target - N_product - Number of ejected neutrons - Number of EC events to stability - N_endpoint - Verify: EC events = ΔZ_product − ΔZ_endpoint</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>### Part I No apparatus needed. Literature/database analysis using NNDC, NUBASE2020, and reaction cross-section databases (EXFOR, TENDL).</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Orbital Mechanics" data-txt="e21 orbital velocity drop test — frame dragging via solar accretion objects dropped from zero orbital velocity will curve their descent toward the sun due to the solar convergence field's rotational gradient. the drops will strike the sun further around (in the direction of earth's orbit) than gr calculates. even a minor shift of &gt;10 km at the solar surface will demonstrate this. all… track each test mass via radar or laser ranging as it falls toward the sun. measure the lateral displacement (in the direction of earth's orbital motion) from the gr-predicted radial trajectory. sdt predicts a systematic displacement &gt;10 km at solar approach, scaling with the fall distance. different masses should…">
+    <div class="xc__bar">
+      <span class="xc__id">E21</span>
+      <span class="xc__t">Orbital Velocity Drop Test — Frame Dragging via Solar Accretion</span>
+      <span class="xc__tag">Orbital Mechanics</span>
+      <span class="xc__tag">HIGH</span>
+      <span class="xc__tag">Proposed (space mission)</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>Objects dropped from zero orbital velocity will curve their descent toward the Sun due to the solar convergence field's rotational gradient. The drops will strike the Sun further around (in the direction of Earth's orbit) than GR calculates. Even a minor shift of &gt;10 km at the solar surface will demonstrate this. All…</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>GR predicts frame dragging from the Sun's rotation is negligibly small (~milliarcseconds). A dropped object should fall radially inward with only Coriolis corrections from the initial orbital frame. No measurable lateral displacement beyond standard orbital mechanics.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Track each test mass via radar or laser ranging as it falls toward the Sun. Measure the lateral displacement (in the direction of Earth's orbital motion) from the GR-predicted radial trajectory. SDT predicts a systematic displacement &gt;10 km at solar approach, scaling with the fall distance. Different masses should…</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Spacecraft with retrograde thruster capability (Delta-V ~30 km/s to null orbital velocity at 1 AU). Multiple test masses (0.1 kg to 100 kg, different materials). Radar transponders or laser retroreflectors on each mass. Deep Space Network tracking. Mission duration ~60 days (free-fall from 1 AU to perihelion).</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Vacuum" data-txt="e22 casimir vacuum sound transmission sound will transmit through a hard vacuum via casimir plate harmonics. two closely-spaced casimir plates in vacuum, one driven by a piezo actuator, will transmit vibrations to the second plate through the spation lattice pressure field. the vacuum is not empty — it is a pressurised medium, and pressure waves propagate. drive one casimir plate with a piezoelectric actuator at frequencies from 1 khz to 10 mhz. detect vibrations on the second plate using a laser interferometer or a second piezo sensor. the plates are separated by 0.1–10 μm in a vacuum better than 10⁻⁹ mbar. any detected signal at the drive frequency, above thermal…">
+    <div class="xc__bar">
+      <span class="xc__id">E22</span>
+      <span class="xc__t">Casimir Vacuum Sound Transmission</span>
+      <span class="xc__tag">Vacuum</span>
+      <span class="xc__tag">MODERATE</span>
+      <span class="xc__tag">Proposed (laboratory)</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>Sound will transmit through a hard vacuum via Casimir plate harmonics. Two closely-spaced Casimir plates in vacuum, one driven by a piezo actuator, will transmit vibrations to the second plate through the spation lattice pressure field. The vacuum is not empty — it is a pressurised medium, and pressure waves propagate.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard physics predicts absolute zero sound transmission in a vacuum. Sound requires a material medium. The Casimir effect is explained by quantum vacuum fluctuations, which do not carry coherent mechanical vibrations.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Drive one Casimir plate with a piezoelectric actuator at frequencies from 1 kHz to 10 MHz. Detect vibrations on the second plate using a laser interferometer or a second piezo sensor. The plates are separated by 0.1–10 μm in a vacuum better than 10⁻⁹ mbar. Any detected signal at the drive frequency, above thermal…</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Two gold-coated silicon plates (10 mm × 10 mm, optical-flat). Piezoelectric actuator (PZT-5H, resonant frequencies 1 kHz–10 MHz). Laser interferometer (sub-pm sensitivity, e.g. Zygo). Ultra-high vacuum chamber (10⁻⁹ mbar). Vibration isolation table. Faraday cage (to exclude electromagnetic crosstalk). Temperature…</p></div>
+      <div class="xc__f"><h4>Scope</h4><p>Vacuum / Medium</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Gravity" data-txt="e23 cavendish bell — gravitational shielding by dense shell a sphere dropped from the centre of a very large, very dense, hollow spherical shell (40 m radius, multi-layered with tungsten/osmium/lead) will experience reduced gravitational acceleration — less than 9.81 m/s². the dense shell occludes convergent boundary pressure from above, reducing the net downward force on the… construct a 40 m radius hollow sphere of alternating dense layers (tungsten, lead, osmium — total shell mass ~10⁶ tonnes). drop a test mass from the exact centre down a vertical vacuum shaft. measure the acceleration with sub-μg precision using laser interferometry. compare to 9.81 m/s². sdt predicts a measurable…">
+    <div class="xc__bar">
+      <span class="xc__id">E23</span>
+      <span class="xc__t">Cavendish Bell — Gravitational Shielding by Dense Shell</span>
+      <span class="xc__tag">Gravity</span>
+      <span class="xc__tag">EXTREME</span>
+      <span class="xc__tag">Proposed (megastructure)</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>A sphere dropped from the centre of a very large, very dense, hollow spherical shell (40 m radius, multi-layered with tungsten/osmium/lead) will experience REDUCED gravitational acceleration — less than 9.81 m/s². The dense shell occludes convergent boundary pressure from above, reducing the net downward force on the…</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>GR and Newtonian gravity predict that a uniform spherical shell exerts ZERO gravitational force on any mass inside it (Newton's shell theorem). The dropped sphere should accelerate at exactly 9.81 m/s² regardless of the shell's mass or density. The shell's gravity cancels perfectly by symmetry.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Construct a 40 m radius hollow sphere of alternating dense layers (tungsten, lead, osmium — total shell mass ~10⁶ tonnes). Drop a test mass from the exact centre down a vertical vacuum shaft. Measure the acceleration with sub-μg precision using laser interferometry. Compare to 9.81 m/s². SDT predicts a measurable…</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>40 m radius spherical shell structure (civil engineering project). Dense metal layers: tungsten carbide tiles, lead sheets, osmium powder in containment. Vertical vacuum shaft (0.5 m diameter, 80 m long, through the centre). Laser drop-tower interferometer (sensitivity &lt; 10⁻⁸ g). Seismic isolation. Environmental…</p></div>
+      <div class="xc__f"><h4>Scope</h4><p>Gravity / Occlusion</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Orbital Mechanics" data-txt="e24 mercury perihelion precession from k-hierarchy mercury's perihelion precession of 43&quot;/century arises from the sun's k²-gradient, not spacetime curvature. compare sdt k-gradient precession calculation to the measured value. this is a paper calculation, not a new measurement.">
+    <div class="xc__bar">
+      <span class="xc__id">E24</span>
+      <span class="xc__t">Mercury Perihelion Precession from k-Hierarchy</span>
+      <span class="xc__tag">Orbital Mechanics</span>
+      <span class="xc__tag">TRIVIAL</span>
+      <span class="xc__tag">Calculable now</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>Mercury's perihelion precession of 43&quot;/century arises from the Sun's k²-gradient, not spacetime curvature.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>GR explains 43&quot;/century from spacetime curvature near a massive body.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Compare SDT k-gradient precession calculation to the measured value. This is a paper calculation, not a new measurement.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Computational. Use laws.hpp bridge::v_orbital with solar k = 686.3 and Mercury's orbital parameters.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Orbital Mechanics" data-txt="e25 pioneer anomaly from pressure domain boundary the pioneer anomalous deceleration (~8.7 × 10⁻¹⁰ m/s²) arises from the spacecraft crossing pressure domain boundaries in the outer solar system. launch a thermally symmetric probe into the outer solar system with sub-nm/s² accelerometry. measure residual acceleration after all thermal effects are accounted for.">
+    <div class="xc__bar">
+      <span class="xc__id">E25</span>
+      <span class="xc__t">Pioneer Anomaly from Pressure Domain Boundary</span>
+      <span class="xc__tag">Orbital Mechanics</span>
+      <span class="xc__tag">HIGH</span>
+      <span class="xc__tag">Proposed (space mission)</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>The Pioneer anomalous deceleration (~8.7 × 10⁻¹⁰ m/s²) arises from the spacecraft crossing pressure domain boundaries in the outer solar system.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Thermal recoil from asymmetric spacecraft emission (resolved in 2012).</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Launch a thermally symmetric probe into the outer solar system with sub-nm/s² accelerometry. Measure residual acceleration after all thermal effects are accounted for.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Thermally symmetric spacecraft. High-precision accelerometer (LISA Pathfinder heritage). Solar sail or ion drive for trajectory control.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Orbital Mechanics" data-txt="e26 lunar laser ranging — k-gradient test lunar orbit shows residual effects from earth's k²-gradient that differ from gr geodesic precession at sub-mm level. analyse existing apache point observatory lunar laser ranging data for systematic residuals vs gr-predicted orbit. look for earth-moon distance anomalies correlated with solar pressure direction.">
+    <div class="xc__bar">
+      <span class="xc__id">E26</span>
+      <span class="xc__t">Lunar Laser Ranging — k-Gradient Test</span>
+      <span class="xc__tag">Orbital Mechanics</span>
+      <span class="xc__tag">LOW</span>
+      <span class="xc__tag">Archival analysis</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>Lunar orbit shows residual effects from Earth's k²-gradient that differ from GR geodesic precession at sub-mm level.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>GR predicts geodesic precession of the lunar orbit at 19.2 mas/year.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Analyse existing Apache Point Observatory Lunar Laser Ranging data for systematic residuals vs GR-predicted orbit. Look for Earth-Moon distance anomalies correlated with solar pressure direction.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Existing data from APOLLO facility (Apache Point, NM). Computational analysis.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Solar Physics" data-txt="e27 solar oblateness from convergence gradient the sun's oblateness (j₂ = 2.2 × 10⁻⁷) arises from the convergence field's equatorial enhancement, not just rotation. compare measured j₂ from helioseismology to rotational predictions. excess oblateness could indicate convergence contribution.">
+    <div class="xc__bar">
+      <span class="xc__id">E27</span>
+      <span class="xc__t">Solar Oblateness from Convergence Gradient</span>
+      <span class="xc__tag">Solar Physics</span>
+      <span class="xc__tag">LOW</span>
+      <span class="xc__tag">Archival analysis</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>The Sun's oblateness (J₂ = 2.2 × 10⁻⁷) arises from the convergence field's equatorial enhancement, not just rotation.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: solar J₂ from rotational flattening alone.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Compare measured J₂ from helioseismology to rotational predictions. Excess oblateness could indicate convergence contribution.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Helioseismology data (SDO, SOHO). Computational modeling.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Nuclear Physics" data-txt="e28 triple-alpha rate from geometric packing the hoyle state in c-12 is not a three-alpha resonance but a single alpha + 4 deuteron geometric closure. the reaction rate should be calculable from the packing geometry alone. calculate the hoyle state energy from the geometric packing energy of 4 deuterons around an alpha core. compare to measured 7.654 mev.">
+    <div class="xc__bar">
+      <span class="xc__id">E28</span>
+      <span class="xc__t">Triple-Alpha Rate from Geometric Packing</span>
+      <span class="xc__tag">Nuclear Physics</span>
+      <span class="xc__tag">TRIVIAL</span>
+      <span class="xc__tag">Calculable now</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>The Hoyle state in C-12 is NOT a three-alpha resonance but a single alpha + 4 deuteron geometric closure. The reaction rate should be calculable from the packing geometry alone.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: the Hoyle state is a 3α resonance at 7.654 MeV above C-12 ground state, crucial for stellar nucleosynthesis.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Calculate the Hoyle state energy from the geometric packing energy of 4 deuterons around an alpha core. Compare to measured 7.654 MeV.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Computational. Nuclear binding data from NUBASE2020.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Nuclear Physics" data-txt="e29 deuteron binding from occlusion geometry the deuteron binding energy (2.224 mev) is derivable from the occlusion geometry of one proton and one neutron at the measured separation of 2.14 fm. calculate occlusion binding energy from r_p = 0.841 fm, r_n ≈ equivalent, separation = 2.14 fm. compare to measured 2.224 mev.">
+    <div class="xc__bar">
+      <span class="xc__id">E29</span>
+      <span class="xc__t">Deuteron Binding from Occlusion Geometry</span>
+      <span class="xc__tag">Nuclear Physics</span>
+      <span class="xc__tag">TRIVIAL</span>
+      <span class="xc__tag">Calculable now</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>The deuteron binding energy (2.224 MeV) is derivable from the occlusion geometry of one proton and one neutron at the measured separation of 2.14 fm.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: deuteron binding from nuclear potential models (Yukawa, AV18, etc.).</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Calculate occlusion binding energy from R_p = 0.841 fm, R_n ≈ equivalent, separation = 2.14 fm. Compare to measured 2.224 MeV.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Computational. Use law_III::F_occlusion from laws.hpp.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Nuclear Physics" data-txt="e30 alpha binding from tetrahedral occlusion the alpha particle binding energy (28.296 mev) should emerge from the tetrahedral packing geometry of 2p+2n. tetrahedral occlusion calculation using nuclear radii and the convergent pressure law.">
+    <div class="xc__bar">
+      <span class="xc__id">E30</span>
+      <span class="xc__t">Alpha Binding from Tetrahedral Occlusion</span>
+      <span class="xc__tag">Nuclear Physics</span>
+      <span class="xc__tag">TRIVIAL</span>
+      <span class="xc__tag">Calculable now</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>The alpha particle binding energy (28.296 MeV) should emerge from the tetrahedral packing geometry of 2p+2n.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: alpha binding from shell model or cluster model calculations.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Tetrahedral occlusion calculation using nuclear radii and the convergent pressure law.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Computational.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Nuclear Physics" data-txt="e31 neutron lifetime from lattice topology the beam/bottle neutron lifetime discrepancy (~8 s) arises from different boundary conditions on the spation lattice. compare both measurements with sdt boundary-condition corrections.">
+    <div class="xc__bar">
+      <span class="xc__id">E31</span>
+      <span class="xc__t">Neutron Lifetime from Lattice Topology</span>
+      <span class="xc__tag">Nuclear Physics</span>
+      <span class="xc__tag">LOW</span>
+      <span class="xc__tag">Archival analysis</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>The beam/bottle neutron lifetime discrepancy (~8 s) arises from different boundary conditions on the spation lattice.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: a dark decay channel or systematic error.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Compare both measurements with SDT boundary-condition corrections.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Existing data.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Atomic Physics" data-txt="e32 proton radius puzzle — w+1 prediction r_p = 4ℏ/(m_p c) = 0.84124 fm, matching the muonic hydrogen measurement. already resolved — use muonic value as canonical.">
+    <div class="xc__bar">
+      <span class="xc__id">E32</span>
+      <span class="xc__t">Proton Radius Puzzle — W+1 Prediction</span>
+      <span class="xc__tag">Atomic Physics</span>
+      <span class="xc__tag">TRIVIAL</span>
+      <span class="xc__tag">Validated</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>R_p = 4ℏ/(m_p c) = 0.84124 fm, matching the muonic hydrogen measurement.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: electronic hydrogen gives ~0.877 fm, muonic gives ~0.841 fm.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Already resolved — use muonic value as canonical.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>None — calculation.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Nuclear Physics" data-txt="e33 nuclear charge radius scaling → z × r_p nuclear charge radii scale as r = z × r_p for all elements. plot r_measured vs z×r_p and vs r₀×a^(1/3) for all measured nuclei. determine which fits better.">
+    <div class="xc__bar">
+      <span class="xc__id">E33</span>
+      <span class="xc__t">Nuclear Charge Radius Scaling → Z × R_p</span>
+      <span class="xc__tag">Nuclear Physics</span>
+      <span class="xc__tag">LOW</span>
+      <span class="xc__tag">Archival analysis</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>Nuclear charge radii scale as R = Z × R_p for all elements.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: R = r₀ × A^(1/3), where r₀ ≈ 1.2 fm.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Plot R_measured vs Z×R_p and vs r₀×A^(1/3) for all measured nuclei. Determine which fits better.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>NIST nuclear charge radius database.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Nuclear Physics" data-txt="e34 quadrupole moment of li-7 from α+t geometry li-7's large quadrupole moment (-4.01 fm²) arises from the asymmetric alpha+triton arrangement. calculate quadrupole moment from the geometric α+t separation.">
+    <div class="xc__bar">
+      <span class="xc__id">E34</span>
+      <span class="xc__t">Quadrupole Moment of Li-7 from α+t Geometry</span>
+      <span class="xc__tag">Nuclear Physics</span>
+      <span class="xc__tag">TRIVIAL</span>
+      <span class="xc__tag">Calculable now</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>Li-7's large quadrupole moment (-4.01 fm²) arises from the asymmetric alpha+triton arrangement.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: shell model explains it from p₃/₂ shell deformation.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Calculate quadrupole moment from the geometric α+t separation.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Computational.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Nuclear Physics" data-txt="e35 fe-56 vs ni-62: true binding energy peak ni-62 has the highest measured b/a (8.795 mev/n), but fe-56 is more abundant because its construction grammar is geometrically optimal. computational comparison of grammar efficiency.">
+    <div class="xc__bar">
+      <span class="xc__id">E35</span>
+      <span class="xc__t">Fe-56 vs Ni-62: True Binding Energy Peak</span>
+      <span class="xc__tag">Nuclear Physics</span>
+      <span class="xc__tag">TRIVIAL</span>
+      <span class="xc__tag">Calculable now</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>Ni-62 has the highest measured B/A (8.795 MeV/n), but Fe-56 is more abundant because its construction grammar is geometrically optimal.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: Fe-56 is more abundant due to stellar nucleosynthesis details.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Computational comparison of grammar efficiency.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Nuclear data.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Nuclear Physics" data-txt="e36 oxygen-16 pure deuteron scaffold verification o-16 = α + 6d (pure deuteron scaffold, 0% tritons). this predicts maximum stability per nucleon for its shell. compare o-16's binding per nucleon to neighboring isotopes. verify pure-deuteron isotopes have enhanced stability.">
+    <div class="xc__bar">
+      <span class="xc__id">E36</span>
+      <span class="xc__t">Oxygen-16 Pure Deuteron Scaffold Verification</span>
+      <span class="xc__tag">Nuclear Physics</span>
+      <span class="xc__tag">TRIVIAL</span>
+      <span class="xc__tag">Archival analysis</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>O-16 = α + 6d (pure deuteron scaffold, 0% tritons). This predicts maximum stability per nucleon for its shell.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: O-16 is doubly magic (8p, 8n) in shell model.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Compare O-16's binding per nucleon to neighboring isotopes. Verify pure-deuteron isotopes have enhanced stability.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Nuclear binding energy data.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Nuclear Physics" data-txt="e37 double ec in xe-124 from he-3 core grammar xe-124 undergoes double ec because it has an he-3 core that requires two sequential captures to repair. verify grammar of xe-124 under he-3 core: check n_deu ≥ 4 (need 2 donor+absorber pairs).">
+    <div class="xc__bar">
+      <span class="xc__id">E37</span>
+      <span class="xc__t">Double EC in Xe-124 from He-3 Core Grammar</span>
+      <span class="xc__tag">Nuclear Physics</span>
+      <span class="xc__tag">TRIVIAL</span>
+      <span class="xc__tag">Calculable now</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>Xe-124 undergoes double EC because it has an He-3 core that requires TWO sequential captures to repair.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: double EC is a second-order weak process.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Verify grammar of Xe-124 under He-3 core: check n_deu ≥ 4 (need 2 donor+absorber pairs).</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Computational.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Nuclear Physics" data-txt="e38 ec rate vs charge state for heavy elements ec rate drops to zero at full ionisation for all elements, not just be-7. measure ec rates of cr-51, mn-54, fe-55 at various charge states in ebit or storage ring.">
+    <div class="xc__bar">
+      <span class="xc__id">E38</span>
+      <span class="xc__t">EC Rate vs Charge State for Heavy Elements</span>
+      <span class="xc__tag">Nuclear Physics</span>
+      <span class="xc__tag">HIGH</span>
+      <span class="xc__tag">Proposed (GSI/FAIR)</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>EC rate drops to zero at full ionisation for ALL elements, not just Be-7.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: EC requires bound electrons; rate varies with electron density at nucleus.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Measure EC rates of Cr-51, Mn-54, Fe-55 at various charge states in EBIT or storage ring.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>GSI/FAIR storage ring, NIST EBIT.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Nuclear Physics" data-txt="e39 proton-neutron mass difference from topology m_n - m_p = 1.293 mev arises from the extra neutron internal energy (one additional trefoil circulation). calculate the energy cost of the additional circulation mode.">
+    <div class="xc__bar">
+      <span class="xc__id">E39</span>
+      <span class="xc__t">Proton-Neutron Mass Difference from Topology</span>
+      <span class="xc__tag">Nuclear Physics</span>
+      <span class="xc__tag">TRIVIAL</span>
+      <span class="xc__tag">Calculable now</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>m_n - m_p = 1.293 MeV arises from the extra neutron internal energy (one additional trefoil circulation).</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: m_n - m_p from quark mass difference (m_d - m_u + EM corrections).</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Calculate the energy cost of the additional circulation mode.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Computational.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Nuclear Physics" data-txt="e40 nuclear magnetic moments from vortex geometry nuclear magnetic moments (μ_p = 2.793 μn, μ_n = -1.913 μn) arise from the trefoil vortex geometry. calculate μ_p and μ_n from the trefoil and torus current distributions.">
+    <div class="xc__bar">
+      <span class="xc__id">E40</span>
+      <span class="xc__t">Nuclear Magnetic Moments from Vortex Geometry</span>
+      <span class="xc__tag">Nuclear Physics</span>
+      <span class="xc__tag">MODERATE</span>
+      <span class="xc__tag">Calculable now</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>Nuclear magnetic moments (μ_p = 2.793 μN, μ_n = -1.913 μN) arise from the trefoil vortex geometry.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: magnetic moments from quark constituent models.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Calculate μ_p and μ_n from the trefoil and torus current distributions.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Computational.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Cosmology" data-txt="e41 cmb temperature from spation lattice properties t_cmb = 2.7255 k is derivable from spation lattice properties, not a free parameter. derive t_cmb from first principles using zk²=1 and the relay density.">
+    <div class="xc__bar">
+      <span class="xc__id">E41</span>
+      <span class="xc__t">CMB Temperature from Spation Lattice Properties</span>
+      <span class="xc__tag">Cosmology</span>
+      <span class="xc__tag">MODERATE</span>
+      <span class="xc__tag">Calculable now</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>T_CMB = 2.7255 K is derivable from spation lattice properties, not a free parameter.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: T_CMB is a relic of the hot Big Bang, a free parameter.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Derive T_CMB from first principles using zk²=1 and the relay density.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Computational.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Cosmology" data-txt="e42 hubble constant from pressure gradient h₀ = v/d is a pressure gradient measure, not an expansion rate. sdt predicts h₀(near) &gt; h₀(far). calculate h₀ from the sdt pressure gradient at different distances.">
+    <div class="xc__bar">
+      <span class="xc__id">E42</span>
+      <span class="xc__t">Hubble Constant from Pressure Gradient</span>
+      <span class="xc__tag">Cosmology</span>
+      <span class="xc__tag">LOW</span>
+      <span class="xc__tag">Archival analysis</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>H₀ = v/d is a pressure gradient measure, not an expansion rate. SDT predicts H₀(near) &gt; H₀(far).</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: H₀ is the expansion rate of the universe, should be constant at all distances.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Calculate H₀ from the SDT pressure gradient at different distances.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Existing SN Ia data (Pantheon+ catalog).</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Cosmology" data-txt="e43 sn ia mass step from occlusion gradient the ~0.04 mag mass step in sn ia standardisation arises from host-galaxy convergence field differences. correlate mass-step residuals with galaxy density measures.">
+    <div class="xc__bar">
+      <span class="xc__id">E43</span>
+      <span class="xc__t">SN Ia Mass Step from Occlusion Gradient</span>
+      <span class="xc__tag">Cosmology</span>
+      <span class="xc__tag">LOW</span>
+      <span class="xc__tag">Archival analysis</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>The ~0.04 mag mass step in SN Ia standardisation arises from host-galaxy convergence field differences.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: dust, metallicity, or progenitor differences.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Correlate mass-step residuals with galaxy density measures.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Pantheon+ catalog, host galaxy data.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Cosmology" data-txt="e44 cmb dipole from observer motion in pressure field the cmb dipole (370 km/s) reflects our motion through the pressure field, not relative to a &quot;rest frame&quot; of expansion. measure higher-order cmb motion effects (e.g., aberration quadrupole) that distinguish medium-motion from frame-motion.">
+    <div class="xc__bar">
+      <span class="xc__id">E44</span>
+      <span class="xc__t">CMB Dipole from Observer Motion in Pressure Field</span>
+      <span class="xc__tag">Cosmology</span>
+      <span class="xc__tag">LOW</span>
+      <span class="xc__tag">Archival analysis</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>The CMB dipole (370 km/s) reflects our motion through the pressure field, not relative to a &quot;rest frame&quot; of expansion.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: CMB dipole from Earth's peculiar velocity relative to the CMB rest frame.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Measure higher-order CMB motion effects (e.g., aberration quadrupole) that distinguish medium-motion from frame-motion.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Planck CMB data.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Cosmology" data-txt="e45 bao as lattice standing waves baryon acoustic oscillations are standing waves in the spation lattice pressure field, not sound waves in primordial plasma. compare sdt lattice resonance predictions to desi bao measurements.">
+    <div class="xc__bar">
+      <span class="xc__id">E45</span>
+      <span class="xc__t">BAO as Lattice Standing Waves</span>
+      <span class="xc__tag">Cosmology</span>
+      <span class="xc__tag">MODERATE</span>
+      <span class="xc__tag">Archival analysis</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>Baryon acoustic oscillations are standing waves in the spation lattice pressure field, not sound waves in primordial plasma.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: BAO from acoustic oscillations in the baryon-photon plasma before recombination.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Compare SDT lattice resonance predictions to DESI BAO measurements.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>DESI survey data.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Cosmology" data-txt="e46 galaxy rotation curves from eclipse saturation flat rotation curves arise from eclipse saturation — beyond a critical radius, all convergence lines are already occluded. compare sdt rotation curve predictions to measured curves for 50+ galaxies.">
+    <div class="xc__bar">
+      <span class="xc__id">E46</span>
+      <span class="xc__t">Galaxy Rotation Curves from Eclipse Saturation</span>
+      <span class="xc__tag">Cosmology</span>
+      <span class="xc__tag">LOW</span>
+      <span class="xc__tag">Archival analysis</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>Flat rotation curves arise from eclipse saturation — beyond a critical radius, all convergence lines are already occluded.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: dark matter halos.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Compare SDT rotation curve predictions to measured curves for 50+ galaxies.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>SPARC database of rotation curves.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Cosmology" data-txt="e47 gravitational lensing from convergence gradient light bending near massive objects arises from the convergence-field gradient (refractive index of the spation lattice), not spacetime curvature. calculate lensing angle from the k-gradient profile of a galaxy cluster. compare to observed strong lensing.">
+    <div class="xc__bar">
+      <span class="xc__id">E47</span>
+      <span class="xc__t">Gravitational Lensing from Convergence Gradient</span>
+      <span class="xc__tag">Cosmology</span>
+      <span class="xc__tag">MODERATE</span>
+      <span class="xc__tag">Archival analysis</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>Light bending near massive objects arises from the convergence-field gradient (refractive index of the spation lattice), not spacetime curvature.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: GR predicts light bending from spacetime curvature.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Calculate lensing angle from the k-gradient profile of a galaxy cluster. Compare to observed strong lensing.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>HST strong lensing data.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Cosmology" data-txt="e48 gravitational wave speed = c from lattice rigidity gravitational waves propagate at c because they are transverse lattice distortions. gw170817 confirmed gw speed = c to 10⁻¹⁵. already confirmed by gw170817/grb 170817a timing.">
+    <div class="xc__bar">
+      <span class="xc__id">E48</span>
+      <span class="xc__t">Gravitational Wave Speed = c from Lattice Rigidity</span>
+      <span class="xc__tag">Cosmology</span>
+      <span class="xc__tag">TRIVIAL</span>
+      <span class="xc__tag">Validated</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>Gravitational waves propagate at c because they are transverse lattice distortions. GW170817 confirmed GW speed = c to 10⁻¹⁵.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: GR predicts GW speed = c from the massless spin-2 graviton.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Already confirmed by GW170817/GRB 170817A timing.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>LIGO/Virgo/KAGRA data.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Cosmology" data-txt="e49 dark energy as residual pressure gradient the accelerating expansion is a misinterpretation of the pressure gradient at cosmological distances. sdt predicts a distance-dependent effective h₀ that mimics acceleration. fit sdt pressure-gradient model to the pantheon+ sn ia hubble diagram. compare χ² with and without λ.">
+    <div class="xc__bar">
+      <span class="xc__id">E49</span>
+      <span class="xc__t">Dark Energy as Residual Pressure Gradient</span>
+      <span class="xc__tag">Cosmology</span>
+      <span class="xc__tag">LOW</span>
+      <span class="xc__tag">Archival analysis</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>The accelerating expansion is a misinterpretation of the pressure gradient at cosmological distances. SDT predicts a distance-dependent effective H₀ that mimics acceleration.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: dark energy (Λ) drives accelerating expansion.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Fit SDT pressure-gradient model to the Pantheon+ SN Ia Hubble diagram. Compare χ² with and without Λ.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Pantheon+ catalog.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Cosmology" data-txt="e50 cosmic neutrino background temperature sdt predicts t_ν ≠ 1.95 k because neutrinos decouple at a different point in the lattice pressure history. measure t_cνb when ptolemy or successor detector becomes available.">
+    <div class="xc__bar">
+      <span class="xc__id">E50</span>
+      <span class="xc__t">Cosmic Neutrino Background Temperature</span>
+      <span class="xc__tag">Cosmology</span>
+      <span class="xc__tag">HIGH</span>
+      <span class="xc__tag">Awaiting detector</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>SDT predicts T_ν ≠ 1.95 K because neutrinos decouple at a different point in the lattice pressure history.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: T_ν = (4/11)^(1/3) × T_CMB ≈ 1.95 K from entropy conservation.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Measure T_CνB when PTOLEMY or successor detector becomes available.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>PTOLEMY tritium detector.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Electromagnetic" data-txt="e51 fine structure constant from lattice geometry α = 1/137.036 is derivable from the ratio of vortex poloidal to toroidal velocities for the w=1 (electron) topology. calculate α from the w=1 torus mode partition.">
+    <div class="xc__bar">
+      <span class="xc__id">E51</span>
+      <span class="xc__t">Fine Structure Constant from Lattice Geometry</span>
+      <span class="xc__tag">Electromagnetic</span>
+      <span class="xc__tag">HIGH</span>
+      <span class="xc__tag">Open problem</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>α = 1/137.036 is derivable from the ratio of vortex poloidal to toroidal velocities for the W=1 (electron) topology.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: α is a fundamental constant with no known derivation.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Calculate α from the W=1 torus mode partition.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Computational.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Electromagnetic" data-txt="e52 proton-electron mass ratio from winding numbers m_p/m_e = 1836.15 should emerge from the w=3 vs w=1 vortex energy ratio. calculate the energy ratio between w=3 and w=1 lattice vortices.">
+    <div class="xc__bar">
+      <span class="xc__id">E52</span>
+      <span class="xc__t">Proton-Electron Mass Ratio from Winding Numbers</span>
+      <span class="xc__tag">Electromagnetic</span>
+      <span class="xc__tag">HIGH</span>
+      <span class="xc__tag">Open problem</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>m_p/m_e = 1836.15 should emerge from the W=3 vs W=1 vortex energy ratio.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: m_p/m_e from quark masses, which are themselves unexplained.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Calculate the energy ratio between W=3 and W=1 lattice vortices.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Computational.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Electromagnetic" data-txt="e53 anomalous magnetic moment (g-2) from lattice corrections the electron g-2 anomaly (α/2π + ...) arises from lattice perturbation corrections to the vortex circulation. calculate first-order lattice correction to the electron magnetic moment.">
+    <div class="xc__bar">
+      <span class="xc__id">E53</span>
+      <span class="xc__t">Anomalous Magnetic Moment (g-2) from Lattice Corrections</span>
+      <span class="xc__tag">Electromagnetic</span>
+      <span class="xc__tag">HIGH</span>
+      <span class="xc__tag">Open problem</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>The electron g-2 anomaly (α/2π + ...) arises from lattice perturbation corrections to the vortex circulation.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: QED calculates g-2 from higher-order Feynman diagrams.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Calculate first-order lattice correction to the electron magnetic moment.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Computational.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Electromagnetic" data-txt="e54 lamb shift from lattice fluctuations the lamb shift in hydrogen arises from spation lattice fluctuations (&quot;vacuum fluctuations&quot; in qed are lattice thermal noise). calculate the lamb shift from the spation lattice fluctuation spectrum.">
+    <div class="xc__bar">
+      <span class="xc__id">E54</span>
+      <span class="xc__t">Lamb Shift from Lattice Fluctuations</span>
+      <span class="xc__tag">Electromagnetic</span>
+      <span class="xc__tag">HIGH</span>
+      <span class="xc__tag">Open problem</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>The Lamb shift in hydrogen arises from spation lattice fluctuations (&quot;vacuum fluctuations&quot; in QED are lattice thermal noise).</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: Lamb shift from vacuum polarisation and electron self-energy in QED.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Calculate the Lamb shift from the spation lattice fluctuation spectrum.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Computational.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Electromagnetic" data-txt="e55 photoelectric effect from pressure-field coupling photon absorption at a metal surface is a pressure-field resonance event, not a particle collision. measure photoelectric emission timing with sub-attosecond precision. sdt predicts instant emission (no tunnelling delay).">
+    <div class="xc__bar">
+      <span class="xc__id">E55</span>
+      <span class="xc__t">Photoelectric Effect from Pressure-Field Coupling</span>
+      <span class="xc__tag">Electromagnetic</span>
+      <span class="xc__tag">MODERATE</span>
+      <span class="xc__tag">Proposed (laboratory)</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>Photon absorption at a metal surface is a pressure-field resonance event, not a particle collision.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: photon as particle ejects electron when E &gt; work function.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Measure photoelectric emission timing with sub-attosecond precision. SDT predicts instant emission (no tunnelling delay).</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Attosecond laser laboratory.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Electromagnetic" data-txt="e56 compton scattering from lattice momentum transfer compton scattering is lattice momentum transfer, with the same cross-section as qed but different ontology. compare sdt cross-section calculation to measured compton data.">
+    <div class="xc__bar">
+      <span class="xc__id">E56</span>
+      <span class="xc__t">Compton Scattering from Lattice Momentum Transfer</span>
+      <span class="xc__tag">Electromagnetic</span>
+      <span class="xc__tag">TRIVIAL</span>
+      <span class="xc__tag">Validated</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>Compton scattering is lattice momentum transfer, with the same cross-section as QED but different ontology.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: photon-electron scattering with momentum transfer.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Compare SDT cross-section calculation to measured Compton data.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Existing measurements.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Electromagnetic" data-txt="e57 cherenkov radiation as lattice shock wave cherenkov radiation occurs when a particle exceeds the local lattice phase velocity — identical to a sonic boom in air. already validated by all cherenkov detectors.">
+    <div class="xc__bar">
+      <span class="xc__id">E57</span>
+      <span class="xc__t">Cherenkov Radiation as Lattice Shock Wave</span>
+      <span class="xc__tag">Electromagnetic</span>
+      <span class="xc__tag">TRIVIAL</span>
+      <span class="xc__tag">Validated</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>Cherenkov radiation occurs when a particle exceeds the local lattice phase velocity — identical to a sonic boom in air.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: particle exceeds phase velocity of light in medium n &gt; 1.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Already validated by all Cherenkov detectors.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Existing data.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Electromagnetic" data-txt="e58 magnetic monopole non-existence from topology magnetic monopoles do not exist because magnetic fields are vortex wakes, which are always dipolar. a monopole would require a half-vortex, which is topologically impossible. continue monopole searches. sdt predicts continued null results.">
+    <div class="xc__bar">
+      <span class="xc__id">E58</span>
+      <span class="xc__t">Magnetic Monopole Non-Existence from Topology</span>
+      <span class="xc__tag">Electromagnetic</span>
+      <span class="xc__tag">TRIVIAL</span>
+      <span class="xc__tag">Ongoing null result</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>Magnetic monopoles do not exist because magnetic fields are vortex wakes, which are always dipolar. A monopole would require a half-vortex, which is topologically impossible.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: Dirac monopoles are allowed; searches have found none.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Continue monopole searches. SDT predicts continued null results.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>MoEDAL (CERN), IceCube.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Electromagnetic" data-txt="e59 superconductivity from lattice phase locking superconductivity is lattice phase-locking: below tc, electron pairs lock into the spation lattice's phase structure, producing zero-resistance flow. measure vortex lattice structure in type-ii superconductors at extreme resolution. compare to sdt lattice predictions.">
+    <div class="xc__bar">
+      <span class="xc__id">E59</span>
+      <span class="xc__t">Superconductivity from Lattice Phase Locking</span>
+      <span class="xc__tag">Electromagnetic</span>
+      <span class="xc__tag">MODERATE</span>
+      <span class="xc__tag">Proposed (laboratory)</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>Superconductivity is lattice phase-locking: below Tc, electron pairs lock into the spation lattice's phase structure, producing zero-resistance flow.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: BCS theory — Cooper pairing via phonon exchange.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Measure vortex lattice structure in type-II superconductors at extreme resolution. Compare to SDT lattice predictions.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Scanning tunnelling microscopy on NbSe₂ or YBCO.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Vacuum" data-txt="e60 casimir force scaling at sub-nm gaps casimir force at sub-nm gaps should show deviations from the 1/d⁴ power law due to spation lattice granularity. measure casimir force at 0.1-10 nm plate separations with atomic force microscopy.">
+    <div class="xc__bar">
+      <span class="xc__id">E60</span>
+      <span class="xc__t">Casimir Force Scaling at Sub-nm Gaps</span>
+      <span class="xc__tag">Vacuum</span>
+      <span class="xc__tag">MODERATE</span>
+      <span class="xc__tag">Proposed (laboratory)</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>Casimir force at sub-nm gaps should show deviations from the 1/d⁴ power law due to spation lattice granularity.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: Casimir force scales as 1/d⁴ at all separable distances.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Measure Casimir force at 0.1-10 nm plate separations with atomic force microscopy.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>AFM with calibrated cantilever, gold surfaces.</p></div>
+      <div class="xc__f"><h4>Scope</h4><p>Vacuum / Medium</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Radiation" data-txt="e61 blackbody spectrum from lattice mode counting planck's blackbody spectrum emerges from counting spation lattice modes, not quantised oscillators. verify the derivation reproduces planck's law exactly.">
+    <div class="xc__bar">
+      <span class="xc__id">E61</span>
+      <span class="xc__t">Blackbody Spectrum from Lattice Mode Counting</span>
+      <span class="xc__tag">Radiation</span>
+      <span class="xc__tag">TRIVIAL</span>
+      <span class="xc__tag">Calculable now</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>Planck's blackbody spectrum emerges from counting spation lattice modes, not quantised oscillators.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: Planck's quantisation hypothesis → blackbody spectrum.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Verify the derivation reproduces Planck's law exactly.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Computational.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Radiation" data-txt="e62 stefan-boltzmann law from convergence throughput the stefan-boltzmann constant σ = 2π⁵k_b⁴/(15h³c²) is derivable from lattice throughput geometry. verify derivation.">
+    <div class="xc__bar">
+      <span class="xc__id">E62</span>
+      <span class="xc__t">Stefan-Boltzmann Law from Convergence Throughput</span>
+      <span class="xc__tag">Radiation</span>
+      <span class="xc__tag">TRIVIAL</span>
+      <span class="xc__tag">Calculable now</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>The Stefan-Boltzmann constant σ = 2π⁵k_B⁴/(15h³c²) is derivable from lattice throughput geometry.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: σ follows from Planck's law integration.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Verify derivation.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Computational.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Radiation" data-txt="e63 wien's displacement from lattice peak mode wien's law λ_max t = 2.898 × 10⁻³ m·k from the peak mode of the lattice spectrum. computational verification.">
+    <div class="xc__bar">
+      <span class="xc__id">E63</span>
+      <span class="xc__t">Wien's Displacement from Lattice Peak Mode</span>
+      <span class="xc__tag">Radiation</span>
+      <span class="xc__tag">TRIVIAL</span>
+      <span class="xc__tag">Calculable now</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>Wien's law λ_max T = 2.898 × 10⁻³ m·K from the peak mode of the lattice spectrum.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: from Planck distribution maximisation.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Computational verification.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Computational.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Stellar Physics" data-txt="e64 solar luminosity from convergence recycling the sun's luminosity (3.828 × 10²⁶ w) is convergence recycling: the sun processes convergent pressure into radiation. calculate solar luminosity from the convergence budget at r_sun.">
+    <div class="xc__bar">
+      <span class="xc__id">E64</span>
+      <span class="xc__t">Solar Luminosity from Convergence Recycling</span>
+      <span class="xc__tag">Stellar Physics</span>
+      <span class="xc__tag">MODERATE</span>
+      <span class="xc__tag">Calculable now</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>The Sun's luminosity (3.828 × 10²⁶ W) is convergence recycling: the Sun processes convergent pressure into radiation.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: nuclear fusion powers the Sun.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Calculate solar luminosity from the convergence budget at R_Sun.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Computational.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Stellar Physics" data-txt="e65 stellar main sequence from k-gradient equilibrium the hr diagram main sequence is a k-gradient equilibrium sequence. each spectral type corresponds to a specific k-value. map measured stellar k-values (from orbital velocities) to hr diagram positions.">
+    <div class="xc__bar">
+      <span class="xc__id">E65</span>
+      <span class="xc__t">Stellar Main Sequence from k-Gradient Equilibrium</span>
+      <span class="xc__tag">Stellar Physics</span>
+      <span class="xc__tag">LOW</span>
+      <span class="xc__tag">Archival analysis</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>The HR diagram main sequence is a k-gradient equilibrium sequence. Each spectral type corresponds to a specific k-value.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: main sequence from mass-luminosity relation and nuclear burning.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Map measured stellar k-values (from orbital velocities) to HR diagram positions.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>GAIA stellar survey data.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Stellar Physics" data-txt="e66 white dwarf chandrasekhar limit from occlusion saturation the chandrasekhar limit (1.44 m_sun) arises from occlusion saturation — beyond this mass, the occlusion fraction exceeds the lattice's carrying capacity. calculate the occlusion-saturation mass limit. compare to 1.44 m_sun.">
+    <div class="xc__bar">
+      <span class="xc__id">E66</span>
+      <span class="xc__t">White Dwarf Chandrasekhar Limit from Occlusion Saturation</span>
+      <span class="xc__tag">Stellar Physics</span>
+      <span class="xc__tag">MODERATE</span>
+      <span class="xc__tag">Calculable now</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>The Chandrasekhar limit (1.44 M_Sun) arises from occlusion saturation — beyond this mass, the occlusion fraction exceeds the lattice's carrying capacity.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: electron degeneracy pressure can no longer support the star.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Calculate the occlusion-saturation mass limit. Compare to 1.44 M_Sun.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Computational.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Stellar Physics" data-txt="e67 neutron star maximum mass from lattice compression limit the tov limit (~2.2 m_sun) emerges from the spation lattice compression limit — beyond this, the lattice cannot support further matter. calculate the lattice compression limit and corresponding maximum mass.">
+    <div class="xc__bar">
+      <span class="xc__id">E67</span>
+      <span class="xc__t">Neutron Star Maximum Mass from Lattice Compression Limit</span>
+      <span class="xc__tag">Stellar Physics</span>
+      <span class="xc__tag">HIGH</span>
+      <span class="xc__tag">Calculable now</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>The TOV limit (~2.2 M_Sun) emerges from the spation lattice compression limit — beyond this, the lattice cannot support further matter.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: TOV limit from GR + nuclear equation of state.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Calculate the lattice compression limit and corresponding maximum mass.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Computational.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Stellar Physics" data-txt="e68 black hole singularity replacement: maximum compression state there is no singularity. the 'black hole' interior is a maximum-compression lattice state where matter exists at the planck density. observe gravitational wave ringdown for deviations from gr's kerr metric.">
+    <div class="xc__bar">
+      <span class="xc__id">E68</span>
+      <span class="xc__t">Black Hole Singularity Replacement: Maximum Compression State</span>
+      <span class="xc__tag">Stellar Physics</span>
+      <span class="xc__tag">HIGH</span>
+      <span class="xc__tag">Archival analysis</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>There is no singularity. The 'black hole' interior is a maximum-compression lattice state where matter exists at the planck density.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: singularity at r = 0 inside event horizon.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Observe gravitational wave ringdown for deviations from GR's Kerr metric.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>LIGO/Virgo ringdown analysis.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Stellar Physics" data-txt="e69 hawking temperature from lattice surface modes black hole temperature (hawking radiation) arises from lattice surface modes at the c-boundary, not quantum tunnelling. same prediction — different mechanism, same result.">
+    <div class="xc__bar">
+      <span class="xc__id">E69</span>
+      <span class="xc__t">Hawking Temperature from Lattice Surface Modes</span>
+      <span class="xc__tag">Stellar Physics</span>
+      <span class="xc__tag">IMPOSSIBLE</span>
+      <span class="xc__tag">Unmeasurable</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>Black hole temperature (Hawking radiation) arises from lattice surface modes at the c-boundary, not quantum tunnelling.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: Hawking radiation from quantum tunnelling through the event horizon.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Same prediction — different mechanism, same result.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Currently undetectable.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Gravity" data-txt="e70 gravitational redshift from k-gradient gravitational redshift z = gm/(rc²) is a k-gradient effect: photons climbing out of a convergence well lose energy to the lattice. already measured (pound-rebka, gps). same prediction.">
+    <div class="xc__bar">
+      <span class="xc__id">E70</span>
+      <span class="xc__t">Gravitational Redshift from k-Gradient</span>
+      <span class="xc__tag">Gravity</span>
+      <span class="xc__tag">TRIVIAL</span>
+      <span class="xc__tag">Validated</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>Gravitational redshift z = GM/(rc²) is a k-gradient effect: photons climbing out of a convergence well lose energy to the lattice.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: GR gravitational time dilation.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Already measured (Pound-Rebka, GPS). Same prediction.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Existing data.</p></div>
+      <div class="xc__f"><h4>Scope</h4><p>Gravity / Occlusion</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Vacuum" data-txt="e71 gravitational casimir effect: mass-dependent plate force casimir plates made of different materials should show slightly different force due to their different nuclear occlusion fractions. measure casimir force between tungsten plates vs aluminium plates at identical gaps.">
+    <div class="xc__bar">
+      <span class="xc__id">E71</span>
+      <span class="xc__t">Gravitational Casimir Effect: Mass-Dependent Plate Force</span>
+      <span class="xc__tag">Vacuum</span>
+      <span class="xc__tag">MODERATE</span>
+      <span class="xc__tag">Proposed (laboratory)</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>Casimir plates made of different materials should show slightly different force due to their different nuclear occlusion fractions.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: Casimir force depends only on plate geometry and dielectric properties.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Measure Casimir force between tungsten plates vs aluminium plates at identical gaps.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>AFM Casimir apparatus with interchangeable plates.</p></div>
+      <div class="xc__f"><h4>Scope</h4><p>Vacuum / Medium</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Electromagnetic" data-txt="e72 speed of light variation in dense media from lattice compression the refractive index of dense media arises from lattice compression by nuclear occlusion. measure c in extremely dense nuclear matter (neutron-rich nuclei). sdt predicts n from density.">
+    <div class="xc__bar">
+      <span class="xc__id">E72</span>
+      <span class="xc__t">Speed of Light Variation in Dense Media from Lattice Compression</span>
+      <span class="xc__tag">Electromagnetic</span>
+      <span class="xc__tag">HIGH</span>
+      <span class="xc__tag">Proposed (FAIR/RHIC)</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>The refractive index of dense media arises from lattice compression by nuclear occlusion.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: refractive index from electromagnetic polarisation of the medium.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Measure c in extremely dense nuclear matter (neutron-rich nuclei). SDT predicts n from density.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Heavy-ion collision experiments.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Electromagnetic" data-txt="e73 local speed of light measurement near dense object the local speed of light near a very dense object (neutron star, white dwarf) should be measurably different from c. measure timing of pulsar emission through different density environments.">
+    <div class="xc__bar">
+      <span class="xc__id">E73</span>
+      <span class="xc__t">Local Speed of Light Measurement Near Dense Object</span>
+      <span class="xc__tag">Electromagnetic</span>
+      <span class="xc__tag">LOW</span>
+      <span class="xc__tag">Archival analysis</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>The local speed of light near a very dense object (neutron star, white dwarf) should be measurably different from c.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: c is constant; what changes is the coordinate speed (time dilation).</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Measure timing of pulsar emission through different density environments.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Pulsar timing data.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Radiation" data-txt="e74 unruh effect as lattice asymmetry the unruh effect (accelerating observer sees thermal radiation) is lattice asymmetry: acceleration creates a differential relay rate. currently unmeasurable — requires a ~ 10²⁰ m/s².">
+    <div class="xc__bar">
+      <span class="xc__id">E74</span>
+      <span class="xc__t">Unruh Effect as Lattice Asymmetry</span>
+      <span class="xc__tag">Radiation</span>
+      <span class="xc__tag">IMPOSSIBLE</span>
+      <span class="xc__tag">Unmeasurable</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>The Unruh effect (accelerating observer sees thermal radiation) is lattice asymmetry: acceleration creates a differential relay rate.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: Unruh effect from Rindler horizon and Bogoliubov transformation.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Currently unmeasurable — requires a ~ 10²⁰ m/s².</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>None available.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Gravity" data-txt="e75 precision equivalence principle test at sub-μg level sdt predicts exact equivalence of inertial and gravitational mass because both measure v_disp. continue microscope-type experiments to higher precision.">
+    <div class="xc__bar">
+      <span class="xc__id">E75</span>
+      <span class="xc__t">Precision Equivalence Principle Test at Sub-μg Level</span>
+      <span class="xc__tag">Gravity</span>
+      <span class="xc__tag">HIGH</span>
+      <span class="xc__tag">Ongoing</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>SDT predicts exact equivalence of inertial and gravitational mass because both measure V_disp.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: equivalence principle is a postulate of GR, tested to 10⁻¹⁵.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Continue MICROSCOPE-type experiments to higher precision.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>MICROSCOPE satellite follow-on.</p></div>
+      <div class="xc__f"><h4>Scope</h4><p>Gravity / Occlusion</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Gravity" data-txt="e76 torsion balance gravitational constant measurement g is not fundamental — it is derived from g = c²r/(k²r) evaluated at laboratory scale. different lab environments may give slightly different g. measure g in underground laboratories vs mountaintop vs satellite. look for systematic environment dependence.">
+    <div class="xc__bar">
+      <span class="xc__id">E76</span>
+      <span class="xc__t">Torsion Balance Gravitational Constant Measurement</span>
+      <span class="xc__tag">Gravity</span>
+      <span class="xc__tag">MODERATE</span>
+      <span class="xc__tag">Proposed (laboratory)</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>G is not fundamental — it is derived from G = c²R/(k²r) evaluated at laboratory scale. Different lab environments may give slightly different G.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: G is a universal fundamental constant (6.674 × 10⁻¹¹).</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Measure G in underground laboratories vs mountaintop vs satellite. Look for systematic environment dependence.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Multiple torsion balance facilities.</p></div>
+      <div class="xc__f"><h4>Scope</h4><p>Gravity / Occlusion</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Electromagnetic" data-txt="e77 sagnac effect as lattice phase rotation the sagnac effect is lattice phase rotation: rotating platforms produce differential relay path lengths. already measured in ring laser gyroscopes. same prediction.">
+    <div class="xc__bar">
+      <span class="xc__id">E77</span>
+      <span class="xc__t">Sagnac Effect as Lattice Phase Rotation</span>
+      <span class="xc__tag">Electromagnetic</span>
+      <span class="xc__tag">TRIVIAL</span>
+      <span class="xc__tag">Validated</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>The Sagnac effect is lattice phase rotation: rotating platforms produce differential relay path lengths.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: Sagnac effect from rotating reference frame (consistent with SR).</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Already measured in ring laser gyroscopes. Same prediction.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Existing data.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Gravity" data-txt="e78 gravitational time dilation from lattice compression clocks run slower in gravitational fields because the lattice is compressed: relay cycles are shorter → fewer ticks per external second. already measured (hafele-keating, gps, pound-rebka). same prediction.">
+    <div class="xc__bar">
+      <span class="xc__id">E78</span>
+      <span class="xc__t">Gravitational Time Dilation from Lattice Compression</span>
+      <span class="xc__tag">Gravity</span>
+      <span class="xc__tag">TRIVIAL</span>
+      <span class="xc__tag">Validated</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>Clocks run slower in gravitational fields because the lattice is compressed: relay cycles are shorter → fewer ticks per external second.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: GR gravitational time dilation from spacetime curvature.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Already measured (Hafele-Keating, GPS, Pound-Rebka). Same prediction.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Existing data.</p></div>
+      <div class="xc__f"><h4>Scope</h4><p>Gravity / Occlusion</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Electromagnetic" data-txt="e79 pair production threshold from lattice energy budget pair production at 2 × 511 kev = 1.022 mev is lattice conversion: sufficient relay energy converts to two counter-rotating vortices. already measured. same prediction.">
+    <div class="xc__bar">
+      <span class="xc__id">E79</span>
+      <span class="xc__t">Pair Production Threshold from Lattice Energy Budget</span>
+      <span class="xc__tag">Electromagnetic</span>
+      <span class="xc__tag">TRIVIAL</span>
+      <span class="xc__tag">Validated</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>Pair production at 2 × 511 keV = 1.022 MeV is lattice conversion: sufficient relay energy converts to two counter-rotating vortices.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: pair production from energy-mass equivalence in EM field of a nucleus.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Already measured. Same prediction.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Existing data.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Electromagnetic" data-txt="e80 positron annihilation as vortex collision annihilation produces 2 × 511 kev photons because counter-rotating vortices cancel, releasing circulation energy to the lattice. already measured.">
+    <div class="xc__bar">
+      <span class="xc__id">E80</span>
+      <span class="xc__t">Positron Annihilation as Vortex Collision</span>
+      <span class="xc__tag">Electromagnetic</span>
+      <span class="xc__tag">TRIVIAL</span>
+      <span class="xc__tag">Validated</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>Annihilation produces 2 × 511 keV photons because counter-rotating vortices cancel, releasing circulation energy to the lattice.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: matter-antimatter annihilation.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Already measured.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Existing data.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Electromagnetic" data-txt="e81 electron diffraction from lattice scattering electron diffraction is lattice scattering: the electron vortex interacts with crystal lattice structure via pressure field coupling. already measured. same pattern.">
+    <div class="xc__bar">
+      <span class="xc__id">E81</span>
+      <span class="xc__t">Electron Diffraction from Lattice Scattering</span>
+      <span class="xc__tag">Electromagnetic</span>
+      <span class="xc__tag">TRIVIAL</span>
+      <span class="xc__tag">Validated</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>Electron diffraction is lattice scattering: the electron vortex interacts with crystal lattice structure via pressure field coupling.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: wave-particle duality — electron has de Broglie wavelength.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Already measured. Same pattern.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Existing data.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Nuclear Physics" data-txt="e82 time of flight neutrino mass test neutrinos travel at c (they are lattice distortions, not massive particles). any measured speed deficit is lattice dispersion, not rest mass. measure neutrino speed from next galactic supernova with sub-ns timing.">
+    <div class="xc__bar">
+      <span class="xc__id">E82</span>
+      <span class="xc__t">Time of Flight Neutrino Mass Test</span>
+      <span class="xc__tag">Nuclear Physics</span>
+      <span class="xc__tag">HIGH</span>
+      <span class="xc__tag">Awaiting nearby SN</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>Neutrinos travel at c (they are lattice distortions, not massive particles). Any measured speed deficit is lattice dispersion, not rest mass.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: neutrinos have small mass (&lt; 0.8 eV) and travel slightly below c.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Measure neutrino speed from next galactic supernova with sub-ns timing.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>IceCube + SN optical detection.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Vacuum" data-txt="e83 spation lattice resonance in quantum oscillator a mechanical oscillator at millikelvin temperatures should show quantised noise from the spation lattice thermal spectrum. measure mechanical oscillator noise spectrum at 10 mk.">
+    <div class="xc__bar">
+      <span class="xc__id">E83</span>
+      <span class="xc__t">Spation Lattice Resonance in Quantum Oscillator</span>
+      <span class="xc__tag">Vacuum</span>
+      <span class="xc__tag">MODERATE</span>
+      <span class="xc__tag">Proposed (laboratory)</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>A mechanical oscillator at millikelvin temperatures should show quantised noise from the spation lattice thermal spectrum.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: quantum ground state motion dominated by zero-point energy.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Measure mechanical oscillator noise spectrum at 10 mK.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>LIGO-style optomechanical oscillator.</p></div>
+      <div class="xc__f"><h4>Scope</h4><p>Vacuum / Medium</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Electromagnetic" data-txt="e84 aharonov-bohm as lattice phase shift the ab effect is a lattice phase shift caused by a vector potential modifying lattice relay phases. already measured. same prediction.">
+    <div class="xc__bar">
+      <span class="xc__id">E84</span>
+      <span class="xc__t">Aharonov-Bohm as Lattice Phase Shift</span>
+      <span class="xc__tag">Electromagnetic</span>
+      <span class="xc__tag">TRIVIAL</span>
+      <span class="xc__tag">Validated</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>The AB effect is a lattice phase shift caused by a vector potential modifying lattice relay phases.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: AB effect from EM vector potential coupling to electron wavefunction.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Already measured. Same prediction.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Existing data.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Electromagnetic" data-txt="e85 josephson junction frequency from lattice phase coupling the josephson frequency f = 2ev/h arises from lattice phase coupling across the superconducting gap. already measured. defines the volt.">
+    <div class="xc__bar">
+      <span class="xc__id">E85</span>
+      <span class="xc__t">Josephson Junction Frequency from Lattice Phase Coupling</span>
+      <span class="xc__tag">Electromagnetic</span>
+      <span class="xc__tag">TRIVIAL</span>
+      <span class="xc__tag">Validated</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>The Josephson frequency f = 2eV/h arises from lattice phase coupling across the superconducting gap.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: Josephson effect from macroscopic quantum coherence.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Already measured. Defines the volt.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Existing data.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Electromagnetic" data-txt="e86 quantum hall effect from lattice topology quantised hall conductance (e²/h per landau level) emerges from topological constraints in the 2d lattice. already measured. defines resistance.">
+    <div class="xc__bar">
+      <span class="xc__id">E86</span>
+      <span class="xc__t">Quantum Hall Effect from Lattice Topology</span>
+      <span class="xc__tag">Electromagnetic</span>
+      <span class="xc__tag">TRIVIAL</span>
+      <span class="xc__tag">Validated</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>Quantised Hall conductance (e²/h per Landau level) emerges from topological constraints in the 2D lattice.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: Landau quantisation + topological invariant.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Already measured. Defines resistance.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Existing data.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Electromagnetic" data-txt="e87 vacuum birefringence from lattice anisotropy strong magnetic fields produce vacuum birefringence because the field creates anisotropy in the lattice relay rates. measure polarisation of x-rays from magnetar sgr 1806-20.">
+    <div class="xc__bar">
+      <span class="xc__id">E87</span>
+      <span class="xc__t">Vacuum Birefringence from Lattice Anisotropy</span>
+      <span class="xc__tag">Electromagnetic</span>
+      <span class="xc__tag">HIGH</span>
+      <span class="xc__tag">Proposed (satellite)</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>Strong magnetic fields produce vacuum birefringence because the field creates anisotropy in the lattice relay rates.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: QED vacuum birefringence from virtual pair loops.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Measure polarisation of X-rays from magnetar SGR 1806-20.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>X-ray polarimeter (IXPE satellite).</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Electromagnetic" data-txt="e88 schwinger pair production from lattice breakdown schwinger pair production (e &gt; 1.3 × 10¹⁸ v/m) is lattice dielectric breakdown — the field exceeds the lattice's relay capacity. measure pair production threshold at extreme field intensities (eli facility).">
+    <div class="xc__bar">
+      <span class="xc__id">E88</span>
+      <span class="xc__t">Schwinger Pair Production from Lattice Breakdown</span>
+      <span class="xc__tag">Electromagnetic</span>
+      <span class="xc__tag">HIGH</span>
+      <span class="xc__tag">Proposed (ELI-NP)</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>Schwinger pair production (E &gt; 1.3 × 10¹⁸ V/m) is lattice dielectric breakdown — the field exceeds the lattice's relay capacity.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: pair creation from strong-field QED.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Measure pair production threshold at extreme field intensities (ELI facility).</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>ELI-NP (Romania) petawatt lasers.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Electromagnetic" data-txt="e89 bremsstrahlung from lattice deceleration radiation bremsstrahlung is lattice deceleration radiation: when a vortex decelerates, it releases circulation energy to the lattice as em radiation. already measured extensively.">
+    <div class="xc__bar">
+      <span class="xc__id">E89</span>
+      <span class="xc__t">Bremsstrahlung from Lattice Deceleration Radiation</span>
+      <span class="xc__tag">Electromagnetic</span>
+      <span class="xc__tag">TRIVIAL</span>
+      <span class="xc__tag">Validated</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>Bremsstrahlung is lattice deceleration radiation: when a vortex decelerates, it releases circulation energy to the lattice as EM radiation.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: classical EM radiation from accelerated charges.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Already measured extensively.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Existing data.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Cosmology" data-txt="e90 cosmic ray ultra-high energy cutoff (gzk) from lattice limit the gzk cutoff (~5 × 10¹⁹ ev) is the lattice energy density limit — above this, the vortex exceeds the lattice relay capacity. already measured by auger observatory.">
+    <div class="xc__bar">
+      <span class="xc__id">E90</span>
+      <span class="xc__t">Cosmic Ray Ultra-High Energy Cutoff (GZK) from Lattice Limit</span>
+      <span class="xc__tag">Cosmology</span>
+      <span class="xc__tag">TRIVIAL</span>
+      <span class="xc__tag">Validated</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>The GZK cutoff (~5 × 10¹⁹ eV) is the lattice energy density limit — above this, the vortex exceeds the lattice relay capacity.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: GZK cutoff from pion photoproduction on CMB.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Already measured by Auger Observatory.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Pierre Auger Observatory data.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Electromagnetic" data-txt="e91 muon anomalous magnetic moment (g-2) from lattice corrections the muon g-2 anomaly (~4.2σ from theory) arises from lattice corrections that differ at the muon mass scale. compare sdt lattice g-2 prediction to fermilab measurement.">
+    <div class="xc__bar">
+      <span class="xc__id">E91</span>
+      <span class="xc__t">Muon Anomalous Magnetic Moment (g-2) from Lattice Corrections</span>
+      <span class="xc__tag">Electromagnetic</span>
+      <span class="xc__tag">HIGH</span>
+      <span class="xc__tag">Calculable now</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>The muon g-2 anomaly (~4.2σ from theory) arises from lattice corrections that differ at the muon mass scale.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: hadronic vacuum polarisation uncertainty.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Compare SDT lattice g-2 prediction to Fermilab measurement.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Fermilab g-2 data.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Engineering" data-txt="e92 convergence-assisted propulsion: solar sail enhancement a sail designed to reflect convergent pressure (not just photon pressure) should experience enhanced thrust. deploy a solar sail with convergence-optimised surface (dense, reflective) and compare thrust to photon-pressure predictions.">
+    <div class="xc__bar">
+      <span class="xc__id">E92</span>
+      <span class="xc__t">Convergence-Assisted Propulsion: Solar Sail Enhancement</span>
+      <span class="xc__tag">Engineering</span>
+      <span class="xc__tag">HIGH</span>
+      <span class="xc__tag">Proposed (space mission)</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>A sail designed to reflect convergent pressure (not just photon pressure) should experience enhanced thrust.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: solar sail thrust = radiation pressure only.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Deploy a solar sail with convergence-optimised surface (dense, reflective) and compare thrust to photon-pressure predictions.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Solar sail spacecraft (JAXA/NASA heritage).</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Electromagnetic" data-txt="e93 lattice waveguide: vacuum waveguide effect a hollow tube in vacuum should guide electromagnetic waves differently from free-space propagation due to lattice boundary effects. measure waveguide cutoff frequencies at extreme precision in vacuum.">
+    <div class="xc__bar">
+      <span class="xc__id">E93</span>
+      <span class="xc__t">Lattice Waveguide: Vacuum Waveguide Effect</span>
+      <span class="xc__tag">Electromagnetic</span>
+      <span class="xc__tag">MODERATE</span>
+      <span class="xc__tag">Proposed (laboratory)</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>A hollow tube in vacuum should guide electromagnetic waves differently from free-space propagation due to lattice boundary effects.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: waveguide theory from boundary conditions on EM fields.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Measure waveguide cutoff frequencies at extreme precision in vacuum.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Microwave/mm-wave waveguide in vacuum.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Gravity" data-txt="e94 convergence lens: focusing convergent pressure with dense matter a very dense sphere should focus convergent pressure, creating a measurable gravity enhancement on its far side. measure gravitational acceleration on the far side of a dense sphere (pb or w, 1 m radius) with sub-μg accelerometer.">
+    <div class="xc__bar">
+      <span class="xc__id">E94</span>
+      <span class="xc__t">Convergence Lens: Focusing Convergent Pressure with Dense Matter</span>
+      <span class="xc__tag">Gravity</span>
+      <span class="xc__tag">HIGH</span>
+      <span class="xc__tag">Proposed (laboratory)</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>A very dense sphere should focus convergent pressure, creating a measurable gravity enhancement on its far side.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: no such effect — gravity is not focusable.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Measure gravitational acceleration on the far side of a dense sphere (Pb or W, 1 m radius) with sub-μg accelerometer.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>1 m radius lead sphere, MEMS accelerometer.</p></div>
+      <div class="xc__f"><h4>Scope</h4><p>Gravity / Occlusion</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Engineering" data-txt="e95 lattice communication: information transfer through vacuum coherent information can be transferred through vacuum at frequencies above the em spectrum via lattice mode coupling. attempt to modulate and detect non-em lattice modes using casimir-coupled piezoelectric transducers.">
+    <div class="xc__bar">
+      <span class="xc__id">E95</span>
+      <span class="xc__t">Lattice Communication: Information Transfer Through Vacuum</span>
+      <span class="xc__tag">Engineering</span>
+      <span class="xc__tag">EXTREME</span>
+      <span class="xc__tag">Proposed (laboratory)</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>Coherent information can be transferred through vacuum at frequencies above the EM spectrum via lattice mode coupling.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: impossible — no medium for transmission above EM.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Attempt to modulate and detect non-EM lattice modes using Casimir-coupled piezoelectric transducers.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Casimir transducer pairs in UHV.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Engineering" data-txt="e96 artificial gravity from convergence focusing convergence focusing can create localised gravitational fields without rotation. computational feasibility study first. required mass would likely be planetary-scale.">
+    <div class="xc__bar">
+      <span class="xc__id">E96</span>
+      <span class="xc__t">Artificial Gravity from Convergence Focusing</span>
+      <span class="xc__tag">Engineering</span>
+      <span class="xc__tag">EXTREME</span>
+      <span class="xc__tag">Computational feasibility</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>Convergence focusing can create localised gravitational fields without rotation.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: no way to create artificial gravity except rotation or acceleration.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Computational feasibility study first. Required mass would likely be planetary-scale.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Computational.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Gravity" data-txt="e97 earth core seismic speed from lattice compression the entire interior profile — g(r), p(r), v_p(r), v_s(r) — follows from ϟ and the measured density profile. no material bulk modulus is used as a gravitational input. k₀ values are measured mineral properties (diamond anvil cell), not fitted parameters. compare sdt-derived profiles to prem (dziewonski &amp; anderson 1981) at 25 depth points from surface to centre.">
+    <div class="xc__bar">
+      <span class="xc__id">E97</span>
+      <span class="xc__t">Earth Core Seismic Speed from Lattice Compression</span>
+      <span class="xc__tag">Gravity</span>
+      <span class="xc__tag">LOW</span>
+      <span class="xc__tag">PARTIAL — g(r) 1.82% RMS; seismic-velocity target FAILED its gate (v_p 11.5%, v_s 28.0% RMS)</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>The entire interior profile — g(r), P(r), v_p(r), v_s(r) — follows from ϟ and the measured density profile. NO material bulk modulus is used as a gravitational input. K₀ values are measured mineral properties (diamond anvil cell), not fitted parameters.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard seismology derives wave speeds from material properties: v_p = √((K + 4G/3)/ρ), with K and G from high-pressure experiments. Gravity profile uses G × M_enc(r)/r². Both approaches require the gravitational constant G and total mass M as inputs.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Compare SDT-derived profiles to PREM (Dziewonski &amp; Anderson 1981) at 25 depth points from surface to centre.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>- PREM density polynomial coefficients (archival) - Diamond anvil cell mineral moduli K₀, G₀ (archival) - SDT Engine: laws.hpp bridge::koppa(), bridge::g_surface()</p></div>
+      <div class="xc__f"><h4>Scope</h4><p>Gravity / Occlusion</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Gravity" data-txt="e98 precision cavendish with variable chamber pressure the cavendish experiment should show a measurable difference at different chamber gas pressures because the gas contributes to local convergence. measure g in vacuum vs 1 atm vs 100 atm.">
+    <div class="xc__bar">
+      <span class="xc__id">E98</span>
+      <span class="xc__t">Precision Cavendish with Variable Chamber Pressure</span>
+      <span class="xc__tag">Gravity</span>
+      <span class="xc__tag">MODERATE</span>
+      <span class="xc__tag">Proposed (laboratory)</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>The Cavendish experiment should show a measurable difference at different chamber gas pressures because the gas contributes to local convergence.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: G is independent of chamber atmosphere.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Measure G in vacuum vs 1 atm vs 100 atm.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>High-pressure torsion balance chamber.</p></div>
+      <div class="xc__f"><h4>Scope</h4><p>Gravity / Occlusion</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Gravity" data-txt="e99 ocean tidal analysis: sdt pressure vs newton potential tidal forces arise from convergence gradient differentials, not gravitational potential gradients. sdt predicts subtle higher-order tidal harmonics. analyse high-precision ocean tide gauge data for sdt-predicted higher harmonics.">
+    <div class="xc__bar">
+      <span class="xc__id">E99</span>
+      <span class="xc__t">Ocean Tidal Analysis: SDT Pressure vs Newton Potential</span>
+      <span class="xc__tag">Gravity</span>
+      <span class="xc__tag">LOW</span>
+      <span class="xc__tag">Archival analysis</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>Tidal forces arise from convergence gradient differentials, not gravitational potential gradients. SDT predicts subtle higher-order tidal harmonics.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: tidal forces from gravitational potential gradient.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Analyse high-precision ocean tide gauge data for SDT-predicted higher harmonics.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Global tide gauge network (UHSLC).</p></div>
+      <div class="xc__f"><h4>Scope</h4><p>Gravity / Occlusion</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Electromagnetic" data-txt="e100 lattice dispersion relation: frequency-dependent c at extremely high frequencies (approaching planck frequency), c should show dispersion due to lattice granularity. measure arrival time differences of high- vs low-energy photons from grbs.">
+    <div class="xc__bar">
+      <span class="xc__id">E100</span>
+      <span class="xc__t">Lattice Dispersion Relation: Frequency-Dependent c</span>
+      <span class="xc__tag">Electromagnetic</span>
+      <span class="xc__tag">LOW</span>
+      <span class="xc__tag">Archival analysis</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>At extremely high frequencies (approaching Planck frequency), c should show dispersion due to lattice granularity.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: c is frequency-independent in vacuum (Lorentz invariance).</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Measure arrival time differences of high- vs low-energy photons from GRBs.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Fermi-LAT, CTA.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Cosmology" data-txt="e101 complete convergence budget of the solar system the total convergence budget of the solar system (sun + planets) should balance against the cmb influx, with stars as recyclers. calculate the total solar convergence budget from the k-hierarchy and compare to l_sun.">
+    <div class="xc__bar">
+      <span class="xc__id">E101</span>
+      <span class="xc__t">Complete Convergence Budget of the Solar System</span>
+      <span class="xc__tag">Cosmology</span>
+      <span class="xc__tag">MODERATE</span>
+      <span class="xc__tag">Calculable now</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>The total convergence budget of the solar system (Sun + planets) should balance against the CMB influx, with stars as recyclers.</p></div>
+      <div class="xc__f xc__f--std"><h4>Standard physics predicts</h4><p>Standard: no such conservation law exists.</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Calculate the total solar convergence budget from the k-hierarchy and compare to L_Sun.</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>Computational.</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Convergence Depth" data-txt="e102 orbital emitter depth-gradient test (the sundiver spectrometer)  ">
+    <div class="xc__bar">
+      <span class="xc__id">E102</span>
+      <span class="xc__t">Orbital Emitter Depth-Gradient Test (the Sundiver Spectrometer)</span>
+      <span class="xc__tag">Convergence Depth</span>
+      <span class="xc__tag">FEASIBLE NOW (existing trajectories + a calibrated emitter)</span>
+      <span class="xc__tag">Proposed — falsifiable, with a daily-confirmed calibration anchor</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f"><h4>Apparatus</h4><p>1. A calibrated atomic-line emitter (the key element — James's point): a frequency-stabilised reference source (astro-comb / cavity-locked laser or a trapped-ion clock line) flown on the descending probe. It defines the &quot;same emitted pulse everywhere&quot; boundary condition the theory assumes. 2. A reference spectrometer…</p></div>
+      <div class="xc__f"><h4>Scope</h4><p>Convergence Depth / Variable Spation Closure</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Unclassified" data-txt="e103 lead sphere displacement field: directional gas tube array &amp; vacuum persistence test  ">
+    <div class="xc__bar">
+      <span class="xc__id">E103</span>
+      <span class="xc__t">Lead Sphere Displacement Field: Directional Gas Tube Array &amp; Vacuum Persistence Test</span>
+      <span class="xc__tag">Unclassified</span>
+    </div>
+    <div class="xc__body">
+    </div>
+  </article>
+  <article class="xc" data-cat="Gravity" data-txt="e104 space-balloon-gondola casimir/cavendish hybrid let the overhead atmospheric column (and earth-limb geometry) set a small, altitude-dependent occlusion fraction δ(h) of the downward convergent budget. sdt (gom13) predicts a fractional change in the apparent cavendish coupling: and — because the same p_eff sets the casimir pressure — a correlated fractional change… the single discriminating number is the cross-channel correlation of the two residuals (after removing the known g(h) and d⁴, t dependences): | quantity | sm | sdt | |---|---|---| | δf_cas/f_cas vs altitude/pointing | 0 (within noise) | tracks δg_app/g | | ρ(f_cas residual, g_app residual) | 0 | +1 (same p_eff) | |…">
+    <div class="xc__bar">
+      <span class="xc__id">E104</span>
+      <span class="xc__t">Space-Balloon-Gondola Casimir/Cavendish Hybrid</span>
+      <span class="xc__tag">Gravity</span>
+      <span class="xc__tag">HIGH (stratospheric balloon payload; existing components)</span>
+      <span class="xc__tag">Proposed — falsifiable, single-platform correlation test</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>Let the overhead atmospheric column (and Earth-limb geometry) set a small, altitude-dependent occlusion fraction δ(h) of the downward convergent budget. SDT (GOM13) predicts a fractional change in the apparent Cavendish coupling: and — because the same P_eff sets the Casimir pressure — a correlated fractional change…</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>The single discriminating number is the cross-channel correlation of the two residuals (after removing the known g(h) and d⁴, T dependences): | Quantity | SM | SDT | |---|---|---| | ΔF_Cas/F_Cas vs altitude/pointing | 0 (within noise) | tracks ΔG_app/G | | ρ(F_Cas residual, G_app residual) | 0 | +1 (same P_eff) | |…</p></div>
+      <div class="xc__f"><h4>Scope</h4><p>Gravity / Occlusion · Vacuum / Medium (unified occlusion test)</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Orbital Mechanics" data-txt="e105 sungrazer occlusion-saturation terminal kick  track sungrazers through perihelion and fit the radial velocity residual δv(r) = v_obs(r) − v_kepler(r): - sdt: δv(r) follows the universal g(x) curve — same shape for every comet, scaling only with r☉ — peaking as a +6.8% terminal excess concentrated inside 1.5 r☉. - sm: δv(r) is zero in the mean; any scatter is…">
+    <div class="xc__bar">
+      <span class="xc__id">E105</span>
+      <span class="xc__t">Sungrazer Occlusion-Saturation Terminal Kick</span>
+      <span class="xc__tag">Orbital Mechanics</span>
+      <span class="xc__tag">LOW (archival tracking) → MODERATE (dedicated tracker)</span>
+      <span class="xc__tag">Proposed — falsifiable on existing SOHO/Parker data</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f"><h4>Observable that separates them</h4><p>Track sungrazers through perihelion and fit the radial velocity residual Δv(r) = v_obs(r) − v_Kepler(r): - SDT: Δv(r) follows the universal G(x) curve — same shape for every comet, scaling only with R☉ — peaking as a +6.8% terminal excess concentrated inside 1.5 R☉. - SM: Δv(r) is zero in the mean; any scatter is…</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>- Archival: SOHO/LASCO C2/C3 astrometry of Kreutz-group sungrazers (thousands catalogued); STEREO; SDO for the deepest divers. Re-reduce positions → fit v(r). - In-situ opportunity: Parker Solar Probe perihelion passes (0.046 AU, ~10 R☉) carry exquisite trajectory metrology — a non-outgassing spacecraft is the clean…</p></div>
+      <div class="xc__f"><h4>Scope</h4><p>Orbital Mechanics / Gravity (occlusion saturation)</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Unclassified" data-txt="e105 pre-registration (method a, the strict front)  ">
+    <div class="xc__bar">
+      <span class="xc__id">E105</span>
+      <span class="xc__t">PRE-REGISTRATION (Method A, the strict front)</span>
+      <span class="xc__tag">Unclassified</span>
+    </div>
+    <div class="xc__body">
+    </div>
+  </article>
+  <article class="xc" data-cat="Convergence Depth" data-txt="e106 oort-cloud lumiostasis — suspension at the lumiopause - a kinematic floor near r_lp: objects in the outer oort band have characteristic speeds below the keplerian prediction v_k = √(gm☉/r) — trending toward suspension (low, isotropic residual motion) rather than the 1/√r falloff continued from the planetary region. - a clustering of aphelia / semi-major-axis pile-up near… from the orbital catalogue of distant solar-system bodies (semi-major axis, perihelion, aphelion, velocity vectors): | signature | sm | sdt | |---|---|---| | v(r) near 20,000 au | continues v_k ∝ 1/√r | falls below v_k, → suspension | | feature at r_lp ≈ 20,857 au | none (smooth tidal rollover) | depth-equilibrium…">
+    <div class="xc__bar">
+      <span class="xc__id">E106</span>
+      <span class="xc__t">Oort-Cloud Lumiostasis — Suspension at the Lumiopause</span>
+      <span class="xc__tag">Convergence Depth</span>
+      <span class="xc__tag">LOW (archival kinematics) → HIGH (deep-space confirmation)</span>
+      <span class="xc__tag">Proposed — falsifiable on distant-object orbital statistics</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>- A kinematic floor near r_LP: objects in the outer Oort band have characteristic speeds below the Keplerian prediction v_K = √(GM☉/r) — trending toward suspension (low, isotropic residual motion) rather than the 1/√r falloff continued from the planetary region. - A clustering of aphelia / semi-major-axis pile-up near…</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>From the orbital catalogue of distant solar-system bodies (semi-major axis, perihelion, aphelion, velocity vectors): | Signature | SM | SDT | |---|---|---| | v(r) near 20,000 AU | continues v_K ∝ 1/√r | falls below v_K, → suspension | | feature at r_LP ≈ 20,857 AU | none (smooth tidal rollover) | depth-equilibrium…</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>- Archival now: JPL Horizons / Minor Planet Center orbits of extreme TNOs and long-period comets; statistical test for a velocity floor and aphelion pile-up at ~r_LP. (Small-N and observational bias toward perihelion passages are the main caveats — handle with a forward-modelled selection function.) - Near future:…</p></div>
+      <div class="xc__f"><h4>Scope</h4><p>Convergence Depth / Orbital Mechanics</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Convergence Depth" data-txt="e107 reflected-light gravitational-redshift fork  | channel | sdt | gr | verdict value | |---|---|---|---| | reflected sunlight (jupiter, venus) | flat | flat | confirms reflector silence (degenerate) | | jupiter h₃⁺ self-emission 3.4–4 µm | +6.6 m/s | +3.7 m/s | the fork — ~1.8× split | | depth scaling venus vs jupiter | own-well, not sun's-well | own-well |…">
+    <div class="xc__bar">
+      <span class="xc__id">E107</span>
+      <span class="xc__t">Reflected-Light Gravitational-Redshift Fork</span>
+      <span class="xc__tag">Convergence Depth</span>
+      <span class="xc__tag">MODERATE (existing high-resolution spectroscopy)</span>
+      <span class="xc__tag">Proposed — falsifiable, ontology-discriminating</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f"><h4>Observable that separates them</h4><p>| Channel | SDT | GR | Verdict value | |---|---|---|---| | Reflected sunlight (Jupiter, Venus) | flat | flat | confirms reflector silence (degenerate) | | Jupiter H₃⁺ self-emission 3.4–4 µm | +6.6 m/s | +3.7 m/s | the fork — ~1.8× split | | Depth scaling Venus vs Jupiter | own-well, not Sun's-well | own-well |…</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>- Self-emission: high-resolution L-band (3–4 µm) spectroscopy of Jovian H₃⁺ aurorae — VLT/CRIRES+, Keck/NIRSPEC, or JWST/NIRSpec — with an absolute wavelength solution good to ≈ 1 m/s (telluric/comb calibration). Compare the measured emission redshift against both predictions. - Reflected (control): existing…</p></div>
+      <div class="xc__f"><h4>Scope</h4><p>Convergence Depth / Variable Closure</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Cosmology" data-txt="e108 galactic-floor redshift — the universal c-deficit - a universal additive redshift floor z_gal ≈ 3.51×10⁻⁷ (≈ 105 m/s) on all spectra of sources that share the sun's galactic depth — isotropic, the same in every sky direction, independent of the source's local environment. - depth-gradient across the galaxy: sources at different galactocentric radii r sit at different… the signal is not a single line shift (degenerate with a velocity zero-point) but the pattern: | signature | sm | sdt | |---|---|---| | common additive offset on all spectra | absorbable zero-point | absolute +105 m/s floor | | variation with galactocentric depth m(&lt;r)/r | none (gauge) | monotonic gradient | |…">
+    <div class="xc__bar">
+      <span class="xc__id">E108</span>
+      <span class="xc__t">Galactic-Floor Redshift — the Universal c-Deficit</span>
+      <span class="xc__tag">Cosmology</span>
+      <span class="xc__tag">HIGH (frontier metrology) — but a clean SDT-only signal</span>
+      <span class="xc__tag">Proposed — discriminating, no GR/ΛCDM counterpart</span>
+    </div>
+    <div class="xc__body">
+      <div class="xc__f xc__f--sdt"><h4>SDT predicts</h4><p>- A universal additive redshift floor z_gal ≈ 3.51×10⁻⁷ (≈ 105 m/s) on all spectra of sources that share the Sun's Galactic depth — isotropic, the same in every sky direction, independent of the source's local environment. - Depth-gradient across the Galaxy: sources at different Galactocentric radii R sit at different…</p></div>
+      <div class="xc__f"><h4>Observable that separates them</h4><p>The signal is not a single line shift (degenerate with a velocity zero-point) but the pattern: | Signature | SM | SDT | |---|---|---| | common additive offset on all spectra | absorbable zero-point | absolute +105 m/s floor | | variation with Galactocentric depth M(&lt;R)/R | none (gauge) | monotonic gradient | |…</p></div>
+      <div class="xc__f"><h4>Apparatus</h4><p>- Stellar gravitational-redshift surveys: precision absolute redshifts of large stellar samples (Gaia RVS, APOGEE, Gaia-ESO) where the own-well term is modelled from each star's M, R; the residual is tested for a common floor and a Galactocentric-depth trend. Solar/asteroid-reflection ground-truth fixes the local…</p></div>
+      <div class="xc__f"><h4>Scope</h4><p>Cosmology / Convergence Depth</p></div>
+    </div>
+  </article>
+  <article class="xc" data-cat="Unclassified" data-txt="e109 the solar spectral prism  ">
+    <div class="xc__bar">
+      <span class="xc__id">E109</span>
+      <span class="xc__t">The Solar Spectral Prism</span>
+      <span class="xc__tag">Unclassified</span>
+    </div>
+    <div class="xc__body">
+    </div>
+  </article>
+  </div>
+</main>
+<script>
+(function(){
+  var list = document.getElementById("xpList");
+  var cards = Array.prototype.slice.call(list.querySelectorAll(".xc"));
+  var cnt = document.getElementById("xpCount");
+  var cat = "*", q = "";
+  cards.forEach(function(c){
+    c.querySelector(".xc__bar").addEventListener("click", function(){ c.classList.toggle("open"); });
+  });
+  function apply(){
+    var n = 0;
+    cards.forEach(function(c){
+      var okc = (cat === "*") || (c.getAttribute("data-cat") === cat);
+      var okq = !q || c.getAttribute("data-txt").indexOf(q) !== -1;
+      var show = okc && okq;
+      c.style.display = show ? "" : "none";
+      if (show) n++;
+    });
+    cnt.textContent = n + " shown";
+  }
+  document.getElementById("xpFilters").addEventListener("click", function(e){
+    var b = e.target.closest("button[data-cat]");
+    if (!b) return;
+    cat = b.getAttribute("data-cat");
+    this.querySelectorAll("button[data-cat]").forEach(function(x){
+      x.setAttribute("aria-pressed", String(x === b));
+    });
+    apply();
+  });
+  document.getElementById("xpSearch").addEventListener("input", function(){
+    q = this.value.toLowerCase().trim(); apply();
+  });
+})();
+</scr
+<link rel="stylesheet" href="sdt-shell.css">
+<script src="sdt-shell.js" defer></scr
+</body>
+</html>

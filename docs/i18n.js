@@ -29,17 +29,16 @@
   var DICT=window.SDT_I18N||{};
 
   var CSS = ''+
-  '.i18n-burger{position:fixed;top:12px;right:16px;z-index:2000;width:40px;height:40px;'+
-    'background:rgba(245,240,232,0.82);-webkit-backdrop-filter:blur(9px);backdrop-filter:blur(9px);'+
+  /* labelled button (Harvey 2026-07-30: no hamburger — say the word) */
+  '.i18n-burger{position:fixed;top:12px;right:16px;z-index:2000;height:36px;padding:0 14px;'+
+    'background:rgba(245,240,232,0.86);-webkit-backdrop-filter:blur(9px);backdrop-filter:blur(9px);'+
     'border:1px solid rgba(176,116,48,0.35);border-radius:10px;cursor:pointer;display:flex;'+
-    'flex-direction:column;align-items:center;justify-content:center;gap:4.5px;'+
+    'align-items:center;gap:7px;font-family:"JetBrains Mono",monospace;font-size:11px;'+
+    'letter-spacing:.16em;text-transform:uppercase;color:#b07430;'+
     'transition:border-color .25s,box-shadow .25s;box-shadow:0 2px 14px rgba(30,28,24,0.10);}'+
   '.i18n-burger:hover{border-color:#b07430;box-shadow:0 3px 18px rgba(176,116,48,0.18);}'+
-  '.i18n-burger span{display:block;width:19px;height:1.7px;background:#b07430;border-radius:2px;'+
-    'transition:transform .3s cubic-bezier(.16,1,.3,1),opacity .2s;}'+
-  '.i18n-burger.open span:nth-child(1){transform:translateY(6.2px) rotate(45deg);}'+
-  '.i18n-burger.open span:nth-child(2){opacity:0;}'+
-  '.i18n-burger.open span:nth-child(3){transform:translateY(-6.2px) rotate(-45deg);}'+
+  '.i18n-burger .i18n-chev{font-size:9px;transition:transform .3s cubic-bezier(.16,1,.3,1);}'+
+  '.i18n-burger.open .i18n-chev{transform:rotate(180deg);}'+
   '.i18n-panel{position:fixed;top:60px;right:16px;z-index:2000;width:210px;max-height:76vh;overflow-y:auto;'+
     'background:rgba(250,246,239,0.98);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);'+
     'border:1px solid rgba(176,116,48,0.28);border-radius:13px;box-shadow:0 14px 44px rgba(30,28,24,0.20);'+
@@ -69,7 +68,7 @@
   var burger=document.createElement('button');
   burger.className='i18n-burger'; burger.type='button';
   burger.setAttribute('aria-label','Language menu · Sprache · שפה');
-  burger.innerHTML='<span></span><span></span><span></span>';
+  burger.innerHTML='Language <span class="i18n-chev">▾</span>';
   var panel=document.createElement('div'); panel.className='i18n-panel';
   var html='<div class="i18n-hd">Language · Sprache · 言語</div><div class="i18n-langs">';
   for(var i=0;i<LANGS.length;i++) html+='<button type="button" data-lang="'+LANGS[i].code+'"><span>'+LANGS[i].label+'</span><span class="tick">✓</span></button>';

@@ -1,0 +1,2081 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Paradox Census · Every Contradiction and the Premise That Made It — SDT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+/* ══════════════════════════════════════════════════════════════════════════
+   THE PARADOX CENSUS — narrative scrollthrough
+   J. C. Harvey, Melbourne. Companion to Audits/PARADOX_CENSUS.md
+   Continuous scroll: nothing snaps, nothing hops. One rAF loop drives a
+   smoothed scroll value; every layer reads it at its own depth.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+html{scroll-behavior:auto}
+body{background:var(--cream);overflow-x:hidden}
+
+:root{
+  --pcw: min(60rem, calc(100vw - 3rem));
+  --th:#8a8478; --th-soft:rgba(138,132,120,.10); --th-ink:#4a463f;
+}
+@media(min-width:1081px){ :root{ --pcw: min(60rem, calc(100vw - 30rem)) } }
+
+/* ── per-theory colour + its one design element ────────────────────────── */
+[data-th="sr"]  {--th:#3f6b86;--th-soft:rgba(63,107,134,.11);--th-ink:#2b4a5e}
+[data-th="gr"]  {--th:#6a4c9c;--th-soft:rgba(106,76,156,.11);--th-ink:#4a3470}
+[data-th="qm"]  {--th:#14807a;--th-soft:rgba(20,128,122,.11);--th-ink:#0d5a56}
+[data-th="sm"]  {--th:#b4432c;--th-soft:rgba(180,67,44,.10);--th-ink:#7e2e1e}
+[data-th="st"]  {--th:#a03a72;--th-soft:rgba(160,58,114,.10);--th-ink:#722851}
+[data-th="mo"]  {--th:#937512;--th-soft:rgba(147,117,18,.12);--th-ink:#68520c}
+[data-th="lc"]  {--th:#24417e;--th-soft:rgba(36,65,126,.10);--th-ink:#1a2f5c}
+[data-th="sdt"] {--th:#b07430;--th-soft:rgba(176,116,48,.12);--th-ink:#7d5220}
+
+/* ── the field: one fixed canvas, cross-fading the active motif ────────── */
+#field{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.pagewrap{position:relative;z-index:1}
+
+/* ── bottom drive bar ──────────────────────────────────────────────────── */
+.drive{position:fixed;left:50%;transform:translateX(-50%);bottom:14px;z-index:120;
+  width:var(--pcw);max-width:60rem;display:flex;align-items:center;gap:.55rem;
+  padding:.45rem .6rem;border:1px solid var(--paper-edge);border-radius:6px;
+  background:rgba(250,246,239,.90);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  box-shadow:0 4px 22px rgba(30,28,24,.10)}
+.drive button{font:inherit;border:1px solid var(--paper-edge);background:#fff;cursor:pointer;
+  border-radius:4px;color:var(--ink-muted);font-family:'JetBrains Mono',monospace;
+  font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;padding:.3rem .55rem;
+  transition:background .2s,color .2s,border-color .2s}
+.drive button:hover{border-color:var(--th);color:var(--th)}
+.drive button[aria-pressed="true"]{background:var(--th);border-color:var(--th);color:#fff}
+.ticks{display:flex;gap:3px;flex:1;min-width:0}
+.tick{flex:1;height:14px;position:relative;cursor:pointer;background:none;border:0;padding:0}
+.tick i{display:block;height:3px;margin-top:5px;border-radius:2px;background:var(--paper-edge);
+  transition:background .35s,height .35s,margin-top .35s}
+.tick[data-on="1"] i{background:var(--tc);height:5px;margin-top:4px}
+.tick:hover i{background:var(--tc)}
+.tick b{position:absolute;bottom:20px;left:50%;transform:translateX(-50%) translateY(4px);
+  font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;
+  white-space:nowrap;color:var(--tc);background:rgba(250,246,239,.95);border:1px solid var(--paper-edge);
+  border-radius:3px;padding:2px 6px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s}
+.tick:hover b{opacity:1;transform:translateX(-50%) translateY(0)}
+.drive .pct{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--ink-faint);
+  min-width:3.1em;text-align:right}
+@media(max-width:600px){.drive{width:calc(100vw - 1.2rem);bottom:8px}.drive .pct{display:none}}
+
+/* ── generic rhythm ────────────────────────────────────────────────────── */
+.act{position:relative;padding:var(--sp-2xl) 0 var(--sp-3xl)}
+.act__rule{width:var(--pcw);margin:0 auto var(--sp-xl);height:1px;background:
+  linear-gradient(90deg,transparent,var(--th) 12%,var(--th) 88%,transparent);opacity:.5}
+.wrap{width:var(--pcw);margin:0 auto}
+.fade{opacity:var(--in,1);transform:translateY(calc((1 - var(--in,1)) * 22px));will-change:opacity,transform}
+
+.act__head{width:var(--pcw);margin:0 auto var(--sp-xl);display:flex;gap:1.1rem;align-items:flex-start}
+.sigil{flex:0 0 auto;width:64px;height:64px;border:1px solid var(--th);border-radius:5px;
+  background:var(--th-soft)}
+.act__head h2{font-family:'Source Serif 4',Georgia,serif;font-weight:300;font-size:var(--fs-2xl);
+  line-height:1.05;letter-spacing:-.01em;color:var(--ink);margin:.1rem 0 .3rem}
+.act__head h2 em{font-style:italic;color:var(--th)}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--th)}
+.premise{font-size:.98rem;color:var(--ink-muted);max-width:36rem;line-height:1.62}
+.premise b{color:var(--th-ink);font-weight:600}
+
+.act__body{width:var(--pcw);margin:0 auto;display:grid;gap:2.6rem;
+  grid-template-columns:minmax(0,1fr)}
+@media(min-width:900px){.act__body{grid-template-columns:minmax(0,1fr) minmax(0,1.02fr);gap:3rem}}
+.stagewrap{position:relative}
+.stage{position:sticky;top:14vh;height:min(64vh,520px);display:flex;flex-direction:column;gap:.5rem}
+.stage canvas{flex:1;width:100%;height:100%;display:block;border:1px solid var(--paper-edge);
+  border-radius:6px;background:linear-gradient(180deg,#fffdf8 0%,#f7f3ea 100%)}
+.stage figcaption{font-family:'JetBrains Mono',monospace;font-size:.63rem;color:var(--ink-faint);
+  letter-spacing:.04em;line-height:1.5}
+.col > * + *{margin-top:var(--sp-md)}
+.col p{font-size:1.02rem;line-height:1.78;color:var(--ink-soft)}
+.col p strong{color:var(--ink);font-weight:600}
+.col p em{font-style:italic;color:var(--th-ink)}
+.lede{font-family:'Source Serif 4',Georgia,serif;font-size:1.22rem;line-height:1.6;color:var(--ink)}
+
+/* ── portrait cards ────────────────────────────────────────────────────── */
+.cast{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:.7rem;margin-top:var(--sp-lg)}
+.who{border:1px solid var(--paper-edge);border-left:2px solid var(--th);border-radius:5px;
+  background:var(--paper);padding:.75rem .8rem;display:flex;gap:.65rem;align-items:flex-start}
+.who svg{flex:0 0 auto;width:52px;height:60px;color:var(--ink-soft)}
+.who .nm{font-family:'Source Serif 4',Georgia,serif;font-size:.95rem;font-weight:600;color:var(--ink);line-height:1.2}
+.who .dt{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.07em;color:var(--ink-faint);margin-top:1px}
+.who .sq{font-size:.83rem;line-height:1.5;color:var(--ink-soft);margin-top:.4rem}
+.who .sq q{font-style:italic;color:var(--th-ink);quotes:'“' '”'}
+.who .rp{font-family:'JetBrains Mono',monospace;font-size:.54rem;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--ink-whisper);display:block;margin-top:.25rem}
+.who .th{font-size:.79rem;line-height:1.5;color:var(--ink-muted);margin-top:.35rem;
+  padding-top:.35rem;border-top:1px dotted var(--paper-edge)}
+
+/* ── the repair strip: the fix, and what the fix cost ──────────────────── */
+.repair{display:grid;grid-template-columns:1fr;border:1px solid var(--th);border-radius:5px;
+  overflow:hidden;margin-top:var(--sp-lg);background:var(--paper)}
+@media(min-width:620px){.repair{grid-template-columns:1fr 1fr}}
+.repair div{padding:.7rem .85rem}
+.repair div + div{border-top:1px solid var(--th-soft);background:var(--th-soft)}
+@media(min-width:620px){.repair div + div{border-top:0;border-left:1px solid var(--th)}}
+.repair h5{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--th);margin-bottom:.3rem;font-weight:500}
+.repair p{font-size:.88rem;line-height:1.55;color:var(--ink-soft)}
+
+/* ── entry lists ───────────────────────────────────────────────────────── */
+.entries{margin-top:var(--sp-lg);border-top:1px solid var(--paper-edge)}
+.entry{display:grid;grid-template-columns:1.6rem 1fr;gap:.6rem;padding:.6rem 0;
+  border-bottom:1px solid var(--paper-edge)}
+.entry .n{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--ink-whisper);padding-top:.15rem}
+.entry .t{font-size:.94rem;color:var(--ink);font-weight:600;line-height:1.35}
+.entry .w{font-size:.85rem;color:var(--ink-muted);line-height:1.55;margin-top:.2rem}
+.lab{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.53rem;letter-spacing:.1em;
+  text-transform:uppercase;padding:1px 5px;border-radius:3px;border:1px solid;vertical-align:.12em;
+  margin-left:.4rem;white-space:nowrap}
+.lab.LOG{color:#8e2a2a;border-color:rgba(142,42,42,.5);background:rgba(142,42,42,.07)}
+.lab.SLF{color:#8a4a12;border-color:rgba(138,74,18,.5);background:rgba(138,74,18,.07)}
+.lab.FIN{color:#7a6a12;border-color:rgba(122,106,18,.45);background:rgba(122,106,18,.07)}
+.lab.EMP{color:#2b5f7a;border-color:rgba(43,95,122,.45);background:rgba(43,95,122,.07)}
+.lab.INT{color:#5a5266;border-color:rgba(90,82,102,.45);background:rgba(90,82,102,.06)}
+.lab.INC{color:#7a7265;border-color:rgba(122,114,101,.45);background:rgba(122,114,101,.06)}
+
+/* ── tallies / boards / tables ─────────────────────────────────────────── */
+.tally{display:grid;grid-template-columns:repeat(auto-fit,minmax(104px,1fr));gap:.5rem;margin:var(--sp-md) 0}
+.cell{border:1px solid var(--paper-edge);border-radius:5px;padding:.5rem .6rem;background:var(--paper);text-align:center}
+.cell .k{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-faint)}
+.cell .v{font-family:'JetBrains Mono',monospace;font-size:1.35rem;color:var(--ink);margin-top:2px;line-height:1.1}
+.cell .v.hot{color:#8e2a2a;font-weight:600}
+.cell .v.gold{color:var(--copper);font-weight:600}
+.note{font-family:'JetBrains Mono',monospace;font-size:.63rem;line-height:1.6;color:var(--ink-faint);
+  letter-spacing:.02em}
+.scope{border:1px solid var(--paper-edge);border-left:3px solid var(--th);background:var(--paper);
+  padding:.85rem 1.05rem;margin:var(--sp-lg) 0;font-size:.92rem;line-height:1.66;color:var(--ink-soft)}
+.scope h4{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--th);margin-bottom:.35rem}
+.eqline{font-family:'JetBrains Mono',monospace;font-size:.85rem;text-align:center;color:var(--ink);
+  background:var(--cream);border:1px solid var(--paper-edge);border-radius:5px;padding:.6rem .8rem;
+  margin:var(--sp-md) 0;overflow-x:auto}
+.eqline b{color:var(--th)}
+</style>
+<link rel="stylesheet" href="sdt-shell.css">
+<script src="sdt-shell.js" defer></script>
+<meta name="description" content="The Paradox Census as a narrative scrollthrough — sixty-seven standing paradoxes across SR, GR, QM, the Standard Model, string theory, MOND and ΛCDM, each…">
+<link rel="canonical" href="https://spatialdisplacementtheory.com/st_paradox_census">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/favicon.ico" sizes="64x64">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#b07430">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Spatial Displacement Theory">
+<meta property="og:title" content="The Paradox Census · Every Contradiction and the Premise That Made It — SDT">
+<meta property="og:description" content="The Paradox Census as a narrative scrollthrough — sixty-seven standing paradoxes across SR, GR, QM, the Standard Model, string theory, MOND and ΛCDM, each…">
+<meta property="og:url" content="https://spatialdisplacementtheory.com/st_paradox_census">
+<meta property="og:image" content="https://spatialdisplacementtheory.com/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_AU">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Paradox Census · Every Contradiction and the Premise That Made It — SDT">
+<meta name="twitter:description" content="The Paradox Census as a narrative scrollthrough — sixty-seven standing paradoxes across SR, GR, QM, the Standard Model, string theory, MOND and ΛCDM, each…">
+<meta name="twitter:image" content="https://spatialdisplacementtheory.com/og-card.png">
+</head>
+<body>
+
+<canvas id="field" aria-hidden="true"></canvas>
+
+<div class="pagewrap">
+<style>
+.hero{position:relative;padding:var(--sp-3xl) 0 var(--sp-2xl);overflow:hidden}
+.hero .wrap{position:relative}
+.hero h1{font-family:'Source Serif 4',Georgia,serif;font-weight:300;font-size:var(--fs-3xl);
+  line-height:1.02;letter-spacing:-.015em;color:var(--ink);margin:.6rem 0 .8rem}
+.hero h1 em{font-style:italic;color:var(--copper)}
+.hero .sub{font-family:'Source Serif 4',Georgia,serif;font-size:1.32rem;line-height:1.5;
+  color:var(--ink-soft);max-width:34rem}
+.hero .lead{max-width:36rem;margin-top:var(--sp-lg);color:var(--ink-muted);font-size:1.02rem;line-height:1.78}
+.hero .by{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-faint);margin-top:var(--sp-xl)}
+.bigcount{display:flex;flex-wrap:wrap;gap:1.6rem;margin-top:var(--sp-xl);align-items:flex-end}
+.bigcount div{min-width:5.5rem}
+.bigcount .v{font-family:'Source Serif 4',Georgia,serif;font-size:3.2rem;line-height:.95;color:var(--ink)}
+.bigcount .v.red{color:#8e2a2a}
+.bigcount .v.gold{color:var(--copper)}
+.bigcount .k{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--ink-faint);margin-top:.4rem;max-width:9rem;line-height:1.5}
+.scrollcue{margin-top:var(--sp-2xl);font-family:'JetBrains Mono',monospace;font-size:.62rem;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);display:flex;align-items:center;gap:.6rem}
+.scrollcue i{display:block;width:34px;height:1px;background:var(--ink-whisper);position:relative}
+.scrollcue i::after{content:'';position:absolute;right:0;top:-2px;width:5px;height:5px;
+  border-right:1px solid var(--ink-whisper);border-bottom:1px solid var(--ink-whisper);transform:rotate(-45deg)}
+.rulers{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:.7rem;margin-top:var(--sp-lg)}
+.ruler{border:1px solid var(--paper-edge);border-radius:5px;background:var(--paper);padding:.8rem .9rem}
+.ruler .lab{margin-left:0}
+.ruler p{font-size:.87rem;line-height:1.55;color:var(--ink-muted);margin-top:.45rem}
+.ruler.proper{border-color:rgba(142,42,42,.35);background:rgba(142,42,42,.035)}
+.ruler.proper p{color:var(--ink-soft)}
+</style>
+
+<div class="drive" data-th="sdt" id="driveBar">
+  <button id="playBtn" type="button" aria-pressed="false" title="Steady drive — scrolls at a constant rate">▶ drive</button>
+  <button id="spdBtn" type="button" title="Drive speed">×1</button>
+  <div class="ticks" id="ticks"></div>
+  <span class="pct" id="pct">0%</span>
+</div>
+
+<!-- ═══════════════════ HERO ═══════════════════ -->
+<header class="hero" data-th="sdt" data-act="hero">
+  <div class="wrap">
+    <div class="eyebrow">Audits · The Paradox Census · Spatial Displacement Theory</div>
+    <h1>Every Contradiction<br>Has a <em>Parent</em>.</h1>
+    <p class="sub">A paradox is not a mystery. It is a receipt — an assumption taken on credit long ago,
+      arriving at the door with what it cost.</p>
+    <p class="lead">Seven frameworks are audited here, entry by entry, and every entry is walked back to
+      the premise that manufactures it. Then the same ruler is turned on SDT. This is the narrative pass:
+      the people, what they said when the contradiction landed on their desk, the repair each field
+      attempted, and what the repair cost. Every count on this page is tallied live from the entries
+      themselves — nothing is asserted that the list below does not contain.</p>
+
+    <div class="bigcount fade" data-fade>
+      <div><div class="v" id="hcTot">—</div><div class="k">entries in the census</div></div>
+      <div><div class="v red" id="hcPar">—</div><div class="k">contradictions and self-destructions</div></div>
+      <div><div class="v" id="hcFw">7</div><div class="k">frameworks audited</div></div>
+      <div><div class="v gold" id="hcSdt">0</div><div class="k">paradoxes in SDT</div></div>
+    </div>
+
+    <div class="by">J. C. Harvey · Melbourne · census recorded 2026-06-17 · this pass 2026-07-31</div>
+    <div class="scrollcue">Scroll — it moves at its own rate<i></i></div>
+  </div>
+</header>
+
+<!-- ═══════════════════ ACT 0 — THE RULER ═══════════════════ -->
+<section class="act" data-act="ruler" data-th="sdt">
+  <div class="act__rule"></div>
+  <div class="act__head fade" data-fade>
+    <canvas class="sigil" data-sigil="sdt" width="64" height="64" aria-hidden="true"></canvas>
+    <div>
+      <div class="eyebrow">Before anything is counted</div>
+      <h2>The <em>ruler</em>, laid down first</h2>
+      <p class="premise">Five severities. Only two of them are paradoxes proper. The distinction is set
+        <b>before</b> the count begins and it does not move at the end — the others' contradictions are not
+        softened into gaps, and SDT's unfinished derivations are not inflated into contradictions.</p>
+    </div>
+  </div>
+  <div class="wrap fade" data-fade>
+    <div class="rulers">
+      <div class="ruler proper"><span class="lab LOG">Logical</span>
+        <p>The framework's own axioms imply X and not-X. A contradiction, inside the walls.</p></div>
+      <div class="ruler proper"><span class="lab SLF">Self-limiting</span>
+        <p>The theory forecasts its own death — infinities, singularities, a place where its equations
+          stop being true and say so.</p></div>
+      <div class="ruler"><span class="lab FIN">Fine-tuning</span>
+        <p>A quantity set to absurd precision with no reason available inside the theory.</p></div>
+      <div class="ruler"><span class="lab EMP">Empirical</span>
+        <p>Something measured that the framework cannot hold without a bolt-on.</p></div>
+      <div class="ruler"><span class="lab INT">Interpretational</span>
+        <p>Stories that agree on every number and disagree on what exists. The theory cannot choose.</p></div>
+      <div class="ruler"><span class="lab INC">Incompleteness</span>
+        <p>A question the framework does not answer and does not pretend to. Named, not counted as a wound.</p></div>
+    </div>
+    <div class="scope">
+      <h4>The rule that keeps this straight</h4>
+      A gap is not a paradox. A theory can finish a derivation. It cannot finish a contradiction — it can
+      only abandon the premise that caused it. Hold that sentence; the whole page turns on it.
+    </div>
+  </div>
+</section>
+<!-- ═══════════════════ ACT I — SPECIAL RELATIVITY ═══════════════════ -->
+<section class="act" data-act="sr" data-th="sr">
+  <div class="act__rule"></div>
+  <div class="act__head fade" data-fade>
+    <canvas class="sigil" data-sigil="sr" width="64" height="64" aria-hidden="true"></canvas>
+    <div>
+      <div class="eyebrow">Act One · Special Relativity · 1905</div>
+      <h2>The substrate is <em>abolished</em></h2>
+      <p class="premise">Generating premise: <b>no preferred frame, and simultaneity is a matter of who is
+        asking</b>. Take the medium out from under the light and every question about <em>who really
+        moved</em> loses its answer — not because the answer is hidden, but because the theory no longer
+        has a place to keep one.</p>
+    </div>
+  </div>
+  <div class="act__body">
+    <div class="stagewrap">
+      <div class="stage">
+        <canvas data-scene="sr"></canvas>
+        <figcaption>Ehrenfest's disk, 1909. Spin it up: the rim segments contract along their motion,
+          the radius does not. The circumference the geometry demands and the circumference the rim can
+          supply come apart, and C/2R walks off π. Drag anywhere on the disk to spin it by hand.</figcaption>
+      </div>
+    </div>
+    <div class="col">
+      <p class="lede fade" data-fade>Einstein did not discover that the ether was absent. He discovered
+        that the equations did not need it, and removed it — and the removal is the single event from which
+        every paradox in this act descends.</p>
+      <p class="fade" data-fade>Lorentz had the same transformations first, with a medium underneath them
+        and rods that shortened because they were <em>moving through something</em>. Einstein's version threw
+        the something away and kept the arithmetic. On every measurement made since, the two agree. That
+        fork was never closed by experiment — it was closed by preference, and it is still standing open at
+        the far end of this page.</p>
+      <p class="fade" data-fade>What follows from the removal is bookkeeping about the word <strong>now</strong>.
+        Two clocks, no medium, and no fact about which of them is at rest: the twin who comes home younger
+        needs an asymmetry the theory just abolished, so it gets smuggled back through acceleration. The pole
+        fits in the barn and does not fit in the barn. Only the <em>two-way</em> speed of light is ever
+        measured; the one-way speed is a convention you choose, and the choosing is invisible in the results.</p>
+      <p class="fade" data-fade>Then Paul Ehrenfest spun a disk, and the bookkeeping broke. A rigid body in
+        rotation is not a puzzle about observers — the rim is contracted and the radius is not, so
+        C/2R ≠ π, and no choice of frame repairs it. <strong>This one is a contradiction</strong>, and Einstein
+        took it seriously enough that it walked him out of flat geometry altogether. The rigid body was the
+        casualty. The continuum was the replacement, and the continuum is Act Two.</p>
+
+      <div class="cast fade" data-fade data-cast="einstein,lorentz,ehrenfest,reichenbach"></div>
+
+      <div class="repair fade" data-fade>
+        <div><h5>The repair</h5><p>Abandon rigid bodies and rebuild rotation in a geometry that can bend —
+          curved spacetime, 1915.</p></div>
+        <div><h5>What the repair cost</h5><p>The disk was fixed by handing physics a continuum with no
+          shortest length. Everything in Act Two grows in that gap.</p></div>
+      </div>
+
+      <div class="entries" data-entries="SR"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ ACT II — GENERAL RELATIVITY ═══════════════════ -->
+<section class="act" data-act="gr" data-th="gr">
+  <div class="act__rule"></div>
+  <div class="act__head fade" data-fade>
+    <canvas class="sigil" data-sigil="gr" width="64" height="64" aria-hidden="true"></canvas>
+    <div>
+      <div class="eyebrow">Act Two · General Relativity · 1915</div>
+      <h2>A continuum with <em>no floor</em></h2>
+      <p class="premise">Generating premise: <b>spacetime is dynamical, continuous, and has no shortest
+        length; gravity is its geometry</b>. Give attraction a continuum to work in and nothing anywhere in
+        the theory can stop a collapse. It runs all the way down, and the equations say so themselves.</p>
+    </div>
+  </div>
+  <div class="act__body">
+    <div class="stagewrap">
+      <div class="stage">
+        <canvas data-scene="gr"></canvas>
+        <figcaption>The well that has no bottom. As the act runs, the profile deepens without limit and the
+          curvature readout climbs off the scale; a marker released outside crosses the horizon ring and does
+          not come back, and neither does what it was carrying. Drag to release another.</figcaption>
+      </div>
+    </div>
+    <div class="col">
+      <p class="lede fade" data-fade>In 1965 Penrose proved that the infinity at the centre is not an
+        artefact of bad coordinates. It is generic. A theory had produced, from its own machinery, a theorem
+        stating where it stops being true.</p>
+      <p class="fade" data-fade>Einstein disliked singularities and spent real effort trying to argue them
+        out of physical existence. He lost that argument to his own field equations. The same theorem class,
+        extended backwards, puts one at the beginning of the universe — so the two boundaries of cosmic
+        history are both places where the description hands in its notice.</p>
+      <p class="fade" data-fade>Then the horizon got a temperature. Hawking's 1974 calculation made black
+        holes radiate, and the radiation came out exactly thermal — carrying no imprint of what fell in. A
+        pure state goes in; a mixed state comes out; unitarity, the one thing quantum mechanics never
+        negotiates, is violated. That is a contradiction <em>between</em> the two best theories physics owns,
+        and it has stood for fifty years.</p>
+      <p class="fade" data-fade>Every attempt to close it charges a fee. Entangle the late radiation with
+        the early radiation to save unitarity, and monogamy of entanglement forces a wall of hard quanta at
+        the horizon — which incinerates the equivalence principle, the seed idea of the whole theory. Quantise
+        gravity canonically and time itself drops out of the equation: Ĥ|ψ⟩ = 0, the wavefunction of the
+        universe does not evolve, nothing happens. And in 1949 Gödel handed Einstein a birthday present — an
+        exact rotating solution containing closed timelike curves. Einstein's published reply worried, in
+        print, about whether such solutions ought to be ruled out on physical grounds. Nothing in the theory
+        rules them out.</p>
+
+      <div class="cast fade" data-fade data-cast="penrose,hawking,wheeler,godel"></div>
+
+      <div class="repair fade" data-fade>
+        <div><h5>The repair</h5><p>Quantise gravity, and let the horizon's quantum structure carry the
+          information out.</p></div>
+        <div><h5>What the repair cost</h5><p>Canonical quantisation deleted time. The unitary rescue built a
+          firewall. Fifty years in, you must still break quantum mechanics, the equivalence principle, or
+          locality — the choice is yours and it is compulsory.</p></div>
+      </div>
+
+      <div class="entries" data-entries="GR"></div>
+    </div>
+  </div>
+</section>
+<!-- ═══════════════════ ACT III — QUANTUM MECHANICS ═══════════════════ -->
+<section class="act" data-act="qm" data-th="qm">
+  <div class="act__rule"></div>
+  <div class="act__head fade" data-fade>
+    <canvas class="sigil" data-sigil="qm" width="64" height="64" aria-hidden="true"></canvas>
+    <div>
+      <div class="eyebrow">Act Three · Quantum Mechanics · 1925</div>
+      <h2>Two laws, and <em>no rule</em> for which one fires</h2>
+      <p class="premise">Generating premise: <b>a wavefunction that evolves smoothly and deterministically,
+        and also collapses — discontinuously, at no stated moment, for no stated reason</b>. The theory ships
+        with two evolution laws and no clause anywhere inside it saying when the second one takes over.
+        Every entry in this act is that one fact wearing a different coat.</p>
+    </div>
+  </div>
+  <div class="act__body">
+    <div class="stagewrap">
+      <div class="stage">
+        <canvas data-scene="qm"></canvas>
+        <figcaption>Top: U — the packet spreads, smooth, linear, reversible, exactly as written. Bottom: R —
+          one outcome, one spike, irreversible, nowhere in the equations. The switch between them has no
+          hand on it. Click to fire R by hand; that is precisely as principled as the theory manages.</figcaption>
+      </div>
+    </div>
+    <div class="col">
+      <p class="lede fade" data-fade>The cat was never a mascot. Schrödinger built it in 1935 as an
+        objection — a burlesque, his word — to show that if you take linearity seriously it walks straight
+        out of the laboratory and into the furniture. The field adopted the objection as a logo and kept
+        the premise.</p>
+      <p class="fade" data-fade>Einstein never accepted it, and the thing he refused was not the
+        arithmetic — it was the ontology. His EPR argument was an offer: either the description is
+        incomplete, or the world is nonlocal. Pick. Thirty years later John Bell turned that offer into a
+        number, and the number went to experiment, and the experiments came back saying <strong>no local
+        account reproduces these correlations</strong>. The measured world is nonlocal or it has no definite
+        values before you look. There is no third door.</p>
+      <p class="fade" data-fade>Bell also said, flatly, what most of the field would only mutter: that
+        ordinary quantum mechanics is unprofessionally vague and ambiguous, working <em>for all practical
+        purposes</em> while leaving the central question unanswered. He asked why the pilot-wave picture —
+        an existing, working, nonlocal, deterministic account — was left out of the textbooks, and got no
+        satisfying answer.</p>
+      <p class="fade" data-fade>Hugh Everett removed the collapse law entirely. It works, and the bill is
+        every outcome happening in a branch of its own. Bohr's circle dismissed him, his thesis was cut down
+        before publication, and he left physics for defence analysis and never came back. Sixty years on the
+        problem sharpened rather than dissolved: Frauchiger and Renner showed in 2018 that if quantum theory
+        applies to observers who use quantum theory, rational agents derive contradictory facts about a
+        single event. The theory cannot consistently describe its own use.</p>
+
+      <div class="cast fade" data-fade data-cast="schrodinger,bell,everett,bohr"></div>
+
+      <div class="repair fade" data-fade>
+        <div><h5>The repair</h5><p>Decoherence: the environment measures the system, interference drains
+          away, the classical world appears without anyone invoking collapse.</p></div>
+        <div><h5>What the repair cost</h5><p>Decoherence needs a system/environment split the theory does not
+          supply, so the preferred basis is handed in by hand — and after all of it you still have a
+          superposition, not an outcome. The Born rule remains an axiom bolted to the side.</p></div>
+      </div>
+
+      <div class="entries" data-entries="QM"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ ACT IV — QFT & THE STANDARD MODEL ═══════════════════ -->
+<section class="act" data-act="sm" data-th="sm">
+  <div class="act__rule"></div>
+  <div class="act__head fade" data-fade>
+    <canvas class="sigil" data-sigil="sm" width="64" height="64" aria-hidden="true"></canvas>
+    <div>
+      <div class="eyebrow">Act Four · Quantum Field Theory & the Standard Model · 1973</div>
+      <h2>The finest instrument ever built, and a drawer full of <em>dials</em></h2>
+      <p class="premise">Generating premise: <b>fundamental fields with free couplings, a fundamental scalar
+        Higgs, and a continuum underneath all of it</b>. Fundamental fields in a continuum give divergences.
+        Free couplings give numbers nobody can derive. A fundamental scalar gives a mass with nothing
+        protecting it.</p>
+    </div>
+  </div>
+  <div class="act__body">
+    <div class="stagewrap">
+      <div class="stage">
+        <canvas data-scene="sm"></canvas>
+        <figcaption>Top: the electron's magnetic moment — prediction against measurement, agreeing digit for
+          digit past one part in a million million. Bottom: the same theory's parameter drawer, every dial
+          measured and none derived, and the Higgs cancellation running thirty-four places before the
+          survivor appears. Hover a dial for its name.</figcaption>
+      </div>
+    </div>
+    <div class="col">
+      <p class="lede fade" data-fade>Both halves of this act are true at once, and that is what makes it
+        the strangest chapter in the census. Nothing humans have ever built predicts better. Nothing humans
+        have ever built asks to be believed less by the people who built it.</p>
+      <p class="fade" data-fade>Dirac would not sign off on renormalisation. He called the procedure not
+        sensible mathematics — infinities discarded arbitrarily because the answer comes out right if you
+        discard them that way. Feynman, who won a Nobel Prize for the machinery, called it a dippy process
+        and a shell game, and said the fact that it works has not stopped it from being hocus-pocus.
+        Neither of them was being modest. They were pointing at the continuum.</p>
+      <p class="fade" data-fade>Then the numbers. Nineteen to twenty-six free parameters — masses, mixing
+        angles, couplings — every one measured, not one derived. Three generations of matter for no reason.
+        Yukawa couplings spanning a factor of a million with no pattern. The Higgs mass held at 125 GeV by
+        a cancellation running to one part in 10³⁴. The QCD angle θ, which has no business being small,
+        measured below 10⁻¹⁰. And the vacuum's own energy, which the theory computes and the sky
+        contradicts — by about <strong>10¹²⁰</strong>, the worst quantitative miss in the history of the
+        subject.</p>
+      <p class="fade" data-fade>Pauli set the tone for the whole century of it in 1930. Needing to save
+        conservation of energy in beta decay, he invented a particle he believed could never be detected,
+        and wrote that he had done a terrible thing. He was right about the terrible thing and wrong about
+        the detection — and the neutrino came back in the end to break the model that inherited it, because
+        the Standard Model says the neutrino is massless and the oscillations say it is not.</p>
+
+      <div class="cast fade" data-fade data-cast="dirac,feynman,pauli,weinberg"></div>
+
+      <div class="repair fade" data-fade>
+        <div><h5>The repair</h5><p>Supersymmetry — a partner for every particle, cancelling the corrections
+          and protecting the Higgs mass without tuning. An axion to zero the strong-CP angle.</p></div>
+        <div><h5>What the repair cost</h5><p>The LHC looked where the argument said to look and found nothing.
+          The tuning is now worse than before the fix was proposed, and the axion is still missing.</p></div>
+      </div>
+
+      <div class="entries" data-entries="SM"></div>
+    </div>
+  </div>
+</section>
+<!-- ═══════════════════ ACT V — STRING THEORY ═══════════════════ -->
+<section class="act" data-act="st" data-th="st">
+  <div class="act__rule"></div>
+  <div class="act__head fade" data-fade>
+    <canvas class="sigil" data-sigil="st" width="64" height="64" aria-hidden="true"></canvas>
+    <div>
+      <div class="eyebrow">Act Five · String Theory · 1984 onwards</div>
+      <h2>Ten to the <em>five hundred</em></h2>
+      <p class="premise">Generating premise: <b>buy finiteness and unification with extra dimensions,
+        supersymmetry, and whatever number of vacua that costs</b>. Six or seven dimensions have to be
+        folded away, and the folding can be done in combinatorially many ways. Each way is a different
+        universe of low-energy physics, and the theory contains no instrument for pointing at ours.</p>
+    </div>
+  </div>
+  <div class="act__body">
+    <div class="stagewrap">
+      <div class="stage">
+        <canvas data-scene="st"></canvas>
+        <figcaption>The landscape. Valleys scroll past without end; the counter runs toward 10⁵⁰⁰ and the
+          marked one is ours — selected by the fact that we are standing in it, and by nothing else the
+          theory can offer. Drag to travel; you will not reach the edge.</figcaption>
+      </div>
+    </div>
+    <div class="col">
+      <p class="lede fade" data-fade>This act's entries are not contradictions. They are something a
+        physicist can find harder to live with: a structure so accommodating that no measurement can
+        disagree with it.</p>
+      <p class="fade" data-fade>The mathematics is real and often beautiful, and the programme has paid out
+        elsewhere — holography, black-hole entropy counting, tools that migrated into nuclear and condensed
+        matter physics. What it has not produced, after four decades, is one distinctive number at one
+        reachable energy. The string scale sits near Planck. The superpartners that the superstring requires
+        did not appear at the LHC, so the breaking scale is pushed up again, as it has been pushed up before,
+        with no principle setting where it stops.</p>
+      <p class="fade" data-fade>Susskind's response was to take the landscape seriously and go anthropic:
+        with 10⁵⁰⁰ vacua available, ours is the one compatible with observers, and that is the whole of the
+        explanation. Gross has spent years refusing that trade, on the ground that it converts physics into
+        a story about our own presence. Both are looking at the same fact. Neither has a way to break the
+        tie from inside the theory.</p>
+      <p class="fade" data-fade>Two structural bills sit under all of it. Perturbative strings are defined
+        <em>on</em> a fixed background, which is precisely what general relativity says a theory of gravity
+        must not need — and the non-perturbative definition that would fix this does not exist yet. And the
+        corner of the theory that is actually under control is anti-de Sitter: negative cosmological constant,
+        the wrong sign for the universe we live in.</p>
+
+      <div class="cast fade" data-fade data-cast="susskind,gross,polchinski"></div>
+
+      <div class="repair fade" data-fade>
+        <div><h5>The repair</h5><p>Accept the landscape and select our vacuum anthropically — the multiverse
+          as an explanatory principle.</p></div>
+        <div><h5>What the repair cost</h5><p>The predictions. If every low-energy physics is somewhere in the
+          catalogue, no measurement can ever count against the catalogue.</p></div>
+      </div>
+
+      <div class="entries" data-entries="ST"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ ACT VI — MOND ═══════════════════ -->
+<section class="act" data-act="mo" data-th="mo">
+  <div class="act__rule"></div>
+  <div class="act__head fade" data-fade>
+    <canvas class="sigil" data-sigil="mo" width="64" height="64" aria-hidden="true"></canvas>
+    <div>
+      <div class="eyebrow">Act Six · MOND · 1983</div>
+      <h2>One knob, <em>set by hand</em></h2>
+      <p class="premise">Generating premise: <b>a phenomenological force law with an inserted acceleration
+        scale and no substrate underneath it</b>. This act is in the census because MOND is the nearest
+        mainstream relative of the framework at the end of this page. The same knife has to cut both, and it
+        is held the same way for each.</p>
+    </div>
+  </div>
+  <div class="act__body">
+    <div class="stagewrap">
+      <div class="stage">
+        <canvas data-scene="mo"></canvas>
+        <figcaption>The rotation curve that refuses to fall. Turn the knob — a₀ is a free constant, and one
+          setting fits a whole population of galaxies. Then the cluster point arrives, at twice the distance
+          from the line, and the knob has nothing left to give. Drag the dial.</figcaption>
+      </div>
+    </div>
+    <div class="col">
+      <p class="lede fade" data-fade>Milgrom's law does something no dark-matter halo does: it predicts
+        individual rotation curves from the visible matter alone, one number for the whole population, and
+        it keeps being right about galaxies it was never fitted to.</p>
+      <p class="fade" data-fade>The number is a₀ ≈ 1.2 × 10⁻¹⁰ m/s², and it was set by hand. Worse — or
+        better, depending on where you think physics is going — it lands suspiciously close to cH₀/2π, a
+        cosmological quantity that has no business appearing in the dynamics of a single galaxy. MOND
+        cannot say why. It offers a force law, not a derivation of its own scale, and a scale you cannot
+        derive is a scale someone else's theory will have to explain.</p>
+      <p class="fade" data-fade>Then the failures, and they are honest ones. Clusters still need roughly
+        twice the mass MOND can supply — the missing-mass problem is reduced, not removed. The Bullet Cluster
+        shows lensing mass sitting away from the gas, which is the textbook argument against modifying the
+        force law alone. Internal dynamics depend on the external field a system happens to sit in, so the
+        strong equivalence principle goes. And there is no cosmology in it: no acoustic peaks, no
+        nucleosynthesis, no structure growth.</p>
+      <p class="fade" data-fade>The hardest blow was a single event. In August 2017 a neutron-star merger
+        arrived as gravitational waves and as light, and the two arrived together to within a part in 10¹⁵.
+        The relativistic completions of MOND had bought their extra dynamics with extra fields, and those
+        fields made gravity travel at a speed other than c. One measurement, one afternoon, and that whole
+        family of theories was ruled out.</p>
+
+      <div class="cast fade" data-fade data-cast="milgrom,zwicky"></div>
+
+      <div class="repair fade" data-fade>
+        <div><h5>The repair</h5><p>TeVeS and its cousins — add tensor, vector and scalar fields until MOND
+          becomes relativistic and can meet cosmology.</p></div>
+        <div><h5>What the repair cost</h5><p>GW170817. The added fields dispersed gravitational waves; the
+          sky said the speed of gravity is c to fifteen decimal places, and the completions went with it.</p></div>
+      </div>
+
+      <div class="entries" data-entries="MO"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ ACT VII — ΛCDM ═══════════════════ -->
+<section class="act" data-act="lc" data-th="lc">
+  <div class="act__rule"></div>
+  <div class="act__head fade" data-fade>
+    <canvas class="sigil" data-sigil="lc" width="64" height="64" aria-hidden="true"></canvas>
+    <div>
+      <div class="eyebrow">Act Seven · ΛCDM · 1998 onwards</div>
+      <h2>Ninety-five per cent, <em>unseen</em></h2>
+      <p class="premise">Generating premise: <b>when an observation does not fit, add an invisible
+        component rather than change the law</b>. The model fits the microwave sky and the large-scale
+        structure superbly, and it pays for the fit with two substances that have never been detected and
+        an early-universe episode invented to repair the initial conditions.</p>
+    </div>
+  </div>
+  <div class="act__body">
+    <div class="stagewrap">
+      <div class="stage">
+        <canvas data-scene="lc"></canvas>
+        <figcaption>Top: the budget — five per cent is everything ever seen, weighed or touched. Bottom: the
+          Hubble tension, the distance ladder against the microwave background, two measurements of one
+          number that do not overlap. Drag to sweep the error bars together; they will not meet.</figcaption>
+      </div>
+    </div>
+    <div class="col">
+      <p class="lede fade" data-fade>Fritz Zwicky counted the Coma cluster in 1933, found the galaxies
+        moving far too fast for the light they showed, and named what was missing <em>dunkle Materie</em>.
+        The field ignored him for forty years, largely because he was difficult and because the measurement
+        was hard to believe.</p>
+      <p class="fade" data-fade>Vera Rubin made it impossible to ignore. Spiral after spiral, the rotation
+        curves went flat where they should have fallen, and the discrepancy was not a marginal effect but a
+        factor of ten. She said the ratio of dark to light matter is about the same as the ratio of our
+        ignorance to our knowledge, and she was not being modest either.</p>
+      <p class="fade" data-fade>Forty years of direct detection have now been run — deeper and deeper
+        underground, tonne-scale targets, the sensitivity improving by orders of magnitude — and the result
+        is null. Twenty-seven per cent of the universe is inferred from gravity and nothing else. Sixty-eight
+        per cent more is a name attached to a number, w ≈ −1, with no microphysics behind it. And the same
+        vacuum energy that Act Four could not compute is here again, off by 10¹²⁰, and additionally tuned to
+        become important at roughly the moment we happen to be looking.</p>
+      <p class="fade" data-fade>The tensions have not softened with better data — they have hardened. The
+        local distance ladder says H₀ ≈ 73; the microwave background, run through the model, says ≈ 67. The
+        gap is past five sigma and neither side has found the error. Lensing surveys find less structure than
+        the CMB requires. On small scales the cold-dark-matter simulations predict cusps where cores are
+        observed, swarms of satellites that are not there, and the satellites that <em>are</em> there sit in
+        thin co-rotating planes that random debris has no business forming. BBN predicts three times the
+        lithium-7 the old stars carry. JWST keeps finding galaxies too massive and too settled too early.</p>
+      <p class="fade" data-fade>Inflation was invented to repair the horizon and flatness problems, and Alan
+        Guth's idea did the job so elegantly that it became standard within a decade. Paul Steinhardt helped
+        build it and now argues in public that as practised it cannot be falsified — the measure problem is
+        unsolved, eternal inflation produces every outcome somewhere, and the initial conditions the inflaton
+        itself needs are as special as the ones it was hired to explain. A fix that needs fixing.</p>
+
+      <div class="cast fade" data-fade data-cast="rubin,guth,steinhardt,riess"></div>
+
+      <div class="repair fade" data-fade>
+        <div><h5>The repair</h5><p>Inflation smooths the horizon and flattens Ω; cold dark matter builds the
+          structure; Λ runs the late acceleration.</p></div>
+        <div><h5>What the repair cost</h5><p>Ninety-five per cent of the energy budget is now two substances
+          defined by what they are not — and the successes of the model are conditional on them.</p></div>
+      </div>
+
+      <div class="entries" data-entries="LC"></div>
+    </div>
+  </div>
+</section>
+<style>
+.filters{display:flex;flex-wrap:wrap;gap:.35rem;margin:var(--sp-md) 0}
+.filters button{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.1em;
+  text-transform:uppercase;padding:.28rem .6rem;border:1px solid var(--paper-edge);border-radius:4px;
+  background:var(--paper);color:var(--ink-muted);cursor:pointer;transition:all .2s}
+.filters button:hover{border-color:var(--ink-faint);color:var(--ink)}
+.filters button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--cream)}
+.board{display:grid;gap:.55rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr));margin-top:var(--sp-md)}
+.bcol{border:1px solid var(--paper-edge);border-radius:5px;background:var(--paper);padding:.55rem .6rem}
+.bcol h5{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--bc);margin-bottom:.4rem;display:flex;justify-content:space-between;gap:.5rem}
+.bcol h5 span{color:var(--ink-whisper)}
+.chip{display:block;width:100%;text-align:left;font:inherit;font-size:.74rem;line-height:1.35;
+  color:var(--ink-soft);background:none;border:0;border-left:2px solid var(--cc);padding:.16rem .4rem;
+  margin-bottom:1px;border-radius:0 3px 3px 0;cursor:default;transition:opacity .35s,background .25s,color .25s}
+.chip[data-dim="1"]{opacity:.17}
+.chip[data-lit="1"]{background:var(--th-soft);color:var(--ink);font-weight:600}
+.chip u{text-decoration:none;font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--ink-whisper);
+  margin-right:.3rem}
+.ledger{margin-top:var(--sp-lg);border-top:1px solid var(--paper-edge)}
+.lrow{display:grid;grid-template-columns:1fr;gap:.2rem .9rem;padding:.7rem .55rem;border-bottom:1px solid var(--paper-edge);
+  cursor:pointer;transition:background .2s;border-left:2px solid transparent}
+@media(min-width:760px){.lrow{grid-template-columns:1fr 1fr auto;align-items:start}}
+.lrow:hover{background:var(--th-soft)}
+.lrow[aria-pressed="true"]{background:var(--th-soft);border-left-color:var(--th)}
+.lrow .a{font-size:.88rem;line-height:1.5;color:var(--ink-muted)}
+.lrow .b{font-size:.88rem;line-height:1.5;color:var(--ink);font-weight:600}
+.lrow .b em{font-style:normal;color:var(--copper)}
+.lrow .c{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--ink-faint);white-space:nowrap;padding-top:.2rem}
+.lhead{display:grid;grid-template-columns:1fr;gap:.9rem;padding:.4rem .55rem;
+  font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--ink-faint);border-bottom:1px solid var(--paper-edge)}
+@media(min-width:760px){.lhead{grid-template-columns:1fr 1fr auto}}
+</style>
+
+<!-- ═══════════════════ INTERLUDE — THE BOARD ═══════════════════ -->
+<section class="act" data-act="board" data-th="sdt">
+  <div class="act__rule"></div>
+  <div class="act__head fade" data-fade>
+    <canvas class="sigil" data-sigil="board" width="64" height="64" aria-hidden="true"></canvas>
+    <div>
+      <div class="eyebrow">Interlude · The whole census on one wall</div>
+      <h2>Sixty-seven entries, <em>counted</em></h2>
+      <p class="premise">Everything from the seven acts, in one board, tallied live from the entries
+        themselves. Filter by severity and watch where the contradictions actually sit — they are not spread
+        evenly, and that is the first real clue.</p>
+    </div>
+  </div>
+  <div class="wrap fade" data-fade>
+    <div class="tally">
+      <div class="cell"><div class="k">entries</div><div class="v" id="tTot">—</div></div>
+      <div class="cell"><div class="k">logical</div><div class="v hot" id="tLOG">—</div></div>
+      <div class="cell"><div class="k">self-limiting</div><div class="v hot" id="tSLF">—</div></div>
+      <div class="cell"><div class="k">fine-tuning</div><div class="v" id="tFIN">—</div></div>
+      <div class="cell"><div class="k">empirical</div><div class="v" id="tEMP">—</div></div>
+      <div class="cell"><div class="k">interpretational</div><div class="v" id="tINT">—</div></div>
+      <div class="cell"><div class="k">incompleteness</div><div class="v" id="tINC">—</div></div>
+    </div>
+    <div class="filters" id="filters"></div>
+    <div class="board" id="board"></div>
+    <p class="note" style="margin-top:var(--sp-md)">Severity strings are the census's own. Where the source
+      qualifies a label — <i>logical-ish</i>, <i>logical-unproven</i>, <i>self-limiting, tamed</i>,
+      <i>within rigid-body SR</i> — the qualifier is carried on the entry and the entry is counted under its
+      primary class. Nothing is promoted or demoted to make a number look better.</p>
+    <div class="scope">
+      <h4>What the board shows before anyone argues about it</h4>
+      The contradictions cluster. They sit where a theory holds a wavefunction that must collapse, a
+      continuum with no floor, a horizon with a singularity behind it, or a vacuum that must carry energy.
+      Where a framework holds none of those, it has crises and gaps instead — MOND and string theory carry
+      almost no logical entries, and they are not the better theories for it. The class of a theory's open
+      items tells you about its premises, not about its quality.
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ ACT VIII — THE PREMISE LEDGER ═══════════════════ -->
+<section class="act" data-act="ledger" data-th="sdt">
+  <div class="act__rule"></div>
+  <div class="act__head fade" data-fade>
+    <canvas class="sigil" data-sigil="ledger" width="64" height="64" aria-hidden="true"></canvas>
+    <div>
+      <div class="eyebrow">Act Eight · The trade</div>
+      <h2>Every shadow needs a <em>wall</em></h2>
+      <p class="premise">Each paradox in this census is cast by a premise. Take the premise away and the
+        shadow has nothing to fall on — it does not get solved, it stops being generated. Twelve premises
+        are listed on the left with what SDT holds instead. <b>Click a row</b> and the entries that lose
+        their root go dark on the board below.</p>
+    </div>
+  </div>
+  <div class="wrap fade" data-fade>
+    <div class="lhead"><span>Their premise</span><span>SDT holds instead</span><span>roots</span></div>
+    <div class="ledger" id="ledger"></div>
+    <div class="tally" style="margin-top:var(--sp-lg)">
+      <div class="cell"><div class="k">roots removed</div><div class="v gold" id="lgOut">0</div></div>
+      <div class="cell"><div class="k">of which logical</div><div class="v" id="lgLog">0</div></div>
+      <div class="cell"><div class="k">of which self-limiting</div><div class="v" id="lgSlf">0</div></div>
+      <div class="cell"><div class="k">not mapped here</div><div class="v" id="lgLeft">67</div></div>
+    </div>
+    <div class="board" id="board2"></div>
+    <div class="scope">
+      <h4>What is not claimed here</h4>
+      A row goes dark when the premise that manufactures it is absent — not when SDT has produced a better
+      number. And this is the census's own twelve-row table, not an exhaustive mapping of all sixty-seven:
+      the entries left lit are the ones the table does not address. Four of them carry a logical label —
+      the rigid body in Act One, the gravitational pseudotensor, the projector algebra behind
+      Kochen–Specker, and MOND's external field effect. Each belongs to furniture SDT does not own either,
+      and none of them is claimed on this screen, because the source does not claim them. The rest are
+      empirical and incompleteness entries: several are other people's unfinished business, and several
+      are SDT's too. Those are named two screens from here, with what each one owes.
+    </div>
+  </div>
+</section>
+<style>
+.emptybook{border:1px solid var(--copper);border-radius:6px;background:var(--paper);overflow:hidden;
+  margin-top:var(--sp-lg)}
+.emptybook .hd{display:grid;grid-template-columns:2.2rem 1fr 8rem;gap:.6rem;padding:.5rem .8rem;
+  background:var(--th-soft);border-bottom:1px solid var(--copper);
+  font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--copper)}
+.emptybook .lines{padding:0 .8rem}
+.emptybook .ln{height:2.1rem;border-bottom:1px dashed var(--paper-edge);position:relative}
+.emptybook .ln:last-child{border-bottom:0}
+.emptybook .ln span{position:absolute;left:2.8rem;top:50%;transform:translateY(-50%);
+  font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--ink-whisper);letter-spacing:.1em}
+.emptybook .ln i{position:absolute;left:.55rem;top:50%;transform:translateY(-50%);
+  font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--ink-whisper);font-style:normal}
+.emptybook .ft{padding:.6rem .8rem;border-top:1px solid var(--copper);background:var(--th-soft);
+  font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--copper);display:flex;
+  justify-content:space-between;flex-wrap:wrap;gap:.5rem}
+.oneline{border:1px solid var(--paper-edge);border-left:3px solid var(--copper);border-radius:5px;
+  background:var(--paper);padding:.85rem 1rem;margin-top:var(--sp-lg)}
+.oneline h5{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--copper);margin-bottom:.5rem}
+.oneline table{width:100%;border-collapse:collapse;font-family:'JetBrains Mono',monospace;font-size:.72rem}
+.oneline td{padding:.22rem .4rem;border-bottom:1px solid var(--paper-edge);color:var(--ink-soft)}
+.oneline td:first-child{color:var(--ink);white-space:nowrap}
+.oneline td:last-child{text-align:right;color:var(--copper);white-space:nowrap}
+.oneline tr:last-child td{border-bottom:0}
+.debts{counter-reset:d;margin-top:var(--sp-lg)}
+.debt{border:1px solid var(--paper-edge);border-left:3px solid var(--th);border-radius:5px;
+  background:var(--paper);padding:.85rem 1rem;margin-bottom:.6rem}
+.debt h5{font-family:'Source Serif 4',Georgia,serif;font-size:1.02rem;color:var(--ink);margin-bottom:.3rem}
+.debt h5::before{counter-increment:d;content:counter(d) " · ";font-family:'JetBrains Mono',monospace;
+  font-size:.7rem;color:var(--th)}
+.debt .tagline{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--th);margin-bottom:.4rem}
+.debt p{font-size:.9rem;line-height:1.65;color:var(--ink-soft)}
+.setdown{font-family:'Source Serif 4',Georgia,serif;font-size:1.7rem;line-height:1.4;color:var(--ink);
+  max-width:32rem;margin:var(--sp-2xl) auto var(--sp-xl)}
+.setdown em{font-style:italic;color:var(--copper)}
+.coda{border-top:1px solid var(--paper-edge);padding-top:var(--sp-lg);margin-top:var(--sp-2xl);
+  display:flex;flex-wrap:wrap;gap:.5rem;justify-content:space-between;align-items:flex-end}
+.coda a{display:inline-flex;align-items:center;gap:6px;padding:.5rem 1rem;border-radius:4px;
+  border:1px solid rgba(176,116,48,.4);background:rgba(176,116,48,.10);color:var(--copper);
+  font-size:.85rem;text-decoration:none;transition:background .2s}
+.coda a:hover{background:rgba(176,116,48,.2)}
+</style>
+
+<!-- ═══════════════════ ACT IX — SDT ═══════════════════ -->
+<section class="act" data-act="sdt" data-th="sdt">
+  <div class="act__rule"></div>
+  <div class="act__head fade" data-fade>
+    <canvas class="sigil" data-sigil="sdt" width="64" height="64" aria-hidden="true"></canvas>
+    <div>
+      <div class="eyebrow">Act Nine · Spatial Displacement Theory</div>
+      <h2>The list that came back <em>empty</em></h2>
+      <p class="premise">One substrate. One force — the occlusion of convergent throughput. One clock, the
+        count of ticks, running everywhere at once. A shortest length. Real particles, wound tight, with
+        boundaries you can measure. <b>Nothing pulls.</b></p>
+    </div>
+  </div>
+  <div class="act__body">
+    <div class="stagewrap">
+      <div class="stage">
+        <canvas data-scene="sdt"></canvas>
+        <figcaption>The whole mechanism. Throughput converges on every boundary from every direction at
+          once; a body occludes its share and casts a shadow; the second body is pushed into the shadow by
+          the throughput still arriving on its far side. That is gravity, and charge, and the nuclear grip —
+          one law, three domains. Drag the bodies.</figcaption>
+      </div>
+    </div>
+    <div class="col">
+      <p class="lede fade" data-fade>Run the seven acts backwards and a pattern falls out that has nothing
+        to do with anyone's cleverness. Every contradiction in this census is the price of a premise, and
+        the premises are all removals or inventions made a century ago for reasons that were good at the
+        time.</p>
+      <p class="fade" data-fade>SDT does not hold them. There is no wavefunction to collapse, so there is
+        nothing for a measurement problem to be about. There is no continuum without a floor, so a collapse
+        has somewhere to stop and the infinities have nowhere to grow. There is no vacuum carrying
+        zero-point energy, so there is no quantity that can be 10¹²⁰ wrong. There is no attraction sourced
+        by mass, so there is no missing mass — the shadow does the holding and the shadow is cast by what is
+        already there. And there is a frame: the lattice, and the tick, and a <strong>now</strong> that is
+        the same count everywhere. The present that special relativity abolished is back, so the block
+        universe, the conventional simultaneity and the disappeared time have nothing to stand on.</p>
+      <p class="fade" data-fade><strong>Not by construction.</strong> That phrase should be struck wherever
+        it appears, including in the census this page walks. You cannot build a theory that dodges
+        contradictions — there is no such move available to anybody. You can only run the work and read what
+        comes back. Nothing was suppressed either: the exclusions here are exclusions of <em>inputs</em> — no
+        G, no M, no wavefunction, no dark sector, no free parameter to fit — and refusing yourself inputs
+        does not protect you from contradictions, it makes them far easier to find. Fewer knobs, fewer places
+        to hide.</p>
+      <p class="fade" data-fade>The count is zero because zero fell out. Hydrogen closes. The deuteron
+        binds at 2.200 against a measured 2.224 MeV with no fitted scale. The closure schedule prints 2, 8,
+        20, 28, 50, 82, 126 from two closed forms and then keeps going to 184. A clock at the Sun's surface
+        runs slow by exactly the depth it sits at, to three parts in ten thousand. A galaxy turns. At no
+        point does one result turn round and contradict another, and at no point does the machinery forecast
+        the place where it stops being true. <strong>No paradox exists because no paradox exists.</strong>
+        None fell out. There was never one there to remove.</p>
+
+      <div class="oneline fade" data-fade>
+        <h5>One formula, across the whole range · v²r = c²ϟ</h5>
+        <table>
+          <tr><td>proton boundary</td><td>the seat the electron rides</td><td>1.83 c</td></tr>
+          <tr><td>hydrogen ground state</td><td>koppa at the 137th gear</td><td>k = 137.07</td></tr>
+          <tr><td>Earth's surface</td><td>g = v²/R, no G written</td><td>9.81 m/s²</td></tr>
+          <tr><td>Sun ↔ Jupiter</td><td>one two-body ledger</td><td>0.4 %</td></tr>
+          <tr><td>Sgr A*</td><td>same length, same law</td><td>ϟ = R/k²</td></tr>
+        </table>
+        <p class="note" style="margin-top:.5rem">Twenty-plus orders of magnitude, one relation, no mass term
+          anywhere in the chain. No rival framework on this page owns that column — each of them writes a
+          different law for each of those rows.</p>
+      </div>
+
+      <div class="emptybook fade" data-fade>
+        <div class="hd"><span>#</span><span>Paradox found in SDT</span><span>severity</span></div>
+        <div class="lines">
+          <div class="ln"><i>1</i><span>— nothing on this line —</span></div>
+          <div class="ln"><i>2</i></div>
+          <div class="ln"><i>3</i></div>
+          <div class="ln"><i>4</i></div>
+          <div class="ln"><i>5</i></div>
+        </div>
+        <div class="ft"><span>LOGICAL · 0</span><span>SELF-LIMITING · 0</span><span>same ruler as §0</span></div>
+      </div>
+      <p class="note fade" data-fade style="margin-top:.6rem">The hunt was run properly: the framework was
+        pushed at the places it is thinnest, and what came back was debts — unfinished derivations — not
+        contradictions. Those are on the next screen, named, with what each one owes.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ ACT X — THE DEBTS ═══════════════════ -->
+<section class="act" data-act="debts" data-th="sdt">
+  <div class="act__rule"></div>
+  <div class="act__head fade" data-fade>
+    <canvas class="sigil" data-sigil="debts" width="64" height="64" aria-hidden="true"></canvas>
+    <div>
+      <div class="eyebrow">Act Ten · The other side of the ledger</div>
+      <h2>Five <em>debts</em>, stated flat</h2>
+      <p class="premise">A gap is not a paradox — the rule from the first screen, applied here and not
+        bent. These are places the framework is exposed and owes a result. They are unpaid, they are
+        named, and none of them is a contradiction.</p>
+    </div>
+  </div>
+  <div class="wrap fade" data-fade>
+    <div class="debts">
+      <div class="debt">
+        <div class="tagline">Debt · the big one</div>
+        <h5>The reproduction debt</h5>
+        <p>Having no measurement problem is bought with an obligation: reproduce, deterministically, what
+          quantum mechanics gets right — two-slit interference, the Born statistics, and CHSH at 2√2. Bell's
+          theorem says any such account must be nonlocal, and SDT has the resource for that, since the relay
+          is one tick from every boundary and there is a frame. The resource is not the result. Until the
+          numbers are on the table, <em>no QM paradoxes</em> is a true statement about premises and a
+          promissory note about results. It goes first, not last.</p>
+      </div>
+      <div class="debt">
+        <div class="tagline">Tension</div>
+        <h5>The neo-Lorentzian bill</h5>
+        <p>The frame has to hide itself — no preferred-frame effect has shown up to a part in 10¹⁸. Rods and
+          clocks rescaling with lattice motion does that job, and the same logic predicts a ceiling that is
+          not locally measurable. A real quantity nobody can point an instrument at is uncomfortable, and it
+          is the mirror image of the one-way light speed from Act One. The bill: exhibit a second-order
+          observable, or concede the frame is forever indirect.</p>
+      </div>
+      <div class="debt">
+        <div class="tagline">Tension · the sharpest</div>
+        <h5>The input and derivation graph</h5>
+        <p>The permitted-input list carries α and m_p, and the framework claims to derive both — koppa at the
+          hydrogen rung, and 6π⁵ for the mass ratio. You cannot assume and derive the same number without it
+          being either a labelled consistency check or a circle. Both of those results are marked
+          <strong>OPEN</strong> in the engine for exactly this reason. The dependency graph has to be
+          published and acyclic: fix the irreducible seeds and demote everything else. This is the one place
+          where the framework could manufacture a contradiction for itself if the labelling ever got lazy.</p>
+      </div>
+      <div class="debt">
+        <div class="tagline">Debt</div>
+        <h5>Stable orbits from pushing alone</h5>
+        <p>A push-only convergence field has to produce closed ellipses and the right precession, not only
+          the circular speed law v = c√(ϟ/r) — which already matches Kepler and carries Mercury geometrically.
+          The full two-body problem from pure pushing is part shown, not finished. If pushing cannot make a
+          stable ellipse, that is a real problem, and the burden is to complete the dynamics rather than
+          restate the kinematics.</p>
+      </div>
+      <div class="debt">
+        <div class="tagline">Debt · narrowing</div>
+        <h5>The strong field</h5>
+        <p>There is a horizon — z = ½ at r = 2ϟ, where the orbital speed is c/√2 and escape is c, landing on
+          the Schwarzschild radius — and there is no singularity behind it: the core is the koppa dissolution
+          surface at z = 1, r = ϟ, a one-third golden-spiral winding, throat of zero width carrying no matter.
+          Owed from <em>that</em> structure: the EHT shadow, the ISCO, and the LIGO ringdown. The inspiral
+          work is drafted; the echo signature is where this framework and general relativity part company and
+          can be told apart.</p>
+      </div>
+    </div>
+
+    <div class="scope">
+      <h4>The categorical difference, in one line</h4>
+      Their open items include contradictions and self-limiting forecasts. These open items are unfinished
+      derivations. A theory can finish a derivation. It cannot finish a contradiction — it can only abandon
+      the premise that caused it.
+    </div>
+
+    <p class="setdown fade" data-fade>Sixty-seven wounds, and every one of them a premise arriving with its
+      bill. Take the premises away and there is nothing left to pay. <em>That is the whole argument.</em></p>
+
+    <div class="coda">
+      <div>
+        <div class="note">Source · <code>Audits/PARADOX_CENSUS.md</code> · recorded 2026-06-17<br>
+          Companion · <code>Theory/05_Provenance_and_Correspondence.md</code> — the audit spine<br>
+          Every SDT number on this page carries its certification label in the engine.</div>
+      </div>
+      <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+        <a href="index.html">← the whole picture</a>
+        <a href="st_magic_numbers.html">the magic numbers →</a>
+        <a href="depth_closure_scroller.html">depth closure →</a>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+/* ══════════════════════════════════════════════════════════════════════════
+   DATA — the census, transcribed from Audits/PARADOX_CENSUS.md
+   c: primary class  ·  lab: the source's own label string, qualifiers intact
+   ══════════════════════════════════════════════════════════════════════════ */
+var FW = {
+  SR:{name:'Special Relativity', th:'sr', col:'#3f6b86', act:'sr'},
+  GR:{name:'General Relativity', th:'gr', col:'#6a4c9c', act:'gr'},
+  QM:{name:'Quantum Mechanics',  th:'qm', col:'#14807a', act:'qm'},
+  SM:{name:'QFT & Standard Model',th:'sm',col:'#b4432c', act:'sm'},
+  ST:{name:'String Theory',      th:'st', col:'#a03a72', act:'st'},
+  MO:{name:'MOND',               th:'mo', col:'#937512', act:'mo'},
+  LC:{name:'ΛCDM',               th:'lc', col:'#24417e', act:'lc'}
+};
+
+var CENSUS = [
+/* ── Special Relativity ─────────────────────────────────────────────────── */
+{f:'SR',n:1,c:'INT',lab:'interpretational',t:'The twin paradox',w:'Two twins, symmetric under the principle of relativity, and one comes home younger. With no preferred frame the asymmetry has to be smuggled back through acceleration and proper time. Operationally settled; “who really moved” has no answer the theory can hold.'},
+{f:'SR',n:2,c:'INT',lab:'interpretational',t:'Pole and barn',w:'The pole fits the shorter barn in one frame and does not in the other, because “both doors shut at once” is frame-dependent. No contradiction — but length and simultaneity carry no observer-independent fact.'},
+{f:'SR',n:3,c:'INT',lab:'interpretational',t:'Bell’s spaceship',w:'Does a thread between two identically accelerated ships break? It does. The confusion lasted decades because with no substrate there is nothing to say what “the same acceleration” means physically.'},
+{f:'SR',n:4,c:'LOG',lab:'logical — within rigid-body SR',t:'The Ehrenfest disk',w:'A rigidly rotating disk: the circumference contracts, the radius does not, C/2R ≠ π. Special relativity and Born rigidity are mutually inconsistent for rotation. Genuine, and it drove Einstein toward curved geometry.'},
+{f:'SR',n:5,c:'INT',lab:'interpretational',t:'Conventionality of simultaneity',w:'Only the two-way speed of light is measurable. The one-way speed is a convention — the ε parameter — so clock synchronisation has no unique fact and c-isotropy is partly stipulated.'},
+{f:'SR',n:6,c:'INT',lab:'interpretational',t:'The block universe',w:'Different observers slice “now” differently, so all events are equally real and nothing objectively passes. Forced directly by frame-relative simultaneity. The theory cannot host a present.'},
+/* ── General Relativity ─────────────────────────────────────────────────── */
+{f:'GR',n:1,c:'SLF',lab:'self-limiting',t:'Spacetime singularities',w:'Penrose–Hawking: a continuum with attractive gravity and no minimum length generically produces infinite curvature. General relativity predicts where general relativity stops being true.'},
+{f:'GR',n:2,c:'LOG',lab:'logical — GR + QM',t:'The black-hole information paradox',w:'Hawking radiation is exactly thermal, so information vanishes as the hole evaporates and pure states evolve to mixed. Unitarity breaks. Fifty years unresolved.'},
+{f:'GR',n:3,c:'LOG',lab:'logical',t:'The AMPS firewall',w:'Saving unitarity violates monogamy of entanglement unless the horizon is a wall of high-energy quanta — which violates the equivalence principle. Break quantum mechanics, the equivalence principle, or locality. Pick one.'},
+{f:'GR',n:4,c:'LOG',lab:'logical',t:'The problem of time',w:'Canonical quantisation gives Ĥ|ψ⟩ = 0: the wavefunction of the universe does not evolve. Diffeomorphism invariance has no external time; quantum mechanics needs one.'},
+{f:'GR',n:5,c:'LOG',lab:'logical-ish',t:'Gravitational energy cannot be localised',w:'No covariant local energy density exists for the field — only coordinate-dependent pseudotensors — and global conservation fails in general. The equivalence principle lets you transform the field away at a point.'},
+{f:'GR',n:6,c:'LOG',lab:'logical',t:'Closed timelike curves',w:'Gödel, the Kerr interior, traversable wormholes, the Tipler cylinder — exact solutions containing time loops. The field equations constrain local geometry, not global causal structure.'},
+{f:'GR',n:7,c:'INT',lab:'interpretational → resolved',t:'The hole argument',w:'Diffeomorphism invariance means bare spacetime points carry no identity, or the theory is indeterministic. Forces a relational reading: “where” has no substantival meaning.'},
+{f:'GR',n:8,c:'SLF',lab:'self-limiting',t:'Cauchy-horizon breakdown',w:'Inside charged or rotating holes, determinism can fail at the inner horizon. Predictivity is not guaranteed past a Cauchy horizon.'},
+{f:'GR',n:9,c:'INT',lab:'interpretational',t:'Mach’s principle unfulfilled',w:'Einstein wanted inertia sourced by all other matter and named the principle. General relativity kept absolute local inertial frames, and rotation relative to nothing at all in asymptotically flat space.'},
+{f:'GR',n:10,c:'FIN',lab:'fine-tuning',t:'The initial low-entropy state',w:'The Big Bang was extraordinarily smooth — very low gravitational entropy — for no reason the equations supply. They are time-symmetric; the arrow is inserted by hand as a special initial condition.'},
+/* ── Quantum Mechanics ──────────────────────────────────────────────────── */
+{f:'QM',n:1,c:'LOG',lab:'logical',t:'The measurement problem',w:'Schrödinger evolution is linear, deterministic and keeps superpositions; experiments give one outcome. The theory has two evolution laws, U and R, and no rule inside it for when R fires. Root of the act — everything below is a face of it.'},
+{f:'QM',n:2,c:'LOG',lab:'logical',t:'Schrödinger’s cat',w:'Unitary evolution scales to |dead⟩ + |alive⟩. Linearity carries no built-in cutoff between micro and macro. Written as an objection; adopted as a mascot.'},
+{f:'QM',n:3,c:'LOG',lab:'logical',t:'Wigner’s friend · Frauchiger–Renner',w:'Apply the theory to observers and rational agents using it derive contradictory facts about the same event. Quantum theory cannot consistently describe its own use without dropping universality, single-world, or non-contextual facts.'},
+{f:'QM',n:4,c:'LOG',lab:'logical / interpretational',t:'EPR',w:'Entangled measurements correlate perfectly at a distance: either the description is incomplete or reality is nonlocal. The state is non-separable, and EPR’s reality criterion demands a local completion.'},
+{f:'QM',n:5,c:'LOG',lab:'empirical + logical',t:'Bell’s theorem',w:'Experiment violates the inequalities, so no local hidden-variable theory reproduces quantum mechanics. Nature’s correlations exceed any local-causal bound. Give up locality or definite pre-measurement values.'},
+{f:'QM',n:6,c:'INT',lab:'interpretational',t:'Wave–particle duality',w:'One entity gives interference and localised hits. The formalism is neither, and complementarity forbids a single spacetime picture.'},
+{f:'QM',n:7,c:'INT',lab:'interpretational',t:'The quantum Zeno effect',w:'Continuous observation freezes evolution, because repeated projection keeps re-preparing the initial state.'},
+{f:'QM',n:8,c:'INT',lab:'interpretational',t:'Delayed choice and the quantum eraser',w:'A present choice appears to fix past behaviour. With no realist trajectory, what the photon did is not defined until measured — which looks retrocausal.'},
+{f:'QM',n:9,c:'LOG',lab:'logical — a gap',t:'The Born rule is unexplained',w:'Why P = |ψ|²? It is an axiom, not a consequence of unitary dynamics; the Gleason and decision-theoretic derivations smuggle assumptions. Probability is bolted onto a deterministic formalism.'},
+{f:'QM',n:10,c:'INT',lab:'interpretational',t:'The preferred-basis problem',w:'Decoherence picks a basis only once you hand it a system/environment split, and the theory does not supply one fundamentally.'},
+{f:'QM',n:11,c:'LOG',lab:'logical',t:'Kochen–Specker contextuality',w:'Observables cannot be assigned measurement-independent values consistently. The algebra of projectors forbids non-contextual value maps.'},
+{f:'QM',n:12,c:'INT',lab:'interpretational',t:'Interpretation underdetermination',w:'Copenhagen, Many-Worlds, Bohm, GRW, QBism, Relational — empirically identical, ontologically irreconcilable. The formalism is silent about what exists, so the ontology floats free.'},
+/* ── QFT & the Standard Model ───────────────────────────────────────────── */
+{f:'SM',n:1,c:'FIN',lab:'fine-tuning',t:'The hierarchy problem',w:'Quantum corrections to the Higgs mass go as the cutoff squared; holding 125 GeV needs cancellation to about one part in 10³⁴. A fundamental scalar has no symmetry protecting its mass — and the LHC found no supersymmetry to supply one.'},
+{f:'SM',n:2,c:'FIN',lab:'fine-tuning — the worst in physics',t:'The cosmological constant problem',w:'QFT vacuum energy exceeds the observed Λ by about 10¹²⁰. Every field’s zero-point energy gravitates and nothing cancels it.'},
+{f:'SM',n:3,c:'FIN',lab:'fine-tuning',t:'Strong CP',w:'The QCD θ-term should be order one; the neutron electric dipole moment puts |θ| below 10⁻¹⁰. Nothing in QCD sets it to zero, so an axion has to be invented.'},
+{f:'SM',n:4,c:'EMP',lab:'empirical',t:'Neutrino mass',w:'The model predicts massless neutrinos and oscillations prove mass. Right-handed states or a seesaw are bolted on; Dirac against Majorana is still unknown.'},
+{f:'SM',n:5,c:'EMP',lab:'empirical',t:'Baryon asymmetry',w:'The universe is matter, not half and half. Standard Model CP violation is about ten orders too small, and the Sakharov conditions are not met by its physics.'},
+{f:'SM',n:6,c:'FIN',lab:'fine-tuning / incompleteness',t:'Nineteen to twenty-six free parameters',w:'Masses, mixing angles, couplings — all measured, none derived. The Standard Model is a framework, not a first-principles theory, and the numbers are inputs.'},
+{f:'SM',n:7,c:'INC',lab:'incompleteness',t:'Three generations',w:'Why three copies of the matter content? No reason is offered.'},
+{f:'SM',n:8,c:'FIN',lab:'fine-tuning',t:'The fermion mass hierarchy',w:'Yukawa couplings span roughly a factor of a million from electron to top, with no pattern.'},
+{f:'SM',n:9,c:'INC',lab:'incompleteness',t:'Charge quantisation',w:'Why is |q_proton| exactly |q_electron|? The model does not require it — anomaly cancellation hints, but the charge assignment is put in by hand. No topological reason inside the theory.'},
+{f:'SM',n:10,c:'LOG',lab:'logical — unproven',t:'Confinement and the Yang–Mills mass gap',w:'No free quark has ever been seen, and the existence of the mass gap is an unproven Millennium Problem. The non-perturbative regime is not analytically controlled.'},
+{f:'SM',n:11,c:'SLF',lab:'self-limiting',t:'The Landau pole and triviality',w:'The U(1) coupling diverges at finite energy, and QED — like φ⁴ — may be trivial as a continuum theory. A continuum with running couplings has no guaranteed high-energy completion.'},
+{f:'SM',n:12,c:'SLF',lab:'self-limiting — tamed',t:'Renormalisation infinities',w:'Bare quantities are infinite and physics is what survives the subtraction. Point particles in a continuum give divergent self-energies. Cured in practice; disliked by the people who built it.'},
+{f:'SM',n:13,c:'FIN',lab:'fine-tuning',t:'Vacuum metastability',w:'The measured Higgs and top masses put our vacuum near the edge of metastable. The potential’s shape is an accident of the parameters.'},
+{f:'SM',n:14,c:'INC',lab:'incompleteness',t:'Gravity excluded',w:'The Standard Model contains no gravity at all.'},
+{f:'SM',n:15,c:'EMP',lab:'empirical',t:'The proton spin crisis',w:'Quark spins sum to roughly 30 % of the proton’s. The constituent picture does not cleanly account for spin.'},
+/* ── String Theory ──────────────────────────────────────────────────────── */
+{f:'ST',n:1,c:'INC',lab:'methodological',t:'The landscape',w:'Around 10⁵⁰⁰ consistent vacua, and no principle to pick ours, so essentially any low-energy physics is allowed. Compactifying six or seven dimensions has combinatorially many choices.'},
+{f:'ST',n:2,c:'INC',lab:'methodological',t:'Unfalsifiability',w:'No distinctive prediction at any reachable energy. The string scale is near Planck, and the landscape erases sharp predictions.'},
+{f:'ST',n:3,c:'EMP',lab:'empirical',t:'Unobserved extra dimensions',w:'Ten or eleven dimensions; we see four. Compactification details are unfixed — the moduli problem.'},
+{f:'ST',n:4,c:'EMP',lab:'empirical',t:'Unobserved supersymmetry',w:'Required for the superstring; the LHC found no superpartners. The breaking scale is unspecified and keeps rising.'},
+{f:'ST',n:5,c:'INC',lab:'incompleteness',t:'Moduli stabilisation',w:'The sizes and shapes of the extra dimensions are massless fields that must be frozen by hand, and the mechanisms proposed for it are themselves contested.'},
+{f:'ST',n:6,c:'LOG',lab:'logical-ish',t:'Background dependence',w:'Perturbative string theory is defined on a fixed background — in tension with general relativity’s background independence. No complete non-perturbative definition exists.'},
+{f:'ST',n:7,c:'EMP',lab:'empirical + methodological',t:'The de Sitter problem and the swampland',w:'Holography works for negative Λ; our universe has positive Λ, and stable de Sitter vacua are hard or maybe impossible to build. The controllable corner is the wrong-signed cosmology.'},
+/* ── MOND ───────────────────────────────────────────────────────────────── */
+{f:'MO',n:1,c:'FIN',lab:'fine-tuning',t:'a₀ is fitted by hand',w:'The acceleration scale a₀ ≈ 1.2 × 10⁻¹⁰ m/s² is a free constant, and its near-equality with cH₀/2π is an unexplained coincidence. MOND offers a force law, not a derivation of its own scale.'},
+{f:'MO',n:2,c:'EMP',lab:'empirical — near-fatal',t:'No relativistic completion',w:'GW170817 fixed the speed of gravity to c within about 10⁻¹⁵, which ruled out the extra-field completions that needed gravity ≠ c.'},
+{f:'MO',n:3,c:'EMP',lab:'empirical',t:'Clusters still need dark mass',w:'MOND under-predicts cluster dynamics by roughly a factor of two. The missing-mass problem is reduced at cluster scale, not removed.'},
+{f:'MO',n:4,c:'EMP',lab:'empirical',t:'The Bullet Cluster',w:'Lensing mass is offset from the baryonic gas — the textbook argument against pure force-law modification.'},
+{f:'MO',n:5,c:'LOG',lab:'logical-ish',t:'The external field effect',w:'A system’s internal dynamics depend on the external field it sits in, which violates the strong equivalence principle. The nonlinearity is in acceleration, not tidal field.'},
+{f:'MO',n:6,c:'INC',lab:'incompleteness',t:'No cosmology',w:'MOND alone does not give the acoustic peaks, nucleosynthesis, or structure growth.'},
+/* ── ΛCDM ───────────────────────────────────────────────────────────────── */
+{f:'LC',n:1,c:'FIN',lab:'fine-tuning',t:'Λ, and the coincidence',w:'Λ sits 10¹²⁰ below the QFT expectation — and is comparable to the matter density right now, at the moment we happen to be looking.'},
+{f:'LC',n:2,c:'EMP',lab:'empirical',t:'Dark matter undetected',w:'Twenty-seven per cent of the universe. Forty years of direct detection and collider search return null. The particle is inferred gravitationally and by nothing else.'},
+{f:'LC',n:3,c:'EMP',lab:'empirical',t:'Dark energy unexplained',w:'Sixty-eight per cent of the universe, with no microphysics — only w ≈ −1 and a name.'},
+{f:'LC',n:4,c:'EMP',lab:'empirical — beyond 5σ',t:'The Hubble tension',w:'The local distance ladder gives H₀ ≈ 73; the CMB, run through the model, gives ≈ 67 km/s/Mpc. Early and late calibrations disagree beyond their errors.'},
+{f:'LC',n:5,c:'EMP',lab:'empirical',t:'The S₈ tension',w:'Weak lensing and clustering find less structure than the microwave background predicts.'},
+{f:'LC',n:6,c:'EMP',lab:'empirical',t:'The small-scale crises',w:'Cores where cold dark matter predicts cusps; far fewer dwarf satellites than simulated; the biggest predicted subhaloes with no bright counterparts; and thin co-rotating planes of satellites around the Milky Way, M31 and Cen A that random debris should not form.'},
+{f:'LC',n:7,c:'EMP',lab:'empirical',t:'CMB large-angle anomalies',w:'Low quadrupole, aligned low multipoles — the axis of evil — the Cold Spot, and hemispherical power asymmetry. Statistical isotropy is mildly but persistently violated.'},
+{f:'LC',n:8,c:'EMP',lab:'empirical',t:'The primordial lithium problem',w:'Nucleosynthesis predicts about three times the lithium-7 actually observed.'},
+{f:'LC',n:9,c:'FIN',lab:'fine-tuning',t:'Horizon and flatness',w:'The microwave sky is uniform across regions never in causal contact, and Ω is tuned to one. Inflation was invented for this — and arrives carrying the measure problem, eternal inflation, its own initial conditions, and the trans-Planckian problem. A fix that needs fixing.'},
+{f:'LC',n:10,c:'EMP',lab:'empirical',t:'JWST early massive galaxies',w:'Galaxies too massive and too mature too early for the cold-dark-matter growth timeline.'},
+{f:'LC',n:11,c:'INC',lab:'meta',t:'The dark-sector IOU',w:'Ninety-five per cent of the energy budget is two substances defined only by what they are not. The model’s successes are conditional on unverified components.'}
+];
+
+/* ── the premise ledger — §8.1, with the entries each premise roots ─────── */
+var LEDGER = [
+ {a:'No preferred frame; simultaneity is relative.', b:'A preferred frame — the lattice, and the tick. <em>Now is the count, everywhere at once.</em>', k:['SR1','SR2','SR5','SR6','GR4','GR6']},
+ {a:'Continuum spacetime with no shortest length.', b:'A discrete lattice with a floor: minimum closure at ℓ_P.', k:['GR1','SM11','SM12']},
+ {a:'Gravity is attraction, sourced by mass.', b:'Nothing pulls. Occluded convergence pushes; orbits are least-resistance paths.', k:['MO1','MO3','MO4','LC2','LC6']},
+ {a:'A wavefunction, plus a collapse law. Two laws.', b:'Deterministic relay mechanics. Real wound particles. No ψ, and nothing to collapse.', k:['QM1','QM2','QM3','QM6','QM7','QM8','QM9','QM10','QM12']},
+ {a:'Only local hidden variables are permitted.', b:'A nonlocal substrate — one tick from every boundary — with a frame to carry it.', k:['QM4','QM5']},
+ {a:'A fundamental scalar Higgs and free Yukawas.', b:'Mass is the cost of reorganising throughput. The mass ratio is topology — 6π⁵, marked OPEN.', k:['SM1','SM8','SM13']},
+ {a:'Quarks, gluons, and a QCD θ-term.', b:'Nucleons are whole trefoil knots. No constituents to confine.', k:['SM3','SM10','SM15']},
+ {a:'The vacuum carries zero-point energy.', b:'The lattice has no QFT vacuum energy. There is no Λ to be 10¹²⁰ wrong.', k:['SM2','LC1']},
+ {a:'A singularity behind the horizon, where information dies.', b:'Horizon yes, at z = ½. Singularity no — the core is the koppa dissolution surface, throat of zero width.', k:['GR2','GR3']},
+ {a:'Extra dimensions, supersymmetry, and a landscape.', b:'Three of space and the relay tick. One lattice. No landscape to search.', k:['ST1','ST2','ST3','ST4','ST5','ST6','ST7']},
+ {a:'An inflaton and a dark sector, to repair the anomalies.', b:'Relay-throughput cosmology. The horizon problem dissolves when every point is one relay tick from every boundary.', k:['LC9','LC11']},
+ {a:'Inertia unexplained — Mach named, never delivered.', b:'Inertia is throughput cost measured against the lattice. Machian because there is a lattice to be Machian about.', k:['GR9']}
+];
+</script>
+<script>
+/* ══════════════════════════════════════════════════════════════════════════
+   THE CAST — line-drawn glyphs, not likenesses. Quotes are as published or
+   as reported, and the marker on each card says which.
+   ══════════════════════════════════════════════════════════════════════════ */
+var PEOPLE = {
+ einstein:{n:'Albert Einstein',d:'1879 – 1955',f:{hair:'wild',fac:'mous',col:'open'},
+   q:'According to the general theory of relativity, space without ether is unthinkable.',
+   rp:'Leiden, 1920 · translated',
+   th:'He took the medium out in 1905 and put a version of it back fifteen years later — one with no state of motion and no parts you could follow. The paradoxes of this act live in the gap between those two positions.'},
+ lorentz:{n:'Hendrik Lorentz',d:'1853 – 1928',f:{hair:'bald',fac:'beard',col:'high'},
+   th:'Had the transformations first, with a medium underneath them and rods that shortened because they were moving through something. Same arithmetic, different world. No measurement since has told the two accounts apart.'},
+ ehrenfest:{n:'Paul Ehrenfest',d:'1880 – 1933',f:{hair:'part',gl:'round',fac:'mous',col:'high'},
+   q:'In recent years it has become ever more difficult for me to follow developments in physics with understanding.',
+   rp:'1933 letter · translated · as reported',
+   th:'Spun the disk in 1909 and found the one place where special relativity contradicts itself outright. He spent his life at the seams of theories and felt every one of them.'},
+ reichenbach:{n:'Hans Reichenbach',d:'1891 – 1953',f:{hair:'recede',gl:'round',col:'tie'},
+   th:'Showed that synchronising two clocks is a definition you adopt, not a fact you find — the one-way speed of light is a convention. Every experiment measures the round trip.'},
+
+ penrose:{n:'Roger Penrose',d:'b. 1931',f:{hair:'swept',gl:'square',col:'open'},
+   th:'Proved in 1965 that the infinity at the centre is generic, not a coordinate accident. A theorem, produced by the theory, marking the place the theory stops.'},
+ hawking:{n:'Stephen Hawking',d:'1942 – 2018',f:{hair:'swept',gl:'square',col:'open',prop:'chair'},
+   q:'God not only plays dice, He sometimes throws them where they cannot be seen.',
+   rp:'published · on horizons',
+   th:'Made the horizon radiate, then spent thirty years on what the radiation destroys. Conceded the information bet in 2004 with a baseball encyclopedia, and most of the field still does not consider the matter closed.'},
+ wheeler:{n:'John A. Wheeler',d:'1911 – 2008',f:{hair:'part',gl:'round',col:'bow'},
+   th:'His equation with DeWitt describes the entire state of the universe and contains no time variable at all. He named the black hole, taught half the field, and left that one on the table.'},
+ godel:{n:'Kurt Gödel',d:'1906 – 1978',f:{hair:'part',gl:'round',col:'tie',thin:1},
+   rp:'1949 · paraphrase',
+   q:'If time travel is possible in some universes, an objective lapse of time loses its meaning.',
+   th:'Gave Einstein a rotating universe for his seventieth birthday, with closed timelike curves in it. Einstein’s published reply asked whether such solutions should be excluded on physical grounds. Nothing in the theory excludes them.'},
+
+ schrodinger:{n:'Erwin Schrödinger',d:'1887 – 1961',f:{hair:'wild',gl:'round',col:'bow'},
+   q:'One can even set up quite ridiculous cases.',
+   rp:'1935 · translated · introducing the cat',
+   th:'Wrote the cat as an objection to being asked to take the superposition literally. The objection became the mascot and the premise it attacked was kept.'},
+ bell:{n:'John Stewart Bell',d:'1928 – 1990',f:{hair:'recede',gl:'square',fac:'beard',col:'open'},
+   q:'Ordinary quantum mechanics is unprofessionally vague and ambiguous.',
+   rp:'“Against measurement”, 1990',
+   th:'Turned Einstein’s objection into a testable number and then spent his career pointing out that the theory which passed the test still cannot say what happens. Asked why the pilot-wave account was left out of the textbooks and never got an answer.'},
+ everett:{n:'Hugh Everett III',d:'1930 – 1982',f:{hair:'part',gl:'square',col:'tie',prop:'cig'},
+   th:'Deleted the collapse law — the cleanest fix anyone has proposed — and paid for it in worlds. Bohr’s circle dismissed him, his thesis was cut down before publication, and he left physics for defence analysis and never came back.'},
+ bohr:{n:'Niels Bohr',d:'1885 – 1962',f:{hair:'part',col:'tie',prop:'pipe'},
+   q:'Anyone who is not shocked by quantum theory has not understood it.',
+   rp:'as reported',
+   th:'Held the line that the formalism plus the laboratory is all there is to have. It is a coherent position. It is also the reason the question was closed for forty years.'},
+
+ dirac:{n:'Paul Dirac',d:'1902 – 1984',f:{hair:'part',col:'high'},
+   q:'I am very dissatisfied with the situation… This is just not sensible mathematics.',
+   rp:'1975 lectures · on renormalisation',
+   th:'Would not sign off on discarding infinities, however well the remainder agreed with experiment. He thought the agreement was hiding something, not proving something.'},
+ feynman:{n:'Richard Feynman',d:'1918 – 1988',f:{hair:'swept',col:'open',prop:'grin'},
+   q:'No matter how clever the word, it is what I would call a dippy process.',
+   rp:'QED, 1985 · on renormalisation',
+   th:'Won the prize for the machinery and called the machinery hocus-pocus in print. His objection was not to the answers; it was to the continuum that made the subtraction necessary.'},
+ pauli:{n:'Wolfgang Pauli',d:'1900 – 1958',f:{hair:'short',col:'tie',round:1},
+   q:'I have done a terrible thing. I have postulated a particle that cannot be detected.',
+   rp:'1930 · as reported',
+   th:'Invented a particle to save a conservation law. It was found, and then it came back to break the model that inherited it: the Standard Model says the neutrino is massless and the oscillations say otherwise.'},
+ weinberg:{n:'Steven Weinberg',d:'1933 – 2021',f:{hair:'recede',gl:'square',col:'tie'},
+   th:'Built a third of the Standard Model, then wrote the review that made the vacuum-energy discrepancy the field’s standing embarrassment. He never stopped calling it a crisis rather than a curiosity.'},
+
+ susskind:{n:'Leonard Susskind',d:'b. 1940',f:{hair:'bald',gl:'square',fac:'beard',col:'open'},
+   th:'Took the landscape at face value: with 10⁵⁰⁰ vacua on the shelf, ours is the one that permits observers, and that is the explanation on offer. He argues it is what the theory actually says.'},
+ gross:{n:'David Gross',d:'b. 1941',f:{hair:'recede',gl:'square',fac:'beard',col:'tie'},
+   q:'Never, never, never give up.',
+   rp:'as reported · against anthropic selection',
+   th:'Refuses the anthropic trade on the ground that it converts physics into a story about our own presence. Both he and Susskind are looking at the same fact, and the theory cannot break the tie.'},
+ polchinski:{n:'Joseph Polchinski',d:'1954 – 2018',f:{hair:'short',fac:'beard',col:'open'},
+   th:'Co-authored the firewall argument while trying to show there was no firewall. The paper is what a field looks like when it audits itself properly and does not like the result.'},
+
+ milgrom:{n:'Mordehai Milgrom',d:'b. 1946',f:{hair:'short',gl:'square',fac:'beard',col:'open'},
+   rp:'paraphrase of his stated position',
+   q:'It is a phenomenological law. The theory that sets its scale has not been written.',
+   th:'Wrote a law in 1983 that predicts individual rotation curves from the visible matter alone, and has been straight about the fact that the number in it was put there by hand.'},
+ zwicky:{n:'Fritz Zwicky',d:'1898 – 1974',f:{hair:'short',col:'bow',brow:1},
+   q:'dunkle Materie',
+   rp:'1933 · his coinage',
+   th:'Counted Coma, found the galaxies moving far too fast for the light they showed, and named what was missing. The field ignored him for forty years.'},
+ rubin:{n:'Vera Rubin',d:'1928 – 2016',f:{hair:'bob',gl:'round',col:'open'},
+   q:'That’s probably a good number for the ratio of our ignorance to our knowledge.',
+   rp:'on the ten-to-one dark-to-light ratio',
+   th:'Made the discrepancy impossible to ignore, spiral after spiral. She was careful all her life to call it a discrepancy rather than a substance.'},
+ guth:{n:'Alan Guth',d:'b. 1947',f:{hair:'short',gl:'square',fac:'beard',col:'open'},
+   q:'The universe is the ultimate free lunch.',
+   rp:'on inflation',
+   th:'Built the repair for the horizon and flatness problems, and it worked so well it became standard within a decade.'},
+ steinhardt:{n:'Paul Steinhardt',d:'b. 1952',f:{hair:'short',gl:'square',col:'open'},
+   th:'Helped build inflationary cosmology and now argues in public that, as practised, it cannot be falsified — eternal inflation produces every outcome somewhere, and the inflaton needs initial conditions as special as the ones it was hired to explain.'},
+ riess:{n:'Adam Riess',d:'b. 1969',f:{hair:'short',col:'open'},
+   th:'Runs the distance ladder that says H₀ ≈ 73 while the microwave background says ≈ 67. Both teams have hunted their own systematics for a decade and neither has found the error.'}
+};
+
+/* ── portrait glyph builder ────────────────────────────────────────────── */
+function glyph(f){
+  f = f || {};
+  var s = '<svg viewBox="0 0 60 70" fill="none" stroke="currentColor" stroke-width="1.3" ' +
+          'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">';
+  /* digital dot matrix behind the head */
+  var d = '';
+  for (var y = 6; y < 52; y += 6) for (var x = 8; x < 54; x += 6) d += 'M' + x + ' ' + y + 'h.6';
+  s += '<path d="' + d + '" stroke="currentColor" stroke-width="1" opacity=".13"/>';
+  var rx = f.round ? 16 : (f.thin ? 12.5 : 14), ry = f.thin ? 18 : 17;
+  /* shoulders + neck */
+  s += '<path d="M6 70 q3 -14 24 -14 q21 0 24 14"/>';
+  s += '<path d="M24 46 v9 M36 46 v9"/>';
+  /* head */
+  s += '<ellipse cx="30" cy="30" rx="' + rx + '" ry="' + ry + '"/>';
+  /* hair */
+  var H = {
+    wild:  'M15 24 q-6 -6 -2 -11 M45 24 q6 -6 2 -11 M17 18 q13 -12 26 0 M13 14 q4 -8 10 -9 M47 14 q-4 -8 -10 -9',
+    bald:  'M17 24 q3 -8 13 -8 q10 0 13 8',
+    part:  'M16 22 q4 -10 14 -10 q10 0 14 10 M30 12 v8',
+    recede:'M17 21 q5 -7 13 -7 q8 0 13 7 M22 15 q8 -4 16 0',
+    swept: 'M16 22 q5 -11 15 -10 q11 1 13 10 M18 16 q10 -6 22 -2',
+    short: 'M16 23 q4 -11 14 -11 q10 0 14 11',
+    bob:   'M15 23 q3 -12 15 -12 q12 0 15 12 M15 23 v11 M45 23 v11'
+  };
+  s += '<path d="' + (H[f.hair] || H.short) + '"/>';
+  /* brows + eyes */
+  if (f.brow) s += '<path d="M22 26 l6 2 M38 26 l-6 2"/>';
+  s += '<path d="M25 31 h.6 M35 31 h.6" stroke-width="2.4"/>';
+  /* glasses */
+  if (f.gl === 'round') s += '<circle cx="25" cy="31" r="4.6"/><circle cx="35" cy="31" r="4.6"/><path d="M29.6 31 h.8 M20.4 30 l-3.5 -1 M39.6 30 l3.5 -1"/>';
+  if (f.gl === 'square') s += '<path d="M20 27.5 h10 v6 h-10 z M30 27.5 h10 v6 h-10 z M16.5 28.5 l3.5 -1 M43.5 28.5 l-3.5 -1"/>';
+  /* nose + mouth */
+  s += '<path d="M30 33 v4 l2 1"/>';
+  if (f.prop === 'grin') s += '<path d="M25 41 q5 4 10 0"/>';
+  else if (f.fac === 'beard') s += '<path d="M20 36 q1 14 10 14 q9 0 10 -14 M25 41 q5 2 10 0"/>';
+  else if (f.fac === 'mous') s += '<path d="M25 39 q5 -2 10 0 M26 42 q4 2 8 0"/>';
+  else s += '<path d="M26 41 h8"/>';
+  /* collar */
+  var C = {
+    bow:  'M30 58 l-7 -4 v8 z M30 58 l7 -4 v8 z',
+    tie:  'M30 56 l-4 3 l4 10 l4 -10 z',
+    high: 'M22 55 l8 6 l8 -6 M22 55 v6 M38 55 v6',
+    open: 'M23 56 l7 7 l7 -7'
+  };
+  s += '<path d="' + (C[f.col] || C.open) + '"/>';
+  /* props */
+  if (f.prop === 'pipe') s += '<path d="M34 43 l8 3 q3 1 3 4"/>';
+  if (f.prop === 'cig')  s += '<path d="M35 41 l7 -2" stroke-width="1.8"/><path d="M43 38 q1 -3 -1 -5" opacity=".5"/>';
+  if (f.prop === 'chair')s += '<path d="M6 70 v-6 h48 v6" opacity=".55"/>';
+  return s + '</svg>';
+}
+</script>
+<script>
+/* ══════════════════════════════════════════════════════════════════════════
+   RENDER — every count on the page is derived from CENSUS, never typed in
+   ══════════════════════════════════════════════════════════════════════════ */
+var $ = function (s, r) { return (r || document).querySelector(s); };
+var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+var KEY = function (e) { return e.f + e.n; };
+var CLS = { LOG:'Logical', SLF:'Self-limiting', FIN:'Fine-tuning', EMP:'Empirical',
+            INT:'Interpretational', INC:'Incompleteness' };
+
+/* ── per-act entry lists ───────────────────────────────────────────────── */
+$$('[data-entries]').forEach(function (host) {
+  var f = host.getAttribute('data-entries');
+  var rows = CENSUS.filter(function (e) { return e.f === f; });
+  host.innerHTML = rows.map(function (e) {
+    return '<div class="entry"><div class="n">' + e.n + '</div><div>' +
+      '<div class="t">' + e.t + '<span class="lab ' + e.c + '">' + e.lab + '</span></div>' +
+      '<div class="w">' + e.w + '</div></div></div>';
+  }).join('');
+});
+
+/* ── cast strips ───────────────────────────────────────────────────────── */
+$$('[data-cast]').forEach(function (host) {
+  host.innerHTML = host.getAttribute('data-cast').split(',').map(function (id) {
+    var p = PEOPLE[id.trim()];
+    if (!p) return '';
+    return '<div class="who">' + glyph(p.f) + '<div>' +
+      '<div class="nm">' + p.n + '</div><div class="dt">' + p.d + '</div>' +
+      (p.q ? '<div class="sq"><q>' + p.q + '</q>' +
+             (p.rp ? '<span class="rp">' + p.rp + '</span>' : '') + '</div>' : '') +
+      '<div class="th">' + p.th + '</div></div></div>';
+  }).join('');
+});
+
+/* ── tallies ───────────────────────────────────────────────────────────── */
+var COUNT = { LOG:0, SLF:0, FIN:0, EMP:0, INT:0, INC:0 };
+CENSUS.forEach(function (e) { COUNT[e.c]++; });
+var TOT = CENSUS.length, PAR = COUNT.LOG + COUNT.SLF;
+['tTot'].forEach(function (id) { if ($('#' + id)) $('#' + id).textContent = TOT; });
+Object.keys(COUNT).forEach(function (k) { if ($('#t' + k)) $('#t' + k).textContent = COUNT[k]; });
+if ($('#hcTot')) $('#hcTot').textContent = TOT;
+if ($('#hcPar')) $('#hcPar').textContent = PAR;
+
+/* ── the board (built twice: filterable, and the ledger's own copy) ────── */
+function buildBoard(host) {
+  host.innerHTML = Object.keys(FW).map(function (f) {
+    var rows = CENSUS.filter(function (e) { return e.f === f; });
+    return '<div class="bcol" style="--bc:' + FW[f].col + '"><h5>' + FW[f].name +
+      '<span>' + rows.length + '</span></h5>' +
+      rows.map(function (e) {
+        return '<div class="chip" data-k="' + KEY(e) + '" data-c="' + e.c + '" ' +
+          'style="--cc:' + FW[f].col + '" title="' + e.lab + '"><u>' + e.c + '</u>' + e.t + '</div>';
+      }).join('') + '</div>';
+  }).join('');
+}
+buildBoard($('#board'));
+buildBoard($('#board2'));
+
+/* ── severity filter ───────────────────────────────────────────────────── */
+var fbox = $('#filters'), active = 'ALL';
+fbox.innerHTML = ['ALL'].concat(Object.keys(CLS)).map(function (k) {
+  return '<button type="button" data-k="' + k + '" aria-pressed="' + (k === 'ALL') + '">' +
+    (k === 'ALL' ? 'all ' + TOT : CLS[k] + ' · ' + COUNT[k]) + '</button>';
+}).join('');
+fbox.addEventListener('click', function (ev) {
+  var b = ev.target.closest('button'); if (!b) return;
+  active = b.getAttribute('data-k');
+  $$('button', fbox).forEach(function (x) {
+    x.setAttribute('aria-pressed', String(x.getAttribute('data-k') === active));
+  });
+  $$('.chip', $('#board')).forEach(function (c) {
+    c.setAttribute('data-dim', (active === 'ALL' || c.getAttribute('data-c') === active) ? '0' : '1');
+  });
+});
+
+/* ── the premise ledger ────────────────────────────────────────────────── */
+var lhost = $('#ledger'), lit = {};
+lhost.innerHTML = LEDGER.map(function (r, i) {
+  return '<div class="lrow" role="button" tabindex="0" aria-pressed="false" data-i="' + i + '">' +
+    '<div class="a">' + r.a + '</div><div class="b">' + r.b + '</div>' +
+    '<div class="c">' + r.k.length + ' entries</div></div>';
+}).join('');
+
+function paintLedger() {
+  var keys = {}, nLog = 0, nSlf = 0, n = 0;
+  Object.keys(lit).forEach(function (i) {
+    if (!lit[i]) return;
+    LEDGER[i].k.forEach(function (k) { keys[k] = 1; });
+  });
+  var anyOn = Object.keys(keys).length > 0;
+  $$('.chip', $('#board2')).forEach(function (c) {
+    var on = !!keys[c.getAttribute('data-k')];
+    c.setAttribute('data-dim', on ? '1' : '0');
+    c.setAttribute('data-lit', '0');
+    if (on) { n++; if (c.getAttribute('data-c') === 'LOG') nLog++; if (c.getAttribute('data-c') === 'SLF') nSlf++; }
+  });
+  if (!anyOn) $$('.chip', $('#board2')).forEach(function (c) { c.setAttribute('data-dim', '0'); });
+  $('#lgOut').textContent = n;
+  $('#lgLog').textContent = nLog;
+  $('#lgSlf').textContent = nSlf;
+  $('#lgLeft').textContent = TOT - n;
+}
+function toggleRow(row) {
+  var i = row.getAttribute('data-i');
+  lit[i] = !lit[i];
+  row.setAttribute('aria-pressed', String(!!lit[i]));
+  paintLedger();
+}
+lhost.addEventListener('click', function (ev) {
+  var r = ev.target.closest('.lrow'); if (r) toggleRow(r);
+});
+lhost.addEventListener('keydown', function (ev) {
+  if (ev.key !== 'Enter' && ev.key !== ' ') return;
+  var r = ev.target.closest('.lrow'); if (!r) return;
+  ev.preventDefault(); toggleRow(r);
+});
+/* open with every premise removed — the census's actual claim */
+LEDGER.forEach(function (_, i) { lit[i] = true; });
+$$('.lrow', lhost).forEach(function (r) { r.setAttribute('aria-pressed', 'true'); });
+paintLedger();
+</script>
+<script>
+/* ══════════════════════════════════════════════════════════════════════════
+   THE DESIGN ELEMENTS — one motif per framework. Each is drawn twice:
+   large and slow as the parallax field behind the act, and small and crisp
+   as the act's sigil. Same function family, same meaning.
+   ══════════════════════════════════════════════════════════════════════════ */
+var COL = { sr:'#3f6b86', gr:'#6a4c9c', qm:'#14807a', sm:'#b4432c',
+            st:'#a03a72', mo:'#937512', lc:'#24417e', sdt:'#b07430' };
+
+function rgba(hex, a) {
+  var n = parseInt(hex.slice(1), 16);
+  return 'rgba(' + (n >> 16) + ',' + ((n >> 8) & 255) + ',' + (n & 255) + ',' + a + ')';
+}
+
+/* ── FIELD MOTIFS — w,h viewport; p = parallax offset px; a = alpha ─────── */
+var MOTIF = {
+  /* SR · simultaneity rules — light-cone diagonals */
+  sr: function (g, w, h, p, a, c) {
+    g.strokeStyle = rgba(c, a); g.lineWidth = 1;
+    var s = 74, o = (p * 0.10) % s;
+    for (var x = -h - s; x < w + s; x += s) {
+      g.beginPath(); g.moveTo(x + o, 0); g.lineTo(x + o + h, h); g.stroke();
+      g.beginPath(); g.moveTo(x - o, 0); g.lineTo(x - o + h, -h); g.stroke();
+    }
+  },
+  /* GR · the sagging grid */
+  gr: function (g, w, h, p, a, c) {
+    g.strokeStyle = rgba(c, a * 1.1); g.lineWidth = 1;
+    var cx = w * 0.5, cy = h * 0.52 + Math.sin(p * 0.0016) * 40, K = 26000;
+    function dz(x, y) { var dx = x - cx, dy = y - cy, r = Math.sqrt(dx * dx + dy * dy) + 60; return K / r; }
+    var s = 62, i, x, y;
+    for (y = -s; y < h + s; y += s) {
+      g.beginPath();
+      for (x = -s; x <= w + s; x += 12) { var yy = y + dz(x, y) * 0.55; x === -s ? g.moveTo(x, yy) : g.lineTo(x, yy); }
+      g.stroke();
+    }
+    for (x = -s; x < w + s; x += s) {
+      g.beginPath();
+      for (y = -s; y <= h + s; y += 12) { var xx = x + (x - cx) / Math.abs(x - cx || 1) * dz(x, y) * 0.16; y === -s ? g.moveTo(xx, y) : g.lineTo(xx, y); }
+      g.stroke();
+    }
+  },
+  /* QM · two-slit fringes */
+  qm: function (g, w, h, p, a, c) {
+    var n = 90, bw = w / n, i;
+    for (i = 0; i < n; i++) {
+      var u = (i / n - 0.5) * 15 + Math.sin(p * 0.0012) * 0.4;
+      var I = Math.pow(Math.cos(u), 2) * Math.pow(Math.sin(u * 0.31) / (u * 0.31 || 1), 2);
+      g.fillStyle = rgba(c, a * 1.7 * I);
+      g.fillRect(i * bw, 0, bw + 1, h);
+    }
+  },
+  /* SM · the dial ladder */
+  sm: function (g, w, h, p, a, c) {
+    g.strokeStyle = rgba(c, a); g.lineWidth = 1;
+    var s = 46, o = (p * 0.06) % s, x, y, k = 0;
+    for (x = -s; x < w + s; x += s) {
+      for (y = -s + ((x / s) % 2) * 12; y < h + s; y += s) {
+        var yy = y + o, r = 7 + ((k = (k * 37 + 11) % 97) / 97) * 5;
+        g.beginPath(); g.arc(x, yy, r, 0, 6.2832); g.stroke();
+        var ang = (k / 97) * 6.2832;
+        g.beginPath(); g.moveTo(x, yy); g.lineTo(x + Math.cos(ang) * r, yy + Math.sin(ang) * r); g.stroke();
+      }
+    }
+  },
+  /* ST · coiled strings */
+  st: function (g, w, h, p, a, c) {
+    g.lineWidth = 1.1;
+    for (var j = 0; j < 9; j++) {
+      g.strokeStyle = rgba(c, a * (0.5 + j / 14));
+      var y0 = (j + 0.5) * h / 9 + Math.sin(p * 0.001 + j) * 16;
+      g.beginPath();
+      for (var x = 0; x <= w; x += 8) {
+        var y = y0 + Math.sin(x * 0.021 + p * 0.004 + j * 1.7) * (10 + j * 2.4) +
+                Math.sin(x * 0.007 - p * 0.002) * 8;
+        x === 0 ? g.moveTo(x, y) : g.lineTo(x, y);
+      }
+      g.stroke();
+    }
+  },
+  /* MO · rotation curves that refuse to fall */
+  mo: function (g, w, h, p, a, c) {
+    g.lineWidth = 1.2;
+    for (var j = 0; j < 7; j++) {
+      g.strokeStyle = rgba(c, a * (0.55 + j / 12));
+      var base = h * (0.16 + j * 0.12) + Math.sin(p * 0.0014 + j) * 10;
+      g.beginPath();
+      for (var x = 0; x <= w; x += 8) {
+        var u = x / w * 6, y = base - (1 - Math.exp(-u * 1.5)) * (h * 0.075 + j * 3);
+        x === 0 ? g.moveTo(x, y) : g.lineTo(x, y);
+      }
+      g.stroke();
+    }
+  },
+  /* ΛCDM · the dark annulus */
+  lc: function (g, w, h, p, a, c) {
+    var cx = w * 0.5, cy = h * 0.5, i;
+    g.lineWidth = 1;
+    for (i = 1; i < 22; i++) {
+      var r = i * 44 + (p * 0.05) % 44;
+      g.strokeStyle = rgba(c, a * (i < 3 ? 1.6 : 0.7));
+      g.beginPath();
+      g.arc(cx, cy, r, i < 3 ? 0 : 0.32, i < 3 ? 6.2832 : 6.2832 - 0.32);
+      g.stroke();
+    }
+  },
+  /* SDT · the shadow cone */
+  sdt: function (g, w, h, p, a, c) {
+    var cx = w * 0.5, cy = h * 0.5, i, n = 40;
+    g.lineWidth = 1;
+    for (i = 0; i < n; i++) {
+      var th = (i / n) * 6.2832 + p * 0.0004;
+      var R1 = Math.max(w, h) * 0.72, R0 = 70 + Math.sin(p * 0.003 + i) * 8;
+      g.strokeStyle = rgba(c, a * 0.85);
+      g.beginPath();
+      g.moveTo(cx + Math.cos(th) * R1, cy + Math.sin(th) * R1);
+      g.lineTo(cx + Math.cos(th) * R0, cy + Math.sin(th) * R0);
+      g.stroke();
+    }
+    g.strokeStyle = rgba(c, a * 1.6);
+    g.beginPath(); g.arc(cx, cy, 54, 0, 6.2832); g.stroke();
+  }
+};
+
+/* ── SIGILS — the same element, small and crisp ────────────────────────── */
+var SIGIL = {
+  sr: function (g, c) { g.strokeStyle = c; for (var i = -3; i < 7; i++) { g.beginPath(); g.moveTo(i * 14, 0); g.lineTo(i * 14 + 64, 64); g.stroke(); } },
+  gr: function (g, c) {
+    g.strokeStyle = c;
+    for (var i = 1; i < 5; i++) {
+      g.beginPath();
+      for (var x = 4; x <= 60; x += 4) { var y = i * 12 + 22 / (Math.abs(x - 32) / 9 + 1); x === 4 ? g.moveTo(x, y) : g.lineTo(x, y); }
+      g.stroke();
+    }
+  },
+  qm: function (g, c) { for (var i = 0; i < 13; i++) { var u = (i / 13 - 0.46) * 12; g.fillStyle = c; g.globalAlpha = Math.pow(Math.cos(u), 2); g.fillRect(4 + i * 4.4, 8, 3.6, 48); } g.globalAlpha = 1; },
+  sm: function (g, c) { g.strokeStyle = c; [[20,22],[44,22],[20,44],[44,44]].forEach(function (d, k) { g.beginPath(); g.arc(d[0], d[1], 9, 0, 6.2832); g.stroke(); var a = k * 1.4 + .6; g.beginPath(); g.moveTo(d[0], d[1]); g.lineTo(d[0] + Math.cos(a) * 9, d[1] + Math.sin(a) * 9); g.stroke(); }); },
+  st: function (g, c) { g.strokeStyle = c; for (var j = 0; j < 4; j++) { g.beginPath(); for (var x = 4; x <= 60; x += 3) { var y = 14 + j * 12 + Math.sin(x * 0.28 + j) * 5; x === 4 ? g.moveTo(x, y) : g.lineTo(x, y); } g.stroke(); } },
+  mo: function (g, c) { g.strokeStyle = c; g.beginPath(); g.moveTo(8, 56); g.lineTo(8, 8); g.moveTo(8, 56); g.lineTo(58, 56); g.stroke(); g.lineWidth = 2; g.beginPath(); for (var x = 8; x <= 58; x += 2) { var y = 48 - (1 - Math.exp(-(x - 8) / 9)) * 28; x === 8 ? g.moveTo(x, y) : g.lineTo(x, y); } g.stroke(); },
+  lc: function (g, c) { g.strokeStyle = c; g.lineWidth = 2; g.beginPath(); g.arc(32, 32, 22, -1.2, 5.0); g.stroke(); g.setLineDash([2, 4]); g.beginPath(); g.arc(32, 32, 22, 5.0, 5.0832); g.stroke(); g.setLineDash([]); g.beginPath(); g.arc(32, 32, 7, 0, 6.2832); g.stroke(); },
+  sdt: function (g, c) {
+    g.strokeStyle = c;
+    for (var i = 0; i < 14; i++) { var t = i / 14 * 6.2832; g.beginPath(); g.moveTo(32 + Math.cos(t) * 28, 32 + Math.sin(t) * 28); g.lineTo(32 + Math.cos(t) * 13, 32 + Math.sin(t) * 13); g.stroke(); }
+    g.lineWidth = 2; g.beginPath(); g.arc(32, 32, 9, 0, 6.2832); g.stroke();
+  }
+};
+SIGIL.board = SIGIL.sdt; SIGIL.ledger = SIGIL.sdt; SIGIL.debts = SIGIL.sdt;
+
+function drawSigils() {
+  $$('.sigil').forEach(function (cv) {
+    var k = cv.getAttribute('data-sigil'), dpr = Math.min(devicePixelRatio || 1, 2);
+    cv.width = 64 * dpr; cv.height = 64 * dpr;
+    var g = cv.getContext('2d'); g.scale(dpr, dpr);
+    g.clearRect(0, 0, 64, 64); g.lineWidth = 1.2; g.lineCap = 'round';
+    g.save(); g.beginPath(); g.rect(2, 2, 60, 60); g.clip();
+    (SIGIL[k] || SIGIL.sdt)(g, COL[k] || COL.sdt);
+    g.restore();
+  });
+}
+</script>
+<script>
+/* ══════════════════════════════════════════════════════════════════════════
+   THE SCENES — one per act, driven by that act's scroll progress t ∈ [0,1]
+   ══════════════════════════════════════════════════════════════════════════ */
+var INK = '#1e1c18', SOFT = '#3d3830', FAINT = '#a49d92', WHIS = '#d8d2c6';
+function mono(g, s) { g.font = s + 'px "JetBrains Mono", ui-monospace, monospace'; }
+function lab(g, x, y, s, c, al) { mono(g, 10); g.fillStyle = c || FAINT; g.textAlign = al || 'left'; g.fillText(s, x, y); }
+function rnd(seed) { var s = seed; return function () { s = (s * 1103515245 + 12345) % 2147483648; return s / 2147483648; }; }
+
+var SCENE = {
+
+/* ── SR · Ehrenfest's disk ─────────────────────────────────────────────── */
+sr: function (g, w, h, t, S) {
+  var C = COL.sr, cx = w / 2, cy = h * 0.46, R = Math.min(w, h) * 0.30;
+  var beta = Math.min(0.97, 0.15 + t * 0.72 + (S.spin || 0));
+  var gam = 1 / Math.sqrt(1 - beta * beta);
+  S.ph = (S.ph || 0) + beta * 0.05;
+  g.strokeStyle = WHIS; g.lineWidth = 1;
+  g.beginPath(); g.arc(cx, cy, R, 0, 6.2832); g.stroke();
+  /* the rim rulers, each contracted by 1/γ — they no longer close the circle */
+  var N = 26, seg = 6.2832 / N, cov = seg / gam;
+  for (var i = 0; i < N; i++) {
+    var a0 = S.ph + i * seg;
+    g.strokeStyle = C; g.lineWidth = 4;
+    g.beginPath(); g.arc(cx, cy, R, a0, a0 + cov * 0.86); g.stroke();
+  }
+  /* the gap the rim cannot supply */
+  var gapA = 6.2832 * (1 - 1 / gam);
+  g.strokeStyle = 'rgba(142,42,42,.85)'; g.lineWidth = 4;
+  g.beginPath(); g.arc(cx, cy, R + 11, S.ph - gapA, S.ph); g.stroke();
+  /* radius — uncontracted */
+  g.strokeStyle = SOFT; g.lineWidth = 1.4;
+  g.beginPath(); g.moveTo(cx, cy); g.lineTo(cx + R * Math.cos(S.ph), cy + R * Math.sin(S.ph)); g.stroke();
+  g.fillStyle = INK; g.beginPath(); g.arc(cx, cy, 3, 0, 6.2832); g.fill();
+  lab(g, cx, cy + R + 34, 'radius: unchanged · rim: contracted', SOFT, 'center');
+  /* readout */
+  mono(g, 13); g.fillStyle = INK; g.textAlign = 'left';
+  g.fillText('v/c   ' + beta.toFixed(3), 16, h - 58);
+  g.fillText('γ     ' + gam.toFixed(3), 16, h - 40);
+  g.fillStyle = '#8e2a2a';
+  g.fillText('C/2R  ' + (Math.PI * gam).toFixed(3) + '   (π = 3.142)', 16, h - 20);
+  lab(g, w - 14, h - 20, 'missing rim ' + (100 * (1 - 1 / gam)).toFixed(1) + '%', '#8e2a2a', 'right');
+},
+
+/* ── GR · the well with no bottom ──────────────────────────────────────── */
+gr: function (g, w, h, t, S) {
+  var C = COL.gr, cx = w / 2, cy = h * 0.34, K = 1400 + t * 5200;
+  g.lineWidth = 1;
+  for (var i = 1; i <= 16; i++) {
+    var r = i * Math.min(w, h) * 0.035, z = K / (r + 8);
+    g.strokeStyle = rgba(C, 0.15 + 0.5 * (1 - i / 16));
+    g.beginPath(); g.ellipse(cx, cy + Math.min(z, h), r, r * 0.34, 0, 0, 6.2832); g.stroke();
+  }
+  for (var k = 0; k < 18; k++) {
+    var a = k / 18 * 6.2832;
+    g.strokeStyle = rgba(C, 0.16); g.beginPath();
+    for (var s = 1; s <= 16; s++) {
+      var rr = s * Math.min(w, h) * 0.035, zz = Math.min(K / (rr + 8), h);
+      var X = cx + Math.cos(a) * rr, Y = cy + zz + Math.sin(a) * rr * 0.34;
+      s === 1 ? g.moveTo(X, Y) : g.lineTo(X, Y);
+    }
+    g.stroke();
+  }
+  /* horizon */
+  var rs = Math.min(w, h) * 0.115, zh = K / (rs + 8);
+  g.strokeStyle = INK; g.lineWidth = 1.6; g.setLineDash([4, 4]);
+  g.beginPath(); g.ellipse(cx, cy + Math.min(zh, h), rs, rs * 0.34, 0, 0, 6.2832); g.stroke();
+  g.setLineDash([]);
+  lab(g, cx + rs + 10, cy + Math.min(zh, h) - 6, 'horizon', INK);
+  /* the faller */
+  S.fall = (S.fall || 0) + 0.006 + (S.kick ? 0.02 : 0);
+  if (S.fall > 1) { S.fall = 0; S.lost = (S.lost || 0) + 1; }
+  var f = S.fall, rf = Math.min(w, h) * 0.44 * (1 - f), af = f * 12;
+  var zf = Math.min(K / (rf + 8), h * 1.2);
+  g.fillStyle = f > 0.72 ? rgba(C, Math.max(0, 1 - (f - 0.72) / 0.28)) : INK;
+  g.beginPath(); g.arc(cx + Math.cos(af) * rf, cy + zf + Math.sin(af) * rf * 0.34, 4, 0, 6.2832); g.fill();
+  mono(g, 13); g.fillStyle = INK; g.textAlign = 'left';
+  g.fillText('curvature at r → 0 :  ' + (t > 0.86 ? '∞' : (K * 40 / 1e3).toFixed(0) + ' →'), 16, h - 40);
+  g.fillStyle = '#8e2a2a';
+  g.fillText('bits recovered :  0  of  ' + ((S.lost || 0) * 8), 16, h - 20);
+  lab(g, w - 14, h - 20, 'the theorem says the theory stops here', SOFT, 'right');
+},
+
+/* ── QM · U and R ──────────────────────────────────────────────────────── */
+qm: function (g, w, h, t, S) {
+  var C = COL.qm, midY = h * 0.42, x, i;
+  S.hist = S.hist || new Array(46).fill(0);
+  var sig = 0.06 + t * 0.13;
+  function psi2(u) { var a = Math.exp(-Math.pow((u - 0.5) / sig, 2) / 2); return a * (0.55 + 0.45 * Math.pow(Math.cos((u - 0.5) / sig * 2.2), 2)); }
+  /* U — the spreading packet */
+  g.beginPath(); g.moveTo(0, midY);
+  for (x = 0; x <= w; x += 3) g.lineTo(x, midY - psi2(x / w) * h * 0.26);
+  g.lineTo(w, midY); g.closePath();
+  g.fillStyle = rgba(C, 0.16); g.fill();
+  g.strokeStyle = C; g.lineWidth = 1.6; g.stroke();
+  lab(g, 14, 22, 'U  ·  linear, deterministic, reversible  ·  in the equations', C);
+  g.strokeStyle = WHIS; g.lineWidth = 1; g.beginPath(); g.moveTo(0, midY); g.lineTo(w, midY); g.stroke();
+  /* R — outcomes */
+  if (S.fire) {
+    S.fire = 0;
+    var u = 0.5 + (Math.random() + Math.random() + Math.random() - 1.5) * sig * 1.25;
+    var b = Math.max(0, Math.min(45, Math.floor(u * 46)));
+    S.hist[b]++; S.last = b; S.n = (S.n || 0) + 1;
+  }
+  var mx = Math.max.apply(null, S.hist) || 1, bw = w / 46;
+  for (i = 0; i < 46; i++) {
+    var hh = S.hist[i] / mx * h * 0.30;
+    g.fillStyle = i === S.last ? INK : rgba(C, 0.45);
+    g.fillRect(i * bw + 1, h - 44 - hh, bw - 2, hh);
+  }
+  g.strokeStyle = WHIS; g.beginPath(); g.moveTo(0, h - 44); g.lineTo(w, h - 44); g.stroke();
+  lab(g, 14, midY + 26, 'R  ·  one outcome, irreversible  ·  nowhere in the equations', '#8e2a2a');
+  mono(g, 12); g.fillStyle = SOFT; g.textAlign = 'left';
+  g.fillText('outcomes: ' + (S.n || 0) + '   —   the histogram converges on |ψ|², and no line of the theory says why', 14, h - 22);
+  lab(g, w - 14, 22, 'click to fire R', FAINT, 'right');
+},
+
+/* ── SM · precision, and the drawer of dials ───────────────────────────── */
+sm: function (g, w, h, t, S) {
+  var C = COL.sm, i;
+  var pred = '1.001 159 652 181 6', meas = '1.001 159 652 180 7';
+  var shown = Math.floor(2 + t * (pred.length - 2));
+  mono(g, 13); g.textAlign = 'left';
+  g.fillStyle = SOFT; g.fillText('electron magnetic moment', 16, 26);
+  mono(g, 15);
+  g.fillStyle = C;   g.fillText('theory   ' + pred.slice(0, shown), 16, 50);
+  g.fillStyle = INK; g.fillText('measured ' + meas.slice(0, shown), 16, 72);
+  lab(g, 16, 92, 'agreeing past one part in 10¹² — nothing else humans built comes near it', FAINT);
+  g.strokeStyle = WHIS; g.beginPath(); g.moveTo(16, 104); g.lineTo(w - 16, 104); g.stroke();
+  /* the dials */
+  var names = ['m_e','m_μ','m_τ','m_u','m_d','m_s','m_c','m_b','m_t','θ₁₂','θ₁₃','θ₂₃','δ_CP','g₁','g₂','g₃','v','m_H','θ_QCD'];
+  var R = rnd(7), cols = 10, r = Math.min(15, (w - 40) / cols / 2.6);
+  for (i = 0; i < names.length; i++) {
+    var cx = 24 + (i % cols) * ((w - 48) / (cols - 1)), cy = 132 + Math.floor(i / cols) * (r * 3.1);
+    var a = R() * 6.2832;
+    g.strokeStyle = rgba(C, 0.8); g.lineWidth = 1.2;
+    g.beginPath(); g.arc(cx, cy, r, 0, 6.2832); g.stroke();
+    g.beginPath(); g.moveTo(cx, cy); g.lineTo(cx + Math.cos(a) * r, cy + Math.sin(a) * r); g.stroke();
+    lab(g, cx, cy + r + 11, names[i], FAINT, 'center');
+  }
+  lab(g, 16, 132 + 2 * (r * 3.1) + 16, 'nineteen dials · every one measured · not one derived', SOFT);
+  /* the cancellation */
+  var y = h - 46;
+  g.fillStyle = rgba(C, 0.13); g.fillRect(16, y - 16, (w - 32) * Math.min(1, t * 1.4), 20);
+  g.strokeStyle = C; g.lineWidth = 1; g.strokeRect(16, y - 16, w - 32, 20);
+  mono(g, 11); g.fillStyle = SOFT; g.textAlign = 'left';
+  g.fillText('Higgs correction cancels for 34 places …', 22, y - 2);
+  g.textAlign = 'right'; g.fillStyle = INK; g.fillText('… leaving 125 GeV', w - 22, y - 2);
+  lab(g, 16, h - 12, 'one part in 10³⁴, with no symmetry asked to arrange it', FAINT);
+},
+
+/* ── ST · the landscape ────────────────────────────────────────────────── */
+st: function (g, w, h, t, S) {
+  var C = COL.st, x, layer;
+  S.pan = (S.pan || 0) + 0.6 + (S.drag || 0);
+  S.drag = (S.drag || 0) * 0.9;
+  var off = S.pan + t * 400;
+  for (layer = 2; layer >= 0; layer--) {
+    var sc = 1 - layer * 0.28, base = h * (0.42 + layer * 0.17), o = off * (0.4 + layer * 0.4);
+    g.beginPath(); g.moveTo(-4, h);
+    for (x = -4; x <= w + 4; x += 4) {
+      var u = (x + o) * 0.012;
+      var y = base - (Math.sin(u) * 22 + Math.sin(u * 2.31 + 1) * 15 + Math.sin(u * 5.17 + 2) * 9) * sc;
+      g.lineTo(x, y);
+    }
+    g.lineTo(w + 4, h); g.closePath();
+    g.fillStyle = rgba(C, 0.09 + layer * 0.10); g.fill();
+    g.strokeStyle = rgba(C, 0.45 + layer * 0.2); g.lineWidth = 1; g.stroke();
+  }
+  /* ours */
+  var ox = w * 0.5, ou = (ox + off * 1.2) * 0.012;
+  var oy = h * 0.76 - (Math.sin(ou) * 22 + Math.sin(ou * 2.31 + 1) * 15 + Math.sin(ou * 5.17 + 2) * 9) * 0.44;
+  g.strokeStyle = INK; g.lineWidth = 1.4;
+  g.beginPath(); g.moveTo(ox, oy); g.lineTo(ox, oy - 34); g.lineTo(ox + 26, oy - 27); g.lineTo(ox, oy - 20); g.stroke();
+  g.fillStyle = INK; g.beginPath(); g.arc(ox, oy, 4, 0, 6.2832); g.fill();
+  lab(g, ox + 30, oy - 24, 'ours', INK);
+  mono(g, 13); g.fillStyle = INK; g.textAlign = 'left';
+  var cnt = Math.min(500, Math.floor(t * 640));
+  g.fillText('vacua in the catalogue :  10^' + cnt, 16, 28);
+  lab(g, 16, 46, 'no principle inside the theory points at this one', SOFT);
+  lab(g, w - 14, h - 16, 'drag — you will not reach the edge', FAINT, 'right');
+},
+
+/* ── MO · the knob and the curve ───────────────────────────────────────── */
+mo: function (g, w, h, t, S) {
+  var C = COL.mo, i;
+  if (S.a0 == null) S.a0 = 0.55;
+  var a0 = Math.max(0.05, Math.min(1, S.a0 + (t - 0.5) * 0.10));
+  /* dial */
+  var dx = 52, dy = 62, dr = 30, ang = -2.2 + a0 * 4.4;
+  g.strokeStyle = WHIS; g.lineWidth = 6; g.beginPath(); g.arc(dx, dy, dr, -2.2, 2.2); g.stroke();
+  g.strokeStyle = C; g.beginPath(); g.arc(dx, dy, dr, -2.2, ang); g.stroke();
+  g.strokeStyle = INK; g.lineWidth = 2;
+  g.beginPath(); g.moveTo(dx, dy); g.lineTo(dx + Math.cos(ang) * dr, dy + Math.sin(ang) * dr); g.stroke();
+  lab(g, dx, dy + dr + 18, 'a₀ — by hand', SOFT, 'center');
+  mono(g, 12); g.fillStyle = INK; g.textAlign = 'left';
+  g.fillText((a0 * 2.2).toFixed(2) + ' × 10⁻¹⁰ m/s²', dx + dr + 18, dy - 4);
+  lab(g, dx + dr + 18, dy + 14, 'nothing in the law sets it', FAINT);
+  /* the curve */
+  var x0 = 40, y0 = h - 44, x1 = w - 20, y1 = h * 0.42;
+  g.strokeStyle = WHIS; g.lineWidth = 1;
+  g.beginPath(); g.moveTo(x0, y1 - 20); g.lineTo(x0, y0); g.lineTo(x1, y0); g.stroke();
+  lab(g, x0 - 6, y1 - 24, 'v', SOFT, 'right'); lab(g, x1, y0 + 14, 'r', SOFT, 'right');
+  var R = rnd(19), pts = [];
+  for (i = 0; i < 22; i++) { var u = (i + 1) / 22; pts.push([u, (1 - Math.exp(-u * 5.2)) * (0.86 + (R() - 0.5) * 0.11)]); }
+  function model(u) { return (1 - Math.exp(-u * 5.2 * (0.55 + a0 * 0.82))) * (0.4 + a0 * 0.8); }
+  g.strokeStyle = C; g.lineWidth = 2; g.beginPath();
+  for (i = 0; i <= 60; i++) { var uu = i / 60, X = x0 + uu * (x1 - x0), Y = y0 - model(uu) * (y0 - y1); i ? g.lineTo(X, Y) : g.moveTo(X, Y); }
+  g.stroke();
+  var rms = 0;
+  pts.forEach(function (p) {
+    var X = x0 + p[0] * (x1 - x0), Y = y0 - p[1] * (y0 - y1);
+    g.fillStyle = INK; g.beginPath(); g.arc(X, Y, 2.6, 0, 6.2832); g.fill();
+    rms += Math.pow(p[1] - model(p[0]), 2);
+  });
+  rms = Math.sqrt(rms / pts.length);
+  /* the cluster point, which no setting reaches */
+  var CX = x0 + 0.93 * (x1 - x0), CY = y0 - 1.92 * model(0.93) * (y0 - y1) * 0.5 - (y0 - y1) * 0.62;
+  g.strokeStyle = '#8e2a2a'; g.lineWidth = 1.6;
+  g.beginPath(); g.arc(CX, CY, 6, 0, 6.2832); g.stroke();
+  g.beginPath(); g.moveTo(CX, CY + 6); g.lineTo(CX, y0 - model(0.93) * (y0 - y1)); g.stroke();
+  lab(g, CX - 10, CY - 8, 'clusters · ×2 short', '#8e2a2a', 'right');
+  mono(g, 12); g.fillStyle = SOFT; g.textAlign = 'left';
+  g.fillText('galaxy RMS  ' + rms.toFixed(3) + '   ·   one knob fits a whole population', 40, h - 18);
+},
+
+/* ── ΛCDM · the budget and the tension ─────────────────────────────────── */
+lc: function (g, w, h, t, S) {
+  var C = COL.lc, x0 = 20, x1 = w - 20, y = 46, bh = 26;
+  var parts = [[0.05, INK, 'baryons 5%'], [0.27, rgba(C, 0.55), 'cold dark matter 27%'], [0.68, rgba(C, 0.22), 'dark energy 68%']];
+  var acc = 0;
+  parts.forEach(function (p) {
+    var X = x0 + acc * (x1 - x0), W = p[0] * (x1 - x0);
+    g.fillStyle = p[1]; g.fillRect(X, y, W, bh);
+    acc += p[0];
+  });
+  g.strokeStyle = C; g.lineWidth = 1; g.strokeRect(x0, y, x1 - x0, bh);
+  g.strokeStyle = rgba(C, 0.5);
+  for (var s = x0 + 0.05 * (x1 - x0); s < x1; s += 7) { g.beginPath(); g.moveTo(s, y); g.lineTo(s - 8, y + bh); g.stroke(); }
+  lab(g, x0, y - 8, 'everything ever seen, weighed or touched  →  5%', SOFT);
+  lab(g, x1, y + bh + 14, 'the other 95% is named, not detected', C, 'right');
+  /* the tension — error bars shrink with the decades, and the gap opens */
+  var by = h * 0.62, bx0 = 60, bx1 = w - 30, lo = 60, hi = 80;
+  function px(v) { return bx0 + (v - lo) / (hi - lo) * (bx1 - bx0); }
+  g.strokeStyle = WHIS; g.lineWidth = 1; g.beginPath(); g.moveTo(bx0, by + 60); g.lineTo(bx1, by + 60); g.stroke();
+  for (var v = 62; v <= 78; v += 4) { lab(g, px(v), by + 74, String(v), FAINT, 'center'); }
+  var k = 0.15 + t * 0.85;
+  [[67.4, 0.5 / k, C, 'CMB · Planck'], [73.0, 1.04 / k, '#8e2a2a', 'ladder · SH0ES']].forEach(function (d, j) {
+    var sg = Math.min(9, d[1]);
+    g.strokeStyle = d[2]; g.lineWidth = 1.8; g.beginPath();
+    for (var i = 0; i <= 120; i++) {
+      var vv = lo + i / 120 * (hi - lo), yy = by + 60 - Math.exp(-Math.pow((vv - d[0]) / sg, 2) / 2) * 74;
+      i ? g.lineTo(px(vv), yy) : g.moveTo(px(vv), yy);
+    }
+    g.stroke();
+    lab(g, px(d[0]), by - 22 + j * 14, d[3] + '  ' + d[0].toFixed(1) + ' ± ' + sg.toFixed(2), d[2], 'center');
+  });
+  var nsig = (73.0 - 67.4) / Math.sqrt(Math.pow(0.5 / k, 2) + Math.pow(1.04 / k, 2));
+  mono(g, 13); g.fillStyle = nsig > 5 ? '#8e2a2a' : SOFT; g.textAlign = 'left';
+  g.fillText('separation :  ' + nsig.toFixed(1) + 'σ', 20, h - 16);
+  lab(g, w - 14, h - 16, 'better data pushed them apart, not together', SOFT, 'right');
+},
+
+/* ── SDT · occlusion ───────────────────────────────────────────────────── */
+sdt: function (g, w, h, t, S) {
+  var C = COL.sdt, cx = w * 0.34, cy = h * 0.5, R1 = 26;
+  var bx = S.bx != null ? S.bx : w * 0.74, by = S.by != null ? S.by : h * 0.5, R2 = 15;
+  var i, n = 64, dx = bx - cx, dy = by - cy, r = Math.max(60, Math.hypot(dx, dy));
+  /* convergent throughput on the small body — one ray removed per occlusion */
+  for (i = 0; i < n; i++) {
+    var a = i / n * 6.2832 + (S.ph = (S.ph || 0) + 0.00008);
+    var ex = bx + Math.cos(a) * r * 2.4, ey = by + Math.sin(a) * r * 2.4;
+    /* is the ray blocked by the big body? */
+    var t1 = ((cx - bx) * (ex - bx) + (cy - by) * (ey - by)) / Math.pow(Math.hypot(ex - bx, ey - by), 2);
+    var px2 = bx + (ex - bx) * t1, py2 = by + (ey - by) * t1;
+    var blocked = t1 > 0 && Math.hypot(px2 - cx, py2 - cy) < R1;
+    g.strokeStyle = blocked ? 'rgba(142,42,42,.10)' : rgba(C, 0.5);
+    g.lineWidth = 1;
+    g.beginPath(); g.moveTo(ex, ey);
+    g.lineTo(bx + Math.cos(a) * (R2 + 3), by + Math.sin(a) * (R2 + 3));
+    g.stroke();
+  }
+  /* the shadow wedge */
+  var half = Math.asin(Math.min(0.999, R1 / r)), base = Math.atan2(by - cy, bx - cx);
+  g.fillStyle = 'rgba(142,42,42,.09)';
+  g.beginPath(); g.moveTo(cx, cy);
+  g.arc(cx, cy, r * 2.2, base - half, base + half); g.closePath(); g.fill();
+  /* bodies */
+  g.fillStyle = INK; g.beginPath(); g.arc(cx, cy, R1, 0, 6.2832); g.fill();
+  g.fillStyle = C;   g.beginPath(); g.arc(bx, by, R2, 0, 6.2832); g.fill();
+  /* net push */
+  var F = (R1 * R1 * R2 * R2) / (r * r) / 40;
+  g.strokeStyle = INK; g.lineWidth = 2;
+  var ux = -Math.cos(base), uy = -Math.sin(base), L = Math.min(70, 16 + F * 3);
+  g.beginPath(); g.moveTo(bx, by); g.lineTo(bx + ux * L, by + uy * L); g.stroke();
+  g.beginPath(); g.moveTo(bx + ux * L, by + uy * L);
+  g.lineTo(bx + ux * L - ux * 8 + uy * 5, by + uy * L - uy * 8 - ux * 5);
+  g.lineTo(bx + ux * L - ux * 8 - uy * 5, by + uy * L - uy * 8 + ux * 5);
+  g.closePath(); g.fillStyle = INK; g.fill();
+  mono(g, 13); g.fillStyle = INK; g.textAlign = 'left';
+  g.fillText('F = (π/4) P_eff R₁² R₂² / r²', 16, 26);
+  lab(g, 16, 46, 'gravity · charge · the nuclear grip — the same line, three domains', SOFT);
+  lab(g, 16, h - 34, 'nothing pulls · the far-side throughput does the work', C);
+  mono(g, 12); g.fillStyle = SOFT;
+  g.fillText('r = ' + r.toFixed(0) + '   F ∝ 1/r² = ' + F.toFixed(2), 16, h - 14);
+  lab(g, w - 14, h - 14, 'drag the small body', FAINT, 'right');
+}
+};
+</script>
+<script>
+/* ══════════════════════════════════════════════════════════════════════════
+   THE ENGINE — one rAF loop. The page never snaps and never hops: every
+   layer reads a smoothed scroll value at its own depth, and the drive
+   advances at a constant rate when you ask it to.
+   ══════════════════════════════════════════════════════════════════════════ */
+(function () {
+  var acts  = $$('.act, .hero');
+  var fades = $$('[data-fade]');
+  var field = $('#field'), fg = field.getContext('2d');
+  var scenes = $$('[data-scene]').map(function (cv) {
+    return { cv: cv, g: cv.getContext('2d'), k: cv.getAttribute('data-scene'),
+             act: cv.closest('.act'), S: {} };
+  });
+  var dpr = Math.min(devicePixelRatio || 1, 2);
+  var vh = innerHeight, docH = 1, smooth = 0, last = 0;
+
+  function motionOff() { return document.documentElement.getAttribute('data-sdt-motion') === 'off'; }
+
+  function sizeCanvas(cv) {
+    var r = cv.getBoundingClientRect();
+    if (!r.width || !r.height) return false;
+    var W = Math.round(r.width * dpr), H = Math.round(r.height * dpr);
+    if (cv.width !== W || cv.height !== H) { cv.width = W; cv.height = H; }
+    cv._w = r.width; cv._h = r.height;
+    return true;
+  }
+
+  function layout() {
+    vh = innerHeight;
+    docH = Math.max(1, document.documentElement.scrollHeight - vh);
+    acts.forEach(function (a) { a._t = a.offsetTop; a._h = a.offsetHeight; });
+    fades.forEach(function (f) {
+      var r = f.getBoundingClientRect();
+      f._t = r.top + scrollY; f._h = r.height;
+    });
+    field.width = Math.round(innerWidth * dpr);
+    field.height = Math.round(vh * dpr);
+    field.style.width = innerWidth + 'px'; field.style.height = vh + 'px';
+    scenes.forEach(function (s) { sizeCanvas(s.cv); });
+    drawSigils();
+  }
+
+  /* ── ticks ───────────────────────────────────────────────────────────── */
+  var TITLES = { hero:'open', ruler:'the ruler', sr:'special relativity', gr:'general relativity',
+                 qm:'quantum mechanics', sm:'standard model', st:'string theory', mo:'MOND',
+                 lc:'ΛCDM', board:'the board', ledger:'the ledger', sdt:'SDT', debts:'the debts' };
+  var tickHost = $('#ticks');
+  tickHost.innerHTML = acts.map(function (a) {
+    var k = a.getAttribute('data-act');
+    return '<button class="tick" type="button" data-a="' + k + '" style="--tc:' +
+      (COL[a.getAttribute('data-th')] || COL.sdt) + '" aria-label="' + (TITLES[k] || k) +
+      '"><b>' + (TITLES[k] || k) + '</b><i></i></button>';
+  }).join('');
+  var ticks = $$('.tick', tickHost);
+  tickHost.addEventListener('click', function (ev) {
+    var b = ev.target.closest('.tick'); if (!b) return;
+    var i = ticks.indexOf(b); if (i < 0) return;
+    stopDrive(); tweenTo(acts[i]._t - 40);
+  });
+
+  /* ── eased jump (never an instant hop) ───────────────────────────────── */
+  var tween = null;
+  function tweenTo(y) {
+    tween = { a: scrollY, b: Math.max(0, Math.min(docH, y)), t0: performance.now(), ms: 780 };
+  }
+
+  /* ── the steady drive ────────────────────────────────────────────────── */
+  var driving = false, speed = 1, SPEEDS = [1, 2, 3], carry = 0;
+  var playBtn = $('#playBtn'), spdBtn = $('#spdBtn');
+  function stopDrive() { driving = false; playBtn.setAttribute('aria-pressed', 'false'); playBtn.textContent = '▶ drive'; }
+  function startDrive() { driving = true; tween = null; playBtn.setAttribute('aria-pressed', 'true'); playBtn.textContent = '❚❚ pause'; }
+  playBtn.addEventListener('click', function () { driving ? stopDrive() : startDrive(); });
+  spdBtn.addEventListener('click', function () {
+    speed = SPEEDS[(SPEEDS.indexOf(speed) + 1) % SPEEDS.length];
+    spdBtn.textContent = '×' + speed;
+  });
+  ['wheel', 'touchstart', 'pointerdown'].forEach(function (e) {
+    addEventListener(e, function (ev) {
+      if (ev.target.closest && ev.target.closest('#driveBar')) return;
+      stopDrive(); tween = null;
+    }, { passive: true });
+  });
+  addEventListener('keydown', function (ev) {
+    if (['ArrowDown','ArrowUp','PageDown','PageUp','Home','End',' '].indexOf(ev.key) >= 0) { stopDrive(); tween = null; }
+  });
+
+  /* ── scene interaction ───────────────────────────────────────────────── */
+  scenes.forEach(function (s) {
+    function at(ev) {
+      var r = s.cv.getBoundingClientRect();
+      return [(ev.clientX - r.left), (ev.clientY - r.top), r.width, r.height];
+    }
+    s.cv.addEventListener('pointerdown', function (ev) {
+      s.S.down = 1; s.S.px = ev.clientX; s.cv.setPointerCapture(ev.pointerId);
+      var p = at(ev);
+      if (s.k === 'qm') s.S.fire = 1;
+      if (s.k === 'gr') { s.S.kick = 1; setTimeout(function () { s.S.kick = 0; }, 400); }
+      if (s.k === 'sdt') { s.S.bx = p[0]; s.S.by = p[1]; }
+      if (s.k === 'mo') s.S.a0 = Math.max(0.05, Math.min(1, p[0] / p[2] * 1.2));
+    });
+    s.cv.addEventListener('pointermove', function (ev) {
+      if (!s.S.down) return;
+      var p = at(ev), d = ev.clientX - (s.S.px || ev.clientX); s.S.px = ev.clientX;
+      if (s.k === 'sr') s.S.spin = Math.max(-0.12, Math.min(0.28, (s.S.spin || 0) + d * 0.0016));
+      if (s.k === 'st') s.S.drag = Math.max(-14, Math.min(14, -d * 0.9));
+      if (s.k === 'sdt') { s.S.bx = p[0]; s.S.by = p[1]; }
+      if (s.k === 'mo') s.S.a0 = Math.max(0.05, Math.min(1, p[0] / p[2] * 1.2));
+    });
+    ['pointerup', 'pointercancel', 'pointerleave'].forEach(function (e) {
+      s.cv.addEventListener(e, function () { s.S.down = 0; });
+    });
+    s.cv.style.touchAction = 'none';
+  });
+
+  /* ── the loop ────────────────────────────────────────────────────────── */
+  var qmClock = 0;
+  function frame(now) {
+    var dt = Math.min(0.05, (now - last) / 1000 || 0.016); last = now;
+    var off = motionOff();
+
+    if (tween) {
+      var u = Math.min(1, (now - tween.t0) / tween.ms);
+      var e = u < 0.5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2;
+      scrollTo(0, tween.a + (tween.b - tween.a) * e);
+      if (u >= 1) tween = null;
+    } else if (driving) {
+      carry += 58 * speed * dt;
+      var step = Math.floor(carry); carry -= step;
+      if (step) {
+        if (scrollY >= docH - 2) stopDrive(); else scrollBy(0, step);
+      }
+    }
+
+    var y = scrollY;
+    smooth += (y - smooth) * (off ? 1 : 0.13);
+    if (Math.abs(y - smooth) < 0.06) smooth = y;
+
+    /* fades — continuous, never a class toggle */
+    for (var i = 0; i < fades.length; i++) {
+      var f = fades[i];
+      if (f._t == null) continue;
+      var span = Math.min(f._h + 180, vh * 0.55);
+      var p = (y + vh - 90 - f._t) / span;
+      p = p < 0 ? 0 : p > 1 ? 1 : p;
+      f.style.setProperty('--in', p.toFixed(3));
+    }
+
+    /* the field — motifs cross-faded by how much of each act is on screen */
+    var W = innerWidth, H = vh;
+    fg.setTransform(dpr, 0, 0, dpr, 0, 0);
+    fg.clearRect(0, 0, W, H);
+    var active = null, best = 0;
+    for (i = 0; i < acts.length; i++) {
+      var a = acts[i];
+      var ov = Math.min(a._t + a._h, y + vh) - Math.max(a._t, y);
+      if (ov <= 0) continue;
+      var wgt = Math.min(1, ov / (vh * 0.85));
+      if (wgt > best) { best = wgt; active = a; }
+      var th = a.getAttribute('data-th') || 'sdt';
+      var m = MOTIF[th] || MOTIF.sdt;
+      fg.save();
+      m(fg, W, H, off ? 0 : smooth * 0.35, 0.115 * wgt, COL[th] || COL.sdt);
+      fg.restore();
+    }
+    if (active) {
+      var ai = acts.indexOf(active);
+      ticks.forEach(function (tk, k) { tk.setAttribute('data-on', k === ai ? '1' : '0'); });
+      $('#driveBar').setAttribute('data-th', active.getAttribute('data-th') || 'sdt');
+    }
+    $('#pct').textContent = Math.round(Math.min(1, y / docH) * 100) + '%';
+
+    /* the scenes */
+    qmClock += dt;
+    for (i = 0; i < scenes.length; i++) {
+      var s = scenes[i], A = s.act;
+      if (!A || A._t == null) continue;
+      if (A._t + A._h < y - vh * 0.3 || A._t > y + vh * 1.3) continue;
+      if (!sizeCanvas(s.cv)) continue;
+      var t = (y + vh - A._t) / (A._h + vh);
+      t = t < 0 ? 0 : t > 1 ? 1 : t;
+      if (s.k === 'qm' && qmClock > 0.55) { s.S.fire = 1; }
+      var g = s.g;
+      g.setTransform(dpr, 0, 0, dpr, 0, 0);
+      g.clearRect(0, 0, s.cv._w, s.cv._h);
+      g.lineCap = 'round'; g.lineJoin = 'round';
+      SCENE[s.k](g, s.cv._w, s.cv._h, t, s.S);
+    }
+    if (qmClock > 0.55) qmClock = 0;
+
+    requestAnimationFrame(frame);
+  }
+
+  addEventListener('resize', layout);
+  addEventListener('load', function () { layout(); });
+  layout();
+  requestAnimationFrame(function (n) { last = n; frame(n); });
+})();
+</script>
+</div>
+
+</body>
+</html>

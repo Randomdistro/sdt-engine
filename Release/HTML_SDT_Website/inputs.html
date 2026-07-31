@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What We Assume — Spatial Displacement Theory</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .il { max-width: 74rem; margin: 0 auto; padding: 5rem 1.5rem 6rem; }
+  .il__head { max-width: 46rem; }
+  .il__kicker { font-family: 'JetBrains Mono', monospace; font-size: .75rem; letter-spacing: .2em;
+        text-transform: uppercase; color: var(--copper); }
+  .il__title { font-family: 'Source Serif 4', Georgia, serif; font-size: clamp(2rem,5vw,3.1rem);
+        font-weight: 600; margin: .8rem 0 1.2rem; line-height: 1.08; }
+  .il__lead { color: var(--ink-soft); font-size: 1.125rem; line-height: 1.8; }
+  .il__lead strong { color: var(--ink); }
+  .il h2 { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.6rem; font-weight: 600;
+        margin: 3.5rem 0 1rem; }
+  .il h3 { font-size: 1.0625rem; font-weight: 600; margin: 2rem 0 .6rem; }
+  .il p { color: var(--ink-soft); line-height: 1.8; max-width: 46rem; }
+  .il code, .il .m { font-family: 'JetBrains Mono', monospace; font-size: .9em; }
+
+  .tally { display: flex; gap: 2.5rem; flex-wrap: wrap; margin: 2.2rem 0;
+        padding: 1.3rem 0; border-top: 1px solid var(--paper-edge); border-bottom: 1px solid var(--paper-edge); }
+  .tally div b { display: block; font-family: 'Source Serif 4', Georgia, serif; font-size: 2.1rem; color: var(--ink); line-height: 1; }
+  .tally div span { font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-faint); }
+
+  table.ledger { width: 100%; border-collapse: collapse; margin: 1.4rem 0 2rem; font-size: .875rem; }
+  table.ledger th { text-align: left; font-size: .65rem; letter-spacing: .13em; text-transform: uppercase;
+        color: var(--ink-faint); font-weight: 600; padding: .5rem .7rem; border-bottom: 1px solid var(--paper-edge); }
+  table.ledger td { padding: .75rem .7rem; border-bottom: 1px solid var(--paper-edge);
+        vertical-align: top; line-height: 1.6; color: var(--ink-soft); }
+  table.ledger td.sym { font-family: 'JetBrains Mono', monospace; color: var(--ink); white-space: nowrap; font-weight: 500; }
+  table.ledger tr.stands td.sym { color: var(--copper); }
+  .pill { display: inline-block; font-size: .625rem; letter-spacing: .09em; text-transform: uppercase;
+        padding: .18rem .5rem; border-radius: 2px; white-space: nowrap; }
+  .pill--bridge { background: rgba(122,114,101,.13); color: var(--ink-muted); }
+  .pill--collapsed { background: var(--copper-glow); color: var(--copper); }
+  .pill--stands { background: rgba(30,28,24,.9); color: var(--paper); }
+  .pill--extract { background: rgba(176,116,48,.2); color: #7d5220; }
+
+  .box { border-left: 2px solid var(--copper); background: var(--copper-glow);
+        padding: 1.1rem 1.3rem; margin: 1.8rem 0; max-width: 46rem; }
+  .box h4 { font-size: .68rem; letter-spacing: .13em; text-transform: uppercase;
+        color: var(--copper); margin: 0 0 .5rem; }
+  .box p { margin: 0; font-size: .9375rem; }
+  .box--plain { border-left-color: var(--ink-whisper); background: rgba(122,114,101,.06); }
+  .box--plain h4 { color: var(--ink-muted); }
+
+  pre.set { font-family: 'JetBrains Mono', monospace; font-size: .8125rem; line-height: 1.9;
+        background: #fffefb; border: 1px solid var(--paper-edge); border-radius: 3px;
+        padding: 1.2rem 1.4rem; overflow-x: auto; color: var(--ink-soft); max-width: 46rem; }
+  pre.set b { color: var(--copper); font-weight: 500; }
+  .owed { max-width: 46rem; padding-left: 1.1rem; }
+  .owed li { color: var(--ink-soft); line-height: 1.8; margin-bottom: .5rem; }
+  .prov { font-size: .8125rem; color: var(--ink-faint); line-height: 1.8; margin-top: 3rem;
+        padding-top: 1.2rem; border-top: 1px solid var(--paper-edge); max-width: 46rem; }
+</style>
+<meta name="description" content="Every external input the framework takes, and what happened to it under audit: nine reduced to five, three of them only unit definitions, zero fitted parameters.">
+<link rel="canonical" href="https://spatialdisplacementtheory.com/inputs">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/favicon.ico" sizes="64x64">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#b07430">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Spatial Displacement Theory">
+<meta property="og:title" content="What We Assume — Spatial Displacement Theory">
+<meta property="og:description" content="Every external input the framework takes, and what happened to it under audit: nine reduced to five, three of them only unit definitions, zero fitted parameters.">
+<meta property="og:url" content="https://spatialdisplacementtheory.com/inputs">
+<meta property="og:image" content="https://spatialdisplacementtheory.com/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_AU">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="What We Assume — Spatial Displacement Theory">
+<meta name="twitter:description" content="Every external input the framework takes, and what happened to it under audit: nine reduced to five, three of them only unit definitions, zero fitted parameters.">
+<meta name="twitter:image" content="https://spatialdisplacementtheory.com/og-card.png">
+</head>
+<body>
+
+<main class="il">
+  <div class="il__head">
+    <p class="il__kicker">The input ledger</p>
+    <h1 class="il__title">What we assume</h1>
+    <p class="il__lead">
+      A framework that claims zero free parameters owes you a list of everything it takes
+      from outside. This is that list — every external input the theory permits, what
+      happened to it under audit, and <strong>what is still owed</strong>.
+    </p>
+  </div>
+
+  <div class="tally">
+    <div><b>9</b><span>inputs on the old list</span></div>
+    <div><b>5</b><span>irreducible after audit</span></div>
+    <div><b>3</b><span>were unit definitions</span></div>
+    <div><b>0</b><span>fitted parameters</span></div>
+  </div>
+
+  <div class="box box--plain">
+    <h4>What this page is not</h4>
+    <p>
+      This is not a set of derivations. What the audit achieved is narrower and more
+      defensible: it reduced the external input set from nine members to five, mostly by
+      identifying which members were never physics in the first place but unit definitions.
+      Two items are left standing with no line drawn through them, and they are named below.
+    </p>
+  </div>
+
+  <h2>The nine, and what became of each</h2>
+
+  <table class="ledger">
+    <thead>
+      <tr><th>Input</th><th>Standing</th><th>Reason</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="sym">c</td>
+        <td><span class="pill pill--bridge">unit bridge</span></td>
+        <td>Since 1983 the metre is <em>defined</em> from c, so no c-free wavelength measurement
+            exists and there is no independent extraction to be had. The frequency/wavenumber
+            ratio returns c to 7 parts in 10⁹ only because CODATA tabulates cR<sub>∞</sub> as
+            c × R<sub>∞</sub> — an identity that cannot fail. The Mercury-precession closure is
+            <strong>withdrawn as a derivation</strong>: the ephemeris elements it consumes are
+            produced by fits that model light propagation with c. Physical content retained:
+            one relay speed closes every line.</td>
+      </tr>
+      <tr>
+        <td class="sym">k<sub>B</sub></td>
+        <td><span class="pill pill--bridge">unit bridge</span></td>
+        <td>SI-exact since 2019 — it <em>defines</em> the kelvin. Temperature itself is counted
+            natively from relay throughput, and the blackbody suite follows from counted lattice
+            modes. A defined conversion has no physics left to derive.</td>
+      </tr>
+      <tr>
+        <td class="sym">e</td>
+        <td><span class="pill pill--bridge">unit bridge</span></td>
+        <td>The permitted set contains no current dimension, so no combination yields coulombs.
+            There is no charge substance — charge is handed redirection — so "derive e" is a
+            category error. The physical magnitude behind it, the redirection pressure, is derived.</td>
+      </tr>
+      <tr>
+        <td class="sym">ℏ</td>
+        <td><span class="pill pill--collapsed">collapsed</span></td>
+        <td>The circulation action of the fundamental W=1 vortex. Its <em>value</em> has no
+            ℏ-free route — a dimensional result, not a failure of effort — so it merges into
+            the single mass/action seat below rather than standing as its own input.</td>
+      </tr>
+      <tr>
+        <td class="sym">m<sub>e</sub></td>
+        <td><span class="pill pill--collapsed">collapsed</span></td>
+        <td>Mass is the medium's resistance to a change in a form's vector. The mechanism is
+            native and recovers Newton I and II, E = mc², and the equivalence principle as a
+            theorem. The value is the same one seat.</td>
+      </tr>
+      <tr>
+        <td class="sym">m<sub>p</sub></td>
+        <td><span class="pill pill--collapsed">collapsed</span></td>
+        <td>The W=3 trefoil's occlusion cost. Pinned to the measured boundary radius through
+            W+1 = 4 at 0.02%, and to m<sub>e</sub> by the pure ratio (4/α)(r<sub>e</sub>/R<sub>p</sub>).
+            R<sub>p</sub> and m<sub>p</sub> are <strong>one fact, not two</strong> — the 0.02%
+            residual is shared between them.</td>
+      </tr>
+      <tr>
+        <td class="sym">α</td>
+        <td><span class="pill pill--extract">extracted</span></td>
+        <td>Read off the hydrogen spectrum two independent ways — a pure fine/gross frequency
+            ratio needing no mass or charge, and the movement-budget seat from the ionisation
+            limit. It is the koppa rung of hydrogen's ground state, the same kind of object as
+            the Sun's. Not dialled in from nowhere; not yet derived either.</td>
+      </tr>
+      <tr class="stands">
+        <td class="sym">ℓ<sub>P</sub></td>
+        <td><span class="pill pill--stands">stands</span></td>
+        <td>No line drawn, and that is a theorem. Every clean route to subdividing the boundary
+            distance reaches ~10³ where ~10⁶¹ is needed. Exactly one length, mass or action
+            anchor is mathematically unavoidable, and this is it.</td>
+      </tr>
+      <tr class="stands">
+        <td class="sym">T<sub>CMB</sub></td>
+        <td><span class="pill pill--stands">stands</span></td>
+        <td>Measured, and reclassified rather than derived: it is the present convergence
+            temperature — a boundary state, a clock reading, not a constant of nature. Deriving
+            its absolute value would be deriving today's date.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>The five that remain</h2>
+
+  <pre class="set">
+<b>ℓ_P</b>              the one dimensional seed — unavoidable, by theorem
+<b>one mass seat</b>    {ℏ ≡ m_e ≡ m_p} — a single anchor, a count of matter
+<b>α</b>                extracted from the hydrogen spectrum; derivation open
+<b>a₀</b>               measured — the length the seat form rides on
+<b>T_CMB</b>            the present boundary state
+
+[R_p ≡ m_p        one fact, not two]
+[c, k_B, e        unit bridges — SI definitions, no physics to derive]</pre>
+
+  <div class="box">
+    <h4>The correction that matters</h4>
+    <p>
+      An earlier count said four. It was wrong by one, and the missing member is a length:
+      the route that draws the line through the electron mass consumes <span class="m">a₀</span>,
+      the Bohr radius, for which no derived route exists — so it is a measured input and must
+      be listed. This names the open problem precisely rather than hiding it: <strong>the
+      collapse moves the mystery from a mass to a length.</strong>
+    </p>
+  </div>
+
+  <h2>What would actually shorten this list</h2>
+  <ol class="owed">
+    <li><strong>Close a₀.</strong> A derived route to the Bohr radius removes the fifth input
+        outright.</li>
+    <li><strong>Land the 6π⁵ wake integral.</strong> The proton-to-electron mass ratio matches
+        6π⁵ to 19 parts per million with zero adjustable parameters, and it is the only simple
+        form of its kind that does. Nobody has computed the wake phase-space integral that
+        would produce it, so it stands as an unexplained match — privileged, not earned.</li>
+    <li><strong>Derive α geometrically.</strong> Being dimensionless, α is not blocked by the
+        seed theorem the way a length is. The route is open; the closed-form search for a
+        clean π-expression is ruled out.</li>
+  </ol>
+
+  <p class="prov">
+    Provenance: the ledger is produced by <span class="m">derivelist_rederive.cpp</span>, run
+    against the canonical engine header. It was independently rebuilt on a second toolchain by
+    a checker the same day — output byte-identical — and four findings were raised and applied,
+    two of which corrected labels, one of which corrected this count upward from four to five,
+    and one of which improved an SDT result that had been scored against a stale reference.
+    Circular routes are printed as circular and are not laundered into derivations.
+    <br><br>
+    J. C. Harvey, Melbourne.
+  </p>
+</main>
+
+<link rel="stylesheet" href="sdt-shell.css">
+<script src="sdt-shell.js" defer></script>
+</body>
+</html>

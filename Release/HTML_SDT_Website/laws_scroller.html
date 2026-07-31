@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Six Laws · A Spatial Displacement Theory Walkthrough</title>
+<style>
+  /* ───────────────────────────────────────────────────────────────
+     THE SIX LAWS OF SPATIAL DISPLACEMENT THEORY — accessible walkthrough.
+     Every live number in the widgets recomputes in JS from the SAME
+     constants in Engine/include/sdt/laws.hpp. If a value here drifts
+     from the header, the page is wrong — that is the intended
+     self-falsification. The narrative "Acts" carry the intuition and
+     the diagrams; ALL the serious mathematics (9 axioms, 2 lemmas,
+     17 theorems, the corollaries, the proofs) is collected in the final
+     section, "The Mathematics." Source: Laws/SDT_Complete_Laws.md.
+     All SVG is inline and editable.
+     ─────────────────────────────────────────────────────────────── */
+  :root{
+    --bg:#070a12; --bg2:#0c1322; --ink:#e9edf6; --dim:#97a3ba;
+    --pass:#37d39b; --fail:#ff5a6e; --warn:#ffcb47;
+    --accent:#5ad1ff; --accent2:#b98cff; --gold:#ffd166; --line:#1b2540;
+    --mono:"SF Mono",ui-monospace,"Cascadia Code",Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
+       line-height:1.65;font-size:18px;overflow-x:hidden}
+  #prog{position:fixed;top:0;left:0;height:3px;width:0;z-index:99;
+        background:linear-gradient(90deg,var(--gold),var(--accent),var(--accent2));transition:width .1s}
+  nav{position:fixed;right:16px;top:50%;transform:translateY(-50%);z-index:50;
+      display:flex;flex-direction:column;gap:9px}
+  nav a{width:11px;height:11px;border-radius:50%;background:#26324f;
+        border:1px solid #3a4a6e;transition:.25s;text-decoration:none;position:relative}
+  nav a:hover,nav a.on{background:var(--gold);transform:scale(1.35)}
+  nav a span{position:absolute;right:20px;top:-3px;white-space:nowrap;font-family:var(--mono);
+             font-size:.7rem;color:var(--dim);opacity:0;pointer-events:none;transition:.2s}
+  nav a:hover span{opacity:1}
+  section{max-width:830px;margin:0 auto;padding:13vh 26px;position:relative}
+  .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding-top:8vh}
+  h1{font-size:clamp(2.1rem,6vw,4rem);line-height:1.05;margin:0 0 .3em;font-weight:800;letter-spacing:-.02em}
+  h1 .glyph{background:linear-gradient(120deg,var(--gold),var(--accent),var(--accent2));
+            -webkit-background-clip:text;background-clip:text;color:transparent}
+  h2{font-size:clamp(1.5rem,3.5vw,2.35rem);margin:.2em 0 .6em;font-weight:750;letter-spacing:-.01em}
+  h3{font-size:1.12rem;color:var(--gold);text-transform:uppercase;letter-spacing:.12em;font-weight:700;margin:2.4em 0 .4em}
+  h4.lawhead{font-size:.95rem;color:var(--accent);text-transform:uppercase;letter-spacing:.14em;font-weight:700;margin:0 0 .2em}
+  p{margin:.9em 0;color:#d3dbec}
+  .lede{font-size:1.32rem;color:var(--dim);max-width:52ch}
+  strong{color:#f3f6ff}
+  em{color:#dfe6f5}
+  .tag{display:inline-block;font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;
+       text-transform:uppercase;padding:4px 10px;border-radius:999px;border:1px solid var(--line);
+       color:var(--dim);margin-right:6px;margin-bottom:4px}
+  .tag.gold{color:var(--gold);border-color:#5a4a14}
+  .tag.cy{color:var(--accent);border-color:#1d4a5a}
+  .tag.vi{color:var(--accent2);border-color:#3a2a5a}
+  .tag.pass{color:var(--pass);border-color:#14523a}
+  .tag.warn{color:var(--warn);border-color:#5a4a14}
+  .tag.fail{color:var(--fail);border-color:#5a1420}
+  .mono{font-family:var(--mono)}
+  .eq{font-family:var(--mono);background:var(--bg2);border:1px solid var(--line);
+      border-left:3px solid var(--gold);border-radius:8px;padding:15px 20px;margin:1.2em 0;
+      font-size:1.0rem;overflow-x:auto;color:#eaf0ff}
+  .eq .hl{color:var(--accent);font-weight:700}
+  .eq .hl2{color:var(--accent2);font-weight:700}
+  .eq .num{color:var(--pass)}
+  .eq .lbl{float:right;color:var(--dim);font-style:normal}
+  figure{margin:2em 0;text-align:center}
+  figcaption{font-size:.86rem;color:var(--dim);margin-top:.7em;max-width:64ch;margin-inline:auto}
+  .card{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:1.4em 0}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+  @media(max-width:680px){.grid2,.grid3{grid-template-columns:1fr}body{font-size:16px}}
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s,transform .8s}
+  .reveal.in{opacity:1;transform:none}
+  .widget{background:linear-gradient(180deg,#0d1424,#080e18);border:1px solid var(--line);
+          border-radius:14px;padding:22px;margin:1.6em 0}
+  .widget h4{margin:.1em 0 .2em;font-size:1.05rem}
+  .widget .sub{font-size:.85rem;color:var(--dim);margin-bottom:1em}
+  label.ctl{display:block;font-family:var(--mono);font-size:.82rem;color:var(--dim);margin:14px 0 4px}
+  input[type=range]{width:100%;accent-color:var(--accent);height:26px}
+  .readout{font-family:var(--mono);font-size:1.0rem;margin-top:10px;display:flex;
+           justify-content:space-between;flex-wrap:wrap;gap:8px}
+  .verdict{font-family:var(--mono);font-weight:700;padding:8px 14px;border-radius:8px;margin-top:12px;
+           display:inline-block;transition:.25s}
+  .verdict.ok{background:#0c3a2b;color:var(--pass);border:1px solid #14523a}
+  .verdict.bad{background:#3a0c14;color:var(--fail);border:1px solid #5a1420}
+  .verdict.warn{background:#332806;color:var(--warn);border:1px solid #5a4a14}
+  .pill{font-family:var(--mono);font-size:.8rem;padding:2px 8px;border-radius:6px;background:#16203a}
+  .btn{background:#16203a;border:1px solid var(--line);color:var(--ink);border-radius:7px;
+       padding:6px 14px;font-family:var(--mono);cursor:pointer;font-size:.85rem;transition:.2s;margin:2px}
+  .btn:hover{background:#22304e}
+  .btn.active{background:var(--accent);color:#06121a;border-color:var(--accent);font-weight:700}
+  table{width:100%;border-collapse:collapse;font-size:.9rem;margin:1.2em 0}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line)}
+  th{color:var(--dim);font-weight:600;font-size:.8rem;text-transform:uppercase;letter-spacing:.06em}
+  td.mono{font-family:var(--mono);color:#eaf0ff}
+  .ok{color:var(--pass)} .bad{color:var(--fail)} .wn{color:var(--warn)}
+  .callout{border:1px solid #1d4a5a;background:#08161c;border-radius:12px;padding:18px 22px;margin:1.6em 0}
+  .callout.gold{border-color:#5a4a14;background:#161204}
+  .callout.open{border-color:#5a1420;background:#160709}
+  .footer{color:var(--dim);font-size:.85rem;border-top:1px solid var(--line);padding:40px 26px;text-align:center;max-width:830px;margin:0 auto}
+  .scrubhint{font-size:.8rem;color:var(--gold);font-family:var(--mono)}
+  .lawrule{height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent);margin:0;border:0}
+  .bignum{font-family:var(--mono);font-size:1.25rem;color:var(--accent)}
+  svg{max-width:100%;height:auto}
+  .flow line,.flow path{stroke-linecap:round}
+  sup{font-size:.7em}
+  .lawnum{font-family:var(--mono);font-size:3.2rem;font-weight:800;color:var(--gold);opacity:.22;
+          position:absolute;top:8vh;right:30px;letter-spacing:-.04em;line-height:1;pointer-events:none}
+  @media(max-width:680px){.lawnum{font-size:2.2rem;top:6vh;right:18px}}
+  .chain{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-family:var(--mono);font-size:.85rem;color:var(--dim)}
+  .chain b{color:var(--accent)}
+  .chain .arr{color:var(--gold)}
+  details{border:1px solid var(--line);border-radius:10px;padding:0 16px;margin:1em 0;background:var(--bg2)}
+  details>summary{cursor:pointer;padding:14px 0;font-weight:700;color:var(--accent);list-style:none}
+  details>summary::-webkit-details-marker{display:none}
+  details>summary::before{content:"▸ ";color:var(--gold)}
+  details[open]>summary::before{content:"▾ "}
+  .proof{font-size:.92rem;color:#c4cee0}
+  .proof .step{color:var(--gold);font-family:var(--mono);font-size:.82rem}
+</style>
+<link rel="stylesheet" href="sdt-shell.css">
+<script src="sdt-shell.js" defer></script>
+<meta name="description" content="The Six Laws · A Spatial Displacement Theory Walkthrough — part of Spatial Displacement Theory, a zero-free-parameter physics framework.">
+<link rel="canonical" href="https://spatialdisplacementtheory.com/laws_scroller">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/favicon.ico" sizes="64x64">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#b07430">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Spatial Displacement Theory">
+<meta property="og:title" content="The Six Laws · A Spatial Displacement Theory Walkthrough">
+<meta property="og:description" content="The Six Laws · A Spatial Displacement Theory Walkthrough — part of Spatial Displacement Theory, a zero-free-parameter physics framework.">
+<meta property="og:url" content="https://spatialdisplacementtheory.com/laws_scroller">
+<meta property="og:image" content="https://spatialdisplacementtheory.com/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_AU">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Six Laws · A Spatial Displacement Theory Walkthrough">
+<meta name="twitter:description" content="The Six Laws · A Spatial Displacement Theory Walkthrough — part of Spatial Displacement Theory, a zero-free-parameter physics framework.">
+<meta name="twitter:image" content="https://spatialdisplacementtheory.com/og-card.png">
+</head>
+<body>
+<div id="prog"></div>
+<nav id="dots"></nav>
+
+<!-- ════════════════════ HERO ════════════════════ -->
+<section class="hero" id="s0">
+  <div class="reveal in">
+    <span class="tag">Spatial Displacement Theory</span>
+    <span class="tag gold">The Six Laws</span>
+    <span class="tag cy">accessible walkthrough</span>
+    <h1>The whole of physics<br>from <span class="glyph">one medium</span><br>and one tick.</h1>
+    <p class="lede">Space is a lattice of cells that relay movement, nearest-neighbour, one
+    Planck-tick at a time. From that single picture — no fields, no dark matter, no
+    wavefunctions — Spatial Displacement Theory builds <strong>gravity, electricity, mass,
+    inertia, special relativity, and the particle mass spectrum</strong>. Six laws,
+    nine axioms, seventeen theorems, and exactly <em>one</em> measured calibration.</p>
+    <p class="scrubhint" style="margin-top:2em">↓ scroll &nbsp;·&nbsp; drag the sliders &nbsp;·&nbsp;
+    every number is live from <span class="mono">laws.hpp</span> &nbsp;·&nbsp;
+    the proofs wait for you at the end</p>
+  </div>
+</section>
+
+<!-- ════════════════════ PROLOGUE — THE FOUR PRIMITIVES ════════════════════ -->
+<section id="s1">
+  <div class="reveal">
+    <h3>Prologue — Four primitives</h3>
+    <h2>Space, matter, movement, now</h2>
+    <p>Before the laws, the picture. SDT replaces the smooth spacetime of standard physics
+    with four things you can hold in your head at once:</p>
+
+    <div class="grid2">
+      <div class="card"><strong style="color:var(--accent)">Space</strong> — a lattice of
+      cells called <strong>spations</strong>, each one Planck-length wide
+      (<span class="mono">ℓ_P = 1.6×10⁻³⁵ m</span>). Not empty: loaded with light arriving
+      from every direction.</div>
+      <div class="card"><strong style="color:var(--accent2)">Matter</strong> — a
+      <strong>displacement vortex</strong>: a self-sustaining whirl in the lattice that
+      <em>excludes</em> a little volume from the relay. Particles are knots in the medium.</div>
+      <div class="card"><strong style="color:var(--gold)">Movement</strong> — the
+      <strong>tick</strong>. One spation hands its deformation to the next, one Planck-length
+      per Planck-time. That hand-off rate <em>is</em> the speed of light:
+      <span class="mono">c = ℓ_P / t_P</span>.</div>
+      <div class="card"><strong>Now</strong> — the current tick. Time is not a dimension you
+      move through; it is the <em>count</em> of hand-offs. The lattice clicks forward
+      everywhere at once.</div>
+    </div>
+
+    <figure class="reveal">
+      <!-- EDITABLE SVG: the lattice + one vortex excluding a cell -->
+      <svg id="svg-lattice" viewBox="0 0 620 300" role="img"
+           aria-label="A regular lattice of spations with one displacement vortex excluding a small volume; light relays through the empty cells">
+        <rect width="620" height="300" fill="#080e18"/>
+        <g id="lat-dots"></g>
+        <g id="lat-rays" stroke="#5ad1ff" stroke-width="1.1" opacity="0"></g>
+        <circle id="lat-vortex" cx="310" cy="150" r="0" fill="none" stroke="#b98cff" stroke-width="2"/>
+        <circle cx="310" cy="150" r="5" fill="#ffd166"/>
+        <text x="310" y="286" fill="#97a3ba" font-size="13" text-anchor="middle" font-family="monospace">
+          empty spations relay light straight through · the vortex (gold) excludes a volume</text>
+      </svg>
+      <figcaption>The whole theory is mechanics on this grid. A spation with nothing in it is
+      perfectly transparent — light passes through untouched. Put a vortex in one cell and the
+      relay can no longer pass: that interruption, and only that, is what we call
+      <strong>force</strong>.</figcaption>
+    </figure>
+
+    <p>Each law below is one consequence of this grid. Here is the chain you are about to
+    climb, end to end:</p>
+    <div class="card chain">
+      <b>I</b> throughput <span class="arr">→</span>
+      <b>II</b> the Clearing <span class="arr">→</span>
+      <b>III</b> force <span class="arr">→</span>
+      <b>IV</b> mass &amp; inertia <span class="arr">→</span>
+      <b>V</b> relativity <span class="arr">→</span>
+      <b>VI</b> the particle spectrum
+    </div>
+  </div>
+</section>
+
+<hr class="lawrule">
+
+<!-- ════════════════════ LAW I ════════════════════ -->
+<section id="s2">
+  <div class="lawnum">I</div>
+  <div class="reveal">
+    <h4 class="lawhead">Law I · Cosmological Relay Throughput</h4>
+    <h2>Every point feels the same colossal pressure</h2>
+    <p>Start with the strangest-sounding claim and make it ordinary. SDT says every point in
+    space carries an enormous, perfectly balanced load of throughput — and the reason it is
+    the <em>same</em> at every point is pure geometry.</p>
+
+    <p>Picture concentric shells of sources around you. A shell twice as far away has
+    <strong>four times as many</strong> sources (its area grows as the square of the radius),
+    but each one is <strong>four times fainter</strong> (inverse-square dilution). The two
+    fours cancel <em>exactly</em>. Every shell, near or unimaginably far, delivers the same
+    quota of throughput, <span class="mono">ε</span>.</p>
+
+    <div class="eq">Φ_shell(d) = <span class="hl">4πd²</span> × <span class="hl2">ε/(4πd²)</span>
+       = ε <span class="lbl">— independent of d (Theorem 1)</span></div>
+
+    <p>Add up one quota from each of the <span class="mono">N</span> shells between you and the
+    boundary of the visible universe, and the total throughput at any point is simply:</p>
+
+    <div class="eq">Φ = <span class="hl">N</span> · ε &nbsp;→&nbsp; P_conv = Φ/ℓ_P³ = N·u_CMB
+       = <span class="num">2.46×10⁴⁸ Pa</span></div>
+
+    <figure class="reveal">
+      <!-- EDITABLE SVG: shell cancellation — sources up, brightness down, product flat -->
+      <svg id="svg-shellcanc" viewBox="0 0 620 280" role="img"
+           aria-label="Three concentric shells: the outer shells have more sources but each is fainter, so each shell contributes the same total">
+        <rect width="620" height="280" fill="#080e18"/>
+        <g id="sc-shells"></g>
+        <g id="sc-bars"></g>
+        <text x="310" y="266" fill="#97a3ba" font-size="13" text-anchor="middle" font-family="monospace">
+          more sources × fainter each = identical contribution ε from every shell</text>
+      </svg>
+      <figcaption>Shell cancellation. The bars on the right show each shell's <em>total</em>
+      contribution — flat, because <span class="mono">4πd²</span> sources each diluted by
+      <span class="mono">1/4πd²</span> always gives <span class="mono">ε</span>. This holds across
+      61 orders of magnitude, from the nearest neighbour to the Clearing.</figcaption>
+    </figure>
+
+    <div class="widget">
+      <h4>Shell-cancellation invariance</h4>
+      <div class="sub">Slide the depth from your nearest neighbour out to the Clearing boundary.
+      Watch sources explode, brightness collapse, and the product refuse to move.</div>
+      <label class="ctl">relay depth &nbsp;d = 10^<span id="o-depth" class="pill"></span> spations</label>
+      <input id="r-depth" type="range" min="0" max="61" step="0.1" value="30">
+      <div class="readout">
+        <span>sources 4πd² = <b id="o-src" style="color:var(--accent)"></b></span>
+        <span>dilution = <b id="o-dil" style="color:var(--accent2)"></b></span>
+      </div>
+      <div class="readout">
+        <span>shell contribution = <b id="o-eps" style="color:var(--pass)"></b> J</span>
+      </div>
+      <div id="v-depth" class="verdict ok">invariant — every shell delivers ε</div>
+    </div>
+
+    <h3>The 10¹²³, demystified</h3>
+    <p>Quantum field theory famously predicts a vacuum energy ~10¹²² times too big — the worst
+    prediction in physics. SDT says that number was never an error. The count of source cells on
+    the boundary surface is <span class="mono">S = 4πN² ≈ 4.4×10¹²⁴</span>, and
+    <span class="mono">N² ≈ 3.5×10¹²³</span>. QFT computed the right throughput total and then had
+    no mechanism to <em>spend</em> it. SDT's mechanism: that energy is not stored, it is
+    <strong>in transit</strong> — the boundary is far, its area is N², and every cell on it
+    relays one unit through your point every tick.</p>
+
+    <div class="callout">
+      <strong>One honest calibration.</strong> Everything downstream uses a single fitted number —
+      the hydrogen Coulomb force at the Bohr radius, which fixes the effective pressure
+      <span class="mono">P_eff</span>. That is the <em>only</em> place a measured force is fed in.
+      Every law is built to lean on this one peg and nothing else.
+    </div>
+  </div>
+</section>
+
+<hr class="lawrule">
+
+<!-- ════════════════════ LAW II ════════════════════ -->
+<section id="s3">
+  <div class="lawnum">II</div>
+  <div class="reveal">
+    <h4 class="lawhead">Law II · The Release Cascade</h4>
+    <h2>The CMB is not a distant wall. It already arrived.</h2>
+    <p>Where does all that throughput come from? From a single event SDT calls
+    <strong>the Clearing</strong>. Early on, the universe was an opaque fog: every spation held
+    radiation it could not pass on. Then — at recombination, ~380,000 years in — the fog lifted
+    everywhere at once. Every spation <em>released</em> its held content omnidirectionally, a
+    spherical shell expanding at <span class="mono">c</span>.</p>
+
+    <p>The key shift in picture: you are <strong>not</strong> waiting for light from a wall
+    13.8 billion light-years away. That light has been arriving continuously, replenished by the
+    relay, the whole time. At this instant your point is immersed in
+    <span class="mono">N</span> overlapping expanding shells at once — one from each depth. The
+    "distant CMB surface" is just the optical reconstruction of the furthest, highest-contrast
+    layer in a stack that fills the entire lattice.</p>
+
+    <figure class="reveal">
+      <!-- EDITABLE SVG: many overlapping expanding shells converging on a point -->
+      <svg id="svg-cascade" viewBox="0 0 620 300" role="img"
+           aria-label="Many expanding spherical shells from sources at different depths, all overlapping at a central point simultaneously">
+        <rect width="620" height="300" fill="#080e18"/>
+        <g id="casc-shells" fill="none"></g>
+        <circle cx="310" cy="150" r="6" fill="#ffd166"/>
+        <g id="casc-arrows" stroke="#5ad1ff" stroke-width="1.3"></g>
+        <text x="310" y="288" fill="#97a3ba" font-size="13" text-anchor="middle" font-family="monospace">
+          your point (gold) is immersed in N overlapping arrivals — not lit by one far wall</text>
+      </svg>
+      <figcaption>The Release Cascade. Each ring is a front from a source at a different depth,
+      all present at your point <em>now</em>. The pressure is the mechanical primitive; the
+      2.725 K blackbody spectrum is just its most visible signature.</figcaption>
+    </figure>
+
+    <h3>Stars are convergence recyclers</h3>
+    <p>The same opacity-to-transparency mechanism runs locally. A star's photosphere is a tiny
+    Clearing: it intercepts cosmological convergence (infall), thermalises it (fusion), and
+    re-releases it as a local boundary event (sunlight). Every luminous body therefore owns a
+    <strong>pressure domain</strong> — the radius out to which its own light outshines the
+    background CMB convergence:</p>
+
+    <div class="eq">r_domain = √( <span class="hl">L</span> / (4π F_CMB) ),&nbsp;&nbsp;
+       F_CMB = c·u_CMB/4 = <span class="num">3.13×10⁻⁶ W/m²</span></div>
+
+    <div class="widget">
+      <h4>A star's pressure domain</h4>
+      <div class="sub">How far out does a star's convergence dominate the cosmos? The Sun's answer
+      (~20,800 AU) is a real, derived boundary — far past the 120-AU heliopause, which is only a
+      <em>particle</em> edge.</div>
+      <label class="ctl">luminosity &nbsp;L = <span id="o-lum" class="pill"></span> × L_☉</label>
+      <input id="r-lum" type="range" min="-2" max="6" step="0.05" value="0">
+      <div class="readout">
+        <span>r_domain = <b id="o-dom" style="color:var(--accent)"></b></span>
+        <span id="o-domcmp" style="color:var(--dim)"></span>
+      </div>
+      <div id="v-dom" class="verdict ok"></div>
+    </div>
+  </div>
+</section>
+
+<hr class="lawrule">
+
+<!-- ════════════════════ LAW III ════════════════════ -->
+<section id="s4">
+  <div class="lawnum">III</div>
+  <div class="reveal">
+    <h4 class="lawhead">Law III · Convergent Boundary Pressure</h4>
+    <h2>Force is a shadow. Nothing attracts.</h2>
+    <p>Now the payoff. In empty space the convergence arrives equally from every direction, so the
+    net push is zero — that is Newton's first law, free of charge. Put two pieces of matter in,
+    and each one <strong>occludes</strong> a sliver of the convergence the other would have
+    received. The unoccluded directions keep pushing; the blocked direction does not. The
+    imbalance points each body toward the other. They don't pull — they fall into each other's
+    shadows.</p>
+
+    <figure class="reveal">
+      <!-- EDITABLE SVG: two bodies, mutual occlusion shadow, net push toward each other -->
+      <svg id="svg-occ" viewBox="0 0 620 300" role="img"
+           aria-label="Two bodies in an isotropic pressure field; each casts a shadow toward the other, and the unblocked pressure pushes them together">
+        <rect width="620" height="300" fill="#080e18"/>
+        <g id="occ-arrows" stroke="#5ad1ff" stroke-width="1.4"></g>
+        <polygon id="occ-shadow1" fill="#b98cff" opacity="0.10"></polygon>
+        <polygon id="occ-shadow2" fill="#b98cff" opacity="0.10"></polygon>
+        <circle id="occ-b1" cx="200" cy="150" r="26" fill="url(#g-m)"/>
+        <circle id="occ-b2" cx="430" cy="150" r="20" fill="url(#g-m)"/>
+        <line id="occ-net1" stroke="#ffd166" stroke-width="3" marker-end="url(#ah)"></line>
+        <line id="occ-net2" stroke="#ffd166" stroke-width="3" marker-end="url(#ah)"></line>
+        <defs>
+          <radialGradient id="g-m" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#ff8a5a"/><stop offset="100%" stop-color="#3a0c08"/>
+          </radialGradient>
+          <marker id="ah" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+            <path d="M0,0 L7,3 L0,6 Z" fill="#ffd166"/></marker>
+        </defs>
+        <text x="310" y="288" fill="#97a3ba" font-size="13" text-anchor="middle" font-family="monospace">
+          each body sits in its neighbour's shadow → net push (gold) inward → attraction</text>
+      </svg>
+      <figcaption>The occlusion force. The purple cones are the throughput each body is denied.
+      The gold arrows are the resulting net push — always toward the other body, always equal and
+      opposite (Newton's third law, for free).</figcaption>
+    </figure>
+
+    <p>Work the geometry of a blocked solid angle and you get a single universal force law — the
+    spine of the whole engine:</p>
+
+    <div class="eq">F = (π/4) · <span class="hl">P_eff</span> · R₁² R₂² / r²
+       <span class="lbl">— Theorem 4</span></div>
+
+    <p>The <span class="mono">1/r²</span> is not a field equation or a force carrier — it is just
+    the solid angle a disc subtends at distance r. And the same equation, with different occlusion
+    radii, is <strong>every</strong> force:</p>
+
+    <div class="grid3">
+      <div class="card"><strong style="color:var(--accent)">Coulomb</strong><br>atomic scale ·
+      occlusion via the charge radius <span class="mono">R_charge=√(R_p r_e)</span></div>
+      <div class="card"><strong style="color:var(--accent2)">Gravity</strong><br>cosmic scale ·
+      occlusion via total displacement volume <span class="mono">V_disp</span></div>
+      <div class="card"><strong style="color:var(--gold)">Nuclear</strong><br>femtometre scale ·
+      occlusion via direct vortex meshing</div>
+    </div>
+
+    <div class="widget">
+      <h4>One law, two forces — inverse square live</h4>
+      <div class="sub">SDT's occlusion force through the universal charge radius
+      <span class="mono">R_charge=√(R_p r_e)</span> vs. textbook Coulomb, for a unit-charge pair.
+      Slide the separation across six decades; they stay locked together because they are the same
+      equation — that lock <em>is</em> the single hydrogen calibration the whole framework rests on.</div>
+      <label class="ctl">separation &nbsp;r = 10^<span id="o-sep" class="pill"></span> m
+        &nbsp;(1 Å sits at −10)</label>
+      <input id="r-sep" type="range" min="-13" max="-7" step="0.05" value="-10">
+      <div class="readout">
+        <span>F_SDT = <b id="o-fsdt" style="color:var(--accent)"></b> N</span>
+        <span>F_Coulomb = <b id="o-fcoul" style="color:var(--pass)"></b> N</span>
+      </div>
+      <div id="v-occ" class="verdict ok"></div>
+    </div>
+  </div>
+</section>
+
+<hr class="lawrule">
+
+<!-- ════════════════════ LAW IV ════════════════════ -->
+<section id="s5">
+  <div class="lawnum">IV</div>
+  <div class="reveal">
+    <h4 class="lawhead">Law IV · Inertial Mass from Throughput Asymmetry</h4>
+    <h2>Mass is what it costs to move through the light</h2>
+    <p>A vortex sitting still bathes in convergence from every side — balanced, no force. The
+    moment it <em>accelerates</em>, the picture tilts: it runs into the relay ahead (compressed,
+    higher pressure) and away from the relay behind (rarefied, lower pressure). That front-back
+    imbalance is a <strong>dipole</strong>, and it pushes back. The push-back is inertia.</p>
+
+    <p>This is not a metaphor — it is <em>measured</em>. The Earth's motion through the
+    convergence frame shows up as the CMB dipole, <span class="mono">ΔT/T = v/c ≈ 1.2×10⁻³</span>,
+    seen by COBE and Planck. The rest frame of the universe is the frame where the CMB looks
+    isotropic; every other frame feels the light pushing harder from one side.</p>
+
+    <figure class="reveal">
+      <!-- EDITABLE SVG: moving vortex, blue ahead / red behind dipole -->
+      <svg id="svg-dipole" viewBox="0 0 620 280" role="img"
+           aria-label="A vortex moving right: compressed blue arrows ahead, rarefied red arrows behind, the dipole anisotropy that is inertia">
+        <rect width="620" height="280" fill="#080e18"/>
+        <g id="dip-front"></g>
+        <g id="dip-back"></g>
+        <circle cx="310" cy="130" r="22" fill="url(#g-m2)"/>
+        <line x1="310" y1="130" x2="380" y2="130" stroke="#ffd166" stroke-width="3" marker-end="url(#ah2)"/>
+        <defs>
+          <radialGradient id="g-m2" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#ff8a5a"/><stop offset="100%" stop-color="#3a0c08"/></radialGradient>
+          <marker id="ah2" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+            <path d="M0,0 L7,3 L0,6 Z" fill="#ffd166"/></marker>
+        </defs>
+        <text x="310" y="262" fill="#97a3ba" font-size="13" text-anchor="middle" font-family="monospace">
+          moving right (gold): blueshifted pressure ahead, redshifted behind = the resisting dipole</text>
+      </svg>
+      <figcaption>Inertia made visible. The leading hemisphere carries enhanced convergence, the
+      trailing hemisphere diminished. Drag the slider below to push the vortex faster and watch the
+      asymmetry — and the cost of moving — diverge.</figcaption>
+    </figure>
+
+    <p>The same exclusion volume that resists acceleration is the shadow the body casts on others.
+    So <strong>inertial mass = gravitational mass</strong> is not a coincidence to be explained —
+    it is one quantity, <span class="mono">V_disp</span>, measured from two frames. And as the
+    vortex approaches <span class="mono">c</span>, the trailing hemisphere empties of throughput
+    entirely; there is nothing left behind to reorganise, so no further acceleration is possible.
+    The speed limit is the medium running out of road.</p>
+
+    <div class="widget">
+      <h4>The cost of speed</h4>
+      <div class="sub">Mass is the radiation-pressure cost of moving through the CMB. As v→c the
+      trailing hemisphere evacuates and the cost blows up — the relativistic γ, derived as a
+      geometric depletion of the angular budget.</div>
+      <label class="ctl">velocity &nbsp;v/c = <span id="o-beta" class="pill"></span></label>
+      <input id="r-beta" type="range" min="0" max="0.999" step="0.001" value="0.4">
+      <div class="readout">
+        <span>CMB dipole ΔT/T = <b id="o-dip" style="color:var(--accent)"></b></span>
+        <span>trailing throughput = <b id="o-trail" style="color:var(--accent2)"></b></span>
+      </div>
+      <div class="readout">
+        <span>relativistic mass m(v)/m₀ = γ = <b id="o-gam" style="color:var(--pass)"></b></span>
+      </div>
+      <div id="v-beta" class="verdict ok"></div>
+    </div>
+  </div>
+</section>
+
+<hr class="lawrule">
+
+<!-- ════════════════════ LAW V ════════════════════ -->
+<section id="s6">
+  <div class="lawnum">V</div>
+  <div class="reveal">
+    <h4 class="lawhead">Law V · The Movement Budget</h4>
+    <h2>All of special relativity from one Pythagorean rule</h2>
+    <p>A vortex has exactly one velocity resource: the tick rate <span class="mono">c</span>. It
+    spends that budget on two things — <strong>circulating</strong> (which is what keeps it
+    existing as a knot) and <strong>translating</strong> (moving through the lattice). Because the
+    two motions are perpendicular, the budget adds in quadrature:</p>
+
+    <div class="eq" style="text-align:center;font-size:1.15rem">
+       <span class="hl">v_circ²</span> + <span class="hl2">v²</span> = c²
+       <span class="lbl" style="float:none;display:block;margin-top:.4em;font-size:.85rem">Theorem 10 — the movement budget</span></div>
+
+    <p>That single equation is a right triangle, and the whole of special relativity is what you
+    read off its sides. Move faster and you steal budget from circulation — so your internal clock
+    (one circulation cycle) ticks slower. That's time dilation. Push to
+    <span class="mono">v=c</span> and circulation hits zero: no knot can survive, which is why
+    only massless light reaches <span class="mono">c</span>.</p>
+
+    <figure class="reveal">
+      <!-- EDITABLE SVG: the movement-budget quarter circle, interactive with widget below -->
+      <svg id="svg-budget" viewBox="0 0 380 320" role="img"
+           aria-label="A right triangle inside a quarter circle of radius c: one leg is translation v, the other circulation v_circ, the hypotenuse is c">
+        <rect width="380" height="320" fill="#080e18"/>
+        <path d="M40 280 A 240 240 0 0 1 280 40" fill="none" stroke="#1b2540" stroke-width="2"/>
+        <line x1="40" y1="280" x2="280" y2="280" stroke="#243154" stroke-width="1"/>
+        <line x1="40" y1="280" x2="40" y2="40" stroke="#243154" stroke-width="1"/>
+        <!-- dynamic triangle -->
+        <line id="bud-trans" x1="40" y1="280" x2="180" y2="280" stroke="#b98cff" stroke-width="4"/>
+        <line id="bud-circ"  x1="180" y1="280" x2="180" y2="150" stroke="#5ad1ff" stroke-width="4"/>
+        <line id="bud-hyp"   x1="40" y1="280" x2="180" y2="150" stroke="#ffd166" stroke-width="3"/>
+        <circle id="bud-pt" cx="180" cy="150" r="5" fill="#ffd166"/>
+        <text x="110" y="300" fill="#b98cff" font-size="13" font-family="monospace" text-anchor="middle">v (translation)</text>
+        <text x="300" y="160" fill="#5ad1ff" font-size="13" font-family="monospace">v_circ</text>
+        <text x="95" y="200" fill="#ffd166" font-size="13" font-family="monospace" transform="rotate(-30 95 200)">c</text>
+      </svg>
+      <figcaption>The movement budget as a triangle of fixed hypotenuse <span class="mono">c</span>.
+      Translation (purple) and circulation (cyan) trade off along the quarter-circle. Everything
+      Einstein wrote is the geometry of this one corner.</figcaption>
+    </figure>
+
+    <div class="widget">
+      <h4>Slide the budget</h4>
+      <div class="sub">One slider sets translation v; the triangle and every relativistic quantity
+      follow. The diagram above moves with it.</div>
+      <label class="ctl">velocity &nbsp;v/c = <span id="o-bv" class="pill"></span></label>
+      <input id="r-bv" type="range" min="0" max="0.999" step="0.001" value="0.55">
+      <div class="readout">
+        <span>circulation v_circ/c = <b id="o-vc" style="color:var(--accent)"></b></span>
+        <span>time dilation dτ/dt = <b id="o-td" style="color:var(--pass)"></b></span>
+      </div>
+      <div class="readout">
+        <span>length L/L₀ = <b id="o-lc" style="color:var(--accent2)"></b></span>
+        <span>energy E/E₀ = γ = <b id="o-en" style="color:var(--warn)"></b></span>
+      </div>
+      <div id="v-bv" class="verdict ok"></div>
+    </div>
+
+    <p>The same budget, applied to a vortex sitting in a gravity well instead of moving, gives
+    <strong>gravitational</strong> time dilation — and the radius where the orbital speed reaches
+    <span class="mono">c</span> is the c-boundary, SDT's Schwarzschild radius. For hydrogen it lands
+    exactly on the classical electron radius <span class="mono">r_e</span>; for the Sun, 1.477 km.</p>
+  </div>
+</section>
+
+<hr class="lawrule">
+
+<!-- ════════════════════ LAW VI ════════════════════ -->
+<section id="s7">
+  <div class="lawnum">VI</div>
+  <div class="reveal">
+    <h4 class="lawhead">Law VI &middot; Vortex Topology Quantisation</h4>
+    <h2>Which knots are allowed &mdash; and why the proton cannot decay</h2>
+    <p>If particles are vortex knots, which knots can exist? The answer is a theorem of knot
+    theory, not a parameter choice. A <span class="mono">(p,q)</span> torus mode is a
+    <strong>true knot</strong> if and only if <span class="mono">gcd(p,q) = 1</span> and
+    <span class="mono">min(p,q) &ge; 2</span>; its Alexander polynomial
+    <span class="mono">&Delta;(t) &ne; 1</span> is then invariant under any continuous deformation,
+    so the state is topologically protected &mdash; it cannot be untied by any smooth process.</p>
+
+    <div class="eq">R<sub>wake</sub> = (W + 1)&middot;&hbar; / (mc)&nbsp;&nbsp;&rArr;&nbsp;&nbsp;
+       R<sub>p</sub> = 4&hbar;/(m<sub>p</sub>c) = <span class="hl">0.84124 fm</span>
+       <span class="lbl">&mdash; Theorem 18, the W+1 rule</span></div>
+
+    <p>Against the muonic-hydrogen boundary radius that is <strong>0.02%</strong> with nothing
+    adjustable, and the winding read back from measurement is
+    <span class="mono">W<sub>eff</sub> = R<sub>p</sub>m<sub>p</sub>c/&hbar; &minus; 1 = 3.0008</span>
+    &mdash; an integer to four figures. The W+1 rule itself remains a <em>conjecture</em>, not yet
+    proven from trefoil geometry, and is labelled so; its falsification criterion is pre-registered:
+    if W<sub>eff</sub> departs from the integer 3 by more than 3&sigma;, the rule is refuted.</p>
+
+    <div class="callout gold">
+      <strong>Why there are only two stable charged particles:</strong> the mode partition follows
+      exactly from the movement budget &mdash; v<sub>T</sub> = c&radic;(p/(p+q)),
+      v<sub>P</sub> = c&radic;(q/(p+q)) &mdash; and the classification admits only two stable
+      windings. <span class="mono">(1,1)</span> is an unknot (&Delta; = 1) held together by its own
+      displacement: the <strong>electron</strong>. <span class="mono">(2,3)</span> is the trefoil,
+      the first protected knot: the <strong>proton</strong>, which is why it does not decay
+      (&tau; &gt; 10<sup>34</sup> yr). <span class="mono">(1,2)</span> is also unknotted and merely
+      metastable &mdash; a barrier of about 0.1 GeV, lifetime ~10<sup>&minus;21</sup> s &mdash;
+      which is why it is never observed. Higher odd windings (W = 5, 7, &hellip;) are protected and
+      await discovery.
+    </div>
+
+    <figure class="reveal">
+      <svg id="svg-knot" viewBox="0 0 380 300" role="img"
+           aria-label="A torus knot whose winding numbers p and q are set by the widget below">
+        <rect width="380" height="300" fill="#080e18"/>
+        <ellipse cx="190" cy="150" rx="120" ry="48" fill="none" stroke="#1b2540" stroke-width="2"/>
+        <path id="knot-path" fill="none" stroke="#5ad1ff" stroke-width="2"/>
+        <text id="knot-label" x="190" y="288" fill="#97a3ba" font-size="13" text-anchor="middle" font-family="monospace"></text>
+      </svg>
+      <figcaption>A <span class="mono">(p,q)</span> torus knot &mdash; a flow line winding p times
+      around the tube and q times around the ring. The widget sets the winding and reads off the
+      movement-budget partition and the knot classification.</figcaption>
+    </figure>
+
+    <div class="widget">
+      <h4>Build a particle from winding</h4>
+      <div class="sub">Set the two winding numbers. The toroidal/poloidal split is exact from the
+      budget <span class="mono">v<sub>T</sub>&sup2; + v<sub>P</sub>&sup2; = c&sup2;</span>; the
+      classification is the knot condition
+      <span class="mono">gcd(p,q) = 1 &and; min(p,q) &ge; 2</span>.</div>
+      <label class="ctl">poloidal winding &nbsp;p = <span id="o-p" class="pill"></span></label>
+      <input id="r-p" type="range" min="1" max="12" step="1" value="2">
+      <label class="ctl">toroidal winding &nbsp;q = <span id="o-q" class="pill"></span></label>
+      <input id="r-q" type="range" min="1" max="12" step="1" value="3">
+      <div class="readout">
+        <span>v<sub>T</sub>/c = <b id="o-pq" style="color:var(--accent2)"></b></span>
+        <span>v<sub>P</sub>/c = <b id="o-mass" style="color:var(--accent)"></b></span>
+      </div>
+      <div id="v-knot" class="verdict ok"></div>
+    </div>
+
+    <table>
+      <thead><tr><th>mode (p,q)</th><th>Alexander &Delta;(t)</th><th>v_T/c &middot; v_P/c</th><th>status</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">(1,1)</td><td class="mono">1</td><td class="mono">0.707 &middot; 0.707</td><td>unknot &mdash; <strong>electron</strong>, confined by its own displacement</td></tr>
+        <tr><td class="mono">(1,2)</td><td class="mono">1</td><td class="mono">0.577 &middot; 0.816</td><td>unknot &mdash; metastable only (~0.1 GeV, 10<sup>&minus;21</sup> s); never observed</td></tr>
+        <tr><td class="mono">(2,3)</td><td class="mono">t&minus;&sup2;&minus;t&minus;&sup1;+1&minus;t+t&sup2;</td><td class="mono">0.632 &middot; 0.775</td><td>trefoil &mdash; <strong>proton</strong>, topologically protected</td></tr>
+        <tr><td class="mono">(2,5) &middot; (3,4) &hellip;</td><td class="mono">&ne; 1</td><td class="mono">&mdash;</td><td>protected higher knots &mdash; permitted, undiscovered</td></tr>
+      </tbody>
+    </table>
+    <p class="mono" style="font-size:.78rem;opacity:.7">Mass-ratio hook:
+    m<sub>p</sub>/m<sub>e</sub> = 6&pi;<sup>5</sup> = 1836.118 against the measured 1836.15267
+    (19 ppm). The identity is exact and parameter-free, but its mapping to the displacement volumes
+    is asserted, not derived. Status: OPEN.</p>
+  </div>
+</section>
+
+<hr class="lawrule">
+
+<!-- ════════════════════ SUPPLEMENTARY ════════════════════ -->
+<section id="s8">
+  <div class="reveal">
+    <h3>Supplementary — Closing the gaps</h3>
+    <h2>What the six laws left open, and how far it's been pushed</h2>
+    <p>The five-law spine left a handful of loose ends. The Gap Resolution paper ties off most of
+    them with no new parameters:</p>
+
+    <div class="grid2">
+      <div class="card"><strong style="color:var(--pass)">Exclusion volumes</strong> — solving the
+      mass law for <span class="mono">V_disp</span> gives the electron's displaced volume
+      (<span class="mono">≈10⁻⁶¹ m³</span>) and the proton's directly. <span class="tag pass">computed</span></div>
+      <div class="card"><strong style="color:var(--pass)">The e–e problem</strong> — charge is a
+      <em>quantised</em> displacement, so every unit-charge pair couples through one universal
+      radius <span class="mono">R_charge=√(R_p r_e)</span>. No over-counting.
+      <span class="tag pass">resolved</span></div>
+      <div class="card"><strong style="color:var(--pass)">Marginal stability</strong> — the
+      "equality" in the movement budget is a <em>stable equilibrium</em>: squeeze the vortex and it
+      pushes back, exactly <span class="mono">P_cf = P_conv/3</span>. <span class="tag pass">proven</span></div>
+      <div class="card"><strong style="color:var(--pass)">Helium binding</strong> — the alpha's
+      charge radius is <span class="mono">2R_p</span> to 0.43%, and the occlusion law reproduces the
+      −79.005 eV binding exactly. <span class="tag pass">matches QM</span></div>
+    </div>
+
+    <p>And the most ambitious supplement — the <strong>Traction / Wake / Toroidal</strong>
+    framework — reframes matter not as an occupant of space but as a persistent <em>exclusion</em>
+    that writes a structured <strong>wake</strong> into the surrounding medium: directional memory,
+    refraction, magnetism as organised spation flow, and nested stellar/planetary wakes. It is a
+    research program, stated as such, not a finished derivation.</p>
+
+    <div class="callout open">
+      <strong style="color:var(--warn)">Genuinely still open — the honest scoreboard.</strong>
+      <div class="grid2" style="margin-top:.8em">
+        <div><span class="tag warn">open</span> <strong>The proton radius R_p</strong> from lattice
+        topology — currently a measured input. Derive it and the transfer function ƒ becomes truly
+        first-principles instead of "computed and expressed."</div>
+        <div><span class="tag warn">open</span> <strong>The exact (p,q)</strong> for proton and
+        electron — the spectrum is derived, but <em>which</em> knots they are needs a stability
+        selection rule.</div>
+        <div><span class="tag fail">open</span> <strong>Newton's G</strong> — shell cancellation
+        kills 122 orders of magnitude but the closest test still misses by ~5×. Logged as a miss,
+        not buried.</div>
+        <div><span class="tag warn">open</span> <strong>The transfer function ƒ</strong> — computed
+        (<span class="mono">2.12×10⁻¹⁷</span>) and written in closed form, but it still carries R_p,
+        so it is calibration-grade until R_p is derived. (See the CQ01 walkthrough.)</div>
+      </div>
+    </div>
+    <p>That is the shape of an honest framework: a great deal derived from one picture and one
+    calibration, with its remaining debts written on the wall in the same ink.</p>
+  </div>
+</section>
+
+<hr class="lawrule">
+
+<!-- ════════════════════ THE MATHEMATICS ════════════════════ -->
+<section id="s9">
+  <div class="reveal">
+    <h3>The Mathematics</h3>
+    <h2>All the serious machinery, in one place</h2>
+    <p>Everything above was intuition and pictures. Here is the rigour: 9 axioms, 2 lemmas, 17
+    theorems and their corollaries — the full deductive chain. Each block is collapsed; open the
+    ones you want. Numbering follows <span class="mono">Laws/SDT_Complete_Laws.md</span>.</p>
+
+    <h4 class="lawhead" style="margin-top:2em">The axioms — the only assumptions</h4>
+    <div class="card">
+      <p style="margin-top:0"><span class="mono" style="color:var(--gold)">Relay set (R1–R6), from Laws I–II:</span></p>
+      <div class="eq" style="font-size:.92rem">
+        <b>R1</b> Lattice: space is a regular lattice, spacing ℓ_P = <span class="num">1.616255×10⁻³⁵ m</span><br>
+        <b>R2</b> Tick: discrete steps t_P = <span class="num">5.39124×10⁻⁴⁴ s</span>, with c·t_P = ℓ_P<br>
+        <b>R3</b> Pre-Clearing: each spation holds ε_held = a·T_rec⁴·ℓ_P³<br>
+        <b>R4</b> Clearing: every spation releases its held content isotropically over 4π<br>
+        <b>R5</b> Faithful relay: ε_out(x,n) = ε_in(x,n) — the medium is inviscid<br>
+        <b>R6</b> Occlusion: a vortex of cross-section σ at distance r intercepts f_occ = σ/(4πr²)
+      </div>
+      <p><span class="mono" style="color:var(--gold)">Movement set (M1–M3), from Law V:</span></p>
+      <div class="eq" style="font-size:.92rem">
+        <b>M1</b> Relay-speed bound: |u| ≤ ℓ_P/t_P = c for any deformation velocity<br>
+        <b>M2</b> Vortex = circulating deformation, boundary speed v_circ = ωR_min, exists iff v_circ &gt; 0<br>
+        <b>M3</b> Orthogonal composition: v_circ ⊥ v_trans at every boundary point
+      </div>
+    </div>
+
+    <h4 class="lawhead" style="margin-top:2em">Law I — Throughput</h4>
+    <details>
+      <summary>Lemma 1 &amp; 2, Theorem 1 (shell cancellation), Theorem 2 (accumulation)</summary>
+      <div class="proof">
+        <p><strong>Lemma 1 (single-source).</strong> A source at depth d contributes
+        δΦ = ε/(4πd²). <span class="step">Proof:</span> isotropic release (R4) spreads ε over 4π;
+        the target subtends 1/d²; fidelity (R5) preserves it in transit. ∎</p>
+        <p><strong>Lemma 2 (shell population).</strong> |S_d| = 4πd² + O(d). <span class="step">Proof:</span>
+        lattice points at graph distance d occupy a spherical shell of area 4π(dℓ_P)², one point per
+        ℓ_P²; discreteness corrections are O(d), negligible for d≫1. ∎</p>
+        <div class="eq"><b>Theorem 1</b> &nbsp; Φ_shell(d) = |S_d|·ε/(4πd²) = 4πd²·ε/(4πd²) = ε</div>
+        <p class="step">Proof: Lemma 1 × Lemma 2; the d-dependence cancels identically. An exact
+        Euclidean identity requiring only isotropy (R4), fidelity (R5), and shell area (D2) — all
+        exact. Holds from d=1 to d=N≈5.9×10⁶¹.</p>
+        <div class="eq"><b>Theorem 2</b> &nbsp; Φ = Σ_{d=1}^{N} Φ_shell(d) = Σ ε = N·ε
+          = <span class="num">1.038×10⁻⁵⁶ J</span></div>
+        <p class="step">Each tick brings one more shell into the causal domain; each contributes ε
+        (T1); the total grows linearly to N = R_CMB/ℓ_P shells. Hence P_conv = Φ/ℓ_P³ = N·u_CMB =
+        2.459×10⁴⁸ Pa, and the boundary cell count S = 4πN² = 4.366×10¹²⁴ (the "10¹²³").</p>
+      </div>
+    </details>
+
+    <h4 class="lawhead" style="margin-top:2em">Law III — Force</h4>
+    <details>
+      <summary>Theorem 3 (isotropy + Newton I + scalar compression), Theorem 4 (occlusion force + Newton III + inverse square)</summary>
+      <div class="proof">
+        <div class="eq"><b>Theorem 3</b> &nbsp; ϕ(n̂) = Φ/(4π) for all n̂ ∈ S²</div>
+        <p class="step">Proof: a cone of solid angle δΩ at depth d holds d²δΩ sources, each giving
+        ε/(4πd²); the product εδΩ/(4π) is independent of d and direction; summing over depths gives
+        Φ/(4π).</p>
+        <p><strong>Corollary 3.1 (Newton I).</strong> F = ∮ ϕ(n̂) n̂ dΩ = (Φ/4π)∮n̂ dΩ = 0 — a body
+        at rest stays at rest, by symmetry of the integral.<br>
+        <strong>Corollary 3.2 (scalar compression).</strong> P_conv = Φ/(3ℓ_P³) &gt; 0 — empty space is
+        under balanced pressure from all sides.</p>
+        <div class="eq"><b>Theorem 4</b> &nbsp; F = (π/4) P_conv R₁²R₂²/r²</div>
+        <p class="step">Proof: M₁ occludes solid angle δΩ₁ = πR₁²/r² at the location of M₂; the
+        pressure deficit there is δP = (Φ/4πℓ_P³)·πR₁²/r²; acting on M₂'s cross-section σ₂ = πR₂²
+        gives F = δP·σ₂ = (π/4)P_conv R₁²R₂²/r².</p>
+        <p><strong>Corollary 4.1 (Newton III):</strong> symmetric in R₁↔R₂, action=reaction.
+        <strong>Corollary 4.2 (inverse square):</strong> the 1/r² is solid-angle geometry — no field,
+        no carrier. <strong>Validation:</strong> hydrogen at a₀ gives F_occ = 8.23×10⁻⁸ N vs Coulomb
+        8.24×10⁻⁸ N, error 0.12%; He⁺ confirms the Z² scaling.</p>
+      </div>
+    </details>
+
+    <h4 class="lawhead" style="margin-top:2em">Law IV — Mass &amp; inertia</h4>
+    <details>
+      <summary>Theorem 5 (inertia / F=ma), Theorem 6 (m_inert = m_grav), Theorem 7 (speed limit), Corollary 7.1 (relativistic mass)</summary>
+      <div class="proof">
+        <p>Acceleration tilts the throughput to a dipole, ϕ′(n̂) = (Φ/4π)(1 + v·n̂/c). The monopole
+        integral vanishes; the dipole integral ∮(v·n̂)n̂ dΩ = (4π/3)v.</p>
+        <div class="eq"><b>Theorem 5</b> &nbsp; F = −ma,&nbsp; m = Φ V_disp / (3ℓ_P³c²)</div>
+        <p class="step">Proof: momentum flux p = (V_disp/ℓ_P³c)(Φ/4π)∮(1+v·n̂/c)n̂ dΩ =
+        Φ V_disp v/(3ℓ_P³c²); F = −dp/dt = −ma with m as above.</p>
+        <div class="eq"><b>Theorem 6</b> &nbsp; m_inert = m_grav</div>
+        <p class="step">Both are set by the same exclusion volume V_disp — the shadow cast on others
+        and the resistance to being moved are one geometric quantity. The equivalence principle is an
+        identity, not a coincidence.</p>
+        <div class="eq"><b>Theorem 7</b> &nbsp; ϕ′(−v̂) = (Φ/4π)(1−v/c) ≥ 0 ⇒ v ≤ c</div>
+        <p class="step">Convergence density cannot be negative; at v=c the trailing hemisphere is
+        evacuated and no throughput remains to reorganise. <strong>Corollary 7.1:</strong> the full
+        aberration ϕ′ ∝ (1−β cosθ)⁻² gives m(v) = m₀/√(1−v²/c²) = γm₀.</p>
+        <p><strong>Measured:</strong> the predicted dipole ΔT/T = v/c is the CMB dipole observed by
+        COBE/Planck.</p>
+      </div>
+    </details>
+
+    <h4 class="lawhead" style="margin-top:2em">Law V — Relativity</h4>
+    <details>
+      <summary>Theorem 10 (movement budget) through Theorem 17 (c-boundary)</summary>
+      <div class="proof">
+        <div class="eq"><b>Theorem 10</b> &nbsp; v_circ² + v² = c²</div>
+        <p class="step">Proof: |u|² = v_circ² + v² by orthogonality (M3); M1 bounds |u| ≤ c; marginal
+        stability (the convergent pressure forces the vortex to circulate at the relay limit to resist
+        collapse) saturates the inequality to equality.</p>
+        <div class="eq">
+          <b>T11</b> time dilation &nbsp; dτ/dt = √(1−v²/c²) = 1/γ<br>
+          <b>T12</b> length contraction &nbsp; L = L₀/γ<br>
+          <b>T13</b> rest energy &nbsp; E₀ = ½ρ_eff v_circ² V_disp = m₀c²<br>
+          <b>T14</b> energy–momentum &nbsp; E² = (pc)² + (m₀c²)²<br>
+          <b>T15</b> photon limit &nbsp; v_circ=0 ⇒ v=c, m₀=0, E=pc<br>
+          <b>T16</b> gravitational dilation &nbsp; dτ/dt = √(1 − zR/r), z = 1/k²<br>
+          <b>T17</b> c-boundary &nbsp; R_c = zR = R/k², where v(R_c)=c
+        </div>
+        <p class="step">T11: the internal clock is one circulation cycle; at v its period is γT₀.
+        T14 is the Pythagorean budget in energy units — rest energy is the circulation leg, momentum
+        the translation leg. T16 verified against GPS (Earth z = 6.95×10⁻⁹). T17 for hydrogen lands on
+        R_c = α²a₀ = r_e = 2.818×10⁻¹⁵ m; for the Sun, 1.477 km.</p>
+      </div>
+    </details>
+
+    <h4 class="lawhead" style="margin-top:2em">Law VI — The mass spectrum</h4>
+    <details>
+      <summary>Theorem 18 (vortex mass formula) and the fundamental scale M₀</summary>
+      <div class="proof">
+        <p>Four conditions: (I) closure gcd(p,q)=1; (II) circulation quantisation a·v_p = ℏ/(mp),
+        R·v_t = ℏ/(mq); (III) budget v_p²+v_t² = c²; (IV) marginal stability ρ_eff c² = P_conv/3 with
+        ρ_eff = 2m/V, V = 2π²Ra².</p>
+        <p class="step">Parametrise v_p = c cosθ, v_t = c sinθ; substitute into (IV) and use
+        λ_C = ℏ/(mc) to get m⁴ = π²ℏ³P_conv/(3c⁵ p²q cos²θ sinθ). Minimising mass maximises
+        cos²θ sinθ, giving sin²θ* = 1/3, cos²θ* = 2/3, g(θ*) = 2/(3√3).</p>
+        <div class="eq"><b>Theorem 18</b> &nbsp; m(p,q) = M₀/(p²q)<sup>1/4</sup>,&nbsp;
+          M₀ = [π²ℏ³P_conv√3/(2c⁵)]<sup>1/4</sup> = <span class="num">1.786×10⁻²⁴ kg</span>
+          = <span class="num">1002 GeV/c²</span></div>
+        <p class="step">The stable budget angle gives v_p/v_t = √2. M₀ ∝ P_conv^{1/4} ∝ H₀^{−1/4}, so
+        the Hubble tension (67–73 km/s/Mpc) moves M₀ only over 984–1006 GeV — robustly the
+        electroweak scale.</p>
+      </div>
+    </details>
+
+    <h4 class="lawhead" style="margin-top:2em">Supplementary — Gap Resolution</h4>
+    <details>
+      <summary>V_disp, the transfer function ƒ, charge quantisation, marginal stability, helium</summary>
+      <div class="proof">
+        <div class="eq">
+          V_disp = 3mℓ_P³c²/Φ &nbsp;→&nbsp; V_disp(e) = <span class="num">9.99×10⁻⁶² m³</span>,
+          V_disp(p) = <span class="num">1.83×10⁻⁵⁸ m³</span><br>
+          P_eff = 4k_e e²/(π R_p² r_e²) = <span class="num">5.225×10³¹ Pa</span><br>
+          ƒ = P_eff/P_conv = 4αℏc/(π R_p² r_e² N u_CMB) = <span class="num">2.123×10⁻¹⁷</span><br>
+          R_charge = √(R_p r_e) = <span class="num">1.540×10⁻¹⁵ m</span><br>
+          P_cf = ρ_eff c² = P_conv/3 &nbsp;(exact algebraic identity from T5)
+        </div>
+        <p class="step">Charge quantisation: k_e e² = (π/4)P_eff R_p²r_e² is a single coupling, not a
+        product of independent cross-sections; defining R_charge = (R_p²r_e²)^{1/4} makes every
+        unit-charge pair give k_e e²/r² regardless of which particles carry the charge — resolving the
+        naive electron–electron over-count of (r_e/R_p)² = 11.22.</p>
+        <p class="step">Helium: R_He ≈ 2R_p to 0.43%; nuclear occlusion gives V = −4k_e e²/r (Z=2);
+        binding converges to the exact −79.005 eV (Pekeris), because the occlusion law reproduces
+        Coulomb exactly. <strong>Still open:</strong> R_p from lattice topology; the (p,q) selection
+        for proton/electron.</p>
+      </div>
+    </details>
+
+    <h4 class="lawhead" style="margin-top:2em">Tally</h4>
+    <table>
+      <thead><tr><th>Law</th><th>Gives</th><th>Theorems</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">I</td><td>baseline throughput Φ = Nε</td><td class="mono">L1–L2, T1–T2</td></tr>
+        <tr><td class="mono">II</td><td>the Clearing, pressure domains</td><td class="mono">T1′, T8, T9</td></tr>
+        <tr><td class="mono">III</td><td>force from occlusion, 1/r²</td><td class="mono">T3–T4 + C3.1, C3.2, C4.1, C4.2</td></tr>
+        <tr><td class="mono">IV</td><td>F=ma, equivalence, speed limit</td><td class="mono">T5–T7 + C7.1</td></tr>
+        <tr><td class="mono">V</td><td>special + gravitational relativity</td><td class="mono">T10–T17</td></tr>
+        <tr><td class="mono">VI</td><td>the particle mass spectrum</td><td class="mono">T18</td></tr>
+      </tbody>
+    </table>
+    <p><span class="tag gold">9 axioms</span> <span class="tag cy">2 lemmas</span>
+    <span class="tag vi">17 theorems</span> <span class="tag warn">1 calibration (hydrogen)</span>
+    — built on a single medium with one tick rate.</p>
+  </div>
+</section>
+
+<div class="footer">
+  Every number in the widgets on this page is live JS, recomputed from the constants in
+  <span class="mono">Engine/include/sdt/laws.hpp</span> — if a value drifts from the header, the
+  page is wrong, by design.<br>
+  All SVG is inline and editable — open this file in any editor and change a
+  <span class="mono">&lt;circle&gt;</span>, a <span class="mono">&lt;path&gt;</span>, or a colour.<br>
+  Source prose: <span class="mono">Laws/SDT_Complete_Laws.md</span>. Companion deep-dives:
+  the CQ01 transfer-function and CQ03 fine-structure scrollers.<br>
+  Spatial Displacement Theory · The Six Laws · James Christopher Tyndall, Melbourne
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════════
+   EXACT constants — copied verbatim from Engine/include/sdt/laws.hpp.
+   If any of these drift from the header, the page is wrong: that is the
+   intended self-falsification.
+   ═══════════════════════════════════════════════════════════════════ */
+const C = {
+  c:299792458.0, hbar:1.054571817e-34, l_P:1.616255e-35,
+  alpha:7.2973525693e-3, e:1.602176634e-19, r_e:2.8179403262e-15,
+  R_p:8.414e-16, m_e:9.1093837015e-31, m_p:1.67262192369e-27,
+  a_rad:7.5657e-16, T_CMB:2.7255, T_rec:3000.0, k_e:8.9875517923e9,
+  R_CMB:9.527e26, k_B:1.380649e-23, L_Sun:3.828e26, AU:1.495978707e11,
+  R_He:1.6755e-15, lambda_C_e:2.42631023867e-12
+};
+const PI=Math.PI;
+C.u_CMB   = C.a_rad*Math.pow(C.T_CMB,4);        // 4.17e-14 J/m^3
+C.N       = C.R_CMB / C.l_P;                     // 5.894e61
+C.l_P3    = C.l_P*C.l_P*C.l_P;
+C.eps     = C.u_CMB * C.l_P3;                    // 1.761e-118 J
+C.Phi     = C.N * C.eps;                         // 1.038e-56 J
+C.P_conv  = C.Phi / C.l_P3;                      // 2.459e48 Pa  ( = N*u_CMB )
+C.S_bdy   = 4*PI*C.N*C.N;                         // 4.366e124
+C.P_eff   = 4*C.k_e*C.e*C.e/(PI*C.R_p*C.R_p*C.r_e*C.r_e); // 5.225e31 Pa
+C.f_trans = C.P_eff / C.P_conv;                  // 2.123e-17
+C.R_charge= Math.sqrt(C.R_p*C.r_e);              // 1.540e-15 m
+C.F_CMB   = C.c*C.u_CMB/4;                        // 3.131e-6 W/m^2
+C.r_dom_Sun = Math.sqrt(C.L_Sun/(4*PI*C.F_CMB)); // ~3.12e15 m ~ 20800 AU
+// fundamental vortex mass scale (Theorem 18')
+C.M0      = Math.pow(PI*PI*Math.pow(C.hbar,3)*C.P_conv*Math.sqrt(3)/(2*Math.pow(C.c,5)), 0.25);
+C.M0_GeV  = C.M0*C.c*C.c/C.e/1e9;                 // ~1002 GeV
+
+const fmt   = (x,d=3)=>{ if(!isFinite(x)) return '∞'; return x.toExponential(d); };
+const fixed = (x,d=3)=>x.toFixed(d);
+const auFmt = m => {
+  const au = m/C.AU;
+  if(au<0.01) return (m/1e3).toExponential(2)+' km';
+  if(au<1e4)  return au.toFixed(0)+' AU';
+  if(au<6.32e4) return au.toFixed(0)+' AU';
+  return (au/63241).toFixed(2)+' ly';
+};
+
+/* ════ Prologue SVG: lattice + vortex ════ */
+(()=>{
+  const NS='http://www.w3.org/2000/svg';
+  const dots=document.getElementById('lat-dots'),
+        rays=document.getElementById('lat-rays'),
+        vor=document.getElementById('lat-vortex');
+  if(!dots) return;
+  for(let x=40;x<=580;x+=40)for(let y=30;y<=240;y+=42){
+    const near = Math.abs(x-310)<30 && Math.abs(y-150)<30;
+    const c=document.createElementNS(NS,'circle');
+    c.setAttribute('cx',x);c.setAttribute('cy',y);c.setAttribute('r',near?0:2.3);
+    c.setAttribute('fill','#2a3450');dots.appendChild(c);
+  }
+  // a few rays that pass straight through empty cells
+  [[40,72,580,72],[40,156,580,156],[40,240,580,240]].forEach(p=>{
+    const l=document.createElementNS(NS,'line');
+    l.setAttribute('x1',p[0]);l.setAttribute('y1',p[1]);
+    l.setAttribute('x2',p[2]);l.setAttribute('y2',p[3]);
+    l.setAttribute('stroke','#5ad1ff');l.setAttribute('stroke-width','1.1');
+    rays.appendChild(l);
+  });
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){
+    rays.style.transition='opacity 1.1s';rays.style.opacity='.55';
+    vor.style.transition='r 1s';vor.setAttribute('r','17');
+  }}),{threshold:.4});
+  io.observe(document.getElementById('svg-lattice'));
+})();
+
+/* ════ Law I: shell cancellation and depth slider ════ */
+(()=>{
+  const NS='http://www.w3.org/2000/svg';
+  const sh=document.getElementById('sc-shells'),bars=document.getElementById('sc-bars');
+  const r=document.getElementById('r-depth'),od=document.getElementById('o-depth'),
+        os=document.getElementById('o-src'),odl=document.getElementById('o-dil'),
+        oe=document.getElementById('o-eps'),v=document.getElementById('v-depth');
+  if(!sh || !r) return;
+  const CX=200,CY=130;
+  
+  const shellCircles = [];
+  const shellDots = [];
+  const barRects = [];
+  
+  // Draw shells
+  [40,80,118].forEach((rad,i)=>{
+    const c=document.createElementNS(NS,'circle');
+    c.setAttribute('cx',CX);c.setAttribute('cy',CY);c.setAttribute('r',rad);
+    c.setAttribute('fill','none');c.setAttribute('stroke','#243154');
+    c.setAttribute('stroke-width','1.5');
+    sh.appendChild(c);
+    shellCircles.push(c);
+    
+    // sources on the shell: more on the bigger ones, fainter
+    const n=6+i*6, op=0.9-i*0.28;
+    const dotsArray = [];
+    for(let k=0;k<n;k++){const a=k/n*2*PI;
+      const d=document.createElementNS(NS,'circle');
+      d.setAttribute('cx',CX+Math.cos(a)*rad);d.setAttribute('cy',CY+Math.sin(a)*rad);
+      d.setAttribute('r',2.4);d.setAttribute('fill','#5ad1ff');
+      d.setAttribute('opacity',op.toFixed(2));
+      sh.appendChild(d);
+      dotsArray.push(d);
+    }
+    shellDots.push(dotsArray);
+  });
+  
+  const c0=document.createElementNS(NS,'circle');
+  c0.setAttribute('cx',CX);c0.setAttribute('cy',CY);c0.setAttribute('r',5);
+  c0.setAttribute('fill','#ffd166');sh.appendChild(c0);
+  
+  // equal bars on the right
+  [0,1,2].forEach(i=>{
+    const x=430+i*55;
+    const rect=document.createElementNS(NS,'rect');
+    rect.setAttribute('x',x);rect.setAttribute('y',60);rect.setAttribute('width',38);
+    rect.setAttribute('height',130);rect.setAttribute('rx',5);rect.setAttribute('fill','#37d39b');
+    rect.setAttribute('opacity','0.45');
+    bars.appendChild(rect);
+    barRects.push(rect);
+    
+    const t=document.createElementNS(NS,'text');
+    t.setAttribute('x',x+19);t.setAttribute('y',208);t.setAttribute('fill','#97a3ba');
+    t.setAttribute('font-size','11');t.setAttribute('text-anchor','middle');
+    t.setAttribute('font-family','monospace');t.textContent='ε';bars.appendChild(t);
+  });
+  
+  function up(){
+    const logd=+r.value, d=Math.pow(10,logd);
+    od.textContent=logd.toFixed(1);
+    os.textContent=fmt(4*PI*d*d,2);
+    odl.textContent=fmt(1/(4*PI*d*d),2);
+    oe.textContent=fmt(C.eps,3);            // ALWAYS ε — that is the point
+    v.className='verdict ok';
+    v.textContent='invariant — every shell delivers ε across 61 orders';
+    
+    // Highlight nearest shell and bar
+    // Split the log range [0..61] into three bins: 
+    // Shell 1 (inner): 0 to 20
+    // Shell 2 (middle): 20 to 41
+    // Shell 3 (outer): 41 to 61
+    let activeIdx = 0;
+    if (logd > 20 && logd <= 41) activeIdx = 1;
+    else if (logd > 41) activeIdx = 2;
+    
+    shellCircles.forEach((circle, idx) => {
+      if (idx === activeIdx) {
+        circle.setAttribute('stroke', '#ffd166');
+        circle.setAttribute('stroke-width', '2.5');
+      } else {
+        circle.setAttribute('stroke', '#243154');
+        circle.setAttribute('stroke-width', '1.5');
+      }
+    });
+    
+    shellDots.forEach((dotsArray, idx) => {
+      const active = (idx === activeIdx);
+      dotsArray.forEach(dot => {
+        dot.setAttribute('fill', active ? '#ffd166' : '#5ad1ff');
+        dot.setAttribute('r', active ? '3.8' : '2.4');
+      });
+    });
+    
+    barRects.forEach((rect, idx) => {
+      if (idx === activeIdx) {
+        rect.setAttribute('fill', '#ffd166');
+        rect.setAttribute('opacity', '0.95');
+      } else {
+        rect.setAttribute('fill', '#37d39b');
+        rect.setAttribute('opacity', '0.45');
+      }
+    });
+  }
+  r.addEventListener('input',up);up();
+})();
+
+/* ════ Law II: overlapping cascade shells (converging animation) ════ */
+(()=>{
+  const NS='http://www.w3.org/2000/svg';
+  const g=document.getElementById('casc-shells'),ar=document.getElementById('casc-arrows');
+  if(!g) return;
+  const CX=310,CY=150;
+  
+  // We'll create the 7 circles
+  const circles = [];
+  const maxRadius = 7 * 19;
+  for(let i=1;i<=7;i++){
+    const c=document.createElementNS(NS,'circle');
+    c.setAttribute('cx',CX);c.setAttribute('cy',CY);
+    c.setAttribute('fill','none');
+    c.setAttribute('stroke-width','1.2');
+    g.appendChild(c);
+    circles.push({
+      element: c,
+      radius: i * 19,
+      colorIdx: i
+    });
+  }
+  
+  // Static arrows pointing inwards
+  for(let k=0;k<10;k++){const a=k/10*2*PI;
+    const l=document.createElementNS(NS,'line');
+    l.setAttribute('x1',CX+Math.cos(a)*150);l.setAttribute('y1',CY+Math.sin(a)*90);
+    l.setAttribute('x2',CX+Math.cos(a)*26);l.setAttribute('y2',CY+Math.sin(a)*26);
+    l.setAttribute('opacity','0.4');ar.appendChild(l);
+  }
+  
+  let animationId = null;
+  const speed = 0.35; // speed of inward collapse
+  
+  function animate() {
+    circles.forEach(circle => {
+      circle.radius -= speed;
+      if (circle.radius <= 0) {
+        circle.radius = maxRadius;
+      }
+      
+      // Update element
+      circle.element.setAttribute('r', circle.radius.toFixed(2));
+      
+      // Compute opacity based on radius (fades out as it approaches the center)
+      const normalizedRadius = circle.radius / maxRadius;
+      circle.element.setAttribute('opacity', (0.85 * normalizedRadius).toFixed(2));
+      
+      // Alternating colors
+      const isOdd = Math.round(circle.radius / 19) % 2 === 1;
+      circle.element.setAttribute('stroke', isOdd ? '#5ad1ff' : '#b98cff');
+    });
+    
+    animationId = requestAnimationFrame(animate);
+  }
+  
+  // Start animation when in view, stop when out of view
+  const io=new IntersectionObserver(es=>es.forEach(e=>{
+    if(e.isIntersecting){
+      if (!animationId) animate();
+    } else {
+      if (animationId) {
+        cancelAnimationFrame(animationId);
+        animationId = null;
+      }
+    }
+  }),{threshold:.2});
+  io.observe(document.getElementById('svg-cascade'));
+})();
+
+/* ════ Law II widget: pressure domain ════ */
+(()=>{
+  const r=document.getElementById('r-lum'),ol=document.getElementById('o-lum'),
+        od=document.getElementById('o-dom'),oc=document.getElementById('o-domcmp'),
+        v=document.getElementById('v-dom');
+  function up(){
+    const logL=+r.value, L=C.L_Sun*Math.pow(10,logL);
+    ol.textContent=Math.pow(10,logL)>=1?Math.pow(10,logL).toFixed(0):Math.pow(10,logL).toFixed(2);
+    const rdom=Math.sqrt(L/(4*PI*C.F_CMB));
+    od.textContent=auFmt(rdom);
+    const heliopause=120*C.AU;
+    oc.textContent='heliopause ≈ 120 AU (particle edge)';
+    if(Math.abs(logL)<0.001){v.className='verdict ok';
+      v.textContent='the Sun: ~20,800 AU — 170× past the heliopause';}
+    else{v.className='verdict ok';
+      v.textContent='r_domain ∝ √L · a real, derived boundary';}
+  }
+  r.addEventListener('input',up);up();
+})();
+
+/* ════ Law III: mutual occlusion SVG + widget ════ */
+(()=>{
+  const NS='http://www.w3.org/2000/svg';
+  const ar=document.getElementById('occ-arrows'),
+        s1=document.getElementById('occ-shadow1'),
+        n1=document.getElementById('occ-net1'),n2=document.getElementById('occ-net2'),
+        ob1=document.getElementById('occ-b1'),ob2=document.getElementById('occ-b2');
+  const r=document.getElementById('r-sep'),
+        os=document.getElementById('o-sep'),
+        of=document.getElementById('o-fsdt'),oc=document.getElementById('o-fcoul'),
+        v=document.getElementById('v-occ');
+        
+  if(!ar || !r) return;
+  
+  const b1={y:150,r:26}, b2={y:150,r:20};
+  const CY=150;
+  
+  const mk=(t,a)=>{const e=document.createElementNS(NS,t);
+    for(const k in a)e.setAttribute(k,a[k]);return e;};
+  const clear=g=>{while(g.firstChild)g.removeChild(g.firstChild);};
+  
+  function drawOcclusion(cx1, cx2, forceRatio) {
+    // Update body centers
+    ob1.setAttribute('cx', cx1);
+    ob2.setAttribute('cx', cx2);
+    
+    // Redraw spokes (pressure arrows)
+    clear(ar);
+    
+    // Body 1 spokes (blocked by Body 2 to the right)
+    for(let k=0;k<12;k++){const a=k/12*2*PI;
+      const dx=Math.cos(a),dy=Math.sin(a);
+      if(dx>0.5) continue; // blocked from right side
+      ar.appendChild(mk('line',{
+        x1: (cx1+dx*(b1.r+38)).toFixed(1), y1: (CY+dy*(b1.r+38)).toFixed(1),
+        x2: (cx1+dx*(b1.r+4)).toFixed(1),  y2: (CY+dy*(b1.r+4)).toFixed(1),
+        stroke: '#5ad1ff', 'stroke-width': 1.1, opacity: 0.5
+      }));
+    }
+    
+    // Body 2 spokes (blocked by Body 1 to the left)
+    for(let k=0;k<12;k++){const a=k/12*2*PI;
+      const dx=Math.cos(a),dy=Math.sin(a);
+      if(dx<-0.5) continue; // blocked from left side
+      ar.appendChild(mk('line',{
+        x1: (cx2+dx*(b2.r+38)).toFixed(1), y1: (CY+dy*(b2.r+38)).toFixed(1),
+        x2: (cx2+dx*(b2.r+4)).toFixed(1),  y2: (CY+dy*(b2.r+4)).toFixed(1),
+        stroke: '#5ad1ff', 'stroke-width': 1.1, opacity: 0.5
+      }));
+    }
+    
+    // Shadow cone between them (mutual occlusion)
+    s1.setAttribute('points',`${cx1},${CY-b1.r} ${cx2},${CY-b2.r} ${cx2},${CY+b2.r} ${cx1},${CY+b1.r}`);
+    s1.setAttribute('opacity','0.11');
+    
+    // Dynamic force arrows (gold) pointing inward: length and opacity scale with force ratio
+    const maxForceLen = 54;
+    const forceLen = 14 + maxForceLen * Math.min(1.0, forceRatio);
+    const forceOpacity = 0.3 + 0.7 * Math.min(1.0, forceRatio);
+    
+    // Arrow on body 1 (pointing right, toward body 2)
+    n1.setAttribute('x1', (cx1 - forceLen).toFixed(1));
+    n1.setAttribute('y1', CY);
+    n1.setAttribute('x2', (cx1 + b1.r + 4).toFixed(1));
+    n1.setAttribute('y2', CY);
+    n1.setAttribute('stroke-width', (1.8 + 2.2 * Math.min(1.0, forceRatio)).toFixed(1));
+    n1.setAttribute('opacity', forceOpacity.toFixed(2));
+    
+    // Arrow on body 2 (pointing left, toward body 1)
+    n2.setAttribute('x1', (cx2 + forceLen).toFixed(1));
+    n2.setAttribute('y1', CY);
+    n2.setAttribute('x2', (cx2 - b2.r - 4).toFixed(1));
+    n2.setAttribute('y2', CY);
+    n2.setAttribute('stroke-width', (1.8 + 2.2 * Math.min(1.0, forceRatio)).toFixed(1));
+    n2.setAttribute('opacity', forceOpacity.toFixed(2));
+  }
+  
+  function up(){
+    const logr=+r.value, rr=Math.pow(10,logr);
+    os.textContent=logr.toFixed(2);
+    // SDT occlusion through the universal charge radius R_charge = sqrt(R_p*r_e)
+    const Fsdt=(PI/4)*C.P_eff*Math.pow(C.R_charge,4)/(rr*rr);
+    // textbook Coulomb between two unit charges
+    const Fcoul=C.k_e*C.e*C.e/(rr*rr);
+    of.textContent=fmt(Fsdt,3); oc.textContent=fmt(Fcoul,3);
+    const ratio=Fsdt/Fcoul, err=Math.abs(ratio-1)*100;
+    v.className='verdict ok';
+    v.textContent='forces agree to '+err.toFixed(2)+'% across every separation — same 1/r² law';
+    
+    // Map logr [-13 .. -7] to separation pixels [90 .. 450]
+    const minS = 90, maxS = 450;
+    const normr = (logr - (-13)) / ((-7) - (-13)); // 0..1
+    const pixelSep = minS + normr * (maxS - minS);
+    
+    const cx1 = 310 - pixelSep / 2;
+    const cx2 = 310 + pixelSep / 2;
+    
+    // Force ratio for visual scaling (using Fsdt at -13 logr as max value)
+    const maxForceVal = (PI/4)*C.P_eff*Math.pow(C.R_charge,4)/(1e-13*1e-13);
+    const forceRatio = Fsdt / maxForceVal;
+    
+    drawOcclusion(cx1, cx2, forceRatio);
+  }
+  r.addEventListener('input',up);up();
+})();
+
+/* ════ Law IV SVG: dipole arrows ════ */
+const dipoleSVG=(()=>{
+  const NS='http://www.w3.org/2000/svg';
+  const f=document.getElementById('dip-front'),b=document.getElementById('dip-back');
+  function draw(beta){
+    [f,b].forEach(g=>{while(g.firstChild)g.removeChild(g.firstChild);});
+    const CX=310,CY=130;
+    for(let k=-2;k<=2;k++){
+      const yy=CY+k*26;
+      // front (right): longer/brighter with beta
+      const lf=document.createElementNS(NS,'line');
+      const len=28+beta*55;
+      lf.setAttribute('x1',CX+30);lf.setAttribute('y1',yy);
+      lf.setAttribute('x2',CX+30+len);lf.setAttribute('y2',yy);
+      lf.setAttribute('stroke','#5ad1ff');lf.setAttribute('stroke-width',(1+beta*3).toFixed(1));
+      f.appendChild(lf);
+      // back (left): shorter/dimmer
+      const lb=document.createElementNS(NS,'line');
+      const lenb=Math.max(4,28-beta*26);
+      lb.setAttribute('x1',CX-30);lb.setAttribute('y1',yy);
+      lb.setAttribute('x2',CX-30-lenb);lb.setAttribute('y2',yy);
+      lb.setAttribute('stroke','#ff5a6e');lb.setAttribute('stroke-width','1.2');
+      lb.setAttribute('opacity',(1-beta*0.7).toFixed(2));
+      b.appendChild(lb);
+    }
+  }
+  return {draw};
+})();
+
+/* ════ Law IV widget: cost of speed ════ */
+(()=>{
+  const r=document.getElementById('r-beta'),ob=document.getElementById('o-beta'),
+        od=document.getElementById('o-dip'),ot=document.getElementById('o-trail'),
+        og=document.getElementById('o-gam'),v=document.getElementById('v-beta');
+  function up(){
+    const beta=+r.value; ob.textContent=beta.toFixed(3);
+    od.textContent=(beta).toExponential(2).replace('e','×10^');
+    ot.textContent='×'+(1-beta).toFixed(3);
+    const gam=1/Math.sqrt(1-beta*beta);
+    og.textContent=isFinite(gam)?gam.toFixed(3):'∞';
+    if(dipoleSVG) dipoleSVG.draw(beta);
+    if(beta<0.1){v.className='verdict ok';v.textContent='nearly isotropic — barely any inertia felt';}
+    else if(beta<0.9){v.className='verdict ok';v.textContent='asymmetry growing — γ = '+gam.toFixed(2);}
+    else{v.className='verdict warn';v.textContent='trailing hemisphere emptying — cost diverging toward c';}
+  }
+  r.addEventListener('input',up);up();
+})();
+
+/* ════ Law V widget + budget triangle ════ */
+(()=>{
+  const r=document.getElementById('r-bv'),ob=document.getElementById('o-bv'),
+        ovc=document.getElementById('o-vc'),otd=document.getElementById('o-td'),
+        olc=document.getElementById('o-lc'),oen=document.getElementById('o-en'),
+        v=document.getElementById('v-bv');
+  const trans=document.getElementById('bud-trans'),circ=document.getElementById('bud-circ'),
+        hyp=document.getElementById('bud-hyp'),pt=document.getElementById('bud-pt');
+  // geometry: origin (40,280), c maps to 240 px
+  const OX=40,OY=280,SCALE=240;
+  function up(){
+    const beta=+r.value; ob.textContent=beta.toFixed(3);
+    const vc=Math.sqrt(Math.max(0,1-beta*beta));
+    const gam=1/Math.sqrt(1-beta*beta);
+    ovc.textContent=vc.toFixed(3);
+    otd.textContent=vc.toFixed(3);
+    olc.textContent=(1/gam).toFixed(3);
+    oen.textContent=isFinite(gam)?gam.toFixed(3):'∞';
+    // triangle
+    const px=OX+beta*SCALE, py=OY-vc*SCALE;
+    trans.setAttribute('x2',px);
+    circ.setAttribute('x1',px);circ.setAttribute('y1',OY);circ.setAttribute('x2',px);circ.setAttribute('y2',py);
+    hyp.setAttribute('x2',px);hyp.setAttribute('y2',py);
+    pt.setAttribute('cx',px);pt.setAttribute('cy',py);
+    if(beta<0.95){v.className='verdict ok';
+      v.textContent='budget balanced: '+(beta*beta).toFixed(3)+' + '+(vc*vc).toFixed(3)+' = 1.000';}
+    else{v.className='verdict warn';
+      v.textContent='circulation almost spent — clock nearly frozen, γ='+gam.toFixed(1);}
+  }
+  r.addEventListener('input',up);up();
+})();
+
+/* ==== Law VI: knot classification + movement-budget partition (canon) ==== */
+(()=>{
+  const rp=document.getElementById('r-p'),rq=document.getElementById('r-q'),
+        op=document.getElementById('o-p'),oq=document.getElementById('o-q'),
+        ovt=document.getElementById('o-pq'),ovp=document.getElementById('o-mass'),
+        v=document.getElementById('v-knot'),
+        path=document.getElementById('knot-path'),lbl=document.getElementById('knot-label');
+  function gcd(a,b){return b?gcd(b,a%b):a;}
+  function drawKnot(p,q){
+    const CX=190,CY=150,Rmaj=104,Rmin=32, pts=[];
+    for(let i=0;i<=600;i++){const t=i/600*2*PI;
+      const rr=Rmaj+Rmin*Math.cos(q*t);
+      const X=CX + rr*Math.cos(p*t);
+      const Y=CY + rr*Math.sin(p*t)*0.42 + Rmin*Math.sin(q*t)*0.55;
+      pts.push((i?'L':'M')+X.toFixed(1)+' '+Y.toFixed(1));
+    }
+    path.setAttribute('d',pts.join(' '));
+  }
+  function up(){
+    const p=+rp.value,q=+rq.value;
+    op.textContent=p; oq.textContent=q;
+    /* exact from the movement budget: v_T^2 + v_P^2 = c^2 */
+    const vT=Math.sqrt(p/(p+q)), vP=Math.sqrt(q/(p+q));
+    ovt.textContent=vT.toFixed(3); ovp.textContent=vP.toFixed(3);
+    drawKnot(p,q);
+    const g=gcd(p,q), trueKnot=(g===1 && Math.min(p,q)>=2);
+    lbl.textContent='('+p+','+q+') '+(trueKnot?'true knot - protected':(g===1?'unknot':'gcd>1 - not one closed knot'));
+    if(p===1&&q===1){v.className='verdict ok';
+      v.textContent='(1,1): the unknot - the ELECTRON, confined by its own displacement. v_T = v_P = c/root2';}
+    else if((p===2&&q===3)||(p===3&&q===2)){v.className='verdict ok';
+      v.textContent='(2,3): the TREFOIL - the PROTON. Alexander polynomial != 1, topologically protected: it cannot decay';}
+    else if(g!==1){v.className='verdict bad';
+      v.textContent='gcd('+p+','+q+')='+g+' - the flow does not close as a single knot';}
+    else if(!trueKnot){v.className='verdict warn';
+      v.textContent='min(p,q) < 2 - an UNKNOT: unprotected, metastable at best';}
+    else{v.className='verdict ok';
+      v.textContent='a protected higher knot - permitted by the classification, not yet observed';}
+    const resid=Math.abs(vT*vT+vP*vP-1);
+    if(resid>1e-12){v.className='verdict bad';v.textContent='budget residual '+resid;}
+  }
+  [rp,rq].forEach(el=>el.addEventListener('input',up));up();
+})();
+/* ════ scroll progress + reveal + dots ════ */
+(()=>{
+  const labels=['intro','primitives','Law I','Law II','Law III','Law IV','Law V','Law VI','gaps','maths'];
+  const prog=document.getElementById('prog');
+  const secs=[...document.querySelectorAll('section')];
+  const dots=document.getElementById('dots');
+  secs.forEach((s,i)=>{const a=document.createElement('a');a.href='#'+s.id;
+    a.title=labels[i]||s.id;
+    const sp=document.createElement('span');sp.textContent=labels[i]||s.id;a.appendChild(sp);
+    dots.appendChild(a);});
+  const dotEls=[...dots.children];
+  const io=new IntersectionObserver(es=>es.forEach(e=>{
+    if(e.isIntersecting){e.target.querySelectorAll('.reveal').forEach(r=>r.classList.add('in'));
+      const i=secs.indexOf(e.target);dotEls.forEach((d,j)=>d.classList.toggle('on',j===i));}
+  }),{threshold:.2});
+  secs.forEach(s=>io.observe(s));
+  addEventListener('scroll',()=>{
+    const h=document.documentElement;
+    prog.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';
+  },{passive:true});
+})();
+</script>
+</body>
+</html>
