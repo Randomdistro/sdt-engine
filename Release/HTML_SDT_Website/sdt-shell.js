@@ -65,6 +65,7 @@
   var SCR = [
     ['Scrollthroughs', [
       ['SDT walkthrough',  'sdt_walkthrough.html'],
+      ['The paradox census','st_paradox_census.html'],
       ['The six laws',     'laws_scroller.html'],
       ['Benchmarks',       'benchmarks_scroller.html'],
       ['Depth closure',    'depth_closure_scroller.html'],

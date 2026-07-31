@@ -1,4 +1,4 @@
-# The Closure-Kink Isotone Invariant
+ The Closure-Kink Isotone Invariant
 
 > **Status:** SUPPORTED (pre-registered, single pass, 2026-07-30).
 > **Author:** J. C. Harvey, Melbourne. Gateways binding.
