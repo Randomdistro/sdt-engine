@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
+<script>/*sdt-theme-guard*/(function(){try{var t=localStorage.getItem("sdt.theme")||"auto";if(t==="auto")t=(window.matchMedia&&window.matchMedia("(prefers-color-scheme:dark)").matches)?"dark":"light";var d=document.documentElement;d.setAttribute("data-theme",t);d.setAttribute("data-sdt-theme",t);}catch(e){}})();</script>
+
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>ATOMICUS — The SDT Nuclear Model, built one finding at a time</title>
 <style>
@@ -243,8 +245,8 @@ const F=[
   chk:iso=>{const r=IDX.get(iso.Z+','+iso.A);return r?`shared-electron binding · deuteron 2.20/2.22 MeV · this nucleus BE/A = ${(r[2]/iso.A).toFixed(2)} MeV`:'shared-electron well, geared by 137'}},
 
  {t:'The β⁻ release',s:'NATIVE',mode:'release',
-  st:'β⁻ decay is a neutron letting go. <b>Two things leave the proton’s skin at once</b> — the electron and the neutrino, both born at the <b>1.83c seat</b> (r = R_p). The electron is released <i>bound</i> and <b>drops to the ground state</b> in femtoseconds, taking up the local displacement — that is the β electron. The neutrino is the <b>one winding that never closes</b> (W→0); it cannot seat, so it goes. <b>They cross the c-boundary together</b> — r_e = 2.818 fm, the electron’s own size, its 0.511 MeV rest shell — at the <b>same instant</b>. And the neutrino <b>deforms</b>: the universe bears harder on its tail than its nose, so it runs <b>fat-nosed, thin-tailed</b>. That lopsidedness is the shove — <b>nothing pulls it; it leaves because it is crooked</b> — a <b>watermelon seed</b> the convergence pinches by the thin tail, squirting it out nose-first past the escape shell (2r_e). The <b>1/√2 compression is the launch</b>; the whole thing is a <b>~10⁻²⁹ m</b> splinter, and nothing it crosses can slow it. Drag the ν or the e⁻ below; they step together.',
-  chk:()=>'seat 1.83c → c-boundary r_e=2.818 fm (0.511 MeV) → escape 2r_e · e⁻ → ground state, ν escapes · both cross c together · ν compresses 1/√2 (~10⁻²⁹ m)'},
+  st:'β⁻ decay is a neutron letting go. <b>Two things leave the proton’s skin at once</b> — the electron and the neutrino, both born at the <b>1.83c seat</b> (r = R_p). They are shunting <i>down</i> from that orbit, and <b>an orbit that slows is an orbit that widens: they spiral outwards</b>. The electron is released <i>bound</i> and <b>drops to the ground state</b> in femtoseconds, taking up the local displacement — that is the β electron. The neutrino is the <b>one winding that never closes</b> (W→0); it cannot seat, so it goes. It is a <b>~10⁻²⁹ m pip — 10⁻¹⁰ of the electron’s own body — and it never grows</b>. <b>They cross the c-boundary together</b> — r_e = 2.818 fm, the electron’s 0.511 MeV rest shell — at the <b>same instant</b>, and <b>only then does the ν begin to deform</b>: its <b>leading edge carries on the slight orbital slowdown from c</b>, while its <b>tail is released at precisely c</b>. The tail outruns the nose. That mismatch is the <b>phase pinch</b> — the spations get <b>more reorganisation at the pinch than at the nose</b> — and the pinch is the launch: the <b>pipshot</b> (the 1/√2 compression), nose-first past the escape shell (2r_e), and nothing it crosses can slow it. <b>Nothing pulls it; it leaves because the phase books don’t balance.</b> Drag the ν or the e⁻ below; they step together.',
+  chk:()=>'seat 1.83c → outward spiral (slowing orbit widens) → c-boundary r_e=2.818 fm together → ν deforms only past c: nose <c, tail =c → phase pinch → pipshot (1/√2, ~10⁻²⁹ m = 10⁻¹⁰ of e⁻) · e⁻ → ground state'},
 
  {t:'The ledger as it stands',s:'OPEN',mode:'ledger',
   st:'The whole model, with each piece carrying its true status. <b>Native and proved:</b> the grammar, the scission invariant, '+
@@ -321,37 +323,64 @@ function drawNucleus(pk,cache,mode){
 /* the β⁻ release interactive (abstracted path — a₀ is 63,000× r_e, so not to scale) */
 function relSmooth(a,b,x){const t=Math.max(0,Math.min(1,(x-a)/(b-a)));return t*t*(3-2*t);}
 function relLayout(){return{xSeat:W*0.135,xC:W*0.47,xEsc:W*0.635,xGS:W*0.88,xEnd:W*1.05,yNu:H*0.37,yE:H*0.63};}
-function relX(who,t){const g=relLayout(),end=(who==='e')?g.xGS:g.xEnd;
-  return (t<=0.5)? g.xSeat+(g.xC-g.xSeat)*(t/0.5) : g.xC+(end-g.xC)*((t-0.5)/0.5);}
-function relTauFromX(who,x){const g=relLayout(),end=(who==='e')?g.xGS:g.xEnd;
-  return (x<=g.xC)? Math.max(0,0.5*(x-g.xSeat)/(g.xC-g.xSeat)) : Math.min(1,0.5+0.5*(x-g.xC)/(end-g.xC));}
+/* shunting down from the 1.83c orbit = SPIRALLING OUTWARDS: a slowing orbit widens.
+   Spiral from the seat to the c-boundary; only past the boundary is the path ballistic. */
+function relPos(who,t){const g=relLayout(),midY=H*0.5,row=(who==='e')?g.yE:g.yNu,end=(who==='e')?g.xGS:g.xEnd;
+  if(t>=0.5)return{x:g.xC+(end-g.xC)*((t-0.5)/0.5),y:row};
+  const r0=Math.min(W,H)*0.05*1.55, Rex=Math.hypot(g.xC-g.xSeat,row-midY), th0=Math.atan2(row-midY,g.xC-g.xSeat);
+  const u=Math.max(0,t/0.5), r=r0+(Rex-r0)*u, th=th0+2.2*2*Math.PI*Math.pow(1-u,1.6);
+  return{x:g.xSeat+r*Math.cos(th),y:midY+r*Math.sin(th)};}
+function relTauFromPos(who,mx,my){const g=relLayout(),midY=H*0.5,row=(who==='e')?g.yE:g.yNu,end=(who==='e')?g.xGS:g.xEnd;
+  if(mx>g.xC)return Math.min(1,0.5+0.5*(mx-g.xC)/(end-g.xC));
+  const r0=Math.min(W,H)*0.05*1.55, Rex=Math.hypot(g.xC-g.xSeat,row-midY);
+  const r=Math.hypot(mx-g.xSeat,my-midY);
+  return Math.max(0,Math.min(0.5,0.5*(r-r0)/(Rex-r0)));}
 function relDot(x,y,R,col){const g=cx.createRadialGradient(x-R*.35,y-R*.4,R*.1,x,y,R);
   g.addColorStop(0,'#fff');g.addColorStop(.35,col);g.addColorStop(1,shadeDark(col));
   cx.beginPath();cx.arc(x,y,R,0,7);cx.fillStyle=g;cx.fill();cx.strokeStyle='rgba(0,0,0,.2)';cx.lineWidth=.6;cx.stroke();}
 function drawNeutrinoGlyph(cxp,cyp,t){
-  const R0=Math.min(W,H)*0.05, d=relSmooth(0.05,0.5,t), comp=1-(1-1/Math.SQRT2)*relSmooth(0.5,0.72,t);
-  const noseR=R0*(0.48+1.25*d), L=R0*2.3*(0.6+0.7*d)*comp, xN=cxp+L*0.5, xT=cxp-L*0.5, Cnx=xN-noseR;
-  const topY=cyp-noseR, botY=cyp+noseR;
-  cx.beginPath(); cx.moveTo(xT,cyp);
-  cx.quadraticCurveTo(cxp,topY,Cnx,topY);
-  cx.arc(Cnx,cyp,noseR,-Math.PI/2,Math.PI/2,false);
-  cx.quadraticCurveTo(cxp,botY,xT,cyp); cx.closePath();
-  const grd=cx.createLinearGradient(xT,cyp,xN,cyp);
-  grd.addColorStop(0,'rgba(125,91,166,.14)');grd.addColorStop(.55,'rgba(125,91,166,.55)');grd.addColorStop(1,'#7d5ba6');
-  cx.fillStyle=grd;cx.fill();cx.strokeStyle='rgba(74,44,110,.6)';cx.lineWidth=1;cx.stroke();
-  const pinch=relSmooth(0.45,0.74,t);
-  if(d>0.15){ // convergence bearing on the thin TAIL, tightening into a PINCH across the escape gap
-    const ticks=3+Math.round(pinch*4);
-    cx.strokeStyle='rgba(74,44,110,'+(0.35+0.5*pinch).toFixed(2)+')';cx.lineWidth=1+pinch*1.2;
-    for(let k=0;k<ticks;k++){const f=ticks>1?(k/(ticks-1)-0.5):0, yy=cyp+f*noseR*1.4*(1-0.45*pinch);
-      cx.beginPath();cx.moveTo(xT-noseR*(1.6-0.5*pinch),yy);cx.lineTo(xT-noseR*0.25,cyp+f*noseR*0.2);cx.stroke();}
+  /* the pip: FIXED size — the nu is ~1e-10 of the electron's body (~1e-29 m). It never grows. */
+  const R0=Math.min(W,H)*0.05;
+  cx.beginPath();cx.arc(cxp,cyp,3.2,0,7);cx.fillStyle='#7d5ba6';cx.fill();
+  cx.strokeStyle='rgba(74,44,110,.6)';cx.lineWidth=.8;cx.stroke();
+  cx.fillStyle='#4a2c6e';cx.font='700 12px ui-monospace';cx.textAlign='center';
+  cx.fillText('\u03bd',cxp,cyp-10);cx.textAlign='left';
+  if(t<0.5)return;                       /* inside the c-boundary: no deformation at all */
+  /* past the boundary the pip deforms — magnified in the loupe: the leading edge carries
+     on the slight orbital slowdown from c; the tail is released at precisely c. The tail
+     outruns the nose: the PHASE PINCH — more spation reorganisation at the pinch than at
+     the nose. The pinch is the launch: pipshot. */
+  const d=relSmooth(0.5,0.62,t), pinch=relSmooth(0.55,0.78,t),
+        comp=1-(1-1/Math.SQRT2)*pinch;
+  const LR=R0*1.5, lx0=cxp+R0*0.4, ly0=cyp-R0*2.0;
+  cx.strokeStyle='rgba(74,44,110,.35)';cx.lineWidth=1;
+  cx.beginPath();cx.moveTo(cxp+2,cyp-4);cx.lineTo(lx0-LR*0.5,ly0+LR*0.75);cx.stroke();
+  cx.beginPath();cx.arc(lx0,ly0,LR,0,7);cx.fillStyle='rgba(255,255,255,.92)';cx.fill();
+  cx.strokeStyle='rgba(74,44,110,.5)';cx.lineWidth=1.2;cx.stroke();
+  const L=LR*1.35*comp*(0.35+0.65*d), nr=LR*0.30*(0.4+0.6*d);
+  const xN=lx0+L*0.5, xT=lx0-L*0.5, xW=xT+L*0.30, wr=nr*(1-0.62*pinch);
+  cx.beginPath();cx.moveTo(xT,ly0);
+  cx.quadraticCurveTo(xW,ly0-wr*1.1,(xW+xN-nr)/2,ly0-(wr+nr)/2);
+  cx.lineTo(xN-nr,ly0-nr);
+  cx.arc(xN-nr,ly0,nr,-Math.PI/2,Math.PI/2,false);
+  cx.lineTo((xW+xN-nr)/2,ly0+(wr+nr)/2);
+  cx.quadraticCurveTo(xW,ly0+wr*1.1,xT,ly0);cx.closePath();
+  const grd=cx.createLinearGradient(xT,ly0,xN,ly0);
+  grd.addColorStop(0,'rgba(125,91,166,.20)');grd.addColorStop(.5,'rgba(125,91,166,.55)');grd.addColorStop(1,'#7d5ba6');
+  cx.fillStyle=grd;cx.fill();cx.strokeStyle='rgba(74,44,110,.7)';cx.lineWidth=1;cx.stroke();
+  if(pinch>0.05){ /* reorg ticks AT THE PINCH, not the nose */
+    cx.strokeStyle='rgba(74,44,110,'+(0.3+0.55*pinch).toFixed(2)+')';cx.lineWidth=1+pinch;
+    for(let k=-1;k<=1;k++){const yy=ly0+k*LR*0.5;
+      cx.beginPath();cx.moveTo(xW-LR*0.26,yy);cx.lineTo(xW,ly0+k*wr*0.8);cx.stroke();}
   }
-  if(pinch>0.04){ // the launch: the 1/sqrt2 squeeze becoming velocity, streaks fired off the nose
-    cx.strokeStyle='rgba(125,91,166,'+(0.55*pinch).toFixed(2)+')';cx.lineWidth=1.6;
-    for(let k=-1;k<=1;k++){const yy=cyp+k*noseR*0.42, len=noseR*(0.8+3.2*pinch);
-      cx.beginPath();cx.moveTo(xN+3,yy);cx.lineTo(xN+3+len,yy);cx.stroke();}
-  }
-  cx.fillStyle='#4a2c6e';cx.font='700 12px ui-monospace';cx.textAlign='center';cx.fillText('\u03bd',cxp,cyp-noseR-7);cx.textAlign='left';
+  cx.font='9px ui-monospace';cx.textAlign='center';
+  cx.fillStyle='#4a2c6e';
+  cx.fillText('tail = c',xT,ly0+LR*0.72);
+  cx.fillText('nose < c',xN-nr,ly0-LR*0.6);
+  if(pinch>0.05)cx.fillText('phase pinch',xW,ly0+LR*0.92);
+  cx.fillStyle='#7b7266';
+  cx.fillText('magnified \u00b7 ~10\u207b\u00b2\u2079 m',lx0,ly0-LR-6);
+  cx.textAlign='left';
 }
 function drawRelease(){
   cx.clearRect(0,0,W,H);
@@ -371,18 +400,20 @@ function drawRelease(){
   relDot(g.xSeat,midY,pR,'#c0503a');
   cx.fillStyle='#8a2f22';cx.font='700 10px ui-monospace';cx.textAlign='center';
   cx.fillText('proton',g.xSeat,midY-pR*1.55-14);cx.fillText('seat R_p \u00b7 1.83c',g.xSeat,midY-pR*1.55-3);cx.textAlign='left';
-  const ex=relX('e',t);
-  cx.strokeStyle='rgba(63,143,111,.25)';cx.lineWidth=1.5;cx.beginPath();cx.moveTo(g.xSeat,g.yE);cx.lineTo(ex,g.yE);cx.stroke();
-  relDot(ex,g.yE,pR*0.32,'#3f8f6f');
-  cx.fillStyle='#2c6b52';cx.font='700 12px ui-monospace';cx.textAlign='center';cx.fillText('e\u207b',ex,g.yE+pR*0.32+15);cx.textAlign='left';
-  const nx=relX('nu',t);
-  cx.strokeStyle='rgba(125,91,166,.22)';cx.lineWidth=1.5;cx.beginPath();cx.moveTo(g.xSeat,g.yNu);cx.lineTo(nx,g.yNu);cx.stroke();
-  drawNeutrinoGlyph(nx,g.yNu,t);
+  function relTrail(who,col){cx.strokeStyle=col;cx.lineWidth=1.5;cx.beginPath();
+    for(let k=0;k<=64;k++){const q=relPos(who,t*k/64);k?cx.lineTo(q.x,q.y):cx.moveTo(q.x,q.y);}cx.stroke();}
+  relTrail('e','rgba(63,143,111,.25)');
+  relTrail('nu','rgba(125,91,166,.22)');
+  const ep=relPos('e',t);
+  relDot(ep.x,ep.y,pR*0.32,'#3f8f6f');
+  cx.fillStyle='#2c6b52';cx.font='700 12px ui-monospace';cx.textAlign='center';cx.fillText('e\u207b',ep.x,ep.y+pR*0.32+15);cx.textAlign='left';
+  const np=relPos('nu',t);
+  drawNeutrinoGlyph(np.x,np.y,t);
   const cap = (t<0.02)?'both born at the 1.83c seat \u2014 drag either one'
     : (Math.abs(t-0.5)<0.03)?'crossing the c-boundary \u2014 together, at the same instant'
-    : (t<0.5)?'climbing the gradient \u2014 the \u03bd deforms into a watermelon seed'
-    : (t<0.74)?'the convergence pinches the tail \u2014 the \u03bd is spat out (1/\u221a2); e\u207b settling'
-    : '\u03bd spat clear (~10\u207b\u00b2\u2079 m splinter) \u00b7 e\u207b at the ground state';
+    : (t<0.5)?'shunting down from the 1.83c orbit \u2014 a slowing orbit widens: they spiral outwards'
+    : (t<0.74)?'past c the \u03bd deforms: nose slowing on from c, tail released at precisely c \u2014 the phase pinch'
+    : 'pipshot \u2014 \u03bd clear (~10\u207b\u00b2\u2079 m, 10\u207b\u00b9\u2070 of the electron) \u00b7 e\u207b at the ground state';
   cx.fillStyle='#1c1a16';cx.font='600 13px ui-monospace';cx.textAlign='center';cx.fillText(cap,W/2,H*0.855);
   cx.fillStyle='#7b7266';cx.font='11px ui-monospace';cx.fillText('drag the \u03bd or the e\u207b \u2014 they step together, and cross c at the same time',W/2,H*0.895);
   cx.textAlign='left';
@@ -427,9 +458,9 @@ function draw2d(m){const p=el('panel2d');p.innerHTML='';
 }
 /* interaction */
 let drag=false,lx=0,ly=0;
-cv.addEventListener('mousedown',e=>{if(F[step].mode==='release'){const rr=cv.getBoundingClientRect(),mx=e.clientX-rr.left,my=e.clientY-rr.top,g=relLayout();const ex=relX('e',relTau),nx=relX('nu',relTau);relDrag=(Math.hypot(mx-nx,my-g.yNu)<32)?'nu':(Math.hypot(mx-ex,my-g.yE)<32)?'e':null;return;}drag=true;spin=false;lx=e.clientX;ly=e.clientY;});
+cv.addEventListener('mousedown',e=>{if(F[step].mode==='release'){const rr=cv.getBoundingClientRect(),mx=e.clientX-rr.left,my=e.clientY-rr.top,g=relLayout();const ep=relPos('e',relTau),np=relPos('nu',relTau);relDrag=(Math.hypot(mx-np.x,my-np.y)<32)?'nu':(Math.hypot(mx-ep.x,my-ep.y)<32)?'e':null;return;}drag=true;spin=false;lx=e.clientX;ly=e.clientY;});
 addEventListener('mouseup',()=>{drag=false;relDrag=null;});
-addEventListener('mousemove',e=>{if(F[step].mode==='release'){if(relDrag){const rr=cv.getBoundingClientRect();relTau=relTauFromX(relDrag,e.clientX-rr.left);draw();}return;}const pk=(F[step].mode==='scission'||F[step].mode==='impact')?UPACK:PACK;
+addEventListener('mousemove',e=>{if(F[step].mode==='release'){if(relDrag){const rr=cv.getBoundingClientRect();relTau=relTauFromPos(relDrag,e.clientX-rr.left,e.clientY-rr.top);draw();}return;}const pk=(F[step].mode==='scission'||F[step].mode==='impact')?UPACK:PACK;
   if(drag){yaw+=(e.clientX-lx)*.008;pitch=Math.max(-1.4,Math.min(1.4,pitch+(e.clientY-ly)*.008));lx=e.clientX;ly=e.clientY;draw();return;}
   const r=cv.getBoundingClientRect(),mx=e.clientX-r.left,my=e.clientY-r.top;let b=null,bd=15;
   for(const n of pk.nuc){const pr=proj(n.pos,pk);const dd=Math.hypot(pr.x-mx,pr.y-my);if(dd<bd){bd=dd;b=n;}}

@@ -33,7 +33,9 @@
     ['Read', [
       ['Atlas — home',  'index.html'],
       ['Welcome',       'welcome.html'],
-      ['Causal chain',  'causal-chain.html'],
+      ['Causal chain · simplified',  'causal-chain-simple.html'],
+      ['Causal chain · layman',      'causal-chain.html'],
+      ['Causal chain · technical',   'causal-chain-technical.html'],
       ['What we assume','inputs.html'],
       ['Predictions',   'experiments.html'],
       ['Investigations','investigations.html'],
@@ -99,14 +101,17 @@
       ['Construction zone',         'atomicus-construction-zone.html']
     ]],
     ['The lab', [
+      /* deprecated, de-listed (Harvey 2026-08-01): atomicus-lab-v4-tiers (v4 tiers),
+         atomicus-stick (traction assembly) — the polar-caps model is the one being worked on */
       ['Atomicus lab',        'atomicus-lab.html'],
-      ['Lab · tiers (v4)',    'atomicus-lab-v4-tiers.html'],
       ['Nuclear model',       'atomicus-nuclear-model.html'],
-      ['Traction assembly',   'atomicus-stick.html'],
       ['Traction · polar caps','atomicus-stick-v3-polar-caps.html'],
       ['Fission impact',      'atomicus-fission-impact.html'],
       ['Monoisotopic morph',  'monoisotopic-morph.html'],
       ['v1 snapshot',         'atomicus-v1-snapshot.html']
+    ]],
+    ['Models', [
+      ['Solar system — 3D orrery', 'solar-system.html']
     ]]
   ];
 
@@ -129,16 +134,74 @@
     c.appendChild(x);
 
     c.appendChild(el('h2', null, title));
-    groups.forEach(function (g) {
-      c.appendChild(el('h3', null, g[0]));
+
+    // Each group is a DROPDOWN: a disclosure button over its own link list.
+    // The group holding the current page opens itself; the rest stay shut, and
+    // the open/shut choice is remembered per group.
+    groups.forEach(function (g, gi) {
+      var key = 'grp.' + side + '.' + gi;
+      var holdsHere = g[1].some(function (it) { return it[1].toLowerCase() === here; });
+
+      var head = el('button', 'sdtq-grp', '<span>' + g[0] + '</span><i class="sdtq-chev"></i>');
+      head.type = 'button';
+      var body = el('div', 'sdtq-grpbody');
+
       g[1].forEach(function (item) {
         var a = el('a', null, item[0]);
         a.href = item[1];
         if (item[1].toLowerCase() === here) a.setAttribute('aria-current', 'page');
-        c.appendChild(a);
+        body.appendChild(a);
       });
+
+      var open = holdsHere || store.get(key, '') === 'open';
+      function paint() {
+        head.setAttribute('aria-expanded', open ? 'true' : 'false');
+        body.style.display = open ? 'block' : 'none';
+      }
+      head.addEventListener('click', function (e) {
+        e.stopPropagation();
+        open = !open;
+        store.set(key, open ? 'open' : 'shut');
+        paint();
+      });
+      paint();
+
+      c.appendChild(head);
+      c.appendChild(body);
     });
     return c;
+  }
+
+  /* ── language ─────────────────────────────────────────────────────────────
+     i18n.js used to paint its own fixed button at z-index 2000; the shell bar
+     (z-index 9000, full width, top 0) buried it. The language control now lives
+     IN the bar as a proper tab, and i18n.js registers its language list here.  */
+  function languagePanel() {
+    var p = el('div', 'sdtq-panel sdtq-langpanel');
+    var api = window.SDT_I18N_API;
+    if (!api) {
+      p.appendChild(el('p', 'sdtq-note',
+        'Translations are not loaded on this page.'));
+      return p;
+    }
+    p.appendChild(el('h3', null, 'Language'));
+    var wrap = el('div', 'sdtq-langs');
+    api.langs.forEach(function (L) {
+      var b = el('button', null, '<span>' + L.label + '</span><span class="tick">✓</span>');
+      b.type = 'button';
+      b.setAttribute('data-lang', L.code);
+      if (L.code === api.current()) b.className = 'active';
+      b.addEventListener('click', function (e) {
+        e.stopPropagation();
+        api.set(L.code);
+        wrap.querySelectorAll('button').forEach(function (o) {
+          o.className = (o.getAttribute('data-lang') === L.code) ? 'active' : '';
+        });
+      });
+      wrap.appendChild(b);
+    });
+    p.appendChild(wrap);
+    return p;
   }
 
   /* ── settings ─────────────────────────────────────────────────────────── */
@@ -318,11 +381,14 @@
     var right = column('Scrollers', SCR, 'right');
     var setPanel = el('div', 'sdtq-panel');
     setPanel.appendChild(settings());
-    panels = { nav: left, set: setPanel, scr: right };
+    var langPanel = languagePanel();
+    panels = { nav: left, set: setPanel, scr: right, lang: langPanel };
 
     var tabs = el('div', 'sdtq-tabs');
     var burgers = el('div', 'sdtq-burgers');
-    [['nav', 'Navigation'], ['set', 'Settings'], ['scr', 'Scrollers']].forEach(function (d) {
+    var TABS = [['nav', 'Navigation'], ['set', 'Settings'], ['scr', 'Scrollers']];
+    if (window.SDT_I18N_API) TABS.push(['lang', 'Language']);
+    TABS.forEach(function (d) {
       var b = el('button', null, d[1]);
       b.type = 'button';
       b.setAttribute('data-sdtq-target', d[0]);
@@ -347,6 +413,7 @@
     root.appendChild(left);
     root.appendChild(right);
     root.appendChild(setPanel);
+    root.appendChild(langPanel);
     document.body.appendChild(root);
 
     ['theme', 'text', 'motion'].forEach(sync);

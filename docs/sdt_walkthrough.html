@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>/*sdt-theme-guard*/(function(){try{var t=localStorage.getItem("sdt.theme")||"auto";if(t==="auto")t=(window.matchMedia&&window.matchMedia("(prefers-color-scheme:dark)").matches)?"dark":"light";var d=document.documentElement;d.setAttribute("data-theme",t);d.setAttribute("data-sdt-theme",t);}catch(e){}})();</script>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Spatial Displacement Theory — The Walkthrough</title>
@@ -172,12 +174,8 @@ svg .drag:active { cursor: grabbing; }
     <p class="chapter__lead">Space is a lattice of permanently contacting cells — <em>spations</em> — that relay deformation one cell per tick. The contact never breaks; the packing still leaves shaped voids, and movement herds them. Every force, every mass, every photon, the redshift of galaxies: all of it is how that relay is loaded, occluded, displaced, and budgeted.</p>
     <p>There are four primitives. Everything else is derived from them.</p>
 
-    <div class="primitives reveal-stagger">
-      <div class="primitive"><div class="primitive__glyph">◈</div><div class="primitive__name">Space</div><div class="primitive__sdt">The spation lattice</div><p class="primitive__desc">A 3D, contact-only relay medium. The irreducible cell is the spation, of size ℓ<sub>P</sub> = 1.616 × 10⁻³⁵ m.</p></div>
-      <div class="primitive"><div class="primitive__glyph">◉</div><div class="primitive__name">Matter</div><div class="primitive__sdt">A persistent displacement</div><p class="primitive__desc">A hard, localised, solid vortex — a knotted circulation pattern in the lattice. Never a cloud, never a probability.</p></div>
-      <div class="primitive"><div class="primitive__glyph">↻</div><div class="primitive__name">Movement</div><div class="primitive__sdt">Circulation + translation</div><p class="primitive__desc">A vortex's velocity is split between spinning in place and moving through space — and the two always sum to c.</p></div>
-      <div class="primitive"><div class="primitive__glyph">·</div><div class="primitive__name">The Ever-Present Now</div><div class="primitive__sdt">The plane of existence</div><p class="primitive__desc">Not a moment — the plane of existence, everything inside it moving. The relay advances one spation per tick; "time" is the tally of those ticks, nothing more.</p></div>
-    </div>
+    <!-- the four irreducibles, quoted from the single statement (sdt-canon.js) -->
+    <div data-sdt-canon="primitives-brief"></div>
 
     <div class="slogan">There is no attraction. The convergence <em>pushes</em> — and a closed least-resistance path through that push is what we call an orbit.</div>
 
@@ -457,6 +455,7 @@ svg .drag:active { cursor: grabbing; }
   </div>
 </footer>
 
+<script src="sdt-canon.js"></script>
 <!-- ════════════════ 2D INTERACTIVES + REVEALS (no dependencies) ════════════════ -->
 <script>
 (function(){

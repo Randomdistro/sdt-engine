@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>/*sdt-theme-guard*/(function(){try{var t=localStorage.getItem("sdt.theme")||"auto";if(t==="auto")t=(window.matchMedia&&window.matchMedia("(prefers-color-scheme:dark)").matches)?"dark":"light";var d=document.documentElement;d.setAttribute("data-theme",t);d.setAttribute("data-sdt-theme",t);}catch(e){}})();</script>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Spatial Displacement Theory</title>
@@ -136,32 +138,7 @@
         <p>SDT is built from exactly four irreducible primitives. Everything else — mass, charge, time, temperature, entropy — is derived. The theory makes no claim about what existed before the Clearing, or whether the lattice is finite.</p>
       </div>
 
-      <div class="primitives reveal-stagger" id="primitivesGrid">
-        <div class="primitive">
-          <div class="primitive__glyph">◈</div>
-          <div class="primitive__name">Space</div>
-          <div class="primitive__sdt">The Spation Lattice</div>
-          <p class="primitive__desc" data-i18n="m_space">A contact-only relay medium. Individually incompressible, collectively deformable. Icosahedral 12-around-1 packing at ℓ<sub>P</sub> = 1.616 × 10⁻³⁵ m — the fit never quite closes, and movement herds the slack into shaped voids.</p>
-        </div>
-        <div class="primitive">
-          <div class="primitive__glyph">◉</div>
-          <div class="primitive__name">Matter</div>
-          <div class="primitive__sdt">Displacement</div>
-          <p class="primitive__desc">Knots wound tight in the medium — persistent vortex structures that crush the space they displace. What we call particles.</p>
-        </div>
-        <div class="primitive">
-          <div class="primitive__glyph">⟳</div>
-          <div class="primitive__name">Movement</div>
-          <div class="primitive__sdt">Relay Propagation</div>
-          <p class="primitive__desc" data-i18n="m_move">Nearest-neighbour energy transfer at exactly <em>c</em>. Every particle circulates internally at light speed. Translation steals from circulation.</p>
-        </div>
-        <div class="primitive">
-          <div class="primitive__glyph">⧖</div>
-          <div class="primitive__name">The Ever-Present Now</div>
-          <div class="primitive__sdt">The Plane of Existence</div>
-          <p class="primitive__desc">Not a moment — the plane of existence itself, with everything inside it moving, always moving. What we call time is the tally that movement keeps; there is no arrow to explain, because un-happening is not an operation the relay has.</p>
-        </div>
-      </div>
+      <!-- the four irreducibles are stated ONCE, above (rendered from sdt-canon.js) — not restated here -->
 
       <div class="margin-note" data-i18n="m_note">The permitted inputs — the only external data SDT accepts — are: {ℓ<sub>P</sub>, c, ℏ, k<sub>B</sub>, T<sub>CMB</sub>, α, m<sub>e</sub>, m<sub>p</sub>} plus direct observables. Everything else is derived.</div>
       <p style="margin-top:var(--sp-xl);display:flex;gap:10px;flex-wrap:wrap;">
@@ -266,8 +243,8 @@
         <a href="paper-13-quantum-foundations.html" target="_blank" style="display:inline-flex;align-items:center;padding:9px 16px;border:1px solid var(--mint);border-radius:4px;color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;text-decoration:none;">peer review paper for submission · Quantum Foundations &amp; Measurement</a>
       </p>
       <figure style="margin-top:var(--sp-xl);text-align:center;">
-        <svg id="atlasLawsPlay" viewBox="0 0 640 240" style="max-width:640px;width:100%;height:auto;touch-action:none;cursor:grab" aria-label="One push, read live — drag either body; the occluded directions vanish and the leftover push appears"></svg>
-        <figcaption style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-faint);margin-top:8px;">drag either body — the flood presses, the shadow thins, F = (π/4)·P<sub>eff</sub>·R₁²R₂²/r² follows the geometry</figcaption>
+        <svg id="atlasLawsPlay" viewBox="0 0 640 240" style="max-width:640px;width:100%;height:auto;touch-action:none;cursor:grab" aria-label="Two bodies displacing a dual hexagonal grid — drag either one; the medium bends around it and the leftover push follows the geometry"></svg>
+        <figcaption style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-faint);margin-top:8px;">drag either body — each displaces the grid it stands in (r → √(r²+R²), area exactly conserved); where the two displacements meet, F = (π/4)·P<sub>eff</sub>·R₁²R₂²/r² follows the geometry</figcaption>
       </figure>
     </div>
   </section>
@@ -1222,8 +1199,24 @@
       mk.appendChild(el('path',{d:'M0,0 L6,3 L0,6 z',fill:'#4a6d82'}));defs.appendChild(mk);
       var mr=el('marker',{id:'alp-r',markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
       mr.appendChild(el('path',{d:'M0,0 L6,3 L0,6 z',fill:'#b07430'}));defs.appendChild(mr);s.appendChild(defs);
-      var shade=el('polygon',{fill:'#4a6d82','fill-opacity':0.10});s.appendChild(shade);
-      var flood=[],i;for(i=0;i<12;i++){var l=el('line',{stroke:'#4a6d82','stroke-width':1.6,'marker-end':'url(#alp-a)'});flood.push(l);s.appendChild(l);}
+      /* THE MEDIUM — a dual hexagonal grid: one equilateral triangular grid set
+         at 90° to another (0/60/120 and 30/90/150), the twelve-around-one
+         packing read in the plane.
+         The bodies are NOT surrounded by arrows. Nothing points at them and
+         nothing is delivered to them. They DISPLACE THE GRID: each one occupies
+         medium that has to go somewhere, and every line bends around it. What
+         you read between them is displaced space, not a field. */
+      var latt=el('g',{fill:'none'});s.appendChild(latt);
+      var LINES=[];
+      [[0,0.34],[60,0.34],[120,0.34],[30,0.20],[90,0.20],[150,0.20]].forEach(function(F){
+        var th=F[0]*Math.PI/180,ux=Math.cos(th),uy=Math.sin(th),qx=-uy,qy=ux,S=32;
+        for(var k=-11;k<=11;k++){
+          var p=el('path',{stroke:'#4a6d82','stroke-width':0.65,'stroke-opacity':F[1]});
+          latt.appendChild(p);
+          LINES.push({p:p,bx:320+qx*k*S,by:120+qy*k*S,ux:ux,uy:uy});
+        }
+      });
+      var shade=el('polygon',{fill:'#4a6d82','fill-opacity':0.07});s.appendChild(shade);
       var fa=el('line',{stroke:'#b07430','stroke-width':3.4,'marker-end':'url(#alp-r)'}),
           fb=el('line',{stroke:'#b07430','stroke-width':3.4,'marker-end':'url(#alp-r)'});
       s.appendChild(fa);s.appendChild(fb);
@@ -1242,17 +1235,37 @@
         shade.setAttribute('points',
           (A.x+px*A.r)+','+(A.y+py*A.r)+' '+(B.x+px*B.r)+','+(B.y+py*B.r)+' '+
           (B.x-px*B.r)+','+(B.y-py*B.r)+' '+(A.x-px*A.r)+','+(A.y-py*A.r));
-        for(var i=0;i<flood.length;i++){var l=flood[i],side=(i%2?1:-1),t=(Math.floor(i/2)+0.5)/6;
-          var bx=A.x+dx*t+px*side*90,by=A.y+dy*t+py*side*90;
-          l.setAttribute('x1',bx);l.setAttribute('y1',by);
-          l.setAttribute('x2',bx-px*side*48);l.setAttribute('y2',by-py*side*48);}
+        /* THE DISPLACEMENT — exact, not stylised. Insert a disc of radius R into
+           a medium whose grains cannot compress, and every point must move
+           outward far enough to make room for the area taken: π(r'² − r²) = πR²,
+           so r' = √(r² + R²). Apply it once per body. The grid you see is the
+           medium after both bodies have taken their room. Nothing is delivered
+           to a body; the body is what the medium had to move around. */
+        function displace(x,y){
+          for(var q=0;q<2;q++){
+            var o=q?B:A, ax=x-o.x, ay=y-o.y, rr=Math.hypot(ax,ay);
+            if(rr<1e-4){ x=o.x+o.r; y=o.y; continue; }
+            var k=Math.sqrt(rr*rr+o.r*o.r)/rr;
+            x=o.x+ax*k; y=o.y+ay*k;
+          }
+          return x.toFixed(1)+' '+y.toFixed(1);
+        }
+        for(var li=0;li<LINES.length;li++){
+          var L=LINES[li], d2='', N=36;
+          for(var q2=0;q2<=N;q2++){
+            var u=(q2/N-0.5)*780;
+            d2+=(q2?'L':'M')+displace(L.bx+L.ux*u, L.by+L.uy*u)+' ';
+          }
+          L.p.setAttribute('d',d2);
+        }
         var F=(A.r*A.r*B.r*B.r)/(r*r);if(F0===null)F0=F;var rel=F/F0;
         var len=Math.max(10,Math.min(70,20*Math.cbrt(rel)));
         fa.setAttribute('x1',A.x+ux*A.r);fa.setAttribute('y1',A.y+uy*A.r);
         fa.setAttribute('x2',A.x+ux*(A.r+len));fa.setAttribute('y2',A.y+uy*(A.r+len));
         fb.setAttribute('x1',B.x-ux*B.r);fb.setAttribute('y1',B.y-uy*B.r);
         fb.setAttribute('x2',B.x-ux*(B.r+len));fb.setAttribute('y2',B.y-uy*(B.r+len));
-        read.textContent='F ∝ R₁²R₂²/r² = '+rel.toFixed(2)+'× — gravity, Coulomb, nuclear: one law, three reaches';}
+        read.textContent='each body displaces the grid it stands in  ·  F ∝ R₁²R₂²/r² = '
+          +rel.toFixed(2)+'× — gravity, Coulomb, nuclear: one law, three reaches';}
       render();
     })();
 

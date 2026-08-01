@@ -1,92 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>/*sdt-theme-guard*/(function(){try{var t=localStorage.getItem("sdt.theme")||"auto";if(t==="auto")t=(window.matchMedia&&window.matchMedia("(prefers-color-scheme:dark)").matches)?"dark":"light";var d=document.documentElement;d.setAttribute("data-theme",t);d.setAttribute("data-sdt-theme",t);}catch(e){}})();</script>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Magic Numbers · Two Closed Forms, All the Data — SDT</title>
+<title>The Magic Numbers · Two Closed Forms — SDT</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <style>
-  :root{
-    --copper:#8a6d1f; --copper-light:#d4a05c; --copper-glow:rgba(138,109,31,0.12);
-    --pcol:#b8422e; --ncol:#2f5aa8; --bad:#c0392b; --good:#1e7a4f;
-  }
-  .inv-tag{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.18em;
-    text-transform:uppercase;color:var(--copper)}
-  .inv-hero{padding:var(--sp-3xl) var(--sp-xl) var(--sp-2xl);text-align:center;
-    background:linear-gradient(180deg,var(--cream) 0%,var(--paper) 100%)}
-  .inv-hero h1{font-family:'Source Serif 4',Georgia,serif;font-weight:300;font-size:var(--fs-3xl);
-    line-height:1.06;letter-spacing:-.01em;color:var(--ink);margin:var(--sp-md) 0}
-  .inv-hero h1 em{font-style:italic;color:var(--copper)}
-  .inv-hero .lead{max-width:var(--content-width);margin:var(--sp-md) auto var(--sp-xl);
-    color:var(--ink-muted);font-size:var(--fs-md);line-height:1.7;text-align:left}
-  .backlink{position:fixed;top:0;left:0;right:0;z-index:100;padding:.7rem 1.4rem;
-    display:flex;justify-content:space-between;align-items:center;
-    background:rgba(245,240,232,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--paper-edge);font-size:.72rem}
-  .backlink a{color:var(--copper);text-decoration:none;letter-spacing:.04em}
-  .backlink .who{font-family:'Source Serif 4',serif;letter-spacing:.14em;text-transform:uppercase;
-    color:var(--ink-soft);font-weight:600}
+/* ══════════════════════════════════════════════════════════════════════════
+   THE MAGIC NUMBERS — narrative scrollthrough  (NP33 closure schedule)
+   J. C. Harvey, Melbourne. Built on the Paradox Census construction:
+   continuous scroll, one rAF loop, every layer reading a smoothed scroll
+   value at its own depth. Each act's stage is a reel of three scenes.
+   ══════════════════════════════════════════════════════════════════════════ */
+html{scroll-behavior:auto}
+body{background:var(--cream);overflow-x:hidden}
+:root{
+  --pcw: min(60rem, calc(100vw - 3rem));
+  --th:#8a8478; --th-soft:rgba(138,132,120,.10); --th-ink:#4a463f;
+}
+@media(min-width:1081px){ :root{ --pcw: min(60rem, calc(100vw - 30rem)) } }
 
-  .rig{max-width:var(--wide-width);margin:0 auto}
-  .rig canvas{width:100%;display:block;border-radius:6px;cursor:grab;touch-action:none;
-    background:radial-gradient(ellipse at 50% 38%,#fffdf7 0%,#f3efe4 74%,#ebe6d8 100%)}
-  .rig canvas:active{cursor:grabbing}
-  .rig figcaption,figure.mini figcaption{font-family:'JetBrains Mono',monospace;font-size:.67rem;
-    color:var(--ink-faint);letter-spacing:.05em;margin-top:.6rem;text-align:center}
-  .rungs{display:flex;gap:5px;justify-content:center;flex-wrap:wrap;margin:var(--sp-md) auto 0}
-  .rung{font-family:'JetBrains Mono',monospace;font-size:.8rem;padding:6px 12px;cursor:pointer;
-    border:1px solid var(--paper-edge);border-radius:4px;background:var(--paper);color:var(--ink-muted);
-    transition:all .18s;-webkit-user-select:none;user-select:none}
-  .rung:hover{border-color:var(--copper-light);color:var(--ink)}
-  .rung.on{background:var(--copper);border-color:var(--copper);color:#fffdf7;font-weight:600}
-  .rung.pred{border-style:dashed}
-  .rung.pred.on{background:var(--copper-light);border-color:var(--copper);color:#2a2417}
-  .tally{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));gap:var(--sp-sm);
-    max-width:var(--content-width);margin:var(--sp-md) auto 0}
-  .cell{border:1px solid var(--paper-edge);border-radius:5px;padding:7px 9px;background:var(--paper);text-align:center}
-  .cell .k{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.09em;
-    text-transform:uppercase;color:var(--ink-faint)}
-  .cell .v{font-family:'JetBrains Mono',monospace;font-size:1.05rem;color:var(--ink);margin-top:2px}
-  .cell .v.gold{color:var(--copper);font-weight:600}
-  .cell .v.p{color:var(--pcol)}.cell .v.n{color:var(--ncol)}
-  .eqline{font-family:'JetBrains Mono',monospace;font-size:.88rem;text-align:center;color:var(--ink);
-    background:var(--cream);border:1px solid var(--paper-edge);border-radius:5px;padding:10px 13px;
-    margin:var(--sp-md) auto;max-width:var(--content-width);overflow-x:auto}
-  .eqline b{color:var(--copper)}
-  figure.mini{max-width:var(--content-width);margin:var(--sp-lg) auto}
-  figure.mini canvas{width:100%;display:block;border-radius:6px;cursor:grab;touch-action:none;
-    background:var(--cream);border:1px solid var(--paper-edge)}
-  figure.mini canvas:active{cursor:grabbing}
-  figure.wide{max-width:var(--wide-width);margin:var(--sp-lg) auto}
-  figure.wide canvas{width:100%;display:block;border-radius:6px;background:var(--cream);
-    border:1px solid var(--paper-edge);cursor:crosshair}
+/* per-act colour: the tier / the belt / the descent / the schedule / the data */
+[data-th="tier"]  {--th:#b8422e;--th-soft:rgba(184,66,46,.11);--th-ink:#7e2e1e}
+[data-th="belt"]  {--th:#2f5aa8;--th-soft:rgba(47,90,168,.11);--th-ink:#20407a}
+[data-th="desc"]  {--th:#6a4c9c;--th-soft:rgba(106,76,156,.11);--th-ink:#4a3470}
+[data-th="sched"] {--th:#b07430;--th-soft:rgba(176,116,48,.12);--th-ink:#7d5220}
+[data-th="data"]  {--th:#14807a;--th-soft:rgba(20,128,122,.11);--th-ink:#0d5a56}
+[data-th="scope"] {--th:#8a8478;--th-soft:rgba(138,132,120,.10);--th-ink:#4a463f}
+[data-th="sdt"]   {--th:#b07430;--th-soft:rgba(176,116,48,.12);--th-ink:#7d5220}
 
-  table.d{width:100%;border-collapse:collapse;font-size:.79rem;margin:var(--sp-md) 0;
-    font-family:'JetBrains Mono',monospace}
-  table.d th,table.d td{border:1px solid var(--paper-edge);padding:5px 8px;text-align:left;
-    white-space:nowrap}
-  table.d th{font-size:.61rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);
-    font-weight:500;background:var(--cream)}
-  table.d td.hit{color:var(--copper);font-weight:600}
-  table.d td.neg{color:var(--bad)}
-  table.d td.ok{color:var(--good)}
-  table.d tr.predrow td{background:rgba(212,160,92,.10);font-style:italic}
-  table.d tr.sum td{background:var(--cream);font-weight:600}
-  .tw{overflow-x:auto;margin:var(--sp-md) 0}
-  .scope{border:1px solid var(--paper-edge);border-left:3px solid var(--copper);background:var(--paper);
-    padding:var(--sp-md) var(--sp-lg);margin:var(--sp-lg) 0;font-size:.93rem}
-  .scope h4{font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.14em;
-    text-transform:uppercase;color:var(--copper);margin-bottom:6px}
-  .kv{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--ink-soft);
-    display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:3px 18px;margin:var(--sp-md) 0}
-  .kv span b{color:var(--copper);font-weight:500}
+#field{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.pagewrap{position:relative;z-index:1}
+
+.drive{position:fixed;left:50%;transform:translateX(-50%);bottom:14px;z-index:120;
+  width:var(--pcw);max-width:60rem;display:flex;align-items:center;gap:.55rem;
+  padding:.45rem .6rem;border:1px solid var(--paper-edge);border-radius:6px;
+  background:rgba(250,246,239,.90);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  box-shadow:0 4px 22px rgba(30,28,24,.10)}
+.drive button{font:inherit;border:1px solid var(--paper-edge);background:#fff;cursor:pointer;
+  border-radius:4px;color:var(--ink-muted);font-family:'JetBrains Mono',monospace;
+  font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;padding:.3rem .55rem;
+  transition:background .2s,color .2s,border-color .2s}
+.drive button:hover{border-color:var(--th);color:var(--th)}
+.drive button[aria-pressed="true"]{background:var(--th);border-color:var(--th);color:#fff}
+.ticks{display:flex;gap:3px;flex:1;min-width:0}
+.tick{flex:1;height:14px;position:relative;cursor:pointer;background:none;border:0;padding:0}
+.tick i{display:block;height:3px;margin-top:5px;border-radius:2px;background:var(--paper-edge);
+  transition:background .35s,height .35s,margin-top .35s}
+.tick[data-on="1"] i{background:var(--tc);height:5px;margin-top:4px}
+.tick:hover i{background:var(--tc)}
+.tick b{position:absolute;bottom:20px;left:50%;transform:translateX(-50%) translateY(4px);
+  font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;
+  white-space:nowrap;color:var(--tc);background:rgba(250,246,239,.95);border:1px solid var(--paper-edge);
+  border-radius:3px;padding:2px 6px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s}
+.tick:hover b{opacity:1;transform:translateX(-50%) translateY(0)}
+.drive .pct{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--ink-faint);
+  min-width:3.1em;text-align:right}
+@media(max-width:600px){.drive{width:calc(100vw - 1.2rem);bottom:8px}.drive .pct{display:none}}
+
+.act{position:relative;padding:var(--sp-2xl) 0 var(--sp-3xl)}
+.act__rule{width:var(--pcw);margin:0 auto var(--sp-xl);height:1px;background:
+  linear-gradient(90deg,transparent,var(--th) 12%,var(--th) 88%,transparent);opacity:.5}
+.wrap{width:var(--pcw);margin:0 auto}
+.plate{position:absolute;top:6%;width:min(48vw,600px);z-index:0;pointer-events:none;
+  perspective:900px;color:var(--th)}
+.plate__in{transform:translate3d(0,var(--py,0px),var(--pz,-300px)) rotate(var(--pr,0deg));
+  opacity:var(--po,.12);will-change:transform,opacity}
+.plate svg{width:100%;height:auto;display:block;stroke:currentColor;fill:none;
+  stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round}
+.plate .solid{fill:currentColor;stroke:none}
+.plate .thin{stroke-width:.6}
+.plate .dash{stroke-dasharray:5 4}
+.plate--left{left:-7%}
+.plate--right{right:-7%}
+.act__head,.act__body,.wrap,.hero .wrap{position:relative;z-index:1}
+@media(max-width:900px){.plate{width:82vw;top:2%}.plate__in{opacity:calc(var(--po,.12)*.6)}}
+
+.fade{opacity:var(--in,1)}
+@media(min-width:900px){
+  .act--flip .stagewrap{order:2}
+  .act--flip .col{order:1}
+}
+.act__head{width:var(--pcw);margin:0 auto var(--sp-xl);display:flex;gap:1.1rem;align-items:flex-start}
+.sigil{flex:0 0 auto;width:64px;height:64px;border:1px solid var(--th);border-radius:5px;
+  background:var(--th-soft)}
+.act__head h2{font-family:'Source Serif 4',Georgia,serif;font-weight:300;font-size:var(--fs-2xl);
+  line-height:1.05;letter-spacing:-.01em;color:var(--ink);margin:.1rem 0 .3rem}
+.act__head h2 em{font-style:italic;color:var(--th)}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--th)}
+.premise{font-size:.98rem;color:var(--ink-muted);max-width:36rem;line-height:1.62}
+.premise b{color:var(--th-ink);font-weight:600}
+
+.act__body{width:var(--pcw);margin:0 auto;display:grid;gap:2.6rem;grid-template-columns:minmax(0,1fr)}
+@media(min-width:900px){.act__body{grid-template-columns:minmax(0,1fr) minmax(0,1.02fr);gap:3rem}}
+.stagewrap{position:relative}
+.stage{position:sticky;top:14vh;height:min(64vh,520px);display:flex;flex-direction:column;gap:.5rem}
+.stage canvas{flex:1;width:100%;height:100%;display:block;border:1px solid var(--paper-edge);
+  border-radius:6px;background:linear-gradient(180deg,#fffdf8 0%,#f7f3ea 100%)}
+.stage figcaption{font-family:'JetBrains Mono',monospace;font-size:.63rem;color:var(--ink-faint);
+  letter-spacing:.04em;line-height:1.5}
+.col > * + *{margin-top:var(--sp-md)}
+.col p{font-size:1.02rem;line-height:1.78;color:var(--ink-soft)}
+.col p strong{color:var(--ink);font-weight:600}
+.col p em{font-style:italic;color:var(--th-ink)}
+.lede{font-family:'Source Serif 4',Georgia,serif;font-size:1.22rem;line-height:1.6;color:var(--ink)}
+
+.repair{display:grid;grid-template-columns:1fr;border:1px solid var(--th);border-radius:5px;
+  overflow:hidden;margin-top:var(--sp-lg);background:var(--paper)}
+@media(min-width:620px){.repair{grid-template-columns:1fr 1fr}}
+.repair div{padding:.7rem .85rem}
+.repair div + div{border-top:1px solid var(--th-soft);background:var(--th-soft)}
+@media(min-width:620px){.repair div + div{border-top:0;border-left:1px solid var(--th)}}
+.repair h5{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--th);margin-bottom:.3rem;font-weight:500}
+.repair p{font-size:.88rem;line-height:1.55;color:var(--ink-soft)}
+
+.tally{display:grid;grid-template-columns:repeat(auto-fit,minmax(104px,1fr));gap:.5rem;margin:var(--sp-md) 0}
+.cell{border:1px solid var(--paper-edge);border-radius:5px;padding:.5rem .6rem;background:var(--paper);text-align:center}
+.cell .k{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-faint)}
+.cell .v{font-family:'JetBrains Mono',monospace;font-size:1.35rem;color:var(--ink);margin-top:2px;line-height:1.1}
+.cell .v.gold{color:var(--th);font-weight:600}
+.cell .v.p{color:#b8422e}.cell .v.n{color:#2f5aa8}
+.note{font-family:'JetBrains Mono',monospace;font-size:.63rem;line-height:1.6;color:var(--ink-faint);letter-spacing:.02em}
+.scope{border:1px solid var(--paper-edge);border-left:3px solid var(--th);background:var(--paper);
+  padding:.85rem 1.05rem;margin:var(--sp-lg) 0;font-size:.92rem;line-height:1.66;color:var(--ink-soft)}
+.scope h4{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--th);margin-bottom:.35rem}
+.eqline{font-family:'JetBrains Mono',monospace;font-size:.85rem;text-align:center;color:var(--ink);
+  background:var(--cream);border:1px solid var(--paper-edge);border-radius:5px;padding:.6rem .8rem;
+  margin:var(--sp-md) 0;overflow-x:auto}
+.eqline b{color:var(--th)}
+table.d{width:100%;border-collapse:collapse;font-size:.76rem;margin:var(--sp-md) 0;
+  font-family:'JetBrains Mono',monospace}
+table.d th,table.d td{border:1px solid var(--paper-edge);padding:5px 8px;text-align:left;white-space:nowrap}
+table.d th{font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);
+  font-weight:500;background:var(--cream)}
+table.d td.hit{color:var(--th);font-weight:600}
+table.d td.neg{color:#c0392b}
+table.d tr.predrow td{background:var(--th-soft);font-style:italic}
+.tw{overflow-x:auto;margin:var(--sp-md) 0}
+
+.hero{position:relative;padding:var(--sp-3xl) 0 var(--sp-2xl);overflow:hidden}
+.hero h1{font-family:'Source Serif 4',Georgia,serif;font-weight:300;font-size:var(--fs-3xl);
+  line-height:1.02;letter-spacing:-.015em;color:var(--ink);margin:.6rem 0 .8rem}
+.hero h1 em{font-style:italic;color:var(--copper)}
+.hero .sub{font-family:'Source Serif 4',Georgia,serif;font-size:1.32rem;line-height:1.5;
+  color:var(--ink-soft);max-width:34rem}
+.hero .lead{max-width:36rem;margin-top:var(--sp-lg);color:var(--ink-muted);font-size:1.02rem;line-height:1.78}
+.hero .by{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-faint);margin-top:var(--sp-xl)}
+.bigcount{display:flex;flex-wrap:wrap;gap:1.6rem;margin-top:var(--sp-xl);align-items:flex-end}
+.bigcount div{min-width:5.5rem}
+.bigcount .v{font-family:'Source Serif 4',Georgia,serif;font-size:3.2rem;line-height:.95;color:var(--ink)}
+.bigcount .v.gold{color:var(--copper)}
+.bigcount .k{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--ink-faint);margin-top:.4rem;max-width:9rem;line-height:1.5}
+.scrollcue{margin-top:var(--sp-2xl);font-family:'JetBrains Mono',monospace;font-size:.62rem;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);display:flex;align-items:center;gap:.6rem}
+.scrollcue i{display:block;width:34px;height:1px;background:var(--ink-whisper);position:relative}
+.scrollcue i::after{content:'';position:absolute;right:0;top:-2px;width:5px;height:5px;
+  border-right:1px solid var(--ink-whisper);border-bottom:1px solid var(--ink-whisper);transform:rotate(-45deg)}
+.theline{font-family:'Source Serif 4',Georgia,serif;font-weight:300;
+  font-size:clamp(1.5rem,4.4vw,2.35rem);line-height:1.18;letter-spacing:-.012em;
+  color:var(--ink);text-align:center;text-wrap:balance;margin:var(--sp-xl) 0;padding:var(--sp-lg) 0;
+  border-top:1px solid var(--copper);border-bottom:1px solid var(--copper)}
+.theline em{font-style:italic;color:var(--copper)}
+.coda{border-top:1px solid var(--paper-edge);padding-top:var(--sp-lg);margin-top:var(--sp-2xl);
+  display:flex;flex-wrap:wrap;gap:.5rem;justify-content:space-between;align-items:flex-end}
+.coda a{display:inline-flex;align-items:center;gap:6px;padding:.5rem 1rem;border-radius:4px;
+  border:1px solid rgba(176,116,48,.4);background:rgba(176,116,48,.10);color:var(--copper);
+  font-size:.85rem;text-decoration:none;transition:background .2s}
+.coda a:hover{background:rgba(176,116,48,.2)}
+.backlink{position:fixed;top:0;left:0;right:0;z-index:100;padding:.7rem 1.4rem;
+  display:flex;justify-content:space-between;align-items:center;
+  background:rgba(245,240,232,.86);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--paper-edge);font-size:.72rem}
+.backlink a{color:var(--copper);text-decoration:none;letter-spacing:.04em}
+.backlink .who{font-family:'Source Serif 4',serif;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-soft);font-weight:600}
 </style>
 <link rel="stylesheet" href="sdt-shell.css">
 <script src="sdt-shell.js" defer></script>
-<meta name="description" content="The magic numbers 2, 8, 20, 28, 50, 82, 126 from two closed forms: F(n)=(n+1)(n+2) and B(n)=2(n+1). Full closure arithmetic, the 19 measured closure…">
+<meta name="description" content="The Magic Numbers · Two Closed Forms — SDT — part of Spatial Displacement Theory, a zero-free-parameter physics framework.">
 <link rel="canonical" href="https://spatialdisplacementtheory.com/st_magic_numbers">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.ico" sizes="64x64">
@@ -95,657 +197,1058 @@
 <meta name="theme-color" content="#b07430">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Spatial Displacement Theory">
-<meta property="og:title" content="The Magic Numbers · Two Closed Forms, All the Data — SDT">
-<meta property="og:description" content="The magic numbers 2, 8, 20, 28, 50, 82, 126 from two closed forms: F(n)=(n+1)(n+2) and B(n)=2(n+1). Full closure arithmetic, the 19 measured closure…">
+<meta property="og:title" content="The Magic Numbers · Two Closed Forms — SDT">
+<meta property="og:description" content="The Magic Numbers · Two Closed Forms — SDT — part of Spatial Displacement Theory, a zero-free-parameter physics framework.">
 <meta property="og:url" content="https://spatialdisplacementtheory.com/st_magic_numbers">
 <meta property="og:image" content="https://spatialdisplacementtheory.com/og-card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="en_AU">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="The Magic Numbers · Two Closed Forms, All the Data — SDT">
-<meta name="twitter:description" content="The magic numbers 2, 8, 20, 28, 50, 82, 126 from two closed forms: F(n)=(n+1)(n+2) and B(n)=2(n+1). Full closure arithmetic, the 19 measured closure…">
+<meta name="twitter:title" content="The Magic Numbers · Two Closed Forms — SDT">
+<meta name="twitter:description" content="The Magic Numbers · Two Closed Forms — SDT — part of Spatial Displacement Theory, a zero-free-parameter physics framework.">
 <meta name="twitter:image" content="https://spatialdisplacementtheory.com/og-card.png">
 </head>
 <body>
+
+<canvas id="field" aria-hidden="true"></canvas>
 
 <div class="backlink">
   <span class="who">Spatial <span style="color:var(--copper)">Displacement</span> Theory</span>
   <a href="index.html">← the whole picture</a>
 </div>
 
-<header class="inv-hero reveal">
-  <div class="inv-tag">Nuclear Physics · NP33 · The Closure Schedule</div>
-  <h1>The Magic Numbers,<br>Built From <em>Two Forms</em></h1>
-  <p class="lead" data-i18n="mn_lead">Two closed forms — a triangular seat layer doubled by the bipartite exclusion, <b>F(n) = (n+1)(n+2)</b>, and an antipodally-paired belt admissible only on the equator of the collective roll, <b>B(n) = 2(n+1)</b> — reproduce <b>2, 8, 20, 28, 50, 82, 126</b> sequence-exact with no fitted coefficient and no assigned spin–orbit coupling, and continue to <b>closure(7) = 184</b>. Everything on this page is either computed live from those two forms or a measured number with its source named. One quantity is read from the data and is flagged where it occurs: the descent onset n = 3.</p>
+<div class="pagewrap">
 
-  <figure class="rig" id="rig">
-    <canvas id="shellCanvas" height="430"></canvas>
-    <figcaption data-i18n="mn_rigcap">Drag to rotate (orthographic, painter-sorted). Rungs seat the next tier: red = p-face, blue = n-face, gold = the belt sealing the closure below.</figcaption>
-  </figure>
-
-  <div class="rungs" id="rungs"></div>
-
-  <div class="tally">
-    <div class="cell"><div class="k">tier n</div><div class="v" id="tN">0</div></div>
-    <div class="cell"><div class="k">seats T(n+1)</div><div class="v" id="tT">1</div></div>
-    <div class="cell"><div class="k">F(n)</div><div class="v p" id="tF">2</div></div>
-    <div class="cell"><div class="k">B(n)</div><div class="v n" id="tB">—</div></div>
-    <div class="cell"><div class="k">R(n)</div><div class="v" id="tR">—</div></div>
-    <div class="cell"><div class="k">closure</div><div class="v gold" id="tC">2</div></div>
-    <div class="cell"><div class="k">measured</div><div class="v" id="tM">2</div></div>
+<!-- ════════════════ HERO ════════════════ -->
+<header class="hero" data-th="sdt" data-act="hero">
+  <div class="wrap">
+    <div class="eyebrow fade" data-fade>Nuclear Physics · NP33 · The Closure Schedule</div>
+    <h1 class="fade" data-fade>Two forms,<br>and the list <em>falls out</em>.</h1>
+    <p class="sub fade" data-fade>2, 8, 20, 28, 50, 82, 126. Seventy years of reproducing that list by
+      assigning a force to make it come out. Here it is built instead — from a triangular layer doubled,
+      and a belt that can only roll where it is not fighting itself.</p>
+    <p class="lead fade" data-fade data-i18n="mn_lead">Every schedule number on this page is evaluated live from two
+      closed forms — <b>F(n) = (n+1)(n+2)</b> and <b>B(n) = 2(n+1)</b> — not typed in. Every measured number
+      carries its source. No fitted coefficient enters, and no spin–orbit coupling exists in the namespace to
+      be removed. One quantity is read from the data rather than derived, and it is flagged at the point where
+      it is used.</p>
+    <div class="bigcount fade" data-fade>
+      <div><div class="v gold" id="hcSeq">7</div><div class="k">closures reproduced, sequence-exact</div></div>
+      <div><div class="v">2</div><div class="k">closed forms, no fitted coefficient</div></div>
+      <div><div class="v gold" id="hcPred">184</div><div class="k">the next one, predicted</div></div>
+      <div><div class="v">19</div><div class="k">measured kinks, all negative</div></div>
+      <div><div class="v">1</div><div class="k">quantity read from data, flagged</div></div>
+    </div>
+    <p class="by fade" data-fade>J. C. Harvey · Melbourne · engine: sdt::laws::nuclear</p>
+    <div class="scrollcue fade" data-fade><i></i> scroll — the shell builds as you go</div>
   </div>
-  <div class="eqline" id="tEq">closure(0) = F(0) = <b>2</b> · measured 2 ✓</div>
 </header>
 
-<!-- ═══════ CH.1 — THE TWO FORMS, TABULATED ═══════ -->
-<section class="chapter">
-  <div class="chapter__inner reveal">
-    <div class="chapter__num">One</div>
-    <h2 class="chapter__title">The two forms</h2>
-    <p class="chapter__lead" data-i18n="mn_c1lead">Two-dimensional close packing is triangular; the bipartite exclusion doubles each seat; a radial rod rolls slip-free at one latitude only. Those three facts give two capacities.</p>
-    <div class="kv">
-      <span><b>F(n) = 2·T(n+1) = (n+1)(n+2)</b> — tier, quadratic (a surface)</span>
-      <span><b>B(n) = 2(n+1)</b> — belt, linear (a 1-D rolling ring)</span>
-      <span><b>R(n) = F(n) − B(n) = n(n+1)</b> — surface remainder</span>
-      <span><b>T(k) = k(k+1)/2</b> — the triangular number</span>
+<!-- ════════════════ ACT 1 · THE TIER ════════════════ -->
+<section class="act" data-act="tier" data-th="tier">
+  <div class="act__rule"></div>
+  <div class="act__head fade" data-fade>
+    <canvas class="sigil" data-sigil="tier" width="64" height="64" aria-hidden="true"></canvas>
+    <div>
+      <div class="eyebrow">Act One · The surface</div>
+      <h2>A layer is <em>triangular</em>, and every seat has two faces</h2>
+      <p class="premise">Generating premise: <b>close packing in two dimensions is triangular, and like never
+        gears like</b>. Marbles on a table arrange in triangles, not squares; and a proton gears only with
+        neutrons. Those two facts alone fix how many seats a layer holds.</p>
     </div>
-    <div class="tw">
-      <table class="d" id="formTable">
-        <thead><tr><th>n</th><th>T(n+1)</th><th>F(n) = (n+1)(n+2)</th><th>B(n) = 2(n+1)</th><th>R(n) = n(n+1)</th></tr></thead>
-        <tbody><!-- computed live --></tbody>
-      </table>
-    </div>
-    <p data-i18n="mn_c1a">The exclusion that forces the doubling is <strong>like never gears like</strong>: a proton gears only with neutrons, a neutron only with protons. A seat is therefore a rod presenting two faces, one p and one n, so the contact graph is bipartite — no odd cycles, no frustration, and traction guaranteed rather than checked. The rolling constraint that forces the belt onto one latitude is the zero-slip condition ω<sub>A</sub> = −ω<sub>B</sub> at contact; off the equator of the collective roll a radial rod's contact slips, which is forbidden.</p>
-    <div class="kv">
-      <span>nucleon boundary <b>R_p = 0.8414 fm</b> (W+1: 4ℏ/m_p c)</span>
-      <span>surface seat <b>v(R_p) = c√(r_e/R_p) = 1.8301c</b></span>
-      <span>rotation period <b>T = 2πR_p/v = 9.64 × 10⁻²⁴ s</b></span>
-      <span>angular rate <b>ω = 6.52 × 10²³ rad/s</b></span>
-      <span>contact separation <b>2R_p = 1.683 fm</b></span>
-      <span>same-sense slip <b>2 × 1.830c = 3.66c</b> — forbidden</span>
+  </div>
+  <div class="act__body">
+    <div class="stagewrap"><div class="stage">
+      <canvas data-scene="tier"></canvas>
+      <figcaption></figcaption>
+    </div></div>
+    <div class="col">
+      <p class="lede fade" data-fade>Layer <em>n</em> holds the (n+1)-th triangular number of rod seats. Each
+        seat is a rod with two ends, so every seat counts twice.</p>
+      <p class="fade" data-fade>Close packing in two dimensions is triangular — it is why a rack of balls is a
+        triangle and a stack of oranges has a triangular face. So a completed layer on the growing shell holds
+        <strong>T(n+1) = (n+1)(n+2)/2</strong> seats: 1, then 3, then 6, then 10.</p>
+      <p class="fade" data-fade>Now the exclusion that runs this whole framework: a proton gears only with
+        neutrons, a neutron only with protons. A seat is therefore not a single occupancy — it is a rod
+        presenting a <em>p-face</em> one way and an <em>n-face</em> the other. The contact graph is bipartite
+        by construction, which means no odd cycles, no frustration, and traction guaranteed rather than
+        checked at each contact.</p>
+      <p class="fade" data-fade>Double the triangular number and the first form is complete:
+        <strong>F(n) = 2·T(n+1) = (n+1)(n+2)</strong> — 2, 6, 12, 20, 30, 42. Nothing is fitted to anything.
+        And accumulating this form alone already gives three of the seven closures: F(0) = 2, then 2+6 = 8,
+        then 8+12 = <strong>20</strong>.</p>
+      <div class="eqline">Σ F(0..2) = 2 + 6 + 12 = <b>20</b> &nbsp;·&nbsp; measured 2, 8, 20 ✓✓✓</div>
+      <div class="repair fade" data-fade>
+        <div><h5>What the form buys</h5><p>Three closures with no assigned quantity. F(0) = 2 is the alpha
+          core's own pair — the core obeys the same formula as every tier above it.</p></div>
+        <div><h5>What it costs</h5><p>Nothing yet. But a surface alone cannot make 28: the gaps it generates
+          are 6 and 12, and the next measured gap is 8. Something that is not a surface has to arrive.</p></div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════ CH.2 — TRIANGULAR DOUBLING ═══════ -->
-<section class="chapter chapter--alt">
-  <div class="chapter__inner reveal">
-    <div class="chapter__num">Two</div>
-    <h2 class="chapter__title">First form — the layer, doubled</h2>
-    <p class="chapter__lead" data-i18n="mn_c2lead">Layer n holds T(n+1) rod seats; each seat carries a p-face and an n-face; F(n) = 2·T(n+1) = (n+1)(n+2).</p>
-    <figure class="mini">
-      <canvas id="triCanvas" height="300"></canvas>
-      <figcaption data-i18n="mn_c2cap">Drag vertically to separate the face sets, horizontally to rotate; click to grow the tier. Counts update live from T(n+1) and F(n).</figcaption>
-    </figure>
-    <p data-i18n="mn_c2a">Accumulating this form alone gives the first three closures, with nothing assigned: F(0) = 2, then 2 + F(1) = 2 + 6 = <strong>8</strong>, then 8 + F(2) = 8 + 12 = <strong>20</strong>. Three of the seven. F(0) = 2 is the alpha core's own pair — the core obeys the same formula as every tier above it.</p>
-    <div class="eqline">Σ F(0..2) = 2 + 6 + 12 = <b>20</b> &nbsp;·&nbsp; measured closures 2, 8, 20 ✓✓✓</div>
+<!-- ════════════════ ACT 2 · THE BELT ════════════════ -->
+<section class="act" data-act="belt" data-th="belt">
+  <div class="act__rule"></div>
+  <div class="act__head fade" data-fade>
+    <canvas class="sigil" data-sigil="belt" width="64" height="64" aria-hidden="true"></canvas>
+    <div>
+      <div class="eyebrow">Act Two · The band</div>
+      <h2>A rod can only roll on the <em>equator</em></h2>
+      <p class="premise">Generating premise: <b>the assembly rolls as one body, and slip is forbidden</b>.
+        A radial rod on a rolling shell grinds at every latitude but one. That single admissible line is a
+        ring — and a ring is not a surface.</p>
+    </div>
   </div>
-</section>
-
-<!-- ═══════ CH.3 — THE BELT ═══════ -->
-<section class="chapter">
-  <div class="chapter__inner reveal">
-    <div class="chapter__num">Three</div>
-    <h2 class="chapter__title">Second form — the rolling equator</h2>
-    <p class="chapter__lead" data-i18n="mn_c3lead">Excess neutrons arrive as rigid n–p–n triton rods, seated radially. A radial rod is slip-free on one latitude only, so the belt is a ring, not a surface — linear capacity, antipodally paired.</p>
-    <figure class="mini">
-      <canvas id="beltCanvas" height="320"></canvas>
-      <figcaption data-i18n="mn_c3cap">Drag the highlighted rod off the equator: off-band the contact slips (red), on-band it rolls (gold). Click on-band to change belt index. B(n) = 2(n+1).</figcaption>
-    </figure>
-    <p data-i18n="mn_c3a">The dimensional difference between the forms — quadratic surface against linear ring — is what sets the observed closure spacing: wide at low count (2→8→20, gaps of 6 and 12), compressed where belts dominate (20→28, gap 8), then widening again as remainders re-enter (28→50→82→126, gaps 22, 32, 44).</p>
-    <div class="tw">
-      <table class="d">
-        <thead><tr><th>closure step</th><th>gap</th><th>composition</th></tr></thead>
-        <tbody>
-          <tr><td>2 → 8</td><td>6</td><td>F(1) — surface only</td></tr>
-          <tr><td>8 → 20</td><td>12</td><td>F(2) — surface only</td></tr>
-          <tr><td>20 → 28</td><td class="hit">8</td><td>B(3) — belt only (the descent)</td></tr>
-          <tr><td>28 → 50</td><td>22</td><td>R(3) + B(4) = 12 + 10</td></tr>
-          <tr><td>50 → 82</td><td>32</td><td>R(4) + B(5) = 20 + 12</td></tr>
-          <tr><td>82 → 126</td><td>44</td><td>R(5) + B(6) = 30 + 14</td></tr>
-          <tr class="predrow"><td>126 → 184</td><td>58</td><td>R(6) + B(7) = 42 + 16</td></tr>
-        </tbody>
-      </table>
+  <div class="act__body">
+    <div class="stagewrap"><div class="stage">
+      <canvas data-scene="belt"></canvas>
+      <figcaption></figcaption>
+    </div></div>
+    <div class="col">
+      <p class="lede fade" data-fade>Excess neutrons arrive as rigid n–p–n triton rods, standing radially.
+        Radial rods have a problem the deuteron seats do not.</p>
+      <p class="fade" data-fade>At every latitude except one, the surface a radial rod must roll against is
+        moving at a different rate than the rod's own turn. It grinds. The traction condition — zero relative
+        surface velocity at contact, <em>ω<sub>A</sub> = −ω<sub>B</sub></em> — forbids exactly that.</p>
+      <p class="fade" data-fade>There is precisely one place it does not grind: the <strong>equator of the
+        collective roll</strong>. So the tritons are confined to a one-dimensional ring, they pair antipodally
+        across it, and the capacity is linear in girth rather than quadratic:
+        <strong>B(n) = 2(n+1)</strong> — 8, 10, 12, 14.</p>
+      <p class="fade" data-fade>Two forms now, and they are different <em>shapes</em> of number. One quadratic
+        because a surface is two-dimensional; one linear because a rolling band is one-dimensional. That
+        difference in dimensional order is the entire reason the magic numbers are spaced the way they
+        are — wide early, compressed through the middle, wide again.</p>
+      <div class="eqline">B(n) = <b>2(n+1)</b> &nbsp;·&nbsp; surface remainder R(n) = F(n) − B(n) = <b>n(n+1)</b></div>
+      <div class="repair fade" data-fade>
+        <div><h5>What the form buys</h5><p>A second capacity of a different dimensional order — the only thing
+          that can produce a gap of 8 between gaps of 12 and 22.</p></div>
+        <div><h5>What it costs</h5><p>The rolling constraint is a claim about the whole assembly moving as one
+          body. If the shell does not roll coherently, the equator is not privileged and the belt has no
+          reason to be a ring.</p></div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════ CH.4 — THE DESCENT ═══════ -->
-<section class="chapter chapter--alt">
-  <div class="chapter__inner reveal">
-    <div class="chapter__num">Four</div>
-    <h2 class="chapter__title">The descent at n = 3</h2>
-    <p class="chapter__lead" data-i18n="mn_c4lead">From the fourth tier the belt separates and descends inward to seal the closure beneath it. This produces 28 — and its onset is the one quantity here read from the measured sequence.</p>
-    <p data-i18n="mn_c4a">Through tiers 0–2 the surface fills and closes. From n = 3 the belt drops to the prior shell and seals it; the tier above then completes on a sealed floor. The three ages of a triton follow: <strong>docked → paired → sealed</strong>. Positions are fixed by tier geometry, filling order by antipodal pairing with the lone odd rod inward, and occupancy by the neutron ledger at closure time — frozen once the next tier rests on it.</p>
-    <div class="scope">
-      <h4>Limitation — stated at the point of use</h4>
-      <p data-i18n="mn_c4scope"><strong>The descent onset n = 3 is READ from the measured sequence, not derived.</strong> The construction fixes what a descending belt does once it descends; it does not yet fix from mesh and void geometry why separation begins at the fourth tier. Candidate mechanism: a field-cost comparison — the tier at which sealing below first becomes cheaper than spreading above — and that computation is owed (residual NP33 debt). The provenance block in <code>sdt::laws::nuclear</code> carries this disclosure at the definition site.</p>
+<!-- ════════════════ ACT 3 · THE DESCENT ════════════════ -->
+<section class="act" data-act="desc" data-th="desc">
+  <div class="act__rule"></div>
+  <div class="act__head fade" data-fade>
+    <canvas class="sigil" data-sigil="desc" width="64" height="64" aria-hidden="true"></canvas>
+    <div>
+      <div class="eyebrow">Act Three · The step that makes 28</div>
+      <h2>At the fourth tier, the belt <em>goes down</em></h2>
+      <p class="premise">Generating premise: <b>from n = 3 the belt separates from its tier and descends to
+        seal the closure below</b>. This is the step that produces 28 — and its onset is the one quantity on
+        this page read from the measured sequence rather than derived.</p>
+    </div>
+  </div>
+  <div class="act__body">
+    <div class="stagewrap"><div class="stage">
+      <canvas data-scene="desc"></canvas>
+      <figcaption></figcaption>
+    </div></div>
+    <div class="col">
+      <p class="lede fade" data-fade>For three tiers the surface fills and closes and that is that. From the
+        fourth, something changes.</p>
+      <p class="fade" data-fade>The belt <strong>separates</strong> from its tier and descends inward to seal
+        the closure beneath it. The tier above then completes on a sealed floor. The three ages of a triton
+        follow: <em>docked → paired → sealed</em>.</p>
+      <p class="fade" data-fade>The closure jumps by exactly the belt's own capacity — B(3) = 8, so
+        20 + 8 = <strong>28</strong>. Then each later closure takes a surface remainder <em>and</em> the next
+        belt: 28 + 12 + 10 = <strong>50</strong>, 50 + 20 + 12 = <strong>82</strong>,
+        82 + 30 + 14 = <strong>126</strong>.</p>
+      <div class="scope fade" data-fade>
+        <h4>Limitation — stated at the point of use</h4>
+        <span data-i18n="mn_c4scope"><strong>Why the descent begins at the fourth tier and not the third or fifth is READ
+        from the measured sequence, not derived.</strong> The construction fixes what a descending belt does
+        once it descends; it does not yet fix, from mesh and void geometry alone, why separation begins at
+        n = 3. The candidate mechanism is a field-cost comparison — the tier at which sealing below first
+        becomes cheaper than spreading above — and that computation is owed. Everything else here is
+        closed-form; this one number is not, and the provenance block in <code>sdt::laws::nuclear</code>
+        carries the disclosure at the definition site.</span>
+      </div>
+      <div class="repair fade" data-fade>
+        <div><h5>What the descent buys</h5><p>28, 50, 82, 126 — four closures, from the alternation of two
+          forms already in hand.</p></div>
+        <div><h5>What it costs</h5><p>One ordering fact borrowed from the data. The capacities are derived;
+          the alternation's starting index is not.</p></div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════ CH.5 — FULL SCHEDULE ═══════ -->
-<section class="chapter">
-  <div class="chapter__inner reveal">
-    <div class="chapter__num">Five</div>
-    <h2 class="chapter__title">The schedule, computed</h2>
-    <p class="chapter__lead" data-i18n="mn_c5lead">All seven closures from the two forms and one alternation rule, then one step further.</p>
-    <div class="tw">
-      <table class="d" id="schedTable">
+<!-- ════════════════ ACT 4 · THE SCHEDULE ════════════════ -->
+<section class="act" data-act="sched" data-th="sched">
+  <div class="act__rule"></div>
+  <div class="act__head fade" data-fade>
+    <canvas class="sigil" data-sigil="sched" width="64" height="64" aria-hidden="true"></canvas>
+    <div>
+      <div class="eyebrow">Act Four · The ladder, assembled</div>
+      <h2>Seven for seven — and then <em>one more</em></h2>
+      <p class="premise">Generating premise: <b>the forms carry no termination condition</b>. They were never
+        told where the measured list ended, so running the recursion one step further costs nothing extra —
+        and lands on a number that is not on the list.</p>
+    </div>
+  </div>
+  <div class="act__body">
+    <div class="stagewrap"><div class="stage">
+      <canvas data-scene="sched"></canvas>
+      <figcaption></figcaption>
+    </div></div>
+    <div class="col">
+      <p class="lede fade" data-fade>Two expressions a schoolchild could evaluate, one alternation rule, and
+        the whole list appears in order.</p>
+      <div class="tw"><table class="d" id="schedTable">
         <thead><tr><th>k</th><th>added</th><th>arithmetic</th><th>closure</th><th>measured</th><th>Δ</th></tr></thead>
-        <tbody><!-- computed live --></tbody>
-      </table>
-    </div>
-    <div class="eqline">static_assert(closure(0..6) ≡ { 2, 8, 20, 28, 50, 82, 126 }) &nbsp;—&nbsp; the engine does not build if the forms and the sequence disagree</div>
-    <p data-i18n="mn_c5a">The forms carry no termination condition and were not conditioned on the extent of the measured set, so <strong>closure(7) = 184</strong> costs no additional assumption. It is the same recursion advanced one step, and it is the page's falsification exposure: an eighth closure located at any other count refutes the schedule that carries the other seven.</p>
-    <div class="kv">
-      <span>engine: <b>sdt::laws::nuclear</b></span>
-      <span>arrays: <b>magic_numbers[7] · deuteron_tiers[5] · triton_belt_pairs[4]</b></span>
-      <span>suite row <b>B38</b>: parity lock <b>7/7</b> grips · <b>12/12</b> combined</span>
-      <span>spin–orbit terms imported: <b>0</b></span>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════ CH.6 — THE 19 MEASURED KINKS ═══════ -->
-<section class="chapter chapter--alt">
-  <div class="chapter__inner reveal">
-    <div class="chapter__num">Six</div>
-    <h2 class="chapter__title">The measured closure kinks — all nineteen</h2>
-    <p class="chapter__lead" data-i18n="mn_c6lead">If a closure is a sealed floor rather than a filled level, the compaction should not track how many tritons occupy the belt. Measured, single-pass, on an instrument validated on known answers: it does not.</p>
-    <figure class="wide">
-      <canvas id="kinkCanvas" height="330"></canvas>
-      <figcaption data-i18n="mn_c6cap">Every computable closure kink (19 points, milli-fm) against triton count. Gold = measured, per-isotone mean drawn flat; dashed red = the profile occupancy-proportional compaction would require. Hover for values.</figcaption>
-    </figure>
-    <div class="tw">
-      <table class="d" id="kinkTable">
-        <thead><tr><th>isotone</th><th>members</th><th>Z (n_t) → kink, milli-fm</th><th>mean</th><th>RMS const</th><th>RMS prop</th><th>outcome</th></tr></thead>
-        <tbody><!-- computed live from the measured record --></tbody>
-      </table>
-    </div>
-    <div class="kv">
-      <span>instrument validated: <b>Ca-48 −29.0 · Cr-52 −28.4 milli-fm</b></span>
-      <span>background field: <b>338 kinks, mean +0.78, σ 20.05</b></span>
-      <span>sign: <b>19/19 negative</b> (compaction)</span>
-      <span>Q1 outcome: <b>SUPPORTED</b> under the pre-registered criterion</span>
-      <span>lone-rod-inward census: <b>271/326 = 83.1%</b> (threshold 70%)</span>
-      <span>Q2 outcome: <b>SUPPORTED</b> — direction only, see scope</span>
-    </div>
-    <p data-i18n="mn_c6a">Two isotones (N = 20 and N = 126) carry a single computable member each and are therefore not adjudicable — the pre-registration required at least two, and they are reported rather than counted. N = 8 has no computable members at all: the neighbour radii are unmeasured. Of the three adjudicable lines, all three select <strong>constant</strong> over occupancy-proportional, and the |kink| span ratios cluster tightly at 0.76, 0.78, 0.76.</p>
-    <div class="scope">
-      <h4>Scope on the staggering census</h4>
-      <p data-i18n="mn_c6scope">The lone-rod-inward result (83.1%) shares its predicted sign with the pairing account: <strong>shared form, cannot discriminate between accounts.</strong> What the census tests is the direction the seat law asserts — inward — not the superiority of one account over the other.</p>
-    </div>
-    <p data-i18n="mn_c6b">Post-hoc, not pre-registered: closure grip peaks at <strong>N = 28</strong> — the first descended belt — at −31.8 milli-fm, and fades with tier size (−22.2 at N = 50, −12.3 at N = 82). The pre-belt N = 20 closure is weak at −6.1 (single member). Whether closure grip is a belt property is a follow-up question, not a claim.</p>
-  </div>
-</section>
-
-<!-- ═══════ CH.7 — THE ASSEMBLY LADDER ═══════ -->
-<section class="chapter">
-  <div class="chapter__inner reveal">
-    <div class="chapter__num">Seven</div>
-    <h2 class="chapter__title">The assembly ladder, with its label discipline</h2>
-    <p class="chapter__lead" data-i18n="mn_c7lead">The mesh is built one nuclide at a time from hydrogen. Only one lock on the ladder is derived; the rest are measured numbers the picture names, and they are tagged that way.</p>
-    <div class="tw">
-      <table class="d">
-        <thead><tr><th>step</th><th>nuclide</th><th>structure</th><th>lock, MeV</th><th>tag</th></tr></thead>
-        <tbody>
-          <tr><td>1</td><td>¹H</td><td>one trefoil, no contact — the free reference rotor</td><td>—</td><td class="ok">[D] seat 1.830c</td></tr>
-          <tr><td>2</td><td>²H</td><td>one p↔n gear; e⁻ rides the rolling node at v = 1.69c; gap D = (7/3)R_p = 1.963 fm</td><td class="hit">2.200 vs 2.2246 (−1.1%)</td><td class="ok">[D] derived</td></tr>
-          <tr><td>3</td><td>⁴He</td><td>p–n–p–n ring (4-cycle); tetrahedral shape, ring mesh; like-like diagonals off contact</td><td>23.847 = 28.296 − 2(2.2246)</td><td>[measured, mesh-named]</td></tr>
-          <tr><td>4</td><td>³H / ³He</td><td>3-gear rods</td><td>6.26</td><td>[measured, mesh-named]</td></tr>
-          <tr><td>5</td><td>⁶Li</td><td>α ring + first deuteron dock</td><td>1.4738 (α–d separation measures 1.4743)</td><td>[measured, mesh-named]</td></tr>
-          <tr><td>6</td><td>⁷Li</td><td>+ lone rod</td><td>2.467</td><td>[measured, mesh-named]</td></tr>
-          <tr><td>7</td><td>⁸Be</td><td>two α — unbound</td><td class="neg">−0.092</td><td>[measured, mesh-named]</td></tr>
-          <tr><td>8</td><td>¹²C</td><td>three α</td><td>+7.274</td><td>[measured, mesh-named]</td></tr>
-          <tr><td>9</td><td>¹⁶O</td><td>four α — tetrahedron of rings; closure 8 complete</td><td>+14.435</td><td>[measured, mesh-named]</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p data-i18n="mn_c7a">The deuteron's 2.200 MeV is the ladder's only <strong>[D]</strong> — computed from the shared-electron occlusion sum E = −Σq<sub>i</sub>q<sub>j</sub>·αℏc/r<sub>ij</sub> with no fitted scale. The α ring lock 23.847 MeV is convergent with the independent scission line-item (23.85 MeV, NP25) — independent origins, same number. Every other entry is a mass-table difference the mesh picture names, and the tag says so; the ledger does not inflate one label at a time.</p>
-    <div class="scope">
-      <h4>Withdrawal on the record</h4>
-      <p data-i18n="mn_c7wd">An earlier conjecture in this line held that mesh <strong>frustration</strong> selects the closures. It is withdrawn: under like-never-gears-like the contact graph is bipartite, so it has no odd cycles and no frustration is available to select with. The successor account is shell completion — the schedule above.</p>
+        <tbody></tbody>
+      </table></div>
+      <p class="fade" data-fade>In the engine this is not prose. The alternation is a compile-time assertion:
+        if the two forms and the measured sequence ever disagree, the header does not build.</p>
+      <div class="eqline">static_assert(closure(0..6) ≡ { 2, 8, 20, 28, 50, 82, 126 })</div>
+      <p class="fade" data-fade>And then the eighth rung: <strong>184</strong>. It is the page's falsification
+        exposure — an eighth closure found at any other count refutes the schedule, and the schedule is what
+        carries the other seven.</p>
+      <div class="repair fade" data-fade>
+        <div><h5>The fix</h5><p>The list stops being an input that a coupling strength is tuned against, and
+          becomes an output of two counting forms.</p></div>
+        <div><h5>The cost</h5><p>A standing bet. 184 is now on the record, and it can be wrong.</p></div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════ CH.8 — PARITY LOCK ═══════ -->
-<section class="chapter chapter--alt">
-  <div class="chapter__inner reveal">
-    <div class="chapter__num">Eight</div>
-    <h2 class="chapter__title">The parity lock — an exact predicate</h2>
-    <p class="chapter__lead" data-i18n="mn_c8lead">The seat law says a stable odd-Z nuclide carries an odd triton count: the lone rod takes the inward seat. An odd-Z nuclide with an even triton count has no partner to seal against — a parity misfit.</p>
-    <div class="eqline">misfit(Z, A) ≡ (Z odd) ∧ (n_t ≥ 0) ∧ (n_t even),&nbsp;&nbsp; n_t = A − 2Z</div>
-    <div class="tw">
-      <table class="d">
-        <thead><tr><th>class</th><th>members</th><th>predicate</th><th>observed</th></tr></thead>
-        <tbody>
-          <tr><td>mono-isotopic grips (odd n_t)</td><td>Na, Al, P, Sc, V, Mn, Co</td><td class="ok">clears — 7/7</td><td>single stable isotope each</td></tr>
-          <tr><td>parity misfits (even n_t)</td><td>K-40, V-50, La-138, Lu-176, Ta-180m</td><td class="hit">flags — 5/5</td><td>every one a long-lived radioactive oddity</td></tr>
-          <tr class="sum"><td colspan="2">suite row B38</td><td colspan="2">12/12 combined</td></tr>
-        </tbody>
-      </table>
+<!-- ════════════════ ACT 5 · THE MEASUREMENT ════════════════ -->
+<section class="act" data-act="data" data-th="data">
+  <div class="act__rule"></div>
+  <div class="act__head fade" data-fade>
+    <canvas class="sigil" data-sigil="data" width="64" height="64" aria-hidden="true"></canvas>
+    <div>
+      <div class="eyebrow">Act Five · Nineteen measurements</div>
+      <h2>The seal leaves a <em>mark</em></h2>
+      <p class="premise">Generating premise: <b>if a closure is a sealed floor rather than a filled level, the
+        compaction should not care how many tritons occupy the belt</b>. That is a testable difference, and
+        the instrument was validated on known answers before it was pointed at the question.</p>
     </div>
-    <p data-i18n="mn_c8a">The misfit class is exactly the five naturally occurring odd–odd quasi-stables. Counting convergent with the odd–odd rule of the prevailing account; the native content is the unpaired rod with nothing to seal against. Corroborating pair: <strong>Ca-48</strong> completes the first triton belt (4 antipodal pairs) and is doubly magic and held; <strong>Ni-56</strong> has an empty belt and is unstable.</p>
+  </div>
+  <div class="act__body">
+    <div class="stagewrap"><div class="stage">
+      <canvas data-scene="kink"></canvas>
+      <figcaption></figcaption>
+    </div></div>
+    <div class="col">
+      <p class="lede fade" data-fade>At every magic neutron count the boundary radius draws inward. The
+        question is whether the size of that kink tracks the occupants.</p>
+      <p class="fade" data-fade>If the compaction were caused by the occupants, more tritons would mean a
+        deeper kink. The seating account says otherwise: <em>the freeze does the compacting, and the ledger
+        only decides who sits in the seats</em>. So the kink should be constant along a magic-N line even as
+        the triton count varies several-fold.</p>
+      <p class="fade" data-fade>Measured, whole-range, single-pass: the kink is an <strong>isotone
+        invariant</strong> — −31.8 milli-fm at N = 28, −22.2 at N = 50, −12.3 at N = 82 — while n<sub>t</sub>
+        varies two- to four-fold along each line. It beats the occupancy-proportional shape on every
+        adjudicable isotone, and all nineteen computable closure kinks come out negative against a background
+        field centred near zero.</p>
+      <div class="tw"><table class="d" id="kinkTable">
+        <thead><tr><th>isotone</th><th>n</th><th>Z (n_t) → kink</th><th>mean</th><th>RMS const</th><th>RMS prop</th><th>outcome</th></tr></thead>
+        <tbody></tbody>
+      </table></div>
+      <div class="scope fade" data-fade>
+        <h4>Scope — the staggering census</h4>
+        <span data-i18n="mn_c6scope">The lone-rod-inward result (271/326 = 83.1%, threshold 70%) shares its predicted sign with
+        the pairing account: <strong>shared form — it cannot discriminate between the two.</strong> What the
+        census tests is the direction the seat law asserts, inward. Two isotones carry a single computable
+        member each and are reported but not counted; N = 8 has no computable members at all.</span>
+      </div>
+      <div class="repair fade" data-fade>
+        <div><h5>What the data says</h5><p>Constant beats proportional on all three adjudicable isotones.
+          Grip peaks at N = 28 — the first descended belt.</p></div>
+        <div><h5>What it does not say</h5><p>The staggering direction is shared with pairing. It corroborates
+          the seat law; it does not choose between accounts.</p></div>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- ═══════ CH.9 — SCOPE ═══════ -->
-<section class="chapter">
-  <div class="chapter__inner reveal">
-    <div class="chapter__num">Nine</div>
-    <h2 class="chapter__title">What this settles and what it does not</h2>
-    <div class="scope">
-      <h4>Scope</h4>
-      <p data-i18n="mn_c9scope">F(n) is numerically identical to the oscillator-level degeneracy of the prevailing shell account, and B(n) to its intruder-orbit capacity. <strong>At sequence level the two accounts are not discriminable — they count the same objects.</strong> Shared form, claimed as consistency and nothing more. Not shared: the bipartite doubling and the rolling-equator constraint, neither of which is available to a construction resting on an assigned spin–orbit coupling. No such coupling appears at any step — not by removal, but because the symbol is absent from the permitted namespace.</p>
+<!-- ════════════════ ACT 6 · SCOPE ════════════════ -->
+<section class="act" data-act="scope" data-th="scope">
+  <div class="act__rule"></div>
+  <div class="act__head fade" data-fade>
+    <canvas class="sigil" data-sigil="scope" width="64" height="64" aria-hidden="true"></canvas>
+    <div>
+      <div class="eyebrow">Act Six · Where the claim stops</div>
+      <h2>What this settles, and what it <em>does not</em></h2>
+      <p class="premise">Generating premise: <b>a construction that hides its shared forms is not a
+        construction, it is an advertisement</b>. Both forms here count the same objects the prevailing
+        account counts. That has to be said before anything else.</p>
     </div>
-    <div class="scope">
-      <h4>Residuals</h4>
-      <p data-i18n="mn_c9res">The descent onset n = 3 is read from data (§4). Capacities are closed-form; the alternation's initial index is not. Two isotones are non-adjudicable at one member each; N = 8 has no computable members. The lone-rod census shares its sign with pairing and discriminates nothing. The 184 prediction is the standing exposure.</p>
-    </div>
-    <div class="kv">
-      <span>certification: capacities <b>DERIVED</b> (2026-07-30)</span>
-      <span>descent onset: <b>READ</b> — open</span>
-      <span>correspondence: <b>sequence-exact</b>, origin differs</span>
-      <span>fitted coefficients in the schedule: <b>0</b></span>
+  </div>
+  <div class="act__body">
+    <div class="stagewrap"><div class="stage">
+      <canvas data-scene="scope"></canvas>
+      <figcaption></figcaption>
+    </div></div>
+    <div class="col">
+      <div class="scope fade" data-fade>
+        <h4>Scope</h4>
+        <span data-i18n="mn_c9scope">F(n) is numerically identical to the oscillator-level degeneracy of the prevailing shell
+        account, and B(n) to its intruder-orbit capacity. <strong>At sequence level the two accounts are not
+        discriminable — they count the same objects.</strong> Shared form, claimed as consistency and nothing
+        further. What is <em>not</em> shared is the origin: the bipartite doubling and the rolling-equator
+        constraint, neither of which is available to a construction resting on an assigned spin–orbit
+        coupling. No such coupling appears at any step — not by removal, but because the symbol is absent
+        from the permitted namespace.</span>
+      </div>
+      <div class="scope fade" data-fade>
+        <h4>Residuals</h4>
+        <span data-i18n="mn_c9res">The descent onset n = 3 is read from data. Capacities are closed-form; the alternation's
+        initial index is not. Two isotones are non-adjudicable at one member each, and N = 8 has none. The
+        lone-rod census shares its sign with pairing and discriminates nothing. The closure(7) = 184
+        prediction is the standing exposure.</span>
+      </div>
+      <p class="fade" data-fade>What changed is narrow and worth stating precisely. The list 2, 8, 20, 28, 50,
+        82, 126 used to be an input that a coupling strength was tuned against. Here it is an output of two
+        counting forms — a triangular layer doubled by an exclusion, and a band that can only roll in one
+        place — with one ordering fact still borrowed from the data and one number staked on the future.</p>
     </div>
   </div>
 </section>
 
-<footer class="footer">
-  <div class="footer__inner" style="text-align:center">
-    <p style="font-family:'JetBrains Mono',monospace;font-size:.67rem;letter-spacing:.13em;color:var(--ink-faint)">
-      J. C. HARVEY · MELBOURNE · NP33 · sdt::laws::nuclear · ATOMICUS/reports/CLOSURE_KINK_ISOTONE_REPORT.md
-    </p>
-    <p style="margin-top:.9rem;font-size:.8rem">
-      <a href="paper-atomicus.html" style="color:var(--copper)">peer review paper for submission · ATOMICUS</a> ·
-      <a href="nuclear-packing-sequencer.html" style="color:var(--copper)">build it yourself · the sequencer</a>
-    </p>
+<section class="act" data-th="sdt" data-act="close">
+  <div class="wrap">
+    <p class="theline fade" data-fade>A closure is not a magic quantity.<br>It is the count at which a seat
+      structure <em>completes</em>.</p>
+    <div class="coda">
+      <a href="paper-atomicus.html">peer review paper · ATOMICUS</a>
+      <a href="nuclear-packing-sequencer.html">build it yourself · the sequencer</a>
+      <a href="index.html">← the whole picture</a>
+    </div>
+    <p class="note" style="margin-top:1rem">J. C. HARVEY · MELBOURNE · NP33 · sdt::laws::nuclear ·
+      ATOMICUS/reports/CLOSURE_KINK_ISOTONE_REPORT.md</p>
   </div>
-</footer>
+</section>
+
+</div><!-- /pagewrap -->
+
+<div class="drive" id="driveBar" data-th="sdt">
+  <button id="playBtn" type="button" aria-pressed="false">play</button>
+  <button id="spdBtn" type="button">1×</button>
+  <div class="ticks" id="ticks"></div>
+  <span class="pct" id="pct">0%</span>
+</div>
 
 <script>
-/* ══════════════════════════════════════════════════════════════════════
-   All schedule arithmetic is evaluated live from the two closed forms.
-   All measured values are transcribed from the named sources and marked.
-   ══════════════════════════════════════════════════════════════════════ */
-(function(){
-  'use strict';
-  var F=function(n){return (n+1)*(n+2);},
-      B=function(n){return 2*(n+1);},
-      R=function(n){return n*(n+1);},
-      T=function(k){return k*(k+1)/2;};
-  var MEASURED=[2,8,20,28,50,82,126];
+/* ══════════════════════════════════════════════════════════════════════════
+   DATA — the two closed forms, and the measured record.
+   Schedule arithmetic is evaluated; measured values are transcribed + named.
+   ══════════════════════════════════════════════════════════════════════════ */
+var F = function(n){ return (n+1)*(n+2); },
+    B = function(n){ return 2*(n+1); },
+    R = function(n){ return n*(n+1); },
+    T = function(k){ return k*(k+1)/2; };
+var MEASURED = [2,8,20,28,50,82,126];
 
-  function schedule(){
-    var out=[],run=F(0);
-    out.push({k:0,c:run,add:'F(0)',math:'2',belt:null,tier:0});
-    run+=F(1); out.push({k:1,c:run,add:'+ F(1)',math:'2 + 6',belt:null,tier:1});
-    run+=F(2); out.push({k:2,c:run,add:'+ F(2)',math:'8 + 12',belt:null,tier:2});
-    var prev=run; run+=B(3);
-    out.push({k:3,c:run,add:'+ B(3)',math:prev+' + '+B(3),belt:3,tier:3});
-    for(var n=3;n<=6;n++){ prev=run; run+=R(n)+B(n+1);
-      out.push({k:n+1,c:run,add:'+ R('+n+') + B('+(n+1)+')',
-                math:prev+' + '+R(n)+' + '+B(n+1),belt:n+1,tier:n+1}); }
-    return out;
-  }
-  var SCHED=schedule();
+var SCHED = (function(){
+  var out = [], run = F(0), prev;
+  out.push({k:0,c:run,add:'F(0)',math:'2',belt:null,tier:0});
+  run += F(1); out.push({k:1,c:run,add:'+ F(1)',math:'2 + 6',belt:null,tier:1});
+  run += F(2); out.push({k:2,c:run,add:'+ F(2)',math:'8 + 12',belt:null,tier:2});
+  prev = run; run += B(3);
+  out.push({k:3,c:run,add:'+ B(3)',math:prev+' + '+B(3),belt:3,tier:3});
+  for (var n=3;n<=6;n++){ prev = run; run += R(n)+B(n+1);
+    out.push({k:n+1,c:run,add:'+ R('+n+') + B('+(n+1)+')',
+              math:prev+' + '+R(n)+' + '+B(n+1),belt:n+1,tier:n+1}); }
+  return out;
+})();
 
-  /* ---- measured closure kinks (CLOSURE_KINK_ISOTONE_REPORT, 2026-07-30) ---- */
-  var KINK=[
-    {N:8,  members:[], mean:null, rc:null, rp:null, out:'no computable members'},
-    {N:20, members:[[18,2,-6.1]], mean:-6.1, rc:null, rp:null, out:'single member — not adjudicable'},
-    {N:28, members:[[20,8,-29.0],[24,4,-28.4],[25,3,-38.0]], mean:-31.8, rc:4.4, rp:15.5, out:'constant'},
-    {N:50, members:[[36,14,-19.2],[37,13,-22.4],[38,12,-21.9],[40,10,-22.8],[42,8,-24.6]],
-           mean:-22.2, rc:1.7, rp:5.7, out:'constant'},
-    {N:82, members:[[52,30,-8.9],[54,28,-12.5],[55,27,-11.7],[56,26,-13.1],[58,24,-12.9],
-                    [60,22,-13.8],[62,20,-13.9],[63,19,-12.4],[66,16,-11.7]],
-           mean:-12.3, rc:1.4, rp:3.2, out:'constant'},
-    {N:126,members:[[82,44,-4.3]], mean:-4.3, rc:null, rp:null, out:'single member — not adjudicable'}
-  ];
+/* measured closure kinks — ATOMICUS/reports/CLOSURE_KINK_ISOTONE_REPORT.md */
+var KINK = [
+  {N:8,  m:[], mean:null, rc:null, rp:null, out:'no computable members'},
+  {N:20, m:[[18,2,-6.1]], mean:-6.1, rc:null, rp:null, out:'single member'},
+  {N:28, m:[[20,8,-29.0],[24,4,-28.4],[25,3,-38.0]], mean:-31.8, rc:4.4, rp:15.5, out:'constant'},
+  {N:50, m:[[36,14,-19.2],[37,13,-22.4],[38,12,-21.9],[40,10,-22.8],[42,8,-24.6]],
+         mean:-22.2, rc:1.7, rp:5.7, out:'constant'},
+  {N:82, m:[[52,30,-8.9],[54,28,-12.5],[55,27,-11.7],[56,26,-13.1],[58,24,-12.9],
+            [60,22,-13.8],[62,20,-13.9],[63,19,-12.4],[66,16,-11.7]],
+         mean:-12.3, rc:1.4, rp:3.2, out:'constant'},
+  {N:126,m:[[82,44,-4.3]], mean:-4.3, rc:null, rp:null, out:'single member'}
+];
 
-  /* ---- projection ---- */
-  function proj(x,y,z,yaw,pitch,scale,cx,cy){
-    var c1=Math.cos(yaw),s1=Math.sin(yaw);
-    var x1=x*c1-z*s1, z1=x*s1+z*c1;
-    var c2=Math.cos(pitch),s2=Math.sin(pitch);
-    return {x:cx+x1*scale, y:cy+(y*c2-z1*s2)*scale, d:y*s2+z1*c2};
-  }
-  function fit(cv){
-    var dpr=Math.min(window.devicePixelRatio||1,2);
-    var w=cv.clientWidth||600,h=parseInt(cv.getAttribute('height'),10)||360;
-    cv.width=Math.round(w*dpr); cv.height=Math.round(h*dpr);
-    var g=cv.getContext('2d'); g.setTransform(dpr,0,0,dpr,0,0);
-    return {g:g,w:w,h:h};
-  }
-  function drag(cv,onMove,onUp){
-    var down=false,lx=0,ly=0;
-    cv.addEventListener('pointerdown',function(e){down=true;lx=e.clientX;ly=e.clientY;
-      if(cv.setPointerCapture)cv.setPointerCapture(e.pointerId);});
-    cv.addEventListener('pointermove',function(e){if(!down)return;
-      var dx=e.clientX-lx,dy=e.clientY-ly;lx=e.clientX;ly=e.clientY;onMove(dx,dy);});
-    function up(){if(down){down=false;onUp&&onUp();}}
-    cv.addEventListener('pointerup',up);cv.addEventListener('pointercancel',up);
-    cv.addEventListener('pointerleave',up);
-  }
-  var PC='#b8422e',NC='#2f5aa8',GC='#8a6d1f',GL='#d4a05c',BAD='#c0392b';
+var COL = {tier:'#b8422e',belt:'#2f5aa8',desc:'#6a4c9c',sched:'#b07430',
+           data:'#14807a',scope:'#8a8478',sdt:'#b07430'};
+var ACTNAME = {hero:'the list',tier:'the tier',belt:'the belt',desc:'the descent',
+               sched:'the schedule',data:'the data',scope:'scope',close:'close'};
 
-  /* ══ tables ══ */
-  (function(){
-    var tb=document.querySelector('#formTable tbody'); if(!tb)return;
-    for(var n=0;n<=9;n++){
-      var tr=document.createElement('tr');
-      tr.innerHTML='<td>'+n+'</td><td>'+T(n+1)+'</td><td class="hit">'+F(n)+'</td><td>'+
-        (n>=3?B(n):'—')+'</td><td>'+(n>=3?R(n):'—')+'</td>';
-      tb.appendChild(tr);
+var $  = function(s,r){ return (r||document).querySelector(s); };
+var $$ = function(s,r){ return Array.prototype.slice.call((r||document).querySelectorAll(s)); };
+</script>
+
+<script>
+/* ══════════════════════════════════════════════════════════════════════════
+   THE SCENES — one reel of three per act, driven by that act's scroll t∈[0,1]
+   ══════════════════════════════════════════════════════════════════════════ */
+var PI = Math.PI;
+function ease(x){ return x<0?0:x>1?1:x*x*(3-2*x); }
+function lerp(a,b,t){ return a+(b-a)*t; }
+function proj(x,y,z,yaw,pit,s,cx,cy){
+  var c1=Math.cos(yaw),s1=Math.sin(yaw),x1=x*c1-z*s1,z1=x*s1+z*c1;
+  var c2=Math.cos(pit),s2=Math.sin(pit);
+  return {x:cx+x1*s, y:cy+(y*c2-z1*s2)*s, d:y*s2+z1*c2};
+}
+function lab(g,txt,x,y,col,sz){
+  g.font='500 '+(sz||10)+'px "JetBrains Mono",monospace'; g.fillStyle=col||'#6d7177';
+  g.textAlign='left'; g.fillText(txt,x,y);
+}
+function ctr(g,txt,x,y,col,sz,w){
+  g.font=(w||'500')+' '+(sz||10)+'px "JetBrains Mono",monospace'; g.fillStyle=col||'#6d7177';
+  g.textAlign='center'; g.fillText(txt,x,y);
+}
+
+/* ── ACT 1 · the tier ─────────────────────────────────────────────────── */
+function triLayer(n){
+  var rows=n+1, p=[];
+  for(var i=0;i<rows;i++) for(var j=0;j<=i;j++)
+    p.push({x:(j-i/2)*0.62, z:(i-(rows-1)/2)*0.56});
+  return p;
+}
+var SC_TIER = [
+  /* 1/3 — the triangular layer grows */
+  function(g,W,H,t,S){
+    var cx=W/2, cy=H/2, sc=Math.min(W,H)/5.2;
+    var n = Math.min(5, Math.floor(t*5.999));
+    var seats = triLayer(n), yaw=0.5+t*0.5, pit=0.45;
+    var items = seats.map(function(P){ return proj(P.x,0,P.z,yaw,pit,sc,cx,cy); });
+    items.sort(function(a,b){return a.d-b.d;});
+    items.forEach(function(P,i){
+      g.globalAlpha = P.d<0?0.5:1;
+      g.fillStyle='#8b8578'; g.beginPath(); g.arc(P.x,P.y,5.2,0,6.3); g.fill();
+    });
+    g.globalAlpha=1;
+    ctr(g,'n = '+n,W/2,30,'#b8422e',13,'600');
+    ctr(g,'T('+(n+1)+') = '+T(n+1)+' rod seats',W/2,48,'#6d7177',11);
+  },
+  /* 2/3 — every seat splits into a p-face and an n-face */
+  function(g,W,H,t,S){
+    var cx=W/2, cy=H/2, sc=Math.min(W,H)/5.2, n=3;
+    var seats=triLayer(n), split=ease(t)*0.42, yaw=0.75, pit=0.42;
+    var items=[];
+    seats.forEach(function(P){
+      items.push({a:proj(P.x,-split,P.z,yaw,pit,sc,cx,cy),
+                  b:proj(P.x, split,P.z,yaw,pit,sc,cx,cy)});
+      var L=items[items.length-1]; L.d=Math.min(L.a.d,L.b.d);
+    });
+    items.sort(function(a,b){return a.d-b.d;});
+    items.forEach(function(it){
+      var al=it.d<0?0.45:1; g.globalAlpha=al*0.55;
+      g.strokeStyle='#8b8578'; g.lineWidth=1.2;
+      g.beginPath(); g.moveTo(it.a.x,it.a.y); g.lineTo(it.b.x,it.b.y); g.stroke();
+      g.globalAlpha=al;
+      g.fillStyle='#2f5aa8'; g.beginPath(); g.arc(it.a.x,it.a.y,4.6,0,6.3); g.fill();
+      g.fillStyle='#b8422e'; g.beginPath(); g.arc(it.b.x,it.b.y,5.0,0,6.3); g.fill();
+    });
+    g.globalAlpha=1;
+    ctr(g,'each seat carries two faces',W/2,30,'#6d7177',11);
+    ctr(g,T(n+1)+' seats  ×2  =  F('+n+') = '+F(n),W/2,H-22,'#b8422e',13,'600');
+  },
+  /* 3/3 — the tally: F(n) accumulating to 20 */
+  function(g,W,H,t,S){
+    var rows=[0,1,2], y0=H*0.30, dy=Math.min(52,H*0.16), run=0;
+    ctr(g,'accumulating the first form',W/2,y0-40,'#6d7177',11);
+    rows.forEach(function(n,i){
+      var on = t > i/3.2, a = on ? ease((t-i/3.2)*4) : 0;
+      if(a<=0) return;
+      g.globalAlpha=a;
+      var y=y0+i*dy;
+      lab(g,'F('+n+') = '+F(n), W*0.16, y, '#b8422e', 14);
+      run = (i===0)?F(0):run;
+      var tot = 0; for(var q=0;q<=i;q++) tot+=F(q);
+      g.textAlign='right';
+      g.font='600 17px "JetBrains Mono",monospace'; g.fillStyle='#1c1e20';
+      g.fillText(String(tot), W*0.84, y);
+      g.textAlign='left';
+      g.font='500 10px "JetBrains Mono",monospace'; g.fillStyle='#9a9384';
+      g.fillText('measured '+MEASURED[i]+' ✓', W*0.52, y);
+    });
+    g.globalAlpha=1;
+    if(t>0.86){ g.globalAlpha=ease((t-0.86)/0.14);
+      ctr(g,'three of seven, nothing assigned',W/2,H-24,'#b8422e',12,'600'); g.globalAlpha=1; }
+  }
+];
+
+/* ── ACT 2 · the belt ─────────────────────────────────────────────────── */
+var SC_BELT = [
+  /* 1/3 — a radial rod tried at every latitude: it grinds */
+  function(g,W,H,t,S){
+    var cx=W/2, cy=H/2, sc=Math.min(W,H)/3.4, yaw=0.6, pit=0.42;
+    var lat = Math.sin(t*PI*2)*0.72;
+    for(var q=-2;q<=2;q++){
+      var la=q*0.42, rr=Math.cos(la);
+      g.strokeStyle=(q===0)?'rgba(47,90,168,.55)':'rgba(122,113,96,.16)';
+      g.lineWidth=(q===0)?2:1; g.beginPath();
+      for(var a=0;a<=72;a++){ var th=a/72*6.2832;
+        var P=proj(Math.cos(th)*rr,Math.sin(la),Math.sin(th)*rr,yaw,pit,sc,cx,cy);
+        a?g.lineTo(P.x,P.y):g.moveTo(P.x,P.y); }
+      g.stroke();
     }
-  })();
-  (function(){
-    var tb=document.querySelector('#schedTable tbody'); if(!tb)return;
+    var rr2=Math.cos(lat), on=Math.abs(lat)<0.10;
+    var p1=proj(rr2*0.74,Math.sin(lat)*0.74,0,yaw,pit,sc,cx,cy);
+    var p2=proj(rr2*1.22,Math.sin(lat)*1.22,0,yaw,pit,sc,cx,cy);
+    g.strokeStyle=on?'#b07430':'#c0392b'; g.lineWidth=3.6;
+    g.beginPath(); g.moveTo(p1.x,p1.y); g.lineTo(p2.x,p2.y); g.stroke();
+    g.fillStyle=on?'#d4a05c':'#c0392b';
+    g.beginPath(); g.arc(p2.x,p2.y,5,0,6.3); g.fill();
+    ctr(g, on?'ON THE EQUATOR — slip = 0':'OFF-BAND — the contact slips',
+        W/2, 30, on?'#b07430':'#c0392b', 12, '600');
+    ctr(g,'ω_A = −ω_B is the only slip-free condition',W/2,H-20,'#6d7177',10);
+  },
+  /* 2/3 — it snaps to the equator and the ring fills antipodally */
+  function(g,W,H,t,S){
+    var cx=W/2, cy=H/2, sc=Math.min(W,H)/3.4, yaw=0.6+t*0.8, pit=0.42, n=3;
+    var pairs=n+1, shown=Math.min(pairs,Math.floor(t*pairs*1.3)+1);
+    g.strokeStyle='rgba(47,90,168,.55)'; g.lineWidth=2; g.beginPath();
+    for(var a=0;a<=72;a++){ var th=a/72*6.2832;
+      var P=proj(Math.cos(th),0,Math.sin(th),yaw,pit,sc,cx,cy);
+      a?g.lineTo(P.x,P.y):g.moveTo(P.x,P.y); }
+    g.stroke();
+    var items=[];
+    for(var i=0;i<shown;i++){
+      var th2=PI*i/pairs;
+      [[Math.cos(th2),Math.sin(th2)],[-Math.cos(th2),-Math.sin(th2)]].forEach(function(d){
+        var p1=proj(d[0]*0.74,0,d[1]*0.74,yaw,pit,sc,cx,cy);
+        var p2=proj(d[0]*1.22,0,d[1]*1.22,yaw,pit,sc,cx,cy);
+        items.push({a:p1,b:p2,d:Math.min(p1.d,p2.d)});
+      });
+    }
+    items.sort(function(a,b){return a.d-b.d;});
+    items.forEach(function(it){
+      g.globalAlpha=it.d<0?0.45:1;
+      g.strokeStyle='#b07430'; g.lineWidth=2.6;
+      g.beginPath(); g.moveTo(it.a.x,it.a.y); g.lineTo(it.b.x,it.b.y); g.stroke();
+      g.fillStyle='#d4a05c'; g.beginPath(); g.arc(it.b.x,it.b.y,3.6,0,6.3); g.fill();
+    });
+    g.globalAlpha=1;
+    ctr(g,'antipodal pairs on a one-dimensional ring',W/2,30,'#6d7177',11);
+    ctr(g,shown+' of '+pairs+' pairs  ·  B(3) = '+B(3)+' seats',W/2,H-20,'#2f5aa8',13,'600');
+  },
+  /* 3/3 — linear vs quadratic: the two forms side by side */
+  function(g,W,H,t,S){
+    var L=W*0.14, Rr=W*0.88, Tp=H*0.24, Bt=H*0.80, nmax=6;
+    var X=function(n){ return L+(n/nmax)*(Rr-L); };
+    var Y=function(v){ return Bt-(v/56)*(Bt-Tp); };
+    g.strokeStyle='rgba(122,113,96,.3)'; g.lineWidth=1;
+    g.beginPath(); g.moveTo(L,Tp); g.lineTo(L,Bt); g.lineTo(Rr,Bt); g.stroke();
+    var upto = t*nmax;
+    g.strokeStyle='#b8422e'; g.lineWidth=2.4; g.beginPath();
+    for(var n=0;n<=nmax;n++){ if(n>upto) break;
+      var x=X(n),y=Y(F(n)); n?g.lineTo(x,y):g.moveTo(x,y); }
+    g.stroke();
+    g.strokeStyle='#2f5aa8'; g.lineWidth=2.4; g.beginPath();
+    var started=false;
+    for(n=3;n<=nmax;n++){ if(n>upto) break;
+      var x2=X(n),y2=Y(B(n)); started?g.lineTo(x2,y2):(g.moveTo(x2,y2),started=true); }
+    g.stroke();
+    for(n=0;n<=nmax;n++){ if(n>upto) break;
+      g.fillStyle='#b8422e'; g.beginPath(); g.arc(X(n),Y(F(n)),3.4,0,6.3); g.fill();
+      if(n>=3){ g.fillStyle='#2f5aa8'; g.beginPath(); g.arc(X(n),Y(B(n)),3.4,0,6.3); g.fill(); } }
+    lab(g,'F(n) — quadratic (a surface)',L,Tp-16,'#b8422e',11);
+    lab(g,'B(n) — linear (a rolling ring)',L,Tp-2,'#2f5aa8',11);
+    ctr(g,'two different shapes of number',W/2,H-16,'#6d7177',11);
+  }
+];
+
+/* ── ACT 3 · the descent ──────────────────────────────────────────────── */
+var SC_DESC = [
+  /* 1/3 — tiers 0..2 fill and close on the surface */
+  function(g,W,H,t,S){
+    var cx=W/2, cy=H/2, sc=Math.min(W,H)/7.4;
+    var upto = t*3;
+    for(var n=0;n<3;n++){
+      if(n>upto) break;
+      var a = Math.min(1, upto-n);
+      g.globalAlpha=a*0.9;
+      g.strokeStyle='#b8422e'; g.lineWidth=1.6;
+      g.beginPath(); g.arc(cx,cy,sc*(1+n*0.62),0,6.3); g.stroke();
+      var cnt=Math.round(F(n)*a);
+      for(var i=0;i<cnt;i++){
+        var th=i/F(n)*6.2832 - 1.2;
+        var rr=sc*(1+n*0.62);
+        g.fillStyle=(i%2)?'#2f5aa8':'#b8422e';
+        g.beginPath(); g.arc(cx+Math.cos(th)*rr, cy+Math.sin(th)*rr*0.62, 3.2,0,6.3); g.fill();
+      }
+    }
+    g.globalAlpha=1;
+    var tot=0; for(n=0;n<=Math.min(2,Math.floor(upto));n++) tot+=F(n);
+    ctr(g,'tiers 0–2 · surface only',W/2,28,'#6d7177',11);
+    ctr(g,'closure '+tot,W/2,H-22,'#6a4c9c',15,'600');
+  },
+  /* 2/3 — at n=3 the belt separates and descends */
+  function(g,W,H,t,S){
+    var cx=W/2, cy=H/2, sc=Math.min(W,H)/7.4, e=ease(t);
+    for(var n=0;n<3;n++){
+      g.strokeStyle='rgba(184,66,46,.35)'; g.lineWidth=1.4;
+      g.beginPath(); g.arc(cx,cy,sc*(1+n*0.62),0,6.3); g.stroke();
+    }
+    var rOut = sc*(1+3*0.62), rIn = sc*(1+2*0.62);
+    var rNow = lerp(rOut, rIn, e);
+    g.strokeStyle='#6a4c9c'; g.lineWidth=2.6; g.globalAlpha=0.9;
+    g.beginPath(); g.ellipse(cx,cy,rNow,rNow*0.30,0,0,6.3); g.stroke();
+    for(var i=0;i<8;i++){
+      var th=i/8*6.2832;
+      g.fillStyle='#b07430';
+      g.beginPath(); g.arc(cx+Math.cos(th)*rNow, cy+Math.sin(th)*rNow*0.30, 4,0,6.3); g.fill();
+    }
+    g.globalAlpha=1;
+    ctr(g, e<0.5?'the belt separates from its tier…':'…and seals the closure below',
+        W/2,28,'#6a4c9c',12,'600');
+    if(e>0.72){ g.globalAlpha=ease((e-0.72)/0.28);
+      ctr(g,'20 + B(3) = 20 + 8 = 28',W/2,H-22,'#6a4c9c',15,'600'); g.globalAlpha=1; }
+  },
+  /* 3/3 — the remaining closures stack: remainder + next belt */
+  function(g,W,H,t,S){
+    var rows=[[3,'+ B(3)','20 + 8',28],[4,'+ R(3)+B(4)','28 + 12 + 10',50],
+              [5,'+ R(4)+B(5)','50 + 20 + 12',82],[6,'+ R(5)+B(6)','82 + 30 + 14',126]];
+    var y0=H*0.26, dy=Math.min(46,H*0.15);
+    ctr(g,'each closure: a surface remainder, and the next belt',W/2,y0-30,'#6d7177',11);
+    rows.forEach(function(r,i){
+      var on=t>i/4.4; if(!on) return;
+      var a=ease((t-i/4.4)*4.4); g.globalAlpha=Math.min(1,a);
+      var y=y0+i*dy;
+      lab(g,r[1],W*0.10,y,'#6a4c9c',11);
+      lab(g,r[2],W*0.38,y,'#8b8578',11);
+      g.textAlign='right'; g.font='600 16px "JetBrains Mono",monospace'; g.fillStyle='#1c1e20';
+      g.fillText(String(r[3]),W*0.90,y); g.textAlign='left';
+    });
+    g.globalAlpha=1;
+  }
+];
+
+/* ── ACT 4 · the schedule ─────────────────────────────────────────────── */
+var SC_SCHED = [
+  /* 1/3 — the ladder builds rung by rung */
+  function(g,W,H,t,S){
+    var n=SCHED.length, shown=Math.min(n, Math.floor(t*n*1.15)+1);
+    var maxC=184, L=W*0.16, Rr=W*0.86, Bt=H*0.86, Tp=H*0.16;
+    for(var i=0;i<shown;i++){
+      var s=SCHED[i], y=Bt-(s.c/maxC)*(Bt-Tp);
+      var a=Math.min(1,(t*n*1.15-i));
+      g.globalAlpha=a;
+      g.strokeStyle=i>6?'#d4a05c':'#b07430'; g.lineWidth=i>6?1.6:2.4;
+      if(i>6) g.setLineDash([4,3]);
+      g.beginPath(); g.moveTo(L,y); g.lineTo(Rr,y); g.stroke(); g.setLineDash([]);
+      g.textAlign='right'; g.font='600 13px "JetBrains Mono",monospace';
+      g.fillStyle=i>6?'#d4a05c':'#1c1e20'; g.fillText(String(s.c),L-8,y+4);
+      g.textAlign='left'; g.font='500 9.5px "JetBrains Mono",monospace'; g.fillStyle='#9a9384';
+      g.fillText(i<=6?('measured '+MEASURED[i]):'predicted', Rr+6>W-40?Rr-70:Rr+6, y+3);
+    }
+    g.globalAlpha=1;
+    ctr(g,'the closure ladder',W/2,24,'#6d7177',11);
+  },
+  /* 2/3 — the arithmetic, row by row */
+  function(g,W,H,t,S){
+    var y0=H*0.18, dy=Math.min(38,H*0.105);
     SCHED.forEach(function(s,i){
-      var meas=i<=6?MEASURED[i]:null;
-      var tr=document.createElement('tr'); if(i>6)tr.className='predrow';
-      tr.innerHTML='<td>'+s.k+'</td><td>'+s.add+(s.belt===3?' <em>belt descends</em>':'')+'</td>'+
+      if(t*8.4 < i) return;
+      var a=Math.min(1,t*8.4-i); g.globalAlpha=a;
+      var y=y0+i*dy;
+      lab(g,'k='+s.k, W*0.07, y, '#9a9384', 10);
+      lab(g,s.math, W*0.20, y, '#6d7177', 11);
+      g.textAlign='right'; g.font='600 14px "JetBrains Mono",monospace';
+      g.fillStyle=i>6?'#d4a05c':'#b07430'; g.fillText(String(s.c), W*0.72, y);
+      g.textAlign='left'; g.font='500 10px "JetBrains Mono",monospace'; g.fillStyle='#9a9384';
+      g.fillText(i<=6?('✓ '+MEASURED[i]):'not observed', W*0.76, y);
+    });
+    g.globalAlpha=1;
+  },
+  /* 3/3 — 184 stands alone */
+  function(g,W,H,t,S){
+    var e=ease(t);
+    g.globalAlpha=Math.min(1,e*1.6);
+    ctr(g,'the same recursion, one step further',W/2,H*0.30,'#6d7177',12);
+    g.font='300 '+Math.round(Math.min(W,H)*0.30)+'px "Source Serif 4",Georgia,serif';
+    g.fillStyle='#b07430'; g.textAlign='center';
+    g.fillText('184', W/2, H*0.62);
+    g.globalAlpha=1;
+    if(e>0.5){ g.globalAlpha=ease((e-0.5)*2);
+      ctr(g,'126 + R(6) + B(7) = 126 + 42 + 16',W/2,H*0.74,'#8b8578',12);
+      ctr(g,'an eighth closure anywhere else refutes the schedule',W/2,H*0.84,'#c0392b',11);
+      g.globalAlpha=1; }
+  }
+];
+
+/* ── ACT 5 · the measured kinks ───────────────────────────────────────── */
+var SC_KINK = [
+  /* 1/3 — the 19 points arrive */
+  function(g,W,H,t,S){
+    var L=W*0.16, Rr=W*0.90, Tp=H*0.18, Bt=H*0.80;
+    var X=function(nt){ return L+(nt/46)*(Rr-L); };
+    var Y=function(v){ return Tp+((0-v)/40)*(Bt-Tp); };
+    g.strokeStyle='rgba(122,113,96,.3)'; g.lineWidth=1;
+    g.beginPath(); g.moveTo(L,Tp); g.lineTo(L,Bt); g.lineTo(Rr,Bt); g.stroke();
+    g.strokeStyle='rgba(30,122,79,.3)'; g.setLineDash([4,3]);
+    g.beginPath(); g.moveTo(L,Y(0.78)); g.lineTo(Rr,Y(0.78)); g.stroke(); g.setLineDash([]);
+    lab(g,'background field  +0.78 ± 20.05',L+4,Y(0.78)-5,'rgba(30,122,79,.85)',9);
+    var all=[]; KINK.forEach(function(ln){ ln.m.forEach(function(p){ all.push([ln.N,p]); }); });
+    var shown=Math.floor(t*all.length*1.1);
+    all.forEach(function(e,i){
+      if(i>shown) return;
+      var c = e[0]===28?'#8a6d1f':e[0]===50?'#a4552e':e[0]===82?'#2f5aa8':'#7a7265';
+      g.fillStyle=c; g.beginPath(); g.arc(X(e[1][1]),Y(e[1][2]),3.6,0,6.3); g.fill();
+      g.strokeStyle='#fffdf8'; g.lineWidth=1; g.stroke();
+    });
+    ctr(g,'every computable closure kink · '+Math.min(shown+1,all.length)+' of '+all.length,
+        W/2,H-16,'#6d7177',11);
+    lab(g,'milli-fm',L-4,Tp-8,'#9a9384',9);
+  },
+  /* 2/3 — flat vs proportional, per isotone */
+  function(g,W,H,t,S){
+    var L=W*0.16, Rr=W*0.90, Tp=H*0.18, Bt=H*0.80;
+    var X=function(nt){ return L+(nt/46)*(Rr-L); };
+    var Y=function(v){ return Tp+((0-v)/40)*(Bt-Tp); };
+    g.strokeStyle='rgba(122,113,96,.3)'; g.lineWidth=1;
+    g.beginPath(); g.moveTo(L,Tp); g.lineTo(L,Bt); g.lineTo(Rr,Bt); g.stroke();
+    KINK.forEach(function(ln){
+      if(ln.m.length<2) return;
+      var ts=ln.m.map(function(p){return p[1];});
+      var t0=Math.min.apply(null,ts), t1=Math.max.apply(null,ts);
+      var tbar=ts.reduce(function(a,b){return a+b;},0)/ts.length;
+      var c = ln.N===28?'#8a6d1f':ln.N===50?'#a4552e':'#2f5aa8';
+      g.setLineDash([3,3]); g.strokeStyle='rgba(192,57,43,'+(0.25+0.6*ease(t))+')';
+      g.lineWidth=1.4; g.beginPath();
+      g.moveTo(X(t0),Y(ln.mean*t0/tbar)); g.lineTo(X(t1),Y(ln.mean*t1/tbar)); g.stroke();
+      g.setLineDash([]);
+      g.strokeStyle=c; g.lineWidth=2.6; g.beginPath();
+      g.moveTo(X(t0),Y(ln.mean)); g.lineTo(X(t1),Y(ln.mean)); g.stroke();
+      ln.m.forEach(function(p){ g.fillStyle=c;
+        g.beginPath(); g.arc(X(p[1]),Y(p[2]),3.4,0,6.3); g.fill(); });
+      g.font='600 10px "JetBrains Mono",monospace'; g.fillStyle=c; g.textAlign='left';
+      g.fillText('N='+ln.N, X(t1)+6, Y(ln.mean)+3);
+    });
+    lab(g,'— measured: flat',L+4,Bt-16,'#8a6d1f',10);
+    lab(g,'-- required if occupants compacted',L+4,Bt-4,'rgba(192,57,43,.85)',10);
+    ctr(g,'constant beats proportional on every adjudicable isotone',W/2,H-16,'#14807a',11,'600');
+  },
+  /* 3/3 — the RMS verdict per isotone */
+  function(g,W,H,t,S){
+    var rows=KINK.filter(function(l){return l.rc!==null;});
+    var y0=H*0.30, dy=Math.min(58,H*0.19);
+    ctr(g,'pre-registered criterion: RMS constant < RMS proportional',W/2,y0-40,'#6d7177',11);
+    rows.forEach(function(ln,i){
+      if(t*3.4<i) return;
+      var a=Math.min(1,t*3.4-i); g.globalAlpha=a;
+      var y=y0+i*dy, c = ln.N===28?'#8a6d1f':ln.N===50?'#a4552e':'#2f5aa8';
+      g.font='600 14px "JetBrains Mono",monospace'; g.fillStyle=c; g.textAlign='left';
+      g.fillText('N = '+ln.N, W*0.10, y);
+      g.font='500 11px "JetBrains Mono",monospace'; g.fillStyle='#6d7177';
+      g.fillText('const '+ln.rc.toFixed(1), W*0.34, y);
+      g.fillText('prop '+ln.rp.toFixed(1), W*0.56, y);
+      g.font='600 11px "JetBrains Mono",monospace'; g.fillStyle='#1e7a4f';
+      g.fillText('constant', W*0.76, y);
+      g.globalAlpha=a*0.5; g.strokeStyle='#c9c3b4'; g.lineWidth=1;
+      g.beginPath(); g.moveTo(W*0.10,y+12); g.lineTo(W*0.90,y+12); g.stroke();
+    });
+    g.globalAlpha=1;
+    if(t>0.8){ g.globalAlpha=ease((t-0.8)*5);
+      ctr(g,'19/19 kinks negative · grip peaks at N = 28',W/2,H-22,'#14807a',12,'600');
+      g.globalAlpha=1; }
+  }
+];
+
+/* ── ACT 6 · scope ────────────────────────────────────────────────────── */
+var SC_SCOPE = [
+  /* 1/3 — the two accounts counting the same objects */
+  function(g,W,H,t,S){
+    var e=ease(t), cx=W/2, cy=H*0.46, r=Math.min(W,H)*0.19, sep=lerp(0,r*0.92,e);
+    g.strokeStyle='#8a8478'; g.lineWidth=2;
+    g.beginPath(); g.arc(cx-sep,cy,r,0,6.3); g.stroke();
+    g.beginPath(); g.arc(cx+sep,cy,r,0,6.3); g.stroke();
+    ctr(g,'this construction',cx-sep,cy-r-12,'#8a8478',10);
+    ctr(g,'the prevailing account',cx+sep,cy-r-12,'#8a8478',10);
+    g.globalAlpha=0.16; g.fillStyle='#8a8478';
+    g.beginPath(); g.arc(cx-sep,cy,r,0,6.3); g.fill();
+    g.beginPath(); g.arc(cx+sep,cy,r,0,6.3); g.fill();
+    g.globalAlpha=1;
+    ctr(g,'F(n) ≡ oscillator degeneracy',cx,cy+r+26,'#4a463f',11);
+    ctr(g,'B(n) ≡ intruder capacity',cx,cy+r+42,'#4a463f',11);
+    if(e>0.6){ g.globalAlpha=ease((e-0.6)*2.5);
+      ctr(g,'at sequence level: not discriminable',cx,H-24,'#8a8478',12,'600'); g.globalAlpha=1; }
+  },
+  /* 2/3 — what is NOT shared */
+  function(g,W,H,t,S){
+    var e=ease(t);
+    ctr(g,'what is not shared',W/2,H*0.22,'#6d7177',11);
+    var items=[['bipartite doubling','p-face / n-face — like never gears like'],
+               ['rolling equator','slip-free at one latitude only'],
+               ['spin–orbit coupling','absent from the namespace entirely']];
+    items.forEach(function(it,i){
+      if(e*3.2<i) return;
+      var a=Math.min(1,e*3.2-i); g.globalAlpha=a;
+      var y=H*0.38+i*Math.min(56,H*0.17);
+      g.font='600 14px "Source Serif 4",Georgia,serif'; g.fillStyle=i===2?'#c0392b':'#1c1e20';
+      g.textAlign='center'; g.fillText(it[0],W/2,y);
+      g.font='500 10.5px "JetBrains Mono",monospace'; g.fillStyle='#8b8578';
+      g.fillText(it[1],W/2,y+17);
+    });
+    g.globalAlpha=1;
+  },
+  /* 3/3 — the residual ledger */
+  function(g,W,H,t,S){
+    var e=ease(t);
+    ctr(g,'the residual ledger',W/2,H*0.20,'#6d7177',11);
+    var rows=[['capacities F(n), B(n)','DERIVED','#1e7a4f'],
+              ['descent onset n = 3','READ from data','#c0392b'],
+              ['closure(7) = 184','PREDICTED — exposure','#b07430'],
+              ['staggering direction','shared with pairing','#8a8478']];
+    rows.forEach(function(r,i){
+      if(e*4.4<i) return;
+      var a=Math.min(1,e*4.4-i); g.globalAlpha=a;
+      var y=H*0.34+i*Math.min(46,H*0.145);
+      g.font='500 12px "JetBrains Mono",monospace'; g.fillStyle='#4a463f'; g.textAlign='left';
+      g.fillText(r[0],W*0.10,y);
+      g.font='600 11px "JetBrains Mono",monospace'; g.fillStyle=r[2]; g.textAlign='right';
+      g.fillText(r[1],W*0.90,y);
+    });
+    g.globalAlpha=1;
+  }
+];
+
+var SCENE = {tier:SC_TIER, belt:SC_BELT, desc:SC_DESC, sched:SC_SCHED,
+             kink:SC_KINK, scope:SC_SCOPE};
+var CAPS = {
+  tier:['the triangular layer grows — T(n+1) seats',
+        'every seat splits: one p-face, one n-face',
+        'the first form accumulates — 2, 8, 20'],
+  belt:['a radial rod tried at every latitude — it grinds',
+        'on the equator it rolls; the ring fills antipodally',
+        'quadratic against linear — two shapes of number'],
+  desc:['tiers 0–2 fill and close on the surface',
+        'at n = 3 the belt separates and descends',
+        'remainder plus next belt — 50, 82, 126'],
+  sched:['the closure ladder builds rung by rung',
+         'the arithmetic, evaluated live from the two forms',
+         'one step further than the measured list'],
+  kink:['nineteen measured kinks arrive',
+        'flat against the occupancy-proportional requirement',
+        'the pre-registered RMS verdict, per isotone'],
+  scope:['both accounts count the same objects',
+         'what is not shared between them',
+         'the residual ledger']
+};
+
+/* background motifs — one per act theme */
+var MOTIF = {
+  tier: function(g,W,H,off,al,c){ g.globalAlpha=al; g.strokeStyle=c; g.lineWidth=1;
+    for(var r=0;r<7;r++) for(var i=0;i<=r;i++){
+      var x=W*0.5+(i-r/2)*46, y=120+r*40-((off*0.05)%40);
+      g.beginPath(); g.arc(x,y,13,0,6.3); g.stroke(); }
+    g.globalAlpha=1; },
+  belt: function(g,W,H,off,al,c){ g.globalAlpha=al; g.strokeStyle=c; g.lineWidth=1;
+    for(var i=0;i<6;i++){ var yy=H*0.5+(i-2.5)*54;
+      g.beginPath(); g.ellipse(W*0.5,yy,W*0.36,18,0,0,6.3); g.stroke(); }
+    g.globalAlpha=1; },
+  desc: function(g,W,H,off,al,c){ g.globalAlpha=al; g.strokeStyle=c; g.lineWidth=1;
+    for(var i=0;i<9;i++){ var rr=60+i*54;
+      g.beginPath(); g.ellipse(W*0.5,H*0.5,rr,rr*0.3,0,0,6.3); g.stroke(); }
+    g.globalAlpha=1; },
+  sched: function(g,W,H,off,al,c){ g.globalAlpha=al; g.strokeStyle=c; g.lineWidth=1;
+    for(var i=0;i<12;i++){ var y=90+i*62-((off*0.04)%62);
+      g.beginPath(); g.moveTo(W*0.12,y); g.lineTo(W*0.88,y); g.stroke(); }
+    g.globalAlpha=1; },
+  data: function(g,W,H,off,al,c){ g.globalAlpha=al; g.fillStyle=c;
+    for(var i=0;i<80;i++){ var x=(i*137.5)%W, y=(i*89.3+off*0.05)%H;
+      g.beginPath(); g.arc(x,y,2.4,0,6.3); g.fill(); }
+    g.globalAlpha=1; },
+  scope: function(g,W,H,off,al,c){ g.globalAlpha=al; g.strokeStyle=c; g.lineWidth=1;
+    for(var i=0;i<8;i++){ var x=W*0.5+(i-3.5)*70;
+      g.beginPath(); g.moveTo(x,60); g.lineTo(x,H-60); g.stroke(); }
+    g.globalAlpha=1; },
+  sdt: function(g,W,H,off,al,c){ g.globalAlpha=al; g.strokeStyle=c; g.lineWidth=1;
+    for(var i=0;i<7;i++){ var rr=70+i*70;
+      g.beginPath(); g.arc(W*0.5,H*0.42,rr,0,6.3); g.stroke(); }
+    g.globalAlpha=1; }
+};
+
+/* sigils — a compact glyph per act */
+var SIGIL = {
+  tier: function(g){ for(var r=0;r<3;r++) for(var i=0;i<=r;i++){
+      g.beginPath(); g.arc(32+(i-r/2)*14, 18+r*14, 4.4, 0, 6.3); g.fill(); } },
+  belt: function(g){ g.beginPath(); g.ellipse(32,32,20,7,0,0,6.3); g.stroke();
+    for(var i=0;i<4;i++){ var th=PI*i/4;
+      g.beginPath(); g.moveTo(32+Math.cos(th)*13,32+Math.sin(th)*4.5);
+      g.lineTo(32+Math.cos(th)*26,32+Math.sin(th)*9); g.stroke();
+      g.beginPath(); g.moveTo(32-Math.cos(th)*13,32-Math.sin(th)*4.5);
+      g.lineTo(32-Math.cos(th)*26,32-Math.sin(th)*9); g.stroke(); } },
+  desc: function(g){ for(var i=0;i<3;i++){ g.beginPath();
+      g.ellipse(32,32,10+i*8,(10+i*8)*0.32,0,0,6.3); g.stroke(); }
+    g.beginPath(); g.moveTo(32,10); g.lineTo(32,26); g.stroke();
+    g.beginPath(); g.moveTo(28,21); g.lineTo(32,26); g.lineTo(36,21); g.stroke(); },
+  sched: function(g){ for(var i=0;i<6;i++){ var y=12+i*8;
+      g.beginPath(); g.moveTo(12,y); g.lineTo(12+(i+1)*6.5,y); g.stroke(); } },
+  data: function(g){ var pts=[[14,44],[24,38],[34,36],[44,34],[52,33]];
+    g.beginPath(); pts.forEach(function(p,i){ i?g.lineTo(p[0],p[1]):g.moveTo(p[0],p[1]); });
+    g.stroke(); pts.forEach(function(p){ g.beginPath(); g.arc(p[0],p[1],2.6,0,6.3); g.fill(); }); },
+  scope: function(g){ g.beginPath(); g.arc(24,32,13,0,6.3); g.stroke();
+    g.beginPath(); g.arc(40,32,13,0,6.3); g.stroke(); }
+};
+</script>
+
+<script>
+/* ══════════════════════════════════════════════════════════════════════════
+   THE ENGINE — one rAF loop; every layer reads a smoothed scroll at its depth.
+   ══════════════════════════════════════════════════════════════════════════ */
+(function () {
+  /* tables built from the same evaluated forms the scenes use */
+  (function(){
+    var tb=$('#schedTable tbody');
+    SCHED.forEach(function(s,i){
+      var meas=i<=6?MEASURED[i]:null, tr=document.createElement('tr');
+      if(i>6) tr.className='predrow';
+      tr.innerHTML='<td>'+s.k+'</td><td>'+s.add+(s.belt===3?' <em>descends</em>':'')+'</td>'+
         '<td>'+s.math+'</td><td class="hit">'+s.c+'</td>'+
-        '<td>'+(meas!==null?meas+' ✓':'— not yet observed')+'</td>'+
-        '<td class="'+(meas!==null?'ok':'')+'">'+(meas!==null?(s.c-meas===0?'0':String(s.c-meas)):'—')+'</td>';
+        '<td>'+(meas!==null?meas+' ✓':'— not observed')+'</td>'+
+        '<td>'+(meas!==null?(s.c-meas):'—')+'</td>';
       tb.appendChild(tr);
     });
-  })();
-  (function(){
-    var tb=document.querySelector('#kinkTable tbody'); if(!tb)return;
+    var kb=$('#kinkTable tbody');
     KINK.forEach(function(L){
-      var mem=L.members.length?L.members.map(function(m){
-        return 'Z='+m[0]+' ('+m[1]+') '+m[2].toFixed(1); }).join(' · ') : '—';
+      var mem=L.m.length?L.m.map(function(p){return 'Z'+p[0]+'('+p[1]+') '+p[2].toFixed(1);}).join(' · '):'—';
       var tr=document.createElement('tr');
-      tr.innerHTML='<td class="hit">N = '+L.N+'</td><td>'+L.members.length+'</td>'+
+      tr.innerHTML='<td class="hit">N='+L.N+'</td><td>'+L.m.length+'</td>'+
         '<td style="white-space:normal">'+mem+'</td>'+
         '<td class="neg">'+(L.mean!==null?L.mean.toFixed(1):'—')+'</td>'+
         '<td>'+(L.rc!==null?L.rc.toFixed(1):'—')+'</td>'+
-        '<td>'+(L.rp!==null?L.rp.toFixed(1):'—')+'</td>'+
-        '<td class="'+(L.out==='constant'?'ok':'')+'">'+L.out+'</td>';
-      tb.appendChild(tr);
+        '<td>'+(L.rp!==null?L.rp.toFixed(1):'—')+'</td><td>'+L.out+'</td>';
+      kb.appendChild(tr);
     });
-    var n=KINK.reduce(function(a,L){return a+L.members.length;},0);
-    var tr=document.createElement('tr'); tr.className='sum';
-    tr.innerHTML='<td colspan="2">all computable</td><td>'+n+' kinks · 19/19 negative</td>'+
-      '<td colspan="4">background field 338 kinks: mean +0.78, σ 20.05</td>';
-    tb.appendChild(tr);
   })();
 
-  /* ══ 1. shell engine ══ */
-  (function(){
-    var cv=document.getElementById('shellCanvas'); if(!cv)return;
-    var st={yaw:.6,pitch:.42,step:0,spin:true};
-    function tierSeats(n){
-      var rows=n+1,pts=[],r=1+n*.42;
-      for(var i=0;i<rows;i++)for(var j=0;j<=i;j++){
-        var u=(j-i/2)*.52,v=(i-(rows-1)/2)*.46,L=Math.sqrt(1+u*u+v*v);
-        pts.push({x:u/L*r,y:v/L*r,z:1/L*r});
-      }
-      var out=[],rots=[0,Math.PI/2,Math.PI,3*Math.PI/2];
-      for(var q=0;q<4;q++){var a=rots[q];
-        for(var p=0;p<pts.length;p++){var P=pts[p];
-          out.push({x:P.x*Math.cos(a)-P.z*Math.sin(a),y:P.y,z:P.x*Math.sin(a)+P.z*Math.cos(a)});}}
-      return out.slice(0,T(rows));
-    }
-    function beltRods(n){
-      var pairs=n+1,out=[],r=1+(n-1)*.42;
-      for(var i=0;i<pairs;i++){var th=Math.PI*i/pairs;
-        out.push({x:Math.cos(th)*r,z:Math.sin(th)*r});
-        out.push({x:-Math.cos(th)*r,z:-Math.sin(th)*r});}
-      return out;
-    }
-    function draw(){
-      var f=fit(cv),g=f.g,W=f.w,H=f.h; g.clearRect(0,0,W,H);
-      var cx=W/2,cy=H/2+6,scale=Math.min(W,H)/6.4,s=SCHED[st.step];
-      g.strokeStyle='rgba(138,109,31,0.13)';g.lineWidth=1;
-      for(var q=1;q<=3;q++){g.beginPath();
-        for(var a=0;a<=64;a++){var t=a/64*6.2832,rr=1+(q-1)*.84;
-          var P=proj(Math.cos(t)*rr,0,Math.sin(t)*rr,st.yaw,st.pitch,scale,cx,cy);
-          a?g.lineTo(P.x,P.y):g.moveTo(P.x,P.y);} g.stroke();}
-      var items=[],n,i,j;
-      for(n=0;n<=Math.min(st.step,6);n++){
-        var seats=tierSeats(n);
-        for(i=0;i<seats.length;i++){var S=seats[i];
-          var inn=proj(S.x*.86,S.y*.86,S.z*.86,st.yaw,st.pitch,scale,cx,cy);
-          var ou=proj(S.x*1.14,S.y*1.14,S.z*1.14,st.yaw,st.pitch,scale,cx,cy);
-          items.push({d:Math.min(inn.d,ou.d),kind:'rod',a:inn,b:ou});}}
-      for(var k=3;k<=st.step;k++){
-        var bn=SCHED[k].belt; if(bn==null)continue;
-        var rods=beltRods(bn);
-        for(j=0;j<rods.length;j++){var Rr=rods[j];
-          var p1=proj(Rr.x*.80,0,Rr.z*.80,st.yaw,st.pitch,scale,cx,cy);
-          var p2=proj(Rr.x*1.18,0,Rr.z*1.18,st.yaw,st.pitch,scale,cx,cy);
-          items.push({d:Math.min(p1.d,p2.d),kind:'belt',a:p1,b:p2});}}
-      items.sort(function(A,Bb){return A.d-Bb.d;});
-      for(var m=0;m<items.length;m++){var it=items[m],al=it.d<0?.42:1;
-        if(it.kind==='rod'){
-          g.globalAlpha=al*.55;g.strokeStyle='#8b8578';g.lineWidth=1.4;
-          g.beginPath();g.moveTo(it.a.x,it.a.y);g.lineTo(it.b.x,it.b.y);g.stroke();
-          g.globalAlpha=al;
-          g.fillStyle=NC;g.beginPath();g.arc(it.a.x,it.a.y,3.1,0,6.3);g.fill();
-          g.fillStyle=PC;g.beginPath();g.arc(it.b.x,it.b.y,3.4,0,6.3);g.fill();
-        }else{
-          g.globalAlpha=al;g.strokeStyle=GC;g.lineWidth=2.6;
-          g.beginPath();g.moveTo(it.a.x,it.a.y);g.lineTo(it.b.x,it.b.y);g.stroke();
-          g.fillStyle=GL;g.beginPath();g.arc(it.b.x,it.b.y,3.0,0,6.3);g.fill();}}
-      g.globalAlpha=1;
-      g.font='600 30px "Source Serif 4",Georgia,serif';g.fillStyle=GC;g.textAlign='center';
-      g.fillText(String(s.c),cx,H-16);
-      g.font='500 9.5px "JetBrains Mono",monospace';g.fillStyle='#9a9384';
-      g.fillText(st.step<=6?'CLOSURE · MEASURED '+MEASURED[st.step]:'CLOSURE · PREDICTED · NOT OBSERVED',cx,H-4);
-    }
-    var rung=document.getElementById('rungs');
-    SCHED.forEach(function(s,i){
-      var b=document.createElement('div');
-      b.className='rung'+(i>6?' pred':'')+(i===0?' on':'');
-      b.textContent=s.c;b.setAttribute('role','button');b.tabIndex=0;
-      b.onclick=function(){setStep(i);};
-      b.onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();setStep(i);}};
-      rung.appendChild(b);
-    });
-    function setStep(i){
-      st.step=i; var rs=rung.children;
-      for(var q=0;q<rs.length;q++)rs[q].className='rung'+(q>6?' pred':'')+(q===i?' on':'');
-      var s=SCHED[i],n=s.tier;
-      document.getElementById('tN').textContent=n;
-      document.getElementById('tT').textContent=T(n+1);
-      document.getElementById('tF').textContent=F(n);
-      document.getElementById('tB').textContent=s.belt!=null?B(s.belt):'—';
-      document.getElementById('tR').textContent=i>=4?R(i-1):'—';
-      document.getElementById('tC').textContent=s.c;
-      document.getElementById('tM').textContent=i<=6?MEASURED[i]:'—';
-      document.getElementById('tEq').innerHTML='closure('+i+') = '+s.math+' = <b>'+s.c+'</b>'+
-        (i>6?' · predicted, not yet observed':' · measured '+MEASURED[i]+' ✓');
-      draw();
-    }
-    drag(cv,function(dx,dy){st.spin=false;st.yaw+=dx*.011;
-      st.pitch=Math.max(-1.2,Math.min(1.2,st.pitch+dy*.008));draw();});
-    window.addEventListener('resize',draw);
-    (function tick(){if(st.spin){st.yaw+=.0026;draw();}requestAnimationFrame(tick);})();
-    setStep(0);
-  })();
+  var acts  = $$('.act, .hero');
+  var fades = $$('[data-fade]');
+  var field = $('#field'), fg = field.getContext('2d');
+  var scenes = $$('[data-scene]').map(function (cv) {
+    return { cv: cv, g: cv.getContext('2d'), k: cv.getAttribute('data-scene'),
+             act: cv.closest('.act'), S: {}, seg: -1,
+             capEl: cv.parentNode.querySelector('figcaption') };
+  });
+  var dpr = Math.min(devicePixelRatio || 1, 2);
+  var vh = innerHeight, docH = 1, smooth = 0, last = 0;
+  function motionOff(){ return document.documentElement.getAttribute('data-sdt-motion')==='off'; }
 
-  /* ══ 2. triangular doubling ══ */
-  (function(){
-    var cv=document.getElementById('triCanvas'); if(!cv)return;
-    var st={yaw:.5,pitch:.34,split:.15,n:3};
-    function draw(){
-      var f=fit(cv),g=f.g,W=f.w,H=f.h; g.clearRect(0,0,W,H);
-      var cx=W/2,cy=H/2+4,scale=Math.min(W,H)/5.0,rows=st.n+1,seats=[];
-      for(var i=0;i<rows;i++)for(var j=0;j<=i;j++)
-        seats.push({x:(j-i/2)*.62,z:(i-(rows-1)/2)*.56});
-      var items=[];
-      for(var s=0;s<seats.length;s++){var S=seats[s];
-        items.push({a:proj(S.x,-st.split,S.z,st.yaw,st.pitch,scale,cx,cy),
-                    b:proj(S.x, st.split,S.z,st.yaw,st.pitch,scale,cx,cy)});
-        items[items.length-1].d=Math.min(items[items.length-1].a.d,items[items.length-1].b.d);}
-      items.sort(function(A,Bb){return A.d-Bb.d;});
-      for(var m=0;m<items.length;m++){var it=items[m],al=it.d<0?.45:1;
-        g.globalAlpha=al*.5;g.strokeStyle='#8b8578';g.lineWidth=1.2;
-        g.beginPath();g.moveTo(it.a.x,it.a.y);g.lineTo(it.b.x,it.b.y);g.stroke();
-        g.globalAlpha=al;
-        g.fillStyle=NC;g.beginPath();g.arc(it.a.x,it.a.y,4.2,0,6.3);g.fill();
-        g.fillStyle=PC;g.beginPath();g.arc(it.b.x,it.b.y,4.6,0,6.3);g.fill();}
-      g.globalAlpha=1;
-      g.font='500 11px "JetBrains Mono",monospace';g.textAlign='left';g.fillStyle='#6d7177';
-      g.fillText('n = '+st.n+'   T('+(st.n+1)+') = '+T(st.n+1)+' seats',12,18);
-      g.fillStyle=PC;g.fillText('p-faces  '+T(st.n+1),12,34);
-      g.fillStyle=NC;g.fillText('n-faces  '+T(st.n+1),12,50);
-      g.fillStyle=GC;g.font='600 13px "JetBrains Mono",monospace';
-      g.fillText('F('+st.n+') = 2·'+T(st.n+1)+' = '+F(st.n),12,72);
-      g.textAlign='right';g.font='500 9.5px "JetBrains Mono",monospace';g.fillStyle='#9a9384';
-      g.fillText('drag ↕ split · ↔ turn · click to grow',W-12,H-10);
+  function sizeCanvas(cv){
+    var r=cv.getBoundingClientRect(); if(!r.width||!r.height) return false;
+    var W=Math.round(r.width*dpr), H=Math.round(r.height*dpr);
+    if(cv.width!==W||cv.height!==H){ cv.width=W; cv.height=H; }
+    cv._w=r.width; cv._h=r.height; return true;
+  }
+  function layout(){
+    vh=innerHeight; docH=Math.max(1,document.documentElement.scrollHeight-vh);
+    acts.forEach(function(a){ a._t=a.offsetTop; a._h=a.offsetHeight; });
+    fades.forEach(function(f){ var r=f.getBoundingClientRect(); f._t=r.top+scrollY; f._h=r.height; });
+    field.width=Math.round(innerWidth*dpr); field.height=Math.round(vh*dpr);
+    field.style.width=innerWidth+'px'; field.style.height=vh+'px';
+    scenes.forEach(function(s){ sizeCanvas(s.cv); });
+  }
+
+  /* sigils */
+  $$('.sigil').forEach(function(cv){
+    var k=cv.getAttribute('data-sigil'), fn=SIGIL[k]; if(!fn) return;
+    var g=cv.getContext('2d'); g.setTransform(dpr,0,0,dpr,0,0);
+    cv.width=64*dpr; cv.height=64*dpr; g.setTransform(dpr,0,0,dpr,0,0);
+    g.strokeStyle=COL[k]||COL.sdt; g.fillStyle=COL[k]||COL.sdt;
+    g.lineWidth=1.4; g.lineCap='round'; g.lineJoin='round'; fn(g);
+  });
+
+  /* drive bar */
+  var ticksHost=$('#ticks'), ticks=[];
+  acts.forEach(function(a,i){
+    var k=a.getAttribute('data-act')||'', b=document.createElement('button');
+    b.className='tick'; b.type='button';
+    b.style.setProperty('--tc', COL[a.getAttribute('data-th')||'sdt']||COL.sdt);
+    b.innerHTML='<b>'+(ACTNAME[k]||k)+'</b><i></i>';
+    b.addEventListener('click',function(){ tween={a:scrollY,b:a._t-vh*0.10,t0:performance.now(),ms:700}; });
+    ticksHost.appendChild(b); ticks.push(b);
+  });
+  var driving=false, speed=1, carry=0, tween=null;
+  var playBtn=$('#playBtn'), spdBtn=$('#spdBtn'), pctEl=$('#pct');
+  function stopDrive(){ driving=false; playBtn.setAttribute('aria-pressed','false'); playBtn.textContent='play'; }
+  playBtn.addEventListener('click',function(){
+    driving=!driving; playBtn.setAttribute('aria-pressed',driving?'true':'false');
+    playBtn.textContent=driving?'pause':'play';
+  });
+  spdBtn.addEventListener('click',function(){
+    speed = speed===1?2:speed===2?0.5:1; spdBtn.textContent=speed+'×';
+  });
+  addEventListener('wheel',stopDrive,{passive:true});
+  addEventListener('touchstart',stopDrive,{passive:true});
+
+  function frame(now){
+    var dt=Math.min(0.05,(now-last)/1000||0.016); last=now;
+    var off=motionOff();
+    if(tween){
+      var u=Math.min(1,(now-tween.t0)/tween.ms);
+      var e=u<0.5?4*u*u*u:1-Math.pow(-2*u+2,3)/2;
+      scrollTo(0,tween.a+(tween.b-tween.a)*e);
+      if(u>=1) tween=null;
+    } else if(driving){
+      carry += 58*speed*dt;
+      var step=Math.floor(carry); carry-=step;
+      if(step){ if(scrollY>=docH-2) stopDrive(); else scrollBy(0,step); }
     }
-    drag(cv,function(dx,dy){st.yaw+=dx*.012;
-      st.split=Math.max(.05,Math.min(.95,st.split-dy*.006));draw();});
-    cv.addEventListener('click',function(){st.n=(st.n+1)%7;draw();});
-    window.addEventListener('resize',draw);draw();
-  })();
+    var y=scrollY;
+    smooth += (y-smooth)*(off?1:0.13);
+    if(Math.abs(y-smooth)<0.06) smooth=y;
 
-  /* ══ 3. rolling equator ══ */
-  (function(){
-    var cv=document.getElementById('beltCanvas'); if(!cv)return;
-    var st={yaw:.55,pitch:.40,lat:0,drag:false,n:4,phase:0};
-    function draw(){
-      var f=fit(cv),g=f.g,W=f.w,H=f.h; g.clearRect(0,0,W,H);
-      var cx=W/2,cy=H/2,scale=Math.min(W,H)/4.6;
-      for(var q=-2;q<=2;q++){
-        var lat=q*.42,rr=Math.cos(lat);
-        g.strokeStyle=(q===0)?'rgba(138,109,31,0.55)':'rgba(122,113,96,0.16)';
-        g.lineWidth=(q===0)?2:1; g.beginPath();
-        for(var a=0;a<=72;a++){var t=a/72*6.2832;
-          var P=proj(Math.cos(t)*rr,Math.sin(lat),Math.sin(t)*rr,st.yaw,st.pitch,scale,cx,cy);
-          a?g.lineTo(P.x,P.y):g.moveTo(P.x,P.y);} g.stroke();}
-      var pairs=st.n+1,onBand=Math.abs(st.lat)<.10,rods=[];
-      for(var i=0;i<pairs;i++){var th=Math.PI*i/pairs+st.phase;
-        rods.push([Math.cos(th),Math.sin(th)]);rods.push([-Math.cos(th),-Math.sin(th)]);}
-      var items=[];
-      for(var j=0;j<rods.length;j++){
-        var held=(j===0),lat2=held?st.lat:0,rr2=Math.cos(lat2);
-        var dx=rods[j][0]*rr2,dz=rods[j][1]*rr2,dy=Math.sin(lat2);
-        var p1=proj(dx*.74,dy*.74,dz*.74,st.yaw,st.pitch,scale,cx,cy);
-        var p2=proj(dx*1.22,dy*1.22,dz*1.22,st.yaw,st.pitch,scale,cx,cy);
-        items.push({d:Math.min(p1.d,p2.d),a:p1,b:p2,held:held,bad:held&&!onBand});}
-      items.sort(function(A,Bb){return A.d-Bb.d;});
-      for(var m=0;m<items.length;m++){var it=items[m],al=it.d<0?.42:1;
-        g.globalAlpha=al;
-        g.strokeStyle=it.bad?BAD:(it.held?GL:GC);g.lineWidth=it.held?3.4:2.4;
-        g.beginPath();g.moveTo(it.a.x,it.a.y);g.lineTo(it.b.x,it.b.y);g.stroke();
-        g.fillStyle=it.bad?BAD:GL;g.beginPath();g.arc(it.b.x,it.b.y,it.held?4.4:3.0,0,6.3);g.fill();
-        g.fillStyle=NC;g.beginPath();g.arc(it.a.x,it.a.y,it.held?3.4:2.4,0,6.3);g.fill();}
-      g.globalAlpha=1;
-      g.font='500 11px "JetBrains Mono",monospace';g.textAlign='left';
-      if(onBand){g.fillStyle=GC;g.fillText('ON THE EQUATOR — rolls, relative slip = 0',12,20);}
-      else{g.fillStyle=BAD;g.fillText('OFF-BAND — contact slips: forbidden (ω_A ≠ −ω_B)',12,20);}
-      g.fillStyle='#6d7177';
-      g.fillText('belt n = '+st.n+'   pairs '+(st.n+1)+'   B('+st.n+') = '+B(st.n)+'   R('+st.n+') = '+R(st.n),12,38);
-      g.textAlign='right';g.font='500 9.5px "JetBrains Mono",monospace';g.fillStyle='#9a9384';
-      g.fillText('drag the bright rod off the equator · click on-band to change belt',W-12,H-10);
+    for(var i=0;i<fades.length;i++){
+      var f=fades[i]; if(f._t==null) continue;
+      var span=Math.min(f._h+180, vh*0.55);
+      var p=(y+vh-90-f._t)/span; p=p<0?0:p>1?1:p;
+      f.style.setProperty('--in',p.toFixed(3));
     }
-    drag(cv,function(dx,dy){st.drag=true;
-      st.lat=Math.max(-.75,Math.min(.75,st.lat-dy*.006));st.yaw+=dx*.010;draw();},
-      function(){st.drag=false;});
-    cv.addEventListener('click',function(){if(Math.abs(st.lat)<.02){st.n=3+((st.n-3+1)%5);draw();}});
-    window.addEventListener('resize',draw);
-    (function tick(){
-      if(!st.drag&&Math.abs(st.lat)>.001){st.lat*=.86;if(Math.abs(st.lat)<.002)st.lat=0;draw();}
-      else if(Math.abs(st.lat)<.10){st.phase+=.004;draw();}
-      requestAnimationFrame(tick);})();
-    draw();
-  })();
 
-  /* ══ 4. the 19 measured kinks ══ */
-  (function(){
-    var cv=document.getElementById('kinkCanvas'); if(!cv)return;
-    var hot=null;
-    var COL={8:'#9a9384',20:'#7a7265',28:'#8a6d1f',50:'#a4552e',82:'#2f5aa8',126:'#7a7265'};
-    function draw(){
-      var f=fit(cv),g=f.g,W=f.w,H=f.h; g.clearRect(0,0,W,H);
-      var L=54,Rr=W-16,Tp=24,Bt=H-34;
-      var maxT=46, minK=-40;
-      var X=function(t){return L+(t/maxT)*(Rr-L);};
-      var Y=function(v){return Tp+((0-v)/(0-minK))*(Bt-Tp);};
-      g.strokeStyle='rgba(122,113,96,0.35)';g.lineWidth=1;
-      g.beginPath();g.moveTo(L,Tp);g.lineTo(L,Bt);g.lineTo(Rr,Bt);g.stroke();
-      g.font='500 9px "JetBrains Mono",monospace';g.fillStyle='#9a9384';g.textAlign='right';
-      for(var v=0;v>=minK;v-=10){var y=Y(v);g.fillText(String(v),L-6,y+3);
-        g.strokeStyle='rgba(122,113,96,0.09)';g.beginPath();g.moveTo(L,y);g.lineTo(Rr,y);g.stroke();}
-      g.textAlign='center';
-      for(var t=0;t<=maxT;t+=5){g.fillText(String(t),X(t),Bt+13);}
-      g.fillText('triton count n_t  →',(L+Rr)/2,H-6);
-      g.save();g.translate(14,(Tp+Bt)/2);g.rotate(-Math.PI/2);g.textAlign='center';
-      g.fillText('closure kink · milli-fm',0,0);g.restore();
-      /* zero line */
-      g.strokeStyle='rgba(30,122,79,0.35)';g.setLineDash([4,3]);g.beginPath();
-      g.moveTo(L,Y(0.78));g.lineTo(Rr,Y(0.78));g.stroke();g.setLineDash([]);
-      g.textAlign='left';g.fillStyle='rgba(30,122,79,0.8)';g.font='500 8.5px "JetBrains Mono",monospace';
-      g.fillText('background field mean +0.78 (338 kinks, σ 20.05)',L+5,Y(0.78)-4);
-
-      KINK.forEach(function(ln){
-        if(!ln.members.length)return;
-        var ts=ln.members.map(function(m){return m[1];});
-        var t0=Math.min.apply(null,ts),t1=Math.max.apply(null,ts);
-        var isHot=(hot===ln.N), col=COL[ln.N];
-        /* ghost: occupancy-proportional requirement, normalised at the mean n_t */
-        if(ln.members.length>1){
-          var tbar=ts.reduce(function(a,b){return a+b;},0)/ts.length;
-          g.setLineDash([3,3]);
-          g.strokeStyle=isHot?'rgba(192,57,43,0.85)':'rgba(192,57,43,0.22)';
-          g.lineWidth=1.4;g.beginPath();
-          g.moveTo(X(t0),Y(ln.mean*t0/tbar));g.lineTo(X(t1),Y(ln.mean*t1/tbar));
-          g.stroke();g.setLineDash([]);
-        }
-        /* measured mean, flat */
-        g.strokeStyle=col;g.lineWidth=isHot?3.2:2;g.globalAlpha=isHot?1:.75;
-        g.beginPath();g.moveTo(X(t0),Y(ln.mean));g.lineTo(X(t1),Y(ln.mean));g.stroke();
-        /* the actual measured points */
-        ln.members.forEach(function(m){
-          g.fillStyle=col;g.beginPath();g.arc(X(m[1]),Y(m[2]),isHot?4.6:3.4,0,6.3);g.fill();
-          g.strokeStyle='#fffdf7';g.lineWidth=1;g.stroke();});
-        g.globalAlpha=1;
-        g.font='600 10px "JetBrains Mono",monospace';g.fillStyle=col;g.textAlign='left';
-        g.fillText('N='+ln.N,X(t1)+7,Y(ln.mean)+3);
-        if(isHot){
-          g.font='500 9px "JetBrains Mono",monospace';g.textAlign='left';
-          var lines=['N = '+ln.N+' · '+ln.members.length+' member(s) · mean '+ln.mean.toFixed(1)];
-          if(ln.rc!==null)lines.push('RMS const '+ln.rc.toFixed(1)+' vs proportional '+ln.rp.toFixed(1)+' → '+ln.out);
-          else lines.push(ln.out);
-          ln.members.forEach(function(m){lines.push('  Z='+m[0]+'  n_t='+m[1]+'  '+m[2].toFixed(1));});
-          var bw=232,bh=lines.length*12+10,bx=Math.min(X(t0),Rr-bw-6),by=Tp+4;
-          g.fillStyle='rgba(255,253,247,0.96)';g.strokeStyle=col;g.lineWidth=1;
-          g.fillRect(bx,by,bw,bh);g.strokeRect(bx,by,bw,bh);
-          g.fillStyle='#45484c';
-          lines.forEach(function(s,i){g.fillText(s,bx+7,by+15+i*12);});
-        }
-      });
-      g.font='500 8.5px "JetBrains Mono",monospace';g.textAlign='left';
-      g.fillStyle=GC;g.fillText('— measured mean (flat: the freeze compacts)',L+5,Bt-16);
-      g.fillStyle='rgba(192,57,43,0.85)';g.fillText('-- required if the occupants compacted',L+5,Bt-5);
+    var W=innerWidth, H=vh;
+    fg.setTransform(dpr,0,0,dpr,0,0); fg.clearRect(0,0,W,H);
+    var active=null, best=0;
+    for(i=0;i<acts.length;i++){
+      var a=acts[i];
+      var ov=Math.min(a._t+a._h, y+vh)-Math.max(a._t,y);
+      if(ov<=0) continue;
+      var wgt=Math.min(1, ov/(vh*0.85));
+      if(wgt>best){ best=wgt; active=a; }
+      var th=a.getAttribute('data-th')||'sdt';
+      var m=MOTIF[th]||MOTIF.sdt;
+      fg.save(); m(fg,W,H,off?0:smooth*0.35,0.10*wgt,COL[th]||COL.sdt); fg.restore();
     }
-    cv.addEventListener('pointermove',function(e){
-      var r=cv.getBoundingClientRect(),mx=e.clientX-r.left,my=e.clientY-r.top;
-      var W=r.width,H=r.height,L=54,Rr=W-16,Tp=24,Bt=H-34,best=null,bd=1e9;
-      KINK.forEach(function(ln){ ln.members.forEach(function(m){
-        var x=L+(m[1]/46)*(Rr-L), y=Tp+((0-m[2])/40)*(Bt-Tp);
-        var d=(x-mx)*(x-mx)+(y-my)*(y-my);
-        if(d<bd){bd=d;best=ln.N;} }); });
-      hot=(bd<2600)?best:null; draw();
-    });
-    cv.addEventListener('pointerleave',function(){hot=null;draw();});
-    window.addEventListener('resize',draw);draw();
-  })();
+    if(active){
+      var ai=acts.indexOf(active);
+      ticks.forEach(function(tk,k){ tk.setAttribute('data-on',k===ai?'1':'0'); });
+      $('#driveBar').setAttribute('data-th',active.getAttribute('data-th')||'sdt');
+    }
+    pctEl.textContent = Math.round(y/docH*100)+'%';
 
-  (function(){
-    var els=document.querySelectorAll('.reveal,.reveal-stagger');
-    if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('is-visible');});return;}
-    var io=new IntersectionObserver(function(en){en.forEach(function(x){
-      if(x.isIntersecting){x.target.classList.add('is-visible');io.unobserve(x.target);}});},{threshold:.12});
-    els.forEach(function(e){io.observe(e);});
-  })();
+    for(i=0;i<scenes.length;i++){
+      var s=scenes[i], A=s.act;
+      if(!A||A._t==null) continue;
+      if(A._t+A._h < y-vh*0.3 || A._t > y+vh*1.3) continue;
+      if(!sizeCanvas(s.cv)) continue;
+      var t=(y+vh-A._t)/(A._h+vh); t=t<0?0:t>1?1:t;
+      var g=s.g, W2=s.cv._w, H2=s.cv._h;
+      g.setTransform(dpr,0,0,dpr,0,0); g.clearRect(0,0,W2,H2);
+      g.lineCap='round'; g.lineJoin='round';
+      var trio=SCENE[s.k]; if(!trio) continue;
+      var segI=Math.min(2,Math.floor(t*3)), tt=t*3-segI;
+      if(s.seg!==segI){ s.seg=segI;
+        if(s.capEl&&CAPS[s.k]) s.capEl.textContent=(segI+1)+'/3 · '+CAPS[s.k][segI]; }
+      trio[segI](g,W2,H2,tt,s.S);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  $$('.act__body').forEach(function(b,i){ if(i%2) b.closest('.act').classList.add('act--flip'); });
+
+  addEventListener('resize',layout);
+  addEventListener('load',function(){ layout(); });
+  layout(); requestAnimationFrame(frame);
 })();
 </script>
 <script src="i18n_dict_st.js"></script>

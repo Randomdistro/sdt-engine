@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>/*sdt-theme-guard*/(function(){try{var t=localStorage.getItem("sdt.theme")||"auto";if(t==="auto")t=(window.matchMedia&&window.matchMedia("(prefers-color-scheme:dark)").matches)?"dark":"light";var d=document.documentElement;d.setAttribute("data-theme",t);d.setAttribute("data-sdt-theme",t);}catch(e){}})();</script>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nuclear Packing Sequencer — SDT</title>
@@ -724,7 +726,7 @@ function recalibrate(){
 }
 
 // =================== 3D scene ===================
-let THREE, scene, camera, renderer, controls, nucleusGroup, wall, dl, motes, moteGeo, moteVel, knotGeo, sphGeo;
+let THREE, scene, camera, renderer, controls, nucleusGroup, wall, dl, motes, moteGeo, moteVel, knotGeo, sphGeo, floorMesh;
 let nuReg=null, fieldReg=null, nuHelixGeo=null;   // ν throughpole windings · fielded-e shell · canonical ν helix
 let threeOK=false;
 
@@ -835,7 +837,25 @@ async function initThree(){
     const canvas=$('scene');
     // fog pushed FAR out (was 28→64 while the orbit reached 60 — zooming out sank the
     // nucleus into shadow); it now only softens the extreme distance, never the subject.
-    scene=new THREE.Scene(); scene.background=new THREE.Color(0x0d1119); scene.fog=new THREE.Fog(0x0d1119,90,220);
+    // ── theme-aware scene (2026-08-01): the site toggle writes data-theme on
+    // <html>; CSS cannot reach a WebGL clear colour, so read it here and follow
+    // it live. The instrument stays legible in both: dark = the shadow bench,
+    // light = the same bench under room light, shadow story unchanged.
+    scene=new THREE.Scene();
+    const THEME={dark:{bg:0x0d1119,wall:0x232b3d,floor:0x0a0c12},
+                 light:{bg:0xece7dd,wall:0xd8d2c6,floor:0xc9c3b6}};
+    function themeNow(){return document.documentElement.getAttribute('data-theme')==='light'?'light':'dark';}
+    function applySceneTheme(){
+      const t=THEME[themeNow()];
+      scene.background=new THREE.Color(t.bg);
+      scene.fog=new THREE.Fog(t.bg,90,220);
+      if(wall) wall.material.color.setHex(t.wall);
+      if(floorMesh) floorMesh.material.color.setHex(t.floor);
+    }
+    new MutationObserver(applySceneTheme).observe(document.documentElement,
+      {attributes:true,attributeFilter:['data-theme']});
+    scene.background=new THREE.Color(THEME[themeNow()].bg);
+    scene.fog=new THREE.Fog(THEME[themeNow()].bg,90,220);
     camera=new THREE.PerspectiveCamera(46,innerWidth/innerHeight,0.1,300); camera.position.set(1,4,26);
     renderer=new THREE.WebGLRenderer({canvas,antialias:true});
     renderer.setPixelRatio(Math.min(devicePixelRatio,2)); renderer.setSize(innerWidth,innerHeight);
@@ -858,8 +878,8 @@ async function initThree(){
     wall=new THREE.Mesh(new THREE.PlaneGeometry(70,48),wallMat);
     wall.position.set(6,-3,-13); wall.receiveShadow=true; scene.add(wall);
     // faint floor grid feel
-    const floor=new THREE.Mesh(new THREE.PlaneGeometry(80,80),new THREE.MeshStandardMaterial({color:0x0a0c12,roughness:1}));
-    floor.rotation.x=-Math.PI/2; floor.position.y=-11; floor.receiveShadow=true; scene.add(floor);
+    floorMesh=new THREE.Mesh(new THREE.PlaneGeometry(80,80),new THREE.MeshStandardMaterial({color:0x0a0c12,roughness:1}));
+    floorMesh.rotation.x=-Math.PI/2; floorMesh.position.y=-11; floorMesh.receiveShadow=true; scene.add(floorMesh);
 
     // shared geometry — the proton is a thin COILED ROPE on the 6π trefoil path,
     // not a fat tube: fine plied fibres, 6 arcs weaving alternately under/over.

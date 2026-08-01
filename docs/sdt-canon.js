@@ -212,13 +212,31 @@
 
   function mount() {
     var slots = document.querySelectorAll('[data-sdt-canon]');
-    if (!slots.length) return;
+    var items = document.querySelectorAll('[data-sdt-canon-item]');
+    if (!slots.length && !items.length) return;
     var st = document.createElement('style');
     st.textContent = CSS;
     document.head.appendChild(st);
     Array.prototype.forEach.call(slots, function (s) {
       var key = s.getAttribute('data-sdt-canon');
       if (R[key]) s.innerHTML = R[key]();
+    });
+    /* per-item quotes: <p data-sdt-canon-item="Space" data-sdt-canon-part="brief"></p>
+       parts: brief (default) · sdt · facets — the statement stays authored ONCE, above. */
+    Array.prototype.forEach.call(items, function (s) {
+      var name = s.getAttribute('data-sdt-canon-item');
+      var part = s.getAttribute('data-sdt-canon-part') || 'brief';
+      var p = null;
+      for (var i = 0; i < CANON.primitives.length; i++)
+        if (CANON.primitives[i].name === name) { p = CANON.primitives[i]; break; }
+      if (!p) return;
+      if (part === 'facets') {
+        s.innerHTML = p.facets.map(function (f) {
+          return '<div class="cn-facet"><h4>' + esc(f[0]) + '</h4><p>' + esc(f[1]) + '</p></div>';
+        }).join('');
+      } else {
+        s.textContent = part === 'sdt' ? p.sdt : p.brief;
+      }
     });
   }
 

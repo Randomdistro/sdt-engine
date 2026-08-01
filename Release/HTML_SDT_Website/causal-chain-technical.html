@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>/*sdt-theme-guard*/(function(){try{var t=localStorage.getItem("sdt.theme")||"auto";if(t==="auto")t=(window.matchMedia&&window.matchMedia("(prefers-color-scheme:dark)").matches)?"dark":"light";var d=document.documentElement;d.setAttribute("data-theme",t);d.setAttribute("data-sdt-theme",t);}catch(e){}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Causal Chain — Technical</title>
+<style>
+:root{--paper:#faf8f4;--edge:#e5e0d4;--ink:#1c1e20;--soft:#45484c;--mute:#6d7177;--mint:#0d7a5f;--rust:#a4552e;--gold:#8a6d1f;--steel:#4a6d82}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:'Source Serif 4',Georgia,serif;line-height:1.75;padding:3rem 1.5rem}
+main{max-width:48rem;margin:0 auto}
+.series{font-family:Consolas,monospace;font-size:.68rem;letter-spacing:.28em;color:var(--mute);text-transform:uppercase;margin-bottom:1.2rem}
+h1{font-size:1.85rem;line-height:1.25;font-weight:700;margin-bottom:1rem}
+.byline{font-size:1rem;margin-bottom:.2rem}
+.affil{font-family:Consolas,monospace;font-size:.72rem;color:var(--mute);margin-bottom:2rem}
+h2{font-size:1.12rem;font-weight:700;margin:2.4rem 0 .7rem;padding-top:1rem;border-top:1px solid var(--edge)}
+h2 .lnk{font-family:Consolas,monospace;font-size:.7rem;letter-spacing:.16em;color:var(--rust);display:block;margin-bottom:.25rem;text-transform:uppercase}
+h3{font-size:.95rem;font-weight:700;margin:1.3rem 0 .5rem;color:var(--ink)}
+p{margin-bottom:.9rem;color:var(--soft)}
+strong{color:var(--ink)}
+.abstract{border:1px solid var(--edge);border-left:3px solid var(--mint);padding:1.1rem 1.3rem;background:#fff;margin:1.5rem 0}
+.abstract p{margin-bottom:0}
+.eq{font-family:Consolas,monospace;font-size:.88rem;background:#fff;border:1px solid var(--edge);border-radius:3px;padding:.8rem 1.1rem;margin:1rem 0;display:flex;justify-content:space-between;gap:1rem;overflow-x:auto}
+.eq .no{color:var(--mute);flex:0 0 auto}
+table{width:100%;border-collapse:collapse;font-size:.82rem;margin:1rem 0}
+th,td{border:1px solid var(--edge);padding:.4rem .55rem;text-align:left;vertical-align:top}
+th{font-family:Consolas,monospace;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+td.num{font-family:Consolas,monospace;font-size:.78rem;white-space:nowrap}
+.dep{font-family:Consolas,monospace;font-size:.72rem;color:var(--steel);background:#fff;border:1px solid var(--edge);border-left:3px solid var(--steel);padding:.5rem .8rem;margin:.6rem 0 1rem}
+.decl{border:1px solid var(--edge);background:#fff;padding:1rem 1.2rem;margin:1.5rem 0;font-size:.92rem}
+.owed{border-left:3px solid var(--rust);background:#fff;border:1px solid var(--edge);padding:.75rem 1rem;margin:.9rem 0;font-size:.88rem}
+.owed strong{color:var(--rust)}
+.tag{font-family:Consolas,monospace;font-size:.64rem;letter-spacing:.1em;padding:.1rem .4rem;border:1px solid var(--edge);border-radius:2px;color:var(--mute);white-space:nowrap}
+.refs ol{margin-left:1.2rem}
+.refs li{font-size:.85rem;color:var(--soft);margin-bottom:.4rem}
+footer{max-width:48rem;margin:3rem auto 0;padding-top:1.2rem;border-top:1px solid var(--edge)}
+footer a{color:var(--mint);text-decoration:none;font-family:Consolas,monospace;font-size:.75rem;letter-spacing:.06em}
+sub,sup{line-height:0}
+</style>
+<link rel="stylesheet" href="sdt-shell.css">
+<script src="sdt-shell.js" defer></script>
+<script src="sdt-register.js" defer></script>
+<meta name="description" content="The causal chain of Spatial Displacement Theory in formal notation: every link stated as a relation, with its dependencies, its certification label, its measured comparison, and its residual.">
+<link rel="canonical" href="https://spatialdisplacementtheory.com/causal-chain-technical">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/favicon.ico" sizes="64x64">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#b07430">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Spatial Displacement Theory">
+<meta property="og:title" content="The Causal Chain — Technical">
+<meta property="og:description" content="Every link of the SDT dependency spine as a relation, with dependencies, certification label, measured comparison and residual.">
+<meta property="og:url" content="https://spatialdisplacementtheory.com/causal-chain-technical">
+<meta property="og:image" content="https://spatialdisplacementtheory.com/og-card.png">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<main>
+<p class="series">Spatial Displacement Theory · The Causal Chain · Technical Translation</p>
+<h1>The Dependency Spine in Formal Notation: Every Link, Its Inputs, Its Relation, Its Residual</h1>
+<p class="byline">J. C. Harvey</p>
+<p class="affil">Melbourne, Australia · July 2026 · Domain-wide dependency spine</p>
+<div id="sdt-register-switch"></div>
+
+<div class="abstract">
+<p><strong>Abstract.</strong> The narrated causal chain states what rests on what in prose. This is the same spine written as relations. Each of the twenty-one links carries: its dependency set (which earlier links must hold for it to mean anything), the relation itself in closed form, a certification label, the measured comparison with its deviation, and — where one exists — the residual or the open mechanism. Numbers are the verbatim output of <code>benchmarks_suite.cpp</code> compiled against <code>Engine/include/sdt/laws.hpp</code>; no figure on this page was typed by hand. The external input set is five items after audit, not the nine of the stated whitelist and not the four the collapse first claimed. Links that fail are printed as failing: L18 (galactic rotation) carries a 66% RMS miss, and the ledger at L20 lists every debt the framework has not paid.</p>
+</div>
+<p><strong>Notation.</strong> ϟ ≡ v²R/c² (koppa, a length) · z ≡ ϟ/r (convergence depth, dimensionless) · k ≡ c/v (gear) · W (winding number) · ℓ<sub>P</sub> (spation, the grain of space) · Φ = Nε (Law I throughput). Certification labels follow the engine: <span class="tag">DERIVED</span> <span class="tag">COMPUTED</span> <span class="tag">IDENTITY</span> <span class="tag">CALIBRATED</span> <span class="tag">OBSERVED</span> <span class="tag">OPEN</span>.</p>
+
+<h2>0. Method: what a dependency spine asserts</h2>
+<p>A causal chain in this sense is not a narrative ordering but a partial order of <em>derivational dependency</em>. Link L<sub>n</sub> depends on L<sub>m</sub> when the relation at L<sub>n</sub> consumes a quantity whose meaning is fixed at L<sub>m</sub>. The discipline this imposes is severe and is the point: a result may not be cited at a link earlier than the link that defines its terms, and a circular route — one whose output is algebraically its own input — must be labelled IDENTITY and never DERIVED.</p>
+<p>Three failure modes are policed explicitly throughout. <strong>Circularity:</strong> a relation returning its own input (e.g. e = √(αℏc/k<sub>e</sub>), which is a restatement of α's definition) is labelled as such. <strong>Shared form:</strong> where an SDT relation is algebraically identical to a rival framework's at the tested order, the correspondence is disclosed and the relation is recorded as unable to discriminate. <strong>Count degeneracy:</strong> where a regularity is a pure function of quantities already fixed upstream, it is bookkeeping, not evidence (NP24-A).</p>
+
+<h3>The external input ledger</h3>
+<p>The stated whitelist has nine members. A single-pass re-derivation of each (<code>derivelist/</code>, 2026-07-30) with an independent audit reduces the set to five, chiefly by identifying which members were never physics but unit definitions:</p>
+<table>
+<tr><th>Input</th><th>Standing after audit</th><th>Basis</th></tr>
+<tr><td>ℓ<sub>P</sub></td><td><strong>AXIOM R1</strong> — irreducible</td><td>Seed Theorem (FLM06): no combination of dimensionless cosmic ratios yields an absolute length; the shortfall is 5.4×10<sup>58</sup></td></tr>
+<tr><td>one mass/action seat {ℏ ≡ m<sub>e</sub> ≡ m<sub>p</sub>}</td><td><strong>IRREDUCIBLE</strong> (one, not three)</td><td>FLM13 collapse via W=1 / W=3 bijections — a baryon-count anchor</td></tr>
+<tr><td>α</td><td><strong>EXTRACTED</strong>, geometric route open</td><td>read off the hydrogen spectrum two ways, 1/α = 137.0726 and 136.912</td></tr>
+<tr><td>a<sub>0</sub></td><td><strong>MEASURED</strong> — the length the seat form rides on</td><td>audit F3: m<sub>e</sub> = ℏ/(αc·a<sub>0</sub>) consumes it; no derived route exists in canon</td></tr>
+<tr><td>T<sub>CMB</sub></td><td><strong>OBSERVED</strong> — a boundary state, not a constant</td><td>FIRAS; reclassified as a clock reading of the present cycle</td></tr>
+<tr><td>c, k<sub>B</sub>, e</td><td>unit bridges — no physics to derive</td><td>SI definitions; c is definitional since 1983, so no c-free wavelength exists</td></tr>
+<tr><td>R<sub>p</sub></td><td>≡ m<sub>p</sub> — one fact, not two</td><td>R<sub>p</sub> = 4ℏ/(m<sub>p</sub>c) to 0.0195%; the residual is shared, not independent</td></tr>
+</table>
+<p>The collapse is real but it relocates rather than removes: the mystery moves from a mass to a length. Closing a<sub>0</sub>, or landing the 6π⁵ wake integral, is what would actually shorten this list.</p>
+
+<h2><span class="lnk">L0 — Axiom</span>The seed: one grain of length</h2>
+<div class="dep">DEPENDS ON: nothing. This is the assumed floor.</div>
+<div class="eq"><span>ℓ<sub>P</sub> = 1.616255 × 10<sup>−35</sup> m &nbsp;&nbsp;[ASSUMED]</span><span class="no">(0.1)</span></div>
+<p>FLM06 attempted the derivation and returned a negative with a proof attached: dimensionless ratios of permitted cosmic quantities bottom out near 10<sup>3</sup> where 10<sup>61</sup> is required. Exactly one dimensional anchor is mathematically unavoidable. <span class="tag">AXIOM</span></p>
+
+<h2><span class="lnk">L1 — Substrate</span>The substrate: a superfluid of grains</h2>
+<div class="dep">DEPENDS ON: L0</div>
+<p>Space is a contact-relay medium of grains of one size, individually incompressible and collectively deformable. Icosahedral 12-around-1 coordination does not close; the residual packing fraction is a conserved slack.</p>
+<div class="eq"><span>g = 0.103 &nbsp;(total packing gap, conserved) &nbsp;·&nbsp; movement herds slack into shaped voids (tetrahedral, octahedral)</span><span class="no">(1.1)</span></div>
+<p>The shaped voids are load-bearing downstream: they are the seats atoms keep electrons in (L14) and the reason the alpha core is a tetrahedron (L13). <span class="tag">DERIVED</span> (geometry) with the void-tier capacities owed to L13's completion law.</p>
+
+<h2><span class="lnk">L2 — Derived frame</span>The tick: nothing but now</h2>
+<div class="dep">DEPENDS ON: L0, L1</div>
+<p>Time is not a primitive. It is the tally movement keeps; the present is the plane on which everything moves. The clock rate is a closure ratio, not a coordinate:</p>
+<div class="eq"><span>dτ/dt = (1 − z)</span><span class="no">(2.1)</span></div>
+<p><strong>Repaired 2026-07-30 (GOM22).</strong> This relation previously read √(1−z), which returned half the measured solar gravitational redshift and contradicted the depth-differential relation at L17. See L17 for the measurement that settled it. <span class="tag">DERIVED</span></p>
+
+<h2><span class="lnk">L3 — Law I</span>The Clearing, and the push that never stopped</h2>
+<div class="dep">DEPENDS ON: L0, L1, L2</div>
+<div class="eq"><span>Φ = N·ε &nbsp;&nbsp;·&nbsp;&nbsp; N = R<sub>CMB</sub>/ℓ<sub>P</sub> &nbsp;&nbsp;·&nbsp;&nbsp; ε = u<sub>CMB</sub>·ℓ<sub>P</sub>³ &nbsp;&nbsp;·&nbsp;&nbsp; P<sub>conv</sub> = Φ/ℓ<sub>P</sub>³</span><span class="no">(3.1)</span></div>
+<div class="eq"><span>P<sub>conv</sub> ≈ 2.46 × 10<sup>48</sup> Pa &nbsp;— balanced at every point, hence unfelt</span><span class="no">(3.2)</span></div>
+<p>The convergence arrives from the Clearing boundary in every direction each tick. Perfect balance is why the medium reads as empty. Every force downstream is an imbalance in this one push. <span class="tag">DERIVED</span> from {ℓ<sub>P</sub>, T<sub>CMB</sub>, R<sub>CMB</sub>}; R<sub>CMB</sub> is an observed scale and is declared as conditioning the Law I chain.</p>
+
+<h2><span class="lnk">L4 — Law III</span>Occlusion: the only force</h2>
+<div class="dep">DEPENDS ON: L3</div>
+<div class="eq"><span>F = (π/4) · P<sub>eff</sub> · R<sub>1</sub>²R<sub>2</sub>² / r²</span><span class="no">(4.1)</span></div>
+<p>Two bodies each shadow part of the convergence arriving at the other; the unshadowed side wins and they are pressed together. Nothing pulls. The inverse square is not postulated — it is the solid angle a cross-section subtends. Gravity, the Coulomb force and the nuclear grip are this one relation read at three cross-sections; their famous hierarchy of strengths is a ratio of areas, not of kinds.</p>
+<table><tr><th>Quantity</th><th>SDT</th><th>Measured</th><th>Dev</th><th>Label</th></tr>
+<tr><td>Solar light deflection</td><td class="num">1.75169″</td><td class="num">1.7505″</td><td class="num">0.0680%</td><td><span class="tag">DERIVED</span></td></tr>
+<tr><td>Mercury precession</td><td class="num">42.9914″/cy</td><td class="num">42.98″/cy</td><td class="num">0.0265%</td><td><span class="tag">DERIVED</span></td></tr></table>
+
+<h2><span class="lnk">L5 — The one new idea</span>Matter: the knot that displaces</h2>
+<div class="dep">DEPENDS ON: L1, L4</div>
+<p>A particle is circulation wound on itself and locked by its own winding — a torus knot, not a cloud and not a point. It has a measurable boundary and a surface that runs faster than the relay. The single new premise of the framework is that <strong>matter displaces space</strong>; the displaced grains must go somewhere, and where they go is every force.</p>
+<div class="eq"><span>R<sub>p</sub> = (W+1)·ℏ/(m<sub>p</sub>c), &nbsp; W = 3 &nbsp;⟹&nbsp; R<sub>p</sub> = 4ℏ/(m<sub>p</sub>c)</span><span class="no">(5.1)</span></div>
+<div class="eq"><span>v(R<sub>p</sub>) = c√(r<sub>e</sub>/R<sub>p</sub>) = 1.8301 c &nbsp;(the seat: a surface, not a signal)</span><span class="no">(5.2)</span></div>
+<table><tr><th>Quantity</th><th>SDT</th><th>Measured</th><th>Dev</th><th>Label</th></tr>
+<tr><td>R<sub>p</sub> (W+1)</td><td class="num">8.41236×10<sup>−16</sup> m</td><td class="num">8.414×10<sup>−16</sup></td><td class="num">0.0195%</td><td><span class="tag">DERIVED</span></td></tr>
+<tr><td>W<sub>eff</sub> (should be 3)</td><td class="num">3.00078</td><td class="num">3</td><td class="num">0.0261%</td><td><span class="tag">DERIVED</span></td></tr></table>
+<div class="owed"><strong>Owed.</strong> m<sub>p</sub>/m<sub>e</sub> = 6π⁵ matches to 19 ppm and is unique within 0.1% of 1836, but the wake phase-space integral that would produce it blind has not been run. Until it is, the ratio is a privileged open match, not a derivation.</div>
+
+<h2><span class="lnk">L6 — Law IV</span>Mass: the cost of moving a displacement</h2>
+<div class="dep">DEPENDS ON: L3, L5</div>
+<div class="eq"><span>m = Φ·V<sub>disp</sub> / (3 ℓ<sub>P</sub>³ c²) &nbsp;&nbsp;⟺&nbsp;&nbsp; V<sub>disp</sub> = 3 m ℓ<sub>P</sub>³ c² / Φ</span><span class="no">(6.1)</span></div>
+<p>Mass is the throughput reorganisation cost of changing a displacement's vector — resistance of the field, not a substance carried by the body. FLM12 recovers Newton I and II, E = mc², and the equivalence of inertial and gravitational mass as a theorem rather than a coincidence.</p>
+<div class="owed"><strong>Label discipline.</strong> Relation (6.1) inverted returns its own input exactly; the round trip is IDENTITY, not a derivation of any mass. <strong>Owed:</strong> the FLM12 D1/D2 make-or-break tests, and the absolute magnitude of the one seat.</div>
+
+<h2><span class="lnk">L7 — Law V</span>The movement budget: one purse, two spends</h2>
+<div class="dep">DEPENDS ON: L2, L5</div>
+<div class="eq"><span>v<sub>circ</sub>² + v² = c²</span><span class="no">(7.1)</span></div>
+<p>Every particle spends its whole allowance at c at all times, divided between internal circulation and translation. Special relativity's kinematics follow as bookkeeping of that division: the slowed clock, the shortened rod and the unreachable ceiling are one budget being spent differently, with no dilation of anything but the tally.</p>
+<table><tr><th>Quantity</th><th>SDT</th><th>Measured</th><th>Dev</th><th>Label</th></tr>
+<tr><td>Bohr v(1,1) = αc</td><td class="num">2.18769×10<sup>6</sup> m/s</td><td class="num">2.18769×10<sup>6</sup></td><td class="num">0.0000%</td><td><span class="tag">IDENTITY</span></td></tr></table>
+
+<h2><span class="lnk">L8 — Law II</span>Release: the cascade</h2>
+<div class="dep">DEPENDS ON: L3, L6</div>
+<p>Held throughput releases in a cascade through pressure domains; the blackbody suite follows from counted relay modes rather than from quantised oscillators.</p>
+<table><tr><th>Quantity</th><th>SDT</th><th>Measured</th><th>Dev</th><th>Label</th></tr>
+<tr><td>Stefan–Boltzmann σ</td><td class="num">5.67037×10<sup>−8</sup></td><td class="num">5.67037×10<sup>−8</sup></td><td class="num">0.0000%</td><td><span class="tag">DERIVED</span></td></tr>
+<tr><td>Wien displacement b</td><td class="num">2.89777×10<sup>−3</sup> m·K</td><td class="num">2.8978×10<sup>−3</sup></td><td class="num">0.0011%</td><td><span class="tag">DERIVED</span></td></tr>
+<tr><td>Mode density vs 8πν²/c³</td><td class="num">counted</td><td class="num">continuum</td><td class="num">0.003%</td><td><span class="tag">DERIVED</span></td></tr></table>
+
+<h2><span class="lnk">L9 — The bridge</span>Koppa: the gear that is a length</h2>
+<div class="dep">DEPENDS ON: L4, L7</div>
+<div class="eq"><span>ϟ ≡ v²R/c² = R/k² &nbsp;&nbsp;·&nbsp;&nbsp; z ≡ ϟ/r = 1/k² = (v/c)² &nbsp;&nbsp;·&nbsp;&nbsp; v(r) = c√(ϟ/r)</span><span class="no">(9.1)</span></div>
+<p>Koppa is the framework's load-bearing bridge: a velocity-defined length that replaces the product GM without importing either G or M. One relation, v²r = c²ϟ, runs from the proton seat to Sgr A* — twenty orders of magnitude on one law. <strong>Disclosed:</strong> ϟ is numerically GM/c², so every first-order gravitational result below shares its form with the rival account and cannot discriminate on that basis; what SDT claims is the origin, not the number.</p>
+<table><tr><th>Quantity</th><th>SDT</th><th>Measured</th><th>Dev</th><th>Label</th></tr>
+<tr><td>Earth orbital velocity</td><td class="num">29788.9 m/s</td><td class="num">29783</td><td class="num">0.0199%</td><td><span class="tag">DERIVED</span></td></tr>
+<tr><td>GM<sub>Sun</sub> (reconstructed)</td><td class="num">1.3275×10<sup>20</sup></td><td class="num">1.327×10<sup>20</sup></td><td class="num">0.0379%</td><td><span class="tag">DERIVED</span></td></tr>
+<tr><td>zk² closure, 5 stars + H + Earth orbit</td><td class="num">1</td><td class="num">1</td><td class="num">0.0000%</td><td><span class="tag">IDENTITY</span></td></tr></table>
+
+<h2><span class="lnk">L10 — The hydrogen chain</span>Hydrogen: three lengths, one invariant</h2>
+<div class="dep">DEPENDS ON: L7, L9</div>
+<div class="eq"><span>r<sub>e</sub> = α²a<sub>0</sub> &nbsp;·&nbsp; ϟ<sub>H</sub> = r<sub>e</sub> &nbsp;·&nbsp; α = the koppa rung of the hydrogen ground state, k = 1/α</span><span class="no">(10.1)</span></div>
+<p>α is not a magic number in this account: it is the gear at which hydrogen's ground state sits, k = 137. The three lengths of hydrogen — a<sub>0</sub>, r<sub>e</sub>, ϟ<sub>H</sub> — are one ladder read at three rungs.</p>
+<table><tr><th>Quantity</th><th>SDT</th><th>Measured</th><th>Dev</th><th>Label</th></tr>
+<tr><td>H n=1 energy</td><td class="num">−13.6057 eV</td><td class="num">−13.5984</td><td class="num">0.0536%</td><td><span class="tag">DERIVED</span></td></tr>
+<tr><td>Balmer 3→2</td><td class="num">656.112 nm</td><td class="num">656.281</td><td class="num">0.0257%</td><td><span class="tag">DERIVED</span></td></tr>
+<tr><td>He⁺ Lyman-α</td><td class="num">30.3756 nm</td><td class="num">30.378</td><td class="num">0.0080%</td><td><span class="tag">DERIVED</span></td></tr>
+<tr><td>2P fine-structure splitting</td><td class="num">4.52826×10<sup>−5</sup> eV</td><td class="num">4.528×10<sup>−5</sup></td><td class="num">0.0057%</td><td><span class="tag">DERIVED</span></td></tr>
+<tr><td>21 cm hyperfine</td><td class="num">1421.16 MHz</td><td class="num">1420.4</td><td class="num">0.0531%</td><td><span class="tag">DERIVED</span></td></tr>
+<tr><td>1/α from the ladder</td><td class="num">137.073</td><td class="num">137.036</td><td class="num">0.027%</td><td><span class="tag">EXTRACTED</span></td></tr></table>
+<div class="owed"><strong>Owed.</strong> A geometric route to α. The closed-form search over a·π<sup>b</sup> forms is excluded — no clean form exists, in contrast to 6π⁵ for the mass ratio.</div>
+
+<h2><span class="lnk">L11 — Emission</span>Emission: a path times a gear</h2>
+<div class="dep">DEPENDS ON: L7, L10</div>
+<div class="eq"><span>λ = 2L·(c/v) &nbsp;— every emission is a path length times its velocity gear at c</span><span class="no">(11.1)</span></div>
+<p>Seven independent emission floors return the same ratio to 1.0000 under this reading. Spectral structure is route geometry, not a probability amplitude.</p>
+<div class="owed"><strong>Owed.</strong> ε = hν as a derived relation rather than an imported one. The 2S–2P interval amplitude is open: the native target is a spacing (1057.8 MHz ≡ 0.703 m/s ≡ 0.272 fm at n=2), and the earlier 1051.8 MHz claim was retracted as fabricated in 2026-07-03.</div>
+
+<h2><span class="lnk">L12 — Charge and EM</span>Charge: a handedness, not a substance</h2>
+<div class="dep">DEPENDS ON: L4, L10</div>
+<div class="eq"><span>k<sub>e</sub>e² = αℏc &nbsp;&nbsp;[IDENTITY — α is defined as k<sub>e</sub>e²/ℏc]</span><span class="no">(12.1)</span></div>
+<div class="eq"><span>P<sub>eff</sub> = m<sub>p</sub>²m<sub>e</sub>²c⁵ / (4παℏ³) = 5.2273 × 10<sup>31</sup> Pa</span><span class="no">(12.2)</span></div>
+<p>There is no charge substance. What is called charge is a handed redirection of the convergence; attraction is a deficit (shadow) and repulsion a surplus (focus), which is why gravity has one sign and electromagnetism two. Relation (12.1) is printed as the tautology it is; the physical content sits in (12.2), which closes to 0.0431% against the value the force law requires.</p>
+<table><tr><th>Quantity</th><th>SDT</th><th>Measured</th><th>Dev</th><th>Label</th></tr>
+<tr><td>Electron g-factor</td><td class="num">2.00232</td><td class="num">2.00232</td><td class="num">0.0002%</td><td><span class="tag">DERIVED</span></td></tr>
+<tr><td>P<sub>eff</sub></td><td class="num">5.22725×10<sup>31</sup></td><td class="num">5.225×10<sup>31</sup></td><td class="num">0.0431%</td><td><span class="tag">DERIVED</span></td></tr></table>
+
+<h2><span class="lnk">L13 — The nuclear floor</span>Nuclei: castings from the stellar foundry</h2>
+<div class="dep">DEPENDS ON: L1 (void tiers), L4, L5, L12</div>
+<div class="eq"><span>Z ≥ 2: 1α + n<sub>d</sub>·d + n<sub>t</sub>·t, &nbsp; n<sub>t</sub> = A − 2Z, &nbsp; n<sub>d</sub> = 3Z − A − 2, &nbsp; N = 2 + n<sub>d</sub> + 2n<sub>t</sub></span><span class="no">(13.1)</span></div>
+<div class="eq"><span>R(A) = R<sub>p</sub>(A/η)<sup>1/3</sup>, &nbsp; η = π/√18 = 0.74048 &nbsp;(zero-fit close packing)</span><span class="no">(13.2)</span></div>
+<div class="eq"><span>E = −Σ<sub>i&lt;j</sub> q<sub>i</sub>q<sub>j</sub>·αℏc/r<sub>ij</sub> &nbsp;⟹&nbsp; B(d) = 2.200 MeV, no fitted scale</span><span class="no">(13.3)</span></div>
+<h3>The closure schedule — the magic numbers derived</h3>
+<div class="eq"><span>F(n) = (n+1)(n+2) &nbsp;·&nbsp; B(n) = 2(n+1) &nbsp;·&nbsp; R(n) = F(n) − B(n) = n(n+1)</span><span class="no">(13.4)</span></div>
+<div class="eq"><span>2 | +6d → 8 | +12d → 20 | +8t → 28 | +12d+10t → 50 | +20d+12t → 82 | +30d+14t → 126</span><span class="no">(13.5)</span></div>
+<p>Four mesh facts force (13.4). A proton gears only with neutrons, so every tier is a bipartite double layer; the packing's two-dimensional order is triangular, so a layer holds a triangular number of rod seats — together, F(n), with F(0) = 2 being the alpha core under the same formula. Tritons are radial rods and the assembly must roll without jamming, so a rod runs slip-free only on the equator of the collective rotation — a one-dimensional antipodally-paired ring, B(n). No spin–orbit coupling is imported anywhere; the belt's location is geometric and carries no strength parameter. <strong>Forward prediction:</strong> closure(7) = 126 + R(6) + B(7) = <strong>N = 184</strong>.</p>
+<table><tr><th>Quantity</th><th>SDT</th><th>Measured</th><th>Dev</th><th>Label</th></tr>
+<tr><td>Deuteron binding</td><td class="num">2.20079 MeV</td><td class="num">2.2246</td><td class="num">1.07%</td><td><span class="tag">DERIVED</span></td></tr>
+<tr><td>R(A), 908 measured radii</td><td class="num">RMS 4.96%</td><td class="num">—</td><td class="num">5× better on chains</td><td><span class="tag">DERIVED</span></td></tr>
+<tr><td>He-4 radius = 2R<sub>p</sub></td><td class="num">1.6828×10<sup>−15</sup> m</td><td class="num">1.6755×10<sup>−15</sup></td><td class="num">0.4357%</td><td><span class="tag">DERIVED</span></td></tr>
+<tr><td>Neutron Q<sub>β</sub></td><td class="num">0.782333 MeV</td><td class="num">0.782</td><td class="num">0.0426%</td><td><span class="tag">DERIVED</span></td></tr>
+<tr><td>Closure sequence rebuild</td><td class="num">7/7</td><td class="num">2,8,20,28,50,82,126</td><td class="num">exact</td><td><span class="tag">DERIVED</span></td></tr>
+<tr><td>Capacities from two closed forms</td><td class="num">9/9</td><td class="num">—</td><td class="num">exact</td><td><span class="tag">DERIVED</span></td></tr>
+<tr><td>Parity lock (odd-Z, even-t misfits)</td><td class="num">12/12</td><td class="num">the 5 natural odd-odd quasi-stables</td><td class="num">exact</td><td><span class="tag">DERIVED</span></td></tr>
+<tr><td>Closure kink, isotone invariant</td><td class="num">const beats ∝n<sub>t</sub> on N=28/50/82</td><td class="num">19/19 negative</td><td class="num">supported</td><td><span class="tag">COMPUTED</span></td></tr></table>
+<div class="owed"><strong>Disclosed correspondence.</strong> F(n) equals the harmonic-oscillator degeneracy and B(n) the intruder-orbit capacity of the prevailing shell model — shared counting, which cannot discriminate at sequence level. The native content is the bipartite doubling and the rolling-equator constraint. <strong>Owed:</strong> the descent onset n = 3 is read from the data, not derived; and BE/A per-nucleon structure is not reproduced by the area account (E = P·ΔV is EXCLUDED).</div>
+
+<h2><span class="lnk">L14 — Seats</span>Atoms and metals: exclusive seats</h2>
+<div class="dep">DEPENDS ON: L1 (shaped voids), L10, L13</div>
+<p>Electrons occupy the shaped voids of L1 — seats, not orbitals or probability clouds. Exclusivity is geometric occupancy rather than a symmetry postulate; the periodic trends are the seat ladder's own arithmetic, with core occlusion pulling the outer seat inward across a period and a new void tier opening at each shell.</p>
+<div class="owed"><strong>Open.</strong> First ionisation from pressure is PENDING: the multi-electron chain misses by up to 500% (He 59.9%, Ne 496.6%) and is printed as failing in the suite. The single-electron ladder (L10) is unaffected.</div>
+
+<h2><span class="lnk">L15 — Fluids</span>Fluids: one poloidal operation</h2>
+<div class="dep">DEPENDS ON: L1, L7</div>
+<div class="eq"><span>c<sub>s</sub> ≤ c/√3 &nbsp;(native sound ceiling from the one-third traction rule)</span><span class="no">(15.1)</span></div>
+<div class="eq"><span>slope = 5/3 + ln(1/(1−g))/(3 ln λ), &nbsp; g = 0.103, λ = 4 &nbsp;⟹&nbsp; −1.6928</span><span class="no">(15.2)</span></div>
+<p>All fluid movement is a poloidal operation upgraded to torus level, where it wraps. The intermittency correction to the Kolmogorov exponent comes from the packing gap of L1 with no new parameter: −1.6928 against a measured −1.70.</p>
+
+<h2><span class="lnk">L16 — Heat and freedom</span>Freedom: entropy with its costume off</h2>
+<div class="dep">DEPENDS ON: L8, L15</div>
+<p>Entropy is replaced by a freedom ledger — a count of available degrees of movement rather than a measure of disorder. Thermodynamics is inherited, not re-founded: across the domain no new primitive and no free parameter is introduced.</p>
+<table><tr><th>Quantity</th><th>SDT</th><th>Measured</th><th>Dev</th><th>Label</th></tr>
+<tr><td>Transport exponents (κ, μ, D)</td><td class="num">0.5</td><td class="num">0.5</td><td class="num">0.0000%</td><td><span class="tag">DERIVED</span></td></tr>
+<tr><td>BBN freedom flip</td><td class="num">0.0624 MeV</td><td class="num">inside the measured window</td><td class="num">—</td><td><span class="tag">COMPUTED</span></td></tr></table>
+
+<h2><span class="lnk">L17 — Gravity and orbits</span>Gravity: depth, not warping</h2>
+<div class="dep">DEPENDS ON: L2, L4, L9</div>
+<div class="eq"><span>(1) ℓ<sub>P</sub>(r) = ℓ<sub>P,∞</sub>(1 − z) &nbsp;&nbsp; (2) c<sub>far</sub>(r) = c<sub>∞</sub>(1 − z)² &nbsp;&nbsp; (3) dτ/dt = (1 − z)</span><span class="no">(17.1)</span></div>
+<div class="eq"><span>(4) z<sub>spec</sub> = z(r<sub>emit</sub>) − z(r<sub>obs</sub>) &nbsp;&nbsp; (5) v(r) = c√z, &nbsp; g = v²/r = c²ϟ/r²</span><span class="no">(17.2)</span></div>
+<p>Gravity is a depth gradient in a medium, not curvature of a manifold. Orbits are closed least-resistance paths through that gradient: real motion, no pull. Nothing is attracted — the convergence of L3 presses everything together and matter takes the cheapest route.</p>
+<h3>The factor-2 repair (GOM22, 2026-07-30)</h3>
+<p>The Shapiro delay <em>measures</em> the relay-speed profile, because a propagation delay is an integral of the inverse local speed. Writing c<sub>local</sub> = c(1 − K·z), the measured delay fixes K with no freedom:</p>
+<div class="eq"><span>Δt = ∫dl/c<sub>local</sub> − ∫dl/c ≈ (K·ϟ/c)·ln(4r₁r₂/b²)</span><span class="no">(17.3)</span></div>
+<p>The canon previously carried K = 1 in (2) and √(1−z) in (3). Both returned exactly half the measurement. The root was a mixed-frame slip: the derivation scaled the hop <em>length</em> by the local closure while leaving the hop <em>duration</em> at its far-frame value. Speed is length per time, so the closure enters twice — a native repair drawn from a relation already in canon, and the factor 2 in the delay is now derived rather than inserted.</p>
+<table><tr><th>Quantity</th><th>SDT</th><th>Measured</th><th>Dev</th><th>Label</th></tr>
+<tr><td>Shapiro round-trip, grazing</td><td class="num">247.244 μs</td><td class="num">247.24 (Viking/Cassini)</td><td class="num">0.0016%</td><td><span class="tag">DERIVED</span></td></tr>
+<tr><td>Solar gravitational redshift</td><td class="num">636.312 m/s</td><td class="num">633</td><td class="num">0.5232%</td><td><span class="tag">DERIVED</span></td></tr>
+<tr><td>Superseded K = 1 profile</td><td class="num">123.62 μs</td><td class="num">247.24</td><td class="num">ratio 0.5000</td><td><span class="tag">FALSIFIED</span></td></tr></table>
+<div class="owed"><strong>Open fork.</strong> Form (a) c(1−z)² is native — one closure factor applied twice. Form (b) c(1−2z) is the Schwarzschild coordinate speed: shared form, cannot discriminate. They are identical to first order and differ on where the relay speed vanishes — (a) at r = ϟ, (b) at r = 2ϟ = r<sub>s</sub> exactly, which is to say on whether SDT has a horizon at all. That form (a) preserves the framework's echo prediction is a consequence, not evidence for it. The discriminator is strong-field: a 1.4 M<sub>☉</sub> neutron-star surface splits them by 8.6%.</div>
+
+<h2><span class="lnk">L18 — Stars and galaxies</span>The open frontier</h2>
+<div class="dep">DEPENDS ON: L9, L17</div>
+<div class="eq"><span>a<sub>0</sub> = cH<sub>0</sub>/2π = 1.042 × 10<sup>−10</sup> m/s² &nbsp;(derived acceleration floor)</span><span class="no">(18.1)</span></div>
+<p><strong>This link fails and is printed as failing.</strong> The canonical three-dimensional eclipse rotation model returns RMS 66% against real SPARC data with a BTFR slope of 1.33; the earlier reported success was a circular mock and has been withdrawn. What stands: the derived floor (18.1), and an 8.8% cross-scale collapse re-earned on real rotation data against a control six times worse. The crossover's functional shape is still borrowed and is not claimed.</p>
+<table><tr><th>Quantity</th><th>SDT</th><th>Measured</th><th>Status</th></tr>
+<tr><td>SPARC rotation, canonical model</td><td class="num">RMS 66%</td><td class="num">—</td><td><span class="tag">EXCLUDED</span></td></tr>
+<tr><td>R<sub>flat</sub>, 4 galaxies</td><td class="num">0.0–4.2%</td><td class="num">MW, NGC 3198, NGC 2403, M33</td><td><span class="tag">COMPUTED</span></td></tr></table>
+
+<h2><span class="lnk">L19 — Cosmology</span>The cosmos: nothing recedes</h2>
+<div class="dep">DEPENDS ON: L3, L8, L17</div>
+<div class="eq"><span>1 + z = 2<sup>Δn</sup> &nbsp;(redshift in octaves; the CMB sits ≈ 10.09 octaves down)</span><span class="no">(19.1)</span></div>
+<div class="eq"><span>z<sub>total</sub> = z<sub>emit</sub>(= ϟ/r at emission) ⊕ z<sub>propagation</sub>(κ-squeeze across the Clearing)</span><span class="no">(19.2)</span></div>
+<p>Redshift is two native effects and no recession: a depth stamp at emission plus a propagation squeeze. Conflating them is what produces the Hubble tension. No expansion, no dark energy and no dark matter enters any relation on this page.</p>
+<table><tr><th>Quantity</th><th>SDT</th><th>Measured</th><th>Dev</th><th>Label</th></tr>
+<tr><td>CMB redshift</td><td class="num">1099.72</td><td class="num">1089</td><td class="num">0.9840%</td><td><span class="tag">DERIVED</span></td></tr>
+<tr><td>BAO sound horizon</td><td class="num">147 Mpc</td><td class="num">147.09</td><td class="num">0.0612%</td><td><span class="tag">COMPUTED</span></td></tr></table>
+<div class="owed"><strong>Struck as targets.</strong> z = 1100 and T = 3000 K were round epoch-frame conventions of the rival account and were removed from the measured whitelist on 2026-07-30; they are retained only as legacy symbols with their provenance stated. The native pair is z = 1089 with T computed from it.</div>
+
+<h2><span class="lnk">L20 — The ledger</span>What the framework owes</h2>
+<p>A dependency spine is only as good as its willingness to print its own gaps. The register, current at this build:</p>
+<table>
+<tr><th>Debt</th><th>Link</th><th>Standing</th></tr>
+<tr><td>ℓ<sub>P</sub> — the one dimensional seed</td><td>L0</td><td>proven irreducible; not a gap but an axiom</td></tr>
+<tr><td>The seat's absolute magnitude</td><td>L6</td><td>OPEN (FLM12 D-series)</td></tr>
+<tr><td>6π⁵ from a blind wake integral</td><td>L5</td><td>OPEN — 19 ppm match, mechanism unrun</td></tr>
+<tr><td>Geometric route to α</td><td>L10</td><td>OPEN — closed-form search excluded</td></tr>
+<tr><td>a<sub>0</sub> as a derived length</td><td>L10</td><td>OPEN — currently a measured input</td></tr>
+<tr><td>ε = hν as derived</td><td>L11</td><td>OPEN</td></tr>
+<tr><td>2S–2P interval amplitude</td><td>L11</td><td>OPEN — prior claim retracted as fabricated</td></tr>
+<tr><td>Descent onset n = 3 in the closure schedule</td><td>L13</td><td>READ, not derived</td></tr>
+<tr><td>BE/A per-nucleon structure</td><td>L13</td><td>OPEN — area account over-binds α-clusters</td></tr>
+<tr><td>Multi-electron ionisation</td><td>L14</td><td>FAILING — printed, up to 500%</td></tr>
+<tr><td>Galactic rotation</td><td>L18</td><td>FAILING — RMS 66%, model excluded</td></tr>
+<tr><td>Horizon fork (a) vs (b)</td><td>L17</td><td>OPEN — second-order, discriminator named</td></tr>
+<tr><td>Neo-Lorentzian frame question</td><td>L2, L7</td><td>OPEN</td></tr>
+</table>
+
+<div class="decl">
+<p><strong>Methodological declaration.</strong> No quantum wavefunction, field primitive, quark, gluon, dark-matter component, dark-energy term or expansion factor enters any relation on this page; these are prohibited inputs, not merely unused ones. Every numerical comparison is the captured output of <code>benchmarks_suite.cpp</code> against <code>Engine/include/sdt/laws.hpp</code>, which is the single source of truth for every constant and law quoted. Where a relation shares its algebraic form with the prevailing account at the tested order, the correspondence is disclosed at that link and the relation is recorded as unable to discriminate. Where a route is circular, it is labelled IDENTITY at the point of use. Failing links are printed with their real errors rather than omitted.</p>
+</div>
+
+<h2 class="refs">References</h2>
+<div class="refs"><ol>
+<li><code>Engine/include/sdt/laws.hpp</code> — the single source of truth: nine axioms, the Six Laws, the bridge, the Depth-Closure block (relations 17.1–17.2), the closure schedule (13.4–13.5).</li>
+<li><code>Benchmarks/B01_B25/benchmarks_suite.cpp</code> — B01–B39; every figure on this page. Current build: 69 rows passing, 0 non-pending failures, 11 open rows printed with their errors.</li>
+<li><code>derivelist/</code> — the whitelist audited from nine external inputs to five, with <code>AUDIT_2026-07-30.md</code>.</li>
+<li>Investigations — FLM06 (Seed Theorem), FLM12/FLM13 (mass mechanism, seat collapse), NP12/NP17/NP33 (radius law, shared-electron binding, traction mesh), GOM05/GOM22 (variable closure, the relay-speed repair), GD05 (the SPARC failure), CR07 (octave redshift).</li>
+<li><a href="causal-chain.html">The narrated causal chain</a> — the lay twin of this document, same twenty-one links.</li>
+</ol></div>
+</main>
+<footer>
+<a href="causal-chain.html">← THE NARRATED CHAIN</a> &nbsp;·&nbsp;
+<a href="index.html">THE ATLAS</a> &nbsp;·&nbsp;
+<a href="benchmarks.html">THE SUITE</a>
+</footer>
+</body>
+</html>

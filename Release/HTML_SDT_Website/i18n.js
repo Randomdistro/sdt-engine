@@ -114,5 +114,26 @@
   for(var j=0;j<bs.length;j++) bs[j].addEventListener('click',(function(l){ return function(){ apply(l); setOpen(false); }; })(bs[j].getAttribute('data-lang')));
 
   var saved; try{ saved=localStorage.getItem(LS); }catch(_){ saved=null; }
-  apply(saved && DICT[saved]!==undefined ? saved : (saved==='en'?'en':'en'));
+  var startLang = (saved && DICT[saved]!==undefined) ? saved : 'en';
+  apply(startLang);
+
+  // ── register with the site shell (2026-07-30) ──────────────────────────
+  // The shell bar is fixed at z-index 9000 across the whole top, which buried
+  // this module's own fixed button (z-index 2000) — that is why the language
+  // control vanished. The shell now renders a Language TAB and drives us
+  // through this API. The legacy button is hidden whenever the shell is
+  // present, and kept as the fallback when it is not.
+  var current = startLang;
+  window.SDT_I18N_API = {
+    langs: LANGS,
+    current: function(){ return current; },
+    set: function(code){ current = code; apply(code); setOpen(false); }
+  };
+  function shellPresent(){ return !!document.querySelector('.sdtq-bar'); }
+  function hideLegacy(){
+    if (shellPresent()) { burger.style.display='none'; setOpen(false); }
+  }
+  if (document.readyState === 'loading')
+    document.addEventListener('DOMContentLoaded', function(){ setTimeout(hideLegacy, 0); });
+  else setTimeout(hideLegacy, 0);
 })();

@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>/*sdt-theme-guard*/(function(){try{var t=localStorage.getItem("sdt.theme")||"auto";if(t==="auto")t=(window.matchMedia&&window.matchMedia("(prefers-color-scheme:dark)").matches)?"dark":"light";var d=document.documentElement;d.setAttribute("data-theme",t);d.setAttribute("data-sdt-theme",t);}catch(e){}})();</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Orrery — a 3D Solar System — Spatial Displacement Theory</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .or { max-width: 88rem; margin: 0 auto; padding: 4.6rem 1.5rem 5rem; }
+  .or__head { max-width: 46rem; margin-bottom: 1.6rem; }
+  .or__kicker { font-family: 'JetBrains Mono', monospace; font-size: .75rem; letter-spacing: .2em;
+        text-transform: uppercase; color: var(--copper); }
+  .or__title { font-family: 'Source Serif 4', Georgia, serif; font-size: clamp(2rem,5vw,3rem);
+        font-weight: 600; margin: .8rem 0 1rem; line-height: 1.1; }
+  .or__lead { color: var(--ink-soft); font-size: 1.0625rem; line-height: 1.8; }
+
+  .or__stage { position: relative; border: 1px solid var(--paper-edge); border-radius: 3px;
+        background: var(--paper); overflow: hidden; }
+  #orrery { display: block; width: 100%; height: min(72vh, 700px); cursor: grab; touch-action: none; }
+  #orrery.dragging { cursor: grabbing; }
+
+  /* engineering-plate corner box */
+  .plate { position: absolute; right: 14px; bottom: 12px; text-align: right; pointer-events: none;
+        font-family: 'JetBrains Mono', monospace; color: var(--ink-faint); }
+  .plate b { display: block; font-size: .625rem; letter-spacing: .18em; color: var(--copper); font-weight: 500; }
+  .plate span { font-size: .5625rem; letter-spacing: .1em; }
+
+  /* controls */
+  .or__ctrl { position: absolute; left: 14px; top: 12px; display: flex; gap: .4rem; }
+  .or__ctrl button { font-family: 'JetBrains Mono', monospace; font-size: .6875rem; letter-spacing: .08em;
+        padding: .3rem .65rem; border: 1px solid var(--paper-edge); border-radius: 3px;
+        background: rgba(255,254,251,.9); color: var(--ink-muted); cursor: pointer; }
+  .or__ctrl button:hover { border-color: var(--copper); color: var(--ink); }
+  .or__ctrl button[aria-pressed="true"] { background: var(--copper); border-color: var(--copper); color: #fff; }
+  .or__clock { position: absolute; left: 14px; bottom: 12px; font-family: 'JetBrains Mono', monospace;
+        font-size: .6875rem; color: var(--ink-faint); letter-spacing: .08em; pointer-events: none; }
+
+  /* info card */
+  .or__card { position: absolute; right: 14px; top: 12px; width: 15.5rem;
+        background: rgba(255,254,251,.94); border: 1px solid var(--paper-edge); border-radius: 3px;
+        padding: .9rem 1rem; }
+  .or__card h3 { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.2rem; font-weight: 600;
+        margin: 0 0 .1rem; display: flex; align-items: center; gap: .5rem; }
+  .or__card .dot { width: .7rem; height: .7rem; border-radius: 50%; border: 1px solid rgba(30,28,24,.35); }
+  .or__card .cls { font-size: .625rem; letter-spacing: .12em; text-transform: uppercase;
+        color: var(--copper); margin: 0 0 .55rem; font-family: 'JetBrains Mono', monospace; }
+  .or__card table { width: 100%; border-collapse: collapse; font-size: .75rem; }
+  .or__card td { padding: .22rem 0; color: var(--ink-soft); border-bottom: 1px dashed var(--paper-edge); }
+  .or__card td:last-child { text-align: right; font-family: 'JetBrains Mono', monospace; color: var(--ink); }
+  .or__card .kop td { border-bottom: 0; color: var(--copper); font-weight: 600; }
+  .or__card .kop td:last-child { color: var(--copper); }
+  .or__hint { font-size: .6875rem; color: var(--ink-faint); line-height: 1.55; margin: .6rem 0 0; }
+
+  .or__foot { max-width: 46rem; margin-top: 2rem; }
+  .or__foot p { color: var(--ink-soft); line-height: 1.8; }
+  .or__foot .one { border-left: 2px solid var(--copper); background: var(--copper-glow);
+        padding: 1rem 1.2rem; margin: 1.4rem 0; }
+  .or__foot .one h4 { font-size: .68rem; letter-spacing: .13em; text-transform: uppercase;
+        color: var(--copper); margin: 0 0 .45rem; }
+  .or__foot .one p { margin: 0; font-size: .9375rem; }
+  .or__foot .m { font-family: 'JetBrains Mono', monospace; font-size: .9em; }
+
+  @media (max-width: 760px) {
+    .or__card { position: static; width: auto; margin-top: .8rem; }
+    #orrery { height: 62vh; }
+  }
+</style>
+<meta name="description" content="A hand-drawn 3D solar system in ink, copper and gold. Drag to turn it, and watch eight orbits return the same 1477 metres — no gravitational constant, no…">
+<link rel="canonical" href="https://spatialdisplacementtheory.com/solar-system">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/favicon.ico" sizes="64x64">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#b07430">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Spatial Displacement Theory">
+<meta property="og:title" content="The Orrery — a 3D Solar System — Spatial Displacement Theory">
+<meta property="og:description" content="A hand-drawn 3D solar system in ink, copper and gold. Drag to turn it, and watch eight orbits return the same 1477 metres — no gravitational constant, no…">
+<meta property="og:url" content="https://spatialdisplacementtheory.com/solar-system">
+<meta property="og:image" content="https://spatialdisplacementtheory.com/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_AU">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Orrery — a 3D Solar System — Spatial Displacement Theory">
+<meta name="twitter:description" content="A hand-drawn 3D solar system in ink, copper and gold. Drag to turn it, and watch eight orbits return the same 1477 metres — no gravitational constant, no…">
+<meta name="twitter:image" content="https://spatialdisplacementtheory.com/og-card.png">
+</head>
+<body>
+
+<main class="or">
+  <div class="or__head">
+    <p class="or__kicker">Plate VII · the one-ledger orrery</p>
+    <h1 class="or__title">The solar system, in ink and copper</h1>
+    <p class="or__lead">
+      Drag to turn it. Scroll to come closer. Every orbit is drawn from two measured numbers —
+      a distance you can range and a period you can count — and nothing else.
+    </p>
+  </div>
+
+  <div class="or__stage">
+    <canvas id="orrery" aria-label="Interactive 3D model of the solar system. Drag to rotate, scroll to zoom, click a planet for its data."></canvas>
+    <div class="or__ctrl" id="orCtrl">
+      <button data-sp="0"   aria-pressed="false">❚❚</button>
+      <button data-sp="1"   aria-pressed="false">×1</button>
+      <button data-sp="10"  aria-pressed="true">×10</button>
+      <button data-sp="100" aria-pressed="false">×100</button>
+      <button id="orReset" title="Reset the view">reset</button>
+    </div>
+    <div class="or__clock" id="orClock">t = +0.0 yr</div>
+    <div class="or__card" id="orCard"></div>
+    <div class="plate"><b>SPATIAL DISPLACEMENT THEORY</b><span>PLATE VII · J. C. HARVEY · MELBOURNE · MMXXVI</span></div>
+  </div>
+
+  <div class="or__foot">
+    <div class="one">
+      <h4>Eight orbits, one length</h4>
+      <p>
+        For every planet the pair (a, T) returns the same length:
+        <span class="m">ϟ = 4π²a³ / T²c² ≈ 1477 m</span>. No gravitational constant and no
+        kilogram enters the computation — click the planets above and watch the last row of the
+        card not move. Standard physics writes this same number GM<sub>☉</sub>/c²; the orbit
+        ledger cannot discriminate between the two readings. SDT reads it as a <em>length</em> —
+        the Sun's displacement, the koppa — and the
+        <a href="depth_closure_scroller.html">depth-closure scroller</a> shows the same 1477
+        metres read a second way, in the Sun's own spectrum.
+      </p>
+    </div>
+    <p>
+      The drawing is honest about what it compresses: planet sizes and distances are eased onto
+      one sheet (a true-scale Neptune would put this page forty metres wide), but every shape is
+      real — the eccentricities, the inclinations, and the speeds, with Kepler's equation solved
+      each frame. Mercury visibly hurries at perihelion because it does.
+    </p>
+  </div>
+</main>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ── measured inputs (IAU/JPL): a [AU], T [yr], e, i [deg], R [km], v [km/s] ── */
+  var C = 299792458, AU = 1.495978707e11, YR = 3.15576e7;
+  var PLANETS = [
+    { n:'Mercury', a:0.38710, T:0.24085, e:0.2056, i:7.005, R:2440,  v:47.36, col:'#b4b4bc', cls:'silver',          ph:0.05 },
+    { n:'Venus',   a:0.72333, T:0.61520, e:0.0068, i:3.395, R:6052,  v:35.02, col:'#d4a05c', cls:'gold',            ph:0.55 },
+    { n:'Earth',   a:1.00000, T:1.00002, e:0.0167, i:0.000, R:6371,  v:29.78, col:'#2e7cff', cls:'electric blue',   ph:0.20 },
+    { n:'Mars',    a:1.52368, T:1.88085, e:0.0934, i:1.850, R:3390,  v:24.07, col:'#b8622f', cls:'copper',          ph:0.72 },
+    { n:'Jupiter', a:5.20260, T:11.8620, e:0.0489, i:1.303, R:69911, v:13.07, col:'#c08a3e', cls:'copper & gold',   ph:0.35, bands:true },
+    { n:'Saturn',  a:9.55491, T:29.4571, e:0.0565, i:2.489, R:58232, v:9.68,  col:'#d9b45c', cls:'gold, silver-ringed', ph:0.88, ring:true },
+    { n:'Uranus',  a:19.2184, T:84.0110, e:0.0457, i:0.773, R:25362, v:6.80,  col:'#38e8d8', cls:'electric cyan',   ph:0.42 },
+    { n:'Neptune', a:30.1104, T:164.786, e:0.0113, i:1.770, R:24622, v:5.43,  col:'#7b5cff', cls:'electric purple', ph:0.10 }
+  ];
+  var SUN = { n:'The Sun', R:696000, col:'#d9a441' };
+
+  /* koppa from (a, T) only — the whole point */
+  function koppa(p) {
+    var a = p.a * AU, T = p.T * YR;
+    return 4 * Math.PI * Math.PI * a * a * a / (T * T * C * C);
+  }
+
+  /* ── palette ── */
+  var INK = '#1e1c18', FAINT = '#a49d92', EDGE = '#e8e0d2', COPPER = '#b07430';
+
+  /* ── canvas ── */
+  var cv = document.getElementById('orrery'), ctx = cv.getContext('2d');
+  var W = 0, H = 0, DPR = 1;
+  function resize() {
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    W = cv.clientWidth; H = cv.clientHeight;
+    cv.width = Math.round(W * DPR); cv.height = Math.round(H * DPR);
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  }
+  window.addEventListener('resize', resize);
+
+  /* ── view state ── */
+  var yaw0 = -0.6, pitch0 = 0.42, zoom0 = 1.0;
+  var yaw = yaw0, pitch = pitch0, zoom = zoom0;
+  var simT = 0, speed = 10, focused = SUN;
+
+  /* distance compression so Neptune shares the sheet with Mercury */
+  function squash(au) { return Math.pow(au, 0.58); }
+  var SCALE0 = 1 / squash(31);   /* Neptune near the rim at zoom 1 */
+
+  /* display radius: log-eased, px at zoom 1 */
+  function dispR(km) { return 2.1 + 2.6 * Math.log(km / 2440) / Math.LN2 * 0.42; }
+
+  /* ── Kepler position, real shape ── */
+  function bodyPos(p, t) {
+    var M = 2 * Math.PI * (((t / p.T) + p.ph) % 1);
+    var E = M;
+    for (var k = 0; k < 6; k++) E = E - (E - p.e * Math.sin(E) - M) / (1 - p.e * Math.cos(E));
+    var nu = 2 * Math.atan2(Math.sqrt(1 + p.e) * Math.sin(E / 2), Math.sqrt(1 - p.e) * Math.cos(E / 2));
+    var r = p.a * (1 - p.e * p.e) / (1 + p.e * Math.cos(nu));
+    var x = r * Math.cos(nu), z = r * Math.sin(nu);
+    var ir = p.i * Math.PI / 180;
+    return { x: x, y: -z * Math.sin(ir), z: z * Math.cos(ir), au: r };
+  }
+
+  /* world → screen */
+  function project(v) {
+    var s = squash(Math.sqrt(v.x * v.x + v.y * v.y + v.z * v.z) || 1e-9);
+    var m = s / (Math.sqrt(v.x * v.x + v.y * v.y + v.z * v.z) || 1e-9);
+    var x = v.x * m, y = v.y * m, z = v.z * m;
+    var cy = Math.cos(yaw), sy = Math.sin(yaw);
+    var x1 = x * cy + z * sy, z1 = -x * sy + z * cy;
+    var cp = Math.cos(pitch), sp = Math.sin(pitch);
+    var y2 = y * cp - z1 * sp, z2 = y * sp + z1 * cp;
+    var base = Math.min(W, H) * 0.46 * SCALE0 * zoom;
+    var fl = 4.2, per = fl / (fl - z2 * SCALE0 * zoom * 0.9);
+    return { x: W / 2 + x1 * base * per, y: H / 2 + y2 * base * per, d: z2, per: per };
+  }
+
+  /* ── drawing ── */
+  function orbitPath(p) {
+    var pts = [];
+    for (var k = 0; k <= 128; k++) {
+      var nu = 2 * Math.PI * k / 128;
+      var r = p.a * (1 - p.e * p.e) / (1 + p.e * Math.cos(nu));
+      var x = r * Math.cos(nu), z = r * Math.sin(nu);
+      var ir = p.i * Math.PI / 180;
+      pts.push(project({ x: x, y: -z * Math.sin(ir), z: z * Math.cos(ir) }));
+    }
+    return pts;
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    /* ecliptic reference rings — the graph paper */
+    ctx.save();
+    ctx.strokeStyle = INK; ctx.globalAlpha = 0.07; ctx.setLineDash([3, 4]); ctx.lineWidth = 1;
+    ctx.font = '9px "JetBrains Mono", monospace'; ctx.fillStyle = FAINT;
+    [1, 5, 10, 20, 30].forEach(function (au) {
+      ctx.beginPath();
+      for (var k = 0; k <= 96; k++) {
+        var th = 2 * Math.PI * k / 96;
+        var q = project({ x: au * Math.cos(th), y: 0, z: au * Math.sin(th) });
+        k ? ctx.lineTo(q.x, q.y) : ctx.moveTo(q.x, q.y);
+      }
+      ctx.stroke();
+      var lp = project({ x: au, y: 0, z: 0 });
+      ctx.globalAlpha = 0.55; ctx.fillText(au + ' AU', lp.x + 4, lp.y - 3); ctx.globalAlpha = 0.07;
+    });
+    ctx.restore();
+
+    /* orbits */
+    PLANETS.forEach(function (p) {
+      var pts = orbitPath(p);
+      ctx.beginPath();
+      pts.forEach(function (q, k) { k ? ctx.lineTo(q.x, q.y) : ctx.moveTo(q.x, q.y); });
+      if (p === focused) { ctx.strokeStyle = p.col; ctx.globalAlpha = 0.75; ctx.lineWidth = 1.4; }
+      else { ctx.strokeStyle = INK; ctx.globalAlpha = 0.16; ctx.lineWidth = 1; }
+      ctx.stroke(); ctx.globalAlpha = 1;
+    });
+
+    /* bodies, painter-sorted */
+    var items = PLANETS.map(function (p) {
+      var w = bodyPos(p, simT), q = project(w);
+      p._sx = q.x; p._sy = q.y;
+      return { p: p, q: q };
+    });
+    items.push({ p: SUN, q: project({ x: 0, y: 0, z: 0 }) });
+    SUN._sx = items[items.length - 1].q.x; SUN._sy = items[items.length - 1].q.y;
+    items.sort(function (a, b) { return a.q.d - b.q.d; });
+
+    items.forEach(function (it) {
+      var p = it.p, q = it.q;
+      if (p === SUN) return drawSun(q);
+      var r = dispR(p.R) * Math.max(0.75, Math.min(zoom, 2.2)) * q.per;
+      drawPlanet(p, q, r);
+    });
+
+    /* labels */
+    ctx.font = '10px "JetBrains Mono", monospace';
+    items.forEach(function (it) {
+      var p = it.p; if (p === SUN) return;
+      var r = dispR(p.R);
+      ctx.fillStyle = (p === focused) ? COPPER : FAINT;
+      ctx.fillText(p.n.toUpperCase(), p._sx + r + 5, p._sy + 3);
+    });
+  }
+
+  function drawSun(q) {
+    var r = 7.5 * Math.max(0.8, Math.min(zoom, 2));
+    var glow = ctx.createRadialGradient(q.x, q.y, 0, q.x, q.y, r * 3.4);
+    glow.addColorStop(0, 'rgba(217,164,65,.5)'); glow.addColorStop(1, 'rgba(217,164,65,0)');
+    ctx.fillStyle = glow; ctx.beginPath(); ctx.arc(q.x, q.y, r * 3.4, 0, 7); ctx.fill();
+    var g = ctx.createRadialGradient(q.x - r * .3, q.y - r * .3, r * .1, q.x, q.y, r);
+    g.addColorStop(0, '#f0d48a'); g.addColorStop(.6, '#d9a441'); g.addColorStop(1, '#b07430');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(q.x, q.y, r, 0, 7); ctx.fill();
+    ctx.strokeStyle = 'rgba(30,28,24,.5)'; ctx.lineWidth = 1; ctx.stroke();
+  }
+
+  function drawPlanet(p, q, r) {
+    /* light comes from the Sun's screen position */
+    var dx = SUN._sx - q.x, dy = SUN._sy - q.y;
+    var L = Math.sqrt(dx * dx + dy * dy) || 1; dx /= L; dy /= L;
+
+    if (p.ring) drawRing(p, q, r, true);
+
+    var g = ctx.createRadialGradient(q.x + dx * r * .45, q.y + dy * r * .45, r * .15, q.x, q.y, r * 1.15);
+    g.addColorStop(0, lighten(p.col, .45)); g.addColorStop(.65, p.col); g.addColorStop(1, darken(p.col, .3));
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(q.x, q.y, r, 0, 7); ctx.fill();
+
+    if (p.bands) {
+      ctx.save(); ctx.beginPath(); ctx.arc(q.x, q.y, r, 0, 7); ctx.clip();
+      ctx.globalAlpha = .5; ctx.lineWidth = Math.max(1, r * .16); ctx.strokeStyle = darken(p.col, .28);
+      [-0.45, 0.05, 0.5].forEach(function (f) {
+        ctx.beginPath(); ctx.moveTo(q.x - r, q.y + r * f); ctx.lineTo(q.x + r, q.y + r * f); ctx.stroke();
+      });
+      ctx.restore(); ctx.globalAlpha = 1;
+    }
+
+    ctx.strokeStyle = 'rgba(30,28,24,' + (p === focused ? '.85' : '.45') + ')';
+    ctx.lineWidth = p === focused ? 1.4 : 1;
+    ctx.beginPath(); ctx.arc(q.x, q.y, r, 0, 7); ctx.stroke();
+
+    if (p.ring) drawRing(p, q, r, false);
+    if (p === focused) {
+      ctx.strokeStyle = COPPER; ctx.globalAlpha = .5; ctx.setLineDash([2, 3]);
+      ctx.beginPath(); ctx.arc(q.x, q.y, r + 5, 0, 7); ctx.stroke();
+      ctx.setLineDash([]); ctx.globalAlpha = 1;
+    }
+  }
+
+  function drawRing(p, q, r, back) {
+    ctx.save();
+    ctx.translate(q.x, q.y); ctx.rotate(-0.35); ctx.scale(1, 0.34);
+    ctx.strokeStyle = '#a8a8b2'; ctx.lineWidth = r * .34; ctx.globalAlpha = .8;
+    ctx.beginPath();
+    if (back) ctx.arc(0, 0, r * 1.75, Math.PI, 2 * Math.PI);
+    else ctx.arc(0, 0, r * 1.75, 0, Math.PI);
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  function lighten(hex, f) { return shade(hex, f, 255); }
+  function darken(hex, f) { return shade(hex, -f, 0); }
+  function shade(hex, f, to) {
+    var n = parseInt(hex.slice(1), 16), r = n >> 16, g = (n >> 8) & 255, b = n & 255;
+    var mix = function (c) { return Math.round(c + (to - c) * Math.abs(f)) ; };
+    if (f < 0) { to = 0; }
+    return 'rgb(' + mix(r) + ',' + mix(g) + ',' + mix(b) + ')';
+  }
+
+  /* ── info card ── */
+  var card = document.getElementById('orCard');
+  function fmt(x, d) { return x.toFixed(d); }
+  function showCard(p) {
+    focused = p;
+    if (p === SUN) {
+      var ks = PLANETS.map(koppa);
+      var kmin = Math.min.apply(null, ks), kmax = Math.max.apply(null, ks);
+      card.innerHTML =
+        '<h3><span class="dot" style="background:#d9a441"></span>The Sun</h3>' +
+        '<p class="cls">gold · the one source</p>' +
+        '<table>' +
+        '<tr><td>planets drawn</td><td>8</td></tr>' +
+        '<tr><td>measured inputs each</td><td>a, T</td></tr>' +
+        '<tr><td>ϟ across all eight</td><td>' + fmt(kmin, 0) + '–' + fmt(kmax, 0) + ' m</td></tr>' +
+        '<tr class="kop"><td>one length</td><td>≈ 1477 m</td></tr>' +
+        '</table>' +
+        '<p class="or__hint">Click any planet. Drag to turn the sheet, scroll to come closer.</p>';
+      return;
+    }
+    var k = koppa(p);
+    card.innerHTML =
+      '<h3><span class="dot" style="background:' + p.col + '"></span>' + p.n + '</h3>' +
+      '<p class="cls">' + p.cls + '</p>' +
+      '<table>' +
+      '<tr><td>semi-major axis a</td><td>' + fmt(p.a, 3) + ' AU</td></tr>' +
+      '<tr><td>period T</td><td>' + fmt(p.T, p.T < 2 ? 3 : 1) + ' yr</td></tr>' +
+      '<tr><td>eccentricity e</td><td>' + fmt(p.e, 4) + '</td></tr>' +
+      '<tr><td>inclination i</td><td>' + fmt(p.i, 2) + '°</td></tr>' +
+      '<tr><td>mean speed v</td><td>' + fmt(p.v, 2) + ' km/s</td></tr>' +
+      '<tr><td>speed rung k = c/v</td><td>' + fmt(C / (p.v * 1000), 0) + '</td></tr>' +
+      '<tr class="kop"><td>ϟ = 4π²a³/T²c²</td><td>' + fmt(k, 1) + ' m</td></tr>' +
+      '</table>' +
+      '<p class="or__hint">Two measured numbers in — a and T. The same 1477 m out, planet after planet.</p>';
+  }
+
+  /* ── interaction ── */
+  var drag = null, pinch = null;
+  cv.addEventListener('pointerdown', function (e) {
+    cv.setPointerCapture(e.pointerId);
+    if (pinch === null && drag === null) drag = { id: e.pointerId, x: e.clientX, y: e.clientY, moved: false };
+    else if (drag && pinch === null) pinch = { id: e.pointerId, x: e.clientX, y: e.clientY };
+  });
+  cv.addEventListener('pointermove', function (e) {
+    if (pinch && (e.pointerId === pinch.id || e.pointerId === drag.id)) {
+      if (e.pointerId === pinch.id) { pinch.x = e.clientX; pinch.y = e.clientY; }
+      else { drag.x = e.clientX; drag.y = e.clientY; }
+      var d = Math.hypot(pinch.x - drag.x, pinch.y - drag.y);
+      if (pinch.d0) zoom = Math.max(.45, Math.min(6, zoom * d / pinch.d0));
+      pinch.d0 = d;
+      return;
+    }
+    if (drag && e.pointerId === drag.id) {
+      var mx = e.clientX - drag.x, my = e.clientY - drag.y;
+      if (Math.abs(mx) + Math.abs(my) > 3) drag.moved = true;
+      yaw += mx * 0.008; pitch = Math.max(0.05, Math.min(1.45, pitch + my * 0.006));
+      drag.x = e.clientX; drag.y = e.clientY;
+      cv.classList.add('dragging');
+    } else {
+      /* hover cursor */
+      var hit = pick(e.clientX, e.clientY);
+      cv.style.cursor = hit ? 'pointer' : 'grab';
+    }
+  });
+  function endPointer(e) {
+    if (drag && e.pointerId === drag.id) {
+      if (!drag.moved) {
+        var hit = pick(e.clientX, e.clientY);
+        showCard(hit || SUN);
+      }
+      drag = pinch ? { id: pinch.id, x: pinch.x, y: pinch.y, moved: true } : null;
+      pinch = null;
+    } else if (pinch && e.pointerId === pinch.id) { pinch = null; }
+    cv.classList.remove('dragging');
+  }
+  cv.addEventListener('pointerup', endPointer);
+  cv.addEventListener('pointercancel', endPointer);
+  cv.addEventListener('wheel', function (e) {
+    e.preventDefault();
+    zoom = Math.max(.45, Math.min(6, zoom * (e.deltaY < 0 ? 1.1 : 0.9)));
+  }, { passive: false });
+
+  function pick(cx, cy) {
+    var rect = cv.getBoundingClientRect();
+    var x = cx - rect.left, y = cy - rect.top, best = null, bd = 16;
+    PLANETS.concat([SUN]).forEach(function (p) {
+      var d = Math.hypot(p._sx - x, p._sy - y);
+      if (d < bd) { bd = d; best = p; }
+    });
+    return best;
+  }
+
+  /* controls */
+  document.getElementById('orCtrl').addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b) return;
+    if (b.id === 'orReset') { yaw = yaw0; pitch = pitch0; zoom = zoom0; simT = 0; showCard(SUN); return; }
+    speed = Number(b.getAttribute('data-sp'));
+    this.querySelectorAll('button[data-sp]').forEach(function (x) {
+      x.setAttribute('aria-pressed', String(x === b));
+    });
+  });
+
+  /* ── loop ── */
+  var clock = document.getElementById('orClock');
+  var last = null;
+  if (document.documentElement.getAttribute('data-sdt-motion') === 'off') speed = 0;
+  function tick(ts) {
+    if (last !== null && speed > 0) simT += (ts - last) / 1000 * speed / 12;
+    last = ts;
+    clock.textContent = 't = +' + simT.toFixed(1) + ' yr';
+    draw();
+    requestAnimationFrame(tick);
+  }
+
+  resize();
+  showCard(SUN);
+  requestAnimationFrame(tick);
+})();
+</script>
+
+<link rel="stylesheet" href="sdt-shell.css">
+<script src="sdt-shell.js" defer></script>
+</body>
+</html>

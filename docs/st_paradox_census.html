@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>/*sdt-theme-guard*/(function(){try{var t=localStorage.getItem("sdt.theme")||"auto";if(t==="auto")t=(window.matchMedia&&window.matchMedia("(prefers-color-scheme:dark)").matches)?"dark":"light";var d=document.documentElement;d.setAttribute("data-theme",t);d.setAttribute("data-sdt-theme",t);}catch(e){}})();</script>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Paradox Census · Every Contradiction and the Premise That Made It — SDT</title>
@@ -71,7 +73,34 @@ body{background:var(--cream);overflow-x:hidden}
 .act__rule{width:var(--pcw);margin:0 auto var(--sp-xl);height:1px;background:
   linear-gradient(90deg,transparent,var(--th) 12%,var(--th) 88%,transparent);opacity:.5}
 .wrap{width:var(--pcw);margin:0 auto}
-.fade{opacity:var(--in,1);transform:translateY(calc((1 - var(--in,1)) * 22px));will-change:opacity,transform}
+/* ── the plate layer ──────────────────────────────────────────────────────
+   Period figures and apparatus, drawn as SVG so they stay crisp at any
+   density and take their act's colour from currentColor. Deepest parallax:
+   they move least and sit furthest back. Perspective is scoped to the plate
+   itself, so no sticky ancestor is disturbed.
+   ─────────────────────────────────────────────────────────────────────── */
+.plate{position:absolute;top:6%;width:min(48vw,600px);z-index:0;pointer-events:none;
+  perspective:900px;color:var(--th)}
+.plate__in{transform:translate3d(0,var(--py,0px),var(--pz,-300px)) rotate(var(--pr,0deg));
+  opacity:var(--po,.12);will-change:transform,opacity}
+.plate svg{width:100%;height:auto;display:block;stroke:currentColor;fill:none;
+  stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round}
+.plate .solid{fill:currentColor;stroke:none}
+.plate .thin{stroke-width:.6}
+.plate .dash{stroke-dasharray:5 4}
+.plate--left{left:-7%}
+.plate--right{right:-7%}
+.act__head,.act__body,.wrap,.hero .wrap{position:relative;z-index:1}
+@media(max-width:900px){.plate{width:82vw;top:2%}.plate__in{opacity:calc(var(--po,.12)*.6)}}
+
+/* the text is inviolable: it fades in where it stands — no travel, no tilt.
+   Depth belongs to the plates, the field, and the scenes. */
+.fade{opacity:var(--in,1)}
+/* the narrative changes sides as it goes */
+@media(min-width:900px){
+  .act--flip .stagewrap{order:2}
+  .act--flip .col{order:1}
+}
 
 .act__head{width:var(--pcw);margin:0 auto var(--sp-xl);display:flex;gap:1.1rem;align-items:flex-start}
 .sigil{flex:0 0 auto;width:64px;height:64px;border:1px solid var(--th);border-radius:5px;
@@ -786,13 +815,15 @@ body{background:var(--cream);overflow-x:hidden}
       <div class="eyebrow">Act Eight · The trade</div>
       <h2>Every shadow needs a <em>wall</em></h2>
       <p class="premise">Each paradox in this census is cast by a premise. Take the premise away and the
-        shadow has nothing to fall on — it does not get solved, it stops being generated. Twelve premises
-        are listed on the left with what SDT holds instead. <b>Click a row</b> and the entries that lose
-        their root go dark on the board below.</p>
+        shadow has nothing to fall on — it does not get solved, it stops being generated. Twelve premises,
+        and what grows from each. There is no SDT column, because <b>SDT is not the counterpart of these
+        premises — it stands apart from them</b>: for half of the rows the framework contains nothing that
+        could even be compared. The absence is the whole point. <b>Click a row</b> and the entries that
+        lose their root go dark on the board below.</p>
     </div>
   </div>
   <div class="wrap fade" data-fade>
-    <div class="lhead"><span>Their premise</span><span>SDT holds instead</span><span>roots</span></div>
+    <div class="lhead"><span>The premise</span><span>What grows from it</span><span>entries</span></div>
     <div class="ledger" id="ledger"></div>
     <div class="tally" style="margin-top:var(--sp-lg)">
       <div class="cell"><div class="k">roots removed</div><div class="v gold" id="lgOut">0</div></div>
@@ -805,12 +836,13 @@ body{background:var(--cream);overflow-x:hidden}
       <h4>What is not claimed here</h4>
       A row goes dark when the premise that manufactures it is absent — not when SDT has produced a better
       number. And this is the census's own twelve-row table, not an exhaustive mapping of all sixty-seven:
-      the entries left lit are the ones the table does not address. Four of them carry a logical label —
-      the rigid body in Act One, the gravitational pseudotensor, the projector algebra behind
-      Kochen–Specker, and MOND's external field effect. Each belongs to furniture SDT does not own either,
-      and none of them is claimed on this screen, because the source does not claim them. The rest are
-      empirical and incompleteness entries: several are other people's unfinished business, and several
-      are SDT's too. Those are named two screens from here, with what each one owes.
+      the entries left lit are the ones the table does not address. Five of those are paradoxes proper —
+      four logical (the rigid body in Act One, the gravitational pseudotensor, the projector algebra
+      behind Kochen–Specker, MOND's external field effect) and one self-limiting (the Cauchy horizon).
+      Each belongs to furniture SDT does not own either, and none of them is claimed on this screen,
+      because the source does not claim them. The remaining seventeen are empirical and incompleteness
+      entries: several are other people's unfinished business, and several are SDT's too. Those are named
+      two screens from here, with what each one owes.
     </div>
   </div>
 </section>
@@ -849,6 +881,12 @@ body{background:var(--cream);overflow-x:hidden}
 .debt .tagline{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.13em;
   text-transform:uppercase;color:var(--th);margin-bottom:.4rem}
 .debt p{font-size:.9rem;line-height:1.65;color:var(--ink-soft)}
+.theline{font-family:'Source Serif 4',Georgia,serif;font-weight:300;
+  font-size:clamp(1.5rem,4.4vw,2.35rem);line-height:1.18;letter-spacing:-.012em;
+  color:var(--ink);text-align:center;text-wrap:balance;
+  margin:var(--sp-xl) 0;padding:var(--sp-lg) 0;
+  border-top:1px solid var(--copper);border-bottom:1px solid var(--copper)}
+.theline em{font-style:italic;color:var(--copper)}
 .setdown{font-family:'Source Serif 4',Georgia,serif;font-size:1.7rem;line-height:1.4;color:var(--ink);
   max-width:32rem;margin:var(--sp-2xl) auto var(--sp-xl)}
 .setdown em{font-style:italic;color:var(--copper)}
@@ -896,26 +934,38 @@ body{background:var(--cream);overflow-x:hidden}
         already there. And there is a frame: the lattice, and the tick, and a <strong>now</strong> that is
         the same count everywhere. The present that special relativity abolished is back, so the block
         universe, the conventional simultaneity and the disappeared time have nothing to stand on.</p>
-      <p class="fade" data-fade><strong>Not by construction.</strong> That phrase should be struck wherever
-        it appears, including in the census this page walks. You cannot build a theory that dodges
-        contradictions — there is no such move available to anybody. You can only run the work and read what
-        comes back. Nothing was suppressed either: the exclusions here are exclusions of <em>inputs</em> — no
-        G, no M, no wavefunction, no dark sector, no free parameter to fit — and refusing yourself inputs
-        does not protect you from contradictions, it makes them far easier to find. Fewer knobs, fewer places
-        to hide.</p>
+      <p class="fade" data-fade><strong>“By construction” carries two meanings here, and only one of them
+        is being claimed.</strong> Read narrowly it is plain and it is right: nothing in this framework had
+        to be renormalised, glossed over, magicked away or quietly not looked at. SDT is a built physics
+        object, so whatever it lacks, it lacks as a consequence of its axioms — that is where the absences
+        come from, and saying so is a statement about provenance, not a boast.</p>
+      <p class="fade" data-fade>Read the other way — <em>we built it so that contradictions could not
+        appear</em> — it would claim something no one can claim. There is no such move available to anybody.
+        You cannot design a theory into being consistent; you run the work and you read what comes back.
+        Nothing was suppressed on the way, either: the exclusions here are exclusions of <em>inputs</em> —
+        no G, no M, no wavefunction, no dark sector, no free parameter to fit — and refusing yourself inputs
+        does not protect you from contradictions. It makes them far easier to find. Fewer knobs, fewer
+        places to hide.</p>
       <p class="fade" data-fade>The count is zero because zero fell out. Hydrogen closes. The deuteron
         binds at 2.200 against a measured 2.224 MeV with no fitted scale. The closure schedule prints 2, 8,
         20, 28, 50, 82, 126 from two closed forms and then keeps going to 184. A clock at the Sun's surface
-        runs slow by exactly the depth it sits at, to three parts in ten thousand. A galaxy turns. At no
-        point does one result turn round and contradict another, and at no point does the machinery forecast
-        the place where it stops being true. <strong>No paradox exists because no paradox exists.</strong>
-        None fell out. There was never one there to remove.</p>
+        runs slow by exactly the depth it sits at, to three parts in ten thousand. A galaxy turns.</p>
+      <p class="fade" data-fade>And light itself obeys the pressure. Crowd the spations and the relay
+        slows — the measured Shapiro delay pinned the profile against the depth of displacement to the
+        limit of the coefficient — and run the same law to saturation and it lands at a wall: wavelength
+        held at 1571 nm in the near infrared, the relay crawling at 4.43 × 10⁵ m/s — a seven-hundredth of
+        c — at 1844 K and 2.92 × 10⁻³ pascals, with not one parameter fitted. The temperature and the
+        pressure come out exact, from the closure. At no point does one result turn round and contradict
+        another, and at no point does the machinery forecast the place where it stops being true.</p>
+
+      <p class="theline fade" data-fade>No paradox exists<br><em>because no paradoxes exist.</em></p>
+      <p class="fade" data-fade>None fell out. There was never one there to remove.</p>
 
       <div class="oneline fade" data-fade>
         <h5>One formula, across the whole range · v²r = c²ϟ</h5>
         <table>
           <tr><td>proton boundary</td><td>the seat the electron rides</td><td>1.83 c</td></tr>
-          <tr><td>hydrogen ground state</td><td>koppa at the 137th gear</td><td>k = 137.07</td></tr>
+          <tr><td>hydrogen ground state</td><td>v = αc — the 137th gear</td><td>k = 1/α = 137.036</td></tr>
           <tr><td>Earth's surface</td><td>g = v²/R, no G written</td><td>9.81 m/s²</td></tr>
           <tr><td>Sun ↔ Jupiter</td><td>one two-body ledger</td><td>0.4 %</td></tr>
           <tr><td>Sgr A*</td><td>same length, same law</td><td>ϟ = R/k²</td></tr>
@@ -950,61 +1000,85 @@ body{background:var(--cream);overflow-x:hidden}
     <canvas class="sigil" data-sigil="debts" width="64" height="64" aria-hidden="true"></canvas>
     <div>
       <div class="eyebrow">Act Ten · The other side of the ledger</div>
-      <h2>Five <em>debts</em>, stated flat</h2>
+      <h2>The <em>open items</em>, stated flat</h2>
       <p class="premise">A gap is not a paradox — the rule from the first screen, applied here and not
-        bent. These are places the framework is exposed and owes a result. They are unpaid, they are
-        named, and none of them is a contradiction.</p>
+        bent. These are the places the framework owes a result, read from the working ledger as it
+        stands — each one named, bounded, and carrying its own test. None of them is a contradiction.</p>
     </div>
   </div>
   <div class="wrap fade" data-fade>
     <div class="debts">
       <div class="debt">
-        <div class="tagline">Debt · the big one</div>
-        <h5>The reproduction debt</h5>
-        <p>Having no measurement problem is bought with an obligation: reproduce, deterministically, what
-          quantum mechanics gets right — two-slit interference, the Born statistics, and CHSH at 2√2. Bell's
-          theorem says any such account must be nonlocal, and SDT has the resource for that, since the relay
-          is one tick from every boundary and there is a frame. The resource is not the result. Until the
-          numbers are on the table, <em>no QM paradoxes</em> is a true statement about premises and a
-          promissory note about results. It goes first, not last.</p>
+        <div class="tagline">Open · the deepest</div>
+        <h5>The residence law</h5>
+        <p>Five quantum debts turned out to be one. The Born statistics, the double slit's landing counts,
+          Bell's joint weighting, the watched-clock re-preparation and tunnelling's re-seeding all owe the
+          same sentence: how long a form dwells for each unit of wake energy before it commits. Much of
+          the surrounding structure is already in hand — the square is the stored energy of a real
+          displacement field, not an axiom; every strictly local readout caps at 2 and is ruled out by
+          the data; the ceiling at 2√2 falls out of one conserved kick read against the geometry of the
+          test itself, with the S = 4 overdraw excluded by the same conservation. What remains open is
+          the dwell law, and its acceptance test is already built: a mechanical rule, a uniform start,
+          and a landing histogram that has to follow the energy density on its own.</p>
       </div>
       <div class="debt">
         <div class="tagline">Tension</div>
         <h5>The neo-Lorentzian bill</h5>
-        <p>The frame has to hide itself — no preferred-frame effect has shown up to a part in 10¹⁸. Rods and
-          clocks rescaling with lattice motion does that job, and the same logic predicts a ceiling that is
-          not locally measurable. A real quantity nobody can point an instrument at is uncomfortable, and it
-          is the mirror image of the one-way light speed from Act One. The bill: exhibit a second-order
-          observable, or concede the frame is forever indirect.</p>
+        <p>The frame has to hide itself — no preferred-frame effect has shown up to a part in 10¹⁸. And the
+          hiding has a mechanism, not a coordinate story: contraction is the vortex reorganising. Boost the
+          proton and the trefoil's 6π of arc redistribute into the four loops of the boundary ring — the
+          W+1 = 4 that sets R_p = 4ℏ/m_p c. The form pays for its motion out of its own winding, which is
+          why the rescaling is exact and why no instrument riding the form can see it. What that logic also
+          predicts is a ceiling that is not locally measurable — the mirror image of the one-way light
+          speed from Act One. The bill: exhibit a second-order observable, or concede the frame is forever
+          indirect.</p>
       </div>
       <div class="debt">
-        <div class="tagline">Tension · the sharpest</div>
-        <h5>The input and derivation graph</h5>
-        <p>The permitted-input list carries α and m_p, and the framework claims to derive both — koppa at the
-          hydrogen rung, and 6π⁵ for the mass ratio. You cannot assume and derive the same number without it
-          being either a labelled consistency check or a circle. Both of those results are marked
-          <strong>OPEN</strong> in the engine for exactly this reason. The dependency graph has to be
-          published and acyclic: fix the irreducible seeds and demote everything else. This is the one place
-          where the framework could manufacture a contradiction for itself if the labelling ever got lazy.</p>
+        <div class="tagline">Open</div>
+        <h5>Two numbers, still on the input side</h5>
+        <p>The input ledger is published, acyclic, and short — a length, a mass seat, a boundary
+          temperature, a measured floor — and two numbers sit at its edge, matching too well to ignore
+          and too shallowly to claim. 6π⁵ lands on the proton–electron mass ratio at nineteen parts per
+          million; 137 is where hydrogen sits on the ladder. A match is not a mechanism. Until the
+          trefoil produces 6π⁵ from its own geometry and the winding produces the integer, both stand
+          written as open and both stay on the input side of the ledger.</p>
       </div>
       <div class="debt">
-        <div class="tagline">Debt</div>
-        <h5>Stable orbits from pushing alone</h5>
-        <p>A push-only convergence field has to produce closed ellipses and the right precession, not only
-          the circular speed law v = c√(ϟ/r) — which already matches Kepler and carries Mercury geometrically.
-          The full two-body problem from pure pushing is part shown, not finished. If pushing cannot make a
-          stable ellipse, that is a real problem, and the burden is to complete the dynamics rather than
-          restate the kinematics.</p>
+        <div class="tagline">Outstanding · predictions on record</div>
+        <h5>The ledger at eight figures</h5>
+        <p>The two-body exchange ledger holds pointwise on a real eccentric orbit, and it reads Jupiter's
+          shadow in the Sun's own table at the predicted sign and size — no G, no M, nothing but periods
+          and distances. What is outstanding is the ephemeris-grade rerun, and its row predictions are
+          already on record with no room to move. If clean inputs land elsewhere, the ledger fails in
+          public. The test cuts both ways, and it is meant to.</p>
+      </div>
+      <div class="debt">
+        <div class="tagline">Open · a recorded failure</div>
+        <h5>The galaxy, on native terms</h5>
+        <p>The rotation-curve attempt failed on real data, and it is written as failed. The floor
+          underneath it — a₀ = cH₀/2π — is native, and deliberately breaking it degrades the cross-scale
+          collapse six-fold, so the data requires it. But the crossover shape that carries the fit is
+          borrowed, and it is marked borrowed. Until that shape follows from occlusion geometry, the
+          galactic ledger stays open — with the failure kept on the same page as the floor.</p>
+      </div>
+      <div class="debt">
+        <div class="tagline">Open</div>
+        <h5>The exact nuclear numbers</h5>
+        <p>The scale of the nuclear grip is recovered — it is the convergent influx read at the nuclear
+          sphere, not a separate force — and the shared-electron route lands the deuteron at 2.200
+          against a measured 2.224 with no fitted scale. But the occlusion route brackets that number
+          rather than landing on it, and one rung of the closure schedule — why the belts first descend
+          at the fourth tier — is still read from the data rather than priced from the mesh.</p>
       </div>
       <div class="debt">
         <div class="tagline">Debt · narrowing</div>
-        <h5>The strong field</h5>
-        <p>There is a horizon — z = ½ at r = 2ϟ, where the orbital speed is c/√2 and escape is c, landing on
-          the Schwarzschild radius — and there is no singularity behind it: the core is the koppa dissolution
-          surface at z = 1, r = ϟ, a one-third golden-spiral winding, throat of zero width carrying no matter.
-          Owed from <em>that</em> structure: the EHT shadow, the ISCO, and the LIGO ringdown. The inspiral
-          work is drafted; the echo signature is where this framework and general relativity part company and
-          can be told apart.</p>
+        <h5>Black holes</h5>
+        <p>The horizon sits at r_s = 2ϟ, and the velocity law puts it there: the orbit at that radius runs
+          c/√2 — 0.707 of light — so escape costs exactly c, and nothing inside comes out. Behind it
+          there is no singularity — nothing in this
+          framework runs to infinity anywhere. Owed from that structure: the EHT shadow, the ISCO, and the
+          LIGO ringdown. The interior profile is a second-order question with a neutron-star measurement
+          waiting on it.</p>
       </div>
     </div>
 
@@ -1126,18 +1200,18 @@ var CENSUS = [
 
 /* ── the premise ledger — §8.1, with the entries each premise roots ─────── */
 var LEDGER = [
- {a:'No preferred frame; simultaneity is relative.', b:'A preferred frame — the lattice, and the tick. <em>Now is the count, everywhere at once.</em>', k:['SR1','SR2','SR5','SR6','GR4','GR6']},
- {a:'Continuum spacetime with no shortest length.', b:'A discrete lattice with a floor: minimum closure at ℓ_P.', k:['GR1','SM11','SM12']},
- {a:'Gravity is attraction, sourced by mass.', b:'Nothing pulls. Occluded convergence pushes; orbits are least-resistance paths.', k:['MO1','MO3','MO4','LC2','LC6']},
- {a:'A wavefunction, plus a collapse law. Two laws.', b:'Deterministic relay mechanics. Real wound particles. No ψ, and nothing to collapse.', k:['QM1','QM2','QM3','QM6','QM7','QM8','QM9','QM10','QM12']},
- {a:'Only local hidden variables are permitted.', b:'A nonlocal substrate — one tick from every boundary — with a frame to carry it.', k:['QM4','QM5']},
- {a:'A fundamental scalar Higgs and free Yukawas.', b:'Mass is the cost of reorganising throughput. The mass ratio is topology — 6π⁵, marked OPEN.', k:['SM1','SM8','SM13']},
- {a:'Quarks, gluons, and a QCD θ-term.', b:'Nucleons are whole trefoil knots. No constituents to confine.', k:['SM3','SM10','SM15']},
- {a:'The vacuum carries zero-point energy.', b:'The lattice has no QFT vacuum energy. There is no Λ to be 10¹²⁰ wrong.', k:['SM2','LC1']},
- {a:'A singularity behind the horizon, where information dies.', b:'Horizon yes, at z = ½. Singularity no — the core is the koppa dissolution surface, throat of zero width.', k:['GR2','GR3']},
- {a:'Extra dimensions, supersymmetry, and a landscape.', b:'Three of space and the relay tick. One lattice. No landscape to search.', k:['ST1','ST2','ST3','ST4','ST5','ST6','ST7']},
- {a:'An inflaton and a dark sector, to repair the anomalies.', b:'Relay-throughput cosmology. The horizon problem dissolves when every point is one relay tick from every boundary.', k:['LC9','LC11']},
- {a:'Inertia unexplained — Mach named, never delivered.', b:'Inertia is throughput cost measured against the lattice. Machian because there is a lattice to be Machian about.', k:['GR9']}
+ {a:'No preferred frame; simultaneity is relative.', b:'The twins, the barn, the conventional clock, the block universe — and time vanishing outright from quantum gravity.', k:['SR1','SR2','SR5','SR6','GR4','GR6']},
+ {a:'Continuum spacetime with no shortest length.', b:'The singularity theorems. Renormalisation’s infinities. The Landau pole.', k:['GR1','SM11','SM12']},
+ {a:'Gravity is attraction, sourced by mass.', b:'The whole missing-mass industry — the fitted a₀, the cluster deficits, the Bullet argument, the undetected 27%.', k:['MO1','MO3','MO4','LC2','LC6']},
+ {a:'A wavefunction, plus a collapse law. Two laws.', b:'The measurement problem, and its nine faces across Act Three.', k:['QM1','QM2','QM3','QM6','QM7','QM8','QM9','QM10','QM12']},
+ {a:'Only local hidden variables are permitted.', b:'EPR and Bell. <em>Escaped, not solved</em> — a framework that is honestly nonlocal owes Bell nothing.', k:['QM4','QM5']},
+ {a:'A fundamental scalar Higgs and free Yukawas.', b:'The hierarchy cancellation, the million-fold Yukawa spread, the metastable vacuum.', k:['SM1','SM8','SM13']},
+ {a:'Quarks, gluons, and a QCD θ-term.', b:'Strong-CP. Confinement as an unproven Millennium Problem. The spin crisis.', k:['SM3','SM10','SM15']},
+ {a:'The vacuum carries zero-point energy.', b:'The 10¹²⁰ — the worst number in physics never even forms.', k:['SM2','LC1']},
+ {a:'A singularity behind the horizon, where information dies.', b:'The information paradox and the firewall. Nothing is destroyed where nothing is infinite.', k:['GR2','GR3']},
+ {a:'Extra dimensions, supersymmetry, and a landscape.', b:'The whole of Act Five.', k:['ST1','ST2','ST3','ST4','ST5','ST6','ST7']},
+ {a:'An inflaton and a dark sector, to repair the anomalies.', b:'Horizon and flatness, the fix that needs fixing, and the 95% IOU.', k:['LC9','LC11']},
+ {a:'Inertia unexplained — Mach named, never delivered.', b:'Rotation relative to nothing at all.', k:['GR9']}
 ];
 </script>
 <script>
@@ -1576,304 +1650,1119 @@ function mono(g, s) { g.font = s + 'px "JetBrains Mono", ui-monospace, monospace
 function lab(g, x, y, s, c, al) { mono(g, 10); g.fillStyle = c || FAINT; g.textAlign = al || 'left'; g.fillText(s, x, y); }
 function rnd(seed) { var s = seed; return function () { s = (s * 1103515245 + 12345) % 2147483648; return s / 2147483648; }; }
 
+/* ══════════════════════════════════════════════════════════════════════════
+   THE PLATES — one period figure per act, drawn rather than photographed:
+   the apparatus, the observation, the group, the chart. SVG, inheriting the
+   act's colour through currentColor, sitting at the deepest parallax.
+   ══════════════════════════════════════════════════════════════════════════ */
+var PLATE = {
+
+/* SR · the Michelson–Morley interferometer on its mercury float, 1887 */
+sr: '<svg viewBox="0 0 320 320"><circle cx="160" cy="160" r="150" class="thin"/>' +
+  '<circle cx="160" cy="160" r="138" class="thin"/><rect x="52" y="52" width="216" height="216"/>' +
+  '<path d="M160 52 v216 M52 160 h216" class="thin dash"/>' +
+  '<path d="M146 146 l28 28" stroke-width="2.6"/>' +
+  '<rect x="150" y="60" width="20" height="7" class="solid"/>' +
+  '<rect x="60" y="150" width="7" height="20" class="solid"/>' +
+  '<rect x="253" y="150" width="7" height="20" class="solid"/>' +
+  '<rect x="150" y="253" width="20" height="7" class="solid"/>' +
+  '<path d="M160 160 L160 66 M160 160 L66 160 M160 160 L254 160 M160 160 L160 254" stroke-width="1.6"/>' +
+  '<circle cx="160" cy="286" r="13"/><path d="M154 286 h12 M160 280 v12" class="thin"/>' +
+  '<path d="M20 300 h60 M20 296 v8 M80 296 v8" class="thin"/></svg>',
+
+/* GR · the eclipse plate of 29 May 1919, with the measured star shifts */
+gr: '<svg viewBox="0 0 320 320"><rect x="8" y="8" width="304" height="304" class="thin"/>' +
+  '<rect x="20" y="20" width="280" height="280" class="thin dash"/>' +
+  '<circle cx="160" cy="150" r="52" class="solid"/><circle cx="160" cy="150" r="52"/>' +
+  '<circle cx="160" cy="150" r="74" class="thin dash"/>' +
+  '<path d="M160 62 v-22 M160 238 v22 M72 150 h-22 M248 150 h22 M98 88 l-16-16 M222 88 l16-16 M98 212 l-16 16 M222 212 l16 16" class="thin"/>' +
+  '<g class="thin"><path d="M56 66 h14 M63 59 v14"/><path d="M252 74 h14 M259 67 v14"/>' +
+  '<path d="M46 232 h14 M53 225 v14"/><path d="M262 226 h14 M269 219 v14"/>' +
+  '<path d="M110 40 h14 M117 33 v14"/><path d="M198 272 h14 M205 265 v14"/></g>' +
+  '<path d="M63 59 l-9 -9 M259 67 l9 -9 M53 225 l-9 9 M269 219 l9 9" stroke-width="1.8"/>' +
+  '<path d="M24 296 h72" class="thin"/></svg>',
+
+/* QM · the fifth Solvay Conference, 1927 — three rows, seventeen of them */
+qm: '<svg viewBox="0 0 360 220"><path d="M10 200 h340" class="thin"/>' +
+  '<g class="solid">' +
+  '<circle cx="40" cy="72" r="9"/><circle cx="82" cy="68" r="9"/><circle cx="124" cy="72" r="9"/>' +
+  '<circle cx="166" cy="66" r="9"/><circle cx="208" cy="72" r="9"/><circle cx="250" cy="68" r="9"/>' +
+  '<circle cx="292" cy="72" r="9"/>' +
+  '<circle cx="60" cy="118" r="10"/><circle cx="106" cy="114" r="10"/><circle cx="152" cy="118" r="10"/>' +
+  '<circle cx="198" cy="114" r="10"/><circle cx="244" cy="118" r="10"/><circle cx="290" cy="114" r="10"/>' +
+  '<circle cx="76" cy="166" r="11"/><circle cx="130" cy="164" r="11"/><circle cx="184" cy="166" r="11"/>' +
+  '<circle cx="238" cy="164" r="11"/></g>' +
+  '<g class="thin">' +
+  '<path d="M28 96 q12 -14 24 0 M70 92 q12 -14 24 0 M112 96 q12 -14 24 0 M154 90 q12 -14 24 0 M196 96 q12 -14 24 0 M238 92 q12 -14 24 0 M280 96 q12 -14 24 0"/>' +
+  '<path d="M46 146 q14 -16 28 0 M92 142 q14 -16 28 0 M138 146 q14 -16 28 0 M184 142 q14 -16 28 0 M230 146 q14 -16 28 0 M276 142 q14 -16 28 0"/>' +
+  '<path d="M60 198 q16 -22 32 0 M114 196 q16 -22 32 0 M168 198 q16 -22 32 0 M222 196 q16 -22 32 0"/></g>' +
+  '<rect x="10" y="12" width="340" height="196" class="thin dash"/></svg>',
+
+/* SM · a bubble-chamber plate — tracks curling in the field, one vertex */
+sm: '<svg viewBox="0 0 320 320"><circle cx="160" cy="160" r="148" class="thin"/>' +
+  '<path d="M160 300 L160 186" stroke-width="1.8"/>' +
+  '<path d="M160 186 q46 -10 62 -46 q16 -36 -12 -58 q-28 -22 -58 -4"/>' +
+  '<path d="M160 186 q-48 -6 -66 -40 q-18 -34 8 -60"/>' +
+  '<path d="M160 186 q10 -44 -14 -74 q-24 -30 -6 -58" class="thin"/>' +
+  '<path d="M160 186 q34 -30 30 -74 q-4 -44 -30 -60" class="thin"/>' +
+  '<path d="M160 186 q-16 -52 6 -92" class="thin dash"/>' +
+  '<circle cx="160" cy="186" r="4" class="solid"/>' +
+  '<path d="M24 40 h44 M24 36 v8 M68 36 v8" class="thin"/>' +
+  '<path d="M252 280 l24 -24 M252 256 h24 v24" class="thin"/></svg>',
+
+/* ST · a Calabi–Yau cross-section rosette over its hex net */
+st: '<svg viewBox="0 0 320 320"><g class="thin">' +
+  '<path d="M40 100 h240 M40 160 h240 M40 220 h240 M100 40 l0 240 M160 40 l0 240 M220 40 l0 240" opacity=".55"/></g>' +
+  '<g>' +
+  '<path d="M160 44 q60 40 60 116 q0 76 -60 116 q-60 -40 -60 -116 q0 -76 60 -116"/>' +
+  '<path d="M44 160 q40 -60 116 -60 q76 0 116 60 q-40 60 -116 60 q-76 0 -116 -60"/>' +
+  '<path d="M78 78 q84 -8 122 78 q38 86 -34 86 q-72 0 -88 -84 q-16 -84 0 -80" opacity=".8"/>' +
+  '<path d="M242 78 q-84 -8 -122 78 q-38 86 34 86 q72 0 88 -84 q16 -84 0 -80" opacity=".8"/></g>' +
+  '<circle cx="160" cy="160" r="140" class="thin dash"/>' +
+  '<circle cx="160" cy="160" r="6" class="solid"/></svg>',
+
+/* MO · a rotation curve on graph paper: Keplerian expectation, flat measurement */
+mo: '<svg viewBox="0 0 340 260"><g class="thin" opacity=".5">' +
+  '<path d="M40 20 v200 M80 20 v200 M120 20 v200 M160 20 v200 M200 20 v200 M240 20 v200 M280 20 v200 M320 20 v200"/>' +
+  '<path d="M20 40 h300 M20 80 h300 M20 120 h300 M20 160 h300 M20 200 h300"/></g>' +
+  '<path d="M40 220 v-190 M40 220 h288" stroke-width="1.6"/>' +
+  '<path d="M40 220 q30 -108 60 -122 q40 -18 180 -4" class="dash"/>' +
+  '<path d="M40 210 q34 -122 74 -128 q52 -8 92 4 q52 10 102 6" stroke-width="2"/>' +
+  '<g class="thin"><path d="M106 78 h12 M112 72 v12 M112 66 v24 M106 66 h12 M106 90 h12"/>' +
+  '<path d="M150 76 h12 M156 70 v12 M156 62 v24 M150 62 h12 M150 86 h12"/>' +
+  '<path d="M198 78 h12 M204 72 v12 M204 64 v24 M198 64 h12 M198 88 h12"/>' +
+  '<path d="M248 80 h12 M254 74 v12 M254 66 v24 M248 66 h12 M248 90 h12"/>' +
+  '<path d="M294 82 h12 M300 76 v12 M300 68 v24 M294 68 h12 M294 92 h12"/></g>' +
+  '<path d="M36 26 l4 -8 l4 8 M320 216 l8 4 l-8 4" class="solid"/></svg>',
+
+/* ΛCDM · the microwave sky, Mollweide, with its galactic band */
+lc: '<svg viewBox="0 0 360 200"><ellipse cx="180" cy="100" rx="168" ry="86"/>' +
+  '<g class="thin" opacity=".7">' +
+  '<path d="M180 14 v172 M96 22 q-16 78 0 156 M264 22 q16 78 0 156 M40 46 q-8 54 0 108 M320 46 q8 54 0 108"/>' +
+  '<path d="M12 100 h336 M32 58 h296 M32 142 h296 M74 30 h212 M74 170 h212"/></g>' +
+  '<path d="M14 104 q84 -22 166 -2 q84 20 166 -6" stroke-width="2.4"/>' +
+  '<g class="solid" opacity=".55">' +
+  '<ellipse cx="112" cy="60" rx="20" ry="12"/><ellipse cx="240" cy="66" rx="15" ry="10"/>' +
+  '<ellipse cx="80" cy="132" rx="17" ry="11"/><ellipse cx="266" cy="140" rx="21" ry="12"/>' +
+  '<ellipse cx="176" cy="42" rx="13" ry="8"/><ellipse cx="188" cy="158" rx="18" ry="10"/>' +
+  '<ellipse cx="44" cy="96" rx="11" ry="9"/><ellipse cx="316" cy="102" rx="12" ry="9"/></g>' +
+  '<ellipse cx="180" cy="100" rx="168" ry="86" class="thin"/></svg>',
+
+/* SDT · the occlusion geometry, as a drawing-office plate */
+sdt: '<svg viewBox="0 0 340 280"><circle cx="108" cy="140" r="34" class="solid"/>' +
+  '<circle cx="258" cy="140" r="18"/>' +
+  '<path d="M108 140 L340 74 M108 140 L340 206" class="thin dash"/>' +
+  '<g class="thin"><path d="M258 30 v70 M258 250 v-70 M338 140 h-52 M300 62 l-24 24 M300 218 l-24 -24"/>' +
+  '<path d="M254 96 l4 8 l4 -8 M254 184 l4 -8 l4 8 M292 136 l-8 4 l8 4"/></g>' +
+  '<path d="M240 140 L196 140" stroke-width="2.6"/><path d="M196 140 l14 -7 l0 14 z" class="solid"/>' +
+  '<g class="thin"><path d="M108 190 v34 M258 166 v58 M108 214 h150"/>' +
+  '<path d="M116 210 l-8 4 l8 4 M250 210 l8 4 l-8 4"/></g>' +
+  '<path d="M108 106 v-52 M258 122 v-68" class="thin"/>' +
+  '<path d="M74 46 h68 M224 40 h68" class="thin"/>' +
+  '<rect x="14" y="14" width="312" height="252" class="thin dash"/></svg>'
+};
+
+/* ── CHOREOGRAPHY ─────────────────────────────────────────────────────────
+   Every scene has a life: its parts arrive from their own origins, coalesce,
+   hold long enough to make the point, then fly apart. Nothing sits still for
+   a whole act. The physics inside each scene runs on u — the hold window —
+   not on raw scroll, so a disk spins up and is done with it.
+   ───────────────────────────────────────────────────────────────────────── */
+function ease(x) { x = x < 0 ? 0 : x > 1 ? 1 : x; return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; }
+function beat(t, a, b) { return ease((t - a) / (b - a)); }
+function choreo(t) {
+  if (window.PC_OFF) return { k: 1, d: 0, live: 1 };   /* reduced motion: assembled, steady */
+  var k = beat(t, 0.03, 0.30), d = beat(t, 0.76, 0.99);
+  return { k: k, d: d, live: k * (1 - d) };
+}
+/* a distinct origin and exit vector per part — no two arrive the same way */
+function vec(i, w, h, seed) {
+  var a = (i * 2.399963 + (seed || 0) * 1.71) % 6.2832;
+  var r = Math.max(w, h) * (0.8 + ((i * 37) % 11) / 20);
+  return { x: Math.cos(a) * r, y: Math.sin(a) * r * 0.82, r: (((i * 53) % 17) / 17 - 0.5) * 2.8 };
+}
+/* draw one part in its own frame: in from depth, home for the point, out on exit */
+function part(g, c, i, hx, hy, w, h, fn, seed) {
+  var a = c.k * (1 - c.d);
+  if (a <= 0.012) return;
+  var o = vec(i, w, h, seed), f = vec(i + 7, w, h, (seed || 0) + 3), k = c.k, d = c.d;
+  g.save();
+  g.globalAlpha = a;
+  g.translate(hx + o.x * (1 - k) + f.x * 0.6 * d, hy + o.y * (1 - k) + f.y * 0.6 * d);
+  g.rotate(o.r * (1 - k) + f.r * d);
+  var s = (0.3 + 0.7 * k) * (1 + d * 0.9);
+  g.scale(s, s);
+  fn(g);
+  g.restore();
+}
+/* readouts and copy hold only while the point is being made */
+function held(g, c, fn) {
+  if (c.live <= 0.02) return;
+  g.save(); g.globalAlpha = c.live; fn(g); g.restore();
+}
+
+/* Each act carries THREE scenes. The stage plays them as a reel: a scene
+   coalesces, makes its point, decoheres, and hands over. drag01() is the
+   generic control — pointer x across the canvas, remembered per scene. */
+function drag01(S, k, w, dflt) {
+  if (S.dragging && S.dragX != null) S[k] = Math.max(0, Math.min(1, S.dragX / w));
+  return S[k] != null ? S[k] : dflt;
+}
+
 var SCENE = {
 
-/* ── SR · Ehrenfest's disk ─────────────────────────────────────────────── */
-sr: function (g, w, h, t, S) {
-  var C = COL.sr, cx = w / 2, cy = h * 0.46, R = Math.min(w, h) * 0.30;
-  var beta = Math.min(0.97, 0.15 + t * 0.72 + (S.spin || 0));
+/* ═════ SR · three scenes ═════ */
+sr: [
+/* 1 · Ehrenfest's disk */
+function (g, w, h, t, S) {
+  var C = COL.sr, c = choreo(t), u = beat(t, 0.18, 0.72);
+  var cx = w / 2, cy = h * 0.44, R = Math.min(w, h) * 0.28;
+  var beta = Math.min(0.97, 0.12 + u * 0.80 + (drag01(S, 'd1', w, 0.5) - 0.5) * 0.2);
   var gam = 1 / Math.sqrt(1 - beta * beta);
-  S.ph = (S.ph || 0) + beta * 0.05;
-  g.strokeStyle = WHIS; g.lineWidth = 1;
-  g.beginPath(); g.arc(cx, cy, R, 0, 6.2832); g.stroke();
-  /* the rim rulers, each contracted by 1/γ — they no longer close the circle */
-  var N = 26, seg = 6.2832 / N, cov = seg / gam;
-  for (var i = 0; i < N; i++) {
-    var a0 = S.ph + i * seg;
-    g.strokeStyle = C; g.lineWidth = 4;
-    g.beginPath(); g.arc(cx, cy, R, a0, a0 + cov * 0.86); g.stroke();
-  }
-  /* the gap the rim cannot supply */
-  var gapA = 6.2832 * (1 - 1 / gam);
-  g.strokeStyle = 'rgba(142,42,42,.85)'; g.lineWidth = 4;
-  g.beginPath(); g.arc(cx, cy, R + 11, S.ph - gapA, S.ph); g.stroke();
-  /* radius — uncontracted */
-  g.strokeStyle = SOFT; g.lineWidth = 1.4;
-  g.beginPath(); g.moveTo(cx, cy); g.lineTo(cx + R * Math.cos(S.ph), cy + R * Math.sin(S.ph)); g.stroke();
-  g.fillStyle = INK; g.beginPath(); g.arc(cx, cy, 3, 0, 6.2832); g.fill();
-  lab(g, cx, cy + R + 34, 'radius: unchanged · rim: contracted', SOFT, 'center');
-  /* readout */
-  mono(g, 13); g.fillStyle = INK; g.textAlign = 'left';
-  g.fillText('v/c   ' + beta.toFixed(3), 16, h - 58);
-  g.fillText('γ     ' + gam.toFixed(3), 16, h - 40);
-  g.fillStyle = '#8e2a2a';
-  g.fillText('C/2R  ' + (Math.PI * gam).toFixed(3) + '   (π = 3.142)', 16, h - 20);
-  lab(g, w - 14, h - 20, 'missing rim ' + (100 * (1 - 1 / gam)).toFixed(1) + '%', '#8e2a2a', 'right');
-},
-
-/* ── GR · the well with no bottom ──────────────────────────────────────── */
-gr: function (g, w, h, t, S) {
-  var C = COL.gr, cx = w / 2, cy = h * 0.34, K = 1400 + t * 5200;
-  g.lineWidth = 1;
-  for (var i = 1; i <= 16; i++) {
-    var r = i * Math.min(w, h) * 0.035, z = K / (r + 8);
-    g.strokeStyle = rgba(C, 0.15 + 0.5 * (1 - i / 16));
-    g.beginPath(); g.ellipse(cx, cy + Math.min(z, h), r, r * 0.34, 0, 0, 6.2832); g.stroke();
-  }
-  for (var k = 0; k < 18; k++) {
-    var a = k / 18 * 6.2832;
-    g.strokeStyle = rgba(C, 0.16); g.beginPath();
-    for (var s = 1; s <= 16; s++) {
-      var rr = s * Math.min(w, h) * 0.035, zz = Math.min(K / (rr + 8), h);
-      var X = cx + Math.cos(a) * rr, Y = cy + zz + Math.sin(a) * rr * 0.34;
-      s === 1 ? g.moveTo(X, Y) : g.lineTo(X, Y);
-    }
-    g.stroke();
-  }
-  /* horizon */
-  var rs = Math.min(w, h) * 0.115, zh = K / (rs + 8);
-  g.strokeStyle = INK; g.lineWidth = 1.6; g.setLineDash([4, 4]);
-  g.beginPath(); g.ellipse(cx, cy + Math.min(zh, h), rs, rs * 0.34, 0, 0, 6.2832); g.stroke();
-  g.setLineDash([]);
-  lab(g, cx + rs + 10, cy + Math.min(zh, h) - 6, 'horizon', INK);
-  /* the faller */
-  S.fall = (S.fall || 0) + 0.006 + (S.kick ? 0.02 : 0);
-  if (S.fall > 1) { S.fall = 0; S.lost = (S.lost || 0) + 1; }
-  var f = S.fall, rf = Math.min(w, h) * 0.44 * (1 - f), af = f * 12;
-  var zf = Math.min(K / (rf + 8), h * 1.2);
-  g.fillStyle = f > 0.72 ? rgba(C, Math.max(0, 1 - (f - 0.72) / 0.28)) : INK;
-  g.beginPath(); g.arc(cx + Math.cos(af) * rf, cy + zf + Math.sin(af) * rf * 0.34, 4, 0, 6.2832); g.fill();
-  mono(g, 13); g.fillStyle = INK; g.textAlign = 'left';
-  g.fillText('curvature at r → 0 :  ' + (t > 0.86 ? '∞' : (K * 40 / 1e3).toFixed(0) + ' →'), 16, h - 40);
-  g.fillStyle = '#8e2a2a';
-  g.fillText('bits recovered :  0  of  ' + ((S.lost || 0) * 8), 16, h - 20);
-  lab(g, w - 14, h - 20, 'the theorem says the theory stops here', SOFT, 'right');
-},
-
-/* ── QM · U and R ──────────────────────────────────────────────────────── */
-qm: function (g, w, h, t, S) {
-  var C = COL.qm, midY = h * 0.42, x, i;
-  S.hist = S.hist || new Array(46).fill(0);
-  var sig = 0.06 + t * 0.13;
-  function psi2(u) { var a = Math.exp(-Math.pow((u - 0.5) / sig, 2) / 2); return a * (0.55 + 0.45 * Math.pow(Math.cos((u - 0.5) / sig * 2.2), 2)); }
-  /* U — the spreading packet */
-  g.beginPath(); g.moveTo(0, midY);
-  for (x = 0; x <= w; x += 3) g.lineTo(x, midY - psi2(x / w) * h * 0.26);
-  g.lineTo(w, midY); g.closePath();
-  g.fillStyle = rgba(C, 0.16); g.fill();
-  g.strokeStyle = C; g.lineWidth = 1.6; g.stroke();
-  lab(g, 14, 22, 'U  ·  linear, deterministic, reversible  ·  in the equations', C);
-  g.strokeStyle = WHIS; g.lineWidth = 1; g.beginPath(); g.moveTo(0, midY); g.lineTo(w, midY); g.stroke();
-  /* R — outcomes */
-  if (S.fire) {
-    S.fire = 0;
-    var u = 0.5 + (Math.random() + Math.random() + Math.random() - 1.5) * sig * 1.25;
-    var b = Math.max(0, Math.min(45, Math.floor(u * 46)));
-    S.hist[b]++; S.last = b; S.n = (S.n || 0) + 1;
-  }
-  var mx = Math.max.apply(null, S.hist) || 1, bw = w / 46;
-  for (i = 0; i < 46; i++) {
-    var hh = S.hist[i] / mx * h * 0.30;
-    g.fillStyle = i === S.last ? INK : rgba(C, 0.45);
-    g.fillRect(i * bw + 1, h - 44 - hh, bw - 2, hh);
-  }
-  g.strokeStyle = WHIS; g.beginPath(); g.moveTo(0, h - 44); g.lineTo(w, h - 44); g.stroke();
-  lab(g, 14, midY + 26, 'R  ·  one outcome, irreversible  ·  nowhere in the equations', '#8e2a2a');
-  mono(g, 12); g.fillStyle = SOFT; g.textAlign = 'left';
-  g.fillText('outcomes: ' + (S.n || 0) + '   —   the histogram converges on |ψ|², and no line of the theory says why', 14, h - 22);
-  lab(g, w - 14, 22, 'click to fire R', FAINT, 'right');
-},
-
-/* ── SM · precision, and the drawer of dials ───────────────────────────── */
-sm: function (g, w, h, t, S) {
-  var C = COL.sm, i;
-  var pred = '1.001 159 652 181 6', meas = '1.001 159 652 180 7';
-  var shown = Math.floor(2 + t * (pred.length - 2));
-  mono(g, 13); g.textAlign = 'left';
-  g.fillStyle = SOFT; g.fillText('electron magnetic moment', 16, 26);
-  mono(g, 15);
-  g.fillStyle = C;   g.fillText('theory   ' + pred.slice(0, shown), 16, 50);
-  g.fillStyle = INK; g.fillText('measured ' + meas.slice(0, shown), 16, 72);
-  lab(g, 16, 92, 'agreeing past one part in 10¹² — nothing else humans built comes near it', FAINT);
-  g.strokeStyle = WHIS; g.beginPath(); g.moveTo(16, 104); g.lineTo(w - 16, 104); g.stroke();
-  /* the dials */
-  var names = ['m_e','m_μ','m_τ','m_u','m_d','m_s','m_c','m_b','m_t','θ₁₂','θ₁₃','θ₂₃','δ_CP','g₁','g₂','g₃','v','m_H','θ_QCD'];
-  var R = rnd(7), cols = 10, r = Math.min(15, (w - 40) / cols / 2.6);
-  for (i = 0; i < names.length; i++) {
-    var cx = 24 + (i % cols) * ((w - 48) / (cols - 1)), cy = 132 + Math.floor(i / cols) * (r * 3.1);
-    var a = R() * 6.2832;
-    g.strokeStyle = rgba(C, 0.8); g.lineWidth = 1.2;
-    g.beginPath(); g.arc(cx, cy, r, 0, 6.2832); g.stroke();
-    g.beginPath(); g.moveTo(cx, cy); g.lineTo(cx + Math.cos(a) * r, cy + Math.sin(a) * r); g.stroke();
-    lab(g, cx, cy + r + 11, names[i], FAINT, 'center');
-  }
-  lab(g, 16, 132 + 2 * (r * 3.1) + 16, 'nineteen dials · every one measured · not one derived', SOFT);
-  /* the cancellation */
-  var y = h - 46;
-  g.fillStyle = rgba(C, 0.13); g.fillRect(16, y - 16, (w - 32) * Math.min(1, t * 1.4), 20);
-  g.strokeStyle = C; g.lineWidth = 1; g.strokeRect(16, y - 16, w - 32, 20);
-  mono(g, 11); g.fillStyle = SOFT; g.textAlign = 'left';
-  g.fillText('Higgs correction cancels for 34 places …', 22, y - 2);
-  g.textAlign = 'right'; g.fillStyle = INK; g.fillText('… leaving 125 GeV', w - 22, y - 2);
-  lab(g, 16, h - 12, 'one part in 10³⁴, with no symmetry asked to arrange it', FAINT);
-},
-
-/* ── ST · the landscape ────────────────────────────────────────────────── */
-st: function (g, w, h, t, S) {
-  var C = COL.st, x, layer;
-  S.pan = (S.pan || 0) + 0.6 + (S.drag || 0);
-  S.drag = (S.drag || 0) * 0.9;
-  var off = S.pan + t * 400;
-  for (layer = 2; layer >= 0; layer--) {
-    var sc = 1 - layer * 0.28, base = h * (0.42 + layer * 0.17), o = off * (0.4 + layer * 0.4);
-    g.beginPath(); g.moveTo(-4, h);
-    for (x = -4; x <= w + 4; x += 4) {
-      var u = (x + o) * 0.012;
-      var y = base - (Math.sin(u) * 22 + Math.sin(u * 2.31 + 1) * 15 + Math.sin(u * 5.17 + 2) * 9) * sc;
-      g.lineTo(x, y);
-    }
-    g.lineTo(w + 4, h); g.closePath();
-    g.fillStyle = rgba(C, 0.09 + layer * 0.10); g.fill();
-    g.strokeStyle = rgba(C, 0.45 + layer * 0.2); g.lineWidth = 1; g.stroke();
-  }
-  /* ours */
-  var ox = w * 0.5, ou = (ox + off * 1.2) * 0.012;
-  var oy = h * 0.76 - (Math.sin(ou) * 22 + Math.sin(ou * 2.31 + 1) * 15 + Math.sin(ou * 5.17 + 2) * 9) * 0.44;
-  g.strokeStyle = INK; g.lineWidth = 1.4;
-  g.beginPath(); g.moveTo(ox, oy); g.lineTo(ox, oy - 34); g.lineTo(ox + 26, oy - 27); g.lineTo(ox, oy - 20); g.stroke();
-  g.fillStyle = INK; g.beginPath(); g.arc(ox, oy, 4, 0, 6.2832); g.fill();
-  lab(g, ox + 30, oy - 24, 'ours', INK);
-  mono(g, 13); g.fillStyle = INK; g.textAlign = 'left';
-  var cnt = Math.min(500, Math.floor(t * 640));
-  g.fillText('vacua in the catalogue :  10^' + cnt, 16, 28);
-  lab(g, 16, 46, 'no principle inside the theory points at this one', SOFT);
-  lab(g, w - 14, h - 16, 'drag — you will not reach the edge', FAINT, 'right');
-},
-
-/* ── MO · the knob and the curve ───────────────────────────────────────── */
-mo: function (g, w, h, t, S) {
-  var C = COL.mo, i;
-  if (S.a0 == null) S.a0 = 0.55;
-  var a0 = Math.max(0.05, Math.min(1, S.a0 + (t - 0.5) * 0.10));
-  /* dial */
-  var dx = 52, dy = 62, dr = 30, ang = -2.2 + a0 * 4.4;
-  g.strokeStyle = WHIS; g.lineWidth = 6; g.beginPath(); g.arc(dx, dy, dr, -2.2, 2.2); g.stroke();
-  g.strokeStyle = C; g.beginPath(); g.arc(dx, dy, dr, -2.2, ang); g.stroke();
-  g.strokeStyle = INK; g.lineWidth = 2;
-  g.beginPath(); g.moveTo(dx, dy); g.lineTo(dx + Math.cos(ang) * dr, dy + Math.sin(ang) * dr); g.stroke();
-  lab(g, dx, dy + dr + 18, 'a₀ — by hand', SOFT, 'center');
-  mono(g, 12); g.fillStyle = INK; g.textAlign = 'left';
-  g.fillText((a0 * 2.2).toFixed(2) + ' × 10⁻¹⁰ m/s²', dx + dr + 18, dy - 4);
-  lab(g, dx + dr + 18, dy + 14, 'nothing in the law sets it', FAINT);
-  /* the curve */
-  var x0 = 40, y0 = h - 44, x1 = w - 20, y1 = h * 0.42;
-  g.strokeStyle = WHIS; g.lineWidth = 1;
-  g.beginPath(); g.moveTo(x0, y1 - 20); g.lineTo(x0, y0); g.lineTo(x1, y0); g.stroke();
-  lab(g, x0 - 6, y1 - 24, 'v', SOFT, 'right'); lab(g, x1, y0 + 14, 'r', SOFT, 'right');
-  var R = rnd(19), pts = [];
-  for (i = 0; i < 22; i++) { var u = (i + 1) / 22; pts.push([u, (1 - Math.exp(-u * 5.2)) * (0.86 + (R() - 0.5) * 0.11)]); }
-  function model(u) { return (1 - Math.exp(-u * 5.2 * (0.55 + a0 * 0.82))) * (0.4 + a0 * 0.8); }
-  g.strokeStyle = C; g.lineWidth = 2; g.beginPath();
-  for (i = 0; i <= 60; i++) { var uu = i / 60, X = x0 + uu * (x1 - x0), Y = y0 - model(uu) * (y0 - y1); i ? g.lineTo(X, Y) : g.moveTo(X, Y); }
-  g.stroke();
-  var rms = 0;
-  pts.forEach(function (p) {
-    var X = x0 + p[0] * (x1 - x0), Y = y0 - p[1] * (y0 - y1);
-    g.fillStyle = INK; g.beginPath(); g.arc(X, Y, 2.6, 0, 6.2832); g.fill();
-    rms += Math.pow(p[1] - model(p[0]), 2);
+  S.ph = (S.ph || 0) + beta * 0.05 * c.live;
+  part(g, c, 0, cx, cy, w, h, function (x) {
+    x.strokeStyle = WHIS; x.lineWidth = 1;
+    x.beginPath(); x.arc(0, 0, R, 0, 6.2832); x.stroke();
   });
-  rms = Math.sqrt(rms / pts.length);
-  /* the cluster point, which no setting reaches */
-  var CX = x0 + 0.93 * (x1 - x0), CY = y0 - 1.92 * model(0.93) * (y0 - y1) * 0.5 - (y0 - y1) * 0.62;
-  g.strokeStyle = '#8e2a2a'; g.lineWidth = 1.6;
-  g.beginPath(); g.arc(CX, CY, 6, 0, 6.2832); g.stroke();
-  g.beginPath(); g.moveTo(CX, CY + 6); g.lineTo(CX, y0 - model(0.93) * (y0 - y1)); g.stroke();
-  lab(g, CX - 10, CY - 8, 'clusters · ×2 short', '#8e2a2a', 'right');
-  mono(g, 12); g.fillStyle = SOFT; g.textAlign = 'left';
-  g.fillText('galaxy RMS  ' + rms.toFixed(3) + '   ·   one knob fits a whole population', 40, h - 18);
+  var N = 26, seg = 6.2832 / N, cov = seg / gam, i, a0;
+  for (i = 0; i < N; i++) {
+    a0 = S.ph + i * seg;
+    part(g, c, i + 1, cx, cy, w, h, function (x) {
+      x.strokeStyle = C; x.lineWidth = 4;
+      x.beginPath(); x.arc(0, 0, R, a0, a0 + cov * 0.86); x.stroke();
+    }, 2);
+  }
+  var gapA = 6.2832 * (1 - 1 / gam);
+  part(g, c, 29, cx, cy, w, h, function (x) {
+    x.strokeStyle = 'rgba(142,42,42,.85)'; x.lineWidth = 4;
+    x.beginPath(); x.arc(0, 0, R + 11, S.ph - gapA, S.ph); x.stroke();
+  }, 5);
+  part(g, c, 31, cx, cy, w, h, function (x) {
+    x.strokeStyle = SOFT; x.lineWidth = 1.4;
+    x.beginPath(); x.moveTo(0, 0); x.lineTo(R * Math.cos(S.ph), R * Math.sin(S.ph)); x.stroke();
+    x.fillStyle = INK; x.beginPath(); x.arc(0, 0, 3, 0, 6.2832); x.fill();
+  }, 8);
+  held(g, c, function (x) {
+    lab(x, cx, cy + R + 34, 'radius: unchanged · rim: contracted', SOFT, 'center');
+    mono(x, 13); x.fillStyle = INK; x.textAlign = 'left';
+    x.fillText('v/c   ' + beta.toFixed(3), 16, h - 58);
+    x.fillText('γ     ' + gam.toFixed(3), 16, h - 40);
+    x.fillStyle = '#8e2a2a';
+    x.fillText('C/2R  ' + (Math.PI * gam).toFixed(3) + '   (π = 3.142)', 16, h - 20);
+    lab(x, w - 14, h - 20, 'missing rim ' + (100 * (1 - 1 / gam)).toFixed(1) + '%', '#8e2a2a', 'right');
+  });
 },
+/* 2 · the twins — two worldlines, two proper times */
+function (g, w, h, t, S) {
+  var C = COL.sr, c = choreo(t), u = beat(t, 0.18, 0.72);
+  var x0 = w * 0.30, xT = w * 0.70, y0 = h - 60, y1 = 44;
+  var beta = 0.35 + drag01(S, 'd2', w, 0.55) * 0.6;         /* 0.35c → 0.95c */
+  var gam = 1 / Math.sqrt(1 - beta * beta);
+  var reach = (xT - x0) * (beta / 0.95);
+  part(g, c, 0, x0, (y0 + y1) / 2, w, h, function (x) {      /* light cones */
+    x.strokeStyle = WHIS; x.lineWidth = 1; x.setLineDash([3, 5]);
+    var L = (y0 - y1) / 2;
+    x.beginPath(); x.moveTo(-L, L); x.lineTo(L, -L); x.moveTo(L, L); x.lineTo(-L, -L); x.stroke();
+    x.setLineDash([]);
+  }, 3);
+  part(g, c, 2, x0, (y0 + y1) / 2, w, h, function (x) {      /* the stay-home line */
+    x.strokeStyle = INK; x.lineWidth = 2.4;
+    x.beginPath(); x.moveTo(0, (y0 - y1) / 2); x.lineTo(0, -(y0 - y1) / 2); x.stroke();
+  }, 6);
+  part(g, c, 4, x0 + reach / 2, (y0 + y1) / 2, w, h, function (x) { /* the traveller */
+    var H = (y0 - y1) / 2, X = reach / 2;
+    x.strokeStyle = C; x.lineWidth = 2.4;
+    x.beginPath(); x.moveTo(-X, H); x.lineTo(X, 0); x.lineTo(-X, -H); x.stroke();
+    x.fillStyle = C; x.beginPath(); x.arc(X, 0, 4, 0, 6.2832); x.fill();
+  }, 9);
+  /* the trip, run on the hold window */
+  var T = 30, tauH = T, tauT = T / gam;
+  held(g, c, function (x) {
+    var p = beat(t, 0.30, 0.70);                             /* the journey itself */
+    var yy = y0 - p * (y0 - y1);
+    var xx = x0 + (p < 0.5 ? p * 2 : (1 - p) * 2) * reach;
+    x.fillStyle = INK; x.beginPath(); x.arc(x0, yy, 4, 0, 6.2832); x.fill();
+    x.fillStyle = C; x.beginPath(); x.arc(xx, yy, 4, 0, 6.2832); x.fill();
+    mono(x, 13); x.textAlign = 'left';
+    x.fillStyle = INK; x.fillText('stayed :  ' + (tauH * p).toFixed(1) + ' yr', 16, h - 40);
+    x.fillStyle = C;   x.fillText('flew   :  ' + (tauT * p).toFixed(1) + ' yr   at ' + beta.toFixed(2) + 'c', 16, h - 20);
+    lab(x, w - 14, h - 20, 'symmetric by the postulate · asymmetric on arrival', '#8e2a2a', 'right');
+    lab(x, w - 14, 22, 'drag — set the speed', FAINT, 'right');
+  });
+},
+/* 3 · pole and barn — one fact per frame, and they disagree */
+function (g, w, h, t, S) {
+  var C = COL.sr, c = choreo(t), u = beat(t, 0.18, 0.72);
+  var beta = 0.6 + drag01(S, 'd3', w, 0.5) * 0.35, gam = 1 / Math.sqrt(1 - beta * beta);
+  var poleL = w * 0.34, barnL = poleL * 0.72;
+  var run = beat(t, 0.30, 0.70), px0 = -poleL + run * (w + poleL);
+  function panel(x, yc, contracted, tag, fits) {
+    var pl = contracted === 'pole' ? poleL / gam : poleL;
+    var bl = contracted === 'barn' ? barnL / gam : barnL;
+    var bx = w / 2 - bl / 2;
+    x.strokeStyle = SOFT; x.lineWidth = 1.4;
+    x.strokeRect(bx, yc - 26, bl, 52);
+    var inside = px0 > bx && px0 + pl < bx + bl;
+    x.strokeStyle = inside ? '#1e7a4f' : WHIS; x.lineWidth = 3;
+    x.beginPath(); x.moveTo(bx, yc - 26); x.lineTo(bx, yc + 26);
+    x.moveTo(bx + bl, yc - 26); x.lineTo(bx + bl, yc + 26); x.stroke();
+    x.strokeStyle = C; x.lineWidth = 5;
+    x.beginPath(); x.moveTo(px0, yc); x.lineTo(px0 + pl, yc); x.stroke();
+    lab(x, 16, yc - 36, tag, SOFT);
+    lab(x, w - 16, yc - 36, fits, inside ? '#1e7a4f' : '#8e2a2a', 'right');
+    return inside;
+  }
+  part(g, c, 0, w / 2, h * 0.30, w, h, function (x) {
+    x.translate(-w / 2, -h * 0.30);
+    panel(x, h * 0.30, 'pole', 'the barn’s frame — the pole is short', 'both doors shut: yes');
+  }, 4);
+  part(g, c, 2, w / 2, h * 0.68, w, h, function (x) {
+    x.translate(-w / 2, -h * 0.68);
+    panel(x, h * 0.68, 'barn', 'the pole’s frame — the barn is short', 'both doors shut: never');
+  }, 7);
+  held(g, c, function (x) {
+    mono(x, 13); x.fillStyle = INK; x.textAlign = 'left';
+    x.fillText('v = ' + beta.toFixed(2) + 'c   ·   γ = ' + gam.toFixed(2), 16, h - 20);
+    lab(x, w - 14, h - 20, '“at the same time” is the thing that broke', '#8e2a2a', 'right');
+    lab(x, w - 14, 22, 'drag — set the speed', FAINT, 'right');
+  });
+}],
 
-/* ── ΛCDM · the budget and the tension ─────────────────────────────────── */
-lc: function (g, w, h, t, S) {
-  var C = COL.lc, x0 = 20, x1 = w - 20, y = 46, bh = 26;
-  var parts = [[0.05, INK, 'baryons 5%'], [0.27, rgba(C, 0.55), 'cold dark matter 27%'], [0.68, rgba(C, 0.22), 'dark energy 68%']];
+/* ═════ GR · three scenes ═════ */
+gr: [
+/* 1 · the well with no bottom */
+function (g, w, h, t, S) {
+  var C = COL.gr, c = choreo(t), u = beat(t, 0.18, 0.78);
+  var cx = w / 2, cy = h * 0.34, K = 1400 + u * 5200, i, k;
+  for (i = 1; i <= 16; i++) {
+    (function (i) {
+      var r = i * Math.min(w, h) * 0.035, z = K / (r + 8);
+      part(g, c, i, cx, cy, w, h, function (x) {
+        x.strokeStyle = rgba(C, 0.15 + 0.5 * (1 - i / 16)); x.lineWidth = 1;
+        x.beginPath(); x.ellipse(0, Math.min(z, h), r, r * 0.34, 0, 0, 6.2832); x.stroke();
+      });
+    })(i);
+  }
+  for (k = 0; k < 18; k++) {
+    (function (k) {
+      var a = k / 18 * 6.2832;
+      part(g, c, k + 20, cx, cy, w, h, function (x) {
+        x.strokeStyle = rgba(C, 0.16); x.lineWidth = 1; x.beginPath();
+        for (var s2 = 1; s2 <= 16; s2++) {
+          var rr = s2 * Math.min(w, h) * 0.035, zz = Math.min(K / (rr + 8), h);
+          s2 === 1 ? x.moveTo(Math.cos(a) * rr, zz + Math.sin(a) * rr * 0.34)
+                   : x.lineTo(Math.cos(a) * rr, zz + Math.sin(a) * rr * 0.34);
+        }
+        x.stroke();
+      }, 3);
+    })(k);
+  }
+  var rs = Math.min(w, h) * 0.115, zh = Math.min(K / (rs + 8), h);
+  part(g, c, 41, cx, cy, w, h, function (x) {
+    x.strokeStyle = INK; x.lineWidth = 1.6; x.setLineDash([4, 4]);
+    x.beginPath(); x.ellipse(0, zh, rs, rs * 0.34, 0, 0, 6.2832); x.stroke();
+    x.setLineDash([]);
+    lab(x, rs + 10, zh - 6, 'horizon', INK);
+  }, 6);
+  held(g, c, function (x) {
+    S.fall = (S.fall || 0) + 0.006 + (S.click ? 0.02 : 0);
+    if (S.fall > 1) { S.fall = 0; S.lost = (S.lost || 0) + 1; S.click = null; }
+    var f = S.fall, rf = Math.min(w, h) * 0.44 * (1 - f), af = f * 12;
+    var zf = Math.min(K / (rf + 8), h * 1.2);
+    x.fillStyle = f > 0.72 ? rgba(C, Math.max(0, 1 - (f - 0.72) / 0.28)) : INK;
+    x.beginPath(); x.arc(cx + Math.cos(af) * rf, cy + zf + Math.sin(af) * rf * 0.34, 4, 0, 6.2832); x.fill();
+    mono(x, 13); x.fillStyle = INK; x.textAlign = 'left';
+    x.fillText('curvature at r → 0 :  ' + (u > 0.86 ? '∞' : (K * 40 / 1e3).toFixed(0) + ' →'), 16, h - 40);
+    lab(x, w - 14, h - 20, 'the theorem says the theory stops here', SOFT, 'right');
+  });
+},
+/* 2 · the information paradox — distinct in, thermal out */
+function (g, w, h, t, S) {
+  var C = COL.gr, c = choreo(t), cx = w / 2, cy = h * 0.46, R = Math.min(w, h) * 0.17;
+  part(g, c, 0, cx, cy, w, h, function (x) {
+    x.fillStyle = INK; x.beginPath(); x.arc(0, 0, R, 0, 6.2832); x.fill();
+    x.strokeStyle = C; x.lineWidth = 1.4; x.setLineDash([4, 4]);
+    x.beginPath(); x.arc(0, 0, R + 14, 0, 6.2832); x.stroke(); x.setLineDash([]);
+  });
+  /* what falls in — each one different, on its own spiral */
+  S.bits = S.bits || [];
+  if (S.click) { S.bits.push({ a: Math.atan2(S.click.y - cy, S.click.x - cx), p: 0, id: (S.nid = (S.nid || 0) + 1) }); S.click = null; }
+  if (S.bits.length < 3 && c.live > 0.5 && Math.random() < 0.012) S.bits.push({ a: Math.random() * 6.2832, p: 0, id: (S.nid = (S.nid || 0) + 1) });
+  var GLYPH = ['✶', '▲', '■', '♦', '●', '✚', '◗', '★'];
+  held(g, c, function (x) {
+    var keep = [];
+    S.bits.forEach(function (b) {
+      b.p += 0.006; b.a += 0.05;
+      var rr = (Math.min(w, h) * 0.42) * (1 - b.p) + (R + 4) * b.p;
+      if (b.p < 1) {
+        mono(x, 15); x.textAlign = 'center';
+        x.fillStyle = rgba(COL.gr, 1 - b.p * 0.4);
+        x.fillText(GLYPH[b.id % 8], cx + Math.cos(b.a) * rr, cy + Math.sin(b.a) * rr + 5);
+        keep.push(b);
+      } else { S.eaten = (S.eaten || 0) + 1; }
+    });
+    S.bits = keep;
+    /* what comes out — identical, featureless, thermal */
+    S.rad = (S.rad || 0) + 0.02;
+    for (var j = 0; j < 5; j++) {
+      var ph = (S.rad + j / 5) % 1, aa = j * 2.51 + Math.floor(S.rad + j / 5) * 0.7;
+      var rr2 = R + 14 + ph * Math.min(w, h) * 0.30;
+      x.strokeStyle = rgba(COL.gr, (1 - ph) * 0.55); x.lineWidth = 1.3;
+      x.beginPath();
+      for (var q = 0; q <= 10; q++) {
+        var rq = rr2 + q * 3, wob = Math.sin(q * 1.8 + ph * 9) * 3;
+        var X = cx + Math.cos(aa) * rq - Math.sin(aa) * wob, Y = cy + Math.sin(aa) * rq + Math.cos(aa) * wob;
+        q ? x.lineTo(X, Y) : x.moveTo(X, Y);
+      }
+      x.stroke();
+    }
+    mono(x, 13); x.textAlign = 'left';
+    x.fillStyle = INK; x.fillText('fell in :  ' + (S.eaten || 0) + '  ·  every one distinct', 16, h - 40);
+    x.fillStyle = '#8e2a2a'; x.fillText('came out :  thermal  ·  all identical  ·  unitarity broken', 16, h - 20);
+    lab(x, w - 14, 22, 'click — feed it something', FAINT, 'right');
+  });
+},
+/* 3 · Gödel's present — light cones tip until the future comes back */
+function (g, w, h, t, S) {
+  var C = COL.gr, c = choreo(t), cx = w / 2, cy = h * 0.47, R = Math.min(w, h) * 0.30;
+  var tip = drag01(S, 'd3', w, 0.35) * 1.9;                  /* rotation parameter */
+  var closed = tip > 1.45;
+  part(g, c, 0, cx, cy, w, h, function (x) {
+    x.fillStyle = rgba(C, 0.5); x.beginPath(); x.arc(0, 0, 12, 0, 6.2832); x.fill();
+    x.strokeStyle = WHIS; x.lineWidth = 1;
+    x.beginPath(); x.arc(0, 0, R, 0, 6.2832); x.stroke();
+  });
+  for (var i = 0; i < 10; i++) {
+    (function (i) {
+      var a = i / 10 * 6.2832, px2 = cx + Math.cos(a) * R, py2 = cy + Math.sin(a) * R;
+      part(g, c, i + 2, px2, py2, w, h, function (x) {
+        x.rotate(a + 1.5708 + tip);                          /* upright, then tipped along the ring */
+        x.strokeStyle = closed ? '#8e2a2a' : COL.gr; x.lineWidth = 1.4;
+        x.beginPath(); x.moveTo(0, 0); x.lineTo(-10, -20); x.moveTo(0, 0); x.lineTo(10, -20);
+        x.moveTo(-10, -20); x.arc(0, -20, 10, 3.1416, 0); x.stroke();
+        x.fillStyle = rgba(closed ? '#8e2a2a' : COL.gr, 0.15);
+        x.beginPath(); x.moveTo(0, 0); x.lineTo(-10, -20); x.lineTo(10, -20); x.closePath(); x.fill();
+      }, 12);
+    })(i);
+  }
+  held(g, c, function (x) {
+    if (closed) {
+      x.strokeStyle = '#8e2a2a'; x.lineWidth = 2.4;
+      x.beginPath(); x.arc(cx, cy, R, -0.4, 5.4); x.stroke();
+      var ex = cx + Math.cos(5.4) * R, ey = cy + Math.sin(5.4) * R;
+      x.fillStyle = '#8e2a2a'; x.beginPath();
+      x.moveTo(ex, ey); x.lineTo(ex - 12, ey - 4); x.lineTo(ex - 3, ey + 10); x.closePath(); x.fill();
+    }
+    mono(x, 13); x.textAlign = 'left';
+    x.fillStyle = closed ? '#8e2a2a' : INK;
+    x.fillText(closed ? 'the future returns to its own past — a closed timelike curve'
+                      : 'rotation tips the cones · keep going', 16, h - 20);
+    lab(x, w - 14, 22, 'drag — spin the universe', FAINT, 'right');
+    lab(x, w - 14, h - 20, 'an exact solution · Gödel, 1949', SOFT, 'right');
+  });
+}],
+
+/* ═════ QM · three scenes ═════ */
+qm: [
+/* 1 · U and R — two laws, no rule between them */
+function (g, w, h, t, S) {
+  var C = COL.qm, c = choreo(t), u2 = beat(t, 0.18, 0.78), midY = h * 0.42, i;
+  S.hist = S.hist || new Array(46).fill(0);
+  var sig = 0.06 + u2 * 0.13;
+  function psi2(v) { var a = Math.exp(-Math.pow((v - 0.5) / sig, 2) / 2); return a * (0.55 + 0.45 * Math.pow(Math.cos((v - 0.5) / sig * 2.2), 2)); }
+  part(g, c, 0, w / 2, midY, w, h, function (x) {
+    x.beginPath(); x.moveTo(-w / 2, 0);
+    for (var X = 0; X <= w; X += 3) x.lineTo(X - w / 2, -psi2(X / w) * h * 0.26);
+    x.lineTo(w / 2, 0); x.closePath();
+    x.fillStyle = rgba(C, 0.16); x.fill();
+    x.strokeStyle = C; x.lineWidth = 1.6; x.stroke();
+  });
+  part(g, c, 2, w / 2, midY, w, h, function (x) {
+    x.strokeStyle = WHIS; x.lineWidth = 1;
+    x.beginPath(); x.moveTo(-w / 2, 0); x.lineTo(w / 2, 0); x.stroke();
+  }, 4);
+  part(g, c, 4, w / 2, h - 44, w, h, function (x) {
+    x.strokeStyle = WHIS; x.lineWidth = 1;
+    x.beginPath(); x.moveTo(-w / 2, 0); x.lineTo(w / 2, 0); x.stroke();
+  }, 7);
+  held(g, c, function (x) {
+    if (S.fire || S.click) {
+      S.fire = 0; S.click = null;
+      var v = 0.5 + (Math.random() + Math.random() + Math.random() - 1.5) * sig * 1.25;
+      var b = Math.max(0, Math.min(45, Math.floor(v * 46)));
+      S.hist[b]++; S.last = b; S.n = (S.n || 0) + 1;
+    }
+    var mx = Math.max.apply(null, S.hist) || 1, bw = w / 46;
+    for (i = 0; i < 46; i++) {
+      var hh = S.hist[i] / mx * h * 0.30;
+      x.fillStyle = i === S.last ? INK : rgba(C, 0.45);
+      x.fillRect(i * bw + 1, h - 44 - hh, bw - 2, hh);
+    }
+    lab(x, 14, 22, 'U  ·  linear, deterministic, reversible  ·  in the equations', C);
+    lab(x, 14, midY + 26, 'R  ·  one outcome, irreversible  ·  nowhere in the equations', '#8e2a2a');
+    mono(x, 12); x.fillStyle = SOFT; x.textAlign = 'left';
+    x.fillText('outcomes: ' + (S.n || 0) + '   —   converging on |ψ|², and no line of the theory says why', 14, h - 22);
+    lab(x, w - 14, 22, 'click to fire R', FAINT, 'right');
+  });
+},
+/* 2 · the two slits — watched and unwatched are different worlds */
+function (g, w, h, t, S) {
+  var C = COL.qm, c = choreo(t), sx = w * 0.16, scx = w * 0.86;
+  var watch = !!S.watch;
+  if (S.click) { S.watch = !S.watch; S.click = null; watch = !!S.watch; }
+  part(g, c, 0, sx, h * 0.5, w, h, function (x) {          /* source */
+    x.fillStyle = INK; x.beginPath(); x.arc(0, 0, 5, 0, 6.2832); x.fill();
+    x.strokeStyle = WHIS; x.beginPath(); x.arc(0, 0, 11, -0.8, 0.8); x.stroke();
+  });
+  part(g, c, 2, w * 0.45, h * 0.5, w, h, function (x) {    /* the wall and its slits */
+    x.strokeStyle = SOFT; x.lineWidth = 4;
+    x.beginPath(); x.moveTo(0, -h * 0.36); x.lineTo(0, -26); x.stroke();
+    x.beginPath(); x.moveTo(0, -8); x.lineTo(0, 8); x.stroke();
+    x.beginPath(); x.moveTo(0, 26); x.lineTo(0, h * 0.36); x.stroke();
+    if (watch) {
+      x.strokeStyle = '#8e2a2a'; x.lineWidth = 1.4;
+      x.beginPath(); x.arc(0, -17, 9, 0, 6.2832); x.stroke();
+      x.beginPath(); x.arc(0, 17, 9, 0, 6.2832); x.stroke();
+      lab(x, 14, -40, 'detector ON', '#8e2a2a');
+    }
+  }, 5);
+  part(g, c, 4, scx, h * 0.5, w, h, function (x) {         /* the screen */
+    x.strokeStyle = SOFT; x.lineWidth = 2;
+    x.beginPath(); x.moveTo(0, -h * 0.36); x.lineTo(0, h * 0.36); x.stroke();
+  }, 9);
+  S.dotsF = S.dotsF || []; S.dotsW = S.dotsW || [];
+  held(g, c, function (x) {
+    /* one arrival at a time, into the pattern its world allows */
+    if ((S.dotsF.length + S.dotsW.length) < 900 && Math.random() < 0.9) {
+      var v;
+      if (watch) { v = 0.5 + (Math.random() < 0.5 ? -1 : 1) * (0.055 + Math.random() * 0.055) + (Math.random() - 0.5) * 0.05; }
+      else {
+        do { v = Math.random(); } while (Math.random() > Math.pow(Math.cos((v - 0.5) * 21), 2) * Math.exp(-Math.pow((v - 0.5) * 3.4, 2)));
+      }
+      (watch ? S.dotsW : S.dotsF).push(v);
+    }
+    S.dotsF.forEach(function (v) { x.fillStyle = rgba(C, 0.55); x.fillRect(scx + 3 + Math.random() * 0, (v - 0.5) * h * 0.68 + h * 0.5, 2, 2); });
+    S.dotsW.forEach(function (v) { x.fillStyle = 'rgba(142,42,42,.5)'; x.fillRect(scx + 9, (v - 0.5) * h * 0.68 + h * 0.5, 2, 2); });
+    mono(x, 12); x.textAlign = 'left';
+    x.fillStyle = C; x.fillText('unwatched: ' + S.dotsF.length + '  — fringes', 14, h - 40);
+    x.fillStyle = '#8e2a2a'; x.fillText('watched:   ' + S.dotsW.length + '  — two lumps, fringes gone', 14, h - 20);
+    lab(x, w - 14, 22, 'click — toggle the which-path detector', FAINT, 'right');
+  });
+},
+/* 3 · Bell — the bound nature refuses to obey */
+function (g, w, h, t, S) {
+  var C = COL.qm, c = choreo(t), u2 = beat(t, 0.18, 0.78);
+  var x0 = 54, x1 = w - 24, y0 = h - 52, y1 = 40;
+  function Y(s) { return y0 - (s / 3) * (y0 - y1); }        /* S-value 0..3 on the axis */
+  var th = drag01(S, 'd3', w, u2) * 1.5708;                 /* analyser angle 0..π/2 */
+  var Sv = 2 * Math.sqrt(2) * Math.abs(Math.cos(2 * th));   /* CHSH at symmetric settings */
+  part(g, c, 0, x0, y0, w, h, function (x) {                /* axes */
+    x.strokeStyle = WHIS; x.lineWidth = 1;
+    x.beginPath(); x.moveTo(0, y1 - y0); x.lineTo(0, 0); x.lineTo(x1 - x0, 0); x.stroke();
+    lab(x, -8, y1 - y0 + 10, 'S', SOFT, 'right');
+    lab(x, x1 - x0, 14, 'angle', SOFT, 'right');
+  });
+  part(g, c, 2, (x0 + x1) / 2, Y(2), w, h, function (x) {   /* the classical ceiling */
+    x.strokeStyle = '#8e2a2a'; x.lineWidth = 1.4; x.setLineDash([5, 4]);
+    x.beginPath(); x.moveTo(-(x1 - x0) / 2, 0); x.lineTo((x1 - x0) / 2, 0); x.stroke(); x.setLineDash([]);
+    lab(x, (x1 - x0) / 2, -6, 'S = 2 · no local story goes higher', '#8e2a2a', 'right');
+  }, 6);
+  part(g, c, 4, (x0 + x1) / 2, 0, w, h, function (x) {      /* the measured curve */
+    x.translate(-(x0 + x1) / 2, 0);
+    x.strokeStyle = C; x.lineWidth = 2; x.beginPath();
+    for (var i = 0; i <= 90; i++) {
+      var a = i / 90 * 1.5708, s = 2 * Math.sqrt(2) * Math.abs(Math.cos(2 * a));
+      var X = x0 + i / 90 * (x1 - x0);
+      i ? x.lineTo(X, Y(s)) : x.moveTo(X, Y(s));
+    }
+    x.stroke();
+  }, 9);
+  held(g, c, function (x) {
+    var X = x0 + (th / 1.5708) * (x1 - x0);
+    x.fillStyle = INK; x.beginPath(); x.arc(X, Y(Sv), 5, 0, 6.2832); x.fill();
+    x.fillStyle = rgba(C, 0.10);
+    x.fillRect(x0, Y(2 * Math.sqrt(2)), x1 - x0, Y(2) - Y(2 * Math.sqrt(2)));
+    mono(x, 13); x.textAlign = 'left';
+    x.fillStyle = Sv > 2 ? '#8e2a2a' : INK;
+    x.fillText('S = ' + Sv.toFixed(3) + (Sv > 2 ? '   — over the bound. measured. repeatedly.' : ''), 16, h - 20);
+    lab(x, x0, y1 - 8, 'ceiling for ANY local hidden variables — Bell, 1964 · violated in the lab since 1982', SOFT);
+    lab(x, w - 14, 22, 'drag — set the analyser angle', FAINT, 'right');
+  });
+}],
+
+/* ═════ SM · three scenes ═════ */
+sm: [
+/* 1 · the finest agreement ever measured */
+function (g, w, h, t, S) {
+  var C = COL.sm, c = choreo(t), u2 = beat(t, 0.18, 0.78);
+  var pred = '1.001 159 652 181 6', meas = '1.001 159 652 180 7';
+  var shown = Math.floor(2 + u2 * (pred.length - 2));
+  part(g, c, 0, w / 2, h * 0.30, w, h, function (x) {       /* the electron itself */
+    x.strokeStyle = C; x.lineWidth = 1.4;
+    x.beginPath(); x.arc(0, 0, 34, 0, 6.2832); x.stroke();
+    x.beginPath(); x.moveTo(0, -46); x.lineTo(0, 46); x.stroke();
+    x.beginPath(); x.moveTo(0, -46); x.lineTo(-7, -36); x.moveTo(0, -46); x.lineTo(7, -36); x.stroke();
+    x.fillStyle = INK; x.beginPath(); x.arc(0, 0, 4, 0, 6.2832); x.fill();
+  });
+  for (var i = 0; i < 6; i++) {
+    (function (i) {                                          /* the loop corrections arriving */
+      var a = i / 6 * 6.2832;
+      part(g, c, i + 2, w / 2 + Math.cos(a) * 62, h * 0.30 + Math.sin(a) * 62, w, h, function (x) {
+        x.strokeStyle = rgba(C, 0.6); x.lineWidth = 1;
+        x.beginPath(); x.arc(0, 0, 9, 0, 6.2832); x.stroke();
+        x.beginPath(); x.moveTo(-9, 0); x.quadraticCurveTo(0, -7, 9, 0); x.stroke();
+      }, 3);
+    })(i);
+  }
+  held(g, c, function (x) {
+    mono(x, 13); x.textAlign = 'left';
+    x.fillStyle = SOFT; x.fillText('electron magnetic moment  g/2', 16, h * 0.56);
+    mono(x, 16);
+    x.fillStyle = C;   x.fillText('theory     ' + pred.slice(0, shown), 16, h * 0.56 + 28);
+    x.fillStyle = INK; x.fillText('measured   ' + meas.slice(0, shown), 16, h * 0.56 + 54);
+    lab(x, 16, h * 0.56 + 76, 'twelve digits, agreeing — nothing else humans built comes near it', FAINT);
+    lab(x, w - 14, h - 16, 'this is the same theory as the next two screens', SOFT, 'right');
+  });
+},
+/* 2 · the drawer of dials — every one measured, none derived */
+function (g, w, h, t, S) {
+  var C = COL.sm, c = choreo(t), i;
+  if (S.click) { S.spinSeed = (S.spinSeed || 7) + 1; S.click = null; }
+  var names = ['m_e','m_μ','m_τ','m_u','m_d','m_s','m_c','m_b','m_t','θ₁₂','θ₁₃','θ₂₃','δ_CP','g₁','g₂','g₃','v','m_H','θ_QCD'];
+  var R = rnd(S.spinSeed || 7), cols = 5, r = Math.min(22, (w - 60) / cols / 2.4);
+  for (i = 0; i < names.length; i++) {
+    (function (i, a) {
+      var cx = 40 + (i % cols) * ((w - 80) / (cols - 1));
+      var cy = 52 + Math.floor(i / cols) * (r * 2.9);
+      part(g, c, i, cx, cy, w, h, function (x) {
+        x.strokeStyle = rgba(C, 0.8); x.lineWidth = 1.2;
+        x.beginPath(); x.arc(0, 0, r, 0, 6.2832); x.stroke();
+        x.strokeStyle = C; x.lineWidth = 1.8;
+        x.beginPath(); x.moveTo(0, 0); x.lineTo(Math.cos(a) * r, Math.sin(a) * r); x.stroke();
+        lab(x, 0, r + 12, names[i], FAINT, 'center');
+      }, 1);
+    })(i, R() * 6.2832);
+  }
+  held(g, c, function (x) {
+    mono(x, 13); x.fillStyle = INK; x.textAlign = 'left';
+    x.fillText('nineteen dials · every one measured · not one derived', 16, h - 40);
+    lab(x, 16, h - 20, 'click — set them all differently. the theory permits it. that is the problem.', SOFT);
+  });
+},
+/* 3 · two cancellations nothing arranges — the Higgs, and the vacuum */
+function (g, w, h, t, S) {
+  var C = COL.sm, c = choreo(t);
+  var N = Math.round(4 + drag01(S, 'd3', w, 0.5) * 26);      /* orders of cancellation, dragged */
+  var y0 = h * 0.30, bw2 = w * 0.30;
+  part(g, c, 0, w * 0.30, y0, w, h, function (x) {           /* bare vs counterterm */
+    x.fillStyle = rgba(C, 0.5); x.fillRect(-bw2 / 2, -34, bw2, 30);
+    x.fillStyle = rgba('#2b5f7a', 0.5); x.fillRect(-bw2 / 2, 6, bw2, 30);
+    mono(x, 11); x.fillStyle = SOFT; x.textAlign = 'center';
+    x.fillText('+ Λ²', 0, -14); x.fillText('− δm²', 0, 26);
+  });
+  part(g, c, 2, w * 0.72, y0, w, h, function (x) {           /* what survives */
+    x.fillStyle = INK; x.fillRect(-1.5, -18, 3, 36);
+    lab(x, 0, 34, '125 GeV', INK, 'center');
+  }, 5);
+  held(g, c, function (x) {
+    mono(x, 13); x.textAlign = 'left'; x.fillStyle = INK;
+    var digits = '';
+    for (var i = 0; i < Math.min(N, 34); i++) digits += '0';
+    x.fillText('cancels to 1 part in 10^' + N + (N >= 34 ? '  — the measured tuning' : ''), 16, y0 + 70);
+    mono(x, 11); x.fillStyle = FAINT;
+    x.fillText('1.' + digits + '…', 16, y0 + 88);
+    /* the vacuum, below — the same disease at 10¹²⁰ */
+    var ly = h - 60;
+    x.strokeStyle = WHIS; x.lineWidth = 1;
+    x.beginPath(); x.moveTo(16, ly); x.lineTo(w - 16, ly); x.stroke();
+    for (var k = 0; k <= 12; k++) {
+      var X = 16 + k / 12 * (w - 32);
+      x.beginPath(); x.moveTo(X, ly - 3); x.lineTo(X, ly + 3); x.stroke();
+      if (k % 3 === 0) lab(x, X, ly + 16, '10^' + (k * 10), FAINT, 'center');
+    }
+    x.fillStyle = '#8e2a2a'; x.beginPath(); x.arc(16, ly, 5, 0, 6.2832); x.fill();
+    lab(x, 16, ly - 12, 'Λ observed', '#8e2a2a');
+    x.fillStyle = C; x.beginPath(); x.arc(w - 16, ly, 5, 0, 6.2832); x.fill();
+    lab(x, w - 16, ly - 12, 'QFT vacuum', C, 'right');
+    mono(x, 12); x.fillStyle = SOFT; x.textAlign = 'left';
+    x.fillText('the same theory, asked about empty space: wrong by 10¹²⁰', 16, h - 18);
+    lab(x, w - 14, 22, 'drag — demand more cancellation', FAINT, 'right');
+  });
+}],
+
+/* ═════ ST · three scenes ═════ */
+st: [
+/* 1 · the landscape without an edge */
+function (g, w, h, t, S) {
+  var C = COL.st, c = choreo(t), u2 = beat(t, 0.18, 0.78), layer;
+  S.pan = (S.pan || 0) + (0.6 + (S.dragging ? (S.dragDX || 0) * -0.6 : 0)) * c.live;
+  S.dragDX = 0;
+  var off2 = S.pan + u2 * 400;
+  for (layer = 2; layer >= 0; layer--) {
+    (function (layer) {
+      var sc = 1 - layer * 0.28, base = h * (0.42 + layer * 0.17), o = off2 * (0.4 + layer * 0.4);
+      part(g, c, 2 - layer, w / 2, 0, w, h, function (x) {
+        x.beginPath(); x.moveTo(-w / 2 - 4, h);
+        for (var X = -4; X <= w + 4; X += 4) {
+          var v = (X + o) * 0.012;
+          x.lineTo(X - w / 2, base - (Math.sin(v) * 22 + Math.sin(v * 2.31 + 1) * 15 + Math.sin(v * 5.17 + 2) * 9) * sc);
+        }
+        x.lineTo(w / 2 + 4, h); x.closePath();
+        x.fillStyle = rgba(C, 0.09 + layer * 0.10); x.fill();
+        x.strokeStyle = rgba(C, 0.45 + layer * 0.2); x.lineWidth = 1; x.stroke();
+      }, 8);
+    })(layer);
+  }
+  held(g, c, function (x) {
+    var ox = w * 0.5, ou = (ox + off2 * 1.2) * 0.012;
+    var oy = h * 0.76 - (Math.sin(ou) * 22 + Math.sin(ou * 2.31 + 1) * 15 + Math.sin(ou * 5.17 + 2) * 9) * 0.44;
+    x.strokeStyle = INK; x.lineWidth = 1.4;
+    x.beginPath(); x.moveTo(ox, oy); x.lineTo(ox, oy - 34); x.lineTo(ox + 26, oy - 27); x.lineTo(ox, oy - 20); x.stroke();
+    x.fillStyle = INK; x.beginPath(); x.arc(ox, oy, 4, 0, 6.2832); x.fill();
+    lab(x, ox + 30, oy - 24, 'ours', INK);
+    mono(x, 13); x.fillStyle = INK; x.textAlign = 'left';
+    x.fillText('vacua in the catalogue :  10^' + Math.min(500, Math.floor(u2 * 640)), 16, 28);
+    lab(x, 16, 46, 'no principle inside the theory points at this one', SOFT);
+    lab(x, w - 14, h - 16, 'drag — you will not reach the edge', FAINT, 'right');
+  });
+},
+/* 2 · compactification — a dimension at every point, too small to see */
+function (g, w, h, t, S) {
+  var C = COL.st, c = choreo(t);
+  var r0 = (1 - drag01(S, 'd2', w, 0.35)) * 16 + 0.4;        /* the hidden radius, dragged down */
+  var i, j, n = 0;
+  for (i = 0; i < 6; i++) for (j = 0; j < 4; j++) {
+    (function (i, j, idx) {
+      var px2 = w * (0.14 + i * 0.145), py2 = h * (0.16 + j * 0.17);
+      part(g, c, idx, px2, py2, w, h, function (x) {
+        x.fillStyle = rgba(C, 0.7); x.beginPath(); x.arc(0, 0, 1.6, 0, 6.2832); x.fill();
+        if (r0 > 1.6) {
+          x.strokeStyle = rgba(C, Math.min(0.8, (r0 - 1.6) / 6)); x.lineWidth = 1.1;
+          x.beginPath(); x.ellipse(0, -r0 * 0.7, r0, r0 * 0.44, 0.3, 0, 6.2832); x.stroke();
+        }
+      }, 15);
+    })(i, j, n++);
+  }
+  held(g, c, function (x) {
+    var kk = 1 / Math.max(0.05, r0 / 16);
+    mono(x, 13); x.textAlign = 'left';
+    x.fillStyle = INK;
+    x.fillText(r0 > 1.6 ? 'a circle at every point — the sixth dimension, drawn large' :
+               'below any microscope, any collider — and still doing the theory’s work', 16, h - 40);
+    x.fillStyle = SOFT;
+    x.fillText('probe energy to see it :  ×' + kk.toFixed(0) + '   (KK scale ∝ 1/r)', 16, h - 20);
+    lab(x, w - 14, 22, 'drag — shrink the dimension', FAINT, 'right');
+  });
+},
+/* 3 · the superpartners keep moving house */
+function (g, w, h, t, S) {
+  var C = COL.st, c = choreo(t), u2 = beat(t, 0.18, 0.78);
+  var x0 = 54, x1 = w - 26, y0 = h - 56, y1 = 48;
+  var yr = drag01(S, 'd3', w, u2);                           /* 1990 → 2026 */
+  var reachX = x0 + (0.12 + yr * 0.62) * (x1 - x0);          /* collider reach grows */
+  part(g, c, 0, x0, y0, w, h, function (x) {
+    x.strokeStyle = WHIS; x.lineWidth = 1;
+    x.beginPath(); x.moveTo(0, y1 - y0); x.lineTo(0, 0); x.lineTo(x1 - x0, 0); x.stroke();
+    lab(x, x1 - x0, 14, 'mass scale →', SOFT, 'right');
+  });
+  part(g, c, 2, 0, 0, w, h, function (x) {                   /* the excluded region */
+    x.fillStyle = rgba(C, 0.10);
+    x.fillRect(x0, y1, reachX - x0, y0 - y1);
+    x.strokeStyle = C; x.lineWidth = 1.4;
+    x.beginPath(); x.moveTo(reachX, y1); x.lineTo(reachX, y0); x.stroke();
+    lab(x, reachX - 6, y1 + 12, 'searched · empty', C, 'right');
+  }, 21);
+  part(g, c, 4, 0, 0, w, h, function (x) {                   /* the predicted band, always beyond */
+    var bx = reachX + (x1 - reachX) * 0.18, bw2 = (x1 - reachX) * 0.34;
+    x.fillStyle = rgba('#8e2a2a', 0.15); x.fillRect(bx, y1 + 14, bw2, y0 - y1 - 28);
+    x.strokeStyle = '#8e2a2a'; x.setLineDash([4, 4]); x.strokeRect(bx, y1 + 14, bw2, y0 - y1 - 28); x.setLineDash([]);
+    lab(x, bx + bw2 / 2, y1 + 30, 'SUSY, revised', '#8e2a2a', 'center');
+  }, 23);
+  held(g, c, function (x) {
+    var year = Math.round(1990 + yr * 36);
+    var names = year < 2000 ? 'LEP' : year < 2010 ? 'Tevatron' : 'LHC';
+    mono(x, 13); x.textAlign = 'left'; x.fillStyle = INK;
+    x.fillText(year + '  ·  ' + names + '  ·  superpartners found: 0', 16, h - 20);
+    lab(x, w - 14, 22, 'drag — run the decades', FAINT, 'right');
+    lab(x, w - 14, h - 20, 'the prediction retreats exactly as fast as the search advances', SOFT, 'right');
+  });
+}],
+
+/* ═════ MO · three scenes ═════ */
+mo: [
+/* 1 · the knob, and the curve it buys */
+function (g, w, h, t, S) {
+  var C = COL.mo, c = choreo(t), i;
+  var a0 = Math.max(0.05, Math.min(1, drag01(S, 'd1', w, 0.55)));
+  var dx2 = 52, dy2 = 62, dr = 30, ang = -2.2 + a0 * 4.4;
+  part(g, c, 0, dx2, dy2, w, h, function (x) {
+    x.strokeStyle = WHIS; x.lineWidth = 6; x.beginPath(); x.arc(0, 0, dr, -2.2, 2.2); x.stroke();
+    x.strokeStyle = C; x.beginPath(); x.arc(0, 0, dr, -2.2, ang); x.stroke();
+    x.strokeStyle = INK; x.lineWidth = 2;
+    x.beginPath(); x.moveTo(0, 0); x.lineTo(Math.cos(ang) * dr, Math.sin(ang) * dr); x.stroke();
+    lab(x, 0, dr + 18, 'a₀ — by hand', SOFT, 'center');
+  });
+  var x0 = 40, y0 = h - 44, x1 = w - 20, y1 = h * 0.42;
+  function model(v) { return (1 - Math.exp(-v * 5.2 * (0.55 + a0 * 0.82))) * (0.4 + a0 * 0.8); }
+  part(g, c, 2, x0, y0, w, h, function (x) {
+    x.strokeStyle = WHIS; x.lineWidth = 1;
+    x.beginPath(); x.moveTo(0, y1 - 20 - y0); x.lineTo(0, 0); x.lineTo(x1 - x0, 0); x.stroke();
+    lab(x, -6, y1 - 24 - y0, 'v', SOFT, 'right'); lab(x, x1 - x0, 14, 'r', SOFT, 'right');
+  }, 3);
+  part(g, c, 4, x0, 0, w, h, function (x) {
+    x.strokeStyle = C; x.lineWidth = 2; x.beginPath();
+    for (var j = 0; j <= 60; j++) { var uu = j / 60; j ? x.lineTo(uu * (x1 - x0), y0 - model(uu) * (y0 - y1)) : x.moveTo(0, y0 - model(0) * (y0 - y1)); }
+    x.stroke();
+  }, 5);
+  var R = rnd(19), rms = 0;
+  for (i = 0; i < 22; i++) {
+    (function (i) {
+      var pu = (i + 1) / 22, pv = (1 - Math.exp(-pu * 5.2)) * (0.86 + (R() - 0.5) * 0.11);
+      rms += Math.pow(pv - model(pu), 2);
+      part(g, c, i + 6, x0 + pu * (x1 - x0), y0 - pv * (y0 - y1), w, h, function (x) {
+        x.fillStyle = INK; x.beginPath(); x.arc(0, 0, 2.6, 0, 6.2832); x.fill();
+      }, 8);
+    })(i);
+  }
+  rms = Math.sqrt(rms / 22);
+  held(g, c, function (x) {
+    mono(x, 12); x.fillStyle = INK; x.textAlign = 'left';
+    x.fillText((a0 * 2.2).toFixed(2) + ' × 10⁻¹⁰ m/s²  ·  nothing in the law sets it', dx2 + dr + 18, dy2 - 4);
+    x.fillStyle = SOFT;
+    x.fillText('galaxy RMS  ' + rms.toFixed(3) + '   ·   one knob fits a whole population', 40, h - 18);
+    lab(x, w - 14, 22, 'drag — turn the knob', FAINT, 'right');
+  });
+},
+/* 2 · the coincidence the theory cannot explain */
+function (g, w, h, t, S) {
+  var C = COL.mo, c = choreo(t);
+  var H0 = 67 + drag01(S, 'd2', w, 0.5) * 6;                 /* the observed range */
+  var a0m = 1.2, a0c = 299792.458 * H0 / (2 * Math.PI) * 1e3 / 3.086e19 * 1e10; /* cH₀/2π ×10⁻¹⁰ */
+  function meter(x, cx, cy, val, tag, col) {
+    var ang = -2.4 + (val / 2.4) * 4.8;
+    x.strokeStyle = WHIS; x.lineWidth = 5; x.beginPath(); x.arc(cx, cy, 44, -2.4, 2.4); x.stroke();
+    x.strokeStyle = col; x.lineWidth = 2;
+    x.beginPath(); x.moveTo(cx, cy); x.lineTo(cx + Math.cos(ang) * 44, cy + Math.sin(ang) * 44); x.stroke();
+    mono(x, 13); x.fillStyle = col; x.textAlign = 'center';
+    x.fillText(val.toFixed(2), cx, cy + 64);
+    lab(x, cx, cy + 80, tag, SOFT, 'center');
+  }
+  part(g, c, 0, w * 0.30, h * 0.38, w, h, function (x) { meter(x, 0, 0, a0m, 'a₀ · fitted to galaxies', INK); });
+  part(g, c, 2, w * 0.70, h * 0.38, w, h, function (x) { meter(x, 0, 0, a0c, 'cH₀/2π · from cosmology', C); }, 6);
+  held(g, c, function (x) {
+    mono(x, 13); x.textAlign = 'left';
+    x.fillStyle = INK; x.fillText('H₀ = ' + H0.toFixed(1) + ' km/s/Mpc   →   ratio ' + (a0m / a0c).toFixed(2), 16, h - 40);
+    x.fillStyle = '#8e2a2a';
+    x.fillText('a galaxy’s dynamics carrying the universe’s expansion rate — unexplained', 16, h - 20);
+    lab(x, w - 14, 22, 'drag — sweep H₀ across its measured range', FAINT, 'right');
+  });
+},
+/* 3 · the Bullet Cluster — the mass is not where the matter is */
+function (g, w, h, t, S) {
+  var C = COL.mo, c = choreo(t);
+  var sep = drag01(S, 'd3', w, beat(t, 0.25, 0.7)) * w * 0.18 + w * 0.06;
+  var cy = h * 0.44, L = w * 0.5 - sep - 30, R2 = w * 0.5 + sep + 30;
+  part(g, c, 0, w * 0.5, cy, w, h, function (x) {            /* the gas — collided, stalled, centre */
+    x.fillStyle = rgba(C, 0.35);
+    x.beginPath(); x.ellipse(-sep * 0.25, 0, 46, 30, 0, 0, 6.2832); x.fill();
+    x.beginPath(); x.ellipse(sep * 0.25, 0, 34, 24, 0, 0, 6.2832); x.fill();
+    lab(x, 0, 46, 'the gas — most of the ordinary matter, stalled here', SOFT, 'center');
+  });
+  part(g, c, 2, L, cy, w, h, function (x) {                  /* lensing peaks — passed through */
+    x.strokeStyle = INK; x.lineWidth = 1.4;
+    for (var k = 1; k <= 3; k++) { x.beginPath(); x.ellipse(0, 0, k * 13, k * 10, 0, 0, 6.2832); x.stroke(); }
+  }, 11);
+  part(g, c, 4, R2, cy, w, h, function (x) {
+    x.strokeStyle = INK; x.lineWidth = 1.4;
+    for (var k = 1; k <= 3; k++) { x.beginPath(); x.ellipse(0, 0, k * 11, k * 8, 0, 0, 6.2832); x.stroke(); }
+  }, 13);
+  held(g, c, function (x) {
+    lab(x, L, cy - 46, 'the lensing mass', INK, 'center');
+    lab(x, R2, cy - 40, 'the lensing mass', INK, 'center');
+    x.strokeStyle = '#8e2a2a'; x.lineWidth = 1.2; x.setLineDash([3, 4]);
+    x.beginPath(); x.moveTo(L, cy - 30); x.lineTo(w * 0.5 - sep * 0.25, cy); x.stroke(); x.setLineDash([]);
+    mono(x, 13); x.textAlign = 'left';
+    x.fillStyle = INK; x.fillText('modify the force law on the matter you see —', 16, h - 40);
+    x.fillStyle = '#8e2a2a'; x.fillText('and the lensing should sit on the gas. it does not.', 16, h - 20);
+    lab(x, w - 14, 22, 'drag — pull the collision apart', FAINT, 'right');
+  });
+}],
+
+/* ═════ ΛCDM · three scenes ═════ */
+lc: [
+/* 1 · the budget — 95% named, not seen */
+function (g, w, h, t, S) {
+  var C = COL.lc, c = choreo(t);
+  var x0 = 24, x1 = w - 24, y2 = h * 0.42, bh2 = 40;
+  var segs = [[0.05, INK, 'baryons · 5%'], [0.27, rgba(C, 0.55), 'cold dark matter · 27%'], [0.68, rgba(C, 0.22), 'dark energy · 68%']];
   var acc = 0;
-  parts.forEach(function (p) {
+  segs.forEach(function (p, i) {
     var X = x0 + acc * (x1 - x0), W = p[0] * (x1 - x0);
-    g.fillStyle = p[1]; g.fillRect(X, y, W, bh);
+    part(g, c, i, X + W / 2, y2, w, h, function (x) {
+      x.fillStyle = p[1]; x.fillRect(-W / 2, -bh2 / 2, W, bh2);
+      if (i > 0) {
+        x.strokeStyle = rgba(C, 0.5); x.lineWidth = 1;
+        for (var s2 = -W / 2; s2 < W / 2; s2 += 7) { x.beginPath(); x.moveTo(s2, -bh2 / 2); x.lineTo(s2 - 9, bh2 / 2); x.stroke(); }
+      }
+      lab(x, 0, bh2 / 2 + 16, p[2], i ? C : INK, 'center');
+    }, 13);
     acc += p[0];
   });
-  g.strokeStyle = C; g.lineWidth = 1; g.strokeRect(x0, y, x1 - x0, bh);
-  g.strokeStyle = rgba(C, 0.5);
-  for (var s = x0 + 0.05 * (x1 - x0); s < x1; s += 7) { g.beginPath(); g.moveTo(s, y); g.lineTo(s - 8, y + bh); g.stroke(); }
-  lab(g, x0, y - 8, 'everything ever seen, weighed or touched  →  5%', SOFT);
-  lab(g, x1, y + bh + 14, 'the other 95% is named, not detected', C, 'right');
-  /* the tension — error bars shrink with the decades, and the gap opens */
-  var by = h * 0.62, bx0 = 60, bx1 = w - 30, lo = 60, hi = 80;
-  function px(v) { return bx0 + (v - lo) / (hi - lo) * (bx1 - bx0); }
-  g.strokeStyle = WHIS; g.lineWidth = 1; g.beginPath(); g.moveTo(bx0, by + 60); g.lineTo(bx1, by + 60); g.stroke();
-  for (var v = 62; v <= 78; v += 4) { lab(g, px(v), by + 74, String(v), FAINT, 'center'); }
-  var k = 0.15 + t * 0.85;
-  [[67.4, 0.5 / k, C, 'CMB · Planck'], [73.0, 1.04 / k, '#8e2a2a', 'ladder · SH0ES']].forEach(function (d, j) {
-    var sg = Math.min(9, d[1]);
-    g.strokeStyle = d[2]; g.lineWidth = 1.8; g.beginPath();
-    for (var i = 0; i <= 120; i++) {
-      var vv = lo + i / 120 * (hi - lo), yy = by + 60 - Math.exp(-Math.pow((vv - d[0]) / sg, 2) / 2) * 74;
-      i ? g.lineTo(px(vv), yy) : g.moveTo(px(vv), yy);
-    }
-    g.stroke();
-    lab(g, px(d[0]), by - 22 + j * 14, d[3] + '  ' + d[0].toFixed(1) + ' ± ' + sg.toFixed(2), d[2], 'center');
+  held(g, c, function (x) {
+    var probe = drag01(S, 'd1', w, 0.03);
+    var X = x0 + probe * (x1 - x0);
+    x.strokeStyle = INK; x.lineWidth = 1; x.setLineDash([3, 4]);
+    x.beginPath(); x.moveTo(X, y2 - bh2 / 2 - 24); x.lineTo(X, y2 + bh2 / 2 + 30); x.stroke(); x.setLineDash([]);
+    var what = probe < 0.05 ? 'seen, weighed, touched' : probe < 0.32 ? 'inferred from gravity · never detected' : 'a name attached to w ≈ −1';
+    mono(x, 13); x.textAlign = 'left';
+    x.fillStyle = probe < 0.05 ? INK : '#8e2a2a';
+    x.fillText(what, 16, h - 40);
+    lab(x, 16, h - 20, 'everything astronomy has ever imaged lives in the first sliver', SOFT);
+    lab(x, w - 14, 22, 'drag — probe the budget', FAINT, 'right');
   });
-  var nsig = (73.0 - 67.4) / Math.sqrt(Math.pow(0.5 / k, 2) + Math.pow(1.04 / k, 2));
-  mono(g, 13); g.fillStyle = nsig > 5 ? '#8e2a2a' : SOFT; g.textAlign = 'left';
-  g.fillText('separation :  ' + nsig.toFixed(1) + 'σ', 20, h - 16);
-  lab(g, w - 14, h - 16, 'better data pushed them apart, not together', SOFT, 'right');
 },
+/* 2 · the Hubble tension — better data, wider gap */
+function (g, w, h, t, S) {
+  var C = COL.lc, c = choreo(t);
+  var by = h * 0.50, bx0 = 60, bx1 = w - 30, lo = 60, hi = 80;
+  function px(v) { return bx0 + (v - lo) / (hi - lo) * (bx1 - bx0); }
+  var k2 = 0.15 + drag01(S, 'd2', w, beat(t, 0.2, 0.75)) * 0.85;
+  part(g, c, 0, w / 2, by + 60, w, h, function (x) {
+    x.strokeStyle = WHIS; x.lineWidth = 1;
+    x.beginPath(); x.moveTo(bx0 - w / 2, 0); x.lineTo(bx1 - w / 2, 0); x.stroke();
+    for (var v = 62; v <= 78; v += 4) lab(x, px(v) - w / 2, 16, String(v), FAINT, 'center');
+    lab(x, bx1 - w / 2, 32, 'H₀ · km/s/Mpc', SOFT, 'right');
+  });
+  [[67.4, 0.5, C, 'CMB · Planck', 2], [73.0, 1.04, '#8e2a2a', 'ladder · SH0ES', 4]].forEach(function (d, j) {
+    part(g, c, d[4], px(d[0]), by + 60, w, h, function (x) {
+      var sg = Math.min(9, d[1] / k2);
+      x.strokeStyle = d[2]; x.lineWidth = 1.8; x.beginPath();
+      for (var i = 0; i <= 120; i++) {
+        var vv = lo + i / 120 * (hi - lo);
+        i ? x.lineTo(px(vv) - px(d[0]), -Math.exp(-Math.pow((vv - d[0]) / sg, 2) / 2) * 74)
+          : x.moveTo(px(vv) - px(d[0]), -Math.exp(-Math.pow((vv - d[0]) / sg, 2) / 2) * 74);
+      }
+      x.stroke();
+      lab(x, 0, -86 + j * 14, d[3] + '  ' + d[0].toFixed(1), d[2], 'center');
+    }, 17);
+  });
+  held(g, c, function (x) {
+    var nsig = (73.0 - 67.4) / Math.sqrt(Math.pow(0.5 / k2, 2) + Math.pow(1.04 / k2, 2));
+    mono(x, 14); x.fillStyle = nsig > 5 ? '#8e2a2a' : SOFT; x.textAlign = 'left';
+    x.fillText('separation :  ' + nsig.toFixed(1) + 'σ' + (nsig > 5 ? '   — past discovery threshold, and nobody has found the error' : ''), 20, h - 20);
+    lab(x, w - 14, 22, 'drag — improve the measurements', FAINT, 'right');
+  });
+},
+/* 3 · forty years underground — events: 0 */
+function (g, w, h, t, S) {
+  var C = COL.lc, c = choreo(t);
+  var x0 = 64, x1 = w - 30, y0 = h - 60, y1 = 46;
+  var yr = drag01(S, 'd3', w, beat(t, 0.2, 0.78));           /* 1985 → 2026 */
+  part(g, c, 0, x0, y0, w, h, function (x) {
+    x.strokeStyle = WHIS; x.lineWidth = 1;
+    x.beginPath(); x.moveTo(0, y1 - y0); x.lineTo(0, 0); x.lineTo(x1 - x0, 0); x.stroke();
+    lab(x, -8, y1 - y0 + 10, 'cross-section', SOFT, 'right');
+    lab(x, x1 - x0, 14, 'year', SOFT, 'right');
+  });
+  part(g, c, 2, 0, 0, w, h, function (x) {                   /* the sensitivity floor, descending */
+    x.strokeStyle = C; x.lineWidth = 2; x.beginPath();
+    for (var i = 0; i <= 60; i++) {
+      var u2 = i / 60, X = x0 + u2 * (x1 - x0) * yr;
+      var Y = y0 - (y0 - y1) * (0.92 - u2 * yr * 0.82);
+      i ? x.lineTo(X, Y) : x.moveTo(X, Y);
+    }
+    x.stroke();
+    x.fillStyle = rgba(C, 0.08);
+    x.beginPath(); x.moveTo(x0, y0 - (y0 - y1) * 0.92);
+    for (var j = 0; j <= 60; j++) { var u3 = j / 60; x.lineTo(x0 + u3 * (x1 - x0) * yr, y0 - (y0 - y1) * (0.92 - u3 * yr * 0.82)); }
+    x.lineTo(x0 + (x1 - x0) * yr, y1); x.lineTo(x0, y1); x.closePath(); x.fill();
+  }, 19);
+  part(g, c, 4, 0, 0, w, h, function (x) {                   /* the theorised region, evaporating */
+    var top = y0 - (y0 - y1) * 0.55, bot = y0 - (y0 - y1) * (0.92 - yr * 0.82);
+    if (bot > top) {
+      x.fillStyle = 'rgba(142,42,42,.12)';
+      x.fillRect(x0 + 10, top, (x1 - x0) - 20, bot - top);
+      x.setLineDash([4, 4]); x.strokeStyle = '#8e2a2a';
+      x.strokeRect(x0 + 10, top, (x1 - x0) - 20, bot - top); x.setLineDash([]);
+      lab(x, x0 + 18, top + 14, 'where the WIMP was predicted', '#8e2a2a');
+    }
+  }, 23);
+  held(g, c, function (x) {
+    var year = Math.round(1985 + yr * 41);
+    var det = year < 1995 ? 'Ge diodes' : year < 2007 ? 'CDMS' : year < 2013 ? 'XENON100' : year < 2019 ? 'LUX · PandaX' : 'LZ · XENONnT';
+    mono(x, 13); x.textAlign = 'left';
+    x.fillStyle = INK; x.fillText(year + '  ·  ' + det + '  ·  sensitivity ×10⁶ better than 1985', 16, h - 40);
+    x.fillStyle = '#8e2a2a'; x.fillText('dark-matter events, forty years, every detector :  0', 16, h - 20);
+    lab(x, w - 14, 22, 'drag — run the decades', FAINT, 'right');
+  });
+}],
 
-/* ── SDT · occlusion ───────────────────────────────────────────────────── */
-sdt: function (g, w, h, t, S) {
-  var C = COL.sdt, cx = w * 0.34, cy = h * 0.5, R1 = 26;
-  var bx = S.bx != null ? S.bx : w * 0.74, by = S.by != null ? S.by : h * 0.5, R2 = 15;
-  var i, n = 64, dx = bx - cx, dy = by - cy, r = Math.max(60, Math.hypot(dx, dy));
-  /* convergent throughput on the small body — one ray removed per occlusion */
-  for (i = 0; i < n; i++) {
-    var a = i / n * 6.2832 + (S.ph = (S.ph || 0) + 0.00008);
-    var ex = bx + Math.cos(a) * r * 2.4, ey = by + Math.sin(a) * r * 2.4;
-    /* is the ray blocked by the big body? */
-    var t1 = ((cx - bx) * (ex - bx) + (cy - by) * (ey - by)) / Math.pow(Math.hypot(ex - bx, ey - by), 2);
-    var px2 = bx + (ex - bx) * t1, py2 = by + (ey - by) * t1;
-    var blocked = t1 > 0 && Math.hypot(px2 - cx, py2 - cy) < R1;
-    g.strokeStyle = blocked ? 'rgba(142,42,42,.10)' : rgba(C, 0.5);
-    g.lineWidth = 1;
-    g.beginPath(); g.moveTo(ex, ey);
-    g.lineTo(bx + Math.cos(a) * (R2 + 3), by + Math.sin(a) * (R2 + 3));
-    g.stroke();
+/* ═════ SDT · three scenes ═════ */
+sdt: [
+/* 1 · occlusion — the one force, drawn */
+function (g, w, h, t, S) {
+  var C = COL.sdt, c = choreo(t);
+  var cx = w * 0.34, cy = h * 0.5, R1 = 26, R2 = 15;
+  if (S.dragging && S.dragX != null) { S.bx = S.dragX; S.by = S.dragY; }
+  var bx = S.bx != null ? S.bx : w * 0.74, by = S.by != null ? S.by : h * 0.5;
+  var i, r = Math.max(60, Math.hypot(bx - cx, by - cy));
+  S.ph = (S.ph || 0) + 0.00008;
+  for (var b2 = 0; b2 < 8; b2++) {                          /* the throughput, in eight bundles */
+    (function (b2) {
+      part(g, c, b2, bx, by, w, h, function (x) {
+        for (var j = 0; j < 8; j++) {
+          var a = (b2 * 8 + j) / 64 * 6.2832 + S.ph;
+          var ex = Math.cos(a) * r * 2.4, ey = Math.sin(a) * r * 2.4;
+          var t1 = ((cx - bx) * ex + (cy - by) * ey) / Math.pow(r * 2.4, 2);
+          var blocked = t1 > 0 && Math.hypot(bx + ex * t1 - cx, by + ey * t1 - cy) < R1;
+          x.strokeStyle = blocked ? 'rgba(142,42,42,.10)' : rgba(C, 0.5);
+          x.lineWidth = 1;
+          x.beginPath(); x.moveTo(ex, ey);
+          x.lineTo(Math.cos(a) * (R2 + 3), Math.sin(a) * (R2 + 3)); x.stroke();
+        }
+      }, 21);
+    })(b2);
   }
-  /* the shadow wedge */
   var half = Math.asin(Math.min(0.999, R1 / r)), base = Math.atan2(by - cy, bx - cx);
-  g.fillStyle = 'rgba(142,42,42,.09)';
-  g.beginPath(); g.moveTo(cx, cy);
-  g.arc(cx, cy, r * 2.2, base - half, base + half); g.closePath(); g.fill();
-  /* bodies */
-  g.fillStyle = INK; g.beginPath(); g.arc(cx, cy, R1, 0, 6.2832); g.fill();
-  g.fillStyle = C;   g.beginPath(); g.arc(bx, by, R2, 0, 6.2832); g.fill();
-  /* net push */
+  part(g, c, 9, cx, cy, w, h, function (x) {                 /* the shadow */
+    x.fillStyle = 'rgba(142,42,42,.09)';
+    x.beginPath(); x.moveTo(0, 0); x.arc(0, 0, r * 2.2, base - half, base + half); x.closePath(); x.fill();
+  }, 23);
+  part(g, c, 11, cx, cy, w, h, function (x) { x.fillStyle = INK; x.beginPath(); x.arc(0, 0, R1, 0, 6.2832); x.fill(); }, 25);
+  part(g, c, 12, bx, by, w, h, function (x) { x.fillStyle = C; x.beginPath(); x.arc(0, 0, R2, 0, 6.2832); x.fill(); }, 27);
   var F = (R1 * R1 * R2 * R2) / (r * r) / 40;
-  g.strokeStyle = INK; g.lineWidth = 2;
-  var ux = -Math.cos(base), uy = -Math.sin(base), L = Math.min(70, 16 + F * 3);
-  g.beginPath(); g.moveTo(bx, by); g.lineTo(bx + ux * L, by + uy * L); g.stroke();
-  g.beginPath(); g.moveTo(bx + ux * L, by + uy * L);
-  g.lineTo(bx + ux * L - ux * 8 + uy * 5, by + uy * L - uy * 8 - ux * 5);
-  g.lineTo(bx + ux * L - ux * 8 - uy * 5, by + uy * L - uy * 8 + ux * 5);
-  g.closePath(); g.fillStyle = INK; g.fill();
-  mono(g, 13); g.fillStyle = INK; g.textAlign = 'left';
-  g.fillText('F = (π/4) P_eff R₁² R₂² / r²', 16, 26);
-  lab(g, 16, 46, 'gravity · charge · the nuclear grip — the same line, three domains', SOFT);
-  lab(g, 16, h - 34, 'nothing pulls · the far-side throughput does the work', C);
-  mono(g, 12); g.fillStyle = SOFT;
-  g.fillText('r = ' + r.toFixed(0) + '   F ∝ 1/r² = ' + F.toFixed(2), 16, h - 14);
-  lab(g, w - 14, h - 14, 'drag the small body', FAINT, 'right');
-}
+  part(g, c, 14, bx, by, w, h, function (x) {                /* the push */
+    var ux = -Math.cos(base), uy = -Math.sin(base), L = Math.min(70, 16 + F * 3);
+    x.strokeStyle = INK; x.lineWidth = 2;
+    x.beginPath(); x.moveTo(0, 0); x.lineTo(ux * L, uy * L); x.stroke();
+    x.beginPath(); x.moveTo(ux * L, uy * L);
+    x.lineTo(ux * L - ux * 8 + uy * 5, uy * L - uy * 8 - ux * 5);
+    x.lineTo(ux * L - ux * 8 - uy * 5, uy * L - uy * 8 + ux * 5);
+    x.closePath(); x.fillStyle = INK; x.fill();
+  }, 29);
+  held(g, c, function (x) {
+    mono(x, 13); x.fillStyle = INK; x.textAlign = 'left';
+    x.fillText('F = (π/4) P_eff R₁² R₂² / r²', 16, 26);
+    lab(x, 16, 46, 'gravity · charge · the nuclear grip — the same line, three domains', SOFT);
+    lab(x, 16, h - 34, 'nothing pulls · the far-side throughput does the work', C);
+    mono(x, 12); x.fillStyle = SOFT;
+    x.fillText('r = ' + r.toFixed(0) + '   F ∝ 1/r² = ' + F.toFixed(2), 16, h - 14);
+    lab(x, w - 14, h - 14, 'drag the small body', FAINT, 'right');
+  });
+},
+/* 2 · one ledger, twenty orders — ϟ = v²r/c², computed live */
+function (g, w, h, t, S) {
+  var C = COL.sdt, c = choreo(t);
+  var OBJ = [
+    ['proton boundary', 5.49e8, 8.41e-16, '1.83c at the surface seat'],
+    ['hydrogen atom',   2.188e6, 5.29e-11, 'the electron at gear 137'],
+    ['Earth, surface',  7.91e3, 6.371e6,  'a satellite skimming the ground'],
+    ['Sun, surface',    4.37e5, 6.96e8,   'a grazing orbit'],
+    ['Sgr A*',          1.91e6, 1.5e14,   'stars timed around the centre']
+  ];
+  var cLight = 2.998e8;
+  var sel = Math.min(4, Math.floor(drag01(S, 'd2', w, beat(t, 0.2, 0.75)) * 5));
+  var x0 = 60, x1 = w - 40, ly = h * 0.40;
+  part(g, c, 0, w / 2, ly, w, h, function (x) {              /* the one line */
+    x.strokeStyle = C; x.lineWidth = 2;
+    x.beginPath(); x.moveTo(x0 - w / 2, 0); x.lineTo(x1 - w / 2, 0); x.stroke();
+    lab(x, x0 - w / 2, -14, '10⁻¹⁵ m', FAINT); lab(x, x1 - w / 2, -14, '10¹⁴ m', FAINT, 'right');
+  });
+  OBJ.forEach(function (o, i) {
+    var X = x0 + (Math.log10(o[2]) + 15.2) / 29.5 * (x1 - x0);
+    part(g, c, i + 2, X, ly, w, h, function (x) {
+      x.fillStyle = i === sel ? INK : rgba(C, 0.7);
+      x.beginPath(); x.arc(0, 0, i === sel ? 7 : 4.5, 0, 6.2832); x.fill();
+      if (i === sel) { x.strokeStyle = INK; x.beginPath(); x.arc(0, 0, 12, 0, 6.2832); x.stroke(); }
+      lab(x, 0, i % 2 ? 26 : -22, o[0], i === sel ? INK : SOFT, 'center');
+    }, 31);
+  });
+  held(g, c, function (x) {
+    var o = OBJ[sel], kop = o[1] * o[1] * o[2] / (cLight * cLight);
+    function fmt(m) {
+      if (m < 1e-12) return (m * 1e15).toFixed(2) + ' fm';
+      if (m < 1) return (m * 1e3).toFixed(2) + ' mm';
+      if (m < 1e6) return (m / 1e3).toFixed(2) + ' km';
+      return (m / 1e9).toFixed(1) + '×10⁹ m';
+    }
+    mono(x, 13); x.textAlign = 'left';
+    x.fillStyle = SOFT; x.fillText(o[0] + '  ·  ' + o[3], 16, h - 78);
+    x.fillStyle = INK;
+    x.fillText('v = ' + (o[1] / 1e3).toFixed(o[1] > 1e6 ? 0 : 2) + ' km/s    r = ' + fmt(o[2]), 16, h - 56);
+    x.fillStyle = C;
+    mono(x, 15);
+    x.fillText('ϟ = v²r/c² = ' + fmt(kop), 16, h - 32);
+    lab(x, 16, h - 14, sel < 2 ? 'proton and atom land on the SAME length — the electron wake, r_e' : 'no G written · no mass weighed · v and r are measured, ϟ follows', SOFT);
+    lab(x, w - 14, 22, 'drag — walk the ladder', FAINT, 'right');
+  });
+},
+/* 3 · the movement budget — Law V on one circle */
+function (g, w, h, t, S) {
+  var C = COL.sdt, c = choreo(t);
+  var cx = w * 0.40, cy = h * 0.46, R = Math.min(w, h) * 0.30;
+  var th = (1 - drag01(S, 'd3', w, 0.25)) * 1.5208 + 0.025;  /* split angle */
+  var v = Math.cos(th), vc = Math.sin(th);                   /* v² + v_circ² = c² */
+  part(g, c, 0, cx, cy, w, h, function (x) {                 /* the budget circle */
+    x.strokeStyle = WHIS; x.lineWidth = 1.4;
+    x.beginPath(); x.arc(0, 0, R, 0, 6.2832); x.stroke();
+    lab(x, 0, -R - 10, 'the whole budget: c', SOFT, 'center');
+  });
+  part(g, c, 2, cx, cy, w, h, function (x) {                 /* translation */
+    x.strokeStyle = INK; x.lineWidth = 2.4;
+    x.beginPath(); x.moveTo(0, 0); x.lineTo(v * R, 0); x.stroke();
+    x.beginPath(); x.moveTo(v * R, 0); x.lineTo(v * R - 9, -5); x.moveTo(v * R, 0); x.lineTo(v * R - 9, 5); x.stroke();
+    lab(x, v * R / 2, 16, 'v — through the lattice', INK, 'center');
+  }, 33);
+  part(g, c, 4, cx, cy, w, h, function (x) {                 /* circulation */
+    x.strokeStyle = C; x.lineWidth = 2.4;
+    x.beginPath(); x.moveTo(v * R, 0); x.lineTo(v * R, -vc * R); x.stroke();
+    S.spin2 = (S.spin2 || 0) + vc * 0.09;
+    x.strokeStyle = rgba(C, 0.75); x.lineWidth = 1.3;
+    x.beginPath(); x.arc(v * R, -vc * R, 9, S.spin2, S.spin2 + 4.6); x.stroke();
+    lab(x, v * R + 14, -vc * R / 2, 'v_circ — the clock', C);
+  }, 35);
+  part(g, c, 6, cx, cy, w, h, function (x) {                 /* the hypotenuse = c, always */
+    x.strokeStyle = SOFT; x.lineWidth = 1; x.setLineDash([4, 4]);
+    x.beginPath(); x.moveTo(0, 0); x.lineTo(v * R, -vc * R); x.stroke(); x.setLineDash([]);
+  }, 37);
+  held(g, c, function (x) {
+    mono(x, 13); x.textAlign = 'left';
+    x.fillStyle = INK; x.fillText('v²  +  v_circ²  =  c²      — Law V, the movement budget', 16, 26);
+    x.fillStyle = SOFT;
+    x.fillText('v = ' + v.toFixed(3) + 'c    clock rate = ' + vc.toFixed(3), 16, h - 58);
+    x.fillText('γ = ' + (1 / Math.max(0.02, vc)).toFixed(2) + '   — dilation is the budget doing arithmetic', 16, h - 38);
+    lab(x, 16, h - 18, 'no postulate about frames — a body spends its one speed two ways', C);
+    lab(x, w - 14, 22, 'drag — spend the budget', FAINT, 'right');
+  });
+}]
+};
+
+/* captions — the stage swaps these as the reel advances */
+var CAPS = {
+  sr: ['Ehrenfest, 1909. Spin the disk: rim segments contract, the radius does not, and C/2R walks off π. Drag to add speed.',
+       'Two twins, one postulate. Drag the speed: the theory that forbids a preferred frame must still hand one twin fewer years.',
+       'One pole, one barn, two frames. Both stories are correct in full — “at the same time” is what broke.'],
+  gr: ['The well with no bottom. The profile deepens without limit; the marker crosses the horizon and does not return. Click to feed it.',
+       'Distinct things fall in; identical thermal quanta come out. Click to drop something — then ask where its information went.',
+       'Gödel’s gift, 1949: spin the universe and the light cones tip until the future rejoins its own past. Drag to spin.'],
+  qm: ['Top: U — smooth, linear, reversible. Bottom: R — one outcome, irreversible, nowhere in the equations. Click to collapse.',
+       'One particle at a time. Unwatched: fringes. Watched at the slits: two lumps. Click to toggle the detector.',
+       'Bell’s ceiling: no local story exceeds S = 2. Drag the analyser angle — the measured curve goes to 2√2.'],
+  sm: ['The electron’s magnetic moment: theory and measurement agreeing digit by digit past one part in a trillion.',
+       'The other drawer: nineteen dials, every one measured, not one derived. Click to spin them — the theory permits any setting.',
+       'Drag for more cancellation: the Higgs survives a 10³⁴ coincidence, and the same theory misses empty space by 10¹²⁰.'],
+  st: ['The landscape. Valleys without end; ours is marked by the fact that we are standing in it. Drag to travel.',
+       'A curled dimension at every point of space. Drag to shrink it below every instrument that will ever be built.',
+       'Four decades of searching. Drag through them: the exclusion grows, and the prediction moves house just ahead of it.'],
+  mo: ['Milgrom’s knob: one hand-set number and the rotation curves follow. Drag it — then remember nothing derives it.',
+       'The coincidence: a₀ tracks cH₀/2π across the whole measured range of H₀. Drag to sweep it. MOND cannot say why.',
+       'The Bullet Cluster: drag the collision apart — the lensing mass rides through, the gas stalls, and the force law points at the wrong one.'],
+  lc: ['The budget. Drag the probe: five per cent has ever been seen; the rest is named after what it is not.',
+       'Two measurements of one number. Drag to improve the data — the error bars shrink and the gap refuses to close.',
+       'Forty years underground, sensitivity a million times better. Drag through the decades. Events: zero.'],
+  sdt: ['The whole mechanism: convergent throughput, occlusion, shadow, push. One law, three domains. Drag the small body.',
+        'One ledger, twenty orders of magnitude. Drag along it: ϟ = v²r/c² lands on every rung, and no mass is ever weighed.',
+        'Law V: one speed, spent two ways. Drag the split — time dilation falls out as arithmetic, not postulate.']
 };
 </script>
 <script>
@@ -1888,7 +2777,8 @@ sdt: function (g, w, h, t, S) {
   var field = $('#field'), fg = field.getContext('2d');
   var scenes = $$('[data-scene]').map(function (cv) {
     return { cv: cv, g: cv.getContext('2d'), k: cv.getAttribute('data-scene'),
-             act: cv.closest('.act'), S: {} };
+             act: cv.closest('.act'), S: {}, seg: -1,
+             capEl: cv.parentNode.querySelector('figcaption') };
   });
   var dpr = Math.min(devicePixelRatio || 1, 2);
   var vh = innerHeight, docH = 1, smooth = 0, last = 0;
@@ -1963,30 +2853,28 @@ sdt: function (g, w, h, t, S) {
     if (['ArrowDown','ArrowUp','PageDown','PageUp','Home','End',' '].indexOf(ev.key) >= 0) { stopDrive(); tween = null; }
   });
 
-  /* ── scene interaction ───────────────────────────────────────────────── */
+  /* ── scene interaction — one generic layer; scenes read what they need ── */
   scenes.forEach(function (s) {
     function at(ev) {
       var r = s.cv.getBoundingClientRect();
-      return [(ev.clientX - r.left), (ev.clientY - r.top), r.width, r.height];
+      return [(ev.clientX - r.left), (ev.clientY - r.top)];
     }
     s.cv.addEventListener('pointerdown', function (ev) {
-      s.S.down = 1; s.S.px = ev.clientX; s.cv.setPointerCapture(ev.pointerId);
-      var p = at(ev);
-      if (s.k === 'qm') s.S.fire = 1;
-      if (s.k === 'gr') { s.S.kick = 1; setTimeout(function () { s.S.kick = 0; }, 400); }
-      if (s.k === 'sdt') { s.S.bx = p[0]; s.S.by = p[1]; }
-      if (s.k === 'mo') s.S.a0 = Math.max(0.05, Math.min(1, p[0] / p[2] * 1.2));
+      var p = at(ev), S = s.S;
+      S.dragging = 1; S.dragX = p[0]; S.dragY = p[1]; S.dragDX = 0;
+      S.click = { x: p[0], y: p[1] };
+      S._lx = ev.clientX;
+      s.cv.setPointerCapture(ev.pointerId);
     });
     s.cv.addEventListener('pointermove', function (ev) {
-      if (!s.S.down) return;
-      var p = at(ev), d = ev.clientX - (s.S.px || ev.clientX); s.S.px = ev.clientX;
-      if (s.k === 'sr') s.S.spin = Math.max(-0.12, Math.min(0.28, (s.S.spin || 0) + d * 0.0016));
-      if (s.k === 'st') s.S.drag = Math.max(-14, Math.min(14, -d * 0.9));
-      if (s.k === 'sdt') { s.S.bx = p[0]; s.S.by = p[1]; }
-      if (s.k === 'mo') s.S.a0 = Math.max(0.05, Math.min(1, p[0] / p[2] * 1.2));
+      var S = s.S;
+      if (!S.dragging) return;
+      var p = at(ev);
+      S.dragX = p[0]; S.dragY = p[1];
+      S.dragDX = (S.dragDX || 0) + (ev.clientX - S._lx); S._lx = ev.clientX;
     });
     ['pointerup', 'pointercancel', 'pointerleave'].forEach(function (e) {
-      s.cv.addEventListener(e, function () { s.S.down = 0; });
+      s.cv.addEventListener(e, function () { s.S.dragging = 0; });
     });
     s.cv.style.touchAction = 'none';
   });
@@ -1996,6 +2884,7 @@ sdt: function (g, w, h, t, S) {
   function frame(now) {
     var dt = Math.min(0.05, (now - last) / 1000 || 0.016); last = now;
     var off = motionOff();
+    window.PC_OFF = off;   /* choreography reads this: assembled and steady when motion is off */
 
     if (tween) {
       var u = Math.min(1, (now - tween.t0) / tween.ms);
@@ -2014,7 +2903,7 @@ sdt: function (g, w, h, t, S) {
     smooth += (y - smooth) * (off ? 1 : 0.13);
     if (Math.abs(y - smooth) < 0.06) smooth = y;
 
-    /* fades — continuous, never a class toggle */
+    /* the text fades in where it stands — nothing moves it */
     for (var i = 0; i < fades.length; i++) {
       var f = fades[i];
       if (f._t == null) continue;
@@ -2046,6 +2935,27 @@ sdt: function (g, w, h, t, S) {
       ticks.forEach(function (tk, k) { tk.setAttribute('data-on', k === ai ? '1' : '0'); });
       $('#driveBar').setAttribute('data-th', active.getAttribute('data-th') || 'sdt');
     }
+
+    /* the plates — deepest layer: slowest travel, furthest back, a slow roll */
+    for (i = 0; i < plates.length; i++) {
+      var pl = plates[i], A2 = pl.act;
+      if (A2._t == null) continue;
+      var on = A2._t + A2._h > y - vh * 0.2 && A2._t < y + vh * 1.2;
+      pl.el.parentNode.style.display = on ? '' : 'none';
+      if (!on) continue;
+      var pp = (y + vh - A2._t) / (A2._h + vh);   /* 0 → 1 across the act */
+      pp = pp < 0 ? 0 : pp > 1 ? 1 : pp;
+      var ps = pl.el.style, edge = Math.min(1, Math.min(pp, 1 - pp) * 4);
+      if (off) {
+        ps.setProperty('--py', '0px'); ps.setProperty('--pr', '0deg');
+        ps.setProperty('--pz', '-300px'); ps.setProperty('--po', '0.12');
+      } else {
+        ps.setProperty('--py', ((0.5 - pp) * vh * 0.55).toFixed(1) + 'px');
+        ps.setProperty('--pz', (-420 + edge * 140).toFixed(0) + 'px');
+        ps.setProperty('--pr', (pl.side * (0.5 - pp) * 7).toFixed(2) + 'deg');
+        ps.setProperty('--po', (0.16 * edge).toFixed(3));
+      }
+    }
     $('#pct').textContent = Math.round(Math.min(1, y / docH) * 100) + '%';
 
     /* the scenes */
@@ -2058,16 +2968,41 @@ sdt: function (g, w, h, t, S) {
       var t = (y + vh - A._t) / (A._h + vh);
       t = t < 0 ? 0 : t > 1 ? 1 : t;
       if (s.k === 'qm' && qmClock > 0.55) { s.S.fire = 1; }
-      var g = s.g;
+      var g = s.g, W2 = s.cv._w, H2 = s.cv._h;
       g.setTransform(dpr, 0, 0, dpr, 0, 0);
-      g.clearRect(0, 0, s.cv._w, s.cv._h);
+      g.clearRect(0, 0, W2, H2);
       g.lineCap = 'round'; g.lineJoin = 'round';
-      SCENE[s.k](g, s.cv._w, s.cv._h, t, s.S);
+      /* the reel: three scenes per act, each owning a third of the scroll */
+      var trio = SCENE[s.k];
+      var segI = Math.min(2, Math.floor(t * 3)), tt = t * 3 - segI;
+      if (s.seg !== segI) {
+        s.seg = segI;
+        if (s.capEl && CAPS[s.k]) s.capEl.textContent = (segI + 1) + '/3 · ' + CAPS[s.k][segI];
+      }
+      trio[segI](g, W2, H2, tt, s.S);
     }
     if (qmClock > 0.55) qmClock = 0;
 
     requestAnimationFrame(frame);
   }
+
+  /* the narrative changes sides as it goes */
+  $$('.act__body').forEach(function (b, i) {
+    if (i % 2) b.closest('.act').classList.add('act--flip');
+  });
+
+  /* mount the plates — opposite the stage, so the two never crowd */
+  var plates = [];
+  acts.forEach(function (a) {
+    var k = a.getAttribute('data-act'), art = PLATE[k];
+    if (!art) return;
+    var d = document.createElement('div');
+    d.className = 'plate ' + (a.classList.contains('act--flip') ? 'plate--left' : 'plate--right');
+    d.setAttribute('aria-hidden', 'true');
+    d.innerHTML = '<div class="plate__in">' + art + '</div>';
+    a.insertBefore(d, a.firstChild);
+    plates.push({ el: d.firstChild, act: a, side: a.classList.contains('act--flip') ? -1 : 1 });
+  });
 
   addEventListener('resize', layout);
   addEventListener('load', function () { layout(); });
