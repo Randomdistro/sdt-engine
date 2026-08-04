@@ -33,9 +33,12 @@
     ['Read', [
       ['Atlas — home',  'index.html'],
       ['Welcome',       'welcome.html'],
-      ['Causal chain',  'causal-chain.html'],
-      ['Causal chain · technical', 'causal-chain-technical.html'],
+      ['Causal chain · simplified',  'causal-chain-simple.html'],
+      ['Causal chain · layman',      'causal-chain.html'],
+      ['Causal chain · technical',   'causal-chain-technical.html'],
       ['What we assume','inputs.html'],
+      ['The koppa ladder','koppa-ladder.html'],
+      ['The wall in the infrared','clearing-ladder.html'],
       ['Predictions',   'experiments.html'],
       ['Investigations','investigations.html'],
       ['Benchmarks',    'benchmarks.html'],
@@ -80,7 +83,8 @@
       ['04 · Law IV',      'st_04_law4.html'],
       ['Lattice',          'st_flm01.html'],
       ['Gravity',          'st_gom_gravity.html'],
-      ['Magic numbers',    'st_magic_numbers.html']
+      ['Magic numbers',    'st_magic_numbers.html'],
+      ['Ring moons',       'st_ring_moons.html']
     ]],
     ['Investigation scrollers', [
       ['FLM01 · force ratios',      'flm01_scroller.html'],
@@ -103,6 +107,7 @@
       /* deprecated, de-listed (Harvey 2026-08-01): atomicus-lab-v4-tiers (v4 tiers),
          atomicus-stick (traction assembly) — the polar-caps model is the one being worked on */
       ['Atomicus lab',        'atomicus-lab.html'],
+      ['Lab · subdued',       'atomicus-lab-subdued.html'],
       ['Nuclear model',       'atomicus-nuclear-model.html'],
       ['Traction · polar caps','atomicus-stick-v3-polar-caps.html'],
       ['Fission impact',      'atomicus-fission-impact.html'],

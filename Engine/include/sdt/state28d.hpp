@@ -90,11 +90,34 @@ struct State28D {
     // LEVEL 7: ENERGY (7 aspects) - FORCE MANIFESTATION
     // ===================================================================
     //
-    // DESIGN FLAG (interchange sweep 2026-07-07, Harvey-authorized):
-    // Under the movement ledger, energy IS movement already counted in
-    // Levels 2-6 — these seven slots are re-reads of prior coordinates,
-    // not independent state dimensions, so Level 7 double-books the
-    // ledger as a state vector. Specific issues, flagged not changed:
+    // RESOLVED 2026-08-01 (Harvey, direct) — the 2026-07-07 flag below is
+    // WITHDRAWN on its headline claim. The ontology settles it:
+    //   Levels 1-6 are STATIC. Level 7 is MOVEMENT — the dynamic,
+    //   energetic level putting the other six to task.
+    // Level 6 is *freedom* of movement (the degrees of freedom available to
+    // the form — a capacity, and static). Level 7 is *expression* as
+    // movement (that capacity actually being spent). The seven eps slots are
+    // therefore NOT re-reads of the Level 2-6 velocity coordinates; they are
+    // what animates them. Six levels describe a thing that could move; the
+    // seventh is the moving. Collapsing 7 into 2-6 conflates freedom with
+    // expression and would drop the state to 21D — the PREDECESSOR scheme,
+    // not a corrected version of this one.
+    //
+    // How 21D became 28D (Harvey, 2026-08-01) — INSERTION AND EXPANSION, not
+    // an append. The 21D scheme was MISSING TOROIDAL STRUCTURE entirely:
+    //     21D:  1 Zero-Point · 2 Line · 3 Plane · 4 Sphere · 5 Dynamism · 6 Energy
+    // Level 5 TORUS was INSERTED, which promoted old L5 Dynamism -> L6 and old
+    // L6 Energy -> L7. Level k carries k aspects, so the total is the
+    // triangular number T(k): T(6)=21 -> T(7)=28. Note the consequence —
+    // aspect count is POSITIONAL. Dynamism gained an aspect (5->6) and Energy
+    // gained an aspect (6->7) purely by being displaced upward. Those two
+    // added aspects exist because of the insertion, not because they were
+    // independently identified; which slot is the added one in each level is
+    // an OPEN question, and may bear on the eps_4 oddity flagged below.
+    //
+    // SUPERSEDED FLAG (interchange sweep 2026-07-07) — ontological claim
+    // withdrawn per above; its four bookkeeping details are NOT withdrawn and
+    // stand as open items:
     //   - Nothing here enforces the Law V budget (v_circ² + v² = c²)
     //     between the eps slots and the velocity coordinates they
     //     re-express; the two can silently disagree.

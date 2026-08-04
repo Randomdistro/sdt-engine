@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>/*sdt-theme-guard*/(function(){try{var t=localStorage.getItem("sdt.theme")||"auto";if(t==="auto")t=(window.matchMedia&&window.matchMedia("(prefers-color-scheme:dark)").matches)?"dark":"light";var d=document.documentElement;d.setAttribute("data-theme",t);d.setAttribute("data-sdt-theme",t);}catch(e){}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Koppa Ladder — Spatial Displacement Theory</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .kl { max-width: 76rem; margin: 0 auto; padding: 4.8rem 1.5rem 6rem; }
+  .kl__head { max-width: 47rem; }
+  .kl__kicker { font-family: 'JetBrains Mono', monospace; font-size: .75rem; letter-spacing: .2em;
+        text-transform: uppercase; color: var(--copper); }
+  .kl__title { font-family: 'Source Serif 4', Georgia, serif; font-size: clamp(2rem,5vw,3.1rem);
+        font-weight: 600; margin: .8rem 0 1.1rem; line-height: 1.08; }
+  .kl__lead { color: var(--ink-soft); font-size: 1.125rem; line-height: 1.8; }
+  .kl h2 { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.65rem; font-weight: 600;
+        margin: 3.4rem 0 .9rem; }
+  .kl h3 { font-size: 1.0625rem; font-weight: 600; margin: 2rem 0 .6rem; }
+  .kl p { color: var(--ink-soft); line-height: 1.85; max-width: 47rem; }
+  .kl .m { font-family: 'JetBrains Mono', monospace; font-size: .9em; }
+  .kl a { color: var(--copper); }
+
+  .thesis { border-left: 2px solid var(--copper); background: var(--copper-glow);
+        padding: 1.2rem 1.4rem; margin: 1.8rem 0; max-width: 47rem; }
+  .thesis h4 { font-size: .68rem; letter-spacing: .13em; text-transform: uppercase;
+        color: var(--copper); margin: 0 0 .5rem; }
+  .thesis p { margin: 0 0 .6rem; font-size: .9688rem; }
+  .thesis p:last-child { margin-bottom: 0; }
+
+  .scope { border-left: 2px solid var(--ink-whisper); background: rgba(122,114,101,.06);
+        padding: 1.1rem 1.3rem; margin: 1.7rem 0; max-width: 47rem; }
+  .scope h4 { font-size: .68rem; letter-spacing: .13em; text-transform: uppercase;
+        color: var(--ink-muted); margin: 0 0 .5rem; }
+  .scope p { margin: 0 0 .55rem; font-size: .9375rem; }
+  .scope p:last-child { margin-bottom: 0; }
+
+  table.kt { width: 100%; border-collapse: collapse; margin: 1.3rem 0 1.8rem; font-size: .8125rem; }
+  table.kt th { text-align: left; font-size: .625rem; letter-spacing: .12em; text-transform: uppercase;
+        color: var(--ink-faint); font-weight: 600; padding: .45rem .6rem;
+        border-bottom: 1px solid var(--paper-edge); }
+  table.kt td { padding: .6rem .6rem; border-bottom: 1px solid var(--paper-edge);
+        vertical-align: top; line-height: 1.55; color: var(--ink-soft); }
+  table.kt td.mono, table.kt td.num { font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+  table.kt td.num { text-align: right; color: var(--ink); }
+  table.kt tr.hl td { color: var(--copper); font-weight: 600; }
+  .tag { display: inline-block; font-size: .5938rem; letter-spacing: .09em; text-transform: uppercase;
+        padding: .14rem .42rem; border-radius: 2px; white-space: nowrap; vertical-align: 1px; }
+  .tag--earn { background: var(--copper-glow); color: var(--copper); }
+  .tag--open { background: rgba(30,28,24,.85); color: var(--paper); }
+  .tag--conv { background: rgba(122,114,101,.14); color: var(--ink-muted); }
+  .tblwrap { overflow-x: auto; }
+
+  /* rung calculator */
+  .calc { border: 1px solid var(--paper-edge); border-radius: 3px; background: #fffefb;
+        padding: 1.2rem 1.4rem; margin: 1.6rem 0; max-width: 47rem; }
+  .calc h4 { font-size: .68rem; letter-spacing: .13em; text-transform: uppercase;
+        color: var(--copper); margin: 0 0 .8rem; }
+  .calc__row { display: flex; gap: .6rem; flex-wrap: wrap; align-items: center; margin-bottom: .9rem; }
+  .calc__row label { font-size: .75rem; color: var(--ink-muted); letter-spacing: .05em; }
+  .calc__row input { font-family: 'JetBrains Mono', monospace; font-size: .8125rem;
+        padding: .35rem .55rem; border: 1px solid var(--paper-edge); border-radius: 3px; width: 11rem; }
+  .calc__row select { font: inherit; font-size: .8125rem; padding: .35rem .5rem;
+        border: 1px solid var(--paper-edge); border-radius: 3px; background: #fff; }
+  .calc__out { display: grid; grid-template-columns: repeat(auto-fit, minmax(10.5rem, 1fr)); gap: .5rem; }
+  .calc__cell { border: 1px dashed var(--paper-edge); border-radius: 3px; padding: .55rem .7rem; }
+  .calc__cell b { display: block; font-family: 'JetBrains Mono', monospace; font-size: .9375rem;
+        color: var(--ink); font-weight: 500; }
+  .calc__cell span { font-size: .625rem; letter-spacing: .1em; text-transform: uppercase;
+        color: var(--ink-faint); }
+  .calc__cell.k b { color: var(--copper); }
+
+  .prov { font-size: .8125rem; color: var(--ink-faint); line-height: 1.8; margin-top: 3rem;
+        padding-top: 1.2rem; border-top: 1px solid var(--paper-edge); max-width: 47rem; }
+</style>
+<meta name="description" content="One length, divided by the rung: every koppa relationship from the proton surface to the solar horizon — the four classical tests as one number, and the…">
+<link rel="canonical" href="https://spatialdisplacementtheory.com/koppa-ladder">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/favicon.ico" sizes="64x64">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#b07430">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Spatial Displacement Theory">
+<meta property="og:title" content="The Koppa Ladder — Spatial Displacement Theory">
+<meta property="og:description" content="One length, divided by the rung: every koppa relationship from the proton surface to the solar horizon — the four classical tests as one number, and the…">
+<meta property="og:url" content="https://spatialdisplacementtheory.com/koppa-ladder">
+<meta property="og:image" content="https://spatialdisplacementtheory.com/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_AU">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Koppa Ladder — Spatial Displacement Theory">
+<meta name="twitter:description" content="One length, divided by the rung: every koppa relationship from the proton surface to the solar horizon — the four classical tests as one number, and the…">
+<meta name="twitter:image" content="https://spatialdisplacementtheory.com/og-card.png">
+</head>
+<body>
+
+<main class="kl">
+  <div class="kl__head">
+    <p class="kl__kicker">Plate VIII · the koppa ladder</p>
+    <h1 class="kl__title">One length, divided by the rung</h1>
+    <p class="kl__lead">
+      Every body carries one length — its koppa, ϟ — and one pure number per seat, the rung
+      k&nbsp;=&nbsp;c/v. Everything on this page is one of those two objects divided into the
+      other: sizes, speeds, spectral shifts, radar delays, the bending of starlight and the
+      slow turn of Mercury's ellipse. From the proton's surface to the Sun's horizon the
+      ladder runs twenty orders of magnitude on a single formula, and no kilogram is
+      consulted anywhere on it.
+    </p>
+  </div>
+
+  <h2>1 · The object</h2>
+  <p>
+    Three equivalent forms, used where each is cleanest:
+  </p>
+  <p class="m" style="line-height:2.1">
+    ϟ = R/k²&nbsp;&nbsp;&nbsp;(the rung is known — hydrogen: k = 1/α)<br>
+    ϟ = v²R/c²&nbsp;&nbsp;&nbsp;(a bound body's speed and distance are measured — the Galilean moons)<br>
+    ϟ = 4π²a³/T²c²&nbsp;&nbsp;&nbsp;(only ephemeris exists — a ranged distance and a counted period)
+  </p>
+  <p>
+    with z = (v/c)² the depth and z·k² = 1 the bookkeeping that ties them. The Sun's koppa is
+    <strong>1476.6 m</strong> however you take it: from its surface pair (v, R), from Earth's
+    orbital pair (a, T), or backwards out of Mercury's precession — the closure that returns
+    c itself as an output to +0.0009%, with no G and no solar mass entering any line.
+  </p>
+
+  <div class="thesis">
+    <h4>What the ratio is — J. C. Harvey, 2026</h4>
+    <p>
+      <strong>ϟ/r is the ratio of movement through accumulated material to movement through
+      accumulated space.</strong> The koppa is the material side — the movement-claim of the
+      accumulated matter, expressed as a length; r is the accumulated space it sits in. The
+      depth z = ϟ/r is material's toll on the path, k² = r/ϟ is space's share, and the rung
+      k = c/v is its square root.
+    </p>
+    <p>
+      One identity makes this concrete. For any bound orbit, v²/c² = ϟ/r: the left side is the
+      Law V movement budget — the fraction of the allowance spent in the travel purse — and the
+      right side is material's fraction of the path. At every bound seat, the budget fraction
+      in travel <em>equals</em> the material:space ratio of the seat. That is why one ϟ serves
+      a speed law and a spectral shift at once: they are the same fraction, read from the two
+      purses.
+    </p>
+  </div>
+
+  <h2>2 · The ladder, proton to Moon</h2>
+  <p>
+    Six rungs, one formula, and the closure z·k² = 1 exact at every one (15/15 in the
+    hierarchy re-run). The k-span covers 0.5464 to 178&#8239;448 with no change of regime —
+    including one rung <em>below</em> 1, where the ladder continues as superluminal phase
+    inside the c-boundary.
+  </p>
+  <div class="tblwrap">
+  <table class="kt">
+    <thead><tr><th>Seat</th><th>rung k = c/v</th><th>koppa ϟ = R/k²</th><th>Reading</th></tr></thead>
+    <tbody>
+      <tr><td>Proton surface</td><td class="mono">0.5464</td><td class="mono">2.818×10⁻¹⁵ m = r_e</td>
+          <td>phase rotation at 1.830c — confirmed zero-fit by independent beam-peel kinematics; matter transport never exceeds c</td></tr>
+      <tr class="hl"><td>Hydrogen ground seat</td><td class="mono">137.07 = 1/α</td><td class="mono">2.818×10⁻¹⁵ m = r_e</td>
+          <td>α is this rung, read off the raw spectrum with α never used in the computation; r_e is not an electron size but the seat's c-boundary</td></tr>
+      <tr><td>Sun surface</td><td class="mono">686.40</td><td class="mono">1476.6 m</td>
+          <td>the solar system's one length</td></tr>
+      <tr><td>Earth orbit (1 AU)</td><td class="mono">10&#8239;065</td><td class="mono">1476.6 m</td>
+          <td>same length, deeper rung — every planet returns it</td></tr>
+      <tr><td>Earth surface</td><td class="mono">37&#8239;905</td><td class="mono">4.43 mm</td>
+          <td>Earth's own koppa</td></tr>
+      <tr><td>Moon surface</td><td class="mono">178&#8239;448</td><td class="mono">0.055 mm</td>
+          <td>the shallowest rung tabulated</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>
+    Note what the table quietly contains: hydrogen's ground seat and the proton's surface share
+    <em>one koppa</em>. A single rotation field v(r) = cα√(a₀/r) spans from the Bohr radius
+    down to the proton boundary radius with ϟ invariant along it — the engine-confirmed
+    coincidence on the PPT02 record. And the Rydberg ladder is pure rung arithmetic: at level
+    n the speed drops as 1/n, so k(n) = 137.07·n while r(n) = n²a₀ — the two cancel
+    identically and rₙ/k(n)² returns r_e at every n. One length, many seats: that constancy
+    <em>is</em> the ladder, and the spectrum shows it series-independently across Lyman,
+    Balmer and Paschen.
+  </p>
+
+  <h2>3 · Three ladders from one rung</h2>
+  <p>
+    Everything a seat does is c or r divided down by its rung:
+  </p>
+  <p class="m" style="line-height:2.1">
+    r / k²&nbsp;&nbsp;→&nbsp;&nbsp;ϟ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the length<br>
+    c / k&nbsp;&nbsp;&nbsp;→&nbsp;&nbsp;v&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the circulation speed<br>
+    c / k²&nbsp;&nbsp;→&nbsp;&nbsp;c − c_local&nbsp;&nbsp;&nbsp;the relay deficit
+  </p>
+  <p>
+    The third row needs its name said carefully, because the standard pipeline gets it wrong:
+    c/k² is dimensionally a speed, but <strong>nothing moves at it</strong>. It is how much
+    slower the relay runs at that depth than in the far field — 636 m/s at the photosphere,
+    2.96 m/s out at Earth's orbit, 0.10 m/s by Neptune, and α²c = 15&#8239;964 m/s at the
+    hydrogen seat, where the same quantity is the fine-structure-squared scale the spectrum
+    hands over as a pure frequency ratio. A Doppler pipeline pushed through v = cz reports
+    each of these as a recession velocity. It is a deficit wearing a velocity costume; the
+    photosphere is not receding.
+  </p>
+
+  <div class="calc" id="klCalc">
+    <h4>Rung calculator — pick a seat or enter your own pair</h4>
+    <div class="calc__row">
+      <label for="klPreset">seat</label>
+      <select id="klPreset"></select>
+      <label for="klV">v [m/s]</label>
+      <input id="klV" type="text" inputmode="decimal">
+      <label for="klR">r [m]</label>
+      <input id="klR" type="text" inputmode="decimal">
+    </div>
+    <div class="calc__out" id="klOut"></div>
+  </div>
+
+  <h2>4 · Four tests, one number</h2>
+  <p>
+    The four classical solar-system tests of general relativity are, on the ladder, one
+    number — the depth 1/k² — sampled four different ways: at a point, along the ray, across
+    the ray, and around the orbit. Run each measured test backwards and ask what length it
+    implies, and all four hand back the same ϟ:
+  </p>
+  <div class="tblwrap">
+  <table class="kt">
+    <thead><tr><th>Test</th><th>Geometry</th><th>Formula</th><th>Value</th><th>ϟ recovered</th></tr></thead>
+    <tbody>
+      <tr><td>Gravitational redshift</td><td>pointwise, one radius</td>
+          <td class="mono">c·ϟ/R</td><td class="num">636 m/s (meas. ~633)</td><td class="num">1477.0 m</td></tr>
+      <tr><td>Shapiro delay</td><td>integrated along the ray</td>
+          <td class="mono">(4ϟ/c)·ln(4r₁r₂/b²)</td><td class="num">247.24 μs round trip</td><td class="num">1476.6 m</td></tr>
+      <tr><td>Light deflection</td><td>across the ray</td>
+          <td class="mono">4ϟ/b</td><td class="num">1.7517″ (meas. 1.7505″)</td><td class="num">1477.0 m</td></tr>
+      <tr><td>Mercury precession</td><td>accumulated around the orbit</td>
+          <td class="mono">6πϟ/a(1−e²)</td><td class="num">42.99″/century (meas. 42.98)</td><td class="num">1477.0 m</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>
+    Spread across the four recoveries: under 0.03%. Standard physics files these as four
+    separate confirmations of general relativity. On the ladder they are one c-boundary
+    length met four ways — and the Shapiro entry carries the ladder's one hard-won
+    coefficient repair: the naive profile c(1−z) delivered exactly half the measured delay
+    and is <strong>ruled out</strong> against the Cassini coefficient; the repaired profile
+    c(1−z)² — one closure factor shortening the hop, the same factor again dilating the
+    tick — returns 247.24 μs at the gate. A signal grazing the limb pays about 14.2
+    picoseconds per kilometre of path.
+  </p>
+
+  <h2>5 · The census of pure numbers</h2>
+  <p>
+    If one length runs everything, the pure numbers in front of it owe an account of
+    themselves. Under the material:space reading each coefficient is a <em>pass count</em> —
+    how many times the measurement's geometry pays the toll z. The census, with each entry's
+    standing stated plainly:
+  </p>
+  <div class="tblwrap">
+  <table class="kt">
+    <thead><tr><th>Coefficient</th><th>Observable</th><th>Where it comes from</th><th>Circle fraction</th><th>Standing</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">1</td><td>spectral shift z = ϟ/r</td>
+          <td>one radial stab into the field; no circle traversed</td>
+          <td class="num">0.159 = 0.5/π</td><td><span class="tag tag--earn">earned</span></td></tr>
+      <tr><td class="mono">2</td><td>escape, horizon r = 2ϟ</td>
+          <td>the energy-integral 2: release costs twice residence — a bound body holds half
+              its release requirement, and the factor-1 exchange rate is licensed by the
+              measured aberration band (the ½ alternative excluded by ~400× the band width)</td>
+          <td class="num">0.318</td><td><span class="tag tag--earn">earned</span></td></tr>
+      <tr><td class="mono">2</td><td>Shapiro profile c(1−z)²</td>
+          <td>a <em>different</em> 2: one closure factor applied twice — hop length shortened,
+              tick dilated; speed is length per time, so the deficit doubles in the integrand.
+              Derived natively; the unrepaired single power is ruled out at exactly 0.5000 of
+              the measured delay</td>
+          <td class="num">0.318</td><td><span class="tag tag--earn">earned</span></td></tr>
+      <tr><td class="mono">2π</td><td>circulation at the W=1 rung</td>
+          <td>the first full circle: one tour of the ground-state circumference is one
+              de Broglie span, and ℏ is that tour's circulation action — the superfluid
+              circulation quantum, not a postulate</td>
+          <td class="num">1.000</td><td><span class="tag tag--conv">identity-class role</span></td></tr>
+      <tr><td class="mono">2·(2π)</td><td>emission law λ = 2L(c/v)</td>
+          <td>one full tour (2πa₀) times the energy-family 2; the gear c/v is the rung itself.
+              Seven floors from the Lyman limit to a 15 MeV giant resonance at ratio 1.0000</td>
+          <td class="num">2.000</td><td><span class="tag tag--conv">convergent — shared closed form</span></td></tr>
+      <tr><td class="mono">4</td><td>light deflection 4ϟ/b</td>
+          <td>profile 2 × geometry 2: the repaired index carries the same profile-squared 2 as
+              Shapiro, and the transverse integral of b/r³ along the whole ray contributes the
+              second 2 by pure geometry. The two 2s inside the 4 have different origins</td>
+          <td class="num">0.637</td><td><span class="tag tag--earn">earned</span></td></tr>
+      <tr><td class="mono">6π</td><td>precession per orbit</td>
+          <td>3 × (2π): one full circle per revolution times the depth-kernel coefficient 3 —
+              and the 3 is the census's one open count. Its native derivation from the
+              second-order depth kernel is pre-registered and not yet earned; until it lands,
+              6π stands as shared form. (The trefoil's total winding is also 6π — an open
+              observation only; no record links the two)</td>
+          <td class="num">3.000</td><td><span class="tag tag--open">the 3 is owed</span></td></tr>
+      <tr><td class="mono">4π²</td><td>Kepler dressing 4π²a³/T²c²</td>
+          <td>(2π)²: the orbit is timed, and each power of the period converts a radius into a
+              circumference — the circle sampled twice</td>
+          <td class="num">6.283</td><td><span class="tag tag--earn">earned</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>
+    The circle-fraction column is the organising idea made visible: every radius-only formula
+    samples 0.5/π of its circle; where a coefficient crosses 2π, the measurement has stopped
+    stabbing the field radially and started traversing it. The column records where each pure
+    number comes from — it does not replace the per-entry derivations, and the two distinct 2s
+    land on the same fraction while having different origins, which is exactly why the
+    derivations stay separate.
+  </p>
+  <h3>Not every π is a ladder π</h3>
+  <p>
+    Honesty about the family tree: the engine carries π-powers that do <em>not</em> sample any
+    orbit's circle. The mass ratio m_p/m_e = 6π⁵ is a topology-and-volume power — three
+    trefoil lobes × the three-sphere's surface-volume × an isotropic π³ — a unique
+    zero-parameter match at 19 ppm whose producing integral has not been computed:
+    <strong>open</strong>, not derived. The π²/15 inside the radiation constant is the thermal
+    phase-space integral. Law III's π/4 is a disc-area π, and the electropause's 1/4π is the
+    full-sphere solid angle. Circumference, volume, area, solid angle — four different
+    geometric objects, and only the first is this ladder.
+  </p>
+
+  <h2>6 · Two koppas: the exchange ledger</h2>
+  <p>
+    A real pair carries two lengths — Koppa for the primary, koppa for the satellite — and
+    their ratio does everything the mass ratio does in the standard account. The barycentre
+    divides the separation as μ = ϟ₂/(Ϟ₁+ϟ₂); the pair's period reads their sum. Run
+    koppa-only, the Earth–Moon barycentre lands at 4672 km (standard: ~4671), the Sun–Earth
+    barycentre 449 km inside the Sun, and the five Lagrange points fall out of two throughput
+    fields c²ϟ/r² plus co-rotation — L2 to +0.06%, with the Trojan stability classification
+    intact — no G, no M, anywhere in the pipeline.
+  </p>
+  <p>
+    The ledger's long reach is the striking part. Jupiter's own moons fix Jupiter's koppa at
+    1.4098 m — four Galilean moons returning one length to a 0.033% spread. The Sun's planet
+    table then carries Jupiter's row high by ϟ_J/Ϟ_Sun, and hydrogen's ionisation row sits low
+    by m_e/m_p — <em>the same two-body ledger read from opposite ends, twenty orders of
+    magnitude apart</em>. The refined hydrogen seat prediction
+    k = (1/α)·√(1+m_e/m_p)/√(1+α²/4) lands on the spectrum-read seat at the parts-per-million
+    level. And across 693 multi-planet systems, every planet of a host returns its host's
+    koppa-density to a median 5.9% while shuffled controls scatter to 51% — the invariance is
+    in the data, not the bookkeeping.
+  </p>
+  <div class="scope">
+    <h4>Gates kept, stated plainly</h4>
+    <p>
+      The exchange-ledger arc keeps its failed gate on the record: the planetary-row spread
+      gate failed as pre-registered, and the enclosed-shadow reading stays open with its row
+      predictions pre-registered, awaiting an ephemeris re-run at eight significant figures.
+      Saturn is instrument-limited by its 883-year great inequality. An earlier composition
+      prediction from this arc was withdrawn. Agreement between planetary rows and rival GM
+      values shares its ephemeris inputs and cannot discriminate; the hydrogen end, where no
+      GM was ever measured, is where the ladder reaches past the rival's habit.
+    </p>
+  </div>
+
+  <h2>7 · The ends of the ladder</h2>
+  <p>
+    <strong>Below k = 1.</strong> The ladder does not stop at the speed of light — it crosses
+    it, as phase. At the proton boundary the rotation field demands k = 0.5464: phase turning
+    at 1.830c inside the c-boundary, confirmed zero-fit by independent beam-peel kinematics.
+    Matter transport never exceeds c; the rung below 1 is the phase regime.
+  </p>
+  <p>
+    <strong>The horizon.</strong> Escape costs twice residence, so v_esc = c√(2ϟ/r), and the
+    radius where release requires the whole budget is r = 2ϟ. That question is settled on this
+    kinematic ground — for the Sun, 2953.25 m. Distinct, and deliberately open: where the
+    <em>relay speed itself</em> vanishes. The native profile c(1−z)² puts that wall at r = ϟ;
+    the coordinate-speed form c(1−2z) puts it at 2ϟ. Both fit every first-order test; a
+    1.4-solar-mass neutron-star surface splits them by 8.6%, which names the discriminating
+    measurement. On the record either way: that one form protects an SDT prediction is not
+    evidence for that form.
+  </p>
+  <p>
+    <strong>The prediction that can die.</strong> A merger remnant with ϟ = 91.6 km predicts a
+    train of echoes spaced ~58 ms — SDT-distinctive, contested in the reanalysis literature,
+    not confirmed, and it does not survive the c(1−2z) branch of the fork. That is what a
+    falsifiable stake looks like, and it is staked.
+  </p>
+  <p>
+    <strong>Engineering.</strong> The GPS clock ledger — satellite clocks fast by the depth
+    term, slow by the speed term, net ≈ +38.7 μs/day — is the same 1/k² run as infrastructure.
+    On the record it is a specification seed only: the target numbers and a pre-registered
+    ±0.1 μs/day gate are documented, and the sub-tolerance pass has not yet been earned.
+  </p>
+
+  <div class="scope">
+    <h4>Scope · limitations · residuals</h4>
+    <p>
+      For gravitating bodies, ϟ is numerically GM/c². Every individual match on this page is
+      therefore a shared form: the orbit ledger cannot discriminate the koppa reading from the
+      GM reading, and no such match is claimed as discrimination.
+    </p>
+    <p>
+      What is native, and claimed as such: the provenance — every ϟ on this page comes from
+      two observables (a speed and a distance, or a distance and a period) with no G, no mass,
+      and no kilogram entering any computation; the unification — one length recovered from
+      four different sampling geometries, and one ladder running unbroken from a superluminal
+      proton surface to the Moon; and the reach — rungs for the proton, electron and hydrogen,
+      where no GM exists to borrow.
+    </p>
+    <p>
+      Open, and named: the 3 in 6π (pre-registered, unearned); the geometric value of α
+      (extracted from the spectrum two ways, derived by nobody); 6π⁵ (privileged, unexplained);
+      the relay-wall fork (neutron-star discriminator named); the enclosed-shadow ledger
+      reading; the GPS gate. A census with every box ticked would be numerology. This one
+      shows its debts.
+    </p>
+  </div>
+
+  <p class="prov">
+    Provenance: assembled from the engine header and the investigation record (GOM01, 02, 04,
+    05, 08, 10, 14, 15–17, 20, 22; PPT02, PPT06/NP27; APS01, 05, 07; FLM13; benchmarks B10,
+    B27, B28, B36, B39), drilled by a four-specialist chain and re-verified line-by-line by an
+    adversarial checker on 2026-08-02 — 34 relations, every number recomputed independently,
+    six cross-findings applied, including one correction to this page's own draft numbers.
+    The material:space ratio reading of ϟ and the pass-count census are stated per J. C.
+    Harvey, 2026-08-02.
+    <br><br>
+    J. C. Harvey, Melbourne.
+  </p>
+</main>
+
+<script>
+(function () {
+  'use strict';
+  var C = 299792458;
+  var SEATS = [
+    { n: 'Sun surface',        v: 436762,    r: 6.957e8 },
+    { n: 'Hydrogen ground seat', v: 2187691, r: 5.29177210903e-11 },
+    { n: 'Proton surface',     v: 548620000, r: 8.414e-16 },
+    { n: 'Earth orbit (1 AU)', v: 29784.7,   r: 1.495978707e11 },
+    { n: 'Earth surface',      v: 7909,      r: 6.371e6 },
+    { n: 'Moon surface',       v: 1680,      r: 1.7374e6 },
+    { n: 'custom pair…',       v: null,      r: null }
+  ];
+  var sel = document.getElementById('klPreset');
+  var vIn = document.getElementById('klV');
+  var rIn = document.getElementById('klR');
+  var out = document.getElementById('klOut');
+  SEATS.forEach(function (s, i) {
+    var o = document.createElement('option');
+    o.value = i; o.textContent = s.n;
+    sel.appendChild(o);
+  });
+  function fmt(x) {
+    if (!isFinite(x)) return '—';
+    var a = Math.abs(x);
+    if (a !== 0 && (a < 1e-3 || a >= 1e6)) return x.toExponential(4);
+    return x.toPrecision(6).replace(/\.?0+$/, '');
+  }
+  function cell(label, val, cls) {
+    return '<div class="calc__cell' + (cls ? ' ' + cls : '') + '"><b>' + val +
+           '</b><span>' + label + '</span></div>';
+  }
+  function run() {
+    var v = parseFloat(vIn.value), r = parseFloat(rIn.value);
+    if (!(v > 0) || !(r > 0)) { out.innerHTML = cell('enter a speed and a distance', '—'); return; }
+    var k = C / v, k2 = k * k, kop = r / k2, z = 1 / k2;
+    out.innerHTML =
+      cell('rung k = c/v', fmt(k), 'k') +
+      cell('k²', fmt(k2)) +
+      cell('koppa ϟ = r/k² [m]', fmt(kop), 'k') +
+      cell('depth z = 1/k²', fmt(z)) +
+      cell('relay deficit c/k² [m/s]', fmt(C / k2)) +
+      cell('escape c·√(2ϟ/r) [m/s]', fmt(C * Math.sqrt(2 * kop / r))) +
+      cell('horizon 2ϟ [m]', fmt(2 * kop)) +
+      cell('budget check v²/c² = ϟ/r', fmt((v * v) / (C * C) / (kop / r)));
+  }
+  sel.addEventListener('change', function () {
+    var s = SEATS[Number(sel.value)];
+    if (s.v !== null) { vIn.value = s.v; rIn.value = s.r; }
+    run();
+  });
+  vIn.addEventListener('input', run);
+  rIn.addEventListener('input', run);
+  sel.value = 0; vIn.value = SEATS[0].v; rIn.value = SEATS[0].r;
+  run();
+})();
+</script>
+
+<link rel="stylesheet" href="sdt-shell.css">
+<script src="sdt-shell.js" defer></script>
+</body>
+</html>

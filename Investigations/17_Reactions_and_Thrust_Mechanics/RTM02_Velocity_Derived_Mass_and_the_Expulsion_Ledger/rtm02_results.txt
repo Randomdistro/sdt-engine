@@ -1,0 +1,55 @@
+﻿RTM02 — VELOCITY-DERIVED MASS AND THE EXPULSION LEDGER (direct run)
+====================================================================
+
+[P1] the gearing law: m(v) = m_rest * c/v_circ, v_circ = sqrt(c^2 - v^2):
+  G1a   c/v_circ vs 1/sqrt(1-v^2/c^2), whole range           got 1             ref 1             dev  0.000000%  PASS
+  G1b   classical limit m(v)->m_rest at v<=1e-3 c            got 1             ref 1             dev  0.000050%  PASS
+  G1c   delta-m == E_k/c^2 (velocity deriving mass)          got 1             ref 1             dev  0.000000%  PASS
+      accelerating a quantum adds resistance without adding one baryon
+      or one unit of rest displacement: the invested movement IS the mass.
+
+[P2] two expulsion ledgers:
+  G2a   open ledger reproduces RTM01: log10(ratio/day)       got 81.8693       ref 81.87         dev  0.000853%  PASS
+  G2b   closed ledger: gearing cancels, p/m_total = v_ex     got 1             ref 1             dev  0.000000%  PASS
+      THEOREM (pre-registered): no closed ledger buys momentum cheaper
+      than c. The price floor of reaction is the relay speed; the photon
+      rocket sits exactly on the floor.
+
+[P3] the hover price per day vs velocity of output (a*t = 
+      848300 m/s of momentum per kg-day):
+
+      v_ex            open ledger              closed ledger
+      (expulsion)     (propellant-only)        (mass-energy complete)
+      4.5 km/s  chem 10^81.9              10^81.9              
+      50 km/s   ion  23347320.691128      23347326.200283      
+      1000 km/s      2.335661             2.335672             
+      0.01c          1.327036             1.327055             
+      0.1c           1.028554             1.028700             
+      0.5c           1.004913             1.005675             
+      0.9c           1.001371             1.003149             
+      the c floor      —                    1.002834  (photon rocket)
+  G3    closed-ledger price descends onto the floor          got 1             ref 1             dev  0.000000%  PASS
+      photon-rocket power price: F*c = 2.943 GW per hovering kg
+      84 orders of magnitude between chemistry and the floor — the whole
+      span is bought with velocity of output, not with more matter.
+
+[P4] the invariable quanta: presence and volume per newton-second:
+      v_ex        baryons expelled per N*s     per-quantum rest V_disp [m^3]
+      4500        1.32859e+23                  1.83265e-58
+      5e+04       1.19573e+22                  1.83265e-58
+      2.998e+06   1.99416e+20                  1.83265e-58
+      2.998e+07   1.98426e+19                  1.83265e-58
+      2.698e+08   9.65864e+17                  1.83265e-58
+      the count column falls five orders; the volume column DOES NOT MOVE.
+      presence and volume are the invariable quanta; the ledger's mass is
+      the geared resistance. Velocity derives mass.
+
+[P5] energy-optimal expulsion speed for a fixed mission dv (open ledger):
+  G5a   optimum satisfies its own stationarity equation      got 1             ref 1             dev  0.000001%  PASS
+  G5b   the ~0.63*dv scaling emerges (not inserted)          got 0.6275        ref 0.6275        dev  0.000079%  PASS
+
+RESULT: 9 gates PASS, 0 FAIL.
+Shared form: the numerical forms coincide with special-relativistic rocket
+mechanics and cannot discriminate. Native content: the gearing from the
+movement budget alone (no dilation postulate), the presence/volume-vs-
+resistance decomposition, and the price floor read as relay economics.

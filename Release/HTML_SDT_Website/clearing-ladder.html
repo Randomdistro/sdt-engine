@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>/*sdt-theme-guard*/(function(){try{var t=localStorage.getItem("sdt.theme")||"auto";if(t==="auto")t=(window.matchMedia&&window.matchMedia("(prefers-color-scheme:dark)").matches)?"dark":"light";var d=document.documentElement;d.setAttribute("data-theme",t);d.setAttribute("data-sdt-theme",t);}catch(e){}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Wall in the Infrared — Spatial Displacement Theory</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  /* ── stage ─────────────────────────────────────────────────────────── */
+  .cl-stage { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+  .cl-stage canvas { width: 100%; height: 100%; display: block; }
+  .cl-stage.is-grab { pointer-events: auto; cursor: grab; }
+  .cl-stage.is-grab.is-drag { cursor: grabbing; }
+
+  .cl-hud { position: fixed; left: 1.4rem; bottom: 1.3rem; z-index: 3;
+        font-family: 'JetBrains Mono', monospace; font-size: .6875rem; line-height: 1.75;
+        color: var(--ink-faint); pointer-events: none;
+        text-shadow: 0 1px 3px var(--paper), 0 0 12px var(--paper); }
+  .cl-hud b { color: var(--copper); font-weight: 500; }
+  .cl-hud .cl-hud__k { display: inline-block; min-width: 5.6rem; color: var(--ink-whisper); }
+  .cl-drag { position: fixed; right: 1.4rem; bottom: 1.3rem; z-index: 3;
+        font-family: 'JetBrains Mono', monospace; font-size: .625rem; letter-spacing: .12em;
+        text-transform: uppercase; color: var(--ink-whisper); pointer-events: none;
+        transition: opacity .5s; }
+
+  /* ── flow ──────────────────────────────────────────────────────────── */
+  .cl { position: relative; z-index: 2; max-width: 76rem; margin: 0 auto;
+        padding: 0 1.5rem 7rem; }
+  .cl__head { max-width: 47rem; padding: 5rem 0 0; }
+  .cl__kicker { font-family: 'JetBrains Mono', monospace; font-size: .75rem; letter-spacing: .2em;
+        text-transform: uppercase; color: var(--copper); }
+  .cl__title { font-family: 'Source Serif 4', Georgia, serif; font-size: clamp(2rem,5vw,3.1rem);
+        font-weight: 600; margin: .8rem 0 1.1rem; line-height: 1.08; }
+  .cl__lead { color: var(--ink-soft); font-size: 1.125rem; line-height: 1.8; }
+
+  .beat { min-height: 92vh; display: flex; align-items: center; }
+  .beat__card { max-width: 34rem; background: color-mix(in srgb, var(--paper) 90%, transparent);
+        backdrop-filter: blur(9px); -webkit-backdrop-filter: blur(9px);
+        border: 1px solid var(--paper-edge); border-radius: 3px;
+        padding: 1.7rem 1.8rem; box-shadow: 0 2px 26px rgba(30,28,24,.07); }
+  .beat--r { margin-left: auto; }
+  .beat__n { font-family: 'JetBrains Mono', monospace; font-size: .625rem; letter-spacing: .16em;
+        text-transform: uppercase; color: var(--copper); }
+  .beat h2 { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.5rem; font-weight: 600;
+        margin: .55rem 0 .8rem; line-height: 1.2; }
+  .beat p { color: var(--ink-soft); line-height: 1.82; font-size: .9688rem; margin: 0 0 .85rem; }
+  .beat p:last-child { margin-bottom: 0; }
+  .beat .m { font-family: 'JetBrains Mono', monospace; font-size: .9em; color: var(--ink); }
+
+  .cl h2.sec { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.65rem; font-weight: 600;
+        margin: 3.4rem 0 .9rem; }
+  .cl p.body { color: var(--ink-soft); line-height: 1.85; max-width: 47rem; }
+  .cl .m { font-family: 'JetBrains Mono', monospace; font-size: .9em; }
+
+  .thesis { border-left: 2px solid var(--copper); background: var(--copper-glow);
+        padding: 1.2rem 1.4rem; margin: 1.8rem 0; max-width: 47rem; }
+  .thesis h4 { font-size: .68rem; letter-spacing: .13em; text-transform: uppercase;
+        color: var(--copper); margin: 0 0 .5rem; }
+  .thesis p { margin: 0 0 .6rem; font-size: .9688rem; line-height: 1.8; color: var(--ink-soft); }
+  .thesis p:last-child { margin-bottom: 0; }
+
+  .scope { border-left: 2px solid var(--ink-whisper); background: rgba(122,114,101,.06);
+        padding: 1.1rem 1.3rem; margin: 1.7rem 0; max-width: 47rem; }
+  .scope h4 { font-size: .68rem; letter-spacing: .13em; text-transform: uppercase;
+        color: var(--ink-muted); margin: 0 0 .5rem; }
+  .scope p { margin: 0 0 .55rem; font-size: .9375rem; line-height: 1.75; color: var(--ink-soft); }
+  .scope p:last-child { margin-bottom: 0; }
+
+  .tblwrap { overflow-x: auto; max-width: 52rem; }
+  table.kt { width: 100%; border-collapse: collapse; margin: 1.3rem 0 1.8rem; font-size: .8125rem; }
+  table.kt th { text-align: left; font-size: .625rem; letter-spacing: .12em; text-transform: uppercase;
+        color: var(--ink-faint); font-weight: 600; padding: .45rem .6rem;
+        border-bottom: 1px solid var(--paper-edge); }
+  table.kt td { padding: .55rem .6rem; border-bottom: 1px solid var(--paper-edge);
+        vertical-align: top; line-height: 1.5; color: var(--ink-soft); }
+  table.kt td.num, table.kt td.mono { font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+  table.kt td.num { text-align: right; color: var(--ink); }
+  table.kt tr.wall td { color: var(--copper); font-weight: 600;
+        background: var(--copper-glow); }
+  table.kt tr.behind td:first-child { color: var(--ink-faint); }
+  .sw { display: inline-block; width: .62rem; height: .62rem; border-radius: 50%;
+        margin-right: .45rem; vertical-align: -1px; box-shadow: 0 0 0 1px rgba(30,28,24,.14) inset; }
+  .seen { font-size: .5938rem; letter-spacing: .09em; text-transform: uppercase;
+        padding: .14rem .42rem; border-radius: 2px; white-space: nowrap; }
+  .seen--y { background: var(--copper-glow); color: var(--copper); }
+  .seen--n { background: rgba(122,114,101,.14); color: var(--ink-muted); }
+
+  .prov { font-size: .8125rem; color: var(--ink-faint); line-height: 1.8; margin-top: 3rem;
+        padding-top: 1.2rem; border-top: 1px solid var(--paper-edge); max-width: 47rem; }
+
+  @media (max-width: 720px) {
+    .beat { min-height: auto; padding: 2.4rem 0; }
+    .beat--r { margin-left: 0; }
+    .cl-hud, .cl-drag { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) { .beat { min-height: auto; padding: 2.4rem 0; } }
+</style>
+<meta name="description" content="We stand in the microwave. Travelling into the past means climbing the spectrum — and the climb stops in the infrared, before red. Every colour is behind the wall.">
+<link rel="canonical" href="https://spatialdisplacementtheory.com/clearing-ladder">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/favicon.ico" sizes="64x64">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#b07430">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Spatial Displacement Theory">
+<meta property="og:title" content="The Wall in the Infrared — Spatial Displacement Theory">
+<meta property="og:description" content="We stand in the microwave. Travelling into the past means climbing the spectrum — and the climb stops in the infrared, before red.">
+<meta property="og:url" content="https://spatialdisplacementtheory.com/clearing-ladder">
+<meta property="og:image" content="https://spatialdisplacementtheory.com/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_AU">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Wall in the Infrared — Spatial Displacement Theory">
+<meta name="twitter:description" content="We stand in the microwave. Travelling into the past means climbing the spectrum — and the climb stops in the infrared, before red.">
+<meta name="twitter:image" content="https://spatialdisplacementtheory.com/og-card.png">
+</head>
+<body>
+
+<div class="cl-stage" id="stage"><canvas id="cv"></canvas></div>
+<div class="cl-hud" id="hud"></div>
+<div class="cl-drag" id="draghint">drag to turn</div>
+
+<main class="cl">
+
+  <div class="cl__head">
+    <p class="cl__kicker">Plate IX · the clearing</p>
+    <h1 class="cl__title">The wall in the infrared</h1>
+    <p class="cl__lead">
+      We do not stand in colour. We stand in the microwave — a bath peaking at
+      1.06&nbsp;millimetres, two-point-seven degrees above absolute zero. To look into the past
+      is to climb the spectrum: shorter wavelengths, hotter light, slower light. The climb runs
+      2.8 decades and then stops, and where it stops is not red. It is the infrared, and every
+      colour there has ever been lies on the far side of it.
+    </p>
+  </div>
+
+  <section class="beat">
+    <div class="beat__card">
+      <p class="beat__n">01 · you are here</p>
+      <h2>The bottom rung is a microwave</h2>
+      <p>
+        Take the bath we actually receive and find where it peaks: <span class="m">λ = 1.0632
+        mm</span>, <span class="m">T = 2.7255 K</span>. That is the ground floor of the ladder,
+        and it is the only rung anyone has ever stood on. Every other rung on this page is
+        reached by going up.
+      </p>
+      <p>
+        Going up means going back. Higher on the spectrum is denser, hotter, more compressed —
+        and light itself is slower there, because the medium it hands off through is packed
+        tighter.
+      </p>
+    </div>
+  </section>
+
+  <section class="beat beat--r">
+    <div class="beat__card">
+      <p class="beat__n">02 · the climb</p>
+      <h2>One rung, one wavelength, everything else forced</h2>
+      <p>
+        Name a wavelength and the rest follows with nothing left to choose. The temperature is
+        Wien's law. The rung number is that temperature over ours. The speed of light on that
+        rung is <span class="m">c</span> divided by the rung, and the radiation pressure is the
+        rung to the fourth.
+      </p>
+      <p class="m" style="line-height:2.05">
+        T = b/λ &nbsp;·&nbsp; N = T/T₀ &nbsp;·&nbsp; v = c/N &nbsp;·&nbsp; P = N⁴P₀
+      </p>
+      <p>
+        Nothing is fitted. Two measured numbers go in — the temperature of the bath we sit in,
+        and how many baryons there are per photon — and the ladder comes out.
+      </p>
+    </div>
+  </section>
+
+  <section class="beat">
+    <div class="beat__card">
+      <p class="beat__n">03 · the obstacles</p>
+      <h2>Matter is what the light jams around</h2>
+      <p>
+        Light does not travel through emptiness here. It is handed spation to spation, and
+        matter sits in that traffic as pinned obstacles. The ratio that matters is how much of
+        the medium's inertia the obstacles carry against how much the radiation carries — the
+        loading, <span class="m">R</span>.
+      </p>
+      <p>
+        Far up the ladder the radiation carries nearly all of it and the relay is jammed on
+        itself: light cannot find a clear corridor. Coming down, the obstacles grow in share.
+        The jam breaks when the two are equal.
+      </p>
+      <p class="m">R = 676.6 / N &nbsp;→&nbsp; R = 1 at N = 677</p>
+    </div>
+  </section>
+
+  <section class="beat beat--r">
+    <div class="beat__card">
+      <p class="beat__n">04 · the wall</p>
+      <h2>1571 nanometres, and no further</h2>
+      <p>
+        That is the whole climb. Loading unity falls at rung <span class="m">677</span>, a bath
+        peaking at <span class="m">1571 nm</span> and <span class="m">1844 K</span>, where light
+        crawls at <span class="m">4.43 × 10⁵ m/s</span> — one part in a thousand of the speed we
+        measure — under a radiation pressure of <span class="m">2.92 × 10⁻³ Pa</span>.
+      </p>
+      <p>
+        Above that rung the medium is jammed and nothing gets out. It is not a surface anyone
+        placed there. It is where the traffic clears.
+      </p>
+    </div>
+  </section>
+
+  <section class="beat">
+    <div class="beat__card">
+      <p class="beat__n">05 · what you never saw</p>
+      <h2>Red is on the other side</h2>
+      <p>
+        The visible spectrum begins at 750&nbsp;nm — rung <span class="m">1418</span>. That is
+        <strong>past the wall by a factor of 2.1</strong>. Climbing from the microwave you meet
+        the jam in the infrared and stop, short of red, with the entire visible range —
+        rungs 1418 through 2798 — behind it.
+      </p>
+      <p>
+        So there was a moment when the sky was orange, and one when it was green, and one when
+        it was violet. None of them were ever received. The cut in the model beside you is a
+        cheat: it is the only way to look at colour that never arrived.
+      </p>
+    </div>
+  </section>
+
+  <section class="beat beat--r">
+    <div class="beat__card">
+      <p class="beat__n">06 · not a knife edge</p>
+      <h2>The wall has width</h2>
+      <p>
+        The loading runs smoothly, so the clearing is a sweep rather than a line. Between
+        <span class="m">R = 0.6</span> and <span class="m">R = 1</span> the bath moves from
+        <span class="m">943 nm</span> to <span class="m">1571 nm</span> — rungs 1128 down to 677.
+      </p>
+      <p>
+        A band in the infrared, opening gradually, entirely short of red. What we receive is
+        whatever found a clear corridor while it opened.
+      </p>
+    </div>
+  </section>
+
+  <h2 class="sec">The ladder</h2>
+  <p class="body">
+    Each row is a wavelength; everything to its right is forced by the four relations above.
+    Swatches carry the true hue of a body at that temperature — below about 800&nbsp;K there is
+    no visible emission at all, and those rows are tinted for legibility only.
+  </p>
+
+  <div class="tblwrap">
+    <table class="kt" id="ladder">
+      <thead>
+        <tr><th>λ peak</th><th>band</th><th>T&nbsp;[K]</th><th>N</th><th>v&nbsp;[m/s]</th>
+            <th>P&nbsp;[Pa]</th><th>R</th><th>received</th></tr>
+      </thead>
+      <tbody id="ladderBody"></tbody>
+    </table>
+  </div>
+
+  <h2 class="sec">What it costs</h2>
+  <div class="thesis">
+    <h4>Two measured numbers, no fitted ones</h4>
+    <p>
+      The ladder consumes the temperature of the bath we sit in and the baryon-to-photon ratio
+      from deuterium. Both are measurements taken elsewhere; neither is tuned to the thing being
+      explained. Nothing on this page was adjusted to make a number land.
+    </p>
+    <p>
+      The wall's position rests on there being no dark matter. Loading unity <em>is</em> the
+      point where matter and radiation carry equal inertia — and with baryons alone that falls
+      in the infrared. Add a cold dark component to the obstacle budget and the same criterion
+      moves the wall to 196&nbsp;nm, deep in the ultraviolet, nowhere near what we receive. The
+      claim fails cleanly in that direction, which is the only kind worth making.
+    </p>
+  </div>
+
+  <div class="scope">
+    <h4>Scope</h4>
+    <p>
+      The four relations are exact given the ladder; the wall's position is only as good as the
+      loading criterion, and loading unity is a physical argument rather than a proof. The two
+      neighbouring conventions — equality with and without the three-quarters factor — put the
+      wall at 1571 and 1179&nbsp;nm respectively, and both sit in the infrared.
+    </p>
+    <p>
+      Three alternative criteria were tested and fail badly: wave delocalisation misses by
+      fourteen orders, rate-matching by a factor of forty-eight, single-scattering by two
+      hundred and fifty-six. That they miss by orders rather than by margins is the reason for
+      trusting the one that lands.
+    </p>
+    <p>
+      What the ladder does not yet carry is the harmonic structure of the received bath. That
+      remains open, and it is the largest single thing outstanding.
+    </p>
+  </div>
+
+  <p class="prov">
+    Wien's displacement constant and the bath temperature are measured; the baryon-to-photon
+    ratio is taken from primordial deuterium rather than from any fit to the microwave sky, so
+    that the ladder cannot be circular with what it explains. Swatch colours are computed from
+    Planck's law against the CIE 1931 observer and converted to sRGB; hue is physical, brightness
+    is normalised so that dim rungs remain legible. Rungs below visible emission are shown in a
+    conventional warm tint and carry no colour information.
+    <br><br>
+    J.&nbsp;C.&nbsp;Harvey, Melbourne.
+  </p>
+</main>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ── constants ─────────────────────────────────────────────────────── */
+  var B_WIEN = 2.897771955e-3, T0 = 2.7255, C = 2.99792458e8;
+  var SIG = 5.670374419e-8, A_RAD = 4 * SIG / C, P0 = A_RAD * Math.pow(T0, 4) / 3;
+  var R_COEF = 676.62;                       // R(N) = R_COEF / N
+  var N_WALL = R_COEF;
+
+  var RUNGS = [
+    [B_WIEN / T0, 'microwave — here, now'],
+    [300e-6, 'sub-millimetre'], [100e-6, 'far infrared'], [30e-6, 'far infrared'],
+    [10e-6, 'mid infrared'], [3e-6, 'short-wave infrared'], [2.5e-6, 'short-wave infrared'],
+    [2e-6, 'short-wave infrared'],
+    [B_WIEN / (T0 * N_WALL), 'the clearing — loading unity'],
+    [1400e-9, 'near infrared'], [1179e-9, 'near infrared'], [1000e-9, 'near infrared'],
+    [975e-9, 'near infrared'], [900e-9, 'near infrared'], [780e-9, 'near infrared onset'],
+    [750e-9, 'red — the visible edge'], [700e-9, 'red'], [625e-9, 'red / orange'],
+    [590e-9, 'orange / yellow'], [565e-9, 'yellow / green'], [500e-9, 'green / cyan'],
+    [485e-9, 'cyan / blue'], [450e-9, 'blue / violet'], [380e-9, 'violet — far edge'],
+    [100e-9, 'ultraviolet'], [10e-9, 'extreme ultraviolet'], [1e-9, 'X-ray']
+  ];
+
+  function fmtL(l) {
+    if (l >= 1e-4) return (l * 1e3).toPrecision(4) + ' mm';
+    if (l >= 1e-6) return (l * 1e6).toPrecision(4) + ' µm';
+    return Math.round(l * 1e9) + ' nm';
+  }
+  function sci(x, p) {
+    if (x === 0) return '0';
+    var e = Math.floor(Math.log10(Math.abs(x)));
+    if (e >= -3 && e < 5) return x.toPrecision(p || 4).replace(/\.?0+$/, '');
+    return (x / Math.pow(10, e)).toFixed(2) + '×10' + sup(e);
+  }
+  function sup(n) {
+    var m = { '-': '⁻', '0': '⁰', '1': '¹', '2': '²', '3': '³', '4': '⁴',
+              '5': '⁵', '6': '⁶', '7': '⁷', '8': '⁸', '9': '⁹' };
+    return String(n).split('').map(function (c) { return m[c] || c; }).join('');
+  }
+
+  /* ── blackbody → sRGB (Planck × CIE 1931, Wyman analytic fits) ─────── */
+  function gauss(x, mu, s1, s2) {
+    var t = (x - mu) * (x < mu ? 1 / s1 : 1 / s2);
+    return Math.exp(-0.5 * t * t);
+  }
+  function cie(l) {                                   // l in nm
+    return [
+      1.056 * gauss(l, 599.8, 37.9, 31.0) + 0.362 * gauss(l, 442.0, 16.0, 26.7)
+        - 0.065 * gauss(l, 501.1, 20.4, 26.2),
+      0.821 * gauss(l, 568.8, 46.9, 40.5) + 0.286 * gauss(l, 530.9, 16.3, 31.1),
+      1.217 * gauss(l, 437.0, 11.8, 36.0) + 0.681 * gauss(l, 459.0, 26.0, 13.8)
+    ];
+  }
+  function planck(lnm, T) {
+    var l = lnm * 1e-9, h = 6.62607015e-34, kb = 1.380649e-23;
+    return 1 / (Math.pow(l, 5) * (Math.exp(h * C / (l * kb * T)) - 1));
+  }
+  function bbColour(T) {
+    var X = 0, Y = 0, Z = 0;
+    for (var l = 380; l <= 780; l += 4) {
+      var p = planck(l, T), o = cie(l);
+      X += p * o[0]; Y += p * o[1]; Z += p * o[2];
+    }
+    var s = X + Y + Z; if (s <= 0) return [0.30, 0.10, 0.05];
+    X /= s; Y /= s; Z = 1 - X - Y;
+    var r =  3.2406 * X - 1.5372 * Y - 0.4986 * Z,
+        g = -0.9689 * X + 1.8758 * Y + 0.0415 * Z,
+        b =  0.0557 * X - 0.2040 * Y + 1.0570 * Z;
+    var v = [r, g, b].map(function (u) {
+      u = Math.max(0, u);
+      return u <= 0.0031308 ? 12.92 * u : 1.055 * Math.pow(u, 1 / 2.4) - 0.055;
+    });
+    var mx = Math.max(v[0], v[1], v[2]) || 1;         // normalise hue to full brightness
+    return v.map(function (u) { return Math.min(1, u / mx); });
+  }
+  /* below visible emission there is no colour — conventional warm tint, flagged in copy */
+  function rungColour(T) {
+    if (T < 800) {
+      var f = Math.max(0, Math.min(1, (T - 40) / 760));
+      return [0.34 + 0.42 * f, 0.11 + 0.13 * f, 0.06 + 0.04 * f];
+    }
+    return bbColour(T);
+  }
+
+  /* ── build rows ────────────────────────────────────────────────────── */
+  var rows = RUNGS.map(function (r) {
+    var lam = r[0], T = B_WIEN / lam, N = T / T0;
+    return { lam: lam, band: r[1], T: T, N: N, v: C / N,
+             P: Math.pow(N, 4) * P0, R: R_COEF / N,
+             col: rungColour(T), wall: Math.abs(N - N_WALL) < 1e-6 };
+  });
+
+  var tb = document.getElementById('ladderBody');
+  rows.forEach(function (d) {
+    var behind = d.N > N_WALL + 1e-6;
+    var tr = document.createElement('tr');
+    tr.className = d.wall ? 'wall' : (behind ? 'behind' : '');
+    var rgb = 'rgb(' + d.col.map(function (u) { return Math.round(u * 255); }).join(',') + ')';
+    tr.innerHTML =
+      '<td class="mono"><span class="sw" style="background:' + rgb + '"></span>' + fmtL(d.lam) + '</td>' +
+      '<td>' + d.band + '</td>' +
+      '<td class="num">' + sci(d.T, 4) + '</td>' +
+      '<td class="num">' + sci(d.N, 4) + '</td>' +
+      '<td class="num">' + sci(d.v, 3) + '</td>' +
+      '<td class="num">' + sci(d.P, 3) + '</td>' +
+      '<td class="num">' + (d.R >= 100 ? Math.round(d.R) : d.R.toPrecision(3)) + '</td>' +
+      '<td><span class="seen ' + (behind ? 'seen--n' : 'seen--y') + '">' +
+        (d.wall ? 'the wall' : (behind ? 'behind' : 'yes')) + '</span></td>';
+    tb.appendChild(tr);
+  });
+
+  /* ── radial emission profile texture ───────────────────────────────── */
+  var TEX = 1024;
+  function radiusOf(N) {                       // log-spaced: rung 1 → 0.10, rung 1e7 → 1.0
+    return 0.10 + 0.90 * Math.min(1, Math.log10(N) / 7);
+  }
+  function buildProfile() {
+    var px = new Uint8Array(TEX * 4);
+    for (var i = 0; i < TEX; i++) {
+      var rad = i / (TEX - 1), e = [0, 0, 0], dens = 0;
+      for (var k = 0; k < rows.length; k++) {
+        var d = rows[k], rk = radiusOf(d.N);
+        var w = Math.exp(-Math.pow((rad - rk) / 0.0135, 2));
+        if (w < 0.004) continue;
+        var boost = d.wall ? 2.6 : 1.0;
+        e[0] += d.col[0] * w * boost; e[1] += d.col[1] * w * boost; e[2] += d.col[2] * w * boost;
+        dens += w * (d.wall ? 3.4 : 0.55);
+      }
+      px[i * 4]     = Math.min(255, e[0] * 255);
+      px[i * 4 + 1] = Math.min(255, e[1] * 255);
+      px[i * 4 + 2] = Math.min(255, e[2] * 255);
+      px[i * 4 + 3] = Math.min(255, dens * 255);
+    }
+    return px;
+  }
+
+  /* ── WebGL ─────────────────────────────────────────────────────────── */
+  var cv = document.getElementById('cv'), stage = document.getElementById('stage');
+  var gl = cv.getContext('webgl', { antialias: false, alpha: true,
+                                    premultipliedAlpha: false });
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!gl) { stage.style.display = 'none'; return; }
+
+  var VS = 'attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
+  var FS = [
+    'precision highp float;',
+    'uniform vec2 uRes; uniform float uCut, uRotX, uRotY, uWallR, uTime, uDark;',
+    'uniform sampler2D uProf;',
+    'mat3 rx(float a){float s=sin(a),c=cos(a);return mat3(1.,0.,0.,0.,c,-s,0.,s,c);}',
+    'mat3 ry(float a){float s=sin(a),c=cos(a);return mat3(c,0.,s,0.,1.,0.,-s,0.,c);}',
+    'void main(){',
+    '  vec2 uv=(gl_FragCoord.xy-0.5*uRes)/uRes.y;',
+    '  vec3 ro=vec3(0.,0.,2.55), rd=normalize(vec3(uv*1.05,-1.4));',
+    '  mat3 M=ry(uRotY)*rx(uRotX); ro=M*ro; rd=M*rd;',
+    '  float b=dot(ro,rd), cc=dot(ro,ro)-1.0, h=b*b-cc;',
+    '  if(h<0.0){ gl_FragColor=vec4(0.); return; }',
+    '  h=sqrt(h); float t0=-b-h, t1=-b+h; t0=max(t0,0.0);',
+    '  const int N=190; float dt=(t1-t0)/float(N);',
+    '  vec3 acc=vec3(0.); float tr=1.0;',
+    '  for(int i=0;i<N;i++){',
+    '    float t=t0+(float(i)+0.5)*dt; vec3 p=ro+rd*t; float r=length(p);',
+    '    if(r>1.0) continue;',
+    // cutaway wedge: remove the +x/+z quadrant, opening with scroll
+    '    float ang=atan(p.z,p.x);',
+    '    float cutHalf=uCut*1.15;',
+    '    if(abs(ang)<cutHalf && uCut>0.001) continue;',
+    '    vec4 s=texture2D(uProf,vec2(r,0.5));',
+    '    float a=s.a*dt*7.0;',
+    '    acc+=tr*s.rgb*dt*5.2;',
+    '    tr*=exp(-a);',
+    '    if(tr<0.004) break;',
+    '  }',
+    // faint rim so the sphere reads as an object on light paper
+    '  float rim=pow(1.0-clamp(h/1.0,0.,1.),3.0);',
+    '  acc+=vec3(0.69,0.45,0.19)*rim*0.16;',
+    '  float al=clamp(1.0-tr,0.,1.)*0.92+rim*0.13;',
+    '  acc=mix(acc, acc*vec3(1.05,0.97,0.9), uDark);',
+    '  gl_FragColor=vec4(acc,clamp(al,0.,1.));',
+    '}'
+  ].join('\n');
+
+  function sh(type, src) {
+    var s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s);
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) { return null; }
+    return s;
+  }
+  var vs = sh(gl.VERTEX_SHADER, VS), fs = sh(gl.FRAGMENT_SHADER, FS);
+  if (!vs || !fs) { stage.style.display = 'none'; return; }
+  var pr = gl.createProgram();
+  gl.attachShader(pr, vs); gl.attachShader(pr, fs); gl.linkProgram(pr);
+  if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) { stage.style.display = 'none'; return; }
+  gl.useProgram(pr);
+
+  var buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 3,-1, -1,3]), gl.STATIC_DRAW);
+  var loc = gl.getAttribLocation(pr, 'p');
+  gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+
+  var tex = gl.createTexture();
+  gl.bindTexture(gl.TEXTURE_2D, tex);
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, TEX, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, buildProfile());
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+
+  gl.enable(gl.BLEND);
+  gl.blendFuncSeparate(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA, gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+
+  var U = {};
+  ['uRes','uCut','uRotX','uRotY','uWallR','uTime','uDark','uProf'].forEach(function (n) {
+    U[n] = gl.getUniformLocation(pr, n);
+  });
+  gl.uniform1i(U.uProf, 0);
+
+  /* ── interaction ───────────────────────────────────────────────────── */
+  var rotX = -0.32, rotY = 0.5, tRotX = rotX, tRotY = rotY;
+  var dragging = false, lx = 0, ly = 0, touched = false;
+  stage.classList.add('is-grab');
+
+  function down(x, y) { dragging = true; lx = x; ly = y; stage.classList.add('is-drag');
+                        if (!touched) { touched = true;
+                          document.getElementById('draghint').style.opacity = '0'; } }
+  function move(x, y) {
+    if (!dragging) return;
+    tRotY += (x - lx) * 0.0072; tRotX += (y - ly) * 0.0058;
+    tRotX = Math.max(-1.25, Math.min(1.25, tRotX)); lx = x; ly = y;
+  }
+  function up() { dragging = false; stage.classList.remove('is-drag'); }
+
+  stage.addEventListener('mousedown', function (e) { down(e.clientX, e.clientY); });
+  window.addEventListener('mousemove', function (e) { move(e.clientX, e.clientY); });
+  window.addEventListener('mouseup', up);
+  stage.addEventListener('touchstart', function (e) {
+    down(e.touches[0].clientX, e.touches[0].clientY);
+  }, { passive: true });
+  stage.addEventListener('touchmove', function (e) {
+    move(e.touches[0].clientX, e.touches[0].clientY);
+  }, { passive: true });
+  stage.addEventListener('touchend', up);
+
+  /* ── scroll ────────────────────────────────────────────────────────── */
+  var prog = 0, tprog = 0;
+  function onScroll() {
+    var h = document.body.scrollHeight - window.innerHeight;
+    tprog = h > 0 ? Math.max(0, Math.min(1, window.scrollY / h)) : 0;
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* ── hud ───────────────────────────────────────────────────────────── */
+  var hud = document.getElementById('hud');
+  function hudAt(p) {
+    // walk the ladder with scroll: rung 1 at the top, deep rungs at the bottom
+    var lg = p * 7, N = Math.pow(10, lg), T = N * T0, lam = B_WIEN / T;
+    var past = N > N_WALL;
+    hud.innerHTML =
+      '<span class="cl-hud__k">rung N</span><b>' + sci(N, 4) + '</b><br>' +
+      '<span class="cl-hud__k">peak λ</span>' + fmtL(lam) + '<br>' +
+      '<span class="cl-hud__k">T</span>' + sci(T, 4) + ' K<br>' +
+      '<span class="cl-hud__k">v = c/N</span>' + sci(C / N, 3) + ' m/s<br>' +
+      '<span class="cl-hud__k">loading R</span>' + (R_COEF / N).toPrecision(3) + '<br>' +
+      '<span class="cl-hud__k">state</span><b>' + (past ? 'behind the wall' : 'received') + '</b>';
+  }
+
+  /* ── loop ──────────────────────────────────────────────────────────── */
+  var dpr = Math.min(window.devicePixelRatio || 1, 1.75), t0 = performance.now();
+  function resize() {
+    var w = Math.floor(cv.clientWidth * dpr), h = Math.floor(cv.clientHeight * dpr);
+    if (cv.width !== w || cv.height !== h) { cv.width = w; cv.height = h; gl.viewport(0, 0, w, h); }
+  }
+  function frame(now) {
+    resize();
+    prog += (tprog - prog) * 0.09;
+    rotX += (tRotX - rotX) * 0.11; rotY += (tRotY - rotY) * 0.11;
+    if (!dragging && !reduce) tRotY += 0.0013;
+    var dark = document.documentElement.getAttribute('data-theme') === 'dark' ? 1 : 0;
+    gl.uniform2f(U.uRes, cv.width, cv.height);
+    gl.uniform1f(U.uCut, Math.max(0, Math.min(1, (prog - 0.06) / 0.34)));
+    gl.uniform1f(U.uRotX, rotX);
+    gl.uniform1f(U.uRotY, rotY);
+    gl.uniform1f(U.uWallR, radiusOf(N_WALL));
+    gl.uniform1f(U.uTime, (now - t0) / 1000);
+    gl.uniform1f(U.uDark, dark);
+    gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+    hudAt(prog);
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+
+<link rel="stylesheet" href="sdt-shell.css">
+<script src="sdt-shell.js" defer></script>
+</body>
+</html>

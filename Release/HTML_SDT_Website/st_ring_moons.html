@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>/*sdt-theme-guard*/(function(){try{var t=localStorage.getItem("sdt.theme")||"auto";if(t==="auto")t=(window.matchMedia&&window.matchMedia("(prefers-color-scheme:dark)").matches)?"dark":"light";var d=document.documentElement;d.setAttribute("data-theme",t);d.setAttribute("data-sdt-theme",t);}catch(e){}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Seat Between Two Streams · Saturn's Ring Moons — SDT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+/* ══════════════════════════════════════════════════════════════════════════
+   THE SEAT BETWEEN TWO STREAMS — Saturn's eight ring-embedded moons (GOM24)
+   J. C. Harvey, Melbourne. Paradox-Census construction: continuous scroll,
+   one rAF loop, each act a reel of three scenes reading a smoothed scroll.
+   ══════════════════════════════════════════════════════════════════════════ */
+html{scroll-behavior:auto}
+body{background:var(--cream);overflow-x:hidden}
+:root{
+  --pcw: min(60rem, calc(100vw - 3rem));
+  --th:#8a8478; --th-soft:rgba(138,132,120,.10); --th-ink:#4a463f;
+}
+@media(min-width:1081px){ :root{ --pcw: min(60rem, calc(100vw - 30rem)) } }
+
+/* ── THE DUOTONE ──
+   teal   = the streams — shear, flow, what runs past the body
+   amber  = the seat    — contact, ridge, what the body keeps */
+:root{--rmA:#1c6b76;--rmA-soft:rgba(28,107,118,.10);--rmA-ink:#124a52;
+      --rmB:#b0662a;--rmB-soft:rgba(176,102,42,.11);--rmB-ink:#7d4718}
+[data-th="seat"] {--th:var(--rmA);--th-soft:var(--rmA-soft);--th-ink:var(--rmA-ink)}
+[data-th="roll"] {--th:var(--rmB);--th-soft:var(--rmB-soft);--th-ink:var(--rmB-ink)}
+[data-th="ridge"]{--th:var(--rmB);--th-soft:var(--rmB-soft);--th-ink:var(--rmB-ink)}
+[data-th="wave"] {--th:var(--rmA);--th-soft:var(--rmA-soft);--th-ink:var(--rmA-ink)}
+[data-th="depth"]{--th:#8a8478;--th-soft:rgba(138,132,120,.10);--th-ink:#4a463f}
+[data-th="spec"] {--th:#b07430;--th-soft:rgba(176,116,48,.12);--th-ink:#7d5220}
+
+canvas.act__rule{width:var(--pcw);height:30px;display:block;margin:0 auto var(--sp-xl);background:none;opacity:.95}
+
+/* stage */
+.stagewrap{position:sticky;top:0;height:100vh;display:flex;align-items:center;justify-content:center}
+.stage{width:100%;max-width:44rem;position:relative}
+.stage canvas{width:100%;height:auto;display:block;border:1px solid var(--paper-edge);border-radius:6px;
+  background:linear-gradient(180deg,#fffdf8,#f6f2e9)}
+.stage figcaption{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--ink-faint);margin-top:.55rem;text-align:center;min-height:1.2em}
+
+.act{position:relative;padding:0 0 var(--sp-3xl)}
+.act__head{width:var(--pcw);margin:0 auto var(--sp-xl);display:flex;gap:1.1rem;align-items:flex-start}
+.act__body{width:var(--pcw);margin:0 auto;display:grid;grid-template-columns:1fr;gap:var(--sp-xl)}
+@media(min-width:1081px){.act__body{grid-template-columns:minmax(0,1fr) minmax(0,26rem);align-items:start}}
+.act__body .col>*+*{margin-top:1rem}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.17em;
+  text-transform:uppercase;color:var(--th);margin-bottom:.3rem}
+.sigil{flex:0 0 auto;width:64px;height:64px;border:1px solid var(--th);border-radius:5px;background:#fffdf8}
+.premise{font-size:.98rem;color:var(--ink-muted);max-width:36rem;line-height:1.62}
+.premise b{color:var(--th-ink);font-weight:600}
+.lede{font-size:1.06rem;line-height:1.62;color:var(--ink)}
+.lede em{color:var(--th-ink);font-style:normal;font-weight:600}
+.eqline{font-family:'JetBrains Mono',monospace;font-size:.78rem;background:var(--th-soft);
+  border-left:2px solid var(--th);padding:.6rem .8rem;border-radius:0 4px 4px 0;color:var(--th-ink)}
+.eqline b{font-weight:600}
+.repair{display:grid;grid-template-columns:1fr;border:1px solid var(--th);border-radius:5px;overflow:hidden}
+@media(min-width:620px){.repair{grid-template-columns:1fr 1fr}}
+.repair div{padding:.7rem .85rem}
+.repair div+div{border-top:1px solid var(--th-soft)}
+@media(min-width:620px){.repair div+div{border-top:none;border-left:1px solid var(--th-soft)}}
+.repair h5{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--th);margin-bottom:.3rem}
+.repair p{font-size:.86rem;line-height:1.55;color:var(--ink-muted)}
+
+.fade{opacity:0;transform:translateY(14px);transition:opacity .7s ease,transform .7s ease}
+.fade--in{opacity:1;transform:none}
+
+/* drive bar */
+.drive{position:fixed;left:50%;transform:translateX(-50%);bottom:14px;z-index:120;
+  display:flex;gap:.4rem;align-items:center;background:rgba(255,253,248,.94);
+  border:1px solid var(--paper-edge);border-radius:7px;padding:.4rem .55rem;
+  box-shadow:0 3px 14px rgba(0,0,0,.07);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.drive button{font:inherit;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.1em;
+  text-transform:uppercase;border:1px solid var(--paper-edge);background:#fff;cursor:pointer;
+  border-radius:4px;padding:.3rem .5rem;color:var(--ink-muted);transition:.2s}
+.drive button:hover{border-color:var(--th);color:var(--th)}
+.drive .pct{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--ink-faint);padding:0 .3rem}
+@media(max-width:600px){.drive{width:calc(100vw - 1.2rem);bottom:8px}.drive .pct{display:none}}
+
+/* lab — drag interactives */
+.lab{width:var(--pcw);margin:var(--sp-xl) auto 0;position:relative;z-index:1}
+.lab .bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem;flex-wrap:wrap;gap:.4rem}
+.lab .bar h4{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--th)}
+.lab .bar .hint{font-family:'JetBrains Mono',monospace;font-size:.58rem;color:var(--ink-faint);letter-spacing:.08em}
+.lab .bar button{font:inherit;font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.1em;
+  text-transform:uppercase;border:1px solid var(--paper-edge);background:#fff;border-radius:4px;
+  padding:.25rem .5rem;cursor:pointer;color:var(--ink-muted);transition:.2s}
+.lab .bar button[aria-pressed="true"]{background:var(--th);border-color:var(--th);color:#fff}
+.lab canvas{width:100%;display:block;border:1px solid var(--paper-edge);border-radius:6px;
+  background:linear-gradient(180deg,#fffdf8,#f7f3ea);cursor:grab;touch-action:none}
+.lab canvas:active{cursor:grabbing}
+.lab .read{font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--ink-muted);
+  margin-top:.45rem;display:flex;gap:1.1rem;flex-wrap:wrap}
+.lab .read b{color:var(--th-ink);font-weight:600}
+
+#field{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.5}
+
+.head{width:var(--pcw);margin:0 auto;padding:var(--sp-3xl) 0 var(--sp-2xl)}
+.head h1{font-size:clamp(2rem,5vw,3.1rem);line-height:1.1;margin-bottom:.7rem}
+.head .sub{font-size:1.06rem;color:var(--ink-muted);max-width:40rem;line-height:1.6}
+.tag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.14em;
+  text-transform:uppercase;border:1px solid var(--paper-edge);border-radius:3px;padding:.2rem .45rem;
+  color:var(--ink-faint);margin-right:.35rem}
+.close{width:var(--pcw);margin:0 auto;padding:var(--sp-2xl) 0 var(--sp-3xl);border-top:1px solid var(--paper-edge)}
+</style>
+</head>
+<body>
+<canvas id="field" aria-hidden="true"></canvas>
+
+<header class="head">
+  <div style="margin-bottom:.9rem">
+    <span class="tag">GOM24</span><span class="tag">Cassini corpus</span><span class="tag">n = 8</span><span class="tag">Spec — nothing claimed</span>
+  </div>
+  <h1>The seat between two streams</h1>
+  <p class="sub">Eight small moons sit inside Saturn's rings. Every one of them is a bearing between two
+  walls running opposite ways. Three carry a shape found nowhere else in the solar system — and not one
+  of the three has ever had its spin measured.</p>
+</header>
+
+<!-- ════════ ACT ONE ════════ -->
+<section class="act" data-act="seat" data-th="seat">
+  <canvas class="act__rule" data-kink="18" aria-hidden="true"></canvas>
+  <div class="act__head fade" data-fade>
+    <canvas class="sigil" data-sigil="seat" width="64" height="64" aria-hidden="true"></canvas>
+    <div>
+      <div class="eyebrow">Act One · The seat</div>
+      <h2>Inside runs forward, outside runs back</h2>
+      <p class="premise">Generating premise: <b>a body in a ring is not orbiting alone — it is wedged
+        between two flows moving opposite ways past it</b>. Nearer material orbits faster and overtakes;
+        further material orbits slower and falls behind. That is a bearing between two belts.</p>
+    </div>
+  </div>
+  <div class="act__body">
+    <div class="stagewrap"><div class="stage">
+      <canvas data-scene="seat"></canvas>
+      <figcaption></figcaption>
+    </div></div>
+    <div class="col">
+      <p class="lede fade" data-fade>Kepler makes the inner wall <em>overtake</em> and the outer wall
+        <em>fall back</em>. Both push the same way round.</p>
+      <p class="fade" data-fade>Take the orbit anticlockwise. Material at smaller radius is faster, so in
+        the moon's own frame it streams forward along its inner flank. Material at larger radius is slower,
+        so it streams backward along the outer flank. A force in +ŷ applied at −x̂, and a force in −ŷ applied
+        at +x̂, give the <strong>same</strong> torque: −ẑ.</p>
+      <p class="fade" data-fade>So the shear does not cancel. It adds. Every ring-embedded body sits in a
+        standing couple that wants to turn it <strong>backwards</strong> relative to its own orbit.</p>
+      <div class="eqline">τ = (−x̂)×(+ŷ) + (+x̂)×(−ŷ) = <b>−2ẑ</b> &nbsp;·&nbsp; retrograde, always</div>
+      <div class="repair fade" data-fade>
+        <div><h5>What the seat is</h5><p>Not a metaphor. Two opposed velocity fields in permanent contact
+          with one body, at every instant of its life.</p></div>
+        <div><h5>What it is not</h5><p>A tidal effect. Tides act along the Saturn line; this couple acts
+          about the vertical axis and has the opposite sign.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="lab fade" data-fade>
+    <div class="bar"><h4>Toy · drag the moon across the gap</h4><span class="hint">drag left–right</span></div>
+    <canvas data-lab="seat" height="300"></canvas>
+    <div class="read">
+      <span>offset Δa <b data-out="da">0</b> km</span>
+      <span>shear Δv <b data-out="dv">0</b> mm/s</span>
+      <span>wake λ = 3π·Δa <b data-out="lam">0</b> km</span>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ ACT TWO ════════ -->
+<section class="act" data-act="roll" data-th="roll">
+  <canvas class="act__rule" data-kink="34" aria-hidden="true"></canvas>
+  <div class="act__head fade" data-fade>
+    <canvas class="sigil" data-sigil="roll" width="64" height="64" aria-hidden="true"></canvas>
+    <div>
+      <div class="eyebrow">Act Two · Roll against lock</div>
+      <h2>Two torques, opposite signs, and nobody has looked</h2>
+      <p class="premise">Generating premise: <b>the shear drives the body backwards and the tide drives it
+        forwards, so its spin state is a contest</b>. For the Moon the contest was settled long ago — one
+        face, always. For a ring moon it has never been measured at all.</p>
+    </div>
+  </div>
+  <div class="act__body">
+    <div class="stagewrap"><div class="stage">
+      <canvas data-scene="roll"></canvas>
+      <figcaption></figcaption>
+    </div></div>
+    <div class="col">
+      <p class="lede fade" data-fade>A body that <em>rolled</em> would show every face. A locked body shows
+        one. Locking is the roll <em>cancelled</em> — exactly one counter-turn per orbit.</p>
+      <p class="fade" data-fade>Tidal locking drives prograde spin at one turn per orbit. The Kepler shear
+        couple drives retrograde. They are not competing for magnitude; they are competing for
+        <strong>sign</strong>. Whichever wins is written in the body's rotation, and rotation is measurable.</p>
+      <p class="fade" data-fade>For Pan, Daphnis and Atlas it has never been measured. Their synchronous
+        rotation is <em>assumed</em>, on the reasonable ground that locking timescales are short for small
+        close bodies. Assumed is not measured, and a ledger fed an assumption returns it.</p>
+      <div class="eqline">τ_tide → prograde, 1/orbit &nbsp;·&nbsp; τ_shear → retrograde &nbsp;·&nbsp; observed: <b>—</b></div>
+      <div class="repair fade" data-fade>
+        <div><h5>Where the circularity bites</h5><p>Feed T_spin ≡ T_orb into any exchange ledger and it
+          returns unity because unity went in. That is arithmetic, not evidence.</p></div>
+        <div><h5>The one number wanted</h5><p>A spin <em>sense</em>. Not a period, a sign. Prograde settles
+          for the tide; retrograde settles for the seat.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ ACT THREE ════════ -->
+<section class="act" data-act="ridge" data-th="ridge">
+  <canvas class="act__rule" data-kink="52" aria-hidden="true"></canvas>
+  <div class="act__head fade" data-fade>
+    <canvas class="sigil" data-sigil="ridge" width="64" height="64" aria-hidden="true"></canvas>
+    <div>
+      <div class="eyebrow">Act Three · The skirts</div>
+      <h2>Two moons are wearing something the solar system has never worn</h2>
+      <p class="premise">Generating premise: <b>Pan and Atlas carry equatorial skirts, and the skirt lies in
+        the ring plane</b> — which is also the plane perpendicular to the shear axis. Orientation alone
+        cannot tell accretion from rolling. Profile can.</p>
+    </div>
+  </div>
+  <div class="act__body">
+    <div class="stagewrap"><div class="stage">
+      <canvas data-scene="ridge"></canvas>
+      <figcaption></figcaption>
+    </div></div>
+    <div class="col">
+      <p class="lede fade" data-fade>Atlas is <em>1.91 times</em> wider across its waist than pole to pole.
+        Nothing else in the solar system is shaped like that.</p>
+      <p class="fade" data-fade>But the obvious metric is a trap, and it caught me while building this page.
+        <strong>R_eq/R_pol does not measure a ridge</strong> — it conflates a skirt with a sausage. Two bodies
+        outrank Atlas on it and neither has a skirt: Aegaeon at <em>3.50</em> and Prometheus at <em>2.28</em>,
+        against Atlas's 2.21. Both are simply <em>elongated along the orbit</em>.</p>
+      <p class="fade" data-fade>The metric that separates them is <strong>R_mid/R_pol</strong>. A prolate body
+        is long in one axis and round in the other two (a≫b≈c). A skirted body is round in two and flat in the
+        third (a≈b≫c). Score the middle axis against the pole and the two morphologies come apart.</p>
+      <div class="eqline">Atlas <b>1.91</b> · Pan <b>1.51</b> · Prometheus 1.34 · Daphnis 1.28 · Pandora 1.25 · Janus 1.21 · Aegaeon 1.25 · Epimetheus <b>1.07</b></div>
+      <div class="repair fade" data-fade>
+        <div><h5>What survives the fix</h5><p>Atlas and Pan still stand clear of the pack. The two deepest in
+          dense ring material are the two with skirts.</p></div>
+        <div><h5>What does not</h5><p>Daphnis drops into the crowd at 1.28. Its skirt is marginal, and any
+          three-body story built on it was built on the wrong axis ratio.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="lab fade" data-fade>
+    <div class="bar">
+      <h4>Toy · turn the body in your hands</h4>
+      <span>
+        <button type="button" data-moon="Atlas" aria-pressed="true">Atlas</button>
+        <button type="button" data-moon="Pan" aria-pressed="false">Pan</button>
+        <button type="button" data-moon="Prometheus" aria-pressed="false">Prometheus</button>
+        <button type="button" data-moon="Janus" aria-pressed="false">Janus</button>
+      </span>
+      <span class="hint">drag to rotate</span>
+    </div>
+    <canvas data-lab="moon3d" height="340"></canvas>
+    <div class="read">
+      <span>axes <b data-out="axes">—</b> km</span>
+      <span>R_mid/R_pol <b data-out="rr">—</b></span>
+      <span>morphology <b data-out="morph">—</b></span>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ ACT FOUR ════════ -->
+<section class="act" data-act="wave" data-th="wave">
+  <canvas class="act__rule" data-kink="66" aria-hidden="true"></canvas>
+  <div class="act__head fade" data-fade>
+    <canvas class="sigil" data-sigil="wave" width="64" height="64" aria-hidden="true"></canvas>
+    <div>
+      <div class="eyebrow">Act Four · The parity test</div>
+      <h2>Do the two edges mirror, or do they match?</h2>
+      <p class="premise">Generating premise: <b>an inclined moon imprints the same vertical phase on both gap
+        edges; an encounter imprints opposite ones</b>. Both offsets and both relative velocities reverse
+        between the inner and outer edge, so the circulation sense goes as their product — and flips.</p>
+    </div>
+  </div>
+  <div class="act__body">
+    <div class="stagewrap"><div class="stage">
+      <canvas data-scene="wave"></canvas>
+      <figcaption></figcaption>
+    </div></div>
+    <div class="col">
+      <p class="lede fade" data-fade>The wavelength is not free. Kepler shear alone gives
+        <em>λ = 3π·Δa</em> — about 190 km at 20 km offset, against roughly 200 km measured.</p>
+      <p class="fade" data-fade>The heights are honest too: they come off a ruler. At the low solar elevation
+        of the 2017 ring-grazing passes, Daphnis and the crests throw long shadows, and shadow length times
+        the tangent of the sun angle is the relief. About a kilometre. No model in the chain.</p>
+      <p class="fade" data-fade>The <strong>inclination</strong> is a different animal. It is fitted — quite
+        possibly fitted from the very waves it is then invoked to explain. That is the circularity this
+        investigation must not inherit, and the parity test sidesteps it completely: it asks only whether the
+        two edges agree or oppose, which no fitted parameter can absorb.</p>
+      <div class="eqline">mirrored (|Δφ−π| &lt; π/4) → <b>encounter</b> &nbsp;·&nbsp; common (|Δφ| &lt; π/4) → <b>inclination</b></div>
+      <div class="repair fade" data-fade>
+        <div><h5>Measured</h5><p>Wavelength against offset. Vertical relief from shadow length. Both
+          model-free, both already in the Cassini frames.</p></div>
+        <div><h5>Fitted</h5><p>The 0.0036° inclination. Until its provenance is traced it may not enter the
+          chain — only an INFORMATIONAL-RIVAL column.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="lab fade" data-fade>
+    <div class="bar">
+      <h4>Toy · the discriminant</h4>
+      <span>
+        <button type="button" data-par="mirror" aria-pressed="true">Mirrored — encounter</button>
+        <button type="button" data-par="common" aria-pressed="false">Common — inclination</button>
+      </span>
+      <span class="hint">two edges, one moon</span>
+    </div>
+    <canvas data-lab="parity" height="320"></canvas>
+    <div class="read">
+      <span>inner edge phase <b data-out="p1">—</b></span>
+      <span>outer edge phase <b data-out="p2">—</b></span>
+      <span>verdict <b data-out="pv">—</b></span>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ ACT FIVE ════════ -->
+<section class="act" data-act="depth" data-th="depth">
+  <canvas class="act__rule" data-kink="80" aria-hidden="true"></canvas>
+  <div class="act__head fade" data-fade>
+    <canvas class="sigil" data-sigil="depth" width="64" height="64" aria-hidden="true"></canvas>
+    <div>
+      <div class="eyebrow">Act Five · The refusal</div>
+      <h2>The tempting wrong answer, killed before it is reached for</h2>
+      <p class="premise">Generating premise: <b>depth does not explain the skirts</b>. It would be convenient
+        if it did — koppa is the framework's own currency. It does not, and the phase that shows this is a
+        pass, not a failure.</p>
+    </div>
+  </div>
+  <div class="act__body">
+    <div class="stagewrap"><div class="stage">
+      <canvas data-scene="depth"></canvas>
+      <figcaption></figcaption>
+    </div></div>
+    <div class="col">
+      <p class="lede fade" data-fade>Saturn's c-boundary is <em>Ϟ = 0.4221 m</em>. Every moon's depth is
+        z = Ϟ/a — and across the eight it slides smoothly by a quarter, with no break anywhere.</p>
+      <p class="fade" data-fade>Pan sits at 3.16 × 10⁻⁹, Aegaeon at 2.52 × 10⁻⁹, and the six between them
+        fall on a smooth line. The skirts, meanwhile, stop dead somewhere near 138,000 km. A smooth quantity
+        cannot draw a sharp boundary.</p>
+      <p class="fade" data-fade>So depth is excluded as the ridge criterion, in the framework's own currency,
+        before anyone gets attached to it. That is what a pre-registered null is for — it spends the
+        attractive explanation early, in public, at no cost.</p>
+      <div class="eqline">z: Pan 3.16 → Aegaeon 2.52 (×10⁻⁹) &nbsp;·&nbsp; monotone, no discontinuity &nbsp;·&nbsp; <b>NULL = PASS</b></div>
+      <div class="repair fade" data-fade>
+        <div><h5>What it costs</h5><p>Nothing. A null declared in advance is information; a null discovered
+          after a claim is a retraction.</p></div>
+        <div><h5>What remains</h5><p>Contact with dense ring material, which is not a depth and not in the
+          chain — so it enters as rival information only.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ ACT SIX ════════ -->
+<section class="act" data-act="spec" data-th="spec">
+  <canvas class="act__rule" data-kink="96" aria-hidden="true"></canvas>
+  <div class="act__head fade" data-fade>
+    <canvas class="sigil" data-sigil="spec" width="64" height="64" aria-hidden="true"></canvas>
+    <div>
+      <div class="eyebrow">Act Six · The missing measurement</div>
+      <h2>One sign decides it</h2>
+      <p class="premise">Generating premise: <b>the whole question reduces to the sense of one rotation</b>.
+        Not a period — a sign. And it has never been taken for any of the three bodies where it matters.</p>
+    </div>
+  </div>
+  <div class="act__body">
+    <div class="stagewrap"><div class="stage">
+      <canvas data-scene="spec"></canvas>
+      <figcaption></figcaption>
+    </div></div>
+    <div class="col">
+      <p class="lede fade" data-fade>Cassini is gone. But the frames are not, and neither are the
+        <em>propeller</em> moonlets, the next mission's targets, or the archive nobody has read this way.</p>
+      <p class="fade" data-fade>Two predictions, stated before any data is touched: under tidal lock, the
+        body turns prograde once per orbit and keeps one face to Saturn. Under a shear-won seat, it turns
+        retrograde, and the face presented to Saturn <em>cycles</em>. Those are opposite signs on a directly
+        imageable quantity.</p>
+      <p class="fade" data-fade>What this page is: a specification. Nothing here is claimed. Act Five is a
+        declared null, Act Three is degenerate with accretion until Act Four resolves, and Act Four has not
+        been run. The value is that every one of those states is written down <em>before</em> the numbers
+        arrive.</p>
+      <div class="eqline">lock → prograde, 1/orbit, one face &nbsp;·&nbsp; seat → retrograde, face cycles &nbsp;·&nbsp; <b>opposite signs</b></div>
+      <div class="repair fade" data-fade>
+        <div><h5>Status</h5><p>SPEC. Not a result, not a claim, not evidence. Six phases with numeric gates
+          and six falsifiers, published before execution.</p></div>
+        <div><h5>The falsifier that matters</h5><p>If both gap edges carry a common vertical phase, the seat
+          mechanism loses its only imaging test and this page says so.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="close">
+  <p style="font-size:.86rem;color:var(--ink-muted);line-height:1.6">
+    <strong>GOM24 · Cassini Ring-Moon Corpus.</strong> Specification only — no result is claimed on this page.
+    Koppa is kinematic throughout (Ϟ = 4π²a³/T²c²); no G, no M, no GM enters the chain. Shape data from
+    Cassini ISS models; orbital elements epoch-matched. The published Daphnis inclination is excluded as an
+    input and appears only as rival information. Full gates, falsifiers and pivot table in
+    <code>Investigations/06_Gravitation_and_Orbital_Mechanics/GOM24_Cassini_Ring_Moon_Corpus/PROMPT.md</code>.
+  </p>
+  <p style="font-size:.8rem;color:var(--ink-faint);margin-top:1rem">J. C. Harvey, Melbourne.</p>
+</footer>
+
+<div class="drive">
+  <button type="button" data-drive="prev">◀</button>
+  <span class="pct">00%</span>
+  <button type="button" data-drive="next">▶</button>
+</div>
+
+<script>
+(function(){
+'use strict';
+var TAU=Math.PI*2;
+function clamp(v,a,b){return v<a?a:v>b?b:v}
+function lerp(a,b,t){return a+(b-a)*t}
+function ease(t){return t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2}
+function css(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim()}
+
+/* ── the corpus ── a[km], axes A>B>C [km], T_orb[d] ── */
+var MOONS=[
+ {n:'Pan',        a:133584, A:34.4, B:31.4, C:20.8,  T:0.5750},
+ {n:'Daphnis',    a:136505, A:8.6,  B:8.2,  C:6.4,   T:0.5940},
+ {n:'Atlas',      a:137670, A:40.8, B:35.4, C:18.5,  T:0.6019},
+ {n:'Prometheus', a:139380, A:135.6,B:79.4, C:59.4,  T:0.6130},
+ {n:'Pandora',    a:141720, A:103,  B:80,   C:64,    T:0.6285},
+ {n:'Epimetheus', a:151422, A:129.8,B:114,  C:106.2, T:0.6942},
+ {n:'Janus',      a:151472, A:203,  B:185,  C:152.6, T:0.6945},
+ {n:'Aegaeon',    a:167500, A:1.4,  B:0.5,  C:0.4,   T:0.8082}
+];
+var KOPPA_SAT=0.4221;              // m — Saturn's c-boundary, kinematic
+MOONS.forEach(function(m){
+  m.rr = m.B/m.C;                  // ridge metric: mid axis over polar
+  m.el = m.A/m.B;                  // elongation: long over mid
+  m.z  = KOPPA_SAT/(m.a*1000);     // depth account
+});
+
+var CAPS={
+ seat:['A body seated in a gap — ring material on both flanks',
+       'Inner wall overtakes, outer wall falls behind',
+       'Both flanks torque the same way: retrograde'],
+ roll:['A rolling body shows every face in turn',
+       'A locked body shows one — the roll exactly cancelled',
+       'Two torques, opposite signs, and no measurement'],
+ ridge:['Eight bodies, one seat, drawn to their true axis ratios',
+       'R_eq/R_pol confuses a skirt with a sausage',
+       'R_mid/R_pol separates them — Atlas and Pan stand clear'],
+ wave:['The wake: λ = 3π·Δa, set by shear alone',
+       'Both edges disturbed, point-symmetric about the moon',
+       'Mirrored phase or common phase — the discriminant'],
+ depth:['Depth per moon: z = Ϟ/a across the eight',
+       'A smooth quarter-decline, no break anywhere',
+       'Sharp boundary, smooth quantity — depth excluded'],
+ spec:['Never measured: the spin of Pan, Daphnis, Atlas',
+       'Lock predicts prograde; seat predicts retrograde',
+       'One sign, directly imageable — the specification']
+};
+
+/* ══ scenes ══ each act a reel of three, each reading tt∈[0,1] ══ */
+function ringBand(g,W,H,y,h,shade){g.fillStyle=shade;g.fillRect(0,y,W,h)}
+function arrow(g,x,y,dx,dy,col,w){
+  g.strokeStyle=col;g.lineWidth=w||1.6;g.beginPath();g.moveTo(x,y);g.lineTo(x+dx,y+dy);g.stroke();
+  var an=Math.atan2(dy,dx),L=6;
+  g.beginPath();g.moveTo(x+dx,y+dy);
+  g.lineTo(x+dx-L*Math.cos(an-.4),y+dy-L*Math.sin(an-.4));
+  g.lineTo(x+dx-L*Math.cos(an+.4),y+dy-L*Math.sin(an+.4));
+  g.closePath();g.fillStyle=col;g.fill();
+}
+function label(g,x,y,t,col,sz,al){
+  g.fillStyle=col;g.font=(sz||10)+'px "JetBrains Mono", monospace';g.textAlign=al||'left';g.fillText(t,x,y);g.textAlign='left';
+}
+
+var SCENES={
+ seat:[
+  function(g,W,H,t,S){ // the gap
+    var gy=H*.5, gh=H*.20;
+    ringBand(g,W,H,gy-gh*2.6,gh*2.1,'#e7e0d2'); ringBand(g,W,H,gy+gh*.5,gh*2.1,'#e7e0d2');
+    g.fillStyle='#2a2621';g.fillRect(0,gy-gh*.5,W,gh);
+    var x=W*.5, r=lerp(3,9,ease(t));
+    g.fillStyle=S.A;g.beginPath();g.arc(x,gy,r,0,TAU);g.fill();
+    label(g,W*.5,gy-gh*2.9,'inner ring — faster','#8a8478',10,'center');
+    label(g,W*.5,gy+gh*2.85,'outer ring — slower','#8a8478',10,'center');
+    label(g,x+14,gy+4,'moon',S.Ai,10);
+  },
+  function(g,W,H,t,S){ // the streams
+    var gy=H*.5, gh=H*.20, e=ease(t);
+    ringBand(g,W,H,gy-gh*2.6,gh*2.1,'#e7e0d2'); ringBand(g,W,H,gy+gh*2*.25,gh*2.1,'#e7e0d2');
+    g.fillStyle='#2a2621';g.fillRect(0,gy-gh*.5,W,gh);
+    for(var i=0;i<9;i++){
+      var px=(i+.5)/9*W;
+      arrow(g,px-26*e,gy-gh*1.5,52*e,0,S.A,1.5);
+      arrow(g,px+26*e,gy+gh*1.5,-52*e,0,S.A,1.5);
+    }
+    g.fillStyle=S.B;g.beginPath();g.arc(W*.5,gy,9,0,TAU);g.fill();
+    label(g,W*.5,gy-gh*2.9,'streams FORWARD past the moon',S.Ai,10,'center');
+    label(g,W*.5,gy+gh*2.85,'streams BACKWARD past the moon',S.Ai,10,'center');
+  },
+  function(g,W,H,t,S){ // the couple
+    var cx=W*.5, cy=H*.5, R=Math.min(W,H)*.22, e=ease(t);
+    g.strokeStyle='#d8d2c4';g.lineWidth=1;
+    g.beginPath();g.arc(cx,cy,R*1.7,0,TAU);g.stroke();
+    arrow(g,cx-R*1.45,cy-R*.75,R*.95*e,0,S.A,2);
+    arrow(g,cx+R*1.45,cy+R*.75,-R*.95*e,0,S.A,2);
+    g.fillStyle=S.B;g.beginPath();g.arc(cx,cy,R*.42,0,TAU);g.fill();
+    var sw=e*TAU*.8;
+    g.strokeStyle=S.Bi;g.lineWidth=2.4;g.beginPath();
+    g.arc(cx,cy,R*.78,-Math.PI*.4,-Math.PI*.4-sw,true);g.stroke();
+    if(e>.55){
+      var an=-Math.PI*.4-sw;
+      arrow(g,cx+R*.78*Math.cos(an),cy+R*.78*Math.sin(an),
+              -9*Math.sin(an),9*Math.cos(an),S.Bi,2.2);
+    }
+    label(g,cx,cy+R*1.95,'τ = −2ẑ  ·  retrograde',S.Bi,11,'center');
+    label(g,cx-R*1.5,cy-R*.95,'+ŷ at −x̂',S.Ai,9);
+    label(g,cx+R*.55,cy+R*1.05,'−ŷ at +x̂',S.Ai,9);
+  }],
+
+ roll:[
+  function(g,W,H,t,S){ // rolling shows every face
+    var cy=H*.5, e=ease(t), n=5;
+    for(var i=0;i<n;i++){
+      var x=lerp(W*.13,W*.87,i/(n-1)), r=Math.min(W,H)*.075;
+      g.fillStyle='#efe9dc';g.beginPath();g.arc(x,cy,r,0,TAU);g.fill();
+      g.strokeStyle=S.A;g.lineWidth=1.4;g.beginPath();g.arc(x,cy,r,0,TAU);g.stroke();
+      var ph=i/(n-1)*TAU*e;
+      g.strokeStyle=S.Bi;g.lineWidth=2.4;
+      g.beginPath();g.moveTo(x,cy);g.lineTo(x+r*.82*Math.cos(ph),cy+r*.82*Math.sin(ph));g.stroke();
+    }
+    label(g,W*.5,cy-Math.min(W,H)*.15,'ROLLING — every face in turn',S.Bi,11,'center');
+  },
+  function(g,W,H,t,S){ // locked shows one
+    var cy=H*.5, e=ease(t), n=5;
+    for(var i=0;i<n;i++){
+      var x=lerp(W*.13,W*.87,i/(n-1)), r=Math.min(W,H)*.075;
+      g.fillStyle='#efe9dc';g.beginPath();g.arc(x,cy,r,0,TAU);g.fill();
+      g.strokeStyle=S.A;g.lineWidth=1.4;g.beginPath();g.arc(x,cy,r,0,TAU);g.stroke();
+      g.strokeStyle=S.Bi;g.lineWidth=2.4;
+      g.beginPath();g.moveTo(x,cy);g.lineTo(x-r*.82,cy);g.stroke();
+    }
+    if(e>.4) label(g,W*.5,cy+Math.min(W,H)*.17,'the roll exactly cancelled — one counter-turn per orbit',S.Ai,10,'center');
+    label(g,W*.5,cy-Math.min(W,H)*.15,'LOCKED — one face, always',S.Bi,11,'center');
+  },
+  function(g,W,H,t,S){ // the contest
+    var cx=W*.5, cy=H*.5, R=Math.min(W,H)*.2, e=ease(t);
+    g.fillStyle='#efe9dc';g.beginPath();g.arc(cx,cy,R,0,TAU);g.fill();
+    g.strokeStyle='#d8d2c4';g.lineWidth=1;g.beginPath();g.arc(cx,cy,R,0,TAU);g.stroke();
+    g.strokeStyle=S.A;g.lineWidth=3;g.beginPath();g.arc(cx,cy,R*1.35,-.2,-.2+TAU*.3*e);g.stroke();
+    g.strokeStyle=S.B;g.lineWidth=3;g.beginPath();g.arc(cx,cy,R*1.62,Math.PI-.2,Math.PI-.2-TAU*.3*e,true);g.stroke();
+    label(g,cx,cy+6,'?',S.Bi,Math.round(R*.9),'center');
+    label(g,cx,cy-R*1.95,'tide → prograde',S.Ai,10,'center');
+    label(g,cx,cy+R*2.15,'shear → retrograde',S.Bi,10,'center');
+  }],
+
+ ridge:[
+  function(g,W,H,t,S){ // the eight to scale
+    var e=ease(t), n=MOONS.length, mx=203;
+    for(var i=0;i<n;i++){
+      var m=MOONS[i], x=lerp(W*.09,W*.91,i/(n-1)), cy=H*.52;
+      var k=Math.pow(m.A/mx,.42)*Math.min(W,H)*.16*e;
+      g.save();g.translate(x,cy);
+      g.fillStyle=(m.rr>1.45)?S.B:'#cfc7b6';
+      g.beginPath();g.ellipse(0,0,k,k*(m.C/m.A),0,0,TAU);g.fill();
+      g.restore();
+      label(g,x,H*.86,m.n.slice(0,4),'#8a8478',9,'center');
+    }
+    label(g,W*.5,H*.14,'the eight, true axis ratios',S.Bi,11,'center');
+  },
+  function(g,W,H,t,S){ // the trap
+    var e=ease(t), n=MOONS.length, P=[], mx=0;
+    for(var i=0;i<n;i++){var v=MOONS[i].A/MOONS[i].C; P.push(v); if(v>mx)mx=v}
+    var bw=W*.75/n, x0=W*.14;
+    for(i=0;i<n;i++){
+      var nm=MOONS[i].n, h=(P[i]/mx)*H*.55*e, x=x0+i*bw;
+      g.fillStyle=(nm==='Prometheus'||nm==='Aegaeon')?S.B:'#cfc7b6';
+      g.fillRect(x,H*.76-h,bw*.66,h);
+      label(g,x+bw*.33,H*.86,nm.slice(0,4),'#8a8478',9,'center');
+    }
+    label(g,W*.5,H*.12,'R_eq / R_pol — the trap',S.Bi,11,'center');
+    if(e>.5) label(g,W*.5,H*.19,'Aegaeon 3.50 and Prometheus 2.28 outrank Atlas — neither is skirted',S.Ai,10,'center');
+  },
+  function(g,W,H,t,S){ // the fix
+    var e=ease(t), n=MOONS.length, mx=0;
+    for(var i=0;i<n;i++) if(MOONS[i].rr>mx) mx=MOONS[i].rr;
+    var bw=W*.75/n, x0=W*.14;
+    for(i=0;i<n;i++){
+      var m=MOONS[i], h=((m.rr-1)/(mx-1))*H*.55*e, x=x0+i*bw;
+      g.fillStyle=(m.rr>1.45)?S.B:'#cfc7b6';
+      g.fillRect(x,H*.76-h,bw*.66,h);
+      label(g,x+bw*.33,H*.86,m.n.slice(0,4),'#8a8478',9,'center');
+      if(e>.7) label(g,x+bw*.33,H*.74-h,m.rr.toFixed(2),(m.rr>1.45)?S.Bi:'#a49b8a',9,'center');
+    }
+    label(g,W*.5,H*.12,'R_mid / R_pol — the fix',S.Bi,11,'center');
+    if(e>.55) label(g,W*.5,H*.19,'Atlas and Pan stand clear; Prometheus falls back',S.Ai,10,'center');
+  }],
+
+ wave:[
+  function(g,W,H,t,S){ // the wake
+    var e=ease(t), gy=H*.5, gh=H*.16;
+    g.fillStyle='#2a2621';g.fillRect(0,gy-gh*.5,W,gh);
+    g.strokeStyle=S.A;g.lineWidth=2;g.beginPath();
+    for(var x=0;x<=W;x+=2){
+      var d=(x-W*.5)/W, amp=(x>W*.5)?0:Math.exp(d*3.2)*gh*.85*e;
+      var y=gy-gh*.5-Math.sin((W*.5-x)/W*TAU*2.4)*amp;
+      if(x===0)g.moveTo(x,y);else g.lineTo(x,y);
+    }
+    g.stroke();
+    g.fillStyle=S.B;g.beginPath();g.arc(W*.5,gy,7,0,TAU);g.fill();
+    label(g,W*.5,H*.16,'λ = 3π·Δa   ≈ 190 km at Δa = 20 km',S.Ai,11,'center');
+    if(e>.6) label(g,W*.5,H*.23,'measured ≈ 200 km','#8a8478',10,'center');
+  },
+  function(g,W,H,t,S){ // point symmetry
+    var e=ease(t), gy=H*.5, gh=H*.16;
+    g.fillStyle='#2a2621';g.fillRect(0,gy-gh*.5,W,gh);
+    for(var s=0;s<2;s++){
+      var sg=s?1:-1, base=gy+sg*gh*.5;
+      g.strokeStyle=S.A;g.lineWidth=2;g.beginPath();
+      for(var x=0;x<=W;x+=2){
+        var d=sg*((x-W*.5)/W), amp=(d>0)?0:Math.exp(d*3.2)*gh*.8*e;
+        var y=base+sg*Math.sin((x-W*.5)/W*TAU*2.4)*amp;
+        if(x===0)g.moveTo(x,y);else g.lineTo(x,y);
+      }
+      g.stroke();
+    }
+    g.fillStyle=S.B;g.beginPath();g.arc(W*.5,gy,7,0,TAU);g.fill();
+    label(g,W*.5,H*.14,'both edges disturbed — point-symmetric about the moon',S.Ai,10,'center');
+    if(e>.6){label(g,W*.18,gy-gh*1.5,'trails one way',S.Ai,9,'center');
+             label(g,W*.82,gy+gh*1.7,'trails the other',S.Ai,9,'center');}
+  },
+  function(g,W,H,t,S){ // the discriminant
+    var e=ease(t), y1=H*.32, y2=H*.68;
+    for(var k=0;k<2;k++){
+      var base=k?y2:y1, flip=k?1:-1;
+      g.strokeStyle=k?S.B:S.A;g.lineWidth=2.2;g.beginPath();
+      for(var x=0;x<=W;x+=2){
+        var y=base+flip*Math.sin(x/W*TAU*2.2)*H*.09*e;
+        if(x===0)g.moveTo(x,y);else g.lineTo(x,y);
+      }
+      g.stroke();
+      label(g,W*.03,base-H*.13,k?'outer edge':'inner edge',k?S.Bi:S.Ai,9);
+    }
+    label(g,W*.5,H*.09,'MIRRORED → encounter geometry',S.Ai,11,'center');
+    if(e>.5) label(g,W*.5,H*.95,'common phase instead → inclination. Falsifier F3.','#8a8478',10,'center');
+  }],
+
+ depth:[
+  function(g,W,H,t,S){ // z per moon
+    var e=ease(t), n=MOONS.length;
+    for(var i=0;i<n;i++){
+      var m=MOONS[i], x=lerp(W*.1,W*.9,i/(n-1));
+      var yv=(m.z-2.4e-9)/(3.3e-9-2.4e-9);
+      var y=lerp(H*.78,H*.22,yv*e);
+      g.fillStyle=S.A;g.beginPath();g.arc(x,y,4.5,0,TAU);g.fill();
+      label(g,x,H*.9,m.n.slice(0,4),'#8a8478',9,'center');
+    }
+    label(g,W*.5,H*.12,'z = Ϟ / a   ·   Ϟ_Saturn = 0.4221 m',S.Ai,11,'center');
+  },
+  function(g,W,H,t,S){ // the smooth line
+    var e=ease(t), n=MOONS.length;
+    g.strokeStyle=S.A;g.lineWidth=2;g.beginPath();
+    for(var i=0;i<n;i++){
+      var m=MOONS[i], x=lerp(W*.1,W*.9,i/(n-1));
+      var yv=(m.z-2.4e-9)/(3.3e-9-2.4e-9), y=lerp(H*.78,H*.22,yv);
+      if(i===0)g.moveTo(x,y);else if(i/(n-1)<=e)g.lineTo(x,y);
+    }
+    g.stroke();
+    for(i=0;i<n;i++){
+      var mm=MOONS[i], xx=lerp(W*.1,W*.9,i/(n-1));
+      var yy=lerp(H*.78,H*.22,(mm.z-2.4e-9)/(3.3e-9-2.4e-9));
+      g.fillStyle=S.A;g.beginPath();g.arc(xx,yy,4.5,0,TAU);g.fill();
+      label(g,xx,H*.9,mm.n.slice(0,4),'#8a8478',9,'center');
+    }
+    label(g,W*.5,H*.12,'3.16 → 2.52 ×10⁻⁹  ·  a smooth quarter',S.Ai,11,'center');
+  },
+  function(g,W,H,t,S){ // the refusal
+    var e=ease(t), n=MOONS.length;
+    g.strokeStyle='#cfc7b6';g.lineWidth=2;g.beginPath();
+    for(var i=0;i<n;i++){
+      var m=MOONS[i], x=lerp(W*.1,W*.9,i/(n-1));
+      var y=lerp(H*.78,H*.22,(m.z-2.4e-9)/(3.3e-9-2.4e-9));
+      if(i===0)g.moveTo(x,y);else g.lineTo(x,y);
+    }
+    g.stroke();
+    var bx=lerp(W*.1,W*.9,2.5/(n-1));
+    g.strokeStyle='#c4511b';g.lineWidth=2;g.setLineDash([5,4]);
+    g.beginPath();g.moveTo(bx,H*.16);g.lineTo(bx,H*.82);g.stroke();g.setLineDash([]);
+    label(g,bx+8,H*.2,'skirts stop here','#c4511b',10);
+    if(e>.4) label(g,W*.5,H*.93,'a smooth quantity cannot draw a sharp boundary — DEPTH EXCLUDED','#4a463f',10,'center');
+    label(g,W*.5,H*.1,'NULL, declared in advance = PASS','#4a463f',11,'center');
+  }],
+
+ spec:[
+  function(g,W,H,t,S){ // never measured
+    var e=ease(t), names=['Pan','Daphnis','Atlas'];
+    for(var i=0;i<3;i++){
+      var x=lerp(W*.24,W*.76,i/2), cy=H*.46, r=Math.min(W,H)*.09;
+      g.fillStyle='#efe9dc';g.beginPath();g.arc(x,cy,r,0,TAU);g.fill();
+      g.strokeStyle='#d8d2c4';g.lineWidth=1.2;g.setLineDash([3,3]);
+      g.beginPath();g.arc(x,cy,r,0,TAU);g.stroke();g.setLineDash([]);
+      label(g,x,cy+5,'?',S.Bi,Math.round(r*.85),'center');
+      label(g,x,cy+r*1.7,names[i],'#8a8478',10,'center');
+    }
+    if(e>.35) label(g,W*.5,H*.8,'spin state: NEVER MEASURED',S.Bi,12,'center');
+  },
+  function(g,W,H,t,S){ // two predictions
+    var e=ease(t), cx=W*.5, cy=H*.5;
+    g.strokeStyle='#d8d2c4';g.lineWidth=1;g.beginPath();g.moveTo(cx,H*.16);g.lineTo(cx,H*.84);g.stroke();
+    g.strokeStyle=S.A;g.lineWidth=2.6;g.beginPath();
+    g.moveTo(cx,cy);g.lineTo(cx-W*.3*e,cy-H*.22*e);g.stroke();
+    g.strokeStyle=S.B;g.lineWidth=2.6;g.beginPath();
+    g.moveTo(cx,cy);g.lineTo(cx+W*.3*e,cy+H*.22*e);g.stroke();
+    label(g,cx-W*.31,cy-H*.25,'LOCK · prograde · one face',S.Ai,10,'center');
+    label(g,cx+W*.31,cy+H*.27,'SEAT · retrograde · face cycles',S.Bi,10,'center');
+    label(g,cx,H*.12,'opposite signs on an imageable quantity','#7d5220',11,'center');
+  },
+  function(g,W,H,t,S){ // the spec
+    var e=ease(t), R=Math.min(W,H)*.26, cx=W*.5, cy=H*.5;
+    g.strokeStyle=S.B;g.lineWidth=2;g.beginPath();g.arc(cx,cy,R,-Math.PI/2,-Math.PI/2+TAU*e);g.stroke();
+    label(g,cx,cy-6,'GOM24',S.Bi,Math.round(R*.34),'center');
+    label(g,cx,cy+R*.34,'SPEC','#8a8478',Math.round(R*.2),'center');
+    if(e>.6) label(g,cx,cy+R*1.45,'6 phases · 6 falsifiers · 0 claims','#8a8478',10,'center');
+  }]
+};
+
+/* ══ act wiring ══ */
+var acts=[].slice.call(document.querySelectorAll('.act')).map(function(sec){
+  var cv=sec.querySelector('canvas[data-scene]');
+  return {sec:sec,k:cv?cv.getAttribute('data-scene'):null,cv:cv,
+          ctx:cv?cv.getContext('2d'):null,capEl:sec.querySelector('figcaption'),
+          rule:sec.querySelector('canvas.act__rule'),sig:sec.querySelector('canvas.sigil'),seg:-1};
+});
+function palette(sec){
+  var cs=getComputedStyle(sec);
+  return {A:cs.getPropertyValue('--th').trim()||'#1c6b76',
+          Ai:cs.getPropertyValue('--th-ink').trim()||'#124a52',
+          B:cs.getPropertyValue('--th').trim()||'#b0662a',
+          Bi:cs.getPropertyValue('--th-ink').trim()||'#7d4718'};
+}
+function fit(cv,hCSS){
+  var dpr=Math.min(2,window.devicePixelRatio||1), w=cv.clientWidth||600;
+  var h=hCSS||Math.round(w*0.66);
+  if(cv.width!==Math.round(w*dpr)||cv.height!==Math.round(h*dpr)){
+    cv.width=Math.round(w*dpr);cv.height=Math.round(h*dpr);
+    if(!hCSS)cv.style.height=h+'px';
+  }
+  var g=cv.getContext('2d');g.setTransform(dpr,0,0,dpr,0,0);
+  return {g:g,W:w,H:h};
+}
+
+/* sigils + rules */
+function drawSigil(a){
+  if(!a.sig)return; var f=fit(a.sig,64), g=f.g, S=palette(a.sec);
+  g.clearRect(0,0,64,64); g.strokeStyle=S.A; g.lineWidth=1.3;
+  g.beginPath();g.arc(32,32,17,0,TAU);g.stroke();
+  g.beginPath();g.moveTo(8,24);g.lineTo(56,24);g.moveTo(8,40);g.lineTo(56,40);g.stroke();
+  g.fillStyle=S.A;g.beginPath();g.arc(32,32,4.5,0,TAU);g.fill();
+}
+function drawRule(a){
+  if(!a.rule)return; var f=fit(a.rule,30), g=f.g, W=f.W, S=palette(a.sec);
+  var k=parseFloat(a.rule.getAttribute('data-kink'))||50;
+  g.clearRect(0,0,W,30); g.strokeStyle=S.A; g.lineWidth=1.2; g.beginPath();
+  var kx=W*k/100;
+  g.moveTo(0,20);g.lineTo(kx-14,20);g.lineTo(kx,9);g.lineTo(kx+14,20);g.lineTo(W,20);
+  g.stroke();
+}
+
+/* ══ labs ══ */
+var LAB={};
+
+/* seat toy */
+(function(){
+  var cv=document.querySelector('canvas[data-lab="seat"]'); if(!cv)return;
+  var st={x:0.5,drag:false};
+  function out(id,v){var e=document.querySelector('[data-out="'+id+'"]');if(e)e.textContent=v}
+  function draw(){
+    var f=fit(cv,300), g=f.g, W=f.W, H=f.H, S={A:css('--rmA'),Ai:css('--rmA-ink'),B:css('--rmB'),Bi:css('--rmB-ink')};
+    g.clearRect(0,0,W,H);
+    var gy=H*.5, gh=H*.30;
+    g.fillStyle='#e7e0d2';g.fillRect(0,0,W,gy-gh*.5);g.fillRect(0,gy+gh*.5,W,H-(gy+gh*.5));
+    g.fillStyle='#2a2621';g.fillRect(0,gy-gh*.5,W,gh);
+    var mx=lerp(W*.08,W*.92,st.x), da=Math.abs(st.x-0.5)*2*30;
+    for(var i=0;i<11;i++){
+      var px=(i+.5)/11*W;
+      arrow(g,px-18,gy-gh*.72,36,0,S.A,1.3);
+      arrow(g,px+18,gy+gh*.72,-36,0,S.A,1.3);
+    }
+    g.strokeStyle=S.A;g.lineWidth=2;g.beginPath();
+    for(var x=0;x<=W;x+=2){
+      var d=(x-mx)/W, amp=(x>mx)?0:Math.exp(d*3.0)*gh*.42*Math.min(1,da/10);
+      var y=gy-gh*.5-Math.sin((mx-x)/W*TAU*(1.4+da*.08))*amp;
+      if(x===0)g.moveTo(x,y);else g.lineTo(x,y);
+    }
+    g.stroke();
+    g.fillStyle=S.B;g.beginPath();g.arc(mx,gy,9,0,TAU);g.fill();
+    label(g,W*.5,16,'drag the moon — the wake follows the offset',S.Ai,10,'center');
+    out('da',da.toFixed(1));
+    out('dv',(da*0.31).toFixed(2));
+    out('lam',(3*Math.PI*da).toFixed(0));
+  }
+  function pos(ev){var r=cv.getBoundingClientRect();
+    var cx=(ev.touches?ev.touches[0].clientX:ev.clientX)-r.left;
+    st.x=clamp(cx/r.width,0.04,0.96);draw();}
+  cv.addEventListener('pointerdown',function(e){st.drag=true;cv.setPointerCapture(e.pointerId);pos(e)});
+  cv.addEventListener('pointermove',function(e){if(st.drag)pos(e)});
+  cv.addEventListener('pointerup',function(){st.drag=false});
+  LAB.seat=draw; draw();
+})();
+
+/* 3D moon — real rotation + orthographic projection */
+(function(){
+  var cv=document.querySelector('canvas[data-lab="moon3d"]'); if(!cv)return;
+  var st={ax:-0.35,ay:0.6,drag:false,px:0,py:0,name:'Atlas'};
+  function out(id,v){var e=document.querySelector('[data-out="'+id+'"]');if(e)e.textContent=v}
+  function pts(m){
+    // ellipsoid shell + equatorial skirt where the body is oblate
+    var P=[],i,j,NU=22,NV=30, skirt=Math.max(0,(m.B/m.C-1.35))*0.55;
+    for(i=0;i<=NU;i++){
+      var u=(i/NU)*Math.PI-Math.PI/2;
+      for(j=0;j<NV;j++){
+        var v=(j/NV)*TAU;
+        var bulge=1+skirt*Math.pow(Math.cos(u),8);
+        P.push([m.A*Math.cos(u)*Math.cos(v)*bulge,
+                m.B*Math.cos(u)*Math.sin(v)*bulge,
+                m.C*Math.sin(u)]);
+      }
+    }
+    return P;
+  }
+  function draw(){
+    var f=fit(cv,340), g=f.g, W=f.W, H=f.H;
+    var A=css('--rmB'), Ai=css('--rmB-ink');
+    g.clearRect(0,0,W,H);
+    var m=null; for(var q=0;q<MOONS.length;q++) if(MOONS[q].n===st.name) m=MOONS[q];
+    if(!m)return;
+    var P=pts(m), sc=Math.min(W,H)*0.34/Math.max(m.A,m.B,m.C);
+    var ca=Math.cos(st.ax),sa=Math.sin(st.ax),cb=Math.cos(st.ay),sb=Math.sin(st.ay);
+    var proj=[];
+    for(var i=0;i<P.length;i++){
+      var x=P[i][0],y=P[i][1],z=P[i][2];
+      var x1=x*cb+z*sb, z1=-x*sb+z*cb;
+      var y1=y*ca-z1*sa, z2=y*sa+z1*ca;
+      proj.push([W/2+x1*sc,H/2-y1*sc,z2]);
+    }
+    proj.sort(function(p,q2){return p[2]-q2[2]});
+    for(i=0;i<proj.length;i++){
+      var d=(proj[i][2]/Math.max(m.A,m.B,m.C)+1)/2;
+      g.fillStyle='rgba('+Math.round(lerp(210,176,d))+','+Math.round(lerp(196,102,d))+','+Math.round(lerp(170,42,d))+','+lerp(.25,.95,d)+')';
+      g.beginPath();g.arc(proj[i][0],proj[i][1],lerp(1.0,2.2,d),0,TAU);g.fill();
+    }
+    // ring plane
+    g.strokeStyle='rgba(28,107,118,.35)';g.lineWidth=1;g.setLineDash([4,4]);
+    g.beginPath();g.moveTo(W*.06,H/2);g.lineTo(W*.94,H/2);g.stroke();g.setLineDash([]);
+    label(g,W*.94,H/2-7,'ring plane','rgba(28,107,118,.7)',9,'right');
+    label(g,W*.5,20,m.n,Ai,12,'center');
+    out('axes',m.A+' × '+m.B+' × '+m.C);
+    out('rr',m.rr.toFixed(2));
+    out('morph', m.rr>1.45 ? 'SKIRTED (oblate)' : (m.el>1.5 ? 'PROLATE (elongated)' : 'near-round'));
+  }
+  function down(e){st.drag=true;st.px=e.clientX;st.py=e.clientY;cv.setPointerCapture(e.pointerId)}
+  function move(e){ if(!st.drag)return;
+    st.ay+=(e.clientX-st.px)*0.01; st.ax+=(e.clientY-st.py)*0.01;
+    st.ax=clamp(st.ax,-1.4,1.4); st.px=e.clientX; st.py=e.clientY; draw(); }
+  cv.addEventListener('pointerdown',down);
+  cv.addEventListener('pointermove',move);
+  cv.addEventListener('pointerup',function(){st.drag=false});
+  [].slice.call(document.querySelectorAll('[data-moon]')).forEach(function(b){
+    b.addEventListener('click',function(){
+      [].slice.call(document.querySelectorAll('[data-moon]')).forEach(function(o){o.setAttribute('aria-pressed','false')});
+      b.setAttribute('aria-pressed','true'); st.name=b.getAttribute('data-moon'); draw();
+    });
+  });
+  LAB.moon3d=draw; draw();
+})();
+
+/* parity toggle */
+(function(){
+  var cv=document.querySelector('canvas[data-lab="parity"]'); if(!cv)return;
+  var st={mode:'mirror'};
+  function out(id,v){var e=document.querySelector('[data-out="'+id+'"]');if(e)e.textContent=v}
+  function draw(){
+    var f=fit(cv,320), g=f.g, W=f.W, H=f.H;
+    var A=css('--rmA'), Ai=css('--rmA-ink'), B=css('--rmB'), Bi=css('--rmB-ink');
+    g.clearRect(0,0,W,H);
+    var gy=H*.5, gh=H*.13;
+    g.fillStyle='#2a2621';g.fillRect(0,gy-gh*.5,W,gh);
+    var flipOuter = (st.mode==='mirror') ? -1 : 1;
+    for(var s=0;s<2;s++){
+      var sg=s?1:-1, base=gy+sg*gh*.5, ph=s?flipOuter:1;
+      g.strokeStyle=s?B:A; g.lineWidth=2.4; g.beginPath();
+      for(var x=0;x<=W;x+=2){
+        var y=base+sg*gh*.1+ph*Math.sin(x/W*TAU*2.1)*H*.11;
+        if(x===0)g.moveTo(x,y);else g.lineTo(x,y);
+      }
+      g.stroke();
+    }
+    g.fillStyle='#7d4718';g.beginPath();g.arc(W*.5,gy,7,0,TAU);g.fill();
+    label(g,W*.03,gy-gh*2.6,'inner edge',Ai,10);
+    label(g,W*.03,gy+gh*3.1,'outer edge',Bi,10);
+    var mir=(st.mode==='mirror');
+    out('p1','0');
+    out('p2',mir?'π':'0');
+    out('pv',mir?'encounter geometry':'orbital inclination');
+    label(g,W*.5,20, mir?'MIRRORED — crests oppose across the gap':'COMMON — crests agree across the gap',
+          mir?Ai:Bi,11,'center');
+  }
+  [].slice.call(document.querySelectorAll('[data-par]')).forEach(function(b){
+    b.addEventListener('click',function(){
+      [].slice.call(document.querySelectorAll('[data-par]')).forEach(function(o){o.setAttribute('aria-pressed','false')});
+      b.setAttribute('aria-pressed','true'); st.mode=b.getAttribute('data-par'); draw();
+    });
+  });
+  LAB.parity=draw; draw();
+})();
+
+/* ══ motif field ══ */
+var fieldCv=document.getElementById('field');
+function drawField(sc){
+  var f=fit(fieldCv,window.innerHeight), g=f.g, W=f.W, H=f.H;
+  g.clearRect(0,0,W,H);
+  g.strokeStyle='rgba(138,132,120,.11)';g.lineWidth=1;
+  for(var i=0;i<7;i++){
+    var y=((i/7+sc*.14)%1)*H;
+    g.beginPath();g.moveTo(0,y);g.lineTo(W,y);g.stroke();
+  }
+}
+
+/* ══ the one loop ══ */
+var target=0, smooth=0;
+function onScroll(){
+  var d=document.documentElement;
+  target=d.scrollTop/Math.max(1,(d.scrollHeight-d.clientHeight));
+}
+window.addEventListener('scroll',onScroll,{passive:true});
+onScroll();
+
+var fadeObs=new IntersectionObserver(function(es){
+  es.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('fade--in'); });
+},{threshold:.18});
+[].slice.call(document.querySelectorAll('[data-fade]')).forEach(function(el){fadeObs.observe(el)});
+
+function frame(){
+  smooth+=(target-smooth)*0.11;
+  var pc=document.querySelector('.drive .pct');
+  if(pc) pc.textContent=String(Math.round(smooth*100)).padStart(2,'0')+'%';
+  drawField(smooth);
+  for(var i=0;i<acts.length;i++){
+    var a=acts[i]; if(!a.cv||!a.k) continue;
+    var r=a.sec.getBoundingClientRect(), vh=window.innerHeight;
+    if(r.bottom<-vh*.5||r.top>vh*1.5) continue;
+    var t=clamp((vh*.5-r.top)/Math.max(1,r.height-vh*.5),0,1);
+    var f=fit(a.cv), g=f.g, W=f.W, H=f.H, S=palette(a.sec);
+    g.clearRect(0,0,W,H);
+    var trio=SCENES[a.k]; if(!trio) continue;
+    var segI=Math.min(2,Math.floor(t*3)), tt=t*3-segI;
+    if(a.seg!==segI){ a.seg=segI;
+      if(a.capEl&&CAPS[a.k]) a.capEl.textContent=(segI+1)+'/3 · '+CAPS[a.k][segI]; }
+    trio[segI](g,W,H,clamp(tt,0,1),S);
+    drawRule(a); drawSigil(a);
+  }
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+
+/* drive */
+document.querySelector('[data-drive="next"]').addEventListener('click',function(){
+  var y=window.scrollY+window.innerHeight*.9; window.scrollTo({top:y,behavior:'smooth'});
+});
+document.querySelector('[data-drive="prev"]').addEventListener('click',function(){
+  var y=window.scrollY-window.innerHeight*.9; window.scrollTo({top:Math.max(0,y),behavior:'smooth'});
+});
+
+window.addEventListener('resize',function(){
+  for(var k in LAB) if(LAB.hasOwnProperty(k)) LAB[k]();
+});
+})();
+</script>
+</body>
+</html>

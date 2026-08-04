@@ -243,8 +243,8 @@
         <a href="paper-13-quantum-foundations.html" target="_blank" style="display:inline-flex;align-items:center;padding:9px 16px;border:1px solid var(--mint);border-radius:4px;color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;text-decoration:none;">peer review paper for submission · Quantum Foundations &amp; Measurement</a>
       </p>
       <figure style="margin-top:var(--sp-xl);text-align:center;">
-        <svg id="atlasLawsPlay" viewBox="0 0 640 240" style="max-width:640px;width:100%;height:auto;touch-action:none;cursor:grab" aria-label="One push, read live — drag either body; the occluded directions vanish and the leftover push appears"></svg>
-        <figcaption style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-faint);margin-top:8px;">drag either body — the flood presses, the shadow thins, F = (π/4)·P<sub>eff</sub>·R₁²R₂²/r² follows the geometry</figcaption>
+        <div id="lawsStage" style="position:relative;width:80vw;height:90vh;max-width:none;margin:var(--sp-lg) 0 var(--sp-md) calc(50% - 40vw);overflow:hidden;border:1px solid var(--paper-edge);border-radius:6px;background:var(--paper)"><canvas id="atlasLawsField" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none"></canvas><svg id="atlasLawsPlay" viewBox="0 0 1800 1200" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:grab" aria-label="Two bodies interrupting an isotropic lattice — grip and throw either one; the summed landings do the pushing"></svg><div id="lawsCtl" style="position:absolute;left:14px;bottom:14px;z-index:3;display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;padding:9px 14px;border-radius:6px;background:color-mix(in srgb, var(--paper) 88%, transparent);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid var(--paper-edge);font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-muted);letter-spacing:.04em"></div></div>
+        <figcaption style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-faint);margin-top:8px;">grip any body and throw it — the hand’s motion is handed over on release. The lattice is turned 5° at a time about EVERY node, so the medium has no special point and no special direction, and the lines run in from far outside the frame. Matter interrupts them; each interruption thickens into the surface over the half-chord it cut out, and the summed landings do the pushing. Mass is the displaced medium counted in unit balls, (R/r₀)³ — and because push goes as cross-section while mass goes as volume, small bodies accelerate more: the saturated regime, where a body is opaque and its shadow is its silhouette. Set the radii, watch the barycentre, and throw gently and sideways for an orbit<sub>eff</sub>·R₁²R₂²/r² follows the geometry</figcaption>
       </figure>
     </div>
   </section>
@@ -541,6 +541,15 @@
            onmouseover="this.style.background='rgba(212,160,92,0.26)'"
            onmouseout="this.style.background='rgba(212,160,92,0.14)'">
           ✦ NP33 · The Magic Numbers
+        </a>
+        <a href="st_ring_moons.html" target="_blank"
+           style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;
+                  background:rgba(212,160,92,0.14);border:1px solid rgba(212,160,92,0.45);
+                  border-radius:4px;color:#8a6d1f;font-size:13px;font-family:Inter,sans-serif;
+                  font-weight:600;text-decoration:none;transition:all 0.2s;"
+           onmouseover="this.style.background='rgba(212,160,92,0.26)'"
+           onmouseout="this.style.background='rgba(212,160,92,0.14)'">
+          ◌ GOM24 · The Ring Moons
         </a>
         <a href="flm02_scroller.html" target="_blank"
            style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;
@@ -1195,42 +1204,458 @@
     /* Six Laws — the one push, played live: two draggable bodies in the flood */
     (function(){
       var s=document.getElementById('atlasLawsPlay'); if(!s)return;
-      var defs=el('defs',{}),mk=el('marker',{id:'alp-a',markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
-      mk.appendChild(el('path',{d:'M0,0 L6,3 L0,6 z',fill:'#4a6d82'}));defs.appendChild(mk);
-      var mr=el('marker',{id:'alp-r',markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
+      var fieldCv=document.getElementById('atlasLawsField'), ctlBar=document.getElementById('lawsCtl');
+      /* ═══════════════════════════════════════════════════════════════════
+         THE ONE PUSH — three bodies in an isotropic lattice.
+
+         The lattice is rotated 5° at a time about EVERY NODE, through the
+         hexagon's own 60° period. No special point, no special direction.
+         Lines run in from far outside the frame — the arrivals come from the
+         boundary of everything, not from the edge of a picture.
+
+         Matter interrupts the lattice; it does not warp it (only the limb
+         bends, by a hair). Where a line ends on a body it thickens INTO the
+         surface, gradually, over the half-chord the body cut out of it — so a
+         line striking dead centre swells over a full radius and a graze barely
+         lifts off a pixel. The net push on a body is the vector sum of those
+         landings. Bodies carry inertia, m ∝ displaced area.
+
+         Nothing here knows what gravity is. They fall together because each
+         stands in the others' weather.
+         ═══════════════════════════════════════════════════════════════════ */
+      var VW=1800, VH=1200, HALF=6000, SPACING=96, ROTSTEP=5;
+
+      var defs=el('defs',{}),mr=el('marker',{id:'alp-r',markerWidth:9,markerHeight:9,refX:7,refY:3,orient:'auto'});
       mr.appendChild(el('path',{d:'M0,0 L6,3 L0,6 z',fill:'#b07430'}));defs.appendChild(mr);s.appendChild(defs);
-      var shade=el('polygon',{fill:'#4a6d82','fill-opacity':0.10});s.appendChild(shade);
-      var flood=[],i;for(i=0;i<12;i++){var l=el('line',{stroke:'#4a6d82','stroke-width':1.6,'marker-end':'url(#alp-a)'});flood.push(l);s.appendChild(l);}
-      var fa=el('line',{stroke:'#b07430','stroke-width':3.4,'marker-end':'url(#alp-r)'}),
-          fb=el('line',{stroke:'#b07430','stroke-width':3.4,'marker-end':'url(#alp-r)'});
-      s.appendChild(fa);s.appendChild(fb);
-      var A={x:210,y:120,r:28},B={x:430,y:120,r:20};
-      var nA=el('circle',{fill:'#1d1f21'}),nB=el('circle',{fill:'#1d1f21'});s.appendChild(nA);s.appendChild(nB);
-      var read=tx({x:320,y:26,'text-anchor':'middle','font-family':'JetBrains Mono,monospace','font-size':'12px',fill:'#6b6f75'},'');s.appendChild(read);
-      var hold=null,F0=null;
+
+      /* every node of the base lattice is a centre in its own right */
+      var NODES=[], HSTEP=SPACING*Math.sqrt(3)/2;
+      for(var jj=-17;jj<=17;jj++) for(var ii=-17;ii<=17;ii++)
+        NODES.push({x:VW/2+(ii+(jj&1?0.5:0))*SPACING, y:VH/2+jj*HSTEP});
+      /* THE LATTICE'S OWN DRIFT. The system's centre is HELD at the middle of
+         the view. Its motion relative to the matrix is therefore shown the only
+         honest way: as the MATRIX MOVING. Watch the grid stream past and you are
+         watching the system travel through it. Out where there is not a particle
+         within a billion parsecs the matrix is still there — change your motion
+         and it pushes back, and that push is your mass.
+         The offset wraps into one cell each frame. A lattice maps exactly onto
+         itself under a whole lattice vector, so the wrap is bit-for-bit
+         invisible: one continuum, built once, never reloaded, and no edges. */
+      var latt={x:0,y:0};
+      var LINES=[], BASEDIR={0:1,30:1,60:1,90:1,120:1,150:1}, OFFGAP=44;
+      for(var ang=0;ang<180;ang+=ROTSTEP){
+        var th=ang*Math.PI/180, ux=Math.cos(th), uy=Math.sin(th), nx=-uy, ny=ux;
+        var offs=NODES.map(function(P){return (P.x-VW/2)*nx+(P.y-VH/2)*ny;})
+                      .sort(function(a,b){return a-b;});
+        var last=-1e9, isBase=!!BASEDIR[ang];
+        for(var oi=0;oi<offs.length;oi++){
+          if(offs[oi]-last<OFFGAP) continue; last=offs[oi];
+          LINES.push({bx:VW/2+nx*offs[oi], by:VH/2+ny*offs[oi], ux:ux, uy:uy,
+                      base:isBase, dim:isBase?1:0.55, stop:[null,null]});
+        }
+      }
+
+      /* ── the bodies ── */
+      /* `on` is EXISTENCE, not visibility: a body switched off displaces
+         nothing, interrupts nothing, casts no shadow, receives no landings. */
+      var BOD=[
+        {n:'A',x:700, y:600,r:84,vx:0,vy:0,on:true},
+        {n:'B',x:1240,y:600,r:60,vx:0,vy:0,on:true},
+        {n:'C',x:960, y:300,r:44,vx:0,vy:0,on:false}
+      ];
+      /* ── DENSITY: mass is a COUNT of displaced medium, not an area.
+              N(R) = (R/r0)^3
+         so a body of the unit radius counts as exactly one, and the count is the
+         volume ratio — which IS the displacement, and therefore the mass. (An
+         earlier pass multiplied by the close-packing fraction pi/sqrt(18); that
+         answers a different question and made a unit ball weigh 0.74 of itself.
+         Withdrawn — displaced volume carries no packing fraction.)
+         Consequence, and intended: push goes as cross-section (R^2) while mass
+         goes as volume (R^3), so a is proportional to 1/R — SMALL BODIES
+         ACCELERATE MORE. That is the saturated regime, where a body is opaque
+         and its shadow is its silhouette. Equivalence returns in the transparent
+         regime, where the flood passes through and the shadow counts nucleons
+         rather than area, so F is proportional to mass. */
+      var R0=18, MASSK=0.00415;
+      function ballCount(R){ return Math.pow(R/R0,3); }
+      function massOf(b){ return MASSK*ballCount(b.r); }
+      var HOME=BOD.map(function(b){return {x:b.x,y:b.y,r:b.r};});
+      var opt={bary:false,lag:false,trails:false,run:true};
+      var trailPts=[[],[],[]];
+
+      var fa=[];
+      BOD.forEach(function(){ fa.push(s.appendChild(
+        el('line',{stroke:'#b07430','stroke-width':5,'marker-end':'url(#alp-r)'}))); });
+      var baryG=el('g',{});s.appendChild(baryG);
+      var lagG=el('g',{});s.appendChild(lagG);
+      var discs=BOD.map(function(){ return s.appendChild(el('circle',{fill:'#1d1f21'})); });
+      var tags=BOD.map(function(b){ return s.appendChild(tx({'text-anchor':'middle',
+        'font-family':'JetBrains Mono,monospace','font-size':'24px',fill:'#faf6ef'},b.n)); });
+      var read=tx({x:VW/2,y:52,'text-anchor':'middle','font-family':'JetBrains Mono,monospace',
+                   'font-size':'26px',fill:'#6b6f75'},'');s.appendChild(read);
+      var hold=null,NLAND=0;
+
+      function hits(L,o){
+        var cx=o.x-(L.bx+latt.x), cy=o.y-(L.by+latt.y);
+        var uc=cx*L.ux+cy*L.uy, pd=-cx*L.uy+cy*L.ux;
+        if(Math.abs(pd)>=o.r) return null;
+        var h=Math.sqrt(o.r*o.r-pd*pd);          /* HALF-CHORD — what the body cut out */
+        return {a:uc-h, b:uc+h, h:h, R:o.r, uc:uc, pd:Math.abs(pd)};
+      }
+      function pt(L,u,out){
+        var x=L.bx+latt.x+L.ux*u, y=L.by+latt.y+L.uy*u;
+        for(var q=0;q<BOD.length;q++){
+          var o=BOD[q]; if(!o.on) continue;
+          var ax=x-o.x, ay=y-o.y, rr=Math.hypot(ax,ay);
+          if(rr<=o.r||rr>o.r*1.5) continue;
+          var e=0.05*o.r*Math.exp(-(rr-o.r)/(0.30*o.r));   /* the limb, by a hair */
+          x+=ax/rr*e; y+=ay/rr*e;
+        }
+        out[0]=x; out[1]=y;
+      }
+
+      /* ── solve: interrupts, landings, summed push ── */
+      var NETF=BOD.map(function(){return {x:0,y:0};});
+      function solve(){
+        for(var b=0;b<BOD.length;b++){NETF[b].x=0;NETF[b].y=0;}
+        NLAND=0;
+        var H=[];
+        for(var i=0;i<LINES.length;i++){
+          var L=LINES[i];
+          for(var q=0;q<BOD.length;q++) H[q]=BOD[q].on?hits(L,BOD[q]):null;
+          var sF=HALF,sB=-HALF,iF=-1,iB=-1;
+          for(q=0;q<BOD.length;q++){ var hq=H[q]; if(!hq) continue;
+            if(hq.a<sF){sF=hq.a;iF=q;} if(hq.b>sB){sB=hq.b;iB=q;} }
+          L.sF=sF; L.sB=sB; L.wF=0; L.wB=0;
+          L.rampF=(iF>=0)?H[iF].h:0; L.rampB=(iB>=0)?H[iB].h:0;
+          for(var c=0;c<2;c++){
+            var u=c?sB:sF, bi=c?iB:iF, dir=c?-1:1;
+            if(bi<0) continue;
+            var o=BOD[bi], I=1;
+            for(q=0;q<BOD.length&&I>0;q++){
+              if(q===bi||!BOD[q].on) continue;
+              var ho=H[q];
+              if(ho){ var oa=dir>0?ho.a:ho.b;
+                if(dir>0?(oa<u):(oa>u)) I=0; }               /* shadowed outright */
+              else {                                          /* penumbra at the edge */
+                var oq=BOD[q], cx3=oq.x-L.bx, cy3=oq.y-L.by;
+                var pd3=Math.abs(-cx3*L.uy+cy3*L.ux), uc3=cx3*L.ux+cy3*L.uy;
+                if(dir>0?(uc3<u):(uc3>u)){
+                  var soft=(pd3-oq.r)/(0.45*oq.r);
+                  if(soft<1) I=Math.min(I,Math.max(0,soft));
+                }
+              }
+            }
+            if(I<=0.02) continue;
+            var P=[0,0]; pt(L,u,P);
+            var vx=P[0]-o.x, vy=P[1]-o.y, m=Math.hypot(vx,vy)||1;
+            var w=I*Math.abs(-(L.ux*vx/m+L.uy*vy/m));
+            if(w<0.02) continue;
+            if(dir>0) L.wF=w; else L.wB=w;
+            NLAND++;
+            NETF[bi].x+=L.ux*dir*w; NETF[bi].y+=L.uy*dir*w;
+          }
+        }
+      }
+
+      /* ── the shadow law for a vanishing probe: toward each body, ∝ asin(R/d).
+           This is the same law the lattice sum produces (verified: the summed
+           landings fall as 1/d to within ~10% across the field). Used only for
+           the balance-point search, which needs thousands of evaluations. ── */
+      function probe(px,py,out){
+        out.x=0; out.y=0;
+        for(var q=0;q<BOD.length;q++){
+          var o=BOD[q]; if(!o.on) continue;
+          var dx=o.x-px, dy=o.y-py, d=Math.hypot(dx,dy);
+          if(d<=o.r*1.02) { out.x=NaN; return; }
+          var mg=Math.asin(Math.min(0.999,o.r/d));
+          out.x+=dx/d*mg; out.y+=dy/d*mg;
+        }
+      }
+      function balancePoints(){
+        var found=[], f={x:0,y:0}, gx, gy;
+        for(gy=90;gy<VH-90;gy+=26) for(gx=90;gx<VW-90;gx+=26){
+          probe(gx,gy,f); if(isNaN(f.x)) continue;
+          var m0=Math.hypot(f.x,f.y);
+          if(m0>0.030) continue;
+          /* refine by descent on |F| */
+          var x=gx,y=gy,step=13;
+          for(var it=0;it<40;it++){
+            var best=null,bm=m0;
+            for(var a2=0;a2<8;a2++){
+              var th2=a2*Math.PI/4, nx2=x+Math.cos(th2)*step, ny2=y+Math.sin(th2)*step;
+              probe(nx2,ny2,f); if(isNaN(f.x)) continue;
+              var mm=Math.hypot(f.x,f.y);
+              if(mm<bm){bm=mm;best=[nx2,ny2];}
+            }
+            if(best){x=best[0];y=best[1];m0=bm;} else step*=0.55;
+            if(step<0.4) break;
+          }
+          if(m0>0.0016) continue;
+          var dup=false;
+          for(var k2=0;k2<found.length;k2++)
+            if(Math.hypot(found[k2][0]-x,found[k2][1]-y)<40){dup=true;break;}
+          if(!dup) found.push([x,y]);
+        }
+        return found;
+      }
+
+      /* ── paint the field ── */
+      var fg=fieldCv.getContext('2d'), dprF=Math.min(devicePixelRatio||1,2);
+      function paint(t){
+        var rct=fieldCv.getBoundingClientRect();
+        var cw=Math.max(1,Math.round(rct.width*dprF)), ch=Math.max(1,Math.round(rct.height*dprF));
+        if(fieldCv.width!==cw||fieldCv.height!==ch){fieldCv.width=cw;fieldCv.height=ch;}
+        /* cover, never stretch — the geometry is identical on every screen */
+        var kk=Math.max(cw/VW,ch/VH), ox=(cw-VW*kk)/2, oy=(ch-VH*kk)/2;
+        fg.setTransform(1,0,0,1,0,0); fg.clearRect(0,0,cw,ch);
+        fg.setTransform(kk,0,0,kk,ox,oy);
+        fg.lineCap='butt';
+        var P=[0,0],Q=[0,0],i,L,VIS=Math.max(VW,VH)*1.1;
+        fg.strokeStyle='#4a6d82';
+        for(i=0;i<LINES.length;i++){
+          L=LINES[i];
+          var aB=(L.base?0.24:0.05)*L.dim, wB=L.base?1.4:1.0;
+          for(var rr=0;rr<2;rr++){
+            var u0=rr?HALF:-HALF, u1=rr?L.sB:L.sF, ramp=rr?L.rampB:L.rampF, wt=rr?L.wB:L.wF;
+            if(rr&&L.sB>=HALF) continue;
+            var dirr=(u1>u0)?1:-1, span=Math.abs(u1-u0);
+            if(span<2) continue;
+            var rl=Math.min(ramp,span);
+            fg.globalAlpha=aB; fg.lineWidth=wB;
+            fg.beginPath(); pt(L,u0,P); pt(L,u1-dirr*rl,Q);
+            fg.moveTo(P[0],P[1]); fg.lineTo(Q[0],Q[1]); fg.stroke();
+            if(rl<2||wt<=0.02) continue;
+            for(var st=0;st<7;st++){
+              var f0=st/7, f1=(st+1)/7, mid=(f0+f1)/2;
+              fg.globalAlpha=aB+(0.52*(L.base?1:0.42)-aB)*mid*wt;
+              fg.lineWidth=wB+(3.4*wt)*mid*mid;      /* 1px → 2 → 3, over the half-chord */
+              fg.beginPath();
+              pt(L,u1-dirr*rl*(1-f0),P); pt(L,u1-dirr*rl*(1-f1),Q);
+              fg.moveTo(P[0],P[1]); fg.lineTo(Q[0],Q[1]); fg.stroke();
+            }
+          }
+        }
+        /* the pulse, on the base layer, inside the frame only */
+        if(document.documentElement.getAttribute('data-sdt-motion')!=='off'){
+          var SP=300, phs=[(t*0.10)%SP,(t*0.10+SP/2)%SP];
+          for(var pass=0;pass<2;pass++){
+            fg.strokeStyle=pass?'#c9a227':'#b07430';
+            fg.globalAlpha=pass?0.32:0.44; fg.lineWidth=pass?1.7:2.1;
+            fg.beginPath();
+            for(i=0;i<LINES.length;i++){
+              L=LINES[i]; if(!L.base) continue;
+              for(var r2=0;r2<2;r2++){
+                var v0=r2?HALF:-HALF, v1=r2?L.sB:L.sF, dr=(v1>v0)?1:-1;
+                if(r2&&L.sB>=HALF) continue;
+                var sp2=Math.abs(v1-v0); if(sp2<80) continue;
+                var from=Math.max(0,sp2-VIS);
+                for(var mm2=phs[pass]+Math.ceil((from-phs[pass])/SP)*SP;mm2<sp2-16;mm2+=SP){
+                  if(mm2<30) continue;
+                  var uu=v0+dr*mm2;
+                  pt(L,uu,P); pt(L,uu-dr*12,Q);
+                  var tx2=P[0]-Q[0],ty2=P[1]-Q[1],nm2=Math.hypot(tx2,ty2)||1; tx2/=nm2; ty2/=nm2;
+                  var ln=pass?12:15, wd=pass?7:9;
+                  fg.moveTo(P[0]-tx2*ln-ty2*wd,P[1]-ty2*ln+tx2*wd);
+                  fg.lineTo(P[0],P[1]);
+                  fg.lineTo(P[0]-tx2*ln+ty2*wd,P[1]-ty2*ln-tx2*wd);
+                }
+              }
+            }
+            fg.stroke();
+          }
+        }
+        /* trails */
+        if(opt.trails){
+          fg.lineWidth=1.6;
+          for(i=0;i<BOD.length;i++){
+            var TP=trailPts[i]; if(TP.length<4) continue;
+            fg.strokeStyle='#b07430'; fg.globalAlpha=0.30;
+            fg.beginPath(); fg.moveTo(TP[0],TP[1]);
+            for(var z2=2;z2<TP.length;z2+=2) fg.lineTo(TP[z2],TP[z2+1]);
+            fg.stroke();
+          }
+        }
+        fg.globalAlpha=1;
+      }
+
+      /* ── grip and throw ── */
+      var trail=[];
+      function pick(p){ var best=null,bd=1e9;
+        BOD.forEach(function(b){ if(!b.on) return;
+          var d=Math.hypot(p.x-b.x,p.y-b.y); if(d<bd){bd=d;best=b;}});
+        return best; }
       drag(s,function(p){if(!hold)return;
-        hold.x=Math.max(40,Math.min(600,p.x));hold.y=Math.max(50,Math.min(200,p.y));render();
-      },function(p){hold=Math.hypot(p.x-A.x,p.y-A.y)<Math.hypot(p.x-B.x,p.y-B.y)?A:B;});
-      window.addEventListener('pointerup',function(){hold=null;});
-      function render(){
-        nA.setAttribute('cx',A.x);nA.setAttribute('cy',A.y);nA.setAttribute('r',A.r);
-        nB.setAttribute('cx',B.x);nB.setAttribute('cy',B.y);nB.setAttribute('r',B.r);
-        var dx=B.x-A.x,dy=B.y-A.y,r=Math.hypot(dx,dy)||1,ux=dx/r,uy=dy/r,px=-uy,py=ux;
-        shade.setAttribute('points',
-          (A.x+px*A.r)+','+(A.y+py*A.r)+' '+(B.x+px*B.r)+','+(B.y+py*B.r)+' '+
-          (B.x-px*B.r)+','+(B.y-py*B.r)+' '+(A.x-px*A.r)+','+(A.y-py*A.r));
-        for(var i=0;i<flood.length;i++){var l=flood[i],side=(i%2?1:-1),t=(Math.floor(i/2)+0.5)/6;
-          var bx=A.x+dx*t+px*side*90,by=A.y+dy*t+py*side*90;
-          l.setAttribute('x1',bx);l.setAttribute('y1',by);
-          l.setAttribute('x2',bx-px*side*48);l.setAttribute('y2',by-py*side*48);}
-        var F=(A.r*A.r*B.r*B.r)/(r*r);if(F0===null)F0=F;var rel=F/F0;
-        var len=Math.max(10,Math.min(70,20*Math.cbrt(rel)));
-        fa.setAttribute('x1',A.x+ux*A.r);fa.setAttribute('y1',A.y+uy*A.r);
-        fa.setAttribute('x2',A.x+ux*(A.r+len));fa.setAttribute('y2',A.y+uy*(A.r+len));
-        fb.setAttribute('x1',B.x-ux*B.r);fb.setAttribute('y1',B.y-uy*B.r);
-        fb.setAttribute('x2',B.x-ux*(B.r+len));fb.setAttribute('y2',B.y-uy*(B.r+len));
-        read.textContent='F ∝ R₁²R₂²/r² = '+rel.toFixed(2)+'× — gravity, Coulomb, nuclear: one law, three reaches';}
-      render();
+        hold.x=Math.max(60,Math.min(VW-60,p.x));hold.y=Math.max(60,Math.min(VH-60,p.y));
+        hold.vx=0;hold.vy=0;
+        trail.push({x:hold.x,y:hold.y,t:performance.now()});
+        if(trail.length>7) trail.shift();
+      },function(p){hold=pick(p);trail.length=0;s.style.cursor='grabbing';});
+      window.addEventListener('pointerup',function(){
+        if(hold&&trail.length>1){
+          var a0=trail[0], b0=trail[trail.length-1], dtm=(b0.t-a0.t)/1000;
+          if(dtm>0.008){
+            var vx=(b0.x-a0.x)/dtm, vy=(b0.y-a0.y)/dtm, sp=Math.hypot(vx,vy), CAP=1100;
+            if(sp>CAP){vx*=CAP/sp;vy*=CAP/sp;}
+            hold.vx=vx; hold.vy=vy;
+          }
+        }
+        hold=null; trail.length=0; s.style.cursor='grab';
+      });
+
+      /* ── the controls ── */
+      function ctlLabel(t2){ var d=document.createElement('span'); d.textContent=t2;
+        d.style.cssText='color:var(--ink-faint);letter-spacing:.12em;text-transform:uppercase;font-size:10px';
+        return d; }
+      BOD.forEach(function(b,bi){
+        var w=document.createElement('label');
+        w.style.cssText='display:flex;align-items:center;gap:6px;cursor:pointer';
+        w.appendChild(ctlLabel(b.n));
+        var r=document.createElement('input');
+        r.type='range'; r.min=18; r.max=150; r.step=1; r.value=b.r;
+        r.style.cssText='width:84px;accent-color:var(--copper)';
+        r.setAttribute('aria-label','body '+b.n+' radius');
+        var v=document.createElement('span');
+        v.style.cssText='min-width:5.4em;color:var(--ink-muted)';
+        function showN(){ v.textContent=b.r+'  ·  '+ballCount(b.r).toFixed(1)+'x'; }
+        showN();
+        r.addEventListener('input',function(){ b.r=+r.value; showN(); });
+        if(bi>0){
+          var ex=document.createElement('input'); ex.type='checkbox'; ex.checked=b.on;
+          ex.style.accentColor='var(--copper)'; ex.title='body '+b.n+' exists';
+          ex.setAttribute('aria-label','body '+b.n+' exists');
+          ex.addEventListener('change',function(){ b.on=ex.checked; b.vx=0; b.vy=0; });
+          w.insertBefore(ex,w.firstChild);
+        }
+        w.appendChild(r); w.appendChild(v); ctlBar.appendChild(w);
+      });
+      [['barycentre','bary'],['balance points','lag'],['trails','trails']].forEach(function(T){
+        var w=document.createElement('label');
+        w.style.cssText='display:flex;align-items:center;gap:5px;cursor:pointer';
+        var c=document.createElement('input'); c.type='checkbox'; c.style.accentColor='var(--copper)';
+        c.addEventListener('change',function(){ opt[T[1]]=c.checked;
+          if(!c.checked&&T[1]==='trails') trailPts=[[],[],[]]; });
+        w.appendChild(c); w.appendChild(ctlLabel(T[0])); ctlBar.appendChild(w);
+      });
+      [['pause',function(bt){opt.run=!opt.run; bt.textContent=opt.run?'pause':'run';}],
+       ['reset',function(){ BOD.forEach(function(b,i){ b.x=HOME[i].x;b.y=HOME[i].y;b.vx=0;b.vy=0; });
+         trailPts=[[],[],[]]; }]].forEach(function(T){
+        var bt=document.createElement('button'); bt.type='button'; bt.textContent=T[0];
+        bt.style.cssText='font:inherit;padding:3px 10px;border:1px solid var(--paper-edge);'+
+          'border-radius:4px;background:var(--paper);color:var(--ink-muted);cursor:pointer;'+
+          'letter-spacing:.1em;text-transform:uppercase;font-size:10px';
+        bt.addEventListener('click',function(){T[1](bt);}); ctlBar.appendChild(bt);
+      });
+
+      /* ── chrome: discs, push arrows, barycentre, balance points, readout ── */
+      var lagCache=null, lagTick=0;
+      function chrome(){
+        BOD.forEach(function(b,i){
+          if(!b.on){ discs[i].setAttribute('r',0); tags[i].textContent='';
+                     fa[i].setAttribute('stroke-opacity',0); return; }
+          tags[i].textContent=b.n;
+          discs[i].setAttribute('cx',b.x);discs[i].setAttribute('cy',b.y);discs[i].setAttribute('r',b.r);
+          tags[i].setAttribute('x',b.x);tags[i].setAttribute('y',b.y+8);
+          tags[i].setAttribute('font-size',Math.max(13,b.r*0.34));
+          var F=NETF[i], m=Math.hypot(F.x,F.y);
+          if(m<0.3){fa[i].setAttribute('stroke-opacity',0);return;}
+          fa[i].setAttribute('stroke-opacity',0.95);
+          var ux2=F.x/m, uy2=F.y/m, len=Math.max(30,Math.min(230,m*3.0));
+          fa[i].setAttribute('x1',b.x+ux2*(b.r+8));fa[i].setAttribute('y1',b.y+uy2*(b.r+8));
+          fa[i].setAttribute('x2',b.x+ux2*(b.r+8+len));fa[i].setAttribute('y2',b.y+uy2*(b.r+8+len));
+        });
+        while(baryG.firstChild) baryG.removeChild(baryG.firstChild);
+        if(opt.bary){
+          var M=0,cx=0,cy=0;
+          BOD.forEach(function(b){if(!b.on)return;var m2=ballCount(b.r);M+=m2;cx+=b.x*m2;cy+=b.y*m2;});
+          cx/=M; cy/=M;
+          baryG.appendChild(el('circle',{cx:cx,cy:cy,r:9,fill:'none',stroke:'#b07430','stroke-width':2.5}));
+          baryG.appendChild(el('line',{x1:cx-20,y1:cy,x2:cx+20,y2:cy,stroke:'#b07430','stroke-width':1.6}));
+          baryG.appendChild(el('line',{x1:cx,y1:cy-20,x2:cx,y2:cy+20,stroke:'#b07430','stroke-width':1.6}));
+          baryG.appendChild(tx({x:cx+26,y:cy-12,'font-family':'JetBrains Mono,monospace',
+            'font-size':'20px',fill:'#b07430'},'barycentre'));
+        }
+        while(lagG.firstChild) lagG.removeChild(lagG.firstChild);
+        if(opt.lag){
+          if(!lagCache||(lagTick++%20===0)) lagCache=balancePoints();
+          lagCache.forEach(function(Pn,k3){
+            lagG.appendChild(el('circle',{cx:Pn[0],cy:Pn[1],r:7,fill:'none',
+              stroke:'#0d7a5f','stroke-width':2.2,'stroke-dasharray':'3 3'}));
+            lagG.appendChild(tx({x:Pn[0]+13,y:Pn[1]-11,'font-family':'JetBrains Mono,monospace',
+              'font-size':'19px',fill:'#0d7a5f'},'S'+(k3+1)));
+          });
+        }
+        read.textContent='every node a centre · 5° through 60° · '+LINES.length+' lines · '
+          +NLAND+' landings summed  ·  mass = (R/r0)^3 of displaced medium'
+          +(opt.lag&&lagCache?'  ·  '+lagCache.length+' balance points':'');
+      }
+
+      var tPrev=0;
+      (function step(now){
+        requestAnimationFrame(step);
+        var rc=s.getBoundingClientRect();
+        if(rc.bottom<0||rc.top>innerHeight){tPrev=now;return;}
+        var dt=Math.min(0.034,((now||0)-tPrev)/1000); tPrev=now||0;
+        if(opt.run&&document.documentElement.getAttribute('data-sdt-motion')!=='off'&&dt>0){
+          BOD.forEach(function(o,i){
+            if(!o.on) return;
+            if(o===hold){o.vx=0;o.vy=0;return;}
+            var m=massOf(o);                     /* m = the medium it displaces */
+            o.vx+=NETF[i].x/m*dt; o.vy+=NETF[i].y/m*dt;
+            /* no arbitrary damping — what you watch is the model, not my
+               dissipation. Push gravity does predict a real drag (a moving body
+               meets the flood anisotropically) but that must be DERIVED from the
+               landings, not dialled in. Not yet done, so: none. */
+            o.x+=o.vx*dt; o.y+=o.vy*dt;     /* no walls — the medium has no edge */
+          });
+          for(var a3=0;a3<BOD.length;a3++) for(var b3=a3+1;b3<BOD.length;b3++){
+            var U=BOD[a3],V=BOD[b3]; if(!U.on||!V.on) continue;
+            var ddx=V.x-U.x, ddy=V.y-U.y, dd=Math.hypot(ddx,ddy)||1, touch=U.r+V.r;
+            if(dd<touch){
+              /* contact resolved WITH MASS: j = -(1+e)*v_rel.n / (1/m_U + 1/m_V),
+                 each body taking j/m. A pebble no longer shoves a boulder. */
+              var nX=ddx/dd, nY=ddy/dd;
+              var mU=massOf(U), mV=massOf(V), iU=1/mU, iV=1/mV, iT=iU+iV;
+              var corr=(touch-dd)/iT;
+              if(hold!==U){U.x-=nX*corr*iU;U.y-=nY*corr*iU;}
+              if(hold!==V){V.x+=nX*corr*iV;V.y+=nY*corr*iV;}
+              var sv=(V.vx-U.vx)*nX+(V.vy-U.vy)*nY;
+              if(sv<0){ var jm=-1.45*sv/iT;
+                U.vx-=jm*nX*iU; U.vy-=jm*nY*iU;
+                V.vx+=jm*nX*iV; V.vy+=jm*nY*iV; }
+            }
+          }
+          if(opt.trails) BOD.forEach(function(b,i){ if(!b.on) return;
+            var T=trailPts[i]; T.push(b.x,b.y); if(T.length>1400) T.splice(0,2); });
+        }
+        /* Hold the shared balance point dead centre and give the difference to
+           the lattice. Everything shifts together — bodies, trails, markers and
+           the matrix — so no relative position or velocity changes: the system
+           stands still and the medium streams past it. */
+        var M2=0,tx0=0,ty0=0;
+        BOD.forEach(function(b){ if(!b.on) return; var mm=ballCount(b.r); M2+=mm; tx0+=b.x*mm; ty0+=b.y*mm; });
+        if(M2){
+          tx0/=M2; ty0/=M2;
+          if(lagCache&&lagCache.length){
+            var bp=null,bd2=1e18;
+            lagCache.forEach(function(P2){ var d2=Math.hypot(P2[0]-tx0,P2[1]-ty0);
+              if(d2<bd2){bd2=d2;bp=P2;} });
+            if(bp&&bd2<Math.max(VW,VH)*0.5){ tx0=bp[0]; ty0=bp[1]; }
+          }
+          var dx0=tx0-VW/2, dy0=ty0-VH/2;
+          if(dx0||dy0){
+            BOD.forEach(function(b){ b.x-=dx0; b.y-=dy0; });
+            for(var ti=0;ti<trailPts.length;ti++){ var TT=trailPts[ti];
+              for(var tj=0;tj<TT.length;tj+=2){ TT[tj]-=dx0; TT[tj+1]-=dy0; } }
+            if(lagCache) lagCache.forEach(function(P3){ P3[0]-=dx0; P3[1]-=dy0; });
+            latt.x-=dx0; latt.y-=dy0;
+            var nrow=Math.round(latt.y/HSTEP);
+            var mcol=Math.round((latt.x-nrow*SPACING/2)/SPACING);
+            latt.x-=mcol*SPACING+nrow*SPACING/2; latt.y-=nrow*HSTEP;
+          }
+        }
+        solve(); paint(now||0); chrome();
+      })(0);
     })();
 
     /* Cosmology — the octave ladder, dragged by hand */
