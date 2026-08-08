@@ -1,0 +1,35 @@
+PDS_VERSION_ID      = PDS3                                                    
+RECORD_TYPE         = FIXED_LENGTH                                            
+RECORD_BYTES        = 80                                                      
+OBJECT              = TEXT                                                    
+  PUBLICATION_DATE    = 2005-07-01                                            
+  NOTE                = "Description of contents of INDEX directory"          
+END_OBJECT          = TEXT                                                    
+END                                                                           
+                                                                              
+      The INDEX directory contains an index for this DVD-R volume (INDEX.TAB) 
+and a cumulative index for the volume set (CUMINDEX.TAB).  Accompanying each  
+*.TAB file is a PDS label (INDEX.LBL and CUMINDEX.LBL, respectively).         
+                                                                              
+      The *.TAB files are ASCII files.  Each line (or record) in INDEX.TAB    
+contains information about a single data file in this data archive volume.    
+Each line in CUMINDEX.TAB contains information about a single data file in    
+the archival volume set as produced to date.                                  
+                                                                              
+      Each line in a *.TAB file is made up of seven comma-delimited           
+fixed-length fields.  Four fields contain character strings, which are        
+enclosed by double quotes.  The other three fields contain date/time          
+information; those values are NOT enclosed by quotes.                         
+                                                                              
+      The *.LBL label files describe the format and content of the respective 
+*.TAB files at the byte level.  Simply stated, the fields are:                
+                                                                              
+              number of the DVD-R volume                                      
+              path name to the PDS detached label for each data file          
+                 (or, in the case of text files, the path to the file itself) 
+              name of the data file                                           
+              original file name, if the file came from another source        
+                 where it was named differently                               
+              start date/time of the data in the file                         
+              stop date/time of the data in the file                          
+              creation date/time for the original file                        

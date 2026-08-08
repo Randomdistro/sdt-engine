@@ -46,6 +46,12 @@
 | `nuclear/fission_yields/IAEA_241Am_independent_FY.csv` | Am-241(n,f) independent yields (minor actinide; thermal+fast) | IAEA relnsd `independent_fy parents=241AM` | NP32 minor-actinide test | `a75a4ecd5109` | 100,715 |
 | `nuclear/fission_yields/IAEA_241Am_cumulative_FY.csv` | Am-241(n,f) cumulative yields | IAEA relnsd `cumulative_fy parents=241AM` | NP32 post-decay | `f4c7c23400d5` | 99,413 |
 
+| `solar_propagation_2026-08/raw/jpl_horizons_emb_sun_vectors_2025.csv` | Earth-Moon-barycenter vector table relative to the Sun, 2025, 14-day cadence | NASA/JPL Horizons API, DE441 product; exact query in local manifest | GOM25 D1 orbit/depth audit | `99570b90b814` | 10,537 |
+| `solar_propagation_2026-08/raw/harps_lfc_tablea1.dat` | 188 HARPS-LFC published line shifts | CDS J/A+A/643/A146; laboratory-wavelength dependency | GOM25 D3 strong-line reconstruction | `1b662d02add6` | 14,288 |
+| `solar_propagation_2026-08/raw/harps_lfc_tablea2.dat` | 97 HARPS-LFC 3D global line shifts | CDS J/A+A/643/A146; CO5BOLD model dependency | GOM25 D3 processed comparator | `70be075001f8` | 7,275 |
+| `solar_propagation_2026-08/raw/cassini_sce1_157_tdf.tdf` | Cassini SCE1 primary closed-loop tracking-data sample | NASA PDS CORS_0021; label and URL in local manifest | GOM25 D4 decoder/readiness check | `354d6904bc19` | 18,668,160 |
+| `solar_propagation_2026-08/MANIFEST.md` | full source, checksum, and processing-dependency ledger | GOM25 retrieval 2026-08-07 | GOM25 data provenance | `see local manifest` | — |
+
 ## External cache (large files, outside OneDrive)
 
 Files **>100 MB** live in `C:\sdt-data\` — outside OneDrive sync (stale-file hazard, APS03 precedent) and **never committed**. Investigations cite the absolute path; sha256 discipline identical to above.
@@ -53,6 +59,28 @@ Files **>100 MB** live in `C:\sdt-data\` — outside OneDrive sync (stale-file h
 | path | what it is | source | used by | sha256 (12) | bytes |
 |---|---|---|---|---|---|
 | `C:\sdt-data\eb_wide_binaries.fits.gz` | Gaia wide-binary catalog (El-Badry et al.) | Zenodo (see `C:\tmp\zenodo_eb.json` metadata) | E108 / wide-binary gravity floor tests | `d49025e25fa0` | 882,786,816 |
+
+## Solar propagation (GOM25, 2026-08-07)
+
+Full per-file SHA-256 and admissibility labels:
+`solar_propagation_2026-08/MANIFEST.md`.
+
+| file | what it is | source | used by | sha256 (12) | bytes |
+|---|---|---|---|---|---:|
+| `solar_propagation_2026-08/raw/jpl_horizons_emb_sun_vectors_2025.csv` | EMB–Sun DE441 vectors, 14 d, 2025 | JPL Horizons API | GOM25 | `99570b90b814` | 10,537 |
+| `solar_propagation_2026-08/raw/harps_lfc_tablea2.dat` | HARPS-LFC Fe line 3D-fit shifts | CDS J/A+A/643/A146 | GOM25 | `70be075001f8` | 7,275 |
+| `solar_propagation_2026-08/raw/cassini_sce1_157_tdf.tdf` | Cassini RSS ATDF (binary) | PDS CO-SS-RSS-1-SCE1 | GOM25 D4 PENDING | `354d6904bc19` | 18,668,160 |
+
+## GPS clock-anchor provenance (GOM20, 2026-08-07)
+
+Full source URLs, full checksums, retrieval exception, and evidentiary
+boundaries: `gps_clock_2026-08/MANIFEST.md`.
+
+| file | what it is | source | used by | sha256 (12) | bytes |
+|---|---|---|---|---|---:|
+| `gps_clock_2026-08/raw/is_gps_200n.pdf` | GPS interface specification | U.S. Coast Guard NAVCEN | GOM20 provenance only | `54ec544bfe7e` | 3,338,120 |
+| `gps_clock_2026-08/raw/nasa_1980_navstar4_metadata.json` | NAVSTAR-4 observation-analysis metadata | NASA NTRS | GOM20 processing-path audit only | `0255b566bca1` | 4,182 |
+| `gps_clock_2026-08/MANIFEST.md` | source/checksum/evidence ledger | GOM20 retrieval 2026-08-07 | GOM20 provenance | `see local manifest` | — |
 
 ## Provenance notes
 - **IAEA live-chart** pulls used `nds.iaea.org/relnsd/v1/data` (single-nuclide queries; `nuclides=all` for the full ground-state chart). Boundary radii are the measured rms values (Angeli & Marinova 2013 via the live chart).

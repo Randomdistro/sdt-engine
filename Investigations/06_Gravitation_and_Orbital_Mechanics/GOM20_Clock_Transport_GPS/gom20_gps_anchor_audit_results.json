@@ -1,0 +1,114 @@
+{
+  "anchor_classification": "ENGINEERING_ONLY",
+  "audit_date": "2026-08-09",
+  "audit_revision": "canonical-authority-correction",
+  "canonical_authority_checks": {
+    "benchmark_uses_repaired_linear_rate": true,
+    "gom20_explicit_rate_binding": false,
+    "gom22_repair_marked_applied": true,
+    "legacy_square_root_rate_present": true,
+    "repaired_linear_rate_present": true
+  },
+  "canonical_authority_hashes_valid": true,
+  "canonical_authority_results": {
+    "benchmark_suite": {
+      "hash_matches_frozen_authority_source": true,
+      "path": "Benchmarks/B01_B25/benchmarks_suite.cpp",
+      "sha256": "ec33026c916a051731a2ceabdfe9559c5e3137a1c3717135a7f0d24ed3c981bf"
+    },
+    "canonical_laws": {
+      "hash_matches_frozen_authority_source": true,
+      "path": "Engine/include/sdt/laws.hpp",
+      "sha256": "ae41f3cb12e567cb90b5518795e62da1dc7fa516536739c56a7fcc54d255835b"
+    },
+    "gom20_mechanism_amendment": {
+      "hash_matches_frozen_authority_source": true,
+      "path": "Investigations/06_Gravitation_and_Orbital_Mechanics/GOM20_Clock_Transport_GPS/GOM20_GPS_MECHANISM_AMENDMENT_01.md",
+      "sha256": "d772bcf1190b2acec57f8f055f7740f89579be2a7907505ff4923d5889b7f84c"
+    },
+    "gom22_assessment": {
+      "hash_matches_frozen_authority_source": true,
+      "path": "Investigations/06_Gravitation_and_Orbital_Mechanics/GOM22_Shapiro_Velocity_Profile/GOM22_ASSESSMENT_2026-07-30.md",
+      "sha256": "2361629a18296d7bef4009f4118ac3f2e07f9d5b4dc41f96629c264fd0356de5"
+    }
+  },
+  "canonical_depth_law_state": "REPAIRED_LINEAR_ENGINE_DEFAULT_WITH_GOM20_BINDING_ABSENT",
+  "canonical_depth_rules": {
+    "depth_closure_linear_rate_present": true,
+    "t16_square_root_rate_present": true
+  },
+  "compiled_clock_rate_callers": {
+    "legacy_square_root_rate": [],
+    "repaired_linear_rate": [
+      "Benchmarks/B01_B25/benchmarks_suite.cpp",
+      "Investigations/06_Gravitation_and_Orbital_Mechanics/GOM22_Shapiro_Velocity_Profile/gom22_shapiro_profile.cpp"
+    ]
+  },
+  "configuration_calculation": {
+    "compensation_magnitude_us_per_day": 38.575008,
+    "difference_us_per_day": 0.12499200000000599,
+    "exceeds_gom20_declared_tolerance": true,
+    "fractional_frequency_offset": -4.4647e-10,
+    "gom20_net_claim_us_per_day": 38.7,
+    "interpretation": "engineering configuration arithmetic, not a clock observation",
+    "seconds_per_day": 86400
+  },
+  "fail_closed_reason": "No qualified direct observation is present, and the GOM20 seed does not supply a unique rate-composition rule or all required state definitions; it does not bind its composition rule to the repair-marked linear engine default.",
+  "mechanism_amendment_path": "Investigations/06_Gravitation_and_Orbital_Mechanics/GOM20_Clock_Transport_GPS/GOM20_GPS_MECHANISM_AMENDMENT_01.md",
+  "mechanism_classification": "PENDING_MECHANISM",
+  "missing_specification_items": [
+    "states_exact_composition_rule",
+    "states_coordinate_time_scale",
+    "states_ground_velocity_definition",
+    "states_eccentric_orbit_treatment",
+    "contains_direct_clock_series",
+    "binds_gom20_to_canonical_depth_rate"
+  ],
+  "physical_model_verdict": "UNADJUDICATED",
+  "qualified_direct_observation": false,
+  "required_recovery_ingredients": {
+    "baryon_count_volume_exclusion": true,
+    "inverse_square_falloff": true,
+    "movement_budget": true,
+    "polar_radius_for_koppa": true,
+    "spation_shell_exclusion": true
+  },
+  "required_recovery_ingredients_complete": true,
+  "source_hashes_valid": true,
+  "source_results": {
+    "gps_interface": {
+      "evidence_class": "ENGINEERING_CONFIGURATION",
+      "hash_matches_manifest": true,
+      "path": "Datasets/gps_clock_2026-08/raw/is_gps_200n.pdf",
+      "sha256": "54ec544bfe7e6acd97daaa1de0ca248e5abec6b418f23c1a69991e5c7bcf749a"
+    },
+    "nasa_gnss_intro": {
+      "evidence_class": "EXPLANATORY_ENGINEERING",
+      "hash_matches_manifest": true,
+      "path": "Datasets/gps_clock_2026-08/raw/nasa_2012_gnss_relativity_introduction.pdf",
+      "sha256": "402b87a7193e929ec5316e446ada53aa2d7c9daa60877a6717605034318b109b"
+    },
+    "navstar4_metadata": {
+      "evidence_class": "MODEL_PROCESSED_OBSERVATION",
+      "hash_matches_manifest": true,
+      "path": "Datasets/gps_clock_2026-08/raw/nasa_1980_navstar4_metadata.json",
+      "sha256": "0255b566bca1011144ed8b76afa94489bdf93842f2de0bc78ad0d643697cb467"
+    },
+    "nist_summary": {
+      "evidence_class": "EXPLANATORY_SECONDARY",
+      "hash_matches_manifest": true,
+      "path": "Datasets/gps_clock_2026-08/raw/nist_putting_einstein_to_the_test.html",
+      "sha256": "1ba074908c7261f2f515edd96505c06f8640836ff47ac5f23902a8cf83220baf"
+    }
+  },
+  "specification_checks": {
+    "binds_gom20_to_canonical_depth_rate": false,
+    "contains_direct_clock_series": false,
+    "states_coordinate_time_scale": false,
+    "states_depth_relation": true,
+    "states_eccentric_orbit_treatment": false,
+    "states_exact_composition_rule": false,
+    "states_ground_velocity_definition": false,
+    "states_motion_term": true
+  }
+}

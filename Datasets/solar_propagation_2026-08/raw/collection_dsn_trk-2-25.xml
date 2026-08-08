@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1G00.sch" 
+    schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<Product_Collection 
+    xmlns="http://pds.nasa.gov/pds4/pds/v1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+    http://pds.nasa.gov/pds4/pds/v1
+    https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1G00.xsd">
+    
+    <Identification_Area>
+        <logical_identifier>urn:nasa:pds:radiosci.documentation:dsn.trk-2-25</logical_identifier>
+        <version_id>1.4</version_id>
+        <title>TRK-2-25 DSN Archival Tracking Data File Interface</title>
+        <information_model_version>1.16.0.0</information_model_version>
+        <product_class>Product_Collection</product_class>
+        
+        <Citation_Information>
+            <publication_year>1977</publication_year>
+            <description>
+                This collection contains several versions of the TRK-2-25 DSN Archival Tracking Data
+                File (ATDF or TDF) interface.  It also contains example TDFs from the Voyager (1979)
+                and Cassini (2001) missions and an explanation of how the binary files can be unpacked.
+                Publication year of this collection is the publication year of the first version in 
+                the collection.  
+            </description>
+        </Citation_Information>
+        
+        <Modification_History>
+            
+            <Modification_Detail>
+                <modification_date>2025-10-07</modification_date>
+                <version_id>1.4</version_id>
+                <description>
+                    Updated version number of member prodcts in Inventory.
+                </description>
+            </Modification_Detail>
+
+            <Modification_Detail>
+                <modification_date>2024-05-15</modification_date>
+                <version_id>1.3</version_id>
+                <description>
+                    Added dsn_trk-2-25.1977-01-20.pdf
+                    Updated version number of member prodcts in Inventory.
+                </description>
+            </Modification_Detail>
+
+            <Modification_Detail>
+                <modification_date>2021-09-29</modification_date>
+                <version_id>1.2</version_id>
+                <description>
+                    Updated to IM v1.16.0.0.
+                    Updated version number of member prodcts in Inventory.
+                </description>
+            </Modification_Detail>
+            
+            <Modification_Detail>
+                <modification_date>2021-04-30</modification_date>
+                <version_id>1.1</version_id>
+                <description>
+                    Added Microsoft Word version of unpack document; updated label.
+                    Corrected reference to instrument context product in label of example product.
+                </description>
+            </Modification_Detail>
+            
+            <Modification_Detail>
+                <modification_date>2020-06-15</modification_date>
+                <version_id>1.0</version_id>
+                <description>
+                    This Collection contains several versions of the TRK-2-25 document plus two
+                    example TDFs and an explanation of how the binary values can be unpacked.
+                </description>
+            </Modification_Detail>
+            
+        </Modification_History>
+        
+    </Identification_Area>
+    
+    <Collection>
+        <collection_type>Document</collection_type>
+        <description>
+            This collection contains several versions of the TRK-2-25 DSN Archival Tracking Data
+            File (ATDF or TDF) interface.  It also contains example TDFs from the Voyager (1979)
+            and Cassini (2001) missions and an explanation of how the binary files can be unpacked.
+            Publication year of this collection is the publication year of the first version in 
+            the collection.
+        </description>
+    </Collection>
+    
+    <File_Area_Inventory>
+        <File>
+            <file_name>collection_dsn_trk-2-25.csv</file_name>
+            <creation_date_time>2025-10-07T14:56:00</creation_date_time>
+            <file_size unit="byte">540</file_size>
+            <md5_checksum>27cb80442f6faa344e37d9760284381d</md5_checksum>
+        </File>
+        <Inventory>
+            <offset unit="byte">0</offset>
+            <parsing_standard_id>PDS DSV 1</parsing_standard_id>
+            <records>8</records>                                                                  
+            <record_delimiter>Carriage-Return Line-Feed</record_delimiter>
+            <field_delimiter>Comma</field_delimiter>
+            <Record_Delimited>
+                <fields>2</fields>
+                <groups>0</groups>
+                <maximum_record_length unit="byte">257</maximum_record_length>               
+                <Field_Delimited>
+                    <name>Member Status</name>
+                    <field_number>1</field_number>
+                    <data_type>ASCII_String</data_type>
+                    <maximum_field_length unit="byte">1</maximum_field_length>
+                </Field_Delimited>
+                <Field_Delimited>
+                    <name>LIDVID_LID</name>
+                    <field_number>2</field_number>
+                    <data_type>ASCII_LIDVID_LID</data_type>
+                    <maximum_field_length unit="byte">255</maximum_field_length>    
+                </Field_Delimited>
+            </Record_Delimited>
+            <reference_type>inventory_has_member_product</reference_type>
+        </Inventory>
+    </File_Area_Inventory>
+    
+</Product_Collection>

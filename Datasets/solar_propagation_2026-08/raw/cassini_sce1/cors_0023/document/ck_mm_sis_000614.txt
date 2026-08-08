@@ -1,0 +1,247 @@
+PDS_VERSION_ID        = PDS3
+RECORD_TYPE           = STREAM
+OBJECT                = TEXT
+  INTERCHANGE_FORMAT    = ASCII
+  PUBLICATION_DATE      = 2000-06-14
+  NOTE                  = "N/A"
+END_OBJECT            = TEXT
+
+END
+
+
+
+
+
+    Multimission Software Interface Specification (SIS)
+
+
+
+
+
+
+
+
+SPICE
+C-Matrix Kernel
+
+CK
+
+
+
+
+NAIF Document No. 370
+Version 1.0
+
+
+
+Prepared by:  C. Acton
+Navigation and Ancillary Information Facility (NAIF)
+Jet Propulsion Laboratory
+National Aeronautics and Space Administration
+
+
+
+PURPOSE:  This SIS describes the format and content of SPICE C-matrix Kernel
+(CK) file, used to provide orientation of a spacecraft or any articulating
+structure.
+
+
+
+CHANGE LOG
+
+Version    Date          Page Nos.    Reason
+1.0      14 June 2000     All        New multimission version.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+List of Acronyms
+
+
+ANSI    American National Standards Institute
+ASCII    American Standard Code for Information Interchange
+CCSDS    Consultative Committee on Space Data Standards
+CK    SPICE C-kernel
+ET    Ephemeris Time
+FK    SPICE Frames Kernel
+FTP    File Transfer Protocol
+JPL    Caltech/Jet Propulsion Laboratory
+MSOO    Mars Surveyor Operations Office
+NAIF    Navigation and Ancillary Information Facility
+PDB    Project Data Base
+PDS    Planetary Data System
+SCLK    SPICE Spacecraft Clock Kernel
+SFDU    Standard Formatted Data Unit
+SIS    Software Interface Specification
+SPICE    S-, P-, I-, C- and E-kernels; the principal logical data components
+      of a particular NASA ancillary information system
+TMOD    Telecommunications and Mission Operations Directorate
+
+
+
+
+Section 1
+General Description
+
+
+1.1    Purpose of Document
+
+This Software Interface Specification (SIS) describes the purpose of
+a SPICE C-matrix Kernel (CK) file and SPICE Toolkit software available
+to work with CK files..
+
+
+1.2    Scope
+
+This is a multimission SIS, applicable for all flight projects.
+
+
+1.3    Applicable Documents
+ 
+No.   Document ID        Version           Title
+1. NAIF Doc. No. 174   Latest release   C-kernel Required Reading
+2. NAIF Doc. No. 358   Latest release   Quaternions: Standard NAIF 
+Conventions
+3. NAIF Doc. No. 214   Latest release   Rotations Required Reading
+4. NAIF Doc. No. 167   Latest release   DAF Required Reading
+5. NAIF Doc. No. 222   Latest release   SCLK Required Reading
+
+
+1.4     Functional Description
+
+A C-kernel holds orientation information, and optionally angular rate data, 
+for a named structure relative to a specified reference frame. In particular,
+a CK file contains time-tagged quaternions that specify the rotation from a 
+base reference frame to a "target" frame fixed to the spacecraft of other 
+structure for which orientation information is being given. Optionally 
+(option to the CK producer) the CK file may contain angular velocity of the 
+target frame relative to the base frame.
+
+A CK may be a "predict" file, describing the planned orientation of a 
+structure, or it may be a "reconstruction" file, providing the actual 
+(measured) orientation of a structure, generally based on data returned from 
+sensors associated with that structure.
+
+Reference Document No. 2 provides detailed descriptions of quaternions as 
+used within SPICE and as specified in other areas. Reference Document Nos.2 
+and 3 describe how these quaternions are used in rotation matrices.
+
+
+1.4.1    Data Source, Destinations, and Transfer Method
+
+C-kernels are made available to flight projects through whatever mechanism is
+used for providing access to SPICE products, such as a Project Database 
+(PDB), a File Interchange System (FIS) or a SPICE Server.
+
+
+
+1.4.2    Labeling and Identification
+
+CK files may include identification information within an internal "comment 
+area.", although this is not a hard requirement. CK file names may utilize 
+any syntax picked by a flight project, although limiting the length to the 
+"27.3" specification adopted by the Planetary Data System (PDS) is suggested.
+NAIF further suggests using the "*.bc" and "*.xc" standard generally used by 
+NAIF.
+
+Section 2
+Data Object Definition
+
+
+2.1    Structure and Organization
+
+In normal use CK files are binary files, consisting of a "comment area" 
+provided to hold metadata, and the data area, holding quaternions, optional 
+angular velocity, and the infrastructure used to organize these. CK files are
+specific instances of an underlying data structure named Double Precision 
+Array File (DAF), which is described in great detail in Reference 4.
+To port binary CK files between machines that do not use the same binary 
+standard the SPICE "transfer format" is utilized. In a transfer format file 
+CK data re encoded in a hexadecimal format that uses only ASCII characters. 
+Transfer format files may be moved between computers using ASCII mode of ftp.
+The SPICE Toolkit contains utility programs (TOBIN and TOXFR) to convert from
+binary to transfer format, and vice-versa.
+
+
+2.2    Data Format and Definition
+
+2.2.1    Metadata Description
+
+A CK file should contain "comments" providing the provenance of the file. 
+These metadata should describe when, why, how and by whom the file was made. 
+They should detail any and all significant data gaps, and provide any similar
+information that could help the end user of the CK file to select an 
+appropriate CK file for some purpose, and to understand how best to use that 
+file.
+
+While providing comments is HIGHLY recommended, it is not a technical 
+requirement on the CK producer.
+
+Because many CK files do contain significant metadata, and because there are 
+frequently problems with attitude data returned from a spacecraft, the user 
+of CK files is STRONGLY encouraged to examine the comment area of any CK file
+for possibly important metadata.
+
+2.2.2    Data Description
+
+The description and layout of data in a CK file is described in Reference 
+Nos. 1 and 4. This information is usually not important to most users; rather
+the user's view of a CK file is via the SPICELIB or CSPICE interface software
+outlined in Reference 1 and also discussed in the SPICE C-Kernel tutorial.
+
+
+Section 3
+CK Data Access
+
+3.1    Reading CK Files
+
+The SPICE Toolkit contains special software (subroutines) for reading CK 
+files. This is described in great detail in Reference 1 and in the C-Kernel 
+tutorial. That process is briefly stated here in a Fortran example. The 
+Toolkit CK Required Reading for a CSPICE version of the Toolkit contains C 
+examples.
+
+
+Initialization ... typically once per program run
+  Tell your program which SPICE files to use ("loading" files)
+   CALL FURNSH( 'lsk_file_name' )
+   CALL FURNSH( 'sclk_file_name' )
+   CALL FURNSH( 'ck_file_name' )
+
+Loop ... do as often as you need
+  Convert UTC to SCLK ticks
+   CALL STR2ET( 'utc_string', tdb )
+   CALL SCE2T ( spacecraft_id, tdb, sclkdp )
+
+  Get orientation matrix and angular velocity at requested time
+   CALL CKGPAV (instid,sclkdp,tol,'ref_frame',cmat,av,clkout,found)
+
+The arguments are described below.
+
+Inputs:
+instid    NAIF ID for the spacecraft or structure for which the orientation 
+is to be returned sclkdp    the time at which the orientation matrix and 
+angular velocity are to be computed. The time system used is encoded 
+spacecraft clock time (SCLK). The units are ticks since the beginning of the 
+mission tol    the tolerance, expressed as number of SCLK ticks, to be used 
+in searching for and computing the orientation data *ref_frame    the name of
+the reference frame with respect to which the orientation is to be computed
+Outputs:
+cmat    the 3x3 rotation matrix that you requested
+av    the angular velocity that you requested
+clkout    the exact time for which the orientation and angular was computed *
+found    the logical flag indicating whether the orientation and angular 
+velocity data were found. Note that if the loaded CK file(s) do not contain 
+angular velocity data, CKGPAV will return a FALSE found flag even when 
+orientation can be computed
+

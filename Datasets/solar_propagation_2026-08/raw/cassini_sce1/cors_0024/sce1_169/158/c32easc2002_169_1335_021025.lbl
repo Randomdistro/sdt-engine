@@ -1,0 +1,90 @@
+PDS_VERSION_ID               = PDS3
+RECORD_TYPE                  = FIXED_LENGTH
+RECORD_BYTES                 = 62
+FILE_RECORDS                 = 165965
+MISSION_NAME                 = "CASSINI-HUYGENS"
+INSTRUMENT_HOST_NAME         = "CASSINI ORBITER"
+INSTRUMENT_NAME              = "RADIO SCIENCE SUBSYSTEM"
+INSTRUMENT_ID                = RSS
+DATA_SET_ID                  = "CO-SS-RSS-1-SCE1-V1.0"
+OBSERVATION_TYPE             = "SCIENCE"
+OBSERVATION_ID               = "SCE1"
+TARGET_NAME                  = "SOLAR SYSTEM"
+PRODUCT_ID                   = "C32EASC2002_169_1335_021025.158"
+PRODUCT_CREATION_TIME        = 2005-216T19:40:49
+START_TIME                   = 2002-169T13:35:03.182
+STOP_TIME                    = 2002-170T02:09:55.099
+SPACECRAFT_CLOCK_START_COUNT = "N/A"
+SPACECRAFT_CLOCK_STOP_COUNT  = "N/A"
+^TABLE                       = "C32EASC2002_169_1335_021025.158"
+OBJECT                       = TABLE
+  INTERCHANGE_FORMAT           = ASCII
+  ROWS                         = 165965
+  ROW_BYTES                    = 62
+  COLUMNS                      = 5
+  OBJECT                       = COLUMN
+    NAME                         = "CHANNEL NAME"
+    COLUMN_NUMBER                = 1
+    START_BYTE                   = 2
+    BYTES                        = 6
+    DATA_TYPE                    = CHARACTER
+    DESCRIPTION                  = "
+          Channel name, usually of the form C-nnnn where C
+          denotes a subsystem and nnnn is a number denoting
+          a channel within that subsystem."
+  END_OBJECT                   = COLUMN
+  OBJECT                       = COLUMN
+    NAME                         = "DN VALUE"
+    COLUMN_NUMBER                = 2
+    START_BYTE                   = 11
+    BYTES                        = 12
+    DATA_TYPE                    = CHARACTER
+    DESCRIPTION                  = "
+          Data number, the raw value reported by the sensor
+          or other data source.  The DN VALUE is provided as
+          a character string enclosed in double quotes since
+          different channels report integers, floats, and
+          ASCII strings.  See CHANNEL TYPE for more format
+          information."
+  END_OBJECT                   = COLUMN
+  OBJECT                       = COLUMN
+    NAME                         = "EU VALUE"
+    COLUMN_NUMBER                = 3
+    START_BYTE                   = 26
+    BYTES                        = 8
+    DATA_TYPE                    = CHARACTER
+    DESCRIPTION                  = "
+          Engineering units, an interpretation of DN VALUE,
+          sometimes including units.  The EU VALUE is provided
+          as a character string enclosed in double quotes since
+          different channels report integers, floats, and
+          ASCII strings.  See CHANNEL TYPE for more format
+          information."
+  END_OBJECT                   = COLUMN
+  OBJECT                       = COLUMN
+    NAME                         = "CHANNEL TYPE"
+    COLUMN_NUMBER                = 4
+    START_BYTE                   = 37
+    BYTES                        = 1
+    DATA_TYPE                    = CHARACTER
+    DESCRIPTION                  = "
+          Type of data in the channel.  For example:
+                 A     alphanumeric
+                 D     digital
+                 F     floating point
+                 I     signed integer
+                 S     status
+                 U     unsigned integer"
+  END_OBJECT                   = COLUMN
+  OBJECT                       = COLUMN
+    NAME                         = "ERT TIME"
+    COLUMN_NUMBER                = 5
+    START_BYTE                   = 40
+    BYTES                        = 21
+    DATA_TYPE                    = TIME
+    DESCRIPTION                  = "
+          Earth Receive Time (UTC).  The time that data
+          reached or were collected on the ground."
+  END_OBJECT                   = COLUMN
+END_OBJECT                   = TABLE
+END

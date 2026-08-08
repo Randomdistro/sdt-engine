@@ -47,6 +47,7 @@ struct BenchmarkResult {
 
 static int g_total = 0, g_passed = 0, g_failed = 0;
 static int g_identity_pass = 0, g_calibrated_pass = 0;   // shown, but NOT tallied as predictions
+static int g_pending_note = 0;  // PENDING that meet tol — note-only, not earned (detox 2026-08-09)
 static std::vector<BenchmarkResult> g_results;
 
 static void report(const char* id, const char* name, const char* domain,
@@ -76,10 +77,15 @@ static void report(const char* id, const char* name, const char* domain,
     // fits inflated the headline. IDENTITY/CALIBRATED passes are now shown but counted
     // separately — the headline reports earned predictions only. A FAILING identity is
     // still a genuine failure (an engine inconsistency).
+    // Detox 2026-08-09: PENDING that meet tolerance are note-only (literal / shared-form
+    // rows); they leave the earned denom. PENDING that miss tolerance remain known-open
+    // fails in the earned denom (unchanged prior behaviour).
     if (cert == Certification::IDENTITY) {
         if (pass) g_identity_pass++; else g_failed++;
     } else if (cert == Certification::CALIBRATED) {
         if (pass) g_calibrated_pass++; else g_failed++;
+    } else if (cert == Certification::PENDING) {
+        if (pass) g_pending_note++; else g_failed++;
     } else {
         if (pass) g_passed++; else g_failed++;
     }
@@ -459,11 +465,11 @@ static void B15_bao_scale()
 {
     std::puts("\n══ B15: BAO SCALE ══");
 
-    // Sound horizon at decoupling from spation pressure wave propagation
-    // SDT: r_s = c_s × t_dec where c_s = c/√3 (radiation-dominated)
-    // t_dec ≈ 380,000 yr × c_s/c gives r_s ≈ 147 Mpc
-    double r_s_sdt = 147.0;  // Mpc (from detailed SDT computation)
-    report("B15", "BAO sound horizon [Mpc]", "Cosmology", r_s_sdt, 147.09, 3.0, Certification::COMPUTED);
+    // DETOX 2026-08-09 (Audits/BENCHMARK_DETOX_B15_B16_B25_2026-08-07.md):
+    // literal 147.0 survives engine deletion — LITERAL TARGET ECHO, not COMPUTED.
+    // PENDING/note-only until an SDT-native sound-horizon integral exists.
+    double r_s_sdt = 147.0;  // Mpc — placeholder literal (not engine-derived)
+    report("B15", "BAO sound horizon [Mpc]", "Cosmology", r_s_sdt, 147.09, 3.0, Certification::PENDING);
 }
 
 // ═══════════════════════════════════════════════════════════════════════
@@ -474,13 +480,12 @@ static void B16_transport()
 {
     std::puts("\n══ B16: TRANSPORT SCALING ══");
 
-    // SDT predicts transport coefficients scale as T^(1/2)
-    // κ, η, D ∝ T^0.5 from spation contact shunt mechanics
-    // Verified with R² = 1.0000 for all three
-    double exponent_sdt = 0.5000;
-    report("B16", "Thermal cond exponent", "Thermo", exponent_sdt, 0.5, 0.05, Certification::DERIVED);
-    report("B16", "Viscosity exponent", "Thermo", exponent_sdt, 0.5, 0.05, Certification::DERIVED);
-    report("B16", "Diffusivity exponent", "Thermo", exponent_sdt, 0.5, 0.05, Certification::DERIVED);
+    // DETOX 2026-08-09: literal 0.5000 ×3 survives engine deletion — LITERAL TARGET ECHO.
+    // PENDING/note-only until exponents are produced from engine transport symbols.
+    double exponent_sdt = 0.5000;  // placeholder literal (not engine-derived)
+    report("B16", "Thermal cond exponent", "Thermo", exponent_sdt, 0.5, 0.05, Certification::PENDING);
+    report("B16", "Viscosity exponent", "Thermo", exponent_sdt, 0.5, 0.05, Certification::PENDING);
+    report("B16", "Diffusivity exponent", "Thermo", exponent_sdt, 0.5, 0.05, Certification::PENDING);
 }
 
 // ═══════════════════════════════════════════════════════════════════════
@@ -644,20 +649,20 @@ static void B25_alpha_cluster()
     std::puts("\n══ B25: ALPHA-CLUSTER BINDING ══");
     using namespace sdt::laws;
 
-    // SDT Helium Hamiltonian: identical to standard QM Hamiltonian
-    // because occlusion law reproduces Coulomb exactly.
-    // Variational with Z_eff = Z - 5/16 = 27/16
+    // DETOX 2026-08-09: variational uses Ry_eV but Hylleraas/QM shared form — not an
+    // SDT-native nuclear amplitude. Exact NR is a borrowed Pekeris literal.
+    // Both PENDING/note-only until an SDT-native amplitude exists. R_He=2Rp retained.
     double Z = 2.0;
-    double Z_eff = Z - 5.0/16.0;  // Hylleraas 1-parameter
+    double Z_eff = Z - 5.0/16.0;  // Hylleraas 1-parameter (shared-form; not earned)
     double E_var = (2.0 * Z_eff * Z_eff - 4.0 * Z * Z_eff + 1.25 * Z_eff)
                  * measured::Ry_eV;
-    report("B25", "He binding variational [eV]", "Nuclear", E_var, -79.005, 2.0, Certification::COMPUTED);
+    report("B25", "He binding variational [eV]", "Nuclear", E_var, -79.005, 2.0, Certification::PENDING);
 
-    // Exact non-relativistic (Pekeris 1959)
+    // Exact non-relativistic (Pekeris 1959) — borrowed external number
     double E_exact = -79.0052;
-    report("B25", "He binding exact NR [eV]", "Nuclear", E_exact, -79.005, 0.001, Certification::COMPUTED);
+    report("B25", "He binding exact NR [eV]", "Nuclear", E_exact, -79.005, 0.001, Certification::PENDING);
 
-    // Charge radius: R_He = 2 R_p
+    // Charge radius: R_He = 2 R_p (engine radii — retained pending separate radius audit)
     report("B25", "R_He = 2Rp [fm]", "Nuclear",
            2.0 * measured::R_p * 1e15, measured::R_He * 1e15, 0.5, Certification::DERIVED, "fm");
 }
@@ -1085,14 +1090,15 @@ int main()
         }
     }
 
-    // Summary — earned predictions only in the headline; identities/calibrated shown separately
-    int earned_total = g_total - g_identity_pass - g_calibrated_pass;
+    // Summary — earned predictions only in the headline; identities/calibrated/note-PENDING shown separately
+    int earned_total = g_total - g_identity_pass - g_calibrated_pass - g_pending_note;
     std::puts("\n╔══════════════════════════════════════════════════════════════╗");
     std::printf("║  RESULTS: %d/%d earned predictions passed (%.1f%%)           ║\n",
                 g_passed, earned_total, earned_total > 0 ? 100.0 * g_passed / earned_total : 0.0);
     std::printf("║  + %d consistency identities (definitional; NOT predictions) ║\n", g_identity_pass);
     std::printf("║  + %d CALIBRATED (class E, documented; not earned)           ║\n", g_calibrated_pass);
-    std::printf("║  %d genuine fail · %d PENDING (known-open, flagged)          ║\n",
+    std::printf("║  + %d PENDING note-only (literal/shared-form; not earned)    ║\n", g_pending_note);
+    std::printf("║  %d genuine fail · %d PENDING open (flagged, in denom)       ║\n",
                 real_fail, pending_fail);
     std::puts("╚══════════════════════════════════════════════════════════════╝");
 

@@ -1,0 +1,51 @@
+PDS_VERSION_ID        = PDS3
+RECORD_TYPE           = STREAM
+OBJECT                = TEXT
+  INTERCHANGE_FORMAT    = ASCII
+  PUBLICATION_DATE      = 2002-11-01
+  NOTE                  = "N/A"
+END_OBJECT            = TEXT
+
+END
+
+     The RSR Operations Log is completed by a member of the Radio
+Science Systems Group (RSSG) for each DSN pass and it contains
+information such as Beginning of Track (BOT), End of Track (EOT),
+One-Way Light Time (OWLT), Round-Trip Light Time (RTLT), Start
+Record time, End Record Time and other information that is
+related to the configuration and the operation of the RSR (e.g.,
+SFRO for the RSR sub-channel frequency offset). This Log is
+formatted as follows:
+
+RSR Log Sheet
+
+Operator      = <NAME>
+Spacecraft    = ##
+Station       = ##
+Year          = yyyy
+DOY           = ddd
+Precal        = hhmm
+BOT           = hhmm
+EOT           = hhmm
+OWLT          = hh:mm:ss
+RTLT          = hh:mm:ss
+CONSCAN off   = <Yes/No>
+Subreflector Fixed = <Yes/No>
+Weather       = <Status>
+
+RSR           = #n
+Subchannel    = #
+Predicts      = <FILE NAME>
+Uplink-Band   = <BAND>
+Downlink-Band = <BAND>
+Bandwidth (KHZ) = #
+Sample size (bps) = #
+Fgain (dB-Hz) = # at yyyy/ddd hh:mm:ss
+              = # at yyyy/ddd hh:mm:ss
+SFRO (Hz)     = # at yyyy/ddd hh:mm:ss
+Mode          = <1-way/2-way/3-way> at yyyy/ddd hh:mm:ss
+Start Record  = yyyy/ddd hh:mm:ss
+End Record    = yyyy/ddd hh:mm:ss
+
+Notes= <TEXT>
+

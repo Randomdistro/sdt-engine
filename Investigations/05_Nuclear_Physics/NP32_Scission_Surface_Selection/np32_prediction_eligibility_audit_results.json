@@ -1,0 +1,288 @@
+{
+  "anchor_audit": {
+    "anchor_location_status": "ANCHOR_EMPIRICALLY_IMPORTED",
+    "precommit_identifies_N82_Z50_lock_as_measured_this_session": true
+  },
+  "audit_status": "COMPLETE",
+  "classification": {
+    "data_feature_status": "IAEA_YIELD_REGULARITY_REPRODUCED",
+    "empirical_sdt_verdict": "UNADJUDICATED",
+    "mechanism_classification": "MINIMUM_CUT_MECHANISM_UNIMPLEMENTED",
+    "predictor_classification": "EMPIRICAL_REGULARITY_SUMMARY_NOT_ZERO_FIT_SDT_PREDICTION"
+  },
+  "historical_claim_audit": {
+    "p3_correction": "HISTORICAL_P3_PASS_IS_FALSE_UNDER_ITS_STATED_EVERY_SYSTEM_GATE",
+    "p3_historical_status": "PASS",
+    "p3_literal_gate_pass": false,
+    "p4_historical_status": "REFUTED",
+    "p4_literal_gate_pass": false
+  },
+  "mechanism_audit": {
+    "called_functions": [
+      "Y.get",
+      "Y.values",
+      "abs",
+      "csv.DictReader",
+      "float",
+      "hump_centroid",
+      "int",
+      "len",
+      "massyield",
+      "math.ceil",
+      "math.floor",
+      "max",
+      "min",
+      "open",
+      "print",
+      "range",
+      "report",
+      "round",
+      "row.get",
+      "row.get(col, '').strip",
+      "rows.append",
+      "slope",
+      "st.mean",
+      "sum",
+      "zip"
+    ],
+    "declared_functions": [
+      "massyield",
+      "hump_centroid",
+      "slope",
+      "report"
+    ],
+    "forward_split_before_yield_load": false,
+    "imports": [
+      "import csv, math, statistics as st"
+    ],
+    "minimum_cut_mechanism_implemented": false,
+    "model_specific_functions": [],
+    "required_capability_term_presence": {
+      "contact_graph": false,
+      "edge_or_bond_cost": false,
+      "partition_or_cut": false
+    },
+    "yield_loader_present": true
+  },
+  "observational_inputs": [
+    {
+      "expected_bytes": 121193,
+      "expected_sha256": "87fcd49503a56b57f98eb785183d778dbfa72551b89f2112a8898fbe0aad6c78",
+      "observed_bytes": 121193,
+      "observed_sha256": "87fcd49503a56b57f98eb785183d778dbfa72551b89f2112a8898fbe0aad6c78",
+      "passed": true,
+      "path": "Datasets/nuclear/IAEA_U235_independent_FY.csv"
+    },
+    {
+      "expected_bytes": 128347,
+      "expected_sha256": "878e4e6c1f39fa781cc903006506f66331a4ef0ebd6a9613be30093664daca62",
+      "observed_bytes": 128347,
+      "observed_sha256": "878e4e6c1f39fa781cc903006506f66331a4ef0ebd6a9613be30093664daca62",
+      "passed": true,
+      "path": "Datasets/nuclear/fission_yields/IAEA_233U_independent_FY.csv"
+    },
+    {
+      "expected_bytes": 98073,
+      "expected_sha256": "8e9272960f5405f15ac1191ad70bef338b7cdef4b65a451d3cf4426a85dcc425",
+      "observed_bytes": 98073,
+      "observed_sha256": "8e9272960f5405f15ac1191ad70bef338b7cdef4b65a451d3cf4426a85dcc425",
+      "passed": true,
+      "path": "Datasets/nuclear/fission_yields/IAEA_239Pu_independent_FY.csv"
+    },
+    {
+      "expected_bytes": 93869,
+      "expected_sha256": "52bbb5be8087bf6145aee289c6558e18a6a32e3bd7389fa0f9c0f7d30a383732",
+      "observed_bytes": 93869,
+      "observed_sha256": "52bbb5be8087bf6145aee289c6558e18a6a32e3bd7389fa0f9c0f7d30a383732",
+      "passed": true,
+      "path": "Datasets/nuclear/fission_yields/IAEA_241Pu_independent_FY.csv"
+    },
+    {
+      "expected_bytes": 88035,
+      "expected_sha256": "a14c5e3540fef662d341e4f9e026fb0edf0a462946444379f3478c186fc220bc",
+      "observed_bytes": 88035,
+      "observed_sha256": "a14c5e3540fef662d341e4f9e026fb0edf0a462946444379f3478c186fc220bc",
+      "passed": true,
+      "path": "Datasets/nuclear/fission_yields/IAEA_237Np_independent_FY.csv"
+    },
+    {
+      "expected_bytes": 100715,
+      "expected_sha256": "a75a4ecd510939227d4502b3b41144f557427af0905bf343eab2174e54740e6c",
+      "observed_bytes": 100715,
+      "observed_sha256": "a75a4ecd510939227d4502b3b41144f557427af0905bf343eab2174e54740e6c",
+      "passed": true,
+      "path": "Datasets/nuclear/fission_yields/IAEA_241Am_independent_FY.csv"
+    },
+    {
+      "expected_bytes": 90478,
+      "expected_sha256": "e602f666aeb3d9957655774be2deef05534db6d6a464de7ee4da166a8452aa4a",
+      "observed_bytes": 90478,
+      "observed_sha256": "e602f666aeb3d9957655774be2deef05534db6d6a464de7ee4da166a8452aa4a",
+      "passed": true,
+      "path": "Datasets/nuclear/fission_yields/IAEA_238U_independent_FY.csv"
+    },
+    {
+      "expected_bytes": 85712,
+      "expected_sha256": "6641d35d4f2c9bc66b86980fc1a6e9c37c6d16137dd3157550a8aa97f7540bc8",
+      "observed_bytes": 85712,
+      "observed_sha256": "6641d35d4f2c9bc66b86980fc1a6e9c37c6d16137dd3157550a8aa97f7540bc8",
+      "passed": true,
+      "path": "Datasets/nuclear/fission_yields/IAEA_232Th_independent_FY.csv"
+    }
+  ],
+  "observational_reconstruction": {
+    "literal_precommit_gates": {
+      "p1_heavy_slope": -0.19689451617682815,
+      "p1_pass": true,
+      "p2_light_slope": 1.259801315590891,
+      "p2_pass": true,
+      "p3_all_systems_in_1_5_to_4_0": false,
+      "p3_nu_max": 4.376649978057657,
+      "p3_nu_min": 2.3609725121145857,
+      "p4_pass": false,
+      "p4_thorium_lowest_fast_peak_to_valley": false,
+      "p4_thorium_shallowest_fast_valley": false
+    },
+    "rows": [
+      {
+        "energy": "thermal",
+        "fission_mass": 236,
+        "heavy_centroid": 136.46778523193692,
+        "heavy_mode": 134,
+        "light_centroid": 95.15556479000543,
+        "light_mode": 95,
+        "nu_back_computed": 4.376649978057657,
+        "peak_sum": 231.62335002194234,
+        "peak_to_valley": 570.8424297943201,
+        "system": "U-235",
+        "valley": 0.00013593016016179998
+      },
+      {
+        "energy": "thermal",
+        "fission_mass": 234,
+        "heavy_centroid": 137.18166548065273,
+        "heavy_mode": 136,
+        "light_centroid": 93.20269603725708,
+        "light_mode": 93,
+        "nu_back_computed": 3.6156384820901906,
+        "peak_sum": 230.3843615179098,
+        "peak_to_valley": 572.8607600933573,
+        "system": "U-233",
+        "valley": 0.0001506699803335
+      },
+      {
+        "energy": "thermal",
+        "fission_mass": 240,
+        "heavy_centroid": 136.32196022012363,
+        "heavy_mode": 135,
+        "light_centroid": 101.31706726776177,
+        "light_mode": 103,
+        "nu_back_computed": 2.3609725121145857,
+        "peak_sum": 237.63902748788541,
+        "peak_to_valley": 170.86167237159637,
+        "system": "Pu-239",
+        "valley": 0.00043264163127900004
+      },
+      {
+        "energy": "thermal",
+        "fission_mass": 242,
+        "heavy_centroid": 136.0290685129447,
+        "heavy_mode": 134,
+        "light_centroid": 102.72108033782438,
+        "light_mode": 104,
+        "nu_back_computed": 3.249851149230949,
+        "peak_sum": 238.75014885076905,
+        "peak_to_valley": 82.33906851454901,
+        "system": "Pu-241",
+        "valley": 0.000909191199072
+      },
+      {
+        "energy": "fast",
+        "fission_mass": 238,
+        "heavy_centroid": 136.41017150965627,
+        "heavy_mode": 135,
+        "light_centroid": 98.37864608671295,
+        "light_mode": 99,
+        "nu_back_computed": 3.2111824036308008,
+        "peak_sum": 234.7888175963692,
+        "peak_to_valley": 155.42426834606502,
+        "system": "Np-237",
+        "valley": 0.0004934340884999999
+      },
+      {
+        "energy": "fast",
+        "fission_mass": 242,
+        "heavy_centroid": 137.60201467911847,
+        "heavy_mode": 138,
+        "light_centroid": 101.54803749169137,
+        "light_mode": 102,
+        "nu_back_computed": 2.849947829190171,
+        "peak_sum": 239.15005217080983,
+        "peak_to_valley": 100.76413190318326,
+        "system": "Am-241",
+        "valley": 0.00068458310017
+      },
+      {
+        "energy": "fast",
+        "fission_mass": 239,
+        "heavy_centroid": 137.18241369770152,
+        "heavy_mode": 136,
+        "light_centroid": 99.0362677025807,
+        "light_mode": 100,
+        "nu_back_computed": 2.7813185997177925,
+        "peak_sum": 236.2186814002822,
+        "peak_to_valley": 321.005426240735,
+        "system": "U-238",
+        "valley": 0.000215521956385
+      },
+      {
+        "energy": "fast",
+        "fission_mass": 233,
+        "heavy_centroid": 139.76675696924332,
+        "heavy_mode": 140,
+        "light_centroid": 90.464250389735,
+        "light_mode": 90,
+        "nu_back_computed": 2.7689926410216685,
+        "peak_sum": 230.23100735897833,
+        "peak_to_valley": 114.57572969068087,
+        "system": "Th-232",
+        "valley": 0.000674352549115505
+      }
+    ]
+  },
+  "source_gate": "PASS",
+  "static_inputs": {
+    "historical_results": {
+      "expected_bytes": 6632,
+      "expected_sha256": "cef9ccb53a6acabe7f2126def2a2ac987ef4bffe4799e4d73ecef5960963fc5d",
+      "observed_bytes": 6632,
+      "observed_sha256": "cef9ccb53a6acabe7f2126def2a2ac987ef4bffe4799e4d73ecef5960963fc5d",
+      "passed": true,
+      "path": "Investigations/05_Nuclear_Physics/NP32_Scission_Surface_Selection/NP32_PREDICT_RESULTS_2026-07-25.md"
+    },
+    "historical_script": {
+      "expected_bytes": 3072,
+      "expected_sha256": "6f995b81b405ad5764e68cc93aeefa3bb403c19626d67e482aef783a41d7fc3c",
+      "observed_bytes": 3072,
+      "observed_sha256": "6f995b81b405ad5764e68cc93aeefa3bb403c19626d67e482aef783a41d7fc3c",
+      "passed": true,
+      "path": "Investigations/05_Nuclear_Physics/NP32_Scission_Surface_Selection/np32_predict_check.py"
+    },
+    "precommit": {
+      "expected_bytes": 3641,
+      "expected_sha256": "9246b48fe0b5959bd2b0c4c44057eebf4d8060e3afe66fe5239fefbe8fb72b7b",
+      "observed_bytes": 3641,
+      "observed_sha256": "9246b48fe0b5959bd2b0c4c44057eebf4d8060e3afe66fe5239fefbe8fb72b7b",
+      "passed": true,
+      "path": "Investigations/05_Nuclear_Physics/NP32_Scission_Surface_Selection/NP32_PREDICT_PRECOMMIT_2026-07-25.md"
+    },
+    "prompt": {
+      "expected_bytes": 9743,
+      "expected_sha256": "ccf81f26efd301c968a3a50b386061bd2b9583e96c45cef4a68a3d582ec1197b",
+      "observed_bytes": 9743,
+      "observed_sha256": "ccf81f26efd301c968a3a50b386061bd2b9583e96c45cef4a68a3d582ec1197b",
+      "passed": true,
+      "path": "Investigations/05_Nuclear_Physics/NP32_Scission_Surface_Selection/PROMPT.md"
+    }
+  }
+}

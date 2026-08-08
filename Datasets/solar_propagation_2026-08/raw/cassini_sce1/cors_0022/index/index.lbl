@@ -1,0 +1,90 @@
+PDS_VERSION_ID       = PDS3                                                   
+RECORD_TYPE          = FIXED_LENGTH                                           
+RECORD_BYTES         = 201                                                    
+FILE_RECORDS         = 98                                                     
+DATA_SET_ID          = "CO-SS-RSS-1-SCE1-V1.0"                                
+^INDEX_TABLE         = "INDEX.TAB"                                            
+                                                                              
+OBJECT                   = INDEX_TABLE                                        
+  INTERCHANGE_FORMAT     = ASCII                                              
+  ROWS                   = 98                                                 
+  ROW_BYTES              = 201                                                
+  COLUMNS                = 7                                                  
+  INDEX_TYPE             = SINGLE                                             
+  INDEXED_FILE_NAME      = {"158/*.LBL","515/*.LBL","LOG/*.*","ODF/*.LBL",    
+                            "PD1/*.LBL","PD2/*.LBL","TDF/*.LBL","TLM/*.LBL",  
+                            "RSR/*.LBL","CKF/*.LBL","EOP/*.LBL","ION/*.LBL",  
+                            "TRO/*.LBL","SPK/*.LBL"}                          
+  DESCRIPTION            = "INDEX.TAB lists all data files in this            
+                            volume.  Rows in this table contain 199           
+                            bytes of table data followed by one               
+                            <CR><LF> pair."                                   
+                                                                              
+  OBJECT                   = COLUMN                                           
+    NAME                   = VOLUME_ID                                        
+    DATA_TYPE              = "CHARACTER"                                      
+    START_BYTE             = 2                                                
+    BYTES                  = 9                                                
+    COLUMN_NUMBER          = 1                                                
+    DESCRIPTION            = "The volume containing this data file."          
+  END_OBJECT               = COLUMN                                           
+                                                                              
+  OBJECT                   = COLUMN                                           
+    NAME                   = FILE_SPECIFICATION_NAME                          
+    DATA_TYPE              = "CHARACTER"                                      
+    START_BYTE             = 14                                               
+    BYTES                  = 50                                               
+    COLUMN_NUMBER          = 2                                                
+    DESCRIPTION            = "Pathname to the detached label which identifies 
+                              this data file.  Or path name to text file."    
+  END_OBJECT               = COLUMN                                           
+                                                                              
+  OBJECT                   = COLUMN                                           
+    NAME                   = PRODUCT_ID                                       
+    DATA_TYPE              = "CHARACTER"                                      
+    START_BYTE             = 67                                               
+    BYTES                  = 31                                               
+    COLUMN_NUMBER          = 3                                                
+    DESCRIPTION            = "The name of the data file, which is unique      
+                              within this data set."                          
+  END_OBJECT               = COLUMN                                           
+                                                                              
+  OBJECT                   = COLUMN                                           
+    NAME                   = ORIGINAL_PRODUCT_ID                              
+    DATA_TYPE              = "CHARACTER"                                      
+    START_BYTE             = 101                                              
+    BYTES                  = 40                                               
+    COLUMN_NUMBER          = 4                                                
+    DESCRIPTION            = "The original name of the data file, if from     
+                              another source; or ASCII blanks."               
+  END_OBJECT               = COLUMN                                           
+                                                                              
+  OBJECT                   = COLUMN                                           
+    NAME                   = START_TIME                                       
+    DATA_TYPE              = "TIME"                                           
+    START_BYTE             = 143                                              
+    BYTES                  = 19                                               
+    COLUMN_NUMBER          = 5                                                
+    DESCRIPTION            = "Earliest valid time within the data file."      
+  END_OBJECT               = COLUMN                                           
+                                                                              
+  OBJECT                   = COLUMN                                           
+    NAME                   = STOP_TIME                                        
+    DATA_TYPE              = "TIME"                                           
+    START_BYTE             = 163                                              
+    BYTES                  = 19                                               
+    COLUMN_NUMBER          = 6                                                
+    DESCRIPTION            = "Latest valid time within the data file."        
+  END_OBJECT               = COLUMN                                           
+                                                                              
+  OBJECT                   = COLUMN                                           
+    NAME                   = PRODUCT_CREATION_TIME                            
+    DATA_TYPE              = "TIME"                                           
+    START_BYTE             = 183                                              
+    BYTES                  = 17                                               
+    COLUMN_NUMBER          = 7                                                
+    DESCRIPTION            = "Time at which the data file was created."       
+  END_OBJECT               = COLUMN                                           
+                                                                              
+END_OBJECT             = INDEX_TABLE                                          
+END                                                                           

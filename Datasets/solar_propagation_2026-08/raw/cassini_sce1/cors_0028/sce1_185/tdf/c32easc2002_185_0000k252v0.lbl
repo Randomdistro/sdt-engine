@@ -1,0 +1,2391 @@
+PDS_VERSION_ID               = PDS3
+RECORD_TYPE                  = FIXED_LENGTH
+RECORD_BYTES                 = 288
+FILE_RECORDS                 = 101080
+DATA_SET_ID                  = "CO-SS-RSS-1-SCE1-V1.0"
+TARGET_NAME                  = "SOLAR_SYSTEM"
+INSTRUMENT_HOST_NAME         = "CASSINI ORBITER"
+INSTRUMENT_NAME              = "RADIO SCIENCE SUBSYSTEM"
+INSTRUMENT_ID                = "RSS"
+PRODUCER_ID                  = "DSN"
+MISSION_NAME                 = "CASSINI-HUYGENS"
+OBSERVATION_TYPE             = "SCIENCE"
+DSN_STATION_NUMBER           = {25,45,65}
+PRODUCT_CREATION_TIME        = 2002-261T22:09:44
+PRODUCT_ID                   = "C32EASC2002_185_0000K252V0.TDF"
+ORIGINAL_PRODUCT_ID          = "C32EASC2002_185_0000K252V0.TDF"
+START_TIME                   = 2002-185T12:56:25
+STOP_TIME                    = 2002-186T03:35:43
+SOFTWARE_NAME                = "R/T ATDF"
+DESCRIPTION                  = "The Tracking Data File (TDF,
+    or sometimes Archival Tracking Data File -- ATDF) is
+    produced by JPL multi-mission support personnel for use
+    in determining spacecraft trajectories, gravity fields
+    affecting them and radio propagation conditions.  The
+    typical TDF has a single File Identification Logical
+    Record (Table), one Transponder Logical Record (Table),
+    a Tracking Data Table of many records, and one or more
+    padding records to fill out a data block.  Some TDFs
+    may be missing the Identification, Transponder, and/or
+    padding records.  Each TDF logical record contains 288
+    bytes; 28 logical records are packed into each block of
+    8064 bytes.  Each TDF is an integer number of these
+    blocks.  Tracking Data Table format and content are
+    described by JPL/DSN Document 820-13, TRK-2-25 (various
+    effective dates, with significant changes in 1997).
+    The applicable version may be included in the archive
+    as file TRK_2_25.TXT in the DOCUMENT directory."
+^TDF1_TABLE                  = ("C32EASC2002_185_0000K252V0.TDF",1)
+^TDF2_TABLE                  = ("C32EASC2002_185_0000K252V0.TDF",2)
+^TDF5_TABLE                  = ("C32EASC2002_185_0000K252V0.TDF",3)
+^TDF6_TABLE                  = ("C32EASC2002_185_0000K252V0.TDF",101056)
+
+OBJECT                       = TDF1_TABLE
+  NAME                         = "FILE IDENTIFICATION TABLE"
+  INTERCHANGE_FORMAT           = BINARY
+  ROWS                         = 1
+  COLUMNS                      = 3
+  ROW_BYTES                    = 30
+  ROW_SUFFIX_BYTES             = 258
+  DESCRIPTION                  = "The File Identification
+     Table identifies the type of data, the spacecraft,
+     and the date and time at which the file was created
+     It is made up of one File Identification Record.
+     On some ATDFs, the File Identification Table may be
+     omitted. When present, it is the first record in
+     the file."
+
+  OBJECT          = COLUMN
+    COLUMN_NUMBER   = 1
+    NAME            = "RECORD FORMAT AND TYPE"
+    DATA_TYPE       = MSB_BIT_STRING
+    START_BYTE      = 1
+    BYTES           = 9
+    DESCRIPTION = "The RECORD FORMAT and RECORD TYPE for the
+       File Identification Logical Record are given as two
+       36-bit integer words.  Each is defined here as a 4-bit
+       spare followed by a 32-bit unsigned integer."
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "SPARE"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 1
+      BITS            = 4
+      DESCRIPTION = "The four most significant bits of the
+         File Identification Logical Record RECORD FORMAT
+         field; sign extension bits, generally not used."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "RECORD FORMAT"
+      BIT_DATA_TYPE   = MSB_INTEGER
+      START_BIT       = 5
+      BITS            = 32
+      DESCRIPTION = "The 32 least significant bits of
+         the File Identification Logical Record RECORD
+         FORMAT field.  In files created before 1997-04-15
+         set to 8.  In files created on 1997-04-15 and later
+         set to 2048."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "SPARE"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 37
+      BITS            = 4
+      DESCRIPTION = "The four most significant bits of the
+         File Identification Logical Record RECORD TYPE
+         field; sign extension bits, generally not used."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "RECORD TYPE"
+      BIT_DATA_TYPE   = MSB_INTEGER
+      START_BIT       = 41
+      BITS            = 32
+      DESCRIPTION     = "The 32 least significant bits of
+         the File Identification Logical Record RECORD
+         TYPE field.  Set to 10 for the File Identification
+         Logical Record."
+    END_OBJECT      = BIT_COLUMN
+
+  END_OBJECT      = COLUMN
+
+  OBJECT          = COLUMN
+    COLUMN_NUMBER   = 2
+    NAME            = "FILE CREATION DATE AND TIME"
+    DATA_TYPE       = MSB_BIT_STRING
+    START_BYTE      = 10
+    BYTES           = 7
+    DESCRIPTION = "The year, day, and time of the last entry
+       in the file; the creation time of the file."
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "YEAR"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 1
+      BITS            = 12
+      DESCRIPTION = "The year in which the file was created,
+         modulo 1900."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "DAY"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 13
+      BITS            = 16
+      DESCRIPTION = "The day of year on which the file
+         was created, starting from January 1 = 1."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "HOUR"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 29
+      BITS            = 8
+      DESCRIPTION = "The hour on which the file
+         was created."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "MINUTE"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 37
+      BITS            = 12
+      DESCRIPTION = "The minute on which the file
+         was created."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "SECOND"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 49
+      BITS            = 8
+      DESCRIPTION = "The second on which the file
+         was created."
+    END_OBJECT      = BIT_COLUMN
+
+  END_OBJECT      = COLUMN
+
+  OBJECT          = COLUMN
+    COLUMN_NUMBER   = 3
+    NAME            = "DATA ID"
+    DATA_TYPE       = MSB_BIT_STRING
+    START_BYTE      = 17
+    BYTES           = 14
+    DESCRIPTION = "The spacecraft ID and the data type"
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "SPARE"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 1
+      BITS            = 12
+      DESCRIPTION     = "Twelve unused bits (set to 0)."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "SPACECRAFT ID"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 13
+      BITS            = 16
+      DESCRIPTION = "ID number for the spacecraft.  These
+         are specified in DSN document OPS-6-8.  Representative
+         values include
+                          Magellan              18
+                          Voyager 1             31
+                          Voyager 2             32
+                          Clementine            64
+                          Galileo Orbiter       77
+                          Mars Global Surveyor  94."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "DATA ID 1"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 29
+      BITS            = 8
+      DESCRIPTION = "First of eight character codes
+         identifying the type of data contained in the file.
+         32 = space, 65 = 'A', ..., 90 = 'Z'."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "DATA ID 2"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 37
+      BITS            = 8
+      DESCRIPTION = "Second of eight character codes
+         identifying the type of data contained in the file.
+         32 = space, 65 = 'A', ..., 90 = 'Z'."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "DATA ID 3"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 45
+      BITS            = 8
+      DESCRIPTION = "Third of eight character codes
+         identifying the type of data contained in the file.
+         32 = space, 65 = 'A', ..., 90 = 'Z'."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "DATA ID 4"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 53
+      BITS            = 12
+      DESCRIPTION = "Fourth of eight character codes
+         identifying the type of data contained in the file.
+         32 = space, 65 = 'A', ..., 90 = 'Z'."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "DATA ID 5"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 65
+      BITS            = 16
+      DESCRIPTION = "Fifth of eight character codes
+         identifying the type of data contained in the file.
+         32 = space, 65 = 'A', ..., 90 = 'Z'."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "DATA ID 6"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 81
+      BITS            = 8
+      DESCRIPTION = "Sixth of eight character codes
+         identifying the type of data contained in the file.
+         32 = space, 65 = 'A', ..., 90 = 'Z'."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "DATA ID 7"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 89
+      BITS            = 12
+      DESCRIPTION = "Seventh of eight character codes
+         identifying the type of data contained in the file.
+         32 = space, 65 = 'A', ..., 90 = 'Z'."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "DATA ID 8"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 101
+      BITS            = 8
+      DESCRIPTION = "Eighth of eight character codes
+         identifying the type of data contained in the file.
+         32 = space, 65 = 'A', ..., 90 = 'Z'."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "SPARE"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 109
+      BITS            = 4
+      DESCRIPTION = "Four unused bits (set to 0)."
+    END_OBJECT      = BIT_COLUMN
+
+  END_OBJECT      = COLUMN
+END_OBJECT                   = TDF1_TABLE
+
+OBJECT                       = TDF2_TABLE
+  NAME                         = "TRANSPONDER TABLE"
+  INTERCHANGE_FORMAT           = BINARY
+  ROWS                         = 1
+  COLUMNS                      = 5
+  ROW_BYTES                    = 41
+  ROW_SUFFIX_BYTES             = 247
+  DESCRIPTION                  = "The Transponder Table
+     identifies the spacecraft, the date and time when the
+     transponder went ON, the date and time when the
+     transponder went OFF, and the spacecraft transponder
+     frequency.  It is made up of one Transponder Logical
+     Record.  The Transponder table may be omitted from the
+     ATDF; when present, there is only one Transponder
+     Logical Record and it is usually the second record in
+     the ATDF."
+
+  OBJECT          = COLUMN
+    COLUMN_NUMBER   = 1
+    NAME            = "RECORD FORMAT AND TYPE"
+    DATA_TYPE       = MSB_BIT_STRING
+    START_BYTE      = 1
+    BYTES           = 9
+    DESCRIPTION = "The RECORD FORMAT and RECORD TYPE for the
+       Transponder Logical Record (TLR) are given as two
+       36-bit integer words.  Each is defined here as a 4-bit
+       spare followed by a 32-bit unsigned integer."
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "SPARE"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 1
+      BITS            = 4
+      DESCRIPTION = "The four most significant bits of the
+         Transponder Logical Record (TLR) RECORD FORMAT field;
+         sign extension bits, generally not used."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "RECORD FORMAT"
+      BIT_DATA_TYPE   = MSB_INTEGER
+      START_BIT       = 5
+      BITS            = 32
+      DESCRIPTION = "The 32 least significant bits of the
+         Transponder Logical Record (TLR) RECORD FORMAT field.
+         For files created before 1997-04-15 set to 8.  For files
+         created on 1997-04-15 and later set to 2048."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "SPARE"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 37
+      BITS            = 4
+      DESCRIPTION = "The four most significant bits of the
+         Transponder Logical Record (TLR) RECORD TYPE field;
+         sign extension bits, generally not used."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "RECORD TYPE"
+      BIT_DATA_TYPE   = MSB_INTEGER
+      START_BIT       = 41
+      BITS            = 32
+      DESCRIPTION = "The 32 least significant bits of
+         the Transponder Logical Record (TLR) RECORD
+         TYPE field.  Set to 30 for the Transponder
+         Logical Record."
+    END_OBJECT      = BIT_COLUMN
+
+  END_OBJECT      = COLUMN
+
+  OBJECT          = COLUMN
+    COLUMN_NUMBER   = 2
+    NAME            = "XPNDR ON TIME"
+    DATA_TYPE       = MSB_BIT_STRING
+    START_BYTE      = 10
+    BYTES           = 7
+    DESCRIPTION = "The year, day, and time at which the
+       transponder was 'on'."
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "XPNDR ON YEAR"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 1
+      BITS            = 12
+      DESCRIPTION = "The year in which the transponder was
+         turned on, modulo 1900."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "XPNDR ON DAY"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 13
+      BITS            = 16
+      DESCRIPTION = "The day of year on which the
+         transponder was turned on."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "XPNDR ON HOUR"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 29
+      BITS            = 8
+      DESCRIPTION = "The hour on which the transponder
+         was turned on."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "XPNDR ON MINUTE"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 37
+      BITS            = 12
+      DESCRIPTION = "The minute on which the transponder
+         was turned on."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "XPNDR ON SECOND"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 49
+      BITS            = 8
+      DESCRIPTION = "The second on which the transponder
+         was turned on."
+    END_OBJECT      = BIT_COLUMN
+
+  END_OBJECT      = COLUMN
+
+  OBJECT          = COLUMN
+    COLUMN_NUMBER   = 3
+    NAME            = "SPACECRAFT ID"
+    DATA_TYPE       = MSB_BIT_STRING
+    START_BYTE      = 17
+    BYTES           = 4
+    DESCRIPTION = "The spacecraft ID"
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "SPARE"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 1
+      BITS            = 12
+      DESCRIPTION = "Twelve unused bits (set to 0)."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "SPACECRAFT ID NUMBER"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 13
+      BITS            = 16
+      DESCRIPTION = "ID number for the spacecraft.  These
+         are specified in DSN document OPS-6-8.  Representative
+         values include
+                          Magellan              18
+                          Voyager 1             31
+                          Voyager 2             32
+                          Clementine            64
+                          Galileo Orbiter       77
+                          Mars Global Surveyor  94."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "SPARE"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 29
+      BITS            = 4
+      DESCRIPTION = "Four unused bits (set to 0)."
+    END_OBJECT      = BIT_COLUMN
+
+  END_OBJECT      = COLUMN
+
+  OBJECT          = COLUMN
+    COLUMN_NUMBER   = 4
+    NAME            = "XPNDR OFF TIME"
+    DATA_TYPE       = MSB_BIT_STRING
+    START_BYTE      = 21
+    BYTES           = 10
+    DESCRIPTION = "The year, day, and time at which the
+       transponder was 'off'."
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "SPARE"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 1
+      BITS            = 20
+      DESCRIPTION = "Twenty 'reserved' bits (set to 0)."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "XPNDR OFF YEAR"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 21
+      BITS            = 12
+      DESCRIPTION = "The year in which the transponder was
+         turned off, modulo 1900."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "XPNDR OFF DAY"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 33
+      BITS            = 16
+      DESCRIPTION = "The day of year in which the
+         transponder was turned off."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "XPNDR OFF HOUR"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 49
+      BITS            = 8
+      DESCRIPTION = "The hour on which the transponder
+         was turned off."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "XPNDR OFF MINUTE"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 57
+      BITS            = 12
+      DESCRIPTION = "The minute on which the transponder
+         was turned off."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "XPNDR OFF SECOND"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 69
+      BITS            = 8
+      DESCRIPTION = "The second on which the transponder
+         was turned off."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "SPARE"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 77
+      BITS            = 4
+      DESCRIPTION = "Four unused bits (set to 0)."
+    END_OBJECT      = BIT_COLUMN
+
+  END_OBJECT      = COLUMN
+
+  OBJECT          = COLUMN
+    COLUMN_NUMBER   = 5
+    NAME            = "XPNDR FREQUENCY"
+    DATA_TYPE       = MSB_BIT_STRING
+    START_BYTE      = 31
+    BYTES           = 12
+    UNIT            = "HERTZ"
+    DESCRIPTION = "Spacecraft transponder frequency  Ft  given as
+       a 'high' part  H  and a 'low' part  L.  The true frequency
+       can be recovered by calculating  Ft = H*10^4 + L*10^-3."
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "SPARE"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 1
+      BITS            = 16
+      DESCRIPTION = "Twelve unused bits (set to 0) followed by
+         four bits that are sign extension bits for the XPNDR
+         FQY HIGH PART column (not needed in 32-bit field
+         definitions)."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "XPNDR FQY HIGH PART"
+      BIT_DATA_TYPE   = MSB_INTEGER
+      START_BIT       = 17
+      BITS            = 32
+      DESCRIPTION = "The spacecraft transponder frequency in
+         kiloHertz."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "SPARE"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 49
+      BITS            = 4
+      DESCRIPTION = "Four bits that are sign extension bits
+         for the XPNDR FQY LOW PART column (not needed in
+         32-bit field definitions)."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "XPNDR FQY LOW PART"
+      BIT_DATA_TYPE   = MSB_INTEGER
+      START_BIT       = 53
+      BITS            = 32
+      DESCRIPTION = "The 'low' part of the spacecraft
+         transponder frequency in milliHertz."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "SPARE"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 85
+      BITS            = 12
+      DESCRIPTION = "Four bits that are unlikely to be used."
+    END_OBJECT      = BIT_COLUMN
+
+  END_OBJECT      = COLUMN
+END_OBJECT                   = TDF2_TABLE
+
+OBJECT                       = TDF5_TABLE
+  NAME                         = "TRACKING DATA TABLE"
+  INTERCHANGE_FORMAT           = BINARY
+  ROWS                         = 101053
+  COLUMNS                      = 41
+  ROW_BYTES                    = 288
+  ROW_SUFFIX_BYTES             = 0
+  DESCRIPTION                  = "The Tracking Data Table
+     contains the spacecraft tracking data.  It is made up
+     of one or more Tracking Data Logical Records (TDLRs)."
+
+  OBJECT          = COLUMN
+    COLUMN_NUMBER   = 1
+    NAME            = "RECORD FORMAT"
+    DATA_TYPE       = MSB_UNSIGNED_INTEGER
+    START_BYTE      = 1
+    BYTES           = 4
+    DESCRIPTION     = "Item 1: A 32-bit code which identifies the format
+       of the Tracking Data Logical Records (TDLRs); set to:
+            8  for records defined by SFOC-NAV-2-25 (1997-04-15 and after)
+            4  for records defined by TRK-2-25      (1997-04-14 and before).
+                  This definition of TDLR format is INCORRECT if
+                  RECORD FORMAT = 4."
+  END_OBJECT      = COLUMN
+
+  OBJECT          = COLUMN
+    COLUMN_NUMBER   = 2
+    NAME            = "SPARE 1"
+    DATA_TYPE       = MSB_UNSIGNED_INTEGER
+    START_BYTE      = 5
+    BYTES           = 1
+    DESCRIPTION     = "Item 2: Not used under SFOC-NAV-2-25; set to 0."
+  END_OBJECT      = COLUMN
+
+  OBJECT          = COLUMN
+    COLUMN_NUMBER   = 3
+    NAME            = "RECORD TYPE"
+    DATA_TYPE       = MSB_UNSIGNED_INTEGER
+    START_BYTE      = 6
+    BYTES           = 4
+    DESCRIPTION     = "Item 3: The type of data in the TDLRs; set to:
+                                 90  for low-rate data
+                                 91  for high-rate data"
+  END_OBJECT      = COLUMN
+
+  OBJECT          = COLUMN
+    COLUMN_NUMBER   = 4
+    NAME            = "DATE-TIME BLOCK"
+    DATA_TYPE       = MSB_BIT_STRING
+    START_BYTE      = 10
+    BYTES           = 9
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "YEAR"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 1
+      BITS            = 12
+      DESCRIPTION     = "Item 4:  The year modulo 1900 in the TDLR time tag."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "DOY"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 13
+      BITS            = 16
+      DESCRIPTION     = "Item 5:  The day of year in the TDLR time tag."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "HOUR"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 29
+      BITS            = 8
+      DESCRIPTION     = "Item 6:  The hour in the TDLR time tag."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "MINUTE"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 37
+      BITS            = 8
+      DESCRIPTION     = "Item 7:  The minute in the TDLR time tag."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "SECOND"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 45
+      BITS            = 8
+      DESCRIPTION     = "Item 8:  The second in the TDLR time tag."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "SPARE 2"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 53
+      BITS            = 20
+      DESCRIPTION     = "Item 9:  Unused under SFOC-NAV-2-25; set to 0."
+    END_OBJECT      = BIT_COLUMN
+
+  END_OBJECT      = COLUMN
+
+  OBJECT          = COLUMN
+    COLUMN_NUMBER   = 5
+    NAME            = "DATA TYPE BLOCK 1"
+    DATA_TYPE       = MSB_BIT_STRING
+    START_BYTE      = 19
+    BYTES           = 4
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "STATION ID"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 1
+      BITS            = 10
+      DESCRIPTION     = "Item 10:  Number of the DSN antenna."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "DOWNLINK FREQUENCY BAND"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 11
+      BITS            = 8
+      DESCRIPTION     = "Item 11:  Receiver/downlink frequency band.
+                                 0  N/A or Ku-Band
+                                 1  S-Band
+                                 2  X-Band
+                                 3  Ka-Band"
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "SAMPLE DATA TYPE ID"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 19
+      BITS            = 6
+      DESCRIPTION     = "Item 12:  Identifier for the data type in the TDLR.
+                                 1  High-Rate Doppler
+                                 2  Low-Rate Doppler
+                                 3  Uplink Phase
+                                 4  DRVID
+                                 5  Range
+                                 6  Ramp
+                                 7  Mixed
+                                 8  Allan Deviation (if Item 119 = 0,1,2)
+                                    or Smoothed Noise (if Item 119 = 3)
+                                11  High-Rate Downlink Phase
+                                12  Low-Rate Downlink Phase
+         DSN definition of Smoothed Noise:  Noise of the Metric Data
+         Assembly (MDA) Doppler Pseudo-Residuals smoothed over six
+         different sample periods: 0.1, 1, 10, 100, 200, and 600 seconds.
+         These items are the standard deviation of the data after linearly
+         detrending using a least squares fit.  Data for each interval are
+         smoothed over that time interval, noise is computed on 18 samples,
+         and each result is divided by 0.99534520 to account for filter
+         loss at high frequencies because of the linear fit."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "DOPPLER CHANNEL COUNT"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 25
+      BITS            = 4
+      DESCRIPTION     = "Item 13:  Doppler channel count."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "GROUND MODE"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 29
+      BITS            = 4
+      DESCRIPTION     = "Item 14:  Data collection mode on the ground.
+                                 0  Angles or Ramp or Uplink Phase
+                                 1  1-way, Doppler or Mixed
+                                 2  2-way, Doppler or Mixed
+                                 3  3-way, Doppler or Mixed
+                                 4  3-way Coherent, Doppler, or Mixed
+                                 5  1-way, Range or DRVID or Allan
+                                      Deviation or Smoothed Noise
+                                 6  2-way, Range or DRVID or Allan
+                                      Deviation or Smoothed Noise
+                                 7  3-way, Range or DRVID or Allan
+                                      Deviation or Smoothed Noise"
+    END_OBJECT      = BIT_COLUMN
+
+  END_OBJECT      = COLUMN
+
+  OBJECT          = COLUMN
+    COLUMN_NUMBER   = 6
+    NAME            = "SPACECRAFT ID"
+    DATA_TYPE       = MSB_UNSIGNED_INTEGER
+    START_BYTE      = 23
+    BYTES           = 2
+    DESCRIPTION     = "Item 15:  ID number for the spacecraft.
+         These are specified in DSN document OPS-6-8.
+         Representative values include
+                          Magellan              18
+                          Voyager 1             31
+                          Voyager 2             32
+                          Clementine            64
+                          Galileo Orbiter       77
+                          Mars Global Surveyor  94"
+  END_OBJECT      = COLUMN
+
+  OBJECT          = COLUMN
+    COLUMN_NUMBER   = 7
+    NAME            = "RANGE TYPE"
+    DATA_TYPE       = MSB_UNSIGNED_INTEGER
+    START_BYTE      = 25
+    BYTES           = 1
+    DESCRIPTION     = "Item 16: The type of range data collected
+                                 0  No Range Data
+                                 1  GSTDN (RE)
+                                 6  PLOP or Pseudo-Noise (PRA)
+                                 7  PLOP2 (SRA)
+                                 8  MU2"
+  END_OBJECT      = COLUMN
+
+  OBJECT          = COLUMN
+    COLUMN_NUMBER   = 8
+    NAME            = "ANGLE TYPE"
+    DATA_TYPE       = MSB_UNSIGNED_INTEGER
+    START_BYTE      = 26
+    BYTES           = 1
+    DESCRIPTION     = "Item 17: The type of range data collected
+                                 0  No Angle Data
+                                 1  Azimuth/Elevation
+                                 2  Hour Angle/Declination
+                                 3  X/Y (where +X is East)
+                                 4  X/Y (where +X is South)"
+  END_OBJECT      = COLUMN
+
+  OBJECT          = COLUMN
+    COLUMN_NUMBER   = 9
+    NAME            = "DRVID TYPE"
+    DATA_TYPE       = MSB_UNSIGNED_INTEGER
+    START_BYTE      = 27
+    BYTES           = 1
+    DESCRIPTION     = "Item 18: The type of DRVID data collected
+                                 0  No DRVID Data
+                                6-8 Same as for Range Type (Item 16)"
+  END_OBJECT      = COLUMN
+
+  OBJECT          = COLUMN
+    COLUMN_NUMBER   = 10
+    NAME            = "STATUS BLOCK 1"
+    DATA_TYPE       = MSB_BIT_STRING
+    START_BYTE      = 28
+    BYTES           = 3
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "DOPPLER GOOD/BAD INDICATOR"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 1
+      BITS            = 1
+      DESCRIPTION     = "Item 19:  Quality of Doppler measurement."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "DOPPLER BIAS"
+      BIT_DATA_TYPE   = MSB_INTEGER
+      START_BIT       = 2
+      BITS            = 18
+      DESCRIPTION     = "Item 20:  Doppler bias."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "ANGLES GOOD/BAD INDICATOR"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 20
+      BITS            = 1
+      DESCRIPTION     = "Item 21:  Quality of angle measurements."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "FREQUENCY LEVEL INDICATOR"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 21
+      BITS            = 1
+      DESCRIPTION     = "Item 22:  Reference for frequency estimates
+                                  0  DCO Level (22 MHz)
+                                  1  Sky Level"
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "SIMULATION SYNTHESIZER INDICATOR"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 22
+      BITS            = 1
+      DESCRIPTION     = "Item 23:  Simulation synthesizer indicator."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "RECEIVER LOOP LOCK INDICATOR"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 23
+      BITS            = 1
+      DESCRIPTION = "Item 24:  Receiver loop lock indicator."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "TRANSMITTER ON/OFF INDICATOR"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 24
+      BITS            = 1
+      DESCRIPTION     = "Item 25:  Transmitter ON/OFF indicator."
+    END_OBJECT      = BIT_COLUMN
+
+  END_OBJECT      = COLUMN
+
+  OBJECT          = COLUMN
+    COLUMN_NUMBER   = 11
+    NAME            = "DATA TYPE BLOCK 2"
+    DATA_TYPE       = MSB_BIT_STRING
+    START_BYTE      = 31
+    BYTES           = 2
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "DOPPLER REFERENCE RECEIVER TYPE"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 1
+      BITS            = 6
+      DESCRIPTION     = "Item 26:  Doppler reference receiver type:
+                              2  MFR
+                              3  Block III
+                              4  Block IV
+                              5  Block V
+                              6  DGT, single station
+                              7  DGT, arrayed
+                              8  SPS, arrayed"
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "SOURCE DESIGNATION/EXCITER TYPE"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 7
+      BITS            = 6
+      DESCRIPTION     = "Item 27:  Source designation/exciter type:
+                              1  34-m or 70-m Subnet, Block III/IV Exciter
+                              2  26-m Subnet
+                              3  11-m (OVLBI, Orbiting VLBI) Subnet
+                              4  34-m or 70-m Subnet, Block V Exciter"
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "NO PROCESS FLAG AND CAUSE"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 13
+      BITS            = 4
+      DESCRIPTION     = "Item 28:  No process flag and cause:
+                              1  before AOS/after LOS
+                              2  'frozen' Doppler counter
+                              3  illegal reference frequency"
+    END_OBJECT      = BIT_COLUMN
+
+  END_OBJECT      = COLUMN
+
+  OBJECT          = COLUMN
+    COLUMN_NUMBER   = 12
+    NAME            = "SAMPLE INTERVAL"
+    DATA_TYPE       = MSB_UNSIGNED_INTEGER
+    START_BYTE      = 33
+    BYTES           = 4
+    UNIT            = CENTISECOND
+    DESCRIPTION     = "Item 29:  Sample interval."
+  END_OBJECT      = COLUMN
+
+  OBJECT          = COLUMN
+    COLUMN_NUMBER   = 13
+    NAME            = "DOPPLER COUNT OR DOWNLINK PHASE"
+    DATA_TYPE       = MSB_BIT_STRING
+    START_BYTE      = 37
+    BYTES           = 9
+    DESCRIPTION     = "To reconstruct double precision value, use
+       the three components below:
+                           (H/P)*10^6 + (I/P)*10^1 + (L/P)*10^-6
+       Unit is count."
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "DOPPLER COUNT OR DOWNLINK PHASE - H/P"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 1
+      BITS            = 24
+      DESCRIPTION     = "Item 30:  High part of Doppler count or
+         downlink phase"
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "DOPPLER COUNT OR DOWNLINK PHASE - I/P"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 25
+      BITS            = 24
+      DESCRIPTION     = "Item 31:  Intermediate part of Doppler count
+         or downlink phase"
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "DOPPLER COUNT OR DOWNLINK PHASE - L/P"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 49
+      BITS            = 24
+      DESCRIPTION     = "Item 32:  Low part of Doppler count or
+         downlink phase"
+    END_OBJECT      = BIT_COLUMN
+
+  END_OBJECT      = COLUMN
+
+  OBJECT          = COLUMN
+    COLUMN_NUMBER   = 14
+    NAME            = "RANGE"
+    DATA_TYPE       = MSB_BIT_STRING
+    START_BYTE      = 46
+    BYTES           = 9
+    DESCRIPTION     = "To reconstruct the double precision value, use the
+       three components below:
+                           (H/P)*10^6 + (I/P)*10^1 + (L/P)*10^-6
+       Unit of the reconstructed value is nanosecond (ns) if Range Type
+       (Item 16) is 1; otherwise, unit is Range-Unit (RU).  A Range-Unit
+       is approximately one nanosecond; it is defined as a function of the
+       sky frequency in Hertz (f_sky) and the uplink frequency band:
+          RU(sec) = 0.5*10^-18*f_sky         (S-Band uplink)
+                  = (11/75)*10^-18*f_sky     (HEF X-Band uplink)
+                  = (221/1498)*10^-18*f_sky  (Block-V Exciter X-Band uplink)"
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "RANGE - H/P"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 1
+      BITS            = 24
+      DESCRIPTION     = "Item 33:  High part of Range."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "RANGE - I/P"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 25
+      BITS            = 24
+      DESCRIPTION     = "Item 34:  Intermediate part of Range."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "RANGE - L/P"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 49
+      BITS            = 24
+      DESCRIPTION     = "Item 35:  Low part of Range."
+    END_OBJECT      = BIT_COLUMN
+
+  END_OBJECT      = COLUMN
+
+  OBJECT          = COLUMN
+    COLUMN_NUMBER   = 15
+    NAME            = "LOWEST RANGING COMPONENT"
+    DATA_TYPE       = MSB_UNSIGNED_INTEGER
+    START_BYTE      = 55
+    BYTES           = 1
+    DESCRIPTION     = "Item 36:  Lowest (last) ranging component."
+  END_OBJECT      = COLUMN
+
+  OBJECT          = COLUMN
+    COLUMN_NUMBER   = 16
+    NAME            = "RADIOMETRIC BLOCK"
+    DATA_TYPE       = MSB_BIT_STRING
+    START_BYTE      = 56
+    BYTES           = 125
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "UPLINK PHASE - PART 1"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 1
+      BITS            = 28
+      DESCRIPTION     = "Item 37:  Part 1 of Uplink Phase.  To reconstruct
+         quadruple precision value from four parts, use:
+         (Part 1)*2^40 + (Part 2)*2^16 + (Part 3)*2^-6 + (Part 4)*2^-32
+         Unit is cycle."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "UPLINK PHASE - PART 2"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 29
+      BITS            = 24
+      DESCRIPTION     = "Item 38:  Part 2 of Uplink Phase.  To reconstruct
+         quadruple precision variable from four parts, see Item 37."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "UPLINK PHASE - PART 3"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 53
+      BITS            = 24
+      DESCRIPTION     = "Item 39:  Part 3 of Uplink Phase.  To reconstruct
+         quadruple precision variable from four parts, see Item 37."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "UPLINK PHASE - PART 4"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 77
+      BITS            = 24
+      DESCRIPTION     = "Item 40:  Part 4 of Uplink Phase.  To reconstruct
+         quadruple precision variable from four parts, see Item 37."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "ANGLE 1"
+      BIT_DATA_TYPE   = MSB_INTEGER
+      START_BIT       = 101
+      BITS            = 24
+      UNIT            = MILLIDEGREE
+      DESCRIPTION     = "Item 41:  Depending on Angle Type (Item 17) the
+         azimuth, hour angle, or X value for the antenna."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "ANGLE 2"
+      BIT_DATA_TYPE   = MSB_INTEGER
+      START_BIT       = 125
+      BITS            = 24
+      UNIT            = MILLIDEGREE
+      DESCRIPTION     = "Item 42:  Depending on Angle Type (Item 17) the
+         elevation, declination, or Y value for the antenna."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "DOPPLER REFERENCE/RECEIVER FREQUENCY - H/P"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 149
+      BITS            = 32
+      UNIT            = HERTZ
+      DESCRIPTION     = "Item 43:  If Item 22 is 0, the high part of the
+         Doppler reference frequency (DCO is near 22 MHz).  If Item 22 is 1,
+         the sky frequency for the receiver (S-Band near 2 GHz, X-Band near
+         7 GHz, Ku-Band near 15 GHz, Ka-Band near 32 GHz).  The double
+         precision value (in Hertz) can be reconstructed using
+                         (H/P)*10^3 + (L/P)*10^-6"
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "DOPPLER REFERENCE/RECEIVER FREQUENCY - L/P"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 181
+      BITS            = 32
+      UNIT            = HERTZ
+      DESCRIPTION     = "Item 44:  Depending on Frequency Level Indicator
+         (Item 22) the low part of the Doppler reference or the
+         receiver frequency.  The double precision variable can be
+         reconstructed using the expression in Item 43."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "DRVID"
+      BIT_DATA_TYPE   = MSB_INTEGER
+      START_BIT       = 213
+      BITS            = 32
+      DESCRIPTION     = "Item 45:  Differential range versus integrated
+         Doppler (DRVID) in hundredths of a Range-Unit."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "NO. 2 MEASUREMENT - H/P"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 245
+      BITS            = 24
+      DESCRIPTION     = "Item 46:  High part of the second high-rate
+          Doppler count or downlink phase measurement.  The full
+          double precision variable can be reconstructed from
+                  (H/P)*10^6 + (I/P)*10^1 + (L/P)*10^-6
+          Unit of the reconstructed value is count."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "NO. 2 MEASUREMENT - I/P"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 269
+      BITS            = 24
+      DESCRIPTION     = "Item 47:  Intermediate part of the second
+          high-rate Doppler count or downlink phase measurement.
+          The full double precision variable can be reconstructed
+          using the equation in Item 46.  Unit of the reconstructed
+          value is count."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "NO. 2 MEASUREMENT - L/P"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 293
+      BITS            = 24
+      DESCRIPTION     = "Item 48:  Depending on the Sample Data Type ID
+          (Item 12) this can be
+            (1) the low part of the second high-rate Doppler count or
+                downlink phase measurement (the full double precision
+                variable can be reconstructed using the equation in
+                Item 46; unit is count);
+            (2) round trip light time (operator input to ranging system;
+                unit is second);
+            (3) 0.1-second Allan Deviation (unit is
+                dimensionless 10^-17); or
+            (4) 0.1-second Smoothed Noise (unit is dimensionless 10^-6)."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "NO. 3 MEASUREMENT - H/P"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 317
+      BITS            = 24
+      DESCRIPTION     = "Item 49:  High part of the third high-rate
+          Doppler count or downlink phase measurement.  The full
+          double precision variable can be reconstructed from
+                  (H/P)*10^6 + (I/P)*10^1 + (L/P)*10^-6
+          Unit is count."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "NO. 3 MEASUREMENT - I/P"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 341
+      BITS            = 24
+      DESCRIPTION     = "Item 50:  Intermediate part of the third
+          high-rate Doppler count or downlink phase measurement.
+          The full double precision variable can be reconstructed
+          using the equation in Item 49.  Unit is count."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "NO. 3 MEASUREMENT - L/P"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 365
+      BITS            = 24
+      DESCRIPTION     = "Item 51:  Depending on the Sample Data Type ID
+          (Item 12) this can be
+            (1) the low part of the third high-rate Doppler count or
+                downlink phase measurement (the full double precision
+                variable can be reconstructed using the equation in
+                Item 49; unit is count);
+            (2) time at which the integration of the last ranging
+                frequency component is completed (a round number, not
+                used for analysis; unit is second);
+            (3) 1-second Allan Deviation (unit is
+                dimensionless 10^-17); or
+            (4) 1-second Smoothed Noise (unit is dimensionless 10^-6)."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "NO. 4 MEASUREMENT - H/P"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 389
+      BITS            = 24
+      DESCRIPTION     = "Item 52:  High part of the fourth high-rate
+          Doppler count or downlink phase measurement.  The full
+          double precision variable can be reconstructed from
+                  (H/P)*10^6 + (I/P)*10^1 + (L/P)*10^-6
+          Unit is count."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "NO. 4 MEASUREMENT - I/P"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 413
+      BITS            = 24
+      DESCRIPTION     = "Item 53:  Intermediate part of the fourth
+          high-rate Doppler count or downlink phase measurement.
+          The full double precision variable can be reconstructed
+          using the equation in Item 52.  Unit is count."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "NO. 4 MEASUREMENT - L/P"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 437
+      BITS            = 24
+      DESCRIPTION     = "Item 54:  Depending on the Sample Data Type ID
+          (Item 12) this can be
+            (1) the low part of the fourth high-rate Doppler count or
+                downlink phase measurement (the full double precision
+                variable can be reconstructed using the equation in
+                Item 52; unit is count);
+            (2) T1 integration time constant (unit is second);
+            (3) 10-second Allan Deviation (unit is
+                dimensionless 10^-17); or
+            (4) 10-second Smoothed Noise (unit is dimensionless 10^-6)."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "NO. 5 MEASUREMENT - H/P"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 461
+      BITS            = 24
+      DESCRIPTION     = "Item 55:  High part of the fifth high-rate
+          Doppler count or downlink phase measurement.  The full
+          double precision variable can be reconstructed from
+                  (H/P)*10^6 + (I/P)*10^1 + (L/P)*10^-6
+          Unit is count."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "NO. 5 MEASUREMENT - I/P"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 485
+      BITS            = 24
+      DESCRIPTION     = "Item 56:  Intermediate part of the fifth
+          high-rate Doppler count or downlink phase measurement.
+          The full double precision variable can be reconstructed
+          using the equation in Item 55.  Unit is count."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "NO. 5 MEASUREMENT - L/P"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 509
+      BITS            = 24
+      DESCRIPTION     = "Item 57:  Depending on the Sample Data Type ID
+          (Item 12) this can be
+            (1) the low part of the fifth high-rate Doppler count or
+                downlink phase measurement (the full double precision
+                variable can be reconstructed using the equation in
+                Item 55; unit is count);
+            (2) T2 integration time constant (unit is second);
+            (3) 100-second Allan Deviation (unit is
+                dimensionless 10^-17); or
+            (4) 100-second Smoothed Noise (unit is dimensionless 10^-6)."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "NO. 6 MEASUREMENT - H/P"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 533
+      BITS            = 24
+      DESCRIPTION     = "Item 58:  High part of the sixth high-rate
+          Doppler count or downlink phase measurement.  The full
+          double precision variable can be reconstructed from
+                  (H/P)*10^6 + (I/P)*10^1 + (L/P)*10^-6
+          Unit is count."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "NO. 6 MEASUREMENT - I/P"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 557
+      BITS            = 24
+      DESCRIPTION     = "Item 59:  Intermediate part of the sixth
+          high-rate Doppler count or downlink phase measurement.
+          The full double precision variable can be reconstructed
+          using the equation in Item 58.  Unit is count."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "NO. 6 MEASUREMENT - L/P"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 581
+      BITS            = 24
+      DESCRIPTION     = "Item 60:  Depending on the Sample Data Type ID
+          (Item 12) this can be
+            (1) the low part of the sixth high-rate Doppler count or
+                downlink phase measurement (the full double precision
+                variable can be reconstructed using the equation in
+                Item 58; unit is count);
+            (2) T3 integration time constant (unit is second);
+            (3) 1000-second Allan Deviation (unit is
+                dimensionless 10^-17); or
+            (4) 200-second Smoothed Noise (unit is dimensionless 10^-6)."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "NO. 7 MEASUREMENT - H/P"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 605
+      BITS            = 24
+      DESCRIPTION     = "Item 61:  High part of the seventh high-rate
+          Doppler count or downlink phase measurement.  The full
+          double precision variable can be reconstructed from
+                  (H/P)*10^6 + (I/P)*10^1 + (L/P)*10^-6
+          Unit is count."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "NO. 7 MEASUREMENT - I/P"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 629
+      BITS            = 24
+      DESCRIPTION     = "Item 62:  Intermediate part of the seventh
+          high-rate Doppler count or downlink phase measurement.
+          The full double precision variable can be reconstructed
+          using the equation in Item 61.  Unit is count."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "NO. 7 MEASUREMENT - L/P"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 653
+      BITS            = 24
+      DESCRIPTION     = "Item 63:  Depending on the Sample Data Type ID
+          (Item 12) this can be
+            (1) the low part of the seventh high-rate Doppler count or
+                downlink phase measurement (the full double precision
+                variable can be reconstructed using the equation in
+                Item 61; unit is count);
+            (2) Reference (0-degree) Correlation Voltage (in millivolts); or
+            (3) 600-second Smoothed Noise (unit is dimensionless 10^-6)."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "NO. 8 MEASUREMENT - H/P"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 677
+      BITS            = 24
+      DESCRIPTION     = "Item 64:  High part of the eighth high-rate
+          Doppler count or downlink phase measurement.  The full
+          double precision variable can be reconstructed from
+                  (H/P)*10^6 + (I/P)*10^1 + (L/P)*10^-6
+          Unit is count."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "NO. 8 MEASUREMENT - I/P"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 701
+      BITS            = 24
+      DESCRIPTION     = "Item 65:  Intermediate part of the eighth
+          high-rate Doppler count or downlink phase measurement.
+          The full double precision variable can be reconstructed
+          using the equation in Item 64.  Unit is count."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "NO. 8 MEASUREMENT - L/P"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 725
+      BITS            = 24
+      DESCRIPTION     = "Item 66:  Depending on the Sample Data Type ID
+          (Item 12) this can be
+            (1) the low part of the eighth high-rate Doppler count or
+                downlink phase measurement (the full double precision
+                variable can be reconstructed using the equation in
+                Item 64; unit is count); or
+            (2) Quadrature (90-degree) Correlation Voltage (in millivolts)"
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "NO. 9 MEASUREMENT - H/P"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 749
+      BITS            = 24
+      DESCRIPTION     = "Item 67:  High part of the ninth high-rate
+          Doppler count or downlink phase measurement.  The full
+          double precision variable can be reconstructed from
+                  (H/P)*10^6 + (I/P)*10^1 + (L/P)*10^-6
+          Unit is count."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "NO. 9 MEASUREMENT - I/P"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 773
+      BITS            = 24
+      DESCRIPTION     = "Item 68:  Intermediate part of the ninth
+          high-rate Doppler count or downlink phase measurement.
+          The full double precision variable can be reconstructed
+          using the equation in Item 67.  Unit is count."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "NO. 9 MEASUREMENT - L/P"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 797
+      BITS            = 24
+      DESCRIPTION     = "Item 69:  Low part of the ninth high-rate Doppler
+          count or downlink phase measurement (the full double precision
+          variable can be reconstructed using the equation in Item 67;
+          unit is count)."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "NO. 10 MEASUREMENT - H/P"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 821
+      BITS            = 24
+      DESCRIPTION     = "Item 70:  High part of the tenth high-rate
+          Doppler count or downlink phase measurement.  The full
+          double precision variable can be reconstructed from
+                  (H/P)*10^6 + (I/P)*10^1 + (L/P)*10^-6
+          Unit is count."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "NO. 10 MEASUREMENT - I/P"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 845
+      BITS            = 24
+      DESCRIPTION     = "Item 71:  Intermediate part of the tenth
+          high-rate Doppler count or downlink phase measurement.
+          The full double precision variable can be reconstructed
+          using the equation in Item 70.  Unit is counts."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "NO. 10 MEASUREMENT - L/P"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 869
+      BITS            = 24
+      DESCRIPTION     = "Item 72:  Low part of the tenth high-rate Doppler
+          count or downlink phase measurement (the full double precision
+          variable can be reconstructed using the equation in Item 70;
+          unit is count)."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "SIGN BITS DOPPLER PSEUDORESIDUAL"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 893
+      BITS            = 4
+      DESCRIPTION     = "Item 73:  Sign bits/extension for Item 74; an
+          artifact of 36-bit binary definitions in older formats.  The
+          full value (including sign) is captured in Item 74."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "DOPPLER PSEUDORESIDUAL"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 897
+      BITS            = 32
+      UNIT            = MILLIHERTZ
+      DESCRIPTION     = "Item 74:  Doppler pseudo-residual."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "SIGN BITS RANGE PSEUDORESIDUAL"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 929
+      BITS            = 4
+      DESCRIPTION     = "Item 75:  Sign bits/extension for Item 76; an
+          artifact of 36-bit binary definitions in older formats.  The
+          full value (including sign) is captured in Item 76."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "RANGE PSEUDORESIDUAL"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 933
+      BITS            = 32
+      DESCRIPTION     = "Item 76:  Range pseudo-residual.  Unit is
+          10^-3 nanosecond if Range Type (Item 16) is set to 1; unit is
+          milli-Range-Unit for other types of range data."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "ANGLE 1 PSEUDORESIDUAL"
+      BIT_DATA_TYPE   = MSB_INTEGER
+      START_BIT       = 965
+      BITS            = 18
+      UNIT            = MILLIDEGREE
+      DESCRIPTION     = "Item 77:  Angle 1 pseudo-residual (see Item 41)."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "ANGLE 2 PSEUDORESIDUAL"
+      BIT_DATA_TYPE   = MSB_INTEGER
+      START_BIT       = 983
+      BITS            = 18
+      UNIT            = MILLIDEGREE
+      DESCRIPTION     = "Item 78:  Angle 2 pseudo-residual (see Item 42)."
+    END_OBJECT      = BIT_COLUMN
+
+  END_OBJECT      = COLUMN
+
+  OBJECT          = COLUMN
+    COLUMN_NUMBER   = 17
+    NAME            = "UPLINK BAND"
+    DATA_TYPE       = MSB_UNSIGNED_INTEGER
+    START_BYTE      = 181
+    BYTES           = 1
+    DESCRIPTION     = "Item 79: Exciter/Uplink Frequency Band.  Allowable
+       values include:
+                           0  N/A, or Ku-Band; S-Band in TRK-2-14
+                           1  S-Band
+                           2  X-Band
+                           3  Ka-Band
+                           7  S-Band in TRK-2-20"
+  END_OBJECT      = COLUMN
+
+  OBJECT          = COLUMN
+    COLUMN_NUMBER   = 18
+    NAME            = "ANGLE BLOCK"
+    DATA_TYPE       = MSB_BIT_STRING
+    START_BYTE      = 182
+    BYTES           = 1
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "ANGLE MODE"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 1
+      BITS            = 4
+      DESCRIPTION     = "Item 80:  Control mode for antenna tracking.
+         Allowable values include:
+                           0  Auto Track
+                           1  Manual Aided
+                           2  Computer
+                           3  Sidereal
+                           4  Brake"
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "CONSCAN MODE"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 5
+      BITS            = 2
+      DESCRIPTION     = "Item 81:  Conscan mode for antenna tracking.
+         Allowable values include:
+                           0  Conscan OFF
+                           1  Closed Loop
+                           2  Open Loop"
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "ANGLE 1 PSEUDORESIDUAL TOLERANCE"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 7
+      BITS            = 1
+      DESCRIPTION     = "Item 82:  Angle 1 (Item 77) Pseudo-Residual
+         Tolerance"
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "ANGLE 2 PSEUDORESIDUAL TOLERANCE"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 8
+      BITS            = 1
+      DESCRIPTION     = "Item 83:  Angle 2 (Item 78) Pseudo-Residual
+         Tolerance"
+    END_OBJECT      = BIT_COLUMN
+
+  END_OBJECT      = COLUMN
+
+  OBJECT          = COLUMN
+    COLUMN_NUMBER   = 19
+    NAME            = "DOPPLER BLOCK"
+    DATA_TYPE       = MSB_BIT_STRING
+    START_BYTE      = 183
+    BYTES           = 7
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "DOPPLER PSEUDORESIDUAL TOLERANCE"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 1
+      BITS            = 1
+      DESCRIPTION     = "Item 84:  Doppler Pseudo-Residual (Item 74)
+         Tolerance"
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "DOPPLER NOISE TOLERANCE"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 2
+      BITS            = 1
+      DESCRIPTION     = "Item 85:  Doppler Noise Tolerance"
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "PERCENTAGE USED FOR ALLAN DEVIATION"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 3
+      BITS            = 8
+      UNIT            = PERCENT
+      DESCRIPTION     = "Item 86:  Percentage of data used for Allan
+         Deviation calculation (e.g., Items 48, 51, etc.)."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "TOTAL SLIPPED CYCLES"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 11
+      BITS            = 10
+      UNIT            = CYCLE
+      DESCRIPTION     = "Item 87:  Total Slipped Cycles during Doppler Count."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "DOPPLER NOISE"
+      BIT_DATA_TYPE   = MSB_INTEGER
+      START_BIT       = 21
+      BITS            = 18
+      UNIT            = MILLIHERTZ
+      DESCRIPTION     = "Item 88:  Doppler Noise."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "RECEIVED SIGNAL STRENGTH"
+      BIT_DATA_TYPE   = MSB_INTEGER
+      START_BIT       = 39
+      BITS            = 18
+      UNIT            = CENTIDBM
+      DESCRIPTION     = "Item 89:  Received Signal Strength in hundredths
+         of dBm (deciBel referenced to one milliwatt)."
+    END_OBJECT      = BIT_COLUMN
+
+  END_OBJECT      = COLUMN
+
+  OBJECT          = COLUMN
+    COLUMN_NUMBER   = 20
+    NAME            = "EXCITER STATION DELAY"
+    DATA_TYPE       = MSB_UNSIGNED_INTEGER
+    START_BYTE      = 190
+    BYTES           = 3
+    UNIT            = NANOSECOND
+    DESCRIPTION     = "Item 90:  Exciter Station Delay."
+  END_OBJECT      = COLUMN
+
+  OBJECT          = COLUMN
+    COLUMN_NUMBER   = 21
+    NAME            = "RECEIVED STATION DELAY"
+    DATA_TYPE       = MSB_UNSIGNED_INTEGER
+    START_BYTE      = 193
+    BYTES           = 3
+    UNIT            = NANOSECOND
+    DESCRIPTION     = "Item 91:  Received Station Delay."
+  END_OBJECT      = COLUMN
+
+  OBJECT          = COLUMN
+    COLUMN_NUMBER   = 22
+    NAME            = "RANGE BLOCK"
+    DATA_TYPE       = MSB_BIT_STRING
+    START_BYTE      = 196
+    BYTES           = 1
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "RANGE MODULATION ON/OFF"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 1
+      BITS            = 1
+      DESCRIPTION     = "Item 92:  Range Modulation ON/OFF state."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "PRIME RANGING CHANNEL"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 2
+      BITS            = 1
+      DESCRIPTION     = "Item 93:  Prime Ranging Channel"
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "PIPELINING ON/OFF"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 3
+      BITS            = 1
+      DESCRIPTION     = "Item 94:  Pipelining ON/OFF state."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "CHOPPER FREQUENCY ON/OFF"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 4
+      BITS            = 1
+      DESCRIPTION     = "Item 95:  Chopper Frequency ON/OFF state."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "RANGE GOOD/BAD INDICATOR"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 5
+      BITS            = 1
+      DESCRIPTION     = "Item 96:  Range GOOD/BAD Indicator"
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "RANGE CALIBRATION TOLERANCE"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 6
+      BITS            = 1
+      DESCRIPTION     = "Item 97:  Range Calibration Tolerance"
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "RANGE CONFIGURATION CHANGE"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 7
+      BITS            = 1
+      DESCRIPTION     = "Item 98:  Range Configuration Change."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "RANGE PSEUDO-RESIDUAL TOLERANCE"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 8
+      BITS            = 1
+      DESCRIPTION     = "Item 99:  Range Pseudo-Residual Tolerance."
+    END_OBJECT      = BIT_COLUMN
+
+  END_OBJECT      = COLUMN
+
+  OBJECT          = COLUMN
+    COLUMN_NUMBER   = 23
+    NAME            = "TRANSMITTER BLOCK"
+    DATA_TYPE       = MSB_BIT_STRING
+    START_BYTE      = 197
+    BYTES           = 2
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "PSEUDO DRVID TOLERANCE"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 1
+      BITS            = 1
+      DESCRIPTION     = "Item 100:  Pseudo-DRVID Tolerance (Item 109)."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "AMPLIFIER TYPE"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 2
+      BITS            = 4
+      DESCRIPTION     = "Item 101:  Amplifier Type."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "TRANSMITTER LOW POWER INDICATOR"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 6
+      BITS            = 1
+      DESCRIPTION     = "Item 102:  Transmitter Low Power Indicator."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "TRANSMITTER POWER"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 7
+      BITS            = 10
+      UNIT            = KILOWATT
+      DESCRIPTION     = "Item 103:  Transmitter Power."
+    END_OBJECT      = BIT_COLUMN
+
+  END_OBJECT      = COLUMN
+
+  OBJECT          = COLUMN
+    COLUMN_NUMBER   = 24
+    NAME            = "RANGING EQUIPMENT DELAY"
+    DATA_TYPE       = MSB_UNSIGNED_INTEGER
+    START_BYTE      = 199
+    BYTES           = 3
+    DESCRIPTION     = "Item 104:  Ranging Equipment Delay in hundredths
+       of a Range-Unit."
+  END_OBJECT      = COLUMN
+
+  OBJECT          = COLUMN
+    COLUMN_NUMBER   = 25
+    NAME            = "MISCELLANEOUS BLOCK 1"
+    DATA_TYPE       = MSB_BIT_STRING
+    START_BYTE      = 202
+    BYTES           = 6
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "RANGE OR DRVID POWER/NOISE RATIO"
+      BIT_DATA_TYPE   = MSB_INTEGER
+      START_BIT       = 1
+      BITS            = 12
+      UNIT            = CENTIBEL
+      DESCRIPTION     = "Item 105:  Range or DRVID Power-to-Noise Ratio
+         in tenths of a dB."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "SIGN BITS FOR ITEM 107"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 13
+      BITS            = 4
+      DESCRIPTION     = "Item 106:  Sign bits/extension for Item 107;
+         an artifact of 36-bit binary definitions in older formats."
+    END_OBJECT      = BIT_COLUMN
+
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "ITEM 107"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 17
+      BITS            = 32
+      DESCRIPTION     = "Item 107:  Average Doppler Pseudo-Residual
+          (in milliHertz) or Orbiting Very Long Baseline Interferometer
+          (OVLBI) Train Axis Angle (in millidegrees)."
+    END_OBJECT      = BIT_COLUMN
+
+  END_OBJECT      = COLUMN
+
+  OBJECT          = COLUMN
+    COLUMN_NUMBER   = 26
+    NAME            = "FREQUENCY BLOCK"
+    DATA_TYPE       = MSB_BIT_STRING
+    START_BYTE      = 208
+    BYTES           = 9
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "SIGN BITS FOR ITEM 109"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 1
+      BITS            = 4
+      DESCRIPTION     = "Item 108:  Sign bits/extension for Item 109;
+         an artifact of 36-bit binary definitions in older formats."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "ITEM 109"
+      BIT_DATA_TYPE   = MSB_INTEGER
+      START_BIT       = 5
+      BITS            = 32
+      DESCRIPTION     = "Item 109:  If Item 12 is a Doppler data type,
+         the intermediate part (I/P) of Delta Frequency divided by
+         Frequency (in dimensionless units of 10^-14); the double
+         precision value can be recovered from
+                   (I/P)*10^-7 + (L/P)*10^-14
+         If Item 12 indicates range data, the Pseudo DRVID (in units
+         of hundredths of a Range-Unit)."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "SIGN BITS FOR ITEM 111"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 37
+      BITS            = 4
+      DESCRIPTION     = "Item 110:  Sign bits/extension for Item 111;
+         an artifact of 36-bit binary definitions in older formats.
+         Set to zero."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "DELTA FREQUENCY/FREQUENCY - L/P"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 41
+      BITS            = 32
+      DESCRIPTION     = "Item 111:  The low part (L/P) of Delta
+         Frequency divided by Frequency.  The double precision value
+         can be recovered using the expression in Item 109."
+    END_OBJECT      = BIT_COLUMN
+
+  END_OBJECT      = COLUMN
+
+  OBJECT          = COLUMN
+    COLUMN_NUMBER   = 27
+    NAME            = "MISCELLANEOUS BLOCK 2"
+    DATA_TYPE       = MSB_BIT_STRING
+    START_BYTE      = 217
+    BYTES           = 9
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "Z CORRECTION"
+      BIT_DATA_TYPE   = MSB_INTEGER
+      START_BIT       = 1
+      BITS            = 22
+      DESCRIPTION     = "Item 112:  Z correction in hundredths of
+         a nanosecond."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "SPACECRAFT DELAY"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 23
+      BITS            = 14
+      UNIT            = NANOSECOND
+      DESCRIPTION     = "Item 113:  Spacecraft Delay."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "RANGE OR DRVID NOISE"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 37
+      BITS            = 23
+      DESCRIPTION     = "Item 114:  Range or DRVID Noise in hundredths
+         of a Range-Unit."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "DRVID OR RANGING STATUS"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 60
+      BITS            = 1
+      DESCRIPTION     = "Item 115:  DRVID Good/Bad Indicator or Ranging
+         Assembly Status."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "RANGE OR DRVID NOISE TOLERANCE"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 61
+      BITS            = 1
+      DESCRIPTION     = "Item 116:  Range or DRVID Noise Tolerance."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "RANGE OR DRVID POWER/NOISE TOLERANCE"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 62
+      BITS            = 1
+      DESCRIPTION     = "Item 117:  Range or DRVID Power/Noise Tolerance."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "POST ACQUISITION DRVID POINTS"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 63
+      BITS            = 10
+      DESCRIPTION     = "Item 118:  Number of Post Acquisition DRVID Points."
+    END_OBJECT      = BIT_COLUMN
+
+  END_OBJECT      = COLUMN
+
+  OBJECT          = COLUMN
+    COLUMN_NUMBER   = 28
+    NAME            = "CONTROLLER OR CAUSE"
+    DATA_TYPE       = MSB_UNSIGNED_INTEGER
+    START_BYTE      = 226
+    BYTES           = 1
+    DESCRIPTION     = "Item 119:  If Item 12 is 6, the Ramp Controller
+       Indicator (RCI); allowable values are:
+                                    0  POCA
+                                    1  DCO
+                                    4  Block V Exciter
+       If Item 12 is 8 and this Item is 0, 1, or 2, the Cause of Allan
+       Deviation Report Generation (ADRG); allowable values are:
+                                    0  1000-second report
+                                    1  Doppler mode change
+                                    2  IDLE mode
+       If Item 12 is 8 and this Item is 3, the data type is radio science
+       smoothed noise."
+  END_OBJECT      = COLUMN
+
+  OBJECT          = COLUMN
+    COLUMN_NUMBER   = 29
+    NAME            = "PROGRAMMED FREQUENCY RAMP RATE - H/P"
+    DATA_TYPE       = MSB_INTEGER
+    START_BYTE      = 227
+    BYTES           = 4
+    UNIT            = "HERTZ PER SECOND"
+    DESCRIPTION     = "Item 120:  High part of Programmed Frequency Ramp
+       Rate.  To recover full double precision value (Hz/sec), use
+                             (H/P)*10^3 + (L/P)*10^-6"
+  END_OBJECT      = COLUMN
+
+  OBJECT          = COLUMN
+    COLUMN_NUMBER   = 30
+    NAME            = "ITEM 121"
+    DATA_TYPE       = MSB_INTEGER
+    START_BYTE      = 231
+    BYTES           = 4
+    DESCRIPTION     = "Item 121:  This can be one of three quantities:
+       (1) If Item 12 is 6, the Low Part (L/P) of Programmed Frequency
+           Ramp Rate; to recover the full double precision value, use
+           the expression in Item 120 (unit is Hertz per second)
+       (2) If Item 12 is 1 or 2, Received Signal Strength (unit is 2^-12 dB)
+       (3) If Item 12 is 5, Ranging Transmitter Coder In-Phase Time Offset
+           (seconds before sample time tag)"
+  END_OBJECT      = COLUMN
+
+  OBJECT          = COLUMN
+    COLUMN_NUMBER   = 31
+    NAME            = "RAMP BLOCK"
+    DATA_TYPE       = MSB_BIT_STRING
+    START_BYTE      = 235
+    BYTES           = 9
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "SIGN BITS FOR ITEM 123"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 1
+      BITS            = 4
+      DESCRIPTION     = "Item 122:  Sign bits/extension for Item 123;
+         an artifact of 36-bit binary definitions in older formats.
+         Set to zero."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "RAMP START - H/P - OR TURNAROUND RATIO"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 5
+      BITS            = 32
+      DESCRIPTION     = "Item 123:  High part of Programmed Ramp Start
+         Frequency (in Hertz) or the numerator of the Spacecraft
+         Turnaround Ratio (dimensionless).  The double precision
+         Programmed Ramp Start Frequency (Hertz) can be recovered using
+                          (H/P)*10^3 + (L/P)*10^-6
+         where (L/P) is Item 125."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "SIGN BITS FOR ITEM 125"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 37
+      BITS            = 4
+      DESCRIPTION     = "Item 124:  Sign bits/extension for Item 125;
+         an artifact of 36-bit binary definitions in older formats.
+         Set to zero."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "RAMP START - L/P"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 41
+      BITS            = 32
+      DESCRIPTION     = "Item 125:  Low part of Programmed Ramp Start
+         Frequency.  The double precision Programmed Ramp Start Frequency
+         can be recovered using the expression in Item 123."
+    END_OBJECT      = BIT_COLUMN
+
+  END_OBJECT      = COLUMN
+
+  OBJECT          = COLUMN
+    COLUMN_NUMBER   = 32
+    NAME            = "CHANGE FLAGS"
+    DATA_TYPE       = MSB_BIT_STRING
+    START_BYTE      = 244
+    BYTES           = 9
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "EXCITER FREQUENCY CHANGED FLAG"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 1
+      BITS            = 1
+      DESCRIPTION     = "Item 126:  Exciter Frequency Changed Flag."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "RECEIVER LOOP LOCK CHANGED FLAG"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 2
+      BITS            = 1
+      DESCRIPTION     = "Item 127:  Receiver Loop Lock Changed Flag."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "RECEIVER FREQUENCY CHANGED FLAG"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 3
+      BITS            = 1
+      DESCRIPTION     = "Item 128:  Receiver Frequency Changed Flag."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "TRANSMITTER ON/OFF CHANGED FLAG"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 4
+      BITS            = 1
+      DESCRIPTION     = "Item 129:  Transmitter ON/OFF Changed Flag."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "STATION DELAY(S) CHANGED FLAG"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 5
+      BITS            = 1
+      DESCRIPTION     = "Item 130:  Station Delay(s) Changed Flag."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "RAMP RATE/FREQUENCY CHANGED FLAG"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 6
+      BITS            = 1
+      DESCRIPTION     = "Item 131:  Ramp Rate/Frequency Changed Flag"
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "GROUND MODE CHANGED FLAG"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 7
+      BITS            = 1
+      DESCRIPTION     = "Item 132:  Ground Mode Changed Flag"
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "HI/LO RANGE COMPONENT CHANGED FLAG"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 8
+      BITS            = 1
+      DESCRIPTION     = "Item 133:  Highest/Lowest Ranging Component
+         Changed Flag."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "SAMPLE YEAR CHANGED FLAG"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 9
+      BITS            = 1
+      DESCRIPTION     = "Item 134:  Sample Year Changed Flag."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "Z-CORRECTION CHANGED FLAG"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 10
+      BITS            = 1
+      DESCRIPTION     = "Item 135:  Z-Correction Changed Flag."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "RAMP RECORD ADDED FLAG"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 11
+      BITS            = 1
+      DESCRIPTION     = "Item 136:  Ramp Record Added Flag."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "DOPPLER GOOD/BAD INDICATOR CHANGED FLAG"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 12
+      BITS            = 1
+      DESCRIPTION     = "Item 137:  Doppler Good/Bad Indicator
+         Changed Flag."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "RANGE GOOD/BAD INDICATOR CHANGED FLAG"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 13
+      BITS            = 1
+      DESCRIPTION     = "Item 138:  Range Good/Bad Indicator
+         Changed Flag."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "ANGLES GOOD/BAD INDICATOR CHANGED FLAG"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 14
+      BITS            = 1
+      DESCRIPTION     = "Item 139:  Angles Good/Bad Indicator
+         Changed Flag."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "TRANSMITTER/EXCITER FREQUENCY - H/P"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 15
+      BITS            = 28
+      UNIT            = HERTZ
+      DESCRIPTION     = "Item 140:  High part of the Transmitter/Exciter
+         Frequency.  The double precision value can be recovered using
+                            (H/P)*10^3 + (L/P)*10^-6
+         where (L/P) is Item 141."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "TRANSMITTER/EXCITER FREQUENCY - L/P"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 43
+      BITS            = 30
+      UNIT            = HERTZ
+      DESCRIPTION     = "Item 141:  Low part of the Transmitter/Exciter
+         Frequency.  The double precision value can be recovered using
+         the expression in Item 140."
+    END_OBJECT      = BIT_COLUMN
+
+  END_OBJECT      = COLUMN
+
+  OBJECT          = COLUMN
+    COLUMN_NUMBER   = 33
+    NAME            = "SPARE 3"
+    DATA_TYPE       = MSB_UNSIGNED_INTEGER
+    START_BYTE      = 253
+    BYTES           = 4
+    DESCRIPTION     = "Item 142:  Not used; set to zero."
+  END_OBJECT      = COLUMN
+
+  OBJECT          = COLUMN
+    COLUMN_NUMBER   = 34
+    NAME            = "SPARE 4"
+    DATA_TYPE       = MSB_UNSIGNED_INTEGER
+    START_BYTE      = 257
+    BYTES           = 4
+    DESCRIPTION     = "Item 143:  Not used; set to zero."
+  END_OBJECT      = COLUMN
+
+  OBJECT          = COLUMN
+    COLUMN_NUMBER   = 35
+    NAME            = "SPARE 5"
+    DATA_TYPE       = MSB_UNSIGNED_INTEGER
+    START_BYTE      = 261
+    BYTES           = 4
+    DESCRIPTION     = "Item 144:  Not used; set to zero."
+  END_OBJECT      = COLUMN
+
+  OBJECT          = COLUMN
+    COLUMN_NUMBER   = 36
+    NAME            = "SPARE 6"
+    DATA_TYPE       = MSB_UNSIGNED_INTEGER
+    START_BYTE      = 265
+    BYTES           = 4
+    DESCRIPTION     = "Item 145:  Not used; set to zero."
+  END_OBJECT      = COLUMN
+
+  OBJECT          = COLUMN
+    COLUMN_NUMBER   = 37
+    NAME            = "SPARE 7"
+    DATA_TYPE       = MSB_UNSIGNED_INTEGER
+    START_BYTE      = 269
+    BYTES           = 4
+    DESCRIPTION     = "Item 146:  Not used; set to zero."
+  END_OBJECT      = COLUMN
+
+  OBJECT          = COLUMN
+    COLUMN_NUMBER   = 38
+    NAME            = "SPARE 8"
+    DATA_TYPE       = MSB_UNSIGNED_INTEGER
+    START_BYTE      = 273
+    BYTES           = 4
+    DESCRIPTION     = "Item 147:  Not used; set to zero."
+  END_OBJECT      = COLUMN
+
+  OBJECT          = COLUMN
+    COLUMN_NUMBER   = 39
+    NAME            = "SPARE 9"
+    DATA_TYPE       = MSB_UNSIGNED_INTEGER
+    START_BYTE      = 277
+    BYTES           = 4
+    DESCRIPTION     = "Item 148:  Not used; set to zero."
+  END_OBJECT      = COLUMN
+
+  OBJECT          = COLUMN
+    COLUMN_NUMBER   = 40
+    NAME            = "SPARE 10"
+    DATA_TYPE       = MSB_UNSIGNED_INTEGER
+    START_BYTE      = 281
+    BYTES           = 4
+    DESCRIPTION     = "Item 149:  Not used; set to zero."
+  END_OBJECT      = COLUMN
+
+  OBJECT          = COLUMN
+    COLUMN_NUMBER   = 41
+    NAME            = "SPARE 11"
+    DATA_TYPE       = MSB_UNSIGNED_INTEGER
+    START_BYTE      = 285
+    BYTES           = 4
+    DESCRIPTION     = "Item 150:  Not used; set to zero."
+  END_OBJECT      = COLUMN
+END_OBJECT                   = TDF5_TABLE
+
+OBJECT                       = TDF6_TABLE
+  NAME                         = "END OF FILE TABLE"
+  INTERCHANGE_FORMAT           = BINARY
+  ROWS                         = 25
+  COLUMNS                      = 1
+  ROW_BYTES                    = 9
+  ROW_SUFFIX_BYTES             = 279
+  DESCRIPTION                  = "The Software End of File
+     Table marks the end of ATDF data.  It is made up of one
+     or more End of File Logical Records."
+
+  OBJECT          = COLUMN
+    COLUMN_NUMBER   = 1
+    NAME            = "LENGTH AND TYPE"
+    DATA_TYPE       = MSB_BIT_STRING
+    START_BYTE      = 1
+    BYTES           = 9
+    DESCRIPTION = "The DATA LENGTH and RECORD TYPE for the
+       End of File Logical Record are given as two
+       36-bit integer words.  Each is defined here as a 4-bit
+       spare followed by a 32-bit unsigned integer.  All are
+       assumed to be 0 in each End of File Logical Record."
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "SPARE"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 1
+      BITS            = 4
+      DESCRIPTION = "The four most significant bits of the
+         End of File Logical Record DATA LENGTH field; sign
+         extension bits, generally not used."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "DATA LENGTH"
+      BIT_DATA_TYPE   = MSB_INTEGER
+      START_BIT       = 5
+      BITS            = 32
+      DESCRIPTION = "The 32 least significant bits of
+         the End of File Logical Record DATA LENGTH field.
+         Set to 0 for each End of File Logical Record."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "SPARE"
+      BIT_DATA_TYPE   = MSB_UNSIGNED_INTEGER
+      START_BIT       = 37
+      BITS            = 4
+      DESCRIPTION = "The four most significant bits of the
+         End of File Logical Record RECORD TYPE field; sign
+         extension bits, generally not used."
+    END_OBJECT      = BIT_COLUMN
+
+    OBJECT          = BIT_COLUMN
+      NAME            = "RECORD TYPE"
+      BIT_DATA_TYPE   = MSB_INTEGER
+      START_BIT       = 41
+      BITS            = 32
+      DESCRIPTION = "The 32 least significant bits of
+         the End of File Logical Record RECORD TYPE field.
+         Set to 0 for each End of File Logical Record."
+    END_OBJECT      = BIT_COLUMN
+
+  END_OBJECT      = COLUMN
+END_OBJECT                   = TDF6_TABLE
+
+END

@@ -1,0 +1,639 @@
+PDS_VERSION_ID                    = PDS3
+LABEL_REVISION_NOTE               = "E. BARBINIS, 2003-10-01
+                                     S.L.Adams, 2003-11-20
+                                       formatted for ingestion,
+                                       added ARCHIVE_STATUS keyword"
+RECORD_TYPE                       = STREAM
+
+OBJECT                            = DATA_SET
+ DATA_SET_ID                      = "CO-SS-RSS-1-SCE1-V1.0"
+
+ OBJECT                           = DATA_SET_INFORMATION
+  DATA_SET_NAME                   = "CASSINI RSS RAW DATA SET - SCE1 V1.0"
+  DATA_SET_COLLECTION_MEMBER_FLG  = "N"
+  ARCHIVE_STATUS                  = "LOCALLY ARCHIVED"
+  DATA_OBJECT_TYPE                = TABLE
+  START_TIME                      = 2002-06-06
+  STOP_TIME                       = 2002-07-05
+  DATA_SET_RELEASE_DATE           = 2005-07-01
+  PRODUCER_FULL_NAME              = "ELIAS BARBINIS"
+  DETAILED_CATALOG_FLAG           = "N"
+  DATA_SET_TERSE_DESC             = "Cassini RSS SCE1 raw data."
+  ABSTRACT_DESC                   = "The first Cassini Solar Conjunction
+                                     Experiment (SCE1) Raw Data Archive is
+                                     a time-ordered collection of radio
+                                     science raw data acquired during the
+                                     Quiet Cruise subphase of the Cassini
+                                     mission."
+  DATA_SET_DESC                   = "
+
+
+    Data Set Overview
+    =================
+      The first Cassini Solar Conjunction Experiment (SCE1) Raw Data
+      Archive is a time-ordered collection of radio science raw data
+      acquired during the Quiet Cruise subphase of the Cassini mission.
+      The DATA_SET_ID 'CO-SS-RSS-1-SCE1-V1.0' includes the following
+      components:
+          Instrument host (i.e., 'CO' for CASSINI ORBITER)
+          Target (i.e., 'SS' for Solar System)
+          Instrument (i.e., 'RSS' for Radio Science Subsystem)
+          Data processing level number (i.e., '1')
+          Description (i.e., 'SCE1')
+          Version number (i.e., 'V1.0')
+
+      Two types of measurements were obtained; these are known
+      as closed-loop and open-loop recordings.  The closed-loop
+      system uses a phase-lock loop in the receiver to track the
+      downlink signal, reporting both amplitude and frequency 10
+      times per second.  In the open-loop system, the signal is
+      simply converted to a baseband frequency range; the entire
+      passband is sampled and recorded at 1000 samples per second.
+
+      The data set includes three primary data types.  Archival Tracking
+      Data Files (ATDFs or TDFs) are the most primitive (and most
+      voluminous) product of the closed-loop system. Orbit Data Files
+      (ODFs) are compressed versions of ATDFs, specifically targeted to
+      spacecraft navigators and scientists interested in gravity fields.
+      Radio Science Receiver (RSR) files are the primary data type from
+      the open-loop system.
+
+
+    Parameters
+    ==========
+      The ATDF is the primary output from the Cassini closed-loop system.
+      Each ATDF in the data set is accompanied by a full PDS label which
+      defines both the content and the format (at the bit level) of the
+      file.  ATDF data fields include:
+           High- or low-rate Doppler
+           Range
+           Uplink frequencies (ramps)
+           Differential Range vs Integrated Doppler (DRVID)
+           Allan deviation
+           Smoothed noise
+      Other information in ATDF data records includes sample date and
+      time; spacecraft ID; ground station and its configuration;
+      status flags and values reported by various ground systems;
+      calibration values, noise estimates, and tolerances (station
+      delay, transmitter power, etc.); and signal strength.
+
+      The ODF is a compressed version of the ATDF.  It contains the most
+      important information (range, Doppler and frequency ramps) needed by
+      spacecraft navigators, and investigators interested in determining
+      gravitational fields.  Each ODF is accompanied by a full PDS label
+      which describes both the content and format of the associated file.
+      ODF data fields include:
+           One-way Doppler (Hertz)
+           Two-way Doppler (Hertz)
+           Three-way Doppler (Hertz)
+           SRA planetary operational discrete spectrum range (range
+                units)
+
+      The Radio Science Receiver (RSR) files are the primary output
+      from the Cassini open-loop system and they contain 16-bit samples
+      of receiver output. Each RSR file is accompanied by a full PDS label
+      which describes both the content and format of the file at the
+      bit level.
+
+
+    Processing
+    ==========
+      The open-loop Radio Science Receiver (RSR) files are screened for
+      gaps.  No gaps were found in the RSR files for SCE1.
+
+      ATDFs are screened for data/contents problems, which are corrected
+      if/as possible before the files are released by the JPL multimission
+      Radio Metric Data Conditioning Team (RMDCT).
+
+      ODFs are abstracted from subsets of ATDF data by the RMDCT.
+
+      The closed-loop Tracking Data Files (TDFs = ATDFs) and Orbit Data
+      Files (ODFs) for Cassini SCE1 are constructed to contain the data
+      for a single day (approximately).  Specifically, the file for any
+      day consists of the Goldstone data (which started around 0-hour of
+      that day, but possibly as much as 2 hours earlier), the subsequent
+      Canberra data (which occurred around midday), and the Madrid data
+      (which occurred during the final several hours of the day, but
+      possibly into the next day) through end of track.  This results
+      in two items that require special attention when processing the
+      TDF data files:
+
+1.  There are extraneous Madrid data at the beginning of the
+file (which overlap Goldstone data, by about 20 minutes)
+that can not be processed because the required uplink
+information (ramps table) is not present -- these same
+Doppler data are present, and must be processed, on the
+preceding day's TDF (at the end).
+
+2.  Likewise, the 3-way Doppler for Goldstone at the beginning
+of the file can not be processed because it, too, requires
+the Madrid uplink information; and must, therefore, also
+be processed on the preceding day's TDF (at the end).
+
+      This is presented graphically in the following diagram (where ':'
+      denotes station Transmitter handover):
+
+
+ATDF Contents:
+--------------
+                                  3-way  2-way
+                                 |-:---|----:-|
+                                    Canberra
+  3-way            2-way                                       3-way
+ |-:---|---------------------------:-|                        |-:---|...
+                Goldstone                                     Goldstone
+2-way                                      3-way    2-way
+...:-|                                    |-:---|---------------:-|
+Madrid                                             Madrid
+
+
+Processing:
+-----------
+
+ N-1                                                              N+1
+------>|                           N                          (^^^^^|-->
+(^^^^^|----------------------------------------------------------->|
+   u/l                        ~24 hours
+
+
+    Primary Data
+    ============
+      The primary data are stored on DVD volumes in subdirectories TDF,
+      ODF, and RSR in per-day directories SCE1_ddd (where ddd specifies
+      the day of year based on the start time of the data). Users should
+      refer to the INDEX/CUMINDEX.TAB listing to locate primary data files.
+
+      ATDFs are stored in the TDF directory on archival volumes.
+      File names are of the form sssttaayyyy_ddd_hhmmxuuwVn.TDF,
+      where 'sss' is the sequence/orbit id (e.g., C32), 'tt' is the
+      target id (e.g., EA),'aa' is the activity/experiment id (e.g., SC),
+      'yyyy_ddd_hhmm' is the date and time for the start of included data
+      (e.g., 2002_160_0000), 'xuu' is the transmitter band and uplink
+      station (e.g., K25), 'w' is the ground mode or 'way'
+      (e.g., 2 for 2-way) and Vn is the file version number (e.g., V0).
+      The PDS label has file name sssttaayyyy_ddd_hhmmxuuwVn.LBL.
+      The typical ATDF contains about 46 Mbytes.
+
+      ODFs are stored in the ODF directory on archival volumes.
+      File names are of the form sssttaayyyy_ddd_hhmmxuuwVn.ODF.
+      The PDS label has file name sssttaayyyy_ddd_hhmmxuuwVn.LBL.
+      The typical ODF contains about 3 Mbytes.
+
+      RSR files are stored in the RSR directory on archival volumes.
+      File names are of the form sssttaayyyy_ddd_hhmmxuudrrD.rcs,
+      where 'drr' is the downlink band and receiving station (e.g., K25)
+      and 'rcs' is the RSR, channel and subchannel that were used to
+      collect the data (e.g., 1A1). The PDS label has file name
+      sssttaayyyy_ddd_hhmmxuudrrD.LBL. The typical RSR contains from
+      about 30 Mbytes to about 165 Mbytes depending Doppler mode and
+      station (i.e., track duration).
+
+
+    Secondary Data
+    ==============
+      Secondary data are needed for proper analysis and interpretation
+      of the radio data (file types TDF, ODF, and RSR). Secondary data
+      that cover a time span of less than 24 hours are stored in
+      subdirectories of SCE1_ddd (i.e., 158, 515, PD1, PD2 and TLM).
+      Secondary data that cover a time span greater than 24 hours are
+      provided in subdirectories CKF, EOP, ION, SPK and TRO in the
+      SCE1_ANCILLARY directory. Users should refer to the
+      INDEX/CUMINDEX.TAB listing to locate secondary data files.
+
+      0158-Monitor Files (158 Directory)
+      ---------------------------------------------------
+        0158-Monitor files are ASCII files with names
+        sssttaayyyy_ddd_hhmm_hhmmrr.158 where 'hhmm_hhmm' is the start
+        and end time of the file and 'rr' is the receiving station.
+        They are channelized DSN Monitor Data files (new format) and
+        they are produced at JPL by a Query Server operating on DSN Monitor
+        packets stored in the JPL Telemetry Delivery System (TDS) Data
+        Base.  Each 0158-Monitor file is accompanied by a PDS label
+        with file name sssttaayyyy_ddd_hhmm_hhmmrr.LBL. Typical file size
+        is 10 MB. The available 0158-Monitor channels, their names, and
+        definitions are:
+
+
+            0158-Monitor     Name     Definition
+            Channel #
+
+            M-0804          AZESTMP1  Average monopulse receiver estimated
+                                      azimuth error - first second
+            M-0805          ELESTMP1  Average monopulse receiver estimated
+                                      elevation error - first second
+            M-0806          AZESTMP2  Average monopulse receiver estimated
+                                      azimuth error - second second
+            M-0807          ELESTMP2  Average monopulse receiver estimated
+                                      elevation error - second second
+            M-0808          AZESTMP3  Average monopulse receiver estimated
+                                      azimuth error - third second
+            M-0809          ELESTMP3  Average monopulse receiver estimated
+                                      elevation error - third second
+            M-0810          AZESTMP4  Average monopulse receiver estimated
+                                      azimuth error - fourth second
+            M-0811          ELESTMP4  Average monopulse receiver estimated
+                                      elevation error - fourth second
+            M-0812          AZESTMP5  Average monopulse receiver estimated
+                                      azimuth error - fifth second
+            M-0813          ELESTMP5  Average monopulse receiver estimated
+                                      elevation error - fifth second
+            M-0814          AZCORMP   Accumulated azimuth correction
+            M-0815          ELCORMP   Accumulated elevation correction
+            M-0816          AALPHA    Aberration angle off boresight
+            M-0817          ABETA     Aberration clock angle of uplink beam
+            M-0818          CNSCNTYP  Conscan type
+            M-0819          RCVSNR    Monopulse Receiver SNR
+            M-0820          ABCX      Aberration table x-position
+            M-0821          ABCY      Aberration table y-position
+            M-0822          ABER      Aberration correction
+
+
+      MON-5-15 Files (515 Directory)
+      ---------------------------------------------------
+        MON-5-15 files are ASCII files with names
+        sssttaayyyy_ddd_hhmm_hhmmrr.515 where 'hhmm_hhmm' is the start
+        and end time of the file and 'rr' is the receiving station.
+        They are channelized DSN Monitor Data files (old format) and they
+        are produced at JPL by a Query Server operating on DSN Monitor
+        packets stored in the JPL Telemetry Delivery System (TDS) Data
+        Base.  Each MON-5-15 file is accompanied by a PDS label with
+        file name sssttaayyyy_ddd_hhmm_hhmmrr.LBL. Typical file size
+        is 25 MB. The available MON-5-15 channels, their names,
+        and definitions are:
+
+         MON-5-15      Name          Definition
+         Channel #
+
+         M-0037        SC_NUM        Spacecraft Code
+         M-0300        ANT A ID      Receiving Antenna 'A' ID
+         M-0301        ANT A EL VAL  Parameter Descriptor Word (PDW)
+                                     Validity Field for Receiving
+                                     Antenna 'A' Elevation Angles
+         M-0304        ANT A EL ANG  Receiving Antenna 'A' Elevation
+                                     Angle in Floating Point Format
+                                     in Units of Degrees
+         M-0308        A CNSCN       Receiving Antenna 'A' Conscan Drive
+                                     Status
+         M-0309        A CNSCN LOOP  Receiving Antenna 'A' Conscan
+                                     Loop Status
+         M-0340        A A VAL       PDW Validity Field for Receiving
+                                     Antenna 'A' Receiver 'A'
+         M-0343        A RCVA LOCK   Receiving Antenna 'A' Receiver 'A'
+                                     Lock Status
+         M-0344        A RCVA STAT   Receiving Antenna 'A' Receiver 'A'
+                                     Status
+         M-0346        A RCVA BAND   Receiving Antenna 'A' Receiver 'A'
+                                     Band
+         M-0349        A RCVA AGC    Receiving Antenna 'A' Receiver 'A'
+                                     Signal Level Auto Gain Control (AGC)
+         M-0350        A A PPM VAL   Validity Field for Receiving Antenna
+                                     'A' Precision Power Monitor (PPM) Data
+         M-0370        A B VAL       PDW Validity Field for Receiving
+                                     Antenna 'A' Receiver 'B'
+         M-0373        A RCVB LOCK   Receiving Antenna 'A' Receiver 'B'
+                                     Lock Status
+         M-0374        A RCVB STAT   Receiving Antenna 'A' Receiver 'B'
+                                     Status
+         M-0376        A RCVB BAND   Receiving Antenna 'A' Receiver 'B'
+                                     Band
+         M-0379        A RCVB AGC    Receiving Antenna 'A' Receiver 'B'
+                                     Signal Level AGC
+         M-0380        A B PPM VAL   Validity Field for Receiving Antenna
+                                     'A' Receiver 'B' PPM Data
+         M-0215        RTC2 LOCK     Real-Time Telemetry Combiner (RTC)
+                                     Channel 2 Lock Status
+         M-0311        A C1 DOP MD   Doppler Mode Antenna 'A' Channel 1,
+                                     S Band
+         M-0312        A C1 REQ DOP  Requested Doppler Sample Rate Antenna
+                                     'A' Channel 1
+         M-0314        A C2 DOP MD   Doppler Mode Antenna 'A' Channel 2,
+                                     X Band
+         M-0315        A C2 REQ DOP  Requested Doppler Sample Rate Antenna
+                                     'A' Channel 2
+         M-0500        TXR ANT ID    Transmitting Antenna ID
+         M-0501        L TXR VAL     Validity Field for Low-Power
+                                     Transmitter Data
+         M-0504        L PWR TXR ID  Transmitter ID
+         M-0509        L PWR TX PWR  Transmitter Power
+         M-0511        H TXR VAL     Validity Field for High-Power
+                                     Transmitter Data
+         M-0524        EXCITER FREQ  Exciter Frequency
+         M-0600        DOP VAL       Validity Field for Doppler Data from
+                                     the Metric Data Assembly (MDA) Data
+         M-0612        DOP BIAS X    X Band Doppler Bias Frequency
+         M-0611        DOP NOISE X   X Band Doppler Noise
+         M-0613        NUM SLIP X    X Band # Slipped Cycles
+         M-0614        DOP RES X     X Band Doppler Residual
+         M-0626        DOP CNT X     X Band Doppler Count
+         M-0627        DOP CNT X FR  Fractional Part of X Band Doppler
+                                     Count
+         M-0605        RNG VAL       Validity Field for Range Data from the
+                                     MDA Data
+
+         M-0320        APA A VAL     Validity Field for Antenna Processing
+                                     Assembly (APA) Antenna 'A' Angles
+         M-0305       ANT A AZ ANG   Receiving Antenna 'A' Azimuth Angle
+                                     in Double Integer Format in Units
+                                     of Degrees
+         M-0306       ANT A AZ RES   Receiving Antenna 'A' Azimuth Angle
+                                     Residual
+         M-0324       ANT A EL ANG   Receiving Antenna 'A' Elevation Angle
+                                     in Double Integer Format in Units of
+                                     Degrees.
+         M-0307       ANT A EL RES   Receiving Antenna 'A' Elevation Angle
+                                     Residual
+         M-0660       SBR MOV        Subreflector Moving Message Moving
+                                     Flag
+         M-0663       SBR MOV TIME   Time of Latest Subreflector Moving
+                                     Message Received for M-0660
+         M-0670       SBR FIX        Subreflector Fixed Message Moving Flag
+         M-0673       SBR FIX TIME   Time of Latest Subreflector Moving
+                                     Message Received for M-0670
+         M-0723       AA5 PCNO       Antenna A Receiver A Block V
+                                     Receiver (BVR) Channel Signal-to-Noise
+                                     Ratio
+         M-0724       AA5 SNT VAL    Antenna A Receiver A BVR Validity
+                                     Field for BVR System Noise Temperature
+                                     Data
+         M-0725       AA5 SNT        Antenna A Receiver A BVR System
+                                     Noise Temperature
+         M-0739       AA5 LBW        Antenna A Receiver A BVR Carrier
+                                     Loop Bandwidth
+         M-0773       AB5 PCNO       Antenna A Receiver B Block V
+                                     Receiver (BVR) Channel Signal-to-Noise
+                                     Ratio
+         M-0774       AB5 SNT VAL    Antenna A Receiver B BVR Validity
+                                     Field for BVR System Noise Temperature
+                                     Data
+         M-0775       AB5 SNT        Antenna A Receiver B BVR System
+                                     Noise Temperature
+         M-0789       AB5 LBW        Antenna A Receiver A BVR Carrier
+                                     Loop Bandwidth
+         M-0616       RNG MOD X      X Band Ranging Modulation Indicator
+         M-0316       ANT A SRC      Antenna A Source Code
+         M-0310       A POL S BD     Antenna A Polarization, S-Band
+         M-0313       A POL X BD     Antenna A Polarization, X-Band
+
+
+      Path Delay Files (PD1 and PD2 Directories)
+      -----------------------------------------------------------
+       Path Delay files are ASCII files and they are produced by the
+       RSSG at JPL. File names have the form
+       sssttaayyyy_ddd_hhmm_hhmmrr.PD1 (stored in the PD1 directory - the
+       '1' in 'PD1' indicates that the data have been collected from
+       Advanced Water Vapor Radiometer (AWVR) Unit 1) and
+       sssttaayyyy_ddd_hhmm_hhmmrr.PD2 (stored in the PD2 directory - the
+       '2' in 'PD2' indicates that the data have been collected from AWVR
+       Unit 2) where 'hhmm_hhmm' is the start and end time of the data
+       and rr is the receiving station. Each Path Delay file
+       is accompanied by a PDS  minimal label with file name
+       sssttaayyyy_ddd_hhmm_hhmmrr.LBL. Typical file size is 135 KB.
+
+
+      Telemetry Files (TLM Directory)
+      ---------------------------------------------------
+        Telemetry files are ASCII files with names
+        sssttaayyyy_ddd_hhmm_hhmm.TLM where 'hhmm_hhmm' is the start and
+        end time of the file. They are channelized DSN Telemetry Data files
+        and they are produced at JPL by a Query Server operating on DSN
+        Telemetry packets stored in the JPL Telemetry Delivery System (TDS)
+        Data Base. Each Telemetry file is accompanied by a PDS label
+        with file name sssttaayyyy_ddd_hhmm_hhmm.LBL. Typical file size
+        is 50 MB. The available Telemetry channels, their names and
+        definitions are:
+
+
+              Telemetry        Name              Definition
+              Channel #
+
+              S-0181           KAT_UNLOCK        Ka-Band Translator (KAT)
+                                                 Receiver Lock Latch
+              S-0182           SBT_STATE_SW      S-Band Transmitter (SBT)
+                                                 On/Off State
+                                                 (Commanded Mode)
+              S-0183           KAT_STATE_SW      KAT On/Off State
+                                                 (Commanded Mode)
+              S-0185           KEX_STATE         Ka-Band Exciter (KEX)
+                                                 On/Off State
+              S-0186           KAT_STATE_HW      KAT Off/On
+                                                 (Actual Status)
+              S-0188           KTWT_SBY_HW       Ka-Band Traveling Wave
+                                                 Tube Amplifier (KATWTA)
+                                                 Standby Enable/Inhibit
+                                                 (Actual Status)
+              S-0189           KAT_RCVR_LCK      KAT Receiver
+                                                 Locked/Unlocked
+              S-0190           SBT_STATE_HW      SBT Off/On
+                                                 (Actual Status)
+              S-0191           SBT_REF_HW        SBT Reference
+                                                 (Actual Status)
+              S-0192           SBT_REF_SW        SBT Reference
+                                                 (Commanded Mode)
+              S-0193           KTWT_SBY_SW       KATWTA Standby
+                                                 Enable/Inhibit
+                                                 (Commanded Mode)
+              S-0166           KTWT_P_IN_r       KATWTA Input Power Level
+                                                 (Residual)
+              S-0164           KTWT_P_OUT_r      KATWTA Output Power Level
+                                                 (Residual)
+              S-0100           KAT_SPE_a         KAT Receiver Static Phase
+                                                 Error (Telemetry Control
+                                                 Unit (TCU) A)
+              S-0102           SBT_P_OUT_a       SBT Output Power
+                                                 Level (TCU A)
+              S-0104           KEX_P_OUT_a       KEX Output Power
+                                                 Level (TCU A)
+              S-0106           KEX_X_PWR_a       KEX X-Band Power
+                                                 Level (TCU A)
+              S-0108           KEX_PCV_a         KEX Power Conv
+                                                 Voltage (TCU A)
+              S-0112           KTWT_HLX_I_a      KATWTA Helix
+                                                 Current (TCU A)
+              S-0114           KTWT_P_OUT_a      KATWTA Output
+                                                 Power Level (TCU A)
+              S-0116           KTWT_P_IN_a       KATWTA Input
+                                                 Power Level (TCU A)
+              S-0118           KTWT_CTH_I_a      KATWTA Cathode
+                                                 Current (TCU A)
+              S-0120           KAT_TEMP_a        KAT Temperature (TCU A)
+              S-0122           SBT_TEMP_a        SBT Temperature (TCU A)
+              S-0124           KTWT_TEMP_a       KATWTA Temperature (TCU A)
+              S-0126           KEX_TEMP_a        KEX Temperature (TCU A)
+              S-0128           KTWT_CURR_a       KATWTA Prime Current
+                                                 (TCU A)
+
+
+      C-Kernel Files (CKF Directory)
+      ---------------------------------------------------
+        C-Kernel Files are in transfer format and they are produced by the
+        Cassini Attitude and Articulation Control Subsystem team (AACS).
+        File names have the form sssttaayyyy_ddd_yyyy_ddd.CKF where
+        'yyyy_ddd_yyyy_ddd is the start and end time of the file. Each
+        C-Kernel file is accompanied by a PDS minimal label with file name
+        sssttaayyyy_ddd_yyyy_ddd.LBL. Typical file size is 18 MB.
+
+
+      Earth Orientation Parameter files (EOP Directory)
+      ---------------------------------------------------
+        Earth Orientation Parameter files are ASCII files and they are
+        produced by the Kalman Earth Orientation Filter (KEOF) Group
+        at JPL. File names have the form sssttaayyyy_ddd_yyyy_ddd.EOP.
+        Each EOP file is accompanied by a PDS minimal label with file
+        name sssttaayyyy_ddd_yyyy_ddd.LBL.  Typical file size is 24 KB.
+
+
+      Ionosphere Calibration Files (ION Directory)
+      ---------------------------------------------------
+        Ionosphere Calibration files are produced by the Tracking
+        System Analytic Calibration (TSAC) Group at JPL.  They provide
+        historical and predicted Earth ionospheric conditions.
+        File names have the form sssttaayyyy_ddd_yyyy_ddd.ION.
+        Each ION file is accompanied by a PDS minimal label with file
+        name sssttaayyyy_ddd_yyyy_ddd.LBL. Typical file size is 23 KB.
+
+
+      Spacecraft/Planetary Ephemeris (SP-Kernel) Files (SPK Directory)
+      ----------------------------------------------------------
+        Spacecraft/Planetary Ephemeris Files (also known as SP kernels
+        or SPK files) are produced by the Cassini Navigation Team
+        (NAV).  These files give spacecraft and planetary ephemerides.
+        File names have the form sssttaayyyy_ddd_yyyy_ddd.SPK. One SPK
+        file has been included, covering SCE1 (file size 27KB).
+        This SPK file is accompanied by a PDS minimal label with file name
+        having the form sssttaayyyy_ddd_yyyy_ddd.LBL.
+
+
+      Troposphere Calibration Files (TRO Directory)
+      ---------------------------------------------------
+        Troposphere Calibration files are produced by the
+        Tracking System Analytic Calibration (TSAC) Group at JPL.
+        They provide historical and predicted Earth tropospheric
+        conditions.  File names have the form sssttaayyyy_ddd_yyyy_ddd.TRO.
+        Each TRO file is accompanied by a PDS minimal label with file name
+        sssttaayyyy_ddd_yyyy_ddd.LBL. Typical file size is 120 KB.
+
+
+    Files in the CALIB Directory
+    =============================
+       The CALIB directory contains a Leapsecond kernel file, a Spacecraft
+       Clock Conversion file, and a Boresight Calibration Report. All files
+       in the CALIB directory are ASCII text files with variable length
+       records delimited by ASCII carriage-return line-feed pairs. All file
+       names in this directory contain the string 'yymmdd', where yy, mm,
+       dd indicate the year, month and day of the file creation.
+
+       Leapsecond kernel files are a record of leap seconds (past and
+       predicted) that allow proper conversion between ephemeris time
+       and UTC. File names are of the form:
+
+                 LSK_yymmdd.TLS
+
+       Each file LSK_yymmdd.TLS is accompanied by a PDS detached minimal
+       label with name LSK_yymmdd.LBL.
+
+       Spacecraft Clock Conversion files allow time measured by the
+       spacecraft clock to be converted to other time systems (e.g.,
+       ephemeris time or UTC). File names are of the form:
+
+                 TSC_yymmdd.SCK
+
+       Each file TSC_yymmdd.SCK is accompanied by a PDS detached minimal
+       label with name TSC_yymmdd.LBL.
+
+       The Boresight Calibration Reports are produced by the Radio Science
+       Systems Group (RSSG) at JPL.  The naming convention for these files
+       is:
+
+       BORESIGHT_yymmdd.TXT
+
+
+    Coordinate System
+    =================
+      SPK files are produced in the J2000 inertial
+      reference frame. Other data types are not dependent on any
+      definition of a coordinate system.
+
+
+    Software
+    ========
+      Software for parsing, reducing, and analyzing data such as
+      these has been developed at JPL and elsewhere. Because such
+      software must usually operate at the bit-level and is written
+      for a narrow range of platforms, it is unsuitable for
+      general distribution. As such, no software is included with
+      this archival data set.
+
+
+    Media/Format
+    ============
+      The archival data set is written on DVD-R media. The DVD-R volumes
+      conform to the 'UDF_ISO-9660_BRIDGE' structure as required by PDS."
+
+
+  CONFIDENCE_LEVEL_NOTE           = "
+
+    Overview
+    ========
+      In general, this is a good data set.
+
+
+    Review
+    ======
+      This archival data set was reviewed by the Cassini Radio Science
+      Team prior to submission to the Planetary Data System (PDS).
+
+
+    Data Coverage and Quality
+    =========================
+      The data are contained in eight volumes (DVDs).
+      The table below lists the eight volumes and their respective
+      contents.
+
+
+      VOLUME_ID      Start Date           End Date
+      ---------  ------------------- -------------------
+CORS_0021  2002-06-06 (02/157) 2002-06-09 (02/160)
+CORS_0022  2002-06-10 (02/161) 2002-06-13 (02/164)
+CORS_0023  2002-06-14 (02/165) 2002-06-17 (02/168)
+CORS_0024  2002-06-18 (02/169) 2002-06-21 (02/172)
+CORS_0025  2002-06-22 (02/173) 2002-06-25 (02/176)
+CORS_0026  2002-06-26 (02/177) 2002-06-29 (02/180)
+CORS_0027  2002-06-30 (02/181) 2002-07-03 (02/184)
+CORS_0028  2002-07-04 (02/185) 2002-07-05 (02/186)
+
+      There are no known problems with this data set.
+
+
+    Limitations
+    ===========
+      The limitations in this data set follow from the quality of
+      the execution, which is described above under Data Coverage
+      and Quality."
+
+
+END_OBJECT                        = DATA_SET_INFORMATION
+
+OBJECT                            = DATA_SET_MISSION
+ MISSION_NAME                     = "CASSINI-HUYGENS"
+END_OBJECT                        = DATA_SET_MISSION
+
+ OBJECT                           = DATA_SET_TARGET
+  TARGET_NAME                     = UNK
+ END_OBJECT                       = DATA_SET_TARGET
+
+ OBJECT                           = DATA_SET_HOST
+  INSTRUMENT_HOST_ID              = "CO"
+  INSTRUMENT_ID                   = RSS
+ END_OBJECT                       = DATA_SET_HOST
+
+ OBJECT                           = DATA_SET_REFERENCE_INFORMATION
+  REFERENCE_KEY_ID                = "KLIOREETAL2000"
+ END_OBJECT                       = DATA_SET_REFERENCE_INFORMATION
+
+ OBJECT                           = DATA_SET_REFERENCE_INFORMATION
+  REFERENCE_KEY_ID                = "ARMSTRONG1998"
+ END_OBJECT                       = DATA_SET_REFERENCE_INFORMATION
+
+END_OBJECT                        = DATA_SET
+
+END

@@ -1,0 +1,106 @@
+PDS_VERSION_ID        = PDS3
+RECORD_TYPE           = STREAM
+OBJECT                = TEXT
+  INTERCHANGE_FORMAT    = ASCII
+  PUBLICATION_DATE      = 2002-11-01
+  NOTE                  = "N/A"
+END_OBJECT            = TEXT
+
+END
+
+       The RSR Validation Log describes the contents of the data
+found in the RSR data file. This summary is formatted as follows:
+
+DATE OF GENERATION: dow mon dd hh:mm:ss yyyy
+REPORT FOR FILE: "<RSR_FILENAME>"
+
+Start Time: yyyy doy hh:mm:ss
+End Time  : yyyy doy hh:mm:ss   Elapsed Time : #### seconds
+Pass No.: ####                  Tracking Mode: #-Way
+Spacecraft No.: ##              DSS No.: ##
+RSR ID: # Sub #                 Processing Center: ##
+Sample Rate: #### per second    Sample Resolution: ## bit
+Uplink Band: <BAND>             Downlink Band: <BAND>
+First Record Seq. No.: ####     Last Record Seq. No.: ####
+Gaps Found: #                   Data Errors: #
+
+The following is a description of all fields found in the summary:
+
++ DATE OF GENERATION
+  - This is the date that the Summary Log was generated. The format of the
+    date given is:
+      dow  - day of week, 3 letter abbreviation. e.g., Mon
+      mon  - month, 3 letter abbreviation. e.g., Jan
+      dd   - day of month, 2 digit number, valued 01-31
+      hh   - hour of day, 2 digit number, valued 00-23
+      mm   - minute of day, 2 digit number, valued 00-59
+      ss   - second of day, 2 digit number, valued 00-60
+      yyyy - year, 4 digit number, valued 1900-2100
++ REPORT FOR FILE
+  - This indicates the name of the RSR data file which is summarized. The
+     filename is enclosed in double quotes.
++ Start Time
+  - Indicates the time of the first data value in the RSR file. The format of
+     the date given is:
+      yyyy - year, 4 digit number, valued 1900-2100
+      doy  - day of year, 3 digit number, valued 001-366
+      hh   - hour of day, 2 digit number, valued 00-23
+      mm   - minute of day, 2 digit number, valued 00-59
+      ss   - second of day, 2 digit number, valued 00-60
++ End Time
+  - Indicates the time of the last data value in the RSR file. The format of
+     the date given is the same as the "Start Time"
++ Elapsed Time
+  -.Indicates the number of seconds that data was recorded for in the RSR
+    file.
+  - This time is equal to the "End Time" minus the "Start Time".
+  - If there is a gap in the data, this is NOT reflected in the Elapsed Time.
+  - The number given is in integer seconds, and can be from 1 to 10 digits,
+     although there will be a maximum of 5 digits under normal circumstances.
++ Pass No.
+  - Indicates the pass number of the spacecraft.
+  - The number given is an integer, ranging from 0 to 9999
++ Tracking Mode
+  - Indicates the type of signal propagation used during the pass.
+  - The number value will be 1,2, or 3
++ Spacecraft No.
+  - Indicates the two digit integer code used to identify the spacecraft
+  - Values range from 00 to 99
++ DSS No.
+  - Indicates the integer code of the Deep Space Station used in the downlink
+     signal reception.
++ RSR ID
+  - Describes the Radio Science Receiver used to record the data.
+  - The value of the first number is either 1 or 2
+  - The value of the second number ranges from 1 to 8
++ Processing Center
+  - Indicates the integer code used to describe the DSN Processing Center
+  - Valid values are: 10, 40, 60, and 21
++ Sample Rate
+  - Indicates the number of I and Q samples recorded per second
+  - Valid values are: 1000, 2000, 4000, 8000, 16000, 25000, 50000, 100000,
+     250000, 500000, 1000000, 2000000, 4000000, 8000000, and 16000000
++ Sample Resolution
+  - Indicates the size, in bits, of each recorded data sample.
+  - Valid values are: 1, 2, 4, 8, and 16
++ Uplink Band
+  - Indicates the signal band used for uplink, if any.
+  - Valid values are: S, X, L, K, or N/A if there was no uplink
++ Downlink Band
+  - Indicates the signal band used for downlink.
+  - Valid values are: S, X, L, and K
++ First Record Seq. No.
+  - Indicates the first record sequence number found in the data file
+  - Values are unsigned integers and range from 0 to 2^16-1
++ Last Record Seq. No.
+  - Indicates the last record sequence number found in the data file
+  - Values are unsigned integers and range from 0 to 2^16-1
++ Gaps Found
+  - Indicates the number of times that a gap is found in the data.
+  - A gap is defined as any time value that would normally have data
+    associated with it, not having a record present in the file.
+  - Nominal value is 0.
++ Data Errors
+  - Indicates the number of hardware errors that occurred during the recording
+     of the data.
+  - Nominal value is 0.

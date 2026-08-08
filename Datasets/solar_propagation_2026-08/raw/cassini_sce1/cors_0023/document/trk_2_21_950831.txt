@@ -1,0 +1,649 @@
+PDS_VERSION_ID         = PDS3
+RECORD_TYPE            = STREAM
+OBJECT                 = TEXT
+  INTERCHANGE_FORMAT     = ASCII
+  PUBLICATION_DATE       = 1995-08-31
+  NOTE                   = "N/A"
+END_OBJECT             = TEXT
+
+END
+
+    Document 820-13; Rev. A
+    DSN Systems Requirements
+    Detailed Interface Design
+
+TRK-2-21
+
+DSN Tracking System Earth
+Orientation Parameter Data
+Interface
+
+
+Initial Release Date: February 1, 1985
+
+Change 2:  August 31, 1995
+
+
+
+
+Responsible Engineer:                        Released by:
+
+
+___________________________                ___________________________
+K. Liewer                                  B. Citrom
+Tracking System Engineer                   TDA Document Release
+
+
+
+Approved  by:
+
+___________________________
+R. W. Burt, Manager
+DSN Data Services
+
+
+
+
+
+
+
+
+Reviewed by:
+
+
+_________________________________        __________________________________
+J. E. Ekelund                            D. W. Green
+NAV Subsystem Engineer                   Software CDE (UTPM STOIC)
+
+
+
+_________________________________
+A. P. Freedman
+Software CDE (EOP)
+
+
+
+_________________________________        __________________________________
+J. Rogers                                L. J. Wood
+940 Interface Coordinator                TDA Division Representative
+
+
+
+
+_________________________________        __________________________________
+R. Gillette                              Kurt M. Liewer
+TDS Manager                              DSN Tracking System Engineer
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  Change Log
+
+Change Number     Date        Affected Pages                 RCD #
+
+Original issue    2/1/85      All
+
+Change 1          6/1/92      All (Document Reformatted)     014
+
+Change 2          8/31/95     All                            086
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Contents
+Section                        Page
+
+
+1      Introduction            1-1
+1.1    Purpose                 1-1
+1.2    Revision and Control    1-1
+
+2      General Information     2-1
+
+3      UTPM Stoic Data Format  3-1
+3.1    UTPM STOIC Data Format  3-1
+
+4      EOP Date Format         4-1
+4.1    EOP Data Format         4-1
+
+
+Appendices
+Appendix                      Page
+
+A      Glossary                A-1
+
+
+Figures
+
+Figure                                                                Page
+
+3-1  Format of UTPM Data File With "Seconds Past 2000" Time Tags      3-4
+3-2  Format of UTPM Data File With "Seconds Past 1950" Time Tags      3-5
+4-1  Sample EOP File                                                  4-3
+
+
+Section 1
+
+Introduction
+
+1.1    Purpose
+
+This module defines the data format and content of the Earth-Orientation
+Parameter (EOP) files and the Universal Time and Polar Motion (UTPM) files
+received from the Tracking System Analytic Calibration (TSAC) group.
+
+1.2    Revision and Control
+Revisions or changes to the information herein presented may be initiated
+in accordance with the procedures in Section I of this document.
+
+
+Section 2
+
+General Information
+
+The DSN and flight projects use EOP data, which includes UTPM data, in the
+process of performing orbit determination and generating prediction data.
+These data are to be provided at intervals determined by the user's
+accuracy requirements and as negotiated with the various DSN and
+project users.
+
+Two different file formats are described in this interface document. The
+first kind of file includes Universal Time and Polar Motion (UTPM) data
+only, and has the same format as was described in the previous version of
+TRK-2-21.   It will be referred to hereafter as the UTPM STOIC file; in the
+past, such files have also been called TPOLY files or TP arrays. The second
+kind of file includes UTPM data and, in addition, nutation correction
+parameters necessary to determine inertial station locations at the few-cm
+level. It will be referred to as the EOP file. For a detailed explanation
+of the models underlying this file, and how the file is used, see Folkner
+et al., AEarth Orientation Parameter (EOP) file description and usage,@ JPL
+IOM 335.1-11-93, May 21, 1993.
+
+The data are deliverable via electronic interface.
+
+
+Section 3
+
+UTPM Stoic Data Format
+
+3.1    UTPM STOIC Data Format
+
+UTPM STOIC data are available as ASCII files in Fortran Namelist format.
+The data file consists of 88 card-image records.  In Fortran Namelist
+format, each variable in a single record is of the form
+
+variable(i) = value(i), value(i+1), value(i+2)...value(i+j-1), where i is
+an index running from 1 to 335 and j is the number of data values of the
+variable given on a single record.  The subscripts i+1 through i+j are not
+given explicitly.  Two different UTPM STOIC files are available, identical
+except for the time tags, generally referred to as "seconds past 2000" or
+"seconds past 1950" (see TIME below).  All time rates of change are with
+respect to International Atomic Time (TAI).Specific inputs are as follows:
+
+First record:    TIMPOL    A label giving the date of the last input datum
+(LD) and the last date for which predictions are given (PT), typically 30
+days after the file is generated.  For Univac deliveries, the LD/PT portion
+names the Univac element. (See Figures 3-1 and 3-2 for LD and PT
+locations.) For UTPM STOIC files created since 1 May 1993, a variable
+called UT1TYP has been placed at the end of TIMPOL.  Only two values are
+allowed: UT1TYP=UT1R or   UT1TYP=UT1. Older UTPM STOIC files are all UT1R
+unless the string AUT1 tidal terms@ appears at the end of TIMPOL.  See the
+UT1R discussion in the Glossary.
+
+Format: 16A4 (VAX 32-bit words) or 11A6 (Univac 36-bit words)
+
+Records 2-14:    IT(i),    Thirteen calendar dates, one date per record,
+that i = 1-39    apply to all remaining data in the record.  Epoch for
+those data is at 0 hr on the given date.  (The purpose
+of these values is to improve human readability; they
+are not used by programs that read this file.)
+
+Format: YYMMDD
+
+TP(i),    Time tags and TAI-UTC values and rates for
+i = 1-39    13 dates.  (It is here that leap seconds appear.  See Appendix.)
+
+Format:  TP(i) = TIME, TAI-UTC, UTCDOT
+
+where    TIME =        Time tag for the remaining data, in
+UTC seconds past 12:00 noon Jan. 1, 2000, or UTC seconds past 0 hours Jan. 1,
+1950 (+SSSSSSSSSSS.).
+Programs that read this file use TIME as epoch for all the remaining data in
+the record.  Time must be a multiple of 100 seconds.
+
+TAI-UTC = TAI-UTC at TIME (+SS.SSSSSS).
+
+UTCDOT =    Rate of change of TAI-UTC at TIME, in seconds/second
+(nnnnn.nnnnE-10). Zero by definition since 1 Jan 1972; at
+that epoch the UTC second was defined to have the same length as the
+TAI second.
+
+Records 15-51:    IT(i),    Calendar date for data in record, as
+i = 40-150    discussed above.
+
+TP(i),    Time tags and TAI-UT1 values and rates for i = 40-150    37 dates.
+
+Format:  TP(i) = TIME, UT1, UT1DOT
+
+where    TIME =        Seconds past 2000 or 1950 (see above.)
+
+TAI-UT1 =     TAI-UT1 at TIME (+SS.SSSSSS).
+
+UT1DOT =    Rate of change of (TAI-UT1) at TIME, in seconds/second
+(nnnnn.nnnnE-10).
+
+Records 52-88:    TP(i),    Time tags and polar motion data for 37
+i = 151-335    dates, usually the same dates as for UT1.
+
+Format:  TP(i) = TIME, X, XDOT, Y, YDOT
+
+where    TIME =    Seconds past 2000 or 1950 (see above.)
+
+X =         X coordinate of polar motion at TIME in arc seconds (+.XXXXX).
+
+XDOT =    Rate of change of X at TIME in arc seconds/TAI second (+.RRRRR-EE).
+
+Y =        Y coordinate of polar motion at TIME in arc seconds (+.YYYYY).
+
+YDOT =    Rate of change of Y at TIME in arc seconds/TAI second (+.RRRRR-EE).
+
+Examples of these data may be found in Figures 3-1 and 3-2.
+
+
+Figure 3-1.  Format of UTPM Data File With "Seconds Past 2000" Time Tags.
+
+ TIMPOL='STOIC/KEOF.LD950322/PT950602 . PREDICTS->950602. UT1TYP=UT1R.',
+ IT(  1)=930910,TP(  1)= -199108800., 28.000000,    0.0000E-10,
+ IT(  4)=940701,TP(  4)= -173707200., 29.000000,    0.0000E-10,
+ IT(  7)=100101,TP(  7)=  315576000., 45.000000,    0.0000E-10,
+ IT( 10)=991231,TP( 10)=          0.,  0.000000,    0.0000E-10,
+ IT( 13)=991231,TP( 13)=          0.,  0.000000,    0.0000E-10,
+ IT( 16)=991231,TP( 16)=          0.,  0.000000,    0.0000E-10,
+ IT( 19)=991231,TP( 19)=          0.,  0.000000,    0.0000E-10,
+ IT( 22)=991231,TP( 22)=          0.,  0.000000,    0.0000E-10,
+ IT( 25)=991231,TP( 25)=          0.,  0.000000,    0.0000E-10,
+ IT( 28)=991231,TP( 28)=          0.,  0.000000,    0.0000E-10,
+ IT( 31)=991231,TP( 31)=          0.,  0.000000,    0.0000E-10,
+ IT( 34)=991231,TP( 34)=          0.,  0.000000,    0.0000E-10,
+ IT( 37)=991231,TP( 37)=          0.,  0.000000,    0.0000E-10,
+ IT( 40)=930910,TP( 40)= -199108800., 27.527470,  240.7390E-10,
+ IT( 43)=930928,TP( 43)= -197553600., 27.567560,  271.4260E-10,
+ IT( 46)=931016,TP( 46)= -195998400., 27.612490,  311.1530E-10,
+ IT( 49)=931103,TP( 49)= -194443200., 27.660101,  293.2580E-10,
+ IT( 52)=931121,TP( 52)= -192888000., 27.704720,  273.6060E-10,
+    .      .        .         .            .            .
+    .      .        .         .            .            .
+    .      .        .         .            .            .
+ IT(124)=950127,TP(124)= -155563200., 28.668550,  315.9780E-10,
+ IT(127)=950214,TP(127)= -154008000., 28.715870,  289.0080E-10,
+ IT(130)=950304,TP(130)= -152452800., 28.762859,  339.3200E-10,
+ IT(133)=950322,TP(133)= -150897600., 28.816549,  338.1390E-10,
+ IT(136)=950409,TP(136)= -149342400., 28.868320,  328.4500E-10,
+ IT(139)=950427,TP(139)= -147787200., 28.918819,  319.7110E-10,
+ IT(142)=950515,TP(142)= -146232000., 28.967529,  307.7830E-10,
+ IT(145)=950602,TP(145)= -144676800., 29.014490,  296.2670E-10,
+ IT(148)=100101,TP(148)=  315576000., 45.000000,  317.0000E-10,
+ IT(151)=930910,TP(151)= -199108800.,-.10100,0.12380E-08,0.33040,0.19430E-07,
+ IT(156)=930928,TP(156)= -197553600.,-.09540,0.27750E-08,0.36360,0.23730E-07,
+ IT(161)=931016,TP(161)= -195998400.,-.08280,0.84520E-08,0.39800,0.18670E-07,
+ IT(166)=931103,TP(166)= -194443200.,-.07040,0.19770E-07,0.42230,0.98470E-08,
+ IT(171)=931121,TP(171)= -192888000.,-.04420,0.84590E-08,0.44400,0.11020E-07,
+    .      .        .         .            .            .
+    .      .        .         .            .            .
+    .      .        .         .            .            .
+ IT(291)=950127,TP(291)= -155563200.,-.11650,0.95110E-08,0.47660,0.25570E-07,
+ IT(296)=950214,TP(296)= -154008000.,-.09380,0.16550E-07,0.50860,0.17200E-07,
+ IT(301)=950304,TP(301)= -152452800.,-.04970,0.39790E-07,0.53530,0.15100E-07,
+ IT(306)=950322,TP(306)= -150897600.,-.00290,0.32860E-07,0.54990,0.83750E-08,
+ IT(311)=950409,TP(311)= -149342400.,0.04950,0.34210E-07,0.55630,-.36730E-09,
+ IT(316)=950427,TP(316)= -147787200.,0.10220,0.33200E-07,0.54880,-.92200E-08,
+ IT(321)=950515,TP(321)= -146232000.,0.15150,0.29830E-07,0.52790,-.17490E-07,
+ IT(326)=950602,TP(326)= -144676800.,0.19390,0.24330E-07,0.49500,-.24590E-07,
+ IT(331)=100101,TP(331)=  315576000.,0.00000,0.00000E+00,0.25000,0.00000E+00,
+
+
+Figure 3-2.  Format of UTPM Data File With "Seconds Past 1950" Time Tags
+
+ TIMPOL='STOIC/KEOF.LD950322/PT950602 . PREDICTS->950602. UT1TYP=UT1R.',
+ IT(  1)=930910,TP(  1)= 1378771200., 28.000000,    0.0000E-10,
+ IT(  4)=940701,TP(  4)= 1404172800., 29.000000,    0.0000E-10,
+ IT(  7)=100101,TP(  7)= 1893456000., 45.000000,    0.0000E-10,
+ IT( 10)=991231,TP( 10)=          0.,  0.000000,    0.0000E-10,
+ IT( 13)=991231,TP( 13)=          0.,  0.000000,    0.0000E-10,
+ IT( 16)=991231,TP( 16)=          0.,  0.000000,    0.0000E-10,
+ IT( 19)=991231,TP( 19)=          0.,  0.000000,    0.0000E-10,
+ IT( 22)=991231,TP( 22)=          0.,  0.000000,    0.0000E-10,
+ IT( 25)=991231,TP( 25)=          0.,  0.000000,    0.0000E-10,
+ IT( 28)=991231,TP( 28)=          0.,  0.000000,    0.0000E-10,
+ IT( 31)=991231,TP( 31)=          0.,  0.000000,    0.0000E-10,
+ IT( 34)=991231,TP( 34)=          0.,  0.000000,    0.0000E-10,
+ IT( 37)=991231,TP( 37)=          0.,  0.000000,    0.0000E-10,
+ IT( 40)=930910,TP( 40)= 1378771200., 27.527470,  240.7390E-10,
+ IT( 43)=930928,TP( 43)= 1380326400., 27.567560,  271.4260E-10,
+ IT( 46)=931016,TP( 46)= 1381881600., 27.612490,  311.1530E-10,
+ IT( 49)=931103,TP( 49)= 1383436800., 27.660101,  293.2580E-10,
+ IT( 52)=931121,TP( 52)= 1384992000., 27.704720,  273.6060E-10,
+    .      .        .         .            .            .
+    .      .        .         .            .            .
+    .      .        .         .            .            .
+ IT(124)=950127,TP(124)= 1422316800., 28.668550,  315.9780E-10,
+ IT(127)=950214,TP(127)= 1423872000., 28.715870,  289.0080E-10,
+ IT(130)=950304,TP(130)= 1425427200., 28.762859,  339.3200E-10,
+ IT(133)=950322,TP(133)= 1426982400., 28.816549,  338.1390E-10,
+ IT(136)=950409,TP(136)= 1428537600., 28.868320,  328.4500E-10,
+ IT(139)=950427,TP(139)= 1430092800., 28.918819,  319.7110E-10,
+ IT(142)=950515,TP(142)= 1431648000., 28.967529,  307.7830E-10,
+ IT(145)=950602,TP(145)= 1433203200., 29.014490,  296.2670E-10,
+ IT(148)=100101,TP(148)= 1893456000., 45.000000,  317.0000E-10,
+ IT(151)=930910,TP(151)= 1378771200.,-.10100,0.12380E-08,0.33040,0.19430E-07,
+ IT(156)=930928,TP(156)= 1380326400.,-.09540,0.27750E-08,0.36360,0.23730E-07,
+ IT(161)=931016,TP(161)= 1381881600.,-.08280,0.84520E-08,0.39800,0.18670E-07,
+ IT(166)=931103,TP(166)= 1383436800.,-.07040,0.19770E-07,0.42230,0.98470E-08,
+ IT(171)=931121,TP(171)= 1384992000.,-.04420,0.84590E-08,0.44400,0.11020E-07,
+    .      .        .         .            .            .
+    .      .        .         .            .            .
+    .      .        .         .            .            .
+ IT(291)=950127,TP(291)= 1422316800.,-.11650,0.95110E-08,0.47660,0.25570E-07,
+ IT(296)=950214,TP(296)= 1423872000.,-.09380,0.16550E-07,0.50860,0.17200E-07,
+ IT(301)=950304,TP(301)= 1425427200.,-.04970,0.39790E-07,0.53530,0.15100E-07,
+ IT(306)=950322,TP(306)= 1426982400.,-.00290,0.32860E-07,0.54990,0.83750E-08,
+ IT(311)=950409,TP(311)= 1428537600.,0.04950,0.34210E-07,0.55630,-.36730E-09,
+ IT(316)=950427,TP(316)= 1430092800.,0.10220,0.33200E-07,0.54880,-.92200E-08,
+ IT(321)=950515,TP(321)= 1431648000.,0.15150,0.29830E-07,0.52790,-.17490E-07,
+ IT(326)=950602,TP(326)= 1433203200.,0.19390,0.24330E-07,0.49500,-.24590E-07,
+ IT(331)=100101,TP(331)= 1893456000.,0.00000,0.00000E+00,0.25000,0.00000E+00,
+
+
+Section 4
+
+EOP Data Format
+
+4.1    EOP Data Format
+
+EOP data are available as ASCII files in Navigation Portable Namelist format.
+In addition to the inclusion of nutation parameters, the EOP file differs
+from the UTPM STOIC file in other important ways:
+
+1)    The EOP file may be of any length, whereas the UTPM STOIC file is
+limited to 13 records for TAI-UTC, 37 records for TAI-UT1, and 37 records for
+polar-motion X and Y.
+
+2)    All EOP data for a single time tag are in a single record, whereas the
+UTPM STOIC file has three different record types depending on the data type,
+as noted  above.
+
+3)    EOP time tags are expressed as Modified Julian Dates; UTPM STOIC time
+tags  are seconds past a particular epoch, such as 12:00 noon, 1 Jan. 2000,
+or 0 hours, 1 Jan. 1950.
+
+All characters in a line following a dollar sign ($) are comments included
+for convenience but ignored by all programs. Specific inputs are as follows:
+
+Records 1-6:    Labels and flags
+
+Note:    Adding blanks in order to fill out any of these labels or flags to
+their full width of 6, 25, or 80 characters is unnecessary.
+
+EOPLBL    character*80        This text label is used in identifying the EOP
+file; it provides the same information as the TIMPOL record in the UTPM STOIC
+file.
+
+EOPFNG    character*80        This text label gives the name of the program
+used to produce the EOP file, the date and time the file was generated, and
+the date and time the program was linked.
+
+EOPUT1    character*6        This flag indicates whether the data in the file
+contain TAI-UT1 or TAI-UT1R.  The two possible values of this variable are
+'UT1' and 'UT1R'.
+
+EOPTYP    character*6        This flag is used by the Orbit Determination
+Program to determine whether to use the EOP array or the UTPM STOIC (TP)
+array  for the computation of Earth orientation.  The allowed values of this
+variable are 'EOP' and 'STOIC'.
+
+EOPTIM    character*25        Date and time (UTC) of creation of the EOP file
+(dd-mmm-yyyy hh:mm:ss.ffff).
+
+EOPTRF    character*6        A label denoting the Terrestrial Reference Frame
+for station locations and site velocities to which the EOP parameters refer;
+currently the value assigned is 'ITRF93'
+
+EOPCRF    character*6        A label denoting the Celestial Reference Frame
+to which the EOP parameters refer;  currently the value assigned is 'ICRF93'
+
+Records 7,8...:    EOP data
+
+EOP(j,i)    double-precision    Earth-orientation parameters in 7-element
+array (7,n)        records.  There is no restriction on n.
+
+EOP(1,i)                Modified Julian Date (MJD) for the remaining
+elements in the record (times are UTC).
+
+EOP(2,i)                X coordinate of polar motion at time EOP(1,i) in
+milliseconds of arc (mas).  One mas is approximately 3 cm on the Earth's
+surface.
+
+EOP(3,i)                Y coordinate of polar motion (mas).
+
+EOP(4,i)                TAI-UT1 or TAI-UT1R (seconds).
+
+EOP(5,i)                TAI-UTC (seconds).
+
+EOP(6,i)                Nutation correction dPsi (mas).
+
+EOP(7,i)                Nutation correction dEps (mas).
+
+EOP records are in strictly increasing time order and may have any record
+spacing (not necessarily uniform).  The file must contain a record at the
+Modified Julian Date where each leap second occurs within the span of the
+file. The number of records required depends upon the data span and the
+desired accuracy. Random variations of UT1 are of the order of 0.07 ms in
+one day, corresponding to about 3 cm on the surface of the Earth.
+Systematic sub-daily tidal variations of both UT1 and polar motion
+exist, also with approximately 3-cm amplitudes.  The spacing used in
+currently delivered EOP files is one day, to allow modeling inertial
+station locations with  approximately 3-cm accuracy. The file format allows
+records to be more closely spaced if greater accuracy is desired.
+
+A sample EOP file is given in Figure 4-1.
+
+
+                   Figure 4-1. Sample EOP File
+
+ $  JPL Earth Orientation Parameter File
+ $  Last Data Point 20-MAR-1995
+ $  Predicts to     24-APR-1995
+ $
+ EOPLBL='EOP. LAST DATUM 20-MAR-1995. PREDICTS->24-APR-1995, UT1TYP=UT1.   '
+ EOPFNG='Enter MAKE_EOP 22-MAR-1995 00:37:34      linked 24-OCT-1994 16:22:56
+'
+ EOPUT1='UT1'
+ EOPTYP='EOP'
+ EOPTIM='22-MAR-1995 00:37:34     '
+ EOPTRF='ITRF93'
+ EOPCRF='ICRF93'
+ $
+ $ MJD      PM x     PM y     TAI-UT1  TAI-UTC   dPsi     dEps
+ $          (mas)    (mas)     (sec)    (sec)    (mas)    (mas)
+ EOP=
+49532.0,  140.00,  213.90,  28.214890,  28.0,  -23.54,   -7.18, $ 29-JUN-1994
+49533.0,  138.50,  212.40,  28.216150,  28.0,  -23.95,   -7.19, $ 30-JUN-1994
+49534.0,  137.00,  211.00,  28.217310,  29.0,  -24.12,   -7.14, $  1-JUL-1994
+49626.0,  -64.50,  198.10,  28.373960,  29.0,  -30.49,   -6.77, $  1-OCT-1994
+49641.0,  -98.20,  222.90,  28.411930,  29.0,  -29.41,   -6.08, $ 16-OCT-1994
+49642.0,  -99.80,  225.30,  28.414420,  29.0,  -29.53,   -5.93, $ 17-OCT-1994
+49656.0, -130.90,  255.40,  28.445640,  29.0,  -28.15,   -5.76, $ 31-OCT-1994
+49663.0, -141.20,  270.80,  28.464470,  29.0,  -27.85,   -5.31, $  7-NOV-1994
+49670.0, -146.50,  289.10,  28.481500,  29.0,  -27.09,   -5.02, $ 14-NOV-1994
+49677.0, -151.90,  307.90,  28.496910,  29.0,  -26.84,   -4.99, $ 21-NOV-1994
+49684.0, -151.90,  327.70,  28.513890,  29.0,  -25.96,   -4.25, $ 28-NOV-1994
+49691.0, -151.70,  345.40,  28.531520,  29.0,  -25.83,   -4.27, $  5-DEC-1994
+49701.0, -153.80,  370.90,  28.555710,  29.0,  -26.00,   -4.04, $ 15-DEC-1994
+49716.0, -156.40,  411.20,  28.596170,  29.0,  -26.20,   -3.72, $ 30-DEC-1994
+49718.0, -152.90,  417.10,  28.601450,  29.0,  -26.02,   -4.09, $  1-JAN-1995
+49720.0, -148.70,  422.90,  28.606980,  29.0,  -25.76,   -3.66, $  3-JAN-1995
+49722.0, -144.60,  428.20,  28.612890,  29.0,  -25.09,   -3.72, $  5-JAN-1995
+49724.0, -141.30,  432.50,  28.618810,  29.0,  -25.51,   -3.72, $  7-JAN-1995
+49749.0, -115.60,  485.40,  28.682430,  29.0,  -26.59,   -3.85, $  1-FEB-1995
+49750.0, -115.70,  487.10,  28.685320,  29.0,  -26.41,   -3.91, $  2-FEB-1995
+    .        .        .          .         .       .         .         .
+    .        .        .          .         .       .         .         .
+    .        .        .          .         .       .         .
+49825.0,   75.00,  547.80,  28.892010,  29.0,  -26.64,   -8.35, $ 18-APR-1995
+49826.0,   77.80,  547.10,  28.894710,  29.0,  -26.74,   -8.57, $ 19-APR-1995
+49827.0,   80.50,  546.40,  28.897360,  29.0,  -26.71,   -8.60, $ 20-APR-1995
+49828.0,   83.30,  545.60,  28.900010,  29.0,  -26.65,   -8.57, $ 21-APR-1995
+49829.0,   86.00,  544.80,  28.902720,  29.0,  -26.58,   -8.51, $ 22-APR-1995
+49830.0,   88.70,  544.00,  28.905510,  29.0,  -26.50,   -8.44, $ 23-APR-1995
+49831.0,   91.40,  543.10,  28.908350,  29.0,  -26.33,   -8.37, $ 24-APR-1995
+
+Note:    October 1994 records (which are not typographical errors) indicate
+flexibility of format.
+
+
+
+Appendix A
+
+Glossary
+
+
+CEP        Celestial Ephemeris Pole: A direction in space, which varies from
+day to day, about which the Earth appears to rotate on any particular day.
+The CEP differs from the instantaneous rotation axis of the Earth by periodic
+terms with amplitudes less than 30 cm. It differs from the pole of the
+celestial reference frame (ICRF pole; see below) by quantities given by the
+IAU standard nutation and precessional models (IAU 1980 Theory of Nutation;
+IAU 1976 Precession) and the offsets (dEps and dPsi; see below) from those
+models.
+
+CIO        Conventional International Origin: The point on the Earth's crust
+representing the mean location of the true pole during the years 1900 - 1905;
+also called the Mean Pole 1903.0.  Formerly used as the terrestrial reference
+pole.
+
+dEps        Delta Epsilon: The obliquity component of the offset of the CEP
+from the direction given by the IAU standard nutation and precessional
+models, referred to the ICRF(see below).
+
+dPsi        Delta Psi: The offset in the ecliptic-longitude direction of the
+CEP from the direction given by the standard nutation and precessional
+models.
+
+IAU        International Astronomical Union
+
+ICRF        IERS Celestial Reference Frame: A celestial coordinate system,
+updated yearly by the IERS, based on a set of VLBI-determined coordinates of
+compact extragalactic radio sources.
+
+IERS        International Earth Rotation Service: An organization that
+started operation on 1 January 1988, replacing the Earth-rotation section of
+the Bureau International de l'Heuse (BIH) and the International Polar Motion
+Service (IPMS).
+
+IRM        IERS Reference Meridian: Reference meridian of the ITRF (see
+below).
+
+IRP        IERS Reference Pole: Reference pole of the ITRF (see below).
+
+ITRF        IERS Terrestrial Reference Frame: A terrestrial coordinate
+system,
+updated yearly by the IERS, implicitly defined by a standard set of station-
+location coordinates.  The directions of its axes are continuous with those
+of the previously used BIH Terrestrial System.
+
+KEOF        Kalman Earth Orientation Filter: An operational program that
+produces smoothed and predicted estimates of earth-orientation quantities for
+the DSN and flight project navigation teams.
+
+MJD        Modified Julian Date: A shortened version of Julian Date used for
+convenience. MJD= Julian Date - 2400000.5
+
+Nutation        The action of the sun and moon on the Earth=s equatorial
+bulge causes small variations in the direction of the CEP. The short-period
+(periods ? 18.6 years) portion of these variations is called nutation; the
+long-period portion is called precession, and is treated as secular
+(nonperiodic).
+
+ODP        Orbit Determination Program. The operational program used by JPL
+navigation teams to determine spacecraft orbits, planetary gravitational
+harmonics, and many other parameters.
+
+Precession    See Nutation
+
+STOIC        Standby Timing Operations in Contingencies.  The program used to
+generate the UTPM STOIC files.
+
+TAI        International Atomic Time (French word order): A time scale
+determined by the International Bureau of Weights and Measures (BIPM; French
+word order) from analysis of data from, and intercomparison of, many atomic
+clocks in laboratories around the world.  Its unit interval is exactly one SI
+second at sea level.
+UTC        Coordinated Universal Time: Civil time, formerly called GMT.  A
+time scale running at the same rate (by definition) as TAI, except for the
+introduction of leap seconds by the IERS as required to keep UTC within 0.9 s
+of UT1.
+
+UT1        Universal Time 1: A measure of the instantaneous rotation angle of
+the Earth, determined from astronomical and satellite observations corrected
+for polar motion and measured in time units; also formerly called GMT.  It is
+related to the direction of the IRM in the ICRF, measured around the CEP
+axis.
+
+UT1R        UT1 with the effects of short-term tides removed.  Short-term
+tidal effects on UT1 have periods ranging from approximately 5 to 35 days.
+Long-term tidal effects have periods ranging from approximately 91 days to
+18.6 years, and are included in UT1R. The quantities noted as "UT1" in the
+UTPM STOIC file description will always be either all UT1 or all UT1R in a
+particular file.
+
+X,Y        Coordinates of the Celestial Ephemeris Pole relative to the IERS
+Reference Pole.  X is measured along the IRM; Y is measured along the
+meridian 90? W of the IRM.
+
+
+Note:    For more detailed and rigorous explanations for astronomical terms
+given below, including specific references, the following two works are
+recommended.
+
+Explanatory Supplement to the Astronomical Almanac, P. Kenneth Seidelman,
+ed.; University Science Books, Mill Valley, California
+
+IERS Standards (1992), Dennis D. McCarthy, ed.; IERS Technical Note 13,
+Observatoire de Paris, Paris (July 1992).

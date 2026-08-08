@@ -1,0 +1,1016 @@
+PDS_VERSION_ID                    = PDS3
+RECORD_TYPE                       = STREAM
+LABEL_REVISION_NOTE               = "
+          2003-02-20 CASSINI: conner  Revision 1;
+          2003-03-06 PDS/RS:  simpson Revision 2;
+          2003-03-18 CASSINI: conner  Revision 3;
+          2003-03-20 PDS/RS:  simpson Revision 4;
+          2003-03-21 CASSINI  conner  Revision 5;
+          2003-03-24 CASSINI  conner  Revision 6;
+          2003-04-21 CASSINI  conner  Revision 7;
+          2003-06-23 CASSINI  conner  Revision 8
+          2003-07-01 PDS/CN:  S.L. Adams, formatted for ingestion from WORD
+                                          to ASCII of 'Revision 8' supplied
+                                          by Diane Conner.
+          2003-07-14 CASSINI  conner, corrected spelling errors.
+          2003-09-22 CASSINI  conner, added Solar System target.
+          2003-10-03 CASSINI  conner, removed extra spaces at beg of line.
+          2003-10-16 CASSINI  conner, changed to SOLAR_SYSTEM.
+          2004-03-08 CASSINI  conner, replaced bad ref to 699-004."
+
+OBJECT                            = MISSION
+  MISSION_NAME                    = "CASSINI-HUYGENS"
+
+  OBJECT                          = MISSION_INFORMATION
+    MISSION_START_DATE            = 1997-10-15
+    MISSION_STOP_DATE             = NULL
+    MISSION_ALIAS_NAME            = { "CASSINI", "HUYGENS" }
+    MISSION_DESC                  = "
+
+The majority of the text in this file was extracted from the Cassini
+Mission Plan Document, D. Seal, 2003. [JPLD-5564]
+
+The Cassini spacecraft, including the Huygens Probe, was launched on 15
+October 1997 using a Titan IV/B launch vehicle with Solid Rocket Motor
+Upgrade (SRMU) strap-ons and a Centaur upper stage.  The spacecraft used a
+6.7-year Venus-Venus-Earth-Jupiter Gravity Assist (VVEJGA) trajectory to
+Saturn, during which cruise observations were conducted to check out,
+calibrate, and maintain the instruments as well as to perform limited
+science.  After Saturn Orbit Insertion (SOI) (1 July 2004), the Huygens
+Probe separated and, on the third encounter with Titan, entered the
+satellite's atmosphere to make in situ measurements during an approximately
+150 minute descent (14 January 2005).  The Orbiter continued a tour of the
+Saturn system until mid-2008 collecting data on the planet and its
+satellites, rings, and environment.
+
+The Cassini Orbiter (CO) was a three-axis stabilized spacecraft equipped
+with one high gain antenna (HGA) and two low gain antennas (LGAs), three
+Radioisotope Thermoelectric Generators (RTGs) for power, main engines,
+attitude thrusters, and reaction wheels.  It carried twelve orbiter
+instruments designed to carry out 27 diverse science investigations.  The
+Huygens Probe (HP) was equipped with six instruments designed to study the
+atmosphere and surface of Titan.  It entered the upper atmosphere protected
+
+by a heat shield, then deployed parachutes to descend slowly to the surface
+from an altitude of about 200 km.  The instruments, with acronym and
+Principal Investigator (PI) or Team Leader (TL), are summarized below:
+
+Instrument                              Acronym  PI/TL
+-----------------------------------------------  ------------
+Orbiter:
+Cassini Plasma Spectrometer               CAPS   Young
+Cosmic Dust Analyzer                      CDA    Srama
+Composite Infrared Spectrometer           CIRS   Flasar
+Ion and Neutral Mass Spectrometer         INMS   Waite
+Imaging Science Subsystem                 ISS    Porco
+Magnetometer                              MAG    Dougherty
+Magnetospheric Imaging Instrument         MIMI   Krimigis
+Cassini Radar                             RADAR  Elachi
+Radio and Plasma Wave Science             RPWS   Gurnett
+Radio Science Subsystem                   RSS    Kliore
+Ultraviolet Imaging Spectrograph          UVIS   Esposito
+Visible and Infrared Mapping Spectrometer VIMS   Brown
+
+Probe:
+Aerosol Collector and Pyrolyser           ACP    Israel
+Descent Imager Spectral Radiometer        DISR   Tomasko
+Doppler Wind Experiment                   DWE    Bird
+Gas Chromatograph Mass Spectrometer       GCMS   Niemann
+Huygens Atmospheric Structure Instrument  HASI   Fulchignoni
+Surface Science Package                   SSP    Zarnecki
+
+    Mission Phases
+    ==============
+
+LAUNCH 1997-10-15 to 1997-10-17
+       1997-288   to 1997-290
+------
+
+Cassini successfully lifted-off from the Cape Canaveral Air Station complex
+40 on 15 October 1997 at 08:55 UTC. The solid rocket motors burned from
+liftoff to separation at 2 min 23 sec at an altitude of 68,300 m. Stage 1
+ignition began at 2 min 11 sec at an altitude of 58,500 m, and Stage 2
+ignition (and Stage 1 separation) occurred at 5 min 23 sec after liftoff at
+167,300 m. During the first three minutes and 27 seconds of flight, the
+payload fairing shrouded the spacecraft, protecting it from direct solar
+illumination.
+
+The Centaur upper stage separated from the launch vehicle at 9 min 13 sec
+at 206,700 m. The first Centaur burn began at 9 min 13 sec and lasted
+approximately two minutes. This burn placed the Cassini spacecraft into an
+elliptical, 170 km by 445 km parking orbit with an inclination of about 30
+degrees. After 17 minutes in the parking orbit, the Centaur fired again and
+launched Cassini toward Venus en route to Saturn. The injection C3 was 16.6
+km^2/s^2.
+
+Immediately after separation from the Centaur (date?), the spacecraft's
+Attitude and Articulation Control Subsystem (AACS) pointed the HGA toward
+the Sun to achieve a thermally safe attitude in which the HGA served as an
+umbrella for the remainder of the spacecraft. X-band uplink and downlink
+was established through the LGAs, the Radio and Plasma Wave Science (RPWS)
+Langmuir Probe was deployed, instrument replacement heaters and main engine
+oxidizer valve heaters were turned on, and the Stellar Reference Unit
+(SRU), Imaging Science Subsystem (ISS), and Visible and Infrared Mapping
+Spectrometer (VIMS) decontaminations were started.
+
+TCM 1  1997-10-18 to 1997-11-14
+       1997-291   to 1997-318
+-----
+
+The Trajectory Correction Maneuver 1 (TCM 1) phase comprised four one-week
+sequences. During most of the TCM 1 phase, the spacecraft was in a
+relatively quiescent state with the HGA pointed toward the Sun. Telemetry
+downlinked by the spacecraft was utilized to make an initial
+characterization of the spacecraft and to assess whether its various
+subsystems survived the launch. Deployment, decontamination, tank heating,
+and AACS checkout activities were started.
+
+Before the maneuver itself, the fuel and oxidizer tanks were heated in
+order to avoid an irreversible overpressure in the propellant lines.  If
+the tanks fully pressurized before the spacecraft passed through the peak
+temperature regime, then (when the spacecraft did enter the maximum thermal
+environment) the tank pressure would climb without there being a way to
+bring it back down, possibly causing an overpressure.
+
+TCM 1 was an Earth injection clean-up maneuver placed at 25 days after
+launch. TCM 1 was executed using the main engine with a delta-V magnitude
+of 2.8 m/s. The burn sequence included holding the spacecraft off-Sun after
+burn completion to allow the spacecraft heating to be characterized in a
+relatively benign environment.
+
+INTERPLANETARY CRUISE     1997-11-14 to 1999-11-07
+                          1997-318   to 1999-311
+---------------------
+
+The Interplanetary Cruise Phase extended from 14 November 1997 to 7
+November 1999.  It consisted of three subphases:  Venus 1 Cruise,
+Instrument Checkout 1, and Venus 2 - Earth Cruise. During most of this
+phase, Cassini's proximity to the Sun constrained the spacecraft to remain
+Sun-pointed, and communications were conducted using the Low Gain Antennas.
+The downlink capability of the LGAs at large spacecraft-Earth ranges was
+very limited.  Between 30 and 150 days after launch, for example, the
+downlink data rate decreased from 948 to 20 bps.
+
+Beginning on 28 December 1998, the spacecraft approached opposition and the
+HGA could be pointed towards Earth for a period of 25 days while the Probe
+equipment temperature remained within the required range. This provided a
+high data rate window during which checkout activities could be
+accomplished.
+
+      VENUS 1 CRUISE      1997-11-14 to 1998-09-13
+                          1997-318   to 1998-256
+      --------------
+
+The Venus 1 Cruise subphase started on 14 November 1997 and continued
+through 13 September 1998. The subphase encompassed sequences C5 through C9
+and included two TCMs, one planetary swingby, and three switches between
+LGA1 and LGA2. Most of the period was dedicated to engineering and
+instrument maintenance activities.
+
+         VENUS 1 ENCOUNTER   1998-04-26
+                             1998-116
+
+The first Venus encounter occurred on 26 April 1998.  The spacecraft
+approached Venus from a sunward direction, and closest approach occurred
+just after the spacecraft entered the Sun's shadow for a period of about 15
+minutes. At closest approach, the altitude was 284 km, with a velocity
+relative to Venus of 11.8 km/s. The spacecraft was occulted from Earth for
+about 2 hours. The Earth occultation zone started about 15 minutes after
+the spacecraft left the Sun occultation zone. Accuracy for the Venus flyby
+was assured by using two TCMs (Trajectory Correction Maneuvers), 60 and 20
+days before closest approach, and a clean-up maneuver 20 days after the
+flyby.
+
+     INSTRUMENT CHECKOUT 1    1998-09-14 to 1999-03-14
+                              1998-257   to 1999-073
+     ---------------------
+
+The Instrument Checkout 1 subphase (ICO-1) started on 14 September 1998,
+continued through 14 March 1999, and consisted of sequences C10-C13. This
+subphase was characterized by the opposition that occurred on 9 January
+1999, which allowed use of the HGA for downlink since the Earth and Sun
+were nearly aligned as seen from Cassini.
+
+All instruments scheduled checkout activities within the 25 day period
+centered on opposition. This was the first opportunity since launch to
+exercise and check the status of most instruments outside of routine
+maintenance. The 'Quiet Test', for example, allowed each instrument to
+monitor other instruments as they turned on and off and provided valuable
+insight into how to integrate science observations during the Saturn tour.
+
+During instrument checkout activities, the spacecraft autonomously went
+into a safe state. Accumulating star position errors from the slow turn
+required to keep the Sun on the -x-axis triggered AACS fault protection.
+Most of the instrument checkout activities were rescheduled after a 10 day
+safing period. Those that were not completed were rescheduled for the ICO-2
+subphase during Outer Cruise.
+
+     VENUS 2 - EARTH CRUISE      1999-03-15 to 1999-11-07
+                                 1999-074   to 1999-311
+     ----------------------
+
+The Venus 2 - Earth Cruise subphase started on 15 March 1999, 45 days prior
+to the second Venus flyby, and continued through 7 November 1999, which was
+82 days after the Earth flyby. The subphase encompassed sequences C13
+through C16, and included seven scheduled TCMs, two planetary swingbys, and
+25 science activities in addition to normal engineering activities. Science
+activities included maintenance, calibration, checkout, and science
+observations using all of the Cassini instruments except INMS and CIRS.
+
+         VENUS 2 ENCOUNTER    1999-06-24
+                              1999-175
+
+TCM-7 was executed 37 days before the Venus 2 Encounter. TCM-8 was
+scheduled 21 days prior to Venus 2, but it was canceled. DSN (Deep Space
+Network) coverage increased from one to three passes per day in support of
+the flyby.
+
+         EARTH ENCOUNTER      1999-08-18
+                              1999-230
+
+The Earth flyby occurred 55 days after the Venus 2 flyby. The spacecraft
+approached the Earth from approximately the direction of the Sun. Closest
+approach occurred right after the spacecraft entered the Sun occultation
+zone. The occultation lasted approximately 30 minutes. The altitude at
+closest approach was 1175 km, with an Earth-relative velocity of 19.0 km/s.
+Trajectory correction maneuvers took place 43, 30, 15 and 6.5 days before
+closest approach, and a clean-up maneuver was executed 13 days after the
+flyby. Continuous DSN coverage began at the Venus 2 flyby and continued
+through the Earth flyby. A week after the Earth Encounter, DSN coverage
+dropped to one pass every two days.
+
+Five instruments conducted observations as Cassini passed through the
+Earth's magnetotail.
+
+OUTER CRUISE  1999-11-08 to 2002-07-07
+              1999-312   to 2002-188
+------------
+
+The Outer Cruise Phase consisted of four subphases: HGA Transition,
+Instrument Checkout 2, Jupiter Cruise, and Quiet Cruise. The Outer Cruise
+phase extended from 8 November 1999 (when the spacecraft reached a Sun
+range of 2.7 AU) to 7 July 2002 (about two years before Saturn Orbit
+Insertion). At 2.7 AU (1 February 2000), the HGA began continuous Earth-
+pointing. The one planetary encounter in this phase was the flyby of
+Jupiter in December 2000. Science at Jupiter was an opportunity to test
+Saturn observation strategies with HGA data rates.
+
+     HIGH GAIN ANTENNA TRANSITION  1999-11-08 to 2000-05-06
+                                   1999-312   to 2000-127
+     ----------------------------
+
+This subphase included sequences C17 to C19, operation of ISS and VIMS
+decontamination heaters, CDA dust calibrations, and Magnetosphere and
+Plasma Science (MAPS) observations after the HGA was pointed toward Earth.
+
+During the initial part of the subphase (C17 and part of C18),
+telecommunications were via LGA1, and the spacecraft was at the farthest
+distance from Earth before transitioning to the HGA for regular use.
+Therefore, data rates were very low and activities were kept to a minimum.
+C17 included standard maintenance and one Periodic Engineering Maintenance
+(PEM) activity. Activities during the LGA1 portion of C18 included a
+Periodic Instrument Maintenance (PIM); observations by ISS, VIMS, and UVIS
+of the asteroid Masursky near closest approach (1,634,000 km); and ISS dark
+frame calibration images directly following the Masursky observations.
+
+The HGA was turned toward Earth for regular use on 1 February 2000, during
+C18. Several activities took place during the rest of C18, using the
+greater telemetry capabilities available with the HGA:  playback of the
+Masursky data and ISS dark frames, a Probe checkout, a Huygens Probe S-band
+Relay to Cassini Test, a Telemetry-Ranging Interference Test, MAG
+calibrations, and a PEM. Regular MAPS observations by CAPS, CDA, MAG, MIMI,
+and RPWS began within a few days after transitioning to the HGA.
+
+The first 6 weeks of C19 were used for a checkout of new Flight Software.
+The AACS version A7 software was uploaded near the beginning of this
+period, and the first 2 weeks were devoted to AACS tests. The next 4 weeks
+were originally scheduled for CDS tests of version V7.0. However, these
+tests were delayed to late July and August of 2000 to allow time for
+additional regression testing. During the AACS checkout period, MAPS
+activity ceased. Several activities took place during the last 3 weeks of
+C19: resumption of MAPS observations, three RSS activities (HGA pattern
+calibration, HGA boresight calibration, and USO characterization), CIRS
+Cooler Cover release, and a PIM.
+
+A few days before the end of C19, the command loss timer setting was
+increased slightly, to account for the 10-day period at the beginning of
+C20 during which superior conjunction made commanding problematic.
+
+     INSTRUMENT CHECKOUT 2   2000-05-06 to 2000-11-05
+                             2000-127   to 2000-310
+     ---------------------
+
+The second instrument checkout subphase (ICO-2) was scheduled from 6 May
+2000 to 5 November of 2000, after the Spacecraft Office had completed its
+engineering checkout activities. ICO-2 included instrument checkout that
+required reaction wheel stability and any instrument checkouts that were
+not successfully completed during ICO-1. But the CDS Flight Software V7
+uplink and checkout, which was delayed from March, was rescheduled to late
+July through early September 2000, causing many ICO-2 activities to be
+compressed into a shorter and more intense period. Some activities were
+postponed until after the Jupiter observations were completed in 2001.
+
+The subphase began with a superior conjunction which precluded early
+science or engineering activities. MAPS instruments remained on; but data
+return was not attempted during conjunction. Two TCMs were scheduled for
+Jupiter targeting, in June and September.
+
+Engineering activities included the continuous use of reaction wheels and,
+beginning on 1 October 2000, dual Solid State Recorders (SSRs). There were
+no scheduled instrument PIMs during ICO-2 since all instruments had other
+activities that accomplished this function. Other engineering activities
+included two Reaction Wheel Assembly (RWA) friction tests, two PEMs, and an
+SRU calibration.
+
+Science activities began with the MAPS instruments continuing from C19. New
+flight software was loaded for eight instruments in late May, and a CDA
+software update was done in September. New Quiet Tests, while operating on
+reaction wheels, were done in July for most instruments. RSS Quiet Tests
+were done in September, and RADAR related tests were done in late June. A
+Probe checkout occurred in late July.
+
+Spacecraft turns were done for RADAR observations of the Sun and Jupiter in
+June and again in September. The star Alpha Piscis Austrinus (Fomalhaut)
+was also observed in September by VIMS with ISS and UVIS doing ride-along
+science. No other science turns were scheduled until October. On 1 October,
+science began using a repeating 5-day template to gather Jupiter science.
+This involved 11 turns in a 5 day period, including two downlinks. The
+turns in the 5-day template involved 4 orientations:
+
+     Orbiter Remote Science (ORS) boresights to Jupiter,
+       Z axis parallel to ecliptic
+     HGA to Sun, rolling about Z axis
+     Probe to Sun, rotating about X axis
+     HGA to Earth, Probe offset from Sun for CDA, not
+        rotating, downlink orientation
+
+     JUPITER CRUISE          2000-11-05 to 2001-04-30
+                             2000-310   to 2001-120
+     --------------
+
+The Jupiter Cruise subphase extended from 6 November 2000 to 29 April 2001
+and included sequences C23 to C25. However Jupiter remote sensing
+observations actually began on 1 October 2000, in C22.
+
+         JUPITER ENCOUNTER   2000-12-30
+                             2000-365
+
+The Jupiter flyby occurred on 30 December 2000 at an altitude of 9.7
+million km. This gravity assist rotated the trajectory 12 deg and increased
+the heliocentric velocity by 2 km/s. The Jupiter relative speed at closest
+approach was 11.6 km/s. At closest approach, Jupiter filled the Narrow
+Angle Camera (NAC) field of view. Extensive Jupiter science was performed
+which required additional DSN support: up to two passes every five days,
+and a maximum of one pass every 30 hours in the 10 days on either side of
+closest approach. Science at Jupiter was an opportunity to test how to
+build and execute viable Saturn sequences.
+
+A problem with the RWAs occurred on 16 December 2000. Increased friction on
+one of the wheels caused the spacecraft to switch autonomously to the
+Reaction Control Subsystem (RCS) for attitude control. With the switch to
+RCS, hydrazine usage increased. Two of four joint CAPS-Hubble Space
+Telescope observations, a Jupiter North-South map, the Himalia 'flyby', and
+a UVIS torus observation were all executed on RCS before the sequence was
+terminated on 19 December 2000. MAPS data continued to be recorded at a
+reduced rate. All other planned science activities were suspended.  After
+tests, RWA operation was resumed for attitude control on 22 December, with
+the wheels biased away from low RPM regions.  The sequence was restarted on
+29 December.
+
+     QUIET CRUISE            2001-04-30 to 2002-07-08
+                             2001-120   to 2002-189
+     ------------
+
+Quiet Cruise was a 14 month subphase that started at the end of Jupiter
+Cruise and ended two years before SOI. During this subphase, routine
+maintenance, engineering, and navigation functions were carried out. One
+Gravitational Wave Experiment (GWE) was conducted in December 2001, and one
+Solar Conjunction Experiment (SCE) was conducted in June 2002.
+
+SCIENCE CRUISE 2002-07-08 to 2004-06-10
+               2002-189   to 2004-162
+--------------
+
+     SPACE SCIENCE     2002-07-08 to 2004-01-11
+                       2002-189   to 2004-011
+
+The Space Science subphase began on 8 July 2002 and ran through 11 January
+2004. TCMs 18 and 19, two GWEs (December 2002 and December 2003) and one
+SCE (June-July 2003) were conducted.
+
+     APPROACH SCIENCE  2004-01-12 to 2004-06-10
+                       2004-012   to 2004-162
+
+The Approach Science subphase began six months before SOI and ended three
+weeks before SOI, when the spacecraft was approaching Saturn at a rate of 5
+kilometers per second. Most of the activities during the Approach Science
+subphase were Saturn science observations and preparation for the Phoebe
+flyby, SOI, and Tour operations.
+
+The reaction wheels were turned on at the beginning of the subphase to
+provide a more stable viewing platform. By this point, the imaging
+instruments had begun atmospheric imaging, and making long-term atmospheric
+movies. CIRS began long integrations of Saturn's disk. At SOI - 4 months,
+Saturn filled one third of the NAC field of view and one half of the CIRS
+Far Infrared (FIR) field of view.
+
+The Saturn approach was made toward the morning terminator at a phase angle
+of about 75 degrees; VIMS gathered data on the temperature difference
+across the terminator. UVIS scans of the Saturn System began 3-4 months
+before SOI. Fields, particles, and waves instruments collected solar wind
+information and recorded Saturn emissions as the spacecraft neared the
+planet. Science data gathered during this period was stored on the SSR and
+transmitted back to Earth. Daily DSN tracking coverage began 90 days before
+SOI.
+
+The Phoebe approach TCM took place on 27 May 2004, 15 days before Phoebe
+closest approach.
+
+
+TOUR PRE-HUYGENS  2004-06-11 to 2004-12-24
+                  2004-163   to 2004-359
+----------------
+
+The Tour Pre-Huygens Phase extended from the Phoebe Encounter through
+Saturn Orbit Insertion to separation of the Huygens Probe from the Cassini
+Orbiter.
+
+     PHOEBE ENCOUNTER         2004-06-11
+                              2004-163
+
+The flyby of Phoebe occurred on 11 June 2004, 19 days before SOI.  At
+closest approach (19:33 UTC) the spacecraft was 2000 km above the surface.
+
+     SATURN ORBIT INSERTION   2004-07-01
+                              2004-183
+
+During Saturn Orbit Insertion (SOI) on 1 July 2004, the spacecraft made its
+closest approach to the planet's surface during the entire mission at an
+altitude of only 0.3 Saturn radii (18,000 km).  Due to this unique
+opportunity, the approximately 95-minute SOI burn (633 m/s total delta-V),
+required to place Cassini in orbit around Saturn, was executed earlier than
+its optimal point centered around periapsis, and instead ended near
+periapsis, allowing science observations immediately after burn completion.
+The SOI maneuver placed the spacecraft in an initial orbit with a periapsis
+radius of 1.3 Rs, a period of 148 days, and an inclination of 16.8 degrees.
+
+After the burn, the spacecraft was turned to allow the ORS instruments to
+view the Saturn inner rings that were not in shadow. After periapsis, the
+trajectory just grazed the occultation zones behind the planet with the
+Earth and Sun being occulted by Saturn.  After communication with Earth was
+re-established, the spacecraft remained on Earth pointed for nine hours to
+play back engineering and science data and to give ground personnel time to
+evaluate the spacecraft status.
+
+After SOI a pair of cleanup maneuvers was used to correct for errors in the
+SOI burn. The first was immediately before superior conjunction, at SOI + 3
+days, and the second was after conjunction at SOI + 16 days.
+
+Probe checkouts were scheduled at SOI + 14 days, Probe Release Maneuver
+(PRM) + 4 days, and ten days before separation.
+
+The partial orbit between SOI and the first apoapsis was designated orbit
+0.  The next three orbits were designated a, b, and c.
+
+     TITAN A ENCOUNTER        2004-10-26
+                              2004-300
+
+     TITAN B ENCOUNTER        2004-12-13
+                              2004-348
+
+
+HUYGENS DESCENT  2004-12-24 to 2005-01-14
+                 2004-359   to 2005-014
+---------------
+
+     HUYGENS PROBE SEPARATION 2004-12-24
+                              2004-359
+
+The probe was released from the Orbiter on 24 December 2004, 11 days after
+the second Titan flyby (orbit b).  Two days after the Probe was released,
+the Orbiter executed a deflection maneuver to place itself on the proper
+trajectory for the third encounter.
+
+
+     TITAN C HUYGENS          2005-01-14
+                              2005-014
+
+During the third flyby (orbit c), on 14 January 2005, the Huygens Probe
+transmitted data to the orbiter for approximately 150 minutes during its
+descent through the atmosphere to the surface.
+
+Because the Orbiter was looking at Titan through most of the corresponding
+Goldstone tracking pass, DSN support on this day was primarily through the
+70-meter antennas at the Canberra and Madrid tracking complexes. While
+approaching Titan, the Orbiter made its last downlink transmission (to the
+Madrid station, DSS 63) before switching to Probe relay mode. The Orbiter
+then turned nearly 180 degrees to point its HGA at the predicted Probe
+impact point, and the Probe Support Avionics (PSA) were configured to
+receive data from the Probe. Some Orbiter instruments were put into a low
+power state to provide additional power for the PSA. The data from the
+Probe were transmitted at S band in two separate data streams, and both
+were recorded on each SSR. Following completion of the predicted descent
+(maximum 150 minutes), the Orbiter listened for Probe signals for an
+additional 30 minutes, in case they continued after landing.
+
+When data collection from the Probe was completed, those data were write
+protected on each SSR. The spacecraft then turned to view Titan with
+optical remote sensing instruments until about one hour after closest
+approach for a total observing window of TBD.
+
+The Orbiter then turned the HGA towards Earth and began transmitting the
+recorded Probe data to the Canberra 70-m antenna. The complete, four-fold
+redundant set of Probe data was transmitted twice, and its receipt
+verified, before the write protection on that portion of the SSR was lifted
+by ground command. A second playback, including all of the Probe data and
+the Orbiter instrument observations, was returned over the subsequent
+Madrid 70-meter tracking pass, which was longer and at higher elevation
+angles.
+
+TOUR   2005-01-14 to 2008-06-30
+       2005-014   to 2008-182
+----
+
+The Tour Phase of the mission began at completion of the Huygens Probe and
+Orbiter-support playback and ended on 30 June 2008.  It included dozens of
+satellite encounters and extended observations of Saturn, its rings, and
+its environment of particles and fields.
+
+     TOUR SEQUENCE BOUNDARIES
+
+The table below shows spacecraft background sequences, orbit revolution,
+start epoch (including day-of-year in a separate column), and the length of
+the sequence.  For completeness, all 'S' sequences are listed even though
+the first seven covered times before the Tour phase.  Each orbit about
+Saturn was assigned a revolution identifier starting with a, b, and c, and
+then numerically ascending from 3 to 74; these were not synchronous with
+sequences, some of which covered only partial orbits.  Full orbits began
+and ended at apoapsis; the partial orbit from SOI to the first apoapsis was
+orbit 0.
+
+               Sequence  Rev     Epoch (SCET)     DOY   Duration
+                                                        In days
+               --------  ---  -----------------   ---   --------
+                  S1      -   2004-May-15 00:00   136      35
+                  S2      0   2004-Jun-19 01:38   171      42
+                  S3      0   2004-Jul-30 23:05   212      43
+                  S4      a   2004-Sep-11 19:10   255      35
+                  S5      a   2004-Oct-16 18:40   290      28
+                  S6      a   2004-Nov-13 16:59   318      33
+                  S7      b   2004-Dec-16 15:03   351      37
+                  S8      c   2005-Jan-22 10:38   022      36
+                  S9      3   2005-Feb-27 00:36   058      41
+                  S10     6   2005-Apr-09 05:15   099      35
+                  S11     8   2005-May-14 02:50   134      35
+                  S12    10   2005-Jun-18 01:34   169      42
+                  S13    12   2005-Jul-29 22:36   210      32
+                  S14    14   2005-Aug-30 21:53   242      39
+                  S15    16   2005-Oct-08 15:57   281      35
+                  S16    17   2005-Nov-12 17:01   316      35
+                  S17    19   2005-Dec-17 14:21   351      42
+                  S18    20   2006-Jan-28 11:23   028      42
+                  S19    22   2006-Mar-11 00:35   070      42
+                  S20    23   2006-Apr-22 05:15   112      42
+                  S21    24   2006-Jun-03 02:39   154      42
+                  S22    26   2006-Jul-15 00:06   196      35
+                  S23    27   2006-Aug-18 22:06   230      39
+                  S24    29   2006-Sep-26 19:53   269      26
+                  S25    31   2006-Oct-22 18:26   295      33
+                  S26    33   2006-Nov-24 16:30   328      42
+                  S27    36   2007-Jan-05 13:50   005      43
+                  S28    39   2007-Feb-17 10:52   048      40
+                  S29    41   2007-Mar-29 08:04   088      37
+                  S30    44   2007-May-04 22:00   124      37
+                  S31    46   2007-Jun-11 03:10   162      33
+                  S32    48   2007-Jul-14 01:06   195      29
+                  S33    49   2007-Aug-11 23:20   223      42
+                  S34    50   2007-Sep-22 20:51   265      40
+                  S35    51   2007-Nov-01 18:40   305      42
+                  S36    54   2007-Dec-13 16:15   347      39
+                  S37    56   2008-Jan-21 13:35   021      26
+                  S38    59   2008-Feb-16 11:51   047      36
+                  S39    62   2008-Mar-23 01:50   083      27
+                  S40    65   2008-Apr-19 07:18   110      42
+                  S41    70   2008-May-31 04:27   152      35
+
+     SATELLITE ENCOUNTER SUMMARY
+
+This table summarizes the Cassini Orbiter satellite encounters; for
+completeness, all recognized encounters are included even though the first
+eight preceded the Tour phase.  Rev identifies the orbit revolution as
+defined above.  The three character ID for the encounter is in the second
+column; an appended asterisk (*) denotes a non-targeted encounter.  The
+target, date and time, and day-of-year are in the next three columns.
+Altitude above the surface at closest approach, sense of the encounter
+(whether on the inbound or outbound leg of an orbit), relative velocity at
+closest approach, and phase angle at closest approach round out the
+columns.
+
+
+
+Rev   Name   Satellite  Epoch (SCET)        DOY   Alt   in/  Speed Phase
+                                                  km    out  km/s   deg
+----  -----  ---------  ----------------    ---   ---   ---  -----  ----
+0     0PH    Phoebe     2004-Jun-11 19:33   163   1997  in    6.4   25
+0     0MI*   Mimas      2004-Jul-01 00:30   183  76424  in   22.3   80
+0     0TI*   Titan      2004-Jul-02 09:30   184 338958  out   8.3   67
+a     aTI    Titan      2004-Oct-26 15:30   300   1200  in    6.1   91
+b     bTI    Titan      2004-Dec-13 11:37   348   2358  in    6     98
+b     bDI*   Dione      2004-Dec-15 02:11   350  81592  in    5.3   93
+c     cIA*   Iapetus    2005-Jan-01 01:28   001  64907  in    2.1  106
+c     cTI    Titan      2005-Jan-14 11:04   014  60000  in    5.4   93
+3     3TI    Titan      2005-Feb-15 06:54   046    950  in    6    102
+3     3EN*   Enceladus  2005-Feb-17 03:24   048   1179  out   6.6   98
+4     4EN    Enceladus  2005-Mar-09 09:06   068    499  in    6.6   43
+4     4TE*   Tethys     2005-Mar-09 11:42   068  82975  out   6.9   64
+5     5EN*   Enceladus  2005-Mar-29 20:20   088  63785  in   10.1  134
+5     5TI    Titan      2005-Mar-31 19:55   090   2523  out   5.9   65
+6     6MI*   Mimas      2005-Apr-15 01:20   105  77233  out  13.6   94
+6     6TI    Titan      2005-Apr-16 19:05   106    950  out   6.1  127
+7     7TE*   Tethys     2005-May-02 21:04   122  64990  in   10    118
+7     7TI*   Titan      2005-May-04 05:10   124 860004  out  10.2  153
+8     8EN*   Enceladus  2005-May-21 07:19   141  92997  out   8.1   81
+9     9TI*   Titan      2005-Jun-06 18:50   157 425973  in    5.8   82
+10   10TI*   Titan      2005-Jun-22 12:27   173 920423  in    3.7   65
+11   11EN    Enceladus  2005-Jul-14 19:57   195   1000  in    8.1   43
+12   12MI*   Mimas      2005-Aug-02 03:52   214  45112  in    6.5   83
+12   12TI*   Titan      2005-Aug-06 12:33   218 841452  out   3.8   62
+13   13TI    Titan      2005-Aug-22 08:39   234   4015  out   5.8   42
+14   14TI    Titan      2005-Sep-07 07:50   250    950  out   6.1   84
+15   15TE*   Tethys     2005-Sep-24 01:29   267  33295  out   7.7   76
+15   15TI*   Titan      2005-Sep-24 22:01   267 910272  out  10.7  148
+15   15HY    Hyperion   2005-Sep-26 01:41   269    990  out   5.6   45
+16   16TI*   Titan      2005-Oct-10 22:20   283 777198  in    9.7   65
+16   16DI    Dione      2005-Oct-11 17:58   284    500  in    9     66
+16   16EN*   Enceladus  2005-Oct-12 03:29   285  42635  out   6.6   75
+17   17TI    Titan      2005-Oct-28 03:58   301   1446  in    5.9  105
+18   18RH    Rhea       2005-Nov-26 22:35   330    500  in    7.3   87
+19   19EN*   Enceladus  2005-Dec-24 20:23   358  97169  in    6.9  133
+19   19TI    Titan      2005-Dec-26 18:54   360  10429  out   5.6   67
+20   20TI    Titan      2006-Jan-15 11:36   015   2042  in    5.8  121
+21   21TI    Titan      2006-Feb-27 08:20   058   1812  out   5.9   93
+22   22TI    Titan      2006-Mar-18 23:58   077   1947  in    5.8  148
+22   22RH*   Rhea       2006-Mar-21 07:01   080  85935  out   5.3  136
+23   23TI    Titan      2006-Apr-30 20:53   120   1853  out   5.8  121
+24   24TI    Titan      2006-May-20 12:13   140   1879  in    5.8  163
+25   25TI    Titan      2006-Jul-02 09:12   183   1911  out   5.8  148
+26   26TI    Titan      2006-Jul-22 00:25   203    950  in    6    105
+27   27TI*   Titan      2006-Aug-18 17:48   230 339190  out   4.8  121
+28   28TI    Titan      2006-Sep-07 20:12   250    950  in    6     45
+28   28EN*   Enceladus  2006-Sep-09 20:00   252  39842  out  10.3  116
+29   29TI    Titan      2006-Sep-23 18:52   266    950  in    6     90
+30   30TI    Titan      2006-Oct-09 17:23   282    950  in    6     81
+31   31TI    Titan      2006-Oct-25 15:51   298    950  in    6     25
+32   32EN*   Enceladus  2006-Nov-09 01:48   313  94410  out  14.1   27
+33   33DI*   Dione      2006-Nov-21 02:32   325  72293  out  12.3  144
+33   33TI*   Titan      2006-Nov-25 13:57   329 930525  out   4.5  114
+35   35TI    Titan      2006-Dec-12 11:35   346    950  in    6    124
+36   36TI    Titan      2006-Dec-28 10:00   362   1500  in    5.9   62
+37   37TI    Titan      2007-Jan-13 08:34   013    950  in    6     53
+38   38TI    Titan      2007-Jan-29 07:12   029   2776  in    5.8   73
+39   39TI    Titan      2007-Feb-22 03:10   053    953  out   6.3  161
+40   40TI    Titan      2007-Mar-10 01:47   069    956  out   6.3  149
+41   41TI    Titan      2007-Mar-26 00:21   085    953  out   6.3  144
+42   42TI    Titan      2007-Apr-10 22:57   100    951  out   6.3  137
+43   43TI    Titan      2007-Apr-26 21:32   116    951  out   6.3  130
+44   44TI    Titan      2007-May-12 20:08   132    950  out   6.3  121
+45   45TE*   Tethys     2007-May-26 20:57   146  97131  in   11.7   75
+45   45TI    Titan      2007-May-28 18:51   148   2425  out   6.1  114
+46   46TI    Titan      2007-Jun-13 17:46   164    950  out   6.3  107
+47   47TE*   Tethys     2007-Jun-27 19:53   178  16166  in   10.1   90
+47   47MI*   Mimas      2007-Jun-27 22:56   178  89730  in   16.2  110
+47   47EN*   Enceladus  2007-Jun-28 01:15   179  90769  out   9.4   55
+47   47TI    Titan      2007-Jun-29 17:05   180   1942  out   6.2   96
+48   48TI    Titan      2007-Jul-19 00:39   200   1302  in    6.2   34
+49   49TE*   Tethys     2007-Aug-29 11:21   241  48324  in    4.7  104
+49   49RH*   Rhea       2007-Aug-30 01:26   242   5098  out   6.7   46
+49   49TI    Titan      2007-Aug-31 06:34   243   3227  out   6.1   87
+49   49IA    Iapetus    2007-Sep-10 12:33   253   1000  out   2.4   65
+50   50DI*   Dione      2007-Sep-30 06:27   273  56523  in    5.6   47
+50   50EN*   Enceladus  2007-Sep-30 10:53   273  88174  in    6.1   99
+50   50TI    Titan      2007-Oct-02 04:48   275    950  out   6.3   67
+51   51TI*   Titan      2007-Oct-22 00:47   295 455697  in    4.1   29
+52   52RH*   Rhea       2007-Nov-16 19:52   320  78360  in    9.1  148
+52   52TI    Titan      2007-Nov-19 00:52   323    950  out   6.3   51
+53   53MI*   Mimas      2007-Dec-03 05:28   337  79272  in   14.8  138
+53   53TI    Titan      2007-Dec-05 00:06   339   1300  out   6.3   70
+54   54TI    Titan      2007-Dec-20 22:56   354    953  out   6.3   61
+55   55TI    Titan      2008-Jan-05 21:26   005    949  out   6.3   37
+57   57TI*   Titan      2008-Jan-22 21:06   022 860776  in    4.5   70
+59   59TI    Titan      2008-Feb-22 17:39   053    959  out   6.4   30
+61   61TI*   Titan      2008-Mar-10 19:15   070 922539  in    6.3  123
+61   61EN    Enceladus  2008-Mar-12 19:05   072    995  in   14.6   56
+62   62TI    Titan      2008-Mar-25 14:35   085    950  out   6.4   21
+64   64MI*   Mimas      2008-Apr-11 09:38   102  95428  in   16.9  137
+66   66TI*   Titan      2008-Apr-26 18:22   117 780589  in    5.5   94
+67   67TI    Titan      2008-May-12 10:09   133    950  out   6.4   35
+69   69TI    Titan      2008-May-28 08:33   149   1316  out   6.3   23
+72   72TI*   Titan      2008-Jun-13 04:17   165 372240  in    5.9   89
+74   74EN*   Enceladus  2008-Jun-30 08:07   182  99092  in   21.6   66
+
+
+     END OF PRIME MISSION     2008-06-30
+                              2008-182
+     -------------------- "
+
+    MISSION_OBJECTIVES_SUMMARY    = "
+
+    CASSINI-HUYGENS MISSION OBJECTIVES
+    ==================================
+
+The Cassini-Huygens mission will accomplish a variety of scientific
+objectives en route to and at Saturn [JPLD-5564].
+
+While en route to Saturn, Cassini performed three sets of Gravitational
+Wave Experiments (GWEs), each scheduled near opposition and each lasting
+approximately 40 days.  During these observations, Cassini acted as a point
+mass which would be perturbed by propagating gravitational waves resulting
+from sudden destruction (or creation) of large masses in the general
+direction of the spacecraft-to-Earth line.
+
+While en route to Saturn, Cassini was also used in two Solar Conjunction
+Experiments (SCEs), each lasting approximately 30 days.  The objectives of
+these observations was to test general relativity and to improve our
+understanding of the solar corona.
+
+The general scientific objectives of the Cassini mission at Saturn were to
+investigate the physical, chemical, and temporal characteristics of Titan
+and of Saturn, its atmosphere, rings, icy satellites, and magnetosphere.
+These are listed more specifically below:
+
+Saturn (Planet) Objectives.
+--------------------------
+
+a) Determine temperature field, cloud properties, and composition of the
+atmosphere of Saturn.
+
+b) Measure the global wind field, including wave and eddy components;
+observe synoptic cloud features and processes.
+
+c) Infer the internal structure and rotation of the deep atmosphere.
+
+d) Study the diurnal variations and magnetic control of the ionosphere of
+Saturn.
+
+e) Provide observational constraints (gas composition, isotope ratios, heat
+flux, etc.) on scenarios for the formation and the evolution of Saturn.
+
+f) Investigate the sources and the morphology of Saturn lightning, Saturn
+Electrostatic Discharges (SED), and whistlers.
+
+
+Titan Objectives.
+----------------
+
+a) Determine abundance of atmospheric constituents (including any noble
+gases), establish isotope ratios for abundant elements, constrain scenarios
+of formation and evolution of Titan and its atmosphere.
+
+b) Observe vertical and horizontal distributions of trace gases, search for
+more complex organic molecules, investigate energy sources for atmospheric
+chemistry, and model the photochemistry of the stratosphere, study
+formation and composition of aerosols.
+
+c) Measure winds and global temperatures; investigate cloud physics,
+general circulation, and seasonal effects in Titan's atmosphere; search for
+lightning discharges.
+
+d) Determine the physical state, topography, and composition of the
+surface; infer the internal structure of the satellite.
+
+e) Investigate the upper atmosphere, its ionization, and its role as a
+source of neutral and ionized material for magnetosphere of Saturn.
+
+
+Ring Objectives.
+---------------
+
+a) Study configuration of the rings and dynamical processes (gravitational,
+viscous, erosional, and electromagnetic) responsible for ring structure.
+
+b) Map composition and size distribution of ring material.
+
+c) Investigate interrelation of rings and satellites, including embedded
+satellites.
+
+d) Determine dust and meteoroid distribution in the vicinity of the rings.
+
+e) Study interactions between the rings and Saturn's magnetosphere,
+ionosphere, and atmosphere.
+
+
+Icy Satellite Objectives.
+------------------------
+
+a) Determine the general characteristics and geological histories of the
+satellites.
+
+b) Define the mechanisms of crustal and surface modifications, both
+external and internal.
+
+c) Investigate the compositions and distributions of surface materials,
+particularly dark, organic rich materials and low melting point condensed
+volatiles.
+
+d) Constrain models of the satellites' bulk compositions and internal
+structures.
+
+e) Investigate interactions with the magnetosphere and ring systems and
+possible gas injections into the magnetosphere.
+
+
+Magnetosphere Objectives
+------------------------
+
+a) Determine the configuration of the nearly axially symmetric magnetic
+field and its relation to the modulation of Saturn Kilometric Radiation
+(SKR).
+
+b) Determine current systems, composition, sources, and sinks of
+magnetosphere charged particles.
+
+c) Investigate wave-particle interactions and dynamics of the dayside
+magnetosphere and the magnetotail of Saturn and their interactions with the
+solar wind, the satellites, and the rings.
+
+d) Study the effect of Titan's interaction with the solar wind and
+magnetospheric plasma.
+
+e) Investigate interactions of Titan's atmosphere and exosphere with the
+surrounding plasma.   "
+
+END_OBJECT                      = MISSION_INFORMATION
+
+OBJECT                          = MISSION_HOST
+  INSTRUMENT_HOST_ID            = "CO"
+
+  OBJECT                        = MISSION_TARGET
+    TARGET_NAME                 = "SATURN"
+  END_OBJECT                    = MISSION_TARGET
+
+  OBJECT                        = MISSION_TARGET
+    TARGET_NAME                 = "TITAN"
+  END_OBJECT                    = MISSION_TARGET
+
+  OBJECT                        = MISSION_TARGET
+    TARGET_NAME                 = "MASURSKY"
+  END_OBJECT                    = MISSION_TARGET
+
+  OBJECT                        = MISSION_TARGET
+    TARGET_NAME                 = "FOMALHAUT"
+  END_OBJECT                    = MISSION_TARGET
+
+  OBJECT                        = MISSION_TARGET
+    TARGET_NAME                 = "SPICA"
+  END_OBJECT                    = MISSION_TARGET
+
+  OBJECT                        = MISSION_TARGET
+    TARGET_NAME                 = "EARTH"
+  END_OBJECT                    = MISSION_TARGET
+
+  OBJECT                        = MISSION_TARGET
+    TARGET_NAME                 = "VENUS"
+  END_OBJECT                    = MISSION_TARGET
+
+  OBJECT                        = MISSION_TARGET
+    TARGET_NAME                 = "STAR"
+  END_OBJECT                    = MISSION_TARGET
+
+  OBJECT                        = MISSION_TARGET
+    TARGET_NAME                 = "MOON"
+  END_OBJECT                    = MISSION_TARGET
+
+  OBJECT                        = MISSION_TARGET
+    TARGET_NAME                 = "JUPITER"
+  END_OBJECT                    = MISSION_TARGET
+
+  OBJECT                        = MISSION_TARGET
+    TARGET_NAME                 = "CALLISTO"
+  END_OBJECT                    = MISSION_TARGET
+
+  OBJECT                        = MISSION_TARGET
+    TARGET_NAME                 = "EUROPA"
+  END_OBJECT                    = MISSION_TARGET
+
+  OBJECT                        = MISSION_TARGET
+    TARGET_NAME                 = "GANYMEDE"
+  END_OBJECT                    = MISSION_TARGET
+
+  OBJECT                        = MISSION_TARGET
+    TARGET_NAME                 = "IO"
+  END_OBJECT                    = MISSION_TARGET
+
+  OBJECT                        = MISSION_TARGET
+    TARGET_NAME                 = "S RINGS"
+  END_OBJECT                    = MISSION_TARGET
+
+  OBJECT                        = MISSION_TARGET
+    TARGET_NAME                 = "ATLAS"
+  END_OBJECT                    = MISSION_TARGET
+
+  OBJECT                        = MISSION_TARGET
+    TARGET_NAME                 = "CALYPSO"
+  END_OBJECT                    = MISSION_TARGET
+
+  OBJECT                        = MISSION_TARGET
+    TARGET_NAME                 = "DIONE"
+  END_OBJECT                    = MISSION_TARGET
+
+  OBJECT                        = MISSION_TARGET
+    TARGET_NAME                 = "ENCELADUS"
+  END_OBJECT                    = MISSION_TARGET
+
+  OBJECT                        = MISSION_TARGET
+    TARGET_NAME                 = "EPIMETHEUS"
+  END_OBJECT                    = MISSION_TARGET
+
+  OBJECT                        = MISSION_TARGET
+    TARGET_NAME                 = "HELENE"
+  END_OBJECT                    = MISSION_TARGET
+
+  OBJECT                        = MISSION_TARGET
+    TARGET_NAME                 = "HYPERION"
+  END_OBJECT                    = MISSION_TARGET
+
+  OBJECT                        = MISSION_TARGET
+    TARGET_NAME                 = "IAPETUS"
+  END_OBJECT                    = MISSION_TARGET
+
+  OBJECT                        = MISSION_TARGET
+    TARGET_NAME                 = "JANUS"
+  END_OBJECT                    = MISSION_TARGET
+
+  OBJECT                        = MISSION_TARGET
+    TARGET_NAME                 = "MIMAS"
+  END_OBJECT                    = MISSION_TARGET
+
+  OBJECT                        = MISSION_TARGET
+    TARGET_NAME                 = "PAN"
+  END_OBJECT                    = MISSION_TARGET
+
+  OBJECT                        = MISSION_TARGET
+    TARGET_NAME                 = "PANDORA"
+  END_OBJECT                    = MISSION_TARGET
+
+  OBJECT                        = MISSION_TARGET
+    TARGET_NAME                 = "PHOEBE"
+  END_OBJECT                    = MISSION_TARGET
+
+  OBJECT                        = MISSION_TARGET
+    TARGET_NAME                 = "PROMETHEUS"
+  END_OBJECT                    = MISSION_TARGET
+
+  OBJECT                        = MISSION_TARGET
+    TARGET_NAME                 = "RHEA"
+  END_OBJECT                    = MISSION_TARGET
+
+  OBJECT                        = MISSION_TARGET
+    TARGET_NAME                 = "TELESTO"
+  END_OBJECT                    = MISSION_TARGET
+
+  OBJECT                        = MISSION_TARGET
+    TARGET_NAME                 = "TETHYS"
+  END_OBJECT                    = MISSION_TARGET
+
+  OBJECT                        = MISSION_TARGET
+    TARGET_NAME                 = "SUN"
+  END_OBJECT                    = MISSION_TARGET
+
+  OBJECT                        = MISSION_TARGET
+    TARGET_NAME                 = "IO PLASMA TORUS"
+  END_OBJECT                    = MISSION_TARGET
+
+  OBJECT                        = MISSION_TARGET
+    TARGET_NAME                 = "SOLAR WIND"
+  END_OBJECT                    = MISSION_TARGET
+
+  OBJECT                        = MISSION_TARGET
+    TARGET_NAME                 = "SOLAR_SYSTEM"
+  END_OBJECT                    = MISSION_TARGET
+
+  OBJECT                        = MISSION_TARGET
+    TARGET_NAME                 = "DUST"
+  END_OBJECT                    = MISSION_TARGET
+
+
+END_OBJECT                      = MISSION_HOST
+
+OBJECT                          = MISSION_HOST
+  INSTRUMENT_HOST_ID            = "HP"
+
+  OBJECT                        = MISSION_TARGET
+    TARGET_NAME                 = "TITAN"
+  END_OBJECT                    = MISSION_TARGET
+
+END_OBJECT                      = MISSION_HOST
+
+OBJECT                 = MISSION_REFERENCE_INFORMATION
+  REFERENCE_KEY_ID       = "JPLD-5564"
+END_OBJECT             = MISSION_REFERENCE_INFORMATION
+
+
+END_OBJECT                        = MISSION
+
+END
+
+

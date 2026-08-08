@@ -1,0 +1,645 @@
+PDS_VERSION_ID         = PDS3
+RECORD_TYPE            = STREAM
+OBJECT                 = TEXT
+  INTERCHANGE_FORMAT     = ASCII
+  PUBLICATION_DATE       = 2000-05-31
+  NOTE                   = "N/A"
+END_OBJECT             = TEXT
+
+END
+
+820-013
+Deep Space Mission System (DSMS)
+External Interface Specification
+JPL D-16765
+
+TRK-2-23
+Media Calibration Interface
+Original Release:  June 1, 1985
+Change 02:  May 31, 2000
+
+
+Document Owner:
+       Approved by:
+
+
+______________________________ ________
+T. Runge       Date
+Troposphere Calibration Software CDE
+
+Document Owner:
+
+
+
+______________________________ ________
+A. Kwok       Date
+System Services Development Engineer
+Tracking and Navigation Services
+
+Approved by:       Approved by:
+
+
+______________________________ ________
+W. Tai       Date
+Manager, TMOD Systems Engineering and Standards Office
+
+
+Approved by:
+
+
+______________________________ ________
+L. Cangahuala       Date
+System Services Manager
+Tracking and Navigation Services
+Approved by:
+
+______________________________ ________
+J. Stipanuk       Date
+Interface Engineer and Release Authority
+
+
+Prepared By:
+
+       Approved by:
+
+______________________________ ________
+T. Runge       Date
+Troposphere Calibration Software CDE
+
+
+
+
+Reviewed By:
+       Approved by:
+
+
+______________________________ ________
+A. Kwok       Date
+TMOD System Engineer
+
+
+
+
+______________________________ ________
+V.I. Altunin       Date
+Telecommunications and Mission Services Manager
+       Approved by:
+
+
+______________________________ ________
+A. I. Beers       Date
+Telecommunications and Mission Services Manager
+
+
+______________________________ ________
+R.D. Benson       Date
+Telecommunications and Mission Services Manager
+       Approved by:
+
+
+______________________________ ________
+A.L. Berman       Date
+Telecommunications and Mission Services Manager
+
+ _________________________ ________
+P.E. Beyer       Date
+Telecommunications and Mission Services Manager
+       Approved by:
+
+
+______________________________ ________
+A.F. Chang       Date
+Telecommunications and Mission Services Manager
+
+______________________________ ________
+R.L. Gillette       Date
+Telecommunications and Mission Services Manager
+       Approved by:
+
+______________________________ ________
+D.P. Holmes       Date
+Telecommunications and Mission Services Manager
+
+
+
+
+______________________________ ________
+E.B. Luers       Date
+Telecommunications and Mission Services Manager
+       Approved by:
+
+
+______________________________ ________
+J.C. McKinney       Date
+Telecommunications and Mission Services Manager
+
+______________________________ ________
+P.T. Poon       Date
+Telecommunications and Mission Services Manager
+       Approved by:
+
+
+______________________________ ________
+B.G. Yetter       Date
+Telecommunications and Mission Services Manager
+
+______________________________ ________
+M. Connally       Date
+System Services Development Engineer
+DSN Science Services
+
+______________________________ ________
+D. Linick       Date
+Manager, Deep Space Mission System Operations Office
+
+       Approved by:
+
+
+______________________________ ________
+J. Wackley       Date
+Operations
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    Change Log
+
+Revision       Date      Pages/Sections   Change Summary         
+
+New issue   05/01/1983   All
+
+Change 1    02/15/1999   C..1             Clarification of 2-digit year.
+
+Change 2    05/31/2000   All              Update troposphere and solar
+                                          Plasma calibration specifications
+                                          and reformat.
+
+Contents
+
+1 Introduction       
+
+1.1 Purpose and Scope       
+1.1.1 Applicability of This Release       
+
+1.2 Revision and Control       
+
+1.3 Applicable Documents       
+
+
+1.4 Notation and Conventions       
+
+1.5 Abbreviations       
+
+2 Functional Overview       
+
+3 Detailed Interface Description       
+
+3.1 CSP Command Language       
+3.1.1 Command Verbs       
+3.1.2 Data Types       
+3.1.3 Frequency Band       
+3.1.4 Transmission Media       
+3.1.5 Time Spans       
+3.1.6 Network Complex or Station       
+3.1.7 Data Source       
+3.1.8 Computation Specifiers       
+3.1.9 Sign of Calibration       
+3.1.10 Number Formats       
+3.1.11 Comments       
+
+3.2 Media Calibrations       
+3.2.1 Ionospheric Calibrations       
+3.2.2 Tropospheric Calibrations       
+3.2.3 Solar Plasma Calibrations       
+
+3.3 File Naming Conventions       
+
+3.4 Protocols and Configuration       
+
+3.5 Dependencies       
+
+
+Figures
+Figure       Page
+Figure 3-1: Example Ionospheric Calibration       
+Figure 3-2: Seasonal Tropospheric Models for DSCC 10       
+Figure 3-3: Example Tropospheric Calibrations       
+Figure 3-4: Example Solar Plasma Calibration       
+ 
+Tables
+Table       Page
+Table 3-1: CSP Elements Used in Media Calibrations       
+
+
+
+1 Introduction
+
+Section 1
+
+Introduction
+
+1.1        Purpose and Scope
+This module specifies the format and content of the media calibration data that 
+are provided by the Media Modeling (MEDIA) Subsystem to the Orbit and Trajectory 
+(NAV) Subsystem, for use by project navigation and radio science teams, multi-
+mission spacecraft navigation, and other investigators. These calibrations 
+improve the accuracy of spacecraft orbit determination and radio science 
+investigations by compensating for the media transmission effects of the Earth's 
+troposphere and ionosphere and the interplanetary solar plasma on the 
+propagation of radio metric signals.
+
+1.1.1 Applicability of This Release
+This module is change number 2. It reflects the current usage of real time 
+corrections to the seasonal troposphere models, and describes a new 
+implementation of solar plasma calibrations, which have not been used recently. 
+Table 3-1 has been modified to: improve clarity; add data type DOPRNG, which 
+applies to both DOPPLER and RANGE and is now the most commonly-used data type in 
+media calibrations; delete the data type specifiers F1, F2, F3, F3C, and PLOP 
+and the frequency band specifier BAND, which were used only in the obsolete 
+solar plasma calibrations; and add the frequency band specifier DOWNLINK, which 
+is used in the new solar plasma calibrations.
+
+1.2        Revision and Control
+Revisions or changes to the information herein presented may be initiated 
+according to the procedure specified in the Introduction to Document 820-013 
+(reference [2]).
+
+1.3        Applicable Documents
+       
+1.       820-062, DSMS Terms and Abbreviations, DSMS Requirements and Design.
+2. 820-013, D-16765, DSMS External Interface Specification, OPS-6-3
+      and OPS-6-21.
+3.       http://eis.jpl.nasa.gov/nav/doc/documentation.html, Navigation and 
+Mission Design Section Software, DPTRAJ-ODP.
+4.       Journal of Geophysical Research, Vol, 101, No. B2, 1996, Global Mapping 
+Functions for the Atmospheric Delay at Radio Wavelengths, A.E. Niell.
+5.       DSN Progress Report, Vol XIV, April 15, 1973, A New Method to Predict 
+Wet Zenith Range Correction from Surface Measurements, C.C. Chao.
+
+
+1.4        Notation and Conventions
+Calibration time span limiters provide only two digits for the year field. Year 
+values 69 through 99 are to be interpreted as years 1969 through 1999. Year 
+values 00 through 68 are to be interpreted as years 2000 through 2068.
+
+1.5        Abbreviations
+Abbreviations used in this document are defined with the first textual use of 
+the term.  Abbreviations and acronyms approved for use are listed in Document 
+820-062 (reference [1]). Abbreviations appearing in this module, but not 
+documented in 820-062 are:
+
+
+ASCII
+American Standard Code for Information Interchange
+CSP
+Control Statement Processor (of the Orbit Determination Program)
+GPS
+Global Positioning Satellite
+
+
+
+      Functional Overview
+
+Section 2
+
+Functional Overview
+
+Media calibrations are provided in the form of American Standard Code for 
+Information Interchange (ASCII) text files. They are created and delivered by 
+the Tracking Systems Analytic Calibration (TSAC) Operations Unit in response to 
+user requests. Delivery is accomplished via File Transfer Protocol (FTP) by 
+"pushing" files of calibrations over the JPLnet institutional network to the 
+user's computer or a central NAV repository, at intervals that are determined by 
+the user's accuracy and timeliness requirements and negotiated with the TSAC 
+operations unit. The location of the NAV repository is subject to change and 
+should be obtained from TSAC Operations.
+A separate calibration file is provided for each medium (ionosphere, 
+troposphere, or solar plasma) desired. Ionosphere and solar plasma calibration 
+files provide one calibration per tracking pass, or other time period of 
+interest, at each Deep Space Communications Complex (DSCC) or Deep Space Station 
+(DSS). Troposphere calibration files provide two calibrations for each pass: a 
+"dry" delay calibration and a "wet" delay calibration. Each calibration occupies 
+approximately 160 to 320 bytes of storage.
+
+
+
+Detailed Interface Description
+
+Section 3
+
+Detailed Interface Description
+
+Media calibrations conform to the Control Statement Processor (CSP) language 
+used by the Orbit Determination Program (ODP) to adjust or delete data points. 
+The CSP language is described in detail in reference [3] under DPTRAJ-ODP, 
+Programs - By Model (Volume 1), Model Descriptions, Data Editing. Section 3.1 
+below identifies the CSP command elements that may be used in media 
+calibrations. Section 3.2 provides further information and examples specific to 
+ionospheric, tropospheric, and solar plasma calibrations. Section 3.3 describes 
+the naming conventions used for the media calibration files. Interface 
+dependencies are described in section 3.4.
+
+3.1        CSP Command Language
+A CSP command consists of a command verb followed by optional scope limiters and 
+computation specifiers, terminated by a period. Spaces are not significant. Most 
+commands extend over multiple lines of text. The CSP language elements that may 
+be used in media calibrations are listed in Table 3-1 and described in the 
+following subsections.
+
+Table 3-1: CSP Elements Used in Media Calibrations
+
+Type of Element         Elements Used
+
+Command Verbs           ADJUST     DELETE
+
+Data Types              DOPPLER    RANGE   DOPRNG
+                        VLBI       DVLBI
+
+Frequency Band          DOWNLINK
+
+Computation Specifier   BY NRMPOW  BY CONST  BY TRIG
+                        BY DNRMPOW BY DCONST BY DTRIG
+
+Transmission Medium     MODEL(DRY NUPART) MODEL(CHPART)
+                        MODEL(WET NUPART) MODEL(DRVID)
+
+Time Span               FROM    TO            AT
+                        BEFORE  AFTER
+
+Network Complex         DSN(C10) DSN(C40)   DSN(C60)
+or Station              DSN(dss) for a specific DSS number
+
+Source                  SCID      QUASAR
+
+Comments                #
+
+
+3.1.1 Command Verbs
+The media calibrations use two CSP command verbs: ADJUST and DELETE. The 
+calibrations themselves are expressed by ADJUST commands, which specify 
+corrections to one or more radio metric data types; e.g., ADJUST(DOPRNG). DELETE 
+commands may be used to instruct the ODP not to process certain data that could 
+not be calibrated.
+
+3.1.2 Data Types
+Data type limiters indicate the specific radio metric data type(s) to be 
+adjusted or deleted; e.g., ADJUST(DOPRNG). The data type limiters used in the 
+media calibrations are: DOPPLER (Doppler data), RANGE (range data), DOPRNG 
+(Doppler and range data), VLBI (VLBI data), and DVLBI (Delta-VLBI data). Most 
+media calibrations refer to data type DOPRNG since Doppler/Range tracking is by 
+far the most common.
+
+
+3.1.3 Frequency Band
+The applicable downlink frequency band is specified for solar plasma 
+calibrations in the form DOWNLINK(x) where x is either S, X, L, C, or K.
+
+3.1.4 Transmission Media
+Media calibrations refer to one of four media: ionospheric charged particles 
+(media model MODEL(CHPART)), tropospheric wet delay (MODEL(WET NUPART)), 
+tropospheric dry delay (MODEL(DRY NUPART)), and solar plasma (MODEL(DRVID)). 
+Only wet and dry tropospheric delay calibrations are typically mixed together in 
+a single calibration file.
+
+3.1.5 Time Spans
+The time span limiters that may be used in media calibrations are FROM, TO, AT, 
+BEFORE, and AFTER. FROM and TO are always used together while AT, BEFORE and 
+AFTER are used alone. Each time span limiter is followed by a parenthesized date 
+and time in the format YY/MM/DD,HH:MM:SS; e.g., 00/02/15,14:45:00. All times 
+refer to Universal Time Coordinated (UTC). The year, month, day, hour, and 
+minute values are two-digit integers; the seconds value is floating point. Years 
+69 through 99 are to be interpreted as 1969 through 1999 and years 00 through 68 
+are to be interpreted as 2000 through 2068. Up to three of the right-most time 
+fields may be omitted, in which case their values are taken to be zeros. Each 
+calibration applies only during the time span specified. If the limiter is AT, 
+the time span is from one millisecond before the given time to one millisecond 
+after.
+
+3.1.6 Network Complex or Station
+The applicable tracking sites for media calibrations may be specified by DSCC 
+number or by DSS number. DSCC specifications have the form DSN(Cnn) where nn is 
+the complex number; e.g., DSN(C10). These are the more common, since the media 
+effects are essentially the same for all stations at a given complex. Individual 
+stations are specified in the form DSN(nn) where nn is the DSS number; e.g., 
+DSN(15). See module OPS-6-3 of 820-13 [2] for the DSS identifiers.
+
+3.1.7 Data Source
+Applicable data sources for media calibrations are specified by spacecraft or 
+quasar number. Spacecraft are identified in the form SCID(nn) where nn is the 
+decimal spacecraft number given in module OPS-6-21A, Table 3-4 of 820-13 [2]. 
+Quasar sources of VLBI data are identified in the form QUASAR(nn) where nn is 
+the quasar number. If no data source is specified, the calibration is applicable 
+to any data source. Tropospheric calibrations may omit a source specification, 
+since they do not refer to a specific spacecraft line-of-sight. 
+
+3.1.8 Computation Specifiers
+Computation specifiers indicate how the data corrections are expressed in ADJUST 
+commands. Media calibrations may be expressed by a constant (computation 
+specifier BY CONST), by a normalized power series (BY NRMPOW), or by a Fourier 
+series (BY TRIG). If the constant or the coefficients are expressed in double 
+precision, the computation specifier is preceded by the letter "D" (e.g., BY 
+DNRMPOW).
+The computation specifier is followed by a parenthesized, comma-separated list 
+of numerical coefficients. Up to 24 single-precision or 12 double-precision 
+coefficients are allowed in one series. Their interpretation is described below 
+for each type of computation that may be used. In these descriptions S and E 
+refer to the start and end of the applicable time span, which are generally 
+specified by the FROM and TO time span limiters.
+A constant correction of size C is expressed in the form BY CONST(C).
+A normalized power series is expressed in the form BY NRMPOW(CO, C1, ... ,CN). 
+The calibration at time T is computed as CO + C1 * X + C2 * X2 + ... + CN * XN, 
+where T is replaced by the normalized, dimensionless argument X = 2 * ( (T - S) 
+/ (E - S) ) - 1, which is -1 at T = S and +1 at T = E.
+A Fourier series is expressed in the form BY TRIG (P, AO, Al, B1, A2, B2, ..., 
+AN, BN). The calibration at time T is A0 + AlcosX + B1sinX + A2cos2X + B2sin2X 
++...+ ANcosNX + BNsinNX, where X = 2p * (T - S) / P and P is the period of the 
+fundamental mode, in seconds.
+
+3.1.9 Sign of Calibration
+Positive ionospheric and tropospheric calibrations indicate positive range 
+delays. Positive solar plasma calibrations indicate an increase in the range 
+delay due to solar plasma. Media calibrations are (effectively) subtracted from 
+ODP range observables. ODP Doppler observables are corrected by (effectively) 
+subtracting troposphere calibrations while adding ionosphere and solar plasma 
+calibrations, since the charged particle effect advances the Doppler phase.
+
+3.1.10 Number Formats
+The formats for single- and double-precision floating-point numbers are 
+generally the same as the standard FORTRAN G format. However, the sign of the 
+exponent of a floating-point number may replace the letter D or E; for example, 
+1.234E-3 may be written 1.234-3.
+
+3.1.11 Comments
+Additional commentary may appear in a CSP command if it is preceded by a number 
+sign (#). All characters from a number sign to the end of the text line are 
+ignored by the ODP.
+
+3.2        Media Calibrations
+
+3.2.1 Ionospheric Calibrations
+The distribution of charged particles in the ionosphere is highly inhomogeneous. 
+The magnitude of the ionospheric range delay at a given site depends on the 
+spacecraft line-of-sight and on the observing frequency, time of day, season, 
+and time since start of the current solar cycle. At S-band, the zenith 
+ionospheric delay ranges from less than 1 meter to more than 8 meters, and the 
+delay at 0 degrees elevation is about 3.5 times as large.
+Ionospheric calibrations are given by a normalized power series for each 
+spacecraft tracking pass at each tracking complex or station. An example is 
+shown in Figure 3-1. Except in special circumstances, the time span of each 
+calibration is from spacecraft rise (0 degrees) to set (0 degrees) at the 
+receiving station or complex. The calibration represents the one-way line-of-
+sight ionospheric range delay to the spacecraft, in meters at a nominal S-band 
+frequency of 2295 Mhz. The ODP adjusts the calibration to the actual radio 
+metric tracking frequency used. 
+
+
+Figure 3-1: Example Ionospheric Calibration
+
+ADJUST(DOPRNG)BY NRMPOW(2.9261,-1.6357,3.5563,0.0388,2.1934)   MODEL(CHPART)
+FROM(99/12/01,03:31)TO(99/12/01,15:32)DSN(C40)SCID(82).#S60 ADJ 991207 14:17
+
+
+Ionospheric calibration files typically contain calibration predictions for all 
+future tracking passes in the same calendar month. These are replaced by 
+calibrations as those become available. They provide a fallback in case a 
+calibration cannot be created for any given tracking pass.
+
+3.2.2 Tropospheric Calibrations
+The tropospheric delay is comprised of a wet delay, caused by the permanent 
+dipole in atmospheric water vapor, and a hydrostatic or dry delay, caused by 
+induced dipoles in all atmospheric gasses. The zenith dry delay ranges from 
+about 2 to 2.2 meters at the DSN sites. DSN zenith wet delays are smaller and 
+more variable, ranging from a few centimeters to 25 centimeters or more. The 
+slant-range factor is approximately 1 / sinX, which is about 10 at 6 degrees 
+elevation.
+To a large degree, the troposphere is azimuthally symmetric. Therefore, 
+tropospheric calibrations represent the zenith wet and dry delays and the ODP 
+uses mapping functions [4] to perform the slant-range correction to the 
+spacecraft elevation. Thus, tropospheric calibrations are not necessarily 
+specific to a particular spacecraft. They may be produced for specific 
+spacecraft tracks and include corresponding spacecraft identifiers, or they may 
+simply "cover the clock" at a given DSCC and apply to all spacecraft by omitting 
+a spacecraft scope limiter.
+First order calibration of the tropospheric delays is accomplished with seasonal 
+models [5] which do not depend on real time data and need only be delivered 
+once. These models represent the one-way zenith wet and dry delays, in meters, 
+as Fourier series calibrations as shown in Figure 3-2. They are routinely used 
+in all ODP runs. More accurate tropospheric calibrations are derived from real 
+time weather and GPS data. These calibrations are expressed as normalized power 
+series corrections, in meters, to the one-way seasonal model delays, in order to 
+avoid double-calibrating. Examples are shown in Figure 3-3.
+The zenith dry delay decreases about 0.25 mm for each additional meter of 
+altitude. Dry delay calibrations refer to the altitude of the intersection of 
+axes of the 70m antenna at each DSCC. The seasonal models include adjustments 
+for the altitudes of each of the other DSN antennas.
+
+
+Figure 3-2: Seasonal Tropospheric Models for DSCC 10
+
+ADJUST(DOPRNG)BY TRIG(31557600.,   0.0870,  -0.0360,  -0.0336,   0.0002,
+   0.0200,   0.0008,  -0.0021,  -0.0036,  -0.0002)                      MODEL
+(WET NUPART)FROM(72/01/01,00:00)TO(48/01/01,00:00)DSN(C10). #ADJ 920121 02:23
+ADJUST(DOPRNG)BY TRIG(31557600.,   2.0521,   0.0082,  -0.0005,  -0.0004,
+   0.0033,  -0.0015,   0.0005,  -0.0011,   0.0036)                      MODEL
+(DRY NUPART)FROM(72/01/01,00:00)TO(48/01/01,00:00)DSN(C10). #ADJ 920121 02:23
+
+
+
+Figure 3-3: Example Tropospheric Calibrations
+
+ADJUST(DOPRNG)BY NRMPOW(-0.0352, -0.0319,  0.0316,  0.0214)             MODEL
+(WET NUPART)FROM(99/11/12,04:24)TO(99/11/12,16:35:00)DSN(C40)SCID(82).
+ADJUST(DOPRNG)BY NRMPOW(  -0.0141,  -0.0015,  -0.0023)                  MODEL
+(DRY NUPART)FROM(99/11/12,04:24)TO(99/11/12,16:35:00)DSN(C40)SCID(82).
+
+
+3.2.3 Solar Plasma Calibrations
+The distribution of solar plasma is highly irregular in regions of space near 
+the sun. Solar plasma calibrations are usually required only when a spacecraft 
+is near superior conjunction. The calibrations represent the change in round-
+trip range delay due to solar plasma that has accumulated since the beginning of 
+the track, in meters, as normalized power series. They are identified with the 
+receiving DSCC and the down-link frequency band. The calibration time span is 
+the actual time span of the 2-way or 3-way ranging data. If the transmitting 
+station changes during a track, the calibration will end and a new one for the 
+same receiving DSCC will be started. The ionospheric portion of the round-trip 
+charged particle delay is removed so that only the solar plasma contribution 
+remains. An example solar plasma calibration is shown in Figure 3-4.
+
+
+
+Figure 3-4: Example Solar Plasma Calibration
+
+ADJUST(DOPRNG)DOWNLINK(X)BY NRMPOW( 2.0465, 2.1997, 0.0358, -0.7583, 0.2619)
+MODEL(DRVID)FROM(03/03/13,14:20)TO(03/03/13,18:18)DSN(C10)SCID(82).
+
+
+
+3.3 File Naming Conventions
+Media calibration file names are constructed to indicate the applicable 
+transmission medium, spacecraft, dates, and tracking data type(s). The specific 
+naming conventions are subject to change and should be confirmed with TSAC 
+Operations. The following describes the conventions that are used currently.
+Media calibration file names have the form medum_sc_datespan_datatype.CSP; e.g., 
+TROPCAL_82_0002_DOPRNG.CSP. medium is either IONCAL, TROPCAL, or PLSMCAL; sc is 
+the spacecraft id number; datespan indicates the range of UTC dates covered by 
+the calibrations; and datatype is one of the data type limiters listed in 
+section 3.1.2, usually DOPRNG. datespan refers to the start dates of the 
+calibrations. It takes one of three forms:
+1.       yymmdd_MMDD is used for TROPCAL and PLSMCAL files that contain less 
+than a full calendar month of calibrations; e.g., 000201_0214 for the first two 
+weeks of February, 2000. These files are typically created for daily-to-weekly 
+deliveries and are replaced by files of type 2 below shortly after the end of 
+the month.
+2.       yymm is used for files that contain one full calendar month of 
+calibrations; e.g., 0002 for February of 2000. These files are typically created 
+shortly after the end of the month. The same form is used for daily-to-weekly 
+delivery IONCAL files, which contain calibrations for the first part of the 
+month and predictions for the rest of it.
+3.       yymm_YYMM is used for IONCAL files that contain calibrations and 
+predictions for month yymm plus predictions for the next month YYMM. These files 
+are typically created for the last scheduled delivery of month yymm.
+
+3.4        Protocols and Configuration
+The protocols required for file transfer include Internet Protocol (IP), 
+Transmission Control Protocol (TCP), and File Transfer Protocol (FTP). See 820-
+019, DFL-1-3 for the well-known port number for FTP.
+The FTP file transfers are in ASCII mode. The file structure is a string of 
+bytes. Stream mode is used to send the data. There is no encryption.
+
+3.5        Dependencies
+The creation and delivery of media calibrations depend on the user making prior 
+arrangements with the TSAC Operations Unit for the desired calibrations and 
+delivery schedule.
+The creation of spacecraft line-of-sight ionospheric calibrations depends on the 
+user providing TSAC Operations with a spacecraft trajectory P-file (see 
+reference [3], ODP-DPTRAJ, File Formats, Output File Format Descriptions, 
+Spacecraft Ephemeris) or state vector that gives the spacecraft position as a 
+function of time. This is normally done via e-mail or FTP per a verbal 
+arrangement with TSAC Operations, as often as necessary to maintain adequate 
+knowledge of the spacecraft position.
+The creation of media calibrations for VLBI or delta-VLBI tracking data depends 
+on the user providing TSAC Operations with the quasar number(s) and the 
+spacecraft and quasar observing schedules.
+The creation of solar plasma calibrations depends on the user configuring the 
+ranging parameters appropriately to acquire useful DRVID (Differenced Range vs. 
+Integrated Doppler) data.
+

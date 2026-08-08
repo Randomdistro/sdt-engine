@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us">
+  <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>VLBA Data Retrieval — NRAO Science Site</title>
+    <!-- Third Party JS Add-ons -->
+    <!--<script src="https://kit.fontawesome.com/f17b5be500.js" crossorigin="anonymous"></script>-->
+    <!--<script async src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS_CHTML"></script> --><!-- Math Jax 2 -->
+    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script> <!-- Math Jax 3 -->
+
+    <!-- Internal JS files -->
+    <script src="/++theme++barceloneta-nrao/assets/js/content.js"></script>
+    
+    <link rel="stylesheet" href="https://use.typekit.net/gpi1eph.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="/++theme++barceloneta-nrao/barceloneta-favicon.ico" />
+    <link rel="apple-touch-icon" href="/++theme++barceloneta-nrao/barceloneta-apple-touch-icon.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/++theme++barceloneta-nrao/barceloneta-apple-touch-icon-144x144-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/++theme++barceloneta-nrao/barceloneta-apple-touch-icon-114x114-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/++theme++barceloneta-nrao/barceloneta-apple-touch-icon-72x72-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/++theme++barceloneta-nrao/barceloneta-apple-touch-icon-57x57-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" href="/++theme++barceloneta-nrao/barceloneta-apple-touch-icon-precomposed.png" />
+
+  <meta name="twitter:card" content="summary" /><meta property="og:site_name" content="NRAO Science Site" /><meta property="og:title" content="VLBA Data Retrieval" /><meta property="og:type" content="website" /><meta property="og:description" content="" /><meta property="og:url" content="https://science.nrao.edu/facilities/vlba/data-archive/index" /><meta property="og:image" content="https://science.nrao.edu/@@site-logo/headergraphic_v3.png" /><meta property="og:image:type" content="image/png" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Plone - http://plone.com" /><link rel="stylesheet" href="https://science.nrao.edu/++plone++production/++unique++2024-10-10T11:22:45.665488/default.css" data-bundle="production" /><link rel="stylesheet" href="https://science.nrao.edu/++plone++static/++unique++2024-09-20%2015%3A00%3A38.022471/plone-fontello-compiled.css" data-bundle="plone-fontello" /><link rel="stylesheet" href="https://science.nrao.edu/++plone++static/++unique++2024-09-20%2015%3A00%3A38.022471/plone-glyphicons-compiled.css" data-bundle="plone-glyphicons" /><link rel="stylesheet" href="https://science.nrao.edu//++theme++barceloneta-nrao/less/barceloneta-compiled.css" data-bundle="diazo" /><link rel="stylesheet" href="https://science.nrao.edu/custom.css?timestamp=2024-09-24 09:20:15.956431" data-bundle="custom-css" /><link rel="canonical" href="https://science.nrao.edu/facilities/vlba/data-archive/index" /><link rel="search" href="https://science.nrao.edu/@@search" title="Search this site" /><script>PORTAL_URL = 'https://science.nrao.edu';</script><script type="text/javascript" src="https://science.nrao.edu/++plone++production/++unique++2024-10-10T11:22:45.665488/default.js" data-bundle="production"></script></head>
+  <body id="visual-portal-wrapper" class="frontend icons-on pat-markspeciallinks portaltype-document section-facilities site-scienceSite subsection-vlba subsection-vlba-data-archive subsection-vlba-data-archive-index template-document_view thumbs-on userrole-anonymous viewpermission-view" dir="ltr" data-base-url="https://science.nrao.edu/facilities/vlba/data-archive/index" data-view-url="https://science.nrao.edu/facilities/vlba/data-archive/index" data-portal-url="https://science.nrao.edu" data-i18ncatalogurl="https://science.nrao.edu/plonejsi18n" data-pat-markspeciallinks="{&quot;external_links_open_new_window&quot;: true, &quot;mark_special_links&quot;: false}" data-pat-pickadate="{&quot;date&quot;: {&quot;selectYears&quot;: 200}, &quot;time&quot;: {&quot;interval&quot;: 5 } }" data-pat-plone-modal="{&quot;actionOptions&quot;: {&quot;displayInModal&quot;: false}}"><!--  <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>--><div class="outer-wrapper">
+      <header id="content-header">
+        <div class="container">
+          
+      <div id="portal-header">
+    <a id="portal-logo" title="NRAO Science Site" href="https://science.nrao.edu">
+    <img src="https://science.nrao.edu/@@site-logo/headergraphic_v3.png" alt="NRAO Science Site" title="NRAO Science Site" /></a>
+
+<div id="portal-searchbox">
+
+    <form id="searchGadget_form" action="https://science.nrao.edu/@@search" role="search" data-pat-livesearch="ajaxUrl:https://science.nrao.edu/@@ajax-search" class="pat-livesearch">
+
+        <div class="LSBox">
+        <label class="hiddenStructure" for="searchGadget">Search Site</label>
+             
+        <div class="searchSection">
+            <input id="searchbox_currentfolder_only" class="noborder" type="checkbox" name="path" value="/scienceSite/facilities/vlba/data-archive" />
+            <label for="searchbox_currentfolder_only" style="cursor: pointer">only in current section</label>
+        </div>
+             
+        <input name="SearchableText" type="text" size="18" id="searchGadget" title="Search Site" placeholder="Search Site" class="searchField" />
+
+        <input class="searchButton" type="submit" value="Search" />
+
+         </div>
+    </form>
+
+    <div id="portal-advanced-search" class="hiddenStructure">
+        <a href="https://science.nrao.edu/@@search">Advanced Search…</a>
+    </div>
+
+</div>
+
+<div id="portal-anontools">
+  <ul>
+    <li>
+      
+          <a title="Log in" href="https://science.nrao.edu/login" id="personaltools-login" class="pat-plone-modal" data-pat-plone-modal="{&quot;prependContent&quot;: &quot;.portalMessage&quot;, &quot;title&quot;: &quot;Log in&quot;, &quot;width&quot;: &quot;26em&quot;, &quot;actionOptions&quot;: {&quot;redirectOnResponse&quot;: true}}">Log in</a>
+      
+    </li>
+  </ul>
+</div>
+
+
+
+
+
+</div>
+
+    
+          
+        </div>
+      </header>
+      <div id="mainnavigation-wrapper">
+        <div id="mainnavigation">
+
+  <nav class="plone-navbar pat-navigationmarker" id="portal-globalnav-wrapper">
+    <div class="container">
+      <div class="plone-navbar-header">
+        <button type="button" class="plone-navbar-toggle" data-toggle="collapse" data-target="#portal-globalnav-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+
+      <div class="plone-collapse plone-navbar-collapse" id="portal-globalnav-collapse">
+        <ul class="plone-nav plone-navbar-nav" id="portal-globalnav">
+          <li class="index_html"><a href="https://science.nrao.edu" class="state-None">Home</a></li><li class="about has_subtree"><a href="https://science.nrao.edu/about" class="state-published" aria-haspopup="true">About NRAO</a><input id="navitem-about" type="checkbox" class="opener" /><label for="navitem-about" role="button" aria-label="About NRAO"></label><ul class="has_subtree dropdown"><li class="committees"><a href="https://science.nrao.edu/about/committees" class="state-published">Committees</a></li><li class="scistaff"><a href="https://science.nrao.edu/about/scistaff" class="state-published">Scientific Staff</a></li><li class="visitors"><a href="https://science.nrao.edu/about/visitors" class="state-published">Visitors</a></li><li class="organization"><a href="https://science.nrao.edu/about/organization" class="state-published">Organization</a></li><li class="annual-reports"><a href="https://science.nrao.edu/about/annual-reports" class="state-published">Annual Reports</a></li><li class="metrics"><a href="https://science.nrao.edu/about/metrics" class="state-published">Performance Metrics</a></li><li class="publications"><a href="https://science.nrao.edu/about/publications" class="state-published">Historical Publications</a></li><li class="drone-policy"><a href="https://science.nrao.edu/about/drone-policy" class="state-published">Drone Policy</a></li></ul></li><li class="science has_subtree"><a href="https://science.nrao.edu/science" class="state-published" aria-haspopup="true">Science</a><input id="navitem-science" type="checkbox" class="opener" /><label for="navitem-science" role="button" aria-label="Science"></label><ul class="has_subtree dropdown"><li class="astro2020"><a href="https://science.nrao.edu/science/astro2020" class="state-published">Astro2020</a></li><li class="meetings"><a href="https://science.nrao.edu/science/meetings" class="state-published">Meetings</a></li><li class="colloquia"><a href="https://science.nrao.edu/science/colloquia" class="state-published">Colloquia</a></li><li class="highlights"><a href="https://science.nrao.edu/science/highlights" class="state-published">Highlights</a></li><li class="science-program"><a href="https://science.nrao.edu/science/science-program" class="state-published">Science Program</a></li><li class="surveys"><a href="https://science.nrao.edu/science/surveys" class="state-published">Surveys</a></li><li class="service-observing"><a href="https://science.nrao.edu/science/service-observing" class="state-published">Service Observing</a></li><li class="jansky-lecture"><a href="https://science.nrao.edu/science/jansky-lecture" class="state-published">Jansky Lectureship</a></li><li class="futures"><a href="https://science.nrao.edu/science/futures" class="state-published">Futures</a></li></ul></li><li class="observing has_subtree"><a href="https://science.nrao.edu/observing" class="state-published" aria-haspopup="true">Observing</a><input id="navitem-observing" type="checkbox" class="opener" /><label for="navitem-observing" role="button" aria-label="Observing"></label><ul class="has_subtree dropdown"><li class="helpdesk"><a href="https://science.nrao.edu/observing/helpdesk" class="state-published">NRAO Science Helpdesk</a></li><li class="call-for-proposals"><a href="https://science.nrao.edu/observing/call-for-proposals" class="state-published">Call For Proposals</a></li><li class="proposalprep"><a href="https://science.nrao.edu/observing/proposalprep" class="state-published">Proposal Prep</a></li><li class="nrao_gbo_users_policies.pdf"><a href="https://science.nrao.edu/observing/nrao_gbo_users_policies.pdf" class="state-published">NRAO &amp; GBO Users' Policy</a></li><li class="proposal-types"><a href="https://science.nrao.edu/observing/proposal-types" class="state-published">Prop Eval &amp; Time Alloc</a></li><li class="observingprep"><a href="https://science.nrao.edu/observing/observingprep" class="state-published">Observation Preparation</a></li><li class="scheduling"><a href="https://science.nrao.edu/observing/scheduling" class="state-published">Scheduling</a></li><li class="dataprocessing"><a href="https://science.nrao.edu/observing/dataprocessing" class="state-published">Data Processing</a></li><li class="pub-support"><a href="https://science.nrao.edu/observing/pub-support" class="state-published">Publication Support</a></li><li class="news-release"><a href="https://science.nrao.edu/observing/news-release" class="state-published">News Release Opportunities</a></li><li class="data-archive"><a href="https://science.nrao.edu/observing/data-archive" class="state-published">Data Archive</a></li><li class="decoding-s-projects"><a href="https://science.nrao.edu/observing/decoding-s-projects" class="state-published">Decoding the 'S' Project Code Names</a></li><li class="nrao-archive-tool-enhancements"><a href="https://science.nrao.edu/observing/nrao-archive-tool-enhancements" class="state-published">NRAO Archive Tool Enhancements</a></li></ul></li><li class="opportunities has_subtree"><a href="https://science.nrao.edu/opportunities" class="state-published" aria-haspopup="true">Opportunities</a><input id="navitem-opportunities" type="checkbox" class="opener" /><label for="navitem-opportunities" role="button" aria-label="Opportunities"></label><ul class="has_subtree dropdown"><li class="jobs"><a href="https://science.nrao.edu/opportunities/jobs" class="state-published">Jobs</a></li><li class="postdoctoral-programs"><a href="https://science.nrao.edu/opportunities/postdoctoral-programs" class="state-published">Postdoctoral</a></li><li class="student-programs"><a href="https://science.nrao.edu/opportunities/student-programs" class="state-published">Student Programs</a></li><li class="courses"><a href="https://science.nrao.edu/opportunities/courses" class="state-published">Learning</a></li><li class="adjunct"><a href="https://science.nrao.edu/opportunities/adjunct" class="state-published">Adjunct</a></li><li class="co-op-internships"><a href="https://science.nrao.edu/opportunities/co-op-internships" class="state-published">Co-ops &amp; Graduate Research</a></li><li class="visitorsprogram"><a href="https://science.nrao.edu/opportunities/visitorsprogram" class="state-published">Visitors</a></li></ul></li><li class="srdp has_subtree"><a href="https://science.nrao.edu/srdp" class="state-published" aria-haspopup="true">SRDP</a><input id="navitem-srdp" type="checkbox" class="opener" /><label for="navitem-srdp" role="button" aria-label="SRDP"></label><ul class="has_subtree dropdown"><li class="tutorials"><a href="https://science.nrao.edu/srdp/tutorials" class="state-published">Tutorials</a></li><li class="self-calibration-preview"><a href="https://science.nrao.edu/srdp/self-calibration-preview" class="state-published">Automated Self-calibration</a></li><li class="science-reference-data-products-srdp-for-the-vla"><a href="https://science.nrao.edu/srdp/science-reference-data-products-srdp-for-the-vla" class="state-published">Science Reference Data Products (SRDP) for the VLA</a></li><li class="science-ready-data-products-srdp-for-alma"><a href="https://science.nrao.edu/srdp/science-ready-data-products-srdp-for-alma" class="state-published">Science Ready Data Products (SRDP) for ALMA</a></li></ul></li><li class="vlass has_subtree"><a href="https://science.nrao.edu/vlass" class="state-published" aria-haspopup="true">VLASS</a><input id="navitem-vlass" type="checkbox" class="opener" /><label for="navitem-vlass" role="button" aria-label="VLASS"></label><ul class="has_subtree dropdown"><li class="news"><a href="https://science.nrao.edu/vlass/news" class="state-published">News</a></li><li class="science"><a href="https://science.nrao.edu/vlass/science" class="state-published">Science Themes &amp; Impacts</a></li><li class="vlass-data"><a href="https://science.nrao.edu/vlass/vlass-data" class="state-published">VLASS Data</a></li><li class="community"><a href="https://science.nrao.edu/vlass/community" class="state-published">Community</a></li><li class="public-outreach"><a href="https://science.nrao.edu/vlass/public-outreach" class="state-published">Public Outreach</a></li><li class="library"><a href="https://science.nrao.edu/vlass/library" class="state-published">Library</a></li><li class="pilot-survey"><a href="https://science.nrao.edu/vlass/pilot-survey" class="state-published">Pilot Survey</a></li><li class="commensal-surveys"><a href="https://science.nrao.edu/vlass/commensal-surveys" class="state-published">Commensal Surveys</a></li><li class="submit-a-white-paper"><a href="https://science.nrao.edu/vlass/submit-a-white-paper" class="state-published">Community Comment Submission</a></li></ul></li><li class="spectrum has_subtree"><a href="https://science.nrao.edu/spectrum" class="state-published" aria-haspopup="true">Spectrum</a><input id="navitem-spectrum" type="checkbox" class="opener" /><label for="navitem-spectrum" role="button" aria-label="Spectrum"></label><ul class="has_subtree dropdown"><li class="services"><a href="https://science.nrao.edu/spectrum/services" class="state-published">Zone Regulatory Services</a></li><li class="monitoring"><a href="https://science.nrao.edu/spectrum/monitoring" class="state-published">Spectrum Monitoring &amp; RFI Mitigation</a></li><li class="policy"><a href="https://science.nrao.edu/spectrum/policy" class="state-published">Spectrum Policy</a></li><li class="projects"><a href="https://science.nrao.edu/spectrum/projects" class="state-published">Special Projects</a></li></ul></li><li class="ngvla"><a href="http://ngvla.nrao.edu/" class="state-published">ngVLA</a></li><li class="public"><a href="https://public.nrao.edu" class="state-published">Public</a></li><li class="my-nrao.edu"><a href="https://my.nrao.edu/nrao-2.0/Login.htm" class="state-published">my.nrao.edu</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+</div>
+      </div>
+      
+      <div id="above-content-wrapper">
+          <div id="viewlet-above-content"><nav id="portal-breadcrumbs" class="plone-breadcrumb">
+  <div class="container">
+    <span id="breadcrumbs-you-are-here" class="hiddenStructure">You are here:</span>
+    <ol aria-labelledby="breadcrumbs-you-are-here">
+      <li id="breadcrumbs-home">
+        <a href="https://science.nrao.edu">Home</a>
+      </li>
+      <li id="breadcrumbs-1">
+        
+          <a href="https://science.nrao.edu/facilities">Facilities</a>
+          
+        
+      </li>
+      <li id="breadcrumbs-2">
+        
+          <a href="https://science.nrao.edu/facilities/vlba">VLBA</a>
+          
+        
+      </li>
+      <li id="breadcrumbs-3">
+        
+          <a href="https://science.nrao.edu/facilities/vlba/data-archive">Data Archive</a>
+          
+        
+      </li>
+      <li id="breadcrumbs-4">
+        
+          
+          <span id="breadcrumbs-current">VLBA Data Retrieval</span>
+        
+      </li>
+    </ol>
+  </div>
+</nav>
+</div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <aside id="global_statusmessage">
+      
+
+      <div>
+      </div>
+    </aside>
+        </div>
+        <main id="main-container" class="row row-offcanvas row-offcanvas-right">
+          
+
+    
+
+    <div class="col-xs-12 col-sm-12 col-md-9 col-md-push-3">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12">
+          <article id="content">
+
+          
+
+          <header>
+            <div id="viewlet-above-content-title"><span id="social-tags-body" style="display: none" itemscope="" itemtype="http://schema.org/WebPage">
+  <span itemprop="name">VLBA Data Retrieval</span>
+  <span itemprop="description"></span>
+  <span itemprop="url">https://science.nrao.edu/facilities/vlba/data-archive/index</span>
+  <span itemprop="image">https://science.nrao.edu/@@site-logo/headergraphic_v3.png</span>
+</span>
+</div>
+            
+              <h1 class="documentFirstHeading">VLBA Data Retrieval</h1>
+
+            
+            <div id="viewlet-below-content-title">
+
+</div>
+
+            
+              
+
+            
+          </header>
+
+          <div id="viewlet-above-content-body"><section id="document-toc" class="portlet toc" role="section" style="display: none">
+  <header class="portletHeader">Contents</header>
+  <section class="portletContent">
+	  <div class="portletItem">
+	  </div>
+  </section>
+</section>
+</div>
+          <div id="content-core">
+            
+
+  <div id="parent-fieldname-text" class="pat-autotoc">
+<p> </p>
+<h3>Locating and unlocking data</h3>
+<p><span class="texhtml"> The online archive contains all VLBA data since observing started in 1992, and its contents are available via the Archive Access Tool (AAT).  The <a class="external-link" href="https://data.nrao.edu/">AAT search</a> provides a data retrieval tool which can be used either as a simple search using keywords in the main search box, or an advanced search under the "Show Search Inputs" below the search box. The Search Input option enables searches based on a large number of user-specified criteria. Both proprietary and public data can be downloaded via secure https file transfer. <span class="texhtml"><br /></span></span></p>
+<p><span class="texhtml"></span></p>
+<p><span class="texhtml">NRAO no longer provides the service of shipping data on hard-disks.</span></p>
+<p><span class="texhtml"></span></p>
+<p><span class="texhtml">Newly correlated VLBA data are transferred to the archive and made available for retrieval to those with the appropriate privileges.  With the exception of some rapid response and large proposals, VLBA data associated with a given proposal are normally restricted to proprietary use by the proposing team for a period of 12 months from the date of the last observation in the program (Note: data taken more than 12 months previously may still be proprietary if additional data for the same proposal have been taken within the last 12 months). Any member of the observing team can unlock proprietary data by signing in on the archive page with their my.nrao.edu user ID and password (Figure 1), and using the link "your_username's Data" in the upper right corner of the site.</span></p>
+<p>You need to be PI or co-I on the proposal to be able to access proprietary data. If you were not listed on the original proposal, you must first obtain permission from the PI, who in turn, must contact us through the <a class="external-link" href="http://go.nrao.edu/obshelp" target="_self" title="">NRAO Helpdesk</a> to allow your access to those data.</p>
+<p>Please, refer to the <a href="http://www.nrao.edu/administration/directors_office/dataarchive.shtml">NRAO Data Archive Policy</a> for more information regarding proprietary data.</p>
+<table class="plain">
+<tbody>
+<tr>
+<td><img alt="Screen capture of new archive search page" class="image-inline" src="https://science.nrao.edu/facilities/vlba/data-archive/new-archive-search/@@images/22a9f4fb-28e5-41b4-8f18-c000503ad34e.png" title="New Archive Search" /></td>
+</tr>
+<tr>
+<td>Figure 1. Archive Access Tool Search Parameters</td>
+</tr>
+</tbody>
+</table>
+<p> </p>
+<h3>Data Formats and Data Retrieval</h3>
+<p><span class="texhtml">All VLBA data are stored in FITS-IDI format.  Observations correlated with the legacy hardware correlator will have a .uvfits extension, and sometimes associated FITSAIPS file.  All observations correlated with the DIFX software correlator will have an .idifits extension.  <br /></span></p>
+<p>Please note:</p>
+<ul>
+<li>It is not currently possible to retrieve Measurement Set (MS) format data for VLBA observations.  Users who wish to use CASA for the data calibration will need to create MS files themselves with the CASA task <em>importfitsidi()</em>.  See below for more information on using CASA for VLBA data.</li>
+<li>Download requests without tarring will be a directory structure. To download that directory structure use the following <em>wget</em> command, replacing <em>'https://dl-dsoc.nrao.edu/anonymous/.....'</em> with the link provided in the notification e-mail.<br />
+<pre class="">wget -r --reject "index.html*" -np -nH --cut-dirs=3 https://dl-dsoc.nrao.edu/anonymous/.....</pre>
+</li>
+</ul>
+<p><span class="texhtml">Some archival data have known problems which, together with the possible fix, are listed on the </span><a class="external-link" href="http://www.vla.nrao.edu/astro/archive/issues/">archive issues</a> page.</p>
+<p> </p>
+<hr />
+<h3>Using CASA with VLBA Data</h3>
+<p><span style="background-color: #ffff99;">NRAO continues to recommend using AIPS for calibrating all VLBA observations. </span> NRAO staff are still evaluating CASA's readiness for calibration of VLBA data. The most up to date information on how to use CASA for VLBI data reduction can be found in our <a class="external-link" href="https://casaguides.nrao.edu/index.php?title=VLBI_Tutorials" target="_self">CASA guides</a>.</p>
+
+</div>
+
+
+          </div>
+          <div id="viewlet-below-content-body">
+
+
+
+    <div class="visualClear"><!-- --></div>
+
+    <div class="documentActions">
+        
+
+        
+
+    </div>
+
+</div>
+
+          
+        </article>
+        </div>
+      </div>
+      <footer class="row">
+        <div class="col-xs-12 col-sm-12">
+          <div id="viewlet-below-content">
+
+
+
+
+</div>
+        </div>
+      </footer>
+    </div>
+  
+          <div class="col-xs-12 col-sm-12 col-md-3 col-md-pull-9 sidebar-offcanvas">
+        <aside id="portal-column-one">
+          <div class="portletWrapper" id="portletwrapper-706c6f6e652e6c656674636f6c756d6e0a636f6e746578740a2f736369656e6365536974652f666163696c69746965732f766c62610a706f72746c65745f737461746963" data-portlethash="706c6f6e652e6c656674636f6c756d6e0a636f6e746578740a2f736369656e6365536974652f666163696c69746965732f766c62610a706f72746c65745f737461746963"><div class="portletStaticText portlet-static-vlba-left-menu">
+<div id="menuLeft">
+<ul class="menuLeft">
+<li><a class="internal-link" href="https://science.nrao.edu/facilities/vlba/proposing">Proposing</a>
+<ul>
+<li><a class="internal-link" href="https://science.nrao.edu/facilities/vlba/introduction-to-vlba">Intro to the VLBA</a></li>
+<li><a class="external-link" href="https://science.nrao.edu/observing/call-for-proposals">Call for Proposals</a></li>
+<li><a class="internal-link" href="https://science.nrao.edu/facilities/vla/docs/manuals/proposal-guide">Guide to NRAO User Portal</a></li>
+<li><a class="internal-link" href="https://science.nrao.edu/facilities/vlba/docs/manuals/propvlba">Guide to Proposing for the VLBA (and HSA/Global VLBI)</a></li>
+<li><a class="internal-link" href="https://science.nrao.edu/facilities/vlba/docs/manuals/oss">Observational Status Summary</a></li>
+<li><a href="https://science.nrao.edu/facilities/vlba/news">News for Proposers and Observers</a></li>
+<li><a href="https://science.nrao.edu/facilities/vlba/HSA">High Sensitivity Array</a></li>
+<li><a href="https://science.nrao.edu/facilities/vlba/accurate-source-position-service">Accurate Source Position Service</a></li>
+<li><a href="https://science.nrao.edu/facilities/vlba/gvlbi">Global VLBI</a></li>
+</ul>
+</li>
+<li><a class="internal-link" href="https://science.nrao.edu/facilities/vlba/observing">Observing</a>
+<ul>
+<li><a href="https://science.nrao.edu/facilities/vlba/news">News for Proposers and Observers</a><a href="http://science.nrao.edu/facilities/vlba/news"></a></li>
+<li><a class="internal-link" href="https://science.nrao.edu/facilities/vlba/docs/manuals/obsvlba">Guide to Observing with the VLBA (and HSA/Global VLBI)</a></li>
+<li><a href="http://www.aoc.nrao.edu/software/sched/index.html">Observation Prep Tool (SCHED)</a></li>
+<li><a class="internal-link" href="https://science.nrao.edu/facilities/vlba/observing/scheduling">Scheduling</a>
+<ul>
+<li><a class="external-link" href="http://www.vlba.nrao.edu/cgi-bin/schedules_new.cgi" target="_self" title="">Monthly Schedules</a></li>
+<li><a class="internal-link" href="https://science.nrao.edu/observing/schedsoc">Schedsoc Home Page</a></li>
+<li><a class="internal-link" href="https://science.nrao.edu/facilities/vlba/observing/daily-ut1">Daily UT1-UTC Observing</a></li>
+<li><a class="internal-link" href="https://science.nrao.edu/facilities/vlba/observing/dynamicguide">Dynamic Scheduling</a></li>
+</ul>
+</li>
+<li><a class="internal-link" href="https://science.nrao.edu/facilities/vlba/publications/memos/upgrade/sensimemo32.pdf">DiFX Pulsar Guide (pdf)</a></li>
+<li><a class="internal-link" href="https://science.nrao.edu/facilities/vlba/observing/rfi">Radio Frequency Interference (RFI)</a></li>
+<li><a class="internal-link" href="https://science.nrao.edu/facilities/vlba/observing/daily-ut1">Daily UT1-UTC</a></li>
+</ul>
+</li>
+<li><a class="internal-link" href="https://science.nrao.edu/facilities/vlba/calibration-and-tools">Calibration &amp; Tools</a>
+<ul>
+<li><a class="internal-link" href="https://science.nrao.edu/facilities/vlba/calibration-and-tools/vlba-calibrator-search-tool">VLBA Calibrator Search Tool</a></li>
+<li><a class="external-link" href="http://astrogeo.smce.nasa.gov/calib/search.html" target="_self" title="">NASA VLBI Calibrator Search Tool</a></li>
+<li><a class="internal-link" href="https://science.nrao.edu/facilities/vlba/calibration-and-tools/caliblogs">Calibration Tables &amp; Log Files</a></li>
+<li><a href="http://www.vla.nrao.edu/astro/calib/polar/">Polarization Calibration (Historic)</a></li>
+<li><a class="internal-link" href="https://science.nrao.edu/facilities/vlba/calibration-and-tools/detailedperformancedata">Detailed Performance Data</a>
+<ul>
+<li><a href="http://www.vlba.nrao.edu/cgi-bin/pnt_dir.pl">Pointing</a></li>
+<li><a href="http://www.vlba.nrao.edu/cgi-bin/wbd_dir.pl">Wideband</a></li>
+<li><a href="https://science.nrao.edu/facilities/vlba/system-temperatture-and-efficiency">System Temperature &amp; Efficiency</a></li>
+<li><a class="internal-link" href="https://science.nrao.edu/facilities/vlba/vlba-system-monitoring-observations">System Monitoring &amp; Auto-released Observations</a></li>
+</ul>
+</li>
+<li><a href="https://services.jive.eu/evn-calculator/cgi-bin/EVNcalc.pl">EVN Sensitivity Calculator</a></li>
+<li><a class="internal-link" href="https://science.nrao.edu/facilities/vlba/clcor_eop/details_of_error">CLCOR / EOP Difference tables 2006 - 2011</a></li>
+</ul>
+</li>
+<li><a class="internal-link" href="https://science.nrao.edu/facilities/vlba/calibration-and-tools/postpro">Data Processing</a>
+<ul>
+<li><a href="http://www.aips.nrao.edu/">AIPS</a></li>
+<li><a href="http://www.aips.nrao.edu/cook.html">AIPS Cookbook</a></li>
+<li><a class="external-link" href="http://www.aips.nrao.edu/vlbarun.shtml" target="_self" title="">AIPS VLBA Calibration Pipeline</a></li>
+<li><a class="internal-link" href="https://science.nrao.edu/facilities/vlba/data-processing/casa-vlba-calibration-and-imaging">CASA</a></li>
+<li><a href="http://www.astro.caltech.edu/~tjp/citvlb/index.html">Caltech VLBI Programs</a></li>
+<li><a class="external-link" href="https://casaguides.nrao.edu/index.php/VLBI_Tutorials" target="_self" title="">AIPS and CASA VLBI Tutorials</a></li>
+<li><a class="internal-link" href="https://science.nrao.edu/facilities/vlba/data-processing/post-observing-notes-issues">Post Observing Notes/Issues</a></li>
+</ul>
+</li>
+<li><a class="internal-link" href="https://science.nrao.edu/facilities/vlba/data-archive">Data Archive</a>
+<ul>
+<li><a href="https://science.nrao.edu/facilities/vla/archive/index">NRAO Data Archive</a></li>
+<li><a class="external-link" href="https://science.nrao.edu/facilities/vlba/data-archive/index">VLBA Data Retrieval</a></li>
+<li><a class="internal-link" href="https://science.nrao.edu/observing/nrao-archive-tool-enhancements">Archive Tool Enhancements</a></li>
+<li><a href="http://www.vla.nrao.edu/astro/archive/issues/">Known Problems in Archived Data</a></li>
+<li><a href="https://public.nrao.edu/gallery/">Image Gallery</a></li>
+<li><a href="http://www.nrao.edu/admin/do/dataarchive.shtml">Archive Policy</a></li>
+<li><a class="internal-link" href="https://science.nrao.edu/facilities/vlba/data-archive/surveys">Source Lists &amp; Surveys</a></li>
+</ul>
+</li>
+<li><a class="internal-link" href="https://science.nrao.edu/facilities/vlba/other">Other Info for Observers</a>
+<ul>
+<li><a class="external-link" href="http://library.nrao.edu/pubsup.shtml">Publication Requirements</a></li>
+<li><a class="internal-link" href="https://science.nrao.edu/opportunities/financial-support/travelsupport">Travel Support</a></li>
+<li><a class="internal-link" href="https://science.nrao.edu/about/socorro/dsoc">Visiting the DSOC</a></li>
+<li><a class="internal-link" href="https://science.nrao.edu/facilities/vla/ctw">Colloquia, Talks, Workshops</a>
+<ul>
+<li><a class="internal-link" href="https://science.nrao.edu/facilities/vla/ctw/coll">Colloquium Schedule</a></li>
+<li><a class="internal-link" href="https://science.nrao.edu/facilities/vla/ctw/wedlunch">Wednesday Lunch Schedule</a></li>
+<li><a class="internal-link" href="https://science.nrao.edu/facilities/vla/ctw/workshops-and-events">Workshops and Events</a></li>
+</ul>
+</li>
+<li><a class="internal-link" href="https://science.nrao.edu/facilities/vlba/publications/publications">Publications</a></li>
+<li><a class="internal-link" href="https://science.nrao.edu/about/socorro/people">People</a></li>
+<li><a href="http://www.vlba.nrao.edu/sites/">Virtual Tour</a></li>
+</ul>
+</li>
+<li><a class="internal-link" href="https://science.nrao.edu/observing/helpdesk">HelpDesk</a></li>
+<li><a class="internal-link" href="https://science.nrao.edu/facilities/vlba/science">Science</a>
+<ul>
+<li><a class="internal-link" href="https://science.nrao.edu/science/highlights">Highlights</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+</div>
+        </aside>
+      </div>
+          <div id="column2-container">
+          </div>
+        </main><!--/row-->
+      </div><!--/container-->
+      
+        
+
+    </div><!--/outer-wrapper --><div id="prefooter">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 col-md-4" id="social-icons">
+                        <h4>Connect with NRAO</h4>
+                        	<style>
+							.blue-icon {filter: brightness(0) saturate(100%) invert(15%) sepia(95%) saturate(2650%) hue-rotate(196deg) brightness(92%) contrast(102%); width: 25px; margin-right: 20px;}
+						</style>
+	
+
+								<a href="https://www.facebook.com/TheNRAO" target="_blank"><img class="blue-icon" src="/++theme++barceloneta-nrao/assets/graphics/social/facebook.svg" /></a>
+
+								<a href="https://twitter.com/TheNRAO" target="_blank"><img class="blue-icon" src="/++theme++barceloneta-nrao/assets/graphics/social/x.svg" /></a>
+
+								<a href="https://www.instagram.com/thenrao/" target="_blank"><img class="blue-icon" src="/++theme++barceloneta-nrao/assets/graphics/social//instagram.svg" /></a>
+
+								<a href="https://www.youtube.com/@TheNRAO" target="_blank"><img class="blue-icon" src="/++theme++barceloneta-nrao/assets/graphics/social/youtube.svg" /></a>
+
+
+								<a href="https://science.nrao.edu/enews/" target="_blank"><img class="blue-icon" src="/++theme++barceloneta-nrao/assets/graphics/social/enews.svg" /></a>
+
+
+                    </div>
+                    <div class="col-sm-12 col-md-8" id="affiliations">
+                        <h4><strong>The NSF National Radio Astronomy Observatory and NSF Green Bank Observatory are facilities of the U.S. National Science Foundation operated under cooperative agreement by Associated Universities, Inc.</strong></h4>
+                        
+                        <div>
+                            <img src="/++theme++barceloneta-nrao/assets/graphics/logoNRAO.png" />
+                           <p class="footer-affiliation" style="overflow: hidden;">Founded in 1956, the NSF NRAO provides state-of-the-art radio telescope facilities for use by the international scientific community. NSF NRAO telescopes are open to all astronomers regardless of institutional or national affiliation. Observing time on NSF NRAO telescopes is available on a competitive basis to qualified scientists after evaluation of research proposals on the basis of scientific merit, the capability of the instruments to do the work, and the availability of the telescope during the requested time. NSF NRAO also provides both formal and informal programs in education and public outreach for teachers, students, the general public, and the media. </p>
+                            
+                        </div>
+                        <div>
+                            <img src="/++theme++barceloneta-nrao/assets/graphics/logoNSF.gif" />
+                            <p class="footer-affiliation">The <a href="https://www.nsf.gov/" target="_blank">U.S. National Science Foundation</a> (U.S. NSF) is an independent federal agency created by Congress in 1950 "to promote the progress of science; to advance the national health, prosperity, and welfare; to secure the national defense..."</p>
+                        </div>
+                        <div>
+                            <img src="/++theme++barceloneta-nrao/assets/graphics/logoAUI.png" />
+                            <p class="footer-affiliation"><a href="http://www.aui.edu/" target="_blank">AUI</a> collaborates with the scientific community and research sponsors to plan, build, and operate cutting-edge facilities. We cultivate excellence, deliver value, enhance education, and engage the public.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><footer id="portal-footer-wrapper">
+          
+          
+        <img src="/++theme++barceloneta-nrao/assets/graphics/swoosh-pale.png" style="width: 100%; height: auto;/" />
+        
+        <div class="container" id="portal-footer">
+            <div class="row" id="footer-info">
+                <div class="col-xs-12 col-sm-6 col-lg-3">
+                    <ul>
+                        <li><a href="https://science.nrao.edu/enews/">Science Newsletter</a></li>
+                        <li><a href="https://data.nrao.edu/">Data Archive</a></li>
+                        <li><a href="https://public.nrao.edu/gallery/">Gallery</a></li>
+                        <li><a href="/facilities/facilities-brochure">Research Facilities</a></li>
+                        <li><a href="https://public.nrao.edu/visit/">Visit Us</a></li>
+                        <li><a href="https://public.nrao.edu/radio-astronomy/">Learn</a></li>
+                        <li><a href="https://public.nrao.edu/explore/">Explore</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-lg-3">
+                    <ul>
+                        <li><a href="https://public.nrao.edu/">Public Website</a></li>
+                        <li><a href="https://public.nrao.edu/about/">About NRAO</a></li>
+                        <li><a href="https://help.nrao.edu/">NRAO Helpdesk</a></li>
+                        <li><a href="http://www.nrao.edu/archives/">Historical Archives</a></li>
+                        <li><a href="https://public.nrao.edu/social-media-policy/">Social Media</a> &amp; <a href="https://public.nrao.edu/media-use/">Media Use</a></li>
+                        <li><a href="https://public.nrao.edu/news/">Press Releases</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-lg-3">
+                    <ul>
+                        <li><a href="http://library.nrao.edu/index.shtml">NRAO Library</a></li>
+                        <li><a href="https://public.nrao.edu/cdl/">Central Development Laboratory</a></li>
+                        <li><a href="https://public.nrao.edu/tech-transfer/">Technology Transfer</a></li>
+                        <li><a href="https://us242.dayforcehcm.com/CandidatePortal/en-US/aui">Careers at NRAO</a></li>
+                        <li><a href="https://inside.nrao.edu/">Employee Services</a></li>
+                        <li><a href="https://go.nrao.edu/conduct">Visitor Code of Conduct</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-lg-3">
+                    <h1>Contact Us</h1>
+                    <p>NRAO Headquarters<br />520 Edgemont Rd<br />Charlottesville, VA 22903<br />434-296-0211</p>
+                    <p><a href="https://public.nrao.edu/contact-us/">More Information Here</a></p>
+                </div>
+            </div>
+          <div class="doormat row">
+    
+    
+    
+    
+  </div>
+          <!--<div class="copyright row"><div class="col-xs-12"></div></div>-->
+          <div class="colophon row"><div class="col-xs-12">
+      <a href="http://plone.com" target="_blank" title="This site was built using the Plone Open Source CMS/WCM.">Powered by Plone &amp; Python</a>
+    </div></div>
+          <div class="site-actions row"><div class="col-xs-12"><ul class="actions-site_actions">
+      
+        <li class="portletItem">
+          <a href="https://science.nrao.edu/sitemap">
+
+            <span>Site Map</span>
+
+            
+
+          </a>
+        </li>
+      
+        <li class="portletItem">
+          <a href="https://science.nrao.edu/accessibility-info">
+
+            <span>Accessibility</span>
+
+            
+
+          </a>
+        </li>
+      
+        <li class="portletItem">
+          <a href="https://science.nrao.edu/contact-science-site-team">
+
+            <span>Contact</span>
+
+            
+
+          </a>
+        </li>
+      
+        <li class="portletItem">
+          <a href="https://science.nrao.edu/login">
+
+            <span>Login</span>
+
+            
+
+          </a>
+        </li>
+      
+    </ul></div></div>
+        </div>
+          <p style="text-align: center;">© <span id="currentYearValue">YEAR</span> The National Radio Astronomy Observatory</p>
+          <!--<p style="color: orange; text-align: center;">You are viewing this site in the <i><u>Barceloneta NRAO</u></i> theme. It is under active development and may not display correctly at times.</p>-->
+      </footer></body>
+  
+</html>
