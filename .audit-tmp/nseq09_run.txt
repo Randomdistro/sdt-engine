@@ -1,0 +1,36 @@
+NSEQ09 blind delta_2n pure-shell
+pre-reg: NSEQ09_PRE_REGISTRATION.md
+
+AME path: C:\Users\Jimmi\OneDrive\Desktop\sdt-engine\Datasets\nuclear\AME2020_mass_excess.txt
+SHA-256: e8599c6d7f724fac91934e59f1b9de8fb8f63e820f4b39456b790665ed2a3307
+hash match: True
+blind SEAL schedule: [2, 8, 20, 28, 50, 82, 126, 184]
+blind OPEN_D:        [40, 70, 112, 168]
+C1 blind schedule (no magic array): PASS
+  builder co_names seal=('F', 'append', 'B', 'R')
+  builder co_names open=('R',)
+
+experimental AME nuclides loaded: 2548
+even-N with median D (>=3 chains): 75
+
+SEAL median D(N) [MeV]:
+  N= 20  medD=  +3.912  nZ=6
+  N= 28  medD=  +4.704  nZ=6
+  N= 50  medD=  +4.786  nZ=9
+  N= 82  medD=  +4.143  nZ=11
+  N=126  medD=  +3.665  nZ=6
+OPEN_D median D(N) [MeV]:
+  N= 40  medD=  +1.412  nZ=6
+  N= 70  medD=  +0.763  nZ=8
+  N=112  medD=  +0.510  nZ=8
+CONTROL even-N count used: 50
+  control mean medD = +1.004 MeV
+
+  SEAL mean medD=+4.242  CONTROL mean=+1.004
+  all SEAL medD>0: True
+C2 SEAL gaps (>= control+1 MeV): PASS
+  mean SEAL{28,50,82}=+4.544  mean OPEN_D=+0.895  diff=+3.649 MeV
+C3 OPEN_D weaker by >=1 MeV: PASS
+
+---
+STATUS BLIND_DELTA2N_SURVIVES

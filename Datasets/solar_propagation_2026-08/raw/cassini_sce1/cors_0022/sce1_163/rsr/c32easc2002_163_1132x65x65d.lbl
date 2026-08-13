@@ -1,0 +1,1160 @@
+PDS_VERSION_ID                    = PDS3
+RECORD_TYPE                       = FIXED_LENGTH
+RECORD_BYTES                      = 4260
+FILE_RECORDS                      = 9781
+DATA_SET_ID                       = "CO-SS-RSS-1-SCE1-V1.0"
+TARGET_NAME                       = "SOLAR_SYSTEM"
+INSTRUMENT_HOST_NAME              = "CASSINI ORBITER"
+INSTRUMENT_NAME                   = "RADIO SCIENCE SUBSYSTEM"
+MISSION_NAME                      = "CASSINI-HUYGENS"
+OBSERVATION_TYPE                  = "SCIENCE"
+PRODUCER_ID                       = DSN
+DSN_STATION_NUMBER                = 65
+NOTE                              = ""
+PRODUCT_CREATION_TIME             = 2002-163T14:15:00
+PRODUCT_ID                        = "C32EASC2002_163_1132X65X65D.1B1"
+^TABLE                            = "C32EASC2002_163_1132X65X65D.1B1"
+START_TIME                        = 2002-163T11:32:00
+STOP_TIME                         = 2002-163T14:15:00
+SOFTWARE_NAME                     = "UNK"
+DOCUMENT_NAME                     = "JPL D-16765"
+OBJECT                            = TABLE
+  INTERCHANGE_FORMAT                = BINARY
+  ROWS                              = 9781
+  COLUMNS                           = 72
+  ROW_BYTES                         = 4260
+  DESCRIPTION                       = "The Radio Science Receiver (RSR) is
+    a computer-controlled open loop receiver that digitally records a
+    spacecraft signal through the use of an analog to digital converter
+    (ADC) and up to four digital filter sub-channels.  The digital samples
+    from each sub-channel are stored to disk in one second records in real
+    time.  In near real time the one second records are partitioned and
+    formatted into a sequence of RSR Standard Format Data Units (SFDUs)
+    which are transmitted to the Advanced Multi-Mission Operations System
+    (AMMOS) at the Jet Propulsion Laboratory (JPL).  Included in each RSR
+    SFDU are the ancillary data necessary to reconstruct the signal
+    represented by the recorded data samples.
+
+    Each SFDU is defined here as a single row in a PDS TABLE object; later
+    SFDUs are later rows.  The first fields in each row contain the ancillary
+    data (time tags and frequency estimates, for example) that applied while
+    the samples at the end of the record were being collected.  The object
+    definitions below explain where the fields are and what the contents
+    represent.
+
+    Analysis of variations in the amplitude, frequency, and phase of the
+    recorded signals provides information on the ring structure, atmospheric
+    density, magnetic field, and charged particle environment of planets
+    which occult the spacecraft.  Variations in the recorded signal can also
+    be used for detection of gravitational waves."
+
+  OBJECT                          = COLUMN
+    NAME                            = "SFDU CONTROL AUTHORITY"
+    COLUMN_NUMBER                   = 1
+    START_BYTE                      = 1
+    BYTES                           = 4
+    DATA_TYPE                       = CHARACTER
+    UNIT                            = "N/A"
+    DESCRIPTION                     = "An ASCII string giving the SFDU
+                                       Control Authority for this data
+                                       type.  Set to 'NJPL', meaning the
+                                       data description information for
+                                       this type of SFDU is maintained
+                                       by the NASA/JPL Control Authority."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "SFDU LABEL VERSION ID"
+    COLUMN_NUMBER                   = 2
+    START_BYTE                      = 5
+    BYTES                           = 1
+    DATA_TYPE                       = CHARACTER
+    UNIT                            = "N/A"
+    DESCRIPTION                     = "An ASCII character giving the SFDU
+                                       Label Version Identifier.  Set to
+                                       '2', meaning the length given in
+                                       bytes 13-20 is formatted as a
+                                       binary unsigned integer."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "SFDU CLASS ID"
+    COLUMN_NUMBER                   = 3
+    START_BYTE                      = 6
+    BYTES                           = 1
+    DATA_TYPE                       = CHARACTER
+    UNIT                            = "N/A"
+    DESCRIPTION                     = "An ASCII character giving the SFDU
+                                       Class Identifier.  Set to 'I',
+                                       meaning this is a Compressed Header
+                                       Data Object (CHDO) structured SFDU."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "SFDU RESERVED"
+    COLUMN_NUMBER                   = 4
+    START_BYTE                      = 7
+    BYTES                           = 2
+    DATA_TYPE                       = MSB_INTEGER
+    UNIT                            = "N/A"
+    DESCRIPTION                     = "These two bytes are not defined."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "SFDU DATA DESCRIPTION ID"
+    COLUMN_NUMBER                   = 5
+    START_BYTE                      = 9
+    BYTES                           = 4
+    DATA_TYPE                       = CHARACTER
+    UNIT                            = "N/A"
+    DESCRIPTION                     = "An ASCII string giving the SFDU Data
+                                       Description Identifier.  Set to
+                                       'C997', a unique identifier for the
+                                       RSR data type within the NASA/JPL
+                                       Control Authority."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "SFDU RSR LENGTH PAD"
+    COLUMN_NUMBER                   = 6
+    START_BYTE                      = 13
+    BYTES                           = 4
+    DATA_TYPE                       = MSB_UNSIGNED_INTEGER
+    UNIT                            = "N/A"
+    DESCRIPTION                     = "The high-order 32 bits of a 64-bit
+                                       unsigned binary integer giving the
+                                       number of remaining bytes in
+                                       the SFDU after the 20-byte label.
+                                       Always '0' in the RSR SFDU."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "SFDU RSR LENGTH"
+    COLUMN_NUMBER                   = 7
+    START_BYTE                      = 17
+    BYTES                           = 4
+    DATA_TYPE                       = MSB_UNSIGNED_INTEGER
+    UNIT                            = "BYTE"
+    DESCRIPTION                     = "The number of remaining bytes in
+                                       the SFDU after the 20-byte label.
+                                       Always less than 31000."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "HEADER AGGREGATION CHDO TYPE"
+    COLUMN_NUMBER                   = 8
+    START_BYTE                      = 21
+    BYTES                           = 2
+    DATA_TYPE                       = MSB_UNSIGNED_INTEGER
+    UNIT                            = "N/A"
+    DESCRIPTION                     = "Header Aggregation CHDO Type.  Set
+                                       to '1', meaning this CHDO is an
+                                       aggregation of header CHDOs.  The
+                                       NJPL Control Authority maintains a
+                                       registry of CHDO types."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "HEADER AGGREGATION CHDO LENGTH"
+    COLUMN_NUMBER                   = 9
+    START_BYTE                      = 23
+    BYTES                           = 2
+    DATA_TYPE                       = MSB_UNSIGNED_INTEGER
+    UNIT                            = "BYTE"
+    DESCRIPTION                     = "Header Aggregation CHDO Length. Set
+                                       to '232', meaning length of the
+                                       value field of the Header Aggregation
+                                       CHDO is 232 bytes (bytes 25-256)."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "PRIMARY HEADER CHDO TYPE"
+    COLUMN_NUMBER                   = 10
+    START_BYTE                      = 25
+    BYTES                           = 2
+    DATA_TYPE                       = MSB_UNSIGNED_INTEGER
+    UNIT                            = "N/A"
+    DESCRIPTION                     = "Primary Header CHDO Type.  Set to
+                                       to '2', meaning this CHDO is a
+                                       primary header CHDO.  The NJPL
+                                       Control Authority maintains a
+                                       registry of CHDO types."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "PRIMARY HEADER CHDO LENGTH"
+    COLUMN_NUMBER                   = 11
+    START_BYTE                      = 27
+    BYTES                           = 2
+    DATA_TYPE                       = MSB_UNSIGNED_INTEGER
+    UNIT                            = "BYTE"
+    DESCRIPTION                     = "Primary Header CHDO Length. Set to
+                                       '4', meaning length of the value
+                                       field of the Primary Header CHDO is
+                                       4 bytes (bytes 29-32)."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "MAJOR DATA CLASS"
+    COLUMN_NUMBER                   = 12
+    START_BYTE                      = 29
+    BYTES                           = 1
+    DATA_TYPE                       = MSB_UNSIGNED_INTEGER
+    UNIT                            = "N/A"
+    DESCRIPTION                     = "Major Data Class.  Set to '21',
+                                       meaning this SFDU contains Radio
+                                       Science data."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "MINOR DATA CLASS"
+    COLUMN_NUMBER                   = 13
+    START_BYTE                      = 30
+    BYTES                           = 1
+    DATA_TYPE                       = MSB_UNSIGNED_INTEGER
+    UNIT                            = "N/A"
+    DESCRIPTION                     = "Minor Data Class.  Set to '4'.
+                                       This Major/Minor Data Class
+                                       combination means the SFDU contains
+                                       Radio Science RSR data."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "MISSION IDENTIFIER"
+    COLUMN_NUMBER                   = 14
+    START_BYTE                      = 31
+    BYTES                           = 1
+    DATA_TYPE                       = MSB_UNSIGNED_INTEGER
+    UNIT                            = "N/A"
+    DESCRIPTION                     = "Mission Identifier.  Set to '0',
+                                       meaning the RSR does not use this
+                                       field.  The value may be changed
+                                       if the Ground Data System handles
+                                       the data. If a Mission Identifier
+                                       is needed, values may be found in
+                                       DSN document 820-013, OPS-6-21A,
+                                       Table 3-4."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "FORMAT CODE"
+    COLUMN_NUMBER                   = 15
+    START_BYTE                      = 32
+    BYTES                           = 1
+    DATA_TYPE                       = MSB_UNSIGNED_INTEGER
+    UNIT                            = "N/A"
+    DESCRIPTION                     = "Format Code.  Set to '0'.  The RSR
+                                       supports only one data format."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "SECONDARY HEADER CHDO TYPE"
+    COLUMN_NUMBER                   = 16
+    START_BYTE                      = 33
+    BYTES                           = 2
+    DATA_TYPE                       = MSB_UNSIGNED_INTEGER
+    UNIT                            = "N/A"
+    DESCRIPTION                     = "Secondary Header CHDO Type.  Set to
+                                       to '104', meaning this CHDO is an
+                                       RSR secondary header CHDO.  The NJPL
+                                       Control Authority maintains a
+                                       registry of CHDO types."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "SECONDARY HEADER CHDO LENGTH"
+    COLUMN_NUMBER                   = 17
+    START_BYTE                      = 35
+    BYTES                           = 2
+    DATA_TYPE                       = MSB_UNSIGNED_INTEGER
+    UNIT                            = "BYTE"
+    DESCRIPTION                     = "Secondary Header CHDO Length. Set to
+                                       '220', meaning length of the value
+                                       field of the Secondary Header CHDO is
+                                       220 bytes (bytes 37-256)."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "ORIGINATOR ID"
+    COLUMN_NUMBER                   = 18
+    START_BYTE                      = 37
+    BYTES                           = 1
+    DATA_TYPE                       = MSB_UNSIGNED_INTEGER
+    UNIT                            = "N/A"
+    DESCRIPTION                     = "Originator Identifier.  A value '48'
+                                       means the data originated within the
+                                       DSN."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "LAST MODIFIER ID"
+    COLUMN_NUMBER                   = 19
+    START_BYTE                      = 38
+    BYTES                           = 1
+    DATA_TYPE                       = MSB_UNSIGNED_INTEGER
+    UNIT                            = "N/A"
+    DESCRIPTION                     = "Last Modifier Identifier.  A value
+                                       '48' means the contents of the SFDU
+                                       were last modified by the DSN."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "RSR SOFTWARE ID"
+    COLUMN_NUMBER                   = 20
+    START_BYTE                      = 39
+    BYTES                           = 2
+    DATA_TYPE                       = MSB_UNSIGNED_INTEGER
+    UNIT                            = "N/A"
+    DESCRIPTION                     = "RSR Software Identifier. The version
+                                       of the RSR software is indicated by
+                                       an unsigned binary integer between
+                                       0 and 65535."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "RECORD SEQUENCE NUMBER"
+    COLUMN_NUMBER                   = 21
+    START_BYTE                      = 41
+    BYTES                           = 2
+    DATA_TYPE                       = MSB_UNSIGNED_INTEGER
+    UNIT                            = "N/A"
+    DESCRIPTION                     = "The Record Sequence Number (RSN)
+                                       starts at 0 for the first RSR SFDU
+                                       and increments by 1 for each
+                                       successive SFDU to a maximum of
+                                       65535, after which it resets to 0
+                                       and begins incrementing again.
+                                       The RSN may be reset at other times,
+                                       such as when the RSR is started or
+                                       restarted.  The RSN is provided by
+                                       the originator of the SFDU and should
+                                       not be changed during subsequent
+                                       handling or modification."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "SIGNAL PROCESSING CENTER"
+    COLUMN_NUMBER                   = 22
+    START_BYTE                      = 43
+    BYTES                           = 1
+    DATA_TYPE                       = MSB_UNSIGNED_INTEGER
+    UNIT                            = "N/A"
+    DESCRIPTION                     = "Signal Processing Center (SPC)
+                                       Identifer. Valid numbers include
+                                         10   Goldstone
+                                         40   Canberra
+                                         60   Madrid
+                                         21   DTF21"
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "DEEP SPACE STATION"
+    COLUMN_NUMBER                   = 23
+    START_BYTE                      = 44
+    BYTES                           = 1
+    DATA_TYPE                       = MSB_UNSIGNED_INTEGER
+    UNIT                            = "N/A"
+    DESCRIPTION                     = "Deep Space Station (DSS) Identifier.
+                                       This is the DSS identifier listed in
+                                       the frequency predicts file used to
+                                       collect the data in this SFDU.  DSS
+                                       identifiers are listed in DSN
+                                       document 820-013, OPS-6-3 and include
+                                       valid numbers such as 14, 15, 25, 43,
+                                       45, 54, and 63."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "RADIO SCIENCE RECEIVER"
+    COLUMN_NUMBER                   = 24
+    START_BYTE                      = 45
+    BYTES                           = 1
+    DATA_TYPE                       = MSB_UNSIGNED_INTEGER
+    UNIT                            = "N/A"
+    DESCRIPTION                     = "Radio Science Receiver (RSR)
+                                       Identifier.  Values can be in the
+                                       range 1-16 and specify the RSR used
+                                       to collect the data in this SFDU.
+                                       For example,
+                                            RSR ID = 1  denotes  RSR1A
+                                            RSR ID = 2  denotes  RSR1B
+                                            RSR ID = 3  denotes  RSR2A
+                                       The SPC ID and RSR ID uniquely
+                                       specify the hardware used in the
+                                       data acquisition.  SPC 10 has three
+                                       RSR racks; SPC 40 and SPC 60 each
+                                       have two.  Each rack has two
+                                       receivers (A and B).  Except for the
+                                       analog components in the ADCs, the
+                                       end-to-end performance of every RSR
+                                       should be identical."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "SUB-CHANNEL IDENTIFIER"
+    COLUMN_NUMBER                   = 25
+    START_BYTE                      = 46
+    BYTES                           = 1
+    DATA_TYPE                       = MSB_UNSIGNED_INTEGER
+    UNIT                            = "N/A"
+    DESCRIPTION                     = "Sub-Channel Identifier.  This can be
+                                       in the range 1-4 and specifies the
+                                       RSR sub-channel used to acquire the
+                                       the data in this SFDU."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "SECONDARY HEADER CHDO RESERVED"
+    COLUMN_NUMBER                   = 26
+    START_BYTE                      = 47
+    BYTES                           = 1
+    DATA_TYPE                       = MSB_UNSIGNED_INTEGER
+    UNIT                            = "N/A"
+    DESCRIPTION                     = "This field is not used."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "SPACECRAFT"
+    COLUMN_NUMBER                   = 27
+    START_BYTE                      = 48
+    BYTES                           = 1
+    DATA_TYPE                       = MSB_UNSIGNED_INTEGER
+    UNIT                            = "N/A"
+    DESCRIPTION                     = "Spacecraft Identifier, as listed in
+                                       the frequency predicts file used to
+                                       collect the data in this SFDU. Values
+                                       are assigned by the Deep Space
+                                       Mission System (DSMS) and are in the
+                                       range 0-255.  Assignments are given
+                                       in DSN document 820-013, OPS-6-21A,
+                                       Table 3-4."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "PREDICTS PASS NUMBER"
+    COLUMN_NUMBER                   = 28
+    START_BYTE                      = 49
+    BYTES                           = 2
+    DATA_TYPE                       = MSB_UNSIGNED_INTEGER
+    UNIT                            = "N/A"
+    DESCRIPTION                     = "Predicts Pass Number (range 0-65535)
+                                       gives the DSN pass number in the
+                                       predicts file used to collect the
+                                       data in this SFDU."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "UPLINK FREQUENCY BAND"
+    COLUMN_NUMBER                   = 29
+    START_BYTE                      = 51
+    BYTES                           = 1
+    DATA_TYPE                       = CHARACTER
+    UNIT                            = "N/A"
+    DESCRIPTION                     = "The Uplink Frequency Band specified
+                                       in the predicts file used to collect
+                                       the data in this SFDU.  Possible
+                                       values include 'S' (S-Band), 'X' (X-
+                                       Band), and 'K' (Ka-Band)."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "DOWNLINK FREQUENCY BAND"
+    COLUMN_NUMBER                   = 30
+    START_BYTE                      = 52
+    BYTES                           = 1
+    DATA_TYPE                       = CHARACTER
+    UNIT                            = "N/A"
+    DESCRIPTION                     = "The Downlink Frequency Band specified
+                                       in the predicts file used to collect
+                                       the data in this SFDU.  Possible
+                                       values include 'S' (S-Band), 'X' (X-
+                                       Band), and 'K' (Ka-Band)."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "TRACKING MODE"
+    COLUMN_NUMBER                   = 31
+    START_BYTE                      = 53
+    BYTES                           = 1
+    DATA_TYPE                       = MSB_UNSIGNED_INTEGER
+    UNIT                            = "N/A"
+    DESCRIPTION                     = "The Tracking Mode in use when the
+                                       data in this SFDU were acquired.
+                                       Possible values are '1' (one-way),
+                                       '2' (two-way), and '3' (three-way)."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "UPLINK DSS ID FOR 3-WAY TRACKING"
+    COLUMN_NUMBER                   = 32
+    START_BYTE                      = 54
+    BYTES                           = 1
+    DATA_TYPE                       = MSB_UNSIGNED_INTEGER
+    UNIT                            = "N/A"
+    DESCRIPTION                     = "Deep Space Station (DSS) Identifier
+                                       for the uplink antenna when
+                                       TRACKING_MODE=3; otherwise,
+                                       undefined.  DSS identifiers are
+                                       listed in DSN document 820-013,
+                                       OPS-6-3 and include valid numbers
+                                       such as 14, 15, 25, 43, 45, 54, and
+                                       63."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "FGAIN"
+    COLUMN_NUMBER                   = 33
+    START_BYTE                      = 55
+    BYTES                           = 1
+    DATA_TYPE                       = MSB_INTEGER
+    UNIT                            = "DECIBEL HERTZ"
+    DESCRIPTION                     = "Expected ratio of signal power to
+                                       noise power in a one Hz bandwidth
+                                       when the data in this SFDU were
+                                       collected.  This parameter is used
+                                       to estimate the sample voltage
+                                       amplitudes at the RSR output and
+                                       to compute settings of the
+                                       sub-channel filter gain so that
+                                       there is no clipping of the sample
+                                       values. Possible values are in the
+                                       range -127 to +128."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "FGAIN IF BANDWIDTH"
+    COLUMN_NUMBER                   = 34
+    START_BYTE                      = 56
+    BYTES                           = 1
+    DATA_TYPE                       = MSB_UNSIGNED_INTEGER
+    UNIT                            = "MEGAHERTZ"
+    DESCRIPTION                     = "IF Bandwidth expected to be in use
+                                       by the RSR at the time the data in
+                                       this SFDU were acquired. This value
+                                       is used to compute the settings of
+                                       the sub-channel filter gain. Values
+                                       can be in the range 1-127."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "FROV FLAG"
+    COLUMN_NUMBER                   = 35
+    START_BYTE                      = 57
+    BYTES                           = 1
+    DATA_TYPE                       = MSB_UNSIGNED_INTEGER
+    UNIT                            = "N/A"
+    DESCRIPTION                     = "Frequency Predicts Override Flag.
+                                       Set to '0', this indicates that the
+                                       frequency predicts file was in use;
+                                       any other value indicates that the
+                                       frequency specified by the FROV
+                                       command was in use.  The value of
+                                       the override frequency is given by
+                                       PREDICTS_FREQUENCY_OVERRIDE in
+                                       Column 51."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "DIG ATTENUATION"
+    COLUMN_NUMBER                   = 36
+    START_BYTE                      = 58
+    BYTES                           = 1
+    DATA_TYPE                       = MSB_UNSIGNED_INTEGER
+    UNIT                            = "N/A"
+    DESCRIPTION                     = "RSR Digitizer Subassembly (DIG)
+                                       setting.  Values are in the range
+                                       0-63, which correspond to 0.5 dB
+                                       increments in attenuation."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "DIG ADC RMS"
+    COLUMN_NUMBER                   = 37
+    START_BYTE                      = 59
+    BYTES                           = 1
+    DATA_TYPE                       = MSB_UNSIGNED_INTEGER
+    UNIT                            = "N/A"
+    DESCRIPTION                     = "Root-mean-square amplitude of about
+                                       10000 8-bit samples taken from the DIG
+                                       ADC stream.  Time of the measurement
+                                       is stored in bytes Columns 39-41."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "DIG ADC PEAK"
+    COLUMN_NUMBER                   = 38
+    START_BYTE                      = 60
+    BYTES                           = 1
+    DATA_TYPE                       = MSB_UNSIGNED_INTEGER
+    UNIT                            = "N/A"
+    DESCRIPTION                     = "Peak amplitude from about 10000 8-bit
+                                       samples taken from the DIG ADC stream.
+                                       Time for the measurement is stored in
+                                       Columns 39-41."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "DIG ADC YEAR"
+    COLUMN_NUMBER                   = 39
+    START_BYTE                      = 61
+    BYTES                           = 2
+    DATA_TYPE                       = MSB_UNSIGNED_INTEGER
+    UNIT                            = "N/A"
+    DESCRIPTION                     = "UTC year on which the ADC data were
+                                       computed.  Values can range over
+                                       1900-3000."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "DIG ADC DAY OF YEAR"
+    COLUMN_NUMBER                   = 40
+    START_BYTE                      = 63
+    BYTES                           = 2
+    DATA_TYPE                       = MSB_UNSIGNED_INTEGER
+    UNIT                            = "N/A"
+    DESCRIPTION                     = "UTC day-of-year on which the ADC
+                                       data were computed.  Values can
+                                       range over 1-366."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "DIG ADC SECOND"
+    COLUMN_NUMBER                   = 41
+    START_BYTE                      = 65
+    BYTES                           = 4
+    DATA_TYPE                       = MSB_UNSIGNED_INTEGER
+    UNIT                            = "SECOND"
+    DESCRIPTION                     = "UTC second of day on which the ADC
+                                       data were computed.  Values can
+                                       range over 0-86400."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "SAMPLE RESOLUTION"
+    COLUMN_NUMBER                   = 42
+    START_BYTE                      = 69
+    BYTES                           = 1
+    DATA_TYPE                       = MSB_UNSIGNED_INTEGER
+    UNIT                            = "BIT"
+    DESCRIPTION                     = "Bits per sample in the data in this
+                                       SFDU.  Valid values are 1, 2, 4, 8,
+                                       and 16 and are selected by the RSR
+                                       operator while it is in configure
+                                       state."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "DATA ERROR COUNT"
+    COLUMN_NUMBER                   = 43
+    START_BYTE                      = 70
+    BYTES                           = 1
+    DATA_TYPE                       = MSB_UNSIGNED_INTEGER
+    UNIT                            = "N/A"
+    DESCRIPTION                     = "Number of hardware errors encountered
+                                       while the data in this SFDU were
+                                       being recorded. Values can range over
+                                       0-255, but any value greater than 0
+                                       indicates data may have been
+                                       corrupted by hardware errors."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "SAMPLE RATE"
+    COLUMN_NUMBER                   = 44
+    START_BYTE                      = 71
+    BYTES                           = 2
+    DATA_TYPE                       = MSB_UNSIGNED_INTEGER
+    UNIT                            = "KILOSAMPLE PER SECOND"
+    DESCRIPTION                     = "The rate at which samples were
+                                       collected in this SFDU. Sample rate
+                                       or bandwidth is specified by the
+                                       operator while the RSR is in the
+                                       configure state."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "DDC LO FREQUENCY"
+    COLUMN_NUMBER                   = 45
+    START_BYTE                      = 73
+    BYTES                           = 2
+    DATA_TYPE                       = MSB_UNSIGNED_INTEGER
+    UNIT                            = "MEGAHERTZ"
+    DESCRIPTION                     = "Digital Down Converter (DDC) Local
+                                       Oscillator (LO) Frequency. This
+                                       specifies the downconversion applied
+                                       to the signal in the DIG and DDC.
+                                       This frequency is needed to compute
+                                       the sky frequency of the data in
+                                       this SFDU:
+
+                                             Fsky = RFtoIF_LO +
+                                                    DDC_LO -
+                                                    NCO_Freq +
+                                                    Fresid
+                                       where
+
+                                            RFtoIF_LO is in Column 46,
+                                            DDC_LO is in Column 45,
+                                            NCO_Freq from Columns 61-63, and
+                                            Fresid is the signal offset
+                                               from DC in the RSR data."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "RF-IF LO FREQUENCY"
+    COLUMN_NUMBER                   = 46
+    START_BYTE                      = 75
+    BYTES                           = 2
+    DATA_TYPE                       = MSB_UNSIGNED_INTEGER
+    UNIT                            = "MEGAHERTZ"
+    DESCRIPTION                     = "RF to IF Down Converter Local
+                                       Oscillator (LO) Frequency. This
+                                       specifies the total downconversion
+                                       applied to the signal before it
+                                       entered the RSR DIG.  The value is
+                                       subtracted from the RF predict
+                                       points in order to obtain the
+                                       frequency of the desired signal at
+                                       IF.  The RSR selects a default value
+                                       based on the downlink band: 2000
+                                       (S-Band), 8100 (X-Band), or 31700
+                                       (Ka-Band).  This frequency is needed
+                                       in order to reconstruct the sky
+                                       frequency of the data contained in
+                                       this SFDU:
+
+                                             Fsky = RFtoIF_LO +
+                                                    DDC_LO -
+                                                    NCO_Freq +
+                                                    Fresid
+                                       where
+
+                                            RFtoIF_LO is in Column 46,
+                                            DDC_LO is in Column 45,
+                                            NCO_Freq from Columns 61-63, and
+                                            Fresid is the signal offset
+                                               from DC in the RSR data."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "SFDU YEAR"
+    COLUMN_NUMBER                   = 47
+    START_BYTE                      = 77
+    BYTES                           = 2
+    DATA_TYPE                       = MSB_UNSIGNED_INTEGER
+    UNIT                            = "N/A"
+    DESCRIPTION                     = "UTC year for the SFDU data and
+                                       models.  Values can range over
+                                       1900-3000."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "SFDU DAY OF YEAR"
+    COLUMN_NUMBER                   = 48
+    START_BYTE                      = 79
+    BYTES                           = 2
+    DATA_TYPE                       = MSB_UNSIGNED_INTEGER
+    UNIT                            = "N/A"
+    DESCRIPTION                     = "UTC day-of-year for the SFDU
+                                       data and models.  Values can
+                                       range over 1-366."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "SFDU SECOND"
+    COLUMN_NUMBER                   = 49
+    START_BYTE                      = 81
+    BYTES                           = 8
+    DATA_TYPE                       = IEEE_REAL
+    UNIT                            = "SECOND"
+    DESCRIPTION                     = "UTC seconds of day for the SFDU
+                                       data and models.  Values can range
+                                       over 0-86400."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "PREDICTS TIME SHIFT"
+    COLUMN_NUMBER                   = 50
+    START_BYTE                      = 89
+    BYTES                           = 8
+    DATA_TYPE                       = IEEE_REAL
+    UNIT                            = "SECOND"
+    DESCRIPTION                     = "The number of seconds added to the
+                                       time tags of the frequency predicts
+                                       to shift them in time. This feature
+                                       allows testing the RSR with old
+                                       predict files.  The value should be
+                                       0.0 during normal operations."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "PREDICTS FREQUENCY OVERRIDE"
+    COLUMN_NUMBER                   = 51
+    START_BYTE                      = 97
+    BYTES                           = 8
+    DATA_TYPE                       = IEEE_REAL
+    UNIT                            = "HERTZ"
+    DESCRIPTION                     = "The value of the predicts frequency
+                                       override specified by the FROV
+                                       command; this constant value is
+                                       substituted for the value derived
+                                       from the predicts.  The flag in
+                                       Column 35 indicates whether the
+                                       frequency override is active."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "PREDICTS FREQUENCY RATE"
+    COLUMN_NUMBER                   = 52
+    START_BYTE                      = 105
+    BYTES                           = 8
+    DATA_TYPE                       = IEEE_REAL
+    UNIT                            = "HERTZ PER SECOND"
+    DESCRIPTION                     = "The frequency rate added to the RF
+                                       frequency predicts as specified by
+                                       the FRR command. The allowable range
+                                       is -8000 to +8000 Hz/s."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "PREDICTS FREQUENCY OFFSET"
+    COLUMN_NUMBER                   = 53
+    START_BYTE                      = 113
+    BYTES                           = 8
+    DATA_TYPE                       = IEEE_REAL
+    UNIT                            = "HERTZ"
+    DESCRIPTION                     = "The total frequency added to the
+                                       RF frequency predicts as specified
+                                       the FRO command and the accumulated
+                                       frequency rate as specified by the
+                                       FRR command. The allowable
+                                       range is -8 to +8 MHz."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "SUB-CHANNEL FREQUENCY OFFSET"
+    COLUMN_NUMBER                   = 54
+    START_BYTE                      = 121
+    BYTES                           = 8
+    DATA_TYPE                       = IEEE_REAL
+    UNIT                            = "HERTZ"
+    DESCRIPTION                     = "The frequency added to the frequency
+                                       predicts for this sub-channel as
+                                       specified by the SFRO command."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "RF POINT 1"
+    COLUMN_NUMBER                   = 55
+    START_BYTE                      = 129
+    BYTES                           = 8
+    DATA_TYPE                       = IEEE_REAL
+    UNIT                            = "HERTZ"
+    DESCRIPTION                     = "The radio frequency at the beginning
+                                       of the second as calculated from the
+                                       predicts."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "RF POINT 2"
+    COLUMN_NUMBER                   = 56
+    START_BYTE                      = 137
+    BYTES                           = 8
+    DATA_TYPE                       = IEEE_REAL
+    UNIT                            = "HERTZ"
+    DESCRIPTION                     = "The radio frequency at the middle
+                                       of the second as calculated from the
+                                       predicts."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "RF POINT 3"
+    COLUMN_NUMBER                   = 57
+    START_BYTE                      = 145
+    BYTES                           = 8
+    DATA_TYPE                       = IEEE_REAL
+    UNIT                            = "HERTZ"
+    DESCRIPTION                     = "The radio frequency at the end
+                                       of the second as calculated from the
+                                       predicts."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "SUB-CHANNEL FREQUENCY POINT 1"
+    COLUMN_NUMBER                   = 58
+    START_BYTE                      = 153
+    BYTES                           = 8
+    DATA_TYPE                       = IEEE_REAL
+    UNIT                            = "HERTZ"
+    DESCRIPTION                     = "The sub-channel frequency at the
+                                       beginning of the second.  This
+                                       point is used to create the
+                                       sub-channel frequency and phase
+                                       polynomials."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "SUB-CHANNEL FREQUENCY POINT 2"
+    COLUMN_NUMBER                   = 59
+    START_BYTE                      = 161
+    BYTES                           = 8
+    DATA_TYPE                       = IEEE_REAL
+    UNIT                            = "HERTZ"
+    DESCRIPTION                     = "The sub-channel frequency at the
+                                       middle of the second.  This
+                                       point is used to create the
+                                       sub-channel frequency and phase
+                                       polynomials."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "SUB-CHANNEL FREQUENCY POINT 3"
+    COLUMN_NUMBER                   = 60
+    START_BYTE                      = 169
+    BYTES                           = 8
+    DATA_TYPE                       = IEEE_REAL
+    UNIT                            = "HERTZ"
+    DESCRIPTION                     = "The sub-channel frequency at the
+                                       end of the second.  This
+                                       point is used to create the
+                                       sub-channel frequency and phase
+                                       polynomials."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "SUB-CHANNEL FREQUENCY COEF F1"
+    COLUMN_NUMBER                   = 61
+    START_BYTE                      = 177
+    BYTES                           = 8
+    DATA_TYPE                       = IEEE_REAL
+    UNIT                            = "HERTZ"
+    DESCRIPTION                     = "The sub-channel frequency polynomial
+                                       coefficient F1 where the frequency
+                                       over a one millisecond interval
+                                       beginning at t in msec is evaluated
+                                         F(t) = F1 +
+                                                F2*((t+0.5)/1000) +
+                                                F3*((t+0.5)/1000)**2
+                                       The coefficients are derived from
+                                       the frequency points in columns
+                                       58-60."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "SUB-CHANNEL FREQUENCY COEF F2"
+    COLUMN_NUMBER                   = 62
+    START_BYTE                      = 185
+    BYTES                           = 8
+    DATA_TYPE                       = IEEE_REAL
+    UNIT                            = "HERTZ"
+    DESCRIPTION                     = "The sub-channel frequency polynomial
+                                       coefficient F2 where the frequency
+                                       over a one millisecond interval
+                                       beginning at t in msec is evaluated
+                                         F(t) = F1 +
+                                                F2*((t+0.5)/1000) +
+                                                F3*((t+0.5)/1000)**2
+                                       The coefficients are derived from
+                                       the frequency points in columns
+                                       58-60."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "SUB-CHANNEL FREQUENCY COEF F3"
+    COLUMN_NUMBER                   = 63
+    START_BYTE                      = 193
+    BYTES                           = 8
+    DATA_TYPE                       = IEEE_REAL
+    UNIT                            = "HERTZ"
+    DESCRIPTION                     = "The sub-channel frequency polynomial
+                                       coefficient F3 where the frequency
+                                       over a one millisecond interval
+                                       beginning at t in msec is evaluated
+                                         F(t) = F1 +
+                                                F2*((t+0.5)/1000) +
+                                                F3*((t+0.5)/1000)**2
+                                       The coefficients are derived from
+                                       the frequency points in columns
+                                       58-60."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "SUB-CHANNEL ACCUMULATED PHASE"
+    COLUMN_NUMBER                   = 64
+    START_BYTE                      = 201
+    BYTES                           = 8
+    DATA_TYPE                       = IEEE_REAL
+    UNIT                            = "CYCLE"
+    DESCRIPTION                     = "The accumulated whole turns of the
+                                       sub-channel phase at the beginning
+                                       of the present second.  The phase
+                                       during this second is the accumulated
+                                       phase incremented by the phase
+                                       computed using the coefficients in
+                                       Columns 65-68."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "SUB-CHANNEL PHASE COEF P1"
+    COLUMN_NUMBER                   = 65
+    START_BYTE                      = 209
+    BYTES                           = 8
+    DATA_TYPE                       = IEEE_REAL
+    UNIT                            = "CYCLE"
+    DESCRIPTION                     = "The sub-channel phase polynomial
+                                       coefficient P1 where the phase
+                                       over a one millisecond interval
+                                       beginning at t in msec is evaluated
+                                         P(t) = P1 +
+                                                P2*((t+0.5)/1000) +
+                                                P3*((t+0.5)/1000)**2 +
+                                                P4*((t+0.5)/1000)**3
+                                       The coefficients are derived from
+                                       the frequency points in columns
+                                       58-60."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "SUB-CHANNEL PHASE COEF P2"
+    COLUMN_NUMBER                   = 66
+    START_BYTE                      = 217
+    BYTES                           = 8
+    DATA_TYPE                       = IEEE_REAL
+    UNIT                            = "CYCLE"
+    DESCRIPTION                     = "The sub-channel phase polynomial
+                                       coefficient P2 where the phase
+                                       over a one millisecond interval
+                                       beginning at t in msec is evaluated
+                                         P(t) = P1 +
+                                                P2*((t+0.5)/1000) +
+                                                P3*((t+0.5)/1000)**2 +
+                                                P4*((t+0.5)/1000)**3
+                                       The coefficients are derived from
+                                       the frequency points in columns
+                                       58-60."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "SUB-CHANNEL PHASE COEF P3"
+    COLUMN_NUMBER                   = 67
+    START_BYTE                      = 225
+    BYTES                           = 8
+    DATA_TYPE                       = IEEE_REAL
+    UNIT                            = "CYCLE"
+    DESCRIPTION                     = "The sub-channel phase polynomial
+                                       coefficient P3 where the phase
+                                       over a one millisecond interval
+                                       beginning at t in msec is evaluated
+                                         P(t) = P1 +
+                                                P2*((t+0.5)/1000) +
+                                                P3*((t+0.5)/1000)**2 +
+                                                P4*((t+0.5)/1000)**3
+                                       The coefficients are derived from
+                                       the frequency points in columns
+                                       58-60."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "SUB-CHANNEL PHASE COEF P4"
+    COLUMN_NUMBER                   = 68
+    START_BYTE                      = 233
+    BYTES                           = 8
+    DATA_TYPE                       = IEEE_REAL
+    UNIT                            = "CYCLE"
+    DESCRIPTION                     = "The sub-channel phase polynomial
+                                       coefficient P4 where the phase
+                                       over a one millisecond interval
+                                       beginning at t in msec is evaluated
+                                         P(t) = P1 +
+                                                P2*((t+0.5)/1000) +
+                                                P3*((t+0.5)/1000)**2 +
+                                                P4*((t+0.5)/1000)**3
+                                       The coefficients are derived from
+                                       the frequency points in columns
+                                       58-60."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "SPARES"
+    COLUMN_NUMBER                   = 69
+    BYTES                           = 16
+    ITEMS                           = 16
+    START_BYTE                      = 241
+    ITEM_BYTES                      = 1
+    ITEM_OFFSET                     = 1
+    DATA_TYPE                       = MSB_UNSIGNED_INTEGER
+    UNIT                            = "N/A"
+    DESCRIPTION                     = "These 16 bytes are undefined."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "DATA CHDO TYPE"
+    COLUMN_NUMBER                   = 70
+    START_BYTE                      = 257
+    BYTES                           = 2
+    DATA_TYPE                       = MSB_UNSIGNED_INTEGER
+    UNIT                            = "N/A"
+    DESCRIPTION                     = "Data CHDO Type.  Set to '10', meaning
+                                       this CHDO contains binary data.  The
+                                       NJPL Control Authority maintains a
+                                       registry of CHDO types."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "DATA CHDO LENGTH"
+    COLUMN_NUMBER                   = 71
+    START_BYTE                      = 259
+    BYTES                           = 2
+    DATA_TYPE                       = MSB_UNSIGNED_INTEGER
+    UNIT                            = "BYTE"
+    DESCRIPTION                     = "Data CHDO Length. Gives the number of
+                                       bytes in the value field of the Data
+                                       CHDO -- the number of bytes containing
+                                       I and Q samples."
+  END_OBJECT                      = COLUMN
+
+  OBJECT                          = COLUMN
+    NAME                            = "SAMPLE WORDS"
+    COLUMN_NUMBER                   = 72
+    START_BYTE                      = 261
+    BYTES                           = 4000
+    ITEMS                           = 1000
+    ITEM_BYTES                      = 4
+    ITEM_OFFSET                     = 4
+    DATA_TYPE                       = MSB_UNSIGNED_INTEGER
+    UNIT                            = "N/A"
+    DESCRIPTION                     = "Each ITEM contains one 32-bit sample
+                                       word: quadrature (Q) sample data in
+                                       the 16 most significant bits (MSBs)
+                                       followed by in-phase (I) sample data
+                                       in the 16 least significant bits
+                                       (LSBs).  Within each Q and I word,
+                                       individual outputs from the analog
+                                       to digital converters (ADCs) are
+                                       stored as 1, 2, 4, 8, or 16 bit values
+                                       in LSB to MSB time order (the sample
+                                       size is set in Column 42).  For
+                                       example, if the data were collected
+                                       using 8-bit samples, the arrangement
+                                       would be
+
+                                            BYTES 1-2
+                                            +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+                                       BITS |1|2|3|4|5|6|7|8|1|2|3|4|5|6|7|8|
+                                            +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+                                            |<------Q2----->|<------Q1----->|
+                                            +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+                                            BYTES 3-4
+                                            +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+                                       BITS |1|2|3|4|5|6|7|8|1|2|3|4|5|6|7|8|
+                                            |<------I2----->|<------I1----->|
+                                            +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+                                       where (Q1,I1) is the earlier sample
+                                       and (Q2,I2) was taken later."
+  END_OBJECT                      = COLUMN
+
+END_OBJECT                      = TABLE
+
+END

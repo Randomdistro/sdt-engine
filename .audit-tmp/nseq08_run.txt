@@ -1,0 +1,40 @@
+NSEQ08 shared doublet invariant
+pre-reg: NSEQ08_PRE_REGISTRATION.md
+
+|doublet rays| triangles=6 hexagon=6
+|inter|=4 |onlyA|=2 |onlyB|=2 |union|=8
+|QQ intersect|=4 |QQ onlyA|=2 |QQ onlyB|=2
+
+Shared doublet rays:
+  ray=(-0.7071067812, -0.7071067812, 0.0)
+    A: QQ=Q(-1.0, 0.0, 0.0)-Q(0.0, -1.0, 0.0)  S=T(-0.577, -0.577, -0.577)-T(-0.577, -0.577, 0.577)
+    B: QQ=Q(-1.0, 0.0, 0.0)-Q(0.0, -1.0, 0.0)  S=T(-0.577, -0.577, -0.577)-T(-0.577, -0.577, 0.577)
+    same_QQ=True same_S=True qq_in_QQ_intersect=True
+  ray=(0.0, -0.7071067812, -0.7071067812)
+    A: QQ=Q(0.0, -1.0, 0.0)-Q(0.0, 0.0, -1.0)  S=T(-0.577, -0.577, -0.577)-T(0.577, -0.577, -0.577)
+    B: QQ=Q(0.0, -1.0, 0.0)-Q(0.0, 0.0, -1.0)  S=T(-0.577, -0.577, -0.577)-T(0.577, -0.577, -0.577)
+    same_QQ=True same_S=True qq_in_QQ_intersect=True
+  ray=(0.0, 0.7071067812, 0.7071067812)
+    A: QQ=Q(0.0, 1.0, 0.0)-Q(0.0, 0.0, 1.0)  S=T(-0.577, 0.577, 0.577)-T(0.577, 0.577, 0.577)
+    B: QQ=Q(0.0, 1.0, 0.0)-Q(0.0, 0.0, 1.0)  S=T(-0.577, 0.577, 0.577)-T(0.577, 0.577, 0.577)
+    same_QQ=True same_S=True qq_in_QQ_intersect=True
+  ray=(0.7071067812, 0.7071067812, 0.0)
+    A: QQ=Q(1.0, 0.0, 0.0)-Q(0.0, 1.0, 0.0)  S=T(0.577, 0.577, -0.577)-T(0.577, 0.577, 0.577)
+    B: QQ=Q(1.0, 0.0, 0.0)-Q(0.0, 1.0, 0.0)  S=T(0.577, 0.577, -0.577)-T(0.577, 0.577, 0.577)
+    same_QQ=True same_S=True qq_in_QQ_intersect=True
+
+Private triangles:
+  ray=(-0.7071067812, 0.0, -0.7071067812) QQ=Q(-1.0, 0.0, 0.0)-Q(0.0, 0.0, -1.0) private_QQ=True
+  ray=(0.7071067812, 0.0, 0.7071067812) QQ=Q(1.0, 0.0, 0.0)-Q(0.0, 0.0, 1.0) private_QQ=True
+Private hexagon:
+  ray=(-0.7071067812, 0.0, 0.7071067812) QQ=Q(-1.0, 0.0, 0.0)-Q(0.0, 0.0, 1.0) private_QQ=True
+  ray=(0.7071067812, 0.0, -0.7071067812) QQ=Q(1.0, 0.0, 0.0)-Q(0.0, 0.0, -1.0) private_QQ=True
+
+C1/H1 cardinality inter=4 union=8: PASS
+C2/H2 shared rays use QQ in QQ_intersect (need 4): PASS (got 4; |QQ cap|=4)
+C3/H3 private rays use private QQ: PASS
+C4/H4 shared rays reuse identical surface edge: PASS (got 4)
+  shared surface-edge sets equal across branches: True |S_shared|=4
+  |QQ used by shared rays| A=4 B=4 |cap|=4
+---
+STATUS SHARED_DOUBLET_QQ_INTERSECT_SURVIVES

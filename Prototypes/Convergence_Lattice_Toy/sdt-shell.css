@@ -1,0 +1,471 @@
+/* ════════════════════════════════════════════════════════════════════════════
+   SDT SITE SHELL — three menus, same on every screen.
+   J. C. Harvey, Melbourne.
+
+     LEFT   vertical COLUMN  — Navigation (the medium, six laws, topology, …)
+     RIGHT  vertical COLUMN  — Scrollers (scrollthroughs, sequencer, lab)
+     TOP    bar              — Settings
+
+   Collapse:  ≤1080px  → three buttons [Navigation] [Settings] [Scrollers]
+              ≤600px   → three hamburgers on a row below "S.D.T."
+
+   Palette inherited from style.css (--paper / --ink / --copper).
+   ════════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  --sdtq-off: 20px;          /* distance off the side of the screen */
+  --sdtq-col: 208px;         /* column width */
+  --sdtq-top: 46px;          /* settings bar height */
+}
+
+/* fallbacks so the shell also works on pages that don't load style.css */
+.sdtq {
+  --sq-paper: var(--paper, #faf6ef);
+  --sq-edge: var(--paper-edge, #e8e0d2);
+  --sq-ink: var(--ink, #1e1c18);
+  --sq-muted: var(--ink-muted, #7a7265);
+  --sq-faint: var(--ink-faint, #a49d92);
+  --sq-copper: var(--copper, #b07430);
+  --sq-glow: var(--copper-glow, rgba(176, 116, 48, .12));
+  font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color: var(--sq-ink);
+}
+
+.sdtq, .sdtq * { box-sizing: border-box; }
+.sdtq a { text-decoration: none; color: inherit; }
+.sdtq button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+
+/* the legacy horizontal nav row is replaced by the left column */
+.nav { display: none !important; }
+
+/* ── TOP: settings bar ───────────────────────────────────────────────────── */
+.sdtq-bar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 9000;
+  min-height: var(--sdtq-top);
+  display: flex; align-items: center; gap: 1.25rem;
+  padding: 0 var(--sdtq-off);
+  background: rgba(250, 246, 239, .93);
+  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--sq-edge);
+}
+.sdtq-brand {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: .8125rem; font-weight: 600; letter-spacing: .18em;
+  text-transform: uppercase; white-space: nowrap;
+}
+.sdtq-brand span { color: var(--sq-copper); }
+
+/* ── search ──────────────────────────────────────────────────────────────── */
+.sdtq-search { position: relative; margin-left: auto; }
+.sdtq-search input {
+  width: 15rem; padding: .32rem .6rem .32rem 1.7rem;
+  border: 1px solid var(--sq-edge); border-radius: 3px;
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%237a7265' stroke-width='1.5'%3E%3Ccircle cx='7' cy='7' r='4.5'/%3E%3Cpath d='M10.5 10.5L14 14'/%3E%3C/svg%3E") no-repeat .45rem center;
+  background-size: 13px; font: inherit; font-size: .8125rem; color: var(--sq-ink);
+}
+.sdtq-search input::placeholder { color: var(--sq-faint); }
+.sdtq-search input:focus { outline: none; border-color: var(--sq-copper); }
+.sdtq-results {
+  display: none; position: absolute; top: calc(100% + .4rem); right: 0;
+  width: min(30rem, calc(100vw - 2rem)); max-height: 62vh; overflow-y: auto;
+  background: var(--sq-paper); border: 1px solid var(--sq-edge); border-radius: 3px;
+  box-shadow: 0 10px 40px rgba(30, 28, 24, .18); padding: .4rem; z-index: 9100;
+}
+.sdtq-results.sdtq-open { display: block; }
+.sdtq-results a { display: block; padding: .5rem .6rem; border-radius: 2px; border-left: 2px solid transparent; }
+.sdtq-results a:hover, .sdtq-results a.sel { background: var(--sq-glow); border-left-color: var(--sq-copper); }
+.sdtq-results .rt { display: block; font-family: 'Source Serif 4', Georgia, serif;
+  font-size: .9375rem; color: var(--sq-ink); }
+.sdtq-results .rs { display: block; font-size: .75rem; color: var(--sq-muted); line-height: 1.5; margin-top: .12rem; }
+.sdtq-results .rs mark { background: rgba(176, 116, 48, .28); color: inherit; padding: 0 .1em; }
+.sdtq-results .rnone { padding: .8rem .6rem; font-size: .8125rem; color: var(--sq-muted); }
+
+.sdtq-settings { display: flex; align-items: center; gap: 1.25rem; }
+.sdtq-settings label {
+  display: flex; align-items: center; gap: .45rem;
+  font-size: .6875rem; letter-spacing: .09em; text-transform: uppercase;
+  color: var(--sq-muted);
+}
+.sdtq-seg { display: flex; border: 1px solid var(--sq-edge); border-radius: 4px; overflow: hidden; }
+.sdtq-seg button {
+  padding: .2rem .5rem; font-size: .6875rem; letter-spacing: .05em;
+  color: var(--sq-muted); background: #fff; transition: all var(--dur-fast, .2s);
+}
+.sdtq-seg button + button { border-left: 1px solid var(--sq-edge); }
+.sdtq-seg button[aria-pressed="true"] { background: var(--sq-copper); color: #fff; }
+
+/* ── LEFT + RIGHT: the two vertical columns ──────────────────────────────── */
+.sdtq-column {
+  position: fixed;
+  top: calc(var(--sdtq-top) + var(--sdtq-off));
+  bottom: var(--sdtq-off);
+  width: var(--sdtq-col);
+  z-index: 8900;
+  display: flex;              /* ← a COLUMN: items stack vertically */
+  flex-direction: column;
+  gap: 1px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: .75rem .6rem 1.25rem;
+  background: rgba(250, 246, 239, .82);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  border: 1px solid var(--sq-edge);
+  border-radius: 3px;
+  scrollbar-width: thin;
+}
+.sdtq-column::-webkit-scrollbar { width: 6px; }
+.sdtq-column::-webkit-scrollbar-thumb { background: var(--sq-whisper, #c8c1b6); border-radius: 3px; }
+
+.sdtq-left  { left:  var(--sdtq-off); }
+.sdtq-right { right: var(--sdtq-off); }
+
+.sdtq-column h2 {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: .6875rem; font-weight: 600; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--sq-copper);
+  margin: 0 0 .5rem; padding-bottom: .5rem;
+  border-bottom: 1px solid var(--sq-edge);
+}
+.sdtq-column h3 {
+  font-size: .625rem; font-weight: 600; letter-spacing: .13em;
+  text-transform: uppercase; color: var(--sq-faint);
+  margin: .9rem 0 .3rem; padding: 0 .4rem;
+}
+.sdtq-column h3:first-of-type { margin-top: .15rem; }
+
+/* one link per line — the vertical stack */
+.sdtq-column a {
+  display: block;
+  padding: .34rem .45rem;
+  font-size: .75rem; letter-spacing: .04em;
+  color: var(--sq-muted);
+  border-left: 2px solid transparent;
+  border-radius: 2px;
+  transition: color var(--dur-fast, .2s), background var(--dur-fast, .2s);
+}
+.sdtq-column a:hover { color: var(--sq-ink); background: var(--sq-glow); border-left-color: var(--sq-copper); }
+.sdtq-column a[aria-current="page"],
+.sdtq-column a.sdtq-active {
+  color: var(--sq-ink); font-weight: 600;
+  background: var(--sq-glow); border-left-color: var(--sq-copper);
+}
+
+.sdtq-close {
+  display: none;
+  position: absolute; top: .5rem; right: .5rem;
+  width: 26px; height: 26px; border: 1px solid var(--sq-edge); border-radius: 3px;
+  background: #fff; font-size: 1rem; line-height: 1;
+}
+
+/* ── collapsed triggers ──────────────────────────────────────────────────── */
+.sdtq-tabs { display: none; align-items: center; gap: .5rem; margin-left: auto; }
+.sdtq-tabs button {
+  padding: .35rem .7rem; border: 1px solid var(--sq-edge); border-radius: 3px;
+  background: #fff; font-size: .6875rem; letter-spacing: .09em; text-transform: uppercase;
+  color: var(--sq-muted);
+}
+.sdtq-tabs button[aria-expanded="true"] {
+  background: var(--sq-copper); border-color: var(--sq-copper); color: #fff;
+}
+
+.sdtq-burgers { display: none; gap: .9rem; width: 100%; justify-content: center; padding: 0 0 .55rem; }
+.sdtq-burgers button {
+  width: 48px; height: 34px; border: 1px solid var(--sq-edge); border-radius: 3px;
+  background: #fff; display: grid; place-content: center; gap: 4px;
+}
+.sdtq-burgers button i { display: block; width: 18px; height: 1.5px; background: var(--sq-ink); }
+.sdtq-burgers button[aria-expanded="true"] { background: var(--sq-copper); border-color: var(--sq-copper); }
+.sdtq-burgers button[aria-expanded="true"] i { background: #fff; }
+
+/* keep page content clear of the columns on wide screens */
+@media (min-width: 1081px) {
+  body { padding-top: var(--sdtq-top); }
+
+  /* ── DESKTOP: the columns are DROPDOWNS, not permanent sidebars ──────────
+     (Harvey 2026-07-30: "the navigation columns in both sides are supposed to
+     be drop downs"). They were fixed full-height rails eating page width at
+     every load. Now they drop from their own tab in the bar, anchored to the
+     side they belong to, and the page keeps its full measure. */
+  .sdtq-tabs { display: flex; }
+  .sdtq-column {
+    display: none;
+    top: calc(var(--sdtq-top) + .4rem);
+    bottom: auto;
+    max-height: calc(100vh - var(--sdtq-top) - 1.4rem);
+    width: min(var(--sdtq-col), calc(100vw - 2rem));
+    box-shadow: 0 14px 44px rgba(30, 28, 24, .18);
+    background: rgba(250, 246, 239, .97);
+  }
+  .sdtq-column.sdtq-open { display: flex; }
+  .sdtq-close { display: grid; place-content: center; }
+
+  /* the settings + language panels drop from the bar too, centred */
+  .sdtq-panel {
+    display: none; position: fixed; z-index: 8900;
+    top: calc(var(--sdtq-top) + .4rem);
+    left: 50%; transform: translateX(-50%);
+    width: min(22rem, calc(100vw - 2rem));
+    max-height: calc(100vh - var(--sdtq-top) - 1.4rem); overflow-y: auto;
+    flex-direction: column; gap: 1rem; padding: 1.1rem;
+    background: rgba(250, 246, 239, .97);
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+    border: 1px solid var(--sq-edge); border-radius: 3px;
+    box-shadow: 0 14px 44px rgba(30, 28, 24, .18);
+  }
+  .sdtq-panel.sdtq-open { display: flex; }
+  /* the inline settings cluster stays in the bar on desktop, so its tab would
+     be a duplicate — hide the tab, keep Navigation / Scrollers / Language */
+  .sdtq-tabs button[data-sdtq-target="set"] { display: none; }
+}
+
+/* ── MEDIUM: three buttons ───────────────────────────────────────────────── */
+@media (max-width: 1080px) {
+  .sdtq-settings { display: none; }
+  .sdtq-tabs { display: flex; }
+  .sdtq-search { margin-left: 1rem; }
+  .sdtq-search input { width: 9rem; }
+  body { padding-top: var(--sdtq-top); }
+
+  .sdtq-column, .sdtq-panel {
+    display: none;
+    top: calc(var(--sdtq-top) + .5rem);
+    bottom: auto;
+    max-height: calc(100vh - var(--sdtq-top) - 1.5rem);
+    width: min(330px, calc(100vw - 1.5rem));
+    box-shadow: 0 10px 40px rgba(30, 28, 24, .16);
+  }
+  .sdtq-column.sdtq-open, .sdtq-panel.sdtq-open { display: flex; }
+  .sdtq-close { display: grid; place-content: center; }
+
+  .sdtq-panel {
+    position: fixed; z-index: 8900;
+    left: 50%; transform: translateX(-50%);
+    flex-direction: column; gap: 1rem;
+    padding: 1.1rem;
+    background: rgba(250, 246, 239, .96);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--sq-edge); border-radius: 3px;
+  }
+  .sdtq-panel .sdtq-settings {
+    display: flex; flex-direction: column; align-items: stretch;
+    gap: .9rem; margin: 0;
+  }
+  .sdtq-panel .sdtq-settings label { justify-content: space-between; }
+}
+
+/* ── SMALL PHONE: three hamburgers below "S.D.T." ────────────────────────── */
+@media (max-width: 600px) {
+  .sdtq-bar { flex-wrap: wrap; padding: .5rem .75rem 0; row-gap: .4rem; }
+  .sdtq-brand { width: 100%; text-align: center; font-size: .9375rem; }
+  .sdtq-tabs { display: none; }
+  .sdtq-burgers { display: flex; }
+  .sdtq-search { order: 3; width: 100%; margin: 0 0 .5rem; }
+  .sdtq-search input { width: 100%; }
+  .sdtq-results { right: auto; left: 0; width: 100%; }
+  body { padding-top: 140px; }
+  .sdtq-column, .sdtq-panel { top: 144px; max-height: calc(100vh - 156px); }
+}
+
+/* reduced motion */
+html[data-sdt-motion="off"] *,
+html[data-sdt-motion="off"] *::before,
+html[data-sdt-motion="off"] *::after {
+  animation: none !important; transition: none !important; scroll-behavior: auto !important;
+}
+
+@media print { .sdtq { display: none !important; } body { padding-top: 0 !important; } }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   DROPDOWN GROUPS in the two columns (2026-07-30)
+   Each h3 group became a disclosure button over its own link list. The group
+   holding the current page opens itself; the rest stay shut and remember it.
+   ══════════════════════════════════════════════════════════════════════════ */
+.sdtq-column .sdtq-grp {
+  display: flex; align-items: center; justify-content: space-between; gap: .5rem;
+  width: 100%; margin: .55rem 0 .1rem; padding: .32rem .4rem;
+  background: none; border: 0; border-radius: 2px; cursor: pointer;
+  font-family: inherit; font-size: .625rem; font-weight: 600; letter-spacing: .13em;
+  text-transform: uppercase; color: var(--sq-faint); text-align: left;
+  transition: color var(--dur-fast, .2s), background var(--dur-fast, .2s);
+}
+.sdtq-column .sdtq-grp:first-of-type { margin-top: .15rem; }
+.sdtq-column .sdtq-grp:hover { color: var(--sq-copper); background: var(--sq-glow); }
+.sdtq-column .sdtq-grp[aria-expanded="true"] { color: var(--sq-copper); }
+
+/* the chevron: a rotating caret, the one moving part */
+.sdtq-chev {
+  flex: 0 0 auto; width: .5rem; height: .5rem; position: relative; opacity: .75;
+}
+.sdtq-chev::before {
+  content: ''; position: absolute; inset: 0; margin: auto;
+  width: .38rem; height: .38rem;
+  border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor;
+  transform: translateY(-25%) rotate(45deg);
+  transition: transform var(--dur-fast, .2s) ease;
+}
+.sdtq-column .sdtq-grp[aria-expanded="true"] .sdtq-chev::before {
+  transform: translateY(10%) rotate(-135deg);
+}
+.sdtq-grpbody { padding-left: .25rem; }
+[data-sdt-motion="reduced"] .sdtq-chev::before { transition: none; }
+
+/* ── LANGUAGE panel (reinstated 2026-07-30) ───────────────────────────────
+   i18n.js painted its own fixed button at z-index 2000; the shell bar sits at
+   9000 across the full top and buried it. The control is a shell tab now. */
+.sdtq-langpanel h3 {
+  font-size: .625rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--sq-copper); margin: 0 0 .5rem; padding-bottom: .4rem;
+  border-bottom: 1px solid var(--sq-edge);
+}
+.sdtq-langs { display: flex; flex-direction: column; gap: .25rem; }
+.sdtq-langs button {
+  display: flex; align-items: center; justify-content: space-between; gap: .5rem;
+  padding: .45rem .6rem; border: 1px solid var(--sq-edge); border-radius: 3px;
+  background: none; cursor: pointer; font-family: inherit; font-size: .8125rem;
+  color: var(--sq-ink); text-align: left;
+  transition: background var(--dur-fast, .2s), border-color var(--dur-fast, .2s);
+}
+.sdtq-langs button:hover { background: var(--sq-glow); border-color: var(--sq-copper); }
+.sdtq-langs button.active { background: var(--sq-copper); border-color: var(--sq-copper); color: var(--sq-paper); }
+.sdtq-langs .tick { opacity: 0; font-size: .7rem; }
+.sdtq-langs button.active .tick { opacity: 1; }
+.sdtq-note { font-size: .75rem; color: var(--sq-muted); line-height: 1.6; margin: 0; }
+
+/* ════════════════════════════════════════════════════════════════════════════
+   THEME LAYER — light / dark, one switch for the whole site.
+   J. C. Harvey, Melbourne · 2026-08-01.
+
+   The shell's Settings menu already writes data-theme="light|dark" onto <html>
+   (Auto follows the OS). Nothing responded to it until now: every page carried
+   its own palette. This layer answers the attribute for BOTH vocabularies in
+   use — the Tekne set from style.css and the compact set the domain papers
+   declare inline — plus the dark-native labs, which get a light mode instead.
+
+   Specificity note: html[data-theme=...] (0,1,1) outranks a page's own :root
+   (0,1,0), so these win regardless of stylesheet order. No !important needed.
+
+   Dark is not an inversion. Tekne at night is a warm charcoal under a lamp:
+   warm off-white ink on warm near-black, copper lifted for contrast.
+   ════════════════════════════════════════════════════════════════════════════ */
+
+html[data-theme="light"] { color-scheme: light; }
+html[data-theme="dark"]  { color-scheme: dark; }
+
+/* ── DARK — the Tekne vocabulary (style.css) ─────────────────────────────── */
+html[data-theme="dark"] {
+  --cream:        #191b1f;
+  --cream-warm:   #1e2126;
+  --paper:        #131519;
+  --paper-deep:   #0f1114;
+  --paper-edge:   #2c313a;
+  --ink:          #e9e5dd;
+  --ink-soft:     #c6c1b7;
+  --ink-muted:    #958e83;
+  --ink-mute:     #958e83;
+  --ink-faint:    #6f6960;
+  --ink-air:      #6f6960;
+  --ink-whisper:  #4b463f;
+  --edge:         #2c313a;
+
+  --copper:       #d99a52;
+  --copper-light: #eab97c;
+  --copper-glow:  rgba(217,154,82,0.16);
+  --steel:        #7fabc6;
+  --steel-light:  #9fc7de;
+  --steel-deep:   #5d8ca6;
+  --mint:         #5ec9a0;
+  --gold:         #d4a850;
+  --rust:         #e08a5a;
+  --soft:         #c6c1b7;
+  --mute:         #958e83;
+
+  /* the deep/code family already reads dark — lift it off the page slightly */
+  --midnight:     #0d0f13;
+  --midnight-up:  #14171d;
+  --midnight-card:#1a1e26;
+  --midnight-edge:#2c313a;
+  --midnight-text:#d2d6de;
+  --midnight-mute:#7b8290;
+}
+
+/* ── DARK — the compact vocabulary the domain papers declare inline ───────── */
+html[data-theme="dark"] body { background: var(--paper); color: var(--ink); }
+
+/* Papers hardcode #fff on their raised blocks; give those a card colour. */
+html[data-theme="dark"] .abstract,
+html[data-theme="dark"] .eq,
+html[data-theme="dark"] .decl,
+html[data-theme="dark"] .card,
+html[data-theme="dark"] .irr-card,
+html[data-theme="dark"] .bench-board .cell,
+html[data-theme="dark"] .door { background: #1a1e26; border-color: var(--paper-edge); }
+html[data-theme="dark"] .bench-pre { background: #0f1114; border-color: var(--paper-edge); }
+html[data-theme="dark"] th, html[data-theme="dark"] td { border-color: var(--paper-edge); }
+html[data-theme="dark"] th { background: #1a1e26; }
+
+/* Fixed translucent bars are declared with literal light rgba on several pages. */
+html[data-theme="dark"] .backlink,
+html[data-theme="dark"] .wt-top,
+html[data-theme="dark"] .nav { background: rgba(19,21,25,0.90); border-color: var(--paper-edge); }
+
+/* Gradients baked light-to-light in hero blocks. */
+html[data-theme="dark"] .inv-hero,
+html[data-theme="dark"] .opening { background: linear-gradient(180deg, var(--cream) 0%, var(--paper) 100%); }
+
+/* Line art drawn as SVG/canvas strokes reads too hot on dark — soften. */
+html[data-theme="dark"] svg text { fill: var(--ink-soft); }
+html[data-theme="dark"] img:not([data-no-dim]) { filter: brightness(.92) contrast(1.02); }
+
+/* ── LIGHT — the dark-native instruments (sequencer, labs, eclipse) ───────── */
+/* These declare --bg/--panel/--ink themselves and are built dark. In light mode
+   they invert to a paper instrument panel; the WebGL scene keeps its own
+   background (set in JS), which is stated on the page rather than faked here. */
+html[data-theme="light"] {
+  --bg:        #f7f4ee;
+  --panel:     rgba(255,253,248,0.94);
+  --gold:      #a97722;
+  --gold-bright:#8a5f18;
+  --steel:     #3d6f96;
+  --mint:      #0d7a5f;
+  --ink-dim:   #8a8378;
+  --red:       #b8453f;
+  --grn:       #2e8b57;
+}
+html[data-theme="light"] body { color-scheme: light; }
+
+/* ── the toggle itself, in the Settings menu, reads as a segmented control ── */
+.sdtq-settings [data-key="theme"] { letter-spacing: .04em; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   REGISTER SWITCH — Simplified · Layman · Technical (2026-07-30)
+   Painted by sdt-register.js into <div id="sdt-register-switch">.
+   ══════════════════════════════════════════════════════════════════════════ */
+.sdt-reg {
+  display: flex; align-items: center; gap: .85rem; flex-wrap: wrap;
+  margin: 1.6rem 0 2.2rem; padding: .75rem .9rem;
+  border: 1px solid var(--paper-edge, #e5e0d4); border-radius: 4px;
+  background: var(--paper-deep, #f2efe8);
+}
+.sdt-reg__lab {
+  font-family: 'JetBrains Mono', Consolas, monospace;
+  font-size: .62rem; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--ink-faint, #a49d92);
+}
+.sdt-reg__seg { display: flex; flex-wrap: wrap; gap: .3rem; }
+.sdt-reg__seg a {
+  padding: .35rem .8rem; border: 1px solid var(--paper-edge, #e5e0d4);
+  border-radius: 3px; background: var(--paper, #faf8f4);
+  font-family: 'JetBrains Mono', Consolas, monospace;
+  font-size: .68rem; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--ink-muted, #6d7177); text-decoration: none;
+  transition: color .2s, background .2s, border-color .2s;
+}
+.sdt-reg__seg a:hover {
+  color: var(--copper, #b07430); border-color: var(--copper, #b07430);
+}
+.sdt-reg__seg a.on {
+  background: var(--copper, #b07430); border-color: var(--copper, #b07430);
+  color: #fff; font-weight: 600; cursor: default;
+}
+@media (max-width: 520px) { .sdt-reg { flex-direction: column; align-items: flex-start; } }

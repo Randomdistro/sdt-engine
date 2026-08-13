@@ -1,35 +1,33 @@
-# Master Protocol — Iteration 27 (NP12c Boundary→RMS Map Phase A)
+# Master Protocol - Iteration 27 (NP30 Contraction Root)
 
-**Date:** 2026-08-09  
-**Commit:** `6e091f612cd7b3af85c31dbbc2b83d3770aec1b9` (working tree dirty)  
-**Canon edits:** none  
-**Upstream:** Iteration 26 reopen gate
+**Date:** 2026-08-09
+**Branch:** nuclear triton-contraction / closure anchor
 
-## Result
+## Decision
 
-| Gate | Result |
-|---|---|
-| Source census for Map | PASS — Map symbol ABSENT |
-| √(3/5) math instrument | PASS |
-| Identity map class | UNDERIVED |
-| Uniform map class | geometric / density UNDERIVED |
-| Native Map freeze | **no** |
-| Phase B holdout | **SEALED** |
+`OBSERVATIONAL_REGULARITY_REPRODUCED_MECHANISM_UNADJUDICATED`.
 
-**Status:** `MAP_UNDERIVED / PHASE_B_SEALED`
+## Evidence and correction
 
-## Cascade
+- The IAEA radius data reproduce a negative heavy one-neutron residual tendency
+  (`77.47%` negative; mean `-5.6842 mfm`) under a frozen explicit reduction.
+- NP30's `86%` on an unnamed 281-member selection has no executable reduction
+  or recoverable membership list; it is retained as unreproduced, not repaired.
+- The later closure-kink analysis reproduces negative kinks at hard-coded
+  closure labels, but its own model comparison favors occupancy independence.
+- N=82/Z=50 is therefore an empirical label, not a closure location derived by
+  the triton/interleave construction. NP32 cannot treat it as an independent
+  SDT anchor.
 
-| Path | Status |
-|---|---|
-| NP12b proxy reproduction | DIRECT_PROXY_REPRODUCED (number retained) |
-| Boundary law vs IAEA RMS | UNADJUDICATED |
-| NP12c Phase B | sealed until native Map derives |
-| Cassini Doppler | DEFERRED_OBSERVABLE_DEFINITION (I23) |
-| GOM20 / BF080 | deferred (equation / access) |
+## Scope boundary
 
-## Next tests (ranked)
+This does not erase the radius trends or deny that a future SDT geometry could
+explain them. It rejects only the present causal and origin claims. No fitted
+coefficient or standard-model comparator supplies this decision.
 
-1. Native nuclear charge-profile / periphery Map derivation (author–theory; then NP12c Phase B).  
-2. Propose-and-wait: `laws.hpp` correspondence_status hygiene for `nuclear_boundary_radius`.  
-3. Other I23-eligible branches with frozen primary data (no decoder/author block).
+## Next gate
+
+Derive the closure schedule and a like-for-like radius observable before a
+source-registered held-out isotope test. Freeze exact membership, uncertainty,
+and effect-size predictions; do not reuse an imported magic-number list as a
+model output.

@@ -1,0 +1,24 @@
+NSEQ11 axis/around branch rule
+pre-reg: NSEQ11_PRE_REGISTRATION.md
+forbidden: C3 x inversion as gate
+
+C4 no C3 machinery in builders: PASS
+  builder co_names sample=('frozenset', 'eid', 'QZ', 'QX', 'QY', 'MZ', 'MX', 'MY', 'QX', 'QY', 'QZ', 'MX')...
+|Shared|=4 |Priv_tri|=2 |Priv_hex|=2
+  Shared: ['-x--y', '-y--z', '+z-+y', '+y-+x']
+  Priv_tri: ['-x--z', '+z-+x']
+  Priv_hex: ['-x-+z', '-z-+x']
+C1 shared/private cardinalities: PASS
+
+C2 K2,2 on axes {x, z}: PASS
+  K2,2 edges: ['-x--z', '-x-+z', '-z-+x', '+z-+x']
+  matching1: ['-x--z', '+z-+x']
+  matching2: ['-x-+z', '-z-+x']
+
+  Shared disjoint from K2,2: True
+  Shared U Priv recovers both branches: True
+C3 branch = Shared U matching: PASS
+
+---
+STATUS AXIS_AROUND_BRANCH_RULE_SURVIVES
+note: gates frozen; FAIL is terminal for this pre-reg

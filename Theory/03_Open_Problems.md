@@ -2,6 +2,21 @@
 
 Open problems remain in both computation and concept: α-from-topology (Conjecture, :29), R_p closure (02_Inputs:61 'Conjectured'), PPT08 angular DOF (OPEN), galaxy rotation on SDT-native terms (GD05 negative), neutron barrier depth (OPEN).
 
+## Aggregation / action (audited 2026-08-11; closed Iteration 42)
+
+| Debt | Status | Pointer |
+|---|---|---|
+| Naive `N·r_e` body depth | EXCLUDED | MM01/MM02, CLM-12 |
+| `ε_agg` as Om packing | WITHDRAWN (unit error) | MM02 |
+| Law-III origin of `koppa_per_baryon` without `l_P↔G` | PARKED_PERMANENT | MM03 / Iter 42 |
+| Native `A_s ≠ ℏ` | PARKED_PERMANENT | AS02 / Iter 42 |
+| Spectroscopic Om = EM `r_e` | EXCLUDED | AS01 |
+| Cherenkov constitutive `n(ω)` | UNDERDETERMINED | CR01 |
+| SNO conversion mechanism | UNDERDETERMINED (scalar-loss EXCLUDED) | NU01 |
+| Occupation MeV map | UNDERDETERMINED | NSEQ13 |
+| GW radiation coeff without GR | UNDERDETERMINED | GW01 |
+| Cassini raw shared-om integral | PARKED_PARTIAL_FETCH | OM02 |
+
 ## 1. R/a Quantisation
 
 **Problem**: Which specific aspect ratios of the genus-1 torus produce self-consistent mode-locked equilibria?

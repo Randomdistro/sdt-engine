@@ -1,0 +1,202 @@
+/* NSEQ06 â€” pure-shell seat geometry for the Nuclear Packing Sequencer.
+   Final isotope counts come from the alpha grammar. These shells supply positions;
+   their capacities are not accumulated as a final isotope ledger. */
+(function(root, factory) {
+  const api = factory();
+  if (typeof module === 'object' && module.exports) module.exports = api;
+  root.SDTNuclearShellGeometry = api;
+})(typeof globalThis !== 'undefined' ? globalThis : this, function() {
+  'use strict';
+
+  const EPS = 1e-10;
+  const BRANCH_HEMISPHERE_TRIANGLES = 'HEMISPHERE_TRIANGLES';
+  const BRANCH_MIXED_SIX_CYCLE = 'MIXED_SIX_CYCLE';
+
+  // Closure count -> representative neutron-closure isotope in Atomicus Lab.
+  // This is a navigation/correspondence ledger, not an accumulation of the
+  // shell capacities into the isotope's final alpha-grammar constituent count.
+  const CLOSURE_ISOTOPES = Object.freeze([
+    Object.freeze({shell:'ALPHA', closure:2,   Z:2,   N:2,   A:4,   sym:'He',   label:'He-4'}),
+    Object.freeze({shell:'D6',    closure:8,   Z:8,   N:8,   A:16,  sym:'O',    label:'O-16'}),
+    Object.freeze({shell:'D12-A', closure:20,  Z:20,  N:20,  A:40,  sym:'Ca',   label:'Ca-40'}),
+    Object.freeze({shell:'T8',    closure:28,  Z:20,  N:28,  A:48,  sym:'Ca',   label:'Ca-48'}),
+    Object.freeze({shell:'T10',   closure:50,  Z:28,  N:50,  A:78,  sym:'Ni',   label:'Ni-78'}),
+    Object.freeze({shell:'T12',   closure:82,  Z:50,  N:82,  A:132, sym:'Sn',   label:'Sn-132'}),
+    Object.freeze({shell:'T14',   closure:126, Z:82,  N:126, A:208, sym:'Pb',   label:'Pb-208'}),
+    Object.freeze({shell:'T16',   closure:184, Z:126, N:184, A:310, sym:'E126', label:'E126-310', predicted:true})
+  ]);
+
+  const add = (a,b) => [a[0]+b[0],a[1]+b[1],a[2]+b[2]];
+  const scale = (v,s) => [v[0]*s,v[1]*s,v[2]*s];
+  const dot = (a,b) => a[0]*b[0]+a[1]*b[1]+a[2]*b[2];
+  const norm = v => Math.hypot(v[0],v[1],v[2]);
+  const unit = v => { const n=norm(v)||1; return scale(v,1/n); };
+  const edgeKey = (i,j) => i<j ? `${i}:${j}` : `${j}:${i}`;
+
+  // Body diagonal (1,1,1) becomes +z. The frozen stella orientation then reads
+  // pole Â· three north-tropical Â· three south-tropical Â· pole.
+  const POLAR_X = unit([1,-1,0]);
+  const POLAR_Y = unit([1,1,-2]);
+  const POLAR_Z = unit([1,1,1]);
+  const polar = v => [dot(v,POLAR_X),dot(v,POLAR_Y),dot(v,POLAR_Z)];
+
+  function pairOrder(points) {
+    const used=new Set(), out=[];
+    for(let i=0;i<points.length;i++){
+      if(used.has(i)) continue;
+      let mate=-1, best=Infinity;
+      for(let j=i+1;j<points.length;j++){
+        if(used.has(j)) continue;
+        const d=norm(add(points[i],points[j]));
+        if(d<best){best=d;mate=j;}
+      }
+      out.push(points[i]); used.add(i);
+      if(mate>=0&&best<EPS){out.push(points[mate]);used.add(mate);}
+    }
+    return out;
+  }
+
+  function graph(points, edges, name) {
+    const seen=new Set(), clean=[];
+    for(const [i,j] of edges){
+      if(i===j||i<0||j<0||i>=points.length||j>=points.length) throw new Error(`${name}: invalid edge ${i},${j}`);
+      const key=edgeKey(i,j); if(seen.has(key)) continue;
+      seen.add(key); clean.push(i<j?[i,j]:[j,i]);
+    }
+    clean.sort((a,b)=>a[0]-b[0]||a[1]-b[1]);
+    return {name,points,edges:clean};
+  }
+
+  function cubeGraph() {
+    const raw=[];
+    for(const x of [-1,1]) for(const y of [-1,1]) for(const z of [-1,1]) raw.push(unit([x,y,z]));
+    const edges=[];
+    for(let i=0;i<raw.length;i++) for(let j=i+1;j<raw.length;j++){
+      let changes=0;
+      for(let k=0;k<3;k++) if(Math.sign(raw[i][k])!==Math.sign(raw[j][k])) changes++;
+      if(changes===1) edges.push([i,j]);
+    }
+    return graph(raw.map(polar),edges,'T8_STELLA_CUBE');
+  }
+
+  function pentagonalAntiprismGraph() {
+    const points=[], n=5, rho=2/Math.sqrt(5), h=1/Math.sqrt(5);
+    for(let i=0;i<n;i++){const a=2*Math.PI*i/n;points.push([rho*Math.cos(a),rho*Math.sin(a),h]);}
+    for(let i=0;i<n;i++){const a=2*Math.PI*i/n+Math.PI/n;points.push([rho*Math.cos(a),rho*Math.sin(a),-h]);}
+    const edges=[];
+    for(let i=0;i<n;i++){
+      edges.push([i,(i+1)%n],[n+i,n+(i+1)%n],[i,n+i],[i,n+(i+n-1)%n]);
+    }
+    return graph(points,edges,'T10_PENTAGONAL_ANTIPRISM');
+  }
+
+  function icosahedronGraph() {
+    const phi=(1+Math.sqrt(5))/2;
+    const raw=[];
+    for(const a of [-1,1]) for(const b of [-phi,phi]) raw.push([0,a,b],[a,b,0],[b,0,a]);
+    const points=raw.map(unit), distances=[];
+    for(let i=0;i<points.length;i++) for(let j=i+1;j<points.length;j++) distances.push(norm(add(points[i],scale(points[j],-1))));
+    const edgeLength=Math.min(...distances.filter(d=>d>EPS));
+    const edges=[];
+    for(let i=0;i<points.length;i++) for(let j=i+1;j<points.length;j++){
+      if(Math.abs(norm(add(points[i],scale(points[j],-1)))-edgeLength)<EPS) edges.push([i,j]);
+    }
+    return graph(points,edges,'T12_ICOSAHEDRON');
+  }
+
+  function t14Graph(branch) {
+    if(branch!==BRANCH_HEMISPHERE_TRIANGLES&&branch!==BRANCH_MIXED_SIX_CYCLE) throw new Error(`unknown D42 branch: ${branch}`);
+    const rawCube=[];
+    for(const x of [-1,1]) for(const y of [-1,1]) for(const z of [-1,1]) rawCube.push(unit([x,y,z]));
+    const rawAxes=[[1,0,0],[-1,0,0],[0,1,0],[0,-1,0],[0,0,1],[0,0,-1]];
+    const raw=rawCube.concat(rawAxes), edges=[];
+
+    // 12 cube edges.
+    for(let i=0;i<8;i++) for(let j=i+1;j<8;j++){
+      let changes=0;
+      for(let k=0;k<3;k++) if(Math.sign(rawCube[i][k])!==Math.sign(rawCube[j][k])) changes++;
+      if(changes===1) edges.push([i,j]);
+    }
+
+    // 24 cube-to-axis incidences: each cube direction meets its three signed axes.
+    for(let i=0;i<8;i++) for(let k=0;k<3;k++) edges.push([i,8+2*k+(rawCube[i][k]>0?0:1)]);
+
+    // Six axial links; both registered branches give axial degree two.
+    if(branch===BRANCH_HEMISPHERE_TRIANGLES){
+      for(const tri of [[8,10,12],[9,11,13]]) for(let i=0;i<3;i++) for(let j=i+1;j<3;j++) edges.push([tri[i],tri[j]]);
+    } else {
+      const cycle=[8,10,13,9,11,12];
+      for(let i=0;i<cycle.length;i++) edges.push([cycle[i],cycle[(i+1)%cycle.length]]);
+    }
+    return graph(raw.map(polar),edges,`T14_${branch}`);
+  }
+
+  function edgeMidpoints(g) {
+    return pairOrder(g.edges.map(([i,j])=>scale(add(g.points[i],g.points[j]),0.5)));
+  }
+
+  function octahedronPoints() {
+    return pairOrder([[1,0,0],[-1,0,0],[0,1,0],[0,-1,0],[0,0,1],[0,0,-1]]);
+  }
+
+  function pendingAntipodalPoints(count) {
+    if(count%2) throw new Error('pending antipodal shell requires an even capacity');
+    const half=count/2, out=[];
+    for(let i=0;i<half;i++){
+      const z=(i+0.5)/half, r=Math.sqrt(1-z*z), a=i*Math.PI*(3-Math.sqrt(5));
+      const p=[r*Math.cos(a),r*Math.sin(a),z]; out.push(p,scale(p,-1));
+    }
+    return out;
+  }
+
+  function makeShell(id,species,points,status,source) {
+    return {id,species,capacity:points.length,points:pairOrder(points),status,source};
+  }
+
+  function scaffold(branch=BRANCH_HEMISPHERE_TRIANGLES) {
+    const t8=cubeGraph(), t10=pentagonalAntiprismGraph(), t12=icosahedronGraph(), t14=t14Graph(branch);
+    return [
+      makeShell('D6','deuteron',octahedronPoints(),'REGISTERED','first closure around alpha'),
+      makeShell('D12-A','deuteron',pairOrder(t12.points),'REGISTERED','pre-triton twelve-seat tier'),
+      makeShell('T8','triton',pairOrder(t8.points),'DERIVED','polar dual tetrahedra / cube hull'),
+      makeShell('D12-B','deuteron',edgeMidpoints(t8),'DERIVED','T8 cube links / cuboctahedron'),
+      makeShell('T10','triton',pairOrder(t10.points),'COMPUTED','registered regular pentagonal antiprism'),
+      makeShell('D20','deuteron',edgeMidpoints(t10),'COMPUTED','registered T10 antiprism links'),
+      makeShell('T12','triton',pairOrder(t12.points),'COMPUTED','registered regular icosahedron'),
+      makeShell('D30','deuteron',edgeMidpoints(t12),'COMPUTED','registered T12 icosahedral links'),
+      makeShell('T14','triton',pairOrder(t14.points),'COMPUTED','registered cube plus axial directions'),
+      makeShell('D42','deuteron',edgeMidpoints(t14),'COMPUTED',`registered T14 links / ${branch}`),
+      makeShell('T16','triton',pendingAntipodalPoints(16),'PENDING','positional geometry not yet derived')
+    ];
+  }
+
+  function allocate(nd,nt,branch=BRANCH_HEMISPHERE_TRIANGLES) {
+    const remaining={deuteron:nd,triton:nt}, allocations=[], steps=[];
+    for(const [scaffoldIndex,shell] of scaffold(branch).entries()){
+      const take=Math.min(remaining[shell.species],shell.capacity);
+      if(take>0){
+        const allocation={...shell,scaffoldIndex,take,points:shell.points.slice(0,take)};
+        allocations.push(allocation);
+        for(let i=0;i<take;i++) steps.push({species:shell.species,shell:shell.id,status:shell.status,seat:i});
+        remaining[shell.species]-=take;
+      }
+    }
+    if(remaining.deuteron||remaining.triton) throw new Error(`shell scaffold exhausted: ${remaining.deuteron}d ${remaining.triton}t remain`);
+    return {allocations,steps,remaining};
+  }
+
+  function degrees(g) {
+    const d=new Array(g.points.length).fill(0);
+    for(const [i,j] of g.edges){d[i]++;d[j]++;}
+    return d;
+  }
+
+  return {
+    EPS,
+    BRANCH_HEMISPHERE_TRIANGLES,
+    BRANCH_MIXED_SIX_CYCLE,
+    CLOSURE_ISOTOPES,
+    add,scale,dot,norm,unit,polar,pairOrder,degrees,edgeMidpoints,
+    cubeGraph,pentagonalAntiprismGraph,icosahedronGraph,t14Graph,scaffold,allocate
+  };
+});

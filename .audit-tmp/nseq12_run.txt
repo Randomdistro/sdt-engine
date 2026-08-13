@@ -1,0 +1,33 @@
+NSEQ12 Shared vs matching surface partners
+pre-reg: NSEQ12_PRE_REGISTRATION.md
+forbidden: C3 gates; MeV; post-hoc amend
+
+C4 no C3 in builders: PASS
+|Shared|=4 |Priv_t|=2 |Priv_h|=2
+|S|=36 (expect 36)
+branch=triangles
+  doublet clusters=6 (expect 6); QQ with partners=6/6
+  Shared QQ partner species=TT
+  Matching QQ partner species=TT
+  Shared QQ partner species=TT
+  Matching QQ partner species=TT
+  Shared QQ partner species=TT
+  Shared QQ partner species=TT
+  C1 exhaustion: PASS
+  C2 Shared->TT: PASS ['TT', 'TT', 'TT', 'TT']
+  C3 Matching->TQ: FAIL ['TT', 'TT']
+branch=hexagon
+  doublet clusters=6 (expect 6); QQ with partners=6/6
+  Shared QQ partner species=TT
+  Matching QQ partner species=TT
+  Shared QQ partner species=TT
+  Matching QQ partner species=TT
+  Shared QQ partner species=TT
+  Shared QQ partner species=TT
+  C1 exhaustion: PASS
+  C2 Shared->TT: PASS ['TT', 'TT', 'TT', 'TT']
+  C3 Matching->TQ: FAIL ['TT', 'TT']
+
+---
+STATUS SHARED_VS_MATCHING_SURFACE_EXCLUDED
+note: gates frozen; FAIL is terminal for this pre-reg

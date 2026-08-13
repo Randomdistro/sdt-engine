@@ -1,31 +1,25 @@
-# Master Protocol - Iteration 26 (NP12b Observable Admissibility)
+# Master Protocol — Iteration 26 (NP34 Triton Parity Census)
 
-**Date:** 2026-08-09
-**Branch:** nuclear close-pack radius
+**Date:** 2026-08-09  
+**Branch:** `triton_parity_misfit` vs NUBASE2020  
+**Decision:** `TRITON_PARITY_EXCLUDED`
 
-## Decision
+## Evidence
 
-`PROXY_REPRODUCED_UNDER_UNDERIVED_SURFACE_CHARGE_MAPPING`.
-
-## Evidence and correction
-
-- The hash-registered IAEA table independently reproduces NP12b's direct
-  zero-fit proxy RMS residual: `0.0369539479` on 885 `A >= 16` rows.
-- The canonical quantity is labelled a boundary radius while the target is an
-  RMS charge-radius measurement. NP12b itself discloses the difference.
-- A prior repository analysis identifies the direct form as a surface-charge
-  limit and retains the required periphery-charge strength as underived.
-- The numerical result is retained, but its promotion to support for the
-  physical boundary law is corrected to `UNADJUDICATED`.
+- Pre-reg: `Investigations/05_Nuclear_Physics/NP34_Triton_Parity_NUBASE_Census/NP34_PRE_REGISTRATION.md`
+- Assessment: `.../NP34_ASSESSMENT.md`
+- Direct stdout: `.audit-tmp/np34_run.txt`
+- Five named quasi-stables and seven grips: all match
+- Extra primordial misfits: ²H, ⁶Li, ¹⁰B, ¹⁴N
 
 ## Scope boundary
 
-This neither excludes SDT nor falsifies close-pack `A^(1/3)` geometry. It
-rejects only the inference that an un-mapped RMS proxy confirms a boundary
-observable. No rival-framework prediction or fitted coefficient set this gate.
+Excludes only the whole-range “exactly five natural misfits” census claim.
+Does not retune coefficients, does not touch Cassini, and does not widen the
+expected set after the fact.
 
 ## Next gate
 
-Derive an executable native boundary-to-measured-RMS map, freeze it with all
-parameters before opening a registered holdout radius dataset, and compare like
-with like. Do not retrofit a conversion factor to the present table.
+Reformulate the parity-lock claim with an explicit light-odd–odd class or mass
+cut, pre-registered before re-run; or select an unrelated ready branch under
+Iteration 23 selection rules.

@@ -1,0 +1,28 @@
+NSEQ10 QQ branch selection rule
+pre-reg: NSEQ10_PRE_REGISTRATION.md
+
+|QQ candidates|=12 (expect 12)
+|2-factors|=20 (expect 20)
+C1 census: PASS
+|C3 x inversion invariant|=2 (expect 2)
+  survivor component counts: [1, 2] (expect [1, 2])
+  overlap with NSEQ05 polar triangle/hexagon pair: 1/2
+  survivor[0] triangle-pair: ['-x--y', '-x--z', '-y--z', '+z-+y', '+z-+x', '+y-+x']
+  survivor[1] six-cycle: ['-x-+z', '-x-+y', '-y-+z', '-y-+x', '-z-+y', '-z-+x']
+C2 symmetry cut: PASS
+|S1 cap S2|=0 (expect 0 under partition)
+  |union|=12 |unused|=0
+C3 complementary partition of 12 QQ: PASS
+  polar triangles in survivors: True
+  polar hexagon in survivors: False
+  polar |cap|=4 (expect 4)
+C4 polar vs symmetry diagnostic: PASS
+
+C5 N=168 / N=184 diagnostic
+  AME hash match: True
+  N=168 (OPEN_D): INSUFFICIENT nZ=0
+  N=184 (SEAL_fwd): INSUFFICIENT nZ=0
+C5 forward gap diagnostic: OPEN (sparse)
+
+---
+STATUS QQ_BRANCH_SELECTION_RULE_SURVIVES__N184_SPARSE

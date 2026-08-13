@@ -26,10 +26,14 @@ radii adjudication. Phase A is derivation census + formal classification only.
 
 **`MAP_UNDERIVED / PHASE_B_SEALED`**
 
+**Superseded for the scalar map by Iteration 28 / NP12d:**
+`UNDERDETERMINED — BOUNDARY IS NOT A SUFFICIENT STATE VARIABLE`
+(`R_B` alone cannot fix `R_RMS`; missing object is topology→`ρ_q`, not a
+coefficient `k`).
+
 Missing freedom (OPEN debt): an SDT-derived nuclear charge-density / periphery
 profile (and finite-proton treatment if required) that converts
-`nuclear_boundary_radius(A)` into a predicted RMS charge radius without using
-the IAEA table.
+topology into a predicted RMS charge radius without using the IAEA table.
 
 | Candidate | Class |
 |---|---|

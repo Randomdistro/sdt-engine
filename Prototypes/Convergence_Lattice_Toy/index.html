@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>/*sdt-theme-guard*/(function(){try{var t=localStorage.getItem("sdt.theme")||"auto";if(t==="auto")t=(window.matchMedia&&window.matchMedia("(prefers-color-scheme:dark)").matches)?"dark":"light";var d=document.documentElement;d.setAttribute("data-theme",t);d.setAttribute("data-sdt-theme",t);}catch(e){}})();</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Primitives · What the Pressurised Universe Is Made Of — SDT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- the website stylesheet is the basis -->
+<link rel="stylesheet" href="style.css">
+<style>
+  /* ── PRIMITIVES signature: deep indigo (the fabric of space itself) ── */
+  :root{
+    --copper:       #4a4f8c;
+    --copper-light: #7b81c9;
+    --copper-glow:  rgba(74,79,140,0.12);
+    --lat:          #4a4f8c;
+    --lat-soft:     #7b81c9;
+  }
+  .inv-tag{ font-family:'JetBrains Mono',monospace; font-size:0.7rem; letter-spacing:0.18em;
+    text-transform:uppercase; color:var(--copper); }
+
+  .inv-hero{ padding:var(--sp-3xl) var(--sp-xl) var(--sp-2xl); text-align:center;
+    background:linear-gradient(180deg,var(--cream) 0%, var(--paper) 100%); }
+  .inv-hero h1{ font-family:'Source Serif 4',Georgia,serif; font-weight:300; font-size:var(--fs-3xl);
+    line-height:1.06; letter-spacing:-0.01em; color:var(--ink); margin:var(--sp-md) 0; }
+  .inv-hero h1 em{ font-style:italic; color:var(--copper); }
+  .inv-hero .lead{ max-width:var(--content-width); margin:var(--sp-md) auto var(--sp-xl);
+    color:var(--ink-muted); font-size:var(--fs-md); line-height:1.7; }
+
+  /* ── the DESIGN ELEMENT: an interactive 3D spation lattice ── */
+  .lattice{ max-width:var(--wide-width); margin:0 auto; position:relative; }
+  .lattice canvas{ width:100%; height:420px; display:block; border-radius:8px; cursor:grab; touch-action:none;
+    background:radial-gradient(circle at 50% 46%,#fdfcff 0%,#f3f1fb 48%,#e9e7f0 100%);
+    border:1px solid rgba(74,79,140,0.18); box-shadow:inset 0 0 44px rgba(74,79,140,0.08); }
+  .lattice canvas:active{ cursor:grabbing; }
+  .lattice figcaption{ font-family:'JetBrains Mono',monospace; font-size:0.68rem; color:var(--ink-faint);
+    letter-spacing:0.06em; margin-top:0.7rem; }
+  .lattice__controls{ display:flex; align-items:center; justify-content:center; gap:.5rem; flex-wrap:wrap;
+    margin-top:.85rem; }
+  .lattice__controls button{ appearance:none; border:1px solid rgba(74,79,140,0.32); border-radius:999px;
+    padding:.4rem .75rem; background:rgba(255,255,255,.72); color:var(--copper); cursor:pointer;
+    font:500 .64rem/1 'JetBrains Mono',monospace; letter-spacing:.07em; text-transform:uppercase;
+    transition:background .2s,border-color .2s,transform .2s; }
+  .lattice__controls button:hover{ background:#fff; border-color:var(--copper); transform:translateY(-1px); }
+  .lattice__controls button:focus-visible{ outline:2px solid var(--copper-light); outline-offset:2px; }
+  .lattice__hint{ color:var(--ink-faint); font:400 .61rem/1.4 'JetBrains Mono',monospace; letter-spacing:.05em; }
+  .lattice__fallback{ padding:2rem; text-align:center; color:var(--ink-muted); font:400 .8rem/1.6 'JetBrains Mono',monospace; }
+  @media(max-width:720px){ .lattice canvas{ height:320px; } .lattice__hint{ flex-basis:100%; } }
+
+  .backlink{ position:fixed; top:0; left:0; right:0; z-index:100; padding:0.7rem 1.4rem;
+    display:flex; justify-content:space-between; align-items:center;
+    background:rgba(245,240,232,0.86); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--paper-edge); font-size:0.72rem; }
+  .backlink a{ color:var(--copper); text-decoration:none; letter-spacing:0.04em; }
+  .backlink .who{ font-family:'Source Serif 4',serif; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--ink-soft); font-weight:600; }
+
+  /* the four primitives, as quiet plates */
+  .prims{ display:grid; grid-template-columns:repeat(4,1fr); gap:var(--sp-md); max-width:var(--wide-width);
+    margin:var(--sp-lg) auto 0; }
+  .prim{ text-align:center; padding:var(--sp-md); border:1px solid var(--paper-edge); border-radius:6px;
+    background:var(--paper); cursor:pointer; transition:border-color .2s, transform .2s, box-shadow .2s; }
+  .prim:hover{ border-color:var(--copper-light); transform:translateY(-2px); }
+  .prim:focus-visible{ outline:none; border-color:var(--copper); }
+  .prim.active{ border-color:var(--copper); box-shadow:0 0 0 1px var(--copper), 0 6px 18px rgba(74,79,140,0.16); }
+  .prim .glyph{ font-size:1.7rem; color:var(--copper); }
+  .prim .nm{ font-family:'Source Serif 4',serif; font-weight:600; font-size:var(--fs-base); margin-top:4px; }
+  .prim .sdt{ font-size:0.72rem; color:var(--copper-light); letter-spacing:0.08em; text-transform:uppercase;
+    font-family:'JetBrains Mono',monospace; margin-top:2px; }
+  @media(max-width:720px){ .prims{ grid-template-columns:repeat(2,1fr); } }
+
+  .step{ font-family:'JetBrains Mono',monospace; color:var(--copper); font-size:0.72rem;
+    letter-spacing:0.12em; }
+</style>
+<link rel="stylesheet" href="sdt-shell.css">
+<script src="sdt-shell.js" defer></script>
+<meta name="description" content="The four primitives of Spatial Displacement Theory — space, matter, movement, and now — the whole of what the pressurised universe is made from.">
+<link rel="canonical" href="https://spatialdisplacementtheory.com/st_00_primitives">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="favicon.ico" sizes="64x64">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#b07430">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Spatial Displacement Theory">
+<meta property="og:title" content="The Primitives · What the Pressurised Universe Is Made Of — SDT">
+<meta property="og:description" content="The four primitives of Spatial Displacement Theory — space, matter, movement, and now — the whole of what the pressurised universe is made from.">
+<meta property="og:url" content="https://spatialdisplacementtheory.com/st_00_primitives">
+<meta property="og:image" content="https://spatialdisplacementtheory.com/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_AU">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Primitives · What the Pressurised Universe Is Made Of — SDT">
+<meta name="twitter:description" content="The four primitives of Spatial Displacement Theory — space, matter, movement, and now — the whole of what the pressurised universe is made from.">
+<meta name="twitter:image" content="https://spatialdisplacementtheory.com/og-card.png">
+</head>
+<body>
+
+<div class="backlink">
+  <span class="who">Spatial <span style="color:var(--copper)">Displacement</span> Theory</span>
+  <a href="investigations.html">← the whole picture</a>
+</div>
+
+<!-- ═══════════════════ HERO ═══════════════════ -->
+<header class="inv-hero reveal">
+  <div class="inv-tag">The Foundations · 0 · Primitives</div>
+  <h1>What the Pressurised<br>Universe Is <em>Made Of</em></h1>
+  <p class="lead">Before anything can be pressed, there must be something to do the pressing, and something to be pressed. Everything that follows in this theory — every force, every particle, every star — is built from four things, and from nothing else. Here they are, one at a time.</p>
+
+  <figure class="lattice" id="lat">
+    <canvas id="latCanvas" tabindex="0" aria-label="Interactive three-dimensional convergence lattice"></canvas>
+    <div class="lattice__controls" aria-label="Convergence lattice controls">
+      <button type="button" data-lattice-action="pulse">Replay influx</button>
+      <button type="button" data-lattice-action="reset">Reset view</button>
+      <span class="lattice__hint">drag to orbit · wheel to zoom · space to replay</span>
+    </div>
+    <figcaption>Convergence visualisation — points occupy concentric three-dimensional shells around a stable central displacement. Drag to orbit, scroll to zoom, or replay the inward pulse. Visual prototype only; it is not a physical simulation.</figcaption>
+  </figure>
+
+  <div class="prims reveal-stagger">
+    <div class="prim" data-prim="space" role="button" tabindex="0"><div class="glyph">◈</div><div class="nm">Space</div><div class="sdt">the lattice</div></div>
+    <div class="prim" data-prim="matter" role="button" tabindex="0"><div class="glyph">◉</div><div class="nm">Matter</div><div class="sdt">a displacement</div></div>
+    <div class="prim" data-prim="movement" role="button" tabindex="0"><div class="glyph">⟳</div><div class="nm">Movement</div><div class="sdt">the relay</div></div>
+    <div class="prim" data-prim="now" role="button" tabindex="0"><div class="glyph">⧖</div><div class="nm">The Ever-Present Now</div><div class="sdt">the plane of existence</div></div>
+  </div>
+</header>
+
+<!-- ═══════════════════ CH.1 ═══════════════════ -->
+<section class="chapter">
+  <div class="chapter__inner reveal">
+    <div class="chapter__num">One</div>
+    <h2 class="chapter__title">Four, and no more</h2>
+    <p class="chapter__lead">A theory is worth exactly as much as how little it asks you to grant it without proof.</p>
+    <p>So we ask for four things only. Space, matter, movement, and <em>The Ever-Present Now</em> — the plane of existence itself. Everything else that physics usually hands you as given — mass, warmth, the flow of time, the pull between bodies — is not granted here. It is <strong>derived</strong>: shown to follow, step by step, from these four and from a short list of measured numbers. If a thing is not one of the four, and cannot be built from them, it does not belong in the account.</p>
+    <p>Hold that discipline in mind as we go. It is the whole reason the picture will feel inevitable rather than assembled.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════ CH.2 ═══════════════════ -->
+<section class="chapter chapter--alt">
+  <div class="chapter__inner reveal">
+    <div class="chapter__num">Two</div>
+    <h2 class="chapter__title">Space — the lattice</h2>
+    <p class="chapter__lead">Space is not the empty stage on which things happen. It is a substance — and it is the first thing.</p>
+    <p>Picture space as a lattice: a close-packed field of cells, each one no larger than the smallest length nature permits, the <em>Planck length</em>. Each cell is a <strong>spation</strong> — the single grain of space. A spation on its own will not compress; press it and it holds. But let many act together and they yield, bend, and flow, the way a crowd can part though no one person steps aside easily.</p>
+    <p>There are no gaps between spations. The lattice is seamless. And because it is seamless, a disturbance in one cell is felt by its neighbours by direct touch — which is exactly what we will need when we come to pressure and to light. For now, hold only this: <strong>space is a gap-free medium, and it can carry a push.</strong></p>
+    <div class="margin-note">A <em>spation</em> is to space what a droplet is to the ocean — the smallest piece that still behaves like the whole.</div>
+  </div>
+</section>
+
+<!-- ═══════════════════ CH.3 ═══════════════════ -->
+<section class="chapter">
+  <div class="chapter__inner reveal">
+    <div class="chapter__num">Three</div>
+    <h2 class="chapter__title">Matter — a displacement</h2>
+    <p class="chapter__lead">Matter is <strong>solid form</strong>, held in that form by the spations constraining it — and the pressure is what that constraint <em>produces</em>.</p>
+    <p>Get the direction right, because everything downstream depends on it. The spations constrain the form. <strong>The pressure is the result of that constraint, not the action that caused it.</strong> Release the constraint and the form does not sit there — it <strong>expands exponentially</strong>.</p>
+    <p>That is what fixes the size. The spations bear collectively on the <strong>boundary condition</strong> — the proton's own event horizon — and the pressure from inside meets them there. The size is wherever those two come out equal. Confine it harder and the horizon moves in: the proton would simply be smaller. Nothing about its size is intrinsic to the particle alone; it is a negotiated surface, and the medium is the other party.</p>
+    <p>These are <strong>perfect spheres with perfect traction</strong>. Where they touch they do not slip: they co-rotate, sharing the drag, and a pirouette barely registers. The drag is not uniform over the surface — it runs in a <strong>gradient from the equator to the pole</strong>, greatest at the waist and least at the axis. Hold on to that gradient; it is why, when we come to build nuclei, some things can only be seated on the equator.</p>
+    <p>And this is the force the textbooks call <strong>strong and nuclear</strong>. It is not a fourth species of interaction with its own carrier and its own coupling constant. It is the spations delivering their pressure to the proton — the same convergence that makes an apple fall, applied at a boundary a thousandth of a millionth of a millionth of a metre across, where the squeeze is titanic and the grip is absolute, holding the proton tightly inside its own event horizon.</p>
+    <p>So resist the old temptation to think of matter as a hole, an absence, a place where space has been removed. It is the exact opposite. Where matter sits, the medium is <strong>crowded, compacted, worked</strong> — denser and more present than the calm lattice around it, not a gap in it. Matter is substance, crushed tight and held there.</p>
+    <figure style="max-width:30rem;margin:1.4rem auto 0;text-align:center">
+      <svg id="knotTry" viewBox="0 0 360 180" style="width:100%;height:auto;touch-action:none;cursor:pointer" aria-label="Press either form — the open loop disperses; the compacted form holds under the crush"></svg>
+      <figcaption style="font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--ink-faint);margin-top:0.6rem">press either form — an open circulation disperses back into lattice; a compacted one holds, because the crush holds it</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ═══════════════════ CH.4 ═══════════════════ -->
+<section class="chapter chapter--alt">
+  <div class="chapter__inner reveal">
+    <div class="chapter__num">Four</div>
+    <h2 class="chapter__title">Movement — the relay</h2>
+    <p class="chapter__lead">Nothing crosses the lattice. The lattice hands things on.</p>
+    <p>When energy moves, no single cell travels with it. Each spation passes what it holds to its neighbour, which passes it to the next — a <strong>relay</strong>, cell to cell, and always at one fixed pace: the speed of light, <em>c</em>. That single speed is not a law imposed from outside; it is simply how fast one grain of space can prompt the next.</p>
+    <p>Every particle carries an inner turning of this same relay, a circulation that never stops. And here is the seed of much to come: that turning and any outward travel must share <strong>one budget</strong>. Spend on crossing the room, and the inner turning must slow to pay for it. When we reach the fifth Law, this single sentence will unfold into the whole of relativity.</p>
+    <div class="margin-note">The relay is why light has one speed, and why that speed is a ceiling: you cannot hand a thing on faster than the medium can pass it.</div>
+  </div>
+</section>
+
+<!-- ═══════════════════ CH.5 ═══════════════════ -->
+<section class="chapter">
+  <div class="chapter__inner reveal">
+    <div class="chapter__num">Five</div>
+    <h2 class="chapter__title">The Ever-Present Now — and its count</h2>
+    <p class="chapter__lead">Not a moment sliding along a line. The plane of existence itself, with everything inside it moving, always moving.</p>
+    <p>The lattice oscillates; each oscillation is one tick. <em>Now</em> is nothing more mysterious than the current count of those ticks — a tally the present keeps, not a territory it sits in. There is no separate dimension of time threaded through space: the past is the tally kept, the future the tally expected, and neither is a place. And there is no arrow to explain, because un-happening is not an operation the relay has.</p>
+    <p>This is a demotion, and a deliberate one. Time joins mass and warmth on the list of things that are <strong>counted or derived</strong>, not assumed. Only the plane is — and the plane does not elapse.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════ CH.6 — THE BRIDGE ═══════════════════ -->
+<section class="chapter chapter--deep">
+  <div class="chapter__inner reveal">
+    <div class="chapter__num">The bridge</div>
+    <h2 class="chapter__title">Four primitives, eight measured numbers</h2>
+    <p class="chapter__lead">From this small purse, the entire account is paid.</p>
+    <p>Alongside the four primitives, the theory permits itself one short list of measured quantities — the only numbers it takes from the world rather than earning from within:</p>
+    <div class="eq-block">
+      <div class="eq">{ ℓ<sub>P</sub>, c, ℏ, k<sub>B</sub>, T<sub>CMB</sub>, α, m<sub>e</sub>, m<sub>p</sub> }</div>
+      <div class="eq-caption">a fact not on this list, and not built from the four primitives, is not admitted</div>
+    </div>
+    <p>The stage is now set. We have a medium that can be pressed, matter that can press it, a relay that carries the pressure, and a count that keeps the time. One question remains, and it opens everything: <strong>what happens when the whole lattice is under pressure at once?</strong></p>
+    <p class="step">Next → The Laws · I — Convergent Boundary Pressure</p>
+    <div class="margin-note">The Foundations · 0 · Primitives. Author: J. C. Harvey, Melbourne.</div>
+  </div>
+</section>
+
+<footer style="padding:var(--sp-xl);text-align:center;background:var(--midnight);color:var(--midnight-mute);font-size:var(--fs-sm);">
+  <a href="investigations.html" style="color:var(--copper-light);text-decoration:none;">← the whole picture</a>
+</footer>
+
+<script>
+(function(){
+  // reveal on scroll (the site's system)
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    if(e.isIntersecting){ e.target.classList.add(e.target.classList.contains('reveal-stagger')?'reveal-stagger--visible':'reveal--visible'); io.unobserve(e.target);} });},{threshold:0.12});
+  document.querySelectorAll('.reveal,.reveal-stagger').forEach(function(el){io.observe(el);});
+
+  // ── design element: a genuine WebGL 3D lattice on concentric shells ──────
+  // This is a visual prototype. It provides an orbit camera and an inward
+  // pulse, but it does not calculate a physical pressure or force field.
+  var cv=document.getElementById('latCanvas');
+  var gl=cv.getContext('webgl',{alpha:true,antialias:true,premultipliedAlpha:false}) ||
+         cv.getContext('experimental-webgl',{alpha:true,antialias:true,premultipliedAlpha:false});
+  function latticeFallback(message){
+    var fallback=document.createElement('div');
+    fallback.className='lattice__fallback'; fallback.textContent=message;
+    cv.parentNode.replaceChild(fallback,cv);
+  }
+  if(!gl){ latticeFallback('This 3D convergence prototype requires WebGL in a modern browser.'); return; }
+
+  var vertexSource=[
+    'attribute vec3 aPosition;',
+    'attribute float aRadius;',
+    'attribute float aPhase;',
+    'uniform float uYaw;',
+    'uniform float uPitch;',
+    'uniform float uDistance;',
+    'uniform float uAspect;',
+    'uniform float uPulseRadius;',
+    'uniform float uPulseStrength;',
+    'uniform float uTime;',
+    'uniform float uCore;',
+    'uniform float uPointScale;',
+    'varying float vPulse;',
+    'varying float vDepth;',
+    'varying float vCore;',
+    'vec3 rotateY(vec3 p,float a){float c=cos(a),s=sin(a);return vec3(c*p.x-s*p.z,p.y,s*p.x+c*p.z);}',
+    'vec3 rotateX(vec3 p,float a){float c=cos(a),s=sin(a);return vec3(p.x,c*p.y-s*p.z,s*p.y+c*p.z);}',
+    'void main(){',
+    '  vec3 point=rotateX(rotateY(aPosition,uYaw),uPitch);',
+    '  float cameraZ=uDistance-point.z;',
+    '  float focal=2.08;',
+    '  gl_Position=vec4(point.x*focal/(cameraZ*uAspect),point.y*focal/cameraZ,0.0,1.0);',
+    '  float band=exp(-pow((aRadius-uPulseRadius)/0.085,2.0));',
+    '  vPulse=uPulseStrength*band*(0.76+0.24*sin(uTime*0.006+aPhase));',
+    '  vDepth=clamp((point.z+1.1)/2.2,0.0,1.0);',
+    '  vCore=uCore;',
+    '  float base=mix(1.1,2.15,vDepth)+uCore*4.6;',
+    '  gl_PointSize=(base+vPulse*4.8)*(uDistance/cameraZ)*uPointScale;',
+    '}'
+  ].join('\n');
+  var fragmentSource=[
+    'precision mediump float;',
+    'varying float vPulse;',
+    'varying float vDepth;',
+    'varying float vCore;',
+    'uniform float uDark;',
+    'void main(){',
+    '  vec2 delta=gl_PointCoord-vec2(0.5);',
+    '  float radius=dot(delta,delta);',
+    '  if(radius>0.25)discard;',
+    '  float shape=1.0-smoothstep(0.08,0.25,radius);',
+    '  vec3 pale=mix(vec3(0.29,0.31,0.55),vec3(0.58,0.62,0.88),vDepth);',
+    '  vec3 night=mix(vec3(0.48,0.52,0.86),vec3(0.76,0.82,1.0),vDepth);',
+    '  vec3 colour=mix(pale,night,uDark);',
+    '  colour=mix(colour,vec3(0.92,0.96,1.0),min(1.0,vPulse));',
+    '  colour=mix(colour,mix(vec3(0.18,0.20,0.42),vec3(0.78,0.83,1.0),uDark),vCore);',
+    '  float alpha=(0.14+0.28*vDepth+0.42*vPulse+0.48*vCore)*shape;',
+    '  gl_FragColor=vec4(colour,alpha);',
+    '}'
+  ].join('\n');
+  function shader(type,source){
+    var value=gl.createShader(type); gl.shaderSource(value,source); gl.compileShader(value);
+    return gl.getShaderParameter(value,gl.COMPILE_STATUS) ? value : null;
+  }
+  var vertexShader=shader(gl.VERTEX_SHADER,vertexSource), fragmentShader=shader(gl.FRAGMENT_SHADER,fragmentSource);
+  if(!vertexShader || !fragmentShader){ latticeFallback('The 3D convergence prototype could not initialise its WebGL shaders.'); return; }
+  var program=gl.createProgram(); gl.attachShader(program,vertexShader); gl.attachShader(program,fragmentShader); gl.linkProgram(program);
+  if(!gl.getProgramParameter(program,gl.LINK_STATUS)){ latticeFallback('The 3D convergence prototype could not link its WebGL program.'); return; }
+  gl.useProgram(program); gl.enable(gl.BLEND); gl.blendFunc(gl.SRC_ALPHA,gl.ONE); gl.disable(gl.DEPTH_TEST);
+
+  var attr={position:gl.getAttribLocation(program,'aPosition'),radius:gl.getAttribLocation(program,'aRadius'),phase:gl.getAttribLocation(program,'aPhase')};
+  var uni={}; ['uYaw','uPitch','uDistance','uAspect','uPulseRadius','uPulseStrength','uTime','uCore','uPointScale','uDark'].forEach(function(name){uni[name]=gl.getUniformLocation(program,name);});
+  var GOLD=Math.PI*(3-Math.sqrt(5));
+  function buffer(values){ var value=gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER,value); gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(values),gl.STATIC_DRAW); return value; }
+  function geometry(positions,radii,phases){ return {positions:buffer(positions),radii:buffer(radii),phases:buffer(phases),count:radii.length}; }
+  function buildLattice(){
+    var positions=[],radii=[],phases=[],shells=6,baseCount=11,s,i;
+    for(s=1;s<=shells;s++){
+      var radius=s/shells, count=baseCount*s*s;
+      for(i=0;i<count;i++){
+        var y=1-2*(i+0.5)/count, radial=Math.sqrt(Math.max(0,1-y*y)), theta=i*GOLD+s*0.37;
+        positions.push(Math.cos(theta)*radial*radius,y*radius,Math.sin(theta)*radial*radius);
+        radii.push(radius); phases.push(i*0.618+s*0.91);
+      }
+    }
+    return geometry(positions,radii,phases);
+  }
+  function buildCore(){
+    var positions=[],radii=[],phases=[],count=96,i;
+    for(i=0;i<count;i++){
+      var y=1-2*(i+0.5)/count, radial=Math.sqrt(Math.max(0,1-y*y)), theta=i*GOLD, radius=0.065+0.070*((i%7)/6);
+      positions.push(Math.cos(theta)*radial*radius,y*radius,Math.sin(theta)*radial*radius);
+      radii.push(0); phases.push(i*0.42);
+    }
+    return geometry(positions,radii,phases);
+  }
+  var lattice=buildLattice(), core=buildCore();
+  function bind(geo){
+    gl.bindBuffer(gl.ARRAY_BUFFER,geo.positions); gl.enableVertexAttribArray(attr.position); gl.vertexAttribPointer(attr.position,3,gl.FLOAT,false,0,0);
+    gl.bindBuffer(gl.ARRAY_BUFFER,geo.radii); gl.enableVertexAttribArray(attr.radius); gl.vertexAttribPointer(attr.radius,1,gl.FLOAT,false,0,0);
+    gl.bindBuffer(gl.ARRAY_BUFFER,geo.phases); gl.enableVertexAttribArray(attr.phase); gl.vertexAttribPointer(attr.phase,1,gl.FLOAT,false,0,0);
+  }
+
+  var dpr=Math.min(window.devicePixelRatio||1,2), width=1, height=1;
+  function resize(){
+    var nextWidth=Math.max(1,Math.floor(cv.clientWidth*dpr)), nextHeight=Math.max(1,Math.floor(cv.clientHeight*dpr));
+    if(cv.width!==nextWidth || cv.height!==nextHeight){cv.width=nextWidth;cv.height=nextHeight;gl.viewport(0,0,nextWidth,nextHeight);}
+    width=nextWidth; height=nextHeight;
+  }
+  window.addEventListener('resize',resize); resize();
+
+  var reduce=window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var yaw=0.64,targetYaw=yaw,pitch=-0.30,targetPitch=pitch,distance=3.10,targetDistance=distance;
+  var dragging=false,lastX=0,lastY=0,pulseStart=reduce ? -Infinity : performance.now();
+  function pulse(){ pulseStart=performance.now(); }
+  function reset(){ targetYaw=0.64; targetPitch=-0.30; targetDistance=3.10; pulse(); }
+  cv.addEventListener('pointerdown',function(event){
+    dragging=true; lastX=event.clientX; lastY=event.clientY; cv.focus();
+    try{cv.setPointerCapture(event.pointerId);}catch(ignore){}
+  });
+  cv.addEventListener('pointermove',function(event){
+    if(!dragging)return; targetYaw+=(event.clientX-lastX)*0.008; targetPitch+=(event.clientY-lastY)*0.006;
+    targetPitch=Math.max(-1.34,Math.min(1.34,targetPitch)); lastX=event.clientX; lastY=event.clientY;
+  });
+  function endDrag(event){
+    dragging=false; if(event && cv.hasPointerCapture && cv.hasPointerCapture(event.pointerId)){cv.releasePointerCapture(event.pointerId);}
+  }
+  cv.addEventListener('pointerup',endDrag); cv.addEventListener('pointercancel',endDrag);
+  cv.addEventListener('wheel',function(event){ event.preventDefault(); targetDistance=Math.max(2.15,Math.min(5.2,targetDistance+event.deltaY*0.003)); },{passive:false});
+  cv.addEventListener('keydown',function(event){
+    if(event.key===' '){event.preventDefault();pulse();}
+    if(event.key==='r' || event.key==='R'){event.preventDefault();reset();}
+  });
+  document.querySelectorAll('[data-lattice-action]').forEach(function(button){button.addEventListener('click',function(){button.getAttribute('data-lattice-action')==='reset' ? reset() : pulse();});});
+  document.querySelectorAll('.prim').forEach(function(element){
+    function go(){ document.querySelectorAll('.prim').forEach(function(item){item.classList.remove('active');}); element.classList.add('active'); pulse(); }
+    element.addEventListener('click',go);
+    element.addEventListener('keydown',function(event){if(event.key==='Enter'||event.key===' '){event.preventDefault();go();}});
+  });
+
+  var previousTime=performance.now();
+  function frame(now){
+    var delta=Math.min(0.05,(now-previousTime)/1000); previousTime=now;
+    if(!dragging && !reduce)targetYaw+=delta*0.13;
+    yaw+=(targetYaw-yaw)*Math.min(1,delta*9); pitch+=(targetPitch-pitch)*Math.min(1,delta*9); distance+=(targetDistance-distance)*Math.min(1,delta*9);
+    var pulseAge=(now-pulseStart)/2450, pulseStrength=pulseAge>=0 && pulseAge<=1 ? 1 : 0, pulseRadius=Math.max(0,1-pulseAge)*1.08;
+    resize(); gl.clearColor(0,0,0,0); gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.uniform1f(uni.uYaw,yaw); gl.uniform1f(uni.uPitch,pitch); gl.uniform1f(uni.uDistance,distance); gl.uniform1f(uni.uAspect,width/height);
+    gl.uniform1f(uni.uPulseRadius,pulseRadius); gl.uniform1f(uni.uPulseStrength,pulseStrength); gl.uniform1f(uni.uTime,now); gl.uniform1f(uni.uPointScale,dpr);
+    gl.uniform1f(uni.uDark,document.documentElement.getAttribute('data-theme')==='dark' ? 1 : 0);
+    gl.uniform1f(uni.uCore,0); bind(lattice); gl.drawArrays(gl.POINTS,0,lattice.count);
+    gl.uniform1f(uni.uCore,1); bind(core); gl.drawArrays(gl.POINTS,0,core.count);
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+
+// ── Ch.3 interactive: shake the loop, shake the knot — only the knot survives ──
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e}
+  var svg=document.getElementById('knotTry'); if(!svg)return;
+  function loopPath(cx,jit){var d='';for(var i=0;i<=90;i++){var t=i/90*Math.PI*2;
+    var r=42+jit*10*Math.sin(7*t+jit*9);
+    d+=(i?'L':'M')+(cx+Math.cos(t)*r)+' '+(90+Math.sin(t)*r*0.8)+' ';}return d+'Z';}
+  // the REAL trefoil projection (x=sin t+2sin 2t, y=cos t−2cos 2t, z=−sin 3t):
+  // three crossings, drawn woven over–under. The shake perturbs it; the weave survives.
+  var treHalo=(function(){var e=svg.parentElement;
+    while(e&&getComputedStyle(e).backgroundColor==='rgba(0, 0, 0, 0)')e=e.parentElement;
+    return e?getComputedStyle(e).backgroundColor:'#faf8f4';})();
+  function trePts(cx,jit){var out=[],N=200,i;
+    for(i=0;i<=N;i++){var t=i/N*Math.PI*2;
+      var X=Math.sin(t)+2*Math.sin(2*t),Y=Math.cos(t)-2*Math.cos(2*t),Z=-Math.sin(3*t);
+      if(jit){var w=jit*0.32*Math.sin(9*t+jit*7);X+=w*Math.cos(5*t);Y+=w*Math.sin(7*t);}
+      out.push([cx+X*15,90+Y*13.5,Z]);}
+    return out;}
+  function treWeave(g,cx,jit){
+    while(g.firstChild)g.removeChild(g.firstChild);
+    var P=trePts(cx,jit),runs=[],cur=null,i;
+    for(i=0;i<P.length;i++){var ov=P[i][2]>=0;
+      if(!cur||cur.ov!==ov){cur={ov:ov,p:[]};runs.push(cur);}
+      cur.p.push(P[i]);
+      if(i<P.length-1&&(P[i+1][2]>=0)!==ov)cur.p.push(P[i+1]);}
+    function dOf(ps){var d='';for(var j=0;j<ps.length;j++)d+=(j?'L':'M')+ps[j][0].toFixed(1)+' '+ps[j][1].toFixed(1)+' ';return d;}
+    function pass(ov,st,w){for(var j=0;j<runs.length;j++)if(runs[j].ov===ov)
+      g.appendChild(el('path',{d:dOf(runs[j].p),fill:'none',stroke:st,'stroke-width':w,'stroke-linecap':'round'}));}
+    pass(false,'#4a4f8c',2.4); pass(true,treHalo,6.5); pass(true,'#4a4f8c',2.4);
+  }
+  var loop=el('path',{d:loopPath(95,0),fill:'none',stroke:'#4a4f8c','stroke-width':2.4});
+  var tre =el('g',{});
+  svg.appendChild(loop);svg.appendChild(tre);
+  treWeave(tre,255,0);
+  var ll=el('text',{x:95,y:168,'text-anchor':'middle','font-family':'JetBrains Mono,monospace','font-size':'10px',fill:'#7a7265'});ll.textContent='an untied loop';
+  var tl=el('text',{x:255,y:168,'text-anchor':'middle','font-family':'JetBrains Mono,monospace','font-size':'10px',fill:'#7a7265'});tl.textContent='the trefoil — a particle';
+  svg.appendChild(ll);svg.appendChild(tl);
+  var state={loop:{jit:0,alive:true},tre:{jit:0}};
+  svg.addEventListener('pointerdown',function(e){
+    var r=svg.getBoundingClientRect(),x=(e.clientX-r.left)/r.width*360;
+    if(x<180){state.loop.jit=1;}else{state.tre.jit=1;}
+  });
+  (function tick(){
+    var L=state.loop,T=state.tre;
+    if(L.jit>0){L.jit*=0.97;
+      if(L.alive&&L.jit<0.5){L.alive=false;}
+      if(!L.alive){loop.setAttribute('stroke-opacity',Math.max(0,L.jit*2-0.2));ll.textContent='…dissolved back into plain lattice';}
+      loop.setAttribute('d',loopPath(95,L.jit));
+      if(L.jit<0.02&&!L.alive){L.jit=0;setTimeout(function(){L.alive=true;loop.setAttribute('stroke-opacity',1);ll.textContent='an untied loop';loop.setAttribute('d',loopPath(95,0));},1400);}
+    }
+    if(T.jit>0){T.jit*=0.95;treWeave(tre,255,T.jit);
+      tl.textContent=T.jit>0.3?'shaken — and still a knot':'the trefoil — a particle';
+      if(T.jit<0.02){T.jit=0;treWeave(tre,255,0);}}
+    requestAnimationFrame(tick);
+  })();
+})();
+</script>
+<script src="i18n_dict_st.js"></script>
+<script src="i18n.js"></script>
+</body>
+</html>

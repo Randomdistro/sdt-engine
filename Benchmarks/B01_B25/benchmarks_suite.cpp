@@ -901,18 +901,17 @@ static void B37_rank4_prediction()
 }
 
 // ═══════════════════════════════════════════════════════════════════════
-//  B38 — SHELL SCHEDULE: CLOSURE TIERS AND TRITON BELTS (canon 2026-07-30)
+//  B38 — SHELL SCHEDULE: CLOSURE TIERS AND TRITON SHELLS (canon 2026-07-30;
+//        geometry/nomenclature NSEQ02–05, 2026-08-09 — planar "belt" withdrawn)
 // ═══════════════════════════════════════════════════════════════════════
 
 static void B38_shell_schedule()
 {
     using namespace sdt::laws::nuclear;
-    std::puts("\n══ B38: SHELL SCHEDULE — CLOSURE TIERS + TRITON BELTS ══");
-    // Deuteron tiers (6,12 | 12,20,30) alternating with triton belts of
-    // antipodal pairs (4,5,6,7) rebuild every closure. Capacities are READ to
-    // match the measured sequence — deriving them from packing-void geometry
-    // is the open NP33 completion law. No spin-orbit force imported: the rod's
-    // seating carries what the prevailing account modelled as a coupling.
+    std::puts("\n══ B38: SHELL SCHEDULE — CLOSURE TIERS + TRITON SHELLS ══");
+    // Pure shells: D6→D12→T8→D12→T10→D20→T12→D30→T14→… Capacities from
+    // F(n)=(n+1)(n+2), B(n)=V=2(n+1), R(n)=E=n(n+1). Planar "belt"/rolling-
+    // equator seating withdrawn (NSEQ05). No spin-orbit force imported.
     int seq_ok = 0;
     for (int k = 0; k < 7; ++k) seq_ok += (closure(k) == magic_numbers[k]);
     std::printf("  B38a closure rebuild 2,8,20,28,50,82,126: %d/7 %s"
@@ -935,9 +934,9 @@ static void B38_shell_schedule()
     std::printf("  B38b parity lock: %d/12 — five odd-odd quasi-stables flagged,"
                 " seven lone-rod grips cleared %s\n", par_ok, par_ok == 12 ? "✓" : "✗");
 
-    // Belt evidence, both poles of the fourth tier:
-    std::printf("  B38c first belt (N=28): Ca-48 n_t=%d = full 4-pair belt (held,"
-                " doubly magic) · Ni-56 n_t=%d = belt empty (unstable) ✓\n",
+    // First T8 shell evidence, both poles of the fourth tier:
+    std::printf("  B38c first T8 shell (N=28): Ca-48 n_t=%d = full stella shell (held,"
+                " doubly magic) · Ni-56 n_t=%d = shell empty (unstable) ✓\n",
                 48 - 2 * 20, 56 - 2 * 28);
     std::puts("  B38d closure-kink isotone invariant (measured, pre-registered"
               " 2026-07-30): constant beats occupancy-proportional on every"
@@ -948,14 +947,14 @@ static void B38_shell_schedule()
     cap_ok += (tier_capacity(1) == 6) + (tier_capacity(2) == 12);
     cap_ok += (surface_remainder(3) == 12) + (surface_remainder(4) == 20)
             + (surface_remainder(5) == 30);
-    cap_ok += (belt_capacity(3) == 8) + (belt_capacity(4) == 10)
-            + (belt_capacity(5) == 12) + (belt_capacity(6) == 14);
+    cap_ok += (triton_shell_capacity(3) == 8) + (triton_shell_capacity(4) == 10)
+            + (triton_shell_capacity(5) == 12) + (triton_shell_capacity(6) == 14);
     std::printf("  B38e COMPLETION LAW: all capacities from two closed forms —"
-                " F(n)=(n+1)(n+2) bipartite-triangular tiers, B(n)=2(n+1)"
-                " rolling-equator belts: %d/9 %s\n", cap_ok, cap_ok == 9 ? "✓" : "✗");
+                " F(n)=(n+1)(n+2) bipartite-triangular tiers, B(n)=V=2(n+1)"
+                " geometric triton shells: %d/9 %s\n", cap_ok, cap_ok == 9 ? "✓" : "✗");
     std::printf("       forward prediction: next closure N = %d (126 + R(6) + B(7))."
                 " Onset n=3 still READ — the residual NP33 debt.\n",
-                126 + surface_remainder(6) + belt_capacity(7));
+                126 + surface_remainder(6) + triton_shell_capacity(7));
     std::puts("  B38  sequence-exact; counting convergent with the shell model,"
               " origin native — capacities DERIVED 2026-07-30.");
 }

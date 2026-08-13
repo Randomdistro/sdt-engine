@@ -360,8 +360,10 @@ const E_NUC = 931.494;              // MeV per u — nucleon rest-energy scale (
    ring touches its face's other two edges, never the shared one, so the contact
    graph is p–n–p–n by geometry. Around it the shell schedule made literal:
    deuterons are RADIAL rods (n inward, p outward — the bipartite double layer) on
-   spherical tiers of capacity 6, 12, 12, 20, 30; tritons are COHERENT radial n–p–n
-   rods on equatorial belts, antipodal pairs, the lone odd rod inward on the pole.
+   pure shells alternate species (NSEQ05): D6→D12→T8→D12→T10→D20→T12→D30→T14→…
+   (grouped +12d+10t is a closure increment, not one mixed shell). Tritons: T8=stella,
+   T14=cuboct face-normals; deuterons after T8 use cuboct (T8 edge midpoints).
+   Opening triton valence radius > closing.
    Bond length D < 2R_p ⇒ boundaries INTERLACE — the overlap IS the mass defect the
    shadow measures. Circulation differs per layer (tier field, consumed by animate).
    Contacts are the EXPLICIT engineered list (nuc.contacts) — all p↔n, frustration
@@ -420,77 +422,108 @@ function packNucleus(A, Z, dnn, coulSpread){
   nuc.alphaTetra=VT;                                     // rebuild3D draws the wireframe
   const alphaOut=Math.max(...alphaIds.map(i=>Math.hypot(...nuc[i].pos)));
 
-  // ── deuteron tiers: radial rods (n in, p out), schedule capacities 6,12,12,20,30 ──
-  const CAP=[6,12,12,20,30,42,56];
+  // ── Pure-shell packing (NSEQ05): species-alternating shells, not all-d then all-t ──
+  // Sequence: D6→D12→T8→D12→T10→D20→T12→D30→T14→D42→T16→…
+  // Capacities unchanged; geometry: T8=stella, post-T8 D12=cuboct, T14=cuboct face-normals.
   const PHI=(1+Math.sqrt(5))/2;
-  const DIRS={
-    6:[[1,0,0],[-1,0,0],[0,1,0],[0,-1,0],[0,0,1],[0,0,-1]],
-    12:[[0,1,PHI],[0,-1,PHI],[0,1,-PHI],[0,-1,-PHI],[1,PHI,0],[-1,PHI,0],
-        [1,-PHI,0],[-1,-PHI,0],[PHI,0,1],[-PHI,0,1],[PHI,0,-1],[-PHI,0,-1]].map(vnorm)
+  const R_OPEN_SCALE=1.05, R_CLOSE_SCALE=0.95;
+  const dirsOct=()=>[[1,0,0],[-1,0,0],[0,1,0],[0,-1,0],[0,0,1],[0,0,-1]];
+  const dirsIco=()=>[[0,1,PHI],[0,-1,PHI],[0,1,-PHI],[0,-1,-PHI],[1,PHI,0],[-1,PHI,0],
+    [1,-PHI,0],[-1,-PHI,0],[PHI,0,1],[-PHI,0,1],[PHI,0,-1],[-PHI,0,-1]].map(vnorm);
+  const dirsCuboct=()=>{ const o=[]; for(const x of[-1,1]) for(const y of[-1,1]){
+      o.push([x,y,0],[x,0,y],[0,x,y]); } return o.map(vnorm); };
+  const dirsFib=(m,seed)=>{ const out=[]; for(let i=0;i<m;i++){ const zz=1-(2*i+1)/m,
+      rr=Math.sqrt(Math.max(0,1-zz*zz)), th=2*Math.PI*((i+(seed||0)*0.37)%m)/(PHI*PHI);
+      out.push([rr*Math.cos(th),rr*Math.sin(th),zz]); } return out; };
+  // Polar / stella family: poles + interleaved tropics at ±arcsin(1/3); open on even index
+  const dirsPolar=(cap,seed)=>{ const nBand=cap/2-1, z=1/3, rho=Math.sqrt(1-z*z),
+    az0=(seed||0)*0.15, s=[[0,0,1],[0,0,-1]];
+    for(let k=0;k<nBand;k++){ const thO=az0+k*(2*Math.PI/nBand), thC=az0+Math.PI/nBand+k*(2*Math.PI/nBand);
+      s.push(vnorm([rho*Math.cos(thO),rho*Math.sin(thO),-z]));
+      s.push(vnorm([rho*Math.cos(thC),rho*Math.sin(thC),+z])); }
+    return s; };
+  // T14 = cuboct face normals: 8△ (±1,±1,±1) ∪ 6□ (±e_i)
+  const dirsT14=()=>{ const s=1/Math.sqrt(3);
+    return [[s,s,s],[s,-s,-s],[-s,s,-s],[-s,-s,s],[-s,-s,-s],[-s,s,s],[s,-s,s],[s,s,-s],
+      [1,0,0],[-1,0,0],[0,1,0],[0,-1,0],[0,0,1],[0,0,-1]].map(vnorm); };
+  const SHELL_SEQ=[
+    {sp:'d',cap:6, geom:'oct'},
+    {sp:'d',cap:12,geom:'ico'},
+    {sp:'t',cap:8, geom:'stella'},
+    {sp:'d',cap:12,geom:'cuboct'},
+    {sp:'t',cap:10,geom:'polar'},
+    {sp:'d',cap:20,geom:'fib'},
+    {sp:'t',cap:12,geom:'polar'},
+    {sp:'d',cap:30,geom:'fib'},
+    {sp:'t',cap:14,geom:'t14'},
+    {sp:'d',cap:42,geom:'fib'},
+    {sp:'t',cap:16,geom:'polar'},
+    {sp:'d',cap:56,geom:'fib'},
+    {sp:'t',cap:18,geom:'polar'},
+  ];
+  const shellDirs=(geom,cap,seed)=>{
+    if(geom==='oct') return dirsOct();
+    if(geom==='ico') return dirsIco();
+    if(geom==='cuboct') return dirsCuboct();
+    if(geom==='stella') return dirsPolar(8,seed);
+    if(geom==='t14') return dirsT14();
+    if(geom==='polar') return dirsPolar(cap,seed);
+    return dirsFib(cap,seed);
   };
-  function tierDirs(m,seed){                             // exact polyhedra where owned, else even spread
-    if(DIRS[m]) return DIRS[m];
-    const out=[]; for(let i=0;i<m;i++){ const zz=1-(2*i+1)/m, rr=Math.sqrt(Math.max(0,1-zz*zz)),
-      th=2*Math.PI*((i+(seed||0)*0.37)%m)/(PHI*PHI); out.push([rr*Math.cos(th),rr*Math.sin(th),zz]); }
-    return out;
-  }
-  let rTier=alphaOut+D*1.05, left=nd, tierIdx=0, dSub=0;
-  let lastP=[];                                          // outer-p ids of the current tier
-  while(left>0){
-    const m=Math.min(left,CAP[Math.min(tierIdx,CAP.length-1)]);
-    const dirs=tierDirs(m,tierIdx);
-    const newP=[];
-    for(const v of dirs){
-      const nIn =push([v[0]*(rTier-D/2),v[1]*(rTier-D/2),v[2]*(rTier-D/2)],'n','deuteron',dSub,[ v[0], v[1], v[2]],tierIdx+1);
-      const pOut=push([v[0]*(rTier+D/2),v[1]*(rTier+D/2),v[2]*(rTier+D/2)],'p','deuteron',dSub,[-v[0],-v[1],-v[2]],tierIdx+1);
-      bond(nIn,pOut); newP.push(pOut);
-      // rest the rod on the layer below: nearest inner-boundary p (or the α ring)
-      let bi=-1,bd_=1e18;
-      const rest=tierIdx===0?alphaIds.filter(i=>nuc[i].type==='p'):lastP;
-      for(const i of rest){ const q=nuc[i].pos,
-        dd=Math.hypot(q[0]-nuc[nIn].pos[0],q[1]-nuc[nIn].pos[1],q[2]-nuc[nIn].pos[2]);
-        if(dd<bd_){bd_=dd;bi=i;} }
-      if(bi>=0&&bd_<=1.6*D) bond(bi,nIn);
-      dSub++;
-    }
-    lastP=newP; left-=m; tierIdx++; rTier+=2*D;
-  }
-  const rBelt0=(nd>0?rTier-2*D:alphaOut)+1.6*D;
-
-  // ── triton belts: coherent radial n–p–n rods, antipodal pairs on equators;
-  //    the lone odd rod seats inward on the pole (the mono-isotopic grip) ──
-  const BELT_PAIRS=[4,5,6,7,8,9];
-  let tLeft=nt, tSub=0, beltIdx=0, rB=rBelt0;
-  const beltPlane=b=>b%3===0?['x','y']:b%3===1?['x','z']:['y','z'];
-  const rodAt=(dir,rc,sub,tier)=>{
-    const n1=push([dir[0]*(rc-D),dir[1]*(rc-D),dir[2]*(rc-D)],'n','triton',sub,[ dir[0], dir[1], dir[2]],tier);
-    const p =push([dir[0]* rc,   dir[1]* rc,   dir[2]* rc   ],'p','triton',sub,[-dir[0],-dir[1],-dir[2]],tier);
-    const n2=push([dir[0]*(rc+D),dir[1]*(rc+D),dir[2]*(rc+D)],'n','triton',sub,[-dir[0],-dir[1],-dir[2]],tier);
-    bond(n1,p); bond(p,n2);
-    // rest the rod's inner n on the nearest outer p below
+  let rTier=alphaOut+D*1.05, dSub=0, tSub=0, shellIdx=0;
+  let ndLeft=nd, ntLeft=nt, lastP=[];
+  const restBond=(nId,scale)=>{
     let bi=-1,bd_=1e18;
     const rest=lastP.length?lastP:alphaIds.filter(i=>nuc[i].type==='p');
     for(const i of rest){ const q=nuc[i].pos,
-      dd=Math.hypot(q[0]-nuc[n1].pos[0],q[1]-nuc[n1].pos[1],q[2]-nuc[n1].pos[2]);
+      dd=Math.hypot(q[0]-nuc[nId].pos[0],q[1]-nuc[nId].pos[1],q[2]-nuc[nId].pos[2]);
       if(dd<bd_){bd_=dd;bi=i;} }
-    if(bi>=0&&bd_<=1.8*D) bond(bi,n1);
-    return [n1,p,n2];
+    if(bi>=0&&bd_<=scale*D) bond(bi,nId);
   };
-  if(tLeft%2===1){ rodAt([0,0,1],rB,tSub++,tierIdx+1); tLeft--; }   // the lone rod, poleward-in
-  while(tLeft>0){
-    const pairs=Math.min(tLeft/2,BELT_PAIRS[Math.min(beltIdx,BELT_PAIRS.length-1)]);
-    const [u1,u2]=beltPlane(beltIdx);
-    for(let k=0;k<pairs;k++){
-      const th=Math.PI*k/pairs + beltIdx*0.35;
-      const dir=[0,0,0];
-      const ax1={x:0,y:1,z:2}[u1], ax2={x:0,y:1,z:2}[u2];
-      dir[ax1]=Math.cos(th); dir[ax2]=Math.sin(th);
-      rodAt(dir,rB,tSub++,tierIdx+1+beltIdx);
-      rodAt([-dir[0],-dir[1],-dir[2]],rB,tSub++,tierIdx+1+beltIdx);   // the antipodal partner
-      tLeft-=2;
-      if(tLeft<=0)break;
+  for(const sh of SHELL_SEQ){
+    if(sh.sp==='d'){
+      const m=Math.min(ndLeft,sh.cap); if(m<=0) continue;
+      const dirs=shellDirs(sh.geom,sh.cap,shellIdx).slice(0,m);
+      const newP=[];
+      for(const v of dirs){
+        const nIn =push([v[0]*(rTier-D/2),v[1]*(rTier-D/2),v[2]*(rTier-D/2)],'n','deuteron',dSub,[ v[0], v[1], v[2]],shellIdx+1);
+        const pOut=push([v[0]*(rTier+D/2),v[1]*(rTier+D/2),v[2]*(rTier+D/2)],'p','deuteron',dSub,[-v[0],-v[1],-v[2]],shellIdx+1);
+        bond(nIn,pOut); newP.push(pOut); restBond(nIn,1.6); dSub++;
+      }
+      lastP=newP; ndLeft-=m; shellIdx++; rTier+=2*D;
+    }else{
+      const m=Math.min(ntLeft,sh.cap); if(m<=0) continue;
+      const dirs=shellDirs(sh.geom,sh.cap,shellIdx).slice(0,m);
+      for(let i=0;i<dirs.length;i++){
+        const v=dirs[i], open=(i%2===0);
+        const rc=rTier*(open?R_OPEN_SCALE:R_CLOSE_SCALE);
+        const n1=push([v[0]*(rc-D),v[1]*(rc-D),v[2]*(rc-D)],'n','triton',tSub,[ v[0], v[1], v[2]],shellIdx+1);
+        const p =push([v[0]* rc,   v[1]* rc,   v[2]* rc   ],'p','triton',tSub,[-v[0],-v[1],-v[2]],shellIdx+1);
+        const n2=push([v[0]*(rc+D),v[1]*(rc+D),v[2]*(rc+D)],'n','triton',tSub,[-v[0],-v[1],-v[2]],shellIdx+1);
+        bond(n1,p); bond(p,n2); restBond(n1,1.8); tSub++;
+      }
+      ntLeft-=m; shellIdx++; rTier+=2.2*D;
     }
-    beltIdx++; rB+=2.2*D;
+  }
+  while(ndLeft>0){
+    const m=Math.min(ndLeft,56); const dirs=dirsFib(m,shellIdx).slice(0,m); const newP=[];
+    for(const v of dirs){
+      const nIn =push([v[0]*(rTier-D/2),v[1]*(rTier-D/2),v[2]*(rTier-D/2)],'n','deuteron',dSub,[ v[0], v[1], v[2]],shellIdx+1);
+      const pOut=push([v[0]*(rTier+D/2),v[1]*(rTier+D/2),v[2]*(rTier+D/2)],'p','deuteron',dSub,[-v[0],-v[1],-v[2]],shellIdx+1);
+      bond(nIn,pOut); newP.push(pOut); restBond(nIn,1.6); dSub++;
+    }
+    lastP=newP; ndLeft-=m; shellIdx++; rTier+=2*D;
+  }
+  while(ntLeft>0){
+    const m=Math.min(ntLeft,18); const dirs=dirsPolar(Math.max(m + (m%2), 2),shellIdx).slice(0,m);
+    for(let i=0;i<dirs.length;i++){
+      const v=dirs[i], open=(i%2===0), rc=rTier*(open?R_OPEN_SCALE:R_CLOSE_SCALE);
+      const n1=push([v[0]*(rc-D),v[1]*(rc-D),v[2]*(rc-D)],'n','triton',tSub,[ v[0], v[1], v[2]],shellIdx+1);
+      const p =push([v[0]* rc,   v[1]* rc,   v[2]* rc   ],'p','triton',tSub,[-v[0],-v[1],-v[2]],shellIdx+1);
+      const n2=push([v[0]*(rc+D),v[1]*(rc+D),v[2]*(rc+D)],'n','triton',tSub,[-v[0],-v[1],-v[2]],shellIdx+1);
+      bond(n1,p); bond(p,n2); restBond(n1,1.8); tSub++;
+    }
+    ntLeft-=m; shellIdx++; rTier+=2.2*D;
   }
   return nuc;
 }
