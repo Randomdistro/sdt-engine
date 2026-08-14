@@ -29,7 +29,7 @@ int main() {
     // --- Native geometry (no a_0, no r_e, no k_e, no e) -------------------
     const double R_p  = 4.0 * hbar / (m_p * c);       // W+1 proton wake [DERIVED]
     const double lam_e = hbar / (m_e * c);            // electron displacement scale [DERIVED]
-    const double k_H  = 1.0 / alpha;                  // ground k-rung [whitelist α]
+    const double k_H  = 1.0 / alpha;                  // ground k-rung [derivation basis α]
     const double v    = c / k_H;                      // Law V / bridge
 
     // Step B: one closed wake -> electropause radius [DERIVED]
@@ -42,7 +42,7 @@ int main() {
     const double P_eff_derived = 4.0 * F_hold * r_star * r_star
                                / (std::numbers::pi * R_p * R_p * lam_e * lam_e);
 
-    // Whitelist closed form
+    // derivation basis closed form
     const double P_eff_closed = m_p * m_p * m_e * m_e * std::pow(c, 5)
                               / (4.0 * std::numbers::pi * alpha * std::pow(hbar, 3));
 
@@ -64,7 +64,7 @@ int main() {
     std::printf("  J. C. Tyndall, Melbourne · no a_0 / Coulomb on derivation path\n");
     std::printf("================================================================\n\n");
 
-    std::printf("INPUTS (whitelist): c, hbar, m_e, m_p, alpha (k-rung)\n\n");
+    std::printf("INPUTS (derivation basis): c, hbar, m_e, m_p, alpha (k-rung)\n\n");
 
     std::printf("DERIVED electropause\n");
     std::printf("  k_H      = 1/alpha     = %.6f\n", k_H);
@@ -81,7 +81,7 @@ int main() {
 
     std::printf("P_eff (output, not calibrated to Coulomb)\n");
     std::printf("  from balance           = %.6e Pa\n", P_eff_derived);
-    std::printf("  whitelist closed form  = %.6e Pa\n", P_eff_closed);
+    std::printf("  derivation basis closed form  = %.6e Pa\n", P_eff_closed);
     std::printf("  engine law_III::P_eff  = %.6e Pa\n", law_III::P_eff);
     std::printf("  rel vs engine          = %.3e  [%s]\n\n",
                 rel_err(P_eff_derived, law_III::P_eff),
@@ -102,7 +102,7 @@ int main() {
     std::printf("================================================================\n");
     std::printf("  VERDICT: %s — electropause DERIVED; P_eff DERIVED; zk²=1\n",
                 pass ? "PASS" : "FAIL");
-    std::printf("  Residual whitelist input: alpha (k-rung). Does NOT derive alpha.\n");
+    std::printf("  Residual derivation basis input: alpha (k-rung). Does NOT derive alpha.\n");
     std::printf("================================================================\n");
     return pass ? 0 : 1;
 }

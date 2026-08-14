@@ -1,6 +1,6 @@
 # Open Problems
 
-Open problems remain in both computation and concept: α-from-topology (Conjecture, :29), R_p closure (02_Inputs:61 'Conjectured'), PPT08 angular DOF (OPEN), galaxy rotation on SDT-native terms (GD05 negative), neutron barrier depth (OPEN).
+Open problems remain in both computation and concept: α-from-topology (Conjecture, :29), R_p closure (02_Inputs:61 'Conjectured'), PPT08 angular DOF (H/He⁺ Lamb stickers OBSERVED; extraction withdrawn), galaxy rotation on SDT-native terms (GD05 negative), neutron barrier depth (OPEN).
 
 ## Aggregation / action (audited 2026-08-11; closed Iteration 42)
 
@@ -16,6 +16,11 @@ Open problems remain in both computation and concept: α-from-topology (Conjectu
 | Occupation MeV map | UNDERDETERMINED | NSEQ13 |
 | GW radiation coeff without GR | UNDERDETERMINED | GW01 |
 | Cassini raw shared-om integral | PARKED_PARTIAL_FETCH | OM02 |
+| Fission as liquid-drop split | **WITHDRAWN as mechanism** (NP35) | flay / T12 remnant |
+| Jacket Z_H from seating | EXCLUDED (NP36); ratio control remains | NP36 |
+| Superheavy N≥168 → N_H=126 | PENDING_DATA | NP35 F3 switch |
+| Lamb nS–nP | H 1057.845 MHz and He⁺ 14041.13 MHz ACCEPTED OBSERVED (two centers); extraction withdrawn; sign = incomplete-dyad strain (APS11) | APS11 / PPT08 |
+| Cyclic reiteration threshold | PENDING amplitude; **chain COMPUTED** (Shapiro → T–P–c identities → IR → gamma `c_far→0`) | `Theory/07_Cyclic_Reiteration.md` |
 
 ## 1. R/a Quantisation
 
@@ -29,11 +34,11 @@ Open problems remain in both computation and concept: α-from-topology (Conjectu
 
 ## 2. Winding Number Quantisation
 
-**Problem**: Why are $W=1$ (electron) and $W=3$ (proton) the only stable winding numbers?
+**Problem**: Which winding modes are dynamically stable, and why?
 
-**What we know**: Higher winding amplifies centrifugal pressure per mode (unlike higher genus which dilutes it). $W=3$ is a trefoil — the simplest non-trivial knot. $W=2$ would be a torus link, not a knot.
+**What we know**: The $(1,1)$ electron mode is an unknot and the $(2,3)$ proton mode is the simplest non-trivial knot. PPT09's Alexander-polynomial classification distinguishes those knot types. Its first-order occlusion integral puts the tested W=2 branch exactly level with two separated W=1 branches; it does not establish a decay direction.
 
-**What we need**: Lattice simulation of vortex reconnection dynamics. Specifically: does a $W=2$ configuration spontaneously reconnect to $W=1$ + energy, while $W=3$ (being knotted) cannot?
+**What we need**: A lattice reconnection calculation that supplies the energy curve, barrier and dissipation law. The W=2 lifetime and the claim that only W={1,3} are stable remain open.
 
 **What it predicts**: The complete stable particle catalogue from topology alone.
 

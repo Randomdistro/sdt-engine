@@ -14,7 +14,7 @@ This pass is **hostile and fair**. Two failure modes are equally guarded against
 | value | meaning |
 |---|---|
 | `SDT-posited` | an axiom / definition / operator — asserted, not derived |
-| `SDT-derived` | produced by an SDT derivation from posited axioms + permitted inputs |
+| `SDT-derived` | produced by an SDT derivation from posited axioms + declared dependencies |
 | `calibrated` | ≥1 scale anchored to a measured **target** value to fix magnitude |
 | `external-input` | the quantity *is* a measured constant, borrowed law, or observational anchor |
 | `unresolved` | path incomplete, contested, **definitional/circular**, or failed |
@@ -30,7 +30,7 @@ This pass is **hostile and fair**. Two failure modes are equally guarded against
 **`input_dependency`** — *what the derivation consumes* (the new axis that prevents over-demotion)
 | value | meaning |
 |---|---|
-| `primitive-whitelist` | only `{ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p}` — the declared permitted scale set |
+| `primitive-derivation basis` | only `{ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p}` — the declared permitted scale set |
 | `measured-observable` | a measured quantity *other than the matched target* (e.g. a planet's v, R) |
 | `calibrated-target` | the known value being matched is fed into the derivation (fatal to C) |
 | `borrowed-function` | an external *functional form* is adopted (e.g. MOND interpolation shape) |
@@ -55,7 +55,7 @@ F — unresolved, unverified, or failed
 |---|---|
 | **A** | `SDT-posited` × (`internal-only`/`known-match`) |
 | **B** | `SDT-derived` × `internal-only` |
-| **C** | `SDT-derived` × `known-match`, **and** `input_dependency ∈ {primitive-whitelist, measured-observable}` |
+| **C** | `SDT-derived` × `known-match`, **and** `input_dependency ∈ {primitive-derivation basis, measured-observable}` |
 | **D** | `SDT-derived` × `novel-prediction` |
 | **E** | `calibrated` × (any) — `input_dependency = calibrated-target` |
 | **X** | `external-input` × (any) — `input_dependency ∈ {external constant, borrowed-function}` |
@@ -67,7 +67,7 @@ F — unresolved, unverified, or failed
 
 1. **C is gated on `SDT-derived` provenance.** A `known-match` from `SDT-posited` is A; from `calibrated` is E; from `external-input` is X.
 2. **The matched target must not enter the derivation.** If `input_dependency = calibrated-target` or `definitional-identity`, it is **not** C → E or F.
-3. **Calibration is contagious — *conditionally*.** *Calibration propagates only when the calibrated quantity sets the magnitude of the result being tested **and does not algebraically cancel**. Whitelisted primitive constants are **dependency-tracked, not automatically demoted.*** (This replaces the v1 blanket "calibration is contagious," which was too punitive.)
+3. **Calibration is contagious — *conditionally*.** *Calibration propagates only when the calibrated quantity sets the magnitude of the result being tested **and does not algebraically cancel**. dependency-traced primitive constants are **dependency-tracked, not automatically demoted.*** (This replaces the v1 blanket "calibration is contagious," which was too punitive.)
 4. **Permitted primitive ≠ calibrated target.** `{ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p}` are the declared input layer. Consuming them keeps a result eligible for C. Only feeding in *the specific value being matched* breaks C.
 5. **Borrowed functional form → X, not C.** If an external *shape* (interpolation function, density profile) is adopted, the shape is X even when the scale that fills it is SDT-derived. Split the formula: keep the SDT-first part as C/B, quarantine the borrowed shape as X.
 
@@ -102,14 +102,14 @@ The claims a hostile reviewer attacks, each adjudicated by the delete-test. **Re
 | #23 | `P_eff` (hydrogen-calibrated) | Vanishes — magnitude set by measured `R_p,r_e,k_e,e` | prov `calibrated` · dep `calibrated-target` | **E** |
 | #24/#25 | `f=P_eff/P_conv`, `R_charge=√(R_p r_e)` | #24 inherits #23's *magnitude* (does not cancel); #25 consumes measured radii | prov `calibrated` · dep `measured-observable`→`calibrated-target` | **E** |
 | #107 | eclipse `κ_area=9.1e-29 m²` | Vanishes without the fitted cross-section | prov `calibrated` · dep `calibrated-target` | **E** |
-| **#49** | **`ϟ_per_baryon=ℓ_P² c m_p/ℏ`** | **Unchanged** — uses only primitive-whitelist `{ℓ_P,c,m_p,ℏ}`; the per-baryon koppa is produced without feeding in any measured `G` or `M`. **`G` is never an input.** | prov `SDT-derived` · corr `known-match` · dep `primitive-whitelist` · **risk_flag: CODATA `ℓ_P` conventionally encodes G under standard physics** | **C-flagged** |
-| M4 | `g_obs=g_bar/(1−e^{−√(g_bar/a₀)})` (gd05_twin_regime) | **Split.** `a₀=cH₀/2π` unchanged (C); BTFR deep-limit `v⁴=GM_bar a₀` unchanged (C); the *interpolation shape* is a borrowed MOND form (X) | a₀: prov `SDT-derived` dep `primitive-whitelist` → **C**; shape: prov `external-input` dep `borrowed-function` → **X** | **C-asymptotes / X-shape** |
-| #67 | `R_p=4ℏ/(m_p c)` (W=3) | Unchanged given the W+1 *rule* — but the rule is conjectural | prov `SDT-derived` · corr `known-match` · dep `primitive-whitelist` · **risk_flag: W+1 not proven from trefoil geometry** | **C-flagged** |
+| **#49** | **`ϟ_per_baryon=ℓ_P² c m_p/ℏ`** | **Unchanged** — uses only primitive-derivation basis `{ℓ_P,c,m_p,ℏ}`; the per-baryon koppa is produced without feeding in any measured `G` or `M`. **`G` is never an input.** | prov `SDT-derived` · corr `known-match` · dep `primitive-derivation basis` · **risk_flag: CODATA `ℓ_P` conventionally encodes G under standard physics** | **C-flagged** |
+| M4 | `g_obs=g_bar/(1−e^{−√(g_bar/a₀)})` (gd05_twin_regime) | **Split.** `a₀=cH₀/2π` unchanged (C); BTFR deep-limit `v⁴=GM_bar a₀` unchanged (C); the *interpolation shape* is a borrowed MOND form (X) | a₀: prov `SDT-derived` dep `primitive-derivation basis` → **C**; shape: prov `external-input` dep `borrowed-function` → **X** | **C-asymptotes / X-shape** |
+| #67 | `R_p=4ℏ/(m_p c)` (W=3) | Unchanged given the W+1 *rule* — but the rule is conjectural | prov `SDT-derived` · corr `known-match` · dep `primitive-derivation basis` · **risk_flag: W+1 not proven from trefoil geometry** | **C-flagged** |
 | #56 | `c` from Mercury precession | Unchanged — re-derives an input from geometry (closure) | prov `SDT-derived` · corr `known-match` · dep `measured-observable` | **C (closure)** |
-| #74 | `α = 1/ϟ_H` | α is a *permitted primitive*; this expresses it as hydrogen koppa, not a fit | prov `SDT-derived` · dep `primitive-whitelist` · risk_flag: α also an input | **C-flagged** |
+| #74 | `α = 1/ϟ_H` | α is a *permitted primitive*; this expresses it as hydrogen koppa, not a fit | prov `SDT-derived` · dep `primitive-derivation basis` · risk_flag: α also an input | **C-flagged** |
 | T⁴ | `κ(z)=κ₀(1+z)⁴` redshift | Falsified for SNe Ia (saturates wrong) | prov `unresolved` · corr `known-match`→fails | **F (failed)** |
 
-**The #49 correction in one line:** the v1 audit conflated *"uses a whitelisted primitive that standard physics happens to define via G"* with *"imports G."* The delete-test shows `G`/`M` never enter the path → the result is **C**, carrying an honest `risk_flag` about `ℓ_P`'s conventional origin. Disclosed, not demoted.
+**The #49 correction in one line:** the v1 audit conflated *"uses a dependency-traced primitive that standard physics happens to define via G"* with *"imports G."* The delete-test shows `G`/`M` never enter the path → the result is **C**, carrying an honest `risk_flag` about `ℓ_P`'s conventional origin. Disclosed, not demoted.
 
 ---
 
@@ -120,22 +120,22 @@ Format: `#census — name — (provenance · correspondence · input_dependency)
 ### A — SDT-posited axiom / definition
 - **#1** `c=ℓ_P/t_P` · **#3** `|u|≤c` · **#4** `v_circ⊥v_trans` · **#5** `τ=1/d=1/3` · **#6** `v_circ²+v²=c²` · **#7** `z·k²=1` · **#8** `ϟ=v²R/c²` — all (`SDT-posited` · `internal-only` · n/a).
 
-### X — external-input component / borrowed functional form
-- **#2** permitted-input constants `{ℓ_P,c,ℏ,k_B,T_CMB,α,m_e,m_p}` and CODATA values — (`external-input` · `known-match` · primitive layer). *The given layer; not a result, not a failure.*
+### X — externally measured component / borrowed functional form
+- **#2** numerical dependency ledger `{ℓ_P,c,ℏ,k_B,T_CMB,α,m_e,m_p}` — mixed roles: dimensional seed, unit bridges, mass/action seat, spectroscopic rung and measured mechanical boundary. Namespace membership is not a status claim.
 - **#10** `u_CMB=aT⁴` (standard radiation thermodynamics, used as input relation) — (`external-input` · `known-match` · `borrowed-function`).
 - **M4 interpolation shape**, **ΛCDM comparison model** (zk2_pantheon_proof), **de Vaucouleurs / exponential-disk profiles** (galactic.hpp f_dev/f_enc), **Shue magnetopause fit**, **Petschek `0.1 v_A B`** — borrowed astrophysical/empirical forms. (`external-input`/`calibrated` · `borrowed-function`). *Petschek/Shue are also fitted → E; listed here for the borrowed-form flag.*
 
 ### B — SDT-derived internal result (no external counterpart)
-- **#9** `⟨cos²θ⟩=1/3` · **#11** `ε=u_CMB ℓ_P³` · **#13** shell-cancellation · **#14** `Φ=Nε` · **#17** `φ(n̂)=Φ/4π` · **#30** `m=ΦV_disp/3ℓ_P³c²` · **#31** `V_disp` · **#35** GPI `δ=aℓ_P/c²` · **#58** `m(p,q)` · **#60** `v_p²+v_t²=c²` · **#63** stable angle · **#117/#118** spation-rotation field (1.831c) · **#120/#122/#123/#124/#125** lattice/traction/depth results — (`SDT-derived` · `internal-only` · primitive-whitelist).
-- **#12/#15** `N`, `P_conv` — (`SDT-derived` · `internal-only` · primitive-whitelist) · **risk_flag: chain conditioned on hard-coded `R_CMB`** (a calibrated scale; see E).
+- **#9** `⟨cos²θ⟩=1/3` · **#11** `ε=u_CMB ℓ_P³` · **#13** shell-cancellation · **#14** `Φ=Nε` · **#17** `φ(n̂)=Φ/4π` · **#30** `m=ΦV_disp/3ℓ_P³c²` · **#31** `V_disp` · **#35** GPI `δ=aℓ_P/c²` · **#58** `m(p,q)` · **#60** `v_p²+v_t²=c²` · **#63** stable angle · **#117/#118** spation-rotation field (1.831c) · **#120/#122/#123/#124/#125** lattice/traction/depth results — (`SDT-derived` · `internal-only` · primitive-derivation basis).
+- **#12/#15** `N`, `P_conv` — (`SDT-derived` · `internal-only` · primitive-derivation basis) · **risk_flag: chain conditioned on hard-coded `R_CMB`** (a calibrated scale; see E).
 - **#33** `P_cf=P_conv/3` — `SDT-derived` · `internal-only` · *flagged: algebraic identity, not a verification.*
 
 ### C — SDT-derived → convergent known-match (the load-bearing defence)
-*All pass the delete-test: the matched value never enters the path. Fuel is primitive-whitelist or measured-observable only.*
+*All pass the delete-test: the matched value never enters the path. Fuel is primitive-derivation basis or measured-observable only.*
 - **SR from the budget:** #37 γ · #38 time dilation · #39 length contraction · #40 E₀=mc² · #41 energy–momentum · #42 photon limit · #43 relativistic mass.
 - **Inertial/Newtonian:** #18 Newton I · #36 Newton II (`F=ma` from relay) · #32 equivalence principle.
 - **Gravity/GR from koppa:** #44 Kepler · #45 `g=v²/R` · #46 `R_c=R/k²` · #47 grav. time dilation · #48 `GM` recovery · #51 precession 42.98″ · #52 deflection 1.75″ · #53 Shapiro · #54 frame dragging · #55 Schwarzschild metric · #56 `c` re-derived (closure) · #57 Earth interior (GOM09, 1.82%, CONFIRMED).
-- **Atomic (α as permitted input):** #70 Rydberg · #71 ionisation · #72 fine structure · #73 Bohr · #74 α=1/ϟ_H *(C-flagged)* · #75 atomic zk²=1 · #76 21 cm.
+- **Atomic (α from the APS05/PPT02 spectroscopic route):** #70 Rydberg · #71 ionisation · #72 fine structure · #73 Bohr · #74 α=1/ϟ_H *(C-flagged)* · #75 atomic zk²=1 · #76 21 cm.
 - **Force-law structure / nuclear:** #22 `F=(π/4)P_eff R₁²R₂²/r²` *(1/r² structure C; coefficient via #23 = E)* · #26 Coulomb force · #27 occlusion solid angle · #77/#78 construction grammar (valley of stability) · #84 `R_nuc=Z R_p` · #67 `R_p=4ℏ/m_p c` *(C-flagged: W+1 conjectural)*.
 - **Cosmology:** #16 `S=4πN²` (Λ count) · #91 Hubble law · #93 `c_s=c/√3` · #96 age from BAO · #97 `T(z)` · #99 Hawking T/L from koppa · #100 `a₀=cH₀/2π` (recovers MOND scale).
 - **Gravitational, no-G/M, C-flagged:** **#49** `ϟ_per_baryon` *(risk_flag: ℓ_P↔G)*.
@@ -185,7 +185,7 @@ Every load-bearing formula gets a six-line block immediately above it. Roll out 
 ```cpp
 // provenance_status:     SDT-derived          // SDT-posited | SDT-derived | calibrated | external-input | unresolved
 // correspondence_status: known-match          // known-match | novel-prediction | internal-only | pending-test
-// input_dependency:      primitive-whitelist  // primitive-whitelist | measured-observable | calibrated-target | borrowed-function | definitional-identity
+// input_dependency:      primitive-derivation basis  // primitive-derivation basis | measured-observable | calibrated-target | borrowed-function | definitional-identity
 // class:                 C                    // A | B | C | D | E | X | F   (append "-flagged" if a risk_flag is set)
 // circularity_assertion: no matched target value enters the derivation   // == delete-test passes
 // risk_flag:             none                 // e.g. "CODATA l_P conventionally encodes G"; "W+1 rule conjectural"
@@ -195,7 +195,7 @@ Worked examples (these are the contested/core sites — annotate these first wit
 
 ```cpp
 // F  — definitional identity:           k_e e2 = alpha*hbar*c   (alpha ≡ k_e e²/ℏc)
-// C  — SDT-derived, primitive-whitelist: F = (pi/4) P_eff R1² R2² / r²   (1/r² structure; coefficient E)
+// C  — SDT-derived, primitive-derivation basis: F = (pi/4) P_eff R1² R2² / r²   (1/r² structure; coefficient E)
 // C-flagged — risk: l_P↔G:               koppa_per_baryon = l_P² c m_p / hbar
 // E  — calibrated-target:                P_eff = 4 k_e e²/(π R_p² r_e²)   (hydrogen)
 // C-flagged — risk: W+1 conjectural:     R_p_predicted = 4 hbar/(m_p c)

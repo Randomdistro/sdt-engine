@@ -31,7 +31,7 @@ A convergence line traveling radially from the edge of an LSB galaxy to its cent
 ## 3. Strict Development Rules (Zero-Parameter Doctrine)
 
 1. **NO EMPIRICAL ANCHORS.** You are strictly forbidden from calibrating against the Milky Way, SPARC data, or MOND constants. If you hardcode a number like $175$ or $1.2 \times 10^{-10}$, you have failed.
-2. **USE FUNDAMENTAL INVARIANTS ONLY.** The only permitted inputs are Planck length ($l_p$), speed of light ($c$), proton mass ($m_p$), and the reduced Planck constant ($\hbar$). From these, SDT natively derives $\kappa_{per\_baryon}$.
+2. **USE FUNDAMENTAL INVARIANTS ONLY.** The only declared dependencies are Planck length ($l_p$), speed of light ($c$), proton mass ($m_p$), and the reduced Planck constant ($\hbar$). From these, SDT natively derives $\kappa_{per\_baryon}$.
 3. **NO DARK MATTER.** Do not fit or reference NFW halos.
 
 ## 4. Required Implementation Steps

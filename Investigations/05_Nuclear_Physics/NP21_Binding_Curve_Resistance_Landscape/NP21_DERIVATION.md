@@ -54,7 +54,7 @@ crossover *is* the floor).
 SDT does **not** yet supply `a_C/a_S` from first geometry. Two runs were therefore pre-committed:
 
 - **Run G (geometric ratio, 0 fitted):** `a_S = kiss/2 = 6` (cuboctahedron coordination 12 from
-  `packing::preset_cuboct12`), `a_C = α` (the single whitelist redirection constant), `a_A = 1` (grammar
+  `packing::preset_cuboct12`), `a_C = α` (the single derivation basis redirection constant), `a_A = 1` (grammar
   unit). — `DERIVED`-attempt.
 - **Run F (fitted ratio, honest fork):** `a_V, a_S, a_C, a_A` least-squares-fit to the AME B/A curve. —
   `CALIBRATED(3)`; anything it enables is Class C.
@@ -93,7 +93,7 @@ The intended mechanism: bulk relief saturates as the cuboctahedral (Vector-Equil
 Fe-56; beyond it, the handed-redirection spread (∝ Z²) and triton-excess asymmetry take over, and their
 crossover with the falling surface term **is** the floor. The functional form encodes exactly this
 competition — and *with fitted coefficients it does reproduce a rise-then-fall*. **But the crossover
-location is a coefficient ratio, and SDT supplies no geometric derivation of that ratio.** The whitelist
+location is a coefficient ratio, and SDT supplies no geometric derivation of that ratio.** The derivation basis
 constant `α` (the natural first guess for the redirection weight) is ~32× too small. Placing the floor at
 iron requires the SEMF-scale ratio, i.e. **a fit** — which is precisely the outcome flagged as
 CALIBRATED, not derived, in the frozen ledger and in FLM12 §D2.

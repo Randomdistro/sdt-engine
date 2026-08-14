@@ -58,13 +58,13 @@ sorting requires measuring (writing a relay record) and resetting that record is
 3. **Reversibility boundary.** *Goal:* map cost vs logical reversibility. *Method:* sweep a family of
    gates from fully irreversible to reversible. *Success:* heat cost `∝ ΔS = k_B Δ(ln W)`; zero at the
    reversible end (Bennett recovered).
-4. **Audit.** *Goal:* confirm whitelist. *Method:* delete-test `k_B`. *Success:* every bound is
+4. **Audit.** *Goal:* confirm derivation basis. *Method:* delete-test `k_B`. *Success:* every bound is
    `k_BT ×` pure number (`ln2`, etc.); no ensemble imported.
 
 ## Success criteria
 
 - **PASS (Class A):** `k_BT ln2`/bit derived from TD01 counting, demon closed, reversible-compute free
-  — only `k_B` whitelisted, zero fitted parameters.
+  — only `k_B` dependency-traced, zero fitted parameters.
 - **QUALIFIED (Class C):** Landauer + demon native; reversible-limit cost within numerical noise.
   *(Expected.)*
 - **PENDING (Class D):** erasure cost right but demon closure stays qualitative.

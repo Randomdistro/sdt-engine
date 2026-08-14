@@ -2,7 +2,7 @@
  * @file cq11_trefoil_confinement.cpp
  * @brief PPT05: Mathematical Proof of Trefoil Confinement
  *
- * Three theorems proven and numerically verified:
+ * Two scoped relations evaluated:
  *
  *   Theorem A (Harmonic Suppression):
  *     The steady-state surface of a (p,q) torus-knot vortex at the stable
@@ -12,10 +12,6 @@
  *   Theorem B (Linear Confinement):
  *     Separating a crossover in a (p,q) vortex by distance L produces
  *     a throughput tube whose energy grows as E = sigma * L (linear).
- *
- *   Theorem C (String Breaking):
- *     At critical separation L_c = 2*m_pi*c^2 / sigma, the tube snaps
- *     into a new vortex-antivortex pair. Topology is conserved.
  *
  * @author SDT Engine — James Tyndall, Melbourne
  * @date 24 April 2026
@@ -48,7 +44,6 @@ namespace constants {
 
     // Particle data
     constexpr double m_p    = 1.67262192e-27;          // proton mass kg
-    constexpr double m_pi   = 2.4880e-28;              // pion mass kg (139.6 MeV)
     constexpr double R_p    = 8.414e-16;               // proton charge radius m
     constexpr double r_e    = 2.8179e-15;              // classical electron radius m
 
@@ -281,127 +276,19 @@ void theorem_b() {
 
     // Energy vs separation
     std::printf("  Energy vs crossover separation:\n");
-    std::printf("  ─────────────────────────────────────\n");
-    std::printf("  L (fm)    E (MeV)    E (m_pi c²)\n");
-    std::printf("  ─────────────────────────────────────\n");
+    std::printf("  ─────────────────────────\n");
+    std::printf("  L (fm)    E (MeV)\n");
+    std::printf("  ─────────────────────────\n");
 
-    double m_pi_MeV = 139.57;
     for (double L_fm = 0.1; L_fm <= 3.05; L_fm += 0.2) {
         double L = L_fm * 1e-15;
         double E = sigma_string * L;
         double E_MeV = E / (1.602e-13);
-        double E_mpi = E_MeV / m_pi_MeV;
-        std::printf("  %4.1f     %8.2f     %6.3f %s\n",
-            L_fm, E_MeV, E_mpi,
-            E_mpi >= 2.0 ? " ← STRING BREAKS" : "");
+        std::printf("  %4.1f     %8.2f\n", L_fm, E_MeV);
     }
 
     std::printf("\n  The potential is LINEAR in L: E = σ × L.\n");
     std::printf("  No 1/r² falloff. The tube confines. ∎\n");
-}
-
-// ═══════════════════════════════════════════════════════════════
-//  THEOREM C: STRING BREAKING AND TOPOLOGY CONSERVATION
-// ═══════════════════════════════════════════════════════════════
-//
-//  THEOREM C. At critical separation L_c, the throughput tube
-//  between separated crossovers snaps. The breaking products
-//  are topologically closed (new vortex-antivortex pair).
-//  No isolated topological strand is ever produced.
-//
-//  PROOF.
-//
-//  Step 1 (Energy threshold). The tube energy at separation L is
-//  E(L) = σ × L. A vortex-antivortex pair (minimum: pion) has
-//  rest energy 2 m_π c². When E(L_c) = 2 m_π c²:
-//
-//      L_c = 2 m_π c² / σ
-//
-//  Beyond L_c, it is energetically cheaper to create a pair
-//  than to extend the tube.
-//
-//  Step 2 (Topology conservation). The original vortex has
-//  winding number (p,q) = (2,3) with crossing number 3. The
-//  tube contains organized throughput but no topological charge.
-//  When the tube breaks:
-//
-//  (a) Each broken end must reconnect to conserve the vortex
-//      topology. An open strand in a convergent field is unstable:
-//      the convergent pressure would collapse it in time ~a/c.
-//
-//  (b) The reconnection creates a new closed loop at each end.
-//      The minimum closed topology is (1,1) — a simple vortex
-//      ring (pion-like).
-//
-//  (c) The original (2,3) topology re-closes with its crossover
-//      count preserved. The new (1,1) pair carries the energy
-//      that was in the tube.
-//
-//  Step 3 (No free strands). An isolated strand (open vortex
-//  line) in the convergent field has infinite energy: the
-//  throughput deficit extends to infinity along the strand,
-//  and each unit length costs σ. The energy diverges as L → ∞.
-//  Therefore free strands are energetically forbidden.
-//
-//  This is confinement. ∎
-
-void theorem_c() {
-    std::printf("\n╔══════════════════════════════════════════════════════════════╗\n");
-    std::printf("║  THEOREM C: STRING BREAKING & TOPOLOGY CONSERVATION        ║\n");
-    std::printf("╚══════════════════════════════════════════════════════════════╝\n\n");
-
-    double lambda_C = hbar / (m_p * c);
-    int p_winding = 2;
-    double a = lambda_C * std::sqrt(1.5) / p_winding;
-    double A_tube = pi * a * a;
-    double rho_eff = m_p / (2 * pi * pi * (lambda_C * std::sqrt(3.0) / 3) * a * a);
-    double u_tube = rho_eff * c2;
-    double sigma = u_tube * A_tube;
-
-    // Critical separation for pion pair production
-    double E_pair = 2 * m_pi * c2;
-    double L_c = E_pair / sigma;
-
-    std::printf("  String breaking threshold:\n");
-    std::printf("    m_π c²         = %.4f MeV\n", m_pi * c2 / 1.602e-13);
-    std::printf("    2 m_π c²       = %.4f MeV  (pair threshold)\n", E_pair / 1.602e-13);
-    std::printf("    σ (string)     = %.4e N\n", sigma);
-    std::printf("    L_c = 2mπc²/σ  = %.4e m = %.3f fm\n\n", L_c, L_c * 1e15);
-
-    // Collapse time of an open strand
-    double t_collapse = a / c;
-    std::printf("  Open-strand collapse time:\n");
-    std::printf("    t_collapse = a/c = %.4e s = %.1f t_P\n\n", t_collapse, t_collapse / tP);
-
-    // Energy of an isolated strand vs separation
-    std::printf("  Why free strands are forbidden:\n");
-    std::printf("  ─────────────────────────────────────────────────\n");
-    std::printf("  L (fm)    E_tube (MeV)  E_pair (MeV)  Cheaper?\n");
-    std::printf("  ─────────────────────────────────────────────────\n");
-
-    for (double L_fm : {0.5, 1.0, 1.5, 2.0, 3.0, 5.0, 10.0, 100.0}) {
-        double L = L_fm * 1e-15;
-        double E_t = sigma * L / 1.602e-13;  // MeV
-        double E_p = E_pair / 1.602e-13;     // MeV
-        std::printf("  %6.1f    %10.1f     %8.1f     %s\n",
-            L_fm, E_t, E_p,
-            E_t > E_p ? "PAIR cheaper → breaks" : "tube cheaper → holds");
-    }
-
-    // Topological accounting
-    std::printf("\n  ── Topological Accounting ──\n\n");
-    std::printf("  BEFORE break:    (2,3) trefoil + tube of length L\n");
-    std::printf("    Crossings:     3\n");
-    std::printf("    Open strands:  0 (tube connects back to vortex)\n\n");
-
-    std::printf("  AFTER break:     (2,3) trefoil + (1,1)+(1,1)̄ pair\n");
-    std::printf("    Crossings:     3 + 0 + 0 = 3 (conserved)\n");
-    std::printf("    Open strands:  0 (all topologies closed)\n\n");
-
-    std::printf("  FORBIDDEN:       (2,3) trefoil with open strand\n");
-    std::printf("    Open strands:  1\n");
-    std::printf("    Energy:        → ∞ (tube extends to infinity)\n");
-    std::printf("    This state is energetically inaccessible. ∎\n");
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -465,12 +352,11 @@ void proof_linear_potential() {
 int main() {
     std::printf("╔══════════════════════════════════════════════════════════════╗\n");
     std::printf("║  PPT05: TREFOIL CONFINEMENT — MATHEMATICAL PROOF           ║\n");
-    std::printf("║  Three theorems from SDT Laws I–VI                        ║\n");
+    std::printf("║  Linear form and coefficient audit                        ║\n");
     std::printf("╚══════════════════════════════════════════════════════════════╝\n");
 
     theorem_a();
     theorem_b();
-    theorem_c();
     proof_linear_potential();
 
     std::printf("\n══════════════════════════════════════════════════════════════\n");
@@ -482,14 +368,9 @@ int main() {
     std::printf("  Theorem B: Separating a crossover stores energy σ×L\n");
     std::printf("    (LINEAR, not 1/r) because the convergent pressure\n");
     std::printf("    confines the throughput tube to constant cross-section.\n\n");
-    std::printf("  Theorem C: At L_c, the tube snaps into a vortex pair.\n");
-    std::printf("    Free strands have infinite energy → forbidden.\n");
-    std::printf("    This is confinement from convergent pressure geometry.\n\n");
-    std::printf("  Open: The numerical string tension depends on the tube\n");
-    std::printf("    energy density, which requires specifying the internal\n");
-    std::printf("    pressure profile of the crossover region. The LINEAR\n");
-    std::printf("    character of the potential is proven; the coefficient\n");
-    std::printf("    requires further investigation.\n");
+    std::printf("  Scope: the fixed-area premise requires an independent lattice\n");
+    std::printf("    pressure-profile test. A breaking threshold and final-state\n");
+    std::printf("    assignment remain open; neither is computed here.\n");
 
     return 0;
 }

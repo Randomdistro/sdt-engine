@@ -45,7 +45,7 @@
 
 inline constexpr double PI = std::numbers::pi;
 
-// ---- whitelist primitives (context only; aero v << c) -----------------------
+// ---- derivation basis primitives (context only; aero v << c) -----------------------
 using sdt::laws::measured::c;     // relay ceiling (Law V)
 using sdt::laws::measured::h;     // for FD02 κ = h/m
 namespace traction = sdt::laws::law_VI::traction;  // PPT06 ℓ=2 channel

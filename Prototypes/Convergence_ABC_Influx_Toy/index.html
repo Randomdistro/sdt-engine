@@ -3,411 +3,504 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Convergence Toy</title>
+  <title>Solar-System Convergence Toy: 3D Magnetopauses</title>
   <style>
     :root { color-scheme: dark; }
     * { box-sizing: border-box; }
-    html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; }
-    body { background: #080d10; color: #dce6e8; font: 12px/1.2 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
-    #stage { position: relative; width: 100%; height: 100%; overflow: hidden; background: radial-gradient(circle at 50% 50%, #10242a, #080d10 68%); }
-    canvas, svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-    canvas { pointer-events: none; }
-    svg { cursor: grab; touch-action: none; }
-    svg:active { cursor: grabbing; }
-    #controls { position: absolute; left: 16px; right: 16px; bottom: 16px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; padding: 10px 12px; border: 1px solid #486168; border-radius: 8px; background: rgba(8, 13, 16, 0.84); backdrop-filter: blur(8px); }
+    html, body, #stage { width: 100%; height: 100%; margin: 0; overflow: hidden; }
+    body { background: #05080c; color: #e4eff0; font: 12px/1.3 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    #stage { position: relative; background: radial-gradient(circle at 50% 50%, #112831 0, #080e13 32%, #05080c 74%); }
+    canvas { position: absolute; inset: 0; width: 100%; height: 100%; cursor: grab; touch-action: none; }
+    canvas:active { cursor: grabbing; }
+    #controls, #readout { position: absolute; border: 1px solid #45626a; border-radius: 8px; background: rgba(5, 8, 12, .88); backdrop-filter: blur(9px); }
+    #controls { left: 16px; right: 16px; bottom: 16px; display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; padding: 10px 12px; }
+    #readout { top: 16px; right: 16px; width: min(350px, calc(100% - 32px)); padding: 10px 12px; color: #b8ced2; }
+    #readout strong { color: #fff5d3; }
+    #readout .warn { color: #ffcf8a; }
+    button { border: 1px solid #45626a; border-radius: 4px; padding: 5px 9px; background: #122128; color: #dcebed; font: inherit; cursor: pointer; }
+    button:hover, button[aria-pressed="true"] { border-color: #e69a5c; color: #fff; }
     label { display: flex; align-items: center; gap: 6px; white-space: nowrap; }
-    input[type="range"] { width: 96px; accent-color: #e1824b; }
-    input[type="checkbox"] { accent-color: #e1824b; }
-    output { min-width: 30px; color: #8fb4ba; }
-    button { border: 1px solid #486168; border-radius: 4px; padding: 5px 9px; background: #142126; color: #dce6e8; font: inherit; cursor: pointer; }
-    button:hover { border-color: #e1824b; color: #fff; }
-    @media (max-width: 640px) { #controls { left: 8px; right: 8px; bottom: 8px; gap: 7px 10px; } input[type="range"] { width: 68px; } }
+    input { accent-color: #e69a5c; }
+    input[type="range"] { width: 100px; }
+    output { min-width: 4.5em; color: #8fc6cf; }
+    @media (max-width: 720px) { #controls { left: 8px; right: 8px; bottom: 8px; gap: 6px 8px; } #readout { top: 8px; right: 8px; width: calc(100% - 16px); } input[type="range"] { width: 72px; } }
   </style>
 </head>
 <body>
   <main id="stage">
-    <canvas id="field" aria-hidden="true"></canvas>
-    <svg id="play" viewBox="0 0 1800 1200" preserveAspectRatio="xMidYMid slice" aria-label="Interactive convergence toy"></svg>
-    <div id="controls" aria-label="Toy controls"></div>
+    <canvas id="solar" aria-label="Interactive solar-system convergence and occlusion toy"></canvas>
+    <div id="readout" aria-live="polite"></div>
+    <div id="controls" aria-label="Solar system controls"></div>
   </main>
   <script>
   (() => {
     'use strict';
 
-    const NS = 'http://www.w3.org/2000/svg';
-    const WORLD = { width: 1800, height: 1200, extent: 3400 };
-    const field = document.getElementById('field');
-    const context = field.getContext('2d');
-    const svg = document.getElementById('play');
-    const controls = document.getElementById('controls');
-    const bodies = [
-      { name: 'A', x: 700, y: 600, radius: 84, vx: 0, vy: 0, active: true },
-      { name: 'B', x: 1240, y: 600, radius: 60, vx: 0, vy: 0, active: true },
-      { name: 'C', x: 960, y: 300, radius: 44, vx: 0, vy: 0, active: false }
+    const AU_KM = 149597870.7;
+    const SOURCE = 'JPL SSD approximate positions (J2000 elements) and planetary physical parameters, accessed 2026-08-13.';
+    const FIELD = { sunDirections: 240, planetDirections: 48, sunExtentAu: 31, minimumExtentAu: 0.28, overlapTolerance: 1e-14 };
+    const MAGNETOPAUSE_MESH = { rings: 12, sides: 20, tailLengths: 5.5, flare: 0.78 };
+    const MAGNETOPAUSE_SOURCES = 'Dayside stand-off inputs: MESSENGER Mercury crossings; NASA Earth magnetosphere material; and the AGU planetary-magnetosphere review for the outer planets. Values remain solar-wind dependent.';
+    const MAGNETOPAUSES = {
+      Mercury: { kind: 'intrinsic', minimumR: 1.45, maximumR: 1.45, referenceRadiusKm: 2439.4, reference: 'R_M', range: '1.45 R_M crossing value; pressure-variable', evidence: 'MESSENGER subsolar crossings' },
+      Venus: { kind: 'induced', evidence: 'No global intrinsic field; induced plasma boundary exists', reference: 'No fixed stand-off rendered' },
+      Earth: { kind: 'intrinsic', minimumR: 6, maximumR: 10, referenceRadiusKm: 6371.0, reference: 'R_E', range: '6-10 R_E reported dayside span', evidence: 'Solar-wind-pressure dependent' },
+      Mars: { kind: 'induced', evidence: 'No global intrinsic field; induced plasma boundary exists', reference: 'No fixed stand-off rendered' },
+      Jupiter: { kind: 'intrinsic', minimumR: 63, maximumR: 92, referenceRadiusKm: 71492, reference: 'R_J', range: '63 and 92 R_J observed modes', evidence: 'Solar-wind-pressure dependent' },
+      Saturn: { kind: 'intrinsic', minimumR: 17, maximumR: 29, referenceRadiusKm: 60268, reference: 'R_S', range: '17-29 R_S observed near noon', evidence: 'Solar-wind-pressure dependent' },
+      Uranus: { kind: 'intrinsic', minimumR: 17, maximumR: 28, referenceRadiusKm: 25559, reference: 'R_U', range: '17-28 R_U Voyager 2 span', evidence: 'Sparse single-flyby constraint' },
+      Neptune: { kind: 'intrinsic', minimumR: 23, maximumR: 26.5, referenceRadiusKm: 24764, reference: 'R_N', range: '23-26.5 R_N Voyager 2 crossings', evidence: 'Sparse single-flyby constraint' }
+    };
+    const PLANETS = [
+      { name: 'Mercury', a: 0.38709927, e: 0.20563593, inc: 7.00497902, node: 48.33076593, peri: 77.45779628, mean: 252.25032350, radiusKm: 2439.4, periodDays: 87.969, color: '#b6b2aa' },
+      { name: 'Venus', a: 0.72333566, e: 0.00677672, inc: 3.39467605, node: 76.67984255, peri: 131.60246718, mean: 181.97909950, radiusKm: 6051.8, periodDays: 224.701, color: '#e7b56a' },
+      { name: 'Earth', orbitalLabel: 'Earth–Moon barycentre', a: 1.00000261, e: 0.01671123, inc: -0.00001531, node: 0, peri: 102.93768193, mean: 100.46457166, radiusKm: 6371.0, periodDays: 365.256, color: '#5e9cf6' },
+      { name: 'Mars', a: 1.52371034, e: 0.09339410, inc: 1.84969142, node: 49.55953891, peri: -23.94362959, mean: -4.55343205, radiusKm: 3389.5, periodDays: 686.980, color: '#d27048' },
+      { name: 'Jupiter', a: 5.20288700, e: 0.04838624, inc: 1.30439695, node: 100.47390909, peri: 14.72847983, mean: 34.39644051, radiusKm: 69911, periodDays: 4332.589, color: '#dfb36d' },
+      { name: 'Saturn', a: 9.53667594, e: 0.05386179, inc: 2.48599187, node: 113.66242448, peri: 92.59887831, mean: 49.95424423, radiusKm: 58232, periodDays: 10759.22, color: '#ead38b', ring: true },
+      { name: 'Uranus', a: 19.18916464, e: 0.04725744, inc: 0.77263783, node: 74.01692503, peri: 170.95427630, mean: 313.23810451, radiusKm: 25362, periodDays: 30688.5, color: '#83dce5' },
+      { name: 'Neptune', a: 30.06992276, e: 0.00859048, inc: 1.77004347, node: 131.78422574, peri: 44.96476227, mean: -55.12002969, radiusKm: 24622, periodDays: 60182, color: '#7589f1' }
     ];
-    const home = bodies.map(({ x, y, radius }) => ({ x, y, radius }));
-    const options = { paused: false, trails: false };
-    const trails = bodies.map(() => []);
-    const lines = [];
-    const bodyNodes = [];
-    const forceNodes = [];
-    const labels = [];
-    let heldBody = null;
+    const SUN = { name: 'Sun', radiusKm: 695700, color: '#ffcf70' };
+    const canvas = document.getElementById('solar');
+    const context = canvas.getContext('2d');
+    const controls = document.getElementById('controls');
+    const readout = document.getElementById('readout');
+    const state = { days: 0, daysPerSecond: 36, running: true, fields: true, deficits: true, magnetopauses: true, magnetopauseMagnification: 1, labels: true, markers: true, yaw: -0.7, pitch: 0.56, zoom: 1, selected: PLANETS[2] };
     let previous = 0;
-    let pointerTrail = [];
+    let dragging = false;
+    let dragged = false;
+    let lastPointer = null;
 
-    function element(name, attributes) {
-      const node = document.createElementNS(NS, name);
-      Object.entries(attributes).forEach(([key, value]) => node.setAttribute(key, value));
-      return node;
-    }
+    function radians(degrees) { return degrees * Math.PI / 180; }
+    function wrap(angle) { return ((angle + Math.PI) % (2 * Math.PI)) - Math.PI; }
+    function magnitude(point) { return Math.hypot(point.x, point.y, point.z); }
+    function difference(left, right) { return { x: left.x - right.x, y: left.y - right.y, z: left.z - right.z }; }
+    function scale(point, amount) { return { x: point.x * amount, y: point.y * amount, z: point.z * amount }; }
+    function add(left, right) { return { x: left.x + right.x, y: left.y + right.y, z: left.z + right.z }; }
+    function unit(point) { const length = magnitude(point) || 1; return scale(point, 1 / length); }
+    function dot(left, right) { return left.x * right.x + left.y * right.y + left.z * right.z; }
+    function cross(left, right) { return { x: left.y * right.z - left.z * right.y, y: left.z * right.x - left.x * right.z, z: left.x * right.y - left.y * right.x }; }
+    function formatScientific(value) { return value === 0 ? '0' : value.toExponential(3); }
 
-    function bodyMass(body) {
-      return Math.pow(body.radius / 18, 3);
-    }
-
-    function buildLines() {
-      const spacing = 86;
-      for (let angle = 0; angle < 180; angle += 5) {
-        const theta = angle * Math.PI / 180;
-        const ux = Math.cos(theta);
-        const uy = Math.sin(theta);
-        const nx = -uy;
-        const ny = ux;
-        for (let offset = -1100; offset <= 1100; offset += spacing) {
-          lines.push({ x: 900 + nx * offset, y: 600 + ny * offset, ux, uy, key: angle + offset });
-        }
+    function solveEccentricAnomaly(meanAnomaly, eccentricity) {
+      let eccentricAnomaly = meanAnomaly + eccentricity * Math.sin(meanAnomaly);
+      for (let iteration = 0; iteration < 8; iteration += 1) {
+        eccentricAnomaly -= (eccentricAnomaly - eccentricity * Math.sin(eccentricAnomaly) - meanAnomaly) / (1 - eccentricity * Math.cos(eccentricAnomaly));
       }
+      return eccentricAnomaly;
     }
 
-    function createScene() {
-      const defs = element('defs', {});
-      const arrow = element('marker', { id: 'force-arrow', markerWidth: 9, markerHeight: 9, refX: 7, refY: 3, orient: 'auto' });
-      arrow.appendChild(element('path', { d: 'M0,0 L6,3 L0,6 Z', fill: '#e1824b' }));
-      defs.appendChild(arrow);
-      svg.appendChild(defs);
-
-      bodies.forEach((body) => {
-        const force = element('line', { stroke: '#e1824b', 'stroke-width': 5, 'marker-end': 'url(#force-arrow)' });
-        const circle = element('circle', { fill: '#162c33', stroke: '#9bc5ca', 'stroke-width': 2 });
-        const label = element('text', { 'text-anchor': 'middle', 'dominant-baseline': 'central', fill: '#ffffff', 'font-size': 28, 'font-family': 'ui-monospace, monospace', 'pointer-events': 'none' });
-        label.textContent = body.name;
-        forceNodes.push(force);
-        bodyNodes.push(circle);
-        labels.push(label);
-        svg.append(force, circle, label);
-      });
+    function positionFromMeanAnomaly(planet, meanAnomaly) {
+      const eccentricAnomaly = solveEccentricAnomaly(meanAnomaly, planet.e);
+      const xPrime = planet.a * (Math.cos(eccentricAnomaly) - planet.e);
+      const yPrime = planet.a * Math.sqrt(1 - planet.e * planet.e) * Math.sin(eccentricAnomaly);
+      const omega = radians(planet.peri - planet.node);
+      const node = radians(planet.node);
+      const inclination = radians(planet.inc);
+      const cosOmega = Math.cos(omega), sinOmega = Math.sin(omega), cosNode = Math.cos(node), sinNode = Math.sin(node), cosInclination = Math.cos(inclination), sinInclination = Math.sin(inclination);
+      return {
+        x: (cosOmega * cosNode - sinOmega * sinNode * cosInclination) * xPrime + (-sinOmega * cosNode - cosOmega * sinNode * cosInclination) * yPrime,
+        y: (cosOmega * sinNode + sinOmega * cosNode * cosInclination) * xPrime + (-sinOmega * sinNode + cosOmega * cosNode * cosInclination) * yPrime,
+        z: sinOmega * sinInclination * xPrime + cosOmega * sinInclination * yPrime
+      };
     }
 
-    function addControls() {
-      bodies.forEach((body, index) => {
-        const label = document.createElement('label');
-        const caption = document.createElement('span');
-        caption.textContent = body.name;
-        const slider = document.createElement('input');
-        slider.type = 'range';
-        slider.min = '18';
-        slider.max = '150';
-        slider.step = '1';
-        slider.value = String(body.radius);
-        slider.setAttribute('aria-label', `${body.name} radius`);
-        const output = document.createElement('output');
-        output.value = String(body.radius);
-        output.textContent = String(body.radius);
-        slider.addEventListener('input', () => {
-          body.radius = Number(slider.value);
-          output.value = slider.value;
-          output.textContent = slider.value;
-        });
-        label.append(caption, slider, output);
+    function positionAt(planet, days) {
+      return positionFromMeanAnomaly(planet, wrap(radians(planet.mean) + 2 * Math.PI * days / planet.periodDays));
+    }
 
-        if (index > 0) {
-          const enabled = document.createElement('input');
-          enabled.type = 'checkbox';
-          enabled.checked = body.active;
-          enabled.setAttribute('aria-label', `${body.name} enabled`);
-          enabled.addEventListener('change', () => {
-            body.active = enabled.checked;
-            body.vx = 0;
-            body.vy = 0;
-            trails[index] = [];
-          });
-          label.prepend(enabled);
+    function fieldExtent(item) {
+      return item.body === SUN ? FIELD.sunExtentAu : Math.max(FIELD.minimumExtentAu, Math.min(2.1, 0.18 + 0.30 * Math.sqrt(item.body.a)));
+    }
+
+    function systemAt(days) {
+      const sun = { body: SUN, position: { x: 0, y: 0, z: 0 }, count: FIELD.sunDirections };
+      return [sun, ...PLANETS.map((body) => ({ body, position: positionAt(body, days), count: FIELD.planetDirections }))];
+    }
+
+    function rotate(point) {
+      const cosYaw = Math.cos(state.yaw), sinYaw = Math.sin(state.yaw);
+      const x = point.x * cosYaw + point.y * sinYaw;
+      const y = -point.x * sinYaw + point.y * cosYaw;
+      const cosPitch = Math.cos(state.pitch), sinPitch = Math.sin(state.pitch);
+      return { x, y: y * cosPitch - point.z * sinPitch, z: y * sinPitch + point.z * cosPitch };
+    }
+
+    function project(point, width, height) {
+      const rotated = rotate(point);
+      const scaleFactor = Math.min(width, height) * 0.44 / 31 * state.zoom;
+      const perspective = 4 / (4 - rotated.z / 31 * 0.65);
+      return { x: width / 2 + rotated.x * scaleFactor * perspective, y: height / 2 - rotated.y * scaleFactor * perspective, depth: rotated.z, perspective };
+    }
+
+    function resize() {
+      const bounds = canvas.getBoundingClientRect();
+      const ratio = Math.min(window.devicePixelRatio || 1, 2);
+      const width = Math.max(1, Math.round(bounds.width * ratio));
+      const height = Math.max(1, Math.round(bounds.height * ratio));
+      if (canvas.width !== width || canvas.height !== height) { canvas.width = width; canvas.height = height; }
+      context.setTransform(ratio, 0, 0, ratio, 0, 0);
+      return { width: bounds.width, height: bounds.height };
+    }
+
+    function solidAngle(radiusKm, distanceAu) {
+      const ratio = Math.min(1, radiusKm / (distanceAu * AU_KM));
+      return 2 * Math.PI * (1 - Math.sqrt(Math.max(0, 1 - ratio * ratio)));
+    }
+
+    function tangentCapOverlap(first, second, separation) {
+      if (separation >= first + second) return 0;
+      if (separation <= Math.abs(first - second)) return Math.PI * Math.min(first, second) ** 2;
+      const firstProjection = (separation * separation + first * first - second * second) / (2 * separation);
+      const height = Math.sqrt(Math.max(0, first * first - firstProjection * firstProjection));
+      return first * first * Math.acos(Math.max(-1, Math.min(1, firstProjection / first))) + second * second * Math.acos(Math.max(-1, Math.min(1, (separation - firstProjection) / second))) - separation * height;
+    }
+
+    function interactionLedger(items) {
+      const receiverEntries = new Map();
+      items.forEach((receiver) => {
+        const entries = items.filter((other) => other !== receiver).map((other) => {
+          const separation = difference(other.position, receiver.position);
+          const distanceAu = magnitude(separation);
+          const direction = unit(separation);
+          const angularRadius = Math.asin(Math.min(1, other.body.radiusKm / (distanceAu * AU_KM)));
+          return { other, distanceAu, direction, angularRadius, omega: solidAngle(other.body.radiusKm, distanceAu) };
+        }).sort((left, right) => right.omega - left.omega);
+        let unionOmega = entries.reduce((sum, entry) => sum + entry.omega, 0);
+        let overlapCorrected = false;
+        for (let first = 0; first < entries.length; first += 1) {
+          for (let second = first + 1; second < entries.length; second += 1) {
+            const separation = Math.acos(Math.max(-1, Math.min(1, dot(entries[first].direction, entries[second].direction))));
+            if (separation + FIELD.overlapTolerance >= entries[first].angularRadius + entries[second].angularRadius) continue;
+            unionOmega -= tangentCapOverlap(entries[first].angularRadius, entries[second].angularRadius, separation);
+            overlapCorrected = true;
+          }
         }
-        controls.appendChild(label);
+        receiverEntries.set(receiver.body, { entries, unionOmega: Math.max(0, unionOmega), overlapCorrected });
       });
-
-      const trailsLabel = document.createElement('label');
-      const trailsToggle = document.createElement('input');
-      trailsToggle.type = 'checkbox';
-      trailsToggle.setAttribute('aria-label', 'Show trails');
-      trailsToggle.addEventListener('change', () => {
-        options.trails = trailsToggle.checked;
-        if (!options.trails) trails.forEach((trail, index) => { trails[index] = []; });
-      });
-      trailsLabel.append(trailsToggle, document.createTextNode('trails'));
-      controls.appendChild(trailsLabel);
-
-      const pause = document.createElement('button');
-      pause.type = 'button';
-      pause.textContent = 'pause';
-      pause.addEventListener('click', () => {
-        options.paused = !options.paused;
-        pause.textContent = options.paused ? 'run' : 'pause';
-      });
-      controls.appendChild(pause);
-
-      const reset = document.createElement('button');
-      reset.type = 'button';
-      reset.textContent = 'reset';
-      reset.addEventListener('click', () => {
-        bodies.forEach((body, index) => {
-          Object.assign(body, home[index], { vx: 0, vy: 0 });
-          trails[index] = [];
-        });
-      });
-      controls.appendChild(reset);
+      return receiverEntries;
     }
 
-    function lineInterval(line, body) {
-      const dx = body.x - line.x;
-      const dy = body.y - line.y;
-      const along = dx * line.ux + dy * line.uy;
-      const perpendicular = -dx * line.uy + dy * line.ux;
-      if (Math.abs(perpendicular) >= body.radius) return null;
-      const chord = Math.sqrt(body.radius * body.radius - perpendicular * perpendicular);
-      return { from: along - chord, to: along + chord, chord };
+    function fibonacciDirection(index, count) {
+      const y = 1 - 2 * (index + 0.5) / count;
+      const radial = Math.sqrt(1 - y * y);
+      const angle = index * Math.PI * (3 - Math.sqrt(5));
+      return { x: Math.cos(angle) * radial, y, z: Math.sin(angle) * radial };
     }
 
-    function drawSegment(line, from, to, width, alpha) {
-      const x1 = line.x + line.ux * from;
-      const y1 = line.y + line.uy * from;
-      const x2 = line.x + line.ux * to;
-      const y2 = line.y + line.uy * to;
-      context.globalAlpha = alpha;
-      context.lineWidth = width;
+    function drawOrbit(planet, width, height) {
       context.beginPath();
-      context.moveTo(x1, y1);
-      context.lineTo(x2, y2);
+      for (let index = 0; index <= 192; index += 1) {
+        const point = project(positionFromMeanAnomaly(planet, index / 192 * 2 * Math.PI), width, height);
+        if (index) context.lineTo(point.x, point.y); else context.moveTo(point.x, point.y);
+      }
+      context.strokeStyle = planet.color;
+      context.globalAlpha = planet === state.selected ? 0.70 : 0.16;
+      context.lineWidth = planet === state.selected ? 1.35 : 0.8;
       context.stroke();
     }
 
-    function paint(now) {
-      const bounds = field.getBoundingClientRect();
-      const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
-      const width = Math.max(1, Math.round(bounds.width * pixelRatio));
-      const height = Math.max(1, Math.round(bounds.height * pixelRatio));
-      if (field.width !== width || field.height !== height) {
-        field.width = width;
-        field.height = height;
+    function drawBodyField(item, ledger, width, height) {
+      if (!state.fields) return;
+      const extent = fieldExtent(item);
+      const innerRadius = Math.min(extent * 0.16, 0.09 + item.body.radiusKm / AU_KM * 2);
+      const baseAlpha = item.body === SUN ? 0.12 : 0.20;
+      context.save();
+      context.strokeStyle = item.body === SUN ? '#7fd8e2' : item.body.color;
+      context.lineWidth = item.body === SUN ? 0.7 : 0.55;
+      for (let index = 0; index < item.count; index += 1) {
+        const direction = fibonacciDirection(index, item.count);
+        const outer = project(add(item.position, scale(direction, extent)), width, height);
+        const inner = project(add(item.position, scale(direction, innerRadius)), width, height);
+        context.globalAlpha = baseAlpha * (0.45 + 0.55 * ((rotate(direction).z + 1) / 2));
+        context.beginPath();
+        context.moveTo(outer.x, outer.y);
+        context.lineTo(inner.x, inner.y);
+        context.stroke();
       }
-      const scale = Math.max(width / WORLD.width, height / WORLD.height);
-      const offsetX = (width - WORLD.width * scale) / 2;
-      const offsetY = (height - WORLD.height * scale) / 2;
-      context.setTransform(scale, 0, 0, scale, offsetX, offsetY);
-      context.clearRect(-offsetX / scale, -offsetY / scale, width / scale, height / scale);
-      context.lineCap = 'round';
-      context.strokeStyle = '#70b8c3';
-
-      lines.forEach((line) => {
-        const intervals = bodies.filter((body) => body.active).map((body) => lineInterval(line, body)).filter(Boolean);
-        if (!intervals.length) {
-          drawSegment(line, -WORLD.extent, WORLD.extent, 1, 0.09);
-          return;
-        }
-        const nearestNegative = intervals.reduce((value, interval) => Math.min(value, interval.from), WORLD.extent);
-        const nearestPositive = intervals.reduce((value, interval) => Math.max(value, interval.to), -WORLD.extent);
-        drawSegment(line, -WORLD.extent, nearestNegative, 1, 0.13);
-        drawSegment(line, nearestPositive, WORLD.extent, 1, 0.13);
-        drawSegment(line, nearestNegative - 24, nearestNegative, 3, 0.68);
-        drawSegment(line, nearestPositive, nearestPositive + 24, 3, 0.68);
-        const pulse = ((now * 0.09 + line.key * 17) % 260) - 130;
-        if (pulse < nearestNegative - 28 && pulse > -WORLD.extent + 28) drawSegment(line, pulse - 12, pulse + 12, 2.5, 0.55);
-        if (-pulse > nearestPositive + 28 && -pulse < WORLD.extent - 28) drawSegment(line, -pulse - 12, -pulse + 12, 2.5, 0.55);
-      });
-
-      if (options.trails) {
-        context.strokeStyle = '#e1824b';
-        context.lineWidth = 2;
-        trails.forEach((trail) => {
-          if (trail.length < 2) return;
-          context.globalAlpha = 0.4;
+      context.restore();
+      if (!state.deficits) return;
+      const entries = ledger.get(item.body).entries.slice(0, 4);
+      entries.forEach((entry, index) => {
+        const outer = project(add(item.position, scale(entry.direction, extent)), width, height);
+        const inner = project(add(item.position, scale(entry.direction, innerRadius)), width, height);
+        const weight = Math.min(1, Math.max(0.18, (Math.log10(entry.omega || 1e-30) + 30) / 26));
+        context.strokeStyle = entry.other.body.color;
+        context.globalAlpha = 0.16 + 0.50 * weight;
+        context.lineWidth = 0.8 + 1.6 * weight;
+        context.beginPath();
+        context.moveTo(outer.x, outer.y);
+        context.lineTo(inner.x, inner.y);
+        context.stroke();
+        if (index === 0 && item.body === state.selected) {
+          context.fillStyle = entry.other.body.color;
+          context.globalAlpha = 0.8;
           context.beginPath();
-          context.moveTo(trail[0].x, trail[0].y);
-          trail.slice(1).forEach((point) => context.lineTo(point.x, point.y));
-          context.stroke();
-        });
-      }
-      context.globalAlpha = 1;
-    }
-
-    function solveForces() {
-      const forces = bodies.map(() => ({ x: 0, y: 0 }));
-      for (let first = 0; first < bodies.length; first += 1) {
-        const a = bodies[first];
-        if (!a.active) continue;
-        for (let second = first + 1; second < bodies.length; second += 1) {
-          const b = bodies[second];
-          if (!b.active) continue;
-          const dx = b.x - a.x;
-          const dy = b.y - a.y;
-          const distance = Math.max(Math.hypot(dx, dy), a.radius + b.radius + 2);
-          const strength = 30 * a.radius * a.radius * b.radius * b.radius / (distance * distance);
-          const ux = dx / distance;
-          const uy = dy / distance;
-          forces[first].x += ux * strength;
-          forces[first].y += uy * strength;
-          forces[second].x -= ux * strength;
-          forces[second].y -= uy * strength;
+          context.arc(outer.x, outer.y, 2.3, 0, Math.PI * 2);
+          context.fill();
         }
-      }
-      return forces;
-    }
-
-    function resolveContacts() {
-      for (let first = 0; first < bodies.length; first += 1) {
-        const a = bodies[first];
-        if (!a.active) continue;
-        for (let second = first + 1; second < bodies.length; second += 1) {
-          const b = bodies[second];
-          if (!b.active) continue;
-          let dx = b.x - a.x;
-          let dy = b.y - a.y;
-          let distance = Math.hypot(dx, dy);
-          const contact = a.radius + b.radius;
-          if (distance >= contact) continue;
-          if (distance < 0.001) { dx = 1; dy = 0; distance = 1; }
-          const ux = dx / distance;
-          const uy = dy / distance;
-          const inverseA = 1 / bodyMass(a);
-          const inverseB = 1 / bodyMass(b);
-          const inverseTotal = inverseA + inverseB;
-          const correction = (contact - distance) / inverseTotal;
-          if (a !== heldBody) { a.x -= ux * correction * inverseA; a.y -= uy * correction * inverseA; }
-          if (b !== heldBody) { b.x += ux * correction * inverseB; b.y += uy * correction * inverseB; }
-          const relativeSpeed = (b.vx - a.vx) * ux + (b.vy - a.vy) * uy;
-          if (relativeSpeed < 0) {
-            const impulse = -1.2 * relativeSpeed / inverseTotal;
-            a.vx -= impulse * ux * inverseA;
-            a.vy -= impulse * uy * inverseA;
-            b.vx += impulse * ux * inverseB;
-            b.vy += impulse * uy * inverseB;
-          }
-        }
-      }
-    }
-
-    function updateNodes(forces) {
-      bodies.forEach((body, index) => {
-        const circle = bodyNodes[index];
-        const label = labels[index];
-        const force = forceNodes[index];
-        if (!body.active) {
-          circle.setAttribute('visibility', 'hidden');
-          label.setAttribute('visibility', 'hidden');
-          force.setAttribute('visibility', 'hidden');
-          return;
-        }
-        circle.setAttribute('visibility', 'visible');
-        label.setAttribute('visibility', 'visible');
-        circle.setAttribute('cx', body.x);
-        circle.setAttribute('cy', body.y);
-        circle.setAttribute('r', body.radius);
-        label.setAttribute('x', body.x);
-        label.setAttribute('y', body.y + 1);
-        label.setAttribute('font-size', Math.max(16, body.radius * 0.35));
-        const magnitude = Math.hypot(forces[index].x, forces[index].y);
-        if (magnitude < 0.1) {
-          force.setAttribute('visibility', 'hidden');
-          return;
-        }
-        const ux = forces[index].x / magnitude;
-        const uy = forces[index].y / magnitude;
-        const length = Math.max(28, Math.min(220, magnitude * 0.08));
-        force.setAttribute('visibility', 'visible');
-        force.setAttribute('x1', body.x + ux * (body.radius + 10));
-        force.setAttribute('y1', body.y + uy * (body.radius + 10));
-        force.setAttribute('x2', body.x + ux * (body.radius + 10 + length));
-        force.setAttribute('y2', body.y + uy * (body.radius + 10 + length));
       });
     }
 
-    function toWorld(event) {
-      const bounds = svg.getBoundingClientRect();
-      return { x: (event.clientX - bounds.left) / bounds.width * WORLD.width, y: (event.clientY - bounds.top) / bounds.height * WORLD.height };
+    function magnetopauseFrame(item) {
+      const sunward = unit(scale(item.position, -1));
+      const helper = Math.abs(sunward.z) < 0.9 ? { x: 0, y: 0, z: 1 } : { x: 0, y: 1, z: 0 };
+      const lateral = unit(cross(sunward, helper));
+      return { sunward, lateral, vertical: unit(cross(lateral, sunward)) };
     }
 
-    function closestBody(point) {
-      return bodies.filter((body) => body.active).reduce((closest, body) => {
-        const distance = Math.hypot(point.x - body.x, point.y - body.y);
-        return !closest || distance < closest.distance ? { body, distance } : closest;
-      }, null)?.body ?? null;
+    function magnetopausePoint(item, frame, noseAu, tailFraction, angle) {
+      const axialDistance = noseAu * (1 - tailFraction);
+      const radialDistance = noseAu * MAGNETOPAUSE_MESH.flare * Math.sqrt(tailFraction) * (1 + 0.12 * tailFraction);
+      const radialDirection = add(scale(frame.lateral, Math.cos(angle)), scale(frame.vertical, Math.sin(angle)));
+      return add(item.position, add(scale(frame.sunward, axialDistance), scale(radialDirection, radialDistance)));
     }
 
-    svg.addEventListener('pointerdown', (event) => {
-      const point = toWorld(event);
-      const candidate = closestBody(point);
-      if (!candidate || Math.hypot(point.x - candidate.x, point.y - candidate.y) > candidate.radius) return;
-      heldBody = candidate;
-      heldBody.vx = 0;
-      heldBody.vy = 0;
-      pointerTrail = [{ ...point, time: performance.now() }];
-      svg.setPointerCapture?.(event.pointerId);
-      event.preventDefault();
-    });
+    function representativeNoseR(measurement) {
+      return (measurement.minimumR + measurement.maximumR) / 2;
+    }
 
-    svg.addEventListener('pointermove', (event) => {
-      if (!heldBody) return;
-      const point = toWorld(event);
-      heldBody.x = Math.max(heldBody.radius, Math.min(WORLD.width - heldBody.radius, point.x));
-      heldBody.y = Math.max(heldBody.radius, Math.min(WORLD.height - heldBody.radius, point.y));
-      pointerTrail.push({ ...point, time: performance.now() });
-      if (pointerTrail.length > 8) pointerTrail.shift();
-    });
-
-    function releaseBody() {
-      if (heldBody && pointerTrail.length > 1) {
-        const start = pointerTrail[0];
-        const end = pointerTrail[pointerTrail.length - 1];
-        const elapsed = (end.time - start.time) / 1000;
-        if (elapsed > 0.008) {
-          heldBody.vx = Math.max(-1100, Math.min(1100, (end.x - start.x) / elapsed));
-          heldBody.vy = Math.max(-1100, Math.min(1100, (end.y - start.y) / elapsed));
+    function drawMagnetopauseWireframe(item, noseAu, opacity, lineWidth, dashed, width, height) {
+      const frame = magnetopauseFrame(item);
+      context.save();
+      context.strokeStyle = item.body.color;
+      context.globalAlpha = opacity;
+      context.lineWidth = lineWidth;
+      context.setLineDash(dashed ? [3, 4] : []);
+      for (let ring = 1; ring <= MAGNETOPAUSE_MESH.rings; ring += 1) {
+        const tailFraction = MAGNETOPAUSE_MESH.tailLengths * ring / MAGNETOPAUSE_MESH.rings;
+        context.beginPath();
+        for (let side = 0; side <= MAGNETOPAUSE_MESH.sides; side += 1) {
+          const point = project(magnetopausePoint(item, frame, noseAu, tailFraction, side / MAGNETOPAUSE_MESH.sides * 2 * Math.PI), width, height);
+          if (side) context.lineTo(point.x, point.y); else context.moveTo(point.x, point.y);
         }
+        context.stroke();
       }
-      heldBody = null;
-      pointerTrail = [];
+      for (let side = 0; side < MAGNETOPAUSE_MESH.sides; side += 3) {
+        context.beginPath();
+        for (let ring = 0; ring <= MAGNETOPAUSE_MESH.rings; ring += 1) {
+          const tailFraction = MAGNETOPAUSE_MESH.tailLengths * ring / MAGNETOPAUSE_MESH.rings;
+          const point = project(magnetopausePoint(item, frame, noseAu, tailFraction, side / MAGNETOPAUSE_MESH.sides * 2 * Math.PI), width, height);
+          if (ring) context.lineTo(point.x, point.y); else context.moveTo(point.x, point.y);
+        }
+        context.stroke();
+      }
+      context.restore();
     }
-    window.addEventListener('pointerup', releaseBody);
-    window.addEventListener('pointercancel', releaseBody);
 
-    function frame(now) {
-      requestAnimationFrame(frame);
-      const elapsed = Math.min(0.034, (now - previous) / 1000 || 0);
+    function drawMagnetopauses(items, width, height) {
+      if (!state.magnetopauses) return;
+      items.filter((item) => MAGNETOPAUSES[item.body.name]?.kind === 'intrinsic').forEach((item) => {
+        const measurement = MAGNETOPAUSES[item.body.name];
+        const toAu = (radiusCount) => radiusCount * measurement.referenceRadiusKm / AU_KM * state.magnetopauseMagnification;
+        const guideR = representativeNoseR(measurement);
+        const selected = item.body === state.selected;
+        if (measurement.minimumR !== measurement.maximumR) {
+          drawMagnetopauseWireframe(item, toAu(measurement.minimumR), selected ? 0.32 : 0.14, 0.55, true, width, height);
+          drawMagnetopauseWireframe(item, toAu(measurement.maximumR), selected ? 0.32 : 0.14, 0.55, true, width, height);
+        }
+        drawMagnetopauseWireframe(item, toAu(guideR), selected ? 0.92 : 0.46, selected ? 1.35 : 0.85, false, width, height);
+      });
+    }
+
+    function displayRadius(body, scaleFactor) {
+      const trueRadiusPixels = body.radiusKm / AU_KM * scaleFactor;
+      if (!state.markers) return trueRadiusPixels;
+      return Math.max(body === SUN ? 1.8 : 1.2, Math.min(body === SUN ? 4.8 : 3.6, trueRadiusPixels));
+    }
+
+    function drawInteractionLinks(selectedItem, ledger, width, height) {
+      if (!state.deficits) return;
+      const selectedScreen = project(selectedItem.position, width, height);
+      ledger.get(selectedItem.body).entries.forEach((entry) => {
+        const otherScreen = project(entry.other.position, width, height);
+        const weight = Math.min(1, Math.max(0.14, (Math.log10(entry.omega || 1e-30) + 30) / 26));
+        context.strokeStyle = entry.other.body.color;
+        context.globalAlpha = 0.06 + 0.20 * weight;
+        context.lineWidth = 0.5 + weight;
+        context.setLineDash([3, 4]);
+        context.beginPath();
+        context.moveTo(selectedScreen.x, selectedScreen.y);
+        context.lineTo(otherScreen.x, otherScreen.y);
+        context.stroke();
+      });
+      context.setLineDash([]);
+    }
+
+    function drawPlanet(item, scaleFactor) {
+      const radius = displayRadius(item.body, scaleFactor) * item.screen.perspective;
+      item.radius = radius;
+      context.save();
+      context.fillStyle = item.body.color;
+      context.globalAlpha = 0.96;
+      context.beginPath();
+      context.arc(item.screen.x, item.screen.y, radius, 0, Math.PI * 2);
+      context.fill();
+      context.strokeStyle = 'rgba(255,255,255,.55)';
+      context.lineWidth = 0.6;
+      context.stroke();
+      if (item.body.ring) {
+        context.save();
+        context.translate(item.screen.x, item.screen.y);
+        context.rotate(-0.32);
+        context.scale(1, 0.34);
+        context.strokeStyle = '#dfcd94';
+        context.globalAlpha = 0.8;
+        context.lineWidth = Math.max(1, radius * 0.55);
+        context.beginPath();
+        context.arc(0, 0, radius * 1.9, 0, Math.PI * 2);
+        context.stroke();
+        context.restore();
+      }
+      if (state.labels || item.body === state.selected) {
+        context.fillStyle = '#e3f0f2';
+        context.globalAlpha = item.body === state.selected ? 1 : 0.74;
+        context.font = '11px ui-monospace, monospace';
+        context.fillText(item.body.name, item.screen.x + radius + 4, item.screen.y - radius - 4);
+      }
+      context.restore();
+    }
+
+    function drawSun(item, scaleFactor) {
+      const radius = displayRadius(SUN, scaleFactor);
+      item.radius = radius;
+      const glow = context.createRadialGradient(item.screen.x, item.screen.y, 0, item.screen.x, item.screen.y, radius * 6);
+      glow.addColorStop(0, 'rgba(255,207,112,.72)');
+      glow.addColorStop(1, 'rgba(255,207,112,0)');
+      context.fillStyle = glow;
+      context.beginPath();
+      context.arc(item.screen.x, item.screen.y, radius * 6, 0, Math.PI * 2);
+      context.fill();
+      context.fillStyle = SUN.color;
+      context.beginPath();
+      context.arc(item.screen.x, item.screen.y, radius, 0, Math.PI * 2);
+      context.fill();
+    }
+
+    function magnetopauseReadout(body) {
+      const measurement = MAGNETOPAUSES[body.name];
+      if (!measurement) return 'Magnetopause: not applicable to the Sun; the heliopause is a different boundary.';
+      if (measurement.kind === 'induced') return `<strong>Magnetic boundary: induced</strong><br>${measurement.evidence}. No numerical shell is drawn because no stand-off datum was supplied to this toy.`;
+      const guideR = representativeNoseR(measurement);
+      const physicalNoseAu = guideR * measurement.referenceRadiusKm / AU_KM;
+      const displayNote = state.magnetopauseMagnification === 1 ? 'literal physical scale' : `display-only magnification ${state.magnetopauseMagnification}x`;
+      const guideText = measurement.minimumR === measurement.maximumR ? `observed line: ${guideR} ${measurement.reference}` : `solid midpoint guide: ${guideR} ${measurement.reference}; dotted bounds: ${measurement.range}`;
+      return `<strong>3D dayside magnetopause envelope</strong><br>${guideText}<br>midpoint physical nose: ${physicalNoseAu.toExponential(3)} AU; ${displayNote}<br>${measurement.evidence}. The bow-shaped shell is an illustrative 3D interpolation: only its sunward nose range is observational input.`;
+    }
+
+    function updateReadout(selectedItem, ledger) {
+      const selected = selectedItem.body;
+      const selectedLedger = ledger.get(selected);
+      const blockedFraction = selectedLedger.unionOmega / (4 * Math.PI);
+      const top = selectedLedger.entries[0];
+      const reverseOmega = solidAngle(selected.radiusKm, top.distanceAu);
+      const scaleText = state.markers ? 'Markers enlarge true-size bodies for selection; turn markers off for literal radii.' : 'Literal physical radii are active; at this scale most bodies are sub-pixel.';
+      const magneticText = magnetopauseReadout(selected);
+      const overlapText = selectedLedger.overlapCorrected ? '<br><span class="warn">Overlapping apparent caps: a tangent-plane overlap correction is active.</span>' : '';
+      const orbitalText = selected === SUN ? 'Central reference body.' : `a = ${selected.a.toFixed(6)} AU · period = ${selected.periodDays.toLocaleString()} d${selected.orbitalLabel ? `<br>Orbit source: ${selected.orbitalLabel}` : ''}`;
+      readout.innerHTML = `<strong>${selected.name}: moving local field</strong><br>${orbitalText}<br>all-occluder cap union: omega = ${formatScientific(selectedLedger.unionOmega)} sr / omega/(4 pi) = ${formatScientific(blockedFraction)}<br><br><strong>Strongest ordered pair: ${top.other.body.name} to ${selected.name}</strong><br>omega(${top.other.body.name} at ${selected.name}) = ${formatScientific(top.omega)} sr<br>omega(${selected.name} at ${top.other.body.name}) = ${formatScientific(reverseOmega)} sr<br>distance = ${top.distanceAu.toFixed(6)} AU${overlapText}<br><br>${magneticText}<br><br>${scaleText}<br><span class="warn">The field, occlusion ledger, and 3D shell topology are visual/mechanism calculations only. Planet positions remain observational Keplerian propagation; no convergence result drives their motion.</span>`;
+    }
+
+    function render(now) {
+      requestAnimationFrame(render);
+      const elapsed = Math.min(0.05, (now - previous) / 1000 || 0);
       previous = now;
-      const forces = solveForces();
-      if (!options.paused && elapsed > 0) {
-        bodies.forEach((body, index) => {
-          if (!body.active || body === heldBody) return;
-          body.vx += forces[index].x / bodyMass(body) * elapsed;
-          body.vy += forces[index].y / bodyMass(body) * elapsed;
-          body.x += body.vx * elapsed;
-          body.y += body.vy * elapsed;
-          if (options.trails) {
-            trails[index].push({ x: body.x, y: body.y });
-            if (trails[index].length > 220) trails[index].shift();
-          }
-        });
-        resolveContacts();
-      }
-      paint(now);
-      updateNodes(forces);
+      if (state.running) state.days += elapsed * state.daysPerSecond;
+      const { width, height } = resize();
+      const items = systemAt(state.days);
+      const ledger = interactionLedger(items);
+      const scaleFactor = Math.min(width, height) * 0.44 / 31 * state.zoom;
+      context.clearRect(0, 0, width, height);
+      PLANETS.forEach((planet) => drawOrbit(planet, width, height));
+      items.forEach((item) => drawBodyField(item, ledger, width, height));
+      drawMagnetopauses(items, width, height);
+      const selectedItem = items.find((item) => item.body === state.selected) || items[0];
+      drawInteractionLinks(selectedItem, ledger, width, height);
+      const drawable = items.map((item) => ({ ...item, screen: project(item.position, width, height) })).sort((left, right) => left.screen.depth - right.screen.depth);
+      drawable.filter((item) => item.body !== SUN).forEach((item) => drawPlanet(item, scaleFactor));
+      const sunItem = drawable.find((item) => item.body === SUN);
+      drawSun(sunItem, scaleFactor);
+      canvas._items = drawable;
+      updateReadout(selectedItem, ledger);
     }
 
-    buildLines();
-    createScene();
-    addControls();
-    requestAnimationFrame(frame);
+    function addButton(label, action, pressed = false) {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.textContent = label;
+      button.setAttribute('aria-pressed', String(pressed));
+      button.addEventListener('click', () => action(button));
+      controls.appendChild(button);
+    }
+
+    function buildControls() {
+      addButton('pause', (button) => { state.running = !state.running; button.textContent = state.running ? 'pause' : 'run'; button.setAttribute('aria-pressed', String(!state.running)); });
+      addButton('reset', () => { state.days = 0; state.yaw = -0.7; state.pitch = 0.56; state.zoom = 1; state.selected = PLANETS[2]; });
+      addButton('-', () => { state.zoom = Math.max(0.18, state.zoom / 1.45); });
+      addButton('+', () => { state.zoom = Math.min(2500, state.zoom * 1.45); });
+      addButton('fields', (button) => { state.fields = !state.fields; button.setAttribute('aria-pressed', String(state.fields)); }, true);
+      addButton('occlusion', (button) => { state.deficits = !state.deficits; button.setAttribute('aria-pressed', String(state.deficits)); }, true);
+      addButton('magnetopauses', (button) => { state.magnetopauses = !state.magnetopauses; button.setAttribute('aria-pressed', String(state.magnetopauses)); }, true);
+      addButton('labels', (button) => { state.labels = !state.labels; button.setAttribute('aria-pressed', String(state.labels)); }, true);
+      addButton('markers', (button) => { state.markers = !state.markers; button.setAttribute('aria-pressed', String(state.markers)); }, true);
+      const magnetopauseLabel = document.createElement('label');
+      const magnetopauseScale = document.createElement('input');
+      const magnetopauseOutput = document.createElement('output');
+      magnetopauseScale.type = 'range'; magnetopauseScale.min = '1'; magnetopauseScale.max = '1000'; magnetopauseScale.step = '1'; magnetopauseScale.value = String(state.magnetopauseMagnification); magnetopauseScale.setAttribute('aria-label', 'Magnetopause display magnification');
+      magnetopauseOutput.textContent = 'MP 1x';
+      magnetopauseScale.addEventListener('input', () => { state.magnetopauseMagnification = Number(magnetopauseScale.value); magnetopauseOutput.textContent = `MP ${state.magnetopauseMagnification}x`; });
+      magnetopauseLabel.append('MP size', magnetopauseScale, magnetopauseOutput);
+      controls.appendChild(magnetopauseLabel);
+      const speedLabel = document.createElement('label');
+      const speed = document.createElement('input');
+      const output = document.createElement('output');
+      speed.type = 'range'; speed.min = '1'; speed.max = '720'; speed.step = '1'; speed.value = String(state.daysPerSecond); speed.setAttribute('aria-label', 'Simulation days per second');
+      output.textContent = `${state.daysPerSecond} d/s`;
+      speed.addEventListener('input', () => { state.daysPerSecond = Number(speed.value); output.textContent = `${state.daysPerSecond} d/s`; });
+      speedLabel.append('speed', speed, output);
+      controls.appendChild(speedLabel);
+    }
+
+    function canvasPoint(event) {
+      const bounds = canvas.getBoundingClientRect();
+      return { x: event.clientX - bounds.left, y: event.clientY - bounds.top };
+    }
+
+    canvas.addEventListener('pointerdown', (event) => {
+      dragging = true;
+      dragged = false;
+      lastPointer = canvasPoint(event);
+      canvas.setPointerCapture?.(event.pointerId);
+    });
+    canvas.addEventListener('pointermove', (event) => {
+      if (!dragging) return;
+      const point = canvasPoint(event);
+      const dx = point.x - lastPointer.x;
+      const dy = point.y - lastPointer.y;
+      if (Math.hypot(dx, dy) > 2) dragged = true;
+      state.yaw += dx * 0.008;
+      state.pitch = Math.max(-1.45, Math.min(1.45, state.pitch + dy * 0.008));
+      lastPointer = point;
+    });
+    canvas.addEventListener('pointerup', (event) => {
+      if (!dragged && canvas._items) {
+        const point = canvasPoint(event);
+        const candidate = canvas._items.reduce((closest, item) => {
+          const distance = Math.hypot(point.x - item.screen.x, point.y - item.screen.y);
+          return distance < closest.distance ? { item, distance } : closest;
+        }, { item: null, distance: 14 });
+        if (candidate.item) state.selected = candidate.item.body;
+      }
+      dragging = false;
+    });
+    canvas.addEventListener('pointercancel', () => { dragging = false; });
+    canvas.addEventListener('wheel', (event) => { event.preventDefault(); state.zoom = Math.max(0.18, Math.min(2500, state.zoom * Math.exp(-event.deltaY * 0.0015))); }, { passive: false });
+
+    buildControls();
+    requestAnimationFrame(render);
+    console.info(SOURCE);
+    console.info(MAGNETOPAUSE_SOURCES);
   })();
   </script>
 </body>

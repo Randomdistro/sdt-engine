@@ -27,7 +27,7 @@ The single most important message: **do not act on `report.md` as a verdict on S
 | `Passes: 0` while ~50 rows show ✅ | **Metric disconnect.** `report.passes` is fed *only* by adversarial `check_2`, which re-validates derivation-step `output_equation`s — and those are **prose headings** (no `=`), so they resolve to UNRESOLVED, never PASS. The ~50 real dimensional passes computed in Stage 3 are never counted into the summary. | PIPE-1 / EXPORT-3 / COH-4 — **high**, confirmed |
 | `Derivation steps: 0` | **Pure reporting bug:** `main.cpp` builds the graph but never copies it into the exported result (`result.derivation_steps` left default). At runtime the graph actually holds **102 nodes (10 axioms + 33 defs + 59 steps)** — the report just drops them. | DERIV-2 / EXPORT-2 / BRIDGE-6 — **high**, confirmed (runtime-verified) |
 | Symbol table: ~93 blank "locked" rows + junk (`varepsilon`, `Nepsilon`, `→`, `mc`, `pc`, `ll`, `nablaW`) | Every equation token is auto-registered as a blank `UNRESOLVED` symbol; `clean_latex` strips backslashes and **glues adjacent macros** (`N\varepsilon` → `Nepsilon`); then `lock_all()` flips *everything* to `LOCKED`. | SYMREG-2/5/1 — **high**, confirmed |
-| Core inputs `c, ℏ, α, m_e, m_p` shown undefined; `G, M` present | The `measured` whitelist is **never seeded** into the registry; constants appear only as blank tokens harvested from equations. `G`/`M` enter only via the compiler's own prohibition setup, **not** as inputs in `laws.hpp` (prohibition compliance is OK). | SYMREG-3 / LAWS-10 — **high/info**, confirmed |
+| Core inputs `c, ℏ, α, m_e, m_p` shown undefined; `G, M` present | The `measured` derivation basis is **never seeded** into the registry; constants appear only as blank tokens harvested from equations. `G`/`M` enter only via the compiler's own prohibition setup, **not** as inputs in `laws.hpp` (prohibition compliance is OK). | SYMREG-3 / LAWS-10 — **high/info**, confirmed |
 | State28D table: all 28 aspects `—` | The **exporter** matches raw aspect field-names (`xi_0`, `T_1`, `eps_b`) against parsed symbols by exact equality → 0 matches. The console path uses `resolve_28d_coverage()` (a real symbol→aspect map) and finds **~15/28**. Two divergent code paths; the durable artifact shows the wrong one. | EXPORT-1 / MANIFOLD-1 / COH-7 — **high**, confirmed |
 | `Failures: 1` → `SYMBOL_DRIFT (W)` | **False positive.** The metaphor heuristic substring-matches `"like"` inside `"unlike higher genus"`. The tool's only emitted finding is noise; it also prints no line number in `report.md`. | DRIFT-1 / DRIFT-7 — **high/low**, confirmed |
 
@@ -72,7 +72,7 @@ These do not affect computed numbers but matter for the "zero free parameters / 
 | Severity | Distinct issues | Examples |
 |---|---|---|
 | Critical | 3 | Parser juxtaposition (PARSER-1/2); success contract (PIPELINE-1/COH-1); edgeless/prose-only derivation graph (DERIV-1/COH-2) |
-| High | ~9 | Pass-metric disconnect; 28D exporter; symbol auto-lock & whitelist not seeded; level-gated checks dead; missing-bridge inert; `R_charge`/`P_eff` labeling |
+| High | ~9 | Pass-metric disconnect; 28D exporter; symbol auto-lock & derivation basis not seeded; level-gated checks dead; missing-bridge inert; `R_charge`/`P_eff` labeling |
 | Medium | ~16 | prose-as-equation extraction; `clean_latex` gluing; severity mis-routing; no JSON/MD cell escaping; build story |
 | Low / Info | ~12 | dead headers, stale comments, golden-ratio obfuscation, CLI arg handling |
 
@@ -91,7 +91,7 @@ These do not affect computed numbers but matter for the "zero free parameters / 
 2. **Unify the dimensional metric** — feed the Stage-3 `eq_records_` into `report.passes`/`failures` (or have `check_2` read them), and drive both the equation table and the summary "Passes" from one source. **Kills the "0 passes vs ~50 ✅" contradiction.** *(PIPE-1, EXPORT-3, COH-4)*
 3. **Make the success contract honest** — gate `COMPILED` on positive evidence (verified steps > 0, a minimum pass ratio, honest coverage, no non-fatal failures), add `PARTIAL`/`INCOMPLETE` states and matching exit codes, print a "what COMPILED does and doesn't mean" caveat block, and set `result.derivation_steps` (or route `main.cpp` through `compile()`). **Stops a degenerate run from reading green.** *(COH-1, PIPELINE-1, DERIV-2)*
 4. **Make the derivation graph real** — set each step's `output_equation` to a *parsed* `$...$` equation (not the prose heading), populate `dependencies` (edges) from theorem references / symbol provenance, and promote `validation_status` as evidence accrues. **Activates cycle/trace/reproducibility/bridge checks and the 4 level-gated checks — i.e. the actual adversarial value.** *(DERIV-1/4, COH-2, BRIDGE-1)*
-5. **Restore symbol & kernel integrity** — don't auto-lock `UNRESOLVED` placeholders; seed the `measured` whitelist as defined, dimensioned primitives; run `check_1` before locking; build the kernel after locking (so `locked_primitives` is non-empty); fix the exporter's 28D path to use `resolve_28d_coverage`; and add separators/subscript handling to `clean_latex`. **Cleans the symbol table, restores undefined-symbol detection, and gives the kernel hash real meaning.** *(SYMREG-1/2/3/5, ADV-7, EXPORT-1)*
+5. **Restore symbol & kernel integrity** — don't auto-lock `UNRESOLVED` placeholders; seed the `measured` derivation basis as defined, dimensioned primitives; run `check_1` before locking; build the kernel after locking (so `locked_primitives` is non-empty); fix the exporter's 28D path to use `resolve_28d_coverage`; and add separators/subscript handling to `clean_latex`. **Cleans the symbol table, restores undefined-symbol detection, and gives the kernel hash real meaning.** *(SYMREG-1/2/3/5, ADV-7, EXPORT-1)*
 
 ---
 
@@ -100,9 +100,9 @@ These do not affect computed numbers but matter for the "zero free parameters / 
 A credible green verdict should require all of:
 1. **Every kernel equation parsed and dimensionally resolved** — no silent ⏳ that is actually a parser limitation, and no ❌ on equations that are in fact consistent.
 2. **A connected derivation graph** — each claim traces to one or more axioms/definitions, with no dangling roots and no cycles, and those edges are checked.
-3. **Input discipline** — the permitted-input whitelist is represented as machine-checkable primitives, and every symbol used in a derivation is either whitelisted or itself derived; `G`/`M` are registered as forbidden so any derivational use is caught.
+3. **Dependency discipline** — seed, bridge, seat, measured-boundary and comparison roles are represented explicitly, and every symbol used in a derivation is dependency-traced or itself derived; forbidden body-source aliases are registered so derivational use is caught.
 4. **The adversarial checks actually executed** — not gated out by every step being `PARSED`; the report states which checks ran and what they covered.
-5. **Honest, single-source metrics** — one coverage number, one pass count, console and `report.md` in agreement.
+5. **Single-source metrics** — one coverage number, one pass count, console and `report.md` in agreement.
 
 Until then, the badge should read, e.g.:
 `COMPILED (structural parse only) — no fatal errors; N equations unresolved (parser-limited), M false dimension-fails pending parser fix, derivation graph unverified.`

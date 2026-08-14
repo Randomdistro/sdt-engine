@@ -94,8 +94,8 @@ static constexpr double koppa_Sun = B::koppa_Sun;
 static constexpr double koppa_per_baryon = B::koppa_per_baryon;
 static constexpr double N_bar_Sun_zk2 = koppa_Sun / koppa_per_baryon;
 static constexpr double a_0_SDT = G::a_0_SDT;
-static constexpr double Sigma_sat_Msun_pc2 = G::Sigma_sat_Msun_pc2;
-static constexpr double Sigma_sat_SI = G::Sigma_sat_SI;
+static constexpr double Sigma_sat_Msun_pc2 = G::Sigma_sat_Msun_pc2_DEPRECATED;
+static constexpr double Sigma_sat_SI = G::Sigma_sat_SI_DEPRECATED;
 
 // =============================================================================
 // MAIN

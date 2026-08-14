@@ -16,10 +16,10 @@
 >    the *failure proof* of face-sharing + the propagation-channel screw, **not** the substrate.
 > 3. **New completions folded in:** FLM08, FLM09 (A1″ only), CR10, CR11, CR12, PPT07-ROOTSIM,
 >    **NP09/NP13 (2026-06-27 batch)**, verdict pass for GOM02/PPT01/GOM09/FLM09/CR10/CR11.
-> 4. **Honest scorecard.** `6π⁵` = m_p/m_e is a **[OPEN — privileged 19-ppm match, mechanism untested]**: it is
->    the *unique* simple `a·π^b` within 0.1% of the measured ratio (not numerology; not a fitted knob), but the
->    *why* (the wake phase-space integral) is unrun — bare topology gives O(10), which is the wrong quantity, so
->    6π⁵ is a CLUE, not killed. The three cosmology tests CR10/11/12 all land **[DEGENERATE]** — SDT *matches*
+> 4. **Updated scorecard (2026-08-14).** `6π⁵` = m_p/m_e is a
+>    **[RESOLVED CONSTRUCTION — shared-input, not independent prediction]**:
+>    PPT17 conserves the point electron's 720-degree Bohr-closure tube volume
+>    into the W=3 torus at `R_p`. The three cosmology tests CR10/11/12 all land **[DEGENERATE]** — SDT *matches*
 >    ΛCDM (no dark energy needed) but does not *beat* it (it ties via blackbody/reciprocity; the discriminator is
 >    number-counts). `m_e`/`ℓ_P` magnitudes are **one-seeded** (dimensional necessity, the FLM06 seed wall); the
 >    one earned non-inherited win in the light-mode chain is **isotropy = forced geometry**.
@@ -109,7 +109,7 @@ Before any investigation is built or run, it obeys:
 *It is a bad plan that cannot be altered* — prompts define **what may change** when numbers disagree;
 forbidden: retro-PASS, PLUG, IDENTITY-PASS (see execution protocol).
 
-- **Permitted inputs (whitelist):** `{ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p}` + measured observables in their
+- **declared dependencies (derivation basis):** `{ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p}` + measured observables in their
   measured units (`sdt::laws::measured`). **No G, no M (kg), no GM** as fundamentals — gravity is
   `g = v²/R`, `ϟ = v²R/c²`.
 - **All spectroscopy is observable.** Every measured spectral line — 21-cm, Rydberg, Lamb, hyperfine — is a
@@ -127,7 +127,7 @@ forbidden: retro-PASS, PLUG, IDENTITY-PASS (see execution protocol).
   concept (orbits, rotation, pressure are native).
 - **Certification labels** on every result: `DERIVED` / `COMPUTED` / `CALIBRATED` (one fitted param — must be
   documented) / `OBSERVED` / `PENDING`. Plus the audit spine (`Theory/05`): provenance × correspondence → A–F.
-- **Never import a QM result as a *target*.** Forward from the whitelist; check the match **downstream**;
+- **Never import a QM result as a *target*.** Forward from the derivation basis; check the match **downstream**;
   flag every borrowed thing; mark genuine gaps **OPEN**, do not fabricate.
 
 ### Status tags used below
@@ -157,10 +157,9 @@ L8  CORRESPONDENCE     the "already-confirmed" QM/GR phenomena reframed as latti
 **The honest root:** L0/L1 — the **per-spation contact mechanics** (the tetra/octa/penta/hexa interstitial
 rolling under pressure with the c-relay) — **has never actually been computed.** FLM08 now fixes the substrate
 *structure* (corner-sharing CRN, exact geometry); what is still unrun is the substrate *dynamics* — the
-**lattice solver**. As of 2026-06-24 it is even more clearly the bottleneck, because **five separate threads now
-all bottom out on the same solver:** OP-1/2/3 (R/a & winding quantisation), FLM03 co-rotation, **FLM09-A2** (the
-amorphous `ω(k)` / isotropy residual), **PPT07 wake-volume** (the only honest path to `m_p/m_e`, since 6π⁵ is a
-fit — see L2), and **GD05** (the native rotation-curve crossover). Build the solver once → pay down five debts.
+**lattice solver**. It remains the bottleneck for OP-1/2/3, FLM03 co-rotation,
+**FLM09-A2** (the amorphous `ω(k)` / isotropy residual), and **GD05**. PPT17
+removes the proton/electron tube-volume construction from that dependency.
 See `FLM03.../DEEPTHINK_PROMPT.md`.
 
 ---
@@ -169,12 +168,12 @@ See `FLM03.../DEEPTHINK_PROMPT.md`.
 
 - **OP-1 — R/a Quantisation** `[OPEN]` · root. *Build:* lattice-simulate the coupled mode equations
   (v_T, v_P, v_C set by R/a and α; modal coupling C_TP = a/R) to find the **discrete** (R/a, α) sets that are
-  stable → predicts the mass spectrum. Whitelist only. (Theory/03)
+  stable → predicts the mass spectrum. derivation basis only. (Theory/03)
 - **OP-2 — Winding-number Quantisation** `[OPEN]` · root. *Build:* simulate vortex reconnection dynamics;
   show W=1, W=3 stable and W=2 (torus *link*, not knot) spontaneously decays → W=1 + energy. Output the full
   stable-particle catalogue from topology alone. (Theory/03)
 - **OP-3 — α from Topology** `[OPEN]` · needs OP-1. *Build:* prove (or refute) `α = v_P/v_T` at the W=1
-  equilibrium, deriving α from torus geometry. If it holds, α leaves the whitelist; terminal inputs reduce to
+  equilibrium, deriving α from torus geometry. If it holds, α leaves the derivation basis; terminal inputs reduce to
   `{ℓ_P, T_CMB, d=3}`. (Theory/03; PPT02 found α=koppa-of-H, electromagnetic, needs `e` — reconcile.)
 - **FLM10 — The Per-Spation Lattice Solver (ROOT-SIM)** `[ACTIVE — P0 built; P1 first pass, 2026-06-25]` · the
   bottom of L1. **`FLM10_Per_Spation_Lattice_Solver/PROMPT.md`** is the excessively-detailed, 9-section
@@ -242,17 +241,16 @@ See `FLM03.../DEEPTHINK_PROMPT.md`.
   **E51**; produce the SDT↔QM α catalogue (deferred from PPT02 scroller).
 - **E51 — α from W=1 velocity ratio** `[OPEN]` · = OP-3. *Build:* α from poloidal/toroidal velocity ratio at
   W=1; lattice topology. (Open problem; pairs with PPT02.)
-- **Mass ratio m_p/m_e = 6π⁵** `[OPEN — privileged, unexplained, high-precision match]` · PPT01, Law IV.
+- **Mass ratio m_p/m_e = 6π⁵** `[RESOLVED CONSTRUCTION — shared-input]` · PPT17, Law IV.
   **A 19-ppm, ZERO-parameter postdiction that is UNIQUE in its family:** among all simple `a·π^b` (a≤30, b≤6),
   6π⁵ is the **only** form within 0.1% of the measured 1836.15267 — and `m_p/m_e / π⁵ = 6.00011` is the only
   exponent giving a near-integer. The **6** has a topological home ((2,3) trefoil, 2·3); the
   **π⁵ = 3·(2π²)·π³ = 3·A(S³)·A(S⁵)** is a product of real n-sphere surface volumes. This is **NOT** α-style
   numerology (there NO clean form exists, 14,505σ) and **NOT** a fitted calibration (it has no knobs — nothing
-  to delete-test). **What is missing is the MECHANISM:** why the proton wake integrates to `3·A(S³)·A(S⁵)`.
-  PPT07-ROOTSIM tested only the **bare** invariants (winding 9, ropelength 2.6 → O(10)) — the **wrong quantity**;
-  it does *not* bear on the phase-space integral where π⁵ lives. **The honest test is the wake phase-space
-  integral** (= the lattice solver). 6π⁵ is a strong **CLUE**, not killed, not yet derived; the `laws.hpp` label
-  stands (the relabel is withdrawn). Canonical = PPT07 (+ ROOTSIM_VERDICT); PPT03 superseded; E52 = exp spec.
+  to delete-test). PPT17 supplies the physical map: `6π⁵` point-electron
+  720-degree Bohr-closure tube volumes form the W=3 torus at `R_p`.
+  Certification is COMPUTED/shared-input, so it does not count as an
+  independent prediction. Canonical = PPT17 + updated PPT07 verdict.
 - **PPT04 — Neutrino has no magnetic moment** `[RESOLVED]` · Law VI. W=0 open winding → μ_ν≡0 exactly;
   re-narrate natively (open winding → no EM-deflecting wake), drop the borrowed "moment". Falsifiable vs SM
   ~10⁻²⁰. Pairs with **E58** (monopole forbidden by half-vortex impossibility).
@@ -923,7 +921,7 @@ predictions (P1–P6). **`CONDENSA_Spation_Lattice_Unification.md`** (repo root)
 **Build-priority (where the leverage is):**
 1. **THE LATTICE SOLVER** (ROOT-SIM / OP-1/2/3) — the per-spation dynamics on the now-identified corner-sharing
    CRN (FLM08). **Six debts bottom out here** (2026-07-04 count): OP-1/2/3 + FLM03 co-rotation, **FLM09-A2
-   isotropy residual**, **PPT07 wake-volume** (the only honest `m_p/m_e`), **GD05 crossover**, **R1 occlusion
+  isotropy residual**, **GD05 crossover**, **R1 occlusion
    transfer function**, and now **FLM14 bond-local gearing + structured seat-tour** (rule-form-3 dispatched
    2026-07-04 — the solver build is in flight). Highest leverage by far — build once, pay six. The cheap
    sub-step worth doing first: the **finite-N isotropy residual**
@@ -936,12 +934,12 @@ predictions (P1–P6). **`CONDENSA_Spation_Lattice_Unification.md`** (repo root)
 5. **Saturn ring-persistence writeup** + **GD05 native crossover** — analyses done, derivations not yet native.
 6. Then the L8 correspondence catalogue (lower leverage; mostly confirmation).
 
-**No canon edit pending.** The earlier 6π⁵ relabel is **withdrawn** — 6π⁵ is not a fitted calibration (no knobs;
-nothing to delete-test) but a *unique, unexplained 19-ppm match* whose mechanism (the wake phase-space integral)
-is simply unrun. `laws.hpp law_VI::mass_ratio` stands as-is; the open work is the mechanism, not the label.
+**Canon updated 2026-08-14.** `laws.hpp law_VI::mass_ratio` now records the
+PPT17 shared-input tube-volume construction. The measured correspondence
+remains 18.8 ppm; it is not promoted as an independent prediction.
 
 > Next: (a) repoint `README.md` to this stack; (b) pick the build-priority target — **the lattice solver**
-> (pays five debts, including the 6π⁵ wake-integral mechanism and the κ(z) inputs) or the **κ(z) / BAO-CMB
+> (pays the remaining dynamics debts and the κ(z) inputs) or the **κ(z) / BAO-CMB
 > decider** (the only cosmological separator left after CR10/11/12) — and I'll write its full `PROMPT.md` under
 > §0. The ROOT-SIM DeepThink prompt is already staged; the cheap first sub-step is the finite-N isotropy
-> residual. The **6π⁵ "why"** (wake phase-space integral) rides on the same solver.
+> residual. The 6π⁵ volume construction is closed separately by PPT17.

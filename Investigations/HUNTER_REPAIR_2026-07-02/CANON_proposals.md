@@ -76,7 +76,7 @@ parallel counter so identities are *shown* (not hidden) but *not tallied as pred
     /// ΔE(2S–2P) ≈ (9/4) Φ₂(a₀) ⇒ 1051.8 MHz vs measured 1057.845 MHz (0.57%)
     // provenance_status:     SDT-derived
     // correspondence_status: known-match
-    // input_dependency:      primitive-whitelist + measured radii (zero fitted params)
+    // input_dependency:      primitive-derivation basis + measured radii (zero fitted params)
     // class:                 C
     // circularity_assertion: not tuned to the measured value (emergent)
     // risk_flag:             quadrupole amplitude awaits numerical (lattice) verification

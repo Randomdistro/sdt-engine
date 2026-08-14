@@ -8,7 +8,7 @@
 - Physics class hoped: **CONVERGENCE** — pre-declared: if the derivation is energy–momentum
   bookkeeping with E = hf as an OBSERVED anchor plus Law-V kinematics, it is SR kinematics with
   renamed nouns and will be classed exactly that. No pretence otherwise.
-- CALIBRATED budget: **0** (W and m_e MEASURED-INPUT; h = measured tick→energy conversion, whitelist)
+- CALIBRATED budget: **0** (W and m_e MEASURED-INPUT; h = measured tick→energy conversion, derivation basis)
 - Engine namespaces used: `measured::` (h, m_e, c, lambda_C_e as the OBSERVED comparison column)
 - **Implementation honesty rules (committed):**
   - The Compton solver solves the conservation ledger NUMERICALLY (bisection on the scattered

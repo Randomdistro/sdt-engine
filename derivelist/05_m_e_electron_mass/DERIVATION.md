@@ -1,7 +1,7 @@
 # m_e — electron mass (velocity–resistance form)
 
 > **J. C. Harvey, Melbourne — 2026-07-30.** Measured anchor: 9.1093837015×10⁻³¹ kg
-> (NIST). Whitelist entry: `laws.hpp:147`. Primary records: FLM12
+> (NIST). derivation basis entry: `laws.hpp:147`. Primary records: FLM12
 > (`Investigations/01_Foundations_and_Lattice_Mechanics/FLM12_The_Mass_Mechanism/`)
 > and FLM13 (one-seat collapse). Re-run: `../derivelist_results.txt` §[5].
 

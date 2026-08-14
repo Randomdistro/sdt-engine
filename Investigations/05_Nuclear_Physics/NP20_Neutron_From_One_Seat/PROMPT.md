@@ -49,7 +49,7 @@ Same interface, opposite arrow. This is *why* magnetic carriers are always the l
 
 ## 3. Theoretical Framework (400–600 words)
 
-**Whitelist inputs only:** {ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p} plus measured observables in their measured units. The measured anchors used here are facts, not standard-model story: neutron moment **−1.913 μ_N** (`measured::mu_N`); proton moment **+2.793 μ_N** (`measured::mu_P`); n–p gap **1.293 MeV** (from `measured::m_n − m_p`); free-neutron decay surplus **0.782 MeV**. We import the **numbers as anchors**; we **do NOT** import the standard-model account (no quarks/gluons, no W-boson exchange, no virtual particles as objects, no wavefunctions, no fields-as-primitives). **No G, no M, no GM** — gravity-style quantities, if they ever appear, come through `ϟ = v²R/c²` and `g = v²/R` only.
+**derivation basis inputs only:** {ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p} plus measured observables in their measured units. The measured anchors used here are facts, not standard-model story: neutron moment **−1.913 μ_N** (`measured::mu_N`); proton moment **+2.793 μ_N** (`measured::mu_P`); n–p gap **1.293 MeV** (from `measured::m_n − m_p`); free-neutron decay surplus **0.782 MeV**. We import the **numbers as anchors**; we **do NOT** import the standard-model account (no quarks/gluons, no W-boson exchange, no virtual particles as objects, no wavefunctions, no fields-as-primitives). **No G, no M, no GM** — gravity-style quantities, if they ever appear, come through `ϟ = v²R/c²` and `g = v²/R` only.
 
 **The single geometry (declared, before any number).**
 The seat is the electron pressed onto the proton boundary `R_p`, circulating at the seat speed already demanded by the proton trefoil itself:
@@ -89,7 +89,7 @@ This is **not a free parameter**. It is the framework's existing value: the prot
 ### Phase 2 — Read the MASS off that geometry → 0.782 MeV — ~2–3 h
 - **Goal:** From the frozen geometry alone, compute the form-resistance step → **0.782 MeV**.
 - **Method:**
-  1. Compute the resistance increment Δ_resist of the seated electron at depth `z_seat` (NP19 resistance reframe — resistance ∝ how hard the medium grips the form at that depth). Use only whitelist constants + the frozen geometry.
+  1. Compute the resistance increment Δ_resist of the seated electron at depth `z_seat` (NP19 resistance reframe — resistance ∝ how hard the medium grips the form at that depth). Use only derivation basis constants + the frozen geometry.
   2. Express the released surplus on relaxation in MeV. **Sanity rail (comparison column only, not the mechanism):** 1.293 MeV (`measured::m_n − m_p`) − 0.511 MeV (electron rest budget) = 0.782 MeV. The mechanism must *generate* 0.782, not subtract to it; the subtraction is an OBSERVED-TARGET column.
 - **Pre-committed success metric:** predicted surplus within **±15%** of 0.782 MeV (stretch: ±10%).
 - **Failure trigger:** |pred − 0.782|/0.782 **> 15%**.
@@ -113,7 +113,7 @@ This is **not a free parameter**. It is the framework's existing value: the prot
 - **Goal:** Prove both numbers came from the **identical declared parameters** with **ZERO free knobs**.
 - **Method:**
   1. The tool must compute the **0.782 MeV** path and the **−1.913 μ_N** path from the **same** {`R_p`, `v_seat`, sense} object — a single struct passed to both readers, no second copy, no per-number override.
-  2. Emit a **zero-knob check**: enumerate every constant consumed; each must be either a whitelist invariant, a `measured::` anchor used as OBSERVED-TARGET, or the one frozen geometry. **Any per-number fudge parameter = FAIL.**
+  2. Emit a **zero-knob check**: enumerate every constant consumed; each must be either a derivation basis invariant, a `measured::` anchor used as OBSERVED-TARGET, or the one frozen geometry. **Any per-number fudge parameter = FAIL.**
   3. Print the **dual read-out**: "same defect, two instruments — mass spectrometer reads `Δ_resist`, magnetometer reads `μ_n`."
 - **Pre-committed success metric:** the knob count consumed by P2-but-not-P3 (and vice-versa) is **exactly 0** beyond the shared geometry; both numbers reproduced from the single struct.
 - **Failure trigger:** any parameter touched by only one number → the closure is **FALSE** → downgrade to **two separate COMPUTED results** (honest Class C/D), and say so.
@@ -128,10 +128,10 @@ This is **not a free parameter**. It is the framework's existing value: the prot
 
 Use canonical labels. **Dual verdict required** (prompt completion A–F + physics class).
 
-- ✅ **PASS (Class A: Derived / one-geometry closure):** ONE frozen seat geometry generates **both** 0.782 MeV (±10%) and −1.913 μ_N (correct **negative** sign, ±10%) with the **zero-knob check passing**. No fitted parameters beyond whitelist. *Publish:* "The neutron's two numbers are one defect read by two instruments."
+- ✅ **PASS (Class A: Derived / one-geometry closure):** ONE frozen seat geometry generates **both** 0.782 MeV (±10%) and −1.913 μ_N (correct **negative** sign, ±10%) with the **zero-knob check passing**. No fitted parameters beyond derivation basis. *Publish:* "The neutron's two numbers are one defect read by two instruments."
 - ✅ **QUALIFIED (Class B/C: Convergence):** Both numbers from the shared geometry within **±15%**, sign correct, with 1 documented approximation in the resistance or flux-composition model. *Publish:* honest convergence; name the approximation.
 - ⚠️ **QUALIFIED PENDING (Class D: Computed):** The two numbers reproduced but **NOT** from one geometry — each needed its own parameter. This **falsifies the closure**; report as **two separate COMPUTED results**, not a closure. *Next:* NP19/NP21 to find the missing shared handle.
-- ❌ **FAIL (Class F / KILLED):** Moment sign comes out **positive** → KILL (the central physical picture is wrong). Or a fitted seat speed is required per number with no whitelist justification.
+- ❌ **FAIL (Class F / KILLED):** Moment sign comes out **positive** → KILL (the central physical picture is wrong). Or a fitted seat speed is required per number with no derivation basis justification.
 
 **Hard gates (non-negotiable):** (1) moment sign must be negative; (2) one geometry, zero per-number knobs; (3) μ_N flagged as borrowed unit; (4) no "charge radius," no G/M/GM, no quarks/wavefunctions in the chain. Failures invoke **PIVOT / KILL / OPEN**, **never** retro-PASS.
 

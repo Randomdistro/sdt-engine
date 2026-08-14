@@ -11,7 +11,7 @@
 | L = λ_C → E_S = 1.323×10¹⁸ V/m | **INHERITED** (matches Schwinger) |
 | Bare lattice L = ℓ_P ceiling | 5.71×10⁴⁴× higher — **[KILLED]** as Schwinger |
 
-**Class:** [INHERITED] consistency win — all-whitelist (m_e, c, ℏ, e); not a new derivation of E_S.
+**Class:** [INHERITED] consistency win — all-derivation basis (m_e, c, ℏ, e); not a new derivation of E_S.
 
 ## Arm A — A2 (dispersion ω(k))
 

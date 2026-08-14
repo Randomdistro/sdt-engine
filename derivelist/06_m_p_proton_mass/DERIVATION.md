@@ -1,7 +1,7 @@
 # m_p — proton mass (occlusion formula + boundary route)
 
 > **J. C. Harvey, Melbourne — 2026-07-30.** Measured anchor: 1.67262192369×10⁻²⁷ kg
-> (NIST). Whitelist entry: `laws.hpp:148`. Primary records: Law IV
+> (NIST). derivation basis entry: `laws.hpp:148`. Primary records: Law IV
 > (`laws.hpp:434-482`), B18/B24/B26 (benchmarks), PPT07 ROOT-SIM
 > (`Investigations/02_Particle_Physics_and_Topology/PPT07_Proton_Electron_Mass_Ratio/ROOTSIM_VERDICT.md`).
 > Re-run: `../derivelist_results.txt` §[6].
@@ -33,18 +33,17 @@ no charge substance) returns the mass:
 m_p = 4ℏ/(R_p·c) = 1.6722951935e-27 kg   (dev −0.0195%)   [DERIVED from measured R_p]
 ```
 
-**3. The topological ratio (B26; PPT07 ROOT-SIM corrected verdict).**
+**3. The tube-volume packing ratio (B26; PPT17 closure).**
 
 ```
 m_p = 6π⁵·m_e = 1.6725904374e-27 kg      (dev −0.0019%, 19 ppm)
 ```
 
-Status on the record: **OPEN — privileged, unexplained, high-precision match.**
-6π⁵ is the ONLY simple a·πᵇ form within 0.1% of 1836.15267 (a≤30, b≤6), zero
-parameters, nothing to delete-test. The bare topological invariants (winding
-W²=9, ropelength 2.6) are O(10) — they do not produce it; the π⁵ lives in the
-wake phase-space integral (angular integrations), never yet computed. Factor
-homes on the table: 6 = 2·3 (trefoil), π⁵ = 3·A(S³)·A(S⁵).
+Status on the record: **RESOLVED CONSTRUCTION — shared-input, not an independent
+prediction.** PPT17 conserves the point electron's finite-width 720-degree
+Bohr-seat tube volume into a W=3 ring torus seated at `R_p`, using `6π⁵` as
+the packing count. The electron tube width cancels from the volume ratio,
+although it remains necessary for the absolute minor radius.
 
 **4. The ℏ-free pure-ratio statement (FLM13 P3).**
 
@@ -59,12 +58,14 @@ m_p/m_e = (4/α)·(r_e/R_p) = 1835.79      (dev −0.0195% — the same single r
   routes 2 and 4 share it (one consistency fact, not two — FLM13 record).
 - The absolute magnitude shares the one mass/action seat with ℏ and m_e; the
   earned content here is the ratio structure and the boundary closure.
-- The 6π⁵ mechanism (wake integral run blind) is the named open problem; if a
-  different clean number falls out, that becomes the prediction.
+- The 6π⁵ map is construction-resolved. Because the packing count is a shared
+  input, this route certifies geometry and volume conservation rather than
+  independently predicting the measured ratio.
 
 ## Status
 
 **Line drawn — occlusion role exact, boundary route earned at 0.02%.** m_p is
 not an independent mystery: it is the W=3 exclusion cost, pinned to the
 measured boundary radius through W+1 and to m_e through the (4/α)(r_e/R_p)
-ratio. Open remainder: the 6π⁵ wake integral and the seat magnitude.
+ratio. The 6π⁵ tube-volume map is resolved as a shared-input construction; the
+absolute seat magnitude remains outside that certification.

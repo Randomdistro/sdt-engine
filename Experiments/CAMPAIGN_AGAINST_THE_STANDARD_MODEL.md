@@ -67,13 +67,13 @@ This is the siege engine. The SM takes ~26 numbers from the bench and cannot say
 Every one SDT derives from structure is a place the SM is blind. **Fine-tuning builds this front** — fit
 the structural relation, certify it, validate out-of-sample.
 
-**The whitelist itself is NOT claimed derived — say so plainly (added 2026-07-23 after an external
+**The derivation basis itself is NOT claimed derived — say so plainly (added 2026-07-23 after an external
 audit flagged exactly this).** SDT's inputs are the 8 measured anchors {ℓ_P, c, ℏ, k_B, T_CMB, α,
-m_e, m_p}. **No member of the whitelist has a validated derivation from deeper structure.** That
+m_e, m_p}. **No member of the derivation basis has a validated derivation from deeper structure.** That
 statement rests on direct grounds only: no direct-run derivation exists in the repo, and anything
 in that class authored by the agent waves is void either way — **including the FLM06 "Seed
 Theorem" impossibility claim, which is agent-era and equally unconfirmed until re-run directly.**
-Neither "derived" nor "underivable" is banked for any whitelist member; α and m_p/m_e are OPEN
+Neither "derived" nor "underivable" is banked for any derivation basis member; α and m_p/m_e are OPEN
 targets in the table below, not results. The honest banner is therefore **zero FITTED parameters
 downstream of 8 measured inputs** — never "zero inputs." The siege is 26 fitted → 0 fitted, not
 26 → 0 inputs; any prose reading otherwise (including the repo's own "zero-free-parameter"
@@ -84,19 +84,20 @@ where it could read as more.
 
 | quantity | SM | SDT | status (FIRED & delete-tested 2026-07-23) |
 |---|---|---|---|
-| **proton boundary radius** | measured (puzzle: e vs µ) | R_p = 4ℏ/m_pc = **0.84124 fm** (0.02%) | **STRONGEST — delete-test PASS** (whitelist ℏ,m_p,c + W=3 topology; measured R_p NOT used). One owed link: the **W+1 rule is conjectural** (engine's own risk_flag). Banks the moment W+1 is proven from trefoil geometry. |
+| **proton boundary radius** | measured (puzzle: e vs µ) | R_p = 4ℏ/m_pc = **0.84124 fm** (0.02%) | **STRONGEST — delete-test PASS** (derivation basis ℏ,m_p,c + W=3 topology; measured R_p NOT used). One owed link: the **W+1 rule is conjectural** (engine's own risk_flag). Banks the moment W+1 is proven from trefoil geometry. |
 | neutron Q_β = 0.782 MeV | fitted | "one 1.83c seat" | **FLAGGED** — 0.782 as written *is* the measured (m_n−m_p−m_e)c². Counts only if SCT derives the 1.293 MeV n−p gap natively (ℏ,c,1.83c) without inputting the masses. Read SCT before claiming — else IDENTITY-PASS. |
 | α-decay rates (Geiger–Nuttall) | fitted per-nuclide | zero-fit R²=0.9997 | **FLAGGED** — the correlation is standard (1911). Native claim = the *coefficients* are derived. Needs QM03 source-read; the R² alone is not the kill. |
 | Chandrasekhar 1.44 M☉, TOV ~2.2 | e-degeneracy / EoS | occlusion saturation | CONVERGENT (same number) |
 | nuclear magnetic moments, p–n split | quark models | vortex/trefoil geometry | CONVERGENT (spec-linked, unrun) |
-| **m_p/m_e = 1836.15** | unexplained input | **6π⁵ = 1836.118 (18.8 ppm)** — zero-param, no fitted knob | **OPEN TARGET** — a true zero-parameter coincidence, but no mechanism ties 6π⁵ to the W=3/W=1 vortex-energy ratio. Fine-tune: is the 19 ppm the next movement-budget term? |
+| **m_p/m_e = 1836.15** | unexplained input | **6π⁵ = 1836.118 (18.8 ppm)** — point-electron Bohr-closure tube packed into W=3 torus at `R_p` | **RESOLVED CONSTRUCTION (PPT17)** — shared-input geometric volume assignment, not independent prediction |
 | **α = 1/137.036** | unexplained input | koppa at H ground (k=1/α=137) | **OPEN TARGET** — a *relation* (α ≡ koppa at H), not yet a derivation of the value. (Correction: 6π⁵ belongs to m_p/m_e, not α.) |
 | electron g−2, Lamb shift | QED loops | lattice corrections | **OPEN TARGET** (do NOT relabel derived — graveyard) |
 | triton contraction (isospin term) | fitted symmetry energy | interleave-pressure compaction | CONVERGENT mechanism; ~11 mfm/triton geometry derivation **owed** |
 
 **Fired-ledger finding (2026-07-23):** examined at the delete-test, the "banked" rows are really
 **strong candidates each owing one link** — the proton radius owes *W+1-from-geometry*; Q_β owes the
-*native n−p derivation*; Geiger–Nuttall owes the *derived coefficients*; m_p/m_e owes a *mechanism*.
+*native n−p derivation*; Geiger–Nuttall owes the *derived coefficients*;
+m_p/m_e is construction-resolved by PPT17.
 The campaign converges on a single load-bearing desk-target: **prove the W+1 rule from the trefoil
 geometry.** That one derivation turns the proton radius (already 0.02%, delete-test clean) from a
 candidate into the first banked SM kill prosecutable without a telescope.

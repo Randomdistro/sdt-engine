@@ -35,7 +35,7 @@
 
 inline constexpr double PI = std::numbers::pi;
 
-// ---- whitelist primitives from the engine (single source of truth) ---------
+// ---- derivation basis primitives from the engine (single source of truth) ---------
 using sdt::laws::measured::c;       // [m/s]  relay signal speed (v_relay <= c)
 using sdt::laws::measured::hbar;    // [J s]  reduced Planck
 using sdt::laws::measured::h;       // [J s]  Planck (= 2*pi*hbar)
@@ -95,7 +95,7 @@ int main() {
     std::printf(" Author: James Christopher Tyndall, Melbourne\n");
     std::printf("============================================================\n\n");
 
-    std::printf("Engine whitelist primitives (laws.hpp::measured):\n");
+    std::printf("Engine derivation basis primitives (laws.hpp::measured):\n");
     std::printf("  c    = %.9g m/s   hbar = %.6g J s   h = %.6g J s\n", c, hbar, h);
     std::printf("  k_B  = %.6g J/K   l_P  = %.6g m     t_P = %.6g s\n", k_B, l_P, t_P);
     std::printf("  check: c = l_P/t_P = %.6g m/s (relay invariant, FLM02)\n\n", l_P / t_P);

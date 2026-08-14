@@ -39,6 +39,15 @@ underdetermined classes only — see `OUTSTANDING_FAILED_AFTER_07-22_CORRECTIONS
 Note: geometric **NSEQ13** (TT flip-axis Shared/matching) remains **EXCLUDED** above;
 Iter-42 suite ID **NSEQ13** = occupation/MeV map (**UNDERDETERMINED**).
 
+## Iteration 44 reopen-condition push
+
+| Relationship | Wrong / incomplete reading | Corrected reading | Status |
+|---|---|---|---|
+| SNO 1/3 leftover | Scalar destruction | Ergodic 3-pitch appearance: Pee=1/3, NC=1 (equal occupation assumed) | NU02 CONDITIONAL |
+| Bulk n from packing | `1/η` is constitutive `n(ω)` | Numeric MATCH vs water; dispersion and mechanism OPEN | CK02 |
+| NSEQ gap heights | Law-III `F×r` at {R_p, r_e} | ORDER (~0.08–1.7 MeV vs 4.24 MeV); not MATCH | NSEQ14 UNDERDETERMINED |
+| Cassini RSR “present” | 93 SCE1 RSR labels | Labels only; `.1A1` binaries = 0 | OM04 ABSENT |
+
 ## External import still missing
 
 `SDT_Audit_Iterations_07-22_Corrected_Mathematical_Proofs.md` was not found under

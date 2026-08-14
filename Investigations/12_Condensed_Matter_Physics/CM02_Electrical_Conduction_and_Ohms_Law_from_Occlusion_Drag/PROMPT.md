@@ -51,7 +51,7 @@ A conduction electron is a **drifting W=1 vortex**. Occlusion events (Law III) r
 | `ℓ_mfp` | Mean relay path between occlusions | DERIVED |
 | `σ_occl` | Effective occlusion cross-section | DERIVED or CALIBRATED(1) |
 | `n` | Carrier density | OBSERVED for Cu |
-| `m_e` | Whitelist reorganisation mass | measured::m_e |
+| `m_e` | derivation basis reorganisation mass | measured::m_e |
 | `R_K` | h/e² | OBSERVED metrology |
 
 **Targets:** Cu σ ≈ 5.96×10⁷ S/m; ρ(300K) linear above θ_D ≈ 170 K for Cu.

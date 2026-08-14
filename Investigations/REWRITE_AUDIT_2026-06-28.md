@@ -119,7 +119,8 @@ of which **~10 are Tier-1** (a wrong claim, not just chrome).
 
 - **01:** FLM10 (gold standard — blind protocol, "negative is a PASS"), FLM06 (seed theorem), FLM08
   (over-determined geometry), FLM09 (disciplined claim-classing), FLM03/04 (honest self-downgrade).
-- **02:** PPT02-INVESTIGATION, ROOTSIM_VERDICT (honest 6π⁵ = OPEN).
+- **02:** PPT02-INVESTIGATION, ROOTSIM_VERDICT (historical status);
+  PPT17 supersedes with the resolved shared-input 6π⁵ volume construction.
 - **03/04:** EMC02, EMC04, APS05 (the highest-risk unit handled right — α = measured anchor).
 - **05:** NP01, NP03 (best-designed: delete-test + null controls), NP05 (honest kill), NP09, NP13,
   NP17, NP04A.

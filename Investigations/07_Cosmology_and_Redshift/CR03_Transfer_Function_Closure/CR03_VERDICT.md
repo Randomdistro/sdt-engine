@@ -5,7 +5,7 @@
 
 ## Dual verdict
 
-**Prompt completion: B — PARTIAL per the prompt's own §4** (f expressed in whitelist + R_CMB, with R_CMB's X-status isolated as the single bottleneck).
+**Prompt completion: B — PARTIAL per the prompt's own §4** (f expressed in derivation basis + R_CMB, with R_CMB's X-status isolated as the single bottleneck).
 **Physics class: OPEN** (blocked on one class-X scale; the algebra itself is verified and earned).
 
 ## The numbers
@@ -23,10 +23,10 @@
 ## What this settles
 
 1. **The prompt's §5 falsification test PASSES**: the W+1 conjecture, the Coulomb identity and
-   the hydrogen calibration are mutually consistent to 0.04%. P_eff is *entirely* whitelist —
+   the hydrogen calibration are mutually consistent to 0.04%. P_eff is *entirely* derivation basis —
    `P_eff = m_p²m_e²c⁵/(4παℏ³)` — no measured radii needed. This confirms the electropause
-   result (P_eff provenance ≠ CALIBRATED; it is a closed-form whitelist expression).
-2. **f = P_eff·ℓ_P/(R_CMB·a_rad·T⁴): every factor is whitelist except R_CMB.** The scan
+   result (P_eff provenance ≠ CALIBRATED; it is a closed-form derivation basis expression).
+2. **f = P_eff·ℓ_P/(R_CMB·a_rad·T⁴): every factor is derivation basis except R_CMB.** The scan
    found no structural value of f (0/10 at the 1% gate, list closed before the run) — f is
    not α⁸-like numerology; it is an honest ratio pinned to one cosmological length.
 3. **All three closure routes fail for a stated reason each**: A re-expresses X through
@@ -36,7 +36,7 @@
 
 ## §D — Seven questions (on the OPEN verdict)
 
-1. **Why blocked?** f inherits exactly one non-whitelist factor, R_CMB (class X), with unit
+1. **Why blocked?** f inherits exactly one non-derivation basis factor, R_CMB (class X), with unit
    log-sensitivity.
 2. **Recoverable?** Only by an independent derivation of R_CMB (or equivalently H₀, or
    t_coupled) — nothing else in the expression is open.
@@ -55,7 +55,7 @@
 **Recovery: PARTIAL** — bottleneck isolated to a single named quantity with a named native
 route (Clearing-dynamics t_coupled); route unbuilt.
 
-**earned:** P_eff whitelist closure verified to machine precision (and the W+1/Coulomb/hydrogen consistency triangle at 0.04%); f's non-numerology established (0/10 closed-list scan); Route B circularity exposed in the engine's own header.
+**earned:** P_eff derivation basis closure verified to machine precision (and the W+1/Coulomb/hydrogen consistency triangle at 0.04%); f's non-numerology established (0/10 closed-list scan); Route B circularity exposed in the engine's own header.
 **owed:** independent t_coupled (Clearing dynamics); until then f stays E (engine label correct as-is — no laws.hpp change proposed).
 
 > **Prompt completion B (PARTIAL per prompt §4) · Physics class OPEN (single X-scale bottleneck) · Recovery PARTIAL · Cascade root: t_coupled circularity in cosmology.hpp (shared with CR08).**

@@ -8,7 +8,7 @@
 ## Objective
 
 Determine whether a native SDT action invariant `A_s` can be assembled from the
-measured whitelist **without importing** `ℏ` / `h`, such that the Compton mass
+measured derivation basis **without importing** `ℏ` / `h`, such that the Compton mass
 link `λ_C = A_s / (m_e c)` recovers NIST `λ_C` within pre-registered tolerance.
 
 ## Claim under test

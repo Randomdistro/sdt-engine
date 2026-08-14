@@ -23,8 +23,8 @@
 
 ## §0 Anti-creep protocol
 
-This investigation obeys the §0 whitelist:
-- **Permitted inputs:** `{ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p}` + measured observables in measured units
+This investigation obeys the §0 derivation basis:
+- **declared dependencies:** `{ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p}` + measured observables in measured units
 - **Prohibited as inputs:** G, M (kg), GM, wavefunctions, fields-as-primitives, quarks/gluons, dark matter/energy
 - **Certification:** every result carries a provenance block
 
@@ -39,11 +39,11 @@ P_eff = 4 k_e e² / (π R_p² r_e²)
 f = P_eff / P_conv
 ```
 
-The hydrogen calibration sets the *magnitude* of every force in the universe. If `f` could be expressed entirely in whitelist primitives, it would be promoted from E to C — the single most valuable provenance upgrade available.
+The hydrogen calibration sets the *magnitude* of every force in the universe. If `f` could be expressed entirely in derivation basis primitives, it would be promoted from E to C — the single most valuable provenance upgrade available.
 
 ## 2. The algebraic route
 
-### Step 1: Express P_eff in whitelist terms
+### Step 1: Express P_eff in derivation basis terms
 
 From the Coulomb identity (α ≡ k_e e²/ℏc):
 ```
@@ -69,7 +69,7 @@ P_eff = 4 αℏc / (π R_p² r_e²)
      = m_p² m_e² c⁵ / (4π α ℏ³)
 ```
 
-**Result:** P_eff is *entirely* in whitelist primitives `{m_p, m_e, c, α, ℏ}`. No measured radii needed.
+**Result:** P_eff is *entirely* in derivation basis primitives `{m_p, m_e, c, α, ℏ}`. No measured radii needed.
 
 ### Step 2: Express f = P_eff / P_conv
 
@@ -85,17 +85,17 @@ f = [m_p² m_e² c⁵ / (4π α ℏ³)] / [(R_CMB/ℓ_P) × a_rad T_CMB⁴]
 
 ### Step 3: What blocks closure?
 
-Two quantities are not yet whitelist-derived:
+Two quantities are not yet derivation basis-derived:
 1. **R_CMB** — currently class X (observed cosmological scale)
 2. **a_rad** — the Stefan radiation constant = `2π⁵k_B⁴/(15h³c²)`
 
-`a_rad` *is* expressible in whitelist terms `{k_B, ℏ, c}`. So the entire expression reduces to:
+`a_rad` *is* expressible in derivation basis terms `{k_B, ℏ, c}`. So the entire expression reduces to:
 
 ```
 f = m_p² m_e² c⁵ ℓ_P × 15 h³ c² / (4π α ℏ³ R_CMB × 2π⁵ k_B⁴ T_CMB⁴)
 ```
 
-**Every factor except R_CMB is whitelist.** If R_CMB can be derived (from BAO θ_s/r_s closure, or from SDT strain interpretation), then f is fully closed and graduates from E to C.
+**Every factor except R_CMB is derivation basis.** If R_CMB can be derived (from BAO θ_s/r_s closure, or from SDT strain interpretation), then f is fully closed and graduates from E to C.
 
 ## 3. The investigation stages
 
@@ -120,11 +120,11 @@ f = m_p² m_e² c⁵ ℓ_P × 15 h³ c² / (4π α ℏ³ R_CMB × 2π⁵ k_B⁴ 
 
 ## 4. Acceptance criteria
 
-**PASS:** `f` can be expressed in whitelist primitives only, with R_CMB either derived or demonstrated to be a structural consequence of the framework.
+**PASS:** `f` can be expressed in derivation basis primitives only, with R_CMB either derived or demonstrated to be a structural consequence of the framework.
 
-**PARTIAL:** `f` expressed in whitelist + R_CMB, with R_CMB's X-status clearly isolated as the single remaining bottleneck.
+**PARTIAL:** `f` expressed in derivation basis + R_CMB, with R_CMB's X-status clearly isolated as the single remaining bottleneck.
 
-**FAIL:** The algebra doesn't simplify, or introduces new non-whitelist quantities.
+**FAIL:** The algebra doesn't simplify, or introduces new non-derivation basis quantities.
 
 ## 5. Falsification
 
@@ -137,7 +137,7 @@ If the algebraic simplification produces a value that **disagrees** with the exi
 ```
 // provenance_status:     SDT-derived (target)
 // correspondence_status: internal-only → known-match (if f matches)
-// input_dependency:      primitive-whitelist + R_CMB (class X)
+// input_dependency:      primitive-derivation basis + R_CMB (class X)
 // class:                 C (target, contingent on R_CMB closure)
 // risk_flag:             R_CMB remains the single load-bearing external scale
 ```

@@ -14,7 +14,7 @@ transponder classification, whereas the PDS label identifies the transponder
 logical record as type 30.  This discrepancy must be resolved before any
 observable is decoded.
 
-## Permitted inputs
+## declared dependencies
 
 1. Existing frozen TDF, detached label, PDS archive readme, and cumulative
    index under `Datasets/solar_propagation_2026-08/raw/`.

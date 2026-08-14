@@ -1,7 +1,7 @@
 # c — speed of light (relay speed)
 
 > **J. C. Harvey, Melbourne — 2026-07-30.** Measured anchor: 299 792 458 m/s (SI exact).
-> Whitelist entry: `laws.hpp:110`. Re-run: `../derivelist_results.txt` §[1].
+> derivation basis entry: `laws.hpp:110`. Re-run: `../derivelist_results.txt` §[1].
 
 ## Role in the framework
 
@@ -40,7 +40,7 @@ speed closes every hydrogen line, every orbit, and every emission gear
 - Route 1 is an extraction from data (two metrologies of one ladder), not a
   derivation from axioms. No route derives the SI numeral — none can, since the
   numeral is definitional.
-- The FLM13 reduced-whitelist line "c ← Mercury precession" is superseded by
+- The FLM13 reduced-derivation basis line "c ← Mercury precession" is superseded by
   this record: the closure survives as consistency, the provenance moves to the
   spectrum.
 

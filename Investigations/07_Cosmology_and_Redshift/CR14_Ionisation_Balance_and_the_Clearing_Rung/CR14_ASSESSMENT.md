@@ -71,7 +71,7 @@ may not be cited as evidence for pressurised space.** The pressure law `P_N = N�
 enters the calculation at all; deleting `P₀` leaves every number in the table unchanged.
 
 **R4 stands unconditionally.** The Saha phase-space factor counts states in ℏ³ cells —
-imported statistical mechanics. Its inputs (`m_e`, `k_B`, `ℏ`, `Ry_eV`) are whitelist-legal;
+imported statistical mechanics. Its inputs (`m_e`, `k_B`, `ℏ`, `Ry_eV`) are derivation basis-legal;
 its derivation is not SDT's. Nothing here is labelled DERIVED. Running the identical solver on
 both density laws is legal precisely because the instrument's provenance then cancels: only the
 density hypothesis is under test.

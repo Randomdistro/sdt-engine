@@ -30,7 +30,7 @@
 #include <cstdio>
 #include <cmath>
 #include <sdt/laws.hpp>
-#include "cq12_element_data.hpp"
+#include "aps01_element_data.hpp"
 
 // Bridge aliases into canonical sdt::laws::measured
 namespace K {
@@ -54,7 +54,7 @@ double v_circ(double v) {
 
 // ═══════════════════════════════════════════════════════
 //  SEQUENTIAL IONISATION DATA — Z=1 to Z=118
-//  Sourced from cq12_element_data.hpp (single truth).
+//  Sourced from aps01_element_data.hpp (single truth).
 //  Each IE is the cost to peel the NEXT electron from
 //  the CURRENT ionic state.
 // ═══════════════════════════════════════════════════════

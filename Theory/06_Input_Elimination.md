@@ -1,24 +1,24 @@
 # 06 — Input Elimination: Standing on Shoulders, Then Flying Away
 
 > **Author:** James Christopher Harvey, Melbourne. 2026-06-17.
-> **Purpose:** retire the permitted-inputs whitelist `{ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p}`
-> one entry at a time — showing what each is *derived from* inside SDT, and what minimal,
-> **acyclic** seed set actually remains. This discharges the "input/derivation circularity"
+> **Purpose:** record the dependency role of `{ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p}`
+> one entry at a time — showing what each is derived from, measures, or converts inside SDT,
+> and what minimal **acyclic** seed/seat/boundary structure remains. This discharges the "input/derivation circularity"
 > tension named in `Audits/PARADOX_CENSUS.md` §8.2(3).
 
 ---
 
-## The principle (why the whitelist is not cheating, and why it must still go)
+## The principle: status belongs to each dependency
 
-The whitelist is **not a list of fabrications.** It is three to four centuries of measurement —
-Planck's quantum of action, Maxwell–Einstein's invariant speed, Boltzmann's energy–temperature
-bridge, Sommerfeld's fine structure, the spectroscopic masses. Standing on those is not a sin;
-it is **scientific custom**. Newton stood on Kepler and Galileo. Einstein stood on Lorentz,
-Riemann, and Mach. Quantum mechanics stood on Balmer and Rydberg. *Every* theory bootstraps from
-measured numbers and only later derives some of them from its own structure.
+No quantity is admitted merely by appearing in a list. Each dependency has a distinct status:
+Planck's quantum of action participates in the mass/action seat,
+Maxwell–Einstein's invariant speed and Boltzmann's constant are unit bridges,
+the fine-structure rung is extracted spectroscopically, particle masses occupy
+the seat, and the present CMB temperature is a measured mechanical boundary
+state. A lookup value gains no scientific status merely by being listed.
 
 SDT's claim is the second half: having stood on the giants, it **flies away** — it turns inputs
-into outputs until only an irreducible seed remains. The honest goal is therefore not "zero
+into outputs until only an irreducible seed remains. The goal is therefore not "zero
 numbers" (the seed theorem, CQ42, forbids that — at least one dimensional seed is unavoidable).
 The goal is an **acyclic dependency graph**: a tiny set of declared seeds, with everything else
 *derived* and nothing both assumed and derived. This document is that graph.
@@ -34,21 +34,22 @@ Labels used: **[UNIT]** convention, not a parameter · **[DERIVED]** from SDT st
 ### c — the relay speed — **[UNIT]**
 c is the rate the lattice relays one spation per tick: a conversion between the lattice's
 space-step and time-step. Set c = 1 and it vanishes as a *number*; it is a choice of units, not
-a free parameter. SDT flies away from "universal constant" to **local relay rate**: c is local,
-c_local = c(1−z), and the absolute ceiling c_∞ is a derived quantity, not an input.
+a free parameter. SDT flies away from "universal constant" to **relay rate**: local propagation
+remains `c`, while the far-frame transport relation is `c_far=c_inf(1-z)^2`.
 *Stood on:* Maxwell, Einstein. *Eliminated as a parameter.*
 
 ### k_B — Boltzmann's constant — **[UNIT]**
 k_B only converts temperature to energy. In SDT temperature *is* lattice agitation energy
 directly; set k_B = 1 and it disappears. *Stood on:* Boltzmann. *Eliminated as a parameter.*
 
-### m_p — the proton mass — **[OPEN]**
-[CORRECTED 2026-07-03: previously classed [DERIVED] — 6π⁵ is a privileged, unexplained 19-ppm
-match (ROOTSIM verdict), not a derivation.]
-The proton/electron mass ratio matches the trefoil topological signature **6π⁵ = 1836.118**
-(measured 1836.153, 0.002%). Until a mechanism produces 6π⁵ from the (2,3) trefoil, m_p stays
-an input. *Stood on:* the measured ratio. (Honest: the 0.002% residual and the
-1.830c-vs-6π⁵ "shared digits" caveat stand — see `Papers/Depth_Closure_Theorem` §9.)
+### m_p — the proton mass — **[RESOLVED CONSTRUCTION]**
+[CLOSED 2026-08-14: PPT17 identifies 6π⁵ as the shared-input packing count that
+conserves the point electron's 720-degree Bohr-seat tube volume into the W=3
+torus seated at R_p.]
+The proton/electron mass ratio uses the trefoil packing signature **6π⁵ = 1836.118**
+(measured 1836.153, 0.002%). This closes the geometric volume assignment but is
+not an independent prediction: the construction consumes its packing count.
+*Stood on:* the 6π⁵ packing assignment and the measured electron mass seat.
 
 ### α — the fine-structure constant — **[DERIVED, PARTIAL]**
 α is koppa at the hydrogen ground state: the depth-ladder rung k_H = 1/α = 137, with
@@ -69,9 +70,9 @@ not survive as a *separate* seed; it collapses into the single length–action s
 ### ℓ_P — the spation closure length — **[SEED, PARTIAL elimination]**
 The size of the spation. In koppa form ℓ_P = √(ϟ·ƛ) — the geometric mean of a koppa and a wake —
 which is **mass-independent** and reduces the seed from Planck's two borrowed constants (ℏ, G) to
-*one measured SDT length*. **Candidate full elimination:** deriving the spation size from
+*one SDT length seed*. **Candidate full elimination:** deriving the spation size from
 recombination-epoch hydrogen geometry (the ~3000 K decoupling surface), the route the redshift
-investigations are pursuing. *Honest status [PARTIAL]:* CQ42's clean construction fell short (the
+investigations are pursuing. *Status [PARTIAL]:* CQ42's clean construction fell short (the
 count N reached only ~z_rec≈10³ against a target ~6×10⁶¹); the recombination-geometry seed is the
 live path, not a closed result. **ℓ_P (≡ the length–action seed) is therefore the first of the two
 irreducible seeds** until that route closes. *Stood on:* Planck.
@@ -104,21 +105,22 @@ seed**, expressible as m_e or equivalently e, with the other derivable through t
                            ├─► (spation size, scales, depths)
                            │
    ② mass–charge seed     ─┬─► e, charge quantisation (CQ37)
-      (m_e ≡ e)            ├─► m_p = m_e · 6π⁵           [OPEN — unexplained match]
+      (m_e ≡ e)            ├─► m_p = m_e · 6π⁵           [RESOLVED, shared-input]
                            └─► (Law IV masses)
                                                          α = 1/k_H rung  [derived, 137 PARTIAL]
    BOUNDARY:  T_CMB  (measured epoch state; candidate Law I output)
 ```
 
-**Tally: 8 whitelist entries → 2 irreducible seeds + 1 boundary**, with two pure unit
-conventions (c, k_B) removed from the input column. [CORRECTED 2026-07-03: previously counted
-"three genuine derivations (m_p, α, charge quantisation)" — m_p is [OPEN], not derived: 6π⁵ is
-a privileged, unexplained 19-ppm match (ROOTSIM verdict), not a derivation; α remains [PARTIAL].]
+**Ledger result: one dimensional seed, one mass/action seat, one measured
+mechanical boundary state, and unit bridges**, with quantity-specific derived
+relations. [UPDATED 2026-08-14:
+m_p/m_e is construction-resolved through the PPT17 tube-volume packing map,
+with shared-input rather than independent-prediction provenance; α remains [PARTIAL].]
 Compare the Standard Model's ~19–26 fitted parameters. No number is both assumed
 and derived **except** the flagged 137-origin [PARTIAL], which is the single remaining cycle to
 break.
 
-## Honest residuals (the unpaid corners)
+## Residuals (the unpaid corners)
 
 1. **α's integer 137** must be derived from winding topology to fully cut the last cycle.
    Currently reframed-as-derived, not derived-from-scratch.

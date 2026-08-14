@@ -1,7 +1,7 @@
 # ℏ — reduced Planck constant (circulation action of the W=1 vortex)
 
 > **J. C. Harvey, Melbourne — 2026-07-30.** Measured anchor: 1.054571817×10⁻³⁴ J·s
-> (SI exact via h). Whitelist entry: `laws.hpp:111`. Primary record: FLM13
+> (SI exact via h). derivation basis entry: `laws.hpp:111`. Primary record: FLM13
 > (`Investigations/01_Foundations_and_Lattice_Mechanics/FLM13_Koppa_Route_to_the_Action/`).
 > Re-run: `../derivelist_results.txt` §[3].
 
@@ -49,7 +49,7 @@ macroscopic **baryon-count anchor**; the ladder distributes it via W=1 and W=3.
 ## Scope / Limitations / Residuals
 
 - The VALUE of ℏ is not derived and cannot be (P2). What is earned is the role
-  and the collapse: three whitelist entries become one.
+  and the collapse: three derivation basis entries become one.
 - The +0.0195% residual is the muonic R_p measurement against exact W+1=4 —
   the same residual as the pure-ratio mass statement.
 

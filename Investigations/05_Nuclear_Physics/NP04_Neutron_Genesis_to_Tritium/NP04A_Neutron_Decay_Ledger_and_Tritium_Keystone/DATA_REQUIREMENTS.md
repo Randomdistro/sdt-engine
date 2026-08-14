@@ -4,7 +4,7 @@
 
 Inputs grouped by `input_dependency` (per `Audits/FORMULATIONS_PROVENANCE_AUDIT.md`). The keystone (`Q_β(³H)`) and the conservation spine consume **only measured masses + binding energies** — no fitted scale — which is why they reach class **C**. Stage A's link energy and Stage F's binding are the only `calibrated-target` consumers.
 
-## 1. `primitive-whitelist` (CODATA, `sdt::laws::measured`)
+## 1. `primitive-derivation basis` (CODATA, `sdt::laws::measured`)
 | symbol | value | used by |
 |---|---|---|
 | `c` | 299 792 458 m/s | mass↔energy, circulation freq |

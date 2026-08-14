@@ -36,7 +36,7 @@ Root cause — a **half-finished `winding` refactor**: `laws.hpp:898` is `namesp
 - **Why it matters for OrbOS anyway:** the "single source of truth" and its end-to-end verification are, *as the tree stands*, non-building. A header that doesn't compile cannot gate anything, and there is no committed snapshot tagged as the canonical hand-off. Land a building commit before OrbOS syncs against it.
 
 ### F-2 — PHYSICS: "No G" fails at the primitive level via `ℓ_P` **[PROVEN, load-bearing]**
-`ℓ_P = 1.616255e-35` is whitelisted as a primitive (`laws.hpp:112`), but the CODATA Planck length **is computed from G** (`ℓ_P = √(ℏG/c³)`). It is load-bearing, not decorative:
+`ℓ_P = 1.616255e-35` is dependency-traced as a primitive (`laws.hpp:112`), but the CODATA Planck length **is computed from G** (`ℓ_P = √(ℏG/c³)`). It is load-bearing, not decorative:
 ```
 laws.hpp:215  N        = R_CMB / l_P                  (Law I — relay count)
 laws.hpp:234  P_conv   = Phi / l_P3                   (Law I — conversion pressure)

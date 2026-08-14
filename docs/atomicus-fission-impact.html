@@ -63,15 +63,15 @@ canvas{display:block;cursor:grab}canvas:active{cursor:grabbing}
 </head><body>
 
 <div class="pane" id="left">
-  <h1>ATOMICUS · Fission Scission Map
-    <small>²³⁵U in opposition-shell packing · central hit → rigid inner sphere + outer skin that calves off</small></h1>
+  <h1>ATOMICUS · Fission Flay Map
+    <small>²³⁵U in opposition-shell packing · central hit → sealed T12 core holds; unfrozen outer shells flay off</small></h1>
 
   <h2>Produce this larger daughter</h2>
   <select id="target"></select>
-  <div class="note">Ranked by real IAEA thermal-fission yield. A <b>central</b> proton hit (b≈0) makes the
-    outer <b>skin</b> (≈100 nucleons) <b>calve/shear off</b> the rigid inner <b>sphere</b> (α core + the
-    tritons that do not budge) — the sphere is this heavy daughter. (A grazing hit b→R shaves a thin
-    surface chip instead → spallation, NP27.)</div>
+  <div class="note">Ranked by real IAEA thermal-fission yield. A <b>central</b> proton hit (b≈0) <b>flays</b> the
+    unfrozen outer shells (≈100 nucleons) off the sealed <b>T12 core</b> (α + the tritons that do not
+    budge, N=82 lock) — the remnant is this heavy daughter. The nucleus is not a goo drop. (A grazing
+    hit b→R shaves a thin surface chip instead → spallation, NP27.)</div>
 
   <h2>Show</h2>
   <div style="display:flex;gap:4px;flex-wrap:wrap">
@@ -87,7 +87,7 @@ canvas{display:block;cursor:grab}canvas:active{cursor:grabbing}
 
   <div class="warn"><b>Scope:</b> subunit <b>counts</b> are exact (α + n_d deuterons + n_t tritons).
     The opposition-shell <b>positions</b> are the model's assignment (Harvey 2026-07-03), not proven unique.
-    The split is <b>radial</b> (tritons inner, deuterons outer) — what is rigid is the <b>triton core</b>
+    The unwrap is <b>radial</b> (tritons inner, deuterons outer) — what is rigid is the <b>triton core</b>
     (heavy daughter locks near n_t = 31–32, the N = 82 shell), shown live below.</div>
 </div>
 
@@ -275,7 +275,7 @@ function draw(){
     const ca=Math.atan2(cB.y-cA.y,cB.x-cA.x);
     cx.beginPath();cx.moveTo(cB.x,cB.y);cx.lineTo(cB.x-10*Math.cos(ca-.4),cB.y-10*Math.sin(ca-.4));
     cx.lineTo(cB.x-10*Math.cos(ca+.4),cB.y-10*Math.sin(ca+.4));cx.closePath();cx.fillStyle='rgba(192,80,58,.7)';cx.fill();
-    cx.fillStyle='#a8402f';cx.fillText('skin calves off',cB.x+4,cB.y+3);
+    cx.fillStyle='#a8402f';cx.fillText('shells flay off',cB.x+4,cB.y+3);
   }
   if(showNames && hoverN){const pr=proj(hoverN.pos);
     cx.fillStyle='#1c1a16';cx.font='600 12px ui-monospace';cx.textAlign='center';
@@ -299,7 +299,7 @@ function render(){
   const c=cur.cleave, ZL=c.Z, AL=c.A, ZH=PZ-ZL, AH=PA-AL-cur.NU;
   const ndH=3*ZH-AH-2, ntH=AH-2*ZH, ndL=3*ZL-AL-2, ntL=AL-2*ZL;
   el('title').textContent='²³⁶U*  →  '+nm(ZH,AH)+'  +  '+nm(ZL,AL)+'  + '+cur.NU+'n';
-  el('sub').textContent='core-shell scission — the rigid inner sphere (gold: α + tritons that do not budge, N=82 lock) holds; the outer skin (copper, ≈100 nucleons) calves off and becomes its own atom';
+  el('sub').textContent='flay, not split — the sealed T12 core (gold: α + tritons that do not budge, N=82 lock) holds; the unfrozen outer shells (copper) unwrap and become their own atom';
   el('chips').innerHTML='<span class="chip keepc">heavy '+nm(ZH,AH)+'</span><span class="chip peelc">light '+nm(ZL,AL)+'</span>';
   el('hName').textContent=nm(ZH,AH); el('hZNA').textContent=ZH+' / '+(AH-ZH)+' / '+AH;
   el('hG').textContent=ndH+' / '+ntH+' t';
@@ -311,10 +311,10 @@ function render(){
   el('iN').textContent=iz+' nucleons at the shear surface';
   el('iBal').textContent=AL+' + '+AH+' + '+cur.NU+' = '+(AL+AH+cur.NU)+(AL+AH+cur.NU===PA?' ✓':' ✗');
   el('fL').textContent='shear error '+c.err+' · outer skin '+c.A+' nucleons ('+c.Z+'p) · core radius '+c.rShear.toFixed(1);
-  el('verdict').innerHTML='Central hit (b≈0) → the rigid <b>inner sphere</b> (α core + the tritons that do '
-    +'not budge, ≈'+AH+' nucleons) holds firm, while the deuteron-rich <b>outer skin</b> (≈'+AL+' nucleons) '
-    +'<b>calves/shears off</b> and becomes <b>'+nm(ZL,AL)+'</b> — its own atom. '
-    +(lock?'The inner sphere sits on the <b>N=82 shell lock</b> — the tightest, most-repeated core in the whole spectrum (NP32).':'')
+  el('verdict').innerHTML='Central hit (b≈0) → the sealed <b>T12 core</b> (α + the tritons that do '
+    +'not budge, ≈'+AH+' nucleons) holds firm, while the deuteron-rich <b>outer shells</b> (≈'+AL+' nucleons) '
+    +'<b>flay off</b> and become <b>'+nm(ZL,AL)+'</b> — their own atom. '
+    +(lock?'The remnant sits on the <b>N=82 shell lock</b> — the tightest, most-repeated core in the whole spectrum (NP35).':'')
     +' The core triton count (n_t='+ntH+') is what fission holds rigid (NP25-Y). '
     +'<i>A grazing hit (b→R) would instead shave a thin surface chip → spallation, a different regime (NP27).</i>';
   draw();

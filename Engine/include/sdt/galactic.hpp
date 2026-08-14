@@ -71,10 +71,11 @@ inline constexpr double pc_m_         = 3.085677581e16;   ///< [m/pc]  (trailing
 inline constexpr double Msun_kg       = 1.98847e30;       ///< [kg] Solar mass
 inline constexpr double deg2rad       = PI / 180.0;
 
-/// SDT Milgrom scale: a₀ = c H₀ / 2π — derived, not imported (GD01)
-/// H₀ = 67.4 km/s/Mpc (Planck 2018)
+/// GD01 correspondence scale using the observed Planck-2018 H₀ anchor.
+/// This is not a first-principles SDT derivation and must not be used to
+/// certify an acceleration floor.
 inline constexpr double H_0_SI        = 67.4e3 / 3.085677581e22;  // [s⁻¹]
-inline constexpr double a_0_SDT       = c * H_0_SI / (2.0 * PI);  // ≈ 1.042e-10 m/s²
+inline constexpr double a_0_SDT       = c * H_0_SI / (2.0 * PI);  // [m/s²], correspondence only
 
 // ═════════════════════════════════════════════════════════════════════════════
 //  CMB FIELD — The Convergence Motor

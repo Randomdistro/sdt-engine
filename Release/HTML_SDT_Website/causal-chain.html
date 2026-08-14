@@ -57,7 +57,8 @@ figcaption{font-size:var(--fs-xs);color:var(--ink-whisper);margin-top:.6rem;font
 .wt h2{font-size:var(--fs-xl);font-weight:600;margin-bottom:.6rem}
 .wt .lead{color:var(--ink-soft);max-width:var(--content);margin-bottom:2.2rem}
 .wt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(19rem,1fr));gap:1rem}
-.wt-card{background:var(--paper);border:1px solid var(--paper-edge);border-radius:4px;padding:1.1rem 1.2rem}
+.wt-card{background:var(--paper);border:1px solid var(--paper-edge);border-radius:4px;padding:1.1rem 1.2rem;display:block;color:inherit;text-decoration:none}
+.wt-card:hover{border-color:var(--mint);text-decoration:none}
 .wt-card .wid{font-family:'JetBrains Mono',monospace;font-size:var(--fs-xs);color:var(--ink-whisper);letter-spacing:.1em}
 .wt-card h4{font-size:var(--fs-md);font-weight:600;margin:.3rem 0 .4rem}
 .wt-card p{font-size:var(--fs-sm);color:var(--ink-muted);line-height:1.6}
@@ -519,8 +520,9 @@ figcaption{font-size:var(--fs-xs);color:var(--ink-whisper);margin-top:.6rem;font
         <p>Every nucleus past hydrogen is built from three bricks and nothing else: one alpha core, n_d deuterons, n_t tritons — n_t = A−2Z, n_d = 3Z−A−2, one way to be per nucleus. A neutron is not a separate species; it is a proton with a seated electron, and a "free neutron" is an exposed triton remnant. The neutron ledger reads N = 2 + n_d + 2n_t: each triton carries two.</p>
         <p>And the bricks have a birthplace. Deuterons and tritons are forged in the cores of stars; the heavy elements are assembled behind the stellar c-boundary, where the deep pressure runs the foundry. Each nucleus is cast once, one way to be — chart neighbours are different castings from the same brick stock, a catalogue, never a biography. The measured rule rides on top: add a triton and the boundary draws IN — tightest at the closed shells.</p>
         <p>And the famous "magic numbers" — 2, 8, 20, 28, 50, 82, 126 — stop being a mystery list and become the shelf plan. Every closure is a completed seat tier the next tier rests on. A tier holds (n+1)(n+2) rods: a triangular layer doubled, because a proton only ever gears a neutron. From the fourth tier a belt of paired tritons — 2(n+1) to the ring, because a radial rod can only roll true on the equator — descends and seals the shelf below. Two small formulas give all seven numbers, and the next one free of charge: N = 184. The seal is measured, not narrated: the boundary kinks inward at every closure by the same amount along the whole row, however many tritons arrived. The freeze does the compacting; the ledger only decides who sits in the seats.</p>
+        <p>Fission is a flay, not a split. Unfrozen outer shells unwrap around sealed T12 masonry (N<sub>H</sub> = 82). The liquid-drop neck is withdrawn (NP35). The core is not a goo drop.</p>
       </div>
-      <div class="form-strip">grammar: 1α + n_d·d + n_t·t · N = 2 + n_d + 2n_t · EC grammar on He-3 cores · contraction rule: 88% of chains comply [direct 2026-07-23] · NP27 beam-peel confirms the 1.83c surface zero-fit · shell schedule F(n)=(n+1)(n+2), B(n)=2(n+1) — the magic numbers derived [2026-07-30] · next closure predicted: N = 184 · one debt open: why the belts first descend at the fourth tier (NP33)</div>
+      <div class="form-strip">grammar: 1α + n_d·d + n_t·t · N = 2 + n_d + 2n_t · EC grammar on He-3 cores · contraction rule: 88% of chains comply [direct 2026-07-23] · NP27 beam-peel confirms the 1.83c surface zero-fit · shell schedule F(n)=(n+1)(n+2), B(n)=2(n+1) — the magic numbers derived [2026-07-30] · next closure predicted: N = 184 · fission = flay of unfrozen shells around sealed T12 (NP35) · one debt open: why the belts first descend at the fourth tier (NP33)</div>
     </div>
     <figure>
       <svg viewBox="0 0 300 200" width="300">
@@ -698,9 +700,9 @@ figcaption{font-size:var(--fs-xs);color:var(--ink-whisper);margin-top:.6rem;font
       <h2 class="link-title">The cosmos: nothing recedes</h2>
       <div class="narr">
         <p>Redshift is two native effects and no recession: the depth stamp at emission (L17), and the propagation squeeze across the Clearing. The ladder is octaves — 1+z = 2^Δn — and the CMB sits 10.10 octaves down, exactly where the boundary's synchronized release puts it. The famous "tension" in the expansion rate is what you get when one number is asked to carry two different mechanisms; split them and the tension is not resolved, it is dissolved.</p>
-        <p>No expansion. No dark matter. No dark energy. A medium that pushes, shadows, and gears needs none of that furniture to carry the same sky — each refusal was earned upstream, link by link, and by the time you reach this one there is nothing left for the furniture to do. What came before the detonation, and whether the cycle turns again — that I hold as conjecture, and say so.</p>
+        <p>No expansion. No dark matter. No dark energy. A medium that pushes, shadows, and gears needs none of that furniture to carry the same sky — each refusal was earned upstream, link by link, and by the time you reach this one there is nothing left for the furniture to do. Late cycle the bath falls toward 0 K; gravity shuts off; matter expands; seated structure breaks; the matrix re-energises until far-frame light cannot move (c<sub>far</sub> → 0). The Clearing begins again. The bang is that reiteration. The door's threshold remains pending.</p>
       </div>
-      <div class="form-strip">1+z = 2^Δn · CMB at 10.10 octaves · redshift = emission depth + propagation, conflation = the "tension" · cyclic recharge: CONJECTURE, uncommitted</div>
+      <div class="form-strip">1+z = 2^Δn · CMB at 10.10 octaves · redshift = emission depth + propagation, conflation = the "tension" · cycle: 0 K → gravity off → unbinding → c_far → 0 → Clearing again</div>
     </div>
     <figure>
       <svg viewBox="0 0 300 180" width="300">
@@ -738,7 +740,9 @@ figcaption{font-size:var(--fs-xs);color:var(--ink-whisper);margin-top:.6rem;font
       <li><b>The galactic shape</b> — the crossover's form is on loan; not touching galactic until it is native.</li>
       <li><b>FLM12 D1/D2</b> — the make-or-break derivations under mass-as-reorganisation.</li>
       <li><b>The Lamb magnitude</b> — the wake carries a nuclear-geometry term (sign, order, scaling all landed); the bulk routes to route-geometry, unbuilt.</li>
-      <li><b>6π⁵</b> — the mass-ratio hook: unique, zero-parameter, 19 ppm — OPEN, with the look-elsewhere caution attached.</li>
+      <li><b>6π⁵</b> — the mass-ratio tube-volume assignment: RESOLVED as a shared-input construction (PPT17), 19 ppm correspondence; not an independent prediction.</li>
+      <li><b>Koppa's origin</b> — ϟ as a length is earned; why it takes the value it does remains parked.</li>
+      <li><b>Le Sage heating is not a debt.</b> Corpuscles in a void would cook a body. There are no corpuscles. The lattice is the space.</li>
     </ul>
   </div>
 </section>
@@ -749,22 +753,23 @@ figcaption{font-size:var(--fs-xs);color:var(--ink-whisper);margin-top:.6rem;font
     <h2>Sixteen fields, walked end to end</h2>
     <p class="lead">Each field of physics gets the full treatment: every phenomenon, every action drawn, and the textbook account set calmly beside mine, so a reader can weigh two ways of building the same world. Pages arrive as each walkthrough is finished; the one-breath claims stand now.</p>
     <div class="wt-grid">
-      <div class="wt-card"><div class="wid">W01</div><h4>Foundations &amp; Lattice</h4><p>The grain, the tick, the packing — and the assumed seed. Where every other page borrows its floor.</p></div>
-      <div class="wt-card"><div class="wid">W02</div><h4>Particles &amp; Topology</h4><p>Knots, windings, the 1.83c seat — and the trefoil's three-lobed fingerprint, now measured in its own wake.</p></div>
-      <div class="wt-card"><div class="wid">W03</div><h4>Electromagnetism &amp; Charge</h4><p>Handed redirection, no substance; the force coefficient derived in closed form at the electropause.</p></div>
-      <div class="wt-card"><div class="wid">W04</div><h4>Atoms &amp; Spectra</h4><p>The hydrogen chain, seats and gears, every line a path times a ratio — and a struck gate kept on display.</p></div>
-      <div class="wt-card"><div class="wid">W05</div><h4>Nuclear Physics</h4><p>Three bricks, one grammar, castings from the stellar foundry; the triton that draws the boundary in.</p></div>
-      <div class="wt-card"><div class="wid">W06</div><h4>Gravitation &amp; Orbits</h4><p>Koppa mechanics without G or M; one two-body ledger holding across twenty orders of magnitude.</p></div>
-      <div class="wt-card"><div class="wid">W07</div><h4>Cosmology &amp; Redshift</h4><p>Depth plus propagation, octaves not recession; the tension dissolved by splitting what was conflated.</p></div>
-      <div class="wt-card"><div class="wid">W08</div><h4>Galactic Dynamics</h4><p>The cosmos's own floor, a₀ = cH₀/2π — and the frontier marked OPEN until the shape is native.</p></div>
-      <div class="wt-card"><div class="wid">W09</div><h4>Stars &amp; Radiation</h4><p>Displacement engines and the foundry behind the c-boundary, where every heavy nucleus was cast.</p></div>
-      <div class="wt-card"><div class="wid">W10</div><h4>Fluid Dynamics</h4><p>One poloidal operation from molecule to storm; the bath's refusal, measured in the turbulence spectrum.</p></div>
-      <div class="wt-card"><div class="wid">W11</div><h4>Thermodynamics</h4><p>Freedom counted, the Boltzmann factor counted not lifted, and the universe's first assembly step dated by ledger.</p></div>
-      <div class="wt-card"><div class="wid">W12</div><h4>Condensed Matter</h4><p>Exclusive seats, the stack, PRESS — metals as topology, with the decisive counting run owed and said so.</p></div>
-      <div class="wt-card"><div class="wid">W13</div><h4>Quantum Foundations</h4><p>Definite routes strobed into clouds; the tick too fast to resolve — no collapse, no dice, no ghost.</p></div>
-      <div class="wt-card"><div class="wid">W14</div><h4>Plasma &amp; Magnetism</h4><p>Collective circulation as the ℓ=2 face of one wake; the identity c = 1/√(μ₀ε₀) as relay bookkeeping.</p></div>
-      <div class="wt-card"><div class="wid">W15</div><h4>Optics &amp; Photonics</h4><p>Light as emission, never a thing in transit between things; one criterion uniting boom and Cherenkov.</p></div>
-      <div class="wt-card"><div class="wid">W16</div><h4>Chemistry &amp; Bonding</h4><p>The octet as void geometry, activation as alignment search — and Avogadro's −6.022 arriving uninvited.</p></div>
+      <a class="wt-card" href="universe-lifecycle.html"><div class="wid">LIFE</div><h4>Life of the universe</h4><p>Shapiro → infrared wall → gamma stop-death; heat death as gravity off; recharge until far-frame light cannot move. Evidence linked.</p></a>
+      <a class="wt-card" href="paper-01-foundations.html"><div class="wid">W01</div><h4>Foundations &amp; Lattice</h4><p>The grain, the tick, the packing — and the assumed seed. Where every other page borrows its floor.</p></a>
+      <a class="wt-card" href="paper-02-particle-topology.html"><div class="wid">W02</div><h4>Particles &amp; Topology</h4><p>Knots, windings, the 1.83c seat — and the trefoil's three-lobed fingerprint, now measured in its own wake.</p></a>
+      <a class="wt-card" href="paper-03-electromagnetism.html"><div class="wid">W03</div><h4>Electromagnetism &amp; Charge</h4><p>Handed redirection, no substance; the force coefficient derived in closed form at the electropause.</p></a>
+      <a class="wt-card" href="paper-04-atomic-spectroscopy.html"><div class="wid">W04</div><h4>Atoms &amp; Spectra</h4><p>The hydrogen chain, seats and gears, every line a path times a ratio — and a struck gate kept on display.</p></a>
+      <a class="wt-card" href="paper-05-nuclear.html"><div class="wid">W05</div><h4>Nuclear Physics</h4><p>Three bricks, one grammar; fission flays unfrozen shells around a sealed T12 core.</p></a>
+      <a class="wt-card" href="paper-06-gravitation.html"><div class="wid">W06</div><h4>Gravitation &amp; Orbits</h4><p>Koppa mechanics without G or M; one two-body ledger holding across twenty orders of magnitude.</p></a>
+      <a class="wt-card" href="paper-07-cosmology.html"><div class="wid">W07</div><h4>Cosmology &amp; Redshift</h4><p>Depth plus propagation, octaves not recession; the tension dissolved by splitting what was conflated.</p></a>
+      <a class="wt-card" href="paper-08-galactic.html"><div class="wid">W08</div><h4>Galactic Dynamics</h4><p>The cosmos's own floor, a₀ = cH₀/2π — and the frontier marked OPEN until the shape is native.</p></a>
+      <a class="wt-card" href="paper-09-stellar.html"><div class="wid">W09</div><h4>Stars &amp; Radiation</h4><p>Displacement engines and the foundry behind the c-boundary, where every heavy nucleus was cast.</p></a>
+      <a class="wt-card" href="paper-10-fluid.html"><div class="wid">W10</div><h4>Fluid Dynamics</h4><p>One poloidal operation from molecule to storm; the bath's refusal, measured in the turbulence spectrum.</p></a>
+      <a class="wt-card" href="paper-11-thermodynamics.html"><div class="wid">W11</div><h4>Thermodynamics</h4><p>Freedom counted, the Boltzmann factor counted not lifted, and the universe's first assembly step dated by ledger.</p></a>
+      <a class="wt-card" href="paper-12-condensed-matter.html"><div class="wid">W12</div><h4>Condensed Matter</h4><p>Exclusive seats, the stack, PRESS — metals as topology, with the decisive counting run owed and said so.</p></a>
+      <a class="wt-card" href="paper-13-quantum-foundations.html"><div class="wid">W13</div><h4>Quantum Foundations</h4><p>Definite routes strobed into clouds; the tick too fast to resolve — no collapse, no dice, no ghost.</p></a>
+      <a class="wt-card" href="paper-14-plasma-magnetism.html"><div class="wid">W14</div><h4>Plasma &amp; Magnetism</h4><p>Collective circulation as the ℓ=2 face of one wake; the identity c = 1/√(μ₀ε₀) as relay bookkeeping.</p></a>
+      <a class="wt-card" href="paper-15-optics.html"><div class="wid">W15</div><h4>Optics &amp; Photonics</h4><p>Light as emission, never a thing in transit between things; one criterion uniting boom and Cherenkov.</p></a>
+      <a class="wt-card" href="paper-16-chemistry.html"><div class="wid">W16</div><h4>Chemistry &amp; Bonding</h4><p>The octet as void geometry, activation as alignment search — and Avogadro's −6.022 arriving uninvited.</p></a>
     </div>
   </div>
 </section>
@@ -774,7 +779,14 @@ figcaption{font-size:var(--fs-xs);color:var(--ink-whisper);margin-top:.6rem;font
   <div class="narr" style="max-width:44rem;text-align:center">
     <p style="font-size:var(--fs-lg);color:var(--ink)">Space. Matter. Movement. The Ever-Present Now. One action. One push, arriving from everywhere, forever.</p>
     <p style="color:var(--ink-muted)">Everything above either follows from that, or is listed as a debt in my own hand. Pull any link and see what hangs from it — that is what the chain is for.</p>
-    <p class="by" style="margin-top:2rem">J. C. HARVEY · MELBOURNE · <a href="index.html">← THE MAIN SITE</a></p>
+    <p class="by" style="margin-top:2rem">J. C. HARVEY · MELBOURNE</p>
+    <p style="margin-top:1.4rem;font-family:'JetBrains Mono',monospace;font-size:var(--fs-sm);letter-spacing:.06em;">
+      <a href="sdt_walkthrough.html">THE WALKTHROUGH →</a>
+      &nbsp;·&nbsp;
+      <a href="st_gom_gravity.html">WHY A BALL →</a>
+      &nbsp;·&nbsp;
+      <a href="index.html">THE ATLAS</a>
+    </p>
   </div>
 </section>
 

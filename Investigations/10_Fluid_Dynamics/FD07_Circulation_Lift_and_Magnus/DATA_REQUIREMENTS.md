@@ -38,7 +38,7 @@ The ideal `L = 2πρaUU_s` overpredicts measured cylinder Magnus lift (boundary-
 
 ## 4. Internal (SDT) inputs — not external
 
-- `c`, `ℓ_P`, `t_P`, `P_conv` — from `Engine/include/sdt/laws.hpp` (`sdt::laws::law_I`, `law_III`). Whitelisted primitives + derived; not datasets.
+- `c`, `ℓ_P`, `t_P`, `P_conv` — from `Engine/include/sdt/laws.hpp` (`sdt::laws::law_I`, `law_III`). dependency-traced primitives + derived; not datasets.
 - `law_VI::traction` (PPT06 `ℓ=2` channel) — the bound-circulation mechanism; **internal result**, re-used here.
 - `law_V` (`v_circ²+v_trans²=c²`) — the `v ≤ c` ceiling that gives the Kutta condition; internal.
 - `κ = h/m` — circulation quantum from **FD02** (internal); used for the `Γ = Nκ` limit.

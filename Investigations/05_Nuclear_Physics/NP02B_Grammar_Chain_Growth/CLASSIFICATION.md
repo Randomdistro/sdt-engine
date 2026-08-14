@@ -12,7 +12,7 @@ Labels per the project scheme (`Audits/FORMULATIONS_PROVENANCE_AUDIT.md`): `prov
 | 6 | `k_occ = 2.224 MeV/contact` (deuteron-pinned) | calibrated | known-match | calibrated-target | **E** |
 | 7 | `B_occ` MeV binding estimate | calibrated | partial-match | calibrated-target | **E** |
 | 8 | `f_t = n_t/(n_d+n_t)`; overload past ~17% → He-5 ejection | SDT-derived | novel-prediction | grammar facts | **D** |
-| 9 | trefoil traction `T = 3(W+1) = 12` (free-strand `E=σL→∞`) | SDT-derived | internal-only | primitive-whitelist | **B** |
+| 9 | trefoil traction `T = 3(W+1) = 12` (free-strand `E=σL→∞`) | SDT-derived | internal-only | primitive-derivation basis | **B** |
 | 10 | He-3 core grammar `n_t=A−2Z+1`, `n_d=3Z−A−3`; EC gate `n_d≥2` | SDT-derived | known-match | isotope integers | **C** |
 | 11 | EC core-change `−2`d`+1`t | SDT-derived | known-match | grammar facts | **C** |
 | 12 | EC `rate ∝ Q²` (PF spread) | external-input | known-match | measured Q | **X** |

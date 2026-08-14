@@ -172,7 +172,7 @@ Every result must carry:
 ```
 // provenance_status:     (SDT-derived | calibrated | observed | unresolved)
 // correspondence_status: (known-match | novel | internal-only | pending)
-// input_dependency:      (primitive-whitelist | calibrated-target | measured-observable)
+// input_dependency:      (primitive-derivation basis | calibrated-target | measured-observable)
 // class:                 (A | B | C | D | E | F | X)
 // circularity_assertion: (passes / fails delete-test; explanation)
 // risk_flag:             (none | brief description of what could break this)

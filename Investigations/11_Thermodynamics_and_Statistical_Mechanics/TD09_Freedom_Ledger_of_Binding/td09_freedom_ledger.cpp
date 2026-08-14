@@ -10,7 +10,7 @@
 #include <numbers>
 static const double PI = std::numbers::pi;
 
-// whitelist / measured inputs (CODATA + Planck), SI
+// derivation basis / measured inputs (CODATA + Planck), SI
 static const double kB   = 1.380649e-23;      // J/K
 static const double hP   = 6.62607015e-34;    // J s
 static const double hbar = 1.054571817e-34;   // J s

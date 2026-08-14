@@ -20,7 +20,7 @@
    and TD06's "derived occupation" claim — so this prompt must firewall it here, once.
 3. **How will we find out?** — Four gated phases (§Strategy). The **two-definition concordance** (P1)
    and the **most-probable-distribution counting** (P3) run on the TD01 toy lattice with `k_B` as the
-   only whitelisted input; P3's native route (Lagrange-multiplier maximisation of `ln W` at fixed total
+   only dependency-traced input; P3's native route (Lagrange-multiplier maximisation of `ln W` at fixed total
    throughput) must produce `exp(−ε/k_BT)` *without* writing down a canonical reservoir.
 4. **What would prove us wrong?** — §⑧ falsifiers with numeric triggers and real failure modes,
    including the **anti-tautology** firewall (F3/F4): if the exponential can only be reached via the
@@ -89,14 +89,14 @@ inherit; closing it here protects both.
    `S_res(E−ε)` expansion (that is the imported ensemble — see firewall). *Success (A):* native
    most-probable occupation `∝ exp(−βε)` with `β=1/k_BT` matching P1 to `R²>0.999`; `c_v=3/2 k_B`
    recovered. *If only the reservoir route works:* label **IMPORTED**, grade **C**, do not claim A.
-4. **Temperature scale audit.** *Goal:* confirm `k_B` is the *only* whitelisted input. *Method:*
+4. **Temperature scale audit.** *Goal:* confirm `k_B` is the *only* dependency-traced input. *Method:*
    delete-test — recompute with `k_B` symbolic. *Success:* every result is `k_B × (pure number)`; no
    `h`, no partition function `Z`, no ensemble object anywhere in the native chain.
 
 ## Success criteria
 
 - **PASS (Class A):** `T_kin=T_ent` (P1), `½k_BT` per DoF (P2), **and** the Boltzmann factor obtained
-  from native `ln W` maximisation (P3) with `β=1/k_BT` matching P1 — all with only `k_B` whitelisted,
+  from native `ln W` maximisation (P3) with `β=1/k_BT` matching P1 — all with only `k_B` dependency-traced,
   zero fitted parameters, **and no reservoir `S_res(E−ε)` expansion anywhere**.
 - **QUALIFIED (Class C):** P1 + P2 native, but the `exp(−ε/k_BT)` reached only via the
   microcanonical→canonical reservoir argument → the factor is **IMPORTED** (firewall fired); or one
@@ -153,7 +153,7 @@ These are not required for the verdict; they are the payoff of doing it well.
 ## Pre-Run Commitments — TD02
 - Prompt completion target: [A|B|C|D]
 - Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
-- CALIBRATED budget: 0 (k_B is the only whitelisted input; list any flagged step)
+- CALIBRATED budget: 0 (k_B is the only dependency-traced input; list any flagged step)
 - Engine namespaces actually used: measured::k_B, law_I::epsilon, TD01 microstate counting W(E,N)
 - Phase thresholds (committed before run):
     P1 |T_kin−T_ent|/T < 1e-3 · P2 per-DoF ½k_BT ±1%, init-independent

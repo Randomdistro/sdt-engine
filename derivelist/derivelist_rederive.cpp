@@ -1,10 +1,10 @@
 // ═══════════════════════════════════════════════════════════════════════
-//  derivelist_rederive.cpp — single-pass re-derivation of every whitelisted
+//  derivelist_rederive.cpp — single-pass re-derivation of every dependency-traced
 //  input, run against the canonical engine (sdt/laws.hpp).
 //
 //  Author: J. C. Harvey, Melbourne. Direct run 2026-07-30.
 //
-//  Purpose: for each member of the measured whitelist
+//  Purpose: for each member of the measured derivation basis
 //      { c, hbar, l_P, alpha, m_e, m_p, k_B, T_CMB, e }
 //  recompute the repo's earned derivation route(s), state the deviation
 //  against the measured anchor, and print the standing status:
@@ -33,7 +33,7 @@ static void line(const char* route, double got, double ref, const char* tag)
 
 int main()
 {
-    std::puts("DERIVELIST — re-derivation of the measured whitelist (direct run)");
+    std::puts("DERIVELIST — re-derivation of the measured derivation basis (direct run)");
     std::puts("=================================================================");
 
     // ── 1. c — the relay speed ─────────────────────────────────────────
@@ -138,9 +138,9 @@ int main()
     const double m_p_W1 = 4.0 * measured::hbar / (measured::R_p * measured::c);
     line("m_p = 4*hbar/(R_p*c) (W+1, muonic R_p input)", m_p_W1,
          measured::m_p, "DERIVED (from measured boundary radius)");
-    // Topological ratio: 6pi^5 (PPT07: OPEN — privileged, unexplained, 19 ppm).
+    // Tube-volume packing ratio: PPT17 construction-resolved, shared-input.
     line("m_p = 6*pi^5*m_e (topological ratio)", law_VI::mass_ratio::six_pi_5 * measured::m_e,
-         measured::m_p, "OPEN (privileged 19-ppm match, mechanism owed)");
+         measured::m_p, "COMPUTED (resolved volume construction; shared-input)");
     // hbar-free pure-ratio statement (FLM13 P3):
     const double ratio_pure = (4.0 / measured::alpha) * (measured::r_e / measured::R_p);
     line("m_p/m_e = (4/alpha)*(r_e/R_p) (hbar eliminated)", ratio_pure,
@@ -191,14 +191,14 @@ int main()
                             / (4.0 * pi * measured::alpha * std::pow(measured::hbar, 3));
     line("P_eff = m_p^2 m_e^2 c^5/(4 pi alpha hbar^3) (EMC04)", P_eff_calc,
          5.225e31, "DERIVED (the physical target behind e)");
-    std::puts("  status: whitelist {l_P,c,hbar,k_B,T_CMB} has no current dimension [A];");
+    std::puts("  status: derivation basis {l_P,c,hbar,k_B,T_CMB} has no current dimension [A];");
     std::puts("          no combination yields coulombs (EMC02 dimensional result).");
     std::puts("          e is a UNIT BRIDGE (no charge substance — handed redirection);");
     std::puts("          line drawn by reclassification, not by derivation.");
 
     // ── Summary ────────────────────────────────────────────────────────
     std::puts("\n=================================================================");
-    std::puts("REDUCED WHITELIST (after the lines are drawn):");
+    std::puts("REDUCED derivation basis (after the lines are drawn):");
     std::puts("  l_P            AXIOM R1 — the one dimensional seed (Seed Theorem)");
     std::puts("  ONE mass seat  {hbar = m_e = m_p} collapsed via W=1/W=3 (FLM13)");
     std::puts("  alpha          extracted from the H spectrum; derivation open");
@@ -209,9 +209,9 @@ int main()
     std::puts("  c, k_B, e      unit bridges — SI definitions, no physics to derive");
     std::puts("  [R_p == m_p    one fact, not two: the 0.02% residual is shared]");
     std::puts("  => FIVE external inputs, not four. The collapse moves the");
-    std::puts("     mystery from a mass to a length; closing a_0 (c^2/C_H) or");
-    std::puts("     the 6pi^5 wake integral is what would actually shorten it.");
-    std::puts("Open mechanisms owed: 6pi^5 wake integral; alpha geometric route;");
+    std::puts("     mystery from a mass to a length; closing a_0 (c^2/C_H) would");
+    std::puts("     actually shorten it. The 6pi^5 tube map is construction-resolved.");
+    std::puts("Open mechanisms owed: alpha geometric route;");
     std::puts("the seat's absolute magnitude (FLM12 D-series).");
     return 0;
 }

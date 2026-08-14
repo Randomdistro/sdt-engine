@@ -52,7 +52,7 @@ PPT01 balance without calling `atomic::ionisation_energy_eV` in the derivation c
 |--------|---------|--------|
 | `r` | Orbit radius | variable [m] |
 | `n` | Wrap integer | dimensionless |
-| `λ` | Wake wavelength | `h/(m_e v)` whitelist |
+| `λ` | Wake wavelength | `h/(m_e v)` derivation basis |
 | `Ry` | Rydberg energy | compare to `measured::Ry_eV` |
 | `a₀` | Bohr scale | `measured::a_0` |
 | `N_ticks` | Survival test length | ≥ 10⁴ committed |

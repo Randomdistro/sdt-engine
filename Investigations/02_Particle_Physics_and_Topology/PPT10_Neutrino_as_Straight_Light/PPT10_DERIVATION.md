@@ -6,7 +6,7 @@
 > **Prohibited in the SDT chain:** `G_F`, virtual W, flavour numbers, wavefunctions, `G/M/GM`,
 > "charge radius". Charge = handed redirection (EMC03); `e` = unit-bridge.
 
-Every step is tagged **DERIVED** (from Law V / Law VI / whitelist geometry), **COMPUTED**
+Every step is tagged **DERIVED** (from Law V / Law VI / derivation basis geometry), **COMPUTED**
 (arithmetic on derived + measured), **ASSUMED** (a body radius taken as MEASURED-INPUT from the
 `neutrino.hpp` comment block), or **OBSERVED-TARGET** (a rival/measured cross-section, comparison only).
 

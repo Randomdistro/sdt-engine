@@ -56,7 +56,7 @@ Second executable in the tree that consumes an engine header: `Benchmarks/spheri
 | **packing.hpp** | golden φ (√5), `acos(-1/3)`, `√(3/2)` | 47–436 | polyhedra | **CLEAN.** All analytic geometric constants (tetrahedral angle etc.). Consumed by spherical_packing.cpp; 28/28 structural PASS. |
 | **lattice_structure.hpp** | `0.5196…`, `0.3162…`, `0.9487…` | 52–59 | BC-helix ratios | **DERIVED** — irrational (3√3/10, 1/√10, 3/√10). Not fitted, not in B-suite. |
 
-**Un-derived numeric-literal count per header (physics scales that are neither whitelist nor measured-observable nor analytic-geometry):**
+**Un-derived numeric-literal count per header (physics scales that are neither derivation basis nor measured-observable nor analytic-geometry):**
 `state28d.hpp` = **2** (`1e10`, `1e-20` — both orphaned) · `laws.hpp` = **1 load-bearing fabrication** (`1051.8` → B04) + several flagged-OPEN placeholders (self-disclosed) · `galactic.hpp` = **1 CALIBRATED** (Σ_sat, not in suite) · all others = **0 un-disclosed** (their literals are measured observables or analytic).
 
 ---

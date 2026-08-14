@@ -10,16 +10,16 @@ Per `Audits/FORMULATIONS_PROVENANCE_AUDIT.md`: `provenance` · `correspondence` 
 | B1 | charge/baryon/lepton/winding closure of `n→p+e+ν̄` | SDT-posited (via A0) | known-match | — | **A** |
 | C1 | `τ_n` from unlink barrier `Γ = f_circ·e^(−B/ε)` | SDT-derived (form) | pending | barrier inferred from `τ` | **F** |
 | C2 | beam–bottle gap = ~1.13% topological branching | SDT-derived | novel-prediction | measured τ split | **D** |
-| **D1** | `m_p/m_e = √(3/2)·(a_p/a_e)³` — the **form** | SDT-derived | known-match | primitive-whitelist | **C-flagged** |
+| **D1** | `m_p/m_e = √(3/2)·(a_p/a_e)³` — the **form** | SDT-derived | known-match | primitive-derivation basis | **C-flagged** |
 | **D1+D2** | the **full proton/electron mass ratio** | unresolved | known-match | depends on D2 | **F** *(NOT C until the lever is derived)* |
 | D2 | `a_p/a_e = 11.445` — the lever | unresolved | known-match | — | **F** *(derive from knot geometry → upgrades D1+D2 to C; retires `(3/2)^{3/2}·10³−1`)* |
 | D3 | `R_excl,p/R_excl,e = 1836^{1/3} = 12.25` (constant density) | SDT-derived | known-match | `law_IV` literals (12.248) | **C** |
-| D4 | `1836π ⟹ R_p = 193 fm` — the falsification | SDT-derived | known-match | primitive-whitelist | **C (negative result)** |
+| D4 | `1836π ⟹ R_p = 193 fm` — the falsification | SDT-derived | known-match | primitive-derivation basis | **C (negative result)** |
 | E | `R_p, W_eff, g_proton` re-emitted from `laws.hpp::winding` | frozen-engine gate | known-match | — | **A (gate)** |
 | F1 | triton `B_occ ~ 3·k_occ = 6.67 MeV` (vs meas 8.482) | calibrated | known-match | calibrated-target (`k_occ`) | **E** |
 | F2 | di-neutron unbound; proton is the occlusion keystone | SDT-derived | known-match (²n unbound) | grammar | **C** |
 | F3 | triton is an alpha-invalid primitive (`alpha_grammar(1,3)→n_d=−2`) | SDT-derived | known-match | isotope integers | **C** |
-| G1 | `a₀ = r_e/α² = 5.2918e-11 m` (β-electron re-links at atomic radius) | SDT-derived | known-match | primitive-whitelist | **C** |
+| G1 | `a₀ = r_e/α² = 5.2918e-11 m` (β-electron re-links at atomic radius) | SDT-derived | known-match | primitive-derivation basis | **C** |
 | G2 | free-neutron and ground-state H = one topology at two link-radii | SDT-derived | novel-prediction | — | **D** |
 | **H1-arith** | **`Q_β(³H) = Q_n − [B(t)−B(³He)] = 18.3 keV`** (the *arithmetic*) | conservation-derived | known-match | measured-observable | **C** |
 | **H1-interp** | mechanism: *the free-neutron link strain is mostly absorbed/cancelled by the triton→helion binding difference* | SDT-posited (mechanism) | known-match | measured-observable | **C-flagged** |

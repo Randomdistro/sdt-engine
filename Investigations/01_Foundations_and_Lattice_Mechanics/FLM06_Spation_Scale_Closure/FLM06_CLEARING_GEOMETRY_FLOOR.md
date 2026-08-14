@@ -86,7 +86,7 @@ temperature ratio `T_rec/T_CMB ≈ 10³`. **One action or mass seed is
 mathematically unavoidable.** ∎
 
 This is the *same wall* EMC02 hit for the elementary charge
-(`CQ37_CHARGE_DERIVATION.md:174` — "the whitelist contains no mechanism to
+(`CQ37_CHARGE_DERIVATION.md:174` — "the derivation basis contains no mechanism to
 produce new dimensional scales"). It is a structural property of the input
 set, not a gap in cleverness.
 

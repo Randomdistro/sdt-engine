@@ -135,7 +135,7 @@ static std::vector<Star> build_catalog(const std::vector<Ring>& rings) {
     // Enriched catalogue: ~280 stars from published sources
     // Gillessen+2017, Peissker+2020/2022, Paumard+2006, Genzel+2010,
     // Figer+2002, Clark+2018, Liermann+2009, Mauerhan+2010, Fritz+2016
-    #include "cq19c_star_data.hpp"
+    #include "gd02_star_data.hpp"
 
     return catalog;
 }

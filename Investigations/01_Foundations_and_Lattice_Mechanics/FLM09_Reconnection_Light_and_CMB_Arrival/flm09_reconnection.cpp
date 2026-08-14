@@ -58,12 +58,12 @@ int main() {
                 E_lattice / E_S_form);
     std::printf("   => opacity onset is governed by nucleating the W=1 (electron) defect, not the\n");
     std::printf("      bare hinge lattice. SDT recovers E_S by that identification; the number is\n");
-    std::printf("      all-whitelist (m_e,c,hbar,e) — inherited, not newly derived.\n\n");
+    std::printf("      all-derivation basis (m_e,c,hbar,e) — inherited, not newly derived.\n\n");
 
     std::printf("  LEDGER (ARM A, A1''):\n");
     std::printf("    [FORM]           E(L) = hbar*c/(e L^2)   (threshold shape)\n");
     std::printf("    [IDENTIFICATION] opacity defect = the electron (W=1), L = lam_C\n");
-    std::printf("    [INHERITED]      E_S = 1.323e18 V/m      (standard, all-whitelist)\n");
+    std::printf("    [INHERITED]      E_S = 1.323e18 V/m      (standard, all-derivation basis)\n");
     std::printf("    [KILLED]         'bare-lattice saturation = Schwinger'  (off by %.0e)\n\n",
                 E_lattice / E_S_form);
 

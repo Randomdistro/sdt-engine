@@ -13,7 +13,7 @@
 //    (1) F_centripetal(a_0) computed from KINEMATICS ALONE (v = alpha*c, no charge)
 //        equals the Coulomb / occlusion force to the last digit  -> "there is no charge".
 //    (2) Inverting the occlusion law for this balance DERIVES P_eff, reproducing the
-//        engine's calibrated value AND the pure-whitelist closed form
+//        engine's calibrated value AND the pure-derivation basis closed form
 //        P_eff = m_p^2 m_e^2 c^5 / (4 pi alpha hbar^3), with NO Coulomb input
 //        (delete-test) -> P_eff upgrades E -> C (EMC01 circularity closed, on framework
 //        terms: alpha read as the kinematic k-rung, the one irreducible input).
@@ -97,7 +97,7 @@ int main() {
     // -----------------------------------------------------------------------------
     // STEP 4.  Symbolic reductions, evaluated numerically.
     //   (a) closed form using k_e e^2 = alpha hbar c :  P_eff = 4 alpha hbar c / (pi R_p^2 r_e^2)
-    //   (b) pure whitelist {m_e,m_p,c,alpha,hbar}, using r_e = alpha hbar/(m_e c)
+    //   (b) pure derivation basis {m_e,m_p,c,alpha,hbar}, using r_e = alpha hbar/(m_e c)
     //       and R_p = 4 hbar/(m_p c) (engine note, 0.02%):  P_eff = m_p^2 m_e^2 c^5/(4 pi alpha hbar^3)
     // -----------------------------------------------------------------------------
     const double P_eff_closed = 4.0 * alpha * hbar * c / (pi * R_p * R_p * r_e * r_e);
@@ -131,7 +131,7 @@ int main() {
     std::printf("    binding == Coulomb (kinematics, no charge) : %s\n", pass_force ? "PASS" : "FAIL");
     std::printf("    P_eff recovered from electropause balance  : %s\n", pass_peff  ? "PASS" : "FAIL");
     std::printf("    closed form 4 a hbar c/(pi R_p^2 r_e^2)    : %s\n", pass_close ? "PASS" : "FAIL");
-    std::printf("    whitelist m_p^2 m_e^2 c^5/(4 pi a hbar^3)  : %s\n", pass_mass  ? "PASS" : "FAIL");
+    std::printf("    derivation basis m_p^2 m_e^2 c^5/(4 pi a hbar^3)  : %s\n", pass_mass  ? "PASS" : "FAIL");
     std::printf("    => P_eff DERIVED (delete-test clean): E -> C, on framework terms.\n");
     std::printf("       Residual input = alpha (the one k-rung); the model does NOT derive alpha.\n");
     std::printf("---------------------------------------------------------------------\n");

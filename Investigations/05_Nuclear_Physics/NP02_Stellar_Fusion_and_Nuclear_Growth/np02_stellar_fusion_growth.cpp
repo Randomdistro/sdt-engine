@@ -194,7 +194,7 @@ static void stage_C() {
 //  Saha (single stage):  x^2/(1-x) = (2/(n_e*lam^3)) exp(-chi/kT),  x = ionised.
 //  Electron availability for capture ~ (1-x).  K-shell binding chi sets the gate.
 static double saha_x(double chi_eV, double T_K, double n_e_m3) {
-    using namespace sdt::laws::measured;            // k_B, h, m_e, eV_to_J (whitelist)
+    using namespace sdt::laws::measured;            // k_B, h, m_e, eV_to_J (derivation basis)
     const double kT  = k_B * T_K;
     const double chi = chi_eV * eV_to_J;
     const double lam = h / std::sqrt(2.0 * PI * m_e * kT);

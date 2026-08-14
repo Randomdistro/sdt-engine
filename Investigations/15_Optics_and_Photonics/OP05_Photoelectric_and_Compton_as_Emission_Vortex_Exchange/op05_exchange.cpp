@@ -3,7 +3,7 @@
 // Author: J. C. Harvey, Melbourne · 2026-07-04
 //
 // MACHINERY ONLY. The emission enters the ledger as an extended relay train
-// with energy rate E = h*f (h = MEASURED tick->energy conversion, whitelist
+// with energy rate E = h*f (h = MEASURED tick->energy conversion, derivation basis
 // input) and momentum rate p = E/c. The electron is a bound vortex of rest
 // ledger m_e c^2 (m_e MEASURED). All results below are conservation
 // bookkeeping solved NUMERICALLY; closed forms appear only as OBSERVED

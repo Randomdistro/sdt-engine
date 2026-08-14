@@ -9,7 +9,7 @@
 
 **CLEAN — and the prompt names its own trap** (§④ P2 anti-tautology gate: ℓ_c must be computed
 forward from lattice geometry; a back-solve from 2300 is CALIBRATED(1), cap at C, "the prompt
-forbids reporting it as DERIVED"). R0–R5 inherited; whitelist-only.
+forbids reporting it as DERIVED"). R0–R5 inherited; derivation basis-only.
 
 ## What the direct run measured
 

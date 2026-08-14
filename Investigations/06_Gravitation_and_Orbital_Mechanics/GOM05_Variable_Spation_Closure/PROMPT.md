@@ -31,7 +31,7 @@
 2. **Why does it matter?** — GOM05 is the load-bearing strong-field refinement under GOM06 (G1
    c_local), GOM01 (the kernel), and the E102/E106/E108 campaign cluster; its FLM06 dependency
    (ℓ_P = √(ϟ·ƛ) closure) is agent-era-adjacent and must be cited as UNCONFIRMED-class, per the
-   whitelist ruling (no Seed-Theorem authority).
+   derivation basis ruling (no Seed-Theorem authority).
 3. **How will we find out?** — P1 re-earn (a)+(b) direct with gates 0.001%; P2 print the
    c-gradient table with per-row labels and the two campaign-status lines attached to (c)/(d);
    P3 the lumiostasis falsifier restated with its decision data named (F3); P4 stretch:

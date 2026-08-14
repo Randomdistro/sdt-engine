@@ -108,7 +108,7 @@ thermodynamic arrow to the cosmological one ([[project_sdt_cyclic_cosmology]]).
 ## Pre-Run Commitments — TD01
 - Prompt completion target: [A|B|C|D]
 - Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
-- CALIBRATED budget: 0 (k_B is the only whitelisted input)
+- CALIBRATED budget: 0 (k_B is the only dependency-traced input)
 - Engine namespaces actually used: measured::k_B, measured::l_P, law_I::epsilon, FLM02 GPI relay update
 - Phase thresholds (committed before run):
     P1 Stirling err <5% at E=1000,N=50; ln W extensive ±5% · P2 net ΔS ≥ 0, trend dS/dt ≥ 0 over 10⁴ ticks from hot start

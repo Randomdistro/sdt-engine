@@ -20,7 +20,7 @@
    - **Cascade B:** CQ15 + CQ16 (spation depth + k-hierarchy) → foundations for CQ18, CQ19, CQ20, CQ26, CQ39, CQ40
    - **Cascade C:** CQ39 + CQ40 → delivers framework closure, breaks CQ33 bottleneck
 
-5. **Whitelist Confirmed:** `{ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p, e_charge}` — nine fundamental inputs (8 + elementary charge).
+5. **derivation basis Confirmed:** `{ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p, e_charge}` — nine fundamental inputs (8 + elementary charge).
 
 ### Class Distribution (23 investigations)
 
@@ -37,7 +37,7 @@
 
 ---
 
-## Foundation Layer: Axioms, Laws, and Whitelist
+## Foundation Layer: Axioms, Laws, and derivation basis
 
 ### Permitted External Invariants (9 inputs)
 
@@ -56,7 +56,7 @@ Base Invariants (CODATA 2018 + IAU):
   e      = 1.602176634e-19 C      (Elementary charge, SI exact)
 ```
 
-**Policy:** α is optional; e_charge IS on the whitelist (CQ03 verdict: e is an EXTERNAL INPUT, not derivable).
+**Policy:** α is optional; e_charge IS on the derivation basis (CQ03 verdict: e is an EXTERNAL INPUT, not derivable).
 
 ### Six Laws (Axioms A1–A9, Theorems T1–T18)
 
@@ -75,7 +75,7 @@ Base Invariants (CODATA 2018 + IAU):
 
 ### Node Types
 
-1. **Whitelist:** {ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p, e}
+1. **derivation basis:** {ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p, e}
 2. **Laws:** Law I, II, III, IV, V, VI
 3. **CQ Investigations:** CQ01–CQ40 (labeled with CLASS: A/C/D/F/X)
 4. **Unknown/Pending:** CQ04, CQ09–CQ14, CQ21–24, CQ27–31, CQ35, CQ41–42
@@ -91,11 +91,11 @@ Base Invariants (CODATA 2018 + IAU):
 
 ## Tier 0: Foundational Autonomies
 
-These CQs depend ONLY on whitelist and Laws (no inter-CQ dependencies):
+These CQs depend ONLY on derivation basis and Laws (no inter-CQ dependencies):
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│ WHITELIST: {ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p, e}             │
+│ derivation basis: {ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p, e}             │
 └────────────┬──────────────────────────────────┬────────────────┘
              │                                  │
         [Law I-VI]                         [Law VI alone]
@@ -297,7 +297,7 @@ CQ37 [X]  Elementary Charge Quantisation
 ├─ Class: X (tier-1 primitive, kept as measured input)
 ├─ Candidates tested: 3 (none succeeded at closure; dimensional impossibility)
 ├─ Deferred to: CQ36 topological linking derivation
-└─ **Decision: Keep e as external input** (whitelisted, CODATA 2018)
+└─ **Decision: Keep e as external input** (dependency-traced, CODATA 2018)
 ```
 
 ---
@@ -426,9 +426,9 @@ These CQs are mentioned in file structure but not extracted:
 
 ---
 
-## Whitelist Verification
+## derivation basis Verification
 
-**Confirmed permitted inputs (9):**
+**Confirmed declared dependencies (9):**
 
 ```
 ✓ ℓ_P    (Planck length, axiom R2)
@@ -489,7 +489,7 @@ These CQs are mentioned in file structure but not extracted:
 ### Tier-0 (Autonomies)
 
 ```
-Whitelist {ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p, e}
+derivation basis {ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p, e}
     ↓
   Laws I–VI
     ↓
@@ -600,7 +600,7 @@ CQ33 [D→C] (Transfer function closure)
 ### Structural Checks
 
 - ✓ No circular dependencies (DAG verified acyclic)
-- ✓ Whitelist complete (9 inputs, e included)
+- ✓ derivation basis complete (9 inputs, e included)
 - ✓ No prohibited inputs (no G, M, dark matter, fields, QM primitives)
 - ✓ All resolved CQs (A/C classes) have zero unresolved sub-dependencies
 - ⚠ Untracked CQs (04, 09–14, 21–24, 27–31, 35, 41–43) need mapping
@@ -652,7 +652,7 @@ Theory reference files:
 ├─ Theory/00_Ruleset.md (axioms, theorems, prohibitions)
 ├─ Theory/01_Closure_Derivations.md
 ├─ Theory/02_Inputs_and_Derivations.md
-├─ Engine/include/sdt/laws.hpp (measured whitelist + Laws I–VI)
+├─ Engine/include/sdt/laws.hpp (measured derivation basis + Laws I–VI)
 ├─ CLAUDE.md (project instructions, ATOMICUS rules)
 └─ SPATIAL_DISPLACEMENT_THEORY.md (full manuscript)
 ```

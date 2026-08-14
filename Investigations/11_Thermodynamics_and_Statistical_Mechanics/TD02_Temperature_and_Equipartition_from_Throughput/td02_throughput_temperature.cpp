@@ -22,7 +22,7 @@
 
 namespace {
 
-const double kB = sdt::laws::measured::k_B;   // the ONLY whitelisted input
+const double kB = sdt::laws::measured::k_B;   // the ONLY dependency-traced input
 
 // TD01 counting: W(E,N) = C(E+N-1, N-1), quanta indistinguishable, cells distinct.
 double ln_W(double E, double N) {
@@ -57,7 +57,7 @@ int main() {
     std::printf("================================================================\n");
     std::printf(" TD02 - Temperature and Equipartition from Throughput\n");
     std::printf(" J. C. Harvey, Melbourne - 2026-07-03\n");
-    std::printf(" Whitelisted input: measured::k_B only. Energies in relay quanta eps.\n");
+    std::printf(" dependency-traced input: measured::k_B only. Energies in relay quanta eps.\n");
     std::printf("================================================================\n\n");
 
     bool p1_beta = true, p1_kin = true, p2_pass = true, p3_pass = true;

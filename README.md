@@ -46,7 +46,7 @@
 >    its own worst results. Since then: the **two-channel architecture + Synchrony Theorem** (pulses
 >    relay at c; constraint through a gear-locked cluster is rigid structure, not a signal — so flat
 >    marginals / no-signalling is a *theorem*, and the locally readable gear phase is the sharpest
->    falsifiable fork with QM on the books); **FLM13** compressed the whitelist ({ℏ, m_e, m_p} → one
+>    falsifiable fork with QM on the books); **FLM13** compressed the derivation basis ({ℏ, m_e, m_p} → one
 >    mass/action seat; eight inputs → four + the thermal seat; the seat's VALUE stays OPEN); **GOM14**
 >    (below) earned the mass-free koppa ontology at scale; and a ~30-investigation strike-force wave
 >    (quantum foundations, condensed matter, plasma, optics, chemistry) executed 2026-07-04/05 with

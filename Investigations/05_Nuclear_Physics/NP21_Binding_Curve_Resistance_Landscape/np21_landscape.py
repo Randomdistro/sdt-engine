@@ -139,13 +139,13 @@ def neg_R_per_A(Z, A, aS, aC, aA):
 #                     (cuboctahedron / FCC coordination) as the interior bond count a piece
 #                     forgoes at the surface -> a_S ~ (bonds per interior piece)/2 * unit.
 #      spread  weight a_C : handed-redirection unit = alpha * (hbar c) geared per pair over
-#                     the shell radius. In whitelist units this is a fixed small number vs a_S.
+#                     the shell radius. In derivation basis units this is a fixed small number vs a_S.
 #      asym    weight a_A : grammar restoring, unit weight.
 #    To avoid smuggling a fitted MeV coefficient, Run G works in RATIO space: we set
 #      a_S := kiss/2 = 6      (12 nearest neighbours, each shared bond counts 1/2)
-#      a_C := alpha           (= 1/137.036, the single whitelisted redirection constant)
+#      a_C := alpha           (= 1/137.036, the single dependency-traced redirection constant)
 #      a_A := 1               (grammar unit)
-#    These are declared GEOMETRIC/whitelist in RUN_LOG. They are NOT tuned to the floor.
+#    These are declared GEOMETRIC/derivation basis in RUN_LOG. They are NOT tuned to the floor.
 # ----------------------------------------------------------------------------
 ALPHA = 1.0 / 137.035999084
 KISS = 12  # cuboctahedron coordination (packing.hpp preset_cuboct12)
@@ -293,7 +293,7 @@ def main():
     print("\n" + "-" * 78)
     print("RUN G — geometric-ratio coefficients  (0 fitted ratios) [DERIVED-attempt]")
     print(f"  a_S = kiss/2 = {GEOM['aS']}  (cuboctahedron coordination 12, packing.hpp)")
-    print(f"  a_C = alpha  = {GEOM['aC']:.6e}  (whitelist redirection constant)")
+    print(f"  a_C = alpha  = {GEOM['aC']:.6e}  (derivation basis redirection constant)")
     print(f"  a_A = {GEOM['aA']}  (grammar unit)")
     print("-" * 78)
     Rmin_G, Zf_G, Af_G = floor_of(rows, **GEOM)
@@ -434,7 +434,7 @@ def main():
         out.write(f"# robustness_on_iron,{stable}/{total}\n")
         out.write("# exponent_tags: bulk=A^0 GEOMETRIC; surface=A^-1/3 GEOMETRIC; "
                   "spread=Z(Z-1)A^-4/3 GEOMETRIC; asym=(nt-nd)^2/A^2 GEOMETRIC(quadratic ASSUMED)\n")
-        out.write("# Run_G ratios: a_S=kiss/2=6 GEOMETRIC; a_C=alpha WHITELIST; a_A=1 GRAMMAR-UNIT (0 fitted)\n")
+        out.write("# Run_G ratios: a_S=kiss/2=6 GEOMETRIC; a_C=alpha derivation basis; a_A=1 GRAMMAR-UNIT (0 fitted)\n")
         out.write(f"# Run_F ratios: a_V={aV_f:.4f} a_S={aS_f:.4f} a_C={aC_f:.4f} a_A={aA_f:.4f} FITTED (CALIBRATED)\n")
     print("\nWrote CSV:", csv_path)
     print("\nDONE.")

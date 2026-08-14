@@ -7,7 +7,7 @@
 
 ## Prompt contraband check
 
-**CLEAN — exemplary.** Whitelist-only, "no borrowed story" contract, all anchors tagged
+**CLEAN — exemplary.** derivation basis-only, "no borrowed story" contract, all anchors tagged
 OBSERVED-ANCHOR, diproton instability taken as measured datum (derivation deferred to NP19/NP20
 by ID), no "X-rays < gammas" definitional import.
 

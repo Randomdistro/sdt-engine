@@ -50,11 +50,11 @@ amorphous silicon/silica). FLM09 claims this single move is the engine of two ph
 ## Claim-class discipline (inherited from CONDENSA)
 
 - **[GEOMETRY]** — pure mathematics, no physics input. Provable, closed.
-- **[FORM / MAGNITUDE]** — the *shape* of a law is forced; the coefficient is either a whitelist input or `[OPEN]`.
+- **[FORM / MAGNITUDE]** — the *shape* of a law is forced; the coefficient is either a derivation basis input or `[OPEN]`.
 - **[IDENTIFICATION]** — a mechanism is *claimed to be* a physical thing. Promising, **not closed**.
 - **[OPEN]** owed · **[KILLED]** tested and abandoned.
 
-## Inputs (whitelist only)
+## Inputs (derivation basis only)
 
 `ℓ_P, c, ℏ, k_B, T_CMB, m_e, e_charge` from `sdt::laws::measured`; lattice geometry (coordination 4, void
 fraction, the frustration angles) from `sdt::laws::lattice_structure` (FLM08). Nothing else is tuned.

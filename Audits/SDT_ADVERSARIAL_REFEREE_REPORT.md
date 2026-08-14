@@ -9,7 +9,7 @@
 ## Summary judgment
 
 - **The genuine result is a re-parametrisation, not a new dynamics.** SDT's clean content is a set of *identities and change-of-variables* (occlusion geometry → 1/r²; `ϟ ≡ GM/c²`; `v_circ²+v²=c²` ≅ Lorentz γ; shell-cancellation `Φ_shell = ε`) plus a genuinely suggestive *ontology* (push-not-pull, matter-as-vortex, time-as-tick). These are internally coherent and occasionally elegant. They are not, on the present evidence, predictive beyond the Standard Model + GR + Kepler.
-- **The EM force scale is parameter-free but inherited from α, not derived from non-EM physics.** The pressure coefficient `P_eff` — which sets every force magnitude — is a pure whitelist closed form `m_p²m_e²c⁵/(4παℏ³)` derived from the electron's centripetal requirement (it passes the delete-test; it is **not** a fit). What it is *not* is a derivation of electromagnetism from nothing: its magnitude is entirely α, the one EM input SDT does not derive. (Corrected after challenge from an earlier draft that wrongly called it a Coulomb calibration — see Part 1 §2.)
+- **The EM force scale is parameter-free but inherited from α, not derived from non-EM physics.** The pressure coefficient `P_eff` — which sets every force magnitude — is a pure derivation basis closed form `m_p²m_e²c⁵/(4παℏ³)` derived from the electron's centripetal requirement (it passes the delete-test; it is **not** a fit). What it is *not* is a derivation of electromagnetism from nothing: its magnitude is entirely α, the one EM input SDT does not derive. (Corrected after challenge from an earlier draft that wrongly called it a Coulomb calibration — see Part 1 §2.)
 - **No number that was not put in comes out.** Not a single particle mass, not the mass ratio, not α, not a binding energy heavier than the deuteron, not H₀. The two genuinely-derived numbers in the whole corpus (the deuteron binding to 1.1%, and the neutron seat velocity 1.83c to 0.006%) are real and should be foregrounded — but they do not carry a theory.
 - **There is an integrity problem**, already self-diagnosed: ~8 fabricated results clustered on famous single constants (Lamb shift, H₀, μ_n, 1.75″ lensing), some still displayed under their retraction banners. These must be quarantined before any external submission, or the first referee to find one discards the whole manuscript.
 
@@ -22,17 +22,17 @@ The strongest, most survivable framing of SDT is **"a neo-Lorentzian, Le-Sage-ty
 ### 1. The convergence-pressure engine cancels out of every quantitative result
 The flagship mechanism is convergent boundary pressure `P_conv = Nε ≈ 2.46×10⁴⁸ Pa`. But:
 - The symbolic force theorem uses `P_conv` (`SDT_Complete_Laws.md:453`), while **every numerical result and the entire engine use a different pressure `P_eff`** (`laws.hpp:399-403`); `P_conv` appears **nowhere** in any force computation.
-- `P_eff` is not `P_conv` reduced by a derived factor, nor is it fitted: it is **independently derived** from the electron's centripetal requirement as a whitelist closed form `P_eff = m_p²m_e²c⁵/(4παℏ³) = 4αℏc/(π R_p² r_e²)` (`laws.hpp:361`; electropause, EMC04). It equals the atomic Coulomb scale by identity, but no measured Coulomb force is used to set it. (The engine still stamps it `class E / calibrated`; on the electropause algebra that is too harsh — EMC04's class-C claim, delete-test-passing, has the better case. See §2.)
+- `P_eff` is not `P_conv` reduced by a derived factor, nor is it fitted: it is **independently derived** from the electron's centripetal requirement as a derivation basis closed form `P_eff = m_p²m_e²c⁵/(4παℏ³) = 4αℏc/(π R_p² r_e²)` (`laws.hpp:361`; electropause, EMC04). It equals the atomic Coulomb scale by identity, but no measured Coulomb force is used to set it. (The engine still stamps it `class E / calibrated`; on the electropause algebra that is too harsh — EMC04's class-C claim, delete-test-passing, has the better case. See §2.)
 - At hydrogen the occlusion dressing is trivial: substituting `R_charge = √(R_p r_e)` into `(π/4) P_eff R_charge⁴/r²` returns `k_e e²/r²` **identically** (`emc01_scroller.html:519-520`), so the 0.12% match is *consistency at the anchor, not an independent test* (`SDT_Complete_Laws.md:474`). The occlusion cross-section does non-trivial work only away from the EM scale (gravity, nuclear).
 
 **Referee's kill line:** the force law's coefficient is `P_eff` (derived, α-based), **not** the shell pressure `P_conv ≈ 2.46×10⁴⁸ Pa`. `P_conv` enters no force computation; `f = P_eff/P_conv` (`laws.hpp:372`, `class E`) is a diagnostic ratio, not a bridge that does work. So the flagship *convergence pressure* does no quantitative work in the force sector — the force magnitude is carried entirely by `P_eff`, i.e. by α. Law I's mechanism is decorative w.r.t. every force number. (Law IV, by contrast, *does* stay circular: `m = ΦV_disp/3ℓ_P³c²` and `V_disp = 3mℓ_P³c²/Φ` are literal inverses — `laws.hpp:439,450`.)
 
 ### 2. P_eff is derived (parameter-free) but α-inherited — corrected after challenge
-*An earlier draft called `P_eff` "a fitted scale calibrated to Coulomb." That was wrong; a challenge forced the check, and the check overturns it.* The electropause derivation (EMC04) fixes `P_eff` from a **kinematic** requirement, not a Coulomb fit: the electron sits at `a₀` moving at `v = αc`, so whatever holds it must supply centripetal force `F = m_e(αc)²/a₀ = m_e²α³c³/ℏ`. Invert the occlusion law `F = (π/4)P_eff R_charge⁴/a₀²` (`R_charge = √(R_p r_e)`) and it collapses to the pure whitelist closed form
+*An earlier draft called `P_eff` "a fitted scale calibrated to Coulomb." That was wrong; a challenge forced the check, and the check overturns it.* The electropause derivation (EMC04) fixes `P_eff` from a **kinematic** requirement, not a Coulomb fit: the electron sits at `a₀` moving at `v = αc`, so whatever holds it must supply centripetal force `F = m_e(αc)²/a₀ = m_e²α³c³/ℏ`. Invert the occlusion law `F = (π/4)P_eff R_charge⁴/a₀²` (`R_charge = √(R_p r_e)`) and it collapses to the pure derivation basis closed form
 
 `P_eff = m_p²m_e²c⁵/(4παℏ³) = 5.23×10³¹ Pa`,
 
-computed from `{m_p, m_e, c, ℏ, α}` alone. **No measured Coulomb force enters; it passes the delete-test.** So `P_eff` adds **no free parameter** — *"zero free parameters beyond the whitelist" survives at this joint*, and the engine's `class E / calibrated / FAILS` stamp is too harsh (EMC04's class-C claim has the better algebra).
+computed from `{m_p, m_e, c, ℏ, α}` alone. **No measured Coulomb force enters; it passes the delete-test.** So `P_eff` adds **no free parameter** — *"zero free parameters beyond the derivation basis" survives at this joint*, and the engine's `class E / calibrated / FAILS` stamp is too harsh (EMC04's class-C claim has the better algebra).
 
 What honestly remains is narrower:
 
@@ -58,7 +58,11 @@ The koppa formalism is a clean, precision-honest re-parametrisation `GM ↔ ϟ =
 
 ### 6. The topological predictions are one-point fits or postdictions
 - **W+1 radius rule** `R_wake=(W+1)ℏ/mc` is a **conjecture** (`laws.hpp:1090,1366`) that predicts exactly one number (R_p to 0.02%) with one integer knob, and **fails for the electron** (g(W=1)=α≠2), which is then handled by a different mechanism and relabelled. It is pre-insulated as a "branch test, not full-SDT kill" (`laws.hpp:1060`).
-- **6π⁵ = 1836.118** is flagged **OPEN, mechanism-untested** (`PPT07/ROOTSIM_VERDICT.md:44`) and was **found by searching against the target** (`:14`). The look-elsewhere problem is demonstrated *by the corpus itself*: it contains **three mutually inconsistent "derivations"** of the same 1836 (`6π⁵`; `(3/2)^{3/2}·10³−1`; a quartic block-ratio), two of which land at 1836.117-118 from unrelated functional families. `SDT_Complete_Laws.md:1653`: *"Not derived."*
+- **6π⁵ = 1836.118** was OPEN at this audit date. **Superseded
+  2026-08-14:** PPT17 resolves its physical assignment as the shared-input
+  packing count from the point electron's 720-degree Bohr-closure tube into
+  the W=3 torus at `R_p`. This closes the construction, not an independent
+  prediction; the historical look-elsewhere warning remains applicable.
 - **α is an input** (PPT02 negative result); "α = koppa at H" is a restatement, not a mechanism (`PPT02:87-88`).
 - **Only two stable charged particles**: the knot-theory half (Alexander Δ≠1 protects the trefoil) is sound; the energetics half (why W=2/W≥4 decay) rests on **PPT09, a retracted fabricated verdict**. And **muon/tau** are the same W=1 as the electron — the "two knot types = two particles" claim is contradicted inside Law VI by its own lepton family (`LAW_OF_VORTEX...:325`, masses "restated, not predicted").
 
@@ -119,7 +123,7 @@ A referee would return the manuscript with three demands, any *one* of which, if
 
 1. **Derive one number you did not put in.** A lepton mass, the mass ratio 1836.15 from a *mechanism* (not a search), α, or a binding energy heavier than A=2. The corpus's own OPEN list says none of these is done.
 2. **Exhibit ONE observable that distinguishes SDT from GR+QM+ΛCDM.** Not a re-derivation of an agreed number (those are identities), and not a degenerate cosmology fit. The neo-Lorentzian `c_∞` is admitted un-measurable; μ_ν≡0 is ~8 orders below testability; the depth-closure P2 (+105 m/s) carries ±20% and is untested. Name one that is measurable this decade.
-3. **Publish the dependency graph acyclic.** "Zero free parameters" with a whitelist containing α and m_p is a contradiction until the graph is shown to derive them without assuming them (`PARADOX_CENSUS.md:354`). Until then, the honest count is **≥2 irreducible seeds** (ℓ_P, and α-or-m_p), not zero.
+3. **Publish the dependency graph acyclic.** "Zero free parameters" with a derivation basis containing α and m_p is a contradiction until the graph is shown to derive them without assuming them (`PARADOX_CENSUS.md:354`). Until then, the honest count is **≥2 irreducible seeds** (ℓ_P, and α-or-m_p), not zero.
 
 ---
 

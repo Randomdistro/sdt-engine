@@ -175,7 +175,7 @@ record and links forward to the investigation (see each investigation's
 | E49 | Dark Energy as Residual Pressure Gradient | Cosmology | LOW | Spec written (investigation not yet run) |
 | E50 | Cosmic Neutrino Background Temperature | Cosmology | HIGH | Awaiting detector |
 | E51 | Fine Structure Constant from Lattice Geometry | Electromagnetic | HIGH | Open problem |
-| E52 | Proton-Electron Mass Ratio from Winding Numbers | Electromagnetic | HIGH | Open problem |
+| E52 | Proton-Electron Mass Ratio from Winding Numbers | Electromagnetic | HIGH | Resolved construction (shared-input) |
 | E53 | Anomalous Magnetic Moment (g-2) from Lattice Corrections | Electromagnetic | HIGH | Open problem |
 | E54 | Lamb Shift from Lattice Fluctuations | Electromagnetic | HIGH | Open problem |
 | E55 | Photoelectric Effect from Pressure-Field Coupling | Electromagnetic | MODERATE | Proposed (laboratory) |
@@ -237,6 +237,9 @@ record and links forward to the investigation (see each investigation's
 | E106 | Oort-Cloud Lumiostasis | Convergence Depth | LOW | Archival (catalogue) |
 | E107 | Reflected-Light Gravitational-Redshift Fork | Convergence Depth | MODERATE | Proposed (IR spectroscopy) |
 | E108 | Galactic-Floor Redshift | Cosmology / Depth | HIGH | Proposed (frontier) |
+| E109 | Solar Spectral Prism | Convergence Depth | LOW | Archival |
+| E110 | Deflection Decomposition by Powered Line | Gravity / Optics | MODERATE | Spec |
+| E111 | Actinide flay vs drop (T12 remnant vs N=126) | Nuclear Physics | LOW | ⮑ graduated → NP35 |
 
 ---
 

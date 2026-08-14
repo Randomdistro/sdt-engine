@@ -48,7 +48,7 @@ transient structure). Phase 0's WWW bond-switching already models this — keep 
 not quench it into a static glass (this is also FLM05's flag C: reconcile rigid-limit ↔ superfluid).
 
 **Four-root loop (§K.2):** on each failed validation problem, sort — root-1 claim false (network won't isotropise /
-v(r) won't decay / wake ratio needs a plug) · root-2 dependency (FLM08 geometry, the whitelist radii) · root-3
+v(r) won't decay / wake ratio needs a plug) · root-2 dependency (FLM08 geometry, the derivation basis radii) · root-3
 prompt (Hessian/discretisation mis-scoped) · root-4 contraband (a wavefunction/probability smuggled as a
 "mechanical" phrase, per the §③ prohibition). **KILL-DEEPEN (§K):** because five debts hang on FLM10, a premature
 KILL here cascades — no KILLED verdict on a first-pass gate; re-run unanchored, old agent results deleted first.
@@ -99,7 +99,7 @@ spectrum — all are *outputs* of this dynamics that are currently *assumed*. Cl
 
 ## ③ Theoretical Framework
 
-**Permitted inputs (whitelist, the ONLY external scales):** `{ℓ_P, c, ℏ, α, m_e, m_p}` plus the two measured
+**declared dependencies (derivation basis, the ONLY external scales):** `{ℓ_P, c, ℏ, α, m_e, m_p}` plus the two measured
 radii `R_p, a₀`. **No `G`, no `M` (kg), no `GM`.** FLM08 geometry constants come from
 `sdt::laws::lattice_structure` (`dihedral = arccos(1/3)`, `deficit = 2π−5·arccos(1/3) = 7.356°`,
 `bc_twist = arccos(−2/3)`, `coordination = 4`, `void = 1 − π√3/16`).
@@ -221,7 +221,7 @@ FAIL — it is a PASS for the solver (it answered the question honestly), even t
 
 **Upstream (required):** **FLM08** (the corner-sharing CRN substrate + exact geometry, `lattice_structure.hpp`);
 **PPT01** (trefoil/unknot velocities, `R/a`); **Laws I/III/IV/V** (pressure, occlusion, mass-as-displacement,
-movement budget); the whitelist (`sdt::laws::measured`).
+movement budget); the derivation basis (`sdt::laws::measured`).
 
 **Downstream (blocked until this exists):** **FLM09-A2** (isotropy/`ω(k)` = the CONDENSA Lorentz-emergence
 debt); **PPT07** (the `6π⁵` wake mechanism); **FLM03/FLM04** (the `v(r)` decay coefficient); **OP-1/OP-2/OP-3**

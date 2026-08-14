@@ -20,7 +20,7 @@ inside a gradient the free path is the curve and straightness costs. Consequentl
 field-following route is demoted to a consistency appendix here, and the primary instruments
 are **reaction instruments** — the normal force, the powered ascent, the null-steered line.
 
-## 1. Permitted inputs
+## 1. declared dependencies
 
 `bridge::koppa_Earth`, `bridge::koppa_Sun` (comparison anchors only — the recovery chains must
 not consume them); measured g₀ = 9.80665 m/s² with its centrifugal content stated; R_E; tower

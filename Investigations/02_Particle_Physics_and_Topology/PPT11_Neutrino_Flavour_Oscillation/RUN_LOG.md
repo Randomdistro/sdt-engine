@@ -18,7 +18,7 @@
   - **P1** — a single named dimensioned internal DoF; all 3 configs → 3 engine minima with no new constants; e/μ/τ→config stated geometrically. GATE HINGE: FLM11 must grant the straight W=0 vortex ≥1 free internal angular DoF, else OPEN.
   - **P2** — `dφ/dx` dimensionally `[1/length]`; proportionality constant from `{ℏ,c,...}` or engine V_disp minima; **0 fitted knobs**; explicit no-wavefunction contrast (translation test).
   - **P3** — bar above; sanity gate: tool round-trips wake radii 9.87/6.80/3.29 µm from m_nu*.
-  - **P4** — every P3 branch bottoms out at a named geometric/whitelist root cause; no branch ends "unclear."
+  - **P4** — every P3 branch bottoms out at a named geometric/derivation basis root cause; no branch ends "unclear."
 - **Forbidden retroactive changes:** widen the ±1-decade bar; plug a lever coefficient; IDENTITY-PASS on Δm²; call a superposition a "geometric beat"; relabel OPEN/KILL as PASS; local constant namespaces.
 
 ---

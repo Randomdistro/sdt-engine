@@ -31,7 +31,7 @@ all PROMPT.md files, APS07 `DATA_COLLECTION.md` (measured data), all tools and d
 | EMC01 | 6/7 PASS, exit 1 | force law class C; G-test honest FAIL (~5×); P_eff question routed to EMC04 |
 | EMC02 | PASS (negative) | e stays Tier-1: dimensional closure impossible ([A·s] unreachable); Lk route deferred (PPT09) |
 | EMC03 | PASS class C | occlusion=Coulomb magnitude 1.4e-16; sign symmetry structural; zk²=1 |
-| EMC04 | **4/4 PASS** | **P_eff derived from kinematics** (4.1e-12; whitelist form 3.9e-4); E→C on framework terms; residuals: α input, W+1 conjectural |
+| EMC04 | **4/4 PASS** | **P_eff derived from kinematics** (4.1e-12; derivation basis form 3.9e-4); E→C on framework terms; residuals: α input, W+1 conjectural |
 | APS01 ×8 | 7 ran, 1 CRASH | H 12.5 ppm / H-like 263 ppm (**CONVERGENCE**, Rydberg algebra); blind terrain recovery 7/9; capacities emerge (pair=2, cube); magnetism 102/118 with named fails; triton–d/f pattern (suggestive only — counts-degeneracy rule); `aps01_forward_derivation` unrunnable (0xC0000005 at -O2 and -O0) |
 | APS02 | PASS pattern | drag D monotone with outer-shell count: 1.766 (lone) → 1.021 (full) |
 | APS03 | **PILOT PASS + collapse re-earned** | with real full SPARC wired: pilot 23.7%/BTFR 3.58 exact; **C+A+B collapse 8.8%** over 20 bins; neg-control 53.3% (6× worse → power); nuclear 447% excluded; atomic floor slope +0.25 wrong-sign (ξ_A open); shape still BORROWED (MOND-simple) |

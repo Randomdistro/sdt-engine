@@ -2,7 +2,7 @@
 ### (spawned by GD06 · feeds Phase 2 · home 02 · REBUILT on the solid-angle instrument 2026-07-13)
 
 > **Author:** J. C. Harvey, Melbourne. **Status:** SPAWNED-SPEC (rebuilt). **Inherits:** GD06 The Two Rules + §③; `HUNTER_PROTOCOL.md` §A–§K.
-> **Engine:** `laws.hpp` for OBSERVED comparison only. **No whitelisted constant in the derivation. No m as input. No "charge radius" → nuclear boundary.**
+> **Engine:** `laws.hpp` for OBSERVED comparison only. **No dependency-traced constant in the derivation. No m as input. No "charge radius" → nuclear boundary.**
 
 ## ⓪ Five questions
 1. **What don't we know?** — The **slope h′(0) and curvature h″(0)** of the dimensionless sky-coverage law z_d=h(Θ) in the **dilute** branch, read from the isotope **field shift** (= the change in the sky-fraction the nucleus subtends at the electron) and its **King nonlinearity**.

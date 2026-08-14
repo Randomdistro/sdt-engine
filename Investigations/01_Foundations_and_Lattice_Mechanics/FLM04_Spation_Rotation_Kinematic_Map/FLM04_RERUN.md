@@ -1,6 +1,6 @@
 # FLM03 — RERUN (2026-06-08, §0-clean)
 
-> Run against the rewritten `PROMPT.md`: forward from the whitelist + measured anchors only, every match
+> Run against the rewritten `PROMPT.md`: forward from the derivation basis + measured anchors only, every match
 > checked **downstream**, every borrowed thing flagged. Tags: **FORWARD** (SDT-derived, lands on an
 > observable = convergence) · **CALIBRATED/DEFINITIONAL** (matches, but not a clean derivation) ·
 > **IDENTITY** (algebraic restatement, not a check) · **OPEN** (no honest forward route — not fabricated).
@@ -18,7 +18,7 @@ This file is retained only as a record of that error; the real adjudication need
 computation and the full dependency stack — which exceeds what continuum algebra, or I in chat, can deliver.
 
 ## What was used
-- Whitelist: ℓ_P, c, ℏ, α, m_e, m_p. Measured anchors (comparison only): R_p=8.414×10⁻¹⁶ m,
+- derivation basis: ℓ_P, c, ℏ, α, m_e, m_p. Measured anchors (comparison only): R_p=8.414×10⁻¹⁶ m,
   a₀=5.29177×10⁻¹¹ m, and the §2 observables (13.6057 eV, 0.741 Å/4.52 eV, 1.4204 GHz, 8.24×10⁻⁸ N).
 - **No G, no M, no QM formula, no observer, no test particle.**
 
@@ -58,7 +58,7 @@ computation and the full dependency stack — which exceeds what continuum algeb
 ## ENERGETIC
 - **Ionisation — FORWARD (clean convergence):** the orbital-whirl kinetic energy
   **½ m_e (αc)² = 13.6057 eV** matches the observed hydrogen ionisation **to all quoted digits**. Rydberg
-  series E_n = 13.606/n² (n=2 → 3.401, n=3 → 1.512 eV) from r_n=n²a₀, v_n=αc/n. *Inputs: α (whitelist), m_e,
+  series E_n = 13.606/n² (n=2 → 3.401, n=3 → 1.512 eV) from r_n=n²a₀, v_n=αc/n. *Inputs: α (derivation basis), m_e,
   c — a genuine forward landing, not a plug.*
 - **Rest energy:** m c² = 938.3 MeV (proton) / 0.511 MeV (electron) — but the **masses are measured inputs**,
   so this is E=mc², not a mass derivation.

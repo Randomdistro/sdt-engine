@@ -17,7 +17,7 @@
 
 ## §0 Anti-creep protocol (R0–R5)
 
-- **R0 — Permitted inputs:** the whitelist `{ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p}` + **RAW measured observables
+- **R0 — declared dependencies:** the derivation basis `{ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p}` + **RAW measured observables
   in their measured units** (§2). Where a quantity in common use is a *model-processed product* (an angle
   reinterpreted as a length via an assumed metric, a magnitude corrected against an assumed cosmology), use the
   **raw observable underneath it**, not the processed number.

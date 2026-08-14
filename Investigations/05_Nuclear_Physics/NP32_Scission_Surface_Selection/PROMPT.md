@@ -1,5 +1,7 @@
 # NP32 — The Scission Surface: where the mesh parts, and whether the input selects it
 
+> **Ontology correction 2026-08-13:** the nucleus is **flayed, not split**. The core is sealed masonry, not a goo drop. A minimum-cut of a liquid-drop contact graph is the wrong object. Empirical yield regularities in this folder stand; the mechanism claim moves to **NP35**. Neck/bipartition language below is historical SPEC text, not current mechanism.
+>
 > **Author:** J. C. Harvey, Melbourne. **Status:** SPEC (opened 2026-07-23, direct).
 > **This is the end-goal linchpin.** The nuclear programme's stated purpose is *each nucleus has
 > one way to be ⇒ spallation/fission become controllable*. Every other NP investigation feeds this

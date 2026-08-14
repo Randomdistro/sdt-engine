@@ -88,7 +88,7 @@ mechanism. This drove the §H.LEASH amendment below.
 
 ## §H Adjudication 2 — FLM06 (Seed Theorem)
 
-**Verdict under review:** "no dimensionless ~10⁶¹ from the whitelist carriers; one action/mass
+**Verdict under review:** "no dimensionless ~10⁶¹ from the derivation basis carriers; one action/mass
 seed unavoidable ⇒ ℓ_P stays Axiom R1." Re-audit: KILL-RESCOPED to "static-spation, count-free
 input set."
 **Phase 2 (scope):** the proof enumerated only length/temperature/dimensionless carriers —

@@ -132,7 +132,7 @@ header{position:sticky;top:0;z-index:100;background:color-mix(in srgb,var(--bg0)
 </style>
 <link rel="stylesheet" href="sdt-shell.css">
 <script src="sdt-shell.js" defer></script>
-<meta name="description" content="The SDT research programme: 157 investigations across 16 fields of physics, each deriving predictions within Spatial Displacement Theory and comparing…">
+<meta name="description" content="The SDT research programme: investigations across 16 fields of physics, each deriving predictions within Spatial Displacement Theory and comparing them to measurement.">
 <link rel="canonical" href="https://spatialdisplacementtheory.com/investigations">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.ico" sizes="64x64">
@@ -142,7 +142,7 @@ header{position:sticky;top:0;z-index:100;background:color-mix(in srgb,var(--bg0)
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Spatial Displacement Theory">
 <meta property="og:title" content="SDT Research — Investigations by Field · Spatial Displacement Theory">
-<meta property="og:description" content="The SDT research programme: 157 investigations across 16 fields of physics, each deriving predictions within Spatial Displacement Theory and comparing…">
+<meta property="og:description" content="The SDT research programme: investigations across 16 fields of physics, each deriving predictions within Spatial Displacement Theory and comparing them to measurement.">
 <meta property="og:url" content="https://spatialdisplacementtheory.com/investigations">
 <meta property="og:image" content="https://spatialdisplacementtheory.com/og-card.png">
 <meta property="og:image:width" content="1200">
@@ -150,7 +150,7 @@ header{position:sticky;top:0;z-index:100;background:color-mix(in srgb,var(--bg0)
 <meta property="og:locale" content="en_AU">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="SDT Research — Investigations by Field · Spatial Displacement Theory">
-<meta name="twitter:description" content="The SDT research programme: 157 investigations across 16 fields of physics, each deriving predictions within Spatial Displacement Theory and comparing…">
+<meta name="twitter:description" content="The SDT research programme: investigations across 16 fields of physics, each deriving predictions within Spatial Displacement Theory and comparing them to measurement.">
 <meta name="twitter:image" content="https://spatialdisplacementtheory.com/og-card.png">
 </head>
 <body>
@@ -174,6 +174,7 @@ header{position:sticky;top:0;z-index:100;background:color-mix(in srgb,var(--bg0)
     <div class="kick">The research programme</div>
     <h1>Every field, tested against the same four irreducibles.</h1>
     <p>SDT holds space, matter, movement and now, and derives the rest. Each investigation below works inside that framework — deriving a prediction and gating it against measurement, with the assessment on the record. Open any card to read it in full.</p>
+    <p style="margin-top:14px;font-size:13px;color:var(--text2);max-width:720px;line-height:1.7;border-left:3px solid var(--accent);padding:8px 0 8px 14px;">As of August 2026: nuclear seating is closed as geometry. Fission is a flay of unfrozen shells around a sealed T12 core, not a liquid-drop split (NP35). Le Sage heating is a corpuscle-in-void objection — it does not apply; the lattice is the space. Koppa origin and a native action distinct from ℏ remain parked. The cards below are the live tree; they are not a second source of truth ahead of <code>laws.hpp</code>.</p>
     <div class="hero-stats">
       <div class="hstat"><div class="n" id="sTotal">—</div><div class="l">Investigations</div></div>
       <div class="hstat"><div class="n" id="sFields">—</div><div class="l">Fields</div></div>
@@ -184,7 +185,7 @@ header{position:sticky;top:0;z-index:100;background:color-mix(in srgb,var(--bg0)
   <div class="toolbar">
     <div class="search-wrap">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input id="searchBox" type="search" placeholder="Search 157 investigations — title, code, field…" autocomplete="off">
+      <input id="searchBox" type="search" placeholder="Search investigations — title, code, field…" autocomplete="off">
     </div>
   </div>
   <div class="pills" id="pills"></div>
@@ -252,7 +253,7 @@ function render(){
 }
 function card(f,inv,i){
   const c=document.createElement('div');c.className='card';c.style.animationDelay=(i*22)+'ms';
-  const badge=inv.verdict?'<span class="badge b-verdict">✓ assessed</span>':'<span class="badge b-spec">spec</span>';
+  const badge=(inv.has_verdict||inv.verdict)?'<span class="badge b-verdict">✓ assessed</span>':'<span class="badge b-spec">spec</span>';
   const fileTags=inv.files.filter(x=>/\.(md|cpp|hpp|h)$/i.test(x)).slice(0,4).map(x=>{const e=x.split('.').pop().toLowerCase();return `<span class="ft ${e}">${x}</span>`;}).join('');
   c.innerHTML=`
     <div class="chead">
@@ -274,14 +275,20 @@ function card(f,inv,i){
 }
 async function load(f,inv,body){
   const docs=inv.files.filter(x=>/\.(md|cpp|hpp|h|txt)$/i.test(x));
-  const order=[inv.primary,...docs.filter(x=>x!==inv.primary)];
-  body.innerHTML=`<div class="tabs">${order.map((x,i)=>`<div class="tab${i?'':' active'}" data-f="${x}">${x}</div>`).join('')}</div><div class="inner"><div class="loading"><div class="spin"></div> Loading…</div></div><a class="gh" href="${GH}${f.dir}/${inv.folder}" target="_blank" rel="noopener" style="margin:0 22px 14px">↗ folder on GitHub</a>`;
+  const primary=inv.primary
+    || docs.find(x=>/ASSESSMENT/i.test(x))
+    || docs.find(x=>/VERDICT/i.test(x))
+    || docs.find(x=>/^PROMPT\.md$/i.test(x))
+    || docs[0];
+  const order=[primary,...docs.filter(x=>x!==primary)].filter(Boolean);
+  const dir=inv.dir||f.dir;
+  body.innerHTML=`<div class="tabs">${order.map((x,i)=>`<div class="tab${i?'':' active'}" data-f="${x}">${x}</div>`).join('')}</div><div class="inner"><div class="loading"><div class="spin"></div> Loading…</div></div><a class="gh" href="${GH}${dir}/${inv.folder}" target="_blank" rel="noopener" style="margin:0 22px 14px">↗ folder on GitHub</a>`;
   const inner=body.querySelector('.inner');
   async function show(fname){
     inner.innerHTML='<div class="loading"><div class="spin"></div> Loading…</div>';
-    const key=f.dir+'/'+inv.folder+'/'+fname;
+    const key=dir+'/'+inv.folder+'/'+fname;
     let txt=cache[key]; if(txt===undefined){txt=await fetchText(key);cache[key]=txt;}
-    if(txt===null){inner.innerHTML=`<div class="loading">Couldn't load locally or from GitHub — <a href="${GH}${f.dir}/${inv.folder}" target="_blank" rel="noopener">open the folder ↗</a></div>`;return;}
+    if(txt===null){inner.innerHTML=`<div class="loading">Couldn't load locally or from GitHub — <a href="${GH}${dir}/${inv.folder}" target="_blank" rel="noopener">open the folder ↗</a></div>`;return;}
     const ext=fname.split('.').pop().toLowerCase();
     inner.innerHTML = ext==='md' ? `<div class="md">${md(txt)}</div>`
       : (ext==='cpp'||ext==='hpp'||ext==='h') ? `<pre class="src">${cpp(txt)}</pre>`
@@ -295,11 +302,13 @@ async function load(f,inv,body){
 (async function(){
   try{const r=await fetch('investigations_manifest.json');DATA=await r.json();}
   catch(e){document.getElementById('container').innerHTML='<div class="empty">Couldn\'t load the manifest. Regenerate it with the manifest script, or serve this page over http (Live Server).</div>';return;}
-  document.getElementById('sTotal').textContent=DATA.total;
-  document.getElementById('sFields').textContent=DATA.nfields;
-  document.getElementById('sVerdicts').textContent=DATA.fields.reduce((a,f)=>a+f.investigations.filter(i=>i.verdict).length,0);
+  document.getElementById('sTotal').textContent=DATA.total_investigations||DATA.total;
+  document.getElementById('sFields').textContent=DATA.total_fields||DATA.nfields;
+  document.getElementById('sVerdicts').textContent=DATA.fields.reduce((a,f)=>a+f.investigations.filter(i=>i.has_verdict||i.verdict).length,0);
+  const total=DATA.total_investigations||DATA.total;
+  document.getElementById('searchBox').placeholder='Search '+total+' investigations — title, code, field…';
   const pills=document.getElementById('pills');
-  pills.innerHTML=`<div class="pill active" data-f="all">All<span class="c">${DATA.total}</span></div>`+
+  pills.innerHTML=`<div class="pill active" data-f="all">All<span class="c">${total}</span></div>`+
     DATA.fields.map(f=>`<div class="pill" data-f="${f.num}" title="${f.name}">${f.code}<span class="c">${f.count}</span></div>`).join('');
   pills.onclick=e=>{const p=e.target.closest('.pill');if(!p)return;pills.querySelectorAll('.pill').forEach(x=>x.classList.remove('active'));p.classList.add('active');filter=p.dataset.f;render();window.scrollTo({top:0,behavior:'smooth'});};
   document.getElementById('searchBox').oninput=e=>{search=e.target.value;render();};

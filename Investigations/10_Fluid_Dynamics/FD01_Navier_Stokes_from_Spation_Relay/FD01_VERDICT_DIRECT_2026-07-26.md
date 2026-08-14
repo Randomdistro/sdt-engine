@@ -8,7 +8,7 @@
 ## Prompt contraband check
 
 **CLEAN.** NS/Euler/Stokes named as the CONVERGENCE target to reproduce, never an input (§9 note
-is explicit). R0–R5 inherited; whitelist-only; Chapman–Enskog/Taylor is mathematics, not a rival
+is explicit). R0–R5 inherited; derivation basis-only; Chapman–Enskog/Taylor is mathematics, not a rival
 axiom. One process gap: the prompt mandates a `RUN_LOG.md` pre-commit block — none exists in the
 folder (agent-era run skipped it). The tool prints its R1 predictions before each comparison,
 which covers the intent for this re-run.

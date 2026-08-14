@@ -23,7 +23,7 @@ Tracked files: **2307**. Working-tree files by top-level region (includes untrac
 | Papers | 22 | manuscripts | medium provenance | yes | no | no | no | depth-closure thread previously read |
 | Audits | 18 | audit records | provenance / non-authoritative vs data | meta | no | no | mixed | today’s audits + this iteration |
 | Laws | 17 | law manuscripts | high (propose-and-wait) | yes | no | no | no | not edited; not re-opened line-by-line |
-| Engine | 9 | canonical headers | **highest** | yes | measured whitelist | no | no | `depth_closure` + bridge solar symbols read |
+| Engine | 9 | canonical headers | **highest** | yes | measured derivation basis | no | no | `depth_closure` + bridge solar symbols read |
 | Theory | 9 | ruleset / open problems | high | yes | no | no | no | gateways applied; Theory files remain on standing read list |
 | Benchmarks | 9 | suite | medium (detox required) | yes | no | no | no | prior adversarial run cited |
 | Theory_SCT / other | <20 | alternate/historical | low | mixed | no | no | often | inventoried |

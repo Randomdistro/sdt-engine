@@ -92,7 +92,7 @@ the overlap in hand — same gears, no new parameter.
 
 ## 5. The 23.85 MeV of 2d→α — movement freed when two tours mesh into one
 
-Scission's mandatory act (NP25): two deuteron tours merge into one alpha tour. Two
+Scission's mandatory act (NP25, jacket of a **flay** — NP35): two deuteron tours merge into one alpha tour. Two
 independently-maintained circulations become **one shared circulation**; the movement that
 was self-opposed in the two deuterons is now opposed jointly — less self-halting needed. The
 movement that was halted and no longer needs to be — 23.85 MeV of it, counted — **runs

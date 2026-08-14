@@ -4,7 +4,7 @@
 
 ## Golden Rule Q1 (filling the template blank)
 
-**What don't we know?** Whether f = P_eff/P_conv ≈ 2.12e-17 can be written in whitelist
+**What don't we know?** Whether f = P_eff/P_conv ≈ 2.12e-17 can be written in derivation basis
 primitives only — equivalently, whether R_CMB (the single class-X scale in it) has any
 independent derivation. One measurable gap: the value of R_CMB required by each closure route
 vs the stored 9.527e26 m.

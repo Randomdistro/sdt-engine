@@ -19,9 +19,9 @@
 |---|---|
 | MM04 koppa Law-III | PARKED_PERMANENT — no new axiom |
 | AS02 discrete A_s | REMAINS_IMPORTED — no new axiom |
-| PSP02 TNF | not staged |
+| PSP02 TNF | not staged (path ledger already ready) |
 | D42 `laws.hpp` comment | no approve phrase |
-| GOM06 GW | still route-to-attempt (not a combinatorial screen) |
+| GOM06 distinctive GW | I42 GW01 already IDENTITY_DISCLOSED on chirp; echoes / breathing≡memory still route-to-attempt |
 
 ## Cascade
 
@@ -34,3 +34,7 @@
 
 `.audit-tmp/i44_run.txt`  
 `Investigations/00_Master_Cascade/Outstanding_Closure_Iteration44/`
+
+## Stop
+
+Every I43 reopen condition that could be screened without a new axiom or restricted data now has a status. Remaining work is still **new ontology or new data** (koppa axiom, DAT9+`.1A1`, TNF, beat equation, `n(ω)`, contact MeV, GOM06 distinctive tests).

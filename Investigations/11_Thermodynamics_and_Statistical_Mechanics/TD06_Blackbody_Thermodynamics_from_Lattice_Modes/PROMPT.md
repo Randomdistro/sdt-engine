@@ -34,10 +34,10 @@ quantisation is structural, not an extra axiom. TD06 **consolidates** the single
 **SAR02** (Stellar Astrophysics suite) into one thermodynamic statement — it does not treat SAR02's
 pass as its own.
 
-## Whitelist note (read before claiming "no extra input")
+## Dependency-provenance note
 
-The suite README whitelists **`k_B` only** as the thermodynamic unit-bridge. TD06 also uses `h` and `c`,
-but **only as unit-bridges already earned elsewhere**: `c=ℓ_P/t_P` is the relay tick speed (Law I), and
+The suite records **`k_B` as a thermodynamic unit bridge**. TD06 also uses `h` and `c`
+with their previously established roles: `c=ℓ_P/t_P` is the relay tick speed (Law I), and
 `h` (equivalently `ε`, the relay energy quantum) is the throughput-per-tick granularity — it is **not** a
 new fitted input, and the `hν=ε` identity must be *stated as native*, not assumed. If `h` enters as an
 independent quantised-oscillator constant rather than as `ε`, that is the `E=nhν` postulate creeping back
@@ -80,7 +80,7 @@ oscillator to quantise** — the `hν` granularity is the relay tick itself (`ε
 ## Success criteria
 
 - **PASS (Class A):** Planck, Stefan–Boltzmann, Wien each recomputed to <0.1% **from TD06's own lattice
-  mode sum**, with the occupation factor inherited from a NATIVE TD02; `k_B` whitelisted and `c`, `h(=ε)`
+  mode sum**, with the occupation factor inherited from a NATIVE TD02; `k_B` dependency-traced and `c`, `h(=ε)`
   documented as earned bridges; no quantised-oscillator postulate, no continuum regularisation, no Bose
   denominator lifted from QM.
 - **QUALIFIED (Class C):** all three numerically reproduced, but the occupation factor rests on a TD02
@@ -139,7 +139,7 @@ heat bath). **Related:** [[TD01]] (entropy of radiation `S = 4/3 · aT³V`), [[T
 - Prompt completion target: [A|B|C|D]
 - Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
 - CALIBRATED budget: 0 (no fitted prefactor; σ and b must come from the mode integral)
-- Whitelisted input: k_B only (README). c and h(=ε) are EARNED bridges (Law I), not free params —
+- dependency-traced input: k_B only (README). c and h(=ε) are EARNED bridges (Law I), not free params —
     document them as such; if h enters as a free oscillator constant the result is F.
 - Engine namespaces actually used: measured::k_B, law_I (ε per mode, hν=ε bridge),
     TD02 occupation exp(−ε/k_BT) (INHERITED — class follows TD02); SAR02 = external cross-check only

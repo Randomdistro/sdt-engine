@@ -19,6 +19,16 @@
 
   /* ── LEFT COLUMN — Navigation ─────────────────────────────────────────── */
   var NAV = [
+    ['Start here', [
+      ['Welcome',       'welcome.html'],
+      ['For people',    'sdt-for-people.html'],
+      ['Causal chain',  'causal-chain.html'],
+      ['Walkthrough',   'sdt_walkthrough.html'],
+      ['Life of the universe', 'universe-lifecycle.html'],
+      ['Theoretical model', 'theoretical-model.html'],
+      ['Gravity — why a ball', 'st_gom_gravity.html'],
+      ['Atlas — home',  'index.html']
+    ]],
     ['The framework', [
       ['The Medium',   sec('medium')],
       ['Six Laws',     sec('laws')],
@@ -31,14 +41,7 @@
       ['Glossary',     sec('glossary')]
     ]],
     ['Read', [
-      ['Atlas — home',  'index.html'],
-      ['Welcome',       'welcome.html'],
-      ['Causal chain · simplified',  'causal-chain-simple.html'],
-      ['Causal chain · layman',      'causal-chain.html'],
-      ['Causal chain · technical',   'causal-chain-technical.html'],
       ['What we assume','inputs.html'],
-      ['The koppa ladder','koppa-ladder.html'],
-      ['The wall in the infrared','clearing-ladder.html'],
       ['Predictions',   'experiments.html'],
       ['Investigations','investigations.html'],
       ['Benchmarks',    'benchmarks.html'],
@@ -67,14 +70,6 @@
 
   /* ── RIGHT COLUMN — Scrollers ─────────────────────────────────────────── */
   var SCR = [
-    ['Scrollthroughs', [
-      ['SDT walkthrough',  'sdt_walkthrough.html'],
-      ['The paradox census','st_paradox_census.html'],
-      ['The six laws',     'laws_scroller.html'],
-      ['Benchmarks',       'benchmarks_scroller.html'],
-      ['Depth closure',    'depth_closure_scroller.html'],
-      ['Eclipse',          'cq06-eclipse.html']
-    ]],
     ['Teaching sequence', [
       ['00 · Primitives',  'st_00_primitives.html'],
       ['01 · Law I',       'st_01_law1.html'],
@@ -86,36 +81,26 @@
       ['Magic numbers',    'st_magic_numbers.html'],
       ['Ring moons',       'st_ring_moons.html']
     ]],
-    ['Investigation scrollers', [
-      ['FLM01 · force ratios',      'flm01_scroller.html'],
-      ['FLM02 · pulse mechanics',   'flm02_scroller.html'],
-      ['PPT01 · vortex equilibrium','ppt01_scroller.html'],
-      ['PPT02 · fine structure',    'ppt02_scroller.html'],
-      ['PPT04 · neutrino moment',   'ppt04_scroller.html'],
-      ['PPT05 · trefoil',           'ppt05_scroller.html'],
-      ['PPT06 · spation traction',  'ppt06_scroller.html'],
-      ['EMC01 · transfer function', 'emc01_scroller.html'],
-      ['APS01 · emissions',         'aps01_scroller.html'],
-      ['APS02 · emission prediction','aps02_scroller.html']
+    ['Scrollthroughs', [
+      ['The six laws',     'laws_scroller.html'],
+      ['Depth closure',    'depth_closure_scroller.html'],
+      ['Benchmarks',       'benchmarks_scroller.html'],
+      ['The paradox census','st_paradox_census.html']
     ]],
-    ['Sequencer', [
-      ['Nuclear packing sequencer', 'nuclear-packing-sequencer.html'],
-      ['Sequencer walkthrough',     'nuclear-packing-walkthrough.html'],
-      ['Construction zone',         'atomicus-construction-zone.html']
+    ['Nuclear', [
+      ['Packing sequencer', 'nuclear-packing-sequencer.html'],
+      ['Sequencer walkthrough', 'nuclear-packing-walkthrough.html'],
+      ['Atomicus lab',        'atomicus-lab-subdued.html'],
+      ['Fission — flay, not split', 'atomicus-fission-impact.html']
     ]],
-    ['The lab', [
-      /* deprecated, de-listed (Harvey 2026-08-01): atomicus-lab-v4-tiers (v4 tiers),
-         atomicus-stick (traction assembly) — the polar-caps model is the one being worked on */
-      ['Atomicus lab',        'atomicus-lab.html'],
-      ['Lab · subdued',       'atomicus-lab-subdued.html'],
-      ['Nuclear model',       'atomicus-nuclear-model.html'],
-      ['Traction · polar caps','atomicus-stick-v3-polar-caps.html'],
-      ['Fission impact',      'atomicus-fission-impact.html'],
-      ['Monoisotopic morph',  'monoisotopic-morph.html'],
-      ['v1 snapshot',         'atomicus-v1-snapshot.html']
-    ]],
-    ['Models', [
-      ['Solar system — 3D orrery', 'solar-system.html']
+    ['More', [
+      ['Causal chain · technical', 'causal-chain-technical.html'],
+      ['Causal chain · simplified', 'causal-chain-simple.html'],
+      ['The koppa ladder', 'koppa-ladder.html'],
+      ['The wall in the infrared', 'clearing-ladder.html'],
+      ['Life of the universe', 'universe-lifecycle.html'],
+      ['Eclipse',          'cq06-eclipse.html'],
+      ['Solar system',     'solar-system.html']
     ]]
   ];
 

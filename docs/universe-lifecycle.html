@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>/*sdt-theme-guard*/(function(){try{var t=localStorage.getItem("sdt.theme")||"auto";if(t==="auto")t=(window.matchMedia&&window.matchMedia("(prefers-color-scheme:dark)").matches)?"dark":"light";var d=document.documentElement;d.setAttribute("data-theme",t);d.setAttribute("data-sdt-theme",t);}catch(e){}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The life of the universe — Spatial Displacement Theory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="sdt-shell.css">
+<style>
+.progress { position: fixed; top: 0; left: 0; height: 2px; background: linear-gradient(90deg,var(--copper-light),var(--copper)); width: 0; z-index: 200; }
+.rail { position: fixed; right: 1.1rem; top: 50%; transform: translateY(-50%); z-index: 120; display: flex; flex-direction: column; gap: .55rem; }
+.rail a { width: 9px; height: 9px; border-radius: 50%; border: 1px solid var(--ink-whisper); background: transparent; }
+.rail a.on { background: var(--copper); border-color: var(--copper); }
+@media (max-width: 900px){ .rail{ display:none; } }
+.chapter { padding: var(--sp-2xl) var(--sp-xl); }
+.chapter__inner { max-width: 42rem; margin: 0 auto; }
+.chapter--alt { background: var(--cream); }
+.ev { font-family: 'JetBrains Mono', monospace; font-size: .72rem; letter-spacing: .04em; }
+.ev a { color: var(--copper); text-decoration: none; border-bottom: 1px solid color-mix(in srgb, var(--copper) 35%, transparent); }
+.ev a:hover { border-bottom-color: var(--copper); }
+.life { width: 100%; border-collapse: collapse; font-size: .82rem; margin: 1.2rem 0 1.6rem; }
+.life th { text-align: left; font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-faint); padding: .4rem .55rem; border-bottom: 1px solid var(--paper-edge); }
+.life td { padding: .5rem .55rem; border-bottom: 1px solid var(--paper-edge); vertical-align: top; color: var(--ink-soft); }
+.life td.m { font-family: 'JetBrains Mono', monospace; white-space: nowrap; color: var(--ink); }
+.life tr.here td { color: var(--copper); font-weight: 600; }
+.life tr.wall td { background: var(--copper-glow); }
+.endcta { display: flex; flex-wrap: wrap; gap: .8rem 1.4rem; margin-top: 1.6rem; }
+.endcta a { color: var(--copper); text-decoration: none; font-family: 'Inter', sans-serif; font-size: .875rem; }
+.slogan { border-left: 2px solid var(--copper); padding: .2rem 0 .2rem 1.1rem; margin: 1.4rem 0; font-size: 1.05rem; }
+.sdt-reg-host { padding-top: 4.2rem; }
+.sdt-reg-host > .sdt-reg { max-width: 42rem; margin-left: auto; margin-right: auto; }
+</style>
+<meta name="description" content="Walk the life of the universe in three registers: newcomer, layman, and technical. Shapiro delay to infrared wall to gamma stop-death; heat death as gravity off; recharge until far-frame light cannot move.">
+<link rel="canonical" href="https://spatialdisplacementtheory.com/universe-lifecycle">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<script src="sdt-shell.js" defer></script>
+<div class="progress" id="progress"></div>
+<nav class="rail" id="rail" aria-label="Section navigation"></nav>
+
+<div class="sdt-reg-host" data-registers="page">
+  <div id="sdt-register-switch"></div>
+
+  <article id="reg-simple" class="sdt-reg-panel" data-level="simple">
+    <h2>For newcomers</h2>
+    <p>We live inside a packing of tiny cells. They pass movement to their neighbours. That handoff is what we call the speed of light. Matter is a lasting dent in the packing. Dents block the inflow. Blocking is force. Nothing pulls. The universe pushes.</p>
+    <p>The sky’s quiet glow is microwave. That glow is the packing’s working pressure, still arriving. It is not leftover light from a first day. There was no first day.</p>
+    <p>Light past the Sun is late because it ran slower, not because empty space got longer. Hotter means more pressure. More pressure means far-away light crawls. Climb from the microwave: infrared is this cycle’s jam. Colour sits behind that jam. Hard gamma is where through-going light stops.</p>
+    <p>The other way is radio, then a wave as big as the whole stack — not a wave at all, just still. If the bath goes all the way cold, the push that we call gravity shuts off. What was seated spreads. That dump reloads the packing until far-away light cannot move. Then the jam opens. We meet infrared coming down. We sit in the microwave again.</p>
+    <p>When the door opens is not yet a derived date. The order of the climb is.</p>
+  </article>
+
+  <article id="reg-layman" data-level="layman">
+<section class="chapter" id="now" data-rail="Now">
+  <div class="chapter__inner">
+    <div class="chapter__num">In ordinary English · the life of the universe</div>
+    <h1 class="chapter__title" style="font-family:'Source Serif 4',Georgia,serif;font-size:clamp(2rem,5vw,3.2rem);line-height:1.08;margin:.4rem 0 1rem;">We sit in the microwave. The bang is this cycle’s wall, still arriving.</h1>
+    <p class="chapter__lead">J. C. Harvey — Melbourne. A walkthrough of the computed chain, with the measurements that hold it.</p>
+    <p>The sky’s blackbody peaks at <span class="m">1.063 mm</span>, <span class="m">2.7255 K</span>. That is not leftover light from a first moment. It is the operating pressure of the lattice, handed to us from every direction, now.</p>
+    <p class="ev">Evidence · FIRAS T<sub>0</sub> in <a href="paper-07-cosmology.html">Paper 07</a> · <a href="clearing-ladder.html">the wall in the infrared</a> · engine <code>measured::T_CMB</code></p>
+  </div>
+</section>
+
+<section class="chapter chapter--alt" id="shapiro" data-rail="Shapiro">
+  <div class="chapter__inner">
+    <div class="chapter__num">01 · the delay</div>
+    <h2 class="chapter__title">Shapiro measures a speed gradient, not extra path</h2>
+    <p>Light past the Sun is late because it ran slower. There is no curved emptiness here to lengthen the road. The delay is the integral of the far-frame deficit:</p>
+    <p class="m">Δt = ∫ dl/c<sub>far</sub> − ∫ dl/c &nbsp;·&nbsp; c<sub>far</sub> = c (1 − z)² &nbsp;·&nbsp; z = ϟ/r</p>
+    <p>Half that law — hop closing, tick left alone — gives exactly half the delay. That form is falsified. Hop and tick both close, so the factor is two, derived, not inserted. The same z is the solar redshift to 0.03%.</p>
+    <p>The Sun is baryons excluding Planck-length spheres, shell by shell. The reverse-map takes the photosphere as through-going speed <strong>zero</strong> and Earth orbit as the match to <strong>c</strong> — the rung we occupy. Weak-field arithmetic on that well is a crawl: c minus 1 273 m/s at the surface, c minus 6 m/s at 1 AU. The identities, taken to cosmological depth, are the rest of this page.</p>
+    <p class="ev">Evidence · <a href="paper-06-gravitation.html">Paper 06</a> · <a href="depth_closure_scroller.html">depth-closure scroller</a> · <a href="st_gom_gravity.html">why a ball</a> · GOM22 in the engine header</p>
+  </div>
+</section>
+
+<section class="chapter" id="ladder" data-rail="The ladder">
+  <div class="chapter__inner">
+    <div class="chapter__num">02 · one ladder</div>
+    <h2 class="chapter__title">Temperature, pressure, and speed are the same identities</h2>
+    <p class="m">1+z = T/T<sub>0</sub> = (P/P<sub>0</sub>)<sup>1/4</sup> = 1/(1 − z<sub>depth</sub>)<br>N = T/T<sub>0</sub> = λ<sub>0</sub>/λ &nbsp;·&nbsp; c<sub>far</sub> = c/N² &nbsp;·&nbsp; P = N⁴ P<sub>0</sub></p>
+    <p>Earth’s measured c is a rung, not the ceiling. The galaxy’s floor sits about 105 m/s above it. You always measure “c” locally because rods and ticks close together.</p>
+    <p class="ev">Evidence · B07 Wien in <a href="benchmarks.html">benchmarks</a> · C4 in depth closure · <a href="theoretical-model.html">theoretical model §5</a></p>
+  </div>
+</section>
+
+<section class="chapter chapter--alt" id="ir" data-rail="Infrared">
+  <div class="chapter__inner">
+    <div class="chapter__num">03 · the wall we meet</div>
+    <h2 class="chapter__title">Climbing from here, the jam is infrared</h2>
+    <p>FIRAS gives N = 1090. Wien puts the peak at <span class="m">975 nm</span>, near-IR, T = 2971 K, c<sub>far</sub> = 252 m/s, depth 0.999. That is this cycle’s radiation wall. The Standard Model puts last scattering in the same band — the same Wien arithmetic, not an imported mechanism.</p>
+    <p>A loading-unity closure (baryons as obstacles, no dark matter) lands at 1571 nm, still infrared, short of red. Coming up from the microwave you stop before colour.</p>
+    <p class="ev">Evidence · <a href="clearing-ladder.html">the wall in the infrared</a> · CR13 / CR17 · <a href="paper-07-cosmology.html">Paper 07</a> octaves</p>
+  </div>
+</section>
+
+<section class="chapter" id="behind" data-rail="Behind">
+  <div class="chapter__inner">
+    <div class="chapter__num">04 · behind the wall</div>
+    <h2 class="chapter__title">Solid colour, then ultraviolet, then gamma stops it</h2>
+    <p>Visible light — 750 to 380 nm — sits behind the jam. Those bands were impenetrable as a through-going signal. Nobody received a green sky. Ultraviolet is the next rung. Continue the same N and through-going light dies in <strong>gamma</strong>.</p>
+    <table class="life">
+      <thead><tr><th>Peak</th><th>Band</th><th>N</th><th>c<sub>far</sub></th><th></th></tr></thead>
+      <tbody>
+        <tr class="here"><td class="m">1.063 mm</td><td>microwave</td><td class="m">1</td><td class="m">c</td><td>here</td></tr>
+        <tr class="wall"><td class="m">975 nm</td><td>near-IR</td><td class="m">1090</td><td class="m">252 m/s</td><td>Clearing</td></tr>
+        <tr><td class="m">750–380 nm</td><td>visible</td><td class="m">1418–2798</td><td class="m">149–38 m/s</td><td>behind</td></tr>
+        <tr><td class="m">100 nm</td><td>UV</td><td class="m">1.06×10⁴</td><td class="m">2.65 m/s</td><td>behind</td></tr>
+        <tr><td class="m">1.21 pm</td><td>gamma</td><td class="m">8.76×10⁸</td><td class="m">3.9×10⁻¹⁰ m/s</td><td>pairs</td></tr>
+        <tr><td class="m">4.30 fm</td><td>hard gamma</td><td class="m">2.48×10¹¹</td><td class="m">4.9×10⁻¹⁵ m/s</td><td>P = P<sub>eff</sub> · stop-death</td></tr>
+      </tbody>
+    </table>
+    <p class="ev">Evidence · <a href="sdt-for-people.html">for people</a> · arithmetic in Theory/07 · pair threshold 2 m<sub>e</sub>c² · P<sub>eff</sub> in laws.hpp</p>
+  </div>
+</section>
+
+<section class="chapter chapter--alt" id="cold" data-rail="Cold">
+  <div class="chapter__inner">
+    <div class="chapter__num">05 · the other way</div>
+    <h2 class="chapter__title">Radio, then a wave the size of the stack</h2>
+    <p>Down from the microwave, photons lengthen. Local c stays the local rung. Forty-four octaves down is 0.125 AU, a 62-second period. Ninety-nine octaves down, the wavelength equals the Clearing radius: one cycle per 100.7 Gyr. That is not radiation. It is static.</p>
+    <p class="ev">Evidence · engine R<sub>CMB</sub>/c · <a href="theoretical-model.html">theoretical model §6</a></p>
+  </div>
+</section>
+
+<section class="chapter" id="death" data-rail="Heat death">
+  <div class="chapter__inner">
+    <div class="chapter__num">06 · heat death</div>
+    <h2 class="chapter__title">Pressure gone, gravity off, matter expands</h2>
+    <p>Take the cold direction all the way. T → 0, P → 0. Gravity is occlusion of that pressure. The push shuts off. Koppa wells flatten. Displacement volumes are no longer held. Matter expands. Seated structure breaks. That is not space stretching. The cells are still Planck-length. What spreads is what was seated.</p>
+    <p class="slogan">Heat death is Law III at empty influx — not a story that movement ends.</p>
+    <p class="ev">Evidence · Law III in <a href="laws_scroller.html">the six laws</a> · the ladder in §02 · cycle file Theory/07</p>
+  </div>
+</section>
+
+<section class="chapter chapter--alt" id="recharge" data-rail="Recharge">
+  <div class="chapter__inner">
+    <div class="chapter__num">07 · recharge</div>
+    <h2 class="chapter__title">The matrix climbs until far-frame light cannot move</h2>
+    <p>The dump — unseated PRESS, including the SMBH queues — reloads the relay. The ladder runs the other way: radio, microwave, infrared, the solid bands, ultraviolet, into gamma, until c<sub>far</sub> → 0. That is not a laboratory metre reading zero. It is the wall.</p>
+    <p>c/√3 is the fluid ceiling we meet in the infrared on the way <em>down</em> after depinning. It is not the recharge target.</p>
+    <p>When the door opens is pending. The chain is not.</p>
+    <p class="ev">Evidence · FD05 ceiling · GOM18 seat · FIRAS gate on Paper 07 (&lt; 50 ppm falsifies the CMB mechanism)</p>
+  </div>
+</section>
+
+<section class="chapter" id="again" data-rail="Again">
+  <div class="chapter__inner">
+    <div class="chapter__num">08 · again</div>
+    <h2 class="chapter__title">The Clearing is depinning. The bang is reiteration.</h2>
+    <p>The wall opens. We meet infrared coming down. We sit in the microwave. The CMB is that boundary, still arriving. There is no first moment. There is no last one. The apple falls because the universe pushes it, and the push is this bath, this cycle.</p>
+    <div class="endcta">
+      <a href="sdt-for-people.html">The same model, for people →</a>
+      <a href="theoretical-model.html">Total theoretical model →</a>
+      <a href="clearing-ladder.html">The infrared wall →</a>
+      <a href="paper-07-cosmology.html">Paper 07 →</a>
+      <a href="causal-chain.html">Causal chain →</a>
+      <a href="sdt_walkthrough.html">Laws walkthrough →</a>
+    </div>
+  </div>
+</section>
+  </article>
+
+  <article id="reg-technical" class="sdt-reg-panel sdt-reg-panel--tech" data-level="technical">
+    <h2>For scientists and physicists</h2>
+    <p>SoT: <code>Engine/include/sdt/laws.hpp</code>. Cycle arithmetic: <code>Theory/07_Cyclic_Reiteration.md</code>. Chain status: COMPUTED. Fire-time amplitude: PENDING. Do not relabel the chain as ontology.</p>
+    <p class="eq">Δt = ∫ dl/c<sub>far</sub> − ∫ dl/c<sub>∞</sub> &nbsp;·&nbsp; c<sub>far</sub> = c<sub>∞</sub>(1 − z)² &nbsp;·&nbsp; z = ϟ/r</p>
+    <p><code>c(1−z)</code> alone is falsified (exactly half Shapiro). Factor 2 is DERIVED (hop and tick both close). Same <code>z</code> is solar C1, <code>z = ϟ/R = 2.123×10⁻⁶</code>, 0.03%.</p>
+    <p class="eq">1+z = T/T<sub>CMB</sub> = (P/P<sub>now</sub>)<sup>1/4</sup> = 1/(1 − z<sub>depth</sub>)<br>N = T/T<sub>CMB</sub> = λ<sub>now</sub>/λ &nbsp;·&nbsp; P = N⁴ P<sub>now</sub> &nbsp;·&nbsp; c<sub>far</sub> = c/N²</p>
+    <p>FIRAS: <code>T_CMB = 2.7255 K</code> OBSERVED; <code>z_release = 1089</code> OBSERVED; <code>T_release = 2970.8 K</code> COMPUTED. Wien <code>b</code> DERIVED (B07). Do not insert FIRAS <code>z = 1089</code> into <code>(1−z)²</code>; <code>z_depth</code> at Clearing is <code>1089/1090 ≈ 0.999</code>.</p>
+    <p>Reverse-map: photosphere as through-going speed 0, Earth orbit as match to local <code>c</code>. Weak-field SI: <code>c_far(R_☉) = c − 1273 m/s</code>, <code>c_far(1 AU) = c − 6 m/s</code> because <code>ϟ_☉ ≪ R_☉</code>. Cosmological N is the same identities at depth.</p>
+    <p>FIRAS N = 1090 → λ = 975 nm (near-IR), <code>c_far = 252 m/s</code>. CR17b R=1 → 1571 nm. Visible 750–380 nm is behind the wall. Pair threshold: λ = 1.21 pm, N = 8.76×10⁸. Bath P = P<sub>eff</sub>: λ = 4.30 fm, N = 2.48×10¹¹, <code>c_far ≈ 4.9×10⁻¹⁵ m/s</code>.</p>
+    <p>Heat death: N → 0 ⇒ P → 0 ⇒ Law III gravity off ⇒ gravitational seats empty (not metric expansion). Recharge climbs until <code>c_far → 0</code>. <code>c/√3</code> (FD05) is the fluid ceiling on the way down, not the recharge target. Locally measured <code>c</code> is never zero. <code>c_∞ ≈ c + 105 m/s</code> (galactic floor). <code>R_CMB</code> class X. FIRAS distortion &lt; 50 ppm is the CMB gate.</p>
+  </article>
+</div>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__brand-name">Spatial <span>Displacement</span> Theory</div>
+    <p class="footer__brand-desc">J. C. Harvey, Melbourne. Lifecycle walkthrough — three registers. Computed chain, pending fire-time. Numbers from laws.hpp.</p>
+    <div class="footer__bottom"><span>MW → IR → gamma · P → 0 · c<sub>far</sub> → 0 · Clearing</span><span>2026-08-13</span></div>
+  </div>
+</footer>
+<script>
+(function(){
+  var sections=[].slice.call(document.querySelectorAll('[data-rail]'));
+  var rail=document.getElementById('rail');
+  sections.forEach(function(s){ var a=document.createElement('a'); a.href='#'+s.id; a.title=s.getAttribute('data-rail'); rail.appendChild(a); });
+  var dots=[].slice.call(rail.children);
+  var progress=document.getElementById('progress');
+  function onScroll(){
+    var h=document.documentElement;
+    var max=h.scrollHeight-h.clientHeight;
+    progress.style.width=(max>0?(h.scrollTop/max*100):0)+'%';
+    var best=0, bestD=1e9, mid=h.clientHeight/2;
+    sections.forEach(function(s,i){ var r=s.getBoundingClientRect(); var d=Math.abs(r.top+r.height/2-mid); if(d<bestD){bestD=d;best=i;} });
+    dots.forEach(function(d,i){ d.classList.toggle('on',i===best); });
+  }
+  addEventListener('scroll',onScroll,{passive:true}); addEventListener('resize',onScroll); onScroll();
+})();
+</script>
+</body>
+</html>

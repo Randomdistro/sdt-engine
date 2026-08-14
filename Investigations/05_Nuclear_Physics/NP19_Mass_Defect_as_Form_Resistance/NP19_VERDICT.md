@@ -65,7 +65,7 @@ All consistent.
 - `ρ_form = R/V_disp`: `[J]/[m³] = [Pa]` ✓ — compared to `P_conv/3` `[Pa]` ✓ (like-for-like).
 - `ΔR = R(n) − R(p)`: `[J] − [J] = [J]` ✓; `Q = ΔR − τ`: `[J] − [J] = [J]` ✓.
 - Numerical care: `m_n − m_p` subtracted in **kg first** (gap ≈ 2.3×10⁻³⁰ kg, ~10¹³× above double round-off), then × c², then ÷ MeV_to_J — no catastrophic cancellation (round-trip and subtraction both clean to machine epsilon).
-- Whitelist obeyed: only `{m_e, m_p, m_n, c, MeV_to_J}` + engine `Phi/P_conv/V_disp`. **No G, no M, no GM, no G_F, no ψ, no ΛCDM, no "charge radius."** The `~3×10⁴⁶ J` is a labelled `OBSERVED-TARGET` illustration, outside the derivation chain.
+- derivation basis obeyed: only `{m_e, m_p, m_n, c, MeV_to_J}` + engine `Phi/P_conv/V_disp`. **No G, no M, no GM, no G_F, no ψ, no ΛCDM, no "charge radius."** The `~3×10⁴⁶ J` is a labelled `OBSERVED-TARGET` illustration, outside the derivation chain.
 
 ### (4) Honest class + what is owed
 

@@ -16,7 +16,7 @@
 | # | Formula | Meaning | Domain | Source (representative) | Cert | Rel |
 |---|---|---|---|---|---|---|
 | 1 | `c = ℓ_P / t_P` | Relay speed = lattice tick rate | Axiom R2/M1 | laws.hpp:109; Theory/04_Notation.md:9; Laws/SDT_Complete_Laws.md:54 | DERIVED | T0 |
-| 2 | inputs `{ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p}` | Permitted external scale set (whitelist) | Ruleset | laws.hpp:107-180; Theory/00_Ruleset.md | MEASURED | T0 |
+| 2 | inputs `{ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p}` | Permitted external scale set (derivation basis) | Ruleset | laws.hpp:107-180; Theory/00_Ruleset.md | MEASURED | T0 |
 | 3 | `\|u\| ≤ ℓ_P/t_P = c` | Hard relay-speed bound | Axiom M1 | Theory/00_Ruleset.md:45; Laws/SDT_Complete_Laws.md:726 | — | T0 |
 | 4 | `v_circ ⊥ v_trans ; u = v_circ + v_trans` | Orthogonal mode composition | Axiom M2/M3 | Theory/00_Ruleset.md:45; Laws/SDT_Complete_Laws.md:733 | — | T0 |
 | 5 | `τ = ε_d/ε = 1/d = 1/3` | Traction fraction = 1/dimensionality (3D) | Operator 3 / T7 | Theory/00_Ruleset.md:12; Theory/01_Closure_Derivations.md:17; laws.hpp:175 | DERIVED | T0 |

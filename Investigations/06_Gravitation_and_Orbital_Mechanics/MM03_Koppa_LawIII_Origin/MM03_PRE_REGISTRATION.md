@@ -12,7 +12,7 @@ Determine whether any Law-III / occlusion expression yields
 - using the CODATA identity `G = l_P² c³/ℏ` (which encodes `G` into `l_P`);
 - fitting to `R_g,☉` or `M_☉`.
 
-## Allowed inputs for candidate formulas
+## declared dependencies for candidate formulas
 
 `c`, `ℏ`, `m_p`, `R_p`, `α`, `a₀`, `r_e`, `P_conv`, `Φ`, `f_transfer`,
 `R_charge`, Law-III `P_eff` — but **not** `l_P` if the formula algebraically

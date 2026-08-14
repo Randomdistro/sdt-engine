@@ -31,7 +31,7 @@ If either hash fails at run time → `PROVENANCE_CONFLICT_NO_NUMERIC_REPRODUCTIO
 Call `sdt::laws::nuclear::nuclear_boundary_radius(A)` with `A = Z + N` from the table.
 Convert metres → fm by `× 1e15`. Do not refit `R_p` or `η`. Do not edit `laws.hpp`.
 
-**Shared-input note (not a rejection criterion):** `R_p` is a measured whitelist
+**Shared-input note (not a rejection criterion):** `R_p` is a measured derivation basis
 constant and also appears in the prediction. The tabulated nuclear radii are an
 independent compilation; the shared-input is recorded as Scope, not as a PASS.
 

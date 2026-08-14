@@ -3,7 +3,7 @@
 #include <numbers>
 
 int main() {
-    // Whitelist constants
+    // derivation basis constants
     double c = 299792458.0;
     double hbar = 1.054571817e-34;
     double l_P = 1.616255e-35;
@@ -34,7 +34,7 @@ int main() {
     printf("║ CQ37: Elementary Charge Quantisation from Lattice Topology    ║\n");
     printf("╚════════════════════════════════════════════════════════════════╝\n\n");
 
-    printf("Whitelist Constants:\n");
+    printf("derivation basis Constants:\n");
     printf("  ℓ_P = %.6e m\n", l_P);
     printf("  c = %.6e m/s\n", c);
     printf("  ℏ = %.6e J·s\n", hbar);
@@ -73,7 +73,7 @@ int main() {
            (e_from_identity - e_measured) / e_measured * 100.0);
 
     printf("═══ DIMENSIONAL ANALYSIS ═══\n");
-    printf("Whitelist {ℓ_P, c, ℏ, k_B, T_CMB, d} cannot produce [C] alone.\n");
+    printf("derivation basis {ℓ_P, c, ℏ, k_B, T_CMB, d} cannot produce [C] alone.\n");
     printf("Charge must be a topological quantum (from winding/linking numbers).\n\n");
 
     printf("═══ VERDICT ═══\n");
@@ -82,7 +82,7 @@ int main() {
     printf("? Candidate 2 PENDING: requires CQ36 (linking number)\n\n");
 
     printf("Recommendation: e remains Tier-1 input in current framework.\n");
-    printf("To remove e from whitelist, must complete:\n");
+    printf("To remove e from derivation basis, must complete:\n");
     printf("  (1) CQ36: linking number for hydrogen\n");
     printf("  (2) Define topological charge quantum from W/Lk\n");
     printf("  (3) Derive impedance matching mechanism\n");

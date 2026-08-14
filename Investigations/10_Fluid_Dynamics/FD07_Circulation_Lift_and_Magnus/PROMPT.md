@@ -16,7 +16,7 @@
 
 **Domain**: Fluid Dynamics (SDT lattice mechanics) · **Status**: SPEC · **Author**: J. C. Harvey, Melbourne
 
-*This investigation inherits the §0 anti-creep protocol and rules R0–R5 verbatim (whitelist inputs only: {ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p} plus measured observables in their measured units; no G/M/GM as fundamentals; no wavefunctions, fields-as-primitives, quarks/gluons, virtual particles, dark matter/energy, ΛCDM, or magnetons; certification labels DERIVED / COMPUTED / CALIBRATED(n) / OBSERVED / PENDING on every result; the audit spine A–F; the translation test on every borrowed term; honesty over success; never repaint or fabricate — log OPEN.)*
+*This investigation inherits the §0 anti-creep protocol and rules R0–R5 verbatim (derivation basis inputs only: {ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p} plus measured observables in their measured units; no G/M/GM as fundamentals; no wavefunctions, fields-as-primitives, quarks/gluons, virtual particles, dark matter/energy, ΛCDM, or magnetons; certification labels DERIVED / COMPUTED / CALIBRATED(n) / OBSERVED / PENDING on every result; the audit spine A–F; the translation test on every borrowed term; honesty over success; never repaint or fabricate — log OPEN.)*
 
 ---
 

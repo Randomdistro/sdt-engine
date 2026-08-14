@@ -2,7 +2,7 @@
 
 > **Author:** J. C. Harvey, Melbourne. **Status:** RUN OUTPUT (2026-07-01).
 > **Tool:** `flm11_ruler_count.py` → `flm11_results.txt`. **Engine:** parity with `sdt::laws::law_VI`.
-> **Inputs:** whitelist only `{ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p}` + `law_VI` integers (W, p, q). No G/M/GM, no ψ, no gauge groups, no charge-substance.
+> **Inputs:** derivation basis only `{ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p}` + `law_VI` integers (W, p, q). No G/M/GM, no ψ, no gauge groups, no charge-substance.
 > Each line flagged **DERIVED** (falls out of the form's DoF + a native constraint) or **ASSUMED** (argued, not proven).
 
 ---
@@ -91,7 +91,7 @@ Tool flags (from `flm11_results.txt`): `exactly-one-zero-grip: PASS` · `residue
 ```
 // provenance_status:     SDT-derived (count + residue); mapping argued (grippability)
 // correspondence_status: known-match (4 = physics' four properties) + novel (neutrino = zero-grip residue)
-// input_dependency:      primitive-whitelist + law_VI integers (W, p, q) + Law V budget
+// input_dependency:      primitive-derivation basis + law_VI integers (W, p, q) + Law V budget
 // class:                 C  (clean integer DERIVED; DoF→property map rests on 1-2 argued grippability claims)
 // circularity_assertion: passes delete-test — physics' "four" is NOT an input; the count is pre-committed
 //                        in RUN_LOG before the tool ran, and Law V (not the answer) removes the 5th axis

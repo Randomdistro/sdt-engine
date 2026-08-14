@@ -43,6 +43,7 @@
 #include <numbers>
 #include <numeric>
 #include <algorithm>
+#include <string>
 
 using namespace sdt::laws;
 using namespace sdt::laws::measured;
@@ -716,7 +717,8 @@ int main()
 
     std::printf("  %-15s  %-35s  %15s  %12s  %15s  %12s\n",
                 "PHASE", "METRIC", "VALUE", "UNCERTAINTY", "PROVENANCE", "VERDICT");
-    std::puts("  " + std::string(160, '─'));
+    const std::string divider = "  " + std::string(160, '-');
+    std::puts(divider.c_str());
 
     for (int i = 0; i < n_results; ++i) {
         std::printf("  %-15s  %-35s  %+15.6e  %+11.2f%%  %-15s  %12s\n",

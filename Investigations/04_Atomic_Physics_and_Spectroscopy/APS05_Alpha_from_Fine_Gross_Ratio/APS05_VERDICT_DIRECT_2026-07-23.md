@@ -28,7 +28,7 @@ line (delete-test by construction); Dirac spin-orbit explicitly excluded from th
   reason than QED, shared data).**
 - **What this does NOT do, stated plainly:** derive α. Both routes *extract* α from spectra. The
   geometric derivation (E51/OP-3) is open — and α, being dimensionless, is **not** blocked by any
-  seed-wall argument (contrast ℓ_P, m_e). Consistent with the campaign whitelist note: α is an
+  seed-wall argument (contrast ℓ_P, m_e). Consistent with the campaign derivation basis note: α is an
   underived input, and "α is a free parameter pulled from nowhere" is nonetheless wrong — it is
   read directly off the hydrogen spectrum, two ways, to 0.1%.
 - **Recovery:** n/a · **Cascade root:** none.

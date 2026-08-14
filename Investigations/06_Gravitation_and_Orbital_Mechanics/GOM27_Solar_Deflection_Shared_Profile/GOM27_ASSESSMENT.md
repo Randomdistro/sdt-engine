@@ -31,7 +31,7 @@ Far-frame refractive index from relay profile. Ray turning condition `b = n(r₀
 | Input | Value | Label | Source |
 |---|---:|---|---|
 | ϟ | 1476.351201 m | DERIVED | GOM26 cal stdout (Horizons 2025) |
-| R_Sun | `measured::R_Sun` | CONVENTIONAL | engine measured whitelist |
+| R_Sun | `measured::R_Sun` | CONVENTIONAL | engine measured derivation basis |
 | c | SI exact | MEASURED-INPUT | engine |
 | bridge::koppa_Sun | unused | — | delete-test |
 

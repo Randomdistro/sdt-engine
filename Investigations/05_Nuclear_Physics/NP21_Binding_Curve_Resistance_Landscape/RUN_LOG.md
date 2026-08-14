@@ -85,7 +85,7 @@ R̃/A  =  − a_V · 1                              (bulk relief, per-nucleon co
 - **Response:** implemented `np21_landscape.py`. Grammar formulas mirror `sdt::nuclear::alpha_grammar`
   EXACTLY (n_d=3Z−A−2, n_t=A−2Z); the scan **domain** (natural_basis 287-row stable set) and the packing
   coordination number (kiss=12, cuboctahedron) are parsed/read straight from the engine headers, not re-listed.
-- **Did NOT change:** any threshold; the whitelist; the frozen exponent ledger.
+- **Did NOT change:** any threshold; the derivation basis; the frozen exponent ledger.
 
 ### ADJ-002 — AME2020 parser fix (2026-07-01)
 - **Trigger:** first run produced corrupt B/A (e.g. Ca-49 → 0.0002 MeV); Spearman noise (−0.06). Positional
@@ -112,7 +112,7 @@ packing + domain pulled from the engine; one scale weight (a_V) reserved, ratios
 **P2 — SHAPE: PARTIAL / conditional.**
 - Run F (ratios least-squares-FITTED to AME): Spearman(−R̃/A, B/A) = **+0.907 > 0.85**, RMS = 0.203 MeV/n.
   Rise-then-fall reproduced — **but only with 3 fitted coefficients** (a CALIBRATED reproduction).
-- Run G (geometric ratios, a_C = α, 0 fitted): Spearman = **−0.574** (WRONG SIGN). With the whitelist-only
+- Run G (geometric ratios, a_C = α, 0 fitted): Spearman = **−0.574** (WRONG SIGN). With the derivation basis-only
   ratio the spread term never overtakes surface → monotone, NO rise-then-fall.
 - **Gate call:** the *form* can reproduce the shape, but *not on geometric ratios*. Proceed to P3 with the
   Class explicitly capped at C (per §⑩: fitted reproduction caps at C). Logged as PARTIAL.

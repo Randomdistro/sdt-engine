@@ -385,7 +385,7 @@ Numerical integration tool:
 - No quantum wavefunctions, no fields as ontological primitives
 - No quarks, gluons, virtual particles
 - No probabilistic wavefunction collapse
-- Only permitted inputs: {ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p} + measured observables
+- Only declared dependencies: {ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p} + measured observables
 
 ---
 

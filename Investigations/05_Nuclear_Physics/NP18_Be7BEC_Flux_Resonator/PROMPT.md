@@ -34,7 +34,7 @@ The textbook "neutrinos barely interact" cross-section is computed for an **inco
 
 ## 3. Theoretical Framework
 
-**Permitted inputs only** (`sdt::laws::measured` whitelist): {ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p} plus measured observables in their measured units (the Be-7 line, the n–p gap 1.293 MeV, CEνNS cross-sections, half-lives, BEC parameters). **No G, no M(kg), no GM. Prohibited as inputs:** wavefunctions-as-primitives, fields-as-primitives, quarks/gluons, virtual particles as real objects, dark matter/energy, ΛCDM. The W boson in β/EC is, by the standard formalism's own statement, a **propagator** — a bookkeeping object, never on-shell here. We do not import the standard-model **story**; we use its **numbers** as anchors.
+**declared dependencies only** (`sdt::laws::measured` derivation basis): {ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p} plus measured observables in their measured units (the Be-7 line, the n–p gap 1.293 MeV, CEνNS cross-sections, half-lives, BEC parameters). **No G, no M(kg), no GM. Prohibited as inputs:** wavefunctions-as-primitives, fields-as-primitives, quarks/gluons, virtual particles as real objects, dark matter/energy, ΛCDM. The W boson in β/EC is, by the standard formalism's own statement, a **propagator** — a bookkeeping object, never on-shell here. We do not import the standard-model **story**; we use its **numbers** as anchors.
 
 **Grammar-forced substrate (the native selection rule).** Run the alpha grammar from `nuclear.hpp` (`alpha_grammar(Z,A)`: n_d = 3Z−A−2, n_t = A−2Z):
 

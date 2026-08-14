@@ -63,9 +63,9 @@ sub,sup{line-height:0}
 <p class="affil">Melbourne, Australia · July 2026 · Atlas Chapter Five — The Engine</p>
 
 <div class="abstract">
-<p><strong>Abstract.</strong> The framework's numerical claims are not a manuscript's — they compile. A single header, Engine/include/sdt/laws.hpp, is the source of truth: every constant, force law, and derivation flows through namespace sdt::laws, whose sub-namespaces mirror the Six Laws, with bridge (the k-hierarchy and koppa), atomic, nuclear, and coulomb_identity carrying the domain functions. Whitelist discipline is structural — a quantity absent from sdt::laws::measured is not an admissible input — and every load-bearing constant carries a machine-readable provenance block: provenance status, correspondence status, input dependency, certification class A–F, delete-test assertion, risk flag. The benchmark executable self-reports PASS/FAIL against measured values within stated tolerances, with IDENTITY and CALIBRATED rows labelled as such rather than counted as predictions; the audited ledger stands at 46/57 earned passes, 11 identities, 2 calibrated, 0 failures, 11 pending. The suite now also carries the nuclear closure schedule as a compile-time proof — a static_assert that the deuteron-tier/triton-belt alternation rebuilds every measured magic number — and suite row B38 tallies the parity-lock predicate at 7/7 mono-isotopic grips and 12/12 combined checks.</p>
+<p><strong>Abstract.</strong> The framework's numerical claims are not a manuscript's — they compile. A single header, Engine/include/sdt/laws.hpp, is the source of truth: every constant, force law, and derivation flows through namespace sdt::laws, whose sub-namespaces mirror the Six Laws, with bridge (the k-hierarchy and koppa), atomic, nuclear, and coulomb_identity carrying the domain functions. derivation basis discipline is structural — a quantity absent from sdt::laws::measured is not an admissible input — and every load-bearing constant carries a machine-readable provenance block: provenance status, correspondence status, input dependency, certification class A–F, delete-test assertion, risk flag. The benchmark executable self-reports PASS/FAIL against measured values within stated tolerances, with IDENTITY and CALIBRATED rows labelled as such rather than counted as predictions; the audited ledger stands at 46/57 earned passes, 11 identities, 2 calibrated, 0 failures, 11 pending. The suite now also carries the nuclear closure schedule as a compile-time proof — a static_assert that the deuteron-tier/triton-belt alternation rebuilds every measured magic number — and suite row B38 tallies the parity-lock predicate at 7/7 mono-isotopic grips and 12/12 combined checks.</p>
 </div>
-<p><strong>Keywords:</strong> single source of truth · whitelist discipline · provenance blocks · certification classes · benchmark ledger · compile-time closure proof</p>
+<p><strong>Keywords:</strong> single source of truth · derivation basis discipline · provenance blocks · certification classes · benchmark ledger · compile-time closure proof</p>
 
 <h2>1. Architecture</h2>
 <div class="eq"><span>sdt::laws { measured · law_I … law_VI · bridge · atomic · nuclear · coulomb_identity · depth_closure }</span><span class="no">(1)</span></div>
@@ -76,8 +76,8 @@ sub,sup{line-height:0}
 <tr><th>Field</th><th>Content</th></tr>
 <tr><td>provenance_status</td><td>SDT-derived · SDT-posited · calibrated · observed-input · unresolved</td></tr>
 <tr><td>correspondence_status</td><td>known-match · internal-only · novel · measured</td></tr>
-<tr><td>input_dependency</td><td>primitive-whitelist · measured-observable · calibrated-target · definitional-identity</td></tr>
-<tr><td>class</td><td>A (axiom) · B (whitelist derivation) · C (derived, passes delete-test) · D (computed/observed correlation) · E (calibrated) · F (definitional identity) · X (observed input conditioning a chain)</td></tr>
+<tr><td>input_dependency</td><td>primitive-derivation basis · measured-observable · calibrated-target · definitional-identity</td></tr>
+<tr><td>class</td><td>A (axiom) · B (derivation basis derivation) · C (derived, passes delete-test) · D (computed/observed correlation) · E (calibrated) · F (definitional identity) · X (observed input conditioning a chain)</td></tr>
 <tr><td>circularity_assertion</td><td>the delete-test statement — what vanishes if the matched target is removed</td></tr>
 <tr><td>risk_flag</td><td>load-bearing caveats, stated at the definition site</td></tr>
 </table>
@@ -98,7 +98,7 @@ sub,sup{line-height:0}
 <table>
 <tr><th>Item</th><th>Value</th><th>Status</th></tr>
 <tr><td>Single-source discipline</td><td>one header</td><td>STRUCTURAL — no constant defined twice</td></tr>
-<tr><td>Whitelist enforcement</td><td>sdt::laws::measured</td><td>STRUCTURAL — absent ⟹ inadmissible</td></tr>
+<tr><td>derivation basis enforcement</td><td>sdt::laws::measured</td><td>STRUCTURAL — absent ⟹ inadmissible</td></tr>
 <tr><td>Benchmark ledger</td><td>eq. (2)</td><td>AUDITED — identities and calibrations labelled; one retraction on record</td></tr>
 <tr><td>Closure-schedule proof</td><td>eq. (3)</td><td>COMPILE-TIME — arithmetic of the alternation; capacities [measured, schedule-named]</td></tr>
 <tr><td>Parity-lock tally</td><td>eq. (4)</td><td>SUITE ROW B38 — exact</td></tr>

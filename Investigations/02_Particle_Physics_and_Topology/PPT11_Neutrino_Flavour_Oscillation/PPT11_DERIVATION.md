@@ -50,7 +50,7 @@ This is a **double-edged licence**, and honesty requires stating both edges:
 
 which gives `L_osc = 4π E ℏ / (Δm² c³) = 2.48 · E[MeV] / Δm²[eV²]` metres.
 
-**Dimensional check (P2 metric): PASS.** With `Δm²` carried as an energy-squared difference, `[Δm² c³ / (ℏ E)]` reduces to `[1/m]` (tool `dimensional_check()`, `ppt11_results.txt`). The proportionality is built from `{ℏ, c}` (whitelist) and `Δm²` (here the **engine-implied** splitting, below) — **no fitted coefficient**. `[COMPUTED]`
+**Dimensional check (P2 metric): PASS.** With `Δm²` carried as an energy-squared difference, `[Δm² c³ / (ℏ E)]` reduces to `[1/m]` (tool `dimensional_check()`, `ppt11_results.txt`). The proportionality is built from `{ℏ, c}` (derivation basis) and `Δm²` (here the **engine-implied** splitting, below) — **no fitted coefficient**. `[COMPUTED]`
 
 **Translation test (NATIVE vs LINGUISTIC-BORROW) — the honest core.**
 The factor `1/(4 ℏ E)` is the **standard quantum oscillation phase**. In the textbook derivation it arises from two mass eigenstates propagating with an energy difference `ΔE ≈ Δm² c⁴ / (2E)` and interfering — **a wavefunction of superposed mass kets**, which SDT prohibits as a primitive. To count as NATIVE, SDT must re-derive **this same factor** from relay cadence + resistance differences of ONE object, with no ket.

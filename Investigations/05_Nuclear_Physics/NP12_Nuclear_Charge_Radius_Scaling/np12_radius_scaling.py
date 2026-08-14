@@ -3,7 +3,7 @@
 # Author: J. C. Harvey, Melbourne. Date: 2026-07-03.
 # Data: charge_radii_iaea.csv (IAEA / Angeli & Marinova 2013, downloaded
 #       2026-07-03 — REAL data, provenance in RUN_LOG.md).
-# Models M1-M5 and all gates pre-committed in RUN_LOG.md BEFORE this file.
+# Models M1-M5 and all gates pre-registered in RUN_LOG.md before this file.
 # Engine constants cited from sdt/laws.hpp (values inlined, source noted):
 #   R_p = 0.8414 fm  (measured::R_p, muonic-H)   — the ONLY SDT length used.
 # ═══════════════════════════════════════════════════════════════════════
@@ -64,9 +64,9 @@ for name, rms, rmsr, r2, npar in full:
 best0 = min((m for m in full if m[4] == 0 and not m[0].startswith("M1")), key=lambda m: m[2])
 m1 = full[0]
 print("\n  best zero-param A^1/3-family model: %s (RMS %.2f%%)" % (best0[0], best0[2]))
-print("  KILL RULE (committed): RMS(M1) > 3x best -> %.2f%% vs %.2f%% : factor %.1fx -> %s"
+print("  EXCLUSION RULE (registered): RMS(M1) > 3x best -> %.2f%% vs %.2f%% : factor %.1fx -> %s"
       % (m1[2], best0[2], m1[2] / best0[2],
-         "M1 KILLED as a global law" if m1[2] > 3 * best0[2] else "M1 survives"))
+         "M1 EXCLUDED as a global law" if m1[2] > 3 * best0[2] else "M1 survives"))
 
 print("\n  Z-band breakdown (RMS relative %):")
 BANDS = [(1, 8), (9, 20), (21, 50), (51, 92)]
@@ -116,10 +116,10 @@ print("  -> monotone drift by ~%.0fx across the table: R/Z is NOT constant." %
 print("\n" + "=" * 74)
 print("VERDICT (numeric):")
 print("  M1 Z*R_p       : RMS %.1f%% -> %s" % (m1[2],
-      "KILLED as a global scaling law (survives only at Z=2..3)" if m1[2] > 3 * best0[2] else "survives"))
+      "EXCLUDED as a global scaling law (survives only at Z=2..3)" if m1[2] > 3 * best0[2] else "survives"))
 print("  rival as written (M2 1.2*A^1/3): RMS %.1f%% - ALSO fails on RMS data (unit mismatch," % full[1][2])
 print("                   pre-declared: sharp-surface vs RMS convention, factor ~1.29)")
-print("  fair rival M3  : RMS %.1f%% | SDT-native M4b: RMS %.1f%% (pre-declared DEGENERATE pair," % (full[2][2], full[4][2]))
+print("  fair rival M3  : RMS %.1f%% | SDT-native M4b: RMS %.1f%% (pre-declared SHARED-CURVE pair," % (full[2][2], full[4][2]))
 print("                   0.09%% apart; dataset cannot distinguish)")
 print("  M4a uniform    : RMS %.1f%% (bracket lower limit - fails; charge sits at periphery)" % full[3][2])
 print("  M5 k*Z^1/3     : RMS %.1f%% with k fitted = %.4f fm [CALIBRATED(1), diagnostic only]" % (full[5][2], k_Z))

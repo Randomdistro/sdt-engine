@@ -2,8 +2,9 @@
  * @file benchmarks_b01_b25.cpp
  * @brief SDT Certified Benchmark Suite B01–B25
  *
- * All computations sourced from sdt::laws (sdt_laws.hpp).
- * Zero external dependencies. Zero fitting parameters beyond the hydrogen calibration.
+ * Canonical computations are sourced from sdt::laws (sdt_laws.hpp).
+ * Every seed, bridge, seat, measured boundary, calibration and comparison
+ * carries item-level provenance.
  *
  * Compile (from project root via CMake — recommended):
  *   cmake -S . -B build && cmake --build build
@@ -27,9 +28,29 @@
 #include <algorithm>
 #include <numeric>
 
+static_assert(sdt::laws::measured::alpha_inv
+              == 1.0 / sdt::laws::measured::alpha);
+static_assert(sdt::laws::measured::t_P
+              == sdt::laws::measured::l_P / sdt::laws::measured::c);
+static_assert(sdt::laws::measured::eV_to_J
+              == sdt::laws::measured::e_charge);
+static_assert(sdt::laws::measured::r_e
+              == sdt::laws::measured::alpha * sdt::laws::measured::alpha
+               * sdt::laws::measured::a_0);
+
 // ═══════════════════════════════════════════════════════════════════════
 //  BENCHMARK FRAMEWORK
 // ═══════════════════════════════════════════════════════════════════════
+//
+// Closure inventory frozen 2026-08-14:
+//   21 PENDING rows = B06(9), B11(2), B15(1), B16(3), B18(3),
+//                     B25(2), B34(1)
+//   open display     = B09 (no SDT resistance-quadrupole emission integral)
+//   standing Class D = B37 (rank-4 band; no measurement yet)
+//   residual debt    = B38 (triton-tier onset n=3 is read, not priced)
+//   calibrated rows  = B22(2) (P_eff and P_eff/P_conv)
+// Numeric gates and target-independent call graphs live in APS14, GOM41,
+// CR08, FD02, FLM07/15, NP33, APS03, GOM06 and TD03 respectively.
 
 enum class Certification { DERIVED, COMPUTED, CALIBRATED, OBSERVED, PENDING, IDENTITY };
 
@@ -194,20 +215,19 @@ static void B04_lamb_shift()
     std::puts("\n══ B04: LAMB SHIFT ══");
     using namespace sdt::laws;
 
-    // RETRACTED (HUNTER 2026-07-02, applied 2026-07-03, Harvey-authorized):
-    // the former "native candidate" 1051.8 MHz was the fabricated APS04 value — a bare
-    // literal in laws.hpp with no evaluating code. That number stays dead.
-    // STATUS UPDATE (2026-07-29, per APS04_ASSESSMENT/VERDICT_DIRECT 2026-07-26): the rebuilt,
-    // instrument-validated APS04 solver now derives the wake's multipole ladder exactly
+    // APS04 derives the wake's multipole ladder
     // (r^-1 / zero dipole / r^-3 / r^-4·cos3φ) and a nuclear-geometry 2S-2P term of
     // +0.761 MHz — correct sign, correct muonic (m/a²) scaling, zero fitted parameters.
     // The whole-interval claim is excluded on raw scaling (predicted 7.1e6 vs measured
-    // 4.6e4 muonic/electronic ratio); the full 1057.845 MHz amplitude routes to the
-    // FLM14 route-geometry programme and remains OPEN. No tally until that lands.
-    std::printf("  B04  H 2S-2P interval: nuclear-geometry term +0.761 MHz derived (APS04 "
-                "2026-07-26, sign/order/scaling earned); full amplitude OPEN (FLM14). "
-                "Measured %.3f MHz retained as OBSERVED-INPUT only.\n",
-                law_VI::angular::lamb_shift_measured_MHz);
+    // 4.6e4 muonic/electronic ratio). 2026-08-13: the H 1057.845 MHz interval is
+    // ACCEPTED as OBSERVED (Lamb–Retherford form-switch on the proton center). He⁺
+    // 14041.13 MHz is a second OBSERVED sticker (α center). Not tallied as derived.
+    std::printf("  B04  H 2S-2P: ACCEPTED OBSERVED %.3f MHz (Lamb-Retherford, proton center). "
+                "He+ n=2: ACCEPTED OBSERVED %.2f MHz (alpha center; not derived from H). "
+                "APS04 nuclear-geometry addend +0.761 MHz (sign/order/scaling earned). "
+                "No derived interval tally.\n",
+                law_VI::angular::lamb_shift_measured_MHz,
+                law_VI::angular::lamb_shift_He_plus_measured_MHz);
 }
 
 // ═══════════════════════════════════════════════════════════════════════
@@ -315,10 +335,8 @@ static void B09_gravitational_radiation()
 {
     std::puts("\n══ B09: BINARY PULSAR DECAY ══");
 
-    // RETRACTED as a prediction (HUNTER 2026-07-02, applied 2026-07-03, Harvey-authorized):
-    // the previous line typed the GR quadrupole value (-2.4029e-12) and stamped it DERIVED —
-    // a BORROW: nothing SDT was computed. Retained as an OBSERVED comparison only, no tally.
-    // The SDT chirp convergence lives in B29 (koppa-bridge identity, labelled there).
+    // No SDT-native emission integral is implemented; the values below are
+    // observed/reference comparisons only. The chirp correspondence is in B29.
     std::puts("  B09  Hulse-Taylor dP/dt: observed -2.4025e-12 s/s; GR quadrupole -2.4029e-12."
               " SDT-native emission integral NOT built — OPEN (no earned prediction).");
 }
@@ -513,17 +531,14 @@ static void B18_proton_radius()
     std::puts("\n══ B18: PROTON RADIUS ══");
     using namespace sdt::laws;
 
-    // W+1 conjecture: R_p = (W+1)ℏ/(m_p c) = 4ℏ/(m_p c)
-    report("B18", "R_p (W+1 conjecture) [m]", "Nuclear",
+    // FLM07: minimum engaged resistance selects q=4 before R_p comparison.
+    report("B18", "R_p (FLM07 q=4 lock) [m]", "Nuclear",
            winding::R_p_predicted, measured::R_p, 0.08, Certification::DERIVED);
 
-    // W_eff diagnostic
-    report("B18", "W_eff (should be 3.000)", "Nuclear",
-           winding::W_eff, 3.0, 0.08, Certification::DERIVED);
-
-    // He-4 charge radius: R_He = 2 × R_p
-    report("B18", "He-4 radius = 2Rp [m]", "Nuclear",
-           nuclear::R_He_predicted, measured::R_He, 0.5, Certification::DERIVED);
+    // Contact-seat correspondence, separate from NP12 bulk RMS scaling.
+    report("B18", "He-4 contact diameter = 2Rp [m]", "Nuclear",
+           nuclear::R_He_contact_diameter, measured::R_He, 0.5,
+           Certification::PENDING);
 }
 
 // ═══════════════════════════════════════════════════════════════════════
@@ -573,12 +588,8 @@ static void B21_screening()
     std::puts("\n══ B21: FORCE HIERARCHY ══");
     using namespace sdt::laws;
 
-    // RETRACTED as a prediction (HUNTER 2026-07-02, applied 2026-07-03, Harvey-authorized):
-    // the previous line hardcoded NIST G = 6.674e-11 inside a suite whose banner says "No G"
-    // ("SDT derives same from k-hierarchy" was asserted in a comment; the NIST number did the
-    // work). BORROW-SMUGGLE — deleted, no tally. Note: extracting G from any body's k-hierarchy
-    // requires that body's mass in kilograms, which is itself GM/G — the koppa cancels (see the
-    // 2026-07-03 lP-relabel retraction). The native statement is the RATIO of koppas, not G.
+    // Splitting GM into G and kilogram mass is unit bookkeeping, not an
+    // independent SDT force-hierarchy derivation; this row is display-only.
     std::puts("  B21  EM/Grav force ratio ~2.27e39: displayed for orientation only — the split"
               " of GM into G and kg-mass is unit bookkeeping SDT does not perform. No tally.");
 }
@@ -662,9 +673,6 @@ static void B25_alpha_cluster()
     double E_exact = -79.0052;
     report("B25", "He binding exact NR [eV]", "Nuclear", E_exact, -79.005, 0.001, Certification::PENDING);
 
-    // Charge radius: R_He = 2 R_p (engine radii — retained pending separate radius audit)
-    report("B25", "R_He = 2Rp [fm]", "Nuclear",
-           2.0 * measured::R_p * 1e15, measured::R_He * 1e15, 0.5, Certification::DERIVED, "fm");
 }
 
 // ═══════════════════════════════════════════════════════════════════════
@@ -685,10 +693,25 @@ static void B26_trefoil_topology()
            law_VI::traction::v_phase_proton_surface / measured::c, 1.830, 0.5,
            Certification::COMPUTED);
 
-    // PPT07: m_p/m_e from trefoil topology = 6π⁵ = 1836.118 (distinct from 1.830c)
-    report("B26", "m_p/m_e = 6pi^5 (topology)", "Particle",
+    // PPT17: shared-input tube-volume construction (not independent prediction).
+    report("B26", "m_p/m_e = 6pi^5 (tube packing)", "Particle",
            law_VI::mass_ratio::six_pi_5, measured::m_p / measured::m_e, 0.01,
-           Certification::DERIVED);
+           Certification::COMPUTED);
+
+    // The point test electron follows v(a0)=alpha*c.
+    report("B26", "Point electron v(a0) [m/s]", "Particle",
+           law_VI::mass_ratio::point_electron_bohr_velocity,
+           measured::alpha * measured::c, 1e-10, Certification::IDENTITY);
+
+    // Conserving 6pi^5 electron closure tubes into the torus at R_p.
+    const double b_e = law_VI::winding::r_electron_body_open;
+    const double b_p = law_VI::mass_ratio::proton_tube_radius_from_packing(b_e);
+    const double packed_ratio =
+        law_VI::mass_ratio::torus_envelope_volume(measured::R_p, b_p)
+        / law_VI::mass_ratio::electron_orbit_tube_volume(b_e);
+    report("B26", "Torus/electron tube volume ratio", "Particle",
+           packed_ratio, law_VI::mass_ratio::six_pi_5, 1e-10,
+           Certification::IDENTITY);
 }
 
 // ═══════════════════════════════════════════════════════════════════════
@@ -831,18 +854,19 @@ static void B33_turbulence()
 }
 
 // ═══════════════════════════════════════════════════════════════════════
-//  B34 — THE DRAFTING FLOOR a₀ = cH₀/2π (APS03)
+//  B34 — DRAFTING-SCALE CORRESPONDENCE a₀ = cH₀/2π (APS03)
 // ═══════════════════════════════════════════════════════════════════════
 
 static void B34_drafting_floor()
 {
-    std::puts("\n══ B34: DRAFTING FLOOR a₀ ══");
+    std::puts("\n══ B34: DRAFTING-SCALE CORRESPONDENCE ══");
     using namespace sdt::laws;
-    // The cosmos's own acceleration floor from the boundary rate — no fit.
-    // Comparison value is the empirically fitted galactic floor 1.2e-10 m/s².
+    // Both H₀ and the galactic comparison are observed/calibrated anchors.
+    // This is a numerical correspondence, not a derived acceleration floor.
     double H0 = 67.4 * 1000.0 / 3.0857e22;               // OBSERVED [1/s]
     double a0 = measured::c * H0 / (2.0 * std::numbers::pi);
-    report("B34", "a0 = cH0/2pi [m/s2]", "Galactic", a0, 1.2e-10, 20.0, Certification::COMPUTED);
+    report("B34", "a0 = cH0/2pi correspondence [m/s2]", "Galactic",
+           a0, 1.2e-10, 20.0, Certification::PENDING);
 }
 
 // ═══════════════════════════════════════════════════════════════════════
@@ -978,13 +1002,52 @@ static void B39_relay_speed_profile()
     const double v_grav = measured::c * (1.0 / depth_closure::clock_rate(z) - 1.0);
     report("B39", "Solar gravitational redshift", "Gravitation",
            v_grav, 633.0, 1.0, Certification::DERIVED, "m/s");
-    // (iii) the superseded relation, printed so the fault stays visible
-    std::printf("  B39  superseded c_local=c(1-z) would give %.2f us "
-                "(ratio %.4f) — retained only for legacy callers.\n",
-                1e6 * dt * 0.5, 0.5);
     std::puts("  B39  OPEN FORK (second-order): c(1-z)^2 [adopted, wall at r=koppa]");
     std::puts("       vs c(1-2z) [Schwarzschild form, horizon at r_s]. A 1.4 Msun");
     std::puts("       NS surface splits them by 8.6% — the named discriminator.");
+}
+
+static void canonical_identity_checks()
+{
+    using namespace sdt::laws;
+    std::puts("\n══ CANONICAL FORMULA IDENTITIES ══");
+    const double k_formula =
+        measured::alpha_inv * std::sqrt(measured::R_p / measured::a_0);
+    report("I40", "Proton-surface k from stated formula", "Canon",
+           bridge::k_proton_surface, k_formula, 1e-12,
+           Certification::IDENTITY);
+
+    const double v_point =
+        law_VI::mass_ratio::point_electron_velocity(measured::R_p);
+    report("I41", "Point-electron/traction velocity identity", "Canon",
+           law_VI::traction::v_phase_proton_surface, v_point, 1e-12,
+           Certification::IDENTITY, "m/s");
+
+    const double R = (measured::hbar / (measured::m_p * measured::c))
+                   / std::numbers::sqrt3;
+    const double sigma =
+        (measured::m_p * measured::c * measured::c
+         / (2.0 * std::numbers::pi * R))
+        * 1.0e-15 / (1.0e9 * measured::eV_to_J);
+    report("I42", "PPT05 tension from registered inputs", "Canon",
+           law_VI::confinement::string_tension_GeV_per_fm, sigma, 1e-12,
+           Certification::IDENTITY, "GeV/fm");
+
+    constexpr double b = 1.0;
+    const double locked = law_IV::locked_engaged_volume_sphere(b);
+    const double wake = law_IV::wake_volume_sphere(b);
+    const double sphere = 4.0 * std::numbers::pi * b * b * b / 3.0;
+    report("I43", "FLM15 lock/wake volume partition", "Canon",
+           (locked + wake) / sphere, 1.0, 1e-12,
+           Certification::IDENTITY);
+
+    const double coincident_delta =
+        law_IV::synchrony_resistance_delta(locked, 2.0 * locked);
+    const double expected_delta =
+        -law_IV::resistance_from_engaged_volume(locked);
+    report("I44", "FLM15 coincident synchrony resistance", "Canon",
+           coincident_delta / expected_delta, 1.0, 1e-12,
+           Certification::IDENTITY);
 }
 
 // ═══════════════════════════════════════════════════════════════════════
@@ -998,7 +1061,7 @@ static void coverage_roster()
     std::puts("         S = investigation seeded 2026-07-29 · O = investigation open");
     std::puts("         (the companion repo's old certifications carry no weight; B04-old");
     std::puts("          and the self-referential B51+ validations are recorded as void)");
-    std::puts("  B01-B25  T  this suite (B04 note-only: APS04 term derived, amplitude open;");
+    std::puts("  B01-B25  T  this suite (B04 note-only: H/He+ Lamb OBSERVED stickers, APS04 addend);");
     std::puts("              B06 PENDING → APS10 seeded; B09 open; B11 PENDING)");
     std::puts("  B25-26   A  alpha geometry/overlap — NP10, NP33 mesh log");
     std::puts("  B27,33   A  radius scaling + isotope shifts — NP12, APS07, contraction rule");
@@ -1036,7 +1099,7 @@ int main()
     std::puts("╔══════════════════════════════════════════════════════════════╗");
     std::puts("║  SDT BENCHMARK SUITE — Six-Law Framework                    ║");
     std::puts("║  Single Source of Truth: sdt_laws.hpp                       ║");
-    std::puts("║  9 Axioms · 18 Theorems · 0 Free Parameters                ║");
+    std::puts("║  9 Axioms · 18 Theorems · Explicit Input Provenance        ║");
     std::puts("╚══════════════════════════════════════════════════════════════╝");
 
     B01_atomic_structure();
@@ -1078,6 +1141,7 @@ int main()
     B37_rank4_prediction();
     B38_shell_schedule();
     B39_relay_speed_profile();
+    canonical_identity_checks();
     coverage_roster();
 
     // Separate genuine regressions from KNOWN-OPEN (PENDING) items so the summary

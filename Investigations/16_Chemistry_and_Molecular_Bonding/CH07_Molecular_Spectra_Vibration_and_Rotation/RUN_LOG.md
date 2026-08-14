@@ -11,7 +11,7 @@ to that well directly, and its answer — whatever it is — is the P1 result.
 
 ## Faith ledger (§G.1)
 
-1. ℏ is whitelist; but TWO quantisation RULES enter this domain as assertions, and are flagged as
+1. ℏ is derivation basis; but TWO quantisation RULES enter this domain as assertions, and are flagged as
    such up front: (a) the rotational ladder step (wake-winding quantiser, PPT06/APS04 — asserted,
    not derived here); (b) the line-position bridge E = ℏω (emission bridge — same status). Any
    number depending on them is capped IDENTITY/CONVERGENCE, never NATIVE.
@@ -100,7 +100,7 @@ p–e seat distance s = u(x)·R, u = √(¼+x²); e–e gap = 2xR.
 - **W-4:** W = Σ_seats ℏ²/(2m_e (2πs)²) — compliance length = the seat-tour circumference
   (FLM14 tour reading; 2π geometry), seat count 2.
 - **W-5:** W = (ℏ²/2m_e a₀²)·exp(−R/a₀) — the exponential class with its range DERIVED from a
-  native length (a₀, whitelist); coefficient 1 (one rolling interface). No other exponential
+  native length (a₀, derivation basis); coefficient 1 (one rolling interface). No other exponential
   range is admissible (r_e and seat spacing variants would need R-dependent ranges — not
   exponentials — or circular Re input).
 
@@ -172,7 +172,7 @@ PRESS mode, "movement that cannot move," and the budget price of movement confin
 is ℏ²/(2m_e s²) (FLM12 confinement reading of Law IV/V). Depth tracks the cores (both press —
 force nuclear); the length that bends is electronic (m_e, s = uR — compliance electronic).
 
-**D-A2 (constants traced):** ℏ, m_e, a₀, α, c — whitelist (`laws.hpp measured::`); αℏc =
+**D-A2 (constants traced):** ℏ, m_e, a₀, α, c — derivation basis (`laws.hpp measured::`); αℏc =
 `coulomb_identity::k_e_e2` (engine class-F identity, declared as in run 1); seat count 2, u(x),
 2xR — run-1 geometry (earned); W+1 = 4 (FLM07 gearing, earned label); 2π (geometry); Shannon
 radii (OBSERVED anchors, ionic leg only). **Fitted-parameter count: ZERO.** The λ-sweep is a

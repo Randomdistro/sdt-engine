@@ -9,7 +9,7 @@
 ## ⓪ The Golden Rule — five questions (answered)
 
 1. **What don't we know?** — **Why the hydrogen ground-state tour gears down to exactly α = 1/137.036 of the relay speed c.** The closure `v = αc` is exact *given* α; the open gap is the *value* of α — i.e. the size of the W=1 electron's lattice wake `r_e` relative to its coherence scale `ƛ_Ce`, currently an input, not a derivation (`laws.hpp:1403` poses this verbatim).
-2. **Why does it matter?** — α is one of only 8 whitelist inputs `{ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p}`. Deriving it drops the minimal input set from 4 (`{ℓ_P, T_CMB, α, d=3}`) to 3 and removes the last dimensionless free number in the atomic sector. Downstream: PPT03 (m_p/m_e), EMC01 (transfer function), every `atomic::` coupling scales through α.
+2. **Why does it matter?** — α is one of only 8 derivation basis inputs `{ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p}`. Deriving it drops the minimal input set from 4 (`{ℓ_P, T_CMB, α, d=3}`) to 3 and removes the last dimensionless free number in the atomic sector. Downstream: PPT03 (m_p/m_e), EMC01 (transfer function), every `atomic::` coupling scales through α.
 3. **How will we find out?** — Three declared, competing native routes (§④ A/B/C), gated, native mechanism before any `atomic::`/rival comparison. α is treated throughout as a **velocity gear ratio** `v_ground/c`, not a "coupling strength" (§③.movement).
 4. **What would prove us wrong?** — §⑧ falsifiers with numeric triggers; any route that only *back-solves* α from a length already scaled by α is CIRCULAR and dies (§④.circularity gate).
 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN). A route "derives α" only if it predicts 1/137.036 to its committed s.f. from a quantity that is *not* itself α-scaled (delete-test).
@@ -97,7 +97,7 @@ The gate does not forbid deriving α — it forbids *laundering* it. Delete-test
 
 | Item | Where | Class it enters as | Live? |
 |------|-------|--------------------|-------|
-| `alpha` | `laws.hpp` `measured::` whitelist | **INPUT** (the thing we are trying to remove) | ✔ |
+| `alpha` | `laws.hpp` `measured::` derivation basis | **INPUT** (the thing we are trying to remove) | ✔ |
 | `r_e` = α·ƛ_Ce | `laws.hpp:144` | IDENTITY (α-scaled) — legacy label flagged | ⚠ relabel |
 | `koppa_hydrogen` = α²a₀ = r_e | `laws.hpp:675` | DERIVED identity | ✔ |
 | `R_excl_e` = 2.878e-21 | `laws.hpp:478` | the electron's *actual* radius (Route A target) | ✔ |
@@ -106,7 +106,7 @@ The gate does not forbid deriving α — it forbids *laundering* it. Delete-test
 | PPT01 velocity/equilibrium budget | Investigations/02 | UPSTREAM (v_T, R/a per winding) | verify on file |
 | **FLM14 rotating-spation dwell** | Investigations/01 | **UPSTREAM (Route B carrier)** — un-verdicted, ACTIVE | ⚠ dependency |
 | **FLM05 lattice reconnection → wake radius** | Investigations/01 | **UPSTREAM (Route C)** — un-enacted SPEC | ⚠ dependency |
-| PPT03 m_p/m_e (6π⁵, OPEN) | Investigations/02 | SIBLING (mass gear; cross-check, not input) | informative |
+| PPT17 m_p/m_e (6π⁵, resolved shared-input construction) | Investigations/02 | SIBLING (mass gear; cross-check, not input) | informative |
 | law_VI winding, `bridge::k_*` | `laws.hpp` | mechanism namespaces | ✔ |
 
 **Dependency risk:** Routes B and C both stand on **un-verdicted** upstream investigations (FLM14 ACTIVE, FLM05 SPEC). If they underdeliver, the honest verdict is **DEFER**, citing the blocker by ID — **never a fake PASS** (§⑩).
@@ -167,7 +167,9 @@ Record the sort in `RUN_LOG.md` per failure; link shared roots once in `INVESTIG
 - **α is a velocity, not a strength.** `v=αc` means α is literally the ground gear. Harvey's current King-plot movement law ("every emission = path × velocity gear at c, 7 floors") suggests the H ground state is *floor 1* of that same gear ladder — α may be the first rung of a countable sequence, not a lone magic number. Cross-check against the 7-floor structure.
 - **The rotation DOF is un-mined.** FLM14 says positions are sequential (tour). A tour has a *rate*. No route has yet asked whether the 1/137 gear is the tour's dwell fraction. This is the §G.3 opening and the primary lead.
 - **Two radii, not one.** The whole field has been conflating $r_e$ (hydrogen koppa) with the electron's size ($R_{\text{excl},e}$). Any α-derivation that targets "the electron radius" must state *which* — Route A targets $R_{\text{excl},e}$; the closure's $r_e$ is the koppa.
-- **6π⁵ sibling.** PPT03 derives m_p/m_e ≈ 6π⁵ (19 ppm, OPEN). If mass gear and charge gear share a lattice origin, α and 6π⁵ may be two projections of one reconnection count — worth a joint delete-test, *not* an input swap.
+- **6π⁵ sibling.** PPT17 resolves m_p/m_e ≈ 6π⁵ (19 ppm) as a
+  shared-input tube-volume construction. It remains a cross-check, not an
+  input swap or independent prediction.
 - **Look-elsewhere discipline.** Before any "α = f(π, geometry)" candidate is called a result, run the look-elsewhere correction (memory: 6π⁵ is unique *because* it survived it; bare α-fits do not).
 - **Contraband watch:** do not let "α must be an input because QM treats it as fundamental" sit in the kill table — that is GATE-CONTRABAND (§G.2). QM's status of α is not an SDT anchor.
 

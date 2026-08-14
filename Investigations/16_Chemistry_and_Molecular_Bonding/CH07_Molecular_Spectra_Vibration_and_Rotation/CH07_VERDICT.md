@@ -6,7 +6,7 @@
 
 | Phase | Result | Call |
 |---|---|---|
-| ℏ entry audit | two ASSERTED quantisation rules located and flagged: the rotational ladder step (wake-winding quantiser, PPT06/APS04) and the line-position bridge E=ℏω. ℏ itself is whitelist; the RULES are the owed pieces | flagged |
+| ℏ entry audit | two ASSERTED quantisation rules located and flagged: the rotational ladder step (wake-winding quantiser, PPT06/APS04) and the line-position bridge E=ℏω. ℏ itself is derivation basis; the RULES are the owed pieces | flagged |
 | P1 native k | shared-seat minimisation: **g\* = −4.19615 at x\* = 0.2887** (H₂⁺ gives exactly −3 at the midpoint — the same machinery as NP17's deuteron factor 3). Well is E = g\*αℏc/R, scale-free → **d²E/dR² = −4.75×10³ N/m at Re: NON-restoring.** No vibrational stiffness exists in this class — registered prediction confirmed | **OPEN** (prompt's 10% gate honestly failed) |
 | P2 isotopologues | k back-solved (DECLARED circular for the parent ν — caps at C) then mass-only transfers, zero new inputs: **DCl −0.002%, D₂ −0.070%, ¹³CO +0.001%** (gates <0.5%) | **PASS** — the isotope-transfer premise (k = charge geometry, mass-blind) survives |
 | P3 rotation | B(CO) 1.9314 vs 1.93128; B(HCl) 10.5926 vs 10.5934 — **DECLARED IDENTITY** (measured R is spectroscopic in origin; ladder step asserted) | IDENTITY, earns nothing |

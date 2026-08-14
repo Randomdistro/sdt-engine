@@ -52,7 +52,7 @@ struct SeriesLimit {
 };
 
 int main() {
-    // ---- the ONLY external inputs: measured constants (whitelist) + measured spectra ----
+    // ---- the ONLY external inputs: measured constants (derivation basis) + measured spectra ----
     const double c   = M::c;        // [m/s]
     const double h   = M::h;        // [J s]
     const double m_e = M::m_e;      // [kg]

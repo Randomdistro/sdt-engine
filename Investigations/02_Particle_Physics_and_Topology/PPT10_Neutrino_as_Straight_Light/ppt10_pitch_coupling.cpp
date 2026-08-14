@@ -2,7 +2,7 @@
 // PPT10 — The Neutrino as Straight Light: pitch = grip, and the coupling gap.
 //
 //   Executes the SPEC at PPT10/PROMPT.md.  Reuses the canonical engine only:
-//     #include <sdt/laws.hpp>      (measured whitelist, law_V budget, law_VI winding)
+//     #include <sdt/laws.hpp>      (measured derivation basis, law_V budget, law_VI winding)
 //     #include <sdt/neutrino.hpp>  (W=0, wake_radius, R_wake_nu1, R_excl_nu1)
 //   NO local constant namespaces.  NO G/M/GM.  NO "charge radius".  NO G_F / virtual-W /
 //   flavour / wavefunction in the SDT chain — those appear ONLY as OBSERVED columns.
@@ -63,7 +63,7 @@ int main() {
     std::printf(" Engine: sdt::laws (measured, law_V, law_VI) + sdt::neutrino.  No G/M/GF.\n");
     std::printf("======================================================================\n\n");
 
-    // ---- whitelist constants (reused, not redefined) ----
+    // ---- derivation basis constants (reused, not redefined) ----
     std::printf("[MEASURED-INPUT] c    = %.6e m/s   (laws.hpp:110)\n", c);
     std::printf("[MEASURED-INPUT] hbar = %.6e J s   (laws.hpp:111)\n", hbar);
     std::printf("[MEASURED-INPUT] m_e  = %.6e kg    (laws.hpp:151)\n", m_e);

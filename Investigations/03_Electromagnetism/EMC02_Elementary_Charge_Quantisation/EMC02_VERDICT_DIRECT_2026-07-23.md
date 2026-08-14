@@ -20,7 +20,7 @@ treated as unverified and re-earned today.
   number (PPT09) and a lattice-derived e₀.
 - **Candidate 3 (e = √(αℏc/k_e)): exact to 3e-8 % but CIRCULAR** — the Coulomb identity is
   definitional; r_e = αℏ/(m_e c) *defines* α's conversion; requires PPT02 first.
-- Dimensional closure: whitelist {ℓ_P, c, ℏ, k_B, T_CMB} **cannot produce [A·s]** — no current
+- Dimensional closure: derivation basis {ℓ_P, c, ℏ, k_B, T_CMB} **cannot produce [A·s]** — no current
   dimension exists to build from. Confirmed by today's run.
 
 ## Verdict
@@ -33,5 +33,5 @@ treated as unverified and re-earned today.
   which EMC04 now derives on framework terms.
 - **Recovery:** n/a · **Cascade root:** PPT02/PPT09 (α and Lk) — both open.
 
-*Consistent with the campaign doc's whitelist note: no whitelist member is claimed derived; e's
+*Consistent with the campaign doc's derivation basis note: no derivation basis member is claimed derived; e's
 irreducibility here is a direct-run dimensional result, not an agent assertion.*

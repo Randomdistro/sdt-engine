@@ -103,8 +103,10 @@ scaling), never the analyst's preference after seeing P3.
 
 ## 3. Theoretical framework (native chain — everything here is committed BEFORE code)
 
-1. **Trefoil topology (Law VI):** W = 3 on the W+1 rule; R_p = 4ℏ/(m_p c) — independently
-   anchored (muonic-H boundary radius). Permitted input.
+1. **Trefoil topology (Law VI):** W = 3; the W+1 relation
+   `R_p = 4ℏ/(m_p c)` is tested against the independently measured muonic-H
+   boundary radius. The measured radius is a validation anchor, not an upstream
+   derivational dependency.
 2. **Knot parametrisation (committed):** (2,3) torus knot,
    x(t) = (R + r·cos 3t)·cos 2t, y(t) = (R + r·cos 3t)·sin 2t, z(t) = r·sin 3t, t ∈ [0, 2π),
    scaled so the outermost extent = R_p. **Aspect ratio committed from the canon gearing:

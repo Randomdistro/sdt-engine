@@ -108,7 +108,7 @@ retrocausal commitment).
   *attracted*; the radial position is a standoff (heliopause/lumiostasis one rung down).
 - Binding = centripetal `F = mₑ(αc)²/a₀ = 8.2387×10⁻⁸ N`, computed **with no charge term**, equal to
   Coulomb and to the SDT occlusion force to ratio **1.0000000000**. Inverting occlusion gives the engine
-  `P_eff = 5.2252×10³¹ Pa`; the delete-test yields the whitelist form `P_eff = mₚ²mₑ²c⁵/(4παℏ³)` with no
+  `P_eff = 5.2252×10³¹ Pa`; the delete-test yields the derivation basis form `P_eff = mₚ²mₑ²c⁵/(4παℏ³)` with no
   `e`, no `k_e`.
 - **HONEST CRUX:** the "1.000…0" agreements are **algebraic identities, not evidence** (a₀ is *defined*
   via α). The whole edifice rests on **α ≡ k_e e²/(ℏc) read in reverse** — the delete-test removes the

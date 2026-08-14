@@ -1,9 +1,13 @@
 # FLM07 — Glancing Transfer, the 0.103 Frustration, and Void Gearing of the Contra-Rotating Shell
 
-> **Author:** James Christopher Harvey, Melbourne. 2026-06-20.
-> **Status:** OPEN → Parts A–C **RESOLVED [geometry, exact]**; Parts D–E **[STRONG conjecture, numbers align, not proven]**.
+> **Author:** James Christopher Tyndall, Melbourne. 2026-06-20.
+> **Status:** Parts A–D **DERIVED/COMPUTED**; the tetrahedral thread is selected
+> by the 2026-08-14 Law-IV minimum-engaged-resistance test.
 > **Tool:** `cq52_glancing_void_gearing.cpp` (consumes `Engine/include/sdt/laws.hpp`; output `cq52_results.txt`).
-> **Honesty contract:** the glancing-transfer geometry (A), the 0.103 even-packing frustration (B/C) and the tetrahedral/octahedral void ratios (D) are **pure geometry — exact, delete-test clean**. The *identification* of the physical contra-rotating shell with the tetrahedral-void sublattice, and the resulting **1:4 gearing**, is a **structural conjecture**: every integer lines up (4 = W+1 = tetrahedral coordination; 12 = 3×4 = the PPT06 traction ratio), but "the shell **is** the tet-void thread" is asserted, not derived. Labelled as such throughout.
+> **Scope:** the glancing geometry, packing frustration and void ratios are
+> exact. Selection of the tetrahedral thread is conditional on Law IV's
+> registered minimum-resistance path: both seat-only and contact-weighted
+> engaged-volume prices select it before particle-radius comparison.
 
 ---
 
@@ -86,11 +90,24 @@ So crushing the frustrated icosahedral shell yields a sublattice of **tetrahedra
 
 ---
 
-## 5. Part E — The contra-rotating shell as the tet-void thread: least spations, 1:4 gearing **[STRONG conjecture]**
+## 5. Part E — Minimum-resistance thread and 1:4 gearing **[DERIVED under Law IV]**
 
-Here is the seam (clearly conjectural — the numbers align, the identification is asserted):
+The close-packed alternatives are priced by the same FLM15 lock kernel. For a
+void radius `r_v`, each engaged contact costs
+`(P_conv/3)V_lock(r_v)`, with `V_lock=8πr_v³/7`:
 
-- The **tetrahedral void is the sparsest** interstice (4-coordinated, smallest, `r/R=0.225`). A shell that wants to rotate against the nucleon with **minimum drag** threads the **fewest spations** — i.e. it rides the tetrahedral-void sublattice. So the **contra-rotating shell naturally possesses the least amount of spations** (Harvey's phrase), by sitting in the 4-coordinated holes rather than the 6-coordinated ones.
+- Tetrahedral: `q=4`, `r/R=√(3/2)-1=0.224745`.
+- Octahedral: `q=6`, `r/R=√2-1=0.414214`.
+
+The octahedral/tetrahedral resistance ratio is `6.2604` for the
+seat-volume price and `9.3906` when each of the `q` contacts is counted. Both
+registered native prices select the tetrahedral path. The choice is invariant
+under scale because both prices scale as `R³`; neither path reads a particle
+radius or the W+1 target.
+
+- The **tetrahedral void is the sparsest** interstice (4-coordinated, smallest,
+  `r/R=0.225`). Law IV therefore selects it as the minimum reorganisation-cost
+  path for the contra-rotating shell.
 - That makes the gearing **one-for-four**: each tetrahedral void meshes exactly **4** spations, so the shell gears **1:4** against the lattice. This is the "void geometry as gearing" of [[project_two_regime_and_occlusion_saturation]] made concrete.
 - **The 4 is W+1.** The proton is the (2,3) trefoil, W=3, and `R_p = (W+1)·ℏ/(m_p c) = 4ℏ/(m_p c)`. So **W+1 = 4 = tetrahedral coordination = the gearing**. And the PPT06 traction ratio factorises cleanly:
 
@@ -98,11 +115,15 @@ $$\mathcal{T} = 3(W+1) = 12 = \underbrace{3}_{\text{trefoil } C_3} \times \under
 
 The **12 = 3 × 4** runs through the entire chain: 3 (the trefoil's three-fold lobes, the C₃ of Part A's wake) × 4 (the tetrahedral void coordination = W+1 = the shell's gearing). The trefoil's topology (3) and the lattice's crushed-void coordination (4) are the two factors of the traction the lattice must carry.
 
-**What is NOT proven:** that the physical contra-rotating shell *is* the tet-void thread (vs the oct-void, or a mix), and that the gearing is exactly 1:4 rather than, say, the 1:3 of the C₃ or the 1:2 of the tet:oct count. The integer coincidences (4 = W+1 = tet coordination; 12 = 3×4) are strong circumstantial support, not a derivation. Promoting Part E from conjecture to result is the forward work (see §8).
+**Scope boundary:** the result uses the framework's minimum-resistance-path
+premise. The instrument does not derive that variational premise again. Its
+W=1 control counts the 720-degree closure as two `2π` action relays; the W=3
+selected seat counts four. The alternate octahedral control gives six and
+predicts a proton boundary `49.97%` high.
 
 ---
 
-## 6. Honest status ledger
+## 6. Status ledger
 
 | part | claim | status |
 |---|---|---|
@@ -111,7 +132,7 @@ The **12 = 3 × 4** runs through the entire chain: 3 (the trefoil's three-fold l
 | B | spation rotation / co-drag / contra-rotation | **grounded** (FLM03, PPT06) — mechanism, not new number |
 | C | 0.103 icosahedral frustration of the even packing | **RESOLVED — exact geometry** |
 | D | crush → tet (0.225, 4-coord) + oct (0.414, 6-coord) voids | **RESOLVED — exact geometry** |
-| E | contra-rotating shell = tet-void thread → least spations, 1:4 gearing = W+1; 12=3×4 | **STRONG conjecture** (integers align; identification asserted) |
+| E | minimum-resistance path selects tet thread → 1:4 gearing = W+1; 12=3×4 | **DERIVED under Law-IV path premise**; octahedral control is 9.3906× dearer |
 
 ---
 
@@ -139,4 +160,41 @@ Output is `cq52_results.txt`.
 - **[[FLM06]]** — spation scale closure + `spation_packing_resonance.html` (the incommensurate-packing tool; the 0.103 is its 3-D cousin).
 - `Engine/include/sdt/laws.hpp` — `law_VI::winding`, `law_VI::traction`, `bridge::k_proton_surface`, `measured::{alpha,a_0,R_p,r_e}`.
 
-**Forward work (to promote Part E):** (1) integrate the glancing-locus angular distribution over the (2,3) knot and show the ℓ=2 / ℓ=3 wake weights drop out, replacing APS04's P₂; (2) prove (or refute) that the minimum-drag contra-rotating shell selects the tetrahedral-void sublattice specifically, fixing the 1:4 gearing; (3) check whether the `gear_ratio_nuclear_atomic` (laws.hpp) or any measured shell ratio carries the factor 4 = W+1.
+**Forward work:** (1) integrate the glancing-locus angular distribution over
+the full `(2,3)` knot to compute the ℓ=2 / ℓ=3 wake weights; (2) test the
+minimum-resistance path on a discrete dynamical lattice rather than the
+analytic close-packed seats; (3) carry the selected synchrony kernel into
+nuclear contact pricing.
+
+## Trefoil action / sublattice-selection freeze (2026-08-14)
+
+Part E is tested rather than assumed. The target-independent call graph is:
+
+```text
+glancing locus + FLM15 lock/resistance kernel
+  -> tet/octahedral candidate contact graphs
+  -> integrated slip and synchrony resistance for each candidate
+  -> minimum-resistance sublattice selected
+  -> trefoil action per closed circulation
+  -> inferred boundary multiplier
+  -> compare with W+1 and measured proton boundary
+```
+
+Frozen controls and gates:
+
+1. Parts A–D retain their exact geometric values to relative error `<1e-12`.
+2. Tetrahedral and octahedral candidates use the same core, boundary, movement
+   and quadrature. No candidate-specific coefficient is allowed.
+3. A sublattice is selected only if its integrated resistance is lower across
+   every registered orientation and by more than `5` numerical standard
+   errors. Otherwise Part E remains `OPEN`.
+4. W=1, `(2,3)` W=3, and the alternate sublattice are all run before any
+   measured particle radius is loaded.
+5. The inferred trefoil action/boundary multiplier must be stable within `1%`
+   under doubled filament resolution and `0.5%` under doubled volume
+   quadrature. Agreement with `W+1=4` is assessed only afterward at `0.08%`.
+6. Deleting the measured proton radius and all benchmark comparison values
+   must not alter the selected sublattice or inferred multiplier.
+
+Until all six gates pass, `W+1`, 1:4 gearing and the B18 radius remain
+structural hypotheses and cannot feed B22.

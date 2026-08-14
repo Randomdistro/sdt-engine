@@ -21,8 +21,9 @@
 4. Pantheon ΔAIC ≈ 90 loss · GD05's MOND-borrowed crossover · CR10/CR11 degeneracy · mass
    quantitative ledger unpaid (FLM12 D1/D2) · preferred-frame/neo-Lorentzian debt · ℓ_P and
    α as irreducible seeds · W+1 conjecture-not-derivation with the electron α-tension ·
-   6π⁵ [OPEN, look-elsewhere-burdened] — ALL CONCEDED; all were already ours, correctly
-   quoted from our own ledger.
+   6π⁵ [historically OPEN and look-elsewhere-burdened] — conceded at the audit
+   date. **Updated 2026-08-14:** PPT17 closes the shared-input tube-volume
+   construction, without promoting it to an independent prediction.
 
 ## Stale or wrong (with receipts)
 
@@ -35,8 +36,8 @@
 2. **"P_eff is a fitted knob quoted at two values" — PARTIAL, and the fitted-knob framing is
    wrong.** The engine carries ONE value (5.225×10³¹ Pa, `laws.hpp:361–363`) and the
    electropause closed form `P_eff = m_p²m_e²c⁵/(4παℏ³)` is ALGEBRAICALLY IDENTICAL to it —
-   a whitelist-only expression ({α, m_e, m_p, ℏ, c}), zero fitted literals. α is a DECLARED
-   whitelist input, not a smuggled constant; the class-E label the referee quotes is OUR
+   a derivation basis-only expression ({α, m_e, m_p, ℏ, c}), zero fitted literals. α is a DECLARED
+   derivation basis input, not a smuggled constant; the class-E label the referee quotes is OUR
    label about the derivation ROUTE (inversion at the hydrogen anchor), honestly displayed.
    What remains real: IF `LAW_OF_RADIATIVE_PRESSURE_ORIGIN.md:137` prints 1.65×10³¹, that is
    a PROSE-LAYER inconsistency (the report's own two-layer thesis) — flagged for the

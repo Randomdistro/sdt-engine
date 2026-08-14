@@ -81,4 +81,4 @@ GEMMA, XENONnT bounds — OBSERVED; discrimination at 10⁻²⁰.
 
 ---
 
-*PPT04 · the prediction stands; the implementation must obey the whitelist.*
+*PPT04 · the prediction stands; the implementation must obey the derivation basis.*

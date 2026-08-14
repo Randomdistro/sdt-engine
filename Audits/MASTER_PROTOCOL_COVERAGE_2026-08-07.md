@@ -492,3 +492,51 @@ Headline: **EPSILON_AGG_UNIT_CORRECTED** — wrong micro unit was `Om_H`;
 engine quantum is `koppa_per_baryon`; packing candidates do not earn a
 mechanism; C2 numeric MATCH = `α m_p/m_e ≈ 4π` coincidence. Law-III origin
 of `koppa_per_baryon` without `l_P↔G` remains OPEN (MM03).
+
+## Gate cleared — Iteration 41
+
+Spine close (2026-08-11) and TT flip-axis (2026-08-12):
+
+- `Audits/MASTER_PROTOCOL_ITERATION_41_2026-08-11.md`
+- `Audits/MASTER_PROTOCOL_ITERATION_41_2026-08-12.md`
+
+Headline: MM03 koppa Law-III **PARKED_OPEN**; AS01 Rydberg/Compton **SURVIVES**
+(length-Om plug EXCLUDED); OM01 shared-om **CONDITIONAL**; NSEQ13 TT flip-axis
+**EXCLUDED** (observed inversion not rescued).
+
+## Gate cleared — Iteration 42
+
+Outstanding-closure terminal classes (2026-08-11) and native `A_s` screen
+(2026-08-12):
+
+- `Audits/MASTER_PROTOCOL_ITERATION_42_2026-08-11.md`
+- `Audits/MASTER_PROTOCOL_ITERATION_42_2026-08-12.md`
+
+Headline: unlabeled OPEN rows closed to terminal classes; AS02
+**REMAINS_IMPORTED**; GW01 chirp **IDENTITY_DISCLOSED** / coeff
+UNDERDETERMINED. No EMPIRICALLY SURVIVES promotions.
+
+## Gate cleared — Iteration 43
+
+Five ranked debts executed (MM04 / OM03 / NU01 / CK01 / NSEQ13 occupation):
+
+- `Audits/MASTER_PROTOCOL_ITERATION_43_2026-08-12.md`
+- `Audits/OUTSTANDING_FAILED_AFTER_07-22_CORRECTIONS_2026-08-09.md`
+
+Headline: MM04 **PARKED_PERMANENT**; OM03 **DEFINITION_BLOCKED**; NU01 scalar
+**EXCLUDED**, mechanism UNDERDETERMINED; CK01 constitutive **OPEN**; NSEQ13
+occupation MeV **UNDERDETERMINED**. Stop: remaining work needs new ontology
+or new data.
+
+## Gate cleared — Iteration 44
+
+Reopen-condition push (not a rerun of I43 candidate classes):
+
+- `Investigations/00_Master_Cascade/Outstanding_Closure_Iteration44/`
+- `Audits/MASTER_PROTOCOL_ITERATION_44_2026-08-13.md`
+- `.audit-tmp/i44_run.txt`
+
+Headline: NU02 **APPEARANCE_CONDITIONAL**; CK02
+**PACKING_NUMERIC_MATCH__CONSTITUTIVE_OPEN**; NSEQ14 **UNDERDETERMINED**;
+OM04 **RSR_PAYLOAD_ABSENT**. Koppa / A_s / GOM06 distinctive tests / PSP02
+TNF / D42 comment remain gated.

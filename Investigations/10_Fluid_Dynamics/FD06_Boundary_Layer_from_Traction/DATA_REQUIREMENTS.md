@@ -4,7 +4,7 @@
 **Status**: SPEC
 **Author**: James Christopher Tyndall, Melbourne
 
-External data is used **only** as the convergence target / falsifier in Phases 2–5. None of it enters the derivation as a tunable input. The mechanism is SDT-native (PPT06 traction + FD01 relay); measured fluid properties are legitimate *measured-in-measured-units* inputs (whitelist §0). The Blasius numbers themselves are analytic and require no dataset — they are reproduced, never borrowed.
+External data is used **only** as the convergence target / falsifier in Phases 2–5. None of it enters the derivation as a tunable input. The mechanism is SDT-native (PPT06 traction + FD01 relay); measured fluid properties are legitimate *measured-in-measured-units* inputs (derivation basis §0). The Blasius numbers themselves are analytic and require no dataset — they are reproduced, never borrowed.
 
 ## A. Analytic reference values (no dataset — exact targets)
 
@@ -20,7 +20,7 @@ These are computed from the Blasius flat-plate similarity solution and serve as 
 | Plate drag (length L) | `C_D = 1.328/√Re_L` | Phase 3 |
 | Wall-gradient constant | `f''(0) ≈ 0.332` | Phase 3 profile check |
 
-## B. Measured fluid properties (whitelist inputs, measured units)
+## B. Measured fluid properties (derivation basis inputs, measured units)
 
 Needed for the Phase-5 dimensional benchmark (turning a dimensionless prediction into a metre/Pascal). At most ONE of these may be used as the single permitted scale; if so, tag CALIBRATED(1).
 

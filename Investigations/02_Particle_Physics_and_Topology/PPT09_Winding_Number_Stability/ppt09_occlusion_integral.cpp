@@ -147,12 +147,16 @@ void phase_2b_two_vortices() {
     printf("Energy ratio: E(1,2) / [2×E(1,1)] = %.6f\n", ratio);
     printf("\n");
 
-    if (ratio > 1.05) {
-        printf("✓ PREDICTION CONFIRMED (≥5% higher):\n");
+    if (std::abs(ratio - 1.0) < 1.0e-12) {
+        printf("= NULL DISCRIMINATOR:\n");
+        printf("  Linked (1,2) and two separate (1,1) branches are equal\n");
+        printf("  in this first-order model. No decay direction is established.\n");
+    } else if (ratio > 1.05) {
+        printf("✓ PREDICTION CONFIRMED (≥5%% higher):\n");
         printf("  Linked (1,2) has HIGHER energy than two separate (1,1).\n");
         printf("  This drives reconnection: (1,2) → 2×(1,1)\n");
     } else if (ratio > 1.0) {
-        printf("✓ WEAK PREDICTION (1-5% higher):\n");
+        printf("✓ WEAK PREDICTION (1-5%% higher):\n");
         printf("  Linked (1,2) has slightly higher energy.\n");
         printf("  Reconnection is energetically favorable but slow.\n");
     } else {
@@ -199,7 +203,7 @@ void phase_2c_occlusion_integral() {
         {3, 4, "(3,4) knot (knotted)"}
     };
 
-    printf("Winding | Name                           | R/a      | V_occ/V_ref | E_conf/E_ref | Stable?\n");
+    printf("Winding | Name                           | R/a      | V_occ/V_ref | E_conf/E_ref | Knot type\n");
     printf("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n");
 
     double ref_volume = 0;
@@ -219,7 +223,7 @@ void phase_2c_occlusion_integral() {
         double e_ratio = ref_energy > 0 ? e_conf / ref_energy : 0;
 
         int is_knotted = (knot.p >= 2 && knot.q >= 2);
-        const char* stable = is_knotted ? "YES (knotted)" : (knot.q == 2 ? "NO (unknotted, W=2)" : "NO (unknotted)");
+        const char* knot_type = is_knotted ? "non-trivial knot" : "unknot";
 
         printf("W=%-2d    | %-30s | %.4f   | %.4f        | %.4f        | %s\n",
                (knot.p == 1) ? knot.q : (knot.p * knot.q),
@@ -227,7 +231,7 @@ void phase_2c_occlusion_integral() {
                std::sqrt((double)knot.q / knot.p),
                v_ratio,
                e_ratio,
-               stable);
+               knot_type);
     }
     printf("\n");
 }
@@ -264,17 +268,17 @@ int main() {
     printf("   total occlusion volume V_occ comparable to or larger than\n");
     printf("   two separate electrons.\n\n");
 
-    printf("3. Energy ratio E(1,2) / [2×E(1,1)] is close to 1.0 in the\n");
-    printf("   first-order approximation, suggesting marginal stability.\n\n");
+    printf("3. Energy ratio E(1,2) / [2×E(1,1)] is exactly 1.0 in the\n");
+    printf("   first-order approximation, so this is a null discriminator.\n\n");
 
-    printf("4. Higher-order terms (edge effects, boundary layers, pressure\n");
-    printf("   gradients) would tip the balance toward reconnection.\n\n");
+    printf("4. Edge effects, boundary layers and pressure gradients are not\n");
+    printf("   computed here; their sign cannot be assigned in advance.\n\n");
 
-    printf("Conclusion: Unknotted (1,2) is energetically disfavored relative\n");
-    printf("to two separate (1,1) vortices. Reconnection is probable.\n\n");
+    printf("Conclusion: knot classification survives, but W=2 energy direction,\n");
+    printf("barrier, lifetime and W={1,3}-only stability remain OPEN.\n\n");
 
-    printf("Next: Phase 3 computes the energy curve E(s) along the\n");
-    printf("reconnection pathway to confirm dE/ds < 0 near the linked state.\n\n");
+    printf("Next: compute the full energy curve E(s) without assuming the\n");
+    printf("sign of dE/ds near the linked state.\n\n");
 
     return 0;
 }

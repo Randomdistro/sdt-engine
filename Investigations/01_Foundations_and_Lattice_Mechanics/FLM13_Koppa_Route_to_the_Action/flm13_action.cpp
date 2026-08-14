@@ -9,6 +9,7 @@
 #include <sdt/laws.hpp>
 #include <cstdio>
 #include <cmath>
+#include <numbers>
 
 int main() {
     using namespace sdt::laws;
@@ -29,20 +30,19 @@ int main() {
     // kappa = oint v.dl = n·h/m. The W=1 unknot is the single-quantum vortex (n=1).
     // The rung's MECHANICAL circulation is 2π·(rung radius)·(rung speed) = 2π·a0·(αc).
     // The claim: this equals kappa = h/m_e, i.e. hbar = m_e·(αc)·a0.
-    const double kappa_mech = 2.0 * M_PI * a0 * (al * c);   // 2π a0 v — mechanical circulation
-    const double h1 = me * kappa_mech / (2.0 * M_PI);        // = m_e·αc·a0
+    const double kappa_mech = 2.0 * std::numbers::pi * a0 * (al * c);
+    const double h1 = me * kappa_mech / (2.0 * std::numbers::pi);
     const double h2 = me * (al * c) * a0;                    // same, written as angular momentum
     const double h3 = re * me * c / al;                      // r_e form (r_e = koppa of hydrogen)
     std::puts("P1  hbar three ladder ways [IDENTITY-CLASS: a0, r_e are hbar-defined lengths]");
     std::printf("    m_e*kappa/2pi   = %.9e   ratio to hbar = %.9f\n", h1, h1 / hb);
     std::printf("    m_e*(ac)*a0     = %.9e   ratio to hbar = %.9f\n", h2, h2 / hb);
     std::printf("    r_e*m_e*c/a     = %.9e   ratio to hbar = %.9f\n", h3, h3 / hb);
-    // Proton-geometry path: r_e' = R_p / k_ps^2 with the ENGINE'S stored k_ps = 0.5464
-    // (laws.hpp:663; pre-computed (1/α)√(R_p/a0) — 4 s.f. rounding lives in the residual).
-    const double k_ps_stored = 0.5464;
+    // Proton-geometry path: r_e' = R_p / k_ps^2 with the engine formula.
+    const double k_ps_stored = bridge::k_proton_surface;
     const double re_proton   = Rp / (k_ps_stored * k_ps_stored);
     const double h4          = re_proton * me * c / al;
-    std::printf("    proton path (R_p/0.5464^2)*m_e*c/a = %.9e  ratio = %.9f\n", h4, h4 / hb);
+    std::printf("    proton path (R_p/k_ps^2)*m_e*c/a = %.9e  ratio = %.9f\n", h4, h4 / hb);
     std::puts("    [residual on the proton path = stored-constant rounding + R_p measurement,");
     std::puts("     NOT physics. All four forms are the SAME statement: hbar is the action of");
     std::puts("     the ladder's bottom rung. ROLE derived; VALUE not extracted here (R5).]\n");
@@ -100,8 +100,8 @@ int main() {
     std::puts("    macroscopic mass anchor == a baryon count times the per-baryon seat; the ladder");
     std::puts("    then distributes it (W=1, W=3). Seed theorem stands. OPEN as pre-committed.\n");
 
-    // ---------- reduced whitelist ----------
-    std::puts("REDUCED WHITELIST after the collapse:");
+    // ---------- reduced derivation basis ----------
+    std::puts("REDUCED derivation basis after the collapse:");
     std::puts("  { l_P <- koppa(g,rho,R) [length seed],");
     std::puts("    c   <- Mercury precession (GOM04),");
     std::puts("    a   <- pure spectral ratio (PPT02/APS05 Route B),");

@@ -31,7 +31,7 @@ log **before** comparison (R1). Tag every use DERIVED / MEASURED-INPUT / CALIBRA
 
 | Quantity | Source | Note |
 |----------|--------|------|
-| ℓ_P, t_P, c = ℓ_P/t_P | `sdt::laws::measured` / `law_I` | Relay scale, tick, signal speed — whitelist inputs |
+| ℓ_P, t_P, c = ℓ_P/t_P | `sdt::laws::measured` / `law_I` | Relay scale, tick, signal speed — derivation basis inputs |
 | P_conv ≈ 2.46×10⁴⁸ Pa | `law_I::P_conv` | Driving / occlusion pressure (no attraction) |
 | Movement-budget cap v_circ²+v²=c² | `law_V` | `U/c < 1` bound on advective transport |
 | Kinematic viscosity ν = (coefficient)·ℓ_P·c | **FD02** (upstream) | The relay-smoothing diffusivity; referenced, never refit in FD03 |

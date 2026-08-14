@@ -63,7 +63,7 @@ relay shot-noise, so their ratio is fixed.
 ## Success criteria
 
 - **PASS (Class A):** `⟨x²⟩=2Dt`, `D=µk_BT`, and the FDT all from one relay shot-noise statistic, only
-  `k_B` whitelisted; Stokes–Einstein closes with FD02 to <10%.
+  `k_B` dependency-traced; Stokes–Einstein closes with FD02 to <10%.
 - **QUALIFIED (Class C):** Einstein relation + FDT native; the relay correlation time carries one
   flagged order-unity factor. *(Expected.)*
 - **PENDING (Class D):** Brownian walk reproduced but FDT ratio needs a calibrated noise normalisation.

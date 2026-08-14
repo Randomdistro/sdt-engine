@@ -224,7 +224,7 @@
     from a constant that touched no spectrometer.</p>
     <p style="font-size:.9rem;color:var(--dim)">One honest refinement, also derived: the nucleus
     is not infinitely heavy, so the engine uses the reduced mass
-    <span class="mono">μ/m_e = m_p/(m_e+m_p) ≈ 0.999456</span> — built from the whitelisted
+    <span class="mono">μ/m_e = m_p/(m_e+m_p) ≈ 0.999456</span> — built from the dependency-traced
     <span class="mono">m_e</span> and <span class="mono">m_p</span>, no fit. Without it the law
     over-predicts by ~545 ppm; with it the worst H line lands at 12.5 ppm, the residual floor.</p>
   </div>
@@ -396,7 +396,7 @@
       <span class="tag pass">correspondence: known-match</span>
       <span class="tag D">class D · derived</span>
       <p style="margin:.6em 0 0">The Rydberg constant is built from
-      <span class="mono">{m_e, c, α, h}</span> — all on the permitted-inputs whitelist — and the
+      <span class="mono">{m_e, c, α, h}</span> — all on the dependency ledger — and the
       spectroscopic <span class="mono">R∞</span> never entered the calculation. Its agreement is
       a <em>correspondence</em>, checked after the fact. Delete the comparison and the predicted
       wavelengths do not move. That is the signature of a real derivation, not a calibration.</p>
@@ -468,7 +468,7 @@ const fmt = (x,d=4)=>{ if(!isFinite(x)) return '∞';
   return x.toExponential(d).replace('e','e'); };
 
 /* Reduced-mass factor μ/m_e = m_nuc/(m_e+m_nuc), m_nuc ≈ A·m_p.
-   Still fully derived — m_e and m_p are both whitelisted inputs.
+   Still fully derived — m_e and m_p are both dependency-traced inputs.
    This is the difference between R∞ (infinite nucleus) and R_A. */
 function muFactor(A){
   const m_nuc = A*C.m_p;

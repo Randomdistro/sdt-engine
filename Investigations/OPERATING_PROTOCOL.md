@@ -75,13 +75,18 @@ term was admitted untranslated. Energy = movement counted at a boundary; three m
 - **Matter is substantive** (a dense crushed knot, never a hole/void). **Mass** = reorganisation
   cost / the field's resistance to a change of vector. **Light** = emission; **influx** = a
   throughpole (in one side, out the other), never a monopole/sink.
-- **Whitelist (only permitted external inputs):** {ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p}.
-  **Prohibited:** quarks, gluons, virtual particles, dark matter, dark energy, ΛCDM, quantum
-  wavefunctions/collapse, fields as primitives, wave-particle duality, any constant not built
-  from the whitelist or the four.
+- **Dependency ledger:** ℓ_P is the dimensional seed; c, k_B and e are unit
+  bridges; {ℏ,m_e,m_p} occupy the mass/action seat; α is the hydrogen
+  spectroscopic koppa rung; T_CMB is the measured present convergence boundary.
+  Every additional quantity must carry item-level derivation, measurement,
+  calibration or comparison provenance. **Prohibited:** quarks, gluons, virtual
+  particles, dark matter, dark energy, ΛCDM, quantum wavefunctions/collapse,
+  fields as primitives, wave-particle duality, and untraced constants.
 - **Phantoms dissolve; true un-inputs remain.** Charge, dark energy, the vacuum catastrophe are
-  renames — they get *dissolved* (the number and its problem vanish together), not derived. α,
-  m_p/m_e (6π⁵, OPEN), the binding magnitudes are *real* quantities the four must still produce.
+  renames — they get *dissolved* (the number and its problem vanish together), not derived. α
+  and the binding magnitudes are *real* quantities the four must still produce.
+  `m_p/m_e = 6π⁵` is separately construction-resolved by PPT17 with
+  shared-input provenance.
   Dissolving a phantom is a win; it is not the same win as deriving a non-phantom.
   **Derive-or-die** on the real ones.
 - **`Engine/include/sdt/laws.hpp` is the single source of truth.** NEVER edit it or anything

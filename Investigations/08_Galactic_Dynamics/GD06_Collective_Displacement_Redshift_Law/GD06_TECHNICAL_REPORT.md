@@ -1,7 +1,7 @@
 # GD06 — Technical Report (RUN 1, 2026-07-13)
 ### Occlusion-as-solid-angle ledger, calibrated on the solar census (H6)
 
-> Tool: `gd06_run.py` (standalone Python; no whitelisted constant enters the *derivation* of Θ — constants used only to convert to OBSERVED SI for comparison). Data: H6 solar census (verified) + standard body parameters. **Triple verdict at foot.**
+> Tool: `gd06_run.py` (standalone Python; no dependency-traced constant enters the *derivation* of Θ — constants used only to convert to OBSERVED SI for comparison). Data: H6 solar census (verified) + standard body parameters. **Triple verdict at foot.**
 
 ## 1. Inputs (all OBSERVED or geometric)
 Solar: R_⊙=6.957×10⁸ m, N_b=1.189×10⁵⁷, L_⊙=3.828×10²⁶ W. CMB: u=4σT⁴/c at T=2.725 K. ℓ_P=1.616×10⁻³⁵ m. Body ladder parameters standard (neutron star 1.4 M_⊙/12 km, bulge 10¹⁰ M_⊙/1 kpc, cluster 10¹⁵ M_⊙/1 Mpc, etc.).

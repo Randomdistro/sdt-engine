@@ -36,7 +36,10 @@ Compute SDT μ(z) for the Pantheon+ sample and compare to ΛCDM.
 ### CR08: BAO as Lattice Standing Waves
 **Target**: Show the 147 Mpc BAO scale is a lattice equilibrium length, not a frozen sound wave.
 
-SDT: the coupled-epoch lattice (before the Clearing) supported standing waves at c/√3. The BAO scale = c_s × t_coupled = (c/√3) × 2.62×10¹⁶ s ≈ 147 Mpc. This is already in cosmology.hpp pre_clearing namespace.
+The coupled-epoch lattice (before the Clearing) supported a baryon-loaded
+relay mode. The historical `t_coupled=147 Mpc/c_s` implementation is circular
+and excluded from prediction. The B15 extension below derives the duration from
+Law-II release and opacity before calculating the travelled scale.
 
 ### Common Methodology
 1. Compute SDT angular diameter distance D_A(z) from pressure-gradient integration
@@ -89,3 +92,41 @@ SDT: the coupled-epoch lattice (before the Clearing) supported standing waves at
 ---
 
 *CR08 · upgraded 2026-06-27 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*
+
+## B15 release/opacity closure freeze (2026-08-14)
+
+The stored `147 Mpc` and the duration obtained by dividing it by a sound speed
+are comparison-only and cannot enter the forward route:
+
+```text
+Law-II release history
+  + free/bound winding populations
+  + FD02/FLM15 relay scattering cross-section
+  -> opacity(t) and mean free path(t)
+  -> clearing condition optical_depth(t)=1
+  -> t_coupled                         [printed and sealed here]
+  -> baryon-loaded relay speed c_s(t)
+  -> integral_0^t_coupled c_s(t) dt
+  -> BAO comparison
+```
+
+Upstream gates are the FLM15 resistance kernel, the FD02 cross-section and a
+free/bound winding population law. A provisional value from any of them may be
+used for sensitivity only and cannot certify B15.
+
+Frozen gates:
+
+1. Every term in opacity has closed dimensions; independent time-step and
+   adaptive-quadrature routes agree within `0.5%`.
+2. `t_coupled` is emitted before any BAO distance is loaded and is unchanged
+   when `147 Mpc` and all BAO columns are deleted.
+3. The clearing root is unique over the registered Law-II release interval;
+   halving/doubling the search interval or resolution changes it by `<1%`.
+4. The sound-speed integrand uses the same derived baryon loading and
+   scattering history; no metric-expansion history or target-defined duration
+   enters.
+5. B15 advances only if the predicted comoving-equivalent mechanical scale is
+   within `3%` of the measured BAO ruler. A miss preserves the duration,
+   predicted scale, residual and the upstream reopening condition.
+6. The free-only and fully-bound populations are mandatory bracketing
+   controls; the physical result must lie between them.

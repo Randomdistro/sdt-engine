@@ -67,7 +67,7 @@ static MassRead read_mass(const SeatGeometry& s) {
 // m_p/m_e = 1836 mu_N (mu_B in mu_N units). To turn +2.793 into -1.913 the
 // seated (counter, sense=-1) electron must contribute -4.706 mu_N. The gearing
 // factor required is -4.706/1836 = -0.002563. That is NOT alpha (0.00730), NOT
-// k_ps^2 (0.2986), NOT any clean whitelist combination → a per-number knob.
+// k_ps^2 (0.2986), NOT any clean derivation basis combination → a per-number knob.
 struct MomentRead {
     double mu_electron_muN;    // bare electron moment in mu_N units = m_p/m_e
     double required_incr;      // increment needed on mu_P to reach mu_N target
@@ -152,7 +152,7 @@ int main() {
 
     // ── PHASE 4 — one-geometry / zero-knob ledger (the actual test) ───────
     std::printf("PHASE 4 — ZERO-KNOB LEDGER (the closure test)\n");
-    std::printf("  shared geometry consumed by BOTH: {R_p, v_seat, z_seat, sense}  [whitelist/derived]\n");
+    std::printf("  shared geometry consumed by BOTH: {R_p, v_seat, z_seat, sense}  [derivation basis/derived]\n");
     std::printf("  per-number knob used by MASS only  : x%.4f  (CALIBRATED(1))\n", m.calib_coeff);
     std::printf("  per-number knob used by MOMENT only: gearing %+.6f  (CALIBRATED(1))\n", q.required_gearing);
     std::printf("  knob count beyond shared geometry  : 2   (committed pass = 0)\n");

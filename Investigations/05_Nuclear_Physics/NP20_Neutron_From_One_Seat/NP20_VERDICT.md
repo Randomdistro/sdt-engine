@@ -37,7 +37,7 @@ neither. This is the FLM12-D1 precedent held to its bar: bracketing ≠ paying.
 |------|---------|-----------|--------|--------|
 | **T1 — Sign** | composite moment sign | negative | negative **but ASSUMED via sense=−1** | not KILLED; **not a native win** (sign carried in, not derived) |
 | **T2 — Mass magnitude** | \|pred−0.782\|/0.782 ≤ 15% | ±15% | **−23.3%** | **FAIL → OPEN** (NP19/NP21 resistance-magnitude dependency) |
-| **T3 — Moment magnitude** | \|pred−1.913\|/1.913 ≤ 15%, sign neg | ±15% | magnitude = IDENTITY (gearing −0.002563, no whitelist match) | **FAIL → OPEN** |
+| **T3 — Moment magnitude** | \|pred−1.913\|/1.913 ≤ 15%, sign neg | ±15% | magnitude = IDENTITY (gearing −0.002563, no derivation basis match) | **FAIL → OPEN** |
 | **T4 — One geometry** | per-number knob count = 0 | 0 | **2** (×1.303 mass; gearing moment) | **CLOSURE FALSE** |
 | **T5 — Same seat speed** | v_seat(mass) == v_seat(moment) | identical | identical (single struct, one `v_seat`) | **PASS** (structurally enforced) |
 | **T6 — Borrowed-unit honesty** | μ_N flagged? | flagged | flagged borrowed throughout | **PASS** |
@@ -57,7 +57,7 @@ No RETRO-PASS, no PLUG, no IDENTITY-PASS taken to rescue the numbers.
   independent of the target but misses by −23%. The 0.782 "rail" is an anchor subtraction, used as an
   OBSERVED-TARGET column only, never fed into the mechanism. To *land* 0.782 needs a ×1.303 knob.
 - **P3 (moment): IDENTITY on the magnitude.** Reproducing −1.913 μ_N consumes the measured increment
-  (μ_N−μ_P) fed back through a gearing that matches no whitelist quantity. The sign is ASSUMED via
+  (μ_N−μ_P) fed back through a gearing that matches no derivation basis quantity. The sign is ASSUMED via
   `sense=−1`, not derived. The `moment_incr/mass_factor ≈ 3.074 ≈ q=3` shortcut was recognised as a
   disguised **IDENTITY-PASS** (it consumes the measured mass anchor and absorbs a 2.5% fudge in
   "3.074≈3") and **KILLED** as a route.

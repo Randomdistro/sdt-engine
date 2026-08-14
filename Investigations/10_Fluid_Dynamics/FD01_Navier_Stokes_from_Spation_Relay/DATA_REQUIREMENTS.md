@@ -33,7 +33,7 @@ remains SDT-native. Tag every use DERIVED / MEASURED-INPUT / CALIBRATED(n) (R2).
 
 | Quantity | Source | Note |
 |----------|--------|------|
-| ℓ_P, t_P, c = ℓ_P/t_P | `sdt::laws::measured` / `law_I` | Relay scale, tick, signal speed — whitelist inputs |
+| ℓ_P, t_P, c = ℓ_P/t_P | `sdt::laws::measured` / `law_I` | Relay scale, tick, signal speed — derivation basis inputs |
 | P_conv ≈ 2.46×10⁴⁸ Pa | `law_I::P_conv` | Ambient convergence pressure (gradient → −∇P/ρ) |
 | Movement-budget cap v_circ²+v_trans²=c² | `law_V` | Low-Mach expansion parameter (Phase 3) |
 | ν coefficient (geometry-fixed) | **FD02** (downstream) | Must match the value emitted by FD01 coarse-graining to <1% |

@@ -1,7 +1,7 @@
 # e — elementary charge (irreducible unit bridge)
 
 > **J. C. Harvey, Melbourne — 2026-07-30.** Value: 1.602176634×10⁻¹⁹ C (SI exact,
-> definitional since 2019). Whitelist entry: `laws.hpp:131-135` (with the EMC02
+> definitional since 2019). derivation basis entry: `laws.hpp:131-135` (with the EMC02
 > ruling in-header). Primary records: EMC02
 > (`Investigations/03_Electromagnetism/EMC02_Elementary_Charge_Quantisation/EMC02_VERDICT_DIRECT_2026-07-23.md`),
 > EMC03 (ontology), EMC04 (the derived target). Re-run: `../derivelist_results.txt` §[9].
@@ -16,7 +16,7 @@ of object as k_B.
 
 ## What is on record (EMC02, direct re-run 2026-07-23)
 
-**The dimensional result.** The whitelist {ℓ_P, c, ℏ, k_B, T_CMB} contains no
+**The dimensional result.** The derivation basis {ℓ_P, c, ℏ, k_B, T_CMB} contains no
 current dimension [A]; no algebraic combination yields coulombs. Confirmed by
 the direct run. e is an **irreducible Tier-1 measured input**.
 
@@ -55,6 +55,6 @@ passes; α the one remaining input in the expression).
 
 **Line drawn — by reclassification.** e is a unit bridge over a mechanism that
 carries no charge substance; its numeral is definitional, its dimension is
-unreachable from the whitelist (structural negative, on the record), and the
+unreachable from the derivation basis (structural negative, on the record), and the
 genuine physical magnitude (P_eff) is derived. Nothing mysterious remains
 attached to the symbol.

@@ -106,7 +106,7 @@ int main() {
     std::printf("        (the exponent is DERIVED from constant flux, not assumed)\n");
     std::printf("================================================================\n\n");
 
-    std::printf("Whitelist invariants used:  c = %.0f m/s,  l_P = %.6e m\n\n", c, l_P);
+    std::printf("derivation basis invariants used:  c = %.0f m/s,  l_P = %.6e m\n\n", c, l_P);
 
     // R1 PRE-REGISTRATION (commit the prediction BEFORE fitting anything):
     std::printf("[R1] Pre-registered predictions (logged before any fit):\n");

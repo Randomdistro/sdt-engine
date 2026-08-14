@@ -35,7 +35,7 @@
 
 ## Root cause (seven questions)
 
-1. **What failed:** magnitude — no non-identity whitelist product recovers ℏ.  
+1. **What failed:** magnitude — no non-identity derivation basis product recovers ℏ.  
 2. **Observable:** Compton / action scale linking mass to length.  
 3. **Premise:** “A_s can be derived from {ℓ_P,c,k_B,T_CMB,α,m_e,m_p,a_0,r_e} without ℏ.”  
 4. **Local or inherited:** local to action ontology; AS01 spine still CONDITIONAL.  

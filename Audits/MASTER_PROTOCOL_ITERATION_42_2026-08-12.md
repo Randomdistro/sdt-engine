@@ -8,7 +8,7 @@
 ## Scope
 
 Highest remaining spine debt after MM01–03 / AS01 / OM01: whether a native
-action invariant `A_s ≠ ℏ` can be assembled from the measured whitelist.
+action invariant `A_s ≠ ℏ` can be assembled from the measured derivation basis.
 
 ## Executed
 
@@ -21,7 +21,7 @@ action invariant `A_s ≠ ℏ` can be assembled from the measured whitelist.
 
 | Claim | Status |
 |---|---|
-| Combinatorial native A_s from whitelist sans ℏ | **UNDERDETERMINED / OPEN** |
+| Combinatorial native A_s from derivation basis sans ℏ | **UNDERDETERMINED / OPEN** |
 | H6 `α m_e c a_0 = ℏ` | **IDENTITY** (SHARED-INPUT) |
 | ℏ as SDT input | **MEASURED-INPUT** (parked) |
 

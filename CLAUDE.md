@@ -56,7 +56,7 @@ These are framework-level and apply to any code or prose you write in this repo.
 
 - **No G, no M as fundamentals.** Gravity is derived from `v_surface` and `R`: `g = v²/R`, `koppa = v²R/c²`. The legacy `GM_equivalent()` helper exists for conversions only.
 - **No quantum wavefunctions, no fields as primitives, no dark matter/energy, no ΛCDM, no quarks/gluons, no wave-particle duality.** These are not "unsupported" — they are prohibited inputs. Derivations must not import them.
-- **Only permitted inputs**: `{ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p}` plus measured observables in their measured units. The `sdt::laws::measured` namespace is the whitelist.
+- **Scales.** `ℓ_P` is Axiom R1 (the one dimensional seed). `c`, `k_B`, `e` are unit bridges. `{ℏ, m_e, m_p}` are one mass/action seat (FLM13). `α` is hydrogen’s koppa rung `k_H = 1/α` (PPT02/APS05). `T_CMB` is a FIRAS clock. `sdt::laws::measured` is the engine's CODATA/FIRAS lookup. Record: `derivelist/README.md`.
 - **Certification labels** (`DERIVED`, `COMPUTED`, `CALIBRATED`, `OBSERVED`, `PENDING`) tag every result in benchmarks. "CALIBRATED" means one parameter was fitted and MUST be documented.
 
 ## Nuclear construction grammar (ATOMICUS)
@@ -75,14 +75,15 @@ Electron-capture isotopes use the **alternate grammar** (He-3 core instead of He
 ## Directory layout (what to read where)
 
 - `Engine/include/sdt/` — header-only C++20 library. Start with `laws.hpp`.
-- `Theory/` — formal framework, read in order `00_Ruleset.md` → `01_Closure_Derivations.md` → `02_Inputs_and_Derivations.md` → `03_Open_Problems.md` → `04_Notation.md`.
+- `Theory/` — formal framework, read in order `00_Ruleset.md` → `01_Closure_Derivations.md` → `02_Inputs_and_Derivations.md` → `03_Open_Problems.md` → `04_Notation.md` → `06_Input_Elimination.md` → `07_Cyclic_Reiteration.md` (Shapiro–Wien chain; heat death is Law III at `P→0`; recharge to `c_far → 0`). Input status: `derivelist/README.md`.
 - `Laws/` — the Six Laws as standalone papers (`.md` + `.docx`).
 - `ATOMICUS/` — atomic/nuclear database and construction grammar; `rules/On the Nature of Atomicus Rules.md` is the nuclear constitution.
 - `Hubble/` — cosmological analysis suite with ~18 `zk²` tools in `tools/` and datasets in `data/`. Independent from the benchmarks CMake build; tools compile standalone.
 - `Experiments/` — falsifiable prediction specs `E01.md` … `E102.md`. Each specifies SDT prediction, standard-model prediction, observable difference.
 - `Investigations/` — active research folders; each contains `PROMPT.md` (methodology), optional `DATA_REQUIREMENTS.md`, and `.cpp` tools. `EMC01–PPT04` address open problems in the engine code itself.
 - `Benchmarks/B01_B25/` — the single `benchmarks_suite.cpp` (B01 and up) that verifies the framework end-to-end. This is what the CMake build produces.
-- `Papers/SPATIAL_DISPLACEMENT_THEORY.md` — the long-form manuscript.
+- `derivelist/` — how each scale sits: unit bridge, seat, rung, clock, or seed.
+- `Papers/SPATIAL_DISPLACEMENT_THEORY.md` — the long-form manuscript. `Papers/SDT_LLM_UPTAKE.md` — spine, explanation then qualifier gates. `Papers/SDT_FOR_PEOPLE.md` — same model, no homework. `Papers/SDT_THEORETICAL_MODEL.md` — current total model. Web: `universe-lifecycle.html`, `sdt-for-people.html`, `theoretical-model.html`.
 
 ## Editing conventions
 

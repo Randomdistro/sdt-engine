@@ -19,7 +19,7 @@ motion held against the field's line by reaction. RTM01 asks three things at onc
   2 of the deflection integral; light pays the full 4 = profile-2 × geometry-2. Specify the
   experiment that splits the census's two 2s observationally (filed as E110).
 
-## 1. Permitted inputs
+## 1. declared dependencies
 
 `bridge::koppa_Earth`, `bridge::koppa_Sun`, `bridge::g_surface` (cross-check), c, radii,
 exhaust-velocity v_ex as an engineering parameter (stated, not fitted). No G, no M, no

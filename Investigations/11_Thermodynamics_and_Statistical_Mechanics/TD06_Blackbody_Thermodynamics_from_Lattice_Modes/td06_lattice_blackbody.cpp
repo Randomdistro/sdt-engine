@@ -38,7 +38,7 @@ int main() {
     std::printf("================================================================\n");
     std::printf(" TD06 - Blackbody Thermodynamics from Lattice Modes\n");
     std::printf(" J. C. Harvey, Melbourne - 2026-07-03\n");
-    std::printf(" Whitelist: k_B; c and h enter ONLY as Law-I bridges (eps = h*nu).\n");
+    std::printf(" derivation basis: k_B; c and h enter ONLY as Law-I bridges (eps = h*nu).\n");
     std::printf("================================================================\n\n");
 
     bool p1a = true, p1b = true, p2 = true, p3 = true, p4 = true;

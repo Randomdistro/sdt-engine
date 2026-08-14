@@ -37,7 +37,7 @@ plausible number.)
 the configurational cost — which contains ln(1/η): the photon bath's route surplus delays
 binding. Compute T_flip (defined: n_d/n_p = 1 at equilibrium with measured η = 6.13×10⁻¹⁰,
 X_n/X_p = 1/7 measured freeze-out ratio; secondary convention X_n/X_p = 1 reported for
-sensitivity) by bisection from whitelist constants + measured E_b = 2.224573 MeV. Compare to
+sensitivity) by bisection from derivation basis constants + measured E_b = 2.224573 MeV. Compare to
 the measured BBN deuterium bottleneck (D/H rise at T ≈ 0.06–0.09 MeV).
 - **G3-PASS:** T_flip ∈ [0.035, 0.17] MeV (factor ~2.2 band).
 - **G3-FAIL:** outside the band → the ledger as posed does not locate the universe's actual

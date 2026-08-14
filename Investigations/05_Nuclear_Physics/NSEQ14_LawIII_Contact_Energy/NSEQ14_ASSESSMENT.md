@@ -10,7 +10,7 @@
 
 ## Result
 
-All `F_occlusion × r` candidates at {R_p, r_e} sit **0.02–1.7 MeV** vs SEAL hold-out **4.242 MeV** (ORDER, not MATCH). Coulomb `k_e e²/R_p` ≈ 1.71 MeV is the closest whitelist scale and still misses.
+All `F_occlusion × r` candidates at {R_p, r_e} sit **0.02–1.7 MeV** vs SEAL hold-out **4.242 MeV** (ORDER, not MATCH). Coulomb `k_e e²/R_p` ≈ 1.71 MeV is the closest derivation basis scale and still misses.
 
 No B_d/B_t leak. P_eff is class-E (Coulomb identity). Seating integers do not repair the MeV gap.
 

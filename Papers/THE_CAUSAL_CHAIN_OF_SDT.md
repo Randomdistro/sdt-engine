@@ -55,7 +55,7 @@ unusually candid about it. This is the map of its knots.
 
 ## 1. The three pegs
 
-SDT permits itself a short list of measured inputs — its whitelist — and forbids
+SDT permits itself a short list of measured inputs — its derivation basis — and forbids
 everything else. The list is:
 
 ```
@@ -106,7 +106,7 @@ in that it *names* the moment and proves it is forced.
 The same wall appears twice more, for the same reason:
 
 - **The elementary unit `e` (EMC02).** The investigation tried to build the elementary unit `e`
-  from the whitelist. It cannot be done: the permitted quantities contain no
+  from the derivation basis. It cannot be done: the permitted quantities contain no
   electric dimension, so no algebra yields an `[A·s]` quantity. The one route that *seems* to
   work, `e = √(αℏc/k_e)`, is a disguised tautology — because `α` is *defined* as
   `k_e e²/ℏc`, that equation just says `e = e`. Charge is a peg, not a derivation.
@@ -135,7 +135,7 @@ its number. The delete-test then confirmed that no `ℏ`-free value path exists 
 Theorem held exactly as pre-committed), and `{ℏ, m_e, m_p}` collapse, by exhibited
 bijections, into **one mass/action seat** — physically a *baryon-count anchor* (the one
 historically `ℏ`-free mass standard was the artifact kilogram: a counted lump of
-baryons). The whitelist of eight therefore compresses to **four plus the thermal seat**:
+baryons). The derivation basis of eight therefore compresses to **four plus the thermal seat**:
 
 ```
 { ℓ_P,   c,   α,   one mass/action seat,   k_B / T_CMB }
@@ -400,9 +400,9 @@ lines of 118 elements. ~~The fine structure and the Lamb shift come from the
 quantum-field corrections, and the Lamb shift lands within 0.6% with nothing tuned
 (**APS04**).~~ **[CORRECTION 2026-07-03: the APS04 Lamb claim was FABRICATED and is
 retracted (HUNTER scour; the 1051.8 literal was deleted from canon 2026-07-03). The
-Lamb amplitude is OPEN — the well-posed native target is
-`Investigations/02_…/PPT08_Angular_DOF_from_Trefoil/PPT08_KOPPA_TARGET.md`
-(a spacing, not a shift: 1057.8 MHz ≡ 0.703 m/s ≡ 0.272 fm at n=2).]**
+hydrogen and He⁺ 2S–2P intervals are ACCEPTED as OBSERVED stickers — proton center
+and α center — not extracted (2026-08-13; `PPT08_KOPPA_TARGET.md`; koppa re-expression
+of the H sticker: 1057.8 MHz ≡ 0.703 m/s ≡ 0.272 fm at n=2).]**
 Atoms inherit `α`, the budget, and the knot; they invent nothing.
 
 **Nuclei (NP).** Every nucleus is built from one rule — one alpha core plus so many
@@ -517,7 +517,7 @@ enforced as a gate. What remains owed is the one scalar that turns correlations 
 numbers: the **residence law** (the `cos²(a−b)` joint weighting; owner FLM14) —
 **[OPEN]**.
 
-**The seat collapse ⇒ a shorter whitelist.** Because `{ℏ, m_e, m_p}` are one
+**The seat collapse ⇒ a shorter derivation basis.** Because `{ℏ, m_e, m_p}` are one
 mass/action seat (FLM13 — the full link is §1), everything downstream of the pegs now
 descends from four numbers and the sky. The seat's VALUE is **[OPEN]**, premise-classed
 under §G.3 with the FLM14 rotation DOF as its named re-open condition.
@@ -546,12 +546,11 @@ expectation*, and degeneracy would have been the anomaly. The word "shift" embed
 rival's failed expectation: Dirac's structure *forbade* the splitting, and the
 measurement violated his theorem. The measured 1057.8 MHz is one quantity in three
 rulers (class RE-EXPRESSION, not extraction): **1057.8 MHz ≡ a 0.703 m/s seat-speed
-offset ≡ a 0.272 fm radial offset at n = 2**, graded against the three-seat table
-(H n=2 → 0.272 fm; H n=3 → 0.410 fm; He⁺ n=2 → 0.452 fm) — any future mechanism must
-hit the *table*, not 1057.8 alone. The R_p/3 cluster (trefoil node radius 0.2805 fm vs
-the 0.2722 offset, −2.9%) is logged **[OPEN]** — privileged, mechanism untested,
-fishing forbidden. The amplitude itself remains the debt §7 records
-(`PPT08_KOPPA_TARGET.md`).
+offset ≡ a 0.272 fm radial offset at n = 2**. Hydrogen is the proton center; He⁺ is a
+second OBSERVED sticker on the α center. The old three-line grading table mixed those
+objects. The R_p/3 cluster (trefoil node radius 0.2805 fm vs the 0.2722 offset, −2.9%)
+is logged as look-elsewhere, not a match. Extraction of 1057 from trefoil/FLM14 is
+withdrawn (`PPT08_KOPPA_TARGET.md`).
 
 **The β-partition: one internal speed, two takers.** The neutron is a proton holding
 an internal electron on a seat (NP14 — earned as *sign and structure*): Δm splits
@@ -670,7 +669,8 @@ budget, the koppa bridge, the inverse-square shape of the force, the speed of li
 read out of Mercury's orbit, the sound limit `c/√3`, the nuclear grammar's
 arithmetic, the Rydberg constant ~~, the Lamb shift to a fraction of a percent~~
 **[CORRECTION 2026-07-03: the Lamb entry is struck — APS04 was fabricated and
-retracted; the Lamb amplitude is OPEN (see PPT08_KOPPA_TARGET.md)]**. These
+retracted; 2026-08-13: H and He⁺ intervals ACCEPTED OBSERVED, extraction withdrawn
+(see PPT08_KOPPA_TARGET.md)]**. These
 are the framework's real assets, and they are substantial.
 
 Everything that is still *owed* sits in a few sharp places, and they are exactly the
@@ -709,7 +709,7 @@ of water taught us, it is what a physics *is*.
 | The sky | `T_CMB` | held energy density of empty space | a measured boundary condition | Law I |
 | (leak) | `R_CMB`→`H₀` | size of the visible lattice | carries the Hubble constant | CR03–CR05, `laws.hpp` |
 
-The remaining whitelist members — `c`, `ℏ`, `k_B`, `h`, `e` — are best read not as
+The remaining derivation basis members — `c`, `ℏ`, `k_B`, `h`, `e` — are best read not as
 extra pegs but as **unit-converters** between SDT's natural counting and SI: `c`
 between space and time, `ℏ`/`h` for action, `k_B` for temperature, `e` for the electromagnetic unit.
 
@@ -727,7 +727,7 @@ GOM05); the inverse-square *shape* of the one force (EMC01); `P_eff` via the
 electropause (EMC04, conditional on `α`); the sound limit `c/√3` (FD05); the nuclear
 grammar's arithmetic for all stable isotopes (NP01); the Rydberg constant and spectra
 (APS01); ~~the Lamb shift to 0.6% (APS04)~~ **[struck 2026-07-03 — APS04 fabricated,
-retracted; Lamb OPEN, target = PPT08_KOPPA_TARGET.md]**; neutrino magnetic moment
+retracted; Lamb ACCEPTED OBSERVED 2026-08-13, see PPT08_KOPPA_TARGET.md]**; neutrino magnetic moment
 exactly zero (PPT04); ~~knot stability selecting the particle spectrum (PPT09)~~
 **[struck 2026-07-03 — the PPT09 Class-A closure was fabricated and is retracted
 (HUNTER scour); the W∈{1,3}-only conjecture itself remains a legitimate OPEN
@@ -752,8 +752,7 @@ koppa-density across 693 multi-planet systems, 5.9% vs 50.7% shuffled (GOM14, cl
 double slit, tunnelling re-seeding and sequential spin — owner FLM14, [OPEN]); the
 seat's VALUE (FLM13/Seed Theorem, premise-classed); the short-range contact wall
 (ROOT-CONTACT, with its three-way numeric cross-check); the lock-depth magnitude
-(ROOT-B); the exit-channel count `N_exit ∝ E²` (NP22); the Lamb amplitude against the
-three-seat table (PPT08); the β-partition candidate 0.9186c/0.395c ([OPEN],
+(ROOT-B); the exit-channel count `N_exit ∝ E²` (NP22); the β-partition candidate 0.9186c/0.395c ([OPEN],
 look-elsewhere applies). Essentially all of it queues behind one instrument —
 ROOT-SIM/FLM14, whose run-4 Born-adjacent exponent (+2.040 at β = 0.20) remains
 honestly **UNCLAIMED** (§7½).

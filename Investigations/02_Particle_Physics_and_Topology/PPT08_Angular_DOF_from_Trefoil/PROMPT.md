@@ -24,7 +24,7 @@
 
 ## §0 Anti-creep protocol
 
-- **Permitted inputs:** `{ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p}` + measured observables
+- **declared dependencies:** `{ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p}` + measured observables
 - **Prohibited:** spherical harmonics Y_ℓ^m as imported functions, |ψ(0)|², orbital angular momentum quantum numbers as external definitions, magnetic quantum numbers
 - **The goal is native:** derive the angular degree of freedom from SDT topology, not import it from QM
 
@@ -140,7 +140,7 @@ In the polar orbit ("p-like"), the electron passes over the top of the trefoil a
 ```
 // provenance_status:     SDT-derived
 // correspondence_status: known-match (fine structure) / novel-prediction (P1-P3)
-// input_dependency:      primitive-whitelist + W=3 topology
+// input_dependency:      primitive-derivation basis + W=3 topology
 // class:                 C (target) / D (for novel predictions)
 // risk_flag:             trefoil multipole expansion may need numerical simulation
 ```

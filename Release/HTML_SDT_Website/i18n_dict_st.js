@@ -17,7 +17,7 @@ window.SDT_I18N = {
   "Domain 05 · NP33 · Closure Schedule and Capacity Derivation",
 
 "@mn_lead":
-  "Two closed forms — a triangular seat layer under bipartite doubling, <b>F(n) = 2·T(n+1) = (n+1)(n+2)</b>, and an antipodally-paired belt admissible only on the equator of the collective roll, <b>B(n) = 2(n+1)</b>, with surface remainder <b>R(n) = F(n) − B(n) = n(n+1)</b> — reproduce the closure sequence <b>{2, 8, 20, 28, 50, 82, 126}</b> sequence-exact, with zero fitted coefficients and no spin–orbit term in the input whitelist, and extend to <b>closure(7) = 184</b>. Schedule arithmetic on this page is evaluated at run time from the two forms; measured quantities are transcribed from named sources and tagged. Single READ quantity, flagged at its point of use: the descent onset n = 3.",
+  "Two closed forms — a triangular seat layer under bipartite doubling, <b>F(n) = 2·T(n+1) = (n+1)(n+2)</b>, and an antipodally-paired belt admissible only on the equator of the collective roll, <b>B(n) = 2(n+1)</b>, with surface remainder <b>R(n) = F(n) − B(n) = n(n+1)</b> — reproduce the closure sequence <b>{2, 8, 20, 28, 50, 82, 126}</b> sequence-exact, with zero fitted coefficients and no spin–orbit term in the input derivation basis, and extend to <b>closure(7) = 184</b>. Schedule arithmetic on this page is evaluated at run time from the two forms; measured quantities are transcribed from named sources and tagged. Single READ quantity, flagged at its point of use: the descent onset n = 3.",
 
 "@mn_rigcap":
   "Drag to rotate (orthographic projection, painter-sorted depth). Rungs seat successive tiers: red = p-face, blue = n-face, gold = the belt sealing the closure below.",
@@ -104,7 +104,7 @@ window.SDT_I18N = {
 "Movement — the relay": "Movement — Nearest-Neighbour Relay at c",
 "The Present — and its count": "The Present — the Plane of Existence; Time as Tick Ordinal",
 "Four primitives, eight measured numbers":
-  "Four Primitives and the Eight-Element Input Whitelist",
+  "Four Primitives and the Eight-Element Input derivation basis",
 
 /* ══════════════ st_01_law1 — spine ══════════════ */
 "The Laws · I · Convergent Relay Throughput":

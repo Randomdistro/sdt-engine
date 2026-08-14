@@ -38,7 +38,7 @@
   runs on lengths, times, counts and ratios, **plus exactly one ruler** — and the ruler is
   a count of matter, not an abstract constant.
 
-## Reduced whitelist (on the record)
+## Reduced derivation basis (on the record)
 
 `{ ℓ_P ← koppa(g,ρ,R) · c ← Mercury precession · α ← pure spectral ratio ·
 ONE mass/action seat (ℏ ≡ m_e ≡ m_p via W=1/W=3) → FLM12 · k_B, T_CMB (thermal seat) }`

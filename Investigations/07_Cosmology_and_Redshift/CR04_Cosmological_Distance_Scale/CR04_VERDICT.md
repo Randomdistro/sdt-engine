@@ -53,7 +53,7 @@ CR04 investigated whether R_CMB (comoving distance to recombination, ~9.5 × 10�
 // Phase 1 Results
 // provenance_status:     SDT-derived
 // correspondence_status: known-match      (BAO measured at ~147 Mpc)
-// input_dependency:      primitive-whitelist + measured BAO scale
+// input_dependency:      primitive-derivation basis + measured BAO scale
 // class:                 A (LAW I coupling → lattice resonance)
 // circularity_assertion: passes delete-test
 // risk_flag:             none
@@ -146,7 +146,7 @@ Result: ~1.4 × 10²⁴ m, still 85% off. The issue is that θ_s projects a dist
 // Phase 3 Results
 // provenance_status:     SDT-derived (Law VI + ionization equilibrium)
 // correspondence_status: known-match      (recombination at z=1100 observed)
-// input_dependency:      primitive-whitelist + recombination epoch
+// input_dependency:      primitive-derivation basis + recombination epoch
 // class:                 C (Law VI + Law II pressure domain physics)
 // circularity_assertion: passes delete-test
 // risk_flag:             W_H (hydrogen winding number) requires full Law VI proof
@@ -318,7 +318,7 @@ CR04 results as a whole:
 
 // provenance_status:     Mixed — Phases 1 & 3 SDT-derived; Phase 2 structured but magnitude-calibrated; Phase 4 exploratory
 // correspondence_status: Phases 1 & 3 match observation; Phase 2 structure correct; Phase 4 unresolved
-// input_dependency:      Whitelist + measured BAO scale + H₀ calibration
+// input_dependency:      derivation basis + measured BAO scale + H₀ calibration
 // class:                 C (with CR05 completion) / D (current status)
 // risk_flag:             H₀ circularity requires CR05. W_H hydrogen winding needs Law VI proof. k_Hubble quantisation open.
 ```

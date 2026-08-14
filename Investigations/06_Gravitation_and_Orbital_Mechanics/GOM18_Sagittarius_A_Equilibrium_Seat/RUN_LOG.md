@@ -18,7 +18,7 @@ bath, and its position in the Galaxy's column. **No G, no M, no GM in-chain** �
 - Milky Way: v_circ = 233 km/s at R0 (kinematic); total luminosity band 1.5–3.0e10 L_Sun.
 - sigma_bulge ≈ 105 km/s (rival-column M–σ check only).
 - u_CMB (engine, Law I): F_CMB = c·u_CMB/4. Proton column m_p/σ_T from CODATA/Thomson
-  (whitelisted particle constants; σ_T is a measured atomic cross-section — data boundary).
+  (dependency-traced particle constants; σ_T is a measured atomic cross-section — data boundary).
 
 ## Committed gates (never widened)
 

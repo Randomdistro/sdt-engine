@@ -101,7 +101,7 @@ int main() {
     printf("  Author: James Christopher Tyndall, Melbourne\n");
     printf("================================================================\n\n");
 
-    printf("Engine whitelist scales (sdt::laws::measured):\n");
+    printf("Engine derivation basis scales (sdt::laws::measured):\n");
     printf("  c   = %.9g m/s   (relay signal speed)\n", c);
     printf("  l_P = %.9g m     (relay lattice scale)\n", l_P);
     printf("  t_P = %.9g s     (relay tick); c = l_P/t_P = %.9g m/s\n\n",
@@ -435,7 +435,7 @@ int main() {
     printf("\n");
 
     printf("  PARAMETER LEDGER (R2):\n");
-    printf("    c, l_P, t_P .................. WHITELIST (sdt::laws::measured)\n");
+    printf("    c, l_P, t_P .................. derivation basis (sdt::laws::measured)\n");
     printf("    Re = UL/nu rate identity ..... DERIVED (Phase 1)\n");
     printf("    dimensionlessness ............ DERIVED (like-rate cancellation)\n");
     printf("    Re_crit = (L/ell_c)^2 form ... DERIVED (coherence crossing)\n");

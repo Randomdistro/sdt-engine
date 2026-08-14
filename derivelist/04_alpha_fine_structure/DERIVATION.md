@@ -1,7 +1,7 @@
 # α — fine-structure ratio (the koppa rung of hydrogen)
 
 > **J. C. Harvey, Melbourne — 2026-07-30.** Measured anchor: 1/α = 137.035999084
-> (CODATA 2018). Whitelist entry: `laws.hpp:126,138`. Primary records: APS05
+> (CODATA 2018). derivation basis entry: `laws.hpp:126,138`. Primary records: APS05
 > (`Investigations/04_Atomic_Physics_and_Spectroscopy/APS05_Alpha_from_Fine_Gross_Ratio/`,
 > direct re-run 2026-07-23) and PPT02 seat closure
 > (`Investigations/02_Particle_Physics_and_Topology/PPT02_Fine_Structure_from_Topology/`).

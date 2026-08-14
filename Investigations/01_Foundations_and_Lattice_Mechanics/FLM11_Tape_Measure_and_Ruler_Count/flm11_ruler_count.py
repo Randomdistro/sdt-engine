@@ -21,7 +21,7 @@ ENGINE PARITY (values mirror Engine/include/sdt/laws.hpp; nothing redefined that
     law_VI::winding : W_electron=1, W_proton=3, W_neutrino=0
     law_VI::topology: v_T = c*sqrt(p/(p+q)), v_P = c*sqrt(q/(p+q))
     law_VI::traction: T = 3*(W+1) = 12 for the proton
-  Whitelist only. No G/M/GM, no wavefunctions, no gauge groups, no charge-substance.
+  derivation basis only. No G/M/GM, no wavefunctions, no gauge groups, no charge-substance.
 """
 
 from dataclasses import dataclass, field
@@ -75,7 +75,7 @@ class Axis:
     name: str                       # form axis (28-D component or knot motion)
     grip: str                       # one of GRIP
     property: str                   # the physics property it reads (or "-")
-    sdt_native: str                 # native reading (whitelist / koppa / W / Φ)
+    sdt_native: str                 # native reading (derivation basis / koppa / W / Φ)
     # independent() references an SDT CONSTRAINT, returns (is_independent, reason)
     independent: Callable[[], "tuple[bool, str]"]
     included: bool = True           # False = excluded as a property ruler (with reason)
@@ -219,7 +219,7 @@ def run():
     line = "=" * 78
     print(line)
     print("FLM11 - RULER COUNT (Tape-Measure Principle)")
-    print("Author: J. C. Harvey, Melbourne.  Whitelist inputs only; no G/M/GM.")
+    print("Author: J. C. Harvey, Melbourne.  derivation basis inputs only; no G/M/GM.")
     print(line)
 
     print("\n[LAW V INDEPENDENCE CHECK]  v_T^2 + v_P^2 = c^2  (must close = 1.0)")

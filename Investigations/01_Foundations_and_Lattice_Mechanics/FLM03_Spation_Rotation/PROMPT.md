@@ -58,7 +58,7 @@ it also feeds **FLM04** (the kinematic map) and the atomic-orbit work (the elect
 replacement for `GM/c²` (no G, no M). For hydrogen the koppa is fixed by geometry:
 
 ```
-ϟ_H = (1/α) · √(R_p / a₀)                         # derived from proton geometry + α (whitelist)
+ϟ_H = (1/α) · √(R_p / a₀)                         # derived from proton geometry + α (derivation basis)
 v(r) = (c / ϟ_H) · √(R_p / r)                      # inverse-√r rotation profile
 k(r) = c / v(r)                                    # local k-rung
 r_c  = R_p / ϟ_H²   (radius where v = c)           # the "c-boundary"
@@ -70,7 +70,7 @@ r_c  = R_p / ϟ_H²   (radius where v = c)           # the "c-boundary"
 - **T3** `v(a₀) = αc` — at the Bohr radius the field velocity is the electron orbital velocity, and `k(a₀)=1/α`.
 - **T4 (resonance)** the proton's field velocity *at a₀* equals the measured electron orbital velocity αc.
 
-**Constraints.** Inputs limited to the whitelist `{ℓ_P, c, ℏ, α, m_e, m_p}` + R_p, a₀, r_e as measured anchors.
+**Constraints.** Inputs limited to the derivation basis `{ℓ_P, c, ℏ, α, m_e, m_p}` + R_p, a₀, r_e as measured anchors.
 No G/M/GM; no fitted parameter; no "charge radius"; superluminal `v>c` is physical here (field rotation inside
 the c-boundary), **not** a particle signalling speed — flag the regime, do not invoke SR-γ.
 

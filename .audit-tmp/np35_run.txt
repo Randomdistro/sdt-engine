@@ -1,0 +1,45 @@
+﻿NP35 flay-not-split
+pre-reg: NP35_PRE_REGISTRATION.md
+--- instrument validation (no yield files) ---
+  F1(U-236 N=144) complete = 126  PASS
+  F3(U-236 N=144) sealed T = 82   PASS
+  F3(N=100) sealed T = 50         PASS
+  F3(N=200) sealed T = 126        PASS (superheavy switch)
+  2d->alpha ledger on F3 pair     PASS
+VALIDATION PASS
+
+--- predictions (yield files not opened) ---
+     sys   A*    N  F1 N_H  F1 A_H  F3 N_H  F3 Z_H  F3 A_H  F3 A_L  F50 A_H
+   U-235  236  144     126     206      82      52     134     102      132
+   U-233  234  142     126     208      82      53     135      99      132
+  Pu-239  240  146     126     207      82      53     135     105      132
+  Pu-241  242  148     126     206      82      52     134     108      132
+  Np-237  238  145     126     207      82      53     135     103      132
+  Am-241  242  147     126     207      82      53     135     107      132
+   U-238  239  147     126     205      82      51     133     106      132
+  Th-232  233  143     126     205      82      52     134      99      132
+
+--- comparison (IAEA independent FY opened now) ---
+     sys  obs A_L  obs A_H   F1 dAH       F1   F3 dAH       F3   F3 dAL  F50 dAH
+   U-235     95.2    136.5    +69.5 EXCLUDED     -2.5    MATCH     +6.8     -4.5
+   U-233     93.2    137.2    +70.8 EXCLUDED     -2.2    MATCH     +5.8     -5.2
+  Pu-239    101.3    136.3    +70.7 EXCLUDED     -1.3    MATCH     +3.7     -4.3
+  Pu-241    102.7    136.0    +70.0 EXCLUDED     -2.0    MATCH     +5.3     -4.0
+  Np-237     98.4    136.4    +70.6 EXCLUDED     -1.4    MATCH     +4.6     -4.4
+  Am-241    101.5    137.6    +69.4 EXCLUDED     -2.6    MATCH     +5.5     -5.6
+   U-238     99.0    137.2    +67.8 EXCLUDED     -4.2    MATCH     +7.0     -5.2
+  Th-232     90.5    139.8    +65.2 EXCLUDED     -5.8    MATCH     +8.5     -7.8
+
+--- gates ---
+  G1 F1 U-235 |dAH|>=20 (EXCLUDE F1): True  (need True)
+  G2 F3 U-235 class: MATCH  (need MATCH)
+  G3 F3 A_H in [128,148] all 8: True
+  G4 F3 A_H vs A* slope=+0.012 (obs -0.197); |pred|<0.25: True
+  G5 F3 A_L_pre-A_L_obs in [1,8] all 8: False  values=[6.84, 5.8, 3.68, 5.28, 4.62, 5.45, 6.96, 8.54]
+
+--- limitations ---
+  Z_H from parent Z/N is a composition assumption, not a seating derivation.
+  nu is not predicted; G5 only checks the residue class.
+  Jacket 2d->alpha is ledger, not a coordinate unwrap.
+  Superheavy N>=168 switch not scored (no FY in-repo).
+STATUS NP35_FLAY_ORDER_PARTIAL

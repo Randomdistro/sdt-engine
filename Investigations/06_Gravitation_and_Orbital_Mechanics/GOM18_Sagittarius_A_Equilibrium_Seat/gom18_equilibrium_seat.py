@@ -12,7 +12,7 @@ LSUN= 3.828e26                       # W (IAU nominal)
 # CMB bath (engine Law I values)
 u_CMB = 7.5657e-16 * 2.7255**4      # a_rad*T^4 [J/m^3]
 F_CMB = c * u_CMB / 4.0             # [W/m^2]
-# whitelisted particle constants (data boundary)
+# dependency-traced particle constants (data boundary)
 m_p = 1.67262192369e-27; sigma_T = 6.6524587321e-29
 # ---- declared dependents: (name, a ["], T [yr])  Gillessen+ catalogue class ----
 STARS = [("S2", 0.1255, 16.05), ("S38", 0.1416, 19.20), ("S55", 0.1078, 12.80)]

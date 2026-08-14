@@ -1209,12 +1209,12 @@ No stable vortex can have mass exceeding M0 ≈ 1 TeV, because the (1,1) mode is
 In the SDT vortex picture, the electron is the most topologically complex stable particle. Its ~10²⁵ winding units distribute the circulation energy over an enormously long path, reducing the energy density per unit volume and therefore the mass. The proton, with ~10¹² windings, is simpler and heavier. The top quark, with ~10³ windings, is simpler still and heaviest of all.
 This is contrary to the intuition that heavier means more complex. In a convergent pressure medium, heaviness means compactness—fewer turns, shorter path, higher energy density. Lightness means elaborateness—more turns, longer path, lower energy density.
 6.3 The Mass Ratio
-The proton-electron mass ratio is:
-mp/me = [(p²q)e/(p²q)p]1/4 = 1836.15     (6.1)
-(the electron's (p²q) value is back-computed from 1836.15⁴ — this displays the definition, it does not derive the ratio; see §7 "Status: OBSERVED. Not derived.")
-Therefore:
-(p²q)e/(p²q)p = 1836.154 = 1.137 × 1013     (6.2)
-The electron has 10¹³ times more topological complexity than the proton. The enormous charge-to-mass ratio of the electron (compared to the proton) reflects this: both carry one quantum of charge, but the electron distributes its circulation over vastly more turns.
+The proton-electron mass ratio is construction-resolved by conserving `6π⁵`
+copies of the point electron's finite-width 720-degree Bohr-seat tube volume
+into the W=3 torus seated at `R_p`:
+mp/me = Vdisp(p)/Vdisp(e) = 6π⁵ = 1836.118.     (6.1)
+Measured mp/me = 1836.153 (−0.0019%). This is a shared-input geometric
+construction, not an independent prediction of the packing count.
 
 
 ---
@@ -1644,13 +1644,17 @@ The factor 1/3 is not approximate. It is the relationship between the mass defin
 
 
 7. The Proton-Electron Mass Ratio
-The mass ratio mp/me = 1836.15 has a geometric near-coincidence:
-(3/2)3/2 × 103 = 1837.12     (7.1)
-mp/me = 1836.15     (7.2)
-Error: 0.053%     (7.3)
-In SDT terms: mp/me = Vdisp(p)/Vdisp(e). The exclusion volume ratio is 1836.15 exactly (by construction). The question is whether this ratio has a geometric origin in the topology of the two vortices.
-The (3/2)3/2 factor arises in Keplerian orbital mechanics: the ratio of volumes swept by orbits with semi-major axes in ratio 3:2 scales as (3/2)3/2. The factor 103 may correspond to the number of stable modes or the winding number of the proton’s toroidal circulation.
-Status: OBSERVED (0.053% agreement). Not derived. The derivation requires the full vortex topology computation.
+Let `b_e` be the point electron's physical tube radius and let its 720-degree
+closure length at the Bohr seat be `L_e = 4πa₀`. Then
+V_e = π b_e² L_e.     (7.1)
+Packing `N = 6π⁵` such volumes into a ring torus at major radius `R_p` gives
+N V_e = 2π² R_p b_p²,     (7.2)
+and therefore
+b_p = b_e √[N L_e/(2πR_p)].     (7.3)
+The point test electron follows the same occlusion profile:
+v(r) = c√(α²a₀/r), so v(a₀)=αc and v(R_p)=1.830057c.     (7.4)
+Status: COMPUTED — RESOLVED SHARED-INPUT CONSTRUCTION. The tube-volume map is
+closed; it does not independently predict the declared packing count.
 
 
 ---

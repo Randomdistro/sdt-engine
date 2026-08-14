@@ -44,9 +44,12 @@ the ratio of the structure's own convergence-gradient amplitude `g_self` to the 
 
 $$ \boxed{\,B = \Phi(\xi)\,}\qquad\text{(scale-invariant; APS03-H1).} $$
 
-`g_floor` is **derived, not fitted**, from SDT invariants:
-- dynamical floor `a₀ = c·H₀/(2π) = 1.042×10⁻¹⁰ m/s²` (`galactic.hpp:77`, `a_0_SDT`);
-- radiative floor `F_CMB = c·u_CMB/4 = σ·T_CMB⁴` (`laws.hpp:247`), used only for the radiative cross-check (§6.B).
+The existing corpus uses two explicitly labelled controls:
+- dynamical correspondence `a₀ = c·H₀/(2π) = 1.042×10⁻¹⁰ m/s²`, which consumes an observed `H₀` and is not a B34 derivation;
+- radiative boundary `F_CMB = c·u_CMB/4 = σ·T_CMB⁴`, used only for the radiative cross-check (§6.B).
+
+The B34 extension below must replace the first control with the independently
+derived convergence-pressure-gradient floor before any earned claim is made.
 
 ### 1.1 The two asymptotes (DERIVED — these are NOT under test)
 
@@ -257,9 +260,9 @@ For **every** input file, at read time, the engine records and prints: absolute 
 ## 11. Prohibitions (framework-level, from `Theory/00_Ruleset.md`)
 
 - No `G`, no `M` in kg as fundamentals: gravity enters only via `koppa = v²R/c²`. `GM_equivalent()` is for unit conversion in cross-checks, never as an input.
-- No dark matter, no dark energy, no ΛCDM, no NFW halo, no MOND `a₀` **as a fitted input** (the floor `a₀` here is DERIVED `c·H₀/2π`; if the analysis ever tunes it, the result is CALIBRATED and must say so).
+- No dark matter, no dark energy, no ΛCDM, no NFW halo, no fitted acceleration floor. The historical `c·H₀/2π` value is a correspondence control; B34 requires the pressure-gradient route frozen below.
 - No quantum wavefunctions / fields-as-primitives at the atomic scale: emission via the movement budget + kinematic ratio only (APS02 lineage).
-- Permitted inputs: `{ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p}` + measured observables in measured units. Every constant cites its `laws.hpp` line.
+- declared dependencies: `{ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p}` + measured observables in measured units. Every constant cites its `laws.hpp` line.
 
 ---
 
@@ -294,7 +297,7 @@ For **every** input file, at read time, the engine records and prints: absolute 
 ---
 
 ### Appendix A — provisional constants (cite `laws.hpp` line at use)
-`a₀ = c·H₀/2π = 1.042e-10 m/s²` (`galactic.hpp:77`) · `F_CMB = c·u_CMB/4` (`laws.hpp:247`) · `koppa_Sun = R_Sun/k_Sun² ≈ 1477 m` (`laws.hpp:539`) · `koppa_per_baryon = ℓ_P²c·m_p/ℏ ≈ 1.242e-54 m` (`laws.hpp:594`) · `λ_C = 2.42631e-12 m` (`laws.hpp:137`) · drag law `D = λ/[(8/3)λ_C k²]` (APS02).
+`a₀ = c·H₀/2π = 1.042e-10 m/s²` (observed-H₀ correspondence control) · `F_CMB = c·u_CMB/4` (`laws.hpp`) · `koppa_Sun = R_Sun/k_Sun² ≈ 1477 m` (`laws.hpp`) · `koppa_per_baryon = ℓ_P²c·m_p/ℏ ≈ 1.242e-54 m` (`laws.hpp`) · `λ_C = 2.42631e-12 m` (`laws.hpp`) · drag law `D = λ/[(8/3)λ_C k²]` (APS02).
 
 ### Appendix B — the one-line statement of the whole investigation
 *Does a single, SDT-derived exposure ratio `ξ = g_self/g_floor` collapse the emission drag of atoms, the orbital boost of bodies, and the rotation excess of galaxies onto one scale-invariant curve `B = Φ(ξ)` whose floor limit `ξ^{-1/2}` is forced by the convergence floor — and is `Φ` derivable from occlusion geometry, or merely the borrowed MOND shape with an SDT-supplied scale?*
@@ -339,3 +342,36 @@ For **every** input file, at read time, the engine records and prints: absolute 
 ---
 
 *APS03 · upgraded 2026-06-27 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*
+
+## B34 convergence-floor closure freeze (2026-08-14)
+
+The `cH0/(2pi)` correspondence and every borrowed interpolation remain
+comparison controls. The forward calculation is:
+
+```text
+Law-I convergence throughput
+  -> local solid-angle exposure/occlusion response
+  -> spatial convergence-pressure gradient
+  + FLM15 engaged resistance density
+  -> a_floor=|grad(P_convergence)|/rho_engaged
+  -> unchanged atomic/stellar/SPARC controls
+  -> comparison with measured low-acceleration floor
+```
+
+Frozen gates:
+
+1. The pressure-gradient and engaged-density terms have dimensions that reduce
+   to acceleration exactly; their independent finite-volume and analytic
+   solid-angle evaluations agree within `1%`.
+2. `a_floor` is emitted before `H0`, galactic acceleration fits or a MOND-like
+   interpolation is loaded, and is unchanged when those columns are deleted.
+3. No body-source alias or target-derived length/time scale enters the forward
+   call graph. Raw measured geometry, movement and boundary facts retain
+   source/uncertainty provenance.
+4. The original SPARC, atomic and stellar control rows and selection rules are
+   rerun unchanged. No control may be dropped because of its residual.
+5. B34 advances at `<=20%` residual against the measured floor only if the
+   wrong-solid-angle and scrambled-exposure controls both worsen RMS residual
+   by at least a factor of two.
+6. Failure leaves the derived candidate scale, whole-range residuals and the
+   pressure-gradient or engaged-density premise that must be reopened.

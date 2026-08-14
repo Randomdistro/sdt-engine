@@ -4,7 +4,7 @@
 **Status**: SPEC
 **Author**: James Christopher Tyndall, Melbourne
 
-All entries below are **MEASURED-INPUT** (measured observables in measured units) or **CONVERGENCE TARGET** (a standard-FD result to *reproduce*, never to *borrow* as a derivation input). Whitelist primitives `{ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p}` are already in `Engine/include/sdt/laws.hpp::measured` and are **not** re-listed here. Anything not on this list or in the engine whitelist must not enter the derivation.
+All entries below are **MEASURED-INPUT** (measured observables in measured units) or **CONVERGENCE TARGET** (a standard-FD result to *reproduce*, never to *borrow* as a derivation input). derivation basis primitives `{ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p}` are already in `Engine/include/sdt/laws.hpp::measured` and are **not** re-listed here. Anything not on this list or in the engine derivation basis must not enter the derivation.
 
 ---
 

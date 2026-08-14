@@ -2,7 +2,8 @@
 
 **Question:** Where does the trefoil's superluminal phase couple to the lattice; what does the lattice do (spation rotation, co-drag, contra-rotation); and what packing/void geometry does the contra-rotating shell ride?
 
-**Verdict:** **RESOLVED [exact geometry] for Parts A–C/D; STRONG conjecture for Part E.**
+**Verdict:** **A–D geometry DERIVED; tetrahedral thread selected by the
+Law-IV minimum-resistance test.**
 
 **The chain (one factorisation runs through it: 12 = 3 × 4):**
 
@@ -14,10 +15,21 @@
 
 4. **Crush → voids (D) — exact.** Squeezing out the 0.103 forces close-packing, whose interstices are **tetrahedral (r/R = 0.225, 4-coordinated)** and **octahedral (r/R = 0.414, 6-coordinated)** voids (2 tet + 1 oct per spation).
 
-5. **Void gearing (E) — STRONG conjecture.** The contra-rotating shell threads the **sparsest (tetrahedral, 4-coordinated)** voids → carries the **least spations** → gears **one-for-four**. And **4 = W+1** (R_p = (W+1)ℏ/m_p c), so the PPT06 traction ratio factorises: **T = 3(W+1) = 12 = (trefoil C₃ = 3) × (tet gearing = W+1 = 4)**. The integers align exactly; that the physical shell *is* the tet-void thread is asserted, not proven.
+5. **Void gearing (E) — derived under Law IV's path premise.** The same
+FLM15 engaged-volume kernel prices both close-packed paths. The octahedral
+seat is `6.2604×` dearer by seat volume and `9.3906×` dearer when contacts are
+counted, so both native routes select the **tetrahedral, 4-coordinate** thread
+before a particle radius is loaded. Four action relays give
+`R=4ℏ/(m_pc)=0.841236 fm`, `−0.0195%` from the measured boundary; the
+octahedral control gives `1.261853 fm`, `+49.97%`.
 
-**Honest seam:** A–D are exact geometry / grounded mechanism. E rests on integer coincidences (4 = W+1 = tetrahedral coordination; 12 = 3×4) — strong circumstantial support, not a derivation. Forward work: integrate the glancing locus to recover the wake weights natively, and prove the minimum-drag shell selects the tetrahedral sublattice.
+**Scope:** selection uses the framework's minimum-reorganisation-resistance
+premise; the instrument does not independently derive that premise. The W=1
+control is the 720-degree closure's two action relays. The remaining work is a
+discrete dynamical-lattice test and full glancing-weight integration, not a
+choice between tetrahedral and octahedral seats.
 
-**Artifacts:** `cq52_glancing_void_gearing.cpp`, `cq52_results.txt` (compiles + runs, exit 0), `INVESTIGATION.md`.
+**Artifacts:** `flm07_glancing_void_gearing.cpp` (MSVC C++20, exit 0),
+`INVESTIGATION.md`, and the FLM15 R4 tests (11/11).
 
-*J. C. Harvey, Melbourne, 2026-06-20.*
+*James Christopher Tyndall, Melbourne, updated 2026-08-14.*

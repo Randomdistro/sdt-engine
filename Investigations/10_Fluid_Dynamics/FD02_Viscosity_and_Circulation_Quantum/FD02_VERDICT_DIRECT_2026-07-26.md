@@ -10,7 +10,7 @@
 **CLEAN, with two honest self-demotions already in the prompt:** κ = h/m is flagged "essentially
 structural… a consistency check, not an independent prediction" (⓪.2), and the KSS 1/(4π) is
 DERIVED-or-CALIBRATED(1), never silent. QGP appears as a measured convergence benchmark by its
-community name only — no rival axioms enter the chain. `h`/`ℏ`/`k_B` are whitelist.
+community name only — no rival axioms enter the chain. `h`/`ℏ`/`k_B` are derivation basis.
 
 ## What the direct run measured
 

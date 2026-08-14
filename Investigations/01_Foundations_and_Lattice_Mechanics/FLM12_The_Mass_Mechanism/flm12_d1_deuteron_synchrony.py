@@ -4,16 +4,16 @@
 # the shared region is re-relayed ONCE not twice, so the joint engagement is LESS than the
 # sum by the shared amount -> E_bind = (engagement density) x (overlap volume).
 #
-# STRESS DISCIPLINE: every input tagged [WHITELIST] or [MEASURED-ANCHOR]; every candidate tagged
+# STRESS DISCIPLINE: every input tagged [derivation basis] or [MEASURED-ANCHOR]; every candidate tagged
 # PRINCIPLED / COMPARATOR / FISHED. A number is only a RESULT if it falls out with no fitted scale
 # and no fished exponent. We do NOT pick a winner; we show the whole spread and let it speak.
 import math
 
 # ---- constants -------------------------------------------------------------
-hbar_c   = 197.3269804      # MeV*fm            [WHITELIST: hbar,c]
-alpha    = 1/137.035999084  #                   [WHITELIST]
+hbar_c   = 197.3269804      # MeV*fm            [derivation basis: hbar,c]
+alpha    = 1/137.035999084  #                   [derivation basis]
 mN_c2    = 938.918          # MeV (avg p,n)     [MEASURED-ANCHOR]
-me_c2    = 0.51099895       # MeV               [WHITELIST: m_e]
+me_c2    = 0.51099895       # MeV               [derivation basis: m_e]
 R_p      = 0.8414           # fm                [MEASURED-ANCHOR: proton boundary radius]
 D        = 1.94             # fm  n-p separation[MEASURED-ANCHOR: deuteron gap, NP17]
 E_meas   = 2.224566         # MeV               [MEASURED-ANCHOR: deuteron binding, the TARGET]

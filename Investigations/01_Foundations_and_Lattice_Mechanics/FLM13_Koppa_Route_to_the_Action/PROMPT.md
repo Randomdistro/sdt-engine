@@ -5,7 +5,7 @@
 > **Engine:** `#include <sdt/laws.hpp>` only — no local constant namespaces.
 > **Run:** Pre-commit thresholds in `RUN_LOG.md` before coding; adjust per pivot table (§⑩).
 >
-> **Sibling of** FLM11 (ruler count) and **FLM12 (The Mass Mechanism)**. This one asks the last whitelist
+> **Sibling of** FLM11 (ruler count) and **FLM12 (The Mass Mechanism)**. This one asks the last derivation basis
 > question of the classical sector: once the koppa ladder gives length (koppa from `g`/orbit), `c` (Mercury's
 > precession), and α (off the list via PPT02/APS05) — **can koppa also reach the quantum of action, ℏ, or is ℏ
 > the one irreducible seat?** Its main result — `{ℏ, m_e, m_p}` collapse to **one mass/action seat** — hands
@@ -15,7 +15,7 @@
 
 ## §0 Anti-creep protocol (R0–R5)
 
-- **R0 — Permitted inputs:** `{ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p}` + measured observables in their measured units. The `sdt::laws::measured` whitelist is the only external fact source. **This investigation's target is to REMOVE ℏ from that set — so ℏ may not appear in any extraction path (delete-test discipline).**
+- **R0 — declared dependencies:** `{ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p}` + measured observables in their measured units. The `sdt::laws::measured` derivation basis is the only external fact source. **This investigation's target is to REMOVE ℏ from that set — so ℏ may not appear in any extraction path (delete-test discipline).**
 - **R1 — Prohibited:** wavefunctions, ψ, operators, Hilbert space, quantised action *asserted* (the quantisation must be *mechanical* — Onsager–Feynman circulation, not a postulate), quarks/gluons, dark sector, ΛCDM, wave–particle duality.
 - **R2 — No charge-as-substance:** `e` is a unit-bridge; charge is handed redirection. No "charge radius."
 - **R3 — Native yardsticks only:** koppa `ϟ = R/k²`, `k = c/v`, winding `W`, circulation `v_T/v_P` (Law V). Never μ_B / magnetons.
@@ -27,7 +27,7 @@
 ## ⓪ The Golden Rule — five questions (answer before Phase 0)
 
 1. **What don't we know?** — Whether the quantum of action ℏ is an *independent* fundamental, or the **circulation quantum of the W=1 vortex** — the bottom rung of the koppa ladder — and if so whether its *value* can be read off the ladder without ℏ ever entering the inputs.
-2. **Why does it matter?** — It is the **last classical-sector seat**. Length (koppa from `g`), `c` (Mercury precession), and α (PPT02/APS05) are already off the whitelist. If ℏ collapses into the mass seat, the residual whitelist is `{one mass/action anchor (→ FLM12), α (dimensionless), k_B, T_CMB}` — the theory's irreducible core, made explicit.
+2. **Why does it matter?** — It is the **last classical-sector seat**. Length (koppa from `g`), `c` (Mercury precession), and α (PPT02/APS05) are already off the derivation basis. If ℏ collapses into the mass seat, the residual derivation basis is `{one mass/action anchor (→ FLM12), α (dimensionless), k_B, T_CMB}` — the theory's irreducible core, made explicit.
 3. **How will we find out?** — (P1) express ℏ as the W=1 rung circulation and prove the Onsager–Feynman identity mechanically; (P2) delete-test every extraction path for hidden ℏ; (P3) prove the ℏ↔m_e degeneracy and collapse `{ℏ,m_e,m_p}`→one seat (handed to FLM12); (P4) hunt an **ℏ-free (non-atomic) koppa path** to the action.
 4. **What would prove us wrong?** — §⑧: a "value derivation" that is secretly an identity (ℏ on both sides); an ℏ-free path that on audit still routes through atomic spectroscopy; or a claim that both ℏ *and* m_e are independently derived (violates the one-mass-seat count).
 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN). The strong core is **(a)** the mechanical Onsager–Feynman ROLE and **(b)** a definite yes/no on an ℏ-free VALUE path.
@@ -42,7 +42,7 @@ hydrogen ground state (**k=137.036=1/α**, koppa = r_e) to the Sun (**k=686.3**,
 atomic scale* of the ladder's bottom rung. The claim of FLM13 is that **ℏ is the Onsager–Feynman circulation
 quantum of the W=1 vortex** — `ℏ = m_e·κ/2π` with `κ = h/m_e` the quantised circulation — equivalently the
 angular momentum of the fundamental rung, `ℏ = m_e·(αc)·a₀ = r_e·m_e·c/α`. **We expect:** the **ROLE** derives
-cleanly and natively (ℏ *is* the rung's action), and the mass-domain whitelist `{ℏ, m_e, m_p}` **collapses to a
+cleanly and natively (ℏ *is* the rung's action), and the mass-domain derivation basis `{ℏ, m_e, m_p}` **collapses to a
 single seat** (fix one, the geometry hands you the rest) — which FLM12 then interprets. We do **not** expect the
 **VALUE** `1.0546×10⁻³⁴` to fall out ℏ-free: unlike α (a dimensionless ratio, extractable from a pure spectral
 ratio — APS05 Route B), ℏ is a *dimensionful action* entangled in every atomic length, so the honest target is
@@ -64,7 +64,7 @@ P4 goes looking for it.
 | Moon | 178,448 | 5.46×10⁻⁵ m | — |
 
 `c` itself is an **output**: GOM04 gives `c = k_Sun·v_surface = 299,795,136 m/s` (+0.0009%) from Mercury's
-precession alone. α is **off the whitelist** two ways: PPT02 seat-closure (`α=1/k`, `k=c/√(2E_ion/m_e)`,
+precession alone. α is **off the derivation basis** two ways: PPT02 seat-closure (`α=1/k`, `k=c/√(2E_ion/m_e)`,
 137.0725) and APS05 (Route A virial `α=√(2E_ion/m_e c²)`; **Route B pure ratio `α²=16Δν_2P/cR∞`, no m_e/e/h**).
 
 **Where ℏ lives.** The ladder is scale-free (ratios `k`, `ϟ`). ℏ sets the one absolute atomic length:
@@ -126,8 +126,8 @@ genuinely ℏ-free measurement.
 - **Pre-committed metric:** the verdict is **ROLE-only** unless a delete-test-clean ℏ-free path is exhibited with numbers. **Failure trigger:** if a path is claimed clean but audit finds hidden ℏ → record and route OPEN; do **not** relabel a tautology as an extraction (R5).
 
 ### Phase 3 — The seat collapse: `{ℏ, m_e, m_p}` → one anchor (CALCULATION, ~2 h)
-- **Goal:** prove the three mass-domain inputs are **one** seat, state the residual whitelist exactly, and **hand the seat to FLM12**.
-- **Method:** show `ℏ ↔ m_e` bijective via the W=1 circulation (fix one → other); show `m_p ↔ m_e` via the W=3 trefoil (`g_proton = R_p m_p c/ℏ = W+1`, engine-verified 0.02%); count the surviving independent dimensionful seats after koppa (length), c (Mercury), α (dimensionless). Output the reduced whitelist and cross-reference FLM12 as the seat's owner.
+- **Goal:** prove the three mass-domain inputs are **one** seat, state the residual derivation basis exactly, and **hand the seat to FLM12**.
+- **Method:** show `ℏ ↔ m_e` bijective via the W=1 circulation (fix one → other); show `m_p ↔ m_e` via the W=3 trefoil (`g_proton = R_p m_p c/ℏ = W+1`, engine-verified 0.02%); count the surviving independent dimensionful seats after koppa (length), c (Mercury), α (dimensionless). Output the reduced derivation basis and cross-reference FLM12 as the seat's owner.
 - **Metric:** exactly **one** mass/action seat remains; the reduction `{ℏ,m_e,m_p}→1` is exhibited with the two bijections stated as SDT relations, not asserted.
 
 ### Phase 4 — The ℏ-free frontier: a non-atomic koppa path? (THEORY, ~2–4 h, may OPEN)
@@ -140,7 +140,7 @@ genuinely ℏ-free measurement.
 ## 5. Success Criteria (dual verdict)
 
 - ✅ **PASS (Class A — VALUE derived).** A delete-test-clean, **ℏ-free** path lands `1.0546×10⁻³⁴` (P2 or P4). *This would be a major result and is not expected — flag extraordinary evidence.*
-- ✅ **QUALIFIED (Class C — ROLE + collapse).** ℏ is derived as the W=1 circulation quantum (P1), the mass-domain whitelist collapses `{ℏ,m_e,m_p}→one seat` (P3, handed to FLM12), and the value honestly rests on that single seat. **This is the expected, honest win.**
+- ✅ **QUALIFIED (Class C — ROLE + collapse).** ℏ is derived as the W=1 circulation quantum (P1), the mass-domain derivation basis collapses `{ℏ,m_e,m_p}→one seat` (P3, handed to FLM12), and the value honestly rests on that single seat. **This is the expected, honest win.**
 - ⚠️ **PENDING (Class D).** The ROLE holds but a bijection (P3) rests on an unproven relation → ship with the gap named.
 - ❌ **FAIL / OPEN.** A "value derivation" is exposed as an ℏ-identity (R5 violation), or the seat-count is ambiguous. Do **not** call ℏ derived on the strength of `ℏ = r_e m_e c/α`.
 
@@ -151,7 +151,7 @@ genuinely ℏ-free measurement.
 ## 6. Outputs
 
 1. **`FLM13_DERIVATION.md`** — the Onsager–Feynman ROLE (P1) with symbols; the delete-test table (P2, each input × does-its-measurement-encode-ℏ); the two bijections and the seat collapse (P3, → FLM12); the ℏ-free frontier verdict (P4). DERIVED vs IDENTITY vs OPEN flagged per line (R5).
-2. **`flm13_action.cpp`** — computes ℏ three ladder ways + the Onsager–Feynman `m_e κ/2π`; prints the delete-test flags; prints the reduced whitelist after the collapse. `#include <sdt/laws.hpp>` only; standalone (`cl /std:c++20 /EHsc /O2 /I Engine\include` or `g++ -std=c++20 -IEngine/include`).
+2. **`flm13_action.cpp`** — computes ℏ three ladder ways + the Onsager–Feynman `m_e κ/2π`; prints the delete-test flags; prints the reduced derivation basis after the collapse. `#include <sdt/laws.hpp>` only; standalone (`cl /std:c++20 /EHsc /O2 /I Engine\include` or `g++ -std=c++20 -IEngine/include`).
 3. **`flm13_results.txt`** — the three ℏ values + ratios; the input×ℏ-encoding table; the surviving-seat count.
 4. **`FLM13_VERDICT.md`** — dual verdict + §⑧ table filled.
 5. **`RUN_LOG.md`** — Pre-Run Commitment Block (the pre-committed ROLE-only-vs-VALUE verdict, the expected seat count = 1).
@@ -160,11 +160,11 @@ genuinely ℏ-free measurement.
 
 ## 7. Dependencies & References
 
-**Upstream (required):** `Papers/an_argument_for_koppa.md` (the ladder, `v=(c/ϟ)√(R/r)`, zϟ²=1); `laws.hpp` bridge (k-hierarchy, `koppa_hydrogen`, `k_Sun`) + `law_VI::winding` (`g_electron=α` tautology, `g_proton=W+1`); **PPT02 / APS05** (α off the whitelist — the template for "measured anchor read off the ladder"); **GOM04** (c from Mercury precession); **GOM02** (15/15 k-hierarchy PASS); the barometer koppa (ℓ_P from `g, ρ_E, R`).
+**Upstream (required):** `Papers/an_argument_for_koppa.md` (the ladder, `v=(c/ϟ)√(R/r)`, zϟ²=1); `laws.hpp` bridge (k-hierarchy, `koppa_hydrogen`, `k_Sun`) + `law_VI::winding` (`g_electron=α` tautology, `g_proton=W+1`); **PPT02 / APS05** (α off the derivation basis — the template for "measured anchor read off the ladder"); **GOM04** (c from Mercury precession); **GOM02** (15/15 k-hierarchy PASS); the barometer koppa (ℓ_P from `g, ρ_E, R`).
 
 **Sibling / hands-off (tightly coupled):** **FLM12 (The Mass Mechanism)** — the single mass/action seat that FLM13's collapse produces is FLM12's *subject*; keep the boundary clean (FLM13 = ℏ's ROLE + the collapse; FLM12 = what the seat *is*). **FLM11 (ruler count)** — the "how many seats" epistemology.
 
-**Downstream (fed by this):** the **reduced whitelist** (`{one mass seat (FLM12), α, k_B, T_CMB}`) — the theory's irreducible core; the thermal-seat investigation (`k_B, T_CMB` — the ℏ↔blackbody link noted in P4).
+**Downstream (fed by this):** the **reduced derivation basis** (`{one mass seat (FLM12), α, k_B, T_CMB}`) — the theory's irreducible core; the thermal-seat investigation (`k_B, T_CMB` — the ℏ↔blackbody link noted in P4).
 
 **Related:** OP-3/E51 (α value from W=1 torus `v_P/v_T` — the *dimensionless* analog of this *dimensionful* question).
 
@@ -190,7 +190,7 @@ genuinely ℏ-free measurement.
 - **The tool's real job is the delete-test table, not the number.** The ℏ *value* is not in doubt (it is an identity); the deliverable is **which inputs encode ℏ** — encode that as an explicit boolean per input, sourced to how each is measured.
 - **Circulation, not postulate.** `κ = h/m` must appear as the superfluid quantised-circulation result (Onsager–Feynman), with the W=1 unknot as the single-quantum vortex — not "Bohr said L=nℏ."
 - **No borrowed units, no ψ.** Say "circulation quantum κ," not "angular-momentum operator." (R1/R3)
-- **Report the reduced whitelist explicitly** in `flm13_results.txt`: `{ℓ_P←koppa(g,ρ,R), c←Mercury, α←PPT02/APS05, ONE mass seat (→FLM12), k_B, T_CMB}` — so the compression 8→core is on the record.
+- **Report the reduced derivation basis explicitly** in `flm13_results.txt`: `{ℓ_P←koppa(g,ρ,R), c←Mercury, α←PPT02/APS05, ONE mass seat (→FLM12), k_B, T_CMB}` — so the compression 8→core is on the record.
 
 ---
 

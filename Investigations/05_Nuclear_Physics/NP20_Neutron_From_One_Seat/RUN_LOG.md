@@ -56,7 +56,7 @@
 - **COMPARE:** vs 0.782 MeV → **−23.3%** (outside ±15%).
 - **The required factor** to reach 0.782 is `0.782/0.511 = 1.531`. None of {2.349, 1.830, 1.209}
   equals 1.531; the ½·(z−1) route = 1.175, still off. To land 0.782 needs an extra **×1.303
-  coefficient** with no whitelist justification.
+  coefficient** with no derivation basis justification.
 - **DECIDE:** **OPEN** (per pivot table row P2). The geometry **brackets** 0.782 but does **not
   predict** it. Do NOT PASS by widening tolerance or inserting the ×1.303 knob. Resistance-magnitude
   mechanism is the OPEN dependency (NP19/NP21). This is the FLM12-D1 precedent: bracketing ≠ paying.
@@ -72,7 +72,7 @@
     sign is *carried in*, not derived from any dynamical over-rotation calculation. T1 "survives" in
     the weak sense (not violated), but the sign is not a native prediction.
   - **Magnitude:** the required gearing −0.002563 matches **neither** α (0.00730) **nor** k²
-    (0.2986) **nor** any clean whitelist combination. Reproducing −1.913 μ_N is therefore an
+    (0.2986) **nor** any clean derivation basis combination. Reproducing −1.913 μ_N is therefore an
     **IDENTITY** (feed the measured increment back in), not a prediction.
 - **DECIDE:** **OPEN** (per pivot table row P3). Correct-sign partial only if the sign were derived;
   here it is assumed, and the magnitude needs a per-number knob. Do NOT change v_seat to fix it.

@@ -248,7 +248,7 @@ For each claim record:
 - result type;
 - stated initial conditions;
 - stated boundary conditions;
-- permitted inputs;
+- declared dependencies;
 - actual code inputs;
 - measured inputs;
 - hidden inputs;

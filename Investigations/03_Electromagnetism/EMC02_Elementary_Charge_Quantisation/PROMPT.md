@@ -19,9 +19,9 @@
 ## Problem Statement
 
 ### Primary Question
-**Can the elementary charge e = 1.602176634e-19 C be derived from whitelist primitives?**
+**Can the elementary charge e = 1.602176634e-19 C be derived from derivation basis primitives?**
 
-Whitelist: {ℓ_P, c, ℏ, k_B, T_CMB, d=3}
+derivation basis: {ℓ_P, c, ℏ, k_B, T_CMB, d=3}
 
 ### Motivation
 PPT02 proved that the fine structure constant α is a Tier-1 input (cannot be derived from W=1 torus geometry alone, due to definitional circularity with electron wake radius r_e). But α depends on e through:
@@ -30,7 +30,7 @@ $$\alpha = \frac{k_e e^2}{\hbar c}$$
 
 **If e can be derived from topology, then α becomes a secondary constant (eliminates the circularity at PPT02).** This investigation tests whether e is:
 1. A topological quantum (dimensionless winding/linking invariant × lattice constant), OR
-2. An irreducible primitive (Class X, cannot be removed from whitelist)
+2. An irreducible primitive (Class X, cannot be removed from derivation basis)
 
 ---
 
@@ -66,10 +66,10 @@ $$e = \sqrt{\frac{\alpha \hbar c}{k_e}}$$
 
 ### Phase 2: Dimensional Analysis (COMPLETE)
 
-**Question**: Can dimension [C] = [A·s] be constructed from whitelist primitives?
+**Question**: Can dimension [C] = [A·s] be constructed from derivation basis primitives?
 
-**Answer**: **No.** The whitelist {ℓ_P, c, ℏ, k_B, T_CMB, d} cannot produce [A·s] through any algebraic combination because:
-1. No current dimension [A] on whitelist
+**Answer**: **No.** The derivation basis {ℓ_P, c, ℏ, k_B, T_CMB, d} cannot produce [A·s] through any algebraic combination because:
+1. No current dimension [A] on derivation basis
 2. No mechanism to generate [A] from {[m], [m/s], [kg], [J/K], [K]}
 
 **Conclusion**: Charge must be derived from **topological quantisation** (discrete geometric property), not dimensional scaling.
@@ -82,14 +82,14 @@ $$e = \sqrt{\frac{\alpha \hbar c}{k_e}}$$
 
 **Candidate 3**: Mathematically exact, ontologically circular → **FAILS**
 
-**Overall**: e cannot be derived from whitelist without external research (PPT09 or PPT02 completion).
+**Overall**: e cannot be derived from derivation basis without external research (PPT09 or PPT02 completion).
 
 ---
 
 ## Success Criteria
 
 - [x] Test all three candidates exhaustively
-- [x] Perform dimensional analysis of whitelist
+- [x] Perform dimensional analysis of derivation basis
 - [x] Identify circularity in Candidate 3
 - [x] Determine path forward (PPT09 vs PPT02 vs acceptance as Tier-1)
 - [x] Document all findings in audit-ready format
@@ -108,7 +108,7 @@ $$e = \sqrt{\frac{\alpha \hbar c}{k_e}}$$
 
 ## Key Findings
 
-1. **Dimensional closure is mathematically impossible** without adding [C] to whitelist or deriving it topologically
+1. **Dimensional closure is mathematically impossible** without adding [C] to derivation basis or deriving it topologically
 
 2. **Coulomb identity is circular**: k_e e² = α ℏ c follows from definitions, not derivation
 
@@ -123,12 +123,12 @@ $$e = \sqrt{\frac{\alpha \hbar c}{k_e}}$$
 ## Recommendation
 
 ### Primary: Accept e as Tier-1 Primitive
-**Action**: Keep e in expanded whitelist {ℓ_P, c, ℏ, k_B, T_CMB, e, d=3}
+**Action**: Keep e in expanded derivation basis {ℓ_P, c, ℏ, k_B, T_CMB, e, d=3}
 
 **Justification**:
 - e is a measured observable (SI exact, 2019)
 - Dimensional closure is impossible; topological path requires PPT09/PPT02
-- Per CLAUDE.md: "measured observables" are permitted inputs
+- Per CLAUDE.md: "measured observables" are declared dependencies
 - No conceptual loss (both α and e equally fundamental)
 
 **Audit Classification**: Class X (Tier-1 primitive, irreducible)
@@ -141,7 +141,7 @@ $$e = \sqrt{\frac{\alpha \hbar c}{k_e}}$$
 1. **PPT09**: Compute Lk(hydrogen) from proton (W=3) and electron (W=1) vortex geometry
 2. **Define** e₀: lattice charge quantum from impedance matching
 3. **Test**: e = e₀ × √Lk(hydrogen)
-4. **If successful**: Remove e from whitelist, whitelist reduces to {ℓ_P, c, ℏ, k_B, T_CMB, d=3}
+4. **If successful**: Remove e from derivation basis, derivation basis reduces to {ℓ_P, c, ℏ, k_B, T_CMB, d=3}
 
 **Timeline**: 2–3 weeks  
 **Probability**: ~40–60%
@@ -158,7 +158,7 @@ PPT02's circularity is explicitly unsolved; effort is unbounded; probability is 
 1. **CQ37_CHARGE_DERIVATION.md** — Detailed candidate analysis, dimensional proofs, all test results
 2. **cq37_charge_solver.cpp** — Numerical verification tool in C++20 (constants, dimensional checks)
 3. **cq37_results.txt** — Tabular results, numerical verification, classification
-4. **CQ37_VERDICT.md** — Formal closure document, whitelist update, next steps
+4. **CQ37_VERDICT.md** — Formal closure document, derivation basis update, next steps
 5. **PROMPT.md** — This file (investigation scope and methodology)
 
 ---
@@ -193,7 +193,7 @@ Compute topological linking number between electron (W=1 torus) and proton (W=3 
 - Theory/03_Open_Problems.md — Fine structure constant derivation gap
 - Investigations/CQ03_Fine_Structure_from_Topology/ — Circularity analysis
 - Engine/include/sdt/laws.hpp — coulomb_identity (Class F) and law_VI::winding
-- CLAUDE.md — Whitelist and measured observable rules
+- CLAUDE.md — derivation basis and measured observable rules
 ---
 
 ## ⑩ Adaptive Execution Protocol

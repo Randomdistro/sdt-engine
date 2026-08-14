@@ -65,7 +65,7 @@
 - **Compression floor — now DERIVED (NP30 §11, banked 2026-07-23):** r0 = R_p/η^{1/3} = 0.9300 fm
   with η = π/√18 = 0.74048; the 281-isotope chart compounds shell-by-shell onto this wall
   (Pb-208 at −1.5 mfm, nothing crosses). Bulk max-compression density: **ρ_max = η·ρ_p =
-  4.965×10¹⁷ kg/m³** — zero knobs (R_p whitelist via W+1; η geometric).
+  4.965×10¹⁷ kg/m³** — zero knobs (R_p derivation basis via W+1; η geometric).
 - **Chirp = length** (GOM06): ϟ☉ = 1477 m per solar mass.
 
 ## §2 Pre-registered numbers (copy to RUN_LOG **before** opening any data)

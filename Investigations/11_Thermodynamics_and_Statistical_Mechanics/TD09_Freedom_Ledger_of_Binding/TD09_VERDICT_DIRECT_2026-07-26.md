@@ -14,7 +14,7 @@
   universe — the quantitative content of "things move toward greater freedom." (Statement, not
   gate, as committed.)
 - **P3 (THE GATE):** ledger flip temperature, zero fitted parameters (measured E_b = 2.224573
-  MeV, measured η = 6.13e-10, whitelist constants): **T_flip = 0.0624 MeV** (7.25e8 K).
+  MeV, measured η = 6.13e-10, derivation basis constants): **T_flip = 0.0624 MeV** (7.25e8 K).
   Measured BBN deuterium bottleneck: ~0.06–0.09 MeV. Committed band [0.035, 0.17]:
   **G3 PASS** — and not marginally: the number sits inside the measured window itself.
   Sensitivity: the other n_n convention moves it to 0.0651 MeV (log-weak, as expected).

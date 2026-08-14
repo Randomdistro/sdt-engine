@@ -11,6 +11,8 @@ Does the deuteron–triton grammar — every nucleus as *one alpha core + n_d de
 
 The honest answer is: **in two places it is real and exceptionless. In several others it is arithmetic wearing a physics costume.** Both halves matter, and telling them apart is the whole result.
 
+**Addendum 2026-08-13 — flay, not split.** Actinide fission is an unwrap of unfrozen outer shells around sealed T12 masonry (N_H=82), not a necked drop. NP35: stop-at-126 **EXCLUDED**; T12 remnant **ORDER_PARTIAL** vs eight IAEA independent-yield tables. Z_H still assumed from parent Z/N (NP36). The NP25 `2d→α` identity is the jacket locking a second core, not a pinched neck.
+
 ---
 
 ## The two things that are genuinely real

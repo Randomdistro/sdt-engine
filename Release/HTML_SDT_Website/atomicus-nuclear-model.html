@@ -204,10 +204,10 @@ const F=[
   chk:iso=>{const r=IDX.get(iso.Z+','+iso.A);return r?`measured BE/A = ${(r[2]/iso.A).toFixed(3)} MeV — the flat ~8.5 plateau the area model can’t make`:'—';}},
 
  {t:'The scission invariant',s:'NATIVE',mode:'scission',
-  st:'When a heavy nucleus splits, each half needs an α core but the parent had one. Conservation forces it with no freedom: '+
-     '<b>tritons preserved exactly, deuterons drop by exactly two</b> → the only scission move is <code>2d → α</code>, emitting <b>zero neutrons</b>. '+
-     'Prompt neutrons come later, from the hot fragments (ν×t→d+n, ν̄≈2.4). Proved from A,Z conservation, verified on 8 pairs.',
-  chk:()=>'²³⁶U*(38d,52t) → two α-cored lobes; the second α built from 2 deuterons; 0 neutrons at the neck'},
+  st:'When a heavy nucleus is flayed, the jacket still needs an α core and the parent had one. Conservation forces it with no freedom: '+
+     '<b>tritons preserved exactly, deuterons drop by exactly two</b> → the only core-forming move is <code>2d → α</code> in the jacket, emitting <b>zero neutrons at unwrap</b>. '+
+     'Prompt neutrons come later, from the hot fragments (ν×t→d+n, ν̄≈2.4). Ledger identity, verified on 8 pairs. The necked-drop picture is withdrawn (NP35).',
+  chk:()=>'²³⁶U*(38d,52t) → sealed T12 remnant + flayed jacket; the second α built from 2 deuterons in the jacket'},
 
  {t:'The G_core selection',s:'SELECTION',mode:'scission',
   st:'Which cut is preferred: <code>G_core = |n_d−n_t| + (n_t mod 2)</code>. G_core=0 puts the light fragment on the '+

@@ -1,7 +1,7 @@
 # k_B — Boltzmann constant (kelvin unit bridge)
 
 > **J. C. Harvey, Melbourne — 2026-07-30.** Value: 1.380649×10⁻²³ J/K (SI exact,
-> definitional since 2019). Whitelist entry: `laws.hpp:130` — listed in-header
+> definitional since 2019). derivation basis entry: `laws.hpp:130` — listed in-header
 > under "Unit conversion constants (not fundamental scales)". Primary records:
 > TD02 (`Investigations/11_Thermodynamics_and_Statistical_Mechanics/TD02_.../TD02_VERDICT_DIRECT_2026-07-26.md`),
 > TD06 (same directory family). Re-run: `../derivelist_results.txt` §[7].

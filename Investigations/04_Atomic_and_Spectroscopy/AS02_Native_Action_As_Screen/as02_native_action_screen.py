@@ -5,7 +5,7 @@ from __future__ import annotations
 import math
 import sys
 
-# CODATA 2018 / engine whitelist (measured)
+# CODATA 2018 / engine derivation basis (measured)
 C = 299792458.0
 HBAR = 1.054571817e-34  # target / H0 only
 H = 2.0 * math.pi * HBAR

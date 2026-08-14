@@ -160,7 +160,8 @@ first-principles derivation of `α` (which remains open).
 - **EMC02** — the elementary unit `e` is dimensional (`[A·s]`) and seed-wall-blocked; `α` (dimensionless)
   is not — the key asymmetry.
 - **EMC04** — α read as the kinematic rung that lets `P_eff` close.
-- **PPT07** — the symmetric case: `m_p/m_e` measured, `6π⁵` privileged, mechanism open.
+- **PPT17** — the symmetric case: `m_p/m_e` measured, `6π⁵` resolved as a
+  shared-input tube-volume construction rather than an independent prediction.
 
 ## 8. Falsification Tests
 

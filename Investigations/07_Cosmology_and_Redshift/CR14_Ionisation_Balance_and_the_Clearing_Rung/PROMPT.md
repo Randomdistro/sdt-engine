@@ -88,7 +88,7 @@ Every class below is populated by a physically possible outcome (§3.1).
   **R3 outranks R1**: if both fire, the finding is the degeneracy, not the reproduction.
 - **R4 — contraband, registered against myself.** The Saha relation is imported statistical
   mechanics: its phase-space factor counts states in ℏ³ cells, machinery SDT has not rebuilt.
-  Its *inputs* are whitelist-legal (`m_e`, `k_B`, `ℏ`, `Ry_eV`); its *derivation* is not SDT's.
+  Its *inputs* are derivation basis-legal (`m_e`, `k_B`, `ℏ`, `Ry_eV`); its *derivation* is not SDT's.
   Therefore **no outcome of this investigation may be labelled DERIVED**. The best available
   label for a Branch-B success is COMPUTED — a consistency check, not a derivation. Registered
   now so the label cannot be upgraded after the number is seen.

@@ -57,7 +57,7 @@ topology into a predicted RMS charge radius without using the IAEA table.
 3. Premise: treating boundary radius as RMS without derived charge profile.  
 4. Inherited from NP12 periphery-charge underived debt.  
 5. Freedom needed: derived `ρ_ch(r)` / periphery weight (+ finite proton if used).  
-6. That freedom is presently OPEN — not DERIVED in whitelist sources.  
+6. That freedom is presently OPEN — not DERIVED in derivation basis sources.  
 7. Downstream: any “survives” claim for `nuclear_boundary_radius` vs IAEA RMS.
 
 **Recovery grade:** OPEN (precise missing mechanism registered).

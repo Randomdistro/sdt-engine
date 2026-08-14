@@ -27,7 +27,7 @@ rivals supply measured NUMBERS only).
 - Prompt completion target: C (the prompt's own expected landing)
 - Physics class hoped: CONVERGENCE (honest) — NATIVE only if the occlusion sum needs no imported constant
 - CALIBRATED budget: 0 fitted parameters. The pairwise coupling is `sdt::laws::coulomb_identity::k_e_e2 = αℏc`
-  (whitelist expression; the engine itself labels it class F / definitional identity — this is DECLARED, not hidden).
+  (derivation basis expression; the engine itself labels it class F / definitional identity — this is DECLARED, not hidden).
   The ionic/covalent split threshold is NOT fitted: the test is whether a clean GAP separates the two classes.
 - Engine namespaces: `sdt::laws::measured`, `sdt::laws::coulomb_identity`. No local constant namespaces.
 - OBSERVED anchors declared up front (measured data, legitimate anchor columns):

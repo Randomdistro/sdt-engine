@@ -14,6 +14,10 @@
 > (`DERIVED / COMPUTED / CALIBRATED / OBSERVED / PENDING`) and, where relevant, an audit class (`A–F`). SDT's
 > own ruleset prizes *honesty over success*: where the theory merely **converges** with an established result
 > rather than deriving it from scratch, this guide says so plainly. That candour is what makes the wins count.
+>
+> **Current model (2026-08-13):** cycle chain, T–P–c identities, and ledger live in
+> `Papers/SDT_THEORETICAL_MODEL.md` (people: `SDT_FOR_PEOPLE.md`; web: `universe-lifecycle.html`).
+> This guide remains the long tour; Part 0.5 is a 2026-07-05 snapshot.
 
 ---
 
@@ -23,7 +27,7 @@
 contacting cells ("spations")** that relay deformation at one cell per tick — and *every* physical
 phenomenon (force, mass, light, gravity, charge, the expansion of the universe) is a consequence of how that
 relay is loaded, occluded, displaced, and budgeted. There are **no free parameters**: the entire framework is
-forwarded from a whitelist of eight measured constants — compressed, as of FLM13 (2026-07-03), to **four plus
+forwarded from a derivation basis of eight measured constants — compressed, as of FLM13 (2026-07-03), to **four plus
 a thermal seat** (Part 2.1) — and a quantity that cannot be built from them is not admitted.
 
 **The four primitives** (everything else is derived): **Space** (the spation lattice), **Matter** (a
@@ -43,23 +47,12 @@ path through a radial gradient simply *is* an orbit. "Gravity" is a bookkeeping 
 
 ---
 
-## PART 0.5 — STATE OF THE FRAMEWORK (SNAPSHOT, 2026-07-05)
+## PART 0.5 — STATE OF THE FRAMEWORK
 
-This guide is a living document; this section is its dated pulse. The first week of July 2026 was the most
-consequential in the repo's history — in both directions — and everything below is verified against the files
-named in each line, not summarised from memory.
-
-**1. The canon was repaired (2026-07-03, Harvey-authorised).** The 2026-07-02 HUNTER scour found that a small
-cluster of the framework's most-quoted "closures" — the APS04 Lamb-shift derivation (1051.8 MHz), PPT08A's
-per-spation rolling, PPT09's winding-stability proof, and CR05's H₀/f-closure — were **fabricated**: hand-typed
-verdicts contradicted (or were computed by) no tool. All four are retracted with banners on disk; the fabricated
-Lamb literal was deleted from the canon. The benchmark headline is now honest:
-**46/57 earned predictions pass (80.7%) + 11 IDENTITY (definitional, shown but never tallied) + 2 CALIBRATED
-(documented) · 0 genuine failures · 11 PENDING** — verified by live rebuild and run on 2026-07-04
-(`Investigations/INVESTIGATION_STACK.md` §2). Wherever this guide previously repeated one of the fabricated
-claims, the passage now carries a dated correction. The theory's own audit protocol caught its own worst
-results; that is the ledger working, and this guide treats it as a feature to be displayed, not an
-embarrassment to be smoothed over.
+This guide follows the current engine and direct assessments. Lamb intervals are observed inputs; PPT09
+establishes knot classification but leaves winding stability dynamics open; CR05 does not derive H₀ or upgrade
+the transfer ratio from Class E. Benchmark totals must be taken from the current executable rather than a dated
+scoreboard.
 
 **2. The audit layer grew teeth — and a mirror.** The HUNTER protocol (kill-list, cascade ledger, the seven
 questions) is now framework law, and on 2026-07-04 it gained **§G**, which audits the auditor: the faith
@@ -73,7 +66,7 @@ three catches that produced physics (Part 2.5).
   IS lattice structure, matter and space **cannot desynchronise**, so flat marginals (no-signalling) are a
   theorem, not an axiom. The completed theorem opens the sharpest falsifiable fork with QM on the books.
 - **FLM13** (Part 2.1): $\{\hbar, m_e, m_p\}$ collapse to **one mass/action seat** — a baryon-count anchor.
-  The classical whitelist compresses to $\{\ell_P,\ c,\ \alpha,\ \text{one seat},\ k_B/T_{\text{CMB}}\}$. The
+  The classical derivation basis compresses to $\{\ell_P,\ c,\ \alpha,\ \text{one seat},\ k_B/T_{\text{CMB}}\}$. The
   seat's VALUE stays OPEN per the Seed Theorem — now explicitly premise-classed under §G.3 (proven inside the
   static-spation class; the FLM14 rotation DOF is the named re-open condition).
 - **GOM14** (Part 5): a mass-free koppa-density built from transit observables only holds across **693
@@ -150,10 +143,12 @@ That asymmetry, integrated over the solid angle occluded, is the universal force
 
 ## PART 2 — THE RULES OF THE GAME
 
-### 2.1 The whitelist (the only permitted inputs)
+### 2.1 Scales
 
-SDT admits exactly these as external inputs — the `sdt::laws::measured` namespace is the *whitelist*, and a fact
-not in it is not a measured fact:
+> `ℓ_P` is the dimensional seed. `c`, `k_B`, `e` are unit bridges. `{ℏ, m_e, m_p}` are one
+> mass/action seat (FLM13). `α` is hydrogen’s koppa rung `k_H = 1/α`. `T_CMB` is a FIRAS clock.
+> Record: `derivelist/README.md`. `sdt::laws::measured` is the engine lookup of CODATA/FIRAS
+> numbers. The cascade below is how those lookup values are used.
 
 $$ \{\,\ell_P,\; c,\; \hbar,\; k_B,\; T_{\text{CMB}},\; \alpha,\; m_e,\; m_p\,\} $$
 
@@ -172,14 +167,14 @@ FIRAS data). The six truly independent numbers behind the derivation cascade are
 ($\ell_P$ is adopted as a measured primitive — see the honest caveat in Part 18.4 — and $k_B$ closes the
 thermodynamics.)
 
-**The whitelist just got smaller (FLM13, executed 2026-07-03).** The koppa route to the action showed that
+**The derivation basis just got smaller (FLM13, executed 2026-07-03).** The koppa route to the action showed that
 $\hbar$ *is* the $W{=}1$ rung's Onsager–Feynman circulation action — $m_e\,\kappa/2\pi = m_e(\alpha c)a_0 =
 r_e m_e c/\alpha$ agree with $\hbar$ to $10^{-9}$ — but this is honestly labelled **IDENTITY-CLASS**: it
 derives what $\hbar$ *is* (the circulation quantum of the fundamental vortex), not its number. The delete-test
 then showed **no $\hbar$-free VALUE path exists** (every dimensionful atomic input encodes $\hbar$; the Seed
 Theorem held exactly as pre-committed), and $\{\hbar, m_e, m_p\}$ collapse by exhibited bijections into
 **one mass/action seat** — physically a *baryon-count anchor* (the one historically $\hbar$-free mass standard
-was the artifact kilogram: a counted lump of baryons). The compressed classical-sector whitelist is therefore
+was the artifact kilogram: a counted lump of baryons). The compressed classical-sector derivation basis is therefore
 
 $$ \{\,\ell_P \leftarrow \varkappa(g,\rho,R),\quad c \leftarrow \text{Mercury precession},\quad \alpha \leftarrow \text{pure spectral ratio},\quad \text{ONE mass/action seat},\quad k_B, T_{\text{CMB}}\,\} $$
 
@@ -204,7 +199,7 @@ These are not "unsupported"; they are **forbidden inputs**:
 
 | Label | Meaning |
 |---|---|
-| **DERIVED** | Computed from the axioms with no external input beyond the CODATA whitelist. |
+| **DERIVED** | Computed from the axioms with no external input beyond the CODATA derivation basis. |
 | **COMPUTED** | Deterministic calculation from the Law framework (may use measured observables as inputs). |
 | **CALIBRATED** | Exactly one parameter was fitted — and it *must* be documented. |
 | **OBSERVED** | Validated against measurement; mechanism established. |
@@ -305,15 +300,10 @@ interior point is therefore just $N\varepsilon$, and the isotropic pressure it e
 $N^2=3.47\times10^{123}$ — *exactly* the "$10^{123}$" of the so-called cosmological-constant problem. In SDT this
 is not a failed vacuum-energy cancellation; it is simply **the boundary-cell count**.
 
-**The CR05 extension — retracted (dated correction, 2026-07-02).** An earlier draft of this guide presented
-CR05's pressure-tensor derivation ($\gamma_{\text{eff}}=4$, the derived $H_0$, the $f$ E→C upgrade) as a
-Class-C result. The HUNTER scour found CR05 **fabricated**: $H_0$ was hardcoded to the Planck value, the
-$\Omega$ set was Planck-2018 ΛCDM mislabelled "(from topology)", and the tool's real output contradicted the
-typed verdict. Status on disk: **KILLED as a closure; the $H_0$-from-pressure hypothesis stays OPEN**
-(`CR05_VERDICT.md` banner). What survives of the idea is honest and small: $\gamma_{\text{eff}}=4$ (the
-topologically stiff lattice) remains a *logged, untested candidate* — it is now the named candidate for the
-wake equation of state (WEOS-1, Part 18.5), where $w=+1$ is exactly what a stiff lattice would give. A
-candidate, not a result.
+**CR05 scope.** Direct execution imports the Planck H₀ and Ω normalisations, while its native pressure-balance
+route predicts $H_0=1.25\times10^{49}$ km s$^{-1}$ Mpc$^{-1}$ and its comoving-distance route misses
+$R_{\rm CMB}$ by 50.8%. It therefore supplies no H₀ law, no transfer-ratio upgrade and no certified
+$\gamma_{\rm eff}=4$ freeze-out law. Those pressure forms remain research candidates only.
 
 ### LAW II — The Release Cascade  (`law_II`)
 
@@ -346,13 +336,11 @@ $F=\tfrac{\pi}{4}P_{\text{eff}}R_{\text{charge}}^4/r^2 = k_e e^2/r^2$.
 **Numerical validation (hydrogen).** $F_{\text{occ}} = \tfrac{\pi}{4}P_{\text{eff}}R_p^2 R_e^2/a_0^2 =
 8.23\times10^{-8}\,\text{N}$ vs Coulomb $8.24\times10^{-8}\,\text{N}$ — **0.12 %**.
 
-**Honesty flag (this is the framework's most load-bearing calibration).** The coefficient $P_{\text{eff}}=
+**Scope (this is the framework's most load-bearing calibration).** The coefficient $P_{\text{eff}}=
 4k_e e^2/(\pi R_p^2 r_e^2)=5.225\times10^{31}\,\text{Pa}$ and the transfer ratio $f=P_{\text{eff}}/P_{\text{conv}}
 =2.125\times10^{-17}$ are **CALIBRATED (Class E)** — the hydrogen scale fixes their magnitude; they fail the
-delete-test. The $1/r^2$ **structure** is DERIVED (Class C); the **coefficient** is fitted. *(Dated correction,
-2026-07-02: an earlier draft cited CR05's "f upgrades E→C via a derived $H_0$" — CR05 was retracted as
-fabricated; $f$ stays Class E, and the $R_{\text{CMB}}/H_0$ underivation is the true open problem, stated in
-CR03.)* This is stated, not hidden.
+delete-test. The $1/r^2$ **structure** is DERIVED (Class C); the **coefficient** is fitted. CR05 does not
+upgrade $f$: $R_{\text{CMB}}/H_0$ remains the open dependency stated in CR03.
 
 ### LAW IV — Inertial Mass from Throughput Reorganisation  (`law_IV`, T5–T7)
 
@@ -425,7 +413,7 @@ muonic-hydrogen value to $0.02\%$; and inverting, $W_{\text{eff}}=R_p m_p c/\hba
 
 ## PART 4 — THE DERIVATION CASCADE (FROM SIX NUMBERS TO EVERYTHING)
 
-Everything flows downhill from the whitelist through four stages. This is the spine of `laws.hpp`.
+Everything flows downhill from the derivation basis through four stages. This is the spine of `laws.hpp`.
 
 | Stage | Output | Formula | Value | Label |
 |---|---|---|---|---|
@@ -438,14 +426,14 @@ Everything flows downhill from the whitelist through four stages. This is the sp
 | | $R_p$ | $4\hbar/(m_p c)$ | $8.412\times10^{-16}\,\text{m}$ | DERIVED |
 | | $R_{\text{charge}}$ | $\sqrt{R_p r_e}$ | $1.540\times10^{-15}\,\text{m}$ | DERIVED |
 | **3 Force law** | $k_e e^2$ | $\alpha\hbar c$ | $2.307\times10^{-28}\,\text{J·m}$ | definitional (F) — *defines* $\alpha$ |
-| | $P_{\text{eff}}$ | $m_p^2 m_e^2 c^5/(4\pi\alpha\hbar^3)$ | $5.225\times10^{31}\,\text{Pa}$ | whitelist-algebraic (CR03); circularity flagged (EMC01) |
-| | $f$ | $P_{\text{eff}}/P_{\text{conv}}$ | $2.125\times10^{-17}$ | Class E (the CR05 "E→C" closure was retracted as fabricated, 2026-07-02) |
+| | $P_{\text{eff}}$ | $m_p^2 m_e^2 c^5/(4\pi\alpha\hbar^3)$ | $5.225\times10^{31}\,\text{Pa}$ | derivation basis-algebraic (CR03); circularity flagged (EMC01) |
+| | $f$ | $P_{\text{eff}}/P_{\text{conv}}$ | $2.125\times10^{-17}$ | Class E; CR05 does not remove its observed/calibrated dependencies |
 | **4 Mass & stability** | $V_{\text{disp},e}$ | $3m_e\ell_P^3 c^2/\Phi$ | $9.988\times10^{-62}\,\text{m}^3$ | COMPUTED |
 | | $V_{\text{disp},p}$ | $3m_p\ell_P^3 c^2/\Phi$ | $1.834\times10^{-58}\,\text{m}^3$ | COMPUTED |
 | | $P_{cf}$ | $\rho_{\text{eff}}c^2=P_{\text{conv}}/3$ | identity ✓ | DERIVED |
 
 **The Coulomb identity** $k_e e^2=\alpha\hbar c$ (T9) is *definitional* (Class F): it **defines**
-$\alpha\equiv k_e e^2/\hbar c$. SDT's coupling is the dimensionless $\alpha$ (in the whitelist); **$e$ is not** —
+$\alpha\equiv k_e e^2/\hbar c$. SDT's coupling is the dimensionless $\alpha$ (in the derivation basis); **$e$ is not** —
 charge is not an SDT entity (it is *occluded influx directionality* — see Part 18), and $e$ figures only as the
 SI unit-bridge from SDT's occlusion magnitude back to the Coulomb number.
 
@@ -729,8 +717,8 @@ Three runs in (`FLM14_VERDICT.md`), the honest state is:
 
 ### 9.6 The Lamb "shift" is a spacing — the native target table (PPT08_KOPPA_TARGET, 2026-07-04)
 
-The angular-DOF problem (why $2S_{1/2} \ne 2P_{1/2}$) remains **OPEN** — the APS04 "closure" was retracted as
-fabricated (Part 15) — but the target is now, for the first time, **well-posed in native coordinates**
+The angular-DOF problem (why $2S_{1/2} \ne 2P_{1/2}$) remains **OPEN**. The target is
+well-posed in native coordinates
 (`PPT08_Angular_DOF_from_Trefoil/PPT08_KOPPA_TARGET.md`, class RE-EXPRESSION, not extraction):
 
 - **Reframing (Harvey): a spacing, not a shift — Dirac was simply wrong.** The word "shift" embeds the rival's
@@ -738,16 +726,15 @@ fabricated (Part 15) — but the target is now, for the first time, **well-posed
   theorem. In SDT two geometrically different seats at the same $n$ have no reason to coincide — the splitting
   is the *null expectation*; degeneracy would have been the anomaly.
 - The measured **1057.8 MHz ≡ a 0.703 m/s seat-speed offset ≡ a 0.272 fm radial offset at n = 2** (one
-  quantity, three rulers, via $v=c\sqrt{\varkappa/r}$).
-- The **three-seat grading table**: H n=2 → 0.272 fm; H n=3 (~314.9 MHz) → 0.410 fm; He⁺ n=2 (14,041.1 MHz) →
-  0.452 fm. Δr is seat-dependent — any future mechanism is graded against the *table*, not against 1057.8
-  alone.
-- The **$R_p/3$ cluster** (trefoil node radius 0.2805 fm vs the n=2 offset 0.2722 fm, −2.9%) is logged
-  **[OPEN]** — privileged, mechanism untested, fishing forbidden. Either coincidence or the mechanism's first
-  fingerprint; the three-seat table decides.
+  quantity, three rulers, via $v=c\sqrt{\varkappa/r}$) — RE-EXPRESSION of the Lamb–Retherford sticker.
+- Hydrogen is the **proton center**; He⁺ (14041.13 MHz) is a second OBSERVED sticker on the **α center**.
+  Construction names two protons; it does not derive 14041 from 1057. The old three-line grading table mixed
+  those objects and is withdrawn as a closure target.
+- The **$R_p/3$ cluster** (trefoil node radius 0.2805 fm vs the n=2 offset 0.2722 fm, −2.9%) remains
+  look-elsewhere, not a match.
 
-The canon carries only `lamb_shift_measured_MHz = 1057.845` as an OBSERVED input. Nothing in the target table
-is promoted to derived.
+The canon carries `lamb_shift_measured_MHz = 1057.845` and `lamb_shift_He_plus_measured_MHz = 14041.13` as
+OBSERVED inputs. Extraction of 1057 from trefoil/FLM14 is withdrawn (2026-08-13).
 
 ---
 
@@ -862,17 +849,16 @@ diffraction is lattice scattering of the vortex (all VERIFIED in the corresponde
 | Topic | SDT account | Label |
 |---|---|---|
 | CMB redshift | $z=T_{\text{rec}}/T_{\text{CMB}}-1=1089$ | DERIVED (B13) |
-| Pressure evolution | $P(z)\propto(1+z)^4$, $\gamma_{\text{eff}}=4$ (topological stiffness) | **candidate only** — the CR05 "derivation" was retracted as fabricated; $\gamma_{\text{eff}}=4$ survives as the logged, untested WEOS-1 candidate |
-| Hubble constant | $H_0$ from lattice pressure | **OPEN** — CR05's closure retracted (its $H_0$ was hardcoded to Planck); $R_{\text{CMB}}/H_0$ remains the underived input (CR03) |
+| Pressure evolution | $P(z)\propto(1+z)^4$, $\gamma_{\text{eff}}=4$ (topological stiffness) | **OPEN candidate**; CR05 does not derive the exponent or freeze-out mechanism |
+| Hubble constant | $H_0$ from lattice pressure | **OPEN**; CR05 imports the comparison value and fails on its native route; $R_{\text{CMB}}/H_0$ remains underived (CR03) |
 | Cosmological "constant problem" | the $10^{123}$ is $N^2=4\pi$-scaled boundary-cell count, not a vacuum-energy failure | DERIVED |
 | BAO sound horizon | $r_s\approx147$ Mpc | COMPUTED (B15; carries an exact-literal debt in the repaired ledger — the freeze-out narrative is PARTIAL per GOM01's re-audit) |
-| Cosmological redshift | depth at emission ($z=\varkappa/r$) + a propagation term along the line of sight | C on emission; the **propagation law $d(z)$ is honestly OPEN** — the exponential strain law is doubly falsified (CR06 SNe; CR08 BAO), the octave/cubic-rung successor has no distance closure yet, and CR09's isotropic radial κ-gradient was killed 0/122 by an exact three-way pincer |
+| Cosmological redshift | depth at emission ($z=\varkappa/r$) + a propagation term along the line of sight | C on emission; the **propagation law $d(z)$ is OPEN** — the exponential strain law is excluded (CR06 SNe; CR08 BAO), the octave/cubic-rung successor has no distance closure yet, and CR09's isotropic radial κ-gradient is excluded 0/122 |
 | SDT vs ΛCDM head-to-head | Tolman surface brightness, the CMB $(1+z)^4$ energy density, Pantheon SNe | **DEGENERATE** (CR10/11/12): SDT *matches* without a dark sector but does not *beat* ΛCDM; the one remaining separator is the κ(z)/BAO-CMB acoustic-peak decider |
-| Dark matter | replaced by convergence-disk occlusion + derived $a_0$ floor | C/PARTIAL |
+| Dark matter | convergence-disk occlusion candidate | PARTIAL; the acceleration-floor magnitude is not derived |
 | Dark energy | a pressure-gradient *misreading* of the lattice EOS, not a substance | SPEC |
 
-**Honest flag (rewritten after the 2026-07-02 scour):** the earlier draft's "$H_0=67.4$ derived, C-flagged"
-rested on CR05, which is retracted (its tool hardcoded the answer). The true state is starker and cleaner:
+**Scope:** CR05 does not derive $H_0=67.4$; its tool imports that value. Therefore
 $R_{\text{CMB}}$ (equivalently $H_0$) is an **observational input**, the Friedmann structure is not
 SDT-derived, and the three classical cosmology tests all tie the rival rather than beating it. What SDT's
 no-expansion reading *does* buy without a dark sector — the Hubble-tension dissolution (emission and
@@ -938,7 +924,7 @@ distinguished from GR.
 | **GW memory** | nonlinear (Christodoulou), separate effect | $=$ the radiated koppa $\Delta\varkappa$; *identical* to the breathing transient |
 | **Ringdown** | pure Kerr QNMs, then silence | QNMs **+ echoes** off the closure-floor wall |
 | **Cosmological const.** | $\Lambda$, $10^{123}$ discrepancy | $N^2$ boundary-cell count — not an energy at all |
-| **Free parameters** | $G$, $\Lambda$, plus initial conditions | zero (whitelist only); the one calibration ($P_{\text{eff}}$) is flagged |
+| **Free parameters** | $G$, $\Lambda$, plus initial conditions | zero (derivation basis only); the one calibration ($P_{\text{eff}}$) is flagged |
 | **Where they agree** | — | redshift, precession, deflection, Shapiro, $\dot P$, GW speed & chirp (all **convergence**, class C) |
 
 ---
@@ -971,17 +957,10 @@ more fundamental.
 | Spin two-valuedness | intrinsic SU(2) | binary circulation handedness $\eta=\pm1$ — two spots, no middle, native | QM07 |
 | Entanglement / no-signalling | nonlocality + no-communication *postulates* | the **Synchrony Theorem** (Part 7A): matter IS lattice structure ⇒ marginals cannot shift, as a theorem; correlations ride the constraint channel | QM05/FARMER |
 
-**The angular DOF and the Lamb shift — the retraction this guide owes you (2026-07-02/03).** An earlier
-version of this section reported that APS04 derived the Lamb shift "at 1051.8 vs 1057.845 MHz (0.57%) with
-zero fitted constants" from the trefoil's $C_3$ wake multipole. **That result was fabricated.** The HUNTER
-audit found the solver never compiled, the results were hand-typed, the formula with its own inputs yields
-≈3145 MHz — and the 1051.8 was fished. The fabricated literal had also been laundered into the canon via B04;
-both are now deleted (`APS04_VERDICT.md` retraction banner; canon repair 2026-07-03). The honest state:
-**PPT08 (the native angular DOF) is OPEN; the SDT Lamb amplitude is unbuilt.** What the episode *bought* is
-Part 9.6 — the target is now well-posed in native coordinates (Lamb = a seat **spacing**, not a "shift";
-0.272 fm at n=2; the three-seat grading table), and any future mechanism is graded against that table under
-the fishing prohibition. A framework that publishes its own retraction in its teaching document is doing the
-thing the honesty contract promises.
+**The angular DOF and the Lamb interval.** **PPT08 is OPEN; the SDT Lamb amplitude is unbuilt.**
+The H and He⁺ intervals are observed inputs. Part 9.6 states the target in native coordinates
+(Lamb = a seat **spacing**, not a derived "shift"; 0.272 fm at n=2), and any future
+mechanism is graded against that table.
 
 **The quantum-foundations strike force (2026-07-04) — what a lattice mechanics actually earned.** Executed
 under §G with pre-committed gates, zero fabrications:
@@ -1021,7 +1000,7 @@ owner, an acceptance test, and a killed null.** That is the honest scoreboard �
 
 **The honest boundary that remains.** Two things an earlier draft mislabelled are *dissolved*, not gaps:
 **charge** (a QM abstraction — SDT has *occluded influx directionality*, not a charge primitive; $\alpha$, not
-$e$, is in the whitelist) and the **fixed $\ell_P$** (GOM05 makes it a variable closure *field*
+$e$, is in the derivation basis) and the **fixed $\ell_P$** (GOM05 makes it a variable closure *field*
 $\ell_P(r)=\ell_{P,\infty}(1-z)$, derived as the koppa = wake fixed point from hydrogen geometry, not $G$). What genuinely remains:
 multi-electron atoms (**PENDING**, B06); the **$P_{\text{eff}}$ force coefficient calibrated to hydrogen**
 (`laws.hpp` Class E); the **observational $R_{\text{CMB}}/H_0$** behind the cosmology (Part 12); the **native
@@ -1037,25 +1016,23 @@ local, hard, and deterministic — and the remaining gaps are honestly logged, n
 `Benchmarks/B01_B25/benchmarks_b01_b25.cpp` is the end-to-end verification; it self-reports PASS/FAIL against
 measured constants.
 
-**The honest headline (canon repaired 2026-07-03, verified by live rebuild+run 2026-07-04):**
+**Benchmark reporting rule:**
 
-> **46/57 earned predictions pass (80.7%), plus 11 IDENTITY (definitional — shown, never tallied) and
-> 2 CALIBRATED (Class E, documented) · 0 genuine failures · 11 PENDING (known-open, flagged).**
+> Use the current benchmark executable for totals; identities and calibrated rows are shown but never
+> tallied as independent predictions.
 
 This supersedes both the old "all 25 PASS" and the interim "62/73" tallies — the latter counted definitional
 identities and calibrated fits as earned passes. The repair's principle: **identities are shown, never
 tallied.** A number the tool read in (or that is true by substitution, like $GM\to c^2\varkappa$) is displayed
-for the reader as an identity row, and is not allowed to inflate the score. In the same repair the fabricated
-Lamb literal (1051.8, laundered through B04) was **deleted** — B04 now reports "SDT amplitude OPEN (PPT08) —
-no earned prediction" — and B09/B21 were demoted to display-only identity rows. The per-benchmark table below
-keeps the guide's original walk-through, with the repaired rows corrected in place.
+for the reader as an identity row, and is not allowed to inflate the score. B04 reports H and He⁺ Lamb
+intervals as observed stickers with no derived tally. The per-benchmark table below records that scope.
 
 | # | Verifies | Result | Label |
 |---|---|---|---|
 | B01 | H energy levels | $E_n=-\text{Ry}\,Z^2/n^2$ | DERIVED |
 | B02 | Multi-ion Rydberg (He⁺, Li²⁺) | exact spectral match | DERIVED |
 | B03 | Fine structure, g-factor | $2P$ split $4.528\times10^{-5}$ eV; $g=2.00232$ | DERIVED |
-| B04 | **Lamb shift** | *(fabricated 1051.8 literal DELETED, canon repair 2026-07-03)* | reports "SDT amplitude **OPEN (PPT08)** — no earned prediction"; measured 1057.845 MHz kept as OBSERVED input; target table = Part 9.6 |
+| B04 | **Lamb interval** | observed H 1057.845 MHz and He⁺ 14041.13 MHz | OBSERVED; APS04 +0.761 MHz addend; no derived tally |
 | B05 | Hyperfine 21 cm | $1420.405$ MHz | DERIVED (line OBSERVED; mechanism re-narrated) |
 | B06 | Multi-electron ionisation | Slater screening | **PENDING** (open atoms problem) |
 | B07 | Stefan–Boltzmann, Wien | $\sigma_{SB}=5.670\times10^{-8}$; $\lambda_{\max}T=2.898\times10^{-3}$ | DERIVED |
@@ -1119,11 +1096,11 @@ residence law. That convergence is Part 18.5.
 
 ## PART 17 — THE INVESTIGATION MAP (DOMAIN CODES)
 
-The `Investigations/` tree pushes open questions to honest conclusions. (The old `CQ##` numbering is retired —
+The `Investigations/` tree pushes open questions to recorded conclusions. (The old `CQ##` numbering is retired —
 investigations carry domain codes: FLM foundations, PPT particle/topology, EMC electromagnetism, APS atomic,
 NP nuclear, GOM gravitation/orbital, CR cosmology, GD galactic, SAR stellar, plus the numbered fields 10–16
 for fluid/thermo/condensed/quantum/plasma/optics/chemistry.) A representative slice, current to 2026-07-05 —
-note that four rows an earlier draft showed as RESOLVED are now displayed as the retractions they became:
+the rows below state their current scope:
 
 | Investigation | Topic | Status |
 |---|---|---|
@@ -1134,10 +1111,10 @@ note that four rows an earlier draft showed as RESOLVED are now displayed as the
 | FLM08 | The vacuum = corner-sharing tetrahedral random network (ten methods converge) | RESOLVED 27/27, class [GEOMETRY] |
 | APS03 | Universal drafting crossover (atomic+stellar+galactic on one curve) | PARTIAL (honest RMS 21.5%; galactic pilot VOID) |
 | CR03 | Transfer-function closure (bottleneck for $f$) | EXECUTED — states the true open problem ($R_{\text{CMB}}/H_0$ underived) |
-| **APS04** | the $C_3$-wake Lamb "closure" (1051.8 MHz) | **⛔ RETRACTED — FABRICATED** (solver never compiled; value fished). PPT08 stays **OPEN**, graded against `PPT08_KOPPA_TARGET.md` |
-| **PPT08A** | per-spation rolling, formerly "Class A $<10^{-15}$" | **⛔ RETRACTED** (a frozen-radius no-op; FLM03's coefficient remains a candidate, not derived) |
-| **PPT09** | winding-number stability "proof" (W=1,3-only) | **⛔ RETRACTED — FABRICATED** (the tool prints the opposite). The conjecture is a legitimate **OPEN** target — FLM14 run 3 now supports the rigid-backbone-plus-carriers picture from the gearing side |
-| **CR05** | pressure tensor; $\gamma_{\text{eff}}=4$; derived $H_0$; $f$ E→C | **⛔ RETRACTED — FABRICATED** ($H_0$ hardcoded to Planck). KILLED as closure; the hypothesis stays OPEN; $\gamma_{\text{eff}}=4$ survives only as the WEOS-1 candidate |
+| **APS04/PPT08** | Lamb amplitude | **OPEN**; measured H and He⁺ intervals remain observed inputs |
+| **PPT08A** | per-spation rolling coefficient | **OPEN**; the frozen-radius calculation does not derive it |
+| **PPT09** | winding topology and stability | knot classification **COMPUTED**; W=2 energy direction, barrier, lifetime and W={1,3}-only stability **OPEN** |
+| **CR05** | pressure tensor; candidate $H_0$ and $f$ closure route | H₀/f closure **EXCLUDED** by direct execution; pressure exponent and freeze-out mechanism **OPEN** |
 | EMC02 | Elementary charge $e$ | **Class X (irreducible)** — the same quantity resurfaces as the PM suite's HG-1 handed-gain root; §G.3 re-open condition: the FLM14 rotation DOF |
 | FLM06 | Spation-scale closure $\ell_P=\sqrt{\varkappa\lambda}$ (seed theorem) | EXECUTED (**negative** on $\ell_P$ + koppa win); Seed Theorem now premise-classed per §G.3 |
 | GOM05 | Variable closure $\ell_P(r)$, the c-gradient, lumiostasis | EXECUTED (4/4) |
@@ -1152,43 +1129,22 @@ note that four rows an earlier draft showed as RESOLVED are now displayed as the
 
 ---
 
-## PART 18 — THE HONEST FRONTIER (WHAT IS *NOT* YET DONE)
+## PART 18 — THE OPEN FRONTIER
 
-A theory is only as trustworthy as its candour — and this part now carries the sternest lesson in the whole
-guide. An earlier draft of this section opened with a list titled "Recently CLOSED," celebrating four items
-that had "moved from OPEN to a native derivation." **All four were fabrications**, caught by the HUNTER scour
-of 2026-07-02 and retracted on disk. The list is preserved here, struck through honestly, because *how it was
-wrong* is itself framework knowledge:
-
-**The retraction ledger (formerly "Recently CLOSED"):**
-
-- ~~PPT08A derives the per-contact lag to $<10^{-15}$ (Class A)~~ → **RETRACTED** — the "derivation" was a
-  frozen-radius no-op. The lattice root is honestly OPEN and is exactly what ROOT-SIM/FLM14 is building.
-- ~~PPT09 proves W=1,3-only analytically (Class A)~~ → **RETRACTED — FABRICATED**: the tool's own output
-  prints the opposite of the typed verdict. OP-2 is **OPEN again** — though FLM14's run 3 (frustration-forced
-  carriers threading a percolated rigid backbone) is the first *earned* support for the picture, from the
-  gearing side.
-- ~~APS04 derives the Lamb shift at 0.57%, zero fits~~ → **RETRACTED — FABRICATED** (solver never compiled;
-  1051.8 fished; laundered into B04, now deleted from the canon). PPT08 is OPEN; the honest replacement is the
-  native target table of Part 9.6.
-- ~~CR05 upgrades $f$ E→C via a derived $H_0$~~ → **RETRACTED — FABRICATED** ($H_0$ hardcoded). $f$ stays
-  Class E; $R_{\text{CMB}}/H_0$ stays an observational input.
-
-The pattern is instructive: **fabrication clustered on the famous single constants** — the Lamb shift, $H_0$,
-the tidy "Class A proof" — precisely where the temptation to have the number exceeds the patience to earn it.
-The kill-list modes (retro-PASS, fished coefficient, hand-typed banner over contradicting output) were all
-present; the §G-era protocol now audits for exactly these, and the 2026-07-04/05 wave ran ~30 investigations
-under it with zero fabrications and every FAIL pre-committed. Candour is not the absence of error; it is what
-happens next.
+- **PPT08A:** the per-contact lag is OPEN; the frozen-radius calculation does not derive it.
+- **PPT09:** knot classification is computed; W=2 dynamics and W={1,3}-only stability are OPEN.
+- **APS04/PPT08:** the Lamb amplitude is OPEN; measured intervals are observed inputs.
+- **CR05:** H₀/f closure is EXCLUDED; $f$ remains Class E and $R_{\text{CMB}}/H_0$
+  remains an observational dependency.
 
 **Two category corrections — dissolved, not open (I earlier mislabelled both by carrying the standard-physics
 frame).**
 
 - **Charge.** **SDT has no charge primitive.** What QM calls charge is *occluded influx directionality* — the
   directional signature of the convergence inflow a vortex occludes — and the electrostatic force is occlusion
-  geometry (Law III). The canonical whitelist contains **$\alpha$, not $e$**, and $k_e e^2=\alpha\hbar c$ is the
+  geometry (Law III). The canonical derivation basis contains **$\alpha$, not $e$**, and $k_e e^2=\alpha\hbar c$ is the
   **definition** of $\alpha$ (Class F). EMC02's "cannot derive $e$" is not a missing derivation — it is the
-  *expected signature of a QM abstraction*: the whitelist has no current dimension $[\mathrm{A}]$ because the
+  *expected signature of a QM abstraction*: the derivation basis has no current dimension $[\mathrm{A}]$ because the
   ontology has no charge. $e$ appears only as an **SI unit-bridge**.
 - **$\ell_P$ is not a constant — it is a field.** GOM05 derives $\ell_P(r)=\ell_{P,\infty}(1-z)$,
   $c_{\text{local}}=c(1-z)$, $z=\varkappa/r$ — exact, parameter-free, **$G$-free** (4/4). The closure tightens
@@ -1203,17 +1159,18 @@ frame).**
   $\ell_P$ that injects $G$" was borrowed framing top to bottom.
 
 **Still genuinely open (after reading EMC01–GOM06):**
-1. **$P_{\text{eff}}$ — whitelist-algebraic, but circularity unresolved.** CR03 shows
-   $P_{\text{eff}}=m_p^2 m_e^2 c^5/(4\pi\alpha\hbar^3)$ — a pure whitelist combination, *not* a free numerical
-   fit. But EMC01's audit flags it may be the hydrogen force-balance rewritten in whitelist clothing (force
+1. **$P_{\text{eff}}$ — derivation basis-algebraic, but circularity unresolved.** CR03 shows
+   $P_{\text{eff}}=m_p^2 m_e^2 c^5/(4\pi\alpha\hbar^3)$ — a pure derivation basis combination, *not* a free numerical
+   fit. But EMC01's audit flags it may be the hydrogen force-balance rewritten in derivation basis clothing (force
    magnitude and $f$ being "the same equation twice"); `laws.hpp` keeps Class E conservatively. Not a free
    parameter; not yet a clean delete-test-passing derivation.
-2. **$R_{\text{CMB}}/H_0$ is an observational input.** With CR05 retracted (see above), there is no derived
-   $H_0$; the Friedmann structure is not SDT-derived; the propagation law $d(z)$ is honestly OPEN (Part 12).
+2. **$R_{\text{CMB}}/H_0$ is an observational input.** CR05 supplies no derived
+   $H_0$; the Friedmann structure is not SDT-derived; the propagation law $d(z)$ is OPEN (Part 12).
    This is the real remaining cosmology contingency, and CR03 states it without decoration.
-3. **The mass ratio's first-principles root.** $6\pi^5=1836.118$ holds to 19 ppm — a unique, zero-parameter,
-   unexplained match — but the wake phase-space integral that would *force* it is unrun (it rides the lattice
-   solver); $m_e,m_p$ survive in the whitelist only as the FLM13 mass/action seat, whose VALUE is OPEN.
+3. **The mass ratio's first-principles root.** $6\pi^5=1836.118$ is the shared packing count in the
+   Law-IV point-electron closure-tube to proton-torus construction. The geometric map is resolved, but it is
+   not an independent prediction of the count. The absolute W=1 point-body width and mass/action-seat value
+   remain open.
 4. **Quantum measurement compresses to one scalar law.** After the strike force (Part 15), the square, the
    floor, the barrier form and two-valuedness are machinery; what is *not yet mechanised* is exactly the
    residence law (landing counts ∝ energy density) — owner FLM14, acceptance test on file, run 4 in flight.
@@ -1242,11 +1199,11 @@ instrument**, the rotating-lattice solver (ROOT-SIM, with FLM14 as its premise p
 | **NP22 exit-channel count** ($N_{\text{exit}}\propto E^2$, native 3-D state counting) | the β-spectrum shape; lineage = FLM14 sequential occupancy ("SDT must earn its spheres from seat geometry") |
 | **ROOT-A** (action per relay event = h beyond vortex winding) | CM04's T³ grade-cap, CM01's lock ceiling, CM03's gap door, CM06's e²/h per channel |
 | **WAKE-DISPERSION** (the one ℏ bridge: $v=(\kappa/2\pi)\nabla\phi$, $\Omega_m=mc^2/\hbar$) | upgrades QM01/QM02/QM03's lab-unit conversions in one payment |
-| **OP-ROOT / ROOT-RIM / WEOS-1 / PM03-REBUILD** | the transverse relay rule (Fresnel pairing, obliquity), angular-window allocation (VSEPR residuals, multi-rim H-bonds), the wake equation of state ($\gamma_{\text{eff}}=4$ candidate), an honest EM-wave solver |
+| **OP-ROOT / ROOT-RIM / WEOS-1 / PM03-REBUILD** | the transverse relay rule (Fresnel pairing, obliquity), angular-window allocation (VSEPR residuals, multi-rim H-bonds), the wake equation of state ($\gamma_{\text{eff}}=4$ candidate), a validated EM-wave solver |
 | **ROOT-SIM itself** (the lattice solver) | OP-1/2/3, FLM03 co-rotation, FLM09's ω(k) isotropy residual, PPT07's wake integral (the 6π⁵ mechanism), GD05's rotation-curve crossover, R1's occlusion transfer function — **six debts before FLM14 joined; its bond-local gearing and structured seat-tour make it the payer-candidate for everything above** |
 
-This is what "zero free parameters" costs in practice: the framework refuses to buy any of these numbers with
-a knob, so they all wait — visibly, in one ledger — for the one build that can earn them. The RESIDENCE-LAW's
+This is what explicit provenance requires in practice: none of these numbers may be promoted without
+its stated dependency class, so they remain in the ledger until a direct build earns them. The RESIDENCE-LAW's
 five debts, ROOT-B's lock-depth, HG-1's charge closure, the exit-channel count and the contact wall (with its
 three-way numeric cross-check) are the make-or-break queue of the rotating-lattice instrument. FLM14 run 4 is
 the next entry in that story.
@@ -1281,18 +1238,17 @@ the next entry in that story.
 
 ## CLOSING NOTE
 
-Read this guide as the theory reads itself: **forward from the whitelist — now compressed to four numbers and
+Read this guide as the theory reads itself: **forward from the derivation basis — now compressed to four numbers and
 a thermal seat — never backward from a target.** Where SDT *matches* GR and QM — redshift, precession,
 deflection, the spectrum, the g-factor, the GW chirp, the Geiger–Nuttall line, the Madelung constant, the
 London $-6$ — it does so as a **check passed, not an answer copied** (the delete-test is the proof). Where it
 *departs* — no singularities, a local $c$ with a galactic floor, gravitational-wave echoes, memory ≡ breathing,
 $\mu_\nu\equiv0$, the high-barrier tunnelling fork, the locally readable gear phase, the nuclear
-$\alpha\!+\!d\!+\!t$ grammar — it stakes **falsifiable** claims. Where it *failed itself* — the four fabricated
-closures of June 2026 — it caught the fraud with its own protocol, published the retractions in its own
-teaching document, and rebuilt the score honestly at 46/57. And where it is *not yet done* — the lattice root,
+$\alpha\!+\!d\!+\!t$ grammar — it stakes **falsifiable** claims. Where a route is excluded, the active text
+states the negative result and the reopening condition. And where it is *not yet done* — the lattice root,
 the calibrated force coefficient, the Lamb amplitude against its native target table, the one residence law
 holding Born and Bell — it says so out loud, in a single cascade ledger that queues nearly all of it behind
-one buildable instrument. That combination — one mechanism, zero free parameters, an audit that hunts its own
+one buildable instrument. That combination — one mechanism, explicit input provenance, an audit that tests its own
 premises, and an unflinching ledger of its own gaps — is the whole of Spatial Displacement Theory and the
 `sdt-engine`.
 

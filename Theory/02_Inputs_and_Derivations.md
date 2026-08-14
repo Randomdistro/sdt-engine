@@ -1,17 +1,24 @@
-# Measured Inputs & Derived Quantities
+# Dependency Provenance & Derived Quantities
 
-The SDT engine requires **8 measured inputs (incl. ℓ_P as the one dimensional seed — Axiom R1 — and k_B via aT⁴)** (or 9 if W+1 is unproven). Everything else derives.
+> Scale status: `derivelist/README.md`. `ℓ_P` is the dimensional seed; `c`, `k_B`, `e` are unit
+> bridges; `{ℏ, m_e, m_p}` are one mass/action seat; `α` is hydrogen’s koppa rung; `T_CMB` is a
+> FIRAS clock. Tables below are the engine’s computational cascade from `laws.hpp` lookup values.
 
-## Independent Inputs
+The SDT engine keeps numerical seats, bridges, measured boundary facts and
+comparison data in `sdt::laws::measured`. That namespace is a lookup location,
+not a scientific-status class. The cascade below records how each value enters.
 
-| Constant | Value | Source | Role |
-|----------|-------|--------|------|
-| $c$ | 299,792,458 m/s | SI exact | Relay speed |
-| $\hbar$ | 1.054571817 × 10⁻³⁴ J·s | SI exact | Planck quantum |
-| $\alpha$ | 7.2973525693 × 10⁻³ | CODATA 2018 | Wake coupling (W=1 torus) |
-| $m_e$ | 9.1093837015 × 10⁻³¹ kg | CODATA 2018 | Electron exclusion cost |
-| $m_p$ | 1.67262192369 × 10⁻²⁷ kg | CODATA 2018 | Proton exclusion cost |
-| $T_{\text{CMB}}$ | 2.7255 K | FIRAS/Planck | Current convergence temperature |
+## Dependency roles
+
+| Quantity | Numerical source | Dependency role |
+|----------|------------------|-----------------|
+| $\ell_P$ | CODATA lookup | Axiom R1: irreducible dimensional seed |
+| $c$ | SI exact | Relay-speed unit bridge |
+| $\hbar$ | CODATA lookup | One mass/action seat; W=1 circulation role |
+| $\alpha$ | hydrogen spectroscopy (APS05/PPT02) | Derived hydrogen koppa rung; topology-only origin remains open |
+| $m_e$ | CODATA lookup | Numerical representative of the mass/action seat |
+| $m_p$ | CODATA lookup | Same seat through the PPT17 shared-input packing construction |
+| $T_{\text{CMB}}$ | FIRAS | Measured mechanical boundary state of present convergence |
 
 ## Derived Quantities (Stage by Stage)
 
@@ -23,7 +30,8 @@ The SDT engine requires **8 measured inputs (incl. ℓ_P as the one dimensional 
 | $\ell_P$ | 1.616255 × 10⁻³⁵ m (measured) | Planck length |
 | $N$ | $R_{\text{CMB}}/\ell_P$ | 5.894 × 10⁶¹ |
 
-> **Note:** $\ell_P$ is a *measured primitive*, not derived from $G$. SDT prohibits $G$ as a fundamental input. The standard-physics relation $G = \ell_P^2 c^3 / \hbar$ is a *consequence* of the whitelist — $G$ is the output, not the source.
+> **Note:** $\ell_P$ carries Axiom-R1 seed status. It is not obtained from a
+> body-source constant or from a benchmark target.
 | $\varepsilon$ | $u_{\text{CMB}} \ell_P^3$ | 1.761 × 10⁻¹¹⁸ J |
 | $\Phi$ | $N\varepsilon$ | 1.038 × 10⁻⁵⁶ J |
 | $P_{\text{conv}}$ | $\Phi/\ell_P^3$ | 2.459 × 10⁴⁸ Pa |
@@ -52,12 +60,14 @@ The SDT engine requires **8 measured inputs (incl. ℓ_P as the one dimensional 
 | $V_{\text{disp},p}$ | $3 m_p \ell_P^3 c^2 / \Phi$ | 1.834 × 10⁻⁵⁸ m³ |
 | $P_{\text{cf}}$ | $\rho_{\text{eff}} c^2 = P_{\text{conv}}/3$ | ✓ identity |
 
-## Remaining Open Inputs
+## Remaining derivational debts
 
 | Quantity | Status | Path to closure |
 |----------|--------|----------------|
-| $\alpha$ | Measured | Derive from W=1 torus mode partition ($v_P/v_T$?) |
-| $m_p/m_e$ | Measured | Derive from W=3 vs W=1 equilibrium |
-| $R_p$ | **Conjectured** | $4\hbar/(m_p c)$ to 0.02% |
+| topology-only origin of $\alpha$ | **OPEN** | Derive the spectroscopic rung from W=1 topology without reading it back from the spectrum |
+| absolute mass/action-seat magnitude | **OPEN** | Close the Law-IV engaged-volume normalization without consuming a particle mass |
+| $m_p/m_e$ packing map | **SHARED-INPUT CONSTRUCTION** | Volumetric map closed by PPT17; not an independent prediction |
+| $R_p=(W+1)\hbar/(m_pc)$ | **PENDING** | Derive the W+1 boundary from trefoil lock/action dynamics |
 
-If $\alpha$ and $m_p/m_e$ close, the terminal input set is: $\ell_P$, $T_{\text{CMB}}$, and $d=3$.
+The terminal description is an acyclic ledger: dimensional seed, mass/action
+seat, unit bridges, derived relations, and measured mechanical boundary facts.

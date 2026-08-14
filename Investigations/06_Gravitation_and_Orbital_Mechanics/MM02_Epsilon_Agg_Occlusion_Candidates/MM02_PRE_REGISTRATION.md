@@ -22,7 +22,7 @@ Identity gate uses **`ε_p`** (same mass species as `koppa_per_baryon`).
 `ε_u/ε_p = m_p/m_u ≈ 1.007` is a disclosed census choice, not a mechanism.
 
 `G`, `M_☉`, and `R_g` are **forbidden inside candidate constructions**.  
-`l_P`, `c`, `ℏ`, `m_p`, `m_e`, `α`, `a₀`, `r_e`, `R_p` are allowed (whitelist).
+`l_P`, `c`, `ℏ`, `m_p`, `m_e`, `α`, `a₀`, `r_e`, `R_p` are allowed (derivation basis).
 
 ## Instrument validation (before candidates)
 

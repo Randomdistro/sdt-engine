@@ -17,7 +17,7 @@ k_B·T_C = z · n_w · α·ℏ²/(2 m_e d²)
 | Ni | 12 | 0.606 | **378** | 627 | 0.60 |
 
 Ordering Co > Fe > Ni exact; every magnitude inside the committed 2× gate; inputs are measured
-crystallography (z, d), the measured aligned-wake count n_w, and whitelist constants (α, ℏ, m_e).
+crystallography (z, d), the measured aligned-wake count n_w, and derivation basis constants (α, ℏ, m_e).
 CALIBRATED parameters: **zero.** The exchange is the cluster's shared confinement door
 (ℏ²/2m_e d² — same door as CM01 v_pack and CM03 E_g) geared down by the handed-redirection
 coupling α (NP17 precedent). All three predictions run LOW (0.60–0.89) — a signed, systematic

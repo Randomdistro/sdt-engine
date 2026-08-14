@@ -42,7 +42,7 @@ No `r₀`, liquid-drop coefficient, or standard-model prediction entered the gat
 
 ## Scope / Limitations / Residuals
 
-- **Shared-input:** `R_p` is a measured whitelist constant and also enters `R(A)`. Tabulated nuclear radii are an independent compilation; this run does not claim independence from `R_p`.
+- **Shared-input:** `R_p` is a measured derivation basis constant and also enters `R(A)`. Tabulated nuclear radii are an independent compilation; this run does not claim independence from `R_p`.
 - **Light nuclei:** A&lt;16 residual remains large (RMS_rel ≈ 21%). Not used to exclude the heavy-domain law under the pre-registered domain.
 - **Observable class:** IAEA column is RMS charge radius; the formula is a boundary-radius construction. Agreement at the few-percent level does not prove charge-distribution identity.
 - **Does not reopen** NP21 geometric-floor tuning, Cassini residual, or BF080.

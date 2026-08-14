@@ -39,7 +39,7 @@ Hydrogen ground state: `r* ≡ a₀` (electropause = Bohr radius **as output**, 
 
 ---
 
-## 2. Native inputs (whitelist only)
+## 2. Native inputs (derivation basis only)
 
 | Symbol | Source | Role |
 |--------|--------|------|
@@ -106,7 +106,7 @@ P_{\text{eff}} = \frac{4 F_{\text{hold}} (r^*)^2}{\pi R_p^2 \lambda_e^2}
 
 Numerically: **`P_eff = 5.2252×10³¹ Pa`** — matches `law_III::P_eff` to **~10⁻¹²** relative. [EVIDENCE-CHAIN BREAK: the folder's own electropause_results.txt prints P_eff derived = 2.783582e+27 Pa (off by 1/α²; replay used r_e where this doc uses λ_e) yet stamps PASS. No recorded run evidences the 1e-12 match. Analytic chain may be right; treat as NOT-RUN until a real compile.]
 
-Equivalent whitelist closed form (using `R_p = 4ℏ/(m_p c)` and `λ_e = ℏ/(m_e c)`):
+Equivalent derivation basis closed form (using `R_p = 4ℏ/(m_p c)` and `λ_e = ℏ/(m_e c)`):
 
 \[
 P_{\text{eff}} = \frac{m_p^2 m_e^2 c^5}{4\pi \alpha \hbar^3}
@@ -134,7 +134,7 @@ So **`bridge::koppa_hydrogen`** is **output** of the electropause geometry, not 
 
 | Claim | Status |
 |-------|--------|
-| Derives α from pure geometry + `P_conv` alone | **FAIL** — PPT02 shows `P_conv` overshoots; α remains whitelist input |
+| Derives α from pure geometry + `P_conv` alone | **FAIL** — PPT02 shows `P_conv` overshoots; α remains derivation basis input |
 | Derives bulk optical `n` (water 1.33) from single-atom electropause | **FAIL** — needs many-body compression (OP01 Phase 1 OPEN) |
 | Proves Coulomb is “wrong” | **No** — shows Coulomb **equals** occlusion hold at `r*` (correspondence) |
 

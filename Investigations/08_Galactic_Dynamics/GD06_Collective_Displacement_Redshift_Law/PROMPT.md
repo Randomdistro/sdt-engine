@@ -3,7 +3,7 @@
 
 > **Author:** J. C. Harvey, Melbourne. **Status:** ROOT-SPEC · **REBUILT ON THE SOLID-ANGLE INSTRUMENT 2026-07-13** (supersedes the volume-𝔇 draft; §K.3, KILL-DEEPEN aware).
 > **Inherits:** `PERFECT_PROMPT_TEMPLATE.md` · `PROMPT_EXECUTION_PROTOCOL.md` · `HUNTER_PROTOCOL.md` §A–§K · `OPERATING_PROTOCOL.md` §0–§4.
-> **Engine:** `#include <sdt/laws.hpp>` only, and only for OBSERVED comparison values — **the derivation itself uses no whitelisted constant** (see The Two Rules). **Propose-only** on canon. **No G, no M(kg), no a₀, no ΛCDM/MOND/ψ, no "charge radius."**
+> **Engine:** `#include <sdt/laws.hpp>` only, and only for OBSERVED comparison values — **the derivation itself uses no dependency-traced constant** (see The Two Rules). **Propose-only** on canon. **No G, no M(kg), no a₀, no ΛCDM/MOND/ψ, no "charge radius."**
 > **Cascade root:** SPAWNS four children (§SPAWN). Build-once-pay-many (FLM10/ROOT-SIM tradition): one angular law pays the atomic field shift, the solar redshift, the sungrazer saturation, the bulge/cluster redshift, and the dissolution of dark matter.
 
 ---
@@ -12,7 +12,7 @@
 
 **RULE 1 — THE INSTRUMENT: occlusion IS the solid angle of sky subtended at a position.** Occlusion is *not* a volume-packing density, an "energy," or a "mass." It is **the fraction of the 4π sky, at a point, that matter covers** — computed by integrating solid-angle patches of blocked sky, saturating direction-by-direction. If a quantity is not the angular integral, it is not occlusion; naming it so is the renaming disease. (The volume-density draft this replaces committed exactly that error.)
 
-**RULE 2 — THE DIRECTION / DISSOLUTION RULE: geometry in, mass and constants out.** The only per-body input is the **geometric angular size of an occluder's boundary**. **Mass is an OUTPUT** (importing m to build the occluder is importing M — circular, since mass *is* the occlusion). And the whitelist {ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p} has been **dissolved into the four irreducibles elsewhere in the repo** — those units may **not** re-enter the derivation as primitives. **Θ is a dimensionless angle; the law needs no constant.** This is *why* the calculation is scale-free.
+**RULE 2 — THE DIRECTION / DISSOLUTION RULE: geometry in, mass and constants out.** The only per-body input is the **geometric angular size of an occluder's boundary**. **Mass is an OUTPUT** (importing m to build the occluder is importing M — circular, since mass *is* the occlusion). And the derivation basis {ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p} has been **dissolved into the four irreducibles elsewhere in the repo** — those units may **not** re-enter the derivation as primitives. **Θ is a dimensionless angle; the law needs no constant.** This is *why* the calculation is scale-free.
 
 ---
 
@@ -21,7 +21,7 @@
 1. **What don't we know?** — **The dimensionless law z_d = h(Θ) mapping the occluded sky-fraction Θ at a position to the depth redshift of light there** — and whether Θ for a bulge/bar/nucleus lands in the **dilute** branch (Θ≪1, h≈h′(0)·Θ, recovers weak-field ϟ/r) or the **saturated** branch (Θ→1, h→h_max, the sungrazer g→2 limit). The prior 0.1% estimate assumed dilute *and* used the wrong (volume/koppa) measure.
 2. **Why does it matter?** — Θ is dimensionless and scale-free, so **the atomic field shift (nucleus's Θ at the electron) and the galactic bulge redshift (bulge's Θ at a star) are the SAME law** — a fishbowl-gate prediction across ~30 orders (§0), calibrated where physics is measured to Hz (King plots) and carried to where it is measured in km/s (cluster gravitational redshift). Confirms mass = occlusion = pressure gradient of space (dark matter dissolved; GD05 verdict).
 3. **How will we find out?** — Compute Θ by direct solid-angle integration with saturation (κ=1−e^{−τ}) at four anchors (nucleus@electron, Sun-surface, sungrazer, bulge@star); derive the *form* of h from the GOM05 closure; read h′,h″ from the field shift + King nonlinearity; extrapolate h(Θ) with **zero fitted parameters**; validate on the cluster. Five gated phases (§④), four spawned children (§SPAWN).
-4. **What would prove us wrong?** — §⑧, each numeric. Chief kills: h that reduces identically to ϟ/r at all Θ (no new physics); a field shift not proportional to δΘ_nuc (bridge dead); a solar anchor that forces a whitelisted constant back in (Rule 2 violated → the coupling is not geometric); scale-invariance failing nucleus→cluster.
+4. **What would prove us wrong?** — §⑧, each numeric. Chief kills: h that reduces identically to ϟ/r at all Θ (no new physics); a field shift not proportional to δΘ_nuc (bridge dead); a solar anchor that forces a dependency-traced constant back in (Rule 2 violated → the coupling is not geometric); scale-invariance failing nucleus→cluster.
 5. **How will we know we're done?** — **Triple verdict:** prompt completion (A–F) × physics class (NATIVE/CONVERGENCE/DEGENERATE/KILLED/OPEN) × cross-scale grade (SCALE-INVARIANT/SCALE-BROKEN/UNDETERMINED). Class-A NATIVE SCALE-INVARIANT = z_d(bulge) and z_d(cluster) predicted from the King-plot h(Θ) within measured error, no fitted parameter, dilute limit = the Sun's 636 m/s, saturation limit = the sungrazer g→2.
 
 ---
@@ -127,7 +127,7 @@ $$\Theta(\mathbf{x})=\frac{1}{4\pi}\oint\!\big(1-e^{-\tau(\mathbf{x},\hat n)}\bi
 | field shift F_i, King NL, ⟨r²⟩ (Ca/Yb/Cd/Sr/Ba) | [[project_kingplot_movement_law]] + isotope data | Phase 2 calibrator = δΘ_nuc | ⚠ pull |
 | cluster gravitational redshift (Wojtak 2011) | literature (OBSERVED only) | Phase 4 validation | ⚠ pull |
 | mass = occlusion = pressure gradient (no localizable mass) | GD05 verdict | ontological premise | ✔ |
-| **PROHIBITED:** G, M(kg), a₀, ΛCDM, MOND, ψ, "charge radius", any whitelisted constant *in the derivation*, virial-as-derivation | — | kill on sight (§B/§G) | — |
+| **PROHIBITED:** G, M(kg), a₀, ΛCDM, MOND, ψ, "charge radius", any dependency-traced constant *in the derivation*, virial-as-derivation | — | kill on sight (§B/§G) | — |
 
 ---
 
@@ -140,13 +140,13 @@ $$\Theta(\mathbf{x})=\frac{1}{4\pi}\oint\!\big(1-e^{-\tau(\mathbf{x},\hat n)}\bi
 | T4 King NL = h″(0) | sign & size match derived curvature | root-1/3 → spawn A2 |
 | T5 crux | Θ_bulge branch (dense/dilute) computed, not assumed | if dilute: 0.1% stands, disk speed uncorrupted (honest) |
 | T6 scale-invariance | cluster z_d within Wojtak error, no fit | root-2: SCALE-BROKEN → spawn D2 |
-| T7 Rule-2 purity | no whitelisted constant in the derivation; σ_occ geometric | root-4: if f won't geometrize → DEFER to EMC01, not fake |
+| T7 Rule-2 purity | no dependency-traced constant in the derivation; σ_occ geometric | root-4: if f won't geometrize → DEFER to EMC01, not fake |
 | T8 mass is output | m_e,m_p,6π⁵ fall OUT of the geometry | root-4: any m-input = contraband |
 
 ---
 
 ## ⑨.E Four-root loop (run on every failure)
-root-1 CLAIM (instrument/closure wrong) · root-2 DEPENDENCY (field-shift, boundary sky-area, cluster data, EMC01 f) · root-3 PROMPT (h form / Θ-engine mis-scoped) · root-4 CONTRABAND (a whitelisted constant or mass smuggled into the derivation; virial; charge radius). The σ_occ-geometrization and any scale-break are **named OPEN closures** (§D), never amputations. Log each; shared roots once in `INVESTIGATION_STACK.md`.
+root-1 CLAIM (instrument/closure wrong) · root-2 DEPENDENCY (field-shift, boundary sky-area, cluster data, EMC01 f) · root-3 PROMPT (h form / Θ-engine mis-scoped) · root-4 CONTRABAND (a dependency-traced constant or mass smuggled into the derivation; virial; charge radius). The σ_occ-geometrization and any scale-break are **named OPEN closures** (§D), never amputations. Log each; shared roots once in `INVESTIGATION_STACK.md`.
 
 ## Brainstorm — leads (§K.3)
 - **Geometrizing f is the crown.** If the transfer function 2×10⁻¹⁷ is the boundary knot's sky-fraction at the electron (a pure angle), then EMC01's P_eff, the whole force hierarchy, AND this redshift law are one geometric object — and no coupling constant survives anywhere. This is the biggest prize in the cascade (XSD-B2).
@@ -155,7 +155,7 @@ root-1 CLAIM (instrument/closure wrong) · root-2 DEPENDENCY (field-shift, bound
 - **6π⁵ falls out, not in.** With mass as the sourced occlusion, m_p/m_e is a ratio of boundary sky-areas of the (2,3) trefoil and (1,1) loop — cross-link PPT03; never an input.
 
 ## ⑤ Success (triple verdict) · ⑥ Outputs
-Class A·NATIVE·SCALE-INVARIANT: h(Θ) derived + King-calibrated + both limits anchored + bulge branch computed + cluster within error, zero fitted parameters, σ_occ geometric. Honest floor (D/OPEN): Θ-engine built, h form + dilute/saturation anchors set, σ_occ-geometrization flagged to EMC01, bulge placed on the Θ-axis. Outputs: `RUN_LOG.md` · `xsd_theta_engine.cpp` (solid-angle integrator, no whitelisted constant in the physics) · `GD06_DERIVATION.md` · `GD06_VERDICT.md` · the four `spawn/XSD-*/PROMPT.md` (rebuilt) · CANON_FLAGS · STACK cascade-root entry.
+Class A·NATIVE·SCALE-INVARIANT: h(Θ) derived + King-calibrated + both limits anchored + bulge branch computed + cluster within error, zero fitted parameters, σ_occ geometric. Honest floor (D/OPEN): Θ-engine built, h form + dilute/saturation anchors set, σ_occ-geometrization flagged to EMC01, bulge placed on the Θ-axis. Outputs: `RUN_LOG.md` · `xsd_theta_engine.cpp` (solid-angle integrator, no dependency-traced constant in the physics) · `GD06_DERIVATION.md` · `GD06_VERDICT.md` · the four `spawn/XSD-*/PROMPT.md` (rebuilt) · CANON_FLAGS · STACK cascade-root entry.
 
 ---
 
@@ -167,7 +167,7 @@ Class A·NATIVE·SCALE-INVARIANT: h(Θ) derived + King-calibrated + both limits 
 - σ_occ rule committed: [geometric boundary sky-area | DEFER to EMC01 if f won't geometrize]
 - Branch boundary Θ* (commit before Phase 3): ____   ·   h″(0) sign committed before Phase 2: ____
 - Anchors: Sun 636 m/s (dilute) · sungrazer g→2 (saturated) · field shift (Θ_nuc) · Wojtak cluster (OBSERVED only)
-- Forbidden: any whitelisted constant IN THE DERIVATION; m as input; koppa as the general law; virial-as-pressure; "charge radius"; a galactic z_d not carried from the King-plot h(Θ)
+- Forbidden: any dependency-traced constant IN THE DERIVATION; m as input; koppa as the general law; virial-as-pressure; "charge radius"; a galactic z_d not carried from the King-plot h(Θ)
 ```
 | Trigger | PIVOT | If fails | Forbidden |
 |---------|-------|----------|-----------|
@@ -178,7 +178,7 @@ Class A·NATIVE·SCALE-INVARIANT: h(Θ) derived + King-calibrated + both limits 
 | cluster overshoot (T6) | spawn D2 break-scale | SCALE-BROKEN, name Θ* | fit a cluster coefficient |
 | any constant/mass in the derivation | remove it; re-derive in pure angle | root-4 contraband | smuggle it as "effective" |
 
-**Disallowed:** whitelisted constants in the derivation · m as input · fitted cross-scale coefficient · virial-as-pressure · koppa-as-general-law · "charge radius" · a galactic z_d not carried from the atom.
+**Disallowed:** dependency-traced constants in the derivation · m as input · fitted cross-scale coefficient · virial-as-pressure · koppa-as-general-law · "charge radius" · a galactic z_d not carried from the atom.
 
 ---
 

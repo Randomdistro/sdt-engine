@@ -388,3 +388,36 @@ forms, nothing added.
   native content is the bipartite doubling and the rolling-equator constraint; the rival
   needs a fitted spin–orbit strength to place its intruders, this law needs no strength
   parameter at all — the belt's location is geometric.
+
+## §10 — B38 synchrony-pricing freeze (2026-08-14)
+
+The residual descent-onset debt is tested with a contact graph that cannot read
+the magic-number schedule:
+
+```text
+FLM15 pair/joint engaged-volume kernel
+  -> bipartite p-n contact graph at tier n
+  -> deuteron-seat synchrony resistance
+  -> triton-seat synchrony resistance
+  -> DeltaR(n)=R_triton(n)-R_deuteron(n)
+  -> first energetically selected triton tier
+  -> compare with the recorded onset n=3
+```
+
+Frozen gates:
+
+1. The forward source contains no magic-number sequence, tier-onset target,
+   measured separation energy or per-tier coefficient.
+2. Every generated graph is connected, bipartite, and has no like-like contact;
+   all registered contact-point slip residuals are `<1e-10`.
+3. Tiers `n=0..6` are evaluated in one pass with the same contact/lock kernel.
+   The selection is the first sign change of `DeltaR`; no equality tolerance is
+   moved after the sweep.
+4. The crossing, if present, must be unique and remain on the same tier when
+   spatial and angular resolution are doubled. A crossing at `n=3` then tests
+   B38; another tier or no crossing is a measured miss, not a retuned rule.
+5. Alternate-sublattice and shuffled-contact controls must either remove the
+   crossing or shift it. If they reproduce the same onset, the instrument lacks
+   discriminatory power and the onset remains `PENDING`.
+6. Only after the tier is sealed may the closure schedule and measured
+   compaction kinks be loaded for comparison.

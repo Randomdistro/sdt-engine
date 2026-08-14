@@ -13,9 +13,9 @@
 #endif
 #include <vector>
 #include <string>
-#include "star_data.hpp"
+#include "../../Investigations/07_Cosmology_and_Redshift/CR01_Redshift_Decomposition/star_data.hpp"
 
-using namespace cq18;
+using namespace cr01;
 
 // Derive semi-major axis from T and Ϟ_star (SDT Kepler, always uses SMA)
 static double sma_m(double T_s, double Koppa_star_m) {

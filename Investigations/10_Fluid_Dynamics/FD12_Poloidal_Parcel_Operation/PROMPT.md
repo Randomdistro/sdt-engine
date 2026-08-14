@@ -2,7 +2,7 @@
 
 > **Author:** J. C. Harvey, Melbourne. **Status:** SPEC, written BEFORE the tool (gates below are
 > pre-commitments). **Run class target: DIRECT** (main session, no agents).
-> **Inherits** R0–R5 anti-creep verbatim (whitelist inputs; no rival axioms; honesty over success).
+> **Inherits** R0–R5 anti-creep verbatim (derivation basis inputs; no rival axioms; honesty over success).
 
 ## The claim (Harvey, verbatim core)
 

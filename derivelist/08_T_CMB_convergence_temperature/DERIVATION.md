@@ -1,7 +1,7 @@
 # T_CMB — present CMB temperature (boundary state, not a constant)
 
 > **J. C. Harvey, Melbourne — 2026-07-30.** Measured anchor: 2.7255 K (FIRAS).
-> Whitelist entry: `laws.hpp:165`. Primary records: CR13
+> derivation basis entry: `laws.hpp:165`. Primary records: CR13
 > (`Investigations/07_Cosmology_and_Redshift/CR13_CMB_Backtrack_to_Closest_Contact/CR13_VERDICT.md`),
 > CR07 (octave ladder), TD06 (blackbody from counted modes).
 > Re-run: `../derivelist_results.txt` §[8].
@@ -34,7 +34,7 @@ independent origin for the absolute temperature. What it does close is the
 wavelength question and the coherence constraint: FIRAS y < 1.5×10⁻⁵ forces
 source temperature coherence < 0.55% (broad-distance bath excluded ×183).
 
-**FLM06 cross-link.** T_CMB sits in the thermal seat of the reduced whitelist
+**FLM06 cross-link.** T_CMB sits in the thermal seat of the reduced derivation basis
 (FLM13); the Seed Theorem quantity set includes it and still cannot build ℓ_P —
 temperature ratios reach ~10³, not 10⁶¹.
 

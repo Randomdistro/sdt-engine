@@ -6,7 +6,7 @@
 > **rotational speeds and radii are strictly regenerated** from one invariant. Geometry,
 > interspersal, rotational velocities, relationships, products.
 > **Honesty spine:** [D]=derived zero-param · [C]=model's constructed assignment (not
-> proven unique) · [O]=owed. Numbers from CODATA + whitelist R_p, r_e, a₀, α, η=π/√18.
+> proven unique) · [O]=owed. Numbers from CODATA + derivation basis R_p, r_e, a₀, α, η=π/√18.
 
 ---
 
@@ -172,7 +172,7 @@ the swept extent behind light-nucleus size (§9).
 > The real content: a **contact-instant** geometry fixes the binding, while the **swept**
 > extent of the same rotating pair fixes the size. Both are dynamic. Neither is static.
 
-Zero-fit, whitelist constants only. Result splits clean:
+Zero-fit, derivation basis constants only. Result splits clean:
 
 **Regenerates [D]:**
 - **Deuteron binding** = 3αℏc/D with D=(7/3)R_p = **(9/7)·αℏc/R_p = 2.200 MeV** vs 2.2246

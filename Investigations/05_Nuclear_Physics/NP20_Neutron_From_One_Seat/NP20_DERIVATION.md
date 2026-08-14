@@ -69,7 +69,7 @@ pred = ½·(z_seat − 1)·m_e c² = ½ · 2.3495 · 0.5110 MeV = 0.6003 MeV    
 **Why it does not pay.** The dimensionless factor the geometry would need to *predict* is
 `0.782 / 0.511 = 1.531` [OBSERVED-TARGET]. None of {2.349, 1.830, 1.209} equals 1.531; the ½·(z−1)
 route gives 1.175. Landing 0.782 requires an extra **×1.303 coefficient** [CALIBRATED(1)] with no
-whitelist justification. The geometry **brackets** 0.782 (0.42–0.60 MeV across the candidate factors)
+derivation basis justification. The geometry **brackets** 0.782 (0.42–0.60 MeV across the candidate factors)
 but does not **generate** it.
 
 **DECIDE: OPEN.** Do not insert the ×1.303 knob; do not widen the tolerance. The resistance-magnitude
@@ -94,7 +94,7 @@ bracketing the number is not predicting it.)*
   *forces* the negative; the sign is carried in, not derived. So T1 is **not violated** (no positive
   sign → no KILL), but the negative sign is **not a native prediction** either.
 - **Magnitude.** The required gearing **−0.002563** matches **neither** α (0.00730), **nor** k²
-  (0.2986), **nor** any clean whitelist combination. Reproducing −1.913 μ_N is an **IDENTITY** (the
+  (0.2986), **nor** any clean derivation basis combination. Reproducing −1.913 μ_N is an **IDENTITY** (the
   measured increment fed back in), not a prediction.
 
 **DECIDE: OPEN.** Correct-sign *would* be a partial win only if the sign were derived; here it is
@@ -112,7 +112,7 @@ to get the moment, and "3.074≈3" absorbs a 2.5% fudge). Rejected under stress 
 
 | Consumed by | Quantity | Tag |
 |---|---|---|
-| BOTH (shared geometry) | `R_p`, `v_seat`, `z_seat`, `sense` | whitelist / DERIVED / ASSUMED-sign |
+| BOTH (shared geometry) | `R_p`, `v_seat`, `z_seat`, `sense` | derivation basis / DERIVED / ASSUMED-sign |
 | MASS only | ×1.303 coefficient | **CALIBRATED(1)** |
 | MOMENT only | gearing −0.002563 | **CALIBRATED(1)** |
 
@@ -127,17 +127,17 @@ each is itself only **bracketed** (mass −23%; moment magnitude via identity, s
 
 ## 5. Ledger of every constant used
 
-| Constant | Value | Whitelist? | Tag |
+| Constant | Value | derivation basis? | Tag |
 |---|---|---|---|
 | `measured::R_p` | 8.414e-16 m | measured observable | MEASURED-INPUT |
 | `measured::r_e` | 2.8179e-15 m | measured observable (=α²a₀) | MEASURED-INPUT |
 | `bridge::k_proton_surface` | 0.5464 | derived (1/α·√(R_p/a₀)) | DERIVED |
 | `law_VI::traction::v_phase_proton_surface` | 1.83016 c | derived | DERIVED |
-| `measured::m_e, m_p, m_n` | — | whitelist / measured | MEASURED-INPUT |
+| `measured::m_e, m_p, m_n` | — | derivation basis / measured | MEASURED-INPUT |
 | `measured::MeV_to_J` | 1.6022e-13 | unit conversion | MEASURED-INPUT |
 | `measured::mu_P, mu_N` | +2.793, −1.913 μ_N | **anchors (borrowed μ_N unit)** | OBSERVED-TARGET |
-| ×1.303 (mass) | — | **not whitelist** | CALIBRATED(1) |
-| gearing −0.002563 (moment) | — | **not whitelist** | CALIBRATED(1) |
+| ×1.303 (mass) | — | **not derivation basis** | CALIBRATED(1) |
+| gearing −0.002563 (moment) | — | **not derivation basis** | CALIBRATED(1) |
 
 **No G / M / GM, no quarks / gluons / W-boson, no wavefunctions/fields, no "charge radius", no G_F.**
 μ_N flagged borrowed throughout. Two CALIBRATED(1) knobs → closure fails; both documented, neither hidden.

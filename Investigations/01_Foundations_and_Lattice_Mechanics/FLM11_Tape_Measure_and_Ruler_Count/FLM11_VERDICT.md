@@ -2,7 +2,7 @@
 
 > **Author:** J. C. Harvey, Melbourne. **Run:** 2026-07-01.
 > Tool: `flm11_ruler_count.py` → `flm11_results.txt` (exit 0, all gates met). Full argument: `FLM11_DERIVATION.md`; log: `RUN_LOG.md`.
-> Inputs: whitelist + `law_VI` integers only. Zero fitted parameters (CALIBRATED budget 0, unused).
+> Inputs: derivation basis + `law_VI` integers only. Zero fitted parameters (CALIBRATED budget 0, unused).
 
 ## Prompt completion: **C** — all four phases (P1 Lemma → P2 count → P3 residue → P4 map) executed as written; the DoF→property *assignment* rests on 1–2 argued grippability claims, so not an unqualified A.
 

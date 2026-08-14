@@ -13,7 +13,7 @@ Freeze whether SDT presently supplies an **executable native map**
 R_pred_RMS(A) = Map( R_boundary(A); profile, charge-weighting, finite-proton )
 ```
 
-with every parameter from the measured whitelist + packing geometry only — **before**
+with every parameter from the measured derivation basis + packing geometry only — **before**
 any holdout comparison to IAEA RMS charge radii.
 
 Phase A does **not** adjudicate EMPIRICALLY SURVIVES / EXCLUDED against radii.

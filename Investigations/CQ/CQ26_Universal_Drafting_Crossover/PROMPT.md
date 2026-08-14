@@ -251,7 +251,7 @@ For **every** input file, at read time, the engine records and prints: absolute 
 - No `G`, no `M` in kg as fundamentals: gravity enters only via `koppa = v²R/c²`. `GM_equivalent()` is for unit conversion in cross-checks, never as an input.
 - No dark matter, no dark energy, no ΛCDM, no NFW halo, no MOND `a₀` **as a fitted input** (the floor `a₀` here is DERIVED `c·H₀/2π`; if the analysis ever tunes it, the result is CALIBRATED and must say so).
 - No quantum wavefunctions / fields-as-primitives at the atomic scale: emission via the movement budget + kinematic ratio only (CQ13 lineage).
-- Permitted inputs: `{ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p}` + measured observables in measured units. Every constant cites its `laws.hpp` line.
+- declared dependencies: `{ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p}` + measured observables in measured units. Every constant cites its `laws.hpp` line.
 
 ---
 

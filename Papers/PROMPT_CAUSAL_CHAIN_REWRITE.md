@@ -156,7 +156,8 @@ delete, merge, or reorder these.
   each with: what would pay it, what dies if it fails. Minimum set: ℓ_P seed; α underived;
   ε = hν; the ν transport coefficient (λ_mfp from knot density — gates FD01/02/08, TD04/08);
   forward ℓ_c; the freedom-climb theorem; C_K; intermittency high orders; FLM12 D1/D2;
-  FLM14 root; the 6π⁵ mass-ratio hook [OPEN, unique zero-param, look-elsewhere applies];
+  FLM14 root; the 6π⁵ mass-ratio hook [RESOLVED CONSTRUCTION by PPT17,
+  shared-input, look-elsewhere context retained];
   the APS04 5.25×-class residuals; degenerate-seat run; GD shape. **The debts are links,
   not footnotes — the map of debts is the document's spine claim.**
 
@@ -293,7 +294,7 @@ the per-field file names are permanent.
   you state any.
 - Every OPEN is stated in voice ("owed," "unpaid," "on loan," "parked"), never buried, and
   echoed in L20.
-- The three-pegs reading of the whitelist (length, coupling, thermometer — the rest
+- The three-pegs reading of the derivation basis (length, coupling, thermometer — the rest
   unit-bridges) is a KEEPER from the current draft: preserve and sharpen it.
 - No invented process stories to make prose flow: a bookkeeping difference is not a
   mechanism; if a link's mechanism is unknown, the [MECHANISM] slot says what is known and

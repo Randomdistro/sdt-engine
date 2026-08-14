@@ -29,7 +29,7 @@ int main() {
     const double A_Sun  = 4.0 * std::numbers::pi * R_Sun * R_Sun;
     const double disc   = std::numbers::pi * R_Sun * R_Sun;
     const double z_Sun  = 1.0 / (bridge::k_Sun * bridge::k_Sun);   // 2.124e-6
-    const double sigma_SB = 5.670374419e-8;       // W/m^2/K^4 = a_rad*c/4 (whitelist {k_B,hbar,c})
+    const double sigma_SB = 5.670374419e-8;       // W/m^2/K^4 = a_rad*c/4 (derivation basis {k_B,hbar,c})
     const double sigma_from_arad = measured::a_rad * measured::c / 4.0;
 
     std::printf("SAR03 — Solar Luminosity from Convergence Recycling (J. C. Harvey, 2026-07-03)\n");

@@ -1,7 +1,7 @@
 # ℓ_P — Planck length (Axiom R1 — the one dimensional seed)
 
 > **J. C. Harvey, Melbourne — 2026-07-30.** Adopted value: 1.616255×10⁻³⁵ m.
-> Whitelist entry: `laws.hpp:112-124` (full provenance block in-header).
+> derivation basis entry: `laws.hpp:112-124` (full provenance block in-header).
 > Primary record: FLM06 (`Investigations/01_Foundations_and_Lattice_Mechanics/FLM06_Spation_Scale_Closure/`).
 > Re-run: `../derivelist_results.txt` §[4].
 
@@ -36,12 +36,12 @@ A re-expression, not a derivation (`laws.hpp:117-123` states this in-header).
 - The Seed Theorem is a dimensional-analysis result over the stated quantity
   set; it does not exclude a future *counting* argument that produces 10⁶¹
   natively — none exists in the repo today.
-- The standard-physics relation G = ℓ_P²c³/ℏ is a consequence of the whitelist,
+- The standard-physics relation G = ℓ_P²c³/ℏ is a consequence of the derivation basis,
   not a source (`Theory/02_Inputs_and_Derivations.md:26`).
 
 ## Status
 
 **NO line drawn — and that is the theorem.** ℓ_P stays Axiom R1, the one
 irreducible dimensional seed the framework is permitted. Crossing it off is
-mathematically excluded (FLM06 Seed Theorem); the whitelist cannot compress
+mathematically excluded (FLM06 Seed Theorem); the derivation basis cannot compress
 below one ruler, and this is the ruler.

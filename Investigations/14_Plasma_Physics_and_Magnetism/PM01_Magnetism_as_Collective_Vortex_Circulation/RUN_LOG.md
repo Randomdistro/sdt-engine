@@ -30,7 +30,7 @@
 ### The wall note (committed before run)
 
 `laws.hpp` (EMC02, lines 131–135) certifies the elementary charge e as an **irreducible Tier-1
-input** — not derivable from the whitelist. The "native handed gain" PM01 needs (a signed coupling
+input** — not derivable from the derivation basis. The "native handed gain" PM01 needs (a signed coupling
 between a W=1 vortex's handedness and ambient swirl, with push ∝ swirl density) is dimensionally
 e-shaped. If the run confirms the two-channel split (signed-but-not-∝B vs ∝B-but-unsigned), the
 honest verdict is that PM01's gain question and EMC02's charge question are the SAME open problem,

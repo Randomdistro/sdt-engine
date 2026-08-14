@@ -45,7 +45,7 @@ batch boundaries. The docket's one-line summaries are indexing aids only — rul
 sources in each row. §X1 items are permanently excluded (do not audit, recover, or cite); §X2/§X3
 are out of scope for you.
 
-## 3. Blinding — read WHITELIST, everything else is closed
+## 3. Blinding — read derivation basis, everything else is closed
 
 You share a repo with the other front, so blinding is by discipline, not by wall. You may read ONLY:
 
@@ -69,7 +69,7 @@ surfaces one of these, do not open it.
 **Honest-blinding doctrine.** Item folders have accreted post-kill annotations; you will
 occasionally see things you shouldn't. The discipline: **rule on primary evidence only**, and
 declare every exposure. Any re-adjudication/recovery/status content you encounter inside
-whitelisted files gets a row in `TWIN_CONTAMINATION_LEDGER.md`: *(file · what was seen, one line ·
+dependency-traced files gets a row in `TWIN_CONTAMINATION_LEDGER.md`: *(file · what was seen, one line ·
 could it steer your ruling? y/n)* — then proceed on primary evidence. An empty ledger on a shared
 repo is a red flag, not a badge; a long honest ledger with clean rulings is the good outcome.
 

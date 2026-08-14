@@ -4,7 +4,7 @@
  * @author James Tyndall, Melbourne
  * @date June 2026
  *
- * PROBLEM: Derive the elementary charge e from whitelist primitives
+ * PROBLEM: Derive the elementary charge e from derivation basis primitives
  *   {ℓ_P, c, ℏ, k_B, T_CMB, d=3}
  * removing e from the independent input list.
  *
@@ -118,10 +118,10 @@ void test_candidate_1_pressure_volume() {
     // Better approach: Use the coupling identity
     // From laws.hpp coulomb_identity: k_e e² = α ℏ c
     // So e² = (α ℏ c) / k_e
-    // Now try to express α ℏ c in terms of whitelist + P_conv
+    // Now try to express α ℏ c in terms of derivation basis + P_conv
 
     // α = r_e / λ_C_e = r_e m_e c / ℏ
-    // So α ℏ c = r_e m_e c²  -- but r_e is not in whitelist
+    // So α ℏ c = r_e m_e c²  -- but r_e is not in derivation basis
 
     printf("Pressure × volume product:\n");
     printf("  P_conv = %.6e Pa\n", P_conv);
@@ -156,7 +156,7 @@ void test_candidate_1_pressure_volume() {
     printf("  e = √(α ℏ c / k_e) = %.6e C\n", e_identity);
     printf("  Relative error: %+.3f%%\n", (e_identity - e_charge) / e_charge * 100.0);
 
-    // Now: can we express (α ℏ c) from whitelist?
+    // Now: can we express (α ℏ c) from derivation basis?
     // α = g_electron = r_e × m_e × c / ℏ (from law_VI::winding)
     // So α ℏ c = r_e × m_e × c²
     // But r_e is defined as α × ℏ / (m_e c), so circular.
@@ -202,7 +202,7 @@ void test_candidate_2_linking_number() {
 // CANDIDATE 3: e from W+1 boundary radius (electron wake)
 //
 // Hypothesis: The electron wake radius r_e is related to W=1 torus geometry
-// and expressing r_e in terms of whitelist constants gives e.
+// and expressing r_e in terms of derivation basis constants gives e.
 //
 // From W+1 conjecture: R_p = 4 ℏ / (m_p c)  (W=3 proton)
 // Analogously: r_e = ? ℏ / (m_e c)          (W=1 electron)
@@ -298,10 +298,10 @@ void test_candidate_3_W1_boundary_radius() {
 // ═══════════════════════════════════════════════════════════════════════
 
 void dimensional_analysis() {
-    printf("\n=== DIMENSIONAL ANALYSIS: e from Whitelist ===\n");
+    printf("\n=== DIMENSIONAL ANALYSIS: e from derivation basis ===\n");
     printf("Available: {ℓ_P, c, ℏ, k_B, T_CMB, d=3}\n\n");
 
-    printf("Whitelist dimensions:\n");
+    printf("derivation basis dimensions:\n");
     printf("  ℓ_P: [m]           Planck length\n");
     printf("  c:   [m/s]         Speed of light\n");
     printf("  ℏ:   [J·s]         Reduced Planck constant\n");
@@ -318,7 +318,7 @@ void dimensional_analysis() {
     printf("  ℏ c = %.6e J·m\n", hbar_c);
 
     // ℏ c / (ℓ_P² m_e c²) = ℏ / (ℓ_P² m_e c)
-    // But m_e is not in whitelist!
+    // But m_e is not in derivation basis!
 
     // k_B T has dimensions [J]
     double k_B_T = k_B * T_CMB;
@@ -336,7 +336,7 @@ void dimensional_analysis() {
 
     // None of these give [C] = [A·s] directly.
 
-    printf("\nPROBLEM: No dimension-preserving combination of whitelist\n");
+    printf("\nPROBLEM: No dimension-preserving combination of derivation basis\n");
     printf("constants yields [C] without knowing ε₀ or k_e (which encode e).\n\n");
 
     printf("INSIGHT: The dimensional closure requires either:\n");
@@ -360,7 +360,7 @@ int main() {
     printf("╚════════════════════════════════════════════════════════════════╝\n");
 
     printf("\nRESEARCH SETUP:\n");
-    printf("  Whitelist: ℓ_P = %.6e m\n", l_P);
+    printf("  derivation basis: ℓ_P = %.6e m\n", l_P);
     printf("             c = %.6e m/s\n", c);
     printf("             ℏ = %.6e J·s\n", hbar);
     printf("             k_B = %.6e J/K\n", k_B);

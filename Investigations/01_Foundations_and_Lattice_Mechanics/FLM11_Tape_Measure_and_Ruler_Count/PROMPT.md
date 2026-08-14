@@ -18,7 +18,7 @@
 
 ## §0 Anti-creep protocol (R0–R5)
 
-- **R0 — Permitted inputs:** `{ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p}` + measured observables in their measured units. The `sdt::laws::measured` whitelist is the only external fact source.
+- **R0 — declared dependencies:** `{ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p}` + measured observables in their measured units. The `sdt::laws::measured` derivation basis is the only external fact source.
 - **R1 — Prohibited:** wavefunctions, fields-as-primitives, quarks/gluons, virtual particles as objects, dark matter/energy, ΛCDM, wave–particle duality. None may enter the chain — not even as "intuition."
 - **R2 — No charge-as-substance:** never write "charge radius." `e` is a **unit-bridge**; charge is **handed redirection** of through-flow. A "charge ruler" reads handedness, not a stored substance.
 - **R3 — Native yardsticks only:** express results in SDT-native units (electron wake, koppa ϟ = R/k², winding W, traction T = 3(W+1)), never μ_B / magnetons / imported SI-disguised constants.

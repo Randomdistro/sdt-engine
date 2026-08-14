@@ -258,7 +258,7 @@ Nothing else is tuned.
 ### [FORM DERIVED / MAGNITUDE = α (single seat)]
 - occlusion force `F = (π/4) P_eff R_occ,1² R_occ,2² / r²`
 - **`P_eff = m_p² m_e² c⁵ / (4π α ℏ³)`** — engine-verified (EMC04, 0.04%); **α is the only coupling**, the rest is
-  whitelist → **the single-seat survives; P_eff is not a hidden second coupling**
+  derivation basis → **the single-seat survives; P_eff is not a hidden second coupling**
 - `a₀ = c²/C_H = cH₀/2π` — the horizon-circumference handoff rate (form derived; the `2π`=circumference, not
   radius, is the load-bearing choice); magnitude inherits the `H₀` boundary-state
 

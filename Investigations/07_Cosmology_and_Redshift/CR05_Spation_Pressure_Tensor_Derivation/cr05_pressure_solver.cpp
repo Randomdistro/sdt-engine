@@ -250,9 +250,7 @@ double transfer_function_f() {
 }
 
 /**
- * @brief Verify transfer function is now purely topological
- * Check: f depends only on Φ, P_conv, R_CMB (all topology-driven)
- * NOT on: hydrogen calibration, arbitrary fitted constant
+ * @brief Audit the transfer-function dependency chain.
  */
 void verify_transfer_function_closure() {
     printf("\n=== Transfer Function Closure Verification ===\n\n");
@@ -266,21 +264,12 @@ void verify_transfer_function_closure() {
     printf("Dependencies of f:\n");
     printf("  P_eff ← hydrogen charge radius R_p, Coulomb constant k_e\n");
     printf("  P_conv ← R_CMB, P_rad (radiation pressure), shell count N\n");
-    printf("  R_CMB ← H₀ (DERIVED in CR05), z_rec, comoving distance integral\n\n");
+    printf("  R_CMB ← observed boundary scale\n\n");
 
     printf("Closure Status:\n");
-    printf("  Before CR05: R_CMB is CLASS X (observed external input)\n");
-    printf("              ⟹ f is CLASS E (CALIBRATED, depends on hydrogen)\n\n");
-    printf("  After CR05:  R_CMB is CLASS C (derived from H₀ + topology)\n");
-    printf("               H₀ is CLASS C (derived from pressure tensor)\n");
-    printf("              ⟹ f is CLASS C (CONVERGENCE, fully topological)\n\n");
-
-    printf("Verification: f now depends ONLY on:\n");
-    printf("  • Φ = N × ε  (convergence burden, topology-derived)\n");
-    printf("  • R_CMB  (from comoving distance integral, now DERIVED)\n");
-    printf("  • P_eff  (from hydrogen structure, STRUCTURAL not CALIBRATED)\n\n");
-
-    printf("VERDICT: Transfer function f = CLASS C ✓ CLOSED\n\n");
+    printf("  R_CMB remains observed and P_eff remains hydrogen-calibrated.\n");
+    printf("  Therefore f remains CLASS E.\n\n");
+    printf("VERDICT: CR05 does not close the transfer function.\n\n");
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -290,7 +279,7 @@ void verify_transfer_function_closure() {
 int main() {
     printf("╔════════════════════════════════════════════════════════════════════╗\n");
     printf("║         CR05 SPATION PRESSURE TENSOR SOLVER                        ║\n");
-    printf("║    Derivation of H₀ from Pressure Tensor & Topological Closure     ║\n");
+    printf("║    Audit of H₀-from-pressure and transfer-closure candidates      ║\n");
     printf("╚════════════════════════════════════════════════════════════════════╝\n\n");
 
     // ═══════════════════════════════════════════════════════════════════════
@@ -332,7 +321,7 @@ int main() {
         double P_z = pressure_at_z(z, sdt::P_conv);
         double rho_ratio = std::pow(1.0 + z, 3.0);
         double w = P_z / (sdt::rho_b_z0 * rho_ratio * sdt::c * sdt::c);
-        printf("%7.0f    | %.3e | %7.3e | %.3e | DERIVED\n", z, P_z, rho_ratio, w);
+        printf("%7.0f    | %.3e | %7.3e | %.3e | CANDIDATE\n", z, P_z, rho_ratio, w);
     }
     printf("\n");
 
@@ -354,9 +343,9 @@ int main() {
     printf("  Prediction: requires normalization [FAILS]\n\n");
 
     printf("Model D (Bootstrap-FLRW): H² = H₀²[Ω_m(1+z)³ + Ω_r(1+z)⁴]\n");
-    printf("  Ω_m = %.4f (matter-like, from topology)\n", sdt::Omega_m);
-    printf("  Ω_r = %.4e (radiation-like, from pressure)\n", sdt::Omega_r);
-    printf("  Status: PREFERRED ✓\n\n");
+    printf("  Ω_m = %.4f (imported normalization)\n", sdt::Omega_m);
+    printf("  Ω_r = %.4e (imported normalization)\n", sdt::Omega_r);
+    printf("  Status: comparison-only; not an SDT derivation\n\n");
 
     // ═══════════════════════════════════════════════════════════════════════
     //  SECTION 4: HUBBLE PARAMETER EVOLUTION
@@ -438,7 +427,7 @@ int main() {
     }
     printf("\n");
 
-    printf("Freeze-out Mechanism (CR04 Phase 3):\n");
+    printf("Freeze-out candidate (not independently derived):\n");
     printf("  Before z_rec: τ(z) = τ₀(1+z)³  [independent e⁻, p⁺]\n");
     printf("  At z_rec:     Electrons bind to protons (Law II ionization)\n");
     printf("  After z_rec:  τ drops by factor of 4 (W_e mode absorbed)\n");
@@ -493,52 +482,20 @@ int main() {
     printf("TASK: Derive H₀ from spation pressure tensor (Law I)\n\n");
 
     printf("RESULTS:\n");
-    printf("  Phase 1 (Pressure Tensor):  COMPLETE ✓\n");
-    printf("    Tensor eigenvalues: λ₁,₂,₃ = P_conv(1+z)⁴\n");
-    printf("    Isotropic evolution: γ = 4 (from topology)\n\n");
-
-    printf("  Phase 2 (Equation of State): COMPLETE ✓\n");
-    printf("    P(z) = P_conv × (1+z)⁴  [not borrowed from ΛCDM]\n");
-    printf("    ρ(z) = ρ₀ × (1+z)³     [from volume conservation]\n");
-    printf("    w(z) ∝ (1+z)  [evolving EOS]\n\n");
-
-    printf("  Phase 3 (Hubble Equation): QUALIFIED ✓\n");
-    printf("    Candidates A, B, C: FAIL (dimensional issues)\n");
-    printf("    Model D (Bootstrap-FLRW): SUCCEEDS\n");
-    printf("    H² = H₀²[Ω_m(1+z)³ + Ω_r(1+z)⁴]\n");
-    printf("    H₀ prediction: %.1f km/s/Mpc (vs Planck: 67.4)\n",
-           H0_obs_SI * sdt::c / 1000.0 * sdt::Mpc_to_m);
+    printf("  Pressure exponent and fourfold freeze-out: OPEN candidates\n");
+    printf("  Candidates A, B, C: FAIL or require normalization\n");
+    printf("  Model D: imports Friedmann structure, H₀ and Ω normalisations\n");
+    printf("  Native Model-A H₀: %.3e km/s/Mpc (vs Planck: 67.4)\n",
+           hubble_modelA(0) * sdt::Mpc_to_m / 1000.0);
     printf("    Comoving distance to z_rec: %.3e m\n", r_c_rec);
     printf("    (Observed: %.3e m, difference: %+.1f%%)\n\n", sdt::R_CMB,
            100.0 * (r_c_rec / sdt::R_CMB - 1.0));
 
-    printf("  Phase 4 (Topological Freeze-Out): COMPLETE ✓\n");
-    printf("    τ(z) drops by factor 4 at z_rec = 1100\n");
-    printf("    Mechanism: electron binding (Law VI)\n");
-    printf("    H(z) transition: pressure-dom → matter-dom\n\n");
-
-    printf("  Phase 5 (Transfer Function Closure): VERIFIED ✓\n");
-    printf("    f = P_eff / P_conv = 2.125e-17\n");
-    printf("    Before: CLASS E (depends on hydrogen calibration)\n");
-    printf("    After:  CLASS C (CONVERGENCE — all topology-derived)\n");
-    printf("    Dependencies: Φ, R_CMB, H₀ — all DERIVED\n\n");
-
-    printf("CLASSIFICATION: CLASS C (CONVERGENCE)\n");
-    printf("  H₀ is derived from pressure tensor (not fitted)\n");
-    printf("  R_CMB is computed from comoving distance integral\n");
-    printf("  Transfer function f is fully closed\n");
-    printf("  All parameters derive from Law I topology\n\n");
-
-    printf("SUCCESS METRICS:\n");
-    printf("  ✓ H₀ predicted to within 1%% of Planck\n");
-    printf("  ✓ H(z) matches FLRW across 0 ≤ z ≤ 1100\n");
-    printf("  ✓ Equation of state γ = 4 emerges from topology\n");
-    printf("  ✓ Topological transition at z_rec is transparent\n");
-    printf("  ✓ Transfer function f fully closed (CLASS C)\n");
-    printf("  ✓ Zero free parameters in complete derivation\n\n");
+    printf("  Transfer function: CLASS E (observed/calibrated dependencies remain)\n\n");
+    printf("CLASSIFICATION: H₀/TRANSFER CLOSURE EXCLUDED; MECHANISMS OPEN\n\n");
 
     printf("════════════════════════════════════════════════════════════════════\n");
-    printf("CR05 INVESTIGATION COMPLETE — TRANSFER FUNCTION CLOSURE ACHIEVED\n");
+    printf("CR05 DIRECT AUDIT COMPLETE — NO TRANSFER-FUNCTION CLOSURE\n");
     printf("════════════════════════════════════════════════════════════════════\n\n");
 
     return 0;

@@ -104,7 +104,7 @@ int main() {
     std::printf("  ordering pred: %s  (obs Co > Fe > Ni)  %s\n",
                 (TcCo > TcFe && TcFe > TcNi) ? "Co > Fe > Ni" : "WRONG",
                 (TcCo > TcFe && TcFe > TcNi) ? "PASS" : "FAIL");
-    std::printf("  [inputs: z, d, n_w measured; alpha, hbar, m_e whitelist. No fit.]\n\n");
+    std::printf("  [inputs: z, d, n_w measured; alpha, hbar, m_e derivation basis. No fit.]\n\n");
 
     // ------------------------------------------------------------------ P3
     std::printf("== P3: M(T) in native wake counts; mean-field exponent ==\n");

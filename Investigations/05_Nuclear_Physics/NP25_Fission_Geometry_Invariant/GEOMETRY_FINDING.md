@@ -1,5 +1,7 @@
 # NP25 — Binary-fission geometry forced by the grammar
 
+> **Ontology correction 2026-08-13:** the ledger below is kept. The **two-lobed body + triton-bearing neck** is withdrawn as mechanism. The second alpha forms in the **flayed jacket** (`2d→α`), not by pinching a goo drop. See NP35.
+
 ## Result
 
 For a parent `(A,Z)` split into two daughters `(A1,Z1)` and `(A2,Z2)`, with

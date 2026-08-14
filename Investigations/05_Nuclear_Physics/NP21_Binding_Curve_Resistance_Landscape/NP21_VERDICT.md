@@ -37,7 +37,7 @@ The single geometric statement *"whole curve = one resistance landscape, most-bo
 is a faithful reframe, and the functional's **A-exponents are genuinely geometric** (compact-packing radius
 and area laws, per-pair counting — not SEMF-fitted). The functional form even reproduces the famous
 rise-then-fall shape well (Spearman 0.907). **But the location of the floor is not geometry — it is a
-coefficient ratio `a_C/a_S`, and SDT supplies no derivation of it.** The natural whitelist guess (`α`) puts
+coefficient ratio `a_C/a_S`, and SDT supplies no derivation of it.** The natural derivation basis guess (`α`) puts
 the floor at uranium; the ratio that would put it near iron is ~32× larger and coincides with the SEMF's
 fitted value — i.e. reaching iron *requires a fit*. Even the full 3-coefficient fit lands the floor at
 Ca-48, still outside the ±2 window. So the decisive claim — **iron derived at the floor** — is not paid.

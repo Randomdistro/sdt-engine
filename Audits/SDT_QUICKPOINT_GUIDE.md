@@ -17,13 +17,13 @@ Formal spine (`…/Theory/00_Ruleset.md`): **6 Operators + 9 Axioms + 17 Theorem
 
 ---
 
-## 2. The whitelist (only permitted external inputs)
+## 2. The derivation basis (only declared external dependencies)
 
 `{ ℓ_P , c , ℏ , k_B , T_CMB , α , m_e , m_p }` (`02_Inputs_and_Derivations.md:3`). A fact not on this list, and not built from the four primitives, is not admitted.
 
 ## 3. Prohibitions (`00_Ruleset.md:69-77` + HUNTER kill-list)
 
-Quarks · gluons · virtual particles · **G or M as fundamental** (gravity derived: `g=v²/R`, `ϟ=v²R/c²`) · dark matter · dark energy · ΛCDM · wavefunction collapse / ψ · fields as primitives · wave-particle duality · any constant not derivable from the whitelist · **BORROW-SMUGGLE** of G/M/GM/ψ/G_F/ΛCDM into the SDT chain · **GATE-CONTRABAND** (a kill condition enforcing a rival's *axiom* rather than a measured anchor) · charge-substance / "charge radius".
+Quarks · gluons · virtual particles · **G or M as fundamental** (gravity derived: `g=v²/R`, `ϟ=v²R/c²`) · dark matter · dark energy · ΛCDM · wavefunction collapse / ψ · fields as primitives · wave-particle duality · any constant not derivable from the derivation basis · **BORROW-SMUGGLE** of G/M/GM/ψ/G_F/ΛCDM into the SDT chain · **GATE-CONTRABAND** (a kill condition enforcing a rival's *axiom* rather than a measured anchor) · charge-substance / "charge radius".
 
 ## 4. Certification scheme
 
@@ -62,10 +62,10 @@ Legacy: **DERIVED · COMPUTED · CALIBRATED · OBSERVED · PENDING** (+ **IDENTI
 - **FLM14** — rotating-spation / sequential-electron program; runs 4–5 **CLAIM REFUSED** (blockers named); ongoing.
 
 ### Particle / Topology (PPT)
-- **PPT01** vortex equilibrium, W=2 excluded [RESOLVED A]. **PPT02** α NOT derivable, needs e [RESOLVED negative]. **PPT03** 6π⁵ to 0.0019%, full derivation blocked [PARTIAL]. **PPT04** μ_ν≡0 exactly [PASS A]. **PPT05** trefoil confinement, σ≈1.23 GeV/fm [C]. **PPT06** v_phase=1.831c, T=12 [C]. **PPT07** 6π⁵ **[OPEN — privileged, unexplained, 19-ppm]**. **PPT09** winding stability **RETRACTED — FABRICATED**.
+- **PPT01** vortex equilibrium, W=2 excluded [RESOLVED A]. **PPT02** α NOT derivable, needs e [RESOLVED negative]. **PPT03/PPT07/PPT17** 6π⁵ tube-volume assignment **[RESOLVED CONSTRUCTION — shared-input, not independent prediction]**. **PPT04** μ_ν≡0 exactly [PASS A]. **PPT05** trefoil confinement, σ≈1.23 GeV/fm [C]. **PPT06** v_phase=1.831c, T=12 [C]. **PPT09** winding stability **RETRACTED — FABRICATED**.
 
 ### EM / Charge (EMC)
-- **EMC01** force law class C, coefficient class E (circular), G class F. **EMC02** e cannot come from whitelist; charge is one irreducible input (α≡e). **EMC03** attraction=deficit(shadow) / repulsion=surplus(focus); one throughflow ±handedness; throughpole. **EMC04** electropause: `P_eff=m_p²m_e²c⁵/(4παℏ³)` **derived** from the electron's centripetal requirement (delete-test passes, no Coulomb fit) — parameter-free but α-inherited ("α still the one input").
+- **EMC01** force law class C, coefficient class E (circular), G class F. **EMC02** e cannot come from derivation basis; charge is one irreducible input (α≡e). **EMC03** attraction=deficit(shadow) / repulsion=surplus(focus); one throughflow ±handedness; throughpole. **EMC04** electropause: `P_eff=m_p²m_e²c⁵/(4παℏ³)` **derived** from the electron's centripetal requirement (delete-test passes, no Coulomb fit) — parameter-free but α-inherited ("α still the one input").
 
 ### Atomic / Spectroscopy (APS)
 - **APS03** drafting crossover 21.5% RMS, galactic pilot VOID [PARTIAL]. **APS04** trefoil Lamb 1051.8 MHz **RETRACTED/FABRICATED**. **APS05** α recovered ≤0.1% two ways (anchor), geometric derivation OPEN. **APS06** emission ladder NATIVE + 13.6 eV IDENTITY; neutron-survey struck as content (empty counterexample class — every nucleus past H has a neutron; consistency check only).
@@ -89,10 +89,12 @@ Legacy: **DERIVED · COMPUTED · CALIBRATED · OBSERVED · PENDING** (+ **IDENTI
 
 1. **ℓ_P** — irreducible Axiom R1 (Planck `√(ℏG/c³)` injects G; "No G" fails at the primitive). Seed Theorem: ≥1 seed always survives.
 2. **α** — input; "α = koppa at H" is a restatement; deriving 137 from winding topology is Open Problem 2.
-3. **m_p** — [OPEN]; 6π⁵ is a privileged unexplained 19-ppm match, not a derivation.
+3. **m_p/m_e** — [RESOLVED CONSTRUCTION]; PPT17 conserves `6π⁵`
+   point-electron Bohr-closure tube volumes into the W=3 torus at `R_p`.
+   Shared-input geometry, not an independent prediction.
 4. **Reproduction debt** (the big one) — must reproduce double-slit, Born statistics, CHSH=2√2 deterministically + nonlocally. Not done.
 5. **Neo-Lorentzian / preferred-frame tension** — frame must hide to 10⁻¹⁸; predicts `c_∞≈c+105 m/s` not locally measurable (self-admitted unfalsifiable-adjacent).
-6. **Input/derivation circularity** — whitelist contains α, m_p yet claims to derive them; graph not yet published acyclic → "zero free parameters" unproven.
+6. **Input/derivation circularity** — derivation basis contains α, m_p yet claims to derive them; graph not yet published acyclic → "zero free parameters" unproven.
 7. **No-attraction orbit obligation** — full Kepler + precession from pure pushing partially shown.
 8. **Black-hole/strong-field obligation** — has horizon (z=½), no singularity; must still match EHT/ISCO/LIGO.
 9. **Coulomb identity `k_e e²=αℏc`** = class F tautology. **No native angular DOF** (FLM03) → no native Lamb/fine-structure until angular DOF derived (not imported `Y_ℓ^m`).

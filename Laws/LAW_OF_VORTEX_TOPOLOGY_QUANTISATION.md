@@ -32,7 +32,7 @@ Within each winding class, the aspect ratio R/a is quantised by simultaneous
 phase-closure of all three dynamical modes — a discrete nonlinear eigenvalue problem
 whose solutions form the observed mass spectrum.
 
-The proton surface radius obeys the (W+1) wake conjecture:
+The FLM07 minimum-resistance thread selects four action relays:
 
     R_p = (W+1) ħ/(m_p c) = 4ħ/(m_p c) = 0.84124 fm
 
@@ -46,15 +46,22 @@ This quantity — formerly misidentified as the "classical electron radius" — 
 property of the proton geometry alone. The proton retains the relay-state energy at
 Ϟ_H at all times.
 
-The proton-electron mass ratio is resolved from pure (2,3) trefoil topology:
+One proposed proton-electron mass-ratio correspondence uses the pure `(2,3)`
+trefoil integers:
 
     m_p/m_e = (q/p)^(q/p) × [2(p+q)]³ - 1
             = (3/2)^(3/2) × 10³ - 1
             = 1836.117...
 
-Error: -0.002% against measured 1836.15267.
+Error: -0.002% against measured 1836.15267. This is a numerical
+correspondence, not a forward derivation.
 
-**Open Problem 4 remains OPEN.** The factors I₂ = [2(p+q)]³ = 1000 and I₃ = −1 ("exhaust unit") have no independent derivation — they are reverse-engineered from the target. The companion volume SDT_Complete_Laws.md grades this same ratio honestly: "Status: OBSERVED (0.053%). Not derived." That grading governs.
+**Open Problem 4 is CLOSED AS A SHARED-INPUT CONSTRUCTION (2026-08-14).**
+PPT17 replaces the reverse-engineered integer and phase-stiffness routes with
+the conserved tube-volume map: `6π⁵` point-electron 720-degree Bohr-closure
+volumes form the W=3 torus seated at `R_p`. This is a resolved geometric
+assignment, not an independent prediction of the packing count. FLM15's
+`J_3/J_1 = 2.647` remains an exclusion of simple phase stiffness.
 
 The electron wake radius is empirically inferred (see §, R_e ≈ 10⁻²² m) — an input, not an output:
 
@@ -224,53 +231,38 @@ sender and one receiver per spation per tick. Two strands cannot share a spation
 **Stability criterion:** W is admitted if and only if the corresponding torus knot
 or link is knot-theoretically irreducible under moves that respect lattice embedding.
 
-### 3.3 The Admitted Winding Set
+### 3.3 Classified Modes and the Open Stability Set
 
 **W = 1 — The Unknot:**
-A simple ring. No crossings in any projection. No reconnection move applies —
-there are no crossing pairs to exchange. Irreducible. **Stable.**
+A simple ring with trivial Alexander polynomial. This classifies its topology;
+its dynamical stability follows from the separate displacement-volume mechanism,
+not from knot irreducibility.
 
-**W = 2 — The (2,2) Torus Link (Hopf Link):**
-Two strands, two crossings. At each crossing, the two strands can be reconnected.
-A single reconnection move separates the Hopf link into two unlinked unknots.
-The separation pathway is embedded (no two strands share a spation during the move).
-Decay: (W=2) → 2 × (W=1) + released relay energy. Timescale ≈ t_P.
-**Unstable.**
+**W = 2 — Tested unknotted branch:**
+PPT09 tests the $(1,2)$ branch. Its Alexander polynomial is trivial. The
+first-order pressure-weighted occlusion integral gives
+$E_{W=2}/(2E_{W=1})=1.000000$. It therefore establishes neither released
+energy nor a decay direction. The barrier, lifetime and reconnection pathway
+remain open.
 
 **W = 3 — The (2,3) Torus Knot (Trefoil):**
 One strand, three crossings. The trefoil is the simplest non-trivial knot. Its
 knot group π₁(S³ \ K) = ⟨a,b | a² = b³⟩ is non-trivial, proving it is not
 equivalent to the unknot by any ambient isotopy.
 
-For a reconnection move to reduce the trefoil, two strands at a crossing must
-exchange partners. However, the trefoil is a single-component knot — the two
-strands at each crossing are different parts of the same thread. Exchanging partners
-at one crossing changes the knot type. The resulting configuration is either:
-    (a) a more complex knot (higher crossing number), or
-    (b) requires passing through a non-embedded state (two portions of the same
-        strand occupying the same spation simultaneously).
-
-Case (b) is lattice-forbidden. Case (a) increases energy. Therefore:
-
-**No reconnection-accessible decay channel exists for the trefoil. W=3 is stable.**
+This topological distinction survives. It does not by itself prove that every
+allowed lattice reconnection has a positive barrier, nor does it calculate a
+lifetime.
 
 **W = 4 — The (2,4) Torus Link:**
-Reduces by reconnection at one crossing to the Hopf link (W=2), which then reduces
-further to two unknots. Embedded decay pathway exists. **Unstable.**
+Its reconnection energetics have not been computed.
 
 **W = 5 — The (2,5) Torus Knot (Cinquefoil):**
-Knot-theoretically irreducible, like the trefoil. However, formation requires
-simultaneous phase-locked convergence of five strands at correct relative phases.
-Under post-Clearing lattice thermal conditions, this five-strand convergence has
-measure zero. **Kinematically inaccessible.** Reserved as a theoretical branch.
+Knot-theoretically distinct from the unknot, like the trefoil. Its formation
+probability and dynamical stability have not been calculated.
 
-**The admitted winding set under SDT post-Clearing reconnection dynamics:**
-
-    W ∈ {1, 3}
-
-This is not an empirical list. It is the knot-theory filter on the genus-1 torus
-knot family under lattice reconnection. The existence of exactly two stable charged
-elementary particles in ordinary matter is the knot count, not a coincidence.
+The admitted post-Clearing winding set is therefore not yet derived. Establishing
+$W\in\{1,3\}$ requires the missing energy landscape and reconnection dynamics.
 
 ---
 
@@ -336,21 +328,23 @@ coupled mode equations 𝔽₁, 𝔽₂, 𝔽₃. This is Open Problem 1.
 
 ## Section 5: Wake Radii
 
-### 5a. Proton Wake — The (W+1) Conjecture
+### 5a. Proton Wake — The FLM07 lock closure
 
 A persistent vortex perturbs the surrounding relay out to a **wake radius** R_wake,
 beyond which the lattice returns to unperturbed bulk relay. This is not the
 exclusion volume boundary. It is the outer reach of the vortex's organisational
 influence on the medium.
 
-**Conjecture (Trefoil Wake, W=3).** For a trefoil-wound vortex of rest mass m, the
-wake radius is:
+Close packing supplies two target-independent relay paths. The FLM15
+engaged-volume kernel prices the tetrahedral path (`q=4`,
+`r/R=√(3/2)-1`) below the octahedral path (`q=6`, `r/R=√2-1`) by factors
+`6.2604` per seat and `9.3906` with contacts counted. Both routes therefore
+select four action relays before the measured proton boundary is loaded:
 
-    R_wake = (W+1) ħ/(mc)
+    R_p = q_lock ħ/(m_p c),    q_lock = 4
 
-**Physical argument:** The wake must achieve phase closure for W toroidal circuits
-plus one poloidal closure for global self-consistency. Each closure contributes one
-reduced Compton wavelength ħ/(mc) to the radial extent. For W=3:
+For the `(2,3)` trefoil, `q_lock=4=W+1`; the equality is an output of the
+close-packed selection rather than an inserted multiplier:
 
     R_p = 4ħ/(m_p c)
 
@@ -374,7 +368,7 @@ reduced Compton wavelength ħ/(mc) to the radial extent. For W=3:
 
     W_eff = R_p × m_p × c / ħ - 1
 
-The conjecture predicts W_eff = 3 exactly (integer). Current measurement gives
+The branch predicts W_eff = 3 exactly (integer). Current measurement gives
 W_eff = 3.0008. Future precision measurements deviating from integer 3 by more
 than experimental σ falsify this branch of the Law.
 
@@ -505,13 +499,14 @@ field is negligible at that scale).
 
 ---
 
-## Section 6: The Mass Ratio — RESOLVED
+## Section 6: The Mass Ratio — RESOLVED VOLUME CONSTRUCTION
 
 ### 6.1 The Reframing
 
-The proton-electron mass ratio is not a comparison between two separate entities.
-It is the proton's **self-ratio**: the ratio of the proton's total relay-state
-occupancy to the relay-state occupancy at its own c-boundary Ϟ_H.
+The proposed SDT interpretation treats the proton-electron mass ratio as a
+**self-ratio**: the ratio of the proton's total relay-state occupancy to the
+relay-state occupancy at its own c-boundary Ϟ_H. FLM15 does not derive this
+occupancy map from the linear response of the phase field.
 
     m_p / m_e = Ω₂₈(R_p, ϟ_H) / Ω₂₈(Ϟ_H, ϟ=1)
 
@@ -526,8 +521,8 @@ c-boundary energy has been displaced into the lattice.
 
 ### 6.2 The Topological Self-Index
 
-The (2,3) trefoil knot has winding parameters (p, q) = (2, 3). The mass ratio
-derives from three pure topological quantities of this knot:
+The (2,3) trefoil knot has winding parameters (p, q) = (2, 3). The candidate
+formula combines three proposed factors:
 
 **Factor 1: The Winding Self-Index**
 
@@ -597,7 +592,7 @@ The correction to the mass ratio formula:
 
 **Measured:** m_p/m_e = 1836.15267343(11) (2018 CODATA)
 
-**Derived:** 1836.11730...
+**Candidate correspondence:** 1836.11730...
 
 **Error:** (1836.11730 - 1836.15267) / 1836.15267 = -0.00193%
 
@@ -608,7 +603,8 @@ The residual 0.00193% is either:
     1/I₁), which shifts the mass ratio via the self-ratio definition. This
     discrepancy is 0.38% in ϟ_H and propagates to ~0.002% in m_p/m_e.
 
-Both interpretations point to the same open problem: derive ϟ_H from mode-locking.
+The historical interpretations point to the separate mode-locking problem for
+`ϟ_H`; PPT17 closes the mass-ratio volume assignment without using that route.
 
 ### 6.4 Geometric Consistency Check
 
@@ -764,7 +760,7 @@ the Law at the Law level (not just the branch level).
 | 1 | Enumeration of (R/a)_j mode-locked spectrum | OPEN — requires lattice simulation |
 | 2 | Derivation of α from W=1 equilibrium geometry | OPEN |
 | 3 | Electron wake radius from (W=1, (R/a)_{e,0}) equilibrium | PARTIALLY RESOLVED — tidal locking gives R_e ≈ 10⁻²² m; precise value from mode-locking |
-| 4 | Derivation of m_p/m_e from topology | **RESOLVED** — (3/2)^(3/2) × 10³ − 1 = 1836.117 (−0.002%) |
+| 4 | Geometric construction of m_p/m_e | **RESOLVED (shared-input)** — PPT17 conserves `6π⁵` point-electron Bohr-closure tube volumes into the W=3 torus at `R_p`; not an independent prediction |
 | 5 | Spin-1/2 and g-factors from mode-locked equilibria | OPEN |
 | 6 | Higher-W kinematic accessibility (pre-Clearing) | OPEN |
 | 7 | Action exhaust mechanism — formal lattice derivation | OPEN (new) |
@@ -778,23 +774,26 @@ circulation dynamical DoF count n = 3g satisfies n = 3 (marginal traction) is
 the solid torus (g=1). Neither the solid ball (g=0, n=0) nor any higher-genus
 handlebody (g≥2, n≥6) achieves this.
 
-**Theorem (Winding Quantisation).** Under nearest-neighbour reconnection dynamics
-on the post-Clearing spation lattice, the admitted winding set on the solid torus is
-W ∈ {1, 3}: the unknot (electron) and the trefoil (proton). All even windings are
-reducible links; odd windings W≥5 are kinematically inaccessible.
+**Computed classification (Winding Quantisation).** W=1 and W=2 are unknots;
+the `(2,3)` W=3 mode is a trefoil. The dynamically admitted winding set,
+barriers and lifetimes remain open; knot classification alone does not prove
+that only W∈{1,3} persists.
 
 **Theorem (Mode-Locking).** The three simultaneous phase-closure conditions on the
 solid torus DoFs admit solutions only at a discrete set of aspect ratios (R/a)_j,
 yielding the charged lepton mass spectrum (W=1) and proton excitation spectrum (W=3).
 
-**Conjecture (Trefoil Wake).** R_p = 4ħ/(m_p c) = 0.84124 fm. Verified to 0.02%.
-Extension to W=1 not asserted.
+**FLM07 trefoil boundary.** Law-IV minimum-resistance pricing selects the
+tetrahedral `q=4` lock thread over the octahedral control before comparison:
+R_p = 4ħ/(m_p c) = 0.84124 fm, verified to 0.02%. The W=1 control is the
+720-degree closure's two action relays; no finite electron body radius is
+asserted.
 
-**Theorem (Mass Ratio).** The proton-electron mass ratio is the proton's self-ratio:
-
-    m_p/m_e = (q/p)^(q/p) × [2(p+q)]³ - 1 = (3/2)^(3/2) × 10³ - 1 = 1836.117
-
-Error: −0.002% from measured 1836.15267. The measured ratio 1836.15267 is the selection target for the integer factors; the construction is not mass-free.
+**Mass-ratio construction.** PPT17 conserves the `6π⁵` point-electron
+Bohr-closure tube volumes into the W=3 torus at R_p. This is a shared-input
+volumetric construction, not an independent prediction. FLM15 separately
+excludes simple phase stiffness as a generator (`J_3/J_1=2.647`) and supplies
+the target-free lock/synchrony kernel used by FLM07.
 
 **Corollary (C-Boundary Identification).** The quantity 2.81794 fm, formerly
 "classical electron radius", is the proton's c-boundary Ϟ_H = R_p/ϟ_H². It is a

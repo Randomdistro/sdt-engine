@@ -49,7 +49,7 @@ shedding constants. The *mechanism* remains SDT-native. Tag every use DERIVED / 
 
 | Quantity | Source | Note |
 |----------|--------|------|
-| ℓ_P, t_P, c = ℓ_P/t_P | `sdt::laws::measured` / `law_I` | Relay scale, tick, signal speed — whitelist inputs |
+| ℓ_P, t_P, c = ℓ_P/t_P | `sdt::laws::measured` / `law_I` | Relay scale, tick, signal speed — derivation basis inputs |
 | Traction `ℓ=2` wake demand `ω_demand` | `law_VI::traction` (PPT06) | Source of the bound circulation and `τ_relax` |
 | Movement-budget cap `v_circ²+v_trans²=c²` | `law_V` | Vortex spin-up cap before detachment |
 | Gear-frequency `Δω` / relaxation-energy scale | **CQ41** (upstream) | The shedding clock; coefficient handed in, not fitted here |

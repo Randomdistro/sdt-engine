@@ -206,8 +206,9 @@ The grounding numbers are in `flm12_mass_field_resistance.cpp`.
   field-engagement — accommodated, not derived. **[RE-DESCRIPTION.]**
 - **C3 · `m_p/m_e = 1836.15` (`= 6π⁵` to 19 ppm).** Under field-as-resistance this is the **ratio of
   the `W=3` trefoil's engagement to the `W=1` unknot's** — field-as-resistance gives `6π⁵` a *home*.
-  The `6π⁵` match itself is a genuine, **unique** zero-parameter result (PPT07) whose **mechanism is
-  [OPEN]**; this document does not close it, it houses it. **[RE-DESCRIPTION (home) + OPEN (mechanism).]**
+  **Updated 2026-08-14:** PPT17 closes the assignment by conserving `6π⁵`
+  point-electron 720-degree Bohr-closure tube volumes into the W=3 torus at
+  `R_p`. **[RESOLVED CONSTRUCTION — shared-input, not independent prediction.]**
 - **C4 · Exact neutron `−1.913 μ_N` and `0.782 MeV` from one geometry.** The two-ledger derivation
   (one seat → both) — still OWED (doc-05, SCT-05). **[RE-DESCRIPTION → OPEN.]**
 
@@ -291,6 +292,7 @@ field splits cleanly — the SM's mass **mysteries** (interchange, confinement, 
 `g−2`-is-really-about-the-vacuum residue) are **artefacts of treating mass as substance** and
 dissolve; the SM's mass **numbers** (Koide, ratios, `6π⁵`, defects) are **housed but not yet derived**;
 and three hard problems (oscillation, the `α` split, `G_F`) stay open and named.
+The `6π⁵` tube-volume assignment is construction-resolved by PPT17.
 
 ---
 

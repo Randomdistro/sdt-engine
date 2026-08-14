@@ -11,7 +11,7 @@ window.SDT_I18N = {
   "All of physics. No fitted parameters.":
     "A closed axiomatic dynamical system: 9 axioms, 2 lemmas, 18 theorems. Zero adjustable parameters.",
   "Gravity, electromagnetism, the nuclear force — one push, read three ways, in a discrete spatial medium. Four primitives. One new idea: matter displaces space. Every constant computed, nothing fitted.":
-    "The gravitational, electromagnetic, and nuclear interactions are one occlusion law, F = (π/4)·P_eff·R₁²R₂²/r² (Theorem T4), evaluated at three cross-section scales in a discrete relay substrate of pitch ℓ_P. Permitted inputs: {ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p} plus measured observables. Every quoted constant is computed and carries a certification label: DERIVED · COMPUTED · CALIBRATED · OBSERVED · PENDING.",
+    "The gravitational, electromagnetic, and nuclear interactions are one occlusion law, F = (π/4)·P_eff·R₁²R₂²/r² (Theorem T4), evaluated at three cross-section scales in a discrete relay substrate of pitch ℓ_P. declared dependencies: {ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p} plus measured observables. Every quoted constant is computed and carries a certification label: DERIVED · COMPUTED · CALIBRATED · OBSERVED · PENDING.",
 
   /* ── nav / titles ── */
   "The Medium": "The Relay Substrate",
@@ -48,7 +48,7 @@ window.SDT_I18N = {
   "Not a moment — the plane of existence itself, with everything inside it moving, always moving. What we call time is the tally that movement keeps; there is no arrow to explain, because un-happening is not an operation the relay has.":
     "Not a coordinate instant: the plane of existence itself, with every structure in continuous motion within it. Time is the ordinal tally that movement keeps — the count of relay ticks, everywhere and simultaneously — and the thermodynamic arrow requires no separate explanation: un-happening is not an operation the relay possesses.",
   "@m_note":
-    "Permitted external inputs — the complete whitelist: {ℓ<sub>P</sub>, c, ℏ, k<sub>B</sub>, T<sub>CMB</sub>, α, m<sub>e</sub>, m<sub>p</sub>} plus directly measured observables in their measured units. A quantity absent from this set is not an admissible input. Every load-bearing constant carries provenance metadata: certification class A–F, delete-test assertion, risk flag.",
+    "declared external dependencies — the complete derivation basis: {ℓ<sub>P</sub>, c, ℏ, k<sub>B</sub>, T<sub>CMB</sub>, α, m<sub>e</sub>, m<sub>p</sub>} plus directly measured observables in their measured units. A quantity absent from this set is not an admissible input. Every load-bearing constant carries provenance metadata: certification class A–F, delete-test assertion, risk flag.",
 
   /* ── ch.2 — the five laws ── */
   "Every prediction flows from these six principles. No additional postulates.":
@@ -92,7 +92,7 @@ window.SDT_I18N = {
   "The pressure disturbance around each vortex sorts itself by how many lobes it carries. The historically \"separate\" forces are faces of the same wake field — and the trefoil's own three-fold face carries the native selection rule m₃ = 3k, with no imported quantum numbers.":
     "The vortex wake decomposes by angular order; the historically separate interactions are components of one multipole expansion of the same pressure field. Native content: the trefoil's C₃ selection rule m₃ = 3k (k ∈ ℤ) and the r⁻¹ / r⁻³ / r⁻⁴ power laws (APS04, class C) — no imported quantum numbers.",
   "@t_margin":
-    "The 10³⁶ electromagnetic-to-gravitational ratio (the hierarchy problem) reduces to a ratio of occlusion cross-sections under one pressure: πR<sub>p</sub>² ≈ 10⁻³⁰ m² against πR<sub>☉</sub>² ≈ 10¹⁸ m². Identical P<sub>eff</sub>, different geometry. The proton-to-electron mass ratio is carried by the topological identity 6π⁵ = 3·(2π²)·π³ = 1836.118 (−0.0019% vs 1836.15267); the 6π⁵ ↔ V<sub>disp</sub> mapping remains OPEN — asserted, not derived.",
+    "The 10³⁶ electromagnetic-to-gravitational ratio (the hierarchy problem) reduces to a ratio of occlusion cross-sections under one pressure: πR<sub>p</sub>² ≈ 10⁻³⁰ m² against πR<sub>☉</sub>² ≈ 10¹⁸ m². Identical P<sub>eff</sub>, different geometry. PPT17 resolves 6π⁵ = 1836.118 as the shared-input packing count from the point electron’s 720° Bohr-closure tube into the W=3 torus at R<sub>p</sub> (−0.0019% vs 1836.15267): COMPUTED construction, not an independent prediction of the mass ratio.",
 
   /* ── ch.4 — atomicus ── */
   "Every stable nucleus with Z ≥ 2 decomposes into exactly one alpha core plus some number of deuterons and tritons. And the grammar admits two distinct lineages depending on whether the core is complete.":
@@ -121,7 +121,7 @@ window.SDT_I18N = {
 
   /* ── ch.5 — engine ── */
   "@e_lead":
-    "A header-only C++20 constexpr library encoding the axioms, theorems, and certification ledger. Zero external dependencies. Whitelist discipline is structural: {ℓ<sub>P</sub>, c, ℏ, k<sub>B</sub>, T<sub>CMB</sub>, α, m<sub>e</sub>, m<sub>p</sub>} plus measured observables in their measured units — a quantity absent from <code>sdt::laws::measured</code> is not an admissible input to any derivation.",
+    "A header-only C++20 constexpr library encoding the axioms, theorems, and certification ledger. Zero external dependencies. Scales: ℓ<sub>P</sub> the dimensional seed; <code>c</code>, k<sub>B</sub>, e unit bridges; one mass/action seat; α = hydrogen’s koppa rung; T<sub>CMB</sub> a clock. <code>sdt::laws::measured</code> is a CODATA/FIRAS lookup.",
   "@e_intro":
     "The single source of truth is <code style=\"color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:0.9em;\">laws.hpp</code>: namespaces law_I…law_VI mirror the Six Laws; <em>bridge</em> carries the k-hierarchy and koppa (ϟ = R/k² = v²R/c²); <em>atomic</em> and <em>nuclear</em> hold the domain functions. Every load-bearing constant carries a provenance block — provenance status, correspondence status, input dependency, certification class A–F, delete-test assertion, risk flag. Orbital mechanics computes without G, nuclear structure without quarks, cosmological observables without a dark sector.",
 
@@ -133,7 +133,7 @@ window.SDT_I18N = {
   "@c_rot":
     "<strong>Audited status: OPEN.</strong> The eclipse-saturation rotation construction FAILED real SPARC photometry on direct rerun (RMS 66%, BTFR slope 1.33 — GD05; the prior success traced to a circular mock and is VOIDED). Surviving content: the derived acceleration floor a₀ = c·H₀/2π ≈ 1.04 × 10⁻¹⁰ m/s² (deliberately-wrong-floor control degrades the collapse 6×) and the 8.8% cross-scale radial-acceleration collapse, re-earned on real rotation data against a 6×-worse control. The crossover shape remains borrowed and is labelled as debt; the full rotation-curve problem is unsolved in this framework's own ledger.",
   "@c_z":
-    "Two native components, no recession: an emission depth stamp z = ϟ/r at the source, plus a propagation squeeze across the Clearing quantised in octaves, 1+z = 2<sup>Δn</sup> (CMB at 10.10 octaves; λ<sub>emit</sub> = 975 nm). The lattice pressure runs P(z) = P<sub>conv</sub>(1+z)⁴ — exactly degenerate with the expanding picture's radiation era: same numbers, different construction, carried as DEGENERATE, not as evidence. No Λ term enters anywhere.",
+    "Two native components, no recession: an emission depth stamp z = ϟ/r at the source, plus a propagation squeeze across the Clearing quantised in octaves, 1+z = 2<sup>Δn</sup> (CMB at 10.10 octaves; λ<sub>emit</sub> = 975 nm). The lattice pressure runs P(z) = P<sub>conv</sub>(1+z)⁴ — a shared-input identity with the expanding picture's radiation era: same numbers, different construction, not independent evidence. No Λ term enters anywhere.",
   "In SDT the \"tension\" is a conflation: one number, H₀, is being asked to carry two different mechanisms — the emission-depth stamp and the propagation squeeze. Probes weight the two differently, so they land in a spread rather than on a point:":
     "The discrepancy is a conflation artefact: a single parameter H₀ is asked to carry two distinct mechanisms — the emission depth stamp z = ϟ/r and the propagation compression squeeze. Distinct probes weight the two components differently, so their estimates land in an ordered spread rather than on a point:",
   "Split the two mechanisms and the tension is not resolved — it is dissolved. Not a crisis requiring new physics.":
@@ -141,8 +141,8 @@ window.SDT_I18N = {
   "What SDT replaces": "Eliminated entities and their derived successors",
 
   /* ── ch.7 — experiments ── */
-  "SDT carries 97 numbered experiment specifications (E13–E109) spanning nuclear physics, cosmology, orbital mechanics, and electromagnetism. The theory is designed to break.":
-    "97 numbered experiment specifications (E13–E109), each stating the SDT prediction, the rival prediction, and the observable discriminant, across the nuclear, cosmological, orbital, and electromagnetic sectors. The programme is constructed to expose the framework to refutation.",
+  "SDT carries numbered experiment specifications (E13–E111) spanning nuclear physics, cosmology, orbital mechanics, and electromagnetism. The theory is designed to break.":
+    "Numbered experiment specifications (E13–E111), each stating the SDT prediction, the rival prediction, and the observable discriminant, across the nuclear, cosmological, orbital, and electromagnetic sectors. The programme is constructed to expose the framework to refutation.",
   "The k-hierarchy returns 42.98 arcsec/century from ϟ = R/k², with G and M never written; the measured anomalous precession is 42.98. Convergent with GR — same number, half the furniture; the closure also recovers c itself to 0.0009%.":
     "The k-hierarchy closure δφ = 6πR_☉/(k²·a·(1−e²)) returns 42.98″/cy from ϟ = R/k² with G and M absent from the formalism; measured 42.98. CONVERGENT with the rival's value — independent origins, one number; inverting the same closure reconstructs c from orbital observables alone to +0.0009% (GOM04, class C).",
   "Light deflection at solar limb: 1.750 arcsec computed vs 1.751 measured. Derived from convergence gradient, not spacetime curvature.":

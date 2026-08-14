@@ -6,7 +6,7 @@
 > `cq49_electropause.cpp` (consumes `Engine/include/sdt/laws.hpp`; output in `cq49_results.txt`).
 > **Honesty contract:** the *structural* result — the electrostatic binding **is** the centripetal
 > requirement **is** the occlusion push, computed from kinematics with **no charge term**, and the
-> inversion **derives** `P_eff` reproducing the engine value and the pure-whitelist closed form
+> inversion **derives** `P_eff` reproducing the engine value and the pure-derivation basis closed form
 > (delete-test clean) — is **[STRONG]** and numerically verified to 10⁻¹². The result upgrades
 > `P_eff` from class **E (CALIBRATED)** to **C (DERIVED)** *on the framework's terms*: it reads **α**
 > as the kinematic k-rung (the chi of [[PPT02]]), not as the Coulomb coupling. **α remains the one
@@ -98,9 +98,9 @@ Reduce symbolically (substituting `k_e e² = αℏc`, `r_e = αℏ/(mₑc)`, and
 |---|---|---|---|
 | `4 F_cen a₀² / (π R_charge⁴)` (the inversion) | none | 5.225210×10³¹ | 4.1×10⁻¹² |
 | `4 α ℏ c / (π R_p² r_e²)` (closed) | none | 5.225210×10³¹ | 6.1×10⁻¹⁰ |
-| `m_p² mₑ² c⁵ / (4 π α ℏ³)` (whitelist) | none | 5.227252×10³¹ | 3.9×10⁻⁴ |
+| `m_p² mₑ² c⁵ / (4 π α ℏ³)` (derivation basis) | none | 5.227252×10³¹ | 3.9×10⁻⁴ |
 
-The last form contains **only** `{m_e, m_p, c, α, ℏ}` — every one a permitted whitelist input, **no
+The last form contains **only** `{m_e, m_p, c, α, ℏ}` — every one a permitted derivation basis input, **no
 `k_e`, no `e`**. That is the delete-test: erase the Coulomb constant and the elementary charge from the
 inputs, and P_eff still computes (to the 2×10⁻⁴ precision with which the proton radius equals four
 reduced-Compton wavelengths). **P_eff: class E → class C.**
@@ -135,7 +135,7 @@ balance and the Coulomb expression are the *same* expression once `a₀` is writ
   state). A reader who *insists* α ≡ k_e e²/ℏc will call `a₀ = ℏ/(mₑcα)` Coulomb-smuggling and the
   argument circular. On SDT's own terms (α = koppa rung, [[PPT02]]) it is not — but the model **does not
   derive α**, and says so.
-- The proton-radius identity `R_p = 4ℏ/(m_p c)` is used at the 2×10⁻⁴ level for the cleanest whitelist
+- The proton-radius identity `R_p = 4ℏ/(m_p c)` is used at the 2×10⁻⁴ level for the cleanest derivation basis
   form; it is the W+1 conjecture, not an exact theorem.
 
 ---

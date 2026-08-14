@@ -47,7 +47,7 @@
 
 ## ③ Theoretical Framework (≈520 words)
 
-**Permitted inputs only:** `{ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p}` + measured observables in measured units (here: the three `m_νi` minima, the two measured mass-squared splittings `Δm²₂₁, Δm²₃₂`, and the measured solar/atmospheric oscillation lengths as **OBSERVED-TARGET** comparison anchors). **Prohibited, must not enter the SDT chain:** quantum superposition wavefunctions, mass-eigenstate kets, fields-as-primitives, `G_F`, virtual particles as objects, `G/M/GM`, ΛCDM, wave-particle duality. Never write "charge radius" — the neutrino has **no** handed redirection at all.
+**declared dependencies only:** `{ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p}` + measured observables in measured units (here: the three `m_νi` minima, the two measured mass-squared splittings `Δm²₂₁, Δm²₃₂`, and the measured solar/atmospheric oscillation lengths as **OBSERVED-TARGET** comparison anchors). **Prohibited, must not enter the SDT chain:** quantum superposition wavefunctions, mass-eigenstate kets, fields-as-primitives, `G_F`, virtual particles as objects, `G/M/GM`, ΛCDM, wave-particle duality. Never write "charge radius" — the neutrino has **no** handed redirection at all.
 
 **Law anchors.**
 - **Law VI (topology).** W=0 open winding. The three flavours must be **three configurations of the same W=0 object** — so the distinguishing degree of freedom is **internal**, not a winding change. (If a flavour change required ΔW, it would be a *different particle*, not oscillation. Pin this.)
@@ -92,7 +92,7 @@
 - **Goal:** Propose, with symbols and dimensions, the **mechanism** by which the internal pitch **periodically cycles** between the three configs as the vortex relays — using only relay cadence + resistance differences, **no superposition ket**.
 - **Method:**
   1. Write the relay-cadence picture: the vortex advances one relay step per lattice cell; its internal pitch precesses by an increment set by the **resistance (length) difference** `ΔR_resist,ij` between configs `i,j`.
-  2. Define the **phase accumulated per unit length**: `dφ_ij/dx ∝ (resistance/length difference)_ij / (budget term)`. Show dimensionally that this yields an inverse length (a spatial frequency). State the constant of proportionality and its provenance (must trace to whitelist, not be fitted).
+  2. Define the **phase accumulated per unit length**: `dφ_ij/dx ∝ (resistance/length difference)_ij / (budget term)`. Show dimensionally that this yields an inverse length (a spatial frequency). State the constant of proportionality and its provenance (must trace to derivation basis, not be fitted).
   3. Identify the **beat condition**: flavour returns when accumulated phase = 2π; the beat **length** is `L_osc,ij = 2π / (dφ_ij/dx)`.
   4. Explicitly contrast with the prohibited route: a one-paragraph statement of *why this is a geometric beat of one object, not two eigenstates interfering in a wavefunction* (the translation-test: NATIVE vs LINGUISTIC-BORROW).
 - **Pre-committed success metric:** `dφ/dx` is dimensionally `[1/length]`; the proportionality constant is sourced from `{ℏ,c,...}` or the engine's V_disp minima — **zero fitted knobs**; the no-wavefunction contrast is explicit.
@@ -118,9 +118,9 @@
 
 - **Goal:** Per Harvey's standing recursive-investigation instruction, drive each outcome to a **root cause**, not a one-line verdict.
 - **Method (recursion template):**
-  - **If FAIL → why?** (e.g. beat length 6 decades short.) → **why is it short?** (resistance difference too small / wrong budget term / wrong cadence). → **why that?** … recurse until the failure bottoms out in a *named geometric/whitelist fact* (e.g. "V_disp minima differ by only ~3×, the measured `Δm²` needs a 30× lever we have not located").
+  - **If FAIL → why?** (e.g. beat length 6 decades short.) → **why is it short?** (resistance difference too small / wrong budget term / wrong cadence). → **why that?** … recurse until the failure bottoms out in a *named geometric/derivation basis fact* (e.g. "V_disp minima differ by only ~3×, the measured `Δm²` needs a 30× lever we have not located").
   - **If SUCCEED → find cause^n:** do not stop at "it matched." → **why did it match?** → is the lever a genuine geometric quantity or a coincidence of the chosen `E_ν`? → recurse until the *source* of the agreement is a named SDT mechanism (else label DEGENERATE/coincidence).
-- **Pre-committed success metric:** every P3 branch terminates at a root cause expressed in whitelist/geometry terms; no branch ends at "unclear."
+- **Pre-committed success metric:** every P3 branch terminates at a root cause expressed in derivation basis/geometry terms; no branch ends at "unclear."
 - **Out of scope:** rescuing a KILL with a fit; relabelling OPEN as PASS.
 
 ---

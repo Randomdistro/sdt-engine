@@ -2,7 +2,7 @@
 ### (spawned by GD06 · feeds Phase 0/1 · home 01 Foundations · REBUILT on the solid-angle instrument 2026-07-13)
 
 > **Author:** J. C. Harvey, Melbourne. **Status:** SPAWNED-SPEC (rebuilt). **Inherits:** GD06 The Two Rules + §③; `HUNTER_PROTOCOL.md` §A–§K.
-> **Engine:** `laws.hpp` for OBSERVED anchors only. **No whitelisted constant in the derivation. No m as input. This is the make-or-break of the whole cascade.**
+> **Engine:** `laws.hpp` for OBSERVED anchors only. **No dependency-traced constant in the derivation. No m as input. This is the make-or-break of the whole cascade.**
 
 ## ⓪ Five questions
 1. **What don't we know?** — (a) the **analytic form of h(Θ)** (equivalently G(Θ)=1−h, the closure vs sky-coverage), and (b) **whether the occlusion cross-section σ_occ is a pure geometric boundary sky-area** — i.e. whether the old **transfer function f≈2×10⁻¹⁷ can be GEOMETRIZED** (Rule 2), or must remain a coupling (⟹ DEFER to EMC01).

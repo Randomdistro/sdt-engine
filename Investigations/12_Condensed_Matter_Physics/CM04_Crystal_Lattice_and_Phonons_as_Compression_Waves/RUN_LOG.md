@@ -20,7 +20,7 @@
     gives slope = 2.0 ± 0.1. Low-T heat-capacity exponent p = 3.0 ± 0.1 for T in [θ_D/100, θ_D/10].
     **Firewall (committed):** the classical (equipartition) branch is run FIRST and is expected to show
     NO T³ (C_v = 3R at all T). If T³ appears only on the lump branch, P2 grades **C**, per prompt — the
-    energy lump ℏω is GRANTED (whitelist ℏ; the relay action quantum h), not derived here. That finding
+    energy lump ℏω is GRANTED (derivation basis ℏ; the relay action quantum h), not derived here. That finding
     is the honest answer to the prompt's own Golden-Rule question 1.
   - **P3** — θ_D = (ℏ v_D/k_B)(6π²n)^{1/3} with v_D the standard 1/v³ Debye average of measured
     polycrystalline v_L, v_T (one rule, all solids, no per-solid multiplier): within 10% for

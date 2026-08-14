@@ -3,7 +3,7 @@
 **Date:** 2026-06-16  
 **Auditor:** Claude Code (Adversarial Protocol)  
 **Scope:** All CQ investigations (CQ01–CQ40) for external framework contamination  
-**Framework:** Spatial Displacement Theory (SDT) — permitted inputs: {ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p}  
+**Framework:** Spatial Displacement Theory (SDT) — declared dependencies: {ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p}  
 
 ---
 
@@ -136,7 +136,7 @@ The document juxtaposes them as if they are equivalent reformulations. But Y_ℓ
 
 **Exact Anti-Creep Clauses:**
 ```
-- **Permitted inputs:** `{ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p}` + measured observables
+- **declared dependencies:** `{ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p}` + measured observables
 - **Prohibited:** spherical harmonics Y_ℓ^m as imported functions, |ψ(0)|², 
   orbital angular momentum quantum numbers as external definitions, 
   magnetic quantum numbers
@@ -373,7 +373,7 @@ The power laws (a⁻², a⁻³/²) are the **Friedmann equations** from GR. Reus
    - Timeline: Post-June 2026
 
 8. **Audit Trail in Each CQ**
-   - Add checklist to every CQ: "Permitted inputs used? ✓ No prohibited concepts? ✓ Mechanism native? ✓ Notation borrowed (acceptable)? ✓"
+   - Add checklist to every CQ: "declared dependencies used? ✓ No prohibited concepts? ✓ Mechanism native? ✓ Notation borrowed (acceptable)? ✓"
    - Owner: James Tyndall
 
 ---
@@ -411,16 +411,19 @@ The power laws (a⁻², a⁻³/²) are the **Friedmann equations** from GR. Reus
 
 ---
 
-## Appendix A: Permitted Input Set (For Reference)
+## Appendix A: Dependency roles (for reference)
 
 From CLAUDE.md and Theory/00_Ruleset.md:
 
 ```
-PERMITTED:
-  {ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p}
-  + measured observables in their measured units
-  + topology (W, genus) derived from stability
-  + geometry (v, R, a₀, r_e) derived from mechanism
+DEPENDENCY ROLES:
+  ℓ_P                         dimensional seed
+  c, k_B, e                   unit bridges
+  {ℏ, m_e, m_p}               one mass/action seat
+  α                           hydrogen spectroscopic koppa rung (APS05/PPT02)
+  T_CMB                       measured present convergence boundary
+  measured observables        validation/comparison data in measured units
+  topology and geometry       derived only through cited mechanisms
 
 PROHIBITED:
   - G, M, GM as fundamentals

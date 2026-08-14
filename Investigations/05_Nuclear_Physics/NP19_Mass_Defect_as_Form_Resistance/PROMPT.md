@@ -72,7 +72,7 @@ Worked seed: `p + e⁻ → n + νₑ` costs **+1.293 MeV** as an *isolated arrow
 
 **Grammar consistency (constitutional check, §8.3 of ATOMICUS rules).** The β⁻/EC vector pair is a bijection with **determinant −1** — a pure *relabelling of form* that conserves count and **carries no energy in the grammar**. That is *expected*, because mass defects ARE relabellings of form: the energy is not in the grammar move, it is in the **resistance difference between the two forms the move connects.** The grammar bookkeeps WHICH forms; the resistance landscape (NP21) supplies HOW HARD each is to hold.
 
-**Constraints (whitelist only).** Inputs limited to `{ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p}` + measured masses (`measured::m_e`, `m_p`, `m_n`, `MeV_to_J`). **Prohibited:** G/M/GM, wavefunctions, fields-as-primitives, quarks/gluons, virtual particles as objects, dark matter/energy, ΛCDM, duality, and the *standard-model decay story* (W boson, weak coupling G_F). Never write "charge radius" or treat charge as a substance.
+**Constraints (derivation basis only).** Inputs limited to `{ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p}` + measured masses (`measured::m_e`, `m_p`, `m_n`, `MeV_to_J`). **Prohibited:** G/M/GM, wavefunctions, fields-as-primitives, quarks/gluons, virtual particles as objects, dark matter/energy, ΛCDM, duality, and the *standard-model decay story* (W boson, weak coupling G_F). Never write "charge radius" or treat charge as a substance.
 
 ## 4. Investigation Strategy (800–1200 words — be excessive)
 

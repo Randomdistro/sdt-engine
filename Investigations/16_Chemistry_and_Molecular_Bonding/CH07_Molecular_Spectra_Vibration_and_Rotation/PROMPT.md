@@ -253,7 +253,7 @@ be stated independently of the gates — selecting d because it lands is fishing
 
 - **D-A1:** W(R)'s functional form, written down with its mechanism sentence (what is rolling,
   what is meshed, what movement is frustrated), BEFORE any evaluation against Re or k.
-- **D-A2:** every constant in W traced to the whitelist / an earned base result, each with its
+- **D-A2:** every constant in W traced to the derivation basis / an earned base result, each with its
   label. Fitted-parameter count against this domain: **zero**.
 - **D-A3:** the CP-2 not-occlusion sentence (Phase 0.3).
 - **D-A4:** the roll/mesh domain rule — where W fires (rolling interfaces between distinct

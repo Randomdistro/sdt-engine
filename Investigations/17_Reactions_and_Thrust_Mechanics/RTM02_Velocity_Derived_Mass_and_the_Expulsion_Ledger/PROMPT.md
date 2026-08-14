@@ -19,7 +19,7 @@ gears as c/v_circ. Accelerating a quantum therefore **adds ledger-mass without a
 single baryon or a single unit of rest displacement** — the added resistance is the
 invested movement itself, worn as mass.
 
-## 1. Permitted inputs
+## 1. declared dependencies
 
 `bridge::koppa_Earth` (the hover row), c, R_E, v_ex as the swept engineering variable,
 `law_IV` rest-resistance forms for the invariance statement. No G, no M as fundamentals;

@@ -2,7 +2,7 @@
 // CR03 — Transfer Function Closure
 // Author: J. C. Harvey, Melbourne. Date: 2026-07-03.
 //
-// Can f = P_eff/P_conv be written in whitelist primitives only?
+// Can f = P_eff/P_conv be written in derivation basis primitives only?
 // Stage 1: verify P_eff = m_p^2 m_e^2 c^5 / (4 pi alpha hbar^3)  (gates in RUN_LOG)
 // Stage 2: f(R_CMB) sensitivity + PRE-REGISTERED structural candidate scan
 // Stage 3: closure routes A (H0, re-expression) / B (BAO, circular as coded) /
@@ -38,7 +38,7 @@ int main() {
     const double rel_eng = P_eff_alg / law_III::P_eff - 1.0;
 
     std::printf("[Stage 1] P_eff algebra\n");
-    std::printf("  P_eff (algebraic, whitelist) = %.10e Pa\n", P_eff_alg);
+    std::printf("  P_eff (algebraic, derivation basis) = %.10e Pa\n", P_eff_alg);
     std::printf("  P_eff (identity rebuild)     = %.10e Pa   rel = %.2e  gate<1e-12: %s\n",
                 P_eff_id, rel_id, std::fabs(rel_id) < 1e-12 ? "PASS" : "FAIL");
     std::printf("  P_eff (engine, measured R_p) = %.10e Pa   rel = %+.4f%%  gate<0.5%%: %s\n",
@@ -98,13 +98,13 @@ int main() {
     std::printf("           to predict. CIRCULAR as coded. No independent t_coupled exists in\n");
     std::printf("           the engine; Route B cannot run until one is derived.\n");
     std::printf("  Route C: N structural — FLM06 Seed Theorem (negative, PROVEN): N ~ 1e61\n");
-    std::printf("           cannot be built from the whitelist; every clean ratio bottoms out\n");
+    std::printf("           cannot be built from the derivation basis; every clean ratio bottoms out\n");
     std::printf("           at ~1e3. Cited, not re-litigated.\n\n");
 
     std::printf("VERDICT LINES\n");
     std::printf("  Algebra: P_eff = m_p^2 m_e^2 c^5/(4 pi alpha hbar^3) VERIFIED (id %.1e, engine %+.3f%%)\n",
                 rel_id, rel_eng*100.0);
-    std::printf("  f = [whitelist] x l_P/(R_CMB a_rad T^4): every factor whitelist EXCEPT R_CMB\n");
+    std::printf("  f = [derivation basis] x l_P/(R_CMB a_rad T^4): every factor derivation basis EXCEPT R_CMB\n");
     std::printf("  Structural hits at 1%%: %d  |  Routes A/B/C: re-expression / circular / proven-negative\n", hits);
     std::printf("  => f remains class E->X-blocked: PARTIAL per prompt Sec.4. R_CMB is THE bottleneck.\n");
     return 0;

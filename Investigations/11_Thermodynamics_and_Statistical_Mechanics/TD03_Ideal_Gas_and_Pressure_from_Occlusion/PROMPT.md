@@ -78,13 +78,13 @@ DoF, hence the mean impact momentum.
 3. **Dalton & equation-of-state.** *Goal:* additivity + first non-ideal term. *Method:* mix two
    species; then crowd the box until wakes overlap. *Success:* `P_total = ΣP_i` to 1%; a positive
    co-volume correction `P(V−Nb)=Nk_BT` emerges with `b` ~ vortex-wake volume (flagged, order-unity).
-4. **Input audit.** *Goal:* confirm whitelist. *Method:* delete-test on `k_B`. *Success:* result is
+4. **Input audit.** *Goal:* confirm derivation basis. *Method:* delete-test on `k_B`. *Success:* result is
    `k_B ×` pure number; no ensemble object, no `h`, no partition function `Z` anywhere in the chain.
 
 ## Success criteria
 
 - **PASS (Class A):** the `1/3` derived from isotropy with no inserted factor (P1), **and** `PV=Nk_BT`
-  closed *given a NATIVE TD02 equipartition*; only `k_B` whitelisted; zero fitted parameters.
+  closed *given a NATIVE TD02 equipartition*; only `k_B` dependency-traced; zero fitted parameters.
 - **QUALIFIED (Class C):** P1 native, but `PV=Nk_BT` rests on a TD02 equipartition graded IMPORTED →
   the ideal-gas number is CONVERGENCE; or the non-ideal `b` coefficient is order-unity / flagged.
   *(Honest expected landing until TD02 clears its firewall.)*
@@ -174,3 +174,35 @@ the same momentum-flux). **Related:** [[TD01]] (microstate counting), FD05 (the 
 ---
 
 *TD03 · 10× upgrade 2026-06-29 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*
+
+## B37 rank-4 measurement freeze (2026-08-14)
+
+B37 remains a Class-D standing prediction; no comparison datum currently
+exists. The machine-readable prediction must contain, for each sampled
+direction `n`,
+
+```text
+M2(n) = mean_j[(b_j dot n)^2] = 1/3
+M4(n) = mean_j[(b_j dot n)^4]
+tetrahedral prediction: min(M4)=1/9, max(M4)=7/27
+isotropic continuum: M4=1/5
+```
+
+Measurement protocol:
+
+1. Build a four-channel mechanical, acoustic or optical relay analogue whose
+   unit channel directions are independently surveyed to form a tetrahedral
+   set. Record the measured direction vectors and covariance; do not force
+   ideal coordinates in reduction.
+2. Rotate a unit-amplitude drive over a spherical grid with at least 1,000
+   directions. For each direction record the normalized second- and
+   fourth-power channel response before any tetrahedral fit.
+3. Validate the apparatus on an isotropic multi-channel control:
+   `|M2-1/3|<0.005` and `|M4-1/5|<0.005` after uncertainty propagation.
+4. The tetrahedral result supports the standing prediction only if the fitted
+   extrema overlap `1/9` and `7/27` at `2 sigma`, the continuum value is
+   excluded at both extrema, and the rank-2 response remains within `0.005` of
+   `1/3`.
+5. Report measured directions, raw channel responses, normalization, moments
+   and uncertainties as CSV/JSON. A null result changes B37; absent data does
+   not become a synthetic benchmark pass.

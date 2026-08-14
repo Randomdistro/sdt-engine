@@ -16,7 +16,7 @@
 
 **Domain**: Fluid Dynamics (SDT lattice mechanics) · **Status**: SPEC · **Author**: J. C. Harvey, Melbourne
 
-*This investigation inherits the §0 anti-creep protocol and rules R0–R5 verbatim (whitelist inputs only; no G/M/kg fundamentals; no fields/wavefunctions/quarks/ΛCDM; certification labels on every result; translation test on every borrowed term; predict-before-look; honesty over success).*
+*This investigation inherits the §0 anti-creep protocol and rules R0–R5 verbatim (derivation basis inputs only; no G/M/kg fundamentals; no fields/wavefunctions/quarks/ΛCDM; certification labels on every result; translation test on every borrowed term; predict-before-look; honesty over success).*
 
 ---
 
@@ -216,3 +216,42 @@ Five phases, each gated. Run in order; a failed checkpoint stops the chain (R4: 
 ---
 
 *FD02 · upgraded 2026-06-27 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*
+
+## B16 full-curve closure freeze (2026-08-14)
+
+The three literal exponent echoes in B16 are not targets for the forward
+solver. The closure route is:
+
+```text
+FLM15 lock/occlusion cross-section sigma_lock(T)
+  -> lambda_lock(T)=1/[n(T) sigma_lock(T)]
+  -> v_relay(T) from the movement budget
+  -> D(T)=(1/3) lambda_lock v_relay
+  -> mu(T)=rho(T) D(T)
+  -> k_thermal(T)=rho(T) c_v D(T)
+  -> full measured curves
+```
+
+The primary sweep is a dilute monatomic gas at fixed measured pressure over at
+least eight temperatures spanning a factor of two. The same cross-section and
+relay speed are used for all three properties; no property-specific exponent
+or scale is fitted. Raw pressure, temperature, composition, number density and
+transport measurements carry source and uncertainty fields.
+
+Frozen gates:
+
+1. The FLM15 isotropic factor and lock cross-section pass before FD02 runs.
+2. Every predicted value is emitted before its measured counterpart is read.
+3. The analytic and numerical collision integrals agree to relative error
+   `<1e-4`; doubling angular and radial quadrature changes each curve by `<1%`.
+4. At fixed pressure, thermal conductivity and dynamic viscosity are separate
+   observables, while diffusivity retains the density factor; the instrument
+   must not copy one fitted slope into three rows.
+5. Each normalized full curve advances only if its uncertainty-weighted RMS
+   fractional residual is `<=10%` and no monotonic trend has the wrong sign.
+   A missing amplitude closure or failed curve remains `PENDING`.
+6. Deleting all measured transport columns leaves `sigma_lock(T)`,
+   `lambda_lock(T)` and every predicted curve unchanged.
+
+No body-source alias, Sutherland fit, tabulated collision integral, or
+post-comparison exponent may enter the prediction path.

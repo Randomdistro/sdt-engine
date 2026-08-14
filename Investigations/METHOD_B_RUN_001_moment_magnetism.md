@@ -40,7 +40,7 @@ packing-shell-closure; the second variable is what turns necessary into sufficie
 two-variable criterion. Trigger 6 (under-sampled: single-variable can't see the closure).
 
 ### 5. Radius law R(A)=R_p·(A/η)^⅓, η=π/√18 — **⬆ UPGRADE: CONFIRMED → SM-SINKING.** The SM
-writes r₀A^⅓ and **fits r₀**. SDT gets r₀ = R_p/η^⅓ from the **whitelist proton boundary + the
+writes r₀A^⅓ and **fits r₀**. SDT gets r₀ = R_p/η^⅓ from the **derivation basis proton boundary + the
 close-packing fraction — zero fitted constants**, RMS 4.96% on 908 radii, wins 5× on isotope
 chains where A^⅓ drifts. Under the corrected criterion this is not "matches" — it is an
 **explanatory kill**: SDT *derives* the nuclear size scale the SM *installs*. Out-of-sample check

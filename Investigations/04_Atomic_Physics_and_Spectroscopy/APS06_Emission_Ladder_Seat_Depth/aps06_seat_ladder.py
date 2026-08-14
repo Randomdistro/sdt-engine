@@ -5,7 +5,7 @@ APS06 - The Emission Ladder by Seat Depth.
 
 Author: J. C. Harvey, Melbourne.  Execute per PROMPT_EXECUTION_PROTOCOL.md.
 
-This standalone tool re-derives everything it needs from the SDT whitelist
+This standalone tool re-derives everything it needs from the SDT derivation basis
 primitives {m_e, c, alpha, h} as transcribed from Engine/include/sdt/laws.hpp
 (line citations inline). It does NOT identity-pass: the 13.6 eV ceiling is
 rebuilt from R_inf_derived = m_e*c*alpha^2/(2h), the SAME closed form the
@@ -23,7 +23,7 @@ import sys
 import math
 
 # =====================================================================
-#  WHITELIST PRIMITIVES  (transcribed from laws.hpp with line citations)
+#  derivation basis PRIMITIVES  (transcribed from laws.hpp with line citations)
 #  These are the ONLY dimensional inputs to the ceiling derivation.
 # =====================================================================
 c      = 299_792_458.0            # [m/s]  laws.hpp:110  (SI exact)          MEASURED-INPUT

@@ -19,17 +19,17 @@ Coulomb coupling); no wavefunction, no rival mechanism in the chain. The one bor
 | binding = centripetal = Coulomb = occlusion at a₀ | ratios **1.0000000000** | PASS |
 | P_eff inverted from electropause balance | 5.225210e31 Pa, rel err **4.1e-12** vs engine | PASS |
 | closed form 4αℏc/(π R_p² r_e²) | rel err 6.1e-10 | PASS |
-| whitelist form m_p²m_e²c⁵/(4παℏ³) | rel err **3.9e-4** (= W+1 R_p residual) | PASS |
+| derivation basis form m_p²m_e²c⁵/(4παℏ³) | rel err **3.9e-4** (= W+1 R_p residual) | PASS |
 
 The centripetal force was computed with **no charge term** (delete-test for charge passes); the
-whitelist form contains no k_e and no e.
+derivation basis form contains no k_e and no e.
 
 ## Verdict
 
 - **Prompt completion: A** · **Physics class: CONVERGENCE→DERIVED-on-framework-terms** —
   **P_eff: class E → class C**, now on **direct-run evidence** (the prior support was agent-era).
 - **Named residuals (the honest whole of what remains):** (1) **α is the one input** — read as
-  the H-rung v/c; the model does not derive α and says so. (2) The cleanest whitelist form rides
+  the H-rung v/c; the model does not derive α and says so. (2) The cleanest derivation basis form rides
   the **conjectural W+1 rule** R_p = 4ℏ/(m_p c) at the 2e-4 level — same single dependency EMC01
   traced. A reader who insists α ≡ k_e e²/ℏc will call the chain circular; on SDT's own terms
   (α = koppa rung, PPT02) it is not. Both readings stated; neither hidden.

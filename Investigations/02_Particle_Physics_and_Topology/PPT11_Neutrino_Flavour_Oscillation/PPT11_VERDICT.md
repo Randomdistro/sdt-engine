@@ -1,7 +1,7 @@
 # PPT11 — Neutrino Flavour Oscillation · VERDICT
 
 > **Run:** 2026-07-01 · `ppt11_oscillation_length.py` → `ppt11_results.txt`.
-> **Spec:** Tier-5, "THE HARDEST OPEN PROBLEM." Inputs: whitelist + the three neutrino mass minima
+> **Spec:** Tier-5, "THE HARDEST OPEN PROBLEM." Inputs: derivation basis + the three neutrino mass minima
 > (MEASURED-INPUT) + measured Δm² (OBSERVED-TARGET only). **Zero fitted knobs.**
 
 ---

@@ -36,7 +36,7 @@ All external data here are **MEASURED-INPUT** (the medium's compressibility and 
 
 ## 4. Internal (SDT) inputs — not external
 
-- `c`, `ℓ_P`, `u_CMB`, `P_rad = u_CMB/3.0`, `P_conv` — from `Engine/include/sdt/laws.hpp` (`sdt::laws::law_I`). Whitelisted primitives + derived; **not** datasets.
+- `c`, `ℓ_P`, `u_CMB`, `P_rad = u_CMB/3.0`, `P_conv` — from `Engine/include/sdt/laws.hpp` (`sdt::laws::law_I`). dependency-traced primitives + derived; **not** datasets.
 - `c_s = c/√3` coupled-lattice / BAO sound speed — from **CR04** (internal result, re-derived here).
 - Cherenkov shock criterion — from **E57** (internal, VERIFIED).
 

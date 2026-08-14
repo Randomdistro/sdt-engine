@@ -352,14 +352,14 @@ exposed and must pay.
    the frame is forever indirect.
 
 3. **The input/derivation circularity — [TENSION, and the closest thing to a paradox].**
-   The permitted-inputs whitelist contains α and m_p, yet the framework claims to *derive* α
+   The dependency ledger contains α and m_p, yet the framework claims to *derive* α
    (koppa at the hydrogen rung) and m_p/m_e (6π⁵). **You cannot both assume and derive the same
    number** without it being either a labelled consistency-check or a circularity. The audit
    spine exists precisely to catch this. The dependency graph must be made *acyclic*: fix the
    genuinely irreducible seed(s) — the programme's own note says *charge e is the one input*
    (FLM05/EMC02) and *ℓ_P needs one seed length* (FLM06 seed theorem) — and demote everything else
    to **derived** or **consistency-check**. Until that graph is published and acyclic, the
-   "zero free parameters" banner is in tension with the 8-entry whitelist. This is the single
+   "zero free parameters" banner is in tension with the 8-entry derivation basis. This is the single
    place where SDT could *manufacture* a [LOGICAL] problem for itself if it got sloppy — and the
    discipline that prevents it (kill circular wins, label CALIBRATED honestly) is exactly the
    discipline already on display elsewhere in the repo.

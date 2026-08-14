@@ -28,10 +28,10 @@ derived). No rival axiom enters any chain.
   kinematics to 4.1e-12 with delete-test clean.
 - **Physics class:** force LAW = **CONVERGENCE** (class C, survives). Coefficient P_eff: the EMC04
   direct run supports **E → C on framework terms** with two named residuals — **α is read as the
-  kinematic rung (not derived)** and the whitelist form uses the **conjectural W+1 R_p** (2e-4).
+  kinematic rung (not derived)** and the derivation basis form uses the **conjectural W+1 R_p** (2e-4).
   G recovery: **FAIL / OPEN** (class F stands; do not deploy).
 - **Recovery:** n/a · **Cascade root:** W+1 rule (Law VI) — the single dependency the prompt's
   §2.RESOLUTION predicted, confirmed by today's runs.
 
-*Remaining work: build `emc01_peff_routes.cpp` per §④ (A: whitelist+delete-test standalone;
+*Remaining work: build `emc01_peff_routes.cpp` per §④ (A: derivation basis+delete-test standalone;
 B: quantify the R_CMB contamination explicitly).*

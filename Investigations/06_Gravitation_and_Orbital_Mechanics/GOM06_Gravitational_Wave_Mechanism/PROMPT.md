@@ -219,3 +219,45 @@ OWED. Open it honestly or report the gate that fires.
 
 *GOM06 · upgraded 2026-07-24 · move the sea, don't make waves; the whisper and the staying-moved
 are one quantity, and that identity — not the chirp — is what GR cannot say.*
+
+## B09 eccentric-binary closure freeze (2026-08-14)
+
+The Hulse–Taylor route consumes raw timing geometry, not a body-source mass
+parameter:
+
+```text
+timing geometry/movement
+  -> koppa_total and eta from SDT orbital relations
+  -> N_baryons=koppa_body/koppa_per_baryon
+  -> Law-IV resistance of each body
+  -> time-dependent resistance quadrupole Q_ij(t)
+  -> relay shear flux integral
+  -> P_shear and orbital-resistance loss
+  -> predicted dP_b/dt
+  -> observed intrinsic dP_b/dt comparison
+```
+
+The raw ledger must preserve the published orbital period, eccentricity,
+projected light-time geometry, periastron timing, inclination constraints and
+kinematic correction with source, units and uncertainty. Symbols or aliases
+equivalent to source `G`, source `M`, `GM`, `mu`, or `u=GM` are forbidden from
+the forward path. A conversion may be printed only after the prediction.
+
+Frozen gates:
+
+1. Constant total resistance gives zero monopole radiation and uniform
+   centre-of-resistance motion gives zero dipole radiation to relative
+   numerical leakage `<1e-10`.
+2. The shear coefficient is the output of the angular/tensor flux integral;
+   it may not be inserted from a rival quadrupole formula. Doubling orbital and
+   angular resolution changes it by `<0.5%`.
+3. The eccentricity enhancement is obtained by integrating the same orbit
+   solver at `e={0,0.1,...,0.9}`. The `e=0` normalization is exactly one to
+   `<1e-6`, and the Hulse–Taylor value is converged to `<0.5%`.
+4. Two independent paths—time-domain resistance loss and frequency-domain
+   quadrupole power—agree within `1%`.
+5. The complete prediction is frozen before the intrinsic observed
+   `dP_b/dt` is loaded. B09 advances at a residual `<=1%`; otherwise the
+   coefficient, measured residual and failed premise remain explicit.
+6. A second eccentric timed binary is a whole-system control and must preserve
+   the sign and uncertainty overlap without any system-specific coefficient.

@@ -6,6 +6,7 @@
 // ZERO fitted parameters. Author: J. C. Harvey, Melbourne. Direct run.
 #include <cstdio>
 #include <cmath>
+#include <numbers>
 
 int main(){
     printf("================================================================\n");
@@ -43,7 +44,7 @@ int main(){
     printf("\n dead branch (rule (a), tube-in-influence-sphere) printed as committed:\n");
     {
         double rho=0.25;
-        double f = (3.0*M_PI/2.0)*rho*rho/pow(1.0+rho,3.0);
+        double f = (3.0 * std::numbers::pi / 2.0) * rho * rho / pow(1.0 + rho, 3.0);
         double codim = log(1.0/f)/log(5.0);
         printf("   f=%.4f  ->  3-D=%.4f  slope=%.3f   [DEAD vs measured -1.71 - as pre-computed]\n",
                f, codim, -5.0/3.0-codim/3.0);

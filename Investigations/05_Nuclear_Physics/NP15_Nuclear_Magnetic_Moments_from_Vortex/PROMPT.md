@@ -202,7 +202,7 @@ the circulation.
 **Construction requirement (error-resistance — this is the run's constitution):**
 the rule must be written as a **single formula/algorithm over the grammar decomposition**
 (1 alpha core + n_d deuterons + n_t tritons; alternate grammar where applicable) in
-`RUN_LOG.md` **BEFORE any moment is computed**. One rule text, every row. Permitted inputs:
+`RUN_LOG.md` **BEFORE any moment is computed**. One rule text, every row. declared dependencies:
 μ_p and μ_n (declared measured inputs), the block tour counts / interleave geometry from
 Phase 0, and engine lengths/speeds. **No per-isotope freedom of any kind** — no per-row
 coefficients, orientations chosen after seeing numbers, or "silent" flags assigned per

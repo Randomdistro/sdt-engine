@@ -68,7 +68,7 @@ TD01  Entropy & arrow of time from lattice microstates   ← the TD root (S=k_B 
 `law_I::P_conv` / `ε` (throughput quantum `ε=u₀ℓ_P³`) · `law_III` occlusion (`F_occlusion`,
 `solid_angle_occluded`) — pressure of the relay gas on a wall · `law_IV` `V_disp` (mass as organised
 throughput cost — the latent-heat reorganisation ledger) · `law_V` movement budget (`v_circ²+v²=c²`)
-· `bridge` (`koppa`, `k`, `z`). **Whitelisted input:** `k_B` — the entropy↔throughput unit-bridge,
+· `bridge` (`koppa`, `k`, `z`). **dependency-traced input:** `k_B` — the entropy↔throughput unit-bridge,
 exactly as `e` is the charge unit-bridge (measured, not derived). Prior results leaned on:
 **SAR02–SAR02** (lattice mode counting → Planck, Stefan–Boltzmann, Wien — TD06 consolidates these),
 **FD02** (transport `ν=⅓λ_mfp v_relay`, `ν∝√T` from B16 — TD04/TD08 reuse the same machinery),

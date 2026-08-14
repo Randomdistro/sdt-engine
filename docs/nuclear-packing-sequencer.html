@@ -138,8 +138,9 @@ canvas{display:block}
 <div id="title">
   <h1>Nuclear <span>Packing Sequencer</span></h1>
   <p>trefoil protons · bipartite mesh — every contact p↔n, traction by construction · mass defect from the shadow</p>
+  <p style="color:var(--ink-dim);max-width:560px;font-size:.82rem">step order is the shell schedule: <b>α → D6 → D12 → T8 → D12 cuboct → T10 → D20 → …</b> — not all deuterons then all tritons. Closures 8 · 20 · 28 · 50 · 82 · 126 tick when the ledger actually crosses them.</p>
   <p id="meshStat" style="color:#44eebb;font-size:.78rem;letter-spacing:.04em">mesh —</p>
-  <p style="color:var(--ink-dim);max-width:560px">in the mesh, each proton presents as a <b style="color:#ff5a5a">RING</b> — wedding-band proportions, wide and flat — four very skinny strands twisting around each other as they run the band (the free proton's 6π trefoil, tightened at 1.83c; the mass is still the packed <b>1836</b> electron volumes, m<sub>p</sub>/m<sub>e</sub> = 6π⁵). A <b style="color:#5a80ff">neutron</b> is the same band with its electron seated <em>inside</em> at the node, facing the bond — the electron is the mesh-maker. <span style="color:#ff5a5a">proton red</span> · <span style="color:#5a80ff">neutron blue</span>. Shown representationally — the real strands are vastly finer.</p>
+  <p style="color:var(--ink-dim);max-width:560px">in the mesh, each proton presents as a <b style="color:#ff5a5a">RING</b> — wedding-band proportions, wide and flat — four very skinny strands twisting around each other as they run the band (the free proton's 6π trefoil, tightened at 1.83c; the mass is still the packed <b>1836</b> electron volumes, m<sub>p</sub>/m<sub>e</sub> = 6π⁵). A <b style="color:#5a80ff">neutron</b> is the same band: a proton core with one internal electron. That electron is not a bead and not a helix — it is a rider on a <b>closed tour of the subunit's proton destinations</b> (FLM14 sequential occupancy; NP17 p–e–p). The cyan loop is the pathway taken; the moving pip is the electron on it. <span style="color:#ff5a5a">proton red</span> · <span style="color:#5a80ff">neutron blue</span> · <span style="color:#7fe7ff">e⁻ tour</span>. Shown representationally — the real strands are vastly finer.</p>
 </div>
 
 <div id="toggles">
@@ -244,8 +245,8 @@ canvas{display:block}
   </div>
   <div class="ctlGrp">
     <label title="time-average torus shells"><input type="checkbox" id="tTorus" checked>torus</label>
-    <label title="internal e⁻ (every neutron, at the R_p/3 node) + shared e⁻ strings on p–n bonds"><input type="checkbox" id="tE" checked>e⁻</label>
-    <label title="ν — one persistent un-closable winding per neutron, along its throughpole axis"><input type="checkbox" id="tNu" checked>ν</label>
+    <label title="e⁻ — closed tour of proton destinations in each subunit (the pathway taken; FLM14 / NP17)"><input type="checkbox" id="tE" checked>e⁻ tour</label>
+    <label title="ν — W→0 open winding through the neutron pole; never a closed circuit"><input type="checkbox" id="tNu">ν</label>
     <label title="Z fielded e⁻ on the atomic shell a₀ (drawn off-scale)"><input type="checkbox" id="tFielded">fielded e⁻</label>
     <label title="shell radius line-and-label"><input type="checkbox" id="tShell" checked>shells</label>
   </div>
@@ -420,6 +421,7 @@ function packNucleus(A, Z, dnn, coulSpread){
   const eMid=(i,j)=>[(VT[i][0]+VT[j][0])/2,(VT[i][1]+VT[j][1])/2,(VT[i][2]+VT[j][2])/2];
   nuc.alphaGear=[eMid(0,2),eMid(1,2),eMid(0,3),eMid(1,3)];  // AC·BC·AD·BD — aligned with the 4 bonds
   nuc.alphaTetra=VT;                                     // rebuild3D draws the wireframe
+  nuc.subSeq=[{group:'alpha',sub:0,sp:'α',name:'α',cap:1}];
   const alphaOut=Math.max(...alphaIds.map(i=>Math.hypot(...nuc[i].pos)));
 
   // ── Pure-shell packing (NSEQ05): species-alternating shells, not all-d then all-t ──
@@ -488,7 +490,9 @@ function packNucleus(A, Z, dnn, coulSpread){
       for(const v of dirs){
         const nIn =push([v[0]*(rTier-D/2),v[1]*(rTier-D/2),v[2]*(rTier-D/2)],'n','deuteron',dSub,[ v[0], v[1], v[2]],shellIdx+1);
         const pOut=push([v[0]*(rTier+D/2),v[1]*(rTier+D/2),v[2]*(rTier+D/2)],'p','deuteron',dSub,[-v[0],-v[1],-v[2]],shellIdx+1);
-        bond(nIn,pOut); newP.push(pOut); restBond(nIn,1.6); dSub++;
+        bond(nIn,pOut); newP.push(pOut); restBond(nIn,1.6);
+        nuc.subSeq.push({group:'deuteron',sub:dSub,sp:'d',name:'D'+sh.cap,geom:sh.geom,cap:sh.cap});
+        dSub++;
       }
       lastP=newP; ndLeft-=m; shellIdx++; rTier+=2*D;
     }else{
@@ -500,7 +504,9 @@ function packNucleus(A, Z, dnn, coulSpread){
         const n1=push([v[0]*(rc-D),v[1]*(rc-D),v[2]*(rc-D)],'n','triton',tSub,[ v[0], v[1], v[2]],shellIdx+1);
         const p =push([v[0]* rc,   v[1]* rc,   v[2]* rc   ],'p','triton',tSub,[-v[0],-v[1],-v[2]],shellIdx+1);
         const n2=push([v[0]*(rc+D),v[1]*(rc+D),v[2]*(rc+D)],'n','triton',tSub,[-v[0],-v[1],-v[2]],shellIdx+1);
-        bond(n1,p); bond(p,n2); restBond(n1,1.8); tSub++;
+        bond(n1,p); bond(p,n2); restBond(n1,1.8);
+        nuc.subSeq.push({group:'triton',sub:tSub,sp:'t',name:'T'+sh.cap,geom:sh.geom,cap:sh.cap});
+        tSub++;
       }
       ntLeft-=m; shellIdx++; rTier+=2.2*D;
     }
@@ -510,7 +516,9 @@ function packNucleus(A, Z, dnn, coulSpread){
     for(const v of dirs){
       const nIn =push([v[0]*(rTier-D/2),v[1]*(rTier-D/2),v[2]*(rTier-D/2)],'n','deuteron',dSub,[ v[0], v[1], v[2]],shellIdx+1);
       const pOut=push([v[0]*(rTier+D/2),v[1]*(rTier+D/2),v[2]*(rTier+D/2)],'p','deuteron',dSub,[-v[0],-v[1],-v[2]],shellIdx+1);
-      bond(nIn,pOut); newP.push(pOut); restBond(nIn,1.6); dSub++;
+      bond(nIn,pOut); newP.push(pOut); restBond(nIn,1.6);
+      nuc.subSeq.push({group:'deuteron',sub:dSub,sp:'d',name:'D*',geom:'fib',cap:56});
+      dSub++;
     }
     lastP=newP; ndLeft-=m; shellIdx++; rTier+=2*D;
   }
@@ -521,7 +529,9 @@ function packNucleus(A, Z, dnn, coulSpread){
       const n1=push([v[0]*(rc-D),v[1]*(rc-D),v[2]*(rc-D)],'n','triton',tSub,[ v[0], v[1], v[2]],shellIdx+1);
       const p =push([v[0]* rc,   v[1]* rc,   v[2]* rc   ],'p','triton',tSub,[-v[0],-v[1],-v[2]],shellIdx+1);
       const n2=push([v[0]*(rc+D),v[1]*(rc+D),v[2]*(rc+D)],'n','triton',tSub,[-v[0],-v[1],-v[2]],shellIdx+1);
-      bond(n1,p); bond(p,n2); restBond(n1,1.8); tSub++;
+      bond(n1,p); bond(p,n2); restBond(n1,1.8);
+      nuc.subSeq.push({group:'triton',sub:tSub,sp:'t',name:'T*',geom:'polar',cap:18});
+      tSub++;
     }
     ntLeft-=m; shellIdx++; rTier+=2.2*D;
   }
@@ -530,9 +540,18 @@ function packNucleus(A, Z, dnn, coulSpread){
 
 /* ---- number of subunits, for the sequencer ---- */
 function subunitCount(iso){ return 1 + iso.nd + iso.nt; }   // α + deuterons + tritons
-// nucleons revealed when `k` subunits are shown
+// Reveal in PACK order (NSEQ05): α → D6 → D12 → T8 → D12-cuboct → T10 → …
+// Not all-d then all-t — that scrambled the closure ticks and the monoisotope line.
 function nucleonsForSubunits(iso, nuc, k){
   if(k<=0) return [];
+  const seq=nuc.subSeq;
+  if(seq && seq.length){
+    const out=[];
+    for(const s of seq.slice(0,k)){
+      out.push(...nuc.filter(n=>n.group===s.group && n.sub===s.sub));
+    }
+    return out;
+  }
   if(k===1) return nuc.filter(n=>n.group==='alpha');
   const out=nuc.filter(n=>n.group==='alpha');
   let shown=1;
@@ -621,7 +640,7 @@ const state = {
   knotA:1.0, torA:0.34,                          // transparency: knots, spun-torus shells
   colP:'#ff2626', colN:'#2f6bff', colE:'#7fe7ff', colNu:'#86ffb0',// colour controls
   showTorus:true, showE:true, showShellLbl:true, // visibility controls
-  showNu:true, showFielded:false,                // ν per-neutron throughpole · Z fielded e (a0 off-scale)
+  showNu:false, showFielded:false,               // ν throughpole (off: not the e⁻ tour) · Z fielded e (a0 off-scale)
   nuc: [], nucShown: []
 };
 
@@ -760,7 +779,7 @@ function recalibrate(){
 
 // =================== 3D scene ===================
 let THREE, scene, camera, renderer, controls, nucleusGroup, wall, dl, motes, moteGeo, moteVel, knotGeo, sphGeo, floorMesh;
-let nuReg=null, fieldReg=null, nuHelixGeo=null;   // ν throughpole windings · fielded-e shell · canonical ν helix
+let nuReg=null, fieldReg=null, nuOpenGeo=null, eTourReg=null;
 let threeOK=false;
 
 /* Build the proton as a coiled rope on the 6π trefoil path.
@@ -852,15 +871,48 @@ function makeTrefoilRope(THREE, mergeGeometries){
   merged.scale(1/maxr,1/maxr,1/maxr); merged.computeVertexNormals();
   return merged;
 }
-function makeNeutrinoHelix(THREE){
-  // The neutrino: ONE open winding that never closes — threaded along the neutron's
-  // THROUGHPOLE (Z here), poking out BOTH poles (in one side, out the other; never terminates,
-  // so it persists as axial flow). Canonical along +Z; oriented per-neutron in rebuild3D and
-  // screwed along its axis in animate(). NP30: the 1838th un-closable winding.
-  const L=1.15, R=0.27, TURNS=3.0, SEG=110, pts=[];
-  for(let i=0;i<=SEG;i++){ const u=i/SEG, z=(u-0.5)*2*L, a=u*TURNS*2*Math.PI;
-    pts.push(new THREE.Vector3(R*Math.cos(a),R*Math.sin(a),z)); }
-  return new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts,false),SEG,0.05,5,false);
+function makeTourCurve(THREE, members){
+  // FLM14 / NP17: the electron's orbital is a closed tour of proton destinations, not a
+  // cloud and not a helix. Each nucleon is a proton core (a neutron is p + seated e⁻);
+  // the shared electron rides a closed path that visits those cores and returns.
+  const P=members.map(n=>new THREE.Vector3(n.pos[0]*SCENE, n.pos[1]*SCENE, n.pos[2]*SCENE));
+  const n=P.length; if(n<2) return null;
+  const c=P.reduce((s,p)=>s.add(p.clone()), new THREE.Vector3()).multiplyScalar(1/n);
+  let bi=0, bj=1, best=0;
+  for(let i=0;i<n;i++) for(let j=i+1;j<n;j++){
+    const d=P[i].distanceToSquared(P[j]); if(d>best){best=d; bi=i; bj=j;}
+  }
+  const axis=P[bj].clone().sub(P[bi]); const L=axis.length()||1; axis.normalize();
+  let tmp=new THREE.Vector3(0,1,0); if(Math.abs(tmp.dot(axis))>0.9) tmp.set(1,0,0);
+  const u=new THREE.Vector3().crossVectors(axis, tmp).normalize();
+  if(n<=3){
+    // 2-seat (deuteron) or 3-seat (triton): one elongated closed loop visiting every seat.
+    const half=L*0.52, r=Math.min(0.28*SCENE, L*0.16);
+    const pts=[]; const SEG=56;
+    for(let i=0;i<=SEG;i++){
+      const t=i/SEG*Math.PI*2;
+      pts.push(c.clone().addScaledVector(axis, Math.cos(t)*half).addScaledVector(u, Math.sin(t)*r));
+    }
+    return new THREE.CatmullRomCurve3(pts, true);
+  }
+  // 4+ (α tetra and heavier subunits): nearest-neighbour Hamiltonian cycle through every core.
+  const used=new Set([0]), seq=[P[0]]; let cur=0;
+  while(seq.length<n){
+    let nxt=-1, bd=1e18;
+    for(let i=0;i<n;i++){ if(used.has(i)) continue;
+      const d=P[cur].distanceToSquared(P[i]); if(d<bd){bd=d; nxt=i;} }
+    used.add(nxt); seq.push(P[nxt]); cur=nxt;
+  }
+  seq.push(seq[0].clone());
+  return new THREE.CatmullRomCurve3(seq, true);
+}
+function makeNeutrinoOpen(THREE){
+  // W→0: throughpole thread. In one pole, out the other; never a closed circuit.
+  // A single incomplete bend — not a multi-turn helix (that glyph is withdrawn).
+  const L=1.25, R=0.10, SEG=32, pts=[];
+  for(let i=0;i<=SEG;i++){ const u=i/SEG, z=(u-0.5)*2*L, a=u*0.55*Math.PI;
+    pts.push(new THREE.Vector3(R*Math.sin(a), 0, z)); }
+  return new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts,false),SEG,0.035,5,false);
 }
 async function initThree(){
   try{
@@ -918,7 +970,7 @@ async function initThree(){
     // not a fat tube: fine plied fibres, 6 arcs weaving alternately under/over.
     knotGeo=makeRingBand(THREE,mergeGeometries);   // the meshed proton presents as the band (trefoil builder retained above)
     sphGeo=new THREE.SphereGeometry(1,20,16);
-    nuHelixGeo=makeNeutrinoHelix(THREE);
+    nuOpenGeo=makeNeutrinoOpen(THREE);
 
     // CMB influx motes
     const MN=1400; const mp=new Float32Array(MN*3); moteVel=[];
@@ -1079,50 +1131,38 @@ function rebuild3D(){
     nucleusGroup.add(toriP); nucleusGroup.add(toriN); }
   bound.material.opacity = state.showKnots?0.16:0.5;
 
-  // ---- electrons (NP17): internal e⁻ inside every neutron; shared e⁻ on every
-  // intra-subunit p–n bond, strung knot-to-knot. Visual only — castShadow=false. ----
+  // ---- electrons (FLM14 / NP17): a closed TOUR of proton destinations per subunit.
+  // The electron is the rider; the loop is the pathway taken. Not a bead, not a helix.
+  // n_e = neutron count in the subunit (each neutron donates one internal e⁻). ----
+  eTourReg=null;
   if(state.showE){
     const eCol=new THREE.Color(state.colE);
-    const eMat=new THREE.MeshStandardMaterial({color:eCol,emissive:eCol.clone().multiplyScalar(0.85),
-      emissiveIntensity:1.2,roughness:0.25,metalness:0.0});
-    const neutrons=shown.filter(n=>n.type==='n');
-    if(neutrons.length){
-      const eInt=new THREE.InstancedMesh(sphGeo,eMat,neutrons.length); eInt.castShadow=false;
-      const es=new THREE.Vector3(0.14*kv,0.14*kv,0.14*kv);
-      const nodeOff=(R_p/3)*SCENE;   // NP30: the stabled e seats at the trefoil NODE (R_p/3), toward the bond — not the nucleon centre
-      neutrons.forEach((n,i)=>{ const ep=new THREE.Vector3(
-          n.pos[0]*SCENE+n.axis[0]*nodeOff, n.pos[1]*SCENE+n.axis[1]*nodeOff, n.pos[2]*SCENE+n.axis[2]*nodeOff);
-        m.compose(ep,q.identity(),es); eInt.setMatrixAt(i,m); });
-      eInt.instanceMatrix.needsUpdate=true; nucleusGroup.add(eInt);
-    }
-    // shared e⁻: p–n pairs in the SAME subunit (grammar bonds: d→1, t→2, α→4)
-    const bonds=[];
-    for(let i=0;i<N;i++)for(let j=i+1;j<N;j++){
-      const a=shown[i],b=shown[j];
-      if(a.type===b.type) continue;
-      if(a.group!==b.group || a.sub!==b.sub) continue;
-      bonds.push([a,b]);
-    }
-    if(bonds.length){
-      const eSh=new THREE.InstancedMesh(sphGeo,eMat,bonds.length); eSh.castShadow=false;
-      const es2=new THREE.Vector3(0.10*kv,0.10*kv,0.10*kv);
-      const linePts=new Float32Array(bonds.length*6);
-      bonds.forEach(([a,b],i)=>{
-        const pa=new THREE.Vector3(a.pos[0]*SCENE,a.pos[1]*SCENE,a.pos[2]*SCENE);
-        const pb=new THREE.Vector3(b.pos[0]*SCENE,b.pos[1]*SCENE,b.pos[2]*SCENE);
-        const mid=pa.clone().add(pb).multiplyScalar(0.5);
-        m.compose(mid,q.identity(),es2); eSh.setMatrixAt(i,m);
-        linePts.set([pa.x,pa.y,pa.z,pb.x,pb.y,pb.z],i*6);
-      });
-      eSh.instanceMatrix.needsUpdate=true; nucleusGroup.add(eSh);
-      const lg=new THREE.BufferGeometry(); lg.setAttribute('position',new THREE.BufferAttribute(linePts,3));
-      const strings=new THREE.LineSegments(lg,new THREE.LineBasicMaterial({color:eCol,transparent:true,opacity:0.45}));
-      nucleusGroup.add(strings);
+    const bySub=new Map();
+    shown.forEach(n=>{ const k=n.group+':'+n.sub; (bySub.get(k)||(bySub.set(k,[]),bySub.get(k))).push(n); });
+    const pathMat=new THREE.MeshBasicMaterial({color:eCol,transparent:true,opacity:0.55,
+      blending:THREE.AdditiveBlending,depthWrite:false});
+    const rideMat=new THREE.MeshStandardMaterial({color:eCol,emissive:eCol.clone().multiplyScalar(0.9),
+      emissiveIntensity:1.3,roughness:0.2,metalness:0.0});
+    const items=[];
+    bySub.forEach(members=>{
+      const curve=makeTourCurve(THREE, members); if(!curve) return;
+      const nE=Math.max(1, members.filter(x=>x.type==='n').length);
+      const tube=new THREE.Mesh(new THREE.TubeGeometry(curve, 64, 0.045*SCENE, 6, true), pathMat);
+      tube.castShadow=false; nucleusGroup.add(tube);
+      for(let k=0;k<nE;k++) items.push({curve, phase:k/nE, slot:items.length});
+    });
+    if(items.length){
+      const riders=new THREE.InstancedMesh(sphGeo, rideMat, items.length); riders.castShadow=false;
+      const rs=new THREE.Vector3(0.11*kv,0.11*kv,0.11*kv);
+      items.forEach((it,i)=>{ const p=it.curve.getPointAt(it.phase);
+        m.compose(p,q.identity(),rs); riders.setMatrixAt(i,m); });
+      riders.instanceMatrix.needsUpdate=true; nucleusGroup.add(riders);
+      eTourReg={riders, items, scale:rs};
     }
   }
 
-  // ---- neutrinos (NP30): one persistent, un-closable winding per NEUTRON, along its
-  // throughpole axis. Instanced open helix, oriented on the nucleon axis; screwed in animate(). ----
+  // ---- neutrinos (NP30): W→0 throughpole thread per neutron. Open: in one pole, out
+  // the other; never a closed circuit. Not a multi-turn helix. ----
   nuReg=null;
   if(state.showNu){
     const nu=shown.filter(n=>n.type==='n');
@@ -1130,14 +1170,14 @@ function rebuild3D(){
       const nuCol=new THREE.Color(state.colNu);
       const nuMat=new THREE.MeshBasicMaterial({color:nuCol,transparent:true,opacity:0.72,
         blending:THREE.AdditiveBlending,depthWrite:false});
-      const nuMesh=new THREE.InstancedMesh(nuHelixGeo,nuMat,nu.length); nuMesh.castShadow=false;
+      const nuMesh=new THREE.InstancedMesh(nuOpenGeo,nuMat,nu.length); nuMesh.castShadow=false;
       const nsc=new THREE.Vector3(R_p*SCENE,R_p*SCENE,R_p*SCENE);
       nuReg={mesh:nuMesh,items:[],scale:nsc};
       nu.forEach((n,i)=>{
         const p=new THREE.Vector3(n.pos[0]*SCENE,n.pos[1]*SCENE,n.pos[2]*SCENE);
         ax.set(n.axis[0],n.axis[1],n.axis[2]); q.setFromUnitVectors(ZAX,ax);
         m.compose(p,q,nsc); nuMesh.setMatrixAt(i,m);
-        nuReg.items.push({pos:p.clone(),quat:q.clone(),slot:i});
+        nuReg.items.push({pos:p.clone(),quat:q.clone(),axis:ax.clone(),slot:i});
       });
       nuMesh.instanceMatrix.needsUpdate=true; nucleusGroup.add(nuMesh);
     }
@@ -1222,13 +1262,29 @@ function animate(){
       reg.mesh.instanceMatrix.needsUpdate=true;
     }
   }
-  // neutrino throughpole flow: screw each open helix about its own axis (reads as axial flow;
-  // it persists even with nucleon spin off — the un-closable winding never stops).
+  // electron tour: riders advance along the closed pathway (the orbital is the tour).
+  if(eTourReg && eTourReg.items.length){
+    const te=performance.now()/1000, speed=0.22+state.spinRate*0.18;
+    const me=new THREE.Matrix4(), qe=new THREE.Quaternion(), Zt=new THREE.Vector3(0,0,1);
+    for(const it of eTourReg.items){
+      const u=((it.phase+te*speed)%1+1)%1;
+      const p=it.curve.getPointAt(u);
+      const tan=it.curve.getTangentAt(u);
+      qe.setFromUnitVectors(Zt, tan);
+      me.compose(p, qe, eTourReg.scale);
+      eTourReg.riders.setMatrixAt(it.slot, me);
+    }
+    eTourReg.riders.instanceMatrix.needsUpdate=true;
+  }
+  // neutrino throughpole: axial flow through the neutron, never a closed circuit.
   if(nuReg && nuReg.items.length){
-    const tn=performance.now()/1000, wv=state.spinRate*3.0+0.8;
-    const mn=new THREE.Matrix4(), qzn=new THREE.Quaternion(), qqn=new THREE.Quaternion(), Zn=new THREE.Vector3(0,0,1);
-    for(const it of nuReg.items){ qzn.setFromAxisAngle(Zn,wv*tn); qqn.copy(it.quat).multiply(qzn);
-      mn.compose(it.pos,qqn,nuReg.scale); nuReg.mesh.setMatrixAt(it.slot,mn); }
+    const tn=performance.now()/1000, flow=0.12*Math.sin(tn*1.15);
+    const mn=new THREE.Matrix4();
+    for(const it of nuReg.items){
+      const p=it.pos.clone().addScaledVector(it.axis, flow*R_p*SCENE);
+      mn.compose(p, it.quat, nuReg.scale);
+      nuReg.mesh.setMatrixAt(it.slot, mn);
+    }
     nuReg.mesh.instanceMatrix.needsUpdate=true;
   }
   if(torMatP){ const o=state.showTorus? state.torA*Math.min(1,state.spinRate/2.2) : 0;
@@ -1283,10 +1339,19 @@ const H_PLANCK=6.62607015e-34, MeV_J=1.602176634e-13;
 const stepFreqHz=dE=>dE*MeV_J/H_PLANCK;             // a subunit locks in → emits a photon f = ΔE/h (a γ)
 function subunitLabel(k){
   if(k<=0) return 'empty';
-  if(k===1) return 'α core (2p·2n)';
-  const iso=state.iso;
-  if(k<=1+iso.nd) return `α + <b>${k-1}</b>/${iso.nd} deuterons`;
-  return `α + ${iso.nd}d + <b>${k-1-iso.nd}</b>/${iso.nt} tritons`;
+  const seq=state.nuc&&state.nuc.subSeq;
+  if(!seq || !seq[k-1]){
+    if(k===1) return 'α core (2p·2n)';
+    const iso=state.iso;
+    if(k<=1+iso.nd) return `α + <b>${k-1}</b>/${iso.nd} deuterons`;
+    return `α + ${iso.nd}d + <b>${k-1-iso.nd}</b>/${iso.nt} tritons`;
+  }
+  const s=seq[k-1];
+  if(s.group==='alpha') return 'α core (2p·2n)';
+  const nD=seq.slice(0,k).filter(x=>x.sp==='d').length;
+  const nT=seq.slice(0,k).filter(x=>x.sp==='t').length;
+  const inSh=seq.slice(0,k).filter(x=>x.name===s.name && x.geom===s.geom).length;
+  return `α + ${nD}d + ${nT}t · <b>${s.name}</b> ${inSh}/${s.cap}`+(s.geom?' · '+s.geom:'');
 }
 // incremental binding per packing step = the chirp: ΔE(k) = κ·[ΔA(k) − ΔA(k−1)]
 function computeChirp(){
@@ -1305,19 +1370,31 @@ function drawChirp(){
   const maxE=Math.max(...arr.slice(1),1e-6), bw=W/n;
   for(let k=1;k<=n;k++){
     const h=Math.max(1,(arr[k]/maxE)*(H-6)), on=k<=state.reveal;
-    sctx.fillStyle = on ? (k===1?'rgba(192,96,224,.92)':k<=1+state.iso.nd?'rgba(122,180,224,.88)':'rgba(255,208,128,.88)')
-                        : 'rgba(96,96,128,.32)';
+    const seq=state.nuc&&state.nuc.subSeq;
+    const step=seq&&seq[k-1];
+    const col= !on ? 'rgba(96,96,128,.32)'
+      : (k===1|| (step&&step.sp==='α') ? 'rgba(192,96,224,.92)'
+        : (step&&step.sp==='t') ? 'rgba(255,208,128,.88)'
+        : 'rgba(122,180,224,.88)');
+    sctx.fillStyle = col;
     sctx.fillRect((k-1)*bw+0.4, H-3-h, Math.max(0.8,bw-0.8), h);
   }
-  // closure ticks (canon 2026-07-30): the neutron ledger N = 2 + d + 2t crossing a
-  // magic number as the subunits lock in — the shell schedule read straight off the build.
+  // closure ticks: N = 2 + d + 2t along PACK order (NSEQ05). All-d-then-t skipped 28 on Fe-56.
   const MAGIC=[2,8,20,28,50,82,126];
   sctx.strokeStyle='rgba(68,238,187,.85)'; sctx.fillStyle='rgba(68,238,187,.85)';
   sctx.font='8px monospace'; sctx.lineWidth=1;
+  const seq=state.nuc&&state.nuc.subSeq;
   for(let k=1;k<=n;k++){
-    const d=Math.min(k-1,state.iso.nd), t=Math.max(0,k-1-state.iso.nd);
-    const Nled=2+d+2*t, dPrev=Math.min(k-2,state.iso.nd), tPrev=Math.max(0,k-2-state.iso.nd);
-    const NPrev=k===1?0:2+dPrev+2*tPrev;
+    let d,t,dPrev,tPrev;
+    if(seq && seq.length){
+      const take=seq.slice(0,k), prev=seq.slice(0,Math.max(0,k-1));
+      d=take.filter(x=>x.sp==='d').length; t=take.filter(x=>x.sp==='t').length;
+      dPrev=prev.filter(x=>x.sp==='d').length; tPrev=prev.filter(x=>x.sp==='t').length;
+    }else{
+      d=Math.min(k-1,state.iso.nd); t=Math.max(0,k-1-state.iso.nd);
+      dPrev=Math.min(k-2,state.iso.nd); tPrev=Math.max(0,k-2-state.iso.nd);
+    }
+    const Nled=2+d+2*t, NPrev=k===1?0:2+dPrev+2*tPrev;
     for(const M of MAGIC) if(Nled>=M && NPrev<M){
       const X=(k-0.5)*bw;
       sctx.beginPath(); sctx.moveTo(X,2); sctx.lineTo(X,9); sctx.stroke();
