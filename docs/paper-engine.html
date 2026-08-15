@@ -34,7 +34,8 @@ sub,sup{line-height:0}
 </style>
 <link rel="stylesheet" href="sdt-shell.css">
 <script src="sdt-shell.js" defer></script>
-<meta name="description" content="Section Paper — The Engine — part of Spatial Displacement Theory, a zero-free-parameter physics framework.">
+<script src="engine-data.js" defer></script>
+<meta name="description" content="Section Paper — The Engine — laws.hpp, input provenance, certification classes and the current executable benchmark ledger.">
 <link rel="canonical" href="https://spatialdisplacementtheory.com/paper-engine">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.ico" sizes="64x64">
@@ -44,7 +45,7 @@ sub,sup{line-height:0}
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Spatial Displacement Theory">
 <meta property="og:title" content="Section Paper — The Engine">
-<meta property="og:description" content="Section Paper — The Engine — part of Spatial Displacement Theory, a zero-free-parameter physics framework.">
+<meta property="og:description" content="Section Paper — The Engine — laws.hpp, input provenance, certification classes and the current executable benchmark ledger.">
 <meta property="og:url" content="https://spatialdisplacementtheory.com/paper-engine">
 <meta property="og:image" content="https://spatialdisplacementtheory.com/og-card.png">
 <meta property="og:image:width" content="1200">
@@ -52,18 +53,18 @@ sub,sup{line-height:0}
 <meta property="og:locale" content="en_AU">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Section Paper — The Engine">
-<meta name="twitter:description" content="Section Paper — The Engine — part of Spatial Displacement Theory, a zero-free-parameter physics framework.">
+<meta name="twitter:description" content="Section Paper — The Engine — laws.hpp, input provenance, certification classes and the current executable benchmark ledger.">
 <meta name="twitter:image" content="https://spatialdisplacementtheory.com/og-card.png">
 </head>
 <body>
 <main>
 <p class="series">Spatial Displacement Theory · Section Paper VI · Prepared for Submission</p>
 <h1>The Engine: laws.hpp as Single Source of Truth, the Provenance Schema, and the Benchmark Ledger</h1>
-<p class="byline">J. C. Harvey</p>
-<p class="affil">Melbourne, Australia · July 2026 · Atlas Chapter Five — The Engine</p>
+<p class="byline">James Christopher Tyndall</p>
+<p class="affil">Melbourne, Australia · August 2026 · Atlas Chapter Five — The Engine</p>
 
 <div class="abstract">
-<p><strong>Abstract.</strong> The framework's numerical claims are not a manuscript's — they compile. A single header, Engine/include/sdt/laws.hpp, is the source of truth: every constant, force law, and derivation flows through namespace sdt::laws, whose sub-namespaces mirror the Six Laws, with bridge (the k-hierarchy and koppa), atomic, nuclear, and coulomb_identity carrying the domain functions. derivation basis discipline is structural — a quantity absent from sdt::laws::measured is not an admissible input — and every load-bearing constant carries a machine-readable provenance block: provenance status, correspondence status, input dependency, certification class A–F, delete-test assertion, risk flag. The benchmark executable self-reports PASS/FAIL against measured values within stated tolerances, with IDENTITY and CALIBRATED rows labelled as such rather than counted as predictions; the audited ledger stands at 46/57 earned passes, 11 identities, 2 calibrated, 0 failures, 11 pending. The suite now also carries the nuclear closure schedule as a compile-time proof — a static_assert that the deuteron-tier/triton-belt alternation rebuilds every measured magic number — and suite row B38 tallies the parity-lock predicate at 7/7 mono-isotopic grips and 12/12 combined checks.</p>
+<p><strong>Abstract.</strong> The framework's numerical claims are executable. A single header, Engine/include/sdt/laws.hpp, is the source of truth: constants, force laws and approved derivations flow through namespace sdt::laws. Input discipline is structural — a quantity absent from sdt::laws::measured is not an admissible measured input — and load-bearing constants carry provenance, dependency, certification and circularity records. The benchmark executable compares the header's outputs with measured values, while keeping IDENTITY, CALIBRATED and PENDING rows outside the earned-prediction headline. The current rebuilt ledger is <span data-sdt-benchmark-summary>66/66 earned predictions passed · 19 IDENTITY · 0 CALIBRATED · 3 PENDING note-only</span>. The same run now exports the machine-readable website dataset, so numerical public copy can consume the verified header rather than duplicate it by hand.</p>
 </div>
 <p><strong>Keywords:</strong> single source of truth · derivation basis discipline · provenance blocks · certification classes · benchmark ledger · compile-time closure proof</p>
 
@@ -84,14 +85,14 @@ sub,sup{line-height:0}
 <p>The schema keeps the register at the point of use: P<sub>eff</sub> is class E with "fails delete-test" on its own definition line; the coupling identity k<sub>e</sub>e² = αℏc is class F with the tautology named; the koppa-per-baryon constant carries its ℓ<sub>P</sub>-convention disclosure. A reader auditing the framework audits the header.</p>
 
 <h2>3. The benchmark ledger</h2>
-<div class="eq"><span>audited: 46/57 earned PASS · 11 IDENTITY · 2 CALIBRATED · 0 FAIL · 11 PENDING</span><span class="no">(2)</span></div>
+<div class="eq"><span data-sdt-benchmark-summary>66/66 earned predictions passed · 19 IDENTITY · 0 CALIBRATED · 3 PENDING note-only</span><span class="no">(2)</span></div>
 <p>The suite (benchmarks_suite.cpp, B01 and up) compares SDT-derived values to measured constants within stated tolerances and prints its own report. Ledger discipline: identity rows (z·k² = 1 among them) are labelled IDENTITY and carry no evidential weight; calibrated rows name their anchor; a historical fabricated row (a Lamb-interval literal with no derivation behind it) was deleted with authorization and its retraction is part of the record. Two structural rows are new with the closure-schedule canon change:</p>
 <div class="eq"><span>static_assert(closure(0..6) ≡ {2, 8, 20, 28, 50, 82, 126}) — the schedule compiles or the engine does not</span><span class="no">(3)</span></div>
 <div class="eq"><span>B38: triton_parity_misfit — 7/7 mono-isotopic grips cleared · 5/5 odd-odd quasi-stables flagged · 12/12</span><span class="no">(4)</span></div>
 <p>Equation (3) is a compile-time proof that the deuteron-tier/triton-belt alternation rebuilds the measured closure sequence: if the schedule and the sequence ever disagree, the header fails to compile. As of 2026-07-30 the capacities themselves are DERIVED from two closed forms — tier F(n) = (n+1)(n+2), belt B(n) = 2(n+1) — with the forward prediction closure(7) = 184; the descent onset n = 3 remains read from the data, and the provenance block says so at the definition site.</p>
 
 <h2>4. Build and reproduction</h2>
-<div class="eq"><span>cmake -B build -G "Visual Studio 17 2022" -A x64 · cmake --build build --config Release · sdt-benchmarks.exe</span><span class="no">(5)</span></div>
+<div class="eq"><span>cl /std:c++20 /EHsc /utf-8 /I Engine\include Benchmarks\B01_B25\benchmarks_suite.cpp · benchmarks_suite.exe --website-data Release\HTML_SDT_Website\dist\sdt-engine-data.json</span><span class="no">(5)</span></div>
 <p>Windows/MSVC is the primary environment (UTF-8 sources require /utf-8); GCC and Clang build unmodified. Investigation tools compile standalone against the header. Reports under ATOMICUS/reports/ are generated outputs — the tool is the source; regeneration, not hand-editing, is the change mechanism.</p>
 
 <h2>5. Certification</h2>
@@ -111,7 +112,7 @@ sub,sup{line-height:0}
 <h2 class="refs">References</h2>
 <div class="refs"><ol>
 <li>Engine/include/sdt/laws.hpp (v6.0, Six-Law framework) and downstream headers.</li>
-<li>Benchmarks/benchmarks_suite.cpp; Benchmarks/nuclear_grammar_output.txt; Benchmarks/CMakeLists.txt.</li>
+<li>Benchmarks/B01_B25/benchmarks_suite.cpp and its generated website-data export.</li>
 <li>Audits/ — the provenance and correspondence audit set (formulations census, contamination audit, paradox census).</li>
 <li>Section Papers II and IV of this series (the laws the engine encodes; the schedule it proves).</li>
 </ol></div>

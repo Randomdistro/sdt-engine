@@ -4,28 +4,32 @@
 <script>/*sdt-theme-guard*/(function(){try{var t=localStorage.getItem("sdt.theme")||"auto";if(t==="auto")t=(window.matchMedia&&window.matchMedia("(prefers-color-scheme:dark)").matches)?"dark":"light";var d=document.documentElement;d.setAttribute("data-theme",t);d.setAttribute("data-sdt-theme",t);}catch(e){}})();</script>
 
 <meta charset="UTF-8">
-<title>ATOMICUS Lab — Nuclear Construction Map</title>
+<title>ATOMICUS Lab — Subdued · SDT</title>
 <link rel="stylesheet" href="style.css">
 <style>
+  /* SUBDUED SKIN — v4 aesthetic (warm charcoal / muted copper), full lab density */
+  :root{
+    --copper:#d4a05c; --copper-light:#e0b06a; --copper-glow:rgba(212,160,92,0.12);
+    --ink:#e8e0d4; --ink-soft:#c8bfae; --ink-muted:#999; --ink-faint:#7a7266; --ink-whisper:#666;
+    --paper:#242019; --paper-edge:#333; --cream:#1a1816;
+    --steel:#6a95b0; --steel-deep:#4a6d82; --midnight:#1a1816;
+  }
+
   * { margin:0; padding:0; box-sizing:border-box; }
   body {
-    background:
-      radial-gradient(ellipse at top left, rgba(30,20,80,0.55), transparent 50%),
-      radial-gradient(ellipse at bottom right, rgba(10,40,80,0.45), transparent 55%),
-      linear-gradient(180deg, #070a16, #0b0f22);
-    color: #c8d4f0;
+    background:#1a1816;
+    color:#e8e0d4;
     font-family:'Inter', 'Segoe UI', system-ui, sans-serif;
     overflow:hidden;
   }
 
   .atomicus-header {
+    display:none;
     position:fixed; top:0; left:0; right:0; z-index:30;
     display:flex; align-items:center; justify-content:space-between;
     gap:12px; padding:10px 16px;
-    background:rgba(7,10,22,0.92);
-    backdrop-filter:blur(16px);
-    border-bottom:1px solid rgba(40,60,120,0.50);
-    box-shadow:0 4px 24px rgba(0,0,0,0.50);
+    background:rgba(30,28,24,0.94);
+    border-bottom:1px solid #333;
   }
   .atomicus-header__brand {
     display:flex; align-items:center; gap:10px;
@@ -48,23 +52,24 @@
   .atomicus-header__link:hover { background:rgba(176,116,48,0.24); }
 
   /* ── LEFT COLUMN: controls + info ── */
-  #leftCol {
-    position:fixed; top:56px; left:0; bottom:0; width:230px; z-index:10;
-    display:flex; flex-direction:column;
-    background:rgba(8,11,24,0.95);
-    border-right:1px solid rgba(30,50,100,0.55);
-    box-shadow:6px 0 24px rgba(0,0,0,0.40);
-    overflow:hidden;
+  #leftCol { display:contents; }
+  #info {
+    position:fixed; top:10px; left:10px; z-index:10; max-width:320px;
+    background:rgba(30,28,24,0.9); border:1px solid #333; border-radius:6px;
+  }
+  #controls {
+    position:fixed; top:10px; right:10px; z-index:10; width:290px;
+    max-height:calc(100vh - 20px);
+    background:rgba(30,28,24,0.9); border:1px solid #333; border-radius:6px;
   }
   #info {
-    padding:10px 14px 8px; font-size:12px; border-bottom:1px solid var(--paper-edge);
-    flex-shrink:0;
+    padding:12px 16px; font-size:12px; line-height:1.6;
   }
   #info h3 { margin-bottom:4px; color:var(--copper); font-size:13px; font-family:'Source Serif 4', 'Georgia', serif; }
   #info .dim { color:var(--ink-muted); font-size:11px; line-height:1.55; }
   #controls {
-    flex:1; overflow-y:auto; padding:0 0 14px;
-    scrollbar-width:thin; scrollbar-color:#333 transparent;
+    overflow-y:auto; padding:6px 4px 14px;
+    scrollbar-width:thin; scrollbar-color:#444 transparent;
     font-size:12px;
   }
   #controls::-webkit-scrollbar { width:4px; }
@@ -72,31 +77,31 @@
 
   /* ── Toggle switches ── */
   .toggle-switch {
-    display:flex; align-items:center; gap:8px; cursor:pointer;
-    padding:3px 10px; user-select:none;
+    display:block; margin:4px 0; padding:0 12px; cursor:pointer; user-select:none;
   }
-  .toggle-track {
+  .toggle-track { display:none; }
+  .toggle-track-off {
     position:relative; width:36px; height:18px; border-radius:9px;
-    background:rgba(40,50,100,0.55); transition:background 0.2s; flex-shrink:0;
+    background:#3a352c; transition:background 0.2s; flex-shrink:0;
   }
   .toggle-track::after {
     content:''; position:absolute; left:2px; top:2px;
     width:14px; height:14px; border-radius:50%;
-    background:rgba(140,160,200,0.80); transition:transform 0.2s, background 0.2s;
+    background:#8a8070; transition:transform 0.2s, background 0.2s;
   }
-  input[type=checkbox]:checked + .toggle-track { background:rgba(30,160,130,0.70); }
+  input[type=checkbox]:checked + .toggle-track { background:rgba(212,160,92,0.55); }
   input[type=checkbox]:checked + .toggle-track::after {
-    transform:translateX(18px); background:#c0fce8;
+    transform:translateX(18px); background:#f0e0c0;
   }
-  input[type=checkbox] { display:none; }
-  .toggle-label { font-size:11px; color:#8898bb; }
+  input[type=checkbox] { display:inline-block; margin-right:6px; accent-color:#d4a05c; vertical-align:-2px; }
+  .toggle-label { font-size:12px; color:#c8bfae; }
 
   /* ── Dropdown sections ── */
-  .dropdown-section { border-bottom:1px solid rgba(30,45,90,0.70); }
+  .dropdown-section { border-bottom:none; }
   .dropdown-header {
-    cursor:pointer; padding:7px 10px; font-size:11px;
-    font-weight:600; color:var(--ink-muted); text-transform:uppercase;
-    letter-spacing:0.05em; display:flex; justify-content:space-between;
+    cursor:pointer; padding:6px 12px 3px; font-size:12px;
+    font-weight:600; color:#d4a05c;
+    display:flex; justify-content:space-between;
     align-items:center; user-select:none;
   }
   .dropdown-header:hover { color:var(--ink); background:rgba(176,116,48,0.08); }
@@ -111,7 +116,7 @@
   /* ── Morph buttons ── */
   .morph-btn {
     flex:1; padding:3px 0; font-size:10px; border-radius:3px;
-    border:1px solid rgba(176,116,48,0.32); background:rgba(255,255,255,0.52); color:var(--ink-muted);
+    border:1px solid rgba(212,160,92,0.30); background:rgba(232,224,212,0.05); color:var(--ink-muted);
     cursor:pointer; transition:all 0.15s;
     font-family:'Segoe UI',sans-serif; letter-spacing:0.3px;
   }
@@ -127,21 +132,20 @@
 
   /* ── RIGHT COLUMN: element panel + PIP ── */
   #rightCol {
-    position:fixed; top:56px; right:0; bottom:0; width:260px; z-index:10;
+    position:fixed; left:10px; bottom:10px; width:300px; max-height:58vh; z-index:10;
     display:flex; flex-direction:column;
-    background:rgba(255,255,255,0.68);
-    border-left:1px solid var(--paper-edge);
-    box-shadow:-6px 0 24px rgba(30,28,24,0.1);
+    background:rgba(30,28,24,0.9);
+    border:1px solid #333; border-radius:6px;
     overflow:hidden;
   }
   #panel {
     flex:1; overflow:hidden; display:flex; flex-direction:column;
-    padding:12px 14px; border-bottom:1px solid rgba(232,224,210,0.9);
+    padding:12px 14px; border-bottom:1px solid #2e2a24;
     font-size:13px;
   }
   #panel .elem-header {
     display:flex; align-items:baseline; gap:10px;
-    margin-bottom:8px; border-bottom:1px solid rgba(232,224,210,0.9); padding-bottom:8px;
+    margin-bottom:8px; border-bottom:1px solid #2e2a24; padding-bottom:8px;
     flex-shrink:0;
   }
   #panel .sym { font-size:30px; font-weight:700; color:var(--copper); line-height:1; }
@@ -157,12 +161,12 @@
 
   /* ── PIP: nuclear structure mini-view ── */
   #pip {
-    flex-shrink:0; height:200px;
-    border-top:1px solid rgba(232,224,210,0.9);
+    flex-shrink:0; height:180px;
+    border-top:1px solid #2e2a24;
     position:relative; cursor:pointer;
-    background:rgba(255,255,255,0.68);
+    background:rgba(30,28,24,0.94);
   }
-  #pip:hover { background:rgba(255,255,255,0.84); }
+  #pip:hover { background:rgba(38,35,30,0.96); }
   #pipCanvas { display:block; width:100%; height:100%; }
   #pipLabel {
     position:absolute; bottom:6px; left:0; right:0;
@@ -201,29 +205,28 @@
   /* ── Tooltip ── */
   #tooltip {
     display:none; position:fixed; z-index:20; pointer-events:none;
-    background:rgba(255,255,255,0.94); color:var(--ink); padding:10px 14px;
-    border-radius:6px; font-size:12px; border:1px solid rgba(176,116,48,0.24);
-    box-shadow:0 12px 24px rgba(30,28,24,0.16);
-    max-width:340px; line-height:1.6;
+    background:rgba(30,28,24,0.95); color:#faf6ef; padding:10px 14px;
+    border-radius:4px; font-size:12px; border:1px solid #444;
+    max-width:360px; line-height:1.6;
   }
 
   /* ── Datasheet panel ── */
   #datasheet {
-    display:none; position:fixed; top:56px; right:0; width:380px; height:calc(100vh - 56px);
-    background:rgba(255,255,255,0.9); border-left:1px solid var(--paper-edge);
+    display:none; position:fixed; top:0; right:0; width:380px; height:100vh;
+    background:rgba(30,28,24,0.96); border-left:1px solid #333;
     overflow-y:auto; z-index:1000; padding:20px;
     box-sizing:border-box; font-family:'Segoe UI',sans-serif; color:var(--ink-soft);
   }
   #datasheet table { width:100%; border-collapse:collapse; font-size:12px; }
-  #datasheet td { padding:4px 0; border-bottom:1px solid #1a2030; }
-  #datasheet a { color:#4aaddd; text-decoration:none; }
+  #datasheet td { padding:4px 0; border-bottom:1px solid #333; }
+  #datasheet a { color:#7ab4e0; text-decoration:none; }
   #datasheet a:hover { text-decoration:underline; }
 </style>
 <link rel="stylesheet" href="sdt-shell.css">
 <script src="sdt-shell.js" defer></script>
 <script src="js/pack-nucleus.js"></script>
 <meta name="description" content="Interactive nuclear construction map: build any nucleus from one alpha core plus deuterons and tritons, and watch the grammar resolve.">
-<link rel="canonical" href="https://spatialdisplacementtheory.com/atomicus-lab">
+<link rel="canonical" href="https://spatialdisplacementtheory.com/atomicus-lab-subdued">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.ico" sizes="64x64">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -233,7 +236,7 @@
 <meta property="og:site_name" content="Spatial Displacement Theory">
 <meta property="og:title" content="ATOMICUS Lab — Nuclear Construction Map">
 <meta property="og:description" content="Interactive nuclear construction map: build any nucleus from one alpha core plus deuterons and tritons, and watch the grammar resolve.">
-<meta property="og:url" content="https://spatialdisplacementtheory.com/atomicus-lab">
+<meta property="og:url" content="https://spatialdisplacementtheory.com/atomicus-lab-subdued">
 <meta property="og:image" content="https://spatialdisplacementtheory.com/og-card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -300,7 +303,7 @@
     <div class="dropdown-section">
       <div class="dropdown-header open" id="hdr-ranges">Isotope Ranges</div>
       <div class="dropdown-content open" id="sec-ranges">
-        <label class="toggle-switch" style="border-bottom:1px solid rgba(255,255,255,0.07);padding-bottom:6px;margin-bottom:4px;">
+        <label class="toggle-switch" style="border-bottom:1px solid rgba(232,224,212,0.07);padding-bottom:6px;margin-bottom:4px;">
           <input type="checkbox" id="showUnstableAll">
           <span class="toggle-track"></span>
           <span class="toggle-label" style="color:#d4a850;font-weight:600;">&#9762; All Unstable</span>
@@ -358,7 +361,7 @@
         <label class="toggle-switch"><input type="checkbox" id="grp-lanth"><span class="toggle-track"></span><span class="toggle-label" style="color:#c58bff;">Lanthanides</span></label>
         <label class="toggle-switch"><input type="checkbox" id="grp-actin"><span class="toggle-track"></span><span class="toggle-label" style="color:#ff6bcb;">Actinides</span></label>
         <label class="toggle-switch"><input type="checkbox" id="grp-halogen"><span class="toggle-track"></span><span class="toggle-label" style="color:#c3ff6b;">Halogens</span></label>
-        <div style="padding:8px 10px 4px;border-top:1px solid rgba(255,255,255,0.07);margin-top:4px;">
+        <div style="padding:8px 10px 4px;border-top:1px solid rgba(232,224,212,0.07);margin-top:4px;">
           <div style="font-size:10px;color:#8898bb;margin-bottom:4px;">Pull any line:</div>
           <div style="display:flex;gap:4px;align-items:center;margin-bottom:5px;">
             <select id="linePickAxis" style="background:#141826;color:#cdd6e6;border:1px solid #33405c;border-radius:3px;font-size:10px;padding:3px;flex:1;">
@@ -372,7 +375,7 @@
           </div>
           <label class="toggle-switch"><input type="checkbox" id="linePickOn"><span class="toggle-track"></span><span class="toggle-label">Highlight this line</span></label>
         </div>
-        <div style="padding:8px 10px 6px;border-top:1px solid rgba(255,255,255,0.07);">
+        <div style="padding:8px 10px 6px;border-top:1px solid rgba(232,224,212,0.07);">
           <div style="font-size:10px;color:#8898bb;margin-bottom:3px;">Dim the rest: <span id="dimVal" style="color:#d4a05c;">80%</span></div>
           <input type="range" id="dimSlider" min="0" max="95" value="80" style="width:100%;accent-color:#d4a05c;cursor:pointer;">
         </div>
@@ -1070,15 +1073,15 @@ const SHORT_LIVED = [
 
 /* Decay vector definitions in grammar space */
 const DECAY_VECTORS = {
-  "α":    { dnd: -2, dnt:  0, color: "#ffd040", label: "α (−2d)" },
-  "β⁻":   { dnd: +3, dnt: -2, color: "#40c8ff", label: "β⁻ (+3d,−2t)" },
-  "EC":   { dnd: -3, dnt: +2, color: "#ff40ff", label: "EC (−3d,+2t)" },
-  "β⁺":   { dnd: -3, dnt: +2, color: "#ff80ff", label: "β⁺ (−3d,+2t)" },
-  "β/EC": { dnd: -3, dnt: +2, color: "#80e0a0", label: "β/EC" },
-  "IT":   { dnd:  0, dnt:  0, color: "#ffaa40", label: "IT (same pos)" },
-  "n":    { dnd: +1, dnt: -1, color: "#ff6060", label: "n (+1d,−1t)" },
-  "p":    { dnd: -2, dnt: +1, color: "#ff9900", label: "p (−2d,+1t)" },
-  "SF":   { dnd:  0, dnt:  0, color: "#ff4444", label: "SF" },
+  "α":    { dnd: -2, dnt:  0, color: "#d4a05c", label: "α (−2d)" },
+  "β⁻":   { dnd: +3, dnt: -2, color: "#7ab4e0", label: "β⁻ (+3d,−2t)" },
+  "EC":   { dnd: -3, dnt: +2, color: "#8b6ca3", label: "EC (−3d,+2t)" },
+  "β⁺":   { dnd: -3, dnt: +2, color: "#a67a92", label: "β⁺ (−3d,+2t)" },
+  "β/EC": { dnd: -3, dnt: +2, color: "#78a08c", label: "β/EC" },
+  "IT":   { dnd:  0, dnt:  0, color: "#c88c50", label: "IT (same pos)" },
+  "n":    { dnd: +1, dnt: -1, color: "#c0503a", label: "n (+1d,−1t)" },
+  "p":    { dnd: -2, dnt: +1, color: "#c88c50", label: "p (−2d,+1t)" },
+  "SF":   { dnd:  0, dnt:  0, color: "#c0503a", label: "SF" },
 };
 
 /* Build fast decay lookup from existing tier tables */
@@ -1326,8 +1329,8 @@ let hoveredIso = null;
 let hoveredZ = null;
 let selectedIso = ISO.find(e => e.Z === 26 && e.A === 56);
 
-const LEFT_W  = 230;  // left column width px
-const RIGHT_W = 260;  // right column width px
+const LEFT_W  = 0;    // v4 layout: full-bleed canvas, floating cards
+const RIGHT_W = 0;    // v4 layout: full-bleed canvas, floating cards
 
 // Checkbox bindings
 const cbLabels      = document.getElementById("showLabels");
@@ -1424,10 +1427,10 @@ function gridPos(nd, nt) {
     u = actualU;
   }
 
-  // Use same pixel scale for both axes so columns are as tight as rows.
+  // v4 spread: columns wider than rows.
   const vRange = (vMax - vMin) || 1;
   const scale  = (H - pad*2) / vRange;
-  const scaleX = scale * 2;
+  const scaleX = scale * 3.2;
   gridScale  = scale;
   gridScaleX = scaleX;
 
@@ -1454,56 +1457,52 @@ function hexToRgb(hex) {
 
 // ── Hexagon geometry helpers ─────────────────────────────────────────────────
 function hexPath(ctx, cx, cy, Rx, Ry) {
-  if (Ry === undefined) Ry = Rx;
+  // v4 marker language: isotopes are CIRCLES, not hexagons.
+  // (name kept so every caller converts; Ry honoured where passed)
   ctx.beginPath();
-  for (let i = 0; i < 6; i++) {
-    const a = (i * Math.PI) / 3;
-    const x = cx + Rx * Math.cos(a);
-    const y = cy + Ry * Math.sin(a);
-    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-  }
-  ctx.closePath();
+  if (Ry != null && Ry !== Rx) ctx.ellipse(cx, cy, Rx, Math.abs(Ry), 0, 0, Math.PI * 2);
+  else ctx.arc(cx, cy, Math.abs(Rx), 0, Math.PI * 2);
 }
 
 // Palette defined by user request
 // Twilight jewel-tone palette — vivid, saturated, visible on dark backgrounds
 const Z_PALETTE = [
-  "100,190,255", // sky blue
-  "255,100,175", // rose
-  "60,210,255",  // azure
-  "80,255,120",  // electric green
-  "220,220,255", // lavender white
-  "190,110,255", // violet
-  "255,235,60",  // bright gold
-  "40,220,190",  // cyan-teal
-  "200,70,255",  // purple
-  "255,210,0",   // amber
-  "255,90,80",   // coral red
-  "255,155,40",  // orange
-  "90,255,150",  // mint
-  "60,210,110",  // spring green
-  "160,230,80",  // lime
-  "255,200,150", // peach
-  "255,170,110", // apricot
-  "130,220,160", // sage
+  "106,149,176", // steel
+  "194,122,90",  // rust
+  "122,180,224", // soft azure
+  "138,162,78",  // olive
+  "216,208,192", // bone
+  "139,108,163", // violet, muted
+  "212,160,92",  // copper
+  "106,160,150", // sea
+  "125,91,166",  // plum
+  "224,176,106", // amber, soft
+  "192,80,58",   // coral, muted
+  "200,140,80",  // ochre
+  "120,160,120", // sage
+  "100,150,110", // moss
+  "150,160,90",  // reed
+  "200,170,140", // sand
+  "190,150,110", // tan
+  "140,170,140", // eucalypt
 ];
 
 function isoColor(iso, alpha) {
   // Sole/Spread mode overrides
   if (cbSS.checked) {
-    if (iso.isSole && iso.stable) return `rgba(255,200,70,${alpha})`;
+    if (iso.isSole && iso.stable) return `rgba(224,176,106,${alpha})`;
     if (!iso.stable) return `rgba(160,100,80,${alpha})`;
-    return `rgba(100,150,200,${alpha})`;
+    return `rgba(106,149,176,${alpha})`;
   }
   // Odd/Even A mode
   if (cbOddEven.checked) {
     if (iso.oddA) return `rgba(220,160,80,${alpha})`;
-    return `rgba(80,160,220,${alpha})`;
+    return `rgba(106,149,176,${alpha})`;
   }
   // Unpaired electron mode
   if (cbUnp.checked && iso.unpaired >= 0) {
     const u = iso.unpaired;
-    if (u === 0) return `rgba(80,160,220,${alpha})`;
+    if (u === 0) return `rgba(106,149,176,${alpha})`;
     const t = Math.min(u / 7, 1);
     const r = Math.round(80 + t * 175);
     const g = Math.round(160 - t * 80);
@@ -1512,7 +1511,7 @@ function isoColor(iso, alpha) {
   }
   // Single isotope elements: indigo/lavender (visible on dark)
   if (iso.isSole && iso.stable) {
-    return `rgba(140,110,220,${alpha})`;
+    return `rgba(139,108,163,${alpha})`;
   }
   // Assign color from rotating jewel-tone palette based on Z
   const rgb = Z_PALETTE[iso.Z % Z_PALETTE.length];
@@ -1521,22 +1520,22 @@ function isoColor(iso, alpha) {
 
 // ─── Electron sub-shell bands (Aufbau filling order) ────────────────────────
 const SHELL_BANDS = [
-  { name:"1s",   zMin:1,  zMax:2,  fill:"rgba(255, 80,  50,  0.10)", stroke:"rgba(255, 80,  50,  0.55)" },
-  { name:"2s",   zMin:3,  zMax:4,  fill:"rgba(255, 145, 40,  0.09)", stroke:"rgba(255, 145, 40,  0.55)" },
-  { name:"2p",   zMin:5,  zMax:10, fill:"rgba(210, 230, 45,  0.08)", stroke:"rgba(210, 230, 45,  0.55)" },
-  { name:"3s",   zMin:11, zMax:12, fill:"rgba(255, 235, 55,  0.09)", stroke:"rgba(255, 235, 55,  0.55)" },
-  { name:"3p",   zMin:13, zMax:18, fill:"rgba(140, 55,  240, 0.08)", stroke:"rgba(160, 80,  255, 0.55)" },
-  { name:"4s",   zMin:19, zMax:20, fill:"rgba(60,  130, 255, 0.08)", stroke:"rgba(80,  155, 255, 0.55)" },
-  { name:"3d",   zMin:21, zMax:30, fill:"rgba(255, 80,  160, 0.08)", stroke:"rgba(255, 100, 175, 0.55)" },
-  { name:"4p",   zMin:31, zMax:36, fill:"rgba(40,  210, 120, 0.08)", stroke:"rgba(50,  220, 130, 0.55)" },
-  { name:"5s",   zMin:37, zMax:38, fill:"rgba(255, 55,  55,  0.08)", stroke:"rgba(255, 70,  70,  0.55)" },
-  { name:"4d",   zMin:39, zMax:48, fill:"rgba(165, 70,  255, 0.08)", stroke:"rgba(185, 90,  255, 0.55)" },
-  { name:"5p",   zMin:49, zMax:54, fill:"rgba(35,  220, 230, 0.08)", stroke:"rgba(45,  230, 240, 0.55)" },
-  { name:"6s",   zMin:55, zMax:56, fill:"rgba(35,  180, 160, 0.09)", stroke:"rgba(45,  200, 175, 0.55)" },
-  { name:"4f",   zMin:57, zMax:71, fill:"rgba(255, 185, 35,  0.08)", stroke:"rgba(255, 200, 45,  0.55)" },
-  { name:"5d",   zMin:72, zMax:80, fill:"rgba(190, 240, 90,  0.08)", stroke:"rgba(200, 245, 100, 0.55)" },
-  { name:"6p",   zMin:81, zMax:86, fill:"rgba(255, 105, 35,  0.09)", stroke:"rgba(255, 115, 45,  0.55)" },
-  { name:"7s",   zMin:87, zMax:88, fill:"rgba(210, 40,  210, 0.09)", stroke:"rgba(225, 60,  225, 0.55)" },
+  { name:"1s",   zMin:1,  zMax:2,   fill:"rgba(212,160,92, 0.05)", stroke:"rgba(212,160,92, 0.32)" },
+  { name:"2s",   zMin:3,  zMax:4,   fill:"rgba(212,160,92, 0.05)", stroke:"rgba(212,160,92, 0.32)" },
+  { name:"2p",   zMin:5,  zMax:10,  fill:"rgba(106,149,176, 0.05)", stroke:"rgba(106,149,176, 0.32)" },
+  { name:"3s",   zMin:11, zMax:12,  fill:"rgba(212,160,92, 0.05)", stroke:"rgba(212,160,92, 0.32)" },
+  { name:"3p",   zMin:13, zMax:18,  fill:"rgba(106,149,176, 0.05)", stroke:"rgba(106,149,176, 0.32)" },
+  { name:"4s",   zMin:19, zMax:20,  fill:"rgba(212,160,92, 0.05)", stroke:"rgba(212,160,92, 0.32)" },
+  { name:"3d",   zMin:21, zMax:30,  fill:"rgba(194,122,90, 0.05)", stroke:"rgba(194,122,90, 0.32)" },
+  { name:"4p",   zMin:31, zMax:36,  fill:"rgba(106,149,176, 0.05)", stroke:"rgba(106,149,176, 0.32)" },
+  { name:"5s",   zMin:37, zMax:38,  fill:"rgba(212,160,92, 0.05)", stroke:"rgba(212,160,92, 0.32)" },
+  { name:"4d",   zMin:39, zMax:48,  fill:"rgba(194,122,90, 0.05)", stroke:"rgba(194,122,90, 0.32)" },
+  { name:"5p",   zMin:49, zMax:54,  fill:"rgba(106,149,176, 0.05)", stroke:"rgba(106,149,176, 0.32)" },
+  { name:"6s",   zMin:55, zMax:56,  fill:"rgba(212,160,92, 0.05)", stroke:"rgba(212,160,92, 0.32)" },
+  { name:"4f",   zMin:57, zMax:71,  fill:"rgba(139,108,163, 0.05)", stroke:"rgba(139,108,163, 0.32)" },
+  { name:"5d",   zMin:72, zMax:80,  fill:"rgba(194,122,90, 0.05)", stroke:"rgba(194,122,90, 0.32)" },
+  { name:"6p",   zMin:81, zMax:86,  fill:"rgba(106,149,176, 0.05)", stroke:"rgba(106,149,176, 0.32)" },
+  { name:"7s",   zMin:87, zMax:88,  fill:"rgba(212,160,92, 0.05)", stroke:"rgba(212,160,92, 0.32)" },
   { name:"5f/6d",zMin:89, zMax:103,fill:"rgba(180, 20,  40,  0.08)", stroke:"rgba(200, 40,  60,  0.55)" },
 ];
 
@@ -1697,16 +1696,16 @@ function drawBackground(ctx) {
     }
     if (goldenPts.length > 1) {
       ctx.save();
-      ctx.shadowColor = "rgba(255,220,40,0.5)";
-      ctx.shadowBlur = 10;
-      ctx.strokeStyle = "rgba(255,215,0,0.12)";
+      ctx.shadowColor = "rgba(212,160,92,0.5)";
+      ctx.shadowBlur = 5;
+      ctx.strokeStyle = "rgba(212,160,92,0.12)";
       ctx.lineWidth = 7;
       ctx.lineJoin = "round";
       ctx.beginPath();
       goldenPts.forEach((p,i) => i===0 ? ctx.moveTo(p.x,p.y) : ctx.lineTo(p.x,p.y));
       ctx.stroke();
       ctx.restore();
-      ctx.strokeStyle = "rgba(255,210,30,0.40)";
+      ctx.strokeStyle = "rgba(212,160,92,0.40)";
       ctx.lineWidth = 1.5;
       ctx.lineJoin = "round";
       ctx.setLineDash([]);
@@ -1716,7 +1715,7 @@ function drawBackground(ctx) {
       const topPt = goldenPts[0];
       ctx.save();
       ctx.font = "600 10px 'Segoe UI',sans-serif";
-      ctx.fillStyle = "rgba(255,215,0,0.35)";
+      ctx.fillStyle = "rgba(212,160,92,0.35)";
       ctx.textAlign = "left";
       ctx.fillText("n\u2099 = n\u209c  (50/50)", topPt.x + 5, topPt.y + 14);
       ctx.restore();
@@ -1807,12 +1806,12 @@ function drawBackground(ctx) {
     });
     if (ePts.length > 1) {
       ctx.save();
-      ctx.strokeStyle = 'rgba(40,180,180,0.32)';
+      ctx.strokeStyle = 'rgba(106,160,150,0.32)';
       ctx.lineWidth   = 1.2;
       ctx.lineJoin    = 'round';
       ctx.lineCap     = 'round';
       ctx.setLineDash([6, 5]);
-      ctx.shadowBlur  = 0;
+      ctx.shadowBlur = 0;
       ctx.beginPath();
       ePts.forEach((p, i) => i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y));
       ctx.stroke();
@@ -1831,14 +1830,14 @@ function drawBackground(ctx) {
     });
     if (mPts.length > 1) {
       ctx.save();
-      ctx.shadowColor = 'rgba(255,160,40,0.25)'; ctx.shadowBlur = 5;
-      ctx.strokeStyle = 'rgba(255,160,40,0.10)'; ctx.lineWidth = 5;
+      ctx.shadowColor = 'rgba(200,140,80,0.25)'; ctx.shadowBlur = 2;
+      ctx.strokeStyle = 'rgba(200,140,80,0.10)'; ctx.lineWidth = 5;
       ctx.lineJoin = 'round';
       ctx.beginPath();
       mPts.forEach((p,i) => i===0 ? ctx.moveTo(p.x,p.y) : ctx.lineTo(p.x,p.y));
       ctx.stroke();
       ctx.restore();
-      ctx.strokeStyle = 'rgba(255,170,60,0.35)'; ctx.lineWidth = 1.2;
+      ctx.strokeStyle = 'rgba(200,140,80,0.35)'; ctx.lineWidth = 1.2;
       ctx.setLineDash([5,4]);
       ctx.beginPath();
       mPts.forEach((p,i) => i===0 ? ctx.moveTo(p.x,p.y) : ctx.lineTo(p.x,p.y));
@@ -1846,7 +1845,7 @@ function drawBackground(ctx) {
       ctx.setLineDash([]);
       if (mPts.length > 0) {
         ctx.font = "600 9px 'Segoe UI',sans-serif"; ctx.textAlign = 'left';
-        ctx.fillStyle = 'rgba(255,170,60,0.30)';
+        ctx.fillStyle = 'rgba(200,140,80,0.30)';
         ctx.fillText('u_mono (monoisotope)', mPts[0].x + 6, mPts[0].y - 4);
       }
     }
@@ -1860,7 +1859,7 @@ function drawBackground(ctx) {
       if (iso) solePoints.push(isoPos(iso));
     }
     if (solePoints.length > 1) {
-      ctx.strokeStyle = "rgba(255,230,70,0.20)";
+      ctx.strokeStyle = "rgba(216,176,100,0.20)";
       ctx.lineWidth = 1.0;
       ctx.setLineDash([4,3]);
       ctx.beginPath();
@@ -1985,16 +1984,16 @@ function drawBackground(ctx) {
     }
     if (goldenPts.length > 1) {
       ctx.save();
-      ctx.shadowColor = "rgba(255,220,40,0.7)";
-      ctx.shadowBlur = 14;
-      ctx.strokeStyle = "rgba(255,215,0,0.20)";
+      ctx.shadowColor = "rgba(212,160,92,0.7)";
+      ctx.shadowBlur = 7;
+      ctx.strokeStyle = "rgba(212,160,92,0.20)";
       ctx.lineWidth = 7;
       ctx.lineJoin = "round";
       ctx.beginPath();
       goldenPts.forEach((p,i) => i===0 ? ctx.moveTo(p.x,p.y) : ctx.lineTo(p.x,p.y));
       ctx.stroke();
       ctx.restore();
-      ctx.strokeStyle = "rgba(255,210,30,0.80)";
+      ctx.strokeStyle = "rgba(212,160,92,0.80)";
       ctx.lineWidth = 1.5;
       ctx.lineJoin = "round";
       ctx.setLineDash([]);
@@ -2004,7 +2003,7 @@ function drawBackground(ctx) {
       const topPt = goldenPts[0];
       ctx.save();
       ctx.font = "600 10px 'Segoe UI',sans-serif";
-      ctx.fillStyle = "rgba(255,215,0,0.60)";
+      ctx.fillStyle = "rgba(212,160,92,0.60)";
       ctx.textAlign = "left";
       ctx.fillText("n\u2099 = n\u209c  (50/50)", topPt.x + 5, topPt.y + 14);
       ctx.restore();
@@ -2026,12 +2025,12 @@ function drawBackground(ctx) {
     });
     if (ePts.length > 1) {
       ctx.save();
-      ctx.strokeStyle = 'rgba(40,180,180,0.42)';
+      ctx.strokeStyle = 'rgba(106,160,150,0.42)';
       ctx.lineWidth   = 1.2;
       ctx.lineJoin    = 'round';
       ctx.lineCap     = 'round';
       ctx.setLineDash([6, 5]);
-      ctx.shadowBlur  = 0;
+      ctx.shadowBlur = 0;
       ctx.beginPath();
       ePts.forEach((p, i) => i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y));
       ctx.stroke();
@@ -2050,14 +2049,14 @@ function drawBackground(ctx) {
     });
     if (mPts.length > 1) {
       ctx.save();
-      ctx.shadowColor = 'rgba(255,160,40,0.60)'; ctx.shadowBlur = 8;
-      ctx.strokeStyle = 'rgba(255,160,40,0.22)'; ctx.lineWidth = 5;
+      ctx.shadowColor = 'rgba(200,140,80,0.60)'; ctx.shadowBlur = 4;
+      ctx.strokeStyle = 'rgba(200,140,80,0.22)'; ctx.lineWidth = 5;
       ctx.lineJoin = 'round';
       ctx.beginPath();
       mPts.forEach((p,i) => i===0 ? ctx.moveTo(p.x,p.y) : ctx.lineTo(p.x,p.y));
       ctx.stroke();
       ctx.restore();
-      ctx.strokeStyle = 'rgba(255,170,60,0.75)'; ctx.lineWidth = 1.2;
+      ctx.strokeStyle = 'rgba(200,140,80,0.75)'; ctx.lineWidth = 1.2;
       ctx.setLineDash([5,4]);
       ctx.beginPath();
       mPts.forEach((p,i) => i===0 ? ctx.moveTo(p.x,p.y) : ctx.lineTo(p.x,p.y));
@@ -2065,7 +2064,7 @@ function drawBackground(ctx) {
       ctx.setLineDash([]);
       if (mPts.length > 0) {
         ctx.font = "600 9px 'Segoe UI',sans-serif"; ctx.textAlign = 'left';
-        ctx.fillStyle = 'rgba(255,170,60,0.60)';
+        ctx.fillStyle = 'rgba(200,140,80,0.60)';
         ctx.fillText('u_mono (monoisotope)', mPts[0].x + 6, mPts[0].y - 4);
       }
     }
@@ -2123,7 +2122,7 @@ function drawNodes(ctx) {
     for (let i = 1; i < sorted.length; i++) {
       if (sorted[i].Z !== sorted[i-1].Z) continue;
       const a = isoPos(sorted[i-1]), b = isoPos(sorted[i]);
-      ctx.strokeStyle = "rgba(255,255,255,0.07)";
+      ctx.strokeStyle = "rgba(232,224,212,0.07)";
       ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
     }
   }
@@ -2136,8 +2135,8 @@ function drawNodes(ctx) {
     const DIA_Z      = new Set([1,2,4,6,7,9,10,12,14,17,18,30,32,33,34,35,36,50,51,52,53,54,80,82,83]);
 
     const magTypes = [
-      { label:"Ferromagnetic",   zSet:FERRO_Z,     glow:"rgba(255,60,80,",  ring:"rgba(255,100,120,", haloR:55 },
-      { label:"Strong para.",    zSet:STRONGPARA_Z,glow:"rgba(255,160,40,",  ring:"rgba(255,190,80,",  haloR:38 },
+      { label:"Ferromagnetic",   zSet:FERRO_Z,     glow:"rgba(192,80,58,",  ring:"rgba(194,122,90,", haloR:55 },
+      { label:"Strong para.",    zSet:STRONGPARA_Z,glow:"rgba(200,140,80,",  ring:"rgba(212,160,92,",  haloR:38 },
       { label:"Paramagnetic",    zSet:PARA_Z,      glow:"rgba(120,200,255,", ring:"rgba(150,220,255,", haloR:28 },
       { label:"Diamagnetic",     zSet:DIA_Z,       glow:"rgba(160,180,220,", ring:"rgba(190,210,240,", haloR:22 },
     ];
@@ -2172,8 +2171,8 @@ function drawNodes(ctx) {
         const rr = (20 + ring * 22) * zoom;
         const alpha = Math.max(0, 0.14 - ring * 0.015);
         const grad2 = ctx.createRadialGradient(cx, cy, rr * 0.7, cx, cy, rr);
-        grad2.addColorStop(0, `rgba(255,60,80,${alpha})`);
-        grad2.addColorStop(1, `rgba(255,60,80,0)`);
+        grad2.addColorStop(0, `rgba(192,80,58,${alpha})`);
+        grad2.addColorStop(1, `rgba(192,80,58,0)`);
         ctx.beginPath();
         ctx.arc(cx, cy, rr, 0, Math.PI*2);
         ctx.fillStyle = grad2;
@@ -2187,14 +2186,14 @@ function drawNodes(ctx) {
         ctx.beginPath();
         ctx.moveTo(cx + Math.cos(angle) * r1, cy + Math.sin(angle) * r1);
         ctx.lineTo(cx + Math.cos(angle) * r2, cy + Math.sin(angle) * r2);
-        ctx.strokeStyle = `rgba(255,80,100,0.12)`;
+        ctx.strokeStyle = `rgba(192,80,58,0.12)`;
         ctx.lineWidth = 1.2 * zoom;
         ctx.stroke();
       }
       const hotGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, 30 * zoom);
-      hotGrad.addColorStop(0,   "rgba(255,200,210,0.30)");
-      hotGrad.addColorStop(0.5, "rgba(255,80,100,0.12)");
-      hotGrad.addColorStop(1,   "rgba(255,60,80,0)");
+      hotGrad.addColorStop(0,   "rgba(210,180,170,0.30)");
+      hotGrad.addColorStop(0.5, "rgba(192,80,58,0.12)");
+      hotGrad.addColorStop(1,   "rgba(192,80,58,0)");
       ctx.beginPath();
       ctx.arc(cx, cy, 30 * zoom, 0, Math.PI*2);
       ctx.fillStyle = hotGrad;
@@ -2202,11 +2201,11 @@ function drawNodes(ctx) {
       ctx.restore();
 
       ctx.font = "700 11px 'Segoe UI',sans-serif";
-      ctx.fillStyle = "rgba(255,100,120,0.75)";
+      ctx.fillStyle = "rgba(194,122,90,0.75)";
       ctx.textAlign = "center";
       ctx.fillText("Fe · Co · Ni", cx, cy + 145 * zoom);
       ctx.font = "500 9px 'Segoe UI',sans-serif";
-      ctx.fillStyle = "rgba(255,100,120,0.45)";
+      ctx.fillStyle = "rgba(194,122,90,0.45)";
       ctx.fillText("ferromagnetic zone", cx, cy + 158 * zoom);
     }
 
@@ -2238,7 +2237,7 @@ function drawNodes(ctx) {
       const positions = magIsos.map(e => isoPos(e));
       const minY = Math.min(...positions.map(p => p.y));
       const maxY = Math.max(...positions.map(p => p.y));
-      ctx.fillStyle = 'rgba(80,200,80,0.03)';
+      ctx.fillStyle = 'rgba(120,160,120,0.03)';
       ctx.fillRect(0, minY - 6, W, maxY - minY + 12);
     });
   }
@@ -2247,7 +2246,7 @@ function drawNodes(ctx) {
   if (cbSS.checked) {
     ctx.font = "500 10px 'Segoe UI',sans-serif";
     ctx.textAlign = "left";
-    ctx.fillStyle = "rgba(230,180,70,0.6)";
+    ctx.fillStyle = "rgba(200,160,90,0.6)";
     ctx.fillText("●  sole (1 stable isotope)", pad + 5, H - pad + 15);
     ctx.fillStyle = "rgba(90,120,150,0.6)";
     ctx.fillText("●  spread (2+ stable isotopes)", pad + 175, H - pad + 15);
@@ -2350,7 +2349,12 @@ function drawNodes(ctx) {
     ctx.globalAlpha = (EMPH.active && !_emphCol) ? EMPH.dimMul : 1;
 
     const gsY = gridScale * zoom;
-    const R0  = gsY * 0.9375;
+    // v4 sizing: the dot IS the abundance readout — r = 3 + (abd%)*3.5;
+    // with "Binding energy size" on, v4's alternate law r = 2 + (BE/9)*5
+    const _zf = Math.max(0.7, Math.min(2.2, zoom));
+    const R0  = ((cbBE && cbBE.checked && iso.be > 0)
+                  ? (2 + (iso.be / 9) * 5)
+                  : (iso.stable ? (3 + (iso.abd / 100) * 3.5) : 2.1)) * _zf;
 
     // Determine scale origin and draw position for group members
     let p = rawP;
@@ -2372,7 +2376,7 @@ function drawNodes(ctx) {
       if (isHov || isSel)                R = R0 * 1.06;
       if (isElemHov && !isHov && !isSel) R = R0 * 1.02;
     }
-    R = Math.max(R, 4);
+    R = Math.max(R, 1.6);
 
     const relAbd = iso.abd > 0 && maxAbdByZ[iso.Z]
       ? iso.abd / maxAbdByZ[iso.Z] : 0;
@@ -2382,7 +2386,7 @@ function drawNodes(ctx) {
       const rgb = isoColor(iso, 1.0);
       ctx.save();
       ctx.shadowColor = rgb.replace(/[\d.]+\)$/, '0.6)');
-      ctx.shadowBlur = 20 * zoom;
+      ctx.shadowBlur = 10 * zoom;
       hexPath(ctx, p.x, p.y, R);
       ctx.fillStyle = 'rgba(0,0,0,0)';
       ctx.fill();
@@ -2398,7 +2402,7 @@ function drawNodes(ctx) {
     hexPath(ctx, p.x, p.y, R);
     if (iso.stable) {
       ctx.fillStyle = isSoleStable
-        ? `rgba(20,20,28,${(isHov||isSel||inGroup) ? 1.0 : 0.92})`
+        ? `rgba(26,24,22,${(isHov||isSel||inGroup) ? 1.0 : 0.92})`
         : isoColor(iso, (isHov||isSel||inGroup) ? 0.85 : isElemHov ? 0.72 : 0.58);
     } else {
       ctx.fillStyle = isoColor(iso, (isHov||isSel||inGroup) ? 0.50 : isElemHov ? 0.30 : 0.20);
@@ -2412,7 +2416,7 @@ function drawNodes(ctx) {
       ctx.globalAlpha = 1;
       ctx.strokeStyle = _emphCol;
       ctx.lineWidth = Math.max(1.5, 2.2*zoom);
-      ctx.shadowColor = _emphCol; ctx.shadowBlur = 8*zoom;
+      ctx.shadowColor = _emphCol; ctx.shadowBlur = 4*zoom;
       hexPath(ctx, p.x, p.y, R + 2.5*zoom);
       ctx.stroke();
       ctx.restore();
@@ -2420,26 +2424,11 @@ function drawNodes(ctx) {
 
     // ── Border drawing: for group members, skip edges shared with other group members ──
     if (inGroup) {
-      // Draw each edge individually, skipping edges adjacent to other group members
-      const R_used = R;
       ctx.save();
       ctx.strokeStyle = isoColor(iso, 0.70);
       ctx.lineWidth = 1.5 * zoom;
-      // Flat-top hex: vertex i is at angle i*PI/3
-      for (let edge = 0; edge < 6; edge++) {
-        // Edge i connects vertex[edge] to vertex[(edge+1)%6]
-        // The neighbour sharing this edge in (nd,nt) space:
-        // For flat-top hex, edge directions map to HEX_NEIGHBOURS
-        const nb = hexNeighbours(iso.nd, iso.nt)[edge];
-        const nbKey = `${nb.nd},${nb.nt}`;
-        if (groupSet.has(nbKey)) continue; // skip shared edge
-        const a1 = (edge * Math.PI) / 3;
-        const a2 = ((edge + 1) * Math.PI) / 3;
-        ctx.beginPath();
-        ctx.moveTo(p.x + R_used * Math.cos(a1), p.y + R_used * Math.sin(a1));
-        ctx.lineTo(p.x + R_used * Math.cos(a2), p.y + R_used * Math.sin(a2));
-        ctx.stroke();
-      }
+      hexPath(ctx, p.x, p.y, R);
+      ctx.stroke();
       ctx.restore();
     } else {
       hexPath(ctx, p.x, p.y, R);
@@ -2451,24 +2440,24 @@ function drawNodes(ctx) {
     }
 
     // Inner abundance hex
-    if (relAbd > 0.01) {
+    if (false && relAbd > 0.01) { // v4: the radius already IS the abundance
       const innerR = Math.max(2, R * relAbd * 0.72);
       hexPath(ctx, p.x, p.y, innerR);
       ctx.fillStyle = isSoleStable
-        ? `rgba(255,200,40,${(isHov||isSel||inGroup) ? 1.0 : 0.88})`
+        ? `rgba(212,160,92,${(isHov||isSel||inGroup) ? 1.0 : 0.88})`
         : isoColor(iso, (isHov||isSel||inGroup) ? 1.0 : 0.94);
       ctx.fill();
     }
 
     if (isSoleStable) {
       hexPath(ctx, p.x, p.y, R + 2 * zoom);
-      ctx.strokeStyle = `rgba(255,215,0,${(isHov||isSel||inGroup) ? 0.85 : 0.50})`;
+      ctx.strokeStyle = `rgba(212,160,92,${(isHov||isSel||inGroup) ? 0.85 : 0.50})`;
       ctx.lineWidth = 1.0 * zoom;
       ctx.stroke();
     }
     if (isSel) {
       hexPath(ctx, p.x, p.y, R + 4 * zoom);
-      ctx.strokeStyle = 'rgba(255,255,255,0.90)';
+      ctx.strokeStyle = 'rgba(232,224,212,0.90)';
       ctx.lineWidth = 1.8 * zoom;
       ctx.stroke();
     }
@@ -2479,7 +2468,7 @@ function drawNodes(ctx) {
       const glowColor = rgb.replace(/rgba\((\d+),(\d+),(\d+),[^)]+\)/, 'rgba($1,$2,$3,0.75)');
       ctx.save();
       ctx.shadowColor = glowColor;
-      ctx.shadowBlur = 8 * zoom;
+      ctx.shadowBlur = 4 * zoom;
       ctx.strokeStyle = glowColor;
       ctx.lineWidth = 2 * zoom;
       ctx.setLineDash([4, 3]);
@@ -2497,11 +2486,11 @@ function drawNodes(ctx) {
         const du = (iso.nd - iso.nt) - sp.u;
         const adu = Math.abs(du);
         let dc;
-        if      (adu < 0.5) dc = 'rgba(40,230,255,';
-        else if (adu < 1.5) dc = 'rgba(40,220,100,';
-        else if (adu < 2.5) dc = 'rgba(190,230,40,';
-        else if (adu < 3.5) dc = 'rgba(255,190,20,';
-        else if (adu < 5.0) dc = 'rgba(255,100,20,';
+        if      (adu < 0.5) dc = 'rgba(122,180,224,';
+        else if (adu < 1.5) dc = 'rgba(120,160,120,';
+        else if (adu < 2.5) dc = 'rgba(150,160,90,';
+        else if (adu < 3.5) dc = 'rgba(200,140,80,';
+        else if (adu < 5.0) dc = 'rgba(194,122,90,';
         else                dc = 'rgba(130,100,100,';
         const alpha = iso.stable ? 0.72 : 0.38;
         hexPath(ctx, p.x, p.y, R * 0.68);
@@ -2518,11 +2507,11 @@ function drawNodes(ctx) {
       // Background pill colour
       let pillFill, textFill;
       if (iso.abd > 0) {
-        pillFill = 'rgba(0,0,0,0.88)';      textFill = 'rgba(255,255,255,0.95)';
+        pillFill = 'rgba(0,0,0,0.88)';      textFill = 'rgba(232,224,212,0.95)';
       } else if (iso.stable) {
-        pillFill = 'rgba(180,20,20,0.88)';  textFill = 'rgba(255,255,255,0.95)';
+        pillFill = 'rgba(180,20,20,0.88)';  textFill = 'rgba(232,224,212,0.95)';
       } else {
-        pillFill = 'rgba(255,255,255,0.88)'; textFill = 'rgba(0,0,0,0.90)';
+        pillFill = 'rgba(232,224,212,0.88)'; textFill = 'rgba(0,0,0,0.90)';
       }
 
       // Measure symbol with Georgia serif
@@ -2539,7 +2528,7 @@ function drawNodes(ctx) {
       // Mass number above — sans-serif
       ctx.font = `400 ${numSize}px 'Segoe UI',Arial,sans-serif`;
       const isTextActive = (isHov || isSel || inGroup);
-      ctx.fillStyle = isTextActive ? 'rgba(255,255,255,0.95)' : 'rgba(180,180,180,0.80)';
+      ctx.fillStyle = isTextActive ? 'rgba(232,224,212,0.95)' : 'rgba(180,180,180,0.80)';
       ctx.textAlign = 'center';
       ctx.fillText(String(iso.A), p.x, p.y - R * 0.12);
 
@@ -2555,11 +2544,11 @@ function drawNodes(ctx) {
   if (activeGroup.length > 1) {
     ctx.save();
     ctx.globalAlpha = 0.5;
-    ctx.strokeStyle = 'rgba(255,255,255,0.6)';
+    ctx.strokeStyle = 'rgba(232,224,212,0.6)';
     ctx.lineWidth = 1.5 * zoom;
     ctx.setLineDash([4, 4]);
-    ctx.shadowColor = 'rgba(255,255,255,0.4)';
-    ctx.shadowBlur = 4;
+    ctx.shadowColor = 'rgba(232,224,212,0.4)';
+    ctx.shadowBlur = 2;
     for (let i = 1; i < activeGroup.length; i++) {
       const a = activeGroup[i-1];
       const b = activeGroup[i];
@@ -2697,7 +2686,7 @@ function drawOverlays(ctx) {
         ctx.fillText(String(A), p.x, p.y - hR*0.30);
         // Symbol
         ctx.font = `bold ${Math.min(hR*0.44,13)}px Georgia,serif`;
-        ctx.fillStyle = 'rgba(255,210,100,0.95)';
+        ctx.fillStyle = 'rgba(216,172,110,0.95)';
         ctx.fillText(sym, p.x, p.y + hR*0.06);
         // Z number
         ctx.font = `400 ${Math.min(hR*0.28,8.5)}px 'Segoe UI',sans-serif`;
@@ -2713,7 +2702,7 @@ function drawOverlays(ctx) {
     const tierShows = [false, false, false, false, showT4, showT5, showT6, showT7, showT8, showT9];
     const tierCols = {
       4:'rgba(160,100,40,', 5:'rgba(140,80,200,', 6:'rgba(60,160,200,',
-      7:'rgba(80,180,80,',  8:'rgba(200,80,180,', 9:'rgba(255,80,80,'
+      7:'rgba(80,180,80,',  8:'rgba(200,80,180,', 9:'rgba(192,80,58,'
     };
     SHORT_LIVED.forEach(([Z, A, sym, hl, decay, nd, nt, tier]) => {
       if (!tierShows[tier]) return;
@@ -2753,7 +2742,7 @@ function drawOverlays(ctx) {
   if (cbMissing.checked) {
     const typeColors = {
       "even-even": "rgba(80,120,200,0.20)",
-      "magic":     "rgba(80,200,80,0.25)",
+      "magic":     "rgba(120,160,120,0.25)",
       "odd-odd":   "rgba(200,80,80,0.18)",
       "mixed":     "rgba(180,140,60,0.18)",
       "gap":       "rgba(120,120,120,0.18)"
@@ -2774,7 +2763,7 @@ function drawOverlays(ctx) {
   // ── 3. Missing He-3 Structures ────────────────────────────────────────
   if (cbHe3Miss && cbHe3Miss.checked) {
     const typeColors = {
-      "even-even": "rgba(40,220,180,0.20)",
+      "even-even": "rgba(106,160,150,0.20)",
       "magic":     "rgba(40,220,80,0.25)",
       "odd-odd":   "rgba(220,80,160,0.18)",
       "mixed":     "rgba(160,200,60,0.18)",
@@ -2802,7 +2791,7 @@ function drawOverlays(ctx) {
       if (p.x < 60 || p.x > W - 10 || p.y < 20 || p.y > H - 20) return;
       const R = Math.max(2, gridScale * zoom * 0.52);
       hexPath(ctx, p.x, p.y, R);
-      ctx.strokeStyle = 'rgba(40,220,180,0.45)';
+      ctx.strokeStyle = 'rgba(106,160,150,0.45)';
       ctx.lineWidth = 1.2;
       ctx.stroke();
     });
@@ -2813,7 +2802,7 @@ function drawOverlays(ctx) {
     const dIsos = ISO.filter(e => e.nt === 0).sort((a,b) => a.nd - b.nd);
     if (dIsos.length > 1) {
       ctx.save();
-      ctx.shadowColor = 'rgba(100,180,255,0.5)'; ctx.shadowBlur = 6;
+      ctx.shadowColor = 'rgba(100,180,255,0.5)'; ctx.shadowBlur = 3;
       ctx.strokeStyle = 'rgba(100,180,255,0.40)'; ctx.lineWidth = 1.2;
       ctx.setLineDash([6,5]);
       ctx.beginPath();
@@ -2861,11 +2850,11 @@ function drawOverlays(ctx) {
     ctx.save();
     ctx.fillStyle = 'rgba(0,0,0,0.70)';
     ctx.fillRect(W - 215, H - 95, 210, 88);
-    ctx.strokeStyle = 'rgba(40,180,180,0.35)';
+    ctx.strokeStyle = 'rgba(106,160,150,0.35)';
     ctx.lineWidth = 0.8;
     ctx.strokeRect(W - 215, H - 95, 210, 88);
     ctx.font = '600 10px "Segoe UI",sans-serif';
-    ctx.fillStyle = 'rgba(40,200,200,0.90)';
+    ctx.fillStyle = 'rgba(106,160,150,0.90)';
     ctx.textAlign = 'left';
     ctx.fillText('Δu_E diagnostics', W - 209, H - 78);
     const lines = [
@@ -2882,16 +2871,16 @@ function drawOverlays(ctx) {
     // ── Δu_E colour legend strip ──────────────────────────────────────────
     const legX = W - 215, legY = H - 110;
     const legendCols = [
-      ['rgba(40,230,255,0.80)','< 0.5'],
-      ['rgba(40,220,100,0.80)','0.5–1.5'],
-      ['rgba(190,230,40,0.80)','1.5–2.5'],
-      ['rgba(255,190,20,0.80)','2.5–3.5'],
-      ['rgba(255,100,20,0.80)','3.5–5'],
+      ['rgba(122,180,224,0.80)','< 0.5'],
+      ['rgba(120,160,120,0.80)','0.5–1.5'],
+      ['rgba(150,160,90,0.80)','1.5–2.5'],
+      ['rgba(200,140,80,0.80)','2.5–3.5'],
+      ['rgba(194,122,90,0.80)','3.5–5'],
       ['rgba(130,100,100,0.80)','> 5'],
     ];
     ctx.save();
     ctx.font = '600 9px "Segoe UI",sans-serif';
-    ctx.fillStyle = 'rgba(40,200,200,0.75)';
+    ctx.fillStyle = 'rgba(106,160,150,0.75)';
     ctx.textAlign = 'left';
     ctx.fillText('|Δu_E|:', legX, legY + 3);
     legendCols.forEach((lc, i) => {
@@ -2936,7 +2925,7 @@ function drawOverlays(ctx) {
       if (!isoRef) return;
       const p = isoPos(isoRef);
       if (p.y < 20 || p.y > H - 20) return;
-      ctx.fillStyle = Z === (hoveredZ || -1) ? "rgba(255,255,200,0.8)" : "rgba(190,170,140,0.45)";
+      ctx.fillStyle = Z === (hoveredZ || -1) ? "rgba(230,220,196,0.8)" : "rgba(190,170,140,0.45)";
       ctx.fillText(isoRef.sym, 122, p.y + 4);
       ctx.fillStyle = "rgba(130,115,95,0.35)";
       ctx.font = "400 9px 'Segoe UI',sans-serif";
@@ -3353,6 +3342,7 @@ canvas.addEventListener("dblclick", e => {
     </table>
     <h3 style="margin:16px 0 8px;color:#889;font-size:12px;text-transform:uppercase;letter-spacing:0.05em;">References</h3>
     <div style="display:flex;flex-direction:column;gap:8px;font-size:12px;">
+      <a href="nuclear-packing-sequencer.html#Z=${iso.Z}&A=${iso.A}">Packing sequencer — ${iso.sym}-${iso.A}</a>
       <a href="https://www.nndc.bnl.gov/nudat3/indx_sigma.jsp?z=${iso.Z}&a=${iso.A}" target="_blank">NuDat 3.0 (NNDC)</a>
       <a href="https://en.wikipedia.org/wiki/${iso.sym}-${iso.A}" target="_blank">Wikipedia: ${iso.sym}-${iso.A}</a>
       <a href="https://www-nds.iaea.org/relnsd/NdsEnsdf/QueryForm?select=levels&nuclides=${iso.A}${iso.sym}" target="_blank">IAEA Nuclear Data</a>
@@ -3459,20 +3449,20 @@ function drawElemLabels(ctx) {
     const isHovZ = hoveredZ === Z;
 
     if (isHovZ) {
-      ctx.fillStyle = "rgba(255,200,40,0.08)";
+      ctx.fillStyle = "rgba(212,160,92,0.08)";
       ctx.fillRect(0, yS - 7, LABEL_W2, 14);
     }
 
     ctx.beginPath();
     ctx.arc(LABEL_X2 + 5, yS, 3.5, 0, Math.PI*2);
     if (isSole) {
-      ctx.fillStyle = "rgba(20,20,28,0.95)"; ctx.fill();
-      ctx.strokeStyle = "rgba(255,200,40,0.9)"; ctx.lineWidth = 1.2; ctx.stroke();
+      ctx.fillStyle = "rgba(26,24,22,0.95)"; ctx.fill();
+      ctx.strokeStyle = "rgba(212,160,92,0.9)"; ctx.lineWidth = 1.2; ctx.stroke();
     } else {
       ctx.fillStyle = `rgba(${rgb},0.9)`; ctx.fill();
     }
 
-    ctx.fillStyle = isHovZ ? "#ffe066" : (isSole ? "rgba(255,200,40,0.95)" : `rgba(${rgb},1.0)`);
+    ctx.fillStyle = isHovZ ? "#e0b06a" : (isSole ? "rgba(212,160,92,0.95)" : `rgba(${rgb},1.0)`);
     ctx.font = `${isHovZ ? "800" : "700"} 10px 'Segoe UI',sans-serif`;
     ctx.textAlign = "left";
     ctx.fillText(sym, LABEL_X2 + 13, yS + 3.5);
@@ -3487,13 +3477,13 @@ function drawElemLabels(ctx) {
 // ══ Element groups, line-picker & magic-line overlays ═══════════════════════
 function _rangeSet(a, b){ const s = new Set(); for (let z = a; z <= b; z++) s.add(z); return s; }
 const GROUPS = {
-  noble:    { zs: new Set([2,10,18,36,54,86]),  col:'#58c8ff' },
-  alkali:   { zs: new Set([3,11,19,37,55,87]),  col:'#ff8a5c' },
-  alkEarth: { zs: new Set([4,12,20,38,56,88]),  col:'#ffd45c' },
-  trans:    { zs: new Set([..._rangeSet(21,30), ..._rangeSet(39,48), ..._rangeSet(72,80), ..._rangeSet(104,112)]), col:'#7affc0' },
-  lanth:    { zs: _rangeSet(57,71),  col:'#c58bff' },
-  actin:    { zs: _rangeSet(89,103), col:'#ff6bcb' },
-  halogen:  { zs: new Set([9,17,35,53,85]), col:'#c3ff6b' },
+  noble:    { zs: new Set([2,10,18,36,54,86]),  col:'#7ab4e0' },
+  alkali:   { zs: new Set([3,11,19,37,55,87]),  col:'#c27a5a' },
+  alkEarth: { zs: new Set([4,12,20,38,56,88]),  col:'#d4a05c' },
+  trans:    { zs: new Set([..._rangeSet(21,30), ..._rangeSet(39,48), ..._rangeSet(72,80), ..._rangeSet(104,112)]), col:'#78a08c' },
+  lanth:    { zs: _rangeSet(57,71),  col:'#8b6ca3' },
+  actin:    { zs: _rangeSet(89,103), col:'#a67a92' },
+  halogen:  { zs: new Set([9,17,35,53,85]), col:'#96a05a' },
 };
 const SYM2Z = {}; ISO.forEach(i => { if (!(i.sym in SYM2Z)) SYM2Z[i.sym] = i.Z; });
 const stableCountByN = {}; ISO.forEach(i => { if (i.stable){ const N = i.A - i.Z; stableCountByN[N] = (stableCountByN[N]||0) + 1; } });
@@ -3519,11 +3509,11 @@ function emphasisState(){
   return { active: any, zs, grpCols, line };
 }
 function isoEmphColor(iso, st){
-  if (st.zs.has(iso.Z)) return st.grpCols[iso.Z] || '#ffffff';
+  if (st.zs.has(iso.Z)) return st.grpCols[iso.Z] || '#e8e0d4';
   if (st.line){
     const a = st.line.axis, v = st.line.val, N = iso.A - iso.Z;
     if ((a==='Z' && iso.Z===v) || (a==='N' && N===v) || (a==='nt' && iso.nt===v) ||
-        (a==='nd' && iso.nd===v) || (a==='A' && iso.A===v)) return '#ffe08a';
+        (a==='nd' && iso.nd===v) || (a==='A' && iso.A===v)) return '#e0b06a';
   }
   return null;
 }
@@ -3551,8 +3541,8 @@ function drawPartitions(ctx){
   // Deuteron families (fixed n_d) — REVERSE diagonal, DASHED violet
   if (cND && cND.checked){
     const by = {}; ISO.forEach(e => { (by[e.nd] = by[e.nd] || []).push(e); });
-    ctx.setLineDash([7,5]); ctx.strokeStyle = 'rgba(185,140,255,0.7)'; ctx.lineWidth = 1.3*zoom + 0.4;
-    ctx.shadowColor = 'rgba(185,140,255,0.5)'; ctx.shadowBlur = 4*zoom;
+    ctx.setLineDash([7,5]); ctx.strokeStyle = 'rgba(139,108,163,0.7)'; ctx.lineWidth = 1.3*zoom + 0.4;
+    ctx.shadowColor = 'rgba(139,108,163,0.5)'; ctx.shadowBlur = 2*zoom;
     Object.values(by).forEach(fam => { if (fam.length < 2) return; fam.sort((a,b)=>a.nt-b.nt);
       ctx.beginPath(); fam.forEach((e,i)=>{ const p=isoPos(e); i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y); }); ctx.stroke(); });
     ctx.setLineDash([]); ctx.shadowBlur = 0;
@@ -3560,8 +3550,8 @@ function drawPartitions(ctx){
   // Triton families (fixed n_t) — diagonal, DOTTED teal
   if (cNT && cNT.checked){
     const by = {}; ISO.forEach(e => { (by[e.nt] = by[e.nt] || []).push(e); });
-    ctx.setLineDash([2,4]); ctx.strokeStyle = 'rgba(84,214,172,0.7)'; ctx.lineWidth = 1.3*zoom + 0.4;
-    ctx.shadowColor = 'rgba(84,214,172,0.5)'; ctx.shadowBlur = 4*zoom;
+    ctx.setLineDash([2,4]); ctx.strokeStyle = 'rgba(120,160,140,0.7)'; ctx.lineWidth = 1.3*zoom + 0.4;
+    ctx.shadowColor = 'rgba(120,160,140,0.5)'; ctx.shadowBlur = 2*zoom;
     Object.values(by).forEach(fam => { if (fam.length < 2) return; fam.sort((a,b)=>a.nd-b.nd);
       ctx.beginPath(); fam.forEach((e,i)=>{ const p=isoPos(e); i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y); }); ctx.stroke(); });
     ctx.setLineDash([]); ctx.shadowBlur = 0;
@@ -3572,9 +3562,9 @@ function drawPartitions(ctx){
       if (!(e.isSole && e.stable)) return;
       const p = isoPos(e); if (p.x < 130 || p.x > W-20 || p.y < 20 || p.y > H-20) return;
       const r = Math.max(5, gridScale*zoom*0.75), gold = (e.nt === 1);
-      ctx.strokeStyle = gold ? 'rgba(255,220,90,0.98)' : 'rgba(255,255,255,0.9)';
+      ctx.strokeStyle = gold ? 'rgba(224,176,106,0.98)' : 'rgba(232,224,212,0.9)';
       ctx.lineWidth = gold ? 2.4 : 1.5;
-      ctx.shadowColor = gold ? 'rgba(255,220,90,0.7)' : 'rgba(255,255,255,0.4)'; ctx.shadowBlur = gold ? 8*zoom : 2*zoom;
+      ctx.shadowColor = gold ? 'rgba(224,176,106,0.7)' : 'rgba(232,224,212,0.4)'; ctx.shadowBlur = gold ? 8*zoom : 2*zoom;
       ctx.beginPath();
       ctx.moveTo(p.x, p.y-r); ctx.lineTo(p.x+r, p.y); ctx.lineTo(p.x, p.y+r); ctx.lineTo(p.x-r, p.y); ctx.closePath();
       ctx.stroke();
@@ -3596,11 +3586,11 @@ function drawSwitchback(ctx){
       row.sort((a,b) => sign>0 ? b.u-a.u : a.u-b.u);
       return { v, u: row[0].u };
     });
-    ctx.strokeStyle = 'rgba(255,184,74,0.9)'; ctx.lineWidth = 2.2*zoom + 0.6;
-    ctx.shadowColor = 'rgba(255,184,74,0.5)'; ctx.shadowBlur = 5*zoom;
+    ctx.strokeStyle = 'rgba(224,176,106,0.9)'; ctx.lineWidth = 2.2*zoom + 0.6;
+    ctx.shadowColor = 'rgba(224,176,106,0.5)'; ctx.shadowBlur = 2*zoom;
     ctx.beginPath(); pts.forEach((pt,i)=>{ const p=gridPosUV(pt.u,pt.v); i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y); }); ctx.stroke();
     // corner dots where the edge reverses horizontal direction (a switchback)
-    ctx.shadowBlur = 0; ctx.fillStyle = 'rgba(255,214,120,0.95)';
+    ctx.shadowBlur = 0; ctx.fillStyle = 'rgba(216,176,120,0.95)';
     for (let i=1;i<pts.length-1;i++){
       const d1 = pts[i].u-pts[i-1].u, d2 = pts[i+1].u-pts[i].u;
       if ((d1>0)!==(d2>0) || (d1===0)!==(d2===0)){
@@ -3625,8 +3615,8 @@ function drawMagicLines(ctx){
       const us = row.map(e => e.nd - e.nt), v = Z - 2;
       const a = gridPosUV(Math.min(...us)-1, v), b = gridPosUV(Math.max(...us)+1, v);
       const w = byStab ? Math.max(1, (stableCountByZ[Z]||1)*0.9) : 2;
-      ctx.strokeStyle = 'rgba(120,195,255,0.9)'; ctx.lineWidth = w*zoom*0.5 + 1.0;
-      ctx.shadowColor = 'rgba(120,195,255,0.6)'; ctx.shadowBlur = 6*zoom;
+      ctx.strokeStyle = 'rgba(122,180,224,0.9)'; ctx.lineWidth = w*zoom*0.5 + 1.0;
+      ctx.shadowColor = 'rgba(122,180,224,0.6)'; ctx.shadowBlur = 3*zoom;
       ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
       ctx.shadowBlur = 0;
       ctx.font = '700 10px "Segoe UI",sans-serif'; ctx.fillStyle = 'rgba(160,210,255,0.95)'; ctx.textAlign = 'left';
@@ -3642,11 +3632,11 @@ function drawMagicLines(ctx){
       else { Zlo = Math.max(2, Math.ceil(N*0.55)); Zhi = Math.min(118, N+2); }
       const pa = gridPosUV(3*Zlo-2*N-2, Zlo-2), pb = gridPosUV(3*Zhi-2*N-2, Zhi-2);
       const w = byStab ? Math.max(1, (stableCountByN[N]||1)*0.9) : 2;
-      ctx.strokeStyle = 'rgba(255,170,80,0.9)'; ctx.lineWidth = w*zoom*0.5 + 1.0;
-      ctx.shadowColor = 'rgba(255,170,80,0.6)'; ctx.shadowBlur = 6*zoom;
+      ctx.strokeStyle = 'rgba(200,140,80,0.9)'; ctx.lineWidth = w*zoom*0.5 + 1.0;
+      ctx.shadowColor = 'rgba(200,140,80,0.6)'; ctx.shadowBlur = 3*zoom;
       ctx.beginPath(); ctx.moveTo(pa.x,pa.y); ctx.lineTo(pb.x,pb.y); ctx.stroke();
       ctx.shadowBlur = 0;
-      ctx.font = '700 10px "Segoe UI",sans-serif'; ctx.fillStyle = 'rgba(255,195,115,0.95)'; ctx.textAlign = 'right';
+      ctx.font = '700 10px "Segoe UI",sans-serif'; ctx.fillStyle = 'rgba(212,164,110,0.95)'; ctx.textAlign = 'right';
       ctx.fillText('N='+N+(byStab?'  ('+(stableCountByN[N]||0)+')':''), pa.x-5, pa.y+3);
     });
   }
@@ -3658,9 +3648,9 @@ function drawMagicLines(ctx){
       const p = gridPos(nd, nt);
       if (p.x < 130 || p.x > W-20 || p.y < 20 || p.y > H-20) return;
       const r = Math.max(6, gridScale*zoom*0.95);
-      ctx.strokeStyle = 'rgba(255,235,120,0.95)'; ctx.lineWidth = 2;
+      ctx.strokeStyle = 'rgba(224,176,106,0.95)'; ctx.lineWidth = 2;
       ctx.beginPath(); ctx.arc(p.x,p.y,r,0,Math.PI*2); ctx.stroke();
-      ctx.strokeStyle = 'rgba(255,235,120,0.30)'; ctx.lineWidth = 1;
+      ctx.strokeStyle = 'rgba(224,176,106,0.30)'; ctx.lineWidth = 1;
       ctx.beginPath(); ctx.arc(p.x,p.y,r+4,0,Math.PI*2); ctx.stroke();
     }));
   }
@@ -3670,7 +3660,7 @@ function drawMagicLines(ctx){
 function draw() {
   ctx.clearRect(0, 0, W, H);
   // Twilight canvas fill
-  ctx.fillStyle = '#07091c';
+  ctx.fillStyle = '#1a1816';
   ctx.fillRect(0, 0, W, H);
   drawBackground(ctx);
   drawMagicLines(ctx);
@@ -3753,9 +3743,9 @@ function drawRingAnim(ctx, p, R, t, Z) {
         Math.cos(ra)*R*0.3, Math.sin(ra)*R*0.3,
         Math.cos(ra)*rayLen, Math.sin(ra)*rayLen
       );
-      grd.addColorStop(0,   `rgba(255,220,80,${blazeA*0.95})`);
-      grd.addColorStop(0.4, `rgba(255,160,30,${blazeA*0.5})`);
-      grd.addColorStop(1,   'rgba(255,80,0,0)');
+      grd.addColorStop(0,   `rgba(216,172,100,${blazeA*0.95})`);
+      grd.addColorStop(0.4, `rgba(200,140,80,${blazeA*0.5})`);
+      grd.addColorStop(1,   'rgba(170,100,50,0)');
       ctx.beginPath();
       ctx.moveTo(Math.cos(ra)*R*0.3, Math.sin(ra)*R*0.3);
       ctx.lineTo(Math.cos(ra)*rayLen, Math.sin(ra)*rayLen);
@@ -3763,8 +3753,8 @@ function drawRingAnim(ctx, p, R, t, Z) {
     }
     const fr = R * (0.25 + blazeT * 0.5);
     const fg = ctx.createRadialGradient(0,0,0, 0,0,fr);
-    fg.addColorStop(0, `rgba(255,245,200,${blazeA})`);
-    fg.addColorStop(1, 'rgba(255,200,60,0)');
+    fg.addColorStop(0, `rgba(228,214,188,${blazeA})`);
+    fg.addColorStop(1, 'rgba(212,160,92,0)');
     ctx.beginPath(); ctx.arc(0,0,fr,0,Math.PI*2);
     ctx.fillStyle = fg; ctx.fill();
   }
@@ -3778,22 +3768,22 @@ function drawRingAnim(ctx, p, R, t, Z) {
     ctx.rotate(angle);
     // Glow halo
     ctx.beginPath(); ctx.arc(0,0,ringR,0,Math.PI*2);
-    ctx.strokeStyle = `rgba(255,200,50,${alpha*0.28})`;
+    ctx.strokeStyle = `rgba(212,160,92,${alpha*0.28})`;
     ctx.lineWidth = 5; ctx.stroke();
     // Ring
     ctx.beginPath(); ctx.arc(0,0,ringR,0,Math.PI*2);
-    ctx.strokeStyle = `rgba(255,215,80,${alpha})`;
+    ctx.strokeStyle = `rgba(224,176,106,${alpha})`;
     ctx.lineWidth = 1.5; ctx.stroke();
     // Spars at 0° and 180°
     for (const a of [0, Math.PI]) {
       ctx.beginPath();
       ctx.moveTo(Math.cos(a)*(ringR-sparL*1.2), Math.sin(a)*(ringR-sparL*1.2));
       ctx.lineTo(Math.cos(a)*(ringR+sparL*0.5), Math.sin(a)*(ringR+sparL*0.5));
-      ctx.strokeStyle = `rgba(255,215,80,${alpha})`;
+      ctx.strokeStyle = `rgba(224,176,106,${alpha})`;
       ctx.lineWidth = 1.5; ctx.stroke();
       // Cap dot
       ctx.beginPath(); ctx.arc(Math.cos(a)*ringR, Math.sin(a)*ringR, 2.2, 0, Math.PI*2);
-      ctx.fillStyle = `rgba(255,235,130,${alpha})`; ctx.fill();
+      ctx.fillStyle = `rgba(220,186,130,${alpha})`; ctx.fill();
     }
   }
   ctx.restore();
@@ -3809,14 +3799,14 @@ function drawSmallRing(ctx, p, R, t, Z) {
   ctx.translate(p.x, p.y);
   ctx.rotate(angle);
   ctx.beginPath(); ctx.arc(0,0,ringR,0,Math.PI*2);
-  ctx.strokeStyle = `rgba(200,140,30,${alpha})`;
+  ctx.strokeStyle = `rgba(176,128,72,${alpha})`;
   ctx.lineWidth = 1;
   ctx.setLineDash([2,3]); ctx.stroke(); ctx.setLineDash([]);
   for (const a of [0, Math.PI]) {
     ctx.beginPath();
     ctx.moveTo(Math.cos(a)*ringR*0.82, Math.sin(a)*ringR*0.82);
     ctx.lineTo(Math.cos(a)*ringR*1.12, Math.sin(a)*ringR*1.12);
-    ctx.strokeStyle = `rgba(200,140,30,${alpha})`;
+    ctx.strokeStyle = `rgba(176,128,72,${alpha})`;
     ctx.lineWidth = 1; ctx.stroke();
   }
   ctx.restore();
@@ -3839,8 +3829,27 @@ if (cbUnstableAll) {
 
 // ── rAF render + animation loop ────────────────────────────────────────────
 resize();
-if (selectedIso) updatePanel(selectedIso);
-window.addEventListener('resize', () => { resize(); draw(); });
+function isoFromHash(){
+  const m=/Z=(\d+)&A=(\d+)/.exec(location.hash||'');
+  if(!m) return null;
+  return ISO.find(e=>e.Z===+m[1] && e.A===+m[2]) || null;
+}
+function focusIso(iso){
+  if(!iso) return;
+  selectedIso = iso;
+  groupLocked = true;
+  hoveredIso = iso;
+  updatePanel(iso);
+  panX = 0; panY = 0;
+  const p = isoPos(iso);
+  panX = (W/2 - p.x) / zoom;
+  panY = (H/2 - p.y) / zoom;
+}
+const hashIso = isoFromHash();
+if (hashIso) focusIso(hashIso);
+else if (selectedIso) updatePanel(selectedIso);
+addEventListener('hashchange', () => { const h = isoFromHash(); if (h) { focusIso(h); draw(); } });
+window.addEventListener('resize', () => { resize(); if (selectedIso) focusIso(selectedIso); draw(); });
 
 requestAnimationFrame(function loop(ts) {
   const nowKey = isoAnimKey(hoveredIso);

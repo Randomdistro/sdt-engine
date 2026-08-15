@@ -18,6 +18,7 @@
  */
 
 #include <sdt/laws.hpp>
+#include <sdt/materials.hpp>
 
 #include <cmath>
 #include <cstdio>
@@ -27,6 +28,9 @@
 #include <numbers>
 #include <algorithm>
 #include <numeric>
+#include <cstring>
+#include <fstream>
+#include <iomanip>
 
 static_assert(sdt::laws::measured::alpha_inv
               == 1.0 / sdt::laws::measured::alpha);
@@ -71,6 +75,212 @@ static int g_identity_pass = 0, g_calibrated_pass = 0;   // shown, but NOT talli
 static int g_pending_note = 0;  // PENDING that meet tol — note-only, not earned (detox 2026-08-09)
 static std::vector<BenchmarkResult> g_results;
 
+static const char* certification_name(Certification cert)
+{
+    switch (cert) {
+        case Certification::DERIVED:    return "DERIVED";
+        case Certification::COMPUTED:   return "COMPUTED";
+        case Certification::CALIBRATED: return "CALIBRATED";
+        case Certification::OBSERVED:   return "OBSERVED";
+        case Certification::PENDING:    return "PENDING";
+        case Certification::IDENTITY:   return "IDENTITY";
+    }
+    return "UNKNOWN";
+}
+
+static void write_json_string(std::ostream& out, const std::string& value)
+{
+    out << '"';
+    for (const unsigned char ch : value) {
+        switch (ch) {
+            case '"':  out << "\\\""; break;
+            case '\\': out << "\\\\"; break;
+            case '\b': out << "\\b";  break;
+            case '\f': out << "\\f";  break;
+            case '\n': out << "\\n";  break;
+            case '\r': out << "\\r";  break;
+            case '\t': out << "\\t";  break;
+            default:
+                if (ch < 0x20) {
+                    out << "\\u"
+                        << std::hex << std::setw(4) << std::setfill('0')
+                        << static_cast<int>(ch)
+                        << std::dec << std::setw(0) << std::setfill(' ');
+                } else {
+                    out << static_cast<char>(ch);
+                }
+        }
+    }
+    out << '"';
+}
+
+static bool write_website_data(
+    const char* path,
+    int earned_total,
+    int genuine_fail,
+    int pending_fail
+)
+{
+    using namespace sdt::laws;
+
+    std::ofstream out(path, std::ios::binary);
+    if (!out) return false;
+    out << std::setprecision(17);
+
+    constexpr double lithium_density = 534.0;
+    constexpr double uranium_density = 19'100.0;
+    constexpr double lithium_A = 7.0;
+    constexpr double uranium_A = 238.0;
+    constexpr double comparison_radius = 0.05;
+    constexpr double comparison_angular_rate = 1.0;
+    const auto li_equal_mass =
+        sdt::materials::state_from_total_resistance(1.0, lithium_density);
+    const auto u_equal_mass =
+        sdt::materials::state_from_total_resistance(1.0, uranium_density);
+    const auto li_equal_size =
+        sdt::materials::state_from_bulk_density(
+            lithium_density,
+            comparison_radius
+        );
+    const auto u_equal_size =
+        sdt::materials::state_from_bulk_density(
+            uranium_density,
+            comparison_radius
+        );
+    const double li_flux_mass = sdt::materials::atom_loop_flux_control(
+        li_equal_mass,
+        lithium_A,
+        1.0,
+        1.0,
+        comparison_angular_rate
+    );
+    const double u_flux_mass = sdt::materials::atom_loop_flux_control(
+        u_equal_mass,
+        uranium_A,
+        1.0,
+        1.0,
+        comparison_angular_rate
+    );
+    const double li_flux_size = sdt::materials::atom_loop_flux_control(
+        li_equal_size,
+        lithium_A,
+        1.0,
+        1.0,
+        comparison_angular_rate
+    );
+    const double u_flux_size = sdt::materials::atom_loop_flux_control(
+        u_equal_size,
+        uranium_A,
+        1.0,
+        1.0,
+        comparison_angular_rate
+    );
+
+    out << "{\n"
+        << "  \"schema_version\": 1,\n"
+        << "  \"as_of\": \"2026-08-15\",\n"
+        << "  \"source\": \"benchmark results + laws.hpp + materials.hpp + CM08 measured density controls\",\n"
+        << "  \"promotion_path\": \"validated investigation -> canonical engine header -> benchmark export -> website\",\n"
+        << "  \"summary\": {\n"
+        << "    \"earned_passed\": " << g_passed << ",\n"
+        << "    \"earned_total\": " << earned_total << ",\n"
+        << "    \"identity_passed\": " << g_identity_pass << ",\n"
+        << "    \"calibrated_passed\": " << g_calibrated_pass << ",\n"
+        << "    \"pending_note_only\": " << g_pending_note << ",\n"
+        << "    \"genuine_fail\": " << genuine_fail << ",\n"
+        << "    \"pending_open\": " << pending_fail << ",\n"
+        << "    \"certified_gates_passed\": "
+        << (genuine_fail == 0 ? "true" : "false") << "\n"
+        << "  },\n"
+        << "  \"laws\": {\n"
+        << "    \"alpha\": " << measured::alpha << ",\n"
+        << "    \"alpha_inverse\": " << measured::alpha_inv << ",\n"
+        << "    \"planck_length_m\": " << measured::l_P << ",\n"
+        << "    \"bohr_radius_m\": " << measured::a_0 << ",\n"
+        << "    \"electron_c_boundary_m\": " << measured::r_e << ",\n"
+        << "    \"proton_radius_m\": " << measured::R_p << ",\n"
+        << "    \"koppa_per_baryon_m\": " << bridge::koppa_per_baryon << ",\n"
+        << "    \"relay_lock_fraction\": "
+        << law_IV::convergence_floor::engaged_volume_fraction << ",\n"
+        << "    \"wake_fraction\": " << atomic::dodecardinal::wake_fraction << ",\n"
+        << "    \"proton_traction_ratio\": "
+        << law_VI::traction::traction_ratio_proton << ",\n"
+        << "    \"nuclear_atomic_gear_ratio\": "
+        << law_VI::traction::gear_ratio_nuclear_atomic << ",\n"
+        << "    \"electron_mode\": {\"winding\": "
+        << law_VI::winding::W_electron << ", \"p\": "
+        << law_VI::topology::electron_p << ", \"q\": "
+        << law_VI::topology::electron_q << "},\n"
+        << "    \"proton_mode\": {\"winding\": "
+        << law_VI::winding::W_proton << ", \"p\": "
+        << law_VI::topology::proton_p << ", \"q\": "
+        << law_VI::topology::proton_q << "}\n"
+        << "  },\n"
+        << "  \"materials\": {\n"
+        << "    \"status\": \"COMPUTED CONTROL\",\n"
+        << "    \"density_inputs_kg_m3\": {\"lithium\": "
+        << lithium_density << ", \"uranium\": " << uranium_density << "},\n"
+        << "    \"equal_resistance_1kg\": {\n"
+        << "      \"lithium_radius_m\": " << li_equal_mass.radius_m << ",\n"
+        << "      \"uranium_radius_m\": " << u_equal_mass.radius_m << ",\n"
+        << "      \"common_koppa_m\": " << li_equal_mass.koppa_total_m << ",\n"
+        << "      \"density_ratio_u_li\": "
+        << u_equal_mass.baryon_density_m3
+            / li_equal_mass.baryon_density_m3 << ",\n"
+        << "      \"surface_response_ratio_u_li\": "
+        << sdt::materials::surface_acceleration(u_equal_mass)
+            / sdt::materials::surface_acceleration(li_equal_mass) << ",\n"
+        << "      \"far_response_ratio_u_li\": "
+        << sdt::materials::far_acceleration(u_equal_mass, 10.0)
+            / sdt::materials::far_acceleration(li_equal_mass, 10.0) << "\n"
+        << "    },\n"
+        << "    \"equal_radius_0_05m\": {\n"
+        << "      \"lithium_resistance_kg\": "
+        << lithium_density * li_equal_size.volume_m3 << ",\n"
+        << "      \"uranium_resistance_kg\": "
+        << uranium_density * u_equal_size.volume_m3 << ",\n"
+        << "      \"koppa_ratio_u_li\": "
+        << u_equal_size.koppa_total_m / li_equal_size.koppa_total_m << ",\n"
+        << "      \"far_response_ratio_u_li\": "
+        << sdt::materials::far_acceleration(u_equal_size, 10.0)
+            / sdt::materials::far_acceleration(li_equal_size, 10.0) << "\n"
+        << "    },\n"
+        << "    \"flux_control_omega_1_full_alignment\": {\n"
+        << "      \"scope\": \"one electron-equivalent loop per atom\",\n"
+        << "      \"equal_resistance_1kg\": {\"lithium_Wb\": "
+        << li_flux_mass << ", \"uranium_Wb\": " << u_flux_mass << "},\n"
+        << "      \"equal_radius_0_05m\": {\"lithium_Wb\": "
+        << li_flux_size << ", \"uranium_Wb\": " << u_flux_size << "}\n"
+        << "    },\n"
+        << "    \"wake_exponent\": -3,\n"
+        << "    \"magnetic_flux_scope\": "
+        << "\"requires declared circulation and alignment; density alone is insufficient\"\n"
+        << "  },\n"
+        << "  \"results\": [\n";
+
+    for (std::size_t i = 0; i < g_results.size(); ++i) {
+        const auto& result = g_results[i];
+        out << "    {\"id\": ";
+        write_json_string(out, result.id);
+        out << ", \"name\": ";
+        write_json_string(out, result.name);
+        out << ", \"domain\": ";
+        write_json_string(out, result.domain);
+        out << ", \"sdt_value\": " << result.sdt_value
+            << ", \"observed_value\": " << result.exp_value
+            << ", \"error_pct\": " << result.error_pct
+            << ", \"tolerance_pct\": " << result.tolerance_pct
+            << ", \"certification\": ";
+        write_json_string(out, certification_name(result.cert));
+        out << ", \"passed\": " << (result.passed ? "true" : "false") << '}';
+        if (i + 1 != g_results.size()) out << ',';
+        out << '\n';
+    }
+
+    out << "  ]\n}\n";
+    return static_cast<bool>(out);
+}
+
 static void report(const char* id, const char* name, const char* domain,
                    double sdt_val, double exp_val, double tol_pct,
                    Certification cert, const char* unit = "")
@@ -79,15 +289,7 @@ static void report(const char* id, const char* name, const char* domain,
     bool pass = err <= tol_pct;
 
     const char* status = pass ? "PASS" : "FAIL";
-    const char* cert_str = "DERIVED";
-    switch (cert) {
-        case Certification::COMPUTED:   cert_str = "COMPUTED";   break;
-        case Certification::CALIBRATED: cert_str = "CALIBRATED"; break;
-        case Certification::OBSERVED:   cert_str = "OBSERVED";   break;
-        case Certification::PENDING:    cert_str = "PENDING";    break;
-        case Certification::IDENTITY:   cert_str = "IDENTITY";   break;
-        default: break;
-    }
+    const char* cert_str = certification_name(cert);
 
     std::printf("  %-4s %-40s  SDT=%-16.6g  EXP=%-16.6g  ERR=%8.4f%%  TOL=%6.2f%%  [%s] %s",
                 id, name, sdt_val, exp_val, err, tol_pct, cert_str, status);
@@ -1364,8 +1566,18 @@ static void coverage_roster()
 //  MAIN — RUN ALL BENCHMARKS
 // ═══════════════════════════════════════════════════════════════════════
 
-int main()
+int main(int argc, char** argv)
 {
+    const char* website_data_path = nullptr;
+    for (int i = 1; i < argc; ++i) {
+        if (std::strcmp(argv[i], "--website-data") == 0 && i + 1 < argc) {
+            website_data_path = argv[++i];
+        } else {
+            std::fprintf(stderr, "Usage: %s [--website-data <path>]\n", argv[0]);
+            return 2;
+        }
+    }
+
     std::puts("╔══════════════════════════════════════════════════════════════╗");
     std::puts("║  SDT BENCHMARK SUITE — Six-Law Framework                    ║");
     std::puts("║  Single Source of Truth: laws.hpp                           ║");
@@ -1454,6 +1666,23 @@ int main()
     std::puts("  OBSERVED   — validated against observation, mechanism established");
     std::puts("  PENDING    — mechanism identified, SDT-native derivation not yet implemented");
     std::puts("  IDENTITY   — true by definition/construction; shown as consistency, never tallied");
+
+    if (website_data_path != nullptr) {
+        if (!write_website_data(
+                website_data_path,
+                earned_total,
+                real_fail,
+                pending_fail
+            )) {
+            std::fprintf(
+                stderr,
+                "\nCould not write website data: %s\n",
+                website_data_path
+            );
+            return 2;
+        }
+        std::printf("\nWebsite data: %s\n", website_data_path);
+    }
 
     // Exit non-zero only on GENUINE regressions; PENDING items are flagged, not failures.
     return real_fail > 0 ? 1 : 0;

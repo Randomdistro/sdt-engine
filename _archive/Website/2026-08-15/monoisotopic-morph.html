@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>/*sdt-theme-guard*/(function(){try{var t=localStorage.getItem("sdt.theme")||"auto";if(t==="auto")t=(window.matchMedia&&window.matchMedia("(prefers-color-scheme:dark)").matches)?"dark":"light";var d=document.documentElement;d.setAttribute("data-theme",t);d.setAttribute("data-sdt-theme",t);}catch(e){}})();</script>
+
+<meta charset="UTF-8">
+<title>Monoisotopic Centreline Morph — Stretcherbond</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: #08080f; color: #c8c8d0;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  overflow: hidden; height: 100vh;
+}
+canvas { display: block; cursor: grab; }
+canvas:active { cursor: grabbing; }
+
+#controls {
+  position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%);
+  z-index: 10; display: flex; align-items: center; gap: 12px;
+  background: rgba(10,10,20,0.94); border: 1px solid #2a2a3a;
+  border-radius: 16px; padding: 8px 22px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.6);
+}
+#controls label { font-size: 10px; letter-spacing: 0.5px; color: #666; text-transform: uppercase; }
+#morphSlider { width: 220px; accent-color: #d4a05c; cursor: pointer; }
+.btn {
+  background: rgba(25,25,45,0.9); border: 1px solid #333;
+  border-radius: 10px; padding: 5px 14px; font-size: 10px;
+  color: #999; cursor: pointer; transition: all 0.2s; letter-spacing: 0.3px;
+}
+.btn:hover { border-color: #d4a05c; color: #ffd080; }
+.btn.active {
+  background: rgba(50,40,20,0.85); border-color: #d4a05c;
+  color: #ffd080; box-shadow: 0 0 8px rgba(212,160,92,0.25);
+}
+#morphLabel {
+  font-size: 12px; font-weight: 600; color: #d4a05c;
+  min-width: 36px; text-align: center;
+}
+#title {
+  position: fixed; top: 12px; left: 14px; z-index: 10;
+  font-size: 15px; font-weight: 700; color: #d4a05c;
+  text-shadow: 0 0 10px rgba(212,160,92,0.25);
+}
+#subtitle {
+  position: fixed; top: 32px; left: 14px; z-index: 10;
+  font-size: 10px; color: #555; max-width: 340px; line-height: 1.5;
+}
+#legend {
+  position: fixed; top: 12px; right: 12px; z-index: 10;
+  background: rgba(10,10,20,0.9); border: 1px solid #1e1e2e;
+  border-radius: 10px; padding: 10px 14px; font-size: 9px; line-height: 2;
+}
+.leg-row { display: flex; align-items: center; gap: 7px; }
+.leg-swatch { width: 14px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+#tooltip {
+  position: fixed; z-index: 20; pointer-events: none; display: none;
+  background: rgba(10,10,25,0.95); border: 1px solid #444;
+  border-radius: 8px; padding: 8px 12px; font-size: 10px;
+  line-height: 1.6; box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+}
+#tooltip .tt-sym { font-size: 14px; font-weight: 700; color: #d4a05c; }
+#tooltip .tt-row { color: #888; }
+#tooltip .tt-val { color: #ddd; font-weight: 500; }
+</style>
+<link rel="stylesheet" href="sdt-shell.css">
+<script src="sdt-shell.js" defer></script>
+<meta name="description" content="Monoisotopic Centreline Morph — Stretcherbond — part of Spatial Displacement Theory, a zero-free-parameter physics framework.">
+<link rel="canonical" href="https://spatialdisplacementtheory.com/monoisotopic-morph">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/favicon.ico" sizes="64x64">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#b07430">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Spatial Displacement Theory">
+<meta property="og:title" content="Monoisotopic Centreline Morph — Stretcherbond">
+<meta property="og:description" content="Monoisotopic Centreline Morph — Stretcherbond — part of Spatial Displacement Theory, a zero-free-parameter physics framework.">
+<meta property="og:url" content="https://spatialdisplacementtheory.com/monoisotopic-morph">
+<meta property="og:image" content="https://spatialdisplacementtheory.com/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_AU">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Monoisotopic Centreline Morph — Stretcherbond">
+<meta name="twitter:description" content="Monoisotopic Centreline Morph — Stretcherbond — part of Spatial Displacement Theory, a zero-free-parameter physics framework.">
+<meta name="twitter:image" content="https://spatialdisplacementtheory.com/og-card.png">
+</head>
+<body>
+
+<div id="title">Monoisotopic Centreline Morph</div>
+<div id="subtitle">Stretcherbond chart: each tile is one isotope. Morph straightens the sole-isotope centreline to vertical.</div>
+
+<div id="legend">
+  <div class="leg-row"><div class="leg-swatch" style="background:#d4a05c;box-shadow:0 0 5px #d4a05c;"></div> Monoisotopic</div>
+  <div class="leg-row"><div class="leg-swatch" style="background:#2a8a6a;"></div> Stable</div>
+  <div class="leg-row"><div class="leg-swatch" style="background:#8a2a3a;"></div> Unstable</div>
+  <div class="leg-row"><div class="leg-swatch" style="background:transparent;border:1px dashed #6a5acd;"></div> Golden line (50/50)</div>
+  <div class="leg-row"><div class="leg-swatch" style="background:transparent;border:1px solid rgba(100,200,255,0.3);"></div> Magic Z</div>
+</div>
+
+<div id="controls">
+  <button class="btn" id="btnPlay">▶ Play</button>
+  <label>Actual</label>
+  <input type="range" id="morphSlider" min="0" max="1000" value="0">
+  <label>Straight</label>
+  <span id="morphLabel">0%</span>
+  <button class="btn" id="btnReset">⟲</button>
+</div>
+
+<div id="tooltip"></div>
+
+<canvas id="c"></canvas>
+
+<script>
+/* ═══════════════════════════════════════════
+   ISOTOPE DATA — Z=2 to Z=83
+   ═══════════════════════════════════════════ */
+const RAW = [
+  ["H",1,1,99.99,true],["H",1,2,0.01,true],["H",1,3,0,false],
+  ["He",2,3,0.0001,true],["He",2,4,99.9999,true],
+  ["Li",3,6,7.59,true],["Li",3,7,92.41,true],
+  ["Be",4,9,100,true],
+  ["B",5,10,19.9,true],["B",5,11,80.1,true],
+  ["C",6,12,98.93,true],["C",6,13,1.07,true],["C",6,14,0,false],
+  ["N",7,14,99.63,true],["N",7,15,0.37,true],
+  ["O",8,16,99.76,true],["O",8,17,0.04,true],["O",8,18,0.20,true],
+  ["F",9,19,100,true],
+  ["Ne",10,20,90.48,true],["Ne",10,21,0.27,true],["Ne",10,22,9.25,true],
+  ["Na",11,23,100,true],
+  ["Mg",12,24,78.99,true],["Mg",12,25,10.0,true],["Mg",12,26,11.01,true],
+  ["Al",13,27,100,true],
+  ["Si",14,28,92.22,true],["Si",14,29,4.69,true],["Si",14,30,3.09,true],
+  ["P",15,31,100,true],
+  ["S",16,32,95.0,true],["S",16,33,0.75,true],["S",16,34,4.25,true],["S",16,36,0.01,true],
+  ["Cl",17,35,75.76,true],["Cl",17,37,24.24,true],
+  ["Ar",18,36,0.33,true],["Ar",18,38,0.06,true],["Ar",18,40,99.6,true],
+  ["K",19,39,93.26,true],["K",19,40,0.01,false],["K",19,41,6.73,true],
+  ["Ca",20,40,96.94,true],["Ca",20,42,0.65,true],["Ca",20,43,0.14,true],["Ca",20,44,2.09,true],["Ca",20,46,0.004,true],["Ca",20,48,0.19,false],
+  ["Sc",21,45,100,true],
+  ["Ti",22,46,8.25,true],["Ti",22,47,7.44,true],["Ti",22,48,73.72,true],["Ti",22,49,5.41,true],["Ti",22,50,5.18,true],
+  ["V",23,50,0.25,false],["V",23,51,99.75,true],
+  ["Cr",24,50,4.35,true],["Cr",24,52,83.79,true],["Cr",24,53,9.50,true],["Cr",24,54,2.37,true],
+  ["Mn",25,55,100,true],
+  ["Fe",26,54,5.85,true],["Fe",26,56,91.75,true],["Fe",26,57,2.12,true],["Fe",26,58,0.28,true],
+  ["Co",27,59,100,true],
+  ["Ni",28,58,68.08,true],["Ni",28,60,26.22,true],["Ni",28,61,1.14,true],["Ni",28,62,3.63,true],["Ni",28,64,0.93,true],
+  ["Cu",29,63,69.15,true],["Cu",29,65,30.85,true],
+  ["Zn",30,64,49.17,true],["Zn",30,66,27.73,true],["Zn",30,67,4.04,true],["Zn",30,68,18.45,true],["Zn",30,70,0.61,true],
+  ["Ga",31,69,60.11,true],["Ga",31,71,39.89,true],
+  ["Ge",32,70,20.57,true],["Ge",32,72,27.45,true],["Ge",32,73,7.75,true],["Ge",32,74,36.50,true],["Ge",32,76,7.73,false],
+  ["As",33,75,100,true],
+  ["Se",34,74,0.89,true],["Se",34,76,9.37,true],["Se",34,77,7.63,true],["Se",34,78,23.77,true],["Se",34,80,49.61,true],["Se",34,82,8.73,false],
+  ["Br",35,79,50.69,true],["Br",35,81,49.31,true],
+  ["Kr",36,78,0.36,true],["Kr",36,80,2.29,true],["Kr",36,82,11.59,true],["Kr",36,83,11.50,true],["Kr",36,84,56.99,true],["Kr",36,86,17.28,true],
+  ["Rb",37,85,72.17,true],["Rb",37,87,27.83,false],
+  ["Sr",38,84,0.56,true],["Sr",38,86,9.86,true],["Sr",38,87,7.0,true],["Sr",38,88,82.58,true],
+  ["Y",39,89,100,true],
+  ["Zr",40,90,51.45,true],["Zr",40,91,11.22,true],["Zr",40,92,17.15,true],["Zr",40,94,17.38,true],["Zr",40,96,2.8,false],
+  ["Nb",41,93,100,true],
+  ["Mo",42,92,14.65,true],["Mo",42,94,9.19,true],["Mo",42,95,15.87,true],["Mo",42,96,16.67,true],["Mo",42,97,9.58,true],["Mo",42,98,24.29,true],["Mo",42,100,9.74,false],
+  ["Ru",44,96,5.54,true],["Ru",44,98,1.87,true],["Ru",44,99,12.76,true],["Ru",44,100,12.60,true],["Ru",44,101,17.06,true],["Ru",44,102,31.55,true],["Ru",44,104,18.62,true],
+  ["Rh",45,103,100,true],
+  ["Pd",46,102,1.02,true],["Pd",46,104,11.14,true],["Pd",46,105,22.33,true],["Pd",46,106,27.33,true],["Pd",46,108,26.46,true],["Pd",46,110,11.72,true],
+  ["Ag",47,107,51.84,true],["Ag",47,109,48.16,true],
+  ["Cd",48,110,12.49,true],["Cd",48,111,12.80,true],["Cd",48,112,24.13,true],["Cd",48,113,12.22,false],["Cd",48,114,28.73,true],["Cd",48,116,7.49,false],
+  ["In",49,113,4.29,true],["In",49,115,95.71,false],
+  ["Sn",50,112,0.97,true],["Sn",50,114,0.66,true],["Sn",50,115,0.34,true],["Sn",50,116,14.54,true],["Sn",50,117,7.68,true],["Sn",50,118,24.22,true],["Sn",50,119,8.59,true],["Sn",50,120,32.58,true],["Sn",50,122,4.63,true],["Sn",50,124,5.79,true],
+  ["Sb",51,121,57.21,true],["Sb",51,123,42.79,true],
+  ["Te",52,120,0.09,true],["Te",52,122,2.55,true],["Te",52,123,0.89,true],["Te",52,124,4.74,true],["Te",52,125,7.07,true],["Te",52,126,18.84,true],["Te",52,128,31.74,false],["Te",52,130,34.08,false],
+  ["I",53,127,100,true],
+  ["Xe",54,124,0.095,false],["Xe",54,126,0.089,true],["Xe",54,128,1.91,true],["Xe",54,129,26.40,true],["Xe",54,130,4.07,true],["Xe",54,131,21.23,true],["Xe",54,132,26.91,true],["Xe",54,134,10.44,true],["Xe",54,136,8.86,false],
+  ["Cs",55,133,100,true],
+  ["Ba",56,130,0.11,true],["Ba",56,132,0.10,true],["Ba",56,134,2.42,true],["Ba",56,135,6.59,true],["Ba",56,136,7.85,true],["Ba",56,137,11.23,true],["Ba",56,138,71.70,true],
+  ["La",57,138,0.09,false],["La",57,139,99.91,true],
+  ["Ce",58,136,0.19,true],["Ce",58,138,0.25,true],["Ce",58,140,88.45,true],["Ce",58,142,11.11,false],
+  ["Pr",59,141,100,true],
+  ["Nd",60,142,27.15,true],["Nd",60,143,12.17,true],["Nd",60,144,23.80,false],["Nd",60,145,8.29,true],["Nd",60,146,17.19,true],["Nd",60,148,5.76,true],["Nd",60,150,5.64,false],
+  ["Sm",62,144,3.07,true],["Sm",62,147,14.99,false],["Sm",62,148,11.24,false],["Sm",62,149,13.82,true],["Sm",62,150,7.38,true],["Sm",62,152,26.75,true],["Sm",62,154,22.75,true],
+  ["Eu",63,151,47.81,true],["Eu",63,153,52.19,true],
+  ["Gd",64,152,0.20,false],["Gd",64,154,2.18,true],["Gd",64,155,14.80,true],["Gd",64,156,20.47,true],["Gd",64,157,15.65,true],["Gd",64,158,24.84,true],["Gd",64,160,21.86,true],
+  ["Tb",65,159,100,true],
+  ["Dy",66,156,0.06,true],["Dy",66,158,0.10,true],["Dy",66,160,2.33,true],["Dy",66,161,18.89,true],["Dy",66,162,25.48,true],["Dy",66,163,24.90,true],["Dy",66,164,28.26,true],
+  ["Ho",67,165,100,true],
+  ["Er",68,162,0.14,true],["Er",68,164,1.60,true],["Er",68,166,33.50,true],["Er",68,167,22.87,true],["Er",68,168,26.98,true],["Er",68,170,14.91,true],
+  ["Tm",69,169,100,true],
+  ["Yb",70,168,0.12,true],["Yb",70,170,2.98,true],["Yb",70,171,14.09,true],["Yb",70,172,21.68,true],["Yb",70,173,16.10,true],["Yb",70,174,32.03,true],["Yb",70,176,13.00,true],
+  ["Lu",71,175,97.40,true],["Lu",71,176,2.60,false],
+  ["Hf",72,174,0.16,false],["Hf",72,176,5.26,true],["Hf",72,177,18.60,true],["Hf",72,178,27.28,true],["Hf",72,179,13.62,true],["Hf",72,180,35.08,true],
+  ["Ta",73,180,0.01,false],["Ta",73,181,99.99,true],
+  ["W",74,180,0.12,false],["W",74,182,26.50,true],["W",74,183,14.31,true],["W",74,184,30.64,true],["W",74,186,28.43,true],
+  ["Re",75,185,37.40,true],["Re",75,187,62.60,false],
+  ["Os",76,184,0.02,true],["Os",76,186,1.59,false],["Os",76,187,1.96,true],["Os",76,188,13.24,true],["Os",76,189,16.15,true],["Os",76,190,26.26,true],["Os",76,192,40.78,true],
+  ["Ir",77,191,37.3,true],["Ir",77,193,62.7,true],
+  ["Pt",78,190,0.01,false],["Pt",78,192,0.78,true],["Pt",78,194,32.86,true],["Pt",78,195,33.78,true],["Pt",78,196,25.24,true],["Pt",78,198,7.36,true],
+  ["Au",79,197,100,true],
+  ["Hg",80,196,0.15,true],["Hg",80,198,9.97,true],["Hg",80,199,16.87,true],["Hg",80,200,23.10,true],["Hg",80,201,13.18,true],["Hg",80,202,29.86,true],["Hg",80,204,6.87,true],
+  ["Tl",81,203,29.52,true],["Tl",81,205,70.48,true],
+  ["Pb",82,204,1.4,true],["Pb",82,206,24.1,true],["Pb",82,207,22.1,true],["Pb",82,208,52.4,true],
+  ["Bi",83,209,100,false]
+];
+
+/* ═══════════════════════════════════════════
+   PROCESS
+   ═══════════════════════════════════════════ */
+const ISO = RAW.map(([sym,Z,A,abd,stable]) => {
+  const N = A - Z;
+  return { sym, Z, A, N, abd, stable };
+});
+
+// Find monoisotopic elements
+const countByZ = {};
+ISO.forEach(e => { if (e.stable || e.abd > 0) countByZ[e.Z] = (countByZ[e.Z]||0)+1; });
+const MONO_Z = new Set();
+for (const [z,c] of Object.entries(countByZ)) { if (c===1) MONO_Z.add(+z); }
+
+// Monoisotopic points for fit
+const monoPts = [];
+ISO.forEach(e => { if (MONO_Z.has(e.Z) && (e.stable||e.abd>0)) monoPts.push(e); });
+
+// Linear fit N = m*Z + b through monoisotopic (N vs Z)
+function linFit(pts) {
+  const n=pts.length; let sx=0,sy=0,sxy=0,sx2=0;
+  pts.forEach(p => { sx+=p.Z; sy+=p.N; sxy+=p.Z*p.N; sx2+=p.Z*p.Z; });
+  const m=(n*sxy-sx*sy)/(n*sx2-sx*sx), b=(sy-m*sx)/n;
+  return {m,b};
+}
+const fit = linFit(monoPts);
+function Nfit(Z) { return fit.m * Z + fit.b; }
+
+// Golden line: 50/50 d:t → N = 0.5*Z (since each position adds 1P, 50% d adds 1N, 50% t adds 2N → avg 1.5N per P beyond alpha)
+// Actually: A = 2.5Z - 1, N = A-Z = 1.5Z - 1
+function Ngolden(Z) { return 1.5 * Z - 1; }
+
+// Compute residuals
+ISO.forEach(e => {
+  e.mono = MONO_Z.has(e.Z);
+  e.Nresid = e.N - Nfit(e.Z);
+});
+
+const MAGIC = [2,8,20,28,50,82];
+
+/* ═══════════════════════════════════════════
+   CANVAS + PAN/ZOOM
+   ═══════════════════════════════════════════ */
+const canvas = document.getElementById("c");
+const ctx = canvas.getContext("2d");
+let W, H;
+function resize() { W=canvas.width=innerWidth; H=canvas.height=innerHeight; }
+addEventListener("resize",()=>{resize();draw();});
+resize();
+
+let panX=0, panY=0, zoom=1;
+let dragging=false, lastX, lastY;
+canvas.addEventListener("mousedown",e=>{dragging=true;lastX=e.clientX;lastY=e.clientY;});
+addEventListener("mouseup",()=>dragging=false);
+canvas.addEventListener("mousemove",e=>{
+  if(dragging){panX+=e.clientX-lastX;panY+=e.clientY-lastY;lastX=e.clientX;lastY=e.clientY;draw();}
+  handleHover(e);
+});
+canvas.addEventListener("wheel",e=>{
+  const f=e.deltaY>0?0.92:1.08;
+  const mx=e.clientX, my=e.clientY;
+  panX=(panX-mx)*f+mx; panY=(panY-my)*f+my;
+  zoom*=f; draw(); e.preventDefault();
+},{passive:false});
+
+/* ═══════════════════════════════════════════
+   TILE GEOMETRY
+   ═══════════════════════════════════════════ */
+const CW = 18; // cell width
+const CH = 11; // cell height
+let morphT = 0;
+
+function tilePos(e) {
+  // Base position: N on x, Z on y (y goes up)
+  // Stretcherbond: odd Z rows shift right by half cell
+  const offset = (e.Z % 2 === 1) ? CW * 0.5 : 0;
+  const xActual = e.N * CW + offset;
+  const xStraight = e.Nresid * CW + offset;
+  const x = xActual * (1 - morphT) + xStraight * morphT;
+  const y = -e.Z * CH; // negative so Z goes up
+  return { x, y };
+}
+
+function toScreen(tx, ty) {
+  return {
+    x: W/2 + (tx + panX) * zoom,
+    y: H/2 + (ty + panY) * zoom
+  };
+}
+
+/* ═══════════════════════════════════════════
+   DRAW
+   ═══════════════════════════════════════════ */
+function draw() {
+  ctx.clearRect(0,0,W,H);
+  const cw = CW * zoom, ch = CH * zoom;
+
+  // ── Magic Z lines ──
+  MAGIC.forEach(mz => {
+    const y0 = toScreen(-200, -mz*CH).y;
+    ctx.beginPath(); ctx.moveTo(0,y0); ctx.lineTo(W,y0);
+    ctx.strokeStyle="rgba(80,180,255,0.07)"; ctx.lineWidth=Math.max(1,ch*0.8);
+    ctx.stroke();
+    // Label at left edge
+    ctx.font=`${Math.max(8,9*zoom)}px 'Segoe UI',sans-serif`;
+    ctx.fillStyle="rgba(80,180,255,0.35)";
+    ctx.textAlign="left"; ctx.textBaseline="middle";
+    ctx.fillText(`Z=${mz}`, 8, y0);
+  });
+
+  // ── Golden line ──
+  ctx.beginPath();
+  ctx.setLineDash([4,3]);
+  for (let z=2;z<=83;z++){
+    const ng = Ngolden(z);
+    const offset = (z%2===1)?CW*0.5:0;
+    const xA = ng*CW + offset;
+    const xS = (ng - Nfit(z))*CW + offset;
+    const tx = xA*(1-morphT) + xS*morphT;
+    const p = toScreen(tx + CW*0.5, -z*CH - CH*0.5);
+    z===2 ? ctx.moveTo(p.x,p.y) : ctx.lineTo(p.x,p.y);
+  }
+  ctx.strokeStyle="rgba(106,90,205,0.45)"; ctx.lineWidth=1.5*zoom; ctx.stroke();
+  ctx.setLineDash([]);
+
+  // ── Monoisotopic centreline ──
+  ctx.beginPath();
+  for (let z=2;z<=83;z++){
+    const nf = Nfit(z);
+    const offset = (z%2===1)?CW*0.5:0;
+    const xA = nf*CW + offset;
+    const xS = 0*CW + offset; // residual=0
+    const tx = xA*(1-morphT) + xS*morphT;
+    const p = toScreen(tx + CW*0.5, -z*CH - CH*0.5);
+    z===2 ? ctx.moveTo(p.x,p.y) : ctx.lineTo(p.x,p.y);
+  }
+  ctx.strokeStyle="rgba(212,160,92,0.25)"; ctx.lineWidth=1.5*zoom; ctx.stroke();
+
+  // ── Tiles ──
+  ISO.forEach(e => {
+    const tp = tilePos(e);
+    const sp = toScreen(tp.x, tp.y);
+    const w = cw - 1, h = ch - 1;
+
+    // Tile fill
+    if (e.mono) {
+      // Monoisotopic: warm gold
+      ctx.fillStyle = "rgba(180,130,50,0.85)";
+      // Glow
+      ctx.shadowColor = "rgba(212,160,92,0.4)";
+      ctx.shadowBlur = 6 * zoom;
+    } else if (e.stable) {
+      ctx.fillStyle = "rgba(30,110,80,0.7)";
+      ctx.shadowColor = "transparent"; ctx.shadowBlur = 0;
+    } else {
+      ctx.fillStyle = "rgba(120,30,45,0.6)";
+      ctx.shadowColor = "transparent"; ctx.shadowBlur = 0;
+    }
+
+    ctx.fillRect(sp.x, sp.y, w, h);
+    ctx.shadowColor = "transparent"; ctx.shadowBlur = 0;
+
+    // Border
+    ctx.strokeStyle = e.mono ? "rgba(255,200,100,0.6)" : "rgba(255,255,255,0.06)";
+    ctx.lineWidth = e.mono ? 1 : 0.5;
+    ctx.strokeRect(sp.x, sp.y, w, h);
+
+    // Label (if zoomed enough)
+    if (cw > 14) {
+      ctx.font = `${e.mono?"bold ":""}${Math.max(6,Math.min(9,cw*0.45))}px 'Segoe UI',sans-serif`;
+      ctx.fillStyle = e.mono ? "rgba(255,230,170,0.95)" : "rgba(255,255,255,0.45)";
+      ctx.textAlign = "center"; ctx.textBaseline = "middle";
+      const label = cw > 28 ? `${e.sym}${e.A}` : (cw > 18 ? `${e.A}` : "");
+      ctx.fillText(label, sp.x + w/2, sp.y + h/2);
+    }
+
+    // Store screen rect for hover
+    e._sx = sp.x; e._sy = sp.y; e._sw = w; e._sh = h;
+  });
+
+  // ── Sole-line label at t=1 ──
+  if (morphT > 0.4) {
+    const a = Math.min(1, (morphT - 0.4) / 0.3);
+    const p = toScreen(CW*0.5, -42*CH);
+    ctx.save();
+    ctx.translate(p.x - 14*zoom, p.y);
+    ctx.rotate(-Math.PI/2);
+    ctx.font = `bold ${Math.max(9,11*zoom)}px 'Segoe UI',sans-serif`;
+    ctx.fillStyle = `rgba(212,160,92,${0.7*a})`;
+    ctx.textAlign = "center"; ctx.textBaseline = "middle";
+    ctx.fillText("SOLE ISOTOPE LINE", 0, 0);
+    ctx.restore();
+  }
+
+  // ── Info bar ──
+  ctx.font = "9px 'Segoe UI',sans-serif";
+  ctx.fillStyle = "rgba(255,255,255,0.2)";
+  ctx.textAlign = "left"; ctx.textBaseline = "bottom";
+  ctx.fillText(`N = ${fit.m.toFixed(4)}·Z ${fit.b>0?"+":""}${fit.b.toFixed(2)}  |  slope → ${((fit.m/(fit.m+1))*100).toFixed(1)}% neutron excess per position  |  ${monoPts.length} monoisotopic elements`, 14, H-60);
+}
+
+/* ═══════════════════════════════════════════
+   HOVER TOOLTIP
+   ═══════════════════════════════════════════ */
+const tooltip = document.getElementById("tooltip");
+function handleHover(ev) {
+  const mx=ev.clientX, my=ev.clientY;
+  let hit = null;
+  for (const e of ISO) {
+    if (mx >= e._sx && mx <= e._sx+e._sw && my >= e._sy && my <= e._sy+e._sh) { hit=e; break; }
+  }
+  if (hit) {
+    const nd = 3*hit.Z - hit.A - 2, nt = hit.A - 2*hit.Z;
+    tooltip.style.display = "block";
+    tooltip.style.left = (mx+14)+"px"; tooltip.style.top = (my-10)+"px";
+    tooltip.innerHTML = `
+      <div class="tt-sym">${hit.sym}-${hit.A}${hit.mono?" ★":""}</div>
+      <div class="tt-row">Z=<span class="tt-val">${hit.Z}</span>  N=<span class="tt-val">${hit.N}</span>  A=<span class="tt-val">${hit.A}</span></div>
+      <div class="tt-row">Grammar: <span class="tt-val">${nd>=0?nd:"?"}d + ${nt>=0?nt:"?"}t</span></div>
+      <div class="tt-row">ΔN from fit: <span class="tt-val">${hit.Nresid>=0?"+":""}${hit.Nresid.toFixed(2)}</span></div>
+      <div class="tt-row">${hit.stable?"Stable":"Unstable"} · ${hit.abd}%</div>
+    `;
+  } else {
+    tooltip.style.display = "none";
+  }
+}
+
+/* ═══════════════════════════════════════════
+   ANIMATION CONTROLS
+   ═══════════════════════════════════════════ */
+const slider = document.getElementById("morphSlider");
+const mlabel = document.getElementById("morphLabel");
+const btnPlay = document.getElementById("btnPlay");
+const btnReset = document.getElementById("btnReset");
+
+slider.addEventListener("input",()=>{
+  morphT=+slider.value/1000; mlabel.textContent=Math.round(morphT*100)+"%";
+  playing=false; btnPlay.textContent="▶ Play"; btnPlay.classList.remove("active"); draw();
+});
+
+let playing=false, animDir=1, animFrame=null;
+function animate(){
+  if(!playing)return;
+  morphT += 0.0025*animDir;
+  if(morphT>=1){morphT=1;animDir=-1;}
+  if(morphT<=0){morphT=0;animDir=1;}
+  slider.value=Math.round(morphT*1000);
+  mlabel.textContent=Math.round(morphT*100)+"%";
+  draw();
+  animFrame=requestAnimationFrame(animate);
+}
+btnPlay.addEventListener("click",()=>{
+  playing=!playing;
+  if(playing){btnPlay.textContent="⏸ Pause";btnPlay.classList.add("active");if(morphT>=1)animDir=-1;if(morphT<=0)animDir=1;animate();}
+  else{btnPlay.textContent="▶ Play";btnPlay.classList.remove("active");if(animFrame)cancelAnimationFrame(animFrame);}
+});
+btnReset.addEventListener("click",()=>{
+  playing=false;btnPlay.textContent="▶ Play";btnPlay.classList.remove("active");
+  morphT=0;animDir=1;slider.value=0;mlabel.textContent="0%";
+  panX=0;panY=0;zoom=1;draw();
+});
+
+// ── Initial pan to centre on ~Z=40 ──
+panY = 40 * CH;
+panX = -45 * CW;
+draw();
+</script>
+</body>
+</html>

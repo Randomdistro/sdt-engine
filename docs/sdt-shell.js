@@ -88,6 +88,7 @@
       ['The paradox census','st_paradox_census.html']
     ]],
     ['Nuclear', [
+      ['Atomicus 3D walkthrough', 'atomicus-3d.html'],
       ['Packing sequencer', 'nuclear-packing-sequencer.html'],
       ['Sequencer walkthrough', 'nuclear-packing-walkthrough.html'],
       ['Atomicus lab',        'atomicus-lab-subdued.html'],

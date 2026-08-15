@@ -12,7 +12,8 @@
   <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="sdt-shell.css">
 <script src="sdt-shell.js" defer></script>
-<meta name="description" content="Spatial Displacement Theory — A zero-parameter framework deriving gravity, electromagnetism, and nuclear forces from pressure differentials in a discrete…">
+<script src="engine-data.js" defer></script>
+<meta name="description" content="Spatial Displacement Theory — an executable pressure-and-geometry framework with explicit inputs, public benchmarks and falsifiable open problems.">
 <link rel="canonical" href="https://spatialdisplacementtheory.com/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.ico" sizes="64x64">
@@ -22,7 +23,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Spatial Displacement Theory">
 <meta property="og:title" content="Spatial Displacement Theory">
-<meta property="og:description" content="Spatial Displacement Theory — A zero-parameter framework deriving gravity, electromagnetism, and nuclear forces from pressure differentials in a discrete…">
+<meta property="og:description" content="Spatial Displacement Theory — an executable pressure-and-geometry framework with explicit inputs, public benchmarks and falsifiable open problems.">
 <meta property="og:url" content="https://spatialdisplacementtheory.com/">
 <meta property="og:image" content="https://spatialdisplacementtheory.com/og-card.png">
 <meta property="og:image:width" content="1200">
@@ -30,15 +31,15 @@
 <meta property="og:locale" content="en_AU">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Spatial Displacement Theory">
-<meta name="twitter:description" content="Spatial Displacement Theory — A zero-parameter framework deriving gravity, electromagnetism, and nuclear forces from pressure differentials in a discrete…">
+<meta name="twitter:description" content="Spatial Displacement Theory — an executable pressure-and-geometry framework with explicit inputs, public benchmarks and falsifiable open problems.">
 <meta name="twitter:image" content="https://spatialdisplacementtheory.com/og-card.png">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "ScholarlyArticle",
   "headline": "Spatial Displacement Theory",
-  "description": "A zero-free-parameter physics framework. Space is a superfluidic hypercrystal; matter displaces it; every force is a pressure difference.",
-  "author": { "@type": "Person", "name": "J. C. Harvey", "affiliation": "Melbourne, Australia" },
+  "description": "An executable pressure-and-geometry framework with explicit inputs, public benchmarks and falsifiable open problems.",
+  "author": { "@type": "Person", "name": "James Christopher Tyndall", "affiliation": "Melbourne, Australia" },
   "inLanguage": "en",
   "url": "https://spatialdisplacementtheory.com/",
   "image": "https://spatialdisplacementtheory.com/og-card.png",
@@ -72,10 +73,10 @@
   <section id="opening" class="opening">
     <canvas id="latticeCanvas" class="opening__canvas"></canvas>
     <div class="opening__content">
-      <p class="opening__pretitle">All of physics. No fitted parameters.</p>
+      <p class="opening__pretitle">One executable framework. Every input disclosed.</p>
       <h1 class="opening__title" data-i18n="hero_title">Spatial<br>Displacement<br><em>Theory</em></h1>
       <hr class="opening__rule">
-      <p class="opening__desc">Gravity, electromagnetism, the nuclear force — one push, read three ways, in a discrete spatial medium. Four primitives. One new idea: matter displaces space. Every constant computed, nothing fitted.</p>
+      <p class="opening__desc">Gravity, electromagnetism and nuclear interaction — one pressure mechanism read through different geometries in a discrete spatial medium. The benchmark ledger separates derived, computed, observed, calibrated, identity and pending results.</p>
       <p style="margin:.8rem 0 0;"><a href="welcome.html" style="font-family:'JetBrains Mono',monospace;font-size:.82rem;letter-spacing:.1em;color:var(--mint);border:1px solid var(--mint);border-radius:3px;padding:.45rem 1rem;display:inline-block;text-decoration:none;">START HERE → THE FOUR IRREDUCIBLES</a></p>
       <p style="margin:.8rem 0 0;"><a href="causal-chain.html" style="font-family:'JetBrains Mono',monospace;font-size:.82rem;letter-spacing:.1em;color:var(--ink-soft);border:1px solid var(--paper-edge);border-radius:3px;padding:.45rem 1rem;display:inline-block;text-decoration:none;">THEN THE CAUSAL CHAIN, NARRATED</a></p>
       <p class="opening__author"><span class="opening_quote">"Any theory that produces paradoxes is either incomplete, or incorrect."</span><br>— J. C. Harvey, Melbourne, Australia</p>
@@ -422,30 +423,36 @@
         </div>
       </div>
 
-      <!-- ── Mass defect as shadow overlap ── -->
+      <!-- ── Tested shadow-overlap account ── -->
       <div style="margin:var(--sp-2xl) 0 var(--sp-lg);">
-        <h3 style="font-family:'Source Serif 4','Georgia',serif;font-size:var(--fs-lg);font-weight:600;margin-bottom:var(--sp-sm);">The mass defect is a shadow</h3>
+        <h3 style="font-family:'Source Serif 4','Georgia',serif;font-size:var(--fs-lg);font-weight:600;margin-bottom:var(--sp-sm);">The shadow-area account was tested</h3>
         <p style="max-width:var(--content-width);color:var(--ink-soft);margin-bottom:var(--sp-md);" data-i18n="a_shadow">
-          In SDT, mass is not a substance — it is the <em>occlusion cross-section</em> a displaced volume presents to
-          the convergence field. Each proton boundary casts a shadow of area πR<sub>p</sub>². When nucleons pack, their
-          shadows <strong>overlap</strong>: the assembled nucleus blocks less area than the sum of its free parts. That
-          shadow deficit ΔA is the shared occlusion — and it <em>is</em> the mass defect. Shine one light through the
-          packed trefoils, measure the shadow it throws on the wall, and the binding energy falls straight out of the
-          geometry.
+          A candidate account priced nuclear binding by the overlap of projected proton boundaries:
+          each isolated boundary contributes πR<sub>p</sub>², while a packed union counts shared projected
+          regions once. NSEQ04 tested that rule on the active dual-tetra packing. It correlates with total
+          binding energy, but it does not reproduce binding energy per nucleon and is not promoted as the
+          binding mechanism.
         </p>
         <div class="eq-block">
           <div class="eq">BE ≈ κ · ΔA<sub>shadow</sub>,&nbsp;&nbsp;&nbsp; ΔA = N·πR<sub>p</sub>² − A<sub>∪</sub></div>
-          <div class="eq-caption">One area→energy scale κ, fixed by least squares over 217 isotopes: total binding energy to R² = 0.988, mean error 7%. The α-cluster and the iron peak are the residual — that fine structure needs the shared-electron well depth, not geometry alone.</div>
+          <div class="eq-caption">NSEQ04 active packing: κ = 31.4485 MeV/fm² [CALIBRATED(1)], R²(total BE) = 0.7918, mean |relative error| = 40.4%; R²(BE/A) = −161.94. Result: excluded as a per-nucleon binding law.</div>
         </div>
       </div>
 
       <div style="margin:var(--sp-lg) 0;border:1px solid rgba(80,140,200,.28);border-radius:8px;background:rgba(80,140,200,.05);padding:var(--sp-lg) var(--sp-xl);display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;">
         <div>
           <div style="font-size:10px;font-family:'JetBrains Mono',monospace;color:#7ab4e0;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px;">Interactive · Nuclear Packing Sequencer</div>
-          <div style="font-family:'Source Serif 4','Georgia',serif;font-size:1.15em;font-weight:600;color:var(--ink);margin-bottom:6px;">Sequence the packing, read the mass defect off the shadow</div>
-          <div style="font-size:var(--fs-sm);color:var(--ink-muted);max-width:520px;line-height:1.65;">Build any nucleus one subunit at a time from interleaved trefoils — α tetrahedron, tritons, deuterons — shine the convergence light through it, and watch the shadow-overlap track the measured binding curve. Each subunit that locks in emits its binding energy as a γ-ray chirp.</div>
+          <div style="font-family:'Source Serif 4','Georgia',serif;font-size:1.15em;font-weight:600;color:var(--ink);margin-bottom:6px;">Sequence the packing and inspect the tested shadow diagnostic</div>
+          <div style="font-size:var(--fs-sm);color:var(--ink-muted);max-width:520px;line-height:1.65;">Build a nucleus from the α core, tritons and deuterons, then compare the projected-union diagnostic with the construction grammar. The visualisation shows the tested geometry; it does not present the excluded area-price rule as binding energy.</div>
         </div>
         <div style="display:flex;flex-direction:column;gap:10px;">
+          <a href="atomicus-3d.html" target="_blank"
+             style="display:inline-flex;align-items:center;gap:8px;padding:11px 22px;
+                    background:rgba(67,214,178,.12);border:1px solid rgba(67,214,178,.45);
+                    border-radius:6px;color:#43d6b2;font-size:13px;font-family:'Inter',sans-serif;
+                    font-weight:500;text-decoration:none;white-space:nowrap;transition:all .2s;">
+            ◈ Open Atomicus 3D
+          </a>
           <a href="nuclear-packing-sequencer.html" target="_blank"
              style="display:inline-flex;align-items:center;gap:8px;padding:11px 22px;
                     background:rgba(80,140,200,.12);border:1px solid rgba(80,140,200,.4);
@@ -710,6 +717,13 @@
            onmouseout="this.style.background='rgba(212,160,92,0.12)'">
           ↗️ Open full screen
         </a>
+        <a href="atomicus-3d.html" target="_blank"
+           style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;
+                  background:rgba(67,214,178,.10);border:1px solid rgba(67,214,178,.34);
+                  border-radius:4px;color:#43d6b2;font-size:13px;font-family:Inter,sans-serif;
+                  text-decoration:none;transition:all .2s;">
+          ◈ Nucleus-to-Atom 3D
+        </a>
         <a href="nuclear-packing-sequencer.html" target="_blank"
            style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;
                   background:rgba(80,140,200,0.10);border:1px solid rgba(80,140,200,0.30);
@@ -806,10 +820,10 @@
   <span class="s-cm">// Law III — The Occlusion Force</span>
   <span class="s-kw">namespace</span> <span class="s-ns">law_III</span> {
     [[<span class="s-attr">nodiscard</span>]] <span class="s-kw">inline auto</span>
-    <span class="s-fn">occlusion_force</span>(<span class="s-kw">double</span> P_eff,
-        <span class="s-kw">double</span> R1, <span class="s-kw">double</span> R2, <span class="s-kw">double</span> r)
+    <span class="s-fn">F_occlusion</span>(<span class="s-kw">double</span> R1,
+        <span class="s-kw">double</span> R2, <span class="s-kw">double</span> r)
     -> <span class="s-kw">double</span> {
-      <span class="s-kw">return</span> (M_PI/<span class="s-num">4.0</span>) * P_eff
+      <span class="s-kw">return</span> (std::numbers::pi/<span class="s-num">4.0</span>) * P_eff
            * R1*R1 * R2*R2 / (r*r);
     }
   }
@@ -821,11 +835,12 @@
       <span class="s-kw">return</span> v*v * R / (measured::c * measured::c);
     }
 
-    <span class="s-cm">// Orbital velocity at radius r</span>
+    <span class="s-cm">// Orbital velocity from a surface gear k and radius R</span>
     [[<span class="s-attr">nodiscard</span>]] <span class="s-kw">inline auto</span>
-    <span class="s-fn">v_orbital</span>(<span class="s-kw">double</span> kop, <span class="s-kw">double</span> r)
+    <span class="s-fn">v_orbital</span>(<span class="s-kw">double</span> k,
+        <span class="s-kw">double</span> R, <span class="s-kw">double</span> r)
     -> <span class="s-kw">double</span> {
-      <span class="s-kw">return</span> measured::c * std::sqrt(kop / r);
+      <span class="s-kw">return</span> (measured::c/k) * std::sqrt(R/r);
     }
   }
 }</div>
@@ -839,7 +854,8 @@
         <span class="module-badge">magnetosphere.hpp</span>
       </div>
 
-      <div class="margin-note">The engine is built with MSVC on Windows. <code style="color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:0.85em;">cmake -B build -G "Visual Studio 17 2022" -A x64 && cmake --build build --config Release</code></div>
+      <div class="margin-note"><strong>Live executable ledger:</strong> <span data-sdt-benchmark-summary>66/66 earned predictions passed · 19 IDENTITY · 0 CALIBRATED · 3 PENDING note-only</span>. The benchmark run exports this page's machine-readable law data only after executing the suite.</div>
+      <div class="margin-note">Standalone MSVC build: <code style="color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:0.85em;">cl /std:c++20 /EHsc /utf-8 /I Engine\include Benchmarks\B01_B25\benchmarks_suite.cpp</code></div>
       <p style="margin-top:var(--sp-xl);display:flex;gap:10px;flex-wrap:wrap;">
         <a href="paper-engine.html" target="_blank" style="display:inline-flex;align-items:center;padding:9px 16px;border:1px solid var(--mint);border-radius:4px;color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;text-decoration:none;">peer review paper for submission · The Engine</a>
         <a href="paper-01-foundations.html" target="_blank" style="display:inline-flex;align-items:center;padding:9px 16px;border:1px solid var(--mint);border-radius:4px;color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;text-decoration:none;">peer review paper for submission · Foundations &amp; Lattice Mechanics</a>
@@ -853,7 +869,7 @@
     <div class="chapter__inner reveal">
       <div class="chapter__num">Chapter Six</div>
       <h2 class="chapter__title">Cosmology Without Dark Components</h2>
-      <p class="chapter__lead">SDT replaces ΛCDM's six adjustable parameters with geometry.</p>
+      <p class="chapter__lead">SDT tests a non-expanding pressure-and-depth account against the same observations, with its failed routes retained in the record.</p>
 
       <div class="cosmo-grid">
         <div class="cosmo-card">
@@ -894,7 +910,7 @@
                 <span class="hubble-bar__val">73.0</span>
               </div>
             </div>
-            <p style="font-size:var(--fs-sm);color:var(--ink-faint);font-style:italic;margin-bottom:0;">Split the two mechanisms and the tension is not resolved — it is dissolved. Not a crisis requiring new physics.</p>
+            <p style="font-size:var(--fs-sm);color:var(--ink-faint);font-style:italic;margin-bottom:0;"><strong>Status: hypothesis.</strong> The old isotropic CR09 route was falsified (0/122 transition depths). The two-component ordering remains a live test; supernova Hubble-diagram fits currently favour ΛCDM by Δχ² ≈ 90–226.</p>
           </div>
         </div>
       </div>

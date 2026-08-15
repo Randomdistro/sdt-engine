@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>/*sdt-theme-guard*/(function(){try{var t=localStorage.getItem("sdt.theme")||"dark";document.documentElement.setAttribute("data-theme",t==="auto"?"dark":t)}catch(e){}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Atomicus 3D — Nucleus to Atom</title>
+<meta name="description" content="An interactive three-dimensional Atomicus walkthrough: trefoil nucleus, layer synchrony, electron-gap hypotheses, material density and a no-G/no-M three-body solver.">
+<meta name="author" content="James Christopher Tyndall">
+<link rel="canonical" href="https://spatialdisplacementtheory.com/atomicus-3d">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<style>
+:root{--bg:#070a0d;--panel:#0d1218;--edge:#24313d;--ink:#edf4f5;--soft:#aab8bd;--mute:#718088;--mint:#43d6b2;--copper:#d79a5a;--blue:#75b8ff;--violet:#b59cff;--rust:#ef715b}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font-family:Inter,"Segoe UI",sans-serif}
+body{overflow-x:hidden}.top{height:62px;display:flex;align-items:center;gap:18px;padding:0 20px;border-bottom:1px solid var(--edge);background:rgba(7,10,13,.94);position:sticky;top:0;z-index:20;backdrop-filter:blur(12px)}
+.top a{color:var(--soft);text-decoration:none;font-size:12px;letter-spacing:.08em}.brand{font-family:Georgia,serif;font-size:20px}.brand span{color:var(--copper)}
+.live{margin-left:auto;color:var(--mint);font:10px ui-monospace,Consolas,monospace;letter-spacing:.08em;text-transform:uppercase}
+.layout{display:grid;grid-template-columns:260px minmax(0,1fr) 300px;min-height:calc(100vh - 62px)}
+.side{background:var(--panel);border-right:1px solid var(--edge);padding:18px;overflow:auto}.side--right{border-right:0;border-left:1px solid var(--edge)}
+.eyebrow{font:10px ui-monospace,Consolas,monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--mint);margin:0 0 8px}
+h1,h2,h3{font-family:Georgia,serif;margin:0}h1{font-size:25px;line-height:1.15}h2{font-size:20px}h3{font-size:15px}
+.intro{font-size:12.5px;line-height:1.65;color:var(--soft)}
+.steps{display:grid;gap:7px;margin:18px 0}.step{all:unset;cursor:pointer;border:1px solid var(--edge);padding:10px;border-radius:7px;color:var(--soft);font-size:12px;line-height:1.35}
+.step:hover,.step.active{border-color:var(--mint);color:var(--ink);background:rgba(67,214,178,.08)}.step b{display:block;color:var(--ink);margin-bottom:2px}
+.tag{display:inline-flex;align-items:center;border:1px solid var(--edge);border-radius:999px;padding:2px 7px;font:9px ui-monospace,Consolas,monospace;letter-spacing:.08em;margin:2px 4px 2px 0}
+.tag--d{color:var(--mint);border-color:rgba(67,214,178,.4)}.tag--i{color:var(--blue);border-color:rgba(117,184,255,.4)}.tag--h{color:var(--copper);border-color:rgba(215,154,90,.4)}.tag--o{color:var(--rust);border-color:rgba(239,113,91,.4)}
+.view{position:relative;min-height:calc(100vh - 62px);overflow:hidden;background:radial-gradient(circle at 50% 45%,#101923 0,#070a0d 68%)}
+#scene{display:block;width:100%;height:100%;min-height:calc(100vh - 62px);touch-action:none;cursor:grab}#scene:active{cursor:grabbing}
+.viewbar{position:absolute;left:14px;right:14px;top:14px;display:flex;gap:7px;flex-wrap:wrap;pointer-events:none}.viewbar>*{pointer-events:auto}
+button,select,input{font:11px Inter,"Segoe UI",sans-serif}.pill{border:1px solid var(--edge);border-radius:7px;background:rgba(13,18,24,.88);color:var(--soft);padding:8px 10px}
+button.pill{cursor:pointer}.pill.active,.pill:hover{color:var(--ink);border-color:var(--mint)}
+.scene-note{position:absolute;left:16px;bottom:16px;max-width:min(560px,calc(100% - 32px));padding:10px 12px;border:1px solid var(--edge);border-radius:8px;background:rgba(7,10,13,.84);font-size:11px;line-height:1.55;color:var(--soft);backdrop-filter:blur(8px)}
+.controls{display:grid;gap:13px}.control label{display:flex;justify-content:space-between;color:var(--soft);font-size:11px;margin-bottom:6px}.control input[type=range]{width:100%;accent-color:var(--mint)}
+.readout{border:1px solid var(--edge);border-radius:8px;padding:11px;margin:10px 0;background:rgba(255,255,255,.02)}
+.row{display:flex;justify-content:space-between;gap:10px;font-size:11px;padding:4px 0;color:var(--soft)}.row strong{color:var(--ink);font-family:ui-monospace,Consolas,monospace;font-weight:500;text-align:right}
+.linkchain{display:grid;grid-template-columns:1fr;gap:6px;margin:12px 0}.linknode{border-left:2px solid var(--edge);padding:7px 9px;font-size:11px;line-height:1.45;color:var(--soft)}.linknode b{color:var(--ink)}
+.options{margin-top:18px;padding-top:16px;border-top:1px solid var(--edge)}.options ol{padding-left:18px;margin:10px 0}.options li{font-size:11px;line-height:1.5;color:var(--soft);margin-bottom:7px}
+.scope{margin-top:14px;font-size:10px;line-height:1.5;color:var(--mute)}
+@media(max-width:1050px){.layout{grid-template-columns:220px minmax(0,1fr)}.side--right{grid-column:1/-1;border-left:0;border-top:1px solid var(--edge);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.side--right>div{min-width:0}}
+@media(max-width:720px){.top{padding:0 12px}.brand{font-size:17px}.live{display:none}.layout{display:block}.side{border:0;border-bottom:1px solid var(--edge)}.steps{grid-template-columns:repeat(2,minmax(0,1fr))}.view,#scene{min-height:66vh}.side--right{display:block}.scene-note{font-size:10px}}
+</style>
+<script src="engine-data.js" defer></script>
+<script src="atomicus-3d.js" defer></script>
+</head>
+<body>
+<header class="top">
+  <a href="index.html#atomicus">← ATLAS</a>
+  <div class="brand">Atomicus <span>3D</span></div>
+  <div class="live" data-sdt-benchmark-summary>66/66 earned · 19 identity · 3 pending note-only</div>
+</header>
+
+<main class="layout">
+  <aside class="side">
+    <p class="eyebrow">Nucleus → atom → material</p>
+    <h1>The rotating construction</h1>
+    <p class="intro">Drag to orbit the model, wheel to zoom. The walkthrough keeps established equations, arithmetic identities, working hypotheses and open mechanisms visually distinct.</p>
+
+    <nav class="steps" aria-label="Walkthrough steps">
+      <button class="step active" data-step="rotor"><b>1 · Trefoil rotor</b>W=3 proton geometry</button>
+      <button class="step" data-step="mesh"><b>2 · Nuclear mesh</b>α + deuteron + triton grammar</button>
+      <button class="step" data-step="gear"><b>3 · Universal gear</b>traction into atomic scale</button>
+      <button class="step" data-step="electron"><b>4 · Forced gap</b>electron candidates under test</button>
+      <button class="step" data-step="atom"><b>5 · Layered atom</b>shared clock, level-dependent seats</button>
+      <button class="step" data-step="materials"><b>6 · Materials</b>Li/U: equal mass or equal size</button>
+      <button class="step" data-step="nbody"><b>7 · A/B/C dynamics</b>validated numerical integrator</button>
+    </nav>
+
+    <div id="stepCopy" class="intro"></div>
+    <div class="scope">Visual nuclear layer placement and electron-gap shapes are hypotheses, not measured reconstructions. Atomic and nuclear scales are logarithmically compressed so both remain visible.</div>
+  </aside>
+
+  <section class="view" aria-label="Interactive three-dimensional model">
+    <canvas id="scene" role="img" aria-label="Rotatable Atomicus three-dimensional walkthrough"></canvas>
+    <div class="viewbar">
+      <button class="pill active" id="playBtn">Pause</button>
+      <button class="pill" id="resetBtn">Reset view</button>
+      <select class="pill" id="elementSelect" aria-label="Element preset">
+        <option value="H1">Hydrogen-1</option>
+        <option value="He4" selected>Helium-4</option>
+        <option value="Li7">Lithium-7</option>
+        <option value="C12">Carbon-12</option>
+        <option value="Fe56">Iron-56</option>
+        <option value="U238">Uranium-238</option>
+      </select>
+      <select class="pill" id="nbodySelect" aria-label="N-body validation scene">
+        <option value="figure8">Figure eight</option>
+        <option value="lagrange">Stable Lagrange</option>
+        <option value="binary">Two-body limit</option>
+      </select>
+    </div>
+    <div class="scene-note" id="sceneNote"></div>
+  </section>
+
+  <aside class="side side--right">
+    <div>
+      <p class="eyebrow">Model controls</p>
+      <div class="controls">
+        <div class="control"><label for="speed"><span>Rotation speed</span><output id="speedOut">1.0×</output></label><input id="speed" type="range" min="0" max="3" value="1" step=".05"></div>
+        <div class="control"><label for="layers"><span>Layer separation</span><output id="layerOut">1.0×</output></label><input id="layers" type="range" min=".55" max="1.8" value="1" step=".05"></div>
+        <div class="control"><label for="alignment"><span>Wake / alignment control</span><output id="alignOut">65%</output></label><input id="alignment" type="range" min="0" max="1" value=".65" step=".01"></div>
+        <div class="control"><label for="materialMode"><span>Material comparison</span></label><select id="materialMode" class="pill"><option value="mass">Same total resistance: 1 kg</option><option value="size">Same radius: 5 cm</option></select></div>
+      </div>
+    </div>
+
+    <div>
+      <p class="eyebrow">Direct structural chain</p>
+      <div class="linkchain">
+        <div class="linknode"><b>Proton rotor</b><br><span class="tag tag--d">DERIVED</span> (p,q)=(2,3), W=3 movement partition</div>
+        <div class="linknode"><b>Traction mismatch</b><br><span class="tag tag--d">DERIVED</span> T=3(W+1)=12</div>
+        <div class="linknode"><b>Nuclear→atomic ratio</b><br><span class="tag tag--i">IDENTITY</span> <span id="gearValue">1.03443×10⁸</span></div>
+        <div class="linknode"><b>Electron forced gap</b><br><span class="tag tag--h">HYPOTHESIS</span> π vs 2π contact-frame recurrence</div>
+        <div class="linknode"><b>Orbital levels</b><br><span class="tag tag--i">IDENTITY</span> rₙ=n²a₀, ωₙ∝n⁻³</div>
+      </div>
+
+      <div class="readout" id="readout"></div>
+    </div>
+
+    <div class="options">
+      <p class="eyebrow">Next-phase electron options</p>
+      <ol>
+        <li><b>Mismatch seed:</b> one short/long contact-side pair; require a collective threshold before persistence.</li>
+        <li><b>π versus 2π:</b> test director inversion and directed-frame recurrence as separate sectors.</li>
+        <li><b>Trapped zipper:</b> bend the selected pressure rift into circulation at an independently sourced boundary.</li>
+        <li><b>Gap kink:</b> render the opening, leading hand-off and trailing pinch separately; do not impose a helix.</li>
+        <li><b>Tidal lock:</b> retain the exact spin/orbit rim-speed identity, then test physical re-locking transients.</li>
+        <li><b>Length change:</b> keep as a competing diagnostic only; the downloaded rod-contraction account conflicts with the current point-electron canon and is not promoted.</li>
+      </ol>
+    </div>
+  </aside>
+</main>
+</body>
+</html>

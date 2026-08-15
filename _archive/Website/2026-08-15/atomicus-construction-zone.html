@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script>/*sdt-theme-guard*/(function(){try{var t=localStorage.getItem("sdt.theme")||"auto";if(t==="auto")t=(window.matchMedia&&window.matchMedia("(prefers-color-scheme:dark)").matches)?"dark":"light";var d=document.documentElement;d.setAttribute("data-theme",t);d.setAttribute("data-sdt-theme",t);}catch(e){}})();</script>
+
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ATOMICUS — Construction Zone</title>
+<style>
+:root{--paper:#f2ede4;--paper2:#faf7f1;--edge:#e2d9c9;--ink:#1c1a16;--ink2:#3a352d;--ink3:#7b7266;
+--copper:#b07430;--steel:#4a6d82;--mint:#3f8f6f;--rose:#c0503a;--gold:#c9a227;}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:13.5px/1.5 'Segoe UI',system-ui,sans-serif;
+display:grid;grid-template-columns:236px 1fr 312px;height:100vh;overflow:hidden;user-select:none}
+@media(max-width:1080px){body{grid-template-columns:1fr;height:auto;overflow:auto}}
+.pane{overflow-y:auto;padding:12px}
+#left{background:var(--paper2);border-right:1px solid var(--edge)}
+#right{background:var(--paper2);border-left:1px solid var(--edge)}
+#mid{padding:0;position:relative;overflow:hidden;background:linear-gradient(#faf8f4,#eee7db)}
+h1{font:600 14px/1.2 'Segoe UI'}h1 small{display:block;font:400 10px/1.4;color:var(--ink3);margin-top:2px}
+h2{font:600 9.5px/1 'Segoe UI';text-transform:uppercase;letter-spacing:.1em;color:var(--copper);
+margin:15px 0 6px;padding-bottom:3px;border-bottom:1px solid var(--edge)}
+h2:first-of-type{margin-top:8px}
+.tool{display:flex;align-items:center;gap:8px;padding:6px 8px;border:1px solid var(--edge);background:#fff;
+border-radius:5px;cursor:pointer;margin-bottom:5px;transition:.12s}
+.tool:hover{border-color:var(--copper)}
+.tool.on{border-color:var(--copper);background:rgba(176,116,48,.09);box-shadow:inset 2px 0 0 var(--copper)}
+.tool .ic{width:26px;height:22px;flex:none}
+.tool .tx{font-size:11.5px;line-height:1.3}
+.tool .tx b{display:block;font-size:12.5px}
+.tool .k{margin-left:auto;font:600 9px ui-monospace;color:var(--ink3);border:1px solid var(--edge);
+padding:1px 4px;border-radius:3px}
+.btn{padding:4px 8px;border:1px solid var(--edge);background:#fff;color:var(--ink2);border-radius:4px;
+cursor:pointer;font-size:10.5px}
+.btn:hover{border-color:var(--copper);color:var(--copper)}
+.btn.on{background:var(--copper);color:#fff;border-color:var(--copper)}
+.row{display:flex;justify-content:space-between;padding:2.5px 0;font-size:11.5px;
+border-bottom:1px solid rgba(226,217,201,.6)}
+.row .l{color:var(--ink3)}.row .v{font:600 11.5px ui-monospace,monospace}
+.chip{display:inline-block;padding:2px 7px;border-radius:10px;font-size:9.5px;font-weight:600;margin:2px 3px 2px 0}
+.ok{background:rgba(63,143,111,.15);color:var(--mint)}
+.no{background:rgba(192,80,58,.13);color:var(--rose)}
+.mid2{background:rgba(201,162,39,.18);color:#846a10}
+.info{background:rgba(74,109,130,.13);color:var(--steel)}
+.note{font-size:10px;line-height:1.5;color:var(--ink3);margin-top:5px}
+.note b{color:var(--ink2)}
+#hud{position:absolute;top:0;left:0;right:0;padding:12px 16px;pointer-events:none;
+display:flex;justify-content:space-between;align-items:flex-start}
+#nucName{font:700 30px/1 ui-monospace,monospace;letter-spacing:-.01em}
+#nucSub{font-size:11px;color:var(--ink3);margin-top:3px}
+#infer{position:absolute;pointer-events:none;background:rgba(28,26,22,.9);color:#f4efe6;
+padding:5px 9px;border-radius:5px;font:11.5px ui-monospace;display:none;z-index:5;white-space:nowrap}
+#infer b{color:var(--gold)}
+#foot{position:absolute;bottom:0;left:0;right:0;padding:8px 16px;font-size:10px;color:var(--ink3);
+display:flex;justify-content:space-between;pointer-events:none}
+canvas{display:block;cursor:crosshair}
+#search{width:100%;padding:5px 7px;border:1px solid var(--edge);border-radius:4px;font-size:12px;background:#fff}
+#hits{max-height:132px;overflow-y:auto;margin-top:4px}
+.hit{padding:3px 6px;cursor:pointer;font-size:11px;border-radius:3px;display:flex;justify-content:space-between}
+.hit:hover{background:rgba(176,116,48,.1)}.hit .g{color:var(--ink3);font-size:9.5px}
+.bar{height:5px;background:var(--edge);border-radius:3px;overflow:hidden;margin:3px 0 1px}
+.bar i{display:block;height:100%;background:var(--copper)}
+</style><link rel="stylesheet" href="sdt-shell.css">
+<script src="sdt-shell.js" defer></script>
+<meta name="description" content="ATOMICUS — Construction Zone — part of Spatial Displacement Theory, a zero-free-parameter physics framework.">
+<link rel="canonical" href="https://spatialdisplacementtheory.com/atomicus-construction-zone">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/favicon.ico" sizes="64x64">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#b07430">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Spatial Displacement Theory">
+<meta property="og:title" content="ATOMICUS — Construction Zone">
+<meta property="og:description" content="ATOMICUS — Construction Zone — part of Spatial Displacement Theory, a zero-free-parameter physics framework.">
+<meta property="og:url" content="https://spatialdisplacementtheory.com/atomicus-construction-zone">
+<meta property="og:image" content="https://spatialdisplacementtheory.com/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_AU">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ATOMICUS — Construction Zone">
+<meta name="twitter:description" content="ATOMICUS — Construction Zone — part of Spatial Displacement Theory, a zero-free-parameter physics framework.">
+<meta name="twitter:image" content="https://spatialdisplacementtheory.com/og-card.png">
+</head><body>
+
+<div class="pane" id="left">
+  <h1>ATOMICUS · Construction Zone
+    <small>place subunits · open ratios live · AME2020 / NUBASE2020</small></h1>
+
+  <h2>Palette</h2>
+  <div class="tool on" data-tool="d"><svg class="ic" viewBox="0 0 26 22"><circle cx="9" cy="11" r="5.5" fill="#c0503a"/><circle cx="17" cy="11" r="5.5" fill="#4a6d82"/></svg>
+    <div class="tx"><b>Deuteron</b>1p + 1n</div><span class="k">D</span></div>
+  <div class="tool" data-tool="t"><svg class="ic" viewBox="0 0 26 22"><circle cx="8" cy="14" r="5" fill="#c0503a"/><circle cx="16" cy="15" r="5" fill="#4a6d82"/><circle cx="12" cy="7" r="5" fill="#4a6d82"/></svg>
+    <div class="tx"><b>Triton</b>1p + 2n</div><span class="k">T</span></div>
+  <div class="tool" data-tool="x"><svg class="ic" viewBox="0 0 26 22"><path d="M6 6l14 10M20 6L6 16" stroke="#c0503a" stroke-width="2.4" fill="none"/></svg>
+    <div class="tx"><b>Erase</b>remove subunit</div><span class="k">X</span></div>
+
+  <h2>Build</h2>
+  <label for="search" style="display:none">Search</label>
+  <input id="search" placeholder="Fe-56, U235, Sn…">
+  <div id="hits"></div>
+  <div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:7px">
+    <button class="btn" data-b="42,104">Mo-104</button>
+    <button class="btn" data-b="50,132">Sn-132</button>
+    <button class="btn" data-b="26,56">Fe-56</button>
+    <button class="btn" data-b="92,235">U-235</button>
+    <button class="btn" data-b="8,16">O-16</button>
+    <button class="btn" id="clr">Clear</button>
+  </div>
+
+  <h2>View</h2>
+  <div style="display:flex;gap:4px;flex-wrap:wrap">
+    <button class="btn on" id="vOpen">Open sites</button>
+    <button class="btn on" id="vShell">Shade depth</button>
+    <button class="btn" id="vCut">Section</button>
+  </div>
+  <div class="note">Drag to orbit · wheel to zoom · click a ghost site to place · <b>Alt-click</b> a subunit to erase.</div>
+
+  <h2>Split</h2>
+  <button class="btn" id="doFission" style="width:100%">Scission — 2d → α</button>
+  <div id="fisOut" class="note"></div>
+</div>
+
+<div class="pane" id="mid">
+  <canvas id="cv"></canvas>
+  <div id="hud">
+    <div><div id="nucName">He-4</div><div id="nucSub"></div></div>
+    <div id="chips" style="text-align:right"></div>
+  </div>
+  <div id="infer"></div>
+  <div id="foot"><span id="fL"></span><span id="fR"></span></div>
+</div>
+
+<div class="pane" id="right">
+  <h2>Open ratios</h2>
+  <div class="row"><span class="l">subunits placed</span><span class="v" id="oN">1</span></div>
+  <div class="row"><span class="l">contacts made</span><span class="v" id="oB">0</span></div>
+  <div class="row"><span class="l">open slots</span><span class="v" id="oO">12</span></div>
+  <div class="row"><span class="l"><b>open ratio</b> Ω</span><span class="v" id="oR">1.000</span></div>
+  <div class="bar"><i id="oBar" style="width:100%"></i></div>
+  <div class="note">Ω = open slots / total slots over a 12-neighbour close packing.
+    Ω→0 is bulk, Ω→1 is all surface. This is a <b>geometric</b> readout only —
+    binding-from-overlap was tested and <b>failed</b> (R² = −12.2 on BE/A; it found the ridge in 1 of 116 rows).
+    Shown because it is the geometry as it stands, not because it predicts binding.</div>
+
+  <h2>Grammar</h2>
+  <div class="row"><span class="l">α + n<sub>d</sub>d + n<sub>t</sub>t</span><span class="v" id="gG">α</span></div>
+  <div class="row"><span class="l">A = 4+2n<sub>d</sub>+3n<sub>t</sub></span><span class="v" id="gA">4</span></div>
+  <div class="row"><span class="l">Z = 2+n<sub>d</sub>+n<sub>t</sub></span><span class="v" id="gZ">2</span></div>
+  <div class="row"><span class="l">u / v</span><span class="v" id="gUV">0 / 0</span></div>
+  <div class="row"><span class="l">f<sub>t</sub></span><span class="v" id="gF">—</span></div>
+  <div class="row"><span class="l">G_core</span><span class="v" id="gC">0</span></div>
+
+  <h2>Measured</h2>
+  <div class="row"><span class="l">binding energy</span><span class="v" id="mBE">—</span></div>
+  <div class="row"><span class="l">BE / A</span><span class="v" id="mBEA">—</span></div>
+  <div class="row"><span class="l">stability</span><span class="v" id="mS">—</span></div>
+  <div class="row"><span class="l">spin J</span><span class="v" id="mJ">—</span></div>
+  <div class="row"><span class="l">abundance</span><span class="v" id="mAb">—</span></div>
+
+  <h2>Laws — live</h2>
+  <div id="laws"></div>
+</div>
+
+<script src="nucdata.js"></script>
+<script>
+const el=id=>document.getElementById(id);
+const IDX=new Map(); NUC.forEach(r=>IDX.set(r[0]+','+r[1],r));
+const nm=(Z,A)=>(SYM[Z]||'Z'+Z)+'-'+A;
+
+/* ---------- FCC close packing: 12 neighbours ---------- */
+const NB=[];
+for(const[a,b]of[[1,1],[1,-1],[-1,1],[-1,-1]]){NB.push([a,b,0],[a,0,b],[0,a,b]);}
+const key=p=>p.join(',');
+const add=(p,q)=>[p[0]+q[0],p[1]+q[1],p[2]+q[2]];
+
+/* ---------- model ---------- */
+let cells=new Map();
+function reset(){ cells=new Map(); cells.set(key([0,0,0]),{p:[0,0,0],kind:'a'}); }
+reset();
+function openSites(){
+  const s=new Map();
+  for(const c of cells.values()) for(const n of NB){
+    const q=add(c.p,n), k=key(q);
+    if(cells.has(k))continue;
+    s.set(k,(s.get(k)||0)+1);            // value = occupied neighbours = snap strength
+  }
+  return s;
+}
+function counts(){
+  let d=0,t=0; for(const c of cells.values()){ if(c.kind==='d')d++; else if(c.kind==='t')t++; }
+  return {d,t};
+}
+function bonds(){
+  let b=0; for(const c of cells.values()) for(const n of NB) if(cells.has(key(add(c.p,n)))) b++;
+  return b/2;
+}
+function greedyBuild(Z,A){
+  const nd=3*Z-A-2, nt=A-2*Z;
+  if(Z<3||nd<0||nt<0) return false;
+  reset();
+  const mix=[]; let di=0,ti=0;
+  for(let i=0;i<nd+nt;i++){
+    const takeD = (nd-di>0) && ( (nt-ti===0) || (di+1)/(nd||1) <= (ti+1)/(nt||1) );
+    if(takeD){mix.push('d');di++;} else {mix.push('t');ti++;}
+  }
+  for(const kind of mix){
+    const os=openSites(); let best=null,bv=-1e18;
+    for(const[k,v]of os){
+      const p=k.split(',').map(Number);
+      const score=v*1000-(p[0]*p[0]+p[1]*p[1]+p[2]*p[2]);   // most contacts, then most central
+      if(score>bv){bv=score;best=p;}
+    }
+    if(!best)break;
+    cells.set(key(best),{p:best,kind});
+  }
+  return true;
+}
+
+/* ---------- laws verified this session ---------- */
+function lawList(d,t){
+  const Z=2+d+t, A=4+2*d+3*t, rec=IDX.get(Z+','+A), L=[];
+  const paired=(d%2===0&&t%2===0);
+  const mag={n:'Magnetism',ok:null,
+    s:(paired?'μ = 0 — every subunit paired':'μ ≠ 0 — unpaired subunit')+
+      ' — 98.5% over 3043, but <b>NOT INDEPENDENT</b>: n_d even ∧ n_t even IS even-even, '+
+      'and n_t odd IS odd-A. This is the pairing rule plus a tautology, not a grammar result. (NP24-A)'};
+  if(rec&&rec[4]>=0){ const obs=(rec[4]===0); mag.ok=(paired===obs);
+    mag.s=(paired?'μ = 0 predicted':'μ ≠ 0 predicted')+' · measured J = '+rec[4]+(mag.ok?' ✓':' ✗'); }
+  L.push(mag);
+  const ft=(d+t)?t/(d+t):0;
+  L.push({n:'Stability band',ok:ft<=0.551,
+    s:'f_t = '+ft.toFixed(3)+(ft<=0.551
+      ?' — inside [0, 0.551]. Necessary, NOT sufficient: it also holds for 65% of unstable nuclides.'
+      :' — outside the band; no stable nuclide is observed here.')});
+  const g=Math.abs(d-t)+(t%2);
+  L.push({n:'G_core = '+g,ok:g===0?true:null,
+    s:g===0?'golden line u = 0 with even n_t — the preferred light-fragment channel.'
+      :(t%2?'odd n_t — delayed-neutron precursor class.':'off the golden line by '+Math.abs(d-t)+'.')});
+  return L;
+}
+
+/* ---------- view ---------- */
+const cv=el('cv'), cx=cv.getContext('2d');
+let yaw=-0.62, pitch=0.52, zoom=1, W=0, H=0;
+let showOpen=true, shade=true, section=false;
+function fit(){ const r=el('mid').getBoundingClientRect(), dp=Math.min(devicePixelRatio,2);
+  W=r.width; H=r.height||520; cv.width=W*dp; cv.height=H*dp;
+  cv.style.width=W+'px'; cv.style.height=H+'px'; cx.setTransform(dp,0,0,dp,0,0); }
+function proj(p){
+  const cyw=Math.cos(yaw),syw=Math.sin(yaw),cp=Math.cos(pitch),sp=Math.sin(pitch);
+  const x=p[0]*cyw-p[1]*syw, y=p[0]*syw+p[1]*cyw, z=p[2];
+  const y2=y*cp-z*sp, dep=y*sp+z*cp;
+  const S=Math.min(W,H)*0.052*zoom/Math.max(1,Math.cbrt(cells.size)/3.2);
+  return {x:W/2+x*S, y:H/2-y2*S*0.92, d:dep, S};
+}
+const SUB={a:{n:4,c:['#c0503a','#c0503a','#4a6d82','#4a6d82'],r:.30},
+           d:{n:2,c:['#c0503a','#4a6d82'],r:.32},
+           t:{n:3,c:['#c0503a','#4a6d82','#4a6d82'],r:.31}};
+function shadeDark(c){ const n=parseInt(c.slice(1),16);
+  return '#'+[16,8,0].map(s=>Math.max(0,((n>>s)&255)-72).toString(16).padStart(2,'0')).join(''); }
+function ball(sx,sy,R,col,dim){
+  const g=cx.createRadialGradient(sx-R*.35,sy-R*.4,R*.1,sx,sy,R);
+  g.addColorStop(0,'#fff'); g.addColorStop(.28,col); g.addColorStop(1,shadeDark(col));
+  cx.globalAlpha=dim; cx.beginPath(); cx.arc(sx,sy,R,0,7); cx.fillStyle=g; cx.fill();
+  cx.strokeStyle='rgba(0,0,0,.22)'; cx.lineWidth=.7; cx.stroke(); cx.globalAlpha=1;
+}
+let hoverKey=null;
+function draw(){
+  fit(); cx.clearRect(0,0,W,H);
+  cx.strokeStyle='rgba(123,114,102,.15)'; cx.lineWidth=1;
+  const ext=6;
+  for(let i=-ext;i<=ext;i+=2){
+    let a=proj([i,-ext,-ext]), b=proj([i,ext,-ext]);
+    cx.beginPath(); cx.moveTo(a.x,a.y); cx.lineTo(b.x,b.y); cx.stroke();
+    a=proj([-ext,i,-ext]); b=proj([ext,i,-ext]);
+    cx.beginPath(); cx.moveTo(a.x,a.y); cx.lineTo(b.x,b.y); cx.stroke();
+  }
+  const items=[];
+  if(showOpen) for(const[k,v]of openSites()){
+    const p=k.split(',').map(Number), pr=proj(p);
+    items.push({d:pr.d,type:'open',p,pr,v,k});
+  }
+  for(const c of cells.values()){
+    if(section && c.p[1]>0) continue;
+    items.push({d:proj(c.p).d,type:'sub',c,pr:proj(c.p)});
+  }
+  items.sort((a,b)=>a.d-b.d);
+  const d0=items.length?items[0].d:0, ds=(items.length?items[items.length-1].d-d0:0)||1;
+  for(const it of items){
+    const dim = shade? 0.45+0.55*((it.d-d0)/ds) : 1;
+    if(it.type==='open'){
+      const R=it.pr.S*0.3, hot=(it.k===hoverKey);
+      cx.globalAlpha=hot?0.95:0.13+0.05*it.v;
+      cx.beginPath(); cx.arc(it.pr.x,it.pr.y,R,0,7);
+      cx.strokeStyle=hot?'#b07430':'#7b7266'; cx.lineWidth=hot?2:1;
+      cx.setLineDash(hot?[]:[3,3]); cx.stroke(); cx.setLineDash([]);
+      if(hot){cx.fillStyle='rgba(176,116,48,.2)';cx.fill();}
+      cx.globalAlpha=1;
+    } else {
+      const S=SUB[it.c.kind], R=it.pr.S*S.r;
+      for(let j=0;j<S.n;j++){
+        const a=j*2*Math.PI/S.n - Math.PI/2, rr=R*0.92;
+        ball(it.pr.x+rr*Math.cos(a), it.pr.y+rr*Math.sin(a)*0.9, R, S.c[j], dim);
+      }
+    }
+  }
+}
+
+/* ---------- interaction ---------- */
+let tool='d', drag=false, moved=false, lx=0, ly=0;
+cv.addEventListener('mousedown',e=>{drag=true;moved=false;lx=e.clientX;ly=e.clientY;});
+addEventListener('mouseup',e=>{ if(drag&&!moved) click(e); drag=false; });
+addEventListener('mousemove',e=>{
+  if(drag){ const dx=e.clientX-lx, dy=e.clientY-ly;
+    if(Math.abs(dx)+Math.abs(dy)>3){ moved=true;
+      yaw+=dx*0.008; pitch=Math.max(-1.4,Math.min(1.4,pitch+dy*0.008));
+      lx=e.clientX; ly=e.clientY; draw(); }
+    return; }
+  hover(e);
+});
+cv.addEventListener('wheel',e=>{e.preventDefault();
+  zoom=Math.max(.35,Math.min(4,zoom*(e.deltaY>0?.9:1.11))); draw();},{passive:false});
+function pick(e){
+  const r=cv.getBoundingClientRect(), mx=e.clientX-r.left, my=e.clientY-r.top;
+  let bestO=null,bo=22, bestC=null,bc=26;
+  for(const[k,v]of openSites()){ const p=k.split(',').map(Number), pr=proj(p);
+    const dd=Math.hypot(pr.x-mx,pr.y-my); if(dd<bo){bo=dd;bestO={k,p,v};} }
+  for(const c of cells.values()){ const pr=proj(c.p);
+    const dd=Math.hypot(pr.x-mx,pr.y-my); if(dd<bc){bc=dd;bestC=c;} }
+  return {o:bestO,c:bestC,mx,my};
+}
+function hover(e){
+  const {o,mx,my}=pick(e), inf=el('infer');
+  const nk=o?o.k:null;
+  if(nk!==hoverKey){ hoverKey=nk; draw(); }
+  if(o && tool!=='x'){
+    const c=counts(), d=c.d+(tool==='d'?1:0), t=c.t+(tool==='t'?1:0);
+    const Z=2+d+t, A=4+2*d+3*t, rec=IDX.get(Z+','+A);
+    inf.style.display='block'; inf.style.left=(mx+16)+'px'; inf.style.top=(my+14)+'px';
+    inf.innerHTML='place '+(tool==='d'?'deuteron':'triton')+' → <b>'+nm(Z,A)+'</b> · '+o.v+' contacts · '+
+      (rec?(rec[3]?'stable':'unstable'):'not observed');
+  } else inf.style.display='none';
+}
+cv.addEventListener('mouseleave',()=>{el('infer').style.display='none';hoverKey=null;draw();});
+function click(e){
+  const {o,c}=pick(e);
+  if(tool==='x'||e.altKey){ if(c&&c.kind!=='a'){ cells.delete(key(c.p)); prune(); render(); } return; }
+  if(o){ cells.set(o.k,{p:o.p,kind:tool}); render(); }
+}
+function prune(){                       // drop anything no longer touching the core
+  const seen=new Set([key([0,0,0])]), q=[[0,0,0]];
+  while(q.length){ const p=q.pop();
+    for(const n of NB){ const nq=add(p,n), k=key(nq);
+      if(cells.has(k)&&!seen.has(k)){ seen.add(k); q.push(nq); } } }
+  for(const k of [...cells.keys()]) if(!seen.has(k)) cells.delete(k);
+}
+
+/* ---------- render ---------- */
+function render(){
+  const {d,t}=counts(), Z=2+d+t, A=4+2*d+3*t, rec=IDX.get(Z+','+A);
+  el('nucName').textContent=(d+t===0)?'He-4':nm(Z,A);
+  el('nucSub').textContent='Z = '+Z+'   N = '+(A-Z)+'   A = '+A;
+  const ch=[];
+  if(d+t===0) ch.push('<span class="chip info">bare core</span>');
+  else if(rec) ch.push(rec[3]?'<span class="chip ok">stable</span>':'<span class="chip mid2">unstable</span>');
+  else ch.push('<span class="chip no">not observed</span>');
+  if(d+t>0 && Math.abs(d-t)+(t%2)===0) ch.push('<span class="chip info">G_core = 0</span>');
+  if(d%2===0&&t%2===0) ch.push('<span class="chip info">μ = 0</span>');
+  el('chips').innerHTML=ch.join('');
+  const n=cells.size, b=bonds(), slots=12*n, open=slots-2*b, R=slots?open/slots:1;
+  el('oN').textContent=n; el('oB').textContent=b; el('oO').textContent=open;
+  el('oR').textContent=R.toFixed(3); el('oBar').style.width=(R*100)+'%';
+  el('gG').textContent='α + '+d+'d + '+t+'t';
+  el('gA').textContent=A; el('gZ').textContent=Z;
+  el('gUV').textContent=(d-t)+' / '+(d+t);
+  el('gF').textContent=(d+t)?(t/(d+t)).toFixed(3):'—';
+  el('gC').textContent=Math.abs(d-t)+(t%2);
+  el('mBE').textContent=rec?rec[2].toFixed(2)+' MeV':'—';
+  el('mBEA').textContent=rec?(rec[2]/A).toFixed(3)+' MeV':'—';
+  el('mS').textContent=rec?(rec[3]?'STABLE':'unstable'):'not observed';
+  el('mJ').textContent=rec&&rec[4]>=0?rec[4]:'—';
+  el('mAb').textContent=rec&&rec[5]?rec[5]+' %':'—';
+  el('laws').innerHTML=lawList(d,t).map(L=>{
+    const c=L.ok===true?'ok':(L.ok===false?'no':'info');
+    return '<div style="margin:6px 0"><span class="chip '+c+'">'+L.n+
+      '</span><div class="note" style="margin-top:1px">'+L.s+'</div></div>';
+  }).join('');
+  el('fL').textContent=n+' subunits · '+b+' contacts · Ω = '+R.toFixed(3);
+  el('fR').textContent='drag orbit · wheel zoom · alt-click erase';
+  draw();
+}
+
+/* ---------- scission ---------- */
+el('doFission').onclick=()=>{
+  const {d,t}=counts(), out=el('fisOut');
+  if(d<2){ out.innerHTML='<b>Blocked:</b> needs n_d ≥ 2 — the second α core is built from <b>two deuterons</b>.'; return; }
+  let best=null;
+  for(let dL=0;dL<=d-2;dL++){
+    const tL=dL;                                   // golden line: G_core = 0
+    if(tL>t||tL%2) continue;
+    const dH=d-2-dL, tH=t-tL; if(dH<0||tH<0) continue;
+    const Lf={Z:2+dL+tL,A:4+2*dL+3*tL}, Hf={Z:2+dH+tH,A:4+2*dH+3*tH};
+    if(!IDX.get(Lf.Z+','+Lf.A)||!IDX.get(Hf.Z+','+Hf.A)) continue;
+    if(!best||Math.abs(Lf.A-Hf.A)<Math.abs(best.L.A-best.H.A)) best={L:Lf,H:Hf,dL,tL,dH,tH};
+  }
+  if(!best){ out.innerHTML='No G_core = 0 cut with both fragments observed.'; return; }
+  const magic=[50,82,126], mz=magic.includes(best.H.Z), mn=magic.includes(best.H.A-best.H.Z);
+  out.innerHTML='<b>'+nm(best.L.Z,best.L.A)+'</b> ('+best.dL+'d·'+best.tL+'t, G_core=0) &nbsp;+&nbsp; <b>'+
+    nm(best.H.Z,best.H.A)+'</b> ('+best.dH+'d·'+best.tH+'t)<br>'+
+    'Σd = '+(best.dL+best.dH)+' = '+d+'−2 ✓ &nbsp; Σt = '+(best.tL+best.tH)+' = '+t+' ✓<br>'+
+    'Scission emits <b>zero neutrons</b>; ν comes later from the hot fragments.'+
+    (mz||mn?'<br><span style="color:#846a10"><b>heavy partner magic</b>'+
+      (mz?' Z='+best.H.Z:'')+(mn?' N='+(best.H.A-best.H.Z):'')+'</span>':'');
+};
+
+/* ---------- ui ---------- */
+document.querySelectorAll('[data-tool]').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('[data-tool]').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on'); tool=b.dataset.tool; });
+addEventListener('keydown',e=>{ const k=e.key.toLowerCase();
+  if('dtx'.includes(k) && document.activeElement.id!=='search')
+    document.querySelector('[data-tool="'+k+'"]').click(); });
+document.querySelectorAll('[data-b]').forEach(b=>b.onclick=()=>{
+  const [Z,A]=b.dataset.b.split(',').map(Number);
+  greedyBuild(Z,A); el('fisOut').textContent=''; render(); });
+el('clr').onclick=()=>{ reset(); el('fisOut').textContent=''; render(); };
+const tog=(id,f)=>el(id).onclick=()=>{ el(id).classList.toggle('on');
+  f(el(id).classList.contains('on')); draw(); };
+tog('vOpen',v=>showOpen=v); tog('vShell',v=>shade=v); tog('vCut',v=>section=v);
+el('search').addEventListener('input',e=>{
+  const q=e.target.value.trim().toLowerCase();
+  if(!q){ el('hits').innerHTML=''; return; }
+  const h=NUC.filter(r=>{ const n=nm(r[0],r[1]).toLowerCase();
+    return n.includes(q)||n.replace('-','').includes(q)||(SYM[r[0]]||'').toLowerCase()===q; }).slice(0,40);
+  el('hits').innerHTML=h.map(r=>'<div class="hit" data-z="'+r[0]+'" data-a="'+r[1]+'"><span>'+nm(r[0],r[1])+
+    (r[3]?' <span class="chip ok" style="padding:0 5px">s</span>':'')+'</span><span class="g">'+
+    (3*r[0]-r[1]-2)+'d·'+(r[1]-2*r[0])+'t</span></div>').join('');
+  document.querySelectorAll('.hit').forEach(x=>x.onclick=()=>{
+    greedyBuild(+x.dataset.z,+x.dataset.a); el('fisOut').textContent=''; render(); });
+});
+addEventListener('resize',render);
+greedyBuild(26,56); render();
+</script></body></html>

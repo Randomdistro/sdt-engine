@@ -1,6 +1,6 @@
-# Condensed Matter Physics — collective vortices in the relay lattice (CM01–CM07)
+# Condensed Matter Physics — collective vortices in the relay lattice (CM01–CM08)
 
-> **Author:** J.C. Harvey, Melbourne. **Status:** SPEC (7 prompts, unstarted).
+> **Author:** James Christopher Tyndall, Melbourne. **Status:** 7 prompts · 1 validated material ledger.
 > Every prompt inherits the §0 anti-creep protocol and rules R0–R5 verbatim.
 
 ## The through-line
@@ -11,7 +11,7 @@ relays convergence throughput to give gravity (`g = v²/R`) and Coulomb (occlusi
 carries conduction, magnetism, sound, and the superfluid condensate. A conduction electron is a
 **drifting W=1 vortex**; resistance is **occlusion drag** dumping organised throughput into
 disordered throughput (heat); a "phonon" is the **native FD05 lattice compression wave**; a magnet
-is **aligned wake circulation**. These seven investigations reproduce the standard solid-state
+is **aligned wake circulation**. These investigations reproduce the standard solid-state
 catalogue as *convergence targets* — never borrowed inputs — narrating each in SDT primitives and
 flagging every gap OPEN rather than fitting it. The forbidden imports (BCS gap/wavefunction, Bloch
 wavefunction, gauge-symmetry-breaking as ontology, electron "clouds", phonon field-operators) are
@@ -36,6 +36,9 @@ CM04  Crystal lattice & phonons          ← the substrate (FD05 compression wav
         │     ├─ CM06  Quantum Hall & Josephson  (lattice topology → the ohm E86 / the volt E85)
         │     │
         │     └─ CM07  Ferromagnetism        (aligned wake circulation; Curie T; hysteresis)
+
+CM08  Material koppa, wake & flux ledger ← measured-density comparison control
+      (Li/U equal resistance and equal radius; alignment remains independent)
 ```
 
 ## The suite
@@ -49,6 +52,7 @@ CM04  Crystal lattice & phonons          ← the substrate (FD05 compression wav
 | **CM05** | Superfluidity & BEC from Phase Lock | macroscopic phase-locked wake condensate; one circulation quantum | He-4 T_λ; κ=h/m (FD02, 0.02%); critical velocity; quantised vortices |
 | **CM06** | Quantum Hall & Josephson Metrology | lattice topology (Hall) + relay-phase coupling (Josephson) | R_K=h/e²; K_J=2e/h; ohm (E86) & volt (E85) native |
 | **CM07** | Ferromagnetism as Aligned Vortex Wakes | aligned wake circulation; exchange = wake co-rotation energy | Curie T_C; hysteresis loop; M(T); **native wake-circulation units, NO magnetons** |
+| **CM08** | Material Koppa Density, Helical Wake & Flux Controls | baryon-to-volume ledger plus normalized rotational wake and separately declared circulating-charge alignment | equal-resistance/equal-radius Li–U controls; C0–C6 validated; density does not set magnetic alignment |
 
 ## Engine hooks (single source of truth: `Engine/include/sdt/laws.hpp`)
 
@@ -59,6 +63,8 @@ CM04  Crystal lattice & phonons          ← the substrate (FD05 compression wav
 **FD02** (`κ = h/m` clean to 0.02% — the circulation quantum) · **FD05** (`c_s` lattice sound =
 relay stiffness, the native "phonon") · **B17** (native `g`). Falsifiable specs: **E59**
 (phase-locked vortices), **E85** (Josephson volt), **E86** (quantum-Hall ohm).
+CM08's reusable comparison functions live in `Engine/include/sdt/materials.hpp` and consume
+only the canonical values exposed by `laws.hpp`.
 
 ## Method discipline
 
@@ -69,4 +75,4 @@ properties (lattice spacing, Debye temperature, carrier density, ρ) are legitim
 inputs/tools — like spectral lines — but the mechanism must be SDT-native. **Never quote magnetic
 results in Bohr magnetons or magnetons** — use native wake-circulation units (this is absolute, see
 [[feedback_no_borrowed_units]]). Naming a lattice wave a "phonon" is fine; importing a phonon field
-operator is not. A clean kill outranks a forced pass (R4).
+operator is not. A clean exclusion outranks a forced pass (R4).
