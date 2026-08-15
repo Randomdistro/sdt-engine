@@ -198,9 +198,9 @@ const F=[
   chk:iso=>{const p=pack(iso.A,iso.Z);return `${p.nSub} subunits placed = ${p.nuc.length} nucleons (${p.nuc.filter(n=>n.type==='p').length}p ${p.nuc.filter(n=>n.type==='n').length}n)`;}},
 
  {t:'Binding from overlap',s:'EXCLUDED',mode:'pack',
-  st:'The shadow-overlap picture (mass defect = shared occlusion area, ΔA=A_sum−A_∪) gives total-BE R²=0.988 — '+
-     'but on <b>per-nucleon</b> binding it scores <b>R²=−12.2</b>, worse than the mean, finding the ridge in 1 of 116 rows. '+
-     'It counts area; binding is nearly flat because every baryon circulates identically and drag is shared. <b>No overlap model reproduces it.</b>',
+  st:'NSEQ04 tested the live shadow-union geometry over the registered isotope range. Its calibrated κ=31.4485 MeV/fm² gives total-BE <b>R²=0.7918</b>, '+
+     '<b>BE/A R²=−161.94</b> and mean absolute relative error 40.4%. The projected-area route therefore fails the per-nucleon target and is not promoted as the binding law. '+
+     '<b>Binding from overlap remains excluded.</b>',
   chk:iso=>{const r=IDX.get(iso.Z+','+iso.A);return r?`measured BE/A = ${(r[2]/iso.A).toFixed(3)} MeV — the flat ~8.5 plateau the area model can’t make`:'—';}},
 
  {t:'The scission invariant',s:'NATIVE',mode:'scission',

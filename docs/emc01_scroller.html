@@ -235,7 +235,7 @@
 
     <p>So the whole question of EMC01 is one sentence:
     <strong>is ƒ a number we <em>derived</em>, or a number we <em>fitted</em> to make the
-    answer come out right?</strong> Hold that question — the honest answer is the most
+    answer come out right?</strong> Hold that question — the documented answer is the most
     interesting part of this page.</p>
   </div>
 </section>
@@ -353,7 +353,7 @@
     <h2>The same pressure, three different forces</h2>
     <p>If ƒ is real, the <em>same</em> P_eff should also build Coulomb at atomic range,
     the strong force at the femtometre, and — through a different geometry — gravity.
-    Here is what the engine actually computed when we ran it. Honest scoreboard:</p>
+    Here is what the engine actually computed when we ran it. Current scoreboard:</p>
 
     <table>
       <thead><tr><th>Proof</th><th>What it tests</th><th>Result</th><th>Error</th></tr></thead>
@@ -368,7 +368,7 @@
       </tbody>
     </table>
     <p><span class="tag pass">6 / 7 PASS</span> The program returns exit code 1 on purpose —
-    it refuses to call itself finished while gravity is off. That honesty is the point.</p>
+    it refuses to call itself finished while gravity is off. That refusal is the point.</p>
 
     <h2>The hierarchy ƒ is built to explain</h2>
     <p>Why is electricity ~10³⁹ times stronger than gravity between a proton and an
@@ -421,7 +421,7 @@
     </figure>
 
     <div class="callout">
-      <strong>Honest status.</strong> EMC01’s documentation calls f “universal, resolved.”
+      <strong>Status.</strong> EMC01’s documentation calls f “universal, resolved.”
       The deeper audit (next section) disagrees about the word <em>derived</em> — and the
       gravity FAIL above is why the engine itself returns a non-zero exit code. Good theories
       keep their own scoreboard.
@@ -467,7 +467,7 @@
     correspondence <span style="color:var(--accent2)">known-match</span>:
     <span class="tag C">class C</span>. The shape is a genuine SDT result that
     <em>converges</em> on Coulomb/Newton/strong-force; only the overall coefficient is
-    borrowed from measurement. <strong>Honest headline:</strong> SDT derives the
+    borrowed from measurement. <strong>Scope:</strong> SDT derives the
     <em>geometry</em> of the force hierarchy; the single pressure coefficient is still a
     calibration waiting to be derived.</p>
 
@@ -557,7 +557,7 @@
     exponent <span class="mono">p = 2</span> fixed by geometry (the Clearing is a
     2-sphere). If that exponent were a free knob, someone could just dial it to hit G
     exactly — and the theory would explain nothing. Test the rigidity: sweep p and see that
-    <strong>no integer-clean value nails G</strong>; the honest result sits ~5× off at the
+    <strong>no integer-clean value nails G</strong>; the registered result sits ~5× off at the
     geometrically-mandated p=2.</p>
 
     <div class="widget">
@@ -571,7 +571,7 @@
       </div>
       <div id="v-g" class="verdict bad"></div>
       <p style="font-size:.9rem;color:var(--dim);margin:.8em 0 0">
-      At the <em>honest</em> p=2 the ratio is 0.197 — a clean FAIL by the &lt;5% bar, but a
+      At the registered p=2 the ratio is 0.197 — a clean FAIL by the &lt;5% bar, but a
       near-miss across 122 orders of magnitude. To “fix” it you’d need a non-geometric
       fractional p (look near <span class="mono">p≈1.98</span>): that would be tuning, and
       SDT forbids it. The miss is kept, not buried.</p>
@@ -595,13 +595,13 @@
       <div class="card"><span class="tag E">class E</span><strong>The coefficient ƒ</strong>
         <p style="margin:.4em 0 0">ƒ = 2.123×10⁻¹⁷ is calibrated to hydrogen, not derived.
         Its “fundamental” form is the same equation written twice (falsifier #2).
-        <span class="wn">Honest open problem.</span></p></div>
+        <span class="wn">Open problem.</span></p></div>
       <div class="card"><span class="tag fail">class F</span><strong>Gravity G</strong>
         <p style="margin:.4em 0 0">Shell cancellation kills 122 orders of magnitude but
         misses by ~5× (falsifier #3). <span class="bad">Not yet derived.</span></p></div>
     </div>
 
-    <p style="margin-top:1.6em">That is the shape of an honest theory: a genuine structural
+    <p style="margin-top:1.6em">That is the shape of the current theory: a genuine structural
     insight (forces are shadows), one beautiful exact identity it borrows (αℏc=k_e e²), one
     coefficient it still has to fit, and one famous number it gets within a factor of five
     and refuses to fudge. EMC01 is <strong>not</strong> “f is universal, done.” It is
@@ -733,7 +733,7 @@ function PeffOf(a, rp){ return 4*a*C.hbar*C.c/(PI*rp*rp*C.r_e*C.r_e); }
     of.textContent=f.toExponential(3);
     // but SDT Coulomb: P_eff uses R_p, force uses R_charge=sqrt(R_p*r_e) -> R_p^2 cancels
     const Peff=PeffOf(C.alpha,rp);
-    const Rc=Math.sqrt(rp*C.r_e);              // honest: R_charge also tracks R_p
+    const Rc=Math.sqrt(rp*C.r_e);              // declared: R_charge also tracks R_p
     const F_sdt=(PI/4)*Peff*Math.pow(Rc,4)/(rTest*rTest);
     const coulRatio=F_sdt/F_real;
     oc.textContent=coulRatio.toFixed(4)+'×';
@@ -753,7 +753,7 @@ function PeffOf(a, rp){ return 4*a*C.hbar*C.c/(PI*rp*rp*C.r_e*C.r_e); }
         og=document.getElementById('o-g'),ogr=document.getElementById('o-gr'),
         v=document.getElementById('v-g');
   const G_naive=3*C.l_P*Math.pow(C.c,4)/(C.Phi*C.Phi);
-  // Engine TEST3 (the honest near-miss): G = G_naive * 4π / N^p, p=2 -> ratio 0.197.
+  // Engine TEST3 (the registered near-miss): G = G_naive * 4π / N^p, p=2 -> ratio 0.197.
   function up(){
     const p=+r.value;o.textContent=p.toFixed(3);
     const G=G_naive*4*PI/Math.pow(C.N,p);
@@ -764,7 +764,7 @@ function PeffOf(a, rp){ return 4*a*C.hbar*C.c/(PI*rp*rp*C.r_e*C.r_e); }
     if(Math.abs(ratio-1)<0.05){v.className='verdict ok';
       v.textContent='hits G — but only at a non-geometric p (this is tuning, forbidden)';}
     else if(within5){v.className='verdict bad';
-      v.textContent='within ~5× (p='+p.toFixed(3)+', ratio '+ratio.toFixed(3)+') — the honest near-miss';}
+      v.textContent='within ~5× (p='+p.toFixed(3)+', ratio '+ratio.toFixed(3)+') — the registered near-miss';}
     else{v.className='verdict bad';
       v.textContent='off by '+ratio.toExponential(1)+'× — geometry-mandated p=2 cannot be tuned';}
   }

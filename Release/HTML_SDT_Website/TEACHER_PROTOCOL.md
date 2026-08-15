@@ -95,7 +95,7 @@ sentence, and an expert must find nothing false in it.
 
 ---
 
-## Honesty — inherited from the framework, non-negotiable
+## Disclosure — inherited from the framework, non-negotiable
 
 - Keep the certification labels (DERIVED, COMPUTED, CALIBRATED, OBSERVED, PENDING). They are
   part of the voice, not a disclaimer bolted on.

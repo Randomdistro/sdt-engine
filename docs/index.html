@@ -244,8 +244,15 @@
       </p>
       <figure style="margin-top:var(--sp-xl);text-align:center;">
         <div id="lawsStage" style="position:relative;width:80vw;height:90vh;max-width:none;margin:var(--sp-lg) 0 var(--sp-md) calc(50% - 40vw);overflow:hidden;border:1px solid var(--paper-edge);border-radius:6px;background:var(--paper)"><canvas id="atlasLawsField" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none"></canvas><svg id="atlasLawsPlay" viewBox="0 0 1800 1200" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:grab" aria-label="Two bodies interrupting an isotropic lattice — grip and throw either one; the summed landings do the pushing"></svg><div id="lawsCtl" style="position:absolute;left:14px;bottom:14px;z-index:3;display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;padding:9px 14px;border-radius:6px;background:color-mix(in srgb, var(--paper) 88%, transparent);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid var(--paper-edge);font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-muted);letter-spacing:.04em"></div></div>
-        <figcaption style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-faint);margin-top:8px;">grip any body and throw it — the hand’s motion is handed over on release. The lattice is turned 5° at a time about EVERY node, so the medium has no special point and no special direction, and the lines run in from far outside the frame. Matter interrupts them; each interruption thickens into the surface over the half-chord it cut out, and the summed landings do the pushing. Mass is the displaced medium counted in unit balls, (R/r₀)³ — and because push goes as cross-section while mass goes as volume, small bodies accelerate more: the saturated regime, where a body is opaque and its shadow is its silhouette. Set the radii, watch the barycentre, and throw gently and sideways for an orbit<sub>eff</sub>·R₁²R₂²/r² follows the geometry</figcaption>
+        <figcaption style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-faint);margin-top:8px;">Grip any body and throw it. This pedagogical mechanism demo sums discrete ray landings on opaque silhouettes, with display mass proportional to displaced volume. It is retained to inspect the proposed push geometry; it is not the engine’s koppa trajectory kernel.</figcaption>
       </figure>
+      <p style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-faint);margin-top:8px;">
+        <strong>PEDAGOGICAL DISCRETE RAY-LATTICE — not GOM42-certified.</strong>
+        The validated koppa trajectory solver is in the
+        <a href="atomicus-3d.html" style="color:var(--copper);">Atomicus 3D walkthrough</a>.
+        Its optional null markers are inertial-frame zeros of the displayed asin proxy,
+        not co-rotating Lagrange points.
+      </p>
     </div>
   </section>
 
@@ -1247,7 +1254,7 @@
          Nothing here knows what gravity is. They fall together because each
          stands in the others' weather.
          ═══════════════════════════════════════════════════════════════════ */
-      var VW=1800, VH=1200, HALF=6000, SPACING=96, ROTSTEP=5;
+      var VW=1800, VH=1200, HALF=6000, SPACING=96, ROTSTEP=5, RESTITUTION=0.45;
 
       var defs=el('defs',{}),mr=el('marker',{id:'alp-r',markerWidth:9,markerHeight:9,refX:7,refY:3,orient:'auto'});
       mr.appendChild(el('path',{d:'M0,0 L6,3 L0,6 z',fill:'#b07430'}));defs.appendChild(mr);s.appendChild(defs);
@@ -1257,8 +1264,8 @@
       for(var jj=-17;jj<=17;jj++) for(var ii=-17;ii<=17;ii++)
         NODES.push({x:VW/2+(ii+(jj&1?0.5:0))*SPACING, y:VH/2+jj*HSTEP});
       /* THE LATTICE'S OWN DRIFT. The system's centre is HELD at the middle of
-         the view. Its motion relative to the matrix is therefore shown the only
-         honest way: as the MATRIX MOVING. Watch the grid stream past and you are
+         the view. Its motion relative to the matrix is therefore shown directly:
+         as the MATRIX MOVING. Watch the grid stream past and you are
          watching the system travel through it. Out where there is not a particle
          within a billion parsecs the matrix is still there — change your motion
          and it pushes back, and that push is your mass.
@@ -1385,7 +1392,8 @@
       /* ── the shadow law for a vanishing probe: toward each body, ∝ asin(R/d).
            This is the same law the lattice sum produces (verified: the summed
            landings fall as 1/d to within ~10% across the field). Used only for
-           the balance-point search, which needs thousands of evaluations. ── */
+           the inertial-null search, which needs thousands of evaluations. These
+           are not co-rotating Lagrange equilibria. ── */
       function probe(px,py,out){
         out.x=0; out.y=0;
         for(var q=0;q<BOD.length;q++){
@@ -1553,7 +1561,7 @@
         }
         w.appendChild(r); w.appendChild(v); ctlBar.appendChild(w);
       });
-      [['barycentre','bary'],['balance points','lag'],['trails','trails']].forEach(function(T){
+      [['barycentre','bary'],['inertial nulls (asin proxy)','lag'],['trails','trails']].forEach(function(T){
         var w=document.createElement('label');
         w.style.cssText='display:flex;align-items:center;gap:5px;cursor:pointer';
         var c=document.createElement('input'); c.type='checkbox'; c.style.accentColor='var(--copper)';
@@ -1571,7 +1579,7 @@
         bt.addEventListener('click',function(){T[1](bt);}); ctlBar.appendChild(bt);
       });
 
-      /* ── chrome: discs, push arrows, barycentre, balance points, readout ── */
+      /* ── chrome: discs, push arrows, barycentre, inertial nulls, readout ── */
       var lagCache=null, lagTick=0;
       function chrome(){
         BOD.forEach(function(b,i){
@@ -1606,12 +1614,12 @@
             lagG.appendChild(el('circle',{cx:Pn[0],cy:Pn[1],r:7,fill:'none',
               stroke:'#0d7a5f','stroke-width':2.2,'stroke-dasharray':'3 3'}));
             lagG.appendChild(tx({x:Pn[0]+13,y:Pn[1]-11,'font-family':'JetBrains Mono,monospace',
-              'font-size':'19px',fill:'#0d7a5f'},'S'+(k3+1)));
+              'font-size':'19px',fill:'#0d7a5f'},'N'+(k3+1)));
           });
         }
-        read.textContent='every node a centre · 5° through 60° · '+LINES.length+' lines · '
+        read.textContent='pedagogical ray-lattice · every node a centre · 5° through 60° · '+LINES.length+' lines · '
           +NLAND+' landings summed  ·  mass = (R/r0)^3 of displaced medium'
-          +(opt.lag&&lagCache?'  ·  '+lagCache.length+' balance points':'');
+          +(opt.lag&&lagCache?'  ·  '+lagCache.length+' inertial nulls':'');
       }
 
       var tPrev=0;
@@ -1644,7 +1652,7 @@
               if(hold!==U){U.x-=nX*corr*iU;U.y-=nY*corr*iU;}
               if(hold!==V){V.x+=nX*corr*iV;V.y+=nY*corr*iV;}
               var sv=(V.vx-U.vx)*nX+(V.vy-U.vy)*nY;
-              if(sv<0){ var jm=-1.45*sv/iT;
+              if(sv<0){ var jm=-(1+RESTITUTION)*sv/iT;
                 U.vx-=jm*nX*iU; U.vy-=jm*nY*iU;
                 V.vx+=jm*nX*iV; V.vy+=jm*nY*iV; }
             }
@@ -1652,7 +1660,7 @@
           if(opt.trails) BOD.forEach(function(b,i){ if(!b.on) return;
             var T=trailPts[i]; T.push(b.x,b.y); if(T.length>1400) T.splice(0,2); });
         }
-        /* Hold the shared balance point dead centre and give the difference to
+        /* Hold the nearest displayed inertial null dead centre and give the difference to
            the lattice. Everything shifts together — bodies, trails, markers and
            the matrix — so no relative position or velocity changes: the system
            stands still and the medium streams past it. */
