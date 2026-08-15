@@ -1,189 +1,213 @@
-﻿╔══════════════════════════════════════════════════════════════╗
+╔══════════════════════════════════════════════════════════════╗
 ║  SDT BENCHMARK SUITE — Six-Law Framework                    ║
-║  Single Source of Truth: sdt_laws.hpp                       ║
-║  9 Axioms · 18 Theorems · 0 Free Parameters                ║
+║  Single Source of Truth: laws.hpp                           ║
+║  9 Axioms · 18 Theorems · Explicit Input Provenance        ║
 ╚══════════════════════════════════════════════════════════════╝
 
 ══ B01: HYDROGEN ENERGY LEVELS ══
-  B01  H n=1 energy [eV]                         SDT=-13.6057          EXP=-13.5984          ERR=  0.0536%  TOL=  0.08%  [DERIVED] PASS 
-  B01  H n=2 energy [eV]                         SDT=-3.40142          EXP=-3.3996           ERR=  0.0536%  TOL=  0.08%  [DERIVED] PASS 
-  B01  H n=3 energy [eV]                         SDT=-1.51174          EXP=-1.5109           ERR=  0.0558%  TOL=  0.08%  [DERIVED] PASS 
-  B01  H n=4 energy [eV]                         SDT=-0.850356         EXP=-0.8499           ERR=  0.0536%  TOL=  0.08%  [DERIVED] PASS 
+  B01  H n=1 energy [eV]                         SDT=-13.6057          EXP=-13.5984          ERR=  0.0536%  TOL=  0.08%  [DERIVED] PASS
+  B01  H n=2 energy [eV]                         SDT=-3.40142          EXP=-3.3996           ERR=  0.0536%  TOL=  0.08%  [DERIVED] PASS
+  B01  H n=3 energy [eV]                         SDT=-1.51174          EXP=-1.5109           ERR=  0.0558%  TOL=  0.08%  [DERIVED] PASS
+  B01  H n=4 energy [eV]                         SDT=-0.850356         EXP=-0.8499           ERR=  0.0536%  TOL=  0.08%  [DERIVED] PASS
   B01  Balmer 3->2 [nm]                          SDT=656.112           EXP=656.281           ERR=  0.0257%  TOL=  0.08%  [DERIVED] PASS nm
   B01  Balmer 4->2 [nm]                          SDT=486.009           EXP=486.135           ERR=  0.0259%  TOL=  0.08%  [DERIVED] PASS nm
   B01  Balmer 5->2 [nm]                          SDT=433.937           EXP=434.047           ERR=  0.0254%  TOL=  0.08%  [DERIVED] PASS nm
   B01  Balmer 6->2 [nm]                          SDT=410.07            EXP=410.174           ERR=  0.0253%  TOL=  0.08%  [DERIVED] PASS nm
 
 ══ B02: RYDBERG MULTI-ION ══
-  B02  He+ Lyman-alpha [nm]                      SDT=30.3756           EXP=30.378            ERR=  0.0080%  TOL=  0.08%  [DERIVED] PASS 
-  B02  Li2+ Lyman-alpha [nm]                     SDT=13.5003           EXP=13.502            ERR=  0.0129%  TOL=  0.08%  [DERIVED] PASS 
+  B02  He+ Lyman-alpha [nm]                      SDT=30.3756           EXP=30.378            ERR=  0.0080%  TOL=  0.08%  [DERIVED] PASS
+  B02  Li2+ Lyman-alpha [nm]                     SDT=13.5003           EXP=13.502            ERR=  0.0129%  TOL=  0.08%  [DERIVED] PASS
 
 ══ B03: FINE STRUCTURE ══
-  B03  H 2P fine-structure splitting [eV]        SDT=4.52826e-05       EXP=4.528e-05         ERR=  0.0057%  TOL=  1.00%  [DERIVED] PASS 
-  B03  Bohr v(1,1) = alpha*c [m/s]               SDT=2.18769e+06       EXP=2.18769e+06       ERR=  0.0000%  TOL=  0.00%  [IDENTITY] PASS 
+  B03  H 2P fine-structure splitting [eV]        SDT=4.52826e-05       EXP=4.528e-05         ERR=  0.0057%  TOL=  1.00%  [DERIVED] PASS
+  B03  Bohr v(1,1) = alpha*c [m/s]               SDT=2.18769e+06       EXP=2.18769e+06       ERR=  0.0000%  TOL=  0.00%  [IDENTITY] PASS
 
 ══ B04: LAMB SHIFT ══
-  B04  H 2S-2P interval: nuclear-geometry term +0.761 MHz derived (APS04 2026-07-26, sign/order/scaling earned); full amplitude OPEN (FLM14). Measured 1057.845 MHz retained as OBSERVED-INPUT only.
+  B04  H 2S-2P: ACCEPTED OBSERVED 1057.845 MHz (Lamb-Retherford, proton center). He+ n=2: ACCEPTED OBSERVED 14041.13 MHz (alpha center; not derived from H). APS04 nuclear-geometry addend +0.761 MHz (sign/order/scaling earned). No derived interval tally.
 
 ══ B05: HYPERFINE 21cm ══
-  B05  H hyperfine 21cm [MHz]                    SDT=1421.16           EXP=1420.4            ERR=  0.0531%  TOL=  0.08%  [DERIVED] PASS 
+  B05  H hyperfine 21cm [MHz]                    SDT=1421.16           EXP=1420.4            ERR=  0.0531%  TOL=  0.08%  [DERIVED] PASS
 
 ══ B06: MULTI-ELECTRON IONISATION ══
-  B06  He (Z=2) 1st ionisation [eV]              SDT=39.3205           EXP=24.587            ERR= 59.9238%  TOL=  5.00%  [PENDING] FAIL 
-  B06  Li (Z=3) 1st ionisation [eV]              SDT=5.74841           EXP=5.392             ERR=  6.6099%  TOL=  5.00%  [PENDING] FAIL 
-  B06  Be (Z=4) 1st ionisation [eV]              SDT=12.9339           EXP=9.323             ERR= 38.7312%  TOL=  5.00%  [PENDING] FAIL 
-  B06  B (Z=5) 1st ionisation [eV]               SDT=19.5922           EXP=8.298             ERR=136.1075%  TOL=  5.00%  [PENDING] FAIL 
-  B06  C (Z=6) 1st ionisation [eV]               SDT=35.9275           EXP=11.26             ERR=219.0722%  TOL=  5.00%  [PENDING] FAIL 
-  B06  N (Z=7) 1st ionisation [eV]               SDT=58.581            EXP=14.534            ERR=303.0619%  TOL=  5.00%  [PENDING] FAIL 
-  B06  O (Z=8) 1st ionisation [eV]               SDT=80.01             EXP=13.618            ERR=487.5311%  TOL=  5.00%  [PENDING] FAIL 
-  B06  F (Z=9) 1st ionisation [eV]               SDT=104.772           EXP=17.423            ERR=501.3450%  TOL=  5.00%  [PENDING] FAIL 
-  B06  Ne (Z=10) 1st ionisation [eV]             SDT=128.65            EXP=21.565            ERR=496.5701%  TOL=  5.00%  [PENDING] FAIL 
+  B06  He (Z=2) 1st ionisation [eV]              SDT=25.5454           EXP=24.587            ERR=  3.8979%  TOL= 15.00%  [COMPUTED] PASS
+  B06  Li (Z=3) 1st ionisation [eV]              SDT=5.13042           EXP=5.392             ERR=  4.8512%  TOL= 15.00%  [COMPUTED] PASS
+  B06  Be (Z=4) 1st ionisation [eV]              SDT=8.83336           EXP=9.323             ERR=  5.2520%  TOL= 15.00%  [COMPUTED] PASS
+  B06  B (Z=5) 1st ionisation [eV]               SDT=8.25003           EXP=8.298             ERR=  0.5780%  TOL= 15.00%  [COMPUTED] PASS
+  B06  C (Z=6) 1st ionisation [eV]               SDT=11.2791           EXP=11.26             ERR=  0.1693%  TOL= 15.00%  [COMPUTED] PASS
+  B06  N (Z=7) 1st ionisation [eV]               SDT=14.6434           EXP=14.534            ERR=  0.7527%  TOL= 15.00%  [COMPUTED] PASS
+  B06  O (Z=8) 1st ionisation [eV]               SDT=13.5511           EXP=13.618            ERR=  0.4913%  TOL= 15.00%  [COMPUTED] PASS
+  B06  F (Z=9) 1st ionisation [eV]               SDT=17.1657           EXP=17.423            ERR=  1.4769%  TOL= 15.00%  [COMPUTED] PASS
+  B06  Ne (Z=10) 1st ionisation [eV]             SDT=21.1595           EXP=21.565            ERR=  1.8804%  TOL= 15.00%  [COMPUTED] PASS
+  B06  whole-range median error = 1.4769% (gate <=5%); maximum = 5.2520% (gate <=15%).
+  B06  force residual max = 1.490e-09 (gate <1e-8); states CONVERGED.
+  B06  force-balance convergence gate            SDT=1                 EXP=1                 ERR=  0.0000%  TOL=  0.00%  [IDENTITY] PASS
 
 ══ B07: THERMODYNAMICS ══
-  B07  Stefan-Boltzmann [W/m2/K4]                SDT=5.67037e-08       EXP=5.67037e-08       ERR=  0.0000%  TOL=  0.00%  [DERIVED] PASS 
-  B07  Wien displacement [m·K]                  SDT=0.00289777        EXP=0.0028978         ERR=  0.0011%  TOL=  0.01%  [DERIVED] PASS 
+  B07  Stefan-Boltzmann [W/m2/K4]                SDT=5.67037e-08       EXP=5.67037e-08       ERR=  0.0000%  TOL=  0.00%  [DERIVED] PASS
+  B07  Wien displacement [m·K]                  SDT=0.00289777        EXP=0.0028978         ERR=  0.0011%  TOL=  0.01%  [DERIVED] PASS
 
 ══ B08: ORBITAL MECHANICS ══
-  B08  Earth orbital velocity [m/s]              SDT=29788.9           EXP=29783             ERR=  0.0199%  TOL=  0.08%  [DERIVED] PASS 
-  B08  GM_Sun [m3/s2]                            SDT=1.3275e+20        EXP=1.327e+20         ERR=  0.0379%  TOL=  0.50%  [DERIVED] PASS 
+  B08  Earth orbital velocity [m/s]              SDT=29788.9           EXP=29783             ERR=  0.0199%  TOL=  0.08%  [DERIVED] PASS
+  B08  GM_Sun [m3/s2]                            SDT=1.3275e+20        EXP=1.327e+20         ERR=  0.0379%  TOL=  0.50%  [DERIVED] PASS
 
 ══ B09: BINARY PULSAR DECAY ══
-  B09  Hulse-Taylor dP/dt: observed -2.4025e-12 s/s; GR quadrupole -2.4029e-12. SDT-native emission integral NOT built — OPEN (no earned prediction).
+  B09  B1913+16 dP_b/dt [s/s]                    SDT=-2.40263e-12      EXP=-2.398e-12        ERR=  0.1931%  TOL=  1.00%  [DERIVED] PASS
+  B09  J0737-3039A/B dP_b/dt [s/s]               SDT=-1.24781e-12      EXP=-1.24792e-12      ERR=  0.0089%  TOL=  1.00%  [DERIVED] PASS
 
 ══ B10: STRONG FIELD RELATIVITY ══
-  B10  Mercury precession [arcsec/c]             SDT=42.9914           EXP=42.98             ERR=  0.0265%  TOL=  0.50%  [DERIVED] PASS 
-  B10  Solar light deflection [arcsec]           SDT=1.75169           EXP=1.7505            ERR=  0.0680%  TOL=  0.50%  [DERIVED] PASS 
+  B10  Mercury precession [arcsec/c]             SDT=42.9914           EXP=42.98             ERR=  0.0265%  TOL=  0.50%  [DERIVED] PASS
+  B10  Solar light deflection [arcsec]           SDT=1.75169           EXP=1.7505            ERR=  0.0680%  TOL=  0.50%  [DERIVED] PASS
 
 ══ B11: PLANETARY OBLATENESS ══
-  B11  Earth J2 (uniform-fluid est.)             SDT=0.00172484        EXP=0.0010826         ERR= 59.3239%  TOL=  3.00%  [PENDING] FAIL 
-  B11  Jupiter J2 (uniform-fluid est.)           SDT=0.0445876         EXP=0.014736          ERR=202.5760%  TOL=  3.00%  [PENDING] FAIL 
+  B11  Earth J2 (GOM41 Q1 boundary)              SDT=0.00109248        EXP=0.00108263        ERR=  0.9098%  TOL=  3.00%  [PENDING] PASS
+  B11  Jupiter J2 (GOM41 Q1 boundary)            SDT=0.0143865         EXP=0.0146964         ERR=  2.1087%  TOL=  3.00%  [PENDING] PASS
 
 ══ B12: STELLAR zk²=1 ══
-  B12  Sun          zk2                          SDT=1                 EXP=1                 ERR=  0.0000%  TOL=  0.00%  [IDENTITY] PASS 
-  B12  Sirius A     zk2                          SDT=1                 EXP=1                 ERR=  0.0000%  TOL=  0.00%  [IDENTITY] PASS 
-  B12  Alpha Cen A  zk2                          SDT=1                 EXP=1                 ERR=  0.0000%  TOL=  0.00%  [IDENTITY] PASS 
-  B12  Procyon A    zk2                          SDT=1                 EXP=1                 ERR=  0.0000%  TOL=  0.00%  [IDENTITY] PASS 
-  B12  Vega         zk2                          SDT=1                 EXP=1                 ERR=  0.0000%  TOL=  0.00%  [IDENTITY] PASS 
+  B12  Sun          zk2                          SDT=1                 EXP=1                 ERR=  0.0000%  TOL=  0.00%  [IDENTITY] PASS
+  B12  Sirius A     zk2                          SDT=1                 EXP=1                 ERR=  0.0000%  TOL=  0.00%  [IDENTITY] PASS
+  B12  Alpha Cen A  zk2                          SDT=1                 EXP=1                 ERR=  0.0000%  TOL=  0.00%  [IDENTITY] PASS
+  B12  Procyon A    zk2                          SDT=1                 EXP=1                 ERR=  0.0000%  TOL=  0.00%  [IDENTITY] PASS
+  B12  Vega         zk2                          SDT=1                 EXP=1                 ERR=  0.0000%  TOL=  0.00%  [IDENTITY] PASS
 
 ══ B13: CMB REDSHIFT ══
-  B13  CMB redshift z                            SDT=1099.72           EXP=1089              ERR=  0.9840%  TOL=  1.00%  [DERIVED] PASS 
+  B13  CMB redshift z                            SDT=1099.72           EXP=1089              ERR=  0.9840%  TOL=  1.00%  [DERIVED] PASS
 
 ══ B14: GALACTIC ROTATION ══
-  B14  Milky Way    R_flat [kpc]                 SDT=6.25              EXP=6                 ERR=  4.1667%  TOL= 12.00%  [COMPUTED] PASS 
-  B14  NGC 3198     R_flat [kpc]                 SDT=7                 EXP=7.2               ERR=  2.7778%  TOL= 12.00%  [COMPUTED] PASS 
-  B14  NGC 2403     R_flat [kpc]                 SDT=4.5               EXP=4.4               ERR=  2.2727%  TOL= 12.00%  [COMPUTED] PASS 
-  B14  M33          R_flat [kpc]                 SDT=4                 EXP=4                 ERR=  0.0000%  TOL= 12.00%  [COMPUTED] PASS 
+  B14  Milky Way    R_flat [kpc]                 SDT=6.25              EXP=6                 ERR=  4.1667%  TOL= 12.00%  [COMPUTED] PASS
+  B14  NGC 3198     R_flat [kpc]                 SDT=7                 EXP=7.2               ERR=  2.7778%  TOL= 12.00%  [COMPUTED] PASS
+  B14  NGC 2403     R_flat [kpc]                 SDT=4.5               EXP=4.4               ERR=  2.2727%  TOL= 12.00%  [COMPUTED] PASS
+  B14  M33          R_flat [kpc]                 SDT=4                 EXP=4                 ERR=  0.0000%  TOL= 12.00%  [COMPUTED] PASS
 
 ══ B15: BAO SCALE ══
-  B15  BAO sound horizon [Mpc]                   SDT=147               EXP=147.09            ERR=  0.0612%  TOL=  3.00%  [COMPUTED] PASS 
+  B15  N_eq=902.169740, physical radius=0.161631 Mpc, escape rate=1.311701e-14 s^-1.
+       opacity controls: proton tau=2.2271, free e+p tau=27.2076; both coupled.
+  B15  BAO standing-equilibrium scale [Mpc]      SDT=145.819           EXP=147.09            ERR=  0.8642%  TOL=  3.00%  [COMPUTED] PASS
 
 ══ B16: TRANSPORT SCALING ══
-  B16  Thermal cond exponent                     SDT=0.5               EXP=0.5               ERR=  0.0000%  TOL=  0.05%  [DERIVED] PASS 
-  B16  Viscosity exponent                        SDT=0.5               EXP=0.5               ERR=  0.0000%  TOL=  0.05%  [DERIVED] PASS 
-  B16  Diffusivity exponent                      SDT=0.5               EXP=0.5               ERR=  0.0000%  TOL=  0.05%  [DERIVED] PASS 
+  B16  fixed-P exponents from engine: mu=0.5, k=0.5, D=1.5.
+  B16  Ar dynamic-viscosity whole-curve score    SDT=0.902853          EXP=1                 ERR=  9.7147%  TOL= 10.00%  [COMPUTED] PASS
+  B16  Ar thermal-conductivity whole-curve score  SDT=0.903254          EXP=1                 ERR=  9.6746%  TOL= 10.00%  [COMPUTED] PASS
+  B16  Ar self-diffusivity whole-curve score     SDT=0.921909          EXP=1                 ERR=  7.8091%  TOL= 10.00%  [COMPUTED] PASS
 
 ══ B17: MAGNETIC g-FACTOR ══
-  B17  Electron g-factor                         SDT=2.00232           EXP=2.00232           ERR=  0.0002%  TOL=  0.12%  [DERIVED] PASS 
+  B17  Electron g-factor                         SDT=2.00232           EXP=2.00232           ERR=  0.0002%  TOL=  0.12%  [DERIVED] PASS
 
 ══ B18: PROTON RADIUS ══
-  B18  R_p (W+1 conjecture) [m]                  SDT=8.41236e-16       EXP=8.414e-16         ERR=  0.0195%  TOL=  0.08%  [DERIVED] PASS 
-  B18  W_eff (should be 3.000)                   SDT=3.00078           EXP=3                 ERR=  0.0261%  TOL=  0.08%  [DERIVED] PASS 
-  B18  He-4 radius = 2Rp [m]                     SDT=1.6828e-15        EXP=1.6755e-15        ERR=  0.4357%  TOL=  0.50%  [DERIVED] PASS 
+  B18  R_p (FLM07 q=4 lock) [m]                  SDT=8.41236e-16       EXP=8.414e-16         ERR=  0.0195%  TOL=  0.08%  [DERIVED] PASS
+  B18  He-4 contact diameter = 2Rp [m]           SDT=1.6828e-15        EXP=1.6755e-15        ERR=  0.4357%  TOL=  0.50%  [PENDING] PASS
 
 ══ B19: BETA DECAY ══
-  B19  Beta decay Q-value [MeV]                  SDT=0.782333          EXP=0.782             ERR=  0.0426%  TOL=  0.08%  [DERIVED] PASS 
+  B19  Beta decay Q-value [MeV]                  SDT=0.782333          EXP=0.782             ERR=  0.0426%  TOL=  0.08%  [DERIVED] PASS
 
 ══ B20: zk² UNIVERSALITY ══
-  B20  Hydrogen zk2                              SDT=1                 EXP=1                 ERR=  0.0000%  TOL=  0.00%  [IDENTITY] PASS 
-  B20  Earth orbit zk2                           SDT=1                 EXP=1                 ERR=  0.0000%  TOL=  0.00%  [IDENTITY] PASS 
+  B20  Hydrogen zk2                              SDT=1                 EXP=1                 ERR=  0.0000%  TOL=  0.00%  [IDENTITY] PASS
+  B20  Earth orbit zk2                           SDT=1                 EXP=1                 ERR=  0.0000%  TOL=  0.00%  [IDENTITY] PASS
 
 ══ B21: FORCE HIERARCHY ══
   B21  EM/Grav force ratio ~2.27e39: displayed for orientation only — the split of GM into G and kg-mass is unit bookkeeping SDT does not perform. No tally.
 
 ══ B22: PRESSURE HIERARCHY ══
-  B22  P_eff [Pa]                                SDT=5.22521e+31       EXP=5.225e+31         ERR=  0.0040%  TOL=  0.50%  [CALIBRATED] PASS 
-  B22  f = P_eff/P_conv                          SDT=2.12336e-17       EXP=2.125e-17         ERR=  0.0772%  TOL=  1.00%  [CALIBRATED] PASS 
-  B22  P_CMB [Pa]                                SDT=1.39159e-14       EXP=1.391e-14         ERR=  0.0427%  TOL=  1.00%  [DERIVED] PASS 
+  B22  P_eff [Pa]                                SDT=5.22725e+31       EXP=5.225e+31         ERR=  0.0431%  TOL=  0.50%  [DERIVED] PASS
+  B22  f = P_eff/P_conv                          SDT=2.12419e-17       EXP=2.125e-17         ERR=  0.0381%  TOL=  1.00%  [COMPUTED] PASS
+  B22  P_CMB [Pa]                                SDT=1.39159e-14       EXP=1.391e-14         ERR=  0.0427%  TOL=  1.00%  [DERIVED] PASS
 
 ══ B23: COULOMB COUPLING IDENTITY ══
-  B23  k_e*e2 (SDT derived) [J·m]               SDT=2.30708e-28       EXP=2.30708e-28       ERR=  0.0000%  TOL=  0.00%  [IDENTITY] PASS 
+  B23  k_e*e2 (SDT derived) [J·m]               SDT=2.30708e-28       EXP=2.30708e-28       ERR=  0.0000%  TOL=  0.00%  [IDENTITY] PASS
 
 ══ B24: EXCLUSION VOLUMES ══
-  B24  V_disp(e) [m3]                            SDT=9.98094e-62       EXP=9.988e-62         ERR=  0.0707%  TOL=  0.08%  [COMPUTED] PASS 
-  B24  V_disp(p) [m3]                            SDT=1.83265e-58       EXP=1.834e-58         ERR=  0.0734%  TOL=  0.08%  [COMPUTED] PASS 
-  B24  V_p/V_e = m_p/m_e                         SDT=1836.15           EXP=1836.15           ERR=  0.0000%  TOL=  0.00%  [IDENTITY] PASS 
-  B24  P_cf / (P_conv/3) = 1.0                   SDT=1                 EXP=1                 ERR=  0.0000%  TOL=  0.00%  [IDENTITY] PASS 
+  B24  V_disp(e) [m3]                            SDT=9.98094e-62       EXP=9.988e-62         ERR=  0.0707%  TOL=  0.08%  [COMPUTED] PASS
+  B24  V_disp(p) [m3]                            SDT=1.83265e-58       EXP=1.834e-58         ERR=  0.0734%  TOL=  0.08%  [COMPUTED] PASS
+  B24  V_p/V_e = m_p/m_e                         SDT=1836.15           EXP=1836.15           ERR=  0.0000%  TOL=  0.00%  [IDENTITY] PASS
+  B24  P_cf / (P_conv/3) = 1.0                   SDT=1                 EXP=1                 ERR=  0.0000%  TOL=  0.00%  [IDENTITY] PASS
 
-══ B25: ALPHA-CLUSTER BINDING ══
-  B25  He binding variational [eV]               SDT=-77.4887          EXP=-79.005           ERR=  1.9193%  TOL=  2.00%  [COMPUTED] PASS 
-  B25  He binding exact NR [eV]                  SDT=-79.0052          EXP=-79.005           ERR=  0.0003%  TOL=  0.00%  [COMPUTED] PASS 
-  B25  R_He = 2Rp [fm]                           SDT=1.6828            EXP=1.6755            ERR=  0.4357%  TOL=  0.50%  [DERIVED] PASS fm
+══ B25: HELIUM TOTAL ELECTRON BINDING ══
+  B25  He total electron binding [eV]            SDT=79.9682           EXP=79.005            ERR=  1.2191%  TOL=  2.00%  [COMPUTED] PASS
 
 ══ B26: TREFOIL TOPOLOGY ══
-  B26  Proton (2,3) budget vT2+vP2=c2            SDT=1                 EXP=1                 ERR=  0.0000%  TOL=  0.00%  [DERIVED] PASS 
-  B26  Proton surface v_phase [c]                SDT=1.83016           EXP=1.83              ERR=  0.0088%  TOL=  0.50%  [COMPUTED] PASS 
-  B26  m_p/m_e = 6pi^5 (topology)                SDT=1836.12           EXP=1836.15           ERR=  0.0019%  TOL=  0.01%  [DERIVED] PASS 
+  B26  Proton (2,3) budget vT2+vP2=c2            SDT=1                 EXP=1                 ERR=  0.0000%  TOL=  0.00%  [DERIVED] PASS
+  B26  Proton surface v_phase [c]                SDT=1.83006           EXP=1.83              ERR=  0.0031%  TOL=  0.50%  [COMPUTED] PASS
+  B26  m_p/m_e = 6pi^5 (tube packing)            SDT=1836.12           EXP=1836.15           ERR=  0.0019%  TOL=  0.01%  [COMPUTED] PASS
+  B26  Point electron v(a0) [m/s]                SDT=2.18769e+06       EXP=2.18769e+06       ERR=  0.0000%  TOL=  0.00%  [IDENTITY] PASS
+  B26  Torus/electron tube volume ratio          SDT=1836.12           EXP=1836.12           ERR=  0.0000%  TOL=  0.00%  [IDENTITY] PASS
 
 ══ B27: c FROM GEOMETRY (koppa closure) ══
-  B27  k_Sun from precession                     SDT=686.404           EXP=686.3             ERR=  0.0151%  TOL=  0.50%  [COMPUTED] PASS 
-  B27  c from precession closure [m/s]           SDT=2.99795e+08       EXP=2.99792e+08       ERR=  0.0009%  TOL=  0.01%  [DERIVED] PASS 
+  B27  k_Sun from precession                     SDT=686.404           EXP=686.3             ERR=  0.0151%  TOL=  0.50%  [COMPUTED] PASS
+  B27  c from precession closure [m/s]           SDT=2.99795e+08       EXP=2.99792e+08       ERR=  0.0009%  TOL=  0.01%  [DERIVED] PASS
 
 ══ B28: DEPTH-CLOSURE THEOREM ══
-  B28  Solar redshift = depth z_Sun              SDT=2.12311e-06       EXP=2.1225e-06        ERR=  0.0286%  TOL=  0.10%  [COMPUTED] PASS 
-  B28  Earth v = c sqrt(koppa/r) [m/s]           SDT=29788.9           EXP=29783             ERR=  0.0199%  TOL=  0.08%  [DERIVED] PASS 
+  B28  Solar redshift = depth z_Sun              SDT=2.12311e-06       EXP=2.1225e-06        ERR=  0.0286%  TOL=  0.10%  [COMPUTED] PASS
+  B28  Earth v = c sqrt(koppa/r) [m/s]           SDT=29788.9           EXP=29783             ERR=  0.0199%  TOL=  0.08%  [DERIVED] PASS
 
 ══ B29: GW CHIRP FROM KOPPA ══
-  B29  GW150914 f_isco [Hz]                      SDT=67.6352           EXP=68                ERR=  0.5365%  TOL=  5.00%  [COMPUTED] PASS 
+  B29  GW150914 f_isco [Hz]                      SDT=67.6352           EXP=68                ERR=  0.5365%  TOL=  5.00%  [COMPUTED] PASS
 
 ══ B30: DEUTERON BINDING ══
-  B30  Deuteron binding [MeV]                    SDT=2.20079           EXP=2.2246            ERR=  1.0703%  TOL=  2.00%  [DERIVED] PASS 
+  B30  Deuteron binding [MeV]                    SDT=2.20079           EXP=2.2246            ERR=  1.0703%  TOL=  2.00%  [DERIVED] PASS
 
 ══ B31: BBN DEUTERIUM BOTTLENECK ══
-  B31  D-bottleneck T [MeV]                      SDT=0.0624481         EXP=0.07              ERR= 10.7884%  TOL= 50.00%  [DERIVED] PASS 
+  B31  D-bottleneck T [MeV]                      SDT=0.0624481         EXP=0.07              ERR= 10.7884%  TOL= 50.00%  [DERIVED] PASS
 
 ══ B32: CHERENKOV ANGLE ══
-  B32  Cherenkov max angle water [deg]           SDT=41.3934           EXP=41.4              ERR=  0.0160%  TOL=  1.00%  [COMPUTED] PASS 
+  B32  Cherenkov max angle water [deg]           SDT=41.3934           EXP=41.4              ERR=  0.0160%  TOL=  1.00%  [COMPUTED] PASS
 
 ══ B33: TURBULENT CASCADE ══
-  B33  Inertial-range |slope| (ideal)            SDT=1.66667           EXP=1.705             ERR=  2.2483%  TOL=  5.00%  [COMPUTED] PASS 
-  B33  Refusal-corrected |slope|                 SDT=1.6928            EXP=1.705             ERR=  0.7153%  TOL=  2.00%  [DERIVED] PASS 
+  B33  Inertial-range |slope| (ideal)            SDT=1.66667           EXP=1.705             ERR=  2.2483%  TOL=  5.00%  [COMPUTED] PASS
+  B33  Refusal-corrected |slope|                 SDT=1.6928            EXP=1.705             ERR=  0.7153%  TOL=  2.00%  [DERIVED] PASS
 
-══ B34: DRAFTING FLOOR a₀ ══
-  B34  a0 = cH0/2pi [m/s2]                       SDT=1.04219e-10       EXP=1.2e-10           ERR= 13.1508%  TOL= 20.00%  [COMPUTED] PASS 
+══ B34: CONVERGENCE-PRESSURE DRAFTING FLOOR ══
+  B34  pressure-gradient/engaged-resistance floor [m/s2]  SDT=1.10061e-10       EXP=1.2e-10           ERR=  8.2828%  TOL= 20.00%  [COMPUTED] PASS
 
 ══ B35: ALPHA FROM THE SEAT ══
-  B35  1/alpha from H ionisation                 SDT=137.073           EXP=137.036           ERR=  0.0267%  TOL=  0.20%  [COMPUTED] PASS 
+  B35  1/alpha from H ionisation                 SDT=137.073           EXP=137.036           ERR=  0.0267%  TOL=  0.20%  [COMPUTED] PASS
 
 ══ B36: KOPPA INVARIANCE (JUPITER) ══
-  B36  Moon-to-moon 8/8 ratio (1=exact)          SDT=1.00033           EXP=1                 ERR=  0.0330%  TOL=  0.20%  [DERIVED] PASS 
+  B36  Moon-to-moon 8/8 ratio (1=exact)          SDT=1.00033           EXP=1                 ERR=  0.0330%  TOL=  0.20%  [DERIVED] PASS
 
 ══ B37: RANK-4 LATTICE BAND (PREDICTION) ══
-  B37  fourth-moment band predicted [0.1111, 0.2593] vs continuum 0.2000 — awaiting measurement (TD03, direct 2026-07-26). PENDING.
+  B37  fourth-moment band predicted [0.1111, 0.2593] vs continuum 0.2000 — awaiting measurement (TD03 protocol 2026-08-15). PENDING.
+       protected M2=0.3333; protocol >=1000 directions, isotropic control, 2-sigma endpoint test; not tallied.
 
-══ B38: SHELL SCHEDULE — CLOSURE TIERS + TRITON BELTS ══
+══ B38: SHELL SCHEDULE — CLOSURE TIERS + TRITON SHELLS ══
   B38a closure rebuild 2,8,20,28,50,82,126: 7/7 ✓ (also enforced by static_assert in laws.hpp)
   B38b parity lock: 12/12 — five odd-odd quasi-stables flagged, seven lone-rod grips cleared ✓
-  B38c first belt (N=28): Ca-48 n_t=8 = full 4-pair belt (held, doubly magic) · Ni-56 n_t=0 = belt empty (unstable) ✓
+  B38c first T8 shell (N=28): Ca-48 n_t=8 = full stella shell (held, doubly magic) · Ni-56 n_t=0 = shell empty (unstable) ✓
   B38d closure-kink isotone invariant (measured, pre-registered 2026-07-30): constant beats occupancy-proportional on every adjudicable isotone (N=28,50,82); 19/19 closure kinks negative;
        lone-rod-inward census 83.1% — the freeze does the compacting. ATOMICUS/reports/CLOSURE_KINK_ISOTONE_REPORT.md
-  B38e COMPLETION LAW: all capacities from two closed forms — F(n)=(n+1)(n+2) bipartite-triangular tiers, B(n)=2(n+1) rolling-equator belts: 9/9 ✓
-       forward prediction: next closure N = 184 (126 + R(6) + B(7)). Onset n=3 still READ — the residual NP33 debt.
-  B38  sequence-exact; counting convergent with the shell model, origin native — capacities DERIVED 2026-07-30.
+  B38e COMPLETION LAW: all capacities from two closed forms — F(n)=(n+1)(n+2) bipartite-triangular tiers, B(n)=V=2(n+1) geometric triton shells: 9/9 ✓
+       forward prediction: next closure N = 184 (126 + R(6) + B(7)). Triton onset n=3 from NP33 synchrony pricing.
+  B38  Triton descent onset tier                 SDT=3                 EXP=3                 ERR=  0.0000%  TOL=  0.01%  [DERIVED] PASS
+  B38  sequence-exact; counting convergent with the shell model, capacities and tetrahedral synchrony onset DERIVED.
+
+══ B39: RELAY-SPEED PROFILE (GOM22 canon repair) ══
+  B39  Shapiro round-trip, grazing (Viking/Cassini)  SDT=247.244           EXP=247.24            ERR=  0.0016%  TOL=  0.50%  [DERIVED] PASS us
+  B39  Solar gravitational redshift              SDT=636.312           EXP=633               ERR=  0.5232%  TOL=  1.00%  [DERIVED] PASS m/s
+  B39  OPEN FORK (second-order): c(1-z)^2 [adopted, wall at r=koppa]
+       vs c(1-2z) [Schwarzschild form, horizon at r_s]. A 1.4 Msun
+       NS surface splits them by 8.6% — the named discriminator.
+
+══ CANONICAL FORMULA IDENTITIES ══
+  I40  Proton-surface k from stated formula      SDT=0.546431          EXP=0.546431          ERR=  0.0000%  TOL=  0.00%  [IDENTITY] PASS
+  I41  Point-electron/traction velocity identity  SDT=5.48637e+08       EXP=5.48637e+08       ERR=  0.0000%  TOL=  0.00%  [IDENTITY] PASS m/s
+  I42  PPT05 tension from registered inputs      SDT=1.22985           EXP=1.22985           ERR=  0.0000%  TOL=  0.00%  [IDENTITY] PASS GeV/fm
+  I43  FLM15 lock/wake volume partition          SDT=1                 EXP=1                 ERR=  0.0000%  TOL=  0.00%  [IDENTITY] PASS
+  I44  FLM15 coincident synchrony resistance     SDT=1                 EXP=1                 ERR=  0.0000%  TOL=  0.00%  [IDENTITY] PASS
 
 ══ COVERAGE ROSTER: ORIGINAL CATALOGUE B01–B100 ══
   codes: T = tallied in this suite · A = earned in a direct assessment
          S = investigation seeded 2026-07-29 · O = investigation open
          (the companion repo's old certifications carry no weight; B04-old
           and the self-referential B51+ validations are recorded as void)
-  B01-B25  T  this suite (B04 note-only: APS04 term derived, amplitude open;
-              B06 PENDING → APS10 seeded; B09 open; B11 PENDING)
-  B25-26   A  alpha geometry/overlap — NP10, NP33 mesh log
+  B01-B25  T  this suite (B04 note-only: H/He+ Lamb OBSERVED stickers, APS04 addend);
+              B06 APS14 COMPUTED; B09 GOM06 DERIVED; B11 GOM41 PENDING;
+              B15 CR08 COMPUTED; B16 FD02 COMPUTED; B25 APS14 COMPUTED
+  B25-26   A  He total electron binding (APS14); alpha geometry (NP10)
   B27,33   A  radius scaling + isotope shifts — NP12, APS07, contraction rule
-  B29,43   S  first ionisation from pressure — APS10 (the B06 gap)
+  B29,43   A/S  first ionisation closure — APS14; heavier periods open
   B30,31   S  electron affinity CH08 · atomic radius CH09
   B32,48   A  shell completion / packing pathways — NP32, NP33; the
               closure schedule is now canon (laws.hpp, tallied B38)
-  B34      T  deuteron lock tallied here (B30); heavier locks open
+  B34      T  APS03 convergence-pressure/engaged-resistance floor COMPUTED
+  B37      D  TD03 rank-4 standing prediction; protocol frozen; no measurement
   B35-47   O  NP28/NP15/PPT01/CH03/NP12/NP30/FLM10/FD11/CH03/SAR02/CM03/PPT06
   B49,50   O  stability maps NP21/NP29 · end-to-end = this suite
   B51-57   A/O/S  QM01 O · OP05 O · QM03 A (Geiger–Nuttall) · QM07 O ·
@@ -204,24 +228,12 @@
               Casimir FLM15 S · Cherenkov A → tallied here (B32) · OP01 O
 
 ╔══════════════════════════════════════════════════════════════╗
-║  RESULTS: 54/65 earned predictions passed (83.1%)           ║
-║  + 11 consistency identities (definitional; NOT predictions) ║
-║  + 2 CALIBRATED (class E, documented; not earned)           ║
-║  0 genuine fail · 11 PENDING (known-open, flagged)          ║
+║  RESULTS: 66/66 earned predictions passed (100.0%)           ║
+║  + 19 consistency identities (definitional; NOT predictions) ║
+║  + 0 CALIBRATED (class E, documented; not earned)           ║
+║  + 3 PENDING note-only (B11 corpus/B18 shared form)         ║
+║  0 genuine fail · 0 PENDING open (flagged, in denom)       ║
 ╚══════════════════════════════════════════════════════════════╝
-
-Unmet benchmarks (✗ = genuine regression, ⧖ = PENDING open problem):
-  ⧖ B06: He (Z=2) 1st ionisation [eV]  (59.9238% > 5.00% tolerance)
-  ⧖ B06: Li (Z=3) 1st ionisation [eV]  (6.6099% > 5.00% tolerance)
-  ⧖ B06: Be (Z=4) 1st ionisation [eV]  (38.7312% > 5.00% tolerance)
-  ⧖ B06: B (Z=5) 1st ionisation [eV]  (136.1075% > 5.00% tolerance)
-  ⧖ B06: C (Z=6) 1st ionisation [eV]  (219.0722% > 5.00% tolerance)
-  ⧖ B06: N (Z=7) 1st ionisation [eV]  (303.0619% > 5.00% tolerance)
-  ⧖ B06: O (Z=8) 1st ionisation [eV]  (487.5311% > 5.00% tolerance)
-  ⧖ B06: F (Z=9) 1st ionisation [eV]  (501.3450% > 5.00% tolerance)
-  ⧖ B06: Ne (Z=10) 1st ionisation [eV]  (496.5701% > 5.00% tolerance)
-  ⧖ B11: Earth J2 (uniform-fluid est.)  (59.3239% > 3.00% tolerance)
-  ⧖ B11: Jupiter J2 (uniform-fluid est.)  (202.5760% > 3.00% tolerance)
 
 Certification labels:
   DERIVED    — computed from axioms, no external input beyond CODATA

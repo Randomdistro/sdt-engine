@@ -1,9 +1,9 @@
 # APS03: The Universal Drafting Crossover — A Forensic Cross-Scale Investigation
 
-> **Author:** J. C. Harvey, Melbourne. **Status:** SPEC (upgrade 2026-06-27).
+> **Author:** James Christopher Tyndall, Melbourne. **Status:** EXECUTED; B34 COMPUTED extension (2026-08-15).
 > **Inherits:** `PERFECT_PROMPT_TEMPLATE.md` §⓪–§⑩ · `PROMPT_EXECUTION_PROTOCOL.md` · §0 anti-creep (R0–R5).
 > **Engine:** `#include <sdt/laws.hpp>` only — no local constant namespaces.
-> **Run:** Pre-commit thresholds in `RUN_LOG.md` before coding; adjust per pivot table (§⑩).
+> **Run:** Pre-register thresholds in `RUN_LOG.md` before coding; adjust per pivot table (§⑩).
 ---
 
 ## ⓪ The Golden Rule — five questions (answer before Phase 0)
@@ -12,7 +12,7 @@
 2. **Why does it matter?** — Stack position / downstream blockers (see `INVESTIGATION_STACK.md`).
 3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
 4. **What would prove us wrong?** — §⑧ falsification tests with numeric triggers.
-5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN).
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / FALSIFIED / OPEN).
 
 ---
 
@@ -157,7 +157,7 @@ Compute `ξ` (§5), assign S/T/F by §3.1 bands. An example whose `ξ` lands in 
 ### 4.3 Selection to exactly 40 (deterministic, no cherry-picking)
 Within each over-subscribed cell, rank candidates by **measurement precision** `σ_B/B` ascending (most precise first); take the top 40. Ties broken by ascending primary-source catalogue ID (lexicographic). This rule is fixed *before* any `B` is examined and is content-blind to the residual against `Φ` (anti-p-hacking).
 
-### 4.4 Span requirement (prevents degenerate strata)
+### 4.4 Span requirement (prevents under-resolved strata)
 Within each Type-T cell, the 40 examples must span **at least 1.5 decades in ξ** and include ≥10 in `0.3 ≤ ξ ≤ 3`. Within S and F cells, report the ξ range; if an S or F cell cannot reach `ξ≥10` / `ξ≤0.1`, it is `SHORT` and the asymptote test for that cell is `INCONCLUSIVE`, not failed.
 
 ---
@@ -305,7 +305,7 @@ For **every** input file, at read time, the engine records and prints: absolute 
 
 ## ⑩ Adaptive Execution Protocol
 
-> *It is a bad plan that cannot be altered.* Failures invoke **PIVOT / KILL / OPEN** — never RETRO-PASS or PLUG.
+> *It is a bad plan that cannot be altered.* Failures invoke **PIVOT / FALSIFY / OPEN** — never RETRO-PASS or PLUG.
 > See `PROMPT_EXECUTION_PROTOCOL.md`.
 
 ### Pre-Run Commitment Block (copy to `RUN_LOG.md` before coding)
@@ -313,7 +313,7 @@ For **every** input file, at read time, the engine records and prints: absolute 
 ```markdown
 ## Pre-Run Commitments — APS03
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: [0 or list each param — max per §⑤]
 - Engine namespaces: atomic::, measured::R_inf, electropause / APS01
 - Phase thresholds (committed before run): 23.8 %, 1.6 %, 1 %
@@ -325,9 +325,9 @@ For **every** input file, at read time, the engine records and prints: absolute 
 | Trigger | PIVOT (first) | If pivot fails | Forbidden |
 |---------|---------------|----------------|-----------|
 | Phase 0 sanity check fails | Fix units/engine refs; verify `laws.hpp` symbols | STOP — report blocker | Fit to target |
-| Native mechanism off > committed % | Alternative route in §④; document ADJ-### | **OPEN** or **KILL** hypothesis | RETRO-PASS |
+| Native mechanism off > committed % | Alternative route in §④; document ADJ-### | **OPEN** or **FALSIFY** hypothesis | RETRO-PASS |
 | `z ≥ 1` in closure formula | Weak-field break (CR10); piecewise or exponential | **OPEN** that regime | Ignore break |
-| Rivals match but SDT doesn't beat | Label **DEGENERATE** honestly | — | Claim Class A |
+| Rivals match but SDT doesn't beat | Label **SHARED-INPUT / not independent** | — | Claim Class A |
 | Upstream dependency missing (FLM10, etc.) | **DEFER** phase; cite dependency ID | — | Fake PASS |
 
 ### Allowed adjustments
@@ -375,3 +375,32 @@ Frozen gates:
    by at least a factor of two.
 6. Failure leaves the derived candidate scale, whole-range residuals and the
    pressure-gradient or engaged-density premise that must be reopened.
+
+## B34 direct execution — 2026-08-15
+
+The frozen pressure-gradient route was run in
+`aps03_drafting_crossover.cpp`:
+
+```text
+<cos^2(theta)>                   = 1/3
+V_eng/V                         = 6/7
+rho_eng = [(P_conv/3)V_eng]/Vc² = 2P_conv/(7c²)
+|grad P|                        = P_conv/(3R_CMB)
+a_floor                         = 7c²/(6R_CMB)
+```
+
+The target-free prediction is `1.10060639e-10 m/s²`. The independent
+solid-angle/finite-volume route gives the same value with relative residual
+`1.586e-11`. Against the comparison value `1.20e-10 m/s²`, the residual is
+`8.28%`.
+
+The unchanged full-SPARC pilot gives `24.0%` RMS and BTFR slope `3.58`; the
+C+A+B binned crossover residual remains `8.8%`. The full-normal-load
+wrong-solid-angle control gives `24.1%`, and deterministic exposure scrambling
+gives `156.9%`. Both exceed twice the live residual. B34 therefore advances to
+`COMPUTED`.
+
+Scope: the forward function contains no expansion-rate value or measured
+low-acceleration target. `R_CMB` remains an observed Clearing boundary with
+shared cosmological provenance, so this is not certified as an independent
+cosmological derivation.

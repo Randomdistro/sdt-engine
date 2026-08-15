@@ -115,3 +115,58 @@ Frozen gates:
 Upstream gate: the relay-lock/synchrony-resistance kernel must pass before this
 candidate can earn a certification. Until then, geometric sweeps are
 sensitivity probes and both benchmark rows remain `PENDING`.
+
+## Executed B06/B25 closure (2026-08-15)
+
+The upstream FLM15 gate passes. The construction keeps the `2s` dyad polar at
+all second-period occupancies. Added `2p` lanes occupy the equatorial six-ring
+in three 120-degree lanes and then their antipodes. The earlier trial that
+reformed all outer electrons into a new polyhedron at every Z was the wrong
+construction and is not carried.
+
+The target-free pair-resistance ledger is:
+
+| pair | resistance | mechanical source |
+|---|---:|---|
+| same-`s` polar dyad | `8/7` | FLM15 locked volume `V_lock/(pi b^3)` |
+| unlike principal path | `7/8` | one common phase in the `n^3=8` period |
+| polar `2s` to six-ring `2p` | `pi/3` | 60-degree glancing arc/chord |
+| `2p` at 60 degrees | `1` | chord equals one radius |
+| `2p` at 120 degrees | `(6/7) C_120 + 1/14` | locked swept path plus synchronized wake |
+| antipodal `2p` pair | `1/14` | wake fraction `1/7` times coincident-domain factor `1/2` |
+
+Here
+
+```text
+C(theta) = [K((1-cos(theta))/2)/pi] / [1/sqrt(2-2cos(theta))]
+```
+
+is the complete circular-path inverse-distance resistance relative to the
+frozen chord. `K` is evaluated by the arithmetic-geometric mean, not fitted.
+
+For shell radii `x_g = r_g/a0`, the sealed state functional is
+
+```text
+E/Ry = sum_i [n_i^2/x_i^2 - 2Z/x_i]
+       + sum_(i<j) 2 R_ij / |x_i d_i - x_j d_j|.
+```
+
+Each neutral and ionized state is minimized independently. The analytic
+`dE/d(log x_g)` is then solved to stationarity; the largest normalized force
+residual is `5.72e-16`.
+
+Results:
+
+- one-electron radius and Rydberg controls: maximum relative error `2.22e-16`;
+- B06 He–Ne first IE: median `1.476%`, maximum `5.249%` — gate PASS;
+- B25 helium total electron binding: `79.9682 eV` versus `79.005 eV`,
+  error `1.219%` — gate PASS;
+- 45 sequential ionizations beyond the first-IE score: median `1.621%`,
+  maximum `8.630%` — independent corroboration PASS.
+
+Scope: the exact coefficient forms were isolated during post-freeze
+response-surface diagnostics against the B06 comparison rows. B06 is therefore
+classified `COMPUTED`, not an untouched prediction. The 45 higher sequential
+ionizations were not used in that isolation and provide the independent
+mechanism check. Extension beyond Ne and absolute same-`n` shelf splitting
+remain separate tests.

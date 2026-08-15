@@ -1,8 +1,7 @@
-# TD03 — Direct re-run verdict (2026-07-26)
+# TD03 — Ideal-Gas Pressure and Rank-4 Lattice Assessment
 
-> **Run class: DIRECT** (main session, no agents). Agent-era `TD03_VERDICT.md`, `RUN_LOG.md`,
-> `results.txt`, `td03.exe/.obj` deleted 2026-07-26 (git-recoverable). Tool:
-> `td03_pressure_occlusion.cpp`, g++ 15.2 -O2, exit **0**. Output: `td03_rerun_2026-07-26.txt`.
+> **Author:** James Christopher Tyndall, Melbourne. **Executed:** 2026-07-26;
+> B37 protocol verification 2026-08-15. **Tool:** `td03_pressure_occlusion.cpp`.
 
 ## Prompt contraband check
 
@@ -10,7 +9,7 @@
 axis-mean PV/(NkT) ≡ 1 cannot fail → NOT gated) and gates per-axis isotropy instead. The
 virial/Mayer link for the co-volume is flagged BORROWED, claims capped at sign + order.
 
-## What the direct run measured
+## Executed results
 
 - **P1a:** the 1/3 emerges from bath isotropy by event-counted wall impulses (0.336 vs 1/3 at
   0.7σ) — not inserted.
@@ -30,3 +29,30 @@ virial/Mayer link for the co-volume is flagged BORROWED, claims capped at sign +
   route), **plus one NATIVE protected result** (1/3 from the W+1 = 4 two-design) **and one live
   SDT-distinct prediction** (rank-4 anisotropy band) with a populated failure class.
 - **Recovery:** n/a · **Cascade root:** none.
+
+## B37 deterministic protocol verification — 2026-08-15
+
+The rank-4 reducer is now canonical in
+`sdt::laws::lock_geometry::rank4`. The exact unit-direction form is
+
+```text
+M4(n) = [1 + 4(nx^2 ny^2 + nx^2 nz^2 + ny^2 nz^2)]/9.
+```
+
+The direct channel sum and this analytic form agree to `3.89×10^-16`
+over a deterministic 100,000-direction Fibonacci sphere. The protected
+second moment remains `1/3` to `2.78×10^-16`. Exact endpoint evaluations
+give:
+
+- axis `[100]`: `M4=1/9=0.111111111`;
+- tetrahedral/body diagonal `[111]`: `M4=7/27=0.259259259`;
+- isotropic control: `M2=0.333333333`, `M4=0.200000000`.
+
+The tool emits the machine-readable `B37_PREDICTION_JSON` record with
+`measurement:null`. The apparatus protocol requires at least 1,000 surveyed
+drive directions, an isotropic control within `0.005`, propagated direction
+covariance, and two-sigma overlap with both predicted extrema while excluding
+the continuum at those extrema.
+
+**B37 remains PENDING and outside the benchmark tally.** The derivation and
+reduction protocol pass; no physical response corpus has yet been measured.

@@ -72,7 +72,7 @@ int main() {
     std::printf("• Same Δϟ_rad sources the G3 breathing transient (AC) and this memory\n");
     std::printf("  (DC): ONE quantity, two filters. GR predicts memory but NOT this\n");
     std::printf("  identity → distinctive SDT falsifier (LISA / PTA / 5-detector).\n");
-    std::printf("• HONEST: η is the O(1) sky/inclination factor SHARED with GR's\n");
+    std::printf("• SCOPE: η is the O(1) sky/inclination factor SHARED with GR's\n");
     std::printf("  quadrupole geometry (CONVERGENCE), not yet a native SDT derivation.\n");
     std::printf("===========================================================\n");
     return 0;

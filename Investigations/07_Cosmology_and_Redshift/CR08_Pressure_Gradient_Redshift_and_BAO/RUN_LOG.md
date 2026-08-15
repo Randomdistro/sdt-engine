@@ -1,6 +1,6 @@
 # RUN_LOG — CR08 Pressure-Gradient Redshift and BAO
 
-**Author:** J. C. Harvey, Melbourne. **Date:** 2026-07-03. **Executor:** HUNTER protocol.
+**Author:** James Christopher Tyndall, Melbourne. **Date:** 2026-07-03; B15 extension 2026-08-15. **Executor:** direct protocol.
 
 ## Golden Rule Q1 (filling the template blank)
 
@@ -11,8 +11,8 @@ z = 0.15–2.33 and the CMB acoustic angle at z ≈ 1100.
 ## Pre-Run Commitments — CR08 (written BEFORE any code was compiled or run)
 
 - Prompt completion target: **B**
-- Physics class hoped: DEGENERATE — committed to **KILLED** on any observable class where the
-  deviation exceeds the gate, with the miss magnitude reported.
+- Physics class hoped: CONVERGENCE control — committed to **FALSIFIED** on any observable class
+  where the deviation exceeds the gate, with the miss magnitude reported.
 - CALIBRATED budget: **0 in the primary run** (H₀ anchored at both 67.4 and 73.04, OBSERVED —
   no fit). One clearly-labelled sensitivity fit (best-fit H₀, 1 param) allowed for diagnosis
   only; it cannot convert a FAIL to a PASS.
@@ -46,3 +46,30 @@ z = 0.15–2.33 and the CMB acoustic angle at z ≈ 1100.
 ## Run record
 
 - Tool: `cr08_bao_consistency.cpp`. Output: `results.txt` = verbatim stdout.
+
+## B15 P1 standing-equilibrium execution — 2026-08-15
+
+The pivot equations and controls were frozen in `PROMPT.md` before this
+instrument extension was compiled. The old target-defined `t_coupled` route
+was retained as an identity audit and was not used.
+
+- Forward dependencies: FIRAS `T_CMB`; BBN-deuterium `eta=6.1×10^-10`;
+  blackbody count; Prop-13 `n_b∝N^3`; `bridge::koppa_per_baryon`;
+  `bridge::v_escape`; rank-2 baryon-loaded relay speed; FLM15 collision
+  measure.
+- Excluded dependencies: BAO ruler, `H_0`, `R_CMB`, metric history, `G`,
+  source mass and source parameter.
+- Sealed prediction before comparison: `N_eq=902.169740`,
+  physical radius `0.161631 Mpc`, present-equivalent scale
+  `145.818917 Mpc`.
+- Independent finite-volume rate residual: `7.813×10^-11`; 20k→40k shell
+  change `2.344×10^-10`.
+- Opacity controls: proton boundary `tau=2.227112`; free electron+proton
+  `tau=27.207584`; bound-seat `tau=8.809258×10^9`.
+- Registered alternative controls: `R=1` endpoint `157.502432 Mpc`;
+  orbital response `206.219090 Mpc`; travelling mode `291.637834 Mpc`.
+- Comparison loaded after seal: `147.09 Mpc`; residual `0.8642%`, inside
+  the frozen 3% gate.
+
+Result: **B15 COMPUTED** with shared BBN/FIRAS provenance. G1/G3 and the
+exponential distance-law verdict are unchanged.

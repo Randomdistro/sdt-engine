@@ -1,14 +1,28 @@
 # SDT Engine — Kinematic Observatory Pipeline
 ## Parameter-Free Orbital & Redshift Solvers (No G, No M)
 
-> **⟐ Dated correction & currency note (2026-07-26).** Latest first; the 2026-07-05 note below still
+> **⟐ Current benchmark note (2026-08-15).** The live
+> `Benchmarks/B01_B25/benchmarks_suite.cpp` rebuild reports **66/66 earned
+> predictions passed**, plus **19 IDENTITY** rows, **0 CALIBRATED** rows and
+> **3 PENDING note-only** rows. B06/B25 use the APS14 polar-dyad/six-ring
+> resistance solver; B09 uses the GOM06 timing-derived resistance quadrupole;
+> B15 predicts **145.8189 Mpc** from the CR08 release-standing equilibrium;
+> B16 uses full Argon transport curves; and B34 uses the APS03
+> pressure-gradient/engaged-resistance floor. B11 remains PENDING because its
+> six-planet interior-profile corpus fails; B18's separate He-4 contact row
+> remains a shared-form correspondence. B37 is a standing rank-4
+> prediction with a frozen measurement protocol and no datum, so it is not
+> tallied. The target-defined `cosmology.hpp::t_coupled` remains excluded from
+> CR03 Route B; B15 no longer consumes it.
+>
+> **⟐ Dated correction & currency note (2026-07-26).** The 2026-07-05 note below still
 > holds except where updated here.
 > 1. **Notation — koppa → Om.** "Koppa" is the *dimensionless gear* **k = c/v** (kept; the `zk²=1`
 >    surface identity is unchanged). The *length* formerly written ϟ (= v²R/c² = R/k², e.g. 1476.6 m for
 >    the Sun) is renamed **Om**, symbol **Ѻ** (Cyrillic round omega, U+047A), lit "Om/om". A repo-wide
 >    ϟ→Ѻ / "koppa"→"Om" sweep is **propose-and-wait** (not yet run — `k` is NOT swept; it *is* the gear).
 >    The stray term "k-rung" (~12 files) is drift for `k`/k-value and should be retired.
-> 2. **CR09 fully rewritten (capstone).** The 2026-07-05 note's "CR09 killed the tension dissolution"
+> 2. **CR09 fully rewritten (capstone).** The 2026-07-05 note's "CR09 falsified the tension dissolution"
 >    refers to the OLD isotropic radial-κ CR09. The new CR09
 >    (`Investigations/07_…/CR09_Hubble_Tension_and_Dark_Energy/PROMPT.md`) reframes on the
 >    **two-component redshift** — emission depth `Ѻ/r` + propagation octaves (`1+z = 2^Δn`) — with **no
@@ -18,13 +32,13 @@
 >    computed on ΛCDM-cooked data. That uses the old model's rules to test the claim the old model's
 >    rules are flawed (circular). Test the **raw observables** (C_ℓ peak *angles*, BAO Δθ(z)/Δz(z), raw
 >    `mB`) through SDT's own rules; ΛCDM is a second interpreter of the same photons, not the yardstick.
-> 4. **Honest cosmology standing.** On the raw-er `mB` (SDT's own standardization, not `m_b_corr`), SDT
+> 4. **Cosmology standing.** On the raw-er `mB` (SDT's own standardization, not `m_b_corr`), SDT
 >    coasting still **loses** to ΛCDM on the SN Hubble diagram (Δχ² ≈ 90–226, ΛCDM-favoured — raw or
 >    cooked). The SNe are conceded. SDT's live shots are the **tension SIGN** (local > CMB from the
 >    gradient, no fit) and the **raw acoustic/BAO angles** (physical shell vs metric sound horizon). "No
 >    dark energy" is a live hypothesis with the SNe behind, **not a claim**.
 > 5. **SAR section completed direct (2026-07-26).** SAR01 (Le Sage) completed — η leakage ceiling
->    4.43×10⁻¹⁸ re-derived native, occlusion terminus-free (kill overturned). SAR05 re-issued DIRECT
+>    4.43×10⁻¹⁸ re-derived native, occlusion terminus-free. SAR05 re-issued DIRECT
 >    (agent-provenance removed; z≈99→273 K + 2/5 seeding verified). SAR02/03/04/06 figure-verified. Root
 >    build litter (106 `.obj/.exe`) cleaned; `.gitignore` extended.
 >
@@ -33,11 +47,11 @@
 > 1. **Paths:** the `CQ##` scheme is retired — `Investigations/CQ18_Redshift_Decomposition/` is now
 >    `Investigations/07_Cosmology_and_Redshift/CR01_Redshift_Decomposition/` (tools renamed
 >    `cq18* → cr01*`). The living master index is `Investigations/INVESTIGATION_STACK.md`.
-> 2. **The Hubble-tension claim below is superseded:** CR09 (executed 2026-07-03) **KILLED** the
+> 2. **The Hubble-tension claim below is superseded:** CR09 (executed 2026-07-03) **FALSIFIED** the
 >    isotropic radial κ-gradient dissolution (0/122 transition depths survive the four-gate pincer);
 >    the anisotropic line-of-sight and emission-half routes remain **OPEN**. The kinematic
 >    decomposition machinery (CR01) stands; the "tension dissolves" headline does not.
-> 3. **Benchmarks (canon repaired 2026-07-03):** honest headline **46/57 earned predictions passed
+> 3. **Benchmarks (canon repaired 2026-07-03):** benchmark headline **46/57 earned predictions passed
 >    (80.7%) + 11 IDENTITY (shown, never tallied) + 2 CALIBRATED (documented) · 0 genuine fail ·
 >    11 PENDING** (`Benchmarks/B01_B25/benchmarks_b01_b25.cpp`; verified by live rebuild 2026-07-04).
 > 4. **State of the framework (July 2026, one paragraph).** The 2026-07-02 HUNTER scour found four
@@ -50,24 +64,24 @@
 >    mass/action seat; eight inputs → four + the thermal seat; the seat's VALUE stays OPEN); **GOM14**
 >    (below) earned the mass-free koppa ontology at scale; and a ~30-investigation strike-force wave
 >    (quantum foundations, condensed matter, plasma, optics, chemistry) executed 2026-07-04/05 with
->    zero fabrications and every FAIL pre-committed. Essentially every open number now queues behind
+>    zero fabrications and every FAIL pre-registered. Essentially every open number now queues behind
 >    one instrument: the rotating-lattice solver (ROOT-SIM / **FLM14**).
 > 5. **FLM14 program status (runs 1–4).** Run 1: gearing frustration 0.347 — rotation must be carried
 >    by defects; particles as structural necessity (NATIVE). Runs 2–3: the rule-form ladder died into
 >    the two-channel split; the constraint backbone percolates (85.5%); run 3's Born-adjacent
->    exponents (+2.375/+2.325) were honestly UNCLAIMED (one β short of the pre-committed licence).
+>    exponents (+2.375/+2.325) remained UNCLAIMED (one β short of the pre-registered licence).
 >    Run 4 (the two-channel tour, completed 2026-07-05): **p_occ = +2.040 at β = 0.20** (split-half
 >    consistent) but **no stable regime by the committed rule** (the β = 0.40 upturn breaks the band;
 >    seed-2 unreached) — Born-adjacent, moved toward 2 by the two-channel architecture, **UNCLAIMED**.
 >    Nothing is graded until the licence is earned.
 >
-> The multi-planet self-calibration idea below has since been executed at scale and honestly earned:
+> The multi-planet self-calibration idea below has since been executed at scale and earned:
 > see `Investigations/06_…/GOM14_Koppa_Density_Multiplanet_Consistency` (693 systems, median
 > intra-system deviation 5.9% vs 50.7% shuffled; solar anchor ϟ☉ = 1476.6 m).
 >
 > **Where to read (current to 2026-07-05):**
 > - `Papers/SDT_AND_THE_ENGINE_COMPLETE_GUIDE.md` — the verified long-form guide; **PART 0.5** is the dated
->   state-of-framework snapshot (honest-numbers table: Part 16.2; the owed/cascade ledger: Part 18.5).
+>   state-of-framework snapshot (quantitative table: Part 16.2; the owed/cascade ledger: Part 18.5).
 > - `Papers/THE_CAUSAL_CHAIN_OF_SDT.md` — what rests on what; the July links are its new §7½.
 > - `Investigations/INVESTIGATION_STACK.md` — living master index and cascade ledger (§3b roots).
 > - `Investigations/HUNTER_PROTOCOL.md` — the audit law; **§G** audits the auditor.

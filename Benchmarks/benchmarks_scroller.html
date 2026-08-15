@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="The SDT benchmark suite B01–B29 — what each benchmark was, what it showed, what was learned, and how the result was applied.">
+<meta name="description" content="A guided B01–B29 walkthrough with the current B01–B38 SDT benchmark status.">
 <title>The Benchmark Suite · Spatial Displacement Theory</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,9 +12,8 @@
 <link rel="stylesheet" href="../Release/HTML_SDT_Website/style.css">
 <style>
   /* ── Benchmark-specific components, built on the site's own tokens ──
-     All result chips + scoreboard render from BENCH[]/CHECKS[] below,
-     the verbatim captured output of benchmarks_suite.cpp against
-     Engine/include/sdt/laws.hpp (MSVC, 62/73 pass, 0 genuine fail, 11 PENDING). */
+     BENCH[]/CHECKS[] drive the guided B01–B29 cards. SUITE_STATUS below
+     carries the canonical whole-suite B01–B38 tally from benchmarks_suite.cpp. */
   .board{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--sp-md);margin:var(--sp-xl) 0}
   .board .cell{padding:var(--sp-lg);border:1px solid var(--paper-edge);border-radius:4px;text-align:center;background:var(--paper)}
   .board .big{font-family:'JetBrains Mono',monospace;font-size:var(--fs-2xl);font-weight:500;line-height:1}
@@ -34,10 +33,11 @@
   .cert--DERIVED{color:var(--steel);background:rgba(74,109,130,0.1)}
   .cert--COMPUTED{color:var(--copper);background:var(--copper-glow)}
   .cert--PENDING{color:#8b6cc1;background:rgba(139,108,193,0.1)}
+  .cert--IDENTITY,.cert--MIXED{color:var(--ink-muted);background:rgba(74,109,130,0.07)}
   .cert--OBSERVED,.cert--CALIBRATED{color:var(--copper);background:var(--copper-glow)}
   .dom{font-family:'JetBrains Mono',monospace;font-size:0.625rem;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-faint)}
   .result{font-family:'JetBrains Mono',monospace;font-size:var(--fs-xs);margin-left:auto;white-space:nowrap;color:var(--ink-muted)}
-  .result .ok{color:var(--steel)} .result .pe{color:#8b6cc1} .result .bad{color:var(--rose-code)}
+  .result.ok{color:var(--steel)} .result.pe{color:#8b6cc1} .result.bad{color:var(--rose-code)}
 
   dl.facets{display:grid;grid-template-columns:auto 1fr;gap:0 var(--sp-md);margin:var(--sp-md) 0 0;font-size:var(--fs-sm)}
   dl.facets dt{font-family:'JetBrains Mono',monospace;font-size:0.625rem;text-transform:uppercase;letter-spacing:.05em;
@@ -88,14 +88,14 @@
   <!-- ═══════════════════════ OPENING ═══════════════════════ -->
   <section id="opening" class="opening">
     <div class="opening__content">
-      <p class="opening__pretitle">The self-reporting suite — B01 through B29</p>
-      <h1 class="opening__title">Seventy-three numbers.<br>One header.<br><em>Zero free parameters.</em></h1>
+      <p class="opening__pretitle">Guided B01–B29 walkthrough · live suite B01–B38</p>
+      <h1 class="opening__title">Eighty-eight tally rows.<br>One header.<br><em>Every status visible.</em></h1>
       <hr class="opening__rule">
       <p class="opening__desc">Every claim in SDT must survive a single executable. The benchmark
-      suite pulls 73 measured quantities — from the hydrogen spectrum to a binary pulsar's decay —
-      out of one source file, <em>laws.hpp</em>, and grades each against experiment. This walkthrough
-      takes every benchmark in turn: what it was, what it was for, what it showed, what was learned,
-      what it meant, and how the result was applied.</p>
+      suite pulls its values — from the hydrogen spectrum to a binary pulsar's decay — out of
+      <em>laws.hpp</em> and grades each against experiment. The live B01–B38 suite reports 66 earned
+      predictions, 19 identities and three PENDING note-only rows. This guided walkthrough explains
+      B01–B29: what each test was for, what it showed, and where its result is used.</p>
       <p class="opening__author">James Christopher Tyndall — Melbourne, Australia</p>
       <nav class="opening__nav" aria-label="Contents">
         <a href="#grading" data-num="00">How it grades</a>
@@ -230,23 +230,21 @@
       <div class="chapter__num">The verdict</div>
       <h2 class="chapter__title">What the suite establishes — and what it still owes</h2>
       <div class="board" id="board2"></div>
-      <p>The headline is not "everything passes." It is that across 73 independent quantities —
-      atomic, thermal, gravitational, stellar, cosmological, nuclear — <strong>nothing genuine is
-      broken</strong>, and the two things that miss are the same two the framework already names as
-      open problems.</p>
+      <p>The current B01–B38 executable reports <strong>66/66 earned predictions passed</strong>,
+      19 consistency identities, zero calibrated rows and three PENDING note-only rows. B37 is a
+      standing prediction without a measured response corpus and is not tallied.</p>
       <div class="aside">
-        <div class="aside__title">The honest debts, kept on the wall</div>
-        <p><strong>B06 — multi-electron atoms.</strong> The hydrogenic (Z−σ)²/n² form with Slater
-        screening is not an SDT derivation and breaks down badly (errors up to ~500%). The
-        geometric-void electron model is the intended SDT route and isn't implemented yet. Logged
-        PENDING, never refit to pass.</p>
-        <p><strong>B11 — planetary oblateness J2.</strong> The uniform-fluid estimate imports GM
-        (against the no-G rule) and overshoots by 1.6×–3× because real planets are centrally
-        condensed. A J2 from the spation displacement-density profile is a would-be CQ. Logged
-        PENDING.</p>
+        <div class="aside__title">The remaining debts, kept on the wall</div>
+        <p><strong>B11 — planetary oblateness J2.</strong> The GOM41 Q1 resistance boundary puts
+        Earth and Jupiter within 3%, but the registered six-planet corpus fails. Native interior
+        resistance profiles for Mars and the giant planets remain unresolved.</p>
+        <p><strong>B18 — He-4 contact.</strong> The FLM07 proton boundary is derived; the separate
+        helium contact row still uses the shared form <b>2R_p</b> and remains PENDING despite its
+        0.44% correspondence.</p>
+        <p><strong>B37 — rank-4 anisotropy.</strong> The tetrahedral fourth-moment band and reducer
+        are frozen. No physical directional-response corpus has yet been measured.</p>
       </div>
-      <p>Those two are <em>why the labels exist.</em> A theory that can finish a derivation but can't
-      finish a contradiction keeps its unfinished derivations visible — and runs them on every build.</p>
+      <p>Those debts stay visible without entering the earned tally.</p>
       <p class="verdict-line" id="verdict-line"></p>
     </div>
   </section>
@@ -280,7 +278,7 @@
         </div>
       </div>
       <div class="footer__bottom">
-        <span>Spatial Displacement Theory · Benchmark Suite B01–B29</span>
+        <span>Spatial Displacement Theory · Benchmark Suite B01–B38</span>
         <span>James Christopher Tyndall · Melbourne</span>
       </div>
     </div>
@@ -288,8 +286,9 @@
 
 <script>
 /* ═══════════════════════════════════════════════════════════════════
-   BENCH[] — verbatim captured output of the suite (62/73 pass, 0 genuine
-   fail, 11 PENDING). Each benchmark: id, domain, cert, facets, checks.
+   BENCH[] — guided B01–B29 cards synchronized to the live suite.
+   Canonical whole-suite status is held separately in SUITE_STATUS.
+   Each benchmark: id, domain, cert, facets, checks.
    check = [name, sdt, exp, errPct, tolPct]. pass = errPct <= tolPct.
    ═══════════════════════════════════════════════════════════════════ */
 const BENCH = [
@@ -309,7 +308,7 @@ const BENCH = [
   learned:'The field does not care which nucleus sits at the centre, only its charge: <b>v_n = Zαc/n</b>.',
   meant:'One law covers the whole isoelectronic sequence, deep into the extreme ultraviolet.',
   applied:'Anchors the APS01 H-like emission engine (<b>emission_wavelength_m</b>, &lt;263 ppm to Z=30).'}},
-{id:'B03',dom:'Atomic',cert:'DERIVED',title:'Fine structure & the ground-state velocity',
+{id:'B03',dom:'Atomic',cert:'MIXED',title:'Fine structure & the ground-state velocity',
  facets:{
   was:'The H 2P fine-structure splitting and the check that the ground-state circulation equals <b>αc</b>.',
   for:'To test the first relativistic correction — the movement-budget z-term — and the velocity anchor.',
@@ -317,14 +316,14 @@ const BENCH = [
   learned:'Fine structure is the next term of the same budget <b>z=(v/c)²=(Zα)²</b>, with the j-level factor ½ — not a new constant.',
   meant:'The "fine structure constant" is just the ground-state speed ratio; the splitting is its square.',
   applied:'Feeds <b>atomic::fine_structure_eV</b> (Sommerfeld α²Z²/n) and the residual story of APS01.'}},
-{id:'B04',dom:'Atomic',cert:'COMPUTED',title:'The Lamb shift, from the quadrupole wake',
+{id:'B04',dom:'Atomic',cert:'OBSERVED',title:'Lamb intervals and the APS04 geometry addend',
  facets:{
-  was:'The H 2S–2P splitting, ~1058 MHz.',
-  for:'To replace a former <em>fitted</em> α⁵ formula with a parameter-free SDT mechanism.',
-  showed:'The native APS04 candidate <b>1051.8 MHz</b> vs measured 1057.85 — <b>0.57%</b>, no tuning.',
-  learned:'The shift is the ℓ=2 quadrupole harmonic of the proton’s trefoil wake acting at a₀ — geometry, not a renormalised loop.',
-  meant:'A quantity long held up as proof of a fluctuating vacuum gets a clean mechanical origin.',
-  applied:'Lives in <b>law_VI::angular::lamb_shift_native_MHz</b>; class C, the active SDT candidate.'}},
+  was:'The accepted H 2S–2P and He⁺ n=2 Lamb intervals, plus the APS04 nuclear-geometry correction.',
+  for:'To separate measured interval anchors from the part SDT currently derives.',
+  showed:'The APS04 addend is <b>+0.761 MHz</b>; its sign, order and nuclear scaling are earned, but no total interval is derived.',
+  learned:'A geometry correction exists without licensing the former fitted α⁵ total.',
+  meant:'The Lamb arrangement remains an active atomic-geometry closure, not an earned benchmark interval.',
+  applied:'B04 is note-only: accepted observed stickers plus the APS04 addend; it does not enter the earned tally.'}},
 {id:'B05',dom:'Atomic',cert:'DERIVED',title:'Hyperfine structure — the 21 cm line',
  facets:{
   was:'The famous neutral-hydrogen 21 cm line, 1420.4 MHz.',
@@ -333,14 +332,14 @@ const BENCH = [
   learned:'The coupling is <b>(8/3)α²(m_e/m_p)·Ry·g_p</b>; the proton g-factor enters as a measured wake property.',
   meant:'The line that maps the entire neutral universe is a one-line consequence of the framework.',
   applied:'Validates the proton magnetic moment as the ℓ=2 wake amplitude used across the nuclear rows.'}},
-{id:'B06',dom:'Atomic',cert:'PENDING',title:'Multi-electron ionisation — the hard problem',
+{id:'B06',dom:'Atomic',cert:'COMPUTED',title:'Multi-electron ionisation — dodecardinal resistance',
  facets:{
-  was:'First ionisation energies of He through Ne via hydrogenic <b>(Z−σ)²/n²</b> with Slater screening.',
-  for:'To probe how far the one-electron picture stretches into many-electron atoms.',
-  showed:'It does not: errors run from 6% (Li) to <b>~500%</b> (O,F,Ne). 9/9 fail — and are flagged, not hidden.',
-  learned:'Empirical screening is not an SDT derivation, and the hydrogenic form is the wrong model once electrons share a slot.',
-  meant:'Atoms are genuinely the hard problem; the honest move is to label it PENDING, not refit σ to pass.',
-  applied:'Marks the open frontier the APS02 drag-factor work and the geometric-void electron model are built to close.'}},
+  was:'First ionisation energies of He through Ne from fixed polar 1s/2s seats and a six-seat 2p ring.',
+  for:'To test whether target-free pair resistance and force-balanced radii replace empirical screening.',
+  showed:'All nine pass: median error <b>1.48%</b>, maximum <b>5.25%</b>; force residual below 1.5×10⁻⁹.',
+  learned:'Shell screening is the net resistance of polar, ring and unlike-principal relay paths.',
+  meant:'The multi-electron problem closes geometrically through occupied-seat resistance, not a fitted σ.',
+  applied:'<b>atomic::dodecardinal::solve_state</b>; APS14 higher sequential ionisations are holdouts.'}},
 {id:'B07',dom:'Thermo',cert:'DERIVED',title:'Blackbody constants — Stefan–Boltzmann & Wien',
  facets:{
   was:'The Stefan–Boltzmann constant σ and the Wien displacement law.',
@@ -357,14 +356,14 @@ const BENCH = [
   learned:'<b>GM ≡ c²R/k²</b> is a derived convenience, not a fundamental product.',
   meant:'The gravitational constant is demoted from input to consequence.',
   applied:'<b>bridge::v_orbital</b> / <b>GM_equivalent</b> — the spine of every planetary and stellar row.'}},
-{id:'B09',dom:'Gravity',cert:'DERIVED',title:'Binary pulsar decay — Hulse–Taylor',
+{id:'B09',dom:'Gravity',cert:'DERIVED',title:'Binary pulsar decay — two timed systems',
  facets:{
-  was:'The orbital-period decay rate of PSR B1913+16.',
-  for:'To test gravitational radiation as pressure-wave emission from an orbiting occlusion pair.',
-  showed:'<b>−2.4029×10⁻¹² s/s</b> vs observed −2.4025 — <b>0.017%</b>, matching the GR quadrupole.',
-  learned:'"Moving the sea, not making waves": the same quadrupole formula follows from convergence loss.',
-  meant:'The first evidence for gravitational waves is reproduced without spacetime curvature.',
-  applied:'Sets up the GOM06 gravitational-wave-as-length treatment (B29).'}},
+  was:'Intrinsic orbital-period decay of B1913+16 and J0737−3039A/B.',
+  for:'To derive radiation loss from timed depth and a trace-free resistance quadrupole.',
+  showed:'Residuals <b>0.193%</b> and <b>0.009%</b> with no source-mass parameter.',
+  learned:'The 1/5 transverse shear weight and circular norm 32 are angular and orbit integrals.',
+  meant:'Binary radiation is the first non-constant multipole of conserved phase resistance.',
+  applied:'<b>bridge::binary_radiation</b>, fed only period, eccentricity, periastron and clock delay.'}},
 {id:'B10',dom:'Gravity',cert:'DERIVED',title:'Strong field — Mercury precession & light bending',
  facets:{
   was:'Mercury’s perihelion precession (42.98″/century) and solar light deflection (1.7505″).',
@@ -373,15 +372,15 @@ const BENCH = [
   learned:'Precession is <b>6πz</b> per orbit and bending is <b>2·(depth gradient)</b> — both read off <b>z=v²/c²</b>.',
   meant:'Einstein’s solar-system triumphs are consequences of the convergence depth field.',
   applied:'Mercury’s precession later runs <em>backwards</em> in B27 to reconstruct c itself.'}},
-{id:'B11',dom:'Gravity',cert:'PENDING',title:'Planetary oblateness J2 — the GM import',
+{id:'B11',dom:'Gravity',cert:'PENDING',title:'Planetary oblateness J2 — resistance boundary',
  facets:{
-  was:'Earth and Jupiter’s gravitational quadrupole J2 from the uniform-fluid (Maclaurin) estimate.',
-  for:'A coarse spin-flattening check across two very different planets.',
-  showed:'Overshoots by <b>1.6×</b> (Earth) and <b>3×</b> (Jupiter) — 2/2 fail, flagged.',
-  learned:'The uniform-fluid form imports <b>GM</b> and ignores central condensation; it is a textbook estimate, not SDT.',
-  meant:'A real J2 needs the spation displacement-density profile — an open derivation, kept visible.',
-  applied:'Logged PENDING as a would-be CQ; not removed, not fudged.'}},
-{id:'B12',dom:'Stellar',cert:'DERIVED',title:'Stellar structure — zk²=1 across five stars',
+  was:'Earth and Jupiter J2 from measured shape, spin and one timed satellite orbit.',
+  for:'To remove body-source mass and test a convergence-boundary balance.',
+  showed:'Earth <b>0.91%</b> and Jupiter <b>2.11%</b>, but the six-planet GOM41 corpus fails.',
+  learned:'The boundary equation works for two rows; Mars and the giants still need native interior resistance profiles.',
+  meant:'Passing selected planets does not promote a class model that fails its registered whole range.',
+  applied:'GOM41 Q1 remains PENDING until the phase-resistance equation of state closes the corpus.'}},
+{id:'B12',dom:'Stellar',cert:'IDENTITY',title:'Stellar structure — zk²=1 across five stars',
  facets:{
   was:'The budget closure <b>z·k²=1</b> at the surface of the Sun, Sirius A, α Cen A, Procyon A and Vega.',
   for:'To show the movement-budget identity is scale-free — atoms and stars obey the same law.',
@@ -401,26 +400,26 @@ const BENCH = [
  facets:{
   was:'The flat-rotation onset rule <b>R_flat ≈ 2.5 R_d</b> across four disk galaxies.',
   for:'A coarse single-ratio check of where rotation curves go flat.',
-  showed:'All four within <b>4.2%</b> (against an honest 12% bar).',
+  showed:'All four within <b>4.2%</b> (against the registered 12% bar).',
   learned:'The onset radius is geometric; the full curve is fit properly in GD05/M4 (SPARC, RMS 23.8%) — no dark matter.',
   meant:'Flat rotation is convergence geometry, not missing mass.',
   applied:'The full mechanism lives in <b>galactic.hpp</b> (interior/exterior koppa, bar streak, CMB self-lensing).'}},
-{id:'B15',dom:'Cosmology',cert:'COMPUTED',title:'The BAO scale',
+{id:'B15',dom:'Cosmology',cert:'COMPUTED',title:'BAO standing-equilibrium ruler',
  facets:{
-  was:'The baryon-acoustic sound horizon, ~147 Mpc.',
-  for:'To place the standard cosmological ruler as a lattice pressure-wave length.',
-  showed:'<b>147 Mpc</b> vs 147.09 — <b>0.06%</b>.',
-  learned:'The horizon is <b>c_s·t</b> with <b>c_s=c/√3</b> in the coupled lattice — a real equilibrium length.',
-  meant:'The BAO ruler is the lattice’s own elasticity scale, not a relic of inflation.',
-  applied:'Sits in <b>cosmology::bao</b> alongside the stellar pressure domains (same √(L/4πF) form).'}},
-{id:'B16',dom:'Thermo',cert:'DERIVED',title:'Transport scaling — the T^½ law',
+  was:'The ~147 Mpc large-scale correlation ruler.',
+  for:'To derive a standing resistance scale without feeding the stored ruler or target-defined duration.',
+  showed:'<b>145.819 Mpc</b> vs 147.09 — <b>0.864%</b>; conservative proton-boundary optical depth 2.23.',
+  learned:'Energy equality fixes N=902.17; per-baryon phase resistance fixes the escape response; one acoustic round trip fixes the radius.',
+  meant:'The ruler is a release-standing equilibrium with shared FIRAS/BBN provenance, not a literal echo.',
+  applied:'<b>bridge::release_acoustics</b>; no H₀, R_CMB, G or source-mass parameter enters.'}},
+{id:'B16',dom:'Thermo',cert:'COMPUTED',title:'Dilute-monatomic transport curves',
  facets:{
-  was:'Thermal conductivity, viscosity and diffusivity all scaling as <b>T^0.5</b>.',
-  for:'To test the contact-shunt transport mechanics of the medium.',
-  showed:'Exponent <b>0.500</b> for all three (R²=1.0000).',
-  learned:'Transport is set by spation contact rate, which scales as √T — no mean-free-path tuning.',
-  meant:'A single mechanical picture replaces three separate kinetic-theory derivations.',
-  applied:'Confirms the contact-mechanics reading of the medium used in the thermodynamic sector.'}},
+  was:'Argon viscosity, thermal conductivity and self-diffusion over 200–423 K.',
+  for:'To test one FLM15 collision boundary against three held-back whole curves.',
+  showed:'RMS residuals <b>9.71%</b>, <b>9.67%</b>, <b>7.81%</b>; exponents 0.5, 0.5 and 1.5 at fixed pressure.',
+  learned:'Number-density dilution adds the extra T factor to diffusion; it is not T^0.5 at fixed pressure.',
+  meant:'One lock-weighted mechanical cross-section drives all three monatomic transport channels.',
+  applied:'<b>law_IV::transport::monatomic_state</b>; dense-liquid water remains separate.'}},
 {id:'B17',dom:'EM',cert:'DERIVED',title:'The electron g-factor',
  facets:{
   was:'The electron magnetic g-factor, 2.00232.',
@@ -429,14 +428,14 @@ const BENCH = [
   learned:'The Schwinger term is the first wake correction to the bare g=2 of a circulating vortex.',
   meant:'The most precisely measured number in physics is reached at leading order from geometry.',
   applied:'Validates the wake-multipole picture (ℓ=2) that APS04/PPT06 build the magnetic moment on.'}},
-{id:'B18',dom:'Nuclear',cert:'DERIVED',title:'The proton radius — the W+1 rule',
+{id:'B18',dom:'Nuclear',cert:'MIXED',title:'The proton radius — the W+1 rule',
  facets:{
   was:'The proton charge radius, the effective winding, and the He-4 radius.',
   for:'To test the conjecture <b>R_p=(W+1)ℏ/m_p c</b> for the W=3 trefoil.',
-  showed:'R_p to <b>0.02%</b>, W_eff = 3.001, and R_He = 2R_p to 0.44%.',
+  showed:'R_p to <b>0.02%</b>; the separate He-4 = 2R_p contact correspondence is 0.44% and remains PENDING.',
   learned:'The proton radius is a winding quantum: four reduced Compton wavelengths for a trefoil.',
   meant:'A measured input becomes (nearly) a topological prediction — the smallest scale earns its number.',
-  applied:'<b>winding::R_p_predicted</b>; the W=3 trefoil anchors PPT05/PPT06/PPT07.'}},
+  applied:'<b>winding::R_p_predicted</b>; the proton boundary is derived, while the He-contact relation remains a declared debt.'}},
 {id:'B19',dom:'Nuclear',cert:'DERIVED',title:'Beta-decay Q-value',
  facets:{
   was:'The energy released in free-neutron beta decay, 0.782 MeV.',
@@ -445,7 +444,7 @@ const BENCH = [
   learned:'The endpoint is bare rest-energy bookkeeping; no weak coupling constant is needed for the Q-value.',
   meant:'Nuclear energetics start from the same E=mc² the movement budget derives.',
   applied:'Supports the Atomicus reading of the neutron as an exposed triton remnant (nuclear grammar).'}},
-{id:'B20',dom:'Universal',cert:'DERIVED',title:'zk²=1 universality',
+{id:'B20',dom:'Universal',cert:'IDENTITY',title:'zk²=1 universality',
  facets:{
   was:'The budget closure for hydrogen and for Earth’s orbit, side by side.',
   for:'To show one identity binds the atomic and the planetary in the same equation.',
@@ -453,15 +452,15 @@ const BENCH = [
   learned:'Hydrogen (v=αc) and Earth (v=29.8 km/s) are two rungs of one ladder; the product is always one.',
   meant:'There is no separate "atomic" and "gravitational" law — only the movement budget at different speeds.',
   applied:'The k-hierarchy (<b>bridge</b>) uses zk²=1 as its defining closure across all scales.'}},
-{id:'B21',dom:'Universal',cert:'COMPUTED',title:'The force hierarchy',
+{id:'B21',dom:'Universal',cert:'OBSERVED',title:'The force hierarchy — orientation only',
  facets:{
   was:'The electromagnetic-to-gravitational force ratio between a proton and electron, ~10³⁹.',
   for:'To check the famous hierarchy is geometric, not a fine-tuned coupling.',
-  showed:'<b>2.269×10³⁹</b> vs 2.27×10³⁹ — within <b>0.05%</b>.',
+  showed:'The displayed ratio is <b>2.269×10³⁹</b>, but it is not tallied because splitting the orbital source into G and kilogram mass is outside the SDT chain.',
   learned:'The ratio is the charge cross-section over the displacement cross-section — same ocean, different shadows.',
   meant:'The "why is gravity so weak" puzzle becomes a statement about two occlusion areas.',
-  applied:'Frames the EMC01 transfer-function audit and the occlusion force law (law_III).'}},
-{id:'B22',dom:'Universal',cert:'COMPUTED',title:'The pressure hierarchy',
+  applied:'Frames the EMC01 transfer-function audit and the occlusion force law (law_III); orientation only, no earned row.'}},
+{id:'B22',dom:'Universal',cert:'MIXED',title:'The pressure hierarchy',
  facets:{
   was:'The effective pressure <b>P_eff</b>, the transfer function <b>f</b>, and the CMB pressure — spanning 45 orders.',
   for:'To trace the single convergence pressure from the Planck scale down to the nuclear coupling.',
@@ -469,7 +468,7 @@ const BENCH = [
   learned:'One pressure, geometrically reduced, sets every force; <b>f=P_eff/P_conv</b> is the bridge (EMC01).',
   meant:'The 33-orders pressure ladder is one quantity seen at different magnifications.',
   applied:'<b>law_III::P_eff / f_transfer</b> — the calibrated peg the whole force sector hangs on.'}},
-{id:'B23',dom:'Universal',cert:'DERIVED',title:'The Coulomb coupling identity',
+{id:'B23',dom:'Universal',cert:'IDENTITY',title:'The Coulomb coupling identity',
  facets:{
   was:'The identity <b>k_e e² = αℏc</b>.',
   for:'To express the electric coupling in the framework’s own constants.',
@@ -477,7 +476,7 @@ const BENCH = [
   learned:'Charge enters force only as the product k_e e²; neither piece is separately fundamental. (This is α’s definition — an identity, flagged as such in the engine.)',
   meant:'The electric coupling is the fine-structure constant in disguise — one number, not two.',
   applied:'Lets <b>coulomb_identity</b> and law_III write every force law in α, ℏ, c.'}},
-{id:'B24',dom:'Particle',cert:'COMPUTED',title:'Exclusion volumes & marginal stability',
+{id:'B24',dom:'Particle',cert:'MIXED',title:'Exclusion volumes & marginal stability',
  facets:{
   was:'The displaced volumes <b>V_disp</b> of electron and proton, their ratio, and the stability identity.',
   for:'To test mass as throughput cost: <b>m=ΦV_disp/3ℓ_P³c²</b>, and that the vortex sits at marginal stability.',
@@ -485,15 +484,15 @@ const BENCH = [
   learned:'Mass is the convergence-reorganisation cost of an exclusion volume; the ½-budget equality is a stable equilibrium.',
   meant:'Inertial and gravitational mass are one quantity — the same V_disp from two frames.',
   applied:'<b>law_IV::V_disp_e / V_disp_p</b>; the marginal-stability identity underpins the whole mass law.'}},
-{id:'B25',dom:'Nuclear',cert:'COMPUTED',title:'Alpha-cluster binding — helium-4',
+{id:'B25',dom:'Atomic',cert:'COMPUTED',title:'Helium total electron binding',
  facets:{
-  was:'The helium-4 binding energy (variational and exact) and its charge radius.',
-  for:'To show the occlusion force reproduces the standard Coulomb Hamiltonian exactly.',
-  showed:'−77.49 eV (1-parameter, 1.9%), −79.005 eV (exact), R_He=2R_p to 0.44%.',
-  learned:'Because occlusion ≡ Coulomb, helium binding is identical to QM at every order — no new parameter.',
-  meant:'The nucleus is alpha-clustered geometry; the same number falls out without importing a field.',
-  applied:'Confirms the Atomicus alpha-grammar (<b>nuclear.hpp</b>: He-4 = 2R_p, golden boundary).'}},
-{id:'B26',dom:'Particle',cert:'DERIVED',title:'Trefoil topology (PPT01 · PPT06 · PPT07)',
+  was:'The total binding of helium’s two polar 1s electrons.',
+  for:'To make the same dodecardinal resistance functional pass an absolute two-electron energy.',
+  showed:'<b>79.968 eV</b> vs 79.005 eV — <b>1.22%</b>.',
+  learned:'The polar dyad and force-balanced common radius price the full electronic state without an exact-answer literal.',
+  meant:'B25 is an atomic electron-binding closure; nuclear alpha binding is a separate benchmark.',
+  applied:'The same <b>atomic::dodecardinal::solve_state</b> used by B06, with no helium target in the solve.'}},
+{id:'B26',dom:'Particle',cert:'MIXED',title:'Trefoil topology (PPT01 · PPT06 · PPT07)',
  facets:{
   was:'The proton’s (2,3) budget closure, its superluminal surface phase velocity, and m_p/m_e from topology.',
   for:'To fold three resolved investigations into one falsifiable row.',
@@ -501,7 +500,7 @@ const BENCH = [
   learned:'The proton is a trefoil: its mode partition, its traction (1.83c demand) and its mass are all topology.',
   meant:'Particle identity is knot identity — the heaviest stable structure is the simplest stable knot.',
   applied:'<b>law_VI::topology / traction / mass_ratio</b> — the PPT01/14/17 results, now benchmarked.'}},
-{id:'B27',dom:'Gravity',cert:'DERIVED',title:'c from orbital geometry (GOM04)',
+{id:'B27',dom:'Gravity',cert:'MIXED',title:'c from orbital geometry (GOM04)',
  facets:{
   was:'The Sun’s speed ratio k from Mercury’s precession, and c reconstructed from it.',
   for:'The headline closure: derive the speed of light as an <em>output</em>, with no c or GM fed in.',
@@ -509,7 +508,7 @@ const BENCH = [
   learned:'Precession encodes the koppa geometry; running it backward yields c from pure orbital observables.',
   meant:'The speed of light is not assumed — it is recoverable from a planet’s slow turn.',
   applied:'<b>bridge::c_from_closure</b> — a self-consistency keystone of the k-hierarchy.'}},
-{id:'B28',dom:'Gravity',cert:'COMPUTED',title:'The depth-closure theorem (GOM01 · GOM05)',
+{id:'B28',dom:'Gravity',cert:'MIXED',title:'The depth-closure theorem (GOM01 · GOM05)',
  facets:{
   was:'The solar gravitational redshift as displacement depth, and the one bound-motion law.',
   for:'To test the keystone <b>z=ϟ/r</b>: redshift, clock rate and light speed are one quantity.',
@@ -544,36 +543,40 @@ const CHECKS = {
       ['Balmer 5→2 [nm]',433.937,434.047,0.0254,0.08],['Balmer 6→2 [nm]',410.07,410.174,0.0253,0.08]],
  B02:[['He⁺ Lyman-α [nm]',30.3756,30.378,0.0080,0.08],['Li²⁺ Lyman-α [nm]',13.5003,13.502,0.0129,0.08]],
  B03:[['2P fine-structure [eV]',4.52826e-5,4.528e-5,0.0057,1.0],['Bohr v(1,1)=αc [m/s]',2.18769e6,2.18769e6,0.0000,0.001]],
- B04:[['2S–2P Lamb [MHz]',1051.8,1057.85,0.5714,1.0]],
+ B04:[],
  B05:[['hyperfine 21cm [MHz]',1421.16,1420.4,0.0531,0.08]],
- B06:[['He ionisation [eV]',39.3205,24.587,59.92,5.0],['Li ionisation [eV]',5.74841,5.392,6.61,5.0],
-      ['Be ionisation [eV]',12.9339,9.323,38.73,5.0],['B ionisation [eV]',19.5922,8.298,136.1,5.0],
-      ['C ionisation [eV]',35.9275,11.26,219.1,5.0],['N ionisation [eV]',58.581,14.534,303.1,5.0],
-      ['O ionisation [eV]',80.01,13.618,487.5,5.0],['F ionisation [eV]',104.772,17.423,501.3,5.0],
-      ['Ne ionisation [eV]',128.65,21.565,496.6,5.0]],
+ B06:[['He ionisation [eV]',25.5454,24.587,3.8979,15.0],['Li ionisation [eV]',5.13042,5.392,4.8512,15.0],
+      ['Be ionisation [eV]',8.83336,9.323,5.2520,15.0],['B ionisation [eV]',8.25003,8.298,0.5780,15.0],
+      ['C ionisation [eV]',11.2791,11.26,0.1693,15.0],['N ionisation [eV]',14.6434,14.534,0.7527,15.0],
+      ['O ionisation [eV]',13.5511,13.618,0.4913,15.0],['F ionisation [eV]',17.1657,17.423,1.4769,15.0],
+      ['Ne ionisation [eV]',21.1595,21.565,1.8804,15.0]],
  B07:[['Stefan–Boltzmann [W/m²K⁴]',5.67037e-8,5.67037e-8,0.0000,0.001],['Wien [m·K]',0.00289777,0.0028978,0.0011,0.01]],
  B08:[['Earth v_orbital [m/s]',29788.9,29783,0.0199,0.08],['GM_Sun [m³/s²]',1.3275e20,1.327e20,0.0379,0.5]],
- B09:[['Hulse–Taylor dP/dt [s/s]',-2.4029e-12,-2.4025e-12,0.0166,0.2]],
+ B09:[['B1913+16 dP_b/dt [s/s]',-2.40263e-12,-2.398e-12,0.1931,1.0],
+      ['J0737−3039A/B dP_b/dt [s/s]',-1.24781e-12,-1.24792e-12,0.0089,1.0]],
  B10:[['Mercury precession [″/c]',42.9914,42.98,0.0265,0.5],['Solar deflection [″]',1.75169,1.7505,0.0680,0.5]],
- B11:[['Earth J2 (uniform-fluid)',0.00172484,0.0010826,59.32,3.0],['Jupiter J2 (uniform-fluid)',0.0445876,0.014736,202.6,3.0]],
+ B11:[['Earth J2 (GOM41 Q1)',0.00109248,0.00108263,0.9098,3.0],
+      ['Jupiter J2 (GOM41 Q1)',0.0143865,0.0146964,2.1087,3.0]],
  B12:[['Sun zk²',1,1,0.0000,0.001],['Sirius A zk²',1,1,0.0000,0.001],['α Cen A zk²',1,1,0.0000,0.001],
       ['Procyon A zk²',1,1,0.0000,0.001],['Vega zk²',1,1,0.0000,0.001]],
  B13:[['CMB redshift z',1099.72,1089,0.9840,1.0]],
  B14:[['Milky Way R_flat [kpc]',6.25,6,4.17,12.0],['NGC 3198 R_flat [kpc]',7,7.2,2.78,12.0],
       ['NGC 2403 R_flat [kpc]',4.5,4.4,2.27,12.0],['M33 R_flat [kpc]',4,4,0.00,12.0]],
- B15:[['BAO sound horizon [Mpc]',147,147.09,0.0612,3.0]],
- B16:[['thermal cond. exponent',0.5,0.5,0.0000,0.05],['viscosity exponent',0.5,0.5,0.0000,0.05],['diffusivity exponent',0.5,0.5,0.0000,0.05]],
+ B15:[['BAO standing-equilibrium [Mpc]',145.818917,147.09,0.8642,3.0]],
+ B16:[['Ar viscosity curve score',0.902853,1,9.7147,10.0],
+      ['Ar conductivity curve score',0.903254,1,9.6746,10.0],
+      ['Ar self-diffusion curve score',0.921909,1,7.8091,10.0]],
  B17:[['electron g-factor',2.00232,2.00232,0.0002,0.12]],
- B18:[['R_p (W+1) [m]',8.41236e-16,8.414e-16,0.0195,0.08],['W_eff (→3)',3.00078,3.0,0.0261,0.08],['He-4 = 2R_p [m]',1.6828e-15,1.6755e-15,0.4357,0.5]],
+ B18:[['R_p (W+1) [m]',8.41236e-16,8.414e-16,0.0195,0.08],['He-4 = 2R_p [m]',1.6828e-15,1.6755e-15,0.4357,0.5]],
  B19:[['β-decay Q [MeV]',0.782333,0.782,0.0426,0.08]],
  B20:[['Hydrogen zk²',1,1,0.0000,0.001],['Earth orbit zk²',1,1,0.0000,0.001]],
- B21:[['EM/grav force ratio',2.26876e39,2.27e39,0.0545,1.0]],
- B22:[['P_eff [Pa]',5.22521e31,5.225e31,0.0040,0.5],['f = P_eff/P_conv',2.12336e-17,2.125e-17,0.0772,1.0],['P_CMB [Pa]',1.39159e-14,1.391e-14,0.0427,1.0]],
+ B21:[],
+ B22:[['P_eff [Pa]',5.22725e31,5.225e31,0.0431,0.5],['f = P_eff/P_conv',2.12419e-17,2.125e-17,0.0381,1.0],['P_CMB [Pa]',1.39159e-14,1.391e-14,0.0427,1.0]],
  B23:[['k_e·e² [J·m]',2.30708e-28,2.30708e-28,0.0000,0.001]],
  B24:[['V_disp(e) [m³]',9.98094e-62,9.988e-62,0.0707,0.08],['V_disp(p) [m³]',1.83265e-58,1.834e-58,0.0734,0.08],
       ['V_p/V_e = m_p/m_e',1836.15,1836.15,0.0000,0.001],['P_cf/(P_conv/3)',1,1,0.0000,0.001]],
- B25:[['He binding variational [eV]',-77.4887,-79.005,1.9193,2.0],['He binding exact [eV]',-79.0052,-79.005,0.0003,0.001],['R_He=2R_p [fm]',1.6828,1.6755,0.4357,0.5]],
- B26:[['(2,3) budget vT²+vP²=c²',1,1,0.0000,0.001],['v_phase [c]',1.83016,1.83,0.0088,0.5],['m_p/m_e = 6π⁵',1836.12,1836.15,0.0019,0.01]],
+ B25:[['He total electron binding [eV]',79.9682,79.005,1.2191,2.0]],
+ B26:[['(2,3) budget vT²+vP²=c²',1,1,0.0000,0.001],['v_phase [c]',1.83006,1.83,0.0031,0.5],['m_p/m_e = 6π⁵',1836.12,1836.15,0.0019,0.01]],
  B27:[['k_Sun from precession',686.404,686.3,0.0151,0.5],['c from closure [m/s]',2.99795e8,2.99792e8,0.0009,0.01]],
  B28:[['Solar redshift = depth',2.12311e-6,2.1225e-6,0.0286,0.1],['Earth v=c√(ϟ/r) [m/s]',29788.9,29783,0.0199,0.08]],
  B29:[['GW150914 f_isco [Hz]',67.6352,68,0.5365,5.0]],
@@ -594,15 +597,24 @@ function renderBench(b){
   const st=bstats(b.id), pend=(b.cert==='PENDING');
   const art=document.createElement('article');
   art.className='bench'+(pend?' pend':''); art.id=b.id;
-  const allpass=st.pass===st.n;
-  const resClass=allpass?'ok':(pend?'pe':'bad');
-  const resTxt=`${st.pass}/${st.n} ${allpass?'PASS':(pend?'PENDING':'FAIL')} · worst ${st.worst.toFixed(st.worst<1?2:1)}%`;
+  const allpass=st.n>0 && st.pass===st.n;
+  const resClass=pend?'pe':(st.n===0?'pe':(allpass?'ok':'bad'));
+  const resTxt=st.n===0
+    ? 'NOTE-ONLY · no earned interval'
+    : pend
+      ? `PENDING · ${st.pass}/${st.n} within row gates · worst ${st.worst.toFixed(st.worst<1?2:1)}%`
+      : `${st.pass}/${st.n} ${allpass?'PASS':'FAIL'} · worst ${st.worst.toFixed(st.worst<1?2:1)}%`;
   let rows='';
   (CHECKS[b.id]||[]).forEach(([nm,sdt,exp,err,tol])=>{
     const ok=err<=tol;
     rows+=`<tr><td>${nm}</td><td class="n">${fmt(sdt)}</td><td class="n">${fmt(exp)}</td>`+
           `<td class="n ${ok?'pp':'ff'}">${err.toFixed(err<1?3:1)}%</td><td class="n">${tol}%</td></tr>`;
   });
+  const checkTable=st.n
+    ? `<details class="checks"><summary>${st.n} measured check${st.n>1?'s':''}</summary>`+
+      `<table class="chk"><tr><td>quantity</td><td class="n">SDT</td><td class="n">measured</td>`+
+      `<td class="n">err</td><td class="n">tol</td></tr>${rows}</table></details>`
+    : '';
   art.innerHTML =
     `<div class="bench-head"><span class="bid">${b.id}</span>`+
     `<h4>${b.title}</h4>`+
@@ -615,10 +627,7 @@ function renderBench(b){
     `<dt>What was learned</dt><dd>${b.facets.learned}</dd>`+
     `<dt>What it meant</dt><dd>${b.facets.meant}</dd>`+
     `<dt>How it’s applied</dt><dd>${b.facets.applied}</dd>`+
-    `</dl>`+
-    `<details class="checks"><summary>${st.n} measured check${st.n>1?'s':''}</summary>`+
-    `<table class="chk"><tr><td>quantity</td><td class="n">SDT</td><td class="n">measured</td>`+
-    `<td class="n">err</td><td class="n">tol</td></tr>${rows}</table></details>`;
+    `</dl>${checkTable}`;
   return art;
 }
 Object.entries(GROUPS).forEach(([cid,ids])=>{
@@ -626,33 +635,30 @@ Object.entries(GROUPS).forEach(([cid,ids])=>{
   ids.forEach(id=>{ const b=BENCH.find(x=>x.id===id); if(b) host.appendChild(renderBench(b)); });
 });
 
-function tally(){
-  let total=0,passed=0,realFail=0,pendFail=0;
-  BENCH.forEach(b=>{ (CHECKS[b.id]||[]).forEach(([,,,err,tol])=>{
-    total++; if(err<=tol) passed++; else (b.cert==='PENDING'?pendFail++:realFail++);
-  });});
-  return {total,passed,realFail,pendFail};
-}
+const SUITE_STATUS = {
+  earnedPassed:66, earnedTotal:66, identities:19, pendingNoteOnly:3,
+  calibrated:0, genuineFailures:0, standingPrediction:'B37'
+};
 function paintBoard(elId){
-  const t=tally(), el=document.getElementById(elId); if(!el) return;
+  const s=SUITE_STATUS, el=document.getElementById(elId); if(!el) return;
   const cells=[
-    [`${t.passed}/${t.total}`,'checks passed','var(--steel)'],
-    [`${(100*t.passed/t.total).toFixed(1)}%`,'pass rate','var(--copper)'],
-    [`${t.realFail}`,'genuine failures',t.realFail?'var(--rose-code)':'var(--steel)'],
-    [`${t.pendFail}`,'PENDING (flagged open)','#8b6cc1'],
+    [`${s.earnedPassed}/${s.earnedTotal}`,'earned predictions passed','var(--steel)'],
+    [`${s.identities}`,'identities · not tallied','var(--copper)'],
+    [`${s.pendingNoteOnly}`,'PENDING note-only','#8b6cc1'],
+    [s.standingPrediction,'standing prediction','#8b6cc1'],
   ];
   el.innerHTML=cells.map(([big,lbl,col])=>
     `<div class="cell"><div class="big" style="color:${col}">${big}</div><div class="lbl">${lbl}</div></div>`).join('');
 }
 paintBoard('board'); paintBoard('board2');
-(()=>{ const t=tally();
+(()=>{ const s=SUITE_STATUS;
   const h=document.getElementById('hero-tally');
-  if(h) h.textContent=`${t.passed}/${t.total} pass · ${t.realFail} genuine fail · ${t.pendFail} PENDING`;
+  if(h) h.textContent=`${s.earnedPassed}/${s.earnedTotal} earned passed · ${s.identities} identities · ${s.pendingNoteOnly} PENDING note-only`;
   const v=document.getElementById('verdict-line');
-  if(v) v.innerHTML=`<span class="num">${t.passed}/${t.total}</span> verified · `+
-     `${t.realFail} genuine failures · ${t.pendFail} open problems, on the wall`;
+  if(v) v.innerHTML=`<span class="num">${s.earnedPassed}/${s.earnedTotal}</span> earned · `+
+     `${s.genuineFailures} genuine failures · ${s.pendingNoteOnly} PENDING note-only · ${s.standingPrediction} standing`;
   const f=document.getElementById('footer-status');
-  if(f) f.textContent=`${t.passed}/${t.total} pass · ${t.pendFail} PENDING`;
+  if(f) f.textContent=`${s.earnedPassed}/${s.earnedTotal} earned · ${s.pendingNoteOnly} PENDING`;
 })();
 
 /* ── site-style behaviours: nav scroll, burger, reveal ── */

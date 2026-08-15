@@ -1,6 +1,6 @@
 # GOM06 — GRAVITATIONAL WAVES: MOVE THE SEA, DON'T MAKE WAVES
 
-> **Author:** J. C. Harvey, Melbourne. **Status:** SPEC — **full upgrade 2026-07-24** (supersedes
+> **Author:** James Christopher Tyndall, Melbourne. **Status:** EXECUTED; B09 DERIVED extension (2026-08-15) — **full upgrade 2026-07-24** (supersedes
 > 2026-06-27). The prior spec embedded run outcomes ("DONE this pass", "EXECUTED", coefficient
 > bands from its own outputs) — those products were the June agent-era layer, **deleted
 > 2026-07-24** (git-recoverable), and every one of their claims is demoted to
@@ -32,9 +32,9 @@
 3. **How will we find out?** — Four gates (§2), each derivation-first with anchors declared (§R1′);
    the existing three tools re-audited against this spec and re-run direct; the two DISTINCTIVE
    predictions (echoes; breathing≡memory) stated with numbers and search protocols.
-4. **What would prove us wrong?** — §3: an order-unity or steady-inspiral scalar mode (G3 kill —
+4. **What would prove us wrong?** — §3: an order-unity or steady-inspiral scalar mode (G3 falsification —
    binary-pulsar decay and GW170817 polarisation already exclude it: model DEAD, log it); chirp
-   scale unreachable without inserting G (G2 kill); no memory (G4 — the "moved sea" picture
+   scale unreachable without inserting G (G2 falsification); no memory (G4 — the "moved sea" picture
    fails); dispersion in band (G1).
 5. **How will we know we're done?** — Dual verdict in a fresh `GOM06_VERDICT_DIRECT_<date>.md`
    with the coefficient ledger (96/5, κ, η — each DERIVED or OWED, no third state) and the two
@@ -64,7 +64,7 @@ cleanly and leaks only a whisper of compression; and a moved sea **stays moved**
 | "the pulse, she stop" | ringdown QNMs of the merged core — with possible **echoes** off the closure floor | G5 |
 | **"but also, she go, forever"** | the net lattice reconfiguration is a permanent strain offset — memory as PRIMARY | G4 |
 
-**The honest tension to resolve, not assume:** E48 says transverse; the seed says bulk. They
+**The tension to resolve, not assume:** E48 says transverse; the seed says bulk. They
 reconcile only if the lattice is incompressible — an incompressible medium *responds* with
 volume-preserving flow yet *radiates* only shear. G1/G3 must demonstrate this.
 
@@ -84,8 +84,8 @@ volume-preserving flow yet *radiates* only shear. G1/G3 must demonstrate this.
   koppa, never weighs a mass) — MEASURED-INPUT, never fitted.
 - **R3 Two-stream** — any CONFIRMED result recomputed independently (closed-form vs numerical
   orbit integration, agreement <1%).
-- **R4 Honesty over success** — a cleanly-logged fired gate outranks a soft pass. If G3 honestly
-  yields an order-unity scalar mode, log the kill: the mechanism is dead.
+- **R4 Evidence over success** — a clearly logged failed gate outranks a soft pass. If G3
+  yields an order-unity scalar mode, record the falsification: the mechanism is ruled out.
 - **R5 No borrowed targets** — never import GR's 96/5, M_c, or h_μν as targets; forward from
   koppa + movement budget; check downstream; the 96/5, the G3 coefficient κ, and the G4
   coefficient η are **OWED until natively derived** — they appear in the ledger as OWED, and no
@@ -114,7 +114,7 @@ cross-check c²ϟ_c/G recovers ⟦30 M☉⟧ ±15% (conversion, labeled). Tool: 
 (re-audit against this spec — if it embeds old pass/fail prints keyed to the deleted layer,
 patch and ADJ-log — then run direct).
 
-### G3 — Polarisation: the kill gate
+### G3 — Polarisation: the falsification gate
 Danger stated plainly: the static SDT field is a scalar depth z = ϟ/r — a breathing mode is the
 natural disaster, and binary-pulsar decay + GW170817 exclude any order-unity or steady-inspiral
 scalar at <0.1%. Route-to-attempt (the June argument, to re-earn): the breathing channel IS the
@@ -155,13 +155,13 @@ vs NR 0.6864) lives in **GOM19 P1/P2**, not here — cite, don't duplicate.
 | # | Test | SDT prediction | If it fails |
 |---|---|---|---|
 | F1 | GW speed/dispersion | = c to 1e-15; zero dispersion in band | E48 wrong; lattice not the light medium |
-| F2 | chirp scale from ϟ only | ≈68 Hz from 96 km, ±15%; f^{11/3} track | koppa bridge fails radiatively — G2 kill |
+| F2 | chirp scale from ϟ only | ≈68 Hz from 96 km, ±15%; f^{11/3} track | koppa bridge fails radiatively — G2 falsified |
 | F3 | polarisation | 2 tensor + transient scalar ≈ Δϟ/ϟ only | order-unity/steady scalar ⟹ **model dead** |
 | F4 | memory | permanent Δh = η·Δϟ_rad/R; ≡ the G3 transient | no memory ⟹ "make waves" wins over "move sea" |
-| F5 | ringdown structure | echoes, Δt ≈ 58 ms scaling as ϟ_f·ln(ϟ_f/ℓ_P) | pure Kerr, no echoes ⟹ E68 unsupported (fork lost, recorded — not a model kill) |
+| F5 | ringdown structure | echoes, Δt ≈ 58 ms scaling as ϟ_f·ln(ϟ_f/ℓ_P) | pure Kerr, no echoes ⟹ E68 unsupported (fork lost and recorded; this alone does not falsify the model) |
 
 ## 4. SUCCESS CRITERIA
-- **PASS (A/B):** G1+G2 from c and ϟ alone (±15%, no G/M) AND G3's kill-condition avoided by a
+- **PASS (A/B):** G1+G2 from c and ϟ alone (±15%, no G/M) AND G3's falsification condition avoided by a
   fully-written conservation chain.
 - **QUALIFIED (C):** form-level G2 + structural G3/G4 with the three coefficients OWED (this is
   the ceiling until the dynamic depth-closure extension is derived — say so).
@@ -189,7 +189,7 @@ One question, split five ways: **is a gravitational wave the medium being moved,
 in it?** Show the chirp is a length; show incompressibility forces shear and quantify the
 whisper; show the sea stays moved and that the whisper and the staying-moved are ONE quantity;
 show the floor echoes. Forward from c and ϟ; never insert G; every borrowed coefficient flagged
-OWED. Open it honestly or report the gate that fires.
+OWED. Open it directly or report the gate that fails.
 
 ---
 
@@ -202,7 +202,7 @@ OWED. Open it honestly or report the gate that fires.
 - CALIBRATED budget: 0 · OWED ledger: 96/5 (G2), κ (G3), η (G4)
 - Declared anchors (R1′): GW150914 ϟ_tot≈96 km, band 35–250 Hz, ⟦M_c≈30 M☉⟧, E_rad/E≈4.6%,
   ⟦ringdown≈250 Hz⟧; GW170817 speed bound — all OBSERVED-through-GR-waveforms, comparison only
-- Gates: G1 1e-15/zero-dispersion · G2 ±15% scale+track · G3 kill-condition chain complete ·
+- Gates: G1 1e-15/zero-dispersion · G2 ±15% scale+track · G3 falsification-condition chain complete ·
   G4 identity Δϟ(G3)≡Δϟ(G4) printed · G5 Δt law re-derived + protocol stated
 - Forbidden: borrowed 96/5 as target; softening F2/F3; restoring deleted June docs as evidence;
   agents.
@@ -211,7 +211,7 @@ OWED. Open it honestly or report the gate that fires.
 | Trigger | PIVOT (first) | If pivot fails | Forbidden |
 |---|---|---|---|
 | tool embeds deleted-layer prints | patch prints to this spec's labels, ADJ-log | rebuild tool minimal | trusting old banners |
-| G2 outside ±15% | check ϟ_tot input chain (root-2) | G2 kill, logged | inserting G |
+| G2 outside ±15% | check ϟ_tot input chain (root-2) | G2 falsified, logged | inserting G |
 | G3 chain gaps at incompressibility | mark the w₀ dependency OWED, verdict ceiling D | — | assuming the modulus |
 | echo Δt derivation shifts from 58 ms | report the new number with the scaling law | — | anchoring to 58 because it was written before |
 
@@ -261,3 +261,55 @@ Frozen gates:
    coefficient, measured residual and failed premise remain explicit.
 6. A second eccentric timed binary is a whole-system control and must preserve
    the sign and uncertainty overlap without any system-specific coefficient.
+
+## B09 direct execution — 2026-08-15
+
+Instrument: `gom06_binary_decay.cpp`.
+
+The forward route used no source-body mass quantity.  For each timed binary:
+
+1. B10 periastron motion gives the dimensionless orbital depth
+   `z_orb = delta_phi(1-e^2)/(6 pi)`.
+2. The GOM22/Law-V clock-depth amplitude gives the companion resistance share
+   from `gamma n/(e z_orb) = f(1+f)`, hence `eta=f(1-f)`.
+3. Constant total Law-IV resistance removes the monopole and the
+   centre-of-resistance condition removes the dipole.
+4. The instrument forms the trace-free resistance quadrupole and projects it
+   onto the two transverse relay-shear directions over the whole sphere.  The
+   sphere integral gives `2/5`; quadratic work supplies `1/2`, producing the
+   previously owed shear weight `1/5`.
+5. The circular orbit integral gives
+   `<Q'''_ij Q'''_ij>/(rho_tot^2 a^4 n^6 eta^2) = 32`.  Orbital resistance
+   loss therefore gives the `96/5` frequency-chirp coefficient and
+   `192 pi/5` period-loss coefficient rather than inserting either number.
+
+The same numerical orbit solver was run at
+`e={0,0.1,...,0.6,0.617134,0.7,0.8,0.9}`.  Its integrated enhancement closes
+to
+
+```text
+F(e) = [1 + (73/24)e^2 + (37/96)e^4] / (1-e^2)^(7/2)
+```
+
+and that closed form was promoted only after the numerical derivation.  At
+`e=0.9`, the worst 512-to-1024 point change was `5.75e-5`; time- and
+frequency-domain paths agreed to `6.25e-11` over the two complete systems.
+
+Direct results:
+
+- B1913+16: `z_orb=2.142730388e-6`, `eta=0.249929878`;
+  predicted `dP_b/dt=-2.402630212e-12` against intrinsic observed
+  `-2.3980(40)e-12`, residual `+0.1931%`.
+- J0737-3039A/B: `z_orb=4.346764404e-6`, `eta=0.249703625`;
+  predicted `dP_b/dt=-1.247809426e-12` against intrinsic observed
+  `-1.247920(78)e-12`, residual `-0.00886%`.
+
+Monopole/dipole numerical leakage was `5.55e-17`.  Both frozen whole-system
+gates pass, including the second-binary sign and two-sigma overlap.  B09 is
+therefore `DERIVED`.  This clears G2's `96/5` debt; the distinct G3/G4
+coefficients and G5 echo claim remain outside this B09 result.
+
+Timing sources: Weisberg & Huang, *ApJ* **829** (2016) 55,
+doi:10.3847/0004-637X/829/1/55; Kramer et al., *Physical Review X* **11**
+(2021) 041050, doi:10.1103/PhysRevX.11.041050; MeerKAT timing parameters,
+*A&A* **667** (2022) A149.

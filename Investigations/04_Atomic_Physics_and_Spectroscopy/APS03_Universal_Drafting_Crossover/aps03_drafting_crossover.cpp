@@ -36,16 +36,80 @@
 #include <sdt/galactic.hpp>
 
 namespace K = sdt::laws::measured;
-namespace G = sdt::galactic;
+namespace gal = sdt::galactic;
 
-static const double a0    = G::a_0_SDT;          // galactic.hpp:77  DERIVED
 static const double cL    = K::c;                // laws.hpp
 static const double lamC  = K::lambda_C_e;       // laws.hpp:137 [m]
 static const double m_e   = K::m_e;              // laws.hpp:130
 static const double eV    = K::eV_to_J;          // laws.hpp:153
-static const double kpc_m = G::kpc_m;
-static const double pc_m  = G::pc_m_;
-static const double Msun  = G::Msun_kg;
+static const double kpc_m = gal::kpc_m;
+
+struct FloorClosure {
+    double angular_fraction;
+    double engaged_fraction;
+    double resistance_density;
+    double pressure_gradient;
+    double acceleration;
+    double finite_volume_acceleration;
+    double finite_volume_residual;
+};
+
+static FloorClosure derive_convergence_floor() {
+    using namespace sdt::laws;
+    const double radius = law_I::R_CMB;
+    const double full_volume =
+        4.0 * std::numbers::pi * radius * radius * radius / 3.0;
+    const double engaged_volume =
+        law_IV::locked_engaged_volume_sphere(radius);
+    const double engaged_fraction = engaged_volume / full_volume;
+    const double angular_fraction = 1.0 / 3.0;
+    const double resistance_density =
+        law_IV::resistance_from_engaged_volume(engaged_volume)
+        / (full_volume * K::c * K::c);
+    const double pressure_gradient =
+        angular_fraction * law_I::P_conv / radius;
+    const double acceleration = pressure_gradient / resistance_density;
+
+    // Independent finite-volume route: midpoint solid-angle and radial
+    // quadratures. Neither quadrature receives the analytic 1/3 or 6/7.
+    constexpr int intervals = 200'000;
+    double angular_sum = 0.0;
+    double radial_sum = 0.0;
+    for (int index = 0; index < intervals; ++index) {
+        const double fraction =
+            (static_cast<double>(index) + 0.5)
+            / static_cast<double>(intervals);
+        const double cosine = -1.0 + 2.0 * fraction;
+        angular_sum += cosine * cosine;
+        const double radial = radius * fraction;
+        radial_sum += radial * radial
+            * law_IV::relay_lock_fraction(radial, radius);
+    }
+    const double angular_numeric =
+        angular_sum / static_cast<double>(intervals);
+    const double engaged_numeric =
+        4.0 * std::numbers::pi * radius
+        * radial_sum / static_cast<double>(intervals);
+    const double density_numeric =
+        law_IV::resistance_from_engaged_volume(engaged_numeric)
+        / (full_volume * K::c * K::c);
+    const double gradient_numeric =
+        angular_numeric * law_I::P_conv / radius;
+    const double acceleration_numeric = gradient_numeric / density_numeric;
+
+    return {
+        angular_fraction,
+        engaged_fraction,
+        resistance_density,
+        pressure_gradient,
+        acceleration,
+        acceleration_numeric,
+        std::fabs(acceleration_numeric / acceleration - 1.0)
+    };
+}
+
+static const FloorClosure floor_closure = derive_convergence_floor();
+static const double a0 = floor_closure.acceleration;
 
 static constexpr double Y_DISK = 0.5, Y_BUL = 0.7;
 static inline double ssq(double v){ return v*std::fabs(v); }
@@ -201,21 +265,24 @@ static void scale_atomic(std::vector<Rec>& out){
 static void scale_stellar(std::vector<Rec>& out, const std::string& fn){
     bool ok; auto L=load_lines(fn,ok);
     if(!ok){ std::fprintf(stderr,"[B] stellar SHORT (no %s)\n",fn.c_str()); return; }
-    // expected: class,name,host,a_AU,a_err,P_yr,P_err,host_mass_Msun,host_mass_err,v_obs_kms,source,source_id
+    // Catalogue columns 8-9 contain a host-load estimate and uncertainty.
+    // They are parsed as text and deliberately excluded from this route.
     int n=0;
     for(size_t i=1;i<L.size();++i){
         std::stringstream s(L[i]); std::string f[12]; int c=0; std::string t;
         while(c<12 && std::getline(s,t,',')) f[c++]=t;
         if(c<8) continue;
         try{
-            std::string cls=f[0]; double aAU=std::stod(f[3]); double Mh=std::stod(f[7]);
+            std::string cls=f[0]; double aAU=std::stod(f[3]);
             double Pyr = f[5].empty()?0:std::stod(f[5]);
             double vobs = f[9].empty()?0:std::stod(f[9])*1e3; // m/s
-            if(aAU<=0||Mh<=0) continue;
+            // The catalogue host-load column is deliberately not consumed.
+            // Only Solar rows have an independent engine koppa in this corpus.
+            if(aAU<=0 || f[2]!="Sun") continue;
             double a=aAU*1.495978707e11;
-            double koppa = Mh*G::koppa_from_mass(1.0); // koppa_host = M*koppa_Sun  (=GM/c^2)
+            double koppa = sdt::laws::bridge::koppa_Sun;
             double vKep2 = cL*cL*koppa/a;               // (m/s)^2
-            if(vobs<=0){ if(Pyr<=0) continue; vobs=2.0*G::PI*a/(Pyr*3.15576e7); }
+            if(vobs<=0){ if(Pyr<=0) continue; vobs=2.0*std::numbers::pi*a/(Pyr*3.15576e7); }
             double Bmeas = (vobs*vobs)/vKep2;
             double g_host = cL*cL*koppa/(a*a);
             double xi = g_host/a0;
@@ -279,24 +346,76 @@ static void report_scale(char sc, const std::vector<Rec>& R){
     std::printf("       vs Phi_simple: rms relative resid = %6.1f%% over %d pts\n", rmsphi, nphi);
 }
 
+static double collapse_rms_control(
+    const std::vector<Rec>& records,
+    double floor_multiplier,
+    bool scramble
+) {
+    std::vector<const Rec*> selected;
+    for (const Rec& record : records) {
+        if (record.scale!='D' && record.xi>0.0) {
+            selected.push_back(&record);
+        }
+    }
+    std::map<int,std::vector<double>> bins;
+    const std::size_t rotation =
+        selected.empty() ? 0 : selected.size()/3 + 17;
+    for (std::size_t index=0; index<selected.size(); ++index) {
+        const std::size_t exposure_index = scramble
+            ? (index + rotation) % selected.size()
+            : index;
+        const double xi =
+            selected[exposure_index]->xi / floor_multiplier;
+        const int bin = static_cast<int>(
+            std::floor(std::log10(xi)*2.0)
+        );
+        bins[bin].push_back(selected[index]->B);
+    }
+    double squared=0.0; int count=0;
+    for (const auto& entry : bins) {
+        if (entry.second.size()<3) continue;
+        double total=0.0;
+        for (double value : entry.second) total+=value;
+        const double mean=total/static_cast<double>(entry.second.size());
+        const double center=std::pow(10.0,(entry.first+0.5)/2.0);
+        const double residual=(mean-Phi_simple(center))/Phi_simple(center);
+        squared+=residual*residual; ++count;
+    }
+    return count>0 ? std::sqrt(squared/static_cast<double>(count))*100.0 : -1.0;
+}
+
 int main(int argc, char** argv){
     std::string dir = (argc>1)? argv[1] : ".";
     auto P=[&](const char* f){ return dir+"/"+f; };
 
     std::fprintf(stderr,"=== APS03 provenance log ===\n");
-    std::fprintf(stderr,"a_0 (DERIVED c H_0/2pi) = %.4e m/s^2\n", a0);
+    std::fprintf(stderr,
+        "B34 pressure-gradient candidate sealed before comparison:\n"
+        "  angular fraction = %.12f\n"
+        "  engaged fraction = %.12f\n"
+        "  resistance density = %.8e kg/m^3\n"
+        "  convergence gradient = %.8e Pa/m\n"
+        "  a_floor analytic = %.8e m/s^2\n"
+        "  a_floor finite-volume = %.8e m/s^2 (residual %.3e)\n",
+        floor_closure.angular_fraction,
+        floor_closure.engaged_fraction,
+        floor_closure.resistance_density,
+        floor_closure.pressure_gradient,
+        floor_closure.acceleration,
+        floor_closure.finite_volume_acceleration,
+        floor_closure.finite_volume_residual);
 
     std::vector<Rec> R;
     double m4_rms, m4_btfr; int m4_n;
-    scale_galactic(R, P("../E46_Galaxy_Rotation_Curves/sparc_rotmod.csv"),
-                      P("../E46_Galaxy_Rotation_Curves/sparc_175.csv"), m4_rms,m4_btfr,m4_n);
+    scale_galactic(R, P("../../08_Galactic_Dynamics/GD05_Galaxy_Rotation_Curves/sparc_rotmod.csv"),
+                      P("../../08_Galactic_Dynamics/GD05_Galaxy_Rotation_Curves/sparc_175.csv"), m4_rms,m4_btfr,m4_n);
     scale_atomic(R);
     scale_stellar(R, P("stellar_orbits.csv"));
     scale_nuclear(R, P("nuclear_binding.csv"));
 
     std::printf("\n================================================================\n");
     std::printf(" APS03: UNIVERSAL DRAFTING CROSSOVER  —  B = Phi(xi)\n");
-    std::printf(" xi = g_self/g_floor ; g_floor=a_0=%.3e m/s^2 (DERIVED)\n", a0);
+    std::printf(" xi = g_self/g_floor ; g_floor=%.3e m/s^2 (Law-I/IV candidate)\n", a0);
     std::printf("================================================================\n\n");
 
     // ---- PILOT STOP-CHECK (sec.14): galactic harness must reproduce GD05 M4 ----
@@ -357,18 +476,49 @@ int main(int argc, char** argv){
                 (cab_rms>0 && neg_rms>1.5*cab_rms)? "PASS (true floor collapses better -> test has power)"
                                                   : "INCONCLUSIVE (wrong floor not clearly worse)");
 
+    const double wrong_solid_angle_rms =
+        collapse_rms_control(R, 3.0, false);
+    const double scrambled_exposure_rms =
+        collapse_rms_control(R, 1.0, true);
+    std::printf("  B34 wrong-solid-angle control (full normal load): RMS = %.1f%%\n",
+                wrong_solid_angle_rms);
+    std::printf("  B34 scrambled-exposure control: RMS = %.1f%%\n",
+                scrambled_exposure_rms);
+
     // ---- emit corpus
-    std::string outcsv = dir+"/cq26_corpus.csv";
+    std::string outcsv = dir+"/aps03_corpus.csv";
     std::ofstream o(outcsv);
     o<<"scale,class,type,id,xi,B,sigmaB\n";
     for(const Rec& r:R) o<<r.scale<<","<<r.cls<<","<<r.type<<","<<r.id<<","
                          <<r.xi<<","<<r.B<<","<<r.sigmaB<<"\n";
     std::printf("\n  corpus written: %s  (%zu rows)\n", outcsv.c_str(), R.size());
 
-    std::printf("\n=== HONEST STATUS ===\n");
+    // Comparison enters only after the floor and all control predictions have
+    // been emitted.
+    const double measured_floor = 1.20e-10;
+    const double floor_residual =
+        std::fabs(a0/measured_floor-1.0);
+    const bool controls_pass =
+        wrong_solid_angle_rms >= 2.0*cab_rms
+        && scrambled_exposure_rms >= 2.0*cab_rms;
+    const bool b34_pass =
+        floor_closure.finite_volume_residual < 0.01
+        && floor_residual <= 0.20
+        && controls_pass;
+    std::printf("\n=== B34 DIRECT GATE ===\n");
+    std::printf("  predicted floor = %.8e m/s^2\n",a0);
+    std::printf("  measured floor  = %.8e m/s^2 (comparison only)\n",measured_floor);
+    std::printf("  residual = %.2f%% (gate <=20%%)\n",100.0*floor_residual);
+    std::printf("  finite-volume gate %s; two-control gate %s\n",
+                floor_closure.finite_volume_residual<0.01?"PASS":"FAIL",
+                controls_pass?"PASS":"FAIL");
+    std::printf("  B34 %s\n",b34_pass?"COMPUTED":"PENDING");
+
+    std::printf("\n=== CURRENT STATUS ===\n");
     std::printf("  Scale C galactic: real SPARC, pilot %s.\n", pilot_ok?"PASS":"FAIL");
     std::printf("  Scale A atomic:   real APS02/NIST resonance lines; xi rule STATED (sec.7.3 open).\n");
-    std::printf("  Scale B stellar / D nuclear: present only if CSV fetched (else SHORT above).\n");
+    std::printf("  Scale B stellar: Solar-host rows only; catalogue host-load aliases ignored.\n");
+    std::printf("  Scale D nuclear: present only if CSV fetched (else SHORT above).\n");
     std::printf("  Phi crossover shape is BORROWED (MOND-simple); only asymptotes DERIVED.\n");
-    return 0;
+    return pilot_ok && b34_pass ? 0 : 1;
 }

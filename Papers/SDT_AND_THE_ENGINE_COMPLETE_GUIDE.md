@@ -87,8 +87,9 @@ three-way numeric cross-check) all name it as owner. FLM14's run 3 delivered the
 ever measured in the program — honestly **unclaimed** (one β short of the pre-committed licence) — and run 4
 (the tour-side constraint channel) is in flight. Part 18.5 is the full ledger of what is owed.
 
-**6. Nothing is committed to git.** The entire arc above lives in the working tree; two canon decisions
-(NP12's radius formula; the `cosmology.hpp` t_coupled circularity) are propose-and-wait pending Harvey.
+**6. Canon flags remain explicit.** NP12's radius formula remains a separate
+decision. The target-defined `cosmology.hpp::t_coupled` remains quarantined for
+CR03 Route B; B15 now bypasses it with the CR08 standing-equilibrium route.
 
 ---
 
@@ -820,8 +821,10 @@ The neutron-identity thread ($n = p + \text{internal } e^-$) reached a sharp, ho
   $R = R_p\,(A/\eta)^{1/3}$ with $\eta = \pi/\sqrt{18}$ (close-packing density) → **4.96% RMS**, degenerate
   with the fair $A^{1/3}$ rival globally but winning at isotope-chain level (Ca chain 1.67% flat vs 8.63%).
   No canon edit has been made — the decision is Harvey's.
-- **`cosmology.hpp` t_coupled** — flagged circular ($\equiv$ BAO_scale/$c_s$); blocks two cosmology routes.
-  Also Harvey's call.
+- **`cosmology.hpp` t_coupled** — flagged circular
+  ($\equiv$ BAO_scale/$c_s$) and still excluded from CR03 Route B. CR08/B15 no
+  longer consumes it: the resistance-standing scale is canonical in
+  `laws.hpp::bridge::release_acoustics`.
 
 ---
 
@@ -852,9 +855,9 @@ diffraction is lattice scattering of the vortex (all VERIFIED in the corresponde
 | Pressure evolution | $P(z)\propto(1+z)^4$, $\gamma_{\text{eff}}=4$ (topological stiffness) | **OPEN candidate**; CR05 does not derive the exponent or freeze-out mechanism |
 | Hubble constant | $H_0$ from lattice pressure | **OPEN**; CR05 imports the comparison value and fails on its native route; $R_{\text{CMB}}/H_0$ remains underived (CR03) |
 | Cosmological "constant problem" | the $10^{123}$ is $N^2=4\pi$-scaled boundary-cell count, not a vacuum-energy failure | DERIVED |
-| BAO sound horizon | $r_s\approx147$ Mpc | COMPUTED (B15; carries an exact-literal debt in the repaired ledger — the freeze-out narrative is PARTIAL per GOM01's re-audit) |
+| BAO standing-equilibrium ruler | $L_{\rm BAO}=145.819$ Mpc from energy equality, per-baryon phase resistance and an acoustic round trip | **COMPUTED** (B15; 0.864% vs 147.09 Mpc; shared FIRAS/BBN provenance) |
 | Cosmological redshift | depth at emission ($z=\varkappa/r$) + a propagation term along the line of sight | C on emission; the **propagation law $d(z)$ is OPEN** — the exponential strain law is excluded (CR06 SNe; CR08 BAO), the octave/cubic-rung successor has no distance closure yet, and CR09's isotropic radial κ-gradient is excluded 0/122 |
-| SDT vs ΛCDM head-to-head | Tolman surface brightness, the CMB $(1+z)^4$ energy density, Pantheon SNe | **DEGENERATE** (CR10/11/12): SDT *matches* without a dark sector but does not *beat* ΛCDM; the one remaining separator is the κ(z)/BAO-CMB acoustic-peak decider |
+| SDT vs ΛCDM head-to-head | Tolman surface brightness, the CMB $(1+z)^4$ energy density, Pantheon SNe | **shared-input correspondence** (CR10/11/12): SDT *matches* without a dark sector but does not *beat* ΛCDM; the remaining separator is the κ(z)/BAO-CMB acoustic-peak decider |
 | Dark matter | convergence-disk occlusion candidate | PARTIAL; the acceleration-floor magnitude is not derived |
 | Dark energy | a pressure-gradient *misreading* of the lattice EOS, not a substance | SPEC |
 
@@ -1037,14 +1040,14 @@ intervals as observed stickers with no derived tally. The per-benchmark table be
 | B06 | Multi-electron ionisation | Slater screening | **PENDING** (open atoms problem) |
 | B07 | Stefan–Boltzmann, Wien | $\sigma_{SB}=5.670\times10^{-8}$; $\lambda_{\max}T=2.898\times10^{-3}$ | DERIVED |
 | B08 | Earth orbital velocity, $GM_\odot$ | $29783$ m/s; $1.327\times10^{20}$ | DERIVED |
-| B09 | Hulse–Taylor $\dot P$ | $-2.4029$ vs $-2.4025\times10^{-12}$ | **IDENTITY, display-only** (rides $GM\to c^2\varkappa$; de-tallied 2026-07-03) |
+| B09 | Binary-pulsar $\dot P_b$ | B1913+16 and J0737-3039A/B from timing depth and resistance quadrupole | **DERIVED** (GOM06; no source-mass parameter) |
 | B10 | Mercury precession; light deflection | $42.98''$; $1.7505''$ | DERIVED |
 | B11 | Earth & Jupiter $J_2$ | uniform-fluid estimate | **PENDING** |
 | B12 | Stellar $zk^2=1$ (5 stars) | $=1.0$ across 10 orders | DERIVED |
 | B13 | CMB redshift | $z=1089$ | DERIVED |
 | B14 | Galactic $R_{\text{flat}}\approx2.5R_d$ | 12 % tolerance | COMPUTED |
-| B15 | BAO sound horizon | $r_s=147$ Mpc | COMPUTED |
-| B16 | Transport scaling $T^{0.5}$ | exponent $0.5$ exact | DERIVED |
+| B15 | BAO standing-equilibrium ruler | $145.8189$ Mpc vs $147.09$ Mpc | COMPUTED |
+| B16 | Dilute-monatomic transport | Ar $\mu,k,D$ whole-curve RMS 9.71%, 9.67%, 7.81%; exponents 0.5, 0.5, 1.5 | COMPUTED |
 | B17 | Electron g-factor | $g=2(1+\alpha/2\pi)=2.00231930436$ | DERIVED |
 | B18 | Proton radius (W+1), He-4 | $R_p=0.84124$ fm (0.08 %); $R_{He}=2R_p$ | DERIVED |
 | B19 | Beta-decay Q-value | $0.782$ MeV | DERIVED |
@@ -1053,16 +1056,17 @@ intervals as observed stickers with no derived tally. The per-benchmark table be
 | B22 | Pressure hierarchy | $P_{\text{eff}}=5.225\times10^{31}$; $f=2.125\times10^{-17}$ | COMPUTED |
 | B23 | Coulomb identity $k_e e^2=\alpha\hbar c$ | 0.1 % | DERIVED |
 | B24 | Exclusion volumes; marginal stability | $P_{cf}/(P_{\text{conv}}/3)=1.0$ | COMPUTED/DERIVED |
-| B25 | He-4 alpha-cluster binding | exact NR $-79.0052$ eV (0.00025 %) | COMPUTED |
+| B25 | He total electron binding | $79.968$ eV vs $79.005$ eV (1.22%) | COMPUTED |
 | B26 | Trefoil $(2,3)$ budget; $m_p/m_e=6\pi^5$ | $1836.118$; $v_{\text{phase}}=1.830c$ | DERIVED/COMPUTED |
 | B27 | Koppa closure: $c$ from Mercury precession | $c$ reconstructed | COMPUTED/DERIVED |
 | B28 | Depth-closure $z=\varkappa/r$ | solar redshift; Earth $v=c\sqrt{\varkappa/r}$ | COMPUTED/DERIVED |
 | B29 | GW chirp as length (GW150914) | $f_{\text{isco}}$ from $\varkappa_{\text{tot}}\approx96$ km | COMPUTED |
 
-*(Residual ledger debts, on record: B15/B16/B25 carry exact-value literals to be re-derived in place;
-the ATOMICUS P_CMB fossil touches ~119 files. Known, logged, unpaid — not hidden.)*
+*(The former B15/B16/B25 literal debts were replaced in place on 2026-08-15.
+Remaining suite physics debt is B11's whole-corpus interior-resistance profile
+and B18's He-contact correspondence; B37 awaits measurement.)*
 
-### 16.2 The strike-force earns (2026-07-04/05) — the honest-numbers table
+### 16.2 The strike-force earns (2026-07-04/05) — quantitative table
 
 The July wave ran roughly thirty investigations across quantum foundations, condensed matter, plasma, optics
 and chemistry under §G. These are not benchmarks (they live in `Investigations/**/*_VERDICT.md`), but they are

@@ -73,10 +73,11 @@ namespace pre_clearing {
     /// ⚠ PROVENANCE GUARD (2026-07-05, Harvey-authorized; CR03/CR08 audit): CIRCULAR AS
     /// WRITTEN — t_coupled is DEFINED from the measured BAO scale (147 Mpc, class-X observed
     /// input), so NO tool may cite t_coupled (or any quantity built on it) as an SDT
-    /// derivation of the BAO scale. It blocks CR03 Route B and CR08 G2 as derivations; both
-    /// remain honest as consistency displays. The open closure that would convert this to
-    /// DERIVED: a native coupled-epoch duration from the Law II release-rate / opacity-
-    /// clearing mechanism (see CR13, SAR03 root) — until then, class X.
+    /// derivation of the BAO scale. It still blocks CR03 Route B and the old CR08 G2
+    /// duration route; both remain consistency displays. B15 no longer consumes this
+    /// quantity: bridge::release_acoustics in laws.hpp computes the CR08 resistance-
+    /// standing scale directly from FIRAS/BBN equality and per-baryon phase resistance.
+    /// A native coupled-epoch duration remains open; this compatibility value stays class X.
     inline constexpr double Mpc = 3.085'677'581e22;
     inline constexpr double BAO_scale = 147.0 * Mpc;        // [m]  (measured, class X)
     inline constexpr double t_coupled = BAO_scale / c_s;     // [s] ~ 2.62e16  (class X — see guard)

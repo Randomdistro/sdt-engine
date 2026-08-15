@@ -82,10 +82,11 @@
 >    EC = repair in fissiles; **the meshing IS the mass defect** (union-not-sum ≡ FLM12's synchrony saving);
 >    FLM14's all-in premise (rotating spation, sequential occupancy) is the root under RESIDENCE-LAW,
 >    PPT08-seats, NP10-lock, FLM03 and ε=hν.
-> 5. **Two canon decisions PENDING Harvey:** NP12 radius formula (Z·R_p KILLED vs 908 radii; zero-fit
->    R_p·(A/η)^⅓, η=π/√18, 4.96% RMS ready) · `cosmology.hpp` t_coupled circularity. Residual debts:
->    ATOMICUS P_CMB fossil ×119 files, stale `ATOMICUS_COMPLETE.md`, B15/B16/B25-exact literals,
->    `structural_analysis.cpp` charge-radius strings. **Nothing is committed to git.**
+> 5. **Canon flags:** NP12 radius formula (`Z·R_p` excluded by 908 radii; zero-fit
+>    `R_p·(A/η)^⅓`, `η=π/√18`, 4.96% RMS ready) · the target-defined
+>    `cosmology.hpp::t_coupled` remains excluded from CR03 Route B. B15 bypasses
+>    it through the CR08 standing-equilibrium route. The former B15/B16/B25
+>    literal debts are paid; B11 and the B18 He-contact row remain PENDING.
 > 6. **NP22 · Beta_Spectrum_from_Partition_Geometry (2026-07-04, EXECUTED — NP14's named test):**
 >    does the 0.9186c seat unwinding (electron keeps a release-angle share, neutrino takes the Law-V
 >    complement) reproduce the free-neutron β SHAPE? **FAIL→OPEN, and the whole 1-DOF release-measure
@@ -475,10 +476,13 @@ See `FLM03.../DEEPTHINK_PROMPT.md`.
 - **CR03 — Transfer-function closure** `[EXECUTED 2026-07-03 — OPEN]` · blocked on one class-X scale
   (Route B blocked by the `cosmology.hpp` t_coupled circularity — CANON FLAG pending Harvey, §3b); the
   algebra itself is verified and earned (`CR03_Transfer_Function_Closure/CR03_VERDICT.md`).
-- **CR08 — BAO as lattice standing waves** `[EXECUTED 2026-07-03 — KILLED (static exponential-strain law:
-  χ² 131.7 vs ΛCDM 8.2; CMB acoustic angle off ×2.21) / IDENTITY (147 Mpc "derivation" as coded)]` — the
-  kill *confirms* CR07/CR10 canon (redshift does not compound); native successor = octave/cubic rung,
-  distance closure owed (§3b NO-DERIVED-d(z) root). FARMER-checked: prompt clean, no transcription loss.
+- **CR08 — BAO as lattice standing waves** `[EXECUTED; B15 EXTENSION 2026-08-15]` —
+  **COMPUTED** standing-equilibrium ruler `145.8189 Mpc` (0.864% vs 147.09;
+  FIRAS/BBN shared provenance), from energy equality, Prop-13 obstacle count,
+  per-baryon phase resistance and an acoustic round trip. The static
+  exponential-strain distance law remains **FALSIFIED** (`χ² 131.7` vs 8.2;
+  CMB acoustic angle off ×2.21), and the old target-defined duration remains
+  an **IDENTITY**. Distance closure is still owed.
 - **CR09 — H₀ tension / dark energy** `[EXECUTED 2026-07-03 — KILLED (isotropic radial κ-gradient: 0/122
   transition depths survive the four-gate pincer) / OPEN (anisotropic line-of-sight version + the
   emission-half route, out of scope)]` (§3b EMISSION/PROPAGATION SPLIT root; `CR09_VERDICT.md`).
@@ -666,9 +670,11 @@ Next new investigation = the **next free domain code** in the relevant field (e.
   ×2.3e17; earned ceiling: thermalisation η < 4.4e-18; Maxwell's elastic-refill objection
   unanswered), SAR03 (luminosity budget closes only at the SB identity — no release-rate law
   exists). Ties to FLM12/EMC01.
-- **CANON FLAG (propose-only): `cosmology.hpp` t_coupled ≡ BAO_scale/c_s** — circular; blocks
-  CR03 Route B and CR08 G2. Also `strain::` comment oversells ("steeper near massive
-  structures"). Harvey's call.
+- **CANON FLAG: `cosmology.hpp` t_coupled ≡ BAO_scale/c_s** — circular and
+  excluded; it still blocks CR03 Route B and the old CR08 G2 duration route.
+  B15 no longer consumes it: `laws.hpp::bridge::release_acoustics` carries the
+  target-independent standing-equilibrium scale. The `strain::` comment still
+  oversells ("steeper near massive structures").
 - **⟐ GM-SWEEP (2026-07-06, Harvey-ordered; 4 parallel auditors, ~70 files with G/M/GM/6.674
   hits graded load-bearing vs rival-column vs conversion):** repo core is CLEAN — laws.hpp,
   galactic.hpp, all GOM01–GOM14 tools, GD suite, FLM/EMC/NP/FD/PPT tools, website, paper

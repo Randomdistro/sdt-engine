@@ -1,46 +1,54 @@
-# APS03 — Direct re-run verdict: the 8.8% collapse RE-EARNED (2026-07-23)
+# APS03 — Universal Drafting Crossover Assessment
 
-> **Run class: DIRECT** (main session, no agents). Prior agent-era `INVESTIGATION.md`,
-> `APS03_VERDICT.md`, `aps03_output.txt`, `results.txt` deleted 2026-07-23 (git-recoverable).
-> Tool: `aps03_drafting_crossover.cpp`, g++ 15.2 -O2, exit **0**, run twice:
-> (1) in-folder — SPARC path dead → galactic SHORT (`aps03_rerun_2026-07-23.txt`);
-> (2) **scratch harness with the real full SPARC wired** (copies of GD05's `sparc_rotmod.csv`
-> 3392 lines + `sparc_175.csv`, byte-counted by the tool's own §10 provenance protocol) —
-> `aps03_rerun_full_sparc_2026-07-23.txt`.
+**Author:** James Christopher Tyndall, Melbourne<br>
+**Executed:** 2026-07-23; B34 extension 2026-08-15<br>
+**Instrument:** `aps03_drafting_crossover.cpp`
 
-## Prompt contraband check
+## Current status
 
-**CLEAN — exemplary.** The prompt pre-registers thresholds, forbids the three failure modes that
-had already occurred (circular validation, borrowed-function laundering, stale data), and hashes
-inputs at read time. The MOND `Φ_simple` appears only as a **disclosed BORROWED baseline**.
+- **B34 convergence floor:** `COMPUTED`, conditioned on the observed Clearing
+  boundary.
+- **Cross-scale crossover:** `QUALIFIED`; the asymptotes and candidate floor
+  have SDT mechanisms, but the interpolation shape remains borrowed.
+- **Open dependencies:** atomic exposure geometry, a deep stellar-floor
+  corpus, and an SDT derivation of the crossover shape.
 
-## What the re-run measured (full-SPARC harness; the tool's own printed numbers)
+## B34 forward result
 
-- **PILOT STOP-CHECK: PASS** — 3012 SPARC points, RMS **23.7%** (ref 23.8%), BTFR slope
-  **3.58** (ref 3.58). *The stale-file VOID that retracted this scale is resolved: the pilot now
-  runs on verified, provenance-logged data.*
-- Per-scale asymptotes: galactic floor slope **−0.481** (window [−0.60,−0.40]: PASS); atomic
-  source ⟨B⟩ = 1.021 PASS; stellar source ⟨B⟩ = 1.042 PASS (76 bodies to ξ~10¹²);
-  **atomic floor slope +0.25 — FAIL** (wrong sign; the provisional shell-occupancy ξ_A is the
-  wrong exposure variable — §7.3 deliverable, open); stellar floor **absent** (no ξ≤0.1 members).
-- **Cross-scale collapse (C+A+B): RMS 8.8% over 20 bins** vs Φ_simple.
-  **Negative control (wrong floor 100·a₀): 53.3% — 6× worse → the test has power.**
-- Nuclear scale: 447.7% — **contaminates; excluded** (ξ_D = grammar ratio is not an exposure).
-- Corpus written: `cq26_corpus.csv`, 3520 rows, per-row provenance.
+The current instrument evaluates
 
-## Verdict
+```text
+normal convergence gradient = P_conv/(3 R_CMB)
+engaged volume fraction      = 6/7
+engaged resistance density   = [(P_conv/3)(6/7)V]/(V c^2)
+a_floor                       = 7 c^2/(6 R_CMB)
+```
 
-- **Prompt completion: B** (pilot + asymptotes + collapse + control run under §10; corpus far
-  short of the 1920-example mandate — stellar floor and NIST expansion unfilled).
-- **Physics class: CONVERGENCE-strong / shape-BORROWED** — one scale-invariant response curve
-  collapses galactic + atomic + stellar data at 8.8% with a derived floor (a₀ = cH₀/2π) and
-  demonstrated statistical power; but the crossover **shape** is still the borrowed MOND-simple
-  interpolation. SDT supplies the floor scale and the asymptotes (DERIVED); the shape derivation
-  (§7.4 solid-angle route) remains **the prize, OPEN**.
-- **Supersedes the 2026-07 retraction:** the "8.8% RETRACTED-STALE" ruling was correct about the
-  stale pilot; with the pilot re-earned on real data the 8.8% stands as an honest number.
-- **Next data step is already cached:** the Gaia wide-binary catalog (the missing deep-stellar
-  floor, the single most valuable absent measurement per the prior run) is now at
-  `C:\sdt-data\eb_wide_binaries.fits.gz` (sha256-verified, see `Datasets/MANIFEST.md`).
-- **Recovery: RECOVERED (galactic pilot + collapse)** · **Cascade root:** ξ_atomic definition
-  (§7.3) — the one live wrong-sign result.
+The angular `1/3` is the isotropic second moment. The `6/7` is the FLM15
+relay-lock volume integral. Neither coefficient is fitted.
+
+Results:
+
+- analytic floor: `1.10060639e-10 m/s²`;
+- independent finite-volume floor: `1.10060639e-10 m/s²`;
+- quadrature residual: `1.586e-11`;
+- comparison floor: `1.20e-10 m/s²`;
+- residual: `8.28%` against the pre-registered `20%` gate.
+
+The full SPARC pilot remains stable at `24.0%` RMS with BTFR slope `3.58`.
+The C+A+B binned collapse remains `8.8%`. The wrong-solid-angle control gives
+`24.1%` RMS and the scrambled-exposure control gives `156.9%`, each exceeding
+twice the live-model residual as required.
+
+## Scope
+
+No expansion-rate value, body-source mass parameter, or measured
+low-acceleration target enters the B34 forward function. However, `R_CMB` is
+an external boundary and shares cosmological provenance with the conventional
+expansion-rate correspondence. B34 is therefore `COMPUTED` with shared-input
+risk, not an independent cosmological derivation.
+
+The broader universal-curve claim remains qualified. The galactic floor slope
+passes, but the provisional atomic exposure variable has the wrong-sign floor
+slope and the stellar corpus has no floor-regime members. The borrowed
+interpolation is a comparison model, not an SDT law.

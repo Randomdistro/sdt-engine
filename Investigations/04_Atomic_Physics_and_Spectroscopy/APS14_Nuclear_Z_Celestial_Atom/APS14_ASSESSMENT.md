@@ -1,13 +1,34 @@
 # APS14 Assessment — Nuclear-Z celestial atom
 
-**Date:** 2026-08-13  
-**Direct execution.** **Canon edits:** none.  
-**Instrument:** `run_aps14.py`  
-**Stdout:** `.audit-tmp/aps14_run.txt` (copy `aps14_results.txt`)  
-**Spec:** `MODEL_SPEC.md`  
+**Date:** 2026-08-13; B06/B25 closure added 2026-08-15<br>
+**Direct execution.** **Canon edits:** `laws.hpp` dodecardinal state solver;
+benchmark B06/B25 consumers.<br>
+**Instruments:** `run_aps14.py`, `aps14_b06_b25_closure.py`<br>
+**Stdout:** `.audit-tmp/aps14_run.txt` (copy `aps14_results.txt`)<br>
+**Spec:** `MODEL_SPEC.md`<br>
 **Data:** `DATA_MANIFEST.md`
 
-## Dual verdict
+## Current B06/B25 status
+
+`APS14_POLAR_DYAD_SIX_RING_CLOSURE_COMPUTED`
+
+The fixed polar `2s` dyad plus equatorial `2p` six-ring closes the He–Ne state
+functional without empirical screening or an element-specific branch. Pair
+resistances come from the FLM15 `6/7 : 1/7` lock/wake partition, coincident
+synchrony, glancing arc/chord geometry, and complete counterphase paths.
+
+- B06 first IE: median `1.476%`, maximum `5.249%` — PASS.
+- B25 He total binding: `79.9682 eV`, error `1.219%` — PASS.
+- 45 higher sequential-ionization checks: median `1.621%`, maximum `8.630%`.
+- Maximum normalized force residual: `5.72e-16`.
+
+Classification is `COMPUTED`: exact coefficient forms were isolated during
+post-freeze diagnostics against the B06 comparison rows. The 45 higher
+ionizations were not part of that isolation and independently corroborate the
+mechanism. The calibrated M0–M3 ladder below remains the record of the initial
+APS14 run; it is not the active B06/B25 calculation.
+
+## Initial calibrated-run dual verdict
 
 | Axis | Outcome |
 |---|---|
@@ -47,7 +68,12 @@ The promotion gate was: a global calibrated model must beat the effective-charge
 
 ## Same-n light
 
-The untouched APS01 resonance set was not in the fit. With `δ=0`, promoting `s→p` at the same principal n does not change `r` or `z`. Predicted ΔE is zero for H I Lyα-as-1s→2p-same-n, He I, Li D, Na D. That is a limitation of principal-depth seats, not a licence to import ℓ as a wavefunction. Same-n terms need angular seating that this package does not yet have.
+In the initial calibrated model, the untouched APS01 resonance set was not in
+the fit. With `δ=0`, promoting `s→p` at the same principal n did not change `r`
+or `z`. The closure extension now distinguishes polar and ring seats in
+multi-electron pair resistance, but its central nuclear term remains isotropic.
+It therefore does not yet compute the absolute one-electron same-`n`
+polar-to-ring shelf interval.
 
 H-like control rows (explicit `n_lo`, `n_hi`) remain MATCH.
 
@@ -73,7 +99,9 @@ CALIBRATED SDT physics budget for a proposed canon function: **not proposed**.
 
 ## Open
 
-Valence and first IE. Same-n angular seating. A geometry for `g` that is not a global scalar. Grammar (`n_d`, `n_t`) as a seating coefficient — not tested here.
+Extension beyond the second period. Absolute same-`n` polar-to-ring shelf
+splitting, including the Lamb magnitude. Grammar (`n_d`, `n_t`) as a
+center-dependent seating coefficient is not tested here.
 
 ## Prohibited-move checklist
 

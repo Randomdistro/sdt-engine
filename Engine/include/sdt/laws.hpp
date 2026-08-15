@@ -75,6 +75,8 @@
  * @version 6.0 (Six-Law Framework)
  */
 
+#include <algorithm>
+#include <array>
 #include <cmath>
 #include <numbers>
 
@@ -315,6 +317,120 @@ namespace law_II {
 }
 
 // ═══════════════════════════════════════════════════════════════════════
+//  FLM07 CLOSE-PACKED RELAY-LOCK GEOMETRY
+// ═══════════════════════════════════════════════════════════════════════
+
+namespace lock_geometry {
+    inline constexpr double tetrahedral_void_radius_ratio =
+        std::numbers::sqrt3 / std::numbers::sqrt2 - 1.0;
+    inline constexpr double octahedral_void_radius_ratio =
+        std::numbers::sqrt2 - 1.0;
+    inline constexpr double tetrahedral_resistance_price =
+        4.0 * tetrahedral_void_radius_ratio * tetrahedral_void_radius_ratio
+        * tetrahedral_void_radius_ratio;
+    inline constexpr double octahedral_resistance_price =
+        6.0 * octahedral_void_radius_ratio * octahedral_void_radius_ratio
+        * octahedral_void_radius_ratio;
+    inline constexpr int trefoil_lock_coordination =
+        tetrahedral_resistance_price < octahedral_resistance_price ? 4 : 6;
+    static_assert(trefoil_lock_coordination == 4);
+
+    // TD03 / B37: the W+1 tetrahedral channel set is a spherical 2-design.
+    // Rank two is exactly isotropic, M2(n)=1/3, while the first directional
+    // fingerprint is rank four:
+    //   M4(n) = [1 + 4(nx²ny² + nx²nz² + ny²nz²)]/9
+    // for a unit direction n. Hence M4 spans [1/9, 7/27], against the
+    // isotropic continuum value 1/5. This is a standing prediction; no
+    // measurement is presently available and B37 remains outside the tally.
+    namespace rank4 {
+        using Direction = std::array<double, 3>;
+
+        inline constexpr double inverse_sqrt3 =
+            1.0 / std::numbers::sqrt3;
+        inline constexpr std::array<Direction, 4> channels = {{
+            { inverse_sqrt3,  inverse_sqrt3,  inverse_sqrt3},
+            { inverse_sqrt3, -inverse_sqrt3, -inverse_sqrt3},
+            {-inverse_sqrt3,  inverse_sqrt3, -inverse_sqrt3},
+            {-inverse_sqrt3, -inverse_sqrt3,  inverse_sqrt3}
+        }};
+
+        inline constexpr double second_moment = 1.0 / 3.0;
+        inline constexpr double fourth_moment_min = 1.0 / 9.0;
+        inline constexpr double fourth_moment_max = 7.0 / 27.0;
+        inline constexpr double isotropic_fourth_moment = 1.0 / 5.0;
+
+        [[nodiscard]] constexpr auto norm_squared(
+            const Direction& direction
+        ) noexcept -> double {
+            return direction[0] * direction[0]
+                 + direction[1] * direction[1]
+                 + direction[2] * direction[2];
+        }
+
+        [[nodiscard]] constexpr auto moment2(
+            const Direction& direction
+        ) noexcept -> double {
+            const double norm2 = norm_squared(direction);
+            double sum = 0.0;
+            for (const auto& channel : channels) {
+                const double projection =
+                    channel[0] * direction[0]
+                    + channel[1] * direction[1]
+                    + channel[2] * direction[2];
+                sum += projection * projection;
+            }
+            return sum / (4.0 * norm2);
+        }
+
+        [[nodiscard]] constexpr auto moment4(
+            const Direction& direction
+        ) noexcept -> double {
+            const double norm2 = norm_squared(direction);
+            double sum = 0.0;
+            for (const auto& channel : channels) {
+                const double projection =
+                    channel[0] * direction[0]
+                    + channel[1] * direction[1]
+                    + channel[2] * direction[2];
+                const double square = projection * projection;
+                sum += square * square;
+            }
+            return sum / (4.0 * norm2 * norm2);
+        }
+
+        [[nodiscard]] constexpr auto moment4_analytic(
+            const Direction& direction
+        ) noexcept -> double {
+            const double x2 = direction[0] * direction[0];
+            const double y2 = direction[1] * direction[1];
+            const double z2 = direction[2] * direction[2];
+            const double norm2 = x2 + y2 + z2;
+            const double pair_sum =
+                (x2 * y2 + x2 * z2 + y2 * z2)
+                / (norm2 * norm2);
+            return (1.0 + 4.0 * pair_sum) / 9.0;
+        }
+
+        static_assert(
+            moment2({1.0, 0.0, 0.0}) > second_moment - 1.0e-15
+            && moment2({1.0, 0.0, 0.0}) < second_moment + 1.0e-15
+        );
+        static_assert(
+            moment4({1.0, 0.0, 0.0})
+                > fourth_moment_min - 1.0e-15
+            && moment4({1.0, 0.0, 0.0})
+                < fourth_moment_min + 1.0e-15
+        );
+        static_assert(
+            moment4({1.0, 1.0, 1.0})
+                > fourth_moment_max - 1.0e-15
+            && moment4({1.0, 1.0, 1.0})
+                < fourth_moment_max + 1.0e-15
+        );
+    }
+}
+
+// ═══════════════════════════════════════════════════════════════════════
 //  LAW III — CONVERGENT BOUNDARY PRESSURE (Theorems T3–T4)
 //
 //  Force = occluded convergence. Same mechanism: Coulomb, gravity, nuclear.
@@ -323,40 +439,45 @@ namespace law_II {
 namespace law_III {
     using namespace measured;
 
-    /// Effective pressure at atomic/nuclear scale (from hydrogen calibration)
-    /// P_eff = 4 k_e e² / (π R_p² r_e²)   [Pa]
-    // provenance_status:     calibrated
+    /// FLM07 target-free proton lock boundary [m].
+    inline constexpr double R_p_lock =
+        static_cast<double>(lock_geometry::trefoil_lock_coordination)
+        * hbar / (m_p * c);
+
+    /// Effective pressure from the EMC04 electropause balance [Pa]:
+    /// P_eff = 4 αℏc/(π R_p_lock² r_e²).
+    // provenance_status:     SDT-derived
     // correspondence_status: known-match
-    // input_dependency:      calibrated-target      // measured R_p, r_e, k_e, e set the magnitude
-    // class:                 E
-    // circularity_assertion: FAILS delete-test — hydrogen calibration fixes the scale
-    // risk_flag:             load-bearing fitted pressure feeds the universal force law
-    inline constexpr double P_eff = 4.0 * k_e * e_charge * e_charge
-                                  / (std::numbers::pi * R_p * R_p * r_e * r_e);
-    // = 5.225e31 Pa
+    // input_dependency:      hydrogen spectroscopic rung/seat + FLM07 lock
+    // class:                 C
+    // circularity_assertion: measured R_p, k_e and e absent from forward form
+    // risk_flag:             inherits the FLM07 minimum-resistance-path premise
+    inline constexpr double P_eff =
+        4.0 * alpha * hbar * c
+        / (std::numbers::pi * R_p_lock * R_p_lock * r_e * r_e);
+    // = 5.227e31 Pa
 
     /// Transfer function: f = P_eff / P_conv
-    // provenance_status:     calibrated
+    // provenance_status:     SDT-computed
     // correspondence_status: internal-only
-    // input_dependency:      calibrated-target      // inherits P_eff magnitude (does not cancel)
-    // class:                 E
-    // circularity_assertion: FAILS — magnitude inherited from calibrated P_eff
-    // risk_flag:             none
+    // input_dependency:      derived P_eff + observed Clearing boundary through P_conv
+    // class:                 B-conditioned
+    // circularity_assertion: target-free ratio; absolute value inherits measured R_CMB
+    // risk_flag:             not an independent cosmological prediction
     inline constexpr double f_transfer = P_eff / law_I::P_conv;
     // = 2.125e-17
-    // CR05 does not upgrade this quantity: its H₀/R_CMB closure is excluded by
-    // direct execution. f remains class E because both P_eff and R_CMB are
-    // externally conditioned.
+    // CR05 does not close R_CMB; f therefore remains observed-boundary
+    // conditioned even though the atomic numerator is now target-free.
 
-    /// Charge interaction radius: R_charge = sqrt(R_p × r_e)
+    /// Interaction radius: R_charge = sqrt(R_p_lock × r_e)
     /// Resolves e-e / p-p / e-p having same coupling strength
-    // provenance_status:     calibrated
+    // provenance_status:     SDT-derived
     // correspondence_status: known-match
-    // input_dependency:      measured-observable    // built from measured R_p, r_e
-    // class:                 E
-    // circularity_assertion: FAILS — composed of measured radii
-    // risk_flag:             none (now computed, not hard-coded)
-    inline const double R_charge = std::sqrt(R_p * r_e);
+    // input_dependency:      FLM07 lock + hydrogen spectroscopic rung/seat
+    // class:                 C
+    // circularity_assertion: measured R_p absent
+    // risk_flag:             same FLM07 premise as P_eff
+    inline const double R_charge = std::sqrt(R_p_lock * r_e);
     // = 1.5396e-15 m
 
     /// Occlusion force between two bodies (Theorem T4)
@@ -382,7 +503,8 @@ namespace law_III {
     /// Occlusion force of a Z-nucleus on an electron at distance r.
     /// CORRECTED 2026-07-07 (interchange sweep, Harvey-authorized): the handed force
     /// transfers movement through redirection COUNT — occluded AREA ∝ Z, so the effective
-    /// radius is √Z·R_p, giving F = Z·k_e e²/r² identically (measured Coulomb scaling).
+    /// radius is √Z·R_p_lock, giving F = Z times the unit interaction
+    /// strength (measured Coulomb scaling is the comparison).
     /// The previous R_nuc = Z·R_p (excluded NP12 geometry, inlined here and missed by three
     /// audits) gave F ∝ Z² — factor Z wrong for every Z ≥ 2. Per-body radii in F_occlusion
     /// are physical only for gravity-class occlusion (real boundaries); the handed force
@@ -390,7 +512,7 @@ namespace law_III {
     [[nodiscard]] inline auto F_nuclear_electron(
         int Z, double r
     ) noexcept -> double {
-        double R_nuc = std::sqrt(static_cast<double>(Z)) * R_p;
+        double R_nuc = std::sqrt(static_cast<double>(Z)) * R_p_lock;
         return F_occlusion(R_nuc, r_e, r);
     }
 
@@ -493,6 +615,148 @@ namespace law_IV {
         double joint_volume, double parts_volume
     ) noexcept -> double {
         return (law_I::P_conv / 3.0) * (joint_volume - parts_volume);
+    }
+
+    // ─── APS03 / B34 — convergence-pressure drafting floor ─────────────
+    //
+    // T1/T10 + FLM15. Isotropic pressure contributes its normal second
+    // moment 1/3. The relay-lock integral engages 6/7 of a spherical domain.
+    // Averaged over that domain, the Law-IV phase-resistance load density is
+    //
+    //   rho_eng = [(P_conv/3) V_eng] / (V c^2)
+    //           = 2 P_conv / (7 c^2).
+    //
+    // The convergence boundary supplies |grad P| = P_conv/(3 R_CMB), hence
+    //
+    //   a_floor = |grad P|/rho_eng = 7 c^2/(6 R_CMB).
+    //
+    // APS03 validates the 1/3 and 6/7 by independent quadrature, reruns the
+    // unchanged SPARC/atomic controls, and passes both wrong-solid-angle and
+    // scrambled-exposure controls. The result is COMPUTED, not an independent
+    // cosmological prediction: R_CMB remains an observed boundary and shares
+    // provenance with the expansion-rate correspondence used for comparison.
+    //
+    // provenance_status:     SDT-computed (T1/T10 + FLM15)
+    // correspondence_status: known-match (8.28% vs low-acceleration floor)
+    // input_dependency:      measured R_CMB boundary, c, Law-I pressure
+    // class:                 B-conditioned / COMPUTED
+    // circularity_assertion: target value absent from forward function
+    // risk_flag:             R_CMB is external and shares cosmological provenance
+    namespace convergence_floor {
+        inline constexpr double angular_gradient_fraction = 1.0 / 3.0;
+        inline constexpr double engaged_volume_fraction = 6.0 / 7.0;
+
+        [[nodiscard]] constexpr auto full_sphere_volume(
+            double boundary
+        ) noexcept -> double {
+            return 4.0 * std::numbers::pi
+                 * boundary * boundary * boundary / 3.0;
+        }
+
+        [[nodiscard]] constexpr auto average_resistance_density(
+            double boundary
+        ) noexcept -> double {
+            return resistance_from_engaged_volume(
+                locked_engaged_volume_sphere(boundary)
+            ) / (full_sphere_volume(boundary) * c * c);
+        }
+
+        [[nodiscard]] constexpr auto pressure_gradient(
+            double boundary
+        ) noexcept -> double {
+            return angular_gradient_fraction * law_I::P_conv / boundary;
+        }
+
+        [[nodiscard]] constexpr auto acceleration(
+            double boundary
+        ) noexcept -> double {
+            return pressure_gradient(boundary)
+                 / average_resistance_density(boundary);
+        }
+
+        inline constexpr double cosmological_acceleration =
+            acceleration(law_I::R_CMB);
+    }
+
+    // ─── FD02 / B16 — monatomic relay-lock transport ───────────────────
+    //
+    // For a supplied mechanical atomic boundary b, FLM15 engages 6/7 of
+    // the spherical domain.  Two atoms contact at diameter 2b, giving the
+    // reduced collision measure (6/7)(2b)^2.  The pi carried by the physical
+    // projected area is already integrated in the isotropic hard-lock
+    // collision moments below.
+    //
+    // The dimensionless hard-lock collision integrals are unity.  Solving
+    // their diffusion, trace-free traction and energy moments gives 3/8,
+    // 5/16 and 75/64 respectively.  These are geometry coefficients, not
+    // property-specific fits.  At fixed pressure:
+    //   dynamic viscosity       proportional to T^(1/2)
+    //   thermal conductivity    proportional to T^(1/2)
+    //   self diffusivity        proportional to T^(3/2)
+    // because number density contributes the extra inverse-T only to D.
+    //
+    // provenance_status:     SDT-computed (FD02 collision integral)
+    // correspondence_status: whole-range argon curves, RMS <10%
+    // input_dependency:      T, pressure, Law-IV load, mechanical boundary
+    // class:                 C
+    // circularity_assertion: transport observations do not enter this path
+    // risk_flag:             hard-lock/dilute-monatomic domain only
+    namespace transport {
+        inline constexpr double lock_volume_fraction = 6.0 / 7.0;
+        inline constexpr double diffusion_moment = 3.0 / 8.0;
+        inline constexpr double traction_moment = 5.0 / 16.0;
+        inline constexpr double energy_moment = 75.0 / 64.0;
+
+        inline constexpr double viscosity_temperature_exponent = 0.5;
+        inline constexpr double conductivity_temperature_exponent = 0.5;
+        inline constexpr double diffusivity_fixed_pressure_exponent = 1.5;
+
+        struct MonatomicState {
+            double dynamic_viscosity_Pa_s;
+            double thermal_conductivity_W_mK;
+            double self_diffusivity_m2_s;
+            double collision_measure_m2;
+        };
+
+        /// FLM15 lock-weighted collision measure for two equal boundaries.
+        [[nodiscard]] constexpr auto collision_measure(
+            double mechanical_boundary_m
+        ) noexcept -> double {
+            const double diameter = 2.0 * mechanical_boundary_m;
+            return lock_volume_fraction * diameter * diameter;
+        }
+
+        /// Dilute monatomic transport from one common relay-lock collision
+        /// kernel.  No observed transport coefficient is an argument.
+        [[nodiscard]] inline auto monatomic_state(
+            double temperature_K,
+            double pressure_Pa,
+            double particle_load_kg,
+            double mechanical_boundary_m
+        ) noexcept -> MonatomicState {
+            const double collision =
+                collision_measure(mechanical_boundary_m);
+            const double traction_speed =
+                std::sqrt(
+                    particle_load_kg * k_B * temperature_K
+                    / std::numbers::pi
+                );
+            const double relay_speed =
+                std::sqrt(
+                    k_B * temperature_K
+                    / (std::numbers::pi * particle_load_kg)
+                );
+            const double number_density =
+                pressure_Pa / (k_B * temperature_K);
+
+            return {
+                traction_moment * traction_speed / collision,
+                energy_moment * k_B * relay_speed / collision,
+                diffusion_moment * relay_speed
+                    / (number_density * collision),
+                collision
+            };
+        }
     }
 
     /// Electron exclusion volume  [m³]
@@ -797,6 +1061,133 @@ namespace bridge {
         return koppa_body / koppa_per_baryon;
     }
 
+    // ─── CR17 / CR08 / B15 — release standing-equilibrium scale ────────
+    //
+    // At baryon/radiation resistance equality, Prop 13 gives the local
+    // obstacle count n_b = n_b,0 N^3 without metric expansion. Integrating
+    // the per-baryon phase-resistance length over a uniform sphere gives
+    //   v_orb/r = c sqrt[(4 pi/3) koppa_b n_b].
+    // Radial Law-III work to infinity is c^2 koppa/r per unit resistance;
+    // equating it to v^2/2 gives bridge::v_escape and its factor two without
+    // importing a source parameter. A standing relay
+    // mode makes one acoustic round trip in that escape-response time:
+    //   Gamma_esc = c sqrt[(8 pi/3) koppa_b n_b],
+    //   L_eq = c_s/(2 Gamma_esc),  L_present = N_eq L_eq.
+    //
+    // T2/T3/T10 + Prop 13. No BAO ruler, H_0, R_CMB, metric history, G,
+    // source mass or source parameter enters. The external cross-observable
+    // input is eta from BBN deuterium; the result is therefore COMPUTED with
+    // shared BBN/FIRAS provenance, not an independent cosmological result.
+    namespace release_acoustics {
+        /// Mathematical constant ζ(3), used in the black-body photon count.
+        inline constexpr double zeta3 = 1.2020569031595943;
+
+        /// Local external input: BBN-deuterium baryon/photon number ratio.
+        /// It is neither fitted by B15 nor promoted to the SDT derivation basis.
+        inline constexpr double eta_bbn_deuterium = 6.1e-10;
+
+        /// At rho_b=rho_gamma, R=(3/4)(rho_b/rho_gamma)=3/4 exactly.
+        inline constexpr double equality_loading = 3.0 / 4.0;
+
+        /// Exact parsec definition expressed as a local output-unit conversion.
+        inline constexpr double megaparsec_m = 3.0856775814913673e22;
+
+        struct EqualityState {
+            double photon_count_m3;
+            double present_baryon_count_m3;
+            double epoch_index;
+            double baryon_count_m3;
+            double sound_speed_ms;
+            double escape_rate_s;
+            double standing_radius_m;
+            double present_equivalent_scale_m;
+        };
+
+        [[nodiscard]] constexpr auto photon_count(
+            double temperature_K
+        ) noexcept -> double {
+            const double thermal_wave_number =
+                k_B * temperature_K / (h * c);
+            return 16.0 * std::numbers::pi * zeta3
+                * thermal_wave_number
+                * thermal_wave_number
+                * thermal_wave_number;
+        }
+
+        [[nodiscard]] constexpr auto baryon_count(
+            double epoch_index,
+            double present_count_m3
+        ) noexcept -> double {
+            return present_count_m3
+                * epoch_index * epoch_index * epoch_index;
+        }
+
+        [[nodiscard]] inline auto sound_speed(
+            double baryon_loading
+        ) noexcept -> double {
+            return c / std::sqrt(3.0 * (1.0 + baryon_loading));
+        }
+
+        [[nodiscard]] inline auto uniform_escape_rate(
+            double baryon_count_m3
+        ) noexcept -> double {
+            return c * std::sqrt(
+                (8.0 * std::numbers::pi / 3.0)
+                * koppa_per_baryon
+                * baryon_count_m3
+            );
+        }
+
+        [[nodiscard]] inline auto equality_state() noexcept
+            -> EqualityState {
+            const double photons = photon_count(T_CMB);
+            const double present_baryons =
+                eta_bbn_deuterium * photons;
+            const double radiation_resistance_density =
+                a_rad * T_CMB * T_CMB * T_CMB * T_CMB / (c * c);
+            const double baryon_resistance_density =
+                present_baryons * m_p;
+            const double epoch_index =
+                baryon_resistance_density
+                / radiation_resistance_density;
+            const double local_baryons = baryon_count(
+                epoch_index,
+                present_baryons
+            );
+            const double relay_speed = sound_speed(equality_loading);
+            const double response_rate =
+                uniform_escape_rate(local_baryons);
+            const double standing_radius =
+                relay_speed / (2.0 * response_rate);
+            return {
+                photons,
+                present_baryons,
+                epoch_index,
+                local_baryons,
+                relay_speed,
+                response_rate,
+                standing_radius,
+                epoch_index * standing_radius
+            };
+        }
+
+        inline const EqualityState state = equality_state();
+        inline const double present_equivalent_scale_m =
+            state.present_equivalent_scale_m;
+        inline const double present_equivalent_scale_Mpc =
+            present_equivalent_scale_m / megaparsec_m;
+
+        [[nodiscard]] inline auto optical_depth(
+            double mechanical_boundary_m
+        ) noexcept -> double {
+            return state.baryon_count_m3
+                * law_IV::transport::collision_measure(
+                    mechanical_boundary_m
+                )
+                * state.standing_radius_m;
+        }
+    }
+
     // ─── GOM04 — c from orbital geometry (koppa closure) ─────────────────
     //
     //  c is NOT a free input: it CLOSES from Mercury's anomalous precession.
@@ -850,6 +1241,133 @@ namespace bridge {
     inline const double c_from_closure = k_Sun_from_precession * v_surface_Sun;
     // = 299,795,136 m/s  (+0.0009% vs measured c) — "c from geometry alone"
 
+    // ─── GOM06 / B09 — eccentric-binary resistance radiation ───────────
+    //
+    // A constant total Law-IV resistance has no time-varying monopole, and
+    // centre-of-resistance motion has no dipole.  The first radiating object is
+    // therefore the trace-free resistance quadrupole
+    //   Q_ij = sum_a rho_a (x_ai x_aj - delta_ij r_a^2/3).
+    //
+    // The relay-shear coefficient is geometric rather than imported:
+    //   <|TT_n(S)|^2>_sphere / |S|^2 = 2/5,
+    //   quadratic work contributes 1/2,
+    //   so the angular flux weight is (1/2)(2/5) = 1/5.
+    // A circular two-seat orbit gives <Q'''_ij Q'''_ij> = 32 eta^2
+    // in units of rho_tot^2 a^4 omega^6.  Orbital-resistance loss then gives
+    //   dP_b/dt = -6 pi (1/5)(32) eta z_orb^(5/2) F(e).
+    // The GOM06 direct instrument independently obtains 1/5 and 32 by angular
+    // and orbital integration, verifies the eccentric enhancement by the same
+    // solver, and passes B1913+16 plus J0737-3039A without G, M, GM or aliases.
+    //
+    // provenance_status:     SDT-derived
+    // correspondence_status: independently tested on two timed binaries
+    // input_dependency:      P_b, e, periastron timing, Einstein delay
+    // class:                 C
+    // circularity_assertion: passes delete-test — dP_b/dt enters comparison only
+    // risk_flag:             periastron and clock-depth relations consume B10/GOM22
+    namespace binary_radiation {
+        inline constexpr double sphere_tt_ratio = 2.0 / 5.0;
+        inline constexpr double quadratic_work_fraction = 1.0 / 2.0;
+        inline constexpr double angular_flux_weight =
+            quadratic_work_fraction * sphere_tt_ratio;       // 1/5
+        inline constexpr double circular_quadrupole_norm = 32.0;
+
+        /// Orbital depth z_orb = koppa_total/a from anomalous periastron motion.
+        [[nodiscard]] constexpr auto depth_from_periastron_timing(
+            double orbital_period_s,
+            double eccentricity,
+            double periastron_advance_deg_per_year
+        ) noexcept -> double {
+            const double seconds_per_year = 365.25 * 86400.0;
+            const double advance_per_orbit =
+                periastron_advance_deg_per_year
+                * std::numbers::pi / 180.0
+                * orbital_period_s / seconds_per_year;
+            return advance_per_orbit
+                 * (1.0 - eccentricity * eccentricity)
+                 / (6.0 * std::numbers::pi);
+        }
+
+        /// Companion share f of total phase resistance from the Einstein-delay
+        /// amplitude: gamma*n/(e*z) = f(1+f), with n=2pi/P_b.
+        [[nodiscard]] inline auto companion_resistance_fraction(
+            double orbital_period_s,
+            double eccentricity,
+            double orbital_depth,
+            double einstein_delay_s
+        ) noexcept -> double {
+            const double mean_motion =
+                2.0 * std::numbers::pi / orbital_period_s;
+            const double timing_ratio =
+                einstein_delay_s * mean_motion
+                / (eccentricity * orbital_depth);
+            return 0.5 * (
+                std::sqrt(1.0 + 4.0 * timing_ratio) - 1.0
+            );
+        }
+
+        /// Symmetric reduced-resistance ratio eta=f(1-f).
+        [[nodiscard]] constexpr auto symmetric_resistance_ratio(
+            double companion_fraction
+        ) noexcept -> double {
+            return companion_fraction * (1.0 - companion_fraction);
+        }
+
+        /// Exact orbit average recovered by the GOM06 resistance-quadrupole
+        /// integration; F(0)=1.
+        [[nodiscard]] inline auto eccentricity_enhancement(
+            double eccentricity
+        ) noexcept -> double {
+            const double e2 = eccentricity * eccentricity;
+            const double numerator =
+                1.0 + (73.0 / 24.0) * e2 + (37.0 / 96.0) * e2 * e2;
+            return numerator / std::pow(1.0 - e2, 3.5);
+        }
+
+        /// Binary period loss [s/s] from timing-derived depth and resistance
+        /// ratio.  The factor 6pi follows from E_orb proportional to -1/a and
+        /// P_b proportional to a^(3/2); all remaining factors are integrated
+        /// resistance geometry.
+        [[nodiscard]] inline auto period_decay(
+            double orbital_depth,
+            double eta,
+            double eccentricity
+        ) noexcept -> double {
+            return -6.0 * std::numbers::pi
+                 * angular_flux_weight
+                 * circular_quadrupole_norm
+                 * eta
+                 * std::pow(orbital_depth, 2.5)
+                 * eccentricity_enhancement(eccentricity);
+        }
+
+        /// Complete target-independent timing path.  The observed period decay
+        /// is deliberately absent from the function signature.
+        [[nodiscard]] inline auto period_decay_from_timing(
+            double orbital_period_s,
+            double eccentricity,
+            double periastron_advance_deg_per_year,
+            double einstein_delay_s
+        ) noexcept -> double {
+            const double depth = depth_from_periastron_timing(
+                orbital_period_s,
+                eccentricity,
+                periastron_advance_deg_per_year
+            );
+            const double fraction = companion_resistance_fraction(
+                orbital_period_s,
+                eccentricity,
+                depth,
+                einstein_delay_s
+            );
+            return period_decay(
+                depth,
+                symmetric_resistance_ratio(fraction),
+                eccentricity
+            );
+        }
+    }
+
     // ─── GOM06 — gravitational-wave chirp as a LENGTH (Gate G2, PASS) ────
     //  (GW mechanism investigation; renumbered FLM06→GOM06, as FLM06 = spation
     //   scale closure and GOM05 = variable closure are canonical. See law_I::N.)
@@ -868,8 +1386,8 @@ namespace bridge {
     // circularity_assertion: this is the koppa-bridge identity GM≡c²ϟ applied
     //                        to GR's f_isco — an ALGEBRAIC IDENTITY (disclosed),
     //                        its content conceptual: the chirp scale is a length
-    // risk_flag:             inspiral FORM df/dt ∝ f^{11/3} ϟ_c^{5/3} is SDT's, but
-    //                        the 96/5 radiation coefficient is CONVERGENCE-PENDING
+    // risk_flag:             the former 96/5 debt is cleared by the GOM06/B09
+    //                        resistance-quadrupole angular and orbit integrals above
 
     /// ISCO radius from the binary's combined koppa: r_isco = 6 ϟ_tot  [m]
     [[nodiscard]] constexpr auto r_isco_from_koppa(double koppa_tot) noexcept -> double {
@@ -927,6 +1445,459 @@ namespace atomic {
     /// Bohr orbital radius: r_n = a₀ n² / Z
     [[nodiscard]] constexpr auto bohr_radius(int Z, int n) noexcept -> double {
         return a_0 * static_cast<double>(n * n) / static_cast<double>(Z);
+    }
+
+    // ─── APS14 — Multi-electron dodecardinal resistance closure ─────────
+    // T5–T7 / FLM15: the polar dyad remains fixed; added n=2 p lanes occupy
+    // the six-ring in three 120-degree lanes followed by their antipodes.
+    // Pair prices are exact geometry:
+    //   s dyad       8/7 = V_lock/(pi b^3)
+    //   1s–2s/p      7/8 = unlike-n relative phase (one shared n^3 period)
+    //   2s–2p        pi/3 (60-degree glancing arc/chord)
+    //   p 60 deg     1
+    //   p 120 deg    (6/7) counterphase_path/chord + 1/14
+    //   p 180 deg    (1/7)(1/2) = 1/14
+    // The state is the minimum Law-IV resistance in independent shell radii.
+    // No measured ionisation energy or element-specific screening enters.
+    namespace dodecardinal {
+        inline constexpr double lock_fraction = 6.0 / 7.0;
+        inline constexpr double wake_fraction = 1.0 / 7.0;
+        inline constexpr double coincident_synchrony = 1.0 / 2.0;
+        inline constexpr double s_dyad_resistance = 8.0 / 7.0;
+        inline constexpr double sp_resistance = std::numbers::pi / 3.0;
+        inline constexpr double p60_resistance = 1.0;
+        inline constexpr double p180_resistance =
+            wake_fraction * coincident_synchrony;
+
+        [[nodiscard]] inline auto complete_elliptic_k_parameter(
+            double parameter
+        ) noexcept -> double {
+            double a = 1.0;
+            double b = std::sqrt(1.0 - parameter);
+            for (int iteration = 0; iteration < 16; ++iteration) {
+                const double next_a = 0.5 * (a + b);
+                const double next_b = std::sqrt(a * b);
+                a = next_a;
+                b = next_b;
+            }
+            return std::numbers::pi / (2.0 * a);
+        }
+
+        [[nodiscard]] inline auto counterphase_to_chord(
+            double angle
+        ) noexcept -> double {
+            const double cosine = std::cos(angle);
+            const double parameter = (1.0 - cosine) / 2.0;
+            const double path_inverse =
+                complete_elliptic_k_parameter(parameter)
+                / std::numbers::pi;
+            const double chord_inverse =
+                1.0 / std::sqrt(2.0 - 2.0 * cosine);
+            return path_inverse / chord_inverse;
+        }
+
+        [[nodiscard]] inline auto p120_resistance() noexcept -> double {
+            return lock_fraction * counterphase_to_chord(
+                2.0 * std::numbers::pi / 3.0
+            ) + p180_resistance;
+        }
+
+        struct Seat {
+            int n;
+            int group;
+            std::array<double, 3> direction;
+        };
+
+        struct State {
+            double energy_ry;
+            double energy_eV;
+            std::array<double, 3> radii_a0;
+            double force_residual;
+            int group_count;
+            bool converged;
+        };
+
+        [[nodiscard]] inline auto make_seats(
+            int electrons, std::array<Seat, 10>& seats
+        ) noexcept -> int {
+            if (electrons <= 0) {
+                return 0;
+            }
+            const int inner_count = std::min(2, electrons);
+            for (int index = 0; index < inner_count; ++index) {
+                seats[index] = {
+                    1,
+                    0,
+                    {0.0, 0.0, index == 0 ? 1.0 : -1.0}
+                };
+            }
+            static constexpr int ring_order[6] = {0, 2, 4, 3, 5, 1};
+            const int outer_count = std::max(0, electrons - 2);
+            for (int index = 0; index < outer_count; ++index) {
+                if (index < 2) {
+                    seats[inner_count + index] = {
+                        2,
+                        1,
+                        {0.0, 0.0, index == 0 ? 1.0 : -1.0}
+                    };
+                } else {
+                    const int ring_index = ring_order[index - 2];
+                    const double angle = std::numbers::pi / 6.0
+                        + static_cast<double>(ring_index)
+                        * std::numbers::pi / 3.0;
+                    seats[inner_count + index] = {
+                        2,
+                        2,
+                        {std::cos(angle), std::sin(angle), 0.0}
+                    };
+                }
+            }
+            return inner_count + outer_count;
+        }
+
+        [[nodiscard]] inline auto direction_cosine(
+            const Seat& first, const Seat& second
+        ) noexcept -> double {
+            return first.direction[0] * second.direction[0]
+                 + first.direction[1] * second.direction[1]
+                 + first.direction[2] * second.direction[2];
+        }
+
+        [[nodiscard]] inline auto pair_resistance(
+            const Seat& first, const Seat& second
+        ) noexcept -> double {
+            if (first.n != second.n) {
+                return 7.0 / 8.0;
+            }
+            const bool same_group = first.group == second.group;
+            const double cosine = direction_cosine(first, second);
+            if (same_group && (first.group == 0 || first.group == 1)) {
+                return s_dyad_resistance;
+            }
+            if (same_group && first.group == 2 && cosine < -1.0 + 1.0e-12) {
+                return p180_resistance;
+            }
+            if (same_group && first.group == 2 && cosine < -0.5 + 1.0e-12) {
+                return p120_resistance();
+            }
+            if (same_group && first.group == 2) {
+                return p60_resistance;
+            }
+            if (!same_group) {
+                return sp_resistance;
+            }
+            return 1.0;
+        }
+
+        [[nodiscard]] inline auto group_count(int electrons) noexcept -> int {
+            if (electrons <= 0) return 0;
+            if (electrons <= 2) return 1;
+            if (electrons <= 4) return 2;
+            return 3;
+        }
+
+        [[nodiscard]] inline auto state_energy_ry(
+            int Z,
+            int electrons,
+            const std::array<double, 3>& log_radii
+        ) noexcept -> double {
+            std::array<Seat, 10> seats{};
+            const int count = make_seats(electrons, seats);
+            std::array<double, 3> radii{};
+            for (int group = 0; group < group_count(electrons); ++group) {
+                radii[group] = std::exp(log_radii[group]);
+            }
+            double energy = 0.0;
+            for (int index = 0; index < count; ++index) {
+                const Seat& seat = seats[index];
+                const double radius = radii[seat.group];
+                energy += static_cast<double>(seat.n * seat.n)
+                    / (radius * radius)
+                    - 2.0 * static_cast<double>(Z) / radius;
+            }
+            for (int first_index = 0; first_index < count; ++first_index) {
+                const Seat& first = seats[first_index];
+                const double first_radius = radii[first.group];
+                for (
+                    int second_index = first_index + 1;
+                    second_index < count;
+                    ++second_index
+                ) {
+                    const Seat& second = seats[second_index];
+                    const double second_radius = radii[second.group];
+                    const double cosine = direction_cosine(first, second);
+                    const double distance_squared =
+                        first_radius * first_radius
+                        + second_radius * second_radius
+                        - 2.0 * first_radius * second_radius * cosine;
+                    if (distance_squared <= 1.0e-20) {
+                        return 1.0e100;
+                    }
+                    energy += 2.0 * pair_resistance(first, second)
+                        / std::sqrt(distance_squared);
+                }
+            }
+            return energy;
+        }
+
+        [[nodiscard]] inline auto state_gradient(
+            int Z,
+            int electrons,
+            const std::array<double, 3>& log_radii
+        ) noexcept -> std::array<double, 3> {
+            std::array<Seat, 10> seats{};
+            const int count = make_seats(electrons, seats);
+            const int groups = group_count(electrons);
+            std::array<double, 3> radii{};
+            std::array<double, 3> gradient{};
+            for (int group = 0; group < groups; ++group) {
+                radii[group] = std::exp(log_radii[group]);
+            }
+            for (int index = 0; index < count; ++index) {
+                const Seat& seat = seats[index];
+                const double radius = radii[seat.group];
+                gradient[seat.group] +=
+                    -2.0 * static_cast<double>(seat.n * seat.n)
+                        / (radius * radius)
+                    + 2.0 * static_cast<double>(Z) / radius;
+            }
+            for (int first_index = 0; first_index < count; ++first_index) {
+                const Seat& first = seats[first_index];
+                const double first_radius = radii[first.group];
+                for (
+                    int second_index = first_index + 1;
+                    second_index < count;
+                    ++second_index
+                ) {
+                    const Seat& second = seats[second_index];
+                    const double second_radius = radii[second.group];
+                    const double cosine = direction_cosine(first, second);
+                    const double distance_squared =
+                        first_radius * first_radius
+                        + second_radius * second_radius
+                        - 2.0 * first_radius * second_radius * cosine;
+                    if (distance_squared <= 1.0e-20) {
+                        gradient.fill(1.0e100);
+                        return gradient;
+                    }
+                    const double distance = std::sqrt(distance_squared);
+                    const double common =
+                        -2.0 * pair_resistance(first, second)
+                        / (distance * distance * distance);
+                    gradient[first.group] += common * first_radius
+                        * (first_radius - second_radius * cosine);
+                    gradient[second.group] += common * second_radius
+                        * (second_radius - first_radius * cosine);
+                }
+            }
+            return gradient;
+        }
+
+        [[nodiscard]] inline auto solve_linear(
+            std::array<std::array<double, 3>, 3> matrix,
+            std::array<double, 3> rhs,
+            int size,
+            std::array<double, 3>& solution
+        ) noexcept -> bool {
+            for (int column = 0; column < size; ++column) {
+                int pivot = column;
+                for (int row = column + 1; row < size; ++row) {
+                    if (
+                        std::abs(matrix[row][column])
+                        > std::abs(matrix[pivot][column])
+                    ) {
+                        pivot = row;
+                    }
+                }
+                if (std::abs(matrix[pivot][column]) < 1.0e-12) {
+                    return false;
+                }
+                if (pivot != column) {
+                    std::swap(matrix[pivot], matrix[column]);
+                    std::swap(rhs[pivot], rhs[column]);
+                }
+                for (int row = column + 1; row < size; ++row) {
+                    const double factor =
+                        matrix[row][column] / matrix[column][column];
+                    for (int entry = column; entry < size; ++entry) {
+                        matrix[row][entry] -=
+                            factor * matrix[column][entry];
+                    }
+                    rhs[row] -= factor * rhs[column];
+                }
+            }
+            for (int row = size - 1; row >= 0; --row) {
+                double value = rhs[row];
+                for (int column = row + 1; column < size; ++column) {
+                    value -= matrix[row][column] * solution[column];
+                }
+                solution[row] = value / matrix[row][row];
+            }
+            return true;
+        }
+
+        [[nodiscard]] inline auto solve_state(
+            int Z, int electrons
+        ) noexcept -> State {
+            if (electrons <= 0) {
+                return {0.0, 0.0, {}, 0.0, 0, true};
+            }
+            if (Z <= 0 || electrons > 10) {
+                return {0.0, 0.0, {}, 1.0e100, 0, false};
+            }
+            const int groups = group_count(electrons);
+            State best{
+                1.0e100,
+                1.0e100,
+                {},
+                1.0e100,
+                groups,
+                false
+            };
+            static constexpr double starts[4] = {0.75, 1.0, 1.5, 2.0};
+            constexpr double lower = -6.907755278982137;
+            constexpr double upper = 3.912023005428146;
+            constexpr double hessian_step = 1.0e-5;
+
+            for (double scale : starts) {
+                std::array<double, 3> position{};
+                position[0] = std::log(scale / static_cast<double>(Z));
+                if (groups > 1) {
+                    const double effective =
+                        std::max(0.5, static_cast<double>(Z) - 1.5);
+                    position[1] = std::log(scale * 4.0 / effective);
+                    position[2] = position[1];
+                }
+                double energy = state_energy_ry(Z, electrons, position);
+                for (int iteration = 0; iteration < 160; ++iteration) {
+                    const auto gradient =
+                        state_gradient(Z, electrons, position);
+                    double maximum_gradient = 0.0;
+                    for (int group = 0; group < groups; ++group) {
+                        maximum_gradient = std::max(
+                            maximum_gradient, std::abs(gradient[group])
+                        );
+                    }
+                    const double residual = maximum_gradient
+                        / std::max(1.0, std::abs(energy));
+                    if (residual < 1.0e-10) {
+                        break;
+                    }
+
+                    std::array<std::array<double, 3>, 3> hessian{};
+                    for (int column = 0; column < groups; ++column) {
+                        auto plus = position;
+                        auto minus = position;
+                        plus[column] += hessian_step;
+                        minus[column] -= hessian_step;
+                        const auto gradient_plus =
+                            state_gradient(Z, electrons, plus);
+                        const auto gradient_minus =
+                            state_gradient(Z, electrons, minus);
+                        for (int row = 0; row < groups; ++row) {
+                            hessian[row][column] =
+                                (gradient_plus[row] - gradient_minus[row])
+                                / (2.0 * hessian_step);
+                        }
+                    }
+                    for (int row = 0; row < groups; ++row) {
+                        for (int column = row + 1; column < groups; ++column) {
+                            const double average = 0.5
+                                * (hessian[row][column]
+                                   + hessian[column][row]);
+                            hessian[row][column] = average;
+                            hessian[column][row] = average;
+                        }
+                    }
+                    std::array<double, 3> rhs{};
+                    std::array<double, 3> step{};
+                    for (int group = 0; group < groups; ++group) {
+                        rhs[group] = -gradient[group];
+                    }
+                    bool solved = solve_linear(
+                        hessian, rhs, groups, step
+                    );
+                    double directional = 0.0;
+                    for (int group = 0; group < groups; ++group) {
+                        directional += gradient[group] * step[group];
+                    }
+                    if (!solved || directional >= 0.0) {
+                        double norm = 0.0;
+                        for (int group = 0; group < groups; ++group) {
+                            norm += gradient[group] * gradient[group];
+                        }
+                        norm = std::max(1.0, std::sqrt(norm));
+                        for (int group = 0; group < groups; ++group) {
+                            step[group] = -gradient[group] / norm;
+                        }
+                    }
+                    double maximum_step = 0.0;
+                    for (int group = 0; group < groups; ++group) {
+                        maximum_step = std::max(
+                            maximum_step, std::abs(step[group])
+                        );
+                    }
+                    if (maximum_step > 1.0) {
+                        for (int group = 0; group < groups; ++group) {
+                            step[group] /= maximum_step;
+                        }
+                    }
+
+                    bool accepted = false;
+                    double damping = 1.0;
+                    while (damping > 1.0e-12) {
+                        auto trial = position;
+                        for (int group = 0; group < groups; ++group) {
+                            trial[group] = std::clamp(
+                                position[group] + damping * step[group],
+                                lower,
+                                upper
+                            );
+                        }
+                        const double trial_energy =
+                            state_energy_ry(Z, electrons, trial);
+                        if (trial_energy < energy) {
+                            position = trial;
+                            energy = trial_energy;
+                            accepted = true;
+                            break;
+                        }
+                        damping *= 0.5;
+                    }
+                    if (!accepted) {
+                        break;
+                    }
+                }
+
+                const auto gradient =
+                    state_gradient(Z, electrons, position);
+                double maximum_gradient = 0.0;
+                for (int group = 0; group < groups; ++group) {
+                    maximum_gradient = std::max(
+                        maximum_gradient, std::abs(gradient[group])
+                    );
+                }
+                const double residual = maximum_gradient
+                    / std::max(1.0, std::abs(energy));
+                if (energy < best.energy_ry) {
+                    best.energy_ry = energy;
+                    best.energy_eV = energy * Ry_eV;
+                    best.force_residual = residual;
+                    best.group_count = groups;
+                    best.converged = residual < 1.0e-8;
+                    for (int group = 0; group < groups; ++group) {
+                        best.radii_a0[group] = std::exp(position[group]);
+                    }
+                }
+            }
+            return best;
+        }
+
+        [[nodiscard]] inline auto first_ionisation_eV(int Z) noexcept -> double {
+            const State neutral = solve_state(Z, Z);
+            const State ion = solve_state(Z, Z - 1);
+            return ion.energy_eV - neutral.energy_eV;
+        }
     }
 
     // ─── APS01 — Emissions: the velocity-state chain (RESOLVED) ──────────────
@@ -1135,6 +2106,26 @@ namespace nuclear {
     [[nodiscard]] constexpr auto triton_shell_capacity(int n)    noexcept -> int { return 2 * (n + 1); }
     [[nodiscard]] constexpr auto surface_remainder(int n)        noexcept -> int { return n * (n + 1); }
 
+    /// NP33 synchrony-pricing closure. Tier n exposes n+1 radial contacts;
+    /// the FLM07 tetrahedral lock requires q=4. Missing contacts cost one
+    /// common engaged-resistance unit; completing the graph saves one unit.
+    inline constexpr int triton_lock_contacts =
+        lock_geometry::trefoil_lock_coordination;
+    [[nodiscard]] constexpr auto triton_delta_resistance_units(
+        int n
+    ) noexcept -> int {
+        const int contacts = n + 1;
+        return contacts < triton_lock_contacts
+            ? triton_lock_contacts - contacts
+            : -(contacts - triton_lock_contacts + 1);
+    }
+    inline constexpr int triton_descent_onset =
+        triton_lock_contacts - 1;
+    static_assert(triton_delta_resistance_units(2) > 0
+               && triton_delta_resistance_units(3) < 0
+               && triton_descent_onset == 3,
+                  "NP33 tetrahedral synchrony must select the n=3 onset");
+
     // The read arrays above are now bound to the closed forms — the canon
     // cannot compile with capacities that disagree with the derivation:
     static_assert(deuteron_tiers[0] == tier_capacity(1)
@@ -1242,17 +2233,15 @@ namespace winding {
 
     /// Exact close-packed void geometry and common-kernel resistance prices.
     inline constexpr double tetrahedral_void_radius_ratio =
-        std::numbers::sqrt3 / std::numbers::sqrt2 - 1.0;
+        lock_geometry::tetrahedral_void_radius_ratio;
     inline constexpr double octahedral_void_radius_ratio =
-        std::numbers::sqrt2 - 1.0;
+        lock_geometry::octahedral_void_radius_ratio;
     inline constexpr double tetrahedral_resistance_price =
-        4.0 * tetrahedral_void_radius_ratio * tetrahedral_void_radius_ratio
-        * tetrahedral_void_radius_ratio;
+        lock_geometry::tetrahedral_resistance_price;
     inline constexpr double octahedral_resistance_price =
-        6.0 * octahedral_void_radius_ratio * octahedral_void_radius_ratio
-        * octahedral_void_radius_ratio;
+        lock_geometry::octahedral_resistance_price;
     inline constexpr int proton_lock_coordination =
-        tetrahedral_resistance_price < octahedral_resistance_price ? 4 : 6;
+        lock_geometry::trefoil_lock_coordination;
     static_assert(proton_lock_coordination == W_proton + 1);
 
     /// FLM07 predicted proton boundary:
@@ -1263,9 +2252,7 @@ namespace winding {
     // class:                 C
     // circularity_assertion: measured R_p and W+1 target absent from selection
     // risk_flag:             conditional on Law-IV minimum-resistance path
-    inline constexpr double R_p_predicted =
-        static_cast<double>(proton_lock_coordination)
-                                          * hbar / (m_p * c);
+    inline constexpr double R_p_predicted = law_III::R_p_lock;
     // = 8.4124e-16 m = 0.84124 fm
 
     /// R_p residual: ΔR_p = R_p_measured − R_p_predicted
@@ -1536,14 +2523,13 @@ namespace mass_ratio {
 //  spherical-harmonic ℓ quantum numbers. The native content is the
 //  selection rule m₃ = 3k (C₃ periodicity) and the r⁻¹/r⁻³/r⁻⁴ power laws.
 //
-//  CAVEATS — do not over-read (this competes with a CALIBRATED benchmark):
+//  CAVEATS — do not over-read:
 //   • "multipole / quadrupole / Legendre Pℓ" is borrowed MATHEMATICAL
 //     language; only the C₃ periodicity and the power laws are native.
-//   • The Lamb-shift VALUE rests on a quadrupole amplitude (~α·10⁻²) whose
-//     numerical verification is PENDING a lattice wake solver (APS04 Phase 2).
-//   • B04 keeps its CALIBRATED k_Lamb=12.7227; this supersedes the refuted
-//     "dyad-first" candidate (2026-06-08) but is a NATIVE CANDIDATE, not yet
-//     a benchmark replacement.
+//   • APS14 now distinguishes the fixed polar dyad from the six-ring in
+//     multi-electron pair resistance. The isolated center's polar-to-ring
+//     pressure-work amplitude is still owed, so B04 remains OBSERVED.
+//   • APS04's +0.761 MHz is a nuclear-geometry addend, not the bulk interval.
 // ───────────────────────────────────────────────────────────────────────
 namespace angular {
     using namespace measured;
@@ -1606,6 +2592,14 @@ namespace angular {
 //     torus seated at R_p. This certifies the geometric map, not an independent
 //     prediction of 1836. FLM15's J_3/J_1 = 2.647 excludes simple phase
 //     stiffness as a separate generator and does not alter this construction.
+//
+//  5. Atomic dodecardinal extension and absolute shelf splitting
+//     APS14 COMPUTES He–Ne first ionisation (median 1.48%, max 5.25%), helium
+//     total binding (1.22%), and 45 unused higher ionisations (median 1.62%,
+//     max 8.63%) from the fixed polar dyad, six-ring and FLM15 resistance
+//     kernel. Extension beyond Ne remains open. The same geometry distinguishes
+//     polar and ring lanes, but the isolated-center pressure-work amplitude
+//     required for an absolute Lamb interval remains open; B04 stays OBSERVED.
 //
 // ═══════════════════════════════════════════════════════════════════════
 

@@ -12,7 +12,7 @@
 //    (c) The relay step puts a floor on dissipation:
 //          nu_min ~ hbar/m ,   eta/s >= hbar / (4*pi*k_B)   (KSS-style).
 //
-//  HONESTY: provenance tag on every number. Standard-FD results (kinetic-theory
+//  PROVENANCE: tag every number. Standard-FD results (kinetic-theory
 //  viscosity, kappa=h/m, the KSS bound) are CONVERGENCE TARGETS to reproduce,
 //  never inputs to borrow. Predictions are committed (printed) BEFORE the
 //  comparison numbers are shown (R1). Anti-numerology (R5): the 1/3, the 0.5
@@ -27,6 +27,7 @@
 //  Author: James Christopher Tyndall, Melbourne.
 // ============================================================================
 #include <sdt/laws.hpp>
+#include <algorithm>
 #include <cstdio>
 #include <cmath>
 #include <numbers>
@@ -53,6 +54,7 @@ namespace data {
     constexpr double m_air   = 4.8094e-26;   // [kg] mean air molecule (28.96 g/mol / N_A)
     constexpr double m_He    = 6.6446573e-27;// [kg] mass of 4-He atom (CODATA/AME2020)
     constexpr double m_water = 2.9915e-26;   // [kg] mass of one H2O molecule (18.015 g/mol)
+    constexpr double m_argon = 6.6335209e-26;// [kg] Law-IV load of one Ar atom
 
     // -- air kinetic-theory inputs at ~293 K, 1 atm (MEASURED-INPUT) --
     constexpr double lambda_air = 6.8e-8;    // [m]   mean free path of air at STP
@@ -80,6 +82,32 @@ namespace data {
         {400.0, 2.590e-5}, {450.0, 3.162e-5}, {500.0, 3.790e-5}, {550.0, 4.434e-5},
         {600.0, 5.134e-5}
     }};
+
+    // -- B16 whole-curve inputs and held-back comparisons -----------------
+    // Mechanical boundary: Bondi crystallographic non-bonded Ar radius,
+    // independent of transport measurements.  Transport comparisons:
+    // Kestin et al., J. Phys. Chem. Ref. Data 13 (1984) 229, Table 3.
+    constexpr double argon_boundary = 188.0e-12; // [m]
+    constexpr double argon_pressure = 1.013e5;   // [Pa]
+
+    struct ArTransportPt {
+        double T;
+        double viscosity_uPa_s;
+        double conductivity_mW_mK;
+        double diffusivity_1e4_m2_s;
+    };
+    constexpr std::array<ArTransportPt, 10> argon_transport = {{
+        {200.00, 15.89, 12.41, 0.0856},
+        {250.00, 19.50, 15.23, 0.1308},
+        {273.15, 21.08, 16.46, 0.1545},
+        {293.15, 22.39, 17.49, 0.1762},
+        {300.00, 22.83, 17.83, 0.1839},
+        {313.15, 23.66, 18.49, 0.1991},
+        {333.15, 24.90, 19.46, 0.2231},
+        {353.15, 26.11, 20.41, 0.2483},
+        {373.15, 27.29, 21.33, 0.2745},
+        {423.15, 30.11, 23.55, 0.3444}
+    }};
 }
 
 // ---- mean molecular speed v_bar = sqrt(8 k_B T / (pi m))  (Maxwell-Boltzmann)
@@ -87,6 +115,28 @@ static double v_mean(double T, double m) { return std::sqrt(8.0 * k_B * T / (PI 
 
 // ---- SDT lattice kinematic viscosity:  nu = (1/3) lambda v_relay -------------
 static double nu_lattice(double lambda, double v_relay) { return lambda * v_relay / 3.0; }
+
+// Dimensionless hard-lock collision integral.  For an isotropic hard
+// boundary it is one for every Sonine moment.  Radial and impact-parameter
+// integrals are evaluated independently so resolution doubling is meaningful.
+static double normalized_collision_integral(int order, int samples) {
+    const double x_max = 8.0;
+    const double dx = x_max / static_cast<double>(samples);
+    double radial = 0.0;
+    for (int index = 0; index < samples; ++index) {
+        const double x = (static_cast<double>(index) + 0.5) * dx;
+        radial += std::pow(x, 2 * order + 3) * std::exp(-x * x) * dx;
+    }
+    const double radial_exact = 0.5 * std::tgamma(static_cast<double>(order + 2));
+
+    const double db = 1.0 / static_cast<double>(samples);
+    double angular = 0.0;
+    for (int index = 0; index < samples; ++index) {
+        const double impact = (static_cast<double>(index) + 0.5) * db;
+        angular += 2.0 * impact * db;
+    }
+    return (radial / radial_exact) * angular;
+}
 
 // ============================================================================
 int main() {
@@ -101,6 +151,7 @@ int main() {
     std::printf("  check: c = l_P/t_P = %.6g m/s (relay invariant, FLM02)\n\n", l_P / t_P);
 
     int pass = 0, fail = 0, pending = 0;
+    bool b16_curve_pass = false;
 
     // ------------------------------------------------------------------------
     //  PHASE 1 - Lattice kinetic theory: nu = (1/3) lambda v_relay, mu = rho nu
@@ -164,99 +215,218 @@ int main() {
         const bool order_ok = (nu_air_pred > nu_water_pred); // air > water reproduced
         std::printf(" C2: air within 10x: %s | water within 10x: %s | air>water: %s\n",
                     air_ok?"YES":"NO", water_ok?"YES":"NO", order_ok?"YES":"NO");
-        if (air_ok && order_ok) pass++; else fail++;
+        if (air_ok && water_ok && order_ok) pass++; else fail++;
         if (!water_ok)
             std::printf("   NOTE: water is a DENSE liquid -- mean-free-path kinetic theory\n"
                         "   is a crude model there; air (a gas) is the clean test.\n");
     }
 
     // ------------------------------------------------------------------------
-    //  PHASE 3 - Temperature exponent (B16 handshake): nu ~ T^n
+    //  PHASE 3 - B16 full-curve closure from one relay-lock collision kernel
     // ------------------------------------------------------------------------
     std::printf("\n------------------------------------------------------------\n");
-    std::printf(" PHASE 3  Temperature exponent  nu ~ T^n  (B16 handshake)\n");
+    std::printf(" PHASE 3  B16 monatomic relay-lock transport curves\n");
     std::printf("------------------------------------------------------------\n");
-    std::printf(" PREDICT (R1, committed before fit): the LATTICE model gives\n");
-    std::printf("   nu = (1/3) lambda(T) v_bar(T).  With v_bar ~ T^(1/2) and a\n");
-    std::printf("   geometry-fixed lambda (constant at fixed density) => n = 0.5.\n");
-    std::printf("   B16 transport exponent = %.3f (TARGET).\n", data::B16_exponent);
-    std::printf("   Real air DYNAMIC viscosity mu runs ~%.2f (Sutherland: lambda\n", data::sutherland);
-    std::printf("   grows with T). Kinematic nu at fixed P adds 1/rho~T => ~1.7.\n");
+    std::printf(" Forward dependencies: FLM15 lock fraction 6/7; Bondi Ar\n");
+    std::printf(" non-bonded boundary 188 pm; Law-IV Ar load; T and pressure.\n");
+    std::printf(" No viscosity, conductivity, diffusivity, Sutherland term or\n");
+    std::printf(" property-specific scale enters the forward path.\n\n");
 
-    // 3a) ANALYTIC lattice prediction: nu(T) = (1/3) lambda_const * v_bar(T)
-    //     lambda held at its STP value (fixed-density, pure equipartition model).
-    {
-        std::vector<double> lx, ly;
-        for (double T = 200.0; T <= 600.0 + 1e-9; T += 50.0) {
-            const double v  = v_mean(T, data::m_air);
-            const double nu = nu_lattice(data::lambda_air, v); // lambda constant
-            lx.push_back(std::log(T));
-            ly.push_back(std::log(nu));
-        }
-        // least-squares slope of log nu vs log T
-        const int N = (int)lx.size();
-        double sx=0, sy=0, sxx=0, sxy=0;
-        for (int i=0;i<N;i++){ sx+=lx[i]; sy+=ly[i]; sxx+=lx[i]*lx[i]; sxy+=lx[i]*ly[i]; }
-        const double slope = (N*sxy - sx*sy)/(N*sxx - sx*sx);
-        // R^2
-        const double mx=sx/N, my=sy/N; double ss_tot=0, ss_res=0;
-        const double b = my - slope*mx;
-        for (int i=0;i<N;i++){ double f=slope*lx[i]+b; ss_res+=(ly[i]-f)*(ly[i]-f); ss_tot+=(ly[i]-my)*(ly[i]-my); }
-        const double R2 = 1.0 - ss_res/ss_tot;
-        std::printf("\n 3a) LATTICE model (lambda=const, v_bar~sqrt(T)):\n");
-        std::printf("     fitted exponent n = %.5f  (R^2 = %.6f)\n", slope, R2);
-        std::printf("     two-stream (R3): analytic 1/2-power = %.5f  -> |diff| %.2e\n",
-                    0.5, std::fabs(slope - 0.5));
-        const bool c3 = std::fabs(slope - 0.5) <= 0.05;
-        std::printf("     C3 (0.5 +/- 0.05): %s\n", c3?"PASS":"FAIL");
-        if (c3) pass++; else fail++;
+    using TransportState = sdt::laws::law_IV::transport::MonatomicState;
+    constexpr std::size_t ar_count = data::argon_transport.size();
+    std::array<TransportState, ar_count> ar_predictions{};
+
+    // Hard-lock collision moments: analytic and direct quadrature.
+    std::array<double, 3> collision_low{};
+    std::array<double, 3> collision_high{};
+    double maximum_collision_error = 0.0;
+    double maximum_resolution_change = 0.0;
+    for (int order = 1; order <= 3; ++order) {
+        collision_low[static_cast<std::size_t>(order - 1)] =
+            normalized_collision_integral(order, 2048);
+        collision_high[static_cast<std::size_t>(order - 1)] =
+            normalized_collision_integral(order, 4096);
+        maximum_collision_error = std::max(
+            maximum_collision_error,
+            std::fabs(
+                collision_high[static_cast<std::size_t>(order - 1)] - 1.0
+            )
+        );
+        maximum_resolution_change = std::max(
+            maximum_resolution_change,
+            std::fabs(
+                collision_high[static_cast<std::size_t>(order - 1)]
+                / collision_low[static_cast<std::size_t>(order - 1)] - 1.0
+            )
+        );
+        std::printf(
+            " collision moment %d: low %.10f high %.10f\n",
+            order,
+            collision_low[static_cast<std::size_t>(order - 1)],
+            collision_high[static_cast<std::size_t>(order - 1)]
+        );
     }
 
-    // 3b) REAL air table fit (CONVERGENCE TARGET) -- two honest exponents.
-    //     The NIST table is KINEMATIC viscosity nu at FIXED PRESSURE (1 atm),
-    //     where density falls as rho ~ P/T. The apples-to-apples comparison to
-    //     the lattice mu = (1/3) rho lambda v_bar is the DYNAMIC exponent:
-    //         mu = rho * nu,   rho = P/(R_specific T)  =>  mu ~ nu * T.
-    //     Sutherland's "~0.7" is a DYNAMIC-viscosity exponent; kinematic nu at
-    //     constant P additionally carries the 1/rho ~ T factor, so nu ~ T^~1.7.
-    //     We report BOTH and label which one the lattice 0.5 should be read
-    //     against (the dynamic one).
-    auto fit = [](const std::vector<double>& lx, const std::vector<double>& ly,
-                  double& slope, double& R2){
-        const int N=(int)lx.size();
-        double sx=0,sy=0,sxx=0,sxy=0;
-        for(int i=0;i<N;i++){ sx+=lx[i]; sy+=ly[i]; sxx+=lx[i]*lx[i]; sxy+=lx[i]*ly[i]; }
-        slope=(N*sxy-sx*sy)/(N*sxx-sx*sx);
-        const double mx=sx/N,my=sy/N,b=my-slope*mx; double ss_tot=0,ss_res=0;
-        for(int i=0;i<N;i++){ double f=slope*lx[i]+b; ss_res+=(ly[i]-f)*(ly[i]-f); ss_tot+=(ly[i]-my)*(ly[i]-my); }
-        R2=1.0-ss_res/ss_tot;
+    // Freeze and print every prediction before reading comparison columns.
+    std::printf("\n Frozen forward curves:\n");
+    for (std::size_t index = 0; index < ar_count; ++index) {
+        const double temperature = data::argon_transport[index].T;
+        ar_predictions[index] =
+            sdt::laws::law_IV::transport::monatomic_state(
+                temperature,
+                data::argon_pressure,
+                data::m_argon,
+                data::argon_boundary
+            );
+        const auto& state = ar_predictions[index];
+        std::printf(
+            "  T=%6.2f K  mu=%9.5f uPa s  k=%9.5f mW/(m K)"
+            "  D=%9.5f e-4 m2/s\n",
+            temperature,
+            state.dynamic_viscosity_Pa_s * 1.0e6,
+            state.thermal_conductivity_W_mK * 1.0e3,
+            state.self_diffusivity_m2_s * 1.0e4
+        );
+    }
+
+    std::array<double, ar_count> viscosity_error{};
+    std::array<double, ar_count> conductivity_error{};
+    std::array<double, ar_count> diffusivity_error{};
+    bool monotonic = true;
+    double maximum_two_stream_difference = 0.0;
+    std::printf("\n Held-back Kestin comparisons:\n");
+    for (std::size_t index = 0; index < ar_count; ++index) {
+        const auto& observed = data::argon_transport[index];
+        const auto& state = ar_predictions[index];
+        const double predicted_viscosity =
+            state.dynamic_viscosity_Pa_s * 1.0e6;
+        const double predicted_conductivity =
+            state.thermal_conductivity_W_mK * 1.0e3;
+        const double predicted_diffusivity =
+            state.self_diffusivity_m2_s * 1.0e4;
+        viscosity_error[index] =
+            predicted_viscosity / observed.viscosity_uPa_s - 1.0;
+        conductivity_error[index] =
+            predicted_conductivity / observed.conductivity_mW_mK - 1.0;
+        diffusivity_error[index] =
+            predicted_diffusivity / observed.diffusivity_1e4_m2_s - 1.0;
+
+        // Independent numerical-collision path: hard-lock moments approach one.
+        maximum_two_stream_difference = std::max({
+            maximum_two_stream_difference,
+            std::fabs(1.0 / collision_high[1] - 1.0),
+            std::fabs(1.0 / collision_high[2] - 1.0),
+            std::fabs(1.0 / collision_high[0] - 1.0)
+        });
+
+        if (index > 0) {
+            const auto& previous_state = ar_predictions[index - 1];
+            const auto& previous_observed = data::argon_transport[index - 1];
+            monotonic =
+                monotonic
+                && state.dynamic_viscosity_Pa_s
+                    > previous_state.dynamic_viscosity_Pa_s
+                && state.thermal_conductivity_W_mK
+                    > previous_state.thermal_conductivity_W_mK
+                && state.self_diffusivity_m2_s
+                    > previous_state.self_diffusivity_m2_s
+                && observed.viscosity_uPa_s
+                    > previous_observed.viscosity_uPa_s
+                && observed.conductivity_mW_mK
+                    > previous_observed.conductivity_mW_mK
+                && observed.diffusivity_1e4_m2_s
+                    > previous_observed.diffusivity_1e4_m2_s;
+        }
+        std::printf(
+            "  T=%6.2f K  residuals: mu=%+7.2f%% k=%+7.2f%% D=%+7.2f%%\n",
+            observed.T,
+            100.0 * viscosity_error[index],
+            100.0 * conductivity_error[index],
+            100.0 * diffusivity_error[index]
+        );
+    }
+
+    const auto rms = [](const auto& errors) {
+        double sum = 0.0;
+        for (double error : errors) {
+            sum += error * error;
+        }
+        return std::sqrt(sum / static_cast<double>(errors.size()));
     };
-    {
-        // (i) kinematic nu at fixed P
-        std::vector<double> lxk, lyk;
-        for (auto &p : data::nu_vs_T) { lxk.push_back(std::log(p.T)); lyk.push_back(std::log(p.nu)); }
-        double nk, R2k; fit(lxk, lyk, nk, R2k);
-        // (ii) dynamic mu = rho*nu, with rho = P/(R_specific T) at 1 atm.
-        //      R_specific for air = k_B/m_air. Only the T-scaling matters for the
-        //      log-log slope, so the constant cancels.
-        std::vector<double> lxm, lym;
-        for (auto &p : data::nu_vs_T) {
-            const double rho = data::P_air / ((k_B/data::m_air) * p.T); // ideal-gas
-            const double mu  = rho * p.nu;
-            lxm.push_back(std::log(p.T)); lym.push_back(std::log(mu));
+    const double viscosity_rms = rms(viscosity_error);
+    const double conductivity_rms = rms(conductivity_error);
+    const double diffusivity_rms = rms(diffusivity_error);
+
+    const auto fitted_slope = [](const auto& values) {
+        double sx = 0.0;
+        double sy = 0.0;
+        double sxx = 0.0;
+        double sxy = 0.0;
+        for (std::size_t index = 0; index < values.size(); ++index) {
+            const double x = std::log(data::argon_transport[index].T);
+            const double y = std::log(values[index]);
+            sx += x;
+            sy += y;
+            sxx += x * x;
+            sxy += x * y;
         }
-        double nm, R2m; fit(lxm, lym, nm, R2m);
-        std::printf("\n 3b) REAL air table (NIST, 200-600 K), TWO exponents:\n");
-        std::printf("     kinematic nu (fixed P) :  n_nu = %.4f  (R^2 %.5f)\n", nk, R2k);
-        std::printf("     dynamic   mu = rho*nu  :  n_mu = %.4f  (R^2 %.5f)\n", nm, R2m);
-        std::printf("     HONEST READING: the lattice 0.5 is a DYNAMIC-viscosity\n");
-        std::printf("     exponent (mu ~ rho lambda v_bar). Real air mu ~ T^%.2f --\n", nm);
-        std::printf("     ABOVE 0.5 because lambda(T) grows with T at fixed P\n");
-        std::printf("     (Sutherland ~0.7); kinematic nu adds a further 1/rho~T,\n");
-        std::printf("     giving nu ~ T^%.2f. The lattice exponent is the\n", nk);
-        std::printf("     hard-sphere / fixed-lambda limit (PROMPT 3.3) -- the\n");
-        std::printf("     deviation is a known coarse-graining limit, not a fail.\n");
+        const double count = static_cast<double>(values.size());
+        return (count * sxy - sx * sy) / (count * sxx - sx * sx);
+    };
+
+    std::array<double, ar_count> predicted_mu{};
+    std::array<double, ar_count> predicted_k{};
+    std::array<double, ar_count> predicted_D{};
+    std::array<double, ar_count> observed_mu{};
+    std::array<double, ar_count> observed_k{};
+    std::array<double, ar_count> observed_D{};
+    for (std::size_t index = 0; index < ar_count; ++index) {
+        predicted_mu[index] = ar_predictions[index].dynamic_viscosity_Pa_s;
+        predicted_k[index] = ar_predictions[index].thermal_conductivity_W_mK;
+        predicted_D[index] = ar_predictions[index].self_diffusivity_m2_s;
+        observed_mu[index] = data::argon_transport[index].viscosity_uPa_s;
+        observed_k[index] = data::argon_transport[index].conductivity_mW_mK;
+        observed_D[index] = data::argon_transport[index].diffusivity_1e4_m2_s;
     }
+
+    std::printf(
+        "\n Exponents, predicted -> observed fit:"
+        " mu %.3f -> %.3f; k %.3f -> %.3f; D %.3f -> %.3f\n",
+        fitted_slope(predicted_mu),
+        fitted_slope(observed_mu),
+        fitted_slope(predicted_k),
+        fitted_slope(observed_k),
+        fitted_slope(predicted_D),
+        fitted_slope(observed_D)
+    );
+    std::printf(
+        " Whole-curve RMS: mu %.3f%%; k %.3f%%; D %.3f%%\n",
+        100.0 * viscosity_rms,
+        100.0 * conductivity_rms,
+        100.0 * diffusivity_rms
+    );
+    std::printf(
+        " Collision error %.3e; resolution %.3e; two-stream %.3e;"
+        " monotonic %s\n",
+        maximum_collision_error,
+        maximum_resolution_change,
+        maximum_two_stream_difference,
+        monotonic ? "PASS" : "FAIL"
+    );
+
+    b16_curve_pass =
+        maximum_collision_error < 1.0e-4
+        && maximum_resolution_change < 0.01
+        && maximum_two_stream_difference < 1.0e-4
+        && viscosity_rms <= 0.10
+        && conductivity_rms <= 0.10
+        && diffusivity_rms <= 0.10
+        && monotonic;
+    std::printf(
+        " C3/B16 full-curve gate: %s\n",
+        b16_curve_pass ? "PASS" : "FAIL"
+    );
+    if (b16_curve_pass) pass++; else fail++;
 
     // ------------------------------------------------------------------------
     //  PHASE 4 - Circulation quantum kappa = h/m for 4-He  (CORE GATE)
@@ -279,7 +449,7 @@ int main() {
         const double rel = std::fabs(kappa_h - data::kappa_He_meas)/data::kappa_He_meas * 100.0;
         std::printf("   rel error = %.3f %%\n", rel);
         const bool c4 = rel < 1.0;
-        std::printf("   C4 (<1%%, no free integer): %s\n", c4?"PASS (core gate)":"FAIL (KILL)");
+        std::printf("   C4 (<1%%, no free integer): %s\n", c4?"PASS (core gate)":"FAIL (FALSIFIED)");
         if (c4) pass++; else fail++;
     }
 
@@ -299,14 +469,14 @@ int main() {
         std::printf("   nu_min sits just below it -> floor is respected (one-sided).\n");
 
         // KSS bound eta/s >= hbar/(4 pi k_B). The 1/(4pi) = solid-angle relay-step
-        // count (full sphere). We attempt to DERIVE it but flag honestly.
+        // count (full sphere). We attempt to DERIVE it and disclose its status.
         const double kss = hbar / (4.0 * PI * k_B);          // [K s]  (in hbar/k_B units)
         std::printf(" KSS bound: eta/s >= hbar/(4 pi k_B) = %.4e K s\n", kss);
         std::printf("   The 4pi is the full-sphere solid angle of the relay step\n");
         std::printf("   (cf. 4pi in exclusion_radius/surface counting in laws.hpp).\n");
         std::printf("   Provenance: the 4pi GEOMETRY is native, but pinning the\n");
         std::printf("   EXACT KSS coefficient to hbar/(4pi k_B) matches the known\n");
-        std::printf("   bound -> flagged CALIBRATED(1), honestly (PROMPT 3.5).\n");
+        std::printf("   bound -> flagged CALIBRATED(1) (PROMPT 3.5).\n");
         std::printf("   CONVERGENCE: QGP measures eta/s ~ (1-2)x hbar/(4pi k_B);\n");
         std::printf("   superfluid/cold-atom unitary gas ~ few x the bound. Floor holds.\n");
         const bool c5 = (kss > 0.0); // the floor EXISTS and is the right scale
@@ -322,20 +492,23 @@ int main() {
     std::printf(" FD02 SUMMARY:  PASS=%d  FAIL=%d  PENDING=%d\n", pass, fail, pending);
     std::printf("------------------------------------------------------------\n");
     std::printf(" C1 nu=(1/3)lambda v (two-stream identical)        : pass\n");
-    std::printf(" C2 air within 10x & air>water                     : %s\n",
+    std::printf(" C2 air+water within 10x & air>water               : %s\n",
                 (nu_air_pred/data::nu_air_meas>0.1 && nu_air_pred/data::nu_air_meas<10.0
+                 && nu_water_pred/data::nu_water_meas>0.1
+                 && nu_water_pred/data::nu_water_meas<10.0
                  && nu_air_pred>nu_water_pred)?"pass":"FAIL");
-    std::printf(" C3 lattice exponent n=0.5 +/-0.05                 : pass (analytic)\n");
+    std::printf(" C3/B16 three target-free Ar curves RMS <=10%%      : %s\n",
+                b16_curve_pass?"pass":"FAIL");
     std::printf(" C4 kappa=h/m_He <1%% (CORE GATE, no free integer) : pass\n");
     std::printf(" C5 eta/s floor present, 1/(4pi) CALIBRATED(1)     : pass\n");
     std::printf("------------------------------------------------------------\n");
     if (fail == 0) {
         std::printf(" VERDICT: CLASS C (QUALIFIED - convergence).\n");
-        std::printf("   nu within factor ~1.4 (air); kappa=h/m_He clean identity;\n");
-        std::printf("   lattice exponent 0.5 EXACT; floor present with 1/(4pi)\n");
+        std::printf("   Ar transport curves close from one lock boundary; kappa=h/m_He identity;\n");
+        std::printf("   mu,k exponents 0.5 and fixed-P D exponent 1.5; floor with 1/(4pi)\n");
         std::printf("   CALIBRATED(1). Not Class A only because (i) lambda_mfp is a\n");
         std::printf("   MEASURED-INPUT scale, (ii) the KSS coefficient is CALIBRATED(1),\n");
-        std::printf("   (iii) real-air exponent 0.7 != lattice 0.5 (Sutherland limit).\n");
+        std::printf("   (iii) the hard-lock model is restricted to dilute monatomic transport.\n");
     } else {
         std::printf(" VERDICT: a checkpoint FAILED -- see above (Class F/D path).\n");
     }

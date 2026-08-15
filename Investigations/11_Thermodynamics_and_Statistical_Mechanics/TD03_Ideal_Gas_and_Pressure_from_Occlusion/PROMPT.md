@@ -3,7 +3,7 @@
 > **Author:** J. C. Harvey, Melbourne. **Status:** SPEC (upgrade 2026-06-27).
 > **Inherits:** `PERFECT_PROMPT_TEMPLATE.md` §⓪–§⑩ · `PROMPT_EXECUTION_PROTOCOL.md` · §0 anti-creep (R0–R5).
 > **Engine:** `#include <sdt/laws.hpp>` only — no local constant namespaces.
-> **Run:** Pre-commit thresholds in `RUN_LOG.md` before coding; adjust per pivot table (§⑩).
+> **Run:** Pre-registered thresholds in `RUN_LOG.md` before coding; adjust per pivot table (§⑩).
 ---
 
 ## ⓪ The Golden Rule — five questions (answered, not stubbed)
@@ -24,7 +24,8 @@
 4. **What would prove us wrong?** — §⑧ falsifiers with numeric triggers and real failure modes,
    including the anti-tautology firewall (F4) on the inherited equipartition.
 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class
-   (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN), per phase, no repainting a fired test.
+   (NATIVE / CONVERGENCE / SHARED-INPUT / FALSIFIED / OPEN), per phase,
+   no repainting a fired test.
 
 ## Question
 
@@ -32,7 +33,7 @@
 argument. The gap: derive it from Law III occlusion — the convergence-momentum flux a relay gas
 deposits on a wall — with no imposed Boltzmann ensemble and no continuum velocity distribution assumed.
 
-## The honest split (what TD03 owns vs what it inherits)
+## Scope split (what TD03 owns vs what it inherits)
 
 - **Native and owned by TD03:** pressure = one-sided occlusion momentum-flux (Law III), and the `1/3`
   as a *derived* readout of 3-D lattice isotropy (the same isotropy `⟨cos²θ⟩=1/3` that FD05 derives for
@@ -87,7 +88,7 @@ DoF, hence the mean impact momentum.
   closed *given a NATIVE TD02 equipartition*; only `k_B` dependency-traced; zero fitted parameters.
 - **QUALIFIED (Class C):** P1 native, but `PV=Nk_BT` rests on a TD02 equipartition graded IMPORTED →
   the ideal-gas number is CONVERGENCE; or the non-ideal `b` coefficient is order-unity / flagged.
-  *(Honest expected landing until TD02 clears its firewall.)*
+  *(Expected landing until TD02 clears its firewall.)*
 - **PENDING (Class D):** pressure law numerically correct but the `1/3` needs a calibrated isotropy step.
 - **FAIL (Class F):** the `1/3` cannot be obtained except by inserting it by hand (P1), **or**
   `PV=Nk_BT` is only reproducible by importing a Maxwell–Boltzmann ensemble directly into TD03.
@@ -130,7 +131,8 @@ the same momentum-flux). **Related:** [[TD01]] (microstate counting), FD05 (the 
 
 ## ⑩ Adaptive Execution Protocol
 
-> *It is a bad plan that cannot be altered.* Failures invoke **PIVOT / KILL / OPEN** — never RETRO-PASS or PLUG.
+> *It is a bad plan that cannot be altered.* Failures invoke **PIVOT /
+> FALSIFY / OPEN** — never RETRO-PASS or PLUG.
 > See `PROMPT_EXECUTION_PROTOCOL.md`.
 
 ### Pre-Run Commitment Block (copy to `RUN_LOG.md` before coding)
@@ -138,7 +140,7 @@ the same momentum-flux). **Related:** [[TD01]] (microstate counting), FD05 (the 
 ```markdown
 ## Pre-Run Commitments — TD03
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: 0 in P1 (the b co-volume is order-unity/flagged, not fitted)
 - Engine namespaces actually used: measured::k_B, law_III (F_occlusion, solid_angle_occluded),
     lattice_structure.hpp (optional, CRN bond directions), TD02 equipartition (INHERITED — class follows TD02)
@@ -155,9 +157,9 @@ the same momentum-flux). **Related:** [[TD01]] (microstate counting), FD05 (the 
 |---|---|---|---|
 | P1 axis-average ≠ 1/3 without an inserted factor | recompute the momentum bookkeeping over axes / CRN bonds | **F** — the `1/3` is not native | hand-insert the geometric factor |
 | P1 discrete CRN `⟨cos²θ⟩` off 1/3 by the frustration residual | report it as the **lattice fingerprint** (Q1); keep the continuum 1/3 as the A-core | **OPEN** the frustration shift | average it silently back to 1/3 |
-| P2 rests on a TD02 equipartition graded IMPORTED | grade TD03's ideal-gas number **CONVERGENCE** honestly | — | claim "ensemble-free PV=Nk_BT" anyway |
+| P2 rests on a TD02 equipartition graded IMPORTED | grade TD03's ideal-gas number **CONVERGENCE** and state the dependency | — | claim "ensemble-free PV=Nk_BT" anyway |
 | P3 first non-ideal term has the wrong sign | check the wake-overlap geometry (attractive vs excluded-volume) | **OPEN** the EoS correction | flip the sign to match van der Waals |
-| Rivals match but SDT only reproduces | label **DEGENERATE** honestly | — | Claim Class A |
+| Rivals match but SDT only reproduces | label **shared-input / not independent** | — | Claim Class A |
 | Upstream missing (TD02 not run) | **DEFER** P2/P3; cite dependency ID | — | Fake PASS |
 
 ### Allowed adjustments
@@ -188,6 +190,20 @@ tetrahedral prediction: min(M4)=1/9, max(M4)=7/27
 isotropic continuum: M4=1/5
 ```
 
+For a unit direction `n=(x,y,z)`, the exact tetrahedral reduction is
+
+```text
+M4(n) = [1 + 4(x^2 y^2 + x^2 z^2 + y^2 z^2)]/9.
+```
+
+The lower endpoint is therefore the axis class `[100]`; the upper endpoint is
+the tetrahedral/body-diagonal class `[111]`. The derivation instrument must
+evaluate those endpoint directions analytically, scan a deterministic
+equal-area sphere grid, compare the direct channel sum to the closed form, and
+validate the same reducer against an isotropic control. Its machine-readable
+record is a `B37_PREDICTION_JSON` stdout line with `measurement:null`; this is
+geometry validation, not an empirical B37 pass.
+
 Measurement protocol:
 
 1. Build a four-channel mechanical, acoustic or optical relay analogue whose
@@ -206,3 +222,6 @@ Measurement protocol:
 5. Report measured directions, raw channel responses, normalization, moments
    and uncertainties as CSV/JSON. A null result changes B37; absent data does
    not become a synthetic benchmark pass.
+
+Until those measured fields exist, B37 stays print-only in the benchmark
+suite and outside the earned denominator.

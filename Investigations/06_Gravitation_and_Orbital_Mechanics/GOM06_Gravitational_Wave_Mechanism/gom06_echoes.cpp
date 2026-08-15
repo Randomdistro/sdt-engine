@@ -14,7 +14,7 @@
 //    the relay speed vanishes, and that is now an OPEN second-order fork. The
 //    repaired canon adopts c_far = c(1−z)², which still vanishes at r = ϟ and
 //    so PRESERVES this prediction. The rival first-order-identical form
-//    c(1−2z) vanishes at r = 2ϟ = r_s exactly — a horizon — and would kill it.
+//    c(1−2z) vanishes at r = 2ϟ = r_s exactly — a horizon — and would rule it out.
 //    Nothing here is evidence for either form; the discriminator is strong-field
 //    (a 1.4 M☉ NS surface splits them by 8.6%). Read this section as
 //    CONDITIONAL on form (a). Record: GOM22_Shapiro_Velocity_Profile/.

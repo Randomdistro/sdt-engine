@@ -77,3 +77,46 @@ The frozen model ladder is:
 A gate-passing, delete-test-clean result is Class C (`DERIVED` route with known
 comparison). A dimensionally closed miss remains `PENDING`. Agreement obtained
 by consuming a measured J2 or an equivalent gravity-harmonic profile is void.
+
+## Direct execution — 2026-08-15
+
+Instrument:
+`gom41_planetary_quadrupole.cpp`.
+
+The source depth for every body was reconstructed from one satellite radius and
+period. The normalized calculation therefore consumed no body-source mass or
+gravitational-parameter table. Predictions for all six bodies were frozen
+before the comparison array was instantiated.
+
+The registered ladder was executed as follows:
+
+- `Q0_UNIFORM`: homogeneous Maclaurin resistance, `J2=q/2`;
+- `Q1_CONVERGENCE`: exact equator/pole convergence-boundary balance using the
+  measured polar and equatorial boundary;
+- `Q2_BOUNDARIES`: Clairaut/Radau response. Earth used coarse PREM mechanical
+  strata, Mars used the InSight core boundary, Jupiter and Saturn shared one
+  `n=1` gas-rich Lane–Emden profile, and Uranus and Neptune shared one `n=3/2`
+  ice-rich profile. No profile coefficient was selected separately for a body.
+
+Whole-corpus outcomes:
+
+- `Q0_UNIFORM`: Earth/Jupiter 3% gates both fail; `0/6` within 10%; RMS
+  `254.75%`;
+- `Q1_CONVERGENCE`: Earth `+0.91%`, Jupiter `-2.11%`, but only `3/6` within
+  10% and RMS `28.89%`;
+- `Q2_BOUNDARIES`: Earth `+1.16%`, Mars `-2.78%`, Jupiter `+5.14%`, Saturn
+  `+67.61%`, Uranus `-15.41%`, Neptune `-26.99%`; `3/6` within 10% and RMS
+  `30.47%`.
+
+All numerical controls pass:
+
+- zero-spin leakage: `0`;
+- spherical quadrupole leakage: `0`;
+- maximum direct-integral/Radau identity residual: `3.394e-7`;
+- maximum change on doubling radial resolution: `2.443e-4`.
+
+The numerical method is therefore resolved, but no registered model clears the
+corpus gate. B11 remains `PENDING`. The missing dependency is an independently
+established giant-planet phase-resistance equation of state and its mechanical
+transition boundaries, especially for Saturn and the ice giants. Those
+profiles may not be inferred from the J2 values above.

@@ -51,7 +51,7 @@ std::vector<double> make_bath(int M, double Etot) {
 int main() {
     std::printf("================================================================\n");
     std::printf(" TD03 - Ideal Gas and Pressure from Occlusion\n");
-    std::printf(" J. C. Harvey, Melbourne - 2026-07-03\n");
+    std::printf(" James Christopher Tyndall, Melbourne - 2026-07-03\n");
     std::printf(" Inheritance stated upfront: PV=NkT number carries TD02's class\n");
     std::printf(" (CONVERGENCE). TD03 owns the flux mechanism and the 1/3.\n");
     std::printf("================================================================\n\n");
@@ -126,44 +126,96 @@ int main() {
     std::printf("P1b: FLM08 tetrahedral bond set (W+1 = %d coordination)\n",
                 sdt::laws::lattice_structure::coordination);
     {
-        const double s3 = 1.0 / std::sqrt(3.0);
-        const std::array<std::array<double,3>,4> b = {{
-            { s3,  s3,  s3}, { s3, -s3, -s3}, {-s3,  s3, -s3}, {-s3, -s3,  s3} }};
-        std::uniform_real_distribution<double> u(-1.0, 1.0);
+        namespace rank4 = sdt::laws::lock_geometry::rank4;
+        constexpr int direction_count = 100'000;
+        const double golden_angle =
+            std::numbers::pi * (3.0 - std::sqrt(5.0));
         double worst2 = 0, min4 = 1e9, max4 = -1e9;
-        for (int k = 0; k < 100000; ++k) {
-            double n[3] = {u(rng), u(rng), u(rng)};
-            const double nn = std::sqrt(n[0]*n[0]+n[1]*n[1]+n[2]*n[2]);
-            if (nn < 1e-3) continue;
-            for (double& x : n) x /= nn;
-            double m2 = 0, m4 = 0;
-            for (const auto& bb : b) {
-                const double d = bb[0]*n[0] + bb[1]*n[1] + bb[2]*n[2];
-                m2 += d*d; m4 += d*d*d*d;
-            }
-            m2 /= 4.0; m4 /= 4.0;
-            worst2 = std::max(worst2, std::fabs(m2 - 1.0/3.0));
+        double analytic_residual = 0.0;
+        double isotropic_m2 = 0.0, isotropic_m4 = 0.0;
+        for (int k = 0; k < direction_count; ++k) {
+            const double z = 1.0
+                - 2.0 * (static_cast<double>(k) + 0.5)
+                / static_cast<double>(direction_count);
+            const double radial = std::sqrt(std::max(0.0, 1.0 - z * z));
+            const double azimuth =
+                golden_angle * static_cast<double>(k);
+            const rank4::Direction n = {
+                radial * std::cos(azimuth),
+                radial * std::sin(azimuth),
+                z
+            };
+            const double m2 = rank4::moment2(n);
+            const double m4 = rank4::moment4(n);
+            const double analytic = rank4::moment4_analytic(n);
+            worst2 = std::max(
+                worst2,
+                std::fabs(m2 - rank4::second_moment)
+            );
+            analytic_residual = std::max(
+                analytic_residual,
+                std::fabs(m4 - analytic)
+            );
             min4 = std::min(min4, m4); max4 = std::max(max4, m4);
+            isotropic_m2 += z * z;
+            isotropic_m4 += z * z * z * z;
         }
-        std::printf("  rank-2: max |<(b.n)^2> - 1/3| over 1e5 wall normals = %.2e  [%s]\n",
+        isotropic_m2 /= static_cast<double>(direction_count);
+        isotropic_m4 /= static_cast<double>(direction_count);
+
+        const double exact_min =
+            rank4::moment4({1.0, 0.0, 0.0});
+        const double exact_max =
+            rank4::moment4({1.0, 1.0, 1.0});
+        const bool isotropic_control =
+            std::fabs(isotropic_m2 - rank4::second_moment) < 0.005
+            && std::fabs(
+                isotropic_m4 - rank4::isotropic_fourth_moment
+            ) < 0.005;
+        const bool rank4_geometry =
+            worst2 < 1.0e-14
+            && analytic_residual < 1.0e-14
+            && std::fabs(
+                exact_min - rank4::fourth_moment_min
+            ) < 1.0e-14
+            && std::fabs(
+                exact_max - rank4::fourth_moment_max
+            ) < 1.0e-14
+            && min4 >= rank4::fourth_moment_min - 1.0e-12
+            && max4 <= rank4::fourth_moment_max + 1.0e-12
+            && isotropic_control;
+
+        std::printf("  rank-2: max |<(b.n)^2> - 1/3| over deterministic 1e5-grid = %.2e  [%s]\n",
                     worst2, worst2 < 1e-14 ? "EXACT" : "RESIDUAL");
         std::printf("  (analytic: sum bb^T = (4/3)I -> <(b.n)^2> = 1/3 for ANY wall; the\n");
         std::printf("   W+1=4 set is a spherical 2-design: the pressure 1/3 is PROTECTED)\n");
-        std::printf("  rank-4: <(b.n)^4> spans [%.6f, %.6f]  (predicted [1/9, 7/27] = [0.111111, 0.259259];\n",
+        std::printf("  rank-4 grid span: <(b.n)^4> in [%.6f, %.6f]\n",
                     min4, max4);
-        std::printf("   continuum = 1/5 = 0.200000) -> lattice fingerprint lives at rank 4,\n");
-        std::printf("   i.e. in fourth-moment observables, NOT in the pressure. [%s]\n\n",
-                    (worst2 < 1e-14 && std::fabs(min4 - 1.0/9.0) < 1e-3 &&
-                     std::fabs(max4 - 7.0/27.0) < 1e-3) ? "PASS" : "FAIL");
-        if (worst2 > 1e-14) p1b = false;
-        if (std::fabs(min4 - 1.0/9.0) > 1e-3 || std::fabs(max4 - 7.0/27.0) > 1e-3) p1b = false;
+        std::printf("  analytic extrema: axis %.9f = 1/9; tetrahedral %.9f = 7/27\n",
+                    exact_min, exact_max);
+        std::printf("  direct-vs-analytic maximum residual = %.2e\n",
+                    analytic_residual);
+        std::printf("  isotropic control: M2=%.9f (1/3), M4=%.9f (1/5) [%s]\n",
+                    isotropic_m2, isotropic_m4,
+                    isotropic_control ? "PASS" : "FAIL");
+        std::printf("  lattice fingerprint lives at rank 4, not in pressure. Geometry [%s].\n",
+                    rank4_geometry ? "PASS" : "FAIL");
+        std::printf("  B37_PREDICTION_JSON {\"status\":\"PENDING\",\"directions\":%d,"
+                    "\"M2\":%.15g,\"M4_min\":%.15g,\"M4_max\":%.15g,"
+                    "\"continuum_M4\":%.15g,\"measurement\":null}\n\n",
+                    direction_count,
+                    rank4::second_moment,
+                    rank4::fourth_moment_min,
+                    rank4::fourth_moment_max,
+                    rank4::isotropic_fourth_moment);
+        if (!rank4_geometry) p1b = false;
     }
 
     // ------------------------------------------------------------------
     // P2 - PV = N k_B T across a decade (T entropic, P counted)
     // ------------------------------------------------------------------
     std::printf("P2: PV/(N kT) across N and T (inherits TD02 class: CONVERGENCE)\n");
-    std::printf("  HONESTY DISCLOSURE (pre-run): with T defined entropically (kT = 2E/3N),\n");
+    std::printf("  IDENTITY DISCLOSURE (pre-run): with T defined entropically (kT = 2E/3N),\n");
     std::printf("  the axis-MEAN PV/(NkT) = sum(mv^2)/2E = 1 IDENTICALLY - it cannot fail and\n");
     std::printf("  is NOT gated (that would be an IDENTITY-PASS). The falsifiable content is\n");
     std::printf("  per-axis isotropy of the mixed bath: gate |r_axis - 1| < 4*sqrt(2/Np).\n");
