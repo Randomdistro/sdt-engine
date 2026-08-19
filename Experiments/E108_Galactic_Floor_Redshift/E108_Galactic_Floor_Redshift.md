@@ -58,7 +58,7 @@ zero-point, not interpreted as an absolute c-deficit.
 
 ## 4. Observable
 
-The signal is **not** a single line shift (degenerate with a velocity zero-point)
+The signal is **not** a single line shift (not independently discriminating from a velocity zero-point)
 but the **pattern**:
 
 | Signature | SM | SDT |

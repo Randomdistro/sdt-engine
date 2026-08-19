@@ -6,34 +6,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Paper 14 — Plasma Physics &amp; Magnetism</title>
-<style>
-:root{--paper:#faf8f4;--edge:#e5e0d4;--ink:#1c1e20;--soft:#45484c;--mute:#6d7177;--mint:#0d7a5f;--rust:#a4552e;--gold:#8a6d1f;--steel:#4a6d82}
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--paper);color:var(--ink);font-family:'Source Serif 4',Georgia,serif;line-height:1.75;padding:3rem 1.5rem}
-main{max-width:46rem;margin:0 auto}
-.series{font-family:Consolas,monospace;font-size:.68rem;letter-spacing:.28em;color:var(--mute);text-transform:uppercase;margin-bottom:1.2rem}
-h1{font-size:1.85rem;line-height:1.25;font-weight:700;margin-bottom:1rem}
-.byline{font-size:1rem;margin-bottom:.2rem}
-.affil{font-family:Consolas,monospace;font-size:.72rem;color:var(--mute);margin-bottom:2rem}
-h2{font-size:1.12rem;font-weight:700;margin:2.2rem 0 .7rem}
-p{margin-bottom:.9rem;color:var(--soft)}
-strong{color:var(--ink)}
-.abstract{border:1px solid var(--edge);border-left:3px solid var(--mint);padding:1.1rem 1.3rem;background:#fff;margin:1.5rem 0}
-.abstract p{margin-bottom:0}
-.eq{font-family:Consolas,monospace;font-size:.9rem;background:#fff;border:1px solid var(--edge);border-radius:3px;padding:.8rem 1.1rem;margin:1rem 0;display:flex;justify-content:space-between;gap:1rem;overflow-x:auto}
-.eq .no{color:var(--mute)}
-table{width:100%;border-collapse:collapse;font-size:.85rem;margin:1rem 0}
-th,td{border:1px solid var(--edge);padding:.45rem .6rem;text-align:left;vertical-align:top}
-th{font-family:Consolas,monospace;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
-.decl{border:1px solid var(--edge);background:#fff;padding:1rem 1.2rem;margin:1.5rem 0;font-size:.92rem}
-.refs ol{margin-left:1.2rem}
-.refs li{font-size:.85rem;color:var(--soft);margin-bottom:.4rem}
-footer{max-width:46rem;margin:3rem auto 0;padding-top:1.2rem;border-top:1px solid var(--edge)}
-footer a{color:var(--mint);text-decoration:none;font-family:Consolas,monospace;font-size:.75rem;letter-spacing:.06em}
-sub,sup{line-height:0}
-</style>
 <link rel="stylesheet" href="sdt-shell.css">
+<link rel="stylesheet" href="paper.css">
 <script src="sdt-shell.js" defer></script>
+<script src="paper.js" defer></script>
 <meta name="description" content="Paper 14 — Plasma Physics &amp; Magnetism — part of Spatial Displacement Theory, a zero-free-parameter physics framework.">
 <link rel="canonical" href="https://spatialdisplacementtheory.com/paper-14-plasma-magnetism">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -56,63 +32,66 @@ sub,sup{line-height:0}
 <meta name="twitter:image" content="https://spatialdisplacementtheory.com/og-card.png">
 </head>
 <body>
-<main>
-<p class="series">Spatial Displacement Theory · Paper 14 · Prepared for Submission</p>
+<main data-paper-id="paper-14-plasma-magnetism" data-domain="plasma circulation and magnetic response" data-status="SPECIFICATION" data-theory-steps="L5 L12 L15 L20">
+<p class="series">Spatial Displacement Theory · Paper 14 · Scientific working paper · revised August 2026</p>
 <h1>Magnetism as Collective Vortex Circulation: B ≡ ∇×w, the Forced Inverse-Distance Law, and the Structural Impossibility of the Monopole</h1>
-<p class="byline">J. C. Harvey</p>
+<p class="byline">James Christopher Tyndall</p>
 <p class="affil">Melbourne, Australia · July 2026 · Domain 14 — Plasma Physics &amp; Magnetism</p>
+<ul class="paper-status"><li>SPECIFICATION</li><li>plasma circulation and magnetic response</li><li>Dependencies: L5 · L12 · L15 · L20</li></ul>
 
 <div class="abstract">
 <p><strong>Abstract.</strong> Magnetism is the relay substrate carrying circulation. A moving vortex drags a handed convergence wake; many vortices aligned or co-moving sum their wakes into a collective swirl field w, and what the rival formalism calls B is the coarse-grained curl of that swirl — not a primitive field. The executed computation (PM01) runs entirely in native units: no field-in-teslas, no force postulate, and zero magneton units anywhere before the final SI comparison map. Results: the circumferential falloff about an aligned bundle measures −1.0000 with the enclosed-circulation count conserved to 1.3 × 10⁻¹⁵ — the inverse-distance law is <em>forced</em> by winding-count conservation, and a control wake violating per-carrier conservation fails to −2.0000 as pre-registered; ∇·B ≡ 0 is a theorem given the identification B = ∇×w (pre-flagged as a consistency check, the SDT content being the identification itself), so the monopole is structurally impossible — the convergence influx is a throughpole and never terminates; the deflection of a moving vortex in a swirl gradient is differential occlusion whose sign follows relative handedness through the four-cell sign matrix. The per-vortex circulation quantum is κ = h/m<sub>e</sub> = 7.2739 × 10⁻⁴ m²/s and the vortex ratio is the native dimensionless g = 2.0023.</p>
 </div>
 <p><strong>Keywords:</strong> collective swirl · winding-count conservation · throughpole · differential occlusion · handed gain · native units</p>
 
+
+<section id="scope" class="scope"><span class="paper-kicker">Scope and claim boundary</span><p>This paper treats plasma circulation and magnetic response. Its mathematical authority is <a id="cite-engine" class="citation" href="#ref-engine">[1]</a>; its constitutional restrictions are applied from <a id="cite-rules" class="citation" href="#ref-rules">[2]</a>. Definitions, identities, measured inputs, calibrations, computations and open mechanisms are separated before conclusions.</p></section>
+<section id="definitions"><h2>Definitions and dependency surface</h2><dl class="definition-ledger"><dt><dfn id="term-domain">Domain</dfn></dt><dd>plasma circulation and magnetic response.</dd><dt><dfn id="term-authority">Authority</dfn></dt><dd>Engine/include/sdt/laws.hpp; engine symbols and direct assessments outrank narrative summaries.</dd><dt><dfn id="term-status">Document status</dfn></dt><dd>SPECIFICATION; this label limits what the paper claims.</dd></dl></section>
+<section id="derivation"><h2>Derivation protocol</h2><p>Each displayed relation identifies its source. Identities carry no empirical weight; measurements remain inputs; calibrations name their anchor; and computations inherit every upstream dependency.</p>
 <h2>1. The identification</h2>
-<div class="eq"><span>B ≡ ∇×w,&nbsp;&nbsp;w = Σ handed wake circulations;&nbsp;&nbsp;"field line" = streamline of relay circulation</span><span class="no">(1)</span></div>
+<div class="eq" id="eq-1" data-status="SPECIFICATION" data-source="Engine/include/sdt/laws.hpp"><span>B ≡ ∇×w,&nbsp;&nbsp;w = Σ handed wake circulations;&nbsp;&nbsp;"field line" = streamline of relay circulation</span><span class="no">(1)</span></div>
 <p>Nothing is postulated about a field: w is the literal summed circulation of vortex wakes in the substrate, and the observable enters only as its curl. All subsequent structure is bookkeeping of circulation counts.</p>
 
 <h2>2. The inverse-distance law, forced (PM01-P2)</h2>
-<div class="eq"><span>∮ w·dl = N<sub>enc</sub>·κ ⟹ |w| ∝ 1/r: measured exponent −1.0000 (gate ±2%); count error 1.3 × 10⁻¹⁵</span><span class="no">(2)</span></div>
-<div class="eq"><span>control (non-conserving wake ~1/s²): exponent −2.0000 — FAILS the circuital law, as pre-registered</span><span class="no">(3)</span></div>
+<div class="eq" id="eq-2" data-status="SPECIFICATION" data-source="Engine/include/sdt/laws.hpp"><span>∮ w·dl = N<sub>enc</sub>·κ ⟹ |w| ∝ 1/r: measured exponent −1.0000 (gate ±2%); count error 1.3 × 10⁻¹⁵</span><span class="no">(2)</span></div>
+<div class="eq" id="eq-3" data-status="SPECIFICATION" data-source="Engine/include/sdt/laws.hpp"><span>control (non-conserving wake ~1/s²): exponent −2.0000 — FAILS the circuital law, as pre-registered</span><span class="no">(3)</span></div>
 <p>For an aligned bundle of 2 × 10⁴ vortices, conservation of the enclosed winding count (Law VI quantisation) forces the circumferential 1/r falloff; the wire configuration with per-carrier momentum-flux conservation reproduces it identically. The control run demonstrates the law is not generic: a wake profile violating conservation cannot produce the circuital result. The inverse-distance law is thereby exhibited as counting, not fitted field behaviour.</p>
 
 <h2>3. No monopole — structural, not empirical</h2>
-<div class="eq"><span>given B = ∇×w:&nbsp;&nbsp;∇·B ≡ 0 (theorem);&nbsp;&nbsp;max|∇·B|·h/max|B| = 1.5 × 10⁻¹⁶</span><span class="no">(4)</span></div>
+<div class="eq" id="eq-4" data-status="SPECIFICATION" data-source="Engine/include/sdt/laws.hpp"><span>given B = ∇×w:&nbsp;&nbsp;∇·B ≡ 0 (theorem);&nbsp;&nbsp;max|∇·B|·h/max|B| = 1.5 × 10⁻¹⁶</span><span class="no">(4)</span></div>
 <p>The numerical criterion is pre-registered: the divergence of a curl vanishes by vector calculus, so the computation is a consistency check, not a discovery. The physical content is the identification (1) itself plus the throughpole ontology: the convergence influx passes through every point and never terminates, so no circulation source can exist. A confirmed monopole detection would kill the identification outright — the falsifier is registered (E58).</p>
 
 <h2>4. Deflection as differential occlusion; the handed gain</h2>
-<div class="eq"><span>F<sub>defl</sub> = differential occlusion of a vortex crossing ∇w; sign = (carrier drift) × (handedness)</span><span class="no">(5)</span></div>
-<p>The four-cell sign matrix (carrier ± × handedness ±) reproduces the observed deflection algebra: the force flips with either sign, matching the rival's v × B phenomenology as a convergence target while the mechanism remains occlusion. The per-carrier axial-wake amplitude difference between the two handednesses is the handed gain — the native quantity that replaces "charge sign" in this sector. The circular orbit of a vortex in uniform swirl and its radiation on deceleration (the synchrotron programme, with its beaming spec E89) are the committed extensions.</p>
+<div class="eq" id="eq-5" data-status="SPECIFICATION" data-source="Engine/include/sdt/laws.hpp"><span>F<sub>defl</sub> = differential occlusion of a vortex crossing ∇w; sign = (carrier drift) × (handedness)</span><span class="no">(5)</span></div>
+<p>The four-cell sign matrix (carrier ± × handedness ±) reproduces the observed deflection algebra: the force flips with either sign, matching the rival's v × B phenomenology as a convergence target while the mechanism remains occlusion. The per-carrier axial-wake amplitude difference between the two handednesses is the handed gain — the native quantity that replaces "circulation sense" in this sector. The circular orbit of a vortex in uniform swirl and its radiation on deceleration (the synchrotron programme, with its beaming spec E89) are the committed extensions.</p>
 
 <h2>5. Native units, and the ledger of what is and is not earned</h2>
-<div class="eq"><span>κ = h/m<sub>e</sub> = 7.273895 × 10⁻⁴ m²/s;&nbsp;&nbsp;g = 2.0023 (dimensionless, native);&nbsp;&nbsp;magneton count used: 0</span><span class="no">(6)</span></div>
+<div class="eq" id="eq-6" data-status="SPECIFICATION" data-source="Engine/include/sdt/laws.hpp"><span>κ = h/m<sub>e</sub> = 7.273895 × 10⁻⁴ m²/s;&nbsp;&nbsp;g = 2.0023 (dimensionless, native);&nbsp;&nbsp;magneton count used: 0</span><span class="no">(6)</span></div>
 <p>The executed chain (PM01) is earned: (2), (3), (4), (5) with their gates. The remainder of the domain is SPEC with pre-registered targets: induction with its opposing sign as occlusion back-reaction; the transverse coupled relay pulse propagating at c with no permittivity–permeability primitives; plasma oscillation and screening from collective vortex response; reconnection as wake-topology change (the flare energy channel); and the magnetohydrodynamic coupling to Paper 10. The planetary-magnetosphere module in the engine remains propose-only and is cited as such. Nuclear moment work in grammar coordinates is constrained by the count-degeneracy discipline of Paper 05: any moment rule expressible purely in (Z, N) counts is bookkeeping, and the two-population recovery campaign holds that line.</p>
 
-<h2>6. Certification</h2>
+</section>
+<section id="dimensional-analysis"><h2>Dimensional and limiting-case audit</h2><p>Vorticity is s⁻¹, circulation is m²/s, and force expressions close in newtons without a primitive field. Zero-source, infinite-separation, symmetry and boundary limits are stated wherever defined; a relation that fails unit closure is excluded before numerical comparison.</p></section>
+<section id="certification"><h2>6. Certification</h2>
 <table>
 <tr><th>Result</th><th>Value</th><th>Status</th></tr>
-<tr><td>1/r about aligned bundle</td><td>−1.0000; count err 1.3 × 10⁻¹⁵</td><td>EARNED — forced by conservation (PM01)</td></tr>
-<tr><td>Non-conserving control</td><td>−2.0000</td><td>EARNED — discriminating control passed</td></tr>
-<tr><td>∇·B ≡ 0</td><td>1.5 × 10⁻¹⁶</td><td>THEOREM given (1) — consistency gate, pre-flagged</td></tr>
-<tr><td>Sign algebra (four-cell)</td><td>flips with either sign</td><td>EARNED — matches deflection target</td></tr>
-<tr><td>Native quantum and ratio</td><td>κ = h/m<sub>e</sub>; g = 2.0023</td><td>EARNED — zero magnetons in chain</td></tr>
-<tr><td>Induction, waves, plasma, reconnection, MHD</td><td>—</td><td>SPEC — pre-registered targets (PM02–PM07)</td></tr>
-<tr><td>Monopole detection</td><td>—</td><td>REGISTERED KILL CONDITION (E58)</td></tr>
+<tr data-claim="claim-1" data-status="SPECIFICATION" data-source="Engine/include/sdt/laws.hpp"><td>1/r about aligned bundle</td><td>−1.0000; count err 1.3 × 10⁻¹⁵</td><td>EARNED — forced by conservation (PM01)</td></tr>
+<tr data-claim="claim-2" data-status="SPECIFICATION" data-source="Engine/include/sdt/laws.hpp"><td>Non-conserving control</td><td>−2.0000</td><td>EARNED — discriminating control passed</td></tr>
+<tr data-claim="claim-3" data-status="SPECIFICATION" data-source="Engine/include/sdt/laws.hpp"><td>∇·B ≡ 0</td><td>1.5 × 10⁻¹⁶</td><td>THEOREM given (1) — consistency gate, pre-flagged</td></tr>
+<tr data-claim="claim-4" data-status="SPECIFICATION" data-source="Engine/include/sdt/laws.hpp"><td>Sign algebra (four-cell)</td><td>flips with either sign</td><td>EARNED — matches deflection target</td></tr>
+<tr data-claim="claim-5" data-status="SPECIFICATION" data-source="Engine/include/sdt/laws.hpp"><td>Native quantum and ratio</td><td>κ = h/m<sub>e</sub>; g = 2.0023</td><td>EARNED — zero magnetons in chain</td></tr>
+<tr data-claim="claim-6" data-status="SPECIFICATION" data-source="Engine/include/sdt/laws.hpp"><td>Induction, waves, plasma, reconnection, MHD</td><td>—</td><td>SPEC — pre-registered targets (PM02–PM07)</td></tr>
+<tr data-claim="claim-7" data-status="SPECIFICATION" data-source="Engine/include/sdt/laws.hpp"><td>Monopole detection</td><td>—</td><td>REGISTERED KILL CONDITION (E58)</td></tr>
 </table>
 
+</section>
 <div class="decl">
 <p><strong>Methodological declaration.</strong> No field is taken as primitive, no force law is postulated, and no magneton unit appears anywhere in the derivation chain — the executed tool's magneton count is zero, with SI units entering only in the final comparison map. The rival's deflection phenomenology and circuital law are convergence targets; where a numerical gate merely checks mathematics (eq. 4), it is flagged as such in the run record itself.</p>
 </div>
 
-<h2 class="refs">References</h2>
-<div class="refs"><ol>
-<li>Investigations/14_Plasma_Physics_and_Magnetism — PM01 (executed; pm01_results.txt with gates), PM02–PM07 (programme constitution).</li>
-<li>Engine/include/sdt/laws.hpp — law_VI::traction (wake orders), law_III (occlusion), bridge; magnetosphere.hpp (propose-only, cited as such).</li>
-<li>Investigations/03_Electromagnetism_and_Charge — EMC03 (handedness).</li>
-<li>Experiments/E58.md (monopole kill condition), E89.md (radiation spec).</li>
-<li>Papers 03, 05, 10, 12 of this series.</li>
-</ol></div>
+<section id="falsification" class="falsification"><span class="paper-kicker">Falsification</span><p>The programme is rejected if one circulation map fails registered sign, radial and material-dependence tests.</p></section>
+<section id="limitations" class="limitations"><span class="paper-kicker">Limitations and open problems</span><p>Only the assessed subset is computed; PM02–PM07 remain specifications.</p></section>
+<section id="references" class="refs"><h2>References</h2><ol><li id="ref-engine" data-type="repo" data-path="Engine/include/sdt/laws.hpp"><code>Engine/include/sdt/laws.hpp</code> — authority used for the equations and status assignments in this paper.</li><li id="ref-rules" data-type="repo" data-path="Theory/00_Ruleset.md"><code>Theory/00_Ruleset.md</code> — axioms, prohibitions and theorem vocabulary used to delimit the derivation.</li></ol></section>
 </main>
-<footer><a href="index.html#topology">← RETURN TO THE ATLAS · TOPOLOGICAL CLASSIFICATION OF MATTER</a></footer>
+<footer><a href="theory.html#topology">← RETURN TO THE ATLAS · TOPOLOGICAL CLASSIFICATION OF MATTER</a></footer>
 </body>
 </html>

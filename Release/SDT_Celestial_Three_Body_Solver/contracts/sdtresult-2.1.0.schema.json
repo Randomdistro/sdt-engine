@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spatial-displacement-theory.com/contracts/sdtresult-2.1.0.schema.json",
+  "title": "SDT celestial displacement and slingshot result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "case_id", "problem_class", "status", "classification", "solver", "provenance", "packet_ledger", "displacement_ledger", "slingshot", "executed_steps", "time_s", "diagnostics", "trajectory", "trajectory_sha256", "checkpoint"],
+  "properties": {
+    "contract_version": {"const": "2.1.0"},
+    "case_id": {"type": "string"},
+    "problem_class": {"enum": ["celestial_three_body", "unknown"]},
+    "status": {"enum": ["completed", "paused", "invalid_case", "collision", "numerical_failure"]},
+    "classification": {"enum": ["COMPUTED", "PENDING", "NOT-EXECUTED"]},
+    "message": {"type": "string"},
+    "solver": {"type": "object"},
+    "provenance": {"type": "object"},
+    "normalized_case": {"type": "object"},
+    "packet_ledger": {"type": "object"},
+    "displacement_ledger": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "required": ["id", "declared", "rest_volume_m3", "engaged_volume_m3", "effective_volume_m3", "resistance_ratio"]
+      }
+    },
+    "slingshot": {
+      "type": "object",
+      "required": ["enabled", "classification"],
+      "properties": {
+        "enabled": {"type": "boolean"},
+        "classification": {"enum": ["PENDING", "NOT-EXECUTED"]},
+        "K_SDT": {"type": "number"},
+        "anti_solar_axis": {"$ref": "#/$defs/vec3"},
+        "x_pause_m": {"type": "number"},
+        "stages": {"type": "array", "minItems": 9, "maxItems": 9},
+        "endpoint": {"type": "object"},
+        "kinematics": {"type": "object"}
+      }
+    },
+    "executed_steps": {"type": "integer", "minimum": 0},
+    "time_s": {"type": "number"},
+    "events": {"type": "array"},
+    "diagnostics": {"type": "object"},
+    "cones": {"type": "array", "maxItems": 42},
+    "pivots": {"type": "object"},
+    "lagrange": {"type": "array"},
+    "comparison": {"type": "object"},
+    "trajectory": {"type": "array"},
+    "trajectory_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "checkpoint": {"type": "object"}
+  },
+  "$defs": {
+    "vec3": {
+      "type": "array",
+      "prefixItems": [{"type": "number"}, {"type": "number"}, {"type": "number"}],
+      "items": false
+    }
+  }
+}

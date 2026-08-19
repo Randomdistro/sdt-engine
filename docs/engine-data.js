@@ -38,7 +38,19 @@
 
       document.dispatchEvent(new CustomEvent('sdt-engine-data', { detail: data }));
     })
-    .catch(() => {
+    .catch(error => {
       document.documentElement.dataset.sdtEngineData = 'fallback';
+      document.querySelectorAll('[data-sdt-benchmark-summary]').forEach(node => {
+        if (!node.textContent.includes('static fallback')) {
+          node.textContent += ' · static fallback';
+        }
+        node.title = 'Live benchmark data could not be loaded; showing embedded fallback text.';
+      });
+      document.querySelectorAll('[data-sdt-data]').forEach(node => {
+        node.title = 'Live engine data unavailable; showing embedded fallback value.';
+      });
+      document.dispatchEvent(new CustomEvent('sdt-engine-data-fallback', {
+        detail: { message: String(error?.message || error) }
+      }));
     });
 })();

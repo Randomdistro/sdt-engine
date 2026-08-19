@@ -6,11 +6,13 @@ import json
 import math
 import re
 import subprocess
+import sys
 import tempfile
 from pathlib import Path
 
 ROOT = Path(".")
 SEQ = ROOT / "Release/HTML_SDT_Website/nuclear-packing-sequencer.html"
+PACK = ROOT / "Release/HTML_SDT_Website/js/pack-nucleus.js"
 R_P = 0.8414
 
 
@@ -41,6 +43,7 @@ def extract_raw_rows(html: str) -> list[tuple]:
 
 
 def main() -> int:
+    sys.stdout.reconfigure(encoding="utf-8")
     print("================================================================")
     print("NSEQ01 — Nuclear Packing Sequencer rules freeze")
     print("Pre-registered 2026-08-09")
@@ -50,13 +53,13 @@ def main() -> int:
 
     print("C1 — rule ledger (source anchors)")
     rules = [
-        ("R1", "α-grammar n_t=A-2Z, n_d=3Z-A-2", "L344-348"),
-        ("R2", "R_p=0.8414 fm; A1=π R_p²", "L353-354"),
-        ("R3", "α contact-rotation tetrahedron; ring ≡ R_p; p↔n contacts", "L382-419"),
-        ("R4", "deuteron tiers capacities 6,12,12,20,30; n-in p-out rods", "L423-457"),
-        ("R5", "triton dual-tetra shells n-p-n; caps 8,10,12…; r_open>r_close", "L460+"),
-        ("R6", "explicit nuc.contacts bipartite p↔n", "L380, L415-417, bonds"),
-        ("R7", "ΔA=ΣA_i−A_∪; E≈κ·ΔA (κ fit separate)", "L511+, L549+"),
+        ("R1", "α-grammar n_t=A-2Z, n_d=3Z-A-2", "js/pack-nucleus.js grammar"),
+        ("R2", "R_p=0.8414 fm; A1=π R_p²", "shared packer + sequencer diagnostic"),
+        ("R3", "α contact-rotation tetrahedron; ring ≡ R_p; p↔n contacts", "js/pack-nucleus.js alpha core"),
+        ("R4", "deuteron tiers capacities 6,12,12,20,30; n-in p-out rods", "js/pack-nucleus.js SHELL_SEQ"),
+        ("R5", "triton dual-tetra shells n-p-n; caps 8,10,12…; r_open>r_close", "js/pack-nucleus.js polar seats"),
+        ("R6", "explicit nuc.contacts bipartite p↔n", "js/pack-nucleus.js contacts"),
+        ("R7", "ΔA=ΣA_i−A_∪; E≈κ·ΔA (κ fit separate)", "sequencer overlap diagnostic"),
         ("R8", "enmeshment = defect; not QED charge-radius map", "walkthrough + guide §10.1"),
     ]
     for rid, text, anc in rules:
@@ -96,30 +99,10 @@ def main() -> int:
         return 2
 
     print("C4 — packing smoke (Node packNucleus count = A, Z)")
-    # Extract packNucleus function body from HTML into a runner
-    # Extract from R_p through end of packNucleus (balanced braces after function)
-    start = html.find("const R_p = 0.8414;")
-    fn = html.find("function packNucleus(", start)
-    if start < 0 or fn < 0:
-        print("  FAIL: could not locate packNucleus")
+    if not PACK.exists():
+        print("  FAIL: shared packer not found")
         return 2
-    brace = html.find("{", fn)
-    depth = 0
-    end = brace
-    for i, ch in enumerate(html[brace:], brace):
-        if ch == "{":
-            depth += 1
-        elif ch == "}":
-            depth -= 1
-            if depth == 0:
-                end = i + 1
-                break
-    js_core = html[start:end]
-    # helpers used by packNucleus
-    if "function vnorm" not in js_core:
-        vn = re.search(r"function vnorm\(v\)\{[^}]+\}", html)
-        if vn:
-            js_core = vn.group(0) + "\n" + js_core
+    js_core = PACK.read_text(encoding="utf-8")
     smoke = [("He", 2, 4), ("C", 6, 12), ("O", 8, 16), ("Fe", 26, 56), ("U", 92, 238)]
     runner = (
         js_core
@@ -138,7 +121,9 @@ def main() -> int:
         f.write(runner)
         tmp = f.name
     try:
-        out = subprocess.check_output(["node", tmp], text=True, stderr=subprocess.STDOUT)
+        out = subprocess.check_output(
+            ["node", tmp], encoding="utf-8", stderr=subprocess.STDOUT
+        )
     except subprocess.CalledProcessError as e:
         print("  FAIL node:", e.output[:500])
         return 2

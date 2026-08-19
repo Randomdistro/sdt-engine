@@ -430,12 +430,12 @@ input[type=range]{width:100%;accent-color:var(--copper);height:24px;cursor:point
     <div class="golden-callout">
       <div class="golden-callout__symbol">R<sub>p</sub></div>
       <div class="golden-callout__text">
-        <h4>The proton charge radius — a live check</h4>
-        <p>The (2,3) trefoil's major radius comes out to exactly <em>half</em> the measured charge radius. The
+        <h4>The proton boundary radius — a live check</h4>
+        <p>The (2,3) trefoil's major radius comes out to exactly <em>half</em> the measured boundary radius. The
         missing factor of 2 is the <span class="k-mono">W+1 = 4</span> winding conjecture:
-        <span class="k-mono">R_charge = (W+1)·ℏ/(m_p·c)</span>.</p>
+        <span class="k-mono">R_boundary = (W+1)·ℏ/(m_p·c)</span>.</p>
         <div class="eq-block" style="margin:var(--sp-md) 0 var(--sp-sm);text-align:left">
-          <div class="eq" style="padding:0;font-size:1.25rem">R<sub>charge</sub> = 4·ℏ/(m<sub>p</sub>c) = <span class="res" id="o-rp">8.414e-16</span> m</div>
+          <div class="eq" style="padding:0;font-size:1.25rem">R<sub>×</sub> = 4·ℏ/(m<sub>p</sub>c) = <span class="res" id="o-rp">8.414e-16</span> m</div>
         </div>
         <span style="font-size:var(--fs-sm);color:var(--ink-muted)">measured: 8.414 × 10⁻¹⁶ m</span>
         <div id="v-rp" class="verdict ok">Match → 0.00%</div>
@@ -478,8 +478,8 @@ input[type=range]{width:100%;accent-color:var(--copper);height:24px;cursor:point
   <span class="s-kw">return</span> Mode{ vT, vP, R_over_a };
 }
 
-<span class="s-cm">// proton (2,3) trefoil — charge radius from the W+1 conjecture</span>
-<span class="s-kw">const double</span> R_charge = <span class="s-num">4.0</span> * hbar / (m_p * c);   <span class="s-cm">// 8.41e-16 m, 0.02%</span></div>
+<span class="s-cm">// proton (2,3) trefoil — boundary radius from the W+1 conjecture</span>
+<span class="s-kw">const double</span> R_boundary = <span class="s-num">4.0</span> * hbar / (m_p * c);   <span class="s-cm">// 8.41e-16 m, 0.02%</span></div>
     </div>
 
     <table class="tk-table">
@@ -523,7 +523,7 @@ input[type=range]{width:100%;accent-color:var(--copper);height:24px;cursor:point
 const C = {
   c: 299792458.0, hbar: 1.054571817e-34,
   m_e: 9.1093837015e-31, m_p: 1.67262192369e-27,
-  Rp_charge_measured: 8.414e-16   /* m, CODATA proton rms charge radius */
+  Rp_boundary_measured: 8.414e-16   /* m, CODATA proton rms boundary radius */
 };
 const gcd = (a,b)=> b ? gcd(b, a%b) : a;
 const $ = id => document.getElementById(id);
@@ -667,11 +667,11 @@ function highlightRow(p,q){
 }
 buildTable(); preset(1,1); animateKnot();
 
-/* ════ Act IV — proton charge radius live check ════ */
+/* ════ Act IV — proton boundary radius live check ════ */
 (function(){
   const W = 3, Rp = (W+1)*C.hbar/(C.m_p*C.c);
   $('o-rp').textContent = Rp.toExponential(3);
-  const dev = Math.abs(Rp - C.Rp_charge_measured)/C.Rp_charge_measured*100;
+  const dev = Math.abs(Rp - C.Rp_boundary_measured)/C.Rp_boundary_measured*100;
   const v = $('v-rp'); v.className = 'verdict '+(dev<0.5?'ok':'circ');
   v.textContent = 'Match → '+dev.toFixed(2)+'%';
 })();

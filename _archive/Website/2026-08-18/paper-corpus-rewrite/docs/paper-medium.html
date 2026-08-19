@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>/*sdt-theme-guard*/(function(){try{var t=localStorage.getItem("sdt.theme")||"auto";if(t==="auto")t=(window.matchMedia&&window.matchMedia("(prefers-color-scheme:dark)").matches)?"dark":"light";var d=document.documentElement;d.setAttribute("data-theme",t);d.setAttribute("data-sdt-theme",t);}catch(e){}})();</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Section Paper — The Relay Substrate</title>
+<style>
+:root{--paper:#faf8f4;--edge:#e5e0d4;--ink:#1c1e20;--soft:#45484c;--mute:#6d7177;--mint:#0d7a5f;--rust:#a4552e;--gold:#8a6d1f;--steel:#4a6d82}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:'Source Serif 4',Georgia,serif;line-height:1.75;padding:3rem 1.5rem}
+main{max-width:46rem;margin:0 auto}
+.series{font-family:Consolas,monospace;font-size:.68rem;letter-spacing:.28em;color:var(--mute);text-transform:uppercase;margin-bottom:1.2rem}
+h1{font-size:1.85rem;line-height:1.25;font-weight:700;margin-bottom:1rem}
+.byline{font-size:1rem;margin-bottom:.2rem}
+.affil{font-family:Consolas,monospace;font-size:.72rem;color:var(--mute);margin-bottom:2rem}
+h2{font-size:1.12rem;font-weight:700;margin:2.2rem 0 .7rem}
+p{margin-bottom:.9rem;color:var(--soft)}
+strong{color:var(--ink)}
+.abstract{border:1px solid var(--edge);border-left:3px solid var(--mint);padding:1.1rem 1.3rem;background:#fff;margin:1.5rem 0}
+.abstract p{margin-bottom:0}
+.eq{font-family:Consolas,monospace;font-size:.9rem;background:#fff;border:1px solid var(--edge);border-radius:3px;padding:.8rem 1.1rem;margin:1rem 0;display:flex;justify-content:space-between;gap:1rem;overflow-x:auto}
+.eq .no{color:var(--mute)}
+table{width:100%;border-collapse:collapse;font-size:.85rem;margin:1rem 0}
+th,td{border:1px solid var(--edge);padding:.45rem .6rem;text-align:left;vertical-align:top}
+th{font-family:Consolas,monospace;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+.decl{border:1px solid var(--edge);background:#fff;padding:1rem 1.2rem;margin:1.5rem 0;font-size:.92rem}
+.refs ol{margin-left:1.2rem}
+.refs li{font-size:.85rem;color:var(--soft);margin-bottom:.4rem}
+footer{max-width:46rem;margin:3rem auto 0;padding-top:1.2rem;border-top:1px solid var(--edge)}
+footer a{color:var(--mint);text-decoration:none;font-family:Consolas,monospace;font-size:.75rem;letter-spacing:.06em}
+sub,sup{line-height:0}
+</style>
+<link rel="stylesheet" href="sdt-shell.css">
+<script src="sdt-shell.js" defer></script>
+<meta name="description" content="Section Paper — The Relay Substrate — part of Spatial Displacement Theory, a zero-free-parameter physics framework.">
+<link rel="canonical" href="https://spatialdisplacementtheory.com/paper-medium">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/favicon.ico" sizes="64x64">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#b07430">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Spatial Displacement Theory">
+<meta property="og:title" content="Section Paper — The Relay Substrate">
+<meta property="og:description" content="Section Paper — The Relay Substrate — part of Spatial Displacement Theory, a zero-free-parameter physics framework.">
+<meta property="og:url" content="https://spatialdisplacementtheory.com/paper-medium">
+<meta property="og:image" content="https://spatialdisplacementtheory.com/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_AU">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Section Paper — The Relay Substrate">
+<meta name="twitter:description" content="Section Paper — The Relay Substrate — part of Spatial Displacement Theory, a zero-free-parameter physics framework.">
+<meta name="twitter:image" content="https://spatialdisplacementtheory.com/og-card.png">
+</head>
+<body>
+<main>
+<p class="series">Spatial Displacement Theory · Section Paper I · Prepared for Submission</p>
+<h1>The Relay Substrate: Four Primitives, One Balanced Convergence</h1>
+<p class="byline">James Christopher Tyndall</p>
+<p class="affil">Melbourne, Australia · July 2026 · Atlas Chapter One — The Medium</p>
+
+<div class="abstract">
+<p><strong>Abstract.</strong> This section paper formalises the substrate chapter of the Atlas. The framework admits exactly four irreducible primitives — Space (the superfluidic hypercrystal), Matter (displacement), Movement (the one currency), and The Ever-Present Now (the plane of existence, whose tally is time). The old whitelist {ℓ<sub>P</sub>, c, ℏ, k<sub>B</sub>, T<sub>CMB</sub>, α, m<sub>e</sub>, m<sub>p</sub>} is rederived: ℓ<sub>P</sub> is mathematical (R<sub>spat</sub> = ℓ<sub>P</sub>/2); T<sub>CMB</sub> is the red-to-IR wall after 10.47 octaves; the remainder are unit bridges and one mass/action seat. From the axiom set the balanced convergence follows: every lattice site receives Φ = Nε ≈ 1.038 × 10⁻⁵⁶ J from N = R<sub>CMB</sub>/ℓ<sub>P</sub> = 5.894 × 10⁶¹ Planck-thick shells, at pressure P<sub>conv</sub> = 2.459 × 10⁴⁸ Pa, cancelling identically at every unoccluded point. Force, mass, charge, time, temperature, and entropy enter downstream as theorems. R<sub>CMB</sub> remains an observed scale that conditions the Law-I magnitudes.</p>
+</div>
+<p><strong>Keywords:</strong> spation lattice · four primitives · input derivation basis · Shell Cancellation Identity · balanced convergence · packing frustration</p>
+
+<h2>1. The four primitives</h2>
+<table>
+<tr><th>Primitive</th><th>Formal object</th><th>Content</th></tr>
+<tr><td>Space</td><td>the superfluidic hypercrystal</td><td>one object, three facets: a quantised particulate superfluid under pressure; icosahedral 12-around-1 packing at the Planck length (R<sub>spat</sub> = ℓ<sub>P</sub>/2); contact-only nearest-neighbour relay. Individually incompressible, collectively deformable. The public statement is authored once (Atlas § irreducibles).</td></tr>
+<tr><td>Matter</td><td>displacement</td><td>a knot — circulation wound on itself and locked by its own winding. Persistent torus-knot states excluding volume V<sub>disp</sub>; identity fixed by winding number W (Section Paper III). Boundary R<sub>p</sub> = 4ℏ/(m<sub>p</sub> c).</td></tr>
+<tr><td>Movement</td><td>the one currency</td><td>relayed grain to grain — that relay is light; wound into knots — that winding is matter. Nearest-neighbour transfer at c; bound structures spend one purse, v<sub>circ</sub>² + v² = c².</td></tr>
+<tr><td>The Ever-Present Now</td><td>the plane of existence</td><td>not a coordinate instant: the venue itself, everything within it in continuous motion; time is the ordinal tally the movement keeps — the count of relay ticks, everywhere, simultaneously</td></tr>
+</table>
+<p>Everything else — mass, charge, time-as-measured, temperature, entropy — is derived, and each derivation carries a certification label. The Clearing is this cycle’s wall opening. The antecedent is the previous recharge. There is no first origin.</p>
+
+<h2>2. The balanced convergence</h2>
+<div class="eq"><span>N = R<sub>CMB</sub>/ℓ<sub>P</sub> = 5.894 × 10⁶¹;&nbsp;&nbsp;ε = u<sub>CMB</sub>·ℓ<sub>P</sub>³ = 1.761 × 10⁻¹¹⁸ J</span><span class="no">(1)</span></div>
+<div class="eq"><span>Φ = Nε = 1.038 × 10⁻⁵⁶ J;&nbsp;&nbsp;P<sub>conv</sub> = Φ/ℓ<sub>P</sub>³ = 2.459 × 10⁴⁸ Pa;&nbsp;&nbsp;S = 4πN² = 4.366 × 10¹²⁴</span><span class="no">(2)</span></div>
+<p>The Shell Cancellation Identity (T1) makes the per-shell contribution distance-independent; the burden is isotropic and the resultant vanishes identically. "Empty" space is not empty — it is balanced, and the vanishing of the net force at equilibrium is a cancellation of forty-eight orders of magnitude, not an absence. Occlusion of this balance is the origin of every force (Section Paper II).</p>
+
+<h2>3. Packing frustration and the shaped interstices</h2>
+<div class="eq"><span>icosahedral 12-around-1 edge gap = 0.05146;&nbsp;&nbsp;lattice frustration gap g = 0.1029</span><span class="no">(3)</span></div>
+<p>Twelve spations about one cannot close; because the substrate is everywhere in relay motion, the slack gathers into shaped interstices — tetrahedral and octahedral pockets. These pockets recur as electron seats in atomic structure, as the tetrahedral α geometry of the nuclear mesh (Section Paper IV), and as the per-generation leak of the turbulent displacement cascade, where the same g = 0.103 yields the zero-parameter intermittency correction 3−D = 0.0784 (Paper 10).</p>
+
+<h2>4. Scope and limitations</h2>
+<p>Two disclosures are constitutional for this chapter. (i) <strong>ℓ<sub>P</sub> is derived</strong> — a mathematical length; the spation radius is R<sub>spat</sub> = ℓ<sub>P</sub>/2. Clearing-geometry routes that loop back onto their own inputs are not independent recoveries and are not reopened here. (ii) <strong>R<sub>CMB</sub></strong> is an observed cosmological scale (certification class X): it conditions the magnitudes in (1)–(2) and does not pass the delete-test; its derivation from the pressure tensor is the recorded upgrade path.</p>
+
+<h2>5. Certification</h2>
+<table>
+<tr><th>Item</th><th>Value</th><th>Status</th></tr>
+<tr><td>ℓ<sub>P</sub></td><td>1.616255 × 10⁻³⁵ m</td><td>DERIVED; R<sub>spat</sub> = ℓ<sub>P</sub>/2</td></tr>
+<tr><td>Φ, P<sub>conv</sub>, S</td><td>eq. (2)</td><td>DERIVED (class B); magnitudes conditioned on R<sub>CMB</sub> (class X, disclosed)</td></tr>
+<tr><td>Frustration gap g</td><td>0.1029</td><td>DERIVED — geometric identity</td></tr>
+<tr><td>Time as tick tally</td><td>—</td><td>PRIMITIVE reading; the arrow needs no separate mechanism (un-happening is not a relay operation)</td></tr>
+</table>
+
+<div class="decl">
+<p><strong>Methodological declaration.</strong> No field, no metric, no wavefunction, and no vacuum-energy reservoir is posited. The four primitives are the public statement on the Atlas; the old whitelist is rederived on the inputs page. R<sub>CMB</sub> remains the disclosed observed scale in (1)–(2). The practice-level treatments rest on this chapter: Paper 01 (foundations), Paper 10 (the substrate as fluid), Paper 12 (collective vortices in the same medium).</p>
+</div>
+
+<h2 class="refs">References</h2>
+<div class="refs"><ol>
+<li>Engine/include/sdt/laws.hpp — measured::, law_I (provenance blocks in situ).</li>
+<li>Theory/00_Ruleset.md → 04_Notation.md; Papers/THE_CAUSAL_CHAIN_OF_SDT.md.</li>
+<li>Investigations/01_Foundations_and_Lattice_Mechanics — FLM06 (Seed Theorem), FLM08, FLM12, FLM14.</li>
+<li>Practice papers of this series: 01 · Foundations &amp; Lattice Mechanics; 10 · Fluid Dynamics; 12 · Condensed Matter Physics.</li>
+</ol></div>
+</main>
+<footer><a href="theory.html#medium">← RETURN TO THE ATLAS · THE RELAY SUBSTRATE</a></footer>
+</body>
+</html>

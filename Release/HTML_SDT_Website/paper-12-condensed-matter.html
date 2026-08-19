@@ -6,34 +6,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Paper 12 — Condensed Matter Physics</title>
-<style>
-:root{--paper:#faf8f4;--edge:#e5e0d4;--ink:#1c1e20;--soft:#45484c;--mute:#6d7177;--mint:#0d7a5f;--rust:#a4552e;--gold:#8a6d1f;--steel:#4a6d82}
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--paper);color:var(--ink);font-family:'Source Serif 4',Georgia,serif;line-height:1.75;padding:3rem 1.5rem}
-main{max-width:46rem;margin:0 auto}
-.series{font-family:Consolas,monospace;font-size:.68rem;letter-spacing:.28em;color:var(--mute);text-transform:uppercase;margin-bottom:1.2rem}
-h1{font-size:1.85rem;line-height:1.25;font-weight:700;margin-bottom:1rem}
-.byline{font-size:1rem;margin-bottom:.2rem}
-.affil{font-family:Consolas,monospace;font-size:.72rem;color:var(--mute);margin-bottom:2rem}
-h2{font-size:1.12rem;font-weight:700;margin:2.2rem 0 .7rem}
-p{margin-bottom:.9rem;color:var(--soft)}
-strong{color:var(--ink)}
-.abstract{border:1px solid var(--edge);border-left:3px solid var(--mint);padding:1.1rem 1.3rem;background:#fff;margin:1.5rem 0}
-.abstract p{margin-bottom:0}
-.eq{font-family:Consolas,monospace;font-size:.9rem;background:#fff;border:1px solid var(--edge);border-radius:3px;padding:.8rem 1.1rem;margin:1rem 0;display:flex;justify-content:space-between;gap:1rem;overflow-x:auto}
-.eq .no{color:var(--mute)}
-table{width:100%;border-collapse:collapse;font-size:.85rem;margin:1rem 0}
-th,td{border:1px solid var(--edge);padding:.45rem .6rem;text-align:left;vertical-align:top}
-th{font-family:Consolas,monospace;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
-.decl{border:1px solid var(--edge);background:#fff;padding:1rem 1.2rem;margin:1.5rem 0;font-size:.92rem}
-.refs ol{margin-left:1.2rem}
-.refs li{font-size:.85rem;color:var(--soft);margin-bottom:.4rem}
-footer{max-width:46rem;margin:3rem auto 0;padding-top:1.2rem;border-top:1px solid var(--edge)}
-footer a{color:var(--mint);text-decoration:none;font-family:Consolas,monospace;font-size:.75rem;letter-spacing:.06em}
-sub,sup{line-height:0}
-</style>
 <link rel="stylesheet" href="sdt-shell.css">
+<link rel="stylesheet" href="paper.css">
 <script src="sdt-shell.js" defer></script>
+<script src="paper.js" defer></script>
 <meta name="description" content="Paper 12 — Condensed Matter Physics — part of Spatial Displacement Theory, a zero-free-parameter physics framework.">
 <link rel="canonical" href="https://spatialdisplacementtheory.com/paper-12-condensed-matter">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -56,57 +32,60 @@ sub,sup{line-height:0}
 <meta name="twitter:image" content="https://spatialdisplacementtheory.com/og-card.png">
 </head>
 <body>
-<main>
-<p class="series">Spatial Displacement Theory · Paper 12 · Prepared for Submission</p>
+<main data-paper-id="paper-12-condensed-matter" data-domain="condensed-matter programme" data-status="SPECIFICATION" data-theory-steps="L14 L15 L20">
+<p class="series">Spatial Displacement Theory · Paper 12 · Scientific working paper · revised August 2026</p>
 <h1>Collective Vortices in One Medium: Conduction as Occlusion Drag, the Native Compression Wave, and Phase-Locked Condensates — A Programme Specification</h1>
-<p class="byline">J. C. Harvey</p>
+<p class="byline">James Christopher Tyndall</p>
 <p class="affil">Melbourne, Australia · July 2026 · Domain 12 — Condensed Matter Physics</p>
+<ul class="paper-status"><li>SPECIFICATION</li><li>condensed-matter programme</li><li>Dependencies: L14 · L15 · L20</li></ul>
 
 <div class="abstract">
 <p><strong>Abstract.</strong> Condensed matter is the collective behaviour of many vortices co-resident in the relay substrate. No second medium exists: the same lattice that carries gravitation (g = v²/R) and the handed occlusion force also carries conduction, magnetism, sound in solids, and the condensate phases. A conduction electron is a drifting W = 1 vortex; resistance is occlusion drag converting organised throughput into disordered throughput (heat); the solid-state quantum of lattice vibration is the native compression wave of Paper 10, requiring no field operator; a magnet is aligned wake circulation. Superconductivity is specified as phase-locking of vortex pairs through the compression wave — a defect-blind collective mode with zero drag and swirl expulsion; superfluidity as the same phase lock in the neutral sector, whose circulation quantum κ = h/m is already recovered to 0.02%. This domain is a SPEC-status programme: mechanisms and falsifiable targets are fixed and pre-registered here; except where a result is imported from an executed domain, no target below is claimed as achieved.</p>
 </div>
 <p><strong>Keywords:</strong> occlusion drag · drifting vortex · compression wave · phase lock · condensate · native metrology</p>
 
+
+<section id="scope" class="scope"><span class="paper-kicker">Scope and claim boundary</span><p>This paper treats condensed-matter programme. Its mathematical authority is <a id="cite-engine" class="citation" href="#ref-engine">[1]</a>; its constitutional restrictions are applied from <a id="cite-rules" class="citation" href="#ref-rules">[2]</a>. Definitions, identities, measured inputs, calibrations, computations and open mechanisms are separated before conclusions.</p></section>
+<section id="definitions"><h2>Definitions and dependency surface</h2><dl class="definition-ledger"><dt><dfn id="term-domain">Domain</dfn></dt><dd>condensed-matter programme.</dd><dt><dfn id="term-authority">Authority</dfn></dt><dd>Engine/include/sdt/laws.hpp; engine symbols and direct assessments outrank narrative summaries.</dd><dt><dfn id="term-status">Document status</dfn></dt><dd>SPECIFICATION; this label limits what the paper claims.</dd></dl></section>
+<section id="derivation"><h2>Derivation protocol</h2><p>Each displayed relation identifies its source. Identities carry no empirical weight; measurements remain inputs; calibrations name their anchor; and computations inherit every upstream dependency.</p>
 <h2>1. One medium, restated for solids</h2>
-<div class="eq"><span>conduction e⁻ = drifting W = 1 vortex;&nbsp;&nbsp;resistance = occlusion drag → heat</span><span class="no">(1)</span></div>
+<div class="eq" id="eq-1" data-status="SPECIFICATION" data-source="Engine/include/sdt/laws.hpp"><span>conduction e⁻ = drifting W = 1 vortex;&nbsp;&nbsp;resistance = occlusion drag → heat</span><span class="no">(1)</span></div>
 <p>Drift velocity is the balance of the driving push against disorder occlusion; dissipation is organised throughput dumped into the disordered channel of Paper 11. The conductivity assumes the observed form σ = ne²τ/m with τ the drag time — the form is the convergence target; the mechanism (occlusion, not scattering amplitudes) is the SDT content. Metallic resistivity rising with temperature follows from drag on thermal lattice agitation.</p>
 
 <h2>2. The native vibration quantum</h2>
-<div class="eq"><span>"phonon" ≡ FD05 compression relay wave; c<sub>s</sub> = relay stiffness</span><span class="no">(2)</span></div>
+<div class="eq" id="eq-2" data-status="SPECIFICATION" data-source="Engine/include/sdt/laws.hpp"><span>"phonon" ≡ FD05 compression relay wave; c<sub>s</sub> = relay stiffness</span><span class="no">(2)</span></div>
 <p>Solid-state heat capacity follows from mode counting of compression waves in a bounded box: the high-temperature 3R plateau and the low-temperature T³ regime are counting consequences, with the characteristic temperature set by c<sub>s</sub> — no quantised field is introduced, and the mode-content caveat of Paper 11 (ε = hν asserted) is inherited and disclosed.</p>
 
 <h2>3. Condensate phases as macroscopic phase lock</h2>
-<div class="eq"><span>superconductor: vortex pairs locked via the compression wave ⟹ R = 0; flux count Φ₀ = h/2e</span><span class="no">(3)</span></div>
-<div class="eq"><span>superfluid: neutral phase-locked condensate; κ = h/m — recovered to 0.02% (FD02, executed)</span><span class="no">(4)</span></div>
+<div class="eq" id="eq-3" data-status="SPECIFICATION" data-source="Engine/include/sdt/laws.hpp"><span>superconductor: vortex pairs locked via the compression wave ⟹ R = 0; flux count Φ₀ = h/2e</span><span class="no">(3)</span></div>
+<div class="eq" id="eq-4" data-status="SPECIFICATION" data-source="Engine/include/sdt/laws.hpp"><span>superfluid: neutral phase-locked condensate; κ = h/m — recovered to 0.02% (FD02, executed)</span><span class="no">(4)</span></div>
 <p>Pair-locking makes the collective mode defect-blind: drag vanishes not because carriers avoid obstacles but because the locked mode has no channel into disorder. Swirl expulsion from the locked bulk is the expulsion phenomenon; the flux count h/2e is a native winding count (two carriers per locked pair). The isotope shift of the transition temperature (T<sub>c</sub> ∝ M<sup>−½</sup>) follows from the compression-wave mediator. Of these, only (4)'s circulation quantum is presently earned (imported from the executed fluid suite); the rest are pre-registered targets.</p>
 
 <h2>4. Band ordering, the Hall staircase, and native metrology</h2>
 <p>Conductor/semiconductor/insulator ordering is specified from lattice-packing occlusion gaps (the same packing geometry as the atomic k-factor radii), not from delocalised wave states. The quantised Hall resistance and the frequency–voltage relation are specified as lattice-topology counts — R<sub>K</sub> = h/e² and K<sub>J</sub> = 2e/h as winding arithmetic — which would ground the practical resistance and voltage units natively (experiment specs E86 and E85). Ferromagnetism is aligned wake circulation with exchange as wake co-rotation energy; its entire quantitative programme is committed to native wake-circulation units — magnetons are forbidden on the face of the spec.</p>
 
-<h2>5. Certification</h2>
+</section>
+<section id="dimensional-analysis"><h2>Dimensional and limiting-case audit</h2><p>Mode frequencies are s⁻¹, circulation is m²/s, and transport coefficients retain measured SI dimensions. Zero-source, infinite-separation, symmetry and boundary limits are stated wherever defined; a relation that fails unit closure is excluded before numerical comparison.</p></section>
+<section id="certification"><h2>5. Certification</h2>
 <table>
 <tr><th>Item</th><th>Target</th><th>Status</th></tr>
-<tr><td>Occlusion-drag conduction</td><td>σ form; ρ(T) sign; Joule channel</td><td>SPEC — pre-registered target</td></tr>
-<tr><td>Compression-wave heat capacity</td><td>3R plateau; T³ law</td><td>SPEC — inherits ε = hν caveat</td></tr>
-<tr><td>Superconductivity as pair lock</td><td>R = 0; Φ₀ = h/2e; T<sub>c</sub> ∝ M<sup>−½</sup></td><td>SPEC (seed written)</td></tr>
-<tr><td>Superfluid circulation quantum</td><td>κ = h/m</td><td>EARNED at 0.02% — imported from executed FD02</td></tr>
-<tr><td>Hall / frequency–voltage counts</td><td>R<sub>K</sub>, K<sub>J</sub> native</td><td>SPEC — E85/E86</td></tr>
-<tr><td>Ferromagnetism in native units</td><td>Curie point; hysteresis</td><td>SPEC — magnetons forbidden</td></tr>
+<tr data-claim="claim-1" data-status="SPECIFICATION" data-source="Engine/include/sdt/laws.hpp"><td>Occlusion-drag conduction</td><td>σ form; ρ(T) sign; Joule channel</td><td>SPEC — pre-registered target</td></tr>
+<tr data-claim="claim-2" data-status="SPECIFICATION" data-source="Engine/include/sdt/laws.hpp"><td>Compression-wave heat capacity</td><td>3R plateau; T³ law</td><td>SPEC — inherits ε = hν caveat</td></tr>
+<tr data-claim="claim-3" data-status="SPECIFICATION" data-source="Engine/include/sdt/laws.hpp"><td>Superconductivity as pair lock</td><td>R = 0; Φ₀ = h/2e; T<sub>c</sub> ∝ M<sup>−½</sup></td><td>SPEC (seed written)</td></tr>
+<tr data-claim="claim-4" data-status="SPECIFICATION" data-source="Engine/include/sdt/laws.hpp"><td>Superfluid circulation quantum</td><td>κ = h/m</td><td>EARNED at 0.02% — imported from executed FD02</td></tr>
+<tr data-claim="claim-5" data-status="SPECIFICATION" data-source="Engine/include/sdt/laws.hpp"><td>Hall / frequency–voltage counts</td><td>R<sub>K</sub>, K<sub>J</sub> native</td><td>SPEC — E85/E86</td></tr>
+<tr data-claim="claim-6" data-status="SPECIFICATION" data-source="Engine/include/sdt/laws.hpp"><td>Ferromagnetism in native units</td><td>Curie point; hysteresis</td><td>SPEC — magnetons forbidden</td></tr>
 </table>
 
+</section>
 <div class="decl">
 <p><strong>Methodological declaration.</strong> The forbidden imports of this domain are named in its constitution: no pair-potential gap function, no delocalised wave states, no symmetry-breaking ontology, no electron clouds, and no field-operator vibration quanta — all are convergence targets, not machinery. This paper distinguishes throughout between EARNED results (imported from executed domains with their classes) and SPEC targets (pre-registered, unclaimed). Nothing in SPEC status is presented as achieved.</p>
 </div>
 
-<h2 class="refs">References</h2>
-<div class="refs"><ol>
-<li>Investigations/12_Condensed_Matter_Physics — CM01–CM07 programme constitution and seeds.</li>
-<li>Investigations/10_Fluid_Dynamics — FD02 (κ = h/m, executed), FD05 (compression wave).</li>
-<li>Engine/include/sdt/laws.hpp — law_III (occlusion), law_VI::traction and topology (winding counts), bridge (native g).</li>
-<li>Experiments/E85.md, E86.md — native voltage and resistance specifications.</li>
-<li>Papers 03, 10, 11, 14 of this series.</li>
-</ol></div>
+<section id="falsification" class="falsification"><span class="paper-kicker">Falsification</span><p>Each mechanism must predict a material series from independent structural inputs before receiving a computed label.</p></section>
+<section id="limitations" class="limitations"><span class="paper-kicker">Limitations and open problems</span><p>This domain is principally a specification, not an established material theory.</p></section>
+<section id="references" class="refs"><h2>References</h2><ol><li id="ref-engine" data-type="repo" data-path="Engine/include/sdt/laws.hpp"><code>Engine/include/sdt/laws.hpp</code> — authority used for the equations and status assignments in this paper.</li><li id="ref-rules" data-type="repo" data-path="Theory/00_Ruleset.md"><code>Theory/00_Ruleset.md</code> — axioms, prohibitions and theorem vocabulary used to delimit the derivation.</li></ol></section>
 </main>
-<footer><a href="index.html#medium">← RETURN TO THE ATLAS · THE RELAY SUBSTRATE</a></footer>
+<footer><a href="theory.html#medium">← RETURN TO THE ATLAS · THE RELAY SUBSTRATE</a></footer>
 </body>
 </html>

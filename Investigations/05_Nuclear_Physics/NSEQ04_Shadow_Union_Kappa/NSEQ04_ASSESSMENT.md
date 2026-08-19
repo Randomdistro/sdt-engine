@@ -63,3 +63,40 @@ against BE/A structure (sequencer UI already exposes the same κ path).
    BE/A, or stratified light/heavy) — do not silent-retune.  
 3. Optional: compare pre-rewrite (planar belt) κ metrics vs dual-tetra for
    orientation sensitivity of ΔA.
+
+## 7. Shared-packer replay (2026-08-15)
+
+The instrument was updated to load `js/pack-nucleus.js` after the website
+sequencer stopped carrying a private inline copy. Replaying the same registered
+`dnn=1.45 R_p`, `coul=0.30`, and `DEFAULT_LIGHT` policy against
+`NSEQ05-WEB-2` (subsequently reclassified as the
+`NSEQ05-CONTROL-3` legacy geometric control) gives:
+
+- κ = 36.162887 MeV/fm²
+- R²(BE) = 0.817825
+- R²(BE/A) = −180.510967
+- mean |relative error| = 41.15%
+
+These values do not replace the 2026-08-09 registered result above. They record
+the geometry-version sensitivity of the proxy. The adjudication is unchanged:
+projected overlap remains excluded as the binding law.
+
+## 8. Live-default unit correction (2026-08-15)
+
+The section 7 replay retained the historical expression `1.45 R_p` while the
+shared NSEQ05 packer and website controls now define `defaultBondFm = 1.45 fm`.
+That replay therefore did not use the live default requested by the website
+publication gate.
+
+The instrument now reads `SDT_NUCLEAR_PACKING.defaultBondFm` directly. The
+corrected whole-table replay gives:
+
+- κ = 47.137184 MeV/fm²
+- R²(BE) = 0.796231
+- R²(BE/A) = −230.641525
+- mean |relative error| = 44.39%
+
+Representative residuals are 557.2% for He-4, 218.5% for C-12, 216.4% for
+O-16, 42.8% for Fe-56, 11.7% for U-238 and 36.1% for Ca-48. The correction
+strengthens the existing adjudication: projected overlap is a
+`CALIBRATED(1)` diagnostic and is excluded as the binding law.

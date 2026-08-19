@@ -52,10 +52,10 @@ model, refuse it and name the thing as SDT sees it.
 
 **Forbidden imports and their native replacements:**
 
-- **"charge"** — there is no charge-substance. A particle boundary is simply a **radius**;
-  there is no such thing as a *charge* radius. Electromagnetic behaviour is the **handed
-  redirection of influx** — a direction, a handedness, never a stuff. Never write "charge
-  radius," "charge cloud," or "amount of charge." (The unit *e* survives only as a bridge
+- **the rejected EM substance noun** — there is no additional substance. A particle boundary is simply a **radius**;
+  there is no such thing as a *substance* radius. Electromagnetic behaviour is the **handed
+  redirection of influx** — a direction, a handedness, never a stuff. Never write "substance
+  radius," "coupling cloud," or "amount of coupling." (The unit *e* survives only as a bridge
   between yardsticks, never as a quantity of substance.)
 - **quantum-mechanical language** — no wavefunction, no orbital, no probability cloud, no
   "ground state" as an eigenstate, no wave–particle duality. An electron's place in an atom
@@ -118,7 +118,7 @@ sentence, and an expert must find nothing false in it.
 
 1. **Evenness.** Read it aloud. Can you name the dominant teacher? If yes, spend less of them.
 2. **Glossing.** Is every uncommon term unfolded at first use?
-3. **Imports.** Search the draft for *charge, orbital, wavefunction, dark, quark, magneton,
+3. **Imports.** Search the draft for the rejected EM substance noun, *orbital, wavefunction, dark, quark, magneton,
    spacetime*. Each hit is a defect until it is native or gone.
 4. **Register.** Does it sit a step above jargon and a step below poetry — the whole way through?
 5. **The two readers.** Would a curious newcomer follow every line? Would an expert find

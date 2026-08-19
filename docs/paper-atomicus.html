@@ -6,34 +6,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Section Paper — ATOMICUS</title>
-<style>
-:root{--paper:#faf8f4;--edge:#e5e0d4;--ink:#1c1e20;--soft:#45484c;--mute:#6d7177;--mint:#0d7a5f;--rust:#a4552e;--gold:#8a6d1f;--steel:#4a6d82}
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--paper);color:var(--ink);font-family:'Source Serif 4',Georgia,serif;line-height:1.75;padding:3rem 1.5rem}
-main{max-width:46rem;margin:0 auto}
-.series{font-family:Consolas,monospace;font-size:.68rem;letter-spacing:.28em;color:var(--mute);text-transform:uppercase;margin-bottom:1.2rem}
-h1{font-size:1.85rem;line-height:1.25;font-weight:700;margin-bottom:1rem}
-.byline{font-size:1rem;margin-bottom:.2rem}
-.affil{font-family:Consolas,monospace;font-size:.72rem;color:var(--mute);margin-bottom:2rem}
-h2{font-size:1.12rem;font-weight:700;margin:2.2rem 0 .7rem}
-p{margin-bottom:.9rem;color:var(--soft)}
-strong{color:var(--ink)}
-.abstract{border:1px solid var(--edge);border-left:3px solid var(--mint);padding:1.1rem 1.3rem;background:#fff;margin:1.5rem 0}
-.abstract p{margin-bottom:0}
-.eq{font-family:Consolas,monospace;font-size:.9rem;background:#fff;border:1px solid var(--edge);border-radius:3px;padding:.8rem 1.1rem;margin:1rem 0;display:flex;justify-content:space-between;gap:1rem;overflow-x:auto}
-.eq .no{color:var(--mute)}
-table{width:100%;border-collapse:collapse;font-size:.85rem;margin:1rem 0}
-th,td{border:1px solid var(--edge);padding:.45rem .6rem;text-align:left;vertical-align:top}
-th{font-family:Consolas,monospace;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
-.decl{border:1px solid var(--edge);background:#fff;padding:1rem 1.2rem;margin:1.5rem 0;font-size:.92rem}
-.refs ol{margin-left:1.2rem}
-.refs li{font-size:.85rem;color:var(--soft);margin-bottom:.4rem}
-footer{max-width:46rem;margin:3rem auto 0;padding-top:1.2rem;border-top:1px solid var(--edge)}
-footer a{color:var(--mint);text-decoration:none;font-family:Consolas,monospace;font-size:.75rem;letter-spacing:.06em}
-sub,sup{line-height:0}
-</style>
 <link rel="stylesheet" href="sdt-shell.css">
+<link rel="stylesheet" href="paper.css">
 <script src="sdt-shell.js" defer></script>
+<script src="paper.js" defer></script>
 <meta name="description" content="Section Paper — ATOMICUS — part of Spatial Displacement Theory, a zero-free-parameter physics framework.">
 <link rel="canonical" href="https://spatialdisplacementtheory.com/paper-atomicus">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -56,63 +32,66 @@ sub,sup{line-height:0}
 <meta name="twitter:image" content="https://spatialdisplacementtheory.com/og-card.png">
 </head>
 <body>
-<main>
-<p class="series">Spatial Displacement Theory · Section Paper IV · Prepared for Submission</p>
+<main data-paper-id="paper-atomicus" data-domain="nuclear geometry reference" data-status="COMPUTED" data-theory-steps="L13 L14">
+<p class="series">Spatial Displacement Theory · Section Paper IV · Scientific working paper · revised August 2026</p>
 <h1>ATOMICUS: The Construction Grammar, the Universal p↔n Gearing Mesh, and the Closure Schedule of the Magic Numbers</h1>
-<p class="byline">J. C. Harvey</p>
+<p class="byline">James Christopher Tyndall</p>
 <p class="affil">Melbourne, Australia · July 2026 · Atlas Chapter Four — ATOMICUS</p>
+<ul class="paper-status"><li>COMPUTED</li><li>nuclear geometry reference</li><li>Dependencies: L13 · L14</li></ul>
 
 <div class="abstract">
 <p><strong>Abstract.</strong> Every nuclide with Z ≥ 2 factorises as one α core plus n<sub>d</sub> deuterons plus n<sub>t</sub> tritons (n<sub>t</sub> = A − 2Z, n<sub>d</sub> = 3Z − A − 2; electron-capture nuclides on the conjugate He-3 grammar). This section paper consolidates the grammar and reports its newest structural results. (i) <strong>The traction mesh (NP33)</strong>: nucleon surfaces in rolling contact must counter-rotate, and the governing exclusion — a proton gears only with neutrons, a neutron only with protons — makes the contact graph bipartite: no odd cycles, no frustration, every contact automatically in traction. The bond is the meshing. An earlier frustration-selector conjecture for the magic numbers is withdrawn on this ground. (ii) <strong>The closure schedule</strong>, carried in the engine with a compile-time proof and — as of 2026-07-30 — with its capacities DERIVED from two closed forms: tier capacity F(n) = (n+1)(n+2) (bipartite doubling of the triangular layer) and belt capacity B(n) = 2(n+1) (radial rods slip-free only on the equator of the collective roll, antipodal-paired). The alternation reproduces 2, 8, 20, 28, 50, 82, 126 sequence-exact with no spin–orbit coupling imported anywhere, and predicts the next neutron closure at N = 184 from the same two forms; the one item still read from the data is the descent onset n = 3. (iii) <strong>The closure-kink census</strong>: on a validated instrument, the boundary-radius kink is constant along each magic-N isotone (N = 28: −31.8; N = 50: −22.2; N = 82: −12.3 milli-fm), supported under the pre-registered criterion, and 83.1% of odd-N members sit inward of the even-even midpoint (threshold 70%) — with the stated scope that the pairing account predicts the same sign, so the census content is the direction, not a discrimination.</p>
 </div>
 <p><strong>Keywords:</strong> construction grammar · traction mesh · bipartite exclusion · closure schedule · triton shells · closure kink · parity lock</p>
 
+
+<section id="scope" class="scope"><span class="paper-kicker">Scope and claim boundary</span><p>This paper treats nuclear geometry reference. Its mathematical authority is <a id="cite-engine" class="citation" href="#ref-engine">[1]</a>; its constitutional restrictions are applied from <a id="cite-rules" class="citation" href="#ref-rules">[2]</a>. Definitions, identities, measured inputs, calibrations, computations and open mechanisms are separated before conclusions.</p></section>
+<section id="definitions"><h2>Definitions and dependency surface</h2><dl class="definition-ledger"><dt><dfn id="term-domain">Domain</dfn></dt><dd>nuclear geometry reference.</dd><dt><dfn id="term-authority">Authority</dfn></dt><dd>ATOMICUS/rules/On the Nature of Atomicus Rules.md; engine symbols and direct assessments outrank narrative summaries.</dd><dt><dfn id="term-status">Document status</dfn></dt><dd>COMPUTED; this label limits what the paper claims.</dd></dl></section>
+<section id="derivation"><h2>Derivation protocol</h2><p>Each displayed relation identifies its source. Identities carry no empirical weight; measurements remain inputs; calibrations name their anchor; and computations inherit every upstream dependency.</p>
 <h2>1. The grammar</h2>
-<div class="eq"><span>Z ≥ 2:&nbsp;&nbsp;1α + n<sub>d</sub>·d + n<sub>t</sub>·t;&nbsp;&nbsp;n<sub>t</sub> = A − 2Z,&nbsp;n<sub>d</sub> = 3Z − A − 2&nbsp;&nbsp;(EC: n<sub>t</sub> = A − 2Z + 1,&nbsp;n<sub>d</sub> = 3Z − A − 3)</span><span class="no">(1)</span></div>
+<div class="eq" id="eq-1" data-status="COMPUTED" data-source="ATOMICUS/rules/On the Nature of Atomicus Rules.md"><span>Z ≥ 2:&nbsp;&nbsp;1α + n<sub>d</sub>·d + n<sub>t</sub>·t;&nbsp;&nbsp;n<sub>t</sub> = A − 2Z,&nbsp;n<sub>d</sub> = 3Z − A − 2&nbsp;&nbsp;(EC: n<sub>t</sub> = A − 2Z + 1,&nbsp;n<sub>d</sub> = 3Z − A − 3)</span><span class="no">(1)</span></div>
 <p>The counts are (Z, N) arithmetic — unique wherever both are non-negative — so the grammar's content is the structure built on it, never the counts themselves (the NP24-A discipline: a pure function of the counts cannot serve as independent evidence). ATOMICUS characterises 290 isotopes on the decomposition, each carrying a per-nuclide closure-schedule line. Free neutrons are forbidden in stable nuclides; a neutron is a proton with a stabled electron, and the ledger closes as N = 2 + n<sub>d</sub> + 2n<sub>t</sub>.</p>
 
 <h2>2. The traction mesh: like never gears like (NP33)</h2>
-<div class="eq"><span>rolling contact (no slip) at 2R<sub>p</sub> ⟹ ω<sub>A</sub> = −ω<sub>B</sub> — counter-rotation is the bond</span><span class="no">(2)</span></div>
-<div class="eq"><span>exclusion: p gears only n; n gears only p ⟹ contact graph bipartite ⟹ no odd cycles, no frustration</span><span class="no">(3)</span></div>
+<div class="eq" id="eq-2" data-status="COMPUTED" data-source="ATOMICUS/rules/On the Nature of Atomicus Rules.md"><span>rolling contact (no slip) at 2R<sub>p</sub> ⟹ ω<sub>A</sub> = −ω<sub>B</sub> — counter-rotation is the bond</span><span class="no">(2)</span></div>
+<div class="eq" id="eq-3" data-status="COMPUTED" data-source="ATOMICUS/rules/On the Nature of Atomicus Rules.md"><span>exclusion: p gears only n; n gears only p ⟹ contact graph bipartite ⟹ no odd cycles, no frustration</span><span class="no">(3)</span></div>
 <p>Each nucleon surface is driven at the universal seat v(R<sub>p</sub>) = 1.8301c (period 9.64 × 10⁻²⁴ s). Same-sense contact would slip at 3.66c — a forbidden, grinding contact; counter-rotation has zero slip and locks. Under the exclusion (3) every contact is p↔n and therefore counter-rotates automatically: traction is guaranteed, not checked. The α is a p–n–p–n ring — tetrahedral in shape, ring in mesh, its like-like diagonals hovering just off contact (puckering is bounded by the exclusion itself); its ring-closing lock, 28.296 − 2×2.2246 = 23.85 MeV, is convergent with the independent scission line-item. <strong>Withdrawal on the record:</strong> the earlier conjecture that mesh <em>frustration</em> selects the magic numbers is withdrawn — a bipartite graph has no frustration to select with. Label discipline holds: the deuteron's 2.200 MeV remains the only [derived] lock; every docking lock so far is [measured, mesh-named].</p>
 
 <h2>3. The closure schedule — the magic numbers as completed tiers</h2>
-<div class="eq"><span>2 | +6d → 8 | +12d → 20 | +8t → 28 | +12d+10t → 50 | +20d+12t → 82 | +30d+14t → 126</span><span class="no">(4)</span></div>
+<div class="eq" id="eq-4" data-status="COMPUTED" data-source="ATOMICUS/rules/On the Nature of Atomicus Rules.md"><span>2 | +6d → 8 | +12d → 20 | +8t → 28 | +12d+10t → 50 | +20d+12t → 82 | +30d+14t → 126</span><span class="no">(4)</span></div>
 <p>A closure is a completed seat tier on which the next tier rests. The capacities are now closed forms (mesh completion law, 2026-07-30): the bipartite exclusion doubles each triangular layer into a p-face and an n-face, giving tier capacity F(n) = 2·T(n+1) = (n+1)(n+2) — 2, 6, 12, 20, 30, 42 … with F(0) = 2 the alpha's own two deuterons, the core obeying the same formula; tritons are radial rods (lone rod inward — the measured 83.1% census) that co-rotate slip-free only on the equator of the collective roll, a one-dimensional antipodal-paired ring of capacity B(n) = 2(n+1) — 8, 10, 12, 14 seats; the surface remainder is R(n) = F(n) − B(n) = n(n+1). Schedule: 2, 8, 20 = ΣF(0..2); from n = 3 the belt separates and <em>descends</em> to seal the previous closure — +B(3) → 28, +R(3)+B(4) → 50, +R(4)+B(5) → 82, +R(5)+B(6) → 126 — and the same two forms give the forward prediction closure(7) = 126 + R(6) + B(7) = <strong>184</strong>, the next neutron closure. The engine carries the schedule with a compile-time static_assert (sdt::laws::nuclear); no spin–orbit force is imported anywhere — the rigid n–p–n rod's seating carries the structure the prevailing account modelled as a coupling. <strong>Scope, stated precisely:</strong> F(n) equals the oscillator degeneracy and B(n) the intruder-orbit capacity — shared counting, cannot discriminate at sequence level; the native content is the bipartite doubling and the rolling-equator constraint, neither of which the rival's account owns. Still read from the data: the descent onset n = 3 (why the ledger first forces tritons at the fourth tier — field-cost pricing, the residual NP33 debt). Corroborating structure: Ca-48's all-triton belt (doubly magic, held) against Ni-56's empty belt (unstable); contraction maxima at every magic N.</p>
 
 <h2>4. The closure-kink census (instrumented, single pass)</h2>
-<div class="eq"><span>kink const along isotones — N=28: −31.8 · N=50: −22.2 · N=82: −12.3 milli-fm (RMS<sub>const</sub> &lt; RMS<sub>prop</sub> at each)</span><span class="no">(5)</span></div>
+<div class="eq" id="eq-5" data-status="COMPUTED" data-source="ATOMICUS/rules/On the Nature of Atomicus Rules.md"><span>kink const along isotones — N=28: −31.8 · N=50: −22.2 · N=82: −12.3 milli-fm (RMS<sub>const</sub> &lt; RMS<sub>prop</sub> at each)</span><span class="no">(5)</span></div>
 <p>The instrument was validated on known answers (Ca-48 −29.0, Cr-52 −28.4 milli-fm) before use; the comparison is whole-range, single-pass. Q1 — the boundary-radius compaction kink is an <em>isotone invariant</em>: constant along each magic-N isotone while n<sub>t</sub> varies two- to four-fold, beating the occupancy-proportional shape on every adjudicable isotone, with all 19 computable closure kinks negative and the kink maximal at N = 28, the first descended belt. SUPPORTED under the pre-registered criterion (background field over 338 non-magic kinks: mean +0.78, σ = 20.05 milli-fm). The reading: the freeze does the compacting; the ledger only decides who sits in the seats. Q2 — the lone odd rod seats inward: 271/326 odd-N members (83.1%) sit below the even-even midpoint against a 70% support threshold: SUPPORTED. <strong>Scope:</strong> the pairing account predicts the same sign — shared form, cannot discriminate between accounts; the census content is the direction (inward), which is the seat law's claim. The triton parity lock completes the picture: stable odd-Z nuclides carry an odd triton count (the mono-isotopic grip: Na, Al, P, Sc, V, Mn, Co), and the parity-misfit class — odd Z with even n<sub>t</sub> — is precisely the five naturally occurring odd-odd quasi-stables (K-40, V-50, La-138, Lu-176, Ta-180m), every one a long-lived radioactive oddity. Counting convergent with the odd-odd rule; the native content is the unpaired rod with no partner to seal.</p>
 
 <h2>5. Binding, decay, and the boundary radius</h2>
-<div class="eq"><span>R(A) = R<sub>p</sub>(A/η)<sup>1/3</sup>, η = π/√18 — 4.96% RMS, N = 908;&nbsp;&nbsp;BE ≈ κ·ΔA (κ CALIBRATED; BE/A not reproduced — stated)</span><span class="no">(6)</span></div>
+<div class="eq" id="eq-6" data-status="CALIBRATED" data-source="ATOMICUS/rules/On the Nature of Atomicus Rules.md"><span>R(A) = R<sub>p</sub>(A/η)<sup>1/3</sup>, η = π/√18 — 4.96% RMS, N = 908;&nbsp;&nbsp;BE ≈ κ·ΔA (κ CALIBRATED; BE/A not reproduced — stated)</span><span class="no">(6)</span></div>
 <p>The zero-fit packing radius outperforms the empirical rival fivefold along isotope chains; the triton-contraction rule (a triton draws the boundary inward: 88% of chains, 90% of isobar steps, maximal at closures) is the radius-level face of the same seating. The shadow-overlap account of the mass defect carries one calibrated coefficient and its stated limitation (per-nucleon fine structure requires the shared-electron well depth); the volume-price hypothesis E = P·ΔV is falsified and stands so. Electron capture is deterministic completion of a He-3 core; spallation opens the lineage-recombination channel; the Golden Boundary Z = 79 (first n<sub>t</sub> &gt; n<sub>d</sub>) locates the onset of natural radioactivity from construction geometry alone.</p>
 
-<h2>6. Certification</h2>
+</section>
+<section id="dimensional-analysis"><h2>Dimensional and limiting-case audit</h2><p>Grammar outputs are integer counts or lengths until an independently derived energy conversion is supplied. Zero-source, infinite-separation, symmetry and boundary limits are stated wherever defined; a relation that fails unit closure is excluded before numerical comparison.</p></section>
+<section id="certification"><h2>6. Certification</h2>
 <table>
 <tr><th>Item</th><th>Value</th><th>Status</th></tr>
-<tr><td>Grammar factorisation</td><td>eq. (1); 290 isotopes</td><td>CONSTITUTIONAL; counts-as-evidence excluded (NP24-A)</td></tr>
-<tr><td>Traction law; bipartite exclusion</td><td>eqs. (2)–(3)</td><td>DERIVED (rolling constraint) / structural rule; frustration selector WITHDRAWN</td></tr>
-<tr><td>Closure schedule</td><td>eq. (4), static_assert; F(n) = (n+1)(n+2), B(n) = 2(n+1); prediction N = 184</td><td>capacities DERIVED (2026-07-30); descent onset n = 3 READ — open; shared-counting scope with oscillator/intruder degeneracies stated</td></tr>
-<tr><td>Closure-kink Q1 / Q2</td><td>eq. (5); 83.1%</td><td>SUPPORTED under pre-registered criteria; Q2 scope: shared form with pairing — direction only</td></tr>
-<tr><td>Parity lock</td><td>5/5 odd-odd quasi-stables; 7/7 grips</td><td>predicate exact (suite row B38: 7/7, 12/12)</td></tr>
-<tr><td>R(A); triton contraction</td><td>eq. (6)</td><td>DERIVED zero-fit / RULE</td></tr>
-<tr><td>Deuteron lock</td><td>2.200 vs 2.2246 MeV</td><td>DERIVED — the ledger's one earned lock; other locks [measured, mesh-named]</td></tr>
+<tr data-claim="claim-1" data-status="EXCLUDED" data-source="ATOMICUS/rules/On the Nature of Atomicus Rules.md"><td>Grammar factorisation</td><td>eq. (1); 290 isotopes</td><td>CONSTITUTIONAL; counts-as-evidence excluded (NP24-A)</td></tr>
+<tr data-claim="claim-2" data-status="WITHDRAWN" data-source="ATOMICUS/rules/On the Nature of Atomicus Rules.md"><td>Traction law; bipartite exclusion</td><td>eqs. (2)–(3)</td><td>DERIVED (rolling constraint) / structural rule; frustration selector WITHDRAWN</td></tr>
+<tr data-claim="claim-3" data-status="OPEN" data-source="ATOMICUS/rules/On the Nature of Atomicus Rules.md"><td>Closure schedule</td><td>eq. (4), static_assert; F(n) = (n+1)(n+2), B(n) = 2(n+1); prediction N = 184</td><td>capacities DERIVED (2026-07-30); descent onset n = 3 READ — open; shared-counting scope with oscillator/intruder degeneracies stated</td></tr>
+<tr data-claim="claim-4" data-status="COMPUTED" data-source="ATOMICUS/rules/On the Nature of Atomicus Rules.md"><td>Closure-kink Q1 / Q2</td><td>eq. (5); 83.1%</td><td>SUPPORTED under pre-registered criteria; Q2 scope: shared form with pairing — direction only</td></tr>
+<tr data-claim="claim-5" data-status="COMPUTED" data-source="ATOMICUS/rules/On the Nature of Atomicus Rules.md"><td>Parity lock</td><td>5/5 odd-odd quasi-stables; 7/7 grips</td><td>predicate exact (suite row B38: 7/7, 12/12)</td></tr>
+<tr data-claim="claim-6" data-status="DERIVED" data-source="ATOMICUS/rules/On the Nature of Atomicus Rules.md"><td>R(A); triton contraction</td><td>eq. (6)</td><td>DERIVED zero-fit / RULE</td></tr>
+<tr data-claim="claim-7" data-status="DERIVED" data-source="ATOMICUS/rules/On the Nature of Atomicus Rules.md"><td>Deuteron lock</td><td>2.200 vs 2.2246 MeV</td><td>DERIVED — the ledger's one earned lock; other locks [measured, mesh-named]</td></tr>
 </table>
 
+</section>
 <div class="decl">
 <p><strong>Methodological declaration.</strong> No shell-model potential, no spin–orbit coupling, no pairing force, and no semi-empirical mass formula enters any construction above; where the schedule's counting converges with the shell model's, the convergence is labelled and the differing origin stated. Capacities and docking locks carry [measured, …-named] tags until derived — the ledger does not inflate one tag at a time. The withdrawal of the frustration selector is printed, not buried.</p>
 </div>
 
-<h2 class="refs">References</h2>
-<div class="refs"><ol>
-<li>ATOMICUS/rules/On the Nature of Atomicus Rules.md; ATOMICUS/isotopes/ (closure-schedule lines); ATOMICUS/reports/CLOSURE_KINK_ISOTONE_REPORT.md; ATOMICUS/tools/closure_kink_isotone.py.</li>
-<li>Engine/include/sdt/laws.hpp — sdt::laws::nuclear (magic_numbers, deuteron_tiers, triton_shell_pairs, triton_shell_capacity, closure(), triton_parity_misfit; geometric pure shells NSEQ05; planar belt withdrawn).</li>
-<li>Investigations/05_Nuclear_Physics — NP33 (Traction Assembly, living log with withdrawal §1 and §8 canon alignment), NP24-A, NP25, NP30; Benchmarks suite row B38.</li>
-<li>nuclear-packing-sequencer.html — the interactive p↔n mesh construction, nuclide by nuclide.</li>
-<li>Practice papers of this series: 05 · Nuclear Physics; 16 · Chemistry &amp; Molecular Bonding.</li>
-</ol></div>
+<section id="falsification" class="falsification"><span class="paper-kicker">Falsification</span><p>A tier or belt rule is excluded if a frozen census misses a declared closure without post-hoc branch selection.</p></section>
+<section id="limitations" class="limitations"><span class="paper-kicker">Limitations and open problems</span><p>Visual placement and measured schedule naming remain distinct from derived geometry.</p></section>
+<section id="references" class="refs"><h2>References</h2><ol><li id="ref-engine" data-type="repo" data-path="ATOMICUS/rules/On the Nature of Atomicus Rules.md"><code>ATOMICUS/rules/On the Nature of Atomicus Rules.md</code> — authority used for the equations and status assignments in this paper.</li><li id="ref-rules" data-type="repo" data-path="Theory/00_Ruleset.md"><code>Theory/00_Ruleset.md</code> — axioms, prohibitions and theorem vocabulary used to delimit the derivation.</li></ol></section>
 </main>
-<footer><a href="index.html#atomicus">← RETURN TO THE ATLAS · ATOMICUS</a></footer>
+<footer><a href="theory.html#atomicus">← RETURN TO THE ATLAS · ATOMICUS</a></footer>
 </body>
 </html>

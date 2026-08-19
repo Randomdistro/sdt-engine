@@ -6,36 +6,20 @@ import json
 import math
 import re
 import subprocess
+import sys
 import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
 SEQ = ROOT / "Release/HTML_SDT_Website/nuclear-packing-sequencer.html"
 DOC = ROOT / "docs/nuclear-packing-sequencer.html"
+PACK = ROOT / "Release/HTML_SDT_Website/js/pack-nucleus.js"
 
 
-def extract_pack_js(html: str) -> str:
-    start = html.find("const R_p = 0.8414;")
-    fn = html.find("function packNucleus(", start)
-    if start < 0 or fn < 0:
-        raise RuntimeError("packNucleus not found")
-    brace = html.find("{", fn)
-    depth = 0
-    end = brace
-    for i, ch in enumerate(html[brace:], brace):
-        if ch == "{":
-            depth += 1
-        elif ch == "}":
-            depth -= 1
-            if depth == 0:
-                end = i + 1
-                break
-    js_core = html[start:end]
-    if "function vnorm" not in js_core:
-        vn = re.search(r"function vnorm\(v\)\{[^}]+\}", html)
-        if vn:
-            js_core = vn.group(0) + "\n" + js_core
-    return js_core
+def extract_pack_js() -> str:
+    if not PACK.exists():
+        raise RuntimeError("shared pack-nucleus.js not found")
+    return PACK.read_text(encoding="utf-8")
 
 
 def run_node(js: str) -> str:
@@ -43,12 +27,15 @@ def run_node(js: str) -> str:
         f.write(js)
         tmp = f.name
     try:
-        return subprocess.check_output(["node", tmp], text=True, stderr=subprocess.STDOUT)
+        return subprocess.check_output(
+            ["node", tmp], encoding="utf-8", stderr=subprocess.STDOUT
+        )
     finally:
         Path(tmp).unlink(missing_ok=True)
 
 
 def main() -> int:
+    sys.stdout.reconfigure(encoding="utf-8")
     print("================================================================")
     print("NSEQ03 — Dual-tetra sequencer rewrite validation")
     print("================================================================\n")
@@ -56,25 +43,29 @@ def main() -> int:
     html = SEQ.read_text(encoding="utf-8", errors="replace")
     doc = DOC.read_text(encoding="utf-8", errors="replace")
 
-    print("C1 — dual-tetra markers in site + docs")
-    markers = ["SHELL_CAPS", "tritonShellSeats", "R_OPEN_SCALE", "dual-tetrahedra"]
+    print("C1 — dual-tetra markers in shared packer + site mirrors")
+    pack = extract_pack_js()
+    markers = ["SHELL_SEQ", "dirsPolar", "R_OPEN_SCALE", "R_CLOSE_SCALE", "stella"]
     stale = ["BELT_PAIRS", "beltPlane"]
     ok1 = True
     for label, text in [("site", html), ("docs", doc)]:
-        for m in markers:
-            hit = m in text
-            ok1 = ok1 and hit
-            print(f"  {label}: {m}: {'PASS' if hit else 'FAIL'}")
+        hit = 'src="js/pack-nucleus.js"' in text
+        ok1 = ok1 and hit
+        print(f"  {label}: shared packer linked: {'PASS' if hit else 'FAIL'}")
         for m in stale:
             gone = m not in text
             ok1 = ok1 and gone
             print(f"  {label}: stale {m} absent: {'PASS' if gone else 'FAIL'}")
+    for marker in markers:
+        hit = marker in pack
+        ok1 = ok1 and hit
+        print(f"  packer: {marker}: {'PASS' if hit else 'FAIL'}")
     print(f"  C1: {'PASS' if ok1 else 'FAIL'}\n")
     if not ok1:
         return 2
 
     print("C2 — packing smoke He/C/O/Fe/U")
-    js_core = extract_pack_js(html)
+    js_core = pack
     smoke = [("He", 2, 4), ("C", 6, 12), ("O", 8, 16), ("Fe", 26, 56), ("U", 92, 238)]
     runner = (
         js_core
@@ -142,8 +133,7 @@ console.log(JSON.stringify({nRods:rods.length,rMax,rMin,openGtClose:rMax>rMin,ma
         return 2
 
     print("C4 — capacity schedule present")
-    m = re.search(r"SHELL_CAPS=\[([^\]]+)\]", html)
-    caps = [int(x) for x in m.group(1).split(",")] if m else []
+    caps = [int(x) for x in re.findall(r"sp:'t',cap:(\d+)", js_core)]
     ok4 = caps[:4] == [8, 10, 12, 14]
     print(f"  SHELL_CAPS={caps}")
     print(f"  C4: {'PASS' if ok4 else 'FAIL'}\n")

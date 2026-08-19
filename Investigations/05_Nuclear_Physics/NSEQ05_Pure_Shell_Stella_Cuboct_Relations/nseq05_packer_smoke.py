@@ -3,53 +3,42 @@
 from __future__ import annotations
 
 import json
-import re
 import subprocess
+import sys
 import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
 SEQ = ROOT / "Release/HTML_SDT_Website/nuclear-packing-sequencer.html"
 DOC = ROOT / "docs/nuclear-packing-sequencer.html"
+PACK = ROOT / "Release/HTML_SDT_Website/js/pack-nucleus.js"
 
 
-def extract_pack(html: str) -> str:
-    start = html.find("const R_p = 0.8414;")
-    fn = html.find("function packNucleus(", start)
-    brace = html.find("{", fn)
-    depth = 0
-    end = brace
-    for i, ch in enumerate(html[brace:], brace):
-        if ch == "{":
-            depth += 1
-        elif ch == "}":
-            depth -= 1
-            if depth == 0:
-                end = i + 1
-                break
-    js = html[start:end]
-    if "function vnorm" not in js:
-        vn = re.search(r"function vnorm\(v\)\{[^}]+\}", html)
-        if vn:
-            js = vn.group(0) + "\n" + js
-    return js
+def extract_pack() -> str:
+    if not PACK.exists():
+        raise RuntimeError("shared pack-nucleus.js not found")
+    return PACK.read_text(encoding="utf-8")
 
 
 def main() -> int:
+    sys.stdout.reconfigure(encoding="utf-8")
     print("NSEQ05-C5 packer smoke")
     html = SEQ.read_text(encoding="utf-8", errors="replace")
     doc = DOC.read_text(encoding="utf-8", errors="replace")
+    js = extract_pack()
     markers = ["SHELL_SEQ", "dirsCuboct", "dirsT14", "dirsPolar", "NSEQ05"]
     ok_m = True
     for label, text in [("site", html), ("docs", doc)]:
-        for m in markers:
-            hit = m in text
-            ok_m = ok_m and hit
-            print(f"  {label} {m}: {'PASS' if hit else 'FAIL'}")
+        hit = 'src="js/pack-nucleus.js"' in text
+        ok_m = ok_m and hit
+        print(f"  {label} shared packer link: {'PASS' if hit else 'FAIL'}")
+    for marker in markers:
+        hit = marker in js
+        ok_m = ok_m and hit
+        print(f"  packer {marker}: {'PASS' if hit else 'FAIL'}")
     if not ok_m:
         return 2
 
-    js = extract_pack(html)
     smoke = [("He", 2, 4), ("C", 6, 12), ("O", 8, 16), ("Fe", 26, 56), ("U", 92, 238), ("Ca", 20, 48)]
     runner = (
         js
@@ -78,7 +67,9 @@ def main() -> int:
         f.write(runner)
         tmp = f.name
     try:
-        out = subprocess.check_output(["node", tmp], text=True, stderr=subprocess.STDOUT)
+        out = subprocess.check_output(
+            ["node", tmp], encoding="utf-8", stderr=subprocess.STDOUT
+        )
     finally:
         Path(tmp).unlink(missing_ok=True)
 

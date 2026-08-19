@@ -1,6 +1,6 @@
 # ═══════════════════════════════════════════════════════════════════
 #  spatialdisplacementtheory.com — Apache configuration
-#  J. C. Harvey, Melbourne.
+#  James Christopher Tyndall, Melbourne.
 # ═══════════════════════════════════════════════════════════════════
 
 Options -Indexes
@@ -23,8 +23,13 @@ ErrorDocument 404 /404.html
   RewriteCond %{REQUEST_FILENAME}\.html -f
   RewriteRule ^(.*)$ $1.html [L]
 
-  # the atlas is the landing page
-  RewriteRule ^atlas/?$ /index.html [R=301,L]
+  # One front door and one complete dependency chain.
+  RewriteRule ^theory/?$ /theory.html [L]
+  RewriteRule ^(?:welcome|welcome\.html|atlas|atlas\.html|causal-chain|causal-chain\.html)/?$ /theory [R=301,L]
+  RewriteRule ^(?:sdt_walkthrough|sdt_walkthrough\.html)/?$ / [R=301,L]
+  RewriteRule ^(?:atomicus-lab-subdued|atomicus-lab-v4-tiers)(?:\.html)?/?$ /atomicus-lab.html [R=301,L]
+  RewriteRule ^(?:atomicus-v1-snapshot|atomicus-stick|atomicus-stick-v3-polar-caps|atomicus-construction-zone|atomicus-nuclear-model|monoisotopic-morph)(?:\.html)?/?$ /atomicus-3d.html [R=301,L]
+  RewriteRule ^nuclear-packing-sequencer-raw(?:\.html)?/?$ /nuclear-packing-sequencer.html [R=301,L]
 </IfModule>
 
 # ── compression ───────────────────────────────────────────────────

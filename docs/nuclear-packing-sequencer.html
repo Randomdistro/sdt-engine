@@ -58,13 +58,15 @@ canvas{display:block}
 .row{display:flex;justify-content:space-between;gap:8px;margin:3px 0}
 .row .l{color:var(--ink-dim);flex-shrink:0}
 .row .v{color:var(--ink);font-weight:500;text-align:right;font-family:var(--mono)}
+#idShells{font-size:8.5px;line-height:1.2;max-width:128px;display:-webkit-box;
+  -webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
 .v.gold{color:var(--gold)}.v.steel{color:var(--steel)}.v.mint{color:var(--mint)}
 .v.red{color:var(--red)}.v.grn{color:var(--grn)}
 .sep{height:1px;background:var(--edge);margin:7px 0;opacity:.6}
 #pIdentity{top:44px}
-#pShadow{top:212px}
-#pDefect{top:406px}
-#pFit{top:628px}
+#pShadow{top:250px}
+#pDefect{top:432px}
+#pFit{top:692px}
 .idhead{display:flex;align-items:center;gap:10px;margin-bottom:6px}
 .idsym{font-size:30px;font-weight:700;color:var(--gold);line-height:1;font-family:var(--sans)}
 .idmeta .z{font-size:10px;color:var(--ink-dim);font-family:var(--mono)}
@@ -107,10 +109,24 @@ canvas{display:block}
 .ctlGrp{display:flex;align-items:center;gap:6px;font-size:10px;color:var(--ink-dim);font-family:var(--mono)}
 .ctlGrp input[type=range]{width:64px;accent-color:var(--gold);vertical-align:middle}
 #loadErr{position:fixed;bottom:64px;left:216px;z-index:30;font-family:var(--mono);font-size:10px;color:var(--ink-dim)}
+@media(max-height:820px) and (min-width:901px){
+  .panel{padding:7px 10px;font-size:10px}
+  #pIdentity{top:42px}#pShadow{top:232px}#pDefect{top:392px}#pFit{top:630px}
+  #pFit .fitDetail,#pFit .sep{display:none}
+}
+@media(max-width:900px){
+  body{overflow:auto}
+  #rail{width:166px}
+  #title{left:178px;right:12px}
+  #toggles{left:178px;right:12px;transform:none;max-width:none;justify-content:flex-start;top:284px}
+  #chirpbar{left:166px;right:0;top:0}
+  .panel{display:none}
+  #transport{left:0;padding-left:176px}
+}
 </style>
 <link rel="stylesheet" href="sdt-shell.css">
 <script src="sdt-shell.js" defer></script>
-<meta name="description" content="Pack a nucleus from SDT trefoil protons, shine the convergence light through it, and read the mass defect straight off the shadow it casts.">
+<meta name="description" content="A 5.28 fm quadruple helix of four 0.06 fm strands, bent into one offset-connected four-tour toroidal proton.">
 <link rel="canonical" href="https://spatialdisplacementtheory.com/nuclear-packing-sequencer">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.ico" sizes="64x64">
@@ -120,7 +136,7 @@ canvas{display:block}
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Spatial Displacement Theory">
 <meta property="og:title" content="Nuclear Packing Sequencer — SDT">
-<meta property="og:description" content="Pack a nucleus from SDT trefoil protons, shine the convergence light through it, and read the mass defect straight off the shadow it casts.">
+<meta property="og:description" content="A 5.28 fm quadruple helix of four 0.06 fm strands, bent into one offset-connected four-tour toroidal proton.">
 <meta property="og:url" content="https://spatialdisplacementtheory.com/nuclear-packing-sequencer">
 <meta property="og:image" content="https://spatialdisplacementtheory.com/og-card.png">
 <meta property="og:image:width" content="1200">
@@ -128,7 +144,7 @@ canvas{display:block}
 <meta property="og:locale" content="en_AU">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Nuclear Packing Sequencer — SDT">
-<meta name="twitter:description" content="Pack a nucleus from SDT trefoil protons, shine the convergence light through it, and read the mass defect straight off the shadow it casts.">
+<meta name="twitter:description" content="A 5.28 fm quadruple helix of four 0.06 fm strands, bent into one offset-connected four-tour toroidal proton.">
 <meta name="twitter:image" content="https://spatialdisplacementtheory.com/og-card.png">
 </head>
 <body>
@@ -137,24 +153,35 @@ canvas{display:block}
 
 <div id="title">
   <h1>Nuclear <span>Packing Sequencer</span></h1>
-  <p>trefoil protons · bipartite mesh — every contact p↔n, traction by construction · mass defect from the shadow</p>
-  <p style="color:var(--ink-dim);max-width:560px;font-size:.82rem">step order is the shell schedule: <b>α → D6 → D12 → T8 → D12 cuboct → T10 → D20 → …</b> — not all deuterons then all tritons. Closures 8 · 20 · 28 · 50 · 82 · 126 tick when the ledger actually crosses them.</p>
+
+  <p id="structureTitle">Hydrogen-1 · quadruple helix · four 0.06 fm strands</p>
+  <p id="structureSummary" style="color:var(--ink-dim);max-width:650px;font-size:.82rem">
+    Hydrogen-1 is rendered at the origin as one complete toroidal nucleon unit. Its
+    packing coordinate transforms that whole unit; it is not a bead or a point sampled
+    from the strand.</p>
   <p id="meshStat" style="color:#44eebb;font-size:.78rem;letter-spacing:.04em">mesh —</p>
-  <p style="color:var(--ink-dim);max-width:560px">in the mesh, each proton presents as a <b style="color:#ff5a5a">RING</b> — wedding-band proportions, wide and flat — four very skinny strands twisting around each other as they run the band (the free proton's 6π trefoil, tightened at 1.83c; the mass is still the packed <b>1836</b> electron volumes, m<sub>p</sub>/m<sub>e</sub> = 6π⁵). A <b style="color:#5a80ff">neutron</b> is the same band: a proton core with one internal electron. That electron is not a bead and not a helix — it is a rider on a <b>closed tour of the subunit's proton destinations</b> (FLM14 sequential occupancy; NP17 p–e–p). The cyan loop is the pathway taken; the moving pip is the electron on it. <span style="color:#ff5a5a">proton red</span> · <span style="color:#5a80ff">neutron blue</span> · <span style="color:#7fe7ff">e⁻ tour</span>. Shown representationally — the real strands are vastly finer.</p>
+  <p id="structureDetail" style="color:var(--ink-dim);max-width:620px">Begin with a 5.28 fm straight-axis
+    quadruple helix. Its four touching strands are each 0.06 fm in diameter and turn
+    through 270°—one rotation short by 90°. Bend the 5.28 fm axis into a circle.
+    Each strand then joins the strand 90° earlier, giving one continuous path
+    0→3→2→1→0 that closes only after four toroidal tours. The bundle rotates
+    poloidally once per tour while material simultaneously travels the full path;
+    the resulting wake phase is locked to −4u. Display speed is independently
+    adjustable and starts at 0.18 rotations per second; model time remains
+    ds/dt=1.83c.</p>
 </div>
 
 <div id="toggles">
-  <label><input type="checkbox" id="tWall" checked> back wall</label>
-  <label><input type="checkbox" id="tShadow" checked> shadow</label>
-  <label><input type="checkbox" id="tKnots" checked> trefoil topology</label>
+  <label><input type="checkbox" id="tKnots" checked> nucleon surface + centreline</label>
+  <label><input type="checkbox" id="tWake" checked> closed helical wake</label>
   <label><input type="checkbox" id="tInflux"> CMB influx</label>
-  <label><input type="checkbox" id="tCoul" checked> Coulomb spread</label>
+  <label><input type="checkbox" id="tCoul"> visual Z spread</label>
   <label><input type="checkbox" id="tSpin" checked> rotate</label>
-  <label><input type="checkbox" id="tChirp"> chirp audio</label>
+  <label><input type="checkbox" id="tChirp"> step audio</label>
 </div>
 
 <div id="rail">
-  <div class="rhdr"><b>Isotopes · α-grammar</b>
+  <div class="rhdr"><b>Isotopes · proton / α-grammar</b>
     <input id="search" placeholder="search symbol / Z / A…" autocomplete="off">
   </div>
   <div id="isoList"></div>
@@ -171,70 +198,77 @@ canvas{display:block}
   <div class="row"><span class="l">mass number A</span><span class="v" id="idA">56</span></div>
   <div class="row"><span class="l">nucleons shown</span><span class="v gold" id="idShown">56 / 56</span></div>
   <div class="row"><span class="l">deuterons · tritons</span><span class="v" id="idDT">20 · 4</span></div>
+  <div class="row"><span class="l">occupied shells</span><span class="v" id="idShells">—</span></div>
 </div>
 
 <div class="panel" id="pShadow">
-  <h3>Occlusion Shadow <em>π R<sub>p</sub>² each</em></h3>
-  <div class="row"><span class="l">R<sub>p</sub> (W+1 boundary)</span><span class="v">0.8414 fm</span></div>
-  <div class="row"><span class="l">one nucleon a₁</span><span class="v" id="shA1">2.224 fm²</span></div>
-  <div class="row"><span class="l">Σ separate  N·a₁</span><span class="v" id="shSum">—</span></div>
-  <div class="row"><span class="l">packed shadow A<sub>∪</sub></span><span class="v steel" id="shUnion">—</span></div>
+  <h3>Construction <em id="ctStatus">candidate</em></h3>
+  <div class="row"><span class="l">instrument</span><span class="v" id="ctEngine">—</span></div>
+  <div class="row"><span class="l">valence stage</span><span class="v steel" id="ctStage">—</span></div>
+  <div class="row"><span class="l">seat model</span><span class="v" id="ctSeats">—</span></div>
+  <div class="row"><span class="l">polar axis</span><span class="v" id="ctPole">—</span></div>
   <div class="sep"></div>
-  <div class="row"><span class="l">shared occlusion ΔA</span><span class="v mint big" id="shDelta">—</span></div>
-  <div class="row"><span class="l">overlap fraction</span><span class="v" id="shPct">—</span></div>
+  <div class="row"><span class="l">module route</span><span class="v mint" id="ctRoute">—</span></div>
+  <div class="row"><span class="l">seat residual</span><span class="v" id="ctSeatResidual">—</span></div>
 </div>
 
 <div class="panel" id="pDefect">
-  <h3>Mass Defect <em>ΔA → energy</em></h3>
-  <div class="row"><span class="l">measured binding</span><span class="v" id="dfMeas">— MeV</span></div>
-  <div class="row"><span class="l">measured  BE/A</span><span class="v" id="dfMeasA">—</span></div>
+  <h3>Contact traction <em>envelope control</em></h3>
+  <div class="row"><span class="l">declared contacts</span><span class="v" id="trContacts">—</span></div>
+  <div class="row"><span class="l">contact graph</span><span class="v mint" id="trGraph">—</span></div>
+  <div class="row"><span class="l">2R<sub>p</sub> envelope residual</span><span class="v" id="trRim">—</span></div>
+  <div class="row"><span class="l">envelope no-slip residual</span><span class="v" id="trSlip">—</span></div>
   <div class="sep"></div>
-  <div class="row"><span class="l">shadow  κ·ΔA</span><span class="v gold" id="dfPred">— MeV</span></div>
-  <div class="row"><span class="l">shadow  BE/A</span><span class="v gold" id="dfPredA">—</span></div>
-  <div class="row"><span class="l">agreement</span><span class="v" id="dfErr">—</span> </div>
-  <canvas id="curve" width="230" height="66"></canvas>
-  <div class="row" style="margin-top:5px"><span class="l">κ (area→energy)</span><span class="v" id="dfKappa">—</span></div>
+  <div class="row"><span class="l">unlisted / like contacts</span><span class="v" id="trRejected">—</span></div>
+  <div class="row"><span class="l">interleave ledger</span><span class="v gold" id="trInterleave">—</span></div>
+  <div class="row"><span class="l">closure contraction</span><span class="v" id="valContraction">—</span></div>
+  <div class="sep"></div>
+  <div class="row"><span class="l">wake work / measured</span><span class="v" id="valBinding">—</span></div>
+  <div class="row"><span class="l">μ integral / far field</span><span class="v" id="valMagRoutes">—</span></div>
+  <div class="row"><span class="l">μ measured / residual</span><span class="v" id="valMagTarget">—</span></div>
+  <div class="row"><span class="l">wake ∇·U / paired flux</span><span class="v" id="valWake">—</span></div>
+  <div class="row"><span class="l">data source</span><span class="v" id="valSource">—</span></div>
+  <div class="row"><span class="l">fitted pose</span><span class="v" id="valFitPose">—</span></div>
+  <div class="row"><span class="l">wake / dimensional coefficients</span><span class="v" id="valFitBridge">—</span></div>
+  <div class="fitDetail" style="font-size:9px;color:var(--ink-dim);line-height:1.4;margin-top:6px">
+    Boundary-envelope gate. Filament engagement phase and an interleave-to-energy
+    law remain separate tests.
+  </div>
 </div>
 
 <div class="panel" id="pFit">
-  <h3>Mass-defect fit <em>N = <span id="fitN">–</span></em></h3>
-  <div class="row"><span class="l">total binding  R²</span><span class="v grn big" id="fitR2tot">—</span></div>
-  <div class="row"><span class="l">mean |error|</span><span class="v" id="fitErr">—</span></div>
+  <h3>Nucleon circulation <em>closure</em></h3>
+  <div class="row"><span class="l">path / material roll</span><span class="v" id="brTurns">—</span></div>
+  <div class="row"><span class="l">lane splice</span><span class="v mint" id="brSplice">—</span></div>
+  <div class="row"><span class="l">seam residual</span><span class="v" id="brSeam">—</span></div>
+  <div class="row"><span class="l">closure residual</span><span class="v" id="brClosure">—</span></div>
+  <div class="row"><span class="l">material clock</span><span class="v gold" id="brSpeed">—</span></div>
   <div class="sep"></div>
-  <div style="font-size:9.5px;color:var(--ink-dim);line-height:1.5">
-    One scale κ, fixed by least squares. The shadow-overlap <b style="color:var(--mint)">is</b> the mass
-    defect to ~8%. Residual: pure boundary overlap slightly <b style="color:#c060e0">over-binds the
-    light α-cluster nuclei</b> and does not resolve the Fe peak — that fine structure needs the shared-electron
-    well depth (NP17), not geometry alone.
-  </div>
-  <div class="sep"></div>
-  <div style="font-size:9.5px;color:var(--ink-dim);line-height:1.5">
-    <b style="color:var(--gold)">Geometry of the weave.</b> The ideal trefoil's three tips sit exactly
-    <b>120° apart, coplanar</b> — the bowl a real strand pulls into is the over·under weave buckling out of
-    plane. That buckle is an angular defect, and Descartes fixes the total: a closed shell carries
-    <b>720°</b> — twelve 60° trefoil caps close an <b>icosahedral shell</b> (12 units · 12 vertices), which
-    is why the wire bowls and why nuclear shells want to be spheres. At the 1.83c seat the six windings
-    tighten onto their torus.
+  <div class="fitDetail" style="font-size:9.5px;color:var(--ink-dim);line-height:1.5">
+    Four touching 0.06 fm strand segments follow the bent 5.28 fm helix axis.
+    Their seam connections are offset 0→3→2→1→0, producing one four-tour
+    circulation rather than four separately closed loops. The moving light train
+    spans one complete toroidal lap so its points trace every lobe and over/under crossing.
   </div>
 </div>
 
 <div id="chirpbar">
-  <button type="button" id="btnFirst" title="reset to α-core">⏮</button>
+  <button type="button" id="btnFirst" title="reset to first construction unit">⏮</button>
   <button type="button" id="btnPrev" title="remove a subunit">◀</button>
   <button type="button" id="btnPlay" class="play" title="sequence the packing">▶</button>
   <button type="button" id="btnNext" title="add a subunit">▶</button>
   <button type="button" id="btnLast" title="full nucleus">⏭</button>
   <div id="seqWrap">
-    <canvas id="seqCanvas" height="42" title="binding-energy chirp — height = ΔE released as each subunit locks in. Click to seek."></canvas>
+    <canvas id="seqCanvas" height="42" title="packing ledger — purple alpha, blue deuterons, gold tritons. Click to seek."></canvas>
     <span id="seqLabel">α core</span>
   </div>
 </div>
 
 <div id="transport">
-  <div class="ctlGrp">tightness<input type="range" id="rTight" title="packing tightness (nn distance / R_p)" aria-label="packing tightness" min="1.15" max="1.95" step="0.01" value="1.45"><span id="rTightV">1.45</span></div>
+  <div class="ctlGrp">bond D<input type="range" id="rTight" title="displayed p–n bond length in femtometres" aria-label="bond length in femtometres" min="1.15" max="1.65" step="0.01" value="1.45"><span id="rTightV">1.45 fm</span></div>
   <div class="ctlGrp">light°<input type="range" id="rLight" title="light azimuth (degrees)" aria-label="light azimuth" min="-60" max="60" step="1" value="-38"><span id="rLightV">-38</span></div>
   <div class="ctlGrp">bright<input type="range" id="rBright" title="light brightness" aria-label="light brightness" min="0.2" max="6" step="0.1" value="2.4"><span id="rBrightV">2.4</span></div>
-  <div class="ctlGrp">spin<input type="range" id="rSpin" title="nucleon rotation rate — complementary: p one sense, n the other; fast spin reads as the 1.83c tight torus" aria-label="spin rate" min="0" max="4" step="0.05" value="1.8"><span id="rSpinV">1.8</span></div>
+  <div class="ctlGrp">view speed<input type="range" id="rSpin" title="Displayed H-ion rotation rate; physical circulation remains 1.83c" aria-label="display rotation rate" min="0.02" max="1" step="0.02" value="0.18"><span id="rSpinV">0.18 Hz</span></div>
   <div class="ctlGrp">knot&nbsp;α<input type="range" id="rKA" title="knot opacity" aria-label="knot opacity" min="0.05" max="1" step="0.05" value="1"><span id="rKAV">1.00</span></div>
   <div class="ctlGrp">torus&nbsp;α<input type="range" id="rTA" title="spun-torus shell opacity (scales with spin)" aria-label="torus opacity" min="0" max="0.9" step="0.02" value="0.34"><span id="rTAV">0.34</span></div>
   <div class="ctlGrp" title="colours: proton / neutron / electron / neutrino">
@@ -245,10 +279,9 @@ canvas{display:block}
   </div>
   <div class="ctlGrp">
     <label title="time-average torus shells"><input type="checkbox" id="tTorus" checked>torus</label>
-    <label title="e⁻ — closed tour of proton destinations in each subunit (the pathway taken; FLM14 / NP17)"><input type="checkbox" id="tE" checked>e⁻ tour</label>
+    <label title="NSEQ16: internal neutron Möbius director; legacy control: closed subunit tour"><input type="checkbox" id="tE" checked>e⁻ Möbius</label>
     <label title="ν — W→0 open winding through the neutron pole; never a closed circuit"><input type="checkbox" id="tNu">ν</label>
     <label title="Z fielded e⁻ on the atomic shell a₀ (drawn off-scale)"><input type="checkbox" id="tFielded">fielded e⁻</label>
-    <label title="shell radius line-and-label"><input type="checkbox" id="tShell" checked>shells</label>
   </div>
 </div>
 <div id="loadErr"></div>
@@ -257,6 +290,10 @@ canvas{display:block}
 <script>
 // [sym,Z,A,abundance,stable,bindingEnergyMeV,spin]
 const RAW = [
+ ["H",1,1,99.9885,true,0,"1/2+"],
+ ["H",1,2,0.0115,true,2.224566342,"1+"],
+ ["H",1,3,0,false,8.481796625,"1/2+"],
+ ["He",2,3,0.000137,true,7.717989650,"1/2+"],
  ["He",2,4,99.9999,true,28.296,"0+"],
  ["Li",3,7,92.41,true,39.245,"3/2-"],
  ["Be",4,9,100,true,58.165,"3/2-"],
@@ -346,277 +383,39 @@ const NAMES=[,"Hydrogen","Helium","Lithium","Beryllium","Boron","Carbon","Nitrog
 const ISO = RAW.map(([sym,Z,A,abd,stable,be,spin])=>{
   const nd=3*Z-A-2, nt=A-2*Z;
   return {sym,Z,A,abd,stable,be,spin,nd,nt,name:NAMES[Z]};
-}).filter(e=>e.nd>=0 && e.nt>=0 && e.be>0);
+}).filter(e=>(e.Z===1&&e.A<=3)||(e.Z===2&&e.A===3)||(e.nd>=0&&e.nt>=0&&e.be>0));
 </script>
+<script src="js/pack-nucleus.js"></script>
+<script src="js/nuclear-inputs.js"></script>
+<script src="js/traction-gear-engine.js"></script>
 
-<!-- ═══════════════ PHYSICS: packing + shadow + mass defect ═══════════════ -->
+<!-- ═══════════════ NSEQ16 CONTACT-CONSTRUCTION LEDGER ═══════════════ -->
 <script>
-const R_p = 0.8414;                 // fm — derived W+1 proton boundary
-const A1  = Math.PI*R_p*R_p;        // fm² — single-nucleon occlusion cross-section
-const E_NUC = 931.494;              // MeV per u — nucleon rest-energy scale (for BE/A context)
+const R_p = SDT_NUCLEAR_PACKING.R_p; // fm — shared packer constant
 
-/* ---- SPHERICAL TIER packing (Harvey spec 2026-07-30, superseding the cubic grid):
-   the α is a wireframe tetrahedron with the two proton RINGS on the faces flanking
-   one edge and the two neutron rings on the faces flanking the OPPOSITE edge — each
-   ring touches its face's other two edges, never the shared one, so the contact
-   graph is p–n–p–n by geometry. Around it the shell schedule made literal:
-   deuterons are RADIAL rods (n inward, p outward — the bipartite double layer) on
-   pure shells alternate species (NSEQ05): D6→D12→T8→D12→T10→D20→T12→D30→T14→…
-   (grouped +12d+10t is a closure increment, not one mixed shell). Tritons: T8=stella,
-   T14=cuboct face-normals; deuterons after T8 use cuboct (T8 edge midpoints).
-   Opening triton valence radius > closing.
-   Bond length D < 2R_p ⇒ boundaries INTERLACE — the overlap IS the mass defect the
-   shadow measures. Circulation differs per layer (tier field, consumed by animate).
-   Contacts are the EXPLICIT engineered list (nuc.contacts) — all p↔n, frustration
-   zero by construction; centre distance is not the contact criterion (the α rings
-   sit close but never touch their own kind). */
-const KSUB=1.5, KINTRA=0.65;   // legacy spacing constants (kept for compatibility)
-function vnorm(v){const l=Math.hypot(v[0],v[1],v[2])||1;return[v[0]/l,v[1]/l,v[2]/l];}
-function packNucleus(A, Z, dnn, coulSpread){
-  // ═══ SPHERICAL TIER PACKING (Harvey spec 2026-07-30) — see block comment above ═══
-  const nd=3*Z-A-2, nt=A-2*Z;
-  const spread=1+coulSpread*(Z*Z)/Math.pow(A,4/3);
-  const D=dnn*spread;                                   // p–n bond length (< 2R_p ⇒ interlace)
-  const nuc=[]; nuc.contacts=[]; nuc.bondD=D;
-  const push=(pos,type,group,sub,axis,tier)=>{
-    const n={pos,type,group,sub,axis,tier:tier||0,id:nuc.length}; nuc.push(n); return n.id; };
-  const bond=(i,j)=>nuc.contacts.push([i,j]);
-
-  // ── α core: CONTACT ROTATION (Harvey correction, 2026-07-30). If it doesn't make
-  // contact, it doesn't rotate — so the rings must genuinely MEET at the edges. Each
-  // ring sits at its face's CIRCUMCENTRE and passes through the MIDPOINTS of its two
-  // near (mixed) edges; the p ring and n ring on either side of a mixed edge share
-  // that midpoint, both tangent along the edge — an exact rolling contact point,
-  // counter-rotation ⇒ zero slip. On a REGULAR tetrahedron this forces the like-like
-  // rings into contact too (all six separations equalise — NP33), so the two
-  // like-like edges AB, CD are pinched by γ: mixed contacts stay exact, p–p and n–n
-  // hover clear. The ring IS the R_p boundary circle — the tetra is sized from it. ──
-  const GAM=0.95;                                        // like-edge pinch (slightly-opened α)
-  const b_=GAM, h_=Math.sqrt(1-b_*b_/4), y0_=(h_*h_-b_*b_/4)/(2*h_);   // face shape, units of a
-  const r_=Math.hypot(b_/4, y0_-h_/2);                   // circumcentre→edge-midpoint = ring radius / a
-  const aEdge=R_p/r_;                                    // mixed-edge length: ring radius ≡ R_p
-  const bEdge=GAM*aEdge, zT=Math.sqrt(aEdge*aEdge-bEdge*bEdge/2)/2;
-  const VT=[[ bEdge/2,0, zT],[-bEdge/2,0, zT],           // A,B — the proton hinge (pinched)
-            [0, bEdge/2,-zT],[0,-bEdge/2,-zT]];          // C,D — the neutron hinge (pinched)
-  // faces: {vertex triple, apex vertex between the two touched mixed edges, type}
-  const FACES=[ {v:[0,1,2],w:2,t:'p'}, {v:[0,1,3],w:3,t:'p'},     // contain AB → protons
-                {v:[0,2,3],w:0,t:'n'}, {v:[1,2,3],w:1,t:'n'} ];   // contain CD → neutrons
-  const alphaIds=[];
-  for(const f of FACES){
-    const W=VT[f.w], oth=f.v.filter(i=>i!==f.w);
-    const M=[(VT[oth[0]][0]+VT[oth[1]][0])/2,(VT[oth[0]][1]+VT[oth[1]][1])/2,(VT[oth[0]][2]+VT[oth[1]][2])/2];
-    const s=y0_/h_;                                      // circumcentre seat on the apex median
-    const c=[M[0]+(W[0]-M[0])*s, M[1]+(W[1]-M[1])*s, M[2]+(W[2]-M[2])*s];
-    // ring plane = face plane ⇒ nucleon axis = outward face normal (true normal, pinch-safe)
-    const e1=[VT[f.v[1]][0]-VT[f.v[0]][0],VT[f.v[1]][1]-VT[f.v[0]][1],VT[f.v[1]][2]-VT[f.v[0]][2]];
-    const e2=[VT[f.v[2]][0]-VT[f.v[0]][0],VT[f.v[2]][1]-VT[f.v[0]][1],VT[f.v[2]][2]-VT[f.v[0]][2]];
-    let nx=e1[1]*e2[2]-e1[2]*e2[1], ny=e1[2]*e2[0]-e1[0]*e2[2], nz=e1[0]*e2[1]-e1[1]*e2[0];
-    if(nx*c[0]+ny*c[1]+nz*c[2]<0){nx=-nx;ny=-ny;nz=-nz;}
-    const id=push(c,f.t,'alpha',0,vnorm([nx,ny,nz]),0);
-    nuc[id].ringR=R_p; alphaIds.push(id);
-  }
-  // the contact graph: each p ring meets each n ring AT their shared mixed-edge midpoint
-  bond(alphaIds[0],alphaIds[2]); bond(alphaIds[0],alphaIds[3]);
-  bond(alphaIds[1],alphaIds[2]); bond(alphaIds[1],alphaIds[3]);
-  const eMid=(i,j)=>[(VT[i][0]+VT[j][0])/2,(VT[i][1]+VT[j][1])/2,(VT[i][2]+VT[j][2])/2];
-  nuc.alphaGear=[eMid(0,2),eMid(1,2),eMid(0,3),eMid(1,3)];  // AC·BC·AD·BD — aligned with the 4 bonds
-  nuc.alphaTetra=VT;                                     // rebuild3D draws the wireframe
-  nuc.subSeq=[{group:'alpha',sub:0,sp:'α',name:'α',cap:1}];
-  const alphaOut=Math.max(...alphaIds.map(i=>Math.hypot(...nuc[i].pos)));
-
-  // ── Pure-shell packing (NSEQ05): species-alternating shells, not all-d then all-t ──
-  // Sequence: D6→D12→T8→D12→T10→D20→T12→D30→T14→D42→T16→…
-  // Capacities unchanged; geometry: T8=stella, post-T8 D12=cuboct, T14=cuboct face-normals.
-  const PHI=(1+Math.sqrt(5))/2;
-  const R_OPEN_SCALE=1.05, R_CLOSE_SCALE=0.95;
-  const dirsOct=()=>[[1,0,0],[-1,0,0],[0,1,0],[0,-1,0],[0,0,1],[0,0,-1]];
-  const dirsIco=()=>[[0,1,PHI],[0,-1,PHI],[0,1,-PHI],[0,-1,-PHI],[1,PHI,0],[-1,PHI,0],
-    [1,-PHI,0],[-1,-PHI,0],[PHI,0,1],[-PHI,0,1],[PHI,0,-1],[-PHI,0,-1]].map(vnorm);
-  const dirsCuboct=()=>{ const o=[]; for(const x of[-1,1]) for(const y of[-1,1]){
-      o.push([x,y,0],[x,0,y],[0,x,y]); } return o.map(vnorm); };
-  const dirsFib=(m,seed)=>{ const out=[]; for(let i=0;i<m;i++){ const zz=1-(2*i+1)/m,
-      rr=Math.sqrt(Math.max(0,1-zz*zz)), th=2*Math.PI*((i+(seed||0)*0.37)%m)/(PHI*PHI);
-      out.push([rr*Math.cos(th),rr*Math.sin(th),zz]); } return out; };
-  // Polar / stella family: poles + interleaved tropics at ±arcsin(1/3); open on even index
-  const dirsPolar=(cap,seed)=>{ const nBand=cap/2-1, z=1/3, rho=Math.sqrt(1-z*z),
-    az0=(seed||0)*0.15, s=[[0,0,1],[0,0,-1]];
-    for(let k=0;k<nBand;k++){ const thO=az0+k*(2*Math.PI/nBand), thC=az0+Math.PI/nBand+k*(2*Math.PI/nBand);
-      s.push(vnorm([rho*Math.cos(thO),rho*Math.sin(thO),-z]));
-      s.push(vnorm([rho*Math.cos(thC),rho*Math.sin(thC),+z])); }
-    return s; };
-  // T14 = cuboct face normals: 8△ (±1,±1,±1) ∪ 6□ (±e_i)
-  const dirsT14=()=>{ const s=1/Math.sqrt(3);
-    return [[s,s,s],[s,-s,-s],[-s,s,-s],[-s,-s,s],[-s,-s,-s],[-s,s,s],[s,-s,s],[s,s,-s],
-      [1,0,0],[-1,0,0],[0,1,0],[0,-1,0],[0,0,1],[0,0,-1]].map(vnorm); };
-  const SHELL_SEQ=[
-    {sp:'d',cap:6, geom:'oct'},
-    {sp:'d',cap:12,geom:'ico'},
-    {sp:'t',cap:8, geom:'stella'},
-    {sp:'d',cap:12,geom:'cuboct'},
-    {sp:'t',cap:10,geom:'polar'},
-    {sp:'d',cap:20,geom:'fib'},
-    {sp:'t',cap:12,geom:'polar'},
-    {sp:'d',cap:30,geom:'fib'},
-    {sp:'t',cap:14,geom:'t14'},
-    {sp:'d',cap:42,geom:'fib'},
-    {sp:'t',cap:16,geom:'polar'},
-    {sp:'d',cap:56,geom:'fib'},
-    {sp:'t',cap:18,geom:'polar'},
-  ];
-  const shellDirs=(geom,cap,seed)=>{
-    if(geom==='oct') return dirsOct();
-    if(geom==='ico') return dirsIco();
-    if(geom==='cuboct') return dirsCuboct();
-    if(geom==='stella') return dirsPolar(8,seed);
-    if(geom==='t14') return dirsT14();
-    if(geom==='polar') return dirsPolar(cap,seed);
-    return dirsFib(cap,seed);
-  };
-  let rTier=alphaOut+D*1.05, dSub=0, tSub=0, shellIdx=0;
-  let ndLeft=nd, ntLeft=nt, lastP=[];
-  const restBond=(nId,scale)=>{
-    let bi=-1,bd_=1e18;
-    const rest=lastP.length?lastP:alphaIds.filter(i=>nuc[i].type==='p');
-    for(const i of rest){ const q=nuc[i].pos,
-      dd=Math.hypot(q[0]-nuc[nId].pos[0],q[1]-nuc[nId].pos[1],q[2]-nuc[nId].pos[2]);
-      if(dd<bd_){bd_=dd;bi=i;} }
-    if(bi>=0&&bd_<=scale*D) bond(bi,nId);
-  };
-  for(const sh of SHELL_SEQ){
-    if(sh.sp==='d'){
-      const m=Math.min(ndLeft,sh.cap); if(m<=0) continue;
-      const dirs=shellDirs(sh.geom,sh.cap,shellIdx).slice(0,m);
-      const newP=[];
-      for(const v of dirs){
-        const nIn =push([v[0]*(rTier-D/2),v[1]*(rTier-D/2),v[2]*(rTier-D/2)],'n','deuteron',dSub,[ v[0], v[1], v[2]],shellIdx+1);
-        const pOut=push([v[0]*(rTier+D/2),v[1]*(rTier+D/2),v[2]*(rTier+D/2)],'p','deuteron',dSub,[-v[0],-v[1],-v[2]],shellIdx+1);
-        bond(nIn,pOut); newP.push(pOut); restBond(nIn,1.6);
-        nuc.subSeq.push({group:'deuteron',sub:dSub,sp:'d',name:'D'+sh.cap,geom:sh.geom,cap:sh.cap});
-        dSub++;
-      }
-      lastP=newP; ndLeft-=m; shellIdx++; rTier+=2*D;
-    }else{
-      const m=Math.min(ntLeft,sh.cap); if(m<=0) continue;
-      const dirs=shellDirs(sh.geom,sh.cap,shellIdx).slice(0,m);
-      for(let i=0;i<dirs.length;i++){
-        const v=dirs[i], open=(i%2===0);
-        const rc=rTier*(open?R_OPEN_SCALE:R_CLOSE_SCALE);
-        const n1=push([v[0]*(rc-D),v[1]*(rc-D),v[2]*(rc-D)],'n','triton',tSub,[ v[0], v[1], v[2]],shellIdx+1);
-        const p =push([v[0]* rc,   v[1]* rc,   v[2]* rc   ],'p','triton',tSub,[-v[0],-v[1],-v[2]],shellIdx+1);
-        const n2=push([v[0]*(rc+D),v[1]*(rc+D),v[2]*(rc+D)],'n','triton',tSub,[-v[0],-v[1],-v[2]],shellIdx+1);
-        bond(n1,p); bond(p,n2); restBond(n1,1.8);
-        nuc.subSeq.push({group:'triton',sub:tSub,sp:'t',name:'T'+sh.cap,geom:sh.geom,cap:sh.cap});
-        tSub++;
-      }
-      ntLeft-=m; shellIdx++; rTier+=2.2*D;
-    }
-  }
-  while(ndLeft>0){
-    const m=Math.min(ndLeft,56); const dirs=dirsFib(m,shellIdx).slice(0,m); const newP=[];
-    for(const v of dirs){
-      const nIn =push([v[0]*(rTier-D/2),v[1]*(rTier-D/2),v[2]*(rTier-D/2)],'n','deuteron',dSub,[ v[0], v[1], v[2]],shellIdx+1);
-      const pOut=push([v[0]*(rTier+D/2),v[1]*(rTier+D/2),v[2]*(rTier+D/2)],'p','deuteron',dSub,[-v[0],-v[1],-v[2]],shellIdx+1);
-      bond(nIn,pOut); newP.push(pOut); restBond(nIn,1.6);
-      nuc.subSeq.push({group:'deuteron',sub:dSub,sp:'d',name:'D*',geom:'fib',cap:56});
-      dSub++;
-    }
-    lastP=newP; ndLeft-=m; shellIdx++; rTier+=2*D;
-  }
-  while(ntLeft>0){
-    const m=Math.min(ntLeft,18); const dirs=dirsPolar(Math.max(m + (m%2), 2),shellIdx).slice(0,m);
-    for(let i=0;i<dirs.length;i++){
-      const v=dirs[i], open=(i%2===0), rc=rTier*(open?R_OPEN_SCALE:R_CLOSE_SCALE);
-      const n1=push([v[0]*(rc-D),v[1]*(rc-D),v[2]*(rc-D)],'n','triton',tSub,[ v[0], v[1], v[2]],shellIdx+1);
-      const p =push([v[0]* rc,   v[1]* rc,   v[2]* rc   ],'p','triton',tSub,[-v[0],-v[1],-v[2]],shellIdx+1);
-      const n2=push([v[0]*(rc+D),v[1]*(rc+D),v[2]*(rc+D)],'n','triton',tSub,[-v[0],-v[1],-v[2]],shellIdx+1);
-      bond(n1,p); bond(p,n2); restBond(n1,1.8);
-      nuc.subSeq.push({group:'triton',sub:tSub,sp:'t',name:'T*',geom:'polar',cap:18});
-      tSub++;
-    }
-    ntLeft-=m; shellIdx++; rTier+=2.2*D;
-  }
-  return nuc;
-}
+// NSEQ18 routes every listed isotope through the universal interstitial
+// contact construction. NSEQ05 remains loaded only as a frozen comparison.
 
 /* ---- number of subunits, for the sequencer ---- */
-function subunitCount(iso){ return 1 + iso.nd + iso.nt; }   // α + deuterons + tritons
-// Reveal in PACK order (NSEQ05): α → D6 → D12 → T8 → D12-cuboct → T10 → …
-// Not all-d then all-t — that scrambled the closure ticks and the monoisotope line.
+function subunitCount(iso){
+  return (iso.Z===1&&iso.A<=3)||(iso.Z===2&&iso.A===3)
+    ? iso.A
+    : 1 + iso.nd + iso.nt;
+}   // H proton, otherwise α + deuterons + tritons
+// Reveal in the selected engine's declared construction order.
 function nucleonsForSubunits(iso, nuc, k){
   if(k<=0) return [];
   const seq=nuc.subSeq;
   if(seq && seq.length){
     const out=[];
     for(const s of seq.slice(0,k)){
-      out.push(...nuc.filter(n=>n.group===s.group && n.sub===s.sub));
+      if(s.nodeIds) out.push(...s.nodeIds.map(id=>nuc[id]));
+      else out.push(...nuc.filter(n=>n.group===s.group && n.sub===s.sub));
     }
     return out;
   }
-  if(k===1) return nuc.filter(n=>n.group==='alpha');
-  const out=nuc.filter(n=>n.group==='alpha');
-  let shown=1;
-  for(let s=0;s<iso.nd && shown<k;s++,shown++) out.push(...nuc.filter(n=>n.group==='deuteron'&&n.sub===s));
-  for(let s=0;s<iso.nt && shown<k;s++,shown++) out.push(...nuc.filter(n=>n.group==='triton'&&n.sub===s));
-  return out;
-}
-
-/* ---- SHADOW: project boundary disks ⊥ to the light, rasterise the union ---- */
-const _shCanvas = document.createElement('canvas'); _shCanvas.width=_shCanvas.height=300;
-const _shCtx = _shCanvas.getContext('2d',{willReadFrequently:true});
-function normalize(v){const l=Math.hypot(v[0],v[1],v[2])||1;return[v[0]/l,v[1]/l,v[2]/l];}
-function cross(a,b){return[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];}
-function dot(a,b){return a[0]*b[0]+a[1]*b[1]+a[2]*b[2];}
-
-function measureShadow(centres, lightDir){
-  const N=centres.length;
-  if(N===0) return {Asum:0,Aunion:0,dA:0,pct:0};
-  const L=normalize(lightDir);
-  const up = Math.abs(L[1])>0.9 ? [1,0,0] : [0,1,0];
-  const u=normalize(cross(up,L)), v=cross(L,u);
-  // project
-  const P=centres.map(c=>[dot(c.pos,u),dot(c.pos,v)]);
-  let minx=1e9,maxx=-1e9,miny=1e9,maxy=-1e9;
-  for(const[x,y]of P){minx=Math.min(minx,x);maxx=Math.max(maxx,x);miny=Math.min(miny,y);maxy=Math.max(maxy,y);}
-  minx-=R_p;maxx+=R_p;miny-=R_p;maxy+=R_p;
-  const spanx=maxx-minx, spany=maxy-miny, span=Math.max(spanx,spany,1e-6);
-  const S=290;                                   // px used
-  const fmPerPx = span/S;
-  const pxR = R_p/fmPerPx;
-  const cx=(minx+maxx)/2, cy=(miny+maxy)/2;
-  _shCtx.clearRect(0,0,300,300);
-  _shCtx.fillStyle='#fff';
-  for(const[x,y]of P){
-    const sx=150+(x-cx)/fmPerPx, sy=150+(y-cy)/fmPerPx;
-    _shCtx.beginPath(); _shCtx.arc(sx,sy,pxR,0,Math.PI*2); _shCtx.fill();
-  }
-  const img=_shCtx.getImageData(0,0,300,300).data;
-  let hit=0; for(let i=3;i<img.length;i+=4) if(img[i]>10) hit++;
-  const cellArea=fmPerPx*fmPerPx;
-  const Aunion=hit*cellArea;
-  const Asum=N*A1;
-  return {Asum,Aunion,dA:Asum-Aunion,pct:(Asum-Aunion)/Asum};
-}
-
-/* ---- calibrate κ (MeV per fm² of shared occlusion) once, over all isotopes ----
-   least-squares through the origin:  BE ≈ κ·ΔA .  Also report the full residuals. */
-const DEFAULT_LIGHT=[-0.4925,0.80,0.62];   // high-left-foreground (matches default light°=-38)
-let KAPPA=5.0, FIT={r2tot:0,r2a:0,mErr:0,n:0};
-function calibrate(dnn, coul){
-  let sxy=0,sxx=0; const rec=[];
-  for(const iso of ISO){
-    const nuc=packNucleus(iso.A,iso.Z,dnn,coul);
-    const {dA}=measureShadow(nuc,DEFAULT_LIGHT);
-    rec.push({iso,dA}); sxy+=iso.be*dA; sxx+=dA*dA;
-  }
-  KAPPA=sxy/sxx;
-  let meanBE=0,meanBEA=0; for(const r of rec){meanBE+=r.iso.be;meanBEA+=r.iso.be/r.iso.A;}
-  meanBE/=rec.length; meanBEA/=rec.length;
-  let sseT=0,sstT=0,sseA=0,sstA=0,mErr=0;
-  for(const r of rec){ const bp=KAPPA*r.dA;
-    sseT+=(r.iso.be-bp)**2; sstT+=(r.iso.be-meanBE)**2;
-    sseA+=(r.iso.be/r.iso.A-bp/r.iso.A)**2; sstA+=(r.iso.be/r.iso.A-meanBEA)**2;
-    mErr+=Math.abs(bp-r.iso.be)/r.iso.be; }
-  FIT={r2tot:1-sseT/sstT, r2a:1-sseA/sstA, mErr:mErr/rec.length, n:rec.length};
+  console.error('packing sequence metadata is missing');
+  return [];
 }
 </script>
 
@@ -628,21 +427,160 @@ function calibrate(dnn, coul){
 }}
 </script>
 <script type="module">
+window.__SDT_LOCAL_MOTION_CONTROL__ = true;
 // ---------- state ----------
 const state = {
-  iso: ISO.find(e=>e.sym==='He'&&e.A===4) || ISO[0],   // start with Helium — the tetrahedral counter-rotating shell
-  dnn: 1.45*R_p, coul: 0.30, coulOn:true,
+  iso: ISO.find(e=>e.sym==='H'&&e.A===1) || ISO[0],
+  dnn: SDT_NUCLEAR_PACKING.defaultBondFm, coul:0.30, coulOn:false,
   lightAz: -38, bright: 2.4,
   reveal: 0,            // subunits shown; set to full on select
   playing:false, chirpAudio:false, chirp:[],
-  showWall:true, showShadow:true, showKnots:true, showInflux:false, spin:true,
-  spinRate:1.8,                                  // per-nucleon rotation (complementary p/n senses)
+  showKnots:true, showWake:true, showInflux:false, spin:true,
+  spinRate:1.8, h1DisplayHz:0.18,
   knotA:1.0, torA:0.34,                          // transparency: knots, spun-torus shells
   colP:'#ff2626', colN:'#2f6bff', colE:'#7fe7ff', colNu:'#86ffb0',// colour controls
-  showTorus:true, showE:true, showShellLbl:true, // visibility controls
+  showTorus:true, showE:true,                    // visibility controls
   showNu:false, showFielded:false,               // ν throughpole (off: not the e⁻ tour) · Z fielded e (a0 off-scale)
   nuc: [], nucShown: []
 };
+
+const CONTACT_PRESET = Object.freeze({
+  '1:1':'H1',
+  '1:2':'H2',
+  '1:3':'H3',
+  '2:3':'He3',
+  '2:4':'He4',
+  '3:7':'Li7',
+  '4:9':'Be9',
+  '5:11':'B11',
+  '6:12':'C12',
+  '7:14':'N14',
+  '8:16':'O16'
+});
+const BRAID_CONTROL=window.SDT_TRACTION_GEAR.selfTest().braid;
+function contactPresetFor(iso){
+  return CONTACT_PRESET[`${iso.Z}:${iso.A}`]||'NSEQ18';
+}
+function vectorUnit(a){
+  const length=Math.hypot(a[0],a[1],a[2])||1;
+  return [a[0]/length,a[1]/length,a[2]/length];
+}
+function vectorCross(a,b){
+  return [a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
+}
+function rotorAxisFor(model,node){
+  if(node.group==='alpha') return [0,0,1];
+  const module=model.modules.find(item=>item.nodes.includes(node.id));
+  const internal=module&&module.internalAxis
+    ? vectorUnit(module.internalAxis)
+    : [1,0,0];
+  const radial=vectorUnit(node.pos);
+  let axis=vectorCross(internal,radial);
+  if(Math.hypot(...axis)<1e-9){
+    const reference=Math.abs(internal[2])<0.8?[0,0,1]:[0,1,0];
+    axis=vectorCross(internal,reference);
+  }
+  return vectorUnit(axis);
+}
+function adaptContactModel(model){
+  const contraction=model.contractionScale||1;
+  const nuc=model.nodes.map(node=>({
+    id:node.id,
+    pos:node.pos.map(value=>value*contraction),
+    type:node.type,
+    group:node.group,
+    sub:node.module,
+    tier:node.tier||0,
+    spin:node.spin,
+    axis:rotorAxisFor(model,node),
+    ringR:model.Rp*contraction
+  }));
+  nuc.version=model.version;
+  nuc.classification=model.geometryStatus;
+  nuc.contactGeometry=true;
+  nuc.grammar=model.grammar;
+  nuc.bondD=2*model.Rp*contraction;
+  nuc.coulombSpread=0;
+  nuc.contacts=model.contacts.map(edge=>[edge.a,edge.b]);
+  nuc.contactKinds=model.contacts.map(edge=>edge.kind);
+  nuc.alphaGear=model.contacts
+    .filter(edge=>edge.kind==='alpha')
+    .map(edge=>model.nodes[edge.a].pos.map(
+      (value,index)=>contraction*(value+model.nodes[edge.b].pos[index])/2
+    ));
+  nuc.modules=model.modules;
+  const canonicalUnits=model.canonicalNucleon&&model.canonicalNucleon.units;
+  if(canonicalUnits&&canonicalUnits.length>1){
+    const available=[...model.nodes];
+    nuc.subSeq=canonicalUnits.map((pose,index)=>{
+      const nodeIndex=available.findIndex(node=>node.type===pose.type);
+      const node=available.splice(nodeIndex,1)[0];
+      return {
+        group:model.modules[0].kind,
+        sub:index,
+        sp:pose.type,
+        name:`${pose.type==='p'?'proton':'neutron'} wake unit ${index+1}`,
+        cap:1,
+        occupancy:1,
+        shell:0,
+        seat:index,
+        geom:'phase-locked conserved wake mesh',
+        nodeIds:[node.id],
+        full:true
+      };
+    });
+  }else{
+    nuc.subSeq=model.modules.map((module,index)=>{
+      const alpha=module.kind==='alpha';
+      const proton=module.kind==='proton';
+      const species=proton?'p':(alpha?'α':(module.kind==='triton'?'t':'d'));
+      return {
+        group:module.kind,
+        sub:module.index||0,
+        sp:species,
+        name:proton
+          ? 'H-1 proton'
+          : (alpha?'α':`${species.toUpperCase()} seat ${module.constructionIndex||index}`),
+        cap:1,
+        occupancy:1,
+        shell:module.shellIndex==null?index:module.shellIndex+1,
+        seat:module.constructionIndex||index,
+        geom:proton
+          ? 'one continuous four-tour circulation'
+          : (alpha?'polar-axis core':(module.region||'contact seat')),
+        nodeIds:[...module.nodes],
+        full:true
+      };
+    });
+  }
+  nuc.shells=model.shellLedger&&model.shellLedger.length
+    ? [
+      {index:0,label:'α core',capacity:1,occupancy:1,geometry:'contact ring',full:true},
+      ...model.shellLedger.map((shell,index)=>({
+        index:index+1,
+        label:shell.label,
+        capacity:shell.capacity,
+        occupancy:shell.occupancy,
+        geometry:shell.geometry,
+        full:shell.full
+      }))
+    ]
+    : nuc.subSeq.map((step,index)=>({
+      index,
+      label:step.name,
+      capacity:1,
+      occupancy:1,
+      geometry:step.geom,
+      full:true
+    }));
+  nuc.tractionModel=model;
+  nuc.braid=model.braid;
+  nuc.canonicalNucleon=model.canonicalNucleon;
+  nuc.constructionTransition=model.constructionTransition;
+  nuc.observableLedger=model.observableLedger;
+  nuc.contractionScale=contraction;
+  return nuc;
+}
 
 // ---------- element list ----------
 const isoListEl=document.getElementById('isoList');
@@ -660,7 +598,11 @@ function buildList(filter=''){
     for(const e of byEl[Z]){
       const d=document.createElement('div');
       d.className=`iso ${e.stable?'stable':'unstable'}`+(e===state.iso?' on':'');
-      d.innerHTML=`<span>${e.sym}-${e.A}</span><span class="g">${e.nd}d·${e.nt}t</span>`;
+      const route=contactPresetFor(e)?'gear':'control';
+      const composition=e.A<=3
+        ? `${e.Z}p·${e.A-e.Z}n`
+        : `${e.nd}d·${e.nt}t`;
+      d.innerHTML=`<span>${e.sym}-${e.A}</span><span class="g">${composition} · ${route}</span>`;
       d.onclick=()=>selectIso(e);
       g.appendChild(d);
     }
@@ -671,7 +613,43 @@ document.getElementById('search').oninput=ev=>buildList(ev.target.value);
 
 // ---------- select / recompute ----------
 function rebuildPacking(){
-  state.nuc = packNucleus(state.iso.A, state.iso.Z, state.dnn, state.coulOn?state.coul:0);
+  const key=contactPresetFor(state.iso);
+  const model=key==='NSEQ18'
+    ? window.SDT_TRACTION_GEAR.buildNuclide(
+      state.iso.Z,
+      state.iso.A,
+      {
+        Rp:R_p,
+        symbol:state.iso.sym,
+        name:state.iso.name,
+        bindingEnergyMeV:state.iso.be
+      }
+    )
+    : window.SDT_TRACTION_GEAR.build(key);
+  state.nuc=adaptContactModel(model);
+  const fixed=true;
+  const canonicalHydrogen=Boolean(state.nuc.tractionModel);
+  document.getElementById('rTight').disabled=fixed;
+  document.getElementById('tCoul').disabled=fixed;
+  const spinControl=document.getElementById('rSpin');
+  spinControl.disabled=false;
+  document.getElementById('rTightV').textContent=fixed
+    ? 'fixed 2Rp'
+    : state.dnn.toFixed(2)+' fm';
+  if(canonicalHydrogen){
+    spinControl.min='0.02';
+    spinControl.max='1';
+    spinControl.step='0.02';
+    spinControl.value=state.h1DisplayHz;
+    document.getElementById('rSpinV').textContent=
+      state.h1DisplayHz.toFixed(2)+' Hz';
+  }else{
+    spinControl.min='0';
+    spinControl.max='4';
+    spinControl.step='0.05';
+    spinControl.value=state.spinRate;
+    document.getElementById('rSpinV').textContent=state.spinRate.toFixed(2);
+  }
 }
 function refreshShown(){
   state.nucShown = nucleonsForSubunits(state.iso, state.nuc, state.reveal);
@@ -705,119 +683,363 @@ function updateAll(){
   $('idZ').textContent=`Z = ${iso.Z}`;
   $('idName').textContent=iso.name;
   $('idA').textContent=iso.A;
-  $('idDT').textContent=`${iso.nd} · ${iso.nt}`;
-  $('idGrammar').innerHTML=`<span class="a">1α</span><span class="o"> + </span>`+
-    `<span class="d">${iso.nd}d</span><span class="o"> + </span><span class="t">${iso.nt}t</span>`;
+  const isCanonical=Boolean(state.nuc.canonicalNucleon);
+  const isH1=iso.Z===1&&iso.A===1&&isCanonical;
+  const calibration=isCanonical&&state.nuc.canonicalNucleon.calibration;
+  $('idDT').textContent=isH1
+    ? 'one proton'
+    : (calibration?`${iso.Z}p · ${iso.A-iso.Z}n`:`${iso.nd} · ${iso.nt}`);
+  const shellLedger=(state.nuc.shells||[]).slice(1)
+    .map(s=>`${s.label} ${s.occupancy}/${s.capacity}`).join(' · ')||'core only';
+  $('idShells').textContent=shellLedger;
+  $('idShells').title=shellLedger;
+  $('idGrammar').innerHTML=isCanonical
+    ? `<span class="d">${iso.Z}p + ${iso.A-iso.Z}n complete wake units</span>`
+    : `<span class="a">1α</span><span class="o"> + </span>`+
+      `<span class="d">${iso.nd}d</span><span class="o"> + </span><span class="t">${iso.nt}t</span>`;
   $('idShown').textContent=`${state.nucShown.length} / ${iso.A}`;
 
-  // shadow of what is currently shown
-  const sh=measureShadow(state.nucShown, lightDir());
-  $('shA1').textContent=A1.toFixed(3)+' fm²';
-  $('shSum').textContent=sh.Asum.toFixed(2)+' fm²';
-  $('shUnion').textContent=sh.Aunion.toFixed(2)+' fm²';
-  $('shDelta').textContent=sh.dA.toFixed(2)+' fm²';
-  $('shPct').textContent=(sh.pct*100).toFixed(1)+' %';
+  const model=state.nuc.tractionModel;
+  let contactMetrics;
+  if(model){
+    contactMetrics=model.metrics;
+    $('ctStatus').textContent=calibration
+      ? calibration.classification
+      : (isH1?'canonical H-1':'NSEQ18 interstitial');
+    $('ctEngine').textContent=model.version;
+    $('ctStage').textContent=model.constructionTransition;
+    $('ctSeats').textContent=isCanonical
+      ? 'complete toroidal nucleon transforms'
+      : model.seatModel;
+    $('ctPole').textContent=isCanonical
+      ? 'not reduced to a point or sphere'
+      : (model.metrics.hasPolarAxis?'α-defined z axis':'not applicable');
+    $('ctRoute').textContent=isCanonical
+      ? (calibration?'conserved phase-locked wake mesh':'one connected component')
+      : model.routeComparison.geometricMatch;
+    $('ctSeatResidual').textContent=
+      isCanonical
+        ? (calibration
+          ? Math.max(...Object.values(calibration.residuals)
+            .filter(value=>value!=null).map(Math.abs)).toExponential(2)
+          : model.canonicalNucleon.diagnostics.frameSeamResidual.toExponential(2))
+        : model.routeComparison.maximumConstitutionalResidual.toExponential(2);
+  }else{
+    contactMetrics=window.SDT_TRACTION_GEAR.evaluateNseq05(state.nuc,R_p);
+    $('ctStatus').textContent='legacy control';
+    $('ctEngine').textContent=state.nuc.version||'NSEQ05';
+    $('ctStage').textContent='outside registered H→O contact sequence';
+    $('ctSeats').textContent='legacy shell templates';
+    $('ctPole').textContent='no α-governed pole';
+    $('ctRoute').textContent='not an Atomicus route';
+    $('ctSeatResidual').textContent='—';
+  }
+  const visibleIds=new Set(state.nucShown.map(node=>node.id));
+  const visibleContacts=(state.nuc.contacts||[]).filter(
+    edge=>visibleIds.has(edge[0])&&visibleIds.has(edge[1])
+  ).length;
+  $('trContacts').textContent=calibration
+    ? `${calibration.mesh.pairLedger.length} wake meshes`
+    : (isH1?'not applicable':`${visibleContacts} / ${contactMetrics.contactCount}`);
+  $('trGraph').textContent=calibration
+    ? 'closed p↔n wake coupling'
+    : (isH1?'one proton':(contactMetrics.unlikeContacts?'p↔n bipartite':'rejected'));
+  $('trRim').textContent=calibration
+    ? calibration.mesh.overlap.toFixed(4)
+    : (isH1?'—':contactMetrics.maxContactResidual.toExponential(2));
+  $('trSlip').textContent=calibration
+    ? calibration.mesh.maximumRelativeDivergence.toExponential(2)
+    : (isH1?'—':contactMetrics.maxSlip.toExponential(2));
+  $('trRejected').textContent=isCanonical
+    ? (calibration&&iso.Z===1&&iso.A===3
+      ? (calibration.neutronNeutronContactExcluded?'n–n excluded':'n–n present')
+      : '0 / 0')
+    : `${contactMetrics.unlistedTouches||0} / ${contactMetrics.likeLikeTouches||0}`;
+  $('trInterleave').textContent=isCanonical
+    ? (calibration
+      ? `${calibration.model.bindingEnergyMeV.toFixed(6)} MeV · ${calibration.classification}`
+      : 'free proton · no contact defect')
+    : `${visibleContacts} seated contacts · fixed αℏc/Rp wake map`;
+  const values=model&&model.observableLedger;
+  if(calibration){
+    $('valContraction').textContent='light-nucleus fitted pose';
+    $('valBinding').textContent=
+      `${calibration.model.bindingEnergyMeV.toFixed(6)} / `+
+      `${calibration.targets.bindingEnergyMeV.toFixed(6)} MeV`;
+    $('valMagRoutes').textContent=
+      `${calibration.magneticRoutes.integralMuN.toFixed(6)} / `+
+      `${calibration.magneticRoutes.farFieldMuN.toFixed(6)} μN`;
+    $('valMagTarget').textContent=
+      `${calibration.targets.magneticMomentMuN.toFixed(6)} / `+
+      `${calibration.residuals.magnetic.toExponential(2)} μN`;
+    $('valWake').textContent=
+      `${calibration.mesh.maximumRelativeDivergence.toExponential(2)} / `+
+      `${(
+        calibration.mesh.pairedFluxResidual
+        ?? window.SDT_TRACTION_GEAR.h1WakeDiagnostics(0).pairedFluxResidual
+      ).toExponential(2)}`;
+    $('valSource').textContent='CODATA 2022 light-nucleus anchors';
+    $('valFitPose').textContent=
+      `d ${calibration.parameters.separationRp.toFixed(4)} Rp · `+
+      `tilt ${(calibration.parameters.tiltRadians*180/Math.PI).toFixed(2)}° · `+
+      `φ ${calibration.parameters.toroidalPhase.toFixed(4)} · `+
+      `ψ ${calibration.parameters.poloidalPhase.toFixed(4)}`;
+    $('valFitBridge').textContent=
+      `C ${calibration.parameters.wakeCompliance.toFixed(4)} · `+
+      `Δsplit ${calibration.parameters.splitShift.toFixed(4)} · `+
+      `K_E ${calibration.parameters.energyBridgeMeVPerOverlap.toFixed(6)} · `+
+      `K_μ ${calibration.parameters.magneticBridgeMuNPerMoment.toFixed(6)}`;
+  }else if(values){
+    const binding=values.massDefect;
+    const magnetic=values.magnetic;
+    $('valContraction').textContent=
+      `${model.fullTritonClosures} full T shell${model.fullTritonClosures===1?'':'s'} · `+
+      `${model.contractionScale.toFixed(3)}×`;
+    $('valBinding').textContent=
+      `${binding.calculatedBindingMeV.toFixed(6)} / `+
+      `${binding.measuredBindingMeV==null?'—':binding.measuredBindingMeV.toFixed(6)} MeV`;
+    $('valMagRoutes').textContent=
+      `${magnetic.integralMuN.toFixed(6)} / ${magnetic.farFieldMuN.toFixed(6)} μN`;
+    $('valMagTarget').textContent=magnetic.measuredMuN==null
+      ? 'measured value unavailable'
+      : `${magnetic.measuredMuN.toFixed(6)} / ${magnetic.residualMuN.toFixed(6)} μN`;
+    $('valWake').textContent=
+      `${values.wake.maximumRelativeDivergence.toExponential(2)} / `+
+      `${values.wake.pairedFluxResidual.toExponential(2)}`;
+    $('valSource').textContent=values.provenance;
+    $('valFitPose').textContent='—';
+    $('valFitBridge').textContent='—';
+  }else{
+    $('valContraction').textContent='1.000×';
+    $('valBinding').textContent=iso.be?`— / ${iso.be.toFixed(6)} MeV`:'—';
+    $('valMagRoutes').textContent='—';
+    $('valMagTarget').textContent='—';
+    $('valWake').textContent='—';
+    $('valSource').textContent='generated nuclear inputs';
+    $('valFitPose').textContent='—';
+    $('valFitBridge').textContent='—';
+  }
 
-  // mass defect
-  const bePred=KAPPA*sh.dA;
-  const full = state.nucShown.length===iso.A;
-  $('dfMeas').textContent = full ? iso.be.toFixed(1)+' MeV' : `(${iso.be.toFixed(1)} full)`;
-  $('dfMeasA').textContent=(iso.be/iso.A).toFixed(3)+' MeV';
-  $('dfPred').textContent=bePred.toFixed(1)+' MeV';
-  $('dfPredA').textContent=(bePred/Math.max(1,state.nucShown.length)).toFixed(3)+' MeV';
-  const err=100*(bePred-iso.be)/iso.be;
-  const eEl=$('dfErr');
-  if(full){ eEl.innerHTML=`<span class="tag ${tagFor(err)}">${err>=0?'+':''}${err.toFixed(1)}%</span>`; }
-  else { eEl.innerHTML=`<span class="tag mid">sequencing…</span>`; }
-  $('dfKappa').textContent=KAPPA.toFixed(3)+' MeV/fm²';
-
-  drawCurve();
-}
-
-// ---------- binding curve sparkline ----------
-const curveEl=$('curve'), cctx=curveEl.getContext('2d');
-let CURVE_CACHE=null;
-function computeCurve(){
-  CURVE_CACHE=ISO.map(iso=>{
-    const nuc=packNucleus(iso.A,iso.Z,state.dnn,state.coulOn?state.coul:0);
-    const {dA}=measureShadow(nuc,DEFAULT_LIGHT);
-    return {A:iso.A, meas:iso.be/iso.A, pred:KAPPA*dA/iso.A};
-  });
-}
-function drawCurve(){
-  if(!CURVE_CACHE) computeCurve();
-  const W=curveEl.width,H=curveEl.height; cctx.clearRect(0,0,W,H);
-  const maxA=245, maxY=10;
-  const px=A=>6+(A/maxA)*(W-10), py=y=>H-6-(y/maxY)*(H-12);
-  // measured dots
-  cctx.fillStyle='rgba(122,180,224,.75)';
-  for(const p of CURVE_CACHE){ cctx.beginPath(); cctx.arc(px(p.A),py(p.meas),1.1,0,7); cctx.fill(); }
-  // predicted line
-  const sorted=[...CURVE_CACHE].sort((a,b)=>a.A-b.A);
-  cctx.strokeStyle='rgba(212,160,92,.95)'; cctx.lineWidth=1.4; cctx.beginPath();
-  sorted.forEach((p,i)=>{ const X=px(p.A),Y=py(p.pred); i?cctx.lineTo(X,Y):cctx.moveTo(X,Y); }); cctx.stroke();
-  // current isotope marker
-  const cur=CURVE_CACHE[ISO.indexOf(state.iso)];
-  if(cur){ cctx.strokeStyle='rgba(68,238,187,.9)'; cctx.lineWidth=1; cctx.beginPath();
-    cctx.moveTo(px(cur.A),4); cctx.lineTo(px(cur.A),H-4); cctx.stroke(); }
-  cctx.fillStyle='rgba(150,160,180,.5)'; cctx.font='8px monospace';
-  cctx.fillText('BE/A vs A — dots measured · line shadow',6,9);
-}
-
-// ---------- fit panel ----------
-function updateFit(){
-  $('fitN').textContent=FIT.n;
-  $('fitR2tot').textContent=FIT.r2tot.toFixed(3);
-  $('fitErr').textContent=(FIT.mErr*100).toFixed(1)+' %';
-}
-
-// ---------- recalibrate on geometry change ----------
-function recalibrate(){
-  calibrate(state.dnn, state.coulOn?state.coul:0);
-  CURVE_CACHE=null; updateFit();
+  const braid=state.nuc.braid||BRAID_CONTROL;
+  if(isCanonical){
+    $('brTurns').textContent=
+      `${iso.A} unit${iso.A===1?'':'s'} · 4 torus tours each · 270° per tour`;
+    $('brSplice').textContent='0→'+braid.laneTargets.join('→');
+    $('brSeam').textContent=braid.maximumLaneSeamResidual.toExponential(2);
+    $('brClosure').textContent=braid.fourTourClosure.toExponential(2);
+    $('brSpeed').textContent=
+      `${state.h1DisplayHz.toFixed(2)} Hz view · `+
+      `4 laps / ${(2/state.h1DisplayHz).toFixed(1)} s · model 1.830c`;
+  }else{
+    $('brTurns').textContent=
+      `${braid.majorTours} laps / ${braid.localTwistsPerLap.toFixed(0)} twist each`;
+    $('brSplice').textContent='0→'+braid.seamLaneTargets.join('→');
+    $('brSeam').textContent=braid.maximumSeamResidual.toExponential(2);
+    $('brClosure').textContent=braid.fourTourClosure.toExponential(2);
+    $('brSpeed').textContent=braid.analyticSpeedRatio.toFixed(3)+'×';
+  }
+  if(calibration){
+    const neutronLedger=calibration.mesh.neutronCalibration;
+    $('structureTitle').textContent=
+      `${iso.sym}-${iso.A} · ${calibration.classification} deformable wake mesh`;
+    $('structureSummary').textContent=
+      `${iso.A} complete toroidal nucleon units begin with Hydrogen's closed circulation cycle. `+
+      `Their fitted wakes deform and repartition as they interleave; no unit is reduced to a bead or point.`;
+    $('structureDetail').textContent=
+      `MEASURED-INPUT targets: binding ${calibration.targets.bindingEnergyMeV.toFixed(6)} MeV `+
+      `and magnetic moment ${calibration.targets.magneticMomentMuN.toFixed(9)} μN. `+
+      `${iso.A===2?`OBSERVED quadrupole ${calibration.targets.electricQuadrupoleFm2.toFixed(6)} fm². `:''}`+
+      `Each neutron is proton-form ${neutronLedger.protonContributionMuN.toFixed(6)} μN `+
+      `plus seated-electron ${neutronLedger.seatedElectronContributionMuN.toFixed(6)} μN, `+
+      `leaving ${(100*neutronLedger.suppressionRatio).toFixed(1)}% of gross component magnitude. `+
+      `The dimensional bridges and pose parameters are isotope-specific and remain ${calibration.classification}.`;
+  }else if(isH1){
+    $('structureTitle').textContent=
+      'Hydrogen-1 · quadruple helix · four 0.06 fm strands';
+    $('structureSummary').textContent=
+      'Hydrogen-1 is rendered at the origin as one complete toroidal nucleon unit. '+
+      'Its packing coordinate transforms that whole unit; it is not a bead or a point sampled from the strand.';
+    $('structureDetail').textContent=
+      'One continuous path closes only after four toroidal tours. The bundle rotates poloidally once per tour '+
+      'while material travels the full path; wake phase remains locked to the circulation at model speed 1.83c.';
+  }else{
+    $('structureTitle').textContent=
+      `${iso.sym}-${iso.A} · Atomicus contact construction`;
+    $('structureSummary').textContent=
+      'Constitutional alpha, deuteron, and triton units occupy registered parent interstices in the species-pure closure order.';
+    $('structureDetail').textContent=
+      `NSEQ18 uses pole-first partial seating, exact p↔n contact rotation and Hydrogen-operation wakes. `+
+      `${model.fullTritonClosures||0} completed triton shells contract the structure to `+
+      `${(model.contractionScale||1).toFixed(3)}×; calculated and measured values remain separate in the datasheet.`;
+  }
 }
 
 // =================== 3D scene ===================
-let THREE, scene, camera, renderer, controls, nucleusGroup, wall, dl, motes, moteGeo, moteVel, knotGeo, sphGeo, floorMesh;
-let nuReg=null, fieldReg=null, nuOpenGeo=null, eTourReg=null;
+let THREE, scene, camera, renderer, controls, nucleusGroup, dl, motes, moteGeo, moteVel, knotGeo, h1Geo, sphGeo;
+let nuReg=null, fieldReg=null, nuOpenGeo=null, eTourReg=null, mobiusReg=null;
+let h1Reg=null, wakeReg=null, compositeReg=null;
 let threeOK=false;
 
-/* Build the proton as a coiled rope on the 6π trefoil path.
-   Centreline = (2,3) trefoil (three crossings → six arcs weaving under/over/under…).
-   Physical construction: ONE thread, 1836 electrons in series, each 1/1836 of the total
-   windings, each a tube ≈2.9e-21 m wide (R_excl_e). 1836 × V_disp_e = the proton's
-   displaced volume (Law IV) → m_p/m_e. The NP_PLY plies here are only a renderable
-   stand-in for that 1836-electron thread (the real one is ~1400× finer than R_p). */
+/* NSEQ16 braid repair: one continuous (4,5) torus filament, displayed as four
+   consecutive lane segments. Each toroidal lap contributes one full local twist
+   plus a quarter-turn lane advance, so segment k ends exactly at segment k+1. */
 function makeRingBand(THREE, mergeGeometries){
-  // Harvey 2026-07-30: in the mesh the proton is a RING — wedding-band proportions
-  // (wide and flat: diameter ≫ band width ≫ thickness) — represented as FOUR very
-  // skinny tubes twisting around each other as they run the band. The free proton's
-  // 6π trefoil tightens into this band at 1.83c; the four strands keep the weave
-  // visible. A neutron is the same band with its electron seated inside at the node.
-  const R=1.0, aRad=0.055, bAx=0.17, TW=3, SEG=180, TUBE=0.045;
-  const TINT=[[1,1,1],[0.80,0.80,0.80],[0.92,0.92,0.92],[0.70,0.70,0.70]];
+  const gear=window.SDT_TRACTION_GEAR;
+  const SEG=120, TUBE=0.045;
+  const TINT=[[1,1,1],[1,0.72,0.44],[0.58,0.80,1],[0.72,0.52,0.88]];
   const parts=[];
-  for(let k=0;k<4;k++){
+  for(let strand=0;strand<gear.braidSpec.strandCount;strand++){
     const pts=[];
     for(let i=0;i<=SEG;i++){
-      const th=i/SEG*2*Math.PI, ph=TW*th+k*Math.PI/2;
-      const rr=R+aRad*Math.cos(ph);
-      pts.push(new THREE.Vector3(rr*Math.cos(th), rr*Math.sin(th), bAx*Math.sin(ph)));
+      const theta=i/SEG*2*Math.PI;
+      const point=gear.braidStrandPoint(strand,theta,1);
+      pts.push(new THREE.Vector3(point[0],point[1],point[2]));
     }
-    const g=new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts,true),SEG,TUBE,6,true);
-    const cols=new Float32Array(g.attributes.position.count*3),[r,gg,b]=TINT[k];
+    const curve=new THREE.CatmullRomCurve3(pts,false,'centripetal');
+    const g=new THREE.TubeGeometry(curve,SEG,TUBE,6,false);
+    const cols=new Float32Array(g.attributes.position.count*3),[r,gg,b]=TINT[strand];
     for(let v=0;v<g.attributes.position.count;v++){cols[v*3]=r;cols[v*3+1]=gg;cols[v*3+2]=b;}
     g.setAttribute('color',new THREE.BufferAttribute(cols,3));
     parts.push(g);
   }
   const merged=mergeGeometries(parts,false);
   parts.forEach(g=>g.dispose&&g.dispose());
-  const maxr=R+aRad+TUBE;
+  const maxr=gear.braidSpec.majorRadiusFraction+
+    gear.braidSpec.helixRadiusFraction+TUBE;
   merged.scale(1/maxr,1/maxr,1/maxr); merged.computeVertexNormals();
   return merged;
 }
+function makeHydrogenNucleon(THREE){
+  const gear=window.SDT_TRACTION_GEAR;
+  const frame=gear.h1FrameTable(1,512);
+  const arc=gear.h1ArcTable(1,512);
+  const SEG=frame.segments, RAD=20, a=gear.h1Spec.strandRadiusFraction;
+  const positions=new Float32Array(SEG*RAD*3);
+  const colours=new Float32Array(SEG*RAD*3);
+  const arcFractions=new Float32Array(SEG*RAD);
+  const betaFractions=new Float32Array(SEG*RAD);
+  const tourIndices=new Uint8Array(SEG*RAD);
+  const TOUR_SHADE=[1.0,0.82,0.66,0.50];
+  const indices=[];
+  let p=0,c=0,q=0;
+  for(let i=0;i<SEG;i++){
+    const centre=frame.points[i],n=frame.materialNormals[i],b=frame.materialBinormals[i];
+    const sf=arc.cumulative[i]/arc.totalLength;
+    const tour=Math.min(3,Math.floor(4*i/SEG));
+    for(let j=0;j<RAD;j++){
+      const beta=2*Math.PI*j/RAD;
+      // Every strand is exactly 0.06 fm thick: a is its constant radius.
+      const radius=a;
+      const cb=Math.cos(beta),sb=Math.sin(beta);
+      positions[p++]=centre[0]+radius*(cb*n[0]+sb*b[0]);
+      positions[p++]=centre[1]+radius*(cb*n[1]+sb*b[1]);
+      positions[p++]=centre[2]+radius*(cb*n[2]+sb*b[2]);
+      const band=0.5+0.5*Math.cos(2*Math.PI*16*sf);
+      const bright=TOUR_SHADE[tour]*(0.72+0.28*band);
+      colours[c++]=bright;
+      colours[c++]=bright;
+      colours[c++]=bright;
+      arcFractions[q]=sf;
+      betaFractions[q]=j/RAD;
+      tourIndices[q]=tour;
+      q++;
+    }
+  }
+  for(let i=0;i<SEG;i++){
+    const ni=(i+1)%SEG;
+    for(let j=0;j<RAD;j++){
+      const nj=(j+1)%RAD;
+      const a0=i*RAD+j,a1=ni*RAD+j,a2=ni*RAD+nj,a3=i*RAD+nj;
+      indices.push(a0,a1,a3,a1,a2,a3);
+    }
+  }
+  const geometry=new THREE.BufferGeometry();
+  geometry.setAttribute('position',new THREE.BufferAttribute(positions,3));
+  geometry.setAttribute('color',new THREE.BufferAttribute(colours,3));
+  geometry.setIndex(indices);
+  geometry.computeVertexNormals();
+  geometry.userData.arcFractions=arcFractions;
+  geometry.userData.betaFractions=betaFractions;
+  geometry.userData.tourIndices=tourIndices;
+  geometry.userData.arcTable=gear.h1ArcTable(1,4096);
+  geometry.userData.frameTable=frame;
+  geometry.userData.connectedComponents=1;
+  return geometry;
+}
+function hydrogenAnimatedFrame(u,rotationPhase){
+  const gear=window.SDT_TRACTION_GEAR;
+  const point=gear.h1Point(u,1,rotationPhase);
+  const tangent=gear.h1Tangent(u,1,rotationPhase);
+  const theta=gear.h1Spec.majorTours*u;
+  const phi=gear.h1Spec.crossSectionTurns*u+rotationPhase;
+  let nx=Math.cos(phi)*Math.cos(theta);
+  let ny=Math.cos(phi)*Math.sin(theta);
+  let nz=Math.sin(phi);
+  const projection=nx*tangent[0]+ny*tangent[1]+nz*tangent[2];
+  nx-=projection*tangent[0];
+  ny-=projection*tangent[1];
+  nz-=projection*tangent[2];
+  const nLength=Math.hypot(nx,ny,nz)||1;
+  nx/=nLength; ny/=nLength; nz/=nLength;
+  const bx=tangent[1]*nz-tangent[2]*ny;
+  const by=tangent[2]*nx-tangent[0]*nz;
+  const bz=tangent[0]*ny-tangent[1]*nx;
+  const roll=gear.h1Spec.internalRollTurns*u;
+  const cr=Math.cos(roll),sr=Math.sin(roll);
+  const director=[
+    cr*nx+sr*bx,
+    cr*ny+sr*by,
+    cr*nz+sr*bz
+  ];
+  const directorB=[
+    tangent[1]*director[2]-tangent[2]*director[1],
+    tangent[2]*director[0]-tangent[0]*director[2],
+    tangent[0]*director[1]-tangent[1]*director[0]
+  ];
+  return {point,tangent,director,directorB};
+}
+function rotateHydrogenGeometry(reg,rotationPhase){
+  const geometry=reg.surface.geometry;
+  const position=geometry.getAttribute('position');
+  const normal=geometry.getAttribute('normal');
+  const SEG=geometry.userData.frameTable.segments;
+  const RAD=position.count/SEG;
+  const radius=window.SDT_TRACTION_GEAR.h1Spec.strandRadiusFraction;
+  for(let i=0;i<SEG;i++){
+    const u=2*Math.PI*i/SEG;
+    const frame=hydrogenAnimatedFrame(u,rotationPhase);
+    for(let j=0;j<RAD;j++){
+      const beta=2*Math.PI*j/RAD;
+      const cb=Math.cos(beta),sb=Math.sin(beta);
+      const rx=cb*frame.director[0]+sb*frame.directorB[0];
+      const ry=cb*frame.director[1]+sb*frame.directorB[1];
+      const rz=cb*frame.director[2]+sb*frame.directorB[2];
+      const index=i*RAD+j;
+      position.setXYZ(
+        index,
+        frame.point[0]+radius*rx,
+        frame.point[1]+radius*ry,
+        frame.point[2]+radius*rz
+      );
+      normal.setXYZ(index,rx,ry,rz);
+    }
+  }
+  position.needsUpdate=true;
+  normal.needsUpdate=true;
+
+  const linePosition=reg.centreline.geometry.getAttribute('position');
+  for(let i=0;i<linePosition.count;i++){
+    const point=window.SDT_TRACTION_GEAR.h1Point(
+      2*Math.PI*i/linePosition.count,
+      1,
+      rotationPhase
+    );
+    linePosition.setXYZ(i,point[0],point[1],point[2]);
+  }
+  linePosition.needsUpdate=true;
+}
 function makeTrefoilRope(THREE, mergeGeometries){
-  // v3 — ROPE OF SEPARATE STRANDS (Harvey's wire model, 2026-07-03).
+  // v3 — ROPE OF SEPARATE STRANDS (James Christopher Tyndall's wire model, 2026-07-03).
   // v2's single tube with brightness banding still read as "the same single line".
   // The wire model shows the truth: a BUNDLE of distinct parallel strands with daylight
   // between them, travelling the knot path together in a slow lay, weaving over·under
@@ -920,22 +1142,16 @@ async function initThree(){
     const {OrbitControls}=await import('three/addons/controls/OrbitControls.js');
     const {mergeGeometries}=await import('three/addons/utils/BufferGeometryUtils.js');
     const canvas=$('scene');
-    // fog pushed FAR out (was 28→64 while the orbit reached 60 — zooming out sank the
-    // nucleus into shadow); it now only softens the extreme distance, never the subject.
     // ── theme-aware scene (2026-08-01): the site toggle writes data-theme on
     // <html>; CSS cannot reach a WebGL clear colour, so read it here and follow
-    // it live. The instrument stays legible in both: dark = the shadow bench,
-    // light = the same bench under room light, shadow story unchanged.
+    // it live.
     scene=new THREE.Scene();
-    const THEME={dark:{bg:0x0d1119,wall:0x232b3d,floor:0x0a0c12},
-                 light:{bg:0xece7dd,wall:0xd8d2c6,floor:0xc9c3b6}};
+    const THEME={dark:{bg:0x0d1119},light:{bg:0xece7dd}};
     function themeNow(){return document.documentElement.getAttribute('data-theme')==='light'?'light':'dark';}
     function applySceneTheme(){
       const t=THEME[themeNow()];
       scene.background=new THREE.Color(t.bg);
       scene.fog=new THREE.Fog(t.bg,90,220);
-      if(wall) wall.material.color.setHex(t.wall);
-      if(floorMesh) floorMesh.material.color.setHex(t.floor);
     }
     new MutationObserver(applySceneTheme).observe(document.documentElement,
       {attributes:true,attributeFilter:['data-theme']});
@@ -944,31 +1160,19 @@ async function initThree(){
     camera=new THREE.PerspectiveCamera(46,innerWidth/innerHeight,0.1,300); camera.position.set(1,4,26);
     renderer=new THREE.WebGLRenderer({canvas,antialias:true});
     renderer.setPixelRatio(Math.min(devicePixelRatio,2)); renderer.setSize(innerWidth,innerHeight);
-    renderer.shadowMap.enabled=true; renderer.shadowMap.type=THREE.PCFSoftShadowMap;
     controls=new OrbitControls(camera,renderer.domElement);
     controls.enableDamping=true; controls.dampingFactor=0.07; controls.minDistance=10; controls.maxDistance=85;
     controls.target.set(0,0,0);
 
     scene.add(new THREE.HemisphereLight(0xaebde0,0x2b3140,1.30));
     dl=new THREE.DirectionalLight(0xfff2dc,state.bright);
-    dl.castShadow=true; dl.shadow.mapSize.set(2048,2048);
-    const sc=dl.shadow.camera; sc.left=-18;sc.right=18;sc.top=18;sc.bottom=-18;sc.near=1;sc.far=80;
-    dl.shadow.bias=-0.0006;
     scene.add(dl); scene.add(dl.target);
     // fill from front-right so the nucleus reads at any zoom
     const fill=new THREE.DirectionalLight(0x7d9bd4,0.95); fill.position.set(8,2,10); scene.add(fill);
 
-    // back wall (low-right-background) — receives the shadow
-    const wallMat=new THREE.MeshStandardMaterial({color:0x232b3d,roughness:0.96,metalness:0});
-    wall=new THREE.Mesh(new THREE.PlaneGeometry(70,48),wallMat);
-    wall.position.set(6,-3,-13); wall.receiveShadow=true; scene.add(wall);
-    // faint floor grid feel
-    floorMesh=new THREE.Mesh(new THREE.PlaneGeometry(80,80),new THREE.MeshStandardMaterial({color:0x0a0c12,roughness:1}));
-    floorMesh.rotation.x=-Math.PI/2; floorMesh.position.y=-11; floorMesh.receiveShadow=true; scene.add(floorMesh);
-
-    // shared geometry — the proton is a thin COILED ROPE on the 6π trefoil path,
-    // not a fat tube: fine plied fibres, 6 arcs weaving alternately under/over.
-    knotGeo=makeRingBand(THREE,mergeGeometries);   // the meshed proton presents as the band (trefoil builder retained above)
+    h1Geo=makeHydrogenNucleon(THREE);
+    // Every packed nucleon uses Hydrogen's same complete four-tour geometry.
+    knotGeo=h1Geo;
     sphGeo=new THREE.SphereGeometry(1,20,16);
     nuOpenGeo=makeNeutrinoOpen(THREE);
 
@@ -990,7 +1194,7 @@ async function initThree(){
     animate();
   }catch(err){
     console.warn('3D unavailable:',err);
-    $('loadErr').textContent='3D view offline — numeric shadow/mass-defect analysis still live.';
+    $('loadErr').textContent='3D view offline — contact and braid diagnostics remain available.';
   }
 }
 
@@ -998,66 +1202,576 @@ const SCENE=1.9;  // fm → scene units
 let meshStats=null;    // contact-mesh tally rebuilt each rebuild3D (like-like is structurally 0)
 let spinReg=null;      // per-nucleon spin registry rebuilt each rebuild3D; consumed by animate()
 let torMatP=null, torMatN=null;
-function makeLabelSprite(text){
-  const cv=document.createElement('canvas'); cv.width=256; cv.height=48;
-  const cx=cv.getContext('2d'); cx.font='24px "Inter",monospace';
-  cx.fillStyle='rgba(200,205,220,0.92)'; cx.textBaseline='middle'; cx.fillText(text,6,24);
-  const tex=new THREE.CanvasTexture(cv); tex.minFilter=THREE.LinearFilter;
-  const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:tex,transparent:true,depthWrite:false}));
-  sp.scale.set(4.6,0.86,1); return sp;
+function buildHydrogenWake(){
+  const gear=window.SDT_TRACTION_GEAR;
+  const group=new THREE.Group();
+  group.scale.setScalar(R_p*SCENE);
+  const stageGroups={};
+  const stageNames=['crown','convergent','throat','poloidal','tail','skirt','exterior'];
+  for(const name of stageNames){
+    stageGroups[name]=new THREE.Group();
+    stageGroups[name].name=`wake-${name}`;
+    group.add(stageGroups[name]);
+  }
+
+  const outward=[0xffb34d,0xff6b6b,0xd982ff,0x65c7ff];
+  const inward=[0x4cc9f0,0x64dfdf,0x72efb2,0x80ffdb];
+  const radii={
+    crown:0.018,
+    convergent:0.021,
+    throat:0.016,
+    poloidal:0.018,
+    tail:0.032,
+    skirt:0.024,
+    exterior:0.020
+  };
+  const opacity={
+    crown:0.72,
+    convergent:0.82,
+    throat:0.92,
+    poloidal:0.80,
+    tail:0.88,
+    skirt:0.70,
+    exterior:0.58
+  };
+  const tracers=[];
+  const tracerGeometry=new THREE.SphereGeometry(0.042,8,6);
+
+  function addStage(circuit,family,points){
+    const vectors=points.map(point=>new THREE.Vector3(...point));
+    const curve=new THREE.CatmullRomCurve3(vectors,false,'centripetal');
+    const colour=family==='exterior'||family==='crown'
+      ? inward[circuit]
+      : outward[circuit];
+    const material=new THREE.MeshBasicMaterial({
+      color:colour,
+      transparent:true,
+      opacity:opacity[family],
+      blending:THREE.AdditiveBlending,
+      depthWrite:false
+    });
+    const geometry=new THREE.TubeGeometry(
+      curve,
+      Math.max(24,points.length*2),
+      radii[family],
+      6,
+      false
+    );
+    stageGroups[family].add(new THREE.Mesh(geometry,material));
+    const tracer=new THREE.Mesh(
+      tracerGeometry,
+      new THREE.MeshBasicMaterial({
+        color:colour,
+        transparent:true,
+        opacity:0.96,
+        blending:THREE.AdditiveBlending,
+        depthWrite:false
+      })
+    );
+    group.add(tracer);
+    tracers.push({
+      mesh:tracer,
+      curve,
+      family,
+      circuit,
+      offset:circuit/4
+    });
+  }
+
+  for(let circuit=0;circuit<gear.h1WakeSpec.circuitCount;circuit++){
+    const network=gear.h1WakeCircuit(circuit,0,28);
+    for(const family of stageNames){
+      addStage(circuit,family,network.stages[family]);
+    }
+  }
+
+  const throat=new THREE.Mesh(
+    new THREE.CylinderGeometry(0.105,0.105,0.72,18,1,true),
+    new THREE.MeshBasicMaterial({
+      color:0xfff1d1,
+      transparent:true,
+      opacity:0.16,
+      blending:THREE.AdditiveBlending,
+      depthWrite:false,
+      side:THREE.DoubleSide
+    })
+  );
+  throat.rotation.x=Math.PI/2;
+  stageGroups.throat.add(throat);
+
+  const skirt=new THREE.Mesh(
+    new THREE.TorusGeometry(
+      gear.h1WakeSpec.skirtRadiusRp,
+      0.055,
+      8,
+      128
+    ),
+    new THREE.MeshBasicMaterial({
+      color:0x69d8ff,
+      transparent:true,
+      opacity:0.34,
+      blending:THREE.AdditiveBlending,
+      depthWrite:false
+    })
+  );
+  skirt.position.z=-gear.h1WakeSpec.tailLengthRp+0.4;
+  stageGroups.skirt.add(skirt);
+
+  const metaTorus=new THREE.Mesh(
+    new THREE.TorusGeometry(2.0,0.48,12,128),
+    new THREE.MeshBasicMaterial({
+      color:0x5ee6d0,
+      transparent:true,
+      opacity:0.10,
+      wireframe:true,
+      blending:THREE.AdditiveBlending,
+      depthWrite:false
+    })
+  );
+  metaTorus.name='wake-magnetic-meta-torus';
+  group.add(metaTorus);
+
+  nucleusGroup.add(group);
+  const diagnostics=gear.h1WakeDiagnostics(0);
+  const status=document.getElementById('meshStat');
+  if(status){
+    status.textContent=
+      `wake 4×(C→T+P→X→E→C) · split ${diagnostics.splitResidual.toExponential(1)} · `+
+      `paired flux ${diagnostics.pairedFluxResidual.toExponential(1)} · `+
+      `relative ∇·U ${(100*diagnostics.maximumRelativeDivergence).toFixed(2)}% · EM bridge pending`;
+  }
+  return {group,stageGroups,tracers,metaTorus,diagnostics};
+}
+function buildCanonicalHydrogen(){
+  const gear=window.SDT_TRACTION_GEAR;
+  const model=state.nuc.tractionModel;
+  const pose=model.modules[0].nucleonPose;
+  nucleusGroup.rotation.set(0,0,0);
+  const unit=new THREE.Group();
+  unit.position.set(...pose.centre.map(value=>value*SCENE));
+  unit.quaternion.set(...pose.orientation);
+  unit.scale.setScalar(R_p*SCENE*pose.scale);
+
+  const material=new THREE.MeshStandardMaterial({
+    color:new THREE.Color(state.colP),
+    roughness:0.3,
+    metalness:0.42,
+    emissive:new THREE.Color(state.colP).multiplyScalar(0.22),
+    emissiveIntensity:0.5,
+    transparent:state.knotA<1,
+    opacity:state.knotA,
+    vertexColors:true,
+    side:THREE.DoubleSide
+  });
+  const surface=new THREE.Mesh(h1Geo,material);
+  surface.visible=state.showKnots;
+  unit.add(surface);
+
+  const centrelinePoints=[];
+  for(let i=0;i<1024;i++){
+    const point=gear.h1Point(2*Math.PI*i/1024,1);
+    centrelinePoints.push(new THREE.Vector3(...point));
+  }
+  const centrelineGeometry=new THREE.BufferGeometry()
+    .setFromPoints(centrelinePoints);
+  const centreline=new THREE.LineLoop(
+    centrelineGeometry,
+    new THREE.LineBasicMaterial({
+      color:0xfff1d1,
+      transparent:true,
+      opacity:0.78
+    })
+  );
+  centreline.visible=state.showKnots;
+  unit.add(centreline);
+
+  const markerCount=28;
+  const markerGeometry=new THREE.OctahedronGeometry(0.022,0);
+  const markerMaterial=new THREE.MeshBasicMaterial({
+    color:0xffffff,
+    transparent:true,
+    opacity:0.96,
+    blending:THREE.AdditiveBlending,
+    depthWrite:false
+  });
+  const markers=new THREE.InstancedMesh(
+    markerGeometry,
+    markerMaterial,
+    markerCount
+  );
+  markers.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+  markers.visible=state.showKnots;
+  const markerPose=new THREE.Object3D();
+  const markerUp=new THREE.Vector3(0,1,0);
+  const markerTangent=new THREE.Vector3();
+  const markerColours=[0xfff1d1,0xffbd76,0xff795c,0xc971ff];
+  const markerArc=h1Geo.userData.arcTable;
+  const markerFrames=h1Geo.userData.frameTable;
+  const markerOffsets=Array.from(
+    {length:markerCount},
+    (_,index)=>(markerArc.totalLength/4)*index/(markerCount-1)
+  );
+  for(let marker=0;marker<markerCount;marker++){
+    const distance=-markerOffsets[marker];
+    const u=gear.h1ParameterAtArc(markerArc,distance);
+    const point=gear.h1Point(u,1);
+    const tangent=gear.h1Tangent(u,1);
+    const frameIndex=Math.round(
+      (u/(2*Math.PI))*markerFrames.segments
+    )%markerFrames.segments;
+    const director=markerFrames.materialNormals[frameIndex];
+    const radius=gear.h1Spec.strandRadiusFraction*1.04;
+    markerPose.position.set(
+      point[0]+radius*director[0],
+      point[1]+radius*director[1],
+      point[2]+radius*director[2]
+    );
+    markerTangent.set(...tangent);
+    markerPose.quaternion.setFromUnitVectors(markerUp,markerTangent);
+    markerPose.scale.set(0.72,1.75,0.72);
+    markerPose.updateMatrix();
+    markers.setMatrixAt(marker,markerPose.matrix);
+    const tour=Math.floor((u/(2*Math.PI))*4)%4;
+    markers.setColorAt(marker,new THREE.Color(markerColours[tour]));
+  }
+  markers.instanceMatrix.needsUpdate=true;
+  if(markers.instanceColor) markers.instanceColor.needsUpdate=true;
+  unit.add(markers);
+
+  nucleusGroup.add(unit);
+  controls.minDistance=3.5;
+  camera.position.set(3.8,2.6,7.2);
+  controls.target.set(0,0,0);
+  controls.update();
+
+  h1Reg={
+    unit,
+    surface,
+    centreline,
+    markers,
+    markerCount,
+    markerOffsets,
+    arc:h1Geo.userData.arcTable,
+    frames:h1Geo.userData.frameTable,
+    startSeconds:performance.now()/1000,
+    physical:gear.h1MagneticMetrics(R_p*1e-15),
+    handedness:pose.handedness,
+    baseQuaternion:unit.quaternion.clone(),
+    bodySpin:new THREE.Quaternion(),
+    bodyAxis:new THREE.Vector3(0,0,1),
+    bodyPhase:0,
+    wakePhase:0
+  };
+  wakeReg=state.showWake?buildHydrogenWake():null;
+  h1Reg.wake=wakeReg;
+  if(wakeReg){
+    controls.minDistance=5;
+    camera.position.set(8.2,5.4,15.5);
+    controls.target.set(0,0,-1.2);
+    controls.update();
+  }
+}
+function buildCanonicalComposite(){
+  const gear=window.SDT_TRACTION_GEAR;
+  const calibration=state.nuc.canonicalNucleon.calibration;
+  const units=[],tracers=[],overlaps=[],wakeUnits=[];
+  nucleusGroup.rotation.set(0,0,0);
+  for(const [index,pose] of calibration.poses.entries()){
+    const unit=new THREE.Group();
+    unit.position.set(...pose.centre.map(value=>value*SCENE));
+    unit.quaternion.set(...pose.orientation);
+    unit.scale.setScalar(R_p*SCENE*(pose.scale||1));
+    const unitGeometry=h1Geo.clone();
+    unitGeometry.userData={...h1Geo.userData};
+    const surface=new THREE.Mesh(
+      unitGeometry,
+      new THREE.MeshStandardMaterial({
+        color:new THREE.Color(state.colP),
+        roughness:0.3,
+        metalness:0.42,
+        emissive:new THREE.Color(state.colP).multiplyScalar(0.22),
+        emissiveIntensity:0.5,
+        transparent:state.knotA<1,
+        opacity:state.knotA,
+        vertexColors:true,
+        side:THREE.DoubleSide
+      })
+    );
+    surface.visible=state.showKnots;
+    unit.add(surface);
+    const centrelinePoints=[];
+    for(let pointIndex=0;pointIndex<512;pointIndex++){
+      centrelinePoints.push(new THREE.Vector3(
+        ...gear.h1Point(2*Math.PI*pointIndex/512,1)
+      ));
+    }
+    const centreline=new THREE.LineLoop(
+      new THREE.BufferGeometry().setFromPoints(centrelinePoints),
+      new THREE.LineBasicMaterial({
+        color:0xfff1d1,
+        transparent:true,
+        opacity:0.72
+      })
+    );
+    centreline.visible=state.showKnots;
+    unit.add(centreline);
+    const markerCount=28;
+    const markers=new THREE.InstancedMesh(
+      new THREE.OctahedronGeometry(0.022,0),
+      new THREE.MeshBasicMaterial({
+        color:0xffffff,
+        transparent:true,
+        opacity:0.96,
+        blending:THREE.AdditiveBlending,
+        depthWrite:false
+      }),
+      markerCount
+    );
+    markers.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+    markers.visible=state.showKnots;
+    unit.add(markers);
+    const markerArc=unitGeometry.userData.arcTable;
+    const markerOffsets=Array.from(
+      {length:markerCount},
+      (_,markerIndex)=>
+        (markerArc.totalLength/4)*markerIndex/(markerCount-1)
+    );
+    let electronSeat=null;
+    if(pose.internalElectron){
+      electronSeat=new THREE.Mesh(
+        new THREE.TorusGeometry(0.28,0.035,10,64),
+        new THREE.MeshBasicMaterial({
+          color:new THREE.Color(state.colE),
+          transparent:true,
+          opacity:0.88,
+          blending:THREE.AdditiveBlending,
+          depthWrite:false
+        })
+      );
+      electronSeat.rotation.x=Math.PI/2;
+      unit.add(electronSeat);
+    }
+    nucleusGroup.add(unit);
+    units.push({
+      unit,
+      surface,
+      centreline,
+      markers,
+      markerCount,
+      markerOffsets,
+      arc:markerArc,
+      physical:gear.h1MagneticMetrics(R_p*1e-15),
+      pose,
+      index,
+      electronSeat,
+      baseQuaternion:unit.quaternion.clone(),
+      bodySpin:new THREE.Quaternion()
+    });
+
+  }
+
+  if(state.showWake){
+    const outward=[0xffb34d,0xff6b6b,0xd982ff,0x65c7ff];
+    const inward=[0x4cc9f0,0x64dfdf,0x72efb2,0x80ffdb];
+    for(const [index,pose] of calibration.poses.entries()){
+      const wakeUnit=new THREE.Group();
+      wakeUnit.position.set(...pose.centre.map(value=>value*SCENE));
+      wakeUnit.quaternion.set(...pose.orientation);
+      wakeUnit.scale.setScalar(R_p*SCENE*(pose.scale||1));
+      const positions=[],colours=[];
+      const localPose={
+        ...pose,
+        centreRp:[0,0,0],
+        orientation:[0,0,0,1],
+        scale:1,
+        unitIndex:index
+      };
+      const operatingSegments=gear.operatingWakeSegments(
+        localPose,
+        10
+      );
+      for(const segment of operatingSegments){
+        const circuit=segment.circuit%4;
+        const segmentColour=new THREE.Color(
+          segment.family==='exterior'||segment.family==='crown'
+            ? inward[circuit]
+            : outward[circuit]
+        );
+        positions.push(
+          ...segment.a,
+          ...segment.b
+        );
+        for(let endpoint=0;endpoint<2;endpoint++){
+          colours.push(
+            segmentColour.r,
+            segmentColour.g,
+            segmentColour.b
+          );
+        }
+      }
+      if(pose.type==='n'){
+        for(const segment of gear.speciesMagneticSegments(
+          localPose,
+          10
+        ).filter(item=>item.source==='seated-electron-counter')){
+          positions.push(
+            ...segment.a,
+            ...segment.b
+          );
+          for(let endpoint=0;endpoint<2;endpoint++){
+            colours.push(0.35,0.95,1.0);
+          }
+        }
+      }
+      const wakeGeometry=new THREE.BufferGeometry();
+      wakeGeometry.setAttribute(
+        'position',
+        new THREE.Float32BufferAttribute(positions,3)
+      );
+      wakeGeometry.setAttribute(
+        'color',
+        new THREE.Float32BufferAttribute(colours,3)
+      );
+      wakeUnit.add(new THREE.LineSegments(
+        wakeGeometry,
+        new THREE.LineBasicMaterial({
+          vertexColors:true,
+          transparent:true,
+          opacity:0.32,
+          blending:THREE.AdditiveBlending,
+          depthWrite:false
+        })
+      ));
+      const tracer=new THREE.Mesh(
+        new THREE.SphereGeometry(0.035,8,6),
+        new THREE.MeshBasicMaterial({
+          color:outward[index%4],
+          blending:THREE.AdditiveBlending,
+          depthWrite:false
+        })
+      );
+      wakeUnit.add(tracer);
+      nucleusGroup.add(wakeUnit);
+      const path=operatingSegments.map(segment=>segment.a);
+      tracers.push({mesh:tracer,path,pose,wakeUnit});
+      wakeUnits.push({
+        group:wakeUnit,
+        pose,
+        baseQuaternion:wakeUnit.quaternion.clone(),
+        wakeSpin:new THREE.Quaternion()
+      });
+    }
+    wakeReg={groups:wakeUnits,tracers};
+  }
+
+  for(const pair of calibration.mesh.pairLedger){
+    const a=calibration.poses[pair.i].centre;
+    const b=calibration.poses[pair.j].centre;
+    const marker=new THREE.Mesh(
+      new THREE.IcosahedronGeometry(
+        Math.max(0.035,0.055*Math.sqrt(pair.coupling))*SCENE,
+        1
+      ),
+      new THREE.MeshBasicMaterial({
+        color:0xffd75a,
+        transparent:true,
+        opacity:0.55,
+        blending:THREE.AdditiveBlending,
+        depthWrite:false
+      })
+    );
+    marker.position.set(
+      (a[0]+b[0])*SCENE/2,
+      (a[1]+b[1])*SCENE/2,
+      (a[2]+b[2])*SCENE/2
+    );
+    nucleusGroup.add(marker);
+    overlaps.push(marker);
+  }
+  compositeReg={
+    units,
+    wakeUnits,
+    tracers,
+    overlaps,
+    calibration,
+    startSeconds:performance.now()/1000
+  };
+  $('meshStat').textContent=
+    `${calibration.classification} · B ${calibration.model.bindingEnergyMeV.toFixed(6)} MeV · `+
+    `μ ${calibration.model.magneticMomentMuN.toFixed(9)} μN · `+
+    `wake deformation ${calibration.parameters.wakeCompliance.toFixed(3)} · `+
+    `∇·U ${calibration.mesh.maximumRelativeDivergence.toExponential(1)}`;
+  controls.minDistance=5;
+  camera.position.set(7.4,5.2,12.8);
+  controls.target.set(0,0,0);
+  controls.update();
 }
 function rebuild3D(){
   if(!threeOK) return;
+  const leavingHydrogen=Boolean(h1Reg||compositeReg);
   while(nucleusGroup.children.length) nucleusGroup.remove(nucleusGroup.children[0]);
+  h1Reg=null; wakeReg=null; compositeReg=null;
   const shown=state.nucShown;
   const N=shown.length; if(!N) return;
-  // instanced boundary spheres (the ONLY shadow casters — the measured ΔA story stays
-  // boundary-only) + instanced trefoil ropes (identity) + spun-torus shells + electrons.
+  if(state.nuc&&state.nuc.canonicalNucleon&&state.iso.Z===1&&state.iso.A===1){
+    buildCanonicalHydrogen();
+    return;
+  }
+  if(state.nuc&&state.nuc.canonicalNucleon&&state.nuc.canonicalNucleon.calibration){
+    buildCanonicalComposite();
+    return;
+  }
+  if(leavingHydrogen){
+    controls.minDistance=10;
+    camera.position.set(1,4,26);
+    controls.target.set(0,0,0);
+    controls.update();
+  }
+  // Instanced boundary controls + cyclic braid rotors + spun-torus shells + electrons.
+  const renderRp=R_p*(state.nuc.contractionScale||1);
   const boundMat=new THREE.MeshStandardMaterial({color:0x9fb0c8,roughness:0.5,metalness:0.1,transparent:true,opacity:0.10,depthWrite:false});
-  const bound=new THREE.InstancedMesh(sphGeo,boundMat,N); bound.castShadow=true;
+  const bound=new THREE.InstancedMesh(sphGeo,boundMat,N);
   const kA=state.knotA;
   const knotP=new THREE.MeshStandardMaterial({color:new THREE.Color(state.colP),roughness:0.34,metalness:0.38,
     emissive:new THREE.Color(state.colP).multiplyScalar(0.28),emissiveIntensity:0.45,vertexColors:true,
     transparent:kA<1,opacity:kA});
-  const knotN=new THREE.MeshStandardMaterial({color:new THREE.Color(state.colN),roughness:0.36,metalness:0.36,
-    emissive:new THREE.Color(state.colN).multiplyScalar(0.28),emissiveIntensity:0.45,vertexColors:true,
+  const knotN=new THREE.MeshStandardMaterial({color:new THREE.Color(state.colP),roughness:0.34,metalness:0.38,
+    emissive:new THREE.Color(state.colP).multiplyScalar(0.28),emissiveIntensity:0.45,vertexColors:true,
     transparent:kA<1,opacity:kA});
   const nP=shown.filter(n=>n.type==='p').length, nN=N-nP;
   const knotsP=new THREE.InstancedMesh(knotGeo,knotP,Math.max(1,nP));
   const knotsN=new THREE.InstancedMesh(knotGeo,knotN,Math.max(1,nN));
-  knotsP.castShadow=knotsN.castShadow=true;
   // spun-torus shells: the time-average the rope becomes at speed (1.83c tight torus).
-  // Opacity scales with spin rate in animate(). Never cast shadow (visual, not occluder).
+  // Opacity scales with spin rate in animate().
   torMatP=new THREE.MeshStandardMaterial({color:new THREE.Color(state.colP),transparent:true,opacity:0,
     roughness:0.55,metalness:0.2,emissive:new THREE.Color(state.colP).multiplyScalar(0.2),depthWrite:false});
-  torMatN=new THREE.MeshStandardMaterial({color:new THREE.Color(state.colN),transparent:true,opacity:0,
-    roughness:0.55,metalness:0.2,emissive:new THREE.Color(state.colN).multiplyScalar(0.2),depthWrite:false});
+  torMatN=new THREE.MeshStandardMaterial({color:new THREE.Color(state.colP),transparent:true,opacity:0,
+    roughness:0.55,metalness:0.2,emissive:new THREE.Color(state.colP).multiplyScalar(0.2),depthWrite:false});
   // the spun time-average: a thin solid band AT the strand radius — the ring the
   // four twisting strands blur into at speed, never a fat flat disc
   const torGeo=new THREE.TorusGeometry(0.86,0.13,12,64);
   const toriP=new THREE.InstancedMesh(torGeo,torMatP,Math.max(1,nP));
   const toriN=new THREE.InstancedMesh(torGeo,torMatN,Math.max(1,nN));
-  toriP.castShadow=toriN.castShadow=false;
-  const m=new THREE.Matrix4(), mT=new THREE.Matrix4(), q=new THREE.Quaternion(), s=new THREE.Vector3(R_p*SCENE,R_p*SCENE,R_p*SCENE);
-  const kv=R_p*SCENE*0.95; const sk=new THREE.Vector3(kv,kv,kv);   // rope extent ≈ boundary; interleaves with neighbours
+  const m=new THREE.Matrix4(), mT=new THREE.Matrix4(), q=new THREE.Quaternion(), s=new THREE.Vector3(renderRp*SCENE,renderRp*SCENE,renderRp*SCENE);
+  const kv=renderRp*SCENE*0.95; const sk=new THREE.Vector3(kv,kv,kv);   // rope extent ≈ boundary; interleaves with neighbours
   // contact-rotation α: its ring IS the R_p boundary circle, so its knot spans the full
   // R_p and its spun torus (geometry major radius 0.62) is rescaled so the ring reaches
   // the gear points at the mixed-edge midpoints. If it doesn't make contact, it doesn't rotate.
-  const skA=new THREE.Vector3(R_p*SCENE,R_p*SCENE,R_p*SCENE);
-  const tvA=R_p*SCENE/0.62; const stA=new THREE.Vector3(tvA,tvA,tvA);
+  const skA=new THREE.Vector3(renderRp*SCENE,renderRp*SCENE,renderRp*SCENE);
+  const tvA=renderRp*SCENE/0.62; const stA=new THREE.Vector3(tvA,tvA,tvA);
   const ZAX=new THREE.Vector3(0,0,1), ax=new THREE.Vector3();
   let ip=0,in_=0;
   spinReg={P:{mesh:knotsP,tor:toriP,items:[]},N:{mesh:knotsN,tor:toriN,items:[]},scale:sk};
   shown.forEach((n,i)=>{
     const p=new THREE.Vector3(n.pos[0]*SCENE,n.pos[1]*SCENE,n.pos[2]*SCENE);
     ax.set(n.axis[0],n.axis[1],n.axis[2]);
-    q.setFromUnitVectors(ZAX,ax);                 // trefoil hole faces the shared-electron centre
+    q.setFromUnitVectors(ZAX,ax);                 // orient the braid-ring axis
     const isA=n.group==='alpha';
     const sKnot=isA?skA:sk;
     m.compose(p,q,s); bound.setMatrixAt(i,m);      // boundary sphere (orientation irrelevant)
-    m.compose(p,q,sKnot);                          // interleaved trefoil (α at full ring radius)
+    m.compose(p,q,sKnot);                          // cyclic quadruple-helix rotor
     mT.compose(p,q,isA?stA:sk);                    // spun torus (α ring reaches the gear contacts)
-    // complementary rotations (Harvey): proton spins +, neutron spins − about its own axis
+    // complementary rotations (James Christopher Tyndall): proton spins +, neutron spins − about its own axis
     const reg = n.type==='p' ? spinReg.P : spinReg.N;
     reg.items.push({pos:p.clone(), quat:q.clone(), scale:sKnot, sense:n.type==='p'?+1:-1, slot:(n.type==='p'?ip:in_), tier:n.tier||0});
     if(n.type==='p'){ knotsP.setMatrixAt(ip,m); toriP.setMatrixAt(ip,mT); ip++; }
@@ -1066,10 +1780,8 @@ function rebuild3D(){
   bound.instanceMatrix.needsUpdate=true;
   nucleusGroup.add(bound);
 
-  // ---- THE MESH (canon 2026-07-30): every lattice contact drawn; parity makes
-  // every one p↔n, so with complementary spins every line is a tractioned gear
-  // contact. The readout counts them and reports the like-like total — which is
-  // structurally ZERO. ----
+  // ---- EXPLICIT BIPARTITE MESH: declared p↔n links only. The readout audits
+  // link parity; it does not infer contact energy from the rendered distance. ----
   {
     // the EXPLICIT engineered contact list (nuc.contacts, by id) — centre distance is
     // not the criterion: the α rings sit close but never touch their own kind.
@@ -1098,16 +1810,66 @@ function rebuild3D(){
     }
     meshStats={contacts:nC,like};
     const el=document.getElementById('meshStat');
-    if(el) el.textContent = nC ? `mesh ${nC} contacts · like-like ${like} · traction ${like?'BROKEN':'100%'} · frustration 0`
+    const route=state.nuc.tractionModel?'NSEQ16 contact candidate':'NSEQ05 legacy control';
+    if(el) el.textContent = nC ? `${route} · ${nC} p↔n links · like-like ${like} · bipartite ${like?'no':'yes'}`
                                : 'mesh —';
+  }
+  if(state.showWake&&state.nuc.tractionModel&&state.nuc.observableLedger){
+    const gear=window.SDT_TRACTION_GEAR;
+    const outward=[0xffb34d,0xff6b6b,0xd982ff,0x65c7ff];
+    const inward=[0x4cc9f0,0x64dfdf,0x72efb2,0x80ffdb];
+    const positions=[],colours=[];
+    for(const pose of state.nuc.observableLedger.poses){
+      for(const segment of gear.transformWakeSegments(pose,4)){
+        positions.push(
+          segment.a[0]*R_p*SCENE,
+          segment.a[1]*R_p*SCENE,
+          segment.a[2]*R_p*SCENE,
+          segment.b[0]*R_p*SCENE,
+          segment.b[1]*R_p*SCENE,
+          segment.b[2]*R_p*SCENE
+        );
+        const circuit=segment.circuit%4;
+        const colour=new THREE.Color(
+          segment.family==='exterior'||segment.family==='crown'
+            ? inward[circuit]
+            : outward[circuit]
+        );
+        colours.push(
+          colour.r,colour.g,colour.b,
+          colour.r,colour.g,colour.b
+        );
+      }
+    }
+    const wakeGeometry=new THREE.BufferGeometry();
+    wakeGeometry.setAttribute(
+      'position',
+      new THREE.Float32BufferAttribute(positions,3)
+    );
+    wakeGeometry.setAttribute(
+      'color',
+      new THREE.Float32BufferAttribute(colours,3)
+    );
+    const wakeGroup=new THREE.LineSegments(
+      wakeGeometry,
+      new THREE.LineBasicMaterial({
+        vertexColors:true,
+        transparent:true,
+        opacity:0.22,
+        blending:THREE.AdditiveBlending,
+        depthWrite:false
+      })
+    );
+    nucleusGroup.add(wakeGroup);
+    wakeReg={group:wakeGroup,tracers:[]};
   }
   // the gear contacts: the four mixed-edge midpoints where a p ring and an n ring
   // meet and counter-roll — drawn hot, because the contact IS the bond
   if(state.nuc&&state.nuc.alphaGear&&shown.some(n=>n.group==='alpha')){
     const gm=new THREE.MeshStandardMaterial({color:0xffd080,emissive:new THREE.Color(0xd4a05c),
       emissiveIntensity:1.5,roughness:0.3,metalness:0.1});
-    const gmesh=new THREE.InstancedMesh(sphGeo,gm,state.nuc.alphaGear.length); gmesh.castShadow=false;
-    const gs=new THREE.Vector3(0.13*R_p*SCENE,0.13*R_p*SCENE,0.13*R_p*SCENE);
+    const gmesh=new THREE.InstancedMesh(sphGeo,gm,state.nuc.alphaGear.length);
+    const gs=new THREE.Vector3(0.13*renderRp*SCENE,0.13*renderRp*SCENE,0.13*renderRp*SCENE);
     const gq=new THREE.Quaternion(), gmM=new THREE.Matrix4();
     state.nuc.alphaGear.forEach((g,i)=>{
       gmM.compose(new THREE.Vector3(g[0]*SCENE,g[1]*SCENE,g[2]*SCENE),gq.identity(),gs);
@@ -1131,11 +1893,59 @@ function rebuild3D(){
     nucleusGroup.add(toriP); nucleusGroup.add(toriN); }
   bound.material.opacity = state.showKnots?0.16:0.5;
 
-  // ---- electrons (FLM14 / NP17): a closed TOUR of proton destinations per subunit.
-  // The electron is the rider; the loop is the pathway taken. Not a bead, not a helix.
-  // n_e = neutron count in the subunit (each neutron donates one internal e⁻). ----
-  eTourReg=null;
-  if(state.showE){
+  // ---- NSEQ16 internal electron control: each neutron carries one circular
+  // centreline plus a director that reverses at 2π and closes at 4π. The moving
+  // crossbar makes the Möbius action visible; it is not an electron-force law. ----
+  eTourReg=null; mobiusReg=null;
+  if(state.showE&&state.nuc.tractionModel){
+    const neutrons=shown.filter(n=>n.type==='n');
+    if(neutrons.length){
+      const eCol=new THREE.Color(state.colE);
+      const pathMat=new THREE.MeshBasicMaterial({color:eCol,transparent:true,opacity:0.48,
+        blending:THREE.AdditiveBlending,depthWrite:false});
+      const pathGeo=new THREE.TorusGeometry(0.28*renderRp*SCENE,0.018*renderRp*SCENE,6,48);
+      const riderMat=new THREE.MeshStandardMaterial({color:eCol,
+        emissive:eCol.clone().multiplyScalar(0.9),emissiveIntensity:1.3,roughness:0.2});
+      const riders=new THREE.InstancedMesh(sphGeo,riderMat,neutrons.length);
+      const rs=new THREE.Vector3(0.09*kv,0.09*kv,0.09*kv);
+      const linePositions=new Float32Array(neutrons.length*6);
+      const lineGeo=new THREE.BufferGeometry();
+      lineGeo.setAttribute('position',new THREE.BufferAttribute(linePositions,3));
+      const directors=new THREE.LineSegments(lineGeo,new THREE.LineBasicMaterial({
+        color:eCol,transparent:true,opacity:0.82
+      }));
+      const items=[];
+      neutrons.forEach((n,i)=>{
+        const centre=new THREE.Vector3(n.pos[0]*SCENE,n.pos[1]*SCENE,n.pos[2]*SCENE);
+        const axis=new THREE.Vector3(n.axis[0],n.axis[1],n.axis[2]);
+        const orientation=new THREE.Quaternion().setFromUnitVectors(ZAX,axis);
+        const path=new THREE.Mesh(pathGeo,pathMat);
+        path.position.copy(centre); path.quaternion.copy(orientation);
+        nucleusGroup.add(path);
+        items.push({centre,orientation,phase:2*Math.PI*i/Math.max(1,neutrons.length),slot:i});
+      });
+      const initialMatrix=new THREE.Matrix4(), identity=new THREE.Quaternion();
+      items.forEach(it=>{
+        const pose=window.SDT_TRACTION_GEAR.mobiusPose(it.phase,R_p*SCENE);
+        const world=new THREE.Vector3(...pose.position)
+          .applyQuaternion(it.orientation).add(it.centre);
+        const director=new THREE.Vector3(...pose.director)
+          .applyQuaternion(it.orientation).multiplyScalar(0.22*R_p*SCENE);
+        initialMatrix.compose(world,identity,rs);
+        riders.setMatrixAt(it.slot,initialMatrix);
+        const offset=it.slot*6;
+        linePositions.set([
+          world.x-director.x,world.y-director.y,world.z-director.z,
+          world.x+director.x,world.y+director.y,world.z+director.z
+        ],offset);
+      });
+      riders.instanceMatrix.needsUpdate=true;
+      lineGeo.attributes.position.needsUpdate=true;
+      nucleusGroup.add(riders); nucleusGroup.add(directors);
+      mobiusReg={riders,directors,linePositions,items,scale:rs};
+    }
+  }else if(state.showE){
+    // Legacy control only: retain the earlier closed tour of subunit proton destinations.
     const eCol=new THREE.Color(state.colE);
     const bySub=new Map();
     shown.forEach(n=>{ const k=n.group+':'+n.sub; (bySub.get(k)||(bySub.set(k,[]),bySub.get(k))).push(n); });
@@ -1148,11 +1958,11 @@ function rebuild3D(){
       const curve=makeTourCurve(THREE, members); if(!curve) return;
       const nE=Math.max(1, members.filter(x=>x.type==='n').length);
       const tube=new THREE.Mesh(new THREE.TubeGeometry(curve, 64, 0.045*SCENE, 6, true), pathMat);
-      tube.castShadow=false; nucleusGroup.add(tube);
+      nucleusGroup.add(tube);
       for(let k=0;k<nE;k++) items.push({curve, phase:k/nE, slot:items.length});
     });
     if(items.length){
-      const riders=new THREE.InstancedMesh(sphGeo, rideMat, items.length); riders.castShadow=false;
+      const riders=new THREE.InstancedMesh(sphGeo, rideMat, items.length);
       const rs=new THREE.Vector3(0.11*kv,0.11*kv,0.11*kv);
       items.forEach((it,i)=>{ const p=it.curve.getPointAt(it.phase);
         m.compose(p,q.identity(),rs); riders.setMatrixAt(i,m); });
@@ -1170,7 +1980,7 @@ function rebuild3D(){
       const nuCol=new THREE.Color(state.colNu);
       const nuMat=new THREE.MeshBasicMaterial({color:nuCol,transparent:true,opacity:0.72,
         blending:THREE.AdditiveBlending,depthWrite:false});
-      const nuMesh=new THREE.InstancedMesh(nuOpenGeo,nuMat,nu.length); nuMesh.castShadow=false;
+      const nuMesh=new THREE.InstancedMesh(nuOpenGeo,nuMat,nu.length);
       const nsc=new THREE.Vector3(R_p*SCENE,R_p*SCENE,R_p*SCENE);
       nuReg={mesh:nuMesh,items:[],scale:nsc};
       nu.forEach((n,i)=>{
@@ -1185,7 +1995,7 @@ function rebuild3D(){
 
   // ---- fielded electrons (NP30 economy: A p, A e = N stabled inward + Z fielded OUTWARD to
   // a0). a0 is ~63,000x the nuclear radius, so this shell is SCHEMATIC (just outside the
-  // nucleus, labelled off-scale) — completes the electron count, not to scale. Default off. ----
+  // nucleus) — completes the electron count, not to scale. Default off. ----
   fieldReg=null;
   if(state.showFielded){
     const Zc=state.iso.Z; let rmax=0;
@@ -1193,37 +2003,11 @@ function rebuild3D(){
     const shellR=Math.max(rmax*SCENE+3.0,6.0), fCol=new THREE.Color(state.colE);
     const fMat=new THREE.MeshStandardMaterial({color:fCol,emissive:fCol.clone().multiplyScalar(0.7),
       emissiveIntensity:0.9,roughness:0.3,metalness:0,transparent:true,opacity:0.85});
-    const fMesh=new THREE.InstancedMesh(sphGeo,fMat,Zc); fMesh.castShadow=false;
+    const fMesh=new THREE.InstancedMesh(sphGeo,fMat,Zc);
     const fs=new THREE.Vector3(0.16*kv,0.16*kv,0.16*kv), PHI2=(1+Math.sqrt(5))/2;
     for(let i=0;i<Zc;i++){ const zz=1-(2*i+1)/Zc, rr=Math.sqrt(Math.max(0,1-zz*zz)), th=2*Math.PI*i/(PHI2*PHI2);
       m.compose(new THREE.Vector3(rr*Math.cos(th)*shellR,rr*Math.sin(th)*shellR,zz*shellR),q.identity(),fs); fMesh.setMatrixAt(i,m); }
     fMesh.instanceMatrix.needsUpdate=true; nucleusGroup.add(fMesh); fieldReg={mesh:fMesh};
-    const sp=makeLabelSprite('Z='+Zc+' fielded e · a0 off-scale (x63k)');
-    sp.position.set(0,shellR+1.2,0); nucleusGroup.add(sp);
-  }
-
-  // ---- shell position: small line-and-label per radial band of subunit centres ----
-  if(state.showShellLbl){
-    const cent={};   // subunit centres from shown nucleons
-    shown.forEach(n=>{ const k=n.group+n.sub; (cent[k]=cent[k]||[]).push(n.pos); });
-    const radii=Object.values(cent).map(ps=>{
-      const c=[0,1,2].map(ax=>ps.reduce((s,p)=>s+p[ax],0)/ps.length);
-      return Math.hypot(c[0],c[1],c[2]); });
-    radii.sort((a,b)=>a-b);
-    const bands=[]; const tol=0.45*state.dnn;
-    radii.forEach(r=>{ const b=bands[bands.length-1];
-      if(b && r-b.r<=tol){ b.r=(b.r*b.n+r)/(b.n+1); b.n++; } else bands.push({r,n:1}); });
-    const dir=new THREE.Vector3(1,0.22,0).normalize();
-    bands.forEach((b,k)=>{
-      const r0=Math.max(b.r*SCENE, 0.6), r1=r0+2.0, r2=r1+0.35;
-      const pts=new Float32Array([dir.x*r0,dir.y*r0,dir.z*r0, dir.x*r1,dir.y*r1,dir.z*r1]);
-      const lg=new THREE.BufferGeometry(); lg.setAttribute('position',new THREE.BufferAttribute(pts,3));
-      const ln=new THREE.Line(lg,new THREE.LineBasicMaterial({color:0x8892a8,transparent:true,opacity:0.6}));
-      nucleusGroup.add(ln);
-      const sp=makeLabelSprite(`shell ${k} · r≈${b.r.toFixed(2)} fm · ×${b.n}`);
-      sp.position.set(dir.x*r2+2.0,dir.y*r2,dir.z*r2);
-      nucleusGroup.add(sp);
-    });
   }
 }
 
@@ -1232,34 +2016,276 @@ function updateLight3D(){
   const L=lightDir(); // direction from origin toward light
   dl.position.set(L[0]*24,L[1]*24,L[2]*24);
   dl.target.position.set(0,0,0);
-  wall.visible=state.showWall;
-  renderer.shadowMap.enabled=state.showShadow;
-  dl.castShadow=state.showShadow;
   motes.visible=state.showInflux;
 }
 
+let stillRenderRequested=true;
+['input','change','click','pointermove','wheel'].forEach(type=>{
+  document.addEventListener(type,()=>{stillRenderRequested=true;},{passive:true});
+});
+function sequencerMotionActive(){
+  if(document.hidden) return false;
+  const setting=document.documentElement.getAttribute('data-sdt-motion');
+  const reduced=setting==='off'
+    ||(setting==null&&window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  if(reduced) return false;
+  const rect=renderer.domElement.getBoundingClientRect();
+  return rect.bottom>=0&&rect.top<=window.innerHeight&&rect.right>=0&&rect.left<=window.innerWidth;
+}
 const _spinM=null;
 function animate(){
   requestAnimationFrame(animate);
-  if(state.spin) nucleusGroup.rotation.y+=0.0025;
-  // per-nucleon complementary rotation: p spins +, n spins − about its own trefoil axis;
-  // fast spin reads as the tight torus (the 1.83c time-average), so the torus shells
-  // fade in with rate.
+  if(!sequencerMotionActive()){
+    if(!document.hidden&&stillRenderRequested){
+      controls.update(); renderer.render(scene,camera); stillRenderRequested=false;
+    }
+    return;
+  }
+  stillRenderRequested=false;
+  if(state.spin&&!h1Reg&&!compositeReg) nucleusGroup.rotation.y+=0.0025;
+  if(h1Reg&&state.spin&&state.h1DisplayHz>0){
+    const gear=window.SDT_TRACTION_GEAR;
+    const now=performance.now()/1000;
+    const elapsed=now-h1Reg.startSeconds;
+    const displayRotationsPerSecond=state.h1DisplayHz;
+    // The viewer is stationary. The body rotates at 1 Hz while material tours
+    // at 1 Hz relative to the body. The viewer therefore sees 2 tours/s.
+    // Model time still advances along the relative path at 1.83c.
+    const modelElapsed=elapsed
+      *h1Reg.physical.circulationPeriodSeconds
+      *(displayRotationsPerSecond/4);
+    const distanceMetres=h1Reg.physical.pathSpeedMetresPerSecond
+      *modelElapsed*h1Reg.handedness;
+    const distance=distanceMetres/(R_p*1e-15);
+    const phaseFraction=((distance/h1Reg.arc.totalLength)%1+1)%1;
+    const materialU=gear.h1ParameterAtArc(h1Reg.arc,distance);
+    // Compose the 1 Hz body rotation with the independent 1 Hz relative tour.
+    h1Reg.bodyPhase=2*Math.PI*elapsed
+      *displayRotationsPerSecond*h1Reg.handedness;
+    h1Reg.bodySpin.setFromAxisAngle(h1Reg.bodyAxis,h1Reg.bodyPhase);
+    h1Reg.unit.quaternion
+      .copy(h1Reg.baseQuaternion)
+      .multiply(h1Reg.bodySpin);
+    h1Reg.wakePhase=-(h1Reg.bodyPhase+4*materialU);
+    if(wakeReg){
+      wakeReg.group.rotation.z=h1Reg.wakePhase;
+      const flowRate={
+        crown:0.42,
+        convergent:0.72,
+        throat:0.92,
+        poloidal:0.62,
+        tail:0.48,
+        skirt:0.54,
+        exterior:0.30
+      };
+      for(const tracer of wakeReg.tracers){
+        const progress=(
+          elapsed*flowRate[tracer.family]+tracer.offset
+        )%1;
+        tracer.mesh.position.copy(tracer.curve.getPointAt(progress));
+      }
+    }
+
+    const colour=h1Reg.surface.geometry.getAttribute('color');
+    const arcFractions=h1Reg.surface.geometry.userData.arcFractions;
+    const betaFractions=h1Reg.surface.geometry.userData.betaFractions;
+    const tourIndices=h1Reg.surface.geometry.userData.tourIndices;
+    const tourShade=[1.0,0.82,0.66,0.50];
+    for(let i=0;i<colour.count;i++){
+      const longitudinal=0.5+0.5*Math.cos(
+        2*Math.PI*16*(arcFractions[i]-phaseFraction)
+      );
+      const rolling=0.5+0.5*Math.cos(
+        2*Math.PI*(betaFractions[i]-3*phaseFraction)
+      );
+      const level=tourShade[tourIndices[i]]
+        *(0.58+0.36*longitudinal+0.06*rolling);
+      colour.setXYZ(i,level,level,level);
+    }
+    colour.needsUpdate=true;
+
+    const dummy=new THREE.Object3D();
+    const up=new THREE.Vector3(0,1,0);
+    const tangentVector=new THREE.Vector3();
+    const laneColours=[0xfff1d1,0xffbd76,0xff795c,0xc971ff];
+    for(let marker=0;marker<h1Reg.markerCount;marker++){
+      const markerDistance=distance
+        -h1Reg.markerOffsets[marker];
+      const u=gear.h1ParameterAtArc(h1Reg.arc,markerDistance);
+      const frame=hydrogenAnimatedFrame(u,0);
+      const point=frame.point;
+      const tangent=frame.tangent;
+      const director=frame.director;
+      const radius=gear.h1Spec.strandRadiusFraction*1.04;
+      dummy.position.set(
+        point[0]+radius*director[0],
+        point[1]+radius*director[1],
+        point[2]+radius*director[2]
+      );
+      tangentVector.set(...tangent);
+      dummy.quaternion.setFromUnitVectors(up,tangentVector);
+      dummy.scale.set(0.72,1.75,0.72);
+      dummy.updateMatrix();
+      h1Reg.markers.setMatrixAt(marker,dummy.matrix);
+      h1Reg.markers.setColorAt(
+        marker,
+        new THREE.Color(
+          laneColours[Math.floor((u/(2*Math.PI))*4)%4]
+        )
+      );
+    }
+    h1Reg.markers.instanceMatrix.needsUpdate=true;
+    if(h1Reg.markers.instanceColor){
+      h1Reg.markers.instanceColor.needsUpdate=true;
+    }
+  }
+  if(compositeReg&&state.spin&&state.h1DisplayHz>0){
+    const gear=window.SDT_TRACTION_GEAR;
+    const elapsed=performance.now()/1000-compositeReg.startSeconds;
+    const cycle=elapsed*state.h1DisplayHz;
+    const displayRotationsPerSecond=state.h1DisplayHz;
+    const laneColours=[0xfff1d1,0xffbd76,0xff795c,0xc971ff];
+    const tourShade=[1.0,0.82,0.66,0.50];
+    const dummy=new THREE.Object3D();
+    const up=new THREE.Vector3(0,1,0);
+    const tangentVector=new THREE.Vector3();
+    const localZ=new THREE.Vector3(0,0,1);
+    compositeReg.units.forEach((entry,index)=>{
+      const modelElapsed=elapsed
+        *entry.physical.circulationPeriodSeconds
+        *(displayRotationsPerSecond/4);
+      const phaseDistance=
+        ((entry.pose.toroidalPhase||0)/(2*Math.PI))
+        *entry.arc.totalLength;
+      const distance=
+        entry.physical.pathSpeedMetresPerSecond
+        *modelElapsed/(R_p*1e-15)
+        *entry.pose.handedness
+        +phaseDistance;
+      const phaseFraction=((distance/entry.arc.totalLength)%1+1)%1;
+      const materialU=gear.h1ParameterAtArc(entry.arc,distance);
+      const bodyPhase=2*Math.PI*elapsed
+        *displayRotationsPerSecond*entry.pose.handedness;
+      entry.surface.material.emissiveIntensity=
+        0.38+0.18*Math.sin(2*Math.PI*(cycle+phaseFraction));
+      entry.bodySpin.setFromAxisAngle(
+        localZ,
+        bodyPhase
+      );
+      entry.unit.quaternion
+        .copy(entry.baseQuaternion)
+        .multiply(entry.bodySpin);
+
+      const colour=entry.surface.geometry.getAttribute('color');
+      const arcFractions=entry.surface.geometry.userData.arcFractions;
+      const betaFractions=entry.surface.geometry.userData.betaFractions;
+      const tourIndices=entry.surface.geometry.userData.tourIndices;
+      for(let vertex=0;vertex<colour.count;vertex++){
+        const longitudinal=0.5+0.5*Math.cos(
+          2*Math.PI*16*(arcFractions[vertex]-phaseFraction)
+        );
+        const rolling=0.5+0.5*Math.cos(
+          2*Math.PI*(betaFractions[vertex]-3*phaseFraction)
+        );
+        const level=tourShade[tourIndices[vertex]]
+          *(0.58+0.36*longitudinal+0.06*rolling);
+        colour.setXYZ(vertex,level,level,level);
+      }
+      colour.needsUpdate=true;
+
+      for(let marker=0;marker<entry.markerCount;marker++){
+        const markerDistance=distance-entry.markerOffsets[marker];
+        const u=gear.h1ParameterAtArc(entry.arc,markerDistance);
+        const frame=hydrogenAnimatedFrame(u,0);
+        const radius=gear.h1Spec.strandRadiusFraction*1.04;
+        dummy.position.set(
+          frame.point[0]+radius*frame.director[0],
+          frame.point[1]+radius*frame.director[1],
+          frame.point[2]+radius*frame.director[2]
+        );
+        tangentVector.set(...frame.tangent);
+        dummy.quaternion.setFromUnitVectors(up,tangentVector);
+        dummy.scale.set(0.72,1.75,0.72);
+        dummy.updateMatrix();
+        entry.markers.setMatrixAt(marker,dummy.matrix);
+        entry.markers.setColorAt(
+          marker,
+          new THREE.Color(
+            laneColours[Math.floor((u/(2*Math.PI))*4)%4]
+          )
+        );
+      }
+      entry.markers.instanceMatrix.needsUpdate=true;
+      if(entry.markers.instanceColor){
+        entry.markers.instanceColor.needsUpdate=true;
+      }
+
+      const tracer=compositeReg.tracers[index];
+      if(tracer&&tracer.path.length){
+        const pathIndex=Math.floor(
+          phaseFraction*tracer.path.length
+        )%tracer.path.length;
+        tracer.mesh.position.set(...tracer.path[pathIndex]);
+      }
+      const wakeEntry=compositeReg.wakeUnits[index];
+      if(wakeEntry){
+        wakeEntry.wakeSpin.setFromAxisAngle(
+          localZ,
+          -(bodyPhase+4*materialU)
+        );
+        wakeEntry.group.quaternion
+          .copy(wakeEntry.baseQuaternion)
+          .multiply(wakeEntry.wakeSpin);
+      }
+      if(entry.electronSeat){
+        entry.electronSeat.rotation.z=
+          -bodyPhase-4*materialU;
+        entry.electronSeat.rotation.x=
+          Math.PI/2+0.18*Math.sin(2*Math.PI*cycle+index);
+      }
+    });
+    compositeReg.overlaps.forEach((marker,index)=>{
+      const pulse=1+0.2*Math.sin(4*Math.PI*cycle+index);
+      marker.scale.setScalar(pulse);
+    });
+  }
+  // Per-nucleon complementary rotation: every ring closes on one common master
+  // period; p and n use opposite hand. Inner/outer line movement differs because
+  // the (4,5) path length differs with depth, not because tiers use different clocks.
   if(spinReg && state.spinRate>0){
-    const t=performance.now()/1000, w=state.spinRate*2.2;
+    const t=performance.now()/1000, w=state.h1DisplayHz*2*Math.PI;
     const m=new THREE.Matrix4(), qz=new THREE.Quaternion(), qq=new THREE.Quaternion();
     const Z=new THREE.Vector3(0,0,1);
     for(const key of ['P','N']){
       const reg=spinReg[key]; if(!reg.items.length) continue;
       for(const it of reg.items){
-        // circulation differs per layer: each tier runs its own rate, fading outward
-        const wl=w*(1-0.10*Math.min(it.tier||0,6));
+        const wl=w;
         qz.setFromAxisAngle(Z, it.sense*wl*t);
         qq.copy(it.quat).multiply(qz);
         m.compose(it.pos,qq,it.scale||spinReg.scale);
         reg.mesh.setMatrixAt(it.slot,m);
       }
       reg.mesh.instanceMatrix.needsUpdate=true;
+    }
+    const colour=knotGeo.getAttribute('color');
+    const arcFractions=knotGeo.userData.arcFractions;
+    const betaFractions=knotGeo.userData.betaFractions;
+    const tourIndices=knotGeo.userData.tourIndices;
+    if(colour&&arcFractions&&betaFractions&&tourIndices){
+      const phaseFraction=(t*state.h1DisplayHz)%1;
+      const tourShade=[1.0,0.82,0.66,0.50];
+      for(let vertex=0;vertex<colour.count;vertex++){
+        const longitudinal=0.5+0.5*Math.cos(
+          2*Math.PI*16*(arcFractions[vertex]-phaseFraction)
+        );
+        const rolling=0.5+0.5*Math.cos(
+          2*Math.PI*(betaFractions[vertex]-3*phaseFraction)
+        );
+        const level=tourShade[tourIndices[vertex]]
+          *(0.58+0.36*longitudinal+0.06*rolling);
+        colour.setXYZ(vertex,level,level,level);
+      }
+      colour.needsUpdate=true;
     }
   }
   // electron tour: riders advance along the closed pathway (the orbital is the tour).
@@ -1275,6 +2301,30 @@ function animate(){
       eTourReg.riders.setMatrixAt(it.slot, me);
     }
     eTourReg.riders.instanceMatrix.needsUpdate=true;
+  }
+  if(mobiusReg&&mobiusReg.items.length){
+    const te=performance.now()/1000, speed=0.7+state.spinRate*0.24;
+    const me=new THREE.Matrix4(), qe=new THREE.Quaternion();
+    const gear=window.SDT_TRACTION_GEAR;
+    for(const it of mobiusReg.items){
+      const u=((it.phase+te*speed)%(4*Math.PI)+4*Math.PI)%(4*Math.PI);
+      const pose=gear.mobiusPose(u,R_p*SCENE);
+      const world=new THREE.Vector3(...pose.position)
+        .applyQuaternion(it.orientation).add(it.centre);
+      const director=new THREE.Vector3(...pose.director)
+        .applyQuaternion(it.orientation).multiplyScalar(0.22*R_p*SCENE);
+      me.compose(world,qe.identity(),mobiusReg.scale);
+      mobiusReg.riders.setMatrixAt(it.slot,me);
+      const offset=it.slot*6;
+      mobiusReg.linePositions[offset]=world.x-director.x;
+      mobiusReg.linePositions[offset+1]=world.y-director.y;
+      mobiusReg.linePositions[offset+2]=world.z-director.z;
+      mobiusReg.linePositions[offset+3]=world.x+director.x;
+      mobiusReg.linePositions[offset+4]=world.y+director.y;
+      mobiusReg.linePositions[offset+5]=world.z+director.z;
+    }
+    mobiusReg.riders.instanceMatrix.needsUpdate=true;
+    mobiusReg.directors.geometry.attributes.position.needsUpdate=true;
   }
   // neutrino throughpole: axial flow through the neutron, never a closed circuit.
   if(nuReg && nuReg.items.length){
@@ -1301,18 +2351,27 @@ function animate(){
 
 // =================== controls wiring ===================
 function bindToggle(id,key,after){ $(id).addEventListener('change',e=>{state[key]=e.target.checked; (after||(()=>{}))();}); }
-bindToggle('tWall','showWall',updateLight3D);
-bindToggle('tShadow','showShadow',updateLight3D);
 bindToggle('tKnots','showKnots',()=>rebuild3D());
+bindToggle('tWake','showWake',()=>rebuild3D());
 bindToggle('tInflux','showInflux',updateLight3D);
 bindToggle('tSpin','spin');
 bindToggle('tChirp','chirpAudio');
 $('tCoul').addEventListener('change',e=>{state.coulOn=e.target.checked; onGeom();});
 
-$('rTight').addEventListener('input',e=>{state.dnn=parseFloat(e.target.value)*R_p; $('rTightV').textContent=parseFloat(e.target.value).toFixed(2); onGeom();});
+$('rTight').addEventListener('input',e=>{state.dnn=parseFloat(e.target.value); $('rTightV').textContent=state.dnn.toFixed(2)+' fm'; onGeom();});
 $('rLight').addEventListener('input',e=>{state.lightAz=parseFloat(e.target.value); $('rLightV').textContent=e.target.value; onLight();});
 $('rBright').addEventListener('input',e=>{state.bright=parseFloat(e.target.value); $('rBrightV').textContent=state.bright.toFixed(1); if(threeOK) dl.intensity=state.bright;});
-$('rSpin').addEventListener('input',e=>{state.spinRate=parseFloat(e.target.value); $('rSpinV').textContent=state.spinRate.toFixed(2);});
+$('rSpin').addEventListener('input',e=>{
+  const value=parseFloat(e.target.value);
+  if(state.iso.Z===1&&state.iso.A===1){
+    state.h1DisplayHz=value;
+    $('rSpinV').textContent=value.toFixed(2)+' Hz';
+    updateAll();
+  }else{
+    state.spinRate=value;
+    $('rSpinV').textContent=value.toFixed(2);
+  }
+});
 $('rKA').addEventListener('input',e=>{state.knotA=parseFloat(e.target.value); $('rKAV').textContent=state.knotA.toFixed(2); rebuild3D();});
 $('rTA').addEventListener('input',e=>{state.torA=parseFloat(e.target.value); $('rTAV').textContent=state.torA.toFixed(2);});
 $('cP').addEventListener('input',e=>{state.colP=e.target.value; rebuild3D();});
@@ -1321,45 +2380,43 @@ $('cE').addEventListener('input',e=>{state.colE=e.target.value; rebuild3D();});
 $('cNu').addEventListener('input',e=>{state.colNu=e.target.value; rebuild3D();});
 bindToggle('tTorus','showTorus',()=>rebuild3D());
 bindToggle('tE','showE',()=>rebuild3D());
-bindToggle('tShell','showShellLbl',()=>rebuild3D());
 bindToggle('tNu','showNu',()=>rebuild3D());
 bindToggle('tFielded','showFielded',()=>rebuild3D());
 
 let geomTimer=null;
-function onGeom(){ // geometry change → recalibrate (debounced) + rebuild
+function onGeom(){ // legacy-control geometry change + rebuild
   rebuildPacking(); refreshShown(); rebuild3D();
-  clearTimeout(geomTimer); geomTimer=setTimeout(()=>{recalibrate(); computeChirp(); updateAll(); drawChirp();},120);
+  clearTimeout(geomTimer); geomTimer=setTimeout(()=>{computeChirp(); updateAll(); drawChirp();},120);
   updateAll();
 }
 function onLight(){ rebuild3D(); updateLight3D(); updateAll(); }
 
-// sequencer transport + binding-energy CHIRP
+// sequencer transport — block-by-block packing ledger
 const seqCanvas=$('seqCanvas'), sctx=seqCanvas.getContext('2d'), seqLabel=$('seqLabel');
-const H_PLANCK=6.62607015e-34, MeV_J=1.602176634e-13;
-const stepFreqHz=dE=>dE*MeV_J/H_PLANCK;             // a subunit locks in → emits a photon f = ΔE/h (a γ)
 function subunitLabel(k){
   if(k<=0) return 'empty';
   const seq=state.nuc&&state.nuc.subSeq;
-  if(!seq || !seq[k-1]){
-    if(k===1) return 'α core (2p·2n)';
-    const iso=state.iso;
-    if(k<=1+iso.nd) return `α + <b>${k-1}</b>/${iso.nd} deuterons`;
-    return `α + ${iso.nd}d + <b>${k-1-iso.nd}</b>/${iso.nt} tritons`;
-  }
+  if(!seq || !seq[k-1]) return 'packing data unavailable';
   const s=seq[k-1];
+  if(state.nuc.canonicalNucleon&&state.nuc.canonicalNucleon.calibration){
+    return `<b>${s.name}</b> · complete four-tour nucleon + deformable conserved wake`;
+  }
+  if(s.sp==='p') return '<b>H-1 proton</b> · one continuous four-tour circulation';
   if(s.group==='alpha') return 'α core (2p·2n)';
   const nD=seq.slice(0,k).filter(x=>x.sp==='d').length;
   const nT=seq.slice(0,k).filter(x=>x.sp==='t').length;
-  const inSh=seq.slice(0,k).filter(x=>x.name===s.name && x.geom===s.geom).length;
-  return `α + ${nD}d + ${nT}t · <b>${s.name}</b> ${inSh}/${s.cap}`+(s.geom?' · '+s.geom:'');
+  const inSh=seq.slice(0,k).filter(x=>x.shell===s.shell).length;
+  return `α + ${nD}d + ${nT}t · <b>${s.name}</b> ${inSh}/${s.occupancy}`+
+    ` placed (${s.cap} seats)`+(s.geom?' · '+s.geom:'');
 }
-// incremental binding per packing step = the chirp: ΔE(k) = κ·[ΔA(k) − ΔA(k−1)]
+// Bar height is the number of nucleons added by the block: α=4, d=2, t=3.
+// It is a construction ledger, not an energy spectrum.
 function computeChirp(){
-  const iso=state.iso, nSub=subunitCount(iso);
-  const arr=new Array(nSub+1).fill(0); let prev=0;
+  const nSub=subunitCount(state.iso), seq=state.nuc&&state.nuc.subSeq;
+  const arr=new Array(nSub+1).fill(0);
   for(let k=1;k<=nSub;k++){
-    const {dA}=measureShadow(nucleonsForSubunits(iso,state.nuc,k), DEFAULT_LIGHT);
-    const cum=KAPPA*dA; arr[k]=Math.max(0,cum-prev); prev=cum;
+    const s=seq&&seq[k-1];
+    arr[k]=s&&(s.sp==='p'||s.sp==='n')?1:(!s||s.sp==='α'?4:(s.sp==='t'?3:2));
   }
   state.chirp=arr;
 }
@@ -1379,7 +2436,7 @@ function drawChirp(){
     sctx.fillStyle = col;
     sctx.fillRect((k-1)*bw+0.4, H-3-h, Math.max(0.8,bw-0.8), h);
   }
-  // closure ticks: N = 2 + d + 2t along PACK order (NSEQ05). All-d-then-t skipped 28 on Fe-56.
+  // Neutron-ledger closure ticks along the selected construction order.
   const MAGIC=[2,8,20,28,50,82,126];
   sctx.strokeStyle='rgba(68,238,187,.85)'; sctx.fillStyle='rgba(68,238,187,.85)';
   sctx.font='8px monospace'; sctx.lineWidth=1;
@@ -1409,19 +2466,28 @@ function setReveal(k){
   const max=subunitCount(state.iso);
   state.reveal=Math.max(0,Math.min(max,k));
   refreshShown(); rebuild3D(); drawChirp();
-  const dE=(state.chirp&&state.reveal>0)?state.chirp[state.reveal]:0;
+  const seq=state.nuc&&state.nuc.subSeq||[], take=seq.slice(0,state.reveal);
+  const d=take.filter(x=>x.sp==='d').length, t=take.filter(x=>x.sp==='t').length;
+  const neutronLedger=state.reveal
+    ? (state.iso.Z===1&&state.iso.A===1?0:2+d+2*t)
+    : 0;
+  const step=state.reveal?seq[state.reveal-1]:null;
+  const shell=step&&state.nuc.shells&&state.nuc.shells.find(x=>x.index===step.shell);
+  const shellState=state.iso.Z===1&&state.iso.A===1
+    ? 'single proton'
+    : (shell?(shell.full?'completed shell':'open shell · registered-seat fill'):'core');
   seqLabel.innerHTML=`${subunitLabel(state.reveal)}<br>`+
-    `<span style="color:var(--ink-soft)">ΔE ${dE.toFixed(2)} MeV · f ${stepFreqHz(dE).toExponential(2)} Hz · γ</span>`;
-  if(state.reveal>0 && dE>0 && state.chirpAudio) beep(dE);
+    `<span style="color:var(--ink-soft)">N ledger ${neutronLedger} · ${state.nucShown.length}/${state.iso.A} nucleons · ${shellState}</span>`;
+  if(step && state.chirpAudio) beep(step.sp);
   updateAll();
 }
-// audible chirp: map ΔE (log) to a tone as each subunit locks in
+// Optional UI tone distinguishes the three block types; it carries no energy claim.
 let AC=null;
-function beep(dE){
+function beep(species){
   try{ AC=AC||new (window.AudioContext||window.webkitAudioContext)();
     const o=AC.createOscillator(), g=AC.createGain();
     o.type='sine';
-    o.frequency.value=170*Math.pow(1500/170, Math.min(1,Math.log10(dE+1)/Math.log10(31)));
+    o.frequency.value=species==='α'?165:(species==='t'?330:220);
     g.gain.setValueAtTime(0.0001,AC.currentTime);
     g.gain.exponentialRampToValueAtTime(0.12,AC.currentTime+0.012);
     g.gain.exponentialRampToValueAtTime(0.0001,AC.currentTime+0.19);
@@ -1448,13 +2514,12 @@ $('btnPlay').onclick=()=>{
 };
 
 // =================== boot ===================
-recalibrate();
 const hashIso=isoFromHash(); if(hashIso) state.iso=hashIso;   // PIP deep-link honoured
 addEventListener('hashchange',()=>{const h=isoFromHash(); if(h) selectIso(h);});
 buildList();
 rebuildPacking(); computeChirp();
 setReveal(subunitCount(state.iso));   // full nucleus; sets panels, chirp + label (3D still off)
-$('rTightV').textContent='1.45'; $('rLightV').textContent='-38';
+$('rLightV').textContent='-38';
 initThree();
 </script>
 </body>

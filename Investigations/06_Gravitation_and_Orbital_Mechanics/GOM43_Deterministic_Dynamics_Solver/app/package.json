@@ -1,0 +1,25 @@
+{
+  "name": "@sdt/gom43-dynamics-laboratory",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Production browser interface for the GOM43 deterministic C/WASM dynamics solver.",
+  "scripts": {
+    "vendor": "node scripts/vendor.mjs",
+    "serve": "node tests/server.mjs",
+    "test:unit": "node --test tests/unit.test.mjs",
+    "test:browser": "playwright test --config=tests/playwright.config.mjs",
+    "test:parity": "node tests/parity.mjs",
+    "test:celestial-parity": "node tests/celestial-parity.mjs",
+    "test": "npm run test:unit && npm run test:browser"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "three": "0.185.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.62.1"
+  }
+}

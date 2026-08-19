@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-sdt-theme-default="light">
 <head>
-<script>/*sdt-theme-guard*/(function(){try{var t=localStorage.getItem("sdt.theme")||"auto";if(t==="auto")t=(window.matchMedia&&window.matchMedia("(prefers-color-scheme:dark)").matches)?"dark":"light";var d=document.documentElement;d.setAttribute("data-theme",t);d.setAttribute("data-sdt-theme",t);}catch(e){}})();</script>
+<script>/*sdt-theme-guard*/(function(){try{var d=document.documentElement;var t=d.getAttribute("data-sdt-theme-default")||localStorage.getItem("sdt.theme")||"auto";if(t==="auto")t=(window.matchMedia&&window.matchMedia("(prefers-color-scheme:dark)").matches)?"dark":"light";d.setAttribute("data-theme",t);d.setAttribute("data-sdt-theme",t);}catch(e){}})();</script>
 
 <meta charset="UTF-8">
-<title>ATOMICUS Lab — Subdued · SDT</title>
+<title>ATOMICUS Lab — Nuclear Construction Map · SDT</title>
 <link rel="stylesheet" href="style.css">
 <style>
-  /* SUBDUED SKIN — v4 aesthetic (warm charcoal / muted copper), full lab density */
+  /* DARK SKIN — subdued v4 instrument, with the full lab control set. */
   :root{
     --copper:#d4a05c; --copper-light:#e0b06a; --copper-glow:rgba(212,160,92,0.12);
     --ink:#e8e0d4; --ink-soft:#c8bfae; --ink-muted:#999; --ink-faint:#7a7266; --ink-whisper:#666;
@@ -221,12 +221,166 @@
   #datasheet td { padding:4px 0; border-bottom:1px solid #333; }
   #datasheet a { color:#7ab4e0; text-decoration:none; }
   #datasheet a:hover { text-decoration:underline; }
+
+  /*
+   * LIGHT SKIN — the subdued full-bleed instrument under a paper treatment.
+   * Layout, circular markers and functions are identical to the dark version.
+   */
+  html[data-theme="light"] {
+    --copper:#b07430; --copper-light:#d4a05c; --copper-glow:rgba(176,116,48,0.12);
+    --ink:#1e1c18; --ink-soft:#3d3830; --ink-muted:#7a7265; --ink-faint:#a49d92; --ink-whisper:#c8c1b6;
+    --paper:#faf6ef; --paper-edge:#e8e0d2; --cream:#f5f0e8;
+    --steel:#4a6d82; --steel-deep:#2c4454; --midnight:#0c0e12;
+  }
+  html[data-theme="light"] body {
+    background:
+      radial-gradient(ellipse at top left, rgba(30,20,80,0.55), transparent 50%),
+      radial-gradient(ellipse at bottom right, rgba(10,40,80,0.45), transparent 55%),
+      linear-gradient(180deg, #070a16, #0b0f22);
+    color:#c8d4f0;
+  }
+  html[data-theme="light"] .atomicus-header {
+    display:none;
+  }
+  html[data-theme="light"] .atomicus-header__title { color:#f7f1e7; }
+  html[data-theme="light"] .atomicus-header__meta { color:#b9c5df; }
+  html[data-theme="light"] .atomicus-header__link { color:#f3e6d4; }
+  html[data-theme="light"] #leftCol {
+    display:contents;
+  }
+  html[data-theme="light"] #info {
+    position:fixed;
+    top:calc(var(--sdtq-top, 64px) + 10px);
+    left:10px;
+    max-width:320px;
+    padding:12px 16px;
+    background:rgba(255,253,248,0.94);
+    border:1px solid var(--paper-edge);
+    border-radius:6px;
+    box-shadow:0 8px 28px rgba(12,14,18,0.18);
+  }
+  html[data-theme="light"] #info h3 { color:var(--copper); }
+  html[data-theme="light"] #info .dim { color:var(--ink-muted); }
+  html[data-theme="light"] #controls {
+    position:fixed;
+    top:calc(var(--sdtq-top, 64px) + 10px);
+    right:10px;
+    width:290px;
+    max-height:calc(100vh - var(--sdtq-top, 64px) - 20px);
+    overflow-y:auto;
+    padding:6px 4px 14px;
+    background:rgba(255,253,248,0.94);
+    border:1px solid var(--paper-edge);
+    border-radius:6px;
+    box-shadow:0 8px 28px rgba(12,14,18,0.18);
+  }
+  html[data-theme="light"] .toggle-switch {
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin:0;
+    padding:3px 10px;
+  }
+  html[data-theme="light"] .toggle-track {
+    display:block;
+    position:relative;
+    width:36px;
+    height:18px;
+    border-radius:9px;
+    background:#d2ccc2;
+    border:1px solid #aaa196;
+    transition:background 0.2s;
+    flex-shrink:0;
+  }
+  html[data-theme="light"] .toggle-track::after {
+    top:1px;
+    left:1px;
+    background:#fffdf8;
+    box-shadow:0 1px 2px rgba(30,28,24,0.20);
+  }
+  html[data-theme="light"] input[type=checkbox] { display:none; }
+  html[data-theme="light"] input[type=checkbox]:checked + .toggle-track {
+    background:#5f8f7f;
+    border-color:#527c6e;
+  }
+  html[data-theme="light"] input[type=checkbox]:checked + .toggle-track::after {
+    background:#f7f3eb;
+  }
+  html[data-theme="light"] .toggle-label { color:#aab6d0; }
+  html[data-theme="light"] .dropdown-section {
+    border-bottom:1px solid rgba(30,45,90,0.70);
+  }
+  html[data-theme="light"] .dropdown-header {
+    padding:7px 10px;
+    font-size:11px;
+    color:#9aa8c8;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+  }
+  html[data-theme="light"] .dropdown-header:hover {
+    color:#eef3ff;
+    background:rgba(176,116,48,0.08);
+  }
+  html[data-theme="light"] .morph-btn {
+    border-color:rgba(176,116,48,0.32);
+    background:rgba(255,255,255,0.08);
+    color:#aab6d0;
+  }
+  html[data-theme="light"] .morph-btn:hover,
+  html[data-theme="light"] .morph-btn.active { color:#f7ead7; }
+  html[data-theme="light"] #rightCol {
+    top:auto;
+    right:auto;
+    bottom:10px;
+    left:10px;
+    width:300px;
+    max-height:58vh;
+    background:rgba(255,253,248,0.94);
+    border:1px solid var(--paper-edge);
+    border-radius:6px;
+    box-shadow:0 8px 28px rgba(12,14,18,0.18);
+  }
+  html[data-theme="light"] #panel {
+    border-bottom-color:rgba(232,224,210,0.9);
+  }
+  html[data-theme="light"] #pip {
+    height:200px;
+    border-top-color:rgba(232,224,210,0.9);
+    background:rgba(255,255,255,0.74);
+  }
+  html[data-theme="light"] #pip:hover { background:rgba(255,255,255,0.92); }
+  html[data-theme="light"] #tooltip {
+    background:rgba(255,255,255,0.96);
+    color:var(--ink);
+    border-color:rgba(176,116,48,0.24);
+    border-radius:6px;
+    box-shadow:0 12px 24px rgba(30,28,24,0.16);
+  }
+  html[data-theme="light"] #datasheet {
+    top:var(--sdtq-top, 64px);
+    height:calc(100vh - var(--sdtq-top, 64px));
+    background:rgba(255,255,255,0.96);
+    border-left-color:var(--paper-edge);
+    color:var(--ink-soft);
+  }
+  html[data-theme="light"] #datasheet td { border-bottom-color:var(--paper-edge); }
+  html[data-theme="light"] #datasheet a { color:#2f6f9d; }
+  html[data-theme="light"] :is(#linePickAxis, #linePickVal) {
+    background:#fffaf0 !important;
+    color:#2f2a24 !important;
+    border-color:#bcae9a !important;
+  }
+  html[data-theme="light"] #printDiagBtn {
+    background:#f6efe4 !important;
+    color:#63594c !important;
+    border-color:#bcae9a !important;
+  }
 </style>
 <link rel="stylesheet" href="sdt-shell.css">
 <script src="sdt-shell.js" defer></script>
 <script src="js/pack-nucleus.js"></script>
 <meta name="description" content="Interactive nuclear construction map: build any nucleus from one alpha core plus deuterons and tritons, and watch the grammar resolve.">
-<link rel="canonical" href="https://spatialdisplacementtheory.com/atomicus-lab-subdued">
+<link rel="canonical" href="https://spatialdisplacementtheory.com/atomicus-lab">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.ico" sizes="64x64">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -236,7 +390,7 @@
 <meta property="og:site_name" content="Spatial Displacement Theory">
 <meta property="og:title" content="ATOMICUS Lab — Nuclear Construction Map">
 <meta property="og:description" content="Interactive nuclear construction map: build any nucleus from one alpha core plus deuterons and tritons, and watch the grammar resolve.">
-<meta property="og:url" content="https://spatialdisplacementtheory.com/atomicus-lab-subdued">
+<meta property="og:url" content="https://spatialdisplacementtheory.com/atomicus-lab">
 <meta property="og:image" content="https://spatialdisplacementtheory.com/og-card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -253,7 +407,7 @@
   <div class="atomicus-header__title">ATOMICUS Lab</div>
   <div class="atomicus-header__meta">
     <span>Interactive nuclear grammar map</span>
-    <a class="atomicus-header__link" href="index.html#lab">← Back to SDT · Atomicus Lab</a>
+    <a class="atomicus-header__link" href="theory.html#lab">← Back to SDT · Atomicus Lab</a>
   </div>
 </div>
 
@@ -1318,7 +1472,47 @@ const deltaMonoEnergy  = {};  // u_E(v) - u_mono(v)
 const canvas = document.getElementById("c");
 const ctx = canvas.getContext("2d");
 const dpr = window.devicePixelRatio || 1;
+window.__SDT_LOCAL_MOTION_CONTROL__ = true;
 let W, H;
+let sdtParentVisible = window.top === window.self;
+const sdtStillFrames = new Set();
+
+["pointerdown", "input", "change", "click"].forEach(type => {
+  document.addEventListener(type, () => sdtStillFrames.clear(), { passive: true });
+});
+
+window.addEventListener("message", event => {
+  if (event.origin !== window.location.origin) return;
+  if (event.data?.type === "sdt-visibility") {
+    sdtParentVisible = Boolean(event.data.visible);
+  }
+});
+
+function sdtMotionActive(element) {
+  if (document.hidden || !sdtParentVisible) return false;
+  const rect = element.getBoundingClientRect();
+  const visible = (
+    rect.bottom >= 0
+    && rect.top <= window.innerHeight
+    && rect.right >= 0
+    && rect.left <= window.innerWidth
+  );
+  if (!visible) return false;
+  const setting = document.documentElement.getAttribute("data-sdt-motion");
+  const off =
+    setting === "off"
+    || (
+      setting == null
+      && window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    );
+  if (off) {
+    if (sdtStillFrames.has(element)) return false;
+    sdtStillFrames.add(element);
+    return true;
+  }
+  sdtStillFrames.delete(element);
+  return true;
+}
 
 let morphT = 0;
 let panX = 0, panY = 0, zoom = 0.75;
@@ -1329,8 +1523,12 @@ let hoveredIso = null;
 let hoveredZ = null;
 let selectedIso = ISO.find(e => e.Z === 26 && e.A === 56);
 
-const LEFT_W  = 0;    // v4 layout: full-bleed canvas, floating cards
-const RIGHT_W = 0;    // v4 layout: full-bleed canvas, floating cards
+function isLightSkin() {
+  return document.documentElement.getAttribute("data-theme") === "light";
+}
+
+let LEFT_W  = 0;
+let RIGHT_W = 0;
 
 // Checkbox bindings
 const cbLabels      = document.getElementById("showLabels");
@@ -1427,7 +1625,7 @@ function gridPos(nd, nt) {
     u = actualU;
   }
 
-  // v4 spread: columns wider than rows.
+  // Subdued full-bleed spread, shared by both colour themes.
   const vRange = (vMax - vMin) || 1;
   const scale  = (H - pad*2) / vRange;
   const scaleX = scale * 3.2;
@@ -1455,18 +1653,15 @@ function hexToRgb(hex) {
   return `${parseInt(h.substring(0,2),16)},${parseInt(h.substring(2,4),16)},${parseInt(h.substring(4,6),16)}`;
 }
 
-// ── Hexagon geometry helpers ─────────────────────────────────────────────────
+// ── Marker geometry helper ───────────────────────────────────────────────────
 function hexPath(ctx, cx, cy, Rx, Ry) {
-  // v4 marker language: isotopes are CIRCLES, not hexagons.
-  // (name kept so every caller converts; Ry honoured where passed)
   ctx.beginPath();
   if (Ry != null && Ry !== Rx) ctx.ellipse(cx, cy, Rx, Math.abs(Ry), 0, 0, Math.PI * 2);
   else ctx.arc(cx, cy, Math.abs(Rx), 0, Math.PI * 2);
 }
 
-// Palette defined by user request
-// Twilight jewel-tone palette — vivid, saturated, visible on dark backgrounds
-const Z_PALETTE = [
+// Subdued v4 palette, shared by both colour themes.
+const SUBDUED_Z_PALETTE = [
   "106,149,176", // steel
   "194,122,90",  // rust
   "122,180,224", // soft azure
@@ -1514,7 +1709,7 @@ function isoColor(iso, alpha) {
     return `rgba(139,108,163,${alpha})`;
   }
   // Assign color from rotating jewel-tone palette based on Z
-  const rgb = Z_PALETTE[iso.Z % Z_PALETTE.length];
+  const rgb = SUBDUED_Z_PALETTE[iso.Z % SUBDUED_Z_PALETTE.length];
   return `rgba(${rgb},${alpha})`;
 }
 
@@ -2348,13 +2543,10 @@ function drawNodes(ctx) {
     const _emphCol = EMPH.active ? isoEmphColor(iso, EMPH) : null;
     ctx.globalAlpha = (EMPH.active && !_emphCol) ? EMPH.dimMul : 1;
 
-    const gsY = gridScale * zoom;
-    // v4 sizing: the dot IS the abundance readout — r = 3 + (abd%)*3.5;
-    // with "Binding energy size" on, v4's alternate law r = 2 + (BE/9)*5
     const _zf = Math.max(0.7, Math.min(2.2, zoom));
-    const R0  = ((cbBE && cbBE.checked && iso.be > 0)
-                  ? (2 + (iso.be / 9) * 5)
-                  : (iso.stable ? (3 + (iso.abd / 100) * 3.5) : 2.1)) * _zf;
+    const R0 = ((cbBE && cbBE.checked && iso.be > 0)
+      ? (2 + (iso.be / 9) * 5)
+      : (iso.stable ? (3 + (iso.abd / 100) * 3.5) : 2.1)) * _zf;
 
     // Determine scale origin and draw position for group members
     let p = rawP;
@@ -2439,8 +2631,8 @@ function drawNodes(ctx) {
       ctx.stroke();
     }
 
-    // Inner abundance hex
-    if (false && relAbd > 0.01) { // v4: the radius already IS the abundance
+    // Marker radius already carries abundance in the subdued instrument.
+    if (false && relAbd > 0.01) {
       const innerR = Math.max(2, R * relAbd * 0.72);
       hexPath(ctx, p.x, p.y, innerR);
       ctx.fillStyle = isSoleStable
@@ -3006,6 +3198,7 @@ function drawOverlays(ctx) {
 
   function drawPip() {
     requestAnimationFrame(drawPip);
+    if (!sdtMotionActive(pipC)) return;
     pipAngle += 0.008;
     const dpr = window.devicePixelRatio || 1;
     const pw = pipEl.clientWidth || 220, ph = pipEl.clientHeight || 150;
@@ -3396,9 +3589,17 @@ document.getElementById('printDiagBtn').addEventListener('click', () => {
   alert('Δu_E table printed to browser console.\nOpen DevTools (F12) → Console tab to view all ' + rows.length + ' rows.');
 });
 
+function canvasTopOffset() {
+  if (!isLightSkin()) return 0;
+  const value = getComputedStyle(document.documentElement)
+    .getPropertyValue("--sdtq-top");
+  return Number.parseFloat(value) || 0;
+}
+
 function resize() {
+  const topOffset = canvasTopOffset();
   const vw = window.innerWidth - LEFT_W - RIGHT_W;
-  const vh = window.innerHeight;
+  const vh = window.innerHeight - topOffset;
   W = vw;
   H = vh;
   canvas.width  = W * dpr;
@@ -3407,7 +3608,7 @@ function resize() {
   canvas.style.height = H + "px";
   canvas.style.position = "fixed";
   canvas.style.left = LEFT_W + "px";
-  canvas.style.top  = "0px";
+  canvas.style.top  = topOffset + "px";
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   // Resize PIP canvas
   const pip = document.getElementById("pip");
@@ -3419,6 +3620,21 @@ function resize() {
     pc.style.height = pip.offsetHeight + "px";
   }
 }
+
+let observedSkin = isLightSkin() ? "light" : "dark";
+new MutationObserver(() => {
+  const nextSkin = isLightSkin() ? "light" : "dark";
+  if (nextSkin === observedSkin) return;
+  observedSkin = nextSkin;
+  LEFT_W = 0;
+  RIGHT_W = 0;
+  resize();
+  if (selectedIso) focusIso(selectedIso);
+  draw();
+}).observe(document.documentElement, {
+  attributes:true,
+  attributeFilter:["data-theme"]
+});
 
 // ── Element label column (drawn on top, as part of UI layer) ───────────────
 function drawElemLabels(ctx) {
@@ -3441,7 +3657,7 @@ function drawElemLabels(ctx) {
     if (yS - lastLY < 11) return;
     lastLY = yS;
 
-    const rgb = Z_PALETTE[Z % Z_PALETTE.length];
+    const rgb = SUBDUED_Z_PALETTE[Z % SUBDUED_Z_PALETTE.length];
     const elemIsos = ISO.filter(e => e.Z === Z);
     const isSole = elemIsos.filter(e => e.stable).length === 1;
     const sym = elemIsos[0].sym;
@@ -3668,7 +3884,7 @@ function draw() {
   drawNodes(ctx);
   drawSwitchback(ctx);
   drawOverlays(ctx);
-  drawElemLabels(ctx);
+  if (cbLabels.checked) drawElemLabels(ctx);
 }
 
 // Export PNG
@@ -3849,9 +4065,17 @@ const hashIso = isoFromHash();
 if (hashIso) focusIso(hashIso);
 else if (selectedIso) updatePanel(selectedIso);
 addEventListener('hashchange', () => { const h = isoFromHash(); if (h) { focusIso(h); draw(); } });
-window.addEventListener('resize', () => { resize(); if (selectedIso) focusIso(selectedIso); draw(); });
+window.addEventListener('resize', () => {
+  resize();
+  if (selectedIso) focusIso(selectedIso);
+  draw();
+});
 
 requestAnimationFrame(function loop(ts) {
+  if (!sdtMotionActive(canvas)) {
+    requestAnimationFrame(loop);
+    return;
+  }
   const nowKey = isoAnimKey(hoveredIso);
   if (nowKey !== _prevHovKey) { _animStartMs = ts; _prevHovKey = nowKey; }
 

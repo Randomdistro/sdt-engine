@@ -1,36 +1,29 @@
-# JPL SPHEREx H0 Correction
-## Resolving the Hubble Tension via Gravitational Redshift Decomposition
+# Redshift-Correction Bookkeeping Demonstration
 
-> **⚠️ RECLASSIFIED: exploratory, NOT a demonstration (2026-07-03).** n=10 hand-picked calibrators at z=0.0008–0.0087 (below any Hubble-flow cut); per-SN `pa_factor` hand-assigned ±0.3–0.8 — contradicting the 'no additional free parameters' line; the solar/MW-bulk subtraction double-counts corrections standard CMB-frame redshifts already apply; `z_cosmo` (expansion) is load-bearing. The 67.1 lands beside Planck by construction. Also mutually exclusive with Hubble/'s κ-gradient tension resolution — the repo cannot claim both.
+A dependency-free C++20 audit harness for explicit, per-record redshift
+correction bookkeeping. It accepts signed correction terms and flags that state
+whether each term has already been applied by the source catalogue. This makes
+double subtraction visible and testable.
 
-A C++20 pipeline that decomposes observed redshift into its kinematic, gravitational, and cosmological components — and demonstrates that the Hubble Tension is largely a **systematic bias** introduced by uncorrected local gravitational potentials and Milky Way bulk motion in the SNe Ia calibration sample.
+This repository is not affiliated with, endorsed by, or certified by NASA,
+JPL, Caltech or the SPHEREx mission. The executable is a software demonstration,
+not a SPHEREx pipeline product or cosmological result.
 
----
+## Withdrawal of the former solve
 
-## The Core Finding
+The former CQ18d/e/f H0 result is withdrawn. It used ten selected calibrators
+below a standard Hubble-flow cut, hand-assigned position-angle factors,
+double-subtracted observer-frame terms, and depended on a cosmological residual
+while claiming to replace it. The numerical landing near a CMB value is not
+evidence.
 
-The Pantheon+ supernova sample is drawn predominantly from directions avoiding the Milky Way's Zone of Avoidance. This introduces a directional bias: the calibration sample is not kinematically isotropic with respect to the Milky Way's bulk motion vector (627 km/s toward *l* = 276°, *b* = 30°).
+Those three sources remain in the folder for provenance, are excluded from
+CMake, and intentionally stop compilation unless a researcher explicitly
+defines `SDT_ENABLE_WITHDRAWN_CQ18`.
 
-When the following components are correctly separated from the observed redshift:
-
-| Component | Symbol | Typical magnitude |
-|---|---|---|
-| Cosmological expansion | z_cosmo | dominant |
-| Host galaxy gravitational redshift | z_grav_host | 10⁻⁵ – 10⁻⁴ |
-| Host galaxy rotational Doppler | z_rot | 10⁻⁴ – 10⁻³ |
-| Milky Way bulk motion projection | z_MW_bulk | up to 2×10⁻³ |
-| MW gravitational potential | z_grav_MW | ~3×10⁻⁷ |
-| Peculiar velocity residuals | z_pec | ~10⁻³ |
-
-The corrected *H*₀ from the Pantheon+ sample converges to:
-
-```
-H₀ (uncorrected, Pantheon+)  ≈  73.0 km/s/Mpc
-H₀ (after z_grav + z_MW)     ≈  67.1 km/s/Mpc
-H₀ (Planck CMB baseline)     =  67.4 km/s/Mpc
-```
-
-The 5σ Hubble Tension reduces to a systematic sampling effect.
+The rebuilt package makes no claim to resolve the Hubble tension or remove the
+Great Attractor. Its only result is whether supplied correction terms were
+applied exactly once.
 
 ---
 
@@ -38,73 +31,74 @@ The 5σ Hubble Tension reduces to a systematic sampling effect.
 
 | File | Purpose |
 |---|---|
-| `cq18d_sne_h0_correction.cpp` | 6-layer redshift decomposition applied to SNe Ia dataset |
-| `cq18e_zladder.cpp` | Distance ladder validation — lab scale to cosmic scale |
-| `cq18f_great_attractor.cpp` | Great Attractor perpendicular ring null-test (ZoA falsification) |
-| `sdt/include/laws.hpp` | Header-only constants library (CODATA 2018) |
-| `CMakeLists.txt` | Build configuration |
+| `redshift_bookkeeping_demo.cpp` | Validated CSV parser, correction ledger, sensitivity output and JSON summary |
+| `examples/synthetic_redshift_components.csv` | Synthetic known-answer fixture; not observational data |
+| `DEMONSTRATION_PROTOCOL.md` | Pre-registered scope, schema and R0–R6 gates |
+| `RUN_LOG.md` | Preserved first run and gate results |
+| `cq18d/e/f_*.cpp` | Withdrawn sources retained for provenance and excluded from the build |
+| `sdt/include/laws.hpp` | Complete standalone export of the canonical header |
+| `CMakeLists.txt` | Standalone build configuration and export-integrity check |
 
----
+The package compiles against the included `sdt/include/laws.hpp`; it does not
+require the repository's `Engine/` tree. The exported header's SHA-256 is
+`F0E74D150E139AF3534F5FEC4CFD3D90B85A4E9EFA08E36AAD1D1462BFE57942`.
+When configured inside the repository, CMake also verifies that the export is
+byte-identical to `Engine/include/sdt/laws.hpp`.
 
 ## Building
 
-```bash
-# CMake (all three executables)
-cmake -B build
-cmake --build build --config Release
+From the repository root:
 
-# Direct (GCC)
-g++ -std=c++20 -O2 -I sdt/include -o cq18d cq18d_sne_h0_correction.cpp
-g++ -std=c++20 -O2 -I sdt/include -o cq18e cq18e_zladder.cpp
-g++ -std=c++20 -O2 -I sdt/include -o cq18f cq18f_great_attractor.cpp
+```powershell
+cmake -S Release/JPL_SPHEREx_H0_Correction -B build-jpl-redshift
+cmake --build build-jpl-redshift --config Release
+ctest --test-dir build-jpl-redshift -C Release --output-on-failure
 ```
 
----
+GCC/Clang use the same CMake commands; omit `--config Release` for a
+single-configuration generator.
 
-## Redshift Decomposition Method
+## Input schema
 
-For each supernova host galaxy, the solver computes:
-
-```
-z_cosmo  =  z_total
-           − z_grav_host(R★, v★)
-           − z_rot_host(v_disk, θ)
-           − z_MW_bulk(v_MW · r̂)
-           − z_grav_MW(Ϟ_MW, d)
-           − z_pec(σ_pec)
+```text
+id,distance_mpc,z_input,
+z_host_grav,z_host_rotation,z_observer_motion,z_other,
+host_grav_already_applied,host_rotation_already_applied,
+observer_motion_already_applied,other_already_applied
 ```
 
-The gravitational terms are computed from the host galaxy's photometric profile and the Milky Way's well-characterised kinematic field — no additional free parameters.
+Correction terms are signed. An `*_already_applied` flag of `1` means the input
+catalogue has already removed that component, so this program subtracts zero for
+it. A flag of `0` means the term remains in `z_input` and is subtracted once.
+Malformed values, non-binary flags, duplicate identifiers and non-positive
+distances are rejected.
 
----
+The program does not infer any correction from a source name, sky coordinate,
+catalogue frame or target H0. Those terms and their provenance belong upstream.
 
-## Great Attractor Null-Test
+## Running the synthetic demonstration
 
-`cq18f_great_attractor.cpp` constructs a ring of galaxies perpendicular to the GA streaming vector (90° offset). In a true mass concentration, this ring should show a convergence signature. The null-test result:
-
+```powershell
+build-jpl-redshift/Release/redshift_bookkeeping_demo.exe `
+  --input Release/JPL_SPHEREx_H0_Correction/examples/synthetic_redshift_components.csv `
+  --output-csv redshift_results.csv `
+  --output-json redshift_summary.json `
+  --fixture-gates
 ```
-GA direction (l=276°, b=30°):   radial velocity residual  =  +487 km/s
-Perpendicular ring (90° offset): radial velocity residual  =  +11  km/s
 
-Ratio:  44:1  →  consistent with projection of a bulk flow vector,
-                 not a gravitational mass concentration.
-```
+The bundled fixture contains five synthetic records generated to test the
+instrument. Four low-z rows recover the registered synthetic value exactly;
+one `z=0.2` row verifies that the linear `cz/d` diagnostic is suppressed outside
+the declared `z <= 0.1` scope. All R0–R6 gates pass.
 
----
+## Outputs
 
-## Distance Ladder (`cq18e_zladder.cpp`)
-
-Validates the kinematic distance relation `z = Ϟ/r` from atomic scale (10⁻¹⁵ m) through solar system (10¹¹ m) to cosmological scale (10²⁶ m) using a single bridge law — no separate Cepheid, SNe, or BAO calibration steps required.
-
----
-
-## Relevance to SPHEREx
-
-SPHEREx will map the large-scale structure of the universe in 96 photometric bands across the full sky. The redshift decomposition pipeline in this repository provides a framework for:
-
-- Separating host-galaxy gravitational redshift from cosmological signal at low-z
-- Correcting for Zone of Avoidance projection bias in the *H*₀ calibration sample
-- Cross-validating peculiar velocity fields against the bulk-motion null-test
+- CSV: residual redshift, corrections actually subtracted, low-z linear
+  diagnostic where permitted, and leave-one-component-in sensitivity deltas.
+- JSON: schema version, source path, row counts, gate statuses,
+  `scientific_result=false`, and `external_target_h0=null`.
+- Process status: `0` only when every active gate passes; `1` for a failed gate;
+  `2` for malformed input or invocation.
 
 ---
 
@@ -113,4 +107,4 @@ SPHEREx will map the large-scale structure of the universe in 96 photometric ban
 Apache 2.0 — free for research and academic use with attribution.  
 See [LICENSE](LICENSE).
 
-**Author:** James C.H. Tyndall — ORMUNDO GROUP, Hampton, Victoria, Australia
+**Author:** James Christopher Tyndall — Melbourne, Australia

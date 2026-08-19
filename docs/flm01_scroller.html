@@ -147,11 +147,11 @@
     <div class="eq">F_C / F_G ≈ A / (0.36 · κ) = <span class="hl">2.27e+39</span></div>
 
     <p>Interactive Parameter Map: Click or drag on the 2D parameter space below to change the screening factor $\kappa$ and amplification $A$ simultaneously. 
-    Notice that the "correct" physical target lies along a degenerate diagonal line—proving the parameters were not independent constants, but a mathematical patch.</p>
+    Notice that the "correct" physical target lies along a non-identifying diagonal line—proving the parameters were not independent constants, but a mathematical patch.</p>
 
     <div class="widget">
       <h4>2D Parameter Space Map</h4>
-      <div class="sub">The green diagonal is the NIST physical target line. Every point on it yields the correct universe scale, showing the degeneracy of the legacy constants. Click or drag to locate.</div>
+      <div class="sub">The green diagonal is the NIST physical target line. Every point on it yields the correct universe scale, showing that the legacy constants were not independently identified. Click or drag to locate.</div>
       
       <svg class="plot-2d" id="plot-legacy" width="360" height="260" viewBox="0 0 360 260"></svg>
 
@@ -517,7 +517,7 @@ const ratio_rela = C.r_e / C.l_P;
       
     } else if (lg < -12) {
       // Subatomic Wake: show overlapping wake boundaries
-      oDesc.textContent = "Vortex wake boundaries (classical / charge radii)";
+      oDesc.textContent = "Vortex wake boundaries (classical / boundary radii)";
       
       const w1 = document.createElementNS(NS, 'circle');
       w1.setAttribute('cx', '200'); w1.setAttribute('cy', '100');

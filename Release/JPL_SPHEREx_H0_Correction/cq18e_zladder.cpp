@@ -1,3 +1,10 @@
+// WITHDRAWN: retained for provenance only. It mixes schematic catalogues with
+// an assumed cosmological distance relation and is not a validated ladder.
+// The rebuilt package does not compile or run this source.
+#ifndef SDT_ENABLE_WITHDRAWN_CQ18
+#error "cq18e is withdrawn; use redshift_bookkeeping_demo.cpp"
+#endif
+
 // =============================================================================
 // CQ18e — Cosmological Redshift Gradient Ladder
 // Three source classes: SNe Ia (z<0.1), Galaxy Clusters (z<1), Quasars (z>1)

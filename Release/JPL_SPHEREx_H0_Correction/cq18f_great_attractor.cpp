@@ -1,3 +1,10 @@
+// WITHDRAWN: retained for provenance only. Its representative catalogue and
+// path-dependent disk correction do not establish a Great Attractor null test.
+// The rebuilt package does not compile or run this source.
+#ifndef SDT_ENABLE_WITHDRAWN_CQ18
+#error "cq18f is withdrawn; use redshift_bookkeeping_demo.cpp"
+#endif
+
 // =============================================================================
 // CQ18f — Great Attractor: Real or Zone of Avoidance z_grav Artifact?
 //

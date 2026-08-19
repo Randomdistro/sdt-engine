@@ -1,0 +1,1715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>/*sdt-theme-guard*/(function(){try{var t=localStorage.getItem("sdt.theme")||"auto";if(t==="auto")t=(window.matchMedia&&window.matchMedia("(prefers-color-scheme:dark)").matches)?"dark":"light";var d=document.documentElement;d.setAttribute("data-theme",t);d.setAttribute("data-sdt-theme",t);}catch(e){}})();</script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atlas — Spatial Displacement Theory</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="sdt-shell.css">
+<script src="sdt-shell.js" defer></script>
+<script src="engine-data.js" defer></script>
+<meta name="description" content="Spatial Displacement Theory — an executable pressure-and-geometry framework with explicit inputs, public benchmarks and falsifiable open problems.">
+<link rel="canonical" href="https://spatialdisplacementtheory.com/atlas">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/favicon.ico" sizes="64x64">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#b07430">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Spatial Displacement Theory">
+<meta property="og:title" content="Atlas — Spatial Displacement Theory">
+<meta property="og:description" content="Spatial Displacement Theory — an executable pressure-and-geometry framework with explicit inputs, public benchmarks and falsifiable open problems.">
+<meta property="og:url" content="https://spatialdisplacementtheory.com/atlas">
+<meta property="og:image" content="https://spatialdisplacementtheory.com/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_AU">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Spatial Displacement Theory">
+<meta name="twitter:description" content="Spatial Displacement Theory — an executable pressure-and-geometry framework with explicit inputs, public benchmarks and falsifiable open problems.">
+<meta name="twitter:image" content="https://spatialdisplacementtheory.com/og-card.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ScholarlyArticle",
+  "headline": "Spatial Displacement Theory",
+  "description": "An executable pressure-and-geometry framework with explicit inputs, public benchmarks and falsifiable open problems.",
+  "author": { "@type": "Person", "name": "James Christopher Tyndall", "affiliation": "Melbourne, Australia" },
+  "inLanguage": "en",
+  "url": "https://spatialdisplacementtheory.com/atlas",
+  "image": "https://spatialdisplacementtheory.com/og-card.png",
+  "keywords": "spatial displacement theory, spation lattice, superfluidic hypercrystal, occlusion, koppa, zero free parameters"
+}
+</script>
+</head>
+<body>
+
+  <!-- ═══════════════════════ NAV ═══════════════════════ -->
+  <nav class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="#opening" class="nav__wordmark">Spatial <span>Displacement</span> Theory</a>
+      <div class="nav__links" id="navLinks">
+        <a href="#medium" class="nav__link">The Medium</a>
+        <a href="#laws" class="nav__link">Six Laws</a>
+        <a href="#topology" class="nav__link">Topology</a>
+        <a href="#atomicus" class="nav__link">Atomicus</a>
+        <a href="#lab" class="nav__link">Lab</a>
+        <a href="#engine" class="nav__link">Engine</a>
+        <a href="#cosmology" class="nav__link">Cosmology</a>
+        <a href="#experiments" class="nav__link">Experiments</a>
+        <a href="#glossary" class="nav__link">Glossary</a>
+      </div>
+      <button class="nav__burger" id="navBurger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+
+  <!-- ═══════════════════════ OPENING ═══════════════════════ -->
+  <section id="opening" class="opening">
+    <canvas id="latticeCanvas" class="opening__canvas"></canvas>
+    <div class="opening__content">
+      <p class="opening__pretitle">Reference atlas. One executable framework. Every input disclosed.</p>
+      <h1 class="opening__title" data-i18n="hero_title">Spatial<br>Displacement<br><em>Theory</em></h1>
+      <hr class="opening__rule">
+      <p class="opening__desc">Gravity, electromagnetism and nuclear interaction — one pressure mechanism read through different geometries in a discrete spatial medium. The benchmark ledger separates derived, computed, observed, calibrated, identity and pending results.</p>
+      <p style="margin:.8rem 0 0;"><a href="index.html#ix-space" style="font-family:'JetBrains Mono',monospace;font-size:.82rem;letter-spacing:.1em;color:var(--mint);border:1px solid var(--mint);border-radius:3px;padding:.45rem 1rem;display:inline-block;text-decoration:none;">START HERE → THE FOUR IRREDUCIBLES</a></p>
+      <p style="margin:.8rem 0 0;"><a href="causal-chain.html" style="font-family:'JetBrains Mono',monospace;font-size:.82rem;letter-spacing:.1em;color:var(--ink-soft);border:1px solid var(--paper-edge);border-radius:3px;padding:.45rem 1rem;display:inline-block;text-decoration:none;">THEN THE CAUSAL CHAIN, NARRATED</a></p>
+      <p class="opening__author"><span class="opening_quote">"Any theory that produces paradoxes is either incomplete, or incorrect."</span><br>— James Christopher Tyndall, Melbourne, Australia</p>
+      <nav class="opening__nav" aria-label="Table of contents">
+        <a href="#irreducibles" data-num="00">The Four Irreducibles</a>
+        <a href="#medium" data-num="01">The Medium</a>
+        <a href="#laws" data-num="02">Six Laws</a>
+        <a href="#topology" data-num="03">Topology</a>
+        <a href="#atomicus" data-num="04">Atomicus</a>
+        <a href="#lab" data-num="04b">Lab</a>
+        <a href="#engine" data-num="05">Engine</a>
+        <a href="#cosmology" data-num="06">Cosmology</a>
+        <a href="#experiments" data-num="07">Experiments</a>
+        <a href="#glossary" data-num="08">Glossary</a>
+      </nav>
+    </div>
+    <a href="#medium" class="opening__scroll" aria-label="Scroll to begin">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 8l5 5 5-5"/></svg>
+    </a>
+  </section>
+
+
+  <!-- ═══════════ THE FOUR IRREDUCIBLES — carried over from the front door ═══════════ -->
+  <style>
+    .irr-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.4rem;margin-top:1.8rem}
+    .irr-card{border:1px solid var(--paper-edge,#e3ded2);border-radius:5px;padding:1.5rem 1.4rem;background:var(--paper,#faf8f4)}
+    .irr-card .irr-word{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-air,#a39d90)}
+    .irr-card h3{font-size:1.45rem;font-weight:600;letter-spacing:-.01em;margin:.4rem 0 .8rem;color:var(--ink,#1d1f21)}
+    .irr-card p{font-size:.95rem;line-height:1.7;color:var(--ink-soft,#4a463d);margin-bottom:.8rem}
+    .irr-card p:last-child{margin-bottom:0}
+    .irr-card strong{color:var(--ink,#1d1f21)}
+  </style>
+  <section id="irreducibles" class="chapter">
+    <div class="chapter__inner reveal">
+      <div class="chapter__num">Before Chapter One</div>
+      <h2 class="chapter__title">The Four Irreducibles</h2>
+      <p class="chapter__lead">Space. Matter. Movement. The Ever-Present Now. Everything below is built from these four — nothing else is assumed.</p>
+      <!-- rendered from sdt-canon.js — the single statement of each concept; edit there, never here -->
+      <div data-sdt-canon="primitives"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ CH.1 — THE MEDIUM ═══════════════════════ -->
+  <section id="medium" class="chapter">
+    <div class="chapter__inner reveal">
+      <div class="chapter__num">Chapter One</div>
+      <h2 class="chapter__title">The Medium</h2>
+      <p class="chapter__lead">You are being pressed — right now, from every direction at once.</p>
+
+      <p data-i18n="m1">At every point a convergence is arriving: an inward pressure from all around you and from every depth beyond, the same from one side as from the other. Perfectly answered on every side, it moves you nowhere — you feel nothing, and call the space around you empty. It is not empty. It is balanced.
+ Now let a body settle nearby. It stands in the path of the convergence coming from its direction and casts a shadow — a cone where the inward push falls short. The push from the opposite side, with nothing left to answer it, has its way, and you drift toward the body.</p>
+
+      <p><strong>You are not attracted. Nothing pulls you. You are pushed — by the pressure the other body fails to block.</strong></p>
+
+      <p data-i18n="m3">Spatial Displacement Theory says it plainly: all of space is a discrete contact-relay medium — the <em>spation lattice</em> — built at Planck length. Movement passes neighbour to neighbour at exactly <em>c</em>, and there is no other way to travel. Light, gravity, electric fields — different gaits of the one medium. Every force is a pressure difference. All of them.</p>
+
+      <div class="aside">
+        <div class="aside__title">On foundations</div>
+        <p>SDT is built from exactly four irreducible primitives. Everything else — mass, charge, time, temperature, entropy — is derived. The Clearing is this cycle’s wall opening, not a first moment. The antecedent is the previous recharge. There is no first origin.</p>
+      </div>
+
+      <!-- the four irreducibles are stated ONCE, above (rendered from sdt-canon.js) — not restated here -->
+
+      <div class="margin-note" data-i18n="m_note">The old whitelist {ℓ<sub>P</sub>, c, ℏ, k<sub>B</sub>, T<sub>CMB</sub>, α, m<sub>e</sub>, m<sub>p</sub>} is rederived — not a second list of primitives. ℓ<sub>P</sub> is mathematical. T<sub>CMB</sub> is the red-to-IR wall after 10.47 octaves. Seats and unit bridges: <a href="inputs.html">the inputs page</a>.</div>
+      <p style="margin-top:var(--sp-xl);display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="paper-medium.html" target="_blank" style="display:inline-flex;align-items:center;padding:9px 16px;border:1px solid var(--mint);border-radius:4px;color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;text-decoration:none;">peer review paper for submission · The Medium</a>
+        <a href="paper-01-foundations.html" target="_blank" style="display:inline-flex;align-items:center;padding:9px 16px;border:1px solid var(--mint);border-radius:4px;color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;text-decoration:none;">peer review paper for submission · Foundations &amp; Lattice Mechanics</a>
+        <a href="paper-10-fluid.html" target="_blank" style="display:inline-flex;align-items:center;padding:9px 16px;border:1px solid var(--mint);border-radius:4px;color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;text-decoration:none;">peer review paper for submission · Fluid Dynamics</a>
+        <a href="paper-12-condensed-matter.html" target="_blank" style="display:inline-flex;align-items:center;padding:9px 16px;border:1px solid var(--mint);border-radius:4px;color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;text-decoration:none;">peer review paper for submission · Condensed Matter Physics</a>
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════ CH.2 — THE SIX LAWS ═══════════════════════ -->
+  <section id="laws" class="chapter chapter--alt">
+    <div class="chapter__inner reveal">
+      <div class="chapter__num">Chapter Two</div>
+      <h2 class="chapter__title">The Six Laws</h2>
+      <p class="chapter__lead">Every prediction flows from these six principles. No additional postulates.</p>
+
+      <div class="law-entry">
+        <div class="law-header">
+          <span class="law-num">I</span>
+          <h3 class="law-name">Cosmological Relay Throughput</h3>
+        </div>
+        <div class="law-body">
+          <p>Every point in space receives convergent energy from N ≈ 5.89 × 10⁶¹ nested Planck-thick shells stretching to the Clearing. Each shell contributes exactly ε regardless of distance — the Shell Cancellation Identity. The total convergence burden:</p>
+          <div class="eq-block">
+            <div class="eq">Φ = Nε ≈ 1.04 × 10⁻⁵⁶ J</div>
+          </div>
+          <p data-i18n="l1b">Convergence pressure: P<sub>conv</sub> ≈ 2.46 × 10⁴⁸ Pa — some thirty-seven orders of magnitude beyond the strongest pressure engineering has ever produced. Perfectly balanced at every point, so you feel nothing.</p>
+        </div>
+      </div>
+
+      <div class="law-entry">
+        <div class="law-header">
+          <span class="law-num">II</span>
+          <h3 class="law-name">The Release Cascade</h3>
+        </div>
+        <div class="law-body">
+          <p>The Clearing is this cycle’s wall opening, not a first fireball. The microwave at 2.7255 K is the operating pressure of the lattice, still arriving — the red-to-IR emission after 10.47 octaves. Stars are convergence processors — pressure-processing nodes in the lattice, not isolated furnaces. The antecedent is the previous recharge. There is no first origin.</p>
+        </div>
+      </div>
+
+      <div class="law-entry">
+        <div class="law-header">
+          <span class="law-num">III</span>
+          <h3 class="law-name">The Occlusion Force</h3>
+        </div>
+        <div class="law-body">
+          <p>Matter stands in the flow and casts a shadow. The unshadowed side pushes harder — that is the force, all of it. One formula carries Coulomb, gravity, and the nuclear force; the only thing that changes between them is the geometry of the shadow:</p>
+          <div class="eq-block">
+            <div class="eq">F = (π/4) · P<sub>eff</sub> · R₁² R₂² / r²</div>
+            <div class="eq-caption">The universal force law — canonically "Convergent Boundary Pressure". The 1/r² occlusion structure is derived; the hydrogen Coulomb force (8.24 × 10⁻⁸ N at a₀) is where the one coefficient P<sub>eff</sub> is anchored — the calibration point, stated as such, not a prediction.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="law-entry">
+        <div class="law-header">
+          <span class="law-num">IV</span>
+          <h3 class="law-name">Inertial Mass</h3>
+        </div>
+        <div class="law-body">
+          <p>Mass is not a substance a particle carries. It is the price the medium charges to reorganise around a moving displacement — push the knot, and the lattice must restructure, and it resists in proportion to the volume displaced. Inertia and weight read the same geometry twice, so their equivalence costs nothing and explains itself. A century of principle, retired by bookkeeping.</p>
+          <div class="eq-block">
+            <div class="eq">m = Φ · V<sub>disp</sub> / (3 ℓ<sub>P</sub>³ c²)</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="law-entry">
+        <div class="law-header">
+          <span class="law-num">V</span>
+          <h3 class="law-name">The Movement Budget</h3>
+        </div>
+        <div class="law-body">
+          <p>Every particle runs its whole budget at c. Standing still, all of it goes to circulation; move, and the travel is paid out of the spin. That one constraint carries all of special relativity — dilation, contraction, E = mc², the speed limit, the energy-momentum relation. Eight theorems from three axioms, and nothing dilates but the bookkeeping.</p>
+          <div class="eq-block">
+            <div class="eq">v<sub>circ</sub>² + v² = c²</div>
+          </div>
+          <p>The closure z · k² = 1 (z = v²/c², k = c/v) is an identity of the budget — true by construction, and labelled IDENTITY in the benchmarks. The content is the budget itself: eight theorems of special relativity recovered from three axioms, and the k-ladder it hangs on hydrogen (k = 137) through the Sun (k = 686).</p>
+        </div>
+      </div>
+
+      <div class="law-entry">
+        <div class="law-header">
+          <span class="law-num">VI</span>
+          <h3 class="law-name">Vortex Topology Quantisation</h3>
+        </div>
+        <div class="law-body">
+          <p>Stable particles are persistent torus-knot windings of the lattice. The (1,1) unknot is the electron; the (2,3) trefoil is the proton — topologically protected, which is why the proton does not decay. The W+1 radius rule puts the proton boundary at:</p>
+          <div class="eq-block">
+            <div class="eq">R<sub>p</sub> = (W+1)·ℏ/(m<sub>p</sub>c) = 0.84124 fm</div>
+            <div class="eq-caption">0.02% from the muonic-hydrogen measurement, no adjustable parameter — the W+1 rule itself is a conjecture, not yet proven from trefoil geometry, and is labelled so. PPT17 resolves the 6π⁵ = 1836.118 mass-ratio volume map as a shared-input construction (19 ppm correspondence), not an independent prediction.</div>
+          </div>
+        </div>
+      </div>
+      <p style="margin-top:var(--sp-xl);display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="paper-laws.html" target="_blank" style="display:inline-flex;align-items:center;padding:9px 16px;border:1px solid var(--mint);border-radius:4px;color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;text-decoration:none;">peer review paper for submission · The Six Laws</a>
+        <a href="paper-03-electromagnetism.html" target="_blank" style="display:inline-flex;align-items:center;padding:9px 16px;border:1px solid var(--mint);border-radius:4px;color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;text-decoration:none;">peer review paper for submission · Electromagnetism &amp; Charge</a>
+        <a href="paper-11-thermodynamics.html" target="_blank" style="display:inline-flex;align-items:center;padding:9px 16px;border:1px solid var(--mint);border-radius:4px;color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;text-decoration:none;">peer review paper for submission · Thermodynamics &amp; Statistical Mechanics</a>
+        <a href="paper-13-quantum-foundations.html" target="_blank" style="display:inline-flex;align-items:center;padding:9px 16px;border:1px solid var(--mint);border-radius:4px;color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;text-decoration:none;">peer review paper for submission · Quantum Foundations &amp; Measurement</a>
+      </p>
+      <figure style="margin-top:var(--sp-xl);text-align:center;">
+        <div id="lawsStage" style="position:relative;width:80vw;height:90vh;max-width:none;margin:var(--sp-lg) 0 var(--sp-md) calc(50% - 40vw);overflow:hidden;border:1px solid var(--paper-edge);border-radius:6px;background:var(--paper)"><canvas id="atlasLawsField" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none"></canvas><svg id="atlasLawsPlay" viewBox="0 0 1800 1200" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:grab" aria-label="Two bodies interrupting an isotropic lattice — grip and throw either one; the summed landings do the pushing"></svg><div id="lawsCtl" style="position:absolute;left:14px;bottom:14px;z-index:3;display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;padding:9px 14px;border-radius:6px;background:color-mix(in srgb, var(--paper) 88%, transparent);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid var(--paper-edge);font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-muted);letter-spacing:.04em"></div></div>
+        <figcaption style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-faint);margin-top:8px;">Grip any body and throw it. This pedagogical mechanism demo sums discrete ray landings on opaque silhouettes, with display mass proportional to displaced volume. It is retained to inspect the proposed push geometry; it is not the engine’s koppa trajectory kernel.</figcaption>
+      </figure>
+      <p style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-faint);margin-top:8px;">
+        <strong>PEDAGOGICAL DISCRETE RAY-LATTICE — not GOM42-certified.</strong>
+        The validated koppa trajectory solver is in the
+        <a href="atomicus-3d.html" style="color:var(--copper);">Atomicus 3D walkthrough</a>.
+        Its optional null markers are inertial-frame zeros of the displayed asin proxy,
+        not co-rotating Lagrange points.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════ CH.3 — TOPOLOGY ═══════════════════════ -->
+  <section id="topology" class="chapter">
+    <div class="chapter__inner reveal">
+      <div class="chapter__num">Chapter Three</div>
+      <h2 class="chapter__title">What Matter Is</h2>
+      <p class="chapter__lead">Stable particles are persistent vortex structures in the spation lattice — topological defects classified by winding number.</p>
+
+      <p>The topology of the lattice permits only certain self-sustaining vortex configurations, and the classification is knot theory, not a parameter choice. A (p,q) mode is a true knot only if gcd(p,q)=1 and min(p,q)≥2; its Alexander polynomial then protects it against any continuous deformation. The (1,1) electron is an unknot, confined by its own displacement. W=2 is an unknot too — merely metastable (≈0.1 GeV barrier, lifetime ~10⁻²¹ s), which is why it is never observed. The (2,3) trefoil is the first protected knot: the proton, which cannot decay. Higher odd knots (W = 5, 7, …) are protected as well and await discovery.</p>
+
+      <div class="particles reveal-stagger" id="particlesGrid">
+        <div class="particle">
+          <canvas class="particle__canvas" id="neutrinoCanvas" width="320" height="320"></canvas>
+          <div class="particle__w">W = 0</div>
+          <h3 class="particle__name">Neutrino</h3>
+          <p class="particle__topo">Open winding — no closed circuit</p>
+          <p class="particle__desc">Translates at approximately c. No persistent loop, hence no electromagnetic wake. SDT predicts its magnetic moment is exactly zero — the Standard Model predicts a non-zero value. A direct test.</p>
+        </div>
+        <div class="particle">
+          <canvas class="particle__canvas" id="electronCanvas" width="320" height="320"></canvas>
+          <div class="particle__w">W = 1</div>
+          <h3 class="particle__name">Electron</h3>
+          <p class="particle__topo">Simple torus — the (1,1) unknot</p>
+          <p class="particle__desc">The simplest persistent loop. Its circulation generates the electromagnetic wake field. Antimatter (the positron) is the same torus circulating in the opposite sense. Annihilation is unwinding.</p>
+        </div>
+        <div class="particle">
+          <canvas class="particle__canvas" id="protonCanvas" width="320" height="320"></canvas>
+          <div class="particle__w">W = 3</div>
+          <h3 class="particle__name">Proton</h3>
+          <p class="particle__topo">Trefoil knot — (2,3) torus knot</p>
+          <p class="particle__desc">The simplest irreducible knot. The W+1 radius conjecture, R = (W+1)ℏ/(mc), predicts a boundary radius of 0.84124 fm — matching the muonic hydrogen measurement to 0.02% with no adjustable parameter.</p>
+        </div>
+      </div>
+
+      <div class="aside">
+        <div class="aside__title">The wake, sorted by lobes</div>
+        <p>The pressure disturbance around each vortex sorts itself by how many lobes it carries. The historically "separate" forces are faces of the same wake field — and the trefoil's own three-fold face carries the native selection rule m₃ = 3k, with no imported quantum numbers.</p>
+      </div>
+
+      <table class="wake-table">
+        <thead>
+          <tr><th>face</th><th>Physical role</th><th>Potential falloff</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>monopole</td><td>Occlusion — the Coulomb-like push (and gravity, at body scale)</td><td>r⁻¹ (force 1/r²)</td></tr>
+          <tr><td>ℓ = 2</td><td>Rotational wake — the magnetic face</td><td>r⁻³</td></tr>
+          <tr><td>ℓ = 3</td><td>Three-fold trefoil harmonic — the nuclear reach; the m = 3 fingerprint measured in the proton's own wake</td><td>r⁻⁴</td></tr>
+        </tbody>
+      </table>
+
+      <p class="margin-note" data-i18n="t_margin">The 10³⁶ ratio between electromagnetic and gravitational strength — the hierarchy problem — dissolves into a ratio of geometric cross-sections. A proton screens πR<sub>p</sub>² ≈ 10⁻³⁰ m²; a star screens πR²<sub>☉</sub> ≈ 10¹⁸ m². Same pressure, different geometry.</p>
+      <p style="margin-top:var(--sp-xl);display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="paper-topology.html" target="_blank" style="display:inline-flex;align-items:center;padding:9px 16px;border:1px solid var(--mint);border-radius:4px;color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;text-decoration:none;">peer review paper for submission · What Matter Is</a>
+        <a href="paper-02-particle-topology.html" target="_blank" style="display:inline-flex;align-items:center;padding:9px 16px;border:1px solid var(--mint);border-radius:4px;color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;text-decoration:none;">peer review paper for submission · Particle Physics &amp; Topology</a>
+        <a href="paper-14-plasma-magnetism.html" target="_blank" style="display:inline-flex;align-items:center;padding:9px 16px;border:1px solid var(--mint);border-radius:4px;color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;text-decoration:none;">peer review paper for submission · Plasma Physics &amp; Magnetism</a>
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════ CH.4 — ATOMICUS ═══════════════════════ -->
+  <section id="atomicus" class="chapter chapter--alt">
+    <div class="chapter__inner--wide reveal" style="max-width:var(--wide-width);margin:0 auto;">
+      <div class="chapter__num">Chapter Four</div>
+      <h2 class="chapter__title">ATOMICUS</h2>
+      <p class="chapter__lead" style="max-width:var(--content-width)">Every stable nucleus with Z ≥ 2 decomposes into exactly one alpha core plus some number of deuterons and tritons. And the grammar admits two distinct lineages depending on whether the core is complete.</p>
+
+      <!-- ── Two Grammars ── -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-md);margin:var(--sp-xl) 0;">
+        <div class="atomicus-formula">
+          <div class="atomicus-formula__label">Standard Grammar — α core (He-4)</div>
+          <div class="atomicus-formula__eq">
+            <span class="alpha">1α</span> <span class="op">+</span>
+            <span class="deut">n<sub>d</sub></span> <span class="op">+</span>
+            <span class="trit">n<sub>t</sub></span>
+          </div>
+          <div class="atomicus-formula__rules">
+            <span>n<sub>t</sub> = A − 2Z</span>
+            <span style="color:var(--ink-whisper)">·</span>
+            <span>n<sub>d</sub> = 3Z − A − 2</span>
+          </div>
+        </div>
+        <div class="atomicus-formula" style="border-color:var(--steel-light);background:rgba(74,109,130,0.04);">
+          <div class="atomicus-formula__label" style="color:var(--steel);">EC Grammar — He-3 core (incomplete tetrahedron)</div>
+          <div class="atomicus-formula__eq">
+            <span style="color:var(--steel);">1 He-3</span> <span class="op">+</span>
+            <span class="deut">n<sub>d</sub></span> <span class="op">+</span>
+            <span class="trit">n<sub>t</sub></span>
+          </div>
+          <div class="atomicus-formula__rules">
+            <span>n<sub>t</sub> = A − 2Z + 1</span>
+            <span style="color:var(--ink-whisper)">·</span>
+            <span>n<sub>d</sub> = 3Z − A − 3</span>
+          </div>
+        </div>
+      </div>
+
+      <p style="max-width:var(--content-width);color:var(--ink-soft);margin-bottom:var(--sp-md);">The standard grammar builds on a complete He-4 alpha — a closed tetrahedral core. Electron capture isotopes use a He-3 core instead: an incomplete tetrahedron missing one neutron. This structural deficit is the geometric reason EC occurs — the nucleus seeks completion by capturing an orbital electron to convert a proton into a neutron, closing the tetrahedron.</p>
+
+      <!-- ── Triton & Magnetism ── -->
+      <div class="aside" style="margin-bottom:var(--sp-xl);">
+        <div class="aside__title">The triton ledger</div>
+        <p data-i18n="a_ledger">The triton is the grammar's unbalanced cluster — the deuteron's proton–neutron pair sits symmetric, the triton carries one neutron more. One triton enters per excess neutron (n<sub>t</sub> = N − Z), and each triton holds <em>two</em> neutrons — the full ledger reads N = 2 + n<sub>d</sub> + 2n<sub>t</sub>. The discipline cuts both ways: because the count itself is bookkeeping of (Z, N), any magnetism rule written in triton counts merely restates the neutron ledger, so SDT claims it as nothing more. What the grammar buys is structure — the construction map below, its lineages, and the two-grammar split.</p>
+      </div>
+
+      <!-- ── EC & Spallation ── -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-md);margin-bottom:var(--sp-xl);max-width:var(--content-width);">
+        <div style="padding:var(--sp-lg);border:1px solid var(--paper-edge);border-radius:4px;">
+          <h4 style="font-family:'Source Serif 4','Georgia',serif;font-weight:600;color:var(--ink);margin-bottom:var(--sp-sm);">Natural Electron Capture</h4>
+          <p style="font-size:var(--fs-sm);color:var(--ink-muted);line-height:1.7;">When a nucleus is built on a He-3 core — an incomplete tetrahedron — it is structurally predisposed to capture an inner-shell electron. The capture converts p → n, completing the tetrahedral alpha. The EC isotope transitions from the He-3 lineage to the α-core lineage. This is not random decay — it is geometric self-repair.</p>
+        </div>
+        <div style="padding:var(--sp-lg);border:1px solid var(--paper-edge);border-radius:4px;">
+          <h4 style="font-family:'Source Serif 4','Georgia',serif;font-weight:600;color:var(--ink);margin-bottom:var(--sp-sm);">Spallation-Induced Capture</h4>
+          <p style="font-size:var(--fs-sm);color:var(--ink-muted);line-height:1.7;">High-energy collisions can break structural bonds within the nucleus, knocking a deuteron or triton loose from the scaffold. If the damage exposes or creates an incomplete core, the resulting fragment becomes eligible for electron capture — spallation opens a recombination pathway between construction lineages that thermal processes alone would not access.</p>
+        </div>
+      </div>
+
+      <!-- ── Construction Map Description ── -->
+      <p style="max-width:var(--content-width);color:var(--ink-muted);font-size:var(--fs-sm);margin-bottom:var(--sp-sm);">The map below plots each element by its nuclear grammar — deuteron count horizontally, triton count vertically. Elements fall into natural construction lineages visible as horizontal families (shared triton count) and vertical families (shared deuteron count). Toggle the overlay to see magnetic character — a view of the same counts, not an independent law.</p>
+
+      <!-- ── View toggles ── -->
+      <div class="exp-categories" id="atomicusMode" style="margin-bottom:var(--sp-md);">
+        <button class="exp-cat exp-cat--active" data-mode="grammar">Construction Grammar</button>
+        <button class="exp-cat" data-mode="magnetic">Magnetic Character</button>
+        <button class="exp-cat" data-mode="lineage">EC Lineage</button>
+      </div>
+
+      <div style="position:relative;">
+        <canvas id="atomicusCanvas" width="1100" height="620" style="width:100%;height:auto;cursor:crosshair;display:block;"></canvas>
+        <div id="atomicusTooltip" style="display:none;position:absolute;pointer-events:none;"></div>
+      </div>
+
+      <div class="element-panel" id="elementPanel">
+        <div class="element-panel__id">
+          <div class="element-panel__z" id="epZ">Z = 26</div>
+          <div class="element-panel__symbol" id="epSym">Fe</div>
+          <div class="element-panel__name" id="epName">Iron</div>
+        </div>
+        <div class="element-panel__body">
+          <h4>Nuclear Decomposition</h4>
+          <div class="element-panel__grammar" id="epGrammar">
+            <span class="alpha">1α</span> <span class="op">+</span>
+            <span class="deut">20d</span> <span class="op">+</span>
+            <span class="trit">4t</span>
+          </div>
+          <div class="element-panel__meta" id="epMeta">
+            A = 56 · Total subunits: 24 · Triton fraction: 16.7%<br>
+            Peak binding energy — the geometric optimum of nuclear construction.
+          </div>
+        </div>
+        <div class="element-panel__stats" id="epStats">
+          <div class="element-panel__stat">
+            <span class="element-panel__stat-val" id="epNd">20</span>
+            <span class="element-panel__stat-lbl">Deuterons</span>
+          </div>
+          <div class="element-panel__stat">
+            <span class="element-panel__stat-val" id="epNt">4</span>
+            <span class="element-panel__stat-lbl">Tritons</span>
+          </div>
+          <div class="element-panel__stat">
+            <span class="element-panel__stat-val" id="epMag">—</span>
+            <span class="element-panel__stat-lbl">Magnetic</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="golden-callout">
+        <div class="golden-callout__symbol">Au</div>
+        <div class="golden-callout__text">
+          <h4>The Golden Boundary — Z = 79</h4>
+          <p>Gold is the first element where the triton count (39) exceeds the deuteron count (38). Beyond this threshold, the nuclear construction becomes triton-dominated — magnetically saturated and topologically unstable. The grammar predicts the onset of radioactivity from construction geometry alone.</p>
+        </div>
+      </div>
+
+      <!-- ── Tested shadow-overlap account ── -->
+      <div style="margin:var(--sp-2xl) 0 var(--sp-lg);">
+        <h3 style="font-family:'Source Serif 4','Georgia',serif;font-size:var(--fs-lg);font-weight:600;margin-bottom:var(--sp-sm);">The shadow-area account was tested</h3>
+        <p style="max-width:var(--content-width);color:var(--ink-soft);margin-bottom:var(--sp-md);" data-i18n="a_shadow">
+          A candidate account priced nuclear binding by the overlap of projected proton boundaries:
+          each isolated boundary contributes πR<sub>p</sub>², while a packed union counts shared projected
+          regions once. NSEQ04 tested that rule on the NSEQ05 geometric-control replay. It correlates with total
+          binding energy, but it does not reproduce binding energy per nucleon and is not promoted as the
+          binding mechanism.
+        </p>
+        <div class="eq-block">
+          <div class="eq">BE ≈ κ · ΔA<sub>shadow</sub>,&nbsp;&nbsp;&nbsp; ΔA = N·πR<sub>p</sub>² − A<sub>∪</sub></div>
+          <div class="eq-caption">NSEQ05-CONTROL-3 replay: κ = 47.137184 MeV/fm² [CALIBRATED(1)], R²(total BE) = 0.796231, mean |relative error| = 44.39%; R²(BE/A) = −230.641525. Result: excluded as a per-nucleon binding law and retained only as a geometric control.</div>
+        </div>
+      </div>
+
+      <div style="margin:var(--sp-lg) 0;border:1px solid rgba(80,140,200,.28);border-radius:8px;background:rgba(80,140,200,.05);padding:var(--sp-lg) var(--sp-xl);display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;">
+        <div>
+          <div style="font-size:10px;font-family:'JetBrains Mono',monospace;color:#7ab4e0;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px;">Interactive · Nuclear Packing Sequencer</div>
+          <div style="font-family:'Source Serif 4','Georgia',serif;font-size:1.15em;font-weight:600;color:var(--ink);margin-bottom:6px;">Sequence the Atomicus contact construction</div>
+          <div style="font-size:var(--fs-sm);color:var(--ink-muted);max-width:520px;line-height:1.65;">Build the registered He→O α+d+t stages with cyclic (4,5) quadruple-helix rotors, p↔n envelope-contact diagnostics and the internal Möbius director. Unregistered isotopes are visibly retained as the NSEQ05 control; interleave-to-energy conversion remains pending.</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <a href="atomicus-3d.html" target="_blank"
+             style="display:inline-flex;align-items:center;gap:8px;padding:11px 22px;
+                    background:rgba(67,214,178,.12);border:1px solid rgba(67,214,178,.45);
+                    border-radius:6px;color:#43d6b2;font-size:13px;font-family:'Inter',sans-serif;
+                    font-weight:500;text-decoration:none;white-space:nowrap;transition:all .2s;">
+            ◈ Open Atomicus 3D
+          </a>
+          <a href="nuclear-packing-sequencer.html" target="_blank"
+             style="display:inline-flex;align-items:center;gap:8px;padding:11px 22px;
+                    background:rgba(80,140,200,.12);border:1px solid rgba(80,140,200,.4);
+                    border-radius:6px;color:#7ab4e0;font-size:13px;font-family:'Inter',sans-serif;
+                    font-weight:500;text-decoration:none;white-space:nowrap;transition:all .2s;"
+             onmouseover="this.style.background='rgba(80,140,200,.22)'"
+             onmouseout="this.style.background='rgba(80,140,200,.12)'">
+            ⚛️ Open the Sequencer
+          </a>
+          <a href="nuclear-packing-walkthrough.html" target="_blank"
+             style="display:inline-flex;align-items:center;gap:8px;padding:11px 22px;
+                    background:rgba(80,140,200,.12);border:1px solid rgba(80,140,200,.4);
+                    border-radius:6px;color:#7ab4e0;font-size:13px;font-family:'Inter',sans-serif;
+                    font-weight:500;text-decoration:none;white-space:nowrap;transition:all .2s;"
+             onmouseover="this.style.background='rgba(80,140,200,.22)'"
+             onmouseout="this.style.background='rgba(80,140,200,.12)'">
+            📖 Open the Walkthrough
+          </a>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:var(--sp-sm);margin:var(--sp-md) 0 0;flex-wrap:wrap;align-items:center;">
+        <span style="font-size:10px;font-family:'JetBrains Mono',monospace;color:var(--ink-muted);letter-spacing:.12em;text-transform:uppercase;">Scrollthrough series ·</span>
+        <a href="st_00_primitives.html" target="_blank"
+           style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;
+                  background:rgba(80,140,200,0.10);border:1px solid rgba(80,140,200,0.30);
+                  border-radius:4px;color:#7ab4e0;font-size:13px;font-family:Inter,sans-serif;
+                  text-decoration:none;transition:all 0.2s;"
+           onmouseover="this.style.background='rgba(80,140,200,0.20)'"
+           onmouseout="this.style.background='rgba(80,140,200,0.10)'">
+          ⬡ The Primitives
+        </a>
+        <a href="st_01_law1.html" target="_blank"
+           style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;
+                  background:rgba(80,140,200,0.10);border:1px solid rgba(80,140,200,0.30);
+                  border-radius:4px;color:#7ab4e0;font-size:13px;font-family:Inter,sans-serif;
+                  text-decoration:none;transition:all 0.2s;"
+           onmouseover="this.style.background='rgba(80,140,200,0.20)'"
+           onmouseout="this.style.background='rgba(80,140,200,0.10)'">
+          Ⅰ Convergent Relay
+        </a>
+        <a href="st_02_law2.html" target="_blank"
+           style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;
+                  background:rgba(80,140,200,0.10);border:1px solid rgba(80,140,200,0.30);
+                  border-radius:4px;color:#7ab4e0;font-size:13px;font-family:Inter,sans-serif;
+                  text-decoration:none;transition:all 0.2s;"
+           onmouseover="this.style.background='rgba(80,140,200,0.20)'"
+           onmouseout="this.style.background='rgba(80,140,200,0.10)'">
+          Ⅱ Release Cascade
+        </a>
+        <a href="st_03_law3.html" target="_blank"
+           style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;
+                  background:rgba(80,140,200,0.10);border:1px solid rgba(80,140,200,0.30);
+                  border-radius:4px;color:#7ab4e0;font-size:13px;font-family:Inter,sans-serif;
+                  text-decoration:none;transition:all 0.2s;"
+           onmouseover="this.style.background='rgba(80,140,200,0.20)'"
+           onmouseout="this.style.background='rgba(80,140,200,0.10)'">
+          Ⅲ Boundary Pressure
+        </a>
+        <a href="st_04_law4.html" target="_blank"
+           style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;
+                  background:rgba(80,140,200,0.10);border:1px solid rgba(80,140,200,0.30);
+                  border-radius:4px;color:#7ab4e0;font-size:13px;font-family:Inter,sans-serif;
+                  text-decoration:none;transition:all 0.2s;"
+           onmouseover="this.style.background='rgba(80,140,200,0.20)'"
+           onmouseout="this.style.background='rgba(80,140,200,0.10)'">
+          Ⅳ Inertial Mass
+        </a>
+        <a href="st_flm01.html" target="_blank"
+           style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;
+                  background:rgba(80,140,200,0.10);border:1px solid rgba(80,140,200,0.30);
+                  border-radius:4px;color:#7ab4e0;font-size:13px;font-family:Inter,sans-serif;
+                  text-decoration:none;transition:all 0.2s;"
+           onmouseover="this.style.background='rgba(80,140,200,0.20)'"
+           onmouseout="this.style.background='rgba(80,140,200,0.10)'">
+          ⧉ FLM01 · The 28D State
+        </a>
+        <a href="st_paradox_census.html" target="_blank"
+           style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;
+                  background:rgba(212,160,92,0.14);border:1px solid rgba(212,160,92,0.45);
+                  border-radius:4px;color:#8a6d1f;font-size:13px;font-family:Inter,sans-serif;
+                  font-weight:600;text-decoration:none;transition:all 0.2s;"
+           onmouseover="this.style.background='rgba(212,160,92,0.26)'"
+           onmouseout="this.style.background='rgba(212,160,92,0.14)'">
+          ⚖ The Paradox Census
+        </a>
+        <a href="st_magic_numbers.html" target="_blank"
+           style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;
+                  background:rgba(212,160,92,0.14);border:1px solid rgba(212,160,92,0.45);
+                  border-radius:4px;color:#8a6d1f;font-size:13px;font-family:Inter,sans-serif;
+                  font-weight:600;text-decoration:none;transition:all 0.2s;"
+           onmouseover="this.style.background='rgba(212,160,92,0.26)'"
+           onmouseout="this.style.background='rgba(212,160,92,0.14)'">
+          ✦ NP33 · The Magic Numbers
+        </a>
+        <a href="st_ring_moons.html" target="_blank"
+           style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;
+                  background:rgba(212,160,92,0.14);border:1px solid rgba(212,160,92,0.45);
+                  border-radius:4px;color:#8a6d1f;font-size:13px;font-family:Inter,sans-serif;
+                  font-weight:600;text-decoration:none;transition:all 0.2s;"
+           onmouseover="this.style.background='rgba(212,160,92,0.26)'"
+           onmouseout="this.style.background='rgba(212,160,92,0.14)'">
+          ◌ GOM24 · The Ring Moons
+        </a>
+        <a href="flm02_scroller.html" target="_blank"
+           style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;
+                  background:rgba(80,140,200,0.10);border:1px solid rgba(80,140,200,0.30);
+                  border-radius:4px;color:#7ab4e0;font-size:13px;font-family:Inter,sans-serif;
+                  text-decoration:none;transition:all 0.2s;"
+           onmouseover="this.style.background='rgba(80,140,200,0.20)'"
+           onmouseout="this.style.background='rgba(80,140,200,0.10)'">
+          ⧉ FLM02 · Granular Pulse
+        </a>
+        <a href="ppt01_scroller.html" target="_blank"
+           style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;
+                  background:rgba(80,140,200,0.10);border:1px solid rgba(80,140,200,0.30);
+                  border-radius:4px;color:#7ab4e0;font-size:13px;font-family:Inter,sans-serif;
+                  text-decoration:none;transition:all 0.2s;"
+           onmouseover="this.style.background='rgba(80,140,200,0.20)'"
+           onmouseout="this.style.background='rgba(80,140,200,0.10)'">
+          ⚛ PPT01 · Vortex Quantisation
+        </a>
+        <a href="ppt02_scroller.html" target="_blank"
+           style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;
+                  background:rgba(80,140,200,0.10);border:1px solid rgba(80,140,200,0.30);
+                  border-radius:4px;color:#7ab4e0;font-size:13px;font-family:Inter,sans-serif;
+                  text-decoration:none;transition:all 0.2s;"
+           onmouseover="this.style.background='rgba(80,140,200,0.20)'"
+           onmouseout="this.style.background='rgba(80,140,200,0.10)'">
+          α PPT02 · Fine Structure
+        </a>
+        <a href="ppt04_scroller.html" target="_blank"
+           style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;
+                  background:rgba(80,140,200,0.10);border:1px solid rgba(80,140,200,0.30);
+                  border-radius:4px;color:#7ab4e0;font-size:13px;font-family:Inter,sans-serif;
+                  text-decoration:none;transition:all 0.2s;"
+           onmouseover="this.style.background='rgba(80,140,200,0.20)'"
+           onmouseout="this.style.background='rgba(80,140,200,0.10)'">
+          ν PPT04 · Neutrino Moment
+        </a>
+        <a href="ppt05_scroller.html" target="_blank"
+           style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;
+                  background:rgba(80,140,200,0.10);border:1px solid rgba(80,140,200,0.30);
+                  border-radius:4px;color:#7ab4e0;font-size:13px;font-family:Inter,sans-serif;
+                  text-decoration:none;transition:all 0.2s;"
+           onmouseover="this.style.background='rgba(80,140,200,0.20)'"
+           onmouseout="this.style.background='rgba(80,140,200,0.10)'">
+          σ PPT05 · Trefoil Confinement
+        </a>
+        <a href="ppt06_scroller.html" target="_blank"
+           style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;
+                  background:rgba(80,140,200,0.10);border:1px solid rgba(80,140,200,0.30);
+                  border-radius:4px;color:#7ab4e0;font-size:13px;font-family:Inter,sans-serif;
+                  text-decoration:none;transition:all 0.2s;"
+           onmouseover="this.style.background='rgba(80,140,200,0.20)'"
+           onmouseout="this.style.background='rgba(80,140,200,0.10)'">
+          T PPT06 · Spation Traction
+        </a>
+        <a href="emc01_scroller.html" target="_blank"
+           style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;
+                  background:rgba(80,140,200,0.10);border:1px solid rgba(80,140,200,0.30);
+                  border-radius:4px;color:#7ab4e0;font-size:13px;font-family:Inter,sans-serif;
+                  text-decoration:none;transition:all 0.2s;"
+           onmouseover="this.style.background='rgba(80,140,200,0.20)'"
+           onmouseout="this.style.background='rgba(80,140,200,0.10)'">
+          ƒ EMC01 · Transfer Function
+        </a>
+        <a href="aps01_scroller.html" target="_blank"
+           style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;
+                  background:rgba(80,140,200,0.10);border:1px solid rgba(80,140,200,0.30);
+                  border-radius:4px;color:#7ab4e0;font-size:13px;font-family:Inter,sans-serif;
+                  text-decoration:none;transition:all 0.2s;"
+           onmouseover="this.style.background='rgba(80,140,200,0.20)'"
+           onmouseout="this.style.background='rgba(80,140,200,0.10)'">
+          λ APS01 · Emissions
+        </a>
+        <a href="aps02_scroller.html" target="_blank"
+           style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;
+                  background:rgba(80,140,200,0.10);border:1px solid rgba(80,140,200,0.30);
+                  border-radius:4px;color:#7ab4e0;font-size:13px;font-family:Inter,sans-serif;
+                  text-decoration:none;transition:all 0.2s;"
+           onmouseover="this.style.background='rgba(80,140,200,0.20)'"
+           onmouseout="this.style.background='rgba(80,140,200,0.10)'">
+          D APS02 · Emission Prediction
+        </a>
+        <a href="st_gom_gravity.html" target="_blank"
+           style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;
+                  background:rgba(80,140,200,0.10);border:1px solid rgba(80,140,200,0.30);
+                  border-radius:4px;color:#7ab4e0;font-size:13px;font-family:Inter,sans-serif;
+                  text-decoration:none;transition:all 0.2s;"
+           onmouseover="this.style.background='rgba(80,140,200,0.20)'"
+           onmouseout="this.style.background='rgba(80,140,200,0.10)'">
+          ϟ GOM · Gravity Without G
+        </a>
+        <a href="depth_closure_scroller.html" target="_blank"
+           style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;
+                  background:rgba(80,140,200,0.10);border:1px solid rgba(80,140,200,0.30);
+                  border-radius:4px;color:#7ab4e0;font-size:13px;font-family:Inter,sans-serif;
+                  text-decoration:none;transition:all 0.2s;"
+           onmouseover="this.style.background='rgba(80,140,200,0.20)'"
+           onmouseout="this.style.background='rgba(80,140,200,0.10)'">
+          z Depth–Closure Theorem
+        </a>
+        <a href="laws_scroller.html" target="_blank"
+           style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;
+                  background:rgba(80,140,200,0.10);border:1px solid rgba(80,140,200,0.30);
+                  border-radius:4px;color:#7ab4e0;font-size:13px;font-family:Inter,sans-serif;
+                  text-decoration:none;transition:all 0.2s;"
+           onmouseover="this.style.background='rgba(80,140,200,0.20)'"
+           onmouseout="this.style.background='rgba(80,140,200,0.10)'">
+          Ⅵ The Six Laws · full scroller
+        </a>
+        <a href="flm01_scroller.html" target="_blank"
+           style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;
+                  background:rgba(80,140,200,0.10);border:1px solid rgba(80,140,200,0.30);
+                  border-radius:4px;color:#7ab4e0;font-size:13px;font-family:Inter,sans-serif;
+                  text-decoration:none;transition:all 0.2s;"
+           onmouseover="this.style.background='rgba(80,140,200,0.20)'"
+           onmouseout="this.style.background='rgba(80,140,200,0.10)'">
+          ⧉ FLM01 · 28D State (long form)
+        </a>
+        <a href="benchmarks_scroller.html" target="_blank"
+           style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;
+                  background:rgba(80,140,200,0.10);border:1px solid rgba(80,140,200,0.30);
+                  border-radius:4px;color:#7ab4e0;font-size:13px;font-family:Inter,sans-serif;
+                  text-decoration:none;transition:all 0.2s;"
+           onmouseover="this.style.background='rgba(80,140,200,0.20)'"
+           onmouseout="this.style.background='rgba(80,140,200,0.10)'">
+          𝔅 Benchmarks B01–B38
+        </a>
+      </div>
+      <p style="margin-top:var(--sp-xl);display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="paper-atomicus.html" target="_blank" style="display:inline-flex;align-items:center;padding:9px 16px;border:1px solid var(--mint);border-radius:4px;color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;text-decoration:none;">peer review paper for submission · ATOMICUS</a>
+        <a href="paper-05-nuclear.html" target="_blank" style="display:inline-flex;align-items:center;padding:9px 16px;border:1px solid var(--mint);border-radius:4px;color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;text-decoration:none;">peer review paper for submission · Nuclear Physics</a>
+        <a href="paper-16-chemistry.html" target="_blank" style="display:inline-flex;align-items:center;padding:9px 16px;border:1px solid var(--mint);border-radius:4px;color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;text-decoration:none;">peer review paper for submission · Chemistry &amp; Molecular Bonding</a>
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════ CH.4b — ATOMICUS LAB ═══════════════════ -->
+  <section id="lab" class="chapter chapter--lab" style="padding:0;overflow:hidden;">
+    <div class="chapter__inner reveal" style="max-width:100%;padding:var(--sp-2xl) var(--sp-xl) var(--sp-lg);">
+      <div class="chapter__num">Chapter Four — Interactive</div>
+      <h2 class="chapter__title">Atomicus Lab</h2>
+      <p style="max-width:var(--content-width);color:var(--ink-muted);margin-bottom:var(--sp-lg);" data-i18n="lab_intro">
+        The grammar map below plots every known isotope in construction-grammar space.
+        Each dot is one isotope: its horizontal position is the deuteron excess
+        (n<sub>d</sub>&nbsp;−&nbsp;n<sub>t</sub>), its vertical position is the total
+        subunit count (n<sub>d</sub>&nbsp;+&nbsp;n<sub>t</sub>). Stable isotopes glow;
+        unstable positions fade by half-life tier. Toggle overlays to reveal electron
+        shells, magnetic character, decay vectors, and the golden n<sub>d</sub> = n<sub>t</sub>
+        boundary. Pan with middle-drag · zoom with scroll · hover any dot for detail.
+      </p>
+      <div style="display:flex;gap:var(--sp-sm);margin-bottom:var(--sp-md);flex-wrap:wrap;">
+        <a href="atomicus-lab.html" target="_blank"
+           style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;
+                  background:rgba(212,160,92,0.12);border:1px solid rgba(212,160,92,0.35);
+                  border-radius:4px;color:#d4a05c;font-size:13px;font-family:Inter,sans-serif;
+                  text-decoration:none;transition:all 0.2s;"
+           onmouseover="this.style.background='rgba(212,160,92,0.22)'"
+           onmouseout="this.style.background='rgba(212,160,92,0.12)'">
+          ↗️ Open full screen
+        </a>
+        <a href="atomicus-3d.html" target="_blank"
+           style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;
+                  background:rgba(67,214,178,.10);border:1px solid rgba(67,214,178,.34);
+                  border-radius:4px;color:#43d6b2;font-size:13px;font-family:Inter,sans-serif;
+                  text-decoration:none;transition:all .2s;">
+          ◈ Nucleus-to-Atom 3D
+        </a>
+        <a href="nuclear-packing-sequencer.html" target="_blank"
+           style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;
+                  background:rgba(80,140,200,0.10);border:1px solid rgba(80,140,200,0.30);
+                  border-radius:4px;color:#7ab4e0;font-size:13px;font-family:Inter,sans-serif;
+                  text-decoration:none;transition:all 0.2s;"
+           onmouseover="this.style.background='rgba(80,140,200,0.20)'"
+           onmouseout="this.style.background='rgba(80,140,200,0.10)'">
+          ⚛️ Nuclear Packing Sequencer
+        </a>
+        <a href="nuclear-packing-walkthrough.html" target="_blank"
+           style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;
+                  background:rgba(80,140,200,0.10);border:1px solid rgba(80,140,200,0.30);
+                  border-radius:4px;color:#7ab4e0;font-size:13px;font-family:Inter,sans-serif;
+                  text-decoration:none;transition:all 0.2s;"
+           onmouseover="this.style.background='rgba(80,140,200,0.20)'"
+           onmouseout="this.style.background='rgba(80,140,200,0.10)'">
+          Packing Walkthrough
+        </a>
+        <a href="atomicus-fission-impact.html" target="_blank"
+           style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;
+                  background:rgba(192,80,58,0.10);border:1px solid rgba(192,80,58,0.30);
+                  border-radius:4px;color:#c0503a;font-size:13px;font-family:Inter,sans-serif;
+                  text-decoration:none;transition:all 0.2s;"
+           onmouseover="this.style.background='rgba(192,80,58,0.20)'"
+           onmouseout="this.style.background='rgba(192,80,58,0.10)'">
+          Fission — flay, not split
+        </a>
+      </div>
+    </div>
+    <!-- Full-width iframe embed -->
+    <div style="width:100%;height:88vh;position:relative;border-top:1px solid rgba(255,255,255,0.07);">
+      <iframe
+        src="atomicus-lab.html"
+        data-sdt-visibility
+        style="width:100%;height:100%;border:none;display:block;"
+        loading="lazy"
+        title="Atomicus Lab — isotope grammar map"
+        id="atomicusLabFrame"
+      ></iframe>
+    </div>
+    <div style="padding:var(--sp-sm) var(--sp-xl);background:rgba(0,0,0,0.4);
+                border-top:1px solid rgba(255,255,255,0.05);
+                display:flex;gap:var(--sp-xl);flex-wrap:wrap;">
+      <span style="font-size:11px;color:var(--ink-whisper);font-family:Inter,sans-serif;">
+        <strong style="color:var(--ink-soft);">Overlays:</strong>
+        Element labels · Shell bands · Magnetic character · Golden boundary (nₙ=nₜ)
+      </span>
+      <span style="font-size:11px;color:var(--ink-whisper);font-family:Inter,sans-serif;">
+        <strong style="color:var(--ink-soft);">Grammar Sheets:</strong>
+        Missing α-structures · Half-life tiers (1a–1j) · He-3 grammar · Decay vectors
+      </span>
+      <span style="font-size:11px;color:var(--ink-whisper);font-family:Inter,sans-serif;">
+        <strong style="color:var(--ink-soft);">Controls:</strong>
+        Scroll to zoom · Middle-drag to pan · Morph slider to straighten
+      </span>
+    </div>
+    <div style="padding:var(--sp-lg) var(--sp-xl);display:flex;gap:10px;flex-wrap:wrap;">
+      <a href="paper-lab.html" target="_blank" style="display:inline-flex;align-items:center;padding:9px 16px;border:1px solid var(--mint);border-radius:4px;color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;text-decoration:none;">peer review paper for submission · The Census Instrument</a>
+      <a href="paper-04-atomic-spectroscopy.html" target="_blank" style="display:inline-flex;align-items:center;padding:9px 16px;border:1px solid var(--mint);border-radius:4px;color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;text-decoration:none;">peer review paper for submission · Atomic Physics &amp; Spectroscopy</a>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════ CH.5 — ENGINE ═══════════════════════ -->
+  <section id="engine" class="chapter chapter--deep">
+    <div class="chapter__inner reveal">
+      <div class="chapter__num">Chapter Five</div>
+      <h2 class="chapter__title">The Engine</h2>
+      <p class="chapter__lead" data-i18n="e_lead">A C++20 header-only library encoding the complete theoretical framework. Zero external dependencies. Scales sit as they are: ℓ<sub>P</sub> the dimensional seed, unit bridges, one mass/action seat, hydrogen’s koppa rung, a FIRAS clock. <code>sdt::laws::measured</code> is the engine’s CODATA/FIRAS lookup.</p>
+
+      <p data-i18n="e_intro">The single source of truth is <code style="color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:0.9em;">laws.hpp</code> — a constexpr-heavy header containing all six laws, the bridge equations, atomic and nuclear domain functions, and the koppa derivation. The engine computes orbital mechanics without G, nuclear structure without quarks, and cosmological observables without dark components.</p>
+
+      <div class="code-window">
+        <div class="code-bar">
+          <span class="code-dot code-dot--r"></span>
+          <span class="code-dot code-dot--y"></span>
+          <span class="code-dot code-dot--g"></span>
+          <span class="code-filename">Engine/include/sdt/laws.hpp</span>
+        </div>
+        <div class="code-body"><span class="s-kw">namespace</span> <span class="s-ns">sdt::laws</span> {
+
+  <span class="s-cm">// Engine lookup (CODATA/FIRAS). Not a derivation basis of underived inputs.</span>
+  <span class="s-kw">namespace</span> <span class="s-ns">measured</span> {
+    <span class="s-kw">inline constexpr double</span> c     = <span class="s-num">299'792'458.0</span>;       <span class="s-cm">// m/s</span>
+    <span class="s-kw">inline constexpr double</span> hbar  = <span class="s-num">1.054571817e-34</span>;    <span class="s-cm">// J·s</span>
+    <span class="s-kw">inline constexpr double</span> l_P   = <span class="s-num">1.616255e-35</span>;      <span class="s-cm">// m</span>
+    <span class="s-kw">inline constexpr double</span> k_B   = <span class="s-num">1.380649e-23</span>;      <span class="s-cm">// J/K</span>
+    <span class="s-kw">inline constexpr double</span> T_CMB = <span class="s-num">2.7255</span>;             <span class="s-cm">// K</span>
+    <span class="s-kw">inline constexpr double</span> alpha = <span class="s-num">7.2973525693e-3</span>;   <span class="s-cm">// fine structure</span>
+    <span class="s-kw">inline constexpr double</span> m_e   = <span class="s-num">9.1093837015e-31</span>;  <span class="s-cm">// kg</span>
+    <span class="s-kw">inline constexpr double</span> m_p   = <span class="s-num">1.67262192369e-27</span>; <span class="s-cm">// kg</span>
+    <span class="s-kw">inline constexpr double</span> R_p   = <span class="s-num">8.414e-16</span>;         <span class="s-cm">// m (proton)</span>
+  }
+
+  <span class="s-cm">// Law III — The Occlusion Force</span>
+  <span class="s-kw">namespace</span> <span class="s-ns">law_III</span> {
+    [[<span class="s-attr">nodiscard</span>]] <span class="s-kw">inline auto</span>
+    <span class="s-fn">F_occlusion</span>(<span class="s-kw">double</span> R1,
+        <span class="s-kw">double</span> R2, <span class="s-kw">double</span> r)
+    -> <span class="s-kw">double</span> {
+      <span class="s-kw">return</span> (std::numbers::pi/<span class="s-num">4.0</span>) * P_eff
+           * R1*R1 * R2*R2 / (r*r);
+    }
+  }
+
+  <span class="s-cm">// Bridge — The Koppa (replaces GM/c²)</span>
+  <span class="s-kw">namespace</span> <span class="s-ns">bridge</span> {
+    [[<span class="s-attr">nodiscard</span>]] <span class="s-kw">inline constexpr auto</span>
+    <span class="s-fn">koppa</span>(<span class="s-kw">double</span> v, <span class="s-kw">double</span> R) -> <span class="s-kw">double</span> {
+      <span class="s-kw">return</span> v*v * R / (measured::c * measured::c);
+    }
+
+    <span class="s-cm">// Orbital velocity from a surface gear k and radius R</span>
+    [[<span class="s-attr">nodiscard</span>]] <span class="s-kw">inline auto</span>
+    <span class="s-fn">v_orbital</span>(<span class="s-kw">double</span> k,
+        <span class="s-kw">double</span> R, <span class="s-kw">double</span> r)
+    -> <span class="s-kw">double</span> {
+      <span class="s-kw">return</span> (measured::c/k) * std::sqrt(R/r);
+    }
+  }
+}</div>
+      </div>
+
+      <div class="modules">
+        <span class="module-badge">laws.hpp</span>
+        <span class="module-badge">state28d.hpp</span>
+        <span class="module-badge">cosmology.hpp</span>
+        <span class="module-badge">neutrino.hpp</span>
+        <span class="module-badge">magnetosphere.hpp</span>
+      </div>
+
+      <div class="margin-note"><strong>Live executable ledger:</strong> <span data-sdt-benchmark-summary>66/66 earned predictions passed · 19 IDENTITY · 0 CALIBRATED · 3 PENDING note-only</span>. The benchmark run exports this page's machine-readable law data only after executing the suite.</div>
+      <div class="margin-note">Standalone MSVC build: <code style="color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:0.85em;">cl /std:c++20 /EHsc /utf-8 /I Engine\include Benchmarks\B01_B25\benchmarks_suite.cpp</code></div>
+      <p style="margin-top:var(--sp-xl);display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="paper-engine.html" target="_blank" style="display:inline-flex;align-items:center;padding:9px 16px;border:1px solid var(--mint);border-radius:4px;color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;text-decoration:none;">peer review paper for submission · The Engine</a>
+        <a href="paper-01-foundations.html" target="_blank" style="display:inline-flex;align-items:center;padding:9px 16px;border:1px solid var(--mint);border-radius:4px;color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;text-decoration:none;">peer review paper for submission · Foundations &amp; Lattice Mechanics</a>
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════ CH.6 — COSMOLOGY ═══════════════════════ -->
+  <section id="cosmology" class="chapter">
+    <div class="chapter__inner reveal">
+      <div class="chapter__num">Chapter Six</div>
+      <h2 class="chapter__title">Cosmology Without Dark Components</h2>
+      <p class="chapter__lead">SDT tests a non-expanding pressure-and-depth account against the same observations, with its failed routes retained in the record.</p>
+
+      <div class="cosmo-grid">
+        <div class="cosmo-card">
+          <h4 class="cosmo-card__title">The Clearing</h4>
+          <div class="cosmo-card__body">The CMB is not an afterglow. It is the operating pressure of the lattice, still arriving — microwave here, infrared at this cycle’s radiation wall. Shapiro delay reads the pressure-speed gradient of excluded Planck spheres; the same identities reverse-map the sky to gamma, where far-frame light stops. Heat death is that pressure gone: gravity shuts off, matter expands. The dump recharges until c<sub>far</sub> → 0. The bang is depinning, again. Fire-time pending. <a href="universe-lifecycle.html" style="color:var(--copper)">Walk the life →</a></div>
+        </div>
+        <div class="cosmo-card">
+          <h4 class="cosmo-card__title">Galaxy Rotation Curves</h4>
+          <div class="cosmo-card__body" data-i18n="c_rot"><strong>Status: OPEN.</strong> The eclipse-saturation rotation model failed the real SPARC data on direct rerun (RMS 66%, BTFR slope 1.33 — GD05; the earlier "success" was a circular mock). What stands: the derived acceleration floor a₀ = cH₀/2π and the 8.8% cross-scale collapse, re-earned on real rotation data with a control 6× worse. The crossover's SHAPE is still borrowed, and full galactic rotation is unsolved on SDT's books — said here, not in a footnote.</div>
+        </div>
+        <div class="cosmo-card">
+          <h4 class="cosmo-card__title">Redshift Without Recession</h4>
+          <div class="cosmo-card__body" data-i18n="c_z">Redshift is two native effects and no recession: a depth stamp at emission (z = ϟ/r) plus a propagation squeeze across the Clearing, in octaves — 1+z = 2^Δn, with the CMB 10.10 octaves down. The lattice pressure runs P(z) = P<sub>conv</sub>(1+z)⁴, which is a shared-input identity with what an expanding picture would call "radiation era" — same numbers, different building, not independent evidence. No dark energy enters anywhere.</div>
+        </div>
+        <div class="cosmo-card cosmo-card--span">
+          <h4 class="cosmo-card__title">The Hubble Tension</h4>
+          <div class="cosmo-card__body">
+            <p>In SDT the "tension" is a conflation: one number, H₀, is being asked to carry two different mechanisms — the emission-depth stamp and the propagation squeeze. Probes weight the two differently, so they land in a spread rather than on a point:</p>
+            <div class="hubble-bars">
+              <div class="hubble-bar">
+                <span class="hubble-bar__label">Planck</span>
+                <div class="hubble-bar__track"><div class="hubble-bar__fill" data-w="82"></div></div>
+                <span class="hubble-bar__val">67.4</span>
+              </div>
+              <div class="hubble-bar">
+                <span class="hubble-bar__label">TRGB</span>
+                <div class="hubble-bar__track"><div class="hubble-bar__fill" data-w="88"></div></div>
+                <span class="hubble-bar__val">70.0</span>
+              </div>
+              <div class="hubble-bar">
+                <span class="hubble-bar__label">Lensing</span>
+                <div class="hubble-bar__track"><div class="hubble-bar__fill" data-w="92"></div></div>
+                <span class="hubble-bar__val">71.6</span>
+              </div>
+              <div class="hubble-bar">
+                <span class="hubble-bar__label">SH0ES</span>
+                <div class="hubble-bar__track"><div class="hubble-bar__fill" data-w="100"></div></div>
+                <span class="hubble-bar__val">73.0</span>
+              </div>
+            </div>
+            <p style="font-size:var(--fs-sm);color:var(--ink-faint);font-style:italic;margin-bottom:0;"><strong>Status: hypothesis.</strong> The old isotropic CR09 route was falsified (0/122 transition depths). The two-component ordering remains a live test; supernova Hubble-diagram fits currently favour ΛCDM by Δχ² ≈ 90–226.</p>
+          </div>
+        </div>
+      </div>
+
+      <figure style="margin:var(--sp-xl) 0;text-align:center;">
+        <svg id="atlasOctaves" viewBox="0 0 640 200" style="max-width:640px;width:100%;height:auto;touch-action:none;cursor:grab" aria-label="Drag the photon across the Clearing — the wave halves each octave; nothing recedes"></svg>
+        <figcaption style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-faint);margin-top:8px;">drag the photon — 1+z = 2^Δn, the ladder is octaves, not recession · the CMB sits 10.10 octaves down</figcaption>
+      </figure>
+
+      <!-- CQ06 Investigation Link -->
+      <div style="margin:var(--sp-xl) 0;border:1px solid rgba(56,232,216,.25);border-radius:8px;background:rgba(56,232,216,.04);padding:var(--sp-lg) var(--sp-xl);display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;">
+        <div>
+          <div style="font-size:10px;font-family:'JetBrains Mono',monospace;color:#38e8d8;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px;">CQ06 · Investigation · Superseded — kept as history</div>
+          <div style="font-family:'Source Serif 4','Georgia',serif;font-size:1.15em;font-weight:600;color:var(--ink);margin-bottom:6px;">The Eclipse Saturation Model</div>
+          <div style="font-size:var(--fs-sm);color:var(--ink-muted);max-width:520px;line-height:1.65;">The original interactive derivation, kept on display with its assessment attached: on direct rerun against real SPARC rotation curves the model FAILED (RMS 66%, BTFR slope 1.33 — GD05). Galactic rotation is OPEN on SDT's books. The page remains as the historical derivation and as proof the theory grades itself.</div>
+        </div>
+        <a href="cq06-eclipse.html" target="_blank"
+           style="display:inline-flex;align-items:center;gap:8px;padding:11px 22px;
+                  background:rgba(56,232,216,.12);border:1px solid rgba(56,232,216,.4);
+                  border-radius:6px;color:#38e8d8;font-size:13px;font-family:'Inter',sans-serif;
+                  font-weight:500;text-decoration:none;white-space:nowrap;transition:all .2s;"
+           onmouseover="this.style.background='rgba(56,232,216,.22)'"
+           onmouseout="this.style.background='rgba(56,232,216,.12)'">
+          ↗ Open Investigation
+        </a>
+      </div>
+
+      <h3 style="font-family:'Source Serif 4','Georgia',serif;font-size:var(--fs-lg);margin:var(--sp-2xl) 0 var(--sp-lg);font-weight:600;">What SDT replaces</h3>
+      <div class="replaces-list">
+        <div class="replaces-item">
+          <div class="replaces-item__concept">Dark Matter</div>
+          <div class="replaces-item__with">Collective displacement + the derived floor a₀ = cH₀/2π (rotation shape: OPEN)</div>
+        </div>
+        <div class="replaces-item">
+          <div class="replaces-item__concept">Dark Energy</div>
+          <div class="replaces-item__with">Pressure-gradient nonlinearity</div>
+        </div>
+        <div class="replaces-item">
+          <div class="replaces-item__concept">Gravitational Constant</div>
+          <div class="replaces-item__with">Koppa: ϟ = v²R/c²</div>
+        </div>
+        <div class="replaces-item">
+          <div class="replaces-item__concept">Quantum Wavefunctions</div>
+          <div class="replaces-item__with">Definite tours, strobe-averaged into "clouds"</div>
+        </div>
+        <div class="replaces-item">
+          <div class="replaces-item__concept">Quarks &amp; Gluons</div>
+          <div class="replaces-item__with">Trefoil vortex topology</div>
+        </div>
+        <div class="replaces-item">
+          <div class="replaces-item__concept">Curved Spacetime</div>
+          <div class="replaces-item__with">Pressure gradients in flat medium</div>
+        </div>
+      </div>
+      <p style="margin-top:var(--sp-xl);display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="paper-cosmology.html" target="_blank" style="display:inline-flex;align-items:center;padding:9px 16px;border:1px solid var(--mint);border-radius:4px;color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;text-decoration:none;">peer review paper for submission · Cosmology Without Dark Components</a>
+        <a href="paper-06-gravitation.html" target="_blank" style="display:inline-flex;align-items:center;padding:9px 16px;border:1px solid var(--mint);border-radius:4px;color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;text-decoration:none;">peer review paper for submission · Gravitation &amp; Orbital Mechanics</a>
+        <a href="paper-07-cosmology.html" target="_blank" style="display:inline-flex;align-items:center;padding:9px 16px;border:1px solid var(--mint);border-radius:4px;color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;text-decoration:none;">peer review paper for submission · Cosmology &amp; Redshift</a>
+        <a href="paper-08-galactic.html" target="_blank" style="display:inline-flex;align-items:center;padding:9px 16px;border:1px solid var(--mint);border-radius:4px;color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;text-decoration:none;">peer review paper for submission · Galactic Dynamics</a>
+        <a href="paper-09-stellar.html" target="_blank" style="display:inline-flex;align-items:center;padding:9px 16px;border:1px solid var(--mint);border-radius:4px;color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;text-decoration:none;">peer review paper for submission · Stellar Astrophysics &amp; Radiation</a>
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════ CH.7 — EXPERIMENTS ═══════════════════════ -->
+  <section id="experiments" class="chapter chapter--alt">
+    <div class="chapter__inner reveal">
+      <div class="chapter__num">Chapter Seven</div>
+      <h2 class="chapter__title">Falsifiable Predictions</h2>
+      <p class="chapter__lead">SDT carries numbered experiment specifications (E13–E111) spanning nuclear physics, cosmology, orbital mechanics, and electromagnetism. The theory is designed to break.</p>
+
+      <div class="exp-categories" id="expFilters">
+        <button class="exp-cat exp-cat--active" data-f="all">All</button>
+        <button class="exp-cat" data-f="validated">Already Testable</button>
+        <button class="exp-cat" data-f="moderate">Moderate</button>
+        <button class="exp-cat" data-f="frontier">Frontier</button>
+        <button class="exp-cat" data-f="extreme">Extreme</button>
+      </div>
+
+      <div class="exp-grid" id="expGrid">
+        <div class="exp-card" data-cat="validated">
+          <div class="exp-card__head">
+            <span class="exp-card__id">E24</span>
+            <span class="exp-card__diff exp-card__diff--validated">Testable</span>
+          </div>
+          <h4 class="exp-card__title">Mercury Perihelion Precession</h4>
+          <p class="exp-card__desc">The k-hierarchy returns 42.98 arcsec/century from ϟ = R/k², with G and M never written; the measured anomalous precession is 42.98. Convergent with GR — same number, half the furniture; the closure also recovers c itself to 0.0009%.</p>
+        </div>
+        <div class="exp-card" data-cat="validated">
+          <div class="exp-card__head">
+            <span class="exp-card__id">E47</span>
+            <span class="exp-card__diff exp-card__diff--validated">Testable</span>
+          </div>
+          <h4 class="exp-card__title">Gravitational Lensing</h4>
+          <p class="exp-card__desc">Light deflection at solar limb: 1.750 arcsec computed vs 1.751 measured. Derived from convergence gradient, not spacetime curvature.</p>
+        </div>
+        <div class="exp-card" data-cat="moderate">
+          <div class="exp-card__head">
+            <span class="exp-card__id">E46</span>
+            <span class="exp-card__diff exp-card__diff--moderate">Moderate</span>
+          </div>
+          <h4 class="exp-card__title">Galaxy Rotation Curves</h4>
+          <p class="exp-card__desc">Status: the eclipse rotation model FAILED real SPARC on direct rerun (GD05, RMS 66%). The derived floor a₀ = cH₀/2π and the 8.8% collapse stand; the rotation shape is OPEN.</p>
+        </div>
+        <div class="exp-card" data-cat="frontier">
+          <div class="exp-card__head">
+            <span class="exp-card__id">E22</span>
+            <span class="exp-card__diff exp-card__diff--frontier">Frontier</span>
+          </div>
+          <h4 class="exp-card__title">Casimir Vibration Test</h4>
+          <p class="exp-card__desc">SDT predicts mechanical signal propagation through vacuum between Casimir plates — sound through empty space via the lattice.</p>
+        </div>
+        <div class="exp-card" data-cat="frontier">
+          <div class="exp-card__head">
+            <span class="exp-card__id">E21</span>
+            <span class="exp-card__diff exp-card__diff--frontier">Frontier</span>
+          </div>
+          <h4 class="exp-card__title">Orbit Drop Test</h4>
+          <p class="exp-card__desc">Mass-independent lateral drift exceeding 10 km — a direct consequence of pressure-gradient mechanics incompatible with general relativity.</p>
+        </div>
+        <div class="exp-card" data-cat="validated">
+          <div class="exp-card__head">
+            <span class="exp-card__id">E07</span>
+            <span class="exp-card__diff exp-card__diff--validated">Testable</span>
+          </div>
+          <h4 class="exp-card__title">Primordial Lithium</h4>
+          <p class="exp-card__desc">The cosmological lithium problem resolved through α+d+t nuclear construction grammar constraints on light element formation.</p>
+        </div>
+        <div class="exp-card" data-cat="extreme">
+          <div class="exp-card__head">
+            <span class="exp-card__id">E100</span>
+            <span class="exp-card__diff exp-card__diff--extreme">Extreme</span>
+          </div>
+          <h4 class="exp-card__title">Lattice Dispersion</h4>
+          <p class="exp-card__desc">Frequency-dependent speed of light for gamma rays — if the lattice is discrete at Planck scale, propagation velocity should vary with wavelength at extreme energies.</p>
+        </div>
+        <div class="exp-card" data-cat="moderate">
+          <div class="exp-card__head">
+            <span class="exp-card__id">E97</span>
+            <span class="exp-card__diff exp-card__diff--moderate">Moderate</span>
+          </div>
+          <h4 class="exp-card__title">Earth Core Seismic Model</h4>
+          <p class="exp-card__desc">Displacement pressure predictions for seismic wave propagation through the inner core — testable against existing seismological data.</p>
+        </div>
+      </div>
+      <p style="margin-top:var(--sp-xl);display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="paper-experiments.html" target="_blank" style="display:inline-flex;align-items:center;padding:9px 16px;border:1px solid var(--mint);border-radius:4px;color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;text-decoration:none;">peer review paper for submission · Falsifiable Predictions</a>
+        <a href="paper-15-optics.html" target="_blank" style="display:inline-flex;align-items:center;padding:9px 16px;border:1px solid var(--mint);border-radius:4px;color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;text-decoration:none;">peer review paper for submission · Optics &amp; Photonics</a>
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════ CH.8 — GLOSSARY ═══════════════════════ -->
+  <section id="glossary" class="chapter">
+    <div class="chapter__inner">
+      <div class="chapter__num">Chapter Eight</div>
+      <h2 class="chapter__title">Glossary</h2>
+
+      <div class="glossary-search">
+        <input type="text" class="glossary-input" id="glossarySearch" placeholder="Search terms…" autocomplete="off">
+      </div>
+
+      <div class="glossary-grid" id="glossaryGrid">
+        <div class="gloss-entry" data-term="spation">
+          <h4 class="gloss-term">Spation</h4>
+          <p class="gloss-def">Individual element of the spatial lattice. Individually incompressible, collectively deformable. Structured at Planck-length scale (1.616 × 10⁻³⁵ m).</p>
+        </div>
+        <div class="gloss-entry" data-term="koppa">
+          <h4 class="gloss-term">Koppa (Ϟ)</h4>
+          <p class="gloss-def">ϟ is the ancient Greek k — same letter, same object. k = c/v is the gear; ϟ = R/k² = v²R/c² is that same gear read as a length on the boundary R. One number, in metres, carries a body's entire gravitational field — same formula for the proton and the Sun. Replaces GM/c² — no G, no kilograms, ever.</p>
+        </div>
+        <div class="gloss-entry" data-term="the clearing">
+          <h4 class="gloss-term">The Clearing</h4>
+          <p class="gloss-def">This cycle’s wall opening: the radiative boundary depins, infrared comes down, we sit in the microwave. Replaces a first-moment bang. The antecedent is the previous recharge. There is no first origin.</p>
+        </div>
+        <div class="gloss-entry" data-term="occlusion">
+          <h4 class="gloss-term">Occlusion</h4>
+          <p class="gloss-def">Matter blocking a fraction of convergent pressure from one direction, creating a net force toward the occluding body. The mechanism behind gravity, Coulomb force, and nuclear binding.</p>
+        </div>
+        <div class="gloss-entry" data-term="convergence">
+          <h4 class="gloss-term">Convergence</h4>
+          <p class="gloss-def">Inward-propagating pressure from all Planck shells to every point in space. Total burden: Φ = Nε ≈ 1.04 × 10⁻⁵⁶ J.</p>
+        </div>
+        <div class="gloss-entry" data-term="displacement">
+          <h4 class="gloss-term">Displacement</h4>
+          <p class="gloss-def">The volume of lattice a particle excludes. Determines both inertial mass (reorganisation cost) and gravitational mass (occlusion cross-section).</p>
+        </div>
+        <div class="gloss-entry" data-term="movement budget">
+          <h4 class="gloss-term">Movement Budget</h4>
+          <p class="gloss-def" data-i18n="g_budget">v²<sub>circ</sub> + v²<sub>trans</sub> = c². Every particle's internal circulation plus translational velocity sums to the speed of light squared.</p>
+        </div>
+        <div class="gloss-entry" data-term="wake tensor">
+          <h4 class="gloss-term">Wake Tensor</h4>
+          <p class="gloss-def">A vortex's pressure disturbance sorted by angular order ℓ — the lobe count of the wake. ℓ=1 carries Coulomb, ℓ=2 carries the magnetic dipole, ℓ≥3 carries the nuclear reach.</p>
+        </div>
+        <div class="gloss-entry" data-term="winding number">
+          <h4 class="gloss-term">Winding Number (W)</h4>
+          <p class="gloss-def">Topological classification of vortex structures. W=0: neutrino (open winding). W=1: electron (unknot, confined). W=3: proton (trefoil, protected). W=2 is an unknot — metastable only (≈0.1 GeV barrier, ~10⁻²¹ s), never observed. Higher odd knots (W=5, 7, …) are protected and await discovery.</p>
+        </div>
+        <div class="gloss-entry" data-term="eclipse saturation">
+          <h4 class="gloss-term">Eclipse Saturation</h4>
+          <p class="gloss-def">Historical model: a galactic disk's total occlusion saturating was proposed to flatten rotation curves. FAILED on direct rerun against real SPARC data (GD05: RMS 66%). Kept in the glossary because the theory keeps its assessments; galactic rotation is OPEN.</p>
+        </div>
+        <div class="gloss-entry" data-term="golden boundary">
+          <h4 class="gloss-term">Golden Boundary</h4>
+          <p class="gloss-def">Z = 79 (Gold). The first element where triton count exceeds deuteron count (39t vs 38d). The onset of topological instability in nuclear construction grammar.</p>
+        </div>
+        <div class="gloss-entry" data-term="transfer function">
+          <h4 class="gloss-term">Transfer Function (f)</h4>
+          <p class="gloss-def" data-i18n="g_transfer">Ratio P<sub>eff</sub> / P<sub>conv</sub> = 2.125 × 10⁻¹⁷. Maps convergence pressure to effective interaction pressure at atomic scale.</p>
+        </div>
+        <div class="gloss-entry" data-term="traction fraction">
+          <h4 class="gloss-term">Traction Ratio (T)</h4>
+          <p class="gloss-def">T = 3(W+1) = 12 for the proton: the mismatch between the angular rate the trefoil demands of a contact spation and the fastest the lattice can relay (ω_max = c/R). That slip is the mechanical origin of the wake's faces — Coulomb, magnetic, orbital entrainment. (Separately, the 1/3 in Law IV is the angular-averaging share: P_cf = P_conv/3.)</p>
+        </div>
+        <div class="gloss-entry" data-term="nuclear construction grammar">
+          <h4 class="gloss-term">Nuclear Construction Grammar</h4>
+          <p class="gloss-def" data-i18n="g_grammar">The decomposition of every nucleus Z ≥ 2 into 1 alpha core + n<sub>d</sub> deuterons + n<sub>t</sub> tritons, with n<sub>t</sub> = A−2Z and n<sub>d</sub> = 3Z−A−2. The counts are fixed by (Z, N) arithmetic — unique wherever both are non-negative — so the grammar's content is the structure built on it, not the counts themselves. ATOMICUS characterises 290 isotopes on this decomposition.</p>
+        </div>
+        <div class="gloss-entry" data-term="triton">
+          <h4 class="gloss-term">Triton</h4>
+          <p class="gloss-def" data-i18n="g_triton">One proton + two neutrons — the grammar's unbalanced cluster. One triton per excess neutron (n<sub>t</sub> = N − Z), each holding two neutrons: N = 2 + n<sub>d</sub> + 2n<sub>t</sub>. The count is bookkeeping of (Z, N); magnetism rules written in it restate the ledger and are claimed as nothing more.</p>
+        </div>
+        <div class="gloss-entry" data-term="electron capture">
+          <h4 class="gloss-term">Electron Capture (EC)</h4>
+          <p class="gloss-def" data-i18n="g_ec">When a nucleus built on a He-3 core (incomplete tetrahedron) captures an inner-shell electron, converting p → n and completing the alpha tetrahedron. Not random decay — geometric self-repair. EC isotopes use the alternate grammar: 1 He-3 + n<sub>d</sub> + n<sub>t</sub>.</p>
+        </div>
+        <div class="gloss-entry" data-term="spallation">
+          <h4 class="gloss-term">Spallation</h4>
+          <p class="gloss-def">High-energy collision that breaks structural bonds within a nucleus, knocking deuterons or tritons loose from the scaffold. If spallation exposes an incomplete core, it opens an electron capture pathway — a recombination route between construction lineages.</p>
+        </div>
+      </div>
+      <p style="margin-top:var(--sp-xl);"><a href="paper-glossary.html" target="_blank" style="display:inline-flex;align-items:center;padding:9px 16px;border:1px solid var(--mint);border-radius:4px;color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;text-decoration:none;">peer review paper for submission · Nomenclature &amp; Certification Standards</a></p>
+      <div style="margin-top:var(--sp-md);">
+        <div style="font-size:10px;font-family:'JetBrains Mono',monospace;color:var(--ink-muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px;">Peer review papers for submission · all sixteen practices</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <a href="paper-01-foundations.html" target="_blank" style="display:inline-flex;align-items:center;padding:8px 14px;border:1px solid var(--mint);border-radius:4px;color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.04em;text-decoration:none;">01 · Foundations &amp; Lattice Mechanics</a>
+        <a href="paper-02-particle-topology.html" target="_blank" style="display:inline-flex;align-items:center;padding:8px 14px;border:1px solid var(--mint);border-radius:4px;color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.04em;text-decoration:none;">02 · Particle Physics &amp; Topology</a>
+        <a href="paper-03-electromagnetism.html" target="_blank" style="display:inline-flex;align-items:center;padding:8px 14px;border:1px solid var(--mint);border-radius:4px;color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.04em;text-decoration:none;">03 · Electromagnetism &amp; Charge</a>
+        <a href="paper-04-atomic-spectroscopy.html" target="_blank" style="display:inline-flex;align-items:center;padding:8px 14px;border:1px solid var(--mint);border-radius:4px;color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.04em;text-decoration:none;">04 · Atomic Physics &amp; Spectroscopy</a>
+        <a href="paper-05-nuclear.html" target="_blank" style="display:inline-flex;align-items:center;padding:8px 14px;border:1px solid var(--mint);border-radius:4px;color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.04em;text-decoration:none;">05 · Nuclear Physics</a>
+        <a href="paper-06-gravitation.html" target="_blank" style="display:inline-flex;align-items:center;padding:8px 14px;border:1px solid var(--mint);border-radius:4px;color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.04em;text-decoration:none;">06 · Gravitation &amp; Orbital Mechanics</a>
+        <a href="paper-07-cosmology.html" target="_blank" style="display:inline-flex;align-items:center;padding:8px 14px;border:1px solid var(--mint);border-radius:4px;color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.04em;text-decoration:none;">07 · Cosmology &amp; Redshift</a>
+        <a href="paper-08-galactic.html" target="_blank" style="display:inline-flex;align-items:center;padding:8px 14px;border:1px solid var(--mint);border-radius:4px;color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.04em;text-decoration:none;">08 · Galactic Dynamics</a>
+        <a href="paper-09-stellar.html" target="_blank" style="display:inline-flex;align-items:center;padding:8px 14px;border:1px solid var(--mint);border-radius:4px;color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.04em;text-decoration:none;">09 · Stellar Astrophysics &amp; Radiation</a>
+        <a href="paper-10-fluid.html" target="_blank" style="display:inline-flex;align-items:center;padding:8px 14px;border:1px solid var(--mint);border-radius:4px;color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.04em;text-decoration:none;">10 · Fluid Dynamics</a>
+        <a href="paper-11-thermodynamics.html" target="_blank" style="display:inline-flex;align-items:center;padding:8px 14px;border:1px solid var(--mint);border-radius:4px;color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.04em;text-decoration:none;">11 · Thermodynamics &amp; Statistical Mechanics</a>
+        <a href="paper-12-condensed-matter.html" target="_blank" style="display:inline-flex;align-items:center;padding:8px 14px;border:1px solid var(--mint);border-radius:4px;color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.04em;text-decoration:none;">12 · Condensed Matter Physics</a>
+        <a href="paper-13-quantum-foundations.html" target="_blank" style="display:inline-flex;align-items:center;padding:8px 14px;border:1px solid var(--mint);border-radius:4px;color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.04em;text-decoration:none;">13 · Quantum Foundations &amp; Measurement</a>
+        <a href="paper-14-plasma-magnetism.html" target="_blank" style="display:inline-flex;align-items:center;padding:8px 14px;border:1px solid var(--mint);border-radius:4px;color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.04em;text-decoration:none;">14 · Plasma Physics &amp; Magnetism</a>
+        <a href="paper-15-optics.html" target="_blank" style="display:inline-flex;align-items:center;padding:8px 14px;border:1px solid var(--mint);border-radius:4px;color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.04em;text-decoration:none;">15 · Optics &amp; Photonics</a>
+        <a href="paper-16-chemistry.html" target="_blank" style="display:inline-flex;align-items:center;padding:8px 14px;border:1px solid var(--mint);border-radius:4px;color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.04em;text-decoration:none;">16 · Chemistry &amp; Molecular Bonding</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════ FOOTER ═══════════════════════ -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__grid">
+        <div>
+          <div class="footer__brand-name">Spatial <span>Displacement</span> Theory</div>
+          <p class="footer__brand-desc">James Christopher Tyndall<br>ORMUNDO GROUP PTY LTD<br>Melbourne, Australia</p>
+        </div>
+        <div>
+          <h4 class="footer__heading">Theory</h4>
+          <a href="#medium" class="footer__link">The Medium</a>
+          <a href="#laws" class="footer__link">Six Laws</a>
+          <a href="#topology" class="footer__link">Particle Topology</a>
+          <a href="#cosmology" class="footer__link">Cosmology</a>
+        </div>
+        <div>
+          <h4 class="footer__heading">Resources</h4>
+          <a href="#atomicus" class="footer__link">ATOMICUS</a>
+          <a href="#engine" class="footer__link">SDT Engine</a>
+          <a href="#experiments" class="footer__link">Experiments</a>
+          <a href="#glossary" class="footer__link">Glossary</a>
+        </div>
+        <div>
+          <h4 class="footer__heading">Technical</h4>
+          <a href="#" class="footer__link">Source Repository</a>
+          <a href="#" class="footer__link">Theory Compiler</a>
+          <a href="#" class="footer__link">Benchmark Suite</a>
+          <a href="#" class="footer__link">Publications</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>&copy; 2026 James Christopher Tyndall</span>
+        <span>Built with the SDT Engine</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="sdt-canon.js"></script>
+  <script src="main.js"></script>
+  <script>
+  /* mechanism interactives — shapes and directions, no widgets */
+  (function(){
+    "use strict";
+    var NS='http://www.w3.org/2000/svg';
+    function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e}
+    function tx(a,s){var e=el('text',a);e.textContent=s;return e}
+    function pt(svg,evt){var r=svg.getBoundingClientRect(),vb=svg.viewBox.baseVal;
+      return {x:(evt.clientX-r.left)/r.width*vb.width,y:(evt.clientY-r.top)/r.height*vb.height}}
+    function drag(svg,onMove,onDown){var on=false;
+      svg.addEventListener('pointerdown',function(e){on=true;svg.setPointerCapture&&svg.setPointerCapture(e.pointerId);
+        var p=pt(svg,e);if(onDown)onDown(p);onMove(p);e.preventDefault();});
+      svg.addEventListener('pointermove',function(e){if(on)onMove(pt(svg,e));});
+      window.addEventListener('pointerup',function(){on=false;});}
+
+    /* Six Laws — the one push, played live: two draggable bodies in the flood */
+    (function(){
+      var s=document.getElementById('atlasLawsPlay'); if(!s)return;
+      var fieldCv=document.getElementById('atlasLawsField'), ctlBar=document.getElementById('lawsCtl');
+      /* ═══════════════════════════════════════════════════════════════════
+         THE ONE PUSH — three bodies in an isotropic lattice.
+
+         The lattice is rotated 5° at a time about EVERY NODE, through the
+         hexagon's own 60° period. No special point, no special direction.
+         Lines run in from far outside the frame — the arrivals come from the
+         boundary of everything, not from the edge of a picture.
+
+         Matter interrupts the lattice; it does not warp it (only the limb
+         bends, by a hair). Where a line ends on a body it thickens INTO the
+         surface, gradually, over the half-chord the body cut out of it — so a
+         line striking dead centre swells over a full radius and a graze barely
+         lifts off a pixel. The net push on a body is the vector sum of those
+         landings. Bodies carry inertia, m ∝ displaced area.
+
+         Nothing here knows what gravity is. They fall together because each
+         stands in the others' weather.
+         ═══════════════════════════════════════════════════════════════════ */
+      var VW=1800, VH=1200, HALF=6000, SPACING=96, ROTSTEP=5, RESTITUTION=0.45;
+
+      var defs=el('defs',{}),mr=el('marker',{id:'alp-r',markerWidth:9,markerHeight:9,refX:7,refY:3,orient:'auto'});
+      mr.appendChild(el('path',{d:'M0,0 L6,3 L0,6 z',fill:'#b07430'}));defs.appendChild(mr);s.appendChild(defs);
+
+      /* every node of the base lattice is a centre in its own right */
+      var NODES=[], HSTEP=SPACING*Math.sqrt(3)/2;
+      for(var jj=-17;jj<=17;jj++) for(var ii=-17;ii<=17;ii++)
+        NODES.push({x:VW/2+(ii+(jj&1?0.5:0))*SPACING, y:VH/2+jj*HSTEP});
+      /* THE LATTICE'S OWN DRIFT. The system's centre is HELD at the middle of
+         the view. Its motion relative to the matrix is therefore shown directly:
+         as the MATRIX MOVING. Watch the grid stream past and you are
+         watching the system travel through it. Out where there is not a particle
+         within a billion parsecs the matrix is still there — change your motion
+         and it pushes back, and that push is your mass.
+         The offset wraps into one cell each frame. A lattice maps exactly onto
+         itself under a whole lattice vector, so the wrap is bit-for-bit
+         invisible: one continuum, built once, never reloaded, and no edges. */
+      var latt={x:0,y:0};
+      var LINES=[], BASEDIR={0:1,30:1,60:1,90:1,120:1,150:1}, OFFGAP=44;
+      for(var ang=0;ang<180;ang+=ROTSTEP){
+        var th=ang*Math.PI/180, ux=Math.cos(th), uy=Math.sin(th), nx=-uy, ny=ux;
+        var offs=NODES.map(function(P){return (P.x-VW/2)*nx+(P.y-VH/2)*ny;})
+                      .sort(function(a,b){return a-b;});
+        var last=-1e9, isBase=!!BASEDIR[ang];
+        for(var oi=0;oi<offs.length;oi++){
+          if(offs[oi]-last<OFFGAP) continue; last=offs[oi];
+          LINES.push({bx:VW/2+nx*offs[oi], by:VH/2+ny*offs[oi], ux:ux, uy:uy,
+                      base:isBase, dim:isBase?1:0.55, stop:[null,null]});
+        }
+      }
+
+      /* ── the bodies ── */
+      /* `on` is EXISTENCE, not visibility: a body switched off displaces
+         nothing, interrupts nothing, casts no shadow, receives no landings. */
+      var BOD=[
+        {n:'A',x:700, y:600,r:84,vx:0,vy:0,on:true},
+        {n:'B',x:1240,y:600,r:60,vx:0,vy:0,on:true},
+        {n:'C',x:960, y:300,r:44,vx:0,vy:0,on:false}
+      ];
+      /* ── DENSITY: mass is a COUNT of displaced medium, not an area.
+              N(R) = (R/r0)^3
+         so a body of the unit radius counts as exactly one, and the count is the
+         volume ratio — which IS the displacement, and therefore the mass. (An
+         earlier pass multiplied by the close-packing fraction pi/sqrt(18); that
+         answers a different question and made a unit ball weigh 0.74 of itself.
+         Withdrawn — displaced volume carries no packing fraction.)
+         Consequence, and intended: push goes as cross-section (R^2) while mass
+         goes as volume (R^3), so a is proportional to 1/R — SMALL BODIES
+         ACCELERATE MORE. That is the saturated regime, where a body is opaque
+         and its shadow is its silhouette. Equivalence returns in the transparent
+         regime, where the flood passes through and the shadow counts nucleons
+         rather than area, so F is proportional to mass. */
+      var R0=18, MASSK=0.00415;
+      function ballCount(R){ return Math.pow(R/R0,3); }
+      function massOf(b){ return MASSK*ballCount(b.r); }
+      var HOME=BOD.map(function(b){return {x:b.x,y:b.y,r:b.r};});
+      var opt={bary:false,lag:false,trails:false,run:true};
+      var trailPts=[[],[],[]];
+
+      var fa=[];
+      BOD.forEach(function(){ fa.push(s.appendChild(
+        el('line',{stroke:'#b07430','stroke-width':5,'marker-end':'url(#alp-r)'}))); });
+      var baryG=el('g',{});s.appendChild(baryG);
+      var lagG=el('g',{});s.appendChild(lagG);
+      var discs=BOD.map(function(){ return s.appendChild(el('circle',{fill:'#1d1f21'})); });
+      var tags=BOD.map(function(b){ return s.appendChild(tx({'text-anchor':'middle',
+        'font-family':'JetBrains Mono,monospace','font-size':'24px',fill:'#faf6ef'},b.n)); });
+      var read=tx({x:VW/2,y:52,'text-anchor':'middle','font-family':'JetBrains Mono,monospace',
+                   'font-size':'26px',fill:'#6b6f75'},'');s.appendChild(read);
+      var hold=null,NLAND=0;
+
+      function hits(L,o){
+        var cx=o.x-(L.bx+latt.x), cy=o.y-(L.by+latt.y);
+        var uc=cx*L.ux+cy*L.uy, pd=-cx*L.uy+cy*L.ux;
+        if(Math.abs(pd)>=o.r) return null;
+        var h=Math.sqrt(o.r*o.r-pd*pd);          /* HALF-CHORD — what the body cut out */
+        return {a:uc-h, b:uc+h, h:h, R:o.r, uc:uc, pd:Math.abs(pd)};
+      }
+      function pt(L,u,out){
+        var x=L.bx+latt.x+L.ux*u, y=L.by+latt.y+L.uy*u;
+        for(var q=0;q<BOD.length;q++){
+          var o=BOD[q]; if(!o.on) continue;
+          var ax=x-o.x, ay=y-o.y, rr=Math.hypot(ax,ay);
+          if(rr<=o.r||rr>o.r*1.5) continue;
+          var e=0.05*o.r*Math.exp(-(rr-o.r)/(0.30*o.r));   /* the limb, by a hair */
+          x+=ax/rr*e; y+=ay/rr*e;
+        }
+        out[0]=x; out[1]=y;
+      }
+
+      /* ── solve: interrupts, landings, summed push ── */
+      var NETF=BOD.map(function(){return {x:0,y:0};});
+      function solve(){
+        for(var b=0;b<BOD.length;b++){NETF[b].x=0;NETF[b].y=0;}
+        NLAND=0;
+        var H=[];
+        for(var i=0;i<LINES.length;i++){
+          var L=LINES[i];
+          for(var q=0;q<BOD.length;q++) H[q]=BOD[q].on?hits(L,BOD[q]):null;
+          var sF=HALF,sB=-HALF,iF=-1,iB=-1;
+          for(q=0;q<BOD.length;q++){ var hq=H[q]; if(!hq) continue;
+            if(hq.a<sF){sF=hq.a;iF=q;} if(hq.b>sB){sB=hq.b;iB=q;} }
+          L.sF=sF; L.sB=sB; L.wF=0; L.wB=0;
+          L.rampF=(iF>=0)?H[iF].h:0; L.rampB=(iB>=0)?H[iB].h:0;
+          for(var c=0;c<2;c++){
+            var u=c?sB:sF, bi=c?iB:iF, dir=c?-1:1;
+            if(bi<0) continue;
+            var o=BOD[bi], I=1;
+            for(q=0;q<BOD.length&&I>0;q++){
+              if(q===bi||!BOD[q].on) continue;
+              var ho=H[q];
+              if(ho){ var oa=dir>0?ho.a:ho.b;
+                if(dir>0?(oa<u):(oa>u)) I=0; }               /* shadowed outright */
+              else {                                          /* penumbra at the edge */
+                var oq=BOD[q], cx3=oq.x-L.bx, cy3=oq.y-L.by;
+                var pd3=Math.abs(-cx3*L.uy+cy3*L.ux), uc3=cx3*L.ux+cy3*L.uy;
+                if(dir>0?(uc3<u):(uc3>u)){
+                  var soft=(pd3-oq.r)/(0.45*oq.r);
+                  if(soft<1) I=Math.min(I,Math.max(0,soft));
+                }
+              }
+            }
+            if(I<=0.02) continue;
+            var P=[0,0]; pt(L,u,P);
+            var vx=P[0]-o.x, vy=P[1]-o.y, m=Math.hypot(vx,vy)||1;
+            var w=I*Math.abs(-(L.ux*vx/m+L.uy*vy/m));
+            if(w<0.02) continue;
+            if(dir>0) L.wF=w; else L.wB=w;
+            NLAND++;
+            NETF[bi].x+=L.ux*dir*w; NETF[bi].y+=L.uy*dir*w;
+          }
+        }
+      }
+
+      /* ── the shadow law for a vanishing probe: toward each body, ∝ asin(R/d).
+           This is the same law the lattice sum produces (verified: the summed
+           landings fall as 1/d to within ~10% across the field). Used only for
+           the inertial-null search, which needs thousands of evaluations. These
+           are not co-rotating Lagrange equilibria. ── */
+      function probe(px,py,out){
+        out.x=0; out.y=0;
+        for(var q=0;q<BOD.length;q++){
+          var o=BOD[q]; if(!o.on) continue;
+          var dx=o.x-px, dy=o.y-py, d=Math.hypot(dx,dy);
+          if(d<=o.r*1.02) { out.x=NaN; return; }
+          var mg=Math.asin(Math.min(0.999,o.r/d));
+          out.x+=dx/d*mg; out.y+=dy/d*mg;
+        }
+      }
+      function balancePoints(){
+        var found=[], f={x:0,y:0}, gx, gy;
+        for(gy=90;gy<VH-90;gy+=26) for(gx=90;gx<VW-90;gx+=26){
+          probe(gx,gy,f); if(isNaN(f.x)) continue;
+          var m0=Math.hypot(f.x,f.y);
+          if(m0>0.030) continue;
+          /* refine by descent on |F| */
+          var x=gx,y=gy,step=13;
+          for(var it=0;it<40;it++){
+            var best=null,bm=m0;
+            for(var a2=0;a2<8;a2++){
+              var th2=a2*Math.PI/4, nx2=x+Math.cos(th2)*step, ny2=y+Math.sin(th2)*step;
+              probe(nx2,ny2,f); if(isNaN(f.x)) continue;
+              var mm=Math.hypot(f.x,f.y);
+              if(mm<bm){bm=mm;best=[nx2,ny2];}
+            }
+            if(best){x=best[0];y=best[1];m0=bm;} else step*=0.55;
+            if(step<0.4) break;
+          }
+          if(m0>0.0016) continue;
+          var dup=false;
+          for(var k2=0;k2<found.length;k2++)
+            if(Math.hypot(found[k2][0]-x,found[k2][1]-y)<40){dup=true;break;}
+          if(!dup) found.push([x,y]);
+        }
+        return found;
+      }
+
+      /* ── paint the field ── */
+      var fg=fieldCv.getContext('2d'), dprF=Math.min(devicePixelRatio||1,2);
+      function paint(t){
+        var rct=fieldCv.getBoundingClientRect();
+        var cw=Math.max(1,Math.round(rct.width*dprF)), ch=Math.max(1,Math.round(rct.height*dprF));
+        if(fieldCv.width!==cw||fieldCv.height!==ch){fieldCv.width=cw;fieldCv.height=ch;}
+        /* cover, never stretch — the geometry is identical on every screen */
+        var kk=Math.max(cw/VW,ch/VH), ox=(cw-VW*kk)/2, oy=(ch-VH*kk)/2;
+        fg.setTransform(1,0,0,1,0,0); fg.clearRect(0,0,cw,ch);
+        fg.setTransform(kk,0,0,kk,ox,oy);
+        fg.lineCap='butt';
+        var P=[0,0],Q=[0,0],i,L,VIS=Math.max(VW,VH)*1.1;
+        fg.strokeStyle='#4a6d82';
+        for(i=0;i<LINES.length;i++){
+          L=LINES[i];
+          var aB=(L.base?0.24:0.05)*L.dim, wB=L.base?1.4:1.0;
+          for(var rr=0;rr<2;rr++){
+            var u0=rr?HALF:-HALF, u1=rr?L.sB:L.sF, ramp=rr?L.rampB:L.rampF, wt=rr?L.wB:L.wF;
+            if(rr&&L.sB>=HALF) continue;
+            var dirr=(u1>u0)?1:-1, span=Math.abs(u1-u0);
+            if(span<2) continue;
+            var rl=Math.min(ramp,span);
+            fg.globalAlpha=aB; fg.lineWidth=wB;
+            fg.beginPath(); pt(L,u0,P); pt(L,u1-dirr*rl,Q);
+            fg.moveTo(P[0],P[1]); fg.lineTo(Q[0],Q[1]); fg.stroke();
+            if(rl<2||wt<=0.02) continue;
+            for(var st=0;st<7;st++){
+              var f0=st/7, f1=(st+1)/7, mid=(f0+f1)/2;
+              fg.globalAlpha=aB+(0.52*(L.base?1:0.42)-aB)*mid*wt;
+              fg.lineWidth=wB+(3.4*wt)*mid*mid;      /* 1px → 2 → 3, over the half-chord */
+              fg.beginPath();
+              pt(L,u1-dirr*rl*(1-f0),P); pt(L,u1-dirr*rl*(1-f1),Q);
+              fg.moveTo(P[0],P[1]); fg.lineTo(Q[0],Q[1]); fg.stroke();
+            }
+          }
+        }
+        /* the pulse, on the base layer, inside the frame only */
+        if(document.documentElement.getAttribute('data-sdt-motion')!=='off'){
+          var SP=300, phs=[(t*0.10)%SP,(t*0.10+SP/2)%SP];
+          for(var pass=0;pass<2;pass++){
+            fg.strokeStyle=pass?'#c9a227':'#b07430';
+            fg.globalAlpha=pass?0.32:0.44; fg.lineWidth=pass?1.7:2.1;
+            fg.beginPath();
+            for(i=0;i<LINES.length;i++){
+              L=LINES[i]; if(!L.base) continue;
+              for(var r2=0;r2<2;r2++){
+                var v0=r2?HALF:-HALF, v1=r2?L.sB:L.sF, dr=(v1>v0)?1:-1;
+                if(r2&&L.sB>=HALF) continue;
+                var sp2=Math.abs(v1-v0); if(sp2<80) continue;
+                var from=Math.max(0,sp2-VIS);
+                for(var mm2=phs[pass]+Math.ceil((from-phs[pass])/SP)*SP;mm2<sp2-16;mm2+=SP){
+                  if(mm2<30) continue;
+                  var uu=v0+dr*mm2;
+                  pt(L,uu,P); pt(L,uu-dr*12,Q);
+                  var tx2=P[0]-Q[0],ty2=P[1]-Q[1],nm2=Math.hypot(tx2,ty2)||1; tx2/=nm2; ty2/=nm2;
+                  var ln=pass?12:15, wd=pass?7:9;
+                  fg.moveTo(P[0]-tx2*ln-ty2*wd,P[1]-ty2*ln+tx2*wd);
+                  fg.lineTo(P[0],P[1]);
+                  fg.lineTo(P[0]-tx2*ln+ty2*wd,P[1]-ty2*ln-tx2*wd);
+                }
+              }
+            }
+            fg.stroke();
+          }
+        }
+        /* trails */
+        if(opt.trails){
+          fg.lineWidth=1.6;
+          for(i=0;i<BOD.length;i++){
+            var TP=trailPts[i]; if(TP.length<4) continue;
+            fg.strokeStyle='#b07430'; fg.globalAlpha=0.30;
+            fg.beginPath(); fg.moveTo(TP[0],TP[1]);
+            for(var z2=2;z2<TP.length;z2+=2) fg.lineTo(TP[z2],TP[z2+1]);
+            fg.stroke();
+          }
+        }
+        fg.globalAlpha=1;
+      }
+
+      /* ── grip and throw ── */
+      var trail=[];
+      function pick(p){ var best=null,bd=1e9;
+        BOD.forEach(function(b){ if(!b.on) return;
+          var d=Math.hypot(p.x-b.x,p.y-b.y); if(d<bd){bd=d;best=b;}});
+        return best; }
+      drag(s,function(p){if(!hold)return;
+        hold.x=Math.max(60,Math.min(VW-60,p.x));hold.y=Math.max(60,Math.min(VH-60,p.y));
+        hold.vx=0;hold.vy=0;
+        trail.push({x:hold.x,y:hold.y,t:performance.now()});
+        if(trail.length>7) trail.shift();
+      },function(p){hold=pick(p);trail.length=0;s.style.cursor='grabbing';});
+      window.addEventListener('pointerup',function(){
+        if(hold&&trail.length>1){
+          var a0=trail[0], b0=trail[trail.length-1], dtm=(b0.t-a0.t)/1000;
+          if(dtm>0.008){
+            var vx=(b0.x-a0.x)/dtm, vy=(b0.y-a0.y)/dtm, sp=Math.hypot(vx,vy), CAP=1100;
+            if(sp>CAP){vx*=CAP/sp;vy*=CAP/sp;}
+            hold.vx=vx; hold.vy=vy;
+          }
+        }
+        hold=null; trail.length=0; s.style.cursor='grab';
+      });
+
+      /* ── the controls ── */
+      function ctlLabel(t2){ var d=document.createElement('span'); d.textContent=t2;
+        d.style.cssText='color:var(--ink-faint);letter-spacing:.12em;text-transform:uppercase;font-size:10px';
+        return d; }
+      BOD.forEach(function(b,bi){
+        var w=document.createElement('label');
+        w.style.cssText='display:flex;align-items:center;gap:6px;cursor:pointer';
+        w.appendChild(ctlLabel(b.n));
+        var r=document.createElement('input');
+        r.type='range'; r.min=18; r.max=150; r.step=1; r.value=b.r;
+        r.style.cssText='width:84px;accent-color:var(--copper)';
+        r.setAttribute('aria-label','body '+b.n+' radius');
+        var v=document.createElement('span');
+        v.style.cssText='min-width:5.4em;color:var(--ink-muted)';
+        function showN(){ v.textContent=b.r+'  ·  '+ballCount(b.r).toFixed(1)+'x'; }
+        showN();
+        r.addEventListener('input',function(){ b.r=+r.value; showN(); });
+        if(bi>0){
+          var ex=document.createElement('input'); ex.type='checkbox'; ex.checked=b.on;
+          ex.style.accentColor='var(--copper)'; ex.title='body '+b.n+' exists';
+          ex.setAttribute('aria-label','body '+b.n+' exists');
+          ex.addEventListener('change',function(){ b.on=ex.checked; b.vx=0; b.vy=0; });
+          w.insertBefore(ex,w.firstChild);
+        }
+        w.appendChild(r); w.appendChild(v); ctlBar.appendChild(w);
+      });
+      [['barycentre','bary'],['inertial nulls (asin proxy)','lag'],['trails','trails']].forEach(function(T){
+        var w=document.createElement('label');
+        w.style.cssText='display:flex;align-items:center;gap:5px;cursor:pointer';
+        var c=document.createElement('input'); c.type='checkbox'; c.style.accentColor='var(--copper)';
+        c.addEventListener('change',function(){ opt[T[1]]=c.checked;
+          if(!c.checked&&T[1]==='trails') trailPts=[[],[],[]]; });
+        w.appendChild(c); w.appendChild(ctlLabel(T[0])); ctlBar.appendChild(w);
+      });
+      [['pause',function(bt){opt.run=!opt.run; bt.textContent=opt.run?'pause':'run';}],
+       ['reset',function(){ BOD.forEach(function(b,i){ b.x=HOME[i].x;b.y=HOME[i].y;b.vx=0;b.vy=0; });
+         trailPts=[[],[],[]]; }]].forEach(function(T){
+        var bt=document.createElement('button'); bt.type='button'; bt.textContent=T[0];
+        bt.style.cssText='font:inherit;padding:3px 10px;border:1px solid var(--paper-edge);'+
+          'border-radius:4px;background:var(--paper);color:var(--ink-muted);cursor:pointer;'+
+          'letter-spacing:.1em;text-transform:uppercase;font-size:10px';
+        bt.addEventListener('click',function(){T[1](bt);}); ctlBar.appendChild(bt);
+      });
+
+      /* ── chrome: discs, push arrows, barycentre, inertial nulls, readout ── */
+      var lagCache=null, lagTick=0;
+      function chrome(){
+        BOD.forEach(function(b,i){
+          if(!b.on){ discs[i].setAttribute('r',0); tags[i].textContent='';
+                     fa[i].setAttribute('stroke-opacity',0); return; }
+          tags[i].textContent=b.n;
+          discs[i].setAttribute('cx',b.x);discs[i].setAttribute('cy',b.y);discs[i].setAttribute('r',b.r);
+          tags[i].setAttribute('x',b.x);tags[i].setAttribute('y',b.y+8);
+          tags[i].setAttribute('font-size',Math.max(13,b.r*0.34));
+          var F=NETF[i], m=Math.hypot(F.x,F.y);
+          if(m<0.3){fa[i].setAttribute('stroke-opacity',0);return;}
+          fa[i].setAttribute('stroke-opacity',0.95);
+          var ux2=F.x/m, uy2=F.y/m, len=Math.max(30,Math.min(230,m*3.0));
+          fa[i].setAttribute('x1',b.x+ux2*(b.r+8));fa[i].setAttribute('y1',b.y+uy2*(b.r+8));
+          fa[i].setAttribute('x2',b.x+ux2*(b.r+8+len));fa[i].setAttribute('y2',b.y+uy2*(b.r+8+len));
+        });
+        while(baryG.firstChild) baryG.removeChild(baryG.firstChild);
+        if(opt.bary){
+          var M=0,cx=0,cy=0;
+          BOD.forEach(function(b){if(!b.on)return;var m2=ballCount(b.r);M+=m2;cx+=b.x*m2;cy+=b.y*m2;});
+          cx/=M; cy/=M;
+          baryG.appendChild(el('circle',{cx:cx,cy:cy,r:9,fill:'none',stroke:'#b07430','stroke-width':2.5}));
+          baryG.appendChild(el('line',{x1:cx-20,y1:cy,x2:cx+20,y2:cy,stroke:'#b07430','stroke-width':1.6}));
+          baryG.appendChild(el('line',{x1:cx,y1:cy-20,x2:cx,y2:cy+20,stroke:'#b07430','stroke-width':1.6}));
+          baryG.appendChild(tx({x:cx+26,y:cy-12,'font-family':'JetBrains Mono,monospace',
+            'font-size':'20px',fill:'#b07430'},'barycentre'));
+        }
+        while(lagG.firstChild) lagG.removeChild(lagG.firstChild);
+        if(opt.lag){
+          if(!lagCache||(lagTick++%20===0)) lagCache=balancePoints();
+          lagCache.forEach(function(Pn,k3){
+            lagG.appendChild(el('circle',{cx:Pn[0],cy:Pn[1],r:7,fill:'none',
+              stroke:'#0d7a5f','stroke-width':2.2,'stroke-dasharray':'3 3'}));
+            lagG.appendChild(tx({x:Pn[0]+13,y:Pn[1]-11,'font-family':'JetBrains Mono,monospace',
+              'font-size':'19px',fill:'#0d7a5f'},'N'+(k3+1)));
+          });
+        }
+        read.textContent='pedagogical ray-lattice · every node a centre · 5° through 60° · '+LINES.length+' lines · '
+          +NLAND+' landings summed  ·  mass = (R/r0)^3 of displaced medium'
+          +(opt.lag&&lagCache?'  ·  '+lagCache.length+' inertial nulls':'');
+      }
+
+      var tPrev=0;
+      (function step(now){
+        requestAnimationFrame(step);
+        var rc=s.getBoundingClientRect();
+        if(rc.bottom<0||rc.top>innerHeight){tPrev=now;return;}
+        var dt=Math.min(0.034,((now||0)-tPrev)/1000); tPrev=now||0;
+        if(opt.run&&document.documentElement.getAttribute('data-sdt-motion')!=='off'&&dt>0){
+          BOD.forEach(function(o,i){
+            if(!o.on) return;
+            if(o===hold){o.vx=0;o.vy=0;return;}
+            var m=massOf(o);                     /* m = the medium it displaces */
+            o.vx+=NETF[i].x/m*dt; o.vy+=NETF[i].y/m*dt;
+            /* no arbitrary damping — what you watch is the model, not my
+               dissipation. Push gravity does predict a real drag (a moving body
+               meets the flood anisotropically) but that must be DERIVED from the
+               landings, not dialled in. Not yet done, so: none. */
+            o.x+=o.vx*dt; o.y+=o.vy*dt;     /* no walls — the medium has no edge */
+          });
+          for(var a3=0;a3<BOD.length;a3++) for(var b3=a3+1;b3<BOD.length;b3++){
+            var U=BOD[a3],V=BOD[b3]; if(!U.on||!V.on) continue;
+            var ddx=V.x-U.x, ddy=V.y-U.y, dd=Math.hypot(ddx,ddy)||1, touch=U.r+V.r;
+            if(dd<touch){
+              /* contact resolved WITH MASS: j = -(1+e)*v_rel.n / (1/m_U + 1/m_V),
+                 each body taking j/m. A pebble no longer shoves a boulder. */
+              var nX=ddx/dd, nY=ddy/dd;
+              var mU=massOf(U), mV=massOf(V), iU=1/mU, iV=1/mV, iT=iU+iV;
+              var corr=(touch-dd)/iT;
+              if(hold!==U){U.x-=nX*corr*iU;U.y-=nY*corr*iU;}
+              if(hold!==V){V.x+=nX*corr*iV;V.y+=nY*corr*iV;}
+              var sv=(V.vx-U.vx)*nX+(V.vy-U.vy)*nY;
+              if(sv<0){ var jm=-(1+RESTITUTION)*sv/iT;
+                U.vx-=jm*nX*iU; U.vy-=jm*nY*iU;
+                V.vx+=jm*nX*iV; V.vy+=jm*nY*iV; }
+            }
+          }
+          if(opt.trails) BOD.forEach(function(b,i){ if(!b.on) return;
+            var T=trailPts[i]; T.push(b.x,b.y); if(T.length>1400) T.splice(0,2); });
+        }
+        /* Hold the nearest displayed inertial null dead centre and give the difference to
+           the lattice. Everything shifts together — bodies, trails, markers and
+           the matrix — so no relative position or velocity changes: the system
+           stands still and the medium streams past it. */
+        var M2=0,tx0=0,ty0=0;
+        BOD.forEach(function(b){ if(!b.on) return; var mm=ballCount(b.r); M2+=mm; tx0+=b.x*mm; ty0+=b.y*mm; });
+        if(M2){
+          tx0/=M2; ty0/=M2;
+          if(lagCache&&lagCache.length){
+            var bp=null,bd2=1e18;
+            lagCache.forEach(function(P2){ var d2=Math.hypot(P2[0]-tx0,P2[1]-ty0);
+              if(d2<bd2){bd2=d2;bp=P2;} });
+            if(bp&&bd2<Math.max(VW,VH)*0.5){ tx0=bp[0]; ty0=bp[1]; }
+          }
+          var dx0=tx0-VW/2, dy0=ty0-VH/2;
+          if(dx0||dy0){
+            BOD.forEach(function(b){ b.x-=dx0; b.y-=dy0; });
+            for(var ti=0;ti<trailPts.length;ti++){ var TT=trailPts[ti];
+              for(var tj=0;tj<TT.length;tj+=2){ TT[tj]-=dx0; TT[tj+1]-=dy0; } }
+            if(lagCache) lagCache.forEach(function(P3){ P3[0]-=dx0; P3[1]-=dy0; });
+            latt.x-=dx0; latt.y-=dy0;
+            var nrow=Math.round(latt.y/HSTEP);
+            var mcol=Math.round((latt.x-nrow*SPACING/2)/SPACING);
+            latt.x-=mcol*SPACING+nrow*SPACING/2; latt.y-=nrow*HSTEP;
+          }
+        }
+        solve(); paint(now||0); chrome();
+      })(0);
+    })();
+
+    /* Cosmology — the octave ladder, dragged by hand */
+    (function(){
+      var s=document.getElementById('atlasOctaves'); if(!s)return;
+      var wave=el('path',{fill:'none',stroke:'#2f6f52','stroke-width':2});s.appendChild(wave);
+      var ph=el('circle',{cy:140,r:8,fill:'#1d1f21'});s.appendChild(ph);
+      var read=tx({x:320,y:24,'text-anchor':'middle','font-family':'JetBrains Mono,monospace','font-size':'12px',fill:'#6b6f75'},'');s.appendChild(read);
+      var x=140;
+      function render(){ph.setAttribute('cx',x);
+        var dn=(x-80)/140, lam=16*Math.pow(2,dn);
+        var d='';for(var i=0;i<=200;i++){var xx=40+i/200*(x-40);
+          d+=(i?'L':'M')+xx+' '+(90-12*Math.sin(xx/lam*Math.PI*2))+' ';}
+        wave.setAttribute('d',d);
+        read.textContent='Δn = '+dn.toFixed(1)+' octaves → 1+z = 2^Δn = '+Math.pow(2,dn).toFixed(1)+' — no recession anywhere';}
+      drag(s,function(p){x=Math.max(140,Math.min(620,p.x));render();});
+      render();
+    })();
+  })();
+  </script>
+  <script src="i18n_dict.js"></script>
+  <script src="i18n.js"></script>
+</body>
+</html>

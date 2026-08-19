@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Deterministic SDT retarded seven-cone celestial solver with explicit Law-IV displacement and slingshot diagnostics">
+  <title>SDT Celestial Three-Body Solver</title>
+  <style>
+    :root{color-scheme:dark;--bg:#05080d;--panel:#0b1119;--line:#243244;--ink:#e7edf5;--muted:#8ea0b5;--cyan:#63d9ff;--amber:#ffbd67;--red:#ff6b6b}
+    *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font:14px/1.45 Inter,Segoe UI,sans-serif}
+    #scene{position:fixed;inset:0;width:100%;height:100%;display:block}
+    #panel{position:fixed;left:0;top:0;bottom:0;width:min(430px,94vw);overflow:auto;background:linear-gradient(180deg,rgba(11,17,25,.98),rgba(5,8,13,.96));border-right:1px solid var(--line);padding:18px;z-index:3;box-shadow:18px 0 50px #0008}
+    h1{font-size:21px;margin:0 0 4px;letter-spacing:.02em}h1 span{color:var(--cyan)}.sub{color:var(--muted);font-size:12px;margin-bottom:15px}
+    section{border-top:1px solid var(--line);padding:13px 0}h2{font-size:12px;text-transform:uppercase;letter-spacing:.13em;color:var(--amber);margin:0 0 9px}
+    label{display:block;color:var(--muted);font-size:11px;margin:7px 0 3px}select,input,textarea,button{width:100%;border:1px solid var(--line);background:#0f1823;color:var(--ink);border-radius:5px;padding:8px;font:inherit}
+    textarea{min-height:185px;resize:vertical;font:11px/1.35 Consolas,monospace}button{cursor:pointer;font-weight:650}button.primary{background:#123449;border-color:#246a8a;color:#c9f4ff}button:disabled{opacity:.48;cursor:not-allowed}
+    .row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.row.three{grid-template-columns:repeat(3,minmax(0,1fr))}.checks{display:grid;grid-template-columns:1fr 1fr;gap:6px}.checks label{display:flex;align-items:center;gap:6px;margin:0;color:var(--ink)}.checks input{width:auto}
+    .cards{display:grid;grid-template-columns:1fr 1fr;gap:6px}.card{background:#0e1721;border:1px solid var(--line);padding:8px;border-radius:5px}.card b{display:block;color:var(--cyan);font:12px Consolas,monospace;overflow:hidden;text-overflow:ellipsis}.card small{color:var(--muted)}.pending{color:var(--amber)!important}.ledger{font:11px/1.45 Consolas,monospace;color:var(--muted);white-space:pre-wrap;overflow-wrap:anywhere}
+    #status{position:fixed;right:14px;top:14px;z-index:2;padding:8px 11px;border:1px solid var(--line);background:#09121ddd;border-radius:5px;font:12px Consolas,monospace;color:var(--cyan)}
+    #status.error{color:#ff9c9c;border-color:#813d45}.note{font-size:11px;color:var(--muted);padding:8px;border-left:2px solid var(--amber);background:#111821}
+    #chart{width:100%;height:92px;border:1px solid var(--line);background:#070c12;border-radius:5px}
+    @media(max-width:700px){#panel{width:100%;height:55%;bottom:auto;border-right:0;border-bottom:1px solid var(--line)}#status{top:auto;bottom:10px}}
+  </style>
+</head>
+<body>
+<canvas id="scene"></canvas>
+<aside id="panel">
+  <h1>Celestial <span>Three-Body Solver</span></h1>
+  <div class="sub">Retarded 6-around-1 baryon occlusion · explicit Law-IV displacement · C++20/WASM</div>
+
+  <section>
+    <h2>Case</h2>
+    <label for="preset">Preset</label>
+    <select id="preset">
+      <option value="">Loading 25 simulations…</option>
+    </select>
+    <div class="row">
+      <button id="loadPreset">Load preset</button>
+      <button id="importCase">Import JSON</button>
+    </div>
+    <label for="caseJson">Versioned case JSON</label>
+    <textarea id="caseJson" spellcheck="false"></textarea>
+    <input id="caseFile" type="file" accept=".json,application/json" hidden>
+    <div class="row">
+      <button id="create" class="primary">Create session</button>
+      <button id="exportCase">Export case</button>
+    </div>
+  </section>
+
+  <section>
+    <h2>Unlimited chunk execution</h2>
+    <div class="row three">
+      <div><label for="chunk">Steps/chunk</label><input id="chunk" type="number" min="1" step="1" value="64"></div>
+      <div><label for="trail">Trail records</label><input id="trail" type="number" min="2" step="1" value="500"></div>
+      <div><label for="speed">Display rate</label><input id="speed" type="number" min=".1" max="20" step=".1" value="1"></div>
+    </div>
+    <div class="row">
+      <button id="advance" class="primary">Advance chunk</button>
+      <button id="continuous">Run continuously</button>
+    </div>
+    <div class="row">
+      <button id="saveCheckpoint">Export checkpoint</button>
+      <button id="loadCheckpoint">Resume checkpoint</button>
+    </div>
+    <input id="checkpointFile" type="file" accept=".json,application/json" hidden>
+    <div class="note">Omit <code>duration_s</code> and <code>max_steps</code> for caller-controlled continuation. Every chunk is fixed-step and checkpointable.</div>
+  </section>
+
+  <section>
+    <h2>Calculated overlays</h2>
+    <div class="checks">
+      <label><input id="showTrails" type="checkbox" checked> trajectories</label>
+      <label><input id="showCones" type="checkbox" checked> 42 cones</label>
+      <label><input id="showSections" type="checkbox" checked> cross-sections</label>
+      <label><input id="showLagrange" type="checkbox" checked> L1–L5</label>
+      <label><input id="showPivot" type="checkbox" checked> baryonic pivot</label>
+      <label><input id="showDisplacement" type="checkbox" checked> displacement volumes</label>
+      <label><input id="showTail" type="checkbox" checked> PENDING tail stages</label>
+      <label><input id="showEndpoints" type="checkbox" checked> equal-radius endpoints</label>
+      <label><input id="showImpulse" type="checkbox" checked> impulse vector</label>
+      <label><input id="rotateView" type="checkbox"> rotate camera</label>
+    </div>
+  </section>
+
+  <section>
+    <h2>Diagnostics</h2>
+    <div class="cards">
+      <div class="card"><small>step / time</small><b id="dStep">—</b></div>
+      <div class="card"><small>minimum pair distance</small><b id="dDistance">—</b></div>
+      <div class="card"><small>retarded residual</small><b id="dRetarded">—</b></div>
+      <div class="card"><small>maximum resistance</small><b id="dResistance">—</b></div>
+      <div class="card"><small>eclipse shield</small><b id="dEclipse">—</b></div>
+      <div class="card"><small>medium closure</small><b id="dMedium">—</b></div>
+      <div class="card"><small>trajectory SHA-256</small><b id="dHash">—</b></div>
+      <div class="card"><small>Lagrange roots</small><b id="dLagrange">—</b></div>
+      <div class="card"><small>K<sub>SDT</sub> Earth/Sun</small><b id="dK">—</b></div>
+      <div class="card"><small>candidate stage 8</small><b id="dStage" class="pending">—</b></div>
+      <div class="card"><small>x<sub>pause</sub></small><b id="dPause">—</b></div>
+      <div class="card"><small>endpoint Δv∞</small><b id="dEndpoint">—</b></div>
+      <div class="card"><small>endpoint radius mismatch</small><b id="dRadius">—</b></div>
+      <div class="card"><small>runner closest approach</small><b id="dClosest">—</b></div>
+    </div>
+    <label>Law-IV displacement ledger (raw SI)</label>
+    <div id="dDisplacement" class="ledger">No 2.1 displacement ledger in this case.</div>
+    <label>Body speed history</label>
+    <canvas id="chart" width="390" height="92"></canvas>
+  </section>
+
+  <section>
+    <h2>Scope</h2>
+    <div class="note">The production path is retarded external-pressure deficit, not attraction and not a force centre. The anti-solar transported-tail branch is <code>PENDING</code>, non-driving, and stage 8 is a candidate—not a terminal prediction. Point-koppa and Anderson rows remain comparison-only. Visual scaling never enters calculation. This is not flight software.</div>
+  </section>
+</aside>
+<div id="status">loading C++/WASM…</div>
+
+<script type="importmap">
+{"imports":{
+  "three":"./vendor/celestial-three.module.js",
+  "three/addons/":"./vendor/"
+}}
+</script>
+<script type="module">
+import * as THREE from "three";
+import {OrbitControls} from "three/addons/OrbitControls.js";
+
+const $=id=>document.getElementById(id);
+const status=$("status");
+const canvas=$("scene");
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+renderer.setSize(innerWidth,innerHeight);
+renderer.outputColorSpace=THREE.SRGBColorSpace;
+renderer.toneMapping=THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure=1.3;
+const scene=new THREE.Scene();
+scene.background=new THREE.Color(0x05080d);
+const camera=new THREE.PerspectiveCamera(46,innerWidth/innerHeight,.01,1000);
+camera.position.set(11,8,14);
+const orbit=new OrbitControls(camera,canvas);
+orbit.enableDamping=true;
+scene.add(new THREE.HemisphereLight(0xa9d9ff,0x080b10,2.2));
+const key=new THREE.DirectionalLight(0xffdfb2,3.5);key.position.set(7,10,8);scene.add(key);
+const root=new THREE.Group();scene.add(root);
+const trailsGroup=new THREE.Group(),conesGroup=new THREE.Group(),sectionsGroup=new THREE.Group(),lagrangeGroup=new THREE.Group(),pivotGroup=new THREE.Group(),bodiesGroup=new THREE.Group(),displacementGroup=new THREE.Group(),tailGroup=new THREE.Group(),endpointsGroup=new THREE.Group(),impulseGroup=new THREE.Group();
+root.add(trailsGroup,conesGroup,sectionsGroup,lagrangeGroup,pivotGroup,bodiesGroup,displacementGroup,tailGroup,endpointsGroup,impulseGroup);
+const colors=[0xffbd67,0x63d9ff,0xd58cff];
+let lastResult=null,continuous=false,busy=false,requestId=0,allFrames=[];
+const pending=new Map();
+const worker=new Worker("js/celestial-three-body-worker.js");
+worker.onmessage=event=>{
+  const item=pending.get(event.data.id);if(!item)return;
+  pending.delete(event.data.id);
+  event.data.ok?item.resolve(event.data.result):item.reject(new Error(event.data.error));
+};
+function call(type,payload={}){return new Promise((resolve,reject)=>{const id=++requestId;pending.set(id,{resolve,reject});worker.postMessage({id,type,payload});});}
+function setStatus(message,error=false){status.textContent=message;status.classList.toggle("error",error)}
+
+let presetCatalog=[];
+async function loadPreset(){
+  const preset=presetCatalog.find(item=>item.id===$("preset").value);
+  if(!preset)throw new Error("Select a simulation preset");
+  $("loadPreset").disabled=true;$("create").disabled=true;
+  try{
+    const response=await fetch(`cases/celestial/${preset.file}`,{cache:"no-store"});
+    if(!response.ok)throw new Error(`case ${preset.file}: HTTP ${response.status}`);
+    const value=await response.json();
+    $("caseJson").value=JSON.stringify(value,null,2);
+    setStatus(`${presetCatalog.length} simulations · ${preset.classification}`);
+  }finally{$("loadPreset").disabled=false;$("create").disabled=false}
+}
+async function initializePresets(){
+  $("loadPreset").disabled=true;$("create").disabled=true;
+  const response=await fetch("cases/celestial/catalog.json",{cache:"no-store"});
+  if(!response.ok)throw new Error(`preset catalog: HTTP ${response.status}`);
+  const catalog=await response.json();
+  if(catalog.count!==25||catalog.presets?.length!==25)throw new Error("preset catalog must contain exactly 25 simulations");
+  presetCatalog=catalog.presets;
+  $("preset").replaceChildren(...presetCatalog.map(item=>new Option(`${item.label} · ${item.classification}`,item.id)));
+  await loadPreset();
+}
+
+function clear(group){while(group.children.length){const child=group.children.pop();child.geometry?.dispose();if(Array.isArray(child.material))child.material.forEach(m=>m.dispose());else child.material?.dispose()}}
+function format(value,unit=""){return Number.isFinite(value)?`${value.toExponential(4)}${unit}`:"—"}
+function download(name,data){const blob=new Blob([data],{type:"application/json"});const link=document.createElement("a");link.href=URL.createObjectURL(blob);link.download=name;link.click();setTimeout(()=>URL.revokeObjectURL(link.href),0)}
+function parseCase(){return JSON.parse($("caseJson").value)}
+
+function updateScene(result){
+  lastResult=result;
+  window.__sdtCelestialLastResult=result;
+  [bodiesGroup,trailsGroup,conesGroup,sectionsGroup,lagrangeGroup,pivotGroup,displacementGroup,tailGroup,endpointsGroup,impulseGroup].forEach(clear);
+  const states=result.checkpoint.states;
+  const pivot=result.pivots.full_position_m;
+  let extent=1;
+  states.forEach(s=>{extent=Math.max(extent,Math.hypot(...s.position_m.map((v,i)=>v-pivot[i])))});
+  const scale=8/extent;
+  const point=v=>new THREE.Vector3((v[0]-pivot[0])*scale,(v[2]-pivot[2])*scale,(v[1]-pivot[1])*scale);
+  const stateById=new Map(states.map(s=>[s.id,s]));
+  states.forEach((state,index)=>{
+    const body=parseCase().bodies.find(b=>b.id===state.id);
+    const radius=Math.max(.14,Math.min(.7,.12*Math.log10(Math.max(10,body.radius_m))));
+    const mesh=new THREE.Mesh(new THREE.SphereGeometry(radius,28,18),new THREE.MeshStandardMaterial({color:colors[index],roughness:.42,metalness:.18,emissive:colors[index],emissiveIntensity:.13}));
+    mesh.position.copy(point(state.position_m));bodiesGroup.add(mesh);
+    const displacement=result.displacement_ledger?.find(row=>row.id===state.id);
+    if(displacement?.declared){
+      const shell=new THREE.Mesh(new THREE.SphereGeometry(radius*1.18,24,16),new THREE.MeshBasicMaterial({color:colors[index],wireframe:true,transparent:true,opacity:.36}));
+      shell.position.copy(mesh.position);displacementGroup.add(shell);
+    }
+    const points=result.trajectory.map(frame=>point(frame.states[index].position_m));
+    if(points.length>1){const line=new THREE.Line(new THREE.BufferGeometry().setFromPoints(points),new THREE.LineBasicMaterial({color:colors[index],transparent:true,opacity:.8}));trailsGroup.add(line)}
+  });
+  result.cones.forEach((cone,index)=>{
+    const target=stateById.get(cone.target);if(!target)return;
+    const centre=point(target.position_m);const axis=new THREE.Vector3(cone.axis[0],cone.axis[2],cone.axis[1]).normalize();
+    const a=centre.clone().addScaledVector(axis,-.75),b=centre.clone().addScaledVector(axis,1.25);
+    const line=new THREE.Line(new THREE.BufferGeometry().setFromPoints([a,b]),new THREE.LineBasicMaterial({color:cone.shield_fraction>.5?0xff6b6b:(index%7===0?0xffbd67:0x4aa8d8),transparent:true,opacity:.34}));
+    conesGroup.add(line);
+    if(cone.channel===0){const ring=new THREE.Mesh(new THREE.RingGeometry(.32,.35,36),new THREE.MeshBasicMaterial({color:0x63d9ff,side:THREE.DoubleSide,transparent:true,opacity:.35}));ring.position.copy(centre);ring.quaternion.setFromUnitVectors(new THREE.Vector3(0,0,1),axis);sectionsGroup.add(ring)}
+  });
+  (result.lagrange||[]).forEach(rootPoint=>{const mesh=new THREE.Mesh(new THREE.OctahedronGeometry(.13),new THREE.MeshBasicMaterial({color:rootPoint.classification==="COMPUTED"?0xfff06a:0xff6b6b}));mesh.position.copy(point(rootPoint.position_m));lagrangeGroup.add(mesh)});
+  const pivotMesh=new THREE.Mesh(new THREE.OctahedronGeometry(.18),new THREE.MeshBasicMaterial({color:0x63fff0,wireframe:true}));pivotMesh.position.set(0,0,0);pivotGroup.add(pivotMesh);
+  const slingshot=result.slingshot;
+  if(slingshot?.enabled){
+    const flyby=stateById.get(slingshot.flyby_body),runner=stateById.get(slingshot.runner_body);
+    const centre=point(flyby.position_m);
+    const axis=new THREE.Vector3(slingshot.anti_solar_axis[0],slingshot.anti_solar_axis[2],slingshot.anti_solar_axis[1]).normalize();
+    for(const stage of slingshot.stages.filter(stage=>stage.n>=2)){
+      const length=Math.max(.25,Math.min(5,stage.z_n_m*scale));
+      const radius=Math.min(5,length*Math.tan(Math.min(stage.cone_half_angle_rad,1.2)));
+      const cone=new THREE.Mesh(new THREE.ConeGeometry(radius,length,36,1,true),new THREE.MeshBasicMaterial({color:stage.candidate_terminal?0xffbd67:0x347aa0,wireframe:true,transparent:true,opacity:stage.candidate_terminal?.45:.08}));
+      cone.position.copy(centre).addScaledVector(axis,length/2);
+      cone.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),axis);
+      tailGroup.add(cone);
+    }
+    const pause=new THREE.Mesh(new THREE.OctahedronGeometry(.11),new THREE.MeshBasicMaterial({color:0xfff06a}));
+    pause.position.copy(centre).addScaledVector(axis,slingshot.x_pause_m*scale);tailGroup.add(pause);
+    const endpoint=slingshot.endpoint;
+    const rhoOut=new THREE.Vector3(endpoint.rho_hat_out[0],endpoint.rho_hat_out[2],endpoint.rho_hat_out[1]);
+    const outMarker=new THREE.Mesh(new THREE.OctahedronGeometry(.14),new THREE.MeshBasicMaterial({color:0x63d9ff}));
+    outMarker.position.copy(centre).addScaledVector(rhoOut,endpoint.outbound_radius_m*scale);endpointsGroup.add(outMarker);
+    const initialCase=parseCase(),initialFlyby=initialCase.bodies.find(body=>body.id===slingshot.flyby_body);
+    const initialCentre=point(initialFlyby.position_m);
+    const rhoIn=new THREE.Vector3(endpoint.rho_hat_in[0],endpoint.rho_hat_in[2],endpoint.rho_hat_in[1]);
+    const inMarker=new THREE.Mesh(new THREE.OctahedronGeometry(.14),new THREE.MeshBasicMaterial({color:0xd58cff}));
+    inMarker.position.copy(initialCentre).addScaledVector(rhoIn,endpoint.inbound_radius_m*scale);endpointsGroup.add(inMarker);
+    const impulse=slingshot.kinematics.canonical_relative_velocity_impulse_m_s;
+    const impulseVector=new THREE.Vector3(impulse[0],impulse[2],impulse[1]);
+    if(impulseVector.length()>0){
+      const arrow=new THREE.ArrowHelper(impulseVector.clone().normalize(),point(runner.position_m),Math.min(2.5,.4+.25*Math.log10(1+impulseVector.length())),0xff6b6b,.18,.09);
+      impulseGroup.add(arrow);
+    }
+  }
+  applyVisibility();orbit.target.set(0,0,0);
+  const d=result.diagnostics;
+  $("dStep").textContent=`${result.executed_steps} / ${format(result.time_s," s")}`;
+  $("dDistance").textContent=format(d.minimum_pair_distance_m," m");
+  $("dRetarded").textContent=format(d.maximum_retarded_residual_s," s");
+  $("dResistance").textContent=`${d.maximum_effective_resistance_ratio.toFixed(12)}×`;
+  $("dEclipse").textContent=d.maximum_eclipse_shield.toFixed(6);
+  $("dMedium").textContent=format(d.body_plus_medium_momentum_residual);
+  $("dHash").textContent=result.trajectory_sha256.slice(0,16)+"…";
+  $("dLagrange").textContent=`${(result.lagrange||[]).length} roots`;
+  if(slingshot?.enabled){
+    const stage8=slingshot.stages.find(stage=>stage.n===8);
+    $("dK").textContent=format(slingshot.K_SDT);
+    $("dStage").textContent=`${stage8.cone_half_angle_deg.toFixed(4)}° · ${format(stage8.z_n_m," m")}`;
+    $("dPause").textContent=format(slingshot.x_pause_m," m");
+    $("dEndpoint").textContent=format(slingshot.endpoint.supplied_endpoint_delta_v_m_s," m/s");
+    $("dRadius").textContent=`${format(slingshot.endpoint.radius_mismatch_m," m")} · ${slingshot.endpoint.equal_radius_passed?"PASS":"OUTSIDE"}`;
+    $("dClosest").textContent=format(slingshot.kinematics.closest_approach_m," m");
+  }else{
+    ["dK","dStage","dPause","dEndpoint","dRadius","dClosest"].forEach(id=>$(id).textContent="—");
+  }
+  $("dDisplacement").textContent=result.displacement_ledger?.map(row=>`${row.id}: rest ${format(row.rest_volume_m3," m³")} · engaged ${format(row.engaged_volume_m3," m³")} · effective ${format(row.effective_volume_m3," m³")} · ${row.declared?"declared Np/Nn":"legacy baryon route"}`).join("\n")||"No 2.1 displacement ledger in this case.";
+  drawChart(result.trajectory);
+}
+function drawChart(frames){const chart=$("chart"),ctx=chart.getContext("2d");ctx.clearRect(0,0,chart.width,chart.height);if(frames.length<2)return;const series=frames.map(f=>Math.hypot(...f.states[0].velocity_m_s));const min=Math.min(...series),max=Math.max(...series),span=Math.max(max-min,1e-20);ctx.strokeStyle="#63d9ff";ctx.lineWidth=1.5;ctx.beginPath();series.forEach((value,index)=>{const x=5+(chart.width-10)*index/(series.length-1),y=chart.height-6-(chart.height-12)*(value-min)/span;index?ctx.lineTo(x,y):ctx.moveTo(x,y)});ctx.stroke()}
+function applyVisibility(){trailsGroup.visible=$("showTrails").checked;conesGroup.visible=$("showCones").checked;sectionsGroup.visible=$("showSections").checked;lagrangeGroup.visible=$("showLagrange").checked;pivotGroup.visible=$("showPivot").checked;displacementGroup.visible=$("showDisplacement").checked;tailGroup.visible=$("showTail").checked;endpointsGroup.visible=$("showEndpoints").checked;impulseGroup.visible=$("showImpulse").checked}
+
+async function createSession(){busy=true;allFrames=[];setStatus("creating deterministic session…");try{const result=await call("create",{caseJson:$("caseJson").value});if(result.status!=="created")throw new Error(result.message||result.status);setStatus(`session ${result.handle} ready`)}catch(error){setStatus(error.message,true);throw error}finally{busy=false}}
+async function advance(){if(busy)return;busy=true;setStatus("calculating retarded pressure chunk…");try{const result=await call("advance",{steps:Math.max(1,Math.floor(+$("chunk").value))});if(!result.trajectory)throw new Error(result.message||result.status);for(const frame of result.trajectory){if(!allFrames.length||allFrames.at(-1).step!==frame.step)allFrames.push(frame)}allFrames=allFrames.slice(-Math.max(2,Math.floor(+$("trail").value)));result.trajectory=allFrames;updateScene(result);setStatus(`${result.status} · step ${result.executed_steps}`);if(result.status==="completed"||result.status==="collision")continuous=false}catch(error){setStatus(error.message,true);continuous=false}finally{busy=false;if(continuous)setTimeout(advance,Math.max(0,50/Math.max(.1,+$("speed").value)))}}
+
+$("loadPreset").onclick=()=>loadPreset().catch(error=>setStatus(error.message,true));
+$("create").onclick=async()=>{try{await createSession();await advance()}catch{}};
+$("advance").onclick=advance;
+$("continuous").onclick=async()=>{continuous=!continuous;$("continuous").textContent=continuous?"Pause after chunk":"Run continuously";if(continuous&&!busy)advance()};
+$("exportCase").onclick=()=>download("celestial-three-body.sdtcase.json",$("caseJson").value);
+$("importCase").onclick=()=>$("caseFile").click();
+$("caseFile").onchange=async event=>{const file=event.target.files[0];if(file)$("caseJson").value=await file.text()};
+$("saveCheckpoint").onclick=async()=>{try{const result=await call("checkpoint");download("celestial-three-body.checkpoint.json",JSON.stringify(result,null,2))}catch(error){setStatus(error.message,true)}};
+$("loadCheckpoint").onclick=()=>$("checkpointFile").click();
+$("checkpointFile").onchange=async event=>{const file=event.target.files[0];if(!file)return;try{const result=await call("resume",{caseJson:$("caseJson").value,checkpointJson:await file.text()});if(result.status!=="resumed")throw new Error(result.message||result.status);setStatus(`resumed session ${result.handle}`)}catch(error){setStatus(error.message,true)}};
+["showTrails","showCones","showSections","showLagrange","showPivot","showDisplacement","showTail","showEndpoints","showImpulse"].forEach(id=>$(id).onchange=applyVisibility);
+
+addEventListener("resize",()=>{renderer.setSize(innerWidth,innerHeight);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix()});
+function animate(){requestAnimationFrame(animate);if($("rotateView").checked)root.rotation.y+=.0015*+$("speed").value;orbit.update();renderer.render(scene,camera)}animate();
+Promise.all([initializePresets(),call("manifest")])
+  .then(([,manifest])=>setStatus(`${manifest.build_id} · 25 simulations · WASM ready`))
+  .catch(error=>setStatus(`Initialization failed: ${error.message}`,true));
+</script>
+</body>
+</html>

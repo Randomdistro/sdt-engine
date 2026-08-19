@@ -132,8 +132,11 @@ namespace measured {
     inline constexpr double R_p         = 8.414e-16;                    // [m]      Proton boundary radius (muonic H, 2019; "charge radius" is the literature's obfuscation)
     // NOTE: FLM07 selects q=4 before comparison; qℏ/(m_p c) agrees to 0.02%.
     inline constexpr double m_e         = 9.109'383'7015e-31;           // [kg]     Electron mass (NIST reference)
-    inline constexpr double m_p         = 1.672'621'923'69e-27;         // [kg]     Proton mass (NIST reference)
-    inline constexpr double m_n         = 1.674'927'498'04e-27;         // [kg]     Neutron mass (NIST reference)
+    inline constexpr double m_p         = 1.672'621'925'95e-27;         // [kg]     Proton mass (CODATA 2022)
+    inline constexpr double m_n         = 1.674'927'500'56e-27;         // [kg]     Neutron mass (CODATA 2022)
+    inline constexpr double m_d         = 3.343'583'7768e-27;           // [kg]     Deuteron mass (CODATA 2022)
+    inline constexpr double m_t         = 5.007'356'7512e-27;           // [kg]     Triton mass (CODATA 2022)
+    inline constexpr double m_He3       = 5.006'412'7862e-27;           // [kg]     Helion mass (CODATA 2022)
     inline constexpr double R_inf       = 1.097'373'156'8160e7;         // [m^-1]   Rydberg constant
     inline constexpr double Ry_eV       = 13.605'693'122'994;           // [eV]     Rydberg energy
 
@@ -151,7 +154,7 @@ namespace measured {
     // CMB (FIRAS/COBE/Planck)
     inline constexpr double T_CMB       = 2.7255;                       // [K]      Present CMB temperature — MEASURED (FIRAS)
 
-    // ── BOUNDARY-RELEASE FRAME — reclassified 2026-07-30 (Harvey-authorized) ──
+    // ── BOUNDARY-RELEASE FRAME — reclassified 2026-07-30 (James Christopher Tyndall-authorized) ──
     // T_rec and z_rec are NOT measured facts. They are the round textbook
     // epoch-frame ballparks (3000 K, 1100) and they were sitting inside the
     // measured derivation basis, which by the ruleset admits only CODATA / IAU / FIRAS
@@ -198,22 +201,29 @@ namespace measured {
     // Coulomb constant (derived from SI)
     inline constexpr double k_e         = 8.987'551'7923e9;             // [N·m²/C²] Coulomb constant
 
-    // Magnetic moments (in nuclear magnetons, CODATA 2018)
-    inline constexpr double mu_P        = 2.792'847'344'62;             // [μ_N]    Proton
-    inline constexpr double mu_N        = -1.913'042'72;                // [μ_N]    Neutron
-    inline constexpr double mu_D        = 0.857'421;                    // [μ_N]    Deuteron
-    inline constexpr double mu_T        = 2.979;                        // [μ_N]    Triton
-    inline constexpr double mu_He3      = -2.128;                       // [μ_N]    Helion
+    // Magnetic moments (in nuclear magnetons, CODATA 2022)
+    inline constexpr double mu_P        = 2.792'847'344'63;             // [μ_N]    Proton
+    inline constexpr double mu_N        = -1.913'042'76;                // [μ_N]    Neutron
+    inline constexpr double mu_D        = 0.857'438'2335;               // [μ_N]    Deuteron
+    inline constexpr double mu_T        = 2.978'962'4650;               // [μ_N]    Triton
+    inline constexpr double mu_He3      = -2.127'625'3498;              // [μ_N]    Helion
     inline constexpr double mu_alpha    = 0.0;                          // [μ_N]    Alpha (spin-0)
 
-    // Nuclear binding energies (MeV, measured)
+    // Deuteron electric quadrupole moment (OBSERVED spectroscopy anchor;
+    // Pachucki 2020, Eq. 24; not a CODATA constant).
+    inline constexpr double Q_deuteron_fm2 = 0.285'699;                 // [fm²]
+
+    // Nuclear binding energies derived from the measured 2022 nuclear masses.
     // NP05 (EXCLUDED): binding energy is not a displaced-volume difference —
     // the volume-price hypothesis E=P·ΔV failed (spread 45× across reactions;
     // a units slip masked it as P_conv). Successor under test: E_bind = ℏ·Δω,
     // the change in meshed-circulation frequency (CQ41 gear-frequency binding).
-    inline constexpr double B_deuteron  = 2.224;
-    inline constexpr double B_triton    = 8.482;
-    inline constexpr double B_helion    = 7.718;
+    inline constexpr double B_deuteron  =
+        ((m_p + m_n - m_d) * c * c) / MeV_to_J;
+    inline constexpr double B_triton    =
+        ((m_p + 2.0 * m_n - m_t) * c * c) / MeV_to_J;
+    inline constexpr double B_helion    =
+        ((2.0 * m_p + m_n - m_He3) * c * c) / MeV_to_J;
     inline constexpr double B_alpha     = 28.296;
 }
 
@@ -501,7 +511,7 @@ namespace law_III {
     }
 
     /// Occlusion force of a Z-nucleus on an electron at distance r.
-    /// CORRECTED 2026-07-07 (interchange sweep, Harvey-authorized): the handed force
+    /// CORRECTED 2026-07-07 (interchange sweep, James Christopher Tyndall-authorized): the handed force
     /// transfers movement through redirection COUNT — occluded AREA ∝ Z, so the effective
     /// radius is √Z·R_p_lock, giving F = Z times the unit interaction
     /// strength (measured Coulomb scaling is the comparison).
@@ -979,6 +989,32 @@ namespace bridge {
     // risk_flag:             none
     [[nodiscard]] constexpr auto koppa(double v_surface, double R) noexcept -> double {
         return v_surface * v_surface * R / (c * c);
+    }
+
+    /// T17 circular-orbit bridge: ϟ = 4π²r³/(T²c²).
+    /// This is the period form of koppa(v, r) with v = 2πr/T. It is an
+    /// algebraic identity / shared-input reparameterisation, not an independent
+    /// ephemeris prediction.
+    [[nodiscard]] constexpr auto koppa_from_circular_period(
+        double orbital_radius, double orbital_period
+    ) noexcept -> double {
+        return 4.0 * std::numbers::pi * std::numbers::pi
+             * orbital_radius * orbital_radius * orbital_radius
+             / (orbital_period * orbital_period * c * c);
+    }
+
+    /// T17 circular speed from a supplied koppa and radius.
+    [[nodiscard]] inline auto circular_speed_from_koppa(
+        double koppa_length, double orbital_radius
+    ) noexcept -> double {
+        return c * std::sqrt(koppa_length / orbital_radius);
+    }
+
+    /// T17 radial acceleration magnitude: a = c²ϟ/r².
+    [[nodiscard]] constexpr auto radial_acceleration_from_koppa(
+        double koppa_length, double radius
+    ) noexcept -> double {
+        return c * c * koppa_length / (radius * radius);
     }
 
     /// Surface gravitational acceleration: g = v²/R = c²ϟ/R²  [m/s²]
@@ -1980,7 +2016,7 @@ namespace atomic {
 namespace nuclear {
     using namespace measured;
 
-    /// Nuclear boundary radius — NP12 canon change (2026-07-05, Harvey-authorized).
+    /// Nuclear boundary radius — NP12 canon change (2026-07-05, James Christopher Tyndall-authorized).
     /// R(A) = R_p · (A/η)^(1/3),  η = π/√18 ≈ 0.74048 (close-packing fraction) — ZERO-FIT:
     /// close-packed nucleon volume V = A·(4/3)πR_p³/η  ⇒  R = R_p (A/η)^(1/3).
     /// Graded against 908 measured radii (IAEA / Angeli & Marinova 2013): RMS 4.96%
@@ -2000,7 +2036,7 @@ namespace nuclear {
     inline constexpr double R_He_contact_diameter = 2.0 * R_p;
 
     // ── SHELL SCHEDULE — closure tiers and triton shells ────────────────────
-    /// Canon change (2026-07-30, Harvey-authorized: "incorporate this structural
+    /// Canon change (2026-07-30, James Christopher Tyndall-authorized: "incorporate this structural
     /// setup into every part of the engine that is relevant").
     /// Nomenclature / geometry correction (2026-08-09, NSEQ02–05, author-approved):
     /// the LLM-propagated planar "triton belt" / rolling-equator seating is

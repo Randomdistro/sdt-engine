@@ -34,20 +34,20 @@ code { font-family: 'JetBrains Mono', monospace; font-size: .86em; }
 <main data-registers="page">
 <p class="kicker">Theoretical model · current · 2026-08-13 · three registers</p>
 <h1>Spatial Displacement Theory — the model as it stands</h1>
-<p class="by">J. C. Harvey, Melbourne. Numbers from <code>Engine/include/sdt/laws.hpp</code>. People: <a href="sdt-for-people.html">sdt-for-people.html</a>. LLM spine: <code>Papers/SDT_LLM_UPTAKE.md</code>. Cycle arithmetic: <code>Theory/07_Cyclic_Reiteration.md</code>.</p>
+<p class="by">James Christopher Tyndall, Melbourne. Numbers from <code>Engine/include/sdt/laws.hpp</code>. People: <a href="sdt-for-people.html">sdt-for-people.html</a>. LLM spine: <code>Papers/SDT_LLM_UPTAKE.md</code>. Cycle arithmetic: <code>Theory/07_Cyclic_Reiteration.md</code>.</p>
 <div id="sdt-register-switch"></div>
 
 <article id="reg-simple" class="sdt-reg-panel" data-level="simple">
 <h2>For newcomers</h2>
-<p>This page is the whole building, labelled. Space is a packing. Matter is a lasting dent. Force is blocked inflow — one shape for falling, charge, and the nucleus. Mass is the cost of routing the inflow around a dent. Spin and travel share one speed. The electron is winding 1; the proton is winding 3. Planck length is the one ruler. Light-speed is a unit of the relay. α is hydrogen’s rung on the same ladder as the Sun. The CMB temperature is a clock.</p>
-<p>Earth’s measured speed of light is the rung we sit on, not the ceiling. Temperature, pressure, and far-away light-speed are the same climb. We sit in the microwave. The jam of this cycle is infrared. Through-going light stops in hard gamma. If the bath goes to empty, gravity shuts off and seated matter spreads. The dump climbs until far-away light cannot move. Then the wall opens again. When that happens is not yet a derived time. The chain is computed from the identities, not chosen as a story.</p>
+<p>This page is the whole building, labelled. Space is a packing. Matter is a lasting dent. Force is blocked inflow — one shape for falling, directional response, and the nucleus. Mass is the cost of routing the inflow around a dent. Spin and travel share one speed. The electron is winding 1; the proton is winding 3. Planck length is the grain, derived. Light-speed is a unit of the relay. α is hydrogen’s rung. The microwave temperature is the red-to-infrared wall, after the octaves.</p>
+<p>Earth’s measured speed of light is the rung we sit on, not the ceiling. Temperature, pressure, and far-away light-speed are the same climb. We sit in the microwave. The jam of this cycle is the last solid red, then infrared. Through-going light stops in hard gamma. If the bath goes to empty, gravity shuts off and seated matter spreads. The dump climbs until far-away light cannot move. Then the wall opens again. When that happens is not yet a derived time. The chain is computed from the identities, not chosen as a story.</p>
 </article>
 
 <article id="reg-layman" class="sdt-reg-panel" data-level="layman">
 <h2>In ordinary English</h2>
-<p>The constitution is short. Space is a gap-free packing of cells that hand movement to their neighbours. Matter is a lasting excluded volume. Force is occlusion only — nothing pulls. Planck length is the one ruler. Light-speed and Boltzmann’s constant are unit bridges. Action and the two masses are one seat. α is hydrogen’s rung on the same ladder as the Sun. The CMB temperature is a clock. G and M are not starting points. Dark matter, dark energy, expanding space, quarks, and wavefunctions-as-stuff are not starting points either.</p>
+<p>The constitution is short. Space is a gap-free packing of cells that hand movement to their neighbours. Matter is a lasting excluded volume. Force is occlusion only — nothing pulls. Planck length is the grain, derived. Light-speed and Boltzmann’s constant are unit bridges. Action and the two masses are one seat. α is hydrogen’s rung. The microwave temperature is the red-to-infrared wall after the octaves. G and M are not starting points. Dark matter, dark energy, expanding space, quarks, and wavefunctions-as-stuff are not starting points either.</p>
 <p>Six laws carry the load. Every shell to the Clearing pays the same; leftover pressure is huge and isotropic. Stars recycle that inflow inside a domain. Force is the shadow of occluded inflow. Mass is the rerouting cost. Spin and travel share one speed. Electron winding 1, proton winding 3.</p>
-<p>Koppa is a length: how deep a well is. The same depth is the clock, the stretch of a line, and the slowness Shapiro integrates. Light past the Sun is late because it ran slower. Temperature, pressure, and that far-frame speed are one ladder. Climb from the microwave: infrared wall, colour behind it, gamma stop. Heat death is gravity off when pressure is gone. Recharge climbs until far-frame light cannot move. Fire-time is pending. The chain is not.</p>
+<p>Koppa is a length: how deep a well is. The same depth is the clock, the stretch of a line, and the slowness Shapiro integrates. Light past the Sun is late because it ran slower. Temperature, pressure, and that far-frame speed are one ladder. Climb from the microwave: last solid red, then infrared — that is the wall, because solid light is too slow to vibrate. Gamma is where speed ends. Heat death is gravity off when pressure is gone. Recharge climbs until far-frame light cannot move. Fire-time is pending. The chain is not.</p>
 <p>Hydrogen is a centre, not a packed seat. Helium-4 is the α centre. Every nucleus with Z ≥ 2 is one α plus deuterons and tritons. Fission flays the jacket. Lamb frequencies are measured stickers. A fabricated 1051.8 MHz stays deleted.</p>
 </article>
 
@@ -57,7 +57,7 @@ code { font-family: 'JetBrains Mono', monospace; font-size: .86em; }
 <h2>1. Constitution</h2>
 <p>Space = gap-free spation lattice, nearest-neighbour relay, tick <em>c = ℓ<sub>P</sub>/t<sub>P</sub></em>. Matter = lasting displacement volume. Movement = circulation + translation, one budget. Now = the tick. Force = occluded convergence only. No attraction.</p>
 <div class="eq">F = (π/4) P<sub>eff</sub> R₁² R₂² / r²</div>
-<p>The lattice cell is ℓ<sub>P</sub> — Axiom R1, the one dimensional seed (FLM06). <code>c</code>, k<sub>B</sub>, e are unit bridges. {ℏ, m<sub>e</sub>, m<sub>p</sub>} are one mass/action seat (FLM13). α is hydrogen’s koppa rung k<sub>H</sub> = 1/α (PPT02/APS05), same ladder as the Sun. T<sub>CMB</sub> is the FIRAS clock of the bath now. <code>sdt::laws::measured</code> stores CODATA/FIRAS numbers so the engine can compute. Prohibited: G, M as fundamentals; dark matter/energy; ΛCDM; quarks; ψ as a primitive; inflaton; a first moment. Certification: DERIVED · COMPUTED · CALIBRATED · OBSERVED · PENDING · EXCLUDED. Correspondence is not provenance.</p>
+<p>The lattice cell is ℓ<sub>P</sub> — derived, the grain; R<sub>spat</sub> = ℓ<sub>P</sub>/2. <code>c</code>, k<sub>B</sub>, e are unit bridges. {ℏ, m<sub>e</sub>, m<sub>p</sub>} are one mass/action seat (FLM13). α is hydrogen’s koppa rung k<sub>H</sub> = 1/α (PPT02/APS05). T<sub>CMB</sub> is the red→IR release after 10.47 octaves. <code>sdt::laws::measured</code> stores lookup seats so the engine can compute. Prohibited: G, M as fundamentals; dark matter/energy; ΛCDM; quarks; ψ as a primitive; inflaton; a first moment. Certification: DERIVED · COMPUTED · CALIBRATED · OBSERVED · PENDING · EXCLUDED. Correspondence is not provenance.</p>
 
 <h2>2. Six laws</h2>
 <table>
@@ -82,16 +82,17 @@ code { font-family: 'JetBrains Mono', monospace; font-size: .86em; }
 
 <h2>5. Temperature, pressure, and far-frame speed</h2>
 <div class="eq">1+z = T/T<sub>CMB</sub> = (P/P<sub>now</sub>)<sup>1/4</sup> = 1/(1 − z<sub>depth</sub>)<br>N = λ<sub>now</sub>/λ &nbsp;·&nbsp; c<sub>far</sub> = c/N² &nbsp;·&nbsp; P = N⁴ P<sub>now</sub></div>
-<p>T<sub>CMB</sub> = 2.7255 K OBSERVED. z<sub>release</sub> = 1089 OBSERVED. Wien b DERIVED (B07).</p>
+<p>T<sub>CMB</sub> = 2.7255 K COMPUTED from the red→IR wall: λ = 750 nm, N = 1418, Δn = 10.47, T<sub>release</sub> = 3864 K. Wien b DERIVED (B07). FIRAS 975 nm / N = 1090 is a later rung.</p>
 
 <h2>6. Lifecycle — COMPUTED chain</h2>
 <p>Shapiro measures the solar pressure-speed profile of excluded Planck spheres. Reverse-map: photosphere as through-going speed 0, Earth orbit as match to c. Weak-field: c<sub>far</sub>(R<sub>☉</sub>) = c − 1273 m/s; at 1 AU, c − 6 m/s. Same identities at cosmological N:</p>
 <table>
 <tr><th>Peak</th><th>Band</th><th>N</th><th>c<sub>far</sub></th><th>Role</th></tr>
 <tr><td>1.063 mm</td><td>microwave</td><td>1</td><td>c</td><td>now</td></tr>
-<tr><td>975 nm</td><td>near-IR</td><td>1090</td><td>252 m/s</td><td>FIRAS Clearing; SM last-scattering band</td></tr>
-<tr><td>750–380 nm</td><td>visible</td><td>1418–2798</td><td>149–38 m/s</td><td>behind the wall</td></tr>
-<tr><td>100 nm</td><td>UV</td><td>1.06×10⁴</td><td>2.65 m/s</td><td>behind</td></tr>
+<tr><td>975 nm</td><td>near-IR</td><td>1090</td><td>252 m/s</td><td>FIRAS / SM band — this side</td></tr>
+<tr><td>750 nm</td><td>red → IR</td><td>1418</td><td>149 m/s</td><td>Clearing — radiative wall</td></tr>
+<tr><td>700–380 nm</td><td>visible</td><td>1519–2798</td><td>130–38 m/s</td><td>too slow to vibrate</td></tr>
+<tr><td>100 nm</td><td>UV</td><td>1.06×10⁴</td><td>2.65 m/s</td><td>slower still</td></tr>
 <tr><td>1.21 pm</td><td>gamma</td><td>8.76×10⁸</td><td>3.9×10⁻¹⁰ m/s</td><td>pair threshold</td></tr>
 <tr><td>4.30 fm</td><td>hard gamma</td><td>2.48×10¹¹</td><td>4.9×10⁻¹⁵ m/s</td><td>P = P<sub>eff</sub>; stop-death</td></tr>
 <tr><td>ℓ<sub>P</sub></td><td>—</td><td>6.58×10³¹</td><td>→ 0</td><td>lattice</td></tr>
@@ -128,13 +129,13 @@ code { font-family: 'JetBrains Mono', monospace; font-size: .86em; }
 <tr><td>E51 W=1 torus v<sub>P</sub>/v<sub>T</sub> as a formula for α</td><td>unpaid experiment — not the origin of 137; 137 is k<sub>H</sub></td></tr>
 <tr><td>FLM14 residence</td><td>UNPAID</td></tr>
 </table>
-<p><a href="sdt-for-people.html">For people →</a> · <a href="sdt_walkthrough.html">Laws walkthrough →</a> · <a href="causal-chain.html">Causal chain →</a> · <a href="benchmarks.html">Benchmarks →</a></p>
+<p><a href="sdt-for-people.html">For people →</a> · <a href="theory.html#laws">Six Laws on the path →</a> · <a href="theory.html#L0">Causal chain →</a> · <a href="benchmarks.html">Benchmarks →</a></p>
 </article>
 </main>
 <footer class="footer">
   <div class="footer__inner">
     <div class="footer__brand-name">Spatial <span>Displacement</span> Theory</div>
-    <p class="footer__brand-desc">J. C. Harvey, Melbourne. Theoretical model — current. Three registers. Parallel to Papers/SDT_THEORETICAL_MODEL.md.</p>
+    <p class="footer__brand-desc">James Christopher Tyndall, Melbourne. Theoretical model — current. Three registers. Parallel to Papers/SDT_THEORETICAL_MODEL.md.</p>
   </div>
 </footer>
 </body>

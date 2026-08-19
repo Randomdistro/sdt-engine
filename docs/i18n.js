@@ -29,7 +29,7 @@
   var DICT=window.SDT_I18N||{};
 
   var CSS = ''+
-  /* labelled button (Harvey 2026-07-30: no hamburger — say the word) */
+  /* labelled button (James Christopher Tyndall 2026-07-30: no hamburger — say the word) */
   '.i18n-burger{position:fixed;top:12px;right:16px;z-index:2000;height:36px;padding:0 14px;'+
     'background:rgba(245,240,232,0.86);-webkit-backdrop-filter:blur(9px);backdrop-filter:blur(9px);'+
     'border:1px solid rgba(176,116,48,0.35);border-radius:10px;cursor:pointer;display:flex;'+

@@ -1,0 +1,212 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sdt-engine.local/contracts/sdtresult-3.0.0.schema.json",
+  "title": "SDT arbitrary-N seven-circle occlusion result 3.0.0",
+  "type": "object",
+  "required": [
+    "contract_version",
+    "case_id",
+    "problem_class",
+    "status",
+    "classification",
+    "executed_steps",
+    "normalized_case",
+    "trajectory",
+    "trajectory_sha256",
+    "channel_ledger",
+    "pair_matrix",
+    "interactions",
+    "diagnostics",
+    "gates",
+    "provenance",
+    "solver"
+  ],
+  "properties": {
+    "contract_version": { "const": "3.0.0" },
+    "case_id": { "type": "string" },
+    "problem_class": { "const": "sdt_occlusion_nbody" },
+    "status": {
+      "enum": [
+        "running",
+        "completed",
+        "collision",
+        "numerical_failure",
+        "invalid_case"
+      ]
+    },
+    "classification": {
+      "enum": ["COMPUTED", "NOT-EXECUTED"]
+    },
+    "message": { "type": "string" },
+    "executed_steps": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "normalized_case": { "type": "object" },
+    "trajectory": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/frame" }
+    },
+    "trajectory_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "channel_ledger": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "body",
+          "baryon_count",
+          "channels",
+          "reconstruction_exact"
+        ],
+        "properties": {
+          "body": { "type": "string" },
+          "baryon_count": { "type": "string" },
+          "channels": {
+            "type": "array",
+            "minItems": 7,
+            "maxItems": 7,
+            "items": { "type": "string" }
+          },
+          "reconstruction_exact": { "type": "boolean" }
+        }
+      }
+    },
+    "pair_matrix": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/pair" }
+    },
+    "interactions": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/interaction" }
+    },
+    "diagnostics": { "type": "object" },
+    "gates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "passed", "value"],
+        "properties": {
+          "id": { "type": "string" },
+          "passed": { "type": "boolean" },
+          "value": { "type": "number" }
+        }
+      }
+    },
+    "provenance": { "type": "object" },
+    "solver": { "type": "object" }
+  },
+  "$defs": {
+    "vector3": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": { "type": "number" }
+    },
+    "state": {
+      "type": "object",
+      "required": ["id", "position_m", "velocity_m_s"],
+      "properties": {
+        "id": { "type": "string" },
+        "position_m": { "$ref": "#/$defs/vector3" },
+        "velocity_m_s": { "$ref": "#/$defs/vector3" }
+      }
+    },
+    "frame": {
+      "type": "object",
+      "required": ["step", "time_s", "states"],
+      "properties": {
+        "step": { "type": "integer", "minimum": 0 },
+        "time_s": { "type": "number", "minimum": 0 },
+        "states": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/state" }
+        }
+      }
+    },
+    "pair": {
+      "type": "object",
+      "required": [
+        "target",
+        "source",
+        "acceleration_m_s2",
+        "visible_solid_angle_sr",
+        "shield_fraction"
+      ],
+      "properties": {
+        "target": { "type": "string" },
+        "source": { "type": "string" },
+        "acceleration_m_s2": { "$ref": "#/$defs/vector3" },
+        "visible_solid_angle_sr": {
+          "type": "number",
+          "minimum": 0
+        },
+        "shield_fraction": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "interaction": {
+      "type": "object",
+      "required": [
+        "target",
+        "source",
+        "target_channel",
+        "source_channel",
+        "target_channel_baryons",
+        "source_channel_baryons",
+        "target_centre_m",
+        "source_centre_m",
+        "axis",
+        "raw_solid_angle_sr",
+        "visible_solid_angle_sr",
+        "shield_fraction",
+        "acceleration_m_s2",
+        "retarded_time_s",
+        "retarded_residual_s"
+      ],
+      "properties": {
+        "target": { "type": "string" },
+        "source": { "type": "string" },
+        "target_channel": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 6
+        },
+        "source_channel": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 6
+        },
+        "target_channel_baryons": { "type": "string" },
+        "source_channel_baryons": { "type": "string" },
+        "target_centre_m": { "$ref": "#/$defs/vector3" },
+        "source_centre_m": { "$ref": "#/$defs/vector3" },
+        "axis": { "$ref": "#/$defs/vector3" },
+        "raw_solid_angle_sr": {
+          "type": "number",
+          "minimum": 0
+        },
+        "visible_solid_angle_sr": {
+          "type": "number",
+          "minimum": 0
+        },
+        "shield_fraction": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "acceleration_m_s2": { "$ref": "#/$defs/vector3" },
+        "retarded_time_s": { "type": "number" },
+        "retarded_residual_s": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    }
+  }
+}

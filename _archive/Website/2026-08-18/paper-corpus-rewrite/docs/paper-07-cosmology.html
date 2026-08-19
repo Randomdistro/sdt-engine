@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>/*sdt-theme-guard*/(function(){try{var t=localStorage.getItem("sdt.theme")||"auto";if(t==="auto")t=(window.matchMedia&&window.matchMedia("(prefers-color-scheme:dark)").matches)?"dark":"light";var d=document.documentElement;d.setAttribute("data-theme",t);d.setAttribute("data-sdt-theme",t);}catch(e){}})();</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paper 07 — Cosmology &amp; Redshift</title>
+<style>
+:root{--paper:#faf8f4;--edge:#e5e0d4;--ink:#1c1e20;--soft:#45484c;--mute:#6d7177;--mint:#0d7a5f;--rust:#a4552e;--gold:#8a6d1f;--steel:#4a6d82}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:'Source Serif 4',Georgia,serif;line-height:1.75;padding:3rem 1.5rem}
+main{max-width:46rem;margin:0 auto}
+.series{font-family:Consolas,monospace;font-size:.68rem;letter-spacing:.28em;color:var(--mute);text-transform:uppercase;margin-bottom:1.2rem}
+h1{font-size:1.85rem;line-height:1.25;font-weight:700;margin-bottom:1rem}
+.byline{font-size:1rem;margin-bottom:.2rem}
+.affil{font-family:Consolas,monospace;font-size:.72rem;color:var(--mute);margin-bottom:2rem}
+h2{font-size:1.12rem;font-weight:700;margin:2.2rem 0 .7rem}
+p{margin-bottom:.9rem;color:var(--soft)}
+strong{color:var(--ink)}
+.abstract{border:1px solid var(--edge);border-left:3px solid var(--mint);padding:1.1rem 1.3rem;background:#fff;margin:1.5rem 0}
+.abstract p{margin-bottom:0}
+.eq{font-family:Consolas,monospace;font-size:.9rem;background:#fff;border:1px solid var(--edge);border-radius:3px;padding:.8rem 1.1rem;margin:1rem 0;display:flex;justify-content:space-between;gap:1rem;overflow-x:auto}
+.eq .no{color:var(--mute)}
+table{width:100%;border-collapse:collapse;font-size:.85rem;margin:1rem 0}
+th,td{border:1px solid var(--edge);padding:.45rem .6rem;text-align:left;vertical-align:top}
+th{font-family:Consolas,monospace;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+.decl{border:1px solid var(--edge);background:#fff;padding:1rem 1.2rem;margin:1.5rem 0;font-size:.92rem}
+.refs ol{margin-left:1.2rem}
+.refs li{font-size:.85rem;color:var(--soft);margin-bottom:.4rem}
+footer{max-width:46rem;margin:3rem auto 0;padding-top:1.2rem;border-top:1px solid var(--edge)}
+footer a{color:var(--mint);text-decoration:none;font-family:Consolas,monospace;font-size:.75rem;letter-spacing:.06em}
+sub,sup{line-height:0}
+</style>
+<link rel="stylesheet" href="sdt-shell.css">
+<script src="sdt-shell.js" defer></script>
+<meta name="description" content="Paper 07 — Cosmology &amp; Redshift — part of Spatial Displacement Theory, a zero-free-parameter physics framework.">
+<link rel="canonical" href="https://spatialdisplacementtheory.com/paper-07-cosmology">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/favicon.ico" sizes="64x64">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#b07430">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Spatial Displacement Theory">
+<meta property="og:title" content="Paper 07 — Cosmology &amp; Redshift">
+<meta property="og:description" content="Paper 07 — Cosmology &amp; Redshift — part of Spatial Displacement Theory, a zero-free-parameter physics framework.">
+<meta property="og:url" content="https://spatialdisplacementtheory.com/paper-07-cosmology">
+<meta property="og:image" content="https://spatialdisplacementtheory.com/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_AU">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Paper 07 — Cosmology &amp; Redshift">
+<meta name="twitter:description" content="Paper 07 — Cosmology &amp; Redshift — part of Spatial Displacement Theory, a zero-free-parameter physics framework.">
+<meta name="twitter:image" content="https://spatialdisplacementtheory.com/og-card.png">
+</head>
+<body>
+<main>
+<p class="series">Spatial Displacement Theory · Paper 07 · Prepared for Submission</p>
+<h1>Cosmography Without a Dark Sector: The Pressure Tensor P(z) = P<sub>conv</sub>(1+z)⁴, the Two-Component Redshift, and the H₀ Ordering</h1>
+<p class="byline">James Christopher Tyndall</p>
+<p class="affil">Melbourne, Australia · July 2026 · Domain 07 — Cosmology &amp; Redshift</p>
+
+<div class="abstract">
+<p><strong>Abstract.</strong> Cosmological observables are computed from the lattice pressure tensor with no expansion of space, no dark matter, and no dark energy. The tensor evolves as P(z) = P<sub>conv</sub>(1+z)⁴ with polytropic index γ<sub>eff</sub> = 4 — a topologically stiff lattice, not a photon gas — and drops by an exact factor 4 at recombination, when independent winding defects bind into neutral hydrogen, freezing the acoustic scale. Redshift decomposes into an emission term (depth, z = ϟ/r) and a propagation term (compression squeeze); the rival framework conflates them into one recession variable, and that conflation <em>is</em> the H₀ tension: the ordering 67.4 → 73.0 across probes follows from local compression sampling. The CMB is the current operating pressure of the substrate. Negative results are on the record: the pure z³ distance model is excluded against the supernova compilation (the rival is preferred at ΔAIC ≈ 90), and the u ∝ (1+z)⁴ energy-density scaling is degenerate between the two frameworks — claimed as consistency, not victory.</p>
+</div>
+<p><strong>Keywords:</strong> pressure tensor · topological freeze-out · two-component redshift · octave quantisation · opacity ceiling · H₀ ordering</p>
+
+<h2>1. The pressure tensor and its stiffness</h2>
+<div class="eq"><span>P(z) = P<sub>conv</sub>·(1+z)⁴,&nbsp;&nbsp;γ<sub>eff</sub> = 4</span><span class="no">(1)</span></div>
+<p>Linking-number density scales as (1+z)³ and temperature as (1+z); the product gives (1). The index is 4, not 4/3: the lattice carries four topological degrees of freedom per cell (W ± 1 modes) and is stiff. The radiation-era scaling H ∝ (1+z)² is recovered, not imported (class C; passes the delete-test).</p>
+
+<h2>2. Recombination as topological freeze-out</h2>
+<div class="eq"><span>P → P/4 exactly, at binding of free W-defects into neutral H</span><span class="no">(2)</span></div>
+<p>When electron and proton windings bind, the independent defect count — hence the lattice pressure — drops by the exact integer factor 4. This freezes the acoustic scale (the baryon-oscillation shells are physical pressure shells, not projected sound horizons) and switches the rate law's exponent. The engine's constant H₀ = 67.4 km/s/Mpc emerges within 1% of the anisotropy-inferred value; disclosure: the rate-equation <em>structure</em> is presently assumed pending its own derivation (GOM05), and the Ω-normalisation is observational — the label is C-flagged, not C.</p>
+
+<h2>3. The two-component redshift and the H₀ ordering</h2>
+<div class="eq"><span>z<sub>obs</sub> = z<sub>emit</sub>(depth: ϟ/r at the source) ⊕ z<sub>prop</sub>(compression squeeze en route)</span><span class="no">(3)</span></div>
+<p>Emission depth is set by the source's own koppa; propagation squeeze accumulates through the compression field traversed. A framework that reads the sum as a single recession velocity must find different "expansion rates" when probes weight the two terms differently — which is precisely the observed ordering: anisotropy-based 67.4, tip-of-red-giant 70.0, lensing-time 71.6, ladder 73.0. The tension is predicted structure, not crisis. Two further quantitative results: the observed shift spectrum quantises in octaves, 1+z = 2<sup>Δn</sup>, placing the CMB at 10.10 octaves below emission (λ<sub>emit</sub> = 975 nm); and octave shifting does not compound like absorption — which rules out the classical tired-light rival while preserving sharp quasar lines, a discriminant the tired-light class fails.</p>
+
+<h2>4. Opacity, the ceiling c/√3, and the CMB's gradient</h2>
+<p>Radiation self-jams: above a threshold flux the relay saturates and the medium runs opaque, with transport ceiling c/√3 — the infrared fluid ceiling we meet coming down, not the recharge target. The Clearing is the depinning of that logjam, this cycle's bang. Because release is synchronised across a depth gradient, the CMB arrives as the superposition of open-close cycles — its blackbody fidelity is a gate, pre-registered at the spectral-distortion bound (&lt; 50 ppm against the interferometric spectrum): a measured distortion above the bound falsifies the mechanism. Late in a cycle the bath falls toward 0 K; gravity shuts off with the influx; matter expands as gravitational seats empty; seated structure breaks. The dump re-energises the spation matrix up the spectral ladder until far-frame light cannot move (c<sub>far</sub> → 0, gamma wall). The Clearing begins again. The Big Bang is that reiteration. Estimated elapsed count since this Clearing ≈ 48 Gyr is a reading, not a derivation. The threshold that opens the door remains PENDING. Ladder and sequence: Theory/07.</p>
+
+<h2>5. Negative results, on the record</h2>
+<div class="eq"><span>pure-z³ distance model vs 1701 SNe: EXCLUDED (rival preferred, ΔAIC ≈ 90)</span><span class="no">(4)</span></div>
+<p>The cubic-redshift distance construction fails the supernova compilation and is recorded as failed (CR12); the surviving content of CR10 is the dimensional reading of the exponent, not a distance law. Likewise u<sub>CMB</sub> ∝ (1+z)⁴ is shared-input between compression and expansion readings — it is not independently discriminating and is logged as such. These entries stand because a falsification programme that hides its misses is not one.</p>
+
+<h2>6. Certification</h2>
+<table>
+<tr><th>Result</th><th>Value</th><th>Status</th></tr>
+<tr><td>P(z) = P<sub>conv</sub>(1+z)⁴, γ<sub>eff</sub> = 4</td><td>eq. (1)</td><td>DERIVED — class C (CR05)</td></tr>
+<tr><td>Freeze-out factor</td><td>exactly 4</td><td>DERIVED — integer defect count</td></tr>
+<tr><td>H₀</td><td>67.4 km/s/Mpc (&lt;1%)</td><td>C-flagged — structure assumed pending GOM05 (disclosed)</td></tr>
+<tr><td>H₀ ordering across probes</td><td>67.4→73.0</td><td>PREDICTED structure — two-component conflation</td></tr>
+<tr><td>Octaves 1+z = 2<sup>Δn</sup>; CMB at 10.10</td><td>λ<sub>emit</sub> = 975 nm</td><td>DERIVED (CR07); kills tired-light class</td></tr>
+<tr><td>CMB distortion gate</td><td>&lt; 50 ppm</td><td>PRE-REGISTERED falsifier</td></tr>
+<tr><td>z³ distance model</td><td>ΔAIC ≈ 90 against</td><td>EXCLUDED — negative result (CR12)</td></tr>
+<tr><td>u ∝ (1+z)⁴</td><td>—</td><td>shared-input — no discriminating power (disclosed)</td></tr>
+<tr><td>Cyclic reiteration</td><td>Shapiro → MW→IR→gamma (`c_far`→0); heat death = Law III at `P`→0</td><td>COMPUTED chain 2026-08-13; amplitude PENDING; FIRAS gate; Theory/07</td></tr>
+</table>
+
+<div class="decl">
+<p><strong>Methodological declaration.</strong> No expansion of space, no dark matter, no dark energy, no inflaton, and no six-parameter concordance fit enters any derivation; the rival framework appears only as the named alternative in discriminant statements, and its victories (eq. 4) are reported as its victories. The anisotropy, distance-ladder, lensing, and supernova datasets enter as measured targets. Shared-input identities are labelled as such rather than claimed as independent evidence.</p>
+</div>
+
+<h2 class="refs">References</h2>
+<div class="refs"><ol>
+<li>Engine/include/sdt/laws.hpp — namespace law_I (pressure tensor, freeze-out, H₀ with C-flag in situ), law_II (release cascade, pressure domains).</li>
+<li>Investigations/07_Cosmology_and_Redshift — CR04/CR05 (tensor, ceiling), CR07 (octaves), CR10/CR12 (cubic model and its exclusion), opacity-logjam dossier.</li>
+<li>Hubble/ — the zk² tool suite and datasets (the tension decomposition).</li>
+<li>FIRAS spectral data; Planck 2018 anisotropy products; Pantheon+ compilation (measured targets).</li>
+<li>Paper 06 of this series (the depth field feeding z<sub>emit</sub>).</li>
+<li>Theory/07_Cyclic_Reiteration.md — Shapiro–Wien chain (T, P, and c<sub>far</sub> are one ladder); heat death is Law III at P→0; recharge to c<sub>far</sub> → 0. COMPUTED; amplitude PENDING.</li>
+</ol></div>
+</main>
+<footer><a href="theory.html#cosmology">← RETURN TO THE ATLAS · COSMOGRAPHY</a></footer>
+</body>
+</html>

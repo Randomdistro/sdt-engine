@@ -4,6 +4,7 @@
 
 (function () {
   "use strict";
+  window.__SDT_LOCAL_MOTION_CONTROL__ = true;
 
   /* ── Element Data (Z, Symbol, Name, most-stable A) ──────────────────────── */
   const ELEMENTS = [
@@ -91,6 +92,54 @@
     hubbleObs.observe(el);
   });
 
+  const stillFrames = new Set();
+  ["pointerdown", "input", "change", "click"].forEach(type => {
+    document.addEventListener(type, () => stillFrames.clear(), { passive: true });
+  });
+
+  function motionEnabled(element) {
+    if (document.hidden) return false;
+    const rect = element.getBoundingClientRect();
+    const visible = (
+      rect.bottom >= 0
+      && rect.top <= window.innerHeight
+      && rect.right >= 0
+      && rect.left <= window.innerWidth
+    );
+    if (!visible) return false;
+    const setting = document.documentElement.getAttribute("data-sdt-motion");
+    const off =
+      setting === "off"
+      || (
+        setting == null
+        && window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      );
+    if (off) {
+      if (stillFrames.has(element)) return false;
+      stillFrames.add(element);
+      return true;
+    }
+    stillFrames.delete(element);
+    return true;
+  }
+
+  document.querySelectorAll("iframe[data-sdt-visibility]").forEach(frame => {
+    const sendVisibility = visible => {
+      frame.contentWindow?.postMessage(
+        { type: "sdt-visibility", visible },
+        window.location.origin
+      );
+    };
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => sendVisibility(entry.isIntersecting));
+    }, { threshold: 0.01 });
+    frame.addEventListener("load", () => {
+      const rect = frame.getBoundingClientRect();
+      sendVisibility(rect.bottom >= 0 && rect.top <= window.innerHeight);
+    });
+    observer.observe(frame);
+  });
+
 
   /* ════════════════════════════════════════════════════════════════════════
      LATTICE CANVAS — Subtle background animation
@@ -117,28 +166,30 @@
     }
 
     function drawLattice() {
-      ctx.clearRect(0, 0, w, h);
-      time += 0.003;
+      if (motionEnabled(latticeCanvas)) {
+        ctx.clearRect(0, 0, w, h);
+        time += 0.003;
 
-      for (let i = 0; i < cols; i++) {
-        for (let j = 0; j < rows; j++) {
-          const x = i * spacing;
-          const y = j * spacing;
-          const dx = Math.sin(time + i * 0.3 + j * 0.2) * 2.5;
-          const dy = Math.cos(time + j * 0.3 + i * 0.15) * 2.5;
+        for (let i = 0; i < cols; i++) {
+          for (let j = 0; j < rows; j++) {
+            const x = i * spacing;
+            const y = j * spacing;
+            const dx = Math.sin(time + i * 0.3 + j * 0.2) * 2.5;
+            const dy = Math.cos(time + j * 0.3 + i * 0.15) * 2.5;
 
-          const cx = w / 2;
-          const cy = h / 2;
-          const dist = Math.sqrt((x - cx) ** 2 + (y - cy) ** 2);
-          const maxDist = Math.sqrt(cx * cx + cy * cy);
-          const fade = 1 - Math.min(dist / (maxDist * 0.8), 1);
-          const alpha = fade * 0.35;
+            const cx = w / 2;
+            const cy = h / 2;
+            const dist = Math.sqrt((x - cx) ** 2 + (y - cy) ** 2);
+            const maxDist = Math.sqrt(cx * cx + cy * cy);
+            const fade = 1 - Math.min(dist / (maxDist * 0.8), 1);
+            const alpha = fade * 0.35;
 
-          if (alpha > 0.01) {
-            ctx.beginPath();
-            ctx.arc(x + dx, y + dy, 1.2, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(176, 116, 48, ${alpha})`;
-            ctx.fill();
+            if (alpha > 0.01) {
+              ctx.beginPath();
+              ctx.arc(x + dx, y + dy, 1.2, 0, Math.PI * 2);
+              ctx.fillStyle = `rgba(176, 116, 48, ${alpha})`;
+              ctx.fill();
+            }
           }
         }
       }
@@ -171,6 +222,10 @@
     let t = 0;
 
     function draw() {
+      if (!motionEnabled(canvas)) {
+        requestAnimationFrame(draw);
+        return;
+      }
       ctx.clearRect(0, 0, size, size);
       t += 0.012;
 

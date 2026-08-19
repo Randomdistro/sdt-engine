@@ -1,0 +1,174 @@
+{
+  "schema": "sdt-theory-dependencies-1.0.0",
+  "canonical": "theory.html",
+  "nodes": [
+    {
+      "id": "L0",
+      "order": 0,
+      "title": "The grain",
+      "requires": [],
+      "produces": ["lattice pitch", "a countable ruler"],
+      "status": "AXIOM R1"
+    },
+    {
+      "id": "L1",
+      "order": 1,
+      "title": "The substrate",
+      "requires": ["L0"],
+      "produces": ["spation packing", "structured packing slack"],
+      "status": "FRAMEWORK"
+    },
+    {
+      "id": "L2",
+      "order": 2,
+      "title": "The relay and the Ever-Present Now",
+      "requires": ["L0", "L1"],
+      "produces": ["nearest-neighbour relay", "movement tally"],
+      "status": "DERIVED"
+    },
+    {
+      "id": "L3",
+      "order": 3,
+      "title": "The Clearing and convergence",
+      "requires": ["L1", "L2"],
+      "produces": ["cosmological relay throughput", "operating pressure"],
+      "status": "LAW I"
+    },
+    {
+      "id": "L4",
+      "order": 4,
+      "title": "Occlusion",
+      "requires": ["L3"],
+      "produces": ["inverse-square geometry", "directed pressure imbalance"],
+      "status": "LAW III"
+    },
+    {
+      "id": "L5",
+      "order": 5,
+      "title": "Matter as persistent displacement",
+      "requires": ["L1", "L2", "L4"],
+      "produces": ["persistent circulation", "material boundary"],
+      "status": "LAW VI"
+    },
+    {
+      "id": "L6",
+      "order": 6,
+      "title": "Mass as reorganisation cost",
+      "requires": ["L1", "L5"],
+      "produces": ["inertial response", "equivalence of weight and inertia"],
+      "status": "LAW IV · OPEN DERIVATION"
+    },
+    {
+      "id": "L7",
+      "order": 7,
+      "title": "The movement budget",
+      "requires": ["L2", "L5"],
+      "produces": ["special-relativistic kinematics", "energy-momentum bookkeeping"],
+      "status": "LAW V"
+    },
+    {
+      "id": "L8",
+      "order": 8,
+      "title": "The release cascade",
+      "requires": ["L3", "L7"],
+      "produces": ["pressure domains", "ordered release rungs"],
+      "status": "LAW II"
+    },
+    {
+      "id": "L9",
+      "order": 9,
+      "title": "Koppa",
+      "requires": ["L3", "L4", "L7"],
+      "produces": ["length-form orbital invariant", "scale bridge"],
+      "status": "BRIDGE"
+    },
+    {
+      "id": "L10",
+      "order": 10,
+      "title": "Hydrogen",
+      "requires": ["L5", "L9"],
+      "produces": ["proton boundary", "electron boundary", "atomic seat"],
+      "status": "COMPUTED CHAIN"
+    },
+    {
+      "id": "L11",
+      "order": 11,
+      "title": "Emission",
+      "requires": ["L7", "L8", "L9", "L10"],
+      "produces": ["path-length spectrum map", "frequency-energy bridge"],
+      "status": "OPEN NORMALISATION"
+    },
+    {
+      "id": "L12",
+      "order": 12,
+      "title": "Opposed circulation and electric response",
+      "requires": ["L4", "L5", "L10"],
+      "produces": ["electric sign from circulation direction", "electromagnetic wake response"],
+      "status": "MECHANISM · CALIBRATED COEFFICIENT"
+    },
+    {
+      "id": "L13",
+      "order": 13,
+      "title": "Nuclear construction",
+      "requires": ["L1", "L5", "L8", "L12"],
+      "produces": ["alpha-deuteron-triton grammar", "shell construction"],
+      "status": "COMPUTED GRAMMAR"
+    },
+    {
+      "id": "L14",
+      "order": 14,
+      "title": "Atomic seating and materials",
+      "requires": ["L10", "L12", "L13"],
+      "produces": ["exclusive seats", "bonding and material structure"],
+      "status": "PARTIAL · OPEN ENERGETICS"
+    },
+    {
+      "id": "L15",
+      "order": 15,
+      "title": "Fluids",
+      "requires": ["L1", "L2", "L8"],
+      "produces": ["poloidal transport", "cascade geometry"],
+      "status": "COMPUTED"
+    },
+    {
+      "id": "L16",
+      "order": 16,
+      "title": "Heat and freedom",
+      "requires": ["L7", "L8", "L14", "L15"],
+      "produces": ["temperature as movement distribution", "entropy as accessible freedom"],
+      "status": "PARTIAL"
+    },
+    {
+      "id": "L17",
+      "order": 17,
+      "title": "Two-body celestial mechanics",
+      "requires": ["L4", "L6", "L9"],
+      "produces": ["surface acceleration", "conic trajectories", "orbital invariants", "precession map"],
+      "status": "DERIVED FORM · COMPUTED CASES"
+    },
+    {
+      "id": "L18",
+      "order": 18,
+      "title": "Many-body and rotating celestial systems",
+      "requires": ["L7", "L8", "L9", "L13", "L15", "L17"],
+      "produces": ["mutual orbits", "deterministic N-body trajectories", "three-body known-answer families", "tidal and rotating-frame diagnostics"],
+      "status": "COMPUTED · VALIDATED KERNEL"
+    },
+    {
+      "id": "L19",
+      "order": 19,
+      "title": "Perturbations, stellar systems and the cyclic cosmos",
+      "requires": ["L3", "L8", "L17", "L18"],
+      "produces": ["perturbed celestial hierarchy", "stellar and galactic tests", "redshift ladder", "recharge cycle"],
+      "status": "PARTIAL · UNDER TEST"
+    },
+    {
+      "id": "L20",
+      "order": 20,
+      "title": "The debt ledger",
+      "requires": ["L0", "L1", "L2", "L3", "L4", "L5", "L6", "L7", "L8", "L9", "L10", "L11", "L12", "L13", "L14", "L15", "L16", "L17", "L18", "L19"],
+      "produces": ["open-debt ledger", "explicit limitations", "falsification programme"],
+      "status": "OPEN"
+    }
+  ]
+}

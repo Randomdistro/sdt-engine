@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="en"><head>
+<meta name="robots" content="noindex">
+<meta http-equiv="refresh" content="0; url=atomicus-3d.html">
+<script>location.replace('atomicus-3d.html' + location.search + location.hash);</script>
 <script>/*sdt-theme-guard*/(function(){try{var t=localStorage.getItem("sdt.theme")||"auto";if(t==="auto")t=(window.matchMedia&&window.matchMedia("(prefers-color-scheme:dark)").matches)?"dark":"light";var d=document.documentElement;d.setAttribute("data-theme",t);d.setAttribute("data-sdt-theme",t);}catch(e){}})();</script>
 
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -53,7 +56,7 @@ select{padding:4px;border:1px solid var(--edge);border-radius:4px;background:#ff
 </style><link rel="stylesheet" href="sdt-shell.css">
 <script src="sdt-shell.js" defer></script>
 <meta name="description" content="ATOMICUS — The SDT Nuclear Model, built one finding at a time — part of Spatial Displacement Theory, a zero-free-parameter physics framework.">
-<link rel="canonical" href="https://spatialdisplacementtheory.com/atomicus-nuclear-model">
+<link rel="canonical" href="https://spatialdisplacementtheory.com/atomicus-3d">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.ico" sizes="64x64">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -63,7 +66,7 @@ select{padding:4px;border:1px solid var(--edge);border-radius:4px;background:#ff
 <meta property="og:site_name" content="Spatial Displacement Theory">
 <meta property="og:title" content="ATOMICUS — The SDT Nuclear Model, built one finding at a time">
 <meta property="og:description" content="ATOMICUS — The SDT Nuclear Model, built one finding at a time — part of Spatial Displacement Theory, a zero-free-parameter physics framework.">
-<meta property="og:url" content="https://spatialdisplacementtheory.com/atomicus-nuclear-model">
+<meta property="og:url" content="https://spatialdisplacementtheory.com/atomicus-3d">
 <meta property="og:image" content="https://spatialdisplacementtheory.com/og-card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -198,8 +201,8 @@ const F=[
   chk:iso=>{const p=pack(iso.A,iso.Z);return `${p.nSub} subunits placed = ${p.nuc.length} nucleons (${p.nuc.filter(n=>n.type==='p').length}p ${p.nuc.filter(n=>n.type==='n').length}n)`;}},
 
  {t:'Binding from overlap',s:'EXCLUDED',mode:'pack',
-  st:'NSEQ04 tested the live shadow-union geometry over the registered isotope range. Its calibrated κ=31.4485 MeV/fm² gives total-BE <b>R²=0.7918</b>, '+
-     '<b>BE/A R²=−161.94</b> and mean absolute relative error 40.4%. The projected-area route therefore fails the per-nucleon target and is not promoted as the binding law. '+
+  st:'NSEQ04 tested the NSEQ05-CONTROL-3 shadow-union replay over the registered 217-isotope range. Its calibrated κ=47.137184 MeV/fm² gives total-BE <b>R²=0.796231</b>, '+
+     '<b>BE/A R²=−230.641525</b> and mean absolute relative error 44.39%. The projected-area route therefore fails the per-nucleon target and is not promoted as the binding law. '+
      '<b>Binding from overlap remains excluded.</b>',
   chk:iso=>{const r=IDX.get(iso.Z+','+iso.A);return r?`measured BE/A = ${(r[2]/iso.A).toFixed(3)} MeV — the flat ~8.5 plateau the area model can’t make`:'—';}},
 
@@ -223,7 +226,7 @@ const F=[
  {t:'The impact & kinematics',s:'CONFIRMED',mode:'impact',
   st:'The nucleus surface whirls at the universal <b>1.83c</b> counter-seat. A 1 A GeV proton arrives at β=0.875; the movement '+
      'budget <code>v_circ²+v_trans²=c²</code> stalls its gear to v_circ=1/γ=0.484c. In one ~5.7e-23 s transit the surface turns <b>309°</b>. '+
-     'To leave the larger daughter, the proton must strike the <b>light lobe off the rigid triton core</b>. (Ekin(Z) fine-tune was Coulomb-degenerate — excluded.)',
+     'To leave the larger daughter, the proton must strike the <b>light lobe off the rigid triton core</b>. (Ekin(Z) fine-tune was shared-input, not independent — excluded.)',
   chk:()=>'central hit → symmetric fission · grazing hit → spallation shave · impact on the deuteron lobe leaves the N=82 daughter'},
 
  {t:'Every proton fields an electron',s:'NATIVE',mode:'electron',

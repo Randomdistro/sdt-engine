@@ -1,7 +1,8 @@
-"""NSEQ05 spherical-tier packer — Python port of Release/HTML_SDT_Website/js/pack-nucleus.js.
+"""Python port of the NSEQ05 legacy geometric comparison control.
 
-Default dnn=1.45 fm, coulSpread=0 (lab PIP / shared JS). Not the sequencer slider
-(1.45×R_p). Do not retune dnn to binding or RMS.
+Default dnn=1.45 fm and coulSpread=0 across the shared JS, sequencer and PIP.
+It preserves inventory and shell-template tests; it is not the Atomicus
+rim-contact construction. Do not retune dnn to binding or RMS.
 """
 from __future__ import annotations
 
@@ -9,25 +10,27 @@ import math
 from typing import Any
 
 R_P = 0.8414  # fm — same literal as pack-nucleus.js
+VERSION = "NSEQ05-CONTROL-3"
+DEFAULT_BOND_FM = 1.45
 PHI = (1.0 + math.sqrt(5.0)) / 2.0
 GAM = 0.95
 R_OPEN_SCALE = 1.05
 R_CLOSE_SCALE = 0.95
 
 SHELL_SEQ = [
-    {"sp": "d", "cap": 6, "geom": "oct"},
-    {"sp": "d", "cap": 12, "geom": "ico"},
-    {"sp": "t", "cap": 8, "geom": "stella"},
-    {"sp": "d", "cap": 12, "geom": "cuboct"},
-    {"sp": "t", "cap": 10, "geom": "polar"},
-    {"sp": "d", "cap": 20, "geom": "fib"},
-    {"sp": "t", "cap": 12, "geom": "polar"},
-    {"sp": "d", "cap": 30, "geom": "fib"},
-    {"sp": "t", "cap": 14, "geom": "t14"},
-    {"sp": "d", "cap": 42, "geom": "fib"},
-    {"sp": "t", "cap": 16, "geom": "polar"},
-    {"sp": "d", "cap": 56, "geom": "fib"},
-    {"sp": "t", "cap": 18, "geom": "polar"},
+    {"sp": "d", "cap": 6, "geom": "oct", "label": "D6"},
+    {"sp": "d", "cap": 12, "geom": "ico", "label": "D12-pre"},
+    {"sp": "t", "cap": 8, "geom": "stella", "label": "T8"},
+    {"sp": "d", "cap": 12, "geom": "cuboct", "label": "D12-cuboct"},
+    {"sp": "t", "cap": 10, "geom": "polar", "label": "T10"},
+    {"sp": "d", "cap": 20, "geom": "fib", "label": "D20"},
+    {"sp": "t", "cap": 12, "geom": "polar", "label": "T12"},
+    {"sp": "d", "cap": 30, "geom": "fib", "label": "D30"},
+    {"sp": "t", "cap": 14, "geom": "t14", "label": "T14"},
+    {"sp": "d", "cap": 42, "geom": "fib", "label": "D42"},
+    {"sp": "t", "cap": 16, "geom": "polar", "label": "T16"},
+    {"sp": "d", "cap": 56, "geom": "fib", "label": "D56"},
+    {"sp": "t", "cap": 18, "geom": "polar", "label": "T18"},
 ]
 
 
@@ -41,7 +44,7 @@ def grammar(Z: int, A: int) -> tuple[int, int]:
 
 
 def dirs_oct() -> list[list[float]]:
-    return [[1, 0, 0], [-1, 0, 0], [0, 1, 0], [0, -1, 0], [0, 0, 1], [0, 0, -1]]
+    return [[0, 0, 1], [0, 0, -1], [1, 0, 0], [-1, 0, 0], [0, 1, 0], [0, -1, 0]]
 
 
 def dirs_ico() -> list[list[float]]:
@@ -139,12 +142,82 @@ def shell_dirs(geom: str, cap: int, seed: int) -> list[list[float]]:
     return dirs_fib(cap, seed)
 
 
+def rotate_dirs(dirs: list[list[float]], seed: int) -> list[list[float]]:
+    angle = seed * math.pi * (3 - math.sqrt(5))
+    c, s = math.cos(angle), math.sin(angle)
+    return [[c * v[0] - s * v[1], s * v[0] + c * v[1], v[2]] for v in dirs]
+
+
+def open_dirs(m: int, seed: int) -> list[list[float]]:
+    """Display-only fallback directions beyond the registered shell schedule."""
+    if m <= 0:
+        return []
+    if m == 1:
+        out = [[0, 0, -1 if seed % 2 else 1]]
+    elif m == 2:
+        out = [[0, 0, 1], [0, 0, -1]]
+    elif m == 3:
+        out = [[1, 0, 0], [-0.5, math.sqrt(3) / 2, 0], [-0.5, -math.sqrt(3) / 2, 0]]
+    elif m == 4:
+        out = [vnorm(v) for v in [[1, 1, 1], [1, -1, -1], [-1, 1, -1], [-1, -1, 1]]]
+    elif m == 5:
+        out = [
+            [0, 0, 1],
+            [0, 0, -1],
+            [1, 0, 0],
+            [-0.5, math.sqrt(3) / 2, 0],
+            [-0.5, -math.sqrt(3) / 2, 0],
+        ]
+    elif m == 6:
+        out = dirs_oct()
+    elif m == 7:
+        out = [[0, 0, 1], [0, 0, -1]]
+        out.extend([[math.cos(2 * math.pi * k / 5), math.sin(2 * math.pi * k / 5), 0] for k in range(5)])
+    else:
+        out = dirs_fib(m, seed)
+    return rotate_dirs(out, seed)
+
+
+def farthest_seats(dirs: list[list[float]], m: int) -> list[dict[str, Any]]:
+    seats = [{"dir": direction, "seat": index} for index, direction in enumerate(dirs)]
+    if m >= len(seats):
+        return seats
+    chosen = [0]
+    while len(chosen) < m:
+        best, best_score = -1, -1.0
+        for i, candidate in enumerate(seats):
+            if i in chosen:
+                continue
+            nearest = math.inf
+            for j in chosen:
+                a, b = candidate["dir"], seats[j]["dir"]
+                d2 = (a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2 + (a[2] - b[2]) ** 2
+                nearest = min(nearest, d2)
+            if nearest > best_score + 1e-12:
+                best, best_score = i, nearest
+        chosen.append(best)
+    return [seats[i] for i in chosen]
+
+
+def occupied_seats(sh: dict[str, Any], m: int, seed: int) -> list[dict[str, Any]]:
+    dirs = shell_dirs(sh["geom"], sh["cap"], seed)
+    if m == sh["cap"]:
+        return [{"dir": direction, "seat": index} for index, direction in enumerate(dirs)]
+    if sh["sp"] == "t":
+        return [{"dir": direction, "seat": index} for index, direction in enumerate(dirs[:m])]
+    return farthest_seats(dirs, m)
+
+
 class Nucleus(list):
     """Nucleon list plus packer extras (contacts, subSeq, …)."""
 
 
-def pack_nucleus(A: int, Z: int, dnn: float = 1.45, coul_spread: float = 0.0) -> Nucleus:
+def pack_nucleus(
+    A: int, Z: int, dnn: float = DEFAULT_BOND_FM, coul_spread: float = 0.0
+) -> Nucleus:
     nd, nt = grammar(Z, A)
+    if not isinstance(A, int) or not isinstance(Z, int) or Z < 2 or A < Z or nd < 0 or nt < 0:
+        raise ValueError(f"invalid alpha grammar for Z={Z}, A={A}")
     spread = 1 + coul_spread * (Z * Z) / (A ** (4 / 3))
     D = dnn * spread
     nuc: Nucleus = Nucleus()
@@ -231,11 +304,34 @@ def pack_nucleus(A: int, Z: int, dnn: float = 1.45, coul_spread: float = 0.0) ->
         ]
 
     nuc_extra = {
+        "version": VERSION,
+        "classification": "LEGACY_GEOMETRIC_CONTROL",
+        "contactGeometry": False,
+        "grammar": {"A": A, "Z": Z, "nd": nd, "nt": nt, "valid": True},
         "contacts": contacts,
+        "shells": [
+            {
+                "index": 0,
+                "scheduleIndex": -1,
+                "species": "alpha",
+                "label": "α core",
+                "capacity": 1,
+                "occupancy": 1,
+                "geometry": "contact tetrahedron",
+                "full": True,
+            }
+        ],
         "bondD": D,
+        "coulombSpread": coul_spread,
+        "partialSeatPolicy": (
+            "registered seats: deuterons use a maximum-separation subset; "
+            "tritons retain N/S-first fill order"
+        ),
         "alphaGear": [e_mid(0, 2), e_mid(1, 2), e_mid(0, 3), e_mid(1, 3)],
         "alphaTetra": VT,
-        "subSeq": [{"group": "alpha", "sub": 0, "sp": "α", "name": "α", "cap": 1}],
+        "subSeq": [
+            {"group": "alpha", "sub": 0, "sp": "α", "name": "α", "cap": 1, "shell": 0, "seat": 0}
+        ],
     }
     alpha_out = max(math.hypot(*nuc[i]["pos"]) for i in alpha_ids)
 
@@ -247,7 +343,7 @@ def pack_nucleus(A: int, Z: int, dnn: float = 1.45, coul_spread: float = 0.0) ->
     nt_left = max(0, nt)
     last_p: list[int] = []
 
-    def rest_bond(n_id: int, scale: float) -> None:
+    def rest_bond(n_id: int) -> None:
         bi = -1
         bd_ = 1e18
         rest = last_p if last_p else [i for i in alpha_ids if nuc[i]["type"] == "p"]
@@ -258,17 +354,36 @@ def pack_nucleus(A: int, Z: int, dnn: float = 1.45, coul_spread: float = 0.0) ->
             if dd < bd_:
                 bd_ = dd
                 bi = i
-        if bi >= 0 and bd_ <= scale * D:
+        if bi >= 0:
             bond(bi, n_id)
 
-    def place_d_shell(cap: int, geom: str, name: str) -> None:
+    def place_d_shell(
+        cap: int, geom: str, name: str, schedule_index: int, registered: bool = True
+    ) -> None:
         nonlocal r_tier, d_sub, shell_idx, nd_left, last_p
         m = min(nd_left, cap)
         if m <= 0:
             return
-        dirs = shell_dirs(geom, cap, shell_idx)[:m]
+        sh = {"sp": "d", "cap": cap, "geom": geom}
+        seats = (
+            occupied_seats(sh, m, shell_idx)
+            if registered
+            else [{"dir": direction, "seat": index} for index, direction in enumerate(open_dirs(m, shell_idx))]
+        )
+        shell = {
+            "index": shell_idx + 1,
+            "scheduleIndex": schedule_index,
+            "species": "d",
+            "label": name,
+            "capacity": cap,
+            "occupancy": m,
+            "geometry": geom,
+            "full": m == cap,
+        }
+        nuc_extra["shells"].append(shell)
         new_p: list[int] = []
-        for v in dirs:
+        for occupied in seats:
+            v, seat = occupied["dir"], occupied["seat"]
             n_in = push(
                 [v[0] * (r_tier - D / 2), v[1] * (r_tier - D / 2), v[2] * (r_tier - D / 2)],
                 "n",
@@ -287,9 +402,20 @@ def pack_nucleus(A: int, Z: int, dnn: float = 1.45, coul_spread: float = 0.0) ->
             )
             bond(n_in, p_out)
             new_p.append(p_out)
-            rest_bond(n_in, 1.6)
+            rest_bond(n_in)
             nuc_extra["subSeq"].append(
-                {"group": "deuteron", "sub": d_sub, "sp": "d", "name": name, "geom": geom, "cap": cap}
+                {
+                    "group": "deuteron",
+                    "sub": d_sub,
+                    "sp": "d",
+                    "name": name,
+                    "geom": geom,
+                    "cap": cap,
+                    "shell": shell["index"],
+                    "seat": seat,
+                    "occupancy": m,
+                    "full": shell["full"],
+                }
             )
             d_sub += 1
         last_p = new_p
@@ -297,15 +423,34 @@ def pack_nucleus(A: int, Z: int, dnn: float = 1.45, coul_spread: float = 0.0) ->
         shell_idx += 1
         r_tier += 2 * D
 
-    def place_t_shell(cap: int, geom: str, name: str, dir_cap: int | None = None) -> None:
-        nonlocal r_tier, t_sub, shell_idx, nt_left
+    def place_t_shell(
+        cap: int, geom: str, name: str, schedule_index: int, registered: bool = True
+    ) -> None:
+        nonlocal r_tier, t_sub, shell_idx, nt_left, last_p
         m = min(nt_left, cap)
         if m <= 0:
             return
-        dc = dir_cap if dir_cap is not None else cap
-        dirs = shell_dirs(geom, dc, shell_idx)[:m]
-        for i, v in enumerate(dirs):
-            open_ = i % 2 == 0
+        sh = {"sp": "t", "cap": cap, "geom": geom}
+        seats = (
+            occupied_seats(sh, m, shell_idx)
+            if registered
+            else [{"dir": direction, "seat": index} for index, direction in enumerate(open_dirs(m, shell_idx))]
+        )
+        shell = {
+            "index": shell_idx + 1,
+            "scheduleIndex": schedule_index,
+            "species": "t",
+            "label": name,
+            "capacity": cap,
+            "occupancy": m,
+            "geometry": geom,
+            "full": m == cap,
+        }
+        nuc_extra["shells"].append(shell)
+        new_p: list[int] = []
+        for occupied in seats:
+            v, seat = occupied["dir"], occupied["seat"]
+            open_ = seat % 2 == 0
             rc = r_tier * (R_OPEN_SCALE if open_ else R_CLOSE_SCALE)
             n1 = push(
                 [v[0] * (rc - D), v[1] * (rc - D), v[2] * (rc - D)],
@@ -333,26 +478,38 @@ def pack_nucleus(A: int, Z: int, dnn: float = 1.45, coul_spread: float = 0.0) ->
             )
             bond(n1, p)
             bond(p, n2)
-            rest_bond(n1, 1.8)
+            rest_bond(n1)
+            new_p.append(p)
             nuc_extra["subSeq"].append(
-                {"group": "triton", "sub": t_sub, "sp": "t", "name": name, "geom": geom, "cap": cap}
+                {
+                    "group": "triton",
+                    "sub": t_sub,
+                    "sp": "t",
+                    "name": name,
+                    "geom": geom,
+                    "cap": cap,
+                    "shell": shell["index"],
+                    "seat": seat,
+                    "occupancy": m,
+                    "full": shell["full"],
+                }
             )
             t_sub += 1
+        last_p = new_p
         nt_left -= m
         shell_idx += 1
         r_tier += 2.2 * D
 
-    for sh in SHELL_SEQ:
+    for schedule_index, sh in enumerate(SHELL_SEQ):
         if sh["sp"] == "d":
-            place_d_shell(sh["cap"], sh["geom"], "D" + str(sh["cap"]))
+            place_d_shell(sh["cap"], sh["geom"], sh["label"], schedule_index)
         else:
-            place_t_shell(sh["cap"], sh["geom"], "T" + str(sh["cap"]))
+            place_t_shell(sh["cap"], sh["geom"], sh["label"], schedule_index)
 
     while nd_left > 0:
-        place_d_shell(min(nd_left, 56), "fib", "D*")
+        place_d_shell(56, "fib", "D*", len(SHELL_SEQ), registered=False)
     while nt_left > 0:
-        m = min(nt_left, 18)
-        place_t_shell(m, "polar", "T*", dir_cap=max(m + (m % 2), 2))
+        place_t_shell(18, "polar", "T*", len(SHELL_SEQ) + 1, registered=False)
 
     for k, v in nuc_extra.items():
         setattr(nuc, k, v)  # type: ignore[attr-defined]
@@ -400,7 +557,7 @@ def walk_schedule(nd: int, nt: int) -> list[dict[str, Any]]:
                 stops.append(
                     {
                         "sp": "d",
-                        "name": "D" + str(sh["cap"]),
+                        "name": sh["label"],
                         "geom": sh["geom"],
                         "fill": k + 1,
                         "cap": sh["cap"],
@@ -418,7 +575,7 @@ def walk_schedule(nd: int, nt: int) -> list[dict[str, Any]]:
                 stops.append(
                     {
                         "sp": "t",
-                        "name": "T" + str(sh["cap"]),
+                        "name": sh["label"],
                         "geom": sh["geom"],
                         "fill": k + 1,
                         "cap": sh["cap"],
@@ -444,7 +601,7 @@ def prefix_through(name: str) -> tuple[int, int, int, int]:
             nd += sh["cap"]
         else:
             nt += sh["cap"]
-        tag = ("D" if sh["sp"] == "d" else "T") + str(sh["cap"])
+        tag = sh["label"]
         if tag == name:
             Z = 2 + nd + nt
             N = 2 + nd + 2 * nt

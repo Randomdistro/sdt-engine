@@ -1,12 +1,56 @@
 # GOM10: Lagrange Points from Koppa — the identity run, the shadow-cone divergence hunt, and the tractability claim on trial
 
-> **Author:** J. C. Harvey, Melbourne. **Status:** SPEC — **full upgrade 2026-07-24** (supersedes
+> **Author:** James Christopher Tyndall, Melbourne. **Status:** SPEC — **full upgrade 2026-07-24** (supersedes
 > 2026-06-27). **Register/stack status:** PARTIAL on input precision (Kepler 0.351%, μ_ϟ −0.122%
 > — "near-certain to clear with ephemeris-grade inputs"); this run must clear it or find out why
 > not. **Inherits:** `PERFECT_PROMPT_TEMPLATE.md` · `PROMPT_EXECUTION_PROTOCOL.md` · HUNTER
 > §0/§G. **Engine:** `#include <sdt/laws.hpp>` only. **Execution: DIRECT ONLY — no agents.**
 > Prior agent-era VERDICT/RUN_LOG/results deleted 2026-07-24 (git-recoverable).
 > Companion spec `PROMPT_nbody_equilibria.md` remains as the extended n-body appendix.
+
+---
+
+## 2026-08-15 addendum — shared 3D trajectory instrument
+
+This addendum was registered before the website-upgrade instrumentation. It keeps the
+qualified N-body work inside GOM10; later numerical studies may call the same engine but do
+not supersede these gates.
+
+### Frozen kernel and routes
+
+- Source acceleration is
+  \(\mathbf a_i=c^2\sum_{j\ne i}\kappa_j
+  (\mathbf r_j-\mathbf r_i)/|\mathbf r_j-\mathbf r_i|^3\).
+- `sdt::dynamics::Body` is the one three-dimensional state used in planar and spatial runs.
+- Velocity-Verlet is the production route. Fixed-step RK4 is the verification route.
+- No force softening, state-mutating recentering, adaptive step, \(1/r\) force proxy,
+  collision rebound, \(G\), source mass \(M\), or \(GM\) is permitted.
+- A supplied contact boundary stops a step before overlap; it does not create a collision law.
+
+### Registered gates
+
+| Gate | Whole-range requirement |
+|---|---|
+| N0 | Koppa-weighted pair acceleration symmetry and inverse-square scaling: relative residual ≤ \(10^{-14}\). |
+| N1 | Circular pair, 100 periods at \(P/2000\): separation drift ≤ \(5\times10^{-5}\), energy drift ≤ \(5\times10^{-6}\). |
+| N2 | Eccentric pair, \(e=0.5\), 50 periods at \(P/8000\): relative energy and angular-momentum drift each ≤ \(2\times10^{-5}\); periapsis and apoapsis stay within \(2\times10^{-4}\) of the registered values. |
+| N3 | Halving the Verlet step gives an error-reduction ratio ≥ 3.5; one-period Verlet and RK4 states agree within \(2\times10^{-4}\) of the position/velocity scales. |
+| N4 | Three-source equilateral solution, 20 periods at \(P/4000\): side drift ≤ \(10^{-4}\), barycentre drift ≤ \(10^{-10}\) of one side. |
+| N5 | Published figure-eight state, one period at \(P/50000\): RMS position and velocity closure errors each ≤ \(2\times10^{-5}\). |
+| N6 | Rigidly rotate the figure-eight state out of plane and rerun the same fixed steps: the final state must equal the rotated planar result within \(10^{-11}\) of the registered scales. |
+| N7 | Sun–Earth L1–L5: collinear roots agree with the frozen restricted-three-body equations to \(10^{-10}\) in normalized position; L4/L5 are equidistant and at \(60^\circ\) to \(10^{-10}\). |
+| N8 | Across N1, N2, N4 and N5, normalized momentum drift ≤ \(10^{-11}\) and normalized angular-momentum drift ≤ \(10^{-10}\). |
+| N9 | A head-on pair returns `collision` before its supplied contact boundaries overlap. |
+
+The circular 100-period and eccentric 50-period runs are the long-run stability controls.
+Every trajectory is executed once at its registered step. Only N3 uses the declared
+coarse/fine and cross-integrator routes.
+
+### Decision
+
+Any failed gate leaves the instrument unqualified. A passing instrument is a numerical
+initial-value solver and does not constitute a closed-form solution of the general
+three-body problem.
 
 ---
 

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>/*sdt-theme-guard*/(function(){try{var t=localStorage.getItem("sdt.theme")||"auto";if(t==="auto")t=(window.matchMedia&&window.matchMedia("(prefers-color-scheme:dark)").matches)?"dark":"light";var d=document.documentElement;d.setAttribute("data-theme",t);d.setAttribute("data-sdt-theme",t);}catch(e){}})();</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paper 16 — Chemistry &amp; Molecular Bonding</title>
+<style>
+:root{--paper:#faf8f4;--edge:#e5e0d4;--ink:#1c1e20;--soft:#45484c;--mute:#6d7177;--mint:#0d7a5f;--rust:#a4552e;--gold:#8a6d1f;--steel:#4a6d82}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:'Source Serif 4',Georgia,serif;line-height:1.75;padding:3rem 1.5rem}
+main{max-width:46rem;margin:0 auto}
+.series{font-family:Consolas,monospace;font-size:.68rem;letter-spacing:.28em;color:var(--mute);text-transform:uppercase;margin-bottom:1.2rem}
+h1{font-size:1.85rem;line-height:1.25;font-weight:700;margin-bottom:1rem}
+.byline{font-size:1rem;margin-bottom:.2rem}
+.affil{font-family:Consolas,monospace;font-size:.72rem;color:var(--mute);margin-bottom:2rem}
+h2{font-size:1.12rem;font-weight:700;margin:2.2rem 0 .7rem}
+p{margin-bottom:.9rem;color:var(--soft)}
+strong{color:var(--ink)}
+.abstract{border:1px solid var(--edge);border-left:3px solid var(--mint);padding:1.1rem 1.3rem;background:#fff;margin:1.5rem 0}
+.abstract p{margin-bottom:0}
+.eq{font-family:Consolas,monospace;font-size:.9rem;background:#fff;border:1px solid var(--edge);border-radius:3px;padding:.8rem 1.1rem;margin:1rem 0;display:flex;justify-content:space-between;gap:1rem;overflow-x:auto}
+.eq .no{color:var(--mute)}
+table{width:100%;border-collapse:collapse;font-size:.85rem;margin:1rem 0}
+th,td{border:1px solid var(--edge);padding:.45rem .6rem;text-align:left;vertical-align:top}
+th{font-family:Consolas,monospace;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+.decl{border:1px solid var(--edge);background:#fff;padding:1rem 1.2rem;margin:1.5rem 0;font-size:.92rem}
+.refs ol{margin-left:1.2rem}
+.refs li{font-size:.85rem;color:var(--soft);margin-bottom:.4rem}
+footer{max-width:46rem;margin:3rem auto 0;padding-top:1.2rem;border-top:1px solid var(--edge)}
+footer a{color:var(--mint);text-decoration:none;font-family:Consolas,monospace;font-size:.75rem;letter-spacing:.06em}
+sub,sup{line-height:0}
+</style>
+<link rel="stylesheet" href="sdt-shell.css">
+<script src="sdt-shell.js" defer></script>
+<meta name="description" content="Paper 16 — Chemistry &amp; Molecular Bonding — part of Spatial Displacement Theory, a zero-free-parameter physics framework.">
+<link rel="canonical" href="https://spatialdisplacementtheory.com/paper-16-chemistry">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/favicon.ico" sizes="64x64">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#b07430">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Spatial Displacement Theory">
+<meta property="og:title" content="Paper 16 — Chemistry &amp; Molecular Bonding">
+<meta property="og:description" content="Paper 16 — Chemistry &amp; Molecular Bonding — part of Spatial Displacement Theory, a zero-free-parameter physics framework.">
+<meta property="og:url" content="https://spatialdisplacementtheory.com/paper-16-chemistry">
+<meta property="og:image" content="https://spatialdisplacementtheory.com/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_AU">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Paper 16 — Chemistry &amp; Molecular Bonding">
+<meta name="twitter:description" content="Paper 16 — Chemistry &amp; Molecular Bonding — part of Spatial Displacement Theory, a zero-free-parameter physics framework.">
+<meta name="twitter:image" content="https://spatialdisplacementtheory.com/og-card.png">
+</head>
+<body>
+<main>
+<p class="series">Spatial Displacement Theory · Paper 16 · Prepared for Submission</p>
+<h1>Electropause Chemistry: Bonding as Pressure-Balance Sharing, Geometry as Wake Cancellation, and the Kinematic Origin of P<sub>eff</sub></h1>
+<p class="byline">James Christopher Tyndall</p>
+<p class="affil">Melbourne, Australia · July 2026 · Domain 16 — Chemistry &amp; Molecular Bonding</p>
+
+<div class="abstract">
+<p><strong>Abstract.</strong> An electron is not a cloud and a bond is not an orbital. The electron is held at the Bohr radius by the electropause — the pressure-balance surface where the inward convergence push equals the outward movement-budget demand — derived kinematically with no charge invoked: F = m<sub>e</sub>v²/a₀ evaluated at v = αc reproduces the measured seat force, and rearrangement yields the closed form P<sub>eff</sub> = m<sub>p</sub>²m<sub>e</sub>²c⁵/(4παℏ³), with α the single remaining empirical anchor. All of chemistry is then one move generalised: a covalent bond is two nuclei sharing one merged electropause; an ionic bond is an electropause handed off entirely; a metallic bond is electropauses delocalised into a lattice sea. Molecular geometry follows from the period-2 wake-cancellation map — paired fore/aft wakes go silent, lone wakes stay active and repel — from which valence, the octet regularity, and the bond-angle ladder are recovered as targets, never assumed. Reaction energetics read as wake reconfiguration: the barrier is a wake saddle and activation is an alignment search. Status: the prototype covalent solve is superseded and PENDING its overlap re-run (its old numbers are not to be trusted); the residual-wake sector has banked the dispersion-force exponent −6.022 against the 1/r⁶ target; the isoelectronic repulsion discriminant is specified as decidable on existing data.</p>
+</div>
+<p><strong>Keywords:</strong> electropause · pressure balance · wake cancellation · valence as active-wake count · wake saddle · dispersion exponent</p>
+
+<h2>1. The electropause, with no charge invoked</h2>
+<div class="eq"><span>F = m<sub>e</sub>v²/a₀,&nbsp;&nbsp;v = αc&nbsp;&nbsp;⟹&nbsp;&nbsp;8.24 × 10⁻⁸ N at the hydrogen seat — kinematics only</span><span class="no">(1)</span></div>
+<div class="eq"><span>P<sub>eff</sub> = m<sub>p</sub>²m<sub>e</sub>²c⁵/(4παℏ³) — closed derivation basis form; α the one remaining input</span><span class="no">(2)</span></div>
+<p>The seat is where the inward convergence push balances the outward budget demand of the circulating vortex: a pressure surface, not a probability shell. Equation (1) contains no coupling constant and no charge; matching it to the occlusion law of Paper 03 forces (2), passing the delete-test in the electropause derivation. "Charge" in this domain is only shorthand for handed redirection of the convergent phase; no charge substance exists to be shared or transferred.</p>
+
+<h2>2. Bonding as electropause bookkeeping</h2>
+<div class="eq"><span>covalent = merged shared surface · ionic = surface handed off · metallic = surfaces delocalised</span><span class="no">(3)</span></div>
+<p>A covalent bond is one pressure-balance surface enclosing two nuclei — an internuclear well with no orbital construct; the committed targets are the hydrogen-molecule bond length and depth from the F<sub>in</sub>(R) = F<sub>out</sub>(R) overlap solve. Limitation: the prototype solve (bond at twice the Bohr radius, depth at half the ionisation unit) is SUPERSEDED and its numbers flagged do-not-trust in the record; the domain awaits the overlap re-run and is classed PENDING. Ionic transfer and the metallic sea connect directly to the conduction sector of Paper 12; the lattice-energy and metallic-radius data are the committed targets.</p>
+
+<h2>3. Geometry from wake cancellation</h2>
+<div class="eq"><span>period-2 map: paired fore/aft wakes silent; lone wakes active ⟹ valence = active-wake count</span><span class="no">(4)</span></div>
+<p>Shell structure is wake bookkeeping: pairing cancels a wake fore-and-aft; unpaired wakes remain active and repel. Valence is the count of active wakes; the octet regularity and the period lengths 2/8/8 are recovered as counting targets of the map — never from hybridised orbitals, which are forbidden machinery here. Bond angles are wake-torque equilibria, with the lone-pair wake heavier than the bond-pair wake; the angle ladder (linear through tetrahedral and its compressed variants) is the committed quantitative target, one ratio to fix them all. Molecular vibration and rotation spectra read as bond-wake oscillation and whole-frame wake rotation, tying back to the emission law λ = 2L(c/v) of Paper 04 — the molecular front of the movement law.</p>
+
+<h2>4. Energetics: the wake saddle</h2>
+<div class="eq"><span>ΔH = wake-cost difference;&nbsp;&nbsp;E<sub>a</sub> = saddle height;&nbsp;&nbsp;catalysis = lower-wake path</span><span class="no">(5)</span></div>
+<p>A reaction is a reconfiguration of merged electropauses; the transition state is the saddle of the joint wake field, and activation energy is the cost of the alignment search that finds it. Sign systematics of bond-energy differences and the ordering of activation barriers are the committed targets. Two quantitative anchors stand: the dispersion-force exponent in the residual-wake sector emerged as <strong>−6.022</strong> against the 1/r⁶ target (banked; residual and fluctuating wake outside the electropause — the weak-bond channel), and the isoelectronic short-range repulsion comparison (Ne vs Na⁺ vs Mg²⁺ in the Born–Mayer window) is specified as a decidable discriminant on existing compressibility data: identical electron count, different nuclear push — the electropause reading and the orbital reading order the hardness differently.</p>
+
+<h2>5. The gear between floors</h2>
+<div class="eq"><span>ω<sub>p</sub>/ω<sub>e</sub> = 3a₀m<sub>p</sub>c/(αℏ) = 1.03 × 10⁸ — chemistry is nuclear circulation geared down through k = 137</span><span class="no">(6)</span></div>
+<p>The same traction machinery that drives the nuclear mesh (Paper 05) drives the valence floor, reduced by the k-hierarchy: the grammar of the nucleus runs the valence floor's fine behaviour (core-breach path multipliers ×3–×9; shell-pairing discipline as triton integrity in the ledger). Chemistry is not a separate science in this framework; it is the outermost floor of one gear train.</p>
+
+<h2>6. Certification</h2>
+<table>
+<tr><th>Item</th><th>Target / value</th><th>Status</th></tr>
+<tr><td>Electropause force, H seat</td><td>8.24 × 10⁻⁸ N — kinematic</td><td>DERIVED — no charge invoked (EMC04)</td></tr>
+<tr><td>P<sub>eff</sub> closed form</td><td>eq. (2)</td><td>DERIVED in electropause chain; coexistence with engine class-E value disclosed (Paper 03)</td></tr>
+<tr><td>Covalent overlap solve</td><td>H₂ length/depth</td><td>PENDING — prototype SUPERSEDED, old numbers do-not-trust</td></tr>
+<tr><td>Valence / octet / angle ladder</td><td>counting targets of (4)</td><td>SPEC — pre-registered</td></tr>
+<tr><td>Dispersion exponent</td><td>−6.022 vs −6</td><td>BANKED — residual-wake sector</td></tr>
+<tr><td>Isoelectronic repulsion discriminant</td><td>Ne / Na⁺ / Mg²⁺</td><td>SPECIFIED — decidable on existing data</td></tr>
+<tr><td>Gear ratio (6)</td><td>1.03 × 10⁸</td><td>DERIVED — traction chain</td></tr>
+</table>
+
+<div class="decl">
+<p><strong>Methodological declaration.</strong> No orbital, no hybridisation, no linear-combination construction, no exchange integral, and no electron cloud enters any step — these are the targets the wake-cancellation map must reproduce, and they are named as forbidden machinery in the domain constitution. The superseded prototype is reported superseded; SPEC targets are claimed as specifications. Thermochemical, structural, and compressibility data enter as measured targets only.</p>
+</div>
+
+<h2 class="refs">References</h2>
+<div class="refs"><ol>
+<li>Investigations/16_Chemistry_and_Molecular_Bonding — CH01 (superseded prototype, flagged), CH02 (isoelectronic discriminant), CH03–CH07 (programme constitution); residual-wake dispersion result.</li>
+<li>Investigations/03_Electromagnetism_and_Charge/EMC04 — the electropause derivation (delete-test record).</li>
+<li>Engine/include/sdt/laws.hpp — law_VI::traction (gear ratio), atomic (seat kinematics), law_III (occlusion matching).</li>
+<li>Papers 03, 04, 05, 12 of this series.</li>
+<li>Measured targets: molecular bond lengths/energies, lattice energies, compressibility windows (data only).</li>
+</ol></div>
+</main>
+<footer><a href="theory.html#atomicus">← RETURN TO THE ATLAS · ATOMICUS</a></footer>
+</body>
+</html>

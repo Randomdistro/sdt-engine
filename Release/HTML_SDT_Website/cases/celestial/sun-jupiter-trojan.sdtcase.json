@@ -1,0 +1,77 @@
+{
+  "contract_version": "2.0.0",
+  "case_id": "sun-jupiter-l4-runner-j2000",
+  "problem_class": "celestial_three_body",
+  "frame": {
+    "type": "inertial_cartesian",
+    "units": "SI",
+    "epoch": "2451545.000000000 TDB",
+    "description": "Barycentric ecliptic J2000 with a constructed L4 runner"
+  },
+  "force": {
+    "type": "retarded_seven_cone_occlusion",
+    "propagation_speed": "c",
+    "pressure_source": "sdt_law_I_P_conv",
+    "enable_eclipse_shielding": true,
+    "comparison_route": "point_koppa"
+  },
+  "bodies": [
+    {
+      "id": "Sun",
+      "baryon_count": "1189137062162891557291581730506889351310699697884370210975",
+      "radius_m": 695700000,
+      "position_m": [-1067706805.380953, -418275271.8194473, 30861817.2547682],
+      "velocity_m_s": [9.312571926520472, -12.82475570794162, -0.1633507186350417],
+      "provenance": {
+        "baryons": "SDT bridge::koppa_Sun / koppa_per_baryon",
+        "radius": "IAU 2015",
+        "state": "NASA/JPL Horizons DE441 target 10"
+      }
+    },
+    {
+      "id": "Jupiter",
+      "baryon_count": "1108526178616902115424301179139909769601516693674559445",
+      "radius_m": 69911000,
+      "position_m": [597499917851.6835, 439186404676.3535, -15195999855.73271],
+      "velocity_m_s": [-7900.547720245487, 11143.39277065934, 130.7023308637314],
+      "provenance": {
+        "baryons": "JPL surface escape speed and radius through kappa=v_surface^2 R/c^2, then koppa_per_baryon",
+        "radius": "NASA/JPL Horizons volumetric mean radius",
+        "state": "NASA/JPL Horizons Jupiter solution and DE441 centre"
+      }
+    },
+    {
+      "id": "L4-runner",
+      "baryon_count": "1000000000000000000000000000000",
+      "radius_m": 10000,
+      "position_m": [-82492714934.49414, 737758833538.1936, -7582569019.238971],
+      "velocity_m_s": [-13607.18536213874, -1284.855945931061, 65.26949007254817],
+      "provenance": {
+        "baryons": "declared negligible runner inventory",
+        "radius": "declared visualization boundary",
+        "state": "Sun-Jupiter relative state rotated +60 degrees"
+      }
+    }
+  ],
+  "integrator": "velocity_verlet",
+  "timestep_s": 21600,
+  "max_steps": 2000,
+  "record_every_steps": 20,
+  "tolerances": {
+    "retarded_time_s": 1e-8,
+    "channel_closure": 1e-13,
+    "medium_momentum_relative": 1e-11,
+    "lagrange_residual_m_s2": 1e-7,
+    "max_retarded_iterations": 64
+  },
+  "events": {
+    "stop_on_collision": true
+  },
+  "provenance": {
+    "classification": "COMPUTED",
+    "description": "Observed Sun/Jupiter state with a geometric L4 runner; the runner is not a JPL-observed asteroid.",
+    "sources": [
+      "NASA/JPL Horizons API version 1.2, retrieved 2026-08-17"
+    ]
+  }
+}

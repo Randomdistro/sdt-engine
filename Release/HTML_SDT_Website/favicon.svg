@@ -1,7 +1,132 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="SDT">
-  <rect width="64" height="64" rx="10" fill="#faf6ef"/>
-  <!-- the spation: one grain, displaced — copper diamond on paper -->
-  <path d="M32 9 L55 32 L32 55 L9 32 Z" fill="none" stroke="#b07430" stroke-width="3.4"/>
-  <path d="M32 19 L45 32 L32 45 L19 32 Z" fill="#b07430" opacity=".18"/>
-  <circle cx="32" cy="32" r="5.6" fill="#1e1c18"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" role="img" aria-label="SDT isotope lattice">
+  <defs>
+    <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="near"/>
+      <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="far"/>
+      <feMerge>
+        <feMergeNode in="far"/>
+        <feMergeNode in="near"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="rail-glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="3.5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <style>
+      .rail{fill:none;stroke:#ffb51f;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+      .rail-core{fill:none;stroke:#fff0a2;stroke-width:.75;stroke-linecap:round;stroke-linejoin:round}
+      .junction{fill:#fff7c9;stroke:#ffab12;stroke-width:2}
+      .node{fill:#030303;stroke:var(--c);stroke-width:4}
+      .ring{fill:none;stroke:var(--c);stroke-width:1.4;opacity:.95}
+      .ring-soft{fill:none;stroke:var(--c);stroke-width:7;opacity:.22}
+      .tick{stroke:var(--c);stroke-width:2;stroke-linecap:round}
+      .label{fill:#fffdf7;font:600 38px Georgia,'Times New Roman',serif;text-anchor:middle;dominant-baseline:central}
+      .label-small{font-size:29px}
+    </style>
+  </defs>
+
+  <rect width="640" height="640" fill="#020202"/>
+
+  <g filter="url(#rail-glow)">
+    <path class="rail" d="M320 55 190 138M320 55 450 138M190 138 450 138M190 138 190 272M190 138 320 350M320 55 320 350M450 138 450 272M450 138 320 350M190 272 450 272M190 272 320 350M450 272 320 350M190 272 190 430M450 272 450 430M320 350 190 430M320 350 450 430M320 350 320 500M190 430 450 430M190 430 320 500M450 430 320 500M320 500 320 574"/>
+    <path class="rail-core" d="M320 55 190 138M320 55 450 138M190 138 450 138M190 138 190 272M190 138 320 350M320 55 320 350M450 138 450 272M450 138 320 350M190 272 450 272M190 272 320 350M450 272 320 350M190 272 190 430M450 272 450 430M320 350 190 430M320 350 450 430M320 350 320 500M190 430 450 430M190 430 320 500M450 430 320 500M320 500 320 574"/>
+  </g>
+
+  <g aria-hidden="true">
+    <circle class="junction" cx="320" cy="138" r="5"/>
+    <circle class="junction" cx="320" cy="204" r="5"/>
+    <circle class="junction" cx="320" cy="272" r="5"/>
+    <circle class="junction" cx="320" cy="430" r="5"/>
+  </g>
+
+  <g style="--c:#a72cff" filter="url(#glow)">
+    <circle class="ring-soft" cx="320" cy="55" r="38"/>
+    <circle class="node" cx="320" cy="55" r="34"/>
+    <circle class="ring" cx="320" cy="55" r="28"/>
+    <path class="tick" d="M320 15v9M320 86v9M280 55h9M351 55h9"/>
+    <text class="label" x="320" y="57">O</text>
+  </g>
+
+  <g style="--c:#13baff" filter="url(#glow)">
+    <circle class="ring-soft" cx="190" cy="138" r="36"/>
+    <circle class="node" cx="190" cy="138" r="32"/>
+    <circle class="ring" cx="190" cy="138" r="26"/>
+    <path class="tick" d="M190 100v8M190 168v8M152 138h8M220 138h8"/>
+    <text class="label" x="190" y="140">N</text>
+  </g>
+  <g style="--c:#13baff" filter="url(#glow)">
+    <circle class="ring-soft" cx="450" cy="138" r="36"/>
+    <circle class="node" cx="450" cy="138" r="32"/>
+    <circle class="ring" cx="450" cy="138" r="26"/>
+    <path class="tick" d="M450 100v8M450 168v8M412 138h8M480 138h8"/>
+    <text class="label" x="450" y="140">N</text>
+  </g>
+
+  <g style="--c:#e6edff" filter="url(#glow)">
+    <circle class="ring-soft" cx="190" cy="204" r="38"/>
+    <circle class="node" cx="190" cy="204" r="34"/>
+    <circle class="ring" cx="190" cy="204" r="28"/>
+    <path class="tick" d="M152 204h8M220 204h8"/>
+    <text class="label" x="190" y="206">C</text>
+  </g>
+  <g style="--c:#e6edff" filter="url(#glow)">
+    <circle class="ring-soft" cx="450" cy="204" r="38"/>
+    <circle class="node" cx="450" cy="204" r="34"/>
+    <circle class="ring" cx="450" cy="204" r="28"/>
+    <path class="tick" d="M412 204h8M480 204h8"/>
+    <text class="label" x="450" y="206">C</text>
+  </g>
+
+  <g style="--c:#42ff18" filter="url(#glow)">
+    <circle class="ring-soft" cx="190" cy="272" r="38"/>
+    <circle class="node" cx="190" cy="272" r="34"/>
+    <circle class="ring" cx="190" cy="272" r="28"/>
+    <path class="tick" d="M190 234v8M190 302v8M152 272h8M220 272h8"/>
+    <text class="label" x="190" y="274">B</text>
+  </g>
+  <g style="--c:#42ff18" filter="url(#glow)">
+    <circle class="ring-soft" cx="450" cy="272" r="38"/>
+    <circle class="node" cx="450" cy="272" r="34"/>
+    <circle class="ring" cx="450" cy="272" r="28"/>
+    <path class="tick" d="M450 234v8M450 302v8M412 272h8M480 272h8"/>
+    <text class="label" x="450" y="274">B</text>
+  </g>
+
+  <g style="--c:#ffe816" filter="url(#glow)">
+    <circle class="ring-soft" cx="320" cy="350" r="34"/>
+    <circle class="node" cx="320" cy="350" r="30"/>
+    <circle class="ring" cx="320" cy="350" r="24"/>
+    <text class="label label-small" x="320" y="352">Be</text>
+  </g>
+  <g style="--c:#ff9e12" filter="url(#glow)">
+    <circle class="ring-soft" cx="190" cy="430" r="36"/>
+    <circle class="node" cx="190" cy="430" r="32"/>
+    <circle class="ring" cx="190" cy="430" r="26"/>
+    <path class="tick" d="M152 430h8M220 430h8"/>
+    <text class="label label-small" x="190" y="432">Li</text>
+  </g>
+  <g style="--c:#ff9e12" filter="url(#glow)">
+    <circle class="ring-soft" cx="450" cy="430" r="36"/>
+    <circle class="node" cx="450" cy="430" r="32"/>
+    <circle class="ring" cx="450" cy="430" r="26"/>
+    <path class="tick" d="M412 430h8M480 430h8"/>
+    <text class="label label-small" x="450" y="432">Li</text>
+  </g>
+  <g style="--c:#ff5a17" filter="url(#glow)">
+    <circle class="ring-soft" cx="320" cy="500" r="34"/>
+    <circle class="node" cx="320" cy="500" r="30"/>
+    <circle class="ring" cx="320" cy="500" r="24"/>
+    <text class="label label-small" x="320" y="502">He</text>
+  </g>
+  <g style="--c:#ff2738" filter="url(#glow)">
+    <circle class="ring-soft" cx="320" cy="574" r="38"/>
+    <circle class="node" cx="320" cy="574" r="34"/>
+    <circle class="ring" cx="320" cy="574" r="28"/>
+    <path class="tick" d="M320 534v9M320 605v9M280 574h9M351 574h9"/>
+    <text class="label" x="320" y="576">H</text>
+  </g>
 </svg>

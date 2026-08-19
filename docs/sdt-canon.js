@@ -1,9 +1,17 @@
 /* ════════════════════════════════════════════════════════════════════════════
    SDT CANON — the single statement of each concept.
-   J. C. Harvey, Melbourne.
+   James Christopher Tyndall, Melbourne.
 
    Every page that shows the primitives or the six laws renders them FROM HERE.
    Edit a concept once, in this file, and it changes everywhere it appears.
+
+   Visitor path:
+     index.html#ix-space   the canonical path and full statement
+     atlas.html#irreducibles   preserved reference room
+     st_00_primitives.html briefs, then expansion
+     laws_scroller.html    briefs
+     causal-chain.html     briefs
+     Numbers sit on inputs.html — not a fifth primitive and not eight assumed measurements.
 
    Usage in a page:
        <div data-sdt-canon="primitives"></div>     the four irreducibles, as cards
@@ -30,7 +38,9 @@
         name: 'Space',
         sdt: 'The superfluidic hypercrystal',
         brief: 'Not an emptiness things sit in — a substance, one grain thick at the floor, ' +
-               'that can be crowded, thinned, and made to carry a wake.',
+               'that can be crowded, thinned, and made to carry a wake. A quantised particulate ' +
+               'superfluid under pressure, making all fields, carrying all radiation and producing ' +
+               'all forces, including gravity. Introducing — the Spation.',
         /* one object, several characterisations — all true at once */
         facets: [
           ['As a fluid',
@@ -57,7 +67,9 @@
         facets: [
           ['What it is',
            'Never a cloud, never a point: a made thing, with a boundary you can measure and ' +
-           'a surface that runs faster than light ever travels.'],
+           'a surface that runs faster than light ever travels. The proton length is derived ' +
+           'several ways — most directly the way Planck built a unique length from the ' +
+           'constants he had, with koppa in place of G: R_p = 4ℏ/(m_p c).'],
           ['The one new idea',
            'Matter displaces space. The displaced grains have to go somewhere, and where they ' +
            'go — the crowding ahead, the wake behind, the shadow cast — is every force you ' +

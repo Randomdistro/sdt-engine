@@ -148,7 +148,7 @@ namespace measured {
     // CMB (FIRAS/COBE/Planck)
     inline constexpr double T_CMB       = 2.7255;                       // [K]      Present CMB temperature — MEASURED (FIRAS)
 
-    // ── BOUNDARY-RELEASE FRAME — reclassified 2026-07-30 (Harvey-authorized) ──
+    // ── BOUNDARY-RELEASE FRAME — reclassified 2026-07-30 (James Christopher Tyndall-authorized) ──
     // T_rec and z_rec are NOT measured facts. They are the round textbook
     // epoch-frame ballparks (3000 K, 1100) and they were sitting inside the
     // measured derivation basis, which by the ruleset admits only CODATA / IAU / FIRAS
@@ -379,7 +379,7 @@ namespace law_III {
     }
 
     /// Occlusion force of a Z-nucleus on an electron at distance r.
-    /// CORRECTED 2026-07-07 (interchange sweep, Harvey-authorized): the handed force
+    /// CORRECTED 2026-07-07 (interchange sweep, James Christopher Tyndall-authorized): the handed force
     /// transfers movement through redirection COUNT — occluded AREA ∝ Z, so the effective
     /// radius is √Z·R_p, giving F = Z·k_e e²/r² identically (measured Coulomb scaling).
     /// The previous R_nuc = Z·R_p (excluded NP12 geometry, inlined here and missed by three
@@ -949,7 +949,7 @@ namespace atomic {
 namespace nuclear {
     using namespace measured;
 
-    /// Nuclear boundary radius — NP12 canon change (2026-07-05, Harvey-authorized).
+    /// Nuclear boundary radius — NP12 canon change (2026-07-05, James Christopher Tyndall-authorized).
     /// R(A) = R_p · (A/η)^(1/3),  η = π/√18 ≈ 0.74048 (close-packing fraction) — ZERO-FIT:
     /// close-packed nucleon volume V = A·(4/3)πR_p³/η  ⇒  R = R_p (A/η)^(1/3).
     /// Graded against 908 measured radii (IAEA / Angeli & Marinova 2013): RMS 4.96%
@@ -969,7 +969,7 @@ namespace nuclear {
     inline constexpr double R_He_contact_diameter = 2.0 * R_p;
 
     // ── SHELL SCHEDULE — closure tiers and triton shells ────────────────────
-    /// Canon change (2026-07-30, Harvey-authorized: "incorporate this structural
+    /// Canon change (2026-07-30, James Christopher Tyndall-authorized: "incorporate this structural
     /// setup into every part of the engine that is relevant").
     /// Nomenclature / geometry correction (2026-08-09, NSEQ02–05, author-approved):
     /// the LLM-propagated planar "triton belt" / rolling-equator seating is

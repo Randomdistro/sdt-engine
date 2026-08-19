@@ -1,3 +1,10 @@
+// WITHDRAWN: retained for provenance only. It uses selected low-z records,
+// hand-assigned factors and observer-frame double subtraction. The rebuilt
+// package does not compile or run this source.
+#ifndef SDT_ENABLE_WITHDRAWN_CQ18
+#error "cq18d is withdrawn; use redshift_bookkeeping_demo.cpp"
+#endif
+
 // =============================================================================
 // CQ18d — Complete Redshift Decomposition Stack
 //

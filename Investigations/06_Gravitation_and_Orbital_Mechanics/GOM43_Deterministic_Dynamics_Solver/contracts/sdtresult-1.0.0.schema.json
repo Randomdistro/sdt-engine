@@ -1,0 +1,165 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spatial-displacement-theory.com/contracts/sdtresult-1.0.0.schema.json",
+  "title": "SDT deterministic dynamics result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "case_id",
+    "problem_class",
+    "status",
+    "classification",
+    "solver",
+    "provenance",
+    "normalized_case",
+    "executed_steps",
+    "events",
+    "diagnostics",
+    "gates",
+    "trajectory",
+    "trajectory_sha256"
+  ],
+  "properties": {
+    "contract_version": { "const": "1.0.0" },
+    "case_id": { "type": "string" },
+    "problem_class": { "enum": ["point_nbody", "articulated_rigid", "unknown"] },
+    "status": {
+      "enum": [
+        "completed",
+        "invalid_case",
+        "collision",
+        "constraint_failure",
+        "numerical_failure"
+      ]
+    },
+    "classification": {
+      "enum": ["VALIDATED", "CONDITIONAL", "NOT-EXECUTED"]
+    },
+    "message": { "type": "string" },
+    "solver": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["build_id", "compiler", "floating_point_policy"],
+      "properties": {
+        "build_id": { "type": "string" },
+        "compiler": { "type": "string" },
+        "floating_point_policy": { "const": "fixed-step; no fast-math; no contraction guarantee" }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["laws_sha256", "input_sha256"],
+      "properties": {
+        "laws_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "input_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+      }
+    },
+    "normalized_case": { "type": "object" },
+    "executed_steps": { "type": "integer", "minimum": 0 },
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["step", "time_s", "type", "detail"],
+        "properties": {
+          "step": { "type": "integer", "minimum": 0 },
+          "time_s": { "type": "number", "minimum": 0 },
+          "type": { "type": "string" },
+          "detail": { "type": "string" }
+        }
+      }
+    },
+    "diagnostics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "relative_energy_drift",
+        "momentum_drift",
+        "angular_momentum_drift",
+        "max_position_constraint_m",
+        "max_velocity_constraint_m_s",
+        "max_quaternion_norm_error"
+      ],
+      "properties": {
+        "relative_energy_drift": { "type": "number" },
+        "momentum_drift": { "type": "number" },
+        "angular_momentum_drift": { "type": "number" },
+        "max_position_constraint_m": { "type": "number", "minimum": 0 },
+        "max_velocity_constraint_m_s": { "type": "number", "minimum": 0 },
+        "max_quaternion_norm_error": { "type": "number", "minimum": 0 }
+      }
+    },
+    "gates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "metric", "relation", "limit", "value", "passed"],
+        "properties": {
+          "id": { "type": "string" },
+          "metric": { "type": "string" },
+          "relation": { "enum": ["<=", ">="] },
+          "limit": { "type": "number" },
+          "value": { "type": "number" },
+          "passed": { "type": "boolean" }
+        }
+      }
+    },
+    "trajectory": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["step", "time_s", "states"],
+        "properties": {
+          "step": { "type": "integer", "minimum": 0 },
+          "time_s": { "type": "number", "minimum": 0 },
+          "states": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "id",
+                "position_m",
+                "velocity_m_s"
+              ],
+              "properties": {
+                "id": { "type": "string" },
+                "position_m": { "$ref": "#/$defs/vec3" },
+                "velocity_m_s": { "$ref": "#/$defs/vec3" },
+                "quaternion_wxyz": { "$ref": "#/$defs/quat" },
+                "angular_velocity_rad_s": { "$ref": "#/$defs/vec3" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "trajectory_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  },
+  "$defs": {
+    "vec3": {
+      "type": "array",
+      "prefixItems": [
+        { "type": "number" },
+        { "type": "number" },
+        { "type": "number" }
+      ],
+      "items": false
+    },
+    "quat": {
+      "type": "array",
+      "prefixItems": [
+        { "type": "number" },
+        { "type": "number" },
+        { "type": "number" },
+        { "type": "number" }
+      ],
+      "items": false
+    }
+  }
+}

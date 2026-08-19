@@ -199,7 +199,7 @@
         throughput still arrives from every side, but the exclusion volume blocks it and a
         <em>shadow cone</em> widens across the far side. That throughput deficit behind
         matter <strong>is</strong> the force — the same eclipse-occlusion mechanism that
-        runs from charges to galaxies. Inline SVG — edit
+        runs from circulating vortices to galaxies. Inline SVG — edit
         <span class="mono">&lt;circle id="centre"&gt;</span>, the cone width
         (<span class="mono">outHW</span>), or the ray count directly.
       </figcaption>
@@ -211,17 +211,17 @@
 <section id="s2">
   <div class="reveal">
     <h3>Act II — The spark</h3>
-    <h2>A single charge can only tap a sliver</h2>
+    <h2>A single circulating vortex can only tap a sliver</h2>
     <p>Matter is the one thing a spation cannot pass straight through. Where there is an
     exclusion volume, the one-tick relay is <em>interrupted</em> — and the interrupted
     throughput, the part that no longer makes it to the far side, is what we call force.
     Nothing attracts; matter simply fails to be transparent, and the surrounding
     throughput imbalance does the rest.</p>
-    <p>So when two charges push on each other they are not inventing a new force — each one
+    <p>So when two circulating vortices push on each other they are not inventing a new force — each one
     <em>occludes</em> a sliver of the convergence throughput the other would otherwise
     have passed through cleanly. Each particle casts a shadow; the shadow is the force.</p>
 
-    <p>But a charge is unimaginably small compared to the cosmos. It cannot tap the whole
+    <p>But a circulating vortex is unimaginably small compared to the cosmos. It cannot tap the whole
     ocean — only the fraction that reaches across its own tiny cross-section. SDT writes
     the electromagnetic force as the universal occlusion law:</p>
 
@@ -244,16 +244,16 @@
 <section id="s3">
   <div class="reveal">
     <h3>Act III — The derivation, step by step</h3>
-    <h2>Step 1 — Trade charge for α</h2>
+    <h2>Step 1 — Trade the coupling for α</h2>
     <p>The first move is exact and beautiful. The strength of the electric force,
-    written with Coulomb’s constant and the electron charge, is identical to the
+    written with Coulomb’s constant and the unit bridge e, is identical to the
     fine-structure constant times the quantum of action:</p>
 
     <div class="eq">k_e e²  =  α ℏ c  =  <span class="num">2.307078×10⁻²⁸ J·m</span></div>
 
     <p class="reveal"><span class="tag pass">proof EMC01-1a · PASS · err 0.0000%</span>
     This isn’t SDT — it’s standard physics, the very <em>definition</em> of α. But it lets
-    us erase the human-chosen units of charge and write everything in nature’s own
+    us erase the human-chosen units of coupling and write everything in nature’s own
     coupling constant. Substituting into <span class="mono">P_eff</span>:</p>
 
     <div class="eq">P_eff = 4 <span class="hl">α ℏ c</span> / (π R_p² r_e²)  =  <span class="num">5.225×10³¹ Pa</span></div>
@@ -376,7 +376,7 @@
     <div class="eq">F_Coulomb / F_gravity  =  <span class="num">2.27×10³⁹</span>
        <span style="color:var(--dim)">(proton–electron, 1 Å)</span></div>
     <p>In SDT this giant number is <em>not</em> a fitted coupling — it is pure geometry:
-    the charge cross-section versus the displacement cross-section. Same ocean, different
+    the coupling cross-section versus the displacement cross-section. Same ocean, different
     shadows.</p>
   </div>
 </section>
@@ -456,7 +456,7 @@
       <span class="tag fail">circularity assertion: FAILS</span>
       <span class="tag">class E</span>
       <p style="margin:.6em 0 0">In <span class="mono">laws.hpp</span> the engine labels its
-      own constant honestly: <span class="mono">P_eff</span> and
+      own constant directly: <span class="mono">P_eff</span> and
       <span class="mono">f_transfer</span> are <strong>class E — calibrated</strong>. The
       hydrogen Coulomb force fixes their scale. ƒ’s magnitude is inherited, not derived.</p>
     </div>
@@ -489,7 +489,7 @@
 
     <div class="widget">
       <h4>α → Coulomb falsifier</h4>
-      <div class="sub">SDT predicts F = (π/4)·P_eff(α)·R_charge⁴/r². Real Coulomb at 1 Å is fixed.</div>
+      <div class="sub">SDT predicts F = (π/4)·P_eff(α)·R_boundary⁴/r². Real Coulomb at 1 Å is fixed.</div>
       <label class="ctl">α / α_measured <span id="o-a2" class="pill"></span></label>
       <input id="r-a2" type="range" min="0.5" max="1.5" step="0.002" value="1">
       <figure style="margin:1em 0 0">
@@ -540,7 +540,7 @@
 
     <div class="callout danger">
       <strong>The tell.</strong> ƒ changes a lot — but the Coulomb match <em>barely</em>
-      moves, because <span class="mono">R_charge⁴ = R_p²r_e²</span> appears in
+      moves, because <span class="mono">R_boundary⁴ = R_p²r_e²</span> appears in
       <span class="mono">P_eff</span> and is cancelled again when you build the force. The
       radii divide out. That cancellation is the fingerprint of a calibration: the
       “independent” inputs were never independent of the target. A truly derived ƒ would
@@ -697,7 +697,7 @@ function PeffOf(a, rp){ return 4*a*C.hbar*C.c/(PI*rp*rp*C.r_e*C.r_e); }
     const aMul=+r.value;
     const a=C.alpha*aMul;
     o.textContent='×'+aMul.toFixed(3);
-    // SDT Coulomb uses P_eff(α) but with the TRUE R_charge (not refitted)
+    // SDT Coulomb uses P_eff(α) but with the TRUE R_boundary (not refitted)
     const Rc=Math.sqrt(C.R_p*C.r_e);
     const Peff=PeffOf(a,C.R_p);
     const F_sdt=(PI/4)*Peff*Math.pow(Rc,4)/(rTest*rTest);
@@ -731,9 +731,9 @@ function PeffOf(a, rp){ return 4*a*C.hbar*C.c/(PI*rp*rp*C.r_e*C.r_e); }
     // f shifts strongly with R_p
     const f=fOf(C.alpha,rp,C.R_CMB);
     of.textContent=f.toExponential(3);
-    // but SDT Coulomb: P_eff uses R_p, force uses R_charge=sqrt(R_p*r_e) -> R_p^2 cancels
+    // but SDT Coulomb: P_eff uses R_p, force uses R_boundary=sqrt(R_p*r_e) -> R_p^2 cancels
     const Peff=PeffOf(C.alpha,rp);
-    const Rc=Math.sqrt(rp*C.r_e);              // declared: R_charge also tracks R_p
+    const Rc=Math.sqrt(rp*C.r_e);              // declared: R_boundary also tracks R_p
     const F_sdt=(PI/4)*Peff*Math.pow(Rc,4)/(rTest*rTest);
     const coulRatio=F_sdt/F_real;
     oc.textContent=coulRatio.toFixed(4)+'×';
@@ -741,7 +741,7 @@ function PeffOf(a, rp){ return 4*a*C.hbar*C.c/(PI*rp*rp*C.r_e*C.r_e); }
     v.className='verdict bad';
     v.textContent='ƒ moved ×'+fDev.toPrecision(3)+'  ·  Coulomb moved ×'+coulRatio.toFixed(3);
     note.textContent='ƒ swings wildly, yet SDT-Coulomb stays pinned near 1.000 — the R_p²'
-      +' in P_eff cancels against R_charge⁴ in the force. The “independent” input divides out.'
+      +' in P_eff cancels against R_boundary⁴ in the force. The “independent” input divides out.'
       +' That self-healing IS the calibration fingerprint.';
   }
   r.addEventListener('input',up);up();

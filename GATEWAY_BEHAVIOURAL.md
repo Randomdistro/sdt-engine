@@ -31,6 +31,15 @@ Retained because they are already professional or near-professional: CALIBRATED(
 COMPUTED, OBSERVED, PENDING, convergent (defined at first use: independently derived,
 in agreement), pre-registered thresholds, residual, tolerance.
 
+### Rejected reification — charge
+
+The word **charge** and its grammatical variants (**charged**, **charges**, **charging**)
+are prohibited in active SDT prose, code, identifiers, and public artifacts. Do not replace
+it with another substance-like noun; write the asserted mechanics instead (circulation
+direction, displacement/exclusion geometry, wake structure, pressure response). Exceptions
+are immutable archives, imported datasets, quotations, and third-party licences. The public
+mirror gate is `Release/verify_public_site.py` (`audit_charge_terminology`).
+
 ## §2. Escort words are prohibited
 
 **"Honest / honestly / honesty" is banned as a modifier.** A stated fact needs no escort, and

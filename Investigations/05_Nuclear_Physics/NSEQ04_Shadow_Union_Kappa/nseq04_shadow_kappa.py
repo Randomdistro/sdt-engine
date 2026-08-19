@@ -1,15 +1,17 @@
 #!/usr/bin/env python3
-"""NSEQ04 — shadow-union κ·ΔA calibrate on live dual-tetra sequencer packing."""
+"""NSEQ04 — shadow-union κ·ΔA replay on the NSEQ05 geometric control."""
 from __future__ import annotations
 
 import json
 import re
 import subprocess
+import sys
 import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
 SEQ = ROOT / "Release/HTML_SDT_Website/nuclear-packing-sequencer.html"
+PACK = ROOT / "Release/HTML_SDT_Website/js/pack-nucleus.js"
 
 
 def extract_block(html: str, start_pat: str, end_pat: str) -> str:
@@ -23,6 +25,7 @@ def extract_block(html: str, start_pat: str, end_pat: str) -> str:
 
 
 def main() -> int:
+    sys.stdout.reconfigure(encoding="utf-8")
     print("================================================================")
     print("NSEQ04 — Shadow-union κ·ΔA (pre-registered policy)")
     print("================================================================\n")
@@ -32,8 +35,8 @@ def main() -> int:
     print("C1 — κ policy (frozen)")
     print("  form: BE ≈ κ·ΔA through origin")
     print("  estimator: κ = Σ(BE·ΔA)/Σ(ΔA²)")
-    print("  sample: full ISO filter; dnn=1.45*R_p; coul=0.30; DEFAULT_LIGHT")
-    print("  packing: live packNucleus (dual-tetra tritons)")
+    print("  sample: full ISO filter; dnn=1.45 fm; coul=0.30; DEFAULT_LIGHT")
+    print("  packing: NSEQ05-CONTROL-3 geometric replay (not Atomicus contact geometry)")
     print("  C1: PASS\n")
 
     # RAW + ISO construction + physics through calibrate()
@@ -43,28 +46,11 @@ def main() -> int:
         print("FAIL: RAW/NAMES not found")
         return 2
 
-    # From R_p through end of packNucleus only (browser canvas shadow replaced below)
-    start = html.find("const R_p = 0.8414;")
-    fn = html.find("function packNucleus(", start)
-    if start < 0 or fn < 0:
-        print("FAIL: packNucleus not found")
+    # Shared packer source (browser canvas shadow replaced below).
+    if not PACK.exists():
+        print("FAIL: shared pack-nucleus.js not found")
         return 2
-    brace = html.find("{", fn)
-    depth = 0
-    end = brace
-    for i, ch in enumerate(html[brace:], brace):
-        if ch == "{":
-            depth += 1
-        elif ch == "}":
-            depth -= 1
-            if depth == 0:
-                end = i + 1
-                break
-    physics = html[start:end]
-    if "function vnorm" not in physics:
-        vn = re.search(r"function vnorm\(v\)\{[^}]+\}", html)
-        if vn:
-            physics = vn.group(0) + "\n" + physics
+    physics = PACK.read_text(encoding="utf-8")
 
     # Node-compatible measureShadow + calibrate (same math as sequencer HTML)
     shadow_js = r"""
@@ -134,10 +120,12 @@ const ISO = RAW.map(([sym,Z,A,abd,stable,be,spin])=>{{
 }}).filter(e=>e.nd>=0 && e.nt>=0 && e.be>0);
 
 {physics}
+const R_p = SDT_NUCLEAR_PACKING.R_p;
+const A1 = Math.PI*R_p*R_p;
 {shadow_js}
 
 // defaults matching sequencer state
-const dnn = 1.45*R_p;
+const dnn = SDT_NUCLEAR_PACKING.defaultBondFm;
 const coul = 0.30;
 calibrate(dnn, coul);
 
@@ -168,7 +156,9 @@ console.log(JSON.stringify({{
         f.write(runner)
         tmp = f.name
     try:
-        out = subprocess.check_output(["node", tmp], text=True, stderr=subprocess.STDOUT)
+        out = subprocess.check_output(
+            ["node", tmp], encoding="utf-8", stderr=subprocess.STDOUT
+        )
     except subprocess.CalledProcessError as e:
         print("FAIL node:\n", e.output[:2000])
         return 2

@@ -1,0 +1,526 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex">
+<meta http-equiv="refresh" content="0; url=nuclear-packing-sequencer.html">
+<script>location.replace('nuclear-packing-sequencer.html' + location.search + location.hash);</script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Raw Nuclear Sequencer — SDT</title>
+<link rel="canonical" href="https://spatialdisplacementtheory.com/nuclear-packing-sequencer">
+  <style>
+    :root{
+      color-scheme:dark;
+      --bg:#05080d;--panel:#0b121c;--line:#26384c;--ink:#eef4fb;
+      --dim:#91a4b8;--gold:#ffc36a;--mint:#57e3c1;--red:#ff6262
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);
+      color:var(--ink);font:13px/1.4 system-ui,Segoe UI,sans-serif}
+    #scene{position:fixed;inset:0;width:100%;height:100%}
+    #panel{position:fixed;left:14px;top:14px;bottom:14px;width:min(360px,calc(100vw - 28px));
+      overflow:auto;padding:14px;background:rgba(7,12,19,.94);border:1px solid var(--line);
+      border-radius:10px;backdrop-filter:blur(12px)}
+    h1{font-size:18px;margin:0 0 3px} h1 span{color:var(--gold)}
+    .note{color:var(--dim);font-size:11px;margin-bottom:10px}
+    .section{border-top:1px solid var(--line);padding-top:10px;margin-top:10px}
+    .section h2{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);
+      margin:0 0 7px}
+    .buttons{display:flex;flex-wrap:wrap;gap:6px}
+    button,.fileButton,select,input,textarea{font:inherit;color:var(--ink);background:#101b28;
+      border:1px solid #30475f;border-radius:5px}
+    button,.fileButton{padding:6px 9px;cursor:pointer}
+    button:hover,.fileButton:hover{border-color:var(--gold)}
+    button.danger{border-color:#733;color:#ffaaaa}
+    button.active{border-color:var(--mint);color:var(--mint)}
+    input{width:100%;padding:5px 6px}
+    .grid{display:grid;grid-template-columns:34px repeat(3,1fr);gap:5px;align-items:center}
+    .grid label{color:var(--dim);font-size:11px}
+    #units{display:grid;gap:4px;max-height:175px;overflow:auto}
+    .unit{display:flex;align-items:center;justify-content:space-between;padding:5px 7px;
+      border:1px solid #26384c;border-radius:5px;cursor:pointer}
+    .unit.active{border-color:var(--mint);background:#10251f}
+    .unit small{color:var(--dim)}
+    .row{display:flex;justify-content:space-between;gap:12px;margin:4px 0}
+    .row span:first-child{color:var(--dim)}
+    #status{color:var(--mint);min-height:18px;margin-top:7px}
+    #json{width:100%;height:115px;padding:7px;resize:vertical;font:10px/1.35 ui-monospace,monospace}
+    #fileInput{display:none}
+    .hint{position:fixed;right:14px;bottom:14px;color:var(--dim);font-size:11px;
+      background:rgba(7,12,19,.82);padding:7px 9px;border-radius:6px}
+    @media(max-width:700px){#panel{width:310px}.hint{display:none}}
+  </style>
+</head>
+<body>
+<canvas id="scene"></canvas>
+<aside id="panel">
+  <h1>Raw Nuclear <span>Sequencer</span></h1>
+  <div class="note">Empty manual workspace. No automatic packing, fitted values,
+    contraction rule, or modification of <code>laws.hpp</code>.</div>
+
+  <div class="buttons">
+    <button id="addP">Add proton</button>
+    <button id="addN">Add neutron</button>
+    <button id="duplicate">Duplicate</button>
+    <button id="remove" class="danger">Delete</button>
+    <button id="clear" class="danger">Clear</button>
+  </div>
+
+  <section class="section">
+    <h2>Complete nucleon transforms</h2>
+    <div class="buttons">
+      <button data-mode="translate" class="active">Move (W)</button>
+      <button data-mode="rotate">Rotate (E)</button>
+      <button data-mode="scale">Scale (R)</button>
+      <button id="localWorld">Space: local</button>
+    </div>
+    <div class="grid" style="margin-top:8px">
+      <label>pos</label><input id="px" type="number" step=".01"><input id="py" type="number" step=".01"><input id="pz" type="number" step=".01">
+      <label>rot°</label><input id="rx" type="number" step="1"><input id="ry" type="number" step="1"><input id="rz" type="number" step="1">
+      <label>scale</label><input id="sx" type="number" step=".01" min=".01"><input id="sy" type="number" step=".01" min=".01"><input id="sz" type="number" step=".01" min=".01">
+    </div>
+    <div class="buttons" style="margin-top:7px">
+      <button id="applyTransform">Apply numbers</button>
+      <button id="undo">Undo</button>
+      <button id="redo">Redo</button>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Units</h2>
+    <div id="units"><div class="note">No nucleons placed.</div></div>
+  </section>
+
+  <section class="section">
+    <h2>Explicit contacts</h2>
+    <div class="buttons">
+      <button id="setA">Set selected as A</button>
+      <button id="addContact">Add A ↔ selected</button>
+      <button id="removeContacts">Remove selected contacts</button>
+    </div>
+    <div class="row"><span>contact A</span><b id="contactA">—</b></div>
+    <div class="row"><span>contacts</span><b id="contactCount">0</b></div>
+    <div class="row"><span>A-to-selected centre distance</span><b id="distance">—</b></div>
+    <div class="note">Contacts are manual declarations. Only unlike species are accepted.
+      No claim is made that centre distance proves toroidal rim contact.</div>
+  </section>
+
+  <section class="section">
+    <h2>Display</h2>
+    <div class="buttons">
+      <button id="toggleWake" class="active">Wake on</button>
+      <button id="toggleSpin" class="active">Motion on</button>
+      <button id="resetCamera">Reset camera</button>
+    </div>
+    <div class="row"><span>selected</span><b id="selected">—</b></div>
+    <div class="row"><span>inventory</span><b id="inventory">0p · 0n</b></div>
+  </section>
+
+  <section class="section">
+    <h2>Portable build ledger</h2>
+    <div class="buttons">
+      <button id="exportJson">Write JSON</button>
+      <button id="copyJson">Copy</button>
+      <label class="fileButton" for="fileInput">Load file</label>
+      <input id="fileInput" type="file" accept=".json,application/json">
+      <button id="loadJson">Load text</button>
+    </div>
+    <textarea id="json" spellcheck="false" placeholder="Exported build JSON appears here."></textarea>
+    <div id="status"></div>
+  </section>
+</aside>
+<div class="hint">Select a unit, then drag its gizmo. W move · E rotate · R scale · Delete remove.</div>
+
+<script src="js/nuclear-inputs.js"></script>
+<script src="js/traction-gear-engine.js"></script>
+<script type="importmap">
+{"imports":{
+  "three":"https://unpkg.com/three@0.160.0/build/three.module.js",
+  "three/addons/":"https://unpkg.com/three@0.160.0/examples/jsm/"
+}}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+import {TransformControls} from 'three/addons/controls/TransformControls.js';
+
+const gear=window.SDT_TRACTION_GEAR;
+const canvas=document.getElementById('scene');
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:false});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+renderer.setSize(innerWidth,innerHeight);
+renderer.outputColorSpace=THREE.SRGBColorSpace;
+renderer.toneMapping=THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure=1.35;
+
+const scene=new THREE.Scene();
+scene.background=new THREE.Color(0x05080d);
+const camera=new THREE.PerspectiveCamera(45,innerWidth/innerHeight,.02,500);
+camera.position.set(10,7,16);
+const orbit=new OrbitControls(camera,renderer.domElement);
+orbit.enableDamping=true;
+orbit.target.set(0,0,0);
+const transform=new TransformControls(camera,renderer.domElement);
+transform.setSpace('local');
+scene.add(transform);
+transform.addEventListener('dragging-changed',event=>{
+  orbit.enabled=!event.value;
+  if(!event.value){pushHistory();refreshTransformInputs();}
+});
+transform.addEventListener('objectChange',()=>{
+  refreshTransformInputs();
+  refreshContacts();
+});
+
+scene.add(new THREE.HemisphereLight(0xbddcff,0x101018,2.0));
+const key=new THREE.DirectionalLight(0xffdfb1,3.2);
+key.position.set(8,10,12);scene.add(key);
+const fill=new THREE.DirectionalLight(0x77aaff,1.5);
+fill.position.set(-10,-4,5);scene.add(fill);
+
+const root=new THREE.Group();
+scene.add(root);
+const contactGroup=new THREE.Group();
+scene.add(contactGroup);
+
+function makeHydrogenGeometry(){
+  const frame=gear.h1FrameTable(1,384);
+  const arc=gear.h1ArcTable(1,384);
+  const segments=frame.segments,radial=16,radius=gear.h1Spec.strandRadiusFraction;
+  const positions=new Float32Array(segments*radial*3);
+  const colours=new Float32Array(segments*radial*3);
+  const arcFractions=new Float32Array(segments*radial);
+  const betaFractions=new Float32Array(segments*radial);
+  const tourIndices=new Uint8Array(segments*radial);
+  const indices=[];
+  let cursor=0;
+  for(let i=0;i<segments;i++){
+    const point=frame.points[i],normal=frame.materialNormals[i],binormal=frame.materialBinormals[i];
+    for(let j=0;j<radial;j++){
+      const beta=2*Math.PI*j/radial;
+      positions[cursor*3]=point[0]+radius*(Math.cos(beta)*normal[0]+Math.sin(beta)*binormal[0]);
+      positions[cursor*3+1]=point[1]+radius*(Math.cos(beta)*normal[1]+Math.sin(beta)*binormal[1]);
+      positions[cursor*3+2]=point[2]+radius*(Math.cos(beta)*normal[2]+Math.sin(beta)*binormal[2]);
+      colours[cursor*3]=colours[cursor*3+1]=colours[cursor*3+2]=1;
+      arcFractions[cursor]=arc.lengths[i]/arc.totalLength;
+      betaFractions[cursor]=j/radial;
+      tourIndices[cursor]=Math.min(3,Math.floor(4*i/segments));
+      cursor++;
+    }
+  }
+  for(let i=0;i<segments;i++){
+    const next=(i+1)%segments;
+    for(let j=0;j<radial;j++){
+      const nj=(j+1)%radial,a=i*radial+j,b=next*radial+j,c=next*radial+nj,d=i*radial+nj;
+      indices.push(a,b,d,b,c,d);
+    }
+  }
+  const geometry=new THREE.BufferGeometry();
+  geometry.setAttribute('position',new THREE.BufferAttribute(positions,3));
+  geometry.setAttribute('color',new THREE.BufferAttribute(colours,3));
+  geometry.setIndex(indices);
+  geometry.computeVertexNormals();
+  geometry.userData={arcFractions,betaFractions,tourIndices};
+  return geometry;
+}
+
+const sharedGeometry=makeHydrogenGeometry();
+const centrelineGeometry=new THREE.BufferGeometry().setFromPoints(
+  Array.from({length:513},(_,i)=>{
+    const point=gear.h1Point(2*Math.PI*i/512,1);
+    return new THREE.Vector3(...point);
+  })
+);
+const material=new THREE.MeshStandardMaterial({
+  color:0xff2626,emissive:0x4d0808,emissiveIntensity:.65,roughness:.3,
+  metalness:.42,vertexColors:true
+});
+const centrelineMaterial=new THREE.LineBasicMaterial({color:0xfff1d1,transparent:true,opacity:.72});
+
+let units=[],contacts=[],selectedId=null,contactA=null,nextId=1;
+let wakeVisible=true,motion=true,history=[],historyIndex=-1,loading=false;
+
+function wakeObject(species){
+  const group=new THREE.Group();
+  const outward=[0xffb34d,0xff6b6b,0xd982ff,0x65c7ff];
+  const inward=[0x4cc9f0,0x64dfdf,0x72efb2,0x80ffdb];
+  const segments=gear.transformWakeSegments({
+    type:species,centreRp:[0,0,0],orientation:[0,0,0,1],scale:1,
+    handedness:species==='p'?1:-1,toroidalPhase:0,wakeCompliance:0,splitShift:0
+  },6);
+  for(const segment of segments){
+    const colour=segment.family==='exterior'||segment.family==='crown'
+      ? inward[segment.circuit%4]:outward[segment.circuit%4];
+    const geometry=new THREE.BufferGeometry().setFromPoints([
+      new THREE.Vector3(...segment.a),new THREE.Vector3(...segment.b)
+    ]);
+    group.add(new THREE.Line(geometry,new THREE.LineBasicMaterial({
+      color:colour,transparent:true,opacity:.28,blending:THREE.AdditiveBlending,depthWrite:false
+    })));
+  }
+  group.visible=wakeVisible;
+  return group;
+}
+
+function makeUnit(species,id){
+  const group=new THREE.Group();
+  group.userData={id,species};
+  const rotor=new THREE.Group();
+  rotor.name='rotor';
+  rotor.add(new THREE.Mesh(sharedGeometry,material));
+  rotor.add(new THREE.Line(centrelineGeometry,centrelineMaterial));
+  const wake=wakeObject(species);wake.name='wake';rotor.add(wake);
+  if(species==='n'){
+    const electron=new THREE.Mesh(
+      new THREE.TorusGeometry(.27,.018,6,48),
+      new THREE.MeshBasicMaterial({color:0x7fe7ff,transparent:true,opacity:.8})
+    );
+    electron.rotation.x=Math.PI/2;electron.name='electron-seat';rotor.add(electron);
+  }
+  group.add(rotor);
+  return group;
+}
+
+function addUnit(species,record=true){
+  const id=nextId++;
+  const object=makeUnit(species,id);
+  object.position.set((units.length%4)*2.4,0,Math.floor(units.length/4)*2.4);
+  root.add(object);
+  units.push({id,species,object});
+  select(id);
+  if(record)pushHistory();
+  refreshAll();
+}
+
+function selectedUnit(){return units.find(unit=>unit.id===selectedId)||null}
+function select(id){
+  selectedId=id;
+  const unit=selectedUnit();
+  if(unit)transform.attach(unit.object);else transform.detach();
+  refreshAll();
+}
+function removeSelected(record=true){
+  const unit=selectedUnit();if(!unit)return;
+  root.remove(unit.object);transform.detach();
+  contacts=contacts.filter(edge=>edge.a!==unit.id&&edge.b!==unit.id);
+  units=units.filter(row=>row.id!==unit.id);
+  if(contactA===unit.id)contactA=null;
+  selectedId=units.at(-1)?.id||null;
+  if(selectedUnit())transform.attach(selectedUnit().object);
+  if(record)pushHistory();
+  refreshAll();
+}
+function clearBuild(record=true){
+  for(const unit of units)root.remove(unit.object);
+  units=[];contacts=[];selectedId=null;contactA=null;nextId=1;transform.detach();
+  if(record)pushHistory();
+  refreshAll();
+}
+
+function snapshot(){
+  return {
+    schema:'SDT-RAW-NUCLEAR-SEQUENCER-1',
+    units:units.map(unit=>({
+      id:unit.id,species:unit.species,
+      position:unit.object.position.toArray(),
+      quaternion:unit.object.quaternion.toArray(),
+      scale:unit.object.scale.toArray()
+    })),
+    contacts:contacts.map(edge=>({...edge}))
+  };
+}
+function pushHistory(){
+  if(loading)return;
+  history=history.slice(0,historyIndex+1);
+  history.push(JSON.stringify(snapshot()));
+  historyIndex=history.length-1;
+}
+function restore(data,record=false){
+  loading=true;clearBuild(false);
+  if(data.schema!=='SDT-RAW-NUCLEAR-SEQUENCER-1')throw new Error('Unsupported raw sequencer schema');
+  for(const row of data.units||[]){
+    if(row.species!=='p'&&row.species!=='n')throw new Error('Species must be p or n');
+    const object=makeUnit(row.species,row.id);
+    object.position.fromArray(row.position);
+    object.quaternion.fromArray(row.quaternion);
+    object.scale.fromArray(row.scale);
+    root.add(object);units.push({id:row.id,species:row.species,object});
+    nextId=Math.max(nextId,row.id+1);
+  }
+  const ids=new Set(units.map(unit=>unit.id));
+  contacts=(data.contacts||[]).filter(edge=>ids.has(edge.a)&&ids.has(edge.b));
+  selectedId=units[0]?.id||null;
+  if(selectedUnit())transform.attach(selectedUnit().object);
+  loading=false;if(record)pushHistory();refreshAll();
+}
+
+function refreshUnits(){
+  const list=document.getElementById('units');list.replaceChildren();
+  if(!units.length){const empty=document.createElement('div');empty.className='note';empty.textContent='No nucleons placed.';list.append(empty);return}
+  for(const unit of units){
+    const row=document.createElement('div');row.className='unit'+(unit.id===selectedId?' active':'');
+    const name=document.createElement('span');name.textContent=`${unit.species==='p'?'proton':'neutron'} ${unit.id}`;
+    const order=document.createElement('small');order.textContent=`step ${units.indexOf(unit)+1}`;
+    row.append(name,order);row.addEventListener('click',()=>select(unit.id));list.append(row);
+  }
+}
+function refreshTransformInputs(){
+  const unit=selectedUnit();
+  const ids=['px','py','pz','rx','ry','rz','sx','sy','sz'];
+  if(!unit){ids.forEach(id=>document.getElementById(id).value='');return}
+  const p=unit.object.position,r=unit.object.rotation,s=unit.object.scale;
+  const values=[p.x,p.y,p.z,THREE.MathUtils.radToDeg(r.x),THREE.MathUtils.radToDeg(r.y),
+    THREE.MathUtils.radToDeg(r.z),s.x,s.y,s.z];
+  ids.forEach((id,index)=>document.getElementById(id).value=values[index].toFixed(4));
+}
+function refreshContacts(){
+  while(contactGroup.children.length)contactGroup.remove(contactGroup.children[0]);
+  const points=[];
+  for(const edge of contacts){
+    const a=units.find(unit=>unit.id===edge.a),b=units.find(unit=>unit.id===edge.b);
+    if(a&&b)points.push(a.object.position.clone(),b.object.position.clone());
+  }
+  if(points.length){
+    contactGroup.add(new THREE.LineSegments(
+      new THREE.BufferGeometry().setFromPoints(points),
+      new THREE.LineBasicMaterial({color:0x57e3c1,transparent:true,opacity:.75})
+    ));
+  }
+  document.getElementById('contactCount').textContent=contacts.length;
+  document.getElementById('contactA').textContent=contactA==null?'—':String(contactA);
+  const a=units.find(unit=>unit.id===contactA),b=selectedUnit();
+  document.getElementById('distance').textContent=a&&b&&a!==b
+    ? a.object.position.distanceTo(b.object.position).toFixed(6):'—';
+}
+function refreshAll(){
+  refreshUnits();refreshTransformInputs();refreshContacts();
+  const p=units.filter(unit=>unit.species==='p').length,n=units.length-p;
+  document.getElementById('inventory').textContent=`${p}p · ${n}n`;
+  const unit=selectedUnit();
+  document.getElementById('selected').textContent=unit?`${unit.species} ${unit.id}`:'—';
+}
+function status(message,error=false){
+  const element=document.getElementById('status');element.textContent=message;
+  element.style.color=error?'var(--red)':'var(--mint)';
+}
+
+document.getElementById('addP').onclick=()=>addUnit('p');
+document.getElementById('addN').onclick=()=>addUnit('n');
+document.getElementById('duplicate').onclick=()=>{
+  const source=selectedUnit();if(!source)return;
+  addUnit(source.species,false);const target=selectedUnit();
+  target.object.position.copy(source.object.position).add(new THREE.Vector3(.35,.35,.35));
+  target.object.quaternion.copy(source.object.quaternion);target.object.scale.copy(source.object.scale);
+  pushHistory();refreshAll();
+};
+document.getElementById('remove').onclick=()=>removeSelected();
+document.getElementById('clear').onclick=()=>{if(confirm('Clear the raw build?'))clearBuild()};
+document.querySelectorAll('[data-mode]').forEach(button=>button.onclick=()=>{
+  transform.setMode(button.dataset.mode);
+  document.querySelectorAll('[data-mode]').forEach(item=>item.classList.toggle('active',item===button));
+});
+document.getElementById('localWorld').onclick=event=>{
+  const next=transform.space==='local'?'world':'local';transform.setSpace(next);
+  event.currentTarget.textContent=`Space: ${next}`;
+};
+document.getElementById('applyTransform').onclick=()=>{
+  const unit=selectedUnit();if(!unit)return;
+  const number=id=>Number(document.getElementById(id).value);
+  unit.object.position.set(number('px'),number('py'),number('pz'));
+  unit.object.rotation.set(
+    THREE.MathUtils.degToRad(number('rx')),
+    THREE.MathUtils.degToRad(number('ry')),
+    THREE.MathUtils.degToRad(number('rz'))
+  );
+  unit.object.scale.set(number('sx'),number('sy'),number('sz'));
+  pushHistory();refreshAll();
+};
+document.getElementById('setA').onclick=()=>{
+  contactA=selectedId;refreshContacts();
+};
+document.getElementById('addContact').onclick=()=>{
+  const a=units.find(unit=>unit.id===contactA),b=selectedUnit();
+  if(!a||!b||a===b)return status('Select two different nucleons.',true);
+  if(a.species===b.species)return status('Rejected: only p↔n contacts are accepted.',true);
+  if(contacts.some(edge=>new Set([edge.a,edge.b]).has(a.id)&&new Set([edge.a,edge.b]).has(b.id)))
+    return status('That contact already exists.',true);
+  contacts.push({a:a.id,b:b.id});pushHistory();refreshContacts();status('Contact added.');
+};
+document.getElementById('removeContacts').onclick=()=>{
+  if(selectedId==null)return;contacts=contacts.filter(edge=>edge.a!==selectedId&&edge.b!==selectedId);
+  pushHistory();refreshContacts();
+};
+document.getElementById('toggleWake').onclick=event=>{
+  wakeVisible=!wakeVisible;event.currentTarget.classList.toggle('active',wakeVisible);
+  event.currentTarget.textContent=`Wake ${wakeVisible?'on':'off'}`;
+  root.traverse(object=>{if(object.name==='wake')object.visible=wakeVisible});
+};
+document.getElementById('toggleSpin').onclick=event=>{
+  motion=!motion;event.currentTarget.classList.toggle('active',motion);
+  event.currentTarget.textContent=`Motion ${motion?'on':'off'}`;
+};
+document.getElementById('resetCamera').onclick=()=>{
+  camera.position.set(10,7,16);orbit.target.set(0,0,0);orbit.update();
+};
+document.getElementById('undo').onclick=()=>{
+  if(historyIndex<=0)return;historyIndex--;restore(JSON.parse(history[historyIndex]));
+};
+document.getElementById('redo').onclick=()=>{
+  if(historyIndex>=history.length-1)return;historyIndex++;restore(JSON.parse(history[historyIndex]));
+};
+document.getElementById('exportJson').onclick=()=>{
+  document.getElementById('json').value=JSON.stringify(snapshot(),null,2);status('Build ledger written.');
+};
+document.getElementById('copyJson').onclick=async()=>{
+  const text=JSON.stringify(snapshot(),null,2);document.getElementById('json').value=text;
+  try{await navigator.clipboard.writeText(text);status('Copied.')}catch{status('Clipboard unavailable; JSON is in the text box.',true)}
+};
+document.getElementById('loadJson').onclick=()=>{
+  try{restore(JSON.parse(document.getElementById('json').value),true);status('Build loaded.')}
+  catch(error){status(error.message,true)}
+};
+document.getElementById('fileInput').onchange=async event=>{
+  const file=event.target.files[0];if(!file)return;
+  try{const text=await file.text();document.getElementById('json').value=text;restore(JSON.parse(text),true);status('Build loaded.')}
+  catch(error){status(error.message,true)}
+};
+addEventListener('keydown',event=>{
+  if(event.target.matches('input,textarea'))return;
+  if(event.key.toLowerCase()==='w')transform.setMode('translate');
+  if(event.key.toLowerCase()==='e')transform.setMode('rotate');
+  if(event.key.toLowerCase()==='r')transform.setMode('scale');
+  if(event.key==='Delete')removeSelected();
+});
+addEventListener('resize',()=>{
+  camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth,innerHeight);
+});
+
+const clock=new THREE.Clock();
+function animate(){
+  requestAnimationFrame(animate);
+  const t=clock.getElapsedTime();
+  if(motion){
+    for(const unit of units){
+      const rotor=unit.object.getObjectByName('rotor');
+      rotor.rotation.z=(unit.species==='p'?1:-1)*t*.55;
+      const electron=rotor.getObjectByName('electron-seat');
+      if(electron)electron.rotation.z=-t*1.1;
+    }
+    const colour=sharedGeometry.getAttribute('color');
+    const {arcFractions,betaFractions,tourIndices}=sharedGeometry.userData;
+    const phase=(t*.18)%1,shade=[1,.82,.66,.5];
+    for(let i=0;i<colour.count;i++){
+      const longitudinal=.5+.5*Math.cos(2*Math.PI*16*(arcFractions[i]-phase));
+      const rolling=.5+.5*Math.cos(2*Math.PI*(betaFractions[i]-3*phase));
+      const level=shade[tourIndices[i]]*(.58+.36*longitudinal+.06*rolling);
+      colour.setXYZ(i,level,level,level);
+    }
+    colour.needsUpdate=true;
+  }
+  orbit.update();renderer.render(scene,camera);
+}
+pushHistory();refreshAll();animate();
+</script>
+</body>
+</html>

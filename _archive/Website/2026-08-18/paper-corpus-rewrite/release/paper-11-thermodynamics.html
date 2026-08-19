@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>/*sdt-theme-guard*/(function(){try{var t=localStorage.getItem("sdt.theme")||"auto";if(t==="auto")t=(window.matchMedia&&window.matchMedia("(prefers-color-scheme:dark)").matches)?"dark":"light";var d=document.documentElement;d.setAttribute("data-theme",t);d.setAttribute("data-sdt-theme",t);}catch(e){}})();</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paper 11 — Thermodynamics &amp; Statistical Mechanics</title>
+<style>
+:root{--paper:#faf8f4;--edge:#e5e0d4;--ink:#1c1e20;--soft:#45484c;--mute:#6d7177;--mint:#0d7a5f;--rust:#a4552e;--gold:#8a6d1f;--steel:#4a6d82}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:'Source Serif 4',Georgia,serif;line-height:1.75;padding:3rem 1.5rem}
+main{max-width:46rem;margin:0 auto}
+.series{font-family:Consolas,monospace;font-size:.68rem;letter-spacing:.28em;color:var(--mute);text-transform:uppercase;margin-bottom:1.2rem}
+h1{font-size:1.85rem;line-height:1.25;font-weight:700;margin-bottom:1rem}
+.byline{font-size:1rem;margin-bottom:.2rem}
+.affil{font-family:Consolas,monospace;font-size:.72rem;color:var(--mute);margin-bottom:2rem}
+h2{font-size:1.12rem;font-weight:700;margin:2.2rem 0 .7rem}
+p{margin-bottom:.9rem;color:var(--soft)}
+strong{color:var(--ink)}
+.abstract{border:1px solid var(--edge);border-left:3px solid var(--mint);padding:1.1rem 1.3rem;background:#fff;margin:1.5rem 0}
+.abstract p{margin-bottom:0}
+.eq{font-family:Consolas,monospace;font-size:.9rem;background:#fff;border:1px solid var(--edge);border-radius:3px;padding:.8rem 1.1rem;margin:1rem 0;display:flex;justify-content:space-between;gap:1rem;overflow-x:auto}
+.eq .no{color:var(--mute)}
+table{width:100%;border-collapse:collapse;font-size:.85rem;margin:1rem 0}
+th,td{border:1px solid var(--edge);padding:.45rem .6rem;text-align:left;vertical-align:top}
+th{font-family:Consolas,monospace;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+.decl{border:1px solid var(--edge);background:#fff;padding:1rem 1.2rem;margin:1.5rem 0;font-size:.92rem}
+.refs ol{margin-left:1.2rem}
+.refs li{font-size:.85rem;color:var(--soft);margin-bottom:.4rem}
+footer{max-width:46rem;margin:3rem auto 0;padding-top:1.2rem;border-top:1px solid var(--edge)}
+footer a{color:var(--mint);text-decoration:none;font-family:Consolas,monospace;font-size:.75rem;letter-spacing:.06em}
+sub,sup{line-height:0}
+</style>
+<link rel="stylesheet" href="sdt-shell.css">
+<script src="sdt-shell.js" defer></script>
+<meta name="description" content="Paper 11 — Thermodynamics &amp; Statistical Mechanics — part of Spatial Displacement Theory, a zero-free-parameter physics framework.">
+<link rel="canonical" href="https://spatialdisplacementtheory.com/paper-11-thermodynamics">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/favicon.ico" sizes="64x64">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#b07430">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Spatial Displacement Theory">
+<meta property="og:title" content="Paper 11 — Thermodynamics &amp; Statistical Mechanics">
+<meta property="og:description" content="Paper 11 — Thermodynamics &amp; Statistical Mechanics — part of Spatial Displacement Theory, a zero-free-parameter physics framework.">
+<meta property="og:url" content="https://spatialdisplacementtheory.com/paper-11-thermodynamics">
+<meta property="og:image" content="https://spatialdisplacementtheory.com/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_AU">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Paper 11 — Thermodynamics &amp; Statistical Mechanics">
+<meta name="twitter:description" content="Paper 11 — Thermodynamics &amp; Statistical Mechanics — part of Spatial Displacement Theory, a zero-free-parameter physics framework.">
+<meta name="twitter:image" content="https://spatialdisplacementtheory.com/og-card.png">
+</head>
+<body>
+<main>
+<p class="series">Spatial Displacement Theory · Paper 11 · Prepared for Submission</p>
+<h1>Heat as Disordered Throughput: Lattice Statistics Without an Imposed Ensemble, and the Freedom Ledger of Binding</h1>
+<p class="byline">James Christopher Tyndall</p>
+<p class="affil">Melbourne, Australia · July 2026 · Domain 11 — Thermodynamics &amp; Statistical Mechanics</p>
+
+<div class="abstract">
+<p><strong>Abstract.</strong> Heat is disordered convergence throughput — relay activity not organised into a vortex or a coherent wake. Because the substrate is discrete at ℓ<sub>P</sub>, the microstate count W of any macrostate is finite and literal: S = k<sub>B</sub>ln W is a count, not a coarse-graining, and the monotone approach to the large basin follows from per-tick neighbour mixing without the molecular-chaos hypothesis. Temperature is mean disordered throughput per degree of freedom (k<sub>B</sub>T per pair of quadratic terms); wall pressure is occlusion momentum flux, yielding PV = Nk<sub>B</sub>T with no imposed ensemble; conduction shares the ⅓λv machinery of Paper 10. The suite's one native falsifiable fingerprint is stated: the rank-4 lattice observable lies in the band [1/9, 7/27] where the continuum requires 1/5. The Freedom Ledger reads the second law as freedom-seeking — matter binds exactly when binding opens more movement routes than it closes — and its flip temperature, computed with zero fits, lands at T = 0.0624 MeV, inside the measured primordial deuterium bottleneck (0.06–0.09 MeV). Root-level debts are disclosed: the suite's mechanisms are ε-scale-blind (TD-ROOT-1) and the per-mode content ε = hν is asserted, not derived (TD-ROOT-3).</p>
+</div>
+<p><strong>Keywords:</strong> disordered throughput · literal microstate count · equipartition from sharing · occlusion pressure · freedom ledger · lattice fingerprint</p>
+
+<h2>1. Entropy as a literal count (TD01)</h2>
+<div class="eq"><span>S = k<sub>B</sub>·ln W,&nbsp;&nbsp;W = number of relay micro-arrangements of the macrostate</span><span class="no">(1)</span></div>
+<p>There is no continuum phase space to partition and no ensemble to impose: the lattice <em>has</em> a countable arrangement set. Per-tick neighbour exchange mixes arrangements toward the dominant basin, and S(t) is monotone without the collision-chaos assumption. The arrow of time is the counting direction of the tick (Paper 01), re-posed at root as the freedom-climb theorem of §5. Status: class C, qualified — the qualification is carried, not buried.</p>
+
+<h2>2. Temperature and equipartition from sharing (TD02)</h2>
+<div class="eq"><span>k<sub>B</sub>T ≡ mean disordered throughput per spation DoF;&nbsp;&nbsp;⟨E⟩ = ½k<sub>B</sub>T per quadratic DoF</span><span class="no">(2)</span></div>
+<p>Relay contact shares throughput evenly among the degrees of freedom it can reach; equipartition is the fixed point of that sharing, and the speed distribution of a relay gas emerges with the observed form. 1/T = ∂S/∂E follows by differentiating the count.</p>
+
+<h2>3. The relay gas: pressure, conduction, fluctuation (TD03, TD04, TD08)</h2>
+<div class="eq"><span>PV = Nk<sub>B</sub>T — from Law III occlusion momentum flux on the walls</span><span class="no">(3)</span></div>
+<div class="eq"><span>q = −k∇T,&nbsp;&nbsp;k = ⅓·c<sub>v</sub>·v<sub>relay</sub>·λ<sub>mfp</sub></span><span class="no">(4)</span></div>
+<p>Wall pressure is the same occlusion bookkeeping as every force in the framework; partial pressures add because occlusion counts add. Conduction is throughput diffusion down a gradient, with the τ = 1/3 quadrature share once more. Tick-level noise and macroscopic dissipation are one mechanism, giving the diffusion–mobility relation D = μk<sub>B</sub>T. The one <strong>native falsifiable fingerprint</strong> of the statistical sector: on the icosahedral lattice the rank-4 velocity-moment observable must lie in [1/9, 7/27], where any continuum medium requires exactly 1/5 — a bench-top discriminant requiring no astronomy (TD03; FLM08 lattice).</p>
+
+<h2>4. Blackbody statistics and the information sector (TD06, TD07)</h2>
+<p>Mode counting on the discrete lattice reproduces the radiation-density law u = aT⁴, the displacement law of the spectral peak, and the total-emission law as convergence targets — with the root flagged: the per-mode content ε = hν is asserted from the derivation basis ℏ, not derived from relay mechanics (TD-ROOT-3). Erasure cost k<sub>B</sub>T ln2 per bit is recovered as relay work; the demon pays in relay bookkeeping. Portions of the information sector reduce to standard combinatorics with no SDT-specific content, and those portions are labelled NULL-SDT-CONTENT rather than dressed up. The reconfiguration account of latent heat was excluded at fixed density (TD05) and stands excluded.</p>
+
+<h2>5. The Freedom Ledger of binding (TD09) — second law as freedom-seeking</h2>
+<div class="eq"><span>bind ⟺ ΔW<sub>routes</sub> &gt; 0:&nbsp;&nbsp;matter climbs into structure when binding opens more routes than it closes</span><span class="no">(5)</span></div>
+<div class="eq"><span>ledger flip: T<sub>flip</sub> = 0.0624 MeV — inside the measured D-bottleneck window 0.06–0.09 MeV, zero fits</span><span class="no">(6)</span></div>
+<p>The restatement changes no mathematics: it reads S = k<sub>B</sub>ln W as a count of movement freedoms and the second law as the substrate seeking routes. Its one quantitative gate passed: the temperature at which binding first pays — the ledger flip — computed with nothing adjustable, lands inside the window where the measured primordial deuterium abundance dates the universe's first assembly step. Disclosure: the computation is convergent with the standard ionisation-balance route, and is claimed as consistency of the ledger, not as a discriminant against it.</p>
+
+<h2>6. Certification</h2>
+<table>
+<tr><th>Result</th><th>Value</th><th>Status</th></tr>
+<tr><td>S = k<sub>B</sub>ln W literal; monotone S(t)</td><td>eq. (1)</td><td>class C, qualified (TD01)</td></tr>
+<tr><td>Equipartition; PV = Nk<sub>B</sub>T; conduction</td><td>eqs. (2)–(4)</td><td>CONVERGENCE-class (TD02–TD04)</td></tr>
+<tr><td>Rank-4 lattice fingerprint</td><td>[1/9, 7/27] vs 1/5</td><td>NATIVE FALSIFIER — pre-registered</td></tr>
+<tr><td>ε = hν per mode</td><td>—</td><td>ASSERTED, not derived (TD-ROOT-3, disclosed)</td></tr>
+<tr><td>ε-scale invisibility</td><td>—</td><td>TD-ROOT-1 — mechanisms substrate-blind (disclosed)</td></tr>
+<tr><td>Latent-heat count ledger at fixed density</td><td>—</td><td>EXCLUDED (TD05)</td></tr>
+<tr><td>Landauer / fluctuation sectors</td><td>—</td><td>partial NULL-SDT-CONTENT, labelled (TD07/TD08)</td></tr>
+<tr><td>Freedom-ledger flip</td><td>0.0624 MeV in [0.06, 0.09]</td><td>GATE PASSED — zero fits; Saha-convergent, disclosed</td></tr>
+</table>
+
+<div class="decl">
+<p><strong>Methodological declaration.</strong> The imposed ensemble, the partition-function-as-axiom, the continuum phase-space measure, the quantised-oscillator postulate, and "entropy = disorder" are forbidden as inputs in this domain — they are the targets. Every convergence with the standard statistical results is labelled convergence; every place where the suite's content reduces to substrate-blind combinatorics is labelled NULL-SDT-CONTENT; both root debts are printed here rather than in a footnote.</p>
+</div>
+
+<h2 class="refs">References</h2>
+<div class="refs"><ol>
+<li>Investigations/11_Thermodynamics_and_Statistical_Mechanics — TD01–TD09 verdicts (direct reruns 2026-07-26); TD-ROOT-1/TD-ROOT-3 in INVESTIGATION_STACK.md §3b.</li>
+<li>Engine/include/sdt/laws.hpp — law_I (u = aT⁴ machinery), law_III (occlusion flux), measured:: (k<sub>B</sub>, T<sub>CMB</sub>).</li>
+<li>Paper 10 (shared λ<sub>mfp</sub>v transport machinery), Paper 01 (tick count and arrow).</li>
+<li>Measured targets: gas-law data, thermal conductivities, blackbody constants, primordial deuterium abundance window (targets only).</li>
+</ol></div>
+</main>
+<footer><a href="theory.html#laws">← RETURN TO THE ATLAS · THE SIX LAWS</a></footer>
+</body>
+</html>

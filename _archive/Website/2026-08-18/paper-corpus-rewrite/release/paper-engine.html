@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>/*sdt-theme-guard*/(function(){try{var t=localStorage.getItem("sdt.theme")||"auto";if(t==="auto")t=(window.matchMedia&&window.matchMedia("(prefers-color-scheme:dark)").matches)?"dark":"light";var d=document.documentElement;d.setAttribute("data-theme",t);d.setAttribute("data-sdt-theme",t);}catch(e){}})();</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Section Paper — The Engine</title>
+<style>
+:root{--paper:#faf8f4;--edge:#e5e0d4;--ink:#1c1e20;--soft:#45484c;--mute:#6d7177;--mint:#0d7a5f;--rust:#a4552e;--gold:#8a6d1f;--steel:#4a6d82}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:'Source Serif 4',Georgia,serif;line-height:1.75;padding:3rem 1.5rem}
+main{max-width:46rem;margin:0 auto}
+.series{font-family:Consolas,monospace;font-size:.68rem;letter-spacing:.28em;color:var(--mute);text-transform:uppercase;margin-bottom:1.2rem}
+h1{font-size:1.85rem;line-height:1.25;font-weight:700;margin-bottom:1rem}
+.byline{font-size:1rem;margin-bottom:.2rem}
+.affil{font-family:Consolas,monospace;font-size:.72rem;color:var(--mute);margin-bottom:2rem}
+h2{font-size:1.12rem;font-weight:700;margin:2.2rem 0 .7rem}
+p{margin-bottom:.9rem;color:var(--soft)}
+strong{color:var(--ink)}
+.abstract{border:1px solid var(--edge);border-left:3px solid var(--mint);padding:1.1rem 1.3rem;background:#fff;margin:1.5rem 0}
+.abstract p{margin-bottom:0}
+.eq{font-family:Consolas,monospace;font-size:.9rem;background:#fff;border:1px solid var(--edge);border-radius:3px;padding:.8rem 1.1rem;margin:1rem 0;display:flex;justify-content:space-between;gap:1rem;overflow-x:auto}
+.eq .no{color:var(--mute)}
+table{width:100%;border-collapse:collapse;font-size:.85rem;margin:1rem 0}
+th,td{border:1px solid var(--edge);padding:.45rem .6rem;text-align:left;vertical-align:top}
+th{font-family:Consolas,monospace;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+.decl{border:1px solid var(--edge);background:#fff;padding:1rem 1.2rem;margin:1.5rem 0;font-size:.92rem}
+.refs ol{margin-left:1.2rem}
+.refs li{font-size:.85rem;color:var(--soft);margin-bottom:.4rem}
+footer{max-width:46rem;margin:3rem auto 0;padding-top:1.2rem;border-top:1px solid var(--edge)}
+footer a{color:var(--mint);text-decoration:none;font-family:Consolas,monospace;font-size:.75rem;letter-spacing:.06em}
+sub,sup{line-height:0}
+</style>
+<link rel="stylesheet" href="sdt-shell.css">
+<script src="sdt-shell.js" defer></script>
+<script src="engine-data.js" defer></script>
+<meta name="description" content="Section Paper — The Engine — laws.hpp, input provenance, certification classes and the current executable benchmark ledger.">
+<link rel="canonical" href="https://spatialdisplacementtheory.com/paper-engine">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/favicon.ico" sizes="64x64">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#b07430">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Spatial Displacement Theory">
+<meta property="og:title" content="Section Paper — The Engine">
+<meta property="og:description" content="Section Paper — The Engine — laws.hpp, input provenance, certification classes and the current executable benchmark ledger.">
+<meta property="og:url" content="https://spatialdisplacementtheory.com/paper-engine">
+<meta property="og:image" content="https://spatialdisplacementtheory.com/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_AU">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Section Paper — The Engine">
+<meta name="twitter:description" content="Section Paper — The Engine — laws.hpp, input provenance, certification classes and the current executable benchmark ledger.">
+<meta name="twitter:image" content="https://spatialdisplacementtheory.com/og-card.png">
+</head>
+<body>
+<main>
+<p class="series">Spatial Displacement Theory · Section Paper VI · Prepared for Submission</p>
+<h1>The Engine: laws.hpp as Single Source of Truth, the Provenance Schema, and the Benchmark Ledger</h1>
+<p class="byline">James Christopher Tyndall</p>
+<p class="affil">Melbourne, Australia · August 2026 · Atlas Chapter Five — The Engine</p>
+
+<div class="abstract">
+<p><strong>Abstract.</strong> The framework's numerical claims are executable. A single header, Engine/include/sdt/laws.hpp, is the source of truth: constants, force laws and approved derivations flow through namespace sdt::laws. Input discipline is structural — a quantity absent from sdt::laws::measured is not an admissible measured input — and load-bearing constants carry provenance, dependency, certification and circularity records. The benchmark executable compares the header's outputs with measured values, while keeping IDENTITY, CALIBRATED and PENDING rows outside the earned-prediction headline. The current rebuilt ledger is <span data-sdt-benchmark-summary>66/66 earned predictions passed · 19 IDENTITY · 0 CALIBRATED · 3 PENDING note-only</span>. The same run now exports the machine-readable website dataset, so numerical public copy can consume the verified header rather than duplicate it by hand.</p>
+</div>
+<p><strong>Keywords:</strong> single source of truth · derivation basis discipline · provenance blocks · certification classes · benchmark ledger · compile-time closure proof</p>
+
+<h2>1. Architecture</h2>
+<div class="eq"><span>sdt::laws { measured · law_I … law_VI · bridge · atomic · nuclear · coulomb_identity · depth_closure }</span><span class="no">(1)</span></div>
+<p>Header-only C++20, constexpr-heavy, zero external dependencies. Downstream headers (cosmology, magnetosphere, neutrino, state28d) and every benchmark and investigation tool include laws.hpp and may not redefine what it exposes. Orbital mechanics computes without G, nuclear structure without quark degrees of freedom, cosmological observables without a dark sector — not as a stylistic choice but because those symbols do not exist in the namespace.</p>
+
+<h2>2. The provenance schema</h2>
+<table>
+<tr><th>Field</th><th>Content</th></tr>
+<tr><td>provenance_status</td><td>SDT-derived · SDT-posited · calibrated · observed-input · unresolved</td></tr>
+<tr><td>correspondence_status</td><td>known-match · internal-only · novel · measured</td></tr>
+<tr><td>input_dependency</td><td>primitive-derivation basis · measured-observable · calibrated-target · definitional-identity</td></tr>
+<tr><td>class</td><td>A (axiom) · B (derivation basis derivation) · C (derived, passes delete-test) · D (computed/observed correlation) · E (calibrated) · F (definitional identity) · X (observed input conditioning a chain)</td></tr>
+<tr><td>circularity_assertion</td><td>the delete-test statement — what vanishes if the matched target is removed</td></tr>
+<tr><td>risk_flag</td><td>load-bearing caveats, stated at the definition site</td></tr>
+</table>
+<p>The schema keeps the register at the point of use: P<sub>eff</sub> is class E with "fails delete-test" on its own definition line; the coupling identity k<sub>e</sub>e² = αℏc is class F with the tautology named; the koppa-per-baryon constant carries its ℓ<sub>P</sub>-convention disclosure. A reader auditing the framework audits the header.</p>
+
+<h2>3. The benchmark ledger</h2>
+<div class="eq"><span data-sdt-benchmark-summary>66/66 earned predictions passed · 19 IDENTITY · 0 CALIBRATED · 3 PENDING note-only</span><span class="no">(2)</span></div>
+<p>The suite (benchmarks_suite.cpp, B01 and up) compares SDT-derived values to measured constants within stated tolerances and prints its own report. Ledger discipline: identity rows (z·k² = 1 among them) are labelled IDENTITY and carry no evidential weight; calibrated rows name their anchor; a historical fabricated row (a Lamb-interval literal with no derivation behind it) was deleted with authorization and its retraction is part of the record. Two structural rows are new with the closure-schedule canon change:</p>
+<div class="eq"><span>static_assert(closure(0..6) ≡ {2, 8, 20, 28, 50, 82, 126}) — the schedule compiles or the engine does not</span><span class="no">(3)</span></div>
+<div class="eq"><span>B38: triton_parity_misfit — 7/7 mono-isotopic grips cleared · 5/5 odd-odd quasi-stables flagged · 12/12</span><span class="no">(4)</span></div>
+<p>Equation (3) is a compile-time proof that the deuteron-tier/triton-belt alternation rebuilds the measured closure sequence: if the schedule and the sequence ever disagree, the header fails to compile. As of 2026-07-30 the capacities themselves are DERIVED from two closed forms — tier F(n) = (n+1)(n+2), belt B(n) = 2(n+1) — with the forward prediction closure(7) = 184; the descent onset n = 3 remains read from the data, and the provenance block says so at the definition site.</p>
+
+<h2>4. Build and reproduction</h2>
+<div class="eq"><span>cl /std:c++20 /EHsc /utf-8 /I Engine\include Benchmarks\B01_B25\benchmarks_suite.cpp · benchmarks_suite.exe --website-data Release\HTML_SDT_Website\dist\sdt-engine-data.json</span><span class="no">(5)</span></div>
+<p>Windows/MSVC is the primary environment (UTF-8 sources require /utf-8); GCC and Clang build unmodified. Investigation tools compile standalone against the header. Reports under ATOMICUS/reports/ are generated outputs — the tool is the source; regeneration, not hand-editing, is the change mechanism.</p>
+
+<h2>5. Certification</h2>
+<table>
+<tr><th>Item</th><th>Value</th><th>Status</th></tr>
+<tr><td>Single-source discipline</td><td>one header</td><td>STRUCTURAL — no constant defined twice</td></tr>
+<tr><td>derivation basis enforcement</td><td>sdt::laws::measured</td><td>STRUCTURAL — absent ⟹ inadmissible</td></tr>
+<tr><td>Benchmark ledger</td><td>eq. (2)</td><td>AUDITED — identities and calibrations labelled; one retraction on record</td></tr>
+<tr><td>Closure-schedule proof</td><td>eq. (3)</td><td>COMPILE-TIME — arithmetic of the alternation; capacities [measured, schedule-named]</td></tr>
+<tr><td>Parity-lock tally</td><td>eq. (4)</td><td>SUITE ROW B38 — exact</td></tr>
+</table>
+
+<div class="decl">
+<p><strong>Methodological declaration.</strong> The engine contains no gravitational constant, no weighed mass as a fundamental, no wavefunction, no metric tensor, no quark field, and no dark-sector parameter — such symbols are absent from the namespace, so their import is a compile error, not a policy. Certification labels live at definition sites; the benchmark report separates earned passes from identities and calibrations. The header is the audit surface.</p>
+</div>
+
+<h2 class="refs">References</h2>
+<div class="refs"><ol>
+<li>Engine/include/sdt/laws.hpp (v6.0, Six-Law framework) and downstream headers.</li>
+<li>Benchmarks/B01_B25/benchmarks_suite.cpp and its generated website-data export.</li>
+<li>Audits/ — the provenance and correspondence audit set (formulations census, contamination audit, paradox census).</li>
+<li>Section Papers II and IV of this series (the laws the engine encodes; the schedule it proves).</li>
+</ol></div>
+</main>
+<footer><a href="theory.html#engine">← RETURN TO THE ATLAS · THE ENGINE</a></footer>
+</body>
+</html>

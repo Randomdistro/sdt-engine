@@ -5,36 +5,12 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Paper 03 — Electromagnetism &amp; Charge</title>
-<style>
-:root{--paper:#faf8f4;--edge:#e5e0d4;--ink:#1c1e20;--soft:#45484c;--mute:#6d7177;--mint:#0d7a5f;--rust:#a4552e;--gold:#8a6d1f;--steel:#4a6d82}
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--paper);color:var(--ink);font-family:'Source Serif 4',Georgia,serif;line-height:1.75;padding:3rem 1.5rem}
-main{max-width:46rem;margin:0 auto}
-.series{font-family:Consolas,monospace;font-size:.68rem;letter-spacing:.28em;color:var(--mute);text-transform:uppercase;margin-bottom:1.2rem}
-h1{font-size:1.85rem;line-height:1.25;font-weight:700;margin-bottom:1rem}
-.byline{font-size:1rem;margin-bottom:.2rem}
-.affil{font-family:Consolas,monospace;font-size:.72rem;color:var(--mute);margin-bottom:2rem}
-h2{font-size:1.12rem;font-weight:700;margin:2.2rem 0 .7rem}
-p{margin-bottom:.9rem;color:var(--soft)}
-strong{color:var(--ink)}
-.abstract{border:1px solid var(--edge);border-left:3px solid var(--mint);padding:1.1rem 1.3rem;background:#fff;margin:1.5rem 0}
-.abstract p{margin-bottom:0}
-.eq{font-family:Consolas,monospace;font-size:.9rem;background:#fff;border:1px solid var(--edge);border-radius:3px;padding:.8rem 1.1rem;margin:1rem 0;display:flex;justify-content:space-between;gap:1rem;overflow-x:auto}
-.eq .no{color:var(--mute)}
-table{width:100%;border-collapse:collapse;font-size:.85rem;margin:1rem 0}
-th,td{border:1px solid var(--edge);padding:.45rem .6rem;text-align:left;vertical-align:top}
-th{font-family:Consolas,monospace;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
-.decl{border:1px solid var(--edge);background:#fff;padding:1rem 1.2rem;margin:1.5rem 0;font-size:.92rem}
-.refs ol{margin-left:1.2rem}
-.refs li{font-size:.85rem;color:var(--soft);margin-bottom:.4rem}
-footer{max-width:46rem;margin:3rem auto 0;padding-top:1.2rem;border-top:1px solid var(--edge)}
-footer a{color:var(--mint);text-decoration:none;font-family:Consolas,monospace;font-size:.75rem;letter-spacing:.06em}
-sub,sup{line-height:0}
-</style>
+<title>Paper 03 — Electromagnetism &amp; Directional response</title>
 <link rel="stylesheet" href="sdt-shell.css">
+<link rel="stylesheet" href="paper.css">
 <script src="sdt-shell.js" defer></script>
-<meta name="description" content="Paper 03 — Electromagnetism &amp; Charge — part of Spatial Displacement Theory, a zero-free-parameter physics framework.">
+<script src="paper.js" defer></script>
+<meta name="description" content="Paper 03 — Electromagnetism &amp; Directional response — part of Spatial Displacement Theory, a zero-free-parameter physics framework.">
 <link rel="canonical" href="https://spatialdisplacementtheory.com/paper-03-electromagnetism">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.ico" sizes="64x64">
@@ -43,81 +19,84 @@ sub,sup{line-height:0}
 <meta name="theme-color" content="#b07430">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Spatial Displacement Theory">
-<meta property="og:title" content="Paper 03 — Electromagnetism &amp; Charge">
-<meta property="og:description" content="Paper 03 — Electromagnetism &amp; Charge — part of Spatial Displacement Theory, a zero-free-parameter physics framework.">
+<meta property="og:title" content="Paper 03 — Electromagnetism &amp; Directional response">
+<meta property="og:description" content="Paper 03 — Electromagnetism &amp; Directional response — part of Spatial Displacement Theory, a zero-free-parameter physics framework.">
 <meta property="og:url" content="https://spatialdisplacementtheory.com/paper-03-electromagnetism">
 <meta property="og:image" content="https://spatialdisplacementtheory.com/og-card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="en_AU">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Paper 03 — Electromagnetism &amp; Charge">
-<meta name="twitter:description" content="Paper 03 — Electromagnetism &amp; Charge — part of Spatial Displacement Theory, a zero-free-parameter physics framework.">
+<meta name="twitter:title" content="Paper 03 — Electromagnetism &amp; Directional response">
+<meta name="twitter:description" content="Paper 03 — Electromagnetism &amp; Directional response — part of Spatial Displacement Theory, a zero-free-parameter physics framework.">
 <meta name="twitter:image" content="https://spatialdisplacementtheory.com/og-card.png">
 </head>
 <body>
-<main>
-<p class="series">Spatial Displacement Theory · Paper 03 · Prepared for Submission</p>
-<h1>Handed Occlusion Without a Charge Substance: The Force Law F = (π/4)P<sub>eff</sub>R₁²R₂²/r² and the Provenance of Its Coefficient</h1>
-<p class="byline">J. C. Harvey</p>
-<p class="affil">Melbourne, Australia · July 2026 · Domain 03 — Electromagnetism &amp; Charge</p>
+<main data-paper-id="paper-03-electromagnetism" data-domain="directional occlusion" data-status="CALIBRATED" data-theory-steps="L4 L5 L12">
+<p class="series">Spatial Displacement Theory · Paper 03 · Scientific working paper · revised August 2026</p>
+<h1>Handed Occlusion Without a Directional response Substance: The Force Law F = (π/4)P<sub>eff</sub>R₁²R₂²/r² and the Provenance of Its Coefficient</h1>
+<p class="byline">James Christopher Tyndall</p>
+<p class="affil">Melbourne, Australia · July 2026 · Domain 03 — Electromagnetism &amp; Directional response</p>
+<ul class="paper-status"><li>CALIBRATED</li><li>directional occlusion</li><li>Dependencies: L4 · L5 · L12</li></ul>
 
 <div class="abstract">
-<p><strong>Abstract.</strong> Electrostatics is exhibited as occlusion of convergent relay throughput with handedness. There is no charge substance: "+e" and "−e" name the two handednesses of the redirection a vortex imposes on the convergent phase, and e itself is a unit bridge. Attraction is a shadow deficit; repulsion is the exact inverse — a focused surplus. The universal force law F = (π/4)·P<sub>eff</sub>·R₁²R₂²/r² carries the Coulomb interaction with R<sub>charge</sub> = √(R<sub>p</sub>r<sub>e</sub>) = 1.5396 × 10⁻¹⁵ m, reproducing the hydrogen force datum to 0.12%. We give the coefficient's provenance in full: P<sub>eff</sub> = 4k<sub>e</sub>e²/(πR<sub>p</sub>²r<sub>e</sub>²) = 5.225 × 10³¹ Pa is CALIBRATED at the hydrogen anchor (class E) in the engine ledger, while the electropause closure P<sub>eff</sub> = m<sub>p</sub>²m<sub>e</sub>²c⁵/(4παℏ³) supplies a closed derivation basis form with α the single remaining input. The identity k<sub>e</sub>e² = αℏc is a definitional tautology (class F) and is claimed as nothing more.</p>
+<p><strong>Abstract.</strong> Electrostatics is exhibited as occlusion of convergent relay throughput with handedness. There is no additional substance: "+e" and "−e" name the two handednesses of the redirection a vortex imposes on the convergent phase, and e itself is a unit bridge. Attraction is a shadow deficit; repulsion is the exact inverse — a focused surplus. The universal force law F = (π/4)·P<sub>eff</sub>·R₁²R₂²/r² carries the Coulomb interaction with R<sub>×</sub> = √(R<sub>p</sub>r<sub>e</sub>) = 1.5396 × 10⁻¹⁵ m, reproducing the hydrogen force datum to 0.12%. We give the coefficient's provenance in full: P<sub>eff</sub> = 4k<sub>e</sub>e²/(πR<sub>p</sub>²r<sub>e</sub>²) = 5.225 × 10³¹ Pa is CALIBRATED at the hydrogen anchor (class E) in the engine ledger, while the electropause closure P<sub>eff</sub> = m<sub>p</sub>²m<sub>e</sub>²c⁵/(4παℏ³) supplies a closed derivation basis form with α the single remaining input. The identity k<sub>e</sub>e² = αℏc is a definitional tautology (class F) and is claimed as nothing more.</p>
 </div>
 <p><strong>Keywords:</strong> occlusion · handedness · unit bridge e · effective pressure · transfer function · electropause</p>
 
+
+<section id="scope" class="scope"><span class="paper-kicker">Scope and claim boundary</span><p>This paper treats directional occlusion. Its mathematical authority is <a id="cite-engine" class="citation" href="#ref-engine">[1]</a>; its constitutional restrictions are applied from <a id="cite-rules" class="citation" href="#ref-rules">[2]</a>. Definitions, identities, measured inputs, calibrations, computations and open mechanisms are separated before conclusions.</p></section>
+<section id="definitions"><h2>Definitions and dependency surface</h2><dl class="definition-ledger"><dt><dfn id="term-domain">Domain</dfn></dt><dd>directional occlusion.</dd><dt><dfn id="term-authority">Authority</dfn></dt><dd>Engine/include/sdt/laws.hpp; engine symbols and direct assessments outrank narrative summaries.</dd><dt><dfn id="term-status">Document status</dfn></dt><dd>CALIBRATED; this label limits what the paper claims.</dd></dl></section>
+<section id="derivation"><h2>Derivation protocol</h2><p>Each displayed relation identifies its source. Identities carry no empirical weight; measurements remain inputs; calibrations name their anchor; and computations inherit every upstream dependency.</p>
 <h2>1. Force as occluded convergence (Theorems T3–T4)</h2>
-<div class="eq"><span>F = (π/4)·P<sub>eff</sub>·R₁²R₂²/r²</span><span class="no">(1)</span></div>
+<div class="eq" id="eq-1" data-status="COMPUTED" data-source="Engine/include/sdt/laws.hpp"><span>F = (π/4)·P<sub>eff</sub>·R₁²R₂²/r²</span><span class="no">(1)</span></div>
 <p>The 1/r² structure and the R₁²R₂² product are derived from shadow geometry (class C; they pass the delete-test). The occluded solid angle of a boundary R at range r is Ω = πR²/r². Nothing pulls: the force is the unbalanced antipodal remainder of an isotropic flux.</p>
 
-<h2>2. Handedness replaces charge</h2>
+<h2>2. Directional response follows circulation sense</h2>
 <p>A circulating vortex does not merely block the convergent phase — it redirects it with a handedness fixed by its circulation sense. Two structures of opposite handedness deepen each other's deficit (net push together); identical handedness focuses a surplus between them (net push apart). Repulsion is thus the exact inverse of convergence-deficit attraction, not a separate mechanism (EMC03). Gravity is the scalar, unhanded limit of the same occlusion — one sign only — which is why it is universally attractive while the handed channel carries two signs.</p>
-<div class="eq"><span>attraction ≡ shadow deficit · repulsion ≡ focused surplus · gravity ≡ unhanded limit</span><span class="no">(2)</span></div>
+<div class="eq" id="eq-2" data-status="COMPUTED" data-source="Engine/include/sdt/laws.hpp"><span>attraction ≡ shadow deficit · repulsion ≡ focused surplus · gravity ≡ unhanded limit</span><span class="no">(2)</span></div>
 <p>The elementary quantity e is a <strong>unit bridge</strong>, not a substance count: EMC02 (INCONCLUSIVE, disclosed) established that the derivation basis {ℓ<sub>P</sub>, c, ℏ, k<sub>B</sub>, T<sub>CMB</sub>, d = 3} carries no current dimension, so no algebraic combination yields coulombs; e stays an irreducible measured input.</p>
 
 <h2>3. The interaction radius and the hydrogen check</h2>
-<div class="eq"><span>R<sub>charge</sub> = √(R<sub>p</sub>·r<sub>e</sub>) = 1.5396 × 10⁻¹⁵ m</span><span class="no">(3)</span></div>
-<div class="eq"><span>F<sub>Coulomb</sub>(r) = (π/4)·P<sub>eff</sub>·R<sub>charge</sub>⁴/r² = k<sub>e</sub>e²/r²</span><span class="no">(4)</span></div>
+<div class="eq" id="eq-3" data-status="COMPUTED" data-source="Engine/include/sdt/laws.hpp"><span>R<sub>×</sub> = √(R<sub>p</sub>·r<sub>e</sub>) = 1.5396 × 10⁻¹⁵ m</span><span class="no">(3)</span></div>
+<div class="eq" id="eq-4" data-status="COMPUTED" data-source="Engine/include/sdt/laws.hpp"><span>F<sub>Coulomb</sub>(r) = (π/4)·P<sub>eff</sub>·R<sub>×</sub>⁴/r² = k<sub>e</sub>e²/r²</span><span class="no">(4)</span></div>
 <p>Evaluated at the hydrogen seat: 8.23 × 10⁻⁸ N computed against 8.24 × 10⁻⁸ N measured (0.12%). This match is the <em>calibration anchor</em> of the coefficient, not an independent prediction, and is labelled so. The geometric mean in (3) resolves why e–e, p–p, and e–p couplings share one strength: the handed force signature is a count product times one universal unit area, (Z₁Z₂)·(R<sub>p</sub>²r<sub>e</sub>²). For a Z-nucleus acting on an electron the occluded area scales with Z, so the effective radius is √Z·R<sub>p</sub>, giving F = Z·k<sub>e</sub>e²/r² identically — the measured scaling; the superseded R = Z·R<sub>p</sub> form, which gave F ∝ Z², is retracted in the canon and recorded here.</p>
 
 <h2>4. Provenance of P<sub>eff</sub> — stated in full</h2>
-<div class="eq"><span>P<sub>eff</sub> = 4k<sub>e</sub>e²/(π·R<sub>p</sub>²·r<sub>e</sub>²) = 5.225 × 10³¹ Pa&nbsp;&nbsp;[engine ledger: class E, CALIBRATED]</span><span class="no">(5)</span></div>
-<div class="eq"><span>P<sub>eff</sub> = m<sub>p</sub>²m<sub>e</sub>²c⁵/(4παℏ³)&nbsp;&nbsp;[electropause closure: closed derivation basis form]</span><span class="no">(6)</span></div>
+<div class="eq" id="eq-5" data-status="CALIBRATED" data-source="Engine/include/sdt/laws.hpp"><span>P<sub>eff</sub> = 4k<sub>e</sub>e²/(π·R<sub>p</sub>²·r<sub>e</sub>²) = 5.225 × 10³¹ Pa&nbsp;&nbsp;[engine ledger: class E, CALIBRATED]</span><span class="no">(5)</span></div>
+<div class="eq" id="eq-6" data-status="COMPUTED" data-source="Engine/include/sdt/laws.hpp"><span>P<sub>eff</sub> = m<sub>p</sub>²m<sub>e</sub>²c⁵/(4παℏ³)&nbsp;&nbsp;[electropause closure: closed derivation basis form]</span><span class="no">(6)</span></div>
 <p>Equation (5) fails the delete-test — the hydrogen calibration fixes the scale — and the engine keeps the label. Equation (6), obtained from the electropause force balance (Paper 16), expresses the same magnitude from {m<sub>p</sub>, m<sub>e</sub>, c, α, ℏ} alone, with α the one remaining empirical anchor. The two values' coexistence is recorded as an open provenance question, not silently resolved. The transfer function</p>
-<div class="eq"><span>f = P<sub>eff</sub>/P<sub>conv</sub> = 2.125 × 10⁻¹⁷</span><span class="no">(7)</span></div>
+<div class="eq" id="eq-7" data-status="COMPUTED" data-source="Engine/include/sdt/laws.hpp"><span>f = P<sub>eff</sub>/P<sub>conv</sub> = 2.125 × 10⁻¹⁷</span><span class="no">(7)</span></div>
 <p>maps cosmological convergence pressure to interaction pressure and inherits the class-E status; its upgrade to class C is contingent on the CR05 closure of R<sub>CMB</sub> from the pressure tensor, itself pending the GOM05 structure derivation.</p>
 
 <h2>5. The coupling identity, disclosed as identity</h2>
-<div class="eq"><span>k<sub>e</sub>e² = αℏc = 2.307 × 10⁻²⁸ J·m&nbsp;&nbsp;[class F — definitional]</span><span class="no">(8)</span></div>
+<div class="eq" id="eq-8" data-status="COMPUTED" data-source="Engine/include/sdt/laws.hpp"><span>k<sub>e</sub>e² = αℏc = 2.307 × 10⁻²⁸ J·m&nbsp;&nbsp;[class F — definitional]</span><span class="no">(8)</span></div>
 <p>Since α ≡ k<sub>e</sub>e²/ℏc by definition, (8) is a tautology and is claimed as nothing more. The physically load-bearing object is the product k<sub>e</sub>e²; neither factor is separately fundamental. A non-definitional SDT path to (8) would require deriving α from W = 1 mode structure — an open problem (the wake ratio g(1) ≡ α is likewise definitional; PPT02 located α as the koppa of the hydrogen ground state, which still consumes e).</p>
 
-<h2>6. Certification</h2>
+</section>
+<section id="dimensional-analysis"><h2>Dimensional and limiting-case audit</h2><p>P R⁴/r² has units Pa·m² = N; coupling identities are dimensionally equivalent but not independent evidence. Zero-source, infinite-separation, symmetry and boundary limits are stated wherever defined; a relation that fails unit closure is excluded before numerical comparison.</p></section>
+<section id="certification"><h2>6. Certification</h2>
 <table>
 <tr><th>Result</th><th>Value</th><th>Status</th></tr>
-<tr><td>Force-law structure (1/r², R₁²R₂²)</td><td>eq. (1)</td><td>DERIVED — class C</td></tr>
-<tr><td>P<sub>eff</sub> (engine)</td><td>5.225 × 10³¹ Pa</td><td>CALIBRATED — class E, fails delete-test (disclosed)</td></tr>
-<tr><td>P<sub>eff</sub> (electropause closure)</td><td>m<sub>p</sub>²m<sub>e</sub>²c⁵/(4παℏ³)</td><td>closed derivation basis form; provenance external to engine — coexistence OPEN</td></tr>
-<tr><td>R<sub>charge</sub> = √(R<sub>p</sub>r<sub>e</sub>)</td><td>1.5396 fm</td><td>class E — composed of measured radii</td></tr>
-<tr><td>Hydrogen force datum</td><td>0.12%</td><td>CALIBRATION ANCHOR — not a prediction</td></tr>
-<tr><td>k<sub>e</sub>e² = αℏc</td><td>identity</td><td>class F — tautology, disclosed</td></tr>
-<tr><td>√Z nuclear–electron scaling</td><td>F = Z·k<sub>e</sub>e²/r²</td><td>DERIVED (corrected canon; Z² form retracted)</td></tr>
-<tr><td>e derivable from derivation basis?</td><td>—</td><td>EMC02 INCONCLUSIVE — e stays an irreducible input</td></tr>
+<tr data-claim="claim-1" data-status="DERIVED" data-source="Engine/include/sdt/laws.hpp"><td>Force-law structure (1/r², R₁²R₂²)</td><td>eq. (1)</td><td>DERIVED — class C</td></tr>
+<tr data-claim="claim-2" data-status="CALIBRATED" data-source="Engine/include/sdt/laws.hpp"><td>P<sub>eff</sub> (engine)</td><td>5.225 × 10³¹ Pa</td><td>CALIBRATED — class E, fails delete-test (disclosed)</td></tr>
+<tr data-claim="claim-3" data-status="OPEN" data-source="Engine/include/sdt/laws.hpp"><td>P<sub>eff</sub> (electropause closure)</td><td>m<sub>p</sub>²m<sub>e</sub>²c⁵/(4παℏ³)</td><td>closed derivation basis form; provenance external to engine — coexistence OPEN</td></tr>
+<tr data-claim="claim-4" data-status="COMPUTED" data-source="Engine/include/sdt/laws.hpp"><td>R<sub>×</sub> = √(R<sub>p</sub>r<sub>e</sub>)</td><td>1.5396 fm</td><td>class E — composed of measured radii</td></tr>
+<tr data-claim="claim-5" data-status="COMPUTED" data-source="Engine/include/sdt/laws.hpp"><td>Hydrogen force datum</td><td>0.12%</td><td>CALIBRATION ANCHOR — not a prediction</td></tr>
+<tr data-claim="claim-6" data-status="IDENTITY" data-source="Engine/include/sdt/laws.hpp"><td>k<sub>e</sub>e² = αℏc</td><td>identity</td><td>class F — tautology, disclosed</td></tr>
+<tr data-claim="claim-7" data-status="DERIVED" data-source="Engine/include/sdt/laws.hpp"><td>√Z nuclear–electron scaling</td><td>F = Z·k<sub>e</sub>e²/r²</td><td>DERIVED (corrected canon; Z² form retracted)</td></tr>
+<tr data-claim="claim-8" data-status="COMPUTED" data-source="Engine/include/sdt/laws.hpp"><td>e derivable from derivation basis?</td><td>—</td><td>EMC02 INCONCLUSIVE — e stays an irreducible input</td></tr>
 </table>
 
+</section>
 <div class="decl">
-<p><strong>Methodological declaration.</strong> No field is taken as primitive, no charge substance is posited, no gauge structure and no photon-particle enters. The measured Coulomb datum appears once, as the disclosed calibration anchor of P<sub>eff</sub>. All identities that merely restate a definition (eq. 8; g(1) ≡ α) are labelled class F and carry no evidential weight in this framework's favour.</p>
+<p><strong>Methodological declaration.</strong> No field is taken as primitive, no additional substance is posited, no gauge structure and no photon-particle enters. The measured Coulomb datum appears once, as the disclosed calibration anchor of P<sub>eff</sub>. All identities that merely restate a definition (eq. 8; g(1) ≡ α) are labelled class F and carry no evidential weight in this framework's favour.</p>
 </div>
 
-<h2 class="refs">References</h2>
-<div class="refs"><ol>
-<li>Engine/include/sdt/laws.hpp — namespaces law_III (P_eff, R_charge, F_occlusion, F_nuclear_electron), coulomb_identity (class-F disclosure in situ).</li>
-<li>Investigations/03_Electromagnetism_and_Charge — EMC02 (charge quantisation, INCONCLUSIVE), EMC03 (repulsion as inverse of convergence), EMC04 (electropause derivation).</li>
-<li>Theory/00_Ruleset.md — prohibition register (no charge substance; no fields as primitives).</li>
-<li>CODATA 2018 (k<sub>e</sub>, e, α, r<sub>e</sub>; measured anchors).</li>
-<li>Paper 14 of this series (collective circulation: the ℓ = 2 sector and induction programme).</li>
-</ol></div>
+<section id="falsification" class="falsification"><span class="paper-kicker">Falsification</span><p>The mechanism is ruled out if one coefficient and declared geometry cannot reproduce both response senses without retuning.</p></section>
+<section id="limitations" class="limitations"><span class="paper-kicker">Limitations and open problems</span><p>Inverse-square geometry is distinct from coefficient provenance; target-free Peff remains open.</p></section>
+<section id="references" class="refs"><h2>References</h2><ol><li id="ref-engine" data-type="repo" data-path="Engine/include/sdt/laws.hpp"><code>Engine/include/sdt/laws.hpp</code> — authority used for the equations and status assignments in this paper.</li><li id="ref-rules" data-type="repo" data-path="Theory/00_Ruleset.md"><code>Theory/00_Ruleset.md</code> — axioms, prohibitions and theorem vocabulary used to delimit the derivation.</li></ol></section>
 </main>
-<footer><a href="index.html#laws">← RETURN TO THE ATLAS · THE SIX LAWS</a></footer>
+<footer><a href="theory.html#laws">← RETURN TO THE ATLAS · THE SIX LAWS</a></footer>
 </body>
 </html>

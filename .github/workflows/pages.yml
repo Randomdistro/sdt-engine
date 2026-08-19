@@ -3,7 +3,16 @@ name: Deploy website (docs/) to GitHub Pages
 on:
   push:
     branches: [main]
-    paths: ['docs/**', '.github/workflows/pages.yml']
+    paths:
+      - 'docs/**'
+      - 'Release/HTML_SDT_Website/**'
+      - 'Release/build_search_index.py'
+      - 'Release/verify_public_site.py'
+      - 'Engine/include/sdt/laws.hpp'
+      - 'Investigations/05_Nuclear_Physics/pack_nucleus.py'
+      - 'Investigations/05_Nuclear_Physics/packer_validate.py'
+      - 'Investigations/05_Nuclear_Physics/NSEQ16_Perfect_Traction_Gear_Engine/**'
+      - '.github/workflows/pages.yml'
   workflow_dispatch:
 
 permissions:
@@ -23,6 +32,29 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify public-site integrity
+        run: python Release/verify_public_site.py
+      - name: Check public JavaScript syntax
+        run: |
+          node --check Release/HTML_SDT_Website/sdt-shell.js
+          node --check Release/HTML_SDT_Website/walk.js
+          node --check Release/HTML_SDT_Website/main.js
+          node --check Release/HTML_SDT_Website/engine-data.js
+          node --check Release/HTML_SDT_Website/atomicus-3d.js
+          node --check Release/HTML_SDT_Website/js/pack-nucleus.js
+          node --check Release/HTML_SDT_Website/js/traction-gear-engine.js
+      - name: Validate nuclear construction instruments
+        run: |
+          python Investigations/05_Nuclear_Physics/packer_validate.py
+          python Investigations/05_Nuclear_Physics/NSEQ16_Perfect_Traction_Gear_Engine/nseq16_traction_validate.py
+          python Investigations/05_Nuclear_Physics/NSEQ16_Perfect_Traction_Gear_Engine/nuclear_sequencer_validate.py
+          node Investigations/05_Nuclear_Physics/NSEQ16_Perfect_Traction_Gear_Engine/atomicus_browser_smoke.js
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

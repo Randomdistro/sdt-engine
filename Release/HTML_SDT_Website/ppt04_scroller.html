@@ -211,7 +211,7 @@ input[type=range]{width:100%;accent-color:var(--copper);height:24px;cursor:point
     <h1 class="opening__title">One whisper,<br>two <em>readings</em></h1>
     <hr class="opening__rule">
     <p class="opening__desc">The neutrino is a single thing read two ways. As <em>composition</em> it is an open
-    winding that never closes — so it has no charge and <em>exactly zero</em> magnetic moment. As <em>role</em>
+    winding that never closes — so it has no directional response and <em>exactly zero</em> magnetic moment. As <em>role</em>
     it is the action exhaust that balances the ledger when a winding changes topology. Like a car's exhaust:
     both a chemical mix and a plume of expanding gas. Same object.</p>
     <div class="status-line">
@@ -248,7 +248,7 @@ input[type=range]{width:100%;accent-color:var(--copper);height:24px;cursor:point
     <div class="eq-block"><div class="eq">Φ₂ₘ ∝ μ ∝ <span class="hl">v<sub>T</sub></span> · R</div>
       <div class="eq-caption">The ℓ=2 (magnetic) wake amplitude is proportional to the toroidal circulation v_T and the loop radius R. No closed toroidal current → no ℓ=2. (Law VI §8; Theory/01.)</div></div>
 
-    <p>Pick a winding number and watch the wake light up. ℓ=0 (mass) is always present; charge (ℓ=1) and
+    <p>Pick a winding number and watch the wake light up. ℓ=0 (mass) is always present; directional response (ℓ=1) and
     magnetism (ℓ=2) require a closed loop; nuclear form factors (ℓ≥3) require a knot:</p>
 
     <div class="lab">
@@ -261,7 +261,7 @@ input[type=range]{width:100%;accent-color:var(--copper);height:24px;cursor:point
         <button class="chip-btn" onclick="setW(3)">W = 3 · Proton</button>
       </div>
       <div id="lrows"></div>
-      <div class="readout sep"><span>net charge Q = <b id="o-Q">0</b></span><span>magnetic moment μ = <b id="o-mu">0</b></span></div>
+      <div class="readout sep"><span>net circulation Q = <b id="o-Q">0</b></span><span>magnetic moment μ = <b id="o-mu">0</b></span></div>
       <div id="wake-verdict" class="verdict ok">W → 0 · open winding · ℓ=0 only → Q = 0, μ = 0</div>
     </div>
 
@@ -375,8 +375,8 @@ input[type=range]{width:100%;accent-color:var(--copper);height:24px;cursor:point
       <div id="vt-verdict" class="verdict ok">v_T = c → μ = μ_e (the electron itself)</div>
     </div>
 
-    <p>The same fact kills the charge. The ℓ=1 (Coulomb) wake comes from the displacement asymmetry of that
-    same toroidal sweep — no sweep, no asymmetry, no charge. Charge and magnetism vanish <em>together</em>:</p>
+    <p>The same fact ends the directional response. The ℓ=1 (Coulomb) wake comes from the displacement asymmetry of that
+    same toroidal sweep — no sweep, no asymmetry, no directional response. Directional response and magnetism vanish <em>together</em>:</p>
 
     <div class="aside aside--steel">
       <div class="aside__title">The logical chain (one topological fact)</div>
@@ -385,7 +385,7 @@ input[type=range]{width:100%;accent-color:var(--copper);height:24px;cursor:point
       &nbsp;→ genus 0 (no torus)<br>
       &nbsp;&nbsp;→ no closed toroidal path<br>
       &nbsp;&nbsp;&nbsp;→ v_T = 0 (no circulation)<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;→ ℓ=1 wake = 0 &nbsp;(no charge)<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;→ ℓ=1 wake = 0 &nbsp;(no directional response)<br>
       &nbsp;&nbsp;&nbsp;&nbsp;→ ℓ=2 wake = 0 &nbsp;(no magnetic moment)</p>
     </div>
 
@@ -448,7 +448,7 @@ input[type=range]{width:100%;accent-color:var(--copper);height:24px;cursor:point
     <h2 class="chapter__title">Falsification &amp; Verdict</h2>
     <p class="chapter__lead">A sharp, qualitative test — and a provenance ledger of what is derived versus measured.</p>
 
-    <p>SDT predicts a strict correlation across the fundamental particles: charge and magnetism appear and
+    <p>SDT predicts a strict correlation across the fundamental particles: Directional response and magnetism appear and
     vanish together with the closed circuit.</p>
 
     <table class="tk-table">
@@ -461,7 +461,7 @@ input[type=range]{width:100%;accent-color:var(--copper);height:24px;cursor:point
       </tbody>
     </table>
     <p class="margin-note" style="border-color:var(--midnight-edge);color:var(--midnight-mute)">The neutron is the
-    apparent exception (Q=0 but μ_n=−1.913 μ_N): it is a W=3 composite with internal charge separation — closed
+    apparent exception (Q=0 but μ_n=−1.913 μ_N): it is a W=3 composite with internal circulation-sign separation — closed
     loops give ℓ=2 even though the net ℓ=1 cancels. The neutrino has no torus at all.</p>
 
     <div class="aside" style="background:rgba(176,116,48,.1)">
@@ -503,7 +503,7 @@ const $ = id => document.getElementById(id);
 /* ════ Ch.1 — ℓ-expansion explorer ════ */
 const L_DEFS = [
   {l:'ℓ=0', role:'Mass — isotropic background convergence (V_disp)', need:0},
-  {l:'ℓ=1', role:'Coulomb force (charge) · falls as 1/r²', need:1},
+  {l:'ℓ=1', role:'Coulomb force (directional response) · falls as 1/r²', need:1},
   {l:'ℓ=2', role:'Magnetic dipole · falls as 1/r³', need:1},
   {l:'ℓ≥3', role:'Nuclear form factors', need:3}
 ];
@@ -522,8 +522,8 @@ function setW(W){
   const v = $('wake-verdict');
   const notes = {
     0:'W → 0 · open winding · ℓ=0 only → Q = 0, μ = 0',
-    1:'W = 1 · simple torus · ℓ=0,1,2 → charge and magnetism present (the electron)',
-    3:'W = 3 · trefoil knot · all orders → charge, magnetism, nuclear form factors (the proton)'};
+    1:'W = 1 · simple torus · ℓ=0,1,2 → Directional response and magnetism present (the electron)',
+    3:'W = 3 · trefoil knot · all orders → directional response, magnetism, nuclear form factors (the proton)'};
   v.className = 'verdict '+(W===0?'circ':'ok'); v.textContent = notes[W];
   document.querySelectorAll('#wake .chip-btn').forEach(b=>b.classList.toggle('active', b.textContent.includes('= '+W) || (W===0 && b.textContent.includes('→ 0'))));
 }
@@ -548,7 +548,7 @@ requestAnimationFrame(animateHelix);
 
 const FACETS = {
   comp: {stroke:'#4a6d82', h:'Composition — the open winding',
-    p:'An open helix with winding W → 0. It never closes, so there is no closed toroidal circuit: no ℓ=1 charge, no ℓ=2 magnetic moment. It is the minimum persistent displacement that propagates without thermalising — the mass gap, ~9.25×10³⁵ spations.',
+    p:'An open helix with winding W → 0. It never closes, so there is no closed toroidal circuit: no ℓ=1 directional response, no ℓ=2 magnetic moment. It is the minimum persistent displacement that propagates without thermalising — the mass gap, ~9.25×10³⁵ spations.',
     tag:'This is what the neutrino is made of.'},
   role: {stroke:'#b07430', h:'Role — the action exhaust',
     p:'The equal-and-opposite relay-chirality response that lets a winding change topology in β-decay without disturbing the core. It carries handedness, not a closed structure — so it streams at c and balances the ledger. Standard physics calls it the antineutrino.',

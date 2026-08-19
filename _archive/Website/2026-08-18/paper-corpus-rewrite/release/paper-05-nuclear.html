@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>/*sdt-theme-guard*/(function(){try{var t=localStorage.getItem("sdt.theme")||"auto";if(t==="auto")t=(window.matchMedia&&window.matchMedia("(prefers-color-scheme:dark)").matches)?"dark":"light";var d=document.documentElement;d.setAttribute("data-theme",t);d.setAttribute("data-sdt-theme",t);}catch(e){}})();</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paper 05 — Nuclear Physics</title>
+<style>
+:root{--paper:#faf8f4;--edge:#e5e0d4;--ink:#1c1e20;--soft:#45484c;--mute:#6d7177;--mint:#0d7a5f;--rust:#a4552e;--gold:#8a6d1f;--steel:#4a6d82}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:'Source Serif 4',Georgia,serif;line-height:1.75;padding:3rem 1.5rem}
+main{max-width:46rem;margin:0 auto}
+.series{font-family:Consolas,monospace;font-size:.68rem;letter-spacing:.28em;color:var(--mute);text-transform:uppercase;margin-bottom:1.2rem}
+h1{font-size:1.85rem;line-height:1.25;font-weight:700;margin-bottom:1rem}
+.byline{font-size:1rem;margin-bottom:.2rem}
+.affil{font-family:Consolas,monospace;font-size:.72rem;color:var(--mute);margin-bottom:2rem}
+h2{font-size:1.12rem;font-weight:700;margin:2.2rem 0 .7rem}
+p{margin-bottom:.9rem;color:var(--soft)}
+strong{color:var(--ink)}
+.abstract{border:1px solid var(--edge);border-left:3px solid var(--mint);padding:1.1rem 1.3rem;background:#fff;margin:1.5rem 0}
+.abstract p{margin-bottom:0}
+.eq{font-family:Consolas,monospace;font-size:.9rem;background:#fff;border:1px solid var(--edge);border-radius:3px;padding:.8rem 1.1rem;margin:1rem 0;display:flex;justify-content:space-between;gap:1rem;overflow-x:auto}
+.eq .no{color:var(--mute)}
+table{width:100%;border-collapse:collapse;font-size:.85rem;margin:1rem 0}
+th,td{border:1px solid var(--edge);padding:.45rem .6rem;text-align:left;vertical-align:top}
+th{font-family:Consolas,monospace;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+.decl{border:1px solid var(--edge);background:#fff;padding:1rem 1.2rem;margin:1.5rem 0;font-size:.92rem}
+.refs ol{margin-left:1.2rem}
+.refs li{font-size:.85rem;color:var(--soft);margin-bottom:.4rem}
+footer{max-width:46rem;margin:3rem auto 0;padding-top:1.2rem;border-top:1px solid var(--edge)}
+footer a{color:var(--mint);text-decoration:none;font-family:Consolas,monospace;font-size:.75rem;letter-spacing:.06em}
+sub,sup{line-height:0}
+</style>
+<link rel="stylesheet" href="sdt-shell.css">
+<script src="sdt-shell.js" defer></script>
+<meta name="description" content="Paper 05 — Nuclear Physics — construction grammar, packing radius, contact binding and the excluded projected-area account.">
+<link rel="canonical" href="https://spatialdisplacementtheory.com/paper-05-nuclear">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/favicon.ico" sizes="64x64">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#b07430">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Spatial Displacement Theory">
+<meta property="og:title" content="Paper 05 — Nuclear Physics">
+<meta property="og:description" content="Paper 05 — Nuclear Physics — construction grammar, packing radius, contact binding and the excluded projected-area account.">
+<meta property="og:url" content="https://spatialdisplacementtheory.com/paper-05-nuclear">
+<meta property="og:image" content="https://spatialdisplacementtheory.com/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_AU">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Paper 05 — Nuclear Physics">
+<meta name="twitter:description" content="Paper 05 — Nuclear Physics — construction grammar, packing radius, contact binding and the excluded projected-area account.">
+<meta name="twitter:image" content="https://spatialdisplacementtheory.com/og-card.png">
+</head>
+<body>
+<main>
+<p class="series">Spatial Displacement Theory · Paper 05 · Prepared for Submission</p>
+<h1>A Constitutional Construction Grammar for the Nuclides: α-Core Factorisation, the Packing Radius R(A) = R<sub>p</sub>(A/η)<sup>1/3</sup>, and Tests of Contact Binding</h1>
+<p class="byline">James Christopher Tyndall</p>
+<p class="affil">Melbourne, Australia · August 2026 · Domain 05 — Nuclear Physics</p>
+
+<div class="abstract">
+<p><strong>Abstract.</strong> Every nuclide with Z ≥ 2 factorises uniquely as one α core plus n<sub>d</sub> deuterons plus n<sub>t</sub> tritons, n<sub>t</sub> = A − 2Z, n<sub>d</sub> = 3Z − A − 2; electron-capture nuclides obey the conjugate grammar on a He-3 core. Free neutrons are forbidden in stable nuclides — a neutron is a proton with an internal electron, and the shared electron is the binding agent: the parameter-free interleaved-trefoil energy E = −Σq<sub>i</sub>q<sub>j</sub>·αℏc/r<sub>ij</sub> reproduces the deuteron binding (2.200 vs 2.224 MeV) with no fitted scale. The close-packing radius R(A) = R<sub>p</sub>(A/η)<sup>1/3</sup>, η = π/√18, is zero-fit and grades at 4.96% RMS over 908 measured radii, beating the empirical rival on isotope chains by 5×. The shadow-overlap account of the mass defect is presented with its calibration and its per-nucleon residual; the volume-price hypothesis is reported EXCLUDED. The magic numbers are derived: two closed forms — bipartite-triangular tier capacity F(n) = (n+1)(n+2) and rolling-equator triton belt B(n) = 2(n+1) — produce the full closure sequence 2, 8, 20, 28, 50, 82, 126 and predict the next at N = 184; the closure compaction is measured to be an isotone invariant. Grammar-count degeneracy discipline (NP24-A) is enforced throughout.</p>
+</div>
+<p><strong>Keywords:</strong> construction grammar · α core · triton ledger · packing radius · shadow overlap · shared-electron binding · beam-peel kinematics</p>
+
+<h2>1. The grammar</h2>
+<div class="eq"><span>Z ≥ 2:&nbsp;&nbsp;1α + n<sub>d</sub>·d + n<sub>t</sub>·t,&nbsp;&nbsp;n<sub>t</sub> = A − 2Z,&nbsp;&nbsp;n<sub>d</sub> = 3Z − A − 2</span><span class="no">(1)</span></div>
+<div class="eq"><span>EC lineage (He-3 core):&nbsp;&nbsp;n<sub>t</sub> = A − 2Z + 1,&nbsp;&nbsp;n<sub>d</sub> = 3Z − A − 3</span><span class="no">(2)</span></div>
+<p>The counts are fixed by (Z, N) arithmetic — the factorisation is unique wherever both are non-negative — and ATOMICUS characterises 290 isotopes on it. The neutron ledger closes as N = 2 + n<sub>d</sub> + 2n<sub>t</sub>. Electron economy: a nuclide of mass number A carries A protons and A electrons, N of them stabled inside neutron structures and Z fielded; "neutronium" is the grammar edge n<sub>d</sub> &lt; 0. A free neutron is an exposed triton remnant, and neutron decay (Q<sub>β</sub> = 0.782 MeV, exact in the ledger) is regime-II metastability of a composite, not the disintegration of an elementary object.</p>
+<p><strong>Degeneracy discipline (NP24-A).</strong> The map (n<sub>t</sub>, n<sub>d</sub>, v) = (N−Z, 2Z−N−2, Z−2) is an invertible re-coordinatisation of (Z, N). Any regularity expressible purely in the counts — including every magnetism rule so written — restates the neutron ledger and is claimed as bookkeeping, never as independent evidence. What the grammar earns is structure: lineages, the two-grammar split, and the scission algebra (2d → α untouched by the demotion).</p>
+
+<h2>2. The packing radius (NP12, canon)</h2>
+<div class="eq"><span>R(A) = R<sub>p</sub>·(A/η)<sup>1/3</sup>,&nbsp;&nbsp;η = π/√18 = 0.74048</span><span class="no">(3)</span></div>
+<p>Zero-fit close packing of nucleon boundaries. Graded against 908 measured boundary radii: RMS 4.96%, statistically indistinguishable from the one-parameter empirical rival (5.00%) in aggregate but 5× better along isotope chains (Ca flat at 1.67% where the rival drifts +8.63%; Sn 3.20%; Pb 3.28%). The superseded R = Z·R<sub>p</sub> is retracted in canon (RMS 890.8%) and retained only as a compile-compatibility stub. He-4 check: R<sub>He</sub> = 2R<sub>p</sub> = 1.683 fm vs 1.6755 fm measured (0.43%). A standing structural rule: adding a triton draws the boundary radius <em>inward</em> (88% of isotope chains, 90% of isobar steps, maximal at shell closures) — the interleave takes the least-resistance path.</p>
+
+<h2>3. Binding: the shared electron, not a new force</h2>
+<div class="eq"><span>E = −Σ<sub>i&lt;j</sub> q<sub>i</sub>q<sub>j</sub>·αℏc/r<sub>ij</sub>&nbsp;&nbsp;⟹&nbsp;&nbsp;B(d) = 2.200 MeV vs 2.224 measured</span><span class="no">(4)</span></div>
+<p>Nucleons pack as interleaved 6π trefoils; the neutron's internal electron is shared between adjacent protons, and the handed occlusion sum (4) — with no fitted scale — delivers the deuteron binding to 1.1% (NP17, RESOLVED; α-cluster case PENDING). There is no separate strong force: nuclear binding is the same handed occlusion of Paper 03 at contact range, with the connection law of §10 (six connections per nucleon) setting the mesh.</p>
+
+<h2>4. Projected shadow area — tested and not promoted</h2>
+<div class="eq"><span>ΔA = N·πR<sub>p</sub>² − A<sub>∪</sub>,&nbsp;&nbsp;BE ≈ κ·ΔA,&nbsp;&nbsp;κ = 47.137184 MeV/fm² [CALIBRATED(1)]</span><span class="no">(5)</span></div>
+<p>NSEQ04 applied the projected-union rule to the NSEQ05-CONTROL-3 geometric replay. The registered 217-isotope corpus gives R²(total BE) = 0.796231, mean absolute relative error 44.39%, and R²(BE/A) = −230.641525. The per-nucleon gate is not met, so projected area is not promoted as the binding law; NSEQ05 remains a legacy geometric control rather than the Atomicus contact construction. The separate volume-price hypothesis E = P·ΔV is also EXCLUDED (NP05). The active target-free work is the contact/lock wall and circulation-reorganisation route; the deuteron result in §3 is a separate handed-occlusion computation and does not validate equation (5).</p>
+
+<h2>5. Decay as geometry: EC, spallation, fission</h2>
+<p>An He-3-cored nuclide is an incomplete tetrahedron; inner-shell capture effects p → n and completes it — deterministic self-repair, transferring the nuclide between lineages (2). Spallation is a shallow flay: supra-threshold ejection of a deuteron or triton. Fission is a deep flay: unfrozen outer shells unwrap around sealed T12 masonry (N<sub>H</sub> = 82); the jacket locks a second core by 2d → α. Stop-at-N=126 (Pb-like remnant) is excluded against eight IAEA independent-yield tables (NP35). Beam kinematics (²³⁸U + p, Bernas): the 1.83c surface circulation is CONFIRMED zero-fit; the fine-tuned Ekin(Z) discriminant is EXCLUDED as shared-input, not independent. Central impact yields fission (deep flay); grazing yields spallation (shallow flay). The Golden Boundary Z = 79 — first n<sub>t</sub> &gt; n<sub>d</sub> — locates the onset of natural radioactivity from construction geometry alone.</p>
+
+<h2>6. The shell schedule: where the magic numbers come from</h2>
+<div class="eq"><span>F(n) = (n+1)(n+2)&nbsp;&nbsp;·&nbsp;&nbsp;B(n) = 2(n+1)&nbsp;&nbsp;·&nbsp;&nbsp;R(n) = F(n) − B(n) = n(n+1)</span><span class="no">(6)</span></div>
+<div class="eq"><span>2 | +6d → 8 | +12d → 20 | +8t → 28 | +12d+10t → 50 | +20d+12t → 82 | +30d+14t → 126</span><span class="no">(7)</span></div>
+<p>Every closure ("magic number") is a completed seat tier on which the next tier rests, and the capacities are forced by four mesh facts. The contact graph is bipartite — a proton gears only with neutrons — so every tier is a <em>double layer</em>, a p-face and an n-face; the packing's two-dimensional order is triangular, so one layer holds the (n+1)-th triangular number of rod seats. Together these give the tier capacity F(n) = (n+1)(n+2): 2, 6, 12, 20, 30 — and F(0) = 2 is the α core itself, obeying the same formula. Tritons are radial rods (the lone rod seats inward — measured, 83.1% whole-range census), and the assembly must roll without jamming, so a radial rod can co-rotate slip-free only on the <em>equator</em> of the collective roll: a one-dimensional ring, capacity linear in tier girth, antipodally paired — the belt B(n) = 2(n+1): 8, 10, 12, 14. From n = 3 the belt separates and descends to seal the previous closure; the surface remainder R(n) = n(n+1) completes at its own. Two closed forms produce all seven magic numbers and all nine capacities. The forward prediction comes free: closure(7) = 126 + R(6) + B(7) = <strong>N = 184</strong>.</p>
+<p>The descent is not narration — it is measured. A pre-registered single-pass sweep over the full radius dataset finds the compaction kink at a magic-N closure to be an <em>isotone invariant</em>: constant along N = 28, 50, 82 while the triton count varies two- to four-fold, beating the occupancy-proportional alternative on every adjudicable isotone (RMS 4.4 vs 15.5; 1.7 vs 5.7; 1.4 vs 3.2), with 19 of 19 computable closure kinks negative against a zero-centred background. The freeze does the compacting; the ledger only decides who sits in the seats. Seat law: positions fixed by tier geometry, filling order fixed (antipodal pairs, lone rod inward), occupancy set by the ledger and frozen at closure. The parity corollary: a stable odd-Z nuclide carries an odd triton count — the lone rod on the inward seat — and the odd-Z, even-triton misfits are precisely the five naturally occurring odd-odd quasi-stables (K-40, V-50, La-138, Lu-176, Ta-180m), every one a long-lived radioactive oddity.</p>
+<p><strong>Disclosure.</strong> F(n) equals the harmonic-oscillator degeneracy and B(n) the intruder-orbit capacity of the prevailing shell model — shared counting, which cannot discriminate at sequence level. The native content is the bipartite doubling and the rolling-equator constraint: the prevailing account requires a fitted spin–orbit strength to place its intruders; this law carries no strength parameter — the belt's location is geometric. The descent onset n = 3 is read, not derived (the field-cost pricing of a triton against a deuteron at given Z is the open residual).</p>
+
+<h2>7. Certification</h2>
+<table>
+<tr><th>Result</th><th>Value</th><th>Status</th></tr>
+<tr><td>Grammar factorisation</td><td>unique for n<sub>d</sub>, n<sub>t</sub> ≥ 0; 290 isotopes characterised</td><td>CONSTITUTIONAL — counts are (Z,N) arithmetic</td></tr>
+<tr><td>Count-rule degeneracy</td><td>(n<sub>t</sub>,n<sub>d</sub>) ↔ (Z,N)</td><td>NOT INDEPENDENT — bookkeeping, enforced (NP24-A)</td></tr>
+<tr><td>R(A) packing law</td><td>4.96% RMS, N = 908</td><td>DERIVED — zero-fit; chain test 5× vs rival</td></tr>
+<tr><td>Shared-electron deuteron</td><td>2.200 vs 2.224 MeV</td><td>DERIVED — no fitted scale (NP17); α PENDING</td></tr>
+<tr><td>BE ≈ κ·ΔA</td><td>R²(total) = 0.796231; R²(BE/A) = −230.641525</td><td>CALIBRATED(1) — per-nucleon binding law excluded (NSEQ04/NSEQ05 control replay)</td></tr>
+<tr><td>E = P·ΔV volume price</td><td>—</td><td>EXCLUDED (NP05)</td></tr>
+<tr><td>1.83c surface (beam peel)</td><td>β = 0.875; 309°</td><td>CONFIRMED zero-fit (NP27); Ekin(Z) EXCLUDED as shared-input, not independent</td></tr>
+<tr><td>Triton-contraction rule</td><td>88% chains / 90% isobars</td><td>RULE — native mechanism; convergent numbers</td></tr>
+<tr><td>Neutron Q<sub>β</sub></td><td>0.782 MeV</td><td>EXACT in two-ledger accounting</td></tr>
+<tr><td>Shell schedule capacities</td><td>F(n) = (n+1)(n+2), B(n) = 2(n+1); 2, 8, 20, 28, 50, 82, 126 sequence-exact</td><td>DERIVED — two closed forms; onset n = 3 READ; oscillator convergence disclosed</td></tr>
+<tr><td>Closure-kink isotone invariant</td><td>constant along N = 28/50/82; 19/19 negative</td><td>SUPPORTED — pre-registered single pass, 2026-07-30</td></tr>
+<tr><td>Parity lock (odd Z, even t)</td><td>the five natural odd-odd quasi-stables, no false positives on the seven lone-rod grips</td><td>RULE — measured stability record, 12/12</td></tr>
+<tr><td>Next neutron closure</td><td>N = 184</td><td>PREDICTION — from the same two forms</td></tr>
+</table>
+
+<div class="decl">
+<p><strong>Methodological declaration.</strong> No quark or gluon degrees of freedom, no shell-model potential, no pairing term, and no semi-empirical mass formula enters any derivation. Binding is the handed occlusion of Paper 03 at contact range; the single calibrated coefficient (κ) is labelled and its domain of failure stated. Where a discriminant shared its inputs with the rival framework's prediction and was not independent (Ekin(Z)), it was excluded rather than claimed. Measured radii (Angeli–Marinova), masses, and the Bernas fragment dataset enter as verification targets only.</p>
+</div>
+
+<h2 class="refs">References</h2>
+<div class="refs"><ol>
+<li>ATOMICUS/rules/On the Nature of Atomicus Rules.md — the construction constitution; ATOMICUS/isotopes/ (284 enriched characterisations).</li>
+<li>Engine/include/sdt/laws.hpp — namespace sdt::laws::nuclear (nuclear_boundary_radius; retraction stub in situ); measured:: nuclear anchors.</li>
+<li>Investigations/05_Nuclear_Physics — NP05 (kill), NP12 (radius law), NP17 (interleaved trefoils, shared-electron binding), NP24-A (degeneracy audit), NP27 (beam-peel kinematics), NP30 (invariant v = c√(r<sub>e</sub>/r)).</li>
+<li>Angeli &amp; Marinova (2013), IAEA compilation — 908 measured boundary radii (verification target).</li>
+<li>Bernas et al., ²³⁸U + p fragment yields (verification target).</li>
+</ol></div>
+</main>
+<footer><a href="theory.html#atomicus">← RETURN TO THE ATLAS · ATOMICUS</a></footer>
+</body>
+</html>

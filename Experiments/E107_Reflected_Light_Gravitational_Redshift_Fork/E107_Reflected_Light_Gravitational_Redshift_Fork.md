@@ -68,7 +68,7 @@ of ~1.8 enhancement.
 
 | Channel | SDT | GR | Verdict value |
 |---|---|---|---|
-| Reflected sunlight (Jupiter, Venus) | flat | flat | confirms reflector silence (degenerate) |
+| Reflected sunlight (Jupiter, Venus) | flat | flat | confirms reflector silence (shared-input; not independent) |
 | **Jupiter H₃⁺ self-emission 3.4–4 µm** | **+6.6 m/s** | **+3.7 m/s** | **the fork — ~1.8× split** |
 | Depth scaling Venus vs Jupiter | own-well, not Sun's-well | own-well | sign/scale cross-check |
 

@@ -1,0 +1,340 @@
+{
+  "schema": "planar-occlusion-jpl-state-series/v1",
+  "source": "NASA/JPL Horizons API 1.3",
+  "ephemeris": "DE441 (reported in each raw response)",
+  "centre": "Solar System Barycenter (0)",
+  "reference_frame": "Ecliptic of J2000.0",
+  "time_scale": "TDB",
+  "vector_correction": "NONE (geometric state vectors)",
+  "start_jd_tdb": 2451545.0,
+  "terminal_jd_tdb": 2451632.969,
+  "duration_days": 87.969,
+  "retrieved_utc": "2026-08-19T03:22:50.733527+00:00",
+  "physical_inputs": {
+    "radius": {
+      "description": "IAU nominal solar radius and NASA/JPL Planetary Fact Sheet mean radii",
+      "source_url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/"
+    },
+    "mass": {
+      "description": "NASA/JPL Planetary Fact Sheet masses",
+      "source_url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/"
+    }
+  },
+  "bodies": [
+    {
+      "name": "Sun",
+      "horizons_command": "10",
+      "radius_km": 695700.0,
+      "mass_kg": 1.9885e+30,
+      "states": [
+        {
+          "jd_tdb": 2451545.0,
+          "position_m": [
+            -1067706805.380953,
+            -418275271.8194473,
+            30861817.2547682
+          ],
+          "velocity_m_s": [
+            9.312571926520471,
+            -12.82475570794162,
+            -0.1633507186350417
+          ]
+        },
+        {
+          "jd_tdb": 2451632.969,
+          "position_m": [
+            -992061310.8392931,
+            -511312651.0610533,
+            29477553.327338193
+          ],
+          "velocity_m_s": [
+            10.6027164709736,
+            -11.670907030885461,
+            -0.20327289729096287
+          ]
+        }
+      ],
+      "query_url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%2710%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27%400%27&REF_PLANE=ECLIPTIC&REF_SYSTEM=J2000&OUT_UNITS=KM-S&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES&VEC_LABELS=NO&TIME_TYPE=TDB&TLIST=%272451545.0%27%2C%272451632.969%27&TLIST_TYPE=JD"
+    },
+    {
+      "name": "Mercury",
+      "horizons_command": "199",
+      "radius_km": 2439.7,
+      "mass_kg": 3.3011e+23,
+      "states": [
+        {
+          "jd_tdb": 2451545.0,
+          "position_m": [
+            -20529433161.23468,
+            -67331550535.34345,
+            -3648992526.494771
+          ],
+          "velocity_m_s": [
+            37004.30442920571,
+            -11177.24068132644,
+            -4307.7914693768535
+          ]
+        },
+        {
+          "jd_tdb": 2451632.969,
+          "position_m": [
+            -20454644214.44112,
+            -67424468039.690346,
+            -3650308010.120079
+          ],
+          "velocity_m_s": [
+            37005.356048517475,
+            -11176.52849958126,
+            -4307.844913769855
+          ]
+        }
+      ],
+      "query_url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27199%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27%400%27&REF_PLANE=ECLIPTIC&REF_SYSTEM=J2000&OUT_UNITS=KM-S&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES&VEC_LABELS=NO&TIME_TYPE=TDB&TLIST=%272451545.0%27%2C%272451632.969%27&TLIST_TYPE=JD"
+    },
+    {
+      "name": "Venus",
+      "horizons_command": "299",
+      "radius_km": 6051.8,
+      "mass_kg": 4.8675e+24,
+      "states": [
+        {
+          "jd_tdb": 2451545.0,
+          "position_m": [
+            -108524200857.5715,
+            -5303290247.691983,
+            6166496116.973171
+          ],
+          "velocity_m_s": [
+            1391.2186011899669,
+            -35153.11993215464,
+            -560.2056890007159
+          ]
+        },
+        {
+          "jd_tdb": 2451632.969,
+          "position_m": [
+            85566954239.86745,
+            -66373101964.328964,
+            -5866889789.055206
+          ],
+          "velocity_m_s": [
+            20998.664755524827,
+            27720.71319417072,
+            -832.6040730826794
+          ]
+        }
+      ],
+      "query_url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27299%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27%400%27&REF_PLANE=ECLIPTIC&REF_SYSTEM=J2000&OUT_UNITS=KM-S&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES&VEC_LABELS=NO&TIME_TYPE=TDB&TLIST=%272451545.0%27%2C%272451632.969%27&TLIST_TYPE=JD"
+    },
+    {
+      "name": "Earth",
+      "horizons_command": "399",
+      "radius_km": 6371.0,
+      "mass_kg": 5.97237e+24,
+      "states": [
+        {
+          "jd_tdb": 2451545.0,
+          "position_m": [
+            -27566740482.81145,
+            144279021520.7299,
+            30250667.8288132
+          ],
+          "velocity_m_s": [
+            -29784.947498510883,
+            -5482.119695478543,
+            0.01843295986780902
+          ]
+        },
+        {
+          "jd_tdb": 2451632.969,
+          "position_m": [
+            -148511117676.658,
+            -24069665006.53379,
+            29631786.45593859
+          ],
+          "velocity_m_s": [
+            4213.8522466494705,
+            -29544.48649266093,
+            0.8828134201639415
+          ]
+        }
+      ],
+      "query_url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27399%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27%400%27&REF_PLANE=ECLIPTIC&REF_SYSTEM=J2000&OUT_UNITS=KM-S&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES&VEC_LABELS=NO&TIME_TYPE=TDB&TLIST=%272451545.0%27%2C%272451632.969%27&TLIST_TYPE=JD"
+    },
+    {
+      "name": "Mars",
+      "horizons_command": "499",
+      "radius_km": 3389.5,
+      "mass_kg": 6.4171e+23,
+      "states": [
+        {
+          "jd_tdb": 2451545.0,
+          "position_m": [
+            206980433836.461,
+            -2425327899.844669,
+            -5125427142.013254
+          ],
+          "velocity_m_s": [
+            1171.984975692608,
+            26283.23978975472,
+            522.1336722766505
+          ]
+        },
+        {
+          "jd_tdb": 2451632.969,
+          "position_m": [
+            135818399581.3244,
+            172852062032.961,
+            298064741.3494885
+          ],
+          "velocity_m_s": [
+            -18086.90932967919,
+            17062.029465127333,
+            802.3102541591643
+          ]
+        }
+      ],
+      "query_url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27499%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27%400%27&REF_PLANE=ECLIPTIC&REF_SYSTEM=J2000&OUT_UNITS=KM-S&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES&VEC_LABELS=NO&TIME_TYPE=TDB&TLIST=%272451545.0%27%2C%272451632.969%27&TLIST_TYPE=JD"
+    },
+    {
+      "name": "Jupiter",
+      "horizons_command": "599",
+      "radius_km": 69911.0,
+      "mass_kg": 1.89819e+27,
+      "states": [
+        {
+          "jd_tdb": 2451545.0,
+          "position_m": [
+            597499917851.6835,
+            439186404676.3535,
+            -15195999855.73271
+          ],
+          "velocity_m_s": [
+            -7900.547720245487,
+            11143.392770659339,
+            130.7023308637314
+          ]
+        },
+        {
+          "jd_tdb": 2451632.969,
+          "position_m": [
+            532064371430.93,
+            519525747197.49896,
+            -14064028804.75944
+          ],
+          "velocity_m_s": [
+            -9290.48273528834,
+            9965.742631314726,
+            166.6307494472217
+          ]
+        }
+      ],
+      "query_url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27599%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27%400%27&REF_PLANE=ECLIPTIC&REF_SYSTEM=J2000&OUT_UNITS=KM-S&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES&VEC_LABELS=NO&TIME_TYPE=TDB&TLIST=%272451545.0%27%2C%272451632.969%27&TLIST_TYPE=JD"
+    },
+    {
+      "name": "Saturn",
+      "horizons_command": "699",
+      "radius_km": 58232.0,
+      "mass_kg": 5.6834e+26,
+      "states": [
+        {
+          "jd_tdb": 2451545.0,
+          "position_m": [
+            957317652110.3407,
+            982438007687.5085,
+            -55182117881.50037
+          ],
+          "velocity_m_s": [
+            -7421.90038683812,
+            6723.930997200832,
+            177.5749426205731
+          ]
+        },
+        {
+          "jd_tdb": 2451632.969,
+          "position_m": [
+            899504530667.2454,
+            1032049327868.589,
+            -53747063171.49132
+          ],
+          "velocity_m_s": [
+            -7787.535989995703,
+            6326.915145314537,
+            200.0849055056606
+          ]
+        }
+      ],
+      "query_url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27699%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27%400%27&REF_PLANE=ECLIPTIC&REF_SYSTEM=J2000&OUT_UNITS=KM-S&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES&VEC_LABELS=NO&TIME_TYPE=TDB&TLIST=%272451545.0%27%2C%272451632.969%27&TLIST_TYPE=JD"
+    },
+    {
+      "name": "Uranus",
+      "horizons_command": "799",
+      "radius_km": 25362.0,
+      "mass_kg": 8.681e+25,
+      "states": [
+        {
+          "jd_tdb": 2451545.0,
+          "position_m": [
+            2157907112723.4167,
+            -2055043811740.0369,
+            -35594639499.61483
+          ],
+          "velocity_m_s": [
+            4646.584677611653,
+            4614.773473441427,
+            -43.085218888708745
+          ]
+        },
+        {
+          "jd_tdb": 2451632.969,
+          "position_m": [
+            2192907317598.319,
+            -2019672689790.9392,
+            -35916717864.98284
+          ],
+          "velocity_m_s": [
+            4563.523837804597,
+            4692.455742096308,
+            -41.659002655352715
+          ]
+        }
+      ],
+      "query_url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27799%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27%400%27&REF_PLANE=ECLIPTIC&REF_SYSTEM=J2000&OUT_UNITS=KM-S&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES&VEC_LABELS=NO&TIME_TYPE=TDB&TLIST=%272451545.0%27%2C%272451632.969%27&TLIST_TYPE=JD"
+    },
+    {
+      "name": "Neptune",
+      "horizons_command": "899",
+      "radius_km": 24622.0,
+      "mass_kg": 1.02413e+26,
+      "states": [
+        {
+          "jd_tdb": 2451545.0,
+          "position_m": [
+            2513978816984.908,
+            -3739132842893.97,
+            19063078769.80734
+          ],
+          "velocity_m_s": [
+            4474.58791838248,
+            3063.15514301819,
+            -166.4119952893173
+          ]
+        },
+        {
+          "jd_tdb": 2451632.969,
+          "position_m": [
+            2547886832780.6074,
+            -3715689748601.159,
+            17798889443.4011
+          ],
+          "velocity_m_s": [
+            4446.762571031078,
+            3104.269191122474,
+            -166.74493051962818
+          ]
+        }
+      ],
+      "query_url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27899%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27%400%27&REF_PLANE=ECLIPTIC&REF_SYSTEM=J2000&OUT_UNITS=KM-S&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES&VEC_LABELS=NO&TIME_TYPE=TDB&TLIST=%272451545.0%27%2C%272451632.969%27&TLIST_TYPE=JD"
+    }
+  ]
+}

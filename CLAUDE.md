@@ -46,7 +46,9 @@ When adding a new derivation: put the formula in the appropriate namespace of `l
 vocabulary — **excluded / ruled out / falsified / withdrawn**, never "KILLED";
 **pre-registered**, never "pre-commit"; **shared-input (not independent)**, never the evidence
 label "DEGENERATE"; the word **"honest" is banned as a modifier** (state the fact; use Scope /
-Limitations / Residuals). Direct execution only — delegated-agent output is not citable.
+Limitations / Residuals); **charge / charged / charges / charging** are prohibited in active
+SDT prose/code/public artifacts (see `GATEWAY_BEHAVIOURAL.md` §1 — do not substitute another
+substance-like noun). Direct execution only — delegated-agent output is not citable.
 Pre-registration before instrumentation; instruments validated on known answers before use;
 whole-range single-pass comparisons. `VOICE_MODEL_HARVEY.md` governs public copy.
 

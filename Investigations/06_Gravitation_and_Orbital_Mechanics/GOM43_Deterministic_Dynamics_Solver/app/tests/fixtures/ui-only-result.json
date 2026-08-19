@@ -1,0 +1,59 @@
+{
+  "fixture_scope": "UI_TEST_ONLY_NEVER_SOLVER_FALLBACK",
+  "result": {
+    "contract_version": "1.0.0",
+    "case_id": "ui-test-fixture",
+    "problem_class": "point_nbody",
+    "status": "completed",
+    "classification": "VALIDATED",
+    "message": "Deterministic fixture for UI module tests only.",
+    "solver": {
+      "build_id": "fixture-not-a-solver",
+      "compiler": "none",
+      "floating_point_policy": "fixed-step; no fast-math; no contraction guarantee"
+    },
+    "provenance": {
+      "laws_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "input_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    "normalized_case": {
+      "contract_version": "1.0.0",
+      "case_id": "ui-test-fixture",
+      "problem_class": "point_nbody",
+      "frame": { "type": "inertial_cartesian", "units": "SI" },
+      "forces": [{ "type": "koppa_pairwise" }],
+      "bodies": [
+        { "id": "A", "position_m": [-1, 0, 0], "velocity_m_s": [0, -1, 0], "koppa_m": 1e-18, "collision_radius_m": 0 },
+        { "id": "B", "position_m": [1, 0, 0], "velocity_m_s": [0, 1, 0], "koppa_m": 1e-18, "collision_radius_m": 0 }
+      ],
+      "integrator": "velocity_verlet",
+      "timestep_s": 0.1,
+      "duration_s": 0.1,
+      "record_every_steps": 1,
+      "tolerances": { "position_m": 1e-10, "velocity_m_s": 1e-10, "quaternion_norm": 1e-12, "max_constraint_iterations": 64 },
+      "gates": []
+    },
+    "executed_steps": 1,
+    "events": [],
+    "diagnostics": {
+      "relative_energy_drift": 0,
+      "momentum_drift": 0,
+      "angular_momentum_drift": 0,
+      "max_position_constraint_m": 0,
+      "max_velocity_constraint_m_s": 0,
+      "max_quaternion_norm_error": 0
+    },
+    "gates": [],
+    "trajectory": [
+      { "step": 0, "time_s": 0, "states": [
+        { "id": "A", "position_m": [-1, 0, 0], "velocity_m_s": [0, -1, 0] },
+        { "id": "B", "position_m": [1, 0, 0], "velocity_m_s": [0, 1, 0] }
+      ] },
+      { "step": 1, "time_s": 0.1, "states": [
+        { "id": "A", "position_m": [-1, -0.1, 0], "velocity_m_s": [0, -1, 0] },
+        { "id": "B", "position_m": [1, 0.1, 0], "velocity_m_s": [0, 1, 0] }
+      ] }
+    ],
+    "trajectory_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+  }
+}

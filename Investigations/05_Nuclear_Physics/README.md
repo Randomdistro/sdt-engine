@@ -23,6 +23,33 @@ Packer-reopen 2026-08-13 (live `packNucleus`, dnn frozen): NP39 light T8×1 MATC
 
 NSEQ05–07, 09 (locations), 11. NSEQ12/TT-flip excluded. Occupation MeV UNDERDETERMINED (NSEQ13/14/15).
 
+## Parallel kinematic experiments
+
+`NSEQ16_Perfect_Traction_Gear_Engine/` — repaired α+d+t construction through
+the whole-atom H→O valence stages passes contact, pole, order, common-clock and
+cyclic `(4,5)` quadruple-helix/Möbius controls. It now drives the registered
+routes in the public nuclear packing sequencer. NSEQ05 is retained as
+`LEGACY_GEOMETRIC_CONTROL` for unregistered routes and fails the frozen
+rim-contact comparison.
+Classification: `ATOMICUS_CONTACT_CONSTRUCTION_CANDIDATE`; no geometry,
+energy or mass-defect relation is promoted.
+
+`NSEQ17_Light_Nucleus_Wake_Mesh/` — the neutron's proton-form plus
+seated-electron counter-circulation is `CALIBRATED(1)` and frozen before H-2,
+H-3, and He-3 fitting. Their Hydrogen-operating wakes deform and repartition
+under closed-flow and no-n–n-contact constraints. Binding and magnetic targets
+are `CALIBRATED(8/9)`; H-2 also fits the observed electric quadrupole.
+Spin/parity remains `PENDING`.
+
+`NSEQ18_Universal_Interstitial_Sequencer/` — all 221 public isotope rows now
+use one species-pure, parent-interstitial p–n contact engine. The registered
+D12 shell is `3 upper + 6 equatorial + 3 lower`; complete triton shells
+contract the supported structure while partial triton shells do not trigger
+the next contraction. Whole-range construction passes. The fixed
+`alpha*hbar*c/R_p` wake-work and uncalibrated magnetic sums do not reproduce
+general measured values, so mass and magnetic predictions remain `PENDING`
+and the public datasheet exposes their residuals.
+
 ## Data
 
 IAEA independent FY for eight neutron-induced systems: cached. Cf-252 SF and N≥168: BLOCKED-relnsd (`DATA_REQUIREMENTS.md`).

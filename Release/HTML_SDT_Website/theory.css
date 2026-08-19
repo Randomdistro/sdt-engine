@@ -1,0 +1,472 @@
+:root {
+  --theory-width: 72rem;
+  --theory-measure: 48rem;
+  --theory-line: color-mix(in srgb, var(--ink, #1d1f21) 14%, transparent);
+  --theory-panel: color-mix(in srgb, var(--paper, #faf8f4) 92%, var(--copper, #b07430) 8%);
+  --theory-accent: var(--copper, #a86f32);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: transparent;
+  color: var(--ink, #1d1f21);
+}
+
+body.sdt-parallax-page {
+  background: transparent;
+}
+
+.theory-progress {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 100;
+  height: 3px;
+  background: transparent;
+}
+
+.theory-progress span {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: var(--theory-accent);
+}
+
+.theory-rail {
+  position: fixed;
+  top: 50%;
+  right: 1rem;
+  z-index: 40;
+  display: grid;
+  gap: .42rem;
+  transform: translateY(-50%);
+}
+
+.theory-rail a {
+  width: .55rem;
+  height: .55rem;
+  border: 1px solid var(--ink-faint, #938d83);
+  border-radius: 50%;
+  background: var(--paper, #faf8f4);
+}
+
+.theory-rail a[aria-current="step"] {
+  border-color: var(--theory-accent);
+  background: var(--theory-accent);
+  transform: scale(1.3);
+}
+
+.theory-hero {
+  min-height: 92vh;
+  display: grid;
+  place-items: center;
+  padding: 7rem 1.5rem 4rem;
+  background: transparent;
+}
+
+.theory-hero__inner {
+  width: min(100%, var(--theory-width));
+}
+
+.theory-kicker,
+.theory-step__number,
+.theory-meta dt,
+.theory-status,
+.theory-map__label {
+  font-family: "JetBrains Mono", Consolas, monospace;
+  font-size: .7rem;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+
+.theory-kicker,
+.theory-step__number,
+.theory-map__label {
+  color: var(--theory-accent);
+}
+
+.theory-hero h1 {
+  max-width: 12ch;
+  margin: .7rem 0 1.2rem;
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size: clamp(3.2rem, 10vw, 7.5rem);
+  font-weight: 500;
+  line-height: .9;
+  letter-spacing: -.045em;
+}
+
+.theory-hero__lead {
+  max-width: 42rem;
+  margin: 0;
+  color: var(--ink-soft, #46433e);
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size: clamp(1.25rem, 2.4vw, 1.8rem);
+  line-height: 1.5;
+}
+
+.theory-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .8rem;
+  margin-top: 2rem;
+}
+
+.theory-button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.6rem;
+  padding: 0 1rem;
+  border: 1px solid var(--theory-accent);
+  border-radius: 3px;
+  color: var(--theory-accent);
+  font-family: "JetBrains Mono", Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.theory-button--solid {
+  color: var(--paper, #faf8f4);
+  background: var(--theory-accent);
+}
+
+.theory-foundations,
+.theory-body,
+.theory-appendix {
+  width: min(calc(100% - 3rem), var(--theory-width));
+  margin-inline: auto;
+}
+
+.theory-foundations {
+  padding: 5rem 0 3rem;
+}
+
+.theory-foundations > h2,
+.theory-appendix h2 {
+  max-width: 18ch;
+  margin: 0 0 1rem;
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  font-weight: 500;
+  line-height: 1.05;
+}
+
+.theory-intro {
+  max-width: var(--theory-measure);
+  color: var(--ink-soft, #46433e);
+  font-size: 1.08rem;
+  line-height: 1.8;
+}
+
+.irreducibles {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 2.5rem 0;
+}
+
+.irreducible {
+  padding: 1.5rem;
+  border: 1px solid var(--theory-line);
+  border-radius: 5px;
+  background: var(--theory-panel);
+}
+
+.irreducible__glyph {
+  color: var(--theory-accent);
+  font-size: 1.8rem;
+}
+
+.irreducible h3 {
+  margin: .5rem 0 .2rem;
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size: 1.65rem;
+}
+
+.irreducible .role {
+  margin: 0 0 .8rem;
+  color: var(--theory-accent);
+  font-family: "JetBrains Mono", Consolas, monospace;
+  font-size: .7rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.irreducible p {
+  color: var(--ink-soft, #46433e);
+  line-height: 1.75;
+}
+
+.theory-demo {
+  margin: 1.2rem 0 0;
+}
+
+.theory-demo svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--theory-line);
+  border-radius: 4px;
+  color: var(--ink-soft, #46433e);
+  cursor: grab;
+  touch-action: none;
+}
+
+.theory-demo svg:active {
+  cursor: grabbing;
+}
+
+.theory-demo figcaption,
+.irreducible label,
+#demo-movement-read,
+#demo-now-read {
+  color: var(--ink-faint, #938d83);
+  font-family: "JetBrains Mono", Consolas, monospace;
+  font-size: .67rem;
+  line-height: 1.55;
+}
+
+.irreducible input[type="range"] {
+  width: 100%;
+  accent-color: var(--theory-accent);
+}
+
+.theory-map {
+  margin: 4rem 0 1rem;
+  padding: 1.25rem;
+  border: 1px solid var(--theory-line);
+  border-radius: 5px;
+}
+
+.theory-map__nodes {
+  display: flex;
+  gap: .45rem;
+  padding: .85rem 0 .2rem;
+  overflow-x: auto;
+}
+
+.theory-map__nodes a {
+  flex: 0 0 auto;
+  padding: .35rem .55rem;
+  border: 1px solid var(--theory-line);
+  border-radius: 3px;
+  color: var(--ink-soft, #46433e);
+  font-family: "JetBrains Mono", Consolas, monospace;
+  font-size: .68rem;
+  text-decoration: none;
+}
+
+.theory-step {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(14rem, 20rem);
+  gap: clamp(2rem, 7vw, 6rem);
+  padding: clamp(4rem, 8vw, 7rem) 0;
+  border-top: 1px solid var(--theory-line);
+  scroll-margin-top: 5rem;
+}
+
+.theory-step__copy {
+  max-width: var(--theory-measure);
+}
+
+.theory-step h2 {
+  margin: .45rem 0 1rem;
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size: clamp(2rem, 5vw, 3.7rem);
+  font-weight: 500;
+  line-height: 1.05;
+}
+
+.theory-step h3 {
+  margin: 2.2rem 0 .55rem;
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size: clamp(1.35rem, 2.6vw, 1.85rem);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.theory-step__copy > p,
+.theory-step__copy li,
+.theory-appendix p,
+.theory-appendix li {
+  color: var(--ink-soft, #46433e);
+  font-size: 1.03rem;
+  line-height: 1.8;
+}
+
+.theory-step__copy strong {
+  color: var(--ink, #1d1f21);
+}
+
+.theory-equation {
+  margin: 1.4rem 0;
+  padding: 1rem 1.15rem;
+  border-left: 3px solid var(--theory-accent);
+  background: var(--theory-panel);
+  font-family: "JetBrains Mono", Consolas, monospace;
+  line-height: 1.7;
+  overflow-x: auto;
+}
+
+.theory-debt-ledger {
+  width: 100%;
+  margin: 1.5rem 0;
+  border-collapse: collapse;
+  font-size: .92rem;
+}
+
+.theory-debt-ledger th,
+.theory-debt-ledger td {
+  padding: .55rem .65rem;
+  border: 1px solid var(--theory-line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.theory-debt-ledger th {
+  font-family: "JetBrains Mono", Consolas, monospace;
+  font-size: .68rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--theory-accent);
+  background: var(--theory-panel);
+}
+
+.theory-debt-ledger td:first-child {
+  color: var(--ink, #1d1f21);
+  font-weight: 500;
+}
+
+.theory-debt-ledger a {
+  color: var(--theory-accent);
+}
+
+.theory-meta {
+  align-self: start;
+  position: sticky;
+  top: 5.2rem;
+  margin: 0;
+  padding: 1rem;
+  border: 1px solid var(--theory-line);
+  border-radius: 5px;
+  background: var(--theory-panel);
+}
+
+.theory-meta div + div {
+  margin-top: 1rem;
+}
+
+.theory-meta dt {
+  margin-bottom: .3rem;
+  color: var(--ink-faint, #938d83);
+}
+
+.theory-meta dd {
+  margin: 0;
+  color: var(--ink-soft, #46433e);
+  font-size: .88rem;
+  line-height: 1.55;
+}
+
+.theory-meta a {
+  color: var(--theory-accent);
+}
+
+.theory-status {
+  display: inline-block;
+  padding: .3rem .45rem;
+  border: 1px solid var(--theory-accent);
+  border-radius: 2px;
+  color: var(--theory-accent);
+}
+
+.theory-appendix {
+  padding: 6rem 0;
+  border-top: 1px solid var(--theory-line);
+}
+
+.theory-appendix-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.theory-appendix article {
+  padding: 1.3rem;
+  border: 1px solid var(--theory-line);
+  border-radius: 5px;
+}
+
+.theory-appendix h3 {
+  margin-top: 0;
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size: 1.4rem;
+}
+
+.theory-dependency-error {
+  margin: 1rem auto;
+  padding: 1rem;
+  max-width: var(--theory-width);
+  border: 2px solid #a4552e;
+  color: #7f3e22;
+  background: #fff4ec;
+}
+
+@media (max-width: 850px) {
+  .theory-rail {
+    display: none;
+  }
+
+  .theory-step {
+    grid-template-columns: 1fr;
+  }
+
+  .theory-meta {
+    position: static;
+    order: -1;
+  }
+}
+
+@media (max-width: 620px) {
+  .irreducibles,
+  .theory-appendix-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .theory-hero,
+  .theory-foundations,
+  .theory-step,
+  .theory-appendix {
+    padding-block: 3.5rem;
+  }
+}
+
+@media print {
+  .theory-rail,
+  .theory-progress,
+  .theory-actions,
+  .sdt-shell {
+    display: none !important;
+  }
+
+  .theory-step {
+    display: block;
+    break-inside: avoid;
+  }
+
+  .theory-meta {
+    position: static;
+    margin-top: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

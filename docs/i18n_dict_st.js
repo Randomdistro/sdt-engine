@@ -99,12 +99,12 @@ window.SDT_I18N = {
 /* ══════════════ st_00_primitives — spine ══════════════ */
 "The Foundations · 0 · Primitives": "Foundations · 0 · The Primitive Set",
 "Four, and no more": "The Irreducible Set — Cardinality Four",
-"Space — the lattice": "Space — the Spation Lattice",
-"Matter — a displacement": "Matter — Persistent Displacement Structure",
-"Movement — the relay": "Movement — Nearest-Neighbour Relay at c",
-"The Present — and its count": "The Present — the Plane of Existence; Time as Tick Ordinal",
-"Four primitives, eight measured numbers":
-  "Four Primitives and the Eight-Element Input derivation basis",
+"Space — the superfluidic hypercrystal": "Space — the Superfluidic Hypercrystal",
+"Matter — displacement": "Matter — Persistent Displacement Structure",
+"Movement — the one currency": "Movement — the One Currency; Nearest-Neighbour Relay at c",
+"The Ever-Present Now — the plane of existence": "The Ever-Present Now — the Plane of Existence; Time as Tick Ordinal",
+"Four primitives. The old list is rederived.":
+  "Four Primitives; the Old Whitelist is Rederived",
 
 /* ══════════════ st_01_law1 — spine ══════════════ */
 "The Laws · I · Convergent Relay Throughput":
