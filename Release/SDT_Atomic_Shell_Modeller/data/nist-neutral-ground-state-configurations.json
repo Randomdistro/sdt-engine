@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0.0",
+  "retrieved_utc": "2026-08-26",
+  "source": {
+    "title": "NIST Atomic Reference Data for Electronic Structure Calculations: Electronic configurations of the elements",
+    "url": "https://math.nist.gov/DFTdata/atomdata/configuration.html",
+    "use": "Neutral-atom ground-state occupation/configuration labels for the preset subset."
+  },
+  "interpretation": {
+    "configuration_status": "NIST describes these as ground configurations; for complex cases configuration labels can be the largest component of a calculated eigenvector.",
+    "not_provided": "This source does not provide measured individual electron paths, a finite probability-lobe edge, or a calibrated SDT atomic response law.",
+    "lobe_tour_renderer": "The application uses the occupation labels and canonical angular/nodal lobe forms only as initial geometry. A finite tour edge is supplied by the SDT closure r = kappa/z; no quantum radial density function drives the model."
+  },
+  "presets": [
+    {"id":"H-1","symbol":"H","name":"Hydrogen-1","atomic_number":1,"mass_number":1,"configuration":"1s1","subshells":[[1,"s",1]]},
+    {"id":"H-2","symbol":"H","name":"Deuterium / Hydrogen-2","atomic_number":1,"mass_number":2,"configuration":"1s1","subshells":[[1,"s",1]]},
+    {"id":"He-3","symbol":"He","name":"Helium-3","atomic_number":2,"mass_number":3,"configuration":"1s2","subshells":[[1,"s",2]]},
+    {"id":"He-4","symbol":"He","name":"Helium-4","atomic_number":2,"mass_number":4,"configuration":"1s2","subshells":[[1,"s",2]]},
+    {"id":"Li-7","symbol":"Li","name":"Lithium-7","atomic_number":3,"mass_number":7,"configuration":"[He] 2s1","subshells":[[1,"s",2],[2,"s",1]]},
+    {"id":"C-12","symbol":"C","name":"Carbon-12","atomic_number":6,"mass_number":12,"configuration":"[He] 2s2 2p2","subshells":[[1,"s",2],[2,"s",2],[2,"p",2]]},
+    {"id":"N-14","symbol":"N","name":"Nitrogen-14","atomic_number":7,"mass_number":14,"configuration":"[He] 2s2 2p3","subshells":[[1,"s",2],[2,"s",2],[2,"p",3]]},
+    {"id":"O-16","symbol":"O","name":"Oxygen-16","atomic_number":8,"mass_number":16,"configuration":"[He] 2s2 2p4","subshells":[[1,"s",2],[2,"s",2],[2,"p",4]]},
+    {"id":"Ne-20","symbol":"Ne","name":"Neon-20","atomic_number":10,"mass_number":20,"configuration":"[He] 2s2 2p6","subshells":[[1,"s",2],[2,"s",2],[2,"p",6]]},
+    {"id":"Na-23","symbol":"Na","name":"Sodium-23","atomic_number":11,"mass_number":23,"configuration":"[Ne] 3s1","subshells":[[1,"s",2],[2,"s",2],[2,"p",6],[3,"s",1]]},
+    {"id":"Si-28","symbol":"Si","name":"Silicon-28","atomic_number":14,"mass_number":28,"configuration":"[Ne] 3s2 3p2","subshells":[[1,"s",2],[2,"s",2],[2,"p",6],[3,"s",2],[3,"p",2]]},
+    {"id":"Fe-56","symbol":"Fe","name":"Iron-56","atomic_number":26,"mass_number":56,"configuration":"[Ar] 3d6 4s2","subshells":[[1,"s",2],[2,"s",2],[2,"p",6],[3,"s",2],[3,"p",6],[3,"d",6],[4,"s",2]]},
+    {"id":"Cu-63","symbol":"Cu","name":"Copper-63","atomic_number":29,"mass_number":63,"configuration":"[Ar] 3d10 4s1","subshells":[[1,"s",2],[2,"s",2],[2,"p",6],[3,"s",2],[3,"p",6],[3,"d",10],[4,"s",1]]},
+    {"id":"U-238","symbol":"U","name":"Uranium-238","atomic_number":92,"mass_number":238,"configuration":"[Rn] 5f3 6d1 7s2","subshells":[[1,"s",2],[2,"s",2],[2,"p",6],[3,"s",2],[3,"p",6],[3,"d",10],[4,"s",2],[4,"p",6],[4,"d",10],[4,"f",14],[5,"s",2],[5,"p",6],[5,"d",10],[5,"f",3],[6,"s",2],[6,"p",6],[6,"d",1],[7,"s",2]]}
+  ]
+}

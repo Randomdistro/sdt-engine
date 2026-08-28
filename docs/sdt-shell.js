@@ -148,7 +148,9 @@
     ]],
     papers: ['Papers', [
       ['The path, spoken', [
+        ['Interactive causal chain', 'causal-chain.html'],
         ['Complete dependency chain', 'theory.html'],
+        ['Words only (newcomers)', 'causal-chain-simple.html'],
         ['For people', 'sdt-for-people.html'],
         ['Theoretical model', 'theoretical-model.html'],
         ['Inputs, rederived', 'inputs.html']
@@ -211,6 +213,8 @@
     'st_ring_moons.html': 'Inspect the ring-moon orbital investigation.',
     'st_paradox_census.html': 'Review the framework’s paradox and contradiction census.',
     'sdt-for-people.html': 'The theory spoken directly, without requiring the technical ledger.',
+    'causal-chain.html': 'Newcomers path: every link is a working mechanism you can drag, press or wind.',
+    'causal-chain-simple.html': 'The same newcomers story in plain words only, without the interactive figures.',
     'theory.html': 'Read the entire framework in dependency order with status, evidence and residuals exposed.',
     'theoretical-model.html': 'A compact statement of the current total model and its open debts.',
     'inputs.html': 'See every admitted input, rederivation and calibration in one place.',
@@ -429,17 +433,18 @@
 
   /* ── reading register ─────────────────────────────────────────────────── */
   var REGISTER_PAGES = {
-    simple: 'causal-chain-simple.html',
+    simple: 'causal-chain.html',
     layman: 'theory.html#L0',
     technical: 'causal-chain-technical.html'
   };
   var REGISTER_FROM_PAGE = {
+    'causal-chain.html': 'simple',
     'causal-chain-simple.html': 'simple',
     'theory.html': 'layman',
     'causal-chain-technical.html': 'technical'
   };
   var REGISTER_LEVELS = [
-    ['simple', 'Newcomers', 'A first pass with the mechanism kept visible.'],
+    ['simple', 'Newcomers', 'Interactive causal chain — drag and press every mechanism.'],
     ['layman', 'Laymen', 'The complete dependency account with status and residuals.'],
     ['technical', 'Academics', 'Relations, evidence labels, residuals and open debts.']
   ];

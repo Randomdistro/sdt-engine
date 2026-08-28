@@ -15,14 +15,14 @@
   var FAMILIES = [
     {
       name: 'The causal chain',
-      simple: 'causal-chain-simple.html',
+      simple: 'causal-chain.html',
       layman: 'theory.html#L0',
       technical: 'causal-chain-technical.html'
     }
   ];
 
   var LEVELS = [
-    ['simple', 'Newcomers', 'a first pass with the mechanism kept visible'],
+    ['simple', 'Newcomers', 'interactive causal chain — drag and press every mechanism'],
     ['layman', 'Laymen', 'the complete dependency account with visible status and residuals'],
     ['technical', 'Academics', 'relations, evidence labels, residuals and open debts']
   ];

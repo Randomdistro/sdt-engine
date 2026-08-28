@@ -14,11 +14,38 @@
     section{border-top:1px solid var(--line);padding:13px 0}h2{font-size:12px;text-transform:uppercase;letter-spacing:.13em;color:var(--amber);margin:0 0 9px}
     label{display:block;color:var(--muted);font-size:11px;margin:7px 0 3px}select,input,textarea,button{width:100%;border:1px solid var(--line);background:#0f1823;color:var(--ink);border-radius:5px;padding:8px;font:inherit}
     textarea{min-height:185px;resize:vertical;font:11px/1.35 Consolas,monospace}button{cursor:pointer;font-weight:650}button.primary{background:#123449;border-color:#246a8a;color:#c9f4ff}button:disabled{opacity:.48;cursor:not-allowed}
-    .row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.row.three{grid-template-columns:repeat(3,minmax(0,1fr))}.checks{display:grid;grid-template-columns:1fr 1fr;gap:6px}.checks label{display:flex;align-items:center;gap:6px;margin:0;color:var(--ink)}.checks input{width:auto}
+    .row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.row.three{grid-template-columns:repeat(3,minmax(0,1fr))}.checks{display:grid;grid-template-columns:1fr 1fr;gap:6px}.checks label{display:flex;align-items:center;gap:6px;margin:0;color:var(--ink)}.checks input{width:auto}.checkline{display:flex;align-items:center;gap:7px;color:var(--ink);margin-top:9px}.checkline input{width:auto}
     .cards{display:grid;grid-template-columns:1fr 1fr;gap:6px}.card{background:#0e1721;border:1px solid var(--line);padding:8px;border-radius:5px}.card b{display:block;color:var(--cyan);font:12px Consolas,monospace;overflow:hidden;text-overflow:ellipsis}.card small{color:var(--muted)}.pending{color:var(--amber)!important}.ledger{font:11px/1.45 Consolas,monospace;color:var(--muted);white-space:pre-wrap;overflow-wrap:anywhere}
     #status{position:fixed;right:14px;top:14px;z-index:2;padding:8px 11px;border:1px solid var(--line);background:#09121ddd;border-radius:5px;font:12px Consolas,monospace;color:var(--cyan)}
-    #status.error{color:#ff9c9c;border-color:#813d45}.note{font-size:11px;color:var(--muted);padding:8px;border-left:2px solid var(--amber);background:#111821}
+    #status.error{color:#ff9c9c;border-color:#813d45}.note{font-size:11px;color:var(--muted);padding:8px;border-left:2px solid var(--amber);background:#111821}.explainer{font:11px/1.45 Consolas,monospace;color:var(--cyan);white-space:pre-wrap;overflow-wrap:anywhere;min-height:74px}
+    #tierBar{position:fixed;left:50%;bottom:60px;transform:translateX(-50%);display:none;gap:6px;z-index:4}
+    #tierBar.show{display:flex}
+    .tier-btn{padding:5px 12px;font-size:10px;letter-spacing:.04em;text-transform:uppercase;border-radius:999px;background:#09121ddd;border:1px solid var(--line);color:var(--muted);cursor:pointer;transition:color .2s ease,border-color .2s ease}
+    .tier-btn.active{color:var(--cyan);border-color:#246a8a}
+    #stageBar{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);display:none;align-items:center;gap:16px;z-index:4;padding:11px 18px;background:#09121ddd;border:1px solid var(--line);border-radius:999px}
+    #stageBar.show{display:flex}
+    .stage-dot{width:13px;height:13px;border-radius:50%;background:var(--cyan);opacity:.46;border:none;cursor:pointer;padding:0;transform:scale(1);transition:transform .45s cubic-bezier(.4,0,.2,1),opacity .45s ease,box-shadow .45s ease}
+    .stage-dot:hover{opacity:.75}
+    .stage-dot.active{opacity:1;transform:scale(1.08);box-shadow:0 0 14px 2px #63d9ff88}
+    #labelLayer{position:fixed;inset:0;pointer-events:none;z-index:2;overflow:hidden}
+    .floating-label{position:absolute;font:15px/1.2 Inter,Segoe UI,sans-serif;font-weight:650;color:var(--ink);text-decoration:underline;text-underline-offset:4px;text-decoration-color:#63d9ffaa;white-space:nowrap;transform:translate(-50%,-100%) scale(1);transform-origin:center bottom;transition:left .35s ease,top .35s ease,transform .18s ease,color .18s ease;text-shadow:0 1px 6px #000d,0 0 14px #000a;pointer-events:auto;cursor:default}
+    .floating-label:hover{transform:translate(-50%,-100%) scale(1.16);color:#fff;text-decoration-color:#63d9ff}
+    .label-line{position:absolute;top:0;left:0;height:1px;background:var(--muted);opacity:.55;transform-origin:0 0;transition:width .35s ease,transform .35s ease}
+    #captionOverlay{position:fixed;z-index:3;max-width:min(560px,72vw);background:#070c12ee;border:1px solid var(--line);border-left:2px solid var(--cyan);border-radius:6px;padding:10px 13px;font:13px/1.5 Inter,Segoe UI,sans-serif;color:var(--ink);pointer-events:none;transition:left .4s ease,top .4s ease,opacity .3s ease;opacity:0}
+    #captionOverlay.show{opacity:1}
     #chart{width:100%;height:92px;border:1px solid var(--line);background:#070c12;border-radius:5px}
+    .palette{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+    .palette button{padding:7px 3px;font-size:10.5px}
+    .palette button.armed{background:#123449;border-color:#246a8a;color:#c9f4ff}
+    .bodyList{margin-top:8px;display:flex;flex-direction:column;gap:5px}
+    .bodyRow{display:flex;align-items:center;gap:6px;padding:6px 9px;border:1px solid var(--line);border-radius:5px;font:12px/1.3 Consolas,monospace;color:var(--ink)}
+    .bodyRow .bodyId{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .bodyRow label{display:inline;color:var(--muted);font-size:10px;margin:0}
+    .bodyRow input[type=number]{width:64px;padding:3px 5px;font:11px Consolas,monospace}
+    .bodyRow button{width:auto;padding:2px 9px;font-size:12px;color:var(--red)}
+    .row-gap{margin-top:9px}
+    #dragHud{position:fixed;z-index:5;padding:6px 10px;background:#09121ddd;border:1px solid var(--line);border-radius:5px;font:12px Consolas,monospace;color:var(--cyan);pointer-events:none;display:none;transform:translate(14px,-50%)}
+    #dragHud.show{display:block}
     @media(max-width:700px){#panel{width:100%;height:55%;bottom:auto;border-right:0;border-bottom:1px solid var(--line)}#status{top:auto;bottom:10px}}
   </style>
 </head>
@@ -26,60 +53,74 @@
 <canvas id="scene"></canvas>
 <aside id="panel">
   <h1>Celestial <span>Three-Body Solver</span></h1>
-  <div class="sub">Retarded 6-around-1 baryon occlusion · explicit Law-IV displacement · C++20/WASM</div>
+  <div class="sub">Retarded 42-cone baryon occlusion · explicit Law-IV displacement · C++20/WASM</div>
 
   <section>
-    <h2>Case</h2>
-    <label for="preset">Preset</label>
+    <h2>Scenario</h2>
+    <label for="preset">Fixed initial-condition scenario</label>
     <select id="preset">
-      <option value="">Loading 25 simulations…</option>
+      <option value="">Loading scenarios…</option>
     </select>
-    <div class="row">
-      <button id="loadPreset">Load preset</button>
-      <button id="importCase">Import JSON</button>
-    </div>
-    <label for="caseJson">Versioned case JSON</label>
-    <textarea id="caseJson" spellcheck="false"></textarea>
-    <input id="caseFile" type="file" accept=".json,application/json" hidden>
-    <div class="row">
-      <button id="create" class="primary">Create session</button>
-      <button id="exportCase">Export case</button>
-    </div>
-  </section>
-
-  <section>
-    <h2>Unlimited chunk execution</h2>
     <div class="row three">
-      <div><label for="chunk">Steps/chunk</label><input id="chunk" type="number" min="1" step="1" value="64"></div>
-      <div><label for="trail">Trail records</label><input id="trail" type="number" min="2" step="1" value="500"></div>
-      <div><label for="speed">Display rate</label><input id="speed" type="number" min=".1" max="20" step=".1" value="1"></div>
+      <button id="create" class="primary">Run persistent</button>
+      <button id="runExplainer" class="primary">Run explainer</button>
+      <button id="continuous" disabled>Stop</button>
     </div>
-    <div class="row">
-      <button id="advance" class="primary">Advance chunk</button>
-      <button id="continuous">Run continuously</button>
-    </div>
-    <div class="row">
-      <button id="saveCheckpoint">Export checkpoint</button>
-      <button id="loadCheckpoint">Resume checkpoint</button>
-    </div>
-    <input id="checkpointFile" type="file" accept=".json,application/json" hidden>
-    <div class="note">Omit <code>duration_s</code> and <code>max_steps</code> for caller-controlled continuation. Every chunk is fixed-step and checkpointable.</div>
   </section>
 
   <section>
-    <h2>Calculated overlays</h2>
-    <div class="checks">
-      <label><input id="showTrails" type="checkbox" checked> trajectories</label>
-      <label><input id="showCones" type="checkbox" checked> 42 cones</label>
-      <label><input id="showSections" type="checkbox" checked> cross-sections</label>
-      <label><input id="showLagrange" type="checkbox" checked> L1–L5</label>
-      <label><input id="showPivot" type="checkbox" checked> baryonic pivot</label>
-      <label><input id="showDisplacement" type="checkbox" checked> displacement volumes</label>
-      <label><input id="showTail" type="checkbox" checked> PENDING tail stages</label>
-      <label><input id="showEndpoints" type="checkbox" checked> equal-radius endpoints</label>
-      <label><input id="showImpulse" type="checkbox" checked> impulse vector</label>
-      <label><input id="rotateView" type="checkbox"> rotate camera</label>
+    <h2>Execution</h2>
+    <div class="note">The selected case supplies all initial conditions, timestep, and SDT mechanism. The worker continuously advances fixed internal chunks until you stop it or the engine reports a collision; no browser control changes the physics.</div>
+    <label for="speedMultiplier">Playback speed (requests more of the same fixed-size steps per poll — never changes timestep_s)</label>
+    <select id="speedMultiplier">
+      <option value="1">1×</option>
+      <option value="2">2×</option>
+      <option value="5">5×</option>
+      <option value="10">10×</option>
+      <option value="25">25×</option>
+      <option value="50">50×</option>
+      <option value="100">100×</option>
+      <option value="250">250×</option>
+      <option value="500">500×</option>
+      <option value="1000">1000×</option>
+    </select>
+    <div id="effectiveSteps" class="note"></div>
+  </section>
+
+  <section>
+    <h2>View</h2>
+    <div class="note">The camera frames the run once on start, then holds still — it does not chase orbiting bodies. Re-frame on demand, or drag/scroll to look around freely at any time.</div>
+    <div class="row three">
+      <button id="viewSide">Side</button>
+      <button id="view45">45°</button>
+      <button id="viewTop">Top-down</button>
     </div>
+  </section>
+
+  <section id="builderSection" hidden>
+    <h2>Scenario Builder</h2>
+    <div class="note">Pick a body, click the scene to place it on the reference plane, drag to set its velocity (arrow length → speed), release to drop it. Click again to place another. The placed configuration is rotated 90° clockwise around its own barycenter before each run, so bodies placed near-edge-on to the camera don't end up hidden behind each other.</div>
+    <label for="builderSpanAU">Placement plane span</label>
+    <select id="builderSpanAU">
+      <option value="0.01">0.01 AU · close binary / moon scale</option>
+      <option value="0.5">0.5 AU</option>
+      <option value="4" selected>4 AU · solar-system scale</option>
+      <option value="40">40 AU · wide / multi-star scale</option>
+    </select>
+    <label>Body palette</label>
+    <div id="palette" class="palette"></div>
+    <label>Placed bodies</label>
+    <div id="bodyList" class="bodyList"></div>
+    <div class="row row-gap">
+      <button id="createCustom" class="primary" disabled>Run custom scenario</button>
+      <button id="clearBuilder" disabled>Clear</button>
+    </div>
+  </section>
+
+  <section>
+    <h2>Guided Explainer</h2>
+    <div id="explainerTitle" class="note">Select “Run explainer” for a slow-motion, solver-driven tour.</div>
+    <div id="explainerCaption" class="explainer">No active explainer run.</div>
   </section>
 
   <section>
@@ -93,12 +134,6 @@
       <div class="card"><small>medium closure</small><b id="dMedium">—</b></div>
       <div class="card"><small>trajectory SHA-256</small><b id="dHash">—</b></div>
       <div class="card"><small>Lagrange roots</small><b id="dLagrange">—</b></div>
-      <div class="card"><small>K<sub>SDT</sub> Earth/Sun</small><b id="dK">—</b></div>
-      <div class="card"><small>candidate stage 8</small><b id="dStage" class="pending">—</b></div>
-      <div class="card"><small>x<sub>pause</sub></small><b id="dPause">—</b></div>
-      <div class="card"><small>endpoint Δv∞</small><b id="dEndpoint">—</b></div>
-      <div class="card"><small>endpoint radius mismatch</small><b id="dRadius">—</b></div>
-      <div class="card"><small>runner closest approach</small><b id="dClosest">—</b></div>
     </div>
     <label>Law-IV displacement ledger (raw SI)</label>
     <div id="dDisplacement" class="ledger">No 2.1 displacement ledger in this case.</div>
@@ -108,10 +143,15 @@
 
   <section>
     <h2>Scope</h2>
-    <div class="note">The production path is retarded external-pressure deficit, not attraction and not a force centre. The anti-solar transported-tail branch is <code>PENDING</code>, non-driving, and stage 8 is a candidate—not a terminal prediction. Point-koppa and Anderson rows remain comparison-only. Visual scaling never enters calculation. This is not flight software.</div>
+    <div class="note">The production path is retarded external-pressure deficit, not attraction and not a force centre. Point-koppa is an internal comparison route, not an observational fit or validation. Visual scaling never enters calculation. This is not flight software.</div>
   </section>
 </aside>
 <div id="status">loading C++/WASM…</div>
+<div id="labelLayer"></div>
+<div id="captionOverlay"></div>
+<div id="tierBar"></div>
+<div id="stageBar"></div>
+<div id="dragHud"></div>
 
 <script type="importmap">
 {"imports":{
@@ -136,15 +176,114 @@ const scene=new THREE.Scene();
 scene.background=new THREE.Color(0x05080d);
 const camera=new THREE.PerspectiveCamera(46,innerWidth/innerHeight,.01,1000);
 camera.position.set(11,8,14);
+// The sidebar panel permanently covers the left ~430px of the canvas —
+// without this, a body sitting at screen-centre in the full canvas can
+// land entirely behind the panel (confirmed: bodies "missing" from a
+// custom scenario were genuinely rendering, at exactly the pixel
+// coordinates the panel occupies — the geometry was correct, only visibly
+// nothing since the panel draws over it). setViewOffset renders just the
+// visible portion of a conceptually wider frame, so content centred in
+// scene-space lands centred in what's actually visible, not centred in
+// the full canvas including the part nobody can see.
+function updateCameraViewport(){
+  camera.aspect=innerWidth/innerHeight;
+  if(innerWidth<=700){camera.clearViewOffset()}
+  else{
+    const panelWidth=Math.min($("panel")?.offsetWidth||430,innerWidth*.7);
+    const fullWidth=innerWidth+panelWidth;
+    camera.aspect=fullWidth/innerHeight;
+    // Crop the LEFT innerWidth×innerHeight of a conceptually WIDER
+    // (fullWidth) frame — imagining the sensor extends further right, not
+    // left. That puts the frame's true centre (fullWidth/2) at pixel
+    // (innerWidth+panelWidth)/2 within the rendered output: right of the
+    // panel's edge, not left of it. x must stay 0 here — offsetting the
+    // crop rightward instead (x=panelWidth) shifts content further
+    // *toward* the panel, which is the bug this replaced.
+    camera.setViewOffset(fullWidth,innerHeight,0,0,innerWidth,innerHeight);
+  }
+  camera.updateProjectionMatrix();
+}
+updateCameraViewport();
 const orbit=new OrbitControls(camera,canvas);
 orbit.enableDamping=true;
+// Any manual drag/zoom/pan permanently releases the auto-tracking camera
+// for the rest of this run — it does not fight the operator for control.
+let manualCameraControl=false;
+orbit.addEventListener("start",()=>{manualCameraControl=true;viewerGoal=null});
 scene.add(new THREE.HemisphereLight(0xa9d9ff,0x080b10,2.2));
 const key=new THREE.DirectionalLight(0xffdfb2,3.5);key.position.set(7,10,8);scene.add(key);
+// Fixed distant reference field — not part of any case, never rescaled by
+// a run's own pivot/extent, so it gives a still backdrop to actually
+// perceive motion (or a held camera) against instead of plain black.
+{
+  const starCount=2600,positions=new Float32Array(starCount*3);
+  for(let i=0;i<starCount;i++){
+    const r=140+Math.random()*60,theta=Math.random()*Math.PI*2,phi=Math.acos(2*Math.random()-1);
+    positions[i*3]=r*Math.sin(phi)*Math.cos(theta);
+    positions[i*3+1]=r*Math.sin(phi)*Math.sin(theta);
+    positions[i*3+2]=r*Math.cos(phi);
+  }
+  const starGeometry=new THREE.BufferGeometry();
+  starGeometry.setAttribute("position",new THREE.BufferAttribute(positions,3));
+  const stars=new THREE.Points(starGeometry,new THREE.PointsMaterial({color:0xcfe3ff,size:.4,sizeAttenuation:true,transparent:true,opacity:.75}));
+  scene.add(stars);
+}
 const root=new THREE.Group();scene.add(root);
-const trailsGroup=new THREE.Group(),conesGroup=new THREE.Group(),sectionsGroup=new THREE.Group(),lagrangeGroup=new THREE.Group(),pivotGroup=new THREE.Group(),bodiesGroup=new THREE.Group(),displacementGroup=new THREE.Group(),tailGroup=new THREE.Group(),endpointsGroup=new THREE.Group(),impulseGroup=new THREE.Group();
-root.add(trailsGroup,conesGroup,sectionsGroup,lagrangeGroup,pivotGroup,bodiesGroup,displacementGroup,tailGroup,endpointsGroup,impulseGroup);
+const trailsGroup=new THREE.Group(),conesGroup=new THREE.Group(),sectionsGroup=new THREE.Group(),lagrangeGroup=new THREE.Group(),pivotGroup=new THREE.Group(),bodiesGroup=new THREE.Group(),displacementGroup=new THREE.Group(),explainerGroup=new THREE.Group(),builderGroup=new THREE.Group();
+root.add(trailsGroup,conesGroup,sectionsGroup,lagrangeGroup,pivotGroup,bodiesGroup,displacementGroup,explainerGroup,builderGroup);
 const colors=[0xffbd67,0x63d9ff,0xd58cff];
-let lastResult=null,continuous=false,busy=false,requestId=0,allFrames=[];
+const SCENARIO_CHUNK_STEPS=512,EXPLAINER_TICK_STEPS=40,EXPLAINER_TICK_MS=550,STAGE_AUTO_MS=6000,STAGE_OVERRIDE_MS=30000,TRAIL_RECORD_LIMIT=500;
+// Retarded 7-channel occlusion is O(pairs) with a heavy per-pair quadrature
+// cost, and pairs grow as n(n-1)/2 — the 3-body baseline (3 pairs) is fast
+// enough for a 512-step chunk; a 9-body system (36 pairs, 12x the work)
+// hitting that same fixed chunk size is what was reading as a multi-minute
+// freeze. Scale the chunk to the case's actual body count instead of a
+// number tuned for exactly three bodies.
+function stepsForBodyCount(baseSteps){
+  const n=activeCase?.bodies?.length||3;
+  const pairs=Math.max(1,n*(n-1)/2);
+  return Math.max(2,Math.round(baseSteps*3/pairs));
+}
+// Real radius_m/baryon_count, copied verbatim from this repo's own already-
+// validated case files (sdt-solar-system-j2000-1h-10y.sdtcase.json and
+// jpl-sun-earth-moon-j2000.sdtcase.json) rather than re-derived — this is
+// the scenario-builder's body palette, and "five stars" just means five
+// placed instances of the Sun entry.
+const AU_M=1.495978707e11;
+const BODY_CATALOG=[
+  {type:"Sun",radius_m:695700000,baryon_count:"1189103151064891689520309602880407308966306831851814125568"},
+  {type:"Mercury",radius_m:2439700,baryon_count:"197360799427845991512216860794209981242029232881664"},
+  {type:"Venus",radius_m:6051800,baryon_count:"2910101757641514349599825014982693880815482289782784"},
+  {type:"Earth",radius_m:6371010,baryon_count:"3570561831943841900782093571431079707813357645987840"},
+  {type:"Mars",radius_m:3389500,baryon_count:"383655141016155390431635323880422057961277030924288"},
+  {type:"Jupiter",radius_m:69911000,baryon_count:"1134864952512608611276905358715189622458470478381056000"},
+  {type:"Saturn",radius_m:58232000,baryon_count:"339789878364248222619583174468862451329492739938058240"},
+  {type:"Uranus",radius_m:25362000,baryon_count:"51900551326319443804793515763257915376082722687549440"},
+  {type:"Neptune",radius_m:24622000,baryon_count:"61229019271769993898861792175054789616386442205855744"},
+  {type:"Moon",radius_m:1737400,baryon_count:"43925314967266381683000603202333653722143467120720"},
+];
+let armedBodyType=null,placingBody=null,builderBodies=[];
+const builderIdCounts=new Map();
+let activeCase=null,activePreset=null,lastResult=null,continuous=false,busy=false,requestId=0,allFrames=[],explainerActive=false,explainerTimer=0,viewerGoal=null,bodyVisuals=new Map();
+let stagePhases=[],stageIndex=0,stageAutoTimer=0,stageOverrideTimer=0,stageAutoEnabled=true,activeTier="lay";
+let needsInitialFocus=true; // frame Earth+Moon immediately on a new run, not the wide Sun-dominated default
+// Between ticks, nothing was moving the bodies at all — updateScene only
+// runs once per completed advance() call, so positions were frozen and
+// jumped at each tick boundary. Invisible at 3-body's sub-second ticks,
+// visibly stuttering at 9-body's multi-second ones. Fixed by extrapolating
+// each body's real position from its own velocity every animation frame,
+// corrected back to the true value whenever the next tick's real data
+// arrives — not fabricated motion, just coasting on the same physics
+// between the samples we actually have.
+let currentScale=1,currentPivot=[0,0,0];
+let lastTickPerfMs=0,simSecondsPerRealMs=0,lastTickSimSeconds=0;
+let freshTickFrames=[]; // set by advance(), just before this tick's own frames get folded into accumulated history
+let currentTickFrames=[],tickStartSimS=0,tickEndSimS=0; // read by the render loop to play back the real path between ticks
+// Computed once per run, not every tick: camera distance feeds the boost,
+// and the boost feeds the camera-framing distance (via candidateViewGoal),
+// so recomputing both every tick chases a moving target and never settles
+// on a stable size. One measurement at run start, held fixed after that.
+let cachedPairBoost=null;
 const pending=new Map();
 const worker=new Worker("js/celestial-three-body-worker.js");
 worker.onmessage=event=>{
@@ -153,148 +292,960 @@ worker.onmessage=event=>{
   event.data.ok?item.resolve(event.data.result):item.reject(new Error(event.data.error));
 };
 function call(type,payload={}){return new Promise((resolve,reject)=>{const id=++requestId;pending.set(id,{resolve,reject});worker.postMessage({id,type,payload});});}
+window.__sdtCall=call; // raw WASM RPC, bypassing advance()'s own trajectory trimming — for inspecting exactly what the engine itself returns
 function setStatus(message,error=false){status.textContent=message;status.classList.toggle("error",error)}
 
 let presetCatalog=[];
 async function loadPreset(){
   const preset=presetCatalog.find(item=>item.id===$("preset").value);
   if(!preset)throw new Error("Select a simulation preset");
-  $("loadPreset").disabled=true;$("create").disabled=true;
-  try{
-    const response=await fetch(`cases/celestial/${preset.file}`,{cache:"no-store"});
-    if(!response.ok)throw new Error(`case ${preset.file}: HTTP ${response.status}`);
-    const value=await response.json();
-    $("caseJson").value=JSON.stringify(value,null,2);
-    setStatus(`${presetCatalog.length} simulations · ${preset.classification}`);
-  }finally{$("loadPreset").disabled=false;$("create").disabled=false}
+  const response=await fetch(`cases/celestial/${preset.file}`,{cache:"no-store"});
+  if(!response.ok)throw new Error(`case ${preset.file}: HTTP ${response.status}`);
+  activeCase=await response.json();
+  activePreset=preset;
+  setStatus(`${presetCatalog.length} scenarios · ${preset.classification}`);
 }
 async function initializePresets(){
-  $("loadPreset").disabled=true;$("create").disabled=true;
   const response=await fetch("cases/celestial/catalog.json",{cache:"no-store"});
   if(!response.ok)throw new Error(`preset catalog: HTTP ${response.status}`);
   const catalog=await response.json();
-  if(catalog.count!==25||catalog.presets?.length!==25)throw new Error("preset catalog must contain exactly 25 simulations");
+  if(!Array.isArray(catalog.presets)||catalog.count!==catalog.presets.length||catalog.count<1)throw new Error("preset catalog count does not match its scenarios");
   presetCatalog=catalog.presets;
   $("preset").replaceChildren(...presetCatalog.map(item=>new Option(`${item.label} · ${item.classification}`,item.id)));
+  $("preset").append(new Option("Custom scenario (scenario builder)","__custom__"));
   await loadPreset();
 }
+function clearRenderedScene(){
+  [bodiesGroup,trailsGroup,conesGroup,sectionsGroup,lagrangeGroup,pivotGroup,displacementGroup,explainerGroup].forEach(clear);
+  bodyVisuals=new Map();lastResult=null;
+  if(window.__sdtDebug)window.__sdtDebug.bodyVisuals=bodyVisuals; // keep the debug hook pointing at the live map, not the just-cleared one
+}
+$("preset").addEventListener("change",()=>{
+  const isCustom=$("preset").value==="__custom__";
+  if(isCustom){
+    // Whatever preset was running keeps ticking (and keeps re-rendering
+    // itself) until something stops it — picking "Custom scenario" from the
+    // menu didn't do that, so the scene stayed on the old preset and every
+    // placement click silently no-op'd against the still-continuous guard
+    // in the pointerdown handler. Stop it and clear the stale render so the
+    // builder actually starts from an empty scene.
+    if(continuous)$("continuous").click();
+    clearRenderedScene();
+  }
+  $("builderSection").hidden=!isCustom;
+  setRunButtonsDisabled(continuous||busy);
+});
 
-function clear(group){while(group.children.length){const child=group.children.pop();child.geometry?.dispose();if(Array.isArray(child.material))child.material.forEach(m=>m.dispose());else child.material?.dispose()}}
+function clear(group){while(group.children.length){const child=group.children.pop();child.traverse(node=>{node.geometry?.dispose();if(Array.isArray(node.material))node.material.forEach(material=>material.dispose());else node.material?.dispose()})}}
 function format(value,unit=""){return Number.isFinite(value)?`${value.toExponential(4)}${unit}`:"—"}
-function download(name,data){const blob=new Blob([data],{type:"application/json"});const link=document.createElement("a");link.href=URL.createObjectURL(blob);link.download=name;link.click();setTimeout(()=>URL.revokeObjectURL(link.href),0)}
-function parseCase(){return JSON.parse($("caseJson").value)}
+function vectorMagnitude(vector){return Math.hypot(...vector)}
+function solverVector(vector){return new THREE.Vector3(vector[0],vector[2],vector[1])}
+function setExplainerText(title,caption){$("explainerTitle").textContent=title;$("explainerCaption").textContent=caption}
 
+// --- Scenario builder: pick real bodies, place them by click, drag out a
+// velocity vector, run the real N-body engine on the result. -------------
+function setRunButtonsDisabled(disabled){
+  const isCustomMode=$("preset").value==="__custom__";
+  $("create").disabled=disabled||isCustomMode;$("runExplainer").disabled=disabled||isCustomMode;
+  $("createCustom").disabled=disabled||builderBodies.length<2;
+}
+function renderPalette(){
+  $("palette").replaceChildren(...BODY_CATALOG.map(entry=>{
+    const b=document.createElement("button");
+    b.textContent=entry.type;
+    b.classList.toggle("armed",armedBodyType===entry);
+    b.onclick=()=>{armedBodyType=armedBodyType===entry?null:entry;renderPalette()};
+    return b;
+  }));
+}
+function generateBodyId(type){
+  const n=(builderIdCounts.get(type)||0)+1;
+  builderIdCounts.set(type,n);
+  return `${type}-${n}`;
+}
+function builderSpanAU(){return Number($("builderSpanAU").value)}
+// scene units per real metre — mirrors the playback convention (scale=8/extent,
+// updateScene) so a placed scene renders at a consistent visual size before
+// any physics result exists to derive that scale from.
+function builderSceneScale(){return 8/(AU_M*builderSpanAU()/2)}
+function bodyVisualRadius(entry){return Math.max(.06,entry.radius_m*builderSceneScale())}
+// A fixed 30 km/s of real speed per scene-unit of drag, independent of the
+// current placement-plane zoom, so a given drag gesture always means the
+// same physical speed rather than a different one at every zoom level.
+const VELOCITY_MPS_PER_SCENE_UNIT=30000;
+const placementPlane=new THREE.Plane(new THREE.Vector3(0,1,0),0);
+const placementRaycaster=new THREE.Raycaster();
+function screenToScenePoint(clientX,clientY){
+  const rect=renderer.domElement.getBoundingClientRect();
+  const ndc=new THREE.Vector2(((clientX-rect.left)/rect.width)*2-1,-((clientY-rect.top)/rect.height)*2+1);
+  placementRaycaster.setFromCamera(ndc,camera);
+  const hit=new THREE.Vector3();
+  return placementRaycaster.ray.intersectPlane(placementPlane,hit)?hit:null;
+}
+// Editable, not just a readout — velocity_m_s here is the exact array that
+// goes into the submitted case (assembleCustomCase reads builderBodies
+// directly), so typing a number and re-running is a direct way to confirm
+// nothing is hardcoded: change the value, the submitted case changes.
+function updateBuilderArrowFor(body){
+  const existing=builderGroup.children.find(c=>c.userData.builderArrowFor===body.id);
+  if(existing){existing.geometry?.dispose();existing.material?.dispose();builderGroup.remove(existing)}
+  const anchor=builderGroup.children.find(c=>c.userData.builderId===body.id)?.position;
+  if(!anchor)return;
+  const dx=(body.velocity_m_s[0]/VELOCITY_MPS_PER_SCENE_UNIT);
+  const dy=(body.velocity_m_s[1]/VELOCITY_MPS_PER_SCENE_UNIT);
+  const length=Math.hypot(dx,dy);
+  if(length<1e-6)return;
+  const direction=new THREE.Vector3(dx,0,dy).normalize();
+  const arrow=new THREE.ArrowHelper(direction,anchor,length,0xfff06a,Math.min(.3,length*.25),Math.min(.15,length*.12));
+  arrow.userData.builderArrowFor=body.id;
+  builderGroup.add(arrow);
+}
+function renderBodyList(){
+  $("bodyList").replaceChildren(...builderBodies.map(b=>{
+    const row=document.createElement("div");row.className="bodyRow";
+    const idLabel=document.createElement("span");idLabel.className="bodyId";idLabel.textContent=b.id;
+    const vxLabel=document.createElement("label");vxLabel.textContent="vx km/s";
+    const vx=document.createElement("input");vx.type="number";vx.step="0.1";vx.value=(b.velocity_m_s[0]/1000).toFixed(2);
+    const vyLabel=document.createElement("label");vyLabel.textContent="vy km/s";
+    const vy=document.createElement("input");vy.type="number";vy.step="0.1";vy.value=(b.velocity_m_s[1]/1000).toFixed(2);
+    const apply=()=>{
+      b.velocity_m_s[0]=Number(vx.value||0)*1000;
+      b.velocity_m_s[1]=Number(vy.value||0)*1000;
+      updateBuilderArrowFor(b);
+    };
+    vx.oninput=apply;vy.oninput=apply;
+    const remove=document.createElement("button");remove.textContent="×";remove.onclick=()=>removeBuilderBody(b.id);
+    row.append(idLabel,vxLabel,vx,vyLabel,vy,remove);
+    return row;
+  }));
+  if(!builderBodies.length){const empty=document.createElement("div");empty.className="note";empty.textContent="No bodies placed yet.";$("bodyList").append(empty)}
+  $("clearBuilder").disabled=builderBodies.length===0;
+  setRunButtonsDisabled(continuous||busy);
+}
+function removeBuilderBody(id){
+  builderBodies=builderBodies.filter(b=>b.id!==id);
+  [...builderGroup.children].forEach(child=>{
+    if(child.userData.builderId===id||child.userData.builderArrowFor===id){
+      builderGroup.remove(child);child.geometry?.dispose();child.material?.dispose();
+    }
+  });
+  renderBodyList();
+}
+renderer.domElement.addEventListener("pointerdown",event=>{
+  if(!armedBodyType||continuous||busy||placingBody)return;
+  const point=screenToScenePoint(event.clientX,event.clientY);
+  if(!point)return;
+  orbit.enabled=false;
+  const id=generateBodyId(armedBodyType.type);
+  placingBody={id,entry:armedBodyType,anchor:point.clone()};
+  const mesh=new THREE.Mesh(new THREE.SphereGeometry(bodyVisualRadius(armedBodyType),20,14),new THREE.MeshStandardMaterial({color:colors[builderGroup.children.length%colors.length],roughness:.5}));
+  mesh.position.copy(point);mesh.userData.builderId=id;
+  builderGroup.add(mesh);
+  $("dragHud").classList.add("show");
+});
+renderer.domElement.addEventListener("pointermove",event=>{
+  if(!placingBody)return;
+  const point=screenToScenePoint(event.clientX,event.clientY);
+  if(!point)return;
+  const existingArrow=builderGroup.children.find(c=>c.userData.builderArrowFor===placingBody.id);
+  if(existingArrow)builderGroup.remove(existingArrow);
+  const delta=point.clone().sub(placingBody.anchor);
+  if(delta.lengthSq()>1e-10){
+    const arrow=new THREE.ArrowHelper(delta.clone().normalize(),placingBody.anchor,delta.length(),0xfff06a,Math.min(.3,delta.length()*.25),Math.min(.15,delta.length()*.12));
+    arrow.userData.builderArrowFor=placingBody.id;
+    builderGroup.add(arrow);
+  }
+  const speedKms=delta.length()*VELOCITY_MPS_PER_SCENE_UNIT/1000;
+  $("dragHud").textContent=`${placingBody.id} → ${speedKms.toFixed(1)} km/s`;
+  $("dragHud").style.left=`${event.clientX}px`;$("dragHud").style.top=`${event.clientY}px`;
+});
+addEventListener("pointerup",event=>{
+  if(!placingBody)return;
+  const point=screenToScenePoint(event.clientX,event.clientY)||placingBody.anchor;
+  const delta=point.clone().sub(placingBody.anchor);
+  const scale=builderSceneScale();
+  // Placement plane is scene-Y=0, which is real-Z=0 under the same axis
+  // convention updateScene's point() already uses (scene X=real X, scene
+  // Y=real Z, scene Z=real Y) — so this is the ecliptic-like plane every
+  // existing case already sits near, not a new convention.
+  builderBodies.push({
+    id:placingBody.id,radius_m:placingBody.entry.radius_m,baryon_count:placingBody.entry.baryon_count,
+    position_m:[placingBody.anchor.x/scale,placingBody.anchor.z/scale,0],
+    velocity_m_s:[delta.x*VELOCITY_MPS_PER_SCENE_UNIT,delta.z*VELOCITY_MPS_PER_SCENE_UNIT,0],
+  });
+  placingBody=null;armedBodyType=null;orbit.enabled=true;
+  $("dragHud").classList.remove("show");
+  renderPalette();renderBodyList();
+});
+$("clearBuilder").onclick=()=>{builderBodies=[];clear(builderGroup);renderBodyList()};
+function timestepForSpan(spanAU){
+  if(spanAU<=0.02)return 60;    // matches jpl-sun-earth-moon-j2000's validated close-orbit timestep
+  if(spanAU<=8)return 3600;     // matches sdt-solar-system-j2000-1h-10y's validated planet-scale timestep
+  return 21600;                  // wider scene only — never touched by the speed control
+}
+// Mass-weighted (baryon_count-weighted) barycenter of the real X/Y position
+// components — Number(BigInt) loses precision far below the digits that
+// matter for a weighted average, so this is safe even at Sun-scale counts.
+function barycenterXY(bodies){
+  let wSum=0,xSum=0,ySum=0;
+  bodies.forEach(b=>{
+    const w=Number(BigInt(b.baryon_count));
+    wSum+=w;xSum+=w*b.position_m[0];ySum+=w*b.position_m[1];
+  });
+  return wSum>0?[xSum/wSum,ySum/wSum]:[0,0];
+}
+// Rotates a real X/Y point 90° clockwise (viewed from above, matching the
+// existing top-down VIEW_ANGLES convention) around a given centre.
+function rotatePoint90CW(x,y,cx,cy){return [cx+(y-cy),cy-(x-cx)]}
+// A vector (velocity) rotates the same way but has no centre to rotate
+// around — it's the position formula with (cx,cy)=(0,0).
+function rotateVector90CW(x,y){return [y,-x]}
+// Placed bodies can land nearly edge-on to the default camera (everything
+// clicked along roughly the same screen line projects to roughly the same
+// real-space line), which reads as "nothing rendered" even though the run
+// is genuinely executing. Rotating the whole configuration 90° clockwise
+// around its own barycenter before each run spreads it across the view
+// instead — applied fresh from builderBodies every run, not accumulated,
+// so re-running never double-rotates.
+function rotatedBuilderBodies(){
+  const [cx,cy]=barycenterXY(builderBodies);
+  return builderBodies.map(b=>{
+    const [px,py]=rotatePoint90CW(b.position_m[0],b.position_m[1],cx,cy);
+    const [vx,vy]=rotateVector90CW(b.velocity_m_s[0],b.velocity_m_s[1]);
+    return {...b,position_m:[px,py,0],velocity_m_s:[vx,vy,0]};
+  });
+}
+function assembleCustomCase(){
+  return {
+    contract_version:"3.0.0",
+    case_id:`custom-${Date.now()}`,
+    problem_class:"sdt_occlusion_nbody",
+    frame:{type:"inertial_cartesian",units:"SI"},
+    forces:[{type:"retarded_seven_circle_occlusion",pressure_source:"sdt_law_I_P_conv",propagation_speed:"c"}],
+    bodies:rotatedBuilderBodies().map(b=>({id:b.id,baryon_count:b.baryon_count,radius_m:b.radius_m,collision_radius_m:b.radius_m,position_m:b.position_m,velocity_m_s:b.velocity_m_s})),
+    integrator:"velocity_verlet",
+    timestep_s:timestepForSpan(builderSpanAU()),
+    duration_s:315576000,
+    record_every_steps:1,
+    tolerances:{retarded_time_s:1e-9,max_retarded_iterations:64}, // exact values already validated in sdt-solar-system-j2000-1h-10y.sdtcase.json
+    gates:[],
+  };
+}
+// Custom scenarios are free-run only, no guided tour — the explainer reads
+// result.cones, which the N-body engine never populates (its per-pair data
+// is under pair_matrix/interactions instead), so it never had anything to
+// show here.
+async function runCustomScenario(){
+  if(busy||continuous||builderBodies.length<2)return;
+  setRunButtonsDisabled(true);resetExplainer();
+  needsInitialFocus=true;manualCameraControl=false;cachedPairBoost=null;
+  activeCase=assembleCustomCase();activePreset=null;explainerActive=false;
+  clear(builderGroup);
+  try{
+    await createSession();continuous=true;$("continuous").disabled=false;renderEffectiveSteps();advance();
+  }catch(error){setStatus(error.message,true);setRunButtonsDisabled(false)}
+}
+$("createCustom").onclick=()=>runCustomScenario();
+window.__sdtBuilderDebug=()=>({builderBodies,armedBodyType,placingBody});
+renderPalette();renderBodyList();
+
+// Illustrative procedural map (ocean base + landmass blobs), not a satellite
+// texture — used only when the run is paused, so there is something stable
+// to look at instead of a spin nobody could read anyway.
+let earthTexture=null;
+function getEarthTexture(){
+  if(earthTexture)return earthTexture;
+  const canvas=document.createElement("canvas");canvas.width=512;canvas.height=256;
+  const ctx=canvas.getContext("2d");
+  ctx.fillStyle="#1c4f7c";ctx.fillRect(0,0,512,256);
+  const blob=(cx,cy,w,h,rot,fill)=>{ctx.save();ctx.fillStyle=fill;ctx.translate(cx,cy);ctx.rotate(rot);ctx.beginPath();ctx.ellipse(0,0,w,h,0,0,Math.PI*2);ctx.fill();ctx.restore()};
+  blob(150,95,72,48,.3,"#3f7d4a");blob(125,155,44,58,-.2,"#3f7d4a");
+  blob(335,80,92,36,-.15,"#3f7d4a");blob(300,58,42,26,.4,"#3f7d4a");
+  blob(92,192,36,30,.1,"#3f7d4a");blob(402,182,50,28,-.3,"#3f7d4a");
+  blob(160,102,30,18,.5,"#2f5f38");blob(322,72,35,15,-.1,"#2f5f38");
+  const texture=new THREE.CanvasTexture(canvas);
+  texture.colorSpace=THREE.SRGBColorSpace;
+  earthTexture=texture;
+  return texture;
+}
+
+// Real sidereal periods only; a body with no declared period here gets no
+// spin rather than an invented one. (The Sun's is technically HELIO, not
+// GEO, but one mechanism serves both.)
+const BODY_SIDEREAL_ROTATION_S={Sun:2164320,Earth:86164.1,Moon:2360591.5};
 function updateScene(result){
   lastResult=result;
   window.__sdtCelestialLastResult=result;
-  [bodiesGroup,trailsGroup,conesGroup,sectionsGroup,lagrangeGroup,pivotGroup,displacementGroup,tailGroup,endpointsGroup,impulseGroup].forEach(clear);
-  const states=result.checkpoint.states;
-  const pivot=result.pivots.full_position_m;
+  [bodiesGroup,trailsGroup,conesGroup,sectionsGroup,lagrangeGroup,pivotGroup,displacementGroup,explainerGroup].forEach(clear);
+  bodyVisuals=new Map();
+  // Assigned after the reassignment above (not before) so this always points
+  // at the live map being populated this tick, not the previous tick's map
+  // (bodyVisuals=new Map() orphans the old object; grabbing a reference to it
+  // earlier silently goes stale).
+  window.__sdtDebug={scene,camera,bodiesGroup,bodyVisuals,activeCase};
+  window.__sdtExtrapDiag=()=>({lastTickPerfMs,simSecondsPerRealMs,lastTickSimSeconds,currentScale});
+  // The N-body engine (sdt_occlusion_nbody) has no checkpoint/pivots fields
+  // the three-body one has — same trajectory[].states shape underneath, so
+  // fall back to the latest frame and to the first body's position as a
+  // reasonable visual centre (the Sun, for a solar-system-scale case).
+  const states=result.checkpoint?.states??result.trajectory.at(-1).states;
+  const pivot=result.pivots?.full_position_m??states[0].position_m;
   let extent=1;
   states.forEach(s=>{extent=Math.max(extent,Math.hypot(...s.position_m.map((v,i)=>v-pivot[i])))});
   const scale=8/extent;
+  currentScale=scale;currentPivot=pivot;
   const point=v=>new THREE.Vector3((v[0]-pivot[0])*scale,(v[2]-pivot[2])*scale,(v[1]-pivot[1])*scale);
+  // Sim-seconds-per-real-millisecond, measured from the last two ticks'
+  // actual timing — paces how fast the render loop scrubs through this
+  // tick's own real frames below; never alters the physics itself.
+  const timeS=result.time_s??result.trajectory.at(-1).time_s;
+  {
+    const nowPerf=performance.now();
+    if(lastTickPerfMs>0){
+      const realDeltaMs=Math.max(1,nowPerf-lastTickPerfMs);
+      const simDeltaS=timeS-lastTickSimSeconds;
+      if(simDeltaS>0)simSecondsPerRealMs=simDeltaS/realDeltaMs;
+    }
+    lastTickPerfMs=nowPerf;lastTickSimSeconds=timeS;
+  }
+  // The frames this tick actually computed, in order — the render loop
+  // plays through these (real positions, not a straight-line guess) over
+  // the real time until the next tick lands, at the rate above. A tick
+  // that lands faster than expected just holds on its last frame until
+  // the next one arrives, same as the old coast-on-velocity tail case.
+  currentTickFrames=freshTickFrames;
+  tickStartSimS=currentTickFrames.length?currentTickFrames[0].time_s:timeS;
+  tickEndSimS=timeS;
   const stateById=new Map(states.map(s=>[s.id,s]));
+  const packetById=new Map((result.packet_ledger?.bodies||[]).map(body=>[body.id,body]));
+  const pointById=new Map(),radiusById=new Map();
+  // True linear scale (radius in scene units ∝ real radius_m) so Earth and
+  // Moon sit at their real proportion to each other and to the Sun. That
+  // alone makes them sub-pixel next to the Sun, so — only for that pair,
+  // sharing one factor so their 3.67:1 ratio survives — boost up to a
+  // minimum on-screen size that grows as the live camera pulls back. Zoom
+  // in close and the boost relaxes back to 1 (true scale); zoom out with
+  // the Sun in frame and it grows to keep them visible.
+  const largestRadius_m=Math.max(...activeCase.bodies.map(b=>b.radius_m));
+  const LINEAR_SCALE=.7/largestRadius_m;
+  const earthState=states.find(s=>s.id==="Earth");
+  const moonState=states.find(s=>s.id==="Moon");
+  if(cachedPairBoost===null&&earthState){
+    let pairBoost=1;
+    const earthBody=activeCase.bodies.find(b=>b.id==="Earth");
+    const moonBody=activeCase.bodies.find(b=>b.id==="Moon");
+    const earthTrueRadius=earthBody.radius_m*LINEAR_SCALE;
+    const earthPoint=point(earthState.position_m);
+    const camDist=Math.max(.1,camera.position.distanceTo(earthPoint));
+    const fovRad=camera.fov*Math.PI/180;
+    const minVisibleWorldRadius=(6*camDist*Math.tan(fovRad/2))/(innerHeight/2);
+    pairBoost=Math.max(1,minVisibleWorldRadius/earthTrueRadius);
+    // The pair must never grow into each other: cap so their combined
+    // boosted radii stay clear inside their own real separation, with
+    // margin. This is the actual constraint — a flat minimum-size floor
+    // (what was here before) ignores their mutual gap entirely and was
+    // forcing the two spheres to overlap outright at real lunar distance.
+    if(moonState){
+      const moonTrueRadius=moonBody.radius_m*LINEAR_SCALE;
+      const gap=earthPoint.distanceTo(point(moonState.position_m));
+      const maxBoost=(gap*.6)/(earthTrueRadius+moonTrueRadius);
+      pairBoost=Math.min(pairBoost,Math.max(1,maxBoost));
+    }
+    cachedPairBoost=pairBoost;
+  }
+  const pairBoost=cachedPairBoost??1;
   states.forEach((state,index)=>{
-    const body=parseCase().bodies.find(b=>b.id===state.id);
-    const radius=Math.max(.14,Math.min(.7,.12*Math.log10(Math.max(10,body.radius_m))));
-    const mesh=new THREE.Mesh(new THREE.SphereGeometry(radius,28,18),new THREE.MeshStandardMaterial({color:colors[index],roughness:.42,metalness:.18,emissive:colors[index],emissiveIntensity:.13}));
-    mesh.position.copy(point(state.position_m));bodiesGroup.add(mesh);
+    const body=activeCase.bodies.find(b=>b.id===state.id);
+    // trueRadius is the real (unboosted) size — used for camera-framing
+    // distance so a large visibility boost never makes the frame think the
+    // body itself is huge and back the camera absurdly far off (or, once
+    // that distance feeds back into the boost calibration below, absurdly
+    // close). radius (boosted, Earth/Moon only) is for rendering only.
+    const trueRadius=Math.max(.002,body.radius_m*LINEAR_SCALE);
+    const radius=(state.id==="Earth"||state.id==="Moon")
+      ?Math.max(.002,body.radius_m*LINEAR_SCALE*pairBoost)
+      :Math.max(.05,body.radius_m*LINEAR_SCALE);
+    const bodyGroup=new THREE.Group();bodyGroup.position.copy(point(state.position_m));bodiesGroup.add(bodyGroup);
+    const period=BODY_SIDEREAL_ROTATION_S[state.id];
+    if(period)bodyGroup.quaternion.setFromAxisAngle(new THREE.Vector3(0,1,0),2*Math.PI*((timeS/period)%1));
+    pointById.set(state.id,bodyGroup.position.clone());radiusById.set(state.id,radius);
+    // Earth: a plain blue dot while the run is advancing (a spin nobody
+    // could read at that rate), a static illustrative map while paused —
+    // running/paused is the whole rule, not distance.
+    const material=state.id==="Earth"&&!continuous
+      ?new THREE.MeshStandardMaterial({map:getEarthTexture(),roughness:.65,metalness:.05})
+      :state.id==="Earth"
+        ?new THREE.MeshStandardMaterial({color:0x2f6fd9,roughness:.5,metalness:.1,emissive:0x2f6fd9,emissiveIntensity:.1})
+        :state.id==="Moon"
+          ?new THREE.MeshStandardMaterial({color:0x9a9a9a,roughness:.92,metalness:.02})
+          :new THREE.MeshStandardMaterial({color:colors[index],roughness:.42,metalness:.18,emissive:colors[index],emissiveIntensity:.13});
+    const mesh=new THREE.Mesh(new THREE.SphereGeometry(radius,28,18),material);
+    bodyGroup.add(mesh);
+    const ledger=packetById.get(state.id);
+    const focusBox=new THREE.Box3().setFromCenterAndSize(bodyGroup.position,new THREE.Vector3(radius*2.3,radius*2.3,radius*2.3));
+    const invisibleBox=new THREE.Box3Helper(focusBox,colors[index]);invisibleBox.visible=false;explainerGroup.add(invisibleBox);
+    bodyVisuals.set(state.id,{bodyGroup,focusBox,radius,trueRadius,index,baryonCount:ledger?.baryon_count||body.baryon_count});
     const displacement=result.displacement_ledger?.find(row=>row.id===state.id);
     if(displacement?.declared){
       const shell=new THREE.Mesh(new THREE.SphereGeometry(radius*1.18,24,16),new THREE.MeshBasicMaterial({color:colors[index],wireframe:true,transparent:true,opacity:.36}));
-      shell.position.copy(mesh.position);displacementGroup.add(shell);
+      shell.position.copy(bodyGroup.position);displacementGroup.add(shell);
     }
     const points=result.trajectory.map(frame=>point(frame.states[index].position_m));
     if(points.length>1){const line=new THREE.Line(new THREE.BufferGeometry().setFromPoints(points),new THREE.LineBasicMaterial({color:colors[index],transparent:true,opacity:.8}));trailsGroup.add(line)}
   });
-  result.cones.forEach((cone,index)=>{
+  // The camera frames the run ONCE, on its first tick, and then holds
+  // still — it does not chase bodies as they orbit. A cheap case can land
+  // physics ticks many times a second while covering hours of simulated
+  // time each; continuously re-deriving "broadside to the current Earth-
+  // Moon line" turned into the camera visibly spinning to keep up with an
+  // orbit compressed into a few real seconds.
+  //
+  // The automatic initial view is the wide, origin-centred framing, not
+  // the Earth/Moon close-up: Earth has real orbital motion, and at this
+  // playback speed a close-up locked onto Earth's tick-1 position goes
+  // stale within a couple of real seconds as Earth visibly moves away from
+  // wherever the camera was aimed — a static camera has to be wide enough
+  // to hold the body's whole orbit, not just its starting point. The tight
+  // Earth/Moon framing is still available on demand via the 45° button.
+  if(!manualCameraControl&&!explainerActive&&needsInitialFocus){
+    needsInitialFocus=false;
+    currentViewIndex=1;
+    viewerGoal=genericFramingGoal(currentViewIndex);
+  }
+  (result.cones||[]).forEach((cone,index)=>{
     const target=stateById.get(cone.target);if(!target)return;
+    // Scaled to the target's own radius — these used to be fixed world-unit
+    // constants (a 0.32-0.35 ring, a ~2-unit line), which was fine when every
+    // body's radius sat in the same 0.14-0.7 band under the old log scale.
+    // Against Earth/Moon's new true-scale radius (~0.01) a fixed 0.35 ring
+    // is 30+ times the body itself — that oversized ring is what was
+    // actually rendering as the giant flat shape, not anything in the new
+    // shell code.
+    const targetRadius=radiusById.get(target.id)??.35;
     const centre=point(target.position_m);const axis=new THREE.Vector3(cone.axis[0],cone.axis[2],cone.axis[1]).normalize();
-    const a=centre.clone().addScaledVector(axis,-.75),b=centre.clone().addScaledVector(axis,1.25);
+    const a=centre.clone().addScaledVector(axis,-targetRadius*2.1),b=centre.clone().addScaledVector(axis,targetRadius*3.6);
     const line=new THREE.Line(new THREE.BufferGeometry().setFromPoints([a,b]),new THREE.LineBasicMaterial({color:cone.shield_fraction>.5?0xff6b6b:(index%7===0?0xffbd67:0x4aa8d8),transparent:true,opacity:.34}));
     conesGroup.add(line);
-    if(cone.channel===0){const ring=new THREE.Mesh(new THREE.RingGeometry(.32,.35,36),new THREE.MeshBasicMaterial({color:0x63d9ff,side:THREE.DoubleSide,transparent:true,opacity:.35}));ring.position.copy(centre);ring.quaternion.setFromUnitVectors(new THREE.Vector3(0,0,1),axis);sectionsGroup.add(ring)}
+    if(cone.channel===0){const ring=new THREE.Mesh(new THREE.RingGeometry(targetRadius*.91,targetRadius*1,36),new THREE.MeshBasicMaterial({color:0x63d9ff,side:THREE.DoubleSide,transparent:true,opacity:.35}));ring.position.copy(centre);ring.quaternion.setFromUnitVectors(new THREE.Vector3(0,0,1),axis);sectionsGroup.add(ring)}
   });
-  (result.lagrange||[]).forEach(rootPoint=>{const mesh=new THREE.Mesh(new THREE.OctahedronGeometry(.13),new THREE.MeshBasicMaterial({color:rootPoint.classification==="COMPUTED"?0xfff06a:0xff6b6b}));mesh.position.copy(point(rootPoint.position_m));lagrangeGroup.add(mesh)});
+  // Same story as the ring and cone-line above: fixed at 0.13 world-units,
+  // fine when every body sat in the old 0.14-0.7 band, ~13x too big now
+  // that Earth/Moon are true-scale (~0.01) — an octahedron's silhouette is
+  // exactly the diamond shape that kept turning up at Earth's position.
+  const lagrangeMarkerRadius=Math.max(.006,Math.min(...Array.from(radiusById.values()))*.5);
+  (result.lagrange||[]).forEach(rootPoint=>{const mesh=new THREE.Mesh(new THREE.OctahedronGeometry(lagrangeMarkerRadius),new THREE.MeshBasicMaterial({color:rootPoint.classification==="COMPUTED"?0xfff06a:0xff6b6b}));mesh.position.copy(point(rootPoint.position_m));lagrangeGroup.add(mesh)});
   const pivotMesh=new THREE.Mesh(new THREE.OctahedronGeometry(.18),new THREE.MeshBasicMaterial({color:0x63fff0,wireframe:true}));pivotMesh.position.set(0,0,0);pivotGroup.add(pivotMesh);
-  const slingshot=result.slingshot;
-  if(slingshot?.enabled){
-    const flyby=stateById.get(slingshot.flyby_body),runner=stateById.get(slingshot.runner_body);
-    const centre=point(flyby.position_m);
-    const axis=new THREE.Vector3(slingshot.anti_solar_axis[0],slingshot.anti_solar_axis[2],slingshot.anti_solar_axis[1]).normalize();
-    for(const stage of slingshot.stages.filter(stage=>stage.n>=2)){
-      const length=Math.max(.25,Math.min(5,stage.z_n_m*scale));
-      const radius=Math.min(5,length*Math.tan(Math.min(stage.cone_half_angle_rad,1.2)));
-      const cone=new THREE.Mesh(new THREE.ConeGeometry(radius,length,36,1,true),new THREE.MeshBasicMaterial({color:stage.candidate_terminal?0xffbd67:0x347aa0,wireframe:true,transparent:true,opacity:stage.candidate_terminal?.45:.08}));
-      cone.position.copy(centre).addScaledVector(axis,length/2);
-      cone.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),axis);
-      tailGroup.add(cone);
-    }
-    const pause=new THREE.Mesh(new THREE.OctahedronGeometry(.11),new THREE.MeshBasicMaterial({color:0xfff06a}));
-    pause.position.copy(centre).addScaledVector(axis,slingshot.x_pause_m*scale);tailGroup.add(pause);
-    const endpoint=slingshot.endpoint;
-    const rhoOut=new THREE.Vector3(endpoint.rho_hat_out[0],endpoint.rho_hat_out[2],endpoint.rho_hat_out[1]);
-    const outMarker=new THREE.Mesh(new THREE.OctahedronGeometry(.14),new THREE.MeshBasicMaterial({color:0x63d9ff}));
-    outMarker.position.copy(centre).addScaledVector(rhoOut,endpoint.outbound_radius_m*scale);endpointsGroup.add(outMarker);
-    const initialCase=parseCase(),initialFlyby=initialCase.bodies.find(body=>body.id===slingshot.flyby_body);
-    const initialCentre=point(initialFlyby.position_m);
-    const rhoIn=new THREE.Vector3(endpoint.rho_hat_in[0],endpoint.rho_hat_in[2],endpoint.rho_hat_in[1]);
-    const inMarker=new THREE.Mesh(new THREE.OctahedronGeometry(.14),new THREE.MeshBasicMaterial({color:0xd58cff}));
-    inMarker.position.copy(initialCentre).addScaledVector(rhoIn,endpoint.inbound_radius_m*scale);endpointsGroup.add(inMarker);
-    const impulse=slingshot.kinematics.canonical_relative_velocity_impulse_m_s;
-    const impulseVector=new THREE.Vector3(impulse[0],impulse[2],impulse[1]);
-    if(impulseVector.length()>0){
-      const arrow=new THREE.ArrowHelper(impulseVector.clone().normalize(),point(runner.position_m),Math.min(2.5,.4+.25*Math.log10(1+impulseVector.length())),0xff6b6b,.18,.09);
-      impulseGroup.add(arrow);
-    }
-  }
-  applyVisibility();orbit.target.set(0,0,0);
+  if(!viewerGoal)orbit.target.set(0,0,0);
+  // sdt_occlusion_nbody's diagnostics use different field names than the
+  // three-body schema (maximum_resistance_ratio vs
+  // maximum_effective_resistance_ratio, etc.) for the same quantities, and
+  // has no minimum_pair_distance_m at all — fall back rather than throw.
   const d=result.diagnostics;
-  $("dStep").textContent=`${result.executed_steps} / ${format(result.time_s," s")}`;
+  $("dStep").textContent=`${result.executed_steps} / ${format(timeS," s")}`;
   $("dDistance").textContent=format(d.minimum_pair_distance_m," m");
   $("dRetarded").textContent=format(d.maximum_retarded_residual_s," s");
-  $("dResistance").textContent=`${d.maximum_effective_resistance_ratio.toFixed(12)}×`;
-  $("dEclipse").textContent=d.maximum_eclipse_shield.toFixed(6);
-  $("dMedium").textContent=format(d.body_plus_medium_momentum_residual);
+  $("dResistance").textContent=`${(d.maximum_effective_resistance_ratio??d.maximum_resistance_ratio??1).toFixed(12)}×`;
+  $("dEclipse").textContent=(d.maximum_eclipse_shield??d.maximum_shield_fraction??0).toFixed(6);
+  $("dMedium").textContent=format(d.body_plus_medium_momentum_residual??d.medium_closure_relative);
   $("dHash").textContent=result.trajectory_sha256.slice(0,16)+"…";
   $("dLagrange").textContent=`${(result.lagrange||[]).length} roots`;
-  if(slingshot?.enabled){
-    const stage8=slingshot.stages.find(stage=>stage.n===8);
-    $("dK").textContent=format(slingshot.K_SDT);
-    $("dStage").textContent=`${stage8.cone_half_angle_deg.toFixed(4)}° · ${format(stage8.z_n_m," m")}`;
-    $("dPause").textContent=format(slingshot.x_pause_m," m");
-    $("dEndpoint").textContent=format(slingshot.endpoint.supplied_endpoint_delta_v_m_s," m/s");
-    $("dRadius").textContent=`${format(slingshot.endpoint.radius_mismatch_m," m")} · ${slingshot.endpoint.equal_radius_passed?"PASS":"OUTSIDE"}`;
-    $("dClosest").textContent=format(slingshot.kinematics.closest_approach_m," m");
-  }else{
-    ["dK","dStage","dPause","dEndpoint","dRadius","dClosest"].forEach(id=>$(id).textContent="—");
-  }
   $("dDisplacement").textContent=result.displacement_ledger?.map(row=>`${row.id}: rest ${format(row.rest_volume_m3," m³")} · engaged ${format(row.engaged_volume_m3," m³")} · effective ${format(row.effective_volume_m3," m³")} · ${row.declared?"declared Np/Nn":"legacy baryon route"}`).join("\n")||"No 2.1 displacement ledger in this case.";
   drawChart(result.trajectory);
 }
 function drawChart(frames){const chart=$("chart"),ctx=chart.getContext("2d");ctx.clearRect(0,0,chart.width,chart.height);if(frames.length<2)return;const series=frames.map(f=>Math.hypot(...f.states[0].velocity_m_s));const min=Math.min(...series),max=Math.max(...series),span=Math.max(max-min,1e-20);ctx.strokeStyle="#63d9ff";ctx.lineWidth=1.5;ctx.beginPath();series.forEach((value,index)=>{const x=5+(chart.width-10)*index/(series.length-1),y=chart.height-6-(chart.height-12)*(value-min)/span;index?ctx.lineTo(x,y):ctx.moveTo(x,y)});ctx.stroke()}
-function applyVisibility(){trailsGroup.visible=$("showTrails").checked;conesGroup.visible=$("showCones").checked;sectionsGroup.visible=$("showSections").checked;lagrangeGroup.visible=$("showLagrange").checked;pivotGroup.visible=$("showPivot").checked;displacementGroup.visible=$("showDisplacement").checked;tailGroup.visible=$("showTail").checked;endpointsGroup.visible=$("showEndpoints").checked;impulseGroup.visible=$("showImpulse").checked}
 
-async function createSession(){busy=true;allFrames=[];setStatus("creating deterministic session…");try{const result=await call("create",{caseJson:$("caseJson").value});if(result.status!=="created")throw new Error(result.message||result.status);setStatus(`session ${result.handle} ready`)}catch(error){setStatus(error.message,true);throw error}finally{busy=false}}
-async function advance(){if(busy)return;busy=true;setStatus("calculating retarded pressure chunk…");try{const result=await call("advance",{steps:Math.max(1,Math.floor(+$("chunk").value))});if(!result.trajectory)throw new Error(result.message||result.status);for(const frame of result.trajectory){if(!allFrames.length||allFrames.at(-1).step!==frame.step)allFrames.push(frame)}allFrames=allFrames.slice(-Math.max(2,Math.floor(+$("trail").value)));result.trajectory=allFrames;updateScene(result);setStatus(`${result.status} · step ${result.executed_steps}`);if(result.status==="completed"||result.status==="collision")continuous=false}catch(error){setStatus(error.message,true);continuous=false}finally{busy=false;if(continuous)setTimeout(advance,Math.max(0,50/Math.max(.1,+$("speed").value)))}}
+function greatestBy(items,metric){return items.reduce((best,item)=>!best||metric(item)>metric(best)?item:best,null)}
+function createExplainerPhases(result){
+  const cones=result.cones||[];
+  const dominantPacket=(result.packet_ledger?.bodies||[]).reduce((best,body)=>!best||BigInt(body.baryon_count)>BigInt(best.baryon_count)?body:best,null);
+  const strongest=greatestBy(cones,cone=>vectorMagnitude(cone.acceleration_m_s2));
+  const deepest=greatestBy(cones,cone=>cone.occlusion_depth);
+  const mostShielded=greatestBy(cones,cone=>cone.shield_fraction);
+  const reference=strongest||deepest||mostShielded;
+  if(!reference)return [];
+  return [
+    {name:"Initial geometry",target:dominantPacket?.id||reference.target,source:reference.source,cone:reference},
+    {name:"Seven-channel baryon packet",target:reference.target,source:reference.source,cone:reference},
+    {name:"Maximum computed occlusion",target:deepest?.target||reference.target,source:deepest?.source||reference.source,cone:deepest||reference},
+    {name:"Retarded response vector",target:strongest?.target||reference.target,source:strongest?.source||reference.source,cone:strongest||reference},
+    {name:"Shielding state",target:mostShielded?.target||reference.target,source:mostShielded?.source||reference.source,cone:mostShielded||reference},
+  ];
+}
+// Three fixed framing angles, never derived from the source→target axis
+// itself — that axis is exactly what was lining bodies up behind each
+// other. Azimuth is perpendicular to that line instead, so source and
+// target sit side by side in frame at all three: side elevation (0°),
+// high-angle isometric (45°), top-down (90°).
+const VIEW_ANGLES=[{name:"side elevation",elevationDeg:0},{name:"high-angle 45°",elevationDeg:45},{name:"top-down",elevationDeg:90}];
+let currentViewIndex=1;
+const scratchCamera=camera.clone(); // for hypothetical projections only — never rendered, never moves the live camera
 
-$("loadPreset").onclick=()=>loadPreset().catch(error=>setStatus(error.message,true));
-$("create").onclick=async()=>{try{await createSession();await advance()}catch{}};
-$("advance").onclick=advance;
-$("continuous").onclick=async()=>{continuous=!continuous;$("continuous").textContent=continuous?"Pause after chunk":"Run continuously";if(continuous&&!busy)advance()};
-$("exportCase").onclick=()=>download("celestial-three-body.sdtcase.json",$("caseJson").value);
-$("importCase").onclick=()=>$("caseFile").click();
-$("caseFile").onchange=async event=>{const file=event.target.files[0];if(file)$("caseJson").value=await file.text()};
-$("saveCheckpoint").onclick=async()=>{try{const result=await call("checkpoint");download("celestial-three-body.checkpoint.json",JSON.stringify(result,null,2))}catch(error){setStatus(error.message,true)}};
-$("loadCheckpoint").onclick=()=>$("checkpointFile").click();
-$("checkpointFile").onchange=async event=>{const file=event.target.files[0];if(!file)return;try{const result=await call("resume",{caseJson:$("caseJson").value,checkpointJson:await file.text()});if(result.status!=="resumed")throw new Error(result.message||result.status);setStatus(`resumed session ${result.handle}`)}catch(error){setStatus(error.message,true)}};
-["showTrails","showCones","showSections","showLagrange","showPivot","showDisplacement","showTail","showEndpoints","showImpulse"].forEach(id=>$(id).onchange=applyVisibility);
+function computeFramingBasis(target,source){
+  const centre=target.bodyGroup.position.clone();
+  const toSource=source?source.bodyGroup.position.clone().sub(centre):new THREE.Vector3(1,0,.3);
+  toSource.y=0;
+  if(toSource.lengthSq()<1e-6)toSource.set(1,0,0);
+  const azimuth=new THREE.Vector3(-toSource.z,0,toSource.x).normalize();
+  // The floor used to be a flat 3.2 regardless of target size — harmless
+  // for Sun-scale bodies (radius 0.7, so the *11 term always won anyway)
+  // but it left true-scale Earth/Moon (radius ~0.01) stranded far outside
+  // any distance that could actually resolve them on screen.
+  // trueRadius (unboosted), not radius — Earth/Moon's rendered radius is
+  // inflated by pairBoost for visibility, and that boost is itself
+  // calibrated against a viewing distance. Feeding the *boosted* radius
+  // back into this distance calculation made the two chase each other:
+  // a boost sized for a far camera produced a "radius" that then demanded
+  // an even more mismatched camera distance (observed landing the camera
+  // almost on top of Earth/Moon, with Sun projected wildly off-screen).
+  const distance=Math.max(.6,target.trueRadius*11,source?centre.distanceTo(source.bodyGroup.position)*1.6:0);
+  return {centre,azimuth,distance};
+}
+function candidateViewGoal(viewIndex,target,source){
+  const {centre,azimuth,distance}=computeFramingBasis(target,source);
+  const elevationRad=VIEW_ANGLES[viewIndex].elevationDeg*Math.PI/180;
+  const offset=azimuth.clone().multiplyScalar(Math.cos(elevationRad)*distance);
+  offset.y+=Math.sin(elevationRad)*distance;
+  return {position:centre.clone().add(offset),target:centre};
+}
+// Frames scene-origin generically, for any run that doesn't have a literal
+// Earth+Moon pair to centre on. updateScene's scale=8/extent already
+// guarantees every body sits within 8 scene-units of the origin, so a fixed
+// distance that fits an 8-unit half-extent in the camera's vertical FOV
+// (with margin) frames the whole run regardless of body count or names.
+function genericFramingGoal(viewIndex){
+  const elevationRad=VIEW_ANGLES[viewIndex].elevationDeg*Math.PI/180;
+  const distance=(8/Math.tan(camera.fov*Math.PI/360))*1.15;
+  const azimuth=new THREE.Vector3(1,0,.3).normalize();
+  const offset=azimuth.clone().multiplyScalar(Math.cos(elevationRad)*distance);
+  offset.y+=Math.sin(elevationRad)*distance;
+  return {position:offset,target:new THREE.Vector3(0,0,0)};
+}
+// One-shot re-frame at the given view angle, using whatever bodies are
+// currently in the scene — Earth+Moon's own tuned close-up framing when
+// both are present (real name match, not a guess), the generic origin
+// framing otherwise. Called once on run-start and by the view-angle
+// buttons; never on a timer or per physics tick.
+function frameCurrentView(viewIndex){
+  currentViewIndex=viewIndex;
+  manualCameraControl=false;
+  viewerGoal=(bodyVisuals.has("Earth")&&bodyVisuals.has("Moon"))
+    ?candidateViewGoal(viewIndex,bodyVisuals.get("Earth"),bodyVisuals.get("Moon"))
+    :genericFramingGoal(viewIndex);
+}
+function projectToScreen(cam,worldPos){
+  const p=worldPos.clone().project(cam);
+  return {x:(p.x*.5+.5)*innerWidth,y:(1-(p.y*.5+.5))*innerHeight,visible:p.z>-1&&p.z<1};
+}
+function bodyScreenCircles(goal){
+  scratchCamera.position.copy(goal.position);
+  scratchCamera.lookAt(goal.target);
+  scratchCamera.updateMatrixWorld(true);
+  scratchCamera.updateProjectionMatrix();
+  const circles=[],fovRad=scratchCamera.fov*Math.PI/180;
+  bodyVisuals.forEach(visual=>{
+    const proj=projectToScreen(scratchCamera,visual.bodyGroup.position);
+    if(!proj.visible)return;
+    const distance=Math.max(.1,visual.bodyGroup.position.distanceTo(scratchCamera.position));
+    const r=Math.max(14,(visual.radius*1.5*innerHeight)/(2*Math.tan(fovRad/2)*distance));
+    circles.push({cx:proj.x,cy:proj.y,r});
+  });
+  return circles;
+}
+function boxCircleOverlap(box,circle){
+  const closestX=Math.max(box.left,Math.min(circle.cx,box.right));
+  const closestY=Math.max(box.top,Math.min(circle.cy,box.bottom));
+  return Math.hypot(circle.cx-closestX,circle.cy-closestY)<circle.r;
+}
+function captionAnchors(capW,capH){
+  const panelWidth=innerWidth<=700?0:$("panel").getBoundingClientRect().right;
+  const left=panelWidth+18,right=innerWidth-18,top=18,bottom=innerHeight-104;
+  return [
+    {left:right-capW,top:bottom-capH},{left,top:bottom-capH},
+    {left:right-capW,top},{left,top},
+  ].map(a=>({...a,right:a.left+capW,bottom:a.top+capH}));
+}
+// Caption placement: try the current view first, then the other two, each
+// with four candidate corners. First placement that clears every body
+// wins; among those, prefer one that also clears the floating labels.
+// Only a real stage change (allowViewChange) may pick a different view
+// than what's on screen — a tick refresh only re-settles the anchor.
+function placeCaptionOverlay(title,caption,target,source,allowViewChange){
+  const overlay=$("captionOverlay");
+  overlay.style.whiteSpace="pre-wrap";
+  overlay.textContent=`${title}\n\n${caption}`;
+  const rect=overlay.getBoundingClientRect();
+  const capW=Math.max(180,rect.width),capH=Math.max(40,rect.height);
+  const labelBoxes=[...document.querySelectorAll(".floating-label")].map(el=>el.getBoundingClientRect());
+  const others=VIEW_ANGLES.map((_,i)=>i).filter(i=>i!==currentViewIndex);
+  const tryOrder=allowViewChange?[currentViewIndex,...others]:[currentViewIndex];
+  let bodyClear=null,bothClear=null;
+  for(const viewIndex of tryOrder){
+    const goal=candidateViewGoal(viewIndex,target,source);
+    const circles=bodyScreenCircles(goal);
+    for(const anchor of captionAnchors(capW,capH)){
+      if(circles.some(c=>boxCircleOverlap(anchor,c)))continue;
+      if(!bodyClear)bodyClear={viewIndex,anchor};
+      const hitsLabel=viewIndex===currentViewIndex&&labelBoxes.some(l=>anchor.left<l.right&&anchor.right>l.left&&anchor.top<l.bottom&&anchor.bottom>l.top);
+      if(!hitsLabel){bothClear={viewIndex,anchor};break}
+    }
+    if(bothClear)break;
+  }
+  const chosen=bothClear||bodyClear||{viewIndex:currentViewIndex,anchor:captionAnchors(capW,capH)[0]};
+  overlay.style.left=`${chosen.anchor.left}px`;overlay.style.top=`${chosen.anchor.top}px`;
+  overlay.classList.add("show");
+  return chosen.viewIndex;
+}
 
-addEventListener("resize",()=>{renderer.setSize(innerWidth,innerHeight);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix()});
-function animate(){requestAnimationFrame(animate);if($("rotateView").checked)root.rotation.y+=.0015*+$("speed").value;orbit.update();renderer.render(scene,camera)}animate();
+// Three explanation tiers. Simplified is plain vocabulary describing the
+// same real event, not a lesser or vaguer one; lay names the mechanism;
+// scientific is the exact computed ledger line (unchanged from the raw diagnostics).
+function pct(x){return `${(x*100).toFixed(1)}%`}
+const PHASE_NARRATIVE={
+  "Initial geometry":{
+    lay:(c)=>`Starting layout: the solver is tracking the ${c.source} → ${c.target} pressure channel first — channel ${c.channel+1} of 7.`,
+    simplified:(c)=>`This is how the bodies are arranged at the start. The solver is following the push between ${c.source} and ${c.target} first.`,
+  },
+  "Seven-channel baryon packet":{
+    lay:(c)=>`Every body's mass is split into seven pressure channels aimed at its neighbor. The glowing shell shows how much of ${c.target}'s pressure is engaged right now.`,
+    simplified:(c)=>`${c.target} pushes outward on its neighbor through seven separate directions at once. The glow shows how much of that push is happening right now.`,
+  },
+  "Maximum computed occlusion":{
+    lay:(c)=>`The deepest occlusion the solver found: ${c.source} blocks ${format(c.occlusion_depth)} of ${c.target}'s outward pressure through this channel.`,
+    simplified:(c)=>`This is the moment ${c.source} blocks the most of ${c.target}'s push.`,
+  },
+  "Retarded response vector":{
+    lay:(c)=>`The response is not instant — it travels at a finite speed. This arrow is the delayed push ${c.target} actually feels: ${format(vectorMagnitude(c.acceleration_m_s2)," m/s²")}.`,
+    simplified:(c)=>`A push takes time to arrive — it is not instant. This arrow shows the strongest delayed push happening right now.`,
+  },
+  "Shielding state":{
+    lay:(c)=>`Something sits between the bodies and partly blocks this channel: shield fraction ${pct(c.shield_fraction)} on ${c.source} → ${c.target}.`,
+    simplified:(c)=>`Something is partly in the way between the bodies. This shows where that blocking is strongest right now.`,
+  },
+};
+function buildCaption(phase,tier){
+  const cone=phase.cone,target=bodyVisuals.get(phase.target);
+  if(tier==="scientific")return [
+    `${cone.source} → ${cone.target} · channel ${cone.channel+1}/7 · ${cone.eclipse_class}`,
+    `Exact target baryons: ${target?.baryonCount??"—"}`,
+    `Exact channel baryons: ${cone.channel_baryons}`,
+    `Solid angle: ${format(cone.solid_angle_sr," sr")} · occlusion depth: ${format(cone.occlusion_depth)}`,
+    `Retarded time: ${format(cone.retarded_time_s," s")} · |a|: ${format(vectorMagnitude(cone.acceleration_m_s2)," m/s²")} · shield: ${cone.shield_fraction.toFixed(6)}`,
+  ].join("\n");
+  const narrative=PHASE_NARRATIVE[phase.name];
+  return narrative?narrative[tier](cone):phase.name;
+}
+
+function clearExplainerDecorations(){
+  [...explainerGroup.children].forEach(child=>{
+    if(!child.userData.explainerDecoration)return;
+    explainerGroup.remove(child);
+    child.geometry?.dispose();
+    if(Array.isArray(child.material))child.material.forEach(m=>m.dispose());else child.material?.dispose();
+  });
+}
+function showExplainerPhase(phase,index,total,moveCamera=true){
+  const target=bodyVisuals.get(phase.target),source=bodyVisuals.get(phase.source);
+  clearExplainerDecorations();
+  if(!target)return;
+  bodyVisuals.forEach(visual=>visual.bodyGroup.scale.setScalar(1));
+  target.bodyGroup.scale.setScalar(1.15);
+  const ring=new THREE.Mesh(new THREE.TorusGeometry(target.radius*1.45,target.radius*.055,10,56),new THREE.MeshBasicMaterial({color:0xfff06a,transparent:true,opacity:.9}));
+  ring.position.copy(target.bodyGroup.position);ring.rotation.x=Math.PI/2;ring.userData.explainerRing=true;ring.userData.explainerDecoration=true;explainerGroup.add(ring);
+  const cone=phase.cone;
+  // No source-target connector line: with real distinguishable bodies
+  // (and the paired occlusion shells, when toggled on) the abstract
+  // "stick" is redundant.
+  const acceleration=solverVector(cone.acceleration_m_s2);
+  if(acceleration.length()>0){
+    const arrow=new THREE.ArrowHelper(acceleration.normalize(),target.bodyGroup.position,Math.max(.7,target.radius*3.4),0xff6b6b,.18,.09);
+    arrow.userData.explainerDecoration=true;explainerGroup.add(arrow);
+  }
+  const title=`${activePreset?.explainer||activeCase.case_id} · ${index+1}/${total} · ${phase.name}`;
+  const caption=buildCaption(phase,activeTier);
+  setExplainerText(title,caption);
+  // The view angle is only allowed to change on an actual stage change
+  // (moveCamera) — not on every physics-tick refresh, or the camera swings
+  // every ~550ms while the operator is still reading a single stage. The
+  // caption's on-screen anchor still re-settles every refresh, since
+  // bodies drift a little each tick regardless of camera angle.
+  const chosenView=placeCaptionOverlay(title,caption,target,source,moveCamera);
+  if(moveCamera&&!manualCameraControl){currentViewIndex=chosenView;viewerGoal=candidateViewGoal(chosenView,target,source)}
+}
+
+// Stage bar: one sphere per landmark. Active sphere is 100% brighter
+// (opacity .46 -> 1) and 8% larger (scale 1 -> 1.08), CSS-transitioned.
+// Default cadence is a 6s linger per stage; a manual pick suspends that
+// cadence for 30s, then it resumes from wherever the operator left it.
+let stageButtons=[];
+function renderStageBar(){
+  const bar=$("stageBar");bar.innerHTML="";stageButtons=[];
+  stagePhases.forEach((phase,i)=>{
+    const dot=document.createElement("button");
+    dot.type="button";dot.className="stage-dot";dot.title=phase.name;dot.setAttribute("aria-label",phase.name);
+    dot.onclick=()=>selectStage(i,true);
+    bar.appendChild(dot);stageButtons.push(dot);
+  });
+  bar.classList.toggle("show",stagePhases.length>0);
+}
+function renderTierBar(){
+  const bar=$("tierBar");bar.innerHTML="";
+  [["simplified","Simplified"],["lay","Lay"],["scientific","Scientific"]].forEach(([id,label])=>{
+    const btn=document.createElement("button");
+    btn.type="button";btn.className="tier-btn"+(id===activeTier?" active":"");btn.textContent=label;
+    btn.onclick=()=>{
+      activeTier=id;
+      [...bar.children].forEach(child=>child.classList.toggle("active",child===btn));
+      if(stagePhases[stageIndex])showExplainerPhase(stagePhases[stageIndex],stageIndex,stagePhases.length,false);
+    };
+    bar.appendChild(btn);
+  });
+  bar.classList.toggle("show",stagePhases.length>0);
+}
+function setActiveStageVisual(){stageButtons.forEach((dot,i)=>dot.classList.toggle("active",i===stageIndex))}
+function scheduleStageAuto(){
+  clearTimeout(stageAutoTimer);
+  if(!stageAutoEnabled||stagePhases.length<2)return;
+  stageAutoTimer=setTimeout(()=>selectStage(stageIndex+1,false),STAGE_AUTO_MS);
+}
+function selectStage(index,manual){
+  if(!stagePhases.length)return;
+  stageIndex=((index%stagePhases.length)+stagePhases.length)%stagePhases.length;
+  setActiveStageVisual();
+  showExplainerPhase(stagePhases[stageIndex],stageIndex,stagePhases.length);
+  if(manual){
+    stageAutoEnabled=false;
+    clearTimeout(stageAutoTimer);
+    clearTimeout(stageOverrideTimer);
+    stageOverrideTimer=setTimeout(()=>{stageAutoEnabled=true;scheduleStageAuto()},STAGE_OVERRIDE_MS);
+  }else scheduleStageAuto();
+}
+
+function resetExplainer(){
+  clearTimeout(explainerTimer);explainerTimer=0;
+  clearTimeout(stageAutoTimer);stageAutoTimer=0;
+  clearTimeout(stageOverrideTimer);stageOverrideTimer=0;
+  stageAutoEnabled=true;explainerActive=false;stagePhases=[];stageIndex=0;stageButtons=[];
+  viewerGoal=null;
+  clearExplainerDecorations();
+  $("stageBar").classList.remove("show");$("stageBar").innerHTML="";
+  $("tierBar").classList.remove("show");$("tierBar").innerHTML="";
+  $("captionOverlay").classList.remove("show");
+  setExplainerText("Guided explainer","No active explainer run.");
+}
+
+// Floating body labels: underlined text with a thin connecting line back
+// to the body, auto-placed to avoid overlapping other labels or bodies.
+const labelLayer=$("labelLayer"),labelEls=new Map();
+function ensureLabelEl(id){
+  let entry=labelEls.get(id);
+  if(!entry){
+    const el=document.createElement("div");el.className="floating-label";el.textContent=id;
+    const line=document.createElement("div");line.className="label-line";
+    labelLayer.append(line,el);
+    entry={el,line};labelEls.set(id,entry);
+  }
+  return entry;
+}
+function pruneLabelEls(activeIds){
+  for(const [id,entry] of labelEls){if(!activeIds.has(id)){entry.el.remove();entry.line.remove();labelEls.delete(id)}}
+}
+const rectsOverlap=(a,b)=>a.left<b.right&&a.right>b.left&&a.top<b.bottom&&a.bottom>b.top;
+const LABEL_DIRECTIONS=[[0,-1],[1,-.6],[-1,-.6],[1,.6],[-1,.6],[0,1],[1,0],[-1,0]];
+function renderFloatingLabels(){
+  const ids=new Set(bodyVisuals.keys());
+  pruneLabelEls(ids);
+  const placed=[],W=innerWidth,H=innerHeight,fovRad=camera.fov*Math.PI/180;
+  const panelRight=innerWidth<=700?0:$("panel").getBoundingClientRect().right;
+  bodyVisuals.forEach((visual,id)=>{
+    const entry=ensureLabelEl(id);
+    const worldPos=visual.bodyGroup.position;
+    const proj=worldPos.clone().project(camera);
+    if(proj.z>1||proj.z<-1){entry.el.style.display="none";entry.line.style.display="none";return}
+    const sx=(proj.x*.5+.5)*W,sy=(1-(proj.y*.5+.5))*H;
+    const distance=Math.max(.1,worldPos.distanceTo(camera.position));
+    const bodyPxRadius=Math.max(9,(visual.radius*H)/(2*Math.tan(fovRad/2)*distance));
+    const textW=Math.max(32,(entry.el.offsetWidth||id.length*9)+10),textH=19;
+    const margin=Math.max(46,bodyPxRadius*.6);
+    let chosen=null;
+    outer: for(const radiusMul of [1,1.6,2.3]){
+      for(const [dx,dy] of LABEL_DIRECTIONS){
+        const cx=sx+dx*(bodyPxRadius+margin*radiusMul),cy=sy+dy*(bodyPxRadius+margin*.75*radiusMul);
+        const box={left:cx-textW/2,right:cx+textW/2,top:cy-textH,bottom:cy};
+        if(box.left<panelRight+10||box.right>W-4||box.top<4||box.bottom>H-72)continue;
+        if(!placed.some(p=>rectsOverlap(p,box))){chosen={cx,cy,box};break outer}
+      }
+    }
+    if(!chosen){const cx=Math.max(panelRight+10+textW/2,sx-(bodyPxRadius+margin)),cy=sy-(bodyPxRadius+margin*.75);chosen={cx,cy,box:{left:cx-textW/2,right:cx+textW/2,top:cy-textH,bottom:cy}}}
+    placed.push(chosen.box);
+    entry.el.style.display="";entry.el.style.left=`${chosen.cx}px`;entry.el.style.top=`${chosen.cy}px`;
+    const dx=sx-chosen.cx,dy=sy-chosen.cy,len=Math.hypot(dx,dy),angle=Math.atan2(dy,dx);
+    entry.line.style.display="";entry.line.style.left=`${chosen.cx}px`;entry.line.style.top=`${chosen.cy-1}px`;
+    entry.line.style.width=`${len}px`;entry.line.style.transform=`rotate(${angle}rad)`;
+  });
+}
+async function createSession(){busy=true;allFrames=[];setStatus("creating deterministic session…");try{const result=await call("create",{caseJson:JSON.stringify(activeCase)});if(result.status!=="created")throw new Error(result.message||result.status);setStatus(`running ${activeCase.case_id}…`)}catch(error){setStatus(error.message,true);throw error}finally{busy=false}}
+// Speed only ever requests more of the same fixed-size, already-accurate
+// steps per poll — timestep_s itself (set once at case-creation time, see
+// timestepForSpan) is never touched, so the retarded-occlusion quadrature
+// stays exactly as fine-grained regardless of playback speed.
+//
+// A flat step cap protects busy (many-pair) cases from a multi-minute
+// single call, but applied flat it also caps cheap cases (few pairs, each
+// step far less costly) at the same ceiling — so for a 2-body scenario,
+// anything above ~100x speed was silently identical to 100x, since the cap
+// saturated long before the multiplier did. Budget by total work
+// (steps*pairs) instead. Measured directly against a real 2-body (1-pair)
+// case near a close encounter (the expensive regime — the retarded-time
+// solve converges faster once bodies separate): ~0.4-0.5ms per
+// (step*pair). This budget targets ~4s worst-case wall time for a single
+// call — which is still a real, physical ceiling: a cheap scenario simply
+// cannot use very high multipliers without a multi-second wait per tick,
+// no matter how the constant here is tuned. #effectiveSteps makes that
+// ceiling visible instead of leaving "why doesn't this do anything" a
+// mystery.
+function computeEffectiveSteps(baseSteps){
+  const speedMultiplier=Number($("speedMultiplier")?.value||1);
+  const n=activeCase?.bodies?.length||3;
+  const pairsForCap=Math.max(1,n*(n-1)/2);
+  const maxStepsForCap=Math.max(500,Math.round(8000/pairsForCap));
+  const requested=Math.round(stepsForBodyCount(baseSteps)*speedMultiplier);
+  const steps=Math.min(maxStepsForCap,requested);
+  return{steps,capped:requested>maxStepsForCap,maxStepsForCap};
+}
+function renderEffectiveSteps(){
+  const el=$("effectiveSteps");if(!el)return;
+  const{steps,capped}=computeEffectiveSteps(SCENARIO_CHUNK_STEPS);
+  el.textContent=capped
+    ?`${steps} steps/poll — capped for responsiveness (this scenario's pair count keeps a single call under ~4s; higher speed settings request more but this is the ceiling actually used)`
+    :`${steps} steps/poll`;
+}
+$("speedMultiplier").addEventListener("change",renderEffectiveSteps);
+function scheduleAdvance(delay){clearTimeout(explainerTimer);explainerTimer=setTimeout(advance,delay)}
+async function advance(){
+  if(busy||!continuous)return;
+  busy=true;let nextDelay=0;
+  try{
+    setStatus(explainerActive?"calculating retarded pressure in slow motion…":"calculating retarded pressure…");
+    const{steps}=computeEffectiveSteps(explainerActive?EXPLAINER_TICK_STEPS:SCENARIO_CHUNK_STEPS);
+    renderEffectiveSteps();
+    const result=await call("advance",{steps});
+    // continuous can flip false while this call was in flight (Stop, or
+    // switching the preset menu away from a running case) — that response
+    // belongs to a run that no longer exists; applying it would silently
+    // repopulate a scene the user just cleared.
+    if(!continuous)return;
+    if(!result.trajectory)throw new Error(result.message||result.status);
+    // The exact per-step frames this call just produced, before they get
+    // folded into the accumulated (and trimmed-for-history) allFrames
+    // below — this is what lets bodies actually move through their real
+    // computed path between renders instead of jumping to the tick's
+    // final state and coasting on a straight-line guess from there.
+    freshTickFrames=result.trajectory;
+    for(const frame of result.trajectory){if(!allFrames.length||allFrames.at(-1).step!==frame.step)allFrames.push(frame)}
+    // The engine returns every recorded step of the tick just executed —
+    // confirmed directly: a 1536-step advance() call comes back with 1537
+    // trajectory entries (steps 0-1536, one per step), full physics, none
+    // skipped. Trimming to a flat TRAIL_RECORD_LIMIT was cutting into that
+    // same tick's own data whenever a tick produced more steps than the
+    // limit — for two bodies starting at rest, the interesting part (their
+    // actual close approach) happens early in the tick and was exactly
+    // what got discarded, leaving only the aftermath visible. Never trim
+    // below what this tick alone just returned; only bound the carried-over
+    // history from *earlier* ticks beyond that.
+    const keep=Math.max(TRAIL_RECORD_LIMIT,result.trajectory.length);
+    allFrames=allFrames.slice(-keep);result.trajectory=allFrames;updateScene(result);
+    if(explainerActive){
+      if(!stagePhases.length){
+        stagePhases=createExplainerPhases(result);
+        if(stagePhases.length){renderTierBar();renderStageBar();selectStage(0,false)}
+        else setExplainerText("Guided explainer","No landmark geometry available for this scenario.");
+      }else if(stagePhases[stageIndex]){
+        showExplainerPhase(stagePhases[stageIndex],stageIndex,stagePhases.length,false);
+      }
+      nextDelay=EXPLAINER_TICK_MS;
+    }
+    const terminal=result.status==="completed"||result.status==="collision";
+    setStatus(`${terminal?result.status:"running"} · step ${result.executed_steps}`);
+    if(terminal){continuous=false;updateScene(result)}
+  }catch(error){setStatus(error.message,true);continuous=false}finally{
+    busy=false;
+    if(continuous)scheduleAdvance(nextDelay);
+    else{setRunButtonsDisabled(false);$("continuous").disabled=true}
+  }
+}
+
+async function runSelectedScenario(withExplainer){
+  if(busy||continuous)return;
+  setRunButtonsDisabled(true);resetExplainer();
+  needsInitialFocus=true;manualCameraControl=false;cachedPairBoost=null;
+  try{
+    await loadPreset();
+    explainerActive=withExplainer;
+    if(withExplainer)setExplainerText("Guided explainer","Preparing tour — computing the first landmark geometry.");
+    await createSession();continuous=true;$("continuous").disabled=false;renderEffectiveSteps();advance();
+  }catch(error){setStatus(error.message,true);setRunButtonsDisabled(false)}
+}
+
+$("create").onclick=()=>runSelectedScenario(false);
+$("runExplainer").onclick=()=>runSelectedScenario(true);
+$("continuous").onclick=()=>{continuous=false;resetExplainer();if(lastResult)updateScene(lastResult);setRunButtonsDisabled(false);$("continuous").disabled=true;call("destroy").catch(error=>setStatus(error.message,true));setStatus("scenario stopped")};
+$("viewSide").onclick=()=>frameCurrentView(0);
+$("view45").onclick=()=>frameCurrentView(1);
+$("viewTop").onclick=()=>frameCurrentView(2);
+
+addEventListener("resize",()=>{renderer.setSize(innerWidth,innerHeight);updateCameraViewport()});
+// Finds the two frames in currentTickFrames bracketing targetSimS (binary
+// search on the already-time-sorted array) and returns them plus the
+// fraction between them, for interpolation. Returns null if there's
+// nothing to play (no frames yet).
+function bracketingFrames(targetSimS){
+  const frames=currentTickFrames;
+  if(!frames.length)return null;
+  if(targetSimS<=frames[0].time_s)return{a:frames[0],b:frames[0],t:0};
+  if(targetSimS>=frames.at(-1).time_s)return{a:frames.at(-1),b:frames.at(-1),t:0};
+  let lo=0,hi=frames.length-1;
+  while(hi-lo>1){
+    const mid=(lo+hi)>>1;
+    if(frames[mid].time_s<=targetSimS)lo=mid;else hi=mid;
+  }
+  const a=frames[lo],b=frames[hi],span=b.time_s-a.time_s;
+  return{a,b,t:span>0?(targetSimS-a.time_s)/span:0};
+}
+// Plays the real path this tick actually computed, over the real time
+// since it landed — not a straight-line guess from the endpoint. Paced by
+// simSecondsPerRealMs (measured from how long the previous tick took), so
+// a tick that arrives roughly on schedule finishes its own playback right
+// as the next one lands; one that's early just holds its last frame.
+function applyTickPlayback(){
+  if(!(lastTickPerfMs>0)||!(simSecondsPerRealMs>0)||!currentTickFrames.length)return;
+  // Clamp elapsed real time (not simSecondsPerRealMs) so a stalled or
+  // backgrounded tab can't compute a wild target — same 5s safety margin
+  // the old velocity-coast used.
+  const elapsedMs=Math.min(Math.max(0,performance.now()-lastTickPerfMs),5000);
+  const targetSimS=Math.min(tickEndSimS,tickStartSimS+elapsedMs*simSecondsPerRealMs);
+  const bracket=bracketingFrames(targetSimS);
+  if(!bracket)return;
+  const{a,b,t}=bracket;
+  bodyVisuals.forEach(v=>{
+    const sa=a.states[v.index],sb=b.states[v.index];
+    if(!sa||!sb)return;
+    const px=sa.position_m[0]+(sb.position_m[0]-sa.position_m[0])*t;
+    const py=sa.position_m[1]+(sb.position_m[1]-sa.position_m[1])*t;
+    const pz=sa.position_m[2]+(sb.position_m[2]-sa.position_m[2])*t;
+    v.bodyGroup.position.set((px-currentPivot[0])*currentScale,(pz-currentPivot[2])*currentScale,(py-currentPivot[1])*currentScale);
+  });
+}
+function animate(){
+  requestAnimationFrame(animate);
+  if(viewerGoal){camera.position.lerp(viewerGoal.position,.06);orbit.target.lerp(viewerGoal.target,.08)}
+  // Body spin is set once per physics tick from real sidereal periods
+  // (updateScene) — no separate decorative animation here anymore.
+  applyTickPlayback();
+  renderFloatingLabels();orbit.update();renderer.render(scene,camera);
+}
+animate();
 Promise.all([initializePresets(),call("manifest")])
-  .then(([,manifest])=>setStatus(`${manifest.build_id} · 25 simulations · WASM ready`))
+  .then(([,manifest])=>setStatus(`${manifest.build_id} · ${presetCatalog.length} scenarios · WASM ready`))
   .catch(error=>setStatus(`Initialization failed: ${error.message}`,true));
 </script>
 </body>

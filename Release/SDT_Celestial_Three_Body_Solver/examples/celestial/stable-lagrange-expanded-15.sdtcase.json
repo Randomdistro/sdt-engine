@@ -1,0 +1,100 @@
+{
+  "contract_version": "2.0.0",
+  "case_id": "mathematical-stable-lagrange-expanded-15",
+  "problem_class": "celestial_three_body",
+  "frame": {
+    "type": "inertial_cartesian",
+    "units": "SI",
+    "epoch": "t=0",
+    "description": "Unequal-baryon equilateral rotating fixture"
+  },
+  "force": {
+    "type": "retarded_seven_cone_occlusion",
+    "propagation_speed": "c",
+    "pressure_source": "sdt_law_I_P_conv",
+    "enable_eclipse_shielding": true,
+    "comparison_route": "point_koppa"
+  },
+  "bodies": [
+    {
+      "id": "primary",
+      "baryon_count": "2012694770528711930862478680940967667264809317896418",
+      "radius_m": 1150000.0,
+      "position_m": [
+        -1724136.6392240522,
+        -1492.3999291956422,
+        0.0
+      ],
+      "velocity_m_s": [
+        0.0003123989270377427,
+        -0.3609075728450031,
+        0.0
+      ],
+      "provenance": {
+        "baryons": "kappa=2.5e-3 m divided by laws.hpp koppa_per_baryon",
+        "radius": "declared mathematical boundary",
+        "state": "sdt::dynamics::equilateral_three known answer; 15% similarity-expanded control"
+      }
+    },
+    {
+      "id": "secondary",
+      "baryon_count": "2012694770528711930862478680940967667264809317896",
+      "radius_m": 575000.0,
+      "position_m": [
+        1723275863.3607757,
+        -1492.3999291956422,
+        0.0
+      ],
+      "velocity_m_s": [
+        0.0003123989270377427,
+        360.7273896040051,
+        0.0
+      ],
+      "provenance": {
+        "baryons": "kappa=2.5e-6 m divided by laws.hpp koppa_per_baryon",
+        "radius": "declared mathematical boundary",
+        "state": "sdt::dynamics::equilateral_three known answer; 15% similarity-expanded control"
+      }
+    },
+    {
+      "id": "runner",
+      "baryon_count": "2012694770528711930862478680940967667264809318",
+      "radius_m": 114999.99999999999,
+      "position_m": [
+        860775863.3607758,
+        1493892329.1282275,
+        0.0
+      ],
+      "velocity_m_s": [
+        -312.71132596549,
+        180.18324101558008,
+        0.0
+      ],
+      "provenance": {
+        "baryons": "kappa=2.5e-9 m divided by laws.hpp koppa_per_baryon",
+        "radius": "declared mathematical boundary",
+        "state": "sdt::dynamics::equilateral_three known answer; 15% similarity-expanded control"
+      }
+    }
+  ],
+  "integrator": "velocity_verlet",
+  "timestep_s": 7504.0473061748235,
+  "record_every_steps": 40,
+  "tolerances": {
+    "retarded_time_s": 1e-10,
+    "channel_closure": 1e-13,
+    "medium_momentum_relative": 1e-11,
+    "lagrange_residual_m_s2": 1e-08,
+    "max_retarded_iterations": 64
+  },
+  "events": {
+    "stop_on_collision": true
+  },
+  "provenance": {
+    "classification": "COMPUTED",
+    "description": "Fifteen-percent similarity expansion of the persistent unequal Lagrange control.",
+    "sources": [
+      "stable-lagrange.sdtcase.json"
+    ]
+  }
+}

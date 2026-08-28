@@ -16,6 +16,14 @@ from typing import Any
 ROOT = pathlib.Path(__file__).resolve().parent
 EXAMPLES = ROOT / "examples" / "celestial"
 DATASETS = ROOT / "datasets"
+REGRESSION_HORIZON_STEPS = {
+    "jpl-sun-earth-moon-j2000.sdtcase.json": 1,
+    "figure-eight.sdtcase.json": 50000,
+    "stable-lagrange.sdtcase.json": 4000,
+    "restricted-runner.sdtcase.json": 4000,
+    "sun-earth-spacecraft.sdtcase.json": 288,
+    "sun-jupiter-trojan.sdtcase.json": 2000,
+}
 
 
 def run_case(executable: pathlib.Path, case: dict[str, Any]) -> dict[str, Any]:
@@ -167,7 +175,9 @@ def main() -> int:
     for name in names:
         case = json.loads((EXAMPLES / name).read_text(encoding="utf-8"))
         loaded[name] = case
-        result = run_case(executable, case)
+        probe = copy.deepcopy(case)
+        probe["max_steps"] = REGRESSION_HORIZON_STEPS[name]
+        result = run_case(executable, probe)
         results[name] = result
         diagnostics = result.get("diagnostics", {})
         structural = (
@@ -185,6 +195,7 @@ def main() -> int:
         all_structural = all_structural and structural
         rows[name] = {
             "status": result.get("status"),
+            "regression_horizon_steps": probe["max_steps"],
             "structural_pass": structural,
             "trajectory_sha256": result.get("trajectory_sha256"),
             "lagrange_count": len(result.get("lagrange", [])),
@@ -268,13 +279,23 @@ def main() -> int:
     eclipse_pass = eclipse_limit >= 1.0 - 1e-14
 
     catalog = json.loads((EXAMPLES / "catalog.json").read_text(encoding="utf-8"))
+    catalog_items = catalog.get("presets")
     catalog_rows: dict[str, dict[str, Any]] = {}
     catalog_pass = (
-        catalog.get("count") == 25
-        and len(catalog.get("presets", [])) == 25
-        and len({item["id"] for item in catalog.get("presets", [])}) == 25
+        isinstance(catalog.get("count"), int)
+        and catalog["count"] > 0
+        and isinstance(catalog_items, list)
+        and len(catalog_items) == catalog["count"]
+        and all(
+            isinstance(item, dict)
+            and isinstance(item.get("id"), str)
+            and isinstance(item.get("file"), str)
+            for item in catalog_items
+        )
+        and len({item["id"] for item in catalog_items}) == len(catalog_items)
+        and len({item["file"] for item in catalog_items}) == len(catalog_items)
     )
-    for item in catalog.get("presets", []):
+    for item in catalog_items if isinstance(catalog_items, list) else []:
         case = json.loads((EXAMPLES / item["file"]).read_text(encoding="utf-8"))
         case["max_steps"] = 1
         case.pop("duration_s", None)

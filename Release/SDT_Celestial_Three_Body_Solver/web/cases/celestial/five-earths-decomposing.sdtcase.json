@@ -1,0 +1,137 @@
+{
+  "contract_version": "3.0.0",
+  "case_id": "five-earths-decomposing",
+  "problem_class": "sdt_occlusion_nbody",
+  "frame": {
+    "type": "inertial_cartesian",
+    "units": "SI"
+  },
+  "forces": [
+    {
+      "type": "retarded_seven_circle_occlusion",
+      "pressure_source": "sdt_law_I_P_conv",
+      "propagation_speed": "c"
+    }
+  ],
+  "bodies": [
+    {
+      "id": "Earth-1",
+      "baryon_count": "3570561831943841900782093571431079707813357645987840",
+      "radius_m": 6371010,
+      "collision_radius_m": 6371010,
+      "position_m": [
+        31855050.0,
+        0.0,
+        0
+      ],
+      "velocity_m_s": [
+        -0.0,
+        25000.0,
+        0
+      ],
+      "provenance": {
+        "radius": "IAU/CODATA Earth mean radius, via laws.hpp",
+        "baryons": "Earth mass / proton mass, via laws.hpp",
+        "position": "Regular pentagon, circumradius 5x Earth radii, vertex 0 at 0 deg",
+        "velocity": "Tangential, counter-clockwise, magnitude tuned above the measured centripetal scale so the configuration disperses rather than orbits"
+      }
+    },
+    {
+      "id": "Earth-2",
+      "baryon_count": "3570561831943841900782093571431079707813357645987840",
+      "radius_m": 6371010,
+      "collision_radius_m": 6371010,
+      "position_m": [
+        9843751.80666367,
+        30295952.87940793,
+        0
+      ],
+      "velocity_m_s": [
+        -23776.41290737884,
+        7725.424859373687,
+        0
+      ],
+      "provenance": {
+        "radius": "IAU/CODATA Earth mean radius, via laws.hpp",
+        "baryons": "Earth mass / proton mass, via laws.hpp",
+        "position": "Regular pentagon, circumradius 5x Earth radii, vertex 1 at 72 deg",
+        "velocity": "Tangential, counter-clockwise, magnitude tuned above the measured centripetal scale so the configuration disperses rather than orbits"
+      }
+    },
+    {
+      "id": "Earth-3",
+      "baryon_count": "3570561831943841900782093571431079707813357645987840",
+      "radius_m": 6371010,
+      "collision_radius_m": 6371010,
+      "position_m": [
+        -25771276.806663666,
+        18723928.60103935,
+        0
+      ],
+      "velocity_m_s": [
+        -14694.63130731183,
+        -20225.424859373685,
+        0
+      ],
+      "provenance": {
+        "radius": "IAU/CODATA Earth mean radius, via laws.hpp",
+        "baryons": "Earth mass / proton mass, via laws.hpp",
+        "position": "Regular pentagon, circumradius 5x Earth radii, vertex 2 at 144 deg",
+        "velocity": "Tangential, counter-clockwise, magnitude tuned above the measured centripetal scale so the configuration disperses rather than orbits"
+      }
+    },
+    {
+      "id": "Earth-4",
+      "baryon_count": "3570561831943841900782093571431079707813357645987840",
+      "radius_m": 6371010,
+      "collision_radius_m": 6371010,
+      "position_m": [
+        -25771276.80666367,
+        -18723928.601039343,
+        0
+      ],
+      "velocity_m_s": [
+        14694.631307311825,
+        -20225.424859373685,
+        0
+      ],
+      "provenance": {
+        "radius": "IAU/CODATA Earth mean radius, via laws.hpp",
+        "baryons": "Earth mass / proton mass, via laws.hpp",
+        "position": "Regular pentagon, circumradius 5x Earth radii, vertex 3 at 216 deg",
+        "velocity": "Tangential, counter-clockwise, magnitude tuned above the measured centripetal scale so the configuration disperses rather than orbits"
+      }
+    },
+    {
+      "id": "Earth-5",
+      "baryon_count": "3570561831943841900782093571431079707813357645987840",
+      "radius_m": 6371010,
+      "collision_radius_m": 6371010,
+      "position_m": [
+        9843751.806663662,
+        -30295952.879407935,
+        0
+      ],
+      "velocity_m_s": [
+        23776.412907378843,
+        7725.424859373681,
+        0
+      ],
+      "provenance": {
+        "radius": "IAU/CODATA Earth mean radius, via laws.hpp",
+        "baryons": "Earth mass / proton mass, via laws.hpp",
+        "position": "Regular pentagon, circumradius 5x Earth radii, vertex 4 at 288 deg",
+        "velocity": "Tangential, counter-clockwise, magnitude tuned above the measured centripetal scale so the configuration disperses rather than orbits"
+      }
+    }
+  ],
+  "integrator": "velocity_verlet",
+  "timestep_s": 60,
+  "duration_s": 172800,
+  "record_every_steps": 1,
+  "tolerances": {
+    "retarded_time_s": 1e-09,
+    "max_retarded_iterations": 64
+  },
+  "gates": []
+}

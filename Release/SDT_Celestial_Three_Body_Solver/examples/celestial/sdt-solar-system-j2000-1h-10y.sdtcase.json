@@ -1,0 +1,225 @@
+{
+  "contract_version": "3.0.0",
+  "case_id": "sdt-solar-system-j2000-1h-10y",
+  "problem_class": "sdt_occlusion_nbody",
+  "frame": {
+    "type": "inertial_cartesian",
+    "units": "SI"
+  },
+  "forces": [
+    {
+      "type": "retarded_seven_circle_occlusion",
+      "pressure_source": "sdt_law_I_P_conv",
+      "propagation_speed": "c"
+    }
+  ],
+  "bodies": [
+    {
+      "id": "Sun",
+      "baryon_count": "1189103151064891689520309602880407308966306831851814125568",
+      "radius_m": 695700000,
+      "collision_radius_m": 695700000,
+      "position_m": [
+        -1067599217.9021449,
+        -418233648.79948026,
+        30835996.68431503
+      ],
+      "velocity_m_s": [
+        9.312452523080912,
+        -12.824597088126374,
+        -0.16340649834831844
+      ],
+      "provenance": {
+        "classification": "OBSERVED",
+        "baryons": "mass_kg / measured::m_p",
+        "radius": "IAU 2015 solar radius",
+        "state": "Astropy 'builtin' analytical ephemeris, J2000.0 TDB, barycentric mean ecliptic -- not JPL DE441; declared lower precision, offline-computable, no fitted trajectory value"
+      }
+    },
+    {
+      "id": "Mercury",
+      "baryon_count": "197360799427845991512216860794209981242029232881664",
+      "radius_m": 2439700,
+      "collision_radius_m": 2439700,
+      "position_m": [
+        -20529049598.304443,
+        -67331374231.60959,
+        -3648979214.200999
+      ],
+      "velocity_m_s": [
+        37004.31173549675,
+        -11177.322576645936,
+        -4307.7996897538815
+      ],
+      "provenance": {
+        "classification": "OBSERVED",
+        "baryons": "mass_kg / measured::m_p (NASA/JPL planetary fact sheet mass)",
+        "radius": "NASA/JPL planetary fact sheet mean radius",
+        "state": "Astropy 'builtin' analytical ephemeris, J2000.0 TDB, barycentric mean ecliptic -- not JPL DE441; declared lower precision, offline-computable, no fitted trajectory value"
+      }
+    },
+    {
+      "id": "Venus",
+      "baryon_count": "2910101757641514349599825014982693880815482289782784",
+      "radius_m": 6051800,
+      "collision_radius_m": 6051800,
+      "position_m": [
+        -108524016012.94908,
+        -5303534798.257121,
+        6166650286.3482685
+      ],
+      "velocity_m_s": [
+        1390.0792162324658,
+        -35152.877161863726,
+        -560.100464616345
+      ],
+      "provenance": {
+        "classification": "OBSERVED",
+        "baryons": "mass_kg / measured::m_p (NASA/JPL planetary fact sheet mass)",
+        "radius": "NASA/JPL planetary fact sheet mean radius",
+        "state": "Astropy 'builtin' analytical ephemeris, J2000.0 TDB, barycentric mean ecliptic -- not JPL DE441; declared lower precision, offline-computable, no fitted trajectory value"
+      }
+    },
+    {
+      "id": "Earth",
+      "baryon_count": "3570561831943841900782093571431079707813357645987840",
+      "radius_m": 6371010,
+      "collision_radius_m": 6371010,
+      "position_m": [
+        -27566633697.21818,
+        144279061942.10864,
+        30250729.91496577
+      ],
+      "velocity_m_s": [
+        -29784.946796638935,
+        -5482.120471475399,
+        0.021170526531418075
+      ],
+      "provenance": {
+        "classification": "OBSERVED",
+        "baryons": "mass_kg / measured::m_p (NASA/JPL planetary fact sheet mass)",
+        "radius": "NASA/JPL planetary fact sheet mean radius",
+        "state": "Astropy 'builtin' analytical ephemeris, J2000.0 TDB, barycentric mean ecliptic -- not JPL DE441; declared lower precision, offline-computable, no fitted trajectory value"
+      }
+    },
+    {
+      "id": "Mars",
+      "baryon_count": "383655141016155390431635323880422057961277030924288",
+      "radius_m": 3389500,
+      "collision_radius_m": 3389500,
+      "position_m": [
+        206978936987.18448,
+        -2418920472.29933,
+        -5124589298.197746
+      ],
+      "velocity_m_s": [
+        1173.4743064740371,
+        26283.990900195156,
+        522.1205057756115
+      ],
+      "provenance": {
+        "classification": "OBSERVED",
+        "baryons": "mass_kg / measured::m_p (NASA/JPL planetary fact sheet mass)",
+        "radius": "NASA/JPL planetary fact sheet mean radius",
+        "state": "Astropy 'builtin' analytical ephemeris, J2000.0 TDB, barycentric mean ecliptic -- not JPL DE441; declared lower precision, offline-computable, no fitted trajectory value"
+      }
+    },
+    {
+      "id": "Jupiter",
+      "baryon_count": "1134864952512608611276905358715189622458470478381056000",
+      "radius_m": 69911000,
+      "collision_radius_m": 69911000,
+      "position_m": [
+        597557252710.8544,
+        439116982819.703,
+        -15177650313.688364
+      ],
+      "velocity_m_s": [
+        -7887.539727082002,
+        11147.607200081642,
+        130.3914818751163
+      ],
+      "provenance": {
+        "classification": "OBSERVED",
+        "baryons": "mass_kg / measured::m_p (NASA/JPL planetary fact sheet mass)",
+        "radius": "NASA/JPL planetary fact sheet mean radius",
+        "state": "Astropy 'builtin' analytical ephemeris, J2000.0 TDB, barycentric mean ecliptic -- not JPL DE441; declared lower precision, offline-computable, no fitted trajectory value"
+      }
+    },
+    {
+      "id": "Saturn",
+      "baryon_count": "339789878364248222619583174468862451329492739938058240",
+      "radius_m": 58232000,
+      "collision_radius_m": 58232000,
+      "position_m": [
+        957047224583.5139,
+        982502705766.2507,
+        -55262035613.2805
+      ],
+      "velocity_m_s": [
+        -7430.65381618384,
+        6698.465278242122,
+        178.93819961702445
+      ],
+      "provenance": {
+        "classification": "OBSERVED",
+        "baryons": "mass_kg / measured::m_p (NASA/JPL planetary fact sheet mass)",
+        "radius": "NASA/JPL planetary fact sheet mean radius",
+        "state": "Astropy 'builtin' analytical ephemeris, J2000.0 TDB, barycentric mean ecliptic -- not JPL DE441; declared lower precision, offline-computable, no fitted trajectory value"
+      }
+    },
+    {
+      "id": "Uranus",
+      "baryon_count": "51900551326319443804793515763257915376082722687549440",
+      "radius_m": 25362000,
+      "collision_radius_m": 25362000,
+      "position_m": [
+        2157937864734.053,
+        -2055162053422.2703,
+        -35619709122.725105
+      ],
+      "velocity_m_s": [
+        4658.777371292603,
+        4600.5932912046765,
+        -43.32645959378442
+      ],
+      "provenance": {
+        "classification": "OBSERVED",
+        "baryons": "mass_kg / measured::m_p (NASA/JPL planetary fact sheet mass)",
+        "radius": "NASA/JPL planetary fact sheet mean radius",
+        "state": "Astropy 'builtin' analytical ephemeris, J2000.0 TDB, barycentric mean ecliptic -- not JPL DE441; declared lower precision, offline-computable, no fitted trajectory value"
+      }
+    },
+    {
+      "id": "Neptune",
+      "baryon_count": "61229019271769993898861792175054789616386442205855744",
+      "radius_m": 24622000,
+      "collision_radius_m": 24622000,
+      "position_m": [
+        2513975677689.3857,
+        -3739120012585.4536,
+        19059594592.706215
+      ],
+      "velocity_m_s": [
+        4477.660473106508,
+        3052.240702775917,
+        -166.233407608063
+      ],
+      "provenance": {
+        "classification": "OBSERVED",
+        "baryons": "mass_kg / measured::m_p (NASA/JPL planetary fact sheet mass)",
+        "radius": "NASA/JPL planetary fact sheet mean radius",
+        "state": "Astropy 'builtin' analytical ephemeris, J2000.0 TDB, barycentric mean ecliptic -- not JPL DE441; declared lower precision, offline-computable, no fitted trajectory value"
+      }
+    }
+  ],
+  "integrator": "velocity_verlet",
+  "timestep_s": 3600,
+  "duration_s": 315576000,
+  "record_every_steps": 1,
+  "tolerances": {
+    "retarded_time_s": 1e-09,
+    "max_retarded_iterations": 64
+  },
+  "gates": []
+}
