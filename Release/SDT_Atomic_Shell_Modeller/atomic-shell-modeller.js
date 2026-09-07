@@ -1533,24 +1533,21 @@
     const majorRadius = nucleonRadius * 0.46;
     const tubeRadius = nucleonRadius * 0.38;
     const firstAnchor = add(proton, multiply(frame.secondary, majorRadius + tubeRadius));
-    const secondAnchor = add(proton, multiply(frame.secondary, -(majorRadius + tubeRadius)));
     const lane = nucleonRadius * (1.4 + 0.08 * (marker.id % 5));
     const firstControl = add(multiply(add(outer, firstAnchor), 0.5), multiply(frame.tertiary, lane));
-    const secondControl = add(multiply(add(secondAnchor, outer), 0.5), multiply(frame.tertiary, -lane));
     const inbound = Array.from({ length: 33 }, (_, index) => quadraticBezier(outer, firstControl, firstAnchor, index / 32));
     const winding = Array.from({ length: 129 }, (_, index) => {
-      const phase = Math.PI * index / 128;
+      const phase = tau * index / 128;
       const toroidalDirection = add(
         multiply(frame.secondary, Math.cos(phase)),
         multiply(frame.tertiary, Math.sin(phase)),
       );
       return add(proton, add(
-        multiply(toroidalDirection, majorRadius + tubeRadius * Math.cos(8 * phase)),
-        multiply(axis, tubeRadius * Math.sin(8 * phase)),
+        multiply(toroidalDirection, majorRadius + tubeRadius * Math.cos(4 * phase)),
+        multiply(axis, tubeRadius * Math.sin(4 * phase)),
       ));
     });
-    const outbound = Array.from({ length: 33 }, (_, index) => quadraticBezier(secondAnchor, secondControl, outer, index / 32));
-    return [...inbound, ...winding.slice(1), ...outbound.slice(1)];
+    return [...inbound, ...winding.slice(1), ...inbound.slice(0, -1).reverse()];
   }
 
   function drawNucleonThreadedTours() {
@@ -1859,7 +1856,7 @@
     const apogeeLayout = apogeeSeparationRad !== null
       ? `<div><dt>Apoapsis layout</dt><dd>all ${post1sEllipseMarkers.length} post-1s apogee directions are redistributed at each addition to maximise their minimum angular separation.<br>current minimum separation = ${decimal(apogeeSeparationRad * 180 / Math.PI, 6)} degrees.</dd></div>`
       : '';
-    const protonFibreLayout = `<div><dt>Nucleon-threaded electron tours</dt><dd>${model.markers.length} neutral one-to-one proton/electron assignments.<br>Each closed displayed tour leaves its orbital seat on one strand, performs four poloidal windings through its assigned proton geometry, and returns on a separate strand. The proton is part of the tour geometry, not merely a coordinate label.<br>outer-fibre sampled minimum centreline separation = ${scientific(model.minimumElectronTourSeparationM)} m; electron exclusion diameter = ${scientific(2 * LAW_IV_RADII.electronExclusionRadiusM)} m.</dd></div>`;
+    const protonFibreLayout = `<div><dt>Nucleon-threaded electron tours</dt><dd>${model.markers.length} neutral one-to-one proton/electron assignments.<br>Each closed displayed tour follows its original strand into the assigned proton geometry, completes four poloidal windings, and returns along that same strand. The proton is part of the tour geometry, not merely a coordinate label.<br>outer-fibre sampled minimum centreline separation = ${scientific(model.minimumElectronTourSeparationM)} m; electron exclusion diameter = ${scientific(2 * LAW_IV_RADII.electronExclusionRadiusM)} m.</dd></div>`;
     const contactVolumeLayout = model.contactGeometry
       ? `${model.contactGeometry.alphaModules.length > 0 ? `<div><dt>4N contact proxy</dt><dd>one alpha tetrahedron; r_contact = ${decimal(model.contactGeometry.contactCircumradiusM * 1e15, 6)} fm<br>V_alpha = ${scientific(model.contactGeometry.alphaContactVolumeM3)} m^3</dd></div>` : ''}${model.contactGeometry.trefoilModules.length > 0 ? `<div><dt>Law IV volume tube</dt><dd>${model.contactGeometry.trefoilModules.length} D/T path(s); centreline diameter = ${decimal(model.contactGeometry.torusMajorDiameterM * 1e15, 6)} fm<br>L_e = 2 pi a0; b_e = ${scientific(CONTACT_TORUS.electronBodyRadiusM)} m<br>b_p = ${scientific(model.contactGeometry.torusTubeRadiusM)} m; V_torus = ${scientific(model.contactGeometry.torusEnvelopeVolumeM3)} m^3<br>V_p input = ${scientific(model.contactGeometry.protonDisplacedVolumeM3)} m^3; residual = ${scientific(model.contactGeometry.torusEnvelopeVolumeM3 - model.contactGeometry.protonDisplacedVolumeM3)} m^3<br>display tube is exaggerated; geometric containment uses the physical matter/contact boundary, never R_wake or b_p</dd></div><div><dt>Packing-count audit</dt><dd>V_p/V_e = ${decimal(model.contactGeometry.packingCount, 9)}<br>6 pi^5 = ${decimal(model.contactGeometry.sixPiFifthComparison, 9)}; comparison only</dd></div>` : ''}<div><dt>volume drive audit</dt><dd>V_eff = ${scientific(model.contactGeometry.effectiveVolumeM3)} m^3<br>at fixed separation, Omega and F scale as V^${decimal(model.contactGeometry.volumeForceExponent, 6)}; z = kappa/r has no volume term</dd></div>`
       : '';
