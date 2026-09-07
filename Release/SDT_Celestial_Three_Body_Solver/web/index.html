@@ -535,13 +535,59 @@ function assembleCustomCase(){
 // result.cones, which the N-body engine never populates (its per-pair data
 // is under pair_matrix/interactions instead), so it never had anything to
 // show here.
+// Bodies placed with a plain click (no drag, no typed velocity) start at
+// rest — with only mutual occlusion pulling them together, that's a
+// straight-line fall into a close encounter, not an orbit (confirmed
+// directly: a Sun+Earth pair placed at rest flung Earth to 431,603 m/s
+// within one tick). This fills in a real, measured, not-guessed default
+// for those bodies only — anything you dragged or typed a velocity into
+// is left exactly as you set it.
+//
+// "Required orbital speed" is measured, not re-derived by hand from the
+// occlusion force law (that would risk drifting from what the actual
+// engine computes) — a one-step probe with every body momentarily at rest
+// gets the real net acceleration on each at-rest body from pair_matrix,
+// then v_circ=sqrt(|a|*r) (standard centripetal balance) around the
+// baryon-weighted barycenter already used for the pre-run rotation. Half
+// of that, tangential (same rotational sense as the barycenter rotation),
+// so bodies swing through an elliptical path around each other instead of
+// either colliding (0 speed) or making a clean circle (full v_circ).
+async function computeAutoOrbitalVelocities(){
+  const atRest=builderBodies.filter(b=>Math.hypot(b.velocity_m_s[0],b.velocity_m_s[1])<1e-6);
+  if(!atRest.length)return;
+  setStatus("measuring required orbital speed for at-rest bodies…");
+  const probeCase={
+    contract_version:"3.0.0",case_id:"probe-orbital-speed",problem_class:"sdt_occlusion_nbody",
+    frame:{type:"inertial_cartesian",units:"SI"},
+    forces:[{type:"retarded_seven_circle_occlusion",pressure_source:"sdt_law_I_P_conv",propagation_speed:"c"}],
+    bodies:builderBodies.map(b=>({id:b.id,baryon_count:b.baryon_count,radius_m:b.radius_m,collision_radius_m:b.radius_m,position_m:b.position_m,velocity_m_s:[0,0,0]})),
+    integrator:"velocity_verlet",timestep_s:timestepForSpan(builderSpanAU()),duration_s:315576000,record_every_steps:1,
+    tolerances:{retarded_time_s:1e-9,max_retarded_iterations:64},gates:[],
+  };
+  await call("create",{caseJson:JSON.stringify(probeCase)});
+  const probe=await call("advance",{steps:1});
+  const pairs=probe.pair_matrix||[];
+  const[cx,cy]=barycenterXY(builderBodies);
+  atRest.forEach(b=>{
+    const net=[0,0];
+    pairs.forEach(p=>{if(p.target===b.id){net[0]+=p.acceleration_m_s2[0];net[1]+=p.acceleration_m_s2[1]}});
+    const aMag=Math.hypot(net[0],net[1]);
+    const r=Math.hypot(b.position_m[0]-cx,b.position_m[1]-cy);
+    if(aMag<=0||r<=0)return;
+    const vHalf=.5*Math.sqrt(aMag*r);
+    const[tx,ty]=rotateVector90CW((b.position_m[0]-cx)/r,(b.position_m[1]-cy)/r);
+    b.velocity_m_s=[vHalf*tx,vHalf*ty,0];
+  });
+  renderBodyList();
+}
 async function runCustomScenario(){
   if(busy||continuous||builderBodies.length<2)return;
   setRunButtonsDisabled(true);resetExplainer();
   needsInitialFocus=true;manualCameraControl=false;cachedPairBoost=null;
-  activeCase=assembleCustomCase();activePreset=null;explainerActive=false;
   clear(builderGroup);
   try{
+    await computeAutoOrbitalVelocities();
+    activeCase=assembleCustomCase();activePreset=null;explainerActive=false;
     await createSession();continuous=true;$("continuous").disabled=false;renderEffectiveSteps();advance();
   }catch(error){setStatus(error.message,true);setRunButtonsDisabled(false)}
 }
