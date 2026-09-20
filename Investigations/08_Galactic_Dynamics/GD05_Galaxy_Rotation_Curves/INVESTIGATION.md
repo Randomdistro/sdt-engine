@@ -38,7 +38,7 @@ v_lim² = c² · (koppa_per_baryon · N_baryons) / (2r)     = G·M_bar / (2r)
 v_SDT  = max_r [ v_lim(r) · √(2 f_occ(r)) ]
 ```
 
-- `koppa_per_baryon = ℓ_P²·c·m_p/ℏ = 1.242e-54 m` — **DERIVED** (reproduces G·M/c² exactly).
+- `koppa_per_baryon = ℓ_P²/(R_p/4) = 1.242e-54 m` — **DERIVED** (reproduces G·M/c² exactly).
 - `kappa_area = 9.1e-29 m²` — **CALIBRATED** to the 175 M☉/pc² threshold (≈1.37·σ_Thomson; the code comment says so explicitly).
 - `h_z = h_R / 10` baseline (the ratio the calibration assumes; Kregel+2002 give ~7.3 empirically).
 

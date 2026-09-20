@@ -18,7 +18,7 @@
 //  HONEST SCOPE: this does NOT derive ℓ_P. Every route loops back to it (G_sdt, m_P, T_P,
 //  ϟ_b, N are all built from ℓ_P). What it shows is that SDT is SELF-CONTAINED around ℓ_P
 //  — it writes G, m_P, T_P in pure primitives, never borrowing Newton's constant — while
-//  remaining honestly NOT self-deriving. ℓ_P stays Axiom R1, the one irreducible seed
+//  checking a supplied numerical reference. ℓ_P follows the exact koppa–wake closure
 //  (see measured::l_P provenance in laws.hpp, and FLM06 §3 Seed Theorem).
 //
 //  Build (MSVC):
@@ -82,7 +82,7 @@ int main() {
           hbar / (m_P_ext * c), true  },
 
         { "3 Koppa geo-mean", "sqrt(koppa_b . lambda_p)",
-          depth_closure::lP_from_closure_floor,          // engine: sqrt(koppa_per_baryon * ℏ/(m_p c))
+          depth_closure::lP_from_closure_floor,          // engine: sqrt(koppa_per_baryon * proton_wake)
           depth_closure::lP_from_closure_floor, false },
 
         { "4 Holographic",    "R_CMB / sqrt(S/4pi)",
@@ -125,7 +125,7 @@ int main() {
                 exact_native);
     std::printf("  VERDICT: five physically-distinct PICTURES, ONE seed (FLM06 Seed Theorem).\n");
     std::printf("    SDT is SELF-CONTAINED around l_P (writes G, m_P, T_P in pure primitives)\n");
-    std::printf("    but NOT self-deriving: every route loops back to l_P (Axiom R1).\n");
+    std::printf("    but NOT self-deriving: these numerical checks loop back to stored l_P.\n");
     std::printf("---------------------------------------------------------------------\n");
 
     return (exact_native == 5) ? 0 : 1;

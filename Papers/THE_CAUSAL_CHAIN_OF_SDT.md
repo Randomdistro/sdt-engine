@@ -116,14 +116,14 @@ The same wall appears twice more, for the same reason:
   The proton/electron *ratio* is genuinely strong: it matches `6π⁵` to 19 ppm, a form
   that is *unique* within 0.1% of 1836 and structurally homed (the `6` is the trefoil's
   `2×3` wrap; the `π⁵` factors into two n-sphere surface areas — see §6). But the
-  *absolute* scale that ratio multiplies is not derivable: a ratio is secretly a ratio
-  of two lengths, and FLM06 already forbids building an absolute length from cosmic
-  arithmetic. So `m_e` is handed in once, for the same reason `ℓ_P` is. The ratio is a
+  *absolute* mass scale still needs a supplied anchor in this calculation. FLM06 excludes
+  its tested Clearing subdivision, while ℓ_P follows the exact koppa–wake relation.
+  Neither statement is a general impossibility proof. The ratio is a
   privileged target still missing its mechanism; the scale is a genuine peg.
 
 So the three pegs are not a stylistic choice. They are three independent places
-where the investigations went looking for a derivation and came back with a proof
-that none exists. **Everything else in SDT is built on these three, plus the sky.**
+where the calculations retain supplied scales or couplings; route-specific failures
+do not establish that no derivation exists. **Everything else in SDT is built on these three, plus the sky.**
 
 ### The pegs got fewer (FLM13, 2026-07-03) — the seat collapse
 
@@ -457,8 +457,8 @@ shown to arise identically in a *static* lattice, so that evidence is **degenera
 (**CR10**); and a one-parameter "aging-glass" distance law fits sixteen hundred real
 supernovae with no dark energy at all (**CR12**). But two debts remain unpaid, and the
 investigations name them: the chain from the force coefficient up to the size of the
-universe still **re-imports `G` through the grain size `ℓ_P`** (Axiom R1, never
-derived), and it still leans on the **Hubble constant `H₀`** as an input — `R_CMB`
+universe still needs a numerical length scale for the exact **koppa–wake closure
+`ℓ_P = √(ϟ·ƛ)`**; the current bridge check reuses stored ℓ_P, and it still leans on the **Hubble constant `H₀`** as an input — `R_CMB`
 carries it, and the acceleration floor that fixes galaxy rotation, `a₀ = cH₀/2π`,
 is *built from* it. The honest verdict on the cosmology is therefore: a remarkable
 amount reproduced, `H₀` matched to a percent — but matched, not yet derived from
@@ -592,10 +592,10 @@ needs C needs A — you find a small, well-mapped set of them. They are not bugs
 in the theory; they are *flagged in the engine's own comments*, and the framework's
 "audit spine" exists precisely to track them. There are four:
 
-1. **`ℓ_P` defines `ℓ_P`.** The prettiest internal route to the grain size,
-   `ℓ_P = √(ϟ · ƛ)`, turns out to use a koppa that is itself *defined* using `ℓ_P` —
-   so it reduces to `ℓ_P = ℓ_P`. A consistency check, not a derivation. (FLM06 proves
-   this is unavoidable: see §1.)
+1. **Stored-reference closure check.** `ℓ_P = √(ϟ·ƛ)` is the exact,
+   mass-independent geometric relation. The current engine check supplies a koppa
+   constructed from stored ℓ_P, so that particular evaluation is a consistency
+   identity. This is an implementation dependency, not a prohibition on derivation.
 
 2. **`α ↔ e ↔ r_e`.** The coupling ring of §5. No member is the entrance; one is held
    by hand.

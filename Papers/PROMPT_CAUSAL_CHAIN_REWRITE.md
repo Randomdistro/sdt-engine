@@ -78,9 +78,10 @@ translation keys** — both future websites will reference links by ID, so IDs a
 You may ADD links (IDs like L13a) where the repo supports finer structure; you may not
 delete, merge, or reorder these.
 
-- **L0 — The seed.** ℓ_P as the one dimensional axiom (R1). Honest status: assumed, not
-  derived; the "Seed Theorem" (that one anchor is unavoidable) is an agent-era claim,
-  UNCONFIRMED — state the question as open, never as settled impossibility.
+- **L0 — The grain.** State ℓ_P = √(ϟ·ƛ), exact and mass-independent,
+  with the proton form ƛ_p = R_p/(W+1), W+1 = 4. Distinguish the geometric
+  relation from the current bridge check, which constructs koppa from stored ℓ_P.
+
 - **L1 — The substrate.** Spations; a reconfigurable lightspeed superfluid, not frozen
   glass. The static 12-around-1 packing would carry a smeared shortfall (~0.103 total) — but
   **movement herds the slack (Harvey 2026-07-26): the gaps bunch into shaped voids —
@@ -153,7 +154,7 @@ delete, merge, or reorder these.
   earned link-by-link, not asserted; the Hubble tension as ΛCDM's conflation; the cyclic
   detonation-recharge picture labelled CONJECTURE (uncommitted).
 - **L20 — The ledger of debts.** Every OPEN in the chain gathered as first-class entries,
-  each with: what would pay it, what dies if it fails. Minimum set: ℓ_P seed; α underived;
+  each with: what would pay it, what dies if it fails. Minimum set: supplied koppa/wake scale provenance; α origin;
   ε = hν; the ν transport coefficient (λ_mfp from knot density — gates FD01/02/08, TD04/08);
   forward ℓ_c; the freedom-climb theorem; C_K; intermittency high orders; FLM12 D1/D2;
   FLM14 root; the 6π⁵ mass-ratio hook [RESOLVED CONSTRUCTION by PPT17,

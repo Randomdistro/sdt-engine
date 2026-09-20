@@ -56,7 +56,7 @@ static_assert(sdt::laws::measured::r_e
 // Numeric gates and target-independent call graphs live in APS14, GOM41,
 // CR08, FD02, FLM07/15, NP33, APS03, GOM06 and TD03 respectively.
 
-enum class Certification { DERIVED, COMPUTED, CALIBRATED, OBSERVED, PENDING, IDENTITY };
+enum class Certification { DERIVED, COMPUTED, CALIBRATED, OBSERVED, PENDING, CONSTRUCTION };
 
 struct BenchmarkResult {
     std::string id;
@@ -71,7 +71,7 @@ struct BenchmarkResult {
 };
 
 static int g_total = 0, g_passed = 0, g_failed = 0;
-static int g_identity_pass = 0, g_calibrated_pass = 0;   // shown, but NOT tallied as predictions
+static int g_construction_pass = 0, g_calibrated_pass = 0;   // shown, but NOT tallied as predictions
 static int g_pending_note = 0;  // PENDING that meet tol — note-only, not earned (detox 2026-08-09)
 static std::vector<BenchmarkResult> g_results;
 
@@ -83,7 +83,7 @@ static const char* certification_name(Certification cert)
         case Certification::CALIBRATED: return "CALIBRATED";
         case Certification::OBSERVED:   return "OBSERVED";
         case Certification::PENDING:    return "PENDING";
-        case Certification::IDENTITY:   return "IDENTITY";
+        case Certification::CONSTRUCTION: return "CONSTRUCTION";
     }
     return "UNKNOWN";
 }
@@ -184,7 +184,7 @@ static bool write_website_data(
         << "  \"summary\": {\n"
         << "    \"earned_passed\": " << g_passed << ",\n"
         << "    \"earned_total\": " << earned_total << ",\n"
-        << "    \"identity_passed\": " << g_identity_pass << ",\n"
+        << "    \"construction_passed\": " << g_construction_pass << ",\n"
         << "    \"calibrated_passed\": " << g_calibrated_pass << ",\n"
         << "    \"pending_note_only\": " << g_pending_note << ",\n"
         << "    \"genuine_fail\": " << genuine_fail << ",\n"
@@ -330,15 +330,15 @@ static void report(const char* id, const char* name, const char* domain,
 
     g_total++;
     // HUNTER repair 2026-07-03 (CANON_proposals §3, author-approved): the pass counter
-    // previously tallied on tolerance alone, so definitional identities and calibrated
-    // fits inflated the headline. IDENTITY/CALIBRATED passes are now shown but counted
-    // separately — the headline reports earned predictions only. A FAILING identity is
+    // previously tallied on tolerance alone, so true-by-construction results and calibrated
+    // fits inflated the headline. CONSTRUCTION/CALIBRATED passes are now shown but counted
+    // separately — the headline reports earned predictions only. A FAILING construction is
     // still a genuine failure (an engine inconsistency).
     // Detox 2026-08-09: PENDING that meet tolerance are note-only (literal / shared-form
     // rows); they leave the earned denom. PENDING that miss tolerance remain known-open
     // fails in the earned denom (unchanged prior behaviour).
-    if (cert == Certification::IDENTITY) {
-        if (pass) g_identity_pass++; else g_failed++;
+    if (cert == Certification::CONSTRUCTION) {
+        if (pass) g_construction_pass++; else g_failed++;
     } else if (cert == Certification::CALIBRATED) {
         if (pass) g_calibrated_pass++; else g_failed++;
     } else if (cert == Certification::PENDING) {
@@ -438,7 +438,7 @@ static void B03_fine_structure()
     // Bohr velocity at ground state (should be αc)
     double v1 = atomic::bohr_velocity(1, 1);
     double exp_v = measured::alpha * measured::c;
-    report("B03", "Bohr v(1,1) = alpha*c [m/s]", "Atomic", v1, exp_v, 0.001, Certification::IDENTITY);  // bohr_velocity(1,1) RETURNS αc — αc vs αc, definitional (HUNTER P7)
+    report("B03", "Bohr v(1,1) = alpha*c [m/s]", "Atomic", v1, exp_v, 0.001, Certification::CONSTRUCTION);  // bohr_velocity(1,1) RETURNS αc — αc vs αc, definitional (HUNTER P7)
 }
 
 // ═══════════════════════════════════════════════════════════════════════
@@ -549,7 +549,7 @@ static void B06_multielectron()
         all_states_converged && maximum_force_residual < 1.0e-8 ? 1.0 : 0.0,
         1.0,
         0.001,
-        Certification::IDENTITY
+        Certification::CONSTRUCTION
     );
 }
 
@@ -794,7 +794,7 @@ static void B12_stellar_structure()
         double zk2 = bridge::zk2_product(z, k);
         char name[64];
         std::snprintf(name, sizeof(name), "%-12s zk2", s.name);
-        report("B12", name, "Stellar", zk2, 1.0, 0.001, Certification::IDENTITY);  // zk²≡1 is the closure DEFINITION z=1/k² — true for any v (HUNTER P8)
+        report("B12", name, "Stellar", zk2, 1.0, 0.001, Certification::CONSTRUCTION);  // zk²≡1 is the koppa/z-k bridge — true by construction for any v, the same v used for both sides here (HUNTER P8); the independent test is B39 (real spectroscopic z against orbitally-derived k)
     }
 }
 
@@ -1049,13 +1049,13 @@ static void B20_zk2_universality()
     double z_H = measured::alpha * measured::alpha;
     double k_H = measured::alpha_inv;
     double zk2_H = z_H * k_H * k_H;
-    report("B20", "Hydrogen zk2", "Universal", zk2_H, 1.0, 0.001, Certification::IDENTITY);  // definitional closure (HUNTER P9)
+    report("B20", "Hydrogen zk2", "Universal", zk2_H, 1.0, 0.001, Certification::CONSTRUCTION);  // koppa/z-k bridge, true by construction (HUNTER P9)
 
     // Earth orbit
     double v_earth = 29783.0;
     double z_e = bridge::z_from_v(v_earth);
     double k_e = bridge::k_from_v(v_earth);
-    report("B20", "Earth orbit zk2", "Universal", z_e * k_e * k_e, 1.0, 0.001, Certification::IDENTITY);  // definitional closure (HUNTER P9)
+    report("B20", "Earth orbit zk2", "Universal", z_e * k_e * k_e, 1.0, 0.001, Certification::CONSTRUCTION);  // koppa/z-k bridge, true by construction (HUNTER P9)
 }
 
 // ═══════════════════════════════════════════════════════════════════════
@@ -1095,16 +1095,16 @@ static void B22_pressure_hierarchy()
 }
 
 // ═══════════════════════════════════════════════════════════════════════
-//  B23 — COULOMB IDENTITY: k_e e² = αℏc
+//  B23 — COULOMB CONSTRUCTION: k_e e² = αℏc
 // ═══════════════════════════════════════════════════════════════════════
 
-static void B23_coulomb_identity()
+static void B23_coulomb_construction()
 {
-    std::puts("\n══ B23: COULOMB COUPLING IDENTITY ══");
+    std::puts("\n══ B23: COULOMB COUPLING CONSTRUCTION ══");
     using namespace sdt::laws;
 
     report("B23", "k_e*e2 (SDT derived) [J·m]", "Universal",
-           coulomb_identity::k_e_e2, coulomb_identity::k_e_e2_codata, 0.001, Certification::IDENTITY);  // α ≡ k_e e²/ℏc — tautology; laws.hpp itself flags class F "FAILS delete-test" (HUNTER P5)
+           coulomb_identity::k_e_e2, coulomb_identity::k_e_e2_codata, 0.001, Certification::CONSTRUCTION);  // α ≡ k_e e²/ℏc — true by construction; laws.hpp itself flags class F "FAILS delete-test" (HUNTER P5)
 }
 
 // ═══════════════════════════════════════════════════════════════════════
@@ -1123,13 +1123,13 @@ static void B24_exclusion_volumes()
     // Mass ratio preserved
     double ratio = law_IV::V_disp_p / law_IV::V_disp_e;
     double exp_ratio = measured::m_p / measured::m_e;
-    report("B24", "V_p/V_e = m_p/m_e", "Particle", ratio, exp_ratio, 0.001, Certification::IDENTITY);  // V_disp ∝ m ⇒ ratio ≡ m_p/m_e by construction (HUNTER P6)
+    report("B24", "V_p/V_e = m_p/m_e", "Particle", ratio, exp_ratio, 0.001, Certification::CONSTRUCTION);  // V_disp ∝ m ⇒ ratio ≡ m_p/m_e by construction (HUNTER P6)
 
     // Marginal stability: P_cf = P_conv / 3
     double P_cf = law_IV::rho_eff_e * measured::c * measured::c;
     double P_target = law_I::P_conv / 3.0;
     double stability_ratio = P_cf / P_target;
-    report("B24", "P_cf / (P_conv/3) = 1.0", "Particle", stability_ratio, 1.0, 0.001, Certification::IDENTITY);  // P_cf ≡ P_conv/3 by the marginal-stability definition (HUNTER P6b)
+    report("B24", "P_cf / (P_conv/3) = 1.0", "Particle", stability_ratio, 1.0, 0.001, Certification::CONSTRUCTION);  // P_cf ≡ P_conv/3 by the marginal-stability definition (HUNTER P6b)
 }
 
 // ═══════════════════════════════════════════════════════════════════════
@@ -1181,7 +1181,7 @@ static void B26_trefoil_topology()
     // The point test electron follows v(a0)=alpha*c.
     report("B26", "Point electron v(a0) [m/s]", "Particle",
            law_VI::mass_ratio::point_electron_bohr_velocity,
-           measured::alpha * measured::c, 1e-10, Certification::IDENTITY);
+           measured::alpha * measured::c, 1e-10, Certification::CONSTRUCTION);
 
     // Conserving 6pi^5 electron closure tubes into the torus at R_p.
     const double b_e = law_VI::winding::r_electron_body_open;
@@ -1191,7 +1191,7 @@ static void B26_trefoil_topology()
         / law_VI::mass_ratio::electron_orbit_tube_volume(b_e);
     report("B26", "Torus/electron tube volume ratio", "Particle",
            packed_ratio, law_VI::mass_ratio::six_pi_5, 1e-10,
-           Certification::IDENTITY);
+           Certification::CONSTRUCTION);
 }
 
 // ═══════════════════════════════════════════════════════════════════════
@@ -1222,7 +1222,7 @@ static void B28_depth_closure()
     using namespace sdt::laws;
 
     // C1 keystone: solar gravitational redshift = displacement depth ϟ_Sun/R_Sun.
-    // (Known-match; ϟ≡GM/c² makes this an identity-of-interpretation, ~0.03%.)
+    // (Known-match; ϟ≡GM/c² makes this the same fact under two readings, ~0.03%.)
     report("B28", "Solar redshift = depth z_Sun", "Gravity",
            depth_closure::z_spectral_Sun, 2.1225e-6, 0.1, Certification::COMPUTED);
 
@@ -1509,21 +1509,21 @@ static void B39_relay_speed_profile()
     std::puts("       NS surface splits them by 8.6% — the named discriminator.");
 }
 
-static void canonical_identity_checks()
+static void canonical_construction_checks()
 {
     using namespace sdt::laws;
-    std::puts("\n══ CANONICAL FORMULA IDENTITIES ══");
+    std::puts("\n══ CANONICAL FORMULA CONSTRUCTIONS ══");
     const double k_formula =
         measured::alpha_inv * std::sqrt(measured::R_p / measured::a_0);
     report("I40", "Proton-surface k from stated formula", "Canon",
            bridge::k_proton_surface, k_formula, 1e-12,
-           Certification::IDENTITY);
+           Certification::CONSTRUCTION);
 
     const double v_point =
         law_VI::mass_ratio::point_electron_velocity(measured::R_p);
-    report("I41", "Point-electron/traction velocity identity", "Canon",
+    report("I41", "Point-electron/traction velocity construction", "Canon",
            law_VI::traction::v_phase_proton_surface, v_point, 1e-12,
-           Certification::IDENTITY, "m/s");
+           Certification::CONSTRUCTION, "m/s");
 
     const double R = (measured::hbar / (measured::m_p * measured::c))
                    / std::numbers::sqrt3;
@@ -1533,7 +1533,7 @@ static void canonical_identity_checks()
         * 1.0e-15 / (1.0e9 * measured::eV_to_J);
     report("I42", "PPT05 tension from registered inputs", "Canon",
            law_VI::confinement::string_tension_GeV_per_fm, sigma, 1e-12,
-           Certification::IDENTITY, "GeV/fm");
+           Certification::CONSTRUCTION, "GeV/fm");
 
     constexpr double b = 1.0;
     const double locked = law_IV::locked_engaged_volume_sphere(b);
@@ -1541,7 +1541,7 @@ static void canonical_identity_checks()
     const double sphere = 4.0 * std::numbers::pi * b * b * b / 3.0;
     report("I43", "FLM15 lock/wake volume partition", "Canon",
            (locked + wake) / sphere, 1.0, 1e-12,
-           Certification::IDENTITY);
+           Certification::CONSTRUCTION);
 
     const double coincident_delta =
         law_IV::synchrony_resistance_delta(locked, 2.0 * locked);
@@ -1549,7 +1549,7 @@ static void canonical_identity_checks()
         -law_IV::resistance_from_engaged_volume(locked);
     report("I44", "FLM15 coincident synchrony resistance", "Canon",
            coincident_delta / expected_delta, 1.0, 1e-12,
-           Certification::IDENTITY);
+           Certification::CONSTRUCTION);
 }
 
 // ═══════════════════════════════════════════════════════════════════════
@@ -1638,7 +1638,7 @@ int main(int argc, char** argv)
     B20_zk2_universality();
     B21_screening();
     B22_pressure_hierarchy();
-    B23_coulomb_identity();
+    B23_coulomb_construction();
     B24_exclusion_volumes();
     B25_helium_binding();
     B26_trefoil_topology();
@@ -1655,7 +1655,7 @@ int main(int argc, char** argv)
     B37_rank4_prediction();
     B38_shell_schedule();
     B39_relay_speed_profile();
-    canonical_identity_checks();
+    canonical_construction_checks();
     coverage_roster();
 
     // Separate genuine regressions from KNOWN-OPEN (PENDING) items so the summary
@@ -1667,12 +1667,12 @@ int main(int argc, char** argv)
         }
     }
 
-    // Summary — earned predictions only in the headline; identities/calibrated/note-PENDING shown separately
-    int earned_total = g_total - g_identity_pass - g_calibrated_pass - g_pending_note;
+    // Summary — earned predictions only in the headline; constructions/calibrated/note-PENDING shown separately
+    int earned_total = g_total - g_construction_pass - g_calibrated_pass - g_pending_note;
     std::puts("\n╔══════════════════════════════════════════════════════════════╗");
     std::printf("║  RESULTS: %d/%d earned predictions passed (%.1f%%)           ║\n",
                 g_passed, earned_total, earned_total > 0 ? 100.0 * g_passed / earned_total : 0.0);
-    std::printf("║  + %d consistency identities (definitional; NOT predictions) ║\n", g_identity_pass);
+    std::printf("║  + %d construction checks (definitional; NOT predictions)    ║\n", g_construction_pass);
     std::printf("║  + %d CALIBRATED (class E, documented; not earned)           ║\n", g_calibrated_pass);
     std::printf("║  + %d PENDING note-only (B11 corpus/B18 shared form)         ║\n", g_pending_note);
     std::printf("║  %d genuine fail · %d PENDING open (flagged, in denom)       ║\n",
@@ -1697,7 +1697,7 @@ int main(int argc, char** argv)
     std::puts("  CALIBRATED — one parameter fitted (documented at the call site)");
     std::puts("  OBSERVED   — validated against observation, mechanism established");
     std::puts("  PENDING    — mechanism identified, SDT-native derivation not yet implemented");
-    std::puts("  IDENTITY   — true by definition/construction; shown as consistency, never tallied");
+    std::puts("  CONSTRUCTION — true by definition/construction; shown as consistency, never tallied");
 
     if (website_data_path != nullptr) {
         if (!write_website_data(

@@ -9,7 +9,7 @@ Ruleset.
 
 - The four ontological categories are Space, Matter, Movement, and the
   Ever-Present Now. They are not four numerical inputs.
-- `ℓ_P` is the lattice pitch (Axiom R1). Relations that recover it through a
+- `ℓ_P` is the lattice pitch from the exact koppa–wake closure. Relations that recover it through a
   quantity already containing `ℓ_P` are identities.
 - `c`, `k_B`, and `e` are unit bridges. `{ℏ, m_e, m_p}` occupy one
   action/mass seat. `α` is the hydrogen rung. `a₀` is an atomic seat.

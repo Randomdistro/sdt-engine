@@ -232,18 +232,17 @@ const root=new THREE.Group();scene.add(root);
 const trailsGroup=new THREE.Group(),conesGroup=new THREE.Group(),sectionsGroup=new THREE.Group(),lagrangeGroup=new THREE.Group(),pivotGroup=new THREE.Group(),bodiesGroup=new THREE.Group(),displacementGroup=new THREE.Group(),explainerGroup=new THREE.Group(),builderGroup=new THREE.Group();
 root.add(trailsGroup,conesGroup,sectionsGroup,lagrangeGroup,pivotGroup,bodiesGroup,displacementGroup,explainerGroup,builderGroup);
 const colors=[0xffbd67,0x63d9ff,0xd58cff];
-const SCENARIO_CHUNK_STEPS=512,EXPLAINER_TICK_STEPS=40,EXPLAINER_TICK_MS=550,STAGE_AUTO_MS=6000,STAGE_OVERRIDE_MS=30000,TRAIL_RECORD_LIMIT=500;
-// Retarded 7-channel occlusion is O(pairs) with a heavy per-pair quadrature
-// cost, and pairs grow as n(n-1)/2 — the 3-body baseline (3 pairs) is fast
-// enough for a 512-step chunk; a 9-body system (36 pairs, 12x the work)
-// hitting that same fixed chunk size is what was reading as a multi-minute
-// freeze. Scale the chunk to the case's actual body count instead of a
-// number tuned for exactly three bodies.
-function stepsForBodyCount(baseSteps){
-  const n=activeCase?.bodies?.length||3;
-  const pairs=Math.max(1,n*(n-1)/2);
-  return Math.max(2,Math.round(baseSteps*3/pairs));
-}
+const EXPLAINER_TICK_MS=550,STAGE_AUTO_MS=6000,STAGE_OVERRIDE_MS=30000,TRAIL_RECORD_LIMIT=500;
+// The pair-count step formula that used to live here assumed cost scales
+// linearly with pairs — wrong: measured directly, the real 9-body
+// solar-system case (36 pairs, widely separated — hours of light-crossing
+// time between the outer planets) costs ~140ms/step, about 8.6x what that
+// linear-in-pairs model predicted from a close 2-body case's measured
+// ~0.4-0.5ms/(step*pair) rate. That mismatch was producing a genuine 6+
+// second freeze every tick for the solar-system preset — replaced by
+// computeEffectiveSteps' measured-cost approach below, which times the
+// actual advance() call and sizes the next one from that, not from a
+// pair-count guess.
 // Real radius_m/baryon_count, copied verbatim from this repo's own already-
 // validated case files (sdt-solar-system-j2000-1h-10y.sdtcase.json and
 // jpl-sun-earth-moon-j2000.sdtcase.json) rather than re-derived — this is
@@ -1129,41 +1128,62 @@ function renderFloatingLabels(){
     entry.line.style.width=`${len}px`;entry.line.style.transform=`rotate(${angle}rad)`;
   });
 }
-async function createSession(){busy=true;allFrames=[];setStatus("creating deterministic session…");try{const result=await call("create",{caseJson:JSON.stringify(activeCase)});if(result.status!=="created")throw new Error(result.message||result.status);setStatus(`running ${activeCase.case_id}…`)}catch(error){setStatus(error.message,true);throw error}finally{busy=false}}
+async function createSession(){busy=true;allFrames=[];lastStepCostMs=null;setStatus("creating deterministic session…");try{const result=await call("create",{caseJson:JSON.stringify(activeCase)});if(result.status!=="created")throw new Error(result.message||result.status);setStatus(`running ${activeCase.case_id}…`)}catch(error){setStatus(error.message,true);throw error}finally{busy=false}}
 // Speed only ever requests more of the same fixed-size, already-accurate
 // steps per poll — timestep_s itself (set once at case-creation time, see
 // timestepForSpan) is never touched, so the retarded-occlusion quadrature
 // stays exactly as fine-grained regardless of playback speed.
 //
-// A flat step cap protects busy (many-pair) cases from a multi-minute
-// single call, but applied flat it also caps cheap cases (few pairs, each
-// step far less costly) at the same ceiling — so for a 2-body scenario,
-// anything above ~100x speed was silently identical to 100x, since the cap
-// saturated long before the multiplier did. Budget by total work
-// (steps*pairs) instead. Measured directly against a real 2-body (1-pair)
-// case near a close encounter (the expensive regime — the retarded-time
-// solve converges faster once bodies separate): ~0.4-0.5ms per
-// (step*pair). This budget targets ~4s worst-case wall time for a single
-// call — which is still a real, physical ceiling: a cheap scenario simply
-// cannot use very high multipliers without a multi-second wait per tick,
-// no matter how the constant here is tuned. #effectiveSteps makes that
-// ceiling visible instead of leaving "why doesn't this do anything" a
-// mystery.
-function computeEffectiveSteps(baseSteps){
+// Per-step cost is MEASURED from the previous call, not assumed from pair
+// count — pair count alone is the wrong predictor (confirmed directly: the
+// real 9-body solar-system case costs ~140ms/step, ~8.6x what a
+// linear-in-pairs model calibrated on a close 2-body encounter predicted,
+// almost certainly because the retarded-time solve is doing real work
+// against hours-long light-crossing delays between the outer planets, not
+// just iterating over more pairs). Sizing the next call from what the last
+// one actually cost adapts correctly to that regardless of *why* a given
+// scenario is expensive — measured, not guessed.
+let lastStepCostMs=null;
+const TARGET_TICK_MS=700; // aimed-for wall time per poll during continuous play
+const EXPLAINER_TARGET_TICK_MS=250; // shorter — explainer mode paces itself with its own inter-tick delay
+const MAX_STEPS_ABSOLUTE=20000; // hard ceiling regardless of measured cost, so a freshly-cheap case can't runaway at a high speed multiplier
+// Bounding wall-clock time alone isn't enough — a CHEAP case (few pairs,
+// close together) fills that time budget with thousands of steps, which
+// covers so much simulated time per tick that orbital motion becomes
+// unwatchable (measured directly: the default 3-body preset was advancing
+// ~7.4 simulated days per real second — a 27-day lunar orbit completing in
+// under 4 seconds). This second ceiling bounds steps/tick directly,
+// independent of measured cost, so a cheap scenario paces itself by watch-
+// ability rather than by how fast it *could* run. Whichever of the two
+// ceilings is smaller wins; the reported reason reflects which one bound.
+const WATCHABLE_STEPS_AT_1X=512;
+function computeEffectiveSteps(targetTickMs){
   const speedMultiplier=Number($("speedMultiplier")?.value||1);
-  const n=activeCase?.bodies?.length||3;
-  const pairsForCap=Math.max(1,n*(n-1)/2);
-  const maxStepsForCap=Math.max(500,Math.round(8000/pairsForCap));
-  const requested=Math.round(stepsForBodyCount(baseSteps)*speedMultiplier);
-  const steps=Math.min(maxStepsForCap,requested);
-  return{steps,capped:requested>maxStepsForCap,maxStepsForCap};
+  if(lastStepCostMs==null){
+    // No measurement yet this session (very first tick) — a small, safe
+    // guess regardless of body count or separation; the result of *this*
+    // call calibrates every tick after it.
+    return{steps:8,measuring:true};
+  }
+  const responsivenessIdeal=Math.round((targetTickMs*speedMultiplier)/lastStepCostMs);
+  const watchableCeiling=Math.round(WATCHABLE_STEPS_AT_1X*speedMultiplier);
+  const ideal=Math.min(responsivenessIdeal,watchableCeiling);
+  const steps=Math.max(2,Math.min(MAX_STEPS_ABSOLUTE,ideal));
+  return{
+    steps,measuring:false,
+    boundBy:ideal>MAX_STEPS_ABSOLUTE?"absolute":responsivenessIdeal<=watchableCeiling?"responsiveness":"pacing",
+  };
 }
 function renderEffectiveSteps(){
   const el=$("effectiveSteps");if(!el)return;
-  const{steps,capped}=computeEffectiveSteps(SCENARIO_CHUNK_STEPS);
-  el.textContent=capped
-    ?`${steps} steps/poll — capped for responsiveness (this scenario's pair count keeps a single call under ~4s; higher speed settings request more but this is the ceiling actually used)`
-    :`${steps} steps/poll`;
+  const{steps,measuring,boundBy}=computeEffectiveSteps(explainerActive?EXPLAINER_TARGET_TICK_MS:TARGET_TICK_MS);
+  el.textContent=measuring
+    ?`${steps} steps/poll — measuring real per-step cost from this scenario's first tick`
+    :boundBy==="responsiveness"
+      ?`${steps} steps/poll — capped for responsiveness (measured ${lastStepCostMs.toFixed(2)}ms/step; higher speed settings request more but this is the ceiling actually used)`
+      :boundBy==="pacing"
+        ?`${steps} steps/poll — capped for watchable pacing (measured ${lastStepCostMs.toFixed(2)}ms/step; this scenario could run faster, but that would blow through orbital motion too fast to see)`
+        :`${steps} steps/poll (measured ${lastStepCostMs.toFixed(2)}ms/step)`;
 }
 $("speedMultiplier").addEventListener("change",renderEffectiveSteps);
 function scheduleAdvance(delay){clearTimeout(explainerTimer);explainerTimer=setTimeout(advance,delay)}
@@ -1172,9 +1192,11 @@ async function advance(){
   busy=true;let nextDelay=0;
   try{
     setStatus(explainerActive?"calculating retarded pressure in slow motion…":"calculating retarded pressure…");
-    const{steps}=computeEffectiveSteps(explainerActive?EXPLAINER_TICK_STEPS:SCENARIO_CHUNK_STEPS);
+    const{steps}=computeEffectiveSteps(explainerActive?EXPLAINER_TARGET_TICK_MS:TARGET_TICK_MS);
     renderEffectiveSteps();
+    const callStartMs=performance.now();
     const result=await call("advance",{steps});
+    lastStepCostMs=(performance.now()-callStartMs)/steps;
     // continuous can flip false while this call was in flight (Stop, or
     // switching the preset menu away from a running case) — that response
     // belongs to a run that no longer exists; applying it would silently

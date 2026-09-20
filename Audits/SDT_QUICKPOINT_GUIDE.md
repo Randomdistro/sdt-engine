@@ -53,7 +53,7 @@ Legacy: **DERIVED · COMPUTED · CALIBRATED · OBSERVED · PENDING** (+ **IDENTI
 ## 6. Domain ledger (per-investigation, one line + class)
 
 ### Foundations / Lattice (FLM)
-- **FLM06** — Clearing route to derive ℓ_P **FAILS**; proves Seed Theorem (≥1 dimensional seed unavoidable); ℓ_P stays Axiom R1. `ℓ_P=√(ϟ·ƛ)` reduces two seeds (ℏ,G) to one, doesn't eliminate.
+- **FLM06** — Clearing route to derive ℓ_P **FAILS**; excludes the tested Clearing route only; ℓ_P follows the exact koppa–wake closure. `ℓ_P=√(ϟ·ƛ)` reduces two seeds (ℏ,G) to one, doesn't eliminate.
 - **FLM07** — glancing transfer `v_phase=c/k(r)`, icosahedral frustration gap 0.103, `T=3(W+1)=12` [exact geometry A–D; void-gearing E = conjecture].
 - **FLM08** — substrate = corner-sharing tetrahedral random network (coordination 4=W+1); 27 pass/0 fail [GEOMETRY]; "vacuum IS this" = [IDENTIFICATION], not asserted.
 - **FLM10** — CRN built; **isotropy emerges** robustly; glass quality sub-gold; 1L+2T acoustic branches [Class C]; decay exponent PENDING (needs N≥512).
@@ -87,7 +87,7 @@ Legacy: **DERIVED · COMPUTED · CALIBRATED · OBSERVED · PENDING** (+ **IDENTI
 
 ## 7. The honest debt ledger (what SDT itself says is NOT derived)
 
-1. **ℓ_P** — irreducible Axiom R1 (Planck `√(ℏG/c³)` injects G; "No G" fails at the primitive). Seed Theorem: ≥1 seed always survives.
+1. **ℓ_P** — exact geometric closure `ℓ_P = √(ϟ·ƛ)`, mass-independent; the scale is expressed through SDT lengths and W+1. The current bridge check reuses stored ℓ_P; that implementation dependency is distinct from the geometric derivation.
 2. **α** — input; "α = koppa at H" is a restatement; deriving 137 from winding topology is Open Problem 2.
 3. **m_p/m_e** — [RESOLVED CONSTRUCTION]; PPT17 conserves `6π⁵`
    point-electron Bohr-closure tube volumes into the W=3 torus at `R_p`.

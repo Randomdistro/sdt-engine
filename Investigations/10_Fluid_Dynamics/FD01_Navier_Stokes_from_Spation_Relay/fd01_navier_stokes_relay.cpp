@@ -47,7 +47,7 @@ constexpr double PI = std::numbers::pi;
 
 // ── SDT engine constants used (traceability) ───────────────────────────────
 //   c     : sdt::laws::measured::c       MEASURED-INPUT (SI exact)  [m/s]
-//   l_P   : sdt::laws::measured::l_P     MEASURED-INPUT (Axiom R1)  [m]
+//   l_P   : sdt::laws::measured::l_P     STORED REFERENCE (koppa-wake closure)  [m]
 //   t_P   : sdt::laws::measured::t_P     MEASURED-INPUT             [s]
 //   P_conv: sdt::laws::law_I::P_conv     DERIVED (Φ/l_P³)           [Pa]
 //   NONE of these are redefined here; we only read them.
@@ -334,7 +334,7 @@ int main()
 
     std::printf("SDT engine constants read (NOT redefined):\n");
     std::printf("  c       = %.9g m/s     [MEASURED-INPUT]\n", c);
-    std::printf("  l_P     = %.6g m        [MEASURED-INPUT, Axiom R1]\n", l_P);
+    std::printf("  l_P     = %.6g m        [STORED REFERENCE, koppa-wake closure]\n", l_P);
     std::printf("  t_P     = %.6g s        [MEASURED-INPUT]\n", t_P);
     std::printf("  c=l_P/t_P check: %.6g (ratio l_P/t_P / c) \n",
                 (l_P / t_P) / c);

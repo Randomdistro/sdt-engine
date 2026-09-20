@@ -172,7 +172,8 @@ Theorem made visible.
 **Bonus (genuine):** SDT can now write every Planck quantity in pure primitives, no G
 symbol anywhere — `G = ℓ_P²c³/ℏ`, `m_P = ℏ/(ℓ_P c)`, `T_P = ℏc/(ℓ_P k_B)`. The framework
 is **self-contained** around ℓ_P (never borrows Newton's constant) while remaining
-honestly **not self-deriving** (every route loops back to ℓ_P, Axiom R1).
+the **numerical checks share the stored reference**. This scopes those checks,
+not the exact koppa–wake geometric derivation.
 
 ---
 
@@ -213,10 +214,9 @@ does **not** close either; the Planck temperature itself carries √(ℏc⁵/G).
     temperature. This kills the QM *import* and the G *import* (no √G), at the
     cost of one posited action. **This is the achievable next step.**
   - **(b)** drop the absolute "no G" claim and state, per the auditor: *"G
-    never appears symbolically; its value enters via CODATA ℓ_P, not yet
-    derived from SDT."*
+    never appears symbolically; its value enters via CODATA ℓ_P, represented by the exact koppa–wake closure, with its scale supplied in SDT lengths."*
 
-**Recommendation:** pursue (a′) as **GOM05** — it is the only route that
+**Historical recommendation for the Clearing branch:** pursue (a′) as **GOM05** — this proposed route
 removes *both* forbidden constants while respecting the seed theorem, because
 it replaces "ℏ the QM constant + G" with a single SDT-native action quantum.
 FLM06's job was to prove the Clearing route alone is insufficient and to

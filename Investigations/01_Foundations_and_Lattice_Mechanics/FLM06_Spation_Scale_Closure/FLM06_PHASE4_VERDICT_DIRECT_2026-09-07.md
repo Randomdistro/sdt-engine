@@ -49,7 +49,7 @@ itself. Re-homing ℏ as "the lattice's own relay-action quantum" is a legitimat
 ontological move — it stops ℏ from being narrated as a borrowed QM constant — but it
 does not, on this run, produce a new derivation of `ℓ_P`'s absolute value.
 
-`ℓ_P` remains Axiom R1. The deferred (a') thread is now closed as **tried and
+`ℓ_P` follows the koppa–wake geometric closure; this run tests a separate route. The deferred (a') thread is now closed as **tried and
 negative**, not left open by omission — the deferral was real; the result was not
 there to find with these three candidates.
 

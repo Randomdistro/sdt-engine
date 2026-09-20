@@ -320,7 +320,7 @@
 <!-- ════════════════════ 3 · CROSS-REGIME CLOSURE zk²=1 ════════════════════ -->
 <section id="s3">
   <div class="reveal">
-    <h3>Act III — One identity binds every state</h3>
+    <h3>Act III — One relation binds every state</h3>
     <h2>The movement budget: v² + v_circ² = c²</h2>
     <p>Underneath all of it sits the single conservation law of SDT — Law V, the movement
     budget. Anything that moves through space spends part of its lightspeed allowance on linear
@@ -411,7 +411,7 @@
         <tr><td class="mono">1</td><td>H spectra — Lyman/Balmer/Paschen</td><td class="ok">PASS</td><td class="mono">12.5 ppm</td></tr>
         <tr><td class="mono">2</td><td>H-like ions Z=2…30, λ∝1/Z²</td><td class="ok">PASS</td><td class="mono">263 ppm</td></tr>
         <tr><td class="mono">3</td><td>Neutral first resonance (21 elements)</td><td class="ok">21/21</td><td class="mono">&lt; 5%</td></tr>
-        <tr><td class="mono">4</td><td>zk²=1 closure, all 118 elements</td><td class="ok">EXACT</td><td class="mono">0 (identity)</td></tr>
+        <tr><td class="mono">4</td><td>zk²=1 closure, all 118 elements</td><td class="ok">EXACT</td><td class="mono">0 (construction)</td></tr>
       </tbody>
     </table>
 
@@ -638,7 +638,7 @@ const ELEMENTS = [
     ok.textContent=k.toFixed(3);
     ozk.textContent=zk2.toFixed(10);
     if(Math.abs(zk2-1.0)<1e-9){v.className='verdict ok';
-      v.textContent='z·k² = '+zk2.toFixed(10)+' — exact closure (identity, no fit)';}
+      v.textContent='z·k² = '+zk2.toFixed(10)+' — exact by construction, no fit';}
     else{v.className='verdict bad';
       v.textContent='z·k² = '+zk2.toFixed(10)+' — drift!';}
   }

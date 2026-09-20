@@ -39,7 +39,7 @@ G and M are not fundamentals. Gravity is `g = v²/R`, `ϟ = v²R/c²`. Dark matt
 
 ## 2. Scales — arranged as they sit
 
-The lattice cell is `ℓ_P` — Axiom R1, the one dimensional seed (FLM06 Seed Theorem: exactly one action/mass/length anchor is unavoidable). Time is that cell divided by the relay rate.
+The lattice cell is `ℓ_P` — the exact, mass-independent koppa–wake closure (FLM06 §3b). Time is that cell divided by the relay rate.
 
 `c` is the SI definition of that rate (exact since 1983). `k_B` converts kelvin to energy. `e` converts charge units. Those three are unit bridges.
 
@@ -56,7 +56,7 @@ Action, electron mass, and proton mass are **one mass/action seat** (FLM13): ℏ
 **Compute — tick from the seed.**
 
 ```
-ℓ_P = 1.616255×10⁻³⁵ m     (Axiom R1; CODATA Planck length as the seed)
+ℓ_P = 1.616255×10⁻³⁵ m     (stored numerical reference for the koppa–wake closure)
 c   = 299 792 458 m/s      (SI exact)
 t_P = ℓ_P / c = 5.39124×10⁻⁴⁴ s
 ```
@@ -116,7 +116,7 @@ P_conv = Φ / ℓ_P³ = N u_CMB                    ≈ 2.459×10⁴⁸ Pa
 
 Theorem T1: every shell contributes `ε`; inner shells cancel; only the outer count N remains. Planck-face throughput: baryons exclude spheres `r = ℓ_P/2`; `Φ = R_CMB u_CMB ℓ_P²`. Gravity is that pressure shadowed. EMC01: `F ∝ P_conv V₁ V₂ / (ℓ_P² r²)`.
 
-`koppa_per_baryon = ℓ_P² c m_p / ℏ` is C-flagged: CODATA `ℓ_P` still carries conventional G.
+`koppa_per_baryon = ℓ_P² / (R_p/4)` uses the measured proton wake and W+1=4; no ℏ, mass, G or c enters the bridge. The stored ℓ_P reference supplies the other length.
 
 **Gate (strict).** Compute `P_conv = N u_CMB` from the three experimental inputs above. You should recover `≈ 2.459×10⁴⁸ Pa`. If you needed a fitted factor to land that pressure, the Law I chain was fudged. The class-X caveat stands: the *magnitude* inherits `R_CMB`. The *cancellation* (only N pays) does not.
 
@@ -378,7 +378,7 @@ The fields are one stack. A result in FLM feeds PPT, EMC, APS, NP, GOM, CR, and 
 
 ### 01 — Foundations and lattice mechanics (FLM)
 
-FLM02: GPI → F = ma, Newton I–III (IDENTITY relabel on m ↔ V_disp rows). FLM05: tick-by-tick contact/gap; V_torus ≠ V_disp. FLM06: Clearing route to derive ℓ_P **fails**; Seed Theorem proven; ℓ_P stays R1. FLM08: substrate = corner-sharing tetrahedral random network (coordination 4 = W+1); 27/27 geometry; “vacuum is this” is identification. FLM10: isotropy emerges; 1L+2T acoustic branches class C; decay exponent pending. FLM12: mass = field-resistance; computes no mass value; D1 unpaid. FLM13: ℏ ROLE native; VALUE open. FLM14: rotation is defect-carried; residence-law β unpaid.
+FLM02: GPI → F = ma, Newton I–III (IDENTITY relabel on m ↔ V_disp rows). FLM05: tick-by-tick contact/gap; V_torus ≠ V_disp. FLM06: Clearing route to derive ℓ_P **fails**; the tested route is excluded; ℓ_P follows the exact koppa–wake closure. FLM08: substrate = corner-sharing tetrahedral random network (coordination 4 = W+1); 27/27 geometry; “vacuum is this” is identification. FLM10: isotropy emerges; 1L+2T acoustic branches class C; decay exponent pending. FLM12: mass = field-resistance; computes no mass value; D1 unpaid. FLM13: ℏ ROLE native; VALUE open. FLM14: rotation is defect-carried; residence-law β unpaid.
 
 **Conclusion.** The cell, the seed, and the substrate geometry stand. Absolute mass and the residence exponent do not.
 

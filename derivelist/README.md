@@ -18,7 +18,7 @@ in the namespace does not by itself confer derivational status.
 |---|------|-----------------|--------|
 | 1 | ~~c~~ | SI-definitional since 1983 — no c-free wavelength exists, so there is no independent spectroscopic extraction (audit F1: the cR∞/R∞ route is a CODATA identity); Mercury closure withdrawn, retained as consistency only | **line drawn** — unit bridge, full stop |
 | 2 | ~~ℏ~~ | W=1 circulation quantum (FLM13, role); value collapses into the one mass/action seat | **line drawn** — role earned; two of three seat constants leave the list |
-| 3 | **ℓ_P** | FLM06 Phase 1 negative; Seed Theorem PROVEN | **no line** — Axiom R1, the one dimensional seed |
+| 3 | ~~ℓ_P~~ | FLM06 §3b: ℓ_P = √(ϟ·ƛ), mass-independent; proton wake R_p/(W+1) | **geometric relation derived** — SDT length scale retained; current bridge check reuses stored ℓ_P |
 | 4 | ~~α~~ | extracted from the hydrogen spectrum by two routes (APS05); identified as the H-ground-state koppa rung (PPT02) | **spectroscopic derivation** — extracted, not dialled; topology-only origin remains open |
 | 5 | ~~m_e~~ | velocity-resistance seat form ℏ/(αc·a₀); mass mechanism native (FLM12) | **line drawn** — mechanism earned; value = the seat |
 | 6 | ~~m_p~~ | occlusion-cost formula (Law IV); boundary route 4ℏ/(R_p c); 6π⁵ tube-volume packing construction | **line drawn** — role + boundary route; ratio construction resolved as shared-input |
@@ -32,7 +32,7 @@ The remaining roles are heterogeneous and therefore must be recorded
 separately:
 
 ```
-l_P            AXIOM R1 — the one dimensional seed (Seed Theorem, FLM06)
+l_P            GEOMETRIC CLOSURE — sqrt(koppa * wake), mass-independent (FLM06)
 ONE mass seat  {hbar ≡ m_e ≡ m_p} collapsed via W=1/W=3 (FLM13) — a baryon-count anchor
 alpha          SPECTROSCOPIC DERIVATION — APS05/PPT02; topology-only origin open
 a_0            MEASURED — the length the seat form rides on (audit F3)

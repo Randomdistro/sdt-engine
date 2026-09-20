@@ -91,7 +91,7 @@
 | dτ/dt at k=1/α | 0.9999734 | clock-rate |
 | absolute ceiling c_∞ | c+105 m/s | galactic floor |
 | a₀ = cH₀/2π | 1.042×10⁻¹⁰ m/s² | derived floor (numerically the Milgrom scale; H₀ is a measured input here) |
-| ℓ_P = √(ϟ_b·ƛ_p) | 1.616×10⁻³⁵ m | = ℓ_P (koppa form; algebraic identity with Planck's √(ℏG/c³) — a re-homing of the seed, not a derivation; see FLM06 Seed Theorem) |
+| ℓ_P = √(ϟ_b·ƛ_p) | 1.616×10⁻³⁵ m | = ℓ_P (koppa form; exact mass-independent geometric relation; numerical scale supplied through SDT length geometry (FLM06 §3b)) |
 | lumiopause √(L/4πF_CMB) | 20,857 AU | Oort edge |
 | 6π⁵ (mass ratio) | 1836.118 | m_p/m_e=1836.153 |
 
@@ -109,9 +109,7 @@ a deliberately wrong floor degrades the collapse 2.4× — suggestive, not decis
 - z (gravitational redshift) = ϟ/r = displacement depth at emission — 0.03%.
 - v = c√z reproduces orbital velocities Earth→292 AU and the hydrogen ladder.
 - k_H=137, koppa_H=r_e, proton surface 1.830c all from the one law.
-- ℓ_P = √(ϟ·ƛ) reproduces the Planck length, mass-independent (algebraic
-  identity with Planck's √(ℏG/c³) — a re-homing of the seed, not a derivation;
-  see FLM06 Seed Theorem).
+- ℓ_P = √(ϟ·ƛ) reproduces the Planck length, mass-independent (exact mass-independent geometric relation; SDT length geometry supplies its scale (FLM06 §3b)).
 - lumiopause = √(L/4πF_CMB) = 20,857 AU exactly.
 
 **Open / honest caveats:**

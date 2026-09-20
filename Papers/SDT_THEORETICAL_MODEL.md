@@ -19,7 +19,7 @@ F = (π/4) P_eff R₁² R₂² / r²
 
 Coulomb, gravity, nuclear: same form, domain `P_eff`.
 
-**Scales.** The lattice cell is `ℓ_P` — Axiom R1, the one dimensional seed (FLM06). Time is that cell divided by the relay rate. `c` is the SI definition of that rate; `k_B` converts kelvin to energy; `e` converts charge units. Action, electron mass, and proton mass are one mass/action seat (FLM13). `α` is hydrogen’s ground-state koppa rung `k_H = 1/α` (PPT02, APS05), same ladder as the Sun. `T_CMB` is the FIRAS reading of the bath now — a clock, not a constant of nature. `a_0` is the length that seat form sits on. `sdt::laws::measured` stores CODATA/FIRAS numbers so the engine can compute.
+**Scales.** The lattice cell is `ℓ_P` — the exact, mass-independent koppa–wake closure (FLM06 §3b). Time is that cell divided by the relay rate. `c` is the SI definition of that rate; `k_B` converts kelvin to energy; `e` converts charge units. Action, electron mass, and proton mass are one mass/action seat (FLM13). `α` is hydrogen’s ground-state koppa rung `k_H = 1/α` (PPT02, APS05), same ladder as the Sun. `T_CMB` is the FIRAS reading of the bath now — a clock, not a constant of nature. `a_0` is the length that seat form sits on. `sdt::laws::measured` stores CODATA/FIRAS numbers so the engine can compute.
 
 **Prohibited inputs.** G, M as fundamentals; dark matter/energy; ΛCDM; quarks/gluons; ψ as a primitive; fields as stuff; inflaton; a first moment of time.
 
@@ -38,7 +38,7 @@ Coulomb, gravity, nuclear: same form, domain `P_eff`.
 | V | `law_V` | `v_circ² + v² = c²`. SR bookkeeping. Photon: `v = c`. Rest: `v_circ = c`. |
 | VI | `law_VI` | W=1 electron (unknot), W=3 proton (trefoil). W=2 not lasting. W+1 conjecture on `R_p`. |
 
-**Planck-face pressure.** Baryons exclude spheres `r = ℓ_P/2`. Throughput on each face: `Φ = R_CMB u_CMB ℓ_P²`. Gravity is that pressure shadowed. EMC01: `F ∝ P_conv V₁ V₂ / (ℓ_P² r²)`. `koppa_per_baryon = ℓ_P² c m_p / ℏ` — C-flagged (CODATA `ℓ_P` still carries conventional G).
+**Planck-face pressure.** Baryons exclude spheres `r = ℓ_P/2`. Throughput on each face: `Φ = R_CMB u_CMB ℓ_P²`. Gravity is that pressure shadowed. EMC01: `F ∝ P_conv V₁ V₂ / (ℓ_P² r²)`. `koppa_per_baryon = ℓ_P² / (R_p/4)` — computed from the supplied lattice length and measured proton wake, with W+1=4.
 
 ---
 

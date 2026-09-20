@@ -81,8 +81,8 @@ descriptor and equals `GM/c²` as a *consequence*, not an input.
 - **C5 (closure floor, koppa form).** The spation closure is the mass-independent
   fixed point where koppa equals wake: `ℓ_P = √(ϟ·ƛ)`, reproducing the Planck
   length, with the irreducible scale-seed reduced from `{ℏ, G}` to one measured SDT
-  length (algebraic identity with Planck's √(ℏG/c³) — a re-homing of the seed, not
-  a derivation; see FLM06 Seed Theorem).
+  length (exact geometric relation; a bridge check using stored ℓ_P verifies consistency,
+  while the supplied scale is expressed in SDT lengths; see FLM06 §3b).
 
 - **C6 (lumiopause / lumiostasis).** The solar depth domain ends at the
   surface-area condition `L_sun/(4πr²) = F_CMB`, i.e. `r = √(L_sun/4πF_CMB) =

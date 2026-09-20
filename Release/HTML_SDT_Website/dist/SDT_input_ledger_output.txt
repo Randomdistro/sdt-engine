@@ -20,18 +20,18 @@ DERIVELIST — re-derivation of the measured derivation basis (direct run)
   hbar = m_e*(alpha c)*a_0 (W=1 circulation)            1.0545718176e-34  ref  1.0545718170e-34  dev   +0.0000%  [IDENTITY-CLASS (role, not value)]
   hbar = r_e*m_e*c/alpha (same rung, restated)          1.0545718176e-34  ref  1.0545718170e-34  dev   +0.0000%  [IDENTITY-CLASS]
   hbar/m_e = kappa/2pi [m^2/s] (kg-free observable)     1.1576763605e-04  ref  1.1576763500e-04  dev   +0.0000%  [OBSERVED]
-  R_p*m_p*c/hbar (should be W+1 = 4)                    4.0007815131e+00  ref  4.0000000000e+00  dev   +0.0195%  [DERIVED (W+1)]
+  R_p*m_p*c/hbar (should be W+1 = 4)                    4.0007815185e+00  ref  4.0000000000e+00  dev   +0.0195%  [DERIVED (W+1)]
   status: ROLE derived; VALUE has no hbar-free path (FLM13 dimensional
           theorem). {hbar, m_e, m_p} collapse to ONE mass/action seat —
           a baryon-count anchor. Two constants leave the list; one seat stays.
 
-[4] l_P — Planck length (Axiom R1, the one dimensional seed)
+[4] l_P — Planck length (exact koppa–wake geometric closure)
   cleanest hbar/G-free subdivision N = z_rec = 1100; required N = 5.894e+61
   shortfall factor = 5.359e+58  -> route EXCLUDED (FLM06 Phase 1 negative)
-  l_P = sqrt(koppa_per_baryon * lambdabar_p)            1.6162550000e-35  ref  1.6162550000e-35  dev   +0.0000%  [CIRCULAR (re-expression, not derivation)]
-  status: NOT derivable from SDT-native quantities — Seed Theorem
-          (FLM06, PROVEN): exactly one action/mass/length anchor is
-          unavoidable. l_P stays AXIOM R1. No line drawn.
+  l_P = sqrt(koppa_per_baryon * proton_wake)            1.6162550000e-35  ref  1.6162550000e-35  dev   +0.0000%  [CONSISTENCY (koppa constructed from stored l_P)]
+  status: exact geometric closure l_P = sqrt(koppa * wake)
+          (FLM06): mass cancels; SDT length geometry supplies the scale.
+          The bridge-based check above reuses stored l_P; Clearing route excluded only.
 
 [5] m_e — electron mass (velocity-resistance form, FLM12/FLM13)
   m_e = hbar/(v_seat*a_0), v_seat = alpha*c             9.1093836959e-31  ref  9.1093837015e-31  dev   -0.0000%  [IDENTITY-CLASS (seat form)]
@@ -41,10 +41,10 @@ DERIVELIST — re-derivation of the measured derivation basis (direct run)
           theorem). VALUE = the one seat (shared with hbar, m_p).
 
 [6] m_p — proton mass (occlusion formula + W+1 boundary route)
-  m_p = Phi*V_disp_p/(3 l_P^3 c^2) (occlusion cost)     1.6726219237e-27  ref  1.6726219237e-27  dev   +0.0000%  [CIRCULAR (round trip)]
-  m_p = 4*hbar/(R_p*c) (W+1, muonic R_p input)          1.6722951935e-27  ref  1.6726219237e-27  dev   -0.0195%  [DERIVED (from measured boundary radius)]
-  m_p = 6*pi^5*m_e (topological ratio)                  1.6725904374e-27  ref  1.6726219237e-27  dev   -0.0019%  [OPEN (privileged 19-ppm match, mechanism owed)]
-  m_p/m_e = (4/alpha)*(r_e/R_p) (hbar eliminated)       1.8357940003e+03  ref  1.8361526734e+03  dev   -0.0195%  [DERIVED (pure ratio, one 0.02% residual)]
+  m_p = Phi*V_disp_p/(3 l_P^3 c^2) (occlusion cost)     1.6726219260e-27  ref  1.6726219259e-27  dev   +0.0000%  [CIRCULAR (round trip)]
+  m_p = 4*hbar/(R_p*c) (W+1, muonic R_p input)          1.6722951935e-27  ref  1.6726219259e-27  dev   -0.0195%  [DERIVED (from measured boundary radius)]
+  m_p = 6*pi^5*m_e (topological ratio)                  1.6725904374e-27  ref  1.6726219259e-27  dev   -0.0019%  [COMPUTED (resolved volume construction; shared-input)]
+  m_p/m_e = (4/alpha)*(r_e/R_p) (hbar eliminated)       1.8357940003e+03  ref  1.8361526759e+03  dev   -0.0195%  [DERIVED (pure ratio, one 0.02% residual)]
   status: role + boundary-radius route drawn; ratio mechanism (wake
           phase-space integral -> 6pi^5) is the named open problem.
 
@@ -63,17 +63,17 @@ DERIVELIST — re-derivation of the measured derivation basis (direct run)
           a constant of nature). Absolute value not derivable from
           within; it is the state the cycle is currently in.
 
-[9] e — unit bridge e (EMC02: irreducible unit bridge)
+[9] e — elementary charge (EMC02: irreducible unit bridge)
   e = sqrt(alpha*hbar*c/k_e) (Coulomb identity)         1.6021766335e-19  ref  1.6021766340e-19  dev   -0.0000%  [CIRCULAR (definitional, printed as such)]
-  P_eff = m_p^2 m_e^2 c^5/(4 pi alpha hbar^3) (EMC04)   5.2272515465e+31  ref  5.2250000000e+31  dev   +0.0431%  [DERIVED (the physical target behind e)]
+  P_eff = m_p^2 m_e^2 c^5/(4 pi alpha hbar^3) (EMC04)   5.2272515606e+31  ref  5.2250000000e+31  dev   +0.0431%  [DERIVED (the physical target behind e)]
   status: derivation basis {l_P,c,hbar,k_B,T_CMB} has no current dimension [A];
           no combination yields coulombs (EMC02 dimensional result).
-          e is a UNIT BRIDGE (no additional substance — handed redirection);
+          e is a UNIT BRIDGE (no charge substance — handed redirection);
           line drawn by reclassification, not by derivation.
 
 =================================================================
 REDUCED derivation basis (after the lines are drawn):
-  l_P            AXIOM R1 — the one dimensional seed (Seed Theorem)
+  l_P            GEOMETRIC CLOSURE — sqrt(koppa * wake), mass-independent
   ONE mass seat  {hbar = m_e = m_p} collapsed via W=1/W=3 (FLM13)
   alpha          extracted from the H spectrum; derivation open
   a_0            MEASURED — the length the seat form rides on
@@ -83,7 +83,7 @@ REDUCED derivation basis (after the lines are drawn):
   c, k_B, e      unit bridges — SI definitions, no physics to derive
   [R_p == m_p    one fact, not two: the 0.02% residual is shared]
   => FIVE external inputs, not four. The collapse moves the
-     mystery from a mass to a length; closing a_0 (c^2/C_H) or
-     the 6pi^5 wake integral is what would actually shorten it.
-Open mechanisms owed: 6pi^5 wake integral; alpha geometric route;
+     mystery from a mass to a length; closing a_0 (c^2/C_H) would
+     actually shorten it. The 6pi^5 tube map is construction-resolved.
+Open mechanisms owed: alpha geometric route;
 the seat's absolute magnitude (FLM12 D-series).

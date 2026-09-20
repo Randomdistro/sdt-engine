@@ -297,7 +297,7 @@ For **every** input file, at read time, the engine records and prints: absolute 
 ---
 
 ### Appendix A — provisional constants (cite `laws.hpp` line at use)
-`a₀ = c·H₀/2π = 1.042e-10 m/s²` (observed-H₀ correspondence control) · `F_CMB = c·u_CMB/4` (`laws.hpp`) · `koppa_Sun = R_Sun/k_Sun² ≈ 1477 m` (`laws.hpp`) · `koppa_per_baryon = ℓ_P²c·m_p/ℏ ≈ 1.242e-54 m` (`laws.hpp`) · `λ_C = 2.42631e-12 m` (`laws.hpp`) · drag law `D = λ/[(8/3)λ_C k²]` (APS02).
+`a₀ = c·H₀/2π = 1.042e-10 m/s²` (observed-H₀ correspondence control) · `F_CMB = c·u_CMB/4` (`laws.hpp`) · `koppa_Sun = R_Sun/k_Sun² ≈ 1477 m` (`laws.hpp`) · `koppa_per_baryon = ℓ_P²/(R_p/4) ≈ 1.242e-54 m` (`laws.hpp`) · `λ_C = 2.42631e-12 m` (`laws.hpp`) · drag law `D = λ/[(8/3)λ_C k²]` (APS02).
 
 ### Appendix B — the one-line statement of the whole investigation
 *Does a single, SDT-derived exposure ratio `ξ = g_self/g_floor` collapse the emission drag of atoms, the orbital boost of bodies, and the rotation excess of galaxies onto one scale-invariant curve `B = Φ(ξ)` whose floor limit `ξ^{-1/2}` is forced by the convergence floor — and is `Φ` derivable from occlusion geometry, or merely the borrowed MOND shape with an SDT-supplied scale?*

@@ -333,17 +333,17 @@ def audit_engine_data() -> list[str]:
         if row.get("certification") in {"DERIVED", "COMPUTED", "CALIBRATED"}
     ]
     identities = [
-        row for row in results if row.get("certification") == "IDENTITY"
+        row for row in results if row.get("certification") == "CONSTRUCTION"
     ]
     pending = [row for row in results if row.get("certification") == "PENDING"]
     if summary.get("earned_total") != len(earned):
         errors.append("engine data earned_total does not match result rows")
     if summary.get("earned_passed") != sum(bool(row.get("passed")) for row in earned):
         errors.append("engine data earned_passed does not match result rows")
-    if summary.get("identity_passed") != sum(
+    if summary.get("construction_passed") != sum(
         bool(row.get("passed")) for row in identities
     ):
-        errors.append("engine data identity_passed does not match result rows")
+        errors.append("engine data construction_passed does not match result rows")
     if summary.get("pending_note_only") != len(pending):
         errors.append("engine data pending_note_only does not match result rows")
     if summary.get("genuine_fail") != sum(

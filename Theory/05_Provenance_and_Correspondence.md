@@ -132,7 +132,7 @@ Every row carries both labels; the A–F letter is the projection.
 | Movement budget | `v_circ² + v² = c²` | SDT-first (axiom) | known-match (replaces SR) | **A** | `laws.hpp:401` (T10) |
 | Convergence pressure | `Φ = N·ε ; P_conv = Φ/ℓ_P³` | SDT-first (axiom) | internal-only | **A** | `laws.hpp:215,219` |
 | Koppa definition | `ϟ = v²R/c²` | SDT-first (definition) | known-match (= GM/c²) | **A** | `laws.hpp:546` |
-| Koppa per baryon | `ϟ_b = ℓ_P²·c·m_p/ℏ` | SDT-first (derived) | known-match (= GM/c² via G=ℓ_P²c³/ℏ) | **C** | `laws.hpp:594` |
+| Koppa per baryon | `ϟ_b = ℓ_P²/(R_p/4)` | SDT-first (derived) | known-match (= GM/c² via G=ℓ_P²c³/ℏ) | **C** | `laws.hpp:594` |
 | Transverse gradient → bending | `∇⊥z = ϟ·b/r³ ; α=4ϟ/b` | SDT-first (derived) | known-match (GR 4GM/c²b, Eddington 1.75″) | **C** | `cq15…cpp:429` |
 | Convergence floor scale | `a₀ = c·H₀/2π = 1.042e-10` | SDT-first (derived) | known-match (MOND/RAR a₀≈1.2e-10) | **C** | `galactic.hpp:77` |
 | Bulge = spherical | `v² = c²·ϟ_enc/R` | SDT-first (derived) | known-match (exact Newtonian spheroid) | **C** | `galactic.hpp:508` |

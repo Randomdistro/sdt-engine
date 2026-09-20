@@ -123,7 +123,7 @@ A referee would return the manuscript with three demands, any *one* of which, if
 
 1. **Derive one number you did not put in.** A lepton mass, the mass ratio 1836.15 from a *mechanism* (not a search), α, or a binding energy heavier than A=2. The corpus's own OPEN list says none of these is done.
 2. **Exhibit ONE observable that distinguishes SDT from GR+QM+ΛCDM.** Not a re-derivation of an agreed number (those are identities), and not a degenerate cosmology fit. The neo-Lorentzian `c_∞` is admitted un-measurable; μ_ν≡0 is ~8 orders below testability; the depth-closure P2 (+105 m/s) carries ±20% and is untested. Name one that is measurable this decade.
-3. **Publish the dependency graph acyclic.** "Zero free parameters" with a derivation basis containing α and m_p is a contradiction until the graph is shown to derive them without assuming them (`PARADOX_CENSUS.md:354`). Until then, the honest count is **≥2 irreducible seeds** (ℓ_P, and α-or-m_p), not zero.
+3. **Publish the dependency graph acyclic.** "Zero free parameters" with a derivation basis containing α and m_p is a contradiction until the graph is shown to derive them without assuming them (`PARADOX_CENSUS.md:354`). Until then, the honest count is **supplied scale and coupling inputs** (the koppa–wake length scale, and α-or-m_p), not zero.
 
 ---
 

@@ -431,7 +431,7 @@ These CQs are mentioned in file structure but not extracted:
 **Confirmed declared dependencies (9):**
 
 ```
-✓ ℓ_P    (Planck length, axiom R2)
+✓ ℓ_P    (Planck length, exact koppa–wake geometric closure)
 ✓ c      (speed of light, axiom R2)
 ✓ ℏ      (reduced Planck constant, axiom R3)
 ✓ k_B    (Boltzmann constant, law I statistical origin)

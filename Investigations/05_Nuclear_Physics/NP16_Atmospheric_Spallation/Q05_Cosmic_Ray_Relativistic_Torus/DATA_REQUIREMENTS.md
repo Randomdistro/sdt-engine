@@ -55,7 +55,7 @@
 
 | Data Point | Source | Purpose |
 |-----------|--------|---------|
-| Spation lattice grain size ℓ_P = 1.616 × 10⁻³⁵ m | SDT axiom R1 | Background medium |
+| Spation lattice grain size ℓ_P = 1.616 × 10⁻³⁵ m | Koppa–wake geometric closure | Background medium |
 | Relay speed c | SDT axiom R2 | Medium propagation limit |
 | Lattice dispersion relation (if any) | SDT E100 (experiment) | Does c depend on frequency? |
 | Lattice breakdown energy (Schwinger limit equivalent) | SDT E88 | Maximum lattice deformation |

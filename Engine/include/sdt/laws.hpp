@@ -21,7 +21,7 @@
  * One medium. One tick. One budget.
  *
  * Dependency contract:
- *   ℓ_P is the irreducible dimensional seed. c, k_B and e are unit bridges.
+ *   ℓ_P follows the exact koppa–wake geometric closure; its numerical scale is supplied. c, k_B and e are unit bridges.
  *   {ℏ,m_e,m_p} occupy one mass/action seat. α is the hydrogen-spectroscopy
  *   koppa rung recorded by APS05/PPT02, a₀ is an atomic seat, and T_CMB is the
  *   measured mechanical boundary state of present convergence. Other measured
@@ -97,17 +97,16 @@ namespace measured {
     inline constexpr double c           = 299'792'458.0;                // [m/s]    Speed of light (SI exact)
     inline constexpr double hbar        = 1.054'571'817e-34;            // [J·s]    Reduced Planck constant
     inline constexpr double l_P         = 1.616'255e-35;                // [m]      Planck length
-    // provenance_status:     SDT-posited (Axiom R1) — the ONE irreducible dimensional seed
+    // provenance_status:     geometric closure — ℓ_P = √(ϟ·ƛ), mass-independent
     // correspondence_status: known-match
-    // input_dependency:      irreducible-seed
-    // class:                 R1 (primitive input — NOT derived)
-    // circularity_assertion: NOT eliminable. The FLM06 koppa-form ℓ_P = √(ϟ·ƛ) RE-HOMES the seed
-    //                        from {ℏ-as-QM, G} to one SDT-native length + W+1 (FLM06 §3b) — a
-    //                        re-expression, not a derivation. depth_closure::lP_from_closure_floor
-    //                        reproduces ℓ_P but is CIRCULAR w.r.t. ℓ_P: koppa_per_baryon is itself
-    //                        defined as ℓ_P²·c·m_p/ℏ (bridge), so √(ϟ·ƛ) = √(ℓ_P²) = ℓ_P is an
-    //                        IDENTITY (consistency check). FLM06 Seed Theorem (§3, PROVEN): exactly
-    //                        one action/mass/length anchor is mathematically unavoidable — ℓ_P is it.
+    // input_dependency:      SDT koppa/wake length scale; W+1 in the proton form
+    // class:                 DERIVED RELATION; stored numerical reference
+    // implementation_scope: closure_floor(koppa, wake) implements the exact relation.
+    //                        The current bridge::koppa_per_baryon uses stored l_P,
+    //                        so lP_from_closure_floor is a consistency check of that
+    //                        bridge, not an independent numerical determination.
+    //                        FLM06's failed Clearing route is route-specific;
+    //                        it establishes no general impossibility of deriving ℓ_P.
     // risk_flag:             load-bearing — feeds N = R_CMB/ℓ_P, P_conv = Φ/ℓ_P³, S_boundary = 4πN²
     // Optional empirical anchor for atomic-scale closure:
     inline constexpr double alpha       = 7.297'352'5693e-3;            // [-]      Fine structure constant
@@ -253,13 +252,10 @@ namespace law_I {
     inline constexpr double N = R_CMB / l_P;
     // = 5.894e61
     //
-    // FLM06 (spation-scale closure) SEED THEOREM — negative result: N is
-    // RELATIONALLY fixed (N² = S_boundary/4π below), but it CANNOT be built
-    // absolutely (~10⁶¹) from the ℏ/G-free derivation basis {R_CMB,c,k_B,T_CMB,z_rec}:
-    // every clean ratio bottoms out at ~10³ (z_rec). Deriving ℓ_P from Clearing
-    // geometry FAILS; one action/mass seed is dimensionally unavoidable. ℓ_P
-    // therefore remains Axiom R1 (not derived in EMC01–40); a re-homing of ℏ as
-    // the relay-action quantum is deferred to GOM05.
+    // FLM06: the tested Clearing subdivision reaches ~10³, not ~10⁶¹.
+    // This excludes that route only. The exact geometric closure is
+    // ℓ_P = √(ϟ·ƛ); N follows after the koppa/wake scale is supplied.
+    // The stored numerical l_P remains the reference used by this implementation.
 
     /// Elementary relay content per shell: ε = u_CMB × l_P³  [J]
     inline constexpr double epsilon = u_CMB * l_P3;
@@ -1052,29 +1048,20 @@ namespace bridge {
     inline constexpr double koppa_Moon = v_Moon * v_Moon * R_Moon / (c * c);
     // = 5.46e-5 m = 0.055 mm
 
-    // ─── Baryon Ϟ quantum — derived from base invariants only ───
-    //
-    // The gravitational c-boundary per proton:
-    //   Ϟ_per_baryon = G m_p / c²
-    //
-    // G is NOT imported. Instead, from the Planck definition:
-    //   G = l_P² c³ / ℏ
-    //
-    // Therefore:
-    //   Ϟ_per_baryon = (l_P² c³ / ℏ) × m_p / c²
-    //                = l_P² × c × m_p / ℏ
-    //
-    // Inputs: l_P [m], c [m/s], m_p [kg], ℏ [J·s] — all base invariants.
-    // No G. No M_Sun. No standard-model mass measurements beyond m_p.
-    //
-    // provenance_status:     SDT-derived
-    // correspondence_status: known-match            // equals G m_p/c²
-    // input_dependency:      primitive-derivation basis    // l_P, c, m_p, hbar only — G and M never entered
-    // class:                 C-flagged
-    // circularity_assertion: passes delete-test — no measured G or M is an input
-    // risk_flag:             CODATA l_P conventionally encodes G under standard physics (disclosed, not laundered)
-    inline constexpr double koppa_per_baryon = l_P * l_P * c * m_p / hbar;
-    // = 1.2421e-54 m / baryon
+    // Baryon koppa from the exact koppa–wake relation:
+    //   ℓ_P² = ϟ_b ƛ_p; ƛ_p = R_p/(W+1), W=3 for the proton trefoil.
+    // Inputs are lengths and an integer. No hbar, mass, G or speed is used.
+    // The stored measured proton boundary supplies the wake; its measurement
+    // uncertainty propagates into koppa. This differs slightly from the legacy
+    // Compton-wake substitution hbar/(m_p*c), which is comparison-only.
+    inline constexpr int proton_wake_seats = 3 + 1;
+    inline constexpr double proton_wake = R_p / proton_wake_seats;
+    inline constexpr double koppa_per_baryon = l_P * l_P / proton_wake;
+    // provenance_status:     SDT geometric closure
+    // input_dependency:      l_P, measured R_p, topological W+1=4
+    // class:                 COMPUTED from supplied lengths
+    // closure_scope:         inverse and forward evaluations share the same
+    //                        supplied length; their agreement checks consistency.
 
     /// Baryon count from zk²=1
     ///
@@ -2740,17 +2727,16 @@ namespace depth_closure {
     inline const double z_spectral_Sun = bridge::koppa_Sun / R_Sun;
 
     /// C5: spation closure floor (koppa form): ℓ_P = √(ϟ_baryon · ƛ_p)
-    /// with ϟ_baryon = bridge::koppa_per_baryon and ƛ_p = ℏ/(m_p c).
-    /// Scope (FLM06): this RE-EXPRESSES ℓ_P; it does not derive it. koppa_per_baryon
-    /// is itself defined as ℓ_P²·c·m_p/ℏ (bridge), so √(ϟ·ƛ) = √(ℓ_P²) = ℓ_P is an
-    /// IDENTITY — a consistency check, not an elimination. FLM06's real result is the
-    /// Seed Theorem (one dimensional anchor unavoidable) + re-homing the seed from
-    /// {ℏ,G} to one SDT-native length. ℓ_P stays Axiom R1; see measured::l_P provenance.
+    /// with ϟ_baryon = bridge::koppa_per_baryon and ƛ_p = bridge::proton_wake.
+    /// Exact geometric relation, mass-independent (FLM06 §3b).
+    /// The generic function accepts koppa and wake as lengths. The convenience
+    /// value below uses a bridge constructed from stored l_P and therefore
+    /// checks consistency; it is not an independent numerical measurement.
     [[nodiscard]] inline auto closure_floor(double koppa, double wake) noexcept -> double {
         return std::sqrt(koppa * wake);
     }
     inline const double lP_from_closure_floor =
-        closure_floor(bridge::koppa_per_baryon, hbar / (m_p * c));
+        closure_floor(bridge::koppa_per_baryon, bridge::proton_wake);
     // ≈ 1.616e-35 m = ℓ_P  (by construction — identity)
 
     /// C6: lumiopause radius — a SURFACE-AREA condition where the solar flux

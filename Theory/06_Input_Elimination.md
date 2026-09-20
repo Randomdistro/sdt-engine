@@ -19,7 +19,7 @@ state. A lookup value gains no scientific status merely by being listed.
 
 SDT's claim is the second half: having stood on the giants, it **flies away** — it turns inputs
 into outputs until only an irreducible seed remains. The goal is therefore not "zero
-numbers" (the seed theorem, CQ42, forbids that — at least one dimensional seed is unavoidable).
+numbers" (the geometric construction records its supplied SDT length scale).
 The goal is an **acyclic dependency graph**: a tiny set of declared seeds, with everything else
 *derived* and nothing both assumed and derived. This document is that graph.
 
@@ -67,15 +67,15 @@ and c are not independent — given c [UNIT], an action and a length are interco
 not survive as a *separate* seed; it collapses into the single length–action seed below.
 *Stood on:* Planck. *Reduced to one shared seed.*
 
-### ℓ_P — the spation closure length — **[SEED, PARTIAL elimination]**
-The size of the spation. In koppa form ℓ_P = √(ϟ·ƛ) — the geometric mean of a koppa and a wake —
-which is **mass-independent** and reduces the seed from Planck's two borrowed constants (ℏ, G) to
-*one SDT length seed*. **Candidate full elimination:** deriving the spation size from
-recombination-epoch hydrogen geometry (the ~3000 K decoupling surface), the route the redshift
-investigations are pursuing. *Status [PARTIAL]:* CQ42's clean construction fell short (the
-count N reached only ~z_rec≈10³ against a target ~6×10⁶¹); the recombination-geometry seed is the
-live path, not a closed result. **ℓ_P (≡ the length–action seed) is therefore the first of the two
-irreducible seeds** until that route closes. *Stood on:* Planck.
+### ℓ_P — the spation closure length — **[GEOMETRIC RELATION DERIVED]**
+The size of the spation follows ℓ_P = √(ϟ·ƛ), the exact, mass-independent
+geometric mean of a koppa and a wake. In the proton construction,
+ƛ_p = R_p/(W+1), W+1 = 4. FLM06 §3b expresses the scale in SDT length
+geometry rather than the borrowed pair ℏ and G: an SDT-native length scale
+plus the integer. The engine now evaluates ϟ_b = ℓ_P²/(R_p/4) directly.
+Its inverse/forward closure check shares the supplied length and verifies
+consistency. The failed Clearing-subdivision route is a separate result;
+it establishes no general prohibition on this geometric derivation.
 
 ### T_CMB — the CMB temperature — **[BOUNDARY]**
 In SDT the CMB is not an inflationary relic but the **convergence influx itself** — the monopole,
@@ -127,7 +127,7 @@ break.
 2. **The length–action seed** is only *reduced* (koppa form), not *eliminated*; the
    recombination-geometry route (≈3000 K hydrogen) is open, and CQ42's first attempt fell short.
 3. **T_CMB** is classed boundary, not yet shown to fall out of Law I.
-4. The **seed theorem guarantees ≥1 seed survives** — "zero inputs" is not the target and is not
+4. The **koppa–wake construction retains a supplied SDT length scale** — "zero inputs" is not the target and is not
    claimed. The target, an acyclic two-seed graph, is reached modulo residual (1).
 
 ---

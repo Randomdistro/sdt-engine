@@ -58,7 +58,7 @@ These are framework-level and apply to any code or prose you write in this repo.
 
 - **No G, no M as fundamentals.** Gravity is derived from `v_surface` and `R`: `g = v²/R`, `koppa = v²R/c²`. The legacy `GM_equivalent()` helper exists for conversions only.
 - **No quantum wavefunctions, no fields as primitives, no dark matter/energy, no ΛCDM, no quarks/gluons, no wave-particle duality.** These are not "unsupported" — they are prohibited inputs. Derivations must not import them.
-- **Scales.** `ℓ_P` is Axiom R1 (the one dimensional seed). `c`, `k_B`, `e` are unit bridges. `{ℏ, m_e, m_p}` are one mass/action seat (FLM13). `α` is hydrogen’s koppa rung `k_H = 1/α` (PPT02/APS05). `T_CMB` is a FIRAS clock. `sdt::laws::measured` is the engine's CODATA/FIRAS lookup. Record: `derivelist/README.md`.
+- **Scales.** `ℓ_P` is the exact koppa–wake geometric closure (FLM06 §3b). `c`, `k_B`, `e` are unit bridges. `{ℏ, m_e, m_p}` are one mass/action seat (FLM13). `α` is hydrogen’s koppa rung `k_H = 1/α` (PPT02/APS05). `T_CMB` is a FIRAS clock. `sdt::laws::measured` is the engine's CODATA/FIRAS lookup. Record: `derivelist/README.md`.
 - **Certification labels** (`DERIVED`, `COMPUTED`, `CALIBRATED`, `OBSERVED`, `PENDING`) tag every result in benchmarks. "CALIBRATED" means one parameter was fitted and MUST be documented.
 
 ## Nuclear construction grammar (ATOMICUS)

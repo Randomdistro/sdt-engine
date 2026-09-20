@@ -99,7 +99,7 @@ int main()
     std::puts("          a baryon-count anchor. Two constants leave the list; one seat stays.");
 
     // ── 4. l_P — the spation floor ─────────────────────────────────────
-    std::puts("\n[4] l_P — Planck length (Axiom R1, the one dimensional seed)");
+    std::puts("\n[4] l_P — Planck length (exact koppa–wake geometric closure)");
     // FLM06 clean candidates reach ~10^3; required subdivision is ~10^61.
     const double N_needed = measured::R_CMB / measured::l_P;
     const double N_clean  = measured::z_rec;   // best hbar/G-free candidate
@@ -108,13 +108,13 @@ int main()
     std::printf("  shortfall factor = %.3e  -> route EXCLUDED (FLM06 Phase 1 negative)\n",
                 N_needed / N_clean);
     // Koppa re-expression (circular w.r.t. l_P — printed as such):
-    const double koppa_pb   = measured::l_P * measured::l_P * measured::c * measured::m_p / measured::hbar;
-    const double lambdabar_p = measured::hbar / (measured::m_p * measured::c);
-    line("l_P = sqrt(koppa_per_baryon * lambdabar_p)", std::sqrt(koppa_pb * lambdabar_p),
-         measured::l_P, "CIRCULAR (re-expression, not derivation)");
-    std::puts("  status: NOT derivable from SDT-native quantities — Seed Theorem");
-    std::puts("          (FLM06, PROVEN): exactly one action/mass/length anchor is");
-    std::puts("          unavoidable. l_P stays AXIOM R1. No line drawn.");
+    const double koppa_pb = bridge::koppa_per_baryon;
+    const double proton_wake = bridge::proton_wake;
+    line("l_P = sqrt(koppa_per_baryon * proton_wake)", std::sqrt(koppa_pb * proton_wake),
+         measured::l_P, "CONSISTENCY (koppa constructed from stored l_P)");
+    std::puts("  status: exact geometric closure l_P = sqrt(koppa * wake)");
+    std::puts("          (FLM06): mass cancels; SDT length geometry supplies the scale.");
+    std::puts("          The bridge-based check above reuses stored l_P; Clearing route excluded only.");
 
     // ── 5. m_e — electron mass ─────────────────────────────────────────
     std::puts("\n[5] m_e — electron mass (velocity-resistance form, FLM12/FLM13)");
@@ -199,7 +199,7 @@ int main()
     // ── Summary ────────────────────────────────────────────────────────
     std::puts("\n=================================================================");
     std::puts("REDUCED derivation basis (after the lines are drawn):");
-    std::puts("  l_P            AXIOM R1 — the one dimensional seed (Seed Theorem)");
+    std::puts("  l_P            GEOMETRIC CLOSURE — sqrt(koppa * wake), mass-independent");
     std::puts("  ONE mass seat  {hbar = m_e = m_p} collapsed via W=1/W=3 (FLM13)");
     std::puts("  alpha          extracted from the H spectrum; derivation open");
     std::puts("  a_0            MEASURED — the length the seat form rides on");

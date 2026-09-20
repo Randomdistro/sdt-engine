@@ -7,16 +7,17 @@ const c=299792458.0, hbar=1.054571817e-34, G=6.674e-11;     // G,ℏ: reference 
 const m_p=1.67262192369e-27, R_p=8.414e-16, lP=1.616255e-35;
 const L=x=>x.toExponential(5);
 
-// the engine's per-baryon koppa (defined in laws.hpp as ℓ_P²·c·m_p/ℏ = G·m_p/c²)
-const koppa_per_baryon = lP*lP*c*m_p/hbar;
+// Engine path: measured proton boundary and topological W+1; constants below are comparisons.
+const protonWake = R_p/(3+1);
+const koppa_per_baryon = lP*lP/protonWake;
 const lam_Cp = hbar/(m_p*c);            // proton coherence wake (reduced Compton)
 console.log("koppa_per_baryon ϟ_b =", L(koppa_per_baryon), "m   (= G·m_p/c² =", L(G*m_p/c/c),")");
-console.log("proton wake ƛ_p      =", L(lam_Cp), "m");
-console.log("R_p (measured)        =", L(R_p), "m   = ƛ_p ×", (R_p/lam_Cp).toFixed(4), "(= W+1 = 4, trefoil)\n");
+console.log("proton wake ƛ_p      =", L(protonWake), "m");
+console.log("R_p (measured)        =", L(R_p), "m   = ƛ_p ×", (R_p/protonWake).toFixed(4), "(= W+1 = 4, trefoil)\n");
 
 console.log("=== THE KOPPA RESTATEMENT OF THE PLANCK FLOOR ===");
 console.log("Planck (ref):  ℓ_P = √(ℏG/c³)          =", L(Math.sqrt(hbar*G/c/c/c)));
-const gm = Math.sqrt(koppa_per_baryon*lam_Cp);
+const gm = Math.sqrt(koppa_per_baryon*protonWake);
 console.log("KOPPA form:    ℓ_P = √(ϟ_b · ƛ_p)       =", L(gm), "  ×ℓ_P:", (gm/lP).toFixed(6));
 console.log("               i.e. ℓ_P = GEOMETRIC MEAN of a c-boundary (koppa) and a wake\n");
 
@@ -30,7 +31,7 @@ console.log("  -> √(ϟ·ƛ) = ℓ_P for EVERY mass: the m cancels. ℓ_P is wh
 console.log("=== via the proton wake R_p + topology W+1=4 (no explicit ƛ) ===");
 const fromRp = Math.sqrt(koppa_per_baryon*R_p/4.0);
 console.log("  ℓ_P = √(ϟ_b · R_p/(W+1)) = √(ϟ_b · R_p/4) =", L(fromRp), "  ×ℓ_P:", (fromRp/lP).toFixed(6));
-console.log("  (since R_p = 4ƛ_p, this = √(ϟ_b·ƛ_p) exactly)\n");
+console.log("  (ƛ_p is R_p/4 in this path; the forward check shares the supplied lP)\n");
 
 console.log("=== the zk²=1 / k=1 reading ===");
 console.log("  koppa ϟ = R/k² = R·z ;  zk²=1.  The spation is the k=1 self-boundary:");

@@ -774,7 +774,7 @@ namespace regime_bar {
  * scalar). This chain requires no G and no kg — only v, R, and c.
  *
  * From bridge namespace: koppa_Sun = R_Sun / (k_Sun × k_Sun) ≈ 1477 m
- *                        koppa_per_baryon = ℓ_P² × c × m_p / ℏ ≈ 1.242e-54 m
+ *                        koppa_per_baryon = ℓ_P² / (R_p/4) ≈ 1.242e-54 m
  *
  * @param M_bar_Msun  Baryonic mass [M☉]
  * @return Galactic Koppa Ϟ_gal [m]
@@ -795,7 +795,7 @@ namespace regime_bar {
 /**
  * @brief Baryon count from Koppa (no kg needed).
  *   N_bar = Ϟ / Ϟ_per_baryon
- *   Ϟ_per_baryon = ℓ_P² c m_p / ℏ ≈ 1.242e-54 m
+ *   Ϟ_per_baryon = ℓ_P² / (R_p/4) ≈ 1.242e-54 m
  * @param koppa_m  Body Koppa [m]
  * @return Number of baryons
  */

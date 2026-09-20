@@ -49,7 +49,7 @@ operator imported.
 
 - Both routes **extract** α from spectra; neither derives it. The geometric
   derivation (E51/OP-3) is open. α, being dimensionless, is not blocked by the
-  Seed Theorem (contrast ℓ_P) — a derivation is permitted, just not yet earned.
+  dimensional-scale argument — a derivation is permitted, just not yet earned; ℓ_P separately follows the koppa–wake closure.
 - The CONDENSA closed-form search is **excluded**: no clean a·πᵇ form exists
   for α (contrast 6π⁵ for the mass ratio, which is unique at 19 ppm).
 - E_ion and α carry the same information through the Rydberg relation — reading

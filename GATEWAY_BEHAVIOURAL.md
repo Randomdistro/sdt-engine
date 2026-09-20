@@ -31,6 +31,20 @@ Retained because they are already professional or near-professional: CALIBRATED(
 COMPUTED, OBSERVED, PENDING, convergent (defined at first use: independently derived,
 in agreement), pre-registered thresholds, residual, tolerance.
 
+### Retired certification label — IDENTITY → CONSTRUCTION
+
+The certification label for a true-by-definition/true-by-construction result (a relation whose
+two sides are computed from the same underlying input, e.g. z and k built from one shared v) is
+**CONSTRUCTION**, never IDENTITY. The epistemic status is unchanged — still shown for
+consistency, still excluded from the earned tally, still not independent evidence on its own —
+only the name changes. "Identity" reads as a dismissal of the relation itself; the koppa/z-k
+bridge (zk² = 1) and relations like it (Coulomb's k_e e² = αℏc, V_disp ratios, marginal-stability
+equalities) are load-bearing bridge equations, not things to be waved away. Where a result of
+this kind is instead built from two genuinely independent measurement chains (e.g. the solar
+gravitational redshift, B39: z from spectroscopy, k from planetary orbital dynamics), it is
+never labelled CONSTRUCTION — it earns DERIVED or COMPUTED, because it could have failed and
+did not. Enum: `Certification::CONSTRUCTION` in `Benchmarks/B01_B25/benchmarks_suite.cpp`.
+
 ### Rejected reification — charge
 
 The word **charge** and its grammatical variants (**charged**, **charges**, **charging**)

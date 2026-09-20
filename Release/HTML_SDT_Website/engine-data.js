@@ -25,7 +25,7 @@
         const s = data.summary;
         node.textContent =
           `${s.earned_passed}/${s.earned_total} earned predictions passed · ` +
-          `${s.identity_passed} IDENTITY · ${s.calibrated_passed} CALIBRATED · ` +
+          `${s.construction_passed} CONSTRUCTION · ${s.calibrated_passed} CALIBRATED · ` +
           `${s.pending_note_only} PENDING note-only`;
       });
 

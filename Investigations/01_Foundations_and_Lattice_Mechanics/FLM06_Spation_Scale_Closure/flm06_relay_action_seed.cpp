@@ -71,7 +71,7 @@ int main() {
     if (passes == 0) {
         std::printf("Result: NEGATIVE. None of the tested relay-saturation temperatures\n");
         std::printf("reproduce l_P. This is consistent with, and does not overturn, FLM06's\n");
-        std::printf("proven Seed Theorem (Section 3): l_P remains Axiom R1. The deferred (a')\n");
+        std::printf("Clearing-route result: koppa-wake closure stands separately. The deferred (a')\n");
         std::printf("thread is now closed as tried-and-negative, not left open by omission --\n");
         std::printf("re-homing hbar as the lattice's own action quantum did not, on this run,\n");
         std::printf("produce a derivation of l_P's absolute value.\n");

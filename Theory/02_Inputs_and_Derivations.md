@@ -1,6 +1,6 @@
 # Dependency Provenance & Derived Quantities
 
-> Scale status: `derivelist/README.md`. `ℓ_P` is the dimensional seed; `c`, `k_B`, `e` are unit
+> Scale status: `derivelist/README.md`. `ℓ_P` follows the exact koppa–wake closure; `c`, `k_B`, `e` are unit
 > bridges; `{ℏ, m_e, m_p}` are one mass/action seat; `α` is hydrogen’s koppa rung; `T_CMB` is a
 > FIRAS clock. Tables below are the engine’s computational cascade from `laws.hpp` lookup values.
 
@@ -12,7 +12,7 @@ not a scientific-status class. The cascade below records how each value enters.
 
 | Quantity | Numerical source | Dependency role |
 |----------|------------------|-----------------|
-| $\ell_P$ | CODATA lookup | Axiom R1: irreducible dimensional seed |
+| $\ell_P$ | CODATA lookup | Exact koppa–wake geometric closure; numerical reference stored |
 | $c$ | SI exact | Relay-speed unit bridge |
 | $\hbar$ | CODATA lookup | One mass/action seat; W=1 circulation role |
 | $\alpha$ | hydrogen spectroscopy (APS05/PPT02) | Derived hydrogen koppa rung; topology-only origin remains open |
@@ -30,8 +30,8 @@ not a scientific-status class. The cascade below records how each value enters.
 | $\ell_P$ | 1.616255 × 10⁻³⁵ m (measured) | Planck length |
 | $N$ | $R_{\text{CMB}}/\ell_P$ | 5.894 × 10⁶¹ |
 
-> **Note:** $\ell_P$ carries Axiom-R1 seed status. It is not obtained from a
-> body-source constant or from a benchmark target.
+> **Note:** ℓ_P = √(ϟ·ƛ) is the exact geometric relation. The engine stores a numerical
+> reference; its bridge-based recovery reuses that reference and is a consistency check.
 | $\varepsilon$ | $u_{\text{CMB}} \ell_P^3$ | 1.761 × 10⁻¹¹⁸ J |
 | $\Phi$ | $N\varepsilon$ | 1.038 × 10⁻⁵⁶ J |
 | $P_{\text{conv}}$ | $\Phi/\ell_P^3$ | 2.459 × 10⁴⁸ Pa |
