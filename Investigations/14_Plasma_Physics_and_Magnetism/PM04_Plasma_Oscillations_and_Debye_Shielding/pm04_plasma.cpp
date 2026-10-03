@@ -4,7 +4,8 @@
 //
 //  FIREWALL: no primitive E field, no e²/ε₀ in the restoring chain, no
 //  magnetons. Pair coupling A = αℏc  (engine coulomb_identity::k_e_e2 —
-//  laws.hpp labels it class F definitional; therefore the GAIN is an
+//  a class-A CONSTRUCTION bridge (laws.hpp's 'class F' tag is a canon
+//  proposal to correct, 2026-10-03); therefore the GAIN is an
 //  α-anchored re-expression, NOT a derivation. Disclosed.)
 //  Sheet force per carrier = 2πA σ_s  (Law III 1/r² integrated over sheet;
 //  distance-independent). Ion background immobile, neutralising.
@@ -61,11 +62,11 @@ struct Sheets {
 
 int main() {
     std::printf("PM04 — Plasma Oscillations & Debye Shielding, 1-D sheet N-body (J. C. Harvey, 2026-07-04)\n");
-    const double A  = coulomb_identity::k_e_e2;     // = alpha*hbar*c [J m] — class F identity, DISCLOSED
+    const double A  = coulomb_identity::k_e_e2;     // = alpha*hbar*c [J m] — class-A CONSTRUCTION bridge, DISCLOSED
     const double m  = measured::m_e;
     const double n  = 1.0e18;                       // [m^-3] chosen density (free test point, not fitted)
     const double wp_native = std::sqrt(4.0*PI*A*n/m);
-    std::printf("native gain: A = alpha*hbar*c = %.6e J m  (engine coulomb_identity, class F identity)\n", A);
+    std::printf("native gain: A = alpha*hbar*c = %.6e J m  (engine coulomb_identity, class-A CONSTRUCTION bridge)\n", A);
     std::printf("omega_p(native form) = sqrt(4 pi A n / m_e) = %.6e rad/s at n = %.1e m^-3\n\n", wp_native, n);
 
     // ═══ P1 — single-sheet ring at omega_p (cold) ═══════════════════════

@@ -433,7 +433,7 @@ Everything flows downhill from the derivation basis through four stages. This is
 | | $V_{\text{disp},p}$ | $3m_p\ell_P^3 c^2/\Phi$ | $1.834\times10^{-58}\,\text{m}^3$ | COMPUTED |
 | | $P_{cf}$ | $\rho_{\text{eff}}c^2=P_{\text{conv}}/3$ | identity ✓ | DERIVED |
 
-**The Coulomb identity** $k_e e^2=\alpha\hbar c$ (T9) is *definitional* (Class F): it **defines**
+**The Coulomb identity** $k_e e^2=\alpha\hbar c$ (T9) is *definitional* (class A bridge, label CONSTRUCTION — not class F, which `Theory/05` reserves for pending/failed; corrected 2026-10-03): it **defines**
 $\alpha\equiv k_e e^2/\hbar c$. SDT's coupling is the dimensionless $\alpha$ (in the derivation basis); **$e$ is not** —
 charge is not an SDT entity (it is *occluded influx directionality* — see Part 18), and $e$ figures only as the
 SI unit-bridge from SDT's occlusion magnitude back to the Coulomb number.
@@ -1147,7 +1147,7 @@ frame).**
 - **Charge.** **SDT has no charge primitive.** What QM calls charge is *occluded influx directionality* — the
   directional signature of the convergence inflow a vortex occludes — and the electrostatic force is occlusion
   geometry (Law III). The canonical derivation basis contains **$\alpha$, not $e$**, and $k_e e^2=\alpha\hbar c$ is the
-  **definition** of $\alpha$ (Class F). EMC02's "cannot derive $e$" is not a missing derivation — it is the
+  **definition** of $\alpha$ (class A bridge, CONSTRUCTION; corrected 2026-10-03). EMC02's "cannot derive $e$" is not a missing derivation — it is the
   *expected signature of a QM abstraction*: the derivation basis has no current dimension $[\mathrm{A}]$ because the
   ontology has no charge. $e$ appears only as an **SI unit-bridge**.
 - **$\ell_P$ is not a constant — it is a field.** GOM05 derives $\ell_P(r)=\ell_{P,\infty}(1-z)$,

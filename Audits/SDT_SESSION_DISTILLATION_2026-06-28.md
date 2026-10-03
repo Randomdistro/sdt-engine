@@ -35,7 +35,10 @@ unfinished prompts. Report: `Investigations/REWRITE_AUDIT_2026-06-28.md`.
 ## 2. Where SDT can actually damage GR (the fork map)
 
 **DECIDED framing.** Every result flagged **DEGENERATE** (koppa ≡ GM/c² at the bridge → same numbers)
-*cannot* damage GR — those are dead ends for falsification. The genuine attack surface:
+*cannot* damage GR — those are dead ends for falsification. *[2026-10-03: the discrimination statement
+stands — a shared number cannot falsify GR — but the label is read as **CONVERGENT, not yet
+discriminating**, not as a demotion of the SDT result (gateway behavioural §3.8). Ѻ is measured from
+(v, r); GM = c²Ѻ is its output.]* The genuine attack surface:
 
 | Fork | SDT ≠ GR claim | Testable |
 |---|---|---|
@@ -234,7 +237,9 @@ domain's audit fix-list):
    still stores moments in μ_N (aspirational vs the engine; flagged, not faked).
 3. **GOM05 = hinges closing (rigid grains), not smaller spations.**
 4. **Anti-tautology.** No can't-fail tests. `z·k²=1`, `k_e e²=αℏc`, `∂(u/3)/∂u=⅓` are *identities*, not
-   evidence. Always separate the identity from the load-bearing derivation.
+   evidence. *[2026-10-03: `z·k²=1` is CONSTRUCTION only where z and k are built from one shared v; with
+   z from spectroscopy and k from orbital dynamics it earns DERIVED (B39). `k_e e²=αℏc` is a class-A
+   bridge (CONSTRUCTION), load-bearing, not a failure.]* Always separate the identity from the load-bearing derivation.
 5. **Opacity = radiation self-jam** (a shared-lattice effect), not Thomson.
 6. **Determinism stays forward-local**, not retrocausal.
 7. **No mass-produced fake completions** — upgrade honestly, execute for real, or say it's owed.

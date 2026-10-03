@@ -2,7 +2,8 @@
 //  CH02 — Ionic & Metallic Bonding from Electropause Transfer
 //  Author: J. C. Harvey, Melbourne · 2026-07-03
 //  Engine: <sdt/laws.hpp> only. Pairwise coupling = coulomb_identity::k_e_e2
-//  (= αℏc; the engine itself labels this class F definitional identity —
+//  (= αℏc; a class-A CONSTRUCTION bridge — laws.hpp's 'class F' tag is a
+//   canon proposal to correct, 2026-10-03 —
 //   declared, not hidden). NO fitted parameters. NO literature Madelung input.
 //
 //  P1  transfer criterion: well-depth asymmetry Δχ, χ=(IE+EA)/2  [OBSERVED anchors]
@@ -47,13 +48,13 @@ static double evjen_madelung(int n) {
 int main() {
     const double eV   = measured::eV_to_J;
     const double NA   = 6.02214076e23;          // [1/mol] SI-exact unit bridge (mol -> count)
-    const double ahc  = coulomb_identity::k_e_e2; // αℏc [J·m] — engine class F identity, declared
+    const double ahc  = coulomb_identity::k_e_e2; // αℏc [J·m] — engine class-A CONSTRUCTION bridge, declared
 
     std::printf("================================================================\n");
     std::printf("  CH02 — Ionic & Metallic Bonding from Electropause Transfer\n");
     std::printf("  Author: J. C. Harvey, Melbourne · 2026-07-03\n");
     std::printf("  Coupling: alpha*hbar*c = %.6e J*m (engine coulomb_identity,\n", ahc);
-    std::printf("            labelled class F identity in laws.hpp — declared)\n");
+    std::printf("            class-A CONSTRUCTION bridge in laws.hpp — declared)\n");
     std::printf("================================================================\n\n");
 
     // ------------------------------------------------------------------

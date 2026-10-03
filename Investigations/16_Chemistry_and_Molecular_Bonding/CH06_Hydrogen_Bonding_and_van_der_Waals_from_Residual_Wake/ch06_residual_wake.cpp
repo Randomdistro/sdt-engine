@@ -2,7 +2,7 @@
 //  CH06 — Hydrogen Bonding & van der Waals from Residual Wake
 //  Author: J. C. Harvey, Melbourne · 2026-07-05
 //  Machinery: residual wake = ± handed point-source pair (separation d = p/e),
-//  pair energy ±αℏc/r (engine coulomb_identity — class F identity, declared).
+//  pair energy ±αℏc/r (engine coulomb_identity — class-A CONSTRUCTION bridge, declared).
 //  EVERY exponent is FITTED from computed sums, never assumed.
 //  Gates committed in RUN_LOG.md before this file. Exit honest.
 // ============================================================================

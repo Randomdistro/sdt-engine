@@ -53,7 +53,7 @@ Proton is genus 1 with winding $W=3$ (trefoil). Higher winding **amplifies**; hi
 
 ## 5. Coulomb Identity (Derived)
 
-> [ANNOTATION: identity (α's definition rearranged) — class F per laws.hpp]
+> [ANNOTATION: identity (α's definition rearranged) — ~~class F per laws.hpp~~ class A bridge, label CONSTRUCTION (gateway behavioural §1; `Theory/05` reserves F for pending/failed). Corrected 2026-10-03; the matching `laws.hpp:121` comment is a canon proposal.]
 
 From the SDT force law + charge quantisation + transfer function:
 
