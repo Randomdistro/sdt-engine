@@ -132,7 +132,7 @@ and recording it as the investigation's verdict — is the exact error to guard 
 | NP27 kinetic-energy fine-tune | DEGENERATE ("does not test the packing") | discrimination statement | **not discriminating for the packing** — vocabulary only |
 | FD05 P2 `c_s = c/√3` | Class C cap for using `law_I::P_rad = u/3` | SDT's own law — legal input (procedural §3.7); the cap was L3 in the 07-26 audit | **cap withdrawn**; P2 is **CONVERGENT** with photon-gas `c/√3`, provenance inherited from law_I (audited once, in its own investigation — TD06 counted-mode route) |
 | GOM08 Mercury precession | "IDENTITY-class until P2 lands" | the 6π form is taken from the GR result with GM → c²Ѻ — a named **external-input form**; Ѻ_⊙ itself is kinematic | relabelled **external-input (form)**, not IDENTITY; the open item is a native derivation of the form (P2). Agreement with GR is not the reason |
-| `k_e e² = αℏc` (CH02, CH06, PM04, FLM04, B23) | class F tautology | true by construction (α ↔ e unit bridge) | **class A bridge, CONSTRUCTION** (gateway behavioural §1); F is reserved for pending/failed (`Theory/05`). The `laws.hpp:121` comment is a canon proposal |
+| `k_e e² = αℏc` (CH02, CH06, PM04, FLM04, B23) | class F tautology | true by construction (α ↔ e unit bridge) | **class A bridge, CONSTRUCTION** (gateway behavioural §1); F is reserved for pending/failed (`Theory/05`). `laws.hpp` relabelled 2026-10-03 on Harvey's word (CANON_PROPOSALS P1–P2, applied) |
 
 **Unchanged by this pass** (named inputs, logged): `z·k²=1` rows built from one shared v
 (`structural_analysis.cpp`) — CONSTRUCTION; Law IV `V_disp` hardcoded from measured masses — circular;

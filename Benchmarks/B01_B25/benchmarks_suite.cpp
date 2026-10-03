@@ -1104,7 +1104,7 @@ static void B23_coulomb_construction()
     using namespace sdt::laws;
 
     report("B23", "k_e*e2 (SDT derived) [J·m]", "Universal",
-           coulomb_identity::k_e_e2, coulomb_identity::k_e_e2_codata, 0.001, Certification::CONSTRUCTION);  // α ≡ k_e e²/ℏc — true by construction: class-A bridge, CONSTRUCTION (outside the earned tally). laws.hpp's "class F" tag is a canon proposal (CANON_PROPOSALS_2026-10-03 P1)
+           coulomb_identity::k_e_e2, coulomb_identity::k_e_e2_codata, 0.001, Certification::CONSTRUCTION);  // α ≡ k_e e²/ℏc — true by construction: class-A bridge, CONSTRUCTION (outside the earned tally). laws.hpp relabelled class A on 2026-10-03 (CANON_PROPOSALS_2026-10-03 P1, applied)
 }
 
 // ═══════════════════════════════════════════════════════════════════════

@@ -1,7 +1,11 @@
 # Canon proposals — origin-rule sweep (2026-10-03)
 
-> **Propose-and-wait** (gateway procedural §1.3). `Engine/include/sdt/` is canon: nothing below has
-> been applied. Each item quotes the current text, the proposed text, and the reason under gateway
+> **APPLIED 2026-10-03 on Harvey's explicit word ("apply the canon proposals").** P1–P3 are in
+> `laws.hpp` as written below, plus one consistency fix: the `g_electron` block's
+> `provenance_status` moved from `unresolved` to `SDT-first (definition, electron row)` to match
+> its class-A label. Comment-only changes; no constant, function or output changed.
+>
+> *(Original header: propose-and-wait, gateway procedural §1.3.)* Each item quotes the current text, the proposed text, and the reason under gateway
 > behavioural §3.8 / procedural §3.8. Apply item by item on Harvey's word.
 
 ## P1 — `coulomb_identity::k_e_e2` is class A (CONSTRUCTION), not class F

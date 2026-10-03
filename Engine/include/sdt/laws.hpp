@@ -117,8 +117,8 @@ namespace measured {
     inline constexpr double e_charge    = 1.602'176'634e-19;            // [C]      Elementary charge (SI exact)
     // EMC02 (INCONCLUSIVE): e is an IRREDUCIBLE Tier-1 input, not derivable. The
     // derivation basis {ℓ_P,c,ℏ,k_B,T_CMB,d=3} has no current dimension [A], so no
-    // algebraic combination yields [C]; the Coulomb route e=√(αℏc/k_e) is a
-    // definitional tautology (class F). e is an SI unit bridge.
+    // algebraic combination yields [C]; the Coulomb route e=√(αℏc/k_e) is the
+    // bridge definition read backwards (class A, CONSTRUCTION). e is an SI unit bridge.
 
     // CODATA 2018 measured values
     inline constexpr double alpha_inv   = 1.0 / alpha;                  // [-]      exact reciprocal in-engine
@@ -490,10 +490,10 @@ namespace law_III {
     /// F = (π/4) P_eff R1² R2² / r²
     // provenance_status:     SDT-derived
     // correspondence_status: known-match            // 1/r² structure: Coulomb, gravity, nuclear
-    // input_dependency:      primitive-derivation basis    // STRUCTURE only; the coefficient P_eff is class E
+    // input_dependency:      primitive-derivation basis    // structure; coefficient P_eff is class C (EMC04 electropause)
     // class:                 C
-    // circularity_assertion: 1/r² structure passes delete-test; magnitude via P_eff (E)
-    // risk_flag:             coefficient calibrated (see P_eff)
+    // circularity_assertion: 1/r² structure passes delete-test; P_eff passes (no measured R_p, k_e, e)
+    // risk_flag:             P_eff inherits the FLM07 minimum-resistance-path premise
     [[nodiscard]] inline auto F_occlusion(
         double R1, double R2, double r
     ) noexcept -> double {
@@ -2196,12 +2196,12 @@ namespace coulomb_identity {
 
     /// k_e × e² — the physically load-bearing coupling product
     /// Derived: k_e e² = αℏc
-    // provenance_status:     unresolved
+    // provenance_status:     SDT-first (bridge definition)
     // correspondence_status: known-match
-    // input_dependency:      definitional-identity  // α ≡ k_e e²/(ℏ c): this line is a tautology
-    // class:                 F
-    // circularity_assertion: FAILS delete-test — vanishes; supply an SDT path NOT using α's definition
-    // risk_flag:             relabel from "Derived (exact, no free parameters)" — it is an identity
+    // input_dependency:      unit bridge — α is the hydrogen koppa rung (PPT02/APS05); e is the SI bridge (EMC02)
+    // class:                 A   (label CONSTRUCTION — true by construction, outside the earned tally)
+    // circularity_assertion: by construction; carries no evidential weight and claims none
+    // risk_flag:             none — load-bearing bridge (gateway behavioural §1, IDENTITY → CONSTRUCTION)
     inline constexpr double k_e_e2 = alpha * hbar * c;
     // = 2.307e-28 J·m
 
@@ -2294,11 +2294,11 @@ namespace winding {
     /// Wake-to-quantum ratio: g(W) = R_wake / ƛ_C
     /// Electron: g(1) = α = 1/137
     /// Proton:   g(3) = 4
-    // provenance_status:     unresolved
+    // provenance_status:     SDT-first (definition, electron row)
     // correspondence_status: known-match
     // input_dependency:      definitional-identity  // r_e ≡ α ℏ/(m_e c) ⟹ g_electron ≡ α identically
-    // class:                 F
-    // circularity_assertion: FAILS delete-test — algebraic identity, not a measurement of α
+    // class:                 A   (label CONSTRUCTION — true by construction, outside the earned tally)
+    // circularity_assertion: by construction — not a measurement of α, and claims none
     // risk_flag:             g(1)=α is definitional; the non-trivial claim is g(3)=4 (proton)
     inline constexpr double g_electron = r_e * m_e * c / hbar;
     // = alpha (exact)

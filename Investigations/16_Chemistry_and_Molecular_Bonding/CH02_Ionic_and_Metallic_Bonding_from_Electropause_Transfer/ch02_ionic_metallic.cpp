@@ -2,8 +2,8 @@
 //  CH02 — Ionic & Metallic Bonding from Electropause Transfer
 //  Author: J. C. Harvey, Melbourne · 2026-07-03
 //  Engine: <sdt/laws.hpp> only. Pairwise coupling = coulomb_identity::k_e_e2
-//  (= αℏc; a class-A CONSTRUCTION bridge — laws.hpp's 'class F' tag is a
-//   canon proposal to correct, 2026-10-03 —
+//  (= αℏc; a class-A CONSTRUCTION bridge — laws.hpp relabelled
+//   class A on 2026-10-03 —
 //   declared, not hidden). NO fitted parameters. NO literature Madelung input.
 //
 //  P1  transfer criterion: well-depth asymmetry Δχ, χ=(IE+EA)/2  [OBSERVED anchors]

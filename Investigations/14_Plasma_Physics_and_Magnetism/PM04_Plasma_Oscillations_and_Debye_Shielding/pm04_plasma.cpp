@@ -4,8 +4,8 @@
 //
 //  FIREWALL: no primitive E field, no e²/ε₀ in the restoring chain, no
 //  magnetons. Pair coupling A = αℏc  (engine coulomb_identity::k_e_e2 —
-//  a class-A CONSTRUCTION bridge (laws.hpp's 'class F' tag is a canon
-//  proposal to correct, 2026-10-03); therefore the GAIN is an
+//  a class-A CONSTRUCTION bridge (laws.hpp relabelled class A
+//  on 2026-10-03); therefore the GAIN is an
 //  α-anchored re-expression, NOT a derivation. Disclosed.)
 //  Sheet force per carrier = 2πA σ_s  (Law III 1/r² integrated over sheet;
 //  distance-independent). Ion background immobile, neutralising.
