@@ -86,22 +86,9 @@
 
   /* ── four unfolding menus ─────────────────────────────────────────────── */
   var MENUS = {
-    lab: ['Lab', [
-      ['Atomicus', [
-        ['Atomicus lab', 'atomicus-lab.html'],
-        ['Atomicus 3D', 'atomicus-3d.html'],
-        ['Packing sequencer', 'nuclear-packing-sequencer.html'],
-        ['Sequencer walkthrough', 'nuclear-packing-walkthrough.html'],
-        ['Fission — flay, not split', 'atomicus-fission-impact.html']
-      ]],
-      ['Instruments', [
-        ['Koppa ladder', 'koppa-ladder.html'],
-        ['Depth closure', 'depth_closure_scroller.html'],
-        ['The wall in the infrared', 'clearing-ladder.html'],
-        ['Six laws scroller', 'laws_scroller.html'],
-        ['Solar system', 'solar-system.html'],
-        ['Celestial three-body solver', 'celestial-three-body-solver.html'],
-        ['Eclipse', 'cq06-eclipse.html']
+    lab: ['Demonstrations', [
+      ['Reviewed mathematical scope', [
+        ['Geometry and movement', 'demonstrations.html']
       ]]
     ]],
     bench: ['Benchmarks', [
@@ -113,8 +100,6 @@
     inv: ['Investigations', [
       ['The programme', [
         ['All investigations', 'investigations.html'],
-        ['Interactive experiment catalogue', 'experiments.html'],
-        ['Interactive experiment catalogue', 'experiments.html'],
         ['Interactive experiment catalogue', 'experiments.html']
       ]],
       ['Foundations', [
@@ -148,7 +133,6 @@
     ]],
     papers: ['Papers', [
       ['The path, spoken', [
-        ['Interactive causal chain', 'causal-chain.html'],
         ['Complete dependency chain', 'theory.html'],
         ['Words only (newcomers)', 'causal-chain-simple.html'],
         ['For people', 'sdt-for-people.html'],
@@ -213,7 +197,7 @@
     'st_ring_moons.html': 'Inspect the ring-moon orbital investigation.',
     'st_paradox_census.html': 'Review the framework’s paradox and contradiction census.',
     'sdt-for-people.html': 'The theory spoken directly, without requiring the technical ledger.',
-    'causal-chain.html': 'Newcomers path: every link is a working mechanism you can drag, press or wind.',
+    'theory.html': 'Newcomers path: every link is a working mechanism you can drag, press or wind.',
     'causal-chain-simple.html': 'The same newcomers story in plain words only, without the interactive figures.',
     'theory.html': 'Read the entire framework in dependency order with status, evidence and residuals exposed.',
     'theoretical-model.html': 'A compact statement of the current total model and its open debts.',
@@ -433,12 +417,11 @@
 
   /* ── reading register ─────────────────────────────────────────────────── */
   var REGISTER_PAGES = {
-    simple: 'causal-chain.html',
+    simple: 'causal-chain-simple.html',
     layman: 'theory.html#L0',
     technical: 'causal-chain-technical.html'
   };
   var REGISTER_FROM_PAGE = {
-    'causal-chain.html': 'simple',
     'causal-chain-simple.html': 'simple',
     'theory.html': 'layman',
     'causal-chain-technical.html': 'technical'

@@ -45,6 +45,9 @@
 | `nuclear/fission_yields/IAEA_241Pu_cumulative_FY.csv` | Pu-241(n,f) cumulative yields | IAEA relnsd `cumulative_fy parents=241PU` | NP32 post-decay | `6824eda417a5` | 92,783 |
 | `nuclear/fission_yields/IAEA_241Am_independent_FY.csv` | Am-241(n,f) independent yields (minor actinide; thermal+fast) | IAEA relnsd `independent_fy parents=241AM` | NP32 minor-actinide test | `a75a4ecd5109` | 100,715 |
 | `nuclear/fission_yields/IAEA_241Am_cumulative_FY.csv` | Am-241(n,f) cumulative yields | IAEA relnsd `cumulative_fy parents=241AM` | NP32 post-decay | `f4c7c23400d5` | 99,413 |
+| `nuclear/neutron_multiplicity/Nishio1998_U235_nth_f_nuA.csv` | ²³⁵U(n_th,f) per-fragment ν̄(A), author table, 66 pts | EXFOR 22464/004 (Nishio 1998, Nucl.Phys.A 632,540) via `X4sGetSubent` | reorganisation/sawtooth ν test (fit system) | `9cd58c5c2bae` | 1,371 |
+| `nuclear/neutron_multiplicity/Nishio1998_U233_nth_f_nuA.csv` | ²³³U(n_th,f) per-fragment ν̄(A), author table, 90 pts | EXFOR 22660/005 (Nishio 1998, JNST 35,631) via `X4sGetSubent` | reorganisation/sawtooth ν test (held-out, same mechanism) | `a8d7f5919c0f` | 1,864 |
+| `nuclear/neutron_multiplicity/BudtzJorgensen1988_Cf252_sf_nuA.csv` | ²⁵²Cf(sf) per-fragment ν̄(A), digitized curve, 106 pts | EXFOR 23175/008 (Budtz-Jørgensen & Knitter 1988, Nucl.Phys.A 490,307) via `X4sGetSubent` | reorganisation/sawtooth ν test (held-out, cross-mechanism: spontaneous vs neutron-induced) | `2f0990416bfa` | 1,688 |
 
 | `solar_propagation_2026-08/raw/jpl_horizons_emb_sun_vectors_2025.csv` | Earth-Moon-barycenter vector table relative to the Sun, 2025, 14-day cadence | NASA/JPL Horizons API, DE441 product; exact query in local manifest | GOM25 D1 orbit/depth audit | `99570b90b814` | 10,537 |
 | `solar_propagation_2026-08/raw/harps_lfc_tablea1.dat` | 188 HARPS-LFC published line shifts | CDS J/A+A/643/A146; laboratory-wavelength dependency | GOM25 D3 strong-line reconstruction | `1b662d02add6` | 14,288 |

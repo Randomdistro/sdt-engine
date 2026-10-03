@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Geometry and movement — SDT demonstrations</title>
+<meta name="description" content="Selected SDT mathematical demonstrations with explicit assumptions, source definitions and limits.">
+<link rel="canonical" href="https://spatialdisplacementtheory.com/demonstrations">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="sdt-shell.css">
+<link rel="stylesheet" href="theory.css">
+<script src="sdt-shell.js" defer></script>
+<script src="demonstrations.js" defer></script>
+</head>
+<body>
+<header class="theory-hero"><div class="theory-hero__inner">
+<p class="theory-kicker">Geometry and movement</p>
+<h1>A structure beneath the motion</h1>
+<p class="theory-hero__lead">A compelling picture starts a question. A calculation establishes a narrower result. The demonstrations below expose the mathematical relationships and identify the physical questions beyond the calculation.</p>
+</div></header>
+<main class="theory-foundations">
+<section aria-labelledby="budget-title">
+<h2 id="budget-title">The movement budget</h2>
+<p><strong>Status: conditional identity.</strong> Law V assumes v² + v<sub>circ</sub>² = c². The control varies the translation fraction β = v/c and calculates the remaining circulation fraction. The arc represents the allowed pairs; the moving point marks the selected pair.</p>
+<label for="budget">Translation fraction β</label>
+<input id="budget" type="range" min="0" max="1" step="0.001" value="0.35">
+<svg viewBox="0 0 340 270" role="img" aria-label="Quarter-circle movement budget: translation on the horizontal axis and circulation on the vertical axis" style="width:100%;max-width:420px">
+<path d="M40 20 V230 H260 M40 30 A200 200 0 0 1 240 230" fill="none" stroke="currentColor" stroke-width="2"/>
+<circle id="budget-point" cx="110" cy="42.65" r="6" fill="#b07430"/>
+<text x="90" y="260" fill="currentColor">Translation v/c</text>
+<text x="50" y="20" fill="currentColor">Circulation v_circ/c</text>
+</svg>
+<p><output id="budget-result" aria-live="polite"></output></p>
+<p>The residual checks numerical closure of the imposed equation. The residual is not an independent confirmation of relativity or a derivation of a contact law.</p>
+</section>
+<section aria-labelledby="mode-title">
+<h2 id="mode-title">The trefoil mode</h2>
+<p><strong>Status: conditional geometry.</strong> The engine assigns the proton mode (p, q) = (2, 3). The mode-locked construction gives R/a = √(q/p), v<sub>T</sub>/c = √(p/(p+q)) and v<sub>P</sub>/c = √(q/(p+q)).</p>
+<label for="mode">Registered mode</label>
+<select id="mode"><option value="proton">Proton (2, 3)</option><option value="electron">Electron (1, 1)</option></select>
+<p><output id="mode-result" aria-live="polite"></output></p>
+<p>R is the major path radius and a is the poloidal path radius. The physical tube radius b<sub>tr</sub> is a separate quantity. Neither the ratio nor budget closure establishes tube width, stability, displaced volume or engaged volume.</p>
+<p>Source: <a href="dist/laws.hpp">Engine definitions</a>, namespace <code>topology</code>, functions <code>aspect_ratio</code>, <code>v_toroidal</code> and <code>v_poloidal</code>. The mode partition adds an assumption beyond the scalar movement budget.</p>
+</section>
+<section><h2>Evidence and open mechanisms</h2>
+<p>The selected scope is mathematical and educational. The <a href="benchmarks.html">benchmark ledger</a> holds numerical comparisons, the <a href="inputs.html">input ledger</a> records inputs, and the <a href="theory.html#L20">unresolved-question ledger</a> identifies outstanding mechanisms. Existing research instruments remain accessible from the research account pending individual review.</p>
+<p>Pressure results from constraint in the stated ontology. A physical contact law must connect structural freedom, actuation and measured response before a geometric animation can qualify as a dynamical prediction.</p>
+</section>
+<noscript><p>Interactive values require JavaScript. The equations, assumptions and source links remain available above.</p></noscript>
+</main>
+</body></html>

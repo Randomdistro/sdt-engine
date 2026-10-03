@@ -8,6 +8,10 @@ on:
       - 'Release/HTML_SDT_Website/**'
       - 'Release/build_search_index.py'
       - 'Release/verify_public_site.py'
+      - 'Release/build_site.py'
+      - 'Release/check_demonstrations.js'
+      - 'Release/build_paper_manifests.py'
+      - 'Release/verify_papers.py'
       - 'Engine/include/sdt/laws.hpp'
       - 'Investigations/05_Nuclear_Physics/pack_nucleus.py'
       - 'Investigations/05_Nuclear_Physics/packer_validate.py'
@@ -39,10 +43,16 @@ jobs:
         with:
           node-version: '22'
       - name: Verify public-site integrity
-        run: python Release/verify_public_site.py
+        run: |
+          python Release/build_site.py --check
+          python Release/verify_public_site.py
+          python Release/verify_papers.py
+          node Release/check_demonstrations.js
       - name: Check public JavaScript syntax
         run: |
           node --check Release/HTML_SDT_Website/sdt-shell.js
+          node --check Release/HTML_SDT_Website/sdt-canon.js
+          node --check Release/HTML_SDT_Website/demonstrations.js
           node --check Release/HTML_SDT_Website/walk.js
           node --check Release/HTML_SDT_Website/main.js
           node --check Release/HTML_SDT_Website/engine-data.js

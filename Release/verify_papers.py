@@ -8,6 +8,7 @@ import re
 import sys
 from html.parser import HTMLParser
 from pathlib import Path
+from build_paper_manifests import PaperParser
 
 ROOT = Path(__file__).resolve().parents[1]
 RELEASE = ROOT / "Release" / "HTML_SDT_Website"
@@ -18,6 +19,7 @@ ALLOWED_STATUS = {
     "DEFINITION",
     "DERIVED",
     "COMPUTED",
+    "CONSTRUCTION",  # Exact within a specified construction; not empirical validation.
     "CALIBRATED",
     "MEASURED-INPUT",
     "OBSERVED",
@@ -197,6 +199,15 @@ def audit_site(site: Path) -> list[str]:
         manifest = site / "manifests" / f"{expected_id}.json"
         if not manifest.exists():
             errors.append(f"{label}: missing generated manifest")
+        else:
+            source_parser = PaperParser()
+            source_parser.feed(text)
+            try:
+                actual_manifest = json.loads(manifest.read_text(encoding="utf-8"))
+                if actual_manifest != source_parser.manifest(path.name):
+                    errors.append(f"{label}: stale generated manifest")
+            except (OSError, json.JSONDecodeError) as error:
+                errors.append(f"{label}: unreadable manifest: {error}")
 
     return errors
 

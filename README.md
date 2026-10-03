@@ -1,3 +1,6 @@
+> **Current navigation:** [Repository map](REPOSITORY_MAP.md). Website source: `Release/HTML_SDT_Website/`; `docs/` is generated with `python Release/build_site.py`.
+> **Historical release account below:** dated claims and benchmark totals require current source and execution checks before reuse.
+
 # SDT Engine — Kinematic Observatory Pipeline
 ## Parameter-Free Orbital & Redshift Solvers (No G, No M)
 

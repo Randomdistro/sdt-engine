@@ -36,6 +36,7 @@
 }
 </script>
 <script src="sdt-shell.js" defer></script>
+<script src="sdt-canon.js" defer></script>
 <script src="theory.js" defer></script>
 <script src="sdt-parallax.js" defer></script>
 </head>
@@ -61,18 +62,19 @@
 <header class="theory-hero" id="arrival">
   <span id="opening" aria-hidden="true"></span>
   <div class="theory-hero__inner">
-    <p class="theory-kicker">A complete physics · one dependency chain · Melbourne</p>
+    <p class="theory-kicker">A physical framework · mechanisms and evidence · Melbourne</p>
     <h1>Spatial Displacement Theory</h1>
-    <p class="theory-hero__lead">Space. Matter. Movement. The Ever-Present Now. Every mechanism below must be built from these four, in that order, without importing a second physical substance.</p>
+    <p class="theory-hero__lead">SDT begins with four irreducibles: space, matter, movement and the Ever-Present Now. The dependency chain connects the proposed mechanisms to calculations, observations and unresolved physical laws.</p>
     <div class="theory-actions">
       <a class="theory-button theory-button--solid" href="#irreducibles">Begin with the irreducibles</a>
-      <a class="theory-button" href="#L20">Read the open debts</a>
+      <a class="theory-button" href="#L20">Read the unresolved questions</a>
       <a class="theory-button" href="inputs.html">Inspect the input ledger</a>
     </div>
   </div>
 </header>
 
 <main>
+<aside class="theory-foundations" aria-label="Evidence boundaries"><h2>Reading the mechanisms</h2><p>The ontology specifies seven levels: point, line, plane, sphere, torus, dynamism and energy. The aspect count is 1 + 2 + 3 + 4 + 5 + 6 + 7 = 28. Levels 1–6 describe structure and available freedom; level 7 describes expression as movement. The count does not supply a contact law.</p><p>Interactive sketches illustrate proposed mechanisms. Animation does not establish physical validation. <a href="demonstrations.html">Selected mathematical demonstrations</a> state assumptions and limits explicitly. Benchmark identities, calibrated comparisons and independent predictions remain separate.</p></aside>
 <section class="theory-foundations" id="irreducibles">
   <p class="theory-kicker">Before L0 · what is allowed to exist</p>
   <h2>The properties, characteristics and behaviours of the irreducibles.</h2>
@@ -82,9 +84,10 @@
     <article class="irreducible" id="ix-space">
       <div class="irreducible__glyph" aria-hidden="true">◈</div>
       <h3>Space</h3>
-      <p class="role">Introducing — the Spation</p>
-      <p>Space is not an emptiness things sit in. In SDT it is a particulate medium that can be crowded, thinned, displaced and made to carry a wake.</p>
-      <p>An invention of spherical perfection, the Spation is the unit of an <strong>inviscid hyperfluid</strong>: a dot point at the scale where internal dimensions cease to be physically useful and surface takes precedence. A sphere owns every outbound direction. Packed with its neighbours, it supplies the relay and the pressure geometry used by every later step.</p>
+      <p class="role">The superfluidic hypercrystal</p>
+      <p data-sdt-canon-item="Space">SDT describes space as a particulate medium. Spations constrain material forms and transfer movement through neighbouring contacts.</p>
+      
+      
       <figure class="theory-demo">
         <svg id="demo-space" viewBox="0 0 360 170" role="img" aria-label="Packed grains responding to a draggable probe"></svg>
         <figcaption>Drag through the grains. Movement reorganises the packing.</figcaption>
@@ -94,9 +97,10 @@
     <article class="irreducible" id="ix-matter">
       <div class="irreducible__glyph" aria-hidden="true">◉</div>
       <h3>Matter</h3>
-      <p class="role">The agent of spatial displacement</p>
-      <p>Dr Albert Einstein and his peers had been working on the structure of the aether for many years before a workaround: they did not need to know what it was. They needed only to understand its properties. Geodesic spacetime was born.</p>
-      <p>Similarly, SDT does not need to claim an inaccessible inner substance for matter; it must account for matter’s effects. Matter is a persistent topological circulation, wound in on itself, excluding and reorganising the space it occupies. The detailed knot and nuclear constructions are downstream. The immediate fact needed here is displacement.</p>
+      <p class="role">Constrained material form</p>
+      <p data-sdt-canon-item="Matter">Matter has a boundary and displaces the surrounding medium. Spation constraint maintains the form; winding alone does not establish self-sustaining matter.</p>
+      
+      
       <figure class="theory-demo">
         <svg id="demo-matter" viewBox="0 0 360 170" role="img" aria-label="A draggable persistent circulation displacing the surrounding grains"></svg>
         <figcaption>Drag the circulation. The surrounding medium must make way.</figcaption>
@@ -106,8 +110,9 @@
     <article class="irreducible" id="ix-move">
       <div class="irreducible__glyph" aria-hidden="true">⟳</div>
       <h3>Movement</h3>
-      <p class="role">The one currency</p>
-      <p>Relayed grain to grain, movement is radiation. Wound into persistent circulations, movement is matter. Nothing in the framework is permitted to coast merely because it existed one step earlier.</p>
+      <p class="role">Transfer and actuation</p>
+      <p data-sdt-canon-item="Movement">Movement includes material motion and contact-mediated transfer. Available freedom describes capacity; actual movement describes actuation.</p>
+      
       <label for="demo-movement">Translation share of the movement budget</label>
       <input id="demo-movement" type="range" min="0" max="100" value="35">
       <p id="demo-movement-read" aria-live="polite">v/c = 0.350 · v<sub>circ</sub>/c = 0.937</p>
@@ -117,15 +122,16 @@
       <span id="ix-present" aria-hidden="true"></span>
       <div class="irreducible__glyph" aria-hidden="true">⧖</div>
       <h3>The Ever-Present Now</h3>
-      <p class="role">The plane of existence</p>
-      <p>It is always now. The past is a retained movement tally and the future is an expected tally; neither is a place through which a body travels. The plane exists, movement occurs within it, and clocks count that movement.</p>
+      <p class="role">Present existence</p>
+      <p data-sdt-canon-item="The Ever-Present Now">The Ever-Present Now names the present existence of matter, space and movement. Clocks measure accumulated physical change.</p>
+      
       <button class="theory-button" id="demo-now" type="button">Relay one movement</button>
       <p id="demo-now-read" aria-live="polite">Movement tally: 0</p>
     </article>
   </div>
 
   <aside class="theory-map" aria-label="Dependency overview">
-    <p class="theory-map__label">The complete load path</p>
+    <p class="theory-map__label">The dependency structure</p>
     <div class="theory-map__nodes">
       <a href="#L0">L0 grain</a><a href="#L1">L1 substrate</a><a href="#L2">L2 relay</a>
       <a href="#L3">L3 convergence</a><a href="#L4">L4 occlusion</a><a href="#L5">L5 matter</a>
@@ -229,8 +235,8 @@
   <section class="theory-step" id="L5" data-requires="L1 L2 L4">
     <div class="theory-step__copy">
       <p class="theory-step__number">L5 · Law VI</p>
-      <h2>Matter: persistent circulation that displaces</h2>
-      <p>A material particle is modelled as a self-maintaining circulation in the substrate. The electron is the simplest closed circulation; the proton is assigned the first protected trefoil topology. Opposite circulation directions produce opposite electromagnetic responses without introducing a stored substance.</p>
+      <h2>Matter: constrained form and displacement</h2>
+      <p>A material particle is described as a solid form maintained by spation constraint. The electron is the simplest closed circulation; the proton is assigned the first protected trefoil topology. Opposite circulation directions produce opposite electromagnetic responses without introducing a stored substance.</p>
       <p>The proton boundary follows the W+1 construction. The numerical correspondence is strong; the W+1 rule itself remains a conjecture until obtained directly from trefoil geometry.</p>
       <div class="theory-equation">R<sub>p</sub> = (W+1)ℏ/(m<sub>p</sub>c) · W = 3</div>
     </div>

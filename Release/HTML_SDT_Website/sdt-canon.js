@@ -34,115 +34,122 @@
     /* ── the four irreducibles ────────────────────────────────────────── */
     primitives: [
       {
-        ord: 'The first irreducible',
-        name: 'Space',
-        sdt: 'The superfluidic hypercrystal',
-        brief: 'Not an emptiness things sit in — a substance, one grain thick at the floor, ' +
-               'that can be crowded, thinned, and made to carry a wake. A quantised particulate ' +
-               'superfluid under pressure, making all fields, carrying all radiation and producing ' +
-               'all forces, including gravity. Introducing — the Spation.',
-        /* one object, several characterisations — all true at once */
-        facets: [
-          ['As a fluid',
-           'A superfluid that reconfigures at the speed of light. It flows without ' +
-           'viscosity, and every particle in it is a quantised vortex.'],
-          ['As a crystal',
-           'Grains of one size in icosahedral 12-around-1 packing at the Planck length. ' +
-           'Pack twelve around one and the fit never quite closes; because everything here ' +
-           'moves, that slack gathers into shaped pockets — tetrahedral, octahedral, larger. ' +
-           'Atoms keep their electrons in those pockets, and the alpha core is a tetrahedron ' +
-           'for a reason.'],
-          ['As a relay',
-           'Contact-only transfer, nearest neighbour to nearest neighbour. Individually ' +
-           'incompressible, collectively deformable. Nothing travels through it; the ' +
-           'hand-off travels, and it travels at c.']
-        ]
+            "ord": "The first irreducible",
+            "name": "Space",
+            "sdt": "The superfluidic hypercrystal",
+            "brief": "SDT describes space as a particulate medium. Spations constrain material forms and transfer movement through neighbouring contacts.",
+            "facets": [
+                  [
+                        "As a fluid",
+                        "The medium is proposed to rearrange without viscosity. Collective rearrangement allows displacement while individual spations remain incompressible."
+                  ],
+                  [
+                        "As a crystal",
+                        "The lattice description concerns local packing and contact geometry. Packing constraints and defects must be distinguished from a completed dynamical model."
+                  ],
+                  [
+                        "As a relay",
+                        "Radiation is described as contact-mediated transfer at c. The contact and medium-response laws remain necessary for a quantitative microscopic account."
+                  ]
+            ]
       },
       {
-        ord: 'The second irreducible',
-        name: 'Matter',
-        sdt: 'Displacement',
-        brief: 'A knot — circulation wound on itself and locked by its own winding, ' +
-               'crushing the space it stands in.',
-        facets: [
-          ['What it is',
-           'Never a cloud, never a point: a made thing, with a boundary you can measure and ' +
-           'a surface that runs faster than light ever travels. The proton length is derived ' +
-           'several ways — most directly the way Planck built a unique length from the ' +
-           'constants he had, with koppa in place of G: R_p = 4ℏ/(m_p c).'],
-          ['The one new idea',
-           'Matter displaces space. The displaced grains have to go somewhere, and where they ' +
-           'go — the crowding ahead, the wake behind, the shadow cast — is every force you ' +
-           'have ever felt.'],
-          ['What it is not',
-           'Not a hole, not a void, not an absence. Matter occludes, which makes it hard, ' +
-           'dense and present.']
-        ]
+            "ord": "The second irreducible",
+            "name": "Matter",
+            "sdt": "Constrained material form",
+            "brief": "Matter has a boundary and displaces the surrounding medium. Spation constraint maintains the form; winding alone does not establish self-sustaining matter.",
+            "facets": [
+                  [
+                        "Structure",
+                        "The proton is assigned a continuous (2,3) trefoil structure. A geometric description specifies a path, while physical tube width and contact response require separate definitions."
+                  ],
+                  [
+                        "Displacement",
+                        "Displaced volume, geometrical envelope volume and engaged volume describe different quantities. A shared input does not make the resulting calculations independent predictions."
+                  ],
+                  [
+                        "Boundary scale",
+                        "The measured proton boundary radius and the proposed relation R_p = 4ℏ/(m_p c) have different evidential roles. Numerical agreement does not complete the derivation of the factor four."
+                  ]
+            ]
       },
       {
-        ord: 'The third irreducible',
-        name: 'Movement',
-        sdt: 'The one currency',
-        brief: 'Relayed grain to grain — that relay is light. Wound into knots — that ' +
-               'winding is matter.',
-        facets: [
-          ['The budget',
-           'Every particle spends its whole allowance at c, always: spin and travel out of ' +
-           'one purse, v_circ² + v² = c². Stand still and it all turns inward. Move, and the ' +
-           'travel is paid out of the spin.'],
-          ['What follows',
-           'The slowed clocks, the shortened rods, E = mc², the speed nothing passes — all of ' +
-           'it is this one budget, spending. Nothing dilates but the bookkeeping.'],
-          ['The floor',
-           'Nothing in this universe ever stops. It only changes what it spends its movement on.']
-        ]
+            "ord": "The third irreducible",
+            "name": "Movement",
+            "sdt": "Transfer and actuation",
+            "brief": "Movement includes material motion and contact-mediated transfer. Available freedom describes capacity; actual movement describes actuation.",
+            "facets": [
+                  [
+                        "The movement budget",
+                        "Law V imposes v_circ² + v² = c². Increasing translation reduces the circulation component under the assumed budget."
+                  ],
+                  [
+                        "Conditional consequences",
+                        "Clock-rate and length relations require a stated mapping from the movement budget to the measuring apparatus. Algebraic closure alone is not an independent experiment."
+                  ],
+                  [
+                        "The unresolved mechanism",
+                        "Structural freedom, contact actuation and measured response remain separate until a physical law connects the quantities."
+                  ]
+            ]
       },
       {
-        ord: 'The fourth irreducible',
-        name: 'The Ever-Present Now',
-        sdt: 'The plane of existence',
-        brief: 'It is always now. It always was. Not a moment sliding along a line — the ' +
-               'plane of existence itself, with everything inside it moving.',
-        facets: [
-          ['Time is a tally',
-           'What you call time is the tally that movement keeps: the past is the tally kept, ' +
-           'the future the tally expected, and neither is a place.'],
-          ['Nothing coasts on having existed',
-           'Every knot pays its keep this tick; every wake is arriving now; the whole history ' +
-           'of the cosmos reaches you as present pressure.'],
-          ['No arrow to explain',
-           'Only the plane is, and the plane does not elapse. There is no arrow of time to ' +
-           'account for, because un-happening is not an operation the relay has.']
-        ]
+            "ord": "The fourth irreducible",
+            "name": "The Ever-Present Now",
+            "sdt": "Present existence",
+            "brief": "The Ever-Present Now names the present existence of matter, space and movement. Clocks measure accumulated physical change.",
+            "facets": [
+                  [
+                        "Time as a count",
+                        "Elapsed time is represented through counts of physical processes. Past records and future expectations do not constitute additional material locations."
+                  ],
+                  [
+                        "Physical clocks",
+                        "A clock comparison requires a specified process, trajectory and measurement protocol. The ontology alone does not supply a clock-rate prediction."
+                  ],
+                  [
+                        "An open question",
+                        "The relationship between irreversible records and reversible mathematical descriptions requires a physical account of the relay."
+                  ]
+            ]
       }
-    ],
+],
 
     glyphs: { 'Space': '◈', 'Matter': '◉', 'Movement': '⟳', 'The Ever-Present Now': '⧖' },
 
     /* ── the six laws ─────────────────────────────────────────────────── */
     laws: [
-      { n: 'I',  name: 'Cosmological Relay Throughput',
-        one: 'The lattice is globally phase-loaded. Shell cancellation preserves the same ' +
-             'throughput at every point, which is why balanced space feels like nothing.' },
-      { n: 'II', name: 'The Release Cascade',
-        one: 'Stored convergence is released in ordered steps, setting the pressure domains ' +
-             'that stars, nuclei and atoms each operate inside.' },
-      { n: 'III', name: 'Convergent Boundary Pressure',
-        one: 'The universal force law. One occlusion expression — bodies blocking each ' +
-             'other’s share of the convergence — covers gravity, the electric force and ' +
-             'the nuclear bond alike; only the pressure domain changes.' },
-      { n: 'IV', name: 'Inertial Mass from Throughput Asymmetry',
-        one: 'Mass is not carried, it is commanded: the medium’s resistance to a change ' +
-             'in a form’s vector. Inertial and gravitational mass are the same quantity ' +
-             'because both measure the same displaced volume.' },
-      { n: 'V',  name: 'The Movement Budget',
-        one: 'v_circ² + v² = c². Every form spends one allowance between spinning and ' +
-             'travelling, and special relativity is that ledger read carefully.' },
-      { n: 'VI', name: 'Vortex Topology Quantisation',
-        one: 'Particles are knots, and only some windings hold. The electron is the single ' +
-             'winding; the proton is the trefoil; the stable species are the codewords that ' +
-             'close.' }
-    ]
+      {
+            "n": "I",
+            "name": "Cosmological Relay Throughput",
+            "one": "Law I proposes a cosmological relay throughput. The shell construction and the physical normalisation must be assessed separately."
+      },
+      {
+            "n": "II",
+            "name": "The Release Cascade",
+            "one": "Law II describes release across pressure domains. The mechanism must specify the boundary and transfer conditions for each domain."
+      },
+      {
+            "n": "III",
+            "name": "Convergent Boundary Pressure",
+            "one": "Law III relates occlusion geometry to a pressure imbalance. An inverse-square factor does not independently determine the effective pressure or coupling coefficient."
+      },
+      {
+            "n": "IV",
+            "name": "Inertial Mass from Throughput Asymmetry",
+            "one": "Law IV attributes inertia to the response of the medium to changing material motion. A quantitative contact-response derivation remains required."
+      },
+      {
+            "n": "V",
+            "name": "The Movement Budget",
+            "one": "Law V imposes v_circ² + v² = c². The equation defines the assumed partition between circulation and translation."
+      },
+      {
+            "n": "VI",
+            "name": "Vortex Topology Quantisation",
+            "one": "Law VI assigns particle structures to closed winding modes. The proton uses the (2,3) trefoil; topology alone does not establish a stability law."
+      }
+]
   };
 
   /* ── renderers ──────────────────────────────────────────────────────── */
