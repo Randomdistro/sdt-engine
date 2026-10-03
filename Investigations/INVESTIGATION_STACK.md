@@ -136,7 +136,11 @@ forbidden: retro-PASS, PLUG, IDENTITY-PASS (see execution protocol).
 `[PARTIAL]` partial / one fitted parameter · `[ACTIVE]` spec + partial execution ·
 `[SPEC]` prompt written, unstarted · `[OPEN]` no honest forward route yet (not fabricated) ·
 `[KILLED]` tested and abandoned (a claim that did NOT survive — recorded, not hidden) ·
-`[DEGENERATE]` result reproduced but it ties the rival theory (matches, does not beat)
+`[CONVERGENT]` SDT-origin result that lands on the rival's number (agreement is an outcome, not a
+demotion; discrimination stated separately) · `[SHARED-INPUT]` a named contaminating input entered the
+chain. *(2026-10-03: the former `[DEGENERATE]` = "matches, does not beat" definition is withdrawn —
+it was the alignment test excluded on 2026-07-26; tags below re-adjudicated in
+`ADJUDICATION_REGISTER.md` §R-2026-10-03.)*
 
 ---
 

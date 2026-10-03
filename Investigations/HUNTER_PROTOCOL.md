@@ -320,7 +320,7 @@ When any investigation reaches a kill gate:
 
 ## The verdict line (every hunt ends here)
 
-> **Prompt completion** [A–F] · **Physics class** [NATIVE / CONVERGENCE / DEGENERATE / BORROW / KILLED / OPEN]
+> **Prompt completion** [A–F] · **Physics class** [NATIVE / CONVERGENCE / SHARED-INPUT (named input) / BORROW / KILLED / OPEN]
 > · **Recovery** [RECOVERED / PARTIAL / NO RECOVERY] · **Cascade root** [id or none].
 
 ## Creed

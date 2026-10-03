@@ -41,6 +41,13 @@ When adding a new derivation: put the formula in the appropriate namespace of `l
 
 ## Gateways (binding on every session)
 
+**Read `GATEWAY_BEHAVIOURAL.md` and `GATEWAY_PROCEDURAL.md` in full before any audit,
+assessment, or labelling — first, not after a correction.** The most frequent LLM failure in
+this repository is downgrading an SDT result because it agrees with a Standard-Model, GR or QM
+formula. That is prohibited (behavioural §3.8, procedural §3.8): agreement is convergence; a
+downgrade must name the contaminating input and its measurement chain. GM, G and ℏ-forms are
+outputs of the koppa structure, never inputs to it.
+
 `GATEWAY_BEHAVIOURAL.md` (register, terminology, conduct) and `GATEWAY_PROCEDURAL.md`
 (execution procedure) bind all LLM work in this repository. Core points: professional physics
 vocabulary — **excluded / ruled out / falsified / withdrawn**, never "KILLED";
