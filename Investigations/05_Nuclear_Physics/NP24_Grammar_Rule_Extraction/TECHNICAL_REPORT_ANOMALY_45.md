@@ -1,4 +1,6 @@
 # NP24-A — Technical Report: the 45 anomalies, and what they exposed
+
+> **Re-adjudicated 2026-10-03 (origin rule, gateway §3.8):** Part A NATIVE → DEGENERATE demotion rested on agreement with the pairing rule; re-adjudicated **CONVERGENT, not discriminating** — the invertibility point is kept as a discrimination requirement, not a demotion. See `Investigations/ADJUDICATION_REGISTER.md` §R-2026-10-03. Original text below is unchanged.
 ### RUN 1, 2026-07-21 · J. C. Harvey, Melbourne
 ### Status: **SELF-CORRECTION.** The strongest claimed grammar law is demoted to DEGENERATE.
 

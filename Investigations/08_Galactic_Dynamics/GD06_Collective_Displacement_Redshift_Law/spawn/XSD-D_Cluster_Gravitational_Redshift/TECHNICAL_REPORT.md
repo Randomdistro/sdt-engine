@@ -1,5 +1,7 @@
 # XSD-D — Technical Report (RUN 1, 2026-07-13)
 
+> **Re-adjudicated 2026-10-03 (origin rule, gateway §3.8):** "DEGENERATE-with-GR" → **CONVERGENT**, not yet discriminating. See `Investigations/ADJUDICATION_REGISTER.md` §R-2026-10-03. Original text below is unchanged.
+
 **Node:** the 30-order validation — cluster gravitational redshift.
 
 ## Result — CONSISTENT with the measurement

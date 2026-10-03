@@ -1,5 +1,7 @@
 # OP07 — Verdict: Solar Lens-Artifact Experiment (falsifier capstone)
 
+> **Re-adjudicated 2026-10-03 (origin rule, gateway §3.8):** mechanism DEGENERATE → **SHARED-INPUT** with the input named (measured chromospheric T(h)/opacity) — stands. See `Investigations/ADJUDICATION_REGISTER.md` §R-2026-10-03. Original text below is unchanged.
+
 **Author:** J. C. Harvey, Melbourne · **Date:** 2026-07-04 · Tool: `op07_solar_fold.cpp` (exit 0; stdout in `results.txt`)
 
 ## What the forward model actually says (the deliverable)

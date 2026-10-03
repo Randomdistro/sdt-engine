@@ -1,5 +1,7 @@
 # FD05 — Direct re-run verdict (2026-07-26)
 
+> **Re-adjudicated 2026-10-03 (origin rule, gateway §3.8):** P2's Class-C cap for using `law_I::P_rad = u/3` is **withdrawn** (SDT's own laws are legal inputs); P2 **CONVERGENT**, provenance inherited from law_I. See `Investigations/ADJUDICATION_REGISTER.md` §R-2026-10-03. Original text below is unchanged.
+
 > **Run class: DIRECT** (main session, no agents). Agent-era `FD05_VERDICT.md`,
 > `FD05_DERIVATION.md`, `fd05_results.txt` deleted 2026-07-26 (git-recoverable).
 > Tool: `fd05_sound_shocks.cpp`, g++ 15.2 -O2, exit **0**. Output: `fd05_rerun_2026-07-26.txt`.

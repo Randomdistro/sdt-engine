@@ -1,5 +1,7 @@
 # CR10 — Verdict: Cubic Redshift (Volumetric Rung)
 
+> **Re-adjudicated 2026-10-03 (origin rule, gateway §3.8):** [DEGENERATE] → **CONVERGENT**, not yet discriminating. See `Investigations/ADJUDICATION_REGISTER.md` §R-2026-10-03. Original text below is unchanged.
+
 **Classification: RESOLVED 5/5 — [DEGENERATE] on cosmological `(1+z)^4`.**
 **Author**: James Christopher Harvey, Melbourne · Tool: `cr10_cubic_redshift.cpp`.
 

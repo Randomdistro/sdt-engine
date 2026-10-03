@@ -1,4 +1,6 @@
 # GD06 — Technical Report (RUN 1, 2026-07-13)
+
+> **Re-adjudicated 2026-10-03 (origin rule, gateway §3.8):** "DEGENERATE with GR" → **CONVERGENT** with GR at dilute order, not yet discriminating. See `Investigations/ADJUDICATION_REGISTER.md` §R-2026-10-03. Original text below is unchanged.
 ### Occlusion-as-solid-angle ledger, calibrated on the solar census (H6)
 
 > Tool: `gd06_run.py` (standalone Python; no dependency-traced constant enters the *derivation* of Θ — constants used only to convert to OBSERVED SI for comparison). Data: H6 solar census (verified) + standard body parameters. **Triple verdict at foot.**

@@ -1,5 +1,7 @@
 # CR12 — Verdict: Pantheon+ Distance Law
 
+> **Re-adjudicated 2026-10-03 (origin rule, gateway §3.8):** "DEGENERATE vs ΛCDM" → **recorded fit comparison** (ΛCDM preferred on SNe alone; not a degeneracy). See `Investigations/ADJUDICATION_REGISTER.md` §R-2026-10-03. Original text below is unchanged.
+
 **Classification: RESOLVED · honest split (Python tool).**
 **Author**: James Christopher Harvey, Melbourne · Tool: `cr12_pantheon_fit.py` (1580 SNe).
 

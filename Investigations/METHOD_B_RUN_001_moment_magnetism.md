@@ -1,5 +1,7 @@
 # METHOD B — Run 001: deep dive across ALL nuclear-model findings
 
+> **Re-adjudicated 2026-10-03 (origin rule, gateway §3.8):** μ=0 presence rule DEGENERATE → **CONVERGENT**, not discriminating. See `Investigations/ADJUDICATION_REGISTER.md` §R-2026-10-03. Original text below is unchanged.
+
 > Deployed 2026-07-23, Fable direct. **Corrected mandate (Harvey): dive deeper into EVERY
 > previous finding — not one leash-picked item.** The leash is the anti-fishing guard, not
 > the activity. Source: the 14-finding ledger in `atomicus-nuclear-model.html` + the session's

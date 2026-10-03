@@ -1,5 +1,7 @@
 # PM06 — Verdict: Cyclotron and Synchrotron from Differential Occlusion
 
+> **Re-adjudicated 2026-10-03 (origin rule, gateway §3.8):** "DEGENERATE with SR via Law V" → **CONVERGENT** (Law V is SDT's own law, a legal input). See `Investigations/ADJUDICATION_REGISTER.md` §R-2026-10-03. Original text below is unchanged.
+
 **Author:** J. C. Harvey, Melbourne · **Date:** 2026-07-05
 **Tool:** `pm06_cyclotron.cpp` (MSVC, real run, exit 0) → `pm06_results.txt`
 **Pre-commitments:** `RUN_LOG.md` (incl. three anti-identity-pass guards, all honoured).

@@ -19,7 +19,7 @@
 > 4. **Updated scorecard (2026-08-14).** `6π⁵` = m_p/m_e is a
 >    **[RESOLVED CONSTRUCTION — shared-input, not independent prediction]**:
 >    PPT17 conserves the point electron's 720-degree Bohr-closure tube volume
->    into the W=3 torus at `R_p`. The three cosmology tests CR10/11/12 all land **[DEGENERATE]** — SDT *matches*
+>    into the W=3 torus at `R_p`. The three cosmology tests CR10/11/12 ~~all land **[DEGENERATE]**~~ — CR10/11 **[CONVERGENT]**, CR12 a recorded fit comparison (re-adjudicated 2026-10-03, `ADJUDICATION_REGISTER.md` §R-2026-10-03) — SDT *matches*
 >    ΛCDM (no dark energy needed) but does not *beat* it (it ties via blackbody/reciprocity; the discriminator is
 >    number-counts). `m_e`/`ℓ_P` magnitudes are **one-seeded** (dimensional necessity, the FLM06 seed wall); the
 >    one earned non-inherited win in the light-mode chain is **isotropy = forced geometry**.
@@ -54,7 +54,7 @@
 > executed honestly (no fake PASS): **FLM11** C · **NP18** DEFER (atomic-BEC coherence 7 orders short) ·
 > **NP19** C reframe · **NP20** OPEN (closure false, 2 knobs) · **NP21** KILLED geometric floor ·
 > **PPT11** OPEN (+ FLM11 zero-grip tension) · **APS06** OBSERVED survey (neutron-survey later struck as content — empty counterexample class, every nucleus past H has a neutron; 2026-07-23) ·
-> **SAR05** C (after-iron fork DEGENERATE for single events) · **PPT10** incomplete (agent dropped pre-verdict).
+> **SAR05** C (after-iron fork not discriminating for single events — relabelled 2026-10-03) · **PPT10** incomplete (agent dropped pre-verdict).
 > **CASCADE LEDGER (§8 Q7):** **D1, NP20(mass), NP21, NP18 share ONE root** — the **influx/engagement profile**
 > FLM10 must derive (magnitude · handed-vs-scalar split · coherence length). Recovery sweep bought: scalar
 > occlusion **ruled out** as the deuteron binder (34× too weak); deuteron binding = **handed redirection**
@@ -259,7 +259,7 @@ See `FLM03.../DEEPTHINK_PROMPT.md`.
 - **PPT04 — Neutrino has no magnetic moment** `[RESOLVED]` · Law VI. W=0 open winding → μ_ν≡0 exactly;
   re-narrate natively (open winding → no EM-deflecting wake), drop the borrowed "moment". Falsifiable vs SM
   ~10⁻²⁰. Pairs with **E58** (monopole forbidden by half-vortex impossibility).
-- **NP15 — Nuclear magnetic moments** `[EXECUTED 2026-07-03 — OPEN; composites DEGENERATE]` · PPT01, PPT06.
+- **NP15 — Nuclear magnetic moments** `[EXECUTED 2026-07-03 — OPEN; composites CONVERGENT, not discriminating (2026-10-03)]` · PPT01, PPT06.
   No committed trefoil formula lands μ_p (modes bracket −9.4%/+11.0%); block-addition reproduces only what
   the rival's impulse approximation also gives and breaks beyond A=4; the post-hoc C5 candidate is
   quarantined (§3b TREFOIL CURRENT-TO-MOMENT MAP). Native wake, **no magneton** — that rule held.
@@ -461,13 +461,13 @@ See `FLM03.../DEEPTHINK_PROMPT.md`.
 - **CR10 — Cubic Redshift (z³)** `[RESOLVED 5/5]` · CR01. z is the *linear* closure deficit ⇒ z³ is the
   **volumetric rung** = three-dimensionality itself (real-space cells/volume + k-space `ν²→T³`). **Headline:**
   `u_CMB ∝ (1+z)⁴` is **NOT proof of expansion** — static SDT reproduces it exactly (the `(1+z)³` is blackbody
-  k-space phase volume, not real-space expansion) → **[DEGENERATE].** Also resolves the proton-count arithmetic
+  k-space phase volume, not real-space expansion) → ~~**[DEGENERATE]**~~ **[CONVERGENT]** (2026-10-03). Also resolves the proton-count arithmetic
   (5.9×10⁵⁹ charge vs 4.3×10⁴⁶ displacement = different radii cubed). Real-space z³ (number counts) = the
   genuine open discriminator.
 - **CR11 — Reciprocity & the Tolman test** `[RESOLVED 4/4]` · CR10, FLM09, GOM05. SDT's closure gradient is an
   **optical metric** `n_eff=(1−z)⁻²` — validated: it reproduces the **full 1.75″ solar deflection** (time-only
   `1/(1−z)` gives the historic 0.875″ half). Etherington reciprocity on that metric → Tolman `Σ∝(1+z)⁻⁴`
-  **without expansion** → **[DEGENERATE]** (ties ΛCDM). **Kills** path-local tired-light (`(1+z)⁻²`) for SDT.
+  **without expansion** → ~~**[DEGENERATE]**~~ **[CONVERGENT]** (2026-10-03; not yet discriminating). **Kills** path-local tired-light (`(1+z)⁻²`) for SDT.
 - **CR12 — Pantheon+ distance law** `[RESOLVED · honest split]` · CR11. **REAL data, 1580 SNe.** SDT
   aging-glass coasting `d_L=(1+z)(c/H₀)ln(1+z)` (no Λ) fits at χ²/dof≈0.49; **EdS (no-Λ decelerating)
   EXCLUDED (+650)** → *dark energy is not required to fit the supernovae* (the SN "proof of Λ" is exclusion of
@@ -937,7 +937,7 @@ predictions (P1–P6). **`CONDENSA_Spation_Lattice_Unification.md`** (repo root)
    sub-step worth doing first: the **finite-N isotropy residual**
    (small CRN → elastic tensor → how fast Zener-anisotropy decays to isotropic) — the one *earned* root.
 2. **κ(z) unified fit + BAO/CMB acoustic peaks** — after CR10/11/12 showed surface-brightness and the CMB
-   `(1+z)⁴` both **[DEGENERATE]**, this is the *only* cosmological test that separates SDT from ΛCDM. The real
+   `(1+z)⁴` both **[CONVERGENT]** (not yet discriminating; relabelled 2026-10-03), this is the *only* cosmological test that separates SDT from ΛCDM. The real
    decider; ties to FLM09 Arm B.
 3. **EMISSIONS-from-first-principles** — the end-to-end atomic test; spec ready, unstarted.
 4. **EC-O7 quantitative t½ fit** + **NP04B kinetics** — turn the grammar from descriptive to predictive.

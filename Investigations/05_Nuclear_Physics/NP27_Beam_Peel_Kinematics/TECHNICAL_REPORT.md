@@ -1,4 +1,6 @@
 # NP27 — Technical Report: beam kinematics, the geometric peel, and the fine-tune that didn't land
+
+> **Re-adjudicated 2026-10-03 (origin rule, gateway §3.8):** §2 DEGENERATE → **not discriminating for the packing**, vocabulary only. See `Investigations/ADJUDICATION_REGISTER.md` §R-2026-10-03. Original text below is unchanged.
 ### RUN 1, 2026-07-21 · J. C. Harvey, Melbourne
 ### Task: use the ²³⁸U + p beam data (Bernas 2003) and the packing model to fine-tune each other.
 

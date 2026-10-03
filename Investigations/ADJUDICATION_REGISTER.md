@@ -99,3 +99,47 @@ and recording it as the investigation's verdict — is the exact error to guard 
     **6-vs-0.74 bridge** (connection law gives 6-fold; density law fits close-pack).
   - μ=0 presence rule: **STAYS DEGENERATE** (genuinely even-even pairing)
   - Leash: 1 re-open / 0 recoveries / 2 dead-or-degenerate — not a resurrection engine.
+
+---
+
+## §R-2026-10-03 — Origin re-adjudication of the alignment-DEGENERATE class
+
+> **Trigger.** Harvey, 2026-10-03: LLM-run investigations keep demoting SDT results because they
+> are algebraically equivalent to a Standard-Model, GR or QM formula. The 2026-07-26 audit fixed the
+> root in the protocol and queued the affected labels "as each is next touched"; most were never
+> touched. This pass closes the queue. **Rule applied:** gateway behavioural §3.8 + procedural §3.8 —
+> agreement is convergence; a downgrade stands only if it names the input whose *measured value*
+> already contains the output. **Method:** read verdict + tool source for each item; check the
+> tool's inputs for the rival's measured or fitted value (the delete-test at source level). Origin
+> and discrimination are recorded separately. Executed directly, 2026-10-03.
+
+| item | label on file | origin test (named input, or none) | re-adjudicated |
+|---|---|---|---|
+| CR10 `(1+z)⁴` | [DEGENERATE] | tool uses T₀ (FIRAS) and SDT's `T ∝ N`; no expansion, Ω or H₀ input (`cr10_cubic_redshift.cpp`) — none | **CONVERGENT**, not yet discriminating (discriminator: number counts / d(z)) |
+| CR11 Tolman `(1+z)⁻⁴` | [DEGENERATE] | SDT optical metric `n_eff=(1−z)⁻²`; no rival input (`cr11_reciprocity.cpp`) — none | **CONVERGENT**, not yet discriminating; tired-light exclusion stands |
+| CR12 Pantheon+ | "DEGENERATE vs ΛCDM on SNe alone" | not a degeneracy — a fit comparison: SDT Δχ² = +92 against ΛCDM's fitted Ω_m | **recorded comparison** (ΛCDM preferred on SNe alone, both ledgers on the table); EdS exclusion stands |
+| CR14 recombination T | [DEGENERATE] (R3) | named inputs exist: `z_rec` MEASURED-INPUT (R2), Saha factor imported (R4) | R2/R4 **stand** (named); R3 relabelled **non-discriminating (log-insensitive)** — vocabulary only |
+| PM06 γ-anatomy (P3, P4) | "DEGENERATE with SR via Law V" | Law V is SDT's own law — a legal input (procedural §3.7) — none | **CONVERGENT** with SR (NATIVE-within-SDT); BORROW on the rest-frame coefficient stands |
+| NP10 G4 μ_α = 0 | DEGENERATE | paired cancellation; no rival input — none | **CONVERGENT**, not discriminating |
+| NP10 / CH07 zero-point wall | "formally degenerate with QM zero-point — capped CONVERGENCE" | form agreement only — none | **CONVERGENCE** stands; "cap" wording withdrawn — the limitation is the underived magnitude, stated as such |
+| NP15 deuteron additivity, α = 0 | DEGENERATE (pre-declared "class ceiling" from agreement with the impulse/Schmidt limits) | inputs are measured μ_p, μ_n — not μ_d; the pre-declared ceiling is the excluded alignment test | **CONVERGENT** (additivity rule), not discriminating; μ_p from trefoil stays OPEN |
+| OP07 limb mechanism | DEGENERATE (mechanism) | **named:** the λ-structure follows from the measured chromospheric T(h)/opacity profile (VAL/FAL); SDT's ϟ term is achromatic | **SHARED-INPUT** (input named) — stands; H2/H3 fold exclusion stands |
+| SAR05 after-iron fork | DEGENERATE (single event) | two SDT pictures indistinguishable per event — internal, no rival involved | **not discriminating (single event)** / LIVE (population) — vocabulary only |
+| GD06 XSD-C / XSD-D | "DEGENERATE-with-GR (it is ϟ/r)" | Θ from solid-angle integration; Ѻ from kinematics; no G or GR input — none | **CONVERGENT** with GR at dilute order, not yet discriminating; cluster cz 14.3 vs ~10 km/s stays CONSISTENT |
+| NP24-A magnetism law | NATIVE → DEGENERATE ("the pairing rule wearing grammar notation … known since the 1930s"; "odd A ⇒ J ≠ 0 trivially") | the moment data (NUBASE J, μ) are a separate measurement from (Z, N); the demotion reasons are agreement with the pairing rule and a QM spin-parity argument — none names a contaminating input | **CONVERGENT** with the pairing rule, **not discriminating** between grammar and pairing. Kept from the report: the grammar↔(Z,N) map is invertible, so a law in grammar coordinates cannot *discriminate* the grammar from a (Z,N) description — evidence for the construction must come from geometry, ordering, or a differing prediction. That is a discrimination requirement, not a demotion |
+| NP24-A stability band f_t ≤ 0.551 | DEGENERATE ("restatement of the valley of stability") | agreement with the valley — none | **CONVERGENT** with the valley of stability; NECESSARY-NOT-SUFFICIENT stands |
+| METHOD B μ = 0 presence rule | "STAYS DEGENERATE" | as NP24-A | **CONVERGENT**, not discriminating |
+| NP27 kinetic-energy fine-tune | DEGENERATE ("does not test the packing") | discrimination statement | **not discriminating for the packing** — vocabulary only |
+| FD05 P2 `c_s = c/√3` | Class C cap for using `law_I::P_rad = u/3` | SDT's own law — legal input (procedural §3.7); the cap was L3 in the 07-26 audit | **cap withdrawn**; P2 is **CONVERGENT** with photon-gas `c/√3`, provenance inherited from law_I (audited once, in its own investigation — TD06 counted-mode route) |
+| GOM08 Mercury precession | "IDENTITY-class until P2 lands" | the 6π form is taken from the GR result with GM → c²Ѻ — a named **external-input form**; Ѻ_⊙ itself is kinematic | relabelled **external-input (form)**, not IDENTITY; the open item is a native derivation of the form (P2). Agreement with GR is not the reason |
+| `k_e e² = αℏc` (CH02, CH06, PM04, FLM04, B23) | class F tautology | true by construction (α ↔ e unit bridge) | **class A bridge, CONSTRUCTION** (gateway behavioural §1); F is reserved for pending/failed (`Theory/05`). The `laws.hpp:121` comment is a canon proposal |
+
+**Unchanged by this pass** (named inputs, logged): `z·k²=1` rows built from one shared v
+(`structural_analysis.cpp`) — CONSTRUCTION; Law IV `V_disp` hardcoded from measured masses — circular;
+NP12 already re-scored (07-23); `z_rec`, `T_rec` legacy anchors (derivelist F2).
+
+**Leash check.** 15 labels moved toward CONVERGENT or vocabulary-only; 3 confirmed with named inputs
+(OP07, CR14 R2/R4, GOM08 form); 0 results promoted to NATIVE or DERIVED by this pass. Convergence is
+not a discrimination claim; every row keeps its discrimination status.
+
+— Executed directly, 2026-10-03, at Harvey's direction.

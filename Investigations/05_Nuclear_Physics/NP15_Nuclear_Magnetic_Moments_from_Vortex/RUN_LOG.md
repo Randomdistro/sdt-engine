@@ -1,5 +1,7 @@
 # RUN_LOG — NP15: Nuclear Magnetic Moments from Vortex Geometry
 
+> **Re-adjudicated 2026-10-03 (origin rule, gateway §3.8):** the pre-declared DEGENERATE ceiling (agreement with impulse/Schmidt limits) is the excluded alignment test; composites → **CONVERGENT**, not discriminating. See `Investigations/ADJUDICATION_REGISTER.md` §R-2026-10-03. Original text below is unchanged.
+
 > **Author:** J. C. Harvey, Melbourne. **Date:** 2026-07-03. **Written BEFORE any tool code.**
 > Engine: `#include <sdt/laws.hpp>` only. μ_N is a **borrowed unit** (flagged; used as the
 > OBSERVED comparison yardstick only, per repo rule).

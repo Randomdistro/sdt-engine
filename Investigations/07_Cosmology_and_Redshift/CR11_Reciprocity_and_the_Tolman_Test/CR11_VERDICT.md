@@ -1,5 +1,7 @@
 # CR11 — Verdict: Reciprocity and the Tolman Test
 
+> **Re-adjudicated 2026-10-03 (origin rule, gateway §3.8):** [DEGENERATE] → **CONVERGENT**, not yet discriminating. See `Investigations/ADJUDICATION_REGISTER.md` §R-2026-10-03. Original text below is unchanged.
+
 **Classification: RESOLVED 4/4 — [DEGENERATE] on Tolman Σ ∝ (1+z)⁻⁴.**
 **Author**: James Christopher Harvey, Melbourne · Tool: `cr11_reciprocity.cpp`.
 
