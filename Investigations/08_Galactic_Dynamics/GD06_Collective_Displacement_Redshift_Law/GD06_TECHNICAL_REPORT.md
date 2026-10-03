@@ -32,7 +32,7 @@ N_spa=V_⊙/ℓ_P³=**3.341×10¹³¹**; N_surf=A_⊙/ℓ_P²=**2.328×10⁸⁸*
 - **XSD-D (cluster):** cz=14.3 km/s vs measured Wojtak+2011 ~10 km/s — **CONSISTENT**, a genuine cross-check the mechanism passes. But it equals ϟ/r = the GR value → **DEGENERATE with GR** at this order (not yet a discriminating prediction).
 
 ## 5. Triple verdict
-> **Prompt completion: B** (instrument built + run end-to-end; two children DEFERRED on data). **Physics class: CONVERGENCE/DEGENERATE** at dilute scales (recovers ϟ/r), NATIVE-pending in the dense branch. **Cross-scale: UNDETERMINED** — σ_occ geometrization open, so the 30-order lever is not yet closed. **σ_occ: DEFERRED-to-EMC01.**
+> **Prompt completion: B** (instrument built + run end-to-end; two children DEFERRED on data). **Physics class: CONVERGENCE/SHARED-INPUT** at dilute scales (recovers ϟ/r), NATIVE-pending in the dense branch. **Cross-scale: UNDETERMINED** — σ_occ geometrization open, so the 30-order lever is not yet closed. **σ_occ: DEFERRED-to-EMC01.**
 
 ## 6. What this run earned, honestly
 1. The occlusion instrument is correct and mass-free, and it **recovers the gravitational redshift** across 40 orders of z_d (proton→BH) with one relation.

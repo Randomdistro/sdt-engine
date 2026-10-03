@@ -12,7 +12,7 @@
 2. **Why does it matter?** — `Re` is the most consequential dimensionless group in fluids and standard texts give it no first-principles account; if SDT derives it as one medium's two competing rates, dimensionlessness becomes a *consequence* and transition becomes a *prediction*. Downstream: FD04 (the supra-threshold cascade), FD06 (flat-plate `Re_x`), FD10 (shedding onset).
 3. **How will we find out?** — Four gated phases (§④). The dimensionlessness proof (P1) and the coherence-threshold *derivation* (P2) commit `Re_crit` to the run log **before** any data are read; the multi-geometry test (P3) is the real discriminator because geometry alone must move the threshold.
 4. **What would prove us wrong?** — §⑧, five falsifiers with real failure modes — **the central one (F2) is honest about the trap:** the threshold must come from the coherence-length *computed from lattice geometry*, NOT back-solved from 2300; if `ℓ_c` can only be obtained by inverting the measured `Re_crit`, F2 is a CALIBRATED pass at best (cap at C), and a geometry that yields the *same* `Re_crit` for pipe/plate/Couette (F4) is a clean kill.
-5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN), per phase, no repainting a fired test.
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN), per phase, no repainting a fired test.
 
 **Domain**: Fluid Dynamics (SDT lattice mechanics) · **Status**: SPEC · **Author**: J. C. Harvey, Melbourne
 
@@ -173,7 +173,7 @@ Four phases, each gated. Run in order; a failed checkpoint stops the chain (R4: 
 ```markdown
 ## Pre-Run Commitments — FD03
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: 0 if `ℓ_c` is forward-computed (A-path); exactly 1 if `ℓ_c` is set from the pipe value (C-path) — declare which
 - Engine namespaces actually used: law_I (P_conv driving pressure), law_III (solid_angle_occluded), law_IV (V_disp→ρ), law_V (U/c<1 cap), law_VI::traction/confinement (mode geometry); ν referenced from FD02
 - Phase thresholds (committed before run):
@@ -190,7 +190,7 @@ Four phases, each gated. Run in order; a failed checkpoint stops the chain (R4: 
 | Forward `ℓ_c` cannot be computed without the data | down-grade to **C**, set `ℓ_c` from one scale, disclose | **OPEN** the dominant-mode `ℓ_c` calculation | back-solve `L/ℓ_c=√2300` and grade A |
 | P2 forward `Re_crit` off >1 order | recheck the `2D` neighbour count and dominant wavenumber | **KILL** the geometric-threshold claim | widen the "order of magnitude" band post-hoc |
 | P3 same `Re_crit` for pipe/plate/Couette | re-examine `ℓ_c(geometry)` per case | **KILL** (geometry-independent = not the mechanism) | refit `ν` per geometry |
-| Rivals match but SDT doesn't beat | Label **DEGENERATE** honestly | — | Claim Class A |
+| A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 | Upstream dependency missing (FD02 `ν`) | **DEFER** phase; cite dependency ID | — | Fake PASS |
 
 ### Allowed adjustments

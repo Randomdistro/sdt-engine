@@ -24,7 +24,7 @@
 4. **What would prove us wrong?** — §⑧, each falsifier with its killing number (orbit not closing,
    `ω_c` off the form, power not `∝γ⁴`, beaming not `1/γ`).
 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class
-   (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN), per phase.
+   (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN), per phase.
 
 ## Question
 
@@ -123,7 +123,7 @@ deceleration radiation), [[PM03_EM_Waves_as_Coupled_Relay_Pulses]] (emission cha
 ```markdown
 ## Pre-Run Commitments — PM06
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: [0 or list each param — max per §⑤]
 - Engine namespaces actually used: law_III (occlusion push), law_V (movement budget), bridge (koppa); PM01 field, E89 emission, PM03 pulse
 - Phase thresholds (committed before run): P1 orbit drift <1%/period + ω_c <1% (native gain, no qv×B import) · P2 P∝γ⁴ exponent · P3 ω_crit∝γ³ · P4 beaming ≈1/γ
@@ -139,7 +139,7 @@ deceleration radiation), [[PM03_EM_Waves_as_Coupled_Relay_Pulses]] (emission cha
 | Any gain/power expressed in µ_B/µ_N | seek the native circulation expression | **units FAIL** — record, do not soften | quote the magneton, call it native |
 | P2/P3 `γ` exponent ≠ 4 / 3 | tie to the E89 turned-wake ledger; recompute | mark prefactor **CONVERGENCE** | plug the exponent, claim native |
 | P4 beaming ≠ `1/γ` | re-fold the Law-V budget at high `v` | **OPEN** the beaming; do not boost | insert an external Lorentz transform |
-| Rivals match but SDT only reproduces | label **DEGENERATE** honestly | — | claim Class A |
+| A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 
 ### Allowed adjustments
 

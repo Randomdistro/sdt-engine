@@ -12,7 +12,7 @@
 2. **Why does it matter?** — The spectrum is the bond-wake's mechanical resonance, not a quantum eigenstate ladder; it EXTENDS atomic emission ([[project_cq03_scroller]] APS01) to two new channels, CONSUMES the CH01 electropause stiffness, and TIES the CM04 phonon picture — all unified under one wake-winding quantiser (PPT06/APS04).
 3. **How will we find out?** — Gated phases in §④: vib frequencies from the CH01 well curvature → k, then ω=√(k/μ); rot B from wake-winding-quantised whole-molecule rotation; demonstrate one winding integer indexes all three channels; then a novel un-fit line. Native wake mechanics BEFORE any per-channel quantum postulate or `atomic::`/rival import.
 4. **What would prove us wrong?** — §⑧ numeric kill triggers: spectra require normal-mode / rigid-rotor wavefunctions, or each channel needs its own postulate.
-5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN).
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN).
 
 ## ⓪⁺ Anti-Tautology Firewall *(the load-bearing constraint)*
 
@@ -107,7 +107,7 @@ molecular lines. **Related:** CM04 (phonons — lattice wake oscillation is the 
 ```markdown
 ## Pre-Run Commitments — CH07
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: [0 or list each param — max per §⑤]
 - Engine namespaces: EMC04 electropause, CH01 wake balance, no MO/LCAO
 - Phase thresholds (committed before run): P1 CO 2143 / HCl 2886 / H2 4401 cm⁻¹ within 10%, correct √(k/μ) ordering + HCl→DCl isotope shift · P2 CO B≈1.93 / HCl B≈10.6 cm⁻¹ within 10%, even 2B spacing · P3 one winding integer indexes all three channels (no per-channel postulate) · P4 novel line (N2 / CO2 bend / isotopologue) within committed tol
@@ -121,7 +121,7 @@ molecular lines. **Related:** CM04 (phonons — lattice wake oscillation is the 
 | Phase 0 sanity check fails | Fix units/engine refs; verify `laws.hpp` symbols | STOP — report blocker | Fit to target |
 | Native mechanism off > committed % | Alternative route in §④; document ADJ-### | **OPEN** or **KILL** hypothesis | RETRO-PASS |
 | k from well curvature gives wrong ν | re-examine CH01 well shape (anharmonicity / electropause stiffness) | **OPEN** the vib link | back-solve k from measured ν, call it predicted |
-| Rivals match but SDT doesn't beat | Label **DEGENERATE** honestly | — | Claim Class A |
+| A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 | Upstream dependency missing (FLM10, etc.) | **DEFER** phase; cite dependency ID | — | Fake PASS |
 
 ### Allowed adjustments
@@ -409,7 +409,7 @@ table. This phase is cheap and non-optional.
 
 ## R2·Verdict requirements
 
-Dual verdict line (prompt completion A–F · physics class NATIVE / CONVERGENCE / DEGENERATE /
+Dual verdict line (prompt completion A–F · physics class NATIVE / CONVERGENCE / SHARED-INPUT /
 KILLED / OPEN · recovery grade · cascade root), a §G faith ledger for run 2 (what W accepted
 on faith — the surplus asymmetry, the domain rule, the compliance-length selection), §G.1/§G.2
 mirror answers at start and at any kill, and explicit disposition of ROOT-WALL and ROOT-BUDGET

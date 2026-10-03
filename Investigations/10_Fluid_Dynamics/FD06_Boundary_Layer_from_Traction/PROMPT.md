@@ -12,7 +12,7 @@
 2. **Why does it matter?** — No-slip is the unexplained foundation under every wall-bounded flow; if traction produces it as an output, then skin friction is just the traction shear `τ_w = μ(∂u/∂y)|_w` and the Blasius layer `δ ∼ √(νx/U)` is the diffusion-vs-advection balance — wiring FD06 to FD03 (transition), FD09 (drag crisis), FD10 (separation/shedding).
 3. **How will we find out?** — Five gated phases (§④): start the lattice in *pure slip* (`u=U` everywhere) and show the traction rule alone relaxes the wall layer to zero — no `u=0` hand-set anywhere; the `√(νx/U)` scaling (P2) is the core gate.
 4. **What would prove us wrong?** — §⑧, five falsifiers with real failure modes: finite slip `λ_s ≫ ℓ_P` in the continuum limit; `δ` slope ≠ ½; `C_f`/`δ` prefactor off by >2×; profiles failing to collapse; or no finite transition `Re_x`.
-5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN), per phase, no repainting a fired test.
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN), per phase, no repainting a fired test.
 
 **Domain**: Fluid Dynamics (SDT lattice mechanics) · **Status**: SPEC · **Author**: J. C. Harvey, Melbourne
 
@@ -177,7 +177,7 @@ Five phases, each gated. Run them in order; a failed checkpoint stops the chain 
 ```markdown
 ## Pre-Run Commitments — FD06
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: 0 in the traction/diffusion chain (at most CALIBRATED(1) one fluid scale in P5, documented)
 - Engine namespaces actually used: law_VI::traction (ω_demand, traction_ratio_proton=12, wake channels ℓ=1/2/≥3), law_III (solid_angle_occluded), law_I (P_conv closure), law_V (low-Mach); ν referenced from FD02
 - Phase thresholds (committed before run):
@@ -194,7 +194,7 @@ Five phases, each gated. Run them in order; a failed checkpoint stops the chain 
 | P1 finite slip `λ_s ≫ ℓ_P` in continuum limit | strengthen the traction grip via `T=3(W+1)`; recheck the fixed point | **KILL** (traction ≠ no-slip) | code `u=0` as a wall BC |
 | P2 `δ` slope ≠ ½ | recheck the normal-diffusion-vs-advection balance | **KILL** (wrong penetration mechanism) | force the ½ slope |
 | P3 `C_f` prefactor off >2× | recheck `τ_w = μ(∂u/∂y)` from the derived profile | **OPEN** the prefactor, cap at C | refit the drag law |
-| Rivals match but SDT doesn't beat | Label **DEGENERATE** honestly | — | Claim Class A |
+| A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 | Upstream dependency missing (FD02 `ν`, FD03 transition) | **DEFER** phase; cite dependency ID | — | Fake PASS |
 
 ### Allowed adjustments

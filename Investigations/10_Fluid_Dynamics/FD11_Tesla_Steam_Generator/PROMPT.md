@@ -12,7 +12,7 @@
 2. **Why does it matter?** — The Tesla disc turbine is a real, buildable device whose drive *is* boundary-layer traction; it is the integration test of the whole FD branch and a concrete falsifier of the traction mechanism (the `dη_rotor/dRe_b < 0` signature is unique to traction drive).
 3. **How will we find out?** — Five gated phases (§④) on the **superheated-steam disc-turbine scope** (`(P₀,T₀)` steam inlet, choked nozzle, co-rotating disc stack). **SCOPE LOCK (read before coding):** this prompt is the steam disc turbine; it is NOT a geothermal pinhole-orifice / low-grade-flash study. If the working fluid, inlet state, or device geometry drifts from "superheated-steam Tesla disc turbine", that is an out-of-scope **ADJ** that must be logged and either justified or reverted — do not silently re-scope and then grade against the new device.
 4. **What would prove us wrong?** — §⑧, five falsifiers with real failure modes; in particular F1 (`b_opt`) has a **hard, self-consistent trigger:** the prompt's own kill line is `b_opt` off by `>2×`, so a result `>2×` off is a FAIL, not a graded success — no moving that goal post.
-5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN), per phase, with a **single, non-contradictory CALIBRATED count** carried identically across §⑤, §⑩, and the VERDICT.
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN), per phase, with a **single, non-contradictory CALIBRATED count** carried identically across §⑤, §⑩, and the VERDICT.
 
 **Domain**: Fluid Dynamics (SDT lattice mechanics) · **Status**: SPEC · **Author**: J. C. Harvey, Melbourne
 
@@ -169,7 +169,7 @@ Five gated phases (R4: a clean kill outranks a forced pass). Each predicts its n
 ```markdown
 ## Pre-Run Commitments — FD11
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: **exactly one number total** for Class C — either `k_b` or one lumped loss coefficient (0 for Class A). State it once; it must read identically in §⑤, §⑩, and the VERDICT.
 - Engine namespaces actually used: law_VI::traction (PPT06 wall shear, ω_demand), law_III (occlusion), law_V (movement-budget partition for the loss ledger), bridge (koppa); ν from FD02 (steam-table MEASURED-INPUT), choked flow from FD05, energy budget from FD08
 - Phase thresholds (committed before run):
@@ -186,7 +186,7 @@ Five gated phases (R4: a clean kill outranks a forced pass). Each predicts its n
 | P1 `b_opt` 20%–2× off | recheck `k_b` from the FD06 `δ` criterion and `t_res` | **report partial (C/D)**; if `>2×`, **Class F** | widen the band, or re-scope the device to make a different gap "pass" |
 | P4 `dη_rotor/dRe_b ≥ 0` (signature inverted) | recheck the traction wall-shear integral | **KILL** — traction is not the drive mechanism | bury the inverted sign |
 | Working fluid / inlet state drifts off steam | log an out-of-scope **ADJ**; justify or revert | **STOP** and re-confirm scope with §⓪ lock | silently re-scope and grade the new device |
-| Rivals (bladed model) match but SDT doesn't beat | Label **DEGENERATE** honestly | — | Claim Class A |
+| A rival (bladed model) lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 | Upstream dependency missing (FD05 choked flow, FD06 traction) | **DEFER** phase; cite dependency ID | — | Fake PASS |
 
 ### Allowed adjustments

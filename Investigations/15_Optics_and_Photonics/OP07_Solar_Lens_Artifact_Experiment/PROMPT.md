@@ -28,7 +28,7 @@
    whose λ-position does not track the temp-minimum height; or one that vanishes under PSF/atmosphere
    modelling (instrumental, not solar).
 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class
-   (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN), per phase, no repainting a fired test.
+   (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN), per phase, no repainting a fired test.
 
 ### Anti-tautology firewall
 
@@ -139,7 +139,7 @@ geometry). **Capstone of:** the entire OP suite — it is the on-sky falsifier O
 ```markdown
 ## Pre-Run Commitments — OP07
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: 0 (T(h) is MEASURED-INPUT — the medium descriptor, never tuned to make the fold)
 - Engine namespaces used: depth_closure:: (n=1/(1−z), c_local, depth), OP01 dispersion n(λ), GOM01 limb geometry
 - T(h) profile committed: [schematic for P1 scaffold → measured VAL/FAL for P4 robustness — name it]
@@ -161,7 +161,7 @@ geometry). **Capstone of:** the entire OP suite — it is the on-sky falsifier O
 | P3 `R(λ)` monotonic in the forward model | recheck dispersion `β` and the temp-min height | **KILL** SDT here (layers vindicated), report it | widen the band until a turnover appears |
 | P4 fold removed by PSF/atmosphere | model wings/dispersion explicitly; is residual solar? | **OPEN** the instrumental-mimic question | declare it solar without the null test |
 | `z ≥ 1` near the limb | weak-field break (CR10); restrict to the valid shell | **OPEN** that regime | ignore the break |
-| Rivals match but SDT only reproduces | label **DEGENERATE** honestly | — | claim Class A |
+| A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 
 ### Allowed adjustments
 

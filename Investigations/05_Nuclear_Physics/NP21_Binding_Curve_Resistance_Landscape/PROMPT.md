@@ -12,7 +12,7 @@
 2. **Why does it matter?** — NP19 named the unit of account (mass defect = resistance difference `ΔR`). NP21 is the **map**: it asks whether that one statement, applied across the chart of nuclides, reproduces the most famous curve in nuclear physics *and* pins iron as the form the medium resists least. If the floor is **derived**, SDT replaces all of nuclear energy-accounting with one geometric statement (*most-bound = least-resistance = easiest form to hold*). It is the direct upstream of **SAR05** (why fusion stops being exothermic at the floor). Stack position: Tier 4.
 3. **How will we find out?** — Four gated phases (§④): (P1) define the **resistance functional** `R̃(Z,A)` from grammar + packing geometry, declaring every input geometric vs fitted **before** running; (P2) reproduce the **qualitative shape** (rise to iron, fall after) as a one-parameter landscape against a pre-committed shape metric; (P3) the decisive test — **derive the floor location** from geometry, pre-commit "floor within ±2 in A of the Fe/Ni region with **no tuned exponent**" for a real PASS; (P4) cross-check Fe-56 vs Ni-62 ordering against NP13.
 4. **What would prove us wrong?** — §⑧ falsifiers with numeric triggers: floor lands far from iron → **KILL** the geometric-floor claim; the only way to place the floor at iron is a **fitted exponent** → downgrade to **CALIBRATED / Class C** and *say so*; landscape can't even reproduce rise-then-fall → **OPEN**.
-5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN). **Honest bar, stated up front:** the *strong* outcome (iron floor **DERIVED**, no fitted exponent) is the only Class-A/NATIVE result; a fitted-exponent reproduction is **only Class C / CALIBRATED**, and we will label it so without flinching.
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN). **Honest bar, stated up front:** the *strong* outcome (iron floor **DERIVED**, no fitted exponent) is the only Class-A/NATIVE result; a fitted-exponent reproduction is **only Class C / CALIBRATED**, and we will label it so without flinching.
 
 ---
 
@@ -261,7 +261,7 @@ All written into `Investigations/05_Nuclear_Physics/NP21_Binding_Curve_Resistanc
 | **P3: floor on iron only via tuned exponent** | Mark exponent `FITTED`; **downgrade to CALIBRATED / Class C** and say so | — | Relabel the exponent GEOMETRIC |
 | P3: minimum is flat/degenerate (noise-driven argmin) | Print profile A=48…70; report flat-minimum honestly | **OPEN** sharpness | Pick the iron point from a flat region |
 | P4: Fe/Ni ordering only matches by re-tuning frozen coeff | **OPEN** (frozen-contract violation) | — | Re-tune the frozen coefficient |
-| Rivals (SEMF) match the curve but SDT doesn't *beat* derivation-wise | Label **DEGENERATE / CONVERGENCE** honestly | — | Claim Class A "derivation" |
+| A rival (SEMF) lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 
 ### Allowed adjustments
 
@@ -274,7 +274,7 @@ All written into `Investigations/05_Nuclear_Physics/NP21_Binding_Curve_Resistanc
 
 ### Dual verdict reminder
 
-Every `NP21_VERDICT.md` header carries **both** axes: **Prompt completion** (A–F, did §④–§⑥ get done phase by phase?) and **Physics class** (NATIVE / CONVERGENCE / DEGENERATE / OPEN / KILLED). **Honest expectation, stated up front:** the strong outcome (iron floor **DERIVED**, no fitted exponent) is the only NATIVE/Class-A result; a fitted-exponent reproduction is **Class C / CALIBRATED** and will be labelled exactly that — *a fitted exponent is not a derived one.*
+Every `NP21_VERDICT.md` header carries **both** axes: **Prompt completion** (A–F, did §④–§⑥ get done phase by phase?) and **Physics class** (NATIVE / CONVERGENCE / SHARED-INPUT / OPEN / KILLED). **Honest expectation, stated up front:** the strong outcome (iron floor **DERIVED**, no fitted exponent) is the only NATIVE/Class-A result; a fitted-exponent reproduction is **Class C / CALIBRATED** and will be labelled exactly that — *a fitted exponent is not a derived one.*
 
 ---
 

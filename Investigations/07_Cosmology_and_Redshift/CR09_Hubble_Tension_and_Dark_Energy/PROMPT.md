@@ -64,7 +64,7 @@
    linkage that does not close; a line-of-sight temperature effect that is *absent* in the data or *overshoots*
    the observed CMB uniformity. Each is a direct miss against the raw sky and kills the specific claim.
 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–H run + `RUN_LOG.md`) × physics
-   class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN). The hard falsifiable cores are the **sign+size of
+   class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN). The hard falsifiable cores are the **sign+size of
    the mismatch (A)** and the **raw CMB peak angles + BAO angles from a physical shell (C, D)** — to be derived,
    not assumed.
 

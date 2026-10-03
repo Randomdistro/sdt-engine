@@ -33,7 +33,7 @@
    admissible snap mechanism exists ⇒ pitch=grip is in serious trouble (**OPEN**/park, sharpened fork
    shipped, not a closure).
 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class
-   (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN), per phase. The honest target may be a
+   (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN), per phase. The honest target may be a
    **SHARPENED FORK**, not a PASS; a fired falsifier is never repainted.
 
 ### Anti-tautology firewall (read before P2)
@@ -229,8 +229,9 @@ probability amplitude. No "charge radius"; charge = handed redirection, `e` = un
 - **Pre-committed success metric:** a single sentence each for SDT and SM prediction that **differ in
   an observable** (presence/absence of a direct, mediator-free conversion channel and its energy
   spectrum), plus the gaplessness condition expressed in SDT variables (pitch + lattice channel).
-- **Failure trigger:** if SDT and SM predictions are **observationally identical** (degenerate) ⇒
-  label **DEGENERATE**; NP18 cannot discriminate, say so. If grounding requires a mediator after all
+- **Failure trigger:** if SDT and SM predictions are **observationally identical** ⇒ record
+  **not yet discriminating** (origin label unaffected — CONVERGENCE if the SDT route is its own;
+  corrected 2026-10-03); NP18 cannot discriminate, say so. If grounding requires a mediator after all
   ⇒ the "no mediator" claim weakens ⇒ **OPEN** and flag to NP18.
 - **OUT OF SCOPE (P4):** building NP18's apparatus model (that is NP18); oscillation (PPT11).
 
@@ -255,7 +256,7 @@ probability amplitude. No "charge radius"; charge = handed redirection, `e` = un
 | Axis | Grades |
 |------|--------|
 | **Prompt completion** | A / B / C / D / F — did the tool do P1–P4 as written? |
-| **Physics class** | NATIVE / CONVERGENCE / DEGENERATE / KILLED / **OPEN (sharpened fork)** |
+| **Physics class** | NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / **OPEN (sharpened fork)** |
 
 ---
 
@@ -336,7 +337,7 @@ projection has no ruler); SAR05 (provenance).
 ```markdown
 ## Pre-Run Commitments — PPT10
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN(sharpened fork)]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN(sharpened fork)]
 - CALIBRATED budget: 0 in the σ(p_T) exponent chain (rung σ values = OBSERVED/MEASURED if used)
 - Engine namespaces used: law_V (budget), law_VI (winding W=0), sdt::neutrino (wake_radius, R_wake/R_excl)
 - P2 σ-form PRE-COMMITTED (write BEFORE viewing neutrino σ): σ ∝ p_T^[n], n from transverse-area geometry; supporting band = ±2 orders on the 20-order suppression
@@ -360,7 +361,7 @@ projection has no ruler); SAR05 (provenance).
 | P2 20 orders only via fitted `n` | tag **CALIBRATED(1)**, grade **C**, row IMPORTED | — | call the fitted exponent DERIVED |
 | P2 `dσ/dp_T ≥ 0` as `p_T→0` | recheck transverse-footprint geometry | **KILL** straight-light (report) | rescue with a sign flip / extra factor |
 | P3 middle provably empty | seek occupants (soft/forward/mislabelled); else derive topological SNAP from `law_VI`/PPT09 | **OPEN** (sharpened fork) | assert a bare threshold (PLUG) |
-| P4 SDT≡SM observably | state the result honestly | label **DEGENERATE**; flag NP18 | claim discrimination that isn't there |
+| P4 SDT≡SM observably | state the result | record **not yet discriminating** (origin label by origin, 2026-10-03); flag NP18 | claim discrimination that isn't there |
 | Any step needs `G_F`/W/flavour/ψ | re-express via pitch + winding + wake | **OPEN**/KILL the no-mediator claim, report it | smuggle the weak vertex into the chain |
 
 ### Allowed adjustments

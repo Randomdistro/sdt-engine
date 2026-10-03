@@ -270,7 +270,7 @@ All written into `Investigations/05_Nuclear_Physics/NP19_Mass_Defect_as_Form_Res
 
 ### Dual verdict reminder
 
-Every `NP19_VERDICT.md` header carries **both** axes: **Prompt completion** (A–F, did §④–§⑥ get done phase by phase?) and **Physics class** (CONVERGENCE / DEGENERATE / OPEN / KILLED). Honest expectation: **CONVERGENCE — a named reframe + arithmetic, not a new number.**
+Every `NP19_VERDICT.md` header carries **both** axes: **Prompt completion** (A–F, did §④–§⑥ get done phase by phase?) and **Physics class** (CONVERGENCE / SHARED-INPUT / OPEN / KILLED). Honest expectation: **CONVERGENCE — a named reframe + arithmetic, not a new number.**
 
 ---
 

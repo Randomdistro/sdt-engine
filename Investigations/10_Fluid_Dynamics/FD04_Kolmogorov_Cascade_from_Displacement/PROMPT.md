@@ -12,7 +12,7 @@
 2. **Why does it matter?** — SDT already owns a *verified* shell-by-shell conservation law (`u ∝ 1/r²`, strain `∝ 1/r³`); if turbulence is that same law in the continuum, the most robust empirical fact in fluid mechanics becomes a native consequence, and the dissipation microscale `η = (ν³/ε)^{1/4}` gains a hard `ℓ_P` floor. This is a **genuine native-derivation candidate**, not a borrow — the exponent is the deliverable.
 3. **How will we find out?** — Five gated phases (§④): the constant-flux ledger (P1) yields `u_ℓ ∝ ℓ^{1/3}` *before* the spectrum is read; the −5/3 closure (P2) is the core gate; any exponent ≠ −5/3 from the flux argument is a clean kill, **not** a retrofit.
 4. **What would prove us wrong?** — §⑧, five falsifiers with real failure modes: non-constant `ε_n`; flux argument yielding any exponent ≠ −5/3; no finite dissipation scale; a derived `η < ℓ_P`; or measured slopes irreconcilable beyond ±0.10.
-5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN), per phase, with `C_K` and intermittency held honestly OPEN.
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN), per phase, with `C_K` and intermittency held honestly OPEN.
 
 **Domain**: Fluid Dynamics (SDT lattice mechanics) · **Status**: SPEC · **Author**: J. C. Harvey, Melbourne
 
@@ -183,7 +183,7 @@ Five gated phases. Run in order; a failed checkpoint stops the chain (R4: a clea
 ```markdown
 ## Pre-Run Commitments — FD04
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: 0 in the exponent chain (`C_K` is COMPUTED or PENDING, never silently fitted to 1.5)
 - Engine namespaces actually used: law_I (P_conv, Φ/u_CMB), law_IV (V_disp→displaced volume), law_V (v_circ²+v_trans²=c² budget), bridge (koppa/z, the 1/r vs 1/r³ distinction); ν referenced from FD02
 - Phase thresholds (committed before run):
@@ -200,7 +200,7 @@ Five gated phases. Run in order; a failed checkpoint stops the chain (R4: a clea
 | P2 flux argument yields exponent ≠ −5/3 | recheck the constant-flux closure on `{ε,k}` | **KILL** (clean — displacement cascade ≠ turbulent cascade) | retrofit the exponent to −5/3 |
 | P3 deep-limit `η < ℓ_P` | recheck `ν → ν_lattice` and the `Re∼1` balance | **KILL** (lattice ontology violated) | floor `η` to `ℓ_P` by hand |
 | P4 `C_K` not derivable from a shell count | flag `C_K` **PENDING/COMPUTED**, cap at C | **OPEN** the prefactor | silently fit `C_K` to 1.5 |
-| Rivals match but SDT doesn't beat | Label **DEGENERATE** honestly | — | Claim Class A |
+| A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 | Upstream dependency missing (FD02 `ν`) | **DEFER** phase; cite dependency ID | — | Fake PASS |
 
 ### Allowed adjustments

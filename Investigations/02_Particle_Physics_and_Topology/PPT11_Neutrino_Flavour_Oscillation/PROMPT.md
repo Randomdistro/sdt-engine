@@ -13,7 +13,7 @@
 2. **Why does it matter?** — This is the single datum **most in tension** with the straight-light-electron picture. Flavour change in flight is *measured* (electron↔muon↔tau conversion is real; the original "massless" assumption is dead). If SDT cannot produce **periodicity from native geometry**, PPT10's straight-thread neutrino has an unfilled hole. NP18 (resonator) tests *conversion*, not *flavour* — **the experiment cannot rescue this; it needs theory.**
 3. **How will we find out?** — Four gated phases (§④): P1 define three flavours as three distinct SDT configurations of the straight vortex (state the geometric DoF); P2 propose a native **beat/relay** mechanism for interconversion *without a wavefunction*; P3 derive an oscillation **length** from the engine's three mass minima and compare to measured solar/atmospheric scales, **no fitted knob**; P4 recursive honest failure analysis to root cause.
 4. **What would prove us wrong?** — §⑧ falsifiers with numeric triggers. Headline: if **no** native (non-wavefunction) mechanism yields periodicity → record `[OPEN]` (do **not** fabricate); if the derived length is many orders off and no geometric reason recovers it → **KILL** the naive beat model and park.
-5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F: did the tool do §④–§⑥?) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / **OPEN**). Failures **PIVOT / KILL / OPEN** — never retro-PASS.
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F: did the tool do §④–§⑥?) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / **OPEN**). Failures **PIVOT / KILL / OPEN** — never retro-PASS.
 
 ---
 
@@ -220,7 +220,7 @@
 | **P3:** `1 < \|log₁₀ ratio\| ≤ 3` | Try alternative native lever from P2's list; document ADJ-### | **OPEN** the lever | Widen the ±1-decade bar post-run (RETRO-PASS) |
 | **P3:** `\|log₁₀ ratio\| > 3`, no geometric recovery | — | **KILL** naive beat; park `[OPEN]`, state required lever | Fit to close 3+ decades |
 | **P3:** match achieved by reading `Δm²` from engine | Reject — rebuild from `m_nu*`/`V_disp` only | If can't rebuild → **OPEN** | IDENTITY-PASS on a measured input |
-| **T5:** match vanishes when `E_ν` changes | Label **DEGENERATE/coincidence** | — | Claim Class C on a coincidence |
+| **T5:** match vanishes when `E_ν` changes | Label **coincidence (not robust)** | — | Claim Class C on a coincidence |
 
 ### Allowed adjustments
 - Finer reference-energy sweep; alternative **native** beat driver (cadence-mismatch length / `ΔR_wake` / `ΔV_disp` spacing) already named above; phase split (3a analytic, 3b numeric); filename fix via ADJ entry.
@@ -229,7 +229,7 @@
 - Post-hoc widening of the ±1-decade bar · any fitted lever coefficient · using `Δm²` as construction input · superposition-wavefunction smuggled in as "beat" · `G/M/GM/G_F/ψ/ΛCDM` in the chain · local constant namespaces · relabelling OPEN/KILL as PASS.
 
 ### Dual verdict reminder
-`PPT11_VERDICT.md` header must carry **both** axes: **Prompt completion (A–F)** and **Physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN)**. For this Tier-5 spec, a **sharpened, honestly-recorded `[OPEN]`** is a complete and acceptable result — a fabricated closure is not.
+`PPT11_VERDICT.md` header must carry **both** axes: **Prompt completion (A–F)** and **Physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN)**. For this Tier-5 spec, a **sharpened, honestly-recorded `[OPEN]`** is a complete and acceptable result — a fabricated closure is not.
 
 ---
 

@@ -23,7 +23,7 @@
 4. **What would prove us wrong?** — §⑧, each falsifier states the killing number (`ω_p` off the form,
    screening not exponential, λ_D scaling wrong, upper-hybrid not additive).
 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class
-   (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN), per phase.
+   (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN), per phase.
 
 ## Question
 
@@ -120,7 +120,7 @@ ensemble / thermal distribution), EMC03 (handedness, surplus/deficit), electropa
 ```markdown
 ## Pre-Run Commitments — PM04
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: [0 or list each param — max per §⑤]
 - Engine namespaces actually used: law_III (occlusion gain), law_V (movement budget / v_th), bridge; PM01 swirl, TD02 ensemble
 - Phase thresholds (committed before run): P1 ω_p form <1% (native gain, no e²/ε₀ import) · P2 exponential screening, λ_D <2% · P3 dispersion coeff ≈3 · P4 upper-hybrid additive
@@ -136,7 +136,7 @@ ensemble / thermal distribution), EMC03 (handedness, surplus/deficit), electropa
 | P3 dispersion coeff ≠ 3 | tie to FD05 isotropy `1/3`; recompute finite relay speed | mark coeff **CONVERGENCE** (borrowed) | plug 3 and claim native |
 | P4 upper-hybrid not additive | check PM01 field coupling sign/geometry | **OPEN** the magnetised limit | claim co-coupling without the quadrature check |
 | Landau damping has no relay analogue | scope it OUT; note as Question 3 | **OPEN** collisionless damping | pretend it is derived |
-| Rivals match but SDT only reproduces | label **DEGENERATE** honestly | — | claim Class A |
+| A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 
 ### Allowed adjustments
 

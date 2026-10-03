@@ -27,7 +27,7 @@
    modes — the exchange sign (T1), the `T_C` ordering (T2), and the native-units moment (T3) can each
    come out wrong.
 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class
-   (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN), per phase, with no repainting of a fired test.
+   (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN), per phase, with no repainting of a fired test.
 
 ## Question
 
@@ -133,7 +133,7 @@ Not required for the verdict; this is the payoff of doing it well.
 ```markdown
 ## Pre-Run Commitments — CM07
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: 0 in the exchange/M(T) chain (T_C magnitude may be CALIBRATED(1) — list it). MAGNETON budget: 0 (absolute)
 - Engine namespaces actually used: law_III (occlusion), law_VI (wake circulation/traction), EMC03 (handedness), CM04 thermal disorder
 - Phase thresholds (committed before run):
@@ -151,7 +151,7 @@ Not required for the verdict; this is the payoff of doing it well.
 | P1 no ferro/antiferro sign distinction | check whether contra-rotation truly raises occlusion | **OPEN**: report both signs | claim a flip that the run does not show |
 | P2 T_C ordering inverts | recheck z·J (coordination × exchange) and CM04 disorder coupling | **OPEN**: report the ordering | retro-fit z or J per element |
 | any quantity expressible only in μ_B | **STOP** — this is the units-rule FAIL, not a pivot; re-derive in native wake units | mark **KILLED** on the units rule, report honestly | quote the result in magnetons and grade anything ≥ C |
-| Rivals (Heisenberg/mean-field) match but SDT only reproduces | label **DEGENERATE** honestly | — | claim Class A |
+| A rival (Heisenberg/mean-field) lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 | Upstream dependency missing (CM01/CM04 not run) | **DEFER** the affected phase; cite dependency ID | — | fake T_C |
 
 ### Allowed adjustments

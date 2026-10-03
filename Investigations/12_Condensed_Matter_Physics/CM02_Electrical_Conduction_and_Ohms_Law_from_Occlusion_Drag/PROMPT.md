@@ -191,7 +191,7 @@ Not required for the verdict; this is the payoff of doing it well.
 | τ from geometry off >2× | adjust σ_occl geometry / n_def model | **CALIBRATED(1)** on σ_occl (full ledger) or **OPEN** the drag model | input the measured τ |
 | σ within tolerance only with OBSERVED τ | label **CONVERGENCE** (Class C), state the import | — | claim NATIVE; grade ≥ C on the circular path (that is the F-path) |
 | ρ(T) exponent ≈ 0 (flat) | recheck the FD05 thermal-amplitude coupling | **DEFER** Phase 3, cite dependency | fake a linear Arrhenius/ρ∝T fit |
-| Rivals (Drude) match but SDT only reproduces | label **DEGENERATE** honestly | — | claim Class A |
+| A rival (Drude) lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 
 ---
 

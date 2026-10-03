@@ -12,7 +12,7 @@
 2. **Why does it matter?** — It explains *why unification looks impossible from inside the medium* (every instrument is cut from the medium and pre-spends the axis it tries to expose), and it predicts the neutrino as a structural blind spot rather than a "weak particle." Upstream of PPT10/PPT11 (straight-light, oscillation) and NP18 (uncommitted-cloth loophole).
 3. **How will we find out?** — Formalise "instrument = committed projection of the medium" (P1), enumerate the form's independent DoF from trefoil/vortex geometry + the 28-D state and map each to a property (P2), derive the straight zero-grip projection as the one DoF with no ruler and identify it with the neutrino (P3), check the count against the properties physics actually uses (P4).
 4. **What would prove us wrong?** — §⑧ falsifiers with numeric triggers: a DoF count that disagrees with the independent-ruler count without explanation; a straight projection that is *not* among the form's DoF; or an irreducibly ambiguous count.
-5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN). The strong falsifiable core is the **derived integer count** and the **predicted existence/non-existence of a fifth independent ruler**.
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN). The strong falsifiable core is the **derived integer count** and the **predicted existence/non-existence of a fifth independent ruler**.
 
 ---
 
@@ -130,7 +130,7 @@ Physics names four "fundamental properties" — mass, charge, magnetic flux, ele
 - ⚠️ **QUALIFIED PENDING (Class D: Computed).** The framework and the zero-grip residue are derived, but the *integer* rests on an unproven independence claim (e.g. v_P dependence asserted) → ship the count as PENDING with the gap named.
 - ❌ **FAIL / OPEN (Class F / OPEN).** No clean count exists (irreducibly ambiguous), **or** the straight projection is not among the DoF, **or** the count disagrees with physics with no native explanation. Do **not** retro-fit to 4.
 
-**Dual verdict (required in `FLM11_VERDICT.md`):** *Prompt completion* (A–F: did P1–P4 execute as written?) **and** *Physics class* (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN). Honesty note: this investigation is **partly conceptual**; the *strong, falsifiable* core is the **derived count** and the **fifth-ruler yes/no**.
+**Dual verdict (required in `FLM11_VERDICT.md`):** *Prompt completion* (A–F: did P1–P4 execute as written?) **and** *Physics class* (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN). Honesty note: this investigation is **partly conceptual**; the *strong, falsifiable* core is the **derived count** and the **fifth-ruler yes/no**.
 
 ---
 
@@ -197,7 +197,7 @@ Physics names four "fundamental properties" — mass, charge, magnetic flux, ele
 ```markdown
 ## Pre-Run Commitments — FLM11
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: [0 — none permitted; this is a count, not a fit]
 - Engine namespaces: law_VI::winding (W=0/1/3), law_VI::angular (C₃), Law V budget, FLM01/state28d (Levels 5–6)
 - PRE-COMMITTED COUNT P: [state the integer BEFORE running — e.g. 4 grippable + 1 straight]
@@ -226,7 +226,7 @@ Physics names four "fundamental properties" — mass, charge, magnetic flux, ele
 - Post-hoc change to the pre-committed integer; rounding an ambiguous count; widening the "clean integer" / "exactly one zero-grip" rules; charge-as-substance or borrowed-unit phrasing; importing G/M/GM, ψ, gauge fields, or a symmetry-group dimension into the derivation chain.
 
 ### Dual verdict reminder
-Report **both** axes in `FLM11_VERDICT.md`: *Prompt completion* (A–F) and *Physics class* (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN). A clean derived integer + correct residue placement is NATIVE; a count that merely *ties* a known group dimension is CONVERGENCE; an ambiguous count is OPEN, never a quiet PASS.
+Report **both** axes in `FLM11_VERDICT.md`: *Prompt completion* (A–F) and *Physics class* (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN). A clean derived integer + correct residue placement is NATIVE; a count that merely *ties* a known group dimension is CONVERGENCE; an ambiguous count is OPEN, never a quiet PASS.
 
 ---
 

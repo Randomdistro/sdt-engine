@@ -12,7 +12,7 @@
 2. **Why does it matter?** — Stack position / downstream blockers (see `INVESTIGATION_STACK.md`).
 3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
 4. **What would prove us wrong?** — §⑧ falsification tests with numeric triggers.
-5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN).
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN).
 
 **Purpose.** Replace balls/sticks with the real nucleon topology — each nucleon a 6π (2,3) trefoil / toroidal structure — **at the positions NP03B already solved**. Rendering is *not* evidence; this stage builds the substrate NP03D tests for threading.
 
@@ -45,7 +45,7 @@ tube scale:     R_p = 4ℏ/(m_p c) = 0.84124 fm   (laws.hpp::winding, frozen)
 ```markdown
 ## Pre-Run Commitments — NP03C
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: [0 or list each param — max per §⑤]
 - Engine namespaces: NP01 grammar, law_III nuclear occlusion, ATOMICUS rules
 - Phase thresholds (committed before run): [commit per phase in RUN_LOG]
@@ -59,7 +59,7 @@ tube scale:     R_p = 4ℏ/(m_p c) = 0.84124 fm   (laws.hpp::winding, frozen)
 | Phase 0 sanity check fails | Fix units/engine refs; verify `laws.hpp` symbols | STOP — report blocker | Fit to target |
 | Native mechanism off > committed % | Alternative route in §④; document ADJ-### | **OPEN** or **KILL** hypothesis | RETRO-PASS |
 | `z ≥ 1` in closure formula | Weak-field break (CR10); piecewise or exponential | **OPEN** that regime | Ignore break |
-| Rivals match but SDT doesn't beat | Label **DEGENERATE** honestly | — | Claim Class A |
+| A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 | Upstream dependency missing (FLM10, etc.) | **DEFER** phase; cite dependency ID | — | Fake PASS |
 
 ### Allowed adjustments

@@ -139,7 +139,7 @@ With \(\beta = 1\) flagged **CALIBRATED(1)** — not yet derived from mode count
 
 | Regime | Status |
 |---|---|
-| Vacuum limb \(\delta = 4\varkappa/b\) | **PASS** — CONVERGENCE/DEGENERATE with GR |
+| Vacuum limb \(\delta = 4\varkappa/b\) | **PASS** — CONVERGENCE/SHARED-INPUT with GR |
 | Snell from Fermat on computed \(n\) | **PASS** — algebra verified numerically |
 | Bulk matter \(n\) (water 1.333) | **OPEN** — electropause \(z = \alpha^2\) is \(10^4\times\) too small |
 | Eikonal integral in OP01 tool | **FAIL** — wrong quadrature geometry; GOM01 path integral PASS [PHANTOM — no source computes this; retracted] |

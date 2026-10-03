@@ -24,7 +24,7 @@
 4. **What would prove us wrong?** — §⑧, each falsifier with its killing number (ledger not closing,
    rate not recovering `1/√S` + fast plateau, flare energy off by orders).
 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class
-   (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN), per phase.
+   (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN), per phase.
 
 ## Question
 
@@ -122,7 +122,7 @@ FD02 (relay diffusion ≡ resistivity), `Engine/include/sdt/magnetosphere.hpp` (
 ```markdown
 ## Pre-Run Commitments — PM05
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: [0 or list each param — max per §⑤]
 - Engine namespaces actually used: law_VI (topology), law_III; PM01 swirl bundles, FD02 relay diffusion, magnetosphere.hpp
 - Phase thresholds (committed before run): P1 U_stored vs B²/2µ₀ form · P2 ΔU <5% + ledger residual <1% · P3 rate 1/√S + fast plateau from traction · P4 flare 10³¹⁻³² erg / CME 10²⁻³ km/s
@@ -138,7 +138,7 @@ FD02 (relay diffusion ≡ resistivity), `Engine/include/sdt/magnetosphere.hpp` (
 | P3 only `1/√S` (no fast branch) | check the topology-snap channel (GOM06) | **OPEN** the fast-reconnection problem honestly | claim fast rate without a native source |
 | P4 flare energy off by >1 order | check active-region inputs (flag MEASURED) | **DEFER** P4; report the order gap | retro-tune B/scale to hit 10³¹ erg |
 | `∇·B` ≠ 0 during the snap | fix the topology-transition stencil | **KILL** the snap model; E58 violated | hide the monopole |
-| Rivals match but SDT only reproduces | label **DEGENERATE** honestly | — | claim Class A |
+| A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 
 ### Allowed adjustments
 

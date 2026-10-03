@@ -23,7 +23,7 @@
    decrease over 10⁴ ticks from a hot start (trend `dS/dt < 0`), or if `ln W` is not extensive in `E`
    (doubling `E,N` does not double `ln W` to ±5%), the lattice-microstate thesis fails.
 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class
-   (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN), per phase, no repainting a fired test.
+   (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN), per phase, no repainting a fired test.
 
 ---
 
@@ -107,7 +107,7 @@ thermodynamic arrow to the cosmological one ([[project_sdt_cyclic_cosmology]]).
 ```markdown
 ## Pre-Run Commitments — TD01
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: 0 (k_B is the only dependency-traced input)
 - Engine namespaces actually used: measured::k_B, measured::l_P, law_I::epsilon, FLM02 GPI relay update
 - Phase thresholds (committed before run):

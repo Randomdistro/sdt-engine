@@ -30,7 +30,7 @@
 2. **Why does it matter?** — It is the **last classical-sector seat**. Length (koppa from `g`), `c` (Mercury precession), and α (PPT02/APS05) are already off the derivation basis. If ℏ collapses into the mass seat, the residual derivation basis is `{one mass/action anchor (→ FLM12), α (dimensionless), k_B, T_CMB}` — the theory's irreducible core, made explicit.
 3. **How will we find out?** — (P1) express ℏ as the W=1 rung circulation and prove the Onsager–Feynman identity mechanically; (P2) delete-test every extraction path for hidden ℏ; (P3) prove the ℏ↔m_e degeneracy and collapse `{ℏ,m_e,m_p}`→one seat (handed to FLM12); (P4) hunt an **ℏ-free (non-atomic) koppa path** to the action.
 4. **What would prove us wrong?** — §⑧: a "value derivation" that is secretly an identity (ℏ on both sides); an ℏ-free path that on audit still routes through atomic spectroscopy; or a claim that both ℏ *and* m_e are independently derived (violates the one-mass-seat count).
-5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN). The strong core is **(a)** the mechanical Onsager–Feynman ROLE and **(b)** a definite yes/no on an ℏ-free VALUE path.
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN). The strong core is **(a)** the mechanical Onsager–Feynman ROLE and **(b)** a definite yes/no on an ℏ-free VALUE path.
 
 ---
 

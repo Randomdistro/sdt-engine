@@ -114,7 +114,7 @@ Class A: ≥50 real SPARC RMS<25%, crossover derived, BTFR from geometry, no GM.
 ```markdown
 ## Pre-Run Commitments — GD05 (§K-deepened)
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: 0 (a₀/crossover is the thing to DERIVE, not fit)
 - Routes: A eclipse(control ~66%) · B M4 floor(purge MOND crossover) · C koppa-density(GOM14)
 - Data: real SPARC only (sparc_real_data.csv) — NO mock

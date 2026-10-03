@@ -12,7 +12,7 @@
 2. **Why does it matter?** — the weak bond is the left-over wake the electropause did not fully cancel; it underpins condensed-matter cohesion and all of biochemistry downstream. It consumes CH01 (electropause), CH04 (geometry that sets residual directions), and CH03 (which wakes are near-cancelled).
 3. **How will we find out?** — gated phases in §④: derive 1/r⁶ from correlated residual-wake fluctuation, the H-bond energy/geometry from a rim residual, water's turnover from network-vs-packing, and a novel H-bond ordering — native mechanism before any induced-dipole picture or rival.
 4. **What would prove us wrong?** — §⑧ numeric triggers: dispersion needing induced dipoles (power ≠ 6), or the H-bond / water anomaly needing an orbital model.
-5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN).
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN).
 
 ## ⓪⁺ Anti-Tautology Firewall *(the load-bearing constraint)*
 
@@ -121,7 +121,7 @@ EMC03 (residual surplus/deficit), the period-2 cancellation map
 ```markdown
 ## Pre-Run Commitments — CH06
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: [0 or list each param — max per §⑤]
 - Engine namespaces: EMC04 electropause, CH01 wake balance, no MO/LCAO
 - Phase thresholds (committed before run): P1 derive 1/r⁶ exponent (not assumed) + monotonic growth with molecular wake size across noble gases/alkanes · P2 H-bond energy in 10–40 kJ/mol band, near-linear O–H···O, correct O–H···O vs N–H···N ordering · P3 water density turnover within a few °C of 4 °C + open ice qualitatively · P4 novel HF/H₂O/NH₃ H-bond ordering correct
@@ -135,7 +135,7 @@ EMC03 (residual surplus/deficit), the period-2 cancellation map
 | Phase 0 sanity check fails | Fix units/engine refs; verify `laws.hpp` symbols | STOP — report blocker | Fit to target |
 | Native mechanism off > committed % | Alternative route in §④; document ADJ-### | **OPEN** or **KILL** hypothesis | RETRO-PASS |
 | Residual fluctuation gives wrong power (not 1/r⁶) | re-derive the correlation geometry of two leaked residuals | **OPEN** the dispersion law | assume 1/r⁶, fit coefficient, claim derived |
-| Rivals match but SDT doesn't beat | Label **DEGENERATE** honestly | — | Claim Class A |
+| A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 | Upstream dependency missing (FLM10, etc.) | **DEFER** phase; cite dependency ID | — | Fake PASS |
 
 ### Allowed adjustments

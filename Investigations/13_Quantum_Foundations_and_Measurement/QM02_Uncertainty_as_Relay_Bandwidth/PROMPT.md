@@ -26,7 +26,7 @@
    (a pulse that beats `½`; an ℏ that must be smuggled rather than traced to `κ=h/m`; a vortex whose
    per-tick x or p is *itself* spread rather than sharp).
 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class
-   (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN), per phase, no repainting a fired test.
+   (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN), per phase, no repainting a fired test.
 
 ## Question
 
@@ -119,7 +119,7 @@ time axis; map to natural linewidth Γτ ≈ ℏ. *Success:* Γ = ℏ/τ reprodu
 ```markdown
 ## Pre-Run Commitments — QM02
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: 0 in the native chain (flag the ℏ-attach borrow from FD02 if used)
 - Engine namespaces used: measured (h via κ=h/m from FD02), FLM05 tick — NO ψ, NO commutator, NO atomic:: in the band-limit chain
 - Phase thresholds (committed before run): P1 Δx·Δk ≥ ½ exact (Gaussian saturates <1%) · P2 ℏ/2 ±1% · P3 product within 1% of ℏ/2 while spreading · P4 Γ=ℏ/τ reproduced
@@ -135,7 +135,7 @@ time axis; map to natural linewidth Γτ ≈ ℏ. *Success:* Γ = ℏ/τ reprodu
 | P1 box/triangle also saturate ½ | refine the saturation criterion (smoothness functional) | **OPEN** the Gaussian-uniqueness claim | claim Gaussian-only without showing it |
 | P2 ℏ/2 off >1% or needs the commutator | alternative native ℏ route (κ=h/m vs FD02 circulation) | **OPEN**; cap at C — ℏ was imported | assume `[x,p]=iℏ` then report A |
 | P3 product needs the vortex itself to spread | re-derive spreading as wake-only (vortex point stays sharp) | **OPEN** the determinism claim; report honestly | let the vortex become a packet and call it native |
-| Rivals match but SDT only reproduces | label **DEGENERATE** honestly | — | Claim Class A |
+| A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 
 ### Allowed adjustments
 

@@ -22,7 +22,7 @@
 4. **What would prove us wrong?** — §⑧ numeric triggers: valence/octet that cannot reproduce
    without subshell filling, or O₂/N₂ paramagnetism coming out wrong.
 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class
-   (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN).
+   (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN).
 
 ## ⓪⁺ Anti-Tautology Firewall *(the load-bearing constraint)*
 
@@ -131,7 +131,7 @@ paramagnetic/diamagnetic assignment (e.g. a radical) from wake count alone.
 ```markdown
 ## Pre-Run Commitments — CH03
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: [0 or list each param — max per §⑤]
 - Engine namespaces: EMC04 electropause, CH01 wake balance, no MO/LCAO
 - Phase thresholds (committed before run): P1 standard valence correct for ALL Z=1–18 · P2 He/Ne/Ar emerge as zero-active-wake (octet reproduced as rule) · P3 O₂ paramagnetic + N₂ diamagnetic from lone-wake count, period lengths 2/8/8 · P4 novel para/diamagnetic call correct
@@ -145,7 +145,7 @@ paramagnetic/diamagnetic assignment (e.g. a radical) from wake count alone.
 | Phase 0 sanity check fails | Fix units/engine refs; verify `laws.hpp` symbols | STOP — report blocker | Fit to target |
 | Native mechanism off > committed % | Alternative route in §④; document ADJ-### | **OPEN** or **KILL** hypothesis | RETRO-PASS |
 | Wake tally only matches when seeded from electron config | re-derive valence from period-2 pairing combinatorics alone | **OPEN/KILL** if irreducible | re-label config as 'wake count', claim NATIVE |
-| Rivals match but SDT doesn't beat | Label **DEGENERATE** honestly | — | Claim Class A |
+| A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 | Upstream dependency missing (FLM10, etc.) | **DEFER** phase; cite dependency ID | — | Fake PASS |
 
 ### Allowed adjustments
@@ -344,7 +344,7 @@ this phase.**
 ```markdown
 ## Pre-Run Commitments — CH03 RUN 2 (mesh closure)
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: [0 or list — any entry documented]
 - Closure rule (ONE, stated in full before code): [the rule]
 - Primitives used: FLM14 two-channel state / FLM07 1:4 gearing / NP10 (Z−1)! tours — cite which
@@ -367,7 +367,7 @@ this phase.**
 | FLM14 run-6 kills the dwell measure | Phase B stays closed; record it | M1 remains killed-in-static-class, re-open condition unpaid | running Phase B anyway on the refused instrument |
 
 **Verdict line (mandatory, HUNTER format):** Prompt completion [A–F] · Physics class [NATIVE /
-CONVERGENCE / DEGENERATE / BORROW / KILLED / OPEN] · Recovery [RECOVERED / PARTIAL / NO RECOVERY]
+CONVERGENCE / SHARED-INPUT / BORROW / KILLED / OPEN] · Recovery [RECOVERED / PARTIAL / NO RECOVERY]
 · Cascade root [id or none]. Convergence with the rival's σ/π ordering, if found, is REPORTED in
 this line as convergence.
 

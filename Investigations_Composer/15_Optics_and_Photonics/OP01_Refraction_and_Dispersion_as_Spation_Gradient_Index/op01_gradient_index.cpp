@@ -234,7 +234,7 @@ int main() {
 
     std::printf("\n  Prompt completion: %s\n",
                 (p0_err < 0.01 && p3_err < 0.01 && std::fabs(snell_res) < 1e-9) ? "B (Ph 1 OPEN)" : "C/D");
-    std::printf("  Physics class: CONVERGENCE/DEGENERATE (limb); matter-n OPEN\n");
+    std::printf("  Physics class: CONVERGENCE/SHARED-INPUT (limb); matter-n OPEN\n");
     std::printf("  Failed gates: %d\n", fails);
     std::printf("================================================================\n");
     return fails == 0 ? 0 : 1;

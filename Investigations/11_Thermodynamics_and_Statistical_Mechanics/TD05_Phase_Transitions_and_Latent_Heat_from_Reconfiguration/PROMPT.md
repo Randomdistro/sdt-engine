@@ -20,7 +20,7 @@
 3. **How will we find out?** — Gated phases in §④; the native packing-threshold simulation before any
    imported order-parameter field.
 4. **What would prove us wrong?** — §⑧ falsification tests with numeric triggers and real failure modes.
-5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN).
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN).
 
 ## Question
 
@@ -98,7 +98,7 @@ motifs that set which solid phase is stable).
 ```markdown
 ## Pre-Run Commitments — TD05
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: 1 measured bond-energy proxy (declared); 0 other fitted params
 - Engine namespaces actually used: law_IV (V_disp, reorg cost), law_III (occlusion/spation-pressure),
     measured::k_B, TD01 (ΔS=L/T); lattice motifs from FLM08/CONDENSA / CM04
@@ -117,7 +117,7 @@ motifs that set which solid phase is stable).
 | P2 `L ≠ T_mΔS` beyond numerical noise | recount bonds × `Δε_reorg`; check the entropy ledger (TD01) | **OPEN** the latent-heat ledger | plug `L` to satisfy `T_mΔS` |
 | P3 `L` off `> 3×` tabulated | revisit the single bond-energy proxy (is it the right motif?) | grade D on magnitude; keep ordering native | tune the bond count to hit the table |
 | P4 `dP/dT` slope off `> 15%` | recheck the two-packing occlusion-pressure balance | **OPEN** Clausius–Clapeyron link | import the thermodynamic relation directly |
-| Rivals match but SDT only reproduces | label **DEGENERATE** honestly | — | Claim Class A |
+| A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 | Upstream missing (CM04 motifs not ready) | **DEFER** the structural phase; cite dependency ID | — | Fake PASS |
 
 ### Allowed adjustments

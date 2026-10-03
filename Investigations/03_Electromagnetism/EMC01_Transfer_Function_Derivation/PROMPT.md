@@ -106,7 +106,7 @@ Class A: P_eff derivation basis-derived, delete-test passes, Routes A≡C; engin
 ```markdown
 ## Pre-Run Commitments — EMC01 (§K-deepened)
 - Prompt completion target: [A|B|C]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT]
 - CALIBRATED budget: 0 (resolving whether P_eff is calibrated, not adding one)
 - Routes this session: A (derivation basis+delete-test) · C (electropause) · B (contamination quantify)
 - Root dependency to verify on file: R_p = (W+1)ℏ/(m_p c), laws.hpp:1093

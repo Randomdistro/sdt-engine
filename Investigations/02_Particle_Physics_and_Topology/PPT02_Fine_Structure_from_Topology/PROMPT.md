@@ -12,7 +12,7 @@
 2. **Why does it matter?** — α is one of only 8 derivation basis inputs `{ℓ_P, c, ℏ, k_B, T_CMB, α, m_e, m_p}`. Deriving it drops the minimal input set from 4 (`{ℓ_P, T_CMB, α, d=3}`) to 3 and removes the last dimensionless free number in the atomic sector. Downstream: PPT03 (m_p/m_e), EMC01 (transfer function), every `atomic::` coupling scales through α.
 3. **How will we find out?** — Three declared, competing native routes (§④ A/B/C), gated, native mechanism before any `atomic::`/rival comparison. α is treated throughout as a **velocity gear ratio** `v_ground/c`, not a "coupling strength" (§③.movement).
 4. **What would prove us wrong?** — §⑧ falsifiers with numeric triggers; any route that only *back-solves* α from a length already scaled by α is CIRCULAR and dies (§④.circularity gate).
-5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN). A route "derives α" only if it predicts 1/137.036 to its committed s.f. from a quantity that is *not* itself α-scaled (delete-test).
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN). A route "derives α" only if it predicts 1/137.036 to its committed s.f. from a quantity that is *not* itself α-scaled (delete-test).
 
 ---
 
@@ -201,7 +201,7 @@ Preserving the earned closure (§2) is Class A on the *identities* regardless of
 ```markdown
 ## Pre-Run Commitments — PPT02 (§K-deepened)
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: [0 — α is the thing being removed, not a fittable knob]
 - Routes to run this session: [A | B | C], in order
 - Non-α seed for each route (name it): [A: W=1 displacement · B: FLM14 dwell · C: FLM05 wake]

@@ -12,7 +12,7 @@
 2. **Why does it matter?** — If emission is ordered by **seat depth** (how deep the displaced electron/nucleon sits), then the photon band is a *read-out of structure*, not a free axis. This closes the long-standing conceptual hole "what really separates an X-ray from a gamma," vindicates the alpha grammar (every real nucleus carries neutrons), and feeds the rung below gamma to **PPT10** (the neutrino as straight-light). Stack-blocking for the NP18–NP21 / PPT10–11 emission set.
 3. **How will we find out?** — Four gated phases (§④): (P1) define seat depth and pre-commit a *monotonic* seat-depth → emission-energy law from the `atomic` namespace + Rydberg/Lyman; (P2) derive the **hydrogen electronic ceiling = 13.6 eV** as the deepest neutron-free seat and show the next-deeper seats demand added protons (X-ray) or neutrons (gamma); (P3) the decisive empirical test — *every recorded nuclear gamma comes from a neutron-containing nucleus*; (P4) reconcile the X-ray/gamma energy overlap as **provenance, not energy**.
 4. **What would prove us wrong?** — §⑧ falsifiers with numeric triggers: a bound neutron-free nucleus past H-1 emitting gamma → **KILL**; seat depth NOT monotonic with energy (a deep seat emitting low-energy light) → ordering **fails**; the 13.6 eV ceiling not recovered from geometry → **PIVOT**.
-5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN). Done = the seat-depth ladder table, the derived 13.6 eV ceiling, and the exceptionless neutron-requirement check all ship with `APS06_VERDICT.md`.
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN). Done = the seat-depth ladder table, the derived 13.6 eV ceiling, and the exceptionless neutron-requirement check all ship with `APS06_VERDICT.md`.
 
 ---
 
@@ -166,7 +166,7 @@ than observing that it is. Until that derivation lands, the only P3 residue with
 
 ## 5. Success Criteria (dual verdict, canonical labels)
 
-**Dual verdict required in `APS06_VERDICT.md`:** Prompt completion (A–F: did the four phases do what §④ asked?) **and** Physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN).
+**Dual verdict required in `APS06_VERDICT.md`:** Prompt completion (A–F: did the four phases do what §④ asked?) **and** Physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN).
 
 - ✅ **PASS (Class A: Derived / NATIVE):** seat depth defined and monotone with energy (zero inversions, P1); 13.6 eV ceiling recovered to < 50 ppm from `R_inf_derived` (P2); the overlap reconciled as provenance (P4). No fitted parameters; every constant from `laws.hpp`. **P3 contributes nothing to the verdict either way** (vacuous class — see the P3 correction block); it is recorded as a consistency check only.
 - ✅ **QUALIFIED (Class C: Convergence):** P1–P2 pass; molecular/nuclear absolute `s` only order-of-magnitude.
@@ -237,7 +237,7 @@ A failed phase is **PIVOT / KILL / OPEN** — never retro-PASS. An OPEN phase mu
 ```markdown
 ## Pre-Run Commitments — APS06
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: [0 — none permitted; flag any fit explicitly]
 - Engine namespaces: atomic:: (R_inf_derived, rydberg_energy_eV, bohr_radius, velocity_from_IE1, drag_factor),
                      measured:: (Ry_eV, R_inf, eV_to_J, MeV_to_J), nuclear:: (alpha_grammar, wedge)
@@ -270,7 +270,7 @@ A failed phase is **PIVOT / KILL / OPEN** — never retro-PASS. An OPEN phase mu
 - Post-hoc tolerance widening · coefficient plugs to hit 13.6 eV · relabelling OBSERVED-ANCHOR bands as DERIVED · hand-editing the alpha-grammar wedge · importing the "X-rays < gammas in energy" definition as a result · `G/M/GM`, wavefunctions, quarks/gluons, virtual particles, ΛCDM in the SDT chain.
 
 ### Dual verdict reminder
-`APS06_VERDICT.md` must carry **both** axes in its header: Prompt completion (A–F) and Physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN). An OPEN phase is never reported as PASS in the summary line.
+`APS06_VERDICT.md` must carry **both** axes in its header: Prompt completion (A–F) and Physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN). An OPEN phase is never reported as PASS in the summary line.
 
 ---
 

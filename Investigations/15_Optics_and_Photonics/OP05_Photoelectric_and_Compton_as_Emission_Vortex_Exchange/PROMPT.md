@@ -27,7 +27,7 @@
    `λ_C` off 2.426 pm by >0.1%; angular shift off `λ_C(1−cosθ)` by >0.1%; absorption time not
    sub-attosecond; or any result requiring a point photon to close.
 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class
-   (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN), per phase, no repainting a fired test.
+   (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN), per phase, no repainting a fired test.
 
 ### Anti-tautology firewall
 
@@ -138,7 +138,7 @@ emission = the reverse exchange), pair-production reframes. **Lateral:** E57 (Ch
 ```markdown
 ## Pre-Run Commitments — OP05
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: 0 (W and m_e are MEASURED-INPUT; h is the tick→energy conversion, not a fit)
 - Engine namespaces used: law_VI:: (electron vortex → λ_C), depth_closure:: (emission relay), measured:: (h, m_e, c)
 - Phase thresholds (committed before run):
@@ -158,7 +158,7 @@ emission = the reverse exchange), pair-production reframes. **Lateral:** E57 (Ch
 | Any close requires a point photon | re-express as extended-emission↔vortex bookkeeping | **KILL** the no-particle claim, report it | smuggle an `h/λ` quantum / field operator |
 | P3 prompt timing shows a real delay | check the relay coherence time; is multi-tick build-up forced? | **OPEN** the timing claim | ignore the measured delay |
 | W or m_e needed beyond MEASURED-INPUT | keep as measured anchor (C on magnitude, A on mechanism) | **DEFER** the magnitude | call a fitted `W` derived |
-| Rivals match but SDT only reproduces | label **DEGENERATE** honestly | — | claim Class A |
+| A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 
 ### Allowed adjustments
 

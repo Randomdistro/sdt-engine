@@ -25,7 +25,7 @@
    extinction floor not at machine zero); three-polariser revival absent; QWP fails linear↔circular;
    optical-activity rotation with the wrong handed sign.
 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class
-   (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN), per phase, no repainting a fired test.
+   (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN), per phase, no repainting a fired test.
 
 ### Anti-tautology firewall
 
@@ -135,7 +135,7 @@ projection). **Framework:** `Theory/00_Ruleset.md`, `Theory/05` audit spine.
 ```markdown
 ## Pre-Run Commitments — OP04
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: 0 in the projection chain (material `Δn`/retardance = MEASURED-INPUT if used)
 - Engine namespaces used: depth_closure:: (n, c_local), law_V:: (transverse budget), EMC03 handedness
 - Phase thresholds (committed before run):
@@ -155,7 +155,7 @@ projection). **Framework:** `Theory/00_Ruleset.md`, `Theory/05` audit spine.
 | P4 activity handed sign wrong | re-anchor the sign to EMC03 ± redirection, not a chosen convention | **OPEN** the chiral-lattice link | flip the sign by fiat to match data |
 | Any result needs photon spin ±ℏ | re-express via transverse orientation + handedness | **KILL** the no-spin claim, report it | smuggle a spin operator / Stokes axiom |
 | Material `Δn` needed but unpredicted | use measured `Δn` as MEASURED-INPUT (C-class on magnitude) | **DEFER** the magnitude | call a fitted `Δn` "derived" |
-| Rivals match but SDT only reproduces | label **DEGENERATE** honestly | — | claim Class A |
+| A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 
 ### Allowed adjustments
 

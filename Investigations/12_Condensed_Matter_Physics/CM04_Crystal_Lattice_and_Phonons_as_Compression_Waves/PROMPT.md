@@ -25,7 +25,7 @@
 4. **What would prove us wrong?** — §⑧: three falsifiers with numeric triggers and real failure
    modes — the `T³` exponent (T2) and the `θ_D(c_s)` prediction (T3) can both come out wrong.
 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class
-   (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN), per phase, with no repainting of a fired test.
+   (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN), per phase, with no repainting of a fired test.
 
 ## Question
 
@@ -127,7 +127,7 @@ Not required for the verdict; this is the payoff of doing it well.
 ```markdown
 ## Pre-Run Commitments — CM04
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: 0 in the mode-counting chain (c_s and lattice spacing are MEASURED-INPUT, not fits)
 - Engine namespaces actually used: FD05 c_s, bridge, TD06 mode counting; lattice_structure.hpp (cutoff geometry)
 - Phase thresholds (committed before run):
@@ -145,7 +145,7 @@ Not required for the verdict; this is the payoff of doing it well.
 | P2 exponent p ≠ 3.0 ± 0.1 | recheck the mode-sphere dimensionality (g(ω)∝ω² in 3D) | **OPEN**: report p; still A on P1 if 3R holds | import an oscillator partition to manufacture T³ and grade A |
 | P2 T³ only appears with an imported quantisation | down-grade to **C** (the import is the postulate) | — | claim NATIVE while importing the oscillator |
 | P3 θ_D off >2× for any solid | recheck c_s (FD05) and n; verify the one-spacing cutoff | **OPEN** θ_D; report which solid fails | refit the cutoff multiplier per solid |
-| Rivals (Debye/Einstein) match but SDT only reproduces | label **DEGENERATE** honestly | — | claim Class A |
+| A rival (Debye/Einstein) lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 | Upstream dependency missing (FD05 c_s not run) | **DEFER** P3/P4; cite dependency ID | — | fabricate c_s |
 
 ### Allowed adjustments

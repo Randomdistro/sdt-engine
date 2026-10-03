@@ -12,7 +12,7 @@
 **No FABRICATED or BROKEN result in this region.** In sharp contrast to APS04 (non-compiling tool, hand-typed
 "machine-precision" PASS), every *executed* GOM tool that I built **compiles clean and its stdout matches the
 committed results file** (GOM08 and GOM06-chirp reproduced number-for-number this session). The GOM authors are
-mostly scrupulous about labelling GR-agreement as **CONVERGENCE / DEGENERATE**, and GOM07 in particular is a model
+mostly scrupulous about labelling GR-agreement as **CONVERGENCE / SHARED-INPUT**, and GOM07 in particular is a model
 of honesty. The real faults are two **INFLATED verdicts** (GOM09 headline, GOM11 amplitude) and a family of
 **IDENTITY/CIRCULAR "PASS" lines** that are true-by-construction and should not be scored as predictions.
 

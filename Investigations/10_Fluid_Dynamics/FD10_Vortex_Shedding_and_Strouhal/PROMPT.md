@@ -12,7 +12,7 @@
 2. **Why does it matter?** — Standard fluid mechanics records the `St ≈ 0.2` plateau empirically with no first-principles account; if it is one ratio of two SDT-native times (relaxation vs advection), the plateau, the `f ∝ U/D` scaling, the low-Re Roshko/Williamson rise, and lock-in all follow from one mechanism. It is the capstone wiring of PPT06 (traction), FD06 (separation), and FD03 (Re regime).
 3. **How will we find out?** — Five gated phases (§④). **Honesty up front:** the relaxation/advection ratio carries a dimensionless clock constant (call it `k_clock`); if it must be set to land 0.2 it is **CALIBRATED(1)** and the grade caps at C — the plateau *flatness* and the `f∝U/D` scaling remain the genuinely-predictive content even when the value is calibrated.
 4. **What would prove us wrong?** — §⑧, five falsifiers with real failure modes: the clock giving *no* plateau (St drifts with Re on the plateau range); the wrong `f`–`U` power; `St_∞` off by >2× with no reconciling geometry; the low-Re curve bending the wrong way; or lock-in predicted where none is observed.
-5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN), per phase, no repainting a fired test.
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN), per phase, no repainting a fired test.
 
 **Domain**: Fluid Dynamics (SDT lattice mechanics) · **Status**: SPEC · **Author**: J. C. Harvey, Melbourne
 
@@ -180,7 +180,7 @@ Five phases, each gated. Run them in order; a failed checkpoint stops the chain 
 ```markdown
 ## Pre-Run Commitments — FD10
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: 0 if `k_clock` is DERIVED (A); exactly 1 if `k_clock` is tuned to 0.2 (C) — state the **total** count, no self-contradiction across sections
 - Engine namespaces actually used: law_VI::traction (ℓ=2 wake, ω_demand), law_V (v_circ²+v_trans²=c² vortex-spin cap), law_I (P_conv ambient), bridge (koppa, k, z); ν from FD02, separation from FD06, gear functional from NP06
 - Phase thresholds (committed before run):
@@ -197,7 +197,7 @@ Five phases, each gated. Run them in order; a failed checkpoint stops the chain 
 | P2 `k_clock` cannot be derived from geometry | set `k_clock` to land 0.2, flag **CALIBRATED(1)**, cap C | **OPEN** the `k_clock` derivation | tune `k_clock` and grade A |
 | P2 `St_∞` off `>2×` with derived `k_clock` | recheck the `ℓ=2`-wake/separation-angle inputs | **KILL** (relaxation argument wrong) | widen the factor-2 band post-hoc |
 | P1/P3 wrong `f`–`U` power or hidden Re-dependence | re-derive the two competing times | **KILL** (clock mis-built) | hide the Re-drift |
-| Rivals match but SDT doesn't beat | Label **DEGENERATE** honestly | — | Claim Class A |
+| A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 | Upstream dependency missing (NP06 `k_clock`, FD06 separation) | **DEFER** phase; cite dependency ID | — | Fake PASS |
 
 ### Allowed adjustments

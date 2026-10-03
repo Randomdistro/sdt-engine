@@ -12,7 +12,7 @@
 2. **Why does it matter?** — This is the **headline experiment** of the 9-investigation flux-resonator set. If the rate climbs with coherence faster than G_F allows, the W-as-object in **this one process** was a re-description of a medium-grounding event (PPT10: a neutrino is straight-running electron-stuff; it can ground into a wiggling electron in the one substrate with no grain). It does **not** touch g−2, the Lamb shift, or Casimir — the W stays a perfectly good propagator everywhere else. This is a **wedge**, not a wrecking ball.
 3. **How will we find out?** — Four gated phases in §④: incoherent baseline rate → coherent-enhanced rate (N vs N²) → divergence population N* against the SQUID femtotesla floor → verdict bucket (tabletop / building / reactor-next-door). Native grammar selection rule first (Be-7 = node (3,−1) underflow), then the rate fork.
 4. **What would prove us wrong?** — §⑧ falsifiers with numeric triggers: rate tracks G_F not coherence (KILL the wedge); no magnetisation step above fT at achievable N (PIVOT or OPEN); coherence cannot span the BEC (DEFER to CEνNS scale).
-5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN).
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN).
 
 ---
 
@@ -159,7 +159,7 @@ Use canonical labels; tag every printed number (§5 protocol). **Dual verdict re
 ```markdown
 ## Pre-Run Commitments — NP18
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: [0 or 1 — only the B_step flux-per-atom absolute, pending NP19/NP20]
 - Engine namespaces: nuclear.hpp alpha_grammar, neutrino.hpp open-winding, laws::measured
 - Phase thresholds (committed before run):
@@ -184,7 +184,7 @@ Use canonical labels; tag every printed number (§5 protocol). **Dual verdict re
 | **P3 (T3)** ρ_coh(N\*) < 1 (can't span BEC) | Tighten N/density to raise L-coverage; recheck λ_ν | **DEFER** to CEνNS scale (honest boundary) | Claim N² span as established |
 | **T1** rate ∝ G_F, flat vs coherence | — (no native rescue) | **KILL** the wedge with numbers | Retro-fit a coherence slope |
 | **T5** stripped-Be-7 signatures <3× apart | Sharpen deep-K vs 2s flux model (NP19/NP20) | **OPEN** the manufacture-vs-reshuffle sub-claim | Claim the fork without the factor |
-| Rival (G_F + CEνNS) matches, SDT doesn't beat | Label **DEGENERATE** honestly | — | Claim Class A |
+| A rival (G_F + CEνNS) lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 | Upstream NP19/NP20/PPT10 missing | **DEFER** the affected phase; cite blocker ID | — | Fake PASS on the read-out |
 
 ### Allowed adjustments
@@ -195,7 +195,7 @@ Use canonical labels; tag every printed number (§5 protocol). **Dual verdict re
 - Post-hoc tolerance widening · plugging N\* or the rate to a target · IDENTITY-PASS · importing G/M/GM/ψ/field/**G_F** into the SDT chain (G_F is OBSERVED-comparison only) · relabelling the 478 keV gamma · over-claiming "virtual particles are fictions."
 
 ### Dual verdict reminder
-Report **prompt completion (A–F)** separately from **physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN)**. A KILLed wedge with a complete tool is still prompt-completion A — honesty about the physics is the point.
+Report **prompt completion (A–F)** separately from **physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN)**. A KILLed wedge with a complete tool is still prompt-completion A — honesty about the physics is the point.
 
 ---
 

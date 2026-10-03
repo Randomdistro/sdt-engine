@@ -46,7 +46,7 @@
 - **GD05** — Prompt completion **A** · Physics class **NEGATIVE (single-regime, HONEST) / BORROW (twin M4 = MOND)** · Recovery: single-regime correctly UNPAID; twin M4 needs the crossover derived natively before "zero-param" stands · Cascade root: the MOND interpolation shape + a₀, self-flagged as owed.
 - **GD06** — Prompt completion **A** · Physics class **CONVERGENCE (Class C, honest)** · no fault.
 - **SAR02** — Prompt completion **A** · Physics class **CONVERGENCE (Class C, honest)**; one MINOR identity-check (Wien) · no material fault.
-- **SAR05** — Prompt completion **A** · Physics class **CONVERGENCE / DEGENERATE (honest, well-labeled)** · no fault.
+- **SAR05** — Prompt completion **A** · Physics class **CONVERGENCE / SHARED-INPUT (honest, well-labeled)** · no fault.
 
 ## Note on the region's honesty gradient
 

@@ -27,7 +27,7 @@
    literature Madelung) constant as a fitted primitive, wrong sign, or post-hoc tuning of the
    occlusion-pressure scale to hit 787 kJ/mol (IDENTITY-PASS).
 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class
-   (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN), logged in `CH02_VERDICT.md`.
+   (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN), logged in `CH02_VERDICT.md`.
 
 ## ⓪⁺ Anti-Tautology Firewall *(the load-bearing constraint)*
 
@@ -134,7 +134,7 @@ energy (e.g. KCl or MgO) or a metallic radius down a group from APS01 k-factors.
 ```markdown
 ## Pre-Run Commitments — CH02
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: [0 or list each param — max per §⑤]
 - Engine namespaces: EMC04 electropause, CH01 wake balance, no MO/LCAO
 - Phase thresholds (committed before run): P1 ionic/covalent split correct for >=15 ref pairs · P2 NaCl lattice energy within 15% of 787 kJ/mol, correct sign · P3 Na radius+cohesion within 25% · P4 novel lattice energy (KCl/MgO) within 20%
@@ -148,7 +148,7 @@ energy (e.g. KCl or MgO) or a metallic radius down a group from APS01 k-factors.
 | Phase 0 sanity check fails | Fix units/engine refs; verify `laws.hpp` symbols | STOP — report blocker | Fit to target |
 | Native mechanism off > committed % | Alternative route in §④; document ADJ-### | **OPEN** or **KILL** hypothesis | RETRO-PASS |
 | Lattice sum won't cohere without Coulomb primitive | re-derive pairwise occlusion balance from Law III geometry | **OPEN** ionic cohesion | import Coulomb constant, call it NATIVE |
-| Rivals match but SDT doesn't beat | Label **DEGENERATE** honestly | — | Claim Class A |
+| A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 | Upstream dependency missing (FLM10, etc.) | **DEFER** phase; cite dependency ID | — | Fake PASS |
 
 ### Allowed adjustments

@@ -24,7 +24,7 @@
 4. **What would prove us wrong?** — §⑧: three falsifiers with numeric triggers and real failure
    modes — the viscosity drop (T1) and the circulation quantum (T2) can both come out wrong.
 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class
-   (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN), per phase, with no repainting of a fired test.
+   (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN), per phase, with no repainting of a fired test.
 
 ## Question
 
@@ -124,7 +124,7 @@ Not required for the verdict; this is the payoff of doing it well.
 ```markdown
 ## Pre-Run Commitments — CM05
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: 0 in the κ chain (T_λ and v_c absolute values may be CALIBRATED(1) — list them)
 - Engine namespaces actually used: FD02 κ, law_III (occlusion), law_VI (wake), CM01 lock mechanism, CM04 thermal disorder, EMC03 expulsion
 - Phase thresholds (committed before run):
@@ -142,7 +142,7 @@ Not required for the verdict; this is the payoff of doing it well.
 | P2 η → 0 only with an imported ψ | down-grade to **C** honestly (ψ is the postulate) | — | claim NATIVE while importing ψ |
 | P3 κ divisor ≠ 1 (gives h/2m) | re-examine single-atom phase single-valuedness vs the pair count | **OPEN**: report the divisor | retro-fit to h/m |
 | P4 v_c off >2× | recheck the excitation/roton onset as an occlusion threshold | **OPEN** v_c; report it | claim within-2× by widening |
-| Rivals (Landau/GP) match but SDT only reproduces | label **DEGENERATE** honestly | — | claim Class A |
+| A rival (Landau/GP) lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 | Upstream dependency missing (CM01/CM04 not run) | **DEFER** the affected phase; cite dependency ID | — | fake the transition |
 
 ### Allowed adjustments

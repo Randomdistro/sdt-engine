@@ -25,7 +25,7 @@ Standard optics and general relativity usually treat refraction and gravitationa
 | 2 | Why it matters | Unifies OP01 with GD06/GOM01; falsifiable solar fold at OP01b |
 | 3 | How tested | Phases 0–4 per PROMPT.md; no lab-\(n\) inputs |
 | 4 | What would falsify? | Fermat ≠ Snell; limb off >1%; native water \(n\) wrong sign/route |
-| 5 | Done? | Prompt grade **C**; physics **CONVERGENCE/DEGENERATE** + **OPEN** |
+| 5 | Done? | Prompt grade **C**; physics **CONVERGENCE/SHARED-INPUT** + **OPEN** |
 
 ---
 
@@ -149,7 +149,7 @@ Thin-lens illustration: \(R = 0.20\,\text{m}\), \(n = 1.5\) → \(f = 0.200\,\te
 | **C** | Ph 2–3 limb via closed form; Ph 1 OPEN | **Yes** |
 | D | Phase 0 + Snell identity only | — |
 
-**Prompt completion: C.** Physics class: **CONVERGENCE/DEGENERATE** (limb) + **OPEN** (matter).
+**Prompt completion: C.** Physics class: **CONVERGENCE/SHARED-INPUT** (limb) + **OPEN** (matter).
 
 ### 5.3 Provenance ledger
 

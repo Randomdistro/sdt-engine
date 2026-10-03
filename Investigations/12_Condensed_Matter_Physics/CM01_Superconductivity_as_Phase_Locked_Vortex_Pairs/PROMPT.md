@@ -24,7 +24,7 @@
 4. **What would prove us wrong?** — §⑧: four falsifiers with numeric triggers and real failure modes —
    the pair-binding test (T2) and the isotope exponent (T4) can both come out the wrong way.
 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class
-   (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN), per phase, with no repainting of a fired test.
+   (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN), per phase, with no repainting of a fired test.
 
 ---
 
@@ -158,7 +158,7 @@ Not required for the verdict; this is the payoff of doing it well.
 ```markdown
 ## Pre-Run Commitments — CM01
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: 0 in the P2 native pairing chain (T_c absolute value may be CALIBRATED(1) — list it)
 - Engine namespaces actually used: law_III (occlusion drag), law_VI (vortex topology/wake), FD05 c_s, FD02 κ, EMC03 (swirl expulsion)
 - Phase thresholds (committed before run):
@@ -176,7 +176,7 @@ Not required for the verdict; this is the payoff of doing it well.
 | P2 binds only if a gap is assumed | down-grade to **C** honestly (the import is the postulate) | — | claim A while importing the gap |
 | P4 Φ₀ divisor ≠ 2 (gives h/e) | re-examine the phase single-valuedness count (one vortex vs the pair) | **OPEN**: report the actual divisor | retro-fit to h/2e |
 | P4 isotope α ≠ −0.5 ± 0.1 | check the c_s ∝ M^{−½} locking-energy link | **OPEN** the isotope channel; report α | claim −½ when the run gives 0 |
-| Rivals (BCS) match but SDT only reproduces, adds nothing | label **DEGENERATE** honestly | — | claim Class A |
+| A rival (BCS) lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 | Upstream dependency missing (FD05 c_s, FLM10) | **DEFER** the affected phase; cite dependency ID | — | fabricate the binding curve |
 
 ### Allowed adjustments

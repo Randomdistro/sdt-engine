@@ -23,7 +23,7 @@
 4. **What would prove us wrong?** — §⑧ falsifiers with numeric triggers and real failure modes,
    including the inherited anti-tautology firewall (F4) on the occupation factor.
 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class
-   (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN), per phase, no repainting a fired test.
+   (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN), per phase, no repainting a fired test.
 
 ## Question
 
@@ -137,7 +137,7 @@ heat bath). **Related:** [[TD01]] (entropy of radiation `S = 4/3 · aT³V`), [[T
 ```markdown
 ## Pre-Run Commitments — TD06
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: 0 (no fitted prefactor; σ and b must come from the mode integral)
 - dependency-traced input: k_B only (README). c and h(=ε) are EARNED bridges (Law I), not free params —
     document them as such; if h enters as a free oscillator constant the result is F.
@@ -158,7 +158,7 @@ heat bath). **Related:** [[TD01]] (entropy of radiation `S = 4/3 · aT³V`), [[T
 | P2 fitted `T`-exponent ≠ 4.00±0.02 | recheck the 3D mode-density × linear dispersion | **OPEN** the `T⁴` origin | force exponent to 4 |
 | P3 `b` only matches by inserting `4.965` | re-extremise the spectral density natively | **OPEN** Wien | hard-code the root |
 | occupation factor rests on an IMPORTED TD02, or Bose sum lifted from QM | grade TD06 **C** (CONVERGENCE) honestly | — | claim A; lean on SAR02 to lift it |
-| Rivals match but SDT only reproduces | label **DEGENERATE** honestly | — | Claim Class A |
+| A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 | Upstream missing (TD02 occupation not run) | **DEFER** the occupation-weighted phases; cite dependency ID | — | Fake PASS |
 
 ### Allowed adjustments

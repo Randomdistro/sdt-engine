@@ -24,7 +24,7 @@
 4. **What would prove us wrong?** — §⑧: three falsifiers with numeric triggers and real failure
    modes — the plateau value (T1) and the "2"-is-two-vortices test (T2) can both come out wrong.
 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class
-   (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN), per phase, with no repainting of a fired test.
+   (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN), per phase, with no repainting of a fired test.
 
 ## Question
 
@@ -125,7 +125,7 @@ Not required for the verdict; this is the payoff of doing it well.
 ```markdown
 ## Pre-Run Commitments — CM06
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: 0 in the R_K / K_J chains (one O(1) channel/geometry factor may be CALIBRATED(1) — list it)
 - Engine namespaces actually used: law_VI (topology/winding), law_III (occlusion confinement), EMC03 (handedness), CM01 lock, CM02 ohm
 - Phase thresholds (committed before run):
@@ -143,7 +143,7 @@ Not required for the verdict; this is the payoff of doing it well.
 | P2 plateaus at non-integer ν | recheck the integer-count argument (a count cannot vary continuously) | **OPEN**: report the non-integer behaviour | hand-round ν to integers |
 | P3 Josephson divisor ≠ 2 (gives e/h) | re-examine the two-locked-vortex carrier (CM01 H3) | **OPEN**: report the divisor; do NOT import BCS 2e | retro-fit to 2e/h |
 | P3 "2" only via imported BCS 2e | down-grade to **C** honestly (the import is the postulate) | — | claim NATIVE while importing 2e |
-| Rivals (gauge/TKNN) match but SDT only reproduces | label **DEGENERATE** honestly | — | claim Class A |
+| A rival (gauge/TKNN) lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 | Upstream dependency missing (CM01/CM02 not run) | **DEFER** the affected phase; cite dependency ID | — | fake the plateau |
 
 ### Allowed adjustments

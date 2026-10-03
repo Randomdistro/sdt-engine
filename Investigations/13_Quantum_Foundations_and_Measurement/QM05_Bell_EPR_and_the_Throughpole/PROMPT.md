@@ -32,7 +32,7 @@
    disagrees-with-data FAIL; flat marginals WITH v>c constraint = the emergent result, since a
    rigidity constraint carries no free energy and controllability must be shown, not presumed.)**
 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class
-   (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN). **The expected landing is D/OPEN** — pre-declared,
+   (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN). **The expected landing is D/OPEN** — pre-declared,
    not repainted.
 
 ## Question
@@ -139,7 +139,7 @@ on EPR/GHZ/Leggett–Garg even if Phase 2 fails. *Success metric:* a clear OPEN 
 ```markdown
 ## Pre-Run Commitments — QM05
 - Prompt completion target: [A|B|C|D] (expected: D/OPEN — pre-declared)
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: 0 (the throughpole coupling is a structure under test, not a fit)
 - Engine namespaces used: handedness (EMC03 contra-handedness = shared hidden variable), QM07 SG axis, QM04 counts — NO ψ, NO collapse, NO atomic::
 - Phase thresholds (committed before run): P1 local S ≤ 2 (pre-declared shortfall) · P2 no-signalling marginal drift < statistical noise · P3 explicit A/C/D/F + OPEN

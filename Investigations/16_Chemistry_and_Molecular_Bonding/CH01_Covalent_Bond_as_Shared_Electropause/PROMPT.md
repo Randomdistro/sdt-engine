@@ -26,7 +26,7 @@
    anywhere in 0.4–1.2 Å; a root that lands `R_e` off by >20%; a **negative or zero** `D_e` (anti-bound);
    or VSEPR angles that cannot be reproduced without importing hybridisation. Each can genuinely fire.
 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class
-   (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN), per phase, with **no repainting a fired test**
+   (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN), per phase, with **no repainting a fired test**
    and **no widening the committed 5% / 20% tolerances after the run**.
 
 ---
