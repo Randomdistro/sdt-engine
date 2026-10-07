@@ -50,7 +50,7 @@ const VCLevels = (() => {
     ast: { r: [20, 32], spd: [110, 170], hp: 3, dmg: 12, pts: 25, name: 'ASTEROID' },
     moon: { r: [44, 58], spd: [65, 95], hp: 999, dmg: 35, pts: 60, name: 'MOON' },
     pla: { r: [84, 108], spd: [36, 52], hp: 999, dmg: 90, pts: 120, name: 'PLANET' },
-    wpn: { r: [7, 7], spd: [300, 380], hp: 1, dmg: 12, pts: 20, name: 'LANCE' },
+    wpn: { r: [7, 7], spd: [300, 380], hp: 1, dmg: 8, pts: 20, name: 'LANCE' },
   };
   const KINDS = ['met', 'ast', 'moon', 'pla', 'wpn'];
   const COST = { met: 1, ast: 2.2, moon: 5, pla: 12, wpn: 1.6 };

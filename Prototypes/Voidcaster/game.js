@@ -148,7 +148,7 @@
     const r = {
       i, L, t: 0, hz: [], bolts: [], fx: [], pk: [], score: 0, shake: 0, ev: VCLevels.buildWaves(L), evi: 0, warned: new Set(), cdRel: 0, relFx: 0,
       rnd: A.rng(99 + i), held: null, selV: 0, firing: false, fireT: 0, over: 0, result: null, absorbed: 0, diverted: 0, boss: null, budget: BUDGET(i), tail: 0,
-      hero: { x: 800, y: 340, vx: 0, vy: 0, hp: 5, inv: 0, face: 1, cast: 0, hurt: 0 },
+      hero: { x: 430, y: 330, vx: 0, vy: 0, hp: 5, inv: 0, face: 1, cast: 0, hurt: 0 },
       mission: makeMission(L),
       voids: [
         { id: 'A', x: 800, y: 430, vx: 0, vy: 0, r: 58, ang: -Math.PI / 2, on: true, isVoid: true },
@@ -342,7 +342,7 @@
     if (bo.variant === 2) bo.shield = (bo.t % 9) < 5; if (bo.variant === 3) bo.shield = bo.open <= 0;
     const throwAt = (kind, n = 1, gap = 0) => { for (let i = 0; i < n; i++) { const aim = pickAim(R.mission, R.rnd); const dx = aim.x - bo.x, dy = aim.y - bo.y, l = Math.hypot(dx, dy) || 1; const rr = HZ[kind].r[1]; const h = spawnHaz(kind, bo.x + dx / l * (bo.r + rr + 12), bo.y + dy / l * (bo.r + rr + 12), aim, Math.floor(R.rnd() * 1e6), { age: -0.2 - i * gap }); if (kind === 'wpn') { h.age = -0.4; } } VCAudio.play('warn'); };
     bo.a1 -= dt; bo.a2 -= dt; bo.a3 -= dt;
-    if (bo.a1 <= 0) { throwAt('wpn', bo.variant === 3 ? 5 : 3, 0.12); bo.a1 = bo.variant === 3 ? 5 : bo.variant === 2 ? 3.8 : 3.2; }
+    if (bo.a1 <= 0) { throwAt('wpn', bo.variant === 3 ? 5 : bo.variant === 2 ? 3 : 2, 0.12); bo.a1 = bo.variant === 3 ? 5 : bo.variant === 2 ? 3.8 : 3.2; }
     if (bo.a2 <= 0) { throwAt(bo.variant === 1 ? 'ast' : 'moon'); bo.a2 = bo.variant === 1 ? 5.5 : 7; }
     if (bo.a3 <= 0 && bo.variant === 3) { throwAt('pla'); bo.open = 3; bo.a3 = 14; }
     if (bo.hp <= 0) { bo.dead = true; boom(bo.x, bo.y, 80, ['#ffcf70', '#ff5fd2', '#fff', '#ece2d0'], 360); VCAudio.play('boom'); R.hz.forEach((h) => { h.dead = true; boom(h.x, h.y, 6, ['#fff'], 100); }); R.shake = 18; }
