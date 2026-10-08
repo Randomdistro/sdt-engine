@@ -1,13 +1,17 @@
 /* VOIDCASTER · game logic.
    Rules come from the A/B/C convergence toy: influx lines are cut by occluders, and bodies are driven into
-   the deficit by F = k r1^2 r2^2 / d^2 with mass r^3. Voidcaster's voids are crescents that turn to present
-   the relevant cross-section to the body they act on.
+   the deficit by F = k r1^2 r2^2 / d^2 with mass r^3. Voidcaster is the lure: the Dearth's mass homes on him.
+   He deploys up to three arcs (fixed-radius curved plates; resizing changes the arc LENGTH) and a kill zone,
+   a portal to a neutron star. Each arc acts through the cross-section it presents to the body it acts on.
    Author: James Christopher Tyndall, Melbourne. */
 'use strict';
 (() => {
   const { WORLDS, LEVELS, HZ, BUDGET } = VCLevels;
   const A = VCArt, F = VCFont;
-  const W = 1600, H = 900, BW = 640, BH = 360, S = BW / W, GP = 16800;
+  const W = 1600, H = 900, BW = 640, BH = 360, S = BW / W, GP = 16800, TH = 18;
+  const ARCS = [{ id: 'A', R: 84, s: 0.85 }, { id: 'B', R: 70, s: 0.7 }, { id: 'C', R: 60, s: 0.6 }];
+  const S_MIN = 0.25, S_MAX = 1.55;
+  const LURE = { met: 260, ast: 150, moon: 55, pla: 26, wpn: 300 };
   const cv = document.getElementById('c'), cx = cv.getContext('2d');
   const buf = document.createElement('canvas'); buf.width = BW; buf.height = BH;
   const b = buf.getContext('2d');
@@ -15,6 +19,21 @@
   const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
   const mass = (r) => Math.pow(r / 18, 3);
   const angDiff = (a, c) => { let d = (c - a) % (Math.PI * 2); if (d > Math.PI) d -= Math.PI * 2; if (d < -Math.PI) d += Math.PI * 2; return d; };
+
+  /* ---------- arcs ---------- */
+  const arcLen = (v) => 2 * v.s * v.R;
+  const arcRad = (v) => Math.max(10, v.R * Math.sin(Math.min(v.s, Math.PI / 2)));      // half-chord: equivalent radius
+  function arcProxies(v) {
+    const cxm = v.x - Math.cos(v.ang) * v.R, cym = v.y - Math.sin(v.ang) * v.R, n = Math.max(2, Math.ceil(arcLen(v) / 12)), out = [];
+    for (let i = 0; i <= n; i++) { const th = v.ang - v.s + (2 * v.s * i) / n; out.push({ x: cxm + Math.cos(th) * v.R, y: cym + Math.sin(th) * v.R, r: TH / 2 + 2, vx: v.vx, vy: v.vy }); }
+    return out;
+  }
+  function arcCross(v, dx, dy) {     // projected width of the arc seen along (dx,dy)
+    const d = Math.atan2(dy, dx); let lo = 9, hi = -9;
+    for (let i = 0; i <= 12; i++) { const s = Math.sin(v.ang - v.s + (2 * v.s * i) / 12 - d); if (s < lo) lo = s; if (s > hi) hi = s; }
+    return Math.max(12, v.R * (hi - lo));
+  }
+  function effR(src, tx, ty) { return src.isArc ? arcCross(src, tx - src.x, ty - src.y) / 2 : src.r; }
 
   /* ---------- save ---------- */
   let save = { stars: Array(30).fill(0) };
@@ -46,7 +65,6 @@
     for (let off = -990 + ((ang * 29) % 110); off <= 990; off += 110) LINES.push({ x: 800 + nx * off, y: 450 + ny * off, ux, uy, key: ang + off });
   }
   const segAmb = [], segEdgeT = [], segEdgeV = [], segPulse = [];
-  function crescentCut(v) { return { x: v.x - Math.cos(v.ang) * v.r * 0.5, y: v.y - Math.sin(v.ang) * v.r * 0.5, r: v.r * 0.82 }; }
   function interval(L, c) {
     const dx = c.x - L.x, dy = c.y - L.y, along = dx * L.ux + dy * L.uy, perp = -dx * L.uy + dy * L.ux;
     if (Math.abs(perp) >= c.r) return null;
@@ -57,14 +75,7 @@
     const EXT = 1200;
     for (const L of LINES) {
       const iv = [];
-      for (const o of occ) {
-        const a = interval(L, o); if (!a) continue;
-        if (o.cut) {
-          const c = interval(L, o.cut);
-          if (c) { if (c[0] > a[0]) iv.push([a[0], c[0], o.v]); if (c[1] < a[1]) iv.push([c[1], a[1], o.v]); continue; }
-        }
-        iv.push([a[0], a[1], o.v]);
-      }
+      for (const o of occ) { const a = interval(L, o); if (a) iv.push([a[0], a[1], o.v]); }
       if (!iv.length) { segAmb.push(L.x - L.ux * EXT, L.y - L.uy * EXT, L.x + L.ux * EXT, L.y + L.uy * EXT); continue; }
       iv.sort((p, q) => p[0] - q[0]);
       const m = []; for (const i of iv) { const l = m[m.length - 1]; if (l && i[0] <= l[1]) { if (i[1] > l[1]) { l[1] = i[1]; l[3] = i[2]; } } else m.push([i[0], i[1], i[2], i[2]]); }
@@ -85,18 +96,14 @@
     pass(segAmb, col, 0.10); pass(segEdgeT, col, 0.5); pass(segEdgeV, '#c89bff', 0.65); pass(segPulse, '#ffffff', 0.5);
     b.restore(); b.globalAlpha = 1;
   }
-  function pxCrescent(c, v, col, rim) {
-    const x = Math.round(v.x * S), y = Math.round(v.y * S), r = Math.max(2, Math.round(v.r * S));
-    const k = crescentCut({ x: v.x * S, y: v.y * S, r, ang: v.ang }); const kr = k.r;
-    for (let dy = -r; dy <= r; dy++) {
-      const w = Math.floor(Math.sqrt(r * r - dy * dy + r * 0.5));
-      const ky = y + dy - k.y; let cw = -1; if (Math.abs(ky) <= kr) cw = Math.floor(Math.sqrt(kr * kr - ky * ky));
-      c.fillStyle = col;
-      if (cw < 0) c.fillRect(x - w, y + dy, w * 2 + 1, 1);
-      else { const c0 = Math.round(k.x - cw), c1 = Math.round(k.x + cw); if (c0 > x - w) c.fillRect(x - w, y + dy, Math.min(c0, x + w + 1) - (x - w), 1); if (c1 < x + w) c.fillRect(Math.max(c1 + 1, x - w), y + dy, x + w - Math.max(c1 + 1, x - w) + 1, 1); }
-    }
-    if (rim) { c.fillStyle = rim; const tip = (s) => { const a = v.ang + s * (Math.PI / 2 + 0.55); c.fillRect(Math.round(x + Math.cos(a) * r), Math.round(y + Math.sin(a) * r), 1, 1); }; tip(1); tip(-1); const ax = Math.round(x + Math.cos(v.ang) * r), ay = Math.round(y + Math.sin(v.ang) * r); c.fillRect(ax, ay, 1, 1); }
+  function drawArc(c, v, held, selected) {
+    const cxm = (v.x - Math.cos(v.ang) * v.R) * S, cym = (v.y - Math.sin(v.ang) * v.R) * S, rr = v.R * S, steps = Math.ceil(arcLen(v) * S * 1.4);
+    const layer = (col, half, off) => { c.fillStyle = col; for (let i = 0; i <= steps; i++) { const th = v.ang - v.s + (2 * v.s * i) / steps; const x = Math.round(cxm + Math.cos(th) * (rr + off)), y = Math.round(cym + Math.sin(th) * (rr + off)); c.fillRect(x - half, y - half, half * 2 + 1, half * 2 + 1); } };
+    layer('#0d0618', 4, 0); layer(held ? '#c85ff0' : '#5a2fb0', 3, 0); layer(held ? '#ff5fd2' : '#8a5ff0', 2, 0.5); layer(held ? '#ffd0f0' : '#d8c8ff', 0, 2);
+    for (const s of [-1, 1]) { const th = v.ang + s * v.s; c.fillStyle = selected ? '#fff' : '#c89bff'; c.fillRect(Math.round(cxm + Math.cos(th) * rr) - 1, Math.round(cym + Math.sin(th) * rr) - 1, 3, 3); }
+    F.draw(c, v.id, Math.round(v.x * S) - Math.cos(v.ang) * 10, Math.round(v.y * S) - Math.sin(v.ang) * 10 - 3, selected ? '#fff' : '#d8c8ff', 1, 'c');
   }
+  const proxiesFor = (v) => arcProxies(v).map((p) => ({ x: p.x, y: p.y, r: TH / 2, v: true }));
 
   /* ---------- missions ---------- */
   function makeMission(L) {
@@ -145,25 +152,26 @@
   /* ---------- run ---------- */
   function newRun(i) {
     const L = LEVELS[i];
+    const mk = (k, x, y) => ({ id: ARCS[k].id, R: ARCS[k].R, s: ARCS[k].s, x, y, vx: 0, vy: 0, ang: -Math.PI / 2, on: L.unlock > k, lock: L.unlock <= k, isArc: true, r: 0 });
     const r = {
-      i, L, t: 0, hz: [], bolts: [], fx: [], pk: [], score: 0, shake: 0, ev: VCLevels.buildWaves(L), evi: 0, warned: new Set(), cdRel: 0, relFx: 0,
-      rnd: A.rng(99 + i), held: null, selV: 0, firing: false, fireT: 0, over: 0, result: null, absorbed: 0, diverted: 0, boss: null, budget: BUDGET(i), tail: 0,
+      i, L, t: 0, hz: [], fx: [], pk: [], score: 0, shake: 0, ev: VCLevels.buildWaves(L), evi: 0, warned: new Set(), cdFlare: 0, flare: 0, flareFx: 0,
+      rnd: A.rng(99 + i), held: null, selV: 0, over: 0, consumed: 0, boss: null, budget: BUDGET(i), tail: 0,
       hero: { x: 430, y: 330, vx: 0, vy: 0, hp: 5, inv: 0, face: 1, cast: 0, hurt: 0 },
       mission: makeMission(L),
-      voids: [
-        { id: 'A', x: 800, y: 430, vx: 0, vy: 0, r: 58, ang: -Math.PI / 2, on: true, isVoid: true },
-        { id: 'B', x: 560, y: 480, vx: 0, vy: 0, r: 42, ang: -Math.PI / 2, on: L.unlock >= 2, isVoid: true },
-        { id: 'C', x: 1040, y: 480, vx: 0, vy: 0, r: 34, ang: -Math.PI / 2, on: L.unlock >= 3, isVoid: true },
-      ],
+      portal: { x: 1180, y: 300, r: 46, pullR: 110, vx: 0, vy: 0 },
+      voids: [mk(0, 980, 400), mk(1, 700, 470), mk(2, 1250, 480)],
     };
+    r.voids.forEach((v) => { v.r = arcRad(v); });
     if (L.boss) { const v = L.boss; r.boss = { x: 800, y: 170, r: [0, 70, 80, 95][v], hp: [0, 30, 45, 90][v], max: [0, 30, 45, 90][v], variant: v, t: 0, a1: 2.5, a2: 5, a3: 7, hurt: 0, open: 0, shield: v === 2, pullR: 70, dead: false }; }
     return r;
   }
-  const bodyBudget = () => R.voids.filter((v) => v.on).reduce((s, v) => s + v.r * v.r, 0);
-  function resizeVoid(v, dr) {
-    const others = bodyBudget() - v.r * v.r; const maxR = Math.min(125, Math.sqrt(Math.max(0, R.budget - others)));
-    v.r = clamp(v.r + dr, 18, Math.max(18, maxR));
+  const usedLen = () => R.voids.filter((v) => v.on).reduce((s, v) => s + arcLen(v), 0);
+  function resizeArc(v, dLen) {
+    if (!v || !v.on) return;
+    const others = usedLen() - arcLen(v), room = Math.max(0, R.budget - others);
+    v.s = clamp(v.s + dLen / (2 * v.R), S_MIN, Math.min(S_MAX, Math.max(S_MIN, room / (2 * v.R)))); v.r = arcRad(v);
   }
+  const activeArcs = () => R.voids.filter((v) => v.on);
 
   function spawnHaz(kind, x, y, aim, seed, extra = {}) {
     const d = HZ[kind], rd = A.rng(seed);
@@ -172,7 +180,7 @@
     const dx = aim.x - x, dy = aim.y - y, l = Math.hypot(dx, dy) || 1; const spread = (rd() - 0.5) * 0.22;
     const c = Math.cos(spread), s = Math.sin(spread);
     const ux = (dx / l) * c - (dy / l) * s, uy = (dx / l) * s + (dy / l) * c;
-    const h = { kind, x, y, vx: ux * spd, vy: uy * spd, r, m: mass(r), hp: d.hp, age: 0, seed, ang: 0, spin: (rd() - 0.5) * 2, contact: 0, cv: null, hitT: 0, ...extra };
+    const h = { kind, x, y, vx: ux * spd, vy: uy * spd, r, m: mass(r), hp: d.hp, age: 0, seed, ang: 0, spin: (rd() - 0.5) * 2, topSpeed: spd, sink: -1, ...extra };
     h.spr = kind === 'wpn' ? null : A.bodySprite(kind, Math.max(2, Math.round(r * S)), seed);
     R.hz.push(h); return h;
   }
@@ -186,7 +194,7 @@
     R.fx.push({ t: 'ring', x, y, r: 6, life: 0.35, max: 0.35, col: cols[0] });
   }
   const pop = (x, y, txt, col = '#fff') => R.fx.push({ t: 'txt', x, y, txt, life: 0.9, max: 0.9, col });
-  function dmgMission(p, amount, x, y) {
+  function dmgMission(p, amount) {
     p.hp -= amount; p.flash = 0.25; R.shake = Math.min(14, R.shake + 3 + amount * 0.25);
     if (R.mission.type === 'critters') p.hp = 0;
     if (p.hp <= 0 && p.alive) { p.alive = false; boom(p.x, p.y, 24, ['#ffcf70', '#ff7a3c', '#fff'], 220); VCAudio.play('boom'); pop(p.x, p.y - 20, R.mission.type === 'critters' ? 'LOST' : 'DOWN', '#ff7a8a'); }
@@ -194,10 +202,8 @@
   function hazHitMission(h) {
     const M = R.mission, dmg = HZ[h.kind].dmg * (h.kind === 'moon' || h.kind === 'pla' ? h.r / HZ[h.kind].r[0] : 1);
     if (M.ground) {
-      const d = Math.hypot(h.x - M.ground.x, h.y - M.ground.y);
-      if (d < M.ground.r + h.r) {
-        let any = false;
-        for (const p of M.parts) if (p.alive) { const dx = Math.abs(p.x - h.x); const rg = h.kind === 'pla' ? 9999 : h.kind === 'moon' ? 260 : 130; if (dx < rg) { dmgMission(p, dmg * (1 - dx / (rg + 40)) * 1.2, h.x, h.y); any = true; } }
+      if (Math.hypot(h.x - M.ground.x, h.y - M.ground.y) < M.ground.r + h.r) {
+        for (const p of M.parts) if (p.alive) { const dx = Math.abs(p.x - h.x); const rg = h.kind === 'pla' ? 9999 : h.kind === 'moon' ? 260 : 130; if (dx < rg) dmgMission(p, dmg * (1 - dx / (rg + 40)) * 1.2); }
         return true;
       }
       return false;
@@ -205,26 +211,27 @@
     for (const p of M.parts) {
       if (!p.alive) continue;
       if (Math.hypot(h.x - p.x, h.y - p.y) < p.r + h.r) {
-        if (p.isReef) { for (const q of M.parts) if (q.alive && !q.isReef && Math.hypot(q.x - h.x, q.y - h.y) < (h.kind === 'pla' ? 700 : h.kind === 'moon' ? 260 : 110)) dmgMission(q, 1, h.x, h.y); return true; }
-        dmgMission(p, dmg, h.x, h.y); return true;
+        if (p.isReef) { for (const q of M.parts) if (q.alive && !q.isReef && Math.hypot(q.x - h.x, q.y - h.y) < (h.kind === 'pla' ? 700 : h.kind === 'moon' ? 260 : 110)) dmgMission(q, 1); return true; }
+        dmgMission(p, dmg); return true;
       }
     }
     return false;
   }
   function killHaz(h, how) {
     h.dead = true; const d = HZ[h.kind];
-    boom(h.x, h.y, 6 + Math.round(h.r / 4), h.kind === 'wpn' ? ['#ff3d7a', '#fff'] : ['#ffb04a', '#8a4a24', '#fff'], 120 + h.r);
-    if (how === 'shot' || how === 'absorb') { R.score += d.pts; pop(h.x, h.y - h.r, '+' + d.pts, how === 'absorb' ? '#8affc8' : '#fff'); if (how === 'absorb') R.absorbed++; }
-    if (how === 'shot' && h.kind === 'ast') for (let i = 0; i < 2; i++) { const m = spawnHaz('met', h.x + (i ? 10 : -10), h.y, { x: h.x + h.vx, y: h.y + h.vy }, h.seed + i, {}); m.vx = h.vx * 0.6 + (i ? 70 : -70); m.vy = h.vy * 0.6 + (i ? -40 : 40); }
-    if (h.kind !== 'met' && h.kind !== 'wpn' && Math.random() < 0.3) R.pk.push({ x: h.x, y: h.y, vx: h.vx * 0.2, vy: h.vy * 0.2, t: 0, kind: Math.random() < 0.5 ? 'heart' : 'patch' });
-    VCAudio.play('pop');
+    if (how === 'portal') {
+      boom(R.portal.x, R.portal.y, 14, ['#9ae0ff', '#fff', '#c89bff'], 200);
+      const sling = h.topSpeed > 520; const pts = Math.round(d.pts * (sling ? 1.5 : 1));
+      R.score += pts; R.consumed++; pop(h.x, h.y - 24, (sling ? 'SLINGSHOT +' : '+') + pts, sling ? '#ffe9a0' : '#8affc8');
+      const bo = R.boss; if (bo && !bo.dead) { const dm = 1 + 0.6 * Math.sqrt(h.m); bo.hp -= dm; bo.hurt = 0.2; pop(bo.x, bo.y + bo.r, '-' + Math.round(dm), '#ff9ad0'); }
+      VCAudio.play('absorb');
+    } else {
+      boom(h.x, h.y, 6 + Math.round(h.r / 4), h.kind === 'wpn' ? ['#ff3d7a', '#fff'] : ['#ffb04a', '#8a4a24', '#fff'], 120 + h.r); VCAudio.play('pop');
+    }
+    if (how === 'portal' && h.kind !== 'met' && h.kind !== 'wpn' && Math.random() < 0.3) R.pk.push({ x: R.portal.x, y: R.portal.y + 50, vx: 0, vy: 30, t: 0, kind: Math.random() < 0.5 ? 'heart' : 'patch' });
   }
 
   /* ---------- physics ---------- */
-  function effR(src, tx, ty) {
-    if (!src.isVoid) return src.r; const dx = tx - src.x, dy = ty - src.y, l = Math.hypot(dx, dy) || 1;
-    const c = Math.abs(Math.cos(src.ang) * dx / l + Math.sin(src.ang) * dy / l); return src.r * Math.sqrt(0.35 + 0.65 * c);
-  }
   function bounce(a, c, e, ia, ic) {
     let dx = c.x - a.x, dy = c.y - a.y, d = Math.hypot(dx, dy); const contact = a.r + c.r; if (d >= contact) return false;
     if (d < 0.001) { dx = 1; dy = 0; d = 1; } const ux = dx / d, uy = dy / d, it = ia + ic; if (it === 0) return true;
@@ -233,105 +240,91 @@
     if (rv < 0) { const j = -(1 + e) * rv / it; a.vx -= j * ux * ia; a.vy -= j * uy * ia; c.vx += j * ux * ic; c.vy += j * uy * ic; }
     return true;
   }
-  function aimThreat() {
-    // crescents turn the convex side toward the nearest approaching body
-    const M = R.mission, src = pullSources(M)[0] || { x: 800, y: 600 };
-    let best = null, bd = 1e9;
-    for (const h of R.hz) { if (h.dead) continue; const d = Math.hypot(h.x - src.x, h.y - src.y); const closing = (src.x - h.x) * h.vx + (src.y - h.y) * h.vy; if (closing > 0 && d < bd) { bd = d; best = h; } }
+  function aimThreat(v) {
+    // the arc turns its convex side toward the nearest body
+    let best = null, bd = 900;
+    for (const h of R.hz) { if (h.dead || h.sink >= 0) continue; const d = Math.hypot(h.x - v.x, h.y - v.y); if (d < bd) { bd = d; best = h; } }
     return best;
   }
   function step(dt) {
-    const hero = R.hero, voids = R.voids.filter((v) => v.on), hz = R.hz;
-    const anchors = pullSources(R.mission); if (R.boss && !R.boss.dead) anchors.push({ x: R.boss.x, y: R.boss.y, r: 0, pullR: R.boss.pullR });
-    const dyn = voids.concat(hz);
-    for (const v of voids) { const th = aimThreat(); let want = th ? Math.atan2(th.y - v.y, th.x - v.x) : -Math.PI / 2; v.ang += angDiff(v.ang, want) * Math.min(1, 9 * dt); }
+    const hero = R.hero, arcs = activeArcs();
+    const act = R.hz.filter((h) => h.sink < 0), dyn = arcs.concat(act);
+    const anchors = pullSources(R.mission).concat([R.portal]); if (R.boss && !R.boss.dead) anchors.push({ x: R.boss.x, y: R.boss.y, r: 0, pullR: R.boss.pullR });
+    for (const v of arcs) { const th = aimThreat(v); const want = th ? Math.atan2(th.y - v.y, th.x - v.x) : Math.atan2(hero.y - v.y, hero.x - v.x); v.ang += angDiff(v.ang, want) * Math.min(1, 7 * dt); }
+    const flareK = R.flare > 0 ? 2.5 : 1, lureR = R.flare > 0 ? 1500 : 1000;
     const acc = dyn.map(() => [0, 0]);
     for (let i = 0; i < dyn.length; i++) {
       const a = dyn[i];
       for (let j = i + 1; j < dyn.length; j++) {
-        const c = dyn[j]; if (a.isVoid && c.isVoid) { /* voids share a budget and do not attract each other */ continue; }
+        const c = dyn[j]; if (a.isArc && c.isArc) continue;
         const dx = c.x - a.x, dy = c.y - a.y; const dist = Math.max(Math.hypot(dx, dy), a.r + c.r + 2), d2 = dist * dist, ux = dx / dist, uy = dy / dist;
         const ra = effR(a, c.x, c.y), rc = effR(c, a.x, a.y);
         const fa = GP * rc * rc / (a.r * d2), fc = GP * ra * ra / (c.r * d2);
         acc[i][0] += ux * fa; acc[i][1] += uy * fa; acc[j][0] -= ux * fc; acc[j][1] -= uy * fc;
       }
-      if (!a.isVoid) for (const s of anchors) {
-        const dx = s.x - a.x, dy = s.y - a.y; const dist = Math.max(Math.hypot(dx, dy), a.r + s.pullR * 0.5 + 2), f = GP * s.pullR * s.pullR / (a.r * dist * dist);
-        acc[i][0] += dx / dist * f; acc[i][1] += dy / dist * f;
+      if (!a.isArc) {
+        for (const s of anchors) {
+          const dx = s.x - a.x, dy = s.y - a.y; const dist = Math.max(Math.hypot(dx, dy), a.r + s.pullR * 0.5 + 2), f = GP * s.pullR * s.pullR / (a.r * dist * dist);
+          acc[i][0] += dx / dist * f; acc[i][1] += dy / dist * f;
+        }
+        const dx = hero.x - a.x, dy = (hero.y - 30) - a.y, d = Math.hypot(dx, dy) || 1;
+        if (d < lureR) { const k = LURE[a.kind] * flareK * (1 + R.i * 0.01) * (1 - 0.6 * d / lureR); acc[i][0] += dx / d * k; acc[i][1] += dy / d * k; }
       }
-      if (a.kind === 'wpn' && !a.dead) { const t = pickAim(R.mission, () => 0.5); const dx = t.x - a.x, dy = t.y - a.y, l = Math.hypot(dx, dy) || 1; acc[i][0] += dx / l * 90; acc[i][1] += dy / l * 90; }
     }
     dyn.forEach((a, i) => {
-      if (a.isVoid) {
+      if (a.isArc) {
         if (a === R.held) { const nx = a.x + (mouse.x - a.x) * Math.min(1, 20 * dt), ny = a.y + (mouse.y - a.y) * Math.min(1, 20 * dt); a.vx = clamp((nx - a.x) / dt, -1400, 1400); a.vy = clamp((ny - a.y) / dt, -1400, 1400); a.x = nx; a.y = ny; return; }
         a.vx *= Math.exp(-0.9 * dt); a.vy *= Math.exp(-0.9 * dt);
       }
       a.vx += acc[i][0] * dt; a.vy += acc[i][1] * dt;
       const sp = Math.hypot(a.vx, a.vy); if (sp > 760) { a.vx *= 760 / sp; a.vy *= 760 / sp; }
       a.x += a.vx * dt; a.y += a.vy * dt;
-      if (a.isVoid) { if (a.x < a.r) { a.x = a.r; a.vx = Math.abs(a.vx) * 0.5; } if (a.x > W - a.r) { a.x = W - a.r; a.vx = -Math.abs(a.vx) * 0.5; } if (a.y < a.r) { a.y = a.r; a.vy = Math.abs(a.vy) * 0.5; } if (a.y > H - a.r) { a.y = H - a.r; a.vy = -Math.abs(a.vy) * 0.5; } }
-      else { a.age += dt; a.ang += a.spin * dt; }
+      if (a.isArc) { a.x = clamp(a.x, 20, W - 20); a.y = clamp(a.y, 20, H - 20); }
+      else { a.age += dt; a.ang += a.spin * dt; if (sp > a.topSpeed) a.topSpeed = sp; }
     });
+    if (R.held === R.portal) { const p = R.portal; p.x += (mouse.x - p.x) * Math.min(1, 14 * dt); p.y += (mouse.y - p.y) * Math.min(1, 14 * dt); }
+    for (const h of R.hz) if (h.sink >= 0) {                     // neutron-star spaghettification
+      h.sink += dt; const k = Math.min(1, dt * 9); h.x += (R.portal.x - h.x) * k; h.y += (R.portal.y - h.y) * k; if (h.sink > 0.4 && !h.dead) killHaz(h, 'portal');
+    }
     // collisions
-    for (let i = 0; i < hz.length; i++) {
-      const h = hz[i]; if (h.dead) continue; h.cv = null;
-      for (let j = i + 1; j < hz.length; j++) { const o = hz[j]; if (!o.dead) bounce(h, o, 0.85, 1 / h.m, 1 / o.m); }
-      for (const v of voids) {
-        const touch = bounce(h, v, 0.6, 1 / h.m, v === R.held ? 0 : 1 / mass(v.r));
-        if (touch) { h.cv = v; h.contact += dt; } else if (h.cv === v) h.cv = null;
-        if (touch && h.contact > 1.4 + h.r / 40 && v.r >= h.r * 0.7 && h.kind !== 'wpn') { killHaz(h, 'absorb'); VCAudio.play('absorb'); break; }
+    for (let i = 0; i < act.length; i++) {
+      const h = act[i]; if (h.dead) continue;
+      if (Math.hypot(h.x - R.portal.x, h.y - R.portal.y) < R.portal.r + h.r * 0.2) { h.sink = 0; h.vx = h.vy = 0; continue; }
+      for (let j = i + 1; j < act.length; j++) { const o = act[j]; if (!o.dead && o.sink < 0) bounce(h, o, 0.85, 1 / h.m, 1 / o.m); }
+      for (const v of arcs) {
+        const im = v === R.held ? 0 : 1 / mass(v.r);
+        for (const p of arcProxies(v)) { const x0 = p.x, y0 = p.y; if (bounce(h, p, 0.6, 1 / h.m, im)) { v.x += p.x - x0; v.y += p.y - y0; v.vx = p.vx; v.vy = p.vy; } }
       }
-      if (h.dead) continue; if (!h.cv) h.contact = Math.max(0, h.contact - dt * 2);
-      for (const v of voids) for (const o of voids) if (v !== o) bounce(v, o, 0.5, v === R.held ? 0 : 1 / mass(v.r), o === R.held ? 0 : 1 / mass(o.r));
-      if (hazHitMission(h)) { killHaz(h, 'hit'); R.diverted--; continue; }
+      if (hazHitMission(h)) { killHaz(h, 'hit'); continue; }
       const bo = R.boss;
       if (bo && !bo.dead && h.age > 0.9 && Math.hypot(h.x - bo.x, h.y - bo.y) < bo.r + h.r) {
         const mom = h.m * Math.hypot(h.vx, h.vy) / 300; bo.hp -= Math.max(0.4, mom); bo.hurt = 0.2; R.shake = Math.min(14, R.shake + 4); pop(h.x, h.y, '-' + Math.max(1, Math.round(mom)), '#ff9ad0');
         if (h.kind === 'met' || h.kind === 'wpn' || h.kind === 'ast') killHaz(h, 'boss'); else { const dx = h.x - bo.x, dy = h.y - bo.y, l = Math.hypot(dx, dy) || 1; h.vx = dx / l * 120; h.vy = dy / l * 120; h.x = bo.x + dx / l * (bo.r + h.r + 2); h.y = bo.y + dy / l * (bo.r + h.r + 2); }
       }
-      if (hero.inv <= 0 && Math.hypot(h.x - hero.x, h.y - hero.y) < 22 + h.r) {
-        hero.hp--; hero.inv = 1.3; hero.hurt = 0.4; VCAudio.play('hurt'); R.shake = 10; const dx = hero.x - h.x, dy = hero.y - h.y, l = Math.hypot(dx, dy) || 1; hero.vx = dx / l * 500; hero.vy = dy / l * 500;
+      if (!h.dead && hero.inv <= 0 && Math.hypot(h.x - hero.x, h.y - (hero.y - 30)) < 24 + h.r) {
+        hero.hp--; hero.inv = 1.3; hero.hurt = 0.4; VCAudio.play('hurt'); R.shake = 10; const dx = hero.x - h.x, dy = hero.y - h.y, l = Math.hypot(dx, dy) || 1; hero.vx = dx / l * 520; hero.vy = dy / l * 520;
         if (h.kind === 'met' || h.kind === 'wpn') killHaz(h, 'hit');
       }
-      if (h.x < -450 || h.x > W + 450 || h.y < -450 || h.y > H + 450) { h.dead = true; if (h.age > 2) { R.diverted++; R.score += Math.round(HZ[h.kind].pts * 0.4); } }
+      if (!h.dead && (h.x < -450 || h.x > W + 450 || h.y < -450 || h.y > H + 450)) h.dead = true;
     }
-    R.hz = hz.filter((h) => !h.dead);
+    R.hz = R.hz.filter((h) => !h.dead);
   }
 
   /* ---------- hero ---------- */
   function updateHero(dt) {
     const h = R.hero; const ax = (keys.d || keys.arrowright ? 1 : 0) - (keys.a || keys.arrowleft ? 1 : 0), ay = (keys.s || keys.arrowdown ? 1 : 0) - (keys.w || keys.arrowup ? 1 : 0);
-    const n = Math.hypot(ax, ay) || 1; h.vx += ax / n * 3200 * dt; h.vy += ay / n * 3200 * dt;
-    h.vx *= Math.exp(-6 * dt); h.vy *= Math.exp(-6 * dt);
-    const sp = Math.hypot(h.vx, h.vy); if (sp > 560) { h.vx *= 560 / sp; h.vy *= 560 / sp; }
-    h.x = clamp(h.x + h.vx * dt, 40, W - 40); h.y = clamp(h.y + h.vy * dt, 90, 760);
+    const n = Math.hypot(ax, ay) || 1; h.vx += ax / n * 3400 * dt; h.vy += ay / n * 3400 * dt;
+    h.vx *= Math.exp(-5.5 * dt); h.vy *= Math.exp(-5.5 * dt);
+    const sp = Math.hypot(h.vx, h.vy); if (sp > 600) { h.vx *= 600 / sp; h.vy *= 600 / sp; }
+    h.x = clamp(h.x + h.vx * dt, 40, W - 40); h.y = clamp(h.y + h.vy * dt, 90, 820);
     h.inv = Math.max(0, h.inv - dt); h.hurt = Math.max(0, h.hurt - dt); h.cast = Math.max(0, h.cast - dt);
-    h.face = (R.held ? R.held.x : mouse.x) >= h.x ? 1 : -1;
-    if (R.held) h.cast = 0.1;
-    R.fireT -= dt;
-    if (R.firing && !R.held && R.fireT <= 0) {
-      R.fireT = 0.18; h.cast = 0.15; const gx = h.x + h.face * 62, gy = h.y - 40; let dx = mouse.x - gx, dy = mouse.y - gy; const l = Math.hypot(dx, dy) || 1; dx /= l; dy /= l;
-      R.bolts.push({ x: gx, y: gy, vx: dx * 1300, vy: dy * 1300, life: 1.1 }); VCAudio.play('bolt');
-    }
-    for (const b2 of R.bolts) {
-      b2.x += b2.vx * dt; b2.y += b2.vy * dt; b2.life -= dt;
-      for (const z of R.hz) if (!z.dead && Math.hypot(z.x - b2.x, z.y - b2.y) < z.r + 6) {
-        b2.life = 0; z.hp -= 1; z.vx += b2.vx * 0.05 / z.m; z.vy += b2.vy * 0.05 / z.m; boom(b2.x, b2.y, 3, ['#ff5fd2', '#fff'], 80);
-        if (z.hp <= 0) killHaz(z, 'shot'); break;
-      }
-      const bo = R.boss; if (bo && !bo.dead && b2.life > 0 && Math.hypot(bo.x - b2.x, bo.y - b2.y) < bo.r + 6) {
-        b2.life = 0; if (bo.shield) { boom(b2.x, b2.y, 3, ['#5ff3ff'], 60); } else { bo.hp -= 1; bo.hurt = 0.15; boom(b2.x, b2.y, 4, ['#ff5fd2', '#fff'], 90); }
-      }
-    }
-    R.bolts = R.bolts.filter((q) => q.life > 0);
-    for (const p of R.pk) { p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt; if (Math.hypot(p.x - h.x, p.y - h.y) < 44) { p.t = 99; VCAudio.play('pick'); if (p.kind === 'heart') h.hp = Math.min(5, h.hp + 1); else { const v = mVuln(R.mission); v.forEach((q) => { if (R.mission.type !== 'critters') q.hp = Math.min(q.max, q.hp + 12); }); } pop(h.x, h.y - 50, p.kind === 'heart' ? '+LIFE' : '+REPAIR', '#8affc8'); } }
+    h.face = (R.held ? R.held.x : mouse.x) >= h.x ? 1 : -1; if (R.held) h.cast = 0.1;
+    for (const p of R.pk) { p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt; p.vy *= 0.98; if (Math.hypot(p.x - h.x, p.y - h.y) < 54) { p.t = 99; VCAudio.play('pick'); if (p.kind === 'heart') h.hp = Math.min(5, h.hp + 1); else mVuln(R.mission).forEach((q) => { if (R.mission.type !== 'critters') q.hp = Math.min(q.max, q.hp + 12); }); pop(h.x, h.y - 60, p.kind === 'heart' ? '+LIFE' : '+REPAIR', '#8affc8'); } }
     R.pk = R.pk.filter((p) => p.t < 10);
-    R.cdRel = Math.max(0, R.cdRel - dt);
+    R.cdFlare = Math.max(0, R.cdFlare - dt); R.flare = Math.max(0, R.flare - dt);
   }
-  function release() {
-    if (R.cdRel > 0) return; R.cdRel = 9; R.relFx = 0.5; VCAudio.play('release'); R.shake = 8;
-    for (const v of R.voids) if (v.on) for (const z of R.hz) { const dx = z.x - v.x, dy = z.y - v.y, d = Math.hypot(dx, dy) || 1, reach = v.r * 3.5 + 120; if (d < reach) { const k = (1 - d / reach) * 700 / Math.sqrt(z.m + 1); z.vx += dx / d * k; z.vy += dy / d * k; z.contact = 0; } }
-    for (const v of R.voids) R.fx.push({ t: 'ring', x: v.x, y: v.y, r: v.r, life: 0.5, max: 0.5, col: '#c89bff', big: 1 });
+  function flare() {
+    if (R.cdFlare > 0) return; R.cdFlare = 8; R.flare = 2.5; R.flareFx = 0.5; VCAudio.play('release'); R.hero.cast = 0.4;
   }
 
   /* ---------- boss ---------- */
@@ -340,7 +333,7 @@
     if (bo.dead) return;
     bo.x = 800 + Math.sin(bo.t * 0.35) * (bo.variant === 3 ? 360 : 520); bo.y = 160 + Math.sin(bo.t * 0.8) * 20;
     if (bo.variant === 2) bo.shield = (bo.t % 9) < 5; if (bo.variant === 3) bo.shield = bo.open <= 0;
-    const throwAt = (kind, n = 1, gap = 0) => { for (let i = 0; i < n; i++) { const aim = pickAim(R.mission, R.rnd); const dx = aim.x - bo.x, dy = aim.y - bo.y, l = Math.hypot(dx, dy) || 1; const rr = HZ[kind].r[1]; const h = spawnHaz(kind, bo.x + dx / l * (bo.r + rr + 12), bo.y + dy / l * (bo.r + rr + 12), aim, Math.floor(R.rnd() * 1e6), { age: -0.2 - i * gap }); if (kind === 'wpn') { h.age = -0.4; } } VCAudio.play('warn'); };
+    const throwAt = (kind, n = 1, gap = 0) => { for (let i = 0; i < n; i++) { const aim = pickAim(R.mission, R.rnd); const dx = aim.x - bo.x, dy = aim.y - bo.y, l = Math.hypot(dx, dy) || 1; const rr = HZ[kind].r[1]; spawnHaz(kind, bo.x + dx / l * (bo.r + rr + 12), bo.y + dy / l * (bo.r + rr + 12), aim, Math.floor(R.rnd() * 1e6), { age: -0.4 - i * gap }); } VCAudio.play('warn'); };
     bo.a1 -= dt; bo.a2 -= dt; bo.a3 -= dt;
     if (bo.a1 <= 0) { throwAt('wpn', bo.variant === 3 ? 5 : bo.variant === 2 ? 3 : 2, 0.12); bo.a1 = bo.variant === 3 ? 5 : bo.variant === 2 ? 3.8 : 3.2; }
     if (bo.a2 <= 0) { throwAt(bo.variant === 1 ? 'ast' : 'moon'); bo.a2 = bo.variant === 1 ? 5.5 : 7; }
@@ -358,19 +351,18 @@
   function updatePlay(dt) {
     if (R.over) { R.over += dt; dt *= 0.3; if (R.over > 3) return; }
     R.t += dt;
-    // spawns
     while (R.evi < R.ev.length && R.ev[R.evi].t <= R.t) {
       const e = R.ev[R.evi++]; const p = spawnPos(e, e.kind); spawnHaz(e.kind, p.x, p.y, pickAim(R.mission, R.rnd), e.seed); R.tail = R.t;
     }
     for (let i = R.evi; i < R.ev.length && R.ev[i].t - R.t < 1.6; i++) { const e = R.ev[i]; if (!R.warned.has(e)) { R.warned.add(e); VCAudio.play('warn'); } }
     missionUpdate(R.mission, dt); updateBoss(dt); updateHero(dt);
     const n = Math.ceil(dt / (1 / 120)); for (let i = 0; i < n; i++) step(dt / n);
-    for (const f of R.fx) { f.life -= dt; if (f.t === 'p') { f.x += f.vx * dt; f.y += f.vy * dt; f.vx *= 0.96; f.vy *= 0.96; } if (f.t === 'ring') f.r += (f.big ? 700 : 260) * dt; if (f.t === 'txt') f.y -= 30 * dt; }
-    R.fx = R.fx.filter((f) => f.life > 0); R.shake = Math.max(0, R.shake - dt * 24); R.relFx = Math.max(0, R.relFx - dt);
+    for (const f of R.fx) { f.life -= dt; if (f.t === 'p') { f.x += f.vx * dt; f.y += f.vy * dt; f.vx *= 0.96; f.vy *= 0.96; } if (f.t === 'ring') f.r += 260 * dt; if (f.t === 'txt') f.y -= 30 * dt; }
+    R.fx = R.fx.filter((f) => f.life > 0); R.shake = Math.max(0, R.shake - dt * 24); R.flareFx = Math.max(0, R.flareFx - dt);
     if (!R.over) {
       if (missionDead(R.mission) || R.hero.hp <= 0) finish(false);
       else if (R.boss ? R.boss.dead : (R.evi >= R.ev.length && R.hz.length === 0)) finish(true);
-      else if (!R.boss && R.evi >= R.ev.length && R.t - R.tail > 28) R.hz.forEach((h) => { h.dead = true; });
+      else if (!R.boss && R.evi >= R.ev.length && R.t - R.tail > 30) R.hz.forEach((h) => { h.dead = true; });
     }
   }
 
@@ -381,16 +373,30 @@
     b.fillStyle = g; b.fillRect(0, 0, BW, BH);
     for (const s of stars) { b.fillStyle = (Math.floor(t * 2 + s.c * 9) % 7 === 0) ? '#fff' : s.s > 0.8 ? '#cfd8ff' : '#6a7090'; b.fillRect(Math.floor(s.x), Math.floor(s.y), 1, 1); }
   }
+  function drawPortal(p, t) {
+    const x = Math.round(p.x * S), y = Math.round(p.y * S), r = Math.round(p.r * S);
+    A.pxCircle(b, x, y, r + 6, 'rgba(90,60,200,.18)'); A.pxRing(b, x, y, r + 3, 'rgba(154,224,255,.35)', 1);
+    A.pxCircle(b, x, y, r, '#05030f'); A.pxRing(b, x, y, r, '#9ae0ff', 1);
+    for (let i = 0; i < 14; i++) { const a = t * 3 + i * 0.45, d = r * (0.92 - ((t * 0.6 + i * 0.13) % 1) * 0.8); b.fillStyle = i % 3 ? '#7447c8' : '#fff'; b.fillRect(Math.round(x + Math.cos(a * (1 + (1 - d / r))) * d), Math.round(y + Math.sin(a * (1 + (1 - d / r))) * d * 0.5), 1, 1); }
+    A.pxCircle(b, x, y, 3, '#cfeaff'); A.pxCircle(b, x, y, 1, '#fff');
+    for (let k = 1; k < 9; k++) { b.fillStyle = `rgba(154,224,255,${0.7 - k * 0.07})`; b.fillRect(x, y - 3 - k * 2 - (Math.floor(t * 20) % 2), 1, 2); b.fillRect(x, y + 2 + k * 2 + (Math.floor(t * 20) % 2), 1, 2); }
+    b.save(); b.translate(x, y); b.rotate(-0.3); for (let a = 0; a < 6.28; a += 0.12) { const rr = r * 1.25; b.fillStyle = (Math.floor(a * 6 + t * 8) % 3) ? '#4a6adf' : '#ff9ad0'; b.fillRect(Math.round(Math.cos(a) * rr), Math.round(Math.sin(a) * rr * 0.28), 1, 1); } b.restore();
+    F.draw(b, 'KILL ZONE', x, y - r - 12, '#9ae0ff', 1, 'c', '#000');
+  }
   function drawBodies() {
     for (const h of R.hz) {
       const x = h.x * S, y = h.y * S;
+      if (h.sink >= 0) {
+        const k = Math.min(1, h.sink / 0.4), a = Math.atan2(R.portal.y * S - y, R.portal.x * S - x), spr = h.spr;
+        b.save(); b.translate(Math.round(x), Math.round(y)); b.rotate(a); b.scale(1 + 2.2 * k, Math.max(0.1, 1 - k)); if (spr) b.drawImage(spr, -spr.width / 2 | 0, -spr.height / 2 | 0); else { b.fillStyle = '#ff3d7a'; b.fillRect(-4, -1, 8, 2); } b.restore(); continue;
+      }
       if (h.kind === 'wpn') { A.drawLance(b, x, y, h.vx, h.vy, now); continue; }
       const spr = h.spr; b.save(); b.translate(Math.round(x), Math.round(y));
       if (h.kind === 'ast' || h.kind === 'met') b.rotate(Math.floor(h.ang) * Math.PI / 2);
       b.drawImage(spr, -spr.width / 2 | 0, -spr.height / 2 | 0); b.restore();
       if (h.kind === 'met') { b.fillStyle = 'rgba(255,170,70,.55)'; const l = Math.hypot(h.vx, h.vy) || 1; for (let i = 1; i < 5; i++) b.fillRect(Math.round(x - h.vx / l * i * 3), Math.round(y - h.vy / l * i * 3), 2, 2); }
       if (h.kind === 'pla' && h.seed % 3 === 0) { b.fillStyle = '#e8d8a0'; const rr = h.r * S; for (let a = 0; a < 6.28; a += 0.035) { const px = Math.cos(a) * rr * 1.7, py = Math.sin(a) * rr * 0.4; if (Math.sin(a) > 0 || Math.abs(px) > rr) b.fillRect(Math.round(x + px * 0.94 - py * 0.34), Math.round(y + py * 0.94 + px * 0.34), 1, 1); } }
-      if (h.contact > 0.2) { const k = Math.min(1, h.contact / (1.4 + h.r / 40)); b.fillStyle = '#8affc8'; b.fillRect(Math.round(x - 6), Math.round(y - h.r * S - 5), Math.round(12 * k), 1); }
+      if (h.topSpeed > 520 && Math.hypot(h.vx, h.vy) > 450) { b.fillStyle = 'rgba(255,233,160,.8)'; b.fillRect(Math.round(x) - 1, Math.round(y - h.r * S) - 4, 3, 1); }
     }
   }
   function drawMission() {
@@ -411,10 +417,11 @@
     if (bo.shield) { A.pxRing(b, bo.x * S, bo.y * S, bo.r * S + 3, 'rgba(95,243,255,.7)', 1); }
   }
   function drawHeroAndFx() {
-    const h = R.hero;
+    const h = R.hero, hx = h.x * S, hy = (h.y - 30) * S;
+    for (let k = 0; k < 2; k++) { const ph = ((now * 0.8 + k * 0.5) % 1); b.globalAlpha = (1 - ph) * (R.flare > 0 ? 0.8 : 0.35); A.pxRing(b, hx, hy, 8 + ph * (R.flare > 0 ? 70 : 34), '#ff3d4a', 1); }
+    b.globalAlpha = 1;
     if (R.held) { const v = R.held; const gx = h.x * S + h.face * 17, gy = h.y * S - 20; for (let i = 0; i < 18; i++) { const k = i / 18; if ((i + Math.floor(now * 20)) % 2) { b.fillStyle = '#ff5fd2'; b.fillRect(Math.round(gx + (v.x * S - gx) * k), Math.round(gy + (v.y * S - gy) * k), 1, 1); } } }
     if (!(h.inv > 0 && Math.floor(now * 20) % 2)) A.drawHero(b, h.x * S, h.y * S, h.face, h.cast > 0 ? 'cast' : 'idle', now, h.vx);
-    for (const q of R.bolts) { b.fillStyle = '#ff5fd2'; b.fillRect(Math.round(q.x * S) - 1, Math.round(q.y * S) - 1, 3, 3); b.fillStyle = '#fff'; b.fillRect(Math.round(q.x * S), Math.round(q.y * S), 1, 1); }
     for (const p of R.pk) { const x = Math.round(p.x * S), y = Math.round(p.y * S + Math.sin(p.t * 5) * 2); if (p.kind === 'heart') { b.fillStyle = '#ff4a7a'; b.fillRect(x - 3, y - 2, 3, 3); b.fillRect(x + 1, y - 2, 3, 3); b.fillRect(x - 2, y + 1, 5, 2); b.fillRect(x - 1, y + 3, 3, 1); } else { b.fillStyle = '#8affc8'; b.fillRect(x - 3, y - 1, 7, 3); b.fillRect(x - 1, y - 3, 3, 7); } }
     for (const f of R.fx) {
       const k = f.life / (f.max || 1);
@@ -433,49 +440,51 @@
   function drawHud() {
     const L = R.L, M = R.mission; F.draw(b, 'L' + (R.i + 1) + ' ' + L.name, 6, 5, '#e6dcff', 1, 'l', '#000');
     const prog = R.boss ? R.boss.hp / R.boss.max : Math.min(1, R.t / (L.dur + 4));
-    bar(6, 16, 120, 4, R.boss ? prog : prog, R.boss ? '#ff5fd2' : '#7447c8'); F.draw(b, R.boss ? 'BOSS' : 'WAVE', 130, 15, '#a98bff', 1, 'l', '#000');
+    bar(6, 16, 120, 4, prog, R.boss ? '#ff5fd2' : '#7447c8'); F.draw(b, R.boss ? 'BOSS' : 'WAVE', 130, 15, '#a98bff', 1, 'l', '#000');
     const nm = { station: 'STATION', city: 'CITY', convoy: 'CONVOY', critters: 'PIPS', ark: 'THE ARK' }[M.type]; const f = missionFrac(M);
     F.draw(b, nm, 6, 26, '#9ae0ff', 1, 'l', '#000'); bar(6, 36, 120, 5, f, f > 0.5 ? '#5ff3a0' : f > 0.25 ? '#ffcf4a' : '#ff4a4a');
     F.draw(b, 'SCORE ' + R.score, BW - 6, 5, '#fff', 1, 'r', '#000');
     for (let i = 0; i < 5; i++) { const x = BW - 10 - i * 10; b.fillStyle = i < R.hero.hp ? '#ff4a7a' : '#3a2040'; b.fillRect(x - 3, 16, 3, 3); b.fillRect(x + 1, 16, 3, 3); b.fillRect(x - 2, 19, 5, 2); b.fillRect(x - 1, 21, 3, 1); }
-    // voids panel
-    const used = bodyBudget(); F.draw(b, 'VOID MASS', 6, BH - 38, '#a98bff', 1, 'l', '#000'); bar(6, BH - 28, 90, 4, used / R.budget, '#7447c8');
-    R.voids.forEach((v, i) => { if (!v.on) return; F.draw(b, v.id + ' ' + Math.round(v.r), 6 + i * 36, BH - 20, i === R.selV ? '#fff' : '#a98bff', 1, 'l', '#000'); });
-    F.draw(b, 'RELEASE', BW - 6, BH - 20, R.cdRel > 0 ? '#6a5a8a' : '#ff5fd2', 1, 'r', '#000'); bar(BW - 66, BH - 10, 60, 3, 1 - R.cdRel / 9, R.cdRel > 0 ? '#6a5a8a' : '#ff5fd2');
-    if (R.t < 9 && L.hint) { const lines = F.wrap(L.hint, 84); lines.forEach((ln, i) => F.draw(b, ln, BW / 2, BH - 62 + i * 9, '#ffe9a0', 1, 'c', '#000')); }
+    F.draw(b, 'ARC LENGTH', 6, BH - 38, '#a98bff', 1, 'l', '#000'); bar(6, BH - 28, 90, 4, usedLen() / R.budget, '#7447c8');
+    R.voids.forEach((v, i) => { if (v.lock) return; F.draw(b, v.id + ' ' + (v.on ? Math.round(arcLen(v)) : 'STOWED'), 6 + i * 52, BH - 20, !v.on ? '#5a4a7a' : i === R.selV ? '#fff' : '#a98bff', 1, 'l', '#000'); });
+    F.draw(b, 'FLARE', BW - 6, BH - 20, R.cdFlare > 0 ? '#6a5a8a' : '#ff5a6a', 1, 'r', '#000'); bar(BW - 66, BH - 10, 60, 3, 1 - R.cdFlare / 8, R.cdFlare > 0 ? '#6a5a8a' : '#ff5a6a');
+    F.draw(b, 'CONSUMED ' + R.consumed, BW / 2, 5, '#9ae0ff', 1, 'c', '#000');
+    if (R.t < 10 && L.hint) { F.wrap(L.hint, 84).forEach((ln, i) => F.draw(b, ln, BW / 2, BH - 62 + i * 9, '#ffe9a0', 1, 'c', '#000')); }
     if (R.over) { F.draw(b, R.win ? 'MISSION COMPLETE' : 'MISSION LOST', BW / 2, BH / 2 - 10, R.win ? '#8affc8' : '#ff7a8a', 3, 'c', '#000'); }
   }
   function drawPlay() {
     const sx = R.shake ? Math.round((Math.random() - 0.5) * R.shake) : 0, sy = R.shake ? Math.round((Math.random() - 0.5) * R.shake) : 0;
     b.save(); b.translate(sx, sy); drawBg(now, R.L.world);
     const occ = [];
-    for (const v of R.voids) if (v.on) occ.push({ x: v.x, y: v.y, r: v.r, v: true, cut: crescentCut(v) });
-    for (const h of R.hz) occ.push({ x: h.x, y: h.y, r: h.r });
+    for (const v of activeArcs()) occ.push(...proxiesFor(v));
+    for (const h of R.hz) if (h.sink < 0) occ.push({ x: h.x, y: h.y, r: h.r });
     if (R.boss && !R.boss.dead) occ.push({ x: R.boss.x, y: R.boss.y, r: R.boss.r });
     for (const p of R.mission.parts) if (p.alive && p.r > 20 && !p.isReef) occ.push({ x: p.x, y: p.y, r: p.r });
     if (R.mission.ground) occ.push(R.mission.ground);
     if (R.mission.reef) occ.push(R.mission.reef);
     drawInflux(occ, now, WORLDS[R.L.world].line);
-    drawMission(); drawBodies(); drawBossSprite();
-    R.voids.forEach((v, i) => { if (!v.on) return; pxCrescent(b, v, v === R.held ? '#c85ff0' : '#5a2fb0', '#fff'); const iv = Math.max(2, Math.round(v.r * S)); pxCrescent(b, { x: v.x, y: v.y, r: v.r * 0.82, ang: v.ang }, v === R.held ? '#ff5fd2' : '#8a5ff0'); pxCrescent(b, { x: v.x - Math.cos(v.ang) * 2 / S, y: v.y - Math.sin(v.ang) * 2 / S, r: v.r * 0.55, ang: v.ang }, '#1a0b33'); F.draw(b, v.id, v.x * S, v.y * S - 3, i === R.selV ? '#fff' : '#d8c8ff', 1, 'c'); });
-    if (R.relFx > 0) { b.fillStyle = `rgba(200,155,255,${R.relFx * 0.4})`; b.fillRect(0, 0, BW, BH); }
+    drawMission(); drawPortal(R.portal, now); drawBodies(); drawBossSprite();
+    R.voids.forEach((v, i) => { if (v.on) drawArc(b, v, v === R.held, i === R.selV); });
+    if (R.flareFx > 0) { b.fillStyle = `rgba(255,90,100,${R.flareFx * 0.35})`; b.fillRect(0, 0, BW, BH); }
     drawHeroAndFx(); drawWarnings(); b.restore(); drawHud();
-    // reticle
     const mx = Math.round(mouse.x * S), my = Math.round(mouse.y * S); b.fillStyle = R.held ? '#ff5fd2' : '#fff'; b.fillRect(mx - 4, my, 3, 1); b.fillRect(mx + 2, my, 3, 1); b.fillRect(mx, my - 4, 1, 3); b.fillRect(mx, my + 2, 1, 3);
   }
 
   /* ---------- menus ---------- */
+  const demoArc = (x, y, R0, s, ang) => proxiesFor({ x, y, R: R0, s, ang, vx: 0, vy: 0 });
   function drawTitle() {
-    drawBg(now, 5); const occ = [{ x: 560 + Math.sin(now * 0.7) * 40, y: 450, r: 150, v: true, cut: crescentCut({ x: 560 + Math.sin(now * 0.7) * 40, y: 450, r: 150, ang: -0.4 }) }, { x: 1180, y: 300 + Math.cos(now) * 30, r: 90 }];
-    drawInflux(occ, now, '#70b8c3');
-    A.drawHero(b, 150, 250, 1, 'cast', now, 0); b.save(); b.translate(150, 250); b.restore();
+    drawBg(now, 5); const ax = 560 + Math.sin(now * 0.7) * 40;
+    drawInflux(demoArc(ax, 450, 170, 1.2, -0.4).concat([{ x: 1180, y: 300 + Math.cos(now) * 30, r: 70 }]), now, '#70b8c3');
+    drawArc(b, { x: ax, y: 450, R: 170, s: 1.2, ang: -0.4, id: '' }, false, false);
+    drawPortal({ x: 1180, y: 300 + Math.cos(now) * 30, r: 70 }, now);
+    A.drawHero(b, 150, 250, 1, 'cast', now, 0);
     F.draw(b, 'VOIDCASTER', BW / 2, 60, '#c89bff', 5, 'c', '#2a1550');
-    F.draw(b, 'BLOCK THE INFLUX. DEFEND THE LIGHT.', BW / 2, 112, '#e6dcff', 1, 'c', '#000');
-    const lore = ['THE DEARTH IS A HUNGER BETWEEN THE STARS. IT CANNOT MAKE LIGHT,', 'SO IT HURLS METEORS, MOONS AND WORLDS AT EVERYTHING THAT GLOWS.', 'VOIDCASTER WIELDS CRESCENT VOIDS THAT TURN TO SHADOW THE INFLUX.', 'THE DEFICIT DRAWS THE FALLING MASS INTO THE SHADOW. NOT ONTO YOU.'];
+    F.draw(b, 'BE THE RED RAG. BEND THE FALL. FEED THE KILL ZONE.', BW / 2, 112, '#e6dcff', 1, 'c', '#000');
+    const lore = ['THE DEARTH IS A HUNGER BETWEEN THE STARS. IT CANNOT MAKE LIGHT,', 'SO IT HURLS METEORS, MOONS AND WORLDS AT EVERYTHING THAT GLOWS.', 'VOIDCASTER FLARES RED AND THE FALLING MASS LOCKS ON TO HIM.', 'HE SLINGS IT AROUND HIS ARCS AND INTO A PORTAL TO A NEUTRON STAR.'];
     lore.forEach((l, i) => F.draw(b, l, BW / 2, 170 + i * 11, '#b8a8e8', 1, 'c', '#000'));
     if (Math.floor(now * 2) % 2) F.draw(b, 'PRESS ENTER OR CLICK TO PLAY', BW / 2, 262, '#fff', 2, 'c', '#000');
     F.draw(b, 'L LEVELS   F FULLSCREEN   M MUTE', BW / 2, 292, '#8a7ab8', 1, 'c', '#000');
-    F.draw(b, 'MOUSE: DRAG VOIDS, FIRE   WASD: MOVE   WHEEL OR [ ]: SIZE   1 2 3: SELECT   SPACE: RELEASE', BW / 2, 316, '#8a7ab8', 1, 'c', '#000');
+    F.draw(b, 'WASD MOVE   DRAG ARCS AND PORTAL   CLICK DEPLOY   RIGHT CLICK STOW   WHEEL LENGTH   SPACE FLARE', BW / 2, 316, '#8a7ab8', 1, 'c', '#000');
     F.draw(b, 'A SPATIAL DISPLACEMENT THEORY GAME', BW / 2, 344, '#5a4a88', 1, 'c');
   }
   function drawSelect() {
@@ -496,24 +505,24 @@
     F.draw(b, 'ARROWS + ENTER, OR CLICK     ESC: TITLE', BW / 2, 347, '#8a7ab8', 1, 'c', '#000');
   }
   function drawBrief() {
-    const L = LEVELS[cur]; drawBg(now, L.world); drawInflux([{ x: 1250, y: 450, r: 130, v: true, cut: crescentCut({ x: 1250, y: 450, r: 130, ang: -0.3 }) }], now, WORLDS[L.world].line);
+    const L = LEVELS[cur]; drawBg(now, L.world); drawInflux(demoArc(1250, 450, 150, 1.1, -0.3), now, WORLDS[L.world].line);
     A.drawHero(b, 90, 200, 1, 'cast', now, 0);
     F.draw(b, 'MISSION ' + (cur + 1), 150, 24, '#a98bff', 1, 'l', '#000'); F.draw(b, L.name, 150, 38, '#fff', 3, 'l', '#2a1550');
     F.draw(b, WORLDS[L.world].name, 150, 66, '#c89bff', 1, 'l', '#000');
     let y = 84; if (cur % 5 === 0) { F.wrap(WORLDS[L.world].intro, 70).forEach((ln) => { F.draw(b, ln, 150, y, '#e6dcff', 1, 'l', '#000'); y += 10; }); y += 8; }
     const goal = { station: 'DEFEND THE STATION.', city: 'DEFEND THE CITY DOMES.', convoy: 'KEEP THE SETTLER SHIPS ALIVE.', critters: 'PROTECT THE PIPS.', ark: 'ESCORT THE SETTLER ARK.' }[L.m]; F.draw(b, 'OBJECTIVE: ' + goal, 150, y, '#9ae0ff', 1, 'l', '#000'); y += 14;
-    F.draw(b, 'HOSTILES:', 150, y, '#ff9ab0', 1, 'l', '#000'); y += 12;
+    F.draw(b, 'HOSTILES (THEY HUNT YOU):', 150, y, '#ff9ab0', 1, 'l', '#000'); y += 12;
     ['met', 'ast', 'moon', 'pla', 'wpn'].forEach((k, i) => { if (L.mix[i] > 0) { const d = HZ[k]; if (k === 'wpn') A.drawLance(b, 160, y + 6, 1, 0, now); else { const sp = A.bodySprite(k, Math.max(3, Math.min(9, Math.round(d.r[0] * S))), 3); b.drawImage(sp, Math.round(160 - sp.width / 2), Math.round(y + 6 - sp.height / 2)); } F.draw(b, d.name, 176, y + 3, '#d8c8ff', 1, 'l', '#000'); y += 16; } });
     if (L.boss) { F.draw(b, 'BOSS: ' + ['', 'DEARTH REAVER', 'DEARTH WARDEN', 'THE HOLLOW REGENT'][L.boss], 150, y, '#ff5fd2', 1, 'l', '#000'); y += 12; }
     y += 6; F.wrap('TIP: ' + L.hint, 76).forEach((ln) => { F.draw(b, ln, 150, y, '#ffe9a0', 1, 'l', '#000'); y += 10; });
     if (Math.floor(now * 2) % 2) F.draw(b, 'PRESS ENTER TO DEPLOY', BW / 2, 332, '#fff', 2, 'c', '#000');
   }
   function drawEnd(win) {
-    drawBg(now, 5); drawInflux([{ x: 800, y: 450, r: 200, v: true, cut: crescentCut({ x: 800, y: 450, r: 200, ang: now * 0.5 }) }], now, win ? '#70c8a0' : '#c87090');
+    drawBg(now, 5); drawInflux(demoArc(800, 450, 220, 1.3, now * 0.5), now, win ? '#70c8a0' : '#c87090');
     F.draw(b, win ? 'MISSION COMPLETE' : 'MISSION LOST', BW / 2, 70, win ? '#8affc8' : '#ff7a8a', 4, 'c', '#000');
     if (win) { for (let s = 0; s < 3; s++) { const x = BW / 2 - 40 + s * 40, y = 130; b.fillStyle = s < R.stars ? '#ffd24a' : '#3a2a4a'; A.pxCircle(b, x, y, 12, b.fillStyle); } }
     else F.draw(b, R.hero.hp <= 0 ? 'VOIDCASTER FELL' : 'THE LIGHT WENT OUT', BW / 2, 130, '#e6dcff', 2, 'c', '#000');
-    F.draw(b, 'SCORE ' + R.score, BW / 2, 175, '#fff', 2, 'c', '#000');
+    F.draw(b, 'SCORE ' + R.score + '   CONSUMED ' + R.consumed, BW / 2, 175, '#fff', 2, 'c', '#000');
     F.draw(b, win ? 'ENTER: NEXT MISSION' : 'ENTER: RETRY', BW / 2, 240, '#fff', 1, 'c', '#000'); F.draw(b, 'R: REPLAY   L: LEVELS', BW / 2, 256, '#a98bff', 1, 'c', '#000');
     if (win && R.i === 29) F.draw(b, 'THE HOLLOW CROWN IS BROKEN. THE LIGHT HOLDS. THANK YOU, VOIDCASTER.', BW / 2, 290, '#ffe9a0', 1, 'c', '#000');
   }
@@ -530,18 +539,29 @@
     else if (scene === 'win') { if (cur < 29) { cur++; go('brief'); } else go('select'); }
     else if (scene === 'lose') startRun(cur);
   }
+  function arcAt(p, pad = 20) {
+    let best = null, bd = 1e9;
+    R.voids.forEach((v, i) => { if (!v.on) return; for (const q of arcProxies(v)) { const d = Math.hypot(p.x - q.x, p.y - q.y); if (d < pad + TH / 2 && d < bd) { bd = d; best = { v, i }; } } });
+    return best;
+  }
+  function recall(v) { if (!v || !v.on) return; v.on = false; if (R.held === v) R.held = null; boom(v.x, v.y, 8, ['#c89bff', '#fff'], 100); VCAudio.play('drop'); }
+  function deploy(p) {
+    let v = R.voids[R.selV]; if (!v || v.on || v.lock) v = R.voids.find((q) => !q.on && !q.lock); if (!v) return false;
+    v.on = true; v.x = p.x; v.y = p.y; v.vx = v.vy = 0; const room = R.budget - (usedLen() - arcLen(v)); v.s = clamp(Math.min(v.s, room / (2 * v.R)), S_MIN, S_MAX); v.r = arcRad(v);
+    R.selV = R.voids.indexOf(v); boom(v.x, v.y, 10, ['#c89bff', '#fff', '#5ff3ff'], 120); VCAudio.play('grab'); return true;
+  }
   addEventListener('keydown', (e) => {
-    const k = e.key.toLowerCase(); if (keys[k] && e.repeat && k !== '[' && k !== ']') { /* held */ } keys[k] = true;
+    const k = e.key.toLowerCase(); keys[k] = true;
     if (['arrowup', 'arrowdown', 'arrowleft', 'arrowright', ' '].includes(k)) e.preventDefault();
     VCAudio.init();
     if (k === 'f') { if (!document.fullscreenElement) document.documentElement.requestFullscreen?.().catch(() => {}); else document.exitFullscreen?.(); }
     if (k === 'm') VCAudio.toggle();
     if (scene === 'play') {
       if (k === 'p' || k === 'escape') go('pause');
-      if (k === ' ') release();
-      if (k === '1' || k === '2' || k === '3') { const v = R.voids[+k - 1]; if (v.on) R.selV = +k - 1; }
-      if (k === '[') resizeVoid(R.held || R.voids[R.selV], -8); if (k === ']') resizeVoid(R.held || R.voids[R.selV], 8);
-      if (k === 'r' && e.shiftKey) startRun(cur);
+      if (k === ' ') flare();
+      if (k === '1' || k === '2' || k === '3') { const v = R.voids[+k - 1]; if (!v.lock) R.selV = +k - 1; }
+      if (k === '[') resizeArc(R.held && R.held.isArc ? R.held : R.voids[R.selV], -16); if (k === ']') resizeArc(R.held && R.held.isArc ? R.held : R.voids[R.selV], 16);
+      if (k === 'x') recall(R.voids[R.selV]);
     } else if (scene === 'pause') { if (k === 'p' || k === 'escape') go('play'); if (k === 'r') startRun(cur); if (k === 'l') go('select'); }
     else if (scene === 'select') {
       if (k === 'arrowright' || k === 'd') sel = Math.min(29, sel + 1); if (k === 'arrowleft' || k === 'a') sel = Math.max(0, sel - 1);
@@ -553,21 +573,24 @@
     }
   });
   addEventListener('keyup', (e) => { keys[e.key.toLowerCase()] = false; });
-  addEventListener('blur', () => { for (const k in keys) keys[k] = false; if (scene === 'play') go('pause'); if (R) { R.firing = false; R.held = null; } });
+  addEventListener('blur', () => { for (const k in keys) keys[k] = false; if (scene === 'play') go('pause'); if (R) R.held = null; });
   cv.addEventListener('contextmenu', (e) => e.preventDefault());
   cv.addEventListener('pointermove', (e) => { const p = toWorld(e); mouse.x = p.x; mouse.y = p.y; });
   cv.addEventListener('pointerdown', (e) => {
     VCAudio.init(); const p = toWorld(e); mouse.x = p.x; mouse.y = p.y; mouse.down = true; cv.setPointerCapture?.(e.pointerId);
     if (scene === 'play') {
-      let best = null, bd = 1e9; R.voids.forEach((v, i) => { if (!v.on) return; const d = Math.hypot(p.x - v.x, p.y - v.y); if (d < v.r + 14 && d < bd) { bd = d; best = v; R.selV = i; } });
-      if (best) { R.held = best; best.vx = best.vy = 0; VCAudio.play('grab'); } else R.firing = true;
+      if (e.button === 2) { const a = arcAt(p, 30); recall(a ? a.v : R.voids[R.selV]); return; }
+      const a = arcAt(p);
+      if (a) { R.held = a.v; R.selV = a.i; a.v.vx = a.v.vy = 0; VCAudio.play('grab'); }
+      else if (Math.hypot(p.x - R.portal.x, p.y - R.portal.y) < R.portal.r + 24) { R.held = R.portal; VCAudio.play('grab'); }
+      else deploy(p);
     } else if (scene === 'select') {
       const bx = p.x * S, by = p.y * S; for (let i = 0; i < 30; i++) { const x = 150 + (i % 5) * 90, y = 48 + Math.floor(i / 5) * 49; if (bx >= x && bx <= x + 80 && by >= y && by <= y + 38) { if (sel === i) enter(); else sel = i; } }
     } else if (scene === 'pause') go('play'); else enter();
   });
-  const up = () => { mouse.down = false; if (R) { if (R.held) { const v = R.held; v.vx *= 0.6; v.vy *= 0.6; VCAudio.play('drop'); } R.held = null; R.firing = false; } };
+  const up = () => { mouse.down = false; if (R) { if (R.held && R.held.isArc) { R.held.vx *= 0.6; R.held.vy *= 0.6; VCAudio.play('drop'); } R.held = null; } };
   addEventListener('pointerup', up); addEventListener('pointercancel', up);
-  cv.addEventListener('wheel', (e) => { e.preventDefault(); if (scene === 'play') { const v = R.held || (R.voids.filter((q) => q.on && Math.hypot(mouse.x - q.x, mouse.y - q.y) < q.r + 30)[0]) || R.voids[R.selV]; resizeVoid(v, -Math.sign(e.deltaY) * 6); } }, { passive: false });
+  cv.addEventListener('wheel', (e) => { e.preventDefault(); if (scene === 'play') { const a = arcAt(mouse, 40); const v = (R.held && R.held.isArc ? R.held : a ? a.v : R.voids[R.selV]); resizeArc(v, -Math.sign(e.deltaY) * 14); } }, { passive: false });
 
   function frame(ts) {
     requestAnimationFrame(frame); now = ts / 1000; const dt = Math.min(0.033, now - last || 0); last = now; tScene += dt;
@@ -578,6 +601,6 @@
     cx.imageSmoothingEnabled = false; cx.fillStyle = '#05030a'; cx.fillRect(0, 0, cv.width, cv.height);
     cx.drawImage(buf, 0, 0, BW, BH, view.x, view.y, Math.round(BW * view.k), Math.round(BH * view.k));
   }
-  window.__vc = { get scene() { return scene; }, get run() { return R; }, startRun, keys, mouse, release };
+  window.__vc = { get scene() { return scene; }, get run() { return R; }, startRun, keys, mouse, flare };
   requestAnimationFrame(frame);
 })();

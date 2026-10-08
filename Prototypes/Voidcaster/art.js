@@ -70,8 +70,8 @@ const VCArt = (() => {
     for (let i = 0; i < 7; i++) {
       const wob = Math.round(Math.sin(t * 9 - i * 0.9) * 1.5 + 0);
       const sx = -face * (i * 2 + 3) - Math.max(-6, Math.min(6, vx * 0.01)) * i * 0.3 * face * -1 * 0;
-      c.fillStyle = i % 2 ? HP.m : HP.p;
-      c.fillRect(Math.round(sx - 1 - (face > 0 ? 2 : -2)), -18 + wob + Math.floor(i / 2), 3, 2);
+      c.fillStyle = i % 2 ? '#ff3d4a' : '#b01c2e';
+      c.fillRect(Math.round(sx - 1 - (face > 0 ? 2 : -2)), -18 + wob + Math.floor(i / 2), 3, 3);
     }
     c.restore();
     // jet flame
