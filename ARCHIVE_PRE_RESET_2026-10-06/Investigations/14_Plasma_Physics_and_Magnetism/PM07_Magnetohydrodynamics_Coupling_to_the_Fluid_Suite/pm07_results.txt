@@ -1,0 +1,43 @@
+PM07 — MHD Coupling to the Fluid Suite (J. C. Harvey, 2026-07-05)
+
+P1  TERM-BY-TERM COUPLING MAP (ideal MHD <-> FD/PM primitives)
+    momentum:  dv/dt + v.grad v   <-> FD01 held-content transport      [FD01, class C]
+               -grad P / rho      <-> FD01 relay count gradient        [FD01, class C]
+               nu laplacian v     <-> FD01/FD02 relay Laplacian        [FD01/FD02, C]
+               (curl B) x B / mu0 <-> swirl back-traction on the flow  [ORPHAN-1: the
+                 swirl<->momentum coupling GAIN is HG-1 (PM01) — term named, not earned]
+    induction: dB/dt = curl(v x B)<-> wake quanta advect with carriers [PM07 P2 BELOW —
+                 counting theorem, no Ohm postulate]
+               + eta laplacian B  <-> FD02 relay diffusion             [ORPHAN-2: eta==FD02
+                 is an IDENTIFICATION (named), its magnitude not derived here]
+    solenoidal: div B = 0         <-> B == curl w (PM01 P2c identity)  [E58 theorem]
+    ORPHAN-3 (perp closure): see P3/P4 — wake isotropic pressure must equal FULL energy
+    density for the Maxwell perp stress; FD05 radiation gives u/3. Mismatch owned.
+    Zero silent leftovers; three orphans NAMED. Bijection NOT clean -> Class C by gate.
+
+P2  eta=0 control: N_enc start 6418, end 6418, worst excursion 0  (gate <=0.5% = 32) -> PASS
+P2  frozen-in = COUNTING THEOREM: loop and quanta ride one flow; enclosure is
+    advection-invariant. Kelvin/induction equation with NO Ohm postulate. NATIVE.
+P2  finite FD02 diffusion (carriers kicked, loop advective):
+      eta=3e-04 : ensemble-mean leak over T=1  = +7.50 quanta
+      eta=1e-03 : ensemble-mean leak over T=1  = +21.92 quanta
+      eta=3e-03 : ensemble-mean leak over T=1  = +59.83 quanta
+      eta=1e-02 : ensemble-mean leak over T=1  = +206.83 quanta
+P2  leak-vs-eta log-log slope = 0.943  (gate 1.0 +/- 0.3; Fick flux = -eta grad n)
+
+P3  ASSEMBLY (form only, no numeric claim): transverse kink of a swirl bundle:
+    restoring = swirl-stream momentum flux (tension) T_par = rho_a <u_w^2>
+    inertia   = bulk lattice density rho  =>  v_A = sqrt(T_par/rho) = u_w sqrt(rho_a/rho)
+    SI map [IMPORTED, final line only]: with rho_a u_w^2 <-> B^2/mu0: v_A = B/sqrt(mu0 rho).
+    The conversion rho_a u_w^2 <-> B^2/mu0 is HG-1-adjacent (ORPHAN-1) — NOT earned.
+P3/P4  STRUCTURAL CHECK (dimensionless, arithmetic — flagged, not a discovery):
+    Maxwell: tension/energy-density = 2.0 ; directed relay stream: 2.0  -> MATCH (2:1)
+P4  PERP CLOSURE — THE HONEST MISMATCH (ORPHAN-3): Maxwell perp pressure = +B^2/2mu0
+    = full energy density (w=+1 stiff). A cold directed stream gives 0; FD05 radiation
+    gives u/3. The wake medium must supply isotropic pressure EQUAL to its energy
+    density for the Maxwell stress to be relay traction. Not derived. OWNED as open.
+    (Candidate: CR05 gamma_eff = 4 stiff-lattice line — logged, untested.)
+P4  magnetosonic handshake (assembled): fast mode ~ sqrt(v_A^2 + c_s^2), c_s <= c/sqrt(3)
+    (FD05 ceiling); one dispersion surface omega(k,theta) is the PM03-rebuild's job.
+
+PM07 done. Verdict: PM07_VERDICT.md

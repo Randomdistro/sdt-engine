@@ -1,0 +1,57 @@
+FLM15 Casimir pressure from gap-mode counting
+pre-registration: PROMPT.md (2026-10-03)
+
+INSTRUMENT VALIDATION (known answers; physics rounds not yet run)
+  [ok] V1 Poisson summation at t=0.7: 1.222105097207609 vs 1.222105097207609
+  [ok] V1 Poisson summation at t=1.3: 1.033677729877368 vs 1.033677729877368
+  [ok] V2 g(q=0.0) closed 2.54647908947 vs quadrature 2.54647908947
+  [ok] V2 g(q=2.0) closed 2.34199326097 vs quadrature 2.34199326097
+  [ok] V2 g(q=7.5) closed 0.705548997384 vs quadrature 0.705548997384
+  [ok] V3 Bose integral 6.49393940226 vs pi^4/15 6.49393940227
+  [ok] V4 direct sum-minus-integral vs Poisson-dual series at lam/d=0.30: -0.024122003934 vs -0.024122003934
+  [ok] V4 direct sum-minus-integral vs Poisson-dual series at lam/d=0.10: -0.027031397117 vs -0.027031397118
+  [ok] V4 direct sum-minus-integral vs Poisson-dual series at lam/d=0.05: -0.027319080618 vs -0.027319080630
+VALIDATION PASS
+
+ROUND 1 - literal seed: counted occupation at T_CMB = 2.7255 K, price eps = h nu
+kT = 3.7630e-23 J = 2.3487e-04 eV; thermal wavenumber s_T = 1.1902e+03 1/m (thermal wavelength 2pi/s_T = 5.279e-03 m)
+free-space free-energy density: quadrature -1.391600e-14, analytic -(pi^2/45)(kT)^4/(hc)^3 -1.391600e-14 (agree to 1e-8)
+n=0 mode free energy per area (d-independent): -1.0199e-17 J/m^2
+
+  d (um) mode n=1 s/sT log10 |occup.|       |P| (Pa) P_ideal (Pa)      |P|/P_ideal
+    0.10    2.639e+04       -11463.1     1.3916e-14   1.3001e+01        1.070e-15
+    0.50    5.279e+03        -2292.6     1.3916e-14   2.0802e-02        6.690e-13
+    1.00    2.639e+03        -1146.3     1.3916e-14   1.3001e-03        1.070e-11
+    3.00    8.798e+02         -382.1     1.3916e-14   1.6051e-05        8.670e-10
+    6.00    4.399e+02         -191.1     1.3916e-14   1.0032e-06        1.387e-08
+
+fitted exponent: P ~ d^0.000000   (registered prediction: 0 +/- 0.001)
+|P| = 1.3916e-14 Pa vs registered u_CMB/3 = 1.3916e-14 Pa
+rejection criterion (exponent != 4 or coefficient outside +/-5% of pi^2 hbar c/240): MET
+
+ROUND 2 - scale-free floor: price a*hbar*omega per mode (a independent of omega)
+   lam/d D direct sum [hbar c/d^3]        D dual series   D - target
+   0.080      -0.027169153362      -0.027169153362    2.464e-04
+   0.060      -0.027276720437      -0.027276720438    1.388e-04
+   0.040      -0.027353781712      -0.027353781734    6.179e-05
+   0.030      -0.027380798128      -0.027380798125    3.477e-05
+   0.020      -0.027400109451      -0.027400109835    1.546e-05
+extrapolated D(0) = -0.027415566645  (order-4), order-3: -0.027415566721;  -pi^2/360 = -0.027415567781
+relative departure from -pi^2/360: 4.143e-08   (registered instrument gate 1e-6): inside
+
+P = -a * pi^2 hbar c /(120 d^4) per the extrapolated energy; coefficient relative to the ideal-plate value pi^2 hbar c/240:
+  a = 0.25  ->  P/P_ideal = 0.500
+  a = 0.50  ->  P/P_ideal = 1.000
+  a = 1.00  ->  P/P_ideal = 2.000
+exponent from the scale-free premise: 4 exactly (energy per area scales as d^-3 for a price independent of omega);
+a price proportional to omega^(1+s) scales as d^-(4+s) by dimensional analysis.
+
+report-only: local exponent with a physical cutoff lambda = 22 nm (skin-depth scale), a = 1/2
+  d (um)       |P| (Pa)          n_eff
+    0.10     1.1583e+01         3.7675
+    0.30     1.5849e-01         3.9749
+    1.00     1.2986e-03         3.9977
+    3.00     1.6049e-05         3.9997
+
+report-only: a=1/2 floor up to nu_p = 3.0e+15 Hz has energy density pi h nu^4/c^3 = 6.258e+03 J/m^3;
+Law I P_conv = 2.461e+48 Pa; ratio floor/P_conv = 2.543e-45

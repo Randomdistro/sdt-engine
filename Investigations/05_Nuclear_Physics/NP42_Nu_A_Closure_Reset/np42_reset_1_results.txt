@@ -1,0 +1,16 @@
+﻿NP42 reset instrument 1 (2026-10-10)
+====================================
+
+[V1] planted break 85.0 recovered at 85.00 (Delta-chi2<=4 set 85.00-85.25) -> met
+[V2] complementary Z balance U-235, A=85-110: mean |Zl+Zh-92| = 0.175 (n=26) -> met
+
+VALIDATIONS: met
+
+U-235: points N*>=70: 29 (median err 0.0419) ; best N_b = 80.50, a = 0.6330, c = 0.0749, chi2/dof = 1.92 ; Delta-chi2<=4 set 79.00-81.25 ; 82 in set: False ; Delta-chi2(82) = 13.07 -> G6 FAIL
+   null 80: Delta-chi2 = 0.22, in set: True
+   null 84: Delta-chi2 = 84.72, in set: False
+U-233: points N*>=70: 45 (median err 0.0238) ; best N_b = 79.75, a = 0.6421, c = 0.0771, chi2/dof = 24.81 ; Delta-chi2<=4 set 78.75-80.50 ; 82 in set: False ; Delta-chi2(82) = 27.94 -> G6 FAIL
+   null 80: Delta-chi2 = 0.48, in set: True
+   null 84: Delta-chi2 = 94.46, in set: False
+
+G6 (both systems): NOT MET

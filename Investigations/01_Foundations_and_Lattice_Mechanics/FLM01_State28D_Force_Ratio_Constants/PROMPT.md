@@ -245,3 +245,15 @@ Check whether the hardcoded values respect this and scale properly with particle
 ---
 
 *FLM01 · upgraded 2026-06-27 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** The pass tiers include "within one order of magnitude = QUALIFIED" and the two scales are admitted CALIBRATED "empirically for numerical stability", yet the recorded outcome is QUALIFIED (Class C) on a question that asked derived-or-fitted.
+
+**Correction:** Score any scale not derived to ≤ 20% as CALIBRATED/OPEN and delete the order-of-magnitude pass tier.
+
+**Status:** ANNOTATED — label, status or tally corrected in the record; no re-score of earlier runs.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

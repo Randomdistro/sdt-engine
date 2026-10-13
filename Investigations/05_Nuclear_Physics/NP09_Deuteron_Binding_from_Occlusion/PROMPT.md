@@ -1,3 +1,50 @@
+# NP09 — The deuteron's mass defect, native (specification rewritten 2026-10-10)
+
+**Author:** J. C. Harvey, Melbourne. Rewritten at Harvey's direction (2026-10-10): dependencies first, prompts carry new data, packing sequencer understood before grammar work. The 2026-06-27 specification is kept unchanged below the line; it is superseded.
+
+## 1. Question (as it now stands)
+What movement does one proton–proton mesh contact free when a stabled electron is shared? Can the defect of the deuteron against its native list, **B(d; {2p, 1e}) = 1.442246 MeV** (AME2020; NP17 reset V4), be derived from that contact without a fitted coefficient?
+
+## 2. What is established (with source)
+| # | Fact | Source |
+|---|---|---|
+| E1 | Binding is mass defect. Energy is movement. Law III is a push. Integrated-force (potential) bookkeeping is withdrawn. | Harvey ruling 2026-10-07 |
+| E2 | Ledgers are list-dependent. {p, n} gives 2.224571 MeV; {2p, 1e} gives 1.442246 MeV. The {p, n} list carries the owed neutron term (+0.782 MeV, no derivation stands). | NP14 native; NP17 reset |
+| E3 | The neutron is p + one stabled electron; it has the same boundary R_p. The old "which neutron radius" question (Step 1 below) dissolves. | NP30 §3; NP14 |
+| E4 | αħc/r ≡ m_e v(r)²: the seat movement on the Ѻ_H = r_e ladder. The native scale at the 1.83c boundary seat is αħc/R_p = 1.711391 MeV. | NP17 PROMPT E2 |
+| E5 | The live sequencer (NSEQ18-WEB-1) builds the deuteron as one open "internal" contact (graph V = 2, E = 1). Its deuteron is **CALIBRATED(8)**: 8 parameters fitted to B, μ and Q. **There is no derived deuteron in the construction.** | engine run 2026-10-10 |
+
+## 3. Errors already made on this question, and what each teaches
+| # | Error | Lesson |
+|---|---|---|
+| X1 | The far-field occlusion integral (this prompt's 2026-06-27 route) gives 0.06–0.08 MeV per contact, about 30× short. The route is also withdrawn bookkeeping (E1). | The MeV scale is the seat movement (E4), not the occlusion residual. |
+| X2 | Old NP17 claimed "3αħc/D = 2.200 MeV, −1.06%". It compared a {p, p, e} configuration with the {p, n} binding. On its own list it is +52.6%. Withdrawn. | Name the list before any comparison. |
+| X3 | The shared-electron seat ledger (half-movement per electron–proton seat) gives the deuteron at +1.71%, post-seen. It is **excluded for A ≥ 3** by a geometry-free ceiling (³H 1.35×, ³He 2.70×, ⁴He 3.90× over). It fails H₂⁺ across scale (+67%). | The deuteron agreement is isolated (G3), not a mechanism. Binding does not track electron count (³H ≈ ³He to 0.019 MeV). The carrier is the proton–proton contact. |
+| X4 | NP06: no α-free rim-rate Δω. "Why D/3" was one of eight lengths. | No length is selected by agreement. |
+| X5 | The live engine's zero-fit universal ledger (wake contact coupling × αħc/R_p) under-binds ⁴He–¹⁶O at about 0.42×. | The scale is right in order; the contact weight is not derived. |
+
+## 4. Dependency
+**Required supplier: NP17 round 2, the O1 contact-mesh ledger** (`NP17_.../PROMPT.md` §7). O1 must state natively what one mesh contact frees: the counter-rotating meeting of two boundaries at 1.83c (NP30 §5), in movement units. It must also state how loop closure adds to it (NP10, NP33). That statement must be written before any measured binding is loaded.
+
+**Blindness limit.** The deuteron, triton, helion and alpha values are already seen. O1 must therefore be tested blind on heavier nuclei, using the sequencer's own contact graphs. For A ≥ 4 these are trees plus one 4-ring (the α core), with E = A. NP09's deuteron is then a **consistency check, not a test**.
+
+**Status:** DEFERRED until NP17 round 2 registers O1. What opens it: a native statement of the per-contact freed movement. That is derived from the FLM07 glancing transfer or FLM10 lattice solver, or given by Harvey as construction.
+
+## 5. Pre-registered checks (for when O1 exists)
+- C1: O1's deuteron (one open contact) against 1.442246 MeV, ±3%. Post-seen class, so G3 at most.
+- C2: the same O1 rule, with no new parameter, on the ³H and ³He open chains (E = 2). B(t) and B(h) must agree with each other to the measured 0.019 MeV pattern (equal within 2%). This is structural; the values are seen.
+- C3: the blind test belongs to NP17 round 2 (A ≥ 6 from the sequencer graphs). NP09 inherits its grade.
+
+## 6. Prohibitions
+- No pair potentials; no {p, n} list without the owed neutron term named.
+- No length or coefficient chosen by agreement; no census.
+- No QM narration; the word "charge" is not used.
+- No edits to Engine or Laws.
+
+---
+
+## Superseded specification (2026-06-27, kept as written)
+
 # NP09: Deuteron Binding from Occlusion Geometry — Investigation Prompt
 
 > **Author:** J. C. Harvey, Melbourne. **Status:** SPEC (upgrade 2026-06-27).
@@ -8,7 +55,7 @@
 
 ## ⓪ The Golden Rule — five questions (answer before Phase 0)
 
-1. **What don't we know?** — [NP09] NP09: Deuteron Binding from Occlusion Geometry — Investigation Prompt: *(unfilled by the 2026-06-27 bulk template upgrade — write the single measurable gap before the next run)*
+1. **What don't we know?** — [NP09] NP09: Deuteron Binding from Occlusion Geometry — Investigation Prompt: **Measurable gap (written 2026-10-05 in the audit correction pass, from this prompt's own content; the 2026-06-27 template left it unfilled):** Can the occlusion force F = (pi/4) P_eff R1^2 R2^2 / r^2 reproduce the measured deuteron binding energy 2.22457 MeV at the measured separation of about 2.14 fm without a fitted coefficient?
 2. **Why does it matter?** — Stack position / downstream blockers (see `INVESTIGATION_STACK.md`).
 3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
 4. **What would prove us wrong?** — §⑧ falsification tests with numeric triggers.
@@ -113,3 +160,15 @@ What R_n_eff is required? Is it physically reasonable?
 ---
 
 *NP09 · upgraded 2026-06-27 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** The sign-off reads "FAIL on occlusion magnitude; PASS on documentation (quoted, modifier omitted)", so a documentation criterion that cannot fail is scored as a PASS beside a real failure.
+
+**Correction:** Remove documentation items from PASS/FAIL scoring and report only the magnitude gate.
+
+**Status:** ANNOTATED — label, status or tally corrected in the record; no re-score of earlier runs.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

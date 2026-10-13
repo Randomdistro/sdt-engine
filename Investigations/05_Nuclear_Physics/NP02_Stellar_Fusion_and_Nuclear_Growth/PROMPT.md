@@ -110,3 +110,15 @@ Class A: all 5 stages pass with a NATIVE occlusion scale (no k_occ fit), mirror-
 ---
 
 *NP02 · §K-deepened 2026-07-13 · fitted k_occ flagged and routed to NP17/κ native successors; 1.83c aligned to PPT06; Hund DoF named as the mirror-map's missing freedom.*
+
+---
+
+## Audit correction 2026-10-05 (construction)
+
+**Finding:** The occlusion unit k_occ = 28.30/6 MeV per contact is fitted (class E) to He-4, and the stage-E "20/20 mirror shell valence PASS" maps Z to a valence category, which is an invertible function of (Z, N) and so cannot be independent evidence.
+
+**Correction:** Replace k_occ with a native scale or label every binding result CALIBRATED(1), and test the valence map against a null on random (Z, N).
+
+**Status:** RULE RECORDED — corrected gate or definition applies to the next run; the earlier result is not re-scored and nothing was re-run.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

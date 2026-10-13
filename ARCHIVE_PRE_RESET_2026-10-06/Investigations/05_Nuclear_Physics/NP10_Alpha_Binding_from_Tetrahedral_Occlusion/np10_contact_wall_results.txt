@@ -1,0 +1,43 @@
+﻿=======================================================================
+ NP10 RUN 2 — ROOT-CONTACT: shared-seat contact wall (J.C. Harvey 2026-07-05)
+ One constant set: ahc = 14.3996 eV*A = 1.4400 MeV*fm | a_0 = 0.529177 A | R_p = 0.8414 fm
+ Zero fitted parameters. Gates (25%) committed in RUN_LOG before coding.
+=======================================================================
+
+GA  k(H2) — Face-R wall under the CH07 shared-seat well  [anchor: 575 N/m OBSERVED]
+    interior minimum: EXISTS at R_min = 0.3147 A (meas Re 0.7414, -57.6%), seat x = 0.5000
+    well depth at minimum: -158.89 eV (vs 2p+2e at infinity)
+    k = d2E/dR2 = 17801.3 N/m  vs 575 N/m  (+2995.9%)   GA(25%): FAIL
+
+GB  NaCl — Face-R correction to the Evjen sum  [anchors: 861.0 -> 787 kJ/mol OBSERVED]
+    D3: NN pair ledger/point enhancement at r0: +0.297% (exact ledger DEEPENS attraction)
+    wall correction to U_L: +40.59 kJ/mol  (required -74.0)  sign WRONG — adds binding
+    GB(25% + sign): FAIL  (err vs required: +154.8%)
+
+GC  ALPHA LOCK — Face T: (Z-1)! tour multiplicity  [anchors: 2.224/8.482/28.296 MeV OBSERVED]
+    required alpha boost = B_alpha/E_es = 28.296/4.454 = x6.354 | (Z-1)! at Z=4: x6  (-5.57%)
+    deuteron Z=2: B = (Z-1)! * E_es = 1 * 2.200 =  2.200 MeV  (meas  2.224, -1.06%) [PASS]
+    triton   Z=3: B = (Z-1)! * E_es = 2 * 4.278 =  8.557 MeV  (meas  8.482, +0.88%) [PASS]
+    alpha    Z=4: B = (Z-1)! * E_es = 6 * 4.454 = 26.721 MeV  (meas 28.296, -5.57%) [PASS]
+    GC(25%): PASS   (declared POST-DICTION of the run-1 ladder; look-elsewhere
+    logged in RUN_LOG; falsifier: Z=5 seat-tour lock must be x24)
+
+D1  BUDGET-WALL RIVAL (diagnostic only; FLM12 confinement hbar/dx, Law-IV/V
+    reading; formally degenerate with QM zero-point — capped CONVERGENCE)
+    hbar^2/2m_e = 3.80998 eV*A^2 (engine hbar, m_e)
+    H2: R_min = 0.5790 A (-21.9% vs 0.7414), depth -45.49 eV, k = 2697 N/m (+369% vs 575)
+    -> fences the wall's true scale for ROOT-BUDGET; earns nothing here.
+
+D2  DEUTERON ANCHOR (Face R nuclear, cage Rh = R_p/6 = 0.1402 fm)
+    E_d(ledger) = 2.2054 MeV (point 2.2004; ledger shift +0.23%; vs meas 2.224: -0.84%)
+    committed band: ledger must stay within 2% of the point anchor -> HOLDS
+
+=======================================================================
+ NP10 RUN 2 — REGISTERED THREE-FIELD CROSS-CHECK SCORE
+   target                     predicted        anchor        gate(25%)
+   (a) k(H2)                   17801.3 N/m    575 N/m       FAIL (+2995.9%)
+   (b) NaCl correction          +40.59 kJ/mol  -74.0 kJ/mol  FAIL (sign WRONG)
+   (c) alpha lock             x6 = (Z-1)!      x6.354        PASS (-5.57%)
+   CONJUNCTION (GA^GB^GC): FAIL
+   committed-gate failures: 2 | exit: 1
+=======================================================================

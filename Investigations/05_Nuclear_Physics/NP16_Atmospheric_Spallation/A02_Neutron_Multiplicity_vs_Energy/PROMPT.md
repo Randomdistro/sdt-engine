@@ -1,3 +1,30 @@
+# NP16-A02 — Neutron multiplicity against energy (specification rewritten 2026-10-12)
+
+**Author:** J. C. Harvey, Melbourne. Rewritten at Harvey's direction: prompts carry new data; the packing sequencer is understood before grammar work. The previous specification is kept below the line.
+
+## 1. State after the reset (2026-10-10)
+**G2, PENDING_DATA.** EXFOR (p,xn) excitation functions for the 20 targets are not in the repo. The first approximation, E_bond = S_n (measured separation energy), is shared-input, not a native ejection cost.
+
+## 2. New data and what it teaches (2026-10-10 to 2026-10-12)
+- NP27 (beam-peel kinematics): 1.83c surface, central = fission, grazing = spallation. The native ejection picture is a peel at the contact.
+- The native separation ledger is list-dependent (NP14/NP17): removing a "neutron" removes a p + e pair from a stabled seat, and that pair's own +0.782 MeV is owed.
+
+## 3. Next round (registered order)
+1. Cache the EXFOR excitation functions with provenance.
+2. A native ejection-cost rule (peel depth against contact count on the live sequencer graph), stated before comparison.
+3. Thresholds and multiplicities compared once, with cascade bands.
+
+## Prohibitions
+- No census over candidate predictors.
+- Grammar counts are not evidence (NP24).
+- No data substitution without a label.
+- Release is read, never edited (proposals only).
+- The word "charge" is not used.
+
+---
+
+## Previous specification (kept as written)
+
 # A02: Neutron Multiplicity vs Energy Scaling — Investigation Prompt
 
 > **Author:** J. C. Harvey, Melbourne. **Status:** SPEC (upgrade 2026-06-27).

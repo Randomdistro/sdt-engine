@@ -1,0 +1,108 @@
+{
+  "dataset": "SPARC original Rotmod_LTG and metadata",
+  "galaxies": 175,
+  "radial_points": 3391,
+  "valid_radial_points": 3389,
+  "disk_mass_to_light": 0.5,
+  "bulge_mass_to_light": 0.7,
+  "outer_rule": "r >= max(2*Rdisk, 0.5*rmax), >=4 valid points; Q<=2 and inclination>=30deg",
+  "selected_galaxies": 123,
+  "selected_negative_outer_slopes": 100,
+  "selected_slopes_below_minus_point_one": 90,
+  "selected_positive_outer_slopes": 23,
+  "median_selected_outer_log_c_slope": -0.22506873395389862,
+  "examples": [
+    {
+      "galaxy": "DDO154",
+      "points": 12,
+      "valid_points": 12,
+      "outer_cut_kpc": 2.96,
+      "outer_points": 7,
+      "outer_log_c_slope": -0.26545929494976805,
+      "quality_inclination_outer_selection": true,
+      "last_radius_kpc": 5.92,
+      "last_vobs_kms": 45.5,
+      "last_vbar_kms": 16.25433480644471,
+      "last_required_cphase_over_c0": 0.35723812761416945,
+      "distance_mpc": 4.04,
+      "inclination_deg": 64.0,
+      "disk_scale_kpc": 0.37,
+      "quality": 2
+    },
+    {
+      "galaxy": "NGC2403",
+      "points": 73,
+      "valid_points": 73,
+      "outer_cut_kpc": 10.435,
+      "outer_points": 21,
+      "outer_log_c_slope": -0.4637507183724345,
+      "quality_inclination_outer_selection": true,
+      "last_radius_kpc": 20.87,
+      "last_vobs_kms": 134.0,
+      "last_vbar_kms": 51.44159163556275,
+      "last_required_cphase_over_c0": 0.38389247489225936,
+      "distance_mpc": 3.16,
+      "inclination_deg": 63.0,
+      "disk_scale_kpc": 1.39,
+      "quality": 1
+    },
+    {
+      "galaxy": "NGC3198",
+      "points": 43,
+      "valid_points": 43,
+      "outer_cut_kpc": 22.04,
+      "outer_points": 12,
+      "outer_log_c_slope": -0.22506873395389862,
+      "quality_inclination_outer_selection": true,
+      "last_radius_kpc": 44.08,
+      "last_vobs_kms": 149.0,
+      "last_vbar_kms": 64.71316751635636,
+      "last_required_cphase_over_c0": 0.4343165605124588,
+      "distance_mpc": 13.8,
+      "inclination_deg": 73.0,
+      "disk_scale_kpc": 3.14,
+      "quality": 1
+    }
+  ],
+  "algebra_checks": {
+    "paired_spectral_max_absolute_error": 1.6653345369377348e-16,
+    "log_ratio_max_absolute_error": 1.8735013540549517e-16,
+    "cavity_jacobian_max_error": 4.440892098500626e-16,
+    "kepler_speed_at_r_1_and_4_kms": [
+      200.0,
+      100.0
+    ],
+    "apparent_speed_with_rising_c_kms": [
+      200.0,
+      50.0
+    ],
+    "apparent_speed_with_falling_c_kms": [
+      200.0,
+      200.0
+    ]
+  },
+  "sources": [
+    {
+      "name": "Rotmod_LTG.zip",
+      "url": "https://astroweb.case.edu/SPARC/Rotmod_LTG.zip",
+      "bytes": 110737,
+      "sha256": "0a80cc90714828cc28b7dd57923576714d209f2490328c087c4a4ad607faf588",
+      "md5": "e4c8b92766026770ed35e5889064e12b"
+    },
+    {
+      "name": "SPARC_Lelli2016c.mrt",
+      "url": "https://astroweb.case.edu/SPARC/SPARC_Lelli2016c.mrt",
+      "bytes": 28259,
+      "sha256": "5aa0501f6b0d881fa579030e315e7b5b6ef561a5bd3a07472f9929c7e5728243",
+      "md5": "6181df386bfc05868a3700c196e800da"
+    }
+  ],
+  "limitations": [
+    "No raw approaching/receding line centroids in Rotmod data.",
+    "Required c profile is solved from observed Vobs and assumed Vbar, not independently predicted.",
+    "Photometric distance, inclination, gas calibration, stellar M/L and baryonic force law remain conditional.",
+    "Outer slopes are descriptive; no full nuisance covariance or model likelihood.",
+    "c_phase is a Doppler parameter; c_far from the native header is not automatically interchangeable."
+  ],
+  "figure_output": "Optional SVG figure: run with --figure"
+}

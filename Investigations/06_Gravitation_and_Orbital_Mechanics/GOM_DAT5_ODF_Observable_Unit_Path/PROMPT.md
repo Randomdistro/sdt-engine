@@ -1,3 +1,20 @@
+# GOM_DAT5 — ODF observable unit path (specification rewritten 2026-10-12)
+
+**Author:** J. C. Harvey, Melbourne. Verification item: its rows are excluded from physics tallies, per the prompt's id alias. The previous specification is kept below the line.
+
+## 1. State after the reset (2026-10-10)
+C1, C2 and C4 met on P0 via the supplier (Doppler observable from counts and bias; type 12, Hz, format 2; median |obs| 50,244.3 Hz within [1e3, 1e7]). C5 (the MESSENGER example magnitude) is open.
+
+## 2. Next round
+C5: decode one MESSENGER ODF with provenance and apply the same magnitude gate, registered first.
+
+## 3. Note
+These decodes feed the Cassini-based gravity tests. No physics result is drawn from a VERIFICATION row.
+
+---
+
+## Previous specification (kept as written)
+
 # GOM32 — ODF Type-12 Observable Unit-Path Adjudication
 
 > **Status:** PRE-REGISTERED — 2026-08-08.  
@@ -48,3 +65,17 @@ No light-time residual, no solar **K** fit, no γ fit.
 MESSENGER one-way Doppler from PDS `odf_unpack` example (bits 65–128):  
 `−382738.663803100` Hz.  
 Source: https://pds-geosciences.wustl.edu/radiosciencedocs/urn-nasa-pds-radiosci_documentation/DSN_TRK-2-18/odf_unpack.pdf
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** Magnitude gate C4 accepts |obs| anywhere from 1 kHz to 10 MHz (four decades), which cannot discriminate Doppler engineering units from other conventions, and ids read GOM32-C*.
+
+**Correction:** Gate on the documented observable equation numerically and align the ids.
+
+**Status:** RULE RECORDED — corrected gate or definition applies to the next run; the earlier result is not re-scored and nothing was re-run.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*
+
+**Id alias (2026-10-05):** claim ids written `GOM32-C*` in this folder and its verdict are the claims of `GOM_DAT5`. The rows are VERIFICATION (data-structure, checksum and field-parse checks), not tests of a physical claim, and are excluded from physics PASS/FAIL tallies; earlier text is not rewritten.

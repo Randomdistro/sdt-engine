@@ -8,7 +8,7 @@
 
 ## ⓪ The Golden Rule — five questions (answer before Phase 0)
 
-1. **What don't we know?** — [NP07] NP07: Primordial Lithium Resolution — Data/Prompt: *(unfilled by the 2026-06-27 bulk template upgrade — write the single measurable gap before the next run)*
+1. **What don't we know?** — [NP07] NP07: Primordial Lithium Resolution — Data/Prompt: **Measurable gap (written 2026-10-05 in the audit correction pass, from this prompt's own content; the 2026-06-27 template left it unfilled):** Does the grammar-selection rule plus the EC-electron binding scale identify a Be-7 electron-capture window that lowers the predicted primordial Li-7/H ratio toward the observed value, with no fitted rate?
 2. **Why does it matter?** — Stack position / downstream blockers (see `INVESTIGATION_STACK.md`).
 3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
 4. **What would prove us wrong?** — §⑧ falsification tests with numeric triggers.
@@ -21,8 +21,8 @@
 | BBN predicted Li-7/H ratio | (4.68 ± 0.67) × 10⁻¹⁰ | Cyburt et al. 2016 |
 | Observed Li-7/H ratio (Spite plateau) | (1.58 ± 0.31) × 10⁻¹⁰ | Sbordone et al. 2010 |
 | Discrepancy factor | ~3× (BBN overproduces Li-7) | The "lithium problem" |
-| Li-7 grammar | α + d + t (3 blocks, 1 triton) | ATOMICUS/003_Li7.md |
-| Li-6 grammar | α + d (2 blocks, 0 tritons) | ATOMICUS/003_Li6.md |
+| Li-7 grammar | α + d + t (3 blocks, 1 triton) | ATOMICUS/isotopes/003_Li7.md |
+| Li-6 grammar | α + d (2 blocks, 0 tritons) | ATOMICUS/isotopes/003_Li6.md |
 | Be-7 half-life (EC) | 53.22 d | NNDC |
 | Be-7 grammar | α + d (EC isotope) | ATOMICUS |
 | Be-7 → Li-7 by EC | Grammar correction: Δn_tri = +2, Δn_deu = −3 | SDT EC rules |
@@ -96,3 +96,15 @@ Standard BBN predicts 3× more Li-7 than observed. The primordial Li-7 comes fro
 ---
 
 *NP07 · upgraded 2026-06-27 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*
+
+---
+
+## Audit correction 2026-10-05 (data / provenance)
+
+**Finding:** The data table cites `ATOMICUS/003_Li6.md` and `ATOMICUS/003_Li7.md`, which do not exist at those paths (the isotope files sit under ATOMICUS/isotopes/ if present).
+
+**Correction:** Correct the paths and record the Li-6/Li-7 inputs with their sources.
+
+**Status:** ANNOTATED — label, status or tally corrected in the record; no re-score of earlier runs.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

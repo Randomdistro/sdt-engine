@@ -1,0 +1,15 @@
+NSEQ05 blank-slate run 1 (registered in NSEQ05_RESET_ASSESSMENT_2026-10-10.md sections 0-2)
+=======================================================================
+
+[T1] cumulative: alpha:2 D6:8 D12:20 T8:28 D12:40 T10:50 D20:70 T12:82 D30:112 T14:126 D42:168 T16:184 -> reproduces the frozen table (VERIFICATION)
+     F(n) = B(n) + E(n) = (n+1)(n+2) for n = 1..7: yes
+[T2] crown graph (two (n+1)-sets, every opening seat linked to every closing seat except its antipode) and the triangulated face count 2V-4:
+     n = 3: V = 8, edges 12 (= n(n+1) = 12), degree 3 regular ; triangulated faces 2V-4 = 12 ; schedule D seats E(n) = 12 -> face rule agrees
+     n = 4: V = 10, edges 20 (= n(n+1) = 20), degree 4 regular ; triangulated faces 2V-4 = 16 ; schedule D seats E(n) = 20 -> face rule differs
+     n = 5: V = 12, edges 30 (= n(n+1) = 30), degree 5 regular ; triangulated faces 2V-4 = 20 ; schedule D seats E(n) = 30 -> face rule differs
+     n = 6: V = 14, edges 42 (= n(n+1) = 42), degree 6 regular ; triangulated faces 2V-4 = 24 ; schedule D seats E(n) = 42 -> face rule differs
+[V1] cube-vertex pair angles 12/12/4 -> met
+[V2] AME2020 experimental rows parsed: 1875 ; n 8071.31806, 1H 7288.971064, 2H 13135.722895, 3H 14931.21888 keV -> NOT MET
+[V3] second difference of a quadratic (step 2) = 8c: 2.000000 vs 2.000000 -> met
+
+VALIDATIONS NOT MET -> G0

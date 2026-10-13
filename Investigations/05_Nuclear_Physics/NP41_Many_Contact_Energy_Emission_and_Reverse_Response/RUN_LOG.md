@@ -1,0 +1,15 @@
+# RUN_LOG — NP41
+
+## Pre-Run Commitments — NP41 (2026-10-05, before any tool)
+- Prompt completion target: B (P0 residual map; P2 degree census). P1 candidates and P3 not run this round.
+- Physics class hoped: CONVERGENCE; CALIBRATED budget: existing items only (NSEQ17 counter-circulation coefficient, ledger D41).
+- P0 definition: for every isotope in the sequencer table with Z ≥ 2, nd ≥ 0, nt ≥ 0, binding > 0 (the 217-nuclide set of the audit), residual fraction r = (B_calc − B_meas)/B_meas, with B_calc from `buildNuclide(...).observableLedger.massDefect.calculatedBindingMeV` of the unchanged engine (`docs/js/traction-gear-engine.js`; B_calc = Σ contactCoupling × αħc/R_p × contractionScale, the measured value is not an input to it) and B_meas from the table's own binding column; denominator = all built nuclides; no pruning.
+- Reported: median, interquartile range of r; B_calc/B_meas by A bins; correlation of r with maximum contact degree and with A; nuclides with B_calc non-finite listed.
+- Gate (⓪.4b): the NP24 null for the shadow-overlap model is R²(BE/A) = −12.2; report R² of B_calc/A against B_meas/A for this construction on the same set; no gate on pass, because P1 value laws are not registered yet.
+- Forbidden retroactive changes: removing nuclides after seeing r; re-scaling B_calc by any constant fitted to B_meas.
+2026-10-05 P0 run: ratio median 0.366, Spearman 0.9997, plateau k~2.756 for A>=60. See NP41_ASSESSMENT.md.
+2026-10-05 Correction of the path in the pre-registration: the engine actually loaded is `Release/HTML_SDT_Website/js/traction-gear-engine.js` (the validator requires it); `docs/js/traction-gear-engine.js` is byte-identical (same sha256 prefix 301523f98517bf60).
+2026-10-05 Instrument check (scratch copy, repo untouched): the hard-coded 4 samples per wake pair changed to 8; B_calc identical to 1e-4 MeV for He-4 (11.6898), C-12 (39.4480), O-16 (55.1155), Ca-40 (135.1135), Fe-56 (184.3102). The 0.366 scale is therefore not a sampling-resolution artefact; it comes from the contact coupling sum and the interaction scale αħc/R_p.
+2026-10-05 Round 2 registered (exploratory, before running): regress B_meas on counts of contact kinds n_k (all 217 nuclides, non-negative least squares, no intercept) to see whether per-kind energies are stable. Parameters = number of kinds (CALIBRATED(n_kinds), labelled exploratory, not a value law). Reported: kinds and their counts, fitted energy per kind, median |residual|, and the same fit with the group split A<60 / A>=60 fitted on one half and scored on the other (train/test), to show whether it generalises. No pruning.
+2026-10-05 Round 3 registered (before running): extract per-edge contactCoupling (observableLedger.wake.contactLedger or equivalent) by edge kind for all 217 nuclides; report per kind the mean contactCoupling and its coefficient of variation across edges and across nuclides, and per-nuclide share of coupling by kind. Question: does one kind carry the A >= 60 plateau? Statistics only; no refit, no scaling.
+2026-10-05 Round 3 run: all kinds ~1.75-1.92 per edge (CV 3-8%); shortfall is a uniform per-contact normalisation. See NP41_ASSESSMENT.md.

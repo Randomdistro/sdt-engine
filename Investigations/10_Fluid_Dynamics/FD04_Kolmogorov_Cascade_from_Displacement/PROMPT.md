@@ -257,3 +257,15 @@ secondary to a pass; silence about the distance from the measured centre.
 ---
 
 *FD04 · upgraded 2026-06-27 · P6 re-pose added 2026-07-26 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** A passing check is the fitted slope −1.666825 ± 6e-4 on a synthetic cascade the tool generates, which recovers the exponent it was built with, and the −5/3 follows from the dimensional constant-flux argument that K41 uses.
+
+**Correction:** Gate only on the measured inertial-range slope (±0.10 as the prompt states) and label the synthetic fit VERIFICATION.
+
+**Status:** RULE RECORDED — corrected gate or definition applies to the next run; the earlier result is not re-scored and nothing was re-run.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

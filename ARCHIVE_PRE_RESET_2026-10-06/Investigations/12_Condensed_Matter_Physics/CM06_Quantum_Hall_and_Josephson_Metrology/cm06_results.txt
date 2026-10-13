@@ -1,0 +1,50 @@
+CM06 - Quantum Hall and Josephson Metrology
+J. C. Harvey, Melbourne - 2026-07-04
+
+== IDENTITY block (printed once, ZERO evidentiary weight) ==
+  R_K  = h/e^2  = 25812.807459 Ohm      [IDENTITY - h, e SI-exact]
+  K_J  = 2e/h   = 4.835978e+14 Hz/V   [IDENTITY]
+  Phi0 = h/(2e) = 2.067834e-15 Wb     [IDENTITY]
+
+== P1/P2: integer channel count vs bulk magnitude under disorder ==
+  [chain, named] 1-D relay line: one carrier configuration per
+  winding cell (Law VI h-cell - ROOT-A premise, shared with
+  CM04/CM01/CM03); cell rate = dmu/h; I = e*dmu/h => G = e^2/h
+  per channel. CONVERGENCE conditional on ROOT-A; grade capped C.
+
+  p          nu (edge count)  bulk G/G0 (drift)   
+  1e-04      2                0.9725              
+  3e-04      2                0.9218              
+  1e-03      2                0.7795              
+  3e-03      2                0.5410              
+  1e-02      2                0.2612              
+  3e-02      2                0.1054              
+  1e-01      2                0.0341              
+  gates: nu integer-only PASS ; nu constant over 3 orders PASS ;
+         bulk declines smoothly: 96.5% (gate >30%)  PASS
+  [COMPUTED-toy, no measured claim: a COUNT is disorder-rigid
+   (re-routing within the edge strip), a MAGNITUDE is not. That
+   is the exactness mechanism - counts cannot drift.]
+
+== P3: the Josephson 2 (inherited body count) ==
+  chain: one 2-pi phase slip of the weak link relays ONE locked
+  pair (CM01 2-body cluster, handedness 2e); energy per slip:
+  2e * V = h * f  =>  V = (h/2e) f.  The 2 is CM01's body count
+  (earned there as ARGUED; exclusivity OPEN there - inherited
+  with that flag, not laundered into a pass here).
+  Single-vortex counterfactual: an unpaired W=1 carrier would give
+  e*V = h*f (K = e/h) - a falsifiable difference: any weak link
+  showing e/h steps in the paired state kills the pair count.
+
+== P4: metrology closure ==
+  DEFER - upstream CM02 (native ohm) is flagged DO-NOT-TRUST
+  (tau-from-sigma circularity). Unblock: CM02 honest re-run;
+  CM01-P1's normal-state chain (tau never sees sigma) is the
+  template it should build on.
+
+== Ledger ==
+  IDENTITY : R_K, K_J, Phi0 (zero evidence, printed once).
+  CONVERGENCE (conditional on ROOT-A): G = e^2/h per channel.
+  COMPUTED-toy : count-vs-magnitude disorder rigidity.
+  INHERITED : the Josephson 2 = CM01 body count (flag carried).
+  DEFER : P4 (CM02). CALIBRATED: none (0 of 0).

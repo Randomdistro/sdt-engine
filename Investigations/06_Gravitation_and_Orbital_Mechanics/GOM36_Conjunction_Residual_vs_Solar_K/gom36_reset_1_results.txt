@@ -1,0 +1,27 @@
+GOM36 blank-slate run 1 (registered in GOM36_RESET_ASSESSMENT_2026-10-11.md sections 0-2)
+=======================================================================
+
+[V3] delay formula: 4.790072873e-05 s against the closed form 4.790072873e-05 s -> met
+[V2] |E| = 1.0148 AU, |C| = 7.3726 AU, Earth-Cassini from vectors 1.251007e+09 km against DSS-25 table 1.250978e+09 km (relative 2.4e-05) -> met
+[V1] two-way predictor, offset from the whole span: residual sd 2.639 Hz (GOM_DAT8: 2.639) -> met
+
+VALIDATIONS: met
+
+PROCEDURE A (prompt literal): s = median(obs/f_A) on train = -0.25024 (CALIBRATED(1)); test residual r_A = obs - s f_A [Hz]
+  r_A                                min 7601.1398 ; median 15230.5123 ; max 22714.7319 ; sd 4371.6978
+  median|r_A| / median|obs| = 0.263 (a scale that explained the observable would leave a small ratio)
+
+PROCEDURE B (amended): f_B = (2/c) F rdot_2w with F = 32.028 GHz fixed ; offset C0 = -2510175.727 Hz from the train half (CALIBRATED(1)); test residual r_B [Hz]
+  r_B                                min -0.2832 ; median 3.1080 ; max 5.5396 ; sd 1.4298
+  test-half residual drift (OLS) = +2.477 Hz/hour ; train-half-defined offset change relative to the test half mean: +2.916 Hz
+
+SOLAR GEOMETRY (test half, K = 1476.35 m): elongation 11.947 to 11.912 deg ; b = 45.17 to 45.04 R_sun (0.2101 to 0.2095 AU) ; one-way delay 64.209 to 64.267 us ; d(delay)/dt = 1.5403e-11 to 1.5450e-11
+  predicted Doppler contribution 2 F d(delay)/dt : mean 0.9882 Hz ; sd over the test half 8.586e-04 Hz ; peak-to-peak 2.973e-03 Hz ; drift +2.875e-03 Hz/hour
+
+CORRELATIONS (test half):
+  r_A  corr(r, dDelay/dt) raw +1.0000 ; corr(r, 1/b) raw +1.0000 ; detrended: corr(r, dDelay/dt) -0.9800 ; corr(r, 1/b) -0.9800
+  r_B  corr(r, dDelay/dt) raw +0.5174 ; corr(r, 1/b) raw +0.5174 ; detrended: corr(r, dDelay/dt) +0.0234 ; corr(r, 1/b) +0.0234
+  prompt's rule on the raw |corr(r_B, d(delay)/dt)| = 0.5174 : SOLAR_K_RESIDUAL_SIGNAL
+  regression coefficient kappa = cov(r_B, Df_pred)/var(Df_pred) = +8.616e+02 (SDT value 1) ; sd(r_B)/sd(Df_pred) = 1.665e+03
+SENSITIVITY GATE (predicted sd over the test half > 3% of the residual sd = 0.0429 Hz): predicted sd 8.586e-04 Hz -> NOT MET
+AMENDED OUTCOME: UNADJUDICATED_BY_SENSITIVITY (the correlation is time-confounded)

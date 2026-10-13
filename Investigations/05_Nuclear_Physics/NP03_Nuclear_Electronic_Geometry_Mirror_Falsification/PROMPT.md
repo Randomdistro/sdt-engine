@@ -8,7 +8,7 @@
 
 ## ⓪ The Golden Rule — five questions (answer before Phase 0)
 
-1. **What don't we know?** — [NP03] NP03 — Independent Nuclear–Electronic Geometry Mirror **Falsification** Test: *(unfilled by the 2026-06-27 bulk template upgrade — write the single measurable gap before the next run)*
+1. **What don't we know?** — [NP03] NP03 — Independent Nuclear–Electronic Geometry Mirror **Falsification** Test: **Measurable gap (written 2026-10-05 in the audit correction pass, from this prompt's own content; the 2026-06-27 template left it unfilled):** Is electron-shell geometry a projection of the nuclear packing (Rule 18): can all Z electron threads be routed through the packing without intersection at r_e thickness, and does the Hopf-fibration mapping hold (0 of 508 so far)?
 2. **Why does it matter?** — Stack position / downstream blockers (see `INVESTIGATION_STACK.md`).
 3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
 4. **What would prove us wrong?** — §⑧ falsification tests with numeric triggers.
@@ -192,3 +192,15 @@ mirror-score falsification framework (NP03E)
 ---
 
 *NP03 · upgraded 2026-06-27 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*
+
+---
+
+## Audit correction 2026-10-05 (opening premise)
+
+**Finding:** The question is unfilled by the bulk template, and the verdict records that Rule 18 (electron-shell geometry as a projection of nuclear geometry) "remains untested" (thin-fibre threading INFEASIBLE at r_e thickness, 0/508 for the full Hopf fibration).
+
+**Correction:** State the measurable gap as a testable nuclear-to-shell mapping and gate it against the measured shell structure.
+
+**Status:** RULE RECORDED — corrected gate or definition applies to the next run; the earlier result is not re-scored and nothing was re-run.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

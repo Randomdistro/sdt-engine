@@ -1,0 +1,22 @@
+P0: AME2020 ground-state rows 3558 ; NUBASE2020 ground-state rows 3558 ; stable (NUBASE stbl) 253
+  AME2020    grammar-valid (Z>=3, n_d>=0, n_t>=0): 3213 ; conservation failures 0 (IDENTITY)
+  NUBASE2020 grammar-valid (Z>=3, n_d>=0, n_t>=0): 3213 ; conservation failures 0 (IDENTITY)
+
+P3: stable nuclides with Z>=3: 249 ; with both Q determinable (measured neighbours): 246 ; inside the single-step band (Q_beta- <= 0 and Q_EC <= 0): 245 (99.6%)
+  stable nuclides outside the band: [(52, 123, -1228.4, 51.9)]
+  F3 (>= 90% inside): met
+  F4: rows (Z) with a stable range and a band: 78 ; stable-range edges coincide with the band edges (same A at both ends): 62 (79.5%)
+  distribution of (stable min A - band min A, band max A - stable max A): [((0, 0), 62), ((0, 2), 6), ((2, 0), 4), ((1, 0), 1), ((0, 4), 1), ((4, 0), 1), ((3, 0), 1), ((2, -2), 1)]
+  F4 (>= 90% of rows): NOT MET
+  S1 as a rule (u_mid quadratic in v): fit even-Z -> odd-Z R^2 0.8485 (rms 2.26 u-units); fit odd-Z -> even-Z R^2 0.9136 (rms 1.80)
+  note: u_mid = 5Z - A_mid*2 - 2 is the relabeled mid-A of the valley; a high R^2 here restates the smoothness of the valley of stability in Z (D2).
+
+P4: ladder scaled to H (z = IE/13.59844 eV, k = 1/sqrt(z)); elements with a list: 104
+  I1 (hydrogenic null) last electron z/Z^2 for the complete ladders:
+    Z1:1.0000 Z2:1.0004 Z3:1.0006 Z14:1.0030 Z15:1.0033 Z27:1.0100 Z28:1.0107 Z29:1.0115
+    complete ladders 29 ; z_last/Z^2 from 1.0000 to 1.0115
+Traceback (most recent call last):
+  File "C:\Users\Jimmi\OneDrive\Desktop\sdt-engine\Investigations\05_Nuclear_Physics\NP24_Grammar_Rule_Extraction\np24_reset_1.py", line 187, in <module>
+    f1[int(zs)] = ie[zs][0]
+                  ~~~~~~^^^
+IndexError: list index out of range

@@ -210,3 +210,15 @@ These are *not* required for the verdict; they are the payoff of doing it well.
 ---
 
 *FD01 · upgraded 2026-06-27 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** The ν-recovery gate (0.5·dσ²/dt against w·dx²/dt, error 2.9e-10) checks that the discrete relay rule reproduces its own diffusion coefficient, which the rule defines, so it cannot fail and the term-for-term Navier–Stokes claim rests on the expansion alone.
+
+**Correction:** Label the gate VERIFICATION and gate the ν value against an independently measured fluid (as FD02 does).
+
+**Status:** ANNOTATED — label, status or tally corrected in the record; no re-score of earlier runs.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

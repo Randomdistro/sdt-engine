@@ -175,3 +175,15 @@ crossover · claiming NATIVE while the residence law is unpaid.
 *NP31 · opened 2026-07-23 direct · the orbit is FLM14's tour and Face T already counted it; the
 factorial dies one step past the alpha and the data wants tours ∝ A. One geometric quantity — the
 tour cap — closes the chart, and the same interleave owes 11.6 mfm/triton.*
+
+---
+
+## Audit correction 2026-10-05 (opening premise)
+
+**Finding:** The tour reach has no geometric definition, so Route A cannot be run without choosing the cap per nucleus (its own kill condition), and two metrics are ±25%/±26% tolerances.
+
+**Correction:** Define the reach from packing pose data with no binding input and tighten the Route C tolerance to ≤ 10%.
+
+**Status:** OWED — needs a new run, derivation or data; the corrected requirement is recorded here.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

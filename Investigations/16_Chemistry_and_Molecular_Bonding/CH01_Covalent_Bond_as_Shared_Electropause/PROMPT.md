@@ -229,3 +229,15 @@ Not required for the verdict; they are the payoff of doing it well.
 ---
 
 *CH01 · the bond is where the electropauses merge — find the crossing, don't guess 2a₀.*
+
+---
+
+## Audit correction 2026-10-05 (construction)
+
+**Finding:** The recorded results (R error 42.8%, D_e error 51.9%) come from the old R = 2a₀, D_e = Ry/2 prototype, not the prompt's required root-find of F_in(R) = F_out(R) without a 2a₀ shortcut, so the registered test has not been run.
+
+**Correction:** Implement the axial-balance root-find and score it against R_e = 0.741 Å and D_e = 4.478 eV with the 5%/20% gates.
+
+**Status:** OWED — needs a new run, derivation or data; the corrected requirement is recorded here.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

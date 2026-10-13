@@ -37,3 +37,17 @@ geometric range-rate — without fitting solar **K**.
 
 - SDT capital **K** = c-boundary radius (unused here).  
 - ODF/TRK `K` / `ρ` = transponder turnaround ratio.
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** The prompt has no numeric gate (flag false), and the PASS rows ("ramp row present", "candidates formed", "predictors reported") are procedure steps.
+
+**Correction:** State a numeric gate for closing the ~3.4× scale gap and score only that.
+
+**Status:** RULE RECORDED — corrected gate or definition applies to the next run; the earlier result is not re-scored and nothing was re-run.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*
+
+**Correction to the finding above (2026-10-05):** claim DAT9-C4 does carry a numeric gate (rel_resid < 0.15 and |ratio − 1| < 0.15); only C1–C3 are procedure steps. The statement that the folder has no numeric gate is withdrawn.

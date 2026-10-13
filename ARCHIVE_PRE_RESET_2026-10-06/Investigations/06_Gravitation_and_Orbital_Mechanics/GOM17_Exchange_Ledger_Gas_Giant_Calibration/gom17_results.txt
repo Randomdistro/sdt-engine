@@ -1,0 +1,145 @@
+====================================================================================================
+ GOM17 - EXCHANGE LEDGER (energy = movement; every term a z-account; zk^2 = 1).
+ koppa KINEMATIC (4pi^2 a^3/T^2 c^2) throughout. No G/M/GM in-chain. Rival = labelled column only.
+====================================================================================================
+
+--- A1. vis-viva time-average theorem (quadrature, Mercury e=0.2056, uniform-in-time grid) ---
+  <z_t>_time = 2.549908123e-08   z_d(a) = 2.549908123e-08   ratio = 1.000000000
+  <1/r>_time*a = 1.000000000  (theorem: =1 exactly)
+  conserved ledger line z_t(t) - 2*z_d(r(t)) = -z_d(a) at 3 sample points:
+    M=0.5: z_t - 2*z_d(r) = -2.549908e-08   -z_d(a) = -2.549908e-08
+    M=2.0: z_t - 2*z_d(r) = -2.549908e-08   -z_d(a) = -2.549908e-08
+    M=4.5: z_t - 2*z_d(r) = -2.549908e-08   -z_d(a) = -2.549908e-08
+  => closure supported: factor-1 (residence): <z_t> = z_d(a). The 1/2 is NOT in the exchange
+     rate; see A3 (release). NOTE: with v=2pi*a/T this is Kepler-III restated (IDENTITY flag
+     per RUN_LOG) - the independent license is A2.
+
+--- A2. aberration constant: kappa^2*(1-e^2) vs z_d(a_EMB) - factor-1 predicts 1, factor-1/2 predicts 2 ---
+  Struve 1843 (measured)                     20.44500"  kappa^2(1-e^2)/z_d = 0.99507
+  Newcomb adopted (measured-era)             20.47000"  kappa^2(1-e^2)/z_d = 0.99751
+  Nyren 1882 (measured)                      20.49200"  kappa^2(1-e^2)/z_d = 0.99965
+  IAU defined (COMPUTED - circularity flagged) 20.49552"  kappa^2(1-e^2)/z_d = 1.00000 [consistency only]
+  => measured band gives 0.995-1.000: factor-1 closure LICENSED by a telescope angle;
+     factor-1/2 (ratio 2.0) excluded by ~400x the band width.
+
+--- A3. release closure: z_esc = 2*z_d(surface); Earth, measured v_esc = 11.186 km/s (R_mean 6371 km) ---
+  kop(E+M) from Moon row = 4.477374e-03 m  [carries solar tide ~ -0.28%, declared]
+  kop(Earth) via barycentre split (4671 km, kinematic length ratio) = 4.422968e-03 m
+  z_esc measured = 1.392221e-09   2*z_d(surf) = 1.388469e-09   ratio = 1.0027
+  => residence:release = 1:2; the celebrated 1/2 lives BETWEEN them (bound orbit holds half
+     its release requirement), not in the exchange rate. Residual ~ tide bias, labelled.
+
+--- A4. z-accounts, Sun's dependents (z_d = kop_sun/a; z_t = (2pi*a/T)^2/c^2 [row-identity];
+        z_rot = (2pi*R/T_spin)^2/c^2; gearing = dependent solid-angle share Omega/4pi) ---
+  body           a [m]        z_d k_d=1/sqrt      z_rot    gearing
+  Mercury   5.7909e+10  2.550e-08       6262  1.018e-16  4.437e-10
+  Venus     1.0821e+11  1.365e-08       8560  3.649e-17  7.819e-10
+  EMB       1.4960e+11  9.871e-09  1.007e+04  2.407e-12  4.544e-10
+  Mars      2.2794e+11  6.478e-09  1.242e+04  6.448e-13  5.550e-11
+  Jupiter   7.7834e+11  1.897e-09  2.296e+04  1.759e-09  2.109e-09
+  Saturn    1.4267e+12  1.035e-09  3.108e+04  1.104e-09  4.461e-10
+  Uranus    2.8707e+12  5.144e-10  4.409e+04  7.449e-11  1.982e-11
+  Neptune   4.4984e+12  3.283e-10  5.519e+04  8.009e-11  7.576e-12
+  (Sun internal: z_rot(Carrington) = 4.421e-11; Saturn spin CONTESTED - 38018 s used,
+   Voyager 38362.4 s gives z_rot = 1.084e-09)
+
+--- A5. locked moons: T_spin = T_orb  =>  z_rot = z_d*(R/a)^2 - rotation is a pure function
+        of position. 'Every tidally locked speck adds up to its position as rotation.' ---
+  [Jupiter]  moon       a [1e3 km]        z_d       z_rot z_d*(R/a)^2    gearing  lock
+           Amalthea       181.37  7.773e-09   1.653e-15   1.648e-15  5.299e-08  LOCKED
+           Io             421.77  3.343e-09   6.238e-14   6.235e-14  4.663e-06  LOCKED
+           Europa         671.08  2.101e-09   1.137e-14   1.136e-14  1.352e-06  LOCKED
+           Ganymede      1070.41  1.317e-09   7.976e-15   7.976e-15  1.514e-06  LOCKED
+           Callisto      1882.71  7.488e-10   1.227e-15   1.227e-15  4.097e-07  LOCKED
+  [Saturn ]  moon       a [1e3 km]        z_d       z_rot z_d*(R/a)^2    gearing  lock
+           Mimas          185.54  2.275e-09   2.603e-15   2.596e-15  2.853e-07  LOCKED
+           Enceladus      237.95  1.774e-09   1.992e-15   1.991e-15  2.806e-07  LOCKED
+           Tethys         294.62  1.433e-09   4.657e-15   4.656e-15  8.124e-07  LOCKED
+           Dione          377.40  1.118e-09   2.476e-15   2.475e-15  5.532e-07  LOCKED
+           Rhea           527.11  8.008e-10   1.682e-15   1.681e-15  5.249e-07  LOCKED
+           Titan         1221.87  3.455e-10   1.534e-15   1.534e-15  1.110e-06  LOCKED
+           Hyperion      1481.01  2.850e-10         nan   2.368e-18  2.077e-09  NOT LOCKED (chaotic tumbler - z_rot column void)
+           Iapetus       3560.82  1.185e-10   5.045e-18   5.044e-18  1.064e-08  LOCKED
+  [others] locked single majors:
+           Moon       (of EMB    ) z_d = 1.165e-11  z_rot = 2.379e-16  = z_d*(R/a)^2 = 2.379e-16  gearing = 5.107e-06
+           Deimos     (of Mars   ) z_d = 2.033e-11  z_rot = 1.419e-18  = z_d*(R/a)^2 = 1.419e-18  gearing = 1.746e-08
+           Titania    (of Uranus ) z_d = 1.475e-10  z_rot = 4.825e-16  = z_d*(R/a)^2 = 4.825e-16  gearing = 8.178e-07
+           Triton     (of Neptune) z_d = 2.144e-10  z_rot = 3.121e-15  = z_d*(R/a)^2 = 3.121e-15  gearing = 3.639e-06
+  NOTE: z_rot = z_d*(R/a)^2 is a definitional identity GIVEN the lock (RUN_LOG); the physics
+  is the measured lock itself. z_rot ~ 4*z_d*gearing (since (R/a)^2 ~ 4*Omega/4pi).
+
+--- B2. per-moon parent-koppa rows: row = kop_parent*(1 + q*(R_par/a)^2) + kop_moon ---
+        (the (R/a)^2 pattern = the parent's OBLATE-SHADOW form term, read kinematically)
+  [Jupiter] regression: intercept kop_clean = 1.409770 m   slope/intercept q_kin = 0.02131
+          INFORMATIONAL-RIVAL (3/2)*J2 = 0.022104   sign gate (slope>0): PASS
+          moon        row kop [m] (row/A-1) e4 fit dev e4
+          Amalthea       1.414450        33.20       0.08
+          Io             1.410559         5.60      -0.52
+          Europa         1.410153         2.72       0.30
+          Ganymede       1.409869         0.70      -0.25
+          Callisto       1.409869         0.71       0.40
+          residual scatter about fit: median 0.30 e-4, max 0.52 e-4
+  [Saturn] regression: intercept kop_clean = 0.422101 m   slope/intercept q_kin = 0.01742
+          INFORMATIONAL-RIVAL (3/2)*J2 = 0.024447   sign gate (slope>0): PASS
+          moon        row kop [m] (row/A-1) e4 fit dev e4
+          Mimas          0.423161        25.12       6.74
+          Enceladus      0.422238         3.26      -7.92
+          Tethys         0.422241         3.32      -3.97
+          Dione          0.422241         3.31      -1.13
+          Rhea           0.422140         0.93      -1.35
+          Titan          0.422176         1.79       1.36
+          Hyperion       0.422241         3.31       3.02
+          Iapetus        0.422240         3.29       3.24
+          residual scatter about fit: median 3.24 e-4, max 7.92 e-4
+  Moon self-terms sought: Ganymede ~0.78 e-4, Titan ~2.37 e-4 (INFORMATIONAL-RIVAL sizes).
+  Verdict per RUN_LOG commitment: reachable only if scatter above < the self-term.
+
+--- B3. Saturn ring line: distributed annulus 74658-136775 km ---
+  z_d(inner edge 74658 km) = 5.6538e-09
+  z_d(outer edge 136775 km) = 3.0861e-09
+  ring's OWN koppa: PENDING-kinematic (a ring has no dependent; no (a,T) route exists).
+  Named kinematic upgrade: spiral density-wave dispersion (wavelength-frequency-distance).
+  INFORMATIONAL-RIVAL class: ~1e-8 of kop_saturn - 4 orders below this run's floor. No rival
+  mass imported; the line is carried OPEN, not filled.
+
+--- B1. per-planet kop_sun rows (SET-A primary; SET-B = declared input-noise probe) ---
+  clean estimate kop_sun = mean(corrected rows) = 1477.0200 m
+  planet    row A [m]  devA e4  devB e4 |A-B| e4 self_kin [m] dev_corr e4 RIVAL-share e4
+  Mercury   1476.6321    -2.63    -2.62     0.01     0.000000       -2.63          0.002
+  Venus     1476.6497    -2.51    -2.68     0.17     0.000000       -2.51          0.024
+  EMB       1476.6409    -2.57    -2.64     0.07     0.004477       -2.60          0.030
+  Mars      1476.6803    -2.30    -3.25     0.95     0.000477       -2.30          0.003
+  Jupiter   1477.9493     6.29    10.09     3.80     1.409770       -3.25          9.548
+  Saturn    1476.9504    -0.47    -5.43     4.96     0.422101       -3.33          2.859
+  Uranus    1478.1383     7.57    12.16     4.59     0.064301        7.14          0.437
+  Neptune   1478.4963    10.00     9.26     0.74     0.076068        9.48          0.515
+  (Mercury/Venus self = 0: PENDING-kinematic, no dependent; rival column says <=0.025 e-4 - sub-floor.)
+  (EMB self via Moon row carries the solar tide ~ -0.28% of 4.5e-3 m = 1.2e-5 m - sub-floor at Sun rows.)
+
+--- C. GATES + REMOVAL TEST ---
+  GATE(i) sign (Jupiter row > all inner rows):  SET-A PASS   SET-B PASS
+          (same for Saturn, informational):     SET-A PASS   SET-B FAIL
+  GATE(ii) spread: RMS before = 5.00 e-4 (predicted, perfect inputs: 3.1 e-4)
+                   RMS after  = 4.84 e-4   ratio after/before = 0.970  (FAIL <0.5)
+                   max-min before = 12.62 e-4,  after = 12.81 e-4
+                   Jupiter corrected row in inner band [-2.63,-2.30] e-4: FAIL (dev -3.25 e-4)
+                   declared input-noise floor (mean |A-B|): 1.91 e-4
+
+  H-GLOBAL kill line: if shadows summed globally every row would sit at +13.39 e-4;
+  the inner rows actually sit at [-2.63, -2.51, -2.57, -2.3] e-4 -> H-GLOBAL vs H-LOCAL read off directly.
+
+  REMOVAL COUNTERFACTUAL - subtract the JUPITER-system shadow from EVERY row (dev e-4 vs K0):
+  planet     before minus Jup-sys minus Sat-sys   (ledger: only the OWNER row may land clean)
+  Mercury     -2.63        -12.17         -5.48   
+  Venus       -2.51        -12.05         -5.37   
+  EMB         -2.57        -12.11         -5.42   
+  Mars        -2.30        -11.84         -5.16   
+  Jupiter      6.29         -3.25          3.43   <= owner (Jup)
+  Saturn      -0.47        -10.02         -3.33   <= owner (Sat)
+  Uranus       7.57         -1.97          4.71   
+  Neptune     10.00          0.45          7.14   
+
+  Reading: subtracting a shadow heals ONLY its owner's row and wounds every other row by the
+  same amount - additivity is row-local. A global background would heal/wound all rows equally.
+
+  done. exit 0

@@ -193,3 +193,15 @@ Not required for the verdict; this is the payoff of doing it well.
 ---
 
 *CM01 · 10× upgrade 2026-06-29 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** The London-depth gate is "λ_L(Nb) = 22.5 nm against a 39 nm anchor (gate 2×) PASS", which passes a 42% miss, and the flux quantum h/2e is labelled IDENTITY while the divisor of 2 is argued, not derived.
+
+**Correction:** Tighten the λ_L gate to ≤ 10% and score only the pair-binding and isotope-exponent tests.
+
+**Status:** RULE RECORDED — corrected gate or definition applies to the next run; the earlier result is not re-scored and nothing was re-run.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

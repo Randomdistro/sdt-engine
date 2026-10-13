@@ -1,0 +1,25 @@
+﻿RTM02 reset instrument 1 (2026-10-10)
+=====================================
+g = v_E^2/R_E = 9.8183 m/s^2 (native, no G)
+
+P1a gearing c/v_circ vs 1/sqrt(1-v^2/c^2): worst 9.5e-15 [CONSTRUCTION]
+P1b classical limit at v = 1 mm/s: gear - 1 = 0.0e+00 [CONSTRUCTION]
+P1c dm/m_rest = 0.250000000000 vs E_k/(m c^2) = 0.250000000000 [CONSTRUCTION]
+
+P2 open ledger at v_ex = 4.5 km/s: hover price 10^81.869 per day (RTM01 anchor 10^81.9) -> consistent within 0.1
+P2 closed ledger at 0.5c: momentum per unit total expended mass = 0.500000 c (= v_ex/c 0.500000) [CONSTRUCTION: gearing cancels]
+   price floor (closed ledger, photon rocket): 10^0.001229 per day = exp(g t / c)
+
+P3 sweep (log10 hover mass ratio per day):
+   v_ex            open ledger    closed ledger (momentum per total mass = v_ex)
+   4.5000e+03     8.186930e+01   8.186930e+01
+   5.0000e+04     7.368237e+00   7.368237e+00
+   1.0000e+06     3.684098e-01   3.684119e-01
+   2.9979e+06     1.228828e-01   1.228890e-01
+   2.9979e+07     1.222730e-02   1.228890e-02
+   1.4990e+08     2.128499e-03   2.457779e-03
+   2.6981e+08     5.951784e-04   1.365433e-03
+   2.9979e+08     1.737914e-06   1.228891e-03
+   floor exp(g t/c): 1.228890e-03
+
+P5 energy-optimal v_ex/dv = 1/x with 2(1-e^-x) = x: x = 1.593624 -> v_ex/dv = 0.627500 [computed; stationarity is CONSTRUCTION]

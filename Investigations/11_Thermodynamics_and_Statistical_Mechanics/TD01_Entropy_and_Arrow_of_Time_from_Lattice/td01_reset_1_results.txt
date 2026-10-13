@@ -1,0 +1,23 @@
+TD01 blank-slate run 1 (registered in the tool header, 2026-10-08)
+===================================================================
+
+[V1] N = 4, E = 3: enumerated 20, formula 20.0000
+[V1] N = 5, E = 6: enumerated 210, formula 210.0000
+[V1] N = 7, E = 10: enumerated 8008, formula 8008.0000
+[V1] -> met
+[V2] N = 5, E = 4 (70 states): max |P - P^T| = 0.0e+00, max |row sum - 1| = 1.1e-16 -> met
+
+VALIDATIONS: met
+
+[P1] ln W(E = 1000, N = 50) = 195.1195 ; leading Stirling (E+N)ln(E+N) - E ln E - N ln N = 201.0163 (error 3.02%) ; ln W(2000, 100) = 395.7901 ; ratio to 2 ln W(1000, 50) = 1.0142
+     S = k_B ln W with k_B = 1.380649e-23 J/K: S(1000, 50) = 2.6939e-21 J/K ; monotone in E: ln W(E=10, 50) = 24.864, ln W(E=100, 50) = 91.704, ln W(E=1000, 50) = 195.120
+
+[R1] symmetric stochastic exchange, ring, exact distribution of 8008 states: S(1) = 0.5091, S(10) = 2.6313, S(100) = 8.0172, S(1000) = 8.9882, S(10^4) = 8.9882 ; S_eq = ln 8008 = 8.9882 ; S(10^4)/S_eq = 1.000000 ; smallest one-tick change -1.226e-13 ; ticks with a decrease: 0
+     criterion (no net decrease and S/S_eq >= 0.9): met (the sign of dS/dt is guaranteed by the symmetry of the transition matrix, V2)
+
+[R2] deterministic reversible swap (open chain): macro-entropy ln W_macro of the single trajectory: start 2.3979, min 0.0000, max 2.3979, mean over 10000 ticks 2.0555, final 2.3979 ; maximum over all states 4.3820 ; final/max = 0.5472 ; one-tick decreases: 714
+     criterion (no net decrease: final >= start; and mean S/S_max >= 0.9): net change +0.0000, mean/max = 0.4691 -> NO arrow shown
+
+[R3] deterministic richer-to-poorer transfer (open chain): macro-entropy ln W_macro of the single trajectory: start 2.3979, min 2.3979, max 3.4657, mean over 10000 ticks 3.4651, final 3.4657 ; maximum over all states 4.3820 ; final/max = 0.7909 ; one-tick decreases: 0
+     criterion (no net decrease: final >= start; and mean S/S_max >= 0.9): net change +1.0678, mean/max = 0.7907 -> NO arrow shown
+

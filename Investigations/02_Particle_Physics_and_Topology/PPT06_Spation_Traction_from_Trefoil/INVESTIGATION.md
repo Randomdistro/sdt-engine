@@ -1,7 +1,7 @@
 # PPT06: Spation Traction from the Trefoil — How the Gears Start
 
 > **Classification**: Pure theoretical derivation  
-> **Status**: COMPLETE  
+> **Status**: RESULTS ON FILE — NOT RE-GRADED (corrected 2026-10-05; the earlier 'COMPLETE / pure theoretical derivation' claim is withdrawn until each result is graded DERIVED, COMPUTED or ASSUMED as PROMPT.md requires; wording that treats a 'charge' as tracing the trefoil is to be read as boundary circulation)  
 > **Author**: SDT Canonical Engine — James Tyndall, Melbourne, Australia  
 > **Date**: May 2026  
 > **Prerequisite**: PPT05 (Trefoil Confinement), Laws V (Movement Budget), Law III (Convergent Pressure)

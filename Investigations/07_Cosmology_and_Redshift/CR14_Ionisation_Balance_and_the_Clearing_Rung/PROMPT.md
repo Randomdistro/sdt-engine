@@ -111,3 +111,15 @@ harvested after the fact.
 ## Deliverables
 
 `cr14_saha_ladder.py`, `cr14_results.txt`, `CR14_ASSESSMENT.md`.
+
+---
+
+## Audit correction 2026-10-05 (opening premise)
+
+**Finding:** The reproduction criterion R1 is "N_half within ±10% of 1100", a ΛCDM-framed target the framework had struck elsewhere (CR16: z = 1100 struck as a target), so the pass condition is target-defined.
+
+**Correction:** Replace R1 with a prediction derived from the vessel's own density behaviour and compare to the measured neutrality epoch afterwards.
+
+**Status:** RULE RECORDED — corrected gate or definition applies to the next run; the earlier result is not re-scored and nothing was re-run.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

@@ -8,7 +8,7 @@
 
 ## ⓪ The Golden Rule — five questions (answer before Phase 0)
 
-1. **What don't we know?** — *(unfilled by the 2026-06-27 bulk template upgrade — write the single measurable gap before the next run)*
+1. **What don't we know?** — **Measurable gap (written 2026-10-05 in the audit correction pass, from this prompt's own content; the 2026-06-27 template left it unfilled):** Can the spation pressure tensor and its freeze-out mechanism close the observed local slope H0 and the transfer function within 5%, or is the closure excluded as recorded?
 2. **Why does it matter?** — Stack position / downstream blockers (see `INVESTIGATION_STACK.md`).
 3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
 4. **What would prove us wrong?** — §⑧ falsification tests with numeric triggers.
@@ -269,7 +269,7 @@ This is the final piece. If successful, the transfer function f = P_eff/P_conv u
    // Test: Transfer function f closure verification
    ```
 
-3. **Theory/05_Audit_Spine.md** (when created)
+3. **Theory/05_Provenance_and_Correspondence.md** (when created)
    ```
    - Transfer function f: CLASS E (CR03) → CLASS C (CR05)
    - Framework closure: Achieved (H₀ derived, R_CMB computed)
@@ -325,7 +325,7 @@ This is the final piece. If successful, the transfer function f = P_eff/P_conv u
 ### Near-term
 
 - [ ] Update CR03 verdict to reference CR05 closure
-- [ ] Create CR05 entry in Theory/05_Audit_Spine.md
+- [ ] Create CR05 entry in Theory/05_Provenance_and_Correspondence.md
 - [ ] Write crosslinks from CR04, APS03, GOM02 to CR05
 - [ ] Add CR05 validation test to benchmarks suite
 
@@ -384,3 +384,15 @@ This is the final piece. If successful, the transfer function f = P_eff/P_conv u
 ---
 
 *CR05 · upgraded 2026-06-27 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*
+
+---
+
+## Audit correction 2026-10-05 (data / provenance)
+
+**Finding:** The folder is marked RETRACTED-FABRICATED and cites `Theory/05_Audit_Spine.md`, which does not exist at that path.
+
+**Correction:** Keep the retraction, correct or remove the dead reference, and re-run only after the question field is filled.
+
+**Status:** ANNOTATED — label corrected in the record; a confirming run or derivation is still OWED.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

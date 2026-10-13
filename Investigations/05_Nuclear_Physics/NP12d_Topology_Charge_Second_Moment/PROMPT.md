@@ -97,3 +97,15 @@ support bound), even `R_RMS ≤ R_B` is **not established**.
 - Does not kill close-pack `A^{1/3}` geometry as a boundary construction.  
 - Does not open Phase B radii comparison.  
 - Does not edit `laws.hpp`.
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** All four PASS rows are analytic fixtures (R_RMS = R_B√λ, shell/uniform ratio √(5/3)), which are mathematical identities that cannot fail.
+
+**Correction:** Label them FIXTURE and carry the physical gate to the unsealed IAEA comparison.
+
+**Status:** ANNOTATED — label, status or tally corrected in the record; no re-score of earlier runs.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

@@ -1,0 +1,106 @@
+==========================================================================================
+CR17 - RADIATIVE SATURATION STATE
+anchor = the near-infrared band (swept). z=1100, T=3000 K and CR13's 975 nm are NOT used.
+==========================================================================================
+
+------------------------------------------------------------------------------------------
+[1] THE GRADIENT REGIME IS ONE LAW - Shapiro locally, epoch depth cosmologically
+------------------------------------------------------------------------------------------
+  refractive form:   v = c / n      with    n = 1 + z      (z = depth)
+
+  SOLAR (Shapiro regime):  z_sun = 2.120e-06  ->  n = 1.000002120
+    speed deficit at the solar surface  c - c/n = 635.6 m/s
+    om_sun = z_sun * R_sun              = 1474.9 m   (document Prop 6: ~1476 m)
+
+  EPOCH (cosmological regime):  n = N = 1 + z ,  v(N) = c/N
+    Same functional form. The Sun's gradient is a local depth; the epoch is a global one.
+
+  P_eff on the same pressure ladder,  N = (P/P_0)^(1/4):
+    P_eff  = 5.2250e+31 Pa  ->  N = 2.4754e+11   (matrix/atomic pressure ceiling)
+    P_0    = 1.3916e-14 Pa  ->  N = 1      (present epoch)
+    ladder span from present to P_eff: 45.57 decades in pressure, 11.39 in N
+
+------------------------------------------------------------------------------------------
+[2] THE SATURATION ANCHOR - peak emission crosses out of the visible
+------------------------------------------------------------------------------------------
+  Wien:  lambda_peak * T = b = 2.897772e-03 m K
+  At saturation the bath peak sits at lambda_sat, so   T_sat = b / lambda_sat,
+  and the epoch index follows from the ladder  N = T_sat / T_0.
+  Nothing is fitted: lambda_sat is the input, everything else is forced.
+
+  lambda_sat                 T_sat [K] N          v = c/N      P_rad [Pa]    u [J/m3]   
+  ------------------------------------------------------------------------------------
+  620 nm  visible red        4673.8    1714.9     1.7482e+05   1.2034e-01    3.6103e-01 
+  700 nm  deep red           4139.7    1518.9     1.9738e+05   7.4062e-02    2.2219e-01 
+  750 nm  RED EDGE           3863.7    1417.6     2.1148e+05   5.6201e-02    1.6860e-01 
+  780 nm  near-IR onset      3715.1    1363.1     2.1994e+05   4.8041e-02    1.4412e-01 
+  1000 nm  near-IR           2897.8    1063.2     2.8197e+05   1.7782e-02    5.3347e-02 
+  1400 nm  near-IR (DIN end) 2069.8    759.4      3.9476e+05   4.6289e-03    1.3887e-02 
+  2500 nm  short-wave IR     1159.1    425.3      7.0492e+05   4.5523e-04    1.3657e-03 
+
+------------------------------------------------------------------------------------------
+[3] THE THREE REQUESTED QUANTITIES AT RADIATIVE SATURATION
+------------------------------------------------------------------------------------------
+  Quoted as the near-IR band [780, 1400] nm, with the log-centre as the central value.
+  (log-centre used because every vessel variable is monomial in N - the halfway theorem)
+    log-centre wavelength = 1045.0 nm
+
+  (1) SPEED OF LIGHT AT SATURATION      v_sat = c/N
+        central   2.9466e+05 m/s   = c / 1017.4  = 0.0983 % of c
+        band      2.1994e+05  ...  3.9476e+05 m/s
+        equivalently a matrix refractive index n = 1017.4 (band 1363.1 - 759.4)
+
+  (2) RADIATION PRESSURE AT SATURATION  P_rad = a T^4 / 3 = N^4 P_0
+        central   1.4912e-02 Pa
+        band      4.8041e-02  ...  4.6289e-03 Pa
+        energy density u = 3P = 4.4737e-02 J/m3
+
+  (3) SPATION-MATRIX TEMPERATURE        T_sat = N T_0 = b / lambda_sat
+        central   2773.0 K   (kT = 0.2390 eV)
+        band      2069.8  ...  3715.1 K
+
+------------------------------------------------------------------------------------------
+[4] WHERE SATURATION SITS IN THE PRESSURE/GRADIENT REGIME
+------------------------------------------------------------------------------------------
+  state                              P [Pa]         N             
+  present epoch                      1.3916e-14     1             
+  radiative saturation (central)     1.4912e-02     1017          
+  P_eff  matrix/atomic ceiling       5.2250e+31     2.475e+11     
+
+  saturation is 12.03 decades in pressure above the present epoch,
+  and still 33.54 decades in pressure BELOW the P_eff matrix ceiling.
+  in N:  saturation N = 1017.4 ;  P_eff ceiling N = 2.475e+11 ;  ratio 2.433e+08
+
+  So radiative saturation is nowhere near the matrix limit - the radiation field jams
+  the relay 34 decades of pressure before the spations themselves are pressed to their
+  atomic-scale ceiling. Saturation is a RADIATION-side limit, not a lattice-side one.
+
+  Shapiro cross-check, one law over 9 orders of depth:
+    solar surface   n - 1 = 2.120e-06   (v deficit 636 m/s)
+    saturation      n - 1 = 1.016e+03   (v deficit 2.9950e+08 m/s)
+
+------------------------------------------------------------------------------------------
+[5] ANCHOR SENSITIVITY - how hard does the answer depend on the band choice?
+------------------------------------------------------------------------------------------
+  All three outputs are pure powers of lambda_sat:
+      T ~ 1/lambda ,  N ~ 1/lambda ,  v ~ lambda ,  P_rad ~ 1/lambda^4
+  so a factor f error in the anchor gives f in T, N and v, and f^4 in P_rad.
+  Across the full near-IR band (780 -> 1400 nm, factor 1.795):
+      T, N, v vary by  x1.79      P_rad varies by  x10.4
+  -> v_sat and T_sat are robust to the band choice; P_rad is NOT (it is the
+     quantity that most needs the saturation wavelength pinned by mechanism.
+
+  For reference only, NOT used as an anchor: CR13's lambda_emit = 974.7 nm gives
+      T = 2973.0 K , N = 1090.8 , v = 2.7484e+05 m/s , P_rad = 1.9702e-02 Pa
+  That N reproduces the imported redshift because 974.7 nm was BACK-COMPUTED from it
+  via Wien. It is a restatement of the input, not a check on it. Flagged, not used.
+
+==========================================================================================
+ANSWER
+==========================================================================================
+  at radiative saturation, anchored on the near-IR band [780, 1400] nm:
+    speed of light        v = 2.947e+05 m/s   (0.0983 % of c ; band 2.20e+05 - 3.95e+05)
+    radiation pressure    P = 1.491e-02 Pa      (band 4.80e-02 - 4.63e-03)
+    matrix temperature    T = 2773 K          (band 2070 - 3715)
+    epoch index           N = 1017            (band 759 - 1363)
+==========================================================================================

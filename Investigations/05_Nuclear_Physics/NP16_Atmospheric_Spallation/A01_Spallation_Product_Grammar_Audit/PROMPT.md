@@ -1,3 +1,38 @@
+# NP16-A01 — Spallation product grammar audit (specification rewritten 2026-10-12)
+
+**Author:** J. C. Harvey, Melbourne. Rewritten at Harvey's direction: prompts carry new data; the packing sequencer is understood before grammar work. The 2026-06-27 specification is kept below the line, superseded.
+
+## 1. Measurable gap (now written)
+Can the packing construction (the grammar *and* the live sequencer) build every nuclide that (p,xn) spallation produces and its decay chains pass through? And does any structural quantity of the built nuclei, not mere grammar membership, predict which products appear?
+
+## 2. What is established (reset run 2026-10-10, `NP16A01_RESET_ASSESSMENT_2026-10-10.md`)
+Data substitution: the kinematically listed (p,xn) products of 284 stable targets that exist in NUBASE2020 (1,003 products). This is **not** the EXFOR-measured set.
+
+| # | Result | Grade |
+|---|---|---|
+| E1 | 8.5% of chain steps and 19.3% of products fall outside the canonical grammar. **All are on the proton-rich side, N < Z** (⁵⁻⁷Be, ⁶⁻⁹B, ⁸⁻¹⁰C …). The EC alternate covers 93.9% of EC/β⁺ steps; the rest are NP40's N < Z − 1 cases. | **G1** for "100% valid" |
+| E2 | The neutron-budget identity N_end = N_target holds in only 14.1% of pairs (modes at −2 and −4): chains end at the stable isobar. | **G1** for "~100%"; the E20 identity is withdrawn as a general law |
+| E3 | The trajectory arithmetic (EC Δn_t = +2, Δn_d = −3; β⁻ the reverse) holds exactly. | construction: it cannot fail, and is not evidence |
+| E4 | **The live sequencer refuses N < Z nuclides outright** (`grammar()` is canonical only; ⁷Be, ¹¹C and ⁸B checked 2026-10-12). | construction limit |
+
+## 3. What the errors teach
+- **The boundary at N < Z is in the construction, not the data.** ⁷Be, ⁸B and ⁹C are produced in nature (cosmic-ray spallation), so a construction that cannot build them is incomplete. This is the same constitutional question as NP40 (a proton-rich core or free proton seats), for Harvey.
+- **Membership counts are maps of (Z, N)** (NP24). The audit's numbers describe where products lie; they cannot confirm the grammar's physics. Future gates must use **built structure**.
+
+## 4. Next round (registered order)
+1. **Data:** fetch the EXFOR-measured (p,xn) product list with provenance into `Datasets/nuclear/`. Report which N < Z products are measured.
+2. **Construction:** wait on Harvey's ruling for N < Z (shared with NP40 P0′).
+3. **Structural test (registered before computing):** from sequencer-built products, a structural quantity. Candidate: the contact count removed by the x-neutron peel, against measured relative (p,xn) cross-sections along x, from the NP27 central-to-grazing picture. Single pass over the measured set.
+
+## 5. Prohibitions
+- Grammar membership is not evidence.
+- No data substitution without labelling.
+- Release is not edited (proposal only).
+
+---
+
+## Superseded specification (2026-06-27, kept as written)
+
 # A01: Spallation Product Grammar Audit — Investigation Prompt
 
 > **Author:** J. C. Harvey, Melbourne. **Status:** SPEC (upgrade 2026-06-27).

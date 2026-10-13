@@ -1,0 +1,23 @@
+S301 -> Sgr A* velocity map (2026-10-11)
+========================================
+[V1] synthetic round trip: a 1.000e+14, Om 6.000e+09 -> met
+
+S301 orbit from (P, e, v_p): a = 1.0272e+14 m = 686.6 AU ; r_p = 1.7257e+12 m = 11.54 AU
+Om(Sgr A*) = 6.3451e+09 m = 0.04241 AU ; R_S = 2 Om = 1.2690e+10 m
+check: r_p / R_S = 136.0 (abstract: 'within 136 R_S') ; Om/r_p at pericentre = 3.6768e-03 ; beta_p = 0.08539
+rounding sensitivity (half last digit of P, e, v_p): a +/- 0.25%, Om +/- 0.74%
+
+Velocity map, r in units of Om (R_S = 2 Om). All speeds in units of c.
+  r/Om    r/R_S   ladder v=c*sqrt(Om/r)   1/r^2+1/r^3 law (C-009) v=c*sqrt(x(1+6x))   escape c*sqrt(2Om/r)   S301-energy orbit at this pericentre c*sqrt((1+e)Om/r)
+   272.0   136.0      0.06063                 0.06130                                     0.08575                0.08539
+   137.0    68.5      0.08544                 0.08729                                     0.12082                0.12032
+   100.0    50.0      0.10000                 0.10296                                     0.14142                0.14083
+    50.0    25.0      0.14142                 0.14967                                     0.20000                0.19916
+    20.0    10.0      0.22361                 0.25495                                     0.31623                0.31490
+    10.0     5.0      0.31623                 0.40000                                     0.44721                0.44533
+     6.0     3.0      0.40825                 0.57735                                     0.57735                0.57492
+     3.0     1.5      0.57735                 1.00000                                     0.81650                0.81306
+     2.0     1.0      0.70711                 1.41421                                     1.00000                0.99579
+     1.0     0.5      1.00000                 2.64575                                     1.41421                1.40826
+
+At R_S (r = 2 Om): ladder circular 0.7071c ; C-009 circular 1.4142c ; escape 1.0000c ; S301-energy pericentre 0.9958c = 298531 km/s

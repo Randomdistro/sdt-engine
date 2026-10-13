@@ -1,0 +1,78 @@
+NP11 neutron lifetime audit
+pre-registration: PROMPT.md (2026-10-03)
+
+INSTRUMENT VALIDATION (known answers; physics parts not yet run)
+  [ok] V1 weighted mean 10.400000 (expect 10.4), sigma 0.894427 (expect 0.894427), difference 2.000 +/- 2.236068 (expect 2 +/- 2.236068)
+  [ok] V2 hbar/(m_e c^2) = 1.2881e-21 s (expect 1.2880e-21), R_p/c = 2.8066e-24 s (expect 2.807e-24)
+  [ok] V3 census null: Monte Carlo 3.1568 vs analytic 3.1596 expected hits (B=20, w=0.9)
+VALIDATION PASS
+
+PART C - beam/bottle (arithmetic on MEASURED-INPUT)
+bottle (world average)       877.80 +/- 0.30 s
+earlier beams                888.10 +/- 2.00 s
+J-PARC beam (2024)           877.20 +/- 4.16 s
+all beams combined           886.06 +/- 1.80 s
+
+difference                  value (s)  sigma (s) in sigma
+earlier beams - bottle         +10.30       2.02    +5.09
+J-PARC - bottle                 -0.60       4.17    -0.14
+J-PARC - earlier beams         -10.90       4.62    -2.36
+all beams - bottle              +8.26       1.83    +4.52
+
+rejection criterion (beam-type results disagree by more than 2 sigma): MET - wall-coupling alone disfavoured (2.36 sigma); 'excluded' reserved for > 3 sigma: no
+size of the effect to be explained: ln(888.1/877.8) = 0.0117 (1.17% in rate)
+the seed's sign commitment (bottle faster) was set with 888 vs 878 in view: retrodiction.
+
+seat quantities (engine): v_phase/c = 1.8301, gamma0 = (m_n-m_p)/m_e = 2.53099, Q_beta/(m_e c^2) = gamma0 - 1 = 1.53099, beta0 = 0.91864, q = 1/gamma0 = 0.39510
+
+PART A1 - B_req = ln(tau/t) for tau = 877.8 s (no fit)
+clock                           t (s)      B_req nuclear-scale
+R_p/c                      2.8066e-24     61.007          yes
+2 pi R_p / v_seat          9.6360e-24     59.774          yes
+hbar/(m_p c^2)             7.0152e-25     62.394          yes
+hbar/(m_e c^2)             1.2881e-21     54.879          yes
+r_e/c                      9.3996e-24     59.799          yes
+l_P/c                      5.3912e-44    106.406           no
+2 pi a0/(alpha c)          1.5198e-16     43.200           no
+spread across the five nuclear-scale clocks: 7.515 nats; beam-bottle difference in B: 0.0117 nats; ratio 644
+
+PART A2 - census: B_c = k ln X, k = 1..16, 7 X values (112 constructions), hit = within 1.5% of B_req
+R_p/c                  B_req 61.007  hits:  8 ln(m_p/m_e) = 60.123 (-1.45%)
+2 pi R_p / v_seat      B_req 59.774  hits:  12 ln(1/alpha) = 59.043 (-1.22%)  8 ln(m_p/m_e) = 60.123 (+0.58%)
+hbar/(m_p c^2)         B_req 62.394  hits:  none
+hbar/(m_e c^2)         B_req 54.879  hits:  11 ln(1/alpha) = 54.123 (-1.38%)
+r_e/c                  B_req 59.799  hits:  12 ln(1/alpha) = 59.043 (-1.26%)  8 ln(m_p/m_e) = 60.123 (+0.54%)
+l_P/c                  B_req 106.406  hits:  14 ln(m_p/m_e) = 105.216 (-1.12%)
+2 pi a0/(alpha c)      B_req 43.200  hits:  none
+
+report-only: nearest construction per clock and the lifetime it implies (a 1.5% window in B is a factor 2.50 in tau)
+R_p/c                  nearest  8 ln(m_p/m_e) = 60.123, |dB| = 0.884 -> tau = 362.6 s (x0.41 of 877.8 s)
+2 pi R_p / v_seat      nearest  8 ln(m_p/m_e) = 60.123, |dB| = 0.349 -> tau = 1245 s (x1.42 of 877.8 s)
+hbar/(m_p c^2)         nearest 13 ln(1/alpha) = 63.963, |dB| = 1.569 -> tau = 4216 s (x4.80 of 877.8 s)
+hbar/(m_e c^2)         nearest 11 ln(1/alpha) = 54.123, |dB| = 0.756 -> tau = 412.2 s (x0.47 of 877.8 s)
+r_e/c                  nearest  8 ln(m_p/m_e) = 60.123, |dB| = 0.325 -> tau = 1214 s (x1.38 of 877.8 s)
+l_P/c                  nearest 14 ln(m_p/m_e) = 105.216, |dB| = 1.190 -> tau = 266.9 s (x0.30 of 877.8 s)
+2 pi a0/(alpha c)      nearest  9 ln(1/alpha) = 44.282, |dB| = 1.082 -> tau = 2590 s (x2.95 of 877.8 s)
+resolution of the beam-bottle difference in B: 0.0117 nats; the best |dB| over all clocks (0.325) is 28x larger
+
+clock                   observed      null mean    P(null >= observed)
+R_p/c                          1          1.343                  0.775
+2 pi R_p / v_seat              2          1.320                  0.392
+hbar/(m_p c^2)                 0          1.374                  1.000
+hbar/(m_e c^2)                 1          1.428                  0.798
+r_e/c                          2          1.320                  0.392
+l_P/c                          1          0.595                  0.463
+2 pi a0/(alpha c)              0          1.326                  1.000
+five nuclear-scale clocks together: observed 6, null mean 6.784, P(null >= observed) = 0.638
+census criterion (a hit counts as distinguishable only if above the null's 95th percentile for its clock AND shared by two or more clocks): not met - no construction is distinguishable from chance
+
+PART A3 - Law V per-tick candidate: tau(N) = t * gamma0^N, N = 50..80, hit = within 1.5% of 877.8 s
+R_p/c                   none (nearest N=66 gives tau = 1162.3 s)
+2 pi R_p / v_seat       none (nearest N=64 gives tau = 623.0 s)
+hbar/(m_p c^2)          none (nearest N=67 gives tau = 735.3 s)
+hbar/(m_e c^2)          none (nearest N=59 gives tau = 801.8 s)
+r_e/c                   none (nearest N=64 gives tau = 607.7 s)
+l_P/c                   none (nearest N=80 gives tau = 0.0 s)
+2 pi a0/(alpha c)       none (nearest N=50 gives tau = 22197.5 s)
+hits: 0; expected by chance over 7 clocks: 0.22
+N required for exact tau on R_p/c: 65.698 (not an integer)

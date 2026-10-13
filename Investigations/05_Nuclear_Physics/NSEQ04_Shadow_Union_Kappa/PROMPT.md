@@ -43,3 +43,15 @@ IAEA charge-radius map.
 
 - **`SHADOW_KAPPA_REPORTED`** — calibrate completed under frozen policy.  
 - Does **not** auto-promote to EMPIRICALLY SURVIVES; residuals decide follow-ups.
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** The single scale κ in BE = κΔA is fitted by least squares on the same binding energies it is then compared with, there is no hold-out, and the reports are explicitly "not gates on κ magnitude", so the folder has no test that can fail.
+
+**Correction:** Fit κ on a light subset and gate on the held-out heavier nuclei with a pre-registered tolerance.
+
+**Status:** RULE RECORDED — corrected gate or definition applies to the next run; the earlier result is not re-scored and nothing was re-run.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

@@ -1,3 +1,27 @@
+# SAR06 — Release rate law (specification rewritten 2026-10-12)
+
+**Author:** J. C. Harvey, Melbourne. Rewritten at Harvey's direction: prompts carry new data, and errors inform the mechanism. The previous specification is kept below the line.
+
+## 1. State after the reset (2026-10-10)
+**G2, open.** Constraints C1–C5 are SAR03's old (exposed) outcomes. M1 (exponent scan) and M2 (candidate grip ratios) are censuses; M3 is an identity.
+
+## 2. What the errors and new data teach
+- SAR06 cannot precede SAR03: it tests the scaling of a law that does not yet exist.
+
+## 3. Next round (registered order)
+1. SAR03's native release law (supplier).
+2. M4: the scaling test on that law alone, registered with its stellar sample before loading (mass-free inputs: g, R and L, as SAR04 repaired).
+
+## Prohibitions
+- No census over candidate forms (2026-10-07 rule).
+- No imported source models (PREM, polytropes, quantum-number labelling) as native tests.
+- No G or GM.
+- The word "charge" is not used.
+
+---
+
+## Previous specification (kept as written)
+
 # SAR06: The Release-Rate Law — Cascading Investigation (from SAR03 H1–H6)
 
 > **Author:** J. C. Harvey, Melbourne. **Opened:** 2026-07-13, direct continuation of the

@@ -66,3 +66,15 @@ public path only and freezes predicted ledgers. Phase B is gated
 - Calling FIELDS plasma bursts a test of \(\Omega/r\).  
 - Claiming EMPIRICALLY SURVIVES without primitive radiometrics.  
 - Mixing circumference/radius inconsistently (OM02).
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** Claim C5 compares obs − geom to the C4 prediction "pre-registered tolerance" without stating the tolerance in the prompt, and C1 (r_min within 1% of 9.86 R_sun) is an ephemeris lookup.
+
+**Correction:** State the C5 tolerance numerically before any data and treat C1 as a setup check.
+
+**Status:** RULE RECORDED — corrected gate or definition applies to the next run; the earlier result is not re-scored and nothing was re-run.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

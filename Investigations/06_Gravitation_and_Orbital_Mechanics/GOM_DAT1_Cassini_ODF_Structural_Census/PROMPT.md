@@ -57,3 +57,17 @@ multi-year hold-out with frozen checksum. If unavailable, record
 
 Pre-register ODF observable-field decode (Doppler/range groups) against a
 **non-conjunction** fixture before any solar-conjunction residual test.
+
+---
+
+## Audit correction 2026-10-05 (record / status)
+
+**Finding:** The claim ids inside the folder (GOM28-C1 …) do not match the folder name or any other folder, and every PASS row is a file-length, checksum or header-pointer check, so the chain's PASS count is data-handling, not a claim test.
+
+**Correction:** Rename claim ids to the folder id and label the rows VERIFICATION.
+
+**Status:** ANNOTATED — label, status or tally corrected in the record; no re-score of earlier runs.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*
+
+**Id alias (2026-10-05):** claim ids written `GOM28-C*` in this folder and its verdict are the claims of `GOM_DAT1`. The rows are VERIFICATION (data-structure, checksum and field-parse checks), not tests of a physical claim, and are excluded from physics PASS/FAIL tallies; earlier text is not rewritten.

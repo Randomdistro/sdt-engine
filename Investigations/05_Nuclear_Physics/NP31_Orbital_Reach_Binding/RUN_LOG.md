@@ -1,0 +1,3 @@
+# RUN_LOG — NP31
+
+2026-10-05 (exploratory, not pre-registered as a gated test; recorded as such): no tool of the PROMPT's three routes was run. Two checks were made on existing material: (1) the PROMPT §2 table of "needed ×" was recomputed as B_meas/B_d from the sequencer table binding column (He-4 12.72, Li-7 17.64, Be-9 26.15, C-12 41.43, Fe-56 221.28; the PROMPT lists 12.72, 17.65, 26.15, 41.44, 221.34); (2) contact counts were read from the unchanged NSEQ16–18 gear engine (`buildNuclide(...).contacts`, no observable ledger) for light nuclei. Route A (cap derived from packing with no binding data), Route B (residence-law debt) and Route C (11.6 mfm per triton) are not run. See NP31_ASSESSMENT.md.

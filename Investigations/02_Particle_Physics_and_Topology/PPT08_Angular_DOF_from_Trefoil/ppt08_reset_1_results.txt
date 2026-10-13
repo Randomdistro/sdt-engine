@@ -1,0 +1,33 @@
+PPT08 blank-slate run 1 (pre-registered 2026-10-07)
+====================================================
+
+[V1] ring r/R = 50: numerical E(z) - E(x) = -3.000281e-06, analytic -3/(8 r^3) = -3.000000e-06 (ratio 1.00009) ; single source monopole residual -8.3e-17 -> met
+[V2] knot r/R = 20 anisotropy: (N,M) = (21000,720): -4.3522146418e-05 ; (84000,2880): -4.3522146418e-05 ; relative difference 2.39e-12 -> met
+[V3] parameter-uniform weights: s_z = 0.33333333 (analytic 0.33333333), s_xy = 0.66666667 (analytic 0.66666667) -> met
+[V4] rotation by 2 pi/3 and n -> -n: worst relative change 9.99e-16 -> met
+
+VALIDATIONS: met
+
+[T1] D(r) = (E(z) - E(x)) r^3 / (kappa R^2) for the (2,3) knot, arclength weights, a/R = 0.81650
+     r/R =  20 : D = -0.34817717
+     r/R =  40 : D = -0.34801413
+     r/R =  80 : D = -0.34797364
+     Richardson (r^-2 terms removed): -0.34795979 (20,40), -0.34796015 (40,80), -0.34796017 (second order) ; route 2 (arclength second moments): s_z = 0.32657564, s_xy = 0.79052253, c2 = 3(s_z - s_xy)/4 = -0.34796017 ; relative difference 5.73e-10
+     parameter-uniform weights (sensitivity): c2 = -0.25000000 (relative to arclength 0.7185)
+
+[T2/T3] DeltaE = E(equatorial) - E(polar) = kappa c2 R^2 / r^3, kappa = alpha hbar c = 2.3071e-28 J m ; r = 4 a_0 (H n = 2)
+     G1 PPT01 closure (R = hbar/(m_p v_T))    R = 3.3253e-16 m a = 2.7151e-16 m : DeltaE = -9.3597e-31 J = -1412.5625 Hz ; vs 1057.845 MHz: ratio 1.335e-06 ; He+ (r = 2 a_0, 2 kappa): -22601.0003 Hz, ratio to 14041.13 MHz 1.610e-06
+     G2 outer extent R + a = R_p              R = 4.6320e-16 m a = 3.7820e-16 m : DeltaE = -1.8161e-30 J = -2740.8683 Hz ; vs 1057.845 MHz: ratio 2.591e-06 ; He+ (r = 2 a_0, 2 kappa): -43853.8932 Hz, ratio to 14041.13 MHz 3.123e-06
+     R1 (H1 rejected if DeltaE < 0 on both routes, primary geometry): c2 route 1 = -0.347960, route 2 = -0.347960 -> MET (rejected)
+     R2 (H2 rejected if |DeltaE|/h is outside [0.1, 10] x 1057.845 MHz, primary geometry): MET (rejected)
+
+[T4] E(phi_n) for polar orbit normals n = (cos phi, sin phi, 0): Fourier modes (units of the monopole |E0| = 1/r)
+     r/R = 10 : |c0| = 9.988e-01 |c1| = 1.537e-16 |c2| = 1.171e-16 |c3| = 1.737e-16 |c4| = 2.752e-16 |c5| = 3.823e-16 |c6| = 1.011e-07 |c12| = 5.046e-14  (c_m x r/kappa R^-1; m = 0 is the monopole)
+          |c3|/|c6| = 1.719e-09 ; |c6| (relative to monopole) = 1.012e-07
+     r/R = 20 : |c0| = 9.997e-01 |c1| = 8.097e-17 |c2| = 2.891e-16 |c3| = 1.669e-16 |c4| = 2.597e-16 |c5| = 3.937e-16 |c6| = 1.669e-09 |c12| = 2.793e-16  (c_m x r/kappa R^-1; m = 0 is the monopole)
+          |c3|/|c6| = 9.998e-08 ; |c6| (relative to monopole) = 1.670e-09
+     r/R = 40 : |c0| = 9.999e-01 |c1| = 6.420e-17 |c2| = 2.553e-16 |c3| = 2.188e-16 |c4| = 1.521e-16 |c5| = 7.785e-17 |c6| = 2.645e-11 |c12| = 5.015e-16  (c_m x r/kappa R^-1; m = 0 is the monopole)
+          |c3|/|c6| = 8.275e-06 ; |c6| (relative to monopole) = 2.645e-11
+     (period of E(phi_n): invariance under 2 pi/3 and under n -> -n, i.e. a shift of pi, gives period pi/3 and modes m = 0, 6, 12)
+
+[T5] P1 (deuterium), P2 (muonic hydrogen): DEFERRED (deuteron geometry NP17/NP06; no muon mass in the engine, no muonic datum in Datasets) ; P3 not a test of this mechanism

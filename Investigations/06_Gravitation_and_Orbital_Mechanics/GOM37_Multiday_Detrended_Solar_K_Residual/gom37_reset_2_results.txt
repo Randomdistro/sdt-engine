@@ -1,0 +1,22 @@
+GOM37 run 2, Addendum A (registered in GOM37_RESET_ASSESSMENT_2026-10-11.md section 5)
+=======================================================================
+
+C0_157 = -2510170.4756 Hz (ref 2116648992.000) ; C0_160 = -2247144.1733 Hz (ref 2116657632.000) ; kappa = (C0_160 - C0_157)/(ref_160 - ref_157) = 30.442859 Hz per Hz
+
+M3 residual r3 = obs - f_B - C0_157 - kappa (ref - ref_157): per day and per reference-value segment
+  day 157: records 7447 ; r3 mean +0.0000 Hz ; sd 0.5705 Hz ; drift -0.954 Hz/h ; reference values 1
+  day 158: records 20748 ; r3 mean -36965.2760 Hz ; sd 173270.6060 Hz ; drift +68570.176 Hz/h ; reference values 3
+      ref 2116647840.000 Hz (d from ref157 -1152) :  15676 records, mean +61588.648, sd 0.550
+      ref 2116662240.000 Hz (d from ref157 +13248) :   4996 records, mean -341552.927, sd 2675.968
+      ref 2116663008.000 Hz (d from ref157 +14016) :     76 records, mean -342378.650, sd 705.866
+      criterion (|mean| < 3 Hz and sd < 5 Hz): NOT MET
+  day 159: records 17289 ; r3 mean -1775891.5245 Hz ; sd 3899055.9132 Hz ; drift +187212.632 Hz/h ; reference values 5
+      ref 2116649376.000 Hz (d from ref157 +384) :   9927 records, mean +82171.497, sd 0.182
+      ref 2116654464.000 Hz (d from ref157 +5472) :   1106 records, mean +4271.338, sd 0.073
+      ref 2116654752.000 Hz (d from ref157 +5760) :   3124 records, mean -138.943, sd 0.227
+      ref 2116983168.000 Hz (d from ref157 +334176) :   1655 records, mean -10061868.309, sd 0.326
+      ref 2116983552.000 Hz (d from ref157 +334560) :   1477 records, mean -10068383.888, sd 24479.074
+      criterion (|mean| < 3 Hz and sd < 5 Hz): NOT MET
+  day 160: records 35942 ; r3 mean -0.0000 Hz ; sd 2.1026 Hz ; drift -0.715 Hz/h ; reference values 1
+
+M3 (offset linear in the reference frequency, out-of-sample on days 158 and 159): NOT SUPPORTED

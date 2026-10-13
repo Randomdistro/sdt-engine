@@ -175,3 +175,15 @@ geometry). **Capstone of:** the entire OP suite — it is the on-sky falsifier O
 ---
 
 *OP07 · 10× upgrade 2026-06-29 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** "All committed gates pass (0 failures)" while the verdict records that the refractivity is 2.5–3 orders below what a fold needs (root: the unresolved OP01 matter-index problem), so the gates do not test magnitude.
+
+**Correction:** Add a magnitude gate (the refractivity needed for the fold against the computed value) and report its failure.
+
+**Status:** RULE RECORDED — corrected gate or definition applies to the next run; the earlier result is not re-scored and nothing was re-run.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

@@ -1,0 +1,62 @@
+==============================================================================
+  QM03 — wake leakage through a raised-occlusion slab (relay chain, c=a=1)
+  firewall: solver knows only Omega(x); WKB appears only as a comparison row
+==============================================================================
+
+  PHASE 1 — evanescent decay constant, measured from the field profile
+       V_f      E_f  kappa_meas  kappa_latt  kappa_cont  dev_latt
+     1e-03    5e-04    0.031591    0.031633    0.031635     0.13%
+     5e-03    3e-03    0.070827    0.070828    0.070843     0.00%
+     2e-02    1e-02    0.142358    0.142358    0.142478     0.00%
+  gate P1 (kappa_meas = kappa_lattice +-1%): PASS
+
+  comparison row (NOT the source — printed after the derivation):
+  NR regime: with m = Om_m (hbar=c=1), V = Om_c-Om_m, E = w-Om_m:
+    kappa_native = 0.031635   sqrt(2m(V-E)) = 0.031623   dev = 0.037%   -> CONVERGENCE
+  exact native form: kappa^2 = 2m(V-E)*(1 + (V+E)/(2m)) — the lattice PREDICTS a
+  high-barrier departure from the Schrodinger form at V,E ~ m c^2 (the QM03-Q1 fork).
+
+  PHASE 2 — transmission vs slab thickness (same solver)
+  fitted d(lnT)/dd = -0.141367  vs  -2*kappa_native = -0.141657  dev = 0.20%  (gate 1%: PASS)
+  prefactor: measured 3.901 vs 16E(V-E)/V^2 = 4.000  (gate 25%: PASS)
+
+  PHASE 3 — STM sensitivity from the native kappa (units via the ONE hbar bridge)
+  kappa = 1.087 1/A  ->  0.94 current decades per Angstrom  (gate [0.5,1.5]: PASS)
+
+  PHASE 4 — Geiger–Nuttall from the leakage integral (zero fitted parameters)
+  nuclide   Q(MeV)  logT_meas  logT_pred dev(dec)
+  Po-212     8.954      -6.52      -7.06    -0.54
+  Po-214     7.833      -3.79      -4.09    -0.30
+  Po-216     6.906      -0.84      -1.05    -0.21
+  Po-218     6.115       2.27       2.11    -0.16
+  Rn-222     5.590       5.52       5.55     0.03
+  Ra-226     4.871      10.70      10.81     0.10
+  U-238      4.270      17.15      17.49     0.34
+  Th-232     4.082      17.65      18.00     0.36
+  linearity of prediction: R^2 = 0.9997 (gate >0.98: PASS)
+  slope pred = 1.53, slope measured-fit = 1.48, dev = 3.4% (gate 10%: PASS)
+  worst per-nuclide |dev| = 0.54 decades (gate <=2.5: PASS)
+
+  PHASE 5 — traversal time vs thickness  [candidate NATIVE per FLM14 ADJ-7]
+  (ADJ-2: gate quantity corrected to the TOTAL traversal tau_tot = d/v_g + tau_phase;
+   tau_phase alone is the delay RELATIVE to free flight and grows negative linearly
+   precisely BECAUSE tau_tot saturates — wrong observable in the committed gate.)
+  outside group velocity v_g = 0.0705 c
+      d 2*kappa*d   tau_phase   tau_tot     d/c tau_tot/(d/c)
+     30      4.25       -36.6     388.7      30        12.958
+     60      8.50      -450.8     399.8      60         6.664
+     90     12.75      -876.0     400.0      90         4.444
+    120     17.00     -1301.3     400.0     120         3.333
+    300     42.50     -3853.3     400.0     300         1.333
+    480     68.00     -6405.2     400.0     480         0.833
+  saturation of tau_tot: |tau(480)-tau(300)|/tau(300) = 0.000  -> SATURATES (Hartman)
+  d/c crossover: first tabulated d with tau_tot < d/c: 480  -> beyond it the leaked constraint arrives ahead of any pulse over the same span.
+  reading (two-channel doctrine): the evanescent slab carries CONSTRAINT, not pulse
+  energy; sub-d/c constraint timing is a native outcome to compare against
+  attoclock/Hartman DATA (measured near-zero tunnelling delay) — not a paradox.
+
+  SUMMARY: exponential leakage + its constant DERIVED from occlusion mechanics
+  (solver never saw WKB); Schrodinger form recovered as the NR limit of the native
+  kappa; high-barrier fork predicted; STM decade/A and Geiger-Nuttall carried with
+  ZERO fitted parameters; hbar entered at ONE bridge (Om_m = mc^2/hbar).
+==============================================================================

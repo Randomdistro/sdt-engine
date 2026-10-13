@@ -1,0 +1,66 @@
+========================================================================================
+  FLM14 - run 6: MEMORY-FREE MEASURE (ADJ-13, committed before code).
+  Machinery: flm14_form4b two-channel tour VERBATIM; dynamics untouched (T_W=27
+  stays in the dynamics). ONE change: A -> A_mf = per-hop |net wake deposit|,
+  no decay factor, no history, NO T_W in the measure. Claim rule: ADJ-11
+  verbatim. Seed-2 UNCONDITIONAL. Export: dwell table at beta=0.20 (CH07 stake).
+========================================================================================
+  geometry seed 1: 42 seats, degree min/mean/max = 6/7.48/10
+
+  MACHINERY ANCHOR (tours must be IDENTICAL to run-4/5's):
+    (a) imported form4b @ beta=0.20 seed-1: p_occ(OLD) = +2.040 (|r|=0.71, n=15)   vs run-4 +2.040 (|dp| <= 5e-4): OK   [54s]
+    (b) THIS tool, OLD measure, same arm:   p_occ(OLD) = +2.040 (|r|=0.71, n=15)   |dp vs (a)| = 0.00e+00 (<= 1e-6): OK   max|d_occ| = 0.00e+00   [63s]
+    anchors PASS -> the measure switch is licensed; dynamics proven unchanged.
+
+  geometry seed 2: 42 seats, degree min/mean/max = 6/7.57/11
+
+  ---- geometry seed 1 (phase seeds 10001-10064) ----
+  beta=0.05:  p_occ(MF) = +2.109 (|r|=0.84, n=15)   [old-measure diagnostic: +2.278 (|r|=0.80, n=17)]
+             p_dwell(MF) = undefined (|r|=0.14 < 0.6 - no exponent defined)
+             drift 0.0766 (gate <0.01: FAIL)   coverage pooled 95% / per-draw 53%   guards: bad-gaps 11676, locked-dwell 0.00e+00   [66s]   split-half p_mf: +2.136 / +2.192
+  beta=0.10:  p_occ(MF) = +2.382 (|r|=0.82, n=14)   [old-measure diagnostic: +2.109 (|r|=0.76, n=18)]
+             p_dwell(MF) = undefined (|r|=0.32 < 0.6 - no exponent defined)
+             drift 0.0028 (gate <0.01: PASS)   coverage pooled 100% / per-draw 61%   guards: bad-gaps 13071, locked-dwell 0.00e+00   [66s]   split-half p_mf: +2.096 / +1.824
+  beta=0.20:  p_occ(MF) = +2.585 (|r|=0.72, n=12)   [old-measure diagnostic: +2.040 (|r|=0.71, n=15)]
+             p_dwell(MF) = undefined (|r|=0.37 < 0.6 - no exponent defined)
+             drift 0.0035 (gate <0.01: PASS)   coverage pooled 98% / per-draw 58%   guards: bad-gaps 7891, locked-dwell 0.00e+00   [0s]   split-half p_mf: +2.782 / +2.446
+  beta=0.40:  p_occ(MF) = +4.191 (|r|=0.79, n=12)   [old-measure diagnostic: +2.855 (|r|=0.68, n=12)]
+             p_dwell(MF) = undefined (|r|=0.54 < 0.6 - no exponent defined)
+             drift 0.0049 (gate <0.01: PASS)   coverage pooled 88% / per-draw 46%   guards: bad-gaps 1981, locked-dwell 0.00e+00   [66s]   split-half p_mf: +4.411 / +4.036
+  fixed-mask check seed 1: beta=0.40 slope on beta=0.20's MF mask (n=11) = +4.542 (|r|=0.78)  -> mask-erosion: CONTRADICTED (dynamics steepen)
+
+  ---- geometry seed 2 (phase seeds 20001-20064) ----
+  beta=0.05:  p_occ(MF) = +2.227 (|r|=0.88, n=13)   [old-measure diagnostic: +1.946 (|r|=0.71, n=15)]
+             p_dwell(MF) = undefined (|r|=0.01 < 0.6 - no exponent defined)
+             drift 0.0594 (gate <0.01: FAIL)   coverage pooled 98% / per-draw 54%   guards: bad-gaps 11766, locked-dwell 0.00e+00   [70s]   split-half p_mf: +2.264 / +2.214
+  beta=0.10:  p_occ(MF) = +2.966 (|r|=0.86, n=15)   [old-measure diagnostic: +2.871 (|r|=0.81, n=19)]
+             p_dwell(MF) = undefined (|r|=0.52 < 0.6 - no exponent defined)
+             drift 0.0298 (gate <0.01: FAIL)   coverage pooled 100% / per-draw 66%   guards: bad-gaps 13043, locked-dwell 0.00e+00   [70s]   split-half p_mf: +3.031 / +1.846
+  beta=0.20:  p_occ(MF) = +3.376 (|r|=0.82, n=13)   [old-measure diagnostic: +2.186 (|r|=0.79, n=16)]
+             p_dwell(MF) = undefined (|r|=0.20 < 0.6 - no exponent defined)
+             drift 0.0639 (gate <0.01: FAIL)   coverage pooled 95% / per-draw 64%   guards: bad-gaps 6802, locked-dwell 0.00e+00   [73s]   split-half p_mf: +3.605 / +3.291
+  beta=0.40:  p_occ(MF) = +3.487 (|r|=0.73, n=12)   [old-measure diagnostic: undefined (|r|=0.58 < 0.6 - no exponent defined)]
+             p_dwell(MF) = undefined (|r|=0.05 < 0.6 - no exponent defined)
+             drift 0.0187 (gate <0.01: FAIL)   coverage pooled 81% / per-draw 45%   guards: bad-gaps 1923, locked-dwell 0.00e+00   [88s]   split-half p_mf: +3.608 / +3.439
+  fixed-mask check seed 2: beta=0.40 slope on beta=0.20's MF mask (n=12) = +3.487 (|r|=0.73)  -> mask-erosion: SUPPORTED (seat-selection, within 0.3 of centre)
+
+========================================================================================
+  CLAIM CONJUNCTION (ADJ-11 verbatim; seed 1 = committed instrument, MF measure)
+========================================================================================
+  leg (i) stable regime: FAIL (beta=0.05: drift FAIL; beta=0.1: defined; beta=0.2: defined; beta=0.4: defined; no 3-consecutive window in band)
+
+  CLAIM DECISION: REFUSED
+    Blocking condition(s), named:
+      - leg (i): no 3 consecutive drift-passing betas within the 0.3 band
+
+  PART C: NOT RUN - ADJ-11 claim conjunction not met (committed condition).
+
+  EXPORT written: C:\Users\Jimmi\OneDrive\Desktop\sdt-engine\Investigations\01_Foundations_and_Lattice_Mechanics\FLM14_Rotating_Spation_Sequential_Occupancy\flm14_run6_dwell_table.txt
+  (per-seat dwell fractions at beta=0.20, both geometry seeds - the CH07
+   WELL-DEPTH-AT-CONTACT input, delivered regardless of the claim outcome.)
+
+========================================================================================
+  F6: one rule throughout - dynamics bit-identical to run-4/5 (anchors (a)+(b)
+  passed above); T_W, W, OMEGA0 untouched; the ONE change is the measurement
+  A -> A_mf (ADJ-13, declared before code); no constant re-tuned anywhere.
+========================================================================================

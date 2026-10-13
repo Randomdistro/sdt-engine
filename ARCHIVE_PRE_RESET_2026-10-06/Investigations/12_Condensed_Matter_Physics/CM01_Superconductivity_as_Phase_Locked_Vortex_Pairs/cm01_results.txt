@@ -1,0 +1,69 @@
+CM01 - Superconductivity as Phase-Locked Vortex Pairs
+J. C. Harvey, Melbourne - 2026-07-04
+Doors: Law VI knot exclusion, law_III occlusion, FD05 wave,
+       FLM14 ADJ-7 constraint channel, NP17 seat template.
+
+== P1: normal state - occlusion drag, tau never sees sigma ==
+  Cu 300 K [all COMPUTED from measured inputs]:
+    u_rms = 7.642e-12 m (0.030 of d_nn)
+    occlusion mfp = 64.20 nm  (anchor 39 nm, gate 3x)  PASS
+    v_pack = 1.574e+06 m/s [Law VI knot exclusion; NAMED PREMISE;
+             STRUCTURAL-CONVERGENCE with rival v_F, number from n_e only]
+    rho = 1.025e-08 Ohm.m  (anchor 1.68e-8, gate 10x)  PASS
+    rho(2T)/rho(T) = 2.0000  (gate 2.00 +/- 0.05)  PASS
+    [FINDING] resistance = occlusion off thermal ion displacement;
+              linear-in-T is equipartition, not a fit. CM02 debt repaid
+              without circularity: tau chain never touches sigma_meas.
+
+== P2: pairing channel - deformation-well branch run to death ==
+  mat   E_pol[eV]   r_seat[nm]    E_rep[eV]         xi/d   window
+  Cu       0.1829       220.25     0.006538          862     OPEN
+  Al       0.1757       227.17     0.006339          793     OPEN
+  Nb       0.1245       238.56     0.006036          835     OPEN
+  Pb       0.1702       833.49     0.001728         2381     OPEN
+  gates: E_pol > E_rep at seat (attraction window) AND xi/d > 10.
+  [DEATH KNELL - committed expectation] E_pol is ~material-blind:
+  measured eta = Tc/thetaD spreads (OBSERVED, never fitted):
+    Al   eta = 0.0028
+    Nb   eta = 0.0336
+    Pb   eta = 0.0685
+  => deformation well CANNOT close Tc magnitude: branch DEAD as a
+     Tc closure (NP17: SDT binding is seat-sharing, geared, not a
+     static well). ADJ-1: binder = gear-lock on the FLM14 constraint
+     channel seeded at the retardation seat; magnitude eta = OPEN.
+
+== P3: zero drag (FLM14 rigidity) + Meissner lambda_L ==
+  drag suppression (d/xi_seat)^1.5 [Al] = 4.47e-05  (gate < 1e-3)  PASS
+  WHY R=0 (machinery): the locked cluster is gear-rigid; a defect
+  kick propagates on the constraint channel cluster-wide in-tick
+  (FLM14 ADJ-7) - the defect faces the WHOLE cluster reorganisation
+  cost, not one carrier's. Drag requires breaking the lock: below
+  the lock temperature there is no dissipation channel. Meissner =
+  EMC03 swirl expulsion by the rigid condensate.
+  lambda_L(Al) = 12.5 nm  (anchor 16 nm, gate 2x)  PASS
+  lambda_L(Nb) = 22.5 nm  (anchor 39 nm, gate 2x)  PASS
+  [lambda_L chain: zero-drag carriers + Ampere circuital law -
+   classical EM, no gauge field as mechanism]
+
+== P4: flux quantum divisor + isotope exponent ==
+  Phi_0 = h/(2e) = 2.067834e-15 Wb  [IDENTITY once carrier = pair;
+          NOT a prediction. Earned content = the divisor:
+          2 = body count of the lock (two W=1 vortices, one phase
+          object, carrier mass 2m_e, handedness 2e). kappa_pair =
+          h/(2 m_e) = 3.6369e-04 m^2/s [COMPUTED]. Exclusivity of 2
+          (why no 3-lock) = OPEN, logged.]
+  isotope exponent alpha_iso = -dlnTc/dlnM = -0.5000
+    chain: Tc ~ lock ceiling hbar*omega_D; omega_D = sqrt(ks/M);
+    ks, geometry M-independent  [DERIVED, conditional on ceiling]
+    gate -0.500 +/- 0.005: PASS ; anchor Hg 0.50 +/- 0.03 [OBSERVED]
+
+== Ledger ==
+  DERIVED : rho_Cu chain (no sigma input), mfp, linear-in-T, seat,
+            attraction window, drag suppression, lambda_L, alpha_iso.
+  NAMED PREMISES: wake-packing speed (Law VI knot exclusion);
+            lock ceiling = hbar*omega_D (channel cutoff);
+            FLM14 constraint channel (canon ADJ-7).
+  IDENTITY: Phi_0 = h/2e, kappa_pair = h/2m (labelled, not passed).
+  OPEN    : eta = Tc/thetaD magnitude (the SDT coupling number);
+            exclusivity of the 2-lock.
+  CALIBRATED: none (0 of 0 budget).

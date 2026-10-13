@@ -169,3 +169,15 @@ density-consistency), GOM17/GOM19 (ledger users), website copy (the honest versi
 
 *GOM02 · upgraded 2026-07-24 · the advantage becomes one measured number or it becomes prose;
 the identities get named either way. Newton found the projection; prove the source measures better.*
+
+---
+
+## Audit correction 2026-10-05 (opening premise)
+
+**Finding:** The thesis that koppa beats "G's 22 ppm wall" compares against G where the relevant quantity is GM, which is known as well as koppa·c² (they are the same number: "koppa·c² recovers GM_Sun exactly"), so the advantage is conceptual rather than a precision gain.
+
+**Correction:** Re-state the gate as the host-wise koppa spread against the GM-route spread from the same orbit data and report equality as the expected outcome.
+
+**Status:** OWED — needs a new run, derivation or data; the corrected requirement is recorded here.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

@@ -1,3 +1,37 @@
+# NSEQ16 — Perfect traction-gear engine (construction verification) (specification rewritten 2026-10-12)
+
+**Author:** J. C. Harvey, Melbourne. Rewritten at Harvey's direction: prompts carry new data; the packing sequencer is understood before grammar work. The previous specification is kept below the line.
+
+## 1. State after the reset (2026-10-10)
+**Deferred:** gates G0–G7 (bipartite p–n contacts, zero contact slip, Möbius reversal control) need `traction-gear-engine.js` driven in full by node.
+
+## 2. New data and what it teaches (2026-10-10 to 2026-10-12)
+- **The live sequencer was driven by node on 2026-10-10/11** (records: NP17 addendum; `NP17_.../CASCADE_ASSESSMENT_2026-10-11.md`; PPT18 stage 1). Findings:
+  - The light seeds ²H, ³H and ³He are **CALIBRATED(8/9)**, fitted exactly to their own B, μ and Q.
+  - The zero-fit universal ledger (wake contact coupling × αħc/R_p × contraction) is **B6 on all 250 stable nuclides**: right order, with ratio CV 8.5%, missing a factor that grows with coordination.
+  - **Wrong-sign binding** in 23 of 173 isotope steps: contraction multiplies binding and also lowers the wake coupling.
+  - Every A ≥ 4 graph is **one α 4-ring plus a tree** (E = A).
+  - μ(⁴He) = 1.65 μN against 0.
+  - The H1 nucleon envelope reaches **1.085 R_p**, using untraced constants (0.06 fm strand, 5.28 fm helix). Canon-consistent sizes (PPT18 stage 2a): R = 0.444 fm and a = 0.397 fm for (4,5).
+  - **No EC grammar:** ⁷Be, ¹¹C and ⁸B are refused.
+- The braid repair's registered sizes (R = 0.62, a = 0.22, b = 0.16 R_p) violate canon's aspect law for (4,5) (2.82 against 1.12; PPT18 K2).
+
+## 3. Next round (registered order)
+1. Drive G0–G7 by node on the current engine version, using the `selfTest` hooks plus contact-slip controls. These are constructions: no physics content until a value law exists.
+2. Add **G8 (registered now): canon consistency.** Nucleon envelope ≤ R_p; aspect R/a = √(q/p) for the declared winding; every size traced to a record. Currently **not met** (PPT18).
+3. A proposal (Release is not edited) to replace the H1 constants with canon-consistent sizes once Harvey rules the winding.
+
+## Prohibitions
+- No census over candidate predictors.
+- Grammar counts are not evidence (NP24).
+- No data substitution without a label.
+- Release is read, never edited (proposals only).
+- The word "charge" is not used.
+
+---
+
+## Previous specification (kept as written)
+
 # NSEQ16 — Contact Perfect-Traction Orbital Gear Engine
 
 **Author:** James Christopher Tyndall, Melbourne  

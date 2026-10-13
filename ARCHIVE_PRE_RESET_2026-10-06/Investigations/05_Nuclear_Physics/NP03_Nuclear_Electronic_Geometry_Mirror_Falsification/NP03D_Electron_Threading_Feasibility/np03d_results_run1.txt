@@ -1,0 +1,79 @@
+﻿NP03D — Electron Threading Feasibility — real intersection solver
+fibre radii: thin = 3.00e-20 m (winding::r_electron_body_open, OPEN)
+             r_e  = 2.8179e-15 m (measured::r_e, atomic c-boundary scale)
+R_p = 8.4140e-16 m. All clearances reported in R_p units.
+==========================================================================
+
+[read] 7 isotopes from np03c_topology.txt
+
+---- He-4  Z=2  trefoils=2 ----
+  D0 trefoil count == Z: PASS
+  D1 own-knot linking: all |Lk|==2, worst |Lk-round| = 0.0001  PASS
+  D2 thin-fibre clearance: loop-tube +0.1770 R_p, loop-loop +0.2905 R_p  PASS (all %d electrons placeable)
+      (Z = 2 electrons threaded, zero intersections)
+  D3 r_e-fibre fork:       loop-tube -3.1720 R_p, loop-loop -6.4076 R_p  INFEASIBLE at r_e scale (as expected: r_e > R_p)
+  D4 null control: 1/2 random loops intersect tubes (construction: 0/2)
+  D5 pairwise-linked fraction: 0/1 (full Hopf fibration needs 1/1)
+
+---- Li-7  Z=3  trefoils=3 ----
+  D0 trefoil count == Z: PASS
+  D1 own-knot linking: all |Lk|==2, worst |Lk-round| = 0.0001  PASS
+  D2 thin-fibre clearance: loop-tube +0.1770 R_p, loop-loop +0.2905 R_p  PASS (all %d electrons placeable)
+      (Z = 3 electrons threaded, zero intersections)
+  D3 r_e-fibre fork:       loop-tube -3.1720 R_p, loop-loop -6.4076 R_p  INFEASIBLE at r_e scale (as expected: r_e > R_p)
+  D4 null control: 0/3 random loops intersect tubes (construction: 0/3)
+  D5 pairwise-linked fraction: 0/3 (full Hopf fibration needs 3/3)
+
+---- C-12  Z=6  trefoils=6 ----
+  D0 trefoil count == Z: PASS
+  D1 own-knot linking: all |Lk|==2, worst |Lk-round| = 0.0001  PASS
+  D2 thin-fibre clearance: loop-tube -0.0648 R_p, loop-loop +0.0515 R_p  FAIL
+  D3 r_e-fibre fork:       loop-tube -3.4138 R_p, loop-loop -6.6466 R_p  INFEASIBLE at r_e scale (as expected: r_e > R_p)
+  D4 null control: 1/6 random loops intersect tubes (construction: 0/6)
+  D5 pairwise-linked fraction: 1/15 (full Hopf fibration needs 15/15)
+
+---- O-16  Z=8  trefoils=8 ----
+  D0 trefoil count == Z: PASS
+  D1 own-knot linking: all |Lk|==2, worst |Lk-round| = 0.0001  PASS
+  D2 thin-fibre clearance: loop-tube -0.0695 R_p, loop-loop +0.1605 R_p  FAIL
+  D3 r_e-fibre fork:       loop-tube -3.4185 R_p, loop-loop -6.5377 R_p  INFEASIBLE at r_e scale (as expected: r_e > R_p)
+  D4 null control: 3/8 random loops intersect tubes (construction: 0/8)
+  D5 pairwise-linked fraction: 0/28 (full Hopf fibration needs 28/28)
+
+---- Ne-20  Z=10  trefoils=10 ----
+  D0 trefoil count == Z: PASS
+  D1 own-knot linking: all |Lk|==2, worst |Lk-round| = 0.0001  PASS
+  D2 thin-fibre clearance: loop-tube +0.1334 R_p, loop-loop +0.0675 R_p  PASS (all %d electrons placeable)
+      (Z = 10 electrons threaded, zero intersections)
+  D3 r_e-fibre fork:       loop-tube -3.2157 R_p, loop-loop -6.6307 R_p  INFEASIBLE at r_e scale (as expected: r_e > R_p)
+  D4 null control: 5/10 random loops intersect tubes (construction: 0/10)
+  D5 pairwise-linked fraction: 0/45 (full Hopf fibration needs 45/45)
+
+---- Si-28  Z=14  trefoils=14 ----
+  D0 trefoil count == Z: PASS
+  D1 own-knot linking: all |Lk|==2, worst |Lk-round| = 0.0001  PASS
+  D2 thin-fibre clearance: loop-tube +0.1034 R_p, loop-loop +0.1411 R_p  PASS (all %d electrons placeable)
+      (Z = 14 electrons threaded, zero intersections)
+  D3 r_e-fibre fork:       loop-tube -3.2457 R_p, loop-loop -6.5570 R_p  INFEASIBLE at r_e scale (as expected: r_e > R_p)
+  D4 null control: 6/14 random loops intersect tubes (construction: 0/14)
+  D5 pairwise-linked fraction: 0/91 (full Hopf fibration needs 91/91)
+
+---- Fe-56  Z=26  trefoils=26 ----
+  D0 trefoil count == Z: PASS
+  D1 own-knot linking: all |Lk|==2, worst |Lk-round| = 0.0001  PASS
+  D2 thin-fibre clearance: loop-tube +0.1193 R_p, loop-loop +0.2905 R_p  PASS (all %d electrons placeable)
+      (Z = 26 electrons threaded, zero intersections)
+  D3 r_e-fibre fork:       loop-tube -3.2297 R_p, loop-loop -6.4076 R_p  INFEASIBLE at r_e scale (as expected: r_e > R_p)
+  D4 null control: 14/26 random loops intersect tubes (construction: 0/26)
+  D5 pairwise-linked fraction: 0/325 (full Hopf fibration needs 325/325)
+
+==========================================================================
+NP03D SUMMARY
+  D0 trefoil count == Z            : PASS
+  D1 own-knot |Lk| == 2            : PASS
+  D2 thin-fibre zero intersection  : FAIL
+  D3 r_e-fibre                     : reported fork (see per-isotope lines)
+  D4 null control                  : run
+  D5 full Hopf fibration           : 1/508 pairs linked -> NOT MET (stays OPEN)
+  OVERALL: FAIL — feasibility is TRUE at thin-fibre scale, FALSE at r_e scale;
+           fibre thickness is OPEN in laws.hpp; full fibration NOT demonstrated.

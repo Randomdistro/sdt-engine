@@ -1,3 +1,31 @@
+# APS10 — First ionisation from pressure (specification rewritten 2026-10-12)
+
+**Author:** J. C. Harvey, Melbourne. Rewritten at Harvey's direction: prompts carry new data; the packing sequencer is understood before grammar work; errors inform the mechanism. The previous specification is kept below the line.
+
+## 1. State after the reset (2026-10-10)
+- **Opening gate met:** Z = 2–10, median error 1.48%, maximum 5.25% (Be), signs 8/8, with validations met.
+- **Grade G3/G4, COMPUTED.** The dodecardinal solver is native (no wavefunction), but its coefficient forms were isolated against these rows, so this is a **re-verification, not blind**.
+- The prompt's "nine pairs" should read eight.
+
+## 2. What the errors and new data teach
+- A blind test exists in the repo: **APS14's higher sequential ionisations**, not used in the isolation (45 unused higher ionisations, per the canon note).
+- CH09 (atomic radius) is to use the same outer-seat ladder. One construction should predict both, registered together.
+
+## 3. Next round (registered order)
+1. Blind run on the higher sequential ionisations (Z = 2–10, all stages), with cascade bands and gates committed before the run.
+2. Extension past Z = 10 needs the solver's domain extended; register the extension rule first.
+
+## Prohibitions
+- No form chosen to reach anchors (2026-10-07 rule).
+- No census of candidate cells.
+- No QM formalism as scaffolding.
+- No potential-energy bookkeeping for binding.
+- The legacy packer (`pack-nucleus.js`, NSEQ05-CONTROL-3) is not the construction; the live sequencer is `traction-gear-engine.js` (NSEQ18-WEB-1).
+
+---
+
+## Previous specification (kept as written)
+
 # APS10 — First Ionisation Energies from Occlusion Pressure
 
 > **Status:** OPEN — specification seed (benchmark-coverage alignment 2026-07-29; catalogue
@@ -36,3 +64,40 @@ beating Slater's failures would already be progress; the 5% suite gate is the de
 
 Fills suite rows B06 (nine PENDING tallies) · catalogue rows B29/B43 · the highest-value
 open tally in the suite.
+
+## Pre-registration (2026-10-03, before the instrument exists)
+
+**Scope correction.** The seed states that no native derivation exists in the corpus. APS14
+(`APS14_ASSESSMENT.md`, 2026-08-15) computes He–Ne first ionisation with the engine's
+`sdt::laws::atomic::dodecardinal::first_ionisation_eV`. This run therefore re-verifies that
+engine closure against APS10's own gates and records APS10's disposition. It is not a new
+derivation and not a blind prediction: the APS14 assessment records that the coefficient
+forms were isolated post-freeze against the B06 comparison rows, so the label ceiling is
+COMPUTED.
+
+**Instrument.** `first_ionisation_eV(Z)` for Z = 2–10, called as shipped. Z = 11–18 is not
+attempted: `solve_state` rejects more than ten electrons, so the closure's domain ends at Ne
+(APS14 records the extension as open).
+
+**Anchor.** Measured first ionisation energies, `APS14_Nuclear_Z_Celestial_Atom/data/
+ionisation.csv` (step = 1), compiled from NIST/CRC into `Datasets/nuclear/ionisation_energies.json`.
+`Datasets/nuclear/NIST_ionisation_snapshot.txt` is not used: it contains a NIST "Invalid
+Checkbox Setting" error page, not data.
+
+**Instrument validation (before scoring).** The solver's one-electron limits against closed
+forms: `solve_state(1,1)` = −Ry (−13.6057 eV) and `solve_state(2,1)` = −4 Ry (−54.4228 eV),
+each to 1e-6 relative with `converged = true`; maximum force residual below 1e-8 for every
+state used in the scored range.
+
+**Gates (single pass, Z = 2–10).** Opening gate from the seed: median error ≤ 15%, maximum
+≤ 40%. Period trend: the sign of IE₁(Z+1) − IE₁(Z) matches the measured sign for all nine
+consecutive pairs, including the Be→B and N→O decreases. Suite destination, reported and not
+gated: median and maximum against 5%.
+
+**Rejection criterion (populated).** Met if the median exceeds 15%, the maximum exceeds 40%,
+or any consecutive-pair sign disagrees with measurement. The Slater rows in B06 (6%–440%,
+B→C inversion) show this class is populated.
+
+**Labels.** COMPUTED (coefficient forms isolated against B06 rows; the 45 higher sequential
+ionisations in APS14 were not used in that isolation). Provenance: NATIVE closure geometry.
+Discrimination: not applicable to a single-framework fit quality.

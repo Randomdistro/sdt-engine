@@ -419,3 +419,15 @@ below the ⟐ notice; run-1 verdict untouched.
 ---
 
 *CH07 RUN 2 · spec 2026-07-06 · J. C. Harvey · one wall pays all, or the wall dies.*
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** The "novel" B(DCl) prediction (+0.004%) is reduced-mass scaling of the measured HCl constant with k back-solved (declared circular), so it is algebra, not a prediction.
+
+**Correction:** Label P2 and P4 IDENTITY and gate the parent frequencies from the derived k against the 10% prompt tolerance.
+
+**Status:** ANNOTATED — label, status or tally corrected in the record; no re-score of earlier runs.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

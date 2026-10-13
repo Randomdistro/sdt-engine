@@ -169,3 +169,15 @@ gate moves. This note scopes the premise only:
   per-tick values are constraint-side facts, the spread is a pulse-side (readout/wake) fact. A
   ruling conflating the two channels would be §G GATE-CONTRABAND (enforcing the rival's "all
   information is c-capped wave content").
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** Δx·Δk ≥ ½ and its saturation by a Gaussian are theorems of Fourier pairs, and Γ = ℏ/τ is recovered as FWHM·τ = 1.0001, so gates P1–P3 are mathematically guaranteed and cannot fail on the physics; the verdict itself says "prediction, unfalsifiable at current precision".
+
+**Correction:** Reclassify as a mathematical consistency check and gate only on whether ℏ is traced to κ = h/m without the commutator.
+
+**Status:** ANNOTATED — label, status or tally corrected in the record; no re-score of earlier runs.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

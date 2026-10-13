@@ -158,3 +158,15 @@ Not required for the verdict; this is the payoff of doing it well.
 ---
 
 *CM05 · 10× upgrade 2026-06-29 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** The critical-velocity gate is "He-4 v_c within 2× of the measured roton value (~60 m/s ideal; ~0.1–10 m/s practical)", a target spanning three orders of magnitude that cannot fail, and the T_λ gate is "within ~2×".
+
+**Correction:** Fix one measured v_c and a ≤ 20% tolerance, and keep the recorded P1 failures (5.77× high, 0.22× low) as the result.
+
+**Status:** RULE RECORDED — corrected gate or definition applies to the next run; the earlier result is not re-scored and nothing was re-run.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

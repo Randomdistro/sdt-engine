@@ -1,0 +1,30 @@
+GOM_DAT1 blank-slate run 1 (registered in GOM_DAT1_RESET_ASSESSMENT_2026-10-11.md sections 0-2)
+=======================================================================
+
+[VD] SHA-256 known digests (empty, abc): met
+[VA] synthetic 36-byte record round trip: met
+[VB] truncated fixture (-7 bytes) rejected by the C1 rule: met
+[VC] one-byte flip changes the hash and the gate rejects it: met
+INSTRUMENT VALIDATIONS: met
+
+MANIFEST GATE: odf c2ea51d9b5e795bd3eb9b4f1c5174cc44325080623188dce5e01c0ea914bfaf7 (match), lbl b27da74ca62187475860e8214c2b76b8b69af760bbe44d27aac93d1c1a5593bf (match) ; the cors_0021 copy hashes identical
+[C1] file bytes 274176 = RECORD_BYTES 36 x FILE_RECORDS 7616 = 274176 : met (VERIFICATION)
+[C2] file bytes / 8064 = 34.000000 : met ; records per block 224, blocks 34 (VERIFICATION)
+
+[C3] label tables: 14, sum of ROWS = 7615 against FILE_RECORDS 7616 (difference 1)
+  record     1: FILE LABEL GROUP HEADER            primary key    101 secondary key   0 length 1 start packet 0 : declared
+  record     3: IDENTIFIER GROUP HEADER            primary key    107 secondary key   0 length 1 start packet 2 : declared
+  record     5: ORBIT DATA GROUP HEADER            primary key    109 secondary key   0 length 1 start packet 4 : declared
+  record  7453: RAMP GROUP 25 HEADER               primary key   2030 secondary key  25 length 1 start packet 7452 : declared
+  record  7455: RAMP GROUP 45 HEADER               primary key   2030 secondary key  45 length 1 start packet 7454 : declared
+  record  7456: RAMP GROUP 54 HEADER               primary key   2030 secondary key  54 length 1 start packet 7455 : declared
+  record  7457: DATA SUMMARY GROUP HEADER          primary key    105 secondary key   0 length 1 start packet 7456 : declared
+  record  7459: END OF FILE GROUP HEADER           primary key     -1 secondary key   0 length 0 start packet 7458 : declared
+  scan of all 7616 records for small-integer first words (< 100000): -1 x1 0 x154 101 x1 105 x1 107 x1 109 x1 2030 x3
+  every small-integer first word is a declared key (or zero padding): yes
+[C3] header records at the positions the label implies: 8 of 8 declared
+
+[C4] file label group data: spacecraft ID 82 ; creation date 1020615 time 020918 ; reference date 19500101 time 0
+  label PRODUCT_CREATION_TIME 2002-166T02:09:18 : 2002-06-15 (day 166) 02:09:18 -> expected YYMMDD 020615, HHMMSS 020918 : creation fields DIFFER ; label gives no spacecraft ID number: UNADJUDICATED (82 is the DSN numbering for Cassini, not read from the label) ; reference date 19500101 = EME50 convention as the label states: yes
+
+[C5] ODF alone yields an admissible propagation residual: PENDING_DATA (this loop computes no residual).

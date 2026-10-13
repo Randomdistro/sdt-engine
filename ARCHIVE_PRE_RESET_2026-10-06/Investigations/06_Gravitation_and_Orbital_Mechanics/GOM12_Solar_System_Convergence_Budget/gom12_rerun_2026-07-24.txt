@@ -1,0 +1,130 @@
+﻿=====================================================================
+ GOM12: SOLAR-SYSTEM CONVERGENCE BUDGET (E101)
+ Pure measured kinematics. No G, no M as inputs.
+ GM/c^2 column = OBSERVED comparison only (CONVERGENCE, disclosed).
+ J. C. Harvey, Melbourne — 2026-07-03
+=====================================================================
+
+--- 1. k-HIERARCHY (orbital) --- [zk^2 = 1 is an IDENTITY: notation only]
+
+  Body        v [km/s]     k = c/v   z = (v/c)^2         z*k^2 - 1
+  Mercury        47.87      6262.6    2.5497e-08          0.00e+00
+  Venus          35.02      8560.6    1.3646e-08          0.00e+00
+  Earth          29.78     10066.9    9.8675e-09          0.00e+00
+  Mars           24.08     12449.9    6.4517e-09          0.00e+00
+  Jupiter        13.07     22937.4    1.9007e-09          0.00e+00
+  Saturn          9.68     30970.3    1.0426e-09          2.22e-16
+  Uranus          6.80     44087.1    5.1449e-10         -3.33e-16
+  Neptune         5.43     55210.4    3.2806e-10          0.00e+00
+
+  max |zk^2 - 1| = 3.33e-16  -> IDENTITY holds (algebra, NOT physics; not scored)
+  Total planetary convergence coupling: sum z_i = 5.9247e-08 (dimensionless)
+
+--- 2. KEPLER CHECK: v(r) = (c/k_Sun) sqrt(R_Sun/r)  [gate 0.1%] ---
+
+  v_surf,Sun = c/k_Sun = 436824.2 m/s (k_Sun = 686.3, laws.hpp bridge)
+
+  Body       v_pred[m/s]    v_JPL[m/s]       err %
+  Mercury        47878.8       47870.0     +0.0184
+  Venus          35025.7       35020.0     +0.0163
+  Earth          29788.9       29780.0     +0.0300
+  Mars           24133.0       24080.0     +0.2200
+  Jupiter        13059.1       13070.0     -0.0834
+  Saturn          9646.0        9680.0     -0.3512
+  Uranus          6799.9        6800.0     -0.0013
+  Neptune         5432.5        5430.0     +0.0451
+
+  worst |err| = 0.3512%
+  [FAIL] Kepler v(r) reproduces all 8 JPL velocities to < 0.1% [CONVERGENCE]
+
+--- 3. PARENT INVARIANCE: koppa_Sun = v^2 a / c^2 from each planet ---
+
+  Body       koppa_Sun [m]
+  Mercury        1476.5020
+  Venus          1476.5657
+  Earth          1476.1599
+  Mars           1470.5678
+  Jupiter        1479.5139
+  Saturn         1487.4751
+  Uranus         1477.0844
+  Neptune        1475.7136
+
+  mean koppa_Sun = 1477.4478 m   sigma/mu = 0.3014%
+  laws.hpp bridge::koppa_Sun = 1477.0459 m
+  OBSERVED GM_Sun/c^2 (IAU)  = 1476.6250 m   [CONVERGENCE column]
+  [FAIL] koppa_Sun invariant across 8 planets (sigma/mu < 0.1%)
+  [PASS] mean koppa_Sun within 0.5% of OBSERVED GM_Sun/c^2 [CONVERGENCE]
+
+--- 4. PER-BODY KOPPA CENSUS (from satellite kinematics only) ---
+
+  Parent    Probe       koppa_kin [m]      GM/c^2 [m]     err %
+  Earth     Moon         4.467286e-03    4.435028e-03    +0.727
+  Mars      Phobos       4.768608e-04    4.765299e-04    +0.069
+  Jupiter   Io           1.409807e+00    1.409577e+00    +0.016
+  Jupiter   Europa       1.409537e+00    1.409577e+00    -0.003
+  Jupiter   Ganymede     1.409832e+00    1.409577e+00    +0.018
+  Jupiter   Callisto     1.409916e+00    1.409577e+00    +0.024
+  Saturn    Titan        4.217878e-01    4.220414e-01    -0.060
+  Uranus    Titania      6.426259e-02    6.446627e-02    -0.316
+  Neptune   Triton       7.607134e-02    7.606664e-02    +0.006
+
+  Jupiter from 4 Galilean moons: mean = 1.4098 m, sigma/mu = 0.010%
+  [PASS] koppa_Jupiter invariant across 4 Galilean moons (sigma/mu < 1%)
+  [FAIL] every satellite-derived koppa within 0.5% of OBSERVED GM/c^2 [CONVERGENCE]
+
+  HONEST GAP: Mercury and Venus have no satellites — their own koppa is
+  NOT measurable by pure orbital kinematics (flyby/radio data required).
+  Left blank, not plugged.
+
+--- 5. OCCLUSION CENSUS (geometric, from the Sun) ---
+
+  Body          f_occluded
+  Mercury       4.4384e-10
+  Venus         7.8201e-10
+  Earth         4.5342e-10
+  Mars          5.5298e-11
+  Jupiter       2.0165e-09
+  Saturn        4.1644e-10
+  Uranus        1.9507e-11
+  Neptune       7.4891e-12
+
+  TOTAL planetary occlusion of the Sun's sky: sum f = 4.1945e-09
+  (i.e. the planets shadow ~4.19e-09 of the Sun's 4pi convergence influx —
+   the solar budget is closed to 1 part in ~2.4e+08 by planetary occlusion)
+
+--- 6. JUPITER'S DEPTH AT EARTH ---
+
+  z_Jupiter(Earth, opposition) = koppa_J / r_JE = 2.242e-12
+  z_Sun(Earth)                 = 9.876e-09
+  ratio = 2.270e-04
+  [REPORT] z_J = 2.24e-12 is 4460x BELOW the ~1e-8 orbital residual scale.
+  Jupiter's static depth does NOT explain a 1e-8 residual. Stated plainly.
+
+--- 7. PRESSURE-DOMAIN CLOSURE: lumiopause vs Oort inner edge ---
+
+  Lumiopause r = sqrt(L_Sun/(4 pi F_CMB)) = 20857 AU (laws.hpp)
+  Oort inner-edge literature range: ~2,000 - 20,000 AU
+  ratio vs lower end: 10.4 x    ratio vs upper end: 1.04 x
+  [OPEN] Consistent with the UPPER end of the range only; the PROMPT's
+  'within factor of 2' criterion is under-specified against a 10x-wide
+  literature range. No PASS stamped. (Committed in RUN_LOG before run.)
+
+--- 8. ADJACENT k^2 RATIOS (E21 integer conjecture) ---
+
+  Pair                  k2 ratio       |ratio-n|
+  Venus   /Mercury       1.8685          0.1315
+  Earth   /Venus         1.3829          0.3829
+  Mars    /Earth         1.5295          0.4705
+  Jupiter /Mars          3.3944          0.3944
+  Saturn  /Jupiter       1.8231          0.1769
+  Uranus  /Saturn        2.0264          0.0264
+  Neptune /Uranus        1.5683          0.4317
+
+  Integer hits: 0 / 7 pairs.
+  [REPORT] No systematic integer pattern (>=1 isolated hit is look-elsewhere
+  territory). E21 conjecture NOT supported by the k-hierarchy. Stated plainly.
+
+=====================================================================
+ SUMMARY: 2 gated PASS, 3 gated FAIL, 1 IDENTITY (unscored), 2 OPEN
+ Class: CONVERGENCE census (koppa = GM/c^2 disclosed throughout).
+=====================================================================

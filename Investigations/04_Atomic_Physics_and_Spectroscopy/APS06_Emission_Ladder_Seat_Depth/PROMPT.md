@@ -281,3 +281,15 @@ A failed phase is **PIVOT / KILL / OPEN** — never retro-PASS. An OPEN phase mu
 ---
 
 *APS06 · SPEC · execute with `PROMPT_EXECUTION_PROTOCOL.md`. Author: J. C. Harvey, Melbourne.*
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** Several gates are empty-class kills ("P2 wedge Z>=2, N=0: PASS (0 found)"; "P3: 0 counterexamples") that nature cannot violate because such nuclides do not exist, so they cannot fail.
+
+**Correction:** Replace them with a gate on a populated class (for example the measured gamma emitters at fixed energy) or drop them from the tally.
+
+**Status:** RULE RECORDED — corrected gate or definition applies to the next run; the earlier result is not re-scored and nothing was re-run.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

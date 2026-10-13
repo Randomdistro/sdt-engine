@@ -1,0 +1,53 @@
+GOM_DAT8 blank-slate run 2, Phase B (registered in GOM_DAT8_RESET_ASSESSMENT_2026-10-10.md sections 2-3)
+==================================================================================
+
+selection: 7447 records
+tables: 5-min 31 rows, 15-min 397 rows
+[VB1] common epochs 11 ; worst relative difference of deldot 0.00e+00 -> met
+[VB2] RTLT range 8345.3 to 8345.9 s -> met
+[VB3] 15-min table interpolated at the 5-min epochs: worst relative difference 7.67e-06 -> met
+
+PHASE B VALIDATIONS: met
+
+---- Frozen prompt hypotheses (levels) ----
+median |obs| = 50244.322 Hz ; median |f0| = 170408.724 Hz
+  H0 f=f0                    scale +1.00000 : med|obs-f|/med|obs| = 4.3916 ; med|f|/med|obs| = 3.3916 -> C3 not met
+  H1 f=-f0                   scale -1.00000 : med|obs-f|/med|obs| = 2.3916 ; med|f|/med|obs| = 3.3916 -> C3 not met
+  H2 f=-f0/2                 scale -0.50000 : med|obs-f|/med|obs| = 0.6958 ; med|f|/med|obs| = 1.6958 -> C3 not met
+  H3 f=-f0/pi                scale -0.31831 : med|obs-f|/med|obs| = 0.1507 ; med|f|/med|obs| = 1.0796 -> C3 not met
+  H4 f=-f0*221/240           scale -0.92083 : med|obs-f|/med|obs| = 2.1231 ; med|f|/med|obs| = 3.1231 -> C3 not met
+  H5 f=-f0*240/749           scale -0.32043 : med|obs-f|/med|obs| = 0.1506 ; med|f|/med|obs| = 1.0868 -> C3 not met
+  H6 f=-f0*2.116e9/8.4e9     scale -0.25190 : med|obs-f|/med|obs| = 0.1493 ; med|f|/med|obs| = 0.8544 -> C3 MET
+  H7 f=-f0*8.4e9/32.028e9    scale -0.26227 : med|obs-f|/med|obs| = 0.1500 ; med|f|/med|obs| = 0.8895 -> C3 not met
+  outcome: SCALE_CONVENTION_PASS (H6 f=-f0*2.116e9/8.4e9; )
+  descriptive: corr(obs, f0) = -0.99963 ; corr of 60-record differences = 0.02324 ; fraction with sign(obs) = sign(f0): 0.000 ; obs/f0: median -0.2948, 10th -0.3656, 90th -0.2239
+
+---- Native change-based reading ----
+  third 1   : span 2382 s ; d(obs) = +9688.489 Hz ; d(rdot_rx) = +0.048937 km/s ; d(rdot_2w) = +0.045316 km/s ; rdot_2w/rdot_rx change ratio 0.9260
+  third 2   : span 2382 s ; d(obs) = +9930.710 Hz ; d(rdot_rx) = +0.046811 km/s ; d(rdot_2w) = +0.046452 km/s ; rdot_2w/rdot_rx change ratio 0.9923
+  third 3   : span 2383 s ; d(obs) = +9773.632 Hz ; d(rdot_rx) = +0.042804 km/s ; d(rdot_2w) = +0.045745 km/s ; rdot_2w/rdot_rx change ratio 1.0687
+  whole span: span 7147 s ; d(obs) = +29423.982 Hz ; d(rdot_rx) = +0.138699 km/s ; d(rdot_2w) = +0.137675 km/s ; rdot_2w/rdot_rx change ratio 0.9926
+
+  predictor P_rx (receive-time rdot)
+    descriptive effective carrier F_eff = |d obs| / ((2/c)|d rdot|): third 1 2.96761e+10 Hz third 2 3.18000e+10 Hz third 3 3.42264e+10 Hz whole span 3.17993e+10 Hz
+    F = 2.1166e9 (ODF ref)   sign +1 : R = -14.0203 (third 1), -15.0238 (third 2), -16.1701 (third 3), -15.0234 (whole) -> not met
+    F = 2.1166e9 (ODF ref)   sign -1 : R = +14.0203 (third 1), +15.0238 (third 2), +16.1701 (third 3), +15.0234 (whole) -> not met
+    F = 8.4e9                sign +1 : R = -3.5329 (third 1), -3.7857 (third 2), -4.0746 (third 3), -3.7856 (whole) -> not met
+    F = 8.4e9                sign -1 : R = +3.5329 (third 1), +3.7857 (third 2), +4.0746 (third 3), +3.7856 (whole) -> not met
+    F = 32.028e9             sign +1 : R = -0.9266 (third 1), -0.9929 (third 2), -1.0686 (third 3), -0.9929 (whole) -> not met
+    F = 32.028e9             sign -1 : R = +0.9266 (third 1), +0.9929 (third 2), +1.0686 (third 3), +0.9929 (whole) -> not met
+    F = 34.316e9             sign +1 : R = -0.8648 (third 1), -0.9267 (third 2), -0.9974 (third 3), -0.9267 (whole) -> not met
+    F = 34.316e9             sign -1 : R = +0.8648 (third 1), +0.9267 (third 2), +0.9974 (third 3), +0.9267 (whole) -> not met
+
+  predictor P_2w (two-way average, up-leg at t - RTLT)
+    descriptive effective carrier F_eff = |d obs| / ((2/c)|d rdot|): third 1 3.20472e+10 Hz third 2 3.20457e+10 Hz third 3 3.20261e+10 Hz whole span 3.20358e+10 Hz
+    F = 2.1166e9 (ODF ref)   sign +1 : R = -15.1406 (third 1), -15.1398 (third 2), -15.1306 (third 3), -15.1352 (whole) -> not met
+    F = 2.1166e9 (ODF ref)   sign -1 : R = +15.1406 (third 1), +15.1398 (third 2), +15.1306 (third 3), +15.1352 (whole) -> not met
+    F = 8.4e9                sign +1 : R = -3.8151 (third 1), -3.8150 (third 2), -3.8126 (third 3), -3.8138 (whole) -> not met
+    F = 8.4e9                sign -1 : R = +3.8151 (third 1), +3.8150 (third 2), +3.8126 (third 3), +3.8138 (whole) -> not met
+    F = 32.028e9             sign +1 : R = -1.0006 (third 1), -1.0006 (third 2), -0.9999 (third 3), -1.0002 (whole) -> not met
+    F = 32.028e9             sign -1 : R = +1.0006 (third 1), +1.0006 (third 2), +0.9999 (third 3), +1.0002 (whole) -> NATIVE PASS
+    F = 34.316e9             sign +1 : R = -0.9339 (third 1), -0.9338 (third 2), -0.9333 (third 3), -0.9336 (whole) -> not met
+    F = 34.316e9             sign -1 : R = +0.9339 (third 1), +0.9338 (third 2), +0.9333 (third 3), +0.9336 (whole) -> not met
+
+  native outcome: PASS (P_2w 32.028e9 -; )

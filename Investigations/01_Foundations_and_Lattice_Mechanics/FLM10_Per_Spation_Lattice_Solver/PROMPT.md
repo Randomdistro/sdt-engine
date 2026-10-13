@@ -326,3 +326,15 @@ debts. J. C. Harvey, Melbourne.*
 ---
 
 *FLM10 · upgraded 2026-06-27 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** A key gate is "match within ~50%" with phase thresholds of 10% and 50%, which cannot discriminate between competing lattice structures.
+
+**Correction:** Use the 10% tier as the pass gate, or label the 50% tier non-discriminating.
+
+**Status:** RULE RECORDED — corrected gate or definition applies to the next run; the earlier result is not re-scored and nothing was re-run.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

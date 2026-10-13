@@ -1,3 +1,30 @@
+# NP04B — Three-neutron genesis gate (specification rewritten 2026-10-12)
+
+**Author:** J. C. Harvey, Melbourne. Rewritten at Harvey's direction: prompts carry new data; the packing sequencer is understood before grammar work; errors inform the mechanism. The previous specification is kept below the line.
+
+## 1. State after the reset (2026-10-10)
+- **F0, energy:** Q(3n → t + e⁻ + ν̄) = Q_n + B(t) = 9.264334 MeV. A **construction** (a conservation identity of measured masses); it cannot fail.
+- **F0b, kinetics:** G2, open; no native rate.
+
+## 2. What the errors and new data teach
+- On the native list the bodies are protons and electrons. "Three free neutrons" is three p + e pairs, and t = 3p + 2e (NP17 reset: B(t; {3p, 2e}) = 6.917143 MeV).
+- **The genesis question re-posed natively:** what assembles 3p + 3e into t + e? The energy side is again an identity. Only a rate or route is testable.
+
+## 3. Next round (registered order)
+1. A native assembly route (contact sequence) for 3p + 2e on the live sequencer's open-chain triton (graph E = 2).
+2. A rate from the unlinking or lock barrier (shared with NP04A C and PPT09). Registered before any comparison.
+
+## Prohibitions
+- No form chosen to reach anchors (2026-10-07 rule).
+- No census of candidate cells.
+- No QM formalism as scaffolding.
+- No potential-energy bookkeeping for binding.
+- The legacy packer (`pack-nucleus.js`, NSEQ05-CONTROL-3) is not the construction; the live sequencer is `traction-gear-engine.js` (NSEQ18-WEB-1).
+
+---
+
+## Previous specification (kept as written)
+
 # NP04B — Three-Neutron Genesis Gate *(energetics PASS · kinetics UNRESOLVED)*
 
 > **Author:** J. C. Harvey, Melbourne. **Status:** SPEC (upgrade 2026-06-27).

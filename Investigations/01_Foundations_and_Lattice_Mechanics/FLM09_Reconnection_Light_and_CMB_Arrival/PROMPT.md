@@ -8,7 +8,7 @@
 
 ## ⓪ The Golden Rule — five questions (answer before Phase 0)
 
-1. **What don't we know?** — [FLM09] FLM09 — Reconnection Dynamics: the Light Mode and the Boundary Arrival: *(unfilled by the 2026-06-27 bulk template upgrade — write the single measurable gap before the next run)*
+1. **What don't we know?** — [FLM09] FLM09 — Reconnection Dynamics: the Light Mode and the Boundary Arrival: **Measurable gap (written 2026-10-05 in the audit correction pass, from this prompt's own content; the 2026-06-27 template left it unfilled):** Does the lattice reconnection (bond-switch) saturation threshold land at the measured Schwinger-field onset E_S = 1.323e18 V/m, stated as a relay-rate bound from m_e, c and hbar, and does the boundary-arrival mode reproduce the FIRAS blackbody to < 50 ppm?
 2. **Why does it matter?** — Stack position / downstream blockers (see `INVESTIGATION_STACK.md`).
 3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
 4. **What would prove us wrong?** — §⑧ falsification tests with numeric triggers.
@@ -180,3 +180,15 @@ never summed.
 ---
 
 *FLM09 · upgraded 2026-06-27 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*
+
+---
+
+## Audit correction 2026-10-05 (opening premise)
+
+**Finding:** The question field reads "unfilled by the 2026-06-27 bulk template upgrade", so there is no stated measurable gap to test.
+
+**Correction:** Write the single measurable gap (the Schwinger-field threshold and the 50 ppm FIRAS gate) in §⓪ before further runs.
+
+**Status:** RULE RECORDED — corrected gate or definition applies to the next run; the earlier result is not re-scored and nothing was re-run.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

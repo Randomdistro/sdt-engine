@@ -1,3 +1,37 @@
+# NP12 — Nuclear boundary radius scaling (specification rewritten 2026-10-12)
+
+**Author:** J. C. Harvey, Melbourne. Rewritten at Harvey's direction: prompts carry new data, and errors inform the mechanism. The 2026-06-27 specification is kept below the line, superseded. "Charge radius" in the old title is the IAEA's label; here it is the **boundary radius**.
+
+## 1. What is established (reset run 2026-10-10, `NP12_RESET_ASSESSMENT_2026-10-10.md`; 908 IAEA radii)
+| model | RMS rel. dev. | R² | status |
+|---|---|---|---|
+| Z·R_p (old premise) | 890.8% | −3282 | **EXCLUDED (G1)**: a 1-D sum cannot fill a volume |
+| 1.2 A^(1/3) (old rival) | 25.6% | −1.46 | partly a convention mismatch (edge radius against RMS radius, factor √(3/5)) |
+| **R_p (A/η)^(1/3), η = π/√18 (canon, NP30 §6)** | **4.96%** | 0.961 | re-verified; the number was known from the engine comment, so it is **not blind** |
+
+**Isotope chains** (60 elements with ≥ 5 isotopes): radii **grow by 2.36% on average over ΔN ≈ 15**, against 5.10% from A^(1/3). The old "constant along chains" prediction is **excluded (G1)**.
+
+## 2. What the errors teach
+- **The canon law has the right volume scaling but the wrong chain slope.** It predicts the A^(1/3) rate (5.1%); measured is about half that.
+- **NP30 §6 and the triton-contraction rule supply the native mechanism:** added neutrons arrive as tritons that draw the boundary in (−11 mfm/triton heavy; endpoint r₀ → 0.9300 fm derived; slope "reproduced at −9.5…−11" from the r₀(f_t) approach).
+- **The chain slope is therefore the discriminating observable,** and it was not used to build the volume law.
+
+## 3. Next round (round 2; register before computing)
+- **H2:** R(Z, N) = R_p (A/η_eff(f_t))^(1/3). Here η_eff rises toward close-pack as the triton fraction f_t = n_t/(n_d + n_t + 1) rises. The functional form of η_eff(f_t) is to be written **from NP30 §6's r₀(f_t) approach before any chain is loaded**, with the deuteron-offset term (NP30 "owed") declared as the one open element.
+- **Observable:** per-chain fractional growth over ΔN for the 60 chains (not the volume RMS, which is already known).
+- **Gate (cascade):** median per-chain slope error ≤ 3% (B3). Report the slope ratio predicted/measured, with A^(1/3) at 2.16× as the null.
+- **Companion:** NP12f round 2 (live-sequencer point radii, running 2026-10-12) reports whether the built construction carries size at all. If it does, the same chain slope test is applied to the built nuclei.
+
+## 4. Prohibitions
+- No fitted η.
+- No re-scoring of the exposed 4.96%.
+- The word "charge" is not used for the boundary.
+- Grammar counts (f_t) are shared-input with (Z, N) (NP24). The test is the **slope prediction**, not membership.
+
+---
+
+## Superseded specification (2026-06-27, kept as written)
+
 # NP12: Nuclear Charge Radius Scaling — Investigation Prompt
 
 > **Author:** J. C. Harvey, Melbourne. **Status:** SPEC (upgrade 2026-06-27).
@@ -8,7 +42,7 @@
 
 ## ⓪ The Golden Rule — five questions (answer before Phase 0)
 
-1. **What don't we know?** — [NP12] NP12: Nuclear Charge Radius Scaling — Investigation Prompt: *(unfilled by the 2026-06-27 bulk template upgrade — write the single measurable gap before the next run)*
+1. **What don't we know?** — [NP12] NP12: Nuclear Charge Radius Scaling — Investigation Prompt: **Measurable gap (written 2026-10-05 in the audit correction pass, from this prompt's own content; the 2026-06-27 template left it unfilled):** Which scaling of the nuclear boundary radius, linear in Z or the volume-additive A^(1/3) close-pack form, fits the measured radii, and with what residual and no free coefficient beyond a declared diagnostic?
 2. **Why does it matter?** — Stack position / downstream blockers (see `INVESTIGATION_STACK.md`).
 3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
 4. **What would prove us wrong?** — §⑧ falsification tests with numeric triggers.
@@ -117,3 +151,15 @@ Test the exact proportionality: plot R_ch / Z vs Z for all elements.
 ---
 
 *NP12 · upgraded 2026-06-27 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*
+
+---
+
+## Audit correction 2026-10-05 (opening premise)
+
+**Finding:** The premise is that nuclear radii scale linearly with Z by adding proton radii in one dimension (Z·R_p), which is 890.8% off and dimensionally wrong for a volume-filling object.
+
+**Correction:** State the premise as volume-additive (close-pack A^(1/3) form, already recovered) and gate that form against the measured radii.
+
+**Status:** RULE RECORDED — corrected gate or definition applies to the next run; the earlier result is not re-scored and nothing was re-run.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

@@ -1,0 +1,18 @@
+FLM15-inf R2 — independent quadrature (pre-registered 2026-10-06)
+=================================================================
+
+[V1] circle centre-field relative error N=96,192,384: 8.70e-04 2.17e-04 5.44e-05 ; ratio(192/384) 4.00 -> PASS
+[V2] circle on-axis (z=3) relative error N=96,192,384: 5.54e-04 1.38e-04 3.46e-05 ; ratio(192/384) 4.00 -> PASS
+[V4] V_lock = 3.590391604103054 (8pi/7 = 3.590391604102621); V_wake = 0.598398600683337 (4pi/21 = 0.598398600683770); fraction 0.857142857142961; engine functions 3.590391604102621, 0.598398600683770 -> PASS
+[V3] circle stiffness h=0.03: 1.678568 ; h=0.02: 1.678564 ; relative change 1.99e-06 -> PASS
+
+VALIDATIONS: met
+
+[T1/T2] independent grid (h = 0.02) vs sealed QMC rows (orientation 0)
+  a      | circle: indep   sealed   diff%  | trefoil: indep   sealed   diff% | ratio: indep   sealed   diff% | L3/L1  ratio/(L3/L1)  J/L circ  J/L tref
+  0.3500 |  1.67856  1.67294  +0.34 |  4.74945  4.37085  +8.66 | 2.82947 2.61268  +8.30 | 2.2706  1.2461  0.2672  0.3329
+  0.5000 |  1.68705  1.67798  +0.54 |  4.83873  4.09824 +18.07 | 2.86816 2.44236 +17.43 | 2.5375  1.1303  0.2685  0.3035
+  0.8165 |  1.69862  1.68259  +0.95 |  6.62775  4.50434 +47.14 | 3.90184 2.67702 +45.75 | 3.2925  1.1851  0.2704  0.3204
+  0.9000 |  1.70075  1.68295  +1.06 |  7.49296  4.76698 +57.18 | 4.40568 2.83250 +55.54 | 3.5190  1.2520  0.2707  0.3389
+
+T1 gate (every circle, trefoil and ratio within 3% of the sealed row): NOT MET

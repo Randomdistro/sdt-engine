@@ -8,7 +8,7 @@
 
 ## ⓪ The Golden Rule — five questions (answer before Phase 0)
 
-1. **What don't we know?** — [NP14] NP14: Proton-Neutron Mass Difference from Topology — Investigation Prompt: *(unfilled by the 2026-06-27 bulk template upgrade — write the single measurable gap before the next run)*
+1. **What don't we know?** — [NP14] NP14: Proton-Neutron Mass Difference from Topology — Investigation Prompt: **Measurable gap (written 2026-10-05 in the audit correction pass, from this prompt's own content; the 2026-06-27 template left it unfilled):** Why is the neutron heavier than the proton by 1.293 MeV when the neutron is a proton plus an internal electron (NP17): does the structural electron term (0.511 MeV) plus a seat surplus (0.782 MeV) close the difference with the surplus derived, not back-solved?
 2. **Why does it matter?** — Stack position / downstream blockers (see `INVESTIGATION_STACK.md`).
 3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
 4. **What would prove us wrong?** — §⑧ falsification tests with numeric triggers.
@@ -93,3 +93,15 @@ The proton's charge (ℓ=1 wake) provides additional stabilisation that slightly
 ---
 
 *NP14 · upgraded 2026-06-27 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** The prompt's gate (Δm within 20% of 1.293 MeV) is applied to the composite m_e + surplus, where the m_e term is structural, so it clears at −14.08% while the surplus itself misses by −23.28%.
+
+**Correction:** Gate on the surplus alone (as the verdict already does) and delete the composite pass criterion from the prompt.
+
+**Status:** RULE RECORDED — corrected gate or definition applies to the next run; the earlier result is not re-scored and nothing was re-run.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

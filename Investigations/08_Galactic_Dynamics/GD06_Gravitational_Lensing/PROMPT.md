@@ -25,7 +25,7 @@
 
 ## ② Framework
 
-`n(r) = 1/(1 − ϟ_⊙/r)` for r ≥ R_Sun (weak-field). **Targets:** δ = 1.750″ at b = R_Sun.
+`n(r) = 1/(1 − ϟ_⊙/r)²` for r ≥ R_Sun (weak-field; the c_far = c(1−z)² profile adopted in `laws.hpp` by the GOM22 repair). *Audit correction 2026-10-05: this line previously read `n = 1/(1 − ϟ_⊙/r)`; numerical integration shows that profile gives 0.8758″, half of the measured 1.750″ (`gd06_eikonal_results_2026-10-05.txt`). The original text is kept in git history.* **Targets:** δ = 1.750″ at b = R_Sun.
 
 **Cross-check OP01:** Same n(r) as OP01 Phase 3.
 

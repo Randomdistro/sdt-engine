@@ -1,3 +1,34 @@
+# RTM02 — Velocity-derived mass and the expulsion ledger (specification rewritten 2026-10-12)
+
+**Author:** J. C. Harvey, Melbourne. Rewritten at Harvey's direction: prompts carry new data, and errors inform the mechanism. The previous specification is kept below the line.
+
+## 1. State after the reset (2026-10-10)
+- **Constructions (cannot fail):** P1a–c, the P2 closed-ledger cancellation, P5 stationarity.
+- **Consistency with RTM01:** open-ledger hover price at 4.5 km/s of 10^81.869 per day, against 10^81.9.
+- **P3 sweep:** the closed ledger descends to the photon-rocket floor exp(gt/c).
+- **P5 optimum:** v_ex/Δv = 0.6275.
+- **g = v_E²/R_E = 9.8183 m/s²** (native, no G).
+- **The measured propellant-fraction gate:** PENDING_DATA.
+
+## 2. What the errors and new data teach
+- Every closed form is shared with special-relativistic rocket mechanics, so the ledger **cannot discriminate**. The native content is the route: movement budget, no dilation postulate, g from Ѻ.
+- **g from engine v_Earth carries a 4-figure rounding** (GOM20 X4: about 2e-4 relative). Below this investigation's precision.
+
+## 3. Next round (registered order)
+1. Cache a measured propellant-fraction dataset (launch-vehicle mass ratios against Δv) with provenance.
+2. Register the gate: the closed-ledger prediction of mass ratio from Δv and v_ex, within the dataset's stated uncertainty.
+3. Label in advance: convergent, not discriminating.
+
+## Prohibitions
+- No census over candidate forms (2026-10-07 rule).
+- No imported source models (PREM, polytropes, quantum-number labelling) as native tests.
+- No G or GM.
+- The word "charge" is not used.
+
+---
+
+## Previous specification (kept as written)
+
 # RTM02 — Velocity-Derived Mass and the Expulsion Ledger
 
 > **Author:** J. C. Harvey, Melbourne. **Date:** 2026-08-03. **Status:** pre-registered
@@ -76,3 +107,15 @@ price-floor theorem read as relay economics.
 
 `rtm02_velocity_mass.cpp` (VS2022 cl), `rtm02_results.txt`, `RTM02_VERDICT.md`,
 domain README row.
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** Gates such as "c/v_circ ≡ 1/√(1−v²/c²) to machine precision" and "optimum satisfies its own stationarity equation (1e-6%)" are identities, and the "~0.63·Δv scaling emerges" gate compares the computed value with a reference computed the same way.
+
+**Correction:** Label them IDENTITY and gate against measured propellant-mass fractions.
+
+**Status:** ANNOTATED — label, status or tally corrected in the record; no re-score of earlier runs.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

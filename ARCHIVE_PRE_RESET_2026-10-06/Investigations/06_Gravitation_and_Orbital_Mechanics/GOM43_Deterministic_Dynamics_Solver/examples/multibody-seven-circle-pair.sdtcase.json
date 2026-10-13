@@ -1,0 +1,59 @@
+{
+  "contract_version": "3.0.0",
+  "case_id": "multibody-seven-circle-pair",
+  "problem_class": "sdt_occlusion_nbody",
+  "frame": {
+    "type": "inertial_cartesian",
+    "units": "SI"
+  },
+  "forces": [
+    {
+      "type": "retarded_seven_circle_occlusion",
+      "pressure_source": "sdt_law_I_P_conv",
+      "propagation_speed": "c"
+    }
+  ],
+  "bodies": [
+    {
+      "id": "A",
+      "baryon_count": "805077908211484772344991472376387066905923727158567",
+      "radius_m": 100000,
+      "collision_radius_m": 100000,
+      "position_m": [-666666666.6666666, 0, 0],
+      "velocity_m_s": [0, -346.17051265463914, 0],
+      "provenance": {
+        "classification": "CONDITIONAL",
+        "description": "Synthetic geometry with laws-derived baryon count."
+      }
+    },
+    {
+      "id": "B",
+      "baryon_count": "1610155816422969544689982944752774133811847454317134",
+      "radius_m": 100000,
+      "collision_radius_m": 100000,
+      "position_m": [333333333.3333333, 0, 0],
+      "velocity_m_s": [0, 173.08525632731957, 0],
+      "provenance": {
+        "classification": "CONDITIONAL",
+        "description": "Synthetic geometry with laws-derived baryon count."
+      }
+    }
+  ],
+  "integrator": "velocity_verlet",
+  "timestep_s": 10,
+  "duration_s": 100,
+  "record_every_steps": 1,
+  "tolerances": {
+    "retarded_time_s": 1e-12,
+    "max_retarded_iterations": 32
+  },
+  "gates": [
+    { "id": "M0" },
+    { "id": "M1" },
+    { "id": "M3" },
+    { "id": "M6" },
+    { "id": "M8" },
+    { "id": "M9" },
+    { "id": "M12" }
+  ]
+}

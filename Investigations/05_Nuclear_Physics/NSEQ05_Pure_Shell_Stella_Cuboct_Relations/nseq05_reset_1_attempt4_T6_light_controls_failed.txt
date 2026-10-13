@@ -1,0 +1,36 @@
+NSEQ05 blank-slate run 1 (registered in NSEQ05_RESET_ASSESSMENT_2026-10-10.md sections 0-2)
+=======================================================================
+
+[T1] cumulative: alpha:2 D6:8 D12:20 T8:28 D12:40 T10:50 D20:70 T12:82 D30:112 T14:126 D42:168 T16:184 -> reproduces the frozen table (VERIFICATION)
+     F(n) = B(n) + E(n) = (n+1)(n+2) for n = 1..7: yes
+[T2] crown graph (two (n+1)-sets, every opening seat linked to every closing seat except its antipode) and the triangulated face count 2V-4:
+     n = 3: V = 8, edges 12 (= n(n+1) = 12), degree 3 regular ; triangulated faces 2V-4 = 12 ; schedule D seats E(n) = 12 -> face rule agrees
+     n = 4: V = 10, edges 20 (= n(n+1) = 20), degree 4 regular ; triangulated faces 2V-4 = 16 ; schedule D seats E(n) = 20 -> face rule differs
+     n = 5: V = 12, edges 30 (= n(n+1) = 30), degree 5 regular ; triangulated faces 2V-4 = 20 ; schedule D seats E(n) = 30 -> face rule differs
+     n = 6: V = 14, edges 42 (= n(n+1) = 42), degree 6 regular ; triangulated faces 2V-4 = 24 ; schedule D seats E(n) = 42 -> face rule differs
+[V1] cube-vertex pair angles 12/12/4 -> met
+[V2] AME2020 nuclide rows read 3558, of which experimental (no estimated flag on the mass excess) 2550 ; n 8071.31806, 1H 7288.971064, 2H 13135.722895, 3H 14949.81090 keV -> met
+[V3] second difference of a quadratic (step 2) = 8c: 2.000000 vs 2.000000 -> met
+
+VALIDATIONS: met
+
+[T3] cube edges (nearest links) 12 ; midpoints 12 (cuboctahedron vertices) ; layers along (1,1,1): height -1.1547 x3; height 0.0000 x6; height 1.1547 x3;
+[T4] cuboctahedron faces: 14 (triangles 8, squares 6) ; expected 14 (8 + 6)
+[T5] 14 sites, 7 antipodal pairs ; C3v (coordinate permutations) orbits: 6 with sizes 1 3 3 1 3 3
+     one-per-pair selections 128 ; polar-symmetric (invariant under all six coordinate permutations) 8 ; distinct mean link angles: 79.9245 deg x2; 84.4368 deg x4; 100.0755 deg x2;
+     minimum mean link angle 79.9245 deg attained by 2 invariant selections (complements counted separately)
+
+[T6] (amended statistic: median over even-Z / even-N nuclides; tables are printed after the controls)
+Positive controls (must rank 1 in the +-4 window):
+  neutron N =  20: G = 3912 keV, window values 5, rank 2 -> FAILS
+  neutron N =  28: G = 4704 keV, window values 5, rank 1 -> ok
+  neutron N =  50: G = 4786 keV, window values 5, rank 1 -> ok
+  neutron N =  82: G = 4143 keV, window values 5, rank 1 -> ok
+  neutron N = 126: G = 3665 keV, window values 5, rank 1 -> ok
+  proton  Z =  20: G = 5113 keV, window values 5, rank 2 -> FAILS
+  proton  Z =  28: G = 6421 keV, window values 5, rank 1 -> ok
+  proton  Z =  50: G = 5375 keV, window values 5, rank 1 -> ok
+  proton  Z =  82: G = 3203 keV, window values 5, rank 1 -> ok
+Controls: NOT ALL PASS -> instrument validation unmet (G0)
+
+Targets (schedule's non-magic totals):

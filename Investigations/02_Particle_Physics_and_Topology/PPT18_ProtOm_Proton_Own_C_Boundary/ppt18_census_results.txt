@@ -1,0 +1,23 @@
+cells: 110 (distinct values 84); references: 28; comparisons: 3080
+
+BY CONSTRUCTION (not counted):
+  electron m_e                 inf -> Om_p                  F  0.510999 MeV = e (0.0000%)
+  electron m_e                 inf -> Om_p                  B  0.510999 MeV = e (0.0000%)
+  proton m_p                   inf -> Om_p                  F  938.272 MeV = p (0.0000%)
+  proton m_p                   inf -> Om_p                  B  938.272 MeV = p (0.0000%)
+
+MATCHES (B1-B3):
+  B2   0.138%   proton m_p                   inf -> Om_p                  F  938.272 MeV  ~ n (939.56542 MeV)
+  B2   0.138%   proton m_p                   inf -> Om_p                  B  938.272 MeV  ~ n (939.56542 MeV)
+  B2   0.728%   proton m_p                   R_p -> a=R                   F  295.838 MeV  ~ Delta-N (293.7 MeV)
+  B3   1.304%   electron (hydrogen ladder)   R_p -> a=R                   H  1.46105 MeV  ~ B_d native (1.44225 MeV)
+  B3   1.327%   proton m_p                   R_p -> Om_p                  F  764.974 MeV  ~ rho (775.26 MeV)
+  B3   2.037%   proton m_p                   inf -> Om_p                  F  938.272 MeV  ~ eta' (957.78 MeV)
+  B3   2.037%   proton m_p                   inf -> Om_p                  B  938.272 MeV  ~ eta' (957.78 MeV)
+  B3   2.101%   electron (hydrogen ladder)   R_p -> Om_p                  F  7.55592 MeV  ~ B_h (7.71804 MeV)
+  B3   2.260%   proton m_p                   R_p -> Om_p                  F  764.974 MeV  ~ omega (782.66 MeV)
+
+observed: B1+B2 matches 3; B1-B3 matches 9
+chance baseline (grid x random factor in [0.5,2], 20000 trials): mean B1+B2 4.74, P(>= observed) 0.660 ; mean B1-B3 14.30, P(>= observed) 0.782
+
+CHOSEN CELL: proton m_p inf -> 2R_p (contact) H = 43.3245 MeV ; nearest reference B_alpha 28.2957 MeV (+53.1%)

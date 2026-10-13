@@ -1,0 +1,51 @@
+NP12 - Nuclear Charge Radius Scaling (J. C. Harvey, 2026-07-03)
+Data: IAEA charge_radii.csv (Angeli & Marinova 2013). REAL download.
+Filter: Z>=1, radius_val>0.  N = 908 isotopes  (criterion N>=250: MET)
+==========================================================================
+
+[Phase B] Global comparison (all 908 isotopes)
+  model                                   RMS[fm]     RMS[%]       R^2   npar
+  M1  Z*R_p (SDT canon)                   45.9507    890.83% -3281.6134      0
+  M2  1.2*A^1/3 (rival as written)         1.2581     25.55%   -1.4607      0
+  M3  0.9295*A^1/3 (fair rival)            0.1610      5.00%    0.9597      0
+  M4a 0.7207*A^1/3 (SDT pack, uniform)     1.1673     25.11%   -1.1184      0
+  M4b 0.9304*A^1/3 (SDT pack, surface)     0.1592      4.96%    0.9606      0
+  M5  1.2708*Z^1/3 [CALIBRATED(1)]         0.1013      3.85%    0.9841      1
+
+  best zero-param A^1/3-family model: M4b 0.9304*A^1/3 (SDT pack, surface) (RMS 4.96%)
+  KILL RULE (committed): RMS(M1) > 3x best -> 890.83% vs 4.96% : factor 179.4x -> M1 KILLED as a global law
+
+  Z-band breakdown (RMS relative %):
+  model                                Z  1-8   Z  9-20  Z 21-50  Z 51-92 
+  M1  Z*R_p (SDT canon)                   76.9%   301.6%   671.4%  1039.6%
+  M2  1.2*A^1/3 (rival as written)        14.7%    18.6%    25.0%    27.0%
+  M3  0.9295*A^1/3 (fair rival)           20.4%     9.3%     3.7%     1.9%
+  M4a 0.7207*A^1/3 (SDT pack, uniform)    37.0%    29.3%    25.1%    23.8%
+  M4b 0.9304*A^1/3 (SDT pack, surface)    20.3%     9.3%     3.6%     1.9%
+  M5  1.2708*Z^1/3 [CALIBRATED(1)]        20.2%     4.6%     1.5%     1.2%
+
+[Phase C] Isotope-chain spread (gates committed: <2%% Z-constancy ok, >5%% A^1/3 better)
+  Ca (Z=20): 11 isotopes A=39..50  measured spread = 1.67%  [< 2%: Z-constancy essentially correct]
+      A^1/3 PREDICTED spread for same A-range = 8.63%  (flatness cuts both ways)
+  Sn (Z=50): 25 isotopes A=108..132  measured spread = 3.20%  [2-5%: intermediate]
+      A^1/3 PREDICTED spread for same A-range = 6.92%  (flatness cuts both ways)
+  Pb (Z=82): 32 isotopes A=182..214  measured spread = 3.28%  [2-5%: intermediate]
+      A^1/3 PREDICTED spread for same A-range = 5.55%  (flatness cuts both ways)
+
+[Phase D] Magic-Z residuals vs best A^1/3-family model (report only)
+  mean |res| magic-Z: 3.10% (n=80)   non-magic: 3.10% (n=828)
+
+[Phase E] R/Z constancy test (M1 predicts R/Z = 0.8414 fm for all Z)
+  R/Z: min = 0.0607 fm (Z=96)  median = 0.0862  max = 2.1421 fm (Z=1)
+  element means: Z=1: 1.593  Z=8: 0.340  Z=20: 0.175  Z=50: 0.093  Z=82: 0.067 fm
+  -> monotone drift by ~24x across the table: R/Z is NOT constant.
+
+==========================================================================
+VERDICT (numeric):
+  M1 Z*R_p       : RMS 890.8% -> KILLED as a global scaling law (survives only at Z=2..3)
+  rival as written (M2 1.2*A^1/3): RMS 25.5% - ALSO fails on RMS data (unit mismatch,
+                   pre-declared: sharp-surface vs RMS convention, factor ~1.29)
+  fair rival M3  : RMS 5.0% | SDT-native M4b: RMS 5.0% (pre-declared DEGENERATE pair,
+                   0.09%% apart; dataset cannot distinguish)
+  M4a uniform    : RMS 25.1% (bracket lower limit - fails; charge sits at periphery)
+  M5 k*Z^1/3     : RMS 3.8% with k fitted = 1.2708 fm [CALIBRATED(1), diagnostic only]

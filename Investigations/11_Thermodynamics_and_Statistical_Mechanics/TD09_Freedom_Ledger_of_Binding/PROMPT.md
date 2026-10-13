@@ -1,3 +1,31 @@
+# TD09 — The freedom ledger of binding (specification rewritten 2026-10-12)
+
+**Author:** J. C. Harvey, Melbourne. Rewritten at Harvey's direction: prompts carry new data, and errors inform the mechanism. Harvey's 2026-07-26 claim and gates are kept below the line.
+
+## 1. What is established (reset run 2026-10-10, `TD09_RESET_ASSESSMENT_2026-10-10.md`)
+- **P2:** at 300 K, E_b/kT = 8.6e7 nats against a configurational cost of 57.7 nats. Binding is freedom-positive by about 10⁷ in a cold bath.
+- **P1 + P3:** the ledger and Saha routes agree to 3e-16. **T_flip = 0.062445 MeV** (X_n/X_p = 1/7; 0.065 at X_n/X_p = 1), inside the registered band [0.035, 0.17] MeV.
+- **Grade G4:** consistent, **convergent route (shared counting; it cannot discriminate against equilibrium thermodynamics)**. Delete test: remove the freedom narration and the number stands.
+
+## 2. What the 2026-10-07 to 2026-10-11 findings change
+1. **The ledger counted the neutron as a free body, with B_d = 2.2246 MeV on the {p,n} list.** The native nucleus list is {2p, 1e}, with B = 1.442246 MeV (NP14; NP17 reset), and the free neutron's own +0.782 MeV is owed (SCT, FLM12). A native-list ledger is a different calculation: the bodies are p, e and d, and the released movement is 1.4422 MeV. It need not reproduce Saha's T_flip. **That makes it potentially discriminating.**
+2. **The comparison band [0.035, 0.17] MeV and the "measured bottleneck 0.06–0.09 MeV" are BBN-model inferences** that import an expansion history. They are framework-dependent anchors, not measurements, and must be labelled so.
+3. **Time-arrow wording in the old text** ("delays the first assembly") is replaced by the movement statement: ln(1/η) = 21.2 nats of photon-bath route surplus sets the bath temperature at which assembly first nets positive.
+
+## 3. Round 2 (register before computing)
+- **Native-list ledger:** bodies p, e, d, with d ⇄ 2p + e releasing 1.442246 MeV. Statistical weights from the constituents' own circulation states (to be stated natively: g_e = 2 by its two circulation hands; g_p = 2; g_d from the built deuteron's hand count). Electron density from neutrality.
+- **Output:** T_flip(native), with the size of the shift from Saha's 0.0624 MeV reported.
+- **Gate:** none against the BBN band (framework-dependent). Report T_flip(native), its difference from the Saha route and its input sensitivity. Any later comparison needs an SDT-native assembly history (no expansion), which is owed.
+
+## 4. Prohibitions
+- No time arrow.
+- No potential-energy step.
+- The BBN band is not to be presented as a measurement.
+
+---
+
+## Original claim and gates (2026-07-26, kept as written)
+
 # TD09 — The Freedom Ledger of Binding (Harvey 2026-07-26)
 
 > **Author:** J. C. Harvey, Melbourne. **Status:** SPEC, written BEFORE the tool (gates below are

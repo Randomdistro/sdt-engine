@@ -1,0 +1,22 @@
+FLM05 R2 — checks (pre-registered 2026-10-06)
+=============================================
+
+[V1] neutral point: Earth-Moon fraction numeric 0.900166551 closed form 0.900166551 (known 0.90017); p-e numeric 0.977195166016 closed form 0.977195166016 -> PASS
+[V2] torus volume numeric 13.159472533892 closed form 13.159472533892 (rel -9.4e-16) -> PASS
+
+VALIDATIONS: met
+
+[T1] Rotorpause (CONSTRUCTION; input m_p/m_e = 1836.1527): r_rp/a0 = 0.977195 (numeric 0.977195); flail angle sqrt(m_e/m_p) = 1.3371 deg
+
+[T2] k(R_p) = 0.546431 ; 1/k^2 = 3.349109 ; r_e/R_p = 3.349109 ; rel diff 0.00e+00 -> stray-form criterion (>1e-3) not met (forms agree)
+     k^2 r_e = 8.414000e-16 m (= R_p to the engine's rounding: the k-ladder gives koppa_H = R_p/k^2 = r_e = 2.817940e-15 m)
+     baryon koppa = 1.241873e-54 m ; z_b = koppa_b/R_p = 1.4760e-39 (not 3.35)
+     r_e/koppa_b = 2.269105e+39 ; Coulomb/gravity (e-p) = alpha (lam_p/l_P)^2/(m_e/m_p) = 2.268662e+39 ; rel diff 1.95e-04
+
+[T3] proton trefoil sizes in use
+     source                                       | R_major [m]   a [m]        | R/R_FLM05 | V_torus [m^3] | m(Law IV) [kg] | m/m_p      | V_torus/V_disp,p
+     FLM05  (T1 = R_p, T2 = T1 sqrt(2/3))         | 8.4140e-16  6.8700e-16 | 1.0000    | 7.8387e-45   | 7.1542e-14   | 4.277e+13 | 4.277e+13 
+     PPT01  (2,3) rule A, action closure          | 3.3253e-16  2.7151e-16 | 0.3952    | 4.8386e-46   | 4.4161e-15   | 2.640e+12 | 2.640e+12 
+     canon  law_VI::confinement::trefoil_major_radius | 1.2142e-16  9.9141e-17 | 0.1443    | 2.3558e-47   | 2.1500e-16   | 1.285e+11 | 1.285e+11 minor radius assumed = rule-A aspect (canon gives only R)
+
+SUMMARY: validations met; stray form agrees with r_e/R_p to 0.0e+00; torus-derived mass differs from m_p by factors 4.28e+13 2.64e+12 1.29e+11 

@@ -74,3 +74,11 @@ most of the signal; P4 partial, DEFER full mimic modelling):
 ---
 
 **Prompt completion C (P1–P3 delivered, P4 partial) · Physics class DEGENERATE (mechanism) / KILLED (H2/H3 temp-min fold as claimed) · Recovery NO RECOVERY (for the claimed mechanism) · Cascade root: OP01-matter-index (no native T→closure term; shared with OP04-magnitude)**
+
+---
+
+## Status correction (2026-10-05) — dependency logic
+
+The kill above is computed with the **measured medium's** refractivity standing in for the matter term (shared-input, named in the 2026-10-03 block). It excludes the temp-min fold **for that matter term**. Its own §D Q2 states the rescue route is an SDT-native matter index, which is OP01's phase B — **OPEN, not computed** (OP01 v2, 2026-10-05). An open upstream cannot close a downstream: "NO RECOVERY" is not licensed while OP01-matter-index is open.
+
+Restated status: H2/H3 **excluded as modelled with the measured-medium matter term**; the native-matter-index version of H2/H3 is **OPEN**, conditional on OP01 phase B, and bounded by the helioseismic-vs-limb 0.5″ consistency. The original text above is unchanged. (OP01 closing negatively on phase B, i.e. a derived native term that is too small, would make this kill stand; OP01 closing positively would reopen it.)

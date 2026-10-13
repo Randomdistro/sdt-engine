@@ -200,3 +200,15 @@ Report **prompt completion (A–F)** separately from **physics class (NATIVE / C
 ---
 
 *NP18 · headline of the 9-investigation flux-resonator set · SPEC · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*
+
+---
+
+## Audit correction 2026-10-05 (construction)
+
+**Finding:** The baseline rate is labelled "G_F-free" but is built from the resonance ceiling plus the measured Be-7 EC width, which already contains the weak coupling, and the "exact incoherent-limit" checks are identities of the model.
+
+**Correction:** Label the baseline OBSERVED-fed, score only the N-versus-N² enhancement law, and note that the BEC-scale coherence span fails (ρ < 1).
+
+**Status:** ANNOTATED — label, status or tally corrected in the record; no re-score of earlier runs.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

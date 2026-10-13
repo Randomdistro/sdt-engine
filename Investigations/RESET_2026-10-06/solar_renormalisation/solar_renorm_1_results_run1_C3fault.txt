@@ -1,0 +1,34 @@
+﻿Renormalising the Sun, instrument 1 (2026-10-09)
+================================================
+
+[V1] 959.63 arcsec at 1 AU = 695991.8 km (expect ~696000) ; 1 arcsec = 725.271 km -> met
+[V2] constructed pivot 2000 nm recovered: 2000.000000000 nm -> met
+[V3] crossing finder on a constructed curve: 735.759 nm and 5436.564 nm, residual 0.0e+00 -> met
+
+VALIDATIONS: met
+
+R(lambda) points: 10
+       160.0 nm   963.040 +/- 0.030 arcsec  SDO/AIA (2012 Venus transit)   [read in review PDF]
+       170.0 nm   961.760 +/- 0.030 arcsec  SDO/AIA (2012 Venus transit)   [read in review PDF]
+       617.3 nm   959.570 +/- 0.020 arcsec  SDO/HMI (2012 Venus transit)   [read in review PDF]
+       535.7 nm   959.777 +/- 0.190 arcsec  PICARD SODISM II (ground)      [search-result reading; sig]
+       607.1 nm   959.862 +/- 0.200 arcsec  PICARD SODISM II (ground)      [search-result reading; sig]
+       782.2 nm   959.876 +/- 0.099 arcsec  PICARD SODISM II (ground)      [search-result reading (sd ]
+      1025.0 nm   959.832 +/- 0.190 arcsec  PICARD SODISM II (ground)      [search-result reading; sig]
+   1300000.0 nm   961.100 +/- 2.500 arcsec  ALMA 230 GHz                   [search-result reading]
+   1414000.0 nm   966.500 +/- 2.800 arcsec  ALMA/SST 212 GHz               [search-result reading]
+   3000000.0 nm   964.100 +/- 4.500 arcsec  ALMA 100 GHz                   [search-result reading]
+seismic radius 695.68 +/- 0.03 Mm = 959.200 +/- 0.041 arcsec
+
+C1 smallest disc: in-band points 0 ; bracketing series SODISM II 782.2 nm 959.876 +/- 0.099 and 1025.0 nm 959.832 +/- 0.190 ; difference -0.044 +/- 0.214 arcsec
+   SODISM II spread 535.7-1025 nm: 0.099 arcsec (series sigmas 0.10-0.20) -> OPEN (no point in band; series flat within 2 sigma)
+
+C2 pivot, my fit R = a + b x + c x^2, x = ln(lambda/1 um): a = 958.8787, b = -1.3338, c = 0.34593, chi2/dof = 111.89 (10 points)
+   pivot lambda_p = 6874.3 nm, sigma(ln lambda_p) = 0.211 -> 2-sigma range 4504.3-10491.2 nm ; R at pivot 957.593 arcsec ; band 925-975 nm outside 2 sigma -> REJECTED
+   bet band offset: ln(950/lambda_p)/sigma = -9.36
+   published fit (log10, X-EUV to radio, ~40 points): minimum X = 3.8186 -> 6585.5 nm, R_min = 954.61 arcsec ; quoted 6.6 +/- 1.9 um ; bet offset (950 nm) = -3.0 sigma (linear)
+   symmetric-dip pivot (registered before data): 4870 nm (4920 with 153.3 um) ; offset from published 6.6 +/- 1.9 um = -0.91 sigma
+
+C3 my fit crosses R_seis at 796.5 nm and 59331.1 nm
+   published fit crosses R_seis at 402.8 nm and 107681.0 nm
+   measured points above R_seis by > 2 sigma: 8 of 10 (smallest excess 0.8 sigma) -> measured crossing exists

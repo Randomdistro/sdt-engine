@@ -186,3 +186,15 @@ Class A·NATIVE·SCALE-INVARIANT: h(Θ) derived + King-calibrated + both limits 
 > **Prompt completion** [A–F] · **Physics class** [NATIVE/…/OPEN] · **Cross-scale** [SCALE-INVARIANT/BROKEN/UNDETERMINED] · **σ_occ** [GEOMETRIC/DEFERRED-to-EMC01] · **Cascade root** [GD06] · **Children** [XSD-A/B/C/D (+A2/B2/C2/D2)].
 
 *GD06 · rebuilt on the solid-angle instrument 2026-07-13 · occlusion = subtended sky-fraction Θ; depth redshift = h(Θ); one dimensionless angular law, no constants, calibrated on the King plot, anchored on the Sun and the sungrazer, carried 30 orders to the bulge and the cluster; mass and 6π⁵ fall out; the crux and the f-geometrization are DERIVED or honestly DEFERRED, never assumed.*
+
+---
+
+## Audit correction 2026-10-05 (record / status)
+
+**Finding:** Two folders carry the id GD06 (Collective_Displacement_Redshift_Law and Gravitational_Lensing), and the first has verdicts but no tool in the folder (`gd06_run.py` is cited, code count 0).
+
+**Correction:** Rename one folder and add or reference the tool.
+
+**Status:** ANNOTATED — label, status or tally corrected in the record; no re-score of earlier runs.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

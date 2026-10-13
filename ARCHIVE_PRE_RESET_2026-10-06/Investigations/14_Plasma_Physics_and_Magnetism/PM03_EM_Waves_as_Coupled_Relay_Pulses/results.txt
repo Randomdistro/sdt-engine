@@ -1,0 +1,26 @@
+================================================================
+  PM03 GÇö EM Waves as Coupled Relay Pulses
+  Author: James Christopher Tyndall, Melbourne
+================================================================
+
+PHASE 1: Relay tick speed
+  c (measured)     = 2.997924580e+08 m/s
+  l_P              = 1.616255e-35 m
+  t_P = l_P/c      = 5.391246e-44 s
+  c_EM=1/sqrt(mu0 eps0) = 2.997924580e+08 m/s
+  |c - c_EM|/c     = 2.17e-14  [PASS]
+
+PHASE 2: Transverse vs compression (FD05 / GOM06)
+  c_transverse (light)  = c
+  c_longitudinal (P=u/3) = c/sqrt(3) = 1.7309e+08 m/s
+  EM mode = transverse lattice rigidity  [IDENTIFICATION]
+
+PHASE 3: 1-D wave equation discretization
+  Courant dt/dx * c = 1.0000  (stable if <=1) [PASS]
+
+================================================================
+  VERDICT: PASS GÇö Class C (CONVERGENCE on c identity)
+  c = l_P/t_P matches 1/sqrt(mu0 eps0): COMPUTED/OBSERVED.
+  Full coupled PM01+PM02 wave eqn: PENDING (Phase 1 lattice sim).
+================================================================
+

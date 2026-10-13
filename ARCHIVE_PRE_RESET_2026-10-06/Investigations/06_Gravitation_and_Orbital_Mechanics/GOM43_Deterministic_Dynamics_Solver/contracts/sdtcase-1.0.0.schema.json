@@ -1,0 +1,247 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spatial-displacement-theory.com/contracts/sdtcase-1.0.0.schema.json",
+  "title": "SDT deterministic dynamics case",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "case_id",
+    "problem_class",
+    "frame",
+    "forces",
+    "integrator",
+    "timestep_s",
+    "duration_s",
+    "record_every_steps",
+    "tolerances",
+    "gates"
+  ],
+  "properties": {
+    "contract_version": { "const": "1.0.0" },
+    "case_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 96,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+    },
+    "problem_class": {
+      "enum": ["point_nbody", "articulated_rigid"]
+    },
+    "frame": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "units"],
+      "properties": {
+        "type": { "const": "inertial_cartesian" },
+        "units": { "const": "SI" }
+      }
+    },
+    "forces": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["type"],
+            "properties": {
+              "type": { "const": "koppa_pairwise" }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["type", "acceleration_m_s2", "provenance"],
+            "properties": {
+              "type": { "const": "uniform_acceleration" },
+              "acceleration_m_s2": { "$ref": "#/$defs/vec3" },
+              "provenance": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["classification", "description"],
+                "properties": {
+                  "classification": {
+                    "enum": ["MEASURED-INPUT", "DERIVED", "COMPUTED", "CONDITIONAL"]
+                  },
+                  "description": { "type": "string", "minLength": 1 },
+                  "v_surface_m_s": { "type": "number", "exclusiveMinimum": 0 },
+                  "radius_m": { "type": "number", "exclusiveMinimum": 0 }
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "bodies": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/point_body" }
+    },
+    "links": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/rigid_link" }
+    },
+    "joints": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/revolute_joint" }
+    },
+    "integrator": {
+      "enum": ["velocity_verlet", "fixed_rk4", "rattle"]
+    },
+    "timestep_s": { "type": "number", "exclusiveMinimum": 0 },
+    "duration_s": { "type": "number", "exclusiveMinimum": 0 },
+    "record_every_steps": { "type": "integer", "minimum": 1 },
+    "tolerances": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "position_m",
+        "velocity_m_s",
+        "quaternion_norm",
+        "max_constraint_iterations"
+      ],
+      "properties": {
+        "position_m": { "type": "number", "exclusiveMinimum": 0 },
+        "velocity_m_s": { "type": "number", "exclusiveMinimum": 0 },
+        "quaternion_norm": { "type": "number", "exclusiveMinimum": 0 },
+        "max_constraint_iterations": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 256
+        }
+      }
+    },
+    "gates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "metric", "relation", "limit"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1, "maxLength": 32 },
+          "metric": { "type": "string", "minLength": 1, "maxLength": 64 },
+          "relation": { "enum": ["<=", ">="] },
+          "limit": { "type": "number" }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "problem_class": { "const": "point_nbody" } },
+        "required": ["problem_class"]
+      },
+      "then": {
+        "required": ["bodies"],
+        "properties": {
+          "integrator": { "enum": ["velocity_verlet", "fixed_rk4"] }
+        },
+        "not": { "anyOf": [{ "required": ["links"] }, { "required": ["joints"] }] }
+      }
+    },
+    {
+      "if": {
+        "properties": { "problem_class": { "const": "articulated_rigid" } },
+        "required": ["problem_class"]
+      },
+      "then": {
+        "required": ["links", "joints"],
+        "properties": { "integrator": { "const": "rattle" } },
+        "not": { "required": ["bodies"] }
+      }
+    }
+  ],
+  "$defs": {
+    "vec3": {
+      "type": "array",
+      "prefixItems": [
+        { "type": "number" },
+        { "type": "number" },
+        { "type": "number" }
+      ],
+      "items": false
+    },
+    "quat": {
+      "type": "array",
+      "prefixItems": [
+        { "type": "number" },
+        { "type": "number" },
+        { "type": "number" },
+        { "type": "number" }
+      ],
+      "items": false
+    },
+    "point_body": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "position_m",
+        "velocity_m_s",
+        "koppa_m",
+        "collision_radius_m"
+      ],
+      "properties": {
+        "id": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "position_m": { "$ref": "#/$defs/vec3" },
+        "velocity_m_s": { "$ref": "#/$defs/vec3" },
+        "koppa_m": { "type": "number", "exclusiveMinimum": 0 },
+        "collision_radius_m": { "type": "number", "minimum": 0 }
+      }
+    },
+    "rigid_link": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "position_m",
+        "quaternion_wxyz",
+        "velocity_m_s",
+        "angular_velocity_rad_s",
+        "inertial_mass_kg",
+        "inertia_diagonal_kg_m2",
+        "length_m"
+      ],
+      "properties": {
+        "id": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "position_m": { "$ref": "#/$defs/vec3" },
+        "quaternion_wxyz": { "$ref": "#/$defs/quat" },
+        "velocity_m_s": { "$ref": "#/$defs/vec3" },
+        "angular_velocity_rad_s": { "$ref": "#/$defs/vec3" },
+        "inertial_mass_kg": { "type": "number", "exclusiveMinimum": 0 },
+        "inertia_diagonal_kg_m2": { "$ref": "#/$defs/vec3" },
+        "length_m": { "type": "number", "exclusiveMinimum": 0 },
+        "koppa_m": { "type": "number", "exclusiveMinimum": 0 }
+      }
+    },
+    "revolute_joint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "parent",
+        "child",
+        "parent_anchor_m",
+        "child_anchor_m",
+        "axis_world"
+      ],
+      "properties": {
+        "id": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "parent": {
+          "type": ["string", "null"],
+          "description": "null denotes the fixed world"
+        },
+        "child": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "parent_anchor_m": { "$ref": "#/$defs/vec3" },
+        "child_anchor_m": { "$ref": "#/$defs/vec3" },
+        "axis_world": { "$ref": "#/$defs/vec3" }
+      }
+    }
+  }
+}

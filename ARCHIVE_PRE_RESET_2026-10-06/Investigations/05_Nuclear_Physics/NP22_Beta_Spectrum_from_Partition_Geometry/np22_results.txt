@@ -1,0 +1,51 @@
+﻿NP22 — beta-spectrum SHAPE from partition geometry (2026-07-04)
+Engine: sdt/laws.hpp only. Gates: RUN_LOG.md (pre-committed).
+=================================================================
+
+Phase 1 — identity ledger (earns NOTHING)
+  m_e c^2                 = 0.510999 MeV                  [engine]
+  (m_n - m_p) c^2         = 1.293332 MeV                  [engine]
+  Q = dm - m_e c^2        = 0.782333 MeV                  [IDENTITY]
+  beta_0: (g0-1)me = Q    = 0.918637  (gamma_0 = 2.530988)  [IDENTITY inversion]
+  Law-V complement        = 0.395103 c (symmetric point)  [IDENTITY]
+  vs NP14 appendix 0.91859c / 0.39522c: dev +0.0051% / -0.0297%   [PASS bookkeeping gate 0.1%]
+
+Anchor [OBSERVED column only — the rival's machinery, quarantined]
+  shape dN/dT = p E (Q-T)^2 on [0,Q];  <T> = 0.3028 MeV;  peak at T = 0.2471 MeV
+  omissions (declared v1): Coulomb/Fermi-function, recoil-order, radiative
+
+G4 numerics — M1 MC (1e7 samples, seed 20260704) vs analytic CDF: max dev = 2.75e-04  [PASS < 1e-3]
+
+Phase 2/3 — shape comparison (all rows vs OBSERVED anchor; zone = probability mass)
+  measure                                  KS D      TV  <T> MeV | [0,.1Q]  1st/3  2nd/3  3rd/3 [.9Q,Q]
+  anchor p E (Q-T)^2                         --      --   0.3028 |  0.0797  0.436  0.453  0.111  0.0039   [OBSERVED]
+  M1 isotropic-projection (COMMITTED)    0.4900  0.4986   0.1368 |  0.5420  0.816  0.130  0.054  0.0124
+  M0 tangential line at Q (scan)         1.0000  1.0000   0.7823 |  0.0000  0.000  0.000  1.000  1.0000
+  M2 energy-projection (scan)            0.2436  0.3260   0.2608 |  0.3162  0.577  0.239  0.184  0.0513
+  M3 planar seat phase (scan)            0.2932  0.4159   0.2602 |  0.3647  0.607  0.182  0.210  0.1002
+
+G1 (SHAPE, committed M1): KS D = 0.4900  =>  FAIL -> OPEN (cascade root: release-measure geometry -> FLM14 lineage)
+G2 (ENDPOINT): T_max = Q = 0.782333 MeV BY CONSTRUCTION — IDENTITY, not gradable, never sold.
+
+Phase 4 — limit fingerprints (pdf ~ x^n on declared windows, RUN_LOG G3)
+  measure                                low-E n (x=T) endpoint n (x=Q-T)
+  anchor p E (Q-T)^2                             0.500              1.990   [OBSERVED: +1/2, +2 = 3D state-count fingerprints]
+  M1 isotropic-projection (COMMITTED)           -0.506              0.014
+  M2 energy-projection (scan)                   -0.500              0.004
+  M3 planar seat phase (scan)                   -0.503             -0.489
+  M0 tangential (scan): delta-line at Q — no shape at all (the two-body line problem).
+
+Class-kill lemma (stated in RUN_LOG before running): an analytic 1-DOF release
+map with bounded non-vanishing measure density has endpoint exponent in
+{0, -1/2, -2/3, ...} — NEVER +2. The anchor demands +2 at the endpoint (nu-side
+3D state count) and +1/2 at low E (e-side 3D count). The table above decides
+whether the whole 1-DOF class is killed, not just the committed member.
+
+Law-V complement column (reported only; E_nu = Q - T_e closes the energy ledger):
+   u=|cos|      v_e/c    T_e [MeV]   E_nu [MeV]      v_nu_LawV/c
+      1.00    0.91864      0.78233      0.00000          0.39510
+      0.75    0.68898      0.19404      0.58829          0.72478
+      0.50    0.45932      0.06427      0.71806          0.88827
+      0.25    0.22966      0.01403      0.76830          0.97327
+      0.00    0.00000      0.00000      0.78233          1.00000
+  (declared ontology debt: no native budget-speed -> E_nu map; conservation does that work)

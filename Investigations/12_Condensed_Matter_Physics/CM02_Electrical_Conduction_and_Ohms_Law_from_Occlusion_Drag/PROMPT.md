@@ -198,3 +198,15 @@ Not required for the verdict; this is the payoff of doing it well.
 *CM02 · 10× upgrade 2026-06-29 · τ must be earned from occlusion, not read from copper tables · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*
 
 *CM02 · τ must be earned from occlusion, not read from copper tables.*
+
+---
+
+## Audit correction 2026-10-05 (construction)
+
+**Finding:** The headline "σ(Cu) computed within 2%" uses τ taken from the measured conductivity (the verdict says "τ from measured σ: OBSERVED"), which is the circular Drude path the prompt itself names as the trap, and a superseded verdict still lingers in the folder.
+
+**Correction:** Derive τ from the defect cross-section independently and label the present pass IDENTITY until that exists.
+
+**Status:** OWED — needs a new run, derivation or data; the corrected requirement is recorded here.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

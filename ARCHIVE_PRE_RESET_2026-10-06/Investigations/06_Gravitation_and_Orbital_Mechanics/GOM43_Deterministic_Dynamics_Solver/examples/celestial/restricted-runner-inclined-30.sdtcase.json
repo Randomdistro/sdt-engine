@@ -1,0 +1,101 @@
+{
+  "contract_version": "2.0.0",
+  "case_id": "mathematical-restricted-runner-inclined-30",
+  "problem_class": "celestial_three_body",
+  "frame": {
+    "type": "inertial_cartesian",
+    "units": "SI",
+    "epoch": "t=0",
+    "description": "Restricted unequal-pair L4 known-answer fixture"
+  },
+  "force": {
+    "type": "retarded_seven_cone_occlusion",
+    "propagation_speed": "c",
+    "pressure_source": "sdt_law_I_P_conv",
+    "enable_eclipse_shielding": true,
+    "comparison_route": "point_koppa"
+  },
+  "bodies": [
+    {
+      "id": "primary",
+      "baryon_count": "805077908211484772344991472376387066905923727158567",
+      "radius_m": 1000000,
+      "position_m": [
+        -999000.999000999,
+        0.0,
+        0.0
+      ],
+      "velocity_m_s": [
+        0,
+        -0.2594981678281278,
+        -0.14982133704978423
+      ],
+      "provenance": {
+        "baryons": "kappa=1e-3 m divided by laws.hpp koppa_per_baryon",
+        "radius": "declared mathematical boundary",
+        "state": "sdt::dynamics circular-pair construction; transformed for mathematical-restricted-runner-inclined-30"
+      }
+    },
+    {
+      "id": "secondary",
+      "baryon_count": "805077908211484772344991472376387066905923727159",
+      "radius_m": 100000,
+      "position_m": [
+        999000999.0009991,
+        0.0,
+        0.0
+      ],
+      "velocity_m_s": [
+        0,
+        259.49816782812786,
+        149.82133704978426
+      ],
+      "provenance": {
+        "baryons": "kappa=1e-6 m divided by laws.hpp koppa_per_baryon",
+        "radius": "declared mathematical boundary",
+        "state": "sdt::dynamics circular-pair construction; transformed for mathematical-restricted-runner-inclined-30"
+      }
+    },
+    {
+      "id": "runner",
+      "baryon_count": "1",
+      "radius_m": 1,
+      "position_m": [
+        499000999.00099903,
+        750000000.0,
+        433012701.89221925
+      ],
+      "velocity_m_s": [
+        -259.7576659959559,
+        129.61933483014985,
+        74.83575785636724
+      ],
+      "provenance": {
+        "baryons": "one resistance quantum",
+        "radius": "declared probe boundary",
+        "state": "equilateral L4 placement and rotating velocity; transformed for mathematical-restricted-runner-inclined-30"
+      }
+    }
+  ],
+  "integrator": "velocity_verlet",
+  "timestep_s": 5237,
+  "max_steps": 4000,
+  "record_every_steps": 40,
+  "tolerances": {
+    "retarded_time_s": 1e-10,
+    "channel_closure": 1e-13,
+    "medium_momentum_relative": 1e-11,
+    "lagrange_residual_m_s2": 1e-08,
+    "max_retarded_iterations": 64
+  },
+  "events": {
+    "stop_on_collision": true
+  },
+  "provenance": {
+    "classification": "COMPUTED",
+    "description": "Restricted runner geometry inclined thirty degrees.",
+    "sources": [
+      "restricted-runner.sdtcase.json"
+    ]
+  }
+}

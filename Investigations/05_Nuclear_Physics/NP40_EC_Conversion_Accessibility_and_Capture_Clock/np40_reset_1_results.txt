@@ -1,0 +1,21 @@
+﻿NP40 reset instrument 1 (2026-10-10)
+====================================
+
+data lines 5843 ; ground states parsed 3558
+[V1] 7Be: Delta 15769.00 keV, modes 'EC=100' ; 22Na present -> met
+[V2] Q_EC(7Be) = 861.895 keV (known 861.89) -> met
+[V3] 7Be EC grammar n_t = 0, n_d = 2, valid yes -> met
+
+VALIDATIONS: met
+
+P0 accessibility: ground-state pairs (Z,A)->(Z-1,A) with experimental Delta: 2249 ; Q_EC > 0: 1235 ; of those grammar-valid parents: 1160 (93.9%)
+   known answer: primary EC nuclides with both Delta experimental: 988 ; with Q_EC > 0: 988 -> met
+
+P1 EC grammar validity (Z-1 <= N <= 2Z-3):
+  primary EC set (EC/B+ with value)  n = 1152 ; valid 1062 (92.19%) ; invalid   90 (7.81%): N < Z-1: 90, N > 2Z-3: 0 ; e.g. 8(Z=5,N=3) 9(Z=6,N=3) 10(Z=6,N=4) 12(Z=7,N=5) 13(Z=8,N=5) 14(Z=8,N=6) 17(Z=10,N=7) 18(Z=10,N=8)
+  secondary EC set (incl. '?')       n = 1473 ; valid 1363 (92.53%) ; invalid  110 (7.47%): N < Z-1: 110, N > 2Z-3: 0 ; e.g. 8(Z=5,N=3) 9(Z=6,N=3) 10(Z=6,N=4) 12(Z=7,N=5) 13(Z=8,N=5) 14(Z=8,N=6) 17(Z=10,N=7) 18(Z=10,N=8)
+  null: all ground states Z >= 2     n = 3550 ; valid 3237 (91.18%) ; invalid  313 (8.82%): N < Z-1: 182, N > 2Z-3: 131 ; e.g. 4(Z=2,N=2) 5(Z=2,N=3) 6(Z=2,N=4) 7(Z=2,N=5) 8(Z=2,N=6) 9(Z=2,N=7) 10(Z=2,N=8) 3(Z=3,N=0)
+  contrast: beta-minus emitters      n = 1480 ; valid 1375 (92.91%) ; invalid  105 (7.09%): N < Z-1: 0, N > 2Z-3: 105 ; e.g. 6(Z=2,N=4) 8(Z=2,N=6) 8(Z=3,N=5) 9(Z=3,N=6) 11(Z=3,N=8) 10(Z=4,N=6) 11(Z=4,N=7) 12(Z=4,N=8)
+  primary EC set, experimental Delta only n =  999 ; valid  943 (94.39%) ; invalid   56 (5.61%): N < Z-1: 56, N > 2Z-3: 0 ; e.g. 8(Z=5,N=3) 9(Z=6,N=3) 10(Z=6,N=4) 12(Z=7,N=5) 13(Z=8,N=5) 14(Z=8,N=6) 17(Z=10,N=7) 18(Z=10,N=8)
+
+gate (a): invalid fraction of primary EC set = 7.81% -> MET: the EC grammar does not cover the EC nuclides (threshold 1%)

@@ -1,0 +1,5 @@
+# Stability and identifiability
+A bulk stability calculation requires a closed evolution operator dot(x)=F(x), equilibrium F(x_0)=0, and Jacobian J=dF/dx at x_0. Missing connectivity, event clock and transport laws leave F undefined. Growth-rate refinement, independent nonlinear integration and an astronomical luminosity therefore cannot be executed without introducing new physical assumptions.
+Structural non-identifiability: conservation and inventory constraints are compatible with zero event rate, or an arbitrary positive rate function multiplied by any positive constant. The supplied constraints cannot select an absolute event timescale. Carrier escape likewise admits multiple boundary responses. No sign or magnitude of bulk growth follows from compression work and inventory alone.
+Required next closure: a native transition path, many-contact resistance functional, absolute capture clock, carrier dispersion/coupling and boundary transport. Stability calculations become meaningful only after those interfaces close. No nova yield or runaway verdict follows from the present run.
+

@@ -1,0 +1,57 @@
+========================================================================================
+  FLM14 - run 4: TWO-CHANNEL TOUR (constraint channel in P2).  ADJ-11.
+  Held from ADJ-8/10: geometry seed 1, 64 draws x 40k hops, beta grid, all
+  criteria. New: locks + same-tick rigid cluster kicks in the tour itself.
+  CLAIM RULE hardened (SG order): regime AND split-half AND seed-2 replication.
+========================================================================================
+  geometry seed 1: 42 seats, degree min/mean/max = 6/7.48/10
+
+  beta=0.02:  p_occ = undefined (only 10 usable seats (<12))
+             p_dwell = undefined (only 10 usable seats (<12))
+             drift 0.0113 (gate <0.01: FAIL)   coverage pooled 86% / per-draw 31%   guards: bad-gaps 8393, locked-dwell time 0.00e+00 (theorem: 0)   [94s]
+
+  beta=0.05:  p_occ = +2.278 (|r|=0.80, n=17)
+             p_dwell = undefined (|r|=0.01 < 0.6 - no exponent defined)
+             drift 0.0766 (gate <0.01: FAIL)   coverage pooled 95% / per-draw 53%   guards: bad-gaps 11676, locked-dwell time 0.00e+00 (theorem: 0)   [102s]   split-half p_occ: +1.858 / undef
+
+  beta=0.10:  p_occ = +2.109 (|r|=0.76, n=18)
+             p_dwell = undefined (|r|=0.14 < 0.6 - no exponent defined)
+             drift 0.0028 (gate <0.01: PASS)   coverage pooled 100% / per-draw 61%   guards: bad-gaps 13071, locked-dwell time 0.00e+00 (theorem: 0)   [97s]   split-half p_occ: +2.161 / undef
+
+  beta=0.20:  p_occ = +2.040 (|r|=0.71, n=15)
+             p_dwell = undefined (|r|=0.12 < 0.6 - no exponent defined)
+             drift 0.0035 (gate <0.01: PASS)   coverage pooled 98% / per-draw 58%   guards: bad-gaps 7891, locked-dwell time 0.00e+00 (theorem: 0)   [96s]   split-half p_occ: +2.015 / +2.128
+
+  beta=0.40:  p_occ = +2.855 (|r|=0.68, n=12)
+             p_dwell = undefined (|r|=0.44 < 0.6 - no exponent defined)
+             drift 0.0049 (gate <0.01: PASS)   coverage pooled 88% / per-draw 46%   guards: bad-gaps 1981, locked-dwell time 0.00e+00 (theorem: 0)   [92s]   split-half p_occ: +3.005 / +2.760
+
+  beta=0.80:  p_occ = +3.769 (|r|=0.82, n=16)
+             p_dwell = undefined (|r|=0.40 < 0.6 - no exponent defined)
+             drift 0.0256 (gate <0.01: FAIL)   coverage pooled 95% / per-draw 49%   guards: bad-gaps 689, locked-dwell time 0.00e+00 (theorem: 0)   [93s]   split-half p_occ: +3.735 / +3.690
+
+  P2-G1 STABLE-REGIME TEST (ADJ-5 rule unchanged):
+    NO stable regime by the committed rule - reported as such.
+
+  robustness (declared, not gates):
+    T_W=13.5 @ beta=0.20: p_occ = +2.596 (|r|=0.79)
+    T_W=54.0 @ beta=0.20: p_occ = +1.620 (|r|=0.64)
+
+  PART C: NOT RUN - ADJ-11 claim conjunction not met (committed condition).
+
+========================================================================================
+  PROBE (ADJ-11, one scan @ beta=0.20 fixed): 0.9186 in TWO-CHANNEL tour
+  kinematics? Four declared observables; hit = within 1% relative.
+========================================================================================
+    Q1 = 0.52655   <|Omega_C|>/<omega>_members (star rate retention)  ->  not 0.9186 (miss)
+    Q2 = 0.85505   <pi*D*|Omega_C|> locked bonds, units c (star rim speed)  ->  not 0.9186 (miss)
+    Q3 = 0.99953   sum(D)/sum(g+D) (effective tour speed / c)  ->  not 0.9186 (miss)
+    Q4 = 1.12895   <omega>_locked/<omega>_all (selection)  ->  not 0.9186 (miss)
+
+    PROBE VERDICT: NOT FOUND on the two-channel
+    tour instrument (run-3 negative was scoped to single-channel, SG note).
+
+========================================================================================
+  F6: one rule throughout - lock/kick/window identical at every beta and in
+  both geometry seeds; T_W, W, OMEGA0 untouched; p (if used) is measured.
+========================================================================================

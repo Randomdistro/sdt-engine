@@ -1,0 +1,38 @@
+FLM15-cas blank-slate run 1 (registered 2026-10-03 in the PROMPT; assessment 2026-10-07)
+==========================================================================================
+
+[V1] Poisson summation identity at t = 0.37, 1.9: worst relative difference 2.22e-16 -> met
+[V2] g(q) closed form against quadrature at q = 0, 1.5, 4: worst relative difference 4.39e-13 -> met
+[V3] integral of x^3/(e^x - 1) = 6.4939394023 against pi^4/15 = 6.4939394023 (relative 2.62e-13) -> met
+[V4] lambda/d = 0.08: direct -2.7169153360e-02, Poisson -2.7169153362e-02 (relative 7.57e-11) ; lambda -> 0 Poisson limit -2.74155678e-02 vs -pi^2/360 = -2.74155678e-02 (relative 2.56e-13) -> met
+
+VALIDATIONS: met
+
+[R1] thermal pricing at T_CMB = 2.7255 K: k_B T = 2.3487e-04 eV ; u_CMB/3 = 1.39159e-14 Pa (pi^2/45 (kT)^4/(hbar c)^3 = 1.39160e-14) ; n = 0 gap free energy per area = -1.0199e-17 J/m^2 (independent of d)
+     d [um]     n=1 exponent (ln occupation)   P_net [Pa]     P_ideal = pi^2 hbar c/(240 d^4) [Pa]   P_net/P_ideal
+     0.10       -26394.7                        1.39159e-14    1.30013e+01                            1.070e-15
+     0.20       -13197.4                        1.39159e-14    8.12579e-01                            1.713e-14
+     0.40       -6598.7                         1.39159e-14    5.07862e-02                            2.740e-13
+     0.80       -3299.3                         1.39159e-14    3.17414e-03                            4.384e-12
+     1.60       -1649.7                         1.39159e-14    1.98383e-04                            7.015e-11
+     3.20       -824.8                          1.39159e-14    1.23990e-05                            1.122e-09
+     6.40       -412.4                          1.39159e-14    7.74935e-07                            1.796e-08
+     10.00      -263.9                          1.39159e-14    1.30013e-07                            1.070e-07
+     fitted exponent of P(d) = -0.000000 (the net pressure scales as d^0.000000) ; at d = 1 um: P_net/P_ideal = 1.070e-11
+     Round 1 rejection criterion (exponent != 4 or coefficient outside +/-5% of pi^2 hbar c/240): MET (rejected)
+
+[R2] scale-free price a hbar omega: E_diff(lambda)/(a hbar c/d^3), d = 1 (units), routes 1 (direct) and 2 (Poisson)
+     lambda/d = 0.08 : direct -2.7169153360e-02   Poisson -2.7169153362e-02   relative 7.57e-11
+     lambda/d = 0.06 : direct -2.7276720444e-02   Poisson -2.7276720438e-02   relative 2.42e-10
+     lambda/d = 0.04 : direct -2.7353781712e-02   Poisson -2.7353781734e-02   relative 8.06e-10
+     lambda/d = 0.03 : direct -2.7380798245e-02   Poisson -2.7380798125e-02   relative 4.37e-09
+     lambda/d = 0.02 : direct -2.7400109451e-02   Poisson -2.7400109835e-02   relative 1.40e-08
+     Richardson (polynomial in (lambda/d)^2): E(0) = -2.7415567781e-02 ; exact -pi^2/360 = -2.7415567781e-02 ; relative difference 7.77e-16
+     |E_diff| ~ d^-3.00000000 at fixed lambda/d = 0.02 (the force exponent is 1 - -3.00000000 = 4.00000000 in magnitude)
+     Round 2 instrument-level criteria: coefficient off by > 1e-6 : not met ; exponent off by > 1e-6 : not met
+     force per unit a: P = a pi^2 hbar c/(120 d^4) ; ratio to the ideal form pi^2 hbar c/(240 d^4) = 2a
+     a = 1/2 (zero-point quantum; prohibited input as a derivation, rival form)       ratio to ideal = 1.000 ; constraint 1.000 +/- 0.010 -> consistent
+     a = 1/2 (720-degree double cover of the PPT17 Bohr-seat tube; underived)         ratio to ideal = 1.000 ; constraint 1.000 +/- 0.010 -> consistent
+     a = 1 (one full tick per mode)                                                   ratio to ideal = 2.000 ; constraint 1.000 +/- 0.010 -> excluded
+
+[report-only] a = 1/2 floor to nu_c = 3e15 Hz (given by the prompt): u = a hbar c k_c^4/(4 pi^2) = 6.2579e+03 J/m^3 ; law_I::P_conv = 2.4608e+48 Pa ; ratio 2.543e-45

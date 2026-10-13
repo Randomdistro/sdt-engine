@@ -201,3 +201,15 @@ Five gated phases (R4: a clean kill outranks a forced pass). Each predicts its n
 ---
 
 *FD11 · upgraded 2026-06-27 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** The prompt's own kill line is "b_opt off by more than 2× is a FAIL", and the verdict reports b_opt = 1.25 mm against Tesla's ~0.4 mm (about 3.1×) as "Prompt completion A, an applied design study" without applying that F1 trigger.
+
+**Correction:** Record F1 as FAILED (or re-derive b_opt without the calibrated K_B) and grade the prompt on its own kill line.
+
+**Status:** ANNOTATED — label corrected in the record; a confirming run or derivation is still OWED.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

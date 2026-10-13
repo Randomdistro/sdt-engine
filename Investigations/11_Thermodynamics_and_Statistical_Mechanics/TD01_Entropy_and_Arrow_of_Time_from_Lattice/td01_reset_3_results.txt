@@ -1,0 +1,55 @@
+TD01 blank-slate run 3 (registered in TD01_EXPANSION_2026-10-09.md section 6)
+=====================================================================
+
+states: 125970 (C(20,8) = 125970)
+[V6] rule S (swap, control)     : F bijective: yes ; conserves E: yes
+[V6] rule Q1 (k = 1)            : F bijective: yes ; conserves E: yes
+[V6] rule Q2 (k = max(1, s/2))  : F bijective: yes ; conserves E: yes
+[V6] P1' {(0,1),(2,3),(4,5),(6,7),(8)}: enumerated ensemble mean 4.485399 ; closed form 4.485399 -> met ; S_max = 5.5452 ; S_ref/S_max = 0.8089
+[V6] P2' {(0,1,2),(3,4,5),(6,7,8)}: enumerated ensemble mean 7.465850 ; closed form 7.465850 -> met ; S_max = 8.1242 ; S_ref/S_max = 0.9190
+[V6] P3' {(0),(1,2),(3,4),(5,6),(7,8)}: enumerated ensemble mean 4.485399 ; closed form 4.485399 -> met ; S_max = 5.5452 ; S_ref/S_max = 0.8089
+VALIDATIONS: met
+
+---- E1b (H-B') ----
+
+  rule S (swap, control): cycles of F = 14000, longest = 9
+    start A (cell 0): orbit length L = 9 periods (18 layers)
+      P1' {(0,1),(2,3),(4,5),(6,7),(8)} : start S/S_ref = 0.5718 ; orbit mean S/S_ref = 0.5083 ; first layer with S >= 0.9 S_ref: -1 (limit 27) -> criterion NOT met
+      P2' {(0,1,2),(3,4,5),(6,7,8)}     : start S/S_ref = 0.6042 ; orbit mean S/S_ref = 0.6042 ; first layer with S >= 0.9 S_ref: -1 (limit 27) -> criterion NOT met
+      P3' {(0),(1,2),(3,4),(5,6),(7,8)} : start S/S_ref = 0.0000 ; orbit mean S/S_ref = 0.5083 ; first layer with S >= 0.9 S_ref: -1 (limit 27) -> criterion NOT met
+    start B (cell 4): orbit length L = 9 periods (18 layers)
+      P1' {(0,1),(2,3),(4,5),(6,7),(8)} : start S/S_ref = 0.5718 ; orbit mean S/S_ref = 0.5083 ; first layer with S >= 0.9 S_ref: -1 (limit 27) -> criterion NOT met
+      P2' {(0,1,2),(3,4,5),(6,7,8)}     : start S/S_ref = 0.6042 ; orbit mean S/S_ref = 0.6042 ; first layer with S >= 0.9 S_ref: -1 (limit 27) -> criterion NOT met
+      P3' {(0),(1,2),(3,4),(5,6),(7,8)} : start S/S_ref = 0.5718 ; orbit mean S/S_ref = 0.5083 ; first layer with S >= 0.9 S_ref: -1 (limit 27) -> criterion NOT met
+
+  rule Q1 (k = 1): cycles of F = 6310, longest = 20
+    start A (cell 0): orbit length L = 20 periods (40 layers)
+      P1' {(0,1),(2,3),(4,5),(6,7),(8)} : start S/S_ref = 0.5718 ; orbit mean S/S_ref = 0.6439 ; first layer with S >= 0.9 S_ref: 28 (limit 27) -> criterion NOT met
+      P2' {(0,1,2),(3,4,5),(6,7,8)}     : start S/S_ref = 0.6042 ; orbit mean S/S_ref = 0.8025 ; first layer with S >= 0.9 S_ref: 16 (limit 27) -> criterion NOT met
+      P3' {(0),(1,2),(3,4),(5,6),(7,8)} : start S/S_ref = 0.0000 ; orbit mean S/S_ref = 0.6439 ; first layer with S >= 0.9 S_ref: 15 (limit 27) -> criterion NOT met
+    start B (cell 4): orbit length L = 20 periods (40 layers)
+      P1' {(0,1),(2,3),(4,5),(6,7),(8)} : start S/S_ref = 0.5718 ; orbit mean S/S_ref = 0.6439 ; first layer with S >= 0.9 S_ref: 24 (limit 27) -> criterion NOT met
+      P2' {(0,1,2),(3,4,5),(6,7,8)}     : start S/S_ref = 0.6042 ; orbit mean S/S_ref = 0.8025 ; first layer with S >= 0.9 S_ref: 12 (limit 27) -> criterion NOT met
+      P3' {(0),(1,2),(3,4),(5,6),(7,8)} : start S/S_ref = 0.5718 ; orbit mean S/S_ref = 0.6439 ; first layer with S >= 0.9 S_ref: 11 (limit 27) -> criterion NOT met
+
+  rule Q2 (k = max(1, s/2)): cycles of F = 226, longest = 3610
+    start A (cell 0): orbit length L = 2795 periods (5590 layers)
+      P1' {(0,1),(2,3),(4,5),(6,7),(8)} : start S/S_ref = 0.5718 ; orbit mean S/S_ref = 0.9982 ; first layer with S >= 0.9 S_ref: 4 (limit 27) -> criterion met
+      P2' {(0,1,2),(3,4,5),(6,7,8)}     : start S/S_ref = 0.6042 ; orbit mean S/S_ref = 0.9971 ; first layer with S >= 0.9 S_ref: 6 (limit 27) -> criterion met
+      P3' {(0),(1,2),(3,4),(5,6),(7,8)} : start S/S_ref = 0.0000 ; orbit mean S/S_ref = 0.9982 ; first layer with S >= 0.9 S_ref: 5 (limit 27) -> criterion met
+    start B (cell 4): orbit length L = 980 periods (1960 layers)
+      P1' {(0,1),(2,3),(4,5),(6,7),(8)} : start S/S_ref = 0.5718 ; orbit mean S/S_ref = 1.0065 ; first layer with S >= 0.9 S_ref: 2 (limit 27) -> criterion met
+      P2' {(0,1,2),(3,4,5),(6,7,8)}     : start S/S_ref = 0.6042 ; orbit mean S/S_ref = 1.0025 ; first layer with S >= 0.9 S_ref: 3 (limit 27) -> criterion met
+      P3' {(0),(1,2),(3,4),(5,6),(7,8)} : start S/S_ref = 0.5718 ; orbit mean S/S_ref = 1.0065 ; first layer with S >= 0.9 S_ref: 3 (limit 27) -> criterion met
+
+  H-B' (Q2 meets for both starts and all partitions): SUPPORTED ; control S meets in some case: no ; Q1 meets in some case: no
+
+---- E3b (H-A'): late-time relaxation time of the symmetric stochastic relay on a ring ----
+  N = 4, E =  6,    84 states: t99 = 46 ; ticks to max|p - 1/n| <= 1e-6/n: 323 ; tau_rel = 20.40 ; t99/tau_rel = 2.255
+  N = 5, E =  7,   330 states: t99 = 80 ; ticks to max|p - 1/n| <= 1e-6/n: 577 ; tau_rel = 36.02 ; t99/tau_rel = 2.221
+  N = 6, E =  9,  2002 states: t99 = 148 ; ticks to max|p - 1/n| <= 1e-6/n: 1103 ; tau_rel = 67.95 ; t99/tau_rel = 2.178
+  N = 7, E = 10,  8008 states: t99 = 218 ; ticks to max|p - 1/n| <= 1e-6/n: 1656 ; tau_rel = 101.11 ; t99/tau_rel = 2.156
+  N = 8, E = 12, 50388 states: t99 = 343 ; ticks to max|p - 1/n| <= 1e-6/n: 2654 ; tau_rel = 160.59 ; t99/tau_rel = 2.136
+  slope of ln tau_rel against ln N (all five pairs, density not fixed) = 2.985
+  fixed density E = 1.5 N (N = 4, 6, 8): exponents 4->6: 2.967 ; 6->8: 2.990 ; 4->8: 2.977
+  H-A' (fixed-density exponent 4->8 in [1.5, 2.5]): EXCLUDED

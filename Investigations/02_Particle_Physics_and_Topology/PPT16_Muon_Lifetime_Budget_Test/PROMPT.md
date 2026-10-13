@@ -1,3 +1,29 @@
+# PPT16 — Muon lifetime and the movement budget (specification rewritten 2026-10-12)
+
+**Author:** J. C. Harvey, Melbourne. Rewritten at Harvey's direction: prompts carry new data. The seed and its 2026-10-03 pre-registration are kept below the line.
+
+## 1. What is established (reset run 2026-10-10, `PPT16_RESET_ASSESSMENT_2026-10-10.md`)
+- **Budget prediction (Law V, v_circ = c√(1 − v²/c²)):** at the CERN g−2 magic momentum (pc = 3094 MeV), c/v_circ = 29.300229, so **τ_pred = 64.3720 ± 0.0104 µs**.
+- **Measured (Bailey et al. 1977; secondary transcription):**
+  - µ⁺: 64.419 ± 0.058 µs (+0.80σ);
+  - µ⁻: 64.368 ± 0.029 µs (−0.13σ);
+  - weighted: 64.378 ± 0.026 µs (+0.21σ, fractional +9.3e-5).
+- **Grade G4:** consistent, of independent origin, **not discriminating**. The closed form is shared with special relativity. The budget admits no correction above about 1e-3 at γ = 29.3.
+
+## 2. What remains
+- **Primary source:** retrieve Bailey et al. 1977 (Nature 268, 301) and re-read the anchors from it. The secondary transcription is a limitation.
+- **Canon note (propose-and-wait):** the muon rest energy and rest lifetime are declared locally. Propose them for `measured`.
+- **Altitude-survival pairs:** PENDING_DATA (Rossi–Hall, Frisch–Smith), with provenance.
+- **Discrimination:** none possible with this observable. A discriminating version needs a native prediction that special relativity does not make, for example a budget effect from the medium's depth z at the storage ring (Earth's Ѻ: z ≈ 7e-10, far below the 4e-4 precision). Recorded as **not reachable** with present data. PPT16 is closed as a consistency check unless such a prediction is written.
+
+## 3. Prohibitions
+- No time-arrow narration. The muon's clock is its own circulation, and the budget slows it; nothing "dilates" as a process.
+- This result is not counted as discriminating.
+
+---
+
+## Seed and pre-registration (kept as written)
+
 # PPT16 — Muon Lifetime Dilation as a Movement-Budget Test
 
 > **Status:** OPEN — specification seed (benchmark-coverage alignment 2026-07-29; catalogue
@@ -32,3 +58,50 @@ number (survival fraction vs altitude; storage-ring lifetime) tests the budget d
 
 Catalogue row B62 · suite coverage roster · a straightforward tally candidate once written
 from the engine's law_V.
+
+## Pre-registration (2026-10-03, before the instrument exists)
+
+**Route.** `sdt::laws::law_V` only (`time_dilation`, `v_circ`, `gamma`). The engine exposes no
+muon constants; the tool declares them locally as MEASURED-INPUT with provenance and the
+addition to `sdt::laws::measured` is a propose-and-wait item.
+
+**Measured inputs.** m_μc² = 105.658 MeV; τ₀ = 2.1969811 µs (PDG; 2.197 µs cross-checked
+against the Bailey et al. summary); storage-ring magic momentum pc = 3094 MeV, rounded to the
+last quoted digit (σ_p = 0.5 MeV, propagated into the prediction).
+
+**Anchor.** Bailey et al., *Nature* **268**, 301 (1977), CERN muon storage ring, γ ≈ 29.3:
+τ⁺ = 64.419 ± 0.058 µs, τ⁻ = 64.368 ± 0.029 µs, weighted τ = 64.378 ± 0.026 µs. The
+secondary-source transcription of these values (search summaries of the paper) is recorded
+as such; the primary paper was not retrieved.
+
+**Procedure.** β from (pc, mc²) as pc/√((pc)²+(mc²)²) ; v = βc ; τ_pred = τ₀ · c / v_circ(v).
+Single pass. No free parameter.
+
+**Instrument validation (before touching the anchor).** (i) v=0 gives ratio 1 exactly;
+(ii) β=0.6 gives v_circ/c = 0.8 and τ ratio 1.25; (iii) β=0.8 gives 0.6 and 1.6667;
+(iv) v_circ² + v² = c² to 1e-12 relative at ten velocities spanning 0–0.9999c;
+(v) two-route agreement: `law_V::time_dilation` against the closed form √(1+(pc/mc²)²) at the
+registered inputs to 1e-12.
+
+**Rejection criterion (populated).** The criterion is met if τ_pred departs any of the three
+anchors (τ⁺, τ⁻, weighted) by more than 2σ, with σ² = σ_exp² + σ_pred². A budget carrying
+any correction term of order 10⁻³ would meet it.
+
+**Out of scope for this run.** Altitude-survival flux pairs: no verified pairs are cached in
+the repository. Recorded PENDING_DATA; not scored.
+
+**Labels.** Numerical result: COMPUTED from a MEASURED-INPUT set. Provenance relative to
+special relativity: CONVERGENT (Law V yields the Lorentz factor; no measured τ(γ) enters).
+Discrimination against special relativity: not discriminating (shared closed form).
+
+---
+
+## Audit correction 2026-10-05 (opening premise)
+
+**Finding:** The premise is that the muon decay clock equals its movement budget, which is the special-relativistic time-dilation relation, so a pass cannot distinguish the framework from the standard account (the run confirmed it is convergent and non-discriminating).
+
+**Correction:** Record it as a consistency check and gate on a quantity SR does not predict, or retire it as a test.
+
+**Status:** ANNOTATED — label, status or tally corrected in the record; no re-score of earlier runs.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

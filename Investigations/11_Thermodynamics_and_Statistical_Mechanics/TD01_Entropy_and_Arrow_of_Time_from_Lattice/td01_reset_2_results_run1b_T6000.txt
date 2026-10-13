@@ -1,0 +1,63 @@
+TD01 blank-slate run 2 (registered in TD01_EXPANSION_2026-10-09.md section 4)
+=====================================================================
+
+[V3] rule S (swap, control)     : F bijective on 8008 states: yes ; conserves E: yes
+[V3] rule Q1 (k = 1)            : F bijective on 8008 states: yes ; conserves E: yes
+[V3] rule Q2 (k = max(1, s/2))  : F bijective on 8008 states: yes ; conserves E: yes
+[V3] -> met
+
+[V4a] detailed balance, max relative violation over all beta, states, options: 2.71e-16 -> met
+[V5] entropy per photon from the engine's u_CMB and T_CMB: 3.60155 ; 2 pi^4/(45 zeta3) = 3.60157 ; relative -4.40e-06 -> met
+
+---- E1 (H-B): reversible deterministic layers, coarse-grained arrow ----
+  P1 {(0,1),(2,3),(4,5),(6)}: S_max = 4.3820 ; uniform-ensemble mean S = 3.5480 (ratio 0.8097)
+  P2 {(0,1,2),(3,4,5),(6)}: S_max = 6.0890 ; uniform-ensemble mean S = 5.2376 (ratio 0.8602)
+  P3 {(0),(1,2),(3,4),(5,6)}: S_max = 4.3820 ; uniform-ensemble mean S = 3.5480 (ratio 0.8097)
+
+  rule S (swap, control): cycles of F = 1144, longest = 7, fixed points = 0 ; hot-start orbit length L = 7 periods (14 layers)
+    P1 {(0,1),(2,3),(4,5),(6)}  : start S = 2.3979 ; orbit mean S/S_max = 0.4690 ; max S/S_max = 0.5472 ; first layer with S >= 0.9 S_max: -1 ; L/10 = 0.7 -> criterion NOT met
+    P2 {(0,1,2),(3,4,5),(6)}    : start S = 4.1897 ; orbit mean S/S_max = 0.5898 ; max S/S_max = 0.6881 ; first layer with S >= 0.9 S_max: -1 ; L/10 = 0.7 -> criterion NOT met
+    P3 {(0),(1,2),(3,4),(5,6)}  : start S = 0.0000 ; orbit mean S/S_max = 0.4690 ; max S/S_max = 0.5472 ; first layer with S >= 0.9 S_max: -1 ; L/10 = 0.7 -> criterion NOT met
+
+  rule Q1 (k = 1): cycles of F = 504, longest = 16, fixed points = 0 ; hot-start orbit length L = 16 periods (32 layers)
+    P1 {(0,1),(2,3),(4,5),(6)}  : start S = 2.3979 ; orbit mean S/S_max = 0.5500 ; max S/S_max = 0.8178 ; first layer with S >= 0.9 S_max: -1 ; L/10 = 1.6 -> criterion NOT met
+    P2 {(0,1,2),(3,4,5),(6)}    : start S = 4.1897 ; orbit mean S/S_max = 0.6075 ; max S/S_max = 0.9194 ; first layer with S >= 0.9 S_max: 26 ; L/10 = 1.6 -> criterion NOT met
+    P3 {(0),(1,2),(3,4),(5,6)}  : start S = 0.0000 ; orbit mean S/S_max = 0.5500 ; max S/S_max = 0.8178 ; first layer with S >= 0.9 S_max: -1 ; L/10 = 1.6 -> criterion NOT met
+
+  rule Q2 (k = max(1, s/2)): cycles of F = 66, longest = 659, fixed points = 0 ; hot-start orbit length L = 99 periods (198 layers)
+    P1 {(0,1),(2,3),(4,5),(6)}  : start S = 2.3979 ; orbit mean S/S_max = 0.7851 ; max S/S_max = 1.0000 ; first layer with S >= 0.9 S_max: 4 ; L/10 = 9.9 -> criterion NOT met
+    P2 {(0,1,2),(3,4,5),(6)}    : start S = 4.1897 ; orbit mean S/S_max = 0.8377 ; max S/S_max = 1.0000 ; first layer with S >= 0.9 S_max: 3 ; L/10 = 9.9 -> criterion NOT met
+    P3 {(0),(1,2),(3,4),(5,6)}  : start S = 0.0000 ; orbit mean S/S_max = 0.7851 ; max S/S_max = 1.0000 ; first layer with S >= 0.9 S_max: 5 ; L/10 = 9.9 -> criterion NOT met
+
+  H-B (Q1 or Q2 meets the criterion for all three partitions): NOT supported
+
+---- E2 (H-C): Metropolis exchange with a non-uniform stationary measure ----
+  [T = 6000] beta = 0.00, uniform start: S(0) = 8.9882, S(T) = 8.9882, S_stat = 8.9882 (ln 8008 = 8.9882) ; S min 8.9882 at t = 0, max 8.9882 ; KL(0) = 0.0000e+00, KL(T) = 0.000e+00 ; KL increases > 1e-12: 0 (worst 0.0e+00) ; S decreasing ticks: 0 ; max|p-pi| = 0.00e+00 ; mass err 6.6e-14 -> criterion met
+  [T = 6000] beta = 0.00, hot     start: S(0) = 0.0000, S(T) = 8.9882, S_stat = 8.9882 (ln 8008 = 8.9882) ; S min 0.0000 at t = 0, max 8.9882 ; KL(0) = 8.9882e+00, KL(T) = -4.970e-16 ; KL increases > 1e-12: 0 (worst 0.0e+00) ; S decreasing ticks: 0 ; max|p-pi| = 4.85e-18 ; mass err 6.4e-14 -> criterion met
+  [T = 6000] beta = 0.05, uniform start: S(0) = 8.9882, S(T) = 8.9867, S_stat = 8.9867 (ln 8008 = 8.9882) ; S min 8.9867 at t = 1218, max 8.9882 ; KL(0) = 1.4767e-03, KL(T) = 5.622e-15 ; KL increases > 1e-12: 0 (worst 0.0e+00) ; S decreasing ticks: 848 ; max|p-pi| = 2.74e-18 ; mass err 1.0e-14 -> criterion met
+  [T = 6000] beta = 0.05, hot     start: S(0) = 0.0000, S(T) = 8.9867, S_stat = 8.9867 (ln 8008 = 8.9882) ; S min 0.0000 at t = 0, max 8.9867 ; KL(0) = 8.6522e+00, KL(T) = 3.817e-15 ; KL increases > 1e-12: 0 (worst 0.0e+00) ; S decreasing ticks: 0 ; max|p-pi| = 5.77e-18 ; mass err 2.1e-14 -> criterion met
+  [T = 6000] beta = 0.20, uniform start: S(0) = 8.9882, S(T) = 8.9588, S_stat = 8.9588 (ln 8008 = 8.9882) ; S min 8.9588 at t = 1653, max 8.9882 ; KL(0) = 2.5964e-02, KL(T) = -3.779e-14 ; KL increases > 1e-12: 0 (worst 0.0e+00) ; S decreasing ticks: 1223 ; max|p-pi| = 2.94e-17 ; mass err -2.6e-14 -> criterion met
+  [T = 6000] beta = 0.20, hot     start: S(0) = 0.0000, S(T) = 8.9588, S_stat = 8.9588 (ln 8008 = 8.9882) ; S min 0.0000 at t = 0, max 8.9588 ; KL(0) = 7.6642e+00, KL(T) = -3.980e-14 ; KL increases > 1e-12: 0 (worst 0.0e+00) ; S decreasing ticks: 0 ; max|p-pi| = 3.55e-17 ; mass err -2.5e-14 -> criterion met
+  [T = 6000] beta = 0.50, uniform start: S(0) = 8.9882, S(T) = 8.7018, S_stat = 8.7018 (ln 8008 = 8.9882) ; S min 8.7018 at t = 2754, max 8.9882 ; KL(0) = 2.0294e-01, KL(T) = 3.633e-14 ; KL increases > 1e-12: 0 (worst 0.0e+00) ; S decreasing ticks: 2224 ; max|p-pi| = 2.04e-17 ; mass err 1.0e-14 -> criterion met
+  [T = 6000] beta = 0.50, hot     start: S(0) = 0.0000, S(T) = 8.7018, S_stat = 8.7018 (ln 8008 = 8.9882) ; S min 0.0000 at t = 0, max 8.7018 ; KL(0) = 5.8161e+00, KL(T) = 3.555e-14 ; KL increases > 1e-12: 0 (worst 0.0e+00) ; S decreasing ticks: 0 ; max|p-pi| = 4.05e-13 ; mass err 3.1e-15 -> criterion met
+[V4b] beta = 0.5, hot start, max |p - pi| at T = 6000 ticks = 4.05e-13 (gate 1e-6) -> met
+  H-C: SUPPORTED (given V4)
+
+---- E3 (H-A): relaxation time of the symmetric stochastic relay on a ring ----
+  N = 4, E =  6,    84 states: t99 = 46
+  N = 5, E =  7,   330 states: t99 = 80
+  N = 6, E =  9,  2002 states: t99 = 148
+  N = 7, E = 10,  8008 states: t99 = 218
+  N = 8, E = 12, 50388 states: t99 = 343
+  least-squares slope of ln t99 against ln N = 2.905 ; pairwise exponents: 2.48 3.37 2.51 3.39
+  H-A time scale (slope in [1.5, 2.5]): EXCLUDED
+
+---- E4 (H-D): Planck-cell stars-and-bars lattice against the thermodynamic entropy of 1 m^3 of CMB ----
+  eps = u l_P^3 = 1.7626e-118 J (engine law_I::epsilon 1.7626e-118) ; N = V/l_P^3 = 2.3685e+104 cells ; E = uV/eps = 2.3685e+104 quanta (E/N = 1.0000)
+  S_sb = 2 N ln2 = 3.2834e+104 k_B ; T_sb = eps/(k_B ln2) = 1.8419e-95 K
+  S_th = 4u/(3T) = 2.0423e-14 J/K = 1.4793e+09 k_B ; T_CMB = 2.7255 K ; n_gamma = 4.1073e+08 m^-3 ; entropy per photon = 3.6016 k_B
+  ratios: S_sb / S_th = 2.2196e+95 ; T_CMB / T_sb = 1.4798e+95 ; S_sb T_sb = 8.3496e-14 J (2E eps = 8.3496e-14) ; S_th T = 5.5664e-14 J (4/3 E_tot = 5.5664e-14)
+  requirement: N_eff with E = N_eff matching S_th: 1.0671e+09 per m^3 ; cell side 9.7860e-04 m ; photon density gives 4.1073e+08 per m^3
+  consistent within a factor 10 (S_sb/S_th <= 10): NO -- the overcount is reported
+
+VALIDATIONS: all met

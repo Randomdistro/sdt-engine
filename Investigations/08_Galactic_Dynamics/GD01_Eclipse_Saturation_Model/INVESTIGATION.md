@@ -2,7 +2,7 @@
 
 > **⛔ RETRACTED — STALE/NON-REPRODUCIBLE (HUNTER scour 2026-07-02).** The cited tool is absent; the present tool no longer compiles against the engine (Sigma_sat symbols deprecated); the v_flat 'results' echo the observed inputs. Superseded by GD05's honest run: single-regime RMS 66%, BTFR 1.33 (negative); twin-regime M4 23.8% rides a MOND-borrowed crossover. 'FRAMEWORK RESOLVED / YES / BTFR=4 / no free parameters' is retracted.
 >
-> **Status**: FRAMEWORK RESOLVED (implementation milestone reached)
+> **Status**: RETRACTED — STALE/NON-REPRODUCIBLE (see the banner above); not resolved [corrected 2026-10-05]
 > **Date**: May 2026
 > **Tool**: `cq06_eclipse_saturation.cpp`
 
@@ -58,5 +58,5 @@ The flat rotation curve is the **saturation plateau** of the disk eclipse fracti
 
 ## Verdict
 
-**GD01 FRAMEWORK RESOLVED.** Eclipse saturation model established and running.
+~~**GD01 FRAMEWORK RESOLVED.** Eclipse saturation model established and running.~~ Withdrawn: the cited tool is absent and the present tool does not reproduce the claim (GD05 records the real-SPARC failure, RMS about 66%). Baryon masses in this tool enter only as census counts N_b = M/m_p, which is permitted; the open item is a mass-free crossover derived natively. [corrected 2026-10-05]
 The flat rotation curve is the convergence shadow of the disk. No dark matter required.

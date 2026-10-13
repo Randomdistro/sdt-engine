@@ -1,0 +1,79 @@
+﻿╔══════════════════════════════════════════════════════════════════╗
+║  TREFOIL PARTITION TEST: heat / sound / movement               ║
+╚══════════════════════════════════════════════════════════════════╝
+
+── SDT Constants ──
+  ε           = 1.762640e-118 J     (per shell per cell per tick)
+  Φ           = 1.038986e-56 J     (total convergence burden)
+  N           = 5.894491e+61       (shell count)
+  P_conv      = 2.460822e+48 Pa
+  l_P         = 1.616255e-35 m
+  t_P         = 5.39124e-44 s
+
+── Earth ──
+  b (excl)    = 1.563045e+98 Planck cells
+  a (spation) = 2.565558e+125 Planck cells
+  b/a         = 6.092417e-28
+
+══ TEST 1: ε per cell per tick, movement = 1/3 ══
+  F/cell      = ε/(3 l_P)     = 3.635234e-84 N
+  F_total     = b × F/cell    = 5.682033e+14 N
+  g           = F/M           = 9.514138e-11 m/s²
+  Ratio to 9.81: 1.031097e+11
+
+══ TEST 2: ε per cell per tick, full (no /3) ══
+  F/cell      = ε/l_P         = 1.090570e-83 N
+  F_total     = b × F/cell    = 1.704610e+15 N
+  g           = F/M           = 2.854241e-10 m/s²
+  Ratio to 9.81: 3.436990e+10
+
+══ TEST 3: Φ per cell (full convergence), movement = 1/3 ══
+  F/cell      = Φ/(3 l_P)     = 2.142785e-22 N
+  F_total     = b × F/cell    = 3.349269e+76 N
+  g           = F/M           = 5.608100e+51 m/s²
+  Ratio to 9.81: 1.749256e-51
+
+══ TEST 4: P_conv × l_P² / (3 c²) per cell ══
+  F/cell      = P l²/(3c²)   = 2.384170e-39 N
+  F_total     = b × F/cell    = 3.726565e+59 N
+  g           = F/M           = 6.239852e+34 m/s²
+  Ratio to 9.81: 1.572153e-34
+
+══ TEST 5: 16 × Φ / (l_P × m_p × c²) — trefoil G-test ══
+  G_SDT       = 16Φ/(l_P m_p c²) = 6.841963e-11
+  G_measured  = 6.674300e-11
+  Ratio       = 0.975495
+  g = G_SDT × M/R² = 1.006699e+01 m/s²
+  Ratio to 9.81: 1.026197
+
+══ TEST 6: (4/π) × 4π P_conv l_P² / (m_p c²) ══
+  G_SDT       = 6.841963e-11
+  G_measured  = 6.674300e-11
+  Ratio       = 0.975495
+  g = G_SDT × M/R² = 1.006699e+01 m/s²
+  Ratio to 9.81: 1.026197
+
+══ DIAGNOSTIC: Required values ══
+  F_total needed    = 5.858728e+25 N
+  F/cell needed     = 3.748279e-73 N
+  Φ/l_P (full)      = 6.428356e-22 N  (ratio: 5.830852e-52)
+  ε/l_P (per tick)  = 1.090570e-83 N  (ratio: 3.436990e+10)
+  ε/(3l_P) (trefoil)= 3.635234e-84 N  (ratio: 1.031097e+11)
+
+  log10(ratio ε/l_P) = 10.5362
+  log10(N)           = 61.7704
+  ratio/N            = 5.830852e-52
+  ratio × N          = 2.025931e+72
+  M/(b × m_u)        = 2.300985e-47
+  4πR²/(b×l_P²)     = 1.249206e-14
+  check1 × check2    = 2.874403e-61
+
+══ TEST 7: Surface steradian mapping ══
+  b per steradian = 1.243831e+97 excluded cells
+  F per sr = 1.356486e+14 N
+  F total (4π sr) = 1.704610e+15 N
+
+══ TEST 8: ε accumulated × N = Φ (sanity check) ══
+  F = b × Φ/l_P = 1.004781e+77 N   (this is 10^77)
+  g = 1.682430e+52 m/s²
+  With /3: g = 5.608100e+51 m/s²

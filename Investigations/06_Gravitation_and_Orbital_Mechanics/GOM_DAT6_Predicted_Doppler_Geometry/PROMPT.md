@@ -42,3 +42,17 @@ Used only if a separate profile term is computed; not a free parameter.
 Full Moyer/Regres formulation (media, troposphere, exact ramp reconstruction)
 is **out of scope** for the first pass. First pass = geometric range-rate Doppler
 plus documented turnaround scaling. Media/ramp fidelity upgrades are later loops.
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** Gate C4 passes when the geometric and observed Doppler medians are "within a factor of 10", and it passed at a ratio of 3.365, a scale mismatch that the next two folders could not resolve (GOM_DAT8 "scale convention unresolved").
+
+**Correction:** Gate at ≤ 5% (or the documented turnaround factor exactly) so a 3.4× discrepancy fails at this step.
+
+**Status:** RULE RECORDED — corrected gate or definition applies to the next run; the earlier result is not re-scored and nothing was re-run.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*
+
+**Id alias (2026-10-05):** claim ids written `GOM33-C*` in this folder and its verdict are the claims of `GOM_DAT6`. The rows are VERIFICATION (data-structure, checksum and field-parse checks), not tests of a physical claim, and are excluded from physics PASS/FAIL tallies; earlier text is not rewritten.

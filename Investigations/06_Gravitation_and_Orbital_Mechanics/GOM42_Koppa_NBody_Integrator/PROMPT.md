@@ -1,7 +1,50 @@
+# GOM42 — Koppa N-body integrator (specification rewritten 2026-10-12)
+
+**Author:** J. C. Harvey, Melbourne. Rewritten at Harvey's direction: prompts carry new data, and errors inform the next step. The 2026-08-15 registration is kept below the line, superseded where stated.
+
+## 1. State after the reset run (`GOM42_RESET_ASSESSMENT_2026-10-10.md`)
+A fresh velocity-Verlet instrument with a = c²Σκ_j(r_j − r_i)/r³ (no softening, collision stop) meets:
+
+| gate | result |
+|---|---|
+| V0 symmetry | met |
+| V1 circular, 100 periods | 4.9e-6 drift |
+| V2 order | ratio 4.000 |
+| V4 figure-eight | 5e-8 |
+| V5 invariants | ~1e-14 |
+| V6 collision stop | met |
+| **V3 Lagrange equilateral, equal sources, 20 periods** | **not met** (side drift 4.03) |
+
+**Grade:** VERIFICATION. The instrument is validated.
+
+## 2. Errors, and what each teaches
+| # | Error | Lesson |
+|---|---|---|
+| X1 | V3's known answer is **physically unstable**. Equal-source Lagrange triangles violate Routh's criterion, 27(m₁m₂ + m₂m₃ + m₃m₁) < (Σm)². Round-off grew exponentially: 1.2e-6 at 2 periods, then 2.87 at 10. | A known answer used for validation must be dynamically stable, or run only inside its pre-instability window. Check stability before registering it. |
+| X2 | Attempt 1's V6 stop left drifted positions in place (overlap 7.8e-5): an instrument fault, fixed by restoring the pre-step state. | Collision handling must be state-restoring. |
+| X3 | The 2026-10-05 correction asked for a numeric **physics** gate on a measured system; none was registered. | A validated integrator still says nothing about SDT until it predicts a measured system with native inputs. |
+
+## 3. Round 2 (to register before running)
+- **V3′ (stability-correct):** a Lagrange triangle with sources (1, 0.01, 0.01), which meets Routh (27 × 0.0201 = 0.543 < 1.040). Gate: side drift ≤ 1e-4 over 20 periods.
+  - The equal-source triangle is also reported within ≤ 2 periods. That is post-seen (drift 1.2e-6 was printed), so it is a diagnostic only.
+- **P1 (physics, native inputs only):** Sun–Jupiter–Saturn, with each κ from its own satellite or planet orbit via v²r = c²Ѻ; no GM.
+  - Observable: the Jupiter–Saturn long-period mutual term (the "great inequality"). Its period and amplitude are to be sourced from the ephemeris literature, with provenance written into `Datasets/` **before** registration. The value is not to be recalled.
+  - Gate: period within 2%.
+  - **Label:** convergent with Newtonian N-body at this order (same 1/r² law), so the test is of the native Ѻ inputs and the integrator, not a discriminator.
+
+## 4. Prohibitions
+- No G, GM, M or softening.
+- No target trajectory.
+- No unstable known answer as a validation.
+
+---
+
+## Superseded registration (2026-08-15, kept as written)
+
 # GOM42 — Koppa N-Body Integrator
 
 **Author:** James Christopher Tyndall, Melbourne  
-**Status:** PRE-REGISTERED · INSTRUMENT NOT YET RUN  
+**Status:** PRE-REGISTERED · INSTRUMENT RUN — assessment VALIDATED NUMERICAL INSTRUMENT (see GOM42_ASSESSMENT.md; V5a, V5b and V6 gates pass in gom42_results.txt) [status line corrected 2026-10-05]  
 **Date:** 2026-08-15
 
 ## Question
@@ -100,3 +143,15 @@ or \(GM\).
 Each validation trajectory is executed once at its registered timestep. The
 convergence gate alone uses the declared timestep pair; no mid-run adjustment
 or body-specific retuning is permitted.
+
+---
+
+## Audit correction 2026-10-05 (record / status)
+
+**Finding:** The status line says "INSTRUMENT NOT YET RUN" while the folder holds results with V5a, V5b and V6 gates passed, and the prompt itself carries no numeric gates.
+
+**Correction:** Update the status and copy the numeric gates from the output into the pre-registration.
+
+**Status:** ANNOTATED — label, status or tally corrected in the record; no re-score of earlier runs.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

@@ -1,0 +1,204 @@
+### 06/GOM13_Occlusion_Altitude_Cavendish  | status: SPEC — full upgrade 2026-07-24 (supersedes | words 1877 | code 1 outs 1 verd 0 runlog 0 | gate True prereg True
+Q: Post-kill, three things: (a) whether the corrected **count-typed occlusion form** (blocking ∝ mass column traversed, per-baryon, R²-cross-sections) is properly derived from Law III and reproduces, from SDT quantities, the **Bouguer gradient** it claims to be degenerate with (the convergence must be COMPUTED, not asserted); (b) w
+F: §⑧: the count-typed form failing to reproduce Bouguer from SDT quantities (the rescope itself would collapse — the branch dies entirely, not parks); H1 derivable with the OPPOSITE sign (κ shares the coupling → ratio cancels → clean structural closure, recorded as an SDT self-consistency result: grav
+G: territory), and E104's κ-correlation channel (itself recorded sub-threshold) — each gets a
+G: | E104 κ-correlation | recorded sub-threshold (δ ~1e-9 vs lock-in) | prior record — recompute, channel 3 |
+G: gradient. **Gate: reproduces the Bouguer gradient ~4.4×10⁻⁷ from SDT quantities with the
+G: convention — state it, bracket it) · root-4 (gate contraband — the Bouguer gate is
+G: - Gates: P1b Bouguer from SDT chain (branch-fatal if missed) · P2 three ratios with cited
+O: PRE-FLIGHT VERDICT (committed wording):
+FLAGS: MISSING: ; Gcode:5 ; ident:1 ; res pass/fail 0/0 verd pass/fail 0/0
+
+### 06/GOM14_Koppa_Density_Multiplanet_Consistency  | status: SPEC — first standalone prompt 2026-07-24. | words 668 | code 1 outs 2 verd 0 runlog 0 | gate True prereg True
+Q: Now that the vocal-cords rule is standing policy, this investigation's class must be stated before its numbers: the claim "every planet of one host returns the same koppa-density q = ϟ*/R*³ = (4π²/c²)(a/R*)³/P²" is **Kepler's third law per host, written mass-free.** Any theory with Kepler (all of them) predicts the consistency —
+F: Real-vs-shuffled separation collapsing (data pipeline defect — the CSV or parse broke, since Kepler guarantees separation on good data); the Sun anchor missing 1476.6 m by >0.5% (formula/unit bug). 5. **Done =** dual verdict; the class statement in the header; the numbers reproduced-or- explained vs
+G: (medians, 75th/90th, fraction-within-10%, shuffle control) vs the OLD-RUN anchor; P3 the
+G: **P0** — audit script + CSV header; provenance print. **P1** — run direct. Gates: real median
+G: |dev| within ±1 point of the old 5.9%-class anchor (reproduce-or-explain); shuffled median ≫
+G: real (report the ratio); fraction-within-10% reported both. **P2** — distribution table +
+G: one-paragraph hand-off note in the verdict: what GOM02-P2 should gate on from this data.
+FLAGS: MISSING: ; Gcode:2 ; res pass/fail 0/0 verd pass/fail 0/0
+
+### 06/GOM19_Merger_Ledger_Grammarless_Baseline  | status: SPEC (2026-07-23). | words 1971 | code 2 outs 3 verd 1 runlog 1 | gate True prereg True
+Q: Whether *binding events* (two bodies orbit in → one rotating remnant + radiated binding) obey ONE ledger from the deuteron to a black-hole merger (~38 orders), with the BH end as the **structureless limit** — so that nuclear captures' deviation from the BH baseline isolates the **grammar contribution** as a measured curve for th
+F: §4: ledger radiated-fraction off the measured BH value by >2×; the remnant-spin mechanism underivable (→ fork dropped to OPEN, no fishing); nuclear residual flat in composition at fixed q (→ grammar-signal claim dies); out-of-sample validation fails. 5. **How will we know we're done?** — Dual verdic
+G: two measured columns (P2 BH, P3 nuclear) and the residual (P4). Gates pre-committed in §2.
+G: ## §3 Phases (gated; Phase N+1 forbidden until PASS-GATE or documented DEFER)
+G: **Gates:** f within factor 2 of the measured/NR value → ledger reading VIABLE; else the
+G: **P3 — Nuclear column.** All two-cluster captures within A ≤ 7 from AME2020 (the §2 six plus any
+G: out-of-sample** on the A = 5–7 captures (d+t, n+³He, p+⁶Li…). **Pre-committed gate: out-of-sample
+V: **Classification:** `GOM19_NUCLEAR_COLUMN_COMPUTED__P1_NOT_DERIVED__ASTAR_FORK_OPEN`<br>
+V: **Run class:** direct. Locks and scope in `RUN_LOG.md` before the AME2020 file was parsed. Tool `gom19_nuclear_column.py`; output `gom19_results.txt`. **Canon edits:** none. **Fitted parameters:** 0. 
+V: - **P2 (f within a factor 2 of the BH value):** the locked target 1/16 = 6.25% is 1.29× the NR 4.83% and 1.36× the GW150914 4.6%, inside the gate. This evaluates the locked target against declared anc
+V: - **F1 fires by default:** no P1a mechanism for the remnant-spin attractor exists in the repo, so the a* fork stays OPEN and no catalog comparison is made. A comparison line printed in run 1 is void (
+V: Locks written before the event table was opened (RUN_LOG "P1c lock"). Data `Datasets/gw/GWTC_eventapi_2026-10-05.json` (GWOSC event API, sha256 prefix 9802865cc8b41508; 391 unique events, 279 with sou
+O: d+d->4He q= 1.00 Q= 23846.530 keV f=0.6355% anchor 0.6357% rel -0.03% PASS
+O: d+t->4He+n q= 1.50 Q= 17589.300 keV f=0.3754% anchor 0.3754% rel -0.00% PASS
+O: n+3He->4He q= 3.00 Q= 20577.621 keV f=0.5489% anchor 0.5490% rel -0.02% PASS
+FLAGS: MISSING:Datasets/nuclear/AME2020 ; LOOSE:25 ; ident:2 ; res pass/fail 12/0 verd pass/fail 1/0
+
+### 06/GOM20_Clock_Transport_GPS  | status: OPEN — specification seed (benchmark-coverage alignment 2026-07-29; ca | words 265 | code 1 outs 1 verd 1 runlog 0 | gate True prereg False
+Q: GPS satellite clocks run fast by +45.9 μs/day from orbital depth and slow by −7.2 μs/day from orbital speed: net +38.7 μs/day, corrected by design in every receiver. The prevailing account needs two separate theories for the two terms. Measured anchor: the engineered correction itself, documented to fractions of a microsecond. #
+F: net correction off by more than the documented engineering tolerance — the numbers are known to sub-μs precision; there is nowhere to hide. - Anchors: GPS orbital radius/period; the documented corrections. - Tolerance: ±0.1 μs/day on the net. ## Benchmark linkage Catalogue row B61 · a clean tally ca
+G: > row B61). **Author:** J. C. Harvey, Melbourne. Gateways binding.
+G: - Tolerance: ±0.1 μs/day on the net.
+V: > **Status:** PENDING_MECHANISM
+V: > **Empirical status:** UNADJUDICATED
+V: ## Required reopening condition
+FLAGS: MISSING: ; res pass/fail 0/0 verd pass/fail 0/0
+
+### 06/GOM21_Frame_Dragging_GPB  | status: OPEN — specification seed (benchmark-coverage alignment 2026-07-29; ca | words 240 | code 0 outs 0 verd 0 runlog 0 | gate True prereg False
+Q: Gravity Probe B measured two precessions of orbiting gyroscopes: the geodetic −6601.8 mas/yr (confirmed to 0.3%) and the frame-dragging −37.2 ± 7.2 mas/yr. The prevailing account calls the second the rotating Earth twisting its own metric. Measured anchors: the GP-B final results; LARES/LAGEOS confirmations. ## SDT footing A rot
+F: either term outside the measured error (the geodetic is known to 0.3% — a tight, populated gate). - Anchors: GP-B final numbers; orbit parameters. - Tolerance: geodetic ±0.5%; drag within the ±7.2 measurement band. ## Benchmark linkage Catalogue row B65 · suite coverage roster · tally on computed nu
+G: > row B65). **Author:** J. C. Harvey, Melbourne. Gateways binding.
+G: known to 0.3% — a tight, populated gate).
+G: - Tolerance: geodetic ±0.5%; drag within the ±7.2 measurement band.
+FLAGS: MISSING: ; res pass/fail 0/0 verd pass/fail 0/0
+
+### 06/GOM23_Koppa_on_a_Straight_Line  | status: pre-registered | words 656 | code 1 outs 1 verd 1 runlog 0 | gate True prereg True
+Q: vitation & Orbital Mechanics. **Feeds:** RTM01 (Reactions & Thrust > Mechanics — the findings here inform the thrust-ledger investigation). ## 0. The question, stated exactly Koppa was earned on closed paths: ϟ = v²r/c², the orbital ledger. This investigation asks whether the same length is recoverable through measurement chains that contain **no closed path, no period, and no π in any line** — and whether the straight-line family lands on the same ϟ the circular ladder carries. **Founding di
+F: ication table | ID | Condition that fails this investigation | |----|------------------------------------------| | F1 | any π irreducibly present in a recovery chain | | F2 | numerical lateral impulse ≠ closed form beyond gate | | F3 | synthetic ascent recovery ≠ injected ϟ beyond 0.1% | | F4 | any 
+G: ## 2. Phases and pre-registered gates
+G: - **P1 — π-audit.** Enumerate every recovery chain and every constant it consumes. Gate:
+G: - I1 *the scale*: standing still is thrust; a = c²ϟ_E/R² vs measured g. Gate: within
+G: - I2 *the tower*: two clocks on a plumb line; Δν/ν = ϟ·h/r² at h = 450 m. Gate: matches
+G: k = c/√(2E_ion/m_e). Gate: r_e within 0.1%, the finite-proton seat offset stated.
+V: # GOM23 — Verdict (dual)
+V: ## Prompt completion: **A** — all five phases executed, 10/10 gates PASS, 0 FAIL.
+V: ## Physics class: **NATIVE (provenance + founding distinction) · CONVERGENT (values, shared form)**
+V: 1% of their circular-ladder values, whole-range single pass.
+V: - The centrifugal content of conventional g₀ bounds I1 at the 0.1% level; a latitude-resolved
+O: P5b Sun: pointwise z*R vs bridge::koppa_Sun [m] got 1477.05 ref 1477.05 dev 0.0000% gate 1.00% PASS
+O: P5c H: photoionisation vs r_e (circular ladder) [m] got 2.81644e-15 ref 2.81794e-15 dev 0.0534% gate 1.00% PASS
+O: RESULT: 10 gates PASS, 0 FAIL.
+FLAGS: MISSING: ; Gcode:1 ; ident:10 ; res pass/fail 11/1 verd pass/fail 1/1
+
+### 06/GOM24_Cassini_Ring_Moon_Corpus  | status: SPEC. | words 2532 | code 0 outs 0 verd 0 runlog 0 | gate True prereg True
+Q: Whether a body seated between two counter-streaming ring flows is *rolled* by that shear — and whether the equatorial ridges, the gap-edge waves, and the unmeasured spin states of Saturn's eight ring-embedded moons are three faces of one mechanism. 2. **Why does it matter?** Eight bodies occupy the same geometric seat under one 
+F: Five falsifiers with numeric triggers in §8. The decisive one: if the two gap edges carry a **common** vertical phase rather than a **mirrored** one, the encounter-geometry mechanism is excluded and orbital inclination carries the waves. 5. **How will we know we're done?** Dual verdict — prompt comp
+G: ## 4. Strategy — five phases with pre-registered gates
+G: Report median, per-moon residual, fractional spread s. **Gate G1:** s < 1×10⁻⁴ after excluding
+G: **Gate G2:** if any candidate depth-based ridge criterion is found to separate the set at
+G: **Gate G3a:** Spearman ρ(𝒮, R_eq/R_pol) > 0.7 across n = 8. **Gate G3b (the honest one):** the
+G: vertical phase on each edge from shadow geometry at known solar elevation. **Gate G4:** the two
+FLAGS: MISSING: ; ident:9 ; res pass/fail 0/0 verd pass/fail 0/0
+
+### 06/GOM25_Solar_Depth_Propagation_Audit  | status: PRE-REGISTERED — 2026-08-07.  No GOM25 external dataset was | words 817 | code 6 outs 6 verd 1 runlog 1 | gate True prereg True
+Q: t, not a > request to preserve the current mechanism. ## 1. Target mechanism and initial conditions Test the implemented solar chain, without importing a competitor's field equations: ```text koppa_Sun = v_orbit^2 r_orbit / c^2 z(r) = koppa_Sun / r z_spec = z(R_Sun) - z(r_observer) c_far(r) = c (1 - z(r))^2 ``` The orbital state, the solar radius, and the surface spectral shift are three separate observations. The measured SI value of `c` is a unit definition, not a fitted parameter
+F: ication conditions Report source uncertainty, vector-table precision, radius uncertainty, spectral-systematic uncertainty, numerical quadrature convergence, and the effect of row exclusions. A result is excluded if it fails a stated numerical or observational criterion; lack of open data is `PENDING
+V: against frozen Horizons vectors and HARPS-LFC line tables. Does not edit `laws.hpp`. Does not treat agreement with GR as success or failure.
+V: ## 2. Coverage status (this iteration)
+V: | Layer | Status |
+V: | Instrument validation A/B/C | PASS |
+V: | Claim ID | Exact claim | Status |
+FLAGS: MISSING: ; Gcode:1 ; ident:12 ; res pass/fail 11/4 verd pass/fail 9/1
+
+### 06/GOM26_Solar_Koppa_Orbital_Invariant  | status: PRE-REGISTERED — 2026-08-07. | words 759 | code 1 outs 1 verd 1 runlog 1 | gate True prereg True
+Q: on OPEN). > **Canon edits:** none. Investigation-level re-audit of a proposed initial-condition repair. ## 0. Objective Re-audit the GOM25 reformulation hypothesis that solar depth input `ϟ` is an **orbital invariant**, not the instantaneous `v²r/c²` sampled on an elliptical state vector. This loop does not edit `laws.hpp`. It tests whether the stated repair: 1. collapses the 1.2% elliptic CV on D1; 2. still yields a spectral amplitude compatible with the frozen D3 comparator under the same 
+G: 1. **Invariance gate (C1/C2):** On calibration, CV of `{ϟ_i}` must be `< 1×10⁻³`. Else **NO RECOVERY** for this repair route.
+G: 3. **Spectral gate (C3):** `|v_pred − 638| > 2√(σ_pred²+6²)` ⇒ EXCLUDED; else COMPATIBLE. Confirmation remains UNADJUDICATED.
+G: 4. **Hold-out gate (C4):** `|ϟ_hold − ϟ_cal| / ϟ_cal < 1×10⁻³` else EXCLUDED as invariant across samples.
+G: 5. **No retuning** of ε, CV threshold, 2σ rule, or radius after seeing residuals.
+G: A. Near-circular Kepler mock (`e=0.01`, known `μ`): recovered `μ` within 1e-8 relative; CV(`ϟ_i`) < 1e-6.
+V: ## 2. Coverage status
+V: | Layer | Status |
+V: | Instrument validation A/B | PASS |
+V: | D1-cal invariance (C1/C2) | executed — gate PASS |
+V: | Hold-out (C4) | **Multi-year PASS** — 2024 EMB(3) vs Sun(10) frozen (`c194718c…`); see Iteration 7 / `.audit-tmp/gom26_multiyear_run.txt` |
+FLAGS: MISSING: ; ident:2 ; res pass/fail 3/0 verd pass/fail 5/0
+
+### 06/GOM27_Solar_Deflection_Shared_Profile  | status: PRE-REGISTERED — 2026-08-07 | words 506 | code 3 outs 2 verd 1 runlog 1 | gate True prereg True
+Q: rwise μ; frozen before this instrument runs). > **Canon edit:** none. > **Evidence rule:** codebase audits and prior investigation assessments are not inputs. ## 1. Objective Test whether the same far-frame profile ```text c_far(r) = c (1 − ϟ/r)² n(r) = c / c_far(r) = 1/(1 − ϟ/r)² ``` with **frozen** GOM26 `ϟ` predicts solar light deflection `δ(b)` over a pre-registered impact-parameter scan, without a new coefficient. ## 2. Weak-field analytic claim (derived before numerical unblin
+G: ## 5. Data gate (D5)
+G: - A: reduced-`ϟ` case → `δ ≈ 4ϟ/b` within 5%
+V: **Evidence rule:** codebase audits are not inputs. Statuses from frozen datasets, GOM26 cal ϟ, `laws.hpp` hypothesis, and this stdout only.
+V: | Claim ID | Claim | Status |
+V: | GOM27-C1 | Weak-field analytic `δ_wf = 4ϟ/b` from `n = 1+2ϟ/r+…` | DERIVED (algebra); numerical recovery PASS at `b=5 R_Sun` |
+V: `PROMPT.md` fixed before execution. Validation A–D: PASS.
+V: ## 9. Classification
+FLAGS: MISSING: ; ident:3 ; res pass/fail 3/1 verd pass/fail 2/1
+
+### 06/GOM36_Conjunction_Residual_vs_Solar_K  | status: PRE-REGISTERED — 2026-08-08. | words 311 | code 1 outs 0 verd 1 runlog 1 | gate True prereg True
+Q:  shape tracking; GOM_DAT8–9 scale unresolved. > **Canon edits:** none. > **Solar K:** frozen GOM26 IC **K = 1476.35 m** — not fitted. ## 0. Objective Ask whether, after removing a **single** geometric Doppler scale calibrated on the first half of P0 only, the hold-out residual correlates with the solar conjunction geometry predicted from frozen **K** (Shapiro-like delay-rate). This is the first post-ODF **claim** test on Cassini SCE1 Doppler. A FAIL is informative. No free solar-**K** adj
+V: **Class:** SDT claim investigation
+V: | ID | Status |
+V: | GOM36-C1 | **PASS** — train scale `s = −0.250217` (CALIBRATED(1)) |
+V: | GOM36-C2 | **PASS** — test residual reported |
+V: | GOM36-C3 | **PASS** — `b`, delay, `d(delay)/dt` with frozen **K** |
+FLAGS: MISSING: ; res pass/fail 0/0 verd pass/fail 5/0
+
+### 06/GOM37_Multiday_Detrended_Solar_K_Residual  | status: PRE-REGISTERED — 2026-08-08. | words 326 | code 1 outs 0 verd 1 runlog 1 | gate True prereg True
+Q: nfounded with time. > **Canon edits:** none. > **Solar K:** frozen **K = 1476.35 m** — not fitted. ## 0. Objective Re-test the solar-**K** delay-rate proxy against Cassini SCE1 Doppler after two GOM36 defects are addressed: 1. **Multi-day** DSS-25 type-12 coverage (K252 days 157–160) so `b(t)` is not a short monotonic stub. 2. **Time detrend:** remove a linear trend fitted on the **train** residual only, then correlate the test residual with `dΔt/dt`. ## 1. Procedure 1. Load K25
+G: > **Upstream:** GOM36 — corr gate fired; delete-test confounded with time.
+G: ## 2. Claims / gates
+V: **Class:** SDT claim investigation
+V: | ID | Status |
+V: | GOM37-C1 | **PASS** — 4× K252 HAVE |
+V: | GOM37-C2 | **PASS** — `s = −0.294774`; α, β from train day 157 |
+V: | GOM37-C3 | **PASS** — b ∈ [35.37, 42.70] R_☉ on test |
+FLAGS: MISSING: ; res pass/fail 0/0 verd pass/fail 4/1
+
+### 06/GOM38_Range_LightTime_Solar_K  | status: PRE-REGISTERED — 2026-08-08. | words 321 | code 1 outs 0 verd 1 runlog 1 | gate True prereg True
+Q: lar-K path UNADJUDICATED / blocked. > **Canon edits:** none. > **Solar K:** frozen **K = 1476.35 m** — not fitted. ## 0. Objective 1. Census SRA range (DATA TYPE 37) on CORS_0021 XMMMV0 ODFs. 2. Compare decoded range observables to Horizons geometric range / light-time. 3. COMPUTE frozen-**K** Shapiro delay and ask whether it is resolvable against the range residual at this product fidelity. 4. Formally label the Doppler–solar-K path `PENDING_DEFINITION` if range also cannot cl
+G: | GOM38-C4 | Magnitude gate: median\|obs\| and geometric range reported; if a documented RU→metre factor is unavailable, convert only geometric→seconds and compare delay-class quantities as 
+V: **Class:** SDT claim investigation (+ census)
+V: | ID | Status |
+V: | GOM38-C1 | **PASS** — 793× type-37 rows (XMMMV0 157–160) |
+V: | GOM38-C2 | **PASS** — all finite |
+V: | GOM38-C3 | **PASS** — Horizons geometry |
+FLAGS: MISSING: ; res pass/fail 0/0 verd pass/fail 9/1
+
+### 06/GOM39_Local_k_Solar_K_Definition  | status: PRE-REGISTERED — 2026-08-09. | words 499 | code 1 outs 0 verd 1 runlog 1 | gate False prereg True
+Q: ream:** GOM36–38 used a naked frozen length **K**; path set `PENDING_DEFINITION`. > **Canon edits:** none. ## 0. Objective Close the Doppler–solar-**K** **definition** gate with the corrected grammar: | Symbol | Meaning | |---|---| | **k** | Dimensionless ratio at a stated main-sequence radius **R**: **k = c / v_orb(R)**. Different **R** ⇒ different **k**. | | **K** | **c-boundary radius** (orbit reaches **c**). Length. **K ≠ k**. | | Link | **K = R / k²** | | Speed law | **v(r) = (c/k) √(R
+V: | ID | Status |
+V: | GOM39-C1 | **PASS** — ledger published; **k ≠ K** |
+V: | GOM39-C2 | **PASS** — max rel err **3.1×10⁻¹⁶** on multi-radius **K** recovery |
+V: | GOM39-C3 | **PASS** — \|num−exact\|/exact **7.6×10⁻¹¹**; \|num−closed\|/closed **8.5×10⁻⁷** |
+V: | GOM39-C4 | **PASS** — SCE1 Earth **k** median **1.021250×10⁴**; **K** median **1455.637 m**; CV(**K**) **1.8×10⁻⁷**; not Doppler-fitted |
+FLAGS: MISSING: ; ident:2 ; res pass/fail 0/0 verd pass/fail 7/0
+
+### 06/GOM40a_Local_K_Amplitude_Robustness  | status: PRE-REGISTERED - 2026-08-09. | words 456 | code 1 outs 1 verd 1 runlog 0 | gate True prereg True
+Q:  multi-day Doppler residual is `UNADJUDICATED` because its amplitude ratio is `7.07e6` and its delay-rate correlation is time-confounded. GOM39 subsequently corrected the grammar from a naked frozen solar `K` to local `k(r)` with `K = R/k^2`. ## Objective Test whether the GOM39 local-K correction can remove either GOM37 failure without fitting any quantity. This is a required recalculation after a definition conflict, not a new confirmation test. ## Fixed hypotheses The residual construction
+G: `LOCAL_K_REPAIR_DOES_NOT_CLEAR_GOM37_GATES`.
+V: **Status:** `LOCAL_K_REPAIR_DOES_NOT_CLEAR_GOM37_GATES`.
+V: **Empirical SDT verdict:** `UNADJUDICATED`.
+V: GOM39 repaired the `k`/`K` grammar. GOM37 had used `K = 1476.350 m` and failed
+V: All thirteen registered input hashes passed before numeric parsing. No source was
+V: unqualified physical verdict even if its statistical gates had changed.
+FLAGS: MISSING: ; res pass/fail 0/0 verd pass/fail 0/0
+
+### 06/GOM40b_Energy_Form_K_Local_k_Delay  | status: PRE-REGISTERED — 2026-08-09. | words 372 | code 1 outs 0 verd 1 runlog 1 | gate True prereg True
+Q: ion). > **Upstream:** GOM39 defined **K = R/k²**; SCE1 circular proxy **K** was 1.4% off GOM26. > **Canon edits:** none. ## 0. Objective Recover solar **K** on the SCE1 Earth@Sun arc by the **GOM26 energy / pairwise-μ** route (not instantaneous **v²r/c²**), then express conjunction delay and delay-rate using local **k(r) = √(r/K)** with that **K**. Still **no** ODF residual promotion, no **K** fit to Doppler/delay, no γ. ## 1. Grammar (locked) - **k = c / v_orb(R)** at main sequence **R
+G: 6. Continuity: \|**K** − 1476.35\| / 1476.35 reported (not a fit gate).
+G: 8. Publish delay-rate amplitude class only — **no** corr(obs,·) gate.
+V: | ID | Status |
+V: | GOM40b-C1 | **PASS** — eccentric mock |
+V: | GOM40b-C2 | **PASS** — **K = a/k²** identity |
+V: | GOM40b-C3 | **PASS** — dual route executed; **K** not ODF-fitted |
+V: | GOM40b-C3c | **PASS** — EMB 2025 year: **K = 1476.354 m**, **a = 1.496×10¹¹ m**, **k = 1.006719×10⁴** |
+FLAGS: MISSING: ; ident:4 ; res pass/fail 0/0 verd pass/fail 7/0
+
+### 06/GOM41_Planetary_Quadrupole_from_Phase_Resistance  | status: pre-registered B11 closure investigation | words 695 | code 1 outs 1 verd 1 runlog 0 | gate True prereg True
+Q: Can a rotating body's normalized resistance quadrupole be predicted from movement, geometry, independently measured composition/boundaries and the Law-IV phase-resistance kernel, without a body-source mass parameter or a profile inferred from the J2 values under test? ## Forward call graph ```text satellite orbital radius + peri
+G: resistance distribution agree within `0.5%`.
+G: 6. A model advances B11 only if Earth and Jupiter are each within `3%`, at
+G: least four of six bodies are within `10%`, and whole-corpus RMS fractional
+G: - `Q0_UNIFORM`: Earth/Jupiter 3% gates both fail; `0/6` within 10%; RMS
+G: - `Q1_CONVERGENCE`: Earth `+0.91%`, Jupiter `-2.11%`, but only `3/6` within
+V: **Classification:** `GOM41_B11_PENDING__NUMERICS_PASS_NO_REGISTERED_MODEL_CLEARS_CORPUS_GATE`<br>
+V: **Run class:** direct (MSVC 19.44, `cl /std:c++20 /O2`, constants from `laws.hpp`). Output `gom41_results_2026-10-05.txt` (program's own stdout, exit code 1 on model failure). The results recorded in 
+V: Numeric gates pass: zero-spin |J2| = 0; spherical leakage 0; direct-integral/Radau identity residual max 3.394e-7; doubling the resolution changes J2 by at most 2.443e-4 (relative).
+V: A model advances B11 only if Earth and Jupiter are each within 3%, at least four of six within 10%, and RMS ≤ 10%. Q1 meets the first (Earth +0.91%, Jupiter −2.11%) and misses the other two (3 of 6; R
+V: - The source depth (koppa from one timed satellite orbit per body) and the numerics are resolved; the miss is in the resistance profile, as the PROMPT records: Uranus and Neptune (Q1 +64.8%, −18.0%; Q
+O: Earth<=3% PASS Jupiter<=3% FAIL within10%=3/6 RMS= 30.47% MODEL FAIL
+O: numeric gates PASS; Q2 corpus FAIL
+O: VERDICT: B11 PENDING — the class-level gas/ice profiles do not close the six-body corpus.
+FLAGS: MISSING: ; LOOSE:26.99;67.61 ; ident:3 ; res pass/fail 4/7 verd pass/fail 0/0
+
+### 06/GOM42_Koppa_NBody_Integrator  | status: PRE-REGISTERED · INSTRUMENT NOT YET RUN | words 490 | code 1 outs 2 verd 1 runlog 1 | gate False prereg True
+Q: Can one shared two- or three-dimensional trajectory engine integrate the SDT koppa acceleration \[ \mathbf a_i =c^2\sum_{j\ne i}\kappa_j \frac{\mathbf r_j-\mathbf r_i}{|\mathbf r_j-\mathbf r_i|^3} \] without importing \(G\), source mass \(M\), \(GM\), force softening, or a target trajectory? This is a numerical initial-value sol
+V: and velocity-Verlet implementation passed the registered two-body,
+O: V5a maximum momentum drift value= 1.757776614e-14 gate <= 1.000e-11 PASS
+O: V5b maximum angular drift value= 5.509852986e-14 gate <= 1.000e-10 PASS
+O: V6 collision stop margin [m] value= 1.940797440e+04 gate > 0.000e+00 PASS
+FLAGS: MISSING: ; Gcode:1 ; ident:1 ; res pass/fail 22/2 verd pass/fail 0/0

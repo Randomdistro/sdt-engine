@@ -1,5 +1,8 @@
 # NP17 — VERDICT
 
+> **ANNOTATION — 2026-10-10 (reset, at Harvey's direction; text below kept as written).** The deuteron PASS is **withdrawn**: E = 3αℏc/D is the p–e–p configuration on the {p,p,e} list (target 1.4422 MeV; result +52.6%), compared here against the {p,n} binding 2.224 MeV. The pair-potential ledger ("Coulomb well", factor −4+1) is withdrawn under the 2026-10-07 ruling (binding = mass defect; energy = movement). The per-electron seat class is excluded for A ≥ 3 by a geometry-free ceiling. See `NP17_RESET_ASSESSMENT_2026-10-10.md` and the rewritten `PROMPT.md`.
+
+
 **RESOLVED (mechanism + deuteron).** The nuclear packing order is **interleaved 6π
 trefoils, neutron = proton + one internal electron, that electron shared between adjacent
 protons.** Binding is a **shared-electron Coulomb well** — the same `H₂⁺` bond as chemistry,

@@ -1,3 +1,30 @@
+# NP16-A03 — Atmospheric spallation inventory (specification rewritten 2026-10-12)
+
+**Author:** J. C. Harvey, Melbourne. Rewritten at Harvey's direction: prompts carry new data; the packing sequencer is understood before grammar work. The previous specification is kept below the line.
+
+## 1. State after the reset (2026-10-10)
+**G2, PENDING_DATA.** The grammar part is a subset of NP16-A01 (same band; the same N < Z exceptions ⁷Be, ¹¹C, ¹³N, ¹⁵O). Production rates need EXFOR cross-sections and the measured cosmic-ray spectrum (AMS-02).
+
+## 2. New data and what it teaches (2026-10-10 to 2026-10-12)
+- **The live sequencer cannot build ⁷Be or ¹¹C at all** (no EC or proton-rich construction). Atmospheric products include exactly these.
+- A04: the law-IV volume is excluded as a cross-section scale (×1e9). No native cross-section law exists yet.
+
+## 3. Next round (registered order)
+1. Harvey's ruling on a proton-rich construction (shared with NP40 and A01).
+2. Cache the EXFOR and AMS-02 inputs.
+3. Rates only after a native cross-section law exists (A04 round 2).
+
+## Prohibitions
+- No census over candidate predictors.
+- Grammar counts are not evidence (NP24).
+- No data substitution without a label.
+- Release is read, never edited (proposals only).
+- The word "charge" is not used.
+
+---
+
+## Previous specification (kept as written)
+
 # A03: Atmospheric Spallation Inventory — Investigation Prompt
 
 > **Author:** J. C. Harvey, Melbourne. **Status:** SPEC (upgrade 2026-06-27).

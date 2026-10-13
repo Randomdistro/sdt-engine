@@ -123,3 +123,9 @@ rescued; forward models await the root). PARTIAL only for the Sag A* Level-3 che
 **Prompt completion F · Physics class CIRCULAR (census/"verification") / KILLED
 (rotation claims; misreported PASS banner documented) · Recovery NO RECOVERY (as
 built; superseded by GD05) · Cascade root OCCLUSION-MECHANISM.**
+
+---
+
+## Audit correction (2026-10-05)
+
+`gd03_spation_topology.cpp` printed its closing banner as unconditional PASS lines (Levels 1–4), contradicting its own computed Level-3 gates and this verdict. The new copy `gd03_spation_topology_v2.cpp` (output `gd03_topology_v2_results_2026-10-05.txt`; the old tool and its results stay, labelled superseded) derives the banner from the gates: **Level 1** is an identity (z·k² = 1 by construction; not scored), **Level 2** is COMPUTED with no comparison datum, **Level 3** solar system σ/μ = 0.0611% PASS (gate 1%) but **Sgr A\* σ/μ = 51.03% FAIL** (gate 5%), **Level 4** is not run in this tool (the flat-rotation claim is excluded here, see above). Exit status follows the Level-3 gates. The question field is now filled (measurable gap written in `PROMPT.md`).

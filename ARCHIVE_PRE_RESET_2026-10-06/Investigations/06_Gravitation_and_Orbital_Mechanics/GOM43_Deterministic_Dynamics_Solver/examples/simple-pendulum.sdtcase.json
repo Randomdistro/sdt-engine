@@ -1,0 +1,65 @@
+{
+  "contract_version": "1.0.0",
+  "case_id": "example-simple-pendulum",
+  "problem_class": "articulated_rigid",
+  "frame": {
+    "type": "inertial_cartesian",
+    "units": "SI"
+  },
+  "forces": [
+    {
+      "type": "uniform_acceleration",
+      "acceleration_m_s2": [0, -9.80665, 0],
+      "provenance": {
+        "classification": "MEASURED-INPUT",
+        "description": "Declared standard laboratory acceleration for a conditional local-uniform fixture."
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "rod-1",
+      "position_m": [0.09933466539753061, -0.4900332889206208, 0],
+      "quaternion_wxyz": [0.9950041652780258, 0, 0, 0.09983341664682815],
+      "velocity_m_s": [0, 0, 0],
+      "angular_velocity_rad_s": [0, 0, 0],
+      "inertial_mass_kg": 1,
+      "inertia_diagonal_kg_m2": [0.08333333333333333, 0.000001, 0.08333333333333333],
+      "length_m": 1
+    }
+  ],
+  "joints": [
+    {
+      "id": "pivot-1",
+      "parent": null,
+      "child": "rod-1",
+      "parent_anchor_m": [0, 0, 0],
+      "child_anchor_m": [0, 0.5, 0],
+      "axis_world": [0, 0, 1]
+    }
+  ],
+  "integrator": "rattle",
+  "timestep_s": 0.0005,
+  "duration_s": 4,
+  "record_every_steps": 20,
+  "tolerances": {
+    "position_m": 1e-10,
+    "velocity_m_s": 1e-10,
+    "quaternion_norm": 1e-12,
+    "max_constraint_iterations": 96
+  },
+  "gates": [
+    {
+      "id": "position",
+      "metric": "max_position_constraint_m",
+      "relation": "<=",
+      "limit": 2e-8
+    },
+    {
+      "id": "velocity",
+      "metric": "max_velocity_constraint_m_s",
+      "relation": "<=",
+      "limit": 2e-8
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+CR06 reframe run 2b (second route and representation check), dataset A: 40 bins, full covariance
+
+[LCDM] Om = 0.2963, chi2 = 39.298   (C++: 0.2963, 39.298)
+[ROUTE 2] K=1: chi2 = 47.412, knots = [0.663]   (C++: chi2 47.412, knots [0.663])
+[ROUTE 2] K=2: chi2 = 38.921, knots = [0.395 1.011]   (C++: chi2 38.921, knots [0.395, 1.011])
+[ROUTE 2] K=3: chi2 = 38.668, knots = [0.431 0.682 1.098]   (C++: chi2 38.668, knots [0.431, 0.682, 1.098])
+
+[REPRESENTATION] offset-removed distance-function difference 5 log10(r_model / r_LCDM) at the 40 redshifts (mag), beside the bin errors
+   K=1: max |dmu| = 0.1517 (at z = 1.612), rms = 0.0302; median bin error 0.026, error at z>1: [0.056 0.074]
+        dmu at z = 0.1, 0.3, 0.5, 0.8, 1.0, 1.23, 1.61: [0.0047, -0.0134, -0.0108, 0.0173, 0.046, 0.0839, 0.1517]
+   K=2: max |dmu| = 0.0332 (at z = 1.612), rms = 0.0063; median bin error 0.026, error at z>1: [0.056 0.074]
+        dmu at z = 0.1, 0.3, 0.5, 0.8, 1.0, 1.23, 1.61: [-0.0007, 0.0024, 0.0018, -0.003, -0.0084, -0.0162, -0.0332]
+   K=3: max |dmu| = 0.0584 (at z = 1.612), rms = 0.0101; median bin error 0.026, error at z>1: [0.056 0.074]
+        dmu at z = 0.1, 0.3, 0.5, 0.8, 1.0, 1.23, 1.61: [-0.0009, 0.0008, 0.0031, 0.0027, -0.0067, -0.0227, -0.0584]
+
+[REPRESENTABILITY] chi2 of the knot profile with knots set to LCDM's n_eff at the knot positions (offset refitted)
+   K=2: chi2 at LCDM knots = 58.793 ; refitted from there = 38.921  (LCDM itself 39.298)
+   K=3: chi2 at LCDM knots = 73.831 ; refitted from there = 38.668  (LCDM itself 39.298)
+   K=5: chi2 at LCDM knots = 74.610 ; refitted from there = 37.160  (LCDM itself 39.298)
+   K=9: chi2 at LCDM knots = 75.358 ; refitted from there = 32.211  (LCDM itself 39.298)

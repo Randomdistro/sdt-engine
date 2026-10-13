@@ -1,0 +1,149 @@
+﻿╔══════════════════════════════════════════════════════════════╗
+║  APS01 E++: TRITON PILEUP vs SHELL OPENINGS               ║
+║  Where do tritons accumulate? At d/f block boundaries!    ║
+╚══════════════════════════════════════════════════════════════╝
+
+══ TRITON COUNT vs Z ══
+
+    Z Sym    A  n_d  n_t   f_t%  mag    unp  block  config                n_t visual
+  ───────────────────────────────────────────────────────────────────────────────────────────────────
+    1 H      1    0    0    0.0  para     1  s      1s1                   
+    2 He     4    0    0    0.0  dia      0  s      1s2                   
+    3 Li     7    0    1  100.0  para     1  s      [He]2s1               #
+    4 Be     9    1    1   50.0  dia      0  s      [He]2s2               #
+    5 B     11    2    1   33.3  para     1  p      [He]2s2 2p1           #
+    6 C     12    4    0    0.0  para     2  p      [He]2s2 2p2           
+    7 N     14    5    0    0.0  para     3  p      [He]2s2 2p3           
+    8 O     16    6    0    0.0  para     2  p      [He]2s2 2p4           
+    9 F     19    6    1   14.3  para     1  p      [He]2s2 2p5           #
+   10 Ne    20    8    0    0.0  dia      0  p      [He]2s2 2p6           
+   11 Na    23    8    1   11.1  para     1  s      [Ne]3s1               #
+   12 Mg    24   10    0    0.0  dia      0  s      [Ne]3s2               
+   13 Al    27   10    1    9.1  para     1  p      [Ne]3s2 3p1           #
+   14 Si    28   12    0    0.0  para     2  p      [Ne]3s2 3p2           
+   15 P     31   12    1    7.7  para     3  p      [Ne]3s2 3p3           #
+   16 S     32   14    0    0.0  para     2  p      [Ne]3s2 3p4           
+   17 Cl    35   14    1    6.7  para     1  p      [Ne]3s2 3p5           #
+   18 Ar    40   12    4   25.0  dia      0  p      [Ne]3s2 3p6           ####
+   19 K     39   16    1    5.9  para     1  s      [Ar]4s1               #
+   20 Ca    40   18    0    0.0  dia      0  s      [Ar]4s2               
+   21 Sc    45   16    3   15.8  para     1  s      [Ar]3d1 4s2           ### ← d-BLOCK OPENS
+   22 Ti    48   16    4   20.0  para     2  s      [Ar]3d2 4s2           ####
+   23 V     51   16    5   23.8  para     3  s      [Ar]3d3 4s2           #####
+   24 Cr    52   18    4   18.2  para     6  s      [Ar]3d5 4s1           ####
+   25 Mn    55   18    5   21.7  para     5  s      [Ar]3d5 4s2           #####
+   26 Fe    56   20    4   16.7  para     4  s      [Ar]3d6 4s2           ####
+   27 Co    59   20    5   20.0  para     3  s      [Ar]3d7 4s2           #####
+   28 Ni    58   24    2    7.7  para     2  s      [Ar]3d8 4s2           ##
+   29 Cu    63   22    5   18.5  para     1  s      [Ar]3d10 4s1          #####
+   30 Zn    64   24    4   14.3  dia      0  s      [Ar]3d10 4s2          #### ← d-block CLOSES (Zn: dia!)
+   31 Ga    69   22    7   24.1  para     1  p      [Ar]3d10 4s2 4p1      ####### ← back to p-block
+   32 Ge    74   20   10   33.3  para     2  p      [Ar]3d10 4s2 4p2      ##########
+   33 As    75   22    9   29.0  para     3  p      [Ar]3d10 4s2 4p3      #########
+   34 Se    80   20   12   37.5  para     2  p      [Ar]3d10 4s2 4p4      ############
+   35 Br    79   24    9   27.3  para     1  p      [Ar]3d10 4s2 4p5      #########
+   36 Kr    84   22   12   35.3  dia      0  p      [Ar]3d10 4s2 4p6      ############
+   37 Rb    85   24   11   31.4  para     1  s      [Kr]5s1               ###########
+   38 Sr    88   24   12   33.3  dia      0  s      [Kr]5s2               ############
+   39 Y     89   26   11   29.7  para     1  s      [Kr]4d1 5s2           ########### ← 4d OPENS
+   40 Zr    90   28   10   26.3  para     2  s      [Kr]4d2 5s2           ##########
+   41 Nb    93   28   11   28.2  para     5  s      [Kr]4d4 5s1           ###########
+   42 Mo    96   28   12   30.0  para     6  s      [Kr]4d5 5s1           ############
+   43 Tc    98   29   12   29.3  para     5  s      [Kr]4d5 5s2           ############
+   44 Ru   101   29   13   31.0  para     4  s      [Kr]4d7 5s1           #############
+   45 Rh   103   30   13   30.2  para     3  s      [Kr]4d8 5s1           #############
+   46 Pd   106   30   14   31.8  dia      0  d      [Kr]4d10              ##############
+   47 Ag   107   32   13   28.9  para     1  s      [Kr]4d10 5s1          #############
+   48 Cd   112   30   16   34.8  dia      0  s      [Kr]4d10 5s2          ################ ← 4d CLOSES (Cd: dia!)
+   49 In   115   30   17   36.2  para     1  p      [Kr]4d10 5s2 5p1      #################
+   50 Sn   120   28   20   41.7  para     2  p      [Kr]4d10 5s2 5p2      ####################
+   51 Sb   121   30   19   38.8  para     3  p      [Kr]4d10 5s2 5p3      ###################
+   52 Te   130   24   26   52.0  para     2  p      [Kr]4d10 5s2 5p4      ##########################
+   53 I    127   30   21   41.2  para     1  p      [Kr]4d10 5s2 5p5      #####################
+   54 Xe   131   29   23   44.2  dia      0  p      [Kr]4d10 5s2 5p6      #######################
+   55 Cs   133   30   23   43.4  para     1  s      [Xe]6s1               #######################
+   56 Ba   137   29   25   46.3  dia      0  s      [Xe]6s2               #########################
+   57 La   139   30   25   45.5  para     1  s      [Xe]5d1 6s2           ######################### ← 5d/4f BOUNDARY
+   58 Ce   140   32   24   42.9  para     2  s      [Xe]4f1 5d1 6s2       ######################## ← f-BLOCK OPENS
+   59 Pr   141   34   23   40.4  para     3  s      [Xe]4f3 6s2           #######################
+   60 Nd   144   34   24   41.4  para     4  s      [Xe]4f4 6s2           ########################
+   61 Pm   145   36   23   39.0  para     5  s      [Xe]4f5 6s2           #######################
+   62 Sm   150   34   26   43.3  para     6  s      [Xe]4f6 6s2           ##########################
+   63 Eu   153   34   27   44.3  para     7  s      [Xe]4f7 6s2           ###########################
+   64 Gd   157   33   29   46.8  para     8  s      [Xe]4f7 5d1 6s2       #############################
+   65 Tb   159   34   29   46.0  para     5  s      [Xe]4f9 6s2           #############################
+   66 Dy   163   33   31   48.4  para     4  s      [Xe]4f10 6s2          ###############################
+   67 Ho   165   34   31   47.7  para     3  s      [Xe]4f11 6s2          ###############################
+   68 Er   167   35   31   47.0  para     2  s      [Xe]4f12 6s2          ###############################
+   69 Tm   169   36   31   46.3  para     1  s      [Xe]4f13 6s2          ###############################
+   70 Yb   173   35   33   48.5  dia      0  s      [Xe]4f14 6s2          #################################
+   71 Lu   175   36   33   47.8  para     1  s      [Xe]4f14 5d1 6s2      ################################# ← f-block CLOSES
+   72 Hf   178   36   34   48.6  para     2  s      [Xe]4f14 5d2 6s2      ################################## ← 5d OPENS
+   73 Ta   181   36   35   49.3  para     3  s      [Xe]4f14 5d3 6s2      ###################################
+   74 W    184   36   36   50.0  para     4  s      [Xe]4f14 5d4 6s2      ####################################
+   75 Re   187   36   37   50.7  para     5  s      [Xe]4f14 5d5 6s2      #####################################
+   76 Os   192   34   40   54.1  para     4  s      [Xe]4f14 5d6 6s2      ########################################
+   77 Ir   193   36   39   52.0  para     3  s      [Xe]4f14 5d7 6s2      #######################################
+   78 Pt   195   37   39   51.3  para     2  s      [Xe]4f14 5d9 6s1      #######################################
+   79 Au   197   38   39   50.6  para     1  s      [Xe]4f14 5d10 6s1     #######################################
+   80 Hg   201   37   41   52.6  dia      0  s      [Xe]4f14 5d10 6s2     ######################################### ← 5d CLOSES (Hg: dia!)
+   81 Tl   204   37   42   53.2  para     1  p      [Xe]4f14 5d10 6s2 6p1  ##########################################
+   82 Pb   207   37   43   53.8  para     2  p      [Xe]4f14 5d10 6s2 6p2  ###########################################
+   83 Bi   209   38   43   53.1  para     3  p      [Xe]4f14 5d10 6s2 6p3  ###########################################
+   84 Po   209   41   41   50.0  para     2  p      [Xe]4f14 5d10 6s2 6p4  #########################################
+   85 At   210   43   40   48.2  para     1  p      [Xe]4f14 5d10 6s2 6p5  ########################################
+   86 Rn   222   34   50   59.5  dia      0  p      [Xe]4f14 5d10 6s2 6p6  ##################################################
+   87 Fr   223   36   49   57.6  para     1  s      [Rn]7s1               #################################################
+   88 Ra   226   36   50   58.1  dia      0  s      [Rn]7s2               ##################################################
+   89 Ac   227   38   49   56.3  para     1  s      [Rn]6d1 7s2           ################################################# ← 5f OPENS
+   90 Th   232   36   52   59.1  para     2  s      [Rn]6d2 7s2           ####################################################
+   91 Pa   231   40   49   55.1  para     3  s      [Rn]5f2 6d1 7s2       #################################################
+   92 U    238   36   54   60.0  para     4  s      [Rn]5f3 6d1 7s2       ######################################################
+
+══ AVERAGE TRITON COUNT BY BLOCK ══
+
+  Block     avg n_t   avg unp     count  n_t≈unp?
+  ───────────────────────────────────────────────────
+  s-block      21.5       2.4        60  no
+  p-block      15.1       1.5        30  no
+  d-block      14.0       0.0         1  no
+  f-block       nan       nan         0  no
+
+══ d/f BLOCK BOUNDARY TRITON JUMPS ══
+
+  At each d/f block opening, n_t jumps sharply.
+  At each d/f block CLOSURE, the atom returns to dia.
+
+  Event                             Z    A  n_t  Δn_t  mag    unp
+  ──────────────────────────────────────────────────────────
+  Ca (last s before 3d)            20   40    0     +0  dia      0
+  Sc (3d OPENS)                    21   45    3     +3  para     1
+  Zn (3d CLOSES)                   30   64    4     +1  dia      0
+  Ga (back to 4p)                  31   69    7     +3  para     1
+  Sr (last s before 4d)            38   88   12     +5  dia      0
+  Y  (4d OPENS)                    39   89   11     -1  para     1
+  Cd (4d CLOSES)                   48  112   16     +5  dia      0
+  In (back to 5p)                  49  115   17     +1  para     1
+  Ba (last s before 5d/4f)         56  137   25     +8  dia      0
+  La (5d OPENS)                    57  139   25     +0  para     1
+  Ce (4f OPENS)                    58  140   24     -1  para     2
+  Yb (4f CLOSES)                   70  173   33     +9  dia      0
+  Lu (back to 5d)                  71  175   33     +0  para     1
+  Hg (5d CLOSES)                   80  201   41     +8  dia      0
+  Ra (last s before 6d/5f)         88  226   50     +9  dia      0
+  Ac (6d/5f OPENS)                 89  227   49     -1  para     1
+
+══════════════════════════════════════════════════════════════
+  VERDICT: TRITON PILEUP AND SHELL OPENINGS
+
+  The neutron excess n_t = A - 2Z grows FASTEST at d/f boundaries.
+  s/p block (Z=1-20):  n_t stays 0-1 (deuteron dominated)
+  3d opens (Z=21):     n_t JUMPS to 3+ and climbs through d-block
+  3d closes (Z=30):    element returns to DIAMAGNETIC
+  Pattern repeats at 4d (Z=39-48) and 5d (Z=72-80).
+  f-block (Z=58-70):   n_t climbs STEEPLY (lanthanides)
+  f-block (Z=90+):     n_t climbs even faster (actinides)
+
+  The nuclear grammar REQUIRES more tritons precisely where
+  the electronic structure opens d and f shells.
+  The tritons ARE the d/f slots.

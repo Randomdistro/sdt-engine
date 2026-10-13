@@ -47,3 +47,17 @@ No least-squares scale is permitted.
 - `SCALE_CONVENTION_PASS (Hi)` if C3 met.  
 - `SCALE_CONVENTION_UNRESOLVED` if C4.  
 No EMPIRICALLY SURVIVES / EXCLUDED for SDT solar **K** from this loop.
+
+---
+
+## Audit correction 2026-10-05 (record / status)
+
+**Finding:** Ids read GOM35-C* against folder GOM_DAT8, and its outcome is a failed gate with an unresolved convention.
+
+**Correction:** Align the ids and record the unresolved scale as the chain's open item.
+
+**Status:** ANNOTATED — label, status or tally corrected in the record; no re-score of earlier runs.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*
+
+**Id alias (2026-10-05):** claim ids written `GOM35-C*` in this folder and its verdict are the claims of `GOM_DAT8`. The rows are VERIFICATION (data-structure, checksum and field-parse checks), not tests of a physical claim, and are excluded from physics PASS/FAIL tallies; earlier text is not rewritten.

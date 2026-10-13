@@ -304,3 +304,15 @@ Comparison source: Kestin, Knierim, Mason, Najafi, Ro and Waldman,
 *J. Phys. Chem. Ref. Data* **13** (1984) 229, Table 3,
 doi:10.1063/1.555703.  Boundary source: Bondi,
 *J. Phys. Chem.* **68** (1964) 441, doi:10.1021/j100785a001.
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** The ν gate is "within one order of magnitude" (factor ≲ 10), and the circulation-quantum gate κ = h/m_He (<1%) is, by the prompt's own words, "essentially by construction".
+
+**Correction:** Tighten ν to ≤ 20% for air and water and score κ = h/m as IDENTITY.
+
+**Status:** RULE RECORDED — corrected gate or definition applies to the next run; the earlier result is not re-scored and nothing was re-run.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

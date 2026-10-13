@@ -1,0 +1,153 @@
+### 16/CH02_Ionic_and_Metallic_Bonding_from_Electropause_Transfer  | status: SPEC (10× upgrade 2026-06-29). | words 5304 | code 2 outs 2 verd 1 runlog 1 | gate True prereg True
+Q: Whether the ionic bond can be derived as an electropause handed off *entirely* to the partner and the metallic bond as electropauses *delocalised* into a lattice sea — recovering NaCl's lattice energy (~787 kJ/mol) and a metal's bonding radius from electropause/occlusion balance, with NO charge substance ("charge" = handed redir
+F: §⑧ falsification tests with concrete numeric triggers: wrong ionic/covalent split, lattice energy that cannot cohere without importing the Coulomb (or literature Madelung) constant as a fitted primitive, wrong sign, or post-hoc tuning of the occlusion-pressure scale to hit 787 kJ/mol (IDENTITY-PASS)
+G: 3. **How will we find out?** — Gated phases in §④: (P1) transfer criterion from APS01 well depths,
+G: energy within ~25%; hands the same field to CM02.
+G: | Lattice = geometric occlusion sum | NaCl lattice energy 787 kJ/mol within 15%, correct (cohesive) sign | >15% off 787 kJ/mol after pivot ⇒ OPEN; wrong sign ⇒ KILL |
+G: | Metallic = delocalised sea | Na bonding R and cohesion within 25% of measured from one uniform pressure | >25% off after pivot ⇒ OPEN; needs band theory to cohere ⇒ KILL metallic-sea hypot
+G: - Phase thresholds (committed before run): P1 ionic/covalent split correct for >=15 ref pairs · P2 NaCl lattice energy within 15% of 787 kJ/mol, correct sign · P3 Na radius+cohesion within 2
+V: # CH02 — VERDICT: Ionic & Metallic Bonding from Electropause Transfer
+V: | P1 transfer split | 15/15 correct; **clean gap** — max covalent Δχ 1.114 eV < min ionic Δχ 3.717 eV (threshold non-critical across a 2.6 eV window) | ≥13/15 | **PASS** |
+V: | P2 NaCl lattice energy | Evjen geometric sum **M = 1.747574** (pure lattice geometry; literature 1.747565 is a cross-check, not input) → **861.0 kJ/mol** vs 787 (**+9.4%**) | ±15% | **PASS** |
+V: | P4 novel KCl | **771.8 kJ/mol** vs 715 (**+7.9%**), same formula, no refit | ±20% | **PASS** |
+V: | P4 stress MgO | **4611.6 kJ/mol** vs 3791 (**+21.6%**) | ±20% | **FAIL** (reported) |
+O: CH02 SUMMARY
+O: P1 transfer split : PASS (15/15, clean gap)
+O: P3 metallic sea : FAIL -> OPEN (Law V confinement cost underived)
+FLAGS: MISSING:Investigations/10_Fluid_Dynamics/FD02_Viscosity_and_Circulation_Quantum/FD02_VERDICT.md ; LOOSE:25;369;460 ; ident:12 ; res pass/fail 8/5 verd pass/fail 7/6
+
+### 16/CH03_Periodic_Table_and_Valence_from_Shell_Wake_Cancellation  | status: SPEC (10× upgrade 2026-06-29). | words 4271 | code 1 outs 1 verd 1 runlog 1 | gate True prereg True
+Q: Whether periodicity, valence number, and the octet rule can be derived from the period-2 wake-cancel map (paired fore/aft wakes silent, lone wakes active) — so that an atom's chemistry is set by its count of **active (uncancelled)** wakes — with **no orbitals, no subshells, no Aufbau wavefunction**. 2. **Why does it matter?** — 
+F: §⑧ numeric triggers: valence/octet that cannot reproduce without subshell filling, or O₂/N₂ paramagnetism coming out wrong. 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN). ## ⓪⁺ Anti-Tautology Fire
+G: 3. **How will we find out?** — Gated phases in §④: a wake tally for Z=1–18, the octet as the
+G: - Phase thresholds (committed before run): P1 standard valence correct for ALL Z=1–18 · P2 He/Ne/Ar emerge as zero-active-wake (octet reproduced as rule) · P3 O₂ paramagnetic + N₂ diamagneti
+G: | A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimin
+G: - Post-hoc tolerance widening · coefficient plugs · `atomic::`/GM/G in Phase-1 native chain · seeding the wake tally from the known electron configuration then claiming NATIVE · subshell/Auf
+G: # RUN 2 PROMPT (2026-07-06) — valence from mesh closure: the O₂/N₂ dual gate
+V: # CH03 — VERDICT: Periodic Table & Valence from Shell Wake-Cancellation
+V: | P1/M0 valence tally | `active(n)=min(n,2S−n)` on CALIBRATED capacities {2,8,8}: **18/18** Z=1–18 | matches — but capped: **re-labelling** unless M1 derives the filling |
+V: | M1 native filling | exact enumeration, 1/d seat kernel: **6/8** — fails at n=2 (min-energy = antipodal pair → Be active 0, needs 2) and n=6 (min-energy = 3 full diagonals → O active 0, needs 2) | **
+V: The honest content: the min(n, 2S−n) arithmetic reproduces every main-group valence, **but the machinery does not yet own it** — static seats with a 1/d kernel pair up at n=2 and n=6 instead of spread
+V: ## FAILURE RECOVERY (§D seven questions)
+O: M1 native filling : 6/8 FAIL - tally is seeded
+O: M2 pairing->magnetism: FAIL on M2-O2
+O: Committed-gate failures: ['M1-native-filling', 'M2-O2']
+FLAGS: MISSING: ; ident:3 ; res pass/fail 0/2 verd pass/fail 0/5
+
+### 16/CH04_Molecular_Geometry_VSEPR_from_Wake_Balance  | status: SPEC (10× upgrade 2026-06-29). | words 1500 | code 1 outs 1 verd 1 runlog 1 | gate True prereg True
+Q: Whether the full VSEPR ladder (104.5° / 107° / 109.5° / 180° / 120° / 90°) can be derived across many molecules as wake-torque equilibria around a central atom — lone-pair wakes heavier than bond-pair wakes — with **no sp³/sp²/sp hybridisation invoked anywhere as mechanism**. 2. **Why does it matter?** — Geometry is just the ang
+F: §⑧ numeric triggers: angles unreproducible without hybridisation; the compression needing a second knob; the novel outlier missed. 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN). ## ⓪⁺ Anti-Tautolo
+G: 3. **How will we find out?** — Gated phases in §④: symmetric solids from equal wakes, the lone-pair compression ladder with one ratio, an extended hypervalent + multiple-bond set, then a nov
+G: interaction for N equal wakes (N=2…6). *Success:* 180/120/109.5/90 within <1° for equal wakes.
+G: CO₂ linear, H₂CO ~120° all qualitatively + within a few degrees.
+G: - Phase thresholds (committed before run): P1 symmetric solids 180/120/109.5/90 within <1° for equal wakes · P2 H2O 104.5°/NH3 107°/CH4 109.5° to <=1° with ONE w_lone/w_bond · P3 SF4/ClF3/Xe
+G: | A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimin
+V: # CH04 — VERDICT: Molecular Geometry (VSEPR) from Wake Balance
+V: | P1 equal wakes | 180.000 / 120.000 / 109.471 / TBP{90,120,180} / 90.000 — all exact | **PASS** |
+V: | P2 ladder, ONE ratio | **w_L/w_B = 1.24** (CALIBRATED(1)) → NH₃ **106.79°** (−0.21), H₂O **104.58°** (+0.08); CH₄ 109.47 ratio-free | **PASS ≤1°** |
+V: | P3 same ratio | SF₄ seesaw ✓ (lone equatorial); ClF₃ T-shape ✓ (bonds 85.6/171.2 vs measured 87.5); CO₂ 180.00 ✓; H₂CO opening ORDER ✓ (magnitudes off: HCH 101.6 vs 116.5); **XeF₄ ✗** (lones settle 
+V: | P4 novel, same ratio | H₂S predicted 104.58 vs **92.1** (+12.5°); PH₃ 106.79 vs **93.5** (+13.3°) | **FAIL — fit-only trigger fires, as pre-registered** |
+O: PH3 predicted 106.79 vs measured 93.5 -> miss +13.29 deg [FAIL >5deg: fit-only trigger fires]
+O: CH04 SUMMARY
+O: committed-gate failures: ['P3-XeF4', 'P4-H2S', 'P4-PH3']
+FLAGS: MISSING: ; ident:4 ; res pass/fail 10/3 verd pass/fail 2/2
+
+### 16/CH05_Reaction_Energetics_and_Activation_from_Wake_Reconfiguration  | status: SPEC (10× upgrade 2026-06-29). | words 3651 | code 1 outs 1 verd 1 runlog 1 | gate True prereg True
+Q: Whether reaction enthalpy ΔH can be derived as the difference in total wake-cost between reactant and product electropause configurations, and the activation barrier Eₐ as the highest wake-cost point (a wake *saddle*) along the reconfiguration path, with catalysis simply a lower-wake route — NO transition-state wavefunctions, NO
+F: §⑧ numeric triggers: ΔH signs or magnitudes wrong across the reaction set, or barriers that cannot be located without an orbital correlation diagram (a quantum TS). 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / 
+G: 3. **How will we find out?** — Gated phases in §④: ΔH bond-energy bookkeeping, then Eₐ as a 1-D wake-cost saddle, then catalysis as improved cancellation along the path, then a novel Eₐ/BEP-
+G: in/out. *Success:* ΔH sign correct for ≥12 reactions, magnitude within ~15% (combustion,
+G: - Phase thresholds (committed before run): P1 ΔH sign correct for >=12 reactions, magnitude within 15% · P2 correct Eₐ ORDERING across a homologous series + Hammond early/late TS correlation
+G: | A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimin
+G: - Post-hoc tolerance widening · coefficient plugs · `atomic::`/GM/G in Phase-1 native chain · claiming NATIVE on ΔH bond-sum alone (it is the identity) · reading the barrier height off the m
+V: # CH05 — VERDICT: Reaction Energetics & Activation from Wake Reconfiguration
+V: | P2 barrier = wake saddle | M-SADDLE (budget split): **Eₐ = 0.0 kJ/mol** — the deeper well always holds the seat, path is barrierless. M-SADDLE+ (end-end pair term): symmetric H₃ comes out **BOUND by
+V: ## FAILURE RECOVERY (§D seven questions — P2)
+V: 1. Why: with pairwise-additive wells and a linear engagement budget, U = min(V₁,V₂); every exchange path can pass through (Re,Re) at −De, so Eₐ = 0 exactly. Adding the end-end pair term makes it worse
+V: **Recovery grade: PARTIAL** — premise (pairwise additivity) and native freedom (window mis-mesh cost) named; not built. Re-open condition: NP10 angular-window law lands a quantitative window cost → re
+O: CH05 SUMMARY
+O: P2 saddle: DID NOT EMERGE - honest FAIL/OPEN
+O: committed-gate failures: ['P2-no-saddle']
+FLAGS: MISSING: ; LOOSE:25 ; ident:12 ; res pass/fail 0/2 verd pass/fail 0/3
+
+### 16/CH06_Hydrogen_Bonding_and_van_der_Waals_from_Residual_Wake  | status: SPEC (10× upgrade 2026-06-29). | words 1568 | code 1 outs 1 verd 1 runlog 1 | gate True prereg True
+Q: whether the hydrogen bond and the van der Waals / London force can be derived as the *residual, fluctuating wake* that leaks outside a molecule's electropause — recovering the ~20 kJ/mol H-bond, the 1/r⁶ London scaling, and water's density-maximum-at-4 °C anomaly — with NO induced-dipole wavefunctions and NO orbital overlap. 2. 
+F: §⑧ numeric triggers: dispersion needing induced dipoles (power ≠ 6), or the H-bond / water anomaly needing an orbital model. 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN). ## ⓪⁺ Anti-Tautology Fir
+G: 3. **How will we find out?** — gated phases in §④: derive 1/r⁶ from correlated residual-wake fluctuation, the H-bond energy/geometry from a rim residual, water's turnover from network-vs-pac
+G: - Phase thresholds (committed before run): P1 derive 1/r⁶ exponent (not assumed) + monotonic growth with molecular wake size across noble gases/alkanes · P2 H-bond energy in 10–40 kJ/mol ban
+G: | A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimin
+G: - Post-hoc tolerance widening · coefficient plugs · `atomic::`/GM/G in Phase-1 native chain · assuming the London 1/r⁶ form then claiming NATIVE · tuning the residual-wake amplitude to hit 2
+V: # CH06 — VERDICT: Hydrogen Bonding & van der Waals from Residual Wake
+V: | P1a static pair-pair exponent | fitted slope **−3.0037** over r/d ∈ [10,100] (gate −3.00±0.05) | **PASS** |
+V: | P1b correlated-fluctuation exponent | fitted slope **−6.0225 / −6.0224** under ×10 changes of seat stiffness κ AND jitter scale T (gate −6.00±0.05, invariance required) — the London −6 **emerges as 
+V: | P2 H-bond | exact 4-point sums, d = p/e from measured rim moments: **HF 20.35** (measured 19.1), **H₂O 12.40** (20.8, in 10–40 band), **NH₃ 6.01** (13.2, below band); O–H···O > N–H···N ✓; **linearit
+V: | P4 novel ordering | 2/3 pairwise relations (NH₃-weakest ✓✓; **HF vs H₂O missed** — predicted HF>H₂O, measured dimers 19.1<20.8) | **FAIL** (gate 3/3, as pre-registered risk) |
+O: pairwise relations correct: 2/3 (gate 3/3) [FAIL]
+O: CH06 SUMMARY
+O: committed-gate failures: 1
+FLAGS: MISSING: ; ident:3 ; res pass/fail 6/1 verd pass/fail 3/2
+
+### 16/CH07_Molecular_Spectra_Vibration_and_Rotation  | status: SPEC (10× upgrade 2026-06-29). | words 4837 | code 2 outs 2 verd 1 runlog 1 | gate True prereg True
+Q: Whether IR/Raman vibrational lines can be derived as oscillations of the bond-wake (the shared electropause flexing along its axis) and microwave rotational lines as whole-molecule rotation of the wake field — recovering the CO stretch ~2143 cm⁻¹, the CO rotational constant B, and the ν∝√(k/μ) mass dependence — with NO normal-mo
+F: §⑧ numeric kill triggers: spectra require normal-mode / rigid-rotor wavefunctions, or each channel needs its own postulate. 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN). ## ⓪⁺ Anti-Tautology Fire
+G: 3. **How will we find out?** — Gated phases in §④: vib frequencies from the CH01 well curvature → k, then ω=√(k/μ); rot B from wake-winding-quantised whole-molecule rotation; demonstrate one
+G: → k; ω=√(k/μ). *Success:* CO 2143 cm⁻¹, HCl 2886 cm⁻¹, H₂ 4401 cm⁻¹ within ~10%; correct √(k/μ)
+G: moment of inertia I=μR². *Success:* CO B≈1.93 cm⁻¹, HCl B≈10.6 cm⁻¹ within ~10%; even 2B spacing.
+G: - **QUALIFIED (C):** CO/HCl vib & rot within ~10% with the stiffness scale CALIBRATED(1).
+G: - Phase thresholds (committed before run): P1 CO 2143 / HCl 2886 / H2 4401 cm⁻¹ within 10%, correct √(k/μ) ordering + HCl→DCl isotope shift · P2 CO B≈1.93 / HCl B≈10.6 cm⁻¹ within 10%, even 
+V: # CH07 — VERDICT: Molecular Spectra (Vibration & Rotation)
+V: | P1 native k | shared-seat minimisation: **g\* = −4.19615 at x\* = 0.2887** (H₂⁺ gives exactly −3 at the midpoint — the same machinery as NP17's deuteron factor 3). Well is E = g\*αℏc/R, scale-free →
+V: | P2 isotopologues | k back-solved (DECLARED circular for the parent ν — caps at C) then mass-only transfers, zero new inputs: **DCl −0.002%, D₂ −0.070%, ¹³CO +0.001%** (gates <0.5%) | **PASS** — the 
+V: | P4 novel | **B(DCl) = 5.4490 vs 5.4488 (+0.004%)**, mass-only, zero new inputs | **PASS** |
+V: | P3-unification | one quantiser for all channels: not demonstrable here | **OPEN** (owner PPT06/APS04; live door FLM14) |
+O: G-C sign (w_e x_e > 0): PASS ; ratio 0.0186 vs 0.0276 REPORT-ONLY
+O: G-D isotope regression: PASS
+O: Exit: 0 (ran to completion; verdicts are the printed lines above)
+FLAGS: MISSING: ; LOOSE:25;369;2996 ; Gcode:1 ; ident:27 ; res pass/fail 20/30 verd pass/fail 6/18
+
+### 16/CH08_Electron_Affinity_Trends  | status: OPEN — specification seed (benchmark-coverage alignment 2026-07-29; ca | words 219 | code 0 outs 0 verd 0 runlog 0 | gate True prereg False
+Q: The sign and ordering of electron affinities across the periodic table: why halogens accept riders eagerly, noble configurations refuse, and the N/O anomaly inverts naive ordering. Measured anchors: standard electron-affinity tables. ## SDT footing Affinity is the mirror of ionisation (APS10): the price a nearly-complete void st
+F: sign accuracy < 80%, or the anomaly requiring a fitted correction. - Anchors: measured EA table, Z = 1–36. - Tolerance: sign ≥ 80% opening; magnitudes are a later phase. ## Benchmark linkage Catalogue row B30 · suite coverage roster · tally on computed number only.
+G: > row B30). **Author:** J. C. Harvey, Melbourne. Gateways binding.
+G: Z = 1–36 at ≥ 80% (the original sheet's gate, adopted) with the N/O anomaly landing
+G: - Tolerance: sign ≥ 80% opening; magnitudes are a later phase.
+FLAGS: MISSING: ; LOOSE:80 ; res pass/fail 0/0 verd pass/fail 0/0
+
+### 16/CH09_Atomic_Radius_Canonical  | status: OPEN — specification seed (benchmark-coverage alignment 2026-07-29; ca | words 237 | code 0 outs 0 verd 0 runlog 0 | gate True prereg False
+Q: The periodic trends of atomic size — shrinking across a period, jumping at each new shell — under a single native definition of "radius." Measured anchors: covalent radius tables (Cordero) as the comparison set. ## SDT footing Natively an atom's size is the reach of its outermost occupied seat — the radius at which the outer rid
+F: correlation < 0.85 or a shell jump displaced by more than one group. - Anchors: Cordero covalent radii. - Tolerance: as stated; magnitudes phase two. ## Benchmark linkage Catalogue row B31 · suite coverage roster · tally on computed number only.
+G: > row B31). **Author:** J. C. Harvey, Melbourne. Gateways binding.
+G: sheet's gate (correlation ≥ 0.85 with closure offsets ≤ 1 group) is adopted.
+FLAGS: MISSING: ; res pass/fail 0/0 verd pass/fail 0/0
+
+### 17/RTM01_Thrust_Ledger_and_Straight_Line_Pricing  | status: pre-registered | words 559 | code 1 outs 1 verd 1 runlog 0 | gate True prereg True
+Q: rust Mechanics (RTM) — new domain, first investigation. > **Consumes:** GOM23's validated instruments and closure table (run GOM23 first). ## 0. The question, stated exactly For every action, an equal and opposite response. This domain treats **the forced state**: motion held against the field's line by reaction. RTM01 asks three things at once — - **(A) Formalism:** what does koppa charge for straightness? Derive the thrust-ledger laws for linear motion through a depth gradient from Law IV
+F: ication table | ID | Condition that fails this investigation | |----|------------------------------------------| | F1 | hover cross-check vs `bridge::g_surface` beyond 0.1% | | F2 | budget identity broken at any rung along a powered path | | F3 | any ledger law requiring a π or an input outside §1 |
+G: ## 2. Phases and pre-registered gates
+G: Δv⊥ = 2c²ϟ/(bv); per-metre toll dz/dl along a straight chord. Gate: the hover row at the
+V: # RTM01 — Verdict (dual)
+V: ## Prompt completion: **A** — all four phases executed, 3/3 gates PASS, 0 FAIL.
+V: ## Physics class: **NATIVE (the ledger formalism + the pricing) · SHARED-FORM (first-order values) · SPEC (E110)**
+V: passage Δv⊥ = 2c²ϟ/(bv) the reaction to pass straight
+V: the line is not. The straight-pass bill runs from 6.3 km/s (Earth, b = 2R) down to
+O: G3 ratio law theta_slow/theta_light = c^2/2v^2 got 1 ref 1 dev 0.00000% PASS
+O: RESULT: 3 gates PASS, 0 FAIL.
+FLAGS: MISSING: ; ident:5 ; res pass/fail 4/1 verd pass/fail 1/1
+
+### 17/RTM02_Velocity_Derived_Mass_and_the_Expulsion_Ledger  | status: pre-registered | words 695 | code 1 outs 1 verd 1 runlog 0 | gate True prereg True
+Q:  Thrust Mechanics. **Consumes:** RTM01 (the hover price > 10^81.9/day at v_ex = 4.5 km/s is the anchor this investigation must reproduce, then alter). ## 0. The thesis, stated exactly Propulsion is reactionary action priced purely by the **vector resistance of the expelled quanta at their speed of expulsion**. The mathematics is rebuilt to show: **velocity derives mass.** Presence (the baryon count N) and volume (the per-quantum displacement at rest) are the invariable quanta of matter — they
+F: ication table | ID | Condition that fails this investigation | |----|------------------------------------------| | F1 | gearing from Law V ≠ 1/√(1−v²/c²) anywhere in range | | F2 | Δm ≠ E_k/c² (velocity-derived mass broken as arithmetic) | | F3 | RTM01's 10^81.9 anchor not reproduced at chemical v_e
+G: ## 2. Phases and pre-registered gates
+G: Gates: (a) c/v_circ ≡ 1/√(1−v²/c²) to machine precision across the range; (b) the
+G: Gate: reproduces RTM01's 10^81.9/day at v_ex = 4.5 km/s within 0.1 in the exponent.
+G: 0.9c → the c floor, both ledgers, whole-range single pass. Gate: monotone descent onto
+G: expulsion speed: minimise E(v_ex) = ½(e^{Δv/v_ex}−1)·v_ex² numerically. Gate: the
+V: # RTM02 — Verdict (dual)
+V: ## Prompt completion: **A** — all five phases executed, 9/9 gates PASS, 0 FAIL.
+V: ## Physics class: **NATIVE (derivation route + decomposition + floor theorem) · SHARED-FORM (numerical values)**
+V: - *Open ledger* (propellant-only): momentum per unit rest mass = (c/v_circ)·v_ex.
+V: - The open ledger prices propellant only; its "cheaper than the floor" rows at high v_ex
+O: G5a optimum satisfies its own stationarity equation got 1 ref 1 dev 0.000001% PASS
+O: G5b the ~0.63*dv scaling emerges (not inserted) got 0.6275 ref 0.6275 dev 0.000079% PASS
+O: RESULT: 9 gates PASS, 0 FAIL.
+FLAGS: MISSING: ; res pass/fail 9/1 verd pass/fail 1/1

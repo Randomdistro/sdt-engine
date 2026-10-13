@@ -1,0 +1,34 @@
+PM03 blank-slate run 1 (registered in PM03_RESET_ASSESSMENT_2026-10-10.md sections 0-2)
+=======================================================================
+
+[Phase 0] |c - 1/sqrt(mu0 eps0)|/c = 2.167e-14 (gate 1e-9) -> met
+[V1] C = 1, 300 steps: max |u - shifted initial| = 8.29e-25 -> met
+[V2] C = 0.5, sigma = 8, 1000 steps vs the exact discrete (Fourier) solution: max error 4.01e-14 (gate 1e-10) -> met ; descriptive: difference from d'Alembert 4.35e-02 (numerical dispersion)
+[V3] discrete energy drift over 1000 steps 5.55e-15 (gate 1e-10) -> met
+VALIDATIONS: met
+
+[Phase 1] C = 1.00, sigma = 8 cells: v_peak/c = 1.00000000 ; final peak / initial = 1.0000 ; max|u| over run / initial = 1.0000 ; energy drift 6.7e-16 -> criterion met
+[Phase 1] C = 1.00, sigma = 1 cells: v_peak/c = 1.00000000 ; final peak / initial = 1.0000 ; max|u| over run / initial = 1.0000 ; energy drift 2.2e-16 -> criterion met
+[Phase 1] C = 0.90, sigma = 8 cells: v_peak/c = 0.99963067 ; final peak / initial = 0.9968 ; max|u| over run / initial = 1.0001 ; energy drift 4.4e-15 -> criterion met
+[Phase 1] C = 0.90, sigma = 2 cells: v_peak/c = 0.99828799 ; final peak / initial = 0.6955 ; max|u| over run / initial = 1.0003 ; energy drift 5.0e-15 -> criterion met
+[Phase 1] C = 0.50, sigma = 8 cells: v_peak/c = 0.99858176 ; final peak / initial = 0.9944 ; max|u| over run / initial = 1.0004 ; energy drift 5.6e-15 -> criterion met
+[Phase 1] C = 0.50, sigma = 2 cells: v_peak/c = 0.99592868 ; final peak / initial = 0.5800 ; max|u| over run / initial = 1.0048 ; energy drift 3.8e-15 -> criterion met
+[Phase 1] C = 0.50, sigma = 1 cells: v_peak/c = 0.99615340 ; final peak / initial = 0.3201 ; max|u| over run / initial = 1.0055 ; energy drift 2.8e-15 -> criterion met
+Phase 1 (all seven): met
+[F3 stability] C = 1.05, sigma = 8: max|u| over 1500 steps / initial = inf ; final peak / initial = 0.000e+00 -> UNSTABLE (class populated)
+
+---- Analytic lattice dispersion ----
+1-D leapfrog: q, then v_p/c and v_g/c for C = 0.5 and C = 1
+  q = 0.1000 :  C = 0.5: v_p/c = 0.999687, v_g/c = 0.999062 ;  C = 1.0: v_p/c = 1.000000, v_g/c = 1.000000 ;
+  q = 0.5000 :  C = 0.5: v_p/c = 0.992157, v_g/c = 0.976412 ;  C = 1.0: v_p/c = 1.000000, v_g/c = 1.000000 ;
+  q = 1.0000 :  C = 0.5: v_p/c = 0.968280, v_g/c = 0.903938 ;  C = 1.0: v_p/c = 1.000000, v_g/c = 1.000000 ;
+  q = 1.5708 :  C = 0.5: v_p/c = 0.920214, v_g/c = 0.755929 ;  C = 1.0: v_p/c = 1.000000, v_g/c = 1.000000 ;
+  q = 3.1416 :  C = 0.5: v_p/c = 0.666667, v_g/c = 0.000000 ;  C = 1.0: v_p/c = 1.000000, v_g/c = inf ;
+3-D cubic, C = 1/sqrt(3): v_p/c along the axis and along the diagonal (|q| fixed)
+  |q| = 0.10 : axis 0.99972215 ; diagonal 1.00000000 ; (axis - diagonal) = -2.778e-04
+  |q| = 0.50 : axis 0.99301229 ; diagonal 1.00000000 ; (axis - diagonal) = -6.988e-03
+  |q| = 1.00 : axis 0.97153747 ; diagonal 1.00000000 ; (axis - diagonal) = -2.846e-02
+Physical scale: 31 GeV photon, dx = l_P: q = E l_P/(hbar c) = 2.539e-18 ; delta v_p/c = -q^2/36 (3-D axis, C = 1/sqrt3) = -1.791e-37 ; -(1-C^2) q^2/24 with C = 0.5 = -2.015e-37
+
+[Phase 2] c_T = c = 299792458.0 m/s ; c_L = c/sqrt(3) = 173085256.3 m/s : IDENTIFICATION (FD05); not computed or tested here (D3)
+[Phase 3] DEFER

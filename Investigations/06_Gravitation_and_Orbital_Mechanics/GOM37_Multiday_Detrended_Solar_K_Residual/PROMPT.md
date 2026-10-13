@@ -47,3 +47,15 @@ two GOM36 defects are addressed:
 Still not EMPIRICALLY SURVIVES even if C4 fires. ODF scale definition remains
 open (DAT). This loop only asks whether a detrended multi-day residual tracks
 frozen-**K** geometry above amplitude/confound gates.
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** Rows C1–C3 pass on data availability ("4× K252 HAVE"), a fitted train scale, and a geometric range for b, none of which tests solar K, and the real gate failed (amplitude ratio 7.07e6).
+
+**Correction:** Report the failed amplitude and correlation gates as the result and treat the rest as setup.
+
+**Status:** ANNOTATED — label, status or tally corrected in the record; no re-score of earlier runs.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

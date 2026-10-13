@@ -1,0 +1,28 @@
+======================================================================
+ FLM12-D1 : deuteron binding from the synchrony-saving mechanism
+======================================================================
+  TARGET (measured)         E_bind = 2.2246 MeV
+  inputs: R_p=0.8414 fm  D=1.94 fm  m_N c^2=938.918 MeV  alpha*hbar*c=1.4400 MeV*fm
+
+  [FACT] hard boundaries touch only if D < 2R_p = 1.683 fm.  Here D=1.94 fm.
+         => at the deuteron separation the R_p boundaries DO NOT OVERLAP (gap 0.257 fm). 
+
+  candidate                                           tag            E(MeV)  x target
+  ------------------------------------------------------------------------------------
+  hard-sphere R_p overlap x density                   PRINCIPLED      0.000    0.00x
+  influx solid-angle share  m_N c^2 * (Omega_B/4pi)   PRINCIPLED     44.154   19.85x
+  bare shared internal electron  m_e c^2              PRINCIPLED      0.511    0.23x
+  NP17 electrostatic  3*alpha*hbar*c / D  (DIFFERENT mechanism)COMPARATOR      2.227    1.00x
+  mutual solid-angle SQUARED  m_N c^2 *(Omega/4pi)^2  FISHED          2.076    0.93x
+  shared-electron x factor 4.35                       FISHED          2.224    1.00x
+
+  READING:
+  - PRINCIPLED spread = 0.511 .. 44.2 MeV : brackets 2.224 but does NOT predict it.
+  - hard R_p boundaries do not touch at D -> binding is a FAR-FIELD influx effect,
+    profile rho_eng(r>R_p) UNSPECIFIED (same open kernel as FLM03<->FLM10).
+  - the only expression that LANDS is the COMPARATOR (NP17 electrostatic), a DIFFERENT
+    mechanism; the synchrony route does not independently reproduce it.
+  - the SQUARED form lands at 2.08 MeV but its exponent was FISHED -> numerology, not a result.
+
+  VERDICT: D1 does NOT pay out. Synchrony mechanism ACCOMMODATES 2.224 MeV (with a chosen
+           profile/exponent) but does not DERIVE it. FLM12 quantitative ledger stays UNPAID.

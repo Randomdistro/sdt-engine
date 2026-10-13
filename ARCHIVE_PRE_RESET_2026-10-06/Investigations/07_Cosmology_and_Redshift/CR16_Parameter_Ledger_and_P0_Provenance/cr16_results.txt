@@ -1,0 +1,146 @@
+======================================================================================
+CR16 - PARAMETER LEDGER AND THE PROVENANCE OF P_0
+Pre-registered: PROMPT.md.  z=1100 and T=3000 K are struck; neither appears here.
+======================================================================================
+
+--------------------------------------------------------------------------------------
+T1 - PROVENANCE OF P_0.  Document Part II: 'P_0 = P_eff,sun / z_sun'  [C]
+--------------------------------------------------------------------------------------
+  radiation constant a = 4 sigma/c      = 7.565733e-16 J/m3/K4
+  u_CMB = a T_0^4                       = 4.174801e-14 J/m3
+  P_rad = u/3  (photon gas)             = 1.391600e-14 Pa
+  P_0 as stated in the document         = 1.391600e-14 Pa
+  relative difference                   = 2.203e-07   (agreement to 6.7 significant figures)
+  T1 CONFIRMED - P_0 IS the CMB photon-gas pressure, a function of T_0
+
+  Corroboration from the repo itself (Benchmarks/investigation_output.txt:130-132):
+      T_CMB = 2.7255 K ,  u_CMB = 4.1748e-14 J/m3 ,  P_rad = 1.3916e-14 Pa
+  The engine's own output labels this number P_rad and computes it from T_CMB.
+
+  What P_eff,sun would have to be for the stated route to produce it:
+      P_eff,sun = P_0 * z_sun = 2.9502e-20 Pa
+  laws.hpp's P_eff (electropause, 4 k_e e^2 / (pi R_p^2 r_e^2)) is ~5.2e31 Pa - 51
+  orders away. The solar attribution in Part II does not source this number.
+
+--------------------------------------------------------------------------------------
+T2 - IS  P ~ N^4  AN INDEPENDENT POSTULATE?
+--------------------------------------------------------------------------------------
+  P6 asserts two clauses, both tagged [A, C]:   T_N = N T_0   and   P_N = N^4 P_0
+  Given T1, substitute the first into the photon-gas relation:
+      P_N = a T_N^4 / 3 = a (N T_0)^4 / 3 = N^4 * (a T_0^4 / 3) = N^4 P_0
+
+  numerical check across the ladder (no epoch is privileged; N values are arbitrary):
+      N            a(N T_0)^4/3 [Pa]  N^4 P_0 [Pa]       ratio     
+      0.5          8.697502e-16       8.697502e-16       1.0000000000
+      2            2.226560e-13       2.226560e-13       1.0000000000
+      17           1.162278e-09       1.162278e-09       1.0000000000
+      500          8.697502e-04       8.697502e-04       1.0000000000
+      4200         4.330237e+00       4.330237e+00       1.0000000000
+      1e+07        1.391600e+14       1.391600e+14       1.0000000000
+
+  T2 CONFIRMED: the second clause of P6 is a THEOREM of the first, not a postulate.
+  -> P6 loses a clause. The postulate count of the sector goes DOWN by one.
+  -> P_0 leaves the [C] list: it is a function of T_0, not an independent input.
+  -> Corollary: the pressure ladder carries no information the temperature ladder
+     lacks. It is the same statement in other units - which is a REDUNDANCY, not an
+     error, and redundancy is what a closed framework should show.
+
+--------------------------------------------------------------------------------------
+T3 - DEPENDENCY AUDIT: which [C] inputs does each result actually consume?
+--------------------------------------------------------------------------------------
+      result                                     consumes
+      Prop 1  lambda_e = N lambda_0              -- nothing --
+      Prop 2  1+z = N                            -- nothing --
+      Prop 3  tau_obs/tau = 1+z  (dilation)      -- nothing --
+      Prop 4  ladder 1+z = T/T_0                 T_0
+      Prop 5  scale-invariant ratio              -- nothing --
+      Thm 1   static gradient conserves nu       -- nothing --
+      Thm 2   uniform medium conserves lambda    -- nothing --
+      Thm 3   envelope ratio v_e/v_a             -- nothing --
+      Thm 5   alpha epoch-invariant              -- nothing --
+      Thm 4   Hubble law u/r -> H_0              H_0
+      Prop 9  Ndot = H_0                         H_0
+      Prop 10 lookback times                     H_0
+      Prop 11 private CMB sphere D               H_0
+      Prop 12 dual clocks, tau_now               H_0
+      Prop 13 coasting n_b ~ N^3                 H_0
+      Prop 14 BAO shell mechanism                H_0
+      Prop 6  solar displacement geometry        z_sun
+      Prop 7  N_max, v_min, T_max                T_0, P_conf
+      Prop 8  decompression floor                P_conf
+      Hyp H   halfway-now                        T_0, P_conf
+
+  results consuming NO calibrated input at all: 8 of 20
+  P_conf is consumed ONLY by Prop 7, Prop 8 and Hypothesis H - the vessel BOUNDS.
+  It touches no redshift, dilation, Hubble, BAO or alpha result.
+  -> P_conf is not a free parameter of the observational sector.
+
+--------------------------------------------------------------------------------------
+T4 - PARAMETER LEDGER, LIKE FOR LIKE
+--------------------------------------------------------------------------------------
+  classification: MEASURED-ELSEWHERE (fixed by non-cosmological data) /
+                  DERIVED (function of other inputs) / FITTED (tuned to the data explained)
+  Only FITTED counts as a free parameter. Applied identically to both sides.
+
+  SDT cosmological sector (document Part II lists 7 as [C]):
+      c          MEASURED-ELSEWHERE   defined constant; local value
+      T_0        MEASURED-ELSEWHERE   FIRAS direct; LCDM also takes it measured
+      H_0        MEASURED-ELSEWHERE   local distance ladder
+      z_sun      MEASURED-ELSEWHERE   solar gravitational redshift
+      koppa_sun  DERIVED              = 1/sqrt(z_sun) via z*koppa^2 = 1
+      P_0        DERIVED              = a T_0^4 / 3   [T1]
+      P_conf     FITTED               vessel ceiling; observational sector does not use it [T3]
+      -> FITTED: 1  (P_conf)
+      (koppa check: 1/sqrt(z_sun) = 686.8 vs stated 686.5)
+
+  LCDM base model:
+      omega_b        FITTED   baryon density
+      omega_c        FITTED   cold dark matter density
+      100 theta_*    FITTED   acoustic angular scale
+      tau_reio       FITTED   reionisation optical depth
+      ln(1e10 A_s)   FITTED   scalar amplitude
+      n_s            FITTED   scalar spectral index
+      -> FITTED: 6
+      (plus fixed-by-assumption: Omega_k = 0, w = -1, N_eff = 3.046, sum m_nu = 0.06 eV)
+      (H_0, Omega_Lambda, age, sigma_8, z_* are DERIVED outputs of these six)
+
+  For the observable set SDT's sector currently addresses:
+      redshift-N relation | (1+z) light-curve dilation | Hubble law | BAO shell mechanism
+      | alpha invariance across epochs | Shapiro delay | solar redshift profile
+      SDT   fitted parameters used: 0   (P_conf enters none of them - T3)
+      LCDM  fitted parameters used: 6
+
+  FAIRNESS CONSTRAINT (PROMPT, binding): LCDM's six also buy an observable list this
+  sector does NOT yet cover - CMB peak HEIGHTS and the full power spectrum, the matter
+  power spectrum, BBN light-element abundances. The comparison above is on a SUBSET.
+  Stated both ways: fewer fitted parameters, AND a smaller observable list.
+
+--------------------------------------------------------------------------------------
+T5 - THE ZERO-PARAMETER SUBSET (consumes no fitted number whatsoever)
+--------------------------------------------------------------------------------------
+  prediction                             measured                   status
+  tau_obs/tau = (1+z)  [Prop 3]          (1+z)^(1.00 +/- 0.05)      MATCHES
+  d(alpha)/alpha = 0   [Thm 5]           < 1e-5 to z~7; Oklo        MATCHES
+  lambda_obs/lambda_0 = N [Prop 2]       definitional               STRUCTURE
+  u/r -> H_0, any ICs  [Thm 4]           Hubble linearity           MATCHES
+  Shapiro: intact signal, late [Thm 1]   Cassini/Viking             MATCHES
+
+  Prop 3 in detail - the sharpest of these, because it is pure structure:
+      slow emission at source  x  transit compression  =  N^2 * (1/N) = N = 1+z
+  A static-space redshift mechanism producing exactly (1+z) clock dilation with no
+  fitted number is not a restatement: classical tired-light fails this test, which is
+  what historically excluded it. This mechanism passes it structurally.
+
+  Thm 5 in detail: alpha = v_1/c_local, both ~ 1/N, so N cancels identically.
+  The null is predicted across ~3 decades of variation in c_local, not accommodated.
+
+======================================================================================
+SUMMARY
+======================================================================================
+  T1  P_0 = a T_0^4/3 to 6.7 sig figs -> P_0 is NOT an independent input
+  T2  P ~ N^4 follows from T ~ N; P6 loses a clause; postulate count DOWN by one
+  T3  P_conf touches only the vessel bounds; 8 of 20 results consume no [C] input
+  T4  on the shared observable subset: SDT 0 fitted vs LCDM 6 fitted
+      - and that subset is smaller than LCDM's full reach. Both halves stated.
+  T5  five zero-parameter predictions, all matching; Prop 3 is the load-bearing one
+======================================================================================

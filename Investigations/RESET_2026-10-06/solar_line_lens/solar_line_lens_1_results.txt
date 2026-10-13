@@ -1,0 +1,35 @@
+﻿SHA-256 tablea1.dat: 1b662d02add6dcec4457aaa677e42ef567c18ab8ff72b3e07a3b09bdff199a14 -> matches manifest
+attempt 2 (V4 tolerance 1e-6 m/s; attempt 1 G0 kept)
+
+Solar line lens, instrument 1 (2026-10-09)
+==========================================
+
+[V1] rows 188 ; row 1: lambda 477.94394 nm, Fe 1, EW 4.09 pm, v 189.1 +/- 25.0 m/s -> met
+[V2] Spearman known cases: +1.000 -1.000 +0.000 (expect +1 -1 0) -> met
+[V3] weighted fit recovers (3, -0.5, 0.25): (3.000000000000, -0.500000000000, 0.250000000000) -> met
+[V4] v = c(lambda_obs - lambda_lab)/lambda_lab round trip: 636.300000016918 m/s -> met
+
+VALIDATIONS: met
+
+predictions (c z_obs at Earth): surface 636.30, observer terms 3.17 ; subtract 639.47, none 636.30, add 633.13, double 629.96 m/s
+
+sample: 188 lines, lambda 477.94-582.79 nm, EW 1.13-52.13 pm, v -33.6-705.3 m/s
+
+ROUTE E (edge)
+  E1 Spearman rho(EW, v) = +0.8739, p = 8.82e-133 -> E-R1 met (shift rises with line strength)
+  E2 strongest 10% (n = 19, EW >= 14.34 pm): mean v = 608.51 +/- 13.00 m/s (sd 56.6)
+  E3 fit v = a + b log10(EW): a = -186.5, b = 581.1 m/s per dex (chi2/dof 50.47) ; at EW_max = 52.13 pm: 811.29 +/- 2.81 m/s
+  E-R2 E2 - E3 = -202.78 +/- 13.29 m/s -> NOT MET (edge not determined, G2)
+  E-R3 edge value 608.51 +/- 13.00 against the handlings:
+     subtract 639.47 m/s : edge - prediction =  -30.96 m/s (-2.38 sigma)
+     none     636.30 m/s : edge - prediction =  -27.79 m/s (-2.14 sigma)
+     add      633.13 m/s : edge - prediction =  -24.62 m/s (-1.89 sigma)
+     double   629.96 m/s : edge - prediction =  -21.45 m/s (-1.65 sigma)
+     closest: double ; handlings within 2 sigma: 2 -> data do not choose (G2) ; sigma needed to separate adjacent handlings at 2 sigma: 0.79 m/s
+
+ROUTE T (twin dip)
+  T1 power: handlings differ by 3.17 m/s = 1.06e-08 in z ; at 158 nm that is 1.67e-06 nm, at 150 um 1.58e-03 nm ; no brightness temperature changes -> the dips cannot choose a handling
+  T2 one stretch z0 = 1.1161e-06 (c z0 = 334.59 m/s) ; residual stretch slope s1 = +6.997e-10 +/- 6.421e-11 per nm (p = 1.20e-27) -> wavelength-dependent stretch present
+     with line strength held: slope -9.371e-10 +/- 6.491e-11 per nm (p = 3.01e-47) ; strength term +1.962e-06 per dex
+     carried to the dips (linear, for scale only): s at 158 nm -2.56e-07, at 150 um +1.05e-04
+  T3 twin identity: T_UV - T_FIR = +60 +/- 265 K (+0.23 sigma) -> consistent ; resolution set by the far-IR record (+/-260 K)

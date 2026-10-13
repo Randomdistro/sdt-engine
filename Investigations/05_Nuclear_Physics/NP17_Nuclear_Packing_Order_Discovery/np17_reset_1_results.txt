@@ -1,0 +1,31 @@
+NP17 reset instrument 1 (2026-10-10)
+====================================
+
+[V1] alpha hbar c = 1.439965 MeV fm met ; identity ahc/r = m_e c^2 r_e/r at 7Rp/6: 1.466906733979 vs 1.466906734876 -> met
+[V2] 1/2 m_e (alpha c)^2 = 13.605693123 eV vs engine Ry 13.605693123 -> met
+[V3] AME: 1H defect against {p,e} = 13.586 eV (measured 13.598) -> met
+[V4] deuteron against {2p,1e}: engine route 1.442233 MeV, AME route 1.442246 MeV (diff -1.36e-05) -> met
+
+VALIDATIONS: met
+
+seat unit 1/2 ahc/R_p = 1/2 m_e v(R_p)^2 = 0.855696 MeV  (v(R_p) = 1.83006 c)
+
+T1  H-SE ceiling B_max = N*A*(1/2 ahc/R_p) against the native-list defect
+   nucleus   N  A   B_meas{Ap,Ne} (MeV)   B_max (MeV)   B_meas/B_max   verdict
+   2H (d)    1  2         1.442246        1.711391       0.8427      within ceiling
+   3H (t)    2  3         6.917143        5.134174       1.3473      EXCEEDS ceiling
+   3He (h)   1  3         6.935735        2.567087       2.7018      EXCEEDS ceiling
+   4He (a)   2  4        26.731023        6.845565       3.9049      EXCEEDS ceiling
+   A>=3 nuclei exceeding the ceiling: 3 of 3 -> H-SE EXCLUDED (G1) for A>=3
+
+T2  deuteron, NP30 contact geometry (electron at D/2 = 7R_p/6 from each proton): H-SE 1.466907 MeV vs 1.442246 {2p,1e}: +1.710% -> within 3% (G3, post-seen, look-elsewhere 8)
+
+T3  H2+ cross-scale, electron static at the midpoint of R_e = 2 a0: H-SE 27.2114 eV vs measured 16.2491 eV {p,p,e}: +67.46% -> NOT one law across the ladder (static seat)
+
+T4  neutron domain check: H-SE at the node R_p/3 predicts n LIGHTER than p+e by 2.5671 MeV; measured n HEAVIER by 0.7823 MeV (gap 3.3494 MeV)
+
+T5  old NP17 ledger 3 ahc/D = 2.200360 MeV (D = 1.9633 fm)
+    on its own list {p,p,e}: vs 1.442246 -> +52.56%
+    against {p,n} with the neutron's node term in the same bookkeeping: 3ahc/D - ahc/(R_p/3) = -2.933813 MeV (vs 2.2246 measured)
+
+context (report only): native-list defects A=3: t - h = -0.018592 MeV (t has 2 stabled electrons, h has 1)

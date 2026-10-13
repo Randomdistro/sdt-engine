@@ -1,3 +1,29 @@
+# NP16-A05 — Capture cross-section against the construction (specification rewritten 2026-10-12)
+
+**Author:** J. C. Harvey, Melbourne. Rewritten at Harvey's direction: prompts carry new data; the packing sequencer is understood before grammar work. The previous specification is kept below the line.
+
+## 1. State after the reset (2026-10-10)
+**G2, PENDING_DATA and specification.** ENDF/B-VIII thermal capture data are not in the repo. Phase B (a Spearman census of grammar predictors) is excluded, and every predictor is a function of (Z, N).
+
+## 2. New data and what it teaches (2026-10-10 to 2026-10-12)
+- Use the built structure, not membership. The live sequencer gives per-nuclide contact graphs, seat positions and the open-seat count at the surface. Those are structural predictors **not** contained in (Z, N) alone, provided they are computed from the construction and not from counts.
+
+## 3. Next round (registered order)
+1. **One** native capture mechanism with **one** predictor fixed before the data. Candidate: the count of open surface seats of the right hand at the next shell position of the live schedule.
+2. Cache the ENDF thermal capture table with provenance.
+3. One rank comparison, with the look-elsewhere count stated (one predictor).
+
+## Prohibitions
+- No census over candidate predictors.
+- Grammar counts are not evidence (NP24).
+- No data substitution without a label.
+- Release is read, never edited (proposals only).
+- The word "charge" is not used.
+
+---
+
+## Previous specification (kept as written)
+
 # A05: Capture Cross-Section vs Grammar State — Investigation Prompt
 
 > **Author:** J. C. Harvey, Melbourne. **Status:** SPEC (upgrade 2026-06-27).

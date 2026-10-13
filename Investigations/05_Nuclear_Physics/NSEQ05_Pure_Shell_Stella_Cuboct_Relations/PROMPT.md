@@ -55,3 +55,15 @@ Magic closures 28,50,82,126 are **T-shell completions**, not mixed d+t shells.
 | NSEQ05-C4 | H6 PASS (42 edges, two orientation branches). |
 | NSEQ05-C5 | Sequencer pack + dirs corrected; packing smoke He/C/O/Fe/U/Ca-48. |
 | NSEQ05-C6 | No silent `laws.hpp` edit. |
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** The PASS rows (C1–C4) restate the frozen shell arithmetic and geometric angles (20-T8-28-D12-40-…) that define the sequence, so they cannot fail.
+
+**Correction:** Label them VERIFICATION and gate the sequence against measured closures beyond the magic numbers it was built to reproduce.
+
+**Status:** ANNOTATED — label, status or tally corrected in the record; no re-score of earlier runs.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

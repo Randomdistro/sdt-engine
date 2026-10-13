@@ -1,0 +1,15 @@
+﻿NP16A01 reset instrument 1 (2026-10-10)
+=======================================
+
+[V1] Ga-69(p,2n) -> Ge-68 chain: 32-68(EC) -> 31-68(B+) -> 30-68 | endpoint stable | N_target 38 vs N_end 38 -> met
+[V2] conservation identities on 1000 random (Z,A) -> met
+VALIDATIONS: met
+
+stable targets Z=3-92: 284 ; (p,xn) product listings existing in NUBASE: 2655 pairs, 1003 unique products
+
+C1 grammar validity at every step: steps 3195, invalid 270 (8.5%) ; products with any invalid step: 194 of 1003 (19.3%) -> NOT MET
+   examples: 4-5(N=1,n_tri=-3,n_deu=5) 4-6(N=2,n_tri=-2,n_deu=4) 4-7(N=3,n_tri=-1,n_deu=3) 5-6(N=1,n_tri=-4,n_deu=7) 5-7(N=2,n_tri=-3,n_deu=6) 4-6(N=2,n_tri=-2,n_deu=4) 5-8(N=3,n_tri=-2,n_deu=5) 5-9(N=4,n_tri=-1,n_deu=4) 6-8(N=2,n_tri=-4,n_deu=8) 6-9(N=3,n_tri=-3,n_deu=7) 5-9(N=4,n_tri=-1,n_deu=4) 6-10(N=4,n_tri=-2,n_deu=6)
+   EC/B+ steps valid under the EC alternate grammar: 1819 of 1938 (93.9%)
+C3 trajectory rules (EC: +2/-3 ; B-: -2/+3): violations 0 -> met (arithmetic)
+C2 neutron budget N_end = N_target over 2475 pairs with a stable endpoint: 349 (14.1%) ; distribution of N_end - N_target: {-22: 1, -20: 4, -19: 2, -18: 6, -17: 7, -16: 16, -15: 5, -14: 7, -13: 1, -12: 5, -11: 2, -10: 5, -9: 4, -8: 53, -7: 75, -6: 256, -5: 221, -4: 417, -3: 285, -2: 468, -1: 256, 0: 349, 1: 30}
+chain endpoints: {'untracked': 76, 'stable': 927}

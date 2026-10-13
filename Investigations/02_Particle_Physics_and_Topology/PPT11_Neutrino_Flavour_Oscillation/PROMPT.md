@@ -234,3 +234,15 @@
 ---
 
 *PPT11 · the price of admission · the straight thread must earn its three flavours or name the hole it cannot fill.*
+
+---
+
+## Audit correction 2026-10-05 (construction)
+
+**Finding:** The oscillation length is computed from neutrino masses m2 and m3 that are literature "best estimates", which are themselves extracted from the oscillation data the beat model is meant to explain, so a numerical "floor met" is shared-input.
+
+**Correction:** Label the length SHARED-INPUT and gate on a quantity not derived from the Δm² values, such as the flavour count or the ratio of the two lengths.
+
+**Status:** ANNOTATED — label, status or tally corrected in the record; no re-score of earlier runs.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

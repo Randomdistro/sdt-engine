@@ -1,0 +1,35 @@
+GOM40a run: fixed K = 1455.637 m (GOM37 run-1 reduction, K a run-time argument)
+GOM37 blank-slate run 1 (registered in GOM37_RESET_ASSESSMENT_2026-10-11.md sections 0-2)
+=======================================================================
+
+INVENTORY (K252, type 12, valid, receive and transmit station 25)
+  day 157: label rows 7447, rows read 7447 (V2 ok), selected 7447 records, time span 7446 s, distinct reference frequencies 1 (first 2116648992.000 Hz), band codes (dl*100+ul*10+ex): 331 ; increasing time tags: yes (V3 ok)
+  day 158: label rows 20748, rows read 20748 (V2 ok), selected 20748 records, time span 34241 s, distinct reference frequencies 3 (first 2116647840.000 Hz), band codes (dl*100+ul*10+ex): 331 ; increasing time tags: yes (V3 ok)
+  day 159: label rows 17289, rows read 17289 (V2 ok), selected 17289 records, time span 31441 s, distinct reference frequencies 5 (first 2116649376.000 Hz), band codes (dl*100+ul*10+ex): 331 ; increasing time tags: yes (V3 ok)
+  day 160: label rows 35942, rows read 35942 (V2 ok), selected 35942 records, time span 35945 s, distinct reference frequencies 1 (first 2116657632.000 Hz), band codes (dl*100+ul*10+ex): 331 ; increasing time tags: yes (V3 ok)
+[V4] 15-min table at the 5-min epochs of day 157: linear interpolation worst relative 7.67e-06 (about 19.7 Hz in the observable), cubic worst 8.65e-09 (about 0.0222 Hz) -> met
+[V5] delay formula against its closed form: met
+[V1] day 157 reproduced: 7447 records, residual sd 2.639 Hz (GOM_DAT8 2.639) -> met
+
+VALIDATIONS: met
+
+day 157 residual sd with the 15-min cubic table and a global offset: 0.571 Hz (5-min linear: 2.639)
+
+OFFSET MODELS. M1: C0 = -2510170.476 Hz (day 157 mean). Per day: records ; elongation ; b [R_sun] ; Delta_f_pred daily mean [Hz] ; M1 residual mean, sd, within-day drift [Hz/h] ; M2 residual sd [Hz]
+  day 157:   7447 ; 11.983 to 11.912 deg ; 45.31 to 45.04 ; +0.9728 ; M1 mean +0.000, sd 0.571 (incl. day offset), drift -0.954 ; M2 sd 0.571 ; coverage 3 hourly bins
+  day 158:  20748 ; 11.283 to 10.959 deg ; 42.70 to 41.49 ; +1.0515 ; M1 mean +35214.690, sd 15404.667 (incl. day offset), drift -6161.428 ; M2 sd 15404.667 ; coverage 9 hourly bins
+  day 159:  17289 ; 10.442 to 10.145 deg ; 39.56 to 38.45 ; +1.1350 ; M1 mean +117106.412, sd 34051.032 (incl. day offset), drift -11022.164 ; M2 sd 34051.032 ; coverage 9 hourly bins
+  day 160:  35942 ; 9.663 to 9.324 deg ; 36.64 to 35.37 ; +1.2285 ; M1 mean +263026.302, sd 2.103 (incl. day offset), drift -0.715 ; M2 sd 2.103 ; coverage 11 hourly bins
+
+DAY-TO-DAY: M1 daily mean residual minus day 157 against the predicted change of the daily mean Delta_f_pred minus day 157
+  day 158: measured +35214.690 Hz ; predicted +0.0787 Hz ; scale sqrt(se^2 + se157^2) = 5134.889 Hz (se = within-day sd / sqrt(hours)) ; predicted/scale = 0.000
+  day 159: measured +117106.412 Hz ; predicted +0.1622 Hz ; scale sqrt(se^2 + se157^2) = 11350.344 Hz (se = within-day sd / sqrt(hours)) ; predicted/scale = 0.000
+  day 160: measured +263026.302 Hz ; predicted +0.2557 Hz ; scale sqrt(se^2 + se157^2) = 0.714 Hz (se = within-day sd / sqrt(hours)) ; predicted/scale = 0.358
+
+PROCEDURE A' (prompt literal): s = -0.29485 (median obs/f_A, day 157), linear detrend on day 157 alpha = -6.7113e+09 Hz, beta = 4.0562e+00 Hz/s ; test residual r_perp (days 158-160): median -797734.392, sd 272108.608 Hz
+  pooled |corr(r_perp, d(delay)/dt)| = 0.9920 ; |corr(r_perp, time)| = 0.9954 ; amplitude ratio stdev(r_perp)/median|F d(delay)/dt| = 2.371e+05
+  prompt's C4-C7 outcome: UNADJUDICATED (amplitude ratio >= 100)
+
+AMENDED (M1 and M2, pooled test days): corr(r_M1, d(delay)/dt) +0.9537 ; corr(r_M1, time) +0.9496 ; corr(r_M2, d(delay)/dt) -0.0762 ; corr(r_M1 per-day detrended, d(delay)/dt) +0.0004 ; sd r_M1 101322.860, sd r_M2 18371.442 ; amplitude ratios sd/median|F d(delay)/dt|: M1 8.830e+04, M2 1.601e+04
+SENSITIVITY GATE (every predicted day-to-day change exceeds 3 x the scale): NOT MET (largest predicted change 0.2557 Hz)
+AMENDED OUTCOME: UNADJUDICATED_BY_SENSITIVITY

@@ -1,0 +1,74 @@
+﻿NP04A - NEUTRON DECAY LEDGER + TRITIUM KEYSTONE  (the PASSED core)
+Ledger: n -> p + e + nu_bar  ...  H3 -> He3 + e + nu_bar
+NOTE: 3n -> triton GENESIS is energy-gated ONLY -> see NP04B (kinetics UNRESOLVED).
+Consumes laws.hpp + nuclear.hpp; one-way A->H.
+
+============================================================
+  STAGE A/B - n -> p + e + nu_bar : conservation spine
+============================================================
+  rest energy [MeV]:  m_n=939.5654  m_p=938.2721  m_e=0.5110
+  quantity       n      p      e     nu   balance
+  charge      0.00   1.00  -1.00   0.00   OK    0 = +1 -1 +0
+  baryon      1.00   1.00   0.00   0.00   OK    trefoil persists
+  lepton      0.00   0.00   1.00  -1.00   OK    unknot + receipt
+  winding    3(+1)      3      1      0   trefoil / unknot / receipt(0+)
+  energy:  m_n = m_p + m_e + Q_n = 938.2721 + 0.5110 + 0.7823 = 939.5654 MeV
+  => eps_link = Q_n = 0.7823 MeV  (the Hopf-link strain that destabilises n)
+  PASS-A/B: spine closes  (0 fatal)
+
+============================================================
+  STAGE C - free-neutron lifetime + beam-bottle branching
+============================================================
+  proton circulation  f = c/lambda_C,p = 2.269e+23 Hz
+  tau_n: bottle 877.75 s, beam 887.70 s ; unlink barrier ln(f*tau) = 60.6 (rare crossing)
+  beam-bottle gap 9.95 s  =>  predicted topological branching 1.13%  [P4, class D]
+  (absolute tau_n: barrier INFERRED from tau, not yet predicted -> class F / PARTIAL)
+
+============================================================
+  STAGE D - the 1836 partition is a VOLUME ratio, not a winding
+============================================================
+  m_p/m_e = 1836.1527 = sqrt(3/2)*(a_p/a_e)^3 = 1.22474*(a_p/a_e)^3
+  => a_p/a_e = 11.4451   <-- THE one number to derive (Q-D1; class F until knot-derived)
+  R_excl,p/R_excl,e: 1836^(1/3)=12.2453 ; laws.hpp law_IV=12.2481  MATCH (same density)
+  1836pi falsification: R_p(W=3)=0.84124 fm  vs  R_p(W=918)=193.3 fm  (230x) -> FALSIFIED
+
+============================================================
+  STAGE E - re-check laws.hpp::winding (do-not-corrupt gate)
+============================================================
+  R_p_predicted = 0.84124 fm (expect 0.84124) OK ;  W_eff=3.0008 (3.0) ;  g_proton=4.0008 (4.0)
+  PASS-E: topology uncorrupted by the earlier stages.
+
+============================================================
+  STAGE F - two neutrons + the proton -> triton (di-neutron unbound)
+============================================================
+  k_occ (1 p-n contact = B_deuteron) = 2.224 MeV
+  triton (2 p-n + 1 n-n, triangle): B_occ ~ 6.67 MeV ; measured B(t)=8.482  (3-body adds 27%, class E)
+  di-neutron: 0 p-n contacts (no proton keystone) -> UNBOUND  [matches reality: 2n unbound] OK
+  grammar(H-3): alpha n_d=-2 n_t=1 -> alpha-invalid OK (triton is a PRIMITIVE block, not alpha+blocks)
+
+============================================================
+  STAGE G - beta-electron Hopf-threads into 1s : the first atom
+============================================================
+  electron wake r_e = 2.8179 fm ; a0 = r_e/alpha^2 = 5.2918e-11 m  (laws.hpp a_0 = 5.2918e-11)  MATCH
+  => free neutron and ground-state H are ONE topology at two link radii:
+     embedded (nuclear, strained, tau~880s)  vs  orbiting (atomic, Lk=1, stable).  [P5, class D]
+
+============================================================
+  STAGE H - KEYSTONE: tritium Q from Q_n minus the binding difference
+============================================================
+  Q_n = 782.3 keV ;  B(t)-B(He3) = 8.482-7.718 = 764.0 keV
+  Q_beta(H3) = Q_n - [B(t)-B(He3)] = 18.3 keV   (measured 18.591)  PASS   [P1, class C, parameter-free]
+  Sargent Q^5: (Q_n/Q_b)^5 = 1.41e+08 ; measured tau-ratio = 6.39e+05 ; super-allowed matrix elt absorbs ~221x
+
+============================================================
+  FINAL LEDGER: n -> p + e + nu   and   H3 -> He3 + e + nu  (decay, PASSED)
+============================================================
+  hero #1  Q_n (link strain)      =   782.3 keV   (meas 782.3)
+  hero #2  Q_beta(H3) = Q_n - dB  =    18.3 keV   (meas 18.591)  <-- PARAMETER-FREE keystone
+  honesty  a_p/a_e (D1 form C-fl) =  11.445       (D2 lever class F -> full p/e ratio is F until derived)
+  honesty  1836pi -> R_p          =   193.3 fm    (falsified: 1836 is displaced VOLUME)
+  NOT TESTED HERE: 3n -> triton genesis -> energy-gated only in NP04B; kinetics UNRESOLVED.
+  conservation fatals across ledger = 0
+
+[NP04A done]  decay ledger closes; keystone holds.
+

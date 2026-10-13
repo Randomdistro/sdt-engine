@@ -1,0 +1,77 @@
+{
+  "contract_version": "2.0.0",
+  "case_id": "mathematical-restricted-l4-runner",
+  "problem_class": "celestial_three_body",
+  "frame": {
+    "type": "inertial_cartesian",
+    "units": "SI",
+    "epoch": "t=0",
+    "description": "Restricted unequal-pair L4 known-answer fixture"
+  },
+  "force": {
+    "type": "retarded_seven_cone_occlusion",
+    "propagation_speed": "c",
+    "pressure_source": "sdt_law_I_P_conv",
+    "enable_eclipse_shielding": true,
+    "comparison_route": "point_koppa"
+  },
+  "bodies": [
+    {
+      "id": "primary",
+      "baryon_count": "805077908211484772344991472376387066905923727158567",
+      "radius_m": 1000000,
+      "position_m": [-999000.999000999, 0, 0],
+      "velocity_m_s": [0, -0.2996426740995685, 0],
+      "provenance": {
+        "baryons": "kappa=1e-3 m divided by laws.hpp koppa_per_baryon",
+        "radius": "declared mathematical boundary",
+        "state": "sdt::dynamics circular-pair construction"
+      }
+    },
+    {
+      "id": "secondary",
+      "baryon_count": "805077908211484772344991472376387066905923727159",
+      "radius_m": 100000,
+      "position_m": [999000999.0009991, 0, 0],
+      "velocity_m_s": [0, 299.6426740995686, 0],
+      "provenance": {
+        "baryons": "kappa=1e-6 m divided by laws.hpp koppa_per_baryon",
+        "radius": "declared mathematical boundary",
+        "state": "sdt::dynamics circular-pair construction"
+      }
+    },
+    {
+      "id": "runner",
+      "baryon_count": "1",
+      "radius_m": 1,
+      "position_m": [499000999.00099903, 866025403.7844386, 0],
+      "velocity_m_s": [-259.7576659959559, 149.6715157127345, 0],
+      "provenance": {
+        "baryons": "one resistance quantum",
+        "radius": "declared probe boundary",
+        "state": "equilateral L4 placement and rotating velocity"
+      }
+    }
+  ],
+  "integrator": "velocity_verlet",
+  "timestep_s": 5237,
+  "max_steps": 4000,
+  "record_every_steps": 40,
+  "tolerances": {
+    "retarded_time_s": 1e-10,
+    "channel_closure": 1e-13,
+    "medium_momentum_relative": 1e-11,
+    "lagrange_residual_m_s2": 1e-8,
+    "max_retarded_iterations": 64
+  },
+  "events": {
+    "stop_on_collision": true
+  },
+  "provenance": {
+    "classification": "DERIVED",
+    "description": "Restricted runner fixture for pressure-root and point-koppa delta tests.",
+    "sources": [
+      "GOM42/GOM43 Lagrange qualification geometry"
+    ]
+  }
+}

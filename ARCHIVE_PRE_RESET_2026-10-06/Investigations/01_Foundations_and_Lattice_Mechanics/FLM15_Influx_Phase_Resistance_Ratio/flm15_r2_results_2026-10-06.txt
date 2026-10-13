@@ -1,0 +1,25 @@
+FLM15-inf R2 — independent quadrature (pre-registered 2026-10-06)
+=================================================================
+
+[V1] circle centre-field relative error N=96,192,384: 8.70e-04 2.17e-04 5.44e-05 ; ratio(192/384) 4.00 -> PASS
+[V2] circle on-axis (z=3) relative error N=96,192,384: 5.54e-04 1.38e-04 3.46e-05 ; ratio(192/384) 4.00 -> PASS
+[V4] V_lock = 3.590391604103054 (8pi/7 = 3.590391604102621); V_wake = 0.598398600683337 (4pi/21 = 0.598398600683770); fraction 0.857142857142961; engine functions 3.590391604102621, 0.598398600683770 -> PASS
+[V3] circle stiffness h=0.03: 1.678568 ; h=0.02: 1.678564 ; relative change 1.99e-06 -> PASS
+
+VALIDATIONS: met
+
+[T1/T2] independent grid (h = 0.02) vs sealed QMC rows (orientation 0), SEALED RMS convention (A3)
+  a      | circle: indep   sealed   diff%  | trefoil: indep   sealed   diff% | ratio: indep   sealed   diff% | L3/L1  ratio/(L3/L1)  J/L circ  J/L tref
+  0.3500 |  1.67314  1.67294  +0.01 |  4.36961  4.37085  -0.03 | 2.61163 2.61268  -0.04 | 2.1432  1.2186  0.2663  0.3245
+  0.5000 |  1.67801  1.67798  +0.00 |  4.09810  4.09824  -0.00 | 2.44224 2.44236  -0.01 | 2.2696  1.0761  0.2671  0.2874
+  0.8165 |  1.68210  1.68259  -0.03 |  4.50424  4.50434  -0.00 | 2.67774 2.67702  +0.03 | 2.5503  1.0500  0.2677  0.2811
+  0.9000 |  1.68241  1.68295  -0.03 |  4.77049  4.76698  +0.07 | 2.83552 2.83250  +0.11 | 2.6156  1.0841  0.2678  0.2903
+
+T1 gate (every circle, trefoil and ratio within 3% of the sealed row, RMS convention): met
+
+[T3] convention sensitivity (report only): ratio J3/J1 with unit-RMS-radius vs unit-major-radius normalisation
+  a      | RMS convention   major-radius convention   difference
+  0.3500 |  2.61163          2.82947                    +8.3%
+  0.5000 |  2.44224          2.86816                   +17.4%
+  0.8165 |  2.67774          3.90184                   +45.7%
+  0.9000 |  2.83552          4.40568                   +55.4%

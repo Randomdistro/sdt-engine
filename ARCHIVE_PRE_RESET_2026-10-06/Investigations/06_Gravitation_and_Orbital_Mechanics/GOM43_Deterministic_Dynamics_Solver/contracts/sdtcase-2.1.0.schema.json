@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spatial-displacement-theory.com/contracts/sdtcase-2.1.0.schema.json",
+  "title": "SDT celestial displacement and slingshot case",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "case_id", "problem_class", "frame", "force", "bodies", "integrator", "timestep_s", "record_every_steps", "tolerances", "provenance"],
+  "properties": {
+    "contract_version": {"const": "2.1.0"},
+    "case_id": {"type": "string", "minLength": 1, "maxLength": 96, "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"},
+    "problem_class": {"const": "celestial_three_body"},
+    "frame": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "units", "epoch"],
+      "properties": {
+        "type": {"const": "inertial_cartesian"},
+        "units": {"const": "SI"},
+        "epoch": {"type": "string", "minLength": 1},
+        "description": {"type": "string"}
+      }
+    },
+    "force": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "propagation_speed", "pressure_source"],
+      "properties": {
+        "type": {"const": "retarded_seven_cone_occlusion"},
+        "propagation_speed": {"const": "c"},
+        "pressure_source": {"enum": ["sdt_law_I_P_conv", "declared"]},
+        "pressure_pa": {"type": "number", "exclusiveMinimum": 0},
+        "enable_eclipse_shielding": {"type": "boolean"},
+        "comparison_route": {"enum": ["none", "point_koppa"]}
+      }
+    },
+    "bodies": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"$ref": "#/$defs/body"}},
+    "slingshot": {"$ref": "#/$defs/slingshot"},
+    "integrator": {"enum": ["velocity_verlet", "fixed_rk4"]},
+    "timestep_s": {"type": "number", "exclusiveMinimum": 0},
+    "duration_s": {"type": "number", "exclusiveMinimum": 0},
+    "max_steps": {"type": "integer", "minimum": 1},
+    "record_every_steps": {"type": "integer", "minimum": 1},
+    "history_seconds": {"type": "number", "exclusiveMinimum": 0},
+    "tolerances": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["retarded_time_s", "channel_closure", "medium_momentum_relative", "lagrange_residual_m_s2", "max_retarded_iterations"],
+      "properties": {
+        "retarded_time_s": {"type": "number", "exclusiveMinimum": 0},
+        "channel_closure": {"type": "number", "exclusiveMinimum": 0},
+        "medium_momentum_relative": {"type": "number", "exclusiveMinimum": 0},
+        "lagrange_residual_m_s2": {"type": "number", "exclusiveMinimum": 0},
+        "max_retarded_iterations": {"type": "integer", "minimum": 2, "maximum": 128}
+      }
+    },
+    "events": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "stop_on_collision": {"type": "boolean"},
+        "stop_time_s": {"type": "number", "exclusiveMinimum": 0},
+        "stop_step": {"type": "integer", "minimum": 1}
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "required": ["classification", "description", "sources"],
+      "properties": {
+        "classification": {"enum": ["MEASURED-INPUT", "DERIVED", "COMPUTED"]},
+        "description": {"type": "string", "minLength": 1},
+        "sources": {"type": "array", "items": {"type": "string", "minLength": 1}}
+      }
+    }
+  },
+  "$defs": {
+    "vec3": {
+      "type": "array",
+      "prefixItems": [{"type": "number"}, {"type": "number"}, {"type": "number"}],
+      "items": false
+    },
+    "displacement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["proton_count", "neutron_count", "material_volume_coverage", "represented_atomic_mass_coverage", "relative_uncertainty", "ledger_sha256"],
+      "properties": {
+        "proton_count": {"type": "string", "pattern": "^[1-9][0-9]*$"},
+        "neutron_count": {"type": "string", "pattern": "^(0|[1-9][0-9]*)$"},
+        "material_volume_coverage": {"type": "number", "minimum": 0.98, "maximum": 1},
+        "represented_atomic_mass_coverage": {"type": "number", "minimum": 0.98, "maximum": 1},
+        "relative_uncertainty": {"type": "number", "minimum": 0, "maximum": 1},
+        "ledger_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "body": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "baryon_count", "radius_m", "position_m", "velocity_m_s", "provenance"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1, "maxLength": 64},
+        "baryon_count": {"type": "string", "pattern": "^[1-9][0-9]*$"},
+        "radius_m": {"type": "number", "exclusiveMinimum": 0},
+        "collision_radius_m": {"type": "number", "minimum": 0},
+        "position_m": {"$ref": "#/$defs/vec3"},
+        "velocity_m_s": {"$ref": "#/$defs/vec3"},
+        "prehistory_position_m": {"$ref": "#/$defs/vec3"},
+        "prehistory_time_s": {"type": "number", "exclusiveMaximum": 0},
+        "displacement": {"$ref": "#/$defs/displacement"},
+        "provenance": {"type": "object"}
+      }
+    },
+    "slingshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["host_body", "flyby_body", "runner_body", "reference_radius_m", "reference_separation_m", "flyby_koppa_m", "stage_min", "stage_max", "candidate_terminal_stage", "enable_experimental_tail"],
+      "properties": {
+        "host_body": {"type": "string"},
+        "flyby_body": {"type": "string"},
+        "runner_body": {"type": "string"},
+        "reference_radius_m": {"type": "number", "exclusiveMinimum": 0},
+        "reference_separation_m": {"type": "number", "exclusiveMinimum": 0},
+        "flyby_koppa_m": {"type": "number", "exclusiveMinimum": 0},
+        "stage_min": {"const": 0},
+        "stage_max": {"const": 8},
+        "candidate_terminal_stage": {"const": 8},
+        "enable_experimental_tail": {"type": "boolean"},
+        "equal_radius_tolerance_m": {"type": "number", "minimum": 0},
+        "provenance": {"type": "object"}
+      }
+    }
+  }
+}

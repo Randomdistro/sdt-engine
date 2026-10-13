@@ -1,0 +1,101 @@
+{
+  "contract_version": "2.0.0",
+  "case_id": "mathematical-figure-eight-rotated-90",
+  "problem_class": "celestial_three_body",
+  "frame": {
+    "type": "inertial_cartesian",
+    "units": "SI",
+    "epoch": "t=0",
+    "description": "Dimensioned equal-baryon figure-eight fixture"
+  },
+  "force": {
+    "type": "retarded_seven_cone_occlusion",
+    "propagation_speed": "c",
+    "pressure_source": "sdt_law_I_P_conv",
+    "enable_eclipse_shielding": true,
+    "comparison_route": "point_koppa"
+  },
+  "bodies": [
+    {
+      "id": "A",
+      "baryon_count": "805077908211484772344991472376387066905923727158567",
+      "radius_m": 1000000,
+      "position_m": [
+        -243087530.00000006,
+        -970004360.0,
+        0
+      ],
+      "velocity_m_s": [
+        -129.61998495166435,
+        139.76434865480772,
+        0
+      ],
+      "provenance": {
+        "baryons": "kappa=1e-3 m divided by laws.hpp koppa_per_baryon",
+        "radius": "declared mathematical collision boundary",
+        "state": "Chenciner-Montgomery figure-eight dimensionless state; transformed for mathematical-figure-eight-rotated-90"
+      }
+    },
+    {
+      "id": "B",
+      "baryon_count": "805077908211484772344991472376387066905923727158567",
+      "radius_m": 1000000,
+      "position_m": [
+        243087530.00000006,
+        970004360.0,
+        0
+      ],
+      "velocity_m_s": [
+        -129.61998495166435,
+        139.76434865480772,
+        0
+      ],
+      "provenance": {
+        "baryons": "kappa=1e-3 m divided by laws.hpp koppa_per_baryon",
+        "radius": "declared mathematical collision boundary",
+        "state": "Chenciner-Montgomery figure-eight dimensionless state; transformed for mathematical-figure-eight-rotated-90"
+      }
+    },
+    {
+      "id": "C",
+      "baryon_count": "805077908211484772344991472376387066905923727158567",
+      "radius_m": 1000000,
+      "position_m": [
+        0.0,
+        0.0,
+        0
+      ],
+      "velocity_m_s": [
+        259.2399699033287,
+        -279.52869730961544,
+        0
+      ],
+      "provenance": {
+        "baryons": "kappa=1e-3 m divided by laws.hpp koppa_per_baryon",
+        "radius": "declared mathematical collision boundary",
+        "state": "Chenciner-Montgomery figure-eight dimensionless state; transformed for mathematical-figure-eight-rotated-90"
+      }
+    }
+  ],
+  "integrator": "velocity_verlet",
+  "timestep_s": 422.0195546080082,
+  "max_steps": 50000,
+  "record_every_steps": 500,
+  "tolerances": {
+    "retarded_time_s": 1e-10,
+    "channel_closure": 1e-13,
+    "medium_momentum_relative": 1e-11,
+    "lagrange_residual_m_s2": 1e-08,
+    "max_retarded_iterations": 64
+  },
+  "events": {
+    "stop_on_collision": true
+  },
+  "provenance": {
+    "classification": "COMPUTED",
+    "description": "Ninety-degree rotational covariance control.",
+    "sources": [
+      "figure-eight.sdtcase.json"
+    ]
+  }
+}

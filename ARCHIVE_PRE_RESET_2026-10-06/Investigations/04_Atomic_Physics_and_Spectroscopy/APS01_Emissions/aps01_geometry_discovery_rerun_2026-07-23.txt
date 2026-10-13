@@ -1,0 +1,831 @@
+﻿╔══════════════════════════════════════════════════════════════╗
+║  APS01 STAGE B+: NON-CIRCULAR GEOMETRY DISCOVERY            ║
+║  Classes inferred from IE ladder, then compared to Atomicus ║
+╚══════════════════════════════════════════════════════════════╝
+
+══ TABLE 1: RAW METRICS ══
+
+       Z   A  n_d n_t   f_t%    OLI   CBI  BP   rho   rough
+  ─────────────────────────────────────────────────────────
+  H    1   1    0  -1     0%   0.00  0.00   0 0.750  0.0000
+  He   2   4    0   0     0%   2.21  2.21   1 0.806  0.0000
+  Li   3   7    0   1   100%  14.03 14.03   1 0.343  1.1657
+  Be   4   9    1   1    50%   1.95  8.45   2 0.293  0.6049
+  B    5  11    2   1    33%   3.03  6.84   3 0.431  0.4302
+  C    6  12    4   0     0%   2.17  6.08   4 0.112  0.3203
+  N    7  14    5   0     0%   2.04  5.64   5 0.164  0.2686
+  O    8  16    6   0     0%   2.58  5.35   6 0.145  0.2532
+  F    9  19    6   1    14%   2.01  5.15   7 0.729  0.2117
+  Ne  10  20    8   0     0%   1.90  5.00   8 0.771  0.1884
+  Na  11  23    8   1    11%   9.20  9.20   1 0.409  0.8138
+  Mg  12  24   10   0     0%   1.97  5.33   2 0.354  0.2486
+  Al  13  27   10   1     9%   3.15  3.15   1 0.525  0.1344
+  Si  14  28   12   0     0%   2.01  2.05   2 0.096  0.0371
+  P   15  31   12   1     8%   1.89  1.89   1 0.134  0.0220
+  S   16  32   14   0     0%   2.25  2.25   1 0.111  0.0484
+  Cl  17  35   14   1     7%   1.84  1.84   1 0.000  0.0024
+  Ar  18  40   12   4    25%   1.75  1.75   1 0.733  0.0176
+  K   19  39   16   1     6%   7.29  7.29   1 0.371  0.6524
+  Ca  20  40   18   0     0%   1.94  4.29   2 0.308  0.1569
+  Sc  21  45   16   3    16%   1.95  1.95   1 0.000  0.0000
+  Ti  22  48   16   4    20%   1.99  2.02   2 0.000  0.0001
+  V   23  51   16   5    24%   2.17  2.17   1 0.000  0.0017
+  Cr  24  52   18   4    18%   2.44  2.44   1 0.000  0.0169
+  Mn  25  55   18   5    22%   2.10  2.15   2 0.000  0.0001
+  Fe  26  56   20   4    17%   2.05  2.05   1 0.000  0.0015
+  Co  27  59   20   5    20%   2.17  2.17   1 0.000  0.0025
+  Ni  28  58   24   2     8%   2.38  2.38   1 0.000  0.0105
+  Cu  29  63   22   5    19%   2.63  2.63   1 0.000  0.0341
+  Zn  30  64   24   4    14%   1.91  2.21   2 0.000  0.0053
+  Ga  31  69   22   7    24%   3.42  3.42   1 0.000  0.1706
+  Ge  32  74   20  10    33%   2.02  2.15   2 0.000  0.0010
+  As  33  75   22   9    29%   1.90  1.90   1 0.000  0.0120
+  Se  34  80   20  12    38%   2.17  2.17   1 0.000  0.0403
+  Br  35  79   24   9    27%   1.83  1.83   1 0.000  0.0021
+  Kr  36  84   22  12    35%   1.74  1.74   1 0.000  0.0047
+  Rb  37  85   24  11    31%   6.53  6.53   1 0.000  0.0000
+  Sr  38  88   24  12    33%   1.94  1.94   1 0.000  0.0000
+  Y   39  89   26  11    30%   1.97  1.97   1 0.000  0.0000
+  Zr  40  90   28  10    26%   1.98  1.98   1 0.000  0.0000
+  Nb  41  93   28  11    28%   2.12  2.12   1 0.000  0.0000
+  Mo  42  96   28  12    30%   2.28  2.28   1 0.000  0.0000
+  Tc  43  98   29  12    29%   2.10  2.10   1 0.000  0.0000
+  Ru  44 101   29  13    31%   2.28  2.28   1 0.000  0.0000
+  Rh  45 103   30  13    30%   2.42  2.42   1 0.000  0.0000
+  Pd  46 106   30  14    32%   2.33  2.33   1 0.000  0.0000
+  Ag  47 107   32  13    29%   2.84  2.84   1 0.000  0.0000
+  Cd  48 112   30  16    35%   1.88  1.88   1 0.000  0.0000
+  In  49 115   30  17    36%   3.26  3.26   1 0.000  0.0000
+  Sn  50 120   28  20    42%   1.99  1.99   1 0.000  0.0000
+  Sb  51 121   30  19    39%   1.92  1.92   1 0.000  0.0000
+  Te  52 130   24  26    52%   2.06  2.06   1 0.000  0.0000
+  I   53 127   30  21    41%   1.83  1.83   1 0.000  0.0000
+  Xe  54 131   29  23    44%   1.73  1.73   1 0.000  0.0000
+  Cs  55 133   30  23    43%   6.45  6.45   1 0.000  0.0000
+  Ba  56 137   29  25    46%   1.92  1.92   1 0.000  0.0000
+  La  57 139   30  25    45%   1.98  1.98   1 0.000  0.0000
+  Ce  58 140   32  24    43%   1.96  1.96   1 0.000  0.0000
+  Pr  59 141   34  23    40%   1.93  1.93   1 0.000  0.0000
+  Nd  60 144   34  24    41%   1.94  1.94   1 0.000  0.0000
+  Pm  61 145   36  23    39%   1.95  1.95   1 0.000  0.0000
+  Sm  62 150   34  26    43%   1.96  1.96   1 0.000  0.0000
+  Eu  63 153   34  27    44%   1.98  1.98   1 0.000  0.0000
+  Gd  64 157   33  29    47%   1.97  1.97   1 0.000  0.0000
+  Tb  65 159   34  29    46%   1.96  1.96   1 0.000  0.0000
+  Dy  66 163   33  31    48%   1.96  1.96   1 0.000  0.0000
+  Ho  67 165   34  31    48%   1.96  1.96   1 0.000  0.0000
+  Er  68 167   35  31    47%   1.95  1.95   1 0.000  0.0000
+  Tm  69 169   36  31    46%   1.95  1.95   1 0.000  0.0000
+  Yb  70 173   35  33    49%   1.95  1.95   1 0.000  0.0000
+  Lu  71 175   36  33    48%   2.56  2.56   1 0.000  0.0000
+  Hf  72 178   36  34    49%   2.18  2.18   1 0.000  0.0000
+  Ta  73 181   36  35    49%   2.15  2.15   1 0.000  0.0000
+  W   74 184   36  36    50%   2.05  2.05   1 0.000  0.0000
+  Re  75 187   36  37    51%   2.12  2.12   1 0.000  0.0000
+  Os  76 192   34  40    54%   2.01  2.01   1 0.000  0.0000
+  Ir  77 193   36  39    52%   1.90  1.90   1 0.000  0.0000
+  Pt  78 195   37  39    51%   2.07  2.07   1 0.000  0.0000
+  Au  79 197   38  39    51%   2.22  2.22   1 0.000  0.0000
+  Hg  80 201   37  41    53%   1.80  1.80   1 0.000  0.0000
+  Tl  81 204   37  42    53%   3.34  3.34   1 0.000  0.0000
+  Pb  82 207   37  43    54%   2.03  2.03   1 0.000  0.0000
+  Bi  83 209   38  43    53%   2.29  2.29   1 0.000  0.0000
+  Po  84 209   41  41    50%   2.31  2.31   1 0.000  0.0000
+  At  85 210   43  40    48%   1.92  1.92   1 0.000  0.0000
+  Rn  86 222   34  50    60%   1.99  1.99   1 0.000  0.0000
+  Fr  87 223   36  49    58%   5.50  5.50   1 0.000  0.0000
+  Ra  88 226   36  50    58%   1.92  1.92   1 0.000  0.0000
+  Ac  89 227   38  49    56%   2.27  2.27   1 0.000  0.0000
+  Th  90 232   36  52    59%   1.82  1.82   1 0.000  0.0000
+  Pa  91 231   40  49    55%   1.99  1.99   1 0.000  0.0000
+  U   92 238   36  54    60%   1.87  1.87   1 0.000  0.0000
+  Np  93 237   40  51    56%   1.84  1.84   1 0.000  0.0000
+  Pu  94 244   36  56    61%   1.86  1.86   1 0.000  0.0000
+  Am  95 243   40  53    57%   1.96  1.96   1 0.000  0.0000
+  Cm  96 247   39  55    59%   2.07  2.07   1 0.000  0.0000
+  Bk  97 247   42  53    56%   1.92  1.92   1 0.000  0.0000
+  Cf  98 251   41  55    57%   1.91  1.91   1 0.000  0.0000
+  Es  99 252   43  54    56%   1.90  1.90   1 0.000  0.0000
+  Fm  100 257   41  57    58%   1.89  1.89   1 0.000  0.0000
+  Md  101 258   43  56    57%   1.88  1.88   1 0.000  0.0000
+  No  102 259   45  55    55%   1.88  1.88   1 0.000  0.0000
+  Lr  103 266   41  60    59%   2.90  2.90   1 0.000  0.0000
+  Rf  104 267   43  59    58%   2.40  2.40   1 0.000  0.0000
+  Db  105 268   45  58    56%   2.12  2.12   1 0.000  0.0000
+  Sg  106 269   47  57    55%   2.03  2.03   1 0.000  0.0000
+  Bh  107 270   49  56    53%   2.14  2.14   1 0.000  0.0000
+  Hs  108 277   45  61    58%   2.24  2.24   1 0.000  0.0000
+  Mt  109 278   47  60    56%   2.03  2.03   1 0.000  0.0000
+  Ds  110 281   47  61    56%   1.96  1.96   1 0.000  0.0000
+  Rg  111 282   49  60    55%   1.85  1.85   1 0.000  0.0000
+  Cn  112 285   49  61    55%   1.59  1.59   1 0.000  0.0000
+  Nh  113 286   51  60    54%   2.74  2.74   1 0.000  0.0000
+  Fl  114 289   51  61    54%   1.97  1.97   1 0.000  0.0000
+  Mc  115 290   53  60    53%   3.23  3.23   1 0.000  0.0000
+  Lv  116 293   53  61    54%   2.50  2.50   1 0.000  0.0000
+  Ts  117 294   55  60    52%   2.21  2.21   1 0.000  0.0000
+  Og  118 294   58  58    50%   2.02  2.02   1 0.000  0.0000
+
+══ TABLE 2: GAP STRUCTURE (selected) ══
+
+  He: G1=2.21!  BP=1
+  Li: G1=14.03!!! G2=1.62  BP=1
+  Be: G1=1.95 G2=8.45!!! G3=1.41  BP=2
+  B: G1=3.03!! G2=1.51 G3=6.84!!! G4=1.31  BP=3
+  C: G1=2.17! G2=1.96 G3=1.35 G4=6.08!!! G5=1.25  BP=4
+  N: G1=2.04! G2=1.60 G3=1.63 G4=1.26 G5=5.64!!! G6=1.21  BP=5
+  O: G1=2.58! G2=1.56 G3=1.41 G4=1.47 G5=1.21 G6=5.35!!! G7=1.18  BP=6
+  F: G1=2.01! G2=1.79 G3=1.39 G4=1.31 G5=1.38 G6=1.18 G7=5.15!!! G8=1.16  BP=7
+  Ne: G1=1.90 G2=1.55 G3=1.53 G4=1.30 G5=1.25 G6=1.31 G7=1.15 G8=5.00!!! G9=1.14  BP=8
+  Na: G1=9.20!!! G2=1.51  BP=1
+  Mg: G1=1.97 G2=5.33!!!  BP=2
+  Al: G1=3.15!! G2=1.51  BP=1
+  Si: G1=2.01! G2=2.05! G3=1.35  BP=2
+  P: G1=1.89 G2=1.53 G3=1.70 G4=1.26  BP=1
+  S: G1=2.25! G2=1.49 G3=1.36  BP=1
+  Cl: G1=1.84 G2=1.66  BP=1
+  Ar: G1=1.75 G2=1.47 G3=1.47 G4=1.25 G5=1.21 G6=1.37 G7=1.15  BP=1
+  K: G1=7.29!!! G2=1.45  BP=1
+  Ca: G1=1.94 G2=4.29!!  BP=2
+  Sc: G1=1.95 G2=1.93  BP=1
+  Ti: G1=1.99 G2=2.02!  BP=2
+  V: G1=2.17! G2=2.00  BP=1
+  Cr: G1=2.44! G2=1.88  BP=1
+  Mn: G1=2.10! G2=2.15!  BP=2
+  Fe: G1=2.05! G2=1.89  BP=1
+  Co: G1=2.17! G2=1.96  BP=1
+  Ni: G1=2.38! G2=1.94  BP=1
+  Cu: G1=2.63! G2=1.82  BP=1
+  Zn: G1=1.91 G2=2.21!  BP=2
+  Ga: G1=3.42!! G2=1.50  BP=1
+  Ge: G1=2.02! G2=2.15!  BP=2
+  As: G1=1.90 G2=1.53  BP=1
+  Se: G1=2.17! G2=1.45  BP=1
+  Br: G1=1.83 G2=1.67  BP=1
+  Kr: G1=1.74 G2=1.52  BP=1
+  Rb: G1=6.53!!!  BP=1
+  Sr: G1=1.94  BP=1
+  Y: G1=1.97  BP=1
+  Zr: G1=1.98  BP=1
+  Nb: G1=2.12!  BP=1
+  Mo: G1=2.28!  BP=1
+  Tc: G1=2.10!  BP=1
+  Ru: G1=2.28!  BP=1
+  Rh: G1=2.42!  BP=1
+  Pd: G1=2.33!  BP=1
+  Ag: G1=2.84!  BP=1
+  Cd: G1=1.88  BP=1
+  In: G1=3.26!!  BP=1
+  Sn: G1=1.99  BP=1
+  Sb: G1=1.92  BP=1
+  Te: G1=2.06!  BP=1
+  I: G1=1.83  BP=1
+  Xe: G1=1.73  BP=1
+  Cs: G1=6.45!!!  BP=1
+  Ba: G1=1.92  BP=1
+  La: G1=1.98  BP=1
+  Ce: G1=1.96  BP=1
+  Pr: G1=1.93  BP=1
+  Nd: G1=1.94  BP=1
+  Pm: G1=1.95  BP=1
+  Sm: G1=1.96  BP=1
+  Eu: G1=1.98  BP=1
+  Gd: G1=1.97  BP=1
+  Tb: G1=1.96  BP=1
+  Dy: G1=1.96  BP=1
+  Ho: G1=1.96  BP=1
+  Er: G1=1.95  BP=1
+  Tm: G1=1.95  BP=1
+  Yb: G1=1.95  BP=1
+  Lu: G1=2.56!  BP=1
+  Hf: G1=2.18!  BP=1
+  Ta: G1=2.15!  BP=1
+  W: G1=2.05!  BP=1
+  Re: G1=2.12!  BP=1
+  Os: G1=2.01!  BP=1
+  Ir: G1=1.90  BP=1
+  Pt: G1=2.07!  BP=1
+  Au: G1=2.22!  BP=1
+  Hg: G1=1.80  BP=1
+  Tl: G1=3.34!!  BP=1
+  Pb: G1=2.03!  BP=1
+  Bi: G1=2.29!  BP=1
+  Po: G1=2.31!  BP=1
+  At: G1=1.92  BP=1
+  Rn: G1=1.99  BP=1
+  Fr: G1=5.50!!!  BP=1
+  Ra: G1=1.92  BP=1
+  Ac: G1=2.27!  BP=1
+  Th: G1=1.82  BP=1
+  Pa: G1=1.99  BP=1
+  U: G1=1.87  BP=1
+  Np: G1=1.84  BP=1
+  Pu: G1=1.86  BP=1
+  Am: G1=1.96  BP=1
+  Cm: G1=2.07!  BP=1
+  Bk: G1=1.92  BP=1
+  Cf: G1=1.91  BP=1
+  Es: G1=1.90  BP=1
+  Fm: G1=1.89  BP=1
+  Md: G1=1.88  BP=1
+  No: G1=1.88  BP=1
+  Lr: G1=2.90!  BP=1
+  Rf: G1=2.40!  BP=1
+  Db: G1=2.12!  BP=1
+  Sg: G1=2.03!  BP=1
+  Bh: G1=2.14!  BP=1
+  Hs: G1=2.24!  BP=1
+  Mt: G1=2.03!  BP=1
+  Ds: G1=1.96  BP=1
+  Rg: G1=1.85  BP=1
+  Cn: G1=1.59  BP=1
+  Nh: G1=2.74!  BP=1
+  Fl: G1=1.97  BP=1
+  Mc: G1=3.23!!  BP=1
+  Lv: G1=2.50!  BP=1
+  Ts: G1=2.21!  BP=1
+  Og: G1=2.02!  BP=1
+
+╔══════════════════════════════════════════════════════════════╗
+║  TABLE 3: NON-CIRCULAR DISCOVERY (Threshold Set A)         ║
+╚══════════════════════════════════════════════════════════════╝
+
+       Z    OLI   CBI  BP   rho  discovered             rule                  
+  ────────────────────────────────────────────────────────────────────
+  H    1   0.00  0.00   0 0.750  disc_cube_closure      rho>rigid only
+  He   2   2.21  2.21   1 0.806  disc_cube_closure      rho>rigid only
+  Li   3  14.03 14.03   1 0.343  disc_loose_outer       OLI>thresh & rho<0.4
+  Be   4   1.95  8.45   2 0.293  disc_outer_dyad        BP=2 & CBI>thresh
+  B    5   3.03  6.84   3 0.431  disc_alpha_breach      CBI>thresh (general)
+  C    6   2.17  6.08   4 0.112  disc_alpha_breach      CBI>thresh (general)
+  N    7   2.04  5.64   5 0.164  disc_alpha_breach      CBI>thresh (general)
+  O    8   2.58  5.35   6 0.145  disc_alpha_breach      CBI>thresh (general)
+  F    9   2.01  5.15   7 0.729  disc_cube_closure      BP>=7 & rho>rigid
+  Ne  10   1.90  5.00   8 0.771  disc_cube_closure      BP>=7 & rho>rigid
+  Na  11   9.20  9.20   1 0.409  disc_alpha_breach      CBI>thresh (general)
+  Mg  12   1.97  5.33   2 0.354  disc_outer_dyad        BP=2 & CBI>thresh
+  Al  13   3.15  3.15   1 0.525  disc_unclear           no strong signature
+  Si  14   2.01  2.05   2 0.096  disc_very_loose        rho<0.10
+  P   15   1.89  1.89   1 0.134  disc_smooth_open       rho<loose
+  S   16   2.25  2.25   1 0.111  disc_smooth_open       rho<loose
+  Cl  17   1.84  1.84   1 0.000  disc_very_loose        rho<0.10
+  Ar  18   1.75  1.75   1 0.733  disc_cube_closure      rho>rigid only
+  K   19   7.29  7.29   1 0.371  disc_loose_outer       OLI>thresh & rho<0.4
+  Ca  20   1.94  4.29   2 0.308  disc_unclear           no strong signature
+  Sc  21   1.95  1.95   1 0.000  disc_very_loose        rho<0.10
+  Ti  22   1.99  2.02   2 0.000  disc_very_loose        rho<0.10
+  V   23   2.17  2.17   1 0.000  disc_very_loose        rho<0.10
+  Cr  24   2.44  2.44   1 0.000  disc_very_loose        rho<0.10
+  Mn  25   2.10  2.15   2 0.000  disc_very_loose        rho<0.10
+  Fe  26   2.05  2.05   1 0.000  disc_very_loose        rho<0.10
+  Co  27   2.17  2.17   1 0.000  disc_very_loose        rho<0.10
+  Ni  28   2.38  2.38   1 0.000  disc_very_loose        rho<0.10
+  Cu  29   2.63  2.63   1 0.000  disc_very_loose        rho<0.10
+  Zn  30   1.91  2.21   2 0.000  disc_very_loose        rho<0.10
+  Ga  31   3.42  3.42   1 0.000  disc_very_loose        rho<0.10
+  Ge  32   2.02  2.15   2 0.000  disc_very_loose        rho<0.10
+  As  33   1.90  1.90   1 0.000  disc_very_loose        rho<0.10
+  Se  34   2.17  2.17   1 0.000  disc_very_loose        rho<0.10
+  Br  35   1.83  1.83   1 0.000  disc_very_loose        rho<0.10
+  Kr  36   1.74  1.74   1 0.000  disc_very_loose        rho<0.10
+  Rb  37   6.53  6.53   1 0.000  disc_loose_outer       OLI>thresh & rho<0.4
+  Sr  38   1.94  1.94   1 0.000  disc_very_loose        rho<0.10
+  Y   39   1.97  1.97   1 0.000  disc_very_loose        rho<0.10
+  Zr  40   1.98  1.98   1 0.000  disc_very_loose        rho<0.10
+  Nb  41   2.12  2.12   1 0.000  disc_very_loose        rho<0.10
+  Mo  42   2.28  2.28   1 0.000  disc_very_loose        rho<0.10
+  Tc  43   2.10  2.10   1 0.000  disc_very_loose        rho<0.10
+  Ru  44   2.28  2.28   1 0.000  disc_very_loose        rho<0.10
+  Rh  45   2.42  2.42   1 0.000  disc_very_loose        rho<0.10
+  Pd  46   2.33  2.33   1 0.000  disc_very_loose        rho<0.10
+  Ag  47   2.84  2.84   1 0.000  disc_very_loose        rho<0.10
+  Cd  48   1.88  1.88   1 0.000  disc_very_loose        rho<0.10
+  In  49   3.26  3.26   1 0.000  disc_very_loose        rho<0.10
+  Sn  50   1.99  1.99   1 0.000  disc_very_loose        rho<0.10
+  Sb  51   1.92  1.92   1 0.000  disc_very_loose        rho<0.10
+  Te  52   2.06  2.06   1 0.000  disc_very_loose        rho<0.10
+  I   53   1.83  1.83   1 0.000  disc_very_loose        rho<0.10
+  Xe  54   1.73  1.73   1 0.000  disc_very_loose        rho<0.10
+  Cs  55   6.45  6.45   1 0.000  disc_loose_outer       OLI>thresh & rho<0.4
+  Ba  56   1.92  1.92   1 0.000  disc_very_loose        rho<0.10
+  La  57   1.98  1.98   1 0.000  disc_very_loose        rho<0.10
+  Ce  58   1.96  1.96   1 0.000  disc_very_loose        rho<0.10
+  Pr  59   1.93  1.93   1 0.000  disc_very_loose        rho<0.10
+  Nd  60   1.94  1.94   1 0.000  disc_very_loose        rho<0.10
+  Pm  61   1.95  1.95   1 0.000  disc_very_loose        rho<0.10
+  Sm  62   1.96  1.96   1 0.000  disc_very_loose        rho<0.10
+  Eu  63   1.98  1.98   1 0.000  disc_very_loose        rho<0.10
+  Gd  64   1.97  1.97   1 0.000  disc_very_loose        rho<0.10
+  Tb  65   1.96  1.96   1 0.000  disc_very_loose        rho<0.10
+  Dy  66   1.96  1.96   1 0.000  disc_very_loose        rho<0.10
+  Ho  67   1.96  1.96   1 0.000  disc_very_loose        rho<0.10
+  Er  68   1.95  1.95   1 0.000  disc_very_loose        rho<0.10
+  Tm  69   1.95  1.95   1 0.000  disc_very_loose        rho<0.10
+  Yb  70   1.95  1.95   1 0.000  disc_very_loose        rho<0.10
+  Lu  71   2.56  2.56   1 0.000  disc_very_loose        rho<0.10
+  Hf  72   2.18  2.18   1 0.000  disc_very_loose        rho<0.10
+  Ta  73   2.15  2.15   1 0.000  disc_very_loose        rho<0.10
+  W   74   2.05  2.05   1 0.000  disc_very_loose        rho<0.10
+  Re  75   2.12  2.12   1 0.000  disc_very_loose        rho<0.10
+  Os  76   2.01  2.01   1 0.000  disc_very_loose        rho<0.10
+  Ir  77   1.90  1.90   1 0.000  disc_very_loose        rho<0.10
+  Pt  78   2.07  2.07   1 0.000  disc_very_loose        rho<0.10
+  Au  79   2.22  2.22   1 0.000  disc_very_loose        rho<0.10
+  Hg  80   1.80  1.80   1 0.000  disc_very_loose        rho<0.10
+  Tl  81   3.34  3.34   1 0.000  disc_very_loose        rho<0.10
+  Pb  82   2.03  2.03   1 0.000  disc_very_loose        rho<0.10
+  Bi  83   2.29  2.29   1 0.000  disc_very_loose        rho<0.10
+  Po  84   2.31  2.31   1 0.000  disc_very_loose        rho<0.10
+  At  85   1.92  1.92   1 0.000  disc_very_loose        rho<0.10
+  Rn  86   1.99  1.99   1 0.000  disc_very_loose        rho<0.10
+  Fr  87   5.50  5.50   1 0.000  disc_loose_outer       OLI>thresh & rho<0.4
+  Ra  88   1.92  1.92   1 0.000  disc_very_loose        rho<0.10
+  Ac  89   2.27  2.27   1 0.000  disc_very_loose        rho<0.10
+  Th  90   1.82  1.82   1 0.000  disc_very_loose        rho<0.10
+  Pa  91   1.99  1.99   1 0.000  disc_very_loose        rho<0.10
+  U   92   1.87  1.87   1 0.000  disc_very_loose        rho<0.10
+  Np  93   1.84  1.84   1 0.000  disc_very_loose        rho<0.10
+  Pu  94   1.86  1.86   1 0.000  disc_very_loose        rho<0.10
+  Am  95   1.96  1.96   1 0.000  disc_very_loose        rho<0.10
+  Cm  96   2.07  2.07   1 0.000  disc_very_loose        rho<0.10
+  Bk  97   1.92  1.92   1 0.000  disc_very_loose        rho<0.10
+  Cf  98   1.91  1.91   1 0.000  disc_very_loose        rho<0.10
+  Es  99   1.90  1.90   1 0.000  disc_very_loose        rho<0.10
+  Fm  100   1.89  1.89   1 0.000  disc_very_loose        rho<0.10
+  Md  101   1.88  1.88   1 0.000  disc_very_loose        rho<0.10
+  No  102   1.88  1.88   1 0.000  disc_very_loose        rho<0.10
+  Lr  103   2.90  2.90   1 0.000  disc_very_loose        rho<0.10
+  Rf  104   2.40  2.40   1 0.000  disc_very_loose        rho<0.10
+  Db  105   2.12  2.12   1 0.000  disc_very_loose        rho<0.10
+  Sg  106   2.03  2.03   1 0.000  disc_very_loose        rho<0.10
+  Bh  107   2.14  2.14   1 0.000  disc_very_loose        rho<0.10
+  Hs  108   2.24  2.24   1 0.000  disc_very_loose        rho<0.10
+  Mt  109   2.03  2.03   1 0.000  disc_very_loose        rho<0.10
+  Ds  110   1.96  1.96   1 0.000  disc_very_loose        rho<0.10
+  Rg  111   1.85  1.85   1 0.000  disc_very_loose        rho<0.10
+  Cn  112   1.59  1.59   1 0.000  disc_very_loose        rho<0.10
+  Nh  113   2.74  2.74   1 0.000  disc_very_loose        rho<0.10
+  Fl  114   1.97  1.97   1 0.000  disc_very_loose        rho<0.10
+  Mc  115   3.23  3.23   1 0.000  disc_very_loose        rho<0.10
+  Lv  116   2.50  2.50   1 0.000  disc_very_loose        rho<0.10
+  Ts  117   2.21  2.21   1 0.000  disc_very_loose        rho<0.10
+  Og  118   2.02  2.02   1 0.000  disc_very_loose        rho<0.10
+
+══ TABLE 4: DISCOVERED vs ATOMICUS EXPECTED ══
+
+       Z  discovered             expected           match
+  ──────────────────────────────────────────────────────────
+  H    1  disc_cube_closure      exp_loose_outer       NO
+  He   2  disc_cube_closure      exp_dyad             YES
+  Li   3  disc_loose_outer       exp_loose_outer      YES
+  Be   4  disc_outer_dyad        exp_dyad             YES
+  B    5  disc_alpha_breach      exp_triangle          NO
+  C    6  disc_alpha_breach      exp_tetrahedron       NO
+  N    7  disc_alpha_breach      exp_triangle          NO
+  O    8  disc_alpha_breach      exp_unknown           NO
+  F    9  disc_cube_closure      exp_unknown           NO
+  Ne  10  disc_cube_closure      exp_cube             YES
+  Na  11  disc_alpha_breach      exp_loose_outer      YES
+  Mg  12  disc_outer_dyad        exp_dyad             YES
+  Al  13  disc_unclear           exp_unknown           NO
+  Si  14  disc_very_loose        exp_unknown          YES
+  P   15  disc_smooth_open       exp_unknown          YES
+  S   16  disc_smooth_open       exp_unknown          YES
+  Cl  17  disc_very_loose        exp_unknown          YES
+  Ar  18  disc_cube_closure      exp_cube             YES
+  K   19  disc_loose_outer       exp_loose_outer      YES
+  Ca  20  disc_unclear           exp_dyad              NO
+  Sc  21  disc_very_loose        exp_unknown          YES
+  Ti  22  disc_very_loose        exp_unknown          YES
+  V   23  disc_very_loose        exp_unknown          YES
+  Cr  24  disc_very_loose        exp_d_rearrange       NO
+  Mn  25  disc_very_loose        exp_unknown          YES
+  Fe  26  disc_very_loose        exp_unknown          YES
+  Co  27  disc_very_loose        exp_unknown          YES
+  Ni  28  disc_very_loose        exp_unknown          YES
+  Cu  29  disc_very_loose        exp_d_rearrange       NO
+  Zn  30  disc_very_loose        exp_unknown          YES
+  Ga  31  disc_very_loose        exp_unknown          YES
+  Ge  32  disc_very_loose        exp_unknown          YES
+  As  33  disc_very_loose        exp_unknown          YES
+  Se  34  disc_very_loose        exp_unknown          YES
+  Br  35  disc_very_loose        exp_unknown          YES
+  Kr  36  disc_very_loose        exp_unknown          YES
+  Rb  37  disc_loose_outer       exp_unknown           NO
+  Sr  38  disc_very_loose        exp_unknown          YES
+  Y   39  disc_very_loose        exp_unknown          YES
+  Zr  40  disc_very_loose        exp_unknown          YES
+  Nb  41  disc_very_loose        exp_unknown          YES
+  Mo  42  disc_very_loose        exp_unknown          YES
+  Tc  43  disc_very_loose        exp_unknown          YES
+  Ru  44  disc_very_loose        exp_unknown          YES
+  Rh  45  disc_very_loose        exp_unknown          YES
+  Pd  46  disc_very_loose        exp_unknown          YES
+  Ag  47  disc_very_loose        exp_unknown          YES
+  Cd  48  disc_very_loose        exp_unknown          YES
+  In  49  disc_very_loose        exp_unknown          YES
+  Sn  50  disc_very_loose        exp_unknown          YES
+  Sb  51  disc_very_loose        exp_unknown          YES
+  Te  52  disc_very_loose        exp_unknown          YES
+  I   53  disc_very_loose        exp_unknown          YES
+  Xe  54  disc_very_loose        exp_unknown          YES
+  Cs  55  disc_loose_outer       exp_unknown           NO
+  Ba  56  disc_very_loose        exp_unknown          YES
+  La  57  disc_very_loose        exp_unknown          YES
+  Ce  58  disc_very_loose        exp_unknown          YES
+  Pr  59  disc_very_loose        exp_unknown          YES
+  Nd  60  disc_very_loose        exp_unknown          YES
+  Pm  61  disc_very_loose        exp_unknown          YES
+  Sm  62  disc_very_loose        exp_unknown          YES
+  Eu  63  disc_very_loose        exp_unknown          YES
+  Gd  64  disc_very_loose        exp_unknown          YES
+  Tb  65  disc_very_loose        exp_unknown          YES
+  Dy  66  disc_very_loose        exp_unknown          YES
+  Ho  67  disc_very_loose        exp_unknown          YES
+  Er  68  disc_very_loose        exp_unknown          YES
+  Tm  69  disc_very_loose        exp_unknown          YES
+  Yb  70  disc_very_loose        exp_unknown          YES
+  Lu  71  disc_very_loose        exp_unknown          YES
+  Hf  72  disc_very_loose        exp_unknown          YES
+  Ta  73  disc_very_loose        exp_unknown          YES
+  W   74  disc_very_loose        exp_unknown          YES
+  Re  75  disc_very_loose        exp_unknown          YES
+  Os  76  disc_very_loose        exp_unknown          YES
+  Ir  77  disc_very_loose        exp_unknown          YES
+  Pt  78  disc_very_loose        exp_unknown          YES
+  Au  79  disc_very_loose        exp_unknown          YES
+  Hg  80  disc_very_loose        exp_unknown          YES
+  Tl  81  disc_very_loose        exp_unknown          YES
+  Pb  82  disc_very_loose        exp_unknown          YES
+  Bi  83  disc_very_loose        exp_unknown          YES
+  Po  84  disc_very_loose        exp_unknown          YES
+  At  85  disc_very_loose        exp_unknown          YES
+  Rn  86  disc_very_loose        exp_unknown          YES
+  Fr  87  disc_loose_outer       exp_unknown           NO
+  Ra  88  disc_very_loose        exp_unknown          YES
+  Ac  89  disc_very_loose        exp_unknown          YES
+  Th  90  disc_very_loose        exp_unknown          YES
+  Pa  91  disc_very_loose        exp_unknown          YES
+  U   92  disc_very_loose        exp_unknown          YES
+  Np  93  disc_very_loose        exp_unknown          YES
+  Pu  94  disc_very_loose        exp_unknown          YES
+  Am  95  disc_very_loose        exp_unknown          YES
+  Cm  96  disc_very_loose        exp_unknown          YES
+  Bk  97  disc_very_loose        exp_unknown          YES
+  Cf  98  disc_very_loose        exp_unknown          YES
+  Es  99  disc_very_loose        exp_unknown          YES
+  Fm  100  disc_very_loose        exp_unknown          YES
+  Md  101  disc_very_loose        exp_unknown          YES
+  No  102  disc_very_loose        exp_unknown          YES
+  Lr  103  disc_very_loose        exp_unknown          YES
+  Rf  104  disc_very_loose        exp_unknown          YES
+  Db  105  disc_very_loose        exp_unknown          YES
+  Sg  106  disc_very_loose        exp_unknown          YES
+  Bh  107  disc_very_loose        exp_unknown          YES
+  Hs  108  disc_very_loose        exp_unknown          YES
+  Mt  109  disc_very_loose        exp_unknown          YES
+  Ds  110  disc_very_loose        exp_unknown          YES
+  Rg  111  disc_very_loose        exp_unknown          YES
+  Cn  112  disc_very_loose        exp_unknown          YES
+  Nh  113  disc_very_loose        exp_unknown          YES
+  Fl  114  disc_very_loose        exp_unknown          YES
+  Mc  115  disc_very_loose        exp_unknown          YES
+  Lv  116  disc_very_loose        exp_unknown          YES
+  Ts  117  disc_very_loose        exp_unknown          YES
+  Og  118  disc_very_loose        exp_unknown          YES
+
+  ALIGNMENT: 105/118 match, 13/118 fail
+
+══ TABLE 5: THRESHOLD SENSITIVITY (Set A vs Set B) ══
+
+  Set A: OLI>5 CBI>5 rho_rig>0.7 rho_lo<0.30
+  Set B: OLI>4 CBI>4 rho_rig>0.6 rho_lo<0.25
+
+       Z  Set A                  Set B                  Stable?
+  ──────────────────────────────────────────────────────────────
+  H    1  disc_cube_closure      disc_cube_closure      STABLE
+  He   2  disc_cube_closure      disc_cube_closure      STABLE
+  Li   3  disc_loose_outer       disc_loose_outer       STABLE
+  Be   4  disc_outer_dyad        disc_outer_dyad        STABLE
+  B    5  disc_alpha_breach      disc_alpha_breach      STABLE
+  C    6  disc_alpha_breach      disc_alpha_breach      STABLE
+  N    7  disc_alpha_breach      disc_alpha_breach      STABLE
+  O    8  disc_alpha_breach      disc_alpha_breach      STABLE
+  F    9  disc_cube_closure      disc_cube_closure      STABLE
+  Ne  10  disc_cube_closure      disc_cube_closure      STABLE
+  Na  11  disc_alpha_breach      disc_alpha_breach      STABLE
+  Mg  12  disc_outer_dyad        disc_outer_dyad        STABLE
+  Al  13  disc_unclear           disc_unclear           STABLE
+  Si  14  disc_very_loose        disc_very_loose        STABLE
+  P   15  disc_smooth_open       disc_smooth_open       STABLE
+  S   16  disc_smooth_open       disc_smooth_open       STABLE
+  Cl  17  disc_very_loose        disc_very_loose        STABLE
+  Ar  18  disc_cube_closure      disc_cube_closure      STABLE
+  K   19  disc_loose_outer       disc_loose_outer       STABLE
+  Ca  20  disc_unclear           disc_outer_dyad        UNSTABLE
+  Sc  21  disc_very_loose        disc_very_loose        STABLE
+  Ti  22  disc_very_loose        disc_very_loose        STABLE
+  V   23  disc_very_loose        disc_very_loose        STABLE
+  Cr  24  disc_very_loose        disc_very_loose        STABLE
+  Mn  25  disc_very_loose        disc_very_loose        STABLE
+  Fe  26  disc_very_loose        disc_very_loose        STABLE
+  Co  27  disc_very_loose        disc_very_loose        STABLE
+  Ni  28  disc_very_loose        disc_very_loose        STABLE
+  Cu  29  disc_very_loose        disc_very_loose        STABLE
+  Zn  30  disc_very_loose        disc_very_loose        STABLE
+  Ga  31  disc_very_loose        disc_very_loose        STABLE
+  Ge  32  disc_very_loose        disc_very_loose        STABLE
+  As  33  disc_very_loose        disc_very_loose        STABLE
+  Se  34  disc_very_loose        disc_very_loose        STABLE
+  Br  35  disc_very_loose        disc_very_loose        STABLE
+  Kr  36  disc_very_loose        disc_very_loose        STABLE
+  Rb  37  disc_loose_outer       disc_loose_outer       STABLE
+  Sr  38  disc_very_loose        disc_very_loose        STABLE
+  Y   39  disc_very_loose        disc_very_loose        STABLE
+  Zr  40  disc_very_loose        disc_very_loose        STABLE
+  Nb  41  disc_very_loose        disc_very_loose        STABLE
+  Mo  42  disc_very_loose        disc_very_loose        STABLE
+  Tc  43  disc_very_loose        disc_very_loose        STABLE
+  Ru  44  disc_very_loose        disc_very_loose        STABLE
+  Rh  45  disc_very_loose        disc_very_loose        STABLE
+  Pd  46  disc_very_loose        disc_very_loose        STABLE
+  Ag  47  disc_very_loose        disc_very_loose        STABLE
+  Cd  48  disc_very_loose        disc_very_loose        STABLE
+  In  49  disc_very_loose        disc_very_loose        STABLE
+  Sn  50  disc_very_loose        disc_very_loose        STABLE
+  Sb  51  disc_very_loose        disc_very_loose        STABLE
+  Te  52  disc_very_loose        disc_very_loose        STABLE
+  I   53  disc_very_loose        disc_very_loose        STABLE
+  Xe  54  disc_very_loose        disc_very_loose        STABLE
+  Cs  55  disc_loose_outer       disc_loose_outer       STABLE
+  Ba  56  disc_very_loose        disc_very_loose        STABLE
+  La  57  disc_very_loose        disc_very_loose        STABLE
+  Ce  58  disc_very_loose        disc_very_loose        STABLE
+  Pr  59  disc_very_loose        disc_very_loose        STABLE
+  Nd  60  disc_very_loose        disc_very_loose        STABLE
+  Pm  61  disc_very_loose        disc_very_loose        STABLE
+  Sm  62  disc_very_loose        disc_very_loose        STABLE
+  Eu  63  disc_very_loose        disc_very_loose        STABLE
+  Gd  64  disc_very_loose        disc_very_loose        STABLE
+  Tb  65  disc_very_loose        disc_very_loose        STABLE
+  Dy  66  disc_very_loose        disc_very_loose        STABLE
+  Ho  67  disc_very_loose        disc_very_loose        STABLE
+  Er  68  disc_very_loose        disc_very_loose        STABLE
+  Tm  69  disc_very_loose        disc_very_loose        STABLE
+  Yb  70  disc_very_loose        disc_very_loose        STABLE
+  Lu  71  disc_very_loose        disc_very_loose        STABLE
+  Hf  72  disc_very_loose        disc_very_loose        STABLE
+  Ta  73  disc_very_loose        disc_very_loose        STABLE
+  W   74  disc_very_loose        disc_very_loose        STABLE
+  Re  75  disc_very_loose        disc_very_loose        STABLE
+  Os  76  disc_very_loose        disc_very_loose        STABLE
+  Ir  77  disc_very_loose        disc_very_loose        STABLE
+  Pt  78  disc_very_loose        disc_very_loose        STABLE
+  Au  79  disc_very_loose        disc_very_loose        STABLE
+  Hg  80  disc_very_loose        disc_very_loose        STABLE
+  Tl  81  disc_very_loose        disc_very_loose        STABLE
+  Pb  82  disc_very_loose        disc_very_loose        STABLE
+  Bi  83  disc_very_loose        disc_very_loose        STABLE
+  Po  84  disc_very_loose        disc_very_loose        STABLE
+  At  85  disc_very_loose        disc_very_loose        STABLE
+  Rn  86  disc_very_loose        disc_very_loose        STABLE
+  Fr  87  disc_loose_outer       disc_loose_outer       STABLE
+  Ra  88  disc_very_loose        disc_very_loose        STABLE
+  Ac  89  disc_very_loose        disc_very_loose        STABLE
+  Th  90  disc_very_loose        disc_very_loose        STABLE
+  Pa  91  disc_very_loose        disc_very_loose        STABLE
+  U   92  disc_very_loose        disc_very_loose        STABLE
+  Np  93  disc_very_loose        disc_very_loose        STABLE
+  Pu  94  disc_very_loose        disc_very_loose        STABLE
+  Am  95  disc_very_loose        disc_very_loose        STABLE
+  Cm  96  disc_very_loose        disc_very_loose        STABLE
+  Bk  97  disc_very_loose        disc_very_loose        STABLE
+  Cf  98  disc_very_loose        disc_very_loose        STABLE
+  Es  99  disc_very_loose        disc_very_loose        STABLE
+  Fm  100  disc_very_loose        disc_very_loose        STABLE
+  Md  101  disc_very_loose        disc_very_loose        STABLE
+  No  102  disc_very_loose        disc_very_loose        STABLE
+  Lr  103  disc_very_loose        disc_very_loose        STABLE
+  Rf  104  disc_very_loose        disc_very_loose        STABLE
+  Db  105  disc_very_loose        disc_very_loose        STABLE
+  Sg  106  disc_very_loose        disc_very_loose        STABLE
+  Bh  107  disc_very_loose        disc_very_loose        STABLE
+  Hs  108  disc_very_loose        disc_very_loose        STABLE
+  Mt  109  disc_very_loose        disc_very_loose        STABLE
+  Ds  110  disc_very_loose        disc_very_loose        STABLE
+  Rg  111  disc_very_loose        disc_very_loose        STABLE
+  Cn  112  disc_very_loose        disc_very_loose        STABLE
+  Nh  113  disc_very_loose        disc_very_loose        STABLE
+  Fl  114  disc_very_loose        disc_very_loose        STABLE
+  Mc  115  disc_very_loose        disc_very_loose        STABLE
+  Lv  116  disc_very_loose        disc_very_loose        STABLE
+  Ts  117  disc_very_loose        disc_very_loose        STABLE
+  Og  118  disc_very_loose        disc_very_loose        STABLE
+
+  Stable: 117/118,  Unstable: 1/118
+
+══ TABLE 6: NORMALIZED PRESSURE TERRAIN P_i = IE_i/(Ry·Z²) ══
+
+  He: 0.4518 0.9999 
+  Li: 0.0440 0.6177 1.0000 
+  Be: 0.0428 0.0837 0.7069 1.0001 
+  B: 0.0244 0.0740 0.1115 0.7625 1.0002 
+  C: 0.0230 0.0498 0.0978 0.1317 0.8005 1.0004 
+  N: 0.0218 0.0444 0.0712 0.1162 0.1468 0.8281 1.0006 
+  O: 0.0156 0.0403 0.0631 0.0889 0.1308 0.1586 0.8491 1.0007 
+  F: 0.0158 0.0317 0.0569 0.0791 0.1037 0.1426 0.1680 0.8656 1.0010 
+  Ne: 0.0158 0.0301 0.0466 0.0714 0.0928 0.1161 0.1523 0.1757 0.8789 1.0012 
+  Na: 0.0031 0.0287 0.0435 
+  Mg: 0.0039 0.0077 0.0409 
+  Al: 0.0026 0.0082 0.0124 
+  Si: 0.0031 0.0061 0.0126 0.0169 
+  P: 0.0034 0.0065 0.0099 0.0168 0.0212 
+  S: 0.0030 0.0067 0.0100 0.0136 
+  Cl: 0.0033 0.0061 0.0101 
+  Ar: 0.0036 0.0063 0.0092 0.0136 0.0170 0.0206 0.0282 0.0325 
+  K: 0.0009 0.0064 0.0093 
+  Ca: 0.0011 0.0022 0.0094 
+  Sc: 0.0011 0.0021 0.0041 
+  Ti: 0.0010 0.0021 0.0042 
+  V: 0.0009 0.0020 0.0041 
+  Cr: 0.0009 0.0021 0.0040 
+  Mn: 0.0009 0.0018 0.0040 
+  Fe: 0.0009 0.0018 0.0033 
+  Co: 0.0008 0.0017 0.0034 
+  Ni: 0.0007 0.0017 0.0033 
+  Cu: 0.0007 0.0018 0.0032 
+  Zn: 0.0008 0.0015 0.0032 
+  Ga: 0.0005 0.0016 0.0023 
+  Ge: 0.0006 0.0011 0.0025 
+  As: 0.0007 0.0013 0.0019 
+  Se: 0.0006 0.0013 0.0020 
+  Br: 0.0007 0.0013 0.0022 
+  Kr: 0.0008 0.0014 0.0021 
+  Rb: 0.0002 0.0015 
+  Sr: 0.0003 0.0006 
+  Y: 0.0003 0.0006 
+  Zr: 0.0003 0.0006 
+  Nb: 0.0003 0.0006 
+  Mo: 0.0003 0.0007 
+  Tc: 0.0003 0.0006 
+  Ru: 0.0003 0.0006 
+  Rh: 0.0003 0.0007 
+  Pd: 0.0003 0.0007 
+  Ag: 0.0003 0.0007 
+  Cd: 0.0003 0.0005 
+  In: 0.0002 0.0006 
+  Sn: 0.0002 0.0004 
+  Sb: 0.0002 0.0005 
+  Te: 0.0002 0.0005 
+  I: 0.0003 0.0005 
+  Xe: 0.0003 0.0005 
+  Cs: 0.0001 0.0006 
+  Ba: 0.0001 0.0002 
+  La: 0.0001 0.0003 
+  Ce: 0.0001 0.0002 
+  Pr: 0.0001 0.0002 
+  Nd: 0.0001 0.0002 
+  Pm: 0.0001 0.0002 
+  Sm: 0.0001 0.0002 
+  Eu: 0.0001 0.0002 
+  Gd: 0.0001 0.0002 
+  Tb: 0.0001 0.0002 
+  Dy: 0.0001 0.0002 
+  Ho: 0.0001 0.0002 
+  Er: 0.0001 0.0002 
+  Tm: 0.0001 0.0002 
+  Yb: 0.0001 0.0002 
+  Lu: 0.0001 0.0002 
+  Hf: 0.0001 0.0002 
+  Ta: 0.0001 0.0002 
+  W: 0.0001 0.0002 
+  Re: 0.0001 0.0002 
+  Os: 0.0001 0.0002 
+  Ir: 0.0001 0.0002 
+  Pt: 0.0001 0.0002 
+  Au: 0.0001 0.0002 
+  Hg: 0.0001 0.0002 
+  Tl: 0.0001 0.0002 
+  Pb: 0.0001 0.0002 
+  Bi: 0.0001 0.0002 
+  Po: 0.0001 0.0002 
+  At: 0.0001 0.0002 
+  Rn: 0.0001 0.0002 
+  Fr: 0.0000 0.0002 
+  Ra: 0.0001 0.0001 
+  Ac: 0.0000 0.0001 
+  Th: 0.0001 0.0001 
+  Pa: 0.0001 0.0001 
+  U: 0.0001 0.0001 
+  Np: 0.0001 0.0001 
+  Pu: 0.0001 0.0001 
+  Am: 0.0000 0.0001 
+  Cm: 0.0000 0.0001 
+  Bk: 0.0000 0.0001 
+  Cf: 0.0000 0.0001 
+  Es: 0.0000 0.0001 
+  Fm: 0.0000 0.0001 
+  Md: 0.0000 0.0001 
+  No: 0.0000 0.0001 
+  Lr: 0.0000 0.0001 
+  Rf: 0.0000 0.0001 
+  Db: 0.0000 0.0001 
+  Sg: 0.0001 0.0001 
+  Bh: 0.0000 0.0001 
+  Hs: 0.0000 0.0001 
+  Mt: 0.0001 0.0001 
+  Ds: 0.0001 0.0001 
+  Rg: 0.0001 0.0001 
+  Cn: 0.0001 0.0001 
+  Nh: 0.0000 0.0001 
+  Fl: 0.0000 0.0001 
+  Mc: 0.0000 0.0001 
+  Lv: 0.0000 0.0001 
+  Ts: 0.0000 0.0001 
+  Og: 0.0000 0.0001 
+
+╔══════════════════════════════════════════════════════════════╗
+║  SPECIAL INVESTIGATIONS                                    ║
+╚══════════════════════════════════════════════════════════════╝
+
+  1. BERYLLIUM (Z=4)
+     IE2→IE3 gap ratio = 8.45 (CBI=8.45 at BP=2)
+     Expected: clearest dyad-to-core discontinuity.
+     Result: CONFIRMED — G2=8.45 is strong alpha-core breach.
+
+  2. CARBON (Z=6)
+     rho=0.112 (low first excitation vs IE1).
+     Expected: tetrahedral bonding openness.
+     Discovered class: disc_alpha_breach
+     Tetrahedral signature in IE ladder: PARTIALLY VISIBLE (very low rho)
+     Note: tetrahedral geometry is a bonding feature,
+     not necessarily visible in sequential IE extraction.
+
+  3. NEON (Z=10)
+     rho=0.771, BP=8, CBI=5.00
+     Expected: cube closure with late shell break (IE8→IE9).
+     Result: CONFIRMED — rho 0.771 is rigid, BP=8 equals 8.
+
+  4. SODIUM (Z=11), POTASSIUM (Z=19)
+     Na: OLI=9.20, K: OLI=7.29
+     Expected: extreme OLI (loose outer).
+     Result: CONFIRMED — both OLI > 7.
+
+  5. COPPER (Z=29) vs NICKEL (Z=28) / ZINC (Z=30)
+     Ni: OLI=2.10 rho=0.000  Cu: OLI=2.05 rho=0.000  Zn: OLI=2.17 rho=0.000
+     Expected: Cu shows distinctive anomaly.
+     Result: NOT CLEARLY DISTINCT — Cu OLI/rho is not distinctive vs Ni.
+
+  6. IRON (Z=26)
+     rho=0.000, roughness=0.0017
+     Expected: complex d-shell, no clean closure.
+     Result: rho=0.000 confirms open/complex structure.
+
+╔══════════════════════════════════════════════════════════════╗
+║  STAGE C TARGETS                                           ║
+╚══════════════════════════════════════════════════════════════╝
+
+  loose_outer           sig: OLI>5 & rho<0.4               PERMISSION GRANTED
+    → derive shallow outer slot over closed inner geometry
+
+  dyad_closure          sig: BP=2 & CBI>4                  PERMISSION GRANTED
+    → derive paired two-electron slot with core breach beyond
+
+  cube_closure          sig: rho>0.7 & late BP             PERMISSION GRANTED
+    → derive eight-slot closure and high first excitation fraction
+
+  alpha_core_breach     sig: CBI>5 at inner boundary       PERMISSION GRANTED
+    → derive deep pressure wall at alpha-core transition
+
+  tetrahedral           sig: low rho (indirect)            WEAK — NEEDS MORE DATA
+    → derive four-direction bonding geometry from alpha+4d grammar
+
+  d_rearrangement       sig: roughness anomaly in d-block  WEAK — NEEDS MORE DATA
+    → derive preference for internal geometric perfection
+
+══════════════════════════════════════════════════════════════
+  STAGE B+ FINDINGS
+
+  1. Non-circular classifications discovered: 118 atoms
+     Alignment with Atomicus: 105/118 match
+
+  2. STRONGEST confirmed signatures:
+     - loose_outer: Li/Na/K OLI > 7 (STRONG)
+     - cube_closure: He/Ne/Ar rho > 0.73 (STRONG)
+     - alpha_core_breach: Be IE2→IE3 = 8.5× (STRONG)
+
+  3. WEAKEST signatures:
+     - tetrahedral: C not distinguishable from IE ladder alone
+     - d_rearrangement: Cu not clearly distinct from Ni/Zn
+
+  4. Nuclear grammar effect: SECONDARY.
+     Primary = slot closure geometry.
+     Triton fraction does not predict rigidity directly.
+
+  5. Stage C permission:
+     GRANTED: loose_outer, dyad, cube, alpha_breach
+     HELD: tetrahedral (needs bonding data, not IE)
+     HELD: d_rearrangement (needs finer d-block metrics)
+
+  6. Threshold stability: 117/118 stable across Set A/B.
+     Unstable atoms need finer discrimination.

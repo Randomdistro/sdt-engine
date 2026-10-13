@@ -1,0 +1,307 @@
+### 10/FD01_Navier_Stokes_from_Spation_Relay  | status: SPEC (upgrade 2026-06-27). | words 3322 | code 1 outs 1 verd 1 runlog 0 | gate True prereg True
+Q: Does the continuum coarse-graining of nearest-neighbour spation relay reproduce incompressible Navier–Stokes **term-for-term** (no surplus term, no missing term), or does the relay update produce a leading-order PDE that differs from NS? 2. **Why does it matter?** — FD01 is the *root* of the entire FD branch (FD02–FD11). If NS i
+F: §⑧, five falsifiers with real failure modes: a surplus leading-order term NS lacks (and not a defensible SDT-distinct prediction), a dropped term, `‖∇·v‖` finite as `Ma→0`, or the emitted `ν` disagreeing with FD02 by >10% — each a clean kill. 5. **How will we know we're done?** — **Dual verdict:** p
+G: 3. **How will we find out?** — Five gated phases (§④): write the discrete relay rule (P1) and Taylor/Chapman–Enskog expand it (P2) **before** declaring any NS term recovered; the term↔mechan
+G: Five phases, each gated. Run them in order; a failed checkpoint stops the chain (R4: a clean kill outranks a forced pass).
+G: - **Success metric.** The leading-order PDE is *exactly* incompressible NS — no surplus term (e.g. no spurious `∇(∇·v)`, no odd-order dispersion at this order), no missing term. **Checkpoint
+G: - **Success metric.** FD01 and FD02 `ν` coefficients agree to <1%; benchmark match within stated tolerance with calibration count ≤ 1. **Checkpoint C5.**
+G: | **C (QUALIFIED — convergence)** | NS reproduced, one scale set | Bijection exact, Euler+Stokes recovered, `ν` matches FD02 <1%, benchmark match within tolerance with CALIBRATED(1) (one flu
+V: # FD01 — Direct re-run verdict (2026-07-26)
+V: > **Run class: DIRECT** (main session, no agents). Agent-era `FD01_VERDICT.md`,
+V: | gate | committed | today | verdict |
+V: | P1 conservation | machine precision | drift 0.000e+00; free-streaming 0 | PASS |
+V: | P1/2 ν recovery (0.5·dσ²/dt vs w·dx²/dt) | <0.5% | 2.873e-10 | PASS |
+O: ADVECTION ALIVE (peak moved): PASS
+O: FD01 VERDICT
+O: Failed numeric checks: 0
+FLAGS: MISSING: ; ident:4 ; res pass/fail 5/0 verd pass/fail 5/0
+
+### 10/FD02_Viscosity_and_Circulation_Quantum  | status: EXECUTED; B16 COMPUTED extension (2026-08-15). | words 4080 | code 1 outs 1 verd 1 runlog 0 | gate True prereg True
+Q: Is fluid viscosity genuinely lattice momentum-diffusion `ν = ⅓ λ_mfp v_relay` (with the `⅓` traced to 3-D angular averaging, not borrowed), and does the lattice impose a real dissipation *floor* (`η/s ≳ ħ/(4π k_B)`) whose `1/(4π)` is derivable rather than fitted? 2. **Why does it matter?** — FD02 supplies the `ν` coefficient FD0
+F: §⑧, five falsifiers with real failure modes: air/water `ν` off by >2 orders or wrong air>water ordering; fitted `T`-exponent outside `0.5 ± 0.05` (not Sutherland-explained); `κ` reproducible only by inserting a free integer; no floor emerging; FD01 handshake off >10%. 5. **How will we know we're don
+G: 3. **How will we find out?** — Five gated phases (§④): derive `ν` and its `⅓` (P1) and the `√T` exponent (P3) before reading any tabulated viscosity; the floor coefficient (P5) is DERIVED-or
+G: Five phases, each gated. Run in order; a failed checkpoint stops the chain (R4: a clean falsification outranks a forced pass). Predict every number and log it *before* comparison (R1).
+G: - **Success metric.** Both `ν` within one order of magnitude (factor ≲ 10) of measured; relative ordering air > water reproduced. **Checkpoint C2.**
+G: ### Phase 4 — Circulation quantum (the superfluid gate)
+G: - **Success metric.** Computed `κ` matches measured to <1% (it is `h/m` essentially by construction — the test is that the SDT winding argument *forces* `h/m` with no free integer, R5 anti-n
+V: # FD02 — Direct re-run verdict (2026-07-26)
+V: > **Run class: DIRECT** (main session, no agents). Agent-era `FD02_VERDICT.md`,
+V: > Tool: `fd02_viscosity_circulation.cpp`, MSVC C++20, exit **1** because C2 fails.
+V: DERIVED-or-CALIBRATED(1), never silent. QGP appears as a measured convergence benchmark by its
+V: | gate | committed | today | verdict |
+O: C4 kappa=h/m_He <1% (CORE GATE, no free integer) : pass
+O: C5 eta/s floor present, 1/(4pi) CALIBRATED(1) : pass
+O: VERDICT: CLASS C (QUALIFIED - convergence).
+FLAGS: MISSING: ; ident:6 ; res pass/fail 4/1 verd pass/fail 3/2
+
+### 10/FD03_Reynolds_Transition_Relay_Ratio  | status: SPEC (upgrade 2026-06-27). | words 3605 | code 1 outs 1 verd 1 runlog 0 | gate True prereg True
+Q: Why is `Re` dimensionless and *why* does transition occur near a particular value: does the lattice fix the threshold `Re_crit` from **geometry** (the dominant-mode coherence length and the `2D` neighbour count), or is `Re_crit ≈ 2300` only reproducible by back-solving the coherence length from the measured number? 2. **Why does
+F: §⑧, five falsifiers with real failure modes — **the central one (F2) is honest about the trap:** the threshold must come from the coherence-length *computed from lattice geometry*, NOT back-solved from 2300; if `ℓ_c` can only be obtained by inverting the measured `Re_crit`, F2 is a CALIBRATED pass a
+G: 1. **What don't we know?** — Why is `Re` dimensionless and *why* does transition occur near a particular value: does the lattice fix the threshold `Re_crit` from **geometry** (the dominant-m
+G: 2. **Why does it matter?** — `Re` is the most consequential dimensionless group in fluids and standard texts give it no first-principles account; if SDT derives it as one medium's two compet
+G: 3. **How will we find out?** — Four gated phases (§④). The dimensionlessness proof (P1) and the coherence-threshold *derivation* (P2) commit `Re_crit` to the run log **before** any data are 
+G: 4. **What would prove us wrong?** — §⑧, five falsifiers with real failure modes — **the central one (F2) is honest about the trap:** the threshold must come from the coherence-length *comput
+G: The Reynolds number `Re = UL/ν` is the most consequential dimensionless group in fluid mechanics, yet textbooks present it as a phenomenological ratio with no first-principles account of *wh
+V: # FD03 — Direct re-run verdict (2026-07-26)
+V: > **Run class: DIRECT** (main session, no agents). Agent-era `FD03_VERDICT.md`,
+V: forward from lattice geometry; a back-solve from 2300 is CALIBRATED(1), cap at C, "the prompt
+V: pure geometry). ℓ_c/L = 1/48 **back-solved from measured 2300 → CALIBRATED(1)**, exactly the
+V: - **P3:** plate needs a **second** calibration (L/ℓ_c = 3536); direction (open ≫ confined) is
+O: FD03 VERDICT: CLASS C (QUALIFIED - convergence)
+FLAGS: MISSING: ; ident:17 ; res pass/fail 1/0 verd pass/fail 0/0
+
+### 10/FD04_Kolmogorov_Cascade_from_Displacement  | status: SPEC (upgrade 2026-06-27). | words 4124 | code 2 outs 2 verd 1 runlog 0 | gate True prereg True
+Q: Is the turbulent inertial-range `E(k) ∝ k^{−5/3}` law *postulated* (as in Kolmogorov's 1941 similarity hypotheses) or does the SDT volume-conserved displacement cascade **force** the `−5/3` exponent through the chain volume-conservation → constant flux → `u_ℓ ∝ ℓ^{1/3}` — with nothing fitted but the prefactor `C_K`? 2. **Why doe
+F: §⑧, five falsifiers with real failure modes: non-constant `ε_n`; flux argument yielding any exponent ≠ −5/3; no finite dissipation scale; a derived `η < ℓ_P`; or measured slopes irreconcilable beyond ±0.10. 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics cla
+G: 3. **How will we find out?** — Five gated phases (§④): the constant-flux ledger (P1) yields `u_ℓ ∝ ℓ^{1/3}` *before* the spectrum is read; the −5/3 closure (P2) is the core gate; any exponen
+G: **Mechanism / analogy.** A large eddy is a large displaced volume of the relay lattice. In SDT a displacement does not vanish locally; it *propagates outward shell-by-shell with the displace
+G: 1. **Displacement cascade with volume conservation (verified SDT result).** A displaced lattice volume `V_disp` propagates outward shell-by-shell with the displaced volume conserved; this fi
+G: Five gated phases. Run in order; a failed checkpoint stops the chain (R4: a clean kill outranks a forced pass). Each phase predicts its number *before* comparing to data (R1).
+G: ### Phase 2 — The −5/3 exponent (the core gate)
+V: # FD04 — Direct re-run verdict (2026-07-26)
+V: > **Run class: DIRECT** (main session, no agents). Agent-era `FD04_VERDICT.md`,
+V: intermittency pre-declared as honestly-OPEN. R0–R5 inherited.
+V: ε_n spread 5.6e-16. PASS.
+V: exactly; numerical fit on the synthetic spectrum −1.666825 ± 6e-4. PASS.
+O: C4 slope match to cited inertial range: PASS
+O: C5 intermittency catalogued OPEN : PASS (honest)
+O: exponent), QUALIFIED to C overall because C_K and intermittency
+FLAGS: MISSING: ; ident:2 ; res pass/fail 12/0 verd pass/fail 5/0
+
+### 10/FD05_Sound_Shocks_and_c_over_root3  | status: SPEC (10× upgrade 2026-06-28). | words 3515 | code 1 outs 1 verd 1 runlog 0 | gate True prereg True
+Q: Is `c_s = c/√3` a *genuine native consequence of 3-D lattice isotropy* (i.e. `c_s = c/√D` with D=3, derivable **without** assuming the radiation equation of state), or is it merely the imported relation `P = u/3` differentiated — an identity wearing a derivation's clothes? And: is `c/√3` a property of the **vacuum lattice** or o
+F: §⑧, seven falsifiers with numeric triggers and **real failure modes** — including the LIGO test (F2) that can genuinely come out the wrong way. 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN), per p
+G: 3. **How will we find out?** — Seven gated phases (§④). The native isotropy derivation (P2) runs
+G: content. *Consuming `law_I::P_rad = u/3` instead of deriving it is the tautology to avoid (§⑤ gate).*
+G: (R1); standard-FD results are CONVERGENCE targets, never imported coefficients (R5). Phase N+1 is gated
+G: - **Success (A-grade):** continuum `⟨cos²θ⟩ = 1/3` exact; discrete CRN average within the committed
+G: residual (P2 threshold, §⑩); `c_s = 1.73085×10⁸ m/s`, `c_s/c = 0.577350`. **No `law_I::P_rad` call.**
+V: # FD05 — Direct re-run verdict (2026-07-26)
+V: > **Run class: DIRECT** (main session, no agents). Agent-era `FD05_VERDICT.md`,
+V: ## Corrections this verdict applies (the tool over-graded itself)
+V: 1. **P2 is Class C by the prompt's own gate, not "Class A native."** The tool's derivation opens
+V: dimensionality?) was NOT executed and **stays open**. The CR04/BAO cross-check is internal
+O: Phase 5 boom == Cherenkov (E57) unification ..... PASS
+O: OVERALL: PASS
+O: -> FD05 overall: Class A/C (native c/sqrt(3) + unification; ordinary
+FLAGS: MISSING:Theory/05 ; ident:20 ; res pass/fail 23/0 verd pass/fail 0/0
+
+### 10/FD06_Boundary_Layer_from_Traction  | status: SPEC (upgrade 2026-06-27). | words 3702 | code 1 outs 1 verd 1 runlog 0 | gate True prereg True
+Q: Fluid mechanics *imposes* no-slip (`u=0` at a wall) as an empirical boundary condition with no first-principles reason; does SDT spation traction (PPT06) *derive* no-slip as a stable fixed point, with residual slip length `λ_s → 0` (continuum) or `λ_s ∼ ℓ_P` (molecularly negligible)? 2. **Why does it matter?** — No-slip is the u
+F: §⑧, five falsifiers with real failure modes: finite slip `λ_s ≫ ℓ_P` in the continuum limit; `δ` slope ≠ ½; `C_f`/`δ` prefactor off by >2×; profiles failing to collapse; or no finite transition `Re_x`. 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (N
+G: 3. **How will we find out?** — Five gated phases (§④): start the lattice in *pure slip* (`u=U` everywhere) and show the traction rule alone relaxes the wall layer to zero — no `u=0` hand-set
+G: **Mechanism / analogy.** A solid surface in SDT is not a "wall boundary condition" — it is a region of vortex-knot matter whose spations are already saturated relaying their own internal con
+G: Five phases, each gated. Run them in order; a failed checkpoint stops the chain (R4: a clean kill outranks a forced pass).
+G: ### Phase 2 — Boundary-layer growth `δ(x) ∼ √(νx/U)` (the Blasius scaling gate)
+G: - **Success metric.** Slope of `log δ` vs `log x` is `0.50 ± 0.03`; prefactor `C_δ` recovers `≈ 5.0` (99% thickness) within the falsifier band (<2×). **Checkpoint C2 (the core gate):** `δ` s
+V: # FD06 — Direct re-run verdict (2026-07-26)
+V: > **Run class: DIRECT** (main session, no agents). Agent-era `FD06_VERDICT.md`,
+V: No-slip emerges as the stable fixed point, not a boundary condition. PASS.
+V: advection streamwise); collapse constant flat to 4 decimals. PASS.
+V: ## Note this verdict adds
+O: CHECKPOINT C3/C4: f''(0), delta/x=5.0, C_f=0.664, H=2.59 reproduced -> PASS
+O: FD06 SUMMARY
+O: OVERALL: Class C (qualified) - native mechanism + scaling, prefactors
+FLAGS: MISSING: ; ident:1 ; res pass/fail 3/0 verd pass/fail 2/0
+
+### 10/FD07_Circulation_Lift_and_Magnus  | status: SPEC (upgrade 2026-06-27). | words 4422 | code 1 outs 1 verd 1 runlog 0 | gate True prereg True
+Q: Does the lattice's `ℓ=2` rotational traction wake (PPT06) *derive* the thin-airfoil lift-curve slope `dC_L/dα = 2π`, with the `2π` emerging from the two-lobed wake geometry — or is the `2π` actually being imported from potential-flow (Joukowski) geometry and only re-narrated? 2. **Why does it matter?** — Textbook lift rests on a
+F: §⑧, five falsifiers with real failure modes: wrong lift *sign* (toward the high-occlusion face); wrong Magnus sign; no Kutta condition emerging from relay continuity; or — the genuinely-falsifiable one — the `ℓ=2` channel geometry yielding a slope materially ≠ `2π` once the `2π` is *not* pre-plugged
+G: 3. **How will we find out?** — Four gated phases (§④). **The honest core (P2):** the `2π` must be shown to *come out of* the `ℓ=2` channel solid-angle geometry; if it is instead supplied by 
+G: - **NATIVE (A-path):** the `ℓ=2` solid-angle integral yields the coefficient `π` to numerical tolerance, with no potential-flow input ⟹ `2π` DERIVED.
+G: Four phases, each gated. Run them in order; a failed checkpoint stops the chain (R4: a clean kill outranks a forced pass).
+G: ### Phase 2 — Thin-airfoil slope `dC_L/dα = 2π` from the ℓ=2 channel (core anti-tautology gate)
+G: - **Success metric.** **A-path:** the `ℓ=2` integral returns the coefficient `π` (slope `2π`) to numerical tolerance with no potential-flow input ⟹ DERIVED. **C-path:** the coefficient is ta
+V: # FD07 — Direct re-run verdict (2026-07-26)
+V: > **Run class: DIRECT** (main session, no agents). Agent-era `FD07_VERDICT.md`,
+V: - **P1 (native):** L = ρUΓ from occlusion asymmetry; lift sign toward the fast face. PASS.
+V: *imposed-by-fiat* rival axiom dissolved into the relay ceiling. PASS.
+V: ## Corrections this verdict applies
+O: Phase 3a Kutta from Law-V relay continuity (v≤c) : PASS [NATIVE mechanism]
+O: Phase 3b Magnus sign toward surface-adds face + right order : PASS [NATIVE sign, Class C]
+O: Phase 4 Γ=Nκ continuum (N≫1) : PASS [FD02 handshake]
+FLAGS: MISSING: ; ident:7 ; res pass/fail 10/0 verd pass/fail 2/0
+
+### 10/FD08_Bernoulli_from_Movement_Budget  | status: SPEC (upgrade 2026-06-27). | words 3809 | code 1 outs 1 verd 1 runlog 0 | gate True prereg True
+Q: Is Bernoulli's `½ρv² + P + ρgz = const` an independent axiom, or does it fall out of the FD01 momentum balance integrated along a streamline as a **budget partition** — directed head vs isotropic static push drawing on one conserved convergence-pressure ledger (the continuum image of Law V's `v_circ² + v² = c²`)? 2. **Why does i
+F: §⑧, five falsifiers with real failure modes: a surplus/missing leading-order term; the wrong trade sign (`dP/dv > 0`); Venturi/Pitot off; the incompressible form not recovered as `M→0`; or the `ρgz` head obtainable only via G/M (R0 violation). 5. **How will we know we're done?** — **Dual verdict:** 
+G: 3. **How will we find out?** — Five gated phases (§④): integrate the steady inviscid FD01 balance along `s` (P1) and show the budget identity + forced sign (P2, core gate) before touching Ve
+G: Five phases, each gated. Run them in order; a failed checkpoint stops the chain (R4: a clean kill outranks a forced pass).
+G: ### Phase 2 — Budget-partition identity & the forced sign (the core gate)
+G: - **Success metric.** `B = const` reproduced as a partition of one ledger; `dP/dv < 0` analytically *and* numerically on a model streamtube. **Checkpoint C2 (core gate):** budget identity ho
+G: - **Success metric.** `B(s)` constant along the tube to machine precision; Venturi/Pitot within stated tolerance; pressure field exported for FD07/FD09. **Checkpoint C5.**
+V: # FD08 — Direct re-run verdict (2026-07-26)
+V: > **Run class: DIRECT** (main session, no agents). Agent-era `FD08_VERDICT.md`,
+V: trade sign **forced** negative (dP/dv = −ρv). PASS.
+V: 1e-8 as M→0; budget bounded at v→c. One measured input (γ). PASS.
+V: ## Correction this verdict applies
+O: C4 compressible/M->0 corner .... PASS
+O: C5 streamtube B(s)=const ....... PASS
+O: OVERALL: ALL CHECKPOINTS PASS
+FLAGS: MISSING: ; ident:9 ; res pass/fail 13/0 verd pass/fail 2/0
+
+### 10/FD09_Drag_as_Occlusion_Cross_Section  | status: SPEC (upgrade 2026-06-27). | words 4002 | code 1 outs 1 verd 1 runlog 0 | gate True prereg True
+Q: Are Stokes drag (`F = 6πμRv`, low Re) and form drag (`½ρv²C_D A`, high Re) genuinely *one* SDT occlusion mechanism, and can the `6π` prefactor be **derived** from the sphere relay geometry rather than adopted from the known Stokes solution? 2. **Why does it matter?** — The engine already uses occlusion (Law III) for every force;
+F: §⑧, five falsifiers with real failure modes: sphere geometry yielding a prefactor ≠ `6π` with no reconciliation; form-regime `C_D` the wrong order of magnitude; no crisis emerging from FD06; crisis location off by >2× AND post-crisis `C_D` out of `[0.07,0.15]`; or terminal velocity off >15%. 5. **Ho
+G: 3. **How will we find out?** — Five gated phases (§④). **Two honesty firewalls:** (P2) the `6π` is either DERIVED from the `4πR²` surface + `2πR²` pressure split of a sphere, or it is ADOPTE
+G: Five phases, each gated. Run in order; a failed checkpoint stops the chain (R4: a clean kill outranks a forced pass). The standard `C_D(Re)` curve is the **convergence target to reproduce**,
+G: - **Success metric.** **A-path:** forward occlusion integral yields `6π` (the `4π`+`2π` split) to <1% with no Stokes-solution input ⟹ DERIVED. **C-path:** `6π` adopted from Stokes and shown 
+G: - **Success metric.** *Independently-predicted* crisis `Re` within a factor ~2 of `3×10⁵` AND post-crisis `C_D ∈ [0.07, 0.15]`. **Checkpoint C4:** the crisis is located by FD06 and sized by 
+G: - **Success metric.** Model `C_D(Re)` within stated tolerance band of the reference curve across `10⁻¹–10⁶` (including crisis); terminal velocities within ~15% with calibration count ≤ 1. **
+V: # FD09 — Direct re-run verdict (2026-07-26)
+V: > **Run class: DIRECT** (main session, no agents). Agent-era `FD09_VERDICT.md`,
+V: CALIBRATED(1) crisis-shape scale.
+V: (~7%, inside the 15% falsifier); 1 mm drop 3.97 vs 4.0–4.5. PASS.
+V: ## Note this verdict adds
+O: VERDICT
+FLAGS: MISSING: ; ident:8 ; res pass/fail 1/0 verd pass/fail 1/0
+
+### 10/FD10_Vortex_Shedding_and_Strouhal  | status: SPEC (upgrade 2026-06-27). | words 3747 | code 1 outs 1 verd 1 runlog 0 | gate True prereg True
+Q: Why does the vortex-shedding Strouhal number sit on a flat plateau `St ≈ 0.2` across ~two decades of Reynolds number — can the SDT relaxation/traction clock (`St = τ_adv/(τ_relax + τ_build)`) reproduce both the plateau *value* and its *flatness* with no fitted shedding constant? 2. **Why does it matter?** — Standard fluid mechan
+F: §⑧, five falsifiers with real failure modes: the clock giving *no* plateau (St drifts with Re on the plateau range); the wrong `f`–`U` power; `St_∞` off by >2× with no reconciling geometry; the low-Re curve bending the wrong way; or lock-in predicted where none is observed. 5. **How will we know we'
+G: 3. **How will we find out?** — Five gated phases (§④). **Honesty up front:** the relaxation/advection ratio carries a dimensionless clock constant (call it `k_clock`); if it must be set to l
+G: A bluff body in steady flow does not bleed its wake away smoothly: above a threshold Reynolds number it sheds alternating vortices in a periodic **Kármán street**, and the dimensionless shed
+G: 5. **Reynolds regime gates the clock (FD03).** `Re = UD/ν` is advection ÷ relay diffusion (FD03). At high `Re` the relay-diffusion correction to `τ_relax` is negligible and the clock is pure
+G: - *Lock-in.* Add an external drive `f_drive` to the NP06 beat; show that within a band `|f − f_drive|/f < ε(A)` the shedding entrains to `f_drive` (Arnold-tongue-like capture), reproducing t
+G: Five phases, each gated. Run them in order; a failed checkpoint stops the chain (R4: a clean kill outranks a forced pass).
+V: # FD10 — Direct re-run verdict (2026-07-26)
+V: > **Run class: DIRECT** (main session, no agents). Agent-era `FD10_VERDICT.md`,
+V: on a calibrated form test); lock-in as CQ41/Adler entrainment — capture band widens with
+V: - **Calibrated, labelled:** κ_clock = 0.450 (the one gear coefficient carrying the 0.205
+V: ## Note this verdict adds
+O: [PASS] Adler locks inside / frees outside band
+O: [PASS] band brackets measured ~5-15% at A/D~0.15
+O: FD10 SUMMARY : 11/11 checks passed
+FLAGS: MISSING: ; ident:3 ; res pass/fail 11/0 verd pass/fail 0/0
+
+### 10/FD11_Tesla_Steam_Generator  | status: SPEC (upgrade 2026-06-27). | words 3252 | code 1 outs 1 verd 1 runlog 0 | gate True prereg True
+Q: Can SDT spation traction (PPT06/FD06), composed with FD02/FD05/FD08, predict from first principles the *optimal disk gap*, *torque–speed curve*, and *rotor-efficiency-vs-tip-speed* of a **superheated-steam-driven Tesla disc turbine**, and does its signature inversion hold (Tesla rotor efficiency *rises* as `Re_b` falls / viscosi
+F: §⑧, five falsifiers with real failure modes; in particular F1 (`b_opt`) has a **hard, self-consistent trigger:** the prompt's own kill line is `b_opt` off by `>2×`, so a result `>2×` off is a FAIL, not a graded success — no moving that goal post. 5. **How will we know we're done?** — **Dual verdict:
+G: 3. **How will we find out?** — Five gated phases (§④) on the **superheated-steam disc-turbine scope** (`(P₀,T₀)` steam inlet, choked nozzle, co-rotating disc stack). **SCOPE LOCK (read befor
+G: Five gated phases (R4: a clean kill outranks a forced pass). Each predicts its number before comparison (R1); every constant is ledgered (R2); confirmed results get an independent two-stream
+G: - **Success / trigger (self-consistent with F1).** `b_opt` predicted within **20%** of Tesla's measured steam optimum (~0.4 mm) is an A-class hit; between 20% and 2× is a Class-C/D partial; 
+G: - **Success.** `η_overall` reproduces the historical Tesla steam-turbine band (≈20–40% overall, with ~95% *rotor* efficiency) to within tolerance, calibration count ≤ 1. **Checkpoint C3.**
+G: - **Success.** Predicted output within stated tolerance of at least one independent dataset; the rpm limit consistent with the disk-material hoop-stress allowable. **Checkpoint C5.**
+V: # FD11 — Direct re-run verdict (2026-07-26)
+V: > **Run class: DIRECT** (main session, no agents). Agent-era `FD11_VERDICT.md` and `results.txt`
+V: > `MATERIALS_AND_PARTS.md` kept — design documents, not verdicts). Tool:
+V: - Turbine design point: b_opt = 1.25 mm (form derived, K_B CALIBRATED(1); Tesla's measured
+V: ## Verdict
+O: VERDICT
+FLAGS: MISSING: ; ident:1 ; res pass/fail 0/0 verd pass/fail 0/0
+
+### 10/FD12_Poloidal_Parcel_Operation  | status: SPEC, written BEFORE the tool (gates below are | words 581 | code 1 outs 2 verd 1 runlog 0 | gate True prereg True
+Q: RECT** (main session, no agents). > **Inherits** R0–R5 anti-creep verbatim (derivation basis inputs; no rival axioms; honesty over success). ## The claim (Harvey, verbatim core) All fluid movement is a 2D-like poloidal operation, from the singular molecule to the macro volume: the centre carries momentum; the parcel moves forward, pushes what is ahead, stalls aside, is moved aside, clears the bath for what is coming, rolls back along the length of the moving fluid, and is caught in the rotatin
+G: - **G1a (formation):** two opposite-sign vorticity extrema, magnitudes within 15%.
+G: Caveat declared now: this is a 2-D planar surrogate for the pipe; a genuine geometry factor
+G: `fd12_poloidal_parcel.cpp` (one tool, both phases, prints every gate) →
+V: # FD12 — Direct verdict (2026-07-26): the operation is native; the ℓ_c identification is dead as posed
+V: > **Run class: DIRECT** (main session, no agents). PROMPT.md written with pre-committed gates
+V: ## Instrument history (all in the open, gates never touched)
+V: - **v1** (grid, random seed, upwind): G = 1.000 at every λ — instrument failure (near-zero
+V: ## P1 — the poloidal operation (all four gates PASS)
+O: G1a formation PASS | G1b self-propulsion PASS | G1c roll-back PASS | G1d closed cell PASS
+O: G2 verdict: FAIL - no interior maximum: no finite roll selected (as committed)
+O: grading in FD12_VERDICT_DIRECT (P1 capped at consistency;
+FLAGS: MISSING: ; Gcode:3 ; ident:1 ; res pass/fail 8/2 verd pass/fail 1/3
+
+### 11/TD01_Entropy_and_Arrow_of_Time_from_Lattice  | status: SPEC → ACTIVE on first gated run. | words 964 | code 1 outs 1 verd 1 runlog 0 | gate True prereg True
+Q: Is `S = k_B ln W` a *literal* count of relay microstates (TD01 is the TD root), and — the load-bearing, falsifiable part — does per-tick neighbour redistribution drive `W` **monotonically up** from a non-equilibrium start, giving an H-theorem analogue **without** importing Boltzmann's Stosszahlansatz (molecular-chaos assumption)
+F: §④/§⑤ falsifiers with numeric triggers: if `⟨S⟩` has a **net** decrease over 10⁴ ticks from a hot start (trend `dS/dt < 0`), or if `ln W` is not extensive in `E` (doubling `E,N` does not double `ln W` to ±5%), the lattice-microstate thesis fails. 5. **How will we know we're done?** — **Dual verdict:
+G: ### Phase 1 — Combinatorics (GATE — may reuse existing; identity, not physics)
+G: ### Phase 2 — Relay mixer *(GATE — the native, falsifiable core)*
+G: | **A** | Phase 1 + Phase 2 native arrow (`dS/dt ≥ 0` from hot start, no Stosszahlansatz) + Phase 3 ideal gas within 20% |
+G: P3 PV=Nk_BT within 20% (or DEFER to TD03)
+G: without a lattice update; widen the 5%/20% gates
+V: # TD01 — Direct re-run verdict (2026-07-26)
+V: > **Run class: DIRECT** (main session, no agents). Agent-era `TD01_VERDICT.md` and `results.txt`
+V: ## Verdict
+V: - **Physics class: COMPUTED (toy consistency).** S = k_B ln W as a literal relay count is
+V: demonstrated, nothing more. The arrow of time remains **OPEN and owed** — the TD root's
+O: S(E) monotone increasing: [PASS]
+O: ln W Stirling= 199.806612 (err 2.40%) [PASS]
+O: VERDICT: PASS — Class C (QUALIFIED)
+FLAGS: MISSING: ; ident:5 ; res pass/fail 3/0 verd pass/fail 0/0
+
+### 11/TD02_Temperature_and_Equipartition_from_Throughput  | status: SPEC (upgrade 2026-06-27). | words 2076 | code 1 outs 1 verd 1 runlog 0 | gate True prereg True
+Q: Does temperature have a *native* lattice meaning — `k_BT ≡ ⟨ε_dis⟩` per spation degree of freedom, the mean disordered relay throughput — that **coincides** with the entropic `1/T = ∂S/∂E` of TD01's `S=k_B ln W`; and does the exponential occupation `exp(−ε/k_BT)` fall out of **native relay counting** (a most-probable distributio
+F: §⑧ falsifiers with numeric triggers and real failure modes, including the **anti-tautology** firewall (F3/F4): if the exponential can only be reached via the microcanonical→canonical reservoir argument, the derivation is IMPORTED and the grade is capped at C. 5. **How will we know we're done?** — **
+G: the Boltzmann factor is **imported**, that contamination propagates into TD03's "no ensemble" claim
+G: 3. **How will we find out?** — Four gated phases (§Strategy). The **two-definition concordance** (P1)
+G: | P1 concordance gap `> 1e-3` | check the per-DoF energy bookkeeping; refine the `∂S/∂E` estimate | **F** — no native temperature anchor | widen the 1e-3 gate |
+G: | A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimin
+V: # TD02 — Direct re-run verdict (2026-07-26)
+V: > **Run class: DIRECT** (main session, no agents). Agent-era `TD02_VERDICT.md`, `RUN_LOG.md`,
+V: ## Verdict
+V: - **Prompt completion: A** · **Physics class: CONVERGENCE (Class C), native-origin route.** The
+O: No h, no Z, no ensemble object in the chain. [PASS by construction]
+O: TD02 GATES: P1 PASS | P2 PASS | P3 PASS | P4 PASS
+O: VERDICT: PASS - see TD02_VERDICT.md for the physics class
+FLAGS: MISSING: ; ident:6 ; res pass/fail 10/0 verd pass/fail 0/0
+
+### 11/TD03_Ideal_Gas_and_Pressure_from_Occlusion  | status: SPEC (upgrade 2026-06-27). | words 2171 | code 1 outs 1 verd 1 runlog 0 | gate True prereg True
+Q: Is `PV = Nk_BT` a *native* consequence of Law III occlusion — the convergence-momentum flux a relay gas deposits on a wall — with the geometric factor `1/3` forced by **3-D lattice isotropy** (the genuinely new content), or does it only reproduce because it inherits TD02's equipartition `½m⟨v²⟩=(3/2)k_BT`, which is itself the pa
+F: §⑧ falsifiers with numeric triggers and real failure modes, including the anti-tautology firewall (F4) on the inherited equipartition. 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / FALSIFIED / OPEN), per phase, 
+G: 3. **How will we find out?** — Four gated phases. The **single-wall flux** (P1) — where the `1/3` must
+G: P3 P_total=ΣP_i within 1%, b > 0 · P4 result = k_B × pure number (no Z, no h, no ensemble)
+G: excluded at both extrema, and the rank-2 response remains within `0.005` of
+V: axis-mean PV/(NkT) ≡ 1 cannot fail → NOT gated) and gates per-axis isotropy instead. The
+V: ## Verdict
+V: - **Prompt completion: A** · **Physics class: CONVERGENCE (Class C)** for PV = NkT (inherited
+V: SDT-distinct prediction** (rank-4 anisotropy band) with a populated failure class.
+V: reduction protocol pass; no physical response corpus has yet been measured.
+O: k_B enters only to convert kT/eps to kelvin. No Z, no h, no ensemble. [PASS]
+O: TD03 GATES: P1a PASS | P1b PASS | P2 PASS | P3 PASS | P4 PASS
+O: VERDICT: PASS - see TD03_VERDICT.md
+FLAGS: MISSING: ; ident:6 ; res pass/fail 13/0 verd pass/fail 0/0
+
+### 11/TD04_Heat_Conduction_and_Diffusion_from_Relay  | status: SPEC (upgrade 2026-06-27). | words 1353 | code 1 outs 1 verd 1 runlog 0 | gate True prereg True
+Q: Is the thermal conductivity `k` a *derived* relay random-walk coefficient `k = ⅓ c_v v_relay λ_mfp` (with the `1/3` from lattice isotropy and `v_relay ∝ √T` from B16), so that Fourier's law and the diffusion equation fall out of throughput diffusion — or must `k` and `λ_mfp` be borrowed un-derived from kinetic theory? 2. **Why d
+F: §⑧ falsification tests with numeric triggers and real failure modes. 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN). ## Question Fourier's law `q = −k∇T` and the diffusion equation describe heat sp
+G: 3. **How will we find out?** — Gated phases in §④; native relay random-walk before any borrowed `λ_mfp`.
+G: within a factor of ~2; `k ∝ √T` slope confirmed for the gas.
+G: - **QUALIFIED (Class C):** mechanism + scaling native; absolute `k` within ~2× and Lorenz prefactor
+G: P1 fitted k vs ⅓c_v v_relay λ_mfp within 2% · P2 variance ∝ t, α=⅓v_relay λ_mfp (no free knob)
+G: P3 k_air,k_Cu within 2×, gas k∝√T slope 0.5 · P4 Lorenz k/(σT)=L const within 10% (prefactor flagged)
+V: # TD04 — Direct re-run verdict (2026-07-26)
+V: > **Run class: DIRECT** (main session, no agents). Agent-era `TD04_VERDICT.md`, `RUN_LOG.md`,
+V: > stated in-output, fails graded here, not laundered). Output: `td04_rerun_2026-07-26.txt`.
+V: - **P1–P3 (core, PASS):** relay random walk → D = vλ/3 (1.05%); diffusion equation with
+V: > 2× gate, both recorded as FAIL. Copper DEFERRED/OPEN (no native degenerate-carrier
+O: TD04 GATES: P1 PASS | P2 PASS | P3 PASS | P4 argon FAIL, air FAIL, Cu DEFERRED | P5 OPEN (fired, reported)
+O: Core mechanism gates (P1-P3): PASS. Exit code reflects core only;
+O: P4/P5 outcomes are graded in TD04_VERDICT.md, not laundered into the exit.
+FLAGS: MISSING: ; ident:1 ; res pass/fail 9/4 verd pass/fail 1/2
+
+### 11/TD05_Phase_Transitions_and_Latent_Heat_from_Reconfiguration  | status: SPEC (upgrade 2026-06-27). | words 1471 | code 1 outs 1 verd 1 runlog 0 | gate True prereg True
+Q: Is a phase transition a *native* lattice-packing reconfiguration threshold — melting/boiling when per-vortex disordered throughput exceeds the wake-binding throughput — with latent heat the Law IV reorganisation cost `L=N_bonds·Δε_reorg` paid at constant `T` (so `L=T_mΔS` and Clausius–Clapeyron follow), or does a sharp transitio
+F: §⑧ falsification tests with numeric triggers and real failure modes. 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN). ## Question Melting and boiling absorb latent heat at a fixed temperature — ener
+G: 1. **What don't we know?** — Is a phase transition a *native* lattice-packing reconfiguration threshold —
+G: 3. **How will we find out?** — Gated phases in §④; the native packing-threshold simulation before any
+G: - **H1 (transition = packing threshold):** melting occurs when per-vortex disordered throughput exceeds
+G: 1. **Threshold transition.** *Goal:* a sharp `T_m`. *Method:* heat a 2D/3D toy vortex packing; watch
+G: energy proxy for one solid and one liquid→gas. *Success:* `L_melt`, `L_vap` within a factor of ~3
+V: # TD05 — Direct re-run verdict (2026-07-26)
+V: > **Run class: DIRECT** (main session, no agents). Agent-era `TD05_VERDICT.md`, `RUN_LOG.md`,
+V: > `td05_packing_reconfiguration.cpp`, g++ 15.2 -O2, **exit 1 — the honest FAIL exit**.
+V: - **P1 (PASS):** a sharp transition with hysteresis emerges from packing dynamics alone —
+V: - **P2 (FAIL, the informative one):** the committed ledger L = N_bonds·Δε ships factor **2.66**
+O: ordering L_vap >> L_melt: 6.774 >> 0.748 [PASS]
+O: TD05 GATES: P1 PASS | P2 FAIL | P3 PASS | P4 DEFERRED
+O: VERDICT: FAIL - see TD05_VERDICT.md
+FLAGS: MISSING: ; ident:3 ; res pass/fail 9/3 verd pass/fail 2/3
+
+### 11/TD06_Blackbody_Thermodynamics_from_Lattice_Modes  | status: SPEC (upgrade 2026-06-27). | words 1918 | code 1 outs 1 verd 1 runlog 0 | gate True prereg True
+Q: Can Planck's law, Stefan–Boltzmann, and Wien be obtained from **native lattice mode counting** in which (a) the `hν` granularity is the relay tick `ε` (Law I), not a postulated oscillator, and (b) the occupation factor is TD02's *natively-derived* `exp(−ε/k_BT)` — or do they only reproduce because the Bose denominator `1/(e^{hν/
+F: §⑧ falsifiers with numeric triggers and real failure modes, including the inherited anti-tautology firewall (F4) on the occupation factor. 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN), per phase,
+G: 3. **How will we find out?** — Four gated phases. Each independently recomputes the curve/constant from
+G: | A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimin
+V: # TD06 — Direct re-run verdict (2026-07-26)
+V: > **Run class: DIRECT** (main session, no agents). Agent-era `TD06_VERDICT.md`, `RUN_LOG.md`,
+V: ## Verdict
+V: - **Prompt completion: A** · **Physics class: CONVERGENCE (Class C, capped).** The whole
+V: Deriving ε = hν from relay mechanics is the open root (it is the same open item as the
+O: TD06 GATES: P1a PASS | P1b PASS | P2 PASS | P3 PASS | P4 PASS | P5 disclosed
+O: not the pass). Occupation inherited from TD02 (native counting,
+O: VERDICT: PASS - see TD06_VERDICT.md
+FLAGS: MISSING: ; ident:4 ; res pass/fail 15/0 verd pass/fail 0/0

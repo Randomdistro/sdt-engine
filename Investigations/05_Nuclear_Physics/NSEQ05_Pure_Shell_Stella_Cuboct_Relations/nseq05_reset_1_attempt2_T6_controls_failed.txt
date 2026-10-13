@@ -1,0 +1,47 @@
+NSEQ05 blank-slate run 1 (registered in NSEQ05_RESET_ASSESSMENT_2026-10-10.md sections 0-2)
+=======================================================================
+
+[T1] cumulative: alpha:2 D6:8 D12:20 T8:28 D12:40 T10:50 D20:70 T12:82 D30:112 T14:126 D42:168 T16:184 -> reproduces the frozen table (VERIFICATION)
+     F(n) = B(n) + E(n) = (n+1)(n+2) for n = 1..7: yes
+[T2] crown graph (two (n+1)-sets, every opening seat linked to every closing seat except its antipode) and the triangulated face count 2V-4:
+     n = 3: V = 8, edges 12 (= n(n+1) = 12), degree 3 regular ; triangulated faces 2V-4 = 12 ; schedule D seats E(n) = 12 -> face rule agrees
+     n = 4: V = 10, edges 20 (= n(n+1) = 20), degree 4 regular ; triangulated faces 2V-4 = 16 ; schedule D seats E(n) = 20 -> face rule differs
+     n = 5: V = 12, edges 30 (= n(n+1) = 30), degree 5 regular ; triangulated faces 2V-4 = 20 ; schedule D seats E(n) = 30 -> face rule differs
+     n = 6: V = 14, edges 42 (= n(n+1) = 42), degree 6 regular ; triangulated faces 2V-4 = 24 ; schedule D seats E(n) = 42 -> face rule differs
+[V1] cube-vertex pair angles 12/12/4 -> met
+[V2] AME2020 nuclide rows read 3558, of which experimental (no estimated flag on the mass excess) 1875 ; n 8071.31806, 1H 7288.971064, 2H 13135.722895, 3H 14949.81090 keV -> met
+[V3] second difference of a quadratic (step 2) = 8c: 2.000000 vs 2.000000 -> met
+
+VALIDATIONS: met
+
+[T3] cube edges (nearest links) 12 ; midpoints 12 (cuboctahedron vertices) ; layers along (1,1,1): height -1.1547 x3; height 0.0000 x6; height 1.1547 x3;
+[T4] cuboctahedron faces: 14 (triangles 8, squares 6) ; expected 14 (8 + 6)
+[T5] 14 sites, 7 antipodal pairs ; C3v (coordinate permutations) orbits: 6 with sizes 1 3 3 1 3 3
+     one-per-pair selections 128 ; polar-symmetric (invariant under all six coordinate permutations) 8 ; distinct mean link angles: 79.9245 deg x2; 84.4368 deg x4; 100.0755 deg x2;
+     minimum mean link angle 79.9245 deg attained by 2 invariant selections (complements counted separately)
+
+[T6] neutron signal G(N) = mean over Z of d2n = ME(N-2) - 2ME(N) + ME(N+2) [keV]; N: G (count)
+  18:4072(8)  20:3600(6)  22:6893(7)  24:-12757(5)  26:5791(10)  28:5392(10)  30:1899(8)
+     32:2763(8)  34:2102(10)  36:1298(11)  38:1403(13)  40:1389(10)  42:1118(12)  44:1054(11)  46:930(13)  48:999(12)  50:4481(13)  52:1135(14)  54:1086(14)
+     56:1371(11)  58:865(13)  60:669(11)  62:6971(14)  64:-15817(10)  66:7797(12)  68:840(11)  70:754(12)  72:761(12)  74:632(12)  76:606(13)  78:454(13)
+     80:670(17)  82:4466(16)  84:545(14)  86:617(15)  88:347(15)  90:324(18)  92:686(14)  94:772(14)  96:746(12)  98:742(12)  100:706(12)  102:693(8)
+     104:7385(7)  106:527(7)  108:798(7)  110:530(8)  112:551(6)  114:467(7)  116:539(5)  118:594(6)  120:610(6)  122:530(5)  136:311(5)  140:316(5)  144:528(7)
+     proton signal G_p(Z); Z: G (count)
+  12:8112(5)  14:11954(6)  16:7110(6)  18:5945(8)  20:6236(8)  22:2847(12)  24:3871(10)  26:3741(10)  28:6398(10)
+     30:3686(11)  32:8244(15)  34:3035(15)  36:2759(16)  38:3302(18)  40:3014(20)  42:11965(17)  44:-9317(14)  46:7713(16)  48:2545(16)  50:6158(21)  52:2003(20)
+     54:2302(18)  56:2230(21)  58:2046(19)  60:2110(16)  62:2100(18)  64:2189(16)  66:2015(13)  68:1930(10)  70:2066(14)  72:1797(17)  74:2029(16)  76:2244(18)
+     78:1551(19)  80:2543(15)  82:3822(13)  84:1597(6)  86:1323(5)  88:1817(6)  90:1741(5)
+
+Positive controls (must rank 1 in the +-4 window):
+  neutron N =  20: G = 3600 keV, window values 4, rank 3 -> excluded (fewer than 5 window values)
+  neutron N =  28: G = 5392 keV, window values 5, rank 2 -> FAILS
+  neutron N =  50: G = 4481 keV, window values 5, rank 1 -> ok
+  neutron N =  82: G = 4466 keV, window values 5, rank 1 -> ok
+  neutron N = 126: G = 0 keV, window values 0, rank 0 -> excluded (fewer than 5 window values)
+  proton  Z =  20: G = 6236 keV, window values 5, rank 2 -> FAILS
+  proton  Z =  28: G = 6398 keV, window values 5, rank 2 -> FAILS
+  proton  Z =  50: G = 6158 keV, window values 5, rank 2 -> FAILS
+  proton  Z =  82: G = 3822 keV, window values 5, rank 1 -> ok
+Controls: NOT ALL PASS -> instrument validation unmet (G0)
+
+Targets (schedule's non-magic totals):

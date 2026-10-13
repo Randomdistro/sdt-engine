@@ -1,0 +1,108 @@
+﻿CR06 blank-slate run 1 (registered in the tool header, 2026-10-09)
+==================================================================
+
+[V5] file parses to 40 rows, z from 0.014 to 1.612 (prompt: 40 bins, 0.014-1.612) -> met
+[V1] family closed form against midpoint quadrature (n = 0.5, 1, 2, 4): worst rel 3.41e-11 -> met
+[V2] LCDM(1) vs EdS worst 4.02e-14 ; LCDM(0) vs z(1+z) (de Sitter) worst 2.22e-16 -> met
+[V3] (toy) noiseless n = 2.5, a = 3.7 -> n-hat 2.50000000, a-hat 3.70000000, chi2 1.17e-25 -> met
+[V4] (toy) 200 realisations of n = 4: mean n-hat 3.9987, scatter 0.0328, |mean - 4| = 0.0013 vs 3 sigma/sqrt(200) = 0.0070 -> met
+
+VALIDATIONS: met
+
+[FULL] N = 40 bins. model, shape parameter, offset a, chi2, chi2/dof (diagonal errors only: absolute value not a gate), AIC, BIC
+   N1 (n=1)  par =   0.0000  a =  23.91797  chi2 =   324.774  chi2/dof =  8.328  AIC =   326.774  BIC =   328.463  dAIC = 273.036
+   N4 (n=4)  par =   0.0000  a =  24.60766  chi2 = 16517.827  chi2/dof = 423.534  AIC = 16519.827  BIC = 16521.516  dAIC = 16466.089
+   n-free    par =   0.6555  a =  23.83028  chi2 =    81.027  chi2/dof =  2.132  AIC =    85.027  BIC =    88.405  dAIC =  31.289
+   LCDM(Om)  par =   0.2841  a =  23.80277  chi2 =    49.738  chi2/dof =  1.309  AIC =    53.738  BIC =    57.116  dAIC =   0.000
+   EdS       par =   0.0000  a =  24.04209  chi2 =  1468.972  chi2/dof = 37.666  AIC =  1470.972  BIC =  1472.661  dAIC = 1417.234
+   Milne     par =   0.0000  a =  23.88822  chi2 =   169.240  chi2/dof =  4.339  AIC =   171.240  BIC =   172.929  dAIC = 117.502
+   Linear    par =   0.0000  a =  23.65850  chi2 =  1060.323  chi2/dof = 27.188  AIC =  1062.323  BIC =  1064.011  dAIC = 1008.585
+[FULL] n-free: n-hat = 0.6555, Delta chi2 = 1 interval [0.6339, 0.6772]
+[RC1] chi2(N1) - chi2(n-free) = 243.747 -> excluded ; chi2(N4) - chi2(n-free) = 16436.800 -> excluded
+[RC2] bend: chi2(Milne) - chi2(LCDM) = 119.502 -> bend present in the data
+[RC2] lower-chi2 native candidate: N1 (n=1)
+      N1 (n=1)  f = -1.302 ; AIC - AIC(LCDM) = 273.036 ; beats EdS: yes ; beats Linear: yes
+      N4 (n=4)  f = -136.805 ; AIC - AIC(LCDM) = 16466.089 ; beats EdS: no ; beats Linear: no
+      n-free    f = 0.738 ; AIC - AIC(LCDM) = 31.289 ; beats EdS: yes ; beats Linear: yes
+[RC2] class of N1 (n=1): FAIL
+
+[RES] per-bin residuals m_obs - m_model - a, in sigma: z, LCDM, N1, N4, n-free, Milne
+   0.0140   +0.42  -3.01 -23.74  -0.36  -2.06
+   0.0194   -1.76  -5.67 -29.39  -2.62  -4.55
+   0.0264   -0.91  -5.20 -31.41  -1.83  -3.92
+   0.0329   -0.93  -4.99 -29.89  -1.77  -3.74
+   0.0396   -0.72  -3.94 -23.78  -1.37  -2.91
+   0.0475   -0.90  -3.50 -19.68  -1.40  -2.64
+   0.0560   -1.86  -4.42 -20.42  -2.32  -3.52
+   0.0640   -0.63  -2.40 -13.58  -0.93  -1.76
+   0.0721   -0.81  -2.71 -14.79  -1.12  -1.99
+   0.0811   +1.79  +0.17 -10.26  +1.55  +0.82
+   0.0889   +0.30  -1.48 -12.98  +0.06  -0.73
+   0.1001   +2.12  +0.45 -10.54  +1.93  +1.21
+   0.1071   +1.51  -0.13 -11.06  +1.34  +0.64
+   0.1195   -0.24  -2.12 -14.90  -0.38  -1.15
+   0.1278   +0.78  -0.93 -12.68  +0.69  +0.00
+   0.1396   +3.22  +1.54 -10.37  +3.19  +2.55
+   0.1519   +0.02  -1.39 -11.74  +0.07  -0.44
+   0.1635   -2.14  -3.24 -11.56  -2.04  -2.41
+   0.1778   +0.92  -0.20  -9.28  +1.13  +0.82
+   0.1906   +0.72  -0.02  -6.65  +0.98  +0.83
+   0.2067   -0.02  -0.47  -5.44  +0.33  +0.32
+   0.2216   +0.23  +0.07  -2.95  +0.60  +0.72
+   0.2405   -0.23  -0.07  -1.21  +0.23  +0.52
+   0.2558   -0.28  +0.18  +0.68  +0.28  +0.73
+   0.2762   -1.66  -0.90  +1.66  -1.09  -0.53
+   0.2972   -0.21  +0.90  +5.67  +0.42  +1.14
+   0.3215   +1.48  +2.98 +10.24  +2.17  +3.06
+   0.3453   +0.17  +1.86 +10.63  +0.83  +1.77
+   0.3708   -0.06  +2.13 +14.13  +0.67  +1.85
+   0.4049   +0.31  +2.06 +12.12  +0.80  +1.69
+   0.4355   -0.00  +2.53 +17.59  +0.61  +1.85
+   0.4738   +0.70  +3.20 +18.62  +1.19  +2.37
+   0.5174   -0.22  +2.87 +22.56  +0.26  +1.65
+   0.5742   +0.79  +4.62 +30.05  +1.18  +2.81
+   0.6299   -0.73  +2.60 +25.52  -0.55  +0.79
+   0.7240   -1.13  +3.16 +34.57  -1.25  +0.33
+   0.8210   +0.43  +5.50 +44.92  -0.15  +1.52
+   0.9511   +0.41  +5.31 +46.44  -0.74  +0.62
+   1.2336   -0.50  +2.05 +27.35  -1.85  -1.48
+   1.6123   -1.74  +0.15 +23.73  -3.68  -3.85
+
+[SPLIT] held-out: parameters from the train bins only, chi2 on the test bins
+  S1 lowest 20 -> highest 20 (train 20, test 20)
+     N1 (n=1)  train par   0.0000 a  23.85950 train chi2   86.750 test chi2   434.821
+     N4 (n=4)  train par   0.0000 a  24.15977 train chi2 1237.527 test chi2 26829.027
+     n-free    train par   0.2374 a  23.78005 train chi2   32.344 test chi2   635.514
+        n-free train interval [0.135, 0.340]
+     LCDM(Om)  train par   0.1370 a  23.77927 train chi2   32.063 test chi2   312.673
+     EdS       train par   0.0000 a  23.91091 train chi2  179.189 test chi2  2280.553
+     Milne     train par   0.0000 a  23.85516 train chi2   78.779 test chi2   153.403
+     Linear    train par   0.0000 a  23.75507 train chi2   37.778 test chi2  1559.442
+  S2 even -> odd (train 20, test 20)
+     N1 (n=1)  train par   0.0000 a  23.91478 train chi2  153.556 test chi2   171.804
+     N4 (n=4)  train par   0.0000 a  24.58896 train chi2 7990.027 test chi2  8547.919
+     n-free    train par   0.6365 a  23.82464 train chi2   25.821 test chi2    56.010
+        n-free train interval [0.605, 0.668]
+     LCDM(Om)  train par   0.2807 a  23.79990 train chi2   15.363 test chi2    34.562
+     EdS       train par   0.0000 a  24.03574 train chi2  710.754 test chi2   760.536
+     Milne     train par   0.0000 a  23.88692 train chi2   70.907 test chi2    98.430
+     Linear    train par   0.0000 a  23.66234 train chi2  458.089 test chi2   603.084
+  S2' odd -> even (train 20, test 20)
+     N1 (n=1)  train par   0.0000 a  23.92139 train chi2  170.591 test chi2   154.855
+     N4 (n=4)  train par   0.0000 a  24.62767 train chi2 8506.256 test chi2  8034.645
+     n-free    train par   0.6727 a  23.83576 train chi2   54.464 test chi2    27.257
+        n-free train interval [0.643, 0.703]
+     LCDM(Om)  train par   0.2875 a  23.80579 train chi2   34.175 test chi2    15.778
+     EdS       train par   0.0000 a  24.04889 train chi2  755.736 test chi2   715.895
+     Milne     train par   0.0000 a  23.88961 train chi2   98.230 test chi2    71.122
+     Linear    train par   0.0000 a  23.65438 train chi2  601.322 test chi2   459.976
+[RC3] S1 lowest 20 -> highest 20: n-hat 0.237 vs full 0.656: |diff| 0.418, combined sigma 0.104 -> NOT stable
+[RC3] S2 even -> odd: n-hat 0.637 vs full 0.656: |diff| 0.019, combined sigma 0.038 -> stable
+[RC3] S2' odd -> even: n-hat 0.673 vs full 0.656: |diff| 0.017, combined sigma 0.037 -> stable
+[RC3] overall: NOT stable
+[RC4] predictive consistency with LCDM (test chi2 within +9 on S1, S2, S2'): N1 no, N4 no
+
+[SENS] prefactor D = (1+z)^p r, n-free fit on the full data (reported, not selected):
+   p = 0.5: n-hat -0.2596, a 23.84069, chi2 98.143
+   p = 1.0: n-hat 0.6555, a 23.83028, chi2 81.027
+   p = 2.0: n-hat 2.8066, a 23.84493, chi2 121.419

@@ -1,3 +1,62 @@
+# NP10 — The alpha's mass defect and its cooperative lock (specification rewritten 2026-10-10)
+
+**Author:** J. C. Harvey, Melbourne. Rewritten at Harvey's direction (2026-10-10): dependencies first, prompts carry new data, and the packing sequencer is understood before grammar work. The 2026-06-27 specification is kept unchanged below the line and is superseded.
+
+## 1. Question (as it now stands)
+⁴He binds **B(α; {4p, 2e}) = 26.731023 MeV** on its native list (AME2020; NP17 reset T1). It binds 28.296 MeV on {2p, 2n}, but that list carries the owed neutron term twice. What cooperative mechanism makes the α's binding per contact several times the deuteron's? What arrangement does the construction actually use?
+
+## 2. What is established (with source)
+
+| # | Fact | Source |
+|---|---|---|
+| E1 | Binding is mass defect. Energy is movement. The bond-sum route below the line ("4E_pn + E_nn + E_pp − E_Coulomb") is withdrawn bookkeeping. | Harvey 2026-10-07 |
+| E2 | Native lists: d 1.442246, ³H 6.917143, ³He 6.935735, ⁴He 26.731023 MeV on {A p, N e}. | NP17 reset (AME2020) |
+| E3 | Per-electron seat ledgers are **excluded for A ≥ 3**. ⁴He exceeds even the most generous ceiling (all electrons on all boundaries) by 3.90×. | NP17 reset T1 |
+| E4 | A shared-resource angular lock (H-W) is **excluded**: binding per contact rises 1.16–3.18× the deuteron's with coordination, under every admissible graph. The lock is **cooperative**. | NP10 reset 2026-10-09 |
+| E5 | The W+1 channel set cannot face a regular tetrahedron's three neighbours at once (it misses by 35.26°, outside the 30° cone). The **square ring** and the triangle engage fully. | NP10 reset (instance) |
+| E6 | The live sequencer (NSEQ18-WEB-1) builds the α as a **4-ring** (4 "alpha" contacts, cycle rank 1), not a tetrahedron. This is independent of, and agrees with, E5. Every A ≥ 4 nucleus is that ring plus a tree of dock and internal contacts, with E = A. | engine run 2026-10-10 |
+| E7 | 2R_p_lock = 1.68247 fm against R_He 1.67550 fm (+0.42%), G4 and not discriminating. | NP10 reset R3 |
+| E8 | NP33 rule in canon: missing lock contacts cost one engaged-resistance unit, and completing the graph saves one (`laws.hpp:2132–2150`). | canon |
+
+## 3. Errors already made, and what each teaches
+
+| # | Error | Lesson |
+|---|---|---|
+| X1 | The electrostatic α (old NP17) gave 4.45 MeV, and the "lock remainder 23.842 MeV" was defined against {p, n} with a withdrawn pair ledger. | The remainder must be restated on the native list against a native contact ledger. It is not a residual of a withdrawn sum. |
+| X2 | The far-field occlusion bond (NP09 route) is about 30× short. | The scale is the seat movement αħc/R_p = m_e v(R_p)² (1.711391 MeV), not occlusion. |
+| X3 | The live engine's zero-fit ledger gives ⁴He 11.69 MeV against 28.30 ({p, n}). It also gives **μ(⁴He) = 1.65 μN against a measured 0**. | The sequencer's 4-ring as built does not cancel its moments. Either the ring's phase assignment or the moment ledger is wrong, and this is a construction defect to report to the sequencer. A native α must give μ = 0 by its arrangement. |
+| X4 | The tetrahedron was taken as a premise (old Step 1). | Let the construction and the angle budget pick. Both now pick the ring (E5, E6). |
+
+## 4. Dependency
+**Required supplier: NP17 round 2 (O1 contact-mesh cooperative ledger).** O1 must state natively, before any value is loaded:
+- what one open mesh contact frees;
+- what closing a loop frees (the cooperative term; NP33 gives the counting form "completing the graph saves one unit", but its energy unit is not yet derived).
+
+**Blindness limit.** d, t, h and α are already seen. The α is therefore a **consistency check**. The blind test is O1 applied, with no new parameter, to A ≥ 6 nuclei on the sequencer's graphs (one ring plus tree), registered in NP17 round 2.
+
+**Status:** DEFERRED until O1 exists. Run now, independently:
+- C3 (μ_α from the sequencer), a construction check;
+- C4 (R_He), already G4.
+
+## 5. Pre-registered checks
+- **C1 (when O1 exists).** O1 on the 4-ring against 26.731023 MeV, ±5%. Post-seen, so G3 at most.
+- **C2 (when O1 exists).** The same rule on the open chains (E = 2) for ³H and ³He; equal to each other within 2%. Structural; the values are seen.
+- **C3 (now; construction).** The magnetic moment of the sequencer's α. Measured 0 (spin-zero anchor). **Not met** as built (1.65 μN). Recorded as a sequencer defect, propose-only (Release is not edited).
+- **C4.** R_He = 2R_p_lock: carried, G4.
+
+## 6. Prohibitions
+- No pair potentials.
+- No neutron as an independent particle without the owed term.
+- No tetrahedron or ring imposed by hand: the construction and the angle budget decide.
+- No census or post-hoc coefficient.
+- No QM narration.
+- The word "charge" is not used.
+- No edits to Engine, Laws or Release.
+
+---
+
+## Superseded specification (2026-06-27, kept as written)
+
 # NP10: Alpha Binding from Tetrahedral Occlusion — Investigation Prompt
 
 > **Author:** J. C. Harvey, Melbourne. **Status:** SPEC (upgrade 2026-06-27).
@@ -8,7 +67,7 @@
 
 ## ⓪ The Golden Rule — five questions (answer before Phase 0)
 
-1. **What don't we know?** — [NP10] NP10: Alpha Binding from Tetrahedral Occlusion — Investigation Prompt: *(unfilled by the 2026-06-27 bulk template upgrade — write the single measurable gap before the next run)*
+1. **What don't we know?** — [NP10] NP10: Alpha Binding from Tetrahedral Occlusion — Investigation Prompt: **Measurable gap (written 2026-10-05 in the audit correction pass, from this prompt's own content; the 2026-06-27 template left it unfilled):** Can the total occlusion energy of the tetrahedral geometry of 2 protons and 2 neutrons (6 bonds) reproduce the He-4 binding energy 28.296 MeV, and what sets the lock remainder (23.842 MeV) beyond the shared-electron electrostatics?
 2. **Why does it matter?** — Stack position / downstream blockers (see `INVESTIGATION_STACK.md`).
 3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
 4. **What would prove us wrong?** — §⑧ falsification tests with numeric triggers.
@@ -132,3 +191,15 @@ Compute from the same geometry:
 ---
 
 *NP10 · upgraded 2026-06-27 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*
+
+---
+
+## Audit correction 2026-10-05 (opening premise)
+
+**Finding:** The question is unfilled by the bulk template, the total-binding gate is "within 20% of 28.296 MeV", and the committed electrostatic model under-binds the alpha by 6.35× (−84.3%).
+
+**Correction:** State the gap (the origin of the 23.842 MeV lock remainder) and gate the lock remainder directly.
+
+**Status:** RULE RECORDED — corrected gate or definition applies to the next run; the earlier result is not re-scored and nothing was re-run.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

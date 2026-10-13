@@ -1,3 +1,36 @@
+# SAR04 — Stellar main sequence and the surface k (specification rewritten 2026-10-12)
+
+**Author:** J. C. Harvey, Melbourne. Rewritten at Harvey's direction: prompts carry new data, and errors inform the mechanism. The 2026-06-27 specification is kept below the line, superseded.
+
+## 1. What is established (reset run 2026-10-10, `SAR04_RESET_ASSESSMENT_2026-10-10.md`)
+- **Premise repaired.** The old k = c/√(2GM/R) used G and M (prohibited) and escape speed. The canon is **k = c/v_surface, with v_surface = √(gR)** (spectroscopic g, R from L and T_eff): no G, no M.
+- **Data:** 123 FGK stars (DUNES table, `Experiments/E109_Solar_Spectral_Prism/data/dunes_koppa_table.txt`), k = 353–3213.
+- **G1, monotonic sequence: EXCLUDED within FGK.**
+  - ρ(k, L) = +0.42 and ρ(k, T_eff) = +0.34, both weak.
+  - The **sign is opposite** to the old picture: hotter and brighter stars sit at lower k.
+- **G2:** log L = −1.49 + 0.49 log k, scatter 0.44 dex. **G3:** the Sun lies inside the band (trivially; it sits mid-sample).
+- **O–M span:** not met (the table is FGK only).
+
+## 2. What the errors teach
+- Across FGK dwarfs √(gR) varies about ×2 while L varies ×100, so **k is not a luminosity coordinate**.
+- **k² = c²/(gR) = 1/z_surface**: k measures the star's **surface depth** (zk² = 1 with z = Ѻ/R = gR/c²).
+- The native question is therefore not "does k order the main sequence" but **what the surface depth orders.** Candidates: evolutionary state (dwarf against subgiant, at fixed T_eff) and the surface-depth redshift itself.
+
+## 3. Next round (register before computing)
+- **H2:** at fixed T_eff, z_surface = gR/c² separates dwarfs from evolved stars, with no fitted boundary. Test it on a sample with independent evolutionary classification (asteroseismic or luminosity class), with that classification loaded only after the z-ranking is saved.
+- **H3 (measured surface redshift):** for the stars with measured gravitational redshift (white dwarfs; the Sun; Gaia/APOGEE dwarfs if available with provenance), z_surface from gR/c² against the measured shift.
+  - **Label:** convergent with the GR surface redshift at first order (Ѻ = GM/c²). This tests the mass-free inputs, not a fork.
+- **O–M extension:** a mass-free k needs spectroscopic g and radii for O, B and M stars. A dataset with provenance is needed before registering.
+
+## 4. Prohibitions
+- No G or M.
+- No escape-speed k.
+- No sample trimming after the run.
+
+---
+
+## Superseded specification (2026-06-27, kept as written)
+
 # SAR04: Stellar Main Sequence from k-Gradient — Data/Prompt
 
 > **Author:** J. C. Harvey, Melbourne. **Status:** SPEC (upgrade 2026-06-27).
@@ -8,7 +41,7 @@
 
 ## ⓪ The Golden Rule — five questions (answer before Phase 0)
 
-1. **What don't we know?** — *(unfilled by the 2026-06-27 bulk template upgrade — write the single measurable gap before the next run)*
+1. **What don't we know?** — **Measurable gap (written 2026-10-05 in the audit correction pass, from this prompt's own content; the 2026-06-27 template left it unfilled):** Does the stellar main sequence follow from a monotone k-gradient (k = c / v_surface), with the luminosity law L(k) derived rather than fitted to the data?
 2. **Why does it matter?** — Stack position / downstream blockers (see `INVESTIGATION_STACK.md`).
 3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
 4. **What would prove us wrong?** — §⑧ falsification tests with numeric triggers.
@@ -93,3 +126,15 @@ The main sequence should be a CONTINUOUS k-sequence. Compute k for each spectral
 ---
 
 *SAR04 · upgraded 2026-06-27 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** T2 passes on "L ∝ k^−22.0, R² ≥ 0.90" with the slope "measured, not derived" (a power-law fit passes a fit statistic), T1 passes with 4 inversions in 15 steps, and the question is unfilled.
+
+**Correction:** Gate the exponent against a derived value and score the ordering with a stated inversion limit.
+
+**Status:** RULE RECORDED — corrected gate or definition applies to the next run; the earlier result is not re-scored and nothing was re-run.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

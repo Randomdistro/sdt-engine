@@ -1,3 +1,34 @@
+# NP04A — Neutron decay ledger and the tritium keystone (specification rewritten 2026-10-12)
+
+**Author:** J. C. Harvey, Melbourne. Rewritten at Harvey's direction: prompts carry new data; the packing sequencer is understood before grammar work; errors inform the mechanism. The previous specification is kept below the line.
+
+## 1. State after the reset (2026-10-10)
+- Stages A and F withdrawn (occlusion-integral binding).
+- B, E, G, H are constructions (identities of measured masses or engine definitions).
+- C and D open.
+- **The μ_n/μ_p = −2/3 of stage A is the quark-model value** (2.7% from measured −0.685). It is not native until derived from the trefoil.
+
+## 2. What the errors and new data teach
+- **The native neutron is p + one stabled electron (NP14), and its +0.782 MeV is owed** (SCT 2026-07-01 demotion; FLM12).
+- **PPT18:** the proton geometry is undetermined (three windings); the live engine's H1 was built **targeting** μ_p, so any moment ratio on engine geometry is shared-input.
+- Coincidence C-001 (s_n against the A = 3 mirror difference, 2.4% apart) is logged. Stage H's 18.579 keV against 18.591 is that identity in another form.
+
+## 3. Next round (registered order)
+1. Harvey's winding ruling (PPT18), then a native trefoil current ratio for μ_n/μ_p **derived before comparison**. Geometry from canon rules only (PPT18 stage 2a), not the engine's μ_p-targeted constants.
+2. A native unlinking barrier, for τ_n (C; shared with PPT09 and the neutron-lifetime anomaly; see the corpus anomaly list 2026-10-11).
+3. a_p/a_e without back-solving 1836 (D).
+
+## Prohibitions
+- No form chosen to reach anchors (2026-10-07 rule).
+- No census of candidate cells.
+- No QM formalism as scaffolding.
+- No potential-energy bookkeeping for binding.
+- The legacy packer (`pack-nucleus.js`, NSEQ05-CONTROL-3) is not the construction; the live sequencer is `traction-gear-engine.js` (NSEQ18-WEB-1).
+
+---
+
+## Previous specification (kept as written)
+
 # NP04A — Neutron Decay Ledger and Tritium Keystone *(free neutron → β-decay → tritium decay)*
 
 > **Author:** J. C. Harvey, Melbourne. **Status:** SPEC (upgrade 2026-06-27).

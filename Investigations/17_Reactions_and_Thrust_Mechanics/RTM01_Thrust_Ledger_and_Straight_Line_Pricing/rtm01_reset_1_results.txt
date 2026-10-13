@@ -1,0 +1,49 @@
+RTM01 blank-slate run 1 (registered in RTM01_RESET_ASSESSMENT_2026-10-11.md sections 0-2)
+=======================================================================
+
+[V1] Simpson (l = b sinh u) against 2L/(b^2 sqrt(b^2 + L^2)): relative 3.33e-16 -> met
+[V2] numerical toll dz/dl against the analytic -koppa l / r^3 : worst relative 5.38e-09 -> met
+[V3] weak-index light integral against 4 koppa/b (Sun limb, X/b = 1e4): relative 5.00e-09 -> met
+
+VALIDATIONS: met
+
+[P1] ledger laws: hover a(r) = c^2 xi / r^2 ; pass bill dv_perp = 2 c^2 xi / (b v) ; toll dz/dl = - xi l / r^3 ; z = xi / r ; light: theta = 4 xi / b ; occurrences of pi: 0 -> zero (F3)
+[P1] hover: Earth surface 9.81828 m/s^2 (g_surface identity 9.81828, difference 2.2e-16) ; Sun photosphere 274.2783 m/s^2 (g_surface identity 274.2783, difference 0.0e+00: IDENTITY)
+     independent comparison (shared form): GM_sun/R_sun^2 = 274.2001 m/s^2 : hover/that - 1 = +0.0285% (gate 0.1%: met)
+[P1] toll |dz/dl| along a chord peaks at l = 0.70710 b (b/sqrt2 = 0.70711) with size 0.384900 xi/b^2 (closed form 2/(3 sqrt3) = 0.384900): relative 6.1e-11
+     toll at the Sun limb chord: peak |dz/dl| = 1.175e-15 per metre ; Earth surface chord: 4.205e-17 per metre
+
+[P2] powered-ascent toll table (Earth): r, z = xi/r, hover a, circular speed c sqrt(z), identity v^2/c^2 / z - 1
+     r = 6371000 m : z = 6.959880e-10 ; a = 9.81828 m/s^2 ; v_circ = 7909.00 m/s ; identity 2.2e-16
+     r = 6421000 m : z = 6.905684e-10 ; a = 9.66597 m/s^2 ; v_circ = 7878.15 m/s ; identity 2.2e-16
+     r = 6471000 m : z = 6.852325e-10 ; a = 9.51717 m/s^2 ; v_circ = 7847.65 m/s ; identity 2.2e-16
+     r = 6521000 m : z = 6.799785e-10 ; a = 9.37179 m/s^2 ; v_circ = 7817.51 m/s ; identity 0.0e+00
+     r = 6571000 m : z = 6.748044e-10 ; a = 9.22971 m/s^2 ; v_circ = 7787.71 m/s ; identity 0.0e+00
+     identity worst 2.2e-16 (met) ; descriptive: circular speed at the ISS radius (6371 + 408 km) = 7667.3 m/s against the approximate observed 7660 m/s (+0.10%)
+
+[P3] hover price at the Earth's surface: a = 9.81828 m/s^2 held for one day with v_ex = 4.5 km/s : exponent a t / v_ex = 188.51 ; mass ratio exp(.) = 10^81.87 (astronomical: the curve is cheap, the line is not). Per second: exponent 2.182e-03 ; per metre of refusing the curve (dz/dl at the surface): 1.092e-16 m^-1
+
+[P3] straight-pass lateral bill dv_perp = 2 c^2 xi/(b v) [m/s]; '*' = outside the straight-line regime (dv_perp/v > 0.1)
+  Earth: rows b = R, 2R, 10R ; columns v = 1e4, 1e5, 1e6, 1e7 m/s
+   b =    1 R :  1.2510e+04*  1.2510e+03   1.2510e+02   1.2510e+01 
+   b =    2 R :  6.2552e+03*  6.2552e+02   6.2552e+01   6.2552e+00 
+   b =   10 R :  1.2510e+03*  1.2510e+02   1.2510e+01   1.2510e+00 
+  Sun: rows b = R, 2R, 10R ; columns v = 1e6, 1e7, 3e7, 1e8 m/s
+   b =    1 R :  3.8163e+05*  3.8163e+04   1.2721e+04   3.8163e+03 
+   b =    2 R :  1.9082e+05*  1.9082e+04   6.3605e+03   1.9082e+03 
+   b =   10 R :  3.8163e+04   3.8163e+03   1.2721e+03   3.8163e+02 
+
+[P4] decomposition by numerical integration: v, b_v (theta_slow = 1e-3), theta_slow (impulse integral / v^2), theta_light (exact-index gradient integral), ratio, c^2/(2v^2), deviation
+     v =    10 km/s : b_v = 2.6550e+15 m (1.775e+04 AU) ; theta_slow = 1.000000e-03 ; theta_light = 2.225300e-12 ; ratio 4.493776e+08 ; c^2/2v^2 = 4.493776e+08 ; deviation -1.30e-12
+     v =    30 km/s : b_v = 2.9500e+14 m (1.972e+03 AU) ; theta_slow = 1.000000e-03 ; theta_light = 2.002770e-11 ; ratio 4.993084e+07 ; c^2/2v^2 = 4.993084e+07 ; deviation -1.18e-11
+     v =   100 km/s : b_v = 2.6550e+13 m (1.775e+02 AU) ; theta_slow = 1.000000e-03 ; theta_light = 2.225300e-10 ; ratio 4.493776e+06 ; c^2/2v^2 = 4.493776e+06 ; deviation -1.31e-10
+     v =   300 km/s : b_v = 2.9500e+12 m (1.972e+01 AU) ; theta_slow = 1.000000e-03 ; theta_light = 2.002770e-09 ; ratio 4.993084e+05 ; c^2/2v^2 = 4.993084e+05 ; deviation -1.18e-09
+     F4 (deviation < 1e-3 in the slow limit): worst 1.18e-09 -> met
+     light at the Sun limb: exact-index integral 8.492473e-06 rad = 1.75170 arcsec ; 4 xi/R = 8.492430e-06 rad = 1.75169 arcsec ; ratio 1.00000500
+
+[Gate M] measured solar deflection (shared-form normalisation by GM_sun/c^2 = 1476.6250 m): (1 + gamma)/2 = 0.99990 +- 0.00015 (VLBA, fitted PPN parameter)
+     koppa_cal (2025 invariant, GOM26)    R_defl = koppa/(GM/c^2) = 0.999815 ; difference from (1+gamma)/2 = -8.54e-05 ; combined sigma 4.27e-04 ; 0.20 sigma ; gate 2 sigma: met
+     koppa_hold (2024, GOM26)             R_defl = koppa/(GM/c^2) = 1.000165 ; difference from (1+gamma)/2 = +2.65e-04 ; combined sigma 4.27e-04 ; 0.62 sigma ; gate 2 sigma: met
+     bridge::koppa_Sun                    R_defl = koppa/(GM/c^2) = 1.000285 ; difference from (1+gamma)/2 = +3.85e-04 ; combined sigma 4.27e-04 ; 0.90 sigma ; gate 2 sigma: met
+     Cassini (1 + gamma)/2 = 1.00001 +- 0.00001: orbit-invariant systematic 4e-04 is 40 times its precision -> not decidable with this koppa
+     predicted limb deflection with koppa_cal: 1.75087 arcsec ; with the GM_sun/c^2 normalisation (GR value for these constants): 1.75119 arcsec

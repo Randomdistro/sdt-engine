@@ -1,0 +1,54 @@
+CM05 - Superfluidity and BEC from Phase Lock
+J. C. Harvey, Melbourne - 2026-07-04
+Doors: FD02 winding, CM01 gear-lock, FLM14 constraint channel.
+
+== P1: transition existence + scale (two committed routes, no averaging) ==
+  spacing d = n^-1/3 = 3.569e-10 m
+  Route 1 (wake-crossover)  T1 = 12.52 K  -> 5.77x of T_lambda  FAIL (gate 2x)
+  Route 2 (lock-energy)     T2 = 0.476 K -> 0.22x of T_lambda  FAIL (gate 2x)
+  [HONESTY] the routes BRACKET T_lambda from opposite sides;
+            bracketing is not predicting (HUNTER SC3). Kelvin-scale
+            existence EARNED; magnitude OPEN - missing closure named:
+            collective seating statistics of indistinguishable wakes
+            (refused as a Bose import; owed natively).
+
+== P2: eta -> 0 below the lock (FLM14 rigidity, mean-field lock fraction) ==
+  T/T_lock   lock fraction f   eta/eta_n = 1-f
+    1.20        0.0000            1.0000
+    1.00        0.0000            1.0000
+    0.90        0.5254            0.4746
+    0.70        0.8286            0.1714
+    0.50        0.9575            0.0425
+    0.30        0.9974            0.0026
+    0.10        1.0000            0.0000
+  gates: f(0.5 T_lock) > 0.9 -> 0.9575 PASS ; f(T>T_lock) = 0 -> 0.0000 PASS
+  WHY eta=0 (machinery): locked wakes = one gear cluster; a wall/defect
+  kick redistributes cluster-wide on the constraint channel in-tick
+  (FLM14 ADJ-7); viscous loss requires unlocking (cost E_lock). The
+  unlocked fraction 1-f is the ONLY viscous channel [COMPUTED, mean-field].
+
+== P3: circulation quantum - the body-count rule (CORE GATE) ==
+  He-4: kappa = h/m (divisor 1, single wake; Law VI, no free integer)
+        = 9.96930e-08 m^2/s vs 9.97e-8 measured  err 0.007%  PASS (gate 0.1%)
+  He-3: body-count rule -> pair lock (odd constituent count leaves an
+        unpaired half-wake; needs a partner - ARGUED, not derived)
+        kappa = h/(2 m3) = 6.61518e-08 m^2/s [OBSERVED comparison: measured
+        He-3 circulation IS h/2m3 (Avenel-Varoquaux)]  divisor 2  OK
+  [RULE] the quantum divisor counts the locked bodies: He-4 -> 1,
+         He-3 -> 2, CM01 electron pair -> 2. Zero adjustments.
+
+== P4: critical velocity (labelled honestly) ==
+  native bound: v_c <= c_s = 238 m/s [compression ceiling]
+  roton-set:    v_c = Delta/(hbar k0) = 59.0 m/s
+  [OBSERVED-REPROCESSING - NO SDT CREDIT: roton spectrum not derived
+   here; consistency check only vs ~60 m/s ideal onset: consistent]
+  The roton itself = short-k relay bend (CM04 generative Q1) - OPEN.
+
+== Ledger ==
+  DERIVED : T1, T2 route values (zero fits), lock-fraction collapse,
+            kappa = h/m form (Law VI), body-count divisor rule.
+  ARGUED  : He-3 must pair (odd-count narration).
+  OPEN    : T_lambda magnitude (seating statistics, native, unbuilt);
+            roton derivation.
+  OBSERVED: T_lambda, kappa_meas, He-3 circulation, roton params, c_s.
+  CALIBRATED: none (0 of 0 budget). No psi anywhere.

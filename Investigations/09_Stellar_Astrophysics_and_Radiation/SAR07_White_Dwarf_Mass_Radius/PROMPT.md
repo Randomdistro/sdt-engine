@@ -1,3 +1,28 @@
+# SAR07 — White dwarf mass–radius (specification rewritten 2026-10-12)
+
+**Author:** J. C. Harvey, Melbourne. Rewritten at Harvey's direction: prompts carry new data, and errors inform the mechanism. The previous specification and its audit blocks are kept below the line.
+
+## 1. State after the reset audit (2026-10-10)
+**G2, open: specification incomplete; no instrument run.** The model depends on a seat-stack counting run that does not exist. There is no R(M) law and no committed tolerance.
+
+## 2. What opens it (registered order)
+1. The seat-stack law, written natively (what holds a white dwarf up: the occlusion saturation and exclusion state-change of the two-regime picture).
+2. R(M), with its trend sign, against the measured white-dwarf relation. Gate committed first.
+3. The Sirius B anchor and the budget-cap limit.
+
+## 3. New data and links from the 2026-10-07 to 2026-10-12 work
+- **Sirius B radius corrected (shadow analysis 2026-10-08, E4).** Use 0.0081 R☉ (Barstow 2005) or 0.00803 R☉ (Joyce 2018), not 0.0084. With the measured gravitational redshift, Ѻ = zR gives **1.024 M☉-equivalent**, inside the dynamical 1.018 ± error. That is a zk² = 1 consistency (convergent, not discriminating) and a ready anchor for the R(M) test.
+- White-dwarf surfaces are shallow (z ≈ 1e-4), well outside any c-boundary. The displacement-modulated occlusion proposal (Harvey 2026-10-11/12) predicts no regime change there.
+
+## Prohibitions (all items in this batch)
+- No mechanism or functional form chosen to reach the anchors (2026-10-07 method rule).
+- Tolerances are committed before any value is computed.
+- No QM narration; no G or GM; the word "charge" is not used.
+
+---
+
+## Previous specification (kept as written)
+
 # SAR07 — White Dwarf Mass–Radius from the Seat Stack
 
 > **Status:** OPEN — specification seed (benchmark-coverage alignment 2026-07-29; catalogue
@@ -32,3 +57,15 @@ neutron-star 11.0 km), reopen R4 (the seat-stack counting run).
 ## Benchmark linkage
 
 Catalogue row B90 · depends on the R4 seat-stack run · tally on computed number only.
+
+---
+
+## Audit correction 2026-10-05 (opening premise)
+
+**Finding:** The seed depends on a "seat-stack counting run" (reopen R4) that does not exist in the repo, so the mass–radius relation has no model.
+
+**Correction:** Build and register the capped-occupancy counting model first, then gate Sirius B and the 1.4 M_sun limit.
+
+**Status:** OWED — model, data or derivation missing; requirement and tolerance recorded, nothing run.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

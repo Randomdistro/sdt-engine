@@ -176,3 +176,15 @@ changes: widening any tolerance, inputting a target velocity, adding a fitted sc
 **Realized:** PASS · 4/4 · Class B · `RUN_LOG.md` 2026-06-26. The 1.83c → c → αc ladder and the driven-orbit
 resonance are fixed by proton geometry with no fitted parameter; the one sub-0.1% residual (αc, 0.083%) is the
 only thing between this and pure Class A.
+
+---
+
+## Audit correction 2026-10-05 (construction)
+
+**Finding:** Anchors 1a–1c (v(R_p), v(r_c) = c, k(a0) = 1/α) are properties of the profile v = cα√(a0/r) it is built from, so a 0.01% pass is by construction.
+
+**Correction:** Gate on a quantity not used to define the profile, such as an independent spectral line or the traction ratio.
+
+**Status:** OWED — needs a new run, derivation or data; the corrected requirement is recorded here.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

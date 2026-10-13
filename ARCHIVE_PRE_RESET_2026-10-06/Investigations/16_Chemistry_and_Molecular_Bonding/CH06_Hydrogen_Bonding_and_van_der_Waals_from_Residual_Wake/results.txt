@@ -1,0 +1,41 @@
+﻿================================================================
+  CH06 — Residual Wake: dispersion exponents + hydrogen bond
+  Author: J. C. Harvey, Melbourne · 2026-07-05
+================================================================
+
+P1a STATIC PAIR-PAIR EXPONENT (fitted, r/d in [10,100])
+    slope = -3.0037  (gate -3.00 +/- 0.05) [PASS]
+
+P1b CORRELATED-FLUCTUATION EXPONENT (London channel)
+    variant 1 (kappa x50, T=1): slope = -6.0225 (gate -6.00 +/- 0.05) [PASS]
+    variant 2 (kappa x500, T=10): slope = -6.0224 (gate -6.00 +/- 0.05) [PASS]
+    The -6 EMERGES as 2 x (P1a -3): second-order correlation of the leaked
+    rim residuals. Jitter AMPLITUDE (hence C6 magnitude) = OPEN closure —
+    substrate influx fluctuation, named, not fitted. Size trend: dF grows
+    monotonically with residual d at fixed r (structural; ladder DEFERred).
+
+P2  HYDROGEN BOND (exact 4-point sums; moments/distances OBSERVED)
+    F-H...F  (HF)   d=p/e=0.380 A  E =  20.35 kJ/mol  (measured dimer  19.1)
+    O-H...O  (H2O)  d=p/e=0.314 A  E =  12.40 kJ/mol  (measured dimer  20.8)
+    N-H...N  (NH3)  d=p/e=0.273 A  E =   6.01 kJ/mol  (measured dimer  13.2)
+    H2O in 10-40 band: [PASS]   O-H...O > N-H...N: [PASS]
+    angular scan (donor tilt):  0 deg: 12.40  15 deg: 11.96  30 deg: 10.70  45 deg:  8.70  60 deg:  6.13  
+    maximum attraction at LINEAR geometry: [PASS] (linearity DERIVED)
+
+P4  NOVEL ORDERING {HF, H2O, NH3} vs measured dimer energies
+    HF vs H2O: predicted >, measured < [X]
+    HF vs NH3: predicted >, measured > [ok]
+    H2O vs NH3: predicted >, measured > [ok]
+    pairwise relations correct: 2/3 (gate 3/3) [FAIL]
+
+P3  WATER 4 C DENSITY TURNOVER: DEFER — needs the H-bond network run
+    (CH04 geometry + this rim residual); named debt, not attempted.
+
+================================================================
+  CH06 SUMMARY
+  P1 exponents: -3 static and -6 correlated, FITTED out of the machinery
+  P2 H-bond: band/ordering/linearity as printed; magnitudes ~40% under
+     (point-pair idealisation at contact distances — honest, unfitted)
+  committed-gate failures: 1
+  Exit: 1
+================================================================

@@ -1,0 +1,524 @@
+﻿╔══════════════════════════════════════════════════════════════╗
+║  APS01 B++: BLIND GEOMETRY RECOVERY (DUAL MODE)            ║
+║  No names. No chemistry. Two classifier modes.            ║
+╚══════════════════════════════════════════════════════════════╝
+
+  HOSTILE-EXAMINER NOTE:
+  Classification does not branch on element name, chemical
+  group, or expected Atomicus class. Z is used only in
+  normalized pressure terrain P_i = IE_i/(Ry·Z²).
+
+  Mode A: IE-only  (OLI, CBI, BP)
+  Mode B: IE + excitation rigidity (adds rho = E_exc1/IE1)
+
+══ DUAL MODE CLASSIFICATION ══
+
+  ID   Z    OLI   CBI  BP   rho  ModeA     ModeB      Trigger
+  ─────────────────────────────────────────────────────────────────────
+  #0   1   0.00  0.00   0 0.750  ?         ?          no dominant IE feature
+  #1   2   2.21  2.21   1 0.806  ?         ?          no dominant IE feature
+  #2   3  14.03 14.03   1 0.343  SPIKE     SPIKE      OLI>5: shallow outer [IE-only]
+  #3   4   1.95  8.45   2 0.293  WALL      WALL       BP=2,CBI>4: pair boundary [IE-only]
+  #4   5   3.03  6.84   3 0.431  BREACH    BREACH     CBI>4: strong discontinuity [IE-only]
+  #5   6   2.17  6.08   4 0.112  BREACH    BREACH     CBI>4: strong discontinuity [IE-only]
+  #6   7   2.04  5.64   5 0.164  BREACH    BREACH     CBI>4: strong discontinuity [IE-only]
+  #7   8   2.58  5.35   6 0.145  BREACH    BREACH     CBI>4: strong discontinuity [IE-only]
+  #8   9   2.01  5.15   7 0.729  PLATEAU   PLATEAU    BP>=7,CBI>3.5: late breach [IE-only]
+  #9  10   1.90  5.00   8 0.771  PLATEAU   PLATEAU    BP>=7,CBI>3.5: late breach [IE-only]
+  #10 11   9.20  9.20   1 0.409  SPIKE     SPIKE      OLI>5: shallow outer [IE-only]
+  #11 12   1.97  5.33   2 0.354  WALL      WALL       BP=2,CBI>4: pair boundary [IE-only]
+  #12 13   3.15  3.15   1 0.525  ?         ?          no dominant IE feature
+  #13 14   2.01  2.05   2 0.096  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #14 15   1.89  1.89   1 0.134  ?         ?          no dominant IE feature
+  #15 16   2.25  2.25   1 0.111  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #16 17   1.84  1.84   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #17 18   1.75  1.75   1 0.733  ?         ?          no dominant IE feature
+  #18 19   7.29  7.29   1 0.371  SPIKE     SPIKE      OLI>5: shallow outer [IE-only]
+  #19 20   1.94  4.29   2 0.308  WALL      WALL       BP=2,CBI>4: pair boundary [IE-only]
+  #20 21   1.95  1.95   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #21 22   1.99  2.02   2 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #22 23   2.17  2.17   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #23 24   2.44  2.44   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #24 25   2.10  2.15   2 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #25 26   2.05  2.05   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #26 27   2.17  2.17   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #27 28   2.38  2.38   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #28 29   2.63  2.63   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #29 30   1.91  2.21   2 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #30 31   3.42  3.42   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #31 32   2.02  2.15   2 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #32 33   1.90  1.90   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #33 34   2.17  2.17   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #34 35   1.83  1.83   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #35 36   1.74  1.74   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #36 37   6.53  6.53   1 0.000  SPIKE     SPIKE      OLI>5: shallow outer [IE-only]
+  #37 38   1.94  1.94   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #38 39   1.97  1.97   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #39 40   1.98  1.98   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #40 41   2.12  2.12   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #41 42   2.28  2.28   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #42 43   2.10  2.10   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #43 44   2.28  2.28   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #44 45   2.42  2.42   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #45 46   2.33  2.33   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #46 47   2.84  2.84   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #47 48   1.88  1.88   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #48 49   3.26  3.26   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #49 50   1.99  1.99   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #50 51   1.92  1.92   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #51 52   2.06  2.06   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #52 53   1.83  1.83   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #53 54   1.73  1.73   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #54 55   6.45  6.45   1 0.000  SPIKE     SPIKE      OLI>5: shallow outer [IE-only]
+  #55 56   1.92  1.92   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #56 57   1.98  1.98   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #57 58   1.96  1.96   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #58 59   1.93  1.93   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #59 60   1.94  1.94   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #60 61   1.95  1.95   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #61 62   1.96  1.96   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #62 63   1.98  1.98   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #63 64   1.97  1.97   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #64 65   1.96  1.96   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #65 66   1.96  1.96   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #66 67   1.96  1.96   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #67 68   1.95  1.95   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #68 69   1.95  1.95   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #69 70   1.95  1.95   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #70 71   2.56  2.56   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #71 72   2.18  2.18   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #72 73   2.15  2.15   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #73 74   2.05  2.05   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #74 75   2.12  2.12   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #75 76   2.01  2.01   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #76 77   1.90  1.90   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #77 78   2.07  2.07   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #78 79   2.22  2.22   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #79 80   1.80  1.80   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #80 81   3.34  3.34   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #81 82   2.03  2.03   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #82 83   2.29  2.29   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #83 84   2.31  2.31   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #84 85   1.92  1.92   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #85 86   1.99  1.99   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #86 87   5.50  5.50   1 0.000  SPIKE     SPIKE      OLI>5: shallow outer [IE-only]
+  #87 88   1.92  1.92   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #88 89   2.27  2.27   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #89 90   1.82  1.82   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #90 91   1.99  1.99   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #91 92   1.87  1.87   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #92 93   1.84  1.84   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #93 94   1.86  1.86   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #94 95   1.96  1.96   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #95 96   2.07  2.07   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #96 97   1.92  1.92   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #97 98   1.91  1.91   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #98 99   1.90  1.90   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #99 100   1.89  1.89   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #100 101   1.88  1.88   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #101 102   1.88  1.88   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #102 103   2.90  2.90   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #103 104   2.40  2.40   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #104 105   2.12  2.12   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #105 106   2.03  2.03   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #106 107   2.14  2.14   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #107 108   2.24  2.24   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #108 109   2.03  2.03   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #109 110   1.96  1.96   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #110 111   1.85  1.85   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #111 112   1.59  1.59   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #112 113   2.74  2.74   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #113 114   1.97  1.97   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #114 115   3.23  3.23   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #115 116   2.50  2.50   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #116 117   2.21  2.21   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+  #117 118   2.02  2.02   1 0.000  ?         FLAT       ← DIFFERS: rho<0.12: open structure [exc-assisted]
+
+══ MODE COMPARISON: What does excitation data add? ══
+
+  Z=14: ? → FLAT
+  Z=16: ? → FLAT
+  Z=17: ? → FLAT
+  Z=21: ? → FLAT
+  Z=22: ? → FLAT
+  Z=23: ? → FLAT
+  Z=24: ? → FLAT
+  Z=25: ? → FLAT
+  Z=26: ? → FLAT
+  Z=27: ? → FLAT
+  Z=28: ? → FLAT
+  Z=29: ? → FLAT
+  Z=30: ? → FLAT
+  Z=31: ? → FLAT
+  Z=32: ? → FLAT
+  Z=33: ? → FLAT
+  Z=34: ? → FLAT
+  Z=35: ? → FLAT
+  Z=36: ? → FLAT
+  Z=38: ? → FLAT
+  Z=39: ? → FLAT
+  Z=40: ? → FLAT
+  Z=41: ? → FLAT
+  Z=42: ? → FLAT
+  Z=43: ? → FLAT
+  Z=44: ? → FLAT
+  Z=45: ? → FLAT
+  Z=46: ? → FLAT
+  Z=47: ? → FLAT
+  Z=48: ? → FLAT
+  Z=49: ? → FLAT
+  Z=50: ? → FLAT
+  Z=51: ? → FLAT
+  Z=52: ? → FLAT
+  Z=53: ? → FLAT
+  Z=54: ? → FLAT
+  Z=56: ? → FLAT
+  Z=57: ? → FLAT
+  Z=58: ? → FLAT
+  Z=59: ? → FLAT
+  Z=60: ? → FLAT
+  Z=61: ? → FLAT
+  Z=62: ? → FLAT
+  Z=63: ? → FLAT
+  Z=64: ? → FLAT
+  Z=65: ? → FLAT
+  Z=66: ? → FLAT
+  Z=67: ? → FLAT
+  Z=68: ? → FLAT
+  Z=69: ? → FLAT
+  Z=70: ? → FLAT
+  Z=71: ? → FLAT
+  Z=72: ? → FLAT
+  Z=73: ? → FLAT
+  Z=74: ? → FLAT
+  Z=75: ? → FLAT
+  Z=76: ? → FLAT
+  Z=77: ? → FLAT
+  Z=78: ? → FLAT
+  Z=79: ? → FLAT
+  Z=80: ? → FLAT
+  Z=81: ? → FLAT
+  Z=82: ? → FLAT
+  Z=83: ? → FLAT
+  Z=84: ? → FLAT
+  Z=85: ? → FLAT
+  Z=86: ? → FLAT
+  Z=88: ? → FLAT
+  Z=89: ? → FLAT
+  Z=90: ? → FLAT
+  Z=91: ? → FLAT
+  Z=92: ? → FLAT
+  Z=93: ? → FLAT
+  Z=94: ? → FLAT
+  Z=95: ? → FLAT
+  Z=96: ? → FLAT
+  Z=97: ? → FLAT
+  Z=98: ? → FLAT
+  Z=99: ? → FLAT
+  Z=100: ? → FLAT
+  Z=101: ? → FLAT
+  Z=102: ? → FLAT
+  Z=103: ? → FLAT
+  Z=104: ? → FLAT
+  Z=105: ? → FLAT
+  Z=106: ? → FLAT
+  Z=107: ? → FLAT
+  Z=108: ? → FLAT
+  Z=109: ? → FLAT
+  Z=110: ? → FLAT
+  Z=111: ? → FLAT
+  Z=112: ? → FLAT
+  Z=113: ? → FLAT
+  Z=114: ? → FLAT
+  Z=115: ? → FLAT
+  Z=116: ? → FLAT
+  Z=117: ? → FLAT
+  Z=118: ? → FLAT
+
+  Unchanged: 20/118
+  Gained PLATEAU from exc data: 0
+  Gained FLAT from exc data: 98
+
+╔══════════════════════════════════════════════════════════════╗
+║  UNMASK: Does blind recovery match periodicity?            ║
+╚══════════════════════════════════════════════════════════════╝
+
+  Name  Z  ModeA     ModeB      Recovery
+  ──────────────────────────────────────────────────────
+  H     1  ?         ?          —
+  He    2  ?         ?          noble NOT recovered
+  Li    3  SPIKE     SPIKE      alkali→SPIKE(A) ✓
+  Be    4  WALL      WALL       alk-earth→WALL(A) ✓
+  B     5  BREACH    BREACH     p-block BREACH
+  C     6  BREACH    BREACH     p-block BREACH
+  N     7  BREACH    BREACH     p-block BREACH
+  O     8  BREACH    BREACH     p-block BREACH
+  F     9  PLATEAU   PLATEAU    —
+  Ne   10  PLATEAU   PLATEAU    noble→PLATEAU(A) ✓ [IE-only!]
+  Na   11  SPIKE     SPIKE      alkali→SPIKE(A) ✓
+  Mg   12  WALL      WALL       alk-earth→WALL(A) ✓
+  Al   13  ?         ?          —
+  Si   14  ?         FLAT       FLAT (open)
+  P    15  ?         ?          —
+  S    16  ?         FLAT       FLAT (open)
+  Cl   17  ?         FLAT       FLAT (open)
+  Ar   18  ?         ?          noble NOT recovered
+  K    19  SPIKE     SPIKE      alkali→SPIKE(A) ✓
+  Ca   20  WALL      WALL       alk-earth→WALL(A) ✓
+  Sc   21  ?         FLAT       FLAT (open)
+  Ti   22  ?         FLAT       FLAT (open)
+  V    23  ?         FLAT       FLAT (open)
+  Cr   24  ?         FLAT       FLAT (open)
+  Mn   25  ?         FLAT       FLAT (open)
+  Fe   26  ?         FLAT       FLAT (open)
+  Co   27  ?         FLAT       FLAT (open)
+  Ni   28  ?         FLAT       FLAT (open)
+  Cu   29  ?         FLAT       FLAT (open)
+  Zn   30  ?         FLAT       FLAT (open)
+  Ga   31  ?         FLAT       FLAT (open)
+  Ge   32  ?         FLAT       FLAT (open)
+  As   33  ?         FLAT       FLAT (open)
+  Se   34  ?         FLAT       FLAT (open)
+  Br   35  ?         FLAT       FLAT (open)
+  Kr   36  ?         FLAT       FLAT (open)
+  Rb   37  SPIKE     SPIKE      —
+  Sr   38  ?         FLAT       FLAT (open)
+  Y    39  ?         FLAT       FLAT (open)
+  Zr   40  ?         FLAT       FLAT (open)
+  Nb   41  ?         FLAT       FLAT (open)
+  Mo   42  ?         FLAT       FLAT (open)
+  Tc   43  ?         FLAT       FLAT (open)
+  Ru   44  ?         FLAT       FLAT (open)
+  Rh   45  ?         FLAT       FLAT (open)
+  Pd   46  ?         FLAT       FLAT (open)
+  Ag   47  ?         FLAT       FLAT (open)
+  Cd   48  ?         FLAT       FLAT (open)
+  In   49  ?         FLAT       FLAT (open)
+  Sn   50  ?         FLAT       FLAT (open)
+  Sb   51  ?         FLAT       FLAT (open)
+  Te   52  ?         FLAT       FLAT (open)
+  I    53  ?         FLAT       FLAT (open)
+  Xe   54  ?         FLAT       FLAT (open)
+  Cs   55  SPIKE     SPIKE      —
+  Ba   56  ?         FLAT       FLAT (open)
+  La   57  ?         FLAT       FLAT (open)
+  Ce   58  ?         FLAT       FLAT (open)
+  Pr   59  ?         FLAT       FLAT (open)
+  Nd   60  ?         FLAT       FLAT (open)
+  Pm   61  ?         FLAT       FLAT (open)
+  Sm   62  ?         FLAT       FLAT (open)
+  Eu   63  ?         FLAT       FLAT (open)
+  Gd   64  ?         FLAT       FLAT (open)
+  Tb   65  ?         FLAT       FLAT (open)
+  Dy   66  ?         FLAT       FLAT (open)
+  Ho   67  ?         FLAT       FLAT (open)
+  Er   68  ?         FLAT       FLAT (open)
+  Tm   69  ?         FLAT       FLAT (open)
+  Yb   70  ?         FLAT       FLAT (open)
+  Lu   71  ?         FLAT       FLAT (open)
+  Hf   72  ?         FLAT       FLAT (open)
+  Ta   73  ?         FLAT       FLAT (open)
+  W    74  ?         FLAT       FLAT (open)
+  Re   75  ?         FLAT       FLAT (open)
+  Os   76  ?         FLAT       FLAT (open)
+  Ir   77  ?         FLAT       FLAT (open)
+  Pt   78  ?         FLAT       FLAT (open)
+  Au   79  ?         FLAT       FLAT (open)
+  Hg   80  ?         FLAT       FLAT (open)
+  Tl   81  ?         FLAT       FLAT (open)
+  Pb   82  ?         FLAT       FLAT (open)
+  Bi   83  ?         FLAT       FLAT (open)
+  Po   84  ?         FLAT       FLAT (open)
+  At   85  ?         FLAT       FLAT (open)
+  Rn   86  ?         FLAT       FLAT (open)
+  Fr   87  SPIKE     SPIKE      —
+  Ra   88  ?         FLAT       FLAT (open)
+  Ac   89  ?         FLAT       FLAT (open)
+  Th   90  ?         FLAT       FLAT (open)
+  Pa   91  ?         FLAT       FLAT (open)
+  U    92  ?         FLAT       FLAT (open)
+  Np   93  ?         FLAT       FLAT (open)
+  Pu   94  ?         FLAT       FLAT (open)
+  Am   95  ?         FLAT       FLAT (open)
+  Cm   96  ?         FLAT       FLAT (open)
+  Bk   97  ?         FLAT       FLAT (open)
+  Cf   98  ?         FLAT       FLAT (open)
+  Es   99  ?         FLAT       FLAT (open)
+  Fm   100  ?         FLAT       FLAT (open)
+  Md   101  ?         FLAT       FLAT (open)
+  No   102  ?         FLAT       FLAT (open)
+  Lr   103  ?         FLAT       FLAT (open)
+  Rf   104  ?         FLAT       FLAT (open)
+  Db   105  ?         FLAT       FLAT (open)
+  Sg   106  ?         FLAT       FLAT (open)
+  Bh   107  ?         FLAT       FLAT (open)
+  Hs   108  ?         FLAT       FLAT (open)
+  Mt   109  ?         FLAT       FLAT (open)
+  Ds   110  ?         FLAT       FLAT (open)
+  Rg   111  ?         FLAT       FLAT (open)
+  Cn   112  ?         FLAT       FLAT (open)
+  Nh   113  ?         FLAT       FLAT (open)
+  Fl   114  ?         FLAT       FLAT (open)
+  Mc   115  ?         FLAT       FLAT (open)
+  Lv   116  ?         FLAT       FLAT (open)
+  Ts   117  ?         FLAT       FLAT (open)
+  Og   118  ?         FLAT       FLAT (open)
+
+══ PERIODICITY CHECK ══
+
+  Period  Start(A)  End(A)   Start(B)  End(B)   Pattern
+  3→10    SPIKE     PLATEAU   SPIKE     PLATEAU   starts SPIKE ✓
+  11→18    SPIKE     ?         SPIKE     ?         starts SPIKE ✓
+  19→20    SPIKE     WALL      SPIKE     WALL      starts SPIKE ✓
+
+══ NORMALIZED TERRAIN FAMILIES (Mode B) ══
+
+  SPIKE family:
+    Z= 3: 0.0440 0.6177 1.0000 
+    Z=11: 0.0031 0.0287 0.0435 
+    Z=19: 0.0009 0.0064 0.0093 
+    Z=37: 0.0002 0.0015 
+    Z=55: 0.0001 0.0006 
+    Z=87: 0.0000 0.0002 
+
+  WALL family:
+    Z= 4: 0.0428 0.0837 0.7069 1.0001 
+    Z=12: 0.0039 0.0077 0.0409 
+    Z=20: 0.0011 0.0022 0.0094 
+
+  PLATEAU family:
+    Z= 9: 0.0158 0.0317 0.0569 0.0791 0.1037 0.1426 
+    Z=10: 0.0158 0.0301 0.0466 0.0714 0.0928 0.1161 
+
+  BREACH family:
+    Z= 5: 0.0244 0.0740 0.1115 0.7625 1.0002 
+    Z= 6: 0.0230 0.0498 0.0978 0.1317 0.8005 1.0004 
+    Z= 7: 0.0218 0.0444 0.0712 0.1162 0.1468 0.8281 
+    Z= 8: 0.0156 0.0403 0.0631 0.0889 0.1308 0.1586 
+
+  FLAT family:
+    Z=14: 0.0031 0.0061 0.0126 0.0169 
+    Z=16: 0.0030 0.0067 0.0100 0.0136 
+    Z=17: 0.0033 0.0061 0.0101 
+    Z=21: 0.0011 0.0021 0.0041 
+    Z=22: 0.0010 0.0021 0.0042 
+    Z=23: 0.0009 0.0020 0.0041 
+    Z=24: 0.0009 0.0021 0.0040 
+    Z=25: 0.0009 0.0018 0.0040 
+    Z=26: 0.0009 0.0018 0.0033 
+    Z=27: 0.0008 0.0017 0.0034 
+    Z=28: 0.0007 0.0017 0.0033 
+    Z=29: 0.0007 0.0018 0.0032 
+    Z=30: 0.0008 0.0015 0.0032 
+    Z=31: 0.0005 0.0016 0.0023 
+    Z=32: 0.0006 0.0011 0.0025 
+    Z=33: 0.0007 0.0013 0.0019 
+    Z=34: 0.0006 0.0013 0.0020 
+    Z=35: 0.0007 0.0013 0.0022 
+    Z=36: 0.0008 0.0014 0.0021 
+    Z=38: 0.0003 0.0006 
+    Z=39: 0.0003 0.0006 
+    Z=40: 0.0003 0.0006 
+    Z=41: 0.0003 0.0006 
+    Z=42: 0.0003 0.0007 
+    Z=43: 0.0003 0.0006 
+    Z=44: 0.0003 0.0006 
+    Z=45: 0.0003 0.0007 
+    Z=46: 0.0003 0.0007 
+    Z=47: 0.0003 0.0007 
+    Z=48: 0.0003 0.0005 
+    Z=49: 0.0002 0.0006 
+    Z=50: 0.0002 0.0004 
+    Z=51: 0.0002 0.0005 
+    Z=52: 0.0002 0.0005 
+    Z=53: 0.0003 0.0005 
+    Z=54: 0.0003 0.0005 
+    Z=56: 0.0001 0.0002 
+    Z=57: 0.0001 0.0003 
+    Z=58: 0.0001 0.0002 
+    Z=59: 0.0001 0.0002 
+    Z=60: 0.0001 0.0002 
+    Z=61: 0.0001 0.0002 
+    Z=62: 0.0001 0.0002 
+    Z=63: 0.0001 0.0002 
+    Z=64: 0.0001 0.0002 
+    Z=65: 0.0001 0.0002 
+    Z=66: 0.0001 0.0002 
+    Z=67: 0.0001 0.0002 
+    Z=68: 0.0001 0.0002 
+    Z=69: 0.0001 0.0002 
+    Z=70: 0.0001 0.0002 
+    Z=71: 0.0001 0.0002 
+    Z=72: 0.0001 0.0002 
+    Z=73: 0.0001 0.0002 
+    Z=74: 0.0001 0.0002 
+    Z=75: 0.0001 0.0002 
+    Z=76: 0.0001 0.0002 
+    Z=77: 0.0001 0.0002 
+    Z=78: 0.0001 0.0002 
+    Z=79: 0.0001 0.0002 
+    Z=80: 0.0001 0.0002 
+    Z=81: 0.0001 0.0002 
+    Z=82: 0.0001 0.0002 
+    Z=83: 0.0001 0.0002 
+    Z=84: 0.0001 0.0002 
+    Z=85: 0.0001 0.0002 
+    Z=86: 0.0001 0.0002 
+    Z=88: 0.0001 0.0001 
+    Z=89: 0.0000 0.0001 
+    Z=90: 0.0001 0.0001 
+    Z=91: 0.0001 0.0001 
+    Z=92: 0.0001 0.0001 
+    Z=93: 0.0001 0.0001 
+    Z=94: 0.0001 0.0001 
+    Z=95: 0.0000 0.0001 
+    Z=96: 0.0000 0.0001 
+    Z=97: 0.0000 0.0001 
+    Z=98: 0.0000 0.0001 
+    Z=99: 0.0000 0.0001 
+    Z=100: 0.0000 0.0001 
+    Z=101: 0.0000 0.0001 
+    Z=102: 0.0000 0.0001 
+    Z=103: 0.0000 0.0001 
+    Z=104: 0.0000 0.0001 
+    Z=105: 0.0000 0.0001 
+    Z=106: 0.0001 0.0001 
+    Z=107: 0.0000 0.0001 
+    Z=108: 0.0000 0.0001 
+    Z=109: 0.0001 0.0001 
+    Z=110: 0.0001 0.0001 
+    Z=111: 0.0001 0.0001 
+    Z=112: 0.0001 0.0001 
+    Z=113: 0.0000 0.0001 
+    Z=114: 0.0000 0.0001 
+    Z=115: 0.0000 0.0001 
+    Z=116: 0.0000 0.0001 
+    Z=117: 0.0000 0.0001 
+    Z=118: 0.0000 0.0001 
+
+══════════════════════════════════════════════════════════════
+  BLIND RECOVERY VERDICT
+
+  MODE A (IE-only):
+    Alkali → SPIKE:     3/3
+    Noble  → PLATEAU:   1/3
+    Alk-earth → WALL:   3/3 (Ca needs deeper IE)
+
+  MODE B (IE + excitation rigidity):
+    Alkali → SPIKE:     3/3
+    Noble  → PLATEAU:   1/3 (0 exc-assisted)
+    Alk-earth → WALL:   3/3 (Ca needs deeper IE)
+
+  MODE A total: 7/9 features from IE terrain only.
+  MODE B total: 7/9 features from IE + first excitation.
+  No element names or chemical labels used.
+
+  FINDING: Alkali loose-outer IS in the IE terrain itself.
+  OLI (IE2/IE1) carries full loose-outer information.
+
+  STAGE C PERMISSION (per recovered class):
+    loose_outer:   GRANTED (Li/Na/K from IE-only)
+    cube_closure:  PENDING (requires excitation data)
+    dyad_wall:     GRANTED (Ca needs deeper IE)
+    alpha_breach:  GRANTED (B/C/N/O from IE-only)
+    d_rearrange:   PENDING (nearest-neighbour test in B+++)

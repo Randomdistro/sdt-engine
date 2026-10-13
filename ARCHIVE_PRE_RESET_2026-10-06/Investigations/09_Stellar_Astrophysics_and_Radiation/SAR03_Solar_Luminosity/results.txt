@@ -1,0 +1,54 @@
+SAR03 v2 — mechanism hunts (direct run)
+[engine] P_conv=2.4608e+48 Pa  F_CMB=3.1289e-06 W/m2  L=3.8280e+26 W  v_surf=c/k_Sun=4.3682e+05 m/s
+
+[H1] interior rotation-map hunt: T(r) = m_p v(r)^2 / (3 kB), three profiles
+     r/R    sqrt(R/r)->T rotor(r/R)->T    hybrid->T
+     0.02     3.8528e+08   3.0822e+03   1.0458e+08
+     0.05     1.5411e+08   1.9264e+04   5.6775e+07
+     0.10     7.7056e+07   7.7056e+04   3.5766e+07
+     0.20     3.8528e+07   3.0822e+05   2.2531e+07
+     0.25     3.0822e+07   4.8160e+05   1.9417e+07
+     0.50     1.5411e+07   1.9264e+06   1.2232e+07
+     0.75     1.0274e+07   4.3344e+06   9.3347e+06
+     1.00     7.7056e+06   7.7056e+06   7.7056e+06
+     surface reading (r/R=1): sqrt: 7.706e+06 K  rotor: 7.706e+06 K  hybrid: 7.706e+06 K  (photosphere 5778 K rival col.)
+     closest to core scale [sqrt(R/r)]: T=1.541e+07 K at r/R=0.50  (log-dist 0.01) <-- WITHIN x10: LEAD candidate
+     closest to core scale [rotor]: T=7.706e+06 K at r/R=1.00  (log-dist 0.31) <-- WITHIN x10: LEAD candidate
+     closest to core scale [hybrid]: T=1.942e+07 K at r/R=0.25  (log-dist 0.09) <-- WITHIN x10: LEAD candidate
+
+[H2] assembly-bottleneck hunt (grammar rate demand)
+     required alpha assemblies = 8.938e+37 /s ; deuteron formations = 1.788e+38 /s
+     census: N_b=1.189e+57 [OBSERVED import]  mean n=8.431e+29 /m3
+     attempt rate/baryon = n*(pi R_p^2)*v_th = 1.169e+06 /s  (v_th/c=2.080e-03)
+     required rate/baryon = 1.503e-19 /s
+     => demanded p_align = 1.286e-25 per encounter
+     candidate geometric fractions (ranked by |log10 ratio| to p_align):
+       alpha^11               = 3.125e-24  log-dist 1.39 
+       alpha^12               = 2.280e-26  log-dist 0.75 <-- WITHIN x10: LEAD (mechanism required before claim)
+       1/k_Sun^8              = 2.032e-23  log-dist 2.20 
+       1/k_Sun^9              = 2.961e-26  log-dist 0.64 <-- WITHIN x10: LEAD (mechanism required before claim)
+       f_transfer*alpha^4     = 6.021e-26  log-dist 0.33 <-- WITHIN x10: LEAD (mechanism required before claim)
+       Sigma_f^3              = 7.356e-26  log-dist 0.24 <-- WITHIN x10: LEAD (mechanism required before claim)
+     rival column: SM pp bottleneck ~1e-25/encounter class (weak S-factor) — comparison only
+
+[H3] engagement-fraction hunt: four intake ledgers
+     radiative F_CMB*piR^2        intake=4.758e+12 W  implied engagement=8.046e+13
+     full P_conv*c*piR^2          intake=1.122e+75 W  implied engagement=3.413e-49
+     electropause P_eff*c*piR^2   intake=2.382e+58 W  implied engagement=1.607e-32
+     GOM12-weighted full          intake=4.700e+66 W  implied engagement=8.144e-41
+     gear-stack search (exponents -3..+3; report hits within 1 order):
+       [radiative F_CMB*piR^2] ~ alpha^-3 * 1/k_Sun^-1 * f_transfer^0 * Sigma_f^-1 * R_p/R_Sun^0 * m_e/m_p^1 (log-dist 0.46)
+       [radiative F_CMB*piR^2] ~ alpha^-3 * 1/k_Sun^0 * f_transfer^-1 * Sigma_f^1 * R_p/R_Sun^0 * m_e/m_p^0 (log-dist 0.80)
+       [radiative F_CMB*piR^2] ~ alpha^-3 * 1/k_Sun^0 * f_transfer^0 * Sigma_f^-1 * R_p/R_Sun^0 * m_e/m_p^0 (log-dist 0.88)
+       [radiative F_CMB*piR^2] ~ alpha^-3 * 1/k_Sun^0 * f_transfer^0 * Sigma_f^0 * R_p/R_Sun^0 * m_e/m_p^-2 (log-dist 0.97)
+       [radiative F_CMB*piR^2] ~ alpha^-3 * 1/k_Sun^0 * f_transfer^0 * Sigma_f^2 * R_p/R_Sun^-1 * m_e/m_p^0 (log-dist 0.33)
+       [radiative F_CMB*piR^2] ~ alpha^-3 * 1/k_Sun^0 * f_transfer^1 * Sigma_f^0 * R_p/R_Sun^-1 * m_e/m_p^0 (log-dist 0.25)
+       [radiative F_CMB*piR^2] ~ alpha^-2 * 1/k_Sun^-2 * f_transfer^0 * Sigma_f^0 * R_p/R_Sun^0 * m_e/m_p^-1 (log-dist 0.69)
+       [radiative F_CMB*piR^2] ~ alpha^-2 * 1/k_Sun^-1 * f_transfer^0 * Sigma_f^0 * R_p/R_Sun^0 * m_e/m_p^-2 (log-dist 0.27)
+       [radiative F_CMB*piR^2] ~ alpha^-2 * 1/k_Sun^-1 * f_transfer^0 * Sigma_f^2 * R_p/R_Sun^-1 * m_e/m_p^0 (log-dist 0.37)
+       [radiative F_CMB*piR^2] ~ alpha^-2 * 1/k_Sun^-1 * f_transfer^1 * Sigma_f^0 * R_p/R_Sun^-1 * m_e/m_p^0 (log-dist 0.45)
+       [radiative F_CMB*piR^2] ~ alpha^-2 * 1/k_Sun^0 * f_transfer^-2 * Sigma_f^0 * R_p/R_Sun^1 * m_e/m_p^0 (log-dist 0.20)
+       [radiative F_CMB*piR^2] ~ alpha^-2 * 1/k_Sun^0 * f_transfer^-1 * Sigma_f^-2 * R_p/R_Sun^1 * m_e/m_p^0 (log-dist 0.12)
+     total combinatorial hits within 1 order: 452 (NOTE: hit count >> 1 means the space is degenerate — hits are NOT results without mechanism)
+
+[H4] pressure-domain check: r_domain = 3.1202e+15 m = 20857 AU (Oort literature comparison open)

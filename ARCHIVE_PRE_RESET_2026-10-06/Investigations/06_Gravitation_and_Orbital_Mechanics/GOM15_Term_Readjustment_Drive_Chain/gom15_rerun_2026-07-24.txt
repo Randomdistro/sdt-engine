@@ -1,0 +1,231 @@
+﻿====================================================================================================
+ GOM15 - drive chain / twelfths / octaves.  koppa KINEMATIC (4pi^2 a^3 / T^2 c^2). No GM anywhere.
+====================================================================================================
+
+####################################################################################################
+# Sol:  koppa(Earth) = 1476.63 m   [all-dependent mean 1479.96, spread 1.477% - two-body/rounding residuals]
+#   unit length = kop = 1476.63 m   unit time = kop/c = 4.925518e-06 s
+#   sprocket rate w = c/kop = 203024 rad-equiv/s   sprocket turn = 2*pi*kop/c = 3.094794e-05 s
+#   R = 6.957e+08  D = 1.3914e+09  C = 4.37121e+09 m;   in kop units: R/kop = 471139, D/kop = 942279, C/kop = 2.96026e+06
+#   gear ratio (surface circumf / sprocket circumf) = C/(2*pi*kop) = 471139 (= R/kop)
+#   z_surf = kop/R = 2.122514e-06   k_surf = 1/sqrt(z) = 686.396
+#   light crossings: radial R/c = 2.3206 s  diametric D/c = 4.6412 s   (= 471139 / 942279 kop-times)
+#   --- rotation vs diameter (crossings per rotation N = T_rot*c/D; vs native dimensionless set) ---
+#   Carrington  T=2.19283e+06 s  N_diam=472470  N_rad=944940   nearest native: R/kop = 471139  dev +0.28%
+#   equatorial  T=2.11421e+06 s  N_diam=455529  N_rad=911059   nearest native: R/kop = 471139  dev -3.31%
+#   --- chain twelfths (variant-a: k*2*pi*kop/12 chain per sprocket division; variant-b: k*D/12) ---
+#     a k= 1: 773.163 m  (0.5236 kop)
+#     a k= 2: 1546.33 m  (1.0472 kop)
+#     a k= 3: 2319.49 m  (1.5708 kop)
+#     a k= 4: 3092.65 m  (2.0944 kop)
+#     a k= 5: 3865.82 m  (2.6180 kop)
+#     a k= 6: 4638.98 m  (3.1416 kop)
+#     a k= 7: 5412.14 m  (3.6652 kop)
+#     a k= 8: 6185.31 m  (4.1888 kop)
+#     a k= 9: 6958.47 m  (4.7124 kop)
+#     a k=10: 7731.63 m  (5.2360 kop)
+#     a k=11: 8504.8 m  (5.7596 kop)
+#     a k=12: 9277.96 m  (6.2832 kop)
+#   Analysis-I octaves of R: twelfths-a median|dev| 16.5%  hits<=2%: ['k=7:2^-17+2.0%']
+#                         : twelfths-b median|dev| 16.7%  hits<=2%: ['k=3:2^-1+0.0%', 'k=6:2^0+0.0%', 'k=12:2^1+0.0%']
+#   Analysis-I octaves of D: twelfths-a median|dev| 16.5%  hits<=2%: ['k=7:2^-18+2.0%']
+#                         : twelfths-b median|dev| 16.7%  hits<=2%: ['k=3:2^-2+0.0%', 'k=6:2^-1+0.0%', 'k=12:2^0+0.0%']
+#   Analysis-I octaves of C: twelfths-a median|dev| 16.5%  hits<=2%: none
+#                         : twelfths-b median|dev| 15.1%  hits<=2%: none
+#   --- Analysis-II: octave rungs vs dependent distances (null: median|dev| ~19.05%) ---
+#   R as base: median|dev| = 21.13%
+#      Mercury      a=5.7909e+10  nearest R*2^+6=4.4525e+10  dev +30.06%
+#      Venus        a=1.0821e+11  nearest R*2^+7=8.905e+10  dev +21.52%
+#      Earth        a=1.496e+11  nearest R*2^+8=1.781e+11  dev -16.00%
+#      Mars         a=2.2794e+11  nearest R*2^+8=1.781e+11  dev +27.98%
+#      Jupiter      a=7.7857e+11  nearest R*2^+10=7.124e+11  dev  +9.29%
+#      Saturn       a=1.4335e+12  nearest R*2^+11=1.4248e+12  dev  +0.61%  <-- NOTABLE(<=2%)
+#      Uranus       a=2.8725e+12  nearest R*2^+12=2.8496e+12  dev  +0.80%  <-- NOTABLE(<=2%)
+#      Neptune      a=4.4951e+12  nearest R*2^+13=5.6992e+12  dev -21.13%
+#   D as base: median|dev| = 21.13%
+#      Mercury      a=5.7909e+10  nearest D*2^+5=4.4525e+10  dev +30.06%
+#      Venus        a=1.0821e+11  nearest D*2^+6=8.905e+10  dev +21.52%
+#      Earth        a=1.496e+11  nearest D*2^+7=1.781e+11  dev -16.00%
+#      Mars         a=2.2794e+11  nearest D*2^+7=1.781e+11  dev +27.98%
+#      Jupiter      a=7.7857e+11  nearest D*2^+9=7.124e+11  dev  +9.29%
+#      Saturn       a=1.4335e+12  nearest D*2^+10=1.4248e+12  dev  +0.61%  <-- NOTABLE(<=2%)
+#      Uranus       a=2.8725e+12  nearest D*2^+11=2.8496e+12  dev  +0.80%  <-- NOTABLE(<=2%)
+#      Neptune      a=4.4951e+12  nearest D*2^+12=5.6992e+12  dev -21.13%
+#   C as base: median|dev| = 22.64%
+#      Mercury      a=5.7909e+10  nearest C*2^+4=6.9939e+10  dev -17.20%
+#      Venus        a=1.0821e+11  nearest C*2^+5=1.3988e+11  dev -22.64%
+#      Earth        a=1.496e+11  nearest C*2^+5=1.3988e+11  dev  +6.95%
+#      Mars         a=2.2794e+11  nearest C*2^+6=2.7976e+11  dev -18.52%
+#      Jupiter      a=7.7857e+11  nearest C*2^+7=5.5952e+11  dev +39.15%
+#      Saturn       a=1.4335e+12  nearest C*2^+8=1.119e+12  dev +28.10%
+#      Uranus       a=2.8725e+12  nearest C*2^+9=2.2381e+12  dev +28.35%
+#      Neptune      a=4.4951e+12  nearest C*2^+10=4.4761e+12  dev  +0.42%  <-- NOTABLE(<=2%)
+
+####################################################################################################
+# Jupiter:  koppa(Io) = 1.40987 m   [all-dependent mean 1.41076, spread 0.441% - two-body/rounding residuals]
+#   unit length = kop = 1.40987 m   unit time = kop/c = 4.702811e-09 s
+#   sprocket rate w = c/kop = 2.12639e+08 rad-equiv/s   sprocket turn = 2*pi*kop/c = 2.954863e-08 s
+#   R = 7.1492e+07  D = 1.42984e+08  C = 4.49197e+08 m;   in kop units: R/kop = 5.07083e+07, D/kop = 1.01417e+08, C/kop = 3.1861e+08
+#   gear ratio (surface circumf / sprocket circumf) = C/(2*pi*kop) = 5.07083e+07 (= R/kop)
+#   z_surf = kop/R = 1.972063e-08   k_surf = 1/sqrt(z) = 7120.98
+#   light crossings: radial R/c = 0.2385 s  diametric D/c = 0.4769 s   (= 5.07083e+07 / 1.01417e+08 kop-times)
+#   --- rotation vs diameter (crossings per rotation N = T_rot*c/D; vs native dimensionless set) ---
+#   SystemIII   T=35729.7 s  N_diam=74914  N_rad=149828   nearest native: R/kop = 5.07083e+07  dev -99.85%
+#   --- chain twelfths (variant-a: k*2*pi*kop/12 chain per sprocket division; variant-b: k*D/12) ---
+#     a k= 1: 0.738205 m  (0.5236 kop)
+#     a k= 2: 1.47641 m  (1.0472 kop)
+#     a k= 3: 2.21461 m  (1.5708 kop)
+#     a k= 4: 2.95282 m  (2.0944 kop)
+#     a k= 5: 3.69102 m  (2.6180 kop)
+#     a k= 6: 4.42923 m  (3.1416 kop)
+#     a k= 7: 5.16743 m  (3.6652 kop)
+#     a k= 8: 5.90564 m  (4.1888 kop)
+#     a k= 9: 6.64384 m  (4.7124 kop)
+#     a k=10: 7.38205 m  (5.2360 kop)
+#     a k=11: 8.12025 m  (5.7596 kop)
+#     a k=12: 8.85846 m  (6.2832 kop)
+#   Analysis-I octaves of R: twelfths-a median|dev| 21.3%  hits<=2%: none
+#                         : twelfths-b median|dev| 16.7%  hits<=2%: ['k=3:2^-1+0.0%', 'k=6:2^0+0.0%', 'k=12:2^1+0.0%']
+#   Analysis-I octaves of D: twelfths-a median|dev| 21.3%  hits<=2%: none
+#                         : twelfths-b median|dev| 16.7%  hits<=2%: ['k=3:2^-2+0.0%', 'k=6:2^-1+0.0%', 'k=12:2^0+0.0%']
+#   Analysis-I octaves of C: twelfths-a median|dev| 11.8%  hits<=2%: ['k=9:2^-26-0.7%']
+#                         : twelfths-b median|dev| 15.1%  hits<=2%: none
+#   --- Analysis-II: octave rungs vs dependent distances (null: median|dev| ~19.05%) ---
+#   R as base: median|dev| = 17.70%
+#      Amalthea     a=1.814e+08  nearest R*2^+1=1.4298e+08  dev +26.87%
+#      Io           a=4.217e+08  nearest R*2^+3=5.7194e+08  dev -26.27%
+#      Europa       a=6.709e+08  nearest R*2^+3=5.7194e+08  dev +17.30%
+#      Ganymede     a=1.0704e+09  nearest R*2^+4=1.1439e+09  dev  -6.42%
+#      Callisto     a=1.8827e+09  nearest R*2^+5=2.2877e+09  dev -17.70%
+#   D as base: median|dev| = 17.70%
+#      Amalthea     a=1.814e+08  nearest D*2^+0=1.4298e+08  dev +26.87%
+#      Io           a=4.217e+08  nearest D*2^+2=5.7194e+08  dev -26.27%
+#      Europa       a=6.709e+08  nearest D*2^+2=5.7194e+08  dev +17.30%
+#      Ganymede     a=1.0704e+09  nearest D*2^+3=1.1439e+09  dev  -6.42%
+#      Callisto     a=1.8827e+09  nearest D*2^+4=2.2877e+09  dev -17.70%
+#   C as base: median|dev| = 19.15%
+#      Amalthea     a=1.814e+08  nearest C*2^-1=2.246e+08  dev -19.23%
+#      Io           a=4.217e+08  nearest C*2^+0=4.492e+08  dev  -6.12%
+#      Europa       a=6.709e+08  nearest C*2^+1=8.9839e+08  dev -25.32%
+#      Ganymede     a=1.0704e+09  nearest C*2^+1=8.9839e+08  dev +19.15%
+#      Callisto     a=1.8827e+09  nearest C*2^+2=1.7968e+09  dev  +4.78%
+
+####################################################################################################
+# Saturn:  koppa(Titan) = 0.422176 m   [all-dependent mean 0.422431, spread 0.218% - two-body/rounding residuals]
+#   unit length = kop = 0.422176 m   unit time = kop/c = 1.408229e-09 s
+#   sprocket rate w = c/kop = 7.10112e+08 rad-equiv/s   sprocket turn = 2*pi*kop/c = 8.848161e-09 s
+#   R = 6.0268e+07  D = 1.20536e+08  C = 3.78675e+08 m;   in kop units: R/kop = 1.42756e+08, D/kop = 2.85511e+08, C/kop = 8.96959e+08
+#   gear ratio (surface circumf / sprocket circumf) = C/(2*pi*kop) = 1.42756e+08 (= R/kop)
+#   z_surf = kop/R = 7.004983e-09   k_surf = 1/sqrt(z) = 11948
+#   light crossings: radial R/c = 0.2010 s  diametric D/c = 0.4021 s   (= 1.42756e+08 / 2.85511e+08 kop-times)
+#   --- rotation vs diameter (crossings per rotation N = T_rot*c/D; vs native dimensionless set) ---
+#   Voyager     T=38362.4 s  N_diam=95413.5  N_rad=190827   nearest native: R/kop = 1.42756e+08  dev -99.93%
+#   Cassini     T=38018 s  N_diam=94556.9  N_rad=189114   nearest native: R/kop = 1.42756e+08  dev -99.93%
+#   --- chain twelfths (variant-a: k*2*pi*kop/12 chain per sprocket division; variant-b: k*D/12) ---
+#     a k= 1: 0.221051 m  (0.5236 kop)
+#     a k= 2: 0.442102 m  (1.0472 kop)
+#     a k= 3: 0.663153 m  (1.5708 kop)
+#     a k= 4: 0.884204 m  (2.0944 kop)
+#     a k= 5: 1.10526 m  (2.6180 kop)
+#     a k= 6: 1.32631 m  (3.1416 kop)
+#     a k= 7: 1.54736 m  (3.6652 kop)
+#     a k= 8: 1.76841 m  (4.1888 kop)
+#     a k= 9: 1.98946 m  (4.7124 kop)
+#     a k=10: 2.21051 m  (5.2360 kop)
+#     a k=11: 2.43156 m  (5.7596 kop)
+#     a k=12: 2.65261 m  (6.2832 kop)
+#   Analysis-I octaves of R: twelfths-a median|dev| 23.1%  hits<=2%: ['k=1:2^-28-1.5%', 'k=2:2^-27-1.5%', 'k=4:2^-26-1.5%', 'k=8:2^-25-1.5%']
+#                         : twelfths-b median|dev| 16.7%  hits<=2%: ['k=3:2^-1+0.0%', 'k=6:2^0+0.0%', 'k=12:2^1+0.0%']
+#   Analysis-I octaves of D: twelfths-a median|dev| 23.1%  hits<=2%: ['k=1:2^-29-1.5%', 'k=2:2^-28-1.5%', 'k=4:2^-27-1.5%', 'k=8:2^-26-1.5%']
+#                         : twelfths-b median|dev| 16.7%  hits<=2%: ['k=3:2^-2+0.0%', 'k=6:2^-1+0.0%', 'k=12:2^0+0.0%']
+#   Analysis-I octaves of C: twelfths-a median|dev| 21.7%  hits<=2%: none
+#                         : twelfths-b median|dev| 15.1%  hits<=2%: none
+#   --- Analysis-II: octave rungs vs dependent distances (null: median|dev| ~19.05%) ---
+#   R as base: median|dev| = 21.72%
+#      Mimas        a=1.8552e+08  nearest R*2^+2=2.4107e+08  dev -23.04%
+#      Enceladus    a=2.3802e+08  nearest R*2^+2=2.4107e+08  dev  -1.27%  <-- NOTABLE(<=2%)
+#      Tethys       a=2.9466e+08  nearest R*2^+2=2.4107e+08  dev +22.23%
+#      Dione        a=3.774e+08  nearest R*2^+3=4.8214e+08  dev -21.72%
+#      Rhea         a=5.2704e+08  nearest R*2^+3=4.8214e+08  dev  +9.31%
+#      Titan        a=1.2219e+09  nearest R*2^+4=9.6429e+08  dev +26.71%
+#      Iapetus      a=3.5613e+09  nearest R*2^+6=3.8572e+09  dev  -7.67%
+#      B-ring inner a=9.2e+07  nearest R*2^+1=1.2054e+08  dev -23.67%
+#      A-ring outer a=1.3678e+08  nearest R*2^+1=1.2054e+08  dev +13.47%
+#   D as base: median|dev| = 21.72%
+#      Mimas        a=1.8552e+08  nearest D*2^+1=2.4107e+08  dev -23.04%
+#      Enceladus    a=2.3802e+08  nearest D*2^+1=2.4107e+08  dev  -1.27%  <-- NOTABLE(<=2%)
+#      Tethys       a=2.9466e+08  nearest D*2^+1=2.4107e+08  dev +22.23%
+#      Dione        a=3.774e+08  nearest D*2^+2=4.8214e+08  dev -21.72%
+#      Rhea         a=5.2704e+08  nearest D*2^+2=4.8214e+08  dev  +9.31%
+#      Titan        a=1.2219e+09  nearest D*2^+3=9.6429e+08  dev +26.71%
+#      Iapetus      a=3.5613e+09  nearest D*2^+5=3.8572e+09  dev  -7.67%
+#      B-ring inner a=9.2e+07  nearest D*2^+0=1.2054e+08  dev -23.67%
+#      A-ring outer a=1.3678e+08  nearest D*2^+0=1.2054e+08  dev +13.47%
+#   C as base: median|dev| = 19.33%
+#      Mimas        a=1.8552e+08  nearest C*2^-1=1.8934e+08  dev  -2.02%
+#      Enceladus    a=2.3802e+08  nearest C*2^-1=1.8934e+08  dev +25.71%
+#      Tethys       a=2.9466e+08  nearest C*2^+0=3.7868e+08  dev -22.19%
+#      Dione        a=3.774e+08  nearest C*2^+0=3.7868e+08  dev  -0.34%  <-- NOTABLE(<=2%)
+#      Rhea         a=5.2704e+08  nearest C*2^+0=3.7868e+08  dev +39.18%
+#      Titan        a=1.2219e+09  nearest C*2^+2=1.5147e+09  dev -19.33%
+#      Iapetus      a=3.5613e+09  nearest C*2^+3=3.0294e+09  dev +17.56%
+#      B-ring inner a=9.2e+07  nearest C*2^-2=9.4669e+07  dev  -2.82%
+#      A-ring outer a=1.3678e+08  nearest C*2^-1=1.8934e+08  dev -27.76%
+
+# [informational comparison only - RIVAL COLUMN, not used above]: the kinematic koppas
+#  above numerically coincide with what GR calls GM/c^2; no G, M, or GM entered any line.
+
+====================================================================================================
+ ADJ-1: depth twelfths per body — z = n/12  =>  r_n = kop/z = 12*kop/n = kop*k_n^2,  k_n = sqrt(12/n)
+====================================================================================================
+
+# Sol (kop=1476.63 m):
+#   z= 1/12  r=17719.6 m (12.0000 kop)  k=3.4641
+#   z= 2/12  r=8859.8 m (6.0000 kop)  k=2.4495
+#   z= 3/12  r=5906.53 m (4.0000 kop)  k=2.0000
+#   z= 4/12  r=4429.9 m (3.0000 kop)  k=1.7321
+#   z= 5/12  r=3543.92 m (2.4000 kop)  k=1.5492
+#   z= 6/12  r=2953.27 m (2.0000 kop)  k=1.4142
+#   z= 7/12  r=2531.37 m (1.7143 kop)  k=1.3093
+#   z= 8/12  r=2214.95 m (1.5000 kop)  k=1.2247
+#   z= 9/12  r=1968.84 m (1.3333 kop)  k=1.1547
+#   z=10/12  r=1771.96 m (1.2000 kop)  k=1.0954
+#   z=11/12  r=1610.87 m (1.0909 kop)  k=1.0445
+#   z=12/12  r=1476.63 m (1.0000 kop)  k=1.0000
+#   Analysis-I(c) octaves of R: median|dev| 16.5%  hits<=2%: none
+#   Analysis-I(c) octaves of D: median|dev| 16.5%  hits<=2%: none
+#   Analysis-I(c) octaves of C: median|dev| 15.0%  hits<=2%: none
+
+# Jupiter (kop=1.40987 m):
+#   z= 1/12  r=16.9184 m (12.0000 kop)  k=3.4641
+#   z= 2/12  r=8.4592 m (6.0000 kop)  k=2.4495
+#   z= 3/12  r=5.63947 m (4.0000 kop)  k=2.0000
+#   z= 4/12  r=4.2296 m (3.0000 kop)  k=1.7321
+#   z= 5/12  r=3.38368 m (2.4000 kop)  k=1.5492
+#   z= 6/12  r=2.81973 m (2.0000 kop)  k=1.4142
+#   z= 7/12  r=2.41692 m (1.7143 kop)  k=1.3093
+#   z= 8/12  r=2.1148 m (1.5000 kop)  k=1.2247
+#   z= 9/12  r=1.87982 m (1.3333 kop)  k=1.1547
+#   z=10/12  r=1.69184 m (1.2000 kop)  k=1.0954
+#   z=11/12  r=1.53804 m (1.0909 kop)  k=1.0445
+#   z=12/12  r=1.40987 m (1.0000 kop)  k=1.0000
+#   Analysis-I(c) octaves of R: median|dev| 20.6%  hits<=2%: ['z=1/12:2^-22-0.7%', 'z=2/12:2^-23-0.7%', 'z=4/12:2^-24-0.7%', 'z=8/12:2^-25-0.7%']
+#   Analysis-I(c) octaves of D: median|dev| 20.6%  hits<=2%: ['z=1/12:2^-23-0.7%', 'z=2/12:2^-24-0.7%', 'z=4/12:2^-25-0.7%', 'z=8/12:2^-26-0.7%']
+#   Analysis-I(c) octaves of C: median|dev| 15.7%  hits<=2%: ['z=5/12:2^-27+1.1%', 'z=10/12:2^-28+1.1%']
+
+# Saturn (kop=0.422176 m):
+#   z= 1/12  r=5.06612 m (12.0000 kop)  k=3.4641
+#   z= 2/12  r=2.53306 m (6.0000 kop)  k=2.4495
+#   z= 3/12  r=1.68871 m (4.0000 kop)  k=2.0000
+#   z= 4/12  r=1.26653 m (3.0000 kop)  k=1.7321
+#   z= 5/12  r=1.01322 m (2.4000 kop)  k=1.5492
+#   z= 6/12  r=0.844353 m (2.0000 kop)  k=1.4142
+#   z= 7/12  r=0.723731 m (1.7143 kop)  k=1.3093
+#   z= 8/12  r=0.633264 m (1.5000 kop)  k=1.2247
+#   z= 9/12  r=0.562902 m (1.3333 kop)  k=1.1547
+#   z=10/12  r=0.506612 m (1.2000 kop)  k=1.0954
+#   z=11/12  r=0.460556 m (1.0909 kop)  k=1.0445
+#   z=12/12  r=0.422176 m (1.0000 kop)  k=1.0000
+#   Analysis-I(c) octaves of R: median|dev| 19.4%  hits<=2%: none
+#   Analysis-I(c) octaves of D: median|dev| 19.4%  hits<=2%: none
+#   Analysis-I(c) octaves of C: median|dev| 19.7%  hits<=2%: none

@@ -98,3 +98,9 @@ re-tuned; the root is owed at OCCLUSION-MECHANISM, partially serviced by GD05).
 **Prompt completion F · Physics class KILLED (falsified on its own sample; INFLATED
 [SUCCESS] stamps documented) · Recovery NO RECOVERY (superseded by GD05) · Cascade
 root OCCLUSION-MECHANISM.**
+
+---
+
+## Audit correction (2026-10-05)
+
+The old tool passed "any nonzero velocity" for UGC 128 (3.7 km/s against 64 km/s observed) and printed a SUCCESS line for an RMS bound it did not enforce on the individual galaxies. New copy `gd04_3d_volumetric_integration_v2.cpp` (output `gd04_v2_results_2026-10-05.txt`; old tool and output stay, labelled superseded) derives its verdict from three gates on the same ten galaxies and the same engine call: A, at least 80% of galaxies within 25% of V_obs: **0 of 10, FAIL**; B, every LSB galaxy within 25%: **0 of 2, FAIL**; C, RMS residual below 30%: **71.39%, FAIL** (maximum 97.7%). The class stays EXCLUDED as recorded here; the corrected tool now says so itself. Masses enter only as baryon counts (N_b = M/m_p inside the engine call); no G or GM is used. The question field is now filled (`PROMPT.md`), and the missing cited path (`cq23_3d_volumetric_integration.cpp`) corresponds to this folder's own tool.

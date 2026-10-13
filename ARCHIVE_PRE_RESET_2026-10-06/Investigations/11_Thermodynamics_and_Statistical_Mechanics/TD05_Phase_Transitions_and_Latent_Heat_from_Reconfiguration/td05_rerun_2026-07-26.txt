@@ -1,0 +1,93 @@
+================================================================
+ TD05 - Phase Transitions and Latent Heat from Reconfiguration
+ J. C. Harvey, Melbourne - 2026-07-03
+ MD of wake-bound vortex packing (LJ proxy, declared). N=108, rho*=1.0.
+ No Landau field: S(k111) is diagnostic only, never enters dynamics.
+================================================================
+
+heating ramp (T* 0.40 -> 2.16, dT* = 0.08):
+    T*      U/N        S(k111)/N   bonds/N   u_bond
+   0.40    -6.7735     0.8877     11.997   -0.8847
+   0.48    -6.6539     0.8643     11.992   -0.8635
+   0.56    -6.5574     0.8417     11.981   -0.8466
+   0.64    -6.3713     0.8115     11.955   -0.8139
+   0.72    -6.3313     0.8026     11.940   -0.8076
+   0.80    -6.2858     0.7930     11.938   -0.7995
+   0.88    -6.2177     0.7826     11.915   -0.7878
+   0.96    -6.1060     0.7586     11.899   -0.7684
+   1.04    -5.9703     0.7476     11.832   -0.7460
+   1.12    -5.8856     0.7099     11.849   -0.7302
+   1.20    -5.7455     0.6984     11.797   -0.7066
+   1.28    -5.6918     0.6836     11.739   -0.6982
+   1.36    -5.4293     0.6419     11.683   -0.6522
+   1.44    -5.5142     0.6410     11.717   -0.6669
+   1.52    -5.3098     0.6095     11.620   -0.6324
+   1.60    -5.2642     0.6032     11.628   -0.6243
+   1.68    -5.1049     0.5584     11.569   -0.5961
+   1.76    -4.7670     0.4785     11.369   -0.5375
+   1.84    -4.8332     0.5002     11.480   -0.5487
+   1.92    -4.0855     0.0202     10.968   -0.4156
+   2.00    -4.0377     0.0231     10.936   -0.4064
+   2.08    -3.9555     0.0200     10.995   -0.3920
+   2.16    -3.8409     0.0228     10.935   -0.3694
+
+cooling ramp (2.16 -> 0.40):
+    T*      U/N        S(k111)/N
+   2.16    -3.7917     0.0119
+   2.08    -3.8457     0.0180
+   2.00    -3.8846     0.0253
+   1.92    -4.2670     0.0157
+   1.84    -4.4259     0.0140
+   1.76    -4.3295     0.0260
+   1.68    -4.4336     0.0189
+   1.60    -4.4487     0.0184
+   1.52    -4.6651     0.0194
+   1.44    -4.6235     0.0093
+   1.36    -4.6528     0.0189
+   1.28    -4.9741     0.0211
+   1.20    -5.0971     0.0241
+   1.12    -5.1657     0.0294
+   1.04    -5.2720     0.0124
+   0.96    -5.5051     0.0100
+   0.88    -5.5348     0.0173
+   0.80    -5.6263     0.0423
+   0.72    -5.7263     0.0177
+   0.64    -6.0018     0.0120
+   0.56    -6.2391     0.0049
+   0.48    -6.3133     0.0038
+   0.40    -6.4581     0.0039
+
+P1: sharpness and hysteresis
+  largest heating step: dU = 0.7478 eps/particle at T* = 1.88 (median step 0.1117)
+  sharpness: dU > 0.4 [PASS], dU > 4x median [PASS]
+  order parameter collapse within <= 2 steps of the jump: S/N 0.500 -> 0.023
+  (committed gate: >0.3 -> <0.1 across <= 2 steps)  [PASS]
+  hysteresis: max |U_heat - U_cool| = 0.8906 (> 5x median step 0.5587) [PASS]
+  cooling endpoint S/N = 0.004 -> glass/defective arrest (FLM09-type, reported)
+
+P2: latent heat vs reconfiguration ledger
+  L_sim = 0.7478 eps/particle;  bonds lost = 0.512 x |u_bond| = 0.5487 -> ledger 0.2810
+  ledger factor = 2.66  (gate 1.5)  [FAIL]
+  TRACE (window 1.76->1.92): L_window ~ 0.570 eps; first-shell split:
+    bond-COUNT channel  = 0.108 eps (14%)
+    bond-REPRICING channel (surviving bonds to worse geometry) = 0.668 eps (86%)
+  -> at FIXED density the latent heat is dominated by re-pricing, not count:
+     the committed count-x-cost ledger form is the errored premise (see VERDICT).
+  DISCLOSED: 'L = T_m dS' with calorimetric dS is an identity - NOT TESTED;
+  flat-T absorption is protocol-set (T controlled) - also disclosed.
+
+P3: argon order-of-magnitude (OBSERVED eps/kB = 119.8 K, sigma = 3.405 A)
+  L_melt: sim 0.748 eps vs argon 1.185 eps  -> factor 1.58 (gate 3) [PASS]
+  L_vap ledger (cohesion at T*=0.4): 6.774 eps vs argon 6.526 eps -> factor 1.04 (gate 3) [PASS]
+  ordering L_vap >> L_melt: 6.774 >> 0.748 [PASS]
+  T*_jump x 119.8 K = 225 K vs argon T_m = 83.8 K - REPORTED ONLY:
+  fixed rho*=1.0 is off-coexistence and superheats; NOT sold as a T_m prediction.
+
+P4: Clausius-Clapeyron - DEFERRED as declared in RUN_LOG (needs
+  pressure-controlled coexistence; producing a slope here would be fabrication).
+
+================================================================
+ TD05 GATES: P1 PASS | P2 FAIL | P3 PASS | P4 DEFERRED
+ No order-parameter field entered the dynamics at any point.
+ VERDICT: FAIL - see TD05_VERDICT.md
+================================================================

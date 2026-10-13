@@ -1,0 +1,32 @@
+BLIND RUN — arrangement vector-sum moment (packing positions + body-axis orientations)
+
+nuclide   |meas|  |pred|  ratio
+Li-7        3.26    2.98    0.9
+F-19        2.63    2.91    1.1
+Al-27       3.64    2.17    0.6
+P-31        1.13    2.15    1.9
+Sc-45       4.76    1.75    0.4
+Co-59       4.63    0.45    0.1
+Ga-69       2.02    3.27    1.6
+Nb-93       6.17    1.31    0.2
+I-127       2.81    1.14    0.4
+La-139      2.78    1.75    0.6
+O-17        1.89    3.05    1.6
+Si-29       0.56    3.10    5.6
+Ca-43       1.32    0.49    0.4
+Zn-67       0.88    1.84    2.1
+Zr-91       1.30    1.51    1.2
+Pb-207      0.59    3.55    6.0
+
+correlation(|meas|,|pred|) = -0.40
+pred range 0.4-3.5 μN vs meas range 0.6-6.2 μN
+
+BLIND VERDICT:
+ FAIL. The packing's golden-angle body-axes give a near-RANDOM-WALK vector sum:
+ magnitude grows with sub-unit COUNT, uncorrelated with the measured moment.
+ DIAGNOSIS: the packing supplies POSITIONS but its ORIENTATIONS are arbitrary
+ (built for mass-splitting geometry, which needs no orientation). A moment needs
+ an ORIENTATION/alignment rule — the handedness-alignment law — which SDT has NOT
+ derived. That missing law, not the positions, is the real gap. The ONE orientation
+ rule that IS defined ('unpaired unit aligned to j, rest paired-cancel') collapses
+ exactly back to the single-unit blind model = Schmidt. No fit was used; no win.

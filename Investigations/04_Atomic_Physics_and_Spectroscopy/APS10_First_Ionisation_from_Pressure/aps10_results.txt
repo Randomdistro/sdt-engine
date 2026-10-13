@@ -1,0 +1,40 @@
+APS10 verification of the APS14 closure (sdt::laws::atomic::dodecardinal)
+pre-registration: PROMPT.md (2026-10-03). Label ceiling: COMPUTED.
+
+INSTRUMENT VALIDATION (closed-form one-electron limits; anchors not yet opened)
+  H   : -13.605693 eV vs -Ry = -13.605693, converged=1, residual=3.55e-15
+  He+ : -54.422772 eV vs -4Ry = -54.422772, converged=1, residual=1.15e-14
+  [ok] H ground state = -Ry to 1e-6
+  [ok] He+ ground state = -4 Ry to 1e-6
+VALIDATION PASS
+
+Z   sym   IE1_pred   IE1_meas     err % converged   residual
+2   He     25.5454    24.5874     3.896       yes   1.15e-14
+3   Li      5.1304     5.3917     4.846       yes   8.75e-11
+4   Be      8.8334     9.3227     5.249       yes   1.49e-09
+5   B       8.2500     8.2980     0.578       yes   5.25e-11
+6   C      11.2791    11.2603     0.167       yes   1.35e-09
+7   N      14.6434    14.5341     0.752       yes   6.53e-13
+8   O      13.5511    13.6181     0.492       yes   1.95e-13
+9   F      17.1657    17.4228     1.476       yes   4.11e-14
+10  Ne     21.1595    21.5646     1.879       yes   1.56e-14
+
+period trend (sign of IE1(Z+1) - IE1(Z), predicted vs measured):
+  He->Li  pred  -20.415  meas  -19.196  agree
+  Li->Be  pred   +3.703  meas   +3.931  agree
+  Be->B  pred   -0.583  meas   -1.025  agree
+  B->C  pred   +3.029  meas   +2.962  agree
+  C->N  pred   +3.364  meas   +3.274  agree
+  N->O  pred   -1.092  meas   -0.916  agree
+  O->F  pred   +3.615  meas   +3.805  agree
+  F->Ne  pred   +3.994  meas   +4.142  agree
+
+GATES (single pass, Z=2-10)
+  median error 1.476 % (opening gate <= 15 %): inside
+  maximum error 5.249 % (opening gate <= 40 %): inside
+  period-trend sign disagreements: 0 of 8 (gate: 0)
+  all states converged: yes, maximum force residual 1.49e-09 (validation bound 1e-8)
+  report-only, suite destination 5 %: median inside, maximum OUTSIDE
+
+rejection criterion: not met
+Z = 11-18: outside the closure domain (solve_state rejects more than 10 electrons); open per APS14.

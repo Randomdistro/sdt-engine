@@ -1,0 +1,45 @@
+==================================================================
+CR13 — CMB backtrack to the closest point of contact
+==================================================================
+
+[1] ANCHORS (frame-neutral: lambda_rx = lambda_em*(1+z))
+  z_rec        = 1089.8
+  T_rec        =   2973.0 K
+  kT_rec       =   0.2562 eV
+  lambda_emit  =    974.7 nm   <- bath peak when transparency set in
+  lambda_recv  =   1.0632 mm   <- bath peak received today
+  mean photon  =   0.6920 eV
+
+[2] WHY ~3000 K = 'the bottom of the visible spectrum'
+  13.6 eV / kT_rec     =   53.1   (recombination waits ~50x below binding)
+  1/eta (photon/baryon)= 1.639e+09   ln = 21.2
+  visible 380-750 nm; bath peak 975 nm = near-IR, one step past red
+
+[3] THE CLOSEST-CONTACT WAVELENGTH + THE FIRAS GATE
+  nearest contact  z->0  : lambda ->    974.7 nm  (~emission, near-IR)
+  farthest  z=1090     : lambda ->    1.063 mm  (microwave)
+  broad-gradient SPREAD  : 975 nm -> 1063 um  (x1091)
+  single thin surface    : fractional T spread s_thin = 0.0733 (7.33%)
+  FIRAS allows           : s_max = sqrt(2*1.5e-05) = 0.00548 (0.548%)
+  VERDICT: a broad-z bath (s ~ O(1)) is excluded by ~183x.
+          contributions must share T to < 0.55% -> synchrony MUST collapse the smear.
+  (note: the thin surface s_thin=7.33% is NOT a temperature spread —
+         every LS point is redshifted to the SAME T0 today, so it makes no distortion.)
+
+[4] BARYON-LOADED SOUND SPEED (ties FD05 / opacity-logjam)
+  c/sqrt(3)            = 1.7309e+08 m/s  (pure radiation ceiling)
+  c/sqrt(3(1+R)), R=0.6 = 1.3684e+08 m/s  (with baryon obstacles)
+  ratio cs_load/c      = 0.4564
+
+[5] gradient table: received lambda vs fractional depth into the redshift
+  depth 0.000 -> 1+z=     1.0 -> lambda    974.7 nm
+  depth 0.001 -> 1+z=     2.1 -> lambda     2.04 um
+  depth 0.010 -> 1+z=    11.9 -> lambda    11.60 um
+  depth 0.050 -> 1+z=    55.5 -> lambda    54.09 um
+  depth 0.100 -> 1+z=   110.0 -> lambda   107.20 um
+  depth 0.250 -> 1+z=   273.4 -> lambda   266.53 um
+  depth 0.500 -> 1+z=   545.9 -> lambda   532.09 um
+  depth 0.750 -> 1+z=   818.3 -> lambda   797.65 um
+  depth 0.900 -> 1+z=   981.8 -> lambda   956.98 um
+  depth 0.990 -> 1+z=  1079.9 -> lambda    1.053 mm
+  depth 1.000 -> 1+z=  1090.8 -> lambda    1.063 mm

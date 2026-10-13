@@ -1,3 +1,29 @@
+# NP16-A06 — Cosmogenic production rates (specification rewritten 2026-10-12)
+
+**Author:** J. C. Harvey, Melbourne. Rewritten at Harvey's direction: prompts carry new data; the packing sequencer is understood before grammar work. The previous specification is kept below the line.
+
+## 1. State after the reset (2026-10-10)
+**G2, PENDING_DATA.** Phases A–B are a conventional baseline (not SDT). Phase C needs SDT cross-sections from A04, whose zero-parameter route is excluded on magnitude.
+
+## 2. New data and what it teaches (2026-10-10 to 2026-10-12)
+- Waits on A04 round 2: the zero-fit geometric baseline, then the displacement-modulated occlusion law (Harvey 2026-10-11/12) for the energy dependence.
+
+## 3. Next round (registered order)
+1. A04 round 2 (supplier).
+2. Cache the AMS-02 spectrum, standard atmosphere and EXFOR/ENDF inputs.
+3. Phase C once, against measured ¹⁰Be, ¹⁴C and ²⁶Al production rates, with gate committed.
+
+## Prohibitions
+- No census over candidate predictors.
+- Grammar counts are not evidence (NP24).
+- No data substitution without a label.
+- Release is read, never edited (proposals only).
+- The word "charge" is not used.
+
+---
+
+## Previous specification (kept as written)
+
 # A06: Cosmogenic Production Rate Prediction — Investigation Prompt
 
 > **Author:** J. C. Harvey, Melbourne. **Status:** SPEC (upgrade 2026-06-27).

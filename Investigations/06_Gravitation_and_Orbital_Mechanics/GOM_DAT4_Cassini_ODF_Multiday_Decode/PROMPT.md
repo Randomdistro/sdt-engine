@@ -1,3 +1,22 @@
+# GOM_DAT4 — Cassini ODF multi-day decode (specification rewritten 2026-10-12)
+
+**Author:** J. C. Harvey, Melbourne. Verification item: its rows are excluded from physics tallies, per the prompt's id alias. The previous specification is kept below the line.
+
+## 1. State after the reset (2026-10-10)
+Open. The supplier decoded P0 only. All eight CORS_0021 ODFs (K252 + XMMMV0, days 157–160) need a fresh multi-file decode; only the day-157 files were confirmed present locally.
+
+## 2. Next round
+1. Confirm all eight files on disk (manifest with sizes and hashes).
+2. Decode each with the validated P0 decoder.
+3. Checks: per-file format ID, time windows contiguous across days, rows per file.
+
+## 3. Note
+These decodes feed the Cassini-based gravity tests. No physics result is drawn from a VERIFICATION row.
+
+---
+
+## Previous specification (kept as written)
+
 # GOM31 — Multi-Day CORS_0021 ODF Observable Decode
 
 > **Status:** PRE-REGISTERED — 2026-08-08.  
@@ -44,3 +63,17 @@
 Whether `obs_Hz` is raw Doppler or a navigation pseudo-residual remains
 **UNADJUDICATED** (carried from GOM30). Multi-day coverage alone does not
 adjudicate the unit path.
+
+---
+
+## Audit correction 2026-10-05 (record / status)
+
+**Finding:** Claims are numbered GOM31-C1 … against folder GOM_DAT4, and the PASS rows are file-presence and row-count checks.
+
+**Correction:** Align the ids and label the rows VERIFICATION.
+
+**Status:** ANNOTATED — label, status or tally corrected in the record; no re-score of earlier runs.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*
+
+**Id alias (2026-10-05):** claim ids written `GOM31-C*` in this folder and its verdict are the claims of `GOM_DAT4`. The rows are VERIFICATION (data-structure, checksum and field-parse checks), not tests of a physical claim, and are excluded from physics PASS/FAIL tallies; earlier text is not rewritten.

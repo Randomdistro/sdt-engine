@@ -1,0 +1,45 @@
+PPT01 R2 — closure-rule family (pre-registered 2026-10-05)
+==========================================================
+
+[V1] independent Newton solver vs closed form, 25 starts per case, tolerance 1e-9
+     cases 18, worst |Newton - closed form| = 6.661e-15, starts landing on another positive root = 0  -> PASS
+
+[V2] torus-knot crossing number min(p(q-1), q(p-1)) against known values
+     (2,3) trefoil 3_1  computed  3 known  3 ok
+     (2,5) 5_1          computed  5 known  5 ok
+     (3,4) 8_19         computed  8 known  8 ok
+     (3,5) 10_124       computed 10 known 10 ok
+     (1,2) unknot       computed  0 known  0 ok
+     (1,3) unknot       computed  0 known  0 ok
+     nontriviality rule (p,q>=2, gcd=1) agrees with crossing number > 0 for all six -> PASS
+
+[V3] regression against the 2026-04 tool's printed values
+     a_e = 5.4611e-13 m (5.4611e-13) ok | (1,3) a_p = 2.4284e-16 (2.4284e-16) ok | (1,3) R_major = 4.2062e-16 (4.2062e-16) ok | (2,3) a_e/a_p = 2011.404 (2011.40) ok
+
+VALIDATIONS: all met
+
+[T1] budget + helix alone (no closure): one-parameter family, proton (p,q)=(2,3)
+     x = 0.5000  vT/c = 0.31623  vP/c = 0.94868  residual 1.1e-16
+     x = 1.0000  vT/c = 0.55470  vP/c = 0.83205  residual 0.0e+00
+     x = 1.2247  vT/c = 0.63246  vP/c = 0.77460  residual 2.2e-16
+     x = 2.0000  vT/c = 0.80000  vP/c = 0.60000  residual 3.3e-16
+     distinct solutions: 4  -> RC2 not met (family confirmed; closure carries the unique answer)
+
+[T2] proton (2,3) geometry under the three closure rules; electron (1,1) invariance
+     rule      nT nP |    x=R/a   vT/c     vP/c  |  a_p (m)      R_major (m)   R+a (m)
+     A (1,1)   1  1 |  1.22474  0.63246  0.77460 | 2.7151e-16  3.3253e-16  6.0404e-16
+     B (p,q)   2  3 |  1.00000  0.55470  0.83205 | 2.5276e-16  2.5276e-16  5.0552e-16
+     C (q,p)   3  2 |  1.50000  0.70711  0.70711 | 2.9742e-16  4.4613e-16  7.4355e-16
+     electron (1,1): x = 1, vT = vP = c/sqrt(2) under A, B and C. Note: B and C are defined by (p,q), so at p = q = 1 they equal A by definition;
+     RC1 is not populated for these three rules (recorded in the run record) -> invariant
+
+[T3] consumer numbers under A, B, C — REPORT ONLY, no rule is selected from this table
+     g_proton = 4.00078 ; mu_p = 2.792847 mu_N (OBSERVED; mu_N is a BORROWED unit, comparison only)
+     NP15 candidates vs mu_p:  rule | C2=gp*vT  (dev)   | C3=gp*vP  (dev)   | C4=C2*x/(1+x) (dev)
+                               A (1,1) |  2.5303 ( -9.40%) |  3.0990 (+10.96%) |  1.3930 (-50.12%)
+                               B (p,q) |  2.2192 (-20.54%) |  3.3289 (+19.19%) |  1.1096 (-60.27%)
+                               C (q,p) |  2.8290 ( +1.29%) |  2.8290 ( +1.29%) |  1.6974 (-39.22%)
+     NP04A a_p/a_e = (m_p/m_e / x)^(1/3):  A (1,1) 11.4451  B (p,q) 12.2453  C (q,p) 10.6973
+     look-elsewhere register: 3 rules x 3 candidates = 9 combinations added to NP15's 5 design-time candidates (14)
+
+SUMMARY: validations met; RC1 not met; RC2 not met; closure rule is not fixed by budget + helix; rule choice changes the proton geometry

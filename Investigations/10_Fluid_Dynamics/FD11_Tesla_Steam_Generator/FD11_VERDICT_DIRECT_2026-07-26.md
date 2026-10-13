@@ -28,3 +28,9 @@ traction; steam and material properties MEASURED-INPUT and labelled.
   everything site-specific is measured-input or assumed efficiency, all labelled. The honest
   negative (cold sites don't pay) is recorded, not hidden.
 - **Recovery:** n/a · **Cascade root:** none.
+
+---
+
+## Audit correction (2026-10-05)
+
+The prompt's own kill line for F1 is "`b_opt` more than 2× off Tesla's measured steam optimum (~0.4 mm) is a FAIL, not a graded success". The tool's design point b_opt = 1.25 mm is about 3.1× the measured optimum, with the scale K_B CALIBRATED(1) (form derived, scale fitted). **F1 is therefore recorded as FAILED**, and the "Prompt completion A" above is withdrawn for the F1 criterion; the estimate stays what the verdict says it is, an applied engineering design study with no SDT physics class claimed. The remaining criteria (hoop-stress headroom 1.7×, the cold-site negative) are unaffected. Re-opening F1 requires deriving b_opt without the calibrated K_B and scoring it against the 2× line.

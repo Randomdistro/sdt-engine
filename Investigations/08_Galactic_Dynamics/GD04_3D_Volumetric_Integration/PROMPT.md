@@ -8,7 +8,7 @@
 
 ## ⓪ The Golden Rule — five questions (answer before Phase 0)
 
-1. **What don't we know?** — *(unfilled by the 2026-06-27 bulk template upgrade — write the single measurable gap before the next run)*
+1. **What don't we know?** — **Measurable gap (written 2026-10-05 in the audit correction pass, from this prompt's own content; the 2026-06-27 template left it unfilled):** Do flat rotation curves of both high- and low-surface-brightness galaxies emerge from 3D volumetric eclipse integration over baryon counts, with the empirical surface-density threshold (175 solar masses per pc^2, a baryon column count) removed?
 2. **Why does it matter?** — Stack position / downstream blockers (see `INVESTIGATION_STACK.md`).
 3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
 4. **What would prove us wrong?** — §⑧ falsification tests with numeric triggers.
@@ -731,3 +731,15 @@ It is a displacement volume.
 ---
 
 *GD04 · upgraded 2026-06-27 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** The pass condition "no longer fails" is met by any nonzero velocity (UGC 128 gives 3.7 km/s against a "should be ~64 km/s" comment), the tool's verdict line is inflated, and `cq23_3d_volumetric_integration.cpp` cited in the prompt is missing.
+
+**Correction:** Gate on the rotation-curve RMS against SPARC with a stated tolerance and restore or remove the missing reference.
+
+**Status:** RULE RECORDED — corrected gate or definition applies to the next run; the earlier result is not re-scored and nothing was re-run.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

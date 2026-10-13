@@ -1,0 +1,36 @@
+GOM_DAT7 blank-slate run 1 (registered in GOM_DAT7_RESET_ASSESSMENT_2026-10-10.md sections 0-2)
+=================================================================================
+
+[VC3] selected 7447 records -> met
+[VC1] 31 epochs (geocentre interpolated to the DSS-25 UTC epochs): |r_geo|/(delta AU) - 1 worst 2.39e-05 -> met
+[VC2] |rdot_geo - deldot_DSS25| worst 0.2028 km/s -> met
+[VC4] RTLT 8345.3 to 8345.9 s -> met
+
+VALIDATIONS: met
+
+A light-time bound: d(rdot_geo)/dt = -4.765e-06 km/s^2 ; x delta/c (4173 s) = -0.0199 km/s (-1.66e-03 of rdot)
+
+---- Level gates (prompt C4 relative; audit-corrected absolute) ; median |obs| = 50244.322 Hz ----
+  A  (geocentre, f_ref)          median|f|/median|obs| =    3.3640 ; median|obs-f| = 219265.8 Hz (/median|obs| = 4.364) ; G-rel (baseline) ; G-abs not met ; C4 (baseline)
+  B1 (DSS-25 rx, 209/15 f_ref)   median|f|/median|obs| =   47.2563 ; median|obs-f| = 2424605.9 Hz (/median|obs| = 48.256) ; G-rel not met ; G-abs not met ; C4 not met
+  B2 (DSS-25 rx, 32.028e9)       median|f|/median|obs| =   51.3199 ; median|obs-f| = 2628778.0 Hz (/median|obs| = 52.320) ; G-rel not met ; G-abs not met ; C4 not met
+  B1w (two-way, 209/15 f_ref)    median|f|/median|obs| =   46.9244 ; median|obs-f| = 2407926.8 Hz (/median|obs| = 47.924) ; G-rel not met ; G-abs not met ; C4 not met
+  B2w (two-way, 32.028e9)        median|f|/median|obs| =   50.9594 ; median|obs-f| = 2610664.7 Hz (/median|obs| = 51.959) ; G-rel not met ; G-abs not met ; C4 not met
+
+---- Residual summary obs - f (prompt C5; sign as defined) ----
+  B1 (DSS-25 rx, 209/15 f_ref)   min 2394435.7 ; median 2424605.9 ; max 2453451.0 ; mean 2424384.6 ; sd 17146.06 Hz
+  B2 (DSS-25 rx, 32.028e9)       min 2597325.8 ; median 2628778.0 ; max 2658783.0 ; mean 2628536.3 ; sd 17855.63 Hz
+
+---- Change-based gate G-chg (|R - 1| < 0.05 in thirds and whole span; both signs) ----
+  A  (geocentre, f_ref)          R =  +60.4576,  +61.9625,  +60.9504 (thirds),  +61.1883 (whole) -> sign as defined: not met ; flipped: not met
+  B1 (DSS-25 rx, 209/15 f_ref)   R =   -1.0062,   -1.0783,   -1.1605 (thirds),   -1.0782 (whole) -> sign as defined: not met ; flipped: not met
+  B2 (DSS-25 rx, 32.028e9)       R =   -0.9266,   -0.9929,   -1.0686 (thirds),   -0.9929 (whole) -> sign as defined: not met ; flipped: not met
+  B1w (two-way, 209/15 f_ref)    R =   -1.0866,   -1.0866,   -1.0859 (thirds),   -1.0863 (whole) -> sign as defined: not met ; flipped: not met
+  B2w (two-way, 32.028e9)        R =   -1.0006,   -1.0006,   -0.9999 (thirds),   -1.0002 (whole) -> sign as defined: not met ; flipped: PASS
+
+---- Descriptive: residual obs + f - mean (f as defined, i.e. sign flipped) after the constant offset is removed ----
+  A  (geocentre, f_ref)          offset -118761.30 Hz ; sd 9039.86 Hz
+  B1 (DSS-25 rx, 209/15 f_ref)   offset -2323864.24 Hz ; sd 683.92 Hz
+  B2 (DSS-25 rx, 32.028e9)       offset -2528015.93 Hz ; sd 252.54 Hz
+  B1w (two-way, 209/15 f_ref)    offset -2307435.31 Hz ; sd 705.83 Hz
+  B2w (two-way, 32.028e9)        offset -2510174.27 Hz ; sd 2.64 Hz

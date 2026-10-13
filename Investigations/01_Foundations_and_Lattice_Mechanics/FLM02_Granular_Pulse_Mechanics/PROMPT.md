@@ -96,3 +96,15 @@ Class A: F=ma + SR suite derived from GPI with no imported γ, FLM12 reconciled 
 ---
 
 *FLM02 · §K-deepened 2026-07-13 · worked derivation to be graded; FLM02↔FLM12 is likely one inertia mechanism (reconcile, don't stack); the "add a law" criterion is propose-only.*
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** The 12/12 PASS tally counts definitional round-trip rows (m_p/m_e from V_disp ≡ ...) that its own label correction calls identities, while the status line still says both FULLY RESOLVED and UN-VERDICTED.
+
+**Correction:** Report only the non-identity rows in the tally and make the status line single-valued.
+
+**Status:** ANNOTATED — label, status or tally corrected in the record; no re-score of earlier runs.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

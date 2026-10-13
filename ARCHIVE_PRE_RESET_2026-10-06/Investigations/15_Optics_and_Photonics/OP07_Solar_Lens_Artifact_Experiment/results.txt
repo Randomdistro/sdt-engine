@@ -1,0 +1,72 @@
+OP07 — Solar lens-artifact forward model (J. C. Harvey, 2026-07-04)
+Profile: approximate VAL III Model-C transcription (MEASURED-INPUT in kind; digitised
+table owed). Engine parameters: R_Sun, AU, r_e, koppa_Sun = 1477.0 m (no G, no M).
+
+G1 — bending integrator validated on the gravitational closure (matter OFF)
+  alpha_num = 1.751689"  vs closed 4*koppa/b = 1.751689"  (dev 1.250e-07)
+  [PASS] G1-integrator  machinery validated; 1.75" limb value is the engine's own
+  z-check: z_grav(limb) = 2.123e-06, mu_matter(0,500nm) = 7.280e-07 — z << 1 everywhere
+
+G2 — apparent limb vs wavelength; fold census (theta_app(b) = b/D + alpha(b))
+  lam nm  h_vis km  alpha(vis)" limb elev"   fold?      fold band (heights km; width mas)
+  400     198       9.7155      9.9891       YES        [198-778 km; 6968.2 mas]
+  500     191       9.8953      10.1580      YES        [191-771 km; 7142.1 mas]
+  600     184       10.1225     10.3755      YES        [184-774 km; 7362.5 mas]
+  700     178       10.3403     10.5854      YES        [178-768 km; 7574.0 mas]
+  800     171       10.6241     10.8603      YES        [171-771 km; 7850.0 mas]
+  900     164       10.9817     11.2076      YES        [164-774 km; 8198.0 mas]
+  1000    158       11.2585     11.4767      YES        [158-768 km; 8467.7 mas]
+  1100    152       11.5907     11.8001      YES        [152-772 km; 8791.4 mas]
+  1200    148       11.7646     11.9691      YES        [148-768 km; 8960.7 mas]
+  1400    138       12.3156     12.5059      YES        [138-768 km; 9497.9 mas]
+  1600    131       12.7029     12.8829      YES        [131-771 km; 9874.9 mas]
+
+  Controls at 1600 nm (driver isolation):
+    neutral only: alpha(500 km) = 1.157e+00" 
+    plasma  only: alpha(500 km) = -1.599e-03" 
+
+  H2/H3 driver check at the temp minimum (515 km, 1600 nm — plasma term maximal):
+    mu_neutral = 3.019e-08 vs mu_plasma = 8.726e-11  (ratio 346:1)
+    -> the total n(h) is MONOTONE in h (neutral-density dominated); there is NO
+       dn/dh sign change at the temperature minimum. The prompt's specific
+       mechanism (two-to-one n(h) from the T(h) turnover) is KILLED as modelled:
+       the computed fold is limb-generic at ALL lambda, tracks h_vis(lambda)
+       (opacity), NOT the 4400-5000 K band.
+  [PASS] G2-deliverable  R_app(lambda) table + fold census + controls produced (fold NOT gated)
+
+G3 — binary discriminator (the falsifier, stated with numbers)
+  dR_app across scan: min step +0.1688", max step +0.5368" -> R(lambda) monotonic
+  FALSIFIER (as computed, replacing the prompt's temp-min version, which this model
+  KILLS): a <=0.3 nm-step lambda-scan of the limb, 400-1600 nm, AO, fixed seeing:
+   - the refraction picture as modelled REQUIRES: (a) R(lambda) monotone-increasing
+     toward the H^- opacity minimum (1.6 um), (b) a compressed/folded emission
+     pile-up AT the limb at every lambda (height band h_vis to ~770 km);
+   - NO grow->vanish->reappear band at 4400-5000 K is predicted by the honest
+     medium: observing one would contradict THIS model too;
+   - a smooth fold-free limb AND agreement of the absolute limb radius with
+     helioseismic values at <0.5" bounds the refractive elevation and with it the
+     transcription's transparent-height densities (amplitude check, see flags).
+  [PASS] G3-discriminator  binary rule printed with computed numbers
+
+HONESTY FLAGS:
+  1. The medium refractivities are STANDARD measured gas/plasma dispersion laws used
+     as descriptors. Any fold computed here is therefore predicted by standard
+     atmospheric-refraction physics TOO: mechanism class DEGENERATE. What is SDT's
+     own: the gravitational closure term (koppa, no G/M) and the one-surface
+     REINTERPRETATION of multi-lambda disks. The T->closure native map that would
+     make the index SDT-native is OP01's OPEN matter-index debt.
+  2. Radiative transfer is reduced to a slant tau=1 cut with a SCHEMATIC H^- -like
+     opacity; emission-height physics (the standard 'layers') is NOT modelled.
+     The apparent-size differences the standard story assigns to opacity layers
+     are ~10^2-10^3 km; the refractive elevations computed above must be compared
+     against THAT before any artifact claim is made on-sky.
+  3. Profile is an approximate VAL-C transcription; digitised table owed (F5).
+  4. AMPLITUDE RELIABILITY: the arcsec-scale limb elevation depends sensitively on
+     WHERE tau_slant=1 lands (opacity model) and on the transcribed densities.
+     Helioseismic-vs-limb radius agreement at the ~0.5" level argues the TRUE
+     elevation is far smaller — i.e. this transcription likely overestimates the
+     transparent-height density by a factor of several. The STRUCTURE (monotone
+     R(lambda); limb-generic fold; no temp-min tracking) is the robust content;
+     the amplitude is NOT publication-grade. Reported, not hidden.
+
+OP07 exit: ALL COMMITTED GATES PASS (0 gate failures) — fold(s) present in forward model

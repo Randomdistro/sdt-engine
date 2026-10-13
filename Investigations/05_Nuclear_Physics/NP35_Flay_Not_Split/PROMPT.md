@@ -13,3 +13,15 @@
 5. **Done when?** Dual verdict: F1 excluded or not; F3 MATCH/ORDER/EXCLUDED on frozen gates; chain NP36–NP38 named.
 
 Neck language in NP25/NP32 is **withdrawn as mechanism**. `2d→α` in the jacket remains.
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** Gate G4 ("|slope| < 0.25") is applied to the predicted heavy mass, which is nearly constant by construction (A_H = Z_H + 82), instead of to the observed slope, and G3's band [128, 148] is 20 mass units wide, so almost any prediction passes.
+
+**Correction:** Apply the slope gate to the observed centroids against the prediction and narrow G3 to ±8 mass units (as the SF hold-out did).
+
+**Status:** RULE RECORDED — corrected gate or definition applies to the next run; the earlier result is not re-scored and nothing was re-run.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

@@ -152,3 +152,15 @@ FD02 (relay diffusion ≡ resistivity), `Engine/include/sdt/magnetosphere.hpp` (
 ---
 
 *PM05 · 10× upgrade 2026-06-29 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** Gate T3 accepts flare energy "within an order" and a one-decade CME speed band, and the ledger passes "exact by construction", while the one numeric gate that could fail (CME speed) did fail by 0.6–1.3 orders.
+
+**Correction:** Tighten T3 to a stated factor ≤ 3 and report the ledger as VERIFICATION.
+
+**Status:** RULE RECORDED — corrected gate or definition applies to the next run; the earlier result is not re-scored and nothing was re-run.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

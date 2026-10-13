@@ -59,3 +59,15 @@ space, Harvey 2026-08-02) is the organising frame: the ledger prices the toll pe
 `rtm01_thrust_ledger.cpp` (VS2022 cl, `#include <sdt/laws.hpp>`), `rtm01_results.txt`,
 `RTM01_VERDICT.md`, `Experiments/E110_*.md` (the decomposition spec), domain `README.md`.
 Findings inform the next RTM investigation.
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** Gates compare a quantity with its own formula ("ratio law c²/2v², got 1, ref 1, dev 0.00000% PASS") and the hover check reuses the koppa-from-orbit g, so the 3/3 PASS tallies algebra.
+
+**Correction:** Label them IDENTITY and gate the straight-pass toll against a measured trajectory perturbation.
+
+**Status:** ANNOTATED — label, status or tally corrected in the record; no re-score of earlier runs.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

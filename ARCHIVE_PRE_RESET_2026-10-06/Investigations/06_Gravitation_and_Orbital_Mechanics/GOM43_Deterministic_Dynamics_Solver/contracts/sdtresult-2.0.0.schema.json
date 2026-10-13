@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spatial-displacement-theory.com/contracts/sdtresult-2.0.0.schema.json",
+  "title": "SDT retarded seven-cone celestial result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "case_id",
+    "problem_class",
+    "status",
+    "classification",
+    "solver",
+    "provenance",
+    "packet_ledger",
+    "executed_steps",
+    "time_s",
+    "diagnostics",
+    "trajectory",
+    "trajectory_sha256",
+    "checkpoint"
+  ],
+  "properties": {
+    "contract_version": { "const": "2.0.0" },
+    "case_id": { "type": "string" },
+    "problem_class": {
+      "enum": ["celestial_three_body", "unknown"]
+    },
+    "status": {
+      "enum": [
+        "completed",
+        "paused",
+        "invalid_case",
+        "collision",
+        "numerical_failure"
+      ]
+    },
+    "classification": {
+      "enum": ["COMPUTED", "PENDING", "NOT-EXECUTED"]
+    },
+    "message": { "type": "string" },
+    "solver": { "type": "object" },
+    "provenance": { "type": "object" },
+    "normalized_case": { "type": "object" },
+    "packet_ledger": {
+      "type": "object",
+      "required": ["gcd", "multiplicities", "reconstruction_passed"],
+      "properties": {
+        "gcd": { "type": "string", "pattern": "^[1-9][0-9]*$" },
+        "multiplicities": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": { "type": "string", "pattern": "^[1-9][0-9]*$" }
+        },
+        "reconstruction_passed": { "type": "boolean" }
+      }
+    },
+    "executed_steps": { "type": "integer", "minimum": 0 },
+    "time_s": { "type": "number" },
+    "events": { "type": "array" },
+    "diagnostics": {
+      "type": "object",
+      "required": [
+        "maximum_retarded_residual_s",
+        "maximum_channel_closure_relative",
+        "maximum_effective_resistance_ratio",
+        "medium_impulse_kg_m_s",
+        "body_plus_medium_momentum_residual"
+      ],
+      "properties": {
+        "maximum_retarded_residual_s": { "type": "number" },
+        "maximum_channel_closure_relative": { "type": "number" },
+        "maximum_effective_resistance_ratio": { "type": "number" },
+        "medium_impulse_kg_m_s": { "$ref": "#/$defs/vec3" },
+        "body_plus_medium_momentum_residual": { "type": "number" },
+        "minimum_pair_distance_m": { "type": "number" },
+        "maximum_eclipse_shield": { "type": "number" }
+      }
+    },
+    "cones": {
+      "type": "array",
+      "maxItems": 42,
+      "items": { "type": "object" }
+    },
+    "pivots": { "type": "object" },
+    "lagrange": { "type": "array" },
+    "comparison": { "type": "object" },
+    "trajectory": { "type": "array" },
+    "trajectory_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "checkpoint": {
+      "type": "object",
+      "required": [
+        "contract_version",
+        "step",
+        "time_s",
+        "states",
+        "history",
+        "medium_impulse_kg_m_s"
+      ]
+    }
+  },
+  "$defs": {
+    "vec3": {
+      "type": "array",
+      "prefixItems": [
+        { "type": "number" },
+        { "type": "number" },
+        { "type": "number" }
+      ],
+      "items": false
+    }
+  }
+}

@@ -8,7 +8,7 @@
 
 ## ⓪ The Golden Rule — five questions (answer before Phase 0)
 
-1. **What don't we know?** — [NP15] NP15: Nuclear Magnetic Moments from Vortex Geometry — Investigation Prompt: *(unfilled by the 2026-06-27 bulk template upgrade — write the single measurable gap before the next run)*
+1. **What don't we know?** — [NP15] NP15: Nuclear Magnetic Moments from Vortex Geometry — Investigation Prompt: **Measurable gap (written 2026-10-05 in the audit correction pass, from this prompt's own content; the 2026-06-27 template left it unfilled):** Can the circulation geometry of the W=3 trefoil torus reproduce the measured proton (+2.793 mu_N) and neutron (-1.913 mu_N) moments, and the deuteron moment, without per-nucleus coefficients, with every moment stated in SDT-native circulation units?
 2. **Why does it matter?** — Stack position / downstream blockers (see `INVESTIGATION_STACK.md`).
 3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
 4. **What would prove us wrong?** — §⑧ falsification tests with numeric triggers.
@@ -314,3 +314,15 @@ reported as FAIL with §D — it is not excused, contextualised away, or retried
 
 *NP15 RUN 2 · spec'd 2026-07-06 · J. C. Harvey · composites only — the mesh either says how
 much the alpha contributes, or it loses to the addition it replaced.*
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** A threshold of 2.6% equals the known μ_d discrepancy, so it was set at the answer (the file's own note says to re-commit a blind threshold), and the deuteron "PASS" is shared-input with the rival's additivity rule.
+
+**Correction:** Re-commit the threshold blind before the run and score the deuteron as non-discriminating.
+
+**Status:** RULE RECORDED — corrected gate or definition applies to the next run; the earlier result is not re-scored and nothing was re-run.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

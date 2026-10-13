@@ -1,7 +1,31 @@
+# CM08 — Material koppa and wake flux (specification rewritten 2026-10-12)
+
+**Author:** J. C. Harvey, Melbourne. Rewritten at Harvey's direction: prompts carry new data, and errors inform the mechanism. The previous specification is kept below the line.
+
+## 1. State after the reset (2026-10-10)
+**VERIFICATION (identities); physics gate owed (G2).** Gates C0–C6 compare formulas with themselves (Ѻ = N_b Ѻ_b; 1/R² surface acceleration; r⁻³ kernel; flux ∝ count × radius; alignment zero).
+
+## 2. What the errors and new data teach
+- The engine-side material Ѻ is an identity. Any physics needs electronic circulation and alignment. PPT18 (2026-10-12) and the APS ladders are where native circulation rules are being built.
+
+## 3. Next round (registered order)
+1. A native circulation and alignment rule for a material, stated first.
+2. A numeric physics gate: measured magnetisation or susceptibility ratios (e.g. Li against U), cached with provenance, compared once with cascade bands.
+
+## Prohibitions
+- No census over candidate forms (2026-10-07 rule).
+- No imported source models (PREM, polytropes, quantum-number labelling) as native tests.
+- No G or GM.
+- The word "charge" is not used.
+
+---
+
+## Previous specification (kept as written)
+
 # CM08 — Material Koppa Density, Helical Wake and Flux Controls
 
 **Author:** James Christopher Tyndall, Melbourne  
-**Status:** PRE-REGISTERED · INSTRUMENT NOT YET RUN  
+**Status:** PRE-REGISTERED · INSTRUMENT RUN — assessment VALIDATED MATERIAL LEDGER (controls C0–C6 passed; the controls are VERIFICATION, there is no physics gate yet) (see CM08_ASSESSMENT.md) [status line corrected 2026-10-05]  
 **Date:** 2026-08-15
 
 ## Question
@@ -103,3 +127,15 @@ The model is rejected if equal baryon count changes the far-field monopole,
 if density is used to infer magnetic alignment, if the normalized wake is
 reported as an absolute measured field, or if any element-specific coefficient
 is fitted to the comparison.
+
+---
+
+## Audit correction 2026-10-05 (record / status)
+
+**Finding:** The status line reads "INSTRUMENT NOT YET RUN" although controls C0–C6 passed and results exist, and the equal-mass and equal-size flux controls compare a value to the same formula (relative error 0 and 2e-16).
+
+**Correction:** Update the status and label the controls VERIFICATION, with a numeric physics gate added.
+
+**Status:** ANNOTATED — label, status or tally corrected in the record; no re-score of earlier runs.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

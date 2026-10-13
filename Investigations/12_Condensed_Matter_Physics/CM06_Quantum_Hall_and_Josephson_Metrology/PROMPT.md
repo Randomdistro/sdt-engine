@@ -160,3 +160,15 @@ Not required for the verdict; this is the payoff of doing it well.
 ---
 
 *CM06 · 10× upgrade 2026-06-29 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** Gates "ν integer-only" and "ν constant over 3 orders" describe an integer count by construction, and "bulk declines smoothly: 96.5% (gate > 30%)" is a lenient threshold, while R_K and K_J are definitional identities (as the verdict says).
+
+**Correction:** Label the integer gates IDENTITY and gate the plateau flatness against measured Hall data at a stated precision.
+
+**Status:** ANNOTATED — label, status or tally corrected in the record; no re-score of earlier runs.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

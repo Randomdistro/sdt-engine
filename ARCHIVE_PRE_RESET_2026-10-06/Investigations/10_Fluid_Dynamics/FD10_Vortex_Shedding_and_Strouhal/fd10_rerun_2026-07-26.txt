@@ -1,0 +1,96 @@
+================================================================
+ FD10 — Vortex Shedding & Strouhal from the Gear-Frequency clock
+ SDT relaxation/traction oscillation : St = tau_adv/(tau_relax+tau_build)
+ Author: James Christopher Tyndall, Melbourne
+================================================================
+
+PHASE 1 — relaxation/gear clock (PPT06 traction + FD06 separation)
+  tau_adv   = D/U                                  [DERIVED]
+  tau_build = (D_eff/D)*(U/U_wake)/kappa * tau_adv  [FORM DERIVED]
+  St = tau_adv/(tau_relax+tau_build); high-Re: tau_relax->0
+  FD06 geometry  : D_eff/D   = 1.200   (MEASURED-INPUT)
+  base-flow def. : U_wake/U  = 0.550   (MEASURED-INPUT)
+  gear coeff     : kappa_clock = 0.4500 (CALIBRATED(1), FIXED literal)
+  sanity gate    : kappa_clock is O(1)? YES  (0.1<k<10)
+
+PHASE 2 — the St plateau (core gate, 300<Re<2e5)
+  St_inf (derived form, 1 calib) = 0.2063
+  measured plateau               = 0.205  (0.20-0.21 band)
+  residual                       = +0.61 %
+  factor vs 0.205                = 1.006x
+  [PASS] plateau within factor 2 of 0.2                 
+  [PASS] plateau within +/-20% of 0.2                   
+  [PASS] kappa_clock is O(1) (mechanism sane)           
+  St drift 300<Re<2e5  = 6.52 % (incl. Roshko tail edge)
+  St drift 1e3<Re<2e5  = 1.93 % (true flat plateau)
+  [PASS] plateau flat for Re>=1e3 (<2.5% drift)         
+
+PHASE 3 — frequency scaling f = St_inf * U/D
+  (a) hold D=0.010 m, sweep U -> expect f ∝ U, slope St_inf/D=20.625 Hz/(m/s)
+      U[m/s]     Re(air)      f[Hz]        f/U[1/m]  
+      1.00       660          20.625       20.6250   
+      2.00       1319         41.250       20.6250   
+      5.00       3298         103.125      20.6250   
+      10.00      6596         206.250      20.6250   
+      20.00      13193        412.500      20.6250   
+      40.00      26385        825.000      20.6250   
+      f/U constant to 0.0000 % (linear in U)
+  [PASS] f ∝ U linear, slope=St_inf/D <5%             
+  (b) hold U=10.0 m/s, sweep D -> expect f ∝ 1/D
+      D[m]       f[Hz]        f*D[m/s]    
+      0.005      412.500      2.0625      
+      0.010      206.250      2.0625      
+      0.020      103.125      2.0625      
+      0.050      41.250       2.0625      
+      0.100      20.625       2.0625      
+      f*D constant to 0.0000 % (f ∝ 1/D)
+  [PASS] f ∝ 1/D, f*D=St_inf*U constant <5%           
+
+PHASE 4 — low-Re rise St(Re) = St_inf*(1 - B/Re)  [FORM DERIVED]
+  Roshko 1954 (MEASURED-INPUT): St = 0.212*(1 - 21.2/Re)
+  fitted B_eff (1 shape param, CALIBRATED) = 19.546
+  Re       St_SDT         St_Roshko      St_Fey         err%      
+  50       0.1256         0.1221         -0.4189        +2.88     
+  60       0.1391         0.1371         -0.3634        +1.44     
+  80       0.1559         0.1558         -0.2856        +0.03     
+  100      0.1659         0.1671         -0.2325        -0.67     
+  120      0.1727         0.1745         -0.1933        -1.08     
+  150      0.1794         0.1820         -0.1499        -1.46     
+  200      0.1861         0.1895         -0.1007        -1.81     
+  300      0.1928         0.1970         -0.0423        -2.13     
+  RMS vs Roshko (50-150) = 1.533 %
+  [PASS] low-Re St(Re) rises monotonically (sign)       
+  [PASS] derived 1/Re form fits Roshko <3% RMS          
+
+PHASE 5 — lock-in / entrainment (CQ41/PPT06 Adler oscillator)
+  natural f_n = 206.25 Hz ; stiffness slope k0=0.65 (CALIBRATED(1))
+  capture half-band (frac of f_n) vs amplitude a=A/D:
+  a=A/D      half-band +/-%   Adler sim (lock @ edge) 
+  0.05       3.2              in:LOCK  out:free
+  0.10       6.5              in:LOCK  out:free
+  0.20       13.0             in:LOCK  out:free
+  0.40       26.0             in:LOCK  out:free
+  band at A/D=0.15 = +/-9.8 % (Koopmann/Williamson ~5-15%)
+  [PASS] capture band widens with amplitude             
+  [PASS] Adler locks inside / frees outside band        
+  [PASS] band brackets measured ~5-15% at A/D~0.15      
+
+================================================================
+ FD10 SUMMARY : 11/11 checks passed
+----------------------------------------------------------------
+ NATIVE      : periodic two-sided (ell=2) wake EXISTS; f ∝ U/D
+               scaling; low-Re 1/Re RISE sign+curvature; lock-in
+               as CQ41 entrainment (Adler capture band).
+ CALIBRATED  : kappa_clock=0.450 (1 gear coeff, O(1) verified);
+               B_eff=19.55 (low-Re shape, = Roshko form test);
+               k0=0.65 (lock-in stiffness slope).
+ MEAS-INPUT  : D_eff/D=1.20, U_wake/U=0.55 (FD06/Achenbach),
+               St~0.2 plateau & Roshko curve = CONVERGENCE targets.
+ CLASS       : C (QUALIFIED — convergence).
+   The ORDER and the f ∝ U/D scaling are SDT-NATIVE; the 0.205
+   plateau VALUE needs ONE calibrated O(1) gear coefficient; the
+   Roshko low-Re constants are empirical (form-test only). Not A
+   (value not derived parameter-free); not D (plateau evaluated,
+   not pending); not F (plateau exists, scaling correct, lock-in
+   present). => Class C.
+================================================================

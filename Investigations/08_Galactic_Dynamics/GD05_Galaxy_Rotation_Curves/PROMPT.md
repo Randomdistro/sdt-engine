@@ -133,3 +133,15 @@ Class A: ≥50 real SPARC RMS<25%, crossover derived, BTFR from geometry, no GM.
 ---
 
 *GD05 · §K-deepened 2026-07-13 · GM contraband purged; naive eclipse fails (66%), M4 floor 23.8% borrows MOND (derive the crossover or label DEGENERATE); mass-free koppa-density (GOM14) is the honest route; real SPARC only.*
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** The BTFR slope gate [3.5, 4.5] passes at 3.58, but a floor law inherits slope ≈ 4 from V⁴ ∝ M by construction, and κ_area is calibrated to the 175 M_sun/pc² threshold (CALIBRATED(1)).
+
+**Correction:** Gate the slope against an independent baryonic census with a tolerance of ±0.2 and keep the model labelled CALIBRATED(1).
+
+**Status:** RULE RECORDED — corrected gate or definition applies to the next run; the earlier result is not re-scored and nothing was re-run.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

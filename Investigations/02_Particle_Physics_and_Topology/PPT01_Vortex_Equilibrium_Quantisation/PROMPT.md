@@ -8,7 +8,7 @@
 
 ## ⓪ The Golden Rule — five questions (answer before Phase 0)
 
-1. **What don't we know?** — [PPT01] PPT01: Vortex Equilibrium Quantisation — Mathematical Framework: *(unfilled by the 2026-06-27 bulk template upgrade — write the single measurable gap before the next run)*
+1. **What don't we know?** — [PPT01] PPT01: Vortex Equilibrium Quantisation — Mathematical Framework: **Measurable gap (written 2026-10-05 in the audit correction pass, from this prompt's own content; the 2026-06-27 template left it unfilled):** Do the movement-budget equilibria of a W=1 and a W=3 vortex (v_circ^2 + v^2 = c^2) fix the quantised radii and the ratio a_e/a_p with no inserted integer?
 2. **Why does it matter?** — Stack position / downstream blockers (see `INVESTIGATION_STACK.md`).
 3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
 4. **What would prove us wrong?** — §⑧ falsification tests with numeric triggers.
@@ -242,3 +242,15 @@ A (p,q) curve is a **true knot** (cannot be deformed to a point) only if gcd(p,q
 ---
 
 *PPT01 · upgraded 2026-06-27 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*
+
+---
+
+## Audit correction 2026-10-05 (opening premise)
+
+**Finding:** The question is "unfilled by the 2026-06-27 bulk template upgrade", and the recorded 5/5 PASS includes budget identities (W=1 and W=3 budgets equal c²).
+
+**Correction:** State the measurable gap and separate identity rows from tests.
+
+**Status:** RULE RECORDED — corrected gate or definition applies to the next run; the earlier result is not re-scored and nothing was re-run.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

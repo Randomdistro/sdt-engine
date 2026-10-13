@@ -1,0 +1,79 @@
+﻿NP03B — Independent Nuclear Equilibrium — electron-blind Tammes solve
+Objective: maximin angular separation; kissing r = sin(t/2)/(1-sin(t/2))
+Seeds fixed pre-run: 11,23,37,53,71,97. No electron quantity in this tool.
+==========================================================================
+
+[P0] solver sanity (known exact optima, gate 0.5%)
+     N=2:  180.0000 deg (ref 180.0000, err 0.000%)
+     N=3:  120.0000 deg (ref 120.0000, err 0.000%)
+     P0 gate: PASS
+
+[P1] emergent preset reproduction (gate 2%, preset coords never fed in)
+     N= 4: theta_min  109.4712 deg (ref 109.4712, err 0.000%)  r_kiss 4.4495  tetrahedron (He-4 scaffold)
+     N= 6: theta_min   90.0000 deg (ref  90.0000, err 0.000%)  r_kiss 2.4142  octahedron (O-16 shell)
+     N= 8: theta_min   73.5337 deg (ref  74.8585, err 1.770%)  r_kiss 1.4910  square antiprism
+     N=12: theta_min   63.4349 deg (ref  63.4349, err 0.000%)  r_kiss 1.1085  icosahedron
+     P1 gate (<2% all four): PASS
+
+[P2] determinism: full re-solve, hash equality (exact)
+     N= 4: hash1 be3519c61e94a831  hash2 be3519c61e94a831  IDENTICAL
+     N= 6: hash1 3614f94bfdac144c  hash2 3614f94bfdac144c  IDENTICAL
+     N= 8: hash1 df7b7cd805b210a6  hash2 df7b7cd805b210a6  IDENTICAL
+     N=12: hash1 6f216b7edfa6f9c5  hash2 6f216b7edfa6f9c5  IDENTICAL
+     P2 gate: PASS
+
+[P3] electron-blindness: by construction (audit: grep this file for
+     a_0 / shell / Aufbau / 2n^2 — zero hits). Inputs are (Z,A) integers only.
+
+[P4/P5] demo isotopes: solved vs random-null; triton max-min sites
+     He-4   (n_d,n_t)=( 0, 0) N= 0  theta_min   0.0000  null   0.0000  r_kiss 0.0000  tritons@min   0.000 deg  hash 0000000000000000
+     Li-7   (n_d,n_t)=( 0, 1) N= 1  theta_min   0.0000  null   0.0000  r_kiss 1.0000  tritons@min   0.000 deg  hash 6c25436b5fcb72f6
+     C-12   (n_d,n_t)=( 4, 0) N= 4  theta_min 109.4712  null  18.8841  r_kiss 4.4495  tritons@min   0.000 deg  hash be3519c61e94a831
+     O-16   (n_d,n_t)=( 6, 0) N= 6  theta_min  90.0000  null   2.1355  r_kiss 2.4142  tritons@min   0.000 deg  hash 3614f94bfdac144c
+     Ne-20  (n_d,n_t)=( 8, 0) N= 8  theta_min  73.5337  null  16.3766  r_kiss 1.4910  tritons@min   0.000 deg  hash df7b7cd805b210a6
+     Si-28  (n_d,n_t)=(12, 0) N=12  theta_min  63.4349  null   5.3712  r_kiss 1.1085  tritons@min   0.000 deg  hash 6f216b7edfa6f9c5
+     Fe-56  (n_d,n_t)=(20, 4) N=24  theta_min  43.0061  null  10.2222  r_kiss 0.5787  tritons@min  86.422 deg  hash 1f962ac11a756cfd
+     P4 gate (solved >= null in all demo N>=2): PASS
+     wrote np03b_positions.txt
+
+[table] theta_min / r_kiss sweep N=1..90 (reference for all Z=3..92)
+     N  theta_min   r_kiss      N  theta_min   r_kiss      N  theta_min   r_kiss
+     1     0.0000   1.0000      31    35.7907   0.4436      61    24.6843   0.2719  
+     2   180.0000      inf      32    37.0114   0.4650      62    24.7658   0.2730  
+     3   120.0000   6.4641      33    33.1708   0.3995      63    24.5787   0.2704  
+     4   109.4712   4.4495      34    33.8423   0.4105      64    24.3795   0.2677  
+     5    90.0000   2.4142      35    32.7806   0.3931      65    23.8743   0.2608  
+     6    90.0000   2.4142      36    32.8806   0.3947      66    23.7990   0.2598  
+     7    75.6227   1.5844      37    31.5362   0.3731      67    23.5496   0.2564  
+     8    73.5337   1.4910      38    32.5511   0.3894      68    23.4129   0.2545  
+     9    69.6820   1.3326      39    30.5108   0.3571      69    23.2251   0.2520  
+    10    64.8413   1.1558      40    30.5776   0.3581      70    23.3849   0.2542  
+    11    60.6030   1.0184      41    30.0990   0.3507      71    23.0091   0.2491  
+    12    63.4349   1.1085      42    30.3869   0.3552      72    23.0454   0.2496  
+    13    54.2890   0.8390      43    29.9773   0.3489      73    22.2240   0.2387  
+    14    53.6335   0.8220      44    30.1295   0.3512      74    22.1520   0.2378  
+    15    51.5359   0.7691      45    28.9187   0.3328      75    22.1080   0.2372  
+    16    50.7606   0.7502      46    28.1295   0.3210      76    21.8802   0.2342  
+    17    50.9080   0.7537      47    28.4647   0.3260      77    22.1447   0.2377  
+    18    48.5493   0.6981      48    28.6380   0.3286      78    22.0257   0.2361  
+    19    45.7466   0.6358      49    27.4026   0.3104      79    21.8667   0.2341  
+    20    46.8568   0.6600      50    28.1069   0.3207      80    21.3850   0.2278  
+    21    44.5635   0.6107      51    26.8113   0.3018      81    21.1851   0.2252  
+    22    44.0821   0.6007      52    26.9974   0.3045      82    21.2267   0.2258  
+    23    40.6836   0.5328      53    26.3089   0.2946      83    20.6469   0.2183  
+    24    43.0061   0.5787      54    26.9575   0.3039      84    21.0315   0.2232  
+    25    39.8155   0.5163      55    26.0899   0.2915      85    20.9439   0.2221  
+    26    40.0353   0.5205      56    25.9827   0.2900      86    20.7460   0.2196  
+    27    40.2778   0.5251      57    25.8751   0.2885      87    20.8529   0.2210  
+    28    37.4961   0.4736      58    25.4897   0.2831      88    20.8288   0.2207  
+    29    36.0143   0.4475      59    25.4089   0.2819      89    20.4388   0.2157  
+    30    36.9515   0.4639      60    25.0607   0.2771      90    20.0823   0.2112  
+
+==========================================================================
+NP03B SUMMARY
+  P0 solver sanity (N=2,3)         : PASS
+  P1 emergent presets (4,6,8,12)   : PASS
+  P2 determinism (hash equality)   : PASS
+  P3 electron-blind                : by construction (audit note above)
+  P4 solved beats random null      : PASS
+  OVERALL: PASS — positions certified as electron-blind substrate (class B)

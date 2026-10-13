@@ -275,3 +275,15 @@ Every `NP19_VERDICT.md` header carries **both** axes: **Prompt completion** (A�
 ---
 
 *NP19 · SPEC · the load-bearing reframe grounding NP20 & NP21 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** The pre-committed success metric is a round-trip identity (m → V_disp → m to 1e-9) that the prompt itself calls a "pure identity check", so it cannot fail, and ρ_form is gated only to "within 1 order".
+
+**Correction:** Remove the round-trip from the PASS tally and gate on the sign and arithmetic lemma plus a stated percentage for ρ_form.
+
+**Status:** ANNOTATED — label, status or tally corrected in the record; no re-score of earlier runs.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

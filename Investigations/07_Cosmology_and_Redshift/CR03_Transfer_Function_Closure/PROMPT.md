@@ -1,3 +1,42 @@
+# CR03 — Transfer-function closure (specification rewritten 2026-10-12)
+
+**Author:** J. C. Harvey, Melbourne. Rewritten at Harvey's direction: prompts carry new data, and errors inform the next step. The 2026-06-27 specification and its audit block are kept below the line, superseded.
+
+## 1. Question (as it now stands)
+f = P_eff/P_conv has been reduced exactly to seat constants plus **one** class-X input, R_CMB. What, natively, fixes R_CMB?
+
+## 2. What is established (reset run 2026-10-10, `CR03_RESET_ASSESSMENT_2026-10-10.md`)
+| # | Result | Grade |
+|---|---|---|
+| E1 | P_eff = m_p² m_e² c⁵/(4παħ³) = 5.227252e31 Pa, equal to law_III::P_eff to 1.2e-9. It is an exact reduction via R_p_lock = 4ħ/(m_p c) (FLM07, target-free; no longer "the W+1 conjecture") and r_e = αħ/(m_e c). | CONSTRUCTION (exact) |
+| E2 | f = m_p² m_e² c⁵ ℓ_P / (4παħ³ R_CMB a T_CMB⁴) = 2.124180e-17; the engine's value is 2.124189e-17. f ∝ R_CMB⁻¹. | verified |
+| E3 | **R_CMB is the single class-X input.** Contaminating input: R_CMB, the observed cosmological scale (measured::R_CMB), entering at laws.hpp:249–276. | G3, shared-input (agrees with the EMC01 reset) |
+
+## 3. Errors in the old specification, and what each teaches
+| # | Error | Lesson |
+|---|---|---|
+| X1 | **"a_rad = 2π⁵k_B⁴/(15h³c²)" is the Stefan–Boltzmann constant σ, not the radiation constant.** The radiation constant is a = 4σ/c = 8π⁵k_B⁴/(15h³c³). Attempt 1, which used the prompt's formula verbatim, missed f by about 7.5e7 (output kept). | Check every closed form dimensionally before it enters an instrument. A_rad's unit is J m⁻³ K⁻⁴; σ's is W m⁻² K⁻⁴. |
+| X2 | The engine stores measured::a_rad = 7.5657e-16 (5 figures). Computed from the engine's exact SI k_B, h and c it is 7.565733e-16, a relative difference of 4.4e-6. | Canon note, propose-and-wait: compute a from k_B, h and c in `laws.hpp`. Not edited. |
+| X3 | Old Stage 2 asked "what value of R_CMB would make f exactly α², 1/N, …". | **Withdrawn**: that is target-first numerology. R_CMB is fixed by mechanism or left class-X. |
+| X4 | Old Stage 3 Route A, R_CMB = (c/H₀) ln(1 + z_rec), imports an expansion history and z_rec. | **Withdrawn**. SDT has no expansion (Prohibitions), and z_rec is CALIBRATED (CR14/CR15). |
+
+## 4. What remains (Stage 3, the open item)
+Derive R_CMB from SDT structure, or record it as the framework's one cosmological scale. Candidate native routes:
+- **(B)** BAO physical shells (opacity-logjam reading): r_s from a derived coupled-stage length, then R_CMB from θ_s.
+- **(C)** N = R_CMB/ℓ_P from a structural relation. Exploratory, with a look-elsewhere count registered first.
+
+**Supplier:** CR05, held for a fresh session. **Status: open (G2).** Each route is registered with its observable before any value is computed. f is not "promoted from E to C" until R_CMB has a native derivation.
+
+## 5. Prohibitions
+- No expansion history, H₀ or z_rec as inputs.
+- No target-first selection of R_CMB.
+- No G or GM.
+- No edits to Engine/Laws (the a_rad note is propose-and-wait).
+
+---
+
+## Superseded specification (2026-06-27, kept as written)
+
 # CQ-33 — Transfer Function Closure
 
 > **Author:** J. C. Harvey, Melbourne. **Status:** SPEC (upgrade 2026-06-27).
@@ -8,7 +47,7 @@
 
 ## ⓪ The Golden Rule — five questions (answer before Phase 0)
 
-1. **What don't we know?** — *(unfilled by the 2026-06-27 bulk template upgrade — write the single measurable gap before the next run)*
+1. **What don't we know?** — **Measurable gap (written 2026-10-05 in the audit correction pass, from this prompt's own content; the 2026-06-27 template left it unfilled):** Can the transfer function f = P_eff / P_conv be expressed in the seat constants plus R_CMB, with the scale R_CMB isolated as the single remaining class-X input?
 2. **Why does it matter?** — Stack position / downstream blockers (see `INVESTIGATION_STACK.md`).
 3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
 4. **What would prove us wrong?** — §⑧ falsification tests with numeric triggers.
@@ -182,3 +221,15 @@ If the algebraic simplification produces a value that **disagrees** with the exi
 ---
 
 *CR03 · upgraded 2026-06-27 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** Row 1a passes "P_eff vs identity rebuild (W+1 radii), −2.2e-16", an identity round-trip at machine precision that cannot fail.
+
+**Correction:** Label it IDENTITY and score the closure on the non-identity, class-X scale R_CMB.
+
+**Status:** ANNOTATED — label, status or tally corrected in the record; no re-score of earlier runs.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

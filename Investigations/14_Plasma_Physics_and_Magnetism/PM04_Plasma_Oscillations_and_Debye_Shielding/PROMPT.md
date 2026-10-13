@@ -150,3 +150,15 @@ ensemble / thermal distribution), EMC03 (handedness, surplus/deficit), electropa
 ---
 
 *PM04 · 10× upgrade 2026-06-29 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** The prompt's P2 threshold is λ_D within 2% but the verdict scores P2a at "<15%", the 15% gate is passed only by run 5 after two recorded FAILs (+40.9%, +61.8%) once a thermostat was added, and the P2c PASS is toolchain-dependent (does not reproduce under g++).
+
+**Correction:** Restore the 2% gate, score the thermostated run as a new registered round, and fix a toolchain-independent random generator.
+
+**Status:** RULE RECORDED — corrected gate or definition applies to the next run; the earlier result is not re-scored and nothing was re-run.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

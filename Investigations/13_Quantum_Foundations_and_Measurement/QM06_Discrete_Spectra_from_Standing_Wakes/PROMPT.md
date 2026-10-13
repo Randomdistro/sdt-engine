@@ -204,3 +204,15 @@ Alkali `δ(n)` sign from core occlusion — qualitative OK for **C** grade.
 ---
 
 *QM06 · quantisation must survive the ticks, not the namespace.*
+
+---
+
+## Audit correction 2026-10-05 (record / status)
+
+**Finding:** A "SUPERSEDED — DO NOT TRUST" banner (PASS on an identity wrapper of `atomic::`) sits on a verdict that still shows E1 exact and Hα 656.112 nm (0.025%) as PASS, with the re-run still pending.
+
+**Correction:** Re-run with the wake-survival test as the gate and replace the verdict.
+
+**Status:** OWED — needs a new run, derivation or data; the corrected requirement is recorded here.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

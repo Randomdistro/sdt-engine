@@ -1,3 +1,20 @@
+# GOM_DAT3 — Cassini ODF observable decode (specification rewritten 2026-10-12)
+
+**Author:** J. C. Harvey, Melbourne. Verification item: its rows are excluded from physics tallies, per the prompt's id alias. The previous specification is kept below the line.
+
+## 1. State after the reset (2026-10-10)
+C1–C3 met on P0 via the supplier (median |obs| 50,244.3 Hz; f_ref per record). C4 (the cumindex freeze list for SCE1 days 157–160) is open.
+
+## 2. Next round
+Decode the cumindex for days 157–160 and list the frozen records; the expected list is written from the PDS index before comparison.
+
+## 3. Note
+These decodes feed the Cassini-based gravity tests. No physics result is drawn from a VERIFICATION row.
+
+---
+
+## Previous specification (kept as written)
+
 # GOM30 — ODF Doppler Observable Decode (Hz) + Multi-Day Freeze List
 
 > **Status:** PRE-REGISTERED — 2026-08-08.  
@@ -55,3 +72,17 @@ If P1–P3 cannot be retrieved this cycle → `PENDING_FETCH`; do not block C1�
 Label as **COMPUTED from RAW instrument product**. Whether the ODF stores
 raw Doppler or a navigation pseudo-residual is recorded as **UNADJUDICATED**
 until a non-conjunction fixture with known engineering value is obtained.
+
+---
+
+## Audit correction 2026-10-05 (record / status)
+
+**Finding:** Claims are numbered GOM30-C1 … against folder GOM_DAT3, and the PASS rows are decode and finiteness checks.
+
+**Correction:** Align the ids and label the rows VERIFICATION.
+
+**Status:** ANNOTATED — label, status or tally corrected in the record; no re-score of earlier runs.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*
+
+**Id alias (2026-10-05):** claim ids written `GOM30-C*` in this folder and its verdict are the claims of `GOM_DAT3`. The rows are VERIFICATION (data-structure, checksum and field-parse checks), not tests of a physical claim, and are excluded from physics PASS/FAIL tallies; earlier text is not rewritten.

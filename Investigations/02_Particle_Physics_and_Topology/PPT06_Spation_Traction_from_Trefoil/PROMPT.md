@@ -91,3 +91,15 @@ Class A: all four headlines re-derived DERIVED, W=1 control passes, neighbours h
 ---
 
 *PPT06 · §K-deepened 2026-07-13 · results-on-file; this pass grades them adversarially and files the missing verdict. 1.831c is a load-bearing neighbour — protect it or trace the cascade.*
+
+---
+
+## Audit correction 2026-10-05 (record / status)
+
+**Finding:** The folder records COMPLETE "pure theoretical derivation" of μ_p = 2.793 μ_N using wording that treats a substance as tracing the trefoil, while its own prompt says no verdict has ever graded the results as derived or fitted.
+
+**Correction:** Re-grade each claimed result DERIVED, COMPUTED or ASSUMED and restate in boundary-circulation terms.
+
+**Status:** RULE RECORDED — corrected gate or definition applies to the next run; the earlier result is not re-scored and nothing was re-run.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

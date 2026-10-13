@@ -1,0 +1,243 @@
+### 01/FLM01_State28D_Force_Ratio_Constants  | status: SPEC (upgrade 2026-06-27). | words 1497 | code 1 outs 0 verd 2 runlog 0 | gate True prereg True
+Q: Are the two hard-coded normalisation scales in `state28d.hpp` — `1e10` Pa/m (line 134, occlusion screening) and `1e-20` J (line 159, phase transition) — **derived** from Laws I–IV (Φ=Nε, occlusion force, velocity budget), or **fitted**? The single measurable gap: does either fall out of the nuclear↔atomic displacement-volume rat
+F: §⑧ falsification tests with numeric triggers. 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN). ﻿# FLM01: State28D Force Ratio Constants — Derivation from Pure SDT ## Executive Summary The State28D m
+G: 1. **What don't we know?** — Are the two hard-coded normalisation scales in `state28d.hpp` — `1e10` Pa/m (line 134, occlusion screening) and `1e-20` J (line 159, phase transition) — **derive
+G: 3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
+G: 5. If within 1 order of magnitude: **QUALIFIED**
+G: 6. If within 20%: **PASS**
+G: - Numerical match within **20%**
+V: **Status**: QUALIFIED PENDING (Class D)
+V: ## Verdict: QUALIFIED PENDING → QUALIFIED (Class C)
+V: ### Why Not PASS?
+V: ### Why QUALIFIED (not FAIL)?
+V: - **CALIBRATED** — scales are justified empirically for numerical stability
+FLAGS: MISSING:Theory/02 ; ident:1 ; res pass/fail 0/0 verd pass/fail 3/1
+
+### 01/FLM02_Granular_Pulse_Mechanics  | status: WORKED-DERIVATION, UN-VERDICTED · §K-DEEPENED 2026-07-13 (HUNTER §K.3) | words 1165 | code 4 outs 0 verd 1 runlog 0 | gate True prereg True
+Q: Whether F=ma and the SR suite genuinely *derive* from the Granular Pulse Invariant (GPI), or whether a step (GPI-3's δ = a·ℓ_P/c², GPI-8's Newton III) is asserted.** And whether FLM02's mechanism is the *same* as FLM12's (mass = field-resistance to vector change) — one root or two. 2. **Why does it matter?** — If GPI is the root
+F: §⑧: if δ = a·ℓ_P/c² is posited (not derived from pulse-timing), or the SR suite quietly imports γ, the "derivation" is a restatement. 5. **How will we know we're done?** — Dual verdict; each theorem graded DERIVED / ASSUMED; FLM02↔FLM12 relationship named (shared root or distinct). ## Question (unch
+G: **Disallowed:** post-hoc tolerance widening · imported γ · double-counting FLM12 · editing `laws.hpp`.
+V: > **Status**: FULLY RESOLVED
+V: > **Tool**: `cq08_statistical_inertia.cpp` (this file — 12/12 PASS)
+V: > **Label correction (HUNTER 2026-07-02):** the 'm_p/m_e from V_disp' rows in the 12/12 table are definitional identities (V_disp ≡ 3mℓ_P³c²/Φ ⇒ round-trip cannot fail) — relabelled IDENTITY, not Law-
+V: 12/12 proofs pass. Maximum error: 0.0014% (classical KE limit check). Mean error: 0.0001%.
+V: ## Verdict
+FLAGS: MISSING:Investigations/01 ; ident:2 ; res pass/fail 0/0 verd pass/fail 3/0
+
+### 01/FLM03_Spation_Rotation  | status: RESOLVED (tool passes 4/4; recorded `RUN_LOG.md`, 2026-06-26). | words 1816 | code 1 outs 0 verd 1 runlog 1 | gate True prereg True
+Q: What is the *rotation profile* `v(r)` of the proton's spation field — how fast does the medium circulate as a function of radius, from inside the proton surface out to the hydrogen orbits? 2. **Why does it matter?** Every downstream "seat speed" claim (the neutron's 1.83c counter-rotating seat in NP20; the electron-as-driven-orb
+F: Any anchor missed beyond tolerance; a non-monotone profile; the c-boundary *not* landing on the classical electron radius; `k(a₀) ≠ 1/α`. (See §8.) 5. **How will we know we're done?** Dual verdict — **prompt:** all three anchor proofs + the driven-orbit resonance PASS; **physics:** the profile is CO
+G: 4. **What would prove us wrong?** Any anchor missed beyond tolerance; a non-monotone profile; the c-boundary
+G: - *Pre-committed thresholds:* **FLM03-1a** |v(R_p)/c − 1/ϟ_H| < **0.01%**; **FLM03-1b** |v(r_c)/c − 1| < **0.01%**
+G: - *Failure trigger:* any anchor over tolerance, or a non-monotone v(r). *Gate:* Part III forbidden until 1a–1c PASS.
+G: - ✅ **PASS (Class A–B, Derived/Computed):** all of FLM03-1a/1b/1c and 4a within their pre-committed tolerances,
+G: CALIBRATED budget **0**; phase thresholds P1 {1a:0.01%, 1b:0.01%, 1c:0.1%}, P3 {4a:0.1%}; forbidden retroactive
+V: # FLM03 — Spation Rotation Kinematic Map · VERDICT
+V: > **Status: PASS (4/4 proofs), class C–B (convergence → derived-from-geometry)**
+V: > This is a clearance marker for the verdict already recorded in `RUN_LOG.md`
+FLAGS: MISSING: ; res pass/fail 0/0 verd pass/fail 1/0
+
+### 01/FLM05_Lattice_Pulse_Propagation  | status: RICH-SPEC · §K-DEEPENED 2026-07-13 (300% rule, HUNTER §K.3). | words 1437 | code 2 outs 0 verd 1 runlog 0 | gate True prereg True
+Q: The tick-by-tick relay mechanism that MAKES 1/r² from ~10²⁴ discrete Planck-shell handoffs** (CQ09b showed the smooth field v(r)=cα√(a₀/r) is algebra, not mechanism), AND the gap width g₀ (sphere/gap fraction of ℓ_P) — currently under-determined (Part V). 2. **Why does it matter?** — This is the substrate's operating manual: gap
+F: §⑧: if 1/r² needs anything beyond d=3 solid angle; if g₀ can't be fixed from f; if the rigid-sphere premise contradicts the superfluid substrate (see PREMISE FLAG). 5. **How will we know we're done?** — Dual verdict; the three canon flags below resolved or logged; g₀ determination graded DERIVED/OPE
+G: 3. **How will we find out?** — Parts I–V (§structure), each gated; geometry (1/r² from d=3) is earned, the g₀ determination and the redshift form are the open/flagged pieces.
+V: > **Status**: RESOLVED
+V: > **Proofs**: 15/16 pass (the 1 intentional failure proves V_torus ≠ V_disp)
+V: 1. **Matter as Forced Contact**: Matter is the state where the interspation gap is compressed to zero. A particle's "surface" is the boundary where the gap just barely reopens.
+V: 2. **Gravity as Gap Reopening**: From the contact zone outward, the gap reopens. Flux conservation over 3D space forces δ ∝ 1/r², which is the inverse-square law emerging from geometry, not dynamics.
+V: | T_rec (3000K) | Atoms form | The gap first opens |
+FLAGS: MISSING:Investigations/cosmology;Investigations/01 ; res pass/fail 0/0 verd pass/fail 2/1
+
+### 01/FLM09_Reconnection_Light_and_CMB_Arrival  | status: SPEC (upgrade 2026-06-27). | words 1668 | code 1 outs 1 verd 1 runlog 0 | gate True prereg True
+Q: [FLM09] FLM09 — Reconnection Dynamics: the Light Mode and the Boundary Arrival: *(unfilled by the 2026-06-27 bulk template upgrade — write the single measurable gap before the next run)* 2. **Why does it matter?** — Stack position / downstream blockers (see `INVESTIGATION_STACK.md`). 3. **How will we find out?** — Gated phases i
+F: §⑧ falsification tests with numeric triggers. 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN). **J. C. Harvey, Melbourne — 2026-06-24.** Domain: `01_Foundations_and_Lattice_Mechanics`. Builds on **F
+G: 3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
+G: | A1″ | derive the saturation threshold and compare to the **Schwinger field** `E_S = 1.323×10¹⁸ V/m` (the measured onset of vacuum nonlinearity) | **[OPEN]** |
+G: | B2′ | reproduce `T = 2.7255 K` **and** the FIRAS blackbody to **< 50 ppm** | **[OPEN] — the gate** |
+G: 2. **A** — a bond-switch saturation threshold derived honestly that lands **orders off** the Schwinger field
+G: | B | FIRAS blackbody bound | < 5×10⁻⁵ (50 ppm) | **the gate** |
+V: # FLM09 — Verdict: Reconnection Light and CMB Arrival
+V: **Classification: ACTIVE — Arm A step A1″ RESOLVED; A2 and Arm B OPEN.**
+V: | E(L) = ℏc/(e L²) self-consistency | ratio 1.000000 **PASS** |
+V: **Class:** [INHERITED] consistency win — all-derivation basis (m_e, c, ℏ, e); not a new derivation of E_S.
+V: **[OPEN]** — pending FLM10 lattice solver (finite-N isotropy / gold-standard glass).
+O: self-consistency ratio = 1.000000 [PASS]
+FLAGS: MISSING: ; ident:2 ; res pass/fail 1/0 verd pass/fail 3/1
+
+### 01/FLM10_Per_Spation_Lattice_Solver  | status: SPEC (upgrade 2026-06-27). | words 3272 | code 2 outs 3 verd 0 runlog 0 | gate True prereg True
+Q: The per-spation contact mechanics on the (FLM08) corner-sharing tetrahedral lattice has **never been computed**. Everything above L1 rests on continuum summaries of it. 2. **Why does it matter?** **Five** open investigations all reduce to this one solver — FLM09-A2 (isotropy / `ω(k)`), PPT07 (the `6π⁵` wake integral), FLM03/04 (
+F: A network that stays *anisotropic* as it grows (kills Lorentz emergence); a `v(r)` that won't decay; a wake ratio that needs a target plugged in; a `W=2` knot that refuses to decay. 5. **How will we know we're done?** At least the **isotropy residual** is REPRODUCED (not plugged), with no coefficien
+G: > **FLM10 is the exemplar** the `PERFECT_PROMPT_TEMPLATE` was validated against (excessive detail + gates,
+G: - *Method:* drive the proton surface at `v₀ = 1.831c`; propagate rotation outward via the traction /
+G: *Checkpoints:* gate after each phase; if Phase 1's isotropy fails, **stop and report** (it falsifies the FLM08
+G: linearised hinge potential, a finite-`N` extrapolation) — match within ~50%, every approximation flagged.
+G: - Phase thresholds (committed before run): 10%, 50%
+O: ISOTROPY-RESIDUAL SUMMARY (the Phase-1 headline)
+O: VERDICT seed: crystal A^U=0.073 is FIXED & cubic-anisotropic; the amorphous
+FLAGS: MISSING: ; ident:3 ; res pass/fail 0/0 verd pass/fail 0/0
+
+### 01/FLM11_Tape_Measure_and_Ruler_Count  | status: SPEC. | words 4120 | code 1 outs 1 verd 2 runlog 1 | gate True prereg True
+Q: How many genuinely independent "fundamental properties" the medium has, and whether that number is the count of the form's measurable degrees of freedom (a geometric fact) rather than a list inherited from experiment. 2. **Why does it matter?** — It explains *why unification looks impossible from inside the medium* (every instru
+F: §⑧ falsifiers with numeric triggers: a DoF count that disagrees with the independent-ruler count without explanation; a straight projection that is *not* among the form's DoF; or an irreducibly ambiguous count. 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics
+G: - **Gate / metric:** the Lemma must be stated with symbols (Π_a, ⟨L,a⟩) and must *predict* the impossibility of measuring a cross-axis relation with one instrument. No numeric gate here; thi
+G: - **Gate:** P3 forbidden until P2 yields a committed integer **or** a documented OPEN on the count. **OUT OF SCOPE:** computing magnitudes of the properties (mass values, moments) — this pha
+G: 5. **`RUN_LOG.md`** — mandatory: Pre-Run Commitment Block (incl. the **pre-committed integer P** and fifth-ruler prediction), ADJ-### entries, phase gates.
+G: - Phase gates: P1 (Lemma stated, symbols) → P2 (count = pre-commit) → P3 (exactly one zero-grip = W=0) → P4 (map to physics' four)
+V: > **Author:** J. C. Harvey, Melbourne. **Status:** RUN OUTPUT (2026-07-01).
+V: - **Winding W** (`law_VI::winding`): `W=1` electron, `W=3` proton, **`W=0` open line**. W discretely *labels* the form; it is not a continuously read ruler. — **DERIVED**.
+V: | F | through / straight axis (open line) | **NONE** | — (no ruler) | residue | grip=NONE; W=0 open line |
+V: | G | core-ring translation (`T₁` / Level-2 position) | — | — | **excluded** | kinematic position, not an identity property |
+V: | H | surface orientation (Level-4 `ξ_s3`) | — | — | **excluded** | frame choice (direction of already-counted axes) |
+O: [P3 FLAG] residue = straight axis: PASS
+O: [P3 FLAG] residue maps to W=0 : PASS (neutrino = open winding)
+O: OVERALL: ALL GATES MET (P2+P3 reproduce pre-commit)
+FLAGS: MISSING: ; Gcode:2 ; ident:10 ; res pass/fail 3/0 verd pass/fail 10/1
+
+### 01/FLM13_Koppa_Route_to_the_Action  | status: SPEC. | words 3313 | code 1 outs 1 verd 2 runlog 1 | gate True prereg True
+Q: Whether the quantum of action ℏ is an *independent* fundamental, or the **circulation quantum of the W=1 vortex** — the bottom rung of the koppa ladder — and if so whether its *value* can be read off the ladder without ℏ ever entering the inputs. 2. **Why does it matter?** — It is the **last classical-sector seat**. Length (kopp
+F: §⑧: a "value derivation" that is secretly an identity (ℏ on both sides); an ℏ-free path that on audit still routes through atomic spectroscopy; or a claim that both ℏ *and* m_e are independently derived (violates the one-mass-seat count). 5. **How will we know we're done?** — **Dual verdict:** promp
+G: ## 4. Investigation Strategy (≥4 phases — gate each)
+G: - **Gate:** all three forms equal to ≤1e-6 relative; the circulation quantisation is *derived from the superfluid*, not asserted. **OUT OF SCOPE:** claiming this fixes ℏ's value (that is P2)
+G: - Phase gates: P1 (three forms agree, circulation mechanical) → P2 (delete-test verdict) → P3 (one seat → FLM12) → P4 (ℏ-free yes/no)
+V: > J. C. Harvey, Melbourne · executed 2026-07-03 · companion to `FLM13_VERDICT.md` and
+V: > `flm13_results.txt`. Every line flagged DERIVED / IDENTITY / OPEN per R5.
+V: ## 4. The frontier (OPEN, with the reason standing)
+V: # FLM13 — VERDICT
+V: ## Dual verdict
+O: VERDICT P4: NO hbar-free path to the VALUE. The irreducible seat is one
+O: GATES: P1 PASS (three forms <=1e-6), P3 PASS (W+1 within 1%, cross-check within 0.5%)
+O: DUAL VERDICT: prompt completion A; physics class NATIVE (ROLE + one-seat collapse);
+FLAGS: MISSING: ; ident:24 ; res pass/fail 2/0 verd pass/fail 5/0
+
+### 01/FLM14_Rotating_Spation_Sequential_Occupancy  | status: SPEC (committed 2026-07-04 — "I am going | words 1292 | code 8 outs 8 verd 1 runlog 1 | gate True prereg True
+Q: Whether the spation carries ROTATION as a real degree of freedom (an internal phase/clock, geared cell-to-cell), and whether electron positions are **sequential** — a deterministic, gear-stepped tour of seats — rather than a static distribution. This is the shared premise under every major open in the ledger. 2. **Why does it ma
+F: §⑧: any of the three ladders missed simultaneously; a sequence law that must be re-tuned per observable (knob, not mechanism); rotation breaking FLM10 isotropy; or the sequence reproducing Born/Bell only by importing the QM weighting (CONSTRUCTION, not derivation — the QM05 lesson). 5. **How will we
+G: ## 2. Phases (gate each; pre-commit in RUN_LOG.md)
+G: Deliverable: the update rule, with NO per-observable parameters. Gate: rule stated in ≤5
+G: lattice — anisotropy ≤ the static lattice's A^U within 20%).
+G: rule. Gate: the THREE-SEAT table simultaneously — Δr(H,n=2)=0.272 fm, Δr(H,n=3)=0.410 fm,
+G: Δr(He⁺,n=2)=0.452 fm — each within 10%, no per-seat tuning. (PPT08_KOPPA_TARGET grades this;
+V: # FLM14 — VERDICT (first run, 2026-07-04)
+V: - **P1-G1 PASS** — the stepping rule closes in five native quantities: {φ, ω₀, g=−1, W, β}.
+V: - **P1-G2 PASS (the run's earned result)** — gearing frustration on FCC neighbourhoods =
+V: - **P1-G3 FAIL (rule-form-1 KILLED as implemented)** — front-speed anisotropy geared/ungeared
+V: (`2ωt` in each bond test): windows open in lattice-wide synchronous waves, and the frozen
+O: P3–P5: gated on P2 per RUN_LOG — see verdict.
+O: rift 0.0483 (gate <0.01: FAIL) coverage 71% mean |r| occ = nan
+O: P1 pass regime (ratio <= 1.2): beta in [1.0]
+FLAGS: MISSING: ; ident:12 ; res pass/fail 23/35 verd pass/fail 21/22
+
+### 01/FLM15_Casimir_as_Relay_Exclusion  | status: OPEN — specification seed (benchmark-coverage alignment 2026-07-29; ca | words 942 | code 1 outs 1 verd 1 runlog 1 | gate True prereg True
+Q: Two conducting plates a micron apart are pushed together with pressure ∝ 1/d⁴ — the Casimir result, measured to ~1% (Lamoreaux and successors). The prevailing account books it as vacuum-energy mode exclusion. ## SDT footing This should be the most SDT-shaped phenomenon in the catalogue: it is occlusion with plates. The medium re
+F: exponent ≠ 4, or coefficient off beyond tolerance (the measured 1% leaves no room). - Anchors: Lamoreaux-class measurements; the standard coefficient. - Tolerance: exponent exact; coefficient ±5% opening, ±1% target. ## Benchmark linkage Catalogue row B98 · the highest-probability near-term win in t
+G: > row B98). **Author:** J. C. Harvey, Melbourne. Gateways binding.
+G: - Rejection criterion (populated): exponent ≠ 4, or coefficient off beyond tolerance (the
+G: - Tolerance: exponent exact; coefficient ±5% opening, ±1% target.
+V: ## Status
+V: `FLM15_LITERAL_ROUTE_EXCLUDED__FLOOR_SPECIFIED`
+V: - Round 1 (the seed read literally) is excluded: the rejection criterion was met by 11 orders of magnitude.
+V: | 1 | Gap-mode counting, TD06 counted occupation at T_CMB, ε = hν | Excluded. d-independent pressure 1.39e-14 Pa |
+V: Four known-answer checks passed before any physics round: Poisson summation of the Gaussian
+FLAGS: MISSING: ; res pass/fail 1/0 verd pass/fail 0/1
+
+### 02/PPT01_Vortex_Equilibrium_Quantisation  | status: SPEC (upgrade 2026-06-27). | words 1602 | code 1 outs 0 verd 2 runlog 0 | gate True prereg True
+Q: [PPT01] PPT01: Vortex Equilibrium Quantisation — Mathematical Framework: *(unfilled by the 2026-06-27 bulk template upgrade — write the single measurable gap before the next run)* 2. **Why does it matter?** — Stack position / downstream blockers (see `INVESTIGATION_STACK.md`). 3. **How will we find out?** — Gated phases in §④; n
+F: §⑧ falsification tests with numeric triggers. 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN). --- ## 1. Definitions | Symbol | Name | Value/Range | Meaning | |--------|------|-------------|--------
+G: 3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
+G: | A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimin
+G: - Post-hoc tolerance widening · coefficient plugs · `atomic::`/GM/G in Phase-1 native chain · Snell/reciprocity-only as Fermat PASS.
+V: > **Status**: RESOLVED
+V: > **Tool**: `cq02_vortex_equilibrium.cpp` (469 lines, 5/5 proofs pass)
+V: | PPT01-1a | W=1 budget = c² | **PASS** |
+V: | PPT01-1b | W=3 budget = c² | **PASS** |
+V: | PPT01-2a | a_e/a_p consistency | **PASS** |
+FLAGS: MISSING: ; ident:1 ; res pass/fail 0/0 verd pass/fail 10/0
+
+### 02/PPT02_Fine_Structure_from_Topology  | status: SPEC · §K-DEEPENED 2026-07-13 (300% rule, HUNTER §K.3). | words 2973 | code 3 outs 1 verd 1 runlog 0 | gate True prereg True
+Q: Why the hydrogen ground-state tour gears down to exactly α = 1/137.036 of the relay speed c.** The closure `v = αc` is exact *given* α; the open gap is the *value* of α — i.e. the size of the W=1 electron's lattice wake `r_e` relative to its coherence scale `ƛ_Ce`, currently an input, not a derivation (`laws.hpp:1403` poses this
+F: §⑧ falsifiers with numeric triggers; any route that only *back-solves* α from a length already scaled by α is CIRCULAR and dies (§④.circularity gate). 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN)
+G: 3. **How will we find out?** — Three declared, competing native routes (§④ A/B/C), gated, native mechanism before any `atomic::`/rival comparison. α is treated throughout as a **velocity gea
+G: 4. **What would prove us wrong?** — §⑧ falsifiers with numeric triggers; any route that only *back-solves* α from a length already scaled by α is CIRCULAR and dies (§④.circularity gate).
+G: Each route must (i) name its non-α-scaled seed, (ii) pass the circularity gate (§4), (iii) state a pre-committed numeric metric, (iv) formulate its seed in movement terms.
+G: - **Phase A1:** compute the W=1 solid-torus displacement volume from $\ell_P$ and the winding geometry (Law VI); **metric:** yields a length ratio $r_e/\bar\lambda_{C,e}$ within committed % 
+G: - **Phase B1:** import FLM14's dwell-fraction result (verify on file first — it is un-verdicted); test whether the ground-state gear $v/c$ equals the dwell/tour ratio. **Metric:** predicted 
+V: > **Status**: RESOLVED (NEGATIVE RESULT)
+V: > **Tool**: `cq03_fine_structure.cpp` (11/11 proofs pass, exit 0 — re-verified June 2026)
+V: > **Seat-closure addendum (2026-06-20):** the koppa-rung reading is now demonstrated from the **raw measured spectrum** — see *Seat-Closure from the Spectrum* below + `cq03_seat_closure.cpp` (2/2 PASS
+V: ## Proof Results (11/11 PASS)
+V: | PPT02-1a | g_electron = α | **PASS** (exact) |
+FLAGS: MISSING:Investigations/02;Investigations/01 ; ident:21 ; res pass/fail 0/0 verd pass/fail 16/0
+
+### 02/PPT04_Neutrino_Magnetic_Moment  | status: RESOLVED (narrative) → re-run for §0 compliance. | words 402 | code 1 outs 1 verd 2 runlog 0 | gate True prereg True
+Q:  · `PROMPT_EXECUTION_PROTOCOL.md` · §0 anti-creep (R0–R5). > **Engine:** `#include <sdt/laws.hpp>` **only** — refactor `ppt04_neutrino_magnetic_moment.cpp` (no local constants). > **Prior audit:** Local `namespace constants`, `G_F`, `mass_kg` driver — **protocol fail**. --- ## ⓪ The Golden Rule 1. **Gap:** μ_ν = 0 from W=0 (no ℓ=2 wake) — falsifiable vs SM ~10⁻²⁰ μ_B. 2. **Stakes:** PPT09 winding; charge-moment correlation; E58 monopole thread. 3. **How:** Phase 0 refactor to laws.hpp; Phase 
+F: iable vs SM ~10⁻²⁰ μ_B. 2. **Stakes:** PPT09 winding; charge-moment correlation; E58 monopole thread. 3. **How:** Phase 0 refactor to laws.hpp; Phase 1 topology table W=0,1,3; Phase 2 SM comparison column (OBSERVED); Phase 3 sensitivity gap. 4. **Falsify:** Any non-zero μ_ν at 10⁻²⁰; W=0 assignment 
+G: ### Phase 0 — Refactor (GATE)
+G: ### Phase 1 — Topology table (GATE)
+V: > **Classification**: Pure theoretical derivation
+V: > **Status**: COMPLETE
+V: > **Source reference**: `neutrino.hpp:9`, `Theory/01_Closure_Derivations.md:32`, `Theory/03_Open_Problems.md:41`
+V: This investigation formally derives the SDT prediction that all neutrino flavours possess **exactly zero** magnetic moment (μ_ν ≡ 0). The proof proceeds from the wake tensor ℓ-expansion applied to the
+V: ### I.2 Vortex Topology Classification
+FLAGS: MISSING: ; res pass/fail 0/0 verd pass/fail 3/1
+
+### 02/PPT06_Spation_Traction_from_Trefoil  | status: RESULTS-ON-FILE, UN-VERDICTED · §K-DEEPENED 2026-07-13 (HUNTER §K.3). | words 1113 | code 2 outs 0 verd 1 runlog 0 | gate True prereg True
+Q: Whether the completed results (**v_phase = 1.831c** at R_p, **traction ratio T = 3(W+1) = 12**, three ℓ-channels, ~10⁸ nuclear→atomic gear) are **DERIVED or fitted** — no verdict has ever graded them. 2. **Why does it matter?** — 1.831c is load-bearing across the repo (the 1.83c counter-seat gives μ_n sign+order, Q_β, the neutro
+F: §⑧: if T = 12 requires choosing W, or the ℓ=1/2/3 → Coulomb/magnetic/orbit map is asserted not derived, downgrade to CONVERGENCE/OPEN. 5. **How will we know we're done?** — `PPT06_VERDICT.md` filed with dual verdict; every [x] criterion re-graded DERIVED / COMPUTED / ASSUMED. ## The Question (unchan
+V: > **Classification**: Pure theoretical derivation
+V: > **Status**: COMPLETE
+V: The magnetic moment μ_p = 2.793 μ_N arises because the charge traces the trefoil 3 times poloidally per toroidal circuit. Each pass generates a current loop. The three loops sum constructively for the
+V: The proton is not a passive lump of matter sitting in a field. It is a **mechanical engine** — a (2,3) torus knot spinning at c, demanding 1.831c from every spation it touches. The spation lattice, li
+FLAGS: MISSING:Theory/01 ; ident:1 ; res pass/fail 0/0 verd pass/fail 0/0
+
+### 02/PPT07_Proton_Electron_Mass_Ratio  | status: COMPLETE | words 288 | code 1 outs 0 verd 1 runlog 0 | gate False prereg False
+Q: ectron mass ratio has a valid Law-IV displaced-volume construction when the electron is treated as a finite-width point body on its 720-degree Bohr-seat closure and the proton volume is packed into a W=3 torus seated at the measured proton charge radius. ## Inputs and provenance - \(a_0,\alpha,c,R_p,m_e,m_p\): `sdt::laws::measured`. - \(N=6\pi^5\): declared geometric packing count. - \(b_e\): symbolic point-electron body radius. Any numerical value is provisional and must not affect the dime
+G: - **Bohr velocity:** \(v(a_0)/c=\alpha\) within machine precision.
+V: > **Status:** RESOLVED CONSTRUCTION — shared-input, not an independent prediction
+V: - **Resolved:** the geometric meaning of the mass ratio as conserved
+V: - **Still owed:** the absolute W=1 point-body width. This does not reopen the
+FLAGS: MISSING: ; res pass/fail 0/0 verd pass/fail 1/0
+
+### 02/PPT08_Angular_DOF_from_Trefoil  | status: SPEC (upgrade 2026-06-27). | words 1537 | code 1 outs 1 verd 1 runlog 0 | gate True prereg True
+Q: [PPT08] CQ-34 — Angular Degree of Freedom from Trefoil Wake: *(unfilled by the 2026-06-27 bulk template upgrade — write the single measurable gap before the next run)* 2. **Why does it matter?** — Stack position / downstream blockers (see `INVESTIGATION_STACK.md`). 3. **How will we find out?** — Gated phases in §④; native mechan
+F: §⑧ falsification tests with numeric triggers. 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN). **Author:** James Christopher Tyndall, Melbourne, Australia **Date:** June 2026 **Status:** SPEC **Depe
+G: 3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
+G: **PASS:** A native angular DOF emerges from the trefoil wake geometry, with the correct number of states and the correct sign for the s-p splitting. The Lamb shift value is derived to within
+G: - Phase thresholds (committed before run): 10%
+G: | A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimin
+G: - Post-hoc tolerance widening · coefficient plugs · `atomic::`/GM/G in Phase-1 native chain · Snell/reciprocity-only as Fermat PASS.
+V: # PPT08 — Honest Rebuild · VERDICT (2026-07-02)
+V: ## Verdict
+V: > **Prompt: A** (rebuilt + executed) · **Physics: OPEN** (SDT mechanism computed, found insufficient) ·
+V: **PPT08 stays OPEN.** The extra measured hydrogen splittings are **not** made by the proton's far field. In SDT they
+V: it. Left OPEN and honestly reframed as dynamical — not modelled here, and not faked.
+O: SDT VERDICT (raw data in, no borrowed nouns, nothing asserted):
+FLAGS: MISSING: ; ident:1 ; res pass/fail 0/0 verd pass/fail 0/0
+
+### 02/PPT09_Winding_Number_Stability  | status: SPEC (upgrade 2026-06-27). | words 1697 | code 1 outs 1 verd 2 runlog 0 | gate True prereg True
+Q: [PPT09] PPT09: Winding Number Stability and Reconnection Dynamics: *(unfilled by the 2026-06-27 bulk template upgrade — write the single measurable gap before the next run)* 2. **Why does it matter?** — Stack position / downstream blockers (see `INVESTIGATION_STACK.md`). 3. **How will we find out?** — Gated phases in §④; native 
+F: §⑧ falsification tests with numeric triggers. 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN). ## Investigation Prompt > **Objective**: Prove why W=2 vortices spontaneously reconnect while W=3 (tref
+G: 3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
+G: - Phase thresholds (committed before run): 5%
+G: | A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimin
+G: - Post-hoc tolerance widening · coefficient plugs · `atomic::`/GM/G in Phase-1 native chain · Snell/reciprocity-only as Fermat PASS.
+V: > **⛔ RETRACTED — FABRICATED VERDICT (HUNTER scour 2026-07-02).** The Class-A/PASS claims below are contradicted by the tool's own output: `ppt09_occlusion_integral.cpp` compiles and prints `Energy ra
+V: > **Status**: RESOLVED
+V: > **Classification**: Class A (Analytical Proof Complete)
+V: > **Verdict**: PASS — W=1,3-only conjecture VALIDATED
+V: | Proof | Description | Result | Classification |
+FLAGS: MISSING: ; ident:2 ; res pass/fail 0/0 verd pass/fail 16/1
+
+### 02/PPT10_Neutrino_as_Straight_Light  | status: SPEC. | words 4227 | code 1 outs 1 verd 2 runlog 1 | gate True prereg True
+Q: Whether the neutrino is the **zero-pitch limit of the emission ladder** (the electron driven all the way onto the proton surface — *straight light*) and, if so, whether its ~20-order-of-magnitude weaker interaction follows from a single law **coupling = f(transverse pitch)** as pitch → 0 — **without** importing the weak charged 
+F: §⑧, numeric. If straightening **cannot in principle** reduce coupling (a straight photon is still a photon, spin-1, grips charge) ⇒ **KILL** straight-light. If continuous pitch is **required** but the middle of the gap is **provably empty** AND no admissible snap mechanism exists ⇒ pitch=grip is in 
+G: spine of the whole neutrino set. If it holds, `neutrino.hpp`'s "W=0 open winding, propagates *with*
+G: 3. **How will we find out?** — Four gated phases: define **transverse pitch** quantitatively for a
+G: (ℓ=1) → no moment (ℓ=2) → propagates *with* the relay → near-zero interaction," and quantifies it via
+G: narrative**; PPT10's job is to turn "propagates with the relay" into a **coupling law in pitch** and
+G: > Gate rule: Phase N+1 forbidden until Phase N is **PASS-GATE** or an explicit **DEFER/OPEN** is
+V: **F1 result — PASS-GATE with logged caveat (ADJ-001).** On the **straight-light line** — the W=1
+V: `p_T → 0`. Straightening genuinely removes grip. **F2 PASSES** — straight-light is *not* killed at the
+V: an IDENTITY-PASS (F3) and is FORBIDDEN** — not taken.
+V: with a real ~5-order residual — *not* a NATIVE PASS.
+V: hard-to-detect forward channels are not excluded by any measurement in hand.
+FLAGS: MISSING: ; ident:9 ; res pass/fail 0/0 verd pass/fail 11/0

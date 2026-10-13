@@ -162,3 +162,15 @@ Not required for the verdict; this is the payoff of doing it well.
 ---
 
 *CM03 · 10× upgrade 2026-06-29 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** The Si gap "recovered 1.300 eV against an input of 1.300 eV (0.00%)" returns its own input, the gap magnitudes are matched with one shared factor f = 0.944 fitted (CALIBRATED(1), minimax) on the same three solids it is scored on, and Sn-grey misses by 11.4×.
+
+**Correction:** Drop the recovered-input row from the tally, fit f on two solids and test the third, and report the Sn-grey miss as a failure.
+
+**Status:** RULE RECORDED — corrected gate or definition applies to the next run; the earlier result is not re-scored and nothing was re-run.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

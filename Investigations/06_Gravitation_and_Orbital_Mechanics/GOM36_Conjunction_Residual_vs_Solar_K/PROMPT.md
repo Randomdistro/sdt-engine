@@ -42,3 +42,15 @@ informative. No free solar-**K** adjustment.
 A `SOLAR_K_RESIDUAL_SIGNAL` label means only that the hold-out residual tracks
 the frozen-**K** delay-rate proxy under this calibration. It is **not**
 framework EMPIRICALLY SURVIVES. Media, ramps, and IF definition remain open.
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** Rows C1–C3 are scored PASS for fitting a train-half scale (CALIBRATED(1)), reporting a residual and computing a delay, which are processing steps, while the one physical gate (correlation) fired and was time-confounded.
+
+**Correction:** Count only the correlation gate and mark C1–C3 as procedure.
+
+**Status:** RULE RECORDED — corrected gate or definition applies to the next run; the earlier result is not re-scored and nothing was re-run.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

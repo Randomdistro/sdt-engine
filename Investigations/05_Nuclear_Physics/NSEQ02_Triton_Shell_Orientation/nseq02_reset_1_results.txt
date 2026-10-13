@@ -1,0 +1,29 @@
+NSEQ02 blank-slate run 1 (registered in NSEQ02_RESET_ASSESSMENT_2026-10-10.md sections 0-2)
+====================================================================
+
+[V1] unit norms: worst deviation 1.11e-16 -> met
+[V2] tetrahedron angle 109.471221 (analytic 109.471221), max deviation in the opening tetrahedron 2.84e-14 ; cube-edge angle 70.528779 (analytic 70.528779)
+(A) author dual tetrahedra: 8 vectors, 28 pairs, min angle 70.5288 deg, max 180.0000 deg
+  histogram: 70.5288 x12; 109.4712 x12; 180.0000 x4;
+  second-moment eigenvalues: 2.666667, 2.666667, 2.666667
+  opening tetrahedron edge angles 109.471221 .. 109.471221 ; closing 109.471221 .. 109.471221 ; partition sizes 4 + 4 ; latitudes of the band vertices -19.4712 (opening), 19.4712 (closing)
+[V3] cube-vertex test: histogram 12/12/4 (12/12/4), isotropic tensor 8/3 x3 (yes) -> met
+
+VALIDATIONS: met
+
+(B) flat hex-bipyramid (rejected misread): 8 vectors, 28 pairs, min angle 60.0000 deg, max 180.0000 deg
+  histogram: 60.0000 x6; 90.0000 x12; 120.0000 x6; 180.0000 x4;
+  second-moment eigenvalues: 2.000000, 3.000000, 3.000000
+  tetrahedron from pole + equator az 0,120,240: edge angles 90.0000 .. 120.0000 -> NOT regular
+
+(C) planar: four antipodal pairs in z = 0 (regular octagon, example spacing): 8 vectors, 28 pairs, min angle 45.0000 deg, max 180.0000 deg
+  histogram: 45.0000 x8; 90.0000 x8; 135.0000 x8; 180.0000 x4;
+  second-moment eigenvalues: 0.000000, 4.000000, 4.000000
+
+Radius rule (opening 1.05, closing 0.95; relative units):
+  mean radius opening 1.0500 > closing 0.9500: yes (C3: restates the inputs)
+  opening-opening distance 1.7146 ; closing-closing 1.5513 (edge = r sqrt(8/3))
+  nearest opening-closing 1.1576 (at 70.5288 deg) ; farthest 2.0000 (antipodal, r1 + r2)
+
+Capacity identity: stella octangula vertex count 8 = B(3) = 2(3+1) = 8 (a count)
+Numeric gate on a measured nuclear quantity (audit correction): OWED, orientation alone enters no capacity, binding or radius (D3)

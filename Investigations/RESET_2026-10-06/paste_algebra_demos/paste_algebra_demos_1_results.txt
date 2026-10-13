@@ -1,0 +1,162 @@
+Algebraic structures of the pasted text: two demonstrations each (2026-10-08)
+=============================================================================
+
+[V] finite-difference d2 residual 8.04e-09 ; Simpson integral of sin on [0,pi] = 2.000000000000 -> met
+
+A1 gamma = (1 - v^2/c^2)^(-1/2)
+  A: gamma at beta = 0.1, 0.5, 0.9, 0.99, 0.999: 1.005038 1.154701 2.294157 7.088812 22.366272 
+  B: v = 30 km/s: gamma - 1 = 5.006925e-09 ; series beta^2/2 = 5.006925e-09 ; ratio 1.000000008
+
+A2 longitudinal and transverse masses m_par = gamma^3 m, m_perp = gamma m
+  A: beta = 0.50 : m_par/m = 1.5396, m_perp/m = 1.1547 (Einstein 1905 transverse gamma^2 m = 1.3333)
+  A: beta = 0.90 : m_par/m = 12.0745, m_perp/m = 2.2942 (Einstein 1905 transverse gamma^2 m = 5.2632)
+  A: beta = 0.99 : m_par/m = 356.2217, m_perp/m = 7.0888 (Einstein 1905 transverse gamma^2 m = 50.2513)
+  B: dp/dv by central difference at beta = 0.9: 12.07451238 ; gamma^3 = 12.07451231 (relative 5.9e-09) ; circular motion: |dp/dt|/(v omega) = 2.29415734 against gamma = 2.29415734
+
+A3 P^mu = m U^mu, E = gamma m c^2, p = gamma m v, E^2 - p^2 c^2 = m^2 c^4
+  A: beta = 0.100 : (E^2 - p^2 c^2)/(m^2 c^4) - 1 = +0.0e+00 (electron)
+  A: beta = 0.900 : (E^2 - p^2 c^2)/(m^2 c^4) - 1 = -1.9e-15 (electron)
+  A: beta = 0.999 : (E^2 - p^2 c^2)/(m^2 c^4) - 1 = -1.4e-13 (electron)
+  B: beta = 0.01 : (E - mc^2)/((1/2) m v^2) = 1.00007501 ; series 1 + 3 beta^2/4 = 1.00007500
+  B: beta = 0.10 : (E - mc^2)/((1/2) m v^2) = 1.00756305 ; series 1 + 3 beta^2/4 = 1.00750000
+
+A4 U^mu U_mu = -c^2 (hyperbolic constraint)
+  A: U^2/c^2 before boost = -1.000000000000, after a boost of 0.6 c along x = -1.000000000000 (both -1)
+  B: rapidities add: tanh(eta1 + eta2) = 0.8888888889 ; (b1 + b2)/(1 + b1 b2) = 0.8888888889 ; cosh^2 - sinh^2 = 1.000000000000
+
+A5 null cone s^2 = -c^2 (t - t0)^2 + |x - x0|^2 = 0 and the lookback radius r = c (t0 - t)
+  A: one year of lookback: r = 9.460730e+15 m = 1.000000 light-years ; s^2/(c^2 dt^2) = 0.0e+00
+  B: s^2 invariant under a boost of 0.8 c: -6.9653526352e+17 and -6.9653526352e+17 (relative difference 4.4e-16)
+
+B1 c = 1/sqrt(eps0 mu0): speed = sqrt(stiffness/density)
+  A [ext]: 1/sqrt(eps0 mu0) = 299792458.000006 m/s against c = 299792458.000000 m/s (relative 2.2e-14)
+  B [ext]: sqrt(gamma P/rho), air 1.4, 101325 Pa, 1.204 kg/m^3 = 343.2 m/s ; sqrt(K/rho), water 2.2e9 Pa, 998 = 1485 m/s ; sqrt(E/rho), steel rod 200e9 Pa, 7850 = 5048 m/s
+
+B2 Maxwell stress tensor T_ij = eps0 (E_i E_j - (1/2) delta_ij E^2) + (1/mu0)(B_i B_j - (1/2) delta_ij B^2)
+  A [ext]: static field E = 1e6 V/m along z: T_zz = 4.4271 Pa (tension along the lines) = eps0 E^2/2 = 4.4271 ; T_xx = -4.4271 Pa (pressure across)
+  B: isotropic radiation, momentum flux Pi_ii = u <n_i^2> = 1.391599e-14, 1.391599e-14, 1.391585e-14 Pa ; u/3 = 1.391594e-14 ; engine law_I::P_rad = 1.391594e-14 (u = a T^4 = 4.17478e-14 J/m^3)
+
+B3 time-averaged flux <T_rr> = (1/2)(eps0 <E^2> + <B^2>/mu0)
+  A [ext]: solar constant 1361 W/m^2: E0 = 1012.65 V/m, B0 = 3.378e-06 T ; <T_rr> = 4.539807e-06 Pa ; I/c = 4.539807e-06 Pa (absorber pressure); reflector 2I/c = 9.079615e-06 Pa
+  B: CMB beam (one direction): pressure u = 4.17478e-14 Pa ; isotropic: u/3 = 1.39159e-14 Pa ; ratio of a beam to the isotropic pressure = 3.000
+
+B4 Helmholtz: laplacian(psi) + k^2 psi = 0, and the Fresnel number F = a^2/(lambda L)
+  A: plane wave residual -8.9e-05 (relative to k^2 psi = -27.025) ; spherical wave e^{ikr}/r, (1/r) d2(r psi)/dr2 + k^2 psi: residual 1.2e-04
+  B: Earth, 1 AU, lambda = l_P                    F = 1.679e+37 (geometric shadow persists)
+  B: Earth, 1 AU, lambda = 1.06 mm (CMB peak)     F = 2.560e+05 (geometric shadow persists)
+  B: baryon (0.84 fm), 1 m, lambda = 1.06 mm      F = 6.657e-28 (diffraction fills the shadow)
+  B: baryon (0.84 fm), 1 m, lambda = l_P          F = 4.366e+04 (geometric shadow persists)
+
+B5 dispersion omega(k) and group velocity v_g = d omega/dk
+  A: plasma omega^2 = c^2 k^2 + wp^2, omega = 2.000 wp : v_g/c = 0.86603, v_p/c = 1.15470, v_p v_g/c^2 = 1.0000000000
+  A: plasma omega^2 = c^2 k^2 + wp^2, omega = 1.100 wp : v_g/c = 0.41660, v_p/c = 2.40040, v_p v_g/c^2 = 1.0000000000
+  A: plasma omega^2 = c^2 k^2 + wp^2, omega = 1.001 wp : v_g/c = 0.04469, v_p/c = 22.37745, v_p v_g/c^2 = 1.0000000000
+  B: discrete chain omega = (2c/l) sin(k l/2), k l = 1.570796 : v_g/c = cos(k l/2) = 7.071068e-01 (v_g -> 0 at the zone edge k = pi/l)
+  B: discrete chain omega = (2c/l) sin(k l/2), k l = 3.138451 : v_g/c = cos(k l/2) = 1.570796e-03 (v_g -> 0 at the zone edge k = pi/l)
+  B: discrete chain omega = (2c/l) sin(k l/2), k l = 3.141590 : v_g/c = cos(k l/2) = 1.570796e-06 (v_g -> 0 at the zone edge k = pi/l)
+
+C1 Doppler factor D(theta) = sqrt(1 - beta^2)/(1 - beta cos theta)
+  A: v = 370 km/s (beta = 1.2342e-03): forward D = 1.00123495 -> T = 2.728866 K, dipole T0 (D - 1) = 3.3659 mK (to first order T0 beta = 3.3638 mK)
+  B: backward D = 0.99876657 ; D(0)/D(pi) = 1.00247142 = (1+beta)/(1-beta) = 1.00247142 ; transverse D(90 deg) = 0.9999992384 = 1/gamma = 0.9999992384
+
+C2 momentum-flux integral over the sphere and the drag F = -(4/3) u sigma beta
+  A: beta = 0.001  : F/(u sigma) = -1.33333467e-03 ; -(4/3) beta = -1.33333333e-03 ; ratio 1.000001
+  A: beta = 0.010  : F/(u sigma) = -1.33346668e-02 ; -(4/3) beta = -1.33333333e-02 ; ratio 1.000100
+  A: beta = 0.100  : F/(u sigma) = -1.34680135e-01 ; -(4/3) beta = -1.33333333e-01 ; ratio 1.010101
+  A: beta = 0.500  : F/(u sigma) = -8.88888889e-01 ; -(4/3) beta = -6.66666667e-01 ; ratio 1.333333
+  B [ext]: the Earth (sigma = pi R^2 = 1.275e+14 m^2, v = 29.78 km/s): CMB drag F = 7.051e-04 N ; the centripetal force M v^2/AU = 3.540e+22 N ; ratio 2.0e-26
+
+C3 Fresnel drag v' = c/n + v (1 - 1/n^2)
+  A [ext]: water n = 1.333, v = 7 m/s: drag v(1 - 1/n^2) = 3.060531 m/s (coefficient 0.4372) ; exact relativistic velocity addition gives 3.060530 m/s (relative -9.1e-09)
+  B: limits: n = 1 gives 0.0, n -> infinity gives v ; at v = 0.5c, n = 1.5 the first-order formula gives 0.2778 c and the exact addition 0.2083 c
+
+D1 orbit equation d2u/dphi2 + u = GM/h^2 + 3 GM u^2/c^2 (u = 1/r; with koppa: GM = c^2 koppa)
+  A: Mercury (a, e from the engine, koppa = 1476.5989 m), 40 orbits: perihelion advance 5.018579e-07 rad/orbit = 42.9800 arcsec/century ; 6 pi koppa/(a(1-e^2)) = 5.018578e-07 (relative 1.8e-07)
+  B: photon sphere: u = koppa/(3 koppa) solves u'' = -u + 3 u^2 = 0 (residual 0.0e+00) ; a perturbation 1e-8 grows to 7.421e+01 of u0 over 5 radians (cosh(5) = 74.21, unstable)
+
+D2 light deflection: scalar form 2 GM/(c^2 b) against tensor form 4 GM/(c^2 b)
+  A: Sun, b = R_Sun: integrating u'' + u = 3 koppa u^2: deflection 8.489915e-06 rad = 1.7512 arcsec ; 4 koppa/b = 8.489860e-06 rad = 1.7512 arcsec (relative 6.5e-06)
+  B: the scalar-index (1911) value 2 koppa/b = 4.244930e-06 rad = 0.8756 arcsec ; tensor/scalar = 2.0000
+
+D3 time dilation dtau = dt (1 + Phi/c^2) (Phi = -c^2 koppa/r), g00 = -(1 + 2 Phi/c^2)
+  A: Sun surface: koppa/R = 2.122465e-06 ; sqrt(1 - 2 koppa/R) = 0.999997877532794 ; 1 - koppa/R = 0.999997877535046 ; difference -2.25e-12 (second order) ; note: the paste writes (1 - Phi/c^2) with Phi the positive magnitude and (1 + Phi/c^2), (1 + 2 Phi/c^2) with Phi negative
+  B [ext, B]: GPS: GM from g R^2 = 3.9805e+14 m^3/s^2 ; gravitational offset +45.66 us/day ; velocity offset -7.21 us/day ; net +38.45 us/day
+
+D4 Einstein 1911 scalar form c(r) = c0 (1 + Phi/c^2) and the delay it implies
+  A: at the Sun's surface c(R) = c (1 - z) : c z = 636.299 m/s lower (z = 2.122465e-06)
+  B: radar path Earth (1 AU) to 1.52 AU, impact parameter 1.5 R_Sun: a = 1: one-way delay (a koppa/c) L = 57.803 us, round trip 115.605 us (L = 11.7356)
+  B: radar path Earth (1 AU) to 1.52 AU, impact parameter 1.5 R_Sun: a = 2: one-way delay (a koppa/c) L = 115.605 us, round trip 231.211 us (L = 11.7356)
+
+E1 phase lag delta_phi = omega delta_t = omega (d/v - d/c)
+  A [ext]: glass plate 1 mm, n = 1.5, 500 nm: delta_phi = 6283.19 rad = 1000.0 cycles
+  B: delta_t = d (n - 1)/c = 1.6678e-12 s, the same for 400, 500, 700 nm: 1.6678e-12, 1.6678e-12, 1.6678e-12 s (delta_phi/omega with omega = 2 pi c/lambda)
+
+E2 conservation of throughput: closed integral S.dA in = closed integral S.dA out
+  A: point source P = 1 W: flux through spheres of radius 1, 10, 1e3 m: 1.000000000000 1.000000000000 1.000000000000 W
+  B: lossless slab n = 1.5 (Airy): T ranges 0.8521 .. 1.0000 with the phase; worst |T + R - 1| = 2.2e-16 (all the throughput is transmitted or reflected)
+
+E3 cosmic shell: T = T0 (1 + z), area ~ (1 + z)^-2, octave 1 + z = 2^n
+  A: T(z = 1100) = T0 (1 + z) = 3000.78 K ; the z for 3000 K: 1 + z = 1100.72
+  B: area ratio (1 + z)^-2 = 8.2495e-07 ; octaves n = log2(1 + z) = 10.1046 ; T0 2^10 = 2790.9 K ; 2^n = 1101.0000
+
+F1 Planck length l_P = sqrt(hbar G/c^3) and the Planck force c^4/G
+  A [ext G]: sqrt(hbar G/c^3) = 1.616255e-35 m against the engine l_P = 1.616255e-35 m (relative 1.5e-08, the uncertainty of G is 2e-5) ; c^4/G = 1.21026e+44 N
+  B [ext G]: (c^4/G) l_P = 1.95608e+09 J ; sqrt(hbar c^5/G) = 1.95608e+09 J = 1.2209e+19 GeV (equal)
+
+F2 N_disp = Omega0/v0 = 8 (R0/l_P)^3 with v0 = (pi/6) l_P^3
+  A: R0 = 8.40000e-16 m : Omega0 = 2.4827e-45 m^3, N_disp = 1.1230e+60
+  A: R0 = 8.41236e-16 m : Omega0 = 2.4937e-45 m^3, N_disp = 1.1280e+60
+  B: cell choices for Omega0 at R0 = 8.4e-16 m: sphere volume (pi/6) l^3: 1.1230e+60 ; face-centred cell l^3/sqrt2: 8.3159e+59 ; cubic cell l^3: 5.8803e+59
+
+F3 shell capacity N_cap(r) = 4 pi r^2 l_P / v0 = 24 (r/l_P)^2
+  A: r = 8.400e-16 m : N_cap = 6.4826e+40
+  A: r = 1.000e-09 m : N_cap = 9.1874e+52
+  B: n = 1e+03 shells of thickness l_P: exact sum of 24 j^2 = 4n(n+1)(2n+1) = 8.012004e+09 ; 8 n^3 = 8.000000e+09 ; ratio 1.001500 (1 + 1.5/n + ... = 1.001501)
+  B: n = 1e+06 shells of thickness l_P: exact sum of 24 j^2 = 4n(n+1)(2n+1) = 8.000012e+18 ; 8 n^3 = 8.000000e+18 ; ratio 1.000002 (1 + 1.5/n + ... = 1.000002)
+
+F4 conserved-volume displacement u(r) = Omega0/(4 pi r^2) = R0^3/(3 r^2)
+  A: surface integral of u over spheres of radius 1e-15, 1e-12, 1e-9, 1e-6 m divided by Omega0: 1.000000000000 1.000000000000 1.000000000000 1.000000000000 
+  B: u(R0) = 2.8000e-16 m = R0/3 = 2.8000e-16 ; u(1 nm) = 1.9757e-28 m ; u(1 um) = 1.9757e-34 m
+
+F5 terminal radius R_term = sqrt(R0^3/(3 l_P)) (u(R_term) = l_P) and its scaling with the baryon number
+  A: R_term = 3.4963e-06 m ; u(R_term) = 1.6163e-35 m against l_P = 1.6163e-35 m
+  B [ext masses]: R_term(N_b) = R_term(1) sqrt(N_b): N_b = 1: 3.496e-06 m ; Earth (N_b = 3.570e+51): 2.089e+20 m = 1.396e+09 AU ; Sun (N_b = 1.189e+57): 1.206e+23 m = 3.907e+00 Mpc ; R_term = R_CMB at N_b = 7.425e+64
+
+F6 strain energy of the displacement field: shear energy density 6 mu (Omega0/4pi)^2 / r^6 (K (div u)^2 = 0)
+  A: total shear energy outside R0 (mu = 1): quadrature 1.655142e-45 ; closed form 8 pi mu (Omega0/4pi)^2/R0^3 = 1.655142e-45 (relative -1.6e-12)
+  B: bulk term K (div u)^2: worst |div u|/(u/r) = 9.8e-13 -> zero ; the energy comes from the shear and is r^-6
+
+F7 the stated density variation rho(r) = rho0 (1 - Omega0/(4 pi r^3))
+  A: r = 1 R0 : rho/rho0 = 0.666667 (Omega0/(4 pi r^3) = R0^3/(3 r^3))
+  A: r = 2 R0 : rho/rho0 = 0.958333 (Omega0/(4 pi r^3) = R0^3/(3 r^3))
+  A: r = 10 R0 : rho/rho0 = 0.999667 (Omega0/(4 pi r^3) = R0^3/(3 r^3))
+  B: volume removed from R0 to 1e+01 R0, integral of (1 - rho/rho0) dV = Omega0 ln(r_max/R0) = 2.303 Omega0 (the displaced volume is Omega0: the integral diverges logarithmically)
+  B: volume removed from R0 to 1e+03 R0, integral of (1 - rho/rho0) dV = Omega0 ln(r_max/R0) = 6.908 Omega0 (the displaced volume is Omega0: the integral diverges logarithmically)
+  B: volume removed from R0 to 1e+06 R0, integral of (1 - rho/rho0) dV = Omega0 ln(r_max/R0) = 13.816 Omega0 (the displaced volume is Omega0: the integral diverges logarithmically)
+
+F8 the stated index n(r) = 1 + alpha Omega0/r
+  A: to give n - 1 = 2 koppa/r per body of N_b baryons, alpha N_b Omega0 = 2 N_b koppa_b, so alpha = 2 koppa_b/Omega0 = 1.0004e-09 m^-2 (koppa_b = 1.2419e-54 m per baryon, engine) : alpha is not dimensionless
+  B: the baryon census of the Sun from koppa_Sun/koppa_b = 1.1890e+57 ; M_Sun/m_p [ext, 1.989e30 kg] = 1.1892e+57 (relative -1.2e-04)
+
+F9 Gauss form: div g = -4 pi G rho  <->  div u = Omega0 delta(r)
+  A: flux of g = c^2 koppa/r^2 over spheres of radius 1e6, 1e9, 1e12 m (Sun's koppa): 1.667684e+21 1.667684e+21 1.667684e+21 (= 4 pi c^2 koppa = 1.667684e+21 m^3/s^2)
+  B: for one baryon u/g = Omega0/(4 pi c^2 koppa_b) at r = 1e-12, 1e-9, 1e-6 m: 1.770101e-09 1.770101e-09 1.770101e-09 s^2 (constant, both fall as 1/r^2)
+
+G1 v = c sqrt(koppa/r) = c/k(r), k(r) = k0 sqrt(r/R), koppa = R/k0^2
+  A: hydrogen (R = a_0, k0 = 1/alpha): v(a_0) = 1.0000 alpha c = 2.18769e+06 m/s ; v(4 a_0) = 0.5000 alpha c ; koppa = a_0 alpha^2 = 2.81794e-15 m (r_e = 2.81794e-15 m)
+  B: Sun (koppa = 1476.5989 m): surface v = 436758.1 m/s (engine v_surface_Sun = 436762) ; at 1 AU v = 29.784 km/s (the Earth's orbital speed)
+
+G2 z k^2 = 1: the spectroscopic redshift gives koppa = z R, the surface speed v = c sqrt(z) and the baryon census N_b = koppa/koppa_b
+  A: Sirius B (z = 80.42 km/s/c = 2.6825e-04 [search result, Barstow et al. 2005]; R = 5.84e6 m [B]): v = c sqrt(z) = 4910.123 km/s ; koppa = zR = 1566.6 m ; N_b = 1.261e+57 = 2.110e+30 kg = 1.061 solar masses [ext 1.989e30] (dynamical 1.018 +/- 0.011, from the search result)
+  B: Sun: predicted shift c z = 636.30 m/s ; error propagation d(koppa)/koppa = dz/z + dR/R: a 50 m/s uncertainty on a 636 m/s shift [B] gives 7.9% on koppa, against about 1e-10 for GM from the orbits [B]
+
+G3 modified Kepler a = -(c^2 koppa/r^2)(1 + beta koppa/r)
+  A: orbit equation u'' + u (1 - beta koppa U) = U, U = 1/(a(1-e^2)), beta = 6, Mercury: advance 5.018579e-07 rad/orbit ; exact 2 pi (1/sqrt(1 - beta koppa U) - 1) = 5.018579e-07 ; first order pi beta koppa/(a(1-e^2)) = 5.018578e-07
+  B: circular-orbit speed v^2 = c^2 x (1 + 6x): v = c at x = 0.333333 (r = 3 koppa) ; stability margin 1/(1 + 6x) at x = 1e-3, 1/3, 10: 0.9940, 0.3333, 0.0164 (positive for all x)
+
+H1 attenuation through a body: transmitted fraction exp(-tau), tau = (sigma/m) Sigma; force proportional to mass only while tau << 1
+  A: tau = 1e-14 : (1 - e^-tau)/tau = 1.0000000000 (the fraction of the linear force that survives)
+  A: tau = 1e-01 : (1 - e^-tau)/tau = 0.9516258196 (the fraction of the linear force that survives)
+  A: tau = 1e+00 : (1 - e^-tau)/tau = 0.6321205588 (the fraction of the linear force that survives)
+  A: tau = 1e+01 : (1 - e^-tau)/tau = 0.0999954600 (the fraction of the linear force that survives)
+  B [ext mean density 5515 kg/m^3]: column density through the Earth Sigma = 7.027e+10 kg/m^2 ; tau < 1e-13 requires sigma/m < 1.42e-24 m^2/kg ; tau = 1 would need sigma/m = 1.42e-11 m^2/kg

@@ -50,3 +50,15 @@ This investigation does **not** claim EMPIRICALLY SURVIVES on ODF residuals. It 
 - `Datasets/solar_propagation_2026-08/raw/jpl_horizons_earth_heliocentric_2002_157.csv`  
 - `Datasets/solar_propagation_2026-08/raw/jpl_horizons_cassini_heliocentric_2002_157.csv`  
 - **c** from SI (same as prior GOM tools): 299792458 m/s.
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** Gates C1–C3 PASS an identity (K = R/k²) and its numerical recovery (3.1e-16), and the folder has no numeric physics gate (gate flag false).
+
+**Correction:** Label them IDENTITY and gate on the SCE1 K value against an independently derived K.
+
+**Status:** ANNOTATED — label, status or tally corrected in the record; no re-score of earlier runs.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

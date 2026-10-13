@@ -150,3 +150,15 @@ EMC03 (residual surplus/deficit), the period-2 cancellation map
 ---
 
 *CH06 · 10× upgrade 2026-06-29 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** The H-bond energy gate is a 10–40 kJ/mol band (4×), which passes H2O at 12.40 against 20.8 measured (−40%), while NH3 (6.01) misses the band.
+
+**Correction:** Gate each dimer at ≤ 20% of its measured energy.
+
+**Status:** RULE RECORDED — corrected gate or definition applies to the next run; the earlier result is not re-scored and nothing was re-run.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

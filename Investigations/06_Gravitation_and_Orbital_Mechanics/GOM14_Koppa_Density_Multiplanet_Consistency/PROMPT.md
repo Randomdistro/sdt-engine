@@ -67,3 +67,15 @@ Fresh `RUN_LOG.md` · `gom14_rerun_<date>.txt` · `gom14_host_spreads_<date>.csv
 
 *GOM14 · first spec 2026-07-24 · Kepler guarantees the pass; the honesty is in saying so — and
 the value is 693 hosts of mass-free precision handed to the ledger case.*
+
+---
+
+## Audit correction 2026-10-05 (opening premise)
+
+**Finding:** The prompt states the claim is "Kepler's third law per host, written mass-free" and that any theory with Kepler predicts the consistency, so a pass cannot discriminate SDT from the standard account.
+
+**Correction:** Record it as a data-pipeline and class check, and gate only the real-versus-shuffled separation.
+
+**Status:** ANNOTATED — label, status or tally corrected in the record; no re-score of earlier runs.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

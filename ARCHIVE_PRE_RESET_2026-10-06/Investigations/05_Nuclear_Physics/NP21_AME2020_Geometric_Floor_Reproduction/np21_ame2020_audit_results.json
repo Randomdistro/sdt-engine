@@ -1,0 +1,66 @@
+{
+  "audit_date": "2026-08-09",
+  "classification": "GEOMETRIC_FLOOR_KILL_CONFIRMED",
+  "diagnostic_spearman_negative_resistance_vs_ame_binding": -0.5739767973659325,
+  "duplicate_equal_to_canonical": true,
+  "empirical_sdt_verdict": "NARROW_CLAIM_ADJUDICATED_ONLY",
+  "excluded_actions": [
+    "coefficient_fit",
+    "exponent_change",
+    "coefficient_ratio_sweep",
+    "semi_empirical_mass_formula_input",
+    "standard_framework_rejection_rule"
+  ],
+  "fixed_zero_fit_functional": {
+    "asymmetry_coefficient": 1.0,
+    "spread_coefficient": 0.0072973525692838015,
+    "surface_coefficient": 6.0
+  },
+  "floor": {
+    "a": 238,
+    "distance_from_fe_56_a": 182,
+    "in_fe_ni_window": false,
+    "resistance_per_nucleon": 1.015327679024254,
+    "z": 92
+  },
+  "scan_counts": {
+    "alpha_valid_observed_rows": 284,
+    "ame_binding_per_nucleon_rows": 3554,
+    "natural_basis_rows": 287
+  },
+  "source_hashes_valid": true,
+  "source_results": {
+    "canonical_ame2020": {
+      "bytes": 472648,
+      "evidence_class": "EVALUATED_EXPERIMENTAL_TARGET",
+      "hash_matches_pre_registration": true,
+      "path": "Datasets/nuclear/AME2020_mass_excess.txt",
+      "sha256": "e8599c6d7f724fac91934e59f1b9de8fb8f63e820f4b39456b790665ed2a3307"
+    },
+    "legacy_ame_duplicate": {
+      "bytes": 472648,
+      "evidence_class": "DUPLICATE_SOURCE_HYGIENE_CHECK",
+      "hash_matches_pre_registration": true,
+      "path": "Investigations/04_Atomic_Physics_and_Spectroscopy/APS03_Universal_Drafting_Crossover/mass_1.mas20.txt",
+      "sha256": "e8599c6d7f724fac91934e59f1b9de8fb8f63e820f4b39456b790665ed2a3307"
+    },
+    "np21_reference_instrument": {
+      "bytes": 21592,
+      "evidence_class": "FROZEN_HYPOTHESIS_REFERENCE",
+      "hash_matches_pre_registration": true,
+      "path": "Investigations/05_Nuclear_Physics/NP21_Binding_Curve_Resistance_Landscape/np21_landscape.py",
+      "sha256": "38aeee91edcca845253a6c039eb270da3bf3d358f913aeda26bf397e75b8827f"
+    },
+    "nuclear_header": {
+      "bytes": 45938,
+      "evidence_class": "FROZEN_SCAN_DOMAIN",
+      "hash_matches_pre_registration": true,
+      "path": "Engine/include/sdt/nuclear.hpp",
+      "sha256": "606f2fdf2e86a05500d9b76d79964e652870eb401fc470da033a6c9b4ce04791"
+    }
+  },
+  "target_availability": {
+    "fe_56": 8.7903563,
+    "ni_62": 8.7945555
+  }
+}

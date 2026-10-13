@@ -1,0 +1,20 @@
+P0: AME2020 file parsed, 3558 nuclides; n, 1H, 4He mass excess checks pass
+
+P3 nuclear column: f = Q/sum(m c^2) (atomic masses; electrons cancel)
+  p+n->d         q= 1.00 Q=  2224.566 keV  f=0.1184%  anchor 0.1185%  rel -0.06%  PASS
+  p+d->3He       q= 2.00 Q=  5493.475 keV  f=0.1952%  anchor 0.1952%  rel -0.02%  PASS
+  p+t->4He       q= 3.00 Q= 19813.866 keV  f=0.5286%  anchor 0.5288%  rel -0.03%  PASS
+  d+d->4He       q= 1.00 Q= 23846.530 keV  f=0.6355%  anchor 0.6357%  rel -0.03%  PASS
+  d+t->4He+n     q= 1.50 Q= 17589.300 keV  f=0.3754%  anchor 0.3754%  rel -0.00%  PASS
+  n+3He->4He     q= 3.00 Q= 20577.621 keV  f=0.5489%  anchor 0.5490%  rel -0.02%  PASS
+  p+6Li->7Be     q= 6.00 Q=  5606.854 keV  f=0.0857%
+  n+6Li->7Li     q= 6.00 Q=  7251.094 keV  f=0.1108%
+  d+4He->6Li     q= 2.00 Q=  1473.758 keV  f=0.0263%
+  t+4He->7Li     q= 1.33 Q=  2467.622 keV  f=0.0377%
+  3He+4He->7Be   q= 1.33 Q=  1587.137 keV  f=0.0243%
+
+F4 fixed-q composition check at q=1: p+n->d f=0.1184%, d+d->4He f=0.6355%, ratio 5.37 (spec 5.4x); flat would be ratio ~1
+q=3: p+t->4He 0.5286% vs n+3He->4He 0.5489% (same q, different composition); q=6: p+6Li 0.0857% vs n+6Li 0.1108%
+
+P2 gate arithmetic on declared anchors only: ledger f(1)=1/16=6.25%; NR 4.83% -> ratio 1.294; GW150914 4.6% -> ratio 1.359; within factor 2: True
+a* fork: OPEN (no P1a mechanism; no catalog comparison made, per F1)

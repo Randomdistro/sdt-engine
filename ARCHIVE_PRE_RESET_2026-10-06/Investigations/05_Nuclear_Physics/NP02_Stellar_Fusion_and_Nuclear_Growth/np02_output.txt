@@ -1,0 +1,177 @@
+NP02 - STELLAR FUSION AND NUCLEAR GROWTH
+DECLARATION: NP01 Atomicus Nuclear Grammar is declared FROZEN.
+Downstream-consequence test of the deuteron-triton grammar.
+One-way flow: A(grammar) -> B(occlusion) -> C(spin) -> D(EC gate) -> E(shell).
+
+============================================================
+  STAGE A — GROWTH GRAMMAR  (He-4 -> Z=10 lattice walk)
+============================================================
+  [DECLARATION] NP01 Atomicus Nuclear Grammar is declared FROZEN.
+  +d -> (Z+1,A+2) step n_d ;  +t -> (Z+1,A+3) step n_t
+  (n_d,n_t): Z=2+n_d+n_t, A=4+2n_d+3n_t, paths=C(n_d+n_t,n_t)
+
+  nuclide  Z   A  (n_d,n_t) paths canon       known decay-tendency
+  He-4     2   4  ( 0, 0)     1 (core)      yes  stable
+  Li-6     3   6  ( 1, 0)     1 d           yes  p-rich: b+/EC
+  Li-7     3   7  ( 0, 1)     1 t           yes  stable
+  Be-8     4   8  ( 2, 0)     1 dd           -   p-rich: b+/EC
+  Be-9     4   9  ( 1, 1)     2 dt          yes  stable
+  Be-10    4  10  ( 0, 2)     1 tt           -   n-rich: b-
+  B -10    5  10  ( 3, 0)     1 ddd         yes  p-rich: b+/EC
+  B -11    5  11  ( 2, 1)     3 ddt         yes  stable
+  B -12    5  12  ( 1, 2)     3 dtt          -   n-rich: b-
+  B -13    5  13  ( 0, 3)     1 ttt          -   n-rich: b-
+  C -12    6  12  ( 4, 0)     1 dddd        yes  stable
+  C -13    6  13  ( 3, 1)     4 dddt        yes  n-rich: b-
+  C -14    6  14  ( 2, 2)     6 ddtt         -   n-rich: b-
+  C -15    6  15  ( 1, 3)     4 dttt         -   n-rich: b-
+  C -16    6  16  ( 0, 4)     1 tttt         -   n-rich: b-
+  N -14    7  14  ( 5, 0)     1 ddddd       yes  stable
+  N -15    7  15  ( 4, 1)     5 ddddt       yes  n-rich: b-
+  N -16    7  16  ( 3, 2)    10 dddtt        -   n-rich: b-
+  N -17    7  17  ( 2, 3)    10 ddttt        -   n-rich: b-
+  N -18    7  18  ( 1, 4)     5 dtttt        -   n-rich: b-
+  N -19    7  19  ( 0, 5)     1 ttttt        -   n-rich: b-
+  O -16    8  16  ( 6, 0)     1 dddddd      yes  stable
+  O -17    8  17  ( 5, 1)     6 dddddt      yes  n-rich: b-
+  O -18    8  18  ( 4, 2)    15 ddddtt      yes  n-rich: b-
+  O -19    8  19  ( 3, 3)    20 dddttt       -   n-rich: b-
+  O -20    8  20  ( 2, 4)    15 ddtttt       -   n-rich: b-
+  O -21    8  21  ( 1, 5)     6 dttttt       -   n-rich: b-
+  O -22    8  22  ( 0, 6)     1 tttttt       -   n-rich: b-
+  F -18    9  18  ( 7, 0)     1 ddddddd      -   p-rich: b+/EC
+  F -19    9  19  ( 6, 1)     7 ddddddt     yes  stable
+  F -20    9  20  ( 5, 2)    21 dddddtt      -   n-rich: b-
+  F -21    9  21  ( 4, 3)    35 ddddttt      -   n-rich: b-
+  F -22    9  22  ( 3, 4)    35 dddtttt      -   n-rich: b-
+  F -23    9  23  ( 2, 5)    21 ddttttt      -   n-rich: b-
+  F -24    9  24  ( 1, 6)     7 dtttttt      -   n-rich: b-
+  F -25    9  25  ( 0, 7)     1 ttttttt      -   n-rich: b-
+  Ne-20   10  20  ( 8, 0)     1 dddddddd    yes  stable
+  Ne-21   10  21  ( 7, 1)     8 dddddddt    yes  n-rich: b-
+  Ne-22   10  22  ( 6, 2)    28 ddddddtt    yes  n-rich: b-
+  Ne-23   10  23  ( 5, 3)    56 dddddttt     -   n-rich: b-
+  Ne-24   10  24  ( 4, 4)    70 ddddtttt     -   n-rich: b-
+  Ne-25   10  25  ( 3, 5)    56 dddttttt     -   n-rich: b-
+  Ne-26   10  26  ( 2, 6)    28 ddtttttt     -   n-rich: b-
+  Ne-27   10  27  ( 1, 7)     8 dttttttt     -   n-rich: b-
+  Ne-28   10  28  ( 0, 8)     1 tttttttt     -   n-rich: b-
+
+  distinct paths He-4 -> Z=10 = Sum C(8,n_t) = 256 = 2^8
+  PASS A: all generated nuclei have n_d>=0 and n_t>=0 by construction.
+
+============================================================
+  STAGE B — OCCLUSION BINDING  (B_geom geometry-only | E_occ_unit alpha-normalised)
+============================================================
+  [SAFEGUARD] E_occ_unit represents the alpha-normalised occlusion unit scale,
+              NOT the total nuclear binding energy E_B.
+  B_geom    : solid-angle/contact occlusion, NO energy scale (dependency: integers)
+  E_occ_unit: k_occ * B_geom, alpha-pinned (CLASS E; not trusted for ranking)
+  PASS B    : does B_geom/A rank  alpha < C-12 < O-16 < Ne-20  correctly?
+
+  nuclide  B_geom  B_geom/A  E_occ_unit  B_meas   note
+  He-4         6    1.500       28.30    28.30   
+  C -12       20    1.667       94.33    92.16   
+  O -16       30    1.875      141.50   127.62   
+  Ne-20       40    2.000      188.67   160.64   over-binds (no Coulomb/saturation)
+  Si-28       60    2.143      283.00   236.54   over-binds (no Coulomb/saturation)
+  Ca-40       90    2.250      424.50   342.05   over-binds (no Coulomb/saturation)
+  Fe-56      128    2.286      603.73   492.25   over-binds (no Coulomb/saturation)
+
+  PASS B: B_geom/A monotone rising over the alpha->C->O->Ne spine?  YES (matches measured B/A order)
+  Honest: E_occ_unit over-binds heavies (no Coulomb / saturation). The geometry-only
+  RANKING is the P_eff-free claim; the MeV column is a calibrated proxy (class E).
+
+============================================================
+  STAGE C — TREFOIL ROTATION & ODD-TRITON SPIN ASYMMETRY
+============================================================
+  Trefoil W=3 surface winding characteristics:
+    Proton surface k-number : 0.5464  (inside c-boundary)
+    Phase-winding velocity proxy : 5.486685e+08 m/s  (1.83c)
+    [SAFEGUARD] This value is a phase-winding velocity proxy ONLY.
+                It is NOT a material transport velocity and NOT a signal velocity.
+
+  Alpha core = W=3 trefoil; traction T = 3(W+1) = 12; w_demand = 3 m_p c^2/hbar.
+  Free open strand: E=sigma*L -> infinity, so every triton must re-close (bind).
+  Prediction (sign/class only): odd n_t -> half-integer spin; even -> integer.
+
+  nuclide n_t parity  I_proxy(A^5/3) rot.excess  pred.spin-class    known I^pi   ok
+  He-4      0  even          10.1     0       integer (0 if e-e) 0+         [ok]
+  C -12     0  even          62.9     0       integer (0 if e-e) 0+         [ok]
+  C -13     1  odd           71.9     1       half-integer (>0) 1/2-       [ok]
+  O -16     0  even         101.6     0       integer (0 if e-e) 0+         [ok]
+  O -17     1  odd          112.4     1       half-integer (>0) 5/2+       [ok]
+  N -14     0  even          81.3     0       integer (0 if e-e) 1+         [ok]
+  Fe-56     4  even         819.7     0       integer (0 if e-e) 0+         [ok]
+  Fe-57     5  odd          844.2     1       half-integer (>0) 1/2-       [ok]
+  Al-27     1  odd          243.0     1       half-integer (>0) 5/2+       [ok]
+
+  PASS C: parity predicts integer vs half-integer spin: 9/9.
+  Exact-but-elementary (n_t parity = A parity). NOT claimed: exact spin value or
+  magnetic-moment sign. Odd-odd nuclei (N-14: even n_t) are integer-but-nonzero
+  -> even n_t implies integer I, NOT necessarily I=0.
+
+============================================================
+  STAGE D — STELLAR IONISATION & EC TIMING  (Saha first-approximation)
+============================================================
+  THERMAL-EQUILIBRIUM APPROXIMATION (plasma non-equilibrium will matter).
+  EC needs a bound K-electron; K-availability = (1 - x_ionised). n_e=1e31 m^-3.
+  Grammar core-change (all EC): He-3 core -> He-4: valence -2 deuterons, +1 triton.
+  Free-neutron baseline: t1/2 = 612 s, Q = 782 keV.
+
+  Be-7  -> Li-7   (EC)            chi_K=115 eV
+     K-availability: T=1e+06:0.701  T=1e+07:0.065  T=1e+08:0.002  
+     gate: ionise => K e- lost => EC SLOWS (bare Be-7 cannot EC)
+
+  Re-187 -> Os-187 (bound-beta)   chi_K=7.17e+04 eV
+     K-availability: T=1e+06:1.000  T=1e+07:1.000  T=1e+08:0.711  
+     gate: K stays bound thermally => bound-beta NOT thermal (needs full strip: 41 Gyr->33 yr)
+
+  Tl-205 <- Pb-205 (EC gate)      chi_K=8.55e+04 eV
+     K-availability: T=1e+06:1.000  T=1e+07:1.000  T=1e+08:0.857  
+     gate: heavy K tightly bound => EC gate stable in stars (LOREX solar-nu target)
+
+  PASS D: Be-7 K-availability FALLS as T rises => EC suppressed (known direction;
+  bare Be-7 is EC-stable). Re-187 K stays bound thermally => its 33-yr bound-beta
+  is a fully-stripped (storage-ring) effect, not a stellar-thermal one. Same
+  grammar shift for all products; TIMING differs by x(T) and Q, not by topology.
+
+============================================================
+  STAGE E — RECIPROCAL SHELL MIRROR  (read-only: nucleus -> predicted shell)
+============================================================
+  Rule 18 'the proton is the code': predict the electron shell class from the
+  nuclear grammar (Z, n_d, n_t) ALONE; compare to known electrons afterward.
+  Expanded mirror-shell benchmark across the first 20 elements (H to Ca):
+
+  Z  El  (n_d,n_t)  predicted shell class   pred-val  known-val  status
+  ──  ──  ───────  ───────────────────────   ────────  ─────────  ──────
+   1  H   ( 0,-1)   lone opener                1         1      PASS
+   2  He  ( 0, 0)   closed shell               2         2      PASS
+   3  Li  ( 0, 1)   lone opener                1         1      PASS
+   4  Be  ( 1, 1)   dyad                       2         2      PASS
+   5  B   ( 2, 1)   triangle                   3         3      PASS
+   6  C   ( 4, 0)   tetrahedron                4         4      PASS
+   7  N   ( 5, 0)   triangle-vacancy           5         5      PASS
+   8  O   ( 6, 0)   dyad-vacancy               6         6      PASS
+   9  F   ( 6, 1)   lone acceptor              7         7      PASS
+  10  Ne  ( 8, 0)   closed shell               8         8      PASS
+  11  Na  ( 8, 1)   lone opener                1         1      PASS
+  12  Mg  (10, 0)   dyad                       2         2      PASS
+  13  Al  (10, 1)   triangle                   3         3      PASS
+  14  Si  (12, 0)   tetrahedron                4         4      PASS
+  15  P   (12, 1)   triangle-vacancy           5         5      PASS
+  16  S   (14, 0)   dyad-vacancy               6         6      PASS
+  17  Cl  (14, 1)   lone acceptor              7         7      PASS
+  18  Ar  (12, 4)   closed shell               8         8      PASS
+  19  K   (16, 1)   lone opener                1         1      PASS
+  20  Ca  (18, 0)   dyad                       2         2      PASS
+
+  PASS E: predicted mirror shell category matches known valence configuration: 20/20.
+  HONEST SCOPE: closure prediction is Z-driven, and Z = 2+n_d+n_t is a GRAMMAR
+  output -> this confirms the COUNT mirror, not yet the GEOMETRY mirror. The
+  deeper Rule-18 claim (nuclear PACKING shape -> shell shape) is a CLASS-D novel
+  prediction needing 3D cluster geometry; NOT tested here. And n_t (neutron-excess
+  asymmetry) does NOT map onto unpaired-e in general (INVESTIGATION sec 7): the
+  mirror is partial — mirrored, not identical.
+
+[NP02 done] See INVESTIGATION.md (analysis) and CLASSIFICATION.md (labels).

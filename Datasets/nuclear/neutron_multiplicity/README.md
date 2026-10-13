@@ -53,3 +53,6 @@ pre-registered before this cache is used to fit or test anything, per gateway pr
 sha256(12) + byte counts in `Datasets/MANIFEST.md`. Fetched via `curl` directly (not the
 WebFetch tool, which returned HTTP 402 against this IAEA servlet for reasons not diagnosed —
 curl with a standard browser User-Agent succeeded cleanly).
+
+## Provenance gap (recorded 2026-10-05)
+No raw EXFOR X4 text was kept alongside the three CSVs; only the parsed tables and the hashes in `Datasets/MANIFEST.md` exist. A re-fetch on 2026-10-05 returned a Cloudflare challenge page, so the CSV values could not be compared with the source that day. Until a raw copy is stored (re-pull from the IAEA servlet or a mirror and keep the unparsed file beside the CSV), the values are traceable to the entry numbers above but not byte-verifiable against them.

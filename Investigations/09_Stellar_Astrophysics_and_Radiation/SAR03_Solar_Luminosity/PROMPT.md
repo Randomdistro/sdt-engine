@@ -1,3 +1,32 @@
+# SAR03 — Solar luminosity (specification rewritten 2026-10-12)
+
+**Author:** J. C. Harvey, Melbourne. Rewritten at Harvey's direction: prompts carry new data, and errors inform the mechanism. The previous specification is kept below the line.
+
+## 1. State after the reset (2026-10-10)
+**G2, open.** Routes H2–H6 are framed as hunts: candidate fractions ranked against the target engagement fraction (8.5e-50). That is a census, and is not run.
+
+## 2. What the errors and new data teach
+- Census-free quantities can be computed now:
+  - the required assembly rate, L☉/26.73 MeV (the native α-assembly defect against {4p, 2e} is 26.731 MeV; NP17 reset), using the native list, not 26.73 on {p,n};
+  - the per-baryon offered budget u c/(ℓ_P n).
+- The release law must be one mechanism stated first: the engagement of convergent throughput by matter (occlusion and restriction, Harvey 2026-07-11).
+- Harvey 2026-10-11/12: occlusion is modulated by the displacement depth where the engagement happens. The solar interior's depth (z from Ѻ☉/r) is the native variable to carry.
+
+## 3. Next round (registered order)
+1. Compute and record the census-free quantities (assembly rate on the native list; offered budget). No comparison.
+2. Write the native release law, with its displacement dependence, before any luminosity is loaded.
+3. One comparison with L☉, with a cascade band.
+
+## Prohibitions
+- No census over candidate forms (2026-10-07 rule).
+- No imported source models (PREM, polytropes, quantum-number labelling) as native tests.
+- No G or GM.
+- The word "charge" is not used.
+
+---
+
+## Previous specification (kept as written)
+
 # SAR03: Solar Luminosity from Convergence Recycling — DEEPENED SPEC (§K rebuild)
 
 > **Author:** J. C. Harvey, Melbourne. **Deepened:** 2026-07-12 under HUNTER §K (kill-deepen,

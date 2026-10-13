@@ -1,0 +1,24 @@
+PPT16 muon lifetime budget test
+pre-registration: PROMPT.md (2026-10-03). Labels: COMPUTED; CONVERGENT with SR; not discriminating.
+
+INSTRUMENT VALIDATION (known answers; anchors not yet opened)
+  [ok] v=0 gives v_circ/c = 1, ratio 1
+  [ok] beta=0.6 gives v_circ/c = 0.8, ratio 1.25
+  [ok] beta=0.8 gives v_circ/c = 0.6, ratio 5/3
+  [ok] budget v_circ^2 + v^2 = c^2 to 1e-12 at ten velocities (0 to 0.9999c)
+  [ok] two routes agree: law_V::time_dilation vs closed form sqrt(1+(pc/mc2)^2) to 1e-12
+  gamma at registered inputs: law_V 29.300228557, closed form 29.300228557
+VALIDATION PASS
+
+inputs (MEASURED-INPUT): mc2 = 105.658 MeV, tau0 = 2.1969811 us, pc = 3094.0 +/- 0.5 MeV
+COMPUTED: tau_pred = 64.3720 us, sigma_pred = 0.0104 us (momentum rounding 0.0104, tau0 0.0001)
+
+anchor         tau_meas     sigma   diff(us)  diff/sig  gate 2s
+tau+ (mu+)       64.419     0.059    -0.0470     -0.80   inside
+tau- (mu-)       64.368     0.031    +0.0040     +0.13   inside
+weighted         64.378     0.028    -0.0060     -0.21   inside
+
+rejection criterion (any anchor beyond 2 sigma): not met
+
+report-only sensitivity: Bailey quoted gamma = 29.33 gives tau = 64.4375 us (registered route uses gamma from pc, mc2: 64.3720)
+altitude-survival flux pairs: PENDING_DATA (not scored)

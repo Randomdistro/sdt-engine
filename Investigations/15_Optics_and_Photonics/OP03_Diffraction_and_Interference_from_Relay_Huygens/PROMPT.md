@@ -171,3 +171,15 @@ angles — a falsifiable SDT≠wave-optics signature, flagged with its size.
 ---
 
 *OP03 · 10× upgrade 2026-06-29 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** The grating, single-slit and Airy gates (0.1%) test that a discrete phase sum reproduces d sin θ = mλ, sinc² and 1.22λ/D, which follows from the Fourier structure of any such sum, and the real discriminator (single-emission build-up) is deferred.
+
+**Correction:** Label the pattern gates VERIFICATION and gate the build-up statistics once QM01 provides them.
+
+**Status:** ANNOTATED — label, status or tally corrected in the record; no re-score of earlier runs.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

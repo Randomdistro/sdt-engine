@@ -1,0 +1,46 @@
+========================================================================================
+  FLM14 - run 5: CLAIM DECISION.  Spec: RUN_LOG.md ADJ-12 (committed before
+  code). Machinery: flm14_form4b two-channel tour, verbatim. Pre-declared:
+  claim leg (i) is already known-FAILED from run-4's table; legs (ii)/(iii)
+  and the T_W diagnosis run UNCONDITIONALLY (their evidence stands alone).
+========================================================================================
+
+  (1) SEED-2 REPLICATION (geometry seed 2, 64 draws x 40k, seeds 20001-20064)
+      geometry seed 2: 42 seats, degree min/mean/max = 6/7.57/11
+      beta=0.10: p_occ = +2.871 (|r|=0.81, n=19)   drift 0.0298 (FAIL)   coverage 100%/66%   [123s]
+                 vs seed-1 +2.109 (band <=0.3: FAIL)   split-half: +2.757 / +2.053 (+-0.4: FAIL)   REPLICATION: FAIL
+      beta=0.20: p_occ = +2.186 (|r|=0.79, n=16)   drift 0.0639 (FAIL)   coverage 95%/64%   [112s]
+                 vs seed-1 +2.040 (band <=0.3: OK)   split-half: +1.983 / +2.176 (+-0.4: OK)   REPLICATION: PASS
+
+  (2) T_W DIAGNOSIS (beta=0.20, geometry seed 1, 64 draws each)
+      T_W= 13.5: p_occ = +2.596 (|r|=0.79, n=16)   anchor vs run-4 +2.596: OK   [105s]
+      T_W= 27.0: p_occ = +2.040 (|r|=0.71, n=15)   anchor vs run-4 +2.040: OK   [106s]
+      T_W= 54.0: p_occ = +1.620 (|r|=0.64, n=16)   anchor vs run-4 +1.620: OK   [107s]
+      T_W=108.0: p_occ = undefined (|r|=0.43 < 0.6 - no exponent defined)   [108s]
+      -> scan point(s) undefined; T_W diagnosis inconclusive (reported)
+
+  (3) BETA=0.40 UPTURN - fixed-mask check (report, don't gate)
+      beta=0.40 own-mask p_occ = +2.855 (|r|=0.68, n=12) (run-4: +2.855)
+      beta=0.40 slope on the FIXED beta=0.20 mask (n=14): +2.270 (|r|=0.79)
+      mask-erosion hypothesis: SUPPORTED (within 0.3 of the centre p — the upturn is seat-selection)
+
+  (4) CLAIM CONJUNCTION (ADJ-11, unchanged)
+      leg (i) stable regime: FAIL - beta=0.05 drift-FAIL and beta=0.40
+              band-break (+2.855 vs median +2.109) pincer the grid (run-4)
+      leg (ii) split-half (run-4): beta=0.10 +2.161/undef FAIL; beta=0.20 +2.015/+2.128 OK
+      leg (iii) seed-2 @ beta=0.1: FAIL
+      leg (iii) seed-2 @ beta=0.2: PASS
+
+  CLAIM DECISION: REFUSED
+    Blocking condition(s), named:
+      - leg (i): no 3 consecutive drift-passing betas within the 0.3 band
+      - leg (ii): split-half undefined in one half at beta=0.10
+      - leg (iii): seed-2 replication FAIL at beta=0.1
+    Part C: NOT RUN (committed condition).
+
+  T_W verdict carried to the ledger: inconclusive (undefined scan point)
+
+========================================================================================
+  F6: machinery identical to run 4 in every arm; T_W varied ONLY inside the
+  declared scan; no constant re-tuned; run-4 values cited, not adjusted.
+========================================================================================

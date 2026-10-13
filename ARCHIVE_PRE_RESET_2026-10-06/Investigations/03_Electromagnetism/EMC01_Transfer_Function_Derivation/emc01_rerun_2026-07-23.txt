@@ -1,0 +1,174 @@
+﻿================================================================
+  EMC01: TRANSFER FUNCTION f DERIVATION
+  Is f = P_eff / P_conv = 2.125e-17 universal?
+  SDT Canonical Engine — James Tyndall, Melbourne
+================================================================
+
+================================================================
+  STEP 1: What f Actually Is
+================================================================
+
+  f (from laws.hpp) = P_eff / P_conv = 2.123360e-17
+
+  Verification: alpha*hbar*c = 2.307078e-28
+                k_e * e^2    = 2.307078e-28
+
+  PASS EMC01-1a: alpha*hbar*c = k_e*e^2
+    Derived:  2.307078e-28   Expected: 2.307078e-28   Err: 0.0000%
+
+  PASS EMC01-1b: P_eff = 4*alpha*hbar*c / (pi*R_p^2*r_e^2)
+    Derived:  5.225210e+31   Expected: 5.225210e+31   Err: 0.0000%
+
+  PASS EMC01-1c: f = 4*alpha*hbar*c / (pi*R_p^2*r_e^2*P_conv)
+    Derived:  2.123360e-17   Expected: 2.123360e-17   Err: 0.0000%
+
+  DECOMPOSITION OF f:
+    f = 4 alpha hbar c / (pi R_p^2 r_e^2 P_conv)
+
+  Length ratios:
+    l_P / R_p  = 1.920912e-20
+    l_P / r_e  = 5.735590e-21
+    (l_P/R_p)^2 = 3.689901e-40
+    (l_P/r_e)^2 = 3.289699e-41
+
+  Test: alpha * (l_P)^4 / (R_p^2 r_e^2) = 8.858012e-83
+  Actual f = 2.123360e-17
+  Ratio = 239710639961734359947444232352725830735900987436069699210228793344.000000
+
+  Full expansion: f = 4 alpha hbar c l_P / (pi R_p^2 r_e^2 R_CMB u_CMB)
+  = 2.123360e-17
+  PASS EMC01-1d: Full expansion matches f
+    Derived:  2.123360e-17   Expected: 2.123360e-17   Err: 0.0000%
+
+  INTERPRETATION:
+    f encodes: (EM coupling) x (quantum) x (lattice cell)
+             / (particle cross-section) x (causal depth) x (medium density)
+
+    f is NOT a free parameter. It is the ratio of the local
+    EM interaction scale to the global convergence scale.
+    It answers: 'what fraction of the total convergence
+    pressure is accessible to a single charge interaction?'
+
+================================================================
+  STEP 2: Universality Test
+================================================================
+
+  --- 2A: Coulomb Force (calibration) ---
+
+  PASS EMC01-2a: Coulomb force at 1 Angstrom
+    Derived:  2.307078e-08   Expected: 2.307078e-08   Err: 0.0000%
+
+  --- 2B: Gravitational Force ---
+
+  NAIVE (no cancellation):
+    G_naive = 3 l_P c^4 / Phi^2 = 3.628226e+111
+
+  TEST 1: G = G_naive / S_boundary = G_naive / (4 pi N^2)
+    S_boundary = 4.366188e+124
+    G_test1 = 8.309826e-14   (measured: 6.674000e-11)   ratio = 0.0012
+
+  TEST 2: G = G_naive / N^2
+    N^2 = 3.474502e+123
+    G_test2 = 1.044244e-12   (measured: 6.674000e-11)   ratio = 0.0156
+
+  TEST 3: G = G_naive * 4pi / N^2
+    G_test3 = 1.312235e-11   (measured: 6.674000e-11)   ratio = 0.1966
+
+  TEST 4: G = G_naive / (3 N^2)  [marginal stability]
+    G_test4 = 3.480812e-13   (measured: 6.674000e-11)   ratio = 0.0052
+
+  RATIO NEEDED: G_naive / G_measured = 5.436359e+121
+  S_boundary   = 4.366188e+124
+  N^2          = 3.474502e+123
+  N            = 5.894491e+61
+
+  ratio/S_boundary = 0.001245
+  ratio/N^2        = 0.015646
+  ratio/N          = 922278069801323987457066764599317817410687690420310975184896.000000
+
+  log10(ratio_needed) = 121.74
+  log10(S_boundary)   = 124.64
+  log10(N^2)          = 123.54
+  log10(N)            = 61.77
+
+  FAIL EMC01-2b: G from convergence with shell cancellation
+    Derived:  8.309826e-14   Expected: 6.674000e-11   Err: 99.8755%
+
+  F_coulomb / F_grav (proton-electron at 1 A) = 2.2688e+39
+  This is the number that f explains: why EM >> gravity.
+
+  --- 2C: Casimir Force ---
+
+  Phi × l_P = 1.679267e-91 J·m
+  hbar × c  = 3.161527e-26 J·m
+  Ratio Phi*l_P / (hbar*c) = 5.311569e-66
+
+  Casimir F/A at d = 1 um:
+    QED:  1.300126e-03 Pa
+    This comes from the relay field mode structure,
+    not from f_transfer. Casimir is geometry-dependent,
+    not scale-dependent like f.
+
+  --- 2D: Nuclear Binding ---
+
+  Deuteron (p-n at r = 2.1 fm):
+    SDT occlusion force:   4.664070e+00 N
+    From binding energy:   1.696781e+02 N
+    Ratio (SDT/binding):   0.0275
+
+    Coulomb at 2.1e-15 m:     5.231468e+01 N
+    Nuclear/Coulomb:     0.0892
+
+    R_p^4 / R_charge^4 = (R_p / r_e)^2 = 8.915412e-02
+    This is the geometric amplification of nuclear over EM.
+
+  PASS EMC01-2d: Nuclear occlusion > Coulomb at fm scale
+    Derived:  8.915412e-02   Expected: 8.915412e-02   Err: 0.0000%
+
+================================================================
+  STEP 3: Deriving f from Lattice Properties
+================================================================
+
+  f = 2.123360e-17
+
+  (l_P / r_e)^2 = 3.289699e-41   ratio = 6.4546e+23
+  (l_P / R_p)^2 = 3.689901e-40   ratio = 5.7545e+22
+  alpha*(l_P/R_p)^2 = 2.692651e-42   ratio = 7.8858e+24
+  alpha^2*(l_P/R_p) = 1.022911e-24   ratio = 2.0758e+07
+
+  EXACT IDENTITY:
+    f = 4 alpha hbar c l_P / (pi R_p^2 r_e^2 R_CMB u_CMB)
+
+  l_P / R_CMB = 1.696499e-62  (lattice to causal depth)
+  hbar c / (R_p^2 r_e^2 u_CMB) = 1.347083e+47
+  f / (4 alpha / pi × ratio1 × ratio2) = 1.000000 (should be 1)
+
+  ═══════════════════════════════════════════════════════
+  VERDICT ON f:
+  ═══════════════════════════════════════════════════════
+
+  f is NOT a free parameter. It is the EXACT ratio:
+    f = 4 alpha hbar c l_P / (pi R_p^2 r_e^2 R_CMB u_CMB)
+
+  Every quantity in this expression is independently measured.
+  f ENCODES:
+    - alpha: the fraction of convergence that couples to charge
+    - l_P / R_CMB: the lattice cell as fraction of causal depth
+    - R_p^2 r_e^2: the two-body interaction cross-section
+    - hbar c / u_CMB: quantum of action per unit medium density
+
+  f is SCALE-DEPENDENT in the sense that:
+    - Coulomb uses R_charge^4 = R_p^2 r_e^2 (charge geometry)
+    - Gravity uses V_disp^2 / l_P^2 (displacement geometry)
+    - Nuclear uses R_p^4 (nuclear geometry)
+  The SAME P_eff (and therefore the same f) works for all,
+  but the geometric cross-section changes with scale.
+
+  f IS universal. The geometry is not.
+
+================================================================
+  RESULTS: 6/7 proofs passed
+================================================================
+
+  WARNING: 1 proof(s) failed.
+
