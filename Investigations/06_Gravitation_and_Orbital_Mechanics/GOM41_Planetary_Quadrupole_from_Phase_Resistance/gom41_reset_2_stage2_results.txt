@@ -1,0 +1,40 @@
+GOM41 Round 2 - stage 2 (J2 unsealed)
+============================================================
+predictions file sha256 fbcf59167a5e8feb25f2e11694e422f3bba916442d24136fb76e1321d32ef4f8
+
+[raw J2 rows from the cached sheets]
+  Earth    ['J2 (x 10-6)', '1082.63']
+  Mars     ['J2 (x 10-6)', '1960.45', '1082.63', '1.811']
+  Jupiter  ['J2 (x 10-6)', '14,736', '1082.63', '13.611']
+  Saturn   ['J2 (x 10-6)', '16,298.', '1082.63', '15.054']
+  Uranus   ['J2 (x 10-6)', '3343.43', '1082.63', '3.088']
+  Neptune  ['J2 (x 10-6)', '3411.', '1082.63', '3.151']
+
+[Q0_UNIFORM]  body: predicted / measured J2, signed fractional residual
+  Earth    1.714357e-03 / 1.082630e-03    +58.35 %
+  Mars     2.293728e-03 / 1.960450e-03    +17.00 %
+  Jupiter  4.423440e-02 / 1.473600e-02   +200.18 %
+  Saturn   7.737689e-02 / 1.629800e-02   +374.76 %
+  Uranus   1.476482e-02 / 3.343430e-03   +341.61 %
+  Neptune  1.303237e-02 / 3.411000e-03   +282.07 %
+  Earth within 3%: False; Jupiter within 3%: False; within 10%: 0/6; RMS 251.82 %  -> gate 6: NOT MET
+
+[Q1_CONVERGENCE]  body: predicted / measured J2, signed fractional residual
+  Earth    1.092480e-03 / 1.082630e-03     +0.91 %
+  Mars     2.391558e-03 / 1.960450e-03    +21.99 %
+  Jupiter  1.459208e-02 / 1.473600e-02     -0.98 %
+  Saturn   1.676506e-02 / 1.629800e-02     +2.87 %
+  Uranus   5.534469e-03 / 3.343430e-03    +65.53 %
+  Neptune  2.798189e-03 / 3.411000e-03    -17.97 %
+  Earth within 3%: True; Jupiter within 3%: True; within 10%: 3/6; RMS 29.19 %  -> gate 6: NOT MET
+
+[S1_DEPTH_PROFILE]  body: predicted / measured J2, signed fractional residual
+  Earth    1.714357e-03 / 1.082630e-03    +58.35 %
+  Mars     2.293728e-03 / 1.960450e-03    +17.00 %
+  Jupiter  4.423440e-02 / 1.473600e-02   +200.18 %
+  Saturn   7.737689e-02 / 1.629800e-02   +374.76 %
+  Uranus   1.476482e-02 / 3.343430e-03   +341.61 %
+  Neptune  1.303237e-02 / 3.411000e-03   +282.07 %
+  Earth within 3%: False; Jupiter within 3%: False; within 10%: 0/6; RMS 251.82 %  -> gate 6: NOT MET
+
+[blind comparison, Neptune, S1 gate: within 10%] S1 1.303237e-02 vs measured 3.411000e-03: +282.07 % -> NOT MET

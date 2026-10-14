@@ -1,0 +1,52 @@
+GOM41 Round 2 - stage 1 (J2 NOT read)
+============================================================
+
+[sources, sha256]
+  jpl_ssd_planet_phys_par.html       e49a487947295c389ba6e5833dd8fb04b63e826d39f70c123881882096e5e68b
+  jpl_ssd_sats_elem.html             1e5e52225cf636b78d0ac602eb5352c5648aa025ba45d61593d824e70779dfdd
+  nasa_earthfact.html                1b06e3ec31249d063d40d1b38837fac89ddcd2f4b25268b38e8a6d5f413e70ef
+  nasa_marsfact.html                 366b0ce9b69cbee370be904956748af954468a41b93dc71a796a986519aa8d74
+  nasa_jupiterfact.html              9ac7835ae5387261bc02019a641bbfc8450122ffebebffea5678c3de6c54d0cb
+  nasa_saturnfact.html               6d09ba010cacef61c8ae1a1ff137b06e5464e99461faf8f32c107419c474d06d
+  nasa_uranusfact.html               02389139f8345a4328fc8f8956012cb72f691c6c7c2854c03c0b2512a063de81
+  nasa_neptunefact.html              4b9166f959be2b507eea77a9eef56f4e5679b693ba75151072a28bb228f44328
+
+[V1] koppa from independent satellites of one planet (relative spread, gate <= 1.5%)
+  Mars     Phobos: 4.77354e-04 m  Deimos: 4.76481e-04 m  spread 1.831e-03 -> met
+  Jupiter  Io: 1.42114e+00 m  Europa: 1.43094e+00 m  Ganymede: 1.40941e+00 m  Callisto: 1.40961e+00 m  spread 1.518e-02 -> NOT MET
+  Saturn   Titan: 4.22206e-01 m  Rhea: 4.22494e-01 m  spread 6.810e-04 -> met
+  Uranus   Titania: 6.44787e-02 m  Oberon: 6.44969e-02 m  spread 2.826e-04 -> met
+  Neptune  Triton: 7.60906e-02 m  Proteus: 7.59772e-02 m  spread 1.492e-03 -> met
+
+[V2/V4] uniform oblate spheroid ap/ae = 0.9: exact J2 = (1 - 0.81)/5 = 0.03799999999999999
+  GL projection 0.0380000000 (rel err 3.65e-14);  midpoint volume N=400 0.037976 (rel 6.29e-04), N=800 0.037988 (rel 3.03e-04)
+  [V2] volume vs projection <= 0.5%: met;  [V4] doubling changes J2 by 3.26e-04 (midpoint), 2.03e-14 (GL) (< 1%): met
+
+[V3] zero spin / spherical leakage
+  Q0(w=0) 0.0e+00, Q1(w=0, ap=ae) 0.0e+00, GL sphere -2.0e-15 (gate < 1e-12): met;  tilted-axis spherical leakage -8.81e-16 (gate < 1e-8): met
+
+[V5] Q1 round-trip and small-limit
+  synthetic: J2_true 0.0147 -> a_p/a_e 0.93420299 -> recovered 1.4700000000e-02, rel err 1.8e-15 (gate < 1e-12 relative)
+  small limit f=1e-4, q=5e-4: closed form -9.998000e-05 vs (2f-q)/3 -1.000000e-04, rel diff 2.00e-04 (gate < 2e-3)
+
+[C1] cache consistency (input defects, not claim results)
+  Earth    ae NASA 6378.1 / JPL 6378.1 (d 6.3e-08);  spin NASA 0.997271 d / JPL 0.997270 d (d 1.2e-06);  (ae^2 ap)^(1/3) 6371.0 / JPL mean 6371.0 (d 1.2e-06) -> met
+  Mars     ae NASA 3396.2 / JPL 3396.2 (d 2.9e-06);  spin NASA 1.025954 d / JPL 1.025957 d (d 2.5e-06);  (ae^2 ap)^(1/3) 3389.5 / JPL mean 3389.5 (d 6.0e-06) -> met
+  Jupiter  ae NASA 71492.0 / JPL 71492.0 (d 0.0e+00);  spin NASA 0.413542 d / JPL 0.413540 d (d 4.0e-06);  (ae^2 ap)^(1/3) 69911.3 / JPL mean 69911.0 (d 4.4e-06) -> met
+  Saturn   ae NASA 60268.0 / JPL 60268.0 (d 0.0e+00);  spin NASA 0.444000 d / JPL 0.444010 d (d 2.3e-05);  (ae^2 ap)^(1/3) 58232.0 / JPL mean 58232.0 (d 1.2e-07) -> met
+  Uranus   ae NASA 25559.0 / JPL 25559.0 (d 0.0e+00);  spin NASA 0.718333 d / JPL 0.718330 d (d 4.6e-06);  (ae^2 ap)^(1/3) 25362.2 / JPL mean 25362.0 (d 6.1e-06) -> met
+  Neptune  ae NASA 24764.0 / JPL 24764.0 (d 0.0e+00);  spin NASA 0.671250 d / JPL 0.671250 d (d 0.0e+00);  (ae^2 ap)^(1/3) 24622.2 / JPL mean 24622.0 (d 7.7e-06) -> met
+
+[corpus rows and predictions] (equatorial radius used for q and J2; sealed before J2 is read)
+  body      sat      kappa [m]        z_surf=kappa/ae   q            Q0 J2          Q1 J2
+  Earth    Moon     4.47730e-03   7.020e-10      3.428713e-03 1.714357e-03   1.092480e-03
+  Mars     Phobos   4.77354e-04   1.406e-10      4.587456e-03 2.293728e-03   2.391558e-03
+  Jupiter  Io       1.42114e+00   1.988e-08      8.846880e-02 4.423440e-02   1.459208e-02
+  Saturn   Titan    4.22206e-01   7.005e-09      1.547538e-01 7.737689e-02   1.676506e-02
+  Uranus   Titania  6.44787e-02   2.523e-09      2.952964e-02 1.476482e-02   5.534469e-03
+  Neptune  Triton   7.60906e-02   3.073e-09      2.606474e-02 1.303237e-02   2.798189e-03
+
+predictions written to gom41_reset_2_predictions.txt  sha256 fbcf59167a5e8feb25f2e11694e422f3bba916442d24136fb76e1321d32ef4f8
+S1 consequence: engagement modulation h'(0)/h(0) * z_surface <= (largest z_surface above) x O(1) -> S1 = Q0 within that relative amount.
+
+stage-1 validations and cache gates all met: False

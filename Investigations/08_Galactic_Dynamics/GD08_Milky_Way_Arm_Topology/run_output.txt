@@ -1,0 +1,45 @@
+﻿=================================================================
+ GD08 MILKY WAY ARM TOPOLOGY   (Reid+2019 Table 2, R0=8.15 kpc)
+ OBSERVED arm parameters ; COMPUTED mesh ; 0 fitted parameters
+=================================================================
+
+== INSTRUMENT VALIDATION (known answers) ==
+  [PASS] V1 : psi=0 gives circle R=Rk  (0.000e+00)
+  [PASS] V2 : every segment passes through (Rk, beta_k)  (0.000e+00)
+  [PASS] V3 : circle tangency = 360 - asin(R/R0)  (4.183e-10)
+  [PASS] V4 : ridge continuous at the kink  (5.814e-11)
+  validation failures: 0
+
+== Q4 TANGENCY LONGITUDES: model vs Reid Table 2 (criterion |d| <= 3 deg) ==
+arm            model    Table2     diff
+3-kpc(N)      337.06     337.0    +0.06   consistent
+Norma         327.67     327.5    +0.17   consistent
+Sct-Cen       306.29     306.1    +0.19   consistent
+Sgr-Car       285.88     285.6    +0.28   consistent
+rejection criterion met for 0 of 4 arms
+
+== WIDTH LAW: tabulated w(Rk) vs global line 0.336 + 0.036 (R - 8.15) ==
+arm            Rk    w_tab   w_line    resid
+3-kpc(N)     3.52    0.180    0.169   +0.011
+Norma        4.46    0.140    0.203   -0.063
+Sct-Cen      4.91    0.230    0.219   +0.011
+Sgr-Car      6.04    0.270    0.260   +0.010
+Local        8.26    0.310    0.340   -0.030
+Perseus      8.87    0.350    0.362   -0.012
+Outer       12.24    0.650    0.483   +0.167
+
+== ARM GEOMETRY (1 sigma) ==
+arm          pts   len_m   len_x    Rmin      Rmax    sin@Rk     sz@Rk   sin_min
+3-kpc(N)       7    0.19    0.00    3.52      3.53     0.180     0.020     0.180
+Norma        335    3.68    8.58    3.00      4.46     0.140     0.020     0.079
+Sct-Cen      490    8.26   13.76    3.00      8.06     0.230     0.020     0.150
+Sgr-Car      551   10.19   23.52    5.75     11.02     0.270     0.020     0.258
+Local         85    6.10    0.00    7.56      8.77     0.310     0.065     0.281
+Perseus      637   21.62   30.27    5.71     14.41     0.350     0.087     0.217
+Outer        535   18.03   35.43    8.10     13.71     0.650     0.209     0.476
+
+len_m = measured-range ridge length [kpc]; len_x = extrapolated length [kpc]
+minimum in-plane 1-sigma over all samples: 0.079 kpc (positive)
+vertical rms: 20 pc for R<=7 kpc ; 61 pc at R=8.15 ; 200 pc at R=12 ; 344 pc at R=16
+
+wrote mw_arms_data.js, mw_arm_topology.obj
