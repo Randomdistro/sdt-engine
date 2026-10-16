@@ -316,7 +316,7 @@ svg .drag:active { cursor: grabbing; }
     <div class="chapter__num">The capstone</div>
     <h2 class="chapter__title">One quantity is closure, light-speed, time, and redshift</h2>
     <p class="chapter__lead">Matter crushes the space it displaces — so spations are <em>smaller</em> near mass, and since light relays one spation per tick, light is locally slower deep in a well. Not a curved metric: a closure gradient. The convergence depth z = ϟ/r is the closure deficit, the light-speed deficit, the clock-rate deficit, and the gravitational redshift — all at once.</p>
-    <div class="eq-block"><div class="eq">ℓ<sub>P</sub>(r) = ℓ<sub>P,∞</sub>(1−z) &nbsp;·&nbsp; c<sub>local</sub> = c<sub>∞</sub>(1−z) &nbsp;·&nbsp; dτ/dt = √(1−z) &nbsp;·&nbsp; v = c√z</div></div>
+    <div class="eq-block"><div class="eq">ℓ<sub>P</sub>(r) = ℓ<sub>P,∞</sub>(1−z) &nbsp;·&nbsp; c<sub>far</sub> = c<sub>∞</sub>(1−z)² &nbsp;·&nbsp; dτ/dt = 1−z &nbsp;·&nbsp; v = c√z</div></div>
     <table class="results">
       <thead><tr><th>Corollary</th><th>Result</th><th></th></tr></thead>
       <tbody>
@@ -734,7 +734,7 @@ svg .drag:active { cursor: grabbing; }
       var d='';for(var i=0;i<=70;i++){var xx=90+r+10+i*1.9;
         d+=(i?'L':'M')+xx+' '+(60-8*Math.sin(xx/lam*Math.PI*2))+' ';}
       wave.setAttribute('d',d);
-      read.innerHTML='z = ϟ/r = <b>'+z.toFixed(2)+'</b> · clock dτ/dt = '+Math.sqrt(1-z).toFixed(2)+' · the light leaves already stretched';}
+      read.innerHTML='z = ϟ/r = <b>'+z.toFixed(2)+'</b> · clock dτ/dt = '+(1-z).toFixed(2)+' · the light leaves already stretched';}
     draggable(svg,emit,function(p){x=Math.max(124,Math.min(340,p.x));render();});
     svg.addEventListener('pointerdown',function(e){var p=svgPoint(svg,e);x=Math.max(124,Math.min(340,p.x));render();});
     render();

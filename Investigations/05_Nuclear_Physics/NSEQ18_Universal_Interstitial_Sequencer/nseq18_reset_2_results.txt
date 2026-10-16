@@ -1,0 +1,34 @@
+NSEQ18 Round 2 (2026-10-14) engine NSEQ18-WEB-1; set S: 253 nuclides (NUBASE2020 stable, grammar-valid, plus 3H)
+[A6] Release vs docs byte-identical: traction-gear-engine.js=true, nuclear-inputs.js=true -> met
+[A1] met for all 253 builds
+[A2] met for all 253 builds
+[A3] met for all 253 builds
+[A4] met for all 253 builds
+[A5] met for all 253 builds
+     wake maxima over the set: split 0.00e+0, rejoin 0.00e+0, paired-flux 0.00e+0, max relative divergence 3.728e-3 (tolerances 1e-3, 1e-3, 1e-3, 1e-2)
+     members without a zero-fit ledger (calibrated seeds): 1-2 1-3 2-3
+
+[O1] binding increments along isotope chains of S (zero-fit ledgers only): consecutive-member steps 171, non-positive 23; DeltaA = 1 steps 102, non-positive 10 -> NOT MET
+     non-positive steps: 28:62->64(-5.579) 30:66->67(-0.864) 30:67->68(-3.007) 31:69->71(-0.140) 32:70->72(-3.634) 34:74->76(-1.428) 36:78->80(-4.460) 46:108->110(-8.333) 48:112->114(-8.387) 50:117->118(-10.654) 52:120->122(-6.277) 54:124->126(-8.494) 62:152->154(-11.474) 64:157->158(-16.022) 66:161->162(-17.931) 68:164->166(-16.692) 70:168->170(-14.712) 72:179->180(-0.378) 76:189->190(-0.583) 78:195->196(-1.608) 80:201->202(-1.224) 80:202->204(-19.916) 82:207->208(-27.113)
+
+[O2] mu of even-even members with a zero-fit ledger: n = 147; rho = |mu|/mu_p <= 1e-3 for 0 of 147; median rho 3.222e+0, min 7.79e-2, max 7.896e+0 -> NOT MET
+     largest five: 44-96 22.053muN; 48-106 21.441muN; 28-58 21.168muN; 42-92 20.297muN; 36-78 19.903muN
+     4He: ledger true, mu = 1.6506 muN
+
+[spot] Z,A: nucleons, protons, contacts, tractionConsistent, B_calc (MeV), mu_calc (muN)
+  1,1: 1, 1, 0, true, seed fit, n/a
+  1,2: 2, 1, 1, true, seed fit, n/a
+  1,3: 3, 1, 2, true, seed fit, n/a
+  2,3: 3, 2, 2, true, seed fit, n/a
+  2,4: 4, 2, 4, true, 11.690, 1.6506
+  8,16: 16, 8, 16, true, 55.116, 7.2936
+  20,48: 48, 20, 48, true, 152.457, 1.0750
+  26,56: 56, 26, 56, true, 184.310, 15.0817
+  82,208: 208, 82, 208, true, 581.686, -16.5066
+  92,238: 238, 92, 238, true, 672.599, -26.9523
+
+[closures] doubly-closure candidates present in S (Z,N in {2,8,20,28,50,82,126}):
+  2,4 N=2 contacts 4 B_calc 11.690 mu 1.6506
+  8,16 N=8 contacts 16 B_calc 55.116 mu 7.2936
+  20,40 N=20 contacts 40 B_calc 135.114 mu 18.1624
+  82,208 N=126 contacts 208 B_calc 581.686 mu -16.5066

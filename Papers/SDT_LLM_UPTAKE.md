@@ -161,7 +161,9 @@ Solar C1 spectral shift: `z = ϟ/R = 2.123×10⁻⁶` vs measured, **0.03%**.
 ```
 v_circ² + v² = c²
 γ = 1/√(1 − v²/c²)
-dτ/dt = √(1 − v²/c²) = √(1 − z)     (also gravitational: z = ϟ/r)
+dτ/dt = √(1 − v²/c²)               (kinematic speed term)
+dτ/dt = 1 − z, z = ϟ/r             (depth term; GOM22 repair, was √(1 − z))
+                                   (GPS: depth +45.7090, speed −7.2122, net +38.4969 µs/day)
 E₀ = m c²
 E² = (p c)² + (m c²)²
 photon: v_circ = 0  ⇒  v = c, m = 0

@@ -1,0 +1,66 @@
+VERIFICATION LOG - external_audit_2026-10-16 - generated 2026-10-16 12:03
+Instrument validation precedes use on any claim (procedural gateway 3.2).
+
+V1 K = 2*omega*R/c, omega=7.292115e-5, R=6371 km (PRL Eq.3): 3.099348e-06  [PRL: 3.099e-6]  -> OK
+V2 Eq.(1) predictions reproduced from Table I (K from V1):
+   Galileo I (GLL-I)    calc    4.123  PRL   4.12  diff +0.003
+   Galileo II (GLL-II)  calc   -4.674  PRL  -4.67  diff -0.004
+   NEAR                 calc   13.279  PRL  13.28  diff -0.001
+   Cassini              calc   -1.068  PRL  -1.07  diff +0.002
+   Rosetta I            calc    2.067  PRL   2.07  diff -0.003
+   MESSENGER            calc    0.055  PRL   0.06  diff -0.005
+   -> all six within 0.02 mm/s: transcription of delta_i, delta_o, Vinf validated
+V3 eccentricity eps = 1 + rp V^2/mu vs ACN 2007 (rp = 6378.137 + A):
+   Galileo (GEGA1)    calc 2.4735  ACN 2.473600  rel diff -2.2e-05
+   NEAR               calc 1.8137  ACN 1.813700  rel diff +2.4e-05
+   Cassini            calc 5.8548  ACN 5.856400  rel diff -2.7e-04
+   Rosetta            calc 1.3119  ACN 1.312005  rel diff -4.3e-05
+   MESSENGER          calc 1.3597  ACN 1.135970  rel diff +2.0e-01
+V4 NEAR tracking gap arithmetic: 1 h 08 m + 2 h 31 m = 3 h 39 m (AG98 and PRL: 3 h 39 m)
+V5 gate radii implied by the sourced tracking times (hyperbolic Kepler; DIAGNOSTIC ONLY, not an SDT result):
+   NEAR       rp   6910.6 km  r_in     36972 km ( 5.35 rp)  r_out     75195 km (10.88 rp)  W=1-(rp/2)(1/r_in+1/r_out)=0.861
+   Galileo I  rp   7334.2 km  r_in     35746 km ( 4.87 rp)  r_out     12033 km ( 1.64 rp)  W=1-(rp/2)(1/r_in+1/r_out)=0.593
+V16 gate radii for the other sourced gaps (DIAGNOSTIC ONLY):
+   Rosetta I                              rp   8331.8 km  r_in     61926 ( 7.43 rp)  r_out     17540 ( 2.11 rp)  W=0.695
+   Juno (predicted gap, no ESA stations)  rp   6939.1 km  r_in     42904 ( 6.18 rp)  r_out     82023 (11.82 rp)  W=0.877
+V6 Juno Anderson Eq.(1) with Busack Table 2 (Vinf 9.91, di -14.2, do 39.4): 6.04 mm/s  [Busack: about +6.0]
+   Juno with Vinf=10.389 km/s (Horizons reconstructed value, V15; also the value in the external audit table): 6.33 mm/s ; Busack's 9.91 km/s is the pre-encounter prediction. (10.389 also equals MESSENGER's perigee speed Vf: coincidence of digits, different quantities.)
+V7 CODATA-2022 parse integrity: R_inf from alpha^2 m_e c/(2h) = 10973731.568038 ; listed 10973731.568157 ; rel diff -1.08e-11
+V8 AME2020 total binding vs mass-excess sum (keV): B(4He) = 2*M(1H) + 2*M(n) - M(4He)
+   from mass excess: 28295.662 keV ; BE/A*4 = 28295.662 keV ; diff -0.000 keV
+   8Be: BE = 7062.4356*8 = 56499.485 keV ; 2*B(4He) = 56591.325 keV ; Q(8Be -> 2 alpha) = -91.84 keV
+V9 Balmer: NIST ASD Ritz vacuum vs Rydberg formula 1/lambda = R_H(1/4-1/n^2), R_H = R_inf/(1+me/mp):
+   n=9: Ritz 383.64789 nm (u 0.00021) ; formula 383.65107 nm ; formula-Ritz +8.29 ppm
+   n=8: Ritz 389.01577 nm (u 0.00021) ; formula 389.01903 nm ; formula-Ritz +8.37 ppm
+   n=7: Ritz 397.12020 nm (u 0.00022) ; formula 397.12359 nm ; formula-Ritz +8.53 ppm
+   n=6: Ritz 410.28991 nm (u 0.00024) ; formula 410.29350 nm ; formula-Ritz +8.76 ppm
+   n=5: Ritz 434.16910 nm (u 0.0003) ; formula 434.17302 nm ; formula-Ritz +9.03 ppm
+   n=4: Ritz 486.26910 nm (u 0.0003) ; formula 486.27378 nm ; formula-Ritz +9.63 ppm
+   n=3: Ritz 656.46320 nm (u 0.0007) ; formula 656.46961 nm ; formula-Ritz +9.76 ppm
+V10 Edlen air->vacuum conversion of the B01 air targets vs NIST ASD Ritz vacuum:
+   n=3: air 656.281 -> vac 656.4623 ; NIST Ritz 656.4632 ; diff -1.39 ppm
+   n=4: air 486.135 -> vac 486.2708 ; NIST Ritz 486.2691 ; diff +3.49 ppm
+   n=5: air 434.047 -> vac 434.1690 ; NIST Ritz 434.1691 ; diff -0.17 ppm
+   n=6: air 410.174 -> vac 410.2898 ; NIST Ritz 410.2899 ; diff -0.37 ppm
+V11 Mercury c-route sensitivity: c = (2 pi a/T) sqrt(6 pi/(dw (1-e^2))), a=5.790905e10 m, T=7.6005216e6 s, e=0.205630
+   dw=42.98"/cy exactly                : c = 299,795,202 m/s ; rel +9.2 ppm
+   dw as quoted 5.0188e-7 rad/orbit    : c = 299,788,582 m/s ; rel -12.9 ppm
+   EPM2011 supplementary precession -2.0 +/- 3.0 mas/cy relative to 42980 mas/cy = 7.0e-05 -> c sensitivity (half) 3.5e-05 = 10.5 km/s
+V12 icosahedral neighbour gap for 12 equal spheres touching a central sphere (centre distance 2): edge = 2*4/sqrt(10+2 sqrt5)*... 
+   neighbour spacing 2.1029 ; gap 0.1029
+V13 Io from JPL numbers: sqrt(GM_J/a) = 17.3305 km/s ; 2 pi a/P = 17.4015 km/s ; ratio 1.00409
+   (JPL mean elements are an ephemeris fit incl. oblateness/Laplace terms; GM-a-P are not mutually Keplerian at the 1e-3 level)
+V14 kissing-number table (wikitext rows 4-8 shown): see MANIFEST file; known: 3D=12, 4D=24, 8D=240, 24D=196560; 7D bounds 126-134 (lower via E7)
+
+V15 Horizons-derived osculating asymptote geometry (instrument validated on the six PRL Table I flybys: V1/V2 plus comparison below):
+   galileo1   Vinf 8.9481/8.9477  I 142.94  dec_in  -12.48  dec_out  -34.17  rp_osc   7324.1 km (alt   946.0)  Eq(1)   4.132 mm/s
+   galileo2   Vinf 8.8793/8.8769  I 139.15  dec_in  -34.27  dec_out   -4.82  rp_osc   6757.2 km (alt   379.0)  Eq(1)  -4.680 mm/s
+   near       Vinf 6.8510/6.8493  I 107.99  dec_in  -20.57  dec_out  -71.98  rp_osc   6911.7 km (alt   533.6)  Eq(1)  13.310 mm/s
+   cassini    Vinf 16.0125/16.0132  I 25.41  dec_in  -12.92  dec_out   -4.99  rp_osc   7567.2 km (alt  1189.1)  Eq(1)  -1.068 mm/s
+   rosetta1   Vinf 3.8612/3.8622  I 144.93  dec_in   -1.94  dec_out  -34.07  rp_osc   8323.8 km (alt  1945.6)  Eq(1)   2.047 mm/s
+   messenger  Vinf 4.0579/4.0581  I 133.12  dec_in   32.24  dec_out  -32.74  rp_osc   8705.8 km (alt  2327.7)  Eq(1)   0.059 mm/s
+   rosetta2   Vinf 9.3640/9.3627  I 115.10  dec_in  -10.80  dec_out   18.59  rp_osc  11694.7 km (alt  5316.5)  Eq(1)   0.999 mm/s
+   rosetta3   Vinf 9.3787/9.3771  I 155.56  dec_in   18.47  dec_out   24.36  rp_osc   8861.1 km (alt  2482.9)  Eq(1)   1.090 mm/s
+   juno       Vinf 10.3887/10.3897  I 47.28  dec_in   14.17  dec_out   39.48  rp_osc   6891.7 km (alt   513.5)  Eq(1)   6.369 mm/s
+   PRL Table I comparison (V-inf, dec_in, dec_out, I): Galileo 8.949,-12.52,-34.15,142.9; Galileo 8.877,-34.26,-4.87,138.7; NEAR 6.851,-20.76,-71.96,108.0; Cassini 16.010,-12.92,-4.99,25.4; Rosetta 3.863,-2.81,-34.29,144.9; MESSENGER 4.056,31.44,-31.92,133.1
+   Published predictions for the later flybys: Anderson 2008 PRL abstract 'less than 1 mm/s' (Rosetta II); ASTG II text 'up to about 1 mm/s' (Rosetta III); Busack 2013 'about +6.0 mm/s' (Juno).

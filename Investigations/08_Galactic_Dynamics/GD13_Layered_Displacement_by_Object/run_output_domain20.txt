@@ -1,0 +1,159 @@
+﻿=================================================================
+ GD13 LAYERED DISPLACEMENT BY OBJECT  (reading R1-R7; NO TWEAKING)
+=================================================================
+V_p = 1.8327e-58 m^3 ; l_P = 1.6163e-35 m ; grid 801 x 801 at 0.05 kpc ; region R < 17 kpc
+
+== INSTRUMENT VALIDATION ==
+  [PASS] V1 : sphere: psi(d) and S(d) against 4 pi d^3/3 and 4 pi d^2 (2%)  (3.967e-03)
+  [PASS] V5 : sphere shell shift f = V/(4 pi r^2 l_P) (2%)  (4.671e-03)
+  [PASS] V2 : plate: psi(d) = H(2dL + pi d^2) (2%)  (7.204e-04)
+  [PASS] V2 : plate: S(d) = H(2L + 2 pi d) (3%)  (5.440e-03)
+  [PASS] V3a : two spheres: contact layer against the analytic arrival condition (2%)  (1.455e-02)
+  [PASS] V3b : two spheres: equal-f meeting point at x = -1 kpc (closed form sqrt(Va/Vb) = 1/2) (2%)  (2.500e-02)
+  validation failures: 0
+
+== OBJECTS (V = N V_p, layer W = 100 V) ==
+object     N baryons    V [m^3]      share of V W [m^3]     
+Sgr A*     4.995e+63    9.155e+05    0.0001     9.155e+07   
+bulge      1.974e+67    3.618e+09    0.4106     3.618e+11   
+long bar   1.225e+67    2.245e+09    0.2548     2.245e+11   
+3-kpc(N)   1.678e+65    3.076e+07    0.0035     3.076e+09   
+Norma      1.623e+66    2.974e+08    0.0337     2.974e+10   
+Sct-Cen    3.759e+66    6.888e+08    0.0782     6.888e+10   
+Sgr-Car    3.920e+66    7.184e+08    0.0815     7.184e+10   
+Local      5.512e+65    1.010e+08    0.0115     1.010e+10   
+Perseus    3.070e+66    5.626e+08    0.0638     5.626e+10   
+Outer      2.996e+66    5.490e+08    0.0623     5.490e+10   
+objects hold 4.8085e+67 baryons ; the unallocated thin-disc + gas baryons and the thick disc belong to no object and do not displace here
+
+K_end = 3.0262e+49 layers (the last plane cell inside 17 kpc is first reached at x = (-7.40, -15.30) kpc)
+
+== O1 CONTACT TIMELINE (first layer at which two objects reach a common plane cell) ==
+#    k_c          object A   object B   contact cell (x,y) R kpc    reach A   reach B   k_c/K_end 
+1    0.0000e+00   Sgr A*     bulge      (  0.00,  0.00)        0.00     0.000     0.000     0.000e+00 
+2    5.8888e+43   Sgr A*     long bar   (  0.00,  0.00)        0.00     0.000     0.000     1.946e-06 
+3    5.8888e+43   bulge      long bar   (  0.00,  0.00)        0.00     0.000     0.000     1.946e-06 
+4    7.0077e+45   long bar   Norma      (  2.10,  3.55)        4.12     0.008     0.001     2.316e-04 
+5    2.2764e+46   long bar   Sct-Cen    (  2.40,  4.10)        4.75     0.013     0.026     7.522e-04 
+6    2.6116e+47   Norma      Sct-Cen    (  1.60,  4.40)        4.68     0.261     0.284     8.630e-03 
+7    3.1476e+47   long bar   3-kpc(N)   (  1.50,  3.15)        3.49     0.306     0.459     1.040e-02 
+8    3.6921e+47   3-kpc(N)   Norma      (  1.40,  3.75)        4.00     0.497     0.365     1.220e-02 
+9    4.4439e+47   Perseus    Outer      (-13.55, -0.80)        13.57    0.032     0.021     1.468e-02 
+10   5.5713e+47   Sgr-Car    Perseus    ( -0.75, -5.90)        5.95     0.202     0.038     1.841e-02 
+11   6.9605e+47   3-kpc(N)   Sct-Cen    (  1.55,  3.90)        4.20     0.708     0.718     2.300e-02 
+12   7.9152e+47   long bar   Sgr-Car    (  3.00,  4.90)        5.75     0.751     0.281     2.616e-02 
+13   8.2265e+47   Sct-Cen    Sgr-Car    (  2.20,  5.35)        5.78     0.839     0.295     2.718e-02 
+14   9.0353e+47   long bar   Perseus    ( -2.45, -5.15)        5.70     0.846     0.044     2.986e-02 
+15   1.3422e+48   Norma      Sgr-Car    (  2.10,  5.20)        5.61     1.200     0.474     4.435e-02 
+16   1.4436e+48   bulge      Sct-Cen    (  0.70, -1.45)        1.61     1.610     1.392     4.770e-02 
+17   1.5473e+48   bulge      Norma      (  1.65,  0.10)        1.65     1.653     1.361     5.113e-02 
+18   2.6133e+48   long bar   Local      (  4.00,  5.80)        7.05     2.089     0.524     8.636e-02 
+19   2.6181e+48   Sct-Cen    Local      (  4.00,  5.80)        7.05     2.309     0.524     8.651e-02 
+20   2.8758e+48   bulge      3-kpc(N)   (  0.40,  2.00)        2.04     2.040     1.490     9.503e-02 
+21   2.8897e+48   Sgr-Car    Local      ( -1.05,  8.10)        8.17     0.979     0.570     9.549e-02 
+22   3.0544e+48   3-kpc(N)   Sgr-Car    (  2.00,  4.60)        5.02     1.536     1.025     1.009e-01 
+23   3.4485e+48   Sgr A*     Sct-Cen    (  0.05, -0.10)        0.11     0.112     2.890     1.140e-01 
+24   3.5702e+48   Norma      Local      (  3.30,  6.20)        7.02     2.731     0.686     1.180e-01 
+(showing the first 24 of 45 pairs; all in gd13_contacts.csv)
+  [PASS] V4 : owned + unreached cells equal the region cell count  (0.000e+00)
+
+== O2 END-STATE OWNERSHIP at K_end (plane, R < 17 kpc; owner = largest pressure by volume among reaching objects) ==
+object     area kpc^2   area share owned volume   share of V  
+Sgr A*     0.00         0.0000     0.0000e+00     0.0001      
+bulge      3.50         0.0039     4.9452e+00     0.4106      
+long bar   37.13        0.0409     1.3365e+01     0.2548      
+3-kpc(N)   0.68         0.0007     2.7200e-02     0.0035      
+Norma      29.63        0.0326     1.1850e+00     0.0337      
+Sct-Cen    836.84       0.9219     4.6751e+01     0.0782      
+Sgr-Car    0.00         0.0000     0.0000e+00     0.0815      
+Local      0.00         0.0000     0.0000e+00     0.0115      
+Perseus    0.00         0.0000     0.0000e+00     0.0638      
+Outer      0.00         0.0000     0.0000e+00     0.0623      
+classes over R < 17 kpc: arms 0.9552 , bulge+Sgr A* 0.0039 , bar 0.0409 of the owned area
+
+== O3 OWNER BY CLASS WITH RADIUS (annulus area shares) ==
+R kpc    arms      bulge     bar       | f_owner mean
+1        0.0000    0.9928    0.0072    | 8.9128e+04  
+2        0.2051    0.0422    0.7527    | 1.6097e+04  
+3        0.6101    0.0000    0.3899    | 1.6151e+04  
+4        0.8031    0.0000    0.1969    | 1.7684e+04  
+5        0.8508    0.0000    0.1492    | 1.7389e+04  
+6        0.8532    0.0000    0.1468    | 1.5761e+04  
+7        0.8671    0.0000    0.1329    | 1.4584e+04  
+8        0.9255    0.0000    0.0745    | 1.3411e+04  
+9        0.9746    0.0000    0.0254    | 1.2250e+04  
+10       1.0000    0.0000    0.0000    | 1.1264e+04  
+11       1.0000    0.0000    0.0000    | 1.0442e+04  
+12       1.0000    0.0000    0.0000    | 9.7556e+03  
+13       1.0000    0.0000    0.0000    | 9.1883e+03  
+14       1.0000    0.0000    0.0000    | 8.6598e+03  
+15       1.0000    0.0000    0.0000    | 8.1652e+03  
+16       1.0000    0.0000    0.0000    | 7.8900e+03  
+17       1.0000    0.0000    0.0000    | 7.8370e+03  
+radius where the arms' owned area first exceeds the bulge's: 1.00 kpc (annulus starting)
+classification 'the spiral arms dominate': arms' share of owned area over 3 < R < 17 kpc = 0.9728  ->  supported
+
+== O4 FREE PRESSURE BY VOLUME f_i = V_i/(S_i l_P) against distance from the centreline ==
+object     d=0.5     d=1       d=2       d=4       d=8 kpc  
+Sgr A*     1.834e+01 4.663e+00 1.187e+00 2.955e-01 7.368e-02
+bulge      7.247e+04 1.843e+04 4.691e+03 1.168e+03 2.912e+02
+long bar   1.752e+04 1.546e+04 1.244e+04 8.969e+03 5.770e+03
+3-kpc(N)   1.417e+04 7.504e+03 3.856e+03 1.955e+03 9.865e+02
+Norma      1.754e+04 1.565e+04 1.302e+04 1.038e+04 6.886e+03
+Sct-Cen    1.912e+04 1.735e+04 1.460e+04 1.108e+04 9.017e+03
+Sgr-Car    6.459e+03 5.982e+03 5.218e+03 4.128e+03 3.711e+03
+Local      3.444e+03 2.867e+03 2.147e+03 1.415e+03 8.470e+02
+Perseus    1.329e+03 1.284e+03 1.204e+03 1.066e+03 1.521e+03
+Outer      8.706e+02 8.501e+02 8.114e+02 7.423e+02 8.016e+02
+
+== O5 CROSSOVER AND SHUNT at K_end (50% of each object's crossover volume is shunted into its own layer) ==
+object     reached cost crossover    frac         shunt / B(K_end)
+Sgr A*     9.3895e-02   9.3895e-02   1.0000       4.9787e-01    
+bulge      3.7270e+02   3.7270e+02   1.0000       5.0000e-01    
+long bar   2.3125e+02   2.3125e+02   1.0000       5.0000e-01    
+3-kpc(N)   3.1680e+00   3.1680e+00   1.0000       5.0001e-01    
+Norma      3.0620e+01   3.0620e+01   1.0000       4.9978e-01    
+Sct-Cen    5.0379e+01   4.5940e+01   0.9119       3.2373e-01    
+Sgr-Car    7.1388e+01   7.1388e+01   1.0000       4.8239e-01    
+Local      1.0405e+01   1.0405e+01   1.0000       5.0000e-01    
+Perseus    5.7950e+01   5.7950e+01   1.0000       4.9999e-01    
+Outer      5.6549e+01   5.6549e+01   1.0000       5.0000e-01    
+
+== arms: crossover and owner along the ridge (thirds, inner -> outer) ; engulfment by the bulge ==
+arm        crossover fraction (in/mid/out) owner = bulge or Sgr A* (in/mid/out) engulfed  
+3-kpc(N)   1.000 / 1.000 / 1.000             0.000 / 0.000 / 0.000                0 of 7
+Norma      1.000 / 1.000 / 1.000             0.000 / 0.000 / 0.000                0 of 335
+Sct-Cen    1.000 / 1.000 / 1.000             0.000 / 0.000 / 0.000                0 of 490
+Sgr-Car    1.000 / 1.000 / 1.000             0.000 / 0.000 / 0.000                0 of 551
+Local      1.000 / 1.000 / 1.000             0.000 / 0.000 / 0.000                0 of 85
+Perseus    1.000 / 1.000 / 1.000             0.000 / 0.000 / 0.000                0 of 637
+Outer      1.000 / 1.000 / 1.000             0.000 / 0.000 / 0.000                0 of 535
+ridge nodes whose cell the bulge or Sgr A* owns at K_end: 0 of 2640
+
+== O1b per ridge node: layer at which another object first reaches the node's cell; layer at which the bulge front reaches it ==
+arm        first reached by another (median k, in/mid/out) who (most often, in/mid/out)       bulge reaches (median k, in/mid/out)
+3-kpc(N)   9.76e+47 / 9.25e+47 / 8.43e+47          long bar  / long bar  / long bar         1.50e+49 / 1.51e+49 / 1.49e+49
+Norma      2.92e+48 / 1.10e+48 / 7.42e+47          Sct-Cen   / Sct-Cen   / Sct-Cen          2.81e+49 / 2.95e+49 / 1.63e+49
+Sct-Cen    3.62e+48 / 9.38e+47 / 1.37e+48          Norma     / Norma     / Norma            1.23e+50 / 5.10e+49 / 1.72e+49
+Sgr-Car    2.56e+48 / 1.52e+48 / 2.94e+48          Sct-Cen   / Sct-Cen   / Sct-Cen          2.67e+50 / 7.48e+49 / 6.78e+49
+Local      3.69e+48 / 3.56e+48 / 3.43e+48          Sct-Cen   / Sct-Cen   / Sct-Cen          2.13e+50 / 1.85e+50 / 1.59e+50
+Perseus    7.01e+48 / 6.06e+48 / 3.13e+48          Sct-Cen   / Sct-Cen   / Sgr-Car          7.11e+50 / 3.05e+50 / 1.11e+50
+Outer      8.51e+48 / 1.04e+49 / 8.45e+48          Sct-Cen   / Sct-Cen   / Sct-Cen          7.90e+50 / 6.31e+50 / 2.86e+50
+(layers; K_end = 3.026e+49 ; the bulge front reaches in-plane radius r at k = 4 pi r^3/3 / W_bulge)
+
+== O5b crossover fraction of each object (cost of cells it has reached that another object has also reached / its reached cost) at layer checkpoints ==
+object     k=1e47     k=1e48     k=1e49     K_end      | bulge in-plane reach kpc at 1e47/1e48/1e49
+Sgr A*     1.0000     1.0000     1.0000     1.0000    
+bulge      0.1520     0.6907     1.0000     1.0000     | 0.66 1.43 3.09 
+long bar   0.1743     0.4909     0.9315     1.0000    
+3-kpc(N)   0.0000     0.8252     1.0000     1.0000    
+Norma      0.0188     0.4582     1.0000     1.0000    
+Sct-Cen    0.0077     0.1932     0.8511     0.9119    
+Sgr-Car    0.0000     0.0119     1.0000     1.0000    
+Local      0.0000     0.0000     1.0000     1.0000    
+Perseus    0.0000     0.0341     0.8975     1.0000    
+Outer      0.0000     0.0308     0.7029     1.0000    
+
+O6 over 3 < R < 17 kpc: mean f of the owner 1.0407e+04 ; mean of the superposition sum f_i 2.5555e+04 ; ratio sum/owner 2.456
+
+wrote gd13_contacts.csv gd13_ridge_owner.csv mw_layers.js

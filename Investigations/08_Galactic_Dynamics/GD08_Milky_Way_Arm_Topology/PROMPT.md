@@ -68,3 +68,62 @@ global line 336 + 36 (R − 8.15) pc, residual per arm reported.
 
 Arm parameters OBSERVED (Reid 2019). Mesh, tangencies, lengths COMPUTED. Zero fitted
 parameters in GD08.
+
+---
+
+## Addendum 1 — context components (pre-registered 2026-10-14, before the tool is changed)
+
+The arms are given a body: stellar discs and the central bulge, at sourced sizes. Source:
+Bland-Hawthorn & Gerhard 2016, ARA&A 54, 529 (arXiv:1602.07702), §4.2.1, §4.3, §5.1, read from the
+paper text in this session; Wegg, Gerhard & Portail 2015 for the long bar.
+
+Inputs (OBSERVED, one source each):
+- Thin disc (old stars): radial exponential scale length R_t = 2.6 ± 0.5 kpc; vertical exponential
+  scale height z_t ≈ 300 pc (20%). Thick disc: R_T = 2.0 ± 0.2 kpc; z_T = 900 ± 100 pc.
+- b/p bulge: major axis at 27 ± 2° from the Sun–centre line, near side at positive longitude;
+  face-on axis ratio b/a = 0.5 ± 0.05 (isophotes of 1 : 2.1 reaching ~2 kpc along the major
+  axis); edge-on axis ratio c/a = 0.26; central vertical scale height 180 pc; X-shape maximum at
+  x_X = 1.5 ± 0.2 kpc.
+- Long bar: half-length 5.0 ± 0.2 kpc, angle 28–33°, thin component scale height 180 pc,
+  super-thin 45 pc. In-plane width is not stated in the abstract or the review and is not drawn.
+
+Rendering rules:
+- Bulge: ellipsoid, semi-major a = 2.0 kpc, b = a/2.1, c = 0.26 a (COMPUTED from the quoted ratios).
+  Not the X-shape; the peanut structure is not modelled.
+- Discs: translucent slabs at ±1 scale height out to R = 15 kpc. The 15 kpc edge is a drawing limit
+  that matches the arm extent; the source gives exponential profiles with no edge, and no
+  truncation radius is asserted. Radial scale lengths are marked by rings.
+- The bulge and slabs are context bodies; arms remain the object of GD08.
+
+Validation (before use, known answers):
+- V5. Ellipsoid mesh volume against 4/3 π a b c, tolerance 1%.
+- V6. Face-on axis ratio used (1/2.1 = 0.476) lies inside the quoted 0.5 ± 0.05.
+- V7. Slab (cylinder) mesh volume against π R² h, tolerance 1%.
+
+Single pass; no mid-range adjustment. Zero fitted parameters.
+
+---
+
+## Addendum 2 — far-side continuation (pre-registered 2026-10-15, before the tool is changed)
+
+Observation that prompted it: the arms cover only part of the disc. The data are maser parallaxes
+seen from the Sun (Reid 2019: parallax distances trace arms over typically < 12 kpc), so the far
+side has no measured arm positions.
+
+Rule: each of Norma, Sct-Cen, Sgr-Car, Perseus and Outer is continued along its own fitted
+log-spiral (its own ψ< and ψ>, no new parameter) for up to 270° beyond each measured end,
+stopping where R leaves [3, 16] kpc. 3-kpc(N) and Local are not continued (as before).
+Three tiers, drawn distinctly and toggled separately:
+- measured azimuth range (Table 2 column "range");
+- extended: up to 90° beyond a measured end (Addendum-0 rule, unchanged);
+- continued: beyond 90°, up to 270°. Labelled as unmeasured.
+
+Not asserted: that continued sections are where the arms are; that segments connect to one
+another; that any arm closes or wraps. Reid's Fig. 10 joins segments with "small adjustments"
+that are not published; none are applied. Segments whose own pitch angle is near zero on the
+continued side (Sgr-Car ψ> = 1.0°, Norma ψ< = −1.0°) continue as near-circles; that is the fitted
+value, not an observation.
+
+Validation (before use): V8 ridge continuity across tier boundaries (jump < 1e-9 kpc per step
+fraction, i.e. no gap); V9 every continued sample has R in [3, 16] kpc and in-plane σ > 0.
+Single pass, zero fitted parameters.

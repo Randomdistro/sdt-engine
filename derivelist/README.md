@@ -56,6 +56,11 @@ The spectroscopic route stands as primary: one hydrogen ladder measured as
 frequency and as wavenumber returns the one relay speed. The closure is retained
 as a cross-domain consistency check.
 
+**Addendum (2026-10-16, direct execution; `Datasets/DATA_REGISTER_2026-10-16.md` §3).**
+- *Algebra:* R_Sun and v_surface cancel identically. c = v_Mercury √(6π/(δφ(1−e²))), v_Mercury = 2πa/T — the GR advance formula solved for c. `bridge::c_from_perihelion_advance` implements it; with the engine inputs it returns 299 794 943 m/s (+8.3 ppm) against 299 795 136 m/s (+8.9 ppm) from the stored `v_surface_Sun`, a 0.64 ppm rounding of that stored value.
+- *Contaminating input (named):* δφ, the anomalous advance, is a residual to ephemeris fits whose force model propagates light and GR accelerations with c (Genova et al. 2018; Pitjeva & Pitjev 2013). The residual to the GR-modelled advance is −2.0 ± 3.0 mas/cy (Pitjeva & Pitjev 2013 Table 4), 7×10⁻⁵ of 42.98″/cy, which maps to ±10.5 km/s on c; the 9 ppm agreement is below the input uncertainty.
+- *Propagation:* B27 rows "k_Sun from precession" and "c from precession closure" are CONSTRUCTION (they were COMPUTED and DERIVED); the earned tally moves 66/66 → 64/64; the closed-form row is CONSTRUCTION. `bridge` block in `laws.hpp` carries the STATUS paragraph.
+
 ## Construction-resolved mechanisms
 
 - the PPT17 map conserving `6π⁵` point-electron Bohr-closure tube volumes into

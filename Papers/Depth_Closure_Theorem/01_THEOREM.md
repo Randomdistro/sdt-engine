@@ -33,7 +33,9 @@ Formally, at any point at depth `z(r) = ϟ/r`:
 ```
 (1)  ℓ_P(r) = ℓ_P,∞ · (1 − z)            local spation closure
 (2)  c_local(r) = c_∞ · (1 − z)           local relay speed   ⇒  z = 1 − c_local/c_∞
-(3)  dτ/dt = √(1 − z)                      local clock rate (movement budget, Law V)
+                                           [canon since GOM22: c_far = c_∞ · (1 − z)², first-order coefficient two;
+                                            figures below that rest on the linear form are not re-derived here]
+(3)  dτ/dt = (1 − z)                       local clock rate (movement budget, Law V) [GOM22 repair; was √(1 − z)]
 (4)  z_spectral = z(r_emit) − z(r_obs)     measured "gravitational redshift"
 (5)  v(r) = c √(ϟ/r) = c√z                 bound-motion law (displacement pressure = centripetal force)
 ```

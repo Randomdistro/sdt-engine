@@ -13,9 +13,9 @@ This reference provides the **exact** constants that Atomicus entries should use
 |----------|--------|-------|--------|
 | Speed of light | $c$ | 299,792,458 m/s | SI exact |
 | Reduced Planck | $\hbar$ | 1.054571817 × 10⁻³⁴ J·s | SI exact |
-| Fine structure | $\alpha$ | 7.2973525693 × 10⁻³ | CODATA 2018 |
-| Electron mass | $m_e$ | 9.1093837015 × 10⁻³¹ kg | CODATA 2018 |
-| Proton mass | $m_p$ | 1.67262192369 × 10⁻²⁷ kg | CODATA 2018 |
+| Fine structure | $\alpha$ | 7.2973525643 × 10⁻³ | CODATA 2022 |
+| Electron mass | $m_e$ | 9.1093837139 × 10⁻³¹ kg | CODATA 2022 |
+| Proton mass | $m_p$ | 1.67262192595 × 10⁻²⁷ kg | CODATA 2022 |
 | CMB temperature | $T_\text{CMB}$ | 2.7255 K | FIRAS/Planck |
 
 ## Derived Atomic Constants

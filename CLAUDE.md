@@ -27,7 +27,7 @@ There is no test runner. Benchmarks self-report PASS/FAIL by comparing SDT-deriv
 
 **`Engine/include/sdt/laws.hpp` is THE single source of truth.** Every numerical constant, every force law, every derivation ultimately flows through this file. Downstream headers (`cosmology.hpp`, `magnetosphere.hpp`, `neutrino.hpp`, `state28d.hpp`) and all benchmark/investigation `.cpp` files `#include <sdt/laws.hpp>` and must not redefine constants it already exposes. Everything lives in `namespace sdt::laws` with sub-namespaces mirroring the Six Laws:
 
-- `sdt::laws::measured` — the ONLY external inputs (CODATA 2018, IAU, FIRAS). A fact not in here is not a measured fact. Do not add fitted values.
+- `sdt::laws::measured` — the ONLY external inputs (CODATA 2022, IAU, FIRAS). A fact not in here is not a measured fact. Do not add fitted values.
 - `sdt::laws::law_I` — cosmological relay throughput (Φ = Nε, P_conv)
 - `sdt::laws::law_II` — release cascade, pressure domains
 - `sdt::laws::law_III` — occlusion force: `F = (π/4) P_eff R₁² R₂² / r²` — the universal force law (Coulomb, gravity, nuclear all share this)
@@ -80,6 +80,12 @@ n_d = 3Z - A - 2
 Electron-capture isotopes use the **alternate grammar** (He-3 core instead of He-4): `n_t = A - 2Z + 1`, `n_d = 3Z - A - 3`. Free neutrons are forbidden in stable nuclei; a "free neutron" is an exposed triton remnant. Don't invent other decompositions — the grammar is constitutional.
 
 `ATOMICUS/` holds per-isotope Markdown characterisations (`isotopes/NNN_XN.md`), per-element files (`elements/`), and generators/validators in `tools/`. Reports like `STRUCTURAL_ANALYSIS_REPORT.md` are regenerated outputs — edit the tool, not the report.
+
+**Contact rule (Harvey, 2026-10-14; `sdt::laws::nuclear::contact_slots`).** Every proton has three neutron slots and every neutron three proton slots. Contacts join unlike units only, a unit holds at most three, and the rule fixes a *capacity* (`contact_capacity(Z, N) = 3·min(Z, N)`), not a count. Nucleons are solid: a centre-distance pass is not a fit (the engine's slip gate is identically zero for unlike pairs and cannot see an out-of-plane contact). The website engine (`Release/HTML_SDT_Website/js/traction-gear-engine.js`, NSEQ18-WEB-2) enforces the cap and reports `outOfPlaneContacts` and `h1EnvelopeRp`; the hard-sphere instrument is `Investigations/05_Nuclear_Physics/NSEQ19_Contact_Closure_Stacker/`. Open: a triton shell's opening is reproduced (T8, T10), its closing tightening is not. The mirror's `tritonOpeningScale` 1.05 / `tritonClosingScale` 0.95 are unsourced placeholders, not canon.
+
+## Website pipeline
+
+`Release/HTML_SDT_Website/` is the sole authoring tree; `docs/` is generated from it and must stay byte-identical. After editing `laws.hpp` or the benchmark suite: build the suite, run it with `--website-data Release/HTML_SDT_Website/dist/sdt-engine-data.json`, write stdout to `dist/SDT_benchmarks_output.txt` and into the `bench-pre` capture of `benchmarks.html`, copy `laws.hpp` to `dist/laws.hpp`, update the static fallback headline text, then `cd Release && python build_site.py`, and run `python Release/verify_public_site.py` and `python Release/verify_papers.py` (all three must pass). The pre-built `build/Benchmarks/Release/sdt-benchmarks.exe` is git-ignored and goes stale; rebuild it before quoting its numbers.
 
 ## Directory layout (what to read where)
 

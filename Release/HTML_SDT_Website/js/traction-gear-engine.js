@@ -4,7 +4,7 @@
 (function (global) {
   'use strict';
 
-  const VERSION = 'NSEQ18-WEB-1';
+  const VERSION = 'NSEQ18-WEB-2';   // WEB-2 (2026-10-16): three-slot contact rule; evaluate() reports out-of-plane contacts and the H1 envelope
   const TAU = 2 * Math.PI;
   const EPS = 1e-12;
   const BRAID = Object.freeze({
@@ -2139,6 +2139,12 @@
     };
   }
 
+  // NOTE (2026-10-16 adversarial audit).  For an UNLIKE pair the two rim velocities are equal
+  // for ANY contact normal: velocityB = signB * (axis x (-n Rp)) = -signB * (axis x n) Rp and
+  // signB = -signA, so velocityB = velocityA and the slip is identically 0.  This test therefore
+  // cannot see a contact lying out of the ring plane (a rim contact between rings turning about
+  // one axis needs the line of centres in the ring plane).  evaluate() reports that separately
+  // as outOfPlaneContacts / maxOutOfPlane; a like pair gives 2|axis x n| (2 in plane).
   function contactSlip(typeA, typeB, normal, Rp) {
     const axis = [0, 0, 1];
     const signA = typeA === 'p' ? 1 : -1;
@@ -2149,12 +2155,55 @@
     return norm(sub(velocityA, velocityB)) / Rp;
   }
 
+  // Contact rule (Harvey, 2026-10-14): every proton has three neutron slots and every neutron three
+  // proton slots. A contact is an unlike pair at centre distance 2*Rp; a unit never has more than
+  // SLOTS contacts; a like pair never touches; nothing overlaps.
+  const SLOTS = 3;
+
+  function screenPlacement(builder, types, positions, contact, anchorId) {
+    const tol = contact * 1e-10;
+    const internal = positions.map((_, i) => (i > 0 ? 1 : 0) + (i < positions.length - 1 ? 1 : 0));
+    const newDegree = internal.map((d, i) => d + (i === 0 && anchorId !== null ? 1 : 0));
+    const added = new Map();
+    if (anchorId !== null) added.set(anchorId, 1);
+    const extras = [];
+    let clearance = Infinity;
+    for (let i = 0; i < positions.length; i++) {
+      for (const node of builder.nodes) {
+        if (i === 0 && node.id === anchorId) continue;
+        const gap = norm(sub(positions[i], node.pos)) - contact;
+        if (gap < -tol) return null;
+        if (gap <= tol) {
+          if (node.type === types[i]) return null;
+          added.set(node.id, (added.get(node.id) || 0) + 1);
+          newDegree[i]++;
+          extras.push({ index: i, node: node.id });
+        } else {
+          clearance = Math.min(clearance, gap);
+        }
+      }
+      for (let j = 0; j < i; j++) {
+        if (i === j + 1) continue;
+        const gap = norm(sub(positions[i], positions[j])) - contact;
+        if (gap <= tol) return null;
+        clearance = Math.min(clearance, gap);
+      }
+    }
+    for (const [id, count] of added) {
+      if (builder.degree[id] + count > SLOTS) return null;
+    }
+    if (newDegree.some(d => d > SLOTS)) return null;
+    return { clearance, extras };
+  }
+
   function makeBuilder(Rp) {
     const nodes = [];
     const contacts = [];
     const modules = [];
+    const degree = [];
     const push = (position, type, group, module, tier) => {
       const id = nodes.length;
+      degree.push(0);
       nodes.push({
         id,
         pos: position,
@@ -2168,6 +2217,8 @@
     };
     const bond = (a, b, kind) => {
       contacts.push({ a, b, kind });
+      degree[a]++;
+      degree[b]++;
     };
 
     const alpha = center => {
@@ -2201,7 +2252,7 @@
       return ids;
     };
 
-    return { nodes, contacts, modules, push, bond, alpha, chain };
+    return { nodes, contacts, modules, degree, push, bond, alpha, chain };
   }
 
   function placeModule(builder, kind, direction, moduleIndex, Rp) {
@@ -2222,6 +2273,7 @@
     }
 
     for (const anchor of builder.nodes) {
+      if (builder.degree[anchor.id] >= SLOTS) continue;
       let types;
       if (kind === 'triton') {
         if (anchor.type !== 'p') continue;
@@ -2249,30 +2301,9 @@
           const centre = mul(direction, centreScalar);
           const positions = offsets.map(offset =>
             add(centre, mul(axis, offset)));
-          let valid = true;
-          let clearance = Infinity;
-
-          for (let i = 0; i < positions.length && valid; i++) {
-            for (const node of builder.nodes) {
-              if (i === 0 && node.id === anchor.id) continue;
-              const gap = norm(sub(positions[i], node.pos)) - contact;
-              if (gap <= contact * 1e-10) {
-                valid = false;
-                break;
-              }
-              clearance = Math.min(clearance, gap);
-            }
-            for (let j = 0; j < i && valid; j++) {
-              if (i === j + 1) continue;
-              const gap = norm(sub(positions[i], positions[j])) - contact;
-              if (gap <= contact * 1e-10) {
-                valid = false;
-                break;
-              }
-              clearance = Math.min(clearance, gap);
-            }
-          }
-
+          const screen = screenPlacement(builder, types, positions, contact, anchor.id);
+          const valid = screen !== null;
+          const clearance = valid ? screen.clearance : Infinity;
           if (valid) {
             candidates.push({
               anchor: anchor.id,
@@ -2280,6 +2311,7 @@
               positions,
               axis,
               clearance,
+              extras: screen.extras,
               centreScalar,
               alphaAnchor: anchor.group === 'alpha'
             });
@@ -2290,6 +2322,7 @@
 
     candidates.sort((a, b) =>
       (Number(b.alphaAnchor) - Number(a.alphaAnchor))
+      || (b.extras.length - a.extras.length)
       || (b.clearance - a.clearance)
       || (a.centreScalar - b.centreScalar)
       || (a.anchor - b.anchor));
@@ -2304,6 +2337,7 @@
     for (let i = 1; i < ids.length; i++) {
       builder.bond(ids[i - 1], ids[i], 'internal');
     }
+    for (const extra of selected.extras) builder.bond(ids[extra.index], extra.node, 'contact');
     return {
       ids,
       anchor: selected.anchor,
@@ -2344,6 +2378,7 @@
         }
       }
       const anchors = builder.nodes
+        .filter(node => builder.degree[node.id] < SLOTS)
         .filter(node => kind !== 'triton' || node.type === 'p')
         .sort((a, b) =>
           (dot(b.pos, base) - dot(a.pos, base)) || (a.id - b.id));
@@ -2357,29 +2392,15 @@
           if (types[0] === anchor.type) continue;
           const positions = types.map((_, index) =>
             add(anchor.pos, mul(axis, contact * (index + 1))));
-          let valid = true;
-          for (let i = 0; i < positions.length && valid; i++) {
-            for (const node of builder.nodes) {
-              if (i === 0 && node.id === anchor.id) continue;
-              if (norm(sub(positions[i], node.pos)) <= contact * (1 + 1e-10)) {
-                valid = false;
-                break;
-              }
-            }
-            for (let j = 0; j < i && valid; j++) {
-              if (i === j + 1) continue;
-              if (norm(sub(positions[i], positions[j])) <= contact * (1 + 1e-10)) {
-                valid = false;
-              }
-            }
-          }
-          if (!valid) continue;
+          const screen = screenPlacement(builder, types, positions, contact, anchor.id);
+          if (screen === null) continue;
           const ids = types.map((type, i) =>
             builder.push(positions[i], type, kind, moduleIndex, 1));
           builder.bond(anchor.id, ids[0], 'interstitial-dock');
           for (let i = 1; i < ids.length; i++) {
             builder.bond(ids[i - 1], ids[i], 'internal');
           }
+          for (const extra of screen.extras) builder.bond(ids[extra.index], extra.node, 'contact');
           return {
             ids,
             anchor: anchor.id,
@@ -2815,6 +2836,17 @@
     return model;
   }
 
+  // Outer envelope of the engine's H1 nucleon in units of R_p (1 + outerEnvelopeResidual).
+  // NP30 section 2 defines R_p as the EXTENT of the wound structure, so the ratio should be <= 1;
+  // the engine's own dimensions give 1.0848 (G8a of NSEQ16, NOT MET).  Cached per R_p.
+  let h1EnvelopeCache = null;
+  function h1EnvelopeRatio(Rp) {
+    if (h1EnvelopeCache === null || h1EnvelopeCache.Rp !== Rp) {
+      h1EnvelopeCache = { Rp, ratio: 1 + h1Diagnostics(Rp).dimensions.outerEnvelopeResidual };
+    }
+    return h1EnvelopeCache.ratio;
+  }
+
   function evaluate(model) {
     const nodes = model.nodes;
     const contacts = model.contacts;
@@ -2844,6 +2876,26 @@
       adjacency[edge.a].push(edge.b);
       adjacency[edge.b].push(edge.a);
     }
+    const degree = nodes.map(() => 0);
+    for (const edge of contacts) {
+      degree[edge.a]++;
+      degree[edge.b]++;
+    }
+    const maxDegree = Math.max(0, ...degree);
+    const unitsOverSlots = degree.filter(d => d > SLOTS).length;
+    // Rim-contact geometry (reported, not gated): every unit shares one axis (z), so a rim
+    // contact needs the line of centres in the ring plane, |n_z| ~ 0.
+    const RING_PLANE_TOLERANCE = 0.05;
+    let outOfPlaneContacts = 0;
+    let maxOutOfPlane = 0;
+    for (const edge of contacts) {
+      const delta = sub(nodes[edge.b].pos, nodes[edge.a].pos);
+      const length = norm(delta);
+      const nz = length > 0 ? Math.abs(delta[2]) / length : 0;
+      if (nz > maxOutOfPlane) maxOutOfPlane = nz;
+      if (nz > RING_PLANE_TOLERANCE) outOfPlaneContacts++;
+    }
+    const envelopeRp = h1EnvelopeRatio(model.Rp);
     const seen = new Set();
     if (nodes.length) {
       const queue = [0];
@@ -2915,9 +2967,17 @@
       && unlike
       && unlistedTouches === 0
       && likeLikeTouches === 0
+      && unitsOverSlots === 0
       && maxContactResidual <= 1e-10
       && maxSlip < 1e-10;
     return {
+      maxDegree,
+      unitsOverSlots,
+      outOfPlaneContacts,
+      maxOutOfPlane,
+      ringPlaneTolerance: RING_PLANE_TOLERANCE,
+      h1EnvelopeRp: envelopeRp,
+      h1EnvelopeWithinRp: envelopeRp <= 1,
       nucleonCount: nodes.length,
       protonCount,
       contactCount: contacts.length,

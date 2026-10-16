@@ -95,7 +95,7 @@ namespace sdt::laws {
 namespace measured {
     // Numerical seed, bridges and seats; see each provenance block.
     inline constexpr double c           = 299'792'458.0;                // [m/s]    Speed of light (SI exact)
-    inline constexpr double hbar        = 1.054'571'817e-34;            // [J·s]    Reduced Planck constant
+    inline constexpr double hbar        = 1.054'571'817'646'156e-34;    // [J·s]    Reduced Planck constant = h/2π (SI exact; was truncated at 10 digits, 6.1e-10 low)
     inline constexpr double l_P         = 1.616'255e-35;                // [m]      Planck length
     // provenance_status:     geometric closure — ℓ_P = √(ϟ·ƛ), mass-independent
     // correspondence_status: known-match
@@ -108,8 +108,17 @@ namespace measured {
     //                        FLM06's failed Clearing route is route-specific;
     //                        it establishes no general impossibility of deriving ℓ_P.
     // risk_flag:             load-bearing — feeds N = R_CMB/ℓ_P, P_conv = Φ/ℓ_P³, S_boundary = 4πN²
+    // provenance_disclosure: (2026-10-16 adversarial review) the stored number is the CODATA Planck
+    //                        length, whose definition carries G. Recovering it: ℓ_P²c³/ħ =
+    //                        (2.612280e-70 m² × 2.694400e25 m³/s³) / 1.054572e-34 J·s
+    //                        = 7.03853e-45 / 1.054572e-34 = 6.6743e-11 m³ kg⁻¹ s⁻². G therefore
+    //                        enters this header numerically through ℓ_P, N, P_conv and
+    //                        koppa_per_baryon even though no G symbol exists. Tier of the STORED
+    //                        NUMBER: CALIBRATED(1) (Axiom R1; the FLM06 Clearing derivation failed;
+    //                        the closure relation above is a consistency check). Record:
+    //                        Investigations/FIELD_ADVERSARIAL_REVIEW_2026-10-16.md (H4).
     // Optional empirical anchor for atomic-scale closure:
-    inline constexpr double alpha       = 7.297'352'5693e-3;            // [-]      Fine structure constant
+    inline constexpr double alpha       = 7.297'352'5643e-3;            // [-]      Fine structure constant (CODATA 2022)
 
     // Unit conversion constants (not fundamental scales)
     inline constexpr double h           = 6.626'070'15e-34;             // [J·s]    Planck constant (SI exact)
@@ -120,24 +129,27 @@ namespace measured {
     // algebraic combination yields [C]; the Coulomb route e=√(αℏc/k_e) is the
     // bridge definition read backwards (class A, CONSTRUCTION). e is an SI unit bridge.
 
-    // CODATA 2018 measured values
+    // CODATA 2022 measured values (one edition throughout; aligned 2026-10-16 —
+    // α, m_e, a_0, R_inf, Ry_eV and k_e were CODATA 2018 while the masses and
+    // moments were 2022; shifts 6.9e-10 (α), 1.4e-9 (m_e), 6.8e-10 (a_0), 2.7e-13
+    // (R_inf), 6.8e-10 (k_e). Record: Datasets/external_audit_2026-10-16/engine_measured_vs_CODATA2022.csv)
     inline constexpr double alpha_inv   = 1.0 / alpha;                  // [-]      exact reciprocal in-engine
 
     // Validation anchors — currently retained for empirical checks only.
     // In a fully closed SDT derivation, these should follow from the base
     // invariants and SDT topology/relational structure.
-    inline constexpr double a_0         = 5.291'772'109'03e-11;         // [m]      Bohr radius
+    inline constexpr double a_0         = 5.291'772'105'44e-11;         // [m]      Bohr radius (CODATA 2022)
     inline constexpr double r_e         = alpha * alpha * a_0;          // [m]      Hydrogen c-boundary; matches classical electron radius
     inline constexpr double R_p         = 8.414e-16;                    // [m]      Proton boundary radius (muonic H, 2019; "charge radius" is the literature's obfuscation)
     // NOTE: FLM07 selects q=4 before comparison; qℏ/(m_p c) agrees to 0.02%.
-    inline constexpr double m_e         = 9.109'383'7015e-31;           // [kg]     Electron mass (NIST reference)
+    inline constexpr double m_e         = 9.109'383'7139e-31;           // [kg]     Electron mass (CODATA 2022)
     inline constexpr double m_p         = 1.672'621'925'95e-27;         // [kg]     Proton mass (CODATA 2022)
     inline constexpr double m_n         = 1.674'927'500'56e-27;         // [kg]     Neutron mass (CODATA 2022)
     inline constexpr double m_d         = 3.343'583'7768e-27;           // [kg]     Deuteron mass (CODATA 2022)
     inline constexpr double m_t         = 5.007'356'7512e-27;           // [kg]     Triton mass (CODATA 2022)
     inline constexpr double m_He3       = 5.006'412'7862e-27;           // [kg]     Helion mass (CODATA 2022)
-    inline constexpr double R_inf       = 1.097'373'156'8160e7;         // [m^-1]   Rydberg constant
-    inline constexpr double Ry_eV       = 13.605'693'122'994;           // [eV]     Rydberg energy
+    inline constexpr double R_inf       = 1.097'373'156'8157e7;         // [m^-1]   Rydberg constant (CODATA 2022)
+    inline constexpr double Ry_eV       = 13.605'693'122'990;           // [eV]     Rydberg energy (CODATA 2022)
 
     // Compton wavelengths derived from the mass/action seat
     inline constexpr double lambda_C_e  = h / (m_e * c);                // [m]      Electron Compton wavelength
@@ -198,7 +210,7 @@ namespace measured {
     inline constexpr double R_He        = 1.6755e-15;                   // [m]      He-4 boundary radius (lit.: "charge radius")
 
     // Coulomb constant (derived from SI)
-    inline constexpr double k_e         = 8.987'551'7923e9;             // [N·m²/C²] Coulomb constant
+    inline constexpr double k_e         = 8.987'551'7862e9;             // [N·m²/C²] Coulomb constant = 1/(4π ε0), ε0 = 8.8541878188e-12 (CODATA 2022)
 
     // Magnetic moments (in nuclear magnetons, CODATA 2022)
     inline constexpr double mu_P        = 2.792'847'344'63;             // [μ_N]    Proton
@@ -486,8 +498,18 @@ namespace law_III {
     inline const double R_charge = std::sqrt(R_p_lock * r_e);
     // = 1.5396e-15 m
 
-    /// Occlusion force between two bodies (Theorem T4)
+    /// Occlusion force between two bodies (Theorem T3; T4 = the same mechanism
+    /// for Coulomb, gravity and nuclear — label corrected 2026-10-16 to match
+    /// Theory/00_Ruleset.md)
     /// F = (π/4) P_eff R1² R2² / r²
+    /// Pair coefficient, checked 2026-10-16 from the projected solid angle: body 1
+    /// shadows Ω_proj = ∫_cap cosθ dΩ = πR1²/r² of the isotropic influx (exact for
+    /// every r ≥ R1, see solid_angle_occluded); the shadowed fraction of the full
+    /// sphere is Ω_proj/4π = R1²/(4r²); acting on the projected area πR2² of body 2
+    /// that gives (π/4) P R1² R2² / r². The unweighted cap fraction Ω_cap/4π also
+    /// tends to R1²/(4r²) in the far field, so the coefficient does not
+    /// discriminate between the two models; they differ only near contact
+    /// (solid_angle_cap, cap_over_projected; E105 uses the cap form).
     // provenance_status:     SDT-derived
     // correspondence_status: known-match            // 1/r² structure: Coulomb, gravity, nuclear
     // input_dependency:      primitive-derivation basis    // structure; coefficient P_eff is class C (EMC04 electropause)
@@ -523,10 +545,33 @@ namespace law_III {
     }
 
     /// Solid angle occluded by body of radius R at distance r  [sr]
+    /// This is the cosθ-weighted (force-projected) cap solid angle,
+    ///   Ω_proj = ∫_cap cosθ dΩ = 2π ∫₀^arcsin(R/r) cosθ sinθ dθ = π sin²(arcsin(R/r)) = πR²/r²,
+    /// exact for every r ≥ R (equal to π at contact, no Taylor remainder).
     [[nodiscard]] constexpr auto solid_angle_occluded(
         double R, double r
     ) noexcept -> double {
         return std::numbers::pi * R * R / (r * r);
+    }
+
+    /// Unweighted cap solid angle of a sphere of radius R at distance r  [sr]
+    ///   Ω_cap = 2π (1 − √(1 − R²/r²)) = 2π (1 − cos α),  sin α = R/r.
+    /// Tends to πR²/r² for r ≫ R; reaches the hemisphere 2π at contact (r = R).
+    /// This is the near-contact saturation model of E105; it is a different
+    /// quantity from solid_angle_occluded (projected), not a correction of it.
+    [[nodiscard]] inline auto solid_angle_cap(
+        double R, double r
+    ) noexcept -> double {
+        if (r <= R) return 2.0 * std::numbers::pi;
+        return 2.0 * std::numbers::pi * (1.0 - std::sqrt(1.0 - (R * R) / (r * r)));
+    }
+
+    /// Ratio of the unweighted cap to the projected solid angle,
+    ///   G(x) = 2(1 − √(1 − x))/x,  x = (R/r)²   (E105);  G → 1 for x → 0, G(1) = 2.
+    [[nodiscard]] inline auto cap_over_projected(
+        double R, double r
+    ) noexcept -> double {
+        return solid_angle_cap(R, r) / solid_angle_occluded(R, r);
     }
 }
 
@@ -1213,7 +1258,17 @@ namespace bridge {
 
     // ─── GOM04 — c from orbital geometry (koppa closure) ─────────────────
     //
-    //  c is NOT a free input: it CLOSES from Mercury's anomalous precession.
+    //  STATUS (2026-10-16): CONSISTENCY CHECK, not a determination of c
+    //  (derivelist/README.md:51-57, "Mercury closure withdrawn, retained as
+    //  consistency only"). Contaminating input: δφ (mercury_precession_arcsec_cy
+    //  below) — measured via ephemeris fits whose force model propagates light and
+    //  relativistic accelerations with c (Pitjeva & Pitjev 2013; Genova et al.
+    //  2018) — enters at delta_phi_Mercury. The measured residual to the GR-modelled
+    //  advance is −2.0 ± 3.0 mas/cy (Pitjeva & Pitjev 2013 Table 4), i.e. 7e-5 of
+    //  42.98″/cy, which maps to ±10.5 km/s on c: the 9 ppm agreement is below the
+    //  input uncertainty. R_Sun and v_surface_Sun cancel identically (see
+    //  c_from_perihelion_advance); v_surface_Sun = v_Mercury √(a/R_Sun) to 0.64 ppm.
+    //  Algebra: c is not an input to the closure below; it follows from δφ.
     //  NOTE on names: the precession fixes the speed-RATIO k = c/v (dimensionless,
     //  ≈686.4 for the Sun), NOT koppa-the-length (ϟ = R/k² = 1477 m). The GOM04
     //  write-up calls 686.4 "koppa"; by engine convention that quantity is k.
@@ -1226,13 +1281,17 @@ namespace bridge {
     // provenance_status:     SDT-derived
     // correspondence_status: known-match            // recovers SI c to 0.0009%
     // input_dependency:      measured-observable     // δφ, R, a, e, v_surf — no c, no GM
-    // class:                 C
-    // circularity_assertion: passes delete-test — c is an OUTPUT here, not an input
-    // risk_flag:             v_surface is itself an orbital inference (disclosed)
+    // class:                 B-conditioned
+    // circularity_assertion: c is an output of the algebra, but δφ is a residual to a
+    //                        c-dependent ephemeris model (named input in STATUS) —
+    //                        NOT an independent determination of c
+    // risk_flag:             δφ shares c upstream; v_surface cancels against R_Sun
+    //                        (closed form below); B27 row relabelled CONSTRUCTION
     inline constexpr double mercury_precession_arcsec_cy = 42.98;
     inline constexpr double a_Mercury  = 5.7909e10;  // [m]  semi-major axis
     inline constexpr double e_Mercury  = 0.20563;    // [-]  eccentricity
-    inline constexpr double mercury_orbits_per_cy = 36525.0 / 87.969;  // ≈ 415.2
+    inline constexpr double P_Mercury_days = 87.969;                    // [d] sidereal period (NASA NSSDCA)
+    inline constexpr double mercury_orbits_per_cy = 36525.0 / P_Mercury_days;  // ≈ 415.2
 
     /// Anomalous precession per orbit [rad], from arcsec/century
     inline constexpr double delta_phi_Mercury =
@@ -1262,7 +1321,24 @@ namespace bridge {
 
     /// c reconstructed from the closure: c = k_Sun · v_surface  ≈ 2.998e8 m/s
     inline const double c_from_closure = k_Sun_from_precession * v_surface_Sun;
-    // = 299,795,136 m/s  (+0.0009% vs measured c) — "c from geometry alone"
+    // = 299,795,136 m/s  (+8.9 ppm vs measured c) — consistency check (see STATUS)
+
+    /// The same closure with R_Sun and v_surface eliminated:
+    ///   k = √(6πR/(δφ a (1−e²))),  v_surface = v_orbit √(a/R)  ⇒
+    ///   c = k v_surface = v_orbit √(6π / (δφ (1−e²))),  v_orbit = 2π a / T.
+    /// Equivalent to δφ = 6π v²/(c²(1−e²)) solved for c. Uses orbital observables
+    /// of the precessing planet only; δφ carries the upstream c of STATUS.
+    [[nodiscard]] inline auto c_from_perihelion_advance(
+        double a_orbit, double period_s, double e_orbit, double delta_phi
+    ) noexcept -> double {
+        const double v_orbit = 2.0 * std::numbers::pi * a_orbit / period_s;
+        return v_orbit * std::sqrt(6.0 * std::numbers::pi
+                                 / (delta_phi * (1.0 - e_orbit * e_orbit)));
+    }
+    inline const double c_from_closure_closed_form = c_from_perihelion_advance(
+        a_Mercury, P_Mercury_days * 86400.0, e_Mercury, delta_phi_Mercury);
+    // = 299,794,943 m/s (+8.3 ppm); differs from c_from_closure by 0.64 ppm, the
+    // rounding of the stored v_surface_Sun (436 762 vs 436 761.72 m/s)
 
     // ─── GOM06 / B09 — eccentric-binary resistance radiation ───────────
     //
@@ -1970,6 +2046,17 @@ namespace atomic {
         return 1.0 / (Rn * inv);
     }
 
+    /// Finite-nucleus bound-level energy [eV]: E_n = −Ry (μ/m_e) Z² / n²,
+    /// μ/m_e = reduced_mass_factor(m_nuc).  Added 2026-10-16: the infinite-nucleus
+    /// rydberg_energy_eV overstates the hydrogen binding by m_e/m_p = 0.0545 %
+    /// (B01 residual 0.0536 % → 0.0008 %).  Ry·(μ/m_e) is the measured R_H hc.
+    [[nodiscard]] constexpr auto level_energy_eV(
+        int Z, int n, double m_nuc_kg
+    ) noexcept -> double {
+        return -Ry_eV * reduced_mass_factor(m_nuc_kg)
+             * static_cast<double>(Z * Z) / static_cast<double>(n * n);
+    }
+
     /// Outer-electron launch velocity from the first ionisation energy:
     /// v₁ = √(2 IE₁/m_e). Feeds the zk²=1 closure: z=(v₁/c)², k=c/v₁ ⟹ z·k²=1.
     [[nodiscard]] inline auto outer_velocity_from_IE(double IE1_J) noexcept -> double {
@@ -2022,6 +2109,49 @@ namespace nuclear {
     /// not a prediction of nuclear_boundary_radius(4).
     inline constexpr double R_He_contact_diameter = 2.0 * R_p;
 
+    // ── CONTACT RULE — three slots (Harvey 2026-10-14; NSEQ16 / NSEQ18 / NSEQ19) ──
+    /// Every proton has three neutron slots and every neutron three proton slots. A contact
+    /// joins an unlike pair at centre distance 2R_p; like pairs never touch; no unit holds more
+    /// than three contacts. The rule fixes a CAPACITY, not a count: the number of contacts a
+    /// nucleus fills is set by geometry. (The live sequencer's E = A tree-plus-ring graphs,
+    /// and degrees of 4 to 7 in A >= 16, were construction defects against this rule.)
+    /// provenance_status:     Operator-stated construction rule (2026-10-14)
+    /// correspondence_status: none claimed; geometry only
+    /// evidence:              Investigations/05_Nuclear_Physics/NSEQ19_Contact_Closure_Stacker/
+    inline constexpr int contact_slots = 3;
+
+    /// Largest contact count of any bipartite p–n graph on Z protons and N neutrons whose
+    /// units each hold at most contact_slots contacts.
+    [[nodiscard]] constexpr auto contact_capacity(int Z, int N) noexcept -> int {
+        return contact_slots * (Z < N ? Z : N);
+    }
+
+    /// Free slots left on a rigid module once its internal contacts are made: free_n_slots are
+    /// neutron slots still open on its protons, free_p_slots proton slots open on its neutrons.
+    struct ModuleSlots { int protons; int neutrons; int contacts; int free_n_slots; int free_p_slots; };
+    [[nodiscard]] constexpr auto module_slots(int protons, int neutrons, int internal_contacts) noexcept -> ModuleSlots {
+        return {protons, neutrons, internal_contacts,
+                contact_slots * protons - internal_contacts,
+                contact_slots * neutrons - internal_contacts};
+    }
+    inline constexpr ModuleSlots deuteron_slots = module_slots(1, 1, 1);  // p–n
+    inline constexpr ModuleSlots triton_slots   = module_slots(1, 2, 2);  // n–p–n
+    inline constexpr ModuleSlots alpha_slots    = module_slots(2, 2, 4);  // p–n–p–n ring
+    static_assert(deuteron_slots.free_n_slots == 2 && deuteron_slots.free_p_slots == 2,
+                  "deuteron: two neutron slots and two proton slots remain");
+    static_assert(triton_slots.free_n_slots == 1 && triton_slots.free_p_slots == 4,
+                  "triton: one neutron slot and four proton slots remain");
+    static_assert(alpha_slots.free_n_slots == 2 && alpha_slots.free_p_slots == 2,
+                  "alpha ring: two neutron slots and two proton slots remain");
+
+    /// A unit with this many unlike neighbours at contact distance breaks the slot cap.
+    [[nodiscard]] constexpr auto kissing_exceeds_cap(int neighbours) noexcept -> bool {
+        return neighbours > contact_slots;
+    }
+    /// A twelve-around-one icosahedral shell has 12 kissing neighbours on its central unit
+    /// (12 / 3 = 4 times the cap): an equal-sphere D12 shell cannot be a contact shell.
+    static_assert(kissing_exceeds_cap(12), "12-around-1 kissing shell exceeds the slot cap");
+
     // ── SHELL SCHEDULE — closure tiers and triton shells ────────────────────
     /// Canon change (2026-07-30, James Christopher Tyndall-authorized: "incorporate this structural
     /// setup into every part of the engine that is relevant").
@@ -2036,6 +2166,13 @@ namespace nuclear {
     /// Geometry (NSEQ05): T8 = stella/dual-tetra; post-T8 D12 = cuboct (T8 edge
     /// midpoints, 3+6+3); T14 = cuboct face normals (8△+6□) — not adjacent to
     /// that D12 (T10 intervenes). Opening triton valence radius > closing.
+    /// Triton-shell rule (Harvey 2026-10-14): opening a triton shell expands the structure;
+    /// closing it returns to the pre-opening size or tighter. NSEQ19 (hard spheres, three-slot
+    /// rule, contact-only collapse) reproduces the OPENING (rms radius +0.122 R_p for T8, 13.6
+    /// sigma; +0.047 for T10, 5.6 sigma) and NOT the closing: the r0-type ratio rises
+    /// +3.8 mfm per triton where the corpus falls −4 to −11. PENDING: closure tightening needs a
+    /// contact-driven attraction or non-rigid modules. The website mirror's tritonOpeningScale
+    /// 1.05 and tritonClosingScale 0.95 have no origin in this header (unsourced placeholders).
     /// Every closure ("magic number") is a completed seat tier on which the next
     /// tier rests. Tritons enter load-bearing masonry where the ledger
     /// (n_t = N − Z) first forces them (fourth closure / T8 → N=28).
@@ -2054,7 +2191,14 @@ namespace nuclear {
     ///                        link remainder R(n) = E = n(n+1). READ (open):
     ///                        the descent onset n = 3 — why the ledger first
     ///                        forces tritons at the fourth tier (field-cost
-    ///                        pricing, residual NP33 debt); D42 contact topology
+    ///                        pricing, residual NP33 debt; the onset is selected
+    ///                        in code by triton_descent_onset = q−1, q = trefoil
+    ///                        lock coordination, static-asserted below — the
+    ///                        pricing rule itself stays open; a second route,
+    ///                        F(n) > K_3 = 12 ⇔ n ≥ 3, agrees arithmetically but
+    ///                        its premise — tier members contacting one core — is
+    ///                        not established, so it is a candidate, not a
+    ///                        confirmation; 2026-10-16); D42 contact topology
     ///                        vs 3V−6 (NSEQ05 OPEN debt)
     /// correspondence_status: sequence-exact (2,8,20,28,50,82,126); counting
     ///                        convergent with the shell model — the origin differs

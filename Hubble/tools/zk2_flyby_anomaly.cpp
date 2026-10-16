@@ -171,10 +171,13 @@ static const std::vector<Flyby> spacecraft_flybys = {
     {"Cassini",     "1999-08-18", 1175, 16.01,  -12.9, -4.99, -2.00,  1.00, 5.0, 230},  // Aug 18
     {"Rosetta I",   "2005-03-04", 1956,  3.863, -2.8,  -34.3, +1.82,  0.05, 3.0,  63},  // Mar 4
     {"MESSENGER",   "2005-08-02", 2347,  4.056, +31.4, -31.9, +0.02,  0.01, 4.0, 214},  // Aug 2
-    // Null results
-    {"Rosetta II",  "2007-11-13", 5301,  9.32,  -6.0,  -6.7,   0.0,  0.5,  1.5, 317},  // Nov 13
-    {"Rosetta III", "2009-11-13", 2481,  9.36, -34.2, -24.7,   0.0,  0.5,  1.2, 317},  // Nov 13
-    {"Juno",        "2013-10-09",  559,  9.87, -17.1, -22.1,   0.0,  0.5,  2.5, 282},  // Oct 9
+    // Null results. Geometry corrected 2026-10-16: V∞ and declinations are JPL Horizons
+    // asymptotes (Datasets/external_audit_2026-10-16/flyby_horizons_asymptotes.csv);
+    // the earlier rows for these three were unsourced estimates that matched no source.
+    // Altitudes: Rosetta II/III from ESA/ESOC (Hoffmann & Budnik 2026), Juno 561 km (JPL, as flown).
+    {"Rosetta II",  "2007-11-13", 5295,  9.364, -10.8, +18.6,  0.0,  0.5,  1.5, 317},  // Nov 13
+    {"Rosetta III", "2009-11-13", 2480,  9.379, +18.5, +24.4,  0.0,  0.5,  1.2, 317},  // Nov 13
+    {"Juno",        "2013-10-09",  561, 10.389, +14.2, +39.5,  0.0,  0.5,  2.5, 282},  // Oct 9
 };
 
 // ────────────────────────────────────────────

@@ -1042,13 +1042,13 @@ intervals as observed stickers with no derived tally. The per-benchmark table be
 | B08 | Earth orbital velocity, $GM_\odot$ | $29783$ m/s; $1.327\times10^{20}$ | DERIVED |
 | B09 | Binary-pulsar $\dot P_b$ | B1913+16 and J0737-3039A/B from timing depth and resistance quadrupole | **DERIVED** (GOM06; no source-mass parameter) |
 | B10 | Mercury precession; light deflection | $42.98''$; $1.7505''$ | DERIVED |
-| B11 | Earth & Jupiter $J_2$ | uniform-fluid estimate | **PENDING** |
+| B11 | Six planets $J_2$ (GOM41 Q1 boundary) | Earth +0.91 %, Jupiter +2.11 %, Saturn +2.87 %; Mars +22.0 %, Uranus +65.5 %, Neptune −18.0 % (three open) | **PENDING** |
 | B12 | Stellar $zk^2=1$ (5 stars) | $=1.0$ across 10 orders | DERIVED |
 | B13 | CMB redshift | $z=1089$ | DERIVED |
-| B14 | Galactic $R_{\text{flat}}\approx2.5R_d$ | 12 % tolerance | COMPUTED |
+| B14 | Galactic $R_{\text{flat}}\approx2.5R_d$ | 12 % tolerance; the ratio 2.5 has no derivation on record | CALIBRATED |
 | B15 | BAO standing-equilibrium ruler | $145.8189$ Mpc vs $147.09$ Mpc | COMPUTED |
 | B16 | Dilute-monatomic transport | Ar $\mu,k,D$ whole-curve RMS 9.71%, 9.67%, 7.81%; exponents 0.5, 0.5, 1.5 | COMPUTED |
-| B17 | Electron g-factor | $g=2(1+\alpha/2\pi)=2.00231930436$ | DERIVED |
+| B17 | Electron g-factor | $g=2(1+\alpha/2\pi)=2.00232$, tolerance 0.01 % ($g=2$ sits 0.116 % away); coefficient owed (PPT12) | **PENDING** |
 | B18 | Proton radius (W+1), He-4 | $R_p=0.84124$ fm (0.08 %); $R_{He}=2R_p$ | DERIVED |
 | B19 | Beta-decay Q-value | $0.782$ MeV | DERIVED |
 | B20 | $zk^2$ universality | $=1.0$ exact | DERIVED |

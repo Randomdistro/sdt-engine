@@ -73,6 +73,18 @@ the investigation derives predictions and compares them to measurements.
 
 ---
 
+## Nuclear construction (NSEQ) — numbered folders under `05_Nuclear_Physics/`
+
+| Folder | Question |
+|--------|----------|
+| NSEQ16_Perfect_Traction_Gear_Engine | Do the live engine's geometric gates hold, and does its nucleon fit as a solid? (G8 canon consistency NOT MET: envelope 1.0848 R_p) |
+| NSEQ18_Universal_Interstitial_Sequencer | Do all 253 stable nuclides build under the three-slot rule; binding and moment gates (O1, O2 NOT MET) |
+| NSEQ19_Contact_Closure_Stacker | Hard spheres under the three-slot rule: do all 296 nuclides pack, and does a triton shell open and close as ruled? (all pack; opening yes, closing no) |
+
+Field-by-field review of the whole programme: `FIELD_ADVERSARIAL_REVIEW_2026-10-16.md`. Incorporation record: `../Audits/INCORPORATION_2026-10-16.md`.
+
+---
+
 ## Dependency Map
 
 ```

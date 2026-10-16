@@ -302,7 +302,7 @@ function updateHUD(){
   hud.innerHTML=
     `year <b>+${S.year.toFixed(1)}</b> · apex <span class="k">${apexKey}</span> · zones <b>${S.nz}</b><br>`+
     `zone depth <span class="k">z=ϟ/r</span>: Sun-surf <b>2.1e-6</b> → lumiopause <b>4.7e-13</b> (20,857 AU)<br>`+
-    `Earth: z=<b>${z.toExponential(3)}</b> c_local=<b>${(c*(1-z)).toFixed(1)}</b> dτ/dt=<b>${Math.sqrt(1-z).toFixed(9)}</b><br>`+
+    `Earth: z=<b>${z.toExponential(3)}</b> c_far=<b>${(c*(1-z)*(1-z)).toFixed(1)}</b> dτ/dt=<b>${(1-z).toFixed(9)}</b><br>`+
     `depth-pause (eq) ∝√(M/M☉): Earth <b>${(pauseAU(3.003e-6,1)*AU/1e6).toFixed(2)}e3 km</b> (inside L1; the strike point)<br>`+
     `<span style="color:#5a6678">first shell = total baryon+lepton exclusion (legend); teardrop nose×${(1-S.tk).toFixed(2)} tail×${(1+S.tk).toFixed(2)}</span>`;
 }

@@ -21,6 +21,10 @@ Open problems remain in both computation and concept: α-from-topology (Conjectu
 | Superheavy N≥168 → N_H=126 | PENDING_DATA | NP35 F3 switch |
 | Lamb nS–nP | H 1057.845 MHz and He⁺ 14041.13 MHz ACCEPTED OBSERVED (two centers); extraction withdrawn; sign = incomplete-dyad strain (APS11) | APS11 / PPT08 |
 | Cyclic reiteration threshold | PENDING amplitude; **chain COMPUTED** (Shapiro → T–P–c identities → IR → gamma `c_far→0`) | `Theory/07_Cyclic_Reiteration.md` |
+| Earth-flyby anomaly: registered endpoint formula (GOM43) | **INCONSISTENT within tolerance** (GOM44, 2026-10-16: anomalous class 4/4, null class 9/9 outside tolerance; ρ = 0.375); classification PENDING; revision needs a new registration. Targets any revised bracket must reproduce without refit: B_needed = +0.146 (Galileo I), −0.173 (Galileo II), +0.655 (NEAR), +0.155 (Rosetta I), ≈ 0 for nulls | GOM44 |
+| Equal-depth flyby control | **PENDING_DATA**: Hayabusa2 (|B| ≈ 0.02, only genuine control; registered prediction +0.29 mm/s) has no published Δv∞; tracking-gap times missing for Cassini, MESSENGER, Rosetta II/III, 2007–2024 flybys | GOM44 / `Datasets/DATA_REGISTER_2026-10-16.md` §12 |
+| Descent onset n = 3, second route F(n) > K₃ = 12 | **OPEN candidate**: arithmetic agrees; premise (tier members contact one core) not established; icosahedral 12-around-1 leaves a 0.103 gap | `laws.hpp` `nuclear` provenance |
+| Mercury c-closure (GOM04/B27) | **CONSISTENCY CHECK**: δφ shares c upstream via ephemeris fits; ±10.5 km/s input bound; B27 rows CONSTRUCTION | `derivelist/README.md` addendum |
 
 ## 1. R/a Quantisation
 

@@ -34,3 +34,40 @@ Width-law residuals against 336 + 36(R − 8.15) pc: −63 pc (Norma) to +167 pc
 - Not read here: `GD02/gd02_spiral_arms.cpp` arm table, labelled Reid+2019, does not match Table 2
   (e.g. Perseus r_ref 9.9 vs R_kink 8.87; a separate "Outer" with r_ref 13.0). Its consumers
   should be re-checked before they are cited.
+
+## Addendum 1 results — context bodies (2026-10-14)
+
+Pre-registered in `PROMPT.md` Addendum 1 before the tool was changed.
+
+Validation: V5 ellipsoid mesh volume −0.18% against 4/3 π a b c; V6 face-on axis ratio 1/2.1 = 0.476
+inside the quoted 0.5 ± 0.05; V7 slab volume −0.02% against π R² h. All consistent within the 1% tolerance.
+
+Bodies (OBSERVED ratios from Bland-Hawthorn & Gerhard 2016; ellipsoid axes COMPUTED from them):
+- b/p bulge ellipsoid a, b, c = 2.000, 0.952, 0.520 kpc, major axis 27° from the Sun–centre line,
+  near end at positive longitude, volume 4.15 kpc³. The X-shape (maximum at 1.5 kpc) is not modelled.
+- Thin disc R_t 2.6 kpc, z_t 0.30 kpc; thick disc R_T 2.0 kpc, z_T 0.90 kpc; slabs at ±1 scale
+  height drawn to R = 15 kpc. The edge is a drawing limit; the source gives exponential profiles.
+- Bar remains an axis (half-length 5.0 kpc, 28–33°). In-plane bar width depends on the parametric
+  model form in Wegg+2015 Eq. 9 and Table 1 and was not taken from the text.
+
+Rendered headless (top, oblique, edge-on ×5). OBJ now also contains `bulge_bp`, `thin_disc_1h`, `thick_disc_1h`.
+
+## Addendum 2 results — far-side continuation (2026-10-15)
+
+Pre-registered in `PROMPT.md` Addendum 2 before the tool was changed.
+
+Validation: V8 samples contiguous in azimuth with every step inside the arc bound (worst step
+0.74 of the bound); V9 all 2292 continued samples have R in 3.53–15.99 kpc and σ_in > 0
+(minimum 0.125 kpc). Consistent. The tangency comparison is unchanged (0 of 4 rejected).
+
+Lengths along the ridge, measured / extended / continued (kpc): Norma 3.7/8.6/13.2 ·
+Sct-Cen 8.3/13.8/32.5 · Sgr-Car 10.2/23.5/34.4 · Perseus 21.6/30.3/23.2 · Outer 18.0/35.4/63.8.
+3-kpc(N) and Local are not continued.
+
+Scope: the continued tier is the model's own spiral carried past the data, not a measurement. It
+does not assert where the arms are on the far side, that segments connect, or that any arm closes.
+The far side has no maser parallaxes; Reid's Fig. 10 joins segments with unpublished adjustments
+that are not applied here. Segments with ψ near 0 on the continued side (Sgr-Car, Norma) continue
+as near-circles because that is their fitted pitch. Continued sections reach R = 16 kpc, past the
+15 kpc drawing limit of the disc slabs. The viewer has a separate "Far side" toggle and draws the
+tier fainter than the extended tier.

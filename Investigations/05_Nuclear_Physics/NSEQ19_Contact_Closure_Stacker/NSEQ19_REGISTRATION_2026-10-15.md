@@ -1,0 +1,29 @@
+# NSEQ19 — Contact-closure stacker: pack every nucleus under the three-slot rule (registration, 2026-10-15)
+
+**Author:** J. C. Harvey, Melbourne. Registered before any NSEQ19 instrument exists. Direct execution; the live engine is read only.
+
+## 0. Inputs read and exposure
+Read: Harvey's instructions of 2026-10-14/15 (three-slot contact rule; no like contacts; units are solid; the triton shell opens and the diameter expands, closes back or tighter; "it will be about connection closure winding it all tighter"; pack every nucleus or reach catastrophic failure); NSEQ16 sections 8–11 and NSEQ18 sections 9–12 (this session's records: the engine's centre-distance contact test, its sprawling spoke-and-tree stacking, extent 12.4 R_p for A = 40 against 3.8 R_p close-packed, closing looser than before opening); NP30 §2 and §6 (R_p is the extent of the wound filament; close-pack radius R(A) = R_p (A/η)^(1/3), η = π/√18); the engine's shell schedule and seat directions (`universalShellAllocation`). Exposure: the extent-versus-n_t numbers above are seen; this stacker has not been run.
+
+## 1. Model (units of R_p; every nucleon an envelope of radius 1, per NP30 §2)
+- **Units:** proton (p) and neutron (n), hard spheres of radius 1. **Modules (rigid):** alpha = ring p–n–p–n with adjacent centres 2 apart (the engine's ring, radius √2); deuteron = p–n or n–p, centres 2 apart; triton = n–p–n in a line, centres 2 apart.
+- **Contact rule (Harvey):** each unit has 3 slots, all for the opposite type. A **contact** is an unlike pair with centre distance d < 2 + τ. Constraints on any state: (i) d ≥ 2 for every pair (no overlap); (ii) like pairs d ≥ 2 + τ (no like contact); (iii) every unit has at most 3 contacts (internal module bonds count); (iv) the contact graph is connected. τ = 0.01.
+- **Stacking order:** the registered shell schedule (D6, D12-pre, T8, D12-cuboct, T10, D20, T12, D30, T14, D42, T16), species-pure, the engine's `universalShellAllocation(n_d, n_t)` for the module order and the seat direction of each module. The alpha is fixed at the origin.
+- **Sedimentation:** each new module starts outside the current structure on its seat direction, falls toward the centroid along its seat line in steps of 0.05 until the next step would violate a constraint, then relaxes by random rigid moves (translation up to 0.15, rotation up to 0.15 rad, step sizes halved when acceptance falls below 5 %) accepted only if every constraint holds and the energy E = Σ|r|² (positions about the structure's centroid) does not increase; at least one contact to the existing structure is required. K = 24 restarts per module (random orientation and type order), the lowest-energy valid result kept. Seat constraint: the module centroid direction stays within 90° of its seat direction (sensitivity: no constraint).
+- **Connection closure:** only when a shell is **complete** do all placed modules (the alpha included, so the whole structure can move) relax together (300 N attempted moves, N = units placed, random module order, then recentre on the centroid). A nucleus whose last shell is complete receives that relaxation as its final state; a nucleus whose last shell is partial is left with each module settled locally only (no global relaxation), because the global tightening is the closure and a partial shell has not closed. Moves are the same downhill rigid moves, so closure tightening is whatever the contacts allow and is not imposed. (Amended before the first run; the first draft applied a final global relaxation to every nucleus, which would have erased the opening of a partial shell.)
+- RNG seed 20261015; results are deterministic.
+
+## 2. Validations and gates (fixed now)
+- **V1 known answers:** alpha alone: 4 units, 4 contacts, every degree 2. Alpha + one deuteron: one connected valid state with the deuteron in contact. Alpha + one triton likewise.
+- **V2 independent checker:** a separate brute-force routine re-verifies (i)–(iv) from the final coordinates for every nucleus (tolerance 1×10⁻⁹ on d ≥ 2).
+- **V3 downhill:** the recorded energy never rises within a relaxation.
+- **G1 packing:** every member of the natural set (the 252 stable ground states A ≥ 2 and the 32 primordial radionuclides of NSEQ18 section 10) packs, i.e. passes V2. A nucleus that does not is a failure, listed with the module at which it stopped.
+- **G2 triton-shell rule (Harvey):** on the series n_d = 18 (T8) and n_d = 30 (T8, T10): the extent E_ext (maximum unit distance from the centroid, plus 1) at the first triton exceeds E_ext at n_t = 0 (opening expands); at shell closure E_ext ≤ E_ext at the state before opening (back or tighter).
+- **Reported, not gated:** E_ext and rms radius against the close-pack extent (A/η)^(1/3) (+1 for the envelope), mean contacts per unit, fraction of units with 3 contacts, wall-clock time.
+- **Catastrophic failure** (the stop condition Harvey set): more than 25 % of the natural set failing to pack, or the series showing no opening expansion in both T8 and T10, or a crash of the checker. Anything less is recorded and the run continues.
+
+## 3. Hand estimate before the run
+Random sedimentation of hard spheres packs to a fraction near 0.55–0.64, so the extent for A = 40 would be about 4–5 R_p; the slot rule limits contacts, not near-neighbours (gaps just above 2 + τ), so it should not by itself lower the density much. I expect most small and mid-mass nuclei to pack. I do not know whether closure tightening appears by itself.
+
+## 4. Limits stated now
+Rigid modules; spheres, not filament bundles (filament radius and packing are unspecified; a sphere of radius 1 is the NP30 envelope); static geometry (no flow, no meshing phase, no internal electron); random search, so "packs" means a valid state was found, not that it is unique or lowest.

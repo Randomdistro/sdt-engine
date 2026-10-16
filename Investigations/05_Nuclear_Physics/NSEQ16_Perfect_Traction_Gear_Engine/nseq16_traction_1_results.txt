@@ -1,0 +1,25 @@
+NSEQ16 section 12: identical-angle traction on the wound ring (engine H1 curve, p = 4 tours, q = 3 cross-section turns)
+[V1] analytic unit tangent vs central difference, 200 random points: max difference 3.80e-11 (gate 1e-6) -> met
+[V2] F1 (like, co-rotating) slip at equal phases: min 1.9987, max 1.9993 (expect about 2); F3 with phi_B = -phi_A: max slip 0.0e+00 (expect 0) -> met
+[V3] azimuths per ring at which an outermost strand sits exactly on the outer equator (phi_out = 0), theta over one revolution:
+     p = 2: q=1:1  q=2:coprime-fail  q=3:3  q=4:coprime-fail  q=5:5  q=6:coprime-fail  q=7:7   (analytic q/gcd(q,p) = q for coprime pairs)
+     p = 4: q=1:1  q=2:coprime-fail  q=3:3  q=4:coprime-fail  q=5:5  q=6:coprime-fail  q=7:7   (analytic q/gcd(q,p) = q for coprime pairs)
+
+[families] slip = |tau_A - tau_B| at the facing outermost strands; phi_out in (-pi/4, pi/4]; grid 1441 x 1441
+  F1 like: same chirality, same circulation: global min 1.999e+00; worst-case best-partner slip over A phases 1.999e+00; literal same phase (phi_B = phi_A): min 1.999e+00, max 1.999e+00; mirrored phase (phi_B = -phi_A): min 1.999e+00, max 1.999e+00
+  F2 same chirality, reversed circulation: global min 5.167e-02; worst-case best-partner slip over A phases 6.704e-02; literal same phase (phi_B = phi_A): min 5.167e-02, max 7.204e-02; mirrored phase (phi_B = -phi_A): min 7.204e-02, max 7.307e-02
+  F3 mirror across contact plane (p/n complement): global min 0.000e+00; worst-case best-partner slip over A phases 2.222e-16; literal same phase (phi_B = phi_A): min 0.000e+00, max 5.167e-02; mirrored phase (phi_B = -phi_A): min 0.000e+00, max 0.000e+00
+  F4 ring-plane mirror, circulation kept: global min 1.999e+00; worst-case best-partner slip over A phases 2.000e+00; literal same phase (phi_B = phi_A): min 2.000e+00, max 2.000e+00; mirrored phase (phi_B = -phi_A): min 1.999e+00, max 2.000e+00
+  F5 ring-plane mirror, circulation reversed: global min 0.000e+00; worst-case best-partner slip over A phases 0.000e+00; literal same phase (phi_B = phi_A): min 0.000e+00, max 0.000e+00; mirrored phase (phi_B = -phi_A): min 0.000e+00, max 5.167e-02
+
+[hand estimate check] |T| at phi = pi/4: sqrt(9a^2 + 16(R + a cos phi)^2) = 4.1403; radial component 3a sin phi = 0.10696; 2 x 3a sin phi / |T| = 0.05167
+
+[orientation] identical rings (rho = 0 for both). Ring A turned by alpha_A about its axis faces the contact at local azimuth -alpha_A; the F3/F5 mesh condition (zero slip) reads
+     red(3 theta_B/4) = -red(3 theta_A/4)   [F3, partner phase mirrored]   and   red(...) equal   [F5]; scanning the partner turn alpha_B for fixed alpha_A:
+     alpha_A = 0.000: zero-slip partner turns alpha_B0 = 2.0944, 4.1888 (count 2); predicted -alpha_A + 2 pi m/3 = 0.0000, 2.0944, 4.1888
+     alpha_A = 0.700: zero-slip partner turns alpha_B0 = 1.3944, 3.4888, 5.5832 (count 3); predicted -alpha_A + 2 pi m/3 = 1.3944, 3.4888, 5.5832
+     alpha_A = 2.100: zero-slip partner turns alpha_B0 = 2.0888, 4.1832, 6.2776 (count 3); predicted -alpha_A + 2 pi m/3 = 2.0888, 4.1832, 6.2776
+     alpha_A = 5.000: zero-slip partner turns alpha_B0 = 1.2832, 3.3776, 5.4720 (count 3); predicted -alpha_A + 2 pi m/3 = 1.2832, 3.3776, 5.4720
+     worst slip of a mirror partner at an unmatched turn (any phases): 0.0517 of s (i.e. 5.17 %)
+
+[contact distance] D = 2R + 2s + a(cos phi_A + cos phi_B), s = 0.03565: phi = pi/4 both: 2.1401; phi = 0 both: 2.1696; spread 1.36 %

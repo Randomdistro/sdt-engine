@@ -351,8 +351,12 @@ static void report(const char* id, const char* name, const char* domain,
 
 // ═══════════════════════════════════════════════════════════════════════
 //  B01 — ATOMIC STRUCTURE / HYDROGEN ENERGY LEVELS
-//  SDT: Rydberg formula from helical standing waves
-//  E_n = -Ry × Z² / n²
+//  SDT: Rydberg formula from helical standing waves, finite-nucleus (two-body)
+//  E_n = -Ry × (μ/m_e) × Z² / n²,  μ/m_e = m_p/(m_e+m_p)  (atomic::level_energy_eV)
+//  Corrected 2026-10-16: the bare Rydberg (infinite nucleus) was compared with
+//  finite-nucleus measurements (+0.0536% energy offset) and with AIR wavelengths
+//  (656.281 nm etc.) — a vacuum prediction against an air target. Now matched:
+//  finite nucleus, and NIST ASD Ritz VACUUM wavelengths (no medium conversion).
 // ═══════════════════════════════════════════════════════════════════════
 
 static void B01_atomic_structure()
@@ -369,29 +373,29 @@ static void B01_atomic_structure()
     };
 
     for (auto& [n, exp] : levels) {
-        double sdt = -measured::Ry_eV / (n * n);
+        double sdt = atomic::level_energy_eV(1, n, measured::m_p);
         char name[64];
         std::snprintf(name, sizeof(name), "H n=%d energy [eV]", n);
         report("B01", name, "Atomic", sdt, exp, 0.08, Certification::DERIVED);
     }
 
-    // Spectral lines (Balmer series)
-    struct Transition { int n_lo, n_hi; double exp_nm; };
+    // Spectral lines (Balmer series): NIST Atomic Spectra Database, H I, Ritz
+    // wavelengths in VACUUM (u = 0.0007, 0.0003, 0.0003, 0.00024 nm), retrieved
+    // 2026-10-16 — Datasets/external_audit_2026-10-16/hydrogen_balmer_NIST_ASD_vacuum.csv
+    struct Transition { int n_lo, n_hi; double exp_vac_nm; };
     Transition balmer[] = {
-        {2, 3,  656.281},  // H-alpha
-        {2, 4,  486.135},  // H-beta
-        {2, 5,  434.047},  // H-gamma
-        {2, 6,  410.174},  // H-delta
+        {2, 3,  656.4632},   // H-alpha
+        {2, 4,  486.2691},   // H-beta
+        {2, 5,  434.1691},   // H-gamma
+        {2, 6,  410.28991},  // H-delta
     };
 
-    for (auto& [nl, nh, exp_nm] : balmer) {
-        double dE = atomic::rydberg_energy_eV(1, nl, nh);
-        double dE_J = dE * measured::eV_to_J;
-        double lambda_m = measured::h * measured::c / dE_J;
-        double lambda_nm = lambda_m * 1e9;
+    for (auto& [nl, nh, exp_vac_nm] : balmer) {
+        double lambda_nm = atomic::emission_wavelength_m(1, nl, nh, measured::m_p) * 1e9;
         char name[64];
-        std::snprintf(name, sizeof(name), "Balmer %d->%d [nm]", nh, nl);
-        report("B01", name, "Atomic", lambda_nm, exp_nm, 0.08, Certification::DERIVED, "nm");
+        std::snprintf(name, sizeof(name), "Balmer %d->%d vac [nm]", nh, nl);
+        report("B01", name, "Atomic", lambda_nm, exp_vac_nm,
+               0.08, Certification::DERIVED, "nm");
     }
 }
 
@@ -703,10 +707,16 @@ static void B11_planetary_oblateness()
     //   q = omega^2 R_e^3/(c^2 koppa),
     //   koppa = v_sat^2 r_sat/c^2.
     //
-    // No body-source mass parameter enters.  The six-body GOM41 corpus still
-    // fails its whole-range gate because Mars and the ice giants require an
-    // independently established interior resistance profile, so these two
-    // successful rows remain PENDING rather than being promoted.
+    // No body-source mass parameter enters.  The six-body GOM41 corpus fails
+    // its whole-range gate (Mars, Uranus and Neptune miss; RMS 29.2%), so all
+    // six rows stay PENDING and all six are listed (2026-10-16 adversarial
+    // review: the earlier table showed only the two bodies that pass).  Mars,
+    // Saturn, Uranus and Neptune are read from the cached sources of
+    // Datasets/solar_system/GOM41_CORPUS_SOURCES_2026-10-14.md (NASA NSSDCA
+    // fact sheets: radii and J2; JPL physical parameters: spin; JPL satellite
+    // mean elements: one satellite orbit per body).  The Jupiter J2 in the
+    // Earth/Jupiter rows (0.0146964) differs from the NASA sheet (0.014736)
+    // by 0.27%; both are recorded and neither was chosen to fit.
     struct Boundary {
         const char* name;
         double equatorial_radius_m;
@@ -734,6 +744,34 @@ static void B11_planetary_oblateness()
             421'700'000.0,
             1.769137786 * 86400.0,
             1.469643e-2
+        },
+        {
+            "Mars J2 (GOM41 Q1 boundary)",
+            3'396'200.0, 3'376'200.0,
+            1.02595676 * 86400.0,
+            9'375'000.0, 0.3187 * 86400.0,          // Phobos
+            1960.45e-6
+        },
+        {
+            "Saturn J2 (GOM41 Q1 boundary)",
+            60'268'000.0, 54'364'000.0,
+            0.44401 * 86400.0,
+            1'221'900'000.0, 15.945448 * 86400.0,   // Titan
+            16298.0e-6
+        },
+        {
+            "Uranus J2 (GOM41 Q1 boundary)",
+            25'559'000.0, 24'973'000.0,
+            0.71833 * 86400.0,
+            436'298'000.0, 8.705869 * 86400.0,      // Titania
+            3343.43e-6
+        },
+        {
+            "Neptune J2 (GOM41 Q1 boundary)",
+            24'764'000.0, 24'341'000.0,
+            0.67125 * 86400.0,
+            354'800'000.0, 5.876994 * 86400.0,      // Triton
+            3411.0e-6
         }
     };
 
@@ -825,7 +863,13 @@ static void B14_galactic_rotation()
     // R_flat/R_d ratio intrinsically scatters galaxy-to-galaxy (there is no universal value),
     // so a ~12% tolerance is the appropriate bar for a single-ratio rule. The full rotation-curve
     // fit (not just the onset radius) is done properly in GD05/M4 (SPARC, RMS 23.8%); this B14
-    // is only the coarse onset-radius check and is labelled COMPUTED, not a precision result.
+    // is only the coarse onset-radius check.
+    // RELABELLED 2026-10-16 (adversarial review): COMPUTED -> CALIBRATED.  The ratio 2.5 has no
+    // derivation anywhere in Theory/, Papers/, Investigations/ or Engine/ (the only mention is
+    // this table in the guide), so it is one documented free parameter; the four rows pass the
+    // 12% bar (errors 4.17%, 2.78%, 2.27%, 0%) but are not earned predictions.  Under the
+    // registered 1% bar three of the four rows fail; the widening happened in 2026-06 with no
+    // new data.
     struct Galaxy { const char* name; double R_d_kpc; double R_flat_obs_kpc; };
     Galaxy galaxies[] = {
         {"Milky Way",    2.5,  6.0},
@@ -838,7 +882,7 @@ static void B14_galactic_rotation()
         double R_flat_pred = 2.5 * g.R_d_kpc;
         char name[64];
         std::snprintf(name, sizeof(name), "%-12s R_flat [kpc]", g.name);
-        report("B14", name, "Galactic", R_flat_pred, g.R_flat_obs_kpc, 12.0, Certification::COMPUTED);
+        report("B14", name, "Galactic", R_flat_pred, g.R_flat_obs_kpc, 12.0, Certification::CALIBRATED);
     }
 }
 
@@ -997,8 +1041,15 @@ static void B17_magnetic()
     // Electron g-factor from vortex geometry
     // SDT lowest order: g = 2(1 + α/2π)
     double g_sdt = 2.0 * (1.0 + measured::alpha / (2.0 * std::numbers::pi));
-    double g_exp = 2.00231930436256;  // CODATA 2018
-    report("B17", "Electron g-factor", "EM", g_sdt, g_exp, 0.12, Certification::DERIVED);
+    double g_exp = 2.00231930436092;  // CODATA 2022
+    // 2026-10-16 adversarial review.  The registered 0.12% bar is larger than the whole
+    // anomalous moment: the Dirac value g = 2 sits 0.1158% from the measurement
+    // (0.0023193 / 2.0023193) and passed.  The bar is now 0.01%, under which g = 2 fails and
+    // 2(1 + alpha/2pi) = 2.0023228 passes (1.7e-6 relative).  The label is PENDING, not DERIVED:
+    // the coefficient 1/2pi of the first-order term is the Schwinger coefficient taken from
+    // the standard account; its native derivation is owed (PPT12 G2, Master Cascade CLM-24
+    // EXCLUDED_CIRCULAR).  The row is a note of the matched form, not an earned prediction.
+    report("B17", "Electron g-factor", "EM", g_sdt, g_exp, 0.01, Certification::PENDING);
 }
 
 // ═══════════════════════════════════════════════════════════════════════
@@ -1203,13 +1254,29 @@ static void B27_koppa_closure()
     std::puts("\n══ B27: c FROM GEOMETRY (koppa closure) ══");
     using namespace sdt::laws;
 
-    // Sun's speed ratio k = c/v from Mercury's precession (no c, no GM input)
+    // Sun's speed ratio k = c/v from Mercury's precession. Same statement as the
+    // c row below (k_Sun_from_precession / bridge::k_Sun = c_from_closure / c up to
+    // the stored v_surface), so the same trace applies; relabelled COMPUTED →
+    // CONSTRUCTION 2026-10-16: contaminating input δφ, measured via c-dependent
+    // ephemeris fits, enters at bridge::delta_phi_Mercury.
     report("B27", "k_Sun from precession", "Gravity",
-           bridge::k_Sun_from_precession, bridge::k_Sun, 0.5, Certification::COMPUTED);
+           bridge::k_Sun_from_precession, bridge::k_Sun, 0.5, Certification::CONSTRUCTION);
 
-    // c reconstructed: c = k_Sun · v_surface — the headline closure (c is OUTPUT)
+    // c reconstructed: c = k_Sun · v_surface. Relabelled DERIVED → CONSTRUCTION
+    // 2026-10-16. contaminating input: δφ (42.98"/cy) — measured via ephemeris fits
+    // whose force model propagates light and GR accelerations with c — enters at
+    // laws.hpp bridge::delta_phi_Mercury (derivelist/README.md:51-57). Consistency
+    // check; excluded from the earned tally. The 9 ppm agreement is below the
+    // input uncertainty (7e-5 on δφ ⇒ ±10.5 km/s on c).
     report("B27", "c from precession closure [m/s]", "Gravity",
-           bridge::c_from_closure, measured::c, 0.01, Certification::DERIVED);
+           bridge::c_from_closure, measured::c, 0.01, Certification::CONSTRUCTION);
+
+    // Same closure with R_Sun and v_surface eliminated (they cancel identically):
+    // c = v_Mercury √(6π/(δφ(1−e²))). Agrees with the row above to the 0.64 ppm
+    // rounding of the stored v_surface_Sun.
+    report("B27", "c closed form, R_Sun and v_surf cancelled [m/s]", "Gravity",
+           bridge::c_from_closure_closed_form, bridge::c_from_closure, 0.0002,
+           Certification::CONSTRUCTION);
 }
 
 // ═══════════════════════════════════════════════════════════════════════
@@ -1550,6 +1617,24 @@ static void canonical_construction_checks()
     report("I44", "FLM15 coincident synchrony resistance", "Canon",
            coincident_delta / expected_delta, 1.0, 1e-12,
            Certification::CONSTRUCTION);
+
+    // Three-slot contact rule (Harvey 2026-10-14): definitional capacities.
+    namespace nuc = nuclear;
+    report("I45", "deuteron free neutron slots (on its proton)", "Nuclear",
+           nuc::deuteron_slots.free_n_slots, 2.0, 1e-12, Certification::CONSTRUCTION);
+    report("I46", "deuteron free proton slots (on its neutron)", "Nuclear",
+           nuc::deuteron_slots.free_p_slots, 2.0, 1e-12, Certification::CONSTRUCTION);
+    report("I47", "triton free neutron slots (on its proton)", "Nuclear",
+           nuc::triton_slots.free_n_slots, 1.0, 1e-12, Certification::CONSTRUCTION);
+    report("I48", "triton free proton slots (on its two neutrons)", "Nuclear",
+           nuc::triton_slots.free_p_slots, 4.0, 1e-12, Certification::CONSTRUCTION);
+    report("I49", "alpha ring free slots (n + p)", "Nuclear",
+           nuc::alpha_slots.free_n_slots + nuc::alpha_slots.free_p_slots, 4.0, 1e-12,
+           Certification::CONSTRUCTION);
+    report("I50", "Pb-208 contact capacity 3 min(Z,N)", "Nuclear",
+           nuc::contact_capacity(82, 126), 246.0, 1e-12, Certification::CONSTRUCTION);
+    report("I51", "12-around-1 kissing contacts / slot cap", "Nuclear",
+           12.0 / nuc::contact_slots, 4.0, 1e-12, Certification::CONSTRUCTION);
 }
 
 // ═══════════════════════════════════════════════════════════════════════
@@ -1674,7 +1759,7 @@ int main(int argc, char** argv)
                 g_passed, earned_total, earned_total > 0 ? 100.0 * g_passed / earned_total : 0.0);
     std::printf("║  + %d construction checks (definitional; NOT predictions)    ║\n", g_construction_pass);
     std::printf("║  + %d CALIBRATED (class E, documented; not earned)           ║\n", g_calibrated_pass);
-    std::printf("║  + %d PENDING note-only (B11 corpus/B18 shared form)         ║\n", g_pending_note);
+    std::printf("║  + %d PENDING note-only (B11 corpus/B17 form/B18 shared)     ║\n", g_pending_note);
     std::printf("║  %d genuine fail · %d PENDING open (flagged, in denom)       ║\n",
                 real_fail, pending_fail);
     std::puts("╚══════════════════════════════════════════════════════════════╝");

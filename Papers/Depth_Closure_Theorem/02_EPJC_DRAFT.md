@@ -22,7 +22,7 @@ force, reproduces orbital velocities from a 292 AU heliocentric orbit
 (1.74 km/s) through Earth's orbit (29.789 km/s vs. 29.78 observed) down to the
 hydrogen ground state, where it returns `k_H = c/v = 1/α = 137.036` and the
 ground-state c-boundary `α²a₀ = r_e` exactly. The same depth field, read through
-the movement budget `v_circ²+v²=c²`, gives the local clock rate `dτ/dt=√(1−z)`,
+the movement budget `v_circ²+v²=c²`, gives the local clock rate `dτ/dt=1−z`,
 making `c` a position-dependent relay ceiling whose absolute value exceeds the
 local terrestrial value by ≈105 m/s (the galactic depth floor). We state the
 result as the **Depth–Closure Theorem**, give three falsifiable predictions
@@ -76,12 +76,13 @@ matter-free limit.
 We claim the following are a single quantity:
 
 ```
-ℓ_P(r) = ℓ_P,∞(1 − z) ,   c_local = c_∞(1 − z) ,   dτ/dt = √(1 − z) ,   z_spectral = z_emit − z_obs .
+ℓ_P(r) = ℓ_P,∞(1 − z) ,   c_far = c_∞(1 − z)² ,   dτ/dt = 1 − z ,   z_spectral = z_emit − z_obs .
 ```
 
-Equations one to three are three readings of the closure deficit; the local relay
-speed and clock rate track the local lattice closure because light advances one
-spation per tick. The fourth identifies the observed spectral shift with the
+Equations one to three are three readings of the closure deficit; the far-frame relay
+speed carries one closure factor for path length and one for clock rate because light
+advances one spation per tick (GOM22 repair: the earlier linear c and √(1 − z) each
+returned half the measured first-order coefficient). The fourth identifies the observed spectral shift with the
 depth difference between emission and observation.
 
 ### 3.1 Test against the solar gravitational redshift
@@ -95,8 +96,9 @@ identically, the two are the same quantity; the empirical content is the
 *interpretation*: the redshift is the displacement depth at emission. Laboratory
 hydrogen emits its line in the terrestrial depth regime; solar hydrogen emits in
 the deeper solar regime; the recorded `z` is `z_⊙ − z_⊕`. The same construction
-gives satellite clock rates as `√(1−z)` at orbital depth, i.e. the operational GPS
-correction.
+gives the satellite depth term as `1−z` differenced between orbit and ground
+(+45.7090 µs/day, GOM20), with the speed term from the movement budget carried
+separately (−7.2122 µs/day), i.e. the operational GPS correction (net +38.4969 µs/day).
 
 ## 4. The single centripetal law
 

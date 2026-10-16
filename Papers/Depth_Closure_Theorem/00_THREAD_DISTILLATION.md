@@ -34,7 +34,7 @@
    balances, not orbiting.
 
 6. **k is a timer; 137 is a countdown.** From the movement budget (Law V),
-   `dτ/dt = √(1−1/k²) = √(1−z)`. k *is* the clock-rate; it counts down toward the
+   `dτ/dt = 1 − 1/k² = 1 − z` (GOM22 repair; the earlier √(1−z) gave half the measured solar redshift). k *is* the clock-rate; it counts down toward the
    c-boundary k=1 (v=c, dτ/dt=0, matter dissolves). Hydrogen sits k=1/α=137 steps
    from the edge. α = v/c = 1/k is speed ratio, clock-rate, and countdown position
    at once.
