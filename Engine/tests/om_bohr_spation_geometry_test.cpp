@@ -3,6 +3,7 @@
 // Run: /tmp/sdt_geometry_test
 #include <sdt/spation_geometry.hpp>
 #include <sdt/om_atomic.hpp>
+#include <algorithm>
 #include <cassert>
 #include <cmath>
 #include <numbers>
