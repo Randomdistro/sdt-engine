@@ -176,3 +176,63 @@ Validation: the closed-form distance integral matches quadrature to 10⁻¹⁰. 
 
 ![chi2](rate_law_chi2_2.png)
 ![residuals](hubble_residuals2.png)
+
+## W10 — Spaz ladder: today's ratios traced back to the halt of light (candidate D)
+
+Rules: N = T_local/T_CMB, z_S = 1 − 1/N, c_far = c/N², hop = ℓ_P/N, tick = N t_P, P = N⁴ P_rad (P_rad now = 1.3916×10⁻¹⁴ Pa), and the Wien peak in local rulers is λ_now/N (λ_now = 1.063207 mm).
+
+Validation (pre-registered): c_far(1090) = 252.3 m/s; N(P = P_eff) = 2.4757×10¹¹; N(λ = ℓ_P) = 6.5782×10³¹. All three match the repository table to < 0.2 %. The Saha half-points for He II (5895) and He I (2489) fall within 20 % of the textbook 6000 and 2500. 5/5 PASS.
+
+| Landmark (locked value meeting the bath) | N | 1 − z_S | T_local (K) | c_far (m/s) | hop / ℓ_P | P / P_now | Wien peak, local |
+|---|---|---|---|---|---|---|---|
+| now | 1 | 1 | 2.7255 | 2.998×10⁸ | 1 | 1 | 1.063 mm |
+| c_far = Earth's orbital speed today (far frame only) | 100.3 | 9.97×10⁻³ | 273.5 | 2.978×10⁴ | 9.97×10⁻³ | 1.01×10⁸ | 10.6 μm |
+| H release, rate law q = 2 (W6b) | 734.1 | 1.36×10⁻³ | 2001 | 556 | 1.36×10⁻³ | 2.90×10¹¹ | 1.45 μm |
+| H release, rate law q = 0 (W6b) | 1064.2 | 9.40×10⁻⁴ | 2900 | 265 | 9.40×10⁻⁴ | 1.28×10¹² | 0.999 μm |
+| FIRAS release | 1090 | 9.17×10⁻⁴ | 2971 | 252 | 9.17×10⁻⁴ | 1.41×10¹² | 975 nm |
+| H Saha half-point | 1380 | 7.25×10⁻⁴ | 3762 | 157 | 7.25×10⁻⁴ | 3.63×10¹² | 770 nm |
+| visible red edge | 1519 | 6.58×10⁻⁴ | 4140 | 130 | 6.58×10⁻⁴ | 5.32×10¹² | 700 nm |
+| He I → He II Saha half | 2489 | 4.02×10⁻⁴ | 6783 | 48.4 | 4.02×10⁻⁴ | 3.84×10¹³ | 427 nm |
+| visible violet edge | 2798 | 3.57×10⁻⁴ | 7626 | 38.3 | 3.57×10⁻⁴ | 6.13×10¹³ | 380 nm |
+| He II → He III Saha half | 5895 | 1.70×10⁻⁴ | 1.61×10⁴ | 8.63 | 1.70×10⁻⁴ | 1.21×10¹⁵ | 180 nm |
+| Lyman-α Wien peak | 8746 | 1.14×10⁻⁴ | 2.38×10⁴ | 3.92 | 1.14×10⁻⁴ | 5.85×10¹⁵ | 121.6 nm |
+| kT = E₁ | 5.793×10⁴ | 1.73×10⁻⁵ | 1.58×10⁵ | 0.0893 | 1.73×10⁻⁵ | 1.13×10¹⁹ | 18.4 nm |
+| solar-centre temperature (comparator) | 5.760×10⁶ | 1.74×10⁻⁷ | 1.57×10⁷ | 9.0×10⁻⁶ | 1.74×10⁻⁷ | 1.10×10²⁷ | 185 pm |
+| Wien photon = 2 m_e c² | 8.764×10⁸ | 1.14×10⁻⁹ | 2.39×10⁹ | 3.9×10⁻¹⁰ | 1.14×10⁻⁹ | 5.90×10³⁵ | 1.21 pm |
+| kT = m_e c² | 2.176×10⁹ | 4.60×10⁻¹⁰ | 5.93×10⁹ | 6.3×10⁻¹¹ | 4.60×10⁻¹⁰ | 2.24×10³⁷ | 489 fm |
+| kT = B_d | 9.472×10⁹ | 1.06×10⁻¹⁰ | 2.58×10¹⁰ | 3.3×10⁻¹² | 1.06×10⁻¹⁰ | 8.05×10³⁹ | 112 fm |
+| kT = B_α | 1.205×10¹¹ | 8.30×10⁻¹² | 3.28×10¹¹ | 2.1×10⁻¹⁴ | 8.30×10⁻¹² | 2.11×10⁴⁴ | 8.82 fm |
+| P = P_eff (5.227×10³¹ Pa) | 2.476×10¹¹ | 4.04×10⁻¹² | 6.75×10¹¹ | 4.9×10⁻¹⁵ | 4.04×10⁻¹² | 3.76×10⁴⁵ | 4.29 fm |
+| Wien peak = r_e | 3.773×10¹¹ | 2.65×10⁻¹² | 1.03×10¹² | 2.1×10⁻¹⁵ | 2.65×10⁻¹² | 2.03×10⁴⁶ | 2.82 fm |
+| Wien peak = R_p | 1.264×10¹² | 7.91×10⁻¹³ | 3.44×10¹² | 1.9×10⁻¹⁶ | 7.91×10⁻¹³ | 2.55×10⁴⁸ | 0.841 fm |
+| kT = m_p c² | 3.995×10¹² | 2.50×10⁻¹³ | 1.09×10¹³ | 1.9×10⁻¹⁷ | 2.50×10⁻¹³ | 2.55×10⁵⁰ | 0.266 fm |
+| P = P_conv (post-registration) | 3.647×10¹⁵ | 2.74×10⁻¹⁶ | 9.94×10¹⁵ | 2.3×10⁻²³ | 2.74×10⁻¹⁶ | 1.77×10⁶² | 2.9×10⁻¹⁹ m |
+| Planck temperature ħc/(kℓ_P) | 5.198×10³¹ | 1.92×10⁻³² | 1.417×10³² | 1.1×10⁻⁵⁵ | 1.92×10⁻³² | 7.30×10¹²⁶ | 2.05×10⁻³⁵ m |
+| **halt of light: Wien peak = one hop (ℓ_P)** | 6.578×10³¹ | 1.52×10⁻³² | 1.793×10³² | 6.9×10⁻⁵⁶ | 1.52×10⁻³² | 1.87×10¹²⁷ | ℓ_P |
+
+**Values that never move (candidate D, local units, every N):**
+
+| Ratio | Value |
+|---|---|
+| α | 1/137.035999 |
+| m_p/m_e | 1836.152676 |
+| R_p/ƛ_p | 4.00078 |
+| E₁/(m_e c²) | 2.662568×10⁻⁵ |
+| a₀ / hop | fixed |
+| c measured locally | c |
+
+**Halt identities:**
+- T_halt / T_Planck = 1.265466 = 2π/x_W, where x_W = 4.965114 is the Wien constant. This is an identity (Wien peak = ℓ_P ⇔ kT = (2π/x_W)ħc/ℓ_P), not an independent lock.
+- Far-frame hop at the halt = ℓ_P²/λ_now = 2.46×10⁻⁶⁷ m.
+- P at the halt = 2.61×10¹¹³ Pa = 4.99×10⁸¹ P_eff.
+
+**Elapsed time to now (non-identifiable; W9 rate laws):**
+
+| From | q = 0 | q = 2 |
+|---|---|---|
+| FIRAS release | 21.7 / H₀ | 3.69×10⁶ / H₀ |
+| P = P_eff | 5.53×10³ / H₀ | 4.17×10²⁵ / H₀ |
+| P = P_conv | 8.13×10⁴ / H₀ | 1.33×10³⁵ / H₀ |
+| halt | 2.90×10⁹ / H₀ | 1.54×10⁷² / H₀ |
+
+![Spaz ladder](spaz_ladder2.png)

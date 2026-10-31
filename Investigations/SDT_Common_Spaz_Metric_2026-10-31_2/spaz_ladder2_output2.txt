@@ -1,0 +1,47 @@
+spaz_ladder2 — W10 Spaz ladder to the halt of light (candidate D)
+  lambda_now (Wien) = 1.063207e-03 m; P_rad now = 1.3916e-14 Pa; P_eff = 5.2273e+31 Pa
+  validation c_far at N=1090 [m/s]        2.5233e+02 vs 2.5200e+02  rel 1.31e-03 PASS
+  validation N at P = P_eff               2.4757e+11 vs 2.4800e+11  rel 1.75e-03 PASS
+  validation N at lambda = l_P            6.5782e+31 vs 6.5800e+31  rel 2.71e-04 PASS
+  validation He II half-point 1+z (~6000) 5.8950e+03 vs 6.0000e+03  rel 1.75e-02 PASS
+  validation He I half-point 1+z (~2500)  2.4889e+03 vs 2.5000e+03  rel 4.45e-03 PASS
+  (He validations carry a pre-registered 20 % tolerance)
+
+  landmark                                         N       1 - z_S   T_local K   c_far m/s     hop/l_P     P/P_now  lambda_loc
+  now                                     1.0000e+00    1.0000e+00  2.7255e+00  2.9979e+08  1.0000e+00  1.0000e+00  1.0632e-03
+  c_far = today's orbital speed of Earth  1.0033e+02    9.9667e-03  2.7346e+02  2.9780e+04  9.9667e-03  1.0134e+08  1.0597e-05
+  H release, rate law q=2 (W6b)           7.3410e+02    1.3622e-03  2.0008e+03  5.5630e+02  1.3622e-03  2.9042e+11  1.4483e-06
+  H release, rate law q=0 (W6b)           1.0642e+03    9.3967e-04  2.9005e+03  2.6471e+02  9.3967e-04  1.2826e+12  9.9907e-07
+  FIRAS release                           1.0900e+03    9.1743e-04  2.9708e+03  2.5233e+02  9.1743e-04  1.4116e+12  9.7542e-07
+  H Saha half-point                       1.3802e+03    7.2454e-04  3.7617e+03  1.5738e+02  7.2454e-04  3.6288e+12  7.7033e-07
+  visible red edge                        1.5189e+03    6.5839e-04  4.1397e+03  1.2995e+02  6.5839e-04  5.3221e+12  7.0000e-07
+  He I -> He II Saha half                 2.4889e+03    4.0179e-04  6.7834e+03  4.8396e+01  4.0179e-04  3.8372e+13  4.2718e-07
+  visible violet edge                     2.7979e+03    3.5741e-04  7.6257e+03  3.8296e+01  3.5741e-04  6.1283e+13  3.8000e-07
+  He II -> He III Saha half               5.8950e+03    1.6964e-04  1.6067e+04  8.6269e+00  1.6964e-04  1.2076e+15  1.8036e-07
+  Lyman-alpha Wien peak                   8.7459e+03    1.1434e-04  2.3837e+04  3.9194e+00  1.1434e-04  5.8507e+15  1.2157e-07
+  kT = E1                                 5.7930e+04    1.7262e-05  1.5789e+05  8.9334e-02  1.7262e-05  1.1262e+19  1.8353e-08
+  solar-centre temperature                5.7604e+06    1.7360e-07  1.5700e+07  9.0347e-06  1.7360e-07  1.1011e+27  1.8457e-10
+  Wien photon = 2 m_e c^2                 8.7640e+08    1.1410e-09  2.3886e+09  3.9032e-10  1.1410e-09  5.8994e+35  1.2132e-12
+  kT = m_e c^2                            2.1757e+09    4.5962e-10  5.9299e+09  6.3331e-11  4.5962e-10  2.2408e+37  4.8867e-13
+  kT = B_d                                9.4717e+09    1.0558e-10  2.5815e+10  3.3417e-12  1.0558e-10  8.0483e+39  1.1225e-13
+  kT = B_alpha                            1.2048e+11    8.3003e-12  3.2836e+11  2.0654e-14  8.3003e-12  2.1068e+44  8.8249e-15
+  P = P_eff                               2.4757e+11    4.0393e-12  6.7474e+11  4.8915e-15  4.0393e-12  3.7563e+45  4.2947e-15
+  Wien peak = r_e                         3.7730e+11    2.6504e-12  1.0283e+12  2.1060e-15  2.6504e-12  2.0265e+46  2.8179e-15
+  Wien peak = R_p                         1.2636e+12    7.9138e-13  3.4440e+12  1.8775e-16  7.9138e-13  2.5495e+48  8.4140e-16
+  kT = m_p c^2                            3.9949e+12    2.5032e-13  1.0888e+13  1.8785e-17  2.5032e-13  2.5471e+50  2.6614e-16
+  P = P_conv (post-registration)          3.6466e+15    2.7423e-16  9.9389e+15  2.2544e-23  2.7423e-16  1.7683e+62  2.9156e-19
+  Planck temperature                      5.1983e+31    1.9237e-32  1.4168e+32  1.1094e-55  1.9237e-32 7.3018e+126  2.0453e-35
+  halt of light                           6.5782e+31    1.5202e-32  1.7929e+32  6.9279e-56  1.5202e-32 1.8725e+127  1.6163e-35
+
+  halt identities:
+    T_halt / T_Planck = 1.265466   (2 pi / x_W = 1.265466)
+    far-frame hop at halt = l_P^2 / lambda_now = 2.4570e-67 m
+    c_far at halt = 6.9279e-56 m/s; P at halt = 2.6058e+113 Pa = 4.985e+81 P_eff
+    P_eff landmark: Wien peak there = 4.2947e-15 m (R_p = 8.4140e-16, r_e = 2.8179e-15)
+
+  locked at every N (candidate D, local units): alpha = 1/137.035999, m_p/m_e = 1836.152676, R_p/lbar_p = 4.00078, E1/(m_e c^2) = 2.662568e-05, a0/hop fixed
+  elapsed time (non-identifiable): t(N->1) = (N^(1-p) - 1)/(1-p) / H0, p = 0.720 (q=0) or -1.280 (q=2); see CSV
+    FIRAS release        q=0: 2.174e+01 / H0   q=2: 3.693e+06 / H0
+    P = P_eff            q=0: 5.531e+03 / H0   q=2: 4.166e+25 / H0
+    P = P_conv (post-registration) q=0: 8.131e+04 / H0   q=2: 1.328e+35 / H0
+    halt of light        q=0: 2.897e+09 / H0   q=2: 1.539e+72 / H0

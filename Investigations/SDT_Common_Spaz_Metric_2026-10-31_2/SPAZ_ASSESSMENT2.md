@@ -62,3 +62,31 @@ Author: James Christopher Tyndall, Melbourne. Tables: `SPAZ_TABLES2.md`. Tools: 
 - Measured comparators for the Venus, Earth and Mars advances.
 
 No paper: the mechanism is not closed.
+
+## W10 — the Spaz ladder to the halt of light (added 2026-10-31, pre-registered in PROMPT2.md)
+
+10. **Where the locked values land.**
+    - **What runs and what doesn't:** under candidate D every local ratio is locked (α, μ, R_p/ƛ_p, E₁/m_ec², a₀/hop, local c). The only thing that runs is the bath against those locks, kT ∝ N. Each locked energy or length therefore lands at a single depth.
+    - **Order of landing:**
+      - release, N = 734–1090
+      - H Saha half-point, 1380
+      - visible band, 1519–2798 (the He I half-point, 2489, falls inside it)
+      - He II, 5895
+      - Lyman-α peak, 8746
+      - kT = E₁, 57,930
+      - solar-centre temperature, 5.76×10⁶
+      - pair threshold, 8.76×10⁸ (Wien photon) to 2.18×10⁹ (kT)
+      - deuteron binding, 9.47×10⁹
+      - α binding, 1.20×10¹¹
+      - **P = P_eff, 2.48×10¹¹**
+      - Wien peak = r_e, 3.77×10¹¹
+      - Wien peak = R_p, 1.26×10¹²
+      - kT = m_pc², 4.0×10¹²
+      - P = P_conv, 3.65×10¹⁵
+      - Planck temperature, 5.20×10³¹
+      - **halt, 6.58×10³¹**
+    - **Light speeds:** the far-frame light speed is 252 m/s at release, 9 μm/s at solar-centre temperature, 4.9 fm/s at P_eff, and 6.9×10⁻⁵⁶ m/s at the halt. Locally it is always c.
+11. **P_eff lands inside the nuclear-binding band.** It sits between kT = B_α and Wien peak = r_e. The bath peak there is 4.29 fm, which is 1.52 r_e and 5.1 R_p. It is not a lock with any one length (COMPUTED; the closeness to r_e is noted, not claimed).
+12. **The desert.** Between kT = m_pc² (N = 4×10¹²) and the Planck temperature (N = 5×10³¹), nineteen decades contain only one engine value, P_conv. The engine has no locked quantity for that range. Whatever the energised spation matrix did there is not yet written down.
+13. **The halt is fixed by the hop, not tuned.** "Wien peak = one hop" puts the halt at T = (2π/x_W) T_Planck = 1.79×10³² K, a definitional identity. That is 10²⁵ times any stellar centre in the table, consistent with "hotter than the centre of a dark star". In the far frame the hop there is ℓ_P/N, below Planck by 32 orders: "lower than Planck" holds in far-frame units and nowhere locally.
+14. **Time from the halt is not identifiable.** It is 2.9×10⁹/H₀ with a constant transit speed and 1.5×10⁷²/H₀ with a full-Shapiro transit. The transit rule (open item 2) decides it.

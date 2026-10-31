@@ -10,3 +10,6 @@
 | 6 | **W6b added after inspection (not pre-registered):** release epoch from the fitted rate law by Thomson optical depth. Two transit rules × three H₀ values were reported once, with nothing retuned. Its look-elsewhere burden is stated in the assessment. |
 | 7 | Charts drawn from the CSV outputs by a scratchpad script. Palette checked with the dataviz validator (blue / orange / aqua: all checks pass; aqua below 3:1 contrast, so every series is directly labelled). Two label collisions were fixed after viewing (Γ_ep reference labels; z*/z_drag markers). |
 | 8 | Not compared: RUN-1 folder (`Projects/sdt-investigations/…_2026-10-22_2/`) is absent from this tree; RUN-1 statements are quoted as cross-checks only. |
+| 9 | W10 pre-registered (73fb2f4) before `spaz_ladder2.cpp` existed. First run printed FAIL for the He II validation because the print used the 1 % tolerance instead of the registered 20 %. The print was corrected; the values were unchanged (5895 vs 6000, 1.75 %). 5/5 validations PASS. |
+| 10 | Landmark P = P_conv added after the first ladder run (post-registration; engine value already in `laws.hpp`). Labelled as such in every table. |
+| 11 | Ladder chart drawn from `spaz_ladder2.csv`; labels moved to a leader-line column after the first render collided. |
