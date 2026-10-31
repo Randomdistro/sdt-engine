@@ -325,3 +325,20 @@ Earth's heliocentric position is projected on (i) the galactic north pole and (i
 - Neither positional term is detected. The 2σ limit is |k_g| < 1.2 ppb/AU.
 - Fitted alone, either position term leaves χ² 7–8 worse than the depth or speed regressors.
 - The depth slope persists unchanged when either is included.
+
+### W12d — speed relative to the Galactic Centre (post-registration, James 2026-10-31)
+
+**Input:** the Sun's velocity relative to Sgr A* is U = 11.1, V = 233.4 + 12.24, W = 7.25 km/s, giving 246.0 km/s (Schönrich 2010 peculiar motion + Reid 2019 circular speed). This is from memory; source check PENDING.
+**Rotation check:** the galactic→equatorial rotation sends l = 0 to RA 266.4°, Dec −28.9° (Sgr A*). The first run used the transposed matrix and placed the maximum in January. That was corrected before the result was read.
+
+| Quantity | Value |
+|---|---|
+| Ecliptic latitude of the Sun's galactic motion | +60.6° |
+| Largest projection of Earth's 29.8 km/s onto it | ±14.6 km/s |
+| 2017 maximum (Earth overtaking, moving with the Sun) | 261.7 km/s, 1 Jun |
+| 2017 minimum (Earth heading aft) | 232.7 km/s, 3 Dec |
+| Over the campaign | 232.9 → 261.7 km/s; corr with depth −0.961 |
+| Fit: galactic-frame v²/c² | k = +6.49×10⁻³ ± 2.54×10⁻³ (2.6σ), χ² 26.88 |
+
+**Validation of phase:** a maximum near 1–2 June is the known phase of Earth's annual speed modulation relative to the Galaxy, the same phase used in dark-matter annual-modulation searches.
+**Size of the swing:** about 233–262 km/s, not 200–260. The ecliptic is tilted 60.6° to the Sun's galactic motion, so half of Earth's orbital velocity goes "above and below" the Sun's path rather than along it.

@@ -130,3 +130,9 @@ No paper: the mechanism is not closed.
     - Earth's offset from the Sun along the galactic pole and along the Sun's CMB motion peaks near March. This shape is nearly orthogonal to depth over the campaign (|r| ≤ 0.18), so it is a genuine separating test.
     - **Result:** no effect, |k_g| < 1.2 ppb/AU at 2σ. The depth/speed slope persists (k_z = −3.7 to −4.0) when either is added.
     - **What the data prefer:** a monotonic Dec → Jun trend (depth, orbital speed, dipole speed, or apparatus drift), not a position-on-the-orbit effect peaking in March.
+21. **Speed relative to Sgr A* (W12d, post-registration).**
+    - Earth's speed relative to the Galactic Centre swings 232.7 → 261.7 km/s: minimum 3 Dec, maximum 1 Jun. The swing is ±14.6 km/s rather than ±30, because Earth's orbit is tilted 60.6° to the Sun's galactic motion.
+    - The Berkeley campaign (13 Dec → 12 Jun) ran almost exactly from minimum to maximum. α rises with that speed: k = +6.5×10⁻³ ± 2.5×10⁻³ (2.6σ), χ² 26.9.
+    - The CMB-frame speed ran the opposite way (399 → 341 km/s), with α falling against it. Depth, both frame speeds and calendar time are all monotonic over the run, so the same 3σ trend fits every one of them.
+    - **Status:** the trend is real at about 3σ in this dataset; its cause is not attributable from it.
+    - **Separating test:** data from June → December, where the galactic-frame speed falls while depth rises.

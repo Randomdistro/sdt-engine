@@ -238,6 +238,53 @@ int main(int argc, char** argv) {
         std::printf("\n  W12c Earth above/below and ahead/behind the Sun (post-registration)\n");
         fit2(ggal, "galactic above/below (g_gal)");
         fit2(gdip, "CMB lead/trail (g_dip)");
+
+        // ── W12d (post-registration, James): speed relative to the Galactic Centre ──
+        // Sun's velocity relative to Sgr A* in galactic (U toward GC, V rotation, W NGP):
+        // U = 11.1, V = 233.4 + 12.24, W = 7.25 km/s (Schoenrich 2010 peculiar + Reid 2019
+        // circular speed; MEASURED-INPUT, from memory, source check PENDING).
+        const double Ug = 11.1e3, Vg = (233.4 + 12.24) * 1e3, Wg = 7.25e3;
+        // galactic -> equatorial (J2000): eq = R gal (column 0 = Sgr A* direction, RA 266.4, Dec -28.9)
+        const double R[3][3] = {{-0.0548755604, 0.4941094279, -0.8676661490},
+                                {-0.8734370902, -0.4448296300, -0.1980763734},
+                                {-0.4838350155, 0.7469822445, 0.4559837762}};
+        const double gv[3] = {Ug, Vg, Wg};
+        double eq[3] = {};
+        for (int i = 0; i < 3; ++i) for (int j = 0; j < 3; ++j) eq[i] += R[i][j] * gv[j];
+        const double Gx = eq[0], Gy = eq[1] * std::cos(eps) + eq[2] * std::sin(eps), Gz = -eq[1] * std::sin(eps) + eq[2] * std::cos(eps);
+        const double vG = std::sqrt(Gx * Gx + Gy * Gy + Gz * Gz);
+        std::printf("\n  W12d speed relative to the Galactic Centre (post-registration)\n");
+        std::printf("    Sun vs Sgr A*: %.1f km/s; ecliptic latitude of that motion %.1f deg -> "
+            "Earth's 29.8 km/s projects at most %.1f km/s onto it\n", vG / 1e3,
+            std::asin(Gz / vG) / deg, 29.78 * std::cos(std::asin(Gz / vG)));
+        auto vgal = [&](double dd) {
+            double x1, y1, x2, y2;
+            earth(dd - 0.05, x1, y1); earth(dd + 0.05, x2, y2);
+            const double vx = (x2 - x1) / (0.1 * 86400), vy = (y2 - y1) / (0.1 * 86400);
+            return std::sqrt((Gx + vx) * (Gx + vx) + (Gy + vy) * (Gy + vy) + Gz * Gz);
+        };
+        double ymin = 1e9, ymax = 0; int dmin = 0, dmax = 0;
+        const int y17 = days_from_civil(2017, 1, 1) - j2000;
+        for (int d = 0; d < 365; ++d) {
+            const double v = vgal(y17 + d);
+            if (v < ymin) { ymin = v; dmin = d; }
+            if (v > ymax) { ymax = v; dmax = d; }
+        }
+        std::printf("    over 2017: %.1f km/s (day %d) .. %.1f km/s (day %d of year)\n", ymin / 1e3, dmin + 1, ymax / 1e3, dmax + 1);
+        std::vector<Pt> gp = pts;
+        double cmin = 1e9, cmax = 0;
+        for (size_t i = 0; i < pts.size(); ++i) {
+            const double v = vgal(pts[i].t + days_from_civil(2016, 12, 13) - j2000);
+            gp[i].z = v * v / (c * c) * 1e-2;
+            cmin = std::min(cmin, v); cmax = std::max(cmax, v);
+        }
+        const Fit fgal = wls(gp);
+        double mg = 0; for (auto& q : gp) mg += q.z; mg /= gp.size();
+        double sgg = 0, sgz = 0;
+        for (size_t i = 0; i < pts.size(); ++i) { sgg += (gp[i].z - mg) * (gp[i].z - mg); sgz += (gp[i].z - mg) * (pts[i].z - mz); }
+        std::printf("    campaign: %.1f .. %.1f km/s; corr(v_gal^2, depth) = %+.3f\n", cmin / 1e3, cmax / 1e3, sgz / std::sqrt(sgg * szz2));
+        std::printf("    galactic-frame v^2/c^2   : k = %+.3e +- %.3e  (%.1f sigma)  chi2 = %.2f\n",
+            fgal.k * 1e-2, fgal.sk * 1e-2, std::abs(fgal.k) / fgal.sk, fgal.chi2);
     }
 
     std::ofstream out(argv[2]);
