@@ -179,6 +179,65 @@ int main(int argc, char** argv) {
             suz += (cmb[i].z - mu) * (pts[i].z - mz);
         }
         std::printf("    correlation(CMB-frame v^2, depth) = %.3f\n", suz / std::sqrt(suu * szz2));
+
+        // ── W12c (post-registration, James): Earth above / below and ahead / behind the Sun ──
+        // g_gal : Earth's heliocentric offset along the galactic north pole [AU]
+        //         (NGP RA 192.85948 deg, Dec 27.12825 deg)
+        // g_dip : Earth's heliocentric offset along the Sun's CMB motion [AU] (lead / trail)
+        // Fits: single regressor, and depth + regressor jointly (3x3 normal equations).
+        const double nra = 192.85948 * deg, nde = 27.12825 * deg;
+        const double nx = std::cos(nde) * std::cos(nra), ny0 = std::cos(nde) * std::sin(nra), nz0 = std::sin(nde);
+        const double Nx = nx, Ny = ny0 * std::cos(eps) + nz0 * std::sin(eps), Nz = -ny0 * std::sin(eps) + nz0 * std::cos(eps);
+        const double Dx = vSx / vS, Dy = vSy / vS, Dz = vSz / vS;
+        std::vector<double> ggal(pts.size()), gdip(pts.size());
+        for (size_t i = 0; i < pts.size(); ++i) {
+            const double dd = pts[i].t + days_from_civil(2016, 12, 13) - j2000;
+            double x, y;
+            earth(dd, x, y);
+            const double AU = sdt::laws::measured::AU;
+            ggal[i] = (x * Nx + y * Ny) / AU;
+            gdip[i] = (x * Dx + y * Dy) / AU;
+        }
+        (void)Nz; (void)Dz;
+        auto fit2 = [&](const std::vector<double>& g, const char* name) {
+            // value = c + k1 (z - zbar) 1e9 + k2 g
+            double A[3][3] = {}, b[3] = {};
+            for (size_t i = 0; i < pts.size(); ++i) {
+                const double w = 1 / (pts[i].s * pts[i].s);
+                const double f[3] = {1.0, (pts[i].z - mz) * 1e9, g[i]};
+                for (int r = 0; r < 3; ++r) { b[r] += w * f[r] * pts[i].v; for (int q = 0; q < 3; ++q) A[r][q] += w * f[r] * f[q]; }
+            }
+            // invert 3x3
+            const double det = A[0][0] * (A[1][1] * A[2][2] - A[1][2] * A[2][1]) - A[0][1] * (A[1][0] * A[2][2] - A[1][2] * A[2][0])
+                             + A[0][2] * (A[1][0] * A[2][1] - A[1][1] * A[2][0]);
+            double I[3][3];
+            I[0][0] = (A[1][1] * A[2][2] - A[1][2] * A[2][1]) / det; I[0][1] = (A[0][2] * A[2][1] - A[0][1] * A[2][2]) / det;
+            I[0][2] = (A[0][1] * A[1][2] - A[0][2] * A[1][1]) / det; I[1][0] = (A[1][2] * A[2][0] - A[1][0] * A[2][2]) / det;
+            I[1][1] = (A[0][0] * A[2][2] - A[0][2] * A[2][0]) / det; I[1][2] = (A[0][2] * A[1][0] - A[0][0] * A[1][2]) / det;
+            I[2][0] = (A[1][0] * A[2][1] - A[1][1] * A[2][0]) / det; I[2][1] = (A[0][1] * A[2][0] - A[0][0] * A[2][1]) / det;
+            I[2][2] = (A[0][0] * A[1][1] - A[0][1] * A[1][0]) / det;
+            double p[3] = {};
+            for (int r = 0; r < 3; ++r) for (int q = 0; q < 3; ++q) p[r] += I[r][q] * b[q];
+            double chi = 0, gm = 0, gmin = 1e9, gmax = -1e9;
+            for (size_t i = 0; i < pts.size(); ++i) {
+                const double res = (pts[i].v - p[0] - p[1] * (pts[i].z - mz) * 1e9 - p[2] * g[i]) / pts[i].s;
+                chi += res * res; gm += g[i]; gmin = std::min(gmin, g[i]); gmax = std::max(gmax, g[i]);
+            }
+            gm /= pts.size();
+            double sgg = 0, szg = 0;
+            for (size_t i = 0; i < pts.size(); ++i) { sgg += (g[i] - gm) * (g[i] - gm); szg += (g[i] - gm) * (pts[i].z - mz); }
+            // single-regressor fit on g
+            std::vector<Pt> gp = pts;
+            for (size_t i = 0; i < pts.size(); ++i) gp[i].z = g[i] * 1e-9;
+            const Fit fg = wls(gp);
+            std::printf("    %-28s range %+.3f..%+.3f AU  corr(g, depth) %+.3f\n", name, gmin, gmax, szg / std::sqrt(sgg * szz2));
+            std::printf("      alone        : k_g = %+.3f +- %.3f ppb/AU  chi2 = %.2f\n", fg.k, fg.sk, fg.chi2);
+            std::printf("      with depth   : k_z = %+.2f +- %.2f   k_g = %+.3f +- %.3f ppb/AU  chi2 = %.2f (25 dof)\n",
+                p[1], std::sqrt(I[1][1]), p[2], std::sqrt(I[2][2]), chi);
+        };
+        std::printf("\n  W12c Earth above/below and ahead/behind the Sun (post-registration)\n");
+        fit2(ggal, "galactic above/below (g_gal)");
+        fit2(gdip, "CMB lead/trail (g_dip)");
     }
 
     std::ofstream out(argv[2]);

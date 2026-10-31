@@ -312,3 +312,16 @@ Sun–CMB velocity: 369.82 km/s toward RA 167.942°, Dec −6.944° (Planck 2018
 - **CMB frame:** α is higher when Earth moves slower relative to the CMB.
 - **Gap test:** the annual swing in either frame supplies at most about 0.5 ppb of the 1.17 ppb Cs–Rb gap.
 - **Daily modulation:** Earth's rotation is 0.37 km/s at Berkeley. At k_u it predicts about 0.007 ppb per day, which is not testable here.
+
+### W12c — Earth above/below and ahead/behind the Sun (post-registration, James 2026-10-31)
+
+Earth's heliocentric position is projected on (i) the galactic north pole and (ii) the Sun's direction of motion relative to the CMB. Over the campaign both run from about 0 (December) through a maximum near March (+0.86 AU and +0.98 AU) and back toward 0 (June). That shape is nearly orthogonal to depth.
+
+| Regressor | corr with depth | Fitted alone: k_g (ppb/AU), χ² | Fitted with depth: k_z, k_g, χ² (25 dof) |
+|---|---|---|---|
+| above/below the Sun, galactic | −0.18 | −0.13 ± 0.45, 33.3 | −3.98 ± 1.33, −0.35 ± 0.46, 24.4 |
+| ahead/behind the Sun, CMB motion | +0.11 | −0.47 ± 0.42, 32.2 | −3.69 ± 1.33, −0.33 ± 0.42, 24.4 |
+
+- Neither positional term is detected. The 2σ limit is |k_g| < 1.2 ppb/AU.
+- Fitted alone, either position term leaves χ² 7–8 worse than the depth or speed regressors.
+- The depth slope persists unchanged when either is included.

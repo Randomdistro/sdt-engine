@@ -126,3 +126,7 @@ No paper: the mechanism is not closed.
     - Depth, orbital speed and dipole speed all peak within about four weeks of each other, so one Dec–Jun campaign cannot separate them, or separate any of them from instrumental drift.
     - **What would separate them:** a campaign with the opposite time order (Jun → Dec), and the Rb per-dataset values.
     - **Clock constraints:** the clock bounds on boost-dependent α (Lorentz-invariance tests) are PENDING sourcing. They decide whether k_u is already excluded.
+20. **Above/below and ahead/behind the Sun (W12c, post-registration).**
+    - Earth's offset from the Sun along the galactic pole and along the Sun's CMB motion peaks near March. This shape is nearly orthogonal to depth over the campaign (|r| ≤ 0.18), so it is a genuine separating test.
+    - **Result:** no effect, |k_g| < 1.2 ppb/AU at 2σ. The depth/speed slope persists (k_z = −3.7 to −4.0) when either is added.
+    - **What the data prefer:** a monotonic Dec → Jun trend (depth, orbital speed, dipole speed, or apparatus drift), not a position-on-the-orbit effect peaking in March.
