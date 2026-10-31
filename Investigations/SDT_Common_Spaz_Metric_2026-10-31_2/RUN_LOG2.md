@@ -13,3 +13,4 @@
 | 9 | W10 pre-registered (73fb2f4) before `spaz_ladder2.cpp` existed. First run printed FAIL for the He II validation because the print used the 1 % tolerance instead of the registered 20 %. The print was corrected; the values were unchanged (5895 vs 6000, 1.75 %). 5/5 validations PASS. |
 | 10 | Landmark P = P_conv added after the first ladder run (post-registration; engine value already in `laws.hpp`). Labelled as such in every table. |
 | 11 | Ladder chart drawn from `spaz_ladder2.csv`; labels moved to a leader-line column after the first render collided. |
+| 12 | W11 pre-registered (a84772a); the first W11 pre-registration attempt was denied and nothing was written. `spaz_transit2.cpp` was run once; validations PASS. The continuous b/a scan was added after the grid output (it is descriptive, adds no trials and selects nothing). One chart; fails reported one line each, per James's instruction. |

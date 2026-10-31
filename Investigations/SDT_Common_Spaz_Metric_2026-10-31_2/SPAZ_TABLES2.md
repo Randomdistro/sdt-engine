@@ -236,3 +236,42 @@ Validation (pre-registered): c_far(1090) = 252.3 m/s; N(P = P_eff) = 2.4757×10�
 | halt | 2.90×10⁹ / H₀ | 1.54×10⁷² / H₀ |
 
 ![Spaz ladder](spaz_ladder2.png)
+
+## W11 — transit-rule permutations (a = cosmic tick exponent, b = hop exponent, c_far ∝ N^−(a+b))
+
+Validation: (1,1) gives release N = 734.1 and (1,−1) gives N = 1064.2, both matching W6b. The two step sizes agree to 1.5×10⁻⁴ and 4.5×10⁻⁴. PASS.
+G1–G3 (redshift = supernova stretch, CMB β = 0, Pantheon+ Δχ² = +5.1) hold for every member by construction and do not discriminate between them.
+
+**Survivors of G4 (release within 5 % of 2892 K or 2971 K):**
+
+| (a, b) | q | p | T_release | halt | N_halt | far-frame hop at halt | G5 (10⁻⁷⁰ ± 1 decade) | t since halt |
+|---|---|---|---|---|---|---|---|---|
+| (1, −1) | 0 | +0.720 | 2900 K | P_eff | 2.48×10¹¹ | 4.0×10⁻²⁴ m | fail | 5.5×10³ / H₀ |
+| (1, −1) | 0 | +0.720 | 2900 K | ℓ_P | 6.58×10³¹ | 1.06×10⁻³ m | fail | 2.9×10⁹ / H₀ |
+
+**Fails (one line each):**
+
+| (a, b) | T_release | Fails |
+|---|---|---|
+| (1,0), (2,0) | 2360 K | G4 |
+| (1,1), (2,2) | 2001 K | G4 |
+| (1,2) | 1743 K | G4 |
+| (1,3) | 1549 K | G4; G5 also fails at the P_eff halt (hop 1.07×10⁻⁶⁹ m, 1.03 decades from 10⁻⁷⁰) |
+| (2,−1) | 2600 K | G4 |
+| (2,1) | 2164 K | G4 |
+| (2,3) | 1862 K | G4 |
+
+**Structure.**
+- The release epoch depends on b/a only (substitute Z = Nᵃ). The continuous G4 window is b/a ∈ [−1.29, −0.77]: the cosmic hop must *grow* with depth, so that the cosmic transit speed is nearly constant.
+- The exponent b that gives exactly 10⁻⁷⁰ m depends on the halt:
+
+| | halt P_eff | halt ℓ_P |
+|---|---|---|
+| a = 1 | b = 3.090 | b = 1.107 |
+| a = 2 | b = 6.180 | b = 2.213 |
+
+  Every one of these is positive, so it lies outside the G4 window.
+
+**Result:** 0 of 20 permutations pass both G4 and G5. In this family the observed release epoch and an onset spacing of 10⁻⁷⁰ m exclude each other. The look-elsewhere count was 40 trials.
+
+![transit release](transit_release2.png)

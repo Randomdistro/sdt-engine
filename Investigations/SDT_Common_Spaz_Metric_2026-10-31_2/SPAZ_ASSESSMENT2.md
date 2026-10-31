@@ -90,3 +90,17 @@ No paper: the mechanism is not closed.
 12. **The desert.** Between kT = m_pc² (N = 4×10¹²) and the Planck temperature (N = 5×10³¹), nineteen decades contain only one engine value, P_conv. The engine has no locked quantity for that range. Whatever the energised spation matrix did there is not yet written down.
 13. **The halt is fixed by the hop, not tuned.** "Wien peak = one hop" puts the halt at T = (2π/x_W) T_Planck = 1.79×10³² K, a definitional identity. That is 10²⁵ times any stellar centre in the table, consistent with "hotter than the centre of a dark star". In the far frame the hop there is ℓ_P/N, below Planck by 32 orders: "lower than Planck" holds in far-frame units and nowhere locally.
 14. **Time from the halt is not identifiable.** It is 2.9×10⁹/H₀ with a constant transit speed and 1.5×10⁷²/H₀ with a full-Shapiro transit. The transit rule (open item 2) decides it.
+
+## W11 — transit-rule permutations (pre-registered, a84772a)
+
+15. **The release epoch fixes the cosmic transit, and it is not the solar structure.**
+    - Across a ∈ {1, 2}, b ∈ {−1…3} and both halts (20 permutations), only b/a ≈ −1 (continuous window −1.29 to −0.77) releases light at 2750–3120 K.
+    - In that window the cosmic hop grows with depth and the cosmic transit speed is nearly constant.
+    - "Identical structure" (1,1) releases at 2001 K. Every "+1" variant (1,2), (2,1) and (2,2) releases at 1743–2164 K. All of them fail G4.
+16. **The 10⁻⁷⁰ m onset is incompatible with that release.**
+    - At the hard-gamma halt (P = P_eff), b = 3.09 gives 10⁻⁷⁰ m. The nearest grid member, (1,3), gives 1.07×10⁻⁶⁹ m, just outside the pre-registered decade, and it releases at 1549 K.
+    - Every b that reaches 10⁻⁷⁰ is positive. The release window needs b < 0.
+    - Within this family, holding both requires a different ingredient: a release mechanism other than Thomson τ = 1 with Saha, an η other than 6.1×10⁻¹⁰, or a cosmic tick that is not a power of N.
+17. **The open items are now ranked:**
+    1. Derive the cosmic hop law. It must grow with depth (b ≈ −a) if release is to stand.
+    2. Decide whether the onset spacing of about 10⁻⁷⁰ m belongs to the same hop, or to a different structure (for example, the spation centre-to-centre spacing rather than the light hop).

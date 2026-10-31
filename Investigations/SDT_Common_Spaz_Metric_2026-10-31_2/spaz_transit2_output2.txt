@@ -1,0 +1,31 @@
+spaz_transit2 — W11 transit permutations (H0 = 70, eta = 6.1e-10)
+  halt temperatures: P = P_eff 6.7474e+11 K; Wien peak = l_P 1.7929e+32 K
+  validation (1,+1): release N 734.1 (W6b 734.1)  step agreement 1.50e-04 PASS
+  validation (1,-1): release N 1064.2 (W6b 1064.2)  step agreement 4.50e-04 PASS
+
+    a   b   q       p halt        T_rel K   G4      N_halt  hop_halt m   G5   t / (1/H0)
+    1  -1   0   0.720 P_eff        2900.4 PASS   2.476e+11   4.001e-24 fail    5.531e+03
+    1  -1   0   0.720 l_P          2900.4 PASS   6.578e+31   1.063e-03 fail    2.897e+09
+    1   0   1  -0.280 P_eff        2360.2 fail   2.476e+11   1.616e-35 fail    2.997e+14
+    1   0   1  -0.280 l_P          2360.2 fail   6.578e+31   1.616e-35 fail    4.168e+40
+    1   1   2  -1.280 P_eff        2000.8 fail   2.476e+11   6.529e-47 fail    4.166e+25
+    1   1   2  -1.280 l_P          2000.8 fail   6.578e+31   2.457e-67 fail    1.539e+72
+    1   2   3  -2.280 P_eff        1743.2 fail   2.476e+11   2.637e-58 fail    7.169e+36
+    1   2   3  -2.280 l_P          1743.2 fail   6.578e+31   3.735e-99 fail   7.039e+103
+    1   3   4  -3.280 P_eff        1548.9 fail   2.476e+11   1.065e-69 fail    1.360e+48
+    1   3   4  -3.280 l_P          1548.9 fail   6.578e+31  5.678e-131 fail   3.549e+135
+    2  -1   1  -0.560 P_eff        2599.7 fail   4.976e+05   8.042e-30 fail    9.885e+08
+    2  -1   1  -0.560 l_P          2599.7 fail   8.111e+15   1.311e-19 fail    8.434e+24
+    2   0   2  -1.560 P_eff        2360.3 fail   4.976e+05   1.616e-35 fail    2.997e+14
+    2   0   2  -1.560 l_P          2360.3 fail   8.111e+15   1.616e-35 fail    4.168e+40
+    2   1   3  -2.560 P_eff        2164.1 fail   4.976e+05   3.248e-41 fail    1.072e+20
+    2   1   3  -2.560 l_P          2164.1 fail   8.111e+15   1.993e-51 fail    2.431e+56
+    2   2   4  -3.560 P_eff        2000.9 fail   4.976e+05   6.529e-47 fail    4.166e+25
+    2   2   4  -3.560 l_P          2000.9 fail   8.111e+15   2.457e-67 fail    1.539e+72
+    2   3   5  -4.560 P_eff        1862.3 fail   4.976e+05   1.312e-52 fail    1.700e+31
+    2   3   5  -4.560 l_P          1862.3 fail   8.111e+15   3.029e-83 fail    1.024e+88
+  b for hop = 1e-70 m: a=1 halt P_eff -> b = 3.0902
+  b for hop = 1e-70 m: a=1 halt l_P   -> b = 1.1066
+  b for hop = 1e-70 m: a=2 halt P_eff -> b = 6.1804
+  b for hop = 1e-70 m: a=2 halt l_P   -> b = 2.2131
+  G4 window (continuous): b/a in [-1.29, -0.77]; hop then GROWS with depth (b < 0) -> far-frame transit speed c_far ~ N^-(a+b)
