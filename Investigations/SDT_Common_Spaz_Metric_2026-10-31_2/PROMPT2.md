@@ -62,3 +62,18 @@ Derived per permutation, with nothing tuned: 1+z = Nᵃ; T_local = T₀Nᵃ; the
 Look-elsewhere: 20 permutations × 2 release comparators × 1 spacing target = 40 trials.
 Validation: (1,1) gives release N = 734.1 and (1,−1) gives N = 1064.2 (W6b). The two step sizes in ln N (10⁻³ and 10⁻⁴) must agree to 0.1 %.
 Reporting: full detail for permutations passing G4 and G5; fails are listed in one line each.
+
+## W12 — α against Earth's solar depth: Berkeley Cs campaign (pre-registered 2026-10-31, before any fit)
+
+Data: Zhong, PhD thesis (UC Berkeley 2020), Figure 4.4, 28 values of (α − ᾱ)/ᾱ with 1σ bars. They are read from the PDF's vector paths. Dates come from Table 4.1 (13 Dec 2016 – 12 Jun 2017). Depth: z = ϟ_Sun / r(date), with ϟ_Sun from the engine and r from Kepler's equation for Earth's orbit (e = 0.0167086, perihelion 2017-01-04).
+
+Digitisation validation (known answers from the thesis):
+- weighted mean of the read values within ±0.05 ppb of 0;
+- combined statistical error 0.16 ± 0.01 ppb;
+- reduced χ² about the mean 1.2 ± 0.1.
+
+Test: weighted least squares, (α − ᾱ)/ᾱ = c + k·(z − z̄). Report k with 1σ.
+- **The depth coupling needed for the Cs–Rb gap, k = 3.5, is excluded** if it lies more than 2σ from the fitted k.
+- **A coupling is indicated** if k ≠ 0 at more than 2σ *and* the same sign appears in the N = 125-only subset (removes datasets 2–5, which used N = 150 and 200).
+
+Reported once; no dataset removed except the pre-registered N = 125 subset.
