@@ -118,6 +118,69 @@ int main(int argc, char** argv) {
     for (auto& p : pts) { szz += (p.z - mz) * (p.z - mz); stt += (p.t - mt) * (p.t - mt); szt += (p.z - mz) * (p.t - mt); }
     std::printf("  correlation(depth, date) = %.3f\n", szt / std::sqrt(szz * stt));
 
+    // ── W12b (post-registration, James 2026-10-31): movement-budget regressors ──
+    // (i) heliocentric orbital speed: v^2/c^2 = koppa (2/r - 1/a) = 2 z - koppa/a,
+    //     an exact linear function of z, so its fit is the depth fit with k_v = k/2.
+    // (ii) speed relative to the CMB rest frame (the dipole): v = v_Sun,CMB + v_Earth.
+    //     Sun-CMB velocity 369.82 km/s toward RA 167.942 deg, Dec -6.944 deg
+    //     (Planck 2018, MEASURED-INPUT). Earth velocity from a low-precision solar
+    //     ephemeris (Astronomical Almanac formulae), numerically differentiated.
+    {
+        const double deg = PI / 180, eps = 23.4393 * deg, c = sdt::laws::measured::c;
+        const double ra = 167.942 * deg, de = -6.944 * deg, vS = 369.82e3;
+        const double ex = std::cos(de) * std::cos(ra), ey0 = std::cos(de) * std::sin(ra), ez0 = std::sin(de);
+        const double vSx = vS * ex, vSy = vS * (ey0 * std::cos(eps) + ez0 * std::sin(eps)),
+                     vSz = vS * (-ey0 * std::sin(eps) + ez0 * std::cos(eps));
+        const int j2000 = days_from_civil(2000, 1, 1);
+        auto earth = [&](double dd, double& x, double& y) {     // heliocentric ecliptic [m]
+            const double g = (357.528 + 0.9856003 * dd) * deg;
+            const double L = (280.460 + 0.9856474 * dd) * deg + (1.915 * std::sin(g) + 0.020 * std::sin(2 * g)) * deg;
+            const double R = sdt::laws::measured::AU * (1.00014 - 0.01671 * std::cos(g) - 0.00014 * std::cos(2 * g));
+            x = R * std::cos(L + PI); y = R * std::sin(L + PI);
+        };
+        std::vector<Pt> cmb = pts, hel = pts;
+        double vmin = 1e9, vmax = 0;
+        for (size_t i = 0; i < pts.size(); ++i) {
+            const double dd = pts[i].t + days_from_civil(2016, 12, 13) - j2000 - 0.5 + 0.5;
+            double x1, y1, x2, y2;
+            earth(dd - 0.05, x1, y1); earth(dd + 0.05, x2, y2);
+            const double vx = (x2 - x1) / (0.1 * 86400), vy = (y2 - y1) / (0.1 * 86400);
+            const double vh2 = vx * vx + vy * vy;
+            const double tx = vSx + vx, ty = vSy + vy, tz = vSz;
+            const double u = (tx * tx + ty * ty + tz * tz) / (c * c);
+            cmb[i].z = u * 1e-2;          // scaled so the fit's 1e9 factor reports k per unit u x 1e-7
+            hel[i].z = vh2 / (c * c);
+            vmin = std::min(vmin, std::sqrt(u) * c); vmax = std::max(vmax, std::sqrt(u) * c);
+        }
+        const Fit fh = wls(hel), fc = wls(cmb);
+        std::printf("\n  W12b movement-budget regressors (post-registration)\n");
+        std::printf("    heliocentric v^2/c^2      : k_v = %+7.2f +- %5.2f  chi2 = %.2f  (depth fit chi2 = %.2f)\n",
+            fh.k, fh.sk, fh.chi2, all.chi2);
+        std::printf("    CMB-frame |v|: %.1f .. %.1f km/s over the campaign\n", vmin / 1e3, vmax / 1e3);
+        std::printf("    CMB-frame v^2/c^2         : k_u = %+.3e +- %.3e  (%.1f sigma)  chi2 = %.2f\n",
+            fc.k * 1e-2, fc.sk * 1e-2, std::abs(fc.k) / fc.sk, fc.chi2);
+        // "plus depth" (James): movement budget plus solar depth, w = v^2/c^2 + z
+        std::vector<Pt> hz = pts, cz = pts;
+        for (size_t i = 0; i < pts.size(); ++i) {
+            hz[i].z = hel[i].z + pts[i].z;
+            cz[i].z = (cmb[i].z * 1e2 + pts[i].z) * 1e-2;
+        }
+        const Fit fhz = wls(hz), fcz = wls(cz);
+        std::printf("    heliocentric v^2/c^2 + z  : k_w = %+7.3f +- %6.3f  (%.1f sigma)  chi2 = %.2f\n",
+            fhz.k, fhz.sk, std::abs(fhz.k) / fhz.sk, fhz.chi2);
+        std::printf("    CMB-frame v^2/c^2 + z     : k_w = %+.3e +- %.3e  (%.1f sigma)  chi2 = %.2f\n",
+            fcz.k * 1e-2, fcz.sk * 1e-2, std::abs(fcz.k) / fcz.sk, fcz.chi2);
+        double mu = 0;
+        for (auto& p : cmb) mu += p.z;
+        mu /= cmb.size();
+        double suu = 0, szz2 = 0, suz = 0;
+        for (size_t i = 0; i < pts.size(); ++i) {
+            suu += (cmb[i].z - mu) * (cmb[i].z - mu); szz2 += (pts[i].z - mz) * (pts[i].z - mz);
+            suz += (cmb[i].z - mu) * (pts[i].z - mz);
+        }
+        std::printf("    correlation(CMB-frame v^2, depth) = %.3f\n", suz / std::sqrt(suu * szz2));
+    }
+
     std::ofstream out(argv[2]);
     out << "index,date,N,z,day_since_20161213,value_ppb,sigma_ppb\n";
     for (auto& p : pts)

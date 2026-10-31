@@ -295,3 +295,20 @@ G1–G3 (redshift = supernova stretch, CMB β = 0, Pantheon+ Δχ² = +5.1) hold
 3. **Clock bounds.** Bounds on an annual α modulation from atomic clocks (|k| ≲ 10⁻⁷, from memory, source PENDING) are about 10⁷ below this slope. A depth effect could only be real here if it acts on the recoil observable h/m_Cs and not on the clock transition frequencies.
 
 ![Cs alpha vs depth](cs_alpha_depth2.png)
+
+### W12b — movement-budget regressors (post-registration, James 2026-10-31)
+
+Sun–CMB velocity: 369.82 km/s toward RA 167.942°, Dec −6.944° (Planck 2018). Earth's velocity comes from a low-precision solar ephemeris. Over the campaign the CMB-frame speed ran from 399.5 km/s (December) down to 341.1 km/s (June).
+
+| Regressor | Coupling (Δα/α per unit) | σ from 0 | χ² (26 dof) |
+|---|---|---|---|
+| solar depth z (W12) | −3.81 ± 1.32 | 2.9 | 25.03 |
+| heliocentric v²/c² (= 2z − ϟ/a exactly) | −1.89 ± 0.65 | 2.9 | 25.07 |
+| heliocentric v²/c² + z | −1.26 ± 0.44 | 2.9 | 25.06 |
+| CMB-frame v²/c² (dipole) | −2.24×10⁻³ ± 0.84×10⁻³ | 2.7 | 26.21 |
+| CMB-frame v²/c² + z | −2.24×10⁻³ ± 0.84×10⁻³ | 2.7 | 26.21 |
+
+- **Collinearity:** the correlation between CMB-frame v² and depth is 0.981. Every regressor is an annual curve with its extreme between mid-December and early January. Δχ² ≤ 1.2 across them, so the data do not discriminate.
+- **CMB frame:** α is higher when Earth moves slower relative to the CMB.
+- **Gap test:** the annual swing in either frame supplies at most about 0.5 ppb of the 1.17 ppb Cs–Rb gap.
+- **Daily modulation:** Earth's rotation is 0.37 km/s at Berkeley. At k_u it predicts about 0.007 ppb per day, which is not testable here.

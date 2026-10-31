@@ -120,3 +120,9 @@ No paper: the mechanism is not closed.
       - the LKB Rb per-dataset values with dates (Morel and Yao theses);
       - later Berkeley data;
       - the dates of the electron g−2 runs.
+19. **Movement budget and dipole (W12b, post-registration).**
+    - Heliocentric orbital speed is an exact linear function of depth for a Kepler orbit (v²/c² = 2z − ϟ/a), so "speed plus depth" refits the same 3σ slope: k = −1.26 ± 0.44 on (v²/c² + z).
+    - In the CMB frame the campaign swept 399.5 → 341.1 km/s. α tracks that at k_u = −2.24×10⁻³ ± 0.84×10⁻³ (2.7σ), with α higher at lower CMB-frame speed.
+    - Depth, orbital speed and dipole speed all peak within about four weeks of each other, so one Dec–Jun campaign cannot separate them, or separate any of them from instrumental drift.
+    - **What would separate them:** a campaign with the opposite time order (Jun → Dec), and the Rb per-dataset values.
+    - **Clock constraints:** the clock bounds on boost-dependent α (Lorentz-invariance tests) are PENDING sourcing. They decide whether k_u is already excluded.
