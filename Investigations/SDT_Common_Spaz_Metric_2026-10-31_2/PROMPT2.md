@@ -27,3 +27,18 @@ is not in this working tree; its stated results are cross-checks (marked RUN-1),
 | W9 | Depth rate law D(t): dN/dt = −H₀Nᵖ, transit speed c₀N^(−q), q ∈ {0, 2} | numerical distance integral vs closed form, 1e-8 | Pantheon+ (Datasets/cosmology, zHD > 0.01, diagonal errors only — stated limitation) shape fit: p CALIBRATED(1) + one magnitude offset. Comparator: flat ΛCDM (Ωm + offset) on the same points. Δχ² reported, no verdict beyond Δχ² and BIC. Elapsed time 1090 → 1 across the p family reported as identifiability measure |
 
 Single pass: each table is computed once over its full range from these rules; no mid-range retuning.
+
+## W10 — Spaz ladder: today's ratios traced back to the halt of light (added 2026-10-31, before its tool exists)
+
+Rules, all from candidate D (`SPAZ_ASSESSMENT2.md` §5) and `Papers/SDT_THEORETICAL_MODEL.md` §4–5, with nothing new:
+N = T_local/T_CMB; Spaz depth z_S = 1 − 1/N; c_far = c/N²; hop = ℓ_P/N; tick = N t_P;
+P = N⁴ P_rad (engine `law_I::P_rad`); Wien peak in local rulers λ = λ_now/N; local physics fixed
+(α, μ, R_p/ƛ_p, a₀/hop locked).
+
+Landmarks: each one is defined by a locked local quantity reaching the bath. Each N is computed once over the whole range, from N = 1 to the halt:
+FIRAS release (1090) · Saha half-points of H, He I, He II (η = 6.1e-10, Y = 0.245, shared-input) ·
+visible band · Lyman-α peak · kT = E₁ · solar-centre temperature (comparator) · Wien photon = 2m_ec² · kT = m_ec² ·
+kT = B_d, B_α · P = P_eff · λ = r_e, λ = R_p · kT = m_pc² · Planck temperature ħc/(kℓ_P) · halt λ = ℓ_P.
+
+Validation: the ladder must reproduce the repository's own table (`SDT_THEORETICAL_MODEL.md` §6: N = 1090 → 252 m/s; P = P_eff at N = 2.48×10¹¹; ℓ_P at N = 6.58×10³¹) to 1 %. Saha must reproduce the textbook He II and He I half-points (z ≈ 6000, ≈ 2500 ± 20 %).
+Elapsed time is reported for both W9 transit rules and labelled non-identifiable.
