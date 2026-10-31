@@ -42,3 +42,23 @@ kT = B_d, B_α · P = P_eff · λ = r_e, λ = R_p · kT = m_pc² · Planck tempe
 
 Validation: the ladder must reproduce the repository's own table (`SDT_THEORETICAL_MODEL.md` §6: N = 1090 → 252 m/s; P = P_eff at N = 2.48×10¹¹; ℓ_P at N = 6.58×10³¹) to 1 %. Saha must reproduce the textbook He II and He I half-points (z ≈ 6000, ≈ 2500 ± 20 %).
 Elapsed time is reported for both W9 transit rules and labelled non-identifiable.
+
+## W11 — transit-rule permutations, extended grid (pre-registered 2026-10-31, before `spaz_transit2.cpp` exists)
+
+Each cosmic permutation has a tick exponent a (far-frame emission period ∝ Nᵃ) and a hop exponent b (far-frame hop ∝ N⁻ᵇ), so the transit speed is c_far ∝ N^−(a+b). Locally, a = b = 1 (Sun, W5). Transit conserves the tick spacing; the supernova stretch (W5) requires this.
+
+Grid: a ∈ {1, 2} × b ∈ {−1, 0, 1, 2, 3} × halt ∈ {P = P_eff (T_local 6.747×10¹¹ K), Wien peak = ℓ_P (T_local 1.793×10³² K)}. That is 20 permutations.
+
+Derived per permutation, with nothing tuned: 1+z = Nᵃ; T_local = T₀Nᵃ; the Pantheon+ shape fixes s = 1 − 0.28a (W9), so p = s − (a+b); H = H₀/a; N_halt = (T_halt/T₀)^(1/a).
+
+| Gate | Rule | Pass |
+|---|---|---|
+| G1/G2 redshift = SN stretch; CMB β = 0 | tick-conserving transit | by construction for all (not evidence) |
+| G3 Pantheon+ | identical shape for all (Δχ² = +5.1) | all (not discriminating) |
+| G4 release | τ_Thomson = 1, Saha (η = 6.1e-10), local time dt/Nᵃ, H₀ = 70 | T_local within 5 % of 2971 K or 2892 K |
+| G5 onset spacing | far-frame hop at the halt, ℓ_P N_halt^(−b) | within one decade of James's stated 10⁻⁷⁰ m |
+| G6 elapsed time | (a/H₀)(N_h^(1−p) − 1)/(1−p) | reported for survivors only |
+
+Look-elsewhere: 20 permutations × 2 release comparators × 1 spacing target = 40 trials.
+Validation: (1,1) gives release N = 734.1 and (1,−1) gives N = 1064.2 (W6b). The two step sizes in ln N (10⁻³ and 10⁻⁴) must agree to 0.1 %.
+Reporting: full detail for permutations passing G4 and G5; fails are listed in one line each.
