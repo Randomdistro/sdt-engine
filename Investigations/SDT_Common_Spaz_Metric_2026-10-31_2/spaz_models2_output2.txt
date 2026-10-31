@@ -1,0 +1,58 @@
+spaz_models2 — Common Spaz Metric run 2 (W5 W6 W9)
+
+W5  Spaz exponent algebra (exponent of N, far-frame units)
+  identity check: nu = alpha^2 m c^2/hbar -> 2*alpha + m + 2c - hbar = {0 -3 1 2} vs {0 -3 1 2}
+  candidate                           alpha     nu     a0  c_loc    1+z     SN   Shap   beta
+  A  ladder: c~N^-1, atoms fixed        1.0    0.0    0.0   -1.0   -0.0   -0.0    1.0    nan
+  B  c~N^-1, alpha fixed, m~N^2         0.0    0.0   -1.0    0.0   -0.0   -0.0    1.0    nan
+  C  hop-tick static, c~N^-2            0.0   -1.0   -1.0    0.0    1.0    1.0    2.0   0.00
+  D  emission-depth, c~N^-2 rising      0.0   -1.0   -1.0    0.0    1.0    1.0    2.0   0.00
+  A' ladder with wavelength kept        1.0    0.0    0.0   -1.0   -1.0   -1.0    1.0   0.00
+  required: alpha 0 (quasar, Law V), 1+z 1, SN 1, Shapiro 2, beta 0.004+-0.016, c_loc 0
+  constraint system: 8 observables, exact rank 3, unknowns 4 -> 1 free exponent(s); consistent: yes
+  solution family (a = hbar exponent): c -2, hbar a, m 3+a, kee a-2
+    a=-2: alpha 0.0  nu -1.0  a0 -1.0  a0/hop(hop~N^-1) 0.0  -> pure unit change
+    a=-1: alpha 0.0  nu -1.0  a0 -1.0  a0/hop(hop~N^-1) 0.0  -> pure unit change
+    a=+0: alpha 0.0  nu -1.0  a0 -1.0  a0/hop(hop~N^-1) 0.0  -> pure unit change
+    a=+1: alpha 0.0  nu -1.0  a0 -1.0  a0/hop(hop~N^-1) 0.0  -> pure unit change
+  hop held fixed (physical widening): tick must carry N^-2 -> solar redshift 2 x koppa/R: excluded by C1
+
+W6  Ground state per epoch and release epoch
+  validation: Saha x_e=0.5 at T = 3761.7 K (textbook 3700-3800 K)
+  route (i)  E1/kT = 53 rule        : N = 1093.0
+  route (ii) Saha x_e = 0.5 (eta 6.1e-10): N = 1380.2
+  observed z* + 1 = 1090.92; Saha x_e at N=1090.92: 3.226e-03; at N=1060.94: 1.557e-03
+  routes differ by 26.3 %: release at N~1090 is NOT an equilibrium ionisation epoch; it needs a rate comparison (W9 rate law)
+    eta 3.0e-10 -> Saha half-ionisation N = 1356.4
+    eta 6.1e-10 -> Saha half-ionisation N = 1380.2
+    eta 1.2e-09 -> Saha half-ionisation N = 1403.7
+  table: E1 = 13.6057/N eV on arrival; local E1 = 13.6057 eV at every N
+    N     1.00  E1_arr  13.60569 eV  Lya_arr      121.6 nm  E1/kT  57929.74  x_e 0.000e+00
+    N   137.04  E1_arr   0.09929 eV  Lya_arr    16659.1 nm  E1/kT    422.73  x_e 8.327e-83
+    N  1060.94  E1_arr   0.01282 eV  Lya_arr   128975.3 nm  E1/kT     54.60  x_e 1.557e-03
+    N  1090.92  E1_arr   0.01247 eV  Lya_arr   132619.9 nm  E1/kT     53.10  x_e 3.226e-03
+    N  1380.20  E1_arr   0.00986 eV  Lya_arr   167786.2 nm  E1/kT     41.97  x_e 5.000e-01
+
+W9  Depth rate law, Pantheon+ shape fit (zHD > 0.01, non-calibrators, diagonal errors only)
+  validation: distance integral numeric 0.4973601849 closed 0.4973601849
+  supernovae used: 1580
+  rate law  : s = p+q = 0.720 (+0.030/-0.030)  chi2 = 699.3  BIC = 714.0   CALIBRATED(1)
+  flat LCDM : Om = 0.350                        chi2 = 694.1  BIC = 708.9   comparator
+  delta chi2 (rate law - LCDM) = +5.1 with equal parameter counts
+  identifiability: distances fix only s = p + q. With q = 2 (full-Shapiro transit) p = -1.280; with q = 0, p = 0.720
+  elapsed time N=1091 -> 1 in units of 1/H0, t = int dn / n^p:
+    q=0 s=0.690 p=+0.690  t = 24.98 / H0
+    q=0 s=0.720 p=+0.720  t = 21.75 / H0
+    q=0 s=0.750 p=+0.750  t = 18.99 / H0
+    q=2 s=0.690 p=-1.310  t = 4.506e+06 / H0
+    q=2 s=0.720 p=-1.280  t = 3.701e+06 / H0
+    q=2 s=0.750 p=-1.250  t = 3.04e+06 / H0
+
+  W6b release epoch from the fitted rate law (tau_Thomson = 1, Saha x_e, eta 6.1e-10)
+    q=2 (p=-1.280) H0=67.4: release N = 733.5  (T_local 1999 K, x_e 1.05e-08)
+    q=2 (p=-1.280) H0=70.0: release N = 734.1  (T_local 2001 K, x_e 1.08e-08)
+    q=2 (p=-1.280) H0=73.0: release N = 734.8  (T_local 2003 K, x_e 1.12e-08)
+    q=0 (p=+0.720) H0=67.4: release N = 1062.8  (T_local 2897 K, x_e 1.63e-03)
+    q=0 (p=+0.720) H0=70.0: release N = 1064.2  (T_local 2900 K, x_e 1.69e-03)
+    q=0 (p=+0.720) H0=73.0: release N = 1065.7  (T_local 2905 K, x_e 1.75e-03)
+    comparators: z*+1 = 1090.92, z_drag+1 = 1060.94 (Planck 2018, shared-input)

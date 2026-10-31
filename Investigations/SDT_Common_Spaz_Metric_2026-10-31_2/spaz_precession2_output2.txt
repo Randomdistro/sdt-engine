@@ -1,0 +1,34 @@
+spaz_precession2 — W3 apsidal advance (RK4, 40000 steps/orbit, 12 orbits)
+  validation: engine law_v_response x = -0.834188827544, scaled algebra -0.834188827544
+  validation Kepler: advance 2.300e-13 rad/orbit (criterion < 1e-8)
+  validation Law V: 0.16663 (criterion 1/6 = 0.16667 +- 0.5 %)
+  validation lambda=6: 1.00141 (criterion 1 +- 0.5 %)
+
+  dynamics                                eps        e    adv/ref
+  Law V only                            3e-04     0.20    0.16663
+  static lambda=5 only                  3e-04     0.20    0.83431
+  Law V + static lambda=5               3e-04     0.20    1.00162
+  Law V only                            1e-04     0.20    0.16665
+  static lambda=5 only                  1e-04     0.20    0.83366
+  Law V + static lambda=5               1e-04     0.20    1.00054
+  Law V only                            3e-04     0.50    0.16657
+  static lambda=5 only                  3e-04     0.50    0.83459
+  Law V + static lambda=5               3e-04     0.50    1.00178
+  Law V only                            1e-04     0.50    0.16663
+  static lambda=5 only                  1e-04     0.50    0.83375
+  Law V + static lambda=5               1e-04     0.50    1.00059
+
+  lambda_req (Law V on) = 4.9903   verify ratio = 1.00000
+
+  GOM04 c-closure sensitivity to Mercury's anomalous advance
+     42.94000"/cy  k =  686.7235  c = k v_surf = 2.999347e+08  (c-c0)/c0 = +4.75e-04
+     42.98000"/cy  k =  686.4039  c = k v_surf = 2.997951e+08  (c-c0)/c0 = +8.93e-06
+     43.02000"/cy  k =  686.0847  c = k v_surf = 2.996557e+08  (c-c0)/c0 = -4.56e-04
+     42.98077"/cy  k =  686.3977  c = k v_surf = 2.997925e+08  (c-c0)/c0 = -2.55e-08
+
+  Reference advance 6 pi koppa_Sun/(a(1-e^2)) per body, koppa_Sun=1477.046 m (engine k_Sun); predicted = ref x (f_V + lambda/6)
+  lambda fitted to Mercury (CALIBRATED(1)) = 4.9984
+    Mercury  ref  42.9930"/cy  Law V only  7.1640  fitted  42.9800  measured: 42.98 +- 0.04 (engine, MEASURED-INPUT)
+    Venus    ref   8.6270"/cy  Law V only  1.4375  fitted   8.6244  measured: PENDING source
+    Earth    ref   3.8397"/cy  Law V only  0.6398  fitted   3.8386  measured: PENDING source
+    Mars     ref   1.3513"/cy  Law V only  0.2252  fitted   1.3509  measured: PENDING source
