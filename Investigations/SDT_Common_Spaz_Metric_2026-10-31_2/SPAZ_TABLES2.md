@@ -275,3 +275,23 @@ G1–G3 (redshift = supernova stretch, CMB β = 0, Pantheon+ Δχ² = +5.1) hold
 **Result:** 0 of 20 permutations pass both G4 and G5. In this family the observed release epoch and an onset spacing of 10⁻⁷⁰ m exclude each other. The look-elsewhere count was 40 trials.
 
 ![transit release](transit_release2.png)
+
+## W12 — Berkeley Cs α against Earth's solar depth
+
+- **Data:** Zhong, PhD thesis (UC Berkeley 2020), Fig. 4.4, read from the PDF vector paths into `cs_alpha_fig44_digitised2.csv` (PDF sha256 in the file header). Dates come from Table 4.1.
+- **Depth:** z = ϟ_Sun / r, with r from Kepler's equation for Earth's orbit.
+- **Digitisation validation (against values stated in the thesis):** weighted mean +0.000 ppb; combined σ 0.155 ppb (thesis 0.16); reduced χ² 1.24 (thesis 1.2). PASS.
+
+| Fit | n | k (Δα/α per unit z) | from 0 | k = +3.5 | k = −3.5 | χ²/dof |
+|---|---|---|---|---|---|---|
+| all datasets | 28 | **−3.81 ± 1.32** | 2.9σ | excluded, 5.6σ | +0.2σ | 0.96 |
+| N = 125 only | 24 | **−4.07 ± 1.36** | 3.0σ | excluded, 5.5σ | +0.4σ | 1.05 |
+
+**Pre-registered criterion: met.** k ≠ 0 at more than 2σ, with the same sign in the N = 125 subset. α is higher when Earth is farther from the Sun.
+
+**Limitations (they decide what the slope can mean):**
+1. **Depth and date are collinear.** The correlation of z with calendar date over the campaign is −0.986. The campaign ran Dec → Jun, so Earth's depth fell monotonically while the apparatus was realigned "several times" (thesis §4.2). This dataset cannot tell a solar-depth coupling from a slow instrumental or analysis drift over the seven months.
+2. **The annual swing covers under half the Cs–Rb gap.** The campaign's weighted mean depth is 9.908×10⁻⁹. The deepest Earth ever gets is 1.0041×10⁻⁸ at perihelion. At k = −3.81 the largest offset any campaign could show against this Cs mean is 0.51 ppb, against the 1.17 ppb gap (and with the right sign, Rb would need to sit deeper).
+3. **Clock bounds.** Bounds on an annual α modulation from atomic clocks (|k| ≲ 10⁻⁷, from memory, source PENDING) are about 10⁷ below this slope. A depth effect could only be real here if it acts on the recoil observable h/m_Cs and not on the clock transition frequencies.
+
+![Cs alpha vs depth](cs_alpha_depth2.png)

@@ -104,3 +104,19 @@ No paper: the mechanism is not closed.
 17. **The open items are now ranked:**
     1. Derive the cosmic hop law. It must grow with depth (b ≈ −a) if release is to stand.
     2. Decide whether the onset spacing of about 10⁻⁷⁰ m belongs to the same hop, or to a different structure (for example, the spation centre-to-centre spacing rather than the light hop).
+
+## W12 — α against solar depth (pre-registered, 198fdf5)
+
+18. **The Berkeley Cs data carry a 3σ slope against Earth's solar depth.**
+    - k = −3.81 ± 1.32 for all 28 datasets, and −4.07 ± 1.36 for the 24 at N = 125. The size matches what the Cs–Rb gap would need, with the sign reversed: α is higher at aphelion.
+    - k = +3.5 is excluded at 5.6σ.
+    - **What the slope can mean:**
+      - Depth and calendar date are collinear (r = −0.986), so this campaign alone cannot separate a solar-depth coupling from a slow drift over Dec 2016 – Jun 2017.
+      - The annual swing can supply at most 0.51 ppb of the 1.17 ppb Cs–Rb gap.
+      - Clock bounds on an annual α modulation are about 10⁷ tighter. That leaves a depth effect only if it acts on h/m (recoil, mass) and not on clock frequencies, which SDT's "mass as throughput reorganisation" could, in principle, do.
+    - **Status:** COMPUTED, indicated, not attributable.
+    - **Tests that separate depth from drift:**
+      - a campaign whose dates cross perihelion twice, or run Jul → Dec (depth rising over the run);
+      - the LKB Rb per-dataset values with dates (Morel and Yao theses);
+      - later Berkeley data;
+      - the dates of the electron g−2 runs.
