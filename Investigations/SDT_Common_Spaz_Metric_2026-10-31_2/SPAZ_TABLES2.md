@@ -342,3 +342,21 @@ Earth's heliocentric position is projected on (i) the galactic north pole and (i
 
 **Validation of phase:** a maximum near 1–2 June is the known phase of Earth's annual speed modulation relative to the Galaxy, the same phase used in dark-matter annual-modulation searches.
 **Size of the swing:** about 233–262 km/s, not 200–260. The ecliptic is tilted 60.6° to the Sun's galactic motion, so half of Earth's orbital velocity goes "above and below" the Sun's path rather than along it.
+
+## W13 — Northwestern electron g−2 against solar depth and frame speeds (pre-registered, 36ce2da)
+
+**Data:** Fan thesis Table 4.7 (raw and correction per field), Fig. 4.37 (cavity correlation), Table 4.8 (common mode), Table 4.1 (dates). Transcribed in `ng2_fan2022_table47_2.csv` and `ng2_fan2022_cavity_corr2.csv`.
+
+**Extraction validation:** GLS mean +0.001 (thesis 0); σ 0.135 (thesis 0.13); χ² 12.80/10 (thesis 13.04). PASS.
+
+| Regressor | k, Northwestern | k, Berkeley Cs | Difference | Pre-registered outcome |
+|---|---|---|---|---|
+| solar depth z | −0.08 ± 0.51 | −3.81 ± 1.32 | 2.6σ | **CONTRADICTS** |
+| heliocentric v²/c² | −0.04 ± 0.25 | −1.89 ± 0.65 | 2.7σ | **CONTRADICTS** |
+| CMB-frame v²/c² | −1.2×10⁻⁵ ± 3.2×10⁻⁴ | −2.24×10⁻³ ± 0.84×10⁻³ | 2.5σ | **CONTRADICTS** |
+| galactic-frame v²/c² | −1.6×10⁻⁵ ± 9.4×10⁻⁴ | +6.49×10⁻³ ± 2.54×10⁻³ | 2.4σ | **CONTRADICTS** |
+
+- **Campaign coverage:** Northwestern spans depth 9.711–10.041×10⁻⁹, almost the full annual swing, and galactic-frame speed 233.7–260.3 km/s. Both are ordered by date the same way as Berkeley: Dec 2021 → Jul 2022.
+- **Confound:** corr(B, z) = +0.60. The cavity correction depends on B and is carried in the covariance.
+
+![two methods](alpha_depth_two_methods2.png)

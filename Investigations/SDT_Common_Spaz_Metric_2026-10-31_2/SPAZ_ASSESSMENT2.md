@@ -136,3 +136,13 @@ No paper: the mechanism is not closed.
     - The CMB-frame speed ran the opposite way (399 → 341 km/s), with α falling against it. Depth, both frame speeds and calendar time are all monotonic over the run, so the same 3σ trend fits every one of them.
     - **Status:** the trend is real at about 3σ in this dataset; its cause is not attributable from it.
     - **Separating test:** data from June → December, where the galactic-frame speed falls while depth rises.
+
+## W13 — Northwestern electron g−2 (T1 under specification v6.1)
+
+22. **No depth or frame-speed dependence of α in the electron g−2 data.**
+    - k_z = −0.08 ± 0.51, which is 2.6× tighter than Berkeley. The Berkeley slope is excluded at 2.6σ, and every frame regressor is excluded at 2.4–2.7σ.
+    - The extraction reproduces the thesis average, its uncertainty and its χ².
+    - **Consequence for W12:** the Berkeley Dec → Jun trend is not a property of α, which the g−2 channel would see through QED. Two readings remain:
+      1. **Instrumental.** Berkeley realignments over the campaign (thesis §4.2).
+      2. **A coupling specific to h/m_Cs.** That is, to atomic mass, the channel the electron g−2 does not contain. Under Law IV (m ∝ V_disp) a depth dependence of m_Cs/m_e would enter Berkeley's α through h/m_Cs and the mass ratio, and would leave g−2 untouched.
+    - **Status:** reading 2 is PENDING. Its size needs Δ(m_Cs/m_e)/(m_Cs/m_e) ≈ 2·k·Δz ≈ 2.4×10⁻⁹ over the year. Clock and Penning-trap mass-ratio stability bounds (T5) decide it.
