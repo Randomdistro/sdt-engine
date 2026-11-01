@@ -77,3 +77,30 @@ Test: weighted least squares, (α − ᾱ)/ᾱ = c + k·(z − z̄). Report k wi
 - **A coupling is indicated** if k ≠ 0 at more than 2σ *and* the same sign appears in the N = 125-only subset (removes datasets 2–5, which used N = 150 and 200).
 
 Reported once; no dataset removed except the pre-registered N = 125 subset.
+
+## W13 — Northwestern electron g−2: α against solar depth and frame speeds (T1; pre-registered 2026-11-01, before any fit)
+
+Data: Fan, PhD thesis (Harvard 2022). Sources:
+- Table 4.7: 11 field values of raw g/2 with statistical σ, and the cavity correction with its σ.
+- Figure 4.37: 11×11 correlation matrix of the cavity-correction uncertainty.
+- Table 4.8: common-mode systematics.
+- Table 4.1: run dates per field set.
+
+Value per field = raw + correction, in units of 10⁻¹² relative to g/2 = 1.001 159 652 180 59. Conversion to α: Δα/α = Δ(g/2)/a_e, a_e = 1.159 652 18×10⁻³ (leading order; next order changes the slope by 0.15 %). Each field set is dated at the midpoint of its runs.
+
+Covariance V = diag(σ_stat²) + C_ij σ_cav,i σ_cav,j + (common-mode sum)² for every element.
+
+Extraction validation (must reproduce Fan Eq. 4.90 and the stated χ² before any fit is read):
+- GLS mean 0.00 ± 0.02 (×10⁻¹²)
+- uncertainty 0.13 ± 0.01
+- χ² = 13.04 ± 0.5 for 10 dof
+
+Test: GLS fit value = c + k·(x − x̄) for each regressor x ∈ {solar depth z, heliocentric v²/c², CMB-frame v²/c², galactic-frame v²/c²}. Comparison is with Berkeley Cs (W12/W12b/W12d).
+
+| Outcome | Condition |
+|---|---|
+| **replicates** | k_NW ≠ 0 at > 2σ and \|k_NW − k_Cs\| < 2σ_combined |
+| **contradicts** | \|k_NW − k_Cs\| > 2σ_combined |
+| **uninformative** | neither of the above |
+
+The magnetic-field/date confound is reported as the correlation of B with z, because the cavity correction depends on the field.
