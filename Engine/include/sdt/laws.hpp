@@ -487,6 +487,22 @@ namespace law_III {
     // CR05 does not close R_CMB; f therefore remains observed-boundary
     // conditioned even though the atomic numerator is now target-free.
 
+    /// Proton–electron interaction volume V_int = (π/4) R_p_lock² r_e [m³]
+    /// (cylinder of cross-section (π/4)R_p² and length r_e).
+    // tier: IDENTITY. Replication record: Audits/PASTE_REPLICATION_2026-10-19.
+    inline constexpr double V_int_pe =
+        0.25 * std::numbers::pi * R_p_lock * R_p_lock * r_e;       // = 1.5662e-45 m³
+
+    /// P_eff = m_e c² / V_int: electron rest energy per interaction volume.
+    /// A rewriting of the Coulomb identity αℏc = m_e c² r_e inside P_eff above;
+    /// it adds no derivation (G-free, ℓ_P-free, N_shells-free). The statement
+    /// "f = V_disp(e)/(3 V_int)" is the same identity with V_disp := m_e c²/P_cf
+    /// (law_IV) and is not a second derivation.
+    inline constexpr double P_eff_from_volume = m_e * c * c / V_int_pe;
+    static_assert(P_eff_from_volume / P_eff > 1.0 - 1.0e-8 &&
+                  P_eff_from_volume / P_eff < 1.0 + 1.0e-8,
+                  "P_eff = m_e c^2 / V_int must agree with the electropause form");
+
     /// Interaction radius: R_charge = sqrt(R_p_lock × r_e)
     /// Resolves e-e / p-p / e-p having same coupling strength
     // provenance_status:     SDT-derived
