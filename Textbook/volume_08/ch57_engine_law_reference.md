@@ -67,7 +67,7 @@ Every displayed expression should carry a source symbol, premise, speed and tick
 
 **Residuals.**
 
-* **R57.1 — untracked headers.** Two consumed headers are untracked; the revision does not identify them. A commit or a snapshot archive of the 14 files is for the author to decide (nothing was committed).
+* **R57.1 — untracked headers.** Two consumed headers are untracked; the revision does not identify them. A commit or a snapshot archive of the 14 files is for the author to decide (nothing was committed). Note of 17 November 2026: on the author's decision the two headers were committed unchanged (revision `aa776d9`; working-copy digests as listed in Section 57.1), so later revisions identify all 14; the statements above describe the tree at runs 1 to 3.
 * **R57.2 — symbol inventory.** No full symbol-and-domain inventory was generated; counts were text counts.
 * **R57.3 — citation meaning.** Resolution shows existence and non-blankness; agreement of each cited line with the statement citing it was not checked line by line.
 * **R57.4 — unguarded domains.** `clock_rate`, `depth_from_c_far` and the others in Section 57.2 do not check their domains (proposal to the author, canon untouched).
