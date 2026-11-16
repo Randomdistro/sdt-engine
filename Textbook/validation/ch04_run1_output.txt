@@ -1,0 +1,60 @@
+﻿Chapter 4 instruments — shell cancellation
+
+INSTRUMENT VALIDATION (known answers)
+    ball R= 1  points = 7  (known 7)
+    ball R= 2  points = 33  (known 33)
+    ball R= 3  points = 123  (known 123)
+    ball R= 4  points = 257  (known 257)
+    ball R= 5  points = 515  (known 515)
+    ball R=10  points = 4169  (known 4169)
+  [consistent  ] V1  lattice-point counts in balls
+    sum |p|^-6  = 8.401908  (known 8.40192)
+    sum |p|^-12 = 6.202149  (known 6.20215)
+  [consistent  ] V2  simple-cubic lattice sums
+
+T3  LATTICE SHELL IDENTITY  (continuum value of each sum is R)
+        R         S_pt(R)        S_sph(R)        S_pt-R       S_sph-R
+       16       15.265937       15.375883     -0.734063     -0.624117
+       32       31.275617       31.388057     -0.724383     -0.611943
+       64       63.287781       63.401465     -0.712219     -0.598535
+      128      127.282202      127.396508     -0.717798     -0.603492
+      256      255.288226      255.402843     -0.711774     -0.597157
+  [consistent  ] T3  |S - R| <= 1 for all R
+
+    single-source kernel: exact sphere-target fraction / point kernel - 1
+    d=  1  exact/point - 1 = +0.095503   leading-order a^2/(4d^2) = +0.079577
+    d=  2  exact/point - 1 = +0.020728   leading-order a^2/(4d^2) = +0.019894
+    d=  3  exact/point - 1 = +0.009002   leading-order a^2/(4d^2) = +0.008842
+    d=  5  exact/point - 1 = +0.003204   leading-order a^2/(4d^2) = +0.003183
+    d= 10  exact/point - 1 = +0.000797   leading-order a^2/(4d^2) = +0.000796
+    d=100  exact/point - 1 = +0.000008   leading-order a^2/(4d^2) = +0.000008
+
+T4  DISPLACED OBSERVER  (continuum: |F| = s/3, toward ball centre => x-component negative)
+    R= 64 s= 4  Fx=-1.33333 Fy=+3.47e-16 Fz=-1.26e-16  |F|=1.33333  s/3=1.33333  rel.diff=1.049e-06
+    R= 96 s= 8  Fx=-2.66667 Fy=+1.17e-15 Fz=-4.07e-17  |F|=2.66667  s/3=2.66667  rel.diff=6.472e-07
+    R= 96 s=24  Fx=-8.00005 Fy=+4.27e-16 Fz=-1.91e-17  |F|=8.00005  s/3=8.00000  rel.diff=6.083e-06
+  [consistent  ] T4  |F| within 2% of s/3, directed toward centre
+
+T5  RELAY FIDELITY  (per-hop loss delta; sum_{d=1}^{N} (1-delta)^d)
+    N=   1000 delta=1.0e-04  direct=951.575897308  closed=951.575897308  N(1-N*delta/2)=950.000000000  rel(direct,closed)=6.09e-15
+    N= 100000 delta=1.0e-07  direct=99501.657508664  closed=99501.657508402  N(1-N*delta/2)=99500.000000000  rel(direct,closed)=2.63e-12
+  [INCONSISTENT] T5  closed form equals direct summation
+
+T6  ENGINE IMPLEMENTATION (Engine/include/sdt/laws.hpp)
+    l_P     = 1.616255e-35 m     (measured::l_P, stored numeric)
+    R_CMB   = 9.527000e+26 m     (measured::R_CMB)
+    T_CMB   = 2.7255 K      a_rad = 7.5657e-16 J m^-3 K^-4
+    u_CMB   = 4.174783e-14 J/m^3
+    N       = 5.894491e+61
+    eps     = 1.762640e-118 J
+    Phi     = 1.038986e-56 J
+    P_conv  = 2.460822e+48 Pa
+    grad P  = 8.609992e+20 Pa/m   (convergence_floor::pressure_gradient)
+    N*eps = 1.038986e-56   N*u_CMB = 2.460822e+48   P_conv/(3R) = 8.609992e+20
+  [consistent  ] T6  Phi = N eps ; P_conv = N u_CMB ; grad P = P_conv/(3R)
+
+DERIVED FIGURES FOR THE CHAPTER
+    relay fidelity: per-hop loss for a 1% departure from N*eps: delta <= 0.02/N = 3.393e-64
+    kernel exponent q (3-D): Phi ~ N^(3-q): q=1 -> N^2 = 3.475e+123 ; q=0 -> N^3 = 2.048e+185 (in units of N)
+
+SUMMARY: one or more pre-registered criteria were not met

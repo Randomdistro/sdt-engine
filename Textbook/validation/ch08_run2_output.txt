@@ -1,0 +1,82 @@
+
+== V0 helper validation (known answers) ==
+[PASS] V0    integrate sin over [0, pi] = 2                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 3.331e-16 (tol 1e-13)
+[PASS] V0    integrate x^7 over [0, 1] = 1/8                                                value 1.250000000000e-01 expected 1.250000000000e-01 err 2.220e-15 (tol 1e-14)
+[PASS] V0    integrate exp over [-1, 1] = e - 1/e                                           value 2.350402387288e+00 expected 2.350402387288e+00 err 5.668e-16 (tol 1e-13)
+[PASS] V0    root of cos x - x = 0.739085133215161                                          value 7.390851332152e-01 expected 7.390851332152e-01 err 2.253e-15 (tol 1e-13)
+[PASS] V0    root of x^2 - 2 on [1, 2] = sqrt 2                                             value 1.414213562373e+00 expected 1.414213562373e+00 err 2.983e-15 (tol 1e-13)
+[PASS] V0    compensated sum 1 + 10^6 x 1e-16 = 1 + 1e-10                                   value 1.000000000100e+00 expected 1.000000000100e+00 err 0.000e+00 (tol 1e-15)
+
+== V1 relay update, f = 1/3, one step ==
+[PASS] V1    central three cells each hold 1/3                                              value 3.333333333333e-01 expected 3.333333333333e-01 err 0.000e+00 (tol 1e-15)
+[PASS] V1    ...                                                                            value 3.333333333333e-01 expected 3.333333333333e-01 err 1.665e-16 (tol 1e-15)
+[PASS] V1    ...                                                                            value 3.333333333333e-01 expected 3.333333333333e-01 err 0.000e+00 (tol 1e-15)
+[PASS] V1    total content is 1                                                             value 1.000000000000e+00 expected 1.000000000000e+00 err 0.000e+00 (tol 1e-15)
+
+== V2 log-variable quadrature of the accumulated displacement ==
+[PASS] V2    s = 2, T = 1e4 vs (T^(1-s) - 1)/(1-s)                                          value 9.999000000000e-01 expected 9.999000000000e-01 err 5.552e-16 (tol 1e-12)
+[PASS] V2    s = 1, T = 1e4 vs ln T                                                         value 9.210340371976e+00 expected 9.210340371976e+00 err 1.736e-15 (tol 1e-12)
+
+== V3 step_locus on a known path ==
+[PASS] V3    (-1,0,0) advanced +x by 0.5 is (-0.5,0,0): distance to the reference           value 0.000000000000e+00 expected 0.000000000000e+00 err 0.000e+00 (tol 1e-12)
+[PASS] V3    radius 0.5                                                                     value 5.000000000000e-01 expected 5.000000000000e-01 err 0.000e+00 (tol 1e-12)
+
+== T1 TOY: positivity and conservation of the relay update ==
+[PASS] T1    double precision, total content, f = 0.250000                                  value 1.000000000000e+00 expected 1.000000000000e+00 err 2.220e-16 (tol 1e-12)
+[PASS] T1    double precision, minimum content >= 0 for f = 0.250000
+       f = 0.25: total 1.000000000000e+00, minimum cell content 0.000000e+00, maximum 7.958924e-02
+[PASS] T1    double precision, total content, f = 0.500000                                  value 1.000000000000e+00 expected 1.000000000000e+00 err 0.000e+00 (tol 1e-12)
+[PASS] T1    double precision, minimum content >= 0 for f = 0.500000
+       f = 0.50: total 1.000000000000e+00, minimum cell content 0.000000e+00, maximum 1.122752e-01
+[PASS] T1    double precision, minimum content < 0 for f = 0.550000
+       f = 0.55: total 9.999999999999e-01, minimum cell content -5.279779e+02, maximum 5.337669e+02
+[PASS] T1    double precision, minimum content < 0 for f = 0.750000
+       f = 0.75: total 1.004466209381e+00, minimum cell content -7.209198e+13, maximum 7.304363e+13
+[PASS] T1    double precision, minimum content < 0 for f = 1.000000
+       f = 1.00: total 1.401423000000e+06, minimum cell content -4.869499e+22, maximum 4.941993e+22
+[PASS] T1    exact: total content = 1 and sign of the minimum correct, f = 1/4
+[PASS] T1    exact: total content = 1 and sign of the minimum correct, f = 1/2
+[FAIL] T1    exact: total content = 1 and sign of the minimum correct, f = 11/20
+[PASS] T1    exact: total content = 1 and sign of the minimum correct, f = 3/4
+[PASS] T1    exact: total content = 1 and sign of the minimum correct, f = 1/1
+
+== T2 arrest and accumulated displacement, I(T) = int_1^T t^(-ab) dt ==
+       ab = 0.5, T = 1e+02: I = 1.800000000e+01
+       ab = 0.5, T = 1e+04: I = 1.980000000e+02
+       ab = 0.5, T = 1e+06: I = 1.998000000e+03
+       ab = 0.5, T = 1e+08: I = 1.999800000e+04
+       ab = 1.0, T = 1e+02: I = 4.605170186e+00
+       ab = 1.0, T = 1e+04: I = 9.210340372e+00
+       ab = 1.0, T = 1e+06: I = 1.381551056e+01
+       ab = 1.0, T = 1e+08: I = 1.842068074e+01
+       ab = 2.0, T = 1e+02: I = 9.900000000e-01
+       ab = 2.0, T = 1e+04: I = 9.999000000e-01
+       ab = 2.0, T = 1e+06: I = 9.999990000e-01
+       ab = 2.0, T = 1e+08: I = 9.999999900e-01
+[PASS] T2    quadrature vs closed form, worst relative over 12 cases                        value 2.109423746788e-15 expected 0.000000000000e+00 err 2.109e-15 (tol 1e-10)
+[PASS] T2    ab = 0.5: I(1e8) > 1e4 (diverging accumulated displacement)
+[PASS] T2    ab = 1: I(1e8)/I(1e6) = 4/3 (logarithmic growth)                               value 1.333333333333e+00 expected 1.333333333333e+00 err 4.996e-16 (tol 1e-10)
+[PASS] T2    ab = 2: |I(1e8) - 1| (finite remaining displacement)                           value 1.000000082740e-08 expected 0.000000000000e+00 err 1.000e-08 (tol 1e-07)
+
+== T3 a straight path across the polar axis of the chart ==
+[PASS] T3    chord between consecutive loci minus 0.1 (worst of 20)                         value 9.714451465470e-17 expected 0.000000000000e+00 err 9.714e-17 (tol 1e-12)
+[PASS] T3    distance from each locus to the Cartesian reference (worst of 21)              value 6.284293840013e-16 expected 0.000000000000e+00 err 6.284e-16 (tol 1e-12)
+[PASS] T3    azimuth change between k = 9 and k = 11 is pi                                  value 3.141592653590e+00 expected 3.141592653590e+00 err 0.000e+00 (tol 1e-09)
+[PASS] T3    polar angle at the crossing (k = 10)                                           value 1.683249687724e-16 expected 0.000000000000e+00 err 1.683e-16 (tol 1e-09)
+       polar angle at k = 9, 10, 11: 0.197396, 1.683e-16, 0.197396 ; azimuth at k = 9, 11: 3.141593, 6.283185
+
+== T4 the centre: step_locus near and at r = 0 ==
+       rho = 1e-02, short of the centre: radius 1.000000000e-02 (exact 1e-02), relative error 5.52e-14, budget 8u/rho^2 = 8.88e-12, direction correct
+       rho = 1e-02, past the centre: radius 1.000000000e-02 (exact 1e-02), relative error 1.06e-12, budget 8u/rho^2 = 8.88e-12, direction correct
+       rho = 1e-04, short of the centre: radius 9.999999970e-05 (exact 1e-04), relative error 3.04e-09, budget 8u/rho^2 = 8.88e-08, direction correct
+       rho = 1e-04, past the centre: radius 9.999999970e-05 (exact 1e-04), relative error 3.04e-09, budget 8u/rho^2 = 8.88e-08, direction correct
+       rho = 1e-06, short of the centre: radius 9.999334258e-07 (exact 1e-06), relative error 6.66e-05, budget 8u/rho^2 = 8.88e-04, direction correct
+       rho = 1e-06, past the centre: radius 1.000044449e-06 (exact 1e-06), relative error 4.44e-05, budget 8u/rho^2 = 8.88e-04, direction correct
+       rho = 1e-08, short of the centre: radius 1.490116119e-08 (exact 1e-08), relative error 4.90e-01, budget 8u/rho^2 = 8.88e+00, direction correct
+       rho = 1e-08, past the centre: radius 5.000000000e-13 (exact 1e-08), relative error 1.00e+00, budget 8u/rho^2 = 8.88e+00, direction correct
+[PASS] T4    relative error of the radius <= 8u/rho^2 in all 8 cases
+[PASS] T4    relative error of the radius at rho = 1e-8 exceeds 0.1
+[PASS] T4    direction label correct for rho >= 1e-6 on both sides of the centre
+[PASS] T4    at d = 1 exactly the radius is the floor 0.5e-12                               value 5.000000000000e-13 expected 5.000000000000e-13 err 0.000e+00 (tol 1e-15)
+
+CRITERIA NOT MET: 1 failure(s)

@@ -1,0 +1,31 @@
+NSEQ16 Round 2 (2026-10-14) engine NSEQ18-WEB-1, R_p 0.8414 fm
+
+case: A, Z, nd, nt | connected, bipartite(types), contacts, max residual, max slip, unlisted, clock residual | fingerprint repeat
+  1-1: 1, 1, 0, 0 | true, true, 0, 0.00e+0, 0.00e+0, 0, 2.45e-16 | true
+  1-2: 2, 1, 0, 0 | true, true, 1, 0.00e+0, 0.00e+0, 0, 2.45e-16 | true
+  1-3: 3, 1, 0, 0 | true, true, 2, 0.00e+0, 0.00e+0, 0, 2.45e-16 | true
+  2-4: 4, 2, 0, 0 | true, true, 4, 2.22e-16, 0.00e+0, 0, 2.45e-16 | true
+  3-7: 7, 3, 0, 1 | true, true, 7, 2.22e-16, 0.00e+0, 0, 2.45e-16 | true
+  4-9: 9, 4, 1, 1 | true, true, 9, 2.22e-16, 0.00e+0, 0, 2.45e-16 | true
+  5-11: 11, 5, 2, 1 | true, true, 11, 2.22e-16, 0.00e+0, 0, 2.45e-16 | true
+  6-12: 12, 6, 4, 0 | true, true, 12, 4.44e-16, 0.00e+0, 0, 2.45e-16 | true
+  7-14: 14, 7, 5, 0 | true, true, 14, 2.22e-16, 0.00e+0, 0, 2.45e-16 | true
+  8-16: 16, 8, 6, 0 | true, true, 16, 2.22e-16, 0.00e+0, 0, 2.45e-16 | true
+[G0] inventory: met
+[G1] seat angle errors for 2-6 seats: max 0.00e+0 rad (<= 1e-10) -> met
+[G2] connected, every unit touched, unlike contacts only, no like-like touch, two-colourable: met
+[G3] contact residual <= 1e-10, slip < 1e-10, no unlisted touch: met
+[G4] common clock residual <= 1e-10: met
+[G5] four-tour closure 1.12e-15 R_p (< 1e-10), stages inner,under,outer,over -> met
+[G6] Mobius: position 2pi 6.86e-17, 4pi 1.37e-16; director 2pi -1, 4pi 1 -> met
+[G7] fingerprint repeat for all ten cases: true; resolution doubling 2048 vs 4096: fourTourClosure 0.00e+0, maximumSeamResidual 0.00e+0, maximumSeamTangentResidual 0.00e+0 -> met
+[control i] same-handed p-p contact slip 2 (nonzero expected); unlike p-n slip 0
+[control ii] O-16 graph with one edge made like-like is still two-colourable by type: false (expected false)
+[control iii, iv] not run: the engine exposes no switch to remove the Mobius half-twist, and (iv) is a labelling rule
+
+[G8a] H1 nucleon outer envelope = 1.0848 R_p (<= 1) -> NOT MET
+[G8b] aspect R/a against sqrt(q/p):
+   H1 spec (4 tours, 3 cross-section turns): R/a(helix radius) = 19.807, R/a(strand radius) = 28.011; sqrt(3/4) = 0.8660, sqrt(5/4) = 1.1180
+   braid spec (4,5): R/a = 2.818 against sqrt(5/4) = 1.1180 -> NOT MET
+   canon (2,3): sqrt(3/2) = 1.2247 (no engine object declares it)
+[G8c] size provenance: H1 straight helix length 5.28 fm and strand diameter 0.060000000000000005 fm; engine record of provenance: [] -> NOT MET

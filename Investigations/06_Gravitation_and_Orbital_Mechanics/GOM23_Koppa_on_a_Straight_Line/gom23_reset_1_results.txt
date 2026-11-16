@@ -1,0 +1,37 @@
+GOM23 blank-slate run 1 (registered in GOM23_RESET_ASSESSMENT_2026-10-10.md sections 0-2)
+=======================================================================
+
+[V1] Simpson (x = b sinh u) against 2X/(b^2 sqrt(b^2 + X^2)): relative 3.33e-16 -> met
+[V2] RK4 free fall for 300 s from R_Earth: relative energy change 1.43e-15 -> met
+[V3] r_e = alpha^2 a_0 and c exact in laws.hpp -> met
+
+VALIDATIONS: met
+
+[P1] I1/I2 (Earth, force and clock)     : xi = g R^2 / c^2 ; dnu/nu = xi h / R^2 ; consumes g0, R_E, h, c
+[P1] I3 (hydrogen, escape)              : xi = a0 / k^2 ; k = c / sqrt(2 E_ion / m_e) ; consumes a0, E_ion, m_e, c
+[P1] P3/P4 (extraction, line)           : xi = (a_prop - rddot) r^2 / c^2 ; dv_perp = 2 c^2 xi / (b v) ; consumes a_prop, r(t), b, v, c
+[P1] occurrences of pi in the chain formulas: 0 -> zero (VERIFICATION: by the form of the chains; the measured a0 and alpha carry h/2pi in their definitions)
+
+[I1] a = c^2 koppa_E / R_E^2 = 9.81828 m/s^2 against g0 = 9.80665 : +0.1186% (gate 0.5%: met) ; inside the polar-equatorial band [9.780327, 9.832186]: yes
+     equatorial: c^2 koppa_E/R_eq^2 = 9.79632, centrifugal omega^2 R_eq = 0.03392, difference 9.76241 against 9.780327 : -0.1832% (gate 0.5%: met)
+     recovery koppa_rec = g0 R^2/c^2 = 4.428886e-03 m against koppa_E = 4.434139e-03 m : -0.1185%
+[I2] tower h = 450 m: koppa_E h/R^2 = 4.9159e-14 ; g0 h/c^2 = 4.9101e-14 (ratio 1.00119, gate 1%: met) ; measured class 4.9e-14 (+0.325%, gate 2%: met)
+[I3] k = c/sqrt(2 E_ion/m_e) = 137.07257 (1/alpha = 137.03600) ; koppa_H,rec = a0/k^2 = 2.816437e-15 m against r_e = 2.817940e-15 m : -0.0533% (gate 0.1%: met)
+     with the infinite-mass Rydberg energy: koppa = 2.817940e-15 m, +1.93e-12 relative to r_e (the finite-proton seat offset is -0.0533%)
+
+[P3] synthetic ascent: r from 6371000 to 6761462 m in 300 s ; mean recovered koppa = 4.434139e-03 m against injected 4.434139e-03 m : -3.717e-11 (gate 0.1%: met) ; worst single sample 1.04e-06
+     required kinematic precision for 0.1%: delta a < 0.010 m/s^2 (accelerometer bias, drag and thrust alignment must be below it)
+
+[P4] Sun, v = 3e7 m/s     X/b = 1e+03 : line integral 1.272102e+04 m/s ; closed form 2 c^2 koppa/(b v) = 1.272103e+04 m/s ; relative -5.00e-07 (gate 0.5%: met) ; finite-X exact 1.272102e+04
+[P4] Sun, v = 3e7 m/s     X/b = 1e+04 : line integral 1.272103e+04 m/s ; closed form 2 c^2 koppa/(b v) = 1.272103e+04 m/s ; relative -5.00e-09 (gate 0.5%: met) ; finite-X exact 1.272103e+04
+     trajectory integration (RK4, step ~ r/v): transverse velocity change 1.272102e+04 m/s, relative to the closed form -3.325e-07 (descriptive; deflection/v = 4.2e-04)
+[P4] Earth, v = 1e6 m/s   X/b = 1e+03 : line integral 1.251045e+02 m/s ; closed form 2 c^2 koppa/(b v) = 1.251046e+02 m/s ; relative -5.00e-07 (gate 0.5%: met) ; finite-X exact 1.251045e+02
+[P4] Earth, v = 1e6 m/s   X/b = 1e+04 : line integral 1.251046e+02 m/s ; closed form 2 c^2 koppa/(b v) = 1.251046e+02 m/s ; relative -5.00e-09 (gate 0.5%: met) ; finite-X exact 1.251046e+02
+     trajectory integration (RK4, step ~ r/v): transverse velocity change 1.251045e+02 m/s, relative to the closed form -4.414e-07 (descriptive; deflection/v = 1.3e-04)
+
+[P5] closure table (straight-line recovery against the circular-ladder anchor):
+  Earth    : 4.428886e-03 m against 4.434139e-03 m : -0.1185% (gate 1%: met)
+  hydrogen : 2.816437e-15 m against 2.817940e-15 m : -0.0533% (gate 1%: met)
+  Sun      : PENDING (no straight-line measurement of the Sun's koppa in the local data that is not a fitted post-Newtonian coefficient)
+
+Anchors: koppa_Earth = 4.434139e-03 m, koppa_Sun = 1477.0459 m, koppa_hydrogen = 2.817940e-15 m

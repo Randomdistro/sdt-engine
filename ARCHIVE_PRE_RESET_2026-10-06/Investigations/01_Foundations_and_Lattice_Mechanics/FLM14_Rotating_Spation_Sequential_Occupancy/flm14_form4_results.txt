@@ -1,0 +1,107 @@
+========================================================================================
+  FLM14 solver - run 3 (RULE-FORM-4, two channels).  Gates: RUN_LOG.md ADJ-8/9.
+  One lattice rule (P1-G1): {base phi, omega_i = OMEGA0*z_i/<z>, g=-1, W,
+  lock-rigidity} = 5 native quantities. beta exists only as the electron's
+  declared contact-kick coefficient in Part B (ADJ-5 verbatim). Nothing fitted.
+========================================================================================
+========================================================================================
+  PART A - P1-G3 on RULE-FORM-4 (two channels).  Gate <= 1.2 (UNMOVED).
+  Ladder: form-1 x7.47 KILLED -> form-2 x2.88/x2.29 FAIL -> form-3 x1.35 FAIL
+  (x1.00 only at degenerate beta=1) -> form-4 = pulse channel transparent BY
+  ARCHITECTURE. Pre-stated (ADJ-8): the ratio is 1.00 by construction; the run
+  verifies the identity and measures the RESIDUAL constraint-channel signature.
+========================================================================================
+
+  glass seed 21: N=1000  accepted WWW switches=179  bond length 0.450+-0.049  z min/mean/max = 4/4.88/11  [72s]
+    pulse channel: ungeared anisotropy 0.0313 (24 dirs)  geared 0.0313 (24 dirs)  ratio 1.0000  identity max|t_g - t_u| = 0.00e+00
+    constraint channel: contacts 2000  locked 947 (47.3%)  window-refused 50.7%  frustrated-refused 38 of 91 same-cluster attempts (41.8%; P1-G2 forecast 34.7%)
+    clusters (size>=2): n=29  largest 832/1000 (83.2% - percolation)  |Omega|_largest/OMEGA0 = 0.0042 (freeze test)  lock-network anisotropy 0.091 (24 cones)
+
+  glass seed 22: N=1000  accepted WWW switches=196  bond length 0.449+-0.049  z min/mean/max = 3/4.86/9  [68s]
+    pulse channel: ungeared anisotropy 0.0317 (24 dirs)  geared 0.0317 (24 dirs)  ratio 1.0000  identity max|t_g - t_u| = 0.00e+00
+    constraint channel: contacts 2000  locked 962 (48.1%)  window-refused 49.6%  frustrated-refused 46 of 87 same-cluster attempts (52.9%; P1-G2 forecast 34.7%)
+    clusters (size>=2): n=28  largest 871/1000 (87.1% - percolation)  |Omega|_largest/OMEGA0 = 0.0047 (freeze test)  lock-network anisotropy 0.040 (24 cones)
+
+  glass seed 23: N=1000  accepted WWW switches=175  bond length 0.447+-0.051  z min/mean/max = 4/4.79/9  [79s]
+    pulse channel: ungeared anisotropy 0.0210 (24 dirs)  geared 0.0210 (24 dirs)  ratio 1.0000  identity max|t_g - t_u| = 0.00e+00
+    constraint channel: contacts 2000  locked 966 (48.3%)  window-refused 48.9%  frustrated-refused 55 of 113 same-cluster attempts (48.7%; P1-G2 forecast 34.7%)
+    clusters (size>=2): n=29  largest 863/1000 (86.3% - percolation)  |Omega|_largest/OMEGA0 = 0.0048 (freeze test)  lock-network anisotropy 0.044 (24 cones)
+
+  P1-G3 SUMMARY: ratio geared/ungeared = 1.0000 +- 0.0000 over 3 glasses; identity anchor max = 0.00e+00
+    gate <= 1.2: PASS - TRIVIALLY SATISFIED BY ARCHITECTURE (pre-stated ADJ-8): the pulse channel
+    carries no gearing waits, so the P1-G3 observable can no longer see the
+    gearing at all. The MEASURABLE residual lives on the constraint channel:
+    <locked bond fraction> = 47.9%  (window duty W = 0.5 forecast)
+    <frustrated refusal>   = 47.8%  of same-cluster attempts
+    <largest cluster>      = 85.5%  of sites (constraint percolation)
+    <|Omega|/OMEGA0>       = 0.0046       (locking FREEZES rotation)
+    <lock anisotropy>      = 0.058       (direction structure of the lock net)
+
+========================================================================================
+  PART B - P2 per ADJ-5 VERBATIM + run-2's two corrections (ADJ-8):
+  (1) ENSEMBLE-OVER-PHASE: 64 initial-phase draws x 40000 hops (ADJ-10)
+      (R-seq:
+      probability IS ignorance of the starting tick). (2) 3-D seat geometry:
+      three shells {8,13,21}, adjacency >= 6 (kills short-cycle trapping).
+  R-Born: nothing quadratic inserted. Exponent criteria + beta grid unchanged.
+========================================================================================
+  geometry seed 1: 42 seats, degree min/mean/max = 6/7.48/10
+
+  beta=0.02:  p_occ = undefined (only 6 usable seats (<12))
+             p_dwell = undefined (only 6 usable seats (<12))
+             drift 0.0006 (gate <0.01: PASS)   coverage pooled 71% / per-draw 26%   [103s]
+
+  beta=0.05:  p_occ = undefined (|r|=0.55 < 0.6 - no exponent defined)
+             p_dwell = undefined (|r|=0.36 < 0.6 - no exponent defined)
+             drift 0.0027 (gate <0.01: PASS)   coverage pooled 83% / per-draw 32%   [88s]
+
+  beta=0.10:  p_occ = undefined (only 10 usable seats (<12))
+             p_dwell = undefined (only 10 usable seats (<12))
+             drift 0.0063 (gate <0.01: PASS)   coverage pooled 86% / per-draw 36%   [52s]
+
+  beta=0.20:  p_occ = +2.375 (|r|=0.63, n=17)
+             p_dwell = undefined (|r|=0.25 < 0.6 - no exponent defined)
+             drift 0.0003 (gate <0.01: PASS)   coverage pooled 95% / per-draw 46%   [47s]   split-half p_occ: undef / +2.457
+
+  beta=0.40:  p_occ = +2.325 (|r|=0.69, n=23)
+             p_dwell = undefined (|r|=0.16 < 0.6 - no exponent defined)
+             drift 0.0011 (gate <0.01: PASS)   coverage pooled 100% / per-draw 54%   [46s]   split-half p_occ: undef / +1.736
+
+  beta=0.80:  p_occ = undefined (amp spread x2.9 (<x3))
+             p_dwell = undefined (amp spread x2.9 (<x3))
+             drift 0.1118 (gate <0.01: FAIL)   coverage pooled 93% / per-draw 28%   [53s]
+
+  P2-G1 STABLE-REGIME TEST (committed rule unchanged):
+    NO stable regime by the committed rule - reported as such.
+
+  robustness (declared, not gates):
+    T_W=13.5 @ beta=0.20: p_occ = undefined (|r|=0.34 < 0.6 - no exponent defined)
+    T_W=54.0 @ beta=0.20: p_occ = +2.291 (|r|=0.66)
+    geometry seed 2 (16 draws) @ beta=0.2: p_occ = undefined (|r|=0.47 < 0.6 - no exponent defined)
+
+  PART C: NOT RUN - no stable P2 regime (committed condition, ADJ-6).
+
+========================================================================================
+  PART D - ADJ-9 PROBE (one scan, declared before code): does form-4 gearing
+  force the NP14 candidate 0.91859c (or ratio 0.91808) in locked-cluster
+  kinematics? Four observables fixed in ADJ-9; hit = within 1% of 0.9186;
+  no derived combinations after looking, no inversions, no second scan.
+========================================================================================
+    R1 = 0.10888  (per-glass: 0.10626, 0.11157, 0.10881)
+         <|Omega_c|>/<omega>_members (rate retention)  ->  not 0.9186 (miss)
+    R2 = 0.00458  (per-glass: 0.00419, 0.00472, 0.00484)
+         |Omega_largest|/OMEGA0 (largest-cluster residual rate)  ->  not 0.9186 (miss)
+    R3 = 0.00574  (per-glass: 0.00634, 0.00522, 0.00567)
+         <pi*l*|Omega_c|> locked bonds, units c (gear rim speed)  ->  not 0.9186 (miss)
+    R4 = 0.99720  (per-glass: 0.99658, 0.99910, 0.99591)
+         <omega>_locked/<omega>_all (coordination selection)  ->  not 0.9186 (miss)
+
+    PROBE VERDICT: NOT FOUND - no declared observable is within 1% of 0.9186. A miss is a miss; no fishing.
+
+========================================================================================
+  F6 ONE-RULE CROSS-CHECK
+    Part A lattice rule has NO beta (locking replaces entrainment structurally);
+    Part B uses the ADJ-5 electron rule verbatim; Part C uses the MEASURED p
+    with no re-tuning of beta, T_W, W, OMEGA0 anywhere between parts.
+  P3 (Lamb routes) / P4 (lock ladder): licensing depends on this run's P2.
+========================================================================================

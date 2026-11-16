@@ -82,3 +82,15 @@ GEMMA, XENONnT bounds — OBSERVED; discrimination at 10⁻²⁰.
 ---
 
 *PPT04 · the prediction stands; the implementation must obey the derivation basis.*
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** The falsifier "any non-zero μ_ν at 10^-20 μ_B" is far below any measured limit, and the standard account also predicts a tiny non-zero value, so no available observation discriminates.
+
+**Correction:** State the discriminant against the current experimental upper limit and record the result as untestable now.
+
+**Status:** RULE RECORDED — corrected gate or definition applies to the next run; the earlier result is not re-scored and nothing was re-run.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

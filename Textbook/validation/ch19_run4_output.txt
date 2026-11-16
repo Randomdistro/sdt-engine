@@ -1,0 +1,49 @@
+
+== V0 helper validation (known answers) ==
+[PASS] V0    integrate sin over [0, pi] = 2                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 3.331e-16 (tol 1e-13)
+[PASS] V0    integrate x^7 over [0, 1] = 1/8                                                value 1.250000000000e-01 expected 1.250000000000e-01 err 2.220e-15 (tol 1e-14)
+[PASS] V0    integrate exp over [-1, 1] = e - 1/e                                           value 2.350402387288e+00 expected 2.350402387288e+00 err 5.668e-16 (tol 1e-13)
+[PASS] V0    root of cos x - x = 0.739085133215161                                          value 7.390851332152e-01 expected 7.390851332152e-01 err 2.253e-15 (tol 1e-13)
+[PASS] V0    root of x^2 - 2 on [1, 2] = sqrt 2                                             value 1.414213562373e+00 expected 1.414213562373e+00 err 2.983e-15 (tol 1e-13)
+[PASS] V0    compensated sum 1 + 10^6 x 1e-16 = 1 + 1e-10                                   value 1.000000000100e+00 expected 1.000000000100e+00 err 0.000e+00 (tol 1e-15)
+
+== V1 unit bridge kg -> MeV ==
+[PASS] V1    m_n c^2 = 939.56542194 MeV                                                     value 9.395654219340e+02 expected 9.395654219400e+02 err 6.380e-12 (tol 1e-08)
+[PASS] V1    m_p c^2 = 938.27208943 MeV                                                     value 9.382720894283e+02 expected 9.382720894300e+02 err 1.857e-12 (tol 1e-08)
+[PASS] V1    m_e c^2 = 0.51099895069 MeV                                                    value 5.109989506918e-01 expected 5.109989506900e-01 err 3.431e-12 (tol 1e-08)
+
+== V2 max-flow solver vs exact bipartite capacity min(3Z, 3N, ZN) ==
+[PASS] V2    solver equals min(3Z, 3N, ZN) for 1 <= Z, N <= 12
+
+== T1 free conversion: energy released and electron endpoint (massless channel) ==
+       Q = 0.782333555 MeV ; E_e,max = 1.292581313 MeV ; T_e,max = 0.781582363 MeV ; proton recoil at endpoint = 0.000751193 MeV
+       check: T_e,max + T_p(recoil) = 0.782333555 MeV (= Q)
+       draws 2000000 : accepted 1817439, rejected 182561 ; channel energy range [1.964e-07, 0.782008] MeV ; largest accepted E_e 1.292581117 MeV
+[PASS] T1    energy-conservation residual of accepted draws (MeV), worst                    value 1.136868377216e-13 expected 0.000000000000e+00 err 1.137e-13 (tol 1e-12)
+[PASS] T1    no accepted draw has E_e above the closed-form endpoint
+[PASS] T1    no rejected draw has E_e below the closed-form endpoint
+[PASS] T1    largest accepted E_e within 1e-4 MeV below the endpoint
+[PASS] T1    both accepted and rejected draws occurred
+
+== T2 endpoint sensitivity to the channel mass (engine convention values) ==
+       m_nu = 0.020 eV : endpoint shift -1.9972e-02 eV (relative to Q: 2.55e-08)
+       m_nu = 0.029 eV : endpoint shift -2.8960e-02 eV (relative to Q: 3.70e-08)
+       m_nu = 0.060 eV : endpoint shift -5.9917e-02 eV (relative to Q: 7.66e-08)
+[PASS] T2    shift (direct root) equals -(m_p m_nu + m_nu^2/2)/m_n, worst relative          value 5.937052389569e-09 expected 0.000000000000e+00 err 5.937e-09 (tol 1e-07)
+[PASS] T2    each shift is below 1e-7 of Q
+
+== T3 contact ledger of in-place conversion ==
+[PASS] T3    free neutron: (lost, surviving, daughter max, re-formed) = (0,0,0,0) ; registered (0,0,0,0)
+[PASS] T3    deuteron p-n: (lost, surviving, daughter max, re-formed) = (1,0,0,0) ; registered (1,0,0,0)
+[PASS] T3    triton n-p-n: (lost, surviving, daughter max, re-formed) = (1,1,2,1) ; registered (1,1,2,1)
+[PASS] T3    alpha ring p-n-p-n: (lost, surviving, daughter max, re-formed) = (2,2,3,1) ; registered (2,2,3,1)
+
+== T4 engine contact_capacity against the exact maximum ==
+       (Z,N) = (1,1): engine 3 ; exact 1
+       (Z,N) = (1,2): engine 3 ; exact 2
+       (Z,N) = (2,1): engine 3 ; exact 2
+       (Z,N) = (2,2): engine 6 ; exact 4
+[PASS] T4    engine equals exact whenever max(Z, N) >= 3
+[PASS] T4    engine exceeds exact for exactly (1,1), (1,2), (2,1), (2,2)
+
+ALL CRITERIA MET: 0 failure(s)

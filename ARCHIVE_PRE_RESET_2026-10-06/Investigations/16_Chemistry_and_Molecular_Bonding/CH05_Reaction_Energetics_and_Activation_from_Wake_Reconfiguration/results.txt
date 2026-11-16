@@ -1,0 +1,47 @@
+﻿====================================================================
+  CH05 - Reaction Energetics & Activation (wake reconfiguration)
+  Author: J. C. Harvey, Melbourne - 2026-07-05
+====================================================================
+
+P1  DH BOOKKEEPING (bonds broken - bonds formed; near-IDENTITY per firewall)
+    reaction                        DH_pred   DH_meas   sign  |err|
+    H2 + Cl2 -> 2 HCl                  -184    -184.6   ok      0.3% ok
+    H2 + F2 -> 2 HF                    -536    -546.0   ok      1.8% ok
+    H2 + Br2 -> 2 HBr                  -103    -103.7   ok      0.7% ok
+    H2 + I2 -> 2 HI                      -9      -9.5   ok      5.3% exempt(|DH|<20)
+    N2 + 3 H2 -> 2 NH3                  -93     -92.2   ok      0.9% ok
+    2 H2 + O2 -> 2 H2O(g)              -482    -483.6   ok      0.3% ok
+    CH4 + 2 O2 -> CO2 + 2 H2O          -802    -802.3   ok      0.0% ok
+    C2H4 + H2 -> C2H6                  -123    -136.9   ok     10.2% ok
+    C2H2 + H2 -> C2H4                  -165    -174.5   ok      5.4% ok
+    CH4 + Cl2 -> CH3Cl + HCl           -104     -99.4   ok      4.6% ok
+    N2 + O2 -> 2 NO                    +181    +180.6   ok      0.2% ok
+    2 CO + O2 -> 2 CO2                 -554    -566.0   ok      2.1% ok
+    signs 12/12 (gate 12) ; magnitudes within 15%: 11/11 (gate >=9)
+    LABEL: CONVERGENCE/IDENTITY - this IS bond-energy bookkeeping re-read as
+    shared-electron re-seating; it earns no NATIVE credit (firewall honoured).
+
+P2  BARRIER AS WAKE SADDLE (collinear H+H2, committed M-SADDLE machinery)
+    M-SADDLE  (budget split only): path max = -4.747 eV at s=-3.67 A -> Ea =    +0.0 kJ/mol
+    M-SADDLE+ (with end-end pair term): path max = -4.748 eV at s=-4.00 A -> Ea =    -0.1 kJ/mol
+    measured Ea(H+H2) ~ 40 kJ/mol (0.42 eV)  [OBSERVED anchor]
+    midpoint check U(Re,Re): budget-split -4.747 eV (= -De, barrierless);
+    with end-end term -6.730 eV vs reactants -4.747 eV -> symmetric H3
+    BOUND by -191.3 kJ/mol (measured: H3 is NOT a bound molecule -> wrong sign)
+    RESULT: no barrier emerges from the committed machinery.
+      budget-split alone: Ea = +0.0 kJ/mol (the deeper well always holds the seat)
+      with end-end term : Ea = -0.1 kJ/mol (end-end Morse ATTRACTS at 2Re -> bound H3, wrong)
+    -> P2 FAIL/OPEN. The missing piece is the cost of the mis-meshed middle
+       configuration (mis-cancellation surplus / angular-window mismatch).
+       No such term is derived; inventing one with a tuned size = FISHED RECOVERY. Refused.
+
+P3  CATALYSIS: DEFER (depends on P2 saddle existing).
+P4  NOVEL BEP SLOPE: DEFER (same dependency).
+
+====================================================================
+  CH05 SUMMARY
+  P1 bookkeeping: signs 12/12, magnitudes 11/11 within 15% - CONVERGENCE/IDENTITY
+  P2 saddle: DID NOT EMERGE - honest FAIL/OPEN
+  committed-gate failures: ['P2-no-saddle']
+  Exit: 1
+====================================================================

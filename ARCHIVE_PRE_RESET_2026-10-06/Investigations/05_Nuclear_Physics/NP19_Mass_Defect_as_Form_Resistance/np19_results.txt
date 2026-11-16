@@ -1,0 +1,64 @@
+﻿================================================================
+ NP19 : Mass-Defect as Form-Resistance  (checker, not fitter)
+ All masses/c/MeV_to_J from sdt::laws::measured (NIST/CODATA ref)
+================================================================
+
+---- PHASE 1 : form-resistance reading (constant-free) ----
+Law IV round-trip  m -> V_disp -> m   (identity check):
+  electron  m=9.109384e-31 kg  V_disp=9.980942e-62 m^3  rel_err=1.92e-16  [PASS]  (IDENTITY)
+  proton    m=1.672622e-27 kg  V_disp=1.832653e-58 m^3  rel_err=2.14e-16  [PASS]  (IDENTITY)
+  neutron   m=1.674927e-27 kg  V_disp=1.835179e-58 m^3  rel_err=4.28e-16  [PASS]  (IDENTITY)
+
+rho_form_e = R(e)/V_disp_e = 8.2027e+47 Pa   (IDENTITY: = rho_eff_e*c^2)
+P_conv/3   (engine stability scale) = 8.2027e+47 Pa   (MEASURED-derived)
+ratio rho_form_e / (P_conv/3) = 1.000000  -> within 1 order of mag: [PASS]
+New constants introduced by the resistance reading: 0  (delete-test PASS)
+
+---- PHASE 2 : 1.293 = 0.511 + 0.782 bookkeeping + sign ----
+  R(n) = m_n c^2 =  939.56542 MeV     (DERIVED from MEASURED m_n)
+  R(p) = m_p c^2 =  938.27209 MeV     (DERIVED from MEASURED m_p)
+  tau  = m_e c^2 =    0.51100 MeV     (DERIVED from MEASURED m_e = the TOLL)
+  ---------------------------------------------------------------
+  dR = R(n)-R(p) =    1.29333 MeV     [target 1.293 MeV  OBSERVED-TARGET]
+  Q  = dR - tau  =    0.78233 MeV     [target 0.782 MeV  OBSERVED-TARGET]
+  |dR-1.293|/1.293 = 2.570e-04  (<0.1%) : [PASS]
+  |Q-0.782|/0.782  = 4.264e-04  (<0.2%) : [PASS]
+
+  SIGN CHECK T1  R(n) > R(p)  (bound=HIGHER resistance) : TRUE  [PASS]
+  SPONTANEITY    dR > tau     (gap exceeds toll, downhill): TRUE  [PASS]
+
+  Landscape check: tau + Q = 1.29333 MeV  vs  dR = 1.29333 MeV  (must match, IDENTITY)
+  --> the three numbers are ONE ledger: gap = toll + exhaust.
+
+---- PHASE 3 : Two-Ledger Lemma (sign is a property of the CUT) ----
+
+  CASE A  free-neutron decay
+    Boundary 1 {n alone}    : n -> p + e + nubar   Q = +0.78233 MeV  (EXOTHERMIC, sign +)
+    Boundary 2 {p+e build n}: p + e -> n + nu      cost +1.29333 MeV  (ENDOTHERMIC, sign -)
+    per-reaction |dR| across cuts: |1.29333| vs |1.29333|  -> rel diff 0.0e+00  [PASS invariant]
+    toll reconciliation: build(+1.293) and net-unbuild(-0.782) differ by the
+    m_e c^2 = 0.51100 MeV manufactured/consumed, NOT destroyed. (IDENTITY)
+
+  CASE B  stellar electron capture / core collapse
+    Boundary 'isolated arrow': p + e -> n + nu     cost +1.29333 MeV  (ENDOTHERMIC, sign -)
+    Boundary 'event scale'   : same conversion is the valve venting ~3e+46 J
+                               (OBSERVED-TARGET, NOT derived) as neutrinos (EXOTHERMIC, sign +)
+    per-form resistances R(n),R(p),tau UNCHANGED across both readings:
+       R(n)=939.56542  R(p)=938.27209  tau=0.51100 MeV  (boundary-invariant) [PASS]
+
+  BOTH-SIGNS FALSIFIER (fixed boundary must give ONE sign)
+    distinct signs a FIXED cut (dR=1.29333) can yield = 1  [PASS (lemma survives)]
+
+---- PHASE 4 : det -1 grammar reconciliation ----
+  beta-/EC vector pair = bijection, determinant -1 (pure relabelling of form,
+  count-conserving). Energy carried IN the grammar move = 0.
+  energy in grammar move   = 0.00000 MeV  (ASSUMED: relabelling is energy-free)
+  energy from dR landscape = 1.29333 MeV  (DERIVED-from-MEASURED, Phase 2)
+  => 1.293/0.511/0.782 sourced 100% from dR, 0% from the det -1 move. [PASS]
+
+================================================================
+ OVERALL: all sign + arithmetic assertions PASS (0 failures).
+ NOTE: 1.293 - 0.511 = 0.782 is an EXACT identity among three MEASURED
+       anchors. This is Class C (convergence/reframe), NOT a new derived
+       number. The tool makes the bookkeeping mechanical + sign-checked.
+================================================================

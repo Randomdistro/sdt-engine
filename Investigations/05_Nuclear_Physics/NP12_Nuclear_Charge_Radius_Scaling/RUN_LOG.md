@@ -27,7 +27,7 @@
 | M5 | R = k_Z · Z^(1/3), k_Z fitted | diagnostic only — CALIBRATED(1), motivated a priori by the chain-flatness logic (if N does not move ⟦R_ch⟧, the third natural scaling is Z^(1/3)) | 1 |
 
 **Pre-declared degeneracy:** M4b (0.9304·A^(1/3)) and M3 (0.9295·A^(1/3)) differ by 0.09% —
-this dataset CANNOT distinguish them. If M4b fits, its class ceiling is CONVERGENCE/DEGENERATE
+this dataset CANNOT distinguish them. If M4b fits, its class ceiling is CONVERGENCE/SHARED-INPUT
 with the rival's fair form; the SDT content would be *deriving the coefficient* from
 {R_p, π/√18} with zero fitting — not beating the rival's curve shape.
 **Pre-declared bracket rule:** M4a/M4b are limits; picking one after seeing metrics is

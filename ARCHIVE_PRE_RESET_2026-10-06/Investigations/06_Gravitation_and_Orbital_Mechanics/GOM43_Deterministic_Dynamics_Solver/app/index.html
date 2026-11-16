@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>SDT Multibody Seven-Circle Laboratory</title>
+  <meta name="description" content="Arbitrary-N retarded seven-circle occlusion and articulated-rigid dynamics through the GOM43 C/WebAssembly solver.">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#workspace">Skip to laboratory</a>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">SDT</span>
+      <div>
+        <h1>Multibody Seven-Circle Laboratory</h1>
+        <p>GOM43 full 7×7 ordered-pair occlusion instrument</p>
+      </div>
+    </div>
+    <div class="solver-state" aria-live="polite">
+      <span id="solverLamp" class="state-lamp pending"></span>
+      <span id="solverStatus">Initializing WebAssembly worker…</span>
+      <span id="solverBuild" class="mono"></span>
+    </div>
+    <div class="run-actions">
+      <label>Chunk <input id="chunkStepsInput" type="number" min="1" step="1" value="16"></label>
+      <button id="runButton" class="primary" disabled>Run chunk</button>
+      <button id="cancelButton" disabled>Pause</button>
+      <button id="checkpointButton" disabled>Checkpoint</button>
+      <button id="resumeButton">Resume</button>
+      <input id="resumeInput" class="visually-hidden" type="file" accept=".json,.sdtcheckpoint.json,application/json">
+      <div class="progress-track" role="progressbar" aria-label="Solver progress" aria-valuemin="0" aria-valuemax="100">
+        <div id="runProgress" class="progress-bar"></div>
+      </div>
+    </div>
+  </header>
+
+  <main id="workspace" class="workspace">
+    <aside class="left-rail panel" aria-label="Case composition">
+      <section class="rail-section">
+        <div class="section-heading">
+          <h2>Case</h2>
+          <button id="newCaseButton" title="Reset to a minimal case">New</button>
+        </div>
+        <label>
+          Preset
+          <select id="presetSelect">
+            <option value="circular-pair">Circular pair</option>
+            <option value="stable-triangle">Stable Lagrange triangle</option>
+            <option value="figure-eight">Figure-eight</option>
+            <option value="restricted-lagrange">Restricted Lagrange points</option>
+            <option value="single-pendulum">Single pendulum</option>
+            <option value="double-pendulum">Double pendulum</option>
+            <option value="sectioned-pendulum">Sectioned pendulum (5 links)</option>
+          </select>
+        </label>
+        <div class="button-grid">
+          <button id="loadPresetButton">Load preset</button>
+          <button id="importButton">Import</button>
+          <button id="exportCaseButton">Export case</button>
+          <button id="shareButton">Copy share link</button>
+        </div>
+        <input id="importInput" class="visually-hidden" type="file" accept=".json,.sdtcase.json,application/json">
+      </section>
+
+      <section class="rail-section scene-section">
+        <div class="section-heading">
+          <h2>Scene tree</h2>
+          <button id="addEntityButton">Add</button>
+        </div>
+        <div id="sceneTree" class="scene-tree" role="tree" aria-label="Bodies, links and joints"></div>
+      </section>
+
+      <section class="rail-section inspector-section">
+        <div class="section-heading">
+          <h2>Inspector</h2>
+          <button id="removeEntityButton" class="danger" disabled>Remove</button>
+        </div>
+        <form id="entityInspector" class="inspector">
+          <p class="muted">Select an entity to inspect its solver inputs.</p>
+        </form>
+      </section>
+    </aside>
+
+    <section class="viewport-column">
+      <div class="viewport panel">
+        <canvas id="sceneCanvas" aria-label="Three-dimensional solver playback"></canvas>
+        <div class="viewport-toolbar">
+          <label>View
+            <select id="frameMode">
+              <option value="inertial">Inertial</option>
+              <option value="rotating">Rotating about barycentre</option>
+            </select>
+          </label>
+          <label>Reference
+            <select id="referenceBody"></select>
+          </label>
+          <button id="fitViewButton">Fit scene</button>
+        </div>
+        <fieldset class="overlay-toolbar">
+          <legend>Overlays</legend>
+          <label><input data-overlay="trails" type="checkbox" checked> Trails</label>
+          <label><input data-overlay="velocity" type="checkbox" checked> Velocity</label>
+          <label><input data-overlay="acceleration" type="checkbox"> Acceleration</label>
+          <label><input data-overlay="joints" type="checkbox" checked> Joints</label>
+          <label><input data-overlay="constraints" type="checkbox"> Constraints</label>
+          <label><input data-overlay="influx" type="checkbox"> Influx</label>
+          <label><input data-overlay="occlusion" type="checkbox" checked> Occlusion</label>
+          <label><input data-overlay="occlusion" type="checkbox" checked> Selected 7×7 matrix</label>
+          <label>Sections
+            <select id="sectionDisplayScale" aria-label="Section display scale">
+              <option value="1">True scale (R disc, R/3 channels)</option>
+              <option value="10">10× section (lab)</option>
+              <option value="100">100× section (lab)</option>
+              <option value="1000" selected>1000× section (lab)</option>
+            </select>
+          </label>
+        </fieldset>
+        <div id="viewportEmpty" class="viewport-empty hidden">
+          <strong>No completed trajectory</strong>
+          <span>Run the case through the WebAssembly worker to inspect solver output.</span>
+        </div>
+        <div id="editHint" class="edit-hint">Each body shows one co-facing R disc toward every neighbour (7 circles of R/3 inside). Highlighted pair drives the 49-link matrix.</div>
+        <div class="axis-key" aria-hidden="true"><i class="x"></i>X <i class="y"></i>Y <i class="z"></i>Z</div>
+      </div>
+
+      <section class="timeline panel" aria-label="Playback timeline">
+        <div class="playback-controls">
+          <button id="jumpStartButton" title="First frame">|◀</button>
+          <button id="stepBackButton" title="Previous frame">◀</button>
+          <button id="playButton" class="primary" disabled>Play</button>
+          <button id="stepForwardButton" title="Next frame">▶</button>
+          <button id="jumpEndButton" title="Last frame">▶|</button>
+          <label>Speed
+            <select id="playbackSpeed">
+              <option value="0.25">0.25×</option>
+              <option value="0.5">0.5×</option>
+              <option value="1" selected>1×</option>
+              <option value="2">2×</option>
+              <option value="4">4×</option>
+            </select>
+          </label>
+          <output id="timeReadout" class="mono">t = 0 s · frame 0/0</output>
+        </div>
+        <input id="timelineSlider" type="range" min="0" max="0" value="0" step="1" disabled aria-label="Trajectory frame">
+        <div id="eventMarkers" class="event-markers"></div>
+      </section>
+    </section>
+
+    <aside class="right-rail panel" aria-label="Diagnostics and case source">
+      <nav class="tabs" aria-label="Laboratory panels">
+        <button class="tab active" data-tab="diagnostics">Diagnostics</button>
+        <button class="tab" data-tab="case">Case editor</button>
+        <button class="tab" data-tab="result">Result</button>
+      </nav>
+
+      <section id="diagnosticsTab" class="tab-panel active">
+        <div id="classificationBanner" class="classification not-executed">
+          <strong>NOT-EXECUTED</strong>
+          <span>No solver result is loaded.</span>
+        </div>
+        <div id="metricCards" class="metric-cards"></div>
+        <section class="pair-inspector">
+          <div class="section-heading">
+            <h2>Ordered-pair matrix</h2>
+            <select id="pairSelector" aria-label="Selected ordered body pair"></select>
+          </div>
+          <div id="pairMatrix" class="pair-matrix"><p class="muted">Run an occlusion case to inspect its 49 channel relations.</p></div>
+        </section>
+        <div class="chart-heading">
+          <h2>Synchronized trace</h2>
+          <select id="chartMetric" aria-label="Chart metric">
+            <option value="separation">Body separation</option>
+            <option value="energy">Relative energy</option>
+            <option value="momentum">Koppa-weighted momentum</option>
+            <option value="angularMomentum">Koppa-weighted angular momentum</option>
+            <option value="jointAngle">Joint angle</option>
+            <option value="angularRate">Angular rate</option>
+            <option value="constraint">Constraint residual</option>
+          </select>
+        </div>
+        <canvas id="diagnosticChart" height="220" aria-label="Synchronized diagnostic plot"></canvas>
+        <div class="chart-legend"><span id="chartName">No trace</span><output id="chartValue" class="mono">—</output></div>
+        <section>
+          <h2>Pre-registered gates</h2>
+          <div id="gateList" class="gate-list"><p class="muted">Run a case to evaluate gates.</p></div>
+        </section>
+        <section>
+          <h2>Events</h2>
+          <ol id="eventList" class="event-list"><li class="muted">No events recorded.</li></ol>
+        </section>
+      </section>
+
+      <section id="caseTab" class="tab-panel">
+        <div class="editor-mode">
+          <button class="active" data-editor-mode="form">Case controls</button>
+          <button data-editor-mode="raw">Raw JSON</button>
+        </div>
+        <form id="caseForm" class="case-form">
+          <label>Case ID <input id="caseIdInput" required pattern="[A-Za-z0-9][A-Za-z0-9._-]*"></label>
+          <label>Problem class <select id="problemClassInput"><option value="sdt_occlusion_nbody">SDT seven-circle N-body</option><option value="point_nbody">Point N-body comparison</option><option value="articulated_rigid">Articulated rigid</option></select></label>
+          <label>Integrator <select id="integratorInput"><option value="velocity_verlet">Velocity Verlet</option><option value="fixed_rk4">Fixed RK4</option><option value="rattle">RATTLE</option></select></label>
+          <div class="field-row">
+            <label>Timestep (s) <input id="timestepInput" type="number" min="0" step="any"></label>
+            <label>Duration (s) <input id="durationInput" type="number" min="0" step="any"></label>
+          </div>
+          <label>Record cadence (steps) <input id="recordEveryInput" type="number" min="1" step="1"></label>
+          <fieldset>
+            <legend>Numerical tolerances</legend>
+            <label>Position (m) <input id="positionToleranceInput" type="number" min="0" step="any"></label>
+            <label>Velocity (m/s) <input id="velocityToleranceInput" type="number" min="0" step="any"></label>
+            <label>Quaternion norm <input id="quaternionToleranceInput" type="number" min="0" step="any"></label>
+            <label>Constraint iterations <input id="constraintIterationsInput" type="number" min="1" max="256" step="1"></label>
+            <label>Retarded time (s) <input id="retardedToleranceInput" type="number" min="0" step="any"></label>
+            <label>Retarded iterations <input id="retardedIterationsInput" type="number" min="2" max="128" step="1"></label>
+          </fieldset>
+        </form>
+        <div id="rawEditorPanel" class="raw-editor hidden">
+          <textarea id="rawCaseEditor" spellcheck="false" aria-label="Raw SDT case JSON"></textarea>
+          <div class="editor-actions">
+            <button id="formatJsonButton">Format</button>
+            <button id="applyJsonButton" class="primary">Validate &amp; apply</button>
+          </div>
+        </div>
+        <div id="caseValidation" class="validation" aria-live="polite"></div>
+      </section>
+
+      <section id="resultTab" class="tab-panel">
+        <div class="result-actions">
+          <button id="exportResultButton" disabled>Export result JSON</button>
+          <button id="exportCsvButton" disabled>Export trajectory CSV</button>
+        </div>
+        <section><h2>Solver provenance</h2><dl id="provenanceList" class="provenance"><div><dt>Status</dt><dd>Not executed</dd></div></dl></section>
+        <details open><summary>Result bundle</summary><pre id="resultJson" class="result-json">No result loaded.</pre></details>
+      </section>
+    </aside>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="./src/app.js"></script>
+</body>
+</html>

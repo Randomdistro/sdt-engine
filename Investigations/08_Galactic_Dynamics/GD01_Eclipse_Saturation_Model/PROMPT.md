@@ -91,3 +91,15 @@ Class A: model derived mass-free, Σ_crit + crossover native, implemented, GD05 
 ---
 
 *GD01 · §K-deepened 2026-07-13 · the mass-free c²/k² occlusion form is canonical (GD05 must adopt it); Σ_crit + the saturation crossover must be DERIVED not fitted; galactic.hpp is propose-only.*
+
+---
+
+## Audit correction 2026-10-05 (record / status)
+
+**Finding:** The folder carries both "RETRACTED — STALE/NON-REPRODUCIBLE" (cited tool absent, present tool no longer compiles) and "FRAMEWORK RESOLVED"; baryon masses enter only as census counts N_b = M/m_p, which is permitted, so the defect is the unreconciled status, not mass input.
+
+**Correction:** Strike the RESOLVED verdict, keep the retraction, and re-run the SPARC comparison with a natively derived mass-free crossover.
+
+**Status:** ANNOTATED — label corrected in the record; a confirming run or derivation is still OWED.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

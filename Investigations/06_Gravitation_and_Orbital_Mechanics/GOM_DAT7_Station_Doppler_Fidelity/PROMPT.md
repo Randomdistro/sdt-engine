@@ -44,3 +44,17 @@ If `f_ref` is S-band scale while bands are Ka, use documented Cassini Ka downlin
 ## 4. Frozen solar K
 
 **K** = 1476.35 m (GOM26). Not a free parameter.
+
+---
+
+## Audit correction 2026-10-05 (record / status)
+
+**Finding:** Ids read GOM34-C* against folder GOM_DAT7 and the gate "closer to 1 than 3.37 or smaller residual than predictor A" is relative, not absolute, so it could pass without agreement.
+
+**Correction:** Add an absolute fidelity threshold and align the ids.
+
+**Status:** RULE RECORDED — corrected gate or definition applies to the next run; the earlier result is not re-scored and nothing was re-run.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*
+
+**Id alias (2026-10-05):** claim ids written `GOM34-C*` in this folder and its verdict are the claims of `GOM_DAT7`. The rows are VERIFICATION (data-structure, checksum and field-parse checks), not tests of a physical claim, and are excluded from physics PASS/FAIL tallies; earlier text is not rewritten.

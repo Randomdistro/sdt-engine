@@ -192,3 +192,15 @@ GOM18 Sgr A* seat.
 
 *GOM19 · SPEC 2026-07-23 · the dance observable reads the pair, the no-hair end strips the
 grammar, the difference is the nucleon. Author: J. C. Harvey, Melbourne.*
+
+---
+
+## Audit correction 2026-10-05 (opening premise)
+
+**Finding:** The ledger radiated fraction f(q) = η/4 follows from Newtonian circular binding at contact, which is not the radiated fraction (radiated energy scales roughly as η² and the catalogue slope was 2.49 against the ledger's 1), the P1a spin mechanism is not derived, and the P2 gate is only "within a factor 2".
+
+**Correction:** Derive f(q) from the radiated part of the binding, tighten the P2 gate to ≤ 20%, and keep the a* fork OPEN until a mechanism exists.
+
+**Status:** OWED — needs a new run, derivation or data; the corrected requirement is recorded here.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

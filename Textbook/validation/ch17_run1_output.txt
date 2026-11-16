@@ -1,0 +1,45 @@
+
+== V0 helper validation (known answers) ==
+[PASS] V0    integrate sin over [0, pi] = 2                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 3.331e-16 (tol 1e-13)
+[PASS] V0    integrate x^7 over [0, 1] = 1/8                                                value 1.250000000000e-01 expected 1.250000000000e-01 err 2.220e-15 (tol 1e-14)
+[PASS] V0    integrate exp over [-1, 1] = e - 1/e                                           value 2.350402387288e+00 expected 2.350402387288e+00 err 5.668e-16 (tol 1e-13)
+[PASS] V0    root of cos x - x = 0.739085133215161                                          value 7.390851332152e-01 expected 7.390851332152e-01 err 2.253e-15 (tol 1e-13)
+[PASS] V0    root of x^2 - 2 on [1, 2] = sqrt 2                                             value 1.414213562373e+00 expected 1.414213562373e+00 err 2.983e-15 (tol 1e-13)
+[PASS] V0    compensated sum 1 + 10^6 x 1e-16 = 1 + 1e-10                                   value 1.000000000100e+00 expected 1.000000000100e+00 err 0.000e+00 (tol 1e-15)
+
+== V1 method on the isotropic oscillator (p = -1, kappa = 2 omega) ==
+[PASS] V1    radial deviation vs delta sin(2t)/2, worst relative to delta/2                 value 8.052788050853e-07 expected 0.000000000000e+00 err 8.053e-07 (tol 1e-04)
+
+== T1 hydrogen rung ledger ==
+[PASS] T1a   r_e = alpha hbar/(m_e c) (shared-input: CODATA relations)                      value 2.817940320432e-15 expected 2.817940320447e-15 err 5.178e-12 (tol 1e-09)
+[PASS] T1b   alpha a_0 / lambda_C-bar = 1 (shared-input)                                    value 9.999999999948e-01 expected 1.000000000000e+00 err 5.178e-12 (tol 1e-09)
+[PASS] T1c   r_e / a_0 = alpha^2                                                            value 5.325135444770e-05 expected 5.325135444770e-05 err 0.000e+00 (tol 1e-14)
+[PASS] T1c   alpha c / a_0 equals law_VI::omega_electron_locked                             value 4.134137333494e+16 expected 4.134137333494e+16 err 0.000e+00 (tol 1e-14)
+       a_0 = 5.291772105440e-11 m ; lambda_C-bar = 3.861592674352e-13 m ; r_e = 2.817940320432e-15 m ; omega = alpha c/a_0 = 4.134137333e+16 rad/s
+       a_0 : lambda_C-bar : r_e = 1 : 7.297352564e-03 : 5.325135445e-05 ; a_0/r_e = 18778.865071
+
+== T2 circulation ladder Z = 1..5, n = 1..10 ==
+[PASS] T2    v^2 r / (c^2 Z r_e) = 1 over 50 states, worst relative                         value 3.330669073875e-16 expected 0.000000000000e+00 err 3.331e-16 (tol 1e-14)
+[PASS] T2    m_e v r / (n hbar) = 1 over 50 states, worst relative (shared-input)           value 5.178080186852e-12 expected 0.000000000000e+00 err 5.178e-12 (tol 1e-09)
+[PASS] T2    T_Zn / T_11 = n^3 / Z^2 over 50 states, worst relative                         value 2.220446049250e-16 expected 0.000000000000e+00 err 2.220e-16 (tol 1e-14)
+
+== T3 equilibrium and small-oscillation response on a_r = -r^{-p} ==
+[PASS] T3    p=1.0: kappa = 1.414214 ; worst deviation relative to delta/kappa              value 2.213209351316e-06 expected 0.000000000000e+00 err 2.213e-06 (tol 1e-04)
+[PASS] T3    p=2.0: kappa = 1.000000 ; worst deviation relative to delta/kappa              value 3.920039195608e-06 expected 0.000000000000e+00 err 3.920e-06 (tol 1e-04)
+[PASS] T3    p=2.9: kappa = 0.316228 ; worst deviation relative to delta/kappa              value 3.709072722031e-06 expected 0.000000000000e+00 err 3.709e-06 (tol 1e-04)
+[PASS] T3    p=3 (marginal): delta r(6) = 6 delta                                           value 5.999999930895e-06 expected 6.000000000000e-06 err 1.152e-08 (tol 1e-04)
+[PASS] T3    p=3.5 (route unstable): delta r(6) = delta sinh(6 lambda)/lambda               value 4.919551964822e-05 expected 4.919837478987e-05 err 5.803e-05 (tol 1e-04)
+       p=3.5: growth factor over 6 counts of the route = 49.196 (stable routes show no growth)
+       p=2: delta r(pi) = -4.034e-10, delta r(2 pi) = -1.853e-10 (radial and azimuthal frequencies coincide: the route closes)
+[FAIL] T3    p=2: radial deviation returns to zero at t = pi and 2 pi (kappa = omega)
+
+== T4 the engine's bridge kernel: radial response of a two-body route ==
+[PASS] T4    separation minus d vs (u/omega) sin(omega t), worst relative to u/omega        value 3.807067870971e-06 expected 0.000000000000e+00 err 3.807e-06 (tol 1e-04)
+
+== T5 three radii ==
+       a_0 = 5.291772105e-11 m (path seat) ; r_e = 2.817940320e-15 m (boundary) ; sqrt(R_p_lock r_e) = 1.539659647e-15 m (interaction radius) ; R_p_lock = 8.412356402e-16 m
+[PASS] T5    pairwise ratios of the three radii exceed 1.5
+[PASS] T5    a_0 / r_e = 1/alpha^2                                                          value 1.877886507060e+04 expected 1.877886507060e+04 err 0.000e+00 (tol 1e-14)
+       ratios: a_0/r_e = 18778.8651 ; r_e/R_int = 1.8302 ; R_int/R_p_lock = 1.8302
+
+CRITERIA NOT MET: 1 failure(s)

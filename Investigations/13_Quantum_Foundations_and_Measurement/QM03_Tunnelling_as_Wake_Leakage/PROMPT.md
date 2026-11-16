@@ -29,7 +29,7 @@
    firewall test: if the only route to κ is to write `√(2m(V−E))/ℏ` into the code, the mechanism is
    IMPORTED (→ C), not native.
 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class
-   (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN), per phase, no repainting a fired test.
+   (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN), per phase, no repainting a fired test.
 
 ## Question
 
@@ -132,7 +132,7 @@ slope within ~10% for a U/Th/Po series.
 ```markdown
 ## Pre-Run Commitments — QM03
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: 0 in the native chain (flag any borrowed prefactor: 16·…, assault frequency)
 - Engine namespaces used: PPT05 occlusion, FLM05 tick, ATOMICUS α-core grammar — NO ψ, NO WKB κ in the Phase-1 chain, NO atomic:: in the native chain
 - Phase thresholds (committed before run): P1 κ_native vs WKB <1% (as convergence, not source) · P2 T form + ‑2 traced · P3 STM ~1 decade/Å · P4 Geiger–Nuttall slope ±10%
@@ -148,7 +148,7 @@ slope within ~10% for a U/Th/Po series.
 | P1 κ only obtainable via WKB form | accept **C/IMPORTED** honestly; the WKB κ is the Schrödinger form | — | claim NATIVE while writing the WKB expression |
 | P3 STM slope off ~1 decade/Å by >½ decade | re-check work-function → occlusion-depth mapping | **OPEN** the decay length | widen the STM tolerance |
 | P4 Geiger–Nuttall slope off >10% or non-linear | re-examine ∫κ dx over the Coulomb-occlusion slope | **OPEN** the α-core leakage picture | plug the slope |
-| Rivals match but SDT only reproduces | label **DEGENERATE** honestly | — | Claim Class A |
+| A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 
 ### Allowed adjustments
 

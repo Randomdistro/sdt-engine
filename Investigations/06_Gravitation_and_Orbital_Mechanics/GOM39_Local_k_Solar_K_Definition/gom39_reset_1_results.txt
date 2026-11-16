@@ -1,0 +1,20 @@
+GOM39 blank-slate run 1 (registered in GOM39_RESET_ASSESSMENT_2026-10-11.md sections 0-2)
+=======================================================================
+
+[A] synthetic main sequence R = 1.496e+11 m, v = 29780 m/s: k = 10066.9059, K = R/k^2 = 1476.180875 m ; r/k(r)^2 over r = 1e9 ... 1e13 m : worst relative 2.22e-16 (gate 1e-12) -> met (IDENTITY)
+[B] chord at the SCE1 geometry (b = 45.17 R_sun, r1 = 1.0148 AU, r2 = 7.3726 AU): numerical Simpson 6.410042003e-05 s, exact 6.410042003e-05 s, relative 4.04e-14 (gate 1e-6) ; far-zone asymptotic (b = 0.01 r1): 1.239e-04 vs exact 1.239e-04, relative 2.03e-06 (gate 1e-3) ; asymptotic at the SCE1 b: relative 1.70e-03 (reported) -> met (calculus)
+
+VALIDATIONS: met
+
+SCE1 Earth main sequence (31 samples, day 157): R = 1.51815e+11 to 1.51817e+11 m (1.01483 AU) ; v = 29355.45 m/s at the middle
+  R1 (literal, instantaneous speed): median k = 10212.4958 ; median K = 1455.6373 m ; CV(K) = 1.78e-07
+  factor (2 - R/a) with a = 1.496262e+11 m : 0.98537 ; R2 (corrected, circular-speed reading): median K = 1477.2552 m ; CV = 4.13e-06 ; against the GOM26 invariant 1476.351 m : +6.124e-04 (gate 4e-4: NOT MET)
+  R1 against the GOM26 invariant: -1.403e-02 (the literal procedure misses by the eccentricity factor)
+
+LOCAL-k LEDGER k(r) = sqrt(r/K): radius r, k with K = 1476.351 m (R2), k with the literal K_inst median
+  Earth R              r = 1.51816e+11 m (1.0148 AU, 218.22 R_sun) : k = 10140.60 ; with K_inst 10212.50 ; z = K/r = 9.725e-09
+  impact parameter b   r = 3.14276e+10 m (0.2101 AU, 45.17 R_sun) : k = 4613.82 ; with K_inst 4646.53 ; z = K/r = 4.698e-08
+  Cassini R            r = 1.10293e+12 m (7.3726 AU, 1585.35 R_sun) : k = 27332.47 ; with K_inst 27526.25 ; z = K/r = 1.339e-09
+  pairwise distinct: yes
+
+Status: ODF Doppler-solar-K path definition CLOSED (grammar); the empirical status is unchanged (GOM36/37: UNADJUDICATED_BY_SENSITIVITY).

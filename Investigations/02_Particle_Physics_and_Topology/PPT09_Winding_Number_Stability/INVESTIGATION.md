@@ -4,10 +4,10 @@
 
 ## INVESTIGATION RESULTS
 
-> **Status**: RESOLVED
+> **Status**: RETRACTED (see the banner above); recorded outcome after correction: knot classification COMPUTED, dynamical stability OPEN [corrected 2026-10-05]
 > **Date**: June 2026
 > **Classification**: Class A (Analytical Proof Complete)
-> **Verdict**: PASS — W=1,3-only conjecture VALIDATED
+> **Verdict**: ~~PASS — W=1,3-only conjecture VALIDATED~~ withdrawn with the retraction (the tool's own output contradicts it); no pass is carried [corrected 2026-10-05]
 
 ---
 
@@ -205,7 +205,7 @@ All dependencies satisfied. No circular reasoning.
 
 ## Verdict
 
-**PPT09 RESOLVED.** Analytical proof complete (Class A).
+~~**PPT09 RESOLVED.** Analytical proof complete (Class A).~~ Withdrawn with the retraction; see PPT09_VERDICT.md. [corrected 2026-10-05]
 
 The W=1, W=3-only conjecture is **VALIDATED** by topological knot theory:
 - W=1 is unknotted but confined by V_disp → Electron

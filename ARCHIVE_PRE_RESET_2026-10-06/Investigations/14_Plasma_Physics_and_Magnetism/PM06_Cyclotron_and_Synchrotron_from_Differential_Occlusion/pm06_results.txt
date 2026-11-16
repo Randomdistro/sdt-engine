@@ -1,0 +1,27 @@
+PM06 — Cyclotron & Synchrotron from Differential Occlusion (J. C. Harvey, 2026-07-04)
+Turning push = PM01 field-proportional channel (UNSIGNED, HG-1 disclosed). c=1 units.
+
+P1  non-rel: omega_meas/Omega = 1.000000 (gate 1 +/- 0.1%); closure drift/r_g = 8.59e-15 (gate <1e-3)
+P1  gamma=2: omega_rel/(Omega/gamma) = 1.000000 (gate 1 +/- 0.5%); r/(gamma v/Omega) = 1.000000 (gate 1 +/- 0.5%)
+P1  gamma=10: omega_rel/(Omega/gamma) = 1.000000 (gate 1 +/- 0.5%); r/(gamma v/Omega) = 1.000000 (gate 1 +/- 0.5%)
+P1  omega_c = |curl w| with UNIT gain (unsigned channel). SI map omega_c = qB/m needs
+    the HG-1 bilinear gain (PM01: sense-from-handedness 2/4, OPEN). Sense NOT claimed.
+
+P2  gamma=2: a_proper/a_lab = 4.0000  vs gamma^2 = 4.0000  (dev -0.000%, gate <0.5%)
+P2  gamma=10: a_proper/a_lab = 100.0000  vs gamma^2 = 100.0000  (dev -0.000%, gate <0.5%)
+P2  ledger: P_rad = C_E89 * a_proper^2 (rest-frame coefficient BORROWED, flagged)
+    => P(gamma)/P_rest = (a'/a)^2|_freq-fold = gamma^4; measured exponent of a'/a = 2.0000
+    (2.0000 = gamma^2 per amplitude, squared in power => 4.000; gate 4.000 +/- 0.02)
+
+P3  gamma=   4: omega_rms/omega_rot = 1.6125e+02
+P3  gamma=   8: omega_rms/omega_rot = 1.3313e+03
+P3  gamma=  16: omega_rms/omega_rot = 1.0733e+04
+P3  gamma=  32: omega_rms/omega_rot = 8.6025e+04
+P3  log-log slope of (omega_rms/omega_rot) vs gamma = 3.0189 (gate 3.0 +/- 0.15)
+
+P4  gamma=   8: median lab angle x gamma = 1.0038 (gate 1 +/- 5%)
+P4  gamma=  32: median lab angle x gamma = 1.0013 (gate 1 +/- 5%)
+P4  half the emission inside theta ~ 1/gamma, from the Law-V budget alone
+    (v_circ/c = 1/gamma). DEGENERATE with SR aberration by construction of Law V.
+
+PM06 done. Verdict: PM06_VERDICT.md

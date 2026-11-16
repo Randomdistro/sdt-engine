@@ -1,0 +1,101 @@
+{
+  "contract_version": "2.0.0",
+  "case_id": "mathematical-hierarchical-triple-wide",
+  "problem_class": "celestial_three_body",
+  "frame": {
+    "type": "inertial_cartesian",
+    "units": "SI",
+    "epoch": "t=0",
+    "description": "Unequal-baryon equilateral rotating fixture"
+  },
+  "force": {
+    "type": "retarded_seven_cone_occlusion",
+    "propagation_speed": "c",
+    "pressure_source": "sdt_law_I_P_conv",
+    "enable_eclipse_shielding": true,
+    "comparison_route": "point_koppa"
+  },
+  "bodies": [
+    {
+      "id": "primary",
+      "baryon_count": "2012694770528711930862478680940967667264809317896418",
+      "radius_m": 1000000,
+      "position_m": [
+        -1499249.251499176,
+        -1297.739068865776,
+        0
+      ],
+      "velocity_m_s": [
+        0.00033501052678458157,
+        -0.38703025405955266,
+        0
+      ],
+      "provenance": {
+        "baryons": "kappa=2.5e-3 m divided by laws.hpp koppa_per_baryon",
+        "radius": "declared mathematical boundary",
+        "state": "sdt::dynamics::equilateral_three known answer; transformed for mathematical-hierarchical-triple-wide"
+      }
+    },
+    {
+      "id": "secondary",
+      "baryon_count": "2012694770528711930862478680940967667264809317896",
+      "radius_m": 500000,
+      "position_m": [
+        1498500750.7485008,
+        -1297.739068865776,
+        0
+      ],
+      "velocity_m_s": [
+        0.00033501052678458157,
+        386.8370290601685,
+        0
+      ],
+      "provenance": {
+        "baryons": "kappa=2.5e-6 m divided by laws.hpp koppa_per_baryon",
+        "radius": "declared mathematical boundary",
+        "state": "sdt::dynamics::equilateral_three known answer; transformed for mathematical-hierarchical-triple-wide"
+      }
+    },
+    {
+      "id": "tertiary",
+      "baryon_count": "2012694770528711930862478680940967667264809318",
+      "radius_m": 100000,
+      "position_m": [
+        0,
+        20000000000.0,
+        4000000000.0
+      ],
+      "velocity_m_s": [
+        -80,
+        0,
+        10
+      ],
+      "provenance": {
+        "baryons": "kappa=2.5e-9 m divided by laws.hpp koppa_per_baryon",
+        "radius": "declared mathematical boundary",
+        "state": "sdt::dynamics::equilateral_three known answer; transformed for mathematical-hierarchical-triple-wide"
+      }
+    }
+  ],
+  "integrator": "velocity_verlet",
+  "timestep_s": 600,
+  "max_steps": 20000,
+  "record_every_steps": 10,
+  "tolerances": {
+    "retarded_time_s": 1e-10,
+    "channel_closure": 1e-13,
+    "medium_momentum_relative": 1e-11,
+    "lagrange_residual_m_s2": 1e-08,
+    "max_retarded_iterations": 64
+  },
+  "events": {
+    "stop_on_collision": true
+  },
+  "provenance": {
+    "classification": "COMPUTED",
+    "description": "Inner unequal binary with a computed wide tertiary state.",
+    "sources": [
+      "stable-lagrange.sdtcase.json"
+    ]
+  }
+}

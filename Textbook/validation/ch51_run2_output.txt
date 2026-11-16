@@ -1,0 +1,57 @@
+
+== V0 helper validation (known answers) ==
+[PASS] V0    integrate sin over [0, pi] = 2                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 3.331e-16 (tol 1e-13)
+[PASS] V0    integrate x^7 over [0, 1] = 1/8                                                value 1.250000000000e-01 expected 1.250000000000e-01 err 2.220e-15 (tol 1e-14)
+[PASS] V0    integrate exp over [-1, 1] = e - 1/e                                           value 2.350402387288e+00 expected 2.350402387288e+00 err 5.668e-16 (tol 1e-13)
+[PASS] V0    root of cos x - x = 0.739085133215161                                          value 7.390851332152e-01 expected 7.390851332152e-01 err 2.253e-15 (tol 1e-13)
+[PASS] V0    root of x^2 - 2 on [1, 2] = sqrt 2                                             value 1.414213562373e+00 expected 1.414213562373e+00 err 2.983e-15 (tol 1e-13)
+[PASS] V0    compensated sum 1 + 10^6 x 1e-16 = 1 + 1e-10                                   value 1.000000000100e+00 expected 1.000000000100e+00 err 0.000e+00 (tol 1e-15)
+
+== V1 known answers ==
+[PASS] V1    S = 2 for a(x) = +1, b(y) = +1                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 0.000e+00 (tol 1e-15)
+[PASS] V1    S = 2 for a(x) = (-1)^x, b(y) = +1                                             value 2.000000000000e+00 expected 2.000000000000e+00 err 0.000e+00 (tol 1e-15)
+[PASS] V1    normalisation of the target                                                    value 0.000000000000e+00 expected 0.000000000000e+00 err 0.000e+00 (tol 1e-15)
+[PASS] V1    normalisation of the PR box                                                    value 0.000000000000e+00 expected 0.000000000000e+00 err 0.000e+00 (tol 1e-15)
+
+== T1 local deterministic strategies ==
+[PASS] T1    all 16 deterministic strategies give S = +2 or -2
+       largest |S| among 1e6 uniform random mixtures: 1.781078833
+[PASS] T1    no random mixture exceeds 2 (to 1e-12)
+       RECORDED REJECTION (run 1 criterion kept): uniform random mixtures do not approach the vertices
+[PASS] T1    the registered statement (largest of 1e6 uniform mixtures within 1e-3 of 2) is rejected
+       largest |S| among 1e5 sparse mixtures: 2.000000000
+[PASS] T1    POST-RUN clause: sparse mixtures reach within 1e-3 of 2 and never exceed it
+
+== T2 other assumption sets ==
+       target: S = -2.828427124746 ; 2 sqrt 2 = 2.828427124746
+[PASS] T2    target |S| = 2 sqrt 2                                                          value 2.828427124746e+00 expected 2.828427124746e+00 err 1.570e-16 (tol 1e-12)
+[PASS] T2    target marginals are independent of the other station's setting (worst difference) value 0.000000000000e+00 expected 0.000000000000e+00 err 0.000e+00 (tol 1e-15)
+[PASS] T2    target margin over the local limit is 2(sqrt 2 - 1)                            value 8.284271247462e-01 expected 8.284271247462e-01 err 5.361e-16 (tol 1e-12)
+[PASS] T2    PR box |S| = 4                                                                 value 4.000000000000e+00 expected 4.000000000000e+00 err 0.000e+00 (tol 1e-15)
+[PASS] T2    PR box marginals are independent of the other station's setting                value 0.000000000000e+00 expected 0.000000000000e+00 err 0.000e+00 (tol 1e-15)
+       signalling strategy: S = 4.000 ; largest marginal difference of A between the two settings of B = 1.000
+[PASS] T2    signalling strategy |S| = 4                                                    value 4.000000000000e+00 expected 4.000000000000e+00 err 0.000e+00 (tol 1e-15)
+[PASS] T2    signalling strategy: marginal of A depends on B's setting (difference 1)       value 1.000000000000e+00 expected 1.000000000000e+00 err 0.000e+00 (tol 1e-15)
+
+== T3 timing: the speed a relay would need ==
+       D =     10 m, delta = 1e-09 s: v_min/c = 3.3356e+01 ; a relay at c can carry the setting in time: no
+       D =     10 m, delta = 1e-07 s: v_min/c = 3.3356e-01 ; a relay at c can carry the setting in time: yes
+       D =     10 m, delta = 1e-05 s: v_min/c = 3.3356e-03 ; a relay at c can carry the setting in time: yes
+       D =    400 m, delta = 1e-09 s: v_min/c = 1.3343e+03 ; a relay at c can carry the setting in time: no
+       D =    400 m, delta = 1e-07 s: v_min/c = 1.3343e+01 ; a relay at c can carry the setting in time: no
+       D =    400 m, delta = 1e-05 s: v_min/c = 1.3343e-01 ; a relay at c can carry the setting in time: yes
+       D =   1300 m, delta = 1e-09 s: v_min/c = 4.3363e+03 ; a relay at c can carry the setting in time: no
+       D =   1300 m, delta = 1e-07 s: v_min/c = 4.3363e+01 ; a relay at c can carry the setting in time: no
+       D =   1300 m, delta = 1e-05 s: v_min/c = 4.3363e-01 ; a relay at c can carry the setting in time: yes
+[PASS] T3    a relay at v = c carries the setting in time exactly in the registered cells
+
+== T4 protocol: sampled data ==
+       sampled target: S = -2.81200 +/- 0.04497 ; |S| - 2 = 18.06 sigma
+[PASS] T4    target: |S| within 4 sigma of 2 sqrt 2
+[PASS] T4    target: |S| exceeds 2 by at least 10 sigma
+       sampled local mixture: S = 1.97000 +/- 0.04469
+[PASS] T4    local mixture: S within 4 sigma of 2
+       trials per pair for a 5 sigma separation: 72.86
+[PASS] T4    the trials per pair needed for 5 sigma lies in [72, 74]
+
+ALL CRITERIA MET: 0 failure(s)

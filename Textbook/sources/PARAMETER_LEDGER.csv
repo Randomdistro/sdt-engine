@@ -1,0 +1,293 @@
+chapter,row,quantity,source_or_value,label,label_token,chapter_mentions_covariance
+ch01,1,"tetrahedron dihedral, deficit, kissing gap, helix twist and rise, diamond packing",network geometry,DERIVED (exact); reproduced by a second route,DERIVED,no
+ch01,2,"lattice reach ratios $\sqrt3,\sqrt2,\sqrt3$",relay front,COMPUTED (exact),COMPUTED,no
+ch01,3,$\ell_P$,cell edge,"the relation to the c-boundary per baryon and the proton wake is geometric (FLM06); the stored number is the CODATA Planck length, whose definition carries $G$ numerically: CALIBRATED(1) as a stored number (`laws.hpp:111–119`)",CALIBRATED,no
+ch01,4,"$m_p$, $m_e$",rest masses,MEASURED-INPUT (CODATA),MEASURED-INPUT,no
+ch01,5,$R_p$,proton boundary radius,"MEASURED-INPUT (muonic hydrogen, 2019)",MEASURED-INPUT,no
+ch01,6,"$T_{\rm CMB}$, $R_{\rm CMB}$",set $\varepsilon$ and $N$,MEASURED-INPUT (FIRAS; measured Clearing distance),MEASURED-INPUT,no
+ch01,7,"cell counts, $V_{\rm disp}$, $R_{\rm excl}$",volumes of Table 1.3,"COMPUTED, carrying the measured inputs above",COMPUTED,no
+ch03,1,$\ell_P$,cell edge,"CALIBRATED(1) as a stored number: the CODATA Planck length, whose definition carries $G$ numerically (`laws.hpp:111–119`)",CALIBRATED,no
+ch03,2,$c$,unit bridge,MEASURED-INPUT (SI exact),MEASURED-INPUT,no
+ch03,3,"$a_0$, $\alpha$, $r_e$",hydrogen scales,MEASURED-INPUT (CODATA),MEASURED-INPUT,no
+ch03,4,"$R_\odot$, 1 AU",lengths,"MEASURED-INPUT (IAU 2015, IAU 2012)",MEASURED-INPUT,no
+ch03,5,$k_\odot=686.404$,speed ratio of the Sun,"CONSTRUCTION with respect to $c$: contaminating input: the anomalous advance $\delta\phi$ of Mercury, a residual of ephemeris fits whose force model uses $c$, entering through `bridge::k_Sun_from_precession`; $\mathrm{Om}_\odot$ in T3 and Table 3.3 uses the engine's `bridge::koppa_Sun` with $k_\odot=686.3$",CONSTRUCTION,no
+ch03,6,closures (1) and (3) of (3.4),posited relations,"the exponent of $1-z$ was set by GOM22 so that the first-order redshift and Shapiro coefficient agree with measured values: contaminating input: measured solar spectral shift and first-order Shapiro coefficient, entering at `laws.hpp:2855–2857`",,no
+ch03,7,"hop counts, recurrence counts",tables,COMPUTED,COMPUTED,no
+ch04,1,$\ell_P$,cell edge,"`measured::l_P`, stored numeric. The exact koppa–wake closure of $\ell_P$ is recorded in FLM06; the stored number is the reference used by the engine.",stored,no
+ch04,2,$T_{\rm CMB}$,sets $u_{\rm CMB}$ and so $\varepsilon$,"measured (FIRAS), 2.7255 K",,no
+ch04,3,$a$,radiation constant,7.5657e-16 J m$^{-3}$ K$^{-4}$,,no
+ch04,4,$R_{\rm CMB}$,sets $N$,"measured Clearing distance, `measured::R_CMB`. The engine records the magnitude of $N$, $\Phi$ and $P_{\rm conv}$ as inheriting this input (`laws.hpp:282–283`).",,no
+ch04,5,$\kappa$,"interception constant, $\sigma/\ell^2$",set to 1 by the engine's definition $\varepsilon = u_{\rm CMB}\ell^3$,,no
+ch04,6,$\delta$,per-pass relay loss,premise P4; bounded by (4.15),,no
+ch06,1,"dimensions, ranks, null spaces",Section 6.2,DERIVED (exact rational),DERIVED,yes
+ch06,2,redundancies of Table 6.2,checks of stored numbers,COMPUTED,COMPUTED,yes
+ch06,3,thermal chain values,Section 6.4,"COMPUTED from MEASURED-INPUT ($T_{\rm CMB}$, constants)",COMPUTED,yes
+ch06,4,roles of Table 6.3,engine statements and derivelist,"the engine's own labels, quoted",,yes
+ch07,1,"Alexander polynomials, genus, determinants",Table 7.1 and T3,DERIVED (exact),DERIVED,no
+ch07,2,skein check,(7.5),DERIVED (exact),DERIVED,no
+ch07,3,mode speeds (7.3) given the lock,engine formulas,DERIVED given the lock premise,DERIVED,no
+ch07,4,smoothing rates (7.4),engine formula,DERIVED given (7.3),DERIVED,no
+ch07,5,"assignment electron $(1,1)$, proton $(2,3)$, neutrino open winding",Law VI,posited,,no
+ch07,6,the lock $v_T^2:v_P^2=p:q$,PPT01,posited,,no
+ch11,1,geometric factors of (11.1),Chapters 9 and 10,DERIVED,DERIVED,no
+ch11,2,$P_{\rm eff}$ (11.3),forward form from the seed,"COMPUTED, class C with the FLM07 premise; inputs $\alpha$, $\hbar$, $c$, $m_p$, $a_0$",COMPUTED,no
+ch11,3,$f=P_{\rm eff}/P_{\rm conv}$,transfer function,"COMPUTED, conditioned on $R_{\rm CMB}$",COMPUTED,no
+ch11,4,$F_{\rm C}=\alpha\hbar c/r^2$,Coulomb form,DERIVED from (11.3); the identity with $k_ee^2$ is a unit bridge,DERIVED,no
+ch11,5,$Z$ scaling,handed count,"posited rule (engine, 2026-07-07)",,no
+ch11,6,hydrogen balance,Section 11.6,CONSTRUCTION,CONSTRUCTION,no
+ch12,1,$m=\Phi V_{\rm disp}/(3\ell_P^3c^2)$,"derived from P7, P10, P11",DERIVED given P7 and P11,DERIVED,no
+ch12,2,"$V_{\rm disp}$ of the proton, electron",from measured masses,"COMPUTED (output), carrying the measured masses and $\Phi$",COMPUTED,no
+ch12,3,factor 3 against 6,sensitivity,reported,,no
+ch12,4,engaged volume $8\pi b^3/7$ and wake $4\pi b^3/21$,relay-lock integral,DERIVED (exact) given $f_{\rm lock}$,DERIVED,no
+ch12,5,$a_{\rm floor}=7c^2/(6R_{\rm CMB})$,convergence floor,"COMPUTED, conditioned on $R_{\rm CMB}$",COMPUTED,no
+ch12,6,nuclear volumes of Table 12.1,from measured masses,CONSTRUCTION,CONSTRUCTION,no
+ch15,1,"chain region, content",cells in $V$,the update rule (15.1 with $S_V=0$),,no
+ch15,2,"chain region, momentum",cells in $V$,"the scatterer, unspecified (R15.1)",,no
+ch15,3,engine body sums (15.4),all bodies,the pair antisymmetry of (15.3),,no
+ch15,4,patterned emitter,the emitter,not represented in the engine (R15.2),,no
+ch15,5,"chain parameters ($s$, cells, region, counts, generator seed)",as stated,CONSTRUCTION,CONSTRUCTION,no
+ch15,6,"body source lengths, separation, collision radii, velocity scale $0.7$, $\varepsilon$",as stated,CONSTRUCTION,CONSTRUCTION,no
+ch15,7,"kernel (15.3), invariants (15.4), refusal rule",engine's,"DERIVED in the engine (bridge, comment T3/T6); checked here by execution",DERIVED,no
+ch15,8,$c$ (SI seconds ↔ length),`measured::c`,MEASURED-INPUT (unit bridge; no result above depends on it),MEASURED-INPUT,no
+ch15,9,"closures, orders, ledger residuals",Sections 15.3–15.7,COMPUTED,COMPUTED,no
+ch16,1,"chain parameters ($s,\gamma,\varepsilon$, sizes, generator seed), scheme parameters of T4",as stated,CONSTRUCTION,CONSTRUCTION,no
+ch16,2,(16.1)–(16.5) and the executed convergence and conservation values,Sections 16.2–16.5,DERIVED (exact) or COMPUTED,DERIVED,no
+ch16,3,$k_B$,`measured::k_B`,MEASURED-INPUT (unit bridge),MEASURED-INPUT,no
+ch16,4,"moments $\tfrac38,\tfrac5{16},\tfrac{75}{64}$, hard-lock collision integrals $=1$",engine's,"DERIVED in the engine (FD02); taken as stated here, not re-derived",DERIVED,no
+ch16,5,engaged fraction $\tfrac67$,engine's,DERIVED in the engine (FLM15); not re-derived here,DERIVED,no
+ch16,6,"test point $T,P,m,b$",as stated,CONSTRUCTION,CONSTRUCTION,no
+ch16,7,"(16.7), scalings, ratio $7/6$",Section 16.6,COMPUTED,COMPUTED,no
+ch17,1,"$\alpha$, $a_0$, $\hbar$, $m_e$, $m_p$",`measured::` (CODATA 2022),"MEASURED-INPUT (the relations among $\alpha$, $a_0$, $m_e$, $\hbar$ are shared-input)",MEASURED-INPUT,no
+ch17,2,$c$,`measured::c`,MEASURED-INPUT (unit bridge),MEASURED-INPUT,no
+ch17,3,"$r_e=\alpha^2a_0$, (17.1), (17.2), $\omega=\alpha c/a_0$",Section 17.2,COMPUTED (defined in the engine; identities executed),COMPUTED,no
+ch17,4,"$R_{p,\rm lock}=4\hbar/(m_pc)$, $R_{\rm int}$",engine's,the engine's lock premise (FLM07) with measured inputs; not re-derived here,DERIVED,no
+ch17,5,epicyclic result (17.4),Section 17.5,DERIVED (exact) and COMPUTED,DERIVED,no
+ch17,6,"route parameters of T3, T4 ($\delta$, step, $\varpi$, $d$)",as stated,CONSTRUCTION,CONSTRUCTION,no
+ch18,1,"$\hbar$, $m_p$, $m_e$, $\alpha$",`measured::`,MEASURED-INPUT,MEASURED-INPUT,no
+ch18,2,$c$,`measured::c`,MEASURED-INPUT (unit bridge),MEASURED-INPUT,no
+ch18,3,"void ratios (18.1), prices, $q=4$",Section 18.2,"DERIVED (geometry, executed from coordinates) under the engine's price law",DERIVED,no
+ch18,4,price law $q\rho^3$ (FLM07),engine's,the engine's premise; not derived here,DERIVED,no
+ch18,5,"$M_2$, $M_4$ of (18.2)",Section 18.3,DERIVED and COMPUTED,DERIVED,no
+ch18,6,"$R_{p,\rm lock}$ (18.3)",$0.841235640$ fm,COMPUTED from the lock and the mass/action seat,COMPUTED,no
+ch18,7,stored $R_p$,$8.414\times10^{-16}$ m,MEASURED-INPUT (no uncertainty stored),MEASURED-INPUT,no
+ch18,8,"$C_g$, $W_{\rm eff}$ (18.4)",Section 18.4,COMPUTED,COMPUTED,no
+ch18,9,$\ell_P$,`measured::l_P`,"CALIBRATED(1) (carries $G$; Chapter 6, R6.1)",CALIBRATED,no
+ch18,10,$\varpi_b$ (18.5),$1.241873176\times10^{-54}$ m,COMPUTED from the stored lengths,COMPUTED,no
+ch18,11,"$V_{\rm int}$, $P_{\rm eff}$",Section 18.6,"COMPUTED; identity, shared-input",COMPUTED,no
+ch19,1,free neutron,0,0,,no
+ch19,2,deuteron p–n,1,0,,no
+ch19,3,triton n–p–n,1,1,,no
+ch19,4,alpha ring p–n–p–n,2,1,,no
+ch19,5,"$m_n$, $m_p$, $m_e$",`measured::` (CODATA 2022),MEASURED-INPUT,MEASURED-INPUT,no
+ch19,6,"$c$, $e$ (unit bridge to MeV)","`measured::c`, `e_charge`",MEASURED-INPUT (unit bridge),MEASURED-INPUT,no
+ch19,7,"$Q$ (19.2), $E_e^{\max}$ (19.3), recoil",Section 19.3,COMPUTED,COMPUTED,no
+ch19,8,"channel mass values $0.02,0.029,0.06$ eV",`neutrino.hpp`,CONSTRUCTION (convention values per the engine's header),CONSTRUCTION,no
+ch19,9,endpoint shifts,Section 19.3,COMPUTED,COMPUTED,no
+ch19,10,"contact rule, slot counts",engine's (`nuclear`),the engine's rule,,no
+ch19,11,"Table 19.1, capacity comparison",Section 19.4,DERIVED (exact integers) and COMPUTED,DERIVED,no
+ch20,1,"the grammar (20.1)–(20.3), helion base",Sections 20.2–20.3,"DERIVED (exact integer algebra), verified exhaustively",DERIVED,no
+ch20,2,"the 287 $(Z,A)$ pairs of the table",`natural_basis`,"OBSERVED (isotope list; CIAAW reconstruction, as stored)",OBSERVED,no
+ch20,3,the aggregates of Table 20.1,Section 20.4,"COMPUTED from the table; consistency, not prediction",COMPUTED,no
+ch20,4,identities (20.4) and the class names,Section 20.5,DERIVED (exact),DERIVED,no
+ch20,5,coverage of the table by the wedge,Section 20.4,"COMPUTED; expected from the valley, not evidence",COMPUTED,no
+ch21,1,"the slot rule (unlike only, cap 3)",engine's,the engine's rule (operator-stated 2026-10-14); not derived from geometry,DERIVED,no
+ch21,2,(21.1) and the flow proof,Section 21.2,DERIVED (exact),DERIVED,no
+ch21,3,(21.2) and Table 21.1,Section 21.3,DERIVED and COMPUTED,DERIVED,no
+ch21,4,geometric classifications,Section 21.4,COMPUTED (exact geometry),COMPUTED,no
+ch21,5,the table of 284 natural nuclides,Chapter 20,OBSERVED (isotope list),OBSERVED,no
+ch22,1,"(22.1), (22.2), the lattice count",Section 22.2,"DERIVED (exact), verified",DERIVED,no
+ch22,2,"the closure list 2, 8, 20, 28, 50, 82, 126",`magic_numbers`,OBSERVED,OBSERVED,no
+ch22,3,(22.3) and the forward value 184,Section 22.3,COMPUTED; 184 is a forward value (PENDING observation),COMPUTED,no
+ch22,4,pricing rule and onset $n=3$,engine's NP33,the engine's premise (open); $q=4$ from Chapter 18,,no
+ch22,5,Table 22.1,Section 22.4,COMPUTED; scored against the observed list,COMPUTED,no
+ch22,6,Table 22.2,Section 22.5,DERIVED (exact),DERIVED,no
+ch22,7,NSEQ19 opening and closing results,engine header,engine-recorded; not re-run here,,no
+ch23,1,"$m_p$, $m_n$, $m_d$, $m_t$, $m_h$",`measured::` (CODATA 2022),MEASURED-INPUT,MEASURED-INPUT,no
+ch23,2,"$B_d$, $B_t$, $B_h$",(23.1),COMPUTED from the stored masses,COMPUTED,no
+ch23,3,$B_\alpha$,28.296 MeV,"MEASURED-INPUT (typed, rounded; residual R23.4)",MEASURED-INPUT,no
+ch23,4,"contact counts 1, 2, 2, 4",Chapter 19,DERIVED (explicit graphs),DERIVED,no
+ch23,5,"Table 23.1, $S_n$, $S_p$, mirror identity",Sections 23.3–23.4,COMPUTED,COMPUTED,no
+ch23,6,bulk radius law,`nuclear_boundary_radius`,the engine's law (NP12; zero-fit by its record); arithmetic checked here,,no
+ch23,7,"$R_p$, $R_{\rm He}$",`measured::`,MEASURED-INPUT,MEASURED-INPUT,no
+ch24,1,definition (24.1) and its zeros,Sections 24.2–24.4,DERIVED (exact) and COMPUTED,DERIVED,no
+ch24,2,"configurations (module graphs, solids, the accidental set)",as stated,"CONSTRUCTION (chosen weights 1, 0.5)",CONSTRUCTION,no
+ch24,3,Tables 24.1 and 24.2,executed,COMPUTED,COMPUTED,no
+ch24,4,orientation average (T3),Section 24.5,DERIVED (exact quadrature),DERIVED,no
+ch24,5,inversion invariance (T4),Section 24.6,DERIVED (exact),DERIVED,no
+ch24,6,the engine's observed moments and quadrupole anchor,`measured::`,OBSERVED (not used; magnetons not used),OBSERVED,no
+ch25,1,"$\alpha$, $a_0$, $m_e$, $m_p$, $m_d$, $m_t$, $m_h$, $h$, $c$",`measured::`,MEASURED-INPUT,MEASURED-INPUT,no
+ch25,2,(25.1),Section 25.2,COMPUTED (identities of the definitions),COMPUTED,no
+ch25,3,"$R_\infty$, Ry",`measured::`,MEASURED-INPUT; shared-input with the set above,MEASURED-INPUT,no
+ch25,4,"$R_\infty^{\rm derived}$, wavelengths, shifts",Sections 25.4–25.5,COMPUTED,COMPUTED,no
+ch25,5,engine's 12.5 ppm and 263 ppm figures,engine header,engine-recorded; not re-run,,no
+ch26,1,"(26.1), (26.2)",Sections 26.2–26.3,"DERIVED (exact), conditional on $J\propto vr$ and fixed source",DERIVED,no
+ch26,2,"$\hbar$, $\mathrm{Ry}$ identifications",Section 26.2,shared-input (CODATA set),,no
+ch26,3,$R_\infty^{\rm derived}$ route,engine's,"COMPUTED from $\{m_e,c,\alpha,h\}$",COMPUTED,no
+ch26,4,"Ritz combination, limits",Section 26.4,DERIVED (exact),DERIVED,no
+ch26,5,$Z<1/\alpha$,Section 26.5,COMPUTED,COMPUTED,no
+ch27,1,"$\alpha$, $\mathrm{Ry}$, $m_e$, $m_p$, $R_p$, $a_0$",`measured::`,MEASURED-INPUT,MEASURED-INPUT,no
+ch27,2,(27.1) and the ratio $l(l+1)$,Section 27.3,COMPUTED (identity of the engine function; comparison formula not an input),COMPUTED,no
+ch27,3,scales of Section 27.4,executed,"COMPUTED (orders only, no coefficient)",COMPUTED,no
+ch28,1,(28.2) and the width statement,Section 28.2,"DERIVED (exact), checked numerically",DERIVED,no
+ch28,2,"harmonic content, route geometry",Section 28.3,DERIVED and COMPUTED (classical route under the $1/r^2$ kernel),DERIVED,no
+ch28,3,broadening combination rules,Section 28.5,"DERIVED (exact), checked numerically",DERIVED,no
+ch28,4,$\Delta E$ for hydrogen $1\to2$,from `level_energy_eV`,"COMPUTED from the stored $\mathrm{Ry}$, masses",COMPUTED,no
+ch28,5,(28.3),Section 28.6,DERIVED (exact),DERIVED,no
+ch28,6,Voigt approximate formula,comparison only,not an input,,no
+ch29,1,"(29.1), seats, pair prices",engine's (APS14),the engine's construction (exact geometry prices; seat order a premise),CONSTRUCTION,no
+ch29,2,"Ry, $Z$",`measured::`,MEASURED-INPUT (anchor of the energy scale),MEASURED-INPUT,no
+ch29,3,neutral and ion minima,Section 29.3,COMPUTED,COMPUTED,no
+ch29,4,measured first ionisation energies,Table 29.1,OBSERVED (compared after the computed values were printed),COMPUTED,no
+ch29,5,"residuals, relaxation energies",Sections 29.4–29.5,COMPUTED,COMPUTED,no
+ch30,1,similarity fit and census,Section 30.2,COMPUTED (random generator fixed; counts of free factors stated),COMPUTED,no
+ch30,2,"nuclear shell directions (cube, icosahedron, cuboctahedron normals)",as stated,CONSTRUCTION (exact solids),CONSTRUCTION,no
+ch30,3,atomic seat directions,`dodecardinal::make_seats`,the engine's seat geometry,,no
+ch30,4,"$I_l$ values, Table 30.1",Section 30.4,COMPUTED,COMPUTED,no
+ch30,5,"$a_0/R_p$, $r_e/R_p$",Section 30.5,COMPUTED (not used),COMPUTED,no
+ch31,1,"model functions (inverse well, Mie, Morse)",as stated,CONSTRUCTION (TOY; no measured input),CONSTRUCTION,no
+ch31,2,"(31.1), the inversion of Section 31.4",exact,"DERIVED (exact), checked numerically",DERIVED,no
+ch31,3,"$m_p$, $m_d$",`measured::`,MEASURED-INPUT (reduced masses only),MEASURED-INPUT,no
+ch31,4,TOY surface of Section 31.5,as stated,CONSTRUCTION,CONSTRUCTION,no
+ch32,1,"(32.1), Voigt–Reuss inequality, (32.2), (32.3)",Sections 32.2–32.3,"DERIVED (exact), checked on TOY inputs",DERIVED,no
+ch32,2,"TOY stiffness triples, Gibbs functions, forcing",as stated,CONSTRUCTION (no measured input),CONSTRUCTION,no
+ch32,3,bulk aggregation in `materials.hpp`,engine's,the engine's source/far-field relations (no constitutive law),,no
+ch33,1,"(33.1)–(33.2), (33.4)",Sections 33.1–33.6,DERIVED (exact),DERIVED,no
+ch33,2,"$\alpha$, $a_0$, $r_e$",`measured::`,MEASURED-INPUT (shared-input for the ladder),MEASURED-INPUT,no
+ch33,3,"$v_\oplus$, $R_\oplus$",`bridge::`,MEASURED-INPUT (rounded stored values),MEASURED-INPUT,no
+ch33,4,"planetary $a_i$, $T_i$; lunar $a$, $T$",published mean elements,OBSERVED (processed ephemeris elements),OBSERVED,no
+ch33,5,"$\mathrm{Om}$ values, spreads, slope","Table 33.1, T3, T4",COMPUTED,COMPUTED,no
+ch33,6,"$c$, AU",exact conversions,MEASURED-INPUT (unit bridge),MEASURED-INPUT,no
+ch34,1,"(34.1)–(34.3), turning points, open-orbit relations",Sections 34.2–34.4,"DERIVED (exact), checked by integration",DERIVED,no
+ch34,2,"test orbits, $\kappa$, starting data",as stated,CONSTRUCTION (units $\mu=1$; no measured input),CONSTRUCTION,no
+ch34,3,the kernel and its conserved quantities,Chapter 15,the engine's kernel,,no
+ch35,1,seven-circle geometry and weights,`occlusion.hpp`,the engine's declared numerical model; geometry DERIVED (exact) and verified,DERIVED,no
+ch35,2,"quadrature errors, Table 35.1",Section 35.3,COMPUTED,COMPUTED,no
+ch35,3,occulted-fraction errors,Section 35.4,COMPUTED (exact half-plane reference),COMPUTED,no
+ch35,4,retardation contraction,Section 35.5,DERIVED (exact) and COMPUTED,DERIVED,no
+ch35,5,"$\gamma^{-3},\gamma^{-1}$ at $0.6c$",Section 35.4,DERIVED (hand arithmetic; not executed),DERIVED,no
+ch36,1,state vectors at J2000 and the comparison positions,JPL Horizons (DE441),OBSERVED (processed ephemeris),OBSERVED,no
+ch36,2,$GM_i$ of the Sun and planets,read from Horizons object data,MEASURED-INPUT (ephemeris constants),MEASURED-INPUT,no
+ch36,3,"$c$, AU",exact conversions,MEASURED-INPUT (unit bridge),MEASURED-INPUT,no
+ch36,4,kernel and integrator,Chapter 15,the engine's,,no
+ch36,5,"Table 36.1, Table 36.2",executed,COMPUTED,COMPUTED,no
+ch37,1,$L_\odot$,`law_II::L_Sun`,MEASURED-INPUT (anchor; IAU nominal),MEASURED-INPUT,no
+ch37,2,"$P_{\rm conv}$, $F_{\rm CMB}$, $r_{\rm domain}$","`law_I`, `law_II`",COMPUTED from the stored inputs ($P_{\rm conv}$ is conditioned on $R_{\rm CMB}$),COMPUTED,no
+ch37,3,$GM_\odot$,ephemeris constant,OBSERVED (processed),OBSERVED,no
+ch37,4,"$\varpi_b$, $G_{\rm eff}$, $N_b$","`bridge`, Section 37.3",COMPUTED from the stored lengths; carries $G$ through $\ell_P$ (CALIBRATED(1)),COMPUTED,no
+ch37,5,"polytropic $\rho_c$, $P_c$",Section 37.3,COMPUTED under an assumed closure (CONSTRUCTION),COMPUTED,no
+ch37,6,"26.7 MeV, 2 per chain",`neutrino.hpp`,the engine's chain bookkeeping,,no
+ch37,7,"chain rate, flux, times",Section 37.5,COMPUTED (accounting on the anchor $L_\odot$),COMPUTED,no
+ch38,1,rotation table (28 points),`milky_way::rc_table`,OBSERVED (compiled by the engine from named sources; used as stored),OBSERVED,no
+ch38,2,"$M_{\rm bar}$, $h_R$",`milky_way`,the engine's canonical parameters (OBSERVED/CONSTRUCTION),OBSERVED,no
+ch38,3,$\varpi_{\rm bar}=M_{\rm bar}\varpi_\odot$,$7.636328\times10^{13}$ m,COMPUTED,COMPUTED,no
+ch38,4,"(38.1), Table 38.1, T3 ratios","Sections 38.1, 38.3",DERIVED (exact formula) and COMPUTED,DERIVED,no
+ch38,5,twin-regime exponents and radii,`galactic.hpp`,CALIBRATED (fitted inputs; not used),CALIBRATED,no
+ch39,1,"profile (39.1), alternative profile",engine's,"the engine's profile (repaired, GOM22); the alternative is a branch of the fork",,no
+ch39,2,$\varpi_\odot$,`bridge::koppa_Sun`,"MEASURED-INPUT (derived from the orbits, Chapter 33; no $G$ or mass)",DERIVED,no
+ch39,3,"(39.2), (39.3) and the fitted coefficients",Sections 39.1–39.3,DERIVED (exact) and COMPUTED,DERIVED,no
+ch39,4,"geometry (Earth–Mars grazing), $R_\odot$, AU",as stated,CONSTRUCTION / unit bridge,CONSTRUCTION,no
+ch40,1,"$v=c\sqrt{\mathrm{Om}/r}$, $c_{\rm far}$, $C$",`depth_closure`,"the engine's relations (repaired, GOM22)",,no
+ch40,2,"(40.1), $\tau$, interior oscillation",Sections 40.1–40.2,"DERIVED (exact), checked by integration",DERIVED,no
+ch40,3,"$\mathrm{Om}_\odot$, $\varpi_{\rm bar}$","`bridge::koppa_Sun`, `milky_way::koppa_mw_m`",MEASURED-INPUT (derived from orbits; Chapter 33) / the engine's stored total,DERIVED,no
+ch40,4,"$c\,\mathrm{Om}$ values",Section 40.3,COMPUTED,COMPUTED,no
+ch41,1,(41.1) and the companion relations,Section 41.3,"DERIVED (exact), checked on test functions",DERIVED,no
+ch41,2,invariance and spacing statements,Section 41.2,DERIVED (exact),DERIVED,no
+ch41,3,chart statements,Section 41.4,DERIVED (exact) and COMPUTED,DERIVED,no
+ch41,4,test functions,as stated,CONSTRUCTION (no measured input),CONSTRUCTION,no
+ch42,1,"the matrix, the stored null basis, the stored rank",`EXACT_CONSTRAINTS2.json`,the frozen inventory (the relations are the atlas's; their sources were not re-audited here),,no
+ch42,2,"rank 63, nullity 44, independence, pairwise counts",Sections 42.1–42.3,COMPUTED (exact rational arithmetic),COMPUTED,no
+ch42,3,addition tests,Section 42.5,COMPUTED (exact),COMPUTED,no
+ch43,1,(43.1) and the KKT solution,Section 43.2,DERIVED (exact) and COMPUTED,DERIVED,no
+ch43,2,identifiability and conditioning,Section 43.1,COMPUTED (stand-in model),COMPUTED,no
+ch43,3,"model, functional, constraints",as stated,CONSTRUCTION (no measured input),CONSTRUCTION,no
+ch44,1,"$h,\hbar,c,k_B$",`measured`,unit bridges (exact SI),unit bridge,no
+ch44,2,$T_{\rm CMB}=2.7255$ K,`measured`,OBSERVED (FIRAS),OBSERVED,no
+ch44,3,"$b$, $a$",Section 44.1,COMPUTED from the Planck form (reference relation),COMPUTED,no
+ch44,4,"$2.898\times10^{-3}$, `a_rad`",engine,"stored rounded values; differ from COMPUTED by $7.9\times10^{-5}$, $4.4\times10^{-6}$",COMPUTED,no
+ch44,5,"octave origin $D=760\,\mathrm{nm}\cdot2^{44}$",Section 44.2,CALIBRATED (1): the integer 44,CALIBRATED,no
+ch44,6,$R_{\rm Earth}$,`bridge`,OBSERVED (stored),OBSERVED,no
+ch44,7,mixture components and weights,Section 44.3,CONSTRUCTION (no measured input),CONSTRUCTION,no
+ch45,1,"depths $z_e$, $z_o$",defined ratios $\mathrm{Om}/r$,CONSTRUCTION (defined geometric ratio),CONSTRUCTION,no
+ch45,2,$\varpi_\odot$ (`koppa_Sun`),`bridge`,stored; the engine's value carries $GM_\odot$ read as a source strength through the ephemeris (named contaminating input; CALIBRATED (1) through the stored $\ell_P$ at `laws.hpp:99`),CALIBRATED,no
+ch45,3,"$R_\odot$, AU",`measured`,IAU values,,no
+ch45,4,$C=1-z$,`clock_rate`,the engine's tick-rate ratio (GOM22),,no
+ch45,5,(45.1) and the two shifts,Section 45.2,COMPUTED,COMPUTED,no
+ch46,1,"$\hbar,c,m_e,m_p,a_0$",`measured`,"CODATA 2022; $\{\hbar,m_e,m_p\}$ one mass/action seat",,yes
+ch46,2,$\alpha$,`measured`,hydrogen rung $k_H=1/\alpha$,,yes
+ch46,3,$\mathrm{Om}_H=\alpha^2a_0$,`measured::r_e`,COMPUTED (shared-input with the CODATA set),COMPUTED,yes
+ch46,4,"$R_{p,\rm lock}=4\hbar/(m_pc)$",`law_III`,"DERIVED (lock coordination 4, FLM07)",DERIVED,yes
+ch46,5,$R_p$,`measured`,OBSERVED (stored),OBSERVED,yes
+ch46,6,"$C_g$, $\mathcal R$",Section 46.1,COMPUTED,COMPUTED,yes
+ch46,7,response rates $a_X$,Section 46.2,CONSTRUCTION (no measured input),CONSTRUCTION,yes
+ch47,1,$T_0=2.7255$ K,`measured`,OBSERVED (FIRAS),OBSERVED,no
+ch47,2,$1+z_{\rm release}=1090$,`measured`,OBSERVED (FIRAS frame),OBSERVED,no
+ch47,3,historical ratio 1090.8,volume draft,stored landmark (not re-derived),DERIVED,no
+ch47,4,"loading landmarks 3073.58 K, 1844.15 K",volume draft,stored landmarks of the recovered calibration (not re-derived),DERIVED,no
+ch47,5,$b$,Chapter 44,COMPUTED from the Planck form,COMPUTED,no
+ch47,6,$R_{\rm CMB}$,`measured`,OBSERVED (stored boundary),OBSERVED,no
+ch47,7,$\ell_P$,`measured`,stored value carrying $G$: CALIBRATED (1); contaminating input named: $G$ enters at `laws.hpp:99`,CALIBRATED,no
+ch47,8,"975 nm, 760 nm, 780 nm",draft,wavelength landmarks (operational definitions),,no
+ch48,1,"$h,c,k_B,m_p,a_{\rm rad},T_{\rm CMB}$",`measured`,CODATA/FIRAS; $a_{\rm rad}$ rounded (Chapter 44),,yes
+ch48,2,$\eta_{\rm BBN}$,`release_acoustics`,OBSERVED (external BBN-deuterium input; not fitted),OBSERVED,yes
+ch48,3,`koppa_per_baryon`,`bridge`,"stored: $\ell_P$ carries $G$, CALIBRATED (1) (`laws.hpp:99`); $R_p$ measured",CALIBRATED,yes
+ch48,4,standing scale $145.8332$ Mpc,Section 48.3,COMPUTED (shared-input with BBN/FIRAS),COMPUTED,yes
+ch48,5,147 Mpc,`pre_clearing`,"OBSERVED, read after the native value",OBSERVED,yes
+ch48,6,"830 Myr, 1098.56 Myr",Section 48.3,compatibility durations (class X),,yes
+ch48,7,"routes, laws, reservoirs",Sections 48.1–48.2,CONSTRUCTION (no measured input),CONSTRUCTION,yes
+ch49,1,"$c,m_e,m_p,m_n,m_d,m_t,m_{\rm He3}$",`measured`,CODATA 2022,,no
+ch49,2,"$B_d,B_t,B_{\rm He3}$",`measured`,derived from the measured masses,DERIVED,no
+ch49,3,$B_\alpha=28.296$ MeV,`measured`,"stored, rounded (computed in Chapter 23: $28.295616$)",COMPUTED,no
+ch49,4,"$\Phi$, $P_{cf}$, $\ell_P$","`law_I`, `law_IV`",stored; $\ell_P$ carries $G$: CALIBRATED (1); cancels from ratios,CALIBRATED,no
+ch49,5,"$V_{\rm disp}$ ratios, $f$, $\eta$",Sections 49.1–49.2,COMPUTED,COMPUTED,no
+ch49,6,"Constructions I, II; tensor $g$",Sections 49.2–49.3,CONSTRUCTION (no measured input),CONSTRUCTION,no
+ch49,7,$\eta_{\rm target}=10^{-13}$,Section 49.2,reference scale for arithmetic,,no
+ch50,1,"$\lambda$, $d$, $a$, $L$, $\sigma_k$, $\mu$",Sections 50.1–50.3,CONSTRUCTION (no measured input),CONSTRUCTION,no
+ch50,2,"path lengths, amplitudes, patterns",Sections 50.1–50.3,COMPUTED,COMPUTED,no
+ch50,3,random-number stream,seed $20261110$,fixed for the run of record,,no
+ch51,1,"strategies, mixtures, PR box, signalling strategy",Sections 51.2,CONSTRUCTION (no measured input),CONSTRUCTION,no
+ch51,2,$E=-\cos(\theta_x-\theta_y)$,Section 51.2,comparison target (standard description); not an SDT input,,no
+ch51,3,"$D$, $\delta$ cells",Section 51.3,CONSTRUCTION,CONSTRUCTION,no
+ch51,4,"sampled $S$, $\sigma_S$",Section 51.4,COMPUTED (seed $20261110$),COMPUTED,no
+ch51,5,separation conclusions,Section 51.2,DERIVED (exact; the limit by linearity over the 16 vertices),DERIVED,no
+ch52,1,"$\hbar,c,k_B$, $T_{\rm CMB}=2.7255$ K",`measured`,CODATA; FIRAS,,no
+ch52,2,$a_{\rm native}$,Chapter 44,COMPUTED from the Planck form,COMPUTED,no
+ch52,3,price amplitude $a$,Section 52.1,CALIBRATED (1) (not derived),DERIVED,no
+ch52,4,"$E(x)$, $\Delta E$, $P$, $d_*$",Sections 52.1–52.2,COMPUTED,COMPUTED,no
+ch52,5,cutoff $\lambda$ and its fitted value,Section 52.3,CALIBRATED (1) where fitted; CONSTRUCTION otherwise,CALIBRATED,no
+ch53,1,"exponents $(m,p,k,w)$","Sections 53.1, 53.3",CONSTRUCTION (no measured input),CONSTRUCTION,no
+ch53,2,"displacement (53.1), counts","Sections 53.1, 53.3",DERIVED (exact) and COMPUTED,DERIVED,no
+ch53,3,rotation displacements,Section 53.2,COMPUTED,COMPUTED,no
+ch54,1,"flux factors, magnitudes, $\eta$, angular-size ratio",Section 54.1,CONSTRUCTION (generic conventions) and COMPUTED,COMPUTED,no
+ch54,2,$R_{\rm CMB}$,"`law_I`, `measured`",OBSERVED (stored boundary; class X),OBSERVED,no
+ch54,3,"$H_{0,\rm CMB}$",`cosmology::strain`,OBSERVED (class X unit conversion),OBSERVED,no
+ch54,4,$z_{\rm rec}=1100$,`measured`,legacy ballpark (not cited as measured),,no
+ch54,5,$z_{\rm release}=1089$,`measured`,OBSERVED (FIRAS frame),OBSERVED,no
+ch54,6,`age_SDT_Gyr` $=48$,`cosmology::age`,stored value (provenance: standard comoving distance reinterpreted),stored,no
+ch54,7,"standing scale, durations",Chapter 48,COMPUTED; compatibility values (class X),COMPUTED,no
+ch55,1,"$c$, $R_\odot$, AU",`measured`,exact SI; IAU,,no
+ch55,2,"$k_\odot=686.3$, $\mathrm{Om}_\odot$",`bridge`,"stored, four digits; surface speed from ephemeris-fitted source strength (named shared input); $\mathrm{Om}$ COMPUTED (class B)",COMPUTED,no
+ch55,3,sidereal year 365.256363 d,IAU,"OBSERVED, read after the native period",OBSERVED,no
+ch55,4,"$\gamma$, $E$, $p$ relations",`law_V`,posited movement budget; identities COMPUTED,COMPUTED,no
+ch55,5,candidate-row numbers,Section 55.3,COMPUTED,COMPUTED,no
+ch56,1,"$k_B$, $\pi$","`measured`, math",exact SI; constant,,no
+ch56,2,"load $m=39.948$ u, boundaries $b$",generic,"CONSTRUCTION (supplied, not derived)",DERIVED,no
+ch56,3,"kernel moments $\tfrac38$, $\tfrac5{16}$, $\tfrac{75}{64}$, $\tfrac67$",`law_IV::transport`,"COMPUTED (geometry coefficients, class C)",COMPUTED,no
+ch56,4,"$\eta,\kappa,D$, $\sigma_{\rm coll}$",Section 56.1,COMPUTED (no measured transport value),COMPUTED,no
+ch56,5,outflow and thermal numbers,Sections 56.2–56.3,CONSTRUCTION (TOY stand-ins),CONSTRUCTION,no
+ch57,1,"digests, line counts, revision",Section 57.1,COMPUTED (source files),COMPUTED,no
+ch57,2,citation resolution,Section 57.1,COMPUTED (65 citations),COMPUTED,no
+ch57,3,function-domain observations,Section 57.2,COMPUTED (engine calls),COMPUTED,no
+ch57,4,"$v_{\rm Earth}$, $R_{\rm Earth}$ in the cutoff example",`bridge`,stored values,stored,no
+ch58,1,"radii, angles, offsets",Sections 58.1–58.3,CONSTRUCTION (constructed geometries; no measured input),CONSTRUCTION,no
+ch58,2,"distances, errors, ranges",Sections 58.1–58.3,COMPUTED,COMPUTED,no
+ch58,3,"$\epsilon$, ulp",double precision,property of the representation,,no
+ch59,1,"contract text, registration text",GOM43 folder,read as source text,,no
+ch59,2,"validator cases, handles, toy retarded system",Sections 59.1–59.2,CONSTRUCTION (no measured input),CONSTRUCTION,no
+ch59,3,"hashes, differences, bit counts",Sections 59.2,COMPUTED (this build),COMPUTED,no
+ch59,4,"gate numbers ($2.34\times10^{-9}$, $1.6\times10^{-13}$, $200\,000$)",registration,quoted from the registration (not re-executed),,no
+ch60,1,"integrands, motion, node counts",Sections 60.1–60.3,CONSTRUCTION (known answers; no measured input),CONSTRUCTION,yes
+ch60,2,engine radial nodes,`occlusion_sphere`,"stored constants (Gauss–Legendre, six nodes)",stored,yes
+ch60,3,"estimates, errors, spreads, fractions",Sections 60.1–60.3,COMPUTED,COMPUTED,yes
+ch61,1,"$I,\gamma,\kappa$, $Q=50$, noise, rates, turns",Sections 61.1–61.3,CONSTRUCTION (no measured input),CONSTRUCTION,yes
+ch61,2,"amplitudes, lags, projections, covariances, hashes",Sections 61.1–61.3,COMPUTED,COMPUTED,yes
+ch61,3,folder names,repository,read as text (existence),,yes

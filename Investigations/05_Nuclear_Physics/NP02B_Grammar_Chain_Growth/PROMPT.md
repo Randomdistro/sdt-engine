@@ -97,3 +97,15 @@ File `NP02B_VERDICT.md`: each of 7 sections graded; inversion re-scored with Hun
 ---
 
 *NP02B · §K-deepened 2026-07-13 · the 48% inversion is root-2 (missing Hund DoF) — CLOSE it, don't amputate; class-E bond scale routed to NP17/κ; Z³/Z³≈m_p/m_e flagged as a sibling to 6π⁵, not fused.*
+
+---
+
+## Audit correction 2026-10-05 (record / status)
+
+**Finding:** The promised NP02B_VERDICT.md was never filed ("RESULTS-ON-FILE, UN-VERDICTED") although the output shows the inversion holds only for single-odd-block nuclei and fails for the n_t = 0 light nuclei.
+
+**Correction:** File the verdict stating "better than chance, not a law" and the 48% match as a descriptive statistic only.
+
+**Status:** RULE RECORDED — corrected gate or definition applies to the next run; the earlier result is not re-scored and nothing was re-run.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

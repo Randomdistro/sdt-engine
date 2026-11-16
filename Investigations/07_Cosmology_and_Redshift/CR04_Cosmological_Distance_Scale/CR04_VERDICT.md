@@ -393,3 +393,13 @@ CR04 results as a whole:
 **Maintainer:** SDT Canonical Engine — James Tyndall, Melbourne  
 **Date:** June 2026  
 **Version:** 1.0 (Complete)
+
+---
+
+## Audit correction (2026-10-05)
+
+- **The tool now compiles and runs** (MSVC 19.44, `/O2`, constants from `laws.hpp`; output kept as `cr04_results_compiled_2026-10-05.txt`). The earlier note that it did not compile was true of the 2026-07-02 source and is no longer true of the file in this folder.
+- **`cr04_results.txt` (hand-written) is superseded and must not be cited.** It disagrees with the compiled output by an order of magnitude on the Phase 3 rows: n_b(z_rec) 7.39e9 there against 7.35e8 m⁻³ from the tool, τ_plasma 2.96e10 against 2.94e9 (and the earlier file labels τ in m⁻³). It stays in the folder, labelled superseded.
+- **Relabelling of the compiled rows (no gate was changed):** λ_BAO = 147 Mpc and R_CMB = 9.527e26 m are OBSERVED inputs, not outputs, and are scored PASS against themselves (0.00% uncertainty); they are INPUT rows and are removed from the PASS tally. c_sound = c/√3 (DERIVED) and k_BAO = c/v_BAO are algebra on that speed. The Phase 1 headline "BAO scale derived from lattice dynamics" is therefore **not established**: the derived quantity is the sound speed, and the 5% gate on the 147 Mpc scale has not been run against a derived wavelength.
+- **Phase 2:** H₀ is CALIBRATED (PENDING), the linear comoving distance is 9.612e26 m (+0.89% on R_CMB) with H₀ and R_CMB tied by v = H₀ R_CMB, so it is a closure on a calibrated slope; the ΛCDM column differs by 55% and is context only. **Phase 4** k_Hubble quantisation remains PENDING.
+- Net status after correction: Phase 1 derived content = c/√3 only (COMPUTED); Phases 2 and 4 PENDING; Phase 3 PASS rows are COMPUTED ratios (τ ratio 4.0 from the 1:4 occupancy) with 5% stated uncertainty, not tests against data. Class stays QUALIFIED (C–D, pending closure).

@@ -1,0 +1,58 @@
+NSEQ05 blank-slate run 1 (registered in NSEQ05_RESET_ASSESSMENT_2026-10-10.md sections 0-2)
+=======================================================================
+
+[T1] cumulative: alpha:2 D6:8 D12:20 T8:28 D12:40 T10:50 D20:70 T12:82 D30:112 T14:126 D42:168 T16:184 -> reproduces the frozen table (VERIFICATION)
+     F(n) = B(n) + E(n) = (n+1)(n+2) for n = 1..7: yes
+[T2] crown graph (two (n+1)-sets, every opening seat linked to every closing seat except its antipode) and the triangulated face count 2V-4:
+     n = 3: V = 8, edges 12 (= n(n+1) = 12), degree 3 regular ; triangulated faces 2V-4 = 12 ; schedule D seats E(n) = 12 -> face rule agrees
+     n = 4: V = 10, edges 20 (= n(n+1) = 20), degree 4 regular ; triangulated faces 2V-4 = 16 ; schedule D seats E(n) = 20 -> face rule differs
+     n = 5: V = 12, edges 30 (= n(n+1) = 30), degree 5 regular ; triangulated faces 2V-4 = 20 ; schedule D seats E(n) = 30 -> face rule differs
+     n = 6: V = 14, edges 42 (= n(n+1) = 42), degree 6 regular ; triangulated faces 2V-4 = 24 ; schedule D seats E(n) = 42 -> face rule differs
+[V1] cube-vertex pair angles 12/12/4 -> met
+[V2] AME2020 nuclide rows read 3558, of which experimental (no estimated flag on the mass excess) 1875 ; n 8071.31806, 1H 7288.971064, 2H 13135.722895, 3H 14949.81090 keV -> met
+[V3] second difference of a quadratic (step 2) = 8c: 2.000000 vs 2.000000 -> met
+
+VALIDATIONS: met
+
+[T3] cube edges (nearest links) 12 ; midpoints 12 (cuboctahedron vertices) ; layers along (1,1,1): height -1.1547 x3; height 0.0000 x6; height 1.1547 x3;
+[T4] cuboctahedron faces: 14 (triangles 8, squares 6) ; expected 14 (8 + 6)
+[T5] 14 sites, 7 antipodal pairs ; C3v (coordinate permutations) orbits: 6 with sizes 1 3 3 1 3 3
+     one-per-pair selections 128 ; polar-symmetric (invariant under all six coordinate permutations) 8 ; distinct mean link angles: 79.9245 deg x2; 84.4368 deg x4; 100.0755 deg x2;
+     minimum mean link angle 79.9245 deg attained by 2 invariant selections (complements counted separately)
+
+[T6] (amended statistic: median over even-Z / even-N nuclides; tables are printed after the controls)
+Positive controls (must rank 1 in the +-4 window):
+  neutron N =  20: G = 0 keV, window values 0, rank 0 -> excluded (fewer than 5 window values)
+  neutron N =  28: G = 4893 keV, window values 2, rank 1 -> excluded (fewer than 5 window values)
+  neutron N =  50: G = 4786 keV, window values 5, rank 1 -> ok
+  neutron N =  82: G = 4143 keV, window values 5, rank 1 -> ok
+  neutron N = 126: G = 0 keV, window values 0, rank 0 -> excluded (fewer than 5 window values)
+  proton  Z =  20: G = 6180 keV, window values 3, rank 1 -> excluded (fewer than 5 window values)
+  proton  Z =  28: G = 6421 keV, window values 4, rank 1 -> excluded (fewer than 5 window values)
+  proton  Z =  50: G = 5340 keV, window values 5, rank 1 -> ok
+  proton  Z =  82: G = 3606 keV, window values 3, rank 1 -> excluded (fewer than 5 window values)
+Controls: all pass
+
+Targets (schedule's non-magic totals):
+[T6] neutron signal G(N) = mean over Z of d2n = ME(N-2) - 2ME(N) + ME(N+2) [keV]; N: G (count)
+  18:3184(5)  26:1426(5)  28:4893(5)  34:1941(5)  36:1616(6)  38:1550(7)  40:1412(6)  42:1155(6)  44:1059(5)  46:893(6)  48:1015(7)  50:4786(9)  52:1200(8)  54:1149(8)
+     56:1232(7)  58:867(8)  60:762(7)  62:948(9)  64:877(6)  66:837(6)  68:870(5)  70:783(7)  72:671(7)  74:668(7)  76:663(7)  78:563(8)
+     80:547(11)  82:4143(11)  84:592(8)  86:599(9)  88:515(9)  90:376(12)  92:623(10)  94:709(8)  96:627(7)  98:744(6)  100:706(7)  102:702(6)
+     104:574(5)  106:535(5)  114:510(5)
+     proton signal G_p(Z); Z: G (count)
+  18:5341(6)  20:6180(6)  22:2186(6)  26:3182(5)  28:6421(5)
+     30:3655(7)  32:3394(9)  34:2946(9)  36:2768(10)  38:3299(10)  40:2815(11)  42:2352(10)  44:2439(10)  46:2555(9)  48:2517(9)  50:5340(12)  52:2066(11)
+     54:2325(11)  56:2147(12)  58:2034(11)  60:2068(9)  62:2001(12)  64:2208(9)  66:1871(9)  68:1915(7)  70:1862(10)  72:1813(10)  74:1953(10)  76:2144(10)
+     78:1613(9)  80:2778(8)  82:3606(7)
+
+  neutron N =  40: G = 1412 keV, window values 5, rank 3 -> ABSENT
+  neutron N =  70: G = 783 keV, window values 5, rank 3 -> ABSENT
+  neutron N = 112: G = 0 keV, window values 0, rank 0 -> not testable
+  proton  Z =  40: G = 2815 keV, window values 5, rank 2 -> ABSENT
+  proton  Z =  70: G = 1862 keV, window values 5, rank 4 -> ABSENT
+  proton  Z = 112: G = 0 keV, window values 0, rank 0 -> not testable
+Targets present: 0 of 6 (chance of rank 1 each 1/5; Bonferroni over 6 tests)
+
+Descriptive: local maxima of G (rank 1 in a +-4 window with 5 window values)
+  neutron N: 50 56 62 82 98
+  proton Z: 38 50 64

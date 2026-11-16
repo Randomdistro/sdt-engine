@@ -25,7 +25,7 @@
 4. **What would prove us wrong?** — §⑧, three falsifiers with numeric triggers — a middle spot;
    sequential-SG that misses cos²(θ/2); a g-factor that can only be matched by importing a number.
 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class
-   (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN), per phase, no repainting a fired test.
+   (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN), per phase, no repainting a fired test.
 
 > **⚠️ Engine-fact correction (flagged for Harvey, 2026-06-29).** A prior draft cited "g≈2 from (W+1),
 > the proton g=4=W+1 line, Law VI" as an engine result. **`laws.hpp` contains no magnetic g-factor from
@@ -145,7 +145,7 @@ a magnetic g-factor; do not cite as one).
 ```markdown
 ## Pre-Run Commitments — QM07
 - Prompt completion target: [A|B|C|D]  (A does NOT require the g-number; g is OPEN)
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: 0 in the native chain (g-factor is OPEN, not a budgeted fit)
 - Engine namespaces used: EMC03 handedness, PPT06 occlusion, PPT01 equilibrium; B17 for the g *number* only — NO ψ, NO μ_B, NO W+1 g-factor citation, NO atomic:: in the native chain
 - Phase thresholds (committed before run): P1 exactly two circulation senses · P2 binary moment native (g number OPEN → B17) · P3 two spots, no middle, ∝ gradient · P4 cos²(θ/2) RMS <2%
@@ -161,7 +161,7 @@ a magnetic g-factor; do not cite as one).
 | P2 no native g, only B17's Schwinger value | mark g **OPEN**, defer the number to B17 | **OPEN** honestly — A still possible via P1/P3 | cite g from (W+1) or import μ_B |
 | P3 a middle spot appears | re-derive differential occlusion (handedness sign → push sign) | **KILL** the two-spot mechanism | suppress the middle spot by hand |
 | P4 cos²(θ/2) RMS >2% | re-check the QM04 residence count over re-projected handedness | **OPEN** the sequential-SG link | plug the cos²(θ/2) |
-| Rivals match but SDT only reproduces | label **DEGENERATE** honestly | — | Claim Class A |
+| A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 
 ### Allowed adjustments
 

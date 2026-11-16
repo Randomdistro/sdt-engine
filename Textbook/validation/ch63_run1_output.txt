@@ -1,0 +1,30 @@
+
+== V1 known answers ==
+[PASS] V1   the record parser returns the run sets {1} and {2, 3}
+[PASS] V1   the classifier returns {instrument defect, numerical} for 'an instrument defect from cancellation'
+[PASS] V1   the classifier returns {registration error, registered statement rejected}
+[PASS] V1   SHA-256('abc') is ba7816bf...
+
+== T1 preservation ==
+       chapters with run outputs: 63 ; run outputs: 115 ; failed runs: 45
+[PASS] T1   at least 110 run outputs are kept
+[PASS] T1   at least 40 failed runs are kept
+[PASS] T1   every failed run is listed in FAILED_RUN_MANIFEST.csv with its digest
+       chapters in which two run outputs share a digest: ['ch59']
+[FAIL] T1   no two run outputs of one chapter have the same digest
+
+== T2 every failed run is accounted for ==
+       records found: 47 ; failed runs without a record: [('ch08', 2, 1)]
+[FAIL] T2   every failed run is named by a Record of run K section (none unrecorded)
+
+== T3 the last run of each chapter is the run of record ==
+       chapters: 63 ; last run without ALL CRITERIA MET: [('ch04', 2), ('ch63', 1)]
+[FAIL] T3   the last run of at least 98 per cent of the chapters says ALL CRITERIA MET
+
+== T4 causes recorded ==
+       records: 47 ; by class: {'numerical': 20, 'instrument defect': 15, 'registration error': 18, 'registered statement rejected': 11, 'launcher failure': 1} ; unclassified: 6 ; only 'registered statement rejected': 2
+       failed runs per chapter (most): [('ch19', 3), ('ch08', 2), ('ch35', 2), ('ch40', 2), ('ch60', 2), ('ch61', 2), ('ch03', 1), ('ch06', 1), ('ch12', 1), ('ch13', 1)]
+[FAIL] T4   at least 90 per cent of the records carry at least one class
+[PASS] T4   records with an instrument defect or a registration error outnumber records classified only as a rejected statement
+
+CRITERIA NOT MET: 4 failure(s)

@@ -1,0 +1,172 @@
+# SN Ia Host Galaxy Mass Step — SDT Analysis
+
+> Tests whether the 0.04 mag mass step has a
+> displacement-field explanation.
+> WARNING: This is the weakest test. Honest assessment.
+
+## 1. The Observed Mass Step
+
+```
+Pantheon+ (Brout et al. 2022):
+
+  SN Ia in hosts with log(M*/Msun) > 10 are on average
+  0.040 ± 0.016 mag BRIGHTER (after standardization)
+  than SN Ia in lower-mass hosts.
+
+  This is known as the 'mass step' and is usually treated
+  as a nuisance systematic in cosmological analyses.
+```
+
+## 2. Mechanism A: Velocity Dispersion (z_env)
+
+SDT says: the host galaxy's internal displacement field
+adds an extra z at the SN emission site.
+
+z_env = (sigma_v / c)^2   (bridge law: z = v^2/c^2)
+
+```
+Host Type                  log(M*)     sig_v         z_env     k_env
+--------------------------------------------------------------------
+Low-mass spiral                9.5        50     2.782e-08      5996
+Milky Way analogue            10.6       110     1.346e-07      2725
+High-mass elliptical          11.0       200     4.451e-07      1499
+Cluster elliptical            11.5       300     1.001e-06       999
+```
+
+### Predicted mass step from velocity dispersion:
+
+```
+delta_z    = z_env(high) - z_env(low)
+           = 4.451e-07 - 2.782e-08
+           = 4.172e-07
+
+At z_galaxy = 0.10:
+delta_mu   = (5/ln10) × delta_z / z_galaxy
+           = 9.060e-06 mag
+
+Observed:    0.040 mag
+Ratio:       2.27e-04
+
+VERDICT: Mechanism A produces a mass step that is
+         4415 TIMES TOO SMALL.
+         Velocity dispersion z_env does NOT explain
+         the mass step.
+```
+
+## 3. Mechanism B: Galaxy Displacement Field (kappa_galaxy)
+
+The galaxy's aggregate displacement field at the SN location:
+
+kappa_galaxy = R_galaxy × z_galaxy_surface
+z_surface = (v_circ / c)^2
+
+```
+Host Type                   v_circ     z_surface    R_eff(m)    kappa(m)
+------------------------------------------------------------------------
+Low-mass spiral                120     1.602e-07   9.257e+19   1.483e+13
+Milky Way analogue             220     5.385e-07   3.086e+20   1.662e+14
+High-mass elliptical           300     1.001e-06   4.629e+20   4.635e+14
+Cluster elliptical             400     1.780e-06   7.714e+20   1.373e+15
+```
+
+### Predicted mass step from galaxy kappa:
+
+```
+At SN location r = 5 kpc:
+  z_extra(low-mass)  = kappa_low  / r_SN = 9.613e-08
+  z_extra(high-mass) = kappa_high / r_SN = 3.004e-06
+  delta_z = 2.908e-06
+
+At z_galaxy = 0.10:
+  delta_mu = 6.315e-05 mag
+
+Observed:     0.040 mag
+Ratio:        1.58e-03
+
+VERDICT: Mechanism B also produces a mass step that is
+         633 TIMES TOO SMALL.
+         Galaxy displacement field at the SN location
+         does NOT explain the mass step.
+```
+
+## 4. Mechanism C: Different Local κ (Environment Density)
+
+The most natural SDT explanation:
+SN Ia in massive galaxies sample denser environments
+→ higher local matter density → more occlusion → lower κ → lower H₀_local.
+
+Lower κ means photons from these SN traverse LESS compression
+per unit distance → they appear CLOSER → BRIGHTER.
+
+```
+If SN Ia in low-mass hosts see H0_eff = 73.5 km/s/Mpc
+and SN Ia in high-mass hosts see H0_eff = 71.5 km/s/Mpc
+
+delta_mu = 5 log10(H0_low / H0_high)
+         = 5 log10(73.5/71.5)
+         = 0.0599 mag
+
+Observed: 0.040 mag
+Ratio:    1.498
+
+Required H0 split for 0.040 mag step:
+  H0_low_mass  = 73.68 km/s/Mpc
+  H0_high_mass = 72.33 km/s/Mpc
+  delta_H0     = 1.34 km/s/Mpc
+
+Required kappa contrast:
+  delta_kappa / kappa = 0.0183
+                      = 1.83%
+
+Is a 1.83% variation in local kappa plausible?
+  H0 tension range: 67.4 to 73.0 → 7.7% variation
+  Required for mass step: 1.83% variation
+  This is 23.70% of the full H0 tension range.
+```
+
+**VERDICT**: Mechanism C is PLAUSIBLE. A 1.83% κ variation between
+low-mass and high-mass host environments would explain
+the mass step as a real environmental effect, not a
+nuisance systematic.
+
+## 5. Honest Assessment
+
+```
+Mechanism A (velocity dispersion z_env):     TOO SMALL by ~10^5×
+Mechanism B (galaxy displacement field):     TOO SMALL by ~10^3×
+Mechanism C (local kappa variation):         PLAUSIBLE
+
+The mass step CANNOT be explained by direct displacement-field
+z-offsets at the SN emission site (Mechanisms A and B). The
+extra z is too small by many orders of magnitude.
+
+However, Mechanism C — the same kappa-gradient mechanism that
+SDT uses to explain the Hubble tension — naturally predicts
+that SN Ia in denser environments (higher-mass hosts) see a
+slightly different effective H0 than SN in underdense environments.
+
+The required kappa variation (1.83%) is small compared to the full
+Hubble tension range (7.7%), making it physically reasonable.
+
+CAVEAT: This is a qualitative argument, not a quantitative
+prediction. SDT does not yet provide a formula for kappa(rho_matter)
+that would predict the mass step from first principles.
+This is an OPEN PROBLEM.
+```
+
+## 6. What's Needed to Close This
+
+```
+1. A derived relation kappa(rho_matter) from the SDT lattice
+   framework. This requires:
+   - The occlusion integral over all matter in a galaxy
+   - The mapping from occlusion deficit to effective kappa
+
+2. Per-SN Pantheon+ data with host galaxy stellar mass
+   and velocity dispersion metadata.
+
+3. Direct correlation test: Hubble residuals vs host
+   galaxy velocity dispersion (not just mass step).
+   If SDT is correct, residuals should correlate with
+   sigma_v^2 (= z_env), not just with M* alone.
+```

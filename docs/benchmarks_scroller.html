@@ -116,8 +116,8 @@
       <hr class="opening__rule">
       <p class="opening__desc">Every claim in SDT must survive a single executable. The benchmark
       suite pulls its values — from the hydrogen spectrum to a binary pulsar's decay — out of
-      <em>laws.hpp</em> and grades each against experiment. The live B01–B38 suite reports 66 earned
-      predictions, 19 identities and three PENDING note-only rows. This guided walkthrough explains
+      <em>laws.hpp</em> and grades each against experiment. The live B01–B38 suite reports 59 of 62 earned
+      predictions passed, 29 identities, four CALIBRATED rows and five PENDING note-only rows. This guided walkthrough explains
       B01–B29: what each test was for, what it showed, and where its result is used.</p>
       <p class="opening__author">James Christopher Tyndall — Melbourne, Australia</p>
       <nav class="opening__nav" aria-label="Contents">
@@ -253,14 +253,16 @@
       <div class="chapter__num">The verdict</div>
       <h2 class="chapter__title">What the suite establishes — and what it still owes</h2>
       <div class="board" id="board2"></div>
-      <p>The current B01–B38 executable reports <strong>66/66 earned predictions passed</strong>,
-      19 consistency identities, zero calibrated rows and three PENDING note-only rows. B37 is a
+      <p>The current B01–B38 executable reports <strong>59/62 earned predictions passed</strong>,
+      29 consistency identities, four calibrated rows and five PENDING note-only rows; three PENDING
+      rows (Mars, Uranus and Neptune oblateness) are open and stay in the denominator. B37 is a
       standing prediction without a measured response corpus and is not tallied.</p>
       <div class="aside">
         <div class="aside__title">The remaining debts, kept on the wall</div>
         <p><strong>B11 — planetary oblateness J2.</strong> The GOM41 Q1 resistance boundary puts
-        Earth and Jupiter within 3%, but the registered six-planet corpus fails. Native interior
-        resistance profiles for Mars and the giant planets remain unresolved.</p>
+        Earth, Jupiter and Saturn within 3%; Mars (+22.0%), Uranus (+65.5%) and Neptune (−18.0%) miss,
+        and the registered six-planet corpus fails (RMS 29.2%). Native interior resistance profiles
+        for Mars and the ice giants remain unresolved.</p>
         <p><strong>B18 — He-4 contact.</strong> The FLM07 proton boundary is derived; the separate
         helium contact row still uses the shared form <b>2R_p</b> and remains PENDING despite its
         0.44% correspondence.</p>
@@ -397,10 +399,10 @@ const BENCH = [
   applied:'Mercury’s precession later runs <em>backwards</em> in B27 to reconstruct c itself.'}},
 {id:'B11',dom:'Gravity',cert:'PENDING',title:'Planetary oblateness J2 — resistance boundary',
  facets:{
-  was:'Earth and Jupiter J2 from measured shape, spin and one timed satellite orbit.',
+  was:'J2 of Earth, Jupiter, Mars, Saturn, Uranus and Neptune from measured shape, spin and one timed satellite orbit each.',
   for:'To remove body-source mass and test a convergence-boundary balance.',
-  showed:'Earth <b>0.91%</b> and Jupiter <b>2.11%</b>, but the six-planet GOM41 corpus fails.',
-  learned:'The boundary equation works for two rows; Mars and the giants still need native interior resistance profiles.',
+  showed:'Earth <b>0.91%</b>, Jupiter <b>2.11%</b> and Saturn <b>2.87%</b> within 3%; Mars <b>21.99%</b>, Uranus <b>65.53%</b> and Neptune <b>17.97%</b> miss, so the six-planet GOM41 corpus fails (RMS 29.2%).',
+  learned:'The boundary equation closes three rows; it takes the measured polar radius, so it is a two-point balance and not an interior profile. Mars and the ice giants still need native interior resistance profiles.',
   meant:'Passing selected planets does not promote a class model that fails its registered whole range.',
   applied:'GOM41 Q1 remains PENDING until the phase-resistance equation of state closes the corpus.'}},
 {id:'B12',dom:'Stellar',cert:'CONSTRUCTION',title:'Stellar structure — zk²=1 across five stars',
@@ -419,12 +421,12 @@ const BENCH = [
   learned:'Redshift here is a ruler comparison (CR07 octaves), set by the temperature ratio between epochs.',
   meant:'No expansion is invoked; the CMB is the already-arrived residue of the Clearing.',
   applied:'Grounds the Release-Cascade cosmology and the pressure-gradient (not Doppler) redshift picture.'}},
-{id:'B14',dom:'Galactic',cert:'COMPUTED',title:'Galactic rotation — the flat-onset radius',
+{id:'B14',dom:'Galactic',cert:'CALIBRATED',title:'Galactic rotation — the flat-onset radius',
  facets:{
   was:'The flat-rotation onset rule <b>R_flat ≈ 2.5 R_d</b> across four disk galaxies.',
   for:'A coarse single-ratio check of where rotation curves go flat.',
-  showed:'All four within <b>4.2%</b> (against the registered 12% bar).',
-  learned:'The onset radius is geometric; GD05/M4 computes the SPARC comparison at RMS 23.8%, a coarse whole-sample result rather than a precision rotation-curve fit.',
+  showed:'All four within <b>4.2%</b> (against a 12% bar; under the registered 1% bar three of the four fail).',
+  learned:'The ratio 2.5 has no derivation on record, so the rows are CALIBRATED and not earned. The onset radius is geometric; GD05/M4 computes the SPARC comparison at RMS 23.8%, a coarse whole-sample result rather than a precision rotation-curve fit.',
   meant:'The registered comparison tests convergence geometry without importing dark matter; its residual remains explicit.',
   applied:'The full mechanism lives in <b>galactic.hpp</b> (interior/exterior koppa, bar streak, CMB self-lensing).'}},
 {id:'B15',dom:'Cosmology',cert:'COMPUTED',title:'BAO standing-equilibrium ruler',
@@ -443,14 +445,14 @@ const BENCH = [
   learned:'Number-density dilution adds the extra T factor to diffusion; it is not T^0.5 at fixed pressure.',
   meant:'One lock-weighted mechanical cross-section drives all three monatomic transport channels.',
   applied:'<b>law_IV::transport::monatomic_state</b>; dense-liquid water remains separate.'}},
-{id:'B17',dom:'EM',cert:'DERIVED',title:'The electron g-factor',
+{id:'B17',dom:'EM',cert:'PENDING',title:'The electron g-factor',
  facets:{
   was:'The electron magnetic g-factor, 2.00232.',
   for:'To get the leading anomaly from vortex geometry.',
-  showed:'<b>g = 2(1+α/2π) = 2.00232</b> — within <b>0.0002%</b>.',
-  learned:'The Schwinger term is the first wake correction to the bare g=2 of a circulating vortex.',
-  meant:'The most precisely measured number in physics is reached at leading order from geometry.',
-  applied:'Validates the wake-multipole picture (ℓ=2) that APS04/PPT06 build the magnetic moment on.'}},
+  showed:'<b>g = 2(1+α/2π) = 2.00232</b> — within <b>0.0002%</b>; the bare g = 2 sits 0.116% away, so the bar is now 0.01%.',
+  learned:'The Schwinger term is the first wake correction to the bare g=2 of a circulating vortex; its coefficient 1/2π is taken from the standard account and its native derivation is owed.',
+  meant:'The form matches at leading order; the native coefficient is the debt.',
+  applied:'Points to the wake-multipole picture (ℓ=2) that APS04/PPT06 build the magnetic moment on, once the coefficient is derived.'}},
 {id:'B18',dom:'Nuclear',cert:'MIXED',title:'The proton radius — the W+1 rule',
  facets:{
   was:'The proton boundary radius, the effective winding, and the He-4 radius.',
@@ -579,7 +581,11 @@ const CHECKS = {
       ['J0737−3039A/B dP_b/dt [s/s]',-1.24781e-12,-1.24792e-12,0.0089,1.0]],
  B10:[['Mercury precession [″/c]',42.9914,42.98,0.0265,0.5],['Solar deflection [″]',1.75169,1.7505,0.0680,0.5]],
  B11:[['Earth J2 (GOM41 Q1)',0.00109248,0.00108263,0.9098,3.0],
-      ['Jupiter J2 (GOM41 Q1)',0.0143865,0.0146964,2.1087,3.0]],
+      ['Jupiter J2 (GOM41 Q1)',0.0143865,0.0146964,2.1087,3.0],
+      ['Mars J2 (GOM41 Q1)',0.00239156,0.00196045,21.9903,3.0],
+      ['Saturn J2 (GOM41 Q1)',0.0167651,0.016298,2.8658,3.0],
+      ['Uranus J2 (GOM41 Q1)',0.00553447,0.00334343,65.5327,3.0],
+      ['Neptune J2 (GOM41 Q1)',0.00279819,0.003411,17.9657,3.0]],
  B12:[['Sun zk²',1,1,0.0000,0.001],['Sirius A zk²',1,1,0.0000,0.001],['α Cen A zk²',1,1,0.0000,0.001],
       ['Procyon A zk²',1,1,0.0000,0.001],['Vega zk²',1,1,0.0000,0.001]],
  B13:[['CMB redshift z',1099.72,1089,0.9840,1.0]],
@@ -589,7 +595,7 @@ const CHECKS = {
  B16:[['Ar viscosity curve score',0.902853,1,9.7147,10.0],
       ['Ar conductivity curve score',0.903254,1,9.6746,10.0],
       ['Ar self-diffusion curve score',0.921909,1,7.8091,10.0]],
- B17:[['electron g-factor',2.00232,2.00232,0.0002,0.12]],
+ B17:[['electron g-factor',2.00232,2.00232,0.0002,0.01]],
  B18:[['R_p (W+1) [m]',8.41236e-16,8.414e-16,0.0195,0.08],['He-4 = 2R_p [m]',1.6828e-15,1.6755e-15,0.4357,0.5]],
  B19:[['β-decay Q [MeV]',0.782333,0.782,0.0426,0.08]],
  B20:[['Hydrogen zk²',1,1,0.0000,0.001],['Earth orbit zk²',1,1,0.0000,0.001]],

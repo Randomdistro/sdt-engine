@@ -12,7 +12,7 @@
 2. **Why does it matter?** — The transition state becomes a geometric saddle of the wake field, not a quantum resonance. It consumes CH01 bond well-depths and CH04 geometries, feeds the downstream chemical-kinetics investigations, and ties to TD05 free-energy accounting. If it holds, reaction barriers stop being quantum resonances and become locatable points in a classical wake field.
 3. **How will we find out?** — Gated phases in §④: ΔH bond-energy bookkeeping, then Eₐ as a 1-D wake-cost saddle, then catalysis as improved cancellation along the path, then a novel Eₐ/BEP-slope call — the native mechanism is built before any orbital correlation diagram or `atomic::`/rival is invoked.
 4. **What would prove us wrong?** — §⑧ numeric triggers: ΔH signs or magnitudes wrong across the reaction set, or barriers that cannot be located without an orbital correlation diagram (a quantum TS).
-5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN).
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN).
 
 ## ⓪⁺ Anti-Tautology Firewall *(the load-bearing constraint)*
 
@@ -119,7 +119,7 @@ accounting), EMC03 (mis-cancellation surplus is the barrier).
 ```markdown
 ## Pre-Run Commitments — CH05
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: [0 or list each param — max per §⑤]
 - Engine namespaces: EMC04 electropause, CH01 wake balance, no MO/LCAO
 - Phase thresholds (committed before run): P1 ΔH sign correct for >=12 reactions, magnitude within 15% · P2 correct Eₐ ORDERING across a homologous series + Hammond early/late TS correlation native · P3 catalysis: Eₐ drops, ΔH unchanged for one model reaction · P4 novel Eₐ or BEP-line slope within committed tol
@@ -133,7 +133,7 @@ accounting), EMC03 (mis-cancellation surplus is the barrier).
 | Phase 0 sanity check fails | Fix units/engine refs; verify `laws.hpp` symbols | STOP — report blocker | Fit to target |
 | Native mechanism off > committed % | Alternative route in §④; document ADJ-### | **OPEN** or **KILL** hypothesis | RETRO-PASS |
 | Saddle won't appear from path geometry | re-parametrise the reconfiguration coordinate; check mis-cancellation cost (EMC03) | **OPEN** barrier-as-saddle | read Eₐ off measurement, call it predicted |
-| Rivals match but SDT doesn't beat | Label **DEGENERATE** honestly | — | Claim Class A |
+| A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 | Upstream dependency missing (FLM10, etc.) | **DEFER** phase; cite dependency ID | — | Fake PASS |
 
 ### Allowed adjustments

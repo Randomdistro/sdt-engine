@@ -1,3 +1,40 @@
+# NSEQ18 — Universal interstitial sequencer (specification rewritten 2026-10-12)
+
+**Author:** J. C. Harvey, Melbourne. Rewritten at Harvey's direction: prompts carry new data; the packing sequencer is understood before grammar work. The previous specification is kept below the line.
+
+## 1. State after the reset (2026-10-10)
+**Deferred:** a universal sequencer for 221 nuclides with contact-rotation, wake and observable gates; same construction dependency as NSEQ16.
+
+## 2. New data and what it teaches (2026-10-10 to 2026-10-12)
+- **The live sequencer was driven by node on 2026-10-10/11** (records: NP17 addendum; `NP17_.../CASCADE_ASSESSMENT_2026-10-11.md`; PPT18 stage 1). Findings:
+  - The light seeds ²H, ³H and ³He are **CALIBRATED(8/9)**, fitted exactly to their own B, μ and Q.
+  - The zero-fit universal ledger (wake contact coupling × αħc/R_p × contraction) is **B6 on all 250 stable nuclides**: right order, with ratio CV 8.5%, missing a factor that grows with coordination.
+  - **Wrong-sign binding** in 23 of 173 isotope steps: contraction multiplies binding and also lowers the wake coupling.
+  - Every A ≥ 4 graph is **one α 4-ring plus a tree** (E = A).
+  - μ(⁴He) = 1.65 μN against 0.
+  - The H1 nucleon envelope reaches **1.085 R_p**, using untraced constants (0.06 fm strand, 5.28 fm helix). Canon-consistent sizes (PPT18 stage 2a): R = 0.444 fm and a = 0.397 fm for (4,5).
+  - **No EC grammar:** ⁷Be, ¹¹C and ⁸B are refused.
+- Radii from the live construction: NP12f round 2 (running 2026-10-12). It will report whether the built nuclei carry size.
+
+## 3. Next round (registered order)
+1. Drive the registered gates by node over the full set (the cascade instrument `nseq_cascade_1.js` is a template).
+2. **Add, registered now:**
+   - O1, binding increments must be positive along every isotope chain. Currently 23 of 173 are wrong-sign.
+   - O2, μ(even-even) = 0. ⁴He currently gives 1.65 μN.
+   - O3, radii from NP12f round 2.
+3. Repairs only as proposals.
+
+## Prohibitions
+- No census over candidate predictors.
+- Grammar counts are not evidence (NP24).
+- No data substitution without a label.
+- Release is read, never edited (proposals only).
+- The word "charge" is not used.
+
+---
+
+## Previous specification (kept as written)
+
 # NSEQ18 — Universal Interstitial Nuclear Sequencer
 
 **Author:** James Christopher Tyndall, Melbourne  

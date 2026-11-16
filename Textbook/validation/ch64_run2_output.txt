@@ -1,0 +1,49 @@
+
+== V1 known answers ==
+[PASS] V1   the extractor returns (5, 1), 'a title' and 'the rest of it.'
+[PASS] V1   the mapper returns {K} for 'no contact-response operator is derived'
+[PASS] V1   the mapper returns {V} for 'the citations were not checked line by line'
+[PASS] V1   the topological sort of K, T, N, C, P returns that order
+[PASS] V1   the sort rejects a graph with a cycle
+
+== T1 completeness ==
+       chapters: 63 ; with residual ids: 63 ; without: []
+       residuals extracted: 330 ; chapters with irregular ids: []
+       chapters without the phrase 'Not established': []
+[PASS] T1   at least 61 of the 63 chapters have residual ids R(n.k)
+[PASS] T1   at least 250 residuals are extracted
+[PASS] T1   the ids are unique within each chapter (no duplicate or foreign ids)
+[PASS] T1   at least 61 chapters contain the phrase 'Not established'
+
+== T2 mapping to the closure tasks ==
+       residuals mapped to at least one task or V: 185 of 330 (0.561)
+       residuals per task: {'A': 22, 'B': 18, 'C': 33, 'K': 33, 'N': 28, 'P': 25, 'S': 12, 'V': 78, 'Z': 8}
+RECORDED REJECTION (run 1 criterion kept): the 70 per cent coverage of the keyword mapper
+[PASS] T2   the registered statement (at least 70 per cent map to a task or V) is rejected: found 0.561
+       POST-RUN exploration (report only): unmapped residuals per chapter: {1: 5, 2: 1, 3: 2, 4: 2, 5: 1, 6: 2, 7: 1, 8: 3, 9: 1, 10: 2, 11: 6, 12: 6, 13: 5, 14: 2, 15: 5, 16: 4, 17: 3, 18: 4, 19: 3, 21: 1, 22: 3, 23: 2, 24: 2, 25: 2, 26: 1, 27: 2, 28: 1, 29: 3, 31: 1, 32: 3, 33: 4, 34: 2, 35: 3, 36: 3, 37: 1, 38: 2, 39: 2, 40: 2, 41: 1, 42: 4, 43: 1, 44: 2, 46: 1, 48: 1, 49: 3, 50: 1, 51: 3, 52: 4, 53: 1, 54: 3, 55: 3, 56: 2, 57: 1, 58: 3, 59: 2, 60: 3, 61: 4, 62: 1, 63: 3}
+[PASS] T2   each of the 8 closure tasks has at least 5 residuals
+
+== T3 the nature of the open items ==
+       nature counts: {'derivation gap': 181, 'proposal': 11, 'data gap': 14}
+       proposal: Ch6 R6.5 radiation constant digits
+       proposal: Ch7 R7.1 the quoted polynomial
+       proposal: Ch8 R8.5 `step_locus` near the centre
+       proposal: Ch11 R11.6 a stale comment
+       proposal: Ch19 R19.5 the capacity function
+       proposal: Ch21 R21.4 the engine's capacity function
+       proposal: Ch44 R44.6 stored constants (proposal to the author, canon untouched)
+       proposal: Ch45 R45.5 engine comment (proposal to the author, canon untouched)
+       proposal: Ch49 R49.6 stored alpha binding (proposal to the author, canon untouche
+       proposal: Ch54 R54.5 stored scales (proposal to the author, canon untouched)
+       proposal: Ch57 R57.4 unguarded domains
+[PASS] T3   at least 50 per cent of residuals are derivation gaps by keyword
+[PASS] T3   at least 10 residuals are proposals to the author and are written to ENGINE_PROPOSALS.csv
+[PASS] T3   RESIDUAL_LEDGER.csv has one line per residual
+
+== T4 the execution order ==
+       topological order: ['K', 'T', 'N', 'C', 'P']
+[PASS] T4   the graph is acyclic
+[PASS] T4   its topological order is K, T, N, C, P
+[PASS] T4   every task other than K has K as a prerequisite
+
+ALL CRITERIA MET: 0 failure(s)

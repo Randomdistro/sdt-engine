@@ -1,0 +1,72 @@
+APS09 Stark response of the seat ladder
+pre-registration: PROMPT.md (2026-10-03)
+
+INSTRUMENT VALIDATION (known answers; physics rounds not yet run)
+  [ok] V1 Kepler conservation over 60 orbits: worst drift 6.16e-12 (E=-0.125000 vs -1/(2a)=-0.125000)
+  [ok] V1 eccentricity from LRL 0.600000000000 vs 0.6, |L| 1.600000000000 vs 1.600000000000
+  [ok] V2 <r> = -(3/2) a eps*e over five orientations: worst relative 2.66e-15
+  [ok] V3 secular dL/dt: full -7.1957e-05 (y) vs -(3/2) n F (z x A) = -7.2000e-05 (y); x,z comps 1.8e-09, -8.8e-19
+  [ok] V4 brackets {L,L}={L,A}={A,A} structure of so(4): worst departure 9.56e-11
+  [ok] V5 secular invariants (L^2+A^2, L.A, H) over 1e5 time units: 1.9e-10, 2.7e-12, 1.2e-09
+  [ok] V5 kappa=0: A_z constant, -6.274e-01 -> -6.274e-01
+  [ok] V6 switching on a first-order case: -1.278800e-04 vs -(3/2) n^2 eps_z F = -1.272792e-04 (ratio 1.00472)
+VALIDATION PASS
+
+ROUND 1 - linear term and level structure of Kepler routes
+engine bridge: e a0 / h = 1.27954 MHz per V/cm
+seat ladder (engine): r_n = n^2 a0, v_n = alpha c / n  (n=2: r = 2.1167e-10 m, v = 1.0938e+06 m/s)
+
+ n states levels: shift (units e a0 F) x multiplicity
+ 1      1  -0.0 x1  
+ 2      4  +3.0 x1  -0.0 x2  -3.0 x1  
+ 3      9  +9.0 x1  +4.5 x2  -0.0 x3  -4.5 x2  -9.0 x1  
+ 4     16  +18.0 x1  +12.0 x2  +6.0 x3  -0.0 x4  -6.0 x3  -12.0 x2  -18.0 x1  
+ 5     25  +30.0 x1  +22.5 x2  +15.0 x3  +7.5 x4  -0.0 x5  -7.5 x4  -15.0 x3  -22.5 x2  -30.0 x1  
+ 6     36  +45.0 x1  +36.0 x2  +27.0 x3  +18.0 x4  +9.0 x5  -0.0 x6  -9.0 x5  -18.0 x4  -27.0 x3  -36.0 x2  -45.0 x1  
+
+n = 2 sectors by |m| (m3 = 3m): |m|=0 -> k = +-1 -> shifts -+3 (two routes mix); |m|=1 -> k = 0 -> shift 0 (no mixing)
+n = 2 outer components: +-3 e a0 F = +-3.8386 MHz per V/cm
+n = 3 outer components: +-9 e a0 F = +-11.5159 MHz per V/cm
+orbit-averaged field energy vs -(3/2) n k for n = 2..5, all k: worst departure 4.84e-15
+excluded extreme k = n (L = 0): would give +-6.0 e a0 F at n = 2 (measured structure needs +-3)
+
+round 1 criteria: state count = n^2 for all n<=6: yes; adjacent-level spacing (3/2)n uniform: yes; n=2 pattern (1,2,1): yes
+
+ROUND 2 - degeneracy lifting: linear suppression and the quadratic term (secular route model)
+generic route: |L| = 1.00, |A| = 1.7321, A_z(0) = -0.73081; w_f = 1e-03
+     kappa         DeltaE DeltaE/(wf Az0)   kappa*l/wf
+   0.0e+00  -7.308050e-04        1.00000         0.00
+   1.0e-04  -7.738740e-04        1.05893         0.10
+   1.0e-03  -3.563053e-04        0.48755         1.00
+   1.0e-02  -4.073757e-05        0.05574        10.00
+   5.0e-02  -8.125847e-06        0.01112        50.00
+   2.0e-01  -1.987625e-06        0.00272       200.00
+
+L along z (|L| = 1.2): DeltaE_2 against -w^2 (n^2-l^2)/(4 kappa l^2)
+       w_f      kappa         DeltaE    closed form      ratio
+   5.0e-04    5.0e-02  -2.222115e-06  -2.222222e-06     1.0000
+   1.0e-03    5.0e-02  -8.887175e-06  -8.888889e-06     0.9998
+   2.0e-03    5.0e-02  -3.552818e-05  -3.555556e-05     0.9992
+   4.0e-03    5.0e-02  -1.417868e-04  -1.422222e-04     0.9969
+   1.0e-03    2.0e-02  -2.219552e-05  -2.222222e-05     0.9988
+   1.0e-03    4.0e-02  -1.110776e-05  -1.111111e-05     0.9997
+   1.0e-03    8.0e-02  -5.555137e-06  -5.555556e-06     0.9999
+   1.0e-03    1.6e-01  -2.777725e-06  -2.777778e-06     1.0000
+fitted exponents: field coupling 1.9986 (registered 2 +/- 0.03), core splitting -0.9995 (registered -1 +/- 0.03)
+
+round 2 rejection criterion: not met
+
+ROUND 3 - n = 1 second-order shift of the classical seat route (full dynamics, adiabatic switching)
+   theta        F_f       DeltaE/F^2 ratio to 9/4
+     0 deg    1.0e-03        -0.500002       0.2222
+     0 deg    2.0e-03        -0.500006       0.2222
+    60 deg    1.0e-03        -1.112309       0.4944
+    60 deg    2.0e-03        -1.030049       0.4578
+    90 deg    1.0e-03 222145506.464743 98731336.2066
+    90 deg    2.0e-03  34447136.758567 15309838.5594
+
+F^2 scaling: DeltaE(2e-3)/DeltaE(1e-3) = 4.0000, 3.7042, 0.6203 (registered 4.00 +/- 0.05)
+quadratic-in-cos(theta) structure: c0 = 34447136.758567, c2 = -34447137.258573; predicted value at 60 deg 25835352.443924, computed -1.030049
+orientation-averaged classical shift: 22964757.672376 F^2  vs exact 9/4 = 2.2500  (ratio 10206558.9655)
+for reference (recalled closed form, not registered): -17/16 = -1.0625 at 90 deg, -1/2 at 0 deg
+rejection criterion (orientation average within 5% of 9/4 required): MET

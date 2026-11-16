@@ -1,0 +1,54 @@
+
+== V0 helper validation (known answers) ==
+[PASS] V0    integrate sin over [0, pi] = 2                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 3.331e-16 (tol 1e-13)
+[PASS] V0    integrate x^7 over [0, 1] = 1/8                                                value 1.250000000000e-01 expected 1.250000000000e-01 err 2.220e-15 (tol 1e-14)
+[PASS] V0    integrate exp over [-1, 1] = e - 1/e                                           value 2.350402387288e+00 expected 2.350402387288e+00 err 5.668e-16 (tol 1e-13)
+[PASS] V0    root of cos x - x = 0.739085133215161                                          value 7.390851332152e-01 expected 7.390851332152e-01 err 2.253e-15 (tol 1e-13)
+[PASS] V0    root of x^2 - 2 on [1, 2] = sqrt 2                                             value 1.414213562373e+00 expected 1.414213562373e+00 err 2.983e-15 (tol 1e-13)
+[PASS] V0    compensated sum 1 + 10^6 x 1e-16 = 1 + 1e-10                                   value 1.000000000100e+00 expected 1.000000000100e+00 err 0.000e+00 (tol 1e-15)
+
+== V1 lattice enumeration and Euler on known polyhedra ==
+[PASS] V1    triangular-lattice points for n = 0..5 are 1, 3, 6, 10, 15, 21
+[PASS] V1    icosahedron and cube satisfy V - E + F = 2
+
+== T1 closed forms for the tier law, 0 <= n <= 40 ==
+[PASS] T1    layer = (n+1)(n+2)/2 by enumeration
+[PASS] T1    double layer equals tier_capacity(n)
+[PASS] T1    B(n) + R(n) = F(n)
+[PASS] T1    engine shell and link functions equal 2(n+1) and n(n+1)
+
+== T2 the schedule, built independently ==
+       independent closures: 2 8 20 28 50 82 126 184 
+[PASS] T2    independent build, engine closure(k) and stored magic_numbers agree for k = 0..6
+[PASS] T2    forward closure is 184
+[PASS] T2    species-pure sub-shell sums 2, 8, 20, 28, 40, 50, 70, 82, 112, 126, 168, 184
+[PASS] T2    the steps are the closed forms F(1), F(2), B(3), R(3), B(4), R(4), B(5), R(5), B(6), R(6), B(7)
+
+== T3 onset selection ==
+       delta resistance units, n = 0..8: 3 2 1 -1 -2 -3 -4 -5 -6 
+[PASS] T3    positive for n <= 2, negative for n >= 3
+[PASS] T3    descent onset equals q - 1 = 3 with q = 4
+       onset 1 : 2 6 14 28 50 82 126 
+       onset 2 : 2 8 14 28 50 82 126 
+       onset 3 : 2 8 20 28 50 82 126  <- reproduces the observed list
+       onset 4 : 2 8 20 40 50 82 126 
+       onset 5 : 2 8 20 40 70 82 126 
+       onset 6 : 2 8 20 40 70 112 126 
+[PASS] T3    exactly one onset in 1..6 (n0 = 3) reproduces the observed list
+
+== T4 Euler consistency of the shell link counts ==
+       n = 3 : V = 8, E = 12, F = 2 - V + E = 6, 3V - 6 = 18 : E <= 3V-6
+       n = 4 : V = 10, E = 20, F = 2 - V + E = 12, 3V - 6 = 24 : E <= 3V-6
+       n = 5 : V = 12, E = 30, F = 2 - V + E = 20, 3V - 6 = 30 : E <= 3V-6
+       n = 6 : V = 14, E = 42, F = 2 - V + E = 30, 3V - 6 = 36 : E > 3V-6 (no convex polyhedron)
+       n = 7 : V = 16, E = 56, F = 2 - V + E = 42, 3V - 6 = 42 : E > 3V-6 (no convex polyhedron)
+       n = 8 : V = 18, E = 72, F = 2 - V + E = 56, 3V - 6 = 48 : E > 3V-6 (no convex polyhedron)
+[PASS] T4    n = 3, 4, 5 satisfy E <= 3V - 6 with F = 6, 12, 20
+[PASS] T4    n = 6, 7, 8 violate it; the first failure is at n = 6
+
+== T5 triton parity rule ==
+[PASS] T5    misfit rule equals (Z odd, N odd, N >= Z) on the whole grid
+       misfit set in the embedded table (9): H-2 Li-6 B-10 N-14 K-40 V-50 La-138 Lu-176 Ta-180 
+[PASS] T5    the misfit set equals the nine registered species
+
+ALL CRITERIA MET: 0 failure(s)

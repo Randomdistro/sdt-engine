@@ -1,3 +1,27 @@
+# QM08 — Quantum eraser (specification rewritten 2026-10-12)
+
+**Author:** J. C. Harvey, Melbourne. Rewritten at Harvey's direction: prompts carry new data, and errors inform the mechanism. The previous specification and its audit blocks are kept below the line.
+
+## 1. State after the reset audit (2026-10-10)
+**G2, open: specification incomplete; no instrument run.** Only a reading ("subset selection over route-definite arrivals") is given. There is no arrival model per gating configuration and no tolerance, and the rejection criterion is not numeric.
+
+## 2. What opens it (registered order)
+1. The QM01/QM05 arrival and pair-correlation rules, written as a **generator of coincidence counts**: route-definite arrivals, sequential occupancy (FLM14), with no wavefunction.
+2. Visibility for each Kim et al. (2000) pairing, computed from the generator. Tolerance committed first.
+3. The single comparison.
+
+## 3. New data and links from the 2026-10-07 to 2026-10-12 work
+- FLM14 (rotating spation; electron positions sequential; Born = dwell time) supplies the native arrival picture the generator must use. No QM formalism is used as scaffolding (standing rule).
+
+## Prohibitions (all items in this batch)
+- No mechanism or functional form chosen to reach the anchors (2026-10-07 method rule).
+- Tolerances are committed before any value is computed.
+- No QM narration; no G or GM; the word "charge" is not used.
+
+---
+
+## Previous specification (kept as written)
+
 # QM08 — The Eraser Experiments Without Retrocausality
 
 > **Status:** OPEN — specification seed (benchmark-coverage alignment 2026-07-29; catalogue
@@ -33,3 +57,15 @@ QM05 (pair correlation).
 ## Benchmark linkage
 
 Catalogue row B57 · suite coverage roster · tally on computed number only.
+
+---
+
+## Audit correction 2026-10-05 (opening premise)
+
+**Finding:** The seed names no mechanism (only "subset selection over route-definite arrivals") and no committed tolerance, and its kill condition ("forces non-local ledger revision") is not a numeric trigger.
+
+**Correction:** Define the which-path selection model and state a visibility tolerance from the Kim et al. data before running.
+
+**Status:** OWED — model, data or derivation missing; requirement and tolerance recorded, nothing run.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

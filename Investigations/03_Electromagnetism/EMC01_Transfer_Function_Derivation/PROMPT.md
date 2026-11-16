@@ -106,7 +106,7 @@ Class A: P_eff derivation basis-derived, delete-test passes, Routes A≡C; engin
 ```markdown
 ## Pre-Run Commitments — EMC01 (§K-deepened)
 - Prompt completion target: [A|B|C]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT]
 - CALIBRATED budget: 0 (resolving whether P_eff is calibrated, not adding one)
 - Routes this session: A (derivation basis+delete-test) · C (electropause) · B (contamination quantify)
 - Root dependency to verify on file: R_p = (W+1)ℏ/(m_p c), laws.hpp:1093
@@ -126,3 +126,15 @@ Class A: P_eff derivation basis-derived, delete-test passes, Routes A≡C; engin
 ---
 
 *EMC01 · §K-deepened 2026-07-13 · the fitted-vs-derived question collapses to the W+1 R_p rule; f's global reading is cosmology-contaminated; label flags routed to CANON_FLAGS.*
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** Six of seven proofs pass on relations that follow from P_eff's definition (C = Zαħc by construction) so they check algebra, while the single falsifiable gate (G within 5×) fails.
+
+**Correction:** Relabel the six as IDENTITY/delete-test rows and gate on the one non-circular output.
+
+**Status:** ANNOTATED — label, status or tally corrected in the record; no re-score of earlier runs.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

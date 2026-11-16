@@ -156,3 +156,15 @@ PARTIAL (cleared by P1).
 
 *GOM12 · upgraded 2026-07-24 · one real question under the bookkeeping: does the ledger close —
 and if it closes by construction, say that instead. The fence stays up either way.*
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** The closure comparison uses a "factor-2 gate" on the convergence budget against L_sun, which any budget within an order-unity range passes.
+
+**Correction:** Gate closure at ≤ 20% and report the factor-2 tier as non-discriminating.
+
+**Status:** RULE RECORDED — corrected gate or definition applies to the next run; the earlier result is not re-scored and nothing was re-run.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

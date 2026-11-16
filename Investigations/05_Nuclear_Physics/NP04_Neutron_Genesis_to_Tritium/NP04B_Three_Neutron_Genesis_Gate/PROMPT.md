@@ -1,3 +1,30 @@
+# NP04B — Three-neutron genesis gate (specification rewritten 2026-10-12)
+
+**Author:** J. C. Harvey, Melbourne. Rewritten at Harvey's direction: prompts carry new data; the packing sequencer is understood before grammar work; errors inform the mechanism. The previous specification is kept below the line.
+
+## 1. State after the reset (2026-10-10)
+- **F0, energy:** Q(3n → t + e⁻ + ν̄) = Q_n + B(t) = 9.264334 MeV. A **construction** (a conservation identity of measured masses); it cannot fail.
+- **F0b, kinetics:** G2, open; no native rate.
+
+## 2. What the errors and new data teach
+- On the native list the bodies are protons and electrons. "Three free neutrons" is three p + e pairs, and t = 3p + 2e (NP17 reset: B(t; {3p, 2e}) = 6.917143 MeV).
+- **The genesis question re-posed natively:** what assembles 3p + 3e into t + e? The energy side is again an identity. Only a rate or route is testable.
+
+## 3. Next round (registered order)
+1. A native assembly route (contact sequence) for 3p + 2e on the live sequencer's open-chain triton (graph E = 2).
+2. A rate from the unlinking or lock barrier (shared with NP04A C and PPT09). Registered before any comparison.
+
+## Prohibitions
+- No form chosen to reach anchors (2026-10-07 rule).
+- No census of candidate cells.
+- No QM formalism as scaffolding.
+- No potential-energy bookkeeping for binding.
+- The legacy packer (`pack-nucleus.js`, NSEQ05-CONTROL-3) is not the construction; the live sequencer is `traction-gear-engine.js` (NSEQ18-WEB-1).
+
+---
+
+## Previous specification (kept as written)
+
 # NP04B — Three-Neutron Genesis Gate *(energetics PASS · kinetics UNRESOLVED)*
 
 > **Author:** J. C. Harvey, Melbourne. **Status:** SPEC (upgrade 2026-06-27).
@@ -12,7 +39,7 @@
 2. **Why does it matter?** — Stack position / downstream blockers (see `INVESTIGATION_STACK.md`).
 3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
 4. **What would prove us wrong?** — §⑧ falsification tests with numeric triggers.
-5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN).
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN).
 
 ## 1. Objective
 Test the forward genesis `3 free neutrons → triton (¹H nucleus) + e⁻ + ν̄ₑ` on **two separate gates that must not be conflated**:
@@ -79,7 +106,7 @@ The energy being available says nothing about the rate. F0b requires what SDT ha
 ```markdown
 ## Pre-Run Commitments — NP04B
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: [0 or list each param — max per §⑤]
 - Engine namespaces: NP01 grammar, law_III nuclear occlusion, ATOMICUS rules
 - Phase thresholds (committed before run): [commit per phase in RUN_LOG]
@@ -93,7 +120,7 @@ The energy being available says nothing about the rate. F0b requires what SDT ha
 | Phase 0 sanity check fails | Fix units/engine refs; verify `laws.hpp` symbols | STOP — report blocker | Fit to target |
 | Native mechanism off > committed % | Alternative route in §④; document ADJ-### | **OPEN** or **KILL** hypothesis | RETRO-PASS |
 | `z ≥ 1` in closure formula | Weak-field break (CR10); piecewise or exponential | **OPEN** that regime | Ignore break |
-| Rivals match but SDT doesn't beat | Label **DEGENERATE** honestly | — | Claim Class A |
+| A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 | Upstream dependency missing (FLM10, etc.) | **DEFER** phase; cite dependency ID | — | Fake PASS |
 
 ### Allowed adjustments

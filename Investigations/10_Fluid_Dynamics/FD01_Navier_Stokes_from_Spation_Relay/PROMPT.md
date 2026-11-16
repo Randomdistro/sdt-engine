@@ -12,7 +12,7 @@
 2. **Why does it matter?** — FD01 is the *root* of the entire FD branch (FD02–FD11). If NS is a borrowed axiom rather than a coarse-grained relay result, every downstream fluid investigation inherits the borrow; conversely a clean bijection makes viscosity (FD02), sound (FD05), and turbulence (FD04) all native consequences of one lattice.
 3. **How will we find out?** — Five gated phases (§④): write the discrete relay rule (P1) and Taylor/Chapman–Enskog expand it (P2) **before** declaring any NS term recovered; the term↔mechanism bijection (P2) is the core gate.
 4. **What would prove us wrong?** — §⑧, five falsifiers with real failure modes: a surplus leading-order term NS lacks (and not a defensible SDT-distinct prediction), a dropped term, `‖∇·v‖` finite as `Ma→0`, or the emitted `ν` disagreeing with FD02 by >10% — each a clean kill.
-5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN), per phase, no repainting a fired test.
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN), per phase, no repainting a fired test.
 
 **Domain**: Fluid Dynamics (SDT lattice mechanics) · **Status**: SPEC · **Author**: J. C. Harvey, Melbourne
 
@@ -178,7 +178,7 @@ These are *not* required for the verdict; they are the payoff of doing it well.
 ```markdown
 ## Pre-Run Commitments — FD01
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: 0 in the P2 bijection chain (at most CALIBRATED(1) one fluid scale in P5, documented)
 - Engine namespaces actually used: law_I (P_conv), law_III (solid_angle_occluded), law_IV (V_disp→ρ), law_V (budget), bridge (koppa)
 - Phase thresholds (committed before run):
@@ -195,7 +195,7 @@ These are *not* required for the verdict; they are the payoff of doing it well.
 | P2 surplus leading-order term appears | characterise it: defensible SDT-distinct prediction or artefact? | **KILL** if it contradicts NS and is not predictive | silently drop the term |
 | P3 `‖∇·v‖` exponent ≠ 2 | re-derive continuity from spation-number conservation | **OPEN** the compressible correction | force the Ma² fit |
 | P5 FD01 `ν` ≠ FD02 `ν` by >10% | recheck the relay-diffusion coefficient against FD02's derivation | **KILL** (relay diffusion ≠ viscosity) | retro-tune one coefficient to the other |
-| Rivals match but SDT doesn't beat | Label **DEGENERATE** honestly | — | Claim Class A |
+| A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 | Upstream dependency missing (FD02 ν, ROOT-SIM) | **DEFER** phase; cite dependency ID | — | Fake PASS |
 
 ### Allowed adjustments
@@ -210,3 +210,15 @@ These are *not* required for the verdict; they are the payoff of doing it well.
 ---
 
 *FD01 · upgraded 2026-06-27 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** The ν-recovery gate (0.5·dσ²/dt against w·dx²/dt, error 2.9e-10) checks that the discrete relay rule reproduces its own diffusion coefficient, which the rule defines, so it cannot fail and the term-for-term Navier–Stokes claim rests on the expansion alone.
+
+**Correction:** Label the gate VERIFICATION and gate the ν value against an independently measured fluid (as FD02 does).
+
+**Status:** ANNOTATED — label, status or tally corrected in the record; no re-score of earlier runs.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

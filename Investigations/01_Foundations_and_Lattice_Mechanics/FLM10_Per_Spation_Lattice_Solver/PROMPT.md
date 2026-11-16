@@ -282,7 +282,7 @@ debts. J. C. Harvey, Melbourne.*
 | Axis | Grades | Notes |
 |------|--------|-------|
 | **Prompt completion** | A / B / C / D / F | Phase gates in §④ executed? |
-| **Physics class** | NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN | Mechanism earned vs identity check |
+| **Physics class** | NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN | Mechanism earned vs identity check |
 
 
 ---
@@ -297,7 +297,7 @@ debts. J. C. Harvey, Melbourne.*
 ```markdown
 ## Pre-Run Commitments — FLM10
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: [0 or list each param — max per §⑤]
 - Engine namespaces: FLM08 `lattice_structure.hpp`, FLM02/FLM05 relay mechanics
 - Phase thresholds (committed before run): 10%, 50%
@@ -311,7 +311,7 @@ debts. J. C. Harvey, Melbourne.*
 | Phase 0 sanity check fails | Fix units/engine refs; verify `laws.hpp` symbols | STOP — report blocker | Fit to target |
 | Native mechanism off > committed % | Alternative route in §④; document ADJ-### | **OPEN** or **KILL** hypothesis | RETRO-PASS |
 | `z ≥ 1` in closure formula | Weak-field break (CR10); piecewise or exponential | **OPEN** that regime | Ignore break |
-| Rivals match but SDT doesn't beat | Label **DEGENERATE** honestly | — | Claim Class A |
+| A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 | Upstream dependency missing (FLM10, etc.) | **DEFER** phase; cite dependency ID | — | Fake PASS |
 
 ### Allowed adjustments
@@ -326,3 +326,15 @@ debts. J. C. Harvey, Melbourne.*
 ---
 
 *FLM10 · upgraded 2026-06-27 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** A key gate is "match within ~50%" with phase thresholds of 10% and 50%, which cannot discriminate between competing lattice structures.
+
+**Correction:** Use the 10% tier as the pass gate, or label the 50% tier non-discriminating.
+
+**Status:** RULE RECORDED — corrected gate or definition applies to the next run; the earlier result is not re-scored and nothing was re-run.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

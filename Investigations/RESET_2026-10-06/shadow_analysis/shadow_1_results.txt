@@ -1,0 +1,41 @@
+﻿Shadow analysis instrument (2026-10-08)
+=======================================
+
+[V1] drag integral at beta = 0.3: -0.4395604396 ; closed form -(4/3) gamma^2 beta = -0.4395604396 ; relative -1.1e-11 -> met
+[V2] dilatation centre A/r^2 at r = 2: e_rr = -0.2500000000 (-2A/r^3 = -0.2500000000), e_thth = 0.1250000000 (A/r^3 = 0.1250000000), trace -1.4e-11 -> met
+[V3] engine c_from_closure = 299795135.791737 m/s ; reduced form v_E sqrt(6 pi AU/(dphi a (1-e^2))) = 299795135.791737 m/s ; relative 2.2e-16 -> met
+
+VALIDATIONS: met
+
+[S1] c_closure at R_Sun x 1.0, 1.1, 0.9: 299795135.791737, 299795135.791737, 299795135.791737 m/s ; worst change 2.2e-16 -> confirmed
+     AU light-time tau_AU = AU/c = 499.004784 s (AU in metres is a ranging light-time times c) ; scaling all orbital lengths by s scales c_closure by s^1 (v_E x 1.001 -> x 1.001000)
+
+[S2] koppa_Mercury = 1476.598868 m ; koppa_Earth-orbit = 1476.625247 m ; ratio - 1 = -1.7864e-05
+     c_closure/c - 1 = 8.9322e-06 ; (koppa_M/koppa_E)^(-1/2) - 1 = 8.9322e-06 ; difference 0.0e+00 -> confirmed
+
+[S3] Sirius B, koppa = (v_gr/c) R, in units of koppa_Sun_from_precession = 1476.5989 m:
+     Joyce 2018 pair (80.65 km/s, 0.00803 R_Sun): koppa = 1502.87 m -> 1.0178 +/- 0.0170 ; dynamical 1.018 +/- 0.011 ; deviation -0.01 sigma -> confirmed
+     evaluation's pair (80.42 km/s, 5.84e6 m = 0.00839 R_Sun): 1.0609 ; 2005 z with 2018 R: 1.0149 ; 2018 z with 5.84e6 m: 1.0640
+     origin of the evaluation's +4%: radius term 1.0454, redshift term 0.9971 (multiplicative)
+
+[S4] r =    1 R0: paste rho/rho0 = 0.666666666667 ; 1 - e_thth = 0.666666666667 ; radial 1 - e_rr = 1.666666666667
+[S4] r =    2 R0: paste rho/rho0 = 0.958333333333 ; 1 - e_thth = 0.958333333333 ; radial 1 - e_rr = 1.083333333333
+[S4] r =   10 R0: paste rho/rho0 = 0.999666666667 ; 1 - e_thth = 0.999666666667 ; radial 1 - e_rr = 1.000666666667
+     worst difference 0.0e+00 -> confirmed
+
+[S5] Q = (koppa_GM/koppa_b)/(M_GM/m_p) = 1.000195409 ; R_p/(4 hbar/(m_p c)) = 1.000195380 ; relative 3.0e-08 -> rejected
+     l_P^2 against hbar G/c^3: relative -2.96e-08 (stored l_P precision)
+     demo ratio 0.999881 = Q (1.000195) x koppa_M/koppa_GM (0.999982) x (GM/G)/1.989e30 (0.999703) : product 0.999881
+
+[S6] Earth CMB drag at 370 km/s: 8.7603e-03 N ; at 29.78 km/s: 7.0509e-04 N ; ratio 12.424465 (370/29.78 = 12.424446) -> rejected
+
+[S7] beta = 0.001: F/(-(4/3) u sigma beta) = 1.00000100 ; gamma^2 = 1.00000100
+[S7] beta = 0.01 : F/(-(4/3) u sigma beta) = 1.00010001 ; gamma^2 = 1.00010001
+[S7] beta = 0.1  : F/(-(4/3) u sigma beta) = 1.01010101 ; gamma^2 = 1.01010101
+[S7] beta = 0.5  : F/(-(4/3) u sigma beta) = 1.33333333 ; gamma^2 = 1.33333333
+     worst relative 2.6e-11 -> confirmed
+
+[S8] 30.53 GeV: k l_P = 2.5006e-18 ; v_g = c cos(k l/2): 1 - v_g/c = 7.8165e-37 ; Delta t <= (1+z)^2 (k l)^2 R_CMB/(8c) = 8.995e-18 s ; bound 0.859 s -> confirmed ; spacing that would reach the bound: 3.090e+08 l_P
+
+[S9] predicted c z at Earth = c koppa (1/R_Sun - 1/AU) - c koppa_Earth/R_Earth = 636.299 - 2.959 - 0.209 = 633.131 m/s ; measured 638 +/- 6 ; deviation 0.81 sigma -> confirmed
+     koppa_Sun from the spectrum alone, koppa = z R_Sun with the Earth terms restored: 1487.90 +/- 13.92 m (precession route 1476.5989 m)

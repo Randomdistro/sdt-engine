@@ -1,0 +1,53 @@
+NP07 — Primordial Lithium — grammar + mechanism map
+==========================================================================
+
+[P0] grammar selection rule (NATIVE, exact integers)
+     Be-7 alpha-grammar (n_d,n_t) = (3,-1) valid=NO  <- UNDERFLOW (n_t<0)
+     Be-7 H3-grammar    (n_d,n_t) = (2,0) valid=yes  <- He-3 core, EC isotope
+     Li-7 (0,1) on-lattice: (0,1) valid=yes
+     Li-6 (1,0) on-lattice: (1,0) valid=yes
+     EC vector (-3,+2): Be-7 -> (0,1) == Li-7  EXACT
+     Grammar reading: Be-7 is not alpha-constructible; it exists only in the
+     alternate He-3-core grammar and is EC-FORCED toward Li-7 (NP18 Phase 0).
+     Li-6 route: alpha+d. Li-7 routes: alpha+t direct, or Be-7 EC.
+     P0 gate: PASS
+
+[P1] Be-7 first-electron seat scale (engine atomic:: kinematics only)
+     v_seat(Z=1) = 2.187691e+06 m/s -> strip cost 1/2 m_e v^2 = 13.6057 eV
+     v_seat(Z=4) = 8.750765e+06 m/s -> strip cost 1/2 m_e v^2 = 217.69 eV  (ref 217.7, err 0.004%)
+     SDT-EC rule: EC needs a seated electron at the scaffold. A fully-stripped
+     Be-7 cannot EC; the EC clock starts only when the plasma is cool enough
+     for Be-7 to hold this ~218 eV seat (~16x the hydrogen seat cost).
+     Chain: laws.hpp atomic::bohr_velocity (engine k-ladder) + kinematics. No
+     outside formalism in the chain.
+     P1 gate: PASS
+
+[P2] required pre-EC destruction fraction (RIVAL-COMPARISON bookkeeping)
+     Observed Li-7/H (Spite)  = (1.58 +/- 0.31)e-10   [OBSERVED anchor]
+     BBN predicted            = (4.68 +/- 0.67)e-10   [RIVAL column only]
+     IF the rival production number were taken at face value, ANY pre-EC
+     destruction mechanism must remove f = 66.2% +/- 8.2% of mass-7.
+     SIGN ANALYSIS (committed): delayed EC alone conserves mass-7 (Be-7 EC
+     -> Li-7 whenever it happens) and CANNOT reduce Li-7. Reduction requires
+     destruction DURING the ionised window: p + Be-7 -> B-8, B-8 -> Be-8 -> 2
+     alpha (mass-7 leaves the ledger). The SDT EC-blocking rule LENGTHENS that
+     window — the mechanism has the right SIGN.
+
+[P3] closure decision (committed pre-run)
+     Needed for a quantitative SDT resolution, and NOT available in-chain:
+       (i)  a native SDT primordial thermal/density history T(t), n_p(t)
+            — SDT rejects the expansion framework; its own cyclic cosmology
+            is uncommitted. No native history exists to integrate over.
+       (ii) measured sigma(p + Be-7 -> B-8) capture data (NACRE / EXFOR) —
+            legitimate OBSERVED input, but not present in this repository.
+     Neither is available -> the committed verdict applies: OPEN.
+     NO number is claimed for the final Li-7/H. The deliverable is the
+     mechanism map above + the named data needs.
+
+==========================================================================
+NP07 SUMMARY
+  P0 grammar selection rule   : PASS  [NATIVE]
+  P1 EC-electron binding scale: PASS  [COMPUTED, scale-setting]
+  P2 destruction requirement  : f = 66.2% +/- 8.2%  [RIVAL-COMPARISON]
+  P3 quantitative resolution  : OPEN — no native history, no sigma data
+  OVERALL: mechanism map earned; resolution honestly OPEN.

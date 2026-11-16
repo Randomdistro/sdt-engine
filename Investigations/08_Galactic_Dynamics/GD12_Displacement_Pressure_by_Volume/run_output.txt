@@ -1,0 +1,113 @@
+﻿=================================================================
+ GD12 DISPLACEMENT PRESSURE BY VOLUME   (NO TWEAKING; nothing matched)
+=================================================================
+l_P = 1.616255e-35 m ; V_p = 1.8327e-58 m^3 ; N = 5.8945e+61 ; N_Sun = 1.1894e+57
+ambient (uniform): n_b0 = eta n_gamma = 6.1000e-10 x 4.1073e+08 = 2.5054e-01 m^-3 (eta is a BBN input shared with other chains) ; f_amb = n_b0 V_p N = 2.7065e+03 pitches
+
+== A. SHELL DEPTH AND 100-SHELL MACRO-SHELLS (one body each) ==
+body volumes: Sun 2.1797e-01 m^3 (N 1.1894e+57) ; Earth 6.5435e-07 m^3 (N 3.5705e+51, from koppa_Earth)
+body     r          k = r/l_P   macro count f close      f far        rel step   grad[/m]    
+Earth    1 m        6.187e+34   6.187e+32   3.2218e+27   3.2218e+27   3.23e-33   -6.444e+27  
+Earth    R_Earth    3.942e+41   3.942e+39   7.9374e+13   7.9374e+13   5.07e-40   -2.492e+07  
+Sun      R_Sun      4.304e+43   4.304e+41   2.2173e+15   2.2173e+15   4.65e-42   -6.374e+06  
+Sun      1 AU       9.256e+45   9.256e+43   4.7954e+10   4.7954e+10   2.16e-44   -6.411e-01  
+Sun      1 pc       1.909e+51   1.909e+49   1.1271e+00   1.1271e+00   1.05e-49   -7.306e-17  
+
+== INSTRUMENT VALIDATION ==
+  [PASS] V1 : macro-shell relative step 200/k0 + 1e4/k0^2 equals (1 + 100/k0)^2 - 1 at k0 = 1e3, 1e4, 1e5 (1e-12)  (1.511e-13)
+  [PASS] V2 : volume conservation: f(k) x shell volume = V at every depth (1e-12)  (3.331e-16)
+  [PASS] V3 : meeting point of two bodies: numerical root equals the closed form (1e-9)  (0.000e+00)
+  [PASS] V4a : mean column at the ball centre, softening corrected (0.5%)  (-6.214e-04)
+  [PASS] V4b : mean column at d = 0.6 a, closed form, softening corrected (0.5%)  (1.916e-03)
+  [PASS] V5 : radial gradient, 400-direction mean at d = 0.6 a, against the derivative of the closed form (2%)  (-1.133e-02)
+  validation failures so far: 0
+
+== B. EARTH IN THE SUN'S GRADIENT (printed as computed; nothing compared) ==
+f_Sun at the Earth (1 AU)        = 4.7954e+10 pitches ; gradient 2f/r = 6.4111e-01 per m (points toward the Sun)
+f_Earth at the Earth's surface   = 7.9374e+13 pitches ; gradient 2f/r = 2.4917e+07 per m (points toward the Earth's centre)
+f_Earth / f_Sun at the Earth's surface = 1.655e+03 ; |grad f_Sun| / |grad f_Earth| there = 2.573e-08
+meeting surface (f_Earth = f_Sun) on the Sun-Earth line: 2.5875e+08 m from the Earth (40.61 R_Earth) ; shell depth 1.601e+43 ; pressure there = f_Earth + f_Sun = 9.6241e+10 pitches
+total at the Earth's surface = f_amb + f_Earth + f_Sun = 7.9422e+13 pitches (ambient share 3.41e-11)
+
+inputs: 7 arms ; N bulge 1.974e+67 thick 7.136e+66 thin 4.163e+67 gas 9.634e+66 ; sum 7.8142e+67 ; Sgr A* 4.995e+63 (mass-equivalent)
+
+Galaxy (spherical-equivalent, V = 1.4322e+10 m^3):
+r          k = r/l_P   macro count f close      f far        rel step   grad[/m]    
+1 pc       1.909e+51   1.909e+49   7.4058e+10   7.4058e+10   1.05e-49   -4.800e-06  
+1 kpc      1.909e+54   1.909e+52   7.4058e+04   7.4058e+04   1.05e-52   -4.800e-15  
+8.15 kpc   1.556e+55   1.556e+53   1.1149e+03   1.1149e+03   1.29e-53   -8.867e-18  
+15 kpc     2.864e+55   2.864e+53   3.2914e+02   3.2914e+02   6.98e-54   -1.422e-18  
+r_1        5.195e+56   5.195e+54   1.0000e+00   1.0000e+00   3.85e-55   -2.382e-22  
+R_CMB      5.894e+61   5.894e+59   7.7689e-11   7.7689e-11   3.39e-60   -1.631e-37  
+r_1 = 8.397e+21 m = 272.1 kpc (shell shift one pitch, f = 1) ; macro-shells from the Galactic centre to the Sun: 1.556e+53 ; to the Clearing: 5.894e+59 (S = 4 pi N^2 = 4.366e+124)
+literal enumeration of macro-shells is not possible; the closed form f(k) is exact for any grouping of shells, so the macro-shell values above are exact.
+
+evaluation points: 10923
+Monte-Carlo noise (two seeds): f_local 1.25% ; in-plane |grad f| 26.10%
+  [PASS] V6a : column at the Sun: particle sum vs ray quadrature (3%)  (1.181e-03)
+  [PASS] V6b : column at the centre: particle sum vs ray quadrature (3%)  (1.440e-02)
+
+== C. PRESSURE BY VOLUME ON THE STATIC DISC (K = 1.32) ==
+Sun     f_local = 2.4584e+03 (Sgr 7.13e-02 bulge 3.01e+02 thick 1.64e+02 thin 1.49e+03 gas 5.06e+02) ; f_total = 5.1649e+03 ; ambient share 5.24e-01 ; |grad f| = 9.141e+02 per kpc
+centre  f_local = 7.8684e+04 (Sgr 5.26e+03 bulge 5.79e+04 thick 2.11e+03 thin 1.31e+04 gas 2.92e+02) ; f_total = 8.1391e+04 ; ambient share 3.33e-02 ; |grad f| = 1.291e+04 per kpc
+f_total centre/Sun = 15.759 ; f_local centre/Sun = 32.007 ; Sun f_local/f_amb = 0.908 ; centre f_local/f_amb = 29.072
+arm overdensity at the Sun: f_local +4.720%
+
+ring means (pitches): R kpc | f_local | f_local/f_amb | bulge regime | disc regime
+    1.0 | 3.6403e+04 | 13.450 | 2.3477e+04 | 1.2926e+04
+    2.0 | 1.8335e+04 | 6.774 | 8.0210e+03 | 1.0314e+04
+    3.0 | 1.1400e+04 | 4.212 | 3.1763e+03 | 8.2241e+03
+    4.0 | 7.8365e+03 | 2.895 | 1.5344e+03 | 6.3021e+03
+    5.0 | 5.6586e+03 | 2.091 | 8.8302e+02 | 4.7756e+03
+    6.0 | 4.3214e+03 | 1.597 | 5.7377e+02 | 3.7476e+03
+    7.0 | 3.2163e+03 | 1.188 | 4.0701e+02 | 2.8092e+03
+    8.0 | 2.4957e+03 | 0.922 | 3.0596e+02 | 2.1898e+03
+    9.0 | 1.9337e+03 | 0.714 | 2.3917e+02 | 1.6946e+03
+   10.0 | 1.5093e+03 | 0.558 | 1.9235e+02 | 1.3169e+03
+   11.0 | 1.2083e+03 | 0.446 | 1.5816e+02 | 1.0501e+03
+   12.0 | 9.8016e+02 | 0.362 | 1.3240e+02 | 8.4777e+02
+   13.0 | 7.9533e+02 | 0.294 | 1.1249e+02 | 6.8284e+02
+   14.0 | 6.5345e+02 | 0.241 | 9.6777e+01 | 5.5667e+02
+   15.0 | 5.4156e+02 | 0.200 | 8.4153e+01 | 4.5741e+02
+   16.0 | 4.4790e+02 | 0.165 | 7.3855e+01 | 3.7404e+02
+   17.0 | 3.8865e+02 | 0.144 | 6.5344e+01 | 3.2330e+02
+T4/T2 ring-mean crossings: f_local = f_amb at R = 7.673 kpc ; bulge regime = disc regime at R = 1.736 kpc
+T2 Sgr A* against the surrounding matter at the centre: f_rest(0) = 7.2956e+04 pitches (analytic) ; f_Sgr = f_rest at r = 2.486e+17 m = 8.06 pc (shell depth 1.538e+52)
+  [PASS] V8 : ridge nodes: mean f(ray, arms included) / f(particle sum) - 1 (3%)  (3.779e-03)
+  [PASS] V9 : ring-mean radial derivative 7-9 kpc: ray instrument vs particle-sum ring means (5%)  (2.224e-03)
+      (ring means at 7 and 9 kpc: ray 3.2109e+03 1.9255e+03 ; particle 3.2163e+03 1.9337e+03)
+Sun: f(ray) = 2.4636e+03 ; in-plane grad f = (51.7, -427.2) per kpc, |grad f| = 430.3 ; direction to the Galactic centre is -y
+
+T1 'pressure is always higher in the direction of the nearest mass' over 696 plane points (1 kpc grid), 0.7 < R < 15 kpc (deterministic gradient):
+   T1a gradient toward the baryon-weighted centroid within 1 kpc: 0.9928  -> holds
+   T1b gradient toward the Galactic centre: 1.0000  -> holds
+
+== T3 SHEATHS: direction of the pressure gradient against the ridge (measured + near-extended nodes, every third node, deterministic gradient) ==
+arm       nodes   <|g.t|/|g|>  <|r.t|>    |diff|    to GC>0     f/ring-1    arm share  bulge-dom 
+3-kpc(N)  3       0.061        0.072      0.011     1.000       +1.129e-01  0.0249     0        %
+Norma     111     0.119        0.138      0.019     1.000       +3.437e-02  0.0292     0        %
+Sct-Cen   164     0.223        0.225      0.002     1.000       +3.024e-02  0.0447     0        %
+Sgr-Car   183     0.136        0.130      0.005     1.000       +3.394e-02  0.0541     0        %
+Local     29      0.200        0.198      0.002     1.000       +3.772e-02  0.0590     0        %
+Perseus   213     0.166        0.165      0.001     1.000       +3.689e-02  0.0535     0        %
+Outer     178     0.124        0.112      0.012     1.000       +4.370e-02  0.0578     0        %
+all arms: <|grad f . t|/|grad f|> = 0.157 against geometric <|r.t|> = 0.155 (|diff| 0.001)  ->  not supported
+
+== D. EMISSION AT DEPTH: pressure by volume at the emitter against the observer (closure to spectral position open) ==
+observer (Sun) f_total = 5.1649e+03 pitches
+  l      d kpc   f_total(emitter)   Delta f (pitches)   ratio to Sun
+  0      2       6.8681e+03         1.7032e+03          1.3298    
+  0      6       2.0544e+04         1.5379e+04          3.9777    
+  0      10      2.4028e+04         1.8863e+04          4.6522    
+  90     2       5.0167e+03         -1.4820e+02         0.9713    
+  90     6       4.1741e+03         -9.9080e+02         0.8082    
+  90     10      3.5224e+03         -1.6425e+03         0.6820    
+  180    2       4.2403e+03         -9.2460e+02         0.8210    
+  180    6       3.3514e+03         -1.8135e+03         0.6489    
+  180    10      3.0322e+03         -2.1327e+03         0.5871    
+  270    2       4.8888e+03         -2.7609e+02         0.9465    
+  270    6       4.2013e+03         -9.6358e+02         0.8134    
+  270    10      3.5912e+03         -1.5737e+03         0.6953    
+ratio f_total(emitter)/f_total(Sun) over 180 emitters 2-10 kpc from the Sun: 0.5860 to 14.1790 ; with the ambient term removed the ratios would span 0.130 to 28.688
+
+wrote gd12_ridge_metrics.csv mw_pressure.js

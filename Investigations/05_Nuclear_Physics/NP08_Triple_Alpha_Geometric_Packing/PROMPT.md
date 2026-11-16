@@ -8,11 +8,11 @@
 
 ## ⓪ The Golden Rule — five questions (answer before Phase 0)
 
-1. **What don't we know?** — [NP08] NP08: Triple-Alpha Rate from Geometric Packing — Data/Prompt: *(unfilled by the 2026-06-27 bulk template upgrade — write the single measurable gap before the next run)*
+1. **What don't we know?** — [NP08] NP08: Triple-Alpha Rate from Geometric Packing — Data/Prompt: **Measurable gap (written 2026-10-05 in the audit correction pass, from this prompt's own content; the 2026-06-27 template left it unfilled):** Does tetrahedral closure of four deuterons around a central alpha core give the Hoyle-state excitation (7.654 MeV above the ground state) from packing geometry alone, with no fitted lock magnitude?
 2. **Why does it matter?** — Stack position / downstream blockers (see `INVESTIGATION_STACK.md`).
 3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
 4. **What would prove us wrong?** — §⑧ falsification tests with numeric triggers.
-5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN).
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN).
 
 ## DATA REQUIREMENTS
 
@@ -66,7 +66,7 @@ SDT re-reads this as:
 ```markdown
 ## Pre-Run Commitments — NP08
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: [0 or list each param — max per §⑤]
 - Engine namespaces: NP01 grammar, law_III nuclear occlusion, ATOMICUS rules
 - Phase thresholds (committed before run): 20%
@@ -80,7 +80,7 @@ SDT re-reads this as:
 | Phase 0 sanity check fails | Fix units/engine refs; verify `laws.hpp` symbols | STOP — report blocker | Fit to target |
 | Native mechanism off > committed % | Alternative route in §④; document ADJ-### | **OPEN** or **KILL** hypothesis | RETRO-PASS |
 | `z ≥ 1` in closure formula | Weak-field break (CR10); piecewise or exponential | **OPEN** that regime | Ignore break |
-| Rivals match but SDT doesn't beat | Label **DEGENERATE** honestly | — | Claim Class A |
+| A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 | Upstream dependency missing (FLM10, etc.) | **DEFER** phase; cite dependency ID | — | Fake PASS |
 
 ### Allowed adjustments
@@ -289,3 +289,15 @@ over-produces barriers → §D on the mechanism, not a widened reading of "diffe
 *NP08 RUN 2 · SPEC 2026-07-06 · J. C. Harvey · Phase A runs now; Phase B blocked on the derived
 lock (owner FLM14/NP17); the target row goes on the record before the lock exists — that is the
 point.*
+
+---
+
+## Audit correction 2026-10-05 (opening premise)
+
+**Finding:** The verdict records a PREMISE-CORRECTION: the prompt's own Be-8 premise contradicts the grammar, and the only derived number (6.327 MeV) uses engine lengths, so the Hoyle gate "within 20% of 7.654 MeV" was set on an invalid premise.
+
+**Correction:** Rewrite the premise with Be-8 as a resonance and gate on the Hoyle-state offset above the 3α threshold at ≤ 5%.
+
+**Status:** ANNOTATED — label, status or tally corrected in the record; no re-score of earlier runs.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

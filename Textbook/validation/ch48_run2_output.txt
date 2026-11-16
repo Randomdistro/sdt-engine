@@ -1,0 +1,59 @@
+
+== V0 helper validation (known answers) ==
+[PASS] V0    integrate sin over [0, pi] = 2                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 3.331e-16 (tol 1e-13)
+[PASS] V0    integrate x^7 over [0, 1] = 1/8                                                value 1.250000000000e-01 expected 1.250000000000e-01 err 2.220e-15 (tol 1e-14)
+[PASS] V0    integrate exp over [-1, 1] = e - 1/e                                           value 2.350402387288e+00 expected 2.350402387288e+00 err 5.668e-16 (tol 1e-13)
+[PASS] V0    root of cos x - x = 0.739085133215161                                          value 7.390851332152e-01 expected 7.390851332152e-01 err 2.253e-15 (tol 1e-13)
+[PASS] V0    root of x^2 - 2 on [1, 2] = sqrt 2                                             value 1.414213562373e+00 expected 1.414213562373e+00 err 2.983e-15 (tol 1e-13)
+[PASS] V0    compensated sum 1 + 10^6 x 1e-16 = 1 + 1e-10                                   value 1.000000000100e+00 expected 1.000000000100e+00 err 0.000e+00 (tol 1e-15)
+
+== V1 known answers ==
+[PASS] V1    int_0^1 dS/(1 - S/2) = 2 ln 2                                                  value 1.386294361120e+00 expected 1.386294361120e+00 err 1.602e-15 (tol 1e-10)
+[PASS] V1    int_0^0.25 dS/(1 - 2S) = (1/2) ln 2                                            value 3.465735902800e-01 expected 3.465735902800e-01 err 1.602e-15 (tol 1e-10)
+[PASS] V1    c_s = c/sqrt(5.25)                                                             value 1.308401553868e+08 expected 1.308401553868e+08 err 0.000e+00 (tol 1e-12)
+
+== T1 elapsed duration from a route and a rate ==
+[PASS] T1    C = 0.8, F = 2: 0.625                                                          value 6.250000000000e-01 expected 6.250000000000e-01 err 5.027e-14 (tol 1e-12)
+[PASS] T1    C = 1 - S/2, F = 1: 2 ln 2                                                     value 1.386294361120e+00 expected 1.386294361120e+00 err 1.602e-15 (tol 1e-10)
+[PASS] T1    C = 1 - S, F = 1 up to 1 - eps, eps = 0.01: ln(1/eps)                          value 4.605170185988e+00 expected 4.605170185988e+00 err 2.314e-15 (tol 1e-08)
+[PASS] T1    C = 1 - S, F = 1 up to 1 - eps, eps = 0.0001: ln(1/eps)                        value 9.210340371976e+00 expected 9.210340371976e+00 err 5.979e-15 (tol 1e-08)
+[PASS] T1    the duration increases as the route approaches the zero of C (no finite limit at S = 1)
+[PASS] T1    C = 1, F = 1 - 2S up to 0.5 - eps/2: -(1/2) ln eps                             value 3.453877639491e+00 expected 3.453877639491e+00 err 1.504e-14 (tol 1e-08)
+[PASS] T1    a route that crosses a zero of F is refused (not defined)
+
+== T2 local relay cycle counts and the tick-rate ratio ==
+       N (remote convention) = 9.000000000e+08 ; N (local convention) = 9.000000000e+08
+[PASS] T2    the two consistent conventions agree                                           value 9.000000000000e+08 expected 9.000000000000e+08 err 0.000e+00 (tol 1e-12)
+       mixed: remote duration / local hop = 1.000000000e+09 (x1.111111) ; local duration / remote hop = 8.100000000e+08 (x0.900000)
+[PASS] T2    remote duration with the local hop is high by 1/C                              value 1.111111111111e+00 expected 1.111111111111e+00 err 0.000e+00 (tol 1e-12)
+[PASS] T2    local duration with the remote hop is low by C                                 value 9.000000000000e-01 expected 9.000000000000e-01 err 0.000e+00 (tol 1e-12)
+
+== T3 a relation traversed either way; the law selects the progression ==
+[PASS] T3    k = +0.7: T1 + T2 conserved (worst relative deviation)                         value 0.000000000000e+00 expected 0.000000000000e+00 err 0.000e+00 (tol 1e-12)
+[PASS] T3    k = +0.7: separation equals Delta_0 exp(-2 k tau)                              value 6.081006262526e+00 expected 6.081006262522e+00 err 6.706e-13 (tol 1e-09)
+       k = +0.7: separation 100.000000 -> 6.081006 ; ln T1 + ln T2: 11.69524702 -> 11.71579084
+[PASS] T3    k > 0: the entropy-like function increases
+[PASS] T3    dS/dtau = k (T1 - T2)^2 / (T1 T2) at tau = 0                                   value 5.833333371896e-02 expected 5.833333333333e-02 err 6.611e-09 (tol 1e-06)
+[PASS] T3    k = -0.7: T1 + T2 conserved (worst relative deviation)                         value 7.771561172376e-15 expected 0.000000000000e+00 err 7.772e-15 (tol 1e-12)
+[PASS] T3    k = -0.7: separation equals Delta_0 exp(-2 k tau)                              value 4.055199966845e+02 expected 4.055199966845e+02 err 7.864e-14 (tol 1e-09)
+       k = -0.7: separation 100.000000 -> 405.519997 ; ln T1 + ln T2: 11.69524702 -> 11.30698783
+[PASS] T3    k < 0 (tau in [0,1], inside the domain): the entropy-like function decreases
+       POST-RUN clause: the law with k < 0 reaches T2 = 0 at tau = ln(7)/(2|k|) = 1.389936
+[PASS] T3    POST-RUN clause: exit time from the positive-temperature domain is ln 7/(2|k|) value 1.389935820754e+00 expected 1.389935820754e+00 err 0.000e+00 (tol 1e-09)
+[PASS] T3    dS/dtau = k (T1 - T2)^2 / (T1 T2) at tau = 0                                   value -5.833333371896e-02 expected -5.833333333333e-02 err 6.611e-09 (tol 1e-06)
+
+== T4 coupled acoustic history ==
+       photon count 4.107268e+08 m^-3 ; present baryon count 2.505434e-01 m^-3 ; epoch index N = 902.169741
+       escape rate 1.311573e-14 s^-1 ; standing radius 4.987910e+21 m ; present-equivalent scale 4.499941e+24 m = 145.8332 Mpc
+[PASS] T4    independent recomputation equals the engine's present-equivalent scale         value 4.499941157698e+24 expected 4.499941157698e+24 err 0.000e+00 (tol 1e-09)
+[PASS] T4    the native value lies in the registered window [14.7, 1470] Mpc
+       read now: BAO scale 147 Mpc = 4.535946e+24 m ; ratio present-equivalent / 147 Mpc = 0.9921
+       compatibility duration 147 Mpc / c_s = 3.466784e+16 s = 1098.6 Myr
+       RECORDED REJECTION (run 1 criterion kept): the registration applied the release_acoustics speed to the pre_clearing statement; duration 1098.56 Myr
+[PASS] T4    the registered statement (147 Mpc / c_s of release_acoustics = 830 Myr to 1 per cent) is rejected
+       POST-RUN clause: 147 Mpc / (c/sqrt3) = 830.43 Myr ; ratio of the two durations 1.322875656 (sqrt 1.75 = 1.322875656)
+[PASS] T4    POST-RUN clause: with pre_clearing::c_s the duration reproduces 830 Myr to 1 per cent value 8.304315434723e+02 expected 8.300000000000e+02 err 5.199e-04 (tol 1e-02)
+[PASS] T4    POST-RUN clause: the two durations differ by sqrt(1.75)                        value 1.322875655532e+00 expected 1.322875655532e+00 err 1.678e-16 (tol 1e-12)
+[PASS] T4    doubling the assumed scale doubles the compatibility duration                  value 2.000000000000e+00 expected 2.000000000000e+00 err 0.000e+00 (tol 1e-12)
+
+ALL CRITERIA MET: 0 failure(s)

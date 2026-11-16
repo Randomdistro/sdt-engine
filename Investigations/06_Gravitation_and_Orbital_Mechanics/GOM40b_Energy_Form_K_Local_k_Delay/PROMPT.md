@@ -50,3 +50,15 @@ Still **no** ODF residual promotion, no **K** fit to Doppler/delay, no γ.
 - `Datasets/solar_propagation_2026-08/raw/jpl_horizons_earth_heliocentric_2002_157_160.csv`  
 - `Datasets/solar_propagation_2026-08/raw/jpl_horizons_cassini_heliocentric_2002_157_160.csv`  
 - **c** = 299792458 m/s
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** C2 passes "K = a/k² identity" and C3 passes that the route was executed, neither of which tests the solar K, and delay-rate amplitude is "published, no gate".
+
+**Correction:** Mark them IDENTITY/PROCEDURE and gate on the recovered K against a stated tolerance.
+
+**Status:** ANNOTATED — label, status or tally corrected in the record; no re-score of earlier runs.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

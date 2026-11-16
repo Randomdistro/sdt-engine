@@ -1,0 +1,198 @@
+### 05/NSEQ04_Shadow_Union_Kappa  | status: PRE-REGISTERED — 2026-08-09. | words 274 | code 1 outs 0 verd 1 runlog 0 | gate True prereg True
+Q: e sequencer mass-defect path. > **Canon edits:** none. ## 0. Physics under test Shared occlusion from the packed nucleus: \[ \Delta A = \sum_i A_i - A_\cup,\qquad E_{\mathrm{bind}} \approx \kappa\,\Delta A \] with one scale κ (MeV/fm²). Enmeshment / shadow is the native defect; not an IAEA charge-radius map. ## 1. κ policy (frozen before run) | Item | Rule | |---|---| | Functional form | `BE ≈ κ·ΔA` through the origin (no intercept) | | Estimator | least squares: `κ = Σ(BE·ΔA) / Σ(ΔA²)` 
+G: ## 2. Reports (not gates on κ magnitude)
+V: `dnn=1.45 R_p`, `coul=0.30`, sequencer `DEFAULT_LIGHT`; one pass, no retune.
+V: ## 2. Results — CALIBRATED(1)
+V: Smoke (packing counts PASS; energy residuals large on light nuclei):
+V: | ID | Status |
+V: | NSEQ04-C1 | **PASS** |
+FLAGS: MISSING: ; res pass/fail 0/0 verd pass/fail 6/0
+
+### 05/NSEQ05_Pure_Shell_Stella_Cuboct_Relations  | status: PRE-REGISTERED — 2026-08-09. | words 429 | code 3 outs 0 verd 1 runlog 0 | gate True prereg True
+Q: xt all tritons. Grouped `+12d+10t` is a closure increment, not > one mixed shell. > **Canon:** no `laws.hpp` edit (propose-and-wait for comment/sequence prose). ## 0. Frozen pure-shell sequence (species-by-species) From the repository arithmetic, expanded: | Step | Shell | ΔN | Cumulative N | |---|---|---|---| | — | α core | 2 | 2 | | D | D₆ | +6 | 8 | | D | D₁₂ (pre) | +12 | 20 | | T | **T₈** (stella / dual tetra) | +8 | **28** | | D | **D₁₂** (cuboct / T₈ edge midpoints) | +12 | 40 | | T 
+V: ## Status
+V: | C1 | PASS | Pure shells `20-T8-28-D12-40-T10-50-D20-70-T12-82-D30-112-T14-126-D42-168-T16-184` |
+V: | C2 | PASS | Face rule `{12,16,20}` excluded; link rule `{12,20,30}=R(3..5)` |
+V: | C3 | PASS | 12 nearest stella links → cuboct midpoints; polar split **3+6+3** |
+V: | C4 | PASS | 14 face normals under triangle pole: 2×90° + 6×35.264° + 6×19.471° |
+FLAGS: MISSING: ; res pass/fail 0/0 verd pass/fail 5/0
+
+### 05/NSEQ15_Packed_Contact_Energy  | status: PRE-REGISTERED — 2026-08-13. | words 33 | code 1 outs 0 verd 1 runlog 1 | gate False prereg True
+Q: .242 MeV. Lengths from packed contacts. No B_d/B_t. 
+V: # NSEQ15 Assessment — packed contact energy (NSEQ14 reopen)
+V: ## Status
+FLAGS: MISSING: ; res pass/fail 0/0 verd pass/fail 1/0
+
+### 05/NSEQ16_Perfect_Traction_Gear_Engine  | status: PRE-REGISTERED · PARALLEL EXPERIMENT · CANON EDITS: NONE | words 793 | code 4 outs 0 verd 1 runlog 0 | gate True prereg True
+Q: Can the constitutional alpha/deuteron/triton grammar be rendered as one contact gear assembly in which every listed contact is proton-neutron, all nucleon rims share one toroidal period, and counter-rotation gives zero contact-point slip? This experiment is parallel to NSEQ05. It does not replace the registered pure-shell packer
+G: `180°, 120°, acos(-1/3), 90°, 90°` within `1e-10` rad.
+G: `2R_p` within `1e-10 R_p`; maximum normalized slip is `<1e-10`.
+G: all signed phases close after one common period within `1e-10`.
+G: `2pi`; both position and director close at `4pi`, each within `1e-10`.
+G: - Any G0–G7 failure: `TRACTION_ENGINE_REJECTED`, naming the failed gate.
+V: **Classification:** `ATOMICUS_CONTACT_CONSTRUCTION_CANDIDATE`
+V: The repaired browser instrument passed R0–R9 across H-1, H-2, H-3, He-4,
+V: pass.
+V: - Alpha equatorial-plane and polar-axis checks: pass.
+V: The dedicated public-sequencer validator passes S0–S7, including module syntax,
+FLAGS: MISSING: ; ident:1 ; res pass/fail 0/0 verd pass/fail 0/0
+
+### 05/NSEQ17_Light_Nucleus_Wake_Mesh  | status: PRE-REGISTERED before instrumentation | words 617 | code 1 outs 1 verd 1 runlog 1 | gate False prereg True
+Q: Can independently calibrated, phase-locked assemblies of the canonical four-circuit nucleon wake reproduce the measured mass defect and magnetic dipole moment of H-2, H-3, and He-3 while retaining closed flow, low numerical divergence, and the constitutional no-neutron–neutron-contact rule? H-2 additionally calibrates its electr
+G: - no fitted coefficient may sit within `1e-6` of a registered bound.
+V: deformable H-2, H-3, and He-3 wake meshes in one pass.
+V: | H-2 | CALIBRATED(8) | 2.224566342 / 2.224566342 | 0.8574382335 / 0.8574382335 | Q = 0.285682357 / 0.285699 fm² |
+V: | H-3 | CALIBRATED(9) | 8.481796625 / 8.481796625 | 2.9789624650 / 2.9789624650 | — |
+V: | He-3 | CALIBRATED(9) | 7.717989650 / 7.717989650 | −2.1276253498 / −2.1276253498 | — |
+V: The counter-circulation coefficient is `CALIBRATED(1)` and is reused unchanged in every
+FLAGS: MISSING: ; ident:3 ; res pass/fail 0/0 verd pass/fail 0/0
+
+### 05/NSEQ18_Universal_Interstitial_Sequencer  | status: PRE-REGISTERED | words 607 | code 2 outs 1 verd 1 runlog 1 | gate False prereg True
+Q: Can the existing Atomicus closure schedule construct every nuclide exposed by the public sequencer as one connected, perfectly-tractioned proton-neutron contact machine, while retaining the Hydrogen circulation and producing unforced mass-defect and magnetic ledgers? ## Frozen inputs The closure schedule is imported from `sdt::l
+G: 9. wake conservation and route-agreement tolerances pass;
+V: ## Verdict
+V: **CONSTRUCTION PASS; VALUE LAW PENDING.**
+V: uncalibrated magnetic sum despite its measured spin-zero moment.
+V: - H2/H3/He3 light-nucleus results: retain their existing `CALIBRATED(n)` status;
+FLAGS: MISSING: ; res pass/fail 0/0 verd pass/fail 1/0
+
+### 06/GOM01_Spation_Depth_Engine  | status: SPEC — full upgrade 2026-07-24 (supersedes the | words 1974 | code 1 outs 1 verd 0 runlog 0 | gate True prereg True
+Q: Three separable things, and the prior spec conflated them: (a) whether the four weak-field observables (Pound–Rebka, Shapiro, bending, plus the coherence checks) all fall out of the ONE kernel z(r) = ϟ/r with **no per-observable freedom**; (b) whether the two hand-waved prefactors — the Shapiro "2" and the bending "2" — can be *
+F: §⑧: any of the four observables needing a per-observable coefficient (kernel fails); the prefactors requiring different mechanisms for Shapiro vs bending (relay story fails); z·k²≠1 anywhere (algebra bug); P3 finding a forced divergence that measurement already excludes (engine KILLED in that regime
+G: (CONVERGENCE gates, labeled as such); P2 the prefactor derivation attempt (the actual native
+G: 3. **No outcome text in this spec.** Gates are unchecked. If you know the measured answer, you
+G: 6. **Direct execution only.** No delegated runs; stdout is teed to a dated results file; the
+G: **P1 — The four samplings vs measured anchors (CONVERGENCE gates, pre-registered).**
+G: magnitude within 1% of the standard value computed from the same geometry.
+O: Coherence (no smear) <1e-10 required PASS
+O: FINAL ACCEPTANCE CRITERION:
+O: FINAL: 27/27 proofs passed
+FLAGS: MISSING: ; Gcode:12 ; ident:6 ; res pass/fail 33/2 verd pass/fail 0/0
+
+### 06/GOM02_k_Hierarchy_Advantage  | status: SPEC — full upgrade 2026-07-24 (supersedes the | words 1717 | code 1 outs 1 verd 0 runlog 0 | gate True prereg True
+Q: Whether the k-hierarchy's claimed *advantage* over G/M is (a) **demonstrable as measurement**, not rhetoric: koppa recovered independently from every dependent of a host must agree to ephemeris-class precision, beating G's 22 ppm wall — the spread IS the thesis, and it has never been gated; and (b) **honestly sorted**: which row
+F: §⑧: host-wise koppa spread worse than the G-route for clean systems (advantage FAILS as measurement); any identity row found load-bearing in a claimed prediction (relabel + strike); the W+1 row failing its 0.02% window on recompute. 5. **How will we know we're done?** — Dual verdict; the showcase ta
+G: koppa-invariance gate passes at 1e-8-class spread, that is a *measured* superiority no rival
+G: P2 the koppa-invariance gate on the GOM14 multiplanet dataset (693 dependents, cached);
+G: 3. **Rhetoric is not a gate.** "GM_proton is 10³⁹ below ℓ_P, meaningless" is commentary — it may
+G: **P2 — The koppa-invariance gate (the thesis, finally measured).** Using `koppa_multiplanet.csv`
+G: the thesis stated as a measurement). Expected from DE440-class inputs: ~1e-8 reachable; gate set
+O: VERDICT:
+O: PASS GOM02-VI.1: koppa*c^2 recovers GM_Sun exactly
+O: FINAL: 15/15 proofs passed
+FLAGS: MISSING: ; Gcode:46 ; ident:21 ; res pass/fail 15/0 verd pass/fail 0/0
+
+### 06/GOM03_Lunar_Orbital_Kinematics  | status: SPEC — full upgrade 2026-07-24 (supersedes | words 1445 | code 1 outs 1 verd 0 runlog 0 | gate True prereg True
+Q: Two things the old spec conflated: (a) whether the koppa-only inversion pipeline (a(t) → lunar d, e, i, T with no G/M anywhere) is *algorithmically sound* — a code property, testable on synthetic data; and (b) whether it works on **measured** acceleration data — the only version that carries physics content, and the version that
+F: §⑧: inversion fails its own synthetic round-trip (code broken); sensitivity budget shows real instruments cannot reach the M2/N2 separation (pipeline physically impossible as posed — record and close); real-data recovery misses the LLR-known elements by more than the instrument budget (the koppa tid
+G: d̄ within 0.1% · e within 5% · T within 0.01% · zero G/M in the chain (grep the tool — the gate
+G: O1 (the inclination channel) at the P1 gate precisions. Output: a feasibility table
+G: BEFORE download. Pre-commit the pass/fail: recovered d̄, e, T within the P2-budgeted envelopes
+G: | F1 | P1 round-trip misses its gates | inversion code broken — fix before anything else; no physics statement |
+G: | F2 | P2 budget: no realistic instrument/duration reaches the gates | pipeline infeasible as posed — record, close honestly (this is a finding) |
+FLAGS: MISSING: ; ident:3 ; res pass/fail 0/0 verd pass/fail 0/0
+
+### 06/GOM04_Koppa_Closure  | status: SPEC — first prompt for this folder, | words 649 | code 2 outs 2 verd 0 runlog 0 | gate True prereg True
+Q: Whether the koppa ledger CLOSES on c: from purely orbital observables — Mercury's measured precession (42.98″/cy, Le Verrier-class), measured orbital velocities scaled to surface values (v_orbiter·√(d/R)), and geometry — invert δφ = 6πR/(k²a(1−e²)) for k, then form c = k·v_surface. If the ledger is coherent, the output lands on 
+F: Recovered c outside the P2-budgeted window (bridge defect — escalate); the inversion found to consume c anywhere upstream (closure claim VOID — audit in P0). 5. **How will we know we're done?** — Dual verdict; the recovered c with its budgeted window; the provenance ledger printed. ## §0 Reader's co
+G: (propagate input uncertainties → the allowed window on recovered c); P3 the provenance
+G: 2. **P0 source audit is a gate:** grep both tools for any c or GM upstream of the output line
+G: convergence demonstration + recovered c. Gate: within the P2 window of 299,792,458 (compute the
+G: - CALIBRATED budget: 0 · Gates: P0 audit clean · P2 window committed before P1 comparison
+O: SUMMARY
+FLAGS: MISSING: ; Gcode:3 ; ident:5 ; res pass/fail 0/0 verd pass/fail 0/0
+
+### 06/GOM05_Variable_Spation_Closure  | status: SPEC — first standalone prompt 2026-07-24. | words 769 | code 2 outs 1 verd 0 runlog 0 | gate True prereg True
+Q: Which parts of the variable-closure picture are earned at which grade, once labels are applied honestly: (a) the **triple identity** ℓ_P(r)/ℓ_P,∞ = 1−z, c_local = c(1−z), z = ϟ/r — exact BY CONSTRUCTION given ϟ (one definition read three ways): label IDENTITY, re-earn the numbers (solar-surface z = 2.123×10⁻⁶, Δc = 636.5 m/s cla
+F: identity re-earn failing (tool/algebra bug); the Shapiro number missing (inputs); E106's original-1/a retest showing clean Keplerian 1/a with no depth-surface clustering (lumiostasis KILLED — pre-committed here). 5. **Done =** dual verdict with the six-part label ledger. ## §0 Reader's contract 1. I
+G: 3. **How will we find out?** — P1 re-earn (a)+(b) direct with gates 0.001%; P2 print the
+G: gates z_surface = 2.123×10⁻⁶ ±0.1%, Δc(surface) = 636.5 ±1 m/s, Shapiro 123.66 ±0.1 µs — all
+G: F1 identity gates miss → bug, STOP. F2 Shapiro miss → inputs. F3 (standing, data-gated): E106
+G: - CALIBRATED budget: 0 · Gates: P1 three numbers · P3 pre-commit restated before any F3 data
+O: PASS GOM05-IV.1: closure-deficit Shapiro = standard formula number
+O: RESULTS: 4/4 proofs passed
+O: VERDICT: one mechanism — ℓ_P(r) = ℓ_P,∞(1−z), c_local = c(1−z),
+FLAGS: MISSING: ; LOOSE:50 ; Gcode:3 ; ident:7 ; res pass/fail 4/0 verd pass/fail 0/0
+
+### 06/GOM06_Gravitational_Wave_Mechanism  | status: EXECUTED; B09 DERIVED extension (2026-08-15) — full upgrade 2026-07-24 | words 3030 | code 4 outs 3 verd 0 runlog 0 | gate True prereg True
+Q: Whether the inspiral–chirp–merger–ringdown–memory sequence can be carried end-to-end by ONE length (ϟ) in a near-incompressible relay lattice, such that: (a) the chirp scale and f^{11/3} track come out of `v² = c²ϟ/r` with no G/M (the koppa-meter reading of LIGO); (b) the polarisation content is forced to two tensor modes by con
+F: §3: an order-unity or steady-inspiral scalar mode (G3 falsification — binary-pulsar decay and GW170817 polarisation already exclude it: model DEAD, log it); chirp scale unreachable without inserting G (G2 falsification); no memory (G4 — the "moved sea" picture fails); dispersion in band (G1). 5. **H
+G: 3. **How will we find out?** — Four gates (§2), each derivation-first with anchors declared (§R1′);
+G: | Poem fragment | Mechanism (R0 vocabulary) | Gate |
+G: - **R4 Evidence over success** — a clearly logged failed gate outranks a soft pass. If G3
+G: ## 2. THE GATES (all unchecked; every prior "EXECUTED/DONE" claim demoted to route-to-attempt)
+G: **Gate:** |c_GW−c|/c consistent with <1e-15 (GW170817 anchor); dispersion onset only at f ~ c/ℓ_P
+O: The PASS is therefore an ALGEBRAIC IDENTITY of the koppa bridge,
+O: • CLASS C (convergence). G2 verdict: PASS on scale, no G/M in dynamics.
+O: • OBSERVATIONAL STATUS: echo claims (Abedi+ 2017, ~0.3 s) are CONTESTED —
+FLAGS: MISSING: ; Gcode:21 ; ident:8 ; res pass/fail 4/0 verd pass/fail 0/0
+
+### 06/GOM07_Reflected_Light_Gravitational_Redshift  | status: SPEC — first standalone prompt 2026-07-24. | words 892 | code 3 outs 3 verd 1 runlog 0 | gate True prereg True
+Q: Three things, in rising order of importance: (a) whether the Part-B regression on the Lanza et al. 2016 common-scale dataset re-earns direct: prior record slope **−1.11 ± 1.28** (0.9σ from SDT-flat, 1.6σ from GR-naive-climb, floor-limited ~1.5 m/s) — consistent-with-flat, not decisive, and only ever a kill of the NAIVE one-way-c
+F: P1 slope re-earning outside ±0.2 of the recorded value (data-handling defect); P3 finding both readings force the same numbers everywhere (the tension is illusory — document why and close D06 as DEGENERATE-permanently). 5. **Done =** dual verdict + the decision matrix filed for Harvey's ruling. ## §
+G: (b) whether the within-Jupiter Galilean gradient (Io−Callisto 0.78 m/s under naive-climb)
+G: labeled) and the Part-B regression. Gates: slope within ±0.2 of −1.11; σ within ±0.1 of ±1.28;
+G: - CALIBRATED budget: 0 · Gates: P1 ±0.2/±0.1 re-earn · P3 three benchmarks × two readings, all
+V: stable, so a passive reflection carries the Sun's stamp unchanged → **flat**. No "re-stamp" is invoked (an
+V: The open theoretical question is on **GR's** side: does the reflected beam's climb-out redshift get
+V: the test (see `CQ51_VERDICT.md`): **measured slope −1.11 ± 1.28 → 0.9σ from SDT (flat), 1.6σ from GR-climb.**
+V: *passive mirror* (its well assumed silent) — measuring the **Sun's** redshift, never the reflector's:
+V: (Part B regression on real data) · `RUN_LOG.md` · `CQ51_VERDICT.md` (consistent-with-SDT; GR-climb
+FLAGS: MISSING: ; Gcode:6 ; res pass/fail 0/0 verd pass/fail 0/0
+
+### 06/GOM08_Mercury_Precession_from_k_Hierarchy  | status: SPEC — full upgrade 2026-07-24 (supersedes | words 1649 | code 1 outs 1 verd 0 runlog 0 | gate True prereg True
+Q: Two things, sharply separated: (a) whether SDT possesses a **native derivation** of the 1/r³ effective-potential correction — from the depth kernel z(r) = ϟ/r acting on angular momentum (GOM01 P3's second-order terms), or from the movement budget — as opposed to what the old spec actually did, which was **transplant GR's Schwarz
+F: §⑧: P2 failing both routes leaves the sector permanently IDENTITY-class (recorded, not spun); P3 magnitude at measurable scale would face immediate test against existing ephemerides — a predicted effect already excluded by MESSENGER-class data KILLS the k-coupling variant that produced it. 5. **How 
+G: > **Re-adjudicated 2026-10-03 (origin rule, gateway §3.8):** "IDENTITY-class" → **external-input (form)**: the 6π form is taken from GR with GM → c²Ѻ; the open item is its native derivation 
+G: 2. **Why does it matter?** — Mercury's 43″/cy is the historic gate every gravity theory must
+G: orbits/cy × 206265. Gate: 42.98 ± 0.1″. Every output line: `[IDENTITY]` label per contract §1.
+G: - Gate: either route reproduces the full coefficient (not just the 1/r³ shape) with zero
+G: **P4 — Cross-body closure.** Same formula, zero refits: Venus and Earth. Gate: both within 2%
+O: STATUS: PASS (< 0.1%)
+O: VERDICT: PASS — Class C (CONVERGENCE)
+FLAGS: MISSING: ; Gcode:1 ; ident:18 ; res pass/fail 4/0 verd pass/fail 0/0
+
+### 06/GOM09_Earth_Core_Seismic_Speed  | status: SPEC — full upgrade 2026-07-24 (supersedes | words 1980 | code 3 outs 3 verd 0 runlog 0 | gate True prereg True
+Q: Three separated questions the prior run blurred into one FAIL: (a) the **convergent leg**: does the koppa-only interior profile g(r), P(r) still land at ~2% RMS on PREM when run direct (it should — the enclosed-mass integral is shared algebra with Newton via the bridge; that part is CONVERGENCE and was never the problem); (b) th
+F: §⑧: P2/P3 missing PREM by >30% anywhere after honest calculation kills the occlusion-stiffness route (KILL-CONFIRMED — the honest outcome the re-adjudication must be ready to file); G > 0 in the outer core kills the unlock criterion; the GM audit finding load-bearing GM in the "native" chain voids t
+G: GM-sweep suspicion — that audit is now a gate); P1 convergent leg re-earned; P2 the occlusion
+G: 5. **GM-sweep audit is a gate, not a note** (the register lists this folder under suspicion):
+G: **P0 — Source + GM audit (gate).** Read `gom09_seismic.cpp`, `gom09_backward.cpp`,
+G: **P1 — Convergent leg re-earned (direct).** g(r) and P(r) against PREM. Pre-registered gates:
+G: g(r) RMS < 3% (old: 1.82%); P(centre) within 5% of 364 GPa. Labels per contract §2. If the old
+FLAGS: MISSING:Datasets/geophysics ; LOOSE:28 ; Gcode:6 ; res pass/fail 0/0 verd pass/fail 0/0
+
+### 06/GOM10_Three_Body_Lagrange_from_Koppa  | status: SPEC — full upgrade 2026-07-24 (supersedes | words 2007 | code 1 outs 1 verd 0 runlog 0 | gate True prereg True
+Q: Three cleanly separated things: (a) *the identity leg:* nothing — μ_ϟ = ϟ₂/(ϟ₁+ϟ₂) equals the mass ratio **algebraically** through the bridge, so L1–L5 landing on the classical positions is IDENTITY-class and its only open item is clearing the input-precision PARTIAL with ephemeris-grade v, R; (b) *the divergence leg (the actual
+F: §⑧: identity leg missing at ephemeris precision (bridge error — serious); P2 predicting a measurable L2 shift already excluded by JWST/SOHO station-keeping (that cone-geometry variant KILLED — with the bound recorded); P3 producing no falsifiable consequence (claim struck as prose). 5. **How will we
+G: | N2 | Eccentric pair, \(e=0.5\), 50 periods at \(P/8000\): relative energy and angular-momentum drift each ≤ \(2\times10^{-5}\); periapsis and apoapsis stay within \(2\times10^{-4}\) of the
+G: | N3 | Halving the Verlet step gives an error-reduction ratio ≥ 3.5; one-period Verlet and RK4 states agree within \(2\times10^{-4}\) of the position/velocity scales. |
+G: | N6 | Rigidly rotate the figure-eight state out of plane and rerun the same fixed steps: the final state must equal the rotated planar result within \(10^{-11}\) of the registered scales. |
+G: Gates: L1/L2 within 0.1% of classical (was 1% — tightened because the PARTIAL was
+G: input-precision-limited); L4/L5 at 60.000°; stability threshold 0.0385 reproduced; μ_ϟ = μ to
+FLAGS: MISSING: ; ident:16 ; res pass/fail 0/0 verd pass/fail 0/0
+
+### 06/GOM11_Ocean_Tidal_Analysis  | status: SPEC — full upgrade 2026-07-24 (supersedes | words 1324 | code 1 outs 1 verd 0 runlog 0 | gate True prereg True
+Q: What, exactly, SDT can claim about ocean tides once the E99 taint is removed. Split honestly, the candidate claims are: (a) the **forcing** — the tidal acceleration field (amplitude and r⁻³ form) computed from ϟ_Moon and ϟ_Sun with no G/M: SDT computes this cleanly, and it is CONVERGENT with Newton (shared gradient algebra throu
+F: §⑧: forcing amplitude off from the standard tidal acceleration (shared algebra — cannot honestly miss; a miss = inputs bug); M2/S2 ratio off by >1% with clean inputs (the ϟ-ledger's lunar/solar strengths are wrong — a real problem feeding back to GOM02); any run needing an in-house fitted response f
+G: equilibrium tide with Love numbers labeled as anchors; P3 the M2/S2 ratio (the clean gate);
+G: P4 (stretch, F8-gated) station-level comparison with the ocean response handled by an
+G: 4. **Data:** MUST_FETCH **F8** (harmonic constants) gates P4 only; P1–P3 run on ephemeris
+G: | M2/S2 forcing ratio | measured ≈ 2.17–2.18 | OBSERVED-anchor — THE clean gate |
+G: **P0 — Tool audit (gate).** Read `gom11_ocean_tidal.cpp` in full: locate every embedded
+O: |error| = 0.4% [PASS]
+O: |error| = 0.3% [PASS]
+O: VERDICT: PASS — Class C (CONVERGENCE)
+FLAGS: MISSING: ; res pass/fail 3/0 verd pass/fail 0/0
+
+### 06/GOM12_Solar_System_Convergence_Budget  | status: SPEC — full upgrade 2026-07-24 (supersedes | words 1488 | code 1 outs 1 verd 0 runlog 0 | gate True prereg True
+Q: The old spec was a grab-bag; sorted, it contains exactly one gated physical question and a set of labeled audits: **The question (E101/Law II):** does the solar system's total convergence budget BALANCE — i.e. does the summed throughput bookkeeping of the Sun's domain close against the Sun's output (L☉) as Law II requires? This 
+F: §⑧: v(r) failing 0.1% with DE-grade inputs (Kepler-in-koppa broken — bridge defect); the budget failing closure by an order of magnitude with all terms labeled (Law II's solar-system bookkeeping has a named hole — record it; do NOT plug it); planetary cross-terms found significant but contradicting 
+G: # GOM12: The Solar-System Convergence Budget — a labeled audit, one gated question, and a numerology fence
+G: 1. **What don't we know?** — The old spec was a grab-bag; sorted, it contains exactly one gated
+G: comparison (factor-2 gate, honest E106 status attached); P4 the fenced pattern-scan
+G: | budget closure ratio | Σ(term)/L☉ | THE gated output (P2) |
+G: gates — zk² = 1 to machine precision `[IDENTITY]`; v(r) within **0.1%** per planet (DE-grade;
+O: literature range. No PASS stamped. (Committed in RUN_LOG before run.)
+O: SUMMARY: 2 gated PASS, 3 gated FAIL, 1 IDENTITY (unscored), 2 OPEN
+FLAGS: MISSING: ; Gcode:11 ; ident:18 ; res pass/fail 4/4 verd pass/fail 0/0

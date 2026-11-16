@@ -93,7 +93,7 @@ Separate **whether the prompt was executed** from **what physics class resulted*
 | Axis | Grades | Question |
 |------|--------|----------|
 | **Prompt completion** | A / B / C / D / F | Did the tool do what §④–§⑥ asked, phase by phase? |
-| **Physics class** | NATIVE / CONVERGENCE / DEGENERATE / LINGUISTIC-BORROW / KILLED / OPEN | What is the ORIGIN of the result — native, independently-convergent, imported, or dead? |
+| **Physics class** | NATIVE / CONVERGENCE / SHARED-INPUT / LINGUISTIC-BORROW / KILLED / OPEN | What is the ORIGIN of the result — native, independently-convergent, imported, or dead? |
 
 > **CORRECTED 2026-07-26 (Harvey's loaded-gates discovery; origin rule ratified 2026-07-25).**
 > The 2026-06-27 bulk upgrade stamped an ALIGNMENT-based degeneracy test ("matches rival
@@ -105,7 +105,11 @@ Separate **whether the prompt was executed** from **what physics class resulted*
 > **Adjudication (origin decides):**
 > - Independent SDT origin + same number as rival → **CONVERGENCE** (meaningful; both live;
 >   discrimination pending a distinct prediction — from EITHER side).
-> - Shared input / invertible relabelling of the rival's quantities → **DEGENERATE**.
+> - Shared input → **SHARED-INPUT (not independent)** — only when the contaminating input is
+>   NAMED with its measurement chain (gateway procedural §3.8). "Invertible relabelling of the
+>   rival's quantities" is NOT a reason by itself: an SDT quantity that maps one-to-one onto a
+>   rival's quantity (Ѻ ↔ GM/c², Law V ↔ Lorentz γ) is convergence unless the rival's MEASURED
+>   value entered the SDT chain. *(Loophole closed 2026-10-03.)*
 > - SDT lands where the rival cannot, unfitted → **NATIVE-distinct**.
 > - Rival lands where SDT cannot → **recorded miss** (never buried).
 >
@@ -155,9 +159,11 @@ Update `INVESTIGATION_STACK.md` status tag when:
 - **RESOLVED** — Prompt completion ≥ B and physics class NATIVE or honest CONVERGENCE
 - **ACTIVE** — Partial run with OPEN/DEFER documented
 - **KILLED** — KILL decision with numbers
-- **DEGENERATE** — shared-input / relabelling of the rival's quantities ONLY (origin rule,
-  corrected 2026-07-26; alignment alone NEVER degrades — see §4. Items previously tagged
-  under the old "matches without beating" test are queued for re-adjudication by origin.)
+- **SHARED-INPUT** (formerly DEGENERATE) — a named contaminating input only (origin rule,
+  corrected 2026-07-26; tightened 2026-10-03: the input and its measurement chain must be
+  named, and agreement with a rival formula is never the reason — see §4 and gateway
+  procedural §3.8). Items previously tagged under the old "matches without beating" test were
+  re-adjudicated by origin on 2026-10-03 — see `ADJUDICATION_REGISTER.md` §R-2026-10-03.
 
 ---
 

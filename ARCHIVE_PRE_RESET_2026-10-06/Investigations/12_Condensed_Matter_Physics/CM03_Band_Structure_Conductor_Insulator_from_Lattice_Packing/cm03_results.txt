@@ -1,0 +1,45 @@
+CM03 - Band Structure from Lattice Packing (occlusion blockade)
+J. C. Harvey, Melbourne - 2026-07-04
+Door: FD02 wake confinement (same Law VI door as CM01 v_pack)
+
+CALIBRATED(1): f = 0.9439 (minimax over C/Si/Ge; SAME f everywhere)
+               max committed miss = sqrt(hi/lo) = 1.815 x
+
+== P1: trichotomy from the pre-committed 3-rule tree ==
+  elem      z  bond  netD  Eg_pred  predicted  observed   ok
+  Cu       12     1     3        -  metal      metal      OK
+  Ag       12     1     3        -  metal      metal      OK
+  Al       12     3     3        -  metal      metal      OK
+  Si        4     4     3    1.30   semi       semi       OK
+  Ge        4     4     3    1.20   semi       semi       OK
+  C         4     4     3    3.01   insulator  insulator  OK
+  Sn-grey   4     4     3    0.91   semi       semi       OK
+  S         2     2     0        -  insulator  insulator  OK
+  P-black   3     3     2    1.45   semi       semi       OK
+  P1: 0 misclassifications of 9 (gate 0; kill >=2)  PASS
+
+== P2: gap ordering (native) + magnitude (one f) ==
+  Si       Eg_pred =  1.30 eV  obs =  1.12  miss 1.16x (gate 2x)  PASS
+  Ge       Eg_pred =  1.20 eV  obs =  0.66  miss 1.82x (gate 2x)  PASS
+  C        Eg_pred =  3.01 eV  obs =  5.47  miss 1.82x (gate 2x)  PASS
+  Sn-grey  Eg_pred =  0.91 eV  obs =  0.08  miss 11.4x  [EXHIBIT - outside gate]
+  P-black  Eg_pred =  1.45 eV  obs =  0.33  miss 4.4x  [EXHIBIT - outside gate]
+  ordering C > Si > Ge (f-independent, pure 1/d^2): PASS [DERIVED]
+
+== P3: activated conduction from pair-creation mass action ==
+  Si: ln(rho) vs 1/T slope -> Eg = 1.300 eV (input 1.300)  err 0.00%  PASS
+  drho/dT < 0 across 250-580 K: PASS (metal has opposite sign, P1 chain)
+
+== P4 (stretch): doping = one opened channel per substitutional defect ==
+  carrier count = dopant count (1:1 by construction of the channel count);
+  sigma proportional to N_d [COMPUTED, linear by mechanism]. Sign: donor
+  frees a wake (n); acceptor leaves a mobile vacancy - opposite handed
+  drift (p). Qualitative only; no numeric gate committed.
+
+== Ledger ==
+  DERIVED   : trichotomy tree outcomes; 1/d^2 ordering; the 1/2 in the
+              activation exponent (pair-creation kinetics).
+  NAMED PREMISE: wake confinement E ~ hbar^2/(m_e d^2) (FD02/Law VI door).
+  CALIBRATED(1): f (minimax over C/Si/Ge, same f for every solid).
+  CONVENTION: 2.0 eV semi/insulator line (standard usage, declared).
+  MEASURED-INPUT: z, bonds, network dim, d_nn. OBSERVED: classes, E_g.

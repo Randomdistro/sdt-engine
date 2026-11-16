@@ -1,3 +1,5 @@
+> **SUPERSEDED IN PART (notice added 2026-10-05):** the minimum-cut-of-a-contact-graph premise is withdrawn by `NP35_Flay_Not_Split` and `NP35_CHAIN.md` ("the wrong object under this ontology"); the empirical regularity (a stationary heavy peak with a sliding light peak) is retained there, and the NP32 mechanism is UNADJUDICATED. The 11 pass / 2 fail rows in this folder describe the cut model and carry no verdict.
+
 # NP32 — The Scission Surface: where the mesh parts, and whether the input selects it
 
 > **Ontology correction 2026-08-13:** the nucleus is **flayed, not split**. The core is sealed masonry, not a goo drop. A minimum-cut of a liquid-drop contact graph is the wrong object. Empirical yield regularities in this folder stand; the mechanism claim moves to **NP35**. Neck/bipartition language below is historical SPEC text, not current mechanism.
@@ -165,3 +167,15 @@ borrowing · claiming "controllable fission" without a falsifiable input→produ
 *NP32 · opened 2026-07-23 direct · the programme's purpose has never had its own prompt; this is it.
 The nucleus parts where the mesh is cheapest to cut — derive that surface, and fission becomes a
 choice rather than a statistic.*
+
+---
+
+## Audit correction 2026-10-05 (record / status)
+
+**Finding:** The minimum-cut premise is withdrawn by NP35 ("wrong object under this ontology") but the folder carries no superseded banner, and it has results (11 pass, 2 fail) and no verdict.
+
+**Correction:** Add a dated superseded notice pointing to NP35 and file the verdict.
+
+**Status:** RULE RECORDED — corrected gate or definition applies to the next run; the earlier result is not re-scored and nothing was re-run.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

@@ -54,7 +54,7 @@ There was never a computation behind the claim (`HUNTER_SCOUR_2026-07-02/MASTER_
    (P5) coming out nuclear-blind; the state count landing on anything but 8. Every gate has a
    POPULATED failure class — the first execution proved this mechanism fails loudly.
 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics
-   class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN), per phase, no repainting.
+   class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN), per phase, no repainting.
 
 ---
 

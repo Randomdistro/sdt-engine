@@ -8,11 +8,11 @@
 
 ## ⓪ The Golden Rule — five questions (answer before Phase 0)
 
-1. **What don't we know?** — [NP14] NP14: Proton-Neutron Mass Difference from Topology — Investigation Prompt: *(unfilled by the 2026-06-27 bulk template upgrade — write the single measurable gap before the next run)*
+1. **What don't we know?** — [NP14] NP14: Proton-Neutron Mass Difference from Topology — Investigation Prompt: **Measurable gap (written 2026-10-05 in the audit correction pass, from this prompt's own content; the 2026-06-27 template left it unfilled):** Why is the neutron heavier than the proton by 1.293 MeV when the neutron is a proton plus an internal electron (NP17): does the structural electron term (0.511 MeV) plus a seat surplus (0.782 MeV) close the difference with the surplus derived, not back-solved?
 2. **Why does it matter?** — Stack position / downstream blockers (see `INVESTIGATION_STACK.md`).
 3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
 4. **What would prove us wrong?** — §⑧ falsification tests with numeric triggers.
-5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN).
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN).
 
 ---
 
@@ -64,7 +64,7 @@ The proton's charge (ℓ=1 wake) provides additional stabilisation that slightly
 ```markdown
 ## Pre-Run Commitments — NP14
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: [0 or list each param — max per §⑤]
 - Engine namespaces: NP01 grammar, law_III nuclear occlusion, ATOMICUS rules
 - Phase thresholds (committed before run): 20%
@@ -78,7 +78,7 @@ The proton's charge (ℓ=1 wake) provides additional stabilisation that slightly
 | Phase 0 sanity check fails | Fix units/engine refs; verify `laws.hpp` symbols | STOP — report blocker | Fit to target |
 | Native mechanism off > committed % | Alternative route in §④; document ADJ-### | **OPEN** or **KILL** hypothesis | RETRO-PASS |
 | `z ≥ 1` in closure formula | Weak-field break (CR10); piecewise or exponential | **OPEN** that regime | Ignore break |
-| Rivals match but SDT doesn't beat | Label **DEGENERATE** honestly | — | Claim Class A |
+| A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 | Upstream dependency missing (FLM10, etc.) | **DEFER** phase; cite dependency ID | — | Fake PASS |
 
 ### Allowed adjustments
@@ -93,3 +93,15 @@ The proton's charge (ℓ=1 wake) provides additional stabilisation that slightly
 ---
 
 *NP14 · upgraded 2026-06-27 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** The prompt's gate (Δm within 20% of 1.293 MeV) is applied to the composite m_e + surplus, where the m_e term is structural, so it clears at −14.08% while the surplus itself misses by −23.28%.
+
+**Correction:** Gate on the surplus alone (as the verdict already does) and delete the composite pass criterion from the prompt.
+
+**Status:** RULE RECORDED — corrected gate or definition applies to the next run; the earlier result is not re-scored and nothing was re-run.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

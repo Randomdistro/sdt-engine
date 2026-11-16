@@ -1,0 +1,52 @@
+
+== V0 helper validation (known answers) ==
+[PASS] V0    integrate sin over [0, pi] = 2                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 3.331e-16 (tol 1e-13)
+[PASS] V0    integrate x^7 over [0, 1] = 1/8                                                value 1.250000000000e-01 expected 1.250000000000e-01 err 2.220e-15 (tol 1e-14)
+[PASS] V0    integrate exp over [-1, 1] = e - 1/e                                           value 2.350402387288e+00 expected 2.350402387288e+00 err 5.668e-16 (tol 1e-13)
+[PASS] V0    root of cos x - x = 0.739085133215161                                          value 7.390851332152e-01 expected 7.390851332152e-01 err 2.253e-15 (tol 1e-13)
+[PASS] V0    root of x^2 - 2 on [1, 2] = sqrt 2                                             value 1.414213562373e+00 expected 1.414213562373e+00 err 2.983e-15 (tol 1e-13)
+[PASS] V0    compensated sum 1 + 10^6 x 1e-16 = 1 + 1e-10                                   value 1.000000000100e+00 expected 1.000000000100e+00 err 0.000e+00 (tol 1e-15)
+
+== V1 illustrative values at x = 4 ==
+[PASS] V1    v/c = x^(-1/2) = 1/2                                                           value 5.000000000000e-01 expected 5.000000000000e-01 err 0.000e+00 (tol 1e-14)
+[PASS] V1    a Om/c^2 = x^-2 = 1/16                                                         value 6.250000000000e-02 expected 6.250000000000e-02 err 0.000e+00 (tol 1e-14)
+[PASS] V1    P c/Om = 2 pi x^(3/2) = 16 pi                                                  value 5.026548245744e+01 expected 5.026548245744e+01 err 0.000e+00 (tol 1e-14)
+
+== T1 master relations ==
+       H n=1          r = 5.291772e-11 m ; Om = 2.817940e-15 m ; x = 1.8779e+04 ; v/c = 7.2974e-03
+       Earth surface  r = 6.371000e+06 m ; Om = 4.434139e-03 m ; x = 1.4368e+09 ; v/c = 2.6382e-05
+       Mercury        r = 5.790923e+10 m ; Om = 1.476637e+03 m ; x = 3.9217e+07 ; v/c = 1.5968e-04
+       Venus          r = 1.082095e+11 m ; Om = 1.476650e+03 m ; x = 7.3280e+07 ; v/c = 1.1682e-04
+       Earth          r = 1.495983e+11 m ; Om = 1.476641e+03 m ; x = 1.0131e+08 ; v/c = 9.9351e-05
+       Mars           r = 2.279438e+11 m ; Om = 1.476679e+03 m ; x = 1.5436e+08 ; v/c = 8.0488e-05
+       Jupiter        r = 7.783408e+11 m ; Om = 1.478105e+03 m ; x = 5.2658e+08 ; v/c = 4.3578e-05
+       Saturn         r = 1.426666e+12 m ; Om = 1.476035e+03 m ; x = 9.6655e+08 ; v/c = 3.2165e-05
+       Moon orbit     r = 3.844000e+08 m ; Om = 4.477409e-03 m ; x = 8.5853e+10 ; v/c = 3.4129e-06
+[PASS] T1    three master relations, worst relative over all system points                  value 2.220446049250e-16 expected 0.000000000000e+00 err 2.220e-16 (tol 1e-12)
+
+== T2 hydrogen ladder ==
+[PASS] T2    Om_n = r_e for n = 1..8 (shared-input), worst relative                         value 1.110223024625e-16 expected 0.000000000000e+00 err 1.110e-16 (tol 1e-14)
+
+== T3 the Sun's planets ==
+       Mercury  Om = 1476.637323 m
+       Venus    Om = 1476.649671 m
+       Earth    Om = 1476.640953 m
+       Mars     Om = 1476.678706 m
+       Jupiter  Om = 1478.104971 m
+       Saturn   Om = 1476.034751 m
+       mean Om_sun = 1476.791063 m ; spread (max/min - 1) = 1.403e-03 ; slope d ln Om/d ln x = 5.493e-05
+[PASS] T3    spread of Om over the six planets is at most 2e-3
+[PASS] T3    |slope of ln Om against ln x| is below 1e-4
+
+== T4 Earth: surface against lunar orbit ==
+       Om_Earth (surface) = 4.434139e-03 m, x = 1.4368e+09 ; Om_Earth (lunar orbit) = 4.477409e-03 m, x = 8.5853e+10 ; ratio 1.00976
+[PASS] T4    ratio of the two determinations lies in [0.98, 1.02]
+
+== T5 logarithmic derivative of the circular speed ==
+[PASS] T5    d ln v/dS = d ln c/dS + (1/2) d ln Om/dS - (1/2) d ln r/dS                     value 2.302955668387e-02 expected 2.302955665025e-02 err 1.460e-09 (tol 1e-08)
+
+== T6 hydrogen boundary and the proton radii ==
+       r_e/R_p = 3.34911 ; Om_H/R_p,lock = 3.34976
+[PASS] T6    neither ratio is 1 (Om_H and the proton radii are distinct objects)
+
+ALL CRITERIA MET: 0 failure(s)

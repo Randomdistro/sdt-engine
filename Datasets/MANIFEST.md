@@ -45,6 +45,9 @@
 | `nuclear/fission_yields/IAEA_241Pu_cumulative_FY.csv` | Pu-241(n,f) cumulative yields | IAEA relnsd `cumulative_fy parents=241PU` | NP32 post-decay | `6824eda417a5` | 92,783 |
 | `nuclear/fission_yields/IAEA_241Am_independent_FY.csv` | Am-241(n,f) independent yields (minor actinide; thermal+fast) | IAEA relnsd `independent_fy parents=241AM` | NP32 minor-actinide test | `a75a4ecd5109` | 100,715 |
 | `nuclear/fission_yields/IAEA_241Am_cumulative_FY.csv` | Am-241(n,f) cumulative yields | IAEA relnsd `cumulative_fy parents=241AM` | NP32 post-decay | `f4c7c23400d5` | 99,413 |
+| `nuclear/neutron_multiplicity/Nishio1998_U235_nth_f_nuA.csv` | ²³⁵U(n_th,f) per-fragment ν̄(A), author table, 66 pts | EXFOR 22464/004 (Nishio 1998, Nucl.Phys.A 632,540) via `X4sGetSubent` | reorganisation/sawtooth ν test (fit system) | `9cd58c5c2bae` | 1,371 |
+| `nuclear/neutron_multiplicity/Nishio1998_U233_nth_f_nuA.csv` | ²³³U(n_th,f) per-fragment ν̄(A), author table, 90 pts | EXFOR 22660/005 (Nishio 1998, JNST 35,631) via `X4sGetSubent` | reorganisation/sawtooth ν test (held-out, same mechanism) | `a8d7f5919c0f` | 1,864 |
+| `nuclear/neutron_multiplicity/BudtzJorgensen1988_Cf252_sf_nuA.csv` | ²⁵²Cf(sf) per-fragment ν̄(A), digitized curve, 106 pts | EXFOR 23175/008 (Budtz-Jørgensen & Knitter 1988, Nucl.Phys.A 490,307) via `X4sGetSubent` | reorganisation/sawtooth ν test (held-out, cross-mechanism: spontaneous vs neutron-induced) | `2f0990416bfa` | 1,688 |
 
 | `solar_propagation_2026-08/raw/jpl_horizons_emb_sun_vectors_2025.csv` | Earth-Moon-barycenter vector table relative to the Sun, 2025, 14-day cadence | NASA/JPL Horizons API, DE441 product; exact query in local manifest | GOM25 D1 orbit/depth audit | `99570b90b814` | 10,537 |
 | `solar_propagation_2026-08/raw/harps_lfc_tablea1.dat` | 188 HARPS-LFC published line shifts | CDS J/A+A/643/A146; laboratory-wavelength dependency | GOM25 D3 strong-line reconstruction | `1b662d02add6` | 14,288 |
@@ -90,3 +93,28 @@ boundaries: `gps_clock_2026-08/MANIFEST.md`.
 - Not re-copied (already in-repo): `Hubble/data/`, `Experiments/E109_Solar_Spectral_Prism/data/` (dunes_koppa_table), `ATOMICUS/tools/_iaea_ground_states.csv` (same IAEA pull, kept beside the enrichment tool).
 - **2026-07-23 migration** (dual-front campaign prep): `cosmology/`, `stellar/SPARC_full_175.mrt`, six `nuclear/` extras, and the external-cache Gaia wide-binary file were migrated from the `C:\tmp` working cache. `C:\tmp` originals retained until Harvey OKs deletion. The 842 MB external file was verified by full-64-char sha256 source-vs-destination match. Regenerable caches (`.pkl`/`.npy`) deliberately not migrated.
 - Outstanding wanted data lives in `Datasets/MUST_FETCH_2026-07-23.md` — check it before assuming a dataset is unavailable.
+| `nuclear/fission_yields/endf_b8_sfy/ENDF-B-VIII.0_sfy.zip` | ENDF/B-VIII.0 spontaneous fission yields (9 materials incl. Cf-252), byte-verified to NNDC checksums | nndc.bnl.gov/endf-b8.0/zips/ENDF-B-VIII.0_sfy.zip | NP35 F3 SF hold-out (F12 partly satisfied) | `7a13c998eb8a` | 1,674,846 |
+| `gw/GWTC_eventapi_2026-10-05.json` | GWOSC event API, all GWTC catalogue events (391 unique; per-event medians incl. m1, m2, final mass, chi_eff) | gwosc.org/eventapi/json/GWTC/ (curl, 2026-10-05) | GOM19 f(q) test (MUST-FETCH F10) | `9802865cc8b4` | 738,435 |
+| `geophysics/PREM_TauP_prem.nd` | PREM tabulated Earth model (depth, vp, vs, density, Q) | Dziewonski and Anderson 1981 via TauP (github raw) | GOM09 comparison profile | `efd896097313` | 5,397 |
+| `cosmology/BOSS_DR12_BAO_Alam2017_Table3.csv` | BOSS DR12 post-reconstruction BAO-only D_M and H at z = 0.38, 0.51, 0.61 (three methods) | Alam et al. 2017 (arXiv:1607.03155) Table 3, read 2026-10-05 | CR08 comparison column | `e1deafb494da` | 938 |
+
+| `cosmology/Pantheon_DS17f_binned_sys_covariance.txt` | Pantheon binned (40 bins) systematic covariance matrix, first line = 40, then 40x40 values row-major; total covariance = this + diag(dmb^2) of `Investigations/07_Cosmology_and_Redshift/CR06_Redshift_Emission_Propagation_Split/data/pantheon_binned_DS17f.txt` | Scolnic et al. 2018 (arXiv:1710.00845), github.com/dscolnic/Pantheon/Binned_data/sys_DS17f.txt, fetched 2026-10-09 | CR06 reframe run (2026-10-09) | `642391b0a56e` | 17,662 |
+
+
+## External audit intake (2026-10-16)
+
+Full register: `DATA_REGISTER_2026-10-16.md`. Per-file hashes for the 31 raw sources (incl. `raw/horizons/`): `external_audit_2026-10-16/MANIFEST.md`. Publisher-copyright reading copies (PRL 100, 091102; AIAA 98-4287) are in `C:\sdt-datalyby_2026-10-16\` and are never committed.
+
+| file | what it is | source | used by | sha256 (12) | bytes |
+|---|---|---|---|---|---|
+| `external_audit_2026-10-16/MANIFEST.md` | per-file source URL, byte size and full sha256 for the 31 cached sources and 11 derived tables | retrieval 2026-10-16 (main session) | EXTERNAL_AUDIT_2026-10-16_ASSESSMENT; DATA_REGISTER_2026-10-16 | `d424f2361f18` | 12,219 |
+| `external_audit_2026-10-16/VERIFICATION_LOG.txt` | V1–V16 instrument-validation and arithmetic log | computed in session | DATA_REGISTER_2026-10-16 §2–§8 | `fe423f998b69` | 6,538 |
+| `external_audit_2026-10-16/flyby_primary_Anderson2008_TableI.csv` | Anderson et al. PRL 100, 091102 Table I, transcribed, Eq.(1) column reproduced | PRL 100, 091102 (2008); reading copy in `C:\sdt-datalyby_2026-10-16\` | flyby tests (E21, GOM43) | `42b409bad4a7` | 1,132 |
+| `external_audit_2026-10-16/flyby_horizons_asymptotes.csv` | osculating asymptote geometry for nine Earth flybys incl. Rosetta II/III and Juno | JPL Horizons API (vectors, geocentric ICRF), computed here | flyby tests | `2f2dd78b35ee` | 2,448 |
+| `external_audit_2026-10-16/flyby_tracking_coverage.csv` | DSN/ESTRACK gap times: NEAR, Galileo I, Rosetta I, Juno | Antreasian & Guinn 1998; Anderson 2008; Hoffmann & Budnik 2026; Busack 2013 | flyby tracking-gap tests | `8d4439b4fd2b` | 2,430 |
+| `external_audit_2026-10-16/flyby_census_Hoffmann2026_Table1.csv` | flyby census 1990–2024 incl. JUICE LEGA | Hoffmann & Budnik, ISSFD 2026, arXiv:2609.23482 Table 1 | flyby tests | `4332e632e46b` | 1,119 |
+| `external_audit_2026-10-16/engine_measured_vs_CODATA2022.csv` | `measured::` constants against CODATA 2022 (edition mix) | NIST CODATA 2022 allascii listing | provenance audit of laws.hpp | `21f9249c7ce1` | 1,776 |
+| `external_audit_2026-10-16/hydrogen_balmer_NIST_ASD_vacuum.csv` | H I Balmer Ritz vacuum wavelengths n=3–9 | NIST ASD lines1.pl (2026-10-16) | B01 | `be9687547bdc` | 260 |
+| `external_audit_2026-10-16/alpha_chain_AME2020.csv` | ⁴He…⁴⁰Ca binding energies from the cached AME2020 file | AME2020 (IN-REPO) | α-cluster tests | `a6ae78520a83` | 793 |
+| `external_audit_2026-10-16/mercury_precession_observations.csv` | Mercury excess-precession bounds and PPN parameters | Pitjeva & Pitjev 2013; Iorio 2018; Genova et al. 2018; NASA fact sheet | GOM04/B27 status | `dd1ab6310403` | 1,191 |
+| `external_audit_2026-10-16/raw/horizons_gom44/` | 40 Horizons VECTORS tables (geo + helio) for 20 Earth encounters + `SHA256SUMS.txt`; input of GOM44 | JPL Horizons API 2026-10-16 (CENTER 500@399 and 500@10, ICRF, 10 min) | GOM44 | `ef66bbaa50e8` (SHA256SUMS.txt) | 3,028,980 |

@@ -1,0 +1,29 @@
+GOM25 blank-slate run 1 (registered in GOM25_RESET_ASSESSMENT_2026-10-10.md sections 0-3)
+=====================================================================
+
+D1 rows read: 27 (JD 2460676.5 to 2461040.5)
+[V1] koppa_i = A + B|r_i|: A = 2.952798 km, B = -9.867566e-09 per km, R^2 = 0.999999, -A/(2B) = 1.496214e+08 km (1.00016 AU) -> met
+[V2] Simpson N=4000: 1/sqrt relative error 0.00e+00, 1/(s^2+b^2) relative error 4.44e-16 -> met
+[V3] domain gate (accept 0, 0.5; reject 1, 1.5, -0.01, NaN) -> met
+[V4] JD spacing: max |dJD - 14| = 0.00e+00 -> met
+
+VALIDATIONS: met
+
+D3 comparators: (A) published 638 +- 6 m/s ; (B) table A.2 v_fit_3D_n: 97 lines, mean 637.70, sd 54.7, se 5.56, weighted mean 642.44 +- 0.35, median 636.0 ; (C) table A.1 v_core_obs: 188 lines, mean 351.15, sd 144.3, se 10.53
+
+[Decision 5] all z(R_Sun) and z(r_i) in [0,1): yes ; z(R_Sun) range 2.0872e-06 to 2.1579e-06
+[Decision 2] koppa_i (km): mean 1.477262, sd 0.018010, CV 1.2192%, min 1.452096, max 1.501286 ; |r| range 1.4710e+08 to 1.5209e+08 km ; variation linear in |r| (V1 R^2 = 0.999999); exploratory invariants: A/2 = 1.476399 km, -A/(2B) = 1.00016 AU
+
+[Decision 1] R = 695700 km: v_pred,i mean 633.622 m/s, sd over rows 7.689, min 622.878, max 643.877 ; leave-one-out range 633.228 to 634.036 ; first-half 634.398, second-half 632.902
+[Decision 1] R = 695658 km: v_pred,i mean 633.661 m/s, sd over rows 7.689, min 622.916, max 643.916 ; leave-one-out range 633.266 to 634.074 ; first-half 634.436, second-half 632.941
+     vs A published 638 +- 6           v_obs = 638.00 +- 6.00 : difference +4.339 m/s ; primary sigma_pred 0.128 -> threshold 12.003 -> COMPATIBLE ; epoch sigma_pred 7.690 -> threshold 19.508 -> COMPATIBLE ; Q = v_obs/v_pred = 1.00685 +- 0.00947
+     vs B table A.2 mean v_fit_3D_n    v_obs = 637.70 +- 5.56 : difference +4.038 m/s ; primary sigma_pred 0.128 -> threshold 11.116 -> COMPATIBLE ; epoch sigma_pred 7.690 -> threshold 18.975 -> COMPATIBLE ; Q = v_obs/v_pred = 1.00637 +- 0.00877
+     vs (C) table A.1 mean v_core_obs 351.15 +- 10.53 : difference -282.51 m/s : no decision (convective shift unmodelled); UNADJUDICATED
+     exploratory invariant koppa = A/2 = 1.476399 km with r = a: v = 633.293 m/s
+
+[Decision 3] straight path r1 = r2 = 1 AU on opposite sides, koppa = 1.477262 km
+     b =  2 R: exact (N=4000) 1.058604e-04 s ; N=2000 vs 4000 relative 4.33e-06 ; shapiro_delay (leading order) 1.058607e-04 s ; exact/leading - 1 = -3.261e-06 ; second-order term 4.902e-11 s (relative to exact 4.630e-07) ; round trip exact 211.7208 us
+     b =  5 R: exact (N=4000) 8.779757e-05 s ; N=2000 vs 4000 relative 1.36e-07 ; shapiro_delay (leading order) 8.780021e-05 s ; exact/leading - 1 = -3.012e-05 ; second-order term 1.943e-11 s (relative to exact 2.213e-07) ; round trip exact 175.5951 us
+     b = 20 R: exact (N=4000) 6.043294e-05 s ; N=2000 vs 4000 relative 6.45e-10 ; shapiro_delay (leading order) 6.047570e-05 s ; exact/leading - 1 = -7.071e-04 ; second-order term 4.638e-12 s (relative to exact 7.675e-08) ; round trip exact 120.8659 us
+
+[Decision 4] not run: PENDING (Cassini SCE1 ODF/TDF product is local; decoding and timing belong to the GOM_DAT chain)

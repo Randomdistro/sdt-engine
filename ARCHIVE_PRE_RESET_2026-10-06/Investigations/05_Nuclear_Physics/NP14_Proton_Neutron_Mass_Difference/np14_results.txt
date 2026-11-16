@@ -1,0 +1,47 @@
+NP14 — Proton-Neutron Mass Difference (J. C. Harvey, 2026-07-03)
+Engine: sdt/laws.hpp | premise: neutron = proton + internal electron (NP17)
+================================================================
+
+[P0] OBSERVED anchors (CODATA via measured::)
+     m_p c^2            =   938.272088 MeV
+     m_n c^2            =   939.565421 MeV
+     m_e c^2            =     0.510999 MeV
+     dm = (m_n-m_p)c^2  =     1.293332 MeV   (target)
+
+     P0 sanity (dm ~ 1.2933 MeV): PASS
+
+[P1] NP17 ledger:  dm = m_e c^2 + S
+     m_e c^2 (STRUCTURAL, by construction) =   0.510999 MeV
+     S_meas = dm - m_e c^2 (IDENTITY = Q_beta) =   0.782333 MeV
+
+[P2] Native seat surplus (committed: S = (1/2)(z-1) m_e c^2)
+     z = r_e/R_p        =    3.34911   (dimensionless depth)
+     v_seat = c sqrt(z) =    1.83006 c
+     traction check c/k_proton_surface = 1.83016 c  (agree -0.006%)
+     S_native           =   0.600196 MeV   vs S_meas = 0.782333 MeV
+     GATE G1 (<=15%):    error = -23.28%  -> FAIL -> OPEN
+
+     composite dm_pred = m_e + S_native = 1.111195 MeV (err -14.08%)
+     ^ DILUTED: contains the by-construction m_e piece. Informational only.
+     knob that WOULD be needed on S: x1.3035  (CALIBRATED(1) — refused)
+
+[P3] Legacy Hyp A (uncharged-trefoil premise — PREMISE-DEAD under NP17)
+     E_em = alpha hbar c / R_p =   1.711391 MeV  (vs dm: +32.3%)
+     required fraction dm/E_em = 0.7557 — NO prior geometric derivation
+     declared in RUN_LOG -> inadmissible; proximity to 3/4 etc. is
+     unexplained numerology. GATE G2: NO PASS. Hypothesis A: KILLED
+     (premise superseded by NP17; no derived fraction).
+
+[P4] GATE G3 — why HEAVIER, not lighter (qualitative)
+     (i)  containment: neutron = p + e -> +m_e c^2, sign forced (+)
+     (ii) seat surplus: z > 1 (r_e > R_p) -> (z-1) > 0 -> S_native > 0,
+          sign forced (+) by the geometry (no sense/sign knob used).
+     The seat is ABOVE the free p+e ground -> beta decay is downhill,
+     releasing exactly S (= Q_beta). Sign: EARNED. Magnitude: OWED.
+
+================================================================
+VERDICT (numeric):
+  G1 surplus magnitude : -23.28% vs +/-15%  -> FAIL -> OPEN (root: NP20/NP19/NP21)
+  G2 legacy Hyp A      : KILLED (premise-dead + no derived fraction)
+  G3 sign/mechanism    : EARNED (both signs forced positive)
+  Composite dm         : 1.1112 vs 1.2933 MeV (-14.08%) — DILUTED, not a pass

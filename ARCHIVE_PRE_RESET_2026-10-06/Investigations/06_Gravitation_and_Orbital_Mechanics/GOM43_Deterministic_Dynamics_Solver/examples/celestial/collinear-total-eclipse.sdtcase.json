@@ -1,0 +1,101 @@
+{
+  "contract_version": "2.0.0",
+  "case_id": "mathematical-collinear-total-eclipse",
+  "problem_class": "celestial_three_body",
+  "frame": {
+    "type": "inertial_cartesian",
+    "units": "SI",
+    "epoch": "t=0",
+    "description": "Collinear eclipse-limiting geometry"
+  },
+  "force": {
+    "type": "retarded_seven_cone_occlusion",
+    "propagation_speed": "c",
+    "pressure_source": "sdt_law_I_P_conv",
+    "enable_eclipse_shielding": true,
+    "comparison_route": "point_koppa"
+  },
+  "bodies": [
+    {
+      "id": "primary",
+      "baryon_count": "2012694770528711930862478680940967667264809317896418",
+      "radius_m": 400000000.0,
+      "position_m": [
+        -4000000000.0,
+        0,
+        0
+      ],
+      "velocity_m_s": [
+        0,
+        0,
+        0
+      ],
+      "provenance": {
+        "baryons": "kappa=2.5e-3 m divided by laws.hpp koppa_per_baryon",
+        "radius": "declared mathematical boundary",
+        "state": "sdt::dynamics::equilateral_three known answer; transformed for mathematical-collinear-total-eclipse"
+      }
+    },
+    {
+      "id": "secondary",
+      "baryon_count": "2012694770528711930862478680940967667264809317896",
+      "radius_m": 200000000.0,
+      "position_m": [
+        0,
+        0,
+        0
+      ],
+      "velocity_m_s": [
+        0,
+        0,
+        0
+      ],
+      "provenance": {
+        "baryons": "kappa=2.5e-6 m divided by laws.hpp koppa_per_baryon",
+        "radius": "declared mathematical boundary",
+        "state": "sdt::dynamics::equilateral_three known answer; transformed for mathematical-collinear-total-eclipse"
+      }
+    },
+    {
+      "id": "runner",
+      "baryon_count": "2012694770528711930862478680940967667264809318",
+      "radius_m": 100000000.0,
+      "position_m": [
+        4000000000.0,
+        0,
+        0
+      ],
+      "velocity_m_s": [
+        0,
+        0,
+        0
+      ],
+      "provenance": {
+        "baryons": "kappa=2.5e-9 m divided by laws.hpp koppa_per_baryon",
+        "radius": "declared mathematical boundary",
+        "state": "sdt::dynamics::equilateral_three known answer; transformed for mathematical-collinear-total-eclipse"
+      }
+    }
+  ],
+  "integrator": "velocity_verlet",
+  "timestep_s": 10,
+  "max_steps": 4000,
+  "record_every_steps": 1,
+  "tolerances": {
+    "retarded_time_s": 1e-10,
+    "channel_closure": 1e-13,
+    "medium_momentum_relative": 1e-11,
+    "lagrange_residual_m_s2": 1e-08,
+    "max_retarded_iterations": 64
+  },
+  "events": {
+    "stop_on_collision": true
+  },
+  "provenance": {
+    "classification": "COMPUTED",
+    "description": "Coaxial collinear geometry for total-eclipse limiting behaviour.",
+    "sources": [
+      "stable-lagrange.sdtcase.json"
+    ]
+  }
+}

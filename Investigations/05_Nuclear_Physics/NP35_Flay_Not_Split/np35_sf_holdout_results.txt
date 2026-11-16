@@ -1,0 +1,36 @@
+--- instrument validation (no yield files) ---
+  F1(U-236 N=144) complete = 126  PASS
+  F3(U-236 N=144) sealed T = 82   PASS
+  F3(N=100) sealed T = 50         PASS
+  F3(N=200) sealed T = 126        PASS (superheavy switch)
+  2d->alpha ledger on F3 pair     PASS
+VALIDATION PASS
+
+--- predictions (yield files not opened) ---
+  U-238 A*=238 N=146 N_H=82 Z_H=52 A_H_pre=134 A_L_pre=104  [matches pre-registration table]
+ Cm-244 A*=244 N=148 N_H=82 Z_H=53 A_H_pre=135 A_L_pre=109  [matches pre-registration table]
+ Cm-246 A*=246 N=150 N_H=82 Z_H=52 A_H_pre=134 A_L_pre=112  [matches pre-registration table]
+ Cm-248 A*=248 N=152 N_H=82 Z_H=52 A_H_pre=134 A_L_pre=114  [matches pre-registration table]
+ Cf-250 A*=250 N=152 N_H=82 Z_H=53 A_H_pre=135 A_L_pre=115  [matches pre-registration table]
+ Cf-252 A*=252 N=154 N_H=82 Z_H=52 A_H_pre=134 A_L_pre=118  [matches pre-registration table]
+ Es-253 A*=253 N=154 N_H=82 Z_H=53 A_H_pre=135 A_L_pre=118  [matches pre-registration table]
+ Fm-254 A*=254 N=154 N_H=82 Z_H=53 A_H_pre=135 A_L_pre=119  [matches pre-registration table]
+ Fm-256 A*=256 N=156 N_H=82 Z_H=53 A_H_pre=135 A_L_pre=121  [matches pre-registration table]
+
+--- comparison (ENDF/B-VIII.0 SFY opened now) ---
+    sys   sumY  obs A_L  obs A_H     dAH     class     dAL
+  U-238   2.00     95.3    141.5    -7.5     MATCH    +8.7
+ Cm-244   2.00    104.5    137.4    -2.4     MATCH    +4.5
+ Cm-246   2.00    104.6    137.7    -3.7     MATCH    +7.4
+ Cm-248   2.00    105.4    138.5    -4.5     MATCH    +8.6
+ Cf-250   2.00    106.7    141.4    -6.4     MATCH    +8.3
+ Cf-252   2.00    107.1    142.2    -8.2     ORDER   +10.9
+ Es-253   2.00    106.3    142.3    -7.3     MATCH   +11.7
+ Fm-254   2.00    110.0    138.6    -3.6     MATCH    +9.0
+ Fm-256   2.00    113.6    137.1    -2.1     MATCH    +7.4
+
+--- gates ---
+  H1 classes: {'MATCH': 8, 'ORDER': 1}  all MATCH: False
+  H2 observed A_H in [128,148] all: True  any <120 or >160: False
+  H3 slope obs A_H vs A*: -0.022  (|slope|<0.25: True)
+  H4 A_L_pre-A_L_obs in [1,8]: [8.68, 4.51, 7.39, 8.64, 8.34, 10.93, 11.74, 8.99, 7.36]  all: False

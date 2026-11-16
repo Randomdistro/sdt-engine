@@ -1,0 +1,234 @@
+### 05/NP18_Be7BEC_Flux_Resonator  | status: SPEC. | words 3656 | code 1 outs 1 verd 2 runlog 1 | gate True prereg True
+Q: Does the electron-capture (EC) rate of Be-7 scale with the **weak coupling G_F** (the W boson's fingerprint), or with the **coherence/gaplessness** of the electron substrate it captures from? Nobody has measured Be-7 EC against a Bose–Einstein condensate target — a gapless, single-wavefunction electron environment the standard c
+F: §⑧ falsifiers with numeric triggers: rate tracks G_F not coherence (KILL the wedge); no magnetisation step above fT at achievable N (PIVOT or OPEN); coherence cannot span the BEC (DEFER to CEνNS scale). 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (
+G: 3. **How will we find out?** — Four gated phases in §④: incoherent baseline rate → coherent-enhanced rate (N vs N²) → divergence population N* against the SQUID femtotesla floor → verdict bu
+G: The textbook "neutrinos barely interact" cross-section is computed for an **incoherent** target: independent nucleons and electrons with gaps between them. A **coherent, gapless Bose–Einstei
+G: **The SDT grounding claim (PPT10).** A neutrino is straight-running electron-stuff: an open winding (W→0, `sdt::neutrino`) that *propagates with the relay, not against it*. In an ordinary gr
+G: > Be excessive. Four phases, each with a pre-committed numeric threshold, an explicit failure trigger, and a hard gate. Phase N+1 is forbidden until Phase N is PASS-GATE or an explicit DEFER
+G: - **Gate:** no rate phase until the (3,−1) underflow check passes.
+V: **Falsifiable selection rule (stated as such):** a good resonant-capture substrate must sit at n_t<0 underflow, reachable to the on-lattice wedge by one EC grammar vector. Zero free parameters. Be-7 s
+V: **Load-bearing limit checks (asserted in code, all pass EXACTLY):**
+V: The crossover is shown in the rate table, not hidden. A model that fails the incoherent limit would be wrong regardless of the headline; both limits are exact here. **DERIVED.**
+V: Consequence: the *whole-condensate* N² enhancement is **geometrically unavailable** at BEC scale. This is exactly the §8 honest boundary: CEνNS proves N² coherence only where q·R ≲ 1 — over nucleons *
+V: The per-capture magnetisation step B_step (the 2s shallow-seat flux quantum) requires the flux-per-atom absolute from **NP19 / NP20**, both still SPEC (BLOCKER-01). Therefore B_sig(N\*)=B_floor **cann
+O: [P1 ] R_inc built G_F-free from resonance ceiling + measured EC width: PASS-GATE
+O: [P2 ] N-vs-N^2 enhancement law + exact incoherent limits: PASS-GATE
+O: [P3 ] span gate FAILS (rho<1); absolute N* DEFERRED (B_step PENDING NP19/NP20).
+FLAGS: MISSING: ; Gcode:2 ; ident:7 ; res pass/fail 6/1 verd pass/fail 11/4
+
+### 05/NP19_Mass_Defect_as_Form_Resistance  | status: SPEC. | words 4463 | code 1 outs 1 verd 2 runlog 1 | gate True prereg True
+Q: We have never written down, as a *named framework claim*, that mass is the medium's RESISTANCE to holding a form and that a mass defect is therefore a *resistance difference* (not stored binding energy) — nor have we proven the three nuclear numbers (0.511, 1.293, 0.782 MeV) are one resistance landscape, not three separate energ
+F: §⑧ falsifiers with numeric/sign triggers: wrong-sign (bound = lower resistance) → **KILL**; arithmetic `1.293 − 0.511 ≠ 0.782` beyond data error → bookkeeping fails; same boundary yielding both signs → lemma fails. 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + phy
+G: 3. **How will we find out?** — Four gated phases: (P1) formalise mass = form-resistance from Law IV with explicit symbols/dimensions; (P2) prove the **1.293 = 0.511 + 0.782** bookkeeping is 
+G: **Pre-committed success metric.** Round-trip `|m − mass_from_V_disp(V_disp_from_mass(m))| / m < 1e-9` for all three particles (pure identity check). `ρ_form` for the electron within **1 orde
+G: **Gate.** No Phase 2 until the renaming is shown constant-free.
+G: **Gate.** No Phase 3 until sign + arithmetic both pass.
+G: **Gate.** No Phase 4 until both cases pass and the both-signs construction provably fails.
+V: > **Status:** RESULT — a **named reframe**, Class C (Convergence).
+V: **Falsifier turned inward (T3).** A *single fixed* boundary has a *fixed* `ΔR`, hence exactly **one** sign. The tool's `distinct_signs_on_fixed_boundary(ΔR)` returns **1** — the both-signs constructio
+V: - No energy must be assigned to the det −1 move to balance the books. No contradiction with NP01 grammar or ATOMICUS rules. `[consistency PASS]`
+V: **Physics class: CONVERGENCE (reframe).** The realistic and pre-committed ceiling. A tautology dressed as a derivation would be an audit fail; NP19 is labelled for exactly what it is.
+V: # NP19 — VERDICT: Mass-Defect as Form-Resistance + the Two-Ledger Lemma
+O: distinct signs a FIXED cut (dR=1.29333) can yield = 1 [PASS (lemma survives)]
+O: => 1.293/0.511/0.782 sourced 100% from dR, 0% from the det -1 move. [PASS]
+O: OVERALL: all sign + arithmetic assertions PASS (0 failures).
+FLAGS: MISSING: ; ident:53 ; res pass/fail 14/0 verd pass/fail 15/2
+
+### 05/NP20_Neutron_From_One_Seat  | status: SPEC. | words 3938 | code 1 outs 2 verd 2 runlog 1 | gate True prereg True
+Q: Does **one** seat geometry (bare proton + one electron driven onto the proton boundary at the framework's already-fixed ~1.83c seat speed) **generate both** neutron numbers — the 0.782 MeV free-decay surplus AND the −1.913 μ_N moment (sign and magnitude) — with **zero free knobs**? 2. **Why does it matter?** — This is the framew
+F: §⑧: a **positive** moment sign → KILL; needing a **different** seat speed for each number → the closure is FALSE (downgrade to two separate COMPUTED results); any fitted parameter → label CALIBRATED and document it. 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + ph
+G: 3. **How will we find out?** — Four gated phases (§④): **declare one geometry first**, then read the mass off it, then read the moment off it, then prove both came from the *identical* param
+G: > **Run discipline:** PRE-COMMIT → IMPLEMENT → EXECUTE → COMPARE → DECIDE → ADJUST → GATE (per `PROMPT_EXECUTION_PROTOCOL.md` §1). No phase N+1 until N is PASS-GATE or documented DEFER. **On
+G: - **Gate:** P2 forbidden until the geometry table is printed and frozen in `RUN_LOG.md`.
+G: - **OUT OF SCOPE:** computing either physical number; choosing tolerances for P2/P3 (those are pre-committed below, not now).
+G: - **Pre-committed success metric:** predicted surplus within **±15%** of 0.782 MeV (stretch: ±10%).
+V: > **Author:** J. C. Harvey, Melbourne. **Status:** EXECUTED (honest OPEN — closure not paid).
+V: downgrade to two separate results (or OPEN).
+V: ## 1. The frozen seat geometry (Phase 1 — declared before any number) — **DERIVED / PASS**
+V: twice over. This passes the delete-test: neither route imports the other's number. **PASS-GATE.**
+V: ## 2. Number 1 — the MASS (form-resistance step) (Phase 2) — **COMPUTED / MISS → OPEN**
+O: knob count beyond shared geometry : 2 (committed pass = 0)
+O: --> CLOSURE VERDICT: FALSE. Each number needs its OWN per-number coefficient.
+O: v_seat reconcile | 1.83016c | 1.83006c(v_bound) | 0.0057% | + | DERIVED(PASS)
+FLAGS: MISSING: ; ident:24 ; res pass/fail 2/0 verd pass/fail 12/8
+
+### 05/NP21_Binding_Curve_Resistance_Landscape  | status: SPEC. | words 4950 | code 1 outs 2 verd 2 runlog 1 | gate True prereg True
+Q: Whether the **entire** binding-energy-per-nucleon curve is a single **resistance landscape** in the NP19 sense — and, the decisive sub-question, whether the **location of its floor (the iron peak, A≈56–62, maximum binding / minimum mass-per-nucleon)** falls out of the alpha-grammar + packing **geometry** *without a fitted expone
+F: §⑧ falsifiers with numeric triggers: floor lands far from iron → **KILL** the geometric-floor claim; the only way to place the floor at iron is a **fitted exponent** → downgrade to **CALIBRATED / Class C** and *say so*; landscape can't even reproduce rise-then-fall → **OPEN**. 5. **How will we know 
+G: 3. **How will we find out?** — Four gated phases (§④): (P1) define the **resistance functional** `R̃(Z,A)` from grammar + packing geometry, declaring every input geometric vs fitted **before
+G: **The floor as a derived prediction.** The decisive object is `argmin_{(Z,A)} R̃ / A`. If, with **only geometric exponents**, that argmin lands within ±2 in `A` of the Fe/Ni region (A≈56–62)
+G: This investigation is **half geometry, half discipline**. The tool exists to make the landscape and the floor-location *mechanical and falsifiable*, and — above all — to keep the **geometric
+G: **Gate.** No P2 until the exponent ledger is frozen and copied into `RUN_LOG.md`.
+G: - (a) `−R̃/A` is **monotone increasing** up to `Z≈26` (within a small tolerance of local grammar wiggle — allow ≤3 non-monotone steps from odd/even pairing), then **monotone decreasing** to 
+V: > Every step tagged: `DERIVED` / `ASSUMED` / `IDENTITY` / `CALIBRATED(n)` / `OBSERVED-TARGET`.
+V: `CALIBRATED(3)`; anything it enables is Class C.
+V: Rise-then-fall reproduced — **only with 3 fitted coefficients** → `CALIBRATED(3)`.
+V: stable-set minimum sits at Ca-48). — `CALIBRATED(3)`.
+V: CALIBRATED, not derived, in the frozen ledger and in FLM12 §D2.
+FLAGS: MISSING: ; Gcode:1 ; ident:13 ; res pass/fail 0/0 verd pass/fail 6/10
+
+### 05/NP22_Beta_Spectrum_from_Partition_Geometry  | status: ACTIVE (named test from NP14 VERDICT, 2026-07-04 appendix). | words 1514 | code 1 outs 1 verd 1 runlog 1 | gate True prereg True
+Q: Whether the geometric partition of one fixed internal speed — the 0.9186c seat electron unwinding, the neutrino taking the Law-V complement — reproduces the *SHAPE* of the free-neutron β spectrum. 2. **Why does it matter?** NP14's appendix names this the cashable test: the rival gets the continuous spectrum from phase-space inte
+F: (T1) KS distance D > 0.15 vs the anchor; (T2) wrong endpoint behaviour — anchor vanishes as (Q−T)², a 1-DOF map gives step/divergence; (T3) wrong low-E behaviour — anchor vanishes as √T; (T4) the class-kill lemma: NO analytic 1-DOF measure can produce a (Q−T)² zero (see §8). 5. **How will we know we
+G: 5. **How will we know we're done?** Dual verdict: prompt completion (all gates evaluated, no
+G: Build the anchor PDF/CDF on [0,Q]. Label every identity as IDENTITY. Gate: β₀ within 0.1% of
+G: CDF to < 10⁻³ (numerics gate). Compare to anchor: KS D (primary), total-variation on 50 bins,
+G: 1. `RUN_LOG.md` — pre-commitments (written BEFORE the tool; gates + forbidden retro list)
+G: | M1 D > 0.15 | Grade declared scan M0/M2/M3 as scan (cannot PASS) | Run Phase 4 class-kill; verdict FAIL→OPEN, cascade root named | Invent a new measure after seeing the miss; reweight the 
+V: # NP22 — VERDICT: β-Spectrum SHAPE from Partition Geometry
+V: ## Dual verdict header
+V: | **Prompt completion** | **A** | Every gate evaluated (G1–G4 + class-kill check); committed measure graded first; scan graded as scan; CALIBRATED budget spent: 0. |
+V: | **Physics class** | **FAIL → OPEN** (shape not earned; **1-DOF release-measure class KILLED**; endpoint IDENTITY as declared) | One release angle can carry the *continuum* but not the *shape*: the m
+V: | **M1 isotropic-projection (COMMITTED)** | **KS D = 0.4900**, TV = 0.4986, ⟨T⟩ = 0.1368 MeV | gate: D ≤ 0.05 PASS / ≤ 0.15 QUALIFIED | **FAIL G1 → OPEN** |
+FLAGS: MISSING: ; ident:24 ; res pass/fail 2/1 verd pass/fail 6/15
+
+### 05/NP23_Monoisotopy_from_Mesh_Windows  | status: ACTIVE (Harvey question, 2026-07-06, verbatim | words 1736 | code 1 outs 1 verd 1 runlog 1 | gate True prereg True
+Q: Whether the ATOMICUS construction grammar (α core + n_d deuterons + n_t tritons; n_t = A−2Z, n_d = 3Z−A−2) makes the ~26 single-stable-isotope elements *jump out* — a shared grammar/mesh signature — and whether a zero-per-element-freedom rule picks WHICH A is the stable one for each. 2. **Why does it matter?** It is Harvey's sta
+F: Phase B rule < 20/26; or the Be row missing A=9 even with the NP08 packing-competition complement; or Phase A showing the singles share NO grammar signature beyond what the rival's pairing/Mattauch account already fixes. 5. **How will we know we're done?** Dual verdict: prompt completion + physics c
+G: 3. **How will we find out?** Phase A (leads only, NO gates): map every stable isotope Z=1..83
+G: elements, declared in RUN_LOG before scoring, gate ≥ 20/26 plus the mandatory Be-9 row.
+G: ## 4. Phase A — leads / mapping (NO gates scored)
+G: 3. Test and REPORT (not gate):
+G: ## 5. Phase B — the committed gate (scored ONLY if Phase A surfaces a declarable rule)
+V: # NP23 — VERDICT: Monoisotopy from Mesh Windows
+V: ## Dual verdict header
+V: | **Physics class** | **CONVERGENCE / CALIBRATED (data-interpolated), capped as declared** — plus one structural EARNED point (the NP08 even-Z pinch) and four leads | The grammar map makes the singles
+V: | Stable nuclides mapped (C1: no observed decay), Z=1..83 | 252 (31 naturally-occurring excluded rows listed as leads) | OBSERVED (declared anchor, typed NUBASE2020-class) |
+V: | Monoisotopic (width-1) elements from the table | exactly the declared 26; the ONLY even-Z single = Be | OBSERVED (G0 integrity PASS) |
+O: GATE G1 (>=20/26 AND Be==9): PASS -- class cap: CONVERGENCE / CALIBRATED (data-interpolated), post-diction-exposed (RUN_LOG)
+O: DECLARED SCANS AND SENSITIVITY (look-elsewhere ledger; none can PASS)
+FLAGS: MISSING: ; ident:7 ; res pass/fail 3/0 verd pass/fail 6/0
+
+### 05/NP24_Grammar_Rule_Extraction  | status: SPEC → RUN 2026-07-18. | words 1452 | code 0 outs 3 verd 4 runlog 0 | gate True prereg True
+Q: The RULE the packing residual obeys.** The shadow-overlap model fails structurally (R²(BE/A) = −12.2 over 3213 isotopes; BE/A ridge found in 1/116 rows), but it fails *systematically*: within every element the error climbs monotonically with n_t. **A systematic residual is a law with its sign flipped.** We do not know its functi
+F: §⑧. Chief kills: the residual has no closed form better than noise; the stability band is not a function of (u,v); the ionisation ladder scaled to H shows no grammar signal (then the cross-scale claim dies and NP24 is nuclear-only). 5. **How will we know we're done?** — Dual verdict + a **RULES LEDG
+G: 1. **What don't we know?** — **The RULE the packing residual obeys.** The shadow-overlap model fails structurally (R²(BE/A) = −12.2 over 3213 isotopes; BE/A ridge found in 1/116 rows), but i
+G: 3. **How will we find out?** — Six gated phases (§④) over three measured datasets, with **candidate rule forms declared BEFORE fitting** (§③) and a hard anti-FISHED discipline: any rule must
+G: | F4 | band = decay contours | band edges match Q_EC=0 / Q_β=0 within 1 u-unit | S3 dead; band is empirical only |
+V: All 3213 valid-grammar isotopes (Z≥3, n_d≥0, n_t≥0) satisfy `A = 4+2n_d+3n_t` and `Z = 2+n_d+n_t`. **0 failures.** Domain note: the grammar begins **after** helium — He is the core, not a construction
+V: **F1 (OOS ≥0.5): PASS. F2 (beats constant by 0.2): PASS.**
+V: - Band f_t ∈ [0.000, 0.551] contains **98.8% of stable** — **F3 PASS**.
+V: - **Core-breach tally, all 81 elements with ≥2 stages:** biggest tear leaves a noble-gas core in **35/81 = 43%** (He 24, Ne 4, Kr 4, Xe 2, Ar 1). The other **46 tear inside an open d/f shell.** (An ea
+V: - **I3 (grammar↔ladder coupling) FAILS; I2 (structure is a function of Z and shell occupancy alone) HOLDS.** **F5 fires: the cross-scale claim is dead. NP24 is nuclear-only on present evidence.**
+FLAGS: MISSING: ; ident:10 ; res pass/fail 0/1 verd pass/fail 7/6
+
+### 05/NP31_Orbital_Reach_Binding  | status: SPEC (opened 2026-07-23, direct). | words 1807 | code 0 outs 0 verd 1 runlog 1 | gate True prereg True
+Q: What caps the tour.** FLM14 established the internal electron's orbit *is* a sequential tour of proton destinations. NP10 Face T established that binding scales with the **tour count**, and for `n ≤ 4` destinations that count is `(n−1)!` — the number of distinct closed tours — giving d/t/α with **zero constants**. What is unknow
+F: §⑧. If the cap must be fitted per nucleus it is a knob, not a derivation (KILL). If "energy ∝ tour count" cannot be derived from FLM14's residence law, Face T stays **CONVERGENCE**, not NATIVE — that debt is already registered and is not discharged here by assertion. 5. **How will we know we're done
+G: destinations lie within one electron's tour), then predict binding across d → Fe-56 with no fitted
+G: 3.59, 3.95 for Li-6 → Fe-56 — flat to within a factor 1.6 across a 9× span in A. That is one
+G: above, with the crossover at **A = 4 ± 0** as an output; light chart within **±10%**, zero fitted energy.
+G: - **Metric:** within ±25% unfitted → the geometry pays both debts. Otherwise report which one it pays.
+G: Class A: cap derived, crossover at A=4 as output, chart within ±10%, zero fitted energy, and the
+V: **Classification:** `NP31_ROUTES_NOT_RUN__ENGINE_CONTACT_COUNT_SHOWS_CROSSOVER_AT_A4_EXPLORATORY`<br>
+V: **Run class:** direct, exploratory (see `RUN_LOG.md`). **Canon edits:** none. **Fitted parameters:** 0.
+V: - Route B (residence-law derivation of "energy ∝ tour count") and Route C (11.6 mfm per triton from the same interleave) require the packing geometry in length units and an FLM14 residence argument; n
+FLAGS: MISSING: ; LOOSE:25;26 ; res pass/fail 0/0 verd pass/fail 0/0
+
+### 05/NP32_Scission_Surface_Selection  | status: SPEC (opened 2026-07-23, direct). | words 1612 | code 2 outs 3 verd 0 runlog 0 | gate True prereg True
+Q: Which surface a driven nucleus parts on.** We have the packing (interleaved trefoils, α core + n_d deuterons + n_t tritons) and, from NP31, the shared-electron bonds that hold it. What is unknown is the **cut**: given an input (energy, impact parameter, angular momentum), *which* set of shared-electron bonds severs — and therefo
+F: §⑧. If the minimum cut is **symmetric** (A/2 + A/2) while the measured split is asymmetric, the cost function is wrong. If reproducing asymmetry needs a fitted surface/shell term, the claim is CALIBRATED, not derived. 5. **How will we know we're done?** — Dual verdict. A real PASS = the asymmetric s
+G: - **Gate:** total Σ bonds reproduces the parent binding to the accuracy NP31 achieved. If NP31 is
+G: - **Pre-committed metric:** the minimum cut yields a **mass split within ±4 in A** of the measured
+FLAGS: MISSING: ; ident:1 ; res pass/fail 11/2 verd pass/fail 0/0
+
+### 05/NP35_Flay_Not_Split  | status:  | words 180 | code 2 outs 1 verd 2 runlog 0 | gate True prereg False
+Q: Whether actinide fission is an unwrap of unfrozen outer shells around a sealed T12 core, rather than a necked liquid-drop bipartition. 2. **Why it matters?** If the core is masonry, products are the jacket vs the remnant — in principle selectable by flay depth (input). The goo-drop min-cut was the wrong object (NP32). 3. **How?*
+G: 5. **Done when?** Dual verdict: F1 excluded or not; F3 MATCH/ORDER/EXCLUDED on frozen gates; chain NP36–NP38 named.
+V: ## Status
+V: | G1 F1 vs U-235 A_H | **EXCLUDED** (Δ ≈ +70) — unwrap-to-126 is not fission |
+V: | G3 F3 A_H band all 8 | **PASS** (133–135 predicted; obs 136–140) |
+V: | G4 F3 A_H vs A* slope | **PASS** (+0.012; obs −0.197) |
+V: | G5 A_L residue in [1, 8] | **FAIL** — Th-232 = 8.54; other seven inside |
+FLAGS: MISSING: ; ident:1 ; res pass/fail 6/0 verd pass/fail 16/6
+
+### 05/NP36_Jacket_Z_from_Seating  | status: PRE-REGISTERED — 2026-08-13. | words 43 | code 1 outs 0 verd 1 runlog 1 | gate False prereg True
+Q: dit-tmp/np35_run.txt`. > **Canon edits:** none. Does seating (T12 prefix) pick Z_H, or only the parent Z/N ratio? 
+V: **Hold-out:** NP35 obs A_H centroids (IAEA not re-opened)
+V: ## Status
+V: `NP36_SEATING_ZH_EXCLUDED`
+V: | R_T12_actual | 194 | **0/8 EXCLUDED** (Δ ≈ +55) |
+V: | R_T12_label NSEQ N=82, Z=82 | 164 | **0/8 EXCLUDED** (Δ ≈ +27) |
+FLAGS: MISSING: ; res pass/fail 0/0 verd pass/fail 2/3
+
+### 05/NP39_Monoisotopy_Pack_Staircase  | status: PRE-REGISTERED — 2026-08-13. Direct execution. | words 58 | code 1 outs 0 verd 1 runlog 1 | gate True prereg True
+Q: _REOPEN_PRE_REGISTRATION.md` > **Canon edits:** none. NP23 mapped width-1 windows. This loop tests whether the interleaved pack order (α → D6 → D12 → T8 → …) places those soles at a shared pack-stop class. Not a native WHICH-A. dnn frozen. 
+G: > **Batch gates:** `Investigations/00_Master_Cascade/Packer_Reopen_Batch_2026-08-13/PACKER_REOPEN_PRE_REGISTRATION.md`
+V: **Packer validate:** `.audit-tmp/packer_validate.txt` PASS vs node
+V: ## Status
+V: | G2 no odd-Z double has a T8×1 stable | **FAIL** — Cl-35, K-39 |
+V: | G3 25/25 odd-Z singles mid-T | **FAIL** 23/25 — Co-59 and In-113 stop on leftover D (D12 2/12, D20 2/20) |
+V: ## Classification
+FLAGS: MISSING:Investigations/00_Master_Cascade/Packer_Reopen_Batch_2026-08-13/PACKER_REOPEN_PRE_REGISTRATION.md ; res pass/fail 0/0 verd pass/fail 2/2
+
+### 05/NP40_EC_Conversion_Accessibility_and_Capture_Clock  | status: SPEC, opened 2026-10-05. Id and placement proposed. Gateways binding;  | words 866 | code 1 outs 1 verd 1 runlog 1 | gate True prereg True
+Q: (i) A physical selection of which nuclides can undergo electron capture (the continuation's "213 inventory pairs" is only a count of rows with at least three deuterons; none has Q_EC > 0 against AME2020), and (ii) a capture clock that is not back-solved (ledger D44, D45). 2. **Why does it matter?** The conversion event and its r
+F: (a) The alternate grammar fails to map more than 1% of tabulated EC nuclides to a valid (n_d, n_t ≥ 0) decomposition; (b) any candidate clock needs a dimensional multiplier fixed on a measured rate; (c) B_req = ln(τ/t) ambiguity across clocks exceeds the 7.5-nat spread NP11 recorded and the ambiguit
+G: > **Author:** J. C. Harvey, Melbourne. **Status:** SPEC, opened 2026-10-05. Id and placement proposed. Gateways binding; direct execution only.
+G: 5. **How will we know we're done?** Prompt completion A–D; physics class OPEN is acceptable and recorded; a rate prediction needs the no-multiplier gate.
+G: - **P1 grammar test:** fraction of known EC nuclides that map to valid decompositions (gate ⓪.4a). Null model: the same test on random (Z, N) pairs.
+G: P0 table complete with a stated denominator; P1 gate evaluated against the null; P2 ambiguity reported; P3 not run unless the no-multiplier gate holds.
+G: Triggers in ⓪.4 with numeric thresholds fixed here.
+V: **Classification:** `NP40_ACCESSIBILITY_DEFINED__ALT_GRAMMAR_GATE_NOT_MET_PROTON_RICH_LIGHT`<br>
+V: **Run class:** direct. Tool `np40_accessibility.py`; output `np40_results.txt`. Pre-registered in `RUN_LOG.md` before the run. P2 (clock candidates) and P3 not run. **Canon edits:** none; **fitted par
+V: - Reading: the grammar has no decomposition for proton-rich nuclei with N < Z − 1. This is a coverage limit of the grammar as written, not a failure of any one nuclide, and the first result NP40 repor
+FLAGS: MISSING: ; LOOSE:99 ; res pass/fail 0/0 verd pass/fail 0/0
+
+### 05/NP41_Many_Contact_Energy_Emission_and_Reverse_Response  | status: SPEC, opened 2026-10-05. Id and placement proposed. Gateways binding;  | words 834 | code 6 outs 7 verd 1 runlog 1 | gate True prereg True
+Q: A value law for contact energy that reproduces binding energies without a calibrated coefficient, and how a contact graph with nodes of degree greater than three (212 of 217 nuclides, 1072 nodes) is to be read as a loading path. 2. **Why does it matter?** The continuation's construction gives about 37–41% of stored binding energ
+F: (a) A candidate value law reproduces He-4 binding by more than 5% only after a parameter is fitted to He-4; (b) binding R² over the whole range with the null model of NP24 (R²(BE/A) = −12.2 for shadow overlap) is not improved; (c) energy residual of the closed-domain emission test exceeds 1e-6 or do
+G: > **Author:** J. C. Harvey, Melbourne. **Status:** SPEC, opened 2026-10-05. Id and placement proposed. Gateways binding; direct execution only.
+G: | U28 | NP35 | flay gates recorded (G1 excluded, G3 pass) |
+G: | closure residual > 1e-6 | refine twice, check unit consistency | record non-closure | loosen the gate |
+V: **Classification:** `NP41_CONSTRUCTION_SHAPE_TRACKS_BINDING__MAGNITUDE_FACTOR_2P7_UNIDENTIFIED`<br>
+V: **Run class:** direct. Tools `np41_residual_map.js` (unchanged engine `docs/js/traction-gear-engine.js`, validator's result write redirected), `np41_analyse.py`; outputs `np41_residual_map.json`, `np4
+V: 1. The registered R² values fail badly because B_calc is about 37% of B_meas, so squared residuals are dominated by the scale. They do not describe the shape. Rank agreement is 0.9997, so the construc
+V: 2. Diagnostic only (not a registered law, would be CALIBRATED(1)): per-nuclide k = B_meas/B_calc has median 2.729; for A ≥ 60 (n = 157) median 2.756, IQR 2.718–2.788; one global k = 2.757 brings the m
+V: Registered in `RUN_LOG.md` before the run. Tools `np41_kinds.js`, `np41_kinds_fit.py`; output `np41_kinds_results.txt`. Parameters: 4 (alpha, dock, internal, interstitial-dock), CALIBRATED(4) and labe
+O: built 217 failed/non-finite 0 []
+FLAGS: MISSING: ; res pass/fail 0/0 verd pass/fail 0/0
+
+### 05/NP42_Nu_A_Closure_Reset  | status:  | words 1618 | code 6 outs 7 verd 1 runlog 1 | gate True prereg True
+Q: sed). Move or rename only on the Operator's word. **Origin:** the "unseated nucleons" thread (`Audits/atomica_n82_fission_stocktake.md` §4: flay leaves six unseated neutrons); cache in `Datasets/nuclear/neutron_multiplicity/` (its README: "unseated nucleons has no precise definition on file"). ## ① What we do not know Whether prompt-neutron multiplicity ν(A) of a fragment tracks how many neutrons sit above the last closed neutron shell, so that ν resets at a closure. ## ② Definition (pinned he
+G: - **G2 (reset location, whole range, one pass):** fit continuous two-segment-linear ν(N) with break N_b scanned 70..100 in steps of 1 over N (continuous in N via linear interpolation of A→N)
+G: - **G3 (held-out):** G1 and G2 repeated unchanged on U-233 (same mechanism) and Cf-252 (different mechanism; digitized CURVE, lower fidelity, so ρ gate only ≥ +0.7).
+G: - **Null:** the same two gates with u built from a shifted closure set (82→80,84,86; 50→48,52) to show how specific 82 is. Results are reported, not gated.
+G: Equal-Z/A ignores Z polarisation (~±0.5 Z, hence ±0.5 N); ν(A) is vs pre-neutron mass; the two segments below and above 82 mix light and heavy fragments since only N matters (a light fragmen
+G: - **G2′:** best N_b within ±2 of 82, 82 in the top 3 of 19, and fitted slopes b ≤ 0 < c. Same null shifts reported. Applied to all three systems unchanged; no gate edits after this block.
+V: **Classification:** `NP42_INCONCLUSIVE__EQUAL_ZA_INPUT_INVALIDATES_N_ASSIGNMENT` (corrected 2026-10-05; earlier labels superseded, text kept below)<br>
+V: **Run class:** direct, main session. Tool `np37_nu_closure.py` (round 1), `np37_round2.py`; outputs `np37_results_round1.txt`, `np37_results_round2.txt`. Instrument validation V1–V3 passed before use.
+V: | G1 ρ(ν,u), 82≤N<126 | +0.986 PASS | +0.892 PASS | +0.733 PASS |
+V: | G2 single hinge, whole range (best N_b; rank of 82 /31) | 70; 14 FAIL | 90; 15 FAIL | 88; 17 FAIL |
+V: | G2′ heavy-branch V-shape (best N_b; rank of 82 /19; slopes b, c) | 79; 5; −0.067, +0.074 FAIL | 78; 7; −0.226, +0.100 FAIL | 80; 4; −0.263, +0.083 FAIL |
+O: G5: |best-82|=2.00 (<=1) 82 in set: False slope signs ok: True -> FAIL
+O: dchi2 at 82 = 13.07; at 80 = 0.22; at 84 = 84.72 G6 -> FAIL
+O: dchi2 at 82 = 27.94; at 80 = 0.48; at 84 = 94.46 G6 -> FAIL
+FLAGS: MISSING: ; res pass/fail 8/20 verd pass/fail 6/11
+
+### 05/NSEQ01_Sequencer_Rules_Freeze  | status: PRE-REGISTERED — 2026-08-09. | words 521 | code 1 outs 0 verd 1 runlog 1 | gate True prereg True
+Q: c–e parked — “charge radius” is a QED measurement formulation; > sequencer physics is **boundary / enmeshment**, not that observable. > **Canon edits:** none. > **Source of record:** `Release/HTML_SDT_Website/nuclear-packing-sequencer.html` > (mirror: `docs/nuclear-packing-sequencer.html`). Walkthrough: > `docs/nuclear-packing-walkthrough.html`. ## 0. Objective Freeze the **executable rule set** already implemented in the Nuclear Packing Sequencer — grammar, spherical-tier packing, p↔n con
+G: | NSEQ01-C6 | No κ fit; no IAEA RMS gate; no `laws.hpp` edit. |
+V: | ID | Rule | Status |
+V: | R5 | **pure shells** D/T alternating (NSEQ05); T₈ stella, D₁₂ cuboct, T₁₄ face-normals; `r_open>r_close` | seating + pack order rewritten; capacities frozen |
+V: | ID | Status |
+V: | NSEQ01-C1 | **PASS** |
+V: | NSEQ01-C2 | **PASS** — 217/217 grammar identities |
+FLAGS: MISSING: ; ident:3 ; res pass/fail 0/0 verd pass/fail 6/0
+
+### 05/NSEQ02_Triton_Shell_Orientation  | status: PRE-REGISTERED — 2026-08-09. | words 452 | code 1 outs 0 verd 1 runlog 0 | gate False prereg True
+Q: rrection — d/t grammar and shell **capacities** stand; > “triton **belt**” equatorial-ring orientation was an LLM assumption that > propagated (sequencer + `laws.hpp` comments). Not a rejection of magic-number > schedule or enmeshment. > **Canon edits:** none (propose-and-wait for nomenclature / orientation in > `laws.hpp` and sequencer). ## 0. Split (binding) | Kept | Contested | |---|---| | α-grammar `n_d`, `n_t` | Word “belt” as physical orientation | | Shell / closure **capacities** givi
+V: distributions / capacities → magic numbers; d/t grammar; tritons open and close
+V: With `r_open=1.05 > r_close=0.95`: opening tetra edges equal and **larger** than
+V: | ID | Status |
+V: | NSEQ02-C1 | **PASS** — split ledger |
+V: | NSEQ02-C2 | **PASS** — dual-tetra built |
+FLAGS: MISSING: ; res pass/fail 0/0 verd pass/fail 7/0
+
+### 05/NSEQ03_Dual_Tetra_Sequencer_Rewrite  | status: PRE-REGISTERED — 2026-08-09. | words 97 | code 1 outs 0 verd 1 runlog 0 | gate False prereg True
+Q: TML orientation rewrite only; `laws.hpp` propose-and-wait. ## Claims | ID | Claim | |---|---| | NSEQ03-C1 | Site + `docs/` sequencer triton seating uses dual-tetra shells. | | NSEQ03-C2 | Packing smoke: He/C/O/Fe/U nucleon count = A, protons = Z. | | NSEQ03-C3 | Ca-48 (`n_t=8`): first shell not coplanar; poles present; `r_open>r_close`. | | NSEQ03-C4 | Capacities still 8,10,12,14… (schedule counting unchanged). | | NSEQ03-C5 | `laws.hpp` not edited; nomenclature proposal filed. | 
+V: - `r_open = 1.05 rB`, `r_close = 0.95 rB`
+V: | ID | Status |
+V: | NSEQ03-C1 | **PASS** — site + docs markers; `BELT_PAIRS`/`beltPlane` gone |
+V: | NSEQ03-C2 | **PASS** — He/C/O/Fe/U counts |
+V: | NSEQ03-C3 | **PASS** — Ca-48: 2 poles, ±19.47° bands, `r_open>r_close`, not planar |
+FLAGS: MISSING: ; res pass/fail 0/0 verd pass/fail 5/0

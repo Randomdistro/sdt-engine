@@ -1,0 +1,34 @@
+CR14 blank-slate run 1 (registered in CR14_RESET_ASSESSMENT_2026-10-11.md sections 0-2)
+=======================================================================
+
+n_gamma(T0) = 4.107268e+08 m^-3 ; eta = 6.10e-10 (BBN deuterium, external input) ; n_b0 = n_H = 0.250543 m^-3 ; B/k_B = 157887.51 K
+
+[V1] x_e(1e5 K, Branch A density) = 1.000000000 ; x_e(1e3 K, Branch A density) = 1.289e-25 -> met
+[V2] Branch A at x_e = 1/2: z = 1379.20 (window 1250-1450; textbook ~1370), T = 3761.7 K, n = 6.5873e+08 m^-3 -> met
+[V3] d ln T_half / d ln n at Branch B density: analytic 0.015491, numeric 0.015491, relative difference 4.79e-11 -> met
+VALIDATIONS: met
+
+BRANCHES (criterion ; Branch A: z, T, n ; Branch B: T_half, N = T/T0 ; density ratio n_A/n_B ; sensitivity d ln T/d ln n at B (analytic))
+  x_e = 0.50 : A: z = 1379.20, T =  3761.72 K, n = 6.5873e+08 ; B: T =  2504.10 K, N =  918.77 ; n_A/n_B = 2.6292e+09 ; sensitivity 0.01549
+  x_e = 0.10 : A: z = 1260.72, T =  3438.81 K, n = 5.0323e+08 ; B: T =  2364.57 K, N =  867.57 ; n_A/n_B = 2.0086e+09 ; sensitivity 0.01465
+  x_e = 0.01 : A: z = 1140.15, T =  3110.19 K, n = 3.7231e+08 ; B: T =  2212.15 K, N =  811.65 ; n_A/n_B = 1.4860e+09 ; sensitivity 0.01372
+
+R3 (non-discriminating iff sensitivity < 0.05): Branch B sensitivity 0.01549 -> FIRES: a 9-order density difference moves the half-ionisation temperature by only the factor below; the Branch-B number cannot be cited as evidence for the vessel
+  the density difference between the branches at x_e = 1/2: n_A/n_B = 2.6292e+09 (9.42 decades) ; T_half ratio T_A/T_B = 1.5022
+
+DENSITY SWEEP D (n [m^-3] : T_half at x_e = 1/2 [K], N = T/T0, sensitivity):
+  1e-06 :   2099.06 K  N =   770.15  s = 0.01303
+  1e-04 :   2233.01 K  N =   819.30  s = 0.01385
+  1e-02 :   2385.02 K  N =   875.08  s = 0.01477
+  1e+00 :   2558.95 K  N =   938.89  s = 0.01582
+  1e+02 :   2759.87 K  N =  1012.61  s = 0.01703
+  1e+04 :   2994.52 K  N =  1098.71  s = 0.01844
+  1e+06 :   3272.06 K  N =  1200.54  s = 0.02010
+  1e+08 :   3605.27 K  N =  1322.79  s = 0.02208
+  1e+10 :   4012.50 K  N =  1472.21  s = 0.02448
+  1e+12 :   4521.05 K  N =  1658.80  s = 0.02746
+  1e+14 :   5173.30 K  N =  1898.11  s = 0.03123
+
+AFTER THE FACT (not a target): engine entry T_release = 2970.8 K (T_CMB (1 + z_release), z_release = 1089, labelled OBSERVED in laws.hpp); Branch B T_half(1/2) = 2504.1 K, N = 918.8 ; Branch A T_half(1/2) = 3761.7 K, z = 1379.2
+
+Label: COMPUTED (consistency of an imported relation, R4); no outcome is DERIVED.

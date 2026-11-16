@@ -1,0 +1,15 @@
+﻿TD09 reset instrument 1 (2026-10-10)
+====================================
+
+[V1] n_gamma(2.7255 K) = 4.1073e+08 m^-3 (known ~4.107e8) -> met
+[V2] S0 scales as (hbar^2/(m kT))^(3/2) (m^3): ratio at kT, 2kT = 1.000000000000000 -> met
+[V3] bisection root of x^2 - 2: 1.414213562373095 -> met
+
+VALIDATIONS: met
+
+P2 (statement): at 300 K, E_b/kT = 8.6050e+07 nats ; configurational cost ln(1/(Xn n_b S0)) at the 300 K bath with n_b = eta n_gamma: 57.67 nats
+
+X_n/X_p = 1/7 (primary) : T_flip (Saha route) = 0.062445 MeV ; (ledger route) = 0.062445 MeV ; agreement -3.3e-16 [P1 identity met]
+   at T_flip: E_b/kT = 35.625 nats ; configurational cost = 35.625 nats ; ln(1/eta) = 21.213 ; T_flip = 7.246e+08 K -> G3 PASS (in [0.035, 0.17] MeV)
+X_n/X_p = 1   (sensitivity) : T_flip (Saha route) = 0.065092 MeV ; (ledger route) = 0.065092 MeV ; agreement 0.0e+00 [P1 identity met]
+   at T_flip: E_b/kT = 34.176 nats ; configurational cost = 34.176 nats ; ln(1/eta) = 21.213 ; T_flip = 7.554e+08 K -> G3 PASS (in [0.035, 0.17] MeV)

@@ -1,0 +1,31 @@
+nuclides 250 ; p-p contacts total 0 ; n-n contacts total 0
+
+=== list: native {A p, N e}
+  CALIBRATED(2): K = kappa*Om_p = 0.014614 fm ; L = -5.5288 MeV/loop   |  null CALIBRATED(1): c = 7.5663 MeV/nucleon
+  read-off (not tested): kappa = K / 0.15538 fm = 0.0941  (proton F 1, proton H 0.5, loop F 0.25, loop H 0.125)
+    cal   2,  4: meas    26.731  map    27.065  null    30.265
+    cal   6, 12: meas    87.468  map    87.597  null    90.796
+    cal   8, 16: meas   121.361  map   118.639  null   121.062
+    cal  20, 40: meas   326.406  map   304.891  null   302.654
+    cal  26, 56: meas   468.790  map   429.059  null   423.715
+    cal  50,120: meas   965.776  map   962.612  null   907.961
+    cal  82,208: meas  1537.857  map  1741.782  null  1573.800
+  map: K*m_p*sum(1/d) + L*loops      held-out n=243 median rho   5.14%  ratio CV  7.03%  first/last A-quintile ratio 0.9811/1.0906  bands {'B1': 4, 'B2': 21, 'B3': 37, 'B4': 161, 'B5': 18, 'B6': 2} -> B4: order-correct, structure missing
+  null: c*A                          held-out n=243 median rho   5.82%  ratio CV  7.14%  first/last A-quintile ratio 0.9900/1.0061  bands {'B1': 3, 'B2': 21, 'B3': 50, 'B4': 164, 'B5': 3, 'B6': 2} -> B4: order-correct, structure missing
+  map beats null: YES (5.14% vs 5.82%)
+  isotope steps where the map binding falls: 0 of 171
+
+=== list: {Z p, N n}
+  CALIBRATED(2): K = kappa*Om_p = 0.015422 fm ; L = -5.7982 MeV/loop   |  null CALIBRATED(1): c = 7.9844 MeV/nucleon
+  read-off (not tested): kappa = K / 0.15538 fm = 0.0993  (proton F 1, proton H 0.5, loop F 0.25, loop H 0.125)
+    cal   2,  4: meas    28.296  map    28.596  null    31.938
+    cal   6, 12: meas    92.162  map    92.472  null    95.813
+    cal   8, 16: meas   127.619  map   125.229  null   127.751
+    cal  20, 40: meas   342.052  map   321.770  null   319.377
+    cal  26, 56: meas   492.260  map   452.797  null   447.128
+    cal  50,120: meas  1020.539  map  1015.825  null   958.131
+    cal  82,208: meas  1636.431  map  1838.038  null  1660.761
+  map: K*m_p*sum(1/d) + L*loops      held-out n=243 median rho   4.95%  ratio CV  6.53%  first/last A-quintile ratio 0.9816/1.0835  bands {'B1': 5, 'B2': 24, 'B3': 37, 'B4': 170, 'B5': 5, 'B6': 2} -> B4: order-correct, structure missing
+  null: c*A                          held-out n=243 median rho   5.82%  ratio CV  6.66%  first/last A-quintile ratio 0.9901/0.9996  bands {'B1': 2, 'B2': 28, 'B3': 45, 'B4': 163, 'B5': 3, 'B6': 2} -> B4: order-correct, structure missing
+  map beats null: YES (4.95% vs 5.82%)
+  isotope steps where the map binding falls: 0 of 171

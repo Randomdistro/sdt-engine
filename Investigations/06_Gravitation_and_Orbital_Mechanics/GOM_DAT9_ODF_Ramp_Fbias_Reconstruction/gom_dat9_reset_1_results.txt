@@ -1,0 +1,27 @@
+GOM_DAT9 blank-slate run 1 (registered in GOM_DAT9_RESET_ASSESSMENT_2026-10-11.md sections 0-2)
+=======================================================================
+
+[V3] synthetic ramp record round trip (t0 1654539733.500, rate -3.250 Hz/s, station 25, f_T 34317852320.25 Hz, sky 1) -> met
+[V2] cubic interpolation of the 15-min table at the 5-min epochs: worst relative 8.65e-09 -> met
+[C1] ramp group 25 header at record 7453 ; data records decoded: 1
+  ramp 0: station 25, start 1654539733.000 s, end 1654570323.000 s (duration 30590.0 s), rate 0.000000000 Hz/s, start frequency 34317852320.000 Hz (sky level)
+[V1] ramp interval [1654539733.0, 1654570323.0] contains every transmit epoch (range 1654539745.2 to 1654547190.6): yes -> met ; f_T over the window 34317852320.000 to 34317852320.000 Hz
+VALIDATIONS: met
+
+C2: f_ref (Items 18-19) = 2116648992.000 Hz ; Fbias_a = (209/15) f_ref = 2.949198e+10 Hz ; Fbias_b = (209/15) f_T = 4.781621e+11 Hz (dimensionally not a physical Fbias, D2) ; Fbias_c = (14/15) f_T = 3.203000e+10 Hz (sky level, T1/T2 for Ka transmitters)
+
+C3/C4 LEVEL (median |obs| = 50244.3 Hz): predictor ; median |f| ; ratio ; rel_resid(+) ; rel_resid(-) ; gates (+ sign / - sign)
+  P0 = -2(rdot_rx/c) f_ref                   170408.8    3.3916     4.3916     2.3916  fail / fail
+  P1_a = -2(rdot_2w/c) (209/15) f_ref       2357677.4   46.9243    47.9243    45.9243  fail / fail
+  P1_c = -2(rdot_2w/c) (14/15) f_T          2560574.3   50.9625    51.9625    49.9625  fail / fail
+  P2 sky residual for Fbias_c (obs - P1_c): median 2610818.7 Hz, mean 2610850.4 Hz, sd 17791.537 Hz
+  P2 sky residual for Fbias_a (obs - P1_a): median 2407921.7 Hz, mean 2407952.2 Hz, sd 17086.602 Hz
+
+CHANGE-BASED (descriptive; the offset is free): obs on predictor: slope ; correlation ; offset
+  P0 = -2(rdot_rx/c) f_ref               slope -15.01225  corr -0.999628  offset -2507703.1 Hz
+  P1_a = -2(rdot_2w/c) (209/15) f_ref    slope  -1.08592  corr -1.000000  offset -2510006.5 Hz
+  P1_c = -2(rdot_2w/c) (14/15) f_T       slope  -0.99987  corr -1.000000  offset -2510006.5 Hz
+  effective carrier from the P1_c slope: -3.202595e+10 Hz against (14/15) f_T = 3.203000e+10 Hz: ratio -0.999874
+
+Outcome: C5 FBIAS_RECON_UNRESOLVED (no level predictor meets rel_resid < 0.15 and |ratio - 1| < 0.15; no scale fitted)
+C6: solar K unused.

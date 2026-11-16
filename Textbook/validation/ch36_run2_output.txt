@@ -1,0 +1,48 @@
+
+== V0 helper validation (known answers) ==
+[PASS] V0    integrate sin over [0, pi] = 2                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 3.331e-16 (tol 1e-13)
+[PASS] V0    integrate x^7 over [0, 1] = 1/8                                                value 1.250000000000e-01 expected 1.250000000000e-01 err 2.220e-15 (tol 1e-14)
+[PASS] V0    integrate exp over [-1, 1] = e - 1/e                                           value 2.350402387288e+00 expected 2.350402387288e+00 err 5.668e-16 (tol 1e-13)
+[PASS] V0    root of cos x - x = 0.739085133215161                                          value 7.390851332152e-01 expected 7.390851332152e-01 err 2.253e-15 (tol 1e-13)
+[PASS] V0    root of x^2 - 2 on [1, 2] = sqrt 2                                             value 1.414213562373e+00 expected 1.414213562373e+00 err 2.983e-15 (tol 1e-13)
+[PASS] V0    compensated sum 1 + 10^6 x 1e-16 = 1 + 1e-10                                   value 1.000000000100e+00 expected 1.000000000100e+00 err 0.000e+00 (tol 1e-15)
+
+== V1 data integrity ==
+[PASS] V1    every body has 731 rows at 10-day spacing
+[PASS] V1    Earth-Moon barycentre file: first row X is the Horizons value for the barycentre (printed) value -1.842959633455e-01 expected -1.842959633455e-01 err 0.000e+00 (tol 1e-14)
+[PASS] V1    Sun GM = 132712440041.93938 km^3/s^2                                           value 1.327124400419e+11 expected 1.327124400419e+11 err 0.000e+00 (tol 1e-14)
+       first row JD 2451545.0 ; Sun barycentric X = -7.137179161608e-03 AU
+
+== V2 two-body return with the same integrator ==
+[PASS] V2    position error after one period, relative to a                                 value 3.047303755129e-12 expected 0.000000000000e+00 err 3.047e-12 (tol 1e-09)
+
+== T1 step convergence (Mercury, t = 1800 d) ==
+       heliocentric angular position difference between 0.125 d and 0.0625 d steps: 0.0203 arcsec
+[PASS] T1    difference at most 0.1 arcsec
+
+== T2 comparison with the ephemeris ==
+       Mercury   t=  360 d:     0.125" 2.2e-07  t= 1800 d:     3.784" 2.5e-06  t= 3650 d:     8.149" 2.3e-06  t= 7300 d:     2.453" 1.8e-06
+       Venus     t=  360 d:     0.184" 8.2e-08  t= 1800 d:     0.873" 3.2e-08  t= 3650 d:     1.709" 1.3e-08  t= 7300 d:     3.457" 2.0e-07
+       EMB       t=  360 d:     0.073" 3.2e-10  t= 1800 d:     0.366" 5.2e-09  t= 3650 d:     0.722" 1.3e-09  t= 7300 d:     1.447" 5.5e-10
+       Mars      t=  360 d:     0.047" 6.3e-08  t= 1800 d:     0.184" 1.6e-07  t= 3650 d:     0.309" 9.1e-08  t= 7300 d:     0.680" 4.4e-07
+       Jupiter   t=  360 d:     0.002" 1.6e-08  t= 1800 d:     0.125" 4.1e-07  t= 3650 d:     0.738" 4.4e-07  t= 7300 d:     1.182" 9.3e-07
+       Saturn    t=  360 d:     0.001" 4.1e-08  t= 1800 d:     0.129" 7.1e-07  t= 3650 d:     0.560" 1.4e-06  t= 7300 d:     1.500" 9.8e-07
+       Uranus    t=  360 d:     0.002" 9.1e-10  t= 1800 d:     0.032" 4.1e-08  t= 3650 d:     0.062" 1.8e-07  t= 7300 d:     0.125" 1.2e-08
+       Neptune   t=  360 d:     0.001" 9.1e-10  t= 1800 d:     0.018" 6.6e-08  t= 3650 d:     0.025" 2.2e-07  t= 7300 d:     0.074" 3.7e-07
+[PASS] T2    all errors within 60 arcsec and 1e-5 relative distance
+       20-year errors: Mercury 2.453, Venus 3.457, EMB 1.447, Mars 0.680 arcsec
+       RECORDED REJECTION (run 1 criterion kept): Mercury's 20-year error does not exceed Venus's (2.453 vs 3.457 arcsec); it is the largest of the eight planets at 1800 and 3650 d
+[PASS] T2    the registered ordering (Mercury largest of the inner four at 7300 d) is rejected
+
+== T3 conservation ==
+       weighted barycentre at J2000: 2.279e-06 AU from the ephemeris origin (Sun radius 0.00465 AU; reported, no criterion)
+       initial weighted momentum 8.615e-08 of w v_max ; largest change of the weighted momentum over 20 years 4.731e-18 ; barycentre drift 1.412709e-05 AU (P0 t / w = 1.412709e-05 AU)
+[PASS] T3    largest change of the weighted momentum (relative to w v_max) at most 1e-12
+[PASS] T3    barycentre drift equals P0 t / w to 1e-9 AU
+
+== T4 input dependence (20-year heliocentric angular position change, arcsec; reported) ==
+       Jupiter varpi x 1.0002    Mercury 0.0042"  Jupiter 0.9544"  Saturn 1.3203"  Neptune 0.0576"
+       Neptune removed           Mercury 0.0171"  Jupiter 2.2892"  Saturn 6.1870"  Neptune 1.5334"
+       Mercury +1 km radial      Mercury 2.5949"  Jupiter 0.0000"  Saturn 0.0000"  Neptune 0.0000"
+
+ALL CRITERIA MET: 0 failure(s)

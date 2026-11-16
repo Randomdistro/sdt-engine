@@ -122,8 +122,8 @@
   plus the colour shift it imprints on light:</p>
   <div class="eq">
 ℓ_P(r) = ℓ_P,∞(1−z)   <span style="color:var(--dim)">closure</span>
-c_local = c_∞(1−z)    <span style="color:var(--dim)">light speed</span>
-dτ/dt = √(1−z)        <span style="color:var(--dim)">clock rate</span>
+c_far = c_∞(1−z)²    <span style="color:var(--dim)">light speed</span>
+dτ/dt = 1−z           <span style="color:var(--dim)">clock rate</span>
 z_spectral = z_emit − z_obs   <span style="color:var(--dim)">redshift</span></div>
   <p>No attraction anywhere in this. Nothing is pulled — the convergence pushes, and matter
   takes the path of least resistance through the gradient. A closed least-resistance path is
@@ -145,8 +145,8 @@ z_spectral = z_emit − z_obs   <span style="color:var(--dim)">redshift</span></
   </table>
   <p><span class="tag ok" id="k-verdict"></span> The shift is the displacement depth at
   emission. Lab hydrogen emits its line in Earth's shallow regime; solar hydrogen in the
-  Sun's deeper one; we record the difference as z. A satellite's clock runs at √(1−z) for the
-  depth at its altitude — which is exactly the GPS correction, already applied every day.</p>
+  Sun's deeper one; we record the difference as z. A satellite's clock rate carries 1−z at
+  its altitude; with its speed term that is the GPS correction, already applied every day.</p>
   <figure>
     <svg id="svg-well" viewBox="0 0 600 230" role="img" aria-label="Two light sources at different lattice depths emit the same line; the deeper one is read redshifted.">
       <rect width="600" height="230" fill="#080d18"/>
@@ -323,7 +323,7 @@ const fmt=(x,d=4)=>x.toExponential(d);
     or.textContent=rAU.toExponential(2)+' AU';
     oz.textContent=fmt(z,3);
     ov.textContent=(v>=1000?(v/1e3).toFixed(2)+' km/s':v.toFixed(1)+' m/s');
-    ock.textContent=Math.sqrt(1-z).toFixed(9);
+    ock.textContent=(1-z).toFixed(9);
     ok.textContent=(C.c/v).toExponential(3);
   }
   sl.addEventListener('input',up);up();

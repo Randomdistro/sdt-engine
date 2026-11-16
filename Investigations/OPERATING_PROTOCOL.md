@@ -47,8 +47,8 @@ script and run it. **Nothing is canonical until it is on file.**
 Grade every result on two axes — provenance {SDT-derived · calibrated · external · unresolved}
 × correspondence {known-match · novel · internal-only · pending} → class A–F. **C = convergence**
 (survives the delete-test: remove the comparison and the result still stands); **E =
-calibrated/circular; F = identity/tautology.** Labels: DERIVED · COMPUTED · CALIBRATED ·
-OBSERVED · PENDING · IDENTITY · KILLED · FABRICATED. Kill-list, applied to your own output too:
+calibrated/circular; F = pending/unverified/failed** (per `Theory/05`; true-by-construction bridges such as `k_e e² = αℏc` and `zk² = 1` are class A, label CONSTRUCTION — never F; corrected 2026-10-03). Labels: DERIVED · COMPUTED · CALIBRATED ·
+OBSERVED · PENDING · CONSTRUCTION · KILLED · FABRICATED. Kill-list, applied to your own output too:
 IDENTITY-PASS, CIRCULARITY, FISHED (tuning to a target), RETRO-PASS (loosening a gate after a
 fail), BORROW-SMUGGLE (importing G/M/ψ/G_F/ΛCDM into an SDT chain), GATE-CONTRABAND. **§G
 mirror — audit the auditor:** what am I accepting on faith; am I letting the oppositional

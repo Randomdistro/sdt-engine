@@ -38,6 +38,9 @@
 
 ## §3. Investigation procedure (this project's own, now standard)
 
+0. **Read both gateways before any audit, assessment, or labelling** — in full, at the
+   start of the session, not after a correction. A label assigned before the gateways were
+   read is re-checked against them before it is quoted. *(Added 2026-10-03.)*
 1. **Pre-registration before instrumentation.** Thresholds, tolerances, conventions, and
    rejection criteria are written into the PROMPT and RUN_LOG before the tool exists. A
    rejection criterion is only registered if its rejection class is populated — a criterion
@@ -61,6 +64,13 @@
    framework's own derived laws are legal inputs to its own chains · first-pass models gated
    against same-fidelity comparators · both parameter ledgers on the table in any comparison
    · alignment with measurement never counts against a result — origin decides.
+8. **Downgrade trace (mechanical; added 2026-10-03).** Before any result is labelled
+   CONSTRUCTION, shared-input, circular, tautology, class E or F, or capped, the assessment
+   writes one line: `contaminating input: <quantity> — measured via <chain> — enters at
+   <file:line>`. If that line cannot be written, the label is not applied. Agreement with a
+   Standard-Model, GR, QM or Newtonian formula is never the content of that line
+   (behavioural §3.8). Agreement is recorded as convergent, with discrimination stated
+   separately.
 
 ## §4. Code standards (calibrated: keep_code_simple · clean_organized · line limits · no_mock_data · no_scripts_in_files · dev_test_prod)
 

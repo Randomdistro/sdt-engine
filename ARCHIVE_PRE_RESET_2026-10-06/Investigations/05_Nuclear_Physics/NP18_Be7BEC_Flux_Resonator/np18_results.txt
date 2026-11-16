@@ -1,0 +1,130 @@
+##############################################################################
+#  NP18 -- Be7BEC Flux Resonator: the rate-scaling fork
+#  Engine mirror: sdt/laws.hpp::measured, sdt/nuclear.hpp::alpha_grammar
+#  NO G / M / GM / G_F in the SDT chain. 478 keV = GAMMA, not a nu line.
+##############################################################################
+
+==============================================================================
+  PHASE 0  --  Grammar selection rule + engine sanity
+==============================================================================
+  [DERIVED         ] Be-7 (Z=4,A=7): alpha_grammar -> (n_d,n_t)=(3,-1)  valid=False  [n_t<0 => UNDERFLOW / EC-cocked]
+  [DERIVED         ] Li-7 (Z=3,A=7): alpha_grammar -> (n_d,n_t)=(0,1)  valid=True  [on-lattice]
+  [DERIVED         ] EC grammar vector (dn_d,dn_t) = (-3, 2)  [single step Be-7 -> Li-7]
+  [COMPUTED        ] assert Be-7 == (3,-1) underflow : True
+  [COMPUTED        ] assert Li-7 == (0,1) on-lattice: True
+  [COMPUTED        ] assert EC vector == (-3,+2)     : True
+  [OBSERVED-TARGET ] Be-7 nu_e lines: 0.862 MeV (gs, ~90%), 0.384 MeV (Li-7*, ~10%)
+  [OBSERVED-TARGET ] 477.6 keV = Li-7* -> Li-7 de-excitation GAMMA (NOT a neutrino line)
+
+  [VERDICT-P0      ] grammar selection rule PASS-GATE (all three integer assertions exact)
+
+==============================================================================
+  PHASE 1  --  Incoherent baseline capture rate  R_inc  (G_F-free resonance)
+==============================================================================
+  [MEASURED-INPUT  ] E_nu (gs line)     = 0.862 MeV
+  [DERIVED         ] lambdabar_nu = hbar c / E_nu = 2.289176e-13 m
+  [DERIVED         ] lambda_nu    = 2 pi lambdabar = 1.438332e-12 m
+  [DERIVED         ] g_spin = (2J*+1)/((2J_Li+1)(2J_nu+1)) = 0.5000  (J*=3/2,J_Li=3/2,J_nu=1/2)
+  [DERIVED         ] sigma_peak = lambdabar^2 * g_spin * 4 = 1.048065e-25 m^2  (resonance CEILING, width-independent)
+  [MEASURED-INPUT  ] t_half(Be-7) = 53.22 d = 4.5982e+06 s
+  [DERIVED         ] lambda_EC = ln2 / t_half = 1.5074e-07 s^-1
+  [DERIVED         ] Gamma_EC  = hbar lambda_EC = 1.5897e-41 J = 9.9221e-23 eV
+  [ASSUMED         ] drive/target bandwidth dE = 1.0 eV (cold-trap linewidth scale)
+  [DERIVED         ] sigma_avg = sigma_peak*(pi/2)*(Gamma_EC/dE) = 1.633469e-47 m^2
+  [ASSUMED         ] reference nu_e flux Phi_ref = 1e+18 m^-2 s^-1 (reactor-class drive)
+  [DERIVED         ] R_inc (per Be-7 nucleus) = sigma_avg * Phi_ref = 1.633469e-29 s^-1
+  [OBSERVED-TARGET ] weak nu-e ref sigma ~ 1e-46 m^2 (@~1 MeV)
+  [COMPUTED        ] sigma_avg / sigma_weak_ref = 1.633e-01  (order-of-magnitude sanity band)
+
+  [VERDICT-P1      ] R_inc built and unit-checked (s^-1); sigma within loose resonance band of weak ref -> PASS-GATE
+
+==============================================================================
+  PHASE 2  --  Coherent-enhanced rate  R_coh(N)   (N vs N^2, with span gate)
+==============================================================================
+  [DERIVED         ] lambda_nu = 1.4383e-12 m  (the coherence yardstick from Phase 1)
+  [COMPUTED        ] limit check  N=1 (any rho): Kcoh=1  -> True
+  [COMPUTED        ] limit check  rho->0 (N=1e+06): Kcoh=N  -> True
+  [COMPUTED        ] full span    rho>=1 (N=1e+06): Kcoh=N^2 to <1% -> True
+
+  Rate table  (R normalised to single-atom incoherent rate R_inc_per):
+  ------------------------------------------------------------------------
+           N   n[cm^-3]         L[m]      rho_coh      K_inc=N          K_coh
+  ------------------------------------------------------------------------
+       1e+00      1e+15   1.0000e-07   1.4383e-05    1.000e+00   1.000000e+00
+       1e+02      1e+15   4.6416e-07   3.0988e-06    1.000e+02   1.000307e+02
+       1e+04      1e+15   2.1544e-06   6.6761e-07    1.000e+04   1.006675e+04
+       1e+05      1e+15   4.6416e-06   3.0988e-07    1.000e+05   1.030988e+05
+       1e+06      1e+15   1.0000e-05   1.4383e-07    1.000e+06   1.143833e+06
+       1e+07      1e+15   2.1544e-05   6.6761e-08    1.000e+07   1.667614e+07
+  ------------------------------------------------------------------------
+  [OBSERVED-TARGET ] flat 'G_F-only' reference: K stays = N (no coherence slope) for ALL N
+
+  [VERDICT-P2      ] N-vs-N^2 law built; EXACT reduction to incoherent at N=1 and rho->0; full-span N^2 to <1% -> PASS-GATE
+
+==============================================================================
+  PHASE 3  --  Divergence population N* vs the SQUID fT floor
+==============================================================================
+  (T3) Span gate: rho_coh = lambda_nu / L(N,n) across tabletop BEC parameters
+  ----------------------------------------------------------------------
+           N   n[cm^-3]         L[m]      rho_coh   span>=1?
+  ----------------------------------------------------------------------
+       1e+04      1e+13   1.0000e-05   1.4383e-07      False
+       1e+04      1e+15   2.1544e-06   6.6761e-07      False
+       1e+05      1e+13   2.1544e-05   6.6761e-08      False
+       1e+05      1e+15   4.6416e-06   3.0988e-07      False
+       1e+06      1e+13   4.6416e-05   3.0988e-08      False
+       1e+06      1e+15   1.0000e-05   1.4383e-07      False
+       1e+07      1e+13   1.0000e-04   1.4383e-08      False
+       1e+07      1e+15   2.1544e-05   6.6761e-08      False
+  ----------------------------------------------------------------------
+  [COMPUTED        ] best (largest) rho_coh over tabletop grid = 6.676e-07  at N=1e+04, n=1e+15 cm^-3
+  [COMPUTED        ] lambda_nu = 1.438e-12 m  vs  smallest BEC L ~ 2.154e-06 m
+
+  [VERDICT-P3-span ] rho_coh < 1 for ALL tabletop N,n -> lambda_nu does NOT span the BEC. Cross-condensate N^2 is UNESTABLISHED -> DEFER (T3).
+
+  [PENDING         ] B_step (per-capture magnetisation increment) absolute is BLOCKED: it needs the 2s shallow-seat flux-per-atom from NP19/NP20, both still SPEC (BLOCKER-01).
+  [PENDING         ] Therefore B_sig(N*) = B_floor cannot be solved to an absolute N* in this run.
+  [CALIBRATED(1)   ] placeholder B_step = 1e-24 T (illustrative only; real value PENDING NP19/NP20)
+  [ASSUMED         ] integration time tau = 1e+03 s
+
+  Illustrative divergence signal (structure only; absolute is PENDING):
+  --------------------------------------------------------------------------
+           N        rho    K_coh-K_inc     dR[s^-1]     B_sig[T]  >=10xfT?
+  --------------------------------------------------------------------------
+       1e+04  6.676e-07     6.6755e+01   1.0904e-27   1.0904e-48     False
+       1e+05  3.099e-07     3.0988e+03   5.0617e-26   5.0617e-47     False
+       1e+06  1.438e-07     1.4383e+05   2.3495e-24   2.3495e-45     False
+       1e+07  6.676e-08     6.6761e+06   1.0905e-22   1.0905e-43     False
+  --------------------------------------------------------------------------
+
+  [VERDICT-P3      ] SPAN gate + SIGNAL gate must hold TOGETHER. Signal gate uses a PENDING placeholder B_step -> no honest absolute N* is claimable this run.
+  [VERDICT-P3      ] Span gate fails on tabletop -> DEFER cross-condensate N^2 to CEvNS scale (honest boundary, T3). Rate table shipped; N* OPEN.
+
+==============================================================================
+  PHASE 4  --  Stripped-Be-7 clean fork (deep-K vs shallow-2s B_step)
+==============================================================================
+  [ASSUMED         ] Z_eff(Li 2s) = 1.26  ; Z_eff(Be 1s/K) = 3.7  (Slater)
+  [DERIVED         ] r_2s ~ n^2/Z_eff * a0 = 3.175 a0   (shallow seat, flux-active)
+  [DERIVED         ] r_1s ~ n^2/Z_eff * a0 = 0.270 a0   (deep K seat, fast/low-flux)
+  [COMPUTED        ] seat-size ratio r_2s/r_1s = 11.75  (leading B_step proxy)
+  [COMPUTED        ] seat-volume ratio (size^3) = 1620.59  (upper proxy)
+
+  [COMPUTED        ] pre-committed fork threshold: signatures differ >=3x
+  [VERDICT-P4      ] deep-K vs shallow-2s differ 11.75x (>=3) -> fork CALLABLE (but absolute B_step still PENDING NP19/NP20)
+
+==============================================================================
+  SUMMARY  --  dual verdict inputs
+==============================================================================
+  [P0              ] grammar selection rule (3,-1)->(0,1), EC vector (-3,+2): PASS-GATE (exact)
+  [P1              ] R_inc built G_F-free from resonance ceiling + measured EC width: PASS-GATE
+  [P2              ] N-vs-N^2 enhancement law + exact incoherent limits: PASS-GATE
+  [P3              ] span gate FAILS (rho<1); absolute N* DEFERRED (B_step PENDING NP19/NP20).
+  [P4              ] stripped fork proxy 11.75x (linear) / 1620.59x (vol): callable
+
+  Physics-class read: NATIVE on the selection rule; the CROSS-CONDENSATE coherence
+  span and the absolute read-out are OPEN/DEFER (T3 unestablished; NP19/NP20 unlanded).
+  The N-vs-N^2 FORK is SHARP as a prediction, but it is NOT paid out to an absolute N*.
+
+##############################################################################
+#  END NP18 rate fork
+##############################################################################

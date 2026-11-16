@@ -1,0 +1,44 @@
+=== RUN 2 (final; ADJ-1 quasi-static bracket) ===
+PM02 — Faraday & Lenz from Changing Swirl (J. C. Harvey, 2026-07-04)
+Native chain: no Faraday rule, no primitive E/B, no magnetons. HG-1 gain g=1 (disclosed).
+
+P1  RL=2.0  count-route = 3.700000   area-route = 3.700113   rel.diff = 3.06e-05 (gate <1%)
+P1  RL=0.5  count-route = 0.925000   area-route = 0.925159   rel.diff = 1.72e-04 (gate <1%)
+P1  reading: Phi IS the enclosed wake-circulation count (kappa quanta). NATIVE.
+
+P2  |loop-int(-dw/dt) - (-dPhi/dt)|/|EMF|, worst over 5 ramps = 1.61e-09 (gate <1%)
+P2  turns ratio: EMF(N turns) = N x EMF(1): 2/1 = 2.0, 7/3 = 2.3333 (count linearity, exact)
+P2  PRE-FLAGGED: this equality is Stokes' theorem (kinematic identity), NOT physics.
+    The physics is WHICH drive rule carriers obey -> P3.
+
+P3  L_g=0.5  K2 (reactive) : I(during ramp)=-2.8823  I(end)=-1.307e-04  opposes ramp, decays to zero after drive: ledger closes
+P3  L_g=0.5  K1 (co-drag)  : I(during ramp)=+3.3251  I(end)=+3.084e-13  aids ramp (flux amplification): passivity violated
+P3  L_g=2.0  K2 (reactive) : I(during ramp)=-2.1071  I(end)=-1.419e-02  opposes ramp, decays to zero after drive: ledger closes
+P3  L_g=2.0  K1 (co-drag)  : I(during ramp)=-63.5883  I(end)=-1.000e+06  RUNAWAY — throughput created, KILLED by conservation
+P3  sign matrix under K2 (4 cells): dPhi/dt>0 -> I<0 (opposes); dPhi/dt<0 -> I>0;
+    reversing loop handedness reverses BOTH count and drive: opposition holds 4/4.
+P3  HONEST CLASS: the minus (K2) is selected by the throughput ledger (K1 permits
+    creation), NOT by occlusion handedness alone (HG-1 wall, PM01). Per the pivot
+    table this is CONVERGENCE (energy-fixed), not NATIVE. Ledger-closure arithmetic
+    is structural to the EOM (flagged; not counted as a discovery).
+
+P4  motional EMF = 0.791000  transformer EMF = 0.791000  rel.diff = 0.00e+00 (gate <1%)
+P4  reading: ONE mechanism — d/dt of the enclosed streamline count. NATIVE at the
+    kinematic level; the force-level identity (qv x B == flux rule) is HG-1-blocked.
+P4  eddy brake (K2 dynamics), drag force vs speed (quasi-static bracket, v*tau << 1):
+      v=0.02  <F_ring>=-0.00813  (opposes motion: YES)
+      v=0.04  <F_ring>=-0.01625  (opposes motion: YES)
+      v=0.08  <F_ring>=-0.03241  (opposes motion: YES)
+      v=0.16  <F_ring>=-0.06399  (opposes motion: YES)
+P4  drag-vs-speed log-log slope = 0.992 (gate 1.0 +/- 0.1)
+
+PM02 done. Verdict: PM02_VERDICT.md
+
+=== RUN 1 (first bracket, DISCLOSED — saturation crossover, gate failed there) ===
+P4  eddy brake (K2 dynamics), drag force vs speed:
+      v=0.05  <F_ring>=-0.17003  (opposes motion: YES)
+      v=0.10  <F_ring>=-0.25352  (opposes motion: YES)
+      v=0.20  <F_ring>=-0.32338  (opposes motion: YES)
+      v=0.40  <F_ring>=-0.36998  (opposes motion: YES)
+P4  drag-vs-speed log-log slope = 0.372 (gate 1.0 +/- 0.1)
+

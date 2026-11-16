@@ -1,0 +1,135 @@
+{
+  "audit_date": "2026-08-09",
+  "cases": {
+    "GOM37_FROZEN": {
+      "amplitude_gate_pass": false,
+      "amplitude_ratio": 7074106.9024247695,
+      "clears_both_gates": false,
+      "correlation_residual_delay_rate": -0.9916778061142338,
+      "correlation_residual_time": -0.9955098432536331,
+      "median_abs_proxy_hz": 0.03845513989208493,
+      "solar_k_m": 1476.35,
+      "time_confounded": true
+    },
+    "GOM39_LOCAL_EARTH_PROXY": {
+      "amplitude_gate_pass": false,
+      "amplitude_ratio": 7174767.971269492,
+      "clears_both_gates": false,
+      "correlation_residual_delay_rate": -0.9916778061142338,
+      "correlation_residual_time": -0.9955098432536331,
+      "median_abs_proxy_hz": 0.037915619241436535,
+      "solar_k_m": 1455.637,
+      "time_confounded": true
+    }
+  },
+  "classification": "LOCAL_K_REPAIR_DOES_NOT_CLEAR_GOM37_GATES",
+  "empirical_sdt_verdict": "UNADJUDICATED",
+  "fail_closed_reason": "The local-K sensitivity case does not itself validate the ODF observable definition or processed geometry; a physical verdict is prohibited.",
+  "fixed_residual_construction": {
+    "geometric_scale_train_only": -0.2947741699880448,
+    "test_residual_stdev_hz": 272035.7705443081,
+    "trend_intercept_hz": -15065.895927542737,
+    "trend_slope_hz_per_s": 4.055739809410226
+  },
+  "linear_k_scaling": {
+    "exact_within_registered_tolerance": true,
+    "expected_proxy_ratio": 0.985970129034443,
+    "observed_proxy_ratio": 0.9859701290344429
+  },
+  "no_fit_parameters": [
+    "solar_k",
+    "geometric_scale",
+    "linear_detrend",
+    "phase",
+    "media",
+    "ramp",
+    "intermediate_frequency"
+  ],
+  "observable_definition_status": "ODF_SCALE_AND_IF_UNRESOLVED",
+  "sample_counts": {
+    "test_days_158_to_160": 1235,
+    "total": 1360,
+    "train_day_157": 125
+  },
+  "source_hashes_valid": true,
+  "source_results": {
+    "cassini_heliocentric": {
+      "evidence_class": "PROCESSED_GEOMETRY",
+      "hash_matches_pre_registration": true,
+      "path": "Datasets/solar_propagation_2026-08/raw/jpl_horizons_cassini_heliocentric_2002_157_160.csv",
+      "sha256": "948c46b6c7447c97739134990c034e97aaf69afc5d8d1b94bb55f6e4d49a0e06"
+    },
+    "dss25_range_rate": {
+      "evidence_class": "PROCESSED_GEOMETRY",
+      "hash_matches_pre_registration": true,
+      "path": "Datasets/solar_propagation_2026-08/raw/jpl_horizons_cassini_dss25_rr_2002_157_160.csv",
+      "sha256": "658021f99e35f77679c9227302c2fabe7a5150b2197aed8f42870536df1fa4ac"
+    },
+    "earth_heliocentric": {
+      "evidence_class": "PROCESSED_GEOMETRY",
+      "hash_matches_pre_registration": true,
+      "path": "Datasets/solar_propagation_2026-08/raw/jpl_horizons_earth_heliocentric_2002_157_160.csv",
+      "sha256": "3950bf02bdcb9f8d471a8a389dae8fd169db2966f281e784073e3be5b65b734c"
+    },
+    "gom37_instrument": {
+      "evidence_class": "FROZEN_ANALYSIS_INSTRUMENT",
+      "hash_matches_pre_registration": true,
+      "path": "Investigations/06_Gravitation_and_Orbital_Mechanics/GOM37_Multiday_Detrended_Solar_K_Residual/gom37_multiday_detrended.py",
+      "sha256": "c805f0bec605c59aa6ba875771493d3efe582991f297b51471dae8322e199da6"
+    },
+    "gom39_assessment": {
+      "evidence_class": "FROZEN_LOCAL_K_SOURCE",
+      "hash_matches_pre_registration": true,
+      "path": "Investigations/06_Gravitation_and_Orbital_Mechanics/GOM39_Local_k_Solar_K_Definition/GOM39_ASSESSMENT.md",
+      "sha256": "fb7292f298a86c395bacb46c1d7fa1f871bfe6aa3c84f400ff49f27f5d2d76bc"
+    },
+    "label_157": {
+      "evidence_class": "PRODUCT_LABEL",
+      "hash_matches_pre_registration": true,
+      "path": "Datasets/solar_propagation_2026-08/raw/cassini_sce1/cors_0021/sce1_157/odf/c32easc2002_157_0000k252v0.lbl",
+      "sha256": "b27da74ca62187475860e8214c2b76b8b69af760bbe44d27aac93d1c1a5593bf"
+    },
+    "label_158": {
+      "evidence_class": "PRODUCT_LABEL",
+      "hash_matches_pre_registration": true,
+      "path": "Datasets/solar_propagation_2026-08/raw/cassini_sce1/cors_0021/sce1_158/odf/c32easc2002_158_0000k252v0.lbl",
+      "sha256": "3ec4a042de7313524674563723c35526bb9eede27153d4ba060172d2a57d4bf7"
+    },
+    "label_159": {
+      "evidence_class": "PRODUCT_LABEL",
+      "hash_matches_pre_registration": true,
+      "path": "Datasets/solar_propagation_2026-08/raw/cassini_sce1/cors_0021/sce1_159/odf/c32easc2002_159_0000k252v0.lbl",
+      "sha256": "446621ccba2c0064b0c5fac4d9d8885eddedd41867b6149ac429220f74a3cba6"
+    },
+    "label_160": {
+      "evidence_class": "PRODUCT_LABEL",
+      "hash_matches_pre_registration": true,
+      "path": "Datasets/solar_propagation_2026-08/raw/cassini_sce1/cors_0021/sce1_160/odf/c32easc2002_160_0000k252v0.lbl",
+      "sha256": "63c3de17bade5b4a5a8fd6c7dc25d2c1c61c347444f2062d4c81653a0662077b"
+    },
+    "odf_157": {
+      "evidence_class": "PRIMARY_TRACKING_BYTES",
+      "hash_matches_pre_registration": true,
+      "path": "Datasets/solar_propagation_2026-08/raw/cassini_sce1/cors_0021/sce1_157/odf/c32easc2002_157_0000k252v0.odf",
+      "sha256": "c2ea51d9b5e795bd3eb9b4f1c5174cc44325080623188dce5e01c0ea914bfaf7"
+    },
+    "odf_158": {
+      "evidence_class": "PRIMARY_TRACKING_BYTES",
+      "hash_matches_pre_registration": true,
+      "path": "Datasets/solar_propagation_2026-08/raw/cassini_sce1/cors_0021/sce1_158/odf/c32easc2002_158_0000k252v0.odf",
+      "sha256": "9393717f29f5853cb65cd2b1b40b2e411a0d114e326e9d3c3fa1b1b359bc93a4"
+    },
+    "odf_159": {
+      "evidence_class": "PRIMARY_TRACKING_BYTES",
+      "hash_matches_pre_registration": true,
+      "path": "Datasets/solar_propagation_2026-08/raw/cassini_sce1/cors_0021/sce1_159/odf/c32easc2002_159_0000k252v0.odf",
+      "sha256": "cfcba02622502887d48dea3e4079d8b9d6fd0a4120b069e8ddeccc9be7683288"
+    },
+    "odf_160": {
+      "evidence_class": "PRIMARY_TRACKING_BYTES",
+      "hash_matches_pre_registration": true,
+      "path": "Datasets/solar_propagation_2026-08/raw/cassini_sce1/cors_0021/sce1_160/odf/c32easc2002_160_0000k252v0.odf",
+      "sha256": "7f447ba5952d6ae85d33ed74f16458a2319e2e88dca38912d5f4d99b6a344ab9"
+    }
+  }
+}

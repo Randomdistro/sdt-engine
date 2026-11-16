@@ -13,7 +13,7 @@
 2. **Why does it matter?** — This is the framework's most convincing available closure of the neutron. NP14/NP17 assert "neutron = proton + internal electron"; NP19 reframes the mass surplus as a *resistance difference*, not stored energy. If one declared geometry emits both numbers, the neutron stops being two coincidences and becomes one object. Downstream: NP18 (resonator read-out — flux per seated electron), PPT10/PPT11 (the emitted neutrino), SAR05 (provenance).
 3. **How will we find out?** — Four gated phases (§④): **declare one geometry first**, then read the mass off it, then read the moment off it, then prove both came from the *identical* parameters with no per-number fudge.
 4. **What would prove us wrong?** — §⑧: a **positive** moment sign → KILL; needing a **different** seat speed for each number → the closure is FALSE (downgrade to two separate COMPUTED results); any fitted parameter → label CALIBRATED and document it.
-5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN). Best case: one-geometry-two-numbers (Class A/B). Realistic fallback: Class C/D.
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN). Best case: one-geometry-two-numbers (Class A/B). Realistic fallback: Class C/D.
 
 ---
 
@@ -142,7 +142,7 @@ Use canonical labels. **Dual verdict required** (prompt completion A–F + physi
 1. **`NP20_DERIVATION.md`** — the frozen seat geometry (symbols, dimensions, sign convention), the resistance→0.782 MeV derivation (NP19-grounded), the flux-composition→−1.913 μ_N derivation; every line tagged DERIVED / COMPUTED / CALIBRATED(n) / MEASURED-INPUT / OBSERVED-TARGET / ASSUMED / PENDING. μ_N flagged as borrowed yardstick throughout.
 2. **`np20_one_seat.cpp`** (and/or **`np20_one_seat.py`**) — standalone tool (`#include <sdt/laws.hpp>`; compile `cl /std:c++20 /EHsc /O2 /I Engine/include`). Builds ONE seat-geometry struct, passes it to **both** readers, prints **both numbers** (0.782 MeV and −1.913 μ_N with sign) plus the **zero-knob check** (enumerated constant ledger, FAIL if any per-number knob). No local constant namespaces.
 3. **`np20_results.txt`** — machine stdout: table [quantity | SDT value | anchor | % error | sign-check | label].
-4. **`NP20_VERDICT.md`** — dual verdict header (prompt completion A–F + physics class NATIVE/CONVERGENCE/DEGENERATE/KILLED/OPEN); falsification table updated; closure verdict (one-geometry vs two-results).
+4. **`NP20_VERDICT.md`** — dual verdict header (prompt completion A–F + physics class NATIVE/CONVERGENCE/SHARED-INPUT/KILLED/OPEN); falsification table updated; closure verdict (one-geometry vs two-results).
 5. **`RUN_LOG.md`** — **mandatory**: Pre-Run Commitment Block filled before coding, ADJ-### entries, per-phase gates.
 
 ---
@@ -204,7 +204,7 @@ Use canonical labels. **Dual verdict required** (prompt completion A–F + physi
 ```markdown
 ## Pre-Run Commitments — NP20
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: [0 — any fitted param must be declared CALIBRATED(n) and documented]
 - Engine namespaces: measured (R_p, mu_P, mu_N, m_n, m_p), traction::v_phase_proton_surface,
   depth_closure (depth_from_v, v_bound), bridge::k_proton_surface
@@ -226,7 +226,7 @@ Use canonical labels. **Dual verdict required** (prompt completion A–F + physi
 | P3: moment sign **positive** | — (no pivot) | **KILL** the closure (T1) | Absolute-value flip to fake sign |
 | P4: any per-number knob > 0 | Re-route through shared struct | Downgrade to **two separate COMPUTED** (Class D); say so | Claim one-geometry closure |
 | v > c handling breaks (NaN/imag) | Use depth formulation `z=(v/c)²`, not SR γ | **OPEN** the regime | Force-clip v to <c |
-| Rival matches but SDT doesn't beat | Label **DEGENERATE** honestly | — | Claim Class A |
+| A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 | Upstream missing (NP19 reframe) | **DEFER** P2; cite NP19 | — | Fake PASS |
 
 ### Allowed adjustments
@@ -237,7 +237,7 @@ Use canonical labels. **Dual verdict required** (prompt completion A–F + physi
 - Post-hoc tolerance widening · coefficient plugs · a different seat speed per number · `atomic::`/GM/G/quarks/ψ in the native chain · "charge radius" · treating μ_N (magnetons) as a native quantity · framing the two numbers as a cross-check that can "agree."
 
 ### Dual verdict reminder
-Report **prompt completion (A–F)** separately from **physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN)**. Best case: one-geometry-two-numbers (Class A/B). Realistic fallback: Class C/D. A closure that needs two geometries is **two COMPUTED results**, reported honestly — not a retro-PASS.
+Report **prompt completion (A–F)** separately from **physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN)**. Best case: one-geometry-two-numbers (Class A/B). Realistic fallback: Class C/D. A closure that needs two geometries is **two COMPUTED results**, reported honestly — not a retro-PASS.
 
 ---
 

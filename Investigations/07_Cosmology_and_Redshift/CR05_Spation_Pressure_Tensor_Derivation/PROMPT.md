@@ -8,11 +8,11 @@
 
 ## ⓪ The Golden Rule — five questions (answer before Phase 0)
 
-1. **What don't we know?** — *(unfilled by the 2026-06-27 bulk template upgrade — write the single measurable gap before the next run)*
+1. **What don't we know?** — **Measurable gap (written 2026-10-05 in the audit correction pass, from this prompt's own content; the 2026-06-27 template left it unfilled):** Can the spation pressure tensor and its freeze-out mechanism close the observed local slope H0 and the transfer function within 5%, or is the closure excluded as recorded?
 2. **Why does it matter?** — Stack position / downstream blockers (see `INVESTIGATION_STACK.md`).
 3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
 4. **What would prove us wrong?** — §⑧ falsification tests with numeric triggers.
-5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN).
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN).
 
 **Investigation Code:** CR05  
 **Title:** Spation Pressure Tensor Derivation — H₀ Closure and Transfer Function Completion  
@@ -269,7 +269,7 @@ This is the final piece. If successful, the transfer function f = P_eff/P_conv u
    // Test: Transfer function f closure verification
    ```
 
-3. **Theory/05_Audit_Spine.md** (when created)
+3. **Theory/05_Provenance_and_Correspondence.md** (when created)
    ```
    - Transfer function f: CLASS E (CR03) → CLASS C (CR05)
    - Framework closure: Achieved (H₀ derived, R_CMB computed)
@@ -325,7 +325,7 @@ This is the final piece. If successful, the transfer function f = P_eff/P_conv u
 ### Near-term
 
 - [ ] Update CR03 verdict to reference CR05 closure
-- [ ] Create CR05 entry in Theory/05_Audit_Spine.md
+- [ ] Create CR05 entry in Theory/05_Provenance_and_Correspondence.md
 - [ ] Write crosslinks from CR04, APS03, GOM02 to CR05
 - [ ] Add CR05 validation test to benchmarks suite
 
@@ -355,7 +355,7 @@ This is the final piece. If successful, the transfer function f = P_eff/P_conv u
 ```markdown
 ## Pre-Run Commitments — CR05
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: [0 or list each param — max per §⑤]
 - Engine namespaces: cosmology.hpp, z_spectral, CR10 cubic rung
 - Phase thresholds (committed before run): 5%, 1%, 3%, 1%, 1%
@@ -369,7 +369,7 @@ This is the final piece. If successful, the transfer function f = P_eff/P_conv u
 | Phase 0 sanity check fails | Fix units/engine refs; verify `laws.hpp` symbols | STOP — report blocker | Fit to target |
 | Native mechanism off > committed % | Alternative route in §④; document ADJ-### | **OPEN** or **KILL** hypothesis | RETRO-PASS |
 | `z ≥ 1` in closure formula | Weak-field break (CR10); piecewise or exponential | **OPEN** that regime | Ignore break |
-| Rivals match but SDT doesn't beat | Label **DEGENERATE** honestly | — | Claim Class A |
+| A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 | Upstream dependency missing (FLM10, etc.) | **DEFER** phase; cite dependency ID | — | Fake PASS |
 
 ### Allowed adjustments
@@ -384,3 +384,15 @@ This is the final piece. If successful, the transfer function f = P_eff/P_conv u
 ---
 
 *CR05 · upgraded 2026-06-27 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*
+
+---
+
+## Audit correction 2026-10-05 (data / provenance)
+
+**Finding:** The folder is marked RETRACTED-FABRICATED and cites `Theory/05_Audit_Spine.md`, which does not exist at that path.
+
+**Correction:** Keep the retraction, correct or remove the dead reference, and re-run only after the question field is filled.
+
+**Status:** ANNOTATED — label corrected in the record; a confirming run or derivation is still OWED.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

@@ -86,3 +86,15 @@ the cube root of an imported number carries no physics.
 ## Deliverables
 
 `cr15_trilemma.py`, `cr15_results.txt`, `CR15_ASSESSMENT.md`.
+
+---
+
+## Audit correction 2026-10-05 (opening premise)
+
+**Finding:** The registered pass condition is "lands within ±10% of N = 1100", the ΛCDM-fitted recombination output that CR16 itself calls contraband (a rival's fitted outputs used as targets), and the folder has no pre-registration.
+
+**Correction:** Replace the target with a prediction from the vessel's own density law and add a dated pre-registration.
+
+**Status:** RULE RECORDED — corrected gate or definition applies to the next run; the earlier result is not re-scored and nothing was re-run.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

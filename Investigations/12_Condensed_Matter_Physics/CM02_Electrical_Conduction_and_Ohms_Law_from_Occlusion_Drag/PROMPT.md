@@ -191,10 +191,22 @@ Not required for the verdict; this is the payoff of doing it well.
 | τ from geometry off >2× | adjust σ_occl geometry / n_def model | **CALIBRATED(1)** on σ_occl (full ledger) or **OPEN** the drag model | input the measured τ |
 | σ within tolerance only with OBSERVED τ | label **CONVERGENCE** (Class C), state the import | — | claim NATIVE; grade ≥ C on the circular path (that is the F-path) |
 | ρ(T) exponent ≈ 0 (flat) | recheck the FD05 thermal-amplitude coupling | **DEFER** Phase 3, cite dependency | fake a linear Arrhenius/ρ∝T fit |
-| Rivals (Drude) match but SDT only reproduces | label **DEGENERATE** honestly | — | claim Class A |
+| A rival (Drude) lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 
 ---
 
 *CM02 · 10× upgrade 2026-06-29 · τ must be earned from occlusion, not read from copper tables · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*
 
 *CM02 · τ must be earned from occlusion, not read from copper tables.*
+
+---
+
+## Audit correction 2026-10-05 (construction)
+
+**Finding:** The headline "σ(Cu) computed within 2%" uses τ taken from the measured conductivity (the verdict says "τ from measured σ: OBSERVED"), which is the circular Drude path the prompt itself names as the trap, and a superseded verdict still lingers in the folder.
+
+**Correction:** Derive τ from the defect cross-section independently and label the present pass IDENTITY until that exists.
+
+**Status:** OWED — needs a new run, derivation or data; the corrected requirement is recorded here.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

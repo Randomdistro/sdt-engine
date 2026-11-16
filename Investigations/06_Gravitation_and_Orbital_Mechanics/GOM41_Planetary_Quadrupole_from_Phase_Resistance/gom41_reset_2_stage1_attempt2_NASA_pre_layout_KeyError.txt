@@ -1,0 +1,45 @@
+GOM41 Round 2 - stage 1 (J2 NOT read)
+============================================================
+
+[sources, sha256]
+  jpl_ssd_planet_phys_par.html       e49a487947295c389ba6e5833dd8fb04b63e826d39f70c123881882096e5e68b
+  jpl_ssd_sats_elem.html             1e5e52225cf636b78d0ac602eb5352c5648aa025ba45d61593d824e70779dfdd
+  nasa_earthfact.html                1b06e3ec31249d063d40d1b38837fac89ddcd2f4b25268b38e8a6d5f413e70ef
+  nasa_marsfact.html                 366b0ce9b69cbee370be904956748af954468a41b93dc71a796a986519aa8d74
+  nasa_jupiterfact.html              9ac7835ae5387261bc02019a641bbfc8450122ffebebffea5678c3de6c54d0cb
+  nasa_saturnfact.html               6d09ba010cacef61c8ae1a1ff137b06e5464e99461faf8f32c107419c474d06d
+  nasa_uranusfact.html               02389139f8345a4328fc8f8956012cb72f691c6c7c2854c03c0b2512a063de81
+  nasa_neptunefact.html              4b9166f959be2b507eea77a9eef56f4e5679b693ba75151072a28bb228f44328
+
+[V1] koppa from independent satellites of one planet (relative spread, gate <= 1.5%)
+  Mars     Phobos: 4.77354e-04 m  Deimos: 4.76481e-04 m  spread 1.831e-03 -> met
+  Jupiter  Io: 1.42114e+00 m  Europa: 1.43094e+00 m  Ganymede: 1.40941e+00 m  Callisto: 1.40961e+00 m  spread 1.518e-02 -> NOT MET
+  Saturn   Titan: 4.22206e-01 m  Rhea: 4.22494e-01 m  spread 6.810e-04 -> met
+  Uranus   Titania: 6.44787e-02 m  Oberon: 6.44969e-02 m  spread 2.826e-04 -> met
+  Neptune  Triton: 7.60906e-02 m  Proteus: 7.59772e-02 m  spread 1.492e-03 -> met
+
+[V2/V4] uniform oblate spheroid ap/ae = 0.9: exact J2 = (1 - 0.81)/5 = 0.03799999999999999
+  GL projection 0.0380000000 (rel err 3.65e-14);  midpoint volume N=400 0.037976 (rel 6.29e-04), N=800 0.037988 (rel 3.03e-04)
+  [V2] volume vs projection <= 0.5%: met;  [V4] doubling changes J2 by 3.26e-04 (midpoint), 2.03e-14 (GL) (< 1%): met
+
+[V3] zero spin / spherical leakage
+  Q0(w=0) 0.0e+00, Q1(w=0, ap=ae) 0.0e+00, GL sphere -2.0e-15 (gate < 1e-12): met;  tilted-axis spherical leakage -8.81e-16 (gate < 1e-8): met
+
+[V5] Q1 round-trip and small-limit
+  synthetic: J2_true 0.0147 -> a_p/a_e 0.93420299 -> recovered 1.4700000000e-02, rel err 1.8e-15 (gate < 1e-12 relative)
+  small limit f=1e-4, q=5e-4: closed form -9.998000e-05 vs (2f-q)/3 -1.000000e-04, rel diff 2.00e-04 (gate < 2e-3)
+
+[C1] cache consistency (input defects, not claim results)
+Traceback (most recent call last):
+  File "C:\Users\Jimmi\OneDrive\Desktop\sdt-engine\Investigations\06_Gravitation_and_Orbital_Mechanics\GOM41_Planetary_Quadrupole_from_Phase_Resistance\gom41_reset_2.py", line 169, in <module>
+    stage2() if (len(sys.argv) > 1 and sys.argv[1] == 'unseal') else stage1()
+                                                                     ~~~~~~^^
+  File "C:\Users\Jimmi\OneDrive\Desktop\sdt-engine\Investigations\06_Gravitation_and_Orbital_Mechanics\GOM41_Planetary_Quadrupole_from_Phase_Resistance\gom41_reset_2.py", line 125, in stage1
+    ae, ap, rv, ph = nasa_geom(b); j = phys[b]; a_s, P_s = sats[PRIMARY[b]]
+                     ~~~~~~~~~^^^
+  File "C:\Users\Jimmi\OneDrive\Desktop\sdt-engine\Investigations\06_Gravitation_and_Orbital_Mechanics\GOM41_Planetary_Quadrupole_from_Phase_Resistance\gom41_reset_2.py", line 33, in nasa_geom
+    ae = num(nasa_row(body, 'Equatorial radius')[1]); ap = num(nasa_row(body, 'Polar radius')[1])
+             ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Jimmi\OneDrive\Desktop\sdt-engine\Investigations\06_Gravitation_and_Orbital_Mechanics\GOM41_Planetary_Quadrupole_from_Phase_Resistance\gom41_reset_2.py", line 31, in nasa_row
+    raise KeyError((body, label_start))
+KeyError: ('Earth', 'Equatorial radius')

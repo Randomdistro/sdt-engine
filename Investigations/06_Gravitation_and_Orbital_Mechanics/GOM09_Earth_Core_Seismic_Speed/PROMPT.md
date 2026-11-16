@@ -181,3 +181,17 @@ fork (P4-iii); GOM19 P5 (compression-floor cross-checks).
 *GOM09 · upgraded 2026-07-24 · the g-profile was never the question; the question is whether
 occlusion can price stiffness — and NP30's six locks are the first native tool for the shear
 half. File the register ruling either way.*
+
+---
+
+## Audit correction 2026-10-05 (data / provenance)
+
+**Finding:** The PREM reference profile is cited from `Datasets/geophysics`, which does not exist, and the kill threshold is "missing PREM by more than 30%", which cannot discriminate between occlusion-stiffness routes.
+
+**Correction:** Add the PREM table with provenance to Datasets and tighten the kill to ≤ 10%.
+
+**Status:** OWED — needs a new run, derivation or data; the corrected requirement is recorded here.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*
+
+**Data correction (2026-10-05):** the PREM comparison profile is now in the repo as `Datasets/geophysics/PREM_TauP_prem.nd` (provenance in `Datasets/geophysics/README.md`); it is a comparison column only, and no mass or G enters the SDT chain (mass = baryon count and spatial resistance). The P0 source and GM audit named in this prompt remains to be run.

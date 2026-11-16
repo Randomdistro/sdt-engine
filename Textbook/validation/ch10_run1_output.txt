@@ -1,0 +1,71 @@
+
+== V0 helper validation (known answers) ==
+[PASS] V0    integrate sin over [0, pi] = 2                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 3.331e-16 (tol 1e-13)
+[PASS] V0    integrate x^7 over [0, 1] = 1/8                                                value 1.250000000000e-01 expected 1.250000000000e-01 err 2.220e-15 (tol 1e-14)
+[PASS] V0    integrate exp over [-1, 1] = e - 1/e                                           value 2.350402387288e+00 expected 2.350402387288e+00 err 5.668e-16 (tol 1e-13)
+[PASS] V0    root of cos x - x = 0.739085133215161                                          value 7.390851332152e-01 expected 7.390851332152e-01 err 2.253e-15 (tol 1e-13)
+[PASS] V0    root of x^2 - 2 on [1, 2] = sqrt 2                                             value 1.414213562373e+00 expected 1.414213562373e+00 err 2.983e-15 (tol 1e-13)
+[PASS] V0    compensated sum 1 + 10^6 x 1e-16 = 1 + 1e-10                                   value 1.000000000100e+00 expected 1.000000000100e+00 err 0.000e+00 (tol 1e-15)
+
+== V1 planar lens area ==
+[PASS] V1    unit circles at d = 1: 2 pi/3 - sqrt3/2                                        value 1.228369698609e+00 expected 1.228369698609e+00 err 3.615e-16 (tol 1e-13)
+[PASS] V1    d = 0: pi                                                                      value 3.141592653590e+00 expected 3.141592653590e+00 err 0.000e+00 (tol 1e-13)
+[PASS] V1    d >= 2: 0
+[PASS] V1    R1 = 2, R2 = 1, d = 0.5 (nested): pi                                           value 3.141592653590e+00 expected 3.141592653590e+00 err 0.000e+00 (tol 1e-13)
+
+== V2 spherical lens closed form ==
+[PASS] V2    coincident caps: cap area                                                      value 1.477540113723e+00 expected 1.477540113723e+00 err 0.000e+00 (tol 1e-13)
+[PASS] V2    nested caps: the smaller cap                                                   value 4.959884026444e-01 expected 4.959884026444e-01 err 0.000e+00 (tol 1e-13)
+[PASS] V2    externally tangent caps: 0
+[PASS] V2    hemispheres at 90 deg: pi                                                      value 3.141592653590e+00 expected 3.141592653590e+00 err 0.000e+00 (tol 1e-13)
+[PASS] V2    hemispheres at 60 deg: 4 pi/3                                                  value 4.188790204786e+00 expected 4.188790204786e+00 err 2.120e-16 (tol 1e-13)
+[PASS] V2    hemispheres at 180 deg: 0
+
+== T1 spherical lens: closed form against two independent routes ==
+[PASS] T1    closed form vs polar-angle integration, worst relative over 8 configurations   value 8.218264579973e-08 expected 0.000000000000e+00 err 8.218e-08 (tol 1e-05)
+       (0.5, 0.3, 0.40): closed form 0.182144348, grid 0.182421813
+       (0.9, 0.4, 0.70): closed form 0.384885254, grid 0.385170429
+       (1.0, 1.0, 1.50): closed form 0.497178457, grid 0.497735789
+[PASS] T1    closed form vs equal-area grid, worst relative over 3 configurations           value 1.523324676947e-03 expected 0.000000000000e+00 err 1.523e-03 (tol 3e-03)
+
+== T2 union of two shadows ==
+       separation 0 deg: overlap 8.610887e-03 sr, union 2.390942e-02 sr, sum of independent shadows 3.252030e-02 sr (overstated by 36.01%)
+       separation 4 deg: overlap 5.551456e-03 sr, union 2.696885e-02 sr, sum of independent shadows 3.252030e-02 sr (overstated by 20.58%)
+       separation 7 deg: overlap 7.675604e-04 sr, union 3.175274e-02 sr, sum of independent shadows 3.252030e-02 sr (overstated by 2.42%)
+       separation 8 deg: overlap 0.000000e+00 sr, union 3.252030e-02 sr, sum of independent shadows 3.252030e-02 sr (overstated by 0.00%)
+       separation 9 deg: overlap 0.000000e+00 sr, union 3.252030e-02 sr, sum of independent shadows 3.252030e-02 sr (overstated by 0.00%)
+[PASS] T2    bounds on the union and strictness exactly when the caps overlap
+[PASS] T2    nested at 0 deg: union equals the larger cap                                   value 2.390941703933e-02 expected 2.390941703933e-02 err 1.451e-16 (tol 1e-13)
+
+== T3 finite-body occlusion force of two spheres (parallel-ray response model) ==
+       R1 = 1.0, R2 = 1.0, r = 2.000 (= 1.00 (R1+R2)): F / F_LawIII = 1.000000000000
+       R1 = 1.0, R2 = 1.0, r = 20.000 (= 10.00 (R1+R2)): F / F_LawIII = 1.000000000000
+       R1 = 1.0, R2 = 0.2, r = 1.200 (= 1.00 (R1+R2)): F / F_LawIII = 1.000000000000
+       R1 = 1.0, R2 = 0.2, r = 12.000 (= 10.00 (R1+R2)): F / F_LawIII = 1.000000000000
+       R1 = 3.0, R2 = 1.0, r = 4.000 (= 1.00 (R1+R2)): F / F_LawIII = 1.000000000000
+       R1 = 3.0, R2 = 1.0, r = 40.000 (= 10.00 (R1+R2)): F / F_LawIII = 1.000000000000
+       R1 = 1.0, R2 = 3.0, r = 4.000 (= 1.00 (R1+R2)): F / F_LawIII = 1.000000000000
+       R1 = 1.0, R2 = 3.0, r = 40.000 (= 10.00 (R1+R2)): F / F_LawIII = 1.000000000000
+[PASS] T3    F / (q pi^2 R1^2 R2^2 / r^2) - 1, worst over 20 cases with r >= R1 + R2        value 2.933209231060e-13 expected 0.000000000000e+00 err 2.933e-13 (tol 1e-09)
+       R1 = 1.0, R2 = 1.0, r = 0.75 (R1+R2) (overlapping bodies, unphysical): ratio 0.904030
+       R1 = 1.0, R2 = 0.2, r = 0.75 (R1+R2) (overlapping bodies, unphysical): ratio 0.794813
+       R1 = 3.0, R2 = 1.0, r = 0.75 (R1+R2) (overlapping bodies, unphysical): ratio 0.858923
+       R1 = 1.0, R2 = 3.0, r = 0.75 (R1+R2) (overlapping bodies, unphysical): ratio 0.858923
+[PASS] T3    ratio < 1 for r < R1 + R2 in all four pairs
+
+== T4 the engine's occlusion quadrature and seven-circle geometry ==
+[PASS] T4    quadrature weights sum to pi R^2 (R = 1)                                       value 3.141592653590e+00 expected 3.141592653590e+00 err 8.481e-16 (tol 1e-14)
+       d/R =    0.5: quadrature 3.473218992211e+00 sr, exact 3.473259414763e+00 sr, relative error 1.16e-05
+       d/R =    1.0: quadrature 1.840302485228e+00 sr, exact 1.840302369021e+00 sr, relative error 6.31e-08
+       d/R =    2.0: quadrature 6.633335223552e-01 sr, exact 6.633335223470e-01 sr, relative error 1.23e-11
+       d/R =    5.0: quadrature 1.220152131742e-01 sr, exact 1.220152131742e-01 sr, relative error 6.00e-15
+       d/R =   10.0: quadrature 3.118225355492e-02 sr, exact 3.118225355492e-02 sr, relative error 4.22e-15
+       d/R =  100.0: quadrature 3.141357053774e-04 sr, exact 3.141357053772e-04 sr, relative error 7.72e-13
+[PASS] T4    relative error <= 1e-3 for d/R >= 1
+[PASS] T4    central_weight + 6 outer_weight = 1                                            value 1.000000000000e+00 expected 1.000000000000e+00 err 0.000e+00 (tol 1e-14)
+[PASS] T4    ring channel centres at 2R/3 from the centre (worst deviation)                 value 1.110223024625e-16 expected 0.000000000000e+00 err 1.110e-16 (tol 1e-14)
+[PASS] T4    adjacent ring centres 2R/3 apart: tangent discs of radius R/3 (worst deviation) value 3.330669073875e-16 expected 0.000000000000e+00 err 3.331e-16 (tol 1e-14)
+[PASS] T4    outermost point of the ring discs reaches R                                    value 1.000000000000e+00 expected 1.000000000000e+00 err 0.000e+00 (tol 1e-14)
+[PASS] T4    total area of the seven discs / (pi R^2) = 7/9                                 value 7.777777777778e-01 expected 7.777777777778e-01 err 0.000e+00 (tol 1e-14)
+
+ALL CRITERIA MET: 0 failure(s)

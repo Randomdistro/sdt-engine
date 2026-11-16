@@ -27,7 +27,7 @@
    literature Madelung) constant as a fitted primitive, wrong sign, or post-hoc tuning of the
    occlusion-pressure scale to hit 787 kJ/mol (IDENTITY-PASS).
 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class
-   (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN), logged in `CH02_VERDICT.md`.
+   (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN), logged in `CH02_VERDICT.md`.
 
 ## ⓪⁺ Anti-Tautology Firewall *(the load-bearing constraint)*
 
@@ -134,7 +134,7 @@ energy (e.g. KCl or MgO) or a metallic radius down a group from APS01 k-factors.
 ```markdown
 ## Pre-Run Commitments — CH02
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: [0 or list each param — max per §⑤]
 - Engine namespaces: EMC04 electropause, CH01 wake balance, no MO/LCAO
 - Phase thresholds (committed before run): P1 ionic/covalent split correct for >=15 ref pairs · P2 NaCl lattice energy within 15% of 787 kJ/mol, correct sign · P3 Na radius+cohesion within 25% · P4 novel lattice energy (KCl/MgO) within 20%
@@ -148,7 +148,7 @@ energy (e.g. KCl or MgO) or a metallic radius down a group from APS01 k-factors.
 | Phase 0 sanity check fails | Fix units/engine refs; verify `laws.hpp` symbols | STOP — report blocker | Fit to target |
 | Native mechanism off > committed % | Alternative route in §④; document ADJ-### | **OPEN** or **KILL** hypothesis | RETRO-PASS |
 | Lattice sum won't cohere without Coulomb primitive | re-derive pairwise occlusion balance from Law III geometry | **OPEN** ionic cohesion | import Coulomb constant, call it NATIVE |
-| Rivals match but SDT doesn't beat | Label **DEGENERATE** honestly | — | Claim Class A |
+| A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 | Upstream dependency missing (FLM10, etc.) | **DEFER** phase; cite dependency ID | — | Fake PASS |
 
 ### Allowed adjustments
@@ -208,7 +208,7 @@ minimum; actively mine for more — anything in the repo that bounds a short-ran
 | `Investigations/16_Chemistry_and_Molecular_Bonding/CH04_Molecular_Geometry_VSEPR_from_Wake_Balance/CH04_VERDICT.md` | read and extract the earned rim-geometry results (angles, wake-balance geometry) | the rolling interface is a RIM contact (FARMER refinement 2: angle is the premium, contact area is small) — any firewall geometry must be consistent with CH04's earned angular structure |
 | `Investigations/16_Chemistry_and_Molecular_Bonding/CH06_Hydrogen_Bonding_and_van_der_Waals_from_Residual_Wake/CH06_VERDICT.md` | read and extract the residual-wake results (index records an emergent **−6.022** power — verify on read; the file is authoritative) | the long-range tail the wall must hand over to at large r: firewall (contact) and residual wake (vdW) must not double-count the same movement |
 | `Investigations/12_Condensed_Matter_Physics/CM01_Superconductivity_as_Phase_Locked_Vortex_Pairs/CM01_VERDICT.md` | isotope exponent **−0.5000**; the η = T_c/θ_D **24× spread** | θ_D is lattice stiffness = the wall in bulk; a real wall law should compress or explain the η spread direction; cadence-locking (mesh) is CM01's own mechanism — same firewall vocabulary, opposite sign |
-| `Investigations/10_Fluid_Dynamics/FD02_Viscosity_and_Circulation_Quantum/FD02_VERDICT.md` + `FD02_DERIVATION.md` | circulation quantum **κ = h/m** | the rolling interface is a circulation mismatch; h/m is the repo's earned quantum of circulation per unit mass — the natural unit in which a rolling cost should be expressible |
+| `Investigations/10_Fluid_Dynamics/FD02_Viscosity_and_Circulation_Quantum/FD02_VERDICT_DIRECT_2026-07-26.md` + `FD02_DERIVATION.md` | circulation quantum **κ = h/m** | the rolling interface is a circulation mismatch; h/m is the repo's earned quantum of circulation per unit mass — the natural unit in which a rolling cost should be expressible |
 | `Investigations/01_Foundations_and_Lattice_Mechanics/FLM12_The_Mass_Mechanism/FLM12_MASS_MECHANISM.md` + verdicts | mass = resistance to reorganisation; confinement ℏc/Δx forces localisation; mass defect = synchrony saving | the PRESS bookkeeping (Phase C) and the reason the D1 fence lands at ℏ²/2m_e: confinement cost is Law-IV/V native in kind |
 | `Investigations/01_Foundations_and_Lattice_Mechanics/FLM14_Rotating_Spation_Sequential_Occupancy/PROMPT.md` + `FLM14_VERDICT.md` + `RUN_LOG.md` | rotation DOF, sequential seat-tours, (Z−1)! tour count; run-1 earned frustration **0.347**; **status: CLAIM REFUSED at runs 4–5** — leads only, nothing from FLM14 is promotable | owner of ROOT-LOCK; the dwell/tour language for Phase C; do NOT import unearned FLM14 claims into a gated chain |
 | `Investigations/06_Gravitation_and_Orbital_Mechanics/GOM17_Exchange_Ledger_Gas_Giant_Calibration/GOM17_VERDICT.md` + `RUN_LOG.md` | the exchange-ledger METHOD (two-sided ledger lines, all-kinematic, GM banned in-chain) | the bookkeeping form for Phase C's frustrated-movement budget |
@@ -411,3 +411,15 @@ actually lands, in which case propose gates for a run 3 — do not gate mid-run.
 
 *CH02 RUN 2 · spec'd 2026-07-06 · J. C. Harvey · Phase A decides the fork, Phase B pays or dies by the cross-check, Phase C
 writes the PRESS memo · execute with `PROMPT_EXECUTION_PROTOCOL.md` + `HUNTER_PROTOCOL.md`.*
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** The NaCl lattice energy passes at +9.4% against a ±15% gate using the pure Coulomb Evjen sum, which omits the repulsive term (a known ~10% correction), so the gate cannot tell a correct derivation from a missing term; a cited verdict file `FD02_VERDICT.md` is also missing at the given path.
+
+**Correction:** Add the repulsion term from the same geometry or gate at ≤ 3%, and correct the FD02 path.
+
+**Status:** OWED — needs a new run, derivation or data; the corrected requirement is recorded here.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

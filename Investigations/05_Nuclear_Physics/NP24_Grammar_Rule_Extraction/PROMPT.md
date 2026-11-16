@@ -106,3 +106,17 @@ Post-hoc tolerance widening · reporting an undeclared form as a prediction · s
 ---
 
 *NP24 · the residual is systematic; a systematic residual is a law with its sign flipped. Find it, name it, or kill it out loud.*
+
+---
+
+## Audit correction 2026-10-05 (record / status)
+
+**Finding:** The folder holds the NUBASE grammar-sweep and null-test results but no generating script, and no `np24` script exists in 05_Nuclear_Physics either, so the 3213-isotope counts cannot be reproduced from the repo.
+
+**Correction:** Add or recover the sweep script and re-run it to confirm the counts.
+
+**Status:** OWED — needs a new run, derivation or data; the corrected requirement is recorded here.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*
+
+**Reproduction (2026-10-05):** `np24_grammar_count_check.py` recounts from `Datasets/nuclear/NUBASE2020.txt`: 3558 ground-state rows, **3213** grammar-valid isotopes (Z ≥ 3, n_d ≥ 0, n_t ≥ 0), 0 failures of A = 4 + 2n_d + 3n_t and Z = 2 + n_d + n_t. The recorded count reproduces; the sweep and null-test result files are still without their generating script, which stays OWED. Note (shared-input): these identities are an invertible map of (Z, N) and are not independent evidence.

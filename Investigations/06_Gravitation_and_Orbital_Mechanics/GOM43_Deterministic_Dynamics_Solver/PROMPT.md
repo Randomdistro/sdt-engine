@@ -1,7 +1,7 @@
 # GOM43 — Deterministic Dynamics Solver Foundation
 
 **Author:** James Christopher Tyndall, Melbourne  
-**Status:** PRE-REGISTERED · INSTRUMENT NOT YET RUN  
+**Status:** PRE-REGISTERED · INSTRUMENT RUN — assessment NATIVE/WASM CORE QUALIFIED · ARBITRARY-N 7×7 OCCLUSION COMPUTED · DISPLACEMENT EXPLICIT · TAIL PENDING (see GOM43_ASSESSMENT.md); the qualification manifest hash is stale against laws.hpp (dependency ledger D52) and must be regenerated before it is cited [status line corrected 2026-10-05]  
 **Date:** 2026-08-16
 
 ## Question
@@ -152,3 +152,14 @@ paths, or if rigid inertia is presented as gravitational source strength.
   motors, closed loops, general spatial hinge networks, adaptive stepping,
   ephemeris ingestion and shadow-cone corrections.
 
+---
+
+## Audit correction 2026-10-05 (record / status)
+
+**Finding:** The status line still reads "INSTRUMENT NOT YET RUN" although the folder records a qualified native/WASM core with passed gates.
+
+**Correction:** Update the status line to the recorded outcome and keep the qualification manifest hash current (it is stale against laws.hpp).
+
+**Status:** ANNOTATED — label, status or tally corrected in the record; no re-score of earlier runs.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

@@ -23,7 +23,7 @@
    decrease over 10⁴ ticks from a hot start (trend `dS/dt < 0`), or if `ln W` is not extensive in `E`
    (doubling `E,N` does not double `ln W` to ±5%), the lattice-microstate thesis fails.
 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class
-   (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN), per phase, no repainting a fired test.
+   (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN), per phase, no repainting a fired test.
 
 ---
 
@@ -107,7 +107,7 @@ thermodynamic arrow to the cosmological one ([[project_sdt_cyclic_cosmology]]).
 ```markdown
 ## Pre-Run Commitments — TD01
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: 0 (k_B is the only dependency-traced input)
 - Engine namespaces actually used: measured::k_B, measured::l_P, law_I::epsilon, FLM02 GPI relay update
 - Phase thresholds (committed before run):
@@ -121,3 +121,15 @@ thermodynamic arrow to the cosmological one ([[project_sdt_cyclic_cosmology]]).
 ---
 
 *TD01 · 10× upgrade 2026-06-29 · counting is the identity (C); the native mixer is the arrow (A).*
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** Gates include "ln W Stirling error 2.40% PASS" (a mathematical approximation), "S(E) monotone" for a toy, and a PV = N k_B T gate at 20% that follows from the equipartition inserted, while the arrow of time (the load-bearing claim) is left OPEN.
+
+**Correction:** Score only the H-theorem monotonicity under no-Stosszahlansatz dynamics and label the rest VERIFICATION.
+
+**Status:** ANNOTATED — label, status or tally corrected in the record; no re-score of earlier runs.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

@@ -15,7 +15,7 @@
   var FAMILIES = [
     {
       name: 'The causal chain',
-      simple: 'causal-chain.html',
+      simple: 'theory.html',
       layman: 'theory.html#L0',
       technical: 'causal-chain-technical.html'
     }

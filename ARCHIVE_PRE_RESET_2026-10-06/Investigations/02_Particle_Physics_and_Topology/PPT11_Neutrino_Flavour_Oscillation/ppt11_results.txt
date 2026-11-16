@@ -1,0 +1,70 @@
+
+##########################################################################
+#  PPT11 — Neutrino flavour oscillation length from 3 SDT mass minima
+#  Engine minima m_nu1/2/3 (MEASURED-INPUT); Dm2_meas OBSERVED-TARGET only
+#  Zero fitted knobs.  W_neutrino = 0 (open winding)
+##########################################################################
+
+==========================================================================
+SANITY GATE — round-trip engine wake radii from the three masses
+==========================================================================
+  nu1: m=0.020 eV -> R_wake= 9.866 um  (engine says 9.87 um)  OK
+  nu2: m=0.029 eV -> R_wake= 6.804 um  (engine says 6.80 um)  OK
+  nu3: m=0.060 eV -> R_wake= 3.289 um  (engine says 3.29 um)  OK
+  Sanity gate: PASS — inputs wired correctly
+
+==========================================================================
+P2 DIMENSIONAL CHECK — dphi/dx must be [1/length]
+==========================================================================
+  dphi/dx = Delta(m^2) c^3 / (4 hbar E)
+  [ (energy^2) * (m/s)^3 / ((J s)*(J)) ] with energy in J, /c^4 to reduce
+  Assembled sample magnitude ~ 1.267e-06  (units resolve to 1/m)
+  RESULT: dphi/dx is dimensionally an inverse length.  PASS
+
+==========================================================================
+ENGINE-IMPLIED SPLITTINGS  (Dm2_ij = m_j^2 - m_i^2, from minima only)
+==========================================================================
+  Dm21_engine = 4.4100e-04 eV^2   [DERIVED-from-minima]  (OBSERVED solar  7.530e-05)
+  Dm32_engine = 2.7590e-03 eV^2   [DERIVED-from-minima]  (OBSERVED atmos. 2.453e-03)
+  Dm31_engine = 3.2000e-03 eV^2   [DERIVED-from-minima]
+
+==========================================================================
+P3 DECISIVE TABLE — L_osc from minima vs measured L_meas
+  BAR: |log10(L_SDT/L_meas)| <= 1 for >=1 scale, NO knob  (PROMPT §4 P3)
+==========================================================================
+scale                     E      L_SDT[m]     L_meas[m]    log10  label
+-----------------------------------------------------------------------
+solar  (nu2-nu1)       1MeV     5.624e+03     3.293e+04    -0.77  PASS (<=1 dec)
+atmos. (nu3-nu2)       1GeV     8.989e+05     1.011e+06    -0.05  PASS (<=1 dec)
+
+==========================================================================
+T5 ROBUSTNESS — log10 ratio is E-independent (same E-scaling both sides)
+==========================================================================
+  E=     0.1 MeV : log10 solar=-0.768  log10 atmos=-0.051
+  E=     1.0 MeV : log10 solar=-0.768  log10 atmos=-0.051
+  E=    10.0 MeV : log10 solar=-0.768  log10 atmos=-0.051
+  E=   100.0 MeV : log10 solar=-0.768  log10 atmos=-0.051
+  E=  1000.0 MeV : log10 solar=-0.768  log10 atmos=-0.051
+  -> ratio is EXACTLY E-independent (L ~ E on both sides): the offset is a
+     property of the MASSES, not of a chosen E.  (T5: not an E-coincidence.)
+
+==========================================================================
+INDEPENDENCE AUDIT — are the minima independent of the measured Dm^2?
+==========================================================================
+  If m2,m3 were BACK-SOLVED from measured Dm^2 (given m1=0.02):
+    m2_backsolve = 0.0218 eV  (engine has 0.029)  DIFFER
+    m3_backsolve = 0.0541 eV  (engine has 0.06)  DIFFER
+  -> engine masses do NOT round-trip to the naive Dm^2 back-solve, so this is
+     NOT a hard identity-pass; BUT m2,m3 are literature 'best estimates' that
+     ARE partly informed by Dm^2 upstream => PARTIAL circularity. Caps grade.
+
+==========================================================================
+P3 RESULT
+==========================================================================
+  Sanity gate: PASS
+  Scales within +-1 decade: 2/2  (solar, atmos.)
+  P3 FLOOR (>=1 scale within +-1 decade, no knob): MET
+  NOTE: floor MET numerically, but see mechanism/independence caveats in VERDICT.
+        The length landing is COMPUTED; the SDT-native origin of the 1/(4 hbar E)
+        phase factor is PENDING => Class-D foothold, not a closure.
+

@@ -1,5 +1,7 @@
 # GOM08: Mercury Precession from the k-Hierarchy — the transplant named, and the equivalence-principle fork promoted
 
+> **Re-adjudicated 2026-10-03 (origin rule, gateway §3.8):** "IDENTITY-class" → **external-input (form)**: the 6π form is taken from GR with GM → c²Ѻ; the open item is its native derivation (P2). Agreement with GR is not the reason. See `Investigations/ADJUDICATION_REGISTER.md` §R-2026-10-03. Original text below is unchanged.
+
 > **Author:** J. C. Harvey, Melbourne. **Status:** SPEC — **full upgrade 2026-07-24** (supersedes
 > 2026-06-27). The old spec was honest in its discussion ("the result will NECESSARILY match GR")
 > but its methodology asserted a native origin for the 1/r³ term it never derived — that gap is

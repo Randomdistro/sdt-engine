@@ -24,7 +24,7 @@
    off >1%, a Lenz cell that doesn't oppose, motional ≠ transformer, an energy ledger that only closes
    with a hand-inserted sign).
 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class
-   (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN), per phase, no repainting a fired sign cell.
+   (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN), per phase, no repainting a fired sign cell.
 
 ## Question
 
@@ -121,7 +121,7 @@ Not required for the verdict; this is the payoff.
 ```markdown
 ## Pre-Run Commitments — PM02
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: [0 or list each param — max per §⑤]
 - Engine namespaces actually used: law_III (occlusion), law_V (movement budget), bridge; PM01 swirl `w`
 - Phase thresholds (committed before run): P1 Φ-count vs B·A <1% · P2 EMF residual <1% + turns-ratio exact · P3 Lenz 4/4 from handedness · P4 eddy ledger <2%
@@ -137,7 +137,7 @@ Not required for the verdict; this is the payoff.
 | P3 sign only closes via energy argument | check whether occlusion *predicts* the sign before energy is invoked | mark sign **CONVERGENCE** (energy-fixed), not NATIVE | claim native while the sign came from energy |
 | P4 eddy ledger off > 2% | tie dissipation to FD02 relay diffusion η; recompute | **DEFER** P4; note the missing diffusion link | bury the open energy gap |
 | Motional ≠ transformer > 1% | check the relative-wake-change frame is identical | **OPEN** the unification; report both EMFs | claim unification without the cross-check |
-| Rivals match but SDT only reproduces | label **DEGENERATE** honestly | — | claim Class A |
+| A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 
 ### Allowed adjustments
 

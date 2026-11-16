@@ -1,0 +1,62 @@
+CM04 - Crystal Lattice and Phonons as Compression Waves
+J. C. Harvey, Melbourne - 2026-07-03
+Engine: sdt/laws.hpp (hbar, k_B from sdt::laws::measured)
+Quantisation door: Law VI winding ONLY (FD02-earned, kappa=h/m 0.02%)
+3R = 24.9434 J/mol/K [DERIVED: N_A x k_B x 3]
+
+== P1: mode count = 3N (enumerated) and Dulong-Petit ==
+  L=2  N=   8 ions  enumerated modes=   24  3N=   24  EXACT
+  L=3  N=  27 ions  enumerated modes=   81  3N=   81  EXACT
+  L=4  N=  64 ions  enumerated modes=  192  3N=  192  EXACT
+  L=5  N= 125 ions  enumerated modes=  375  3N=  375  EXACT
+  L=6  N= 216 ions  enumerated modes=  648  3N=  648  EXACT
+  [COMPUTED] DOF = bodies x dims (3N), enumerated k-points x 3 pol.
+  model C_v(10 theta_D)/3R = 0.999500  (gate: within 0.1%)  PASS
+  empirical Dulong-Petit band Cp(298)/3R in [0.95, 1.10]:
+    Cu       Cp/3R = 0.980  [OBSERVED]  in band
+    Al       Cp/3R = 0.970  [OBSERVED]  in band
+    Pb       Cp/3R = 1.068  [OBSERVED]  in band
+    NaCl     Cp/3R = 1.012  [OBSERVED]  in band
+  P1 verdict: count EXACT, model limit PASS, band 4/4
+
+== P2: g(w) ~ w^2 from k-sphere enumeration (pure geometry) ==
+  ln g vs ln w slope = 1.924  (gate 2.0 +/- 0.1)  PASS  [COMPUTED]
+  FIREWALL - continuous-exchange branch (lattice granularity OFF):
+    T =    3.43 K : C_v = 3R exactly (24.9434 J/mol/K) - no freeze-out
+    T =   34.30 K : C_v = 3R exactly (24.9434 J/mol/K) - no freeze-out
+    T =  343.00 K : C_v = 3R exactly (24.9434 J/mol/K) - no freeze-out
+    T = 3430.00 K : C_v = 3R exactly (24.9434 J/mol/K) - no freeze-out
+  [FINDING] a continuum lattice CANNOT freeze modes out: no T^3.
+            The T^3 law is a READOUT OF LATTICE GRANULARITY.
+            Discrete branch premise (named, load-bearing): action per
+            reconnection event = h (Law VI extension to compression
+            waves; FD02-earned for vortices). Grade capped C until that
+            extension is independently earned - per pre-commitment.
+  discrete-relay branch: low-T exponent p = 2.9950 (gate 3.0 +/- 0.1)  PASS
+
+== P3: theta_D = (hbar v_D / k_B)(6 pi^2 n)^(1/3), one rule ==
+  solid    n [1/m^3]    v_D [m/s]    theta_pred   theta_obs  err     
+  Cu       8.491e+28     2611.7      341.8 K    343.0 K    -0.4% PASS
+  Al       6.026e+28     3420.4      399.2 K    428.0 K    -6.7% PASS
+  Pb       3.296e+28      784.2       74.9 K    105.0 K   -28.7% FAIL
+  NaCl     4.462e+28     2733.8      288.7 K    321.0 K   -10.1% FAIL
+  diamond  1.762e+29    13805.1     2304.3 K   2230.0 K    +3.3% PASS
+  P3: 3/5 within 10% (committed gate; inputs frozen pre-run)
+
+== P4: Cu crossover vs measured C_p (theta = 343 K, no refit) ==
+  T =    50 K : C_v(model) =   4.98  C_p(meas) =   6.25  err  -20.2%  FAIL
+  T =   100 K : C_v(model) =  14.77  C_p(meas) =  16.01  err   -7.8%  PASS
+  T =   200 K : C_v(model) =  21.63  C_p(meas) =  22.63  err   -4.4%  PASS
+  T =   300 K : C_v(model) =  23.39  C_p(meas) =  24.47  err   -4.4%  PASS
+  P4: 3/4 within 20% band (T=20 K excluded pre-run: carrier gamma-T term)
+
+== Ledger ==
+  DERIVED       : 3N mode count; g~w^2 (k-sphere geometry); 3R limit;
+                  energy-per-event = hbar*w from (granularity + one
+                  reconnection per cycle + action h per winding event);
+                  T^3 exponent; theta_D rule form.
+  NAMED PREMISE : action per reconnection = h for compression waves
+                  (Law VI extension; FD02-earned for vortex winding).
+  MEASURED-INPUT: rho, A, v_L, v_T (elastic tables), N_A.
+  OBSERVED-TARGET: theta_D calorimetric, C_p anchors.
+  CALIBRATED    : none (0 used of 0 budget).

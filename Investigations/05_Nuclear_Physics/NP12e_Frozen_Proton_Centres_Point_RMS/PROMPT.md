@@ -70,3 +70,15 @@ Packing diagnostic (not a second prediction channel):
 - Not Phase B.  
 - ATOMICUS tables are not upgraded to DERIVED packing law by this loop.  
 - Close-pack `A^{1/3}` boundary construction not re-litigated.
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** Gates C1–C4 pass on computed second moments of stated tables (Tammes-4 returns equal values for distinct nuclei), with no comparison datum, so the PASS tally has no discriminating power.
+
+**Correction:** Gate against measured RMS radii after unsealing, with the tolerance fixed in advance.
+
+**Status:** RULE RECORDED — corrected gate or definition applies to the next run; the earlier result is not re-scored and nothing was re-run.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

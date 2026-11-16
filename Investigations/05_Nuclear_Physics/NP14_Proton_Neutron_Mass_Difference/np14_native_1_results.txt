@@ -1,0 +1,33 @@
+NP14 native run 1 (registered 2026-10-07)
+==========================================
+
+[V1] hydrogen ladder: (1/2) m_e (alpha c)^2 = 13.605693 eV (13.605693) ; circular balance at a_0: E_total = -13.605693 eV = -(1/2) m v^2 ; (m_n - m_p) c^2 = 1.293333 MeV ; B_deuteron = 2.224566 MeV -> met
+[V2] unit-free (m_p = 1) ledger against the MeV ledger for d, t, 3He and the surplus: worst relative difference 1.31e-13 -> met
+
+VALIDATIONS: met
+
+[T1] unit-free resistances (m_p = 1): m_n/m_p - 1 = 1.37841946e-03 ; m_e/m_p = 5.44617021e-04 ; (m_n - m_p)/m_e = 2.53098858 ; surplus s/m_e = (m_n - m_p - m_e)/m_e = 1.53098858 ; s/m_p = 8.33802438e-04
+     Law IV: V_disp is proportional to m, so V_n/V_p - 1 = 1.37841946e-03 and the extra exclusion volume is 2.530989 electron-volumes (one is the electron itself)
+
+[T2] unit invariance (R-U: F5 set if any ledger statement changes by > 1e-12): worst relative difference 1.31e-13 -> F5 not set
+
+[T3] component-list ledger (MeV): B_SM against {Z p, N n}, B' against {A p, N e}, s = 0.782334 MeV
+     nucleus          B_SM       B'         B_SM - B'    N s          (B_SM-B')/N s - 1 list change [%]
+     d  (Z=1, N=1)    2.22457    1.44223    0.782334     0.782334     -2.66e-15      35.17       
+     3H (Z=1, N=2)    8.48180    6.91713    1.564667     1.564667     -2.60e-13      18.45       
+     3He (Z=2, N=1)   7.71799    6.93566    0.782334     0.782334     -1.55e-15      10.14       
+     relation B_SM - B' = N s: worst relative deviation 2.60e-13 (CONSTRUCTION)
+     per baryon: B_SM/A = 1.1123, 2.8273, 2.5727 ; B'/A = 0.7211, 2.3057, 2.3119 MeV (d, 3H, 3He)
+     mirror pair: B_SM(3H) - B_SM(3He) = 0.763807 MeV ; B'(3H) - B'(3He) = -0.018527 MeV ; -Q_beta(3H) = -0.018527 MeV (CONSTRUCTION: Q_beta = M(3H) - M(3He) - m_e) ; s = 0.782334 MeV ; [B_SM(3H) - B_SM(3He)]/s = 0.9763 ; s - [B_SM(3H) - B_SM(3He)] = 0.018527 MeV
+     free neutron against {p, e}: B'(n) = m_p + m_e - m_n = -0.782334 MeV (negative: a state above its constituents)
+     R-L (H-L not supported if the list change for d is below 1%): list change for d = 35.17% -> H-L supported
+
+[T4] N1: Law III circular balance, v = c sqrt(r_e/r), E_kin = (1/2) m_e v^2, E_pot = -alpha hbar c / r, E_total = E_kin + E_pot (MeV); measured excess over p + e: s = +0.782334 MeV
+     radius                 r [fm]     v/c      E_kin      E_pot      E_total    domain (v <= c)           
+     r_e (c-boundary)       2.8179     1.0000   +0.25550   -0.51100   -0.25550   inside the law's domain   
+     R_lock                 0.8412     1.8302   +0.85586   -1.71173   -0.85586   outside (Law V budget): flagged
+     R_lock/3 (node)        0.2804     3.1701   +2.56759   -5.13518   -2.56759   outside (Law V budget): flagged
+     R-N1 (N1 rejected if its sign differs from the measured sign of the excess): predicted sign negative at every registered radius, measured sign positive -> MET (rejected)
+
+[T5] O1 thresholds (invariant mass, recoil neglected): gamma d -> p n : 2.224566 MeV (B_SM(d)) ; gamma d -> p p e- : 1.442233 MeV (B'(d)) ; the interval in which only the second channel is open: 0.782334 MeV wide
+     O3 boundary radius under the lock rule R = 4 hbar/(m c) for both W = 3: R_n/R_p = m_p/m_n = 0.99862348 (a 0.138% difference; the measurement would need a precision of about 1e-3 on the radius)

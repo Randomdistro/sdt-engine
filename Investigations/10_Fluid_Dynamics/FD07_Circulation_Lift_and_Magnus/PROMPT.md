@@ -12,7 +12,7 @@
 2. **Why does it matter?** — Textbook lift rests on an *imposed* bound circulation `Γ` and a Kutta condition asserted by fiat; if occlusion asymmetry threads `Γ` and Law V's `v ≤ c` ceiling forces the Kutta condition, lift becomes a momentum-flux imbalance with no borrowed circulation. Downstream: FD10 (shed circulation / starting vortex).
 3. **How will we find out?** — Four gated phases (§④). **The honest core (P2):** the `2π` must be shown to *come out of* the `ℓ=2` channel solid-angle geometry; if it is instead supplied by writing `Γ = π U c α` (which already contains the answer), that is an IMPORTED coefficient and the grade caps at C — see the anti-tautology note in §3.
 4. **What would prove us wrong?** — §⑧, five falsifiers with real failure modes: wrong lift *sign* (toward the high-occlusion face); wrong Magnus sign; no Kutta condition emerging from relay continuity; or — the genuinely-falsifiable one — the `ℓ=2` channel geometry yielding a slope materially ≠ `2π` once the `2π` is *not* pre-plugged.
-5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN), per phase, no repainting a fired test.
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN), per phase, no repainting a fired test.
 
 **Domain**: Fluid Dynamics (SDT lattice mechanics) · **Status**: SPEC · **Author**: J. C. Harvey, Melbourne
 
@@ -184,7 +184,7 @@ Four phases, each gated. Run them in order; a failed checkpoint stops the chain 
 ```markdown
 ## Pre-Run Commitments — FD07
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: 0 if the `ℓ=2` integral returns `π` natively (A); the `2π` is IMPORTED (cap C) if taken from potential flow — declare which
 - Engine namespaces actually used: law_III (F_occlusion, momentum flux), law_V (v_circ²+v_trans²=c² ceiling → Kutta), law_VI::traction (PPT06 ℓ=2 channel), law_IV (V_disp→ρ); κ from FD02
 - Phase thresholds (committed before run):
@@ -201,7 +201,7 @@ Four phases, each gated. Run them in order; a failed checkpoint stops the chain 
 | P2 `ℓ=2` integral cannot be closed without potential flow | take the coefficient from potential flow, label **IMPORTED**, cap C | **OPEN** the `ℓ=2`→`2π` derivation | plug `Γ=πUcα` and grade A |
 | P2 independent `ℓ=2` coefficient ≠ `π` materially | recheck the two-lobed solid-angle integral | **KILL** (SDT mechanism gives wrong slope) | widen tolerance to swallow the miss |
 | P1/P3 lift or Magnus sign wrong | recheck which face is low-occlusion / fast-relay | **KILL** (occlusion asymmetry mis-mapped) | flip the sign as a tuning knob |
-| Rivals match but SDT doesn't beat | Label **DEGENERATE** honestly | — | Claim Class A |
+| A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 | Upstream dependency missing (FD06 Kutta pinning, FD02 κ) | **DEFER** phase; cite dependency ID | — | Fake PASS |
 
 ### Allowed adjustments

@@ -70,14 +70,14 @@
 ╚══════════════════════════════════════════════════════════════╝
 
 ══ B01: HYDROGEN ENERGY LEVELS ══
-  B01  H n=1 energy [eV]                         SDT=-13.6057          EXP=-13.5984          ERR=  0.0536%  TOL=  0.08%  [DERIVED] PASS
-  B01  H n=2 energy [eV]                         SDT=-3.40142          EXP=-3.3996           ERR=  0.0536%  TOL=  0.08%  [DERIVED] PASS
-  B01  H n=3 energy [eV]                         SDT=-1.51174          EXP=-1.5109           ERR=  0.0558%  TOL=  0.08%  [DERIVED] PASS
-  B01  H n=4 energy [eV]                         SDT=-0.850356         EXP=-0.8499           ERR=  0.0536%  TOL=  0.08%  [DERIVED] PASS
-  B01  Balmer 3-&gt;2 [nm]                          SDT=656.112           EXP=656.281           ERR=  0.0257%  TOL=  0.08%  [DERIVED] PASS nm
-  B01  Balmer 4-&gt;2 [nm]                          SDT=486.009           EXP=486.135           ERR=  0.0259%  TOL=  0.08%  [DERIVED] PASS nm
-  B01  Balmer 5-&gt;2 [nm]                          SDT=433.937           EXP=434.047           ERR=  0.0254%  TOL=  0.08%  [DERIVED] PASS nm
-  B01  Balmer 6-&gt;2 [nm]                          SDT=410.07            EXP=410.174           ERR=  0.0253%  TOL=  0.08%  [DERIVED] PASS nm
+  B01  H n=1 energy [eV]                         SDT=-13.5983          EXP=-13.5984          ERR=  0.0008%  TOL=  0.08%  [DERIVED] PASS
+  B01  H n=2 energy [eV]                         SDT=-3.39957          EXP=-3.3996           ERR=  0.0008%  TOL=  0.08%  [DERIVED] PASS
+  B01  H n=3 energy [eV]                         SDT=-1.51092          EXP=-1.5109           ERR=  0.0014%  TOL=  0.08%  [DERIVED] PASS
+  B01  H n=4 energy [eV]                         SDT=-0.849893         EXP=-0.8499           ERR=  0.0008%  TOL=  0.08%  [DERIVED] PASS
+  B01  Balmer 3-&gt;2 vac [nm]                      SDT=656.47            EXP=656.463           ERR=  0.0010%  TOL=  0.08%  [DERIVED] PASS nm
+  B01  Balmer 4-&gt;2 vac [nm]                      SDT=486.274           EXP=486.269           ERR=  0.0010%  TOL=  0.08%  [DERIVED] PASS nm
+  B01  Balmer 5-&gt;2 vac [nm]                      SDT=434.173           EXP=434.169           ERR=  0.0009%  TOL=  0.08%  [DERIVED] PASS nm
+  B01  Balmer 6-&gt;2 vac [nm]                      SDT=410.294           EXP=410.29            ERR=  0.0009%  TOL=  0.08%  [DERIVED] PASS nm
 
 ══ B02: RYDBERG MULTI-ION ══
   B02  He+ Lyman-alpha [nm]                      SDT=30.3756           EXP=30.378            ERR=  0.0080%  TOL=  0.08%  [DERIVED] PASS
@@ -126,6 +126,10 @@
 ══ B11: PLANETARY OBLATENESS ══
   B11  Earth J2 (GOM41 Q1 boundary)              SDT=0.00109248        EXP=0.00108263        ERR=  0.9098%  TOL=  3.00%  [PENDING] PASS
   B11  Jupiter J2 (GOM41 Q1 boundary)            SDT=0.0143865         EXP=0.0146964         ERR=  2.1087%  TOL=  3.00%  [PENDING] PASS
+  B11  Mars J2 (GOM41 Q1 boundary)               SDT=0.00239156        EXP=0.00196045        ERR= 21.9903%  TOL=  3.00%  [PENDING] FAIL
+  B11  Saturn J2 (GOM41 Q1 boundary)             SDT=0.0167651         EXP=0.016298          ERR=  2.8658%  TOL=  3.00%  [PENDING] PASS
+  B11  Uranus J2 (GOM41 Q1 boundary)             SDT=0.00553447        EXP=0.00334343        ERR= 65.5327%  TOL=  3.00%  [PENDING] FAIL
+  B11  Neptune J2 (GOM41 Q1 boundary)            SDT=0.00279819        EXP=0.003411          ERR= 17.9657%  TOL=  3.00%  [PENDING] FAIL
 
 ══ B12: STELLAR zk²=1 ══
   B12  Sun          zk2                          SDT=1                 EXP=1                 ERR=  0.0000%  TOL=  0.00%  [CONSTRUCTION] PASS
@@ -138,15 +142,15 @@
   B13  CMB redshift z                            SDT=1099.72           EXP=1089              ERR=  0.9840%  TOL=  1.00%  [DERIVED] PASS
 
 ══ B14: GALACTIC ROTATION ══
-  B14  Milky Way    R_flat [kpc]                 SDT=6.25              EXP=6                 ERR=  4.1667%  TOL= 12.00%  [COMPUTED] PASS
-  B14  NGC 3198     R_flat [kpc]                 SDT=7                 EXP=7.2               ERR=  2.7778%  TOL= 12.00%  [COMPUTED] PASS
-  B14  NGC 2403     R_flat [kpc]                 SDT=4.5               EXP=4.4               ERR=  2.2727%  TOL= 12.00%  [COMPUTED] PASS
-  B14  M33          R_flat [kpc]                 SDT=4                 EXP=4                 ERR=  0.0000%  TOL= 12.00%  [COMPUTED] PASS
+  B14  Milky Way    R_flat [kpc]                 SDT=6.25              EXP=6                 ERR=  4.1667%  TOL= 12.00%  [CALIBRATED] PASS
+  B14  NGC 3198     R_flat [kpc]                 SDT=7                 EXP=7.2               ERR=  2.7778%  TOL= 12.00%  [CALIBRATED] PASS
+  B14  NGC 2403     R_flat [kpc]                 SDT=4.5               EXP=4.4               ERR=  2.2727%  TOL= 12.00%  [CALIBRATED] PASS
+  B14  M33          R_flat [kpc]                 SDT=4                 EXP=4                 ERR=  0.0000%  TOL= 12.00%  [CALIBRATED] PASS
 
 ══ B15: BAO SCALE ══
-  B15  N_eq=902.169741, physical radius=0.161631 Mpc, escape rate=1.311701e-14 s^-1.
-       opacity controls: proton tau=2.2271, free e+p tau=27.2076; both coupled.
-  B15  BAO standing-equilibrium scale [Mpc]      SDT=145.819           EXP=147.09            ERR=  0.8642%  TOL=  3.00%  [COMPUTED] PASS
+  B15  N_eq=902.169741, physical radius=0.161647 Mpc, escape rate=1.311573e-14 s^-1.
+       opacity controls: proton tau=2.2273, free e+p tau=27.2102; both coupled.
+  B15  BAO standing-equilibrium scale [Mpc]      SDT=145.833           EXP=147.09            ERR=  0.8545%  TOL=  3.00%  [COMPUTED] PASS
 
 ══ B16: TRANSPORT SCALING ══
   B16  fixed-P exponents from engine: mu=0.5, k=0.5, D=1.5.
@@ -155,7 +159,7 @@
   B16  Ar self-diffusivity whole-curve score     SDT=0.921909          EXP=1                 ERR=  7.8091%  TOL= 10.00%  [COMPUTED] PASS
 
 ══ B17: MAGNETIC g-FACTOR ══
-  B17  Electron g-factor                         SDT=2.00232           EXP=2.00232           ERR=  0.0002%  TOL=  0.12%  [DERIVED] PASS
+  B17  Electron g-factor                         SDT=2.00232           EXP=2.00232           ERR=  0.0002%  TOL=  0.01%  [PENDING] PASS
 
 ══ B18: PROTON RADIUS ══
   B18  R_p (FLM07 q=4 lock) [m]                  SDT=8.41236e-16       EXP=8.414e-16         ERR=  0.0195%  TOL=  0.08%  [DERIVED] PASS
@@ -196,8 +200,9 @@
   B26  Torus/electron tube volume ratio          SDT=1836.12           EXP=1836.12           ERR=  0.0000%  TOL=  0.00%  [CONSTRUCTION] PASS
 
 ══ B27: c FROM GEOMETRY (koppa closure) ══
-  B27  k_Sun from precession                     SDT=686.404           EXP=686.3             ERR=  0.0151%  TOL=  0.50%  [COMPUTED] PASS
-  B27  c from precession closure [m/s]           SDT=2.99795e+08       EXP=2.99792e+08       ERR=  0.0009%  TOL=  0.01%  [DERIVED] PASS
+  B27  k_Sun from precession                     SDT=686.404           EXP=686.3             ERR=  0.0151%  TOL=  0.50%  [CONSTRUCTION] PASS
+  B27  c from precession closure [m/s]           SDT=2.99795e+08       EXP=2.99792e+08       ERR=  0.0009%  TOL=  0.01%  [CONSTRUCTION] PASS
+  B27  c closed form, R_Sun and v_surf cancelled [m/s]  SDT=2.99795e+08       EXP=2.99795e+08       ERR=  0.0001%  TOL=  0.00%  [CONSTRUCTION] PASS
 
 ══ B28: DEPTH-CLOSURE THEOREM ══
   B28  Solar redshift = depth z_Sun              SDT=2.12311e-06       EXP=2.1225e-06        ERR=  0.0286%  TOL=  0.10%  [COMPUTED] PASS
@@ -256,6 +261,13 @@
   I42  PPT05 tension from registered inputs      SDT=1.22985           EXP=1.22985           ERR=  0.0000%  TOL=  0.00%  [CONSTRUCTION] PASS GeV/fm
   I43  FLM15 lock/wake volume partition          SDT=1                 EXP=1                 ERR=  0.0000%  TOL=  0.00%  [CONSTRUCTION] PASS
   I44  FLM15 coincident synchrony resistance     SDT=1                 EXP=1                 ERR=  0.0000%  TOL=  0.00%  [CONSTRUCTION] PASS
+  I45  deuteron free neutron slots (on its proton)  SDT=2                 EXP=2                 ERR=  0.0000%  TOL=  0.00%  [CONSTRUCTION] PASS
+  I46  deuteron free proton slots (on its neutron)  SDT=2                 EXP=2                 ERR=  0.0000%  TOL=  0.00%  [CONSTRUCTION] PASS
+  I47  triton free neutron slots (on its proton)  SDT=1                 EXP=1                 ERR=  0.0000%  TOL=  0.00%  [CONSTRUCTION] PASS
+  I48  triton free proton slots (on its two neutrons)  SDT=4                 EXP=4                 ERR=  0.0000%  TOL=  0.00%  [CONSTRUCTION] PASS
+  I49  alpha ring free slots (n + p)             SDT=4                 EXP=4                 ERR=  0.0000%  TOL=  0.00%  [CONSTRUCTION] PASS
+  I50  Pb-208 contact capacity 3 min(Z,N)        SDT=246               EXP=246               ERR=  0.0000%  TOL=  0.00%  [CONSTRUCTION] PASS
+  I51  12-around-1 kissing contacts / slot cap   SDT=4                 EXP=4                 ERR=  0.0000%  TOL=  0.00%  [CONSTRUCTION] PASS
 
 ══ COVERAGE ROSTER: ORIGINAL CATALOGUE B01–B100 ══
   codes: T = tallied in this suite · A = earned in a direct assessment
@@ -293,12 +305,17 @@
               Casimir FLM15 S · Cherenkov A → tallied here (B32) · OP01 O
 
 ╔══════════════════════════════════════════════════════════════╗
-║  RESULTS: 66/66 earned predictions passed (100.0%)           ║
-║  + 19 construction checks (definitional; NOT predictions)    ║
-║  + 0 CALIBRATED (class E, documented; not earned)           ║
-║  + 3 PENDING note-only (B11 corpus/B18 shared form)         ║
-║  0 genuine fail · 0 PENDING open (flagged, in denom)       ║
+║  RESULTS: 59/62 earned predictions passed (95.2%)           ║
+║  + 29 construction checks (definitional; NOT predictions)    ║
+║  + 4 CALIBRATED (class E, documented; not earned)           ║
+║  + 5 PENDING note-only (B11 corpus/B17 form/B18 shared)     ║
+║  0 genuine fail · 3 PENDING open (flagged, in denom)       ║
 ╚══════════════════════════════════════════════════════════════╝
+
+Unmet benchmarks (✗ = genuine regression, ⧖ = PENDING open problem):
+  ⧖ B11: Mars J2 (GOM41 Q1 boundary)  (21.9903% &gt; 3.00% tolerance)
+  ⧖ B11: Uranus J2 (GOM41 Q1 boundary)  (65.5327% &gt; 3.00% tolerance)
+  ⧖ B11: Neptune J2 (GOM41 Q1 boundary)  (17.9657% &gt; 3.00% tolerance)
 
 Certification labels:
   DERIVED    — computed from axioms, no external input beyond CODATA
@@ -306,8 +323,7 @@ Certification labels:
   CALIBRATED — one parameter fitted (documented at the call site)
   OBSERVED   — validated against observation, mechanism established
   PENDING    — mechanism identified, SDT-native derivation not yet implemented
-  CONSTRUCTION — true by definition/construction; shown as consistency, never tallied
-</pre>
+  CONSTRUCTION — true by definition/construction; shown as consistency, never tallied</pre>
   <p class="bench-foot">Run 2026-09-08, MSVC C++20, direct. This page is a captured run — regenerate it
   by rebuilding and re-running the suite; edit the tool, never this page. The suite source and the
   engine header are public in the repository (the Engine door on the front page).</p>

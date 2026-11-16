@@ -1,0 +1,1438 @@
+{
+  "schema": "NSEQ17-WAKE-MESH-REPAIR-2",
+  "neutron": {
+    "classification": "CALIBRATED(1)",
+    "protonBridgeMuNPerGeometricMoment": -0.031274505702046415,
+    "seatedElectronCoefficientMuNPerGeometricMoment": -0.05269689630313559,
+    "protonContributionMuN": 2.79284734463,
+    "seatedElectronContributionMuN": -4.70589010463,
+    "netMomentMuN": -1.9130427599999997,
+    "targetMomentMuN": -1.91304276,
+    "residualMuN": 2.220446049250313e-16,
+    "suppressionRatio": 0.2551153141371532,
+    "protonBasisMoment": -89.30108668183533,
+    "seatedElectronBasisMoment": 89.30108668183534,
+    "phaseOffsetRadians": 0.7853981633974483,
+    "mapping": "proton-form circulation + seated-electron counter-circulation"
+  },
+  "classification": {
+    "H2": "CALIBRATED(8)",
+    "H3": "CALIBRATED(9)",
+    "He3": "CALIBRATED(9)"
+  },
+  "instrumentValidation": {
+    "circularLoop": {
+      "expected": 3.141592653589793,
+      "actual": 3.1415914215113783,
+      "relativeResidual": 3.9218273999972376e-7
+    },
+    "translation": {
+      "base": 1.4809031646186825,
+      "translated": 1.4809031646186817,
+      "relativeResidual": 5.997545558144732e-16
+    },
+    "separatedOverlap": 0
+  },
+  "deterministicResidual": 0,
+  "isotopes": {
+    "H2": {
+      "key": "H2",
+      "classification": "CALIBRATED(8)",
+      "parameterCount": 8,
+      "parameters": {
+        "separationRp": 1.4763916015625,
+        "tiltRadians": 2.198482090437852,
+        "toroidalPhase": 3.535250473280946,
+        "poloidalPhase": 1.5707963267948966,
+        "wakeCompliance": 0.2924862670898437,
+        "splitShift": 0.34997863769531246,
+        "energyBridgeMeVPerOverlap": 0.38316134033541216,
+        "magneticBridgeMuNPerMoment": 0.09073814744764296
+      },
+      "bounds": {
+        "separationRp": [
+          1.4,
+          2.6
+        ],
+        "tiltRadians": [
+          0.7853981633974483,
+          2.356194490192345
+        ],
+        "toroidalPhase": [
+          0,
+          6.283185307179586
+        ],
+        "poloidalPhase": [
+          0,
+          6.283185307179586
+        ],
+        "wakeCompliance": [
+          0,
+          0.45
+        ],
+        "splitShift": [
+          -0.35,
+          0.35
+        ],
+        "energyBridge": [
+          0.01,
+          100
+        ],
+        "magneticBridge": [
+          -20,
+          20
+        ]
+      },
+      "targets": {
+        "bindingEnergyMeV": 2.22456634198942,
+        "magneticMomentMuN": 0.8574382335,
+        "electricQuadrupoleFm2": 0.285699
+      },
+      "model": {
+        "bindingEnergyMeV": 2.22456634198942,
+        "magneticMomentMuN": 0.8574382335000063,
+        "electricQuadrupoleFm2": 0.2856823566913558
+      },
+      "residuals": {
+        "binding": 0,
+        "magnetic": 7.250958372269594e-15,
+        "quadrupole": -0.000058254696880997687
+      },
+      "poses": [
+        {
+          "type": "p",
+          "centreRp": [
+            -0.73819580078125,
+            0,
+            0
+          ],
+          "orientation": [
+            0,
+            0.5223636775231362,
+            0,
+            0.8527228086573649
+          ],
+          "scale": 1,
+          "toroidalPhase": 0,
+          "handedness": 1,
+          "wakeCompliance": 0.2924862670898437,
+          "splitShift": 0.34997863769531246,
+          "centre": [
+            -0.6211179467773438,
+            0,
+            0
+          ],
+          "phase": 0
+        },
+        {
+          "type": "n",
+          "centreRp": [
+            0.73819580078125,
+            0,
+            0
+          ],
+          "orientation": [
+            0,
+            -0.5223636775231362,
+            0.8527228086573649,
+            1.1102230246251565e-16
+          ],
+          "scale": 1,
+          "toroidalPhase": 3.535250473280946,
+          "handedness": -1,
+          "wakeCompliance": 0.2924862670898437,
+          "splitShift": 0.34997863769531246,
+          "internalElectron": true,
+          "centre": [
+            0.6211179467773438,
+            0,
+            0
+          ],
+          "phase": 3.535250473280946
+        }
+      ],
+      "mesh": {
+        "overlap": 5.805821485127067,
+        "pairLedger": [
+          {
+            "i": 0,
+            "j": 1,
+            "coupling": 5.805821485127067,
+            "contactCoupling": 3.7131108680231333,
+            "signedAlignment": -5.805821485127067,
+            "minimumDistanceRp": 1.4763916015625,
+            "integration": {
+              "representation": "-integral U_i dot U_j dV",
+              "samples": 175,
+              "volumeElement": 3.51643092313859
+            },
+            "byFamily": {
+              "crown:crown": -0.2968416837466765,
+              "crown:convergent": -2.9748161576601113,
+              "crown:throat": 0.054626339302664625,
+              "crown:poloidal": 0.00205017225366071,
+              "crown:tail": 1.8231459816897786,
+              "crown:skirt": -0.0726216910471632,
+              "crown:exterior": 1.7739129262313797,
+              "convergent:crown": -0.2069566520994927,
+              "convergent:convergent": 2.754374106786874,
+              "convergent:throat": 0.26699332999027264,
+              "convergent:poloidal": 0.04026202087858011,
+              "convergent:tail": 1.5250873489057306,
+              "convergent:skirt": 0.03258587457576653,
+              "convergent:exterior": -0.9684581949021855,
+              "throat:crown": 0.05149042713384903,
+              "throat:convergent": 0.23676964651383012,
+              "throat:throat": 0.04646465964427053,
+              "throat:poloidal": 0.0060067613468035045,
+              "throat:tail": 0.2794686196981491,
+              "throat:skirt": 0.012406868162475066,
+              "throat:exterior": -0.3936424301958668,
+              "poloidal:crown": 0.0005930300524549906,
+              "poloidal:convergent": 0.04297011064265637,
+              "poloidal:throat": 0.0067088245313318496,
+              "poloidal:poloidal": 0.0003348244992371506,
+              "poloidal:tail": 0.06290198218260051,
+              "poloidal:skirt": 0.0040710500520012545,
+              "poloidal:exterior": -0.12673820589884696,
+              "tail:crown": 0.016385650268010456,
+              "tail:convergent": 0.44236718231776045,
+              "tail:throat": 0.0904358691602036,
+              "tail:poloidal": 0.014355503214300227,
+              "tail:tail": 0.03346045402735546,
+              "tail:skirt": 0.0842082690775265,
+              "tail:exterior": -1.8341108544837026,
+              "skirt:crown": -0.02589525120185689,
+              "skirt:convergent": 0.059390241849178176,
+              "skirt:throat": 0.009576271553262055,
+              "skirt:poloidal": 0.001055694250967939,
+              "skirt:tail": 0.011441793526572604,
+              "skirt:skirt": -0.06792351935242988,
+              "skirt:exterior": -0.06611659772520039,
+              "exterior:crown": 0.418421485104515,
+              "exterior:convergent": -1.4434190927720507,
+              "exterior:throat": 0.07230313319976407,
+              "exterior:poloidal": 0.06591549493173916,
+              "exterior:tail": 0.6237403397361175,
+              "exterior:skirt": 0.3830760207411096,
+              "exterior:exterior": 2.9340035081799005
+            }
+          }
+        ],
+        "familyLedger": {
+          "crown:crown": -0.2968416837466765,
+          "crown:convergent": -2.9748161576601113,
+          "crown:throat": 0.054626339302664625,
+          "crown:poloidal": 0.00205017225366071,
+          "crown:tail": 1.8231459816897786,
+          "crown:skirt": -0.0726216910471632,
+          "crown:exterior": 1.7739129262313797,
+          "convergent:crown": -0.2069566520994927,
+          "convergent:convergent": 2.754374106786874,
+          "convergent:throat": 0.26699332999027264,
+          "convergent:poloidal": 0.04026202087858011,
+          "convergent:tail": 1.5250873489057306,
+          "convergent:skirt": 0.03258587457576653,
+          "convergent:exterior": -0.9684581949021855,
+          "throat:crown": 0.05149042713384903,
+          "throat:convergent": 0.23676964651383012,
+          "throat:throat": 0.04646465964427053,
+          "throat:poloidal": 0.0060067613468035045,
+          "throat:tail": 0.2794686196981491,
+          "throat:skirt": 0.012406868162475066,
+          "throat:exterior": -0.3936424301958668,
+          "poloidal:crown": 0.0005930300524549906,
+          "poloidal:convergent": 0.04297011064265637,
+          "poloidal:throat": 0.0067088245313318496,
+          "poloidal:poloidal": 0.0003348244992371506,
+          "poloidal:tail": 0.06290198218260051,
+          "poloidal:skirt": 0.0040710500520012545,
+          "poloidal:exterior": -0.12673820589884696,
+          "tail:crown": 0.016385650268010456,
+          "tail:convergent": 0.44236718231776045,
+          "tail:throat": 0.0904358691602036,
+          "tail:poloidal": 0.014355503214300227,
+          "tail:tail": 0.03346045402735546,
+          "tail:skirt": 0.0842082690775265,
+          "tail:exterior": -1.8341108544837026,
+          "skirt:crown": -0.02589525120185689,
+          "skirt:convergent": 0.059390241849178176,
+          "skirt:throat": 0.009576271553262055,
+          "skirt:poloidal": 0.001055694250967939,
+          "skirt:tail": 0.011441793526572604,
+          "skirt:skirt": -0.06792351935242988,
+          "skirt:exterior": -0.06611659772520039,
+          "exterior:crown": 0.418421485104515,
+          "exterior:convergent": -1.4434190927720507,
+          "exterior:throat": 0.07230313319976407,
+          "exterior:poloidal": 0.06591549493173916,
+          "exterior:tail": 0.6237403397361175,
+          "exterior:skirt": 0.3830760207411096,
+          "exterior:exterior": 2.9340035081799005
+        },
+        "signedContributions": [
+          {
+            "unit": 0,
+            "type": "p",
+            "frozenSpeciesMomentMuN": 1.0495462693909814,
+            "interactionMomentMuN": 0.26340474298607663,
+            "totalMomentMuN": 1.312951012377058,
+            "internal": {
+              "classification": "CALIBRATED free-proton bridge",
+              "protonContributionMuN": 2.79284734463
+            }
+          },
+          {
+            "unit": 1,
+            "type": "n",
+            "frozenSpeciesMomentMuN": -0.7189175218631317,
+            "interactionMomentMuN": 0.26340474298607663,
+            "totalMomentMuN": -0.4555127788770551,
+            "internal": {
+              "classification": "CALIBRATED(1)",
+              "protonBridgeMuNPerGeometricMoment": -0.031274505702046415,
+              "seatedElectronCoefficientMuNPerGeometricMoment": -0.05269689630313559,
+              "protonContributionMuN": 2.79284734463,
+              "seatedElectronContributionMuN": -4.70589010463,
+              "netMomentMuN": -1.9130427599999997,
+              "targetMomentMuN": -1.91304276,
+              "residualMuN": 2.220446049250313e-16,
+              "suppressionRatio": 0.2551153141371532,
+              "protonBasisMoment": -89.30108668183533,
+              "seatedElectronBasisMoment": 89.30108668183534,
+              "phaseOffsetRadians": 0.7853981633974483,
+              "mapping": "proton-form circulation + seated-electron counter-circulation"
+            }
+          }
+        ],
+        "neutronCalibration": {
+          "classification": "CALIBRATED(1)",
+          "protonBridgeMuNPerGeometricMoment": -0.031274505702046415,
+          "seatedElectronCoefficientMuNPerGeometricMoment": -0.05269689630313559,
+          "protonContributionMuN": 2.79284734463,
+          "seatedElectronContributionMuN": -4.70589010463,
+          "netMomentMuN": -1.9130427599999997,
+          "targetMomentMuN": -1.91304276,
+          "residualMuN": 2.220446049250313e-16,
+          "suppressionRatio": 0.2551153141371532,
+          "protonBasisMoment": -89.30108668183533,
+          "seatedElectronBasisMoment": 89.30108668183534,
+          "phaseOffsetRadians": 0.7853981633974483,
+          "mapping": "proton-form circulation + seated-electron counter-circulation"
+        },
+        "deformationLedger": [
+          {
+            "unit": 0,
+            "type": "p",
+            "wakeCompliance": 0.2924862670898437,
+            "throatFraction": 0.7999786376953124,
+            "poloidalFraction": 0.2000213623046876,
+            "incomingPhaseSectors": 4
+          },
+          {
+            "unit": 1,
+            "type": "n",
+            "wakeCompliance": 0.2924862670898437,
+            "throatFraction": 0.7999786376953124,
+            "poloidalFraction": 0.2000213623046876,
+            "incomingPhaseSectors": 4
+          }
+        ],
+        "sectorCorrespondences": 4,
+        "sameSpeciesOverlapRatio": 0,
+        "circuitCount": 8,
+        "closedCircuitCount": 8,
+        "splitResidual": 0,
+        "rejoinResidual": 0,
+        "maximumRelativeDivergence": 6.838969670144716e-16
+      },
+      "magneticRoutes": {
+        "integralMuN": 0.8574382335000063,
+        "farFieldMuN": 0.8468738258121131,
+        "relativeResidual": 0.0123208964507798,
+        "axial": [
+          0.8948435412984662,
+          0.887472499814139,
+          0.8825255788287613
+        ],
+        "equatorial": [
+          0.7944887062101846,
+          0.8068091813330897,
+          0.8151034473880383
+        ]
+      },
+      "coefficientBoundsSatisfied": true,
+      "parameterBoundsSatisfied": true,
+      "contactMismatch": false,
+      "neutronNeutronContactExcluded": true,
+      "spinParityDiagnostic": {
+        "fitted": false,
+        "frameReturnRadians": 12.566370614359172,
+        "netHandedness": 0,
+        "status": "PENDING — no native periodicity-to-spin mapping"
+      }
+    },
+    "H3": {
+      "key": "H3",
+      "classification": "CALIBRATED(9)",
+      "parameterCount": 9,
+      "parameters": {
+        "separationRp": 1.750042724609375,
+        "openingRadians": 2.945275070673512,
+        "tiltRadians": 0.954950977358433,
+        "toroidalPhase": 0.5289677083558985,
+        "poloidalPhase": 1.5707963267948966,
+        "wakeCompliance": 0.08772857666015625,
+        "splitShift": -0.34997863769531246,
+        "energyBridgeMeVPerOverlap": 0.3324102881333439,
+        "magneticBridgeMuNPerMoment": 0.09515966946022615
+      },
+      "bounds": {
+        "separationRp": [
+          1.4,
+          2.8
+        ],
+        "openingRadians": [
+          2.0943951023931953,
+          3.141592653589793
+        ],
+        "tiltRadians": [
+          0.7853981633974483,
+          2.356194490192345
+        ],
+        "toroidalPhase": [
+          0,
+          6.283185307179586
+        ],
+        "poloidalPhase": [
+          0,
+          6.283185307179586
+        ],
+        "wakeCompliance": [
+          0,
+          0.45
+        ],
+        "splitShift": [
+          -0.35,
+          0.35
+        ],
+        "energyBridge": [
+          0.01,
+          100
+        ],
+        "magneticBridge": [
+          -20,
+          20
+        ]
+      },
+      "targets": {
+        "bindingEnergyMeV": 8.48179662478708,
+        "magneticMomentMuN": 2.978962465
+      },
+      "model": {
+        "bindingEnergyMeV": 8.48179662478708,
+        "magneticMomentMuN": 2.9789624650000173,
+        "electricQuadrupoleFm2": null
+      },
+      "residuals": {
+        "binding": 0,
+        "magnetic": 5.813929979863792e-15,
+        "quadrupole": null
+      },
+      "poses": [
+        {
+          "type": "p",
+          "centreRp": [
+            0,
+            0,
+            0
+          ],
+          "orientation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": 1,
+          "toroidalPhase": 0,
+          "handedness": 1,
+          "wakeCompliance": 0.08772857666015625,
+          "splitShift": -0.34997863769531246,
+          "internalElectron": false,
+          "centre": [
+            0,
+            0,
+            0
+          ],
+          "phase": 0
+        },
+        {
+          "type": "n",
+          "centreRp": [
+            1.7416185312716823,
+            0,
+            0.17150635407842263
+          ],
+          "orientation": [
+            0.02254481731150504,
+            0.4589851236153262,
+            0.8870883849305549,
+            0.04357275333868721
+          ],
+          "scale": 1,
+          "toroidalPhase": 0.5289677083558985,
+          "handedness": -1,
+          "wakeCompliance": 0.08772857666015625,
+          "splitShift": -0.34997863769531246,
+          "internalElectron": true,
+          "centre": [
+            1.4653978322119936,
+            0,
+            0.14430544632158482
+          ],
+          "phase": 0.5289677083558985
+        },
+        {
+          "type": "n",
+          "centreRp": [
+            -1.7416185312716823,
+            0,
+            0.17150635407842263
+          ],
+          "orientation": [
+            0.02254481731150504,
+            -0.4589851236153262,
+            -0.8870883849305549,
+            0.04357275333868721
+          ],
+          "scale": 1,
+          "toroidalPhase": -0.5289677083558985,
+          "handedness": -1,
+          "wakeCompliance": 0.08772857666015625,
+          "splitShift": -0.34997863769531246,
+          "internalElectron": true,
+          "centre": [
+            -1.4653978322119936,
+            0,
+            0.14430544632158482
+          ],
+          "phase": -0.5289677083558985
+        }
+      ],
+      "mesh": {
+        "overlap": 25.516047269224924,
+        "pairLedger": [
+          {
+            "i": 0,
+            "j": 1,
+            "coupling": 26.048708493146588,
+            "contactCoupling": 1.034096993008601,
+            "signedAlignment": -26.048708493146588,
+            "minimumDistanceRp": 1.7500427246093748,
+            "integration": {
+              "representation": "-integral U_i dot U_j dV",
+              "samples": 175,
+              "volumeElement": 2.8123153204083327
+            },
+            "byFamily": {
+              "crown:crown": 0.5438811648760282,
+              "crown:convergent": 0.5234580096679518,
+              "crown:throat": 0.025667641355473822,
+              "crown:poloidal": 0.26660388523821676,
+              "crown:tail": 0.6663544692159723,
+              "crown:skirt": -0.013369748692899143,
+              "crown:exterior": 1.7544477685402327,
+              "convergent:crown": 0.3185834193045447,
+              "convergent:convergent": 0.1501756798626792,
+              "convergent:throat": 0.011498083311986432,
+              "convergent:poloidal": 0.1409249754641299,
+              "convergent:tail": 0.4631123602661733,
+              "convergent:skirt": -0.009285510648867916,
+              "convergent:exterior": 0.7024740165633676,
+              "throat:crown": 0.0116950739317974,
+              "throat:convergent": 0.01410995132130259,
+              "throat:throat": 0.0007427227407234774,
+              "throat:poloidal": 0.007638019274573235,
+              "throat:tail": 0.0226676129979567,
+              "throat:skirt": -0.0009058778540627004,
+              "throat:exterior": 0.053263107275728555,
+              "poloidal:crown": 0.09931895316004792,
+              "poloidal:convergent": 0.11687137627206007,
+              "poloidal:throat": 0.0065344888374493865,
+              "poloidal:poloidal": 0.06716354326080785,
+              "poloidal:tail": 0.2077339286230533,
+              "poloidal:skirt": -0.008922595150891256,
+              "poloidal:exterior": 0.4264950160524096,
+              "tail:crown": 0.4637581526603926,
+              "tail:convergent": 0.4719429148033764,
+              "tail:throat": 0.029099624199891514,
+              "tail:poloidal": 0.25741994306838917,
+              "tail:tail": 0.4756130250776349,
+              "tail:skirt": -0.22417834058786354,
+              "tail:exterior": 2.4406063003112495,
+              "skirt:crown": -0.0528481240699602,
+              "skirt:convergent": -0.0042015245703945535,
+              "skirt:throat": -0.0011304088972192278,
+              "skirt:poloidal": -0.009046963039869417,
+              "skirt:tail": -0.28946306218813,
+              "skirt:skirt": -0.21046120068830215,
+              "skirt:exterior": 0.13846541532040393,
+              "exterior:crown": 2.2462715098543846,
+              "exterior:convergent": 0.8882690326134116,
+              "exterior:throat": 0.061908606322790126,
+              "exterior:poloidal": 0.604613838488652,
+              "exterior:tail": 3.056074281212102,
+              "exterior:skirt": 0.36848065838390487,
+              "exterior:exterior": 8.768583279803808
+            }
+          },
+          {
+            "i": 0,
+            "j": 2,
+            "coupling": 7.670303512150837,
+            "contactCoupling": 1.3848913029484429,
+            "signedAlignment": -7.670303512150837,
+            "minimumDistanceRp": 1.7500427246093748,
+            "integration": {
+              "representation": "-integral U_i dot U_j dV",
+              "samples": 175,
+              "volumeElement": 2.8589189857589625
+            },
+            "byFamily": {
+              "crown:crown": -0.1793278291530223,
+              "crown:convergent": -0.379223762517205,
+              "crown:throat": -0.007496436714425531,
+              "crown:poloidal": -0.04903498055895306,
+              "crown:tail": 0.1613599055569126,
+              "crown:skirt": 0.06005742096828547,
+              "crown:exterior": 0.2406229245085386,
+              "convergent:crown": -0.034289377553922376,
+              "convergent:convergent": -0.024204042592294264,
+              "convergent:throat": 0.010837000799026332,
+              "convergent:poloidal": 0.14165852001324927,
+              "convergent:tail": 0.4688412100567996,
+              "convergent:skirt": 0.04613350321394579,
+              "convergent:exterior": -1.3004128419941998,
+              "throat:crown": -0.001083670848650282,
+              "throat:convergent": -0.001504578024033833,
+              "throat:throat": 0.0007249174729238593,
+              "throat:poloidal": 0.007038922576182928,
+              "throat:tail": 0.025314116034173127,
+              "throat:skirt": 0.00392722884639425,
+              "throat:exterior": -0.09269883842611248,
+              "poloidal:crown": -0.01194840114381731,
+              "poloidal:convergent": -0.00702060814401609,
+              "poloidal:throat": 0.006371654565071861,
+              "poloidal:poloidal": 0.06300604604305761,
+              "poloidal:tail": 0.2332045335939878,
+              "poloidal:skirt": 0.034570729184236,
+              "poloidal:exterior": -0.8010450540737487,
+              "tail:crown": 0.16163022646037942,
+              "tail:convergent": 0.21784812700036182,
+              "tail:throat": 0.02793480893179223,
+              "tail:poloidal": 0.23309705081233256,
+              "tail:tail": 0.7684688395213863,
+              "tail:skirt": 0.29682150644420513,
+              "tail:exterior": -4.887786185321408,
+              "skirt:crown": -0.026774139384358367,
+              "skirt:convergent": 0.02631543032285821,
+              "skirt:throat": 0.003950087007910601,
+              "skirt:poloidal": 0.032740285767976204,
+              "skirt:tail": 0.25588258481184334,
+              "skirt:skirt": -0.2365177387160187,
+              "skirt:exterior": -1.030750784035878,
+              "exterior:crown": 1.3131068492123272,
+              "exterior:convergent": 2.502374467080466,
+              "exterior:throat": -0.07453731182916404,
+              "exterior:poloidal": -0.5894188810501042,
+              "exterior:tail": -7.861447793243919,
+              "exterior:skirt": -0.5907128129552304,
+              "exterior:exterior": 18.513700683624702
+            }
+          },
+          {
+            "i": 1,
+            "j": 2,
+            "coupling": -8.202964736072499,
+            "contactCoupling": 0.7470038806866547,
+            "signedAlignment": 8.202964736072499,
+            "minimumDistanceRp": 3.4832370625433646,
+            "integration": {
+              "representation": "-integral U_i dot U_j dV",
+              "samples": 175,
+              "volumeElement": 3.4914414853350215
+            },
+            "byFamily": {
+              "crown:crown": 0.2617909153313238,
+              "crown:convergent": -0.20024013665760165,
+              "crown:throat": -0.0015486181995878544,
+              "crown:poloidal": -0.009338707296996238,
+              "crown:tail": -0.18064779040708015,
+              "crown:skirt": 0.03700135059412552,
+              "crown:exterior": 0.09790648837252487,
+              "convergent:crown": -0.13931329448880939,
+              "convergent:convergent": 0.03552151977468126,
+              "convergent:throat": -0.005616430741472656,
+              "convergent:poloidal": -0.035922600425687665,
+              "convergent:tail": -0.4060861493608039,
+              "convergent:skirt": -0.0046135743887334045,
+              "convergent:exterior": 0.028622836476841416,
+              "throat:crown": -0.003497037836389356,
+              "throat:convergent": -0.0025037973371122685,
+              "throat:throat": -0.0003676528923931631,
+              "throat:poloidal": -0.002293690933499835,
+              "throat:tail": -0.027387245743634464,
+              "throat:skirt": 0.0029706830100008756,
+              "throat:exterior": 0.04264433625059977,
+              "poloidal:crown": -0.014190575124534461,
+              "poloidal:convergent": -0.009836186903205393,
+              "poloidal:throat": -0.0023697180905935308,
+              "poloidal:poloidal": -0.012102484059233903,
+              "poloidal:tail": -0.20259965191752102,
+              "poloidal:skirt": 0.028445446971868762,
+              "poloidal:exterior": 0.25915977087282627,
+              "tail:crown": -0.2558508926232644,
+              "tail:convergent": -0.31947684708401064,
+              "tail:throat": -0.028934412234554546,
+              "tail:poloidal": -0.21850470360371116,
+              "tail:tail": -1.921746401602499,
+              "tail:skirt": 0.7333349604415422,
+              "tail:exterior": 2.219980615867864,
+              "skirt:crown": 0.017884069616068164,
+              "skirt:convergent": -0.025932036861848203,
+              "skirt:throat": 0.00022322218377884506,
+              "skirt:poloidal": 0.003637938798513562,
+              "skirt:tail": 0.6692034956655479,
+              "skirt:skirt": 0.1508495662590333,
+              "skirt:exterior": 0.27900441761612566,
+              "exterior:crown": 0.18907018584910332,
+              "exterior:convergent": -0.20635223199669478,
+              "exterior:throat": 0.03611469510211148,
+              "exterior:poloidal": 0.3092479739106259,
+              "exterior:tail": 1.5478108960793464,
+              "exterior:skirt": -0.24286651252608732,
+              "exterior:exterior": -10.673250739779391
+            }
+          }
+        ],
+        "familyLedger": {
+          "crown:crown": 0.6263442510543298,
+          "crown:convergent": -0.05600588950685492,
+          "crown:throat": 0.016622586441460436,
+          "crown:poloidal": 0.20823019738226747,
+          "crown:tail": 0.6470665843658048,
+          "crown:skirt": 0.08368902286951185,
+          "crown:exterior": 2.092977181421296,
+          "convergent:crown": 0.14498074726181295,
+          "convergent:convergent": 0.16149315704506623,
+          "convergent:throat": 0.01671865336954011,
+          "convergent:poloidal": 0.24666089505169148,
+          "convergent:tail": 0.525867420962169,
+          "convergent:skirt": 0.032234418176344475,
+          "convergent:exterior": -0.5693159889539908,
+          "throat:crown": 0.007114365246757762,
+          "throat:convergent": 0.010101575960156487,
+          "throat:throat": 0.0010999873212541736,
+          "throat:poloidal": 0.012383250917256328,
+          "throat:tail": 0.020594483288495363,
+          "throat:skirt": 0.005992034002332426,
+          "throat:exterior": 0.003208605100215839,
+          "poloidal:crown": 0.07317997689169616,
+          "poloidal:convergent": 0.10001458122483858,
+          "poloidal:throat": 0.010536425311927717,
+          "poloidal:poloidal": 0.11806710524463156,
+          "poloidal:tail": 0.23833881029952006,
+          "poloidal:skirt": 0.05409358100521351,
+          "poloidal:exterior": -0.11539026714851286,
+          "tail:crown": 0.3695374864975077,
+          "tail:convergent": 0.37031419471972765,
+          "tail:throat": 0.028100020897129197,
+          "tail:poloidal": 0.27201229027701057,
+          "tail:tail": -0.6776645370034777,
+          "tail:skirt": 0.8059781262978838,
+          "tail:exterior": -0.22719926914229482,
+          "skirt:crown": -0.0617381938382504,
+          "skirt:convergent": -0.0038181311093845455,
+          "skirt:throat": 0.0030429002944702176,
+          "skirt:poloidal": 0.027331261526620347,
+          "skirt:tail": 0.6356230182892613,
+          "skirt:skirt": -0.29612937314528753,
+          "skirt:exterior": -0.6132809510993484,
+          "exterior:crown": 3.7484485449158154,
+          "exterior:convergent": 3.184291267697183,
+          "exterior:throat": 0.02348598959573757,
+          "exterior:poloidal": 0.32444293134917374,
+          "exterior:tail": -3.257562615952471,
+          "exterior:skirt": -0.4650986670974128,
+          "exterior:exterior": 16.60903322364912
+        },
+        "signedContributions": [
+          {
+            "unit": 0,
+            "type": "p",
+            "frozenSpeciesMomentMuN": 2.640196264316827,
+            "interactionMomentMuN": 1.60434501847475,
+            "totalMomentMuN": 4.244541282791577,
+            "internal": {
+              "classification": "CALIBRATED free-proton bridge",
+              "protonContributionMuN": 2.79284734463
+            }
+          },
+          {
+            "unit": 1,
+            "type": "n",
+            "frozenSpeciesMomentMuN": -1.0446662116938865,
+            "interactionMomentMuN": 0.8490975385975323,
+            "totalMomentMuN": -0.19556867309635417,
+            "internal": {
+              "classification": "CALIBRATED(1)",
+              "protonBridgeMuNPerGeometricMoment": -0.031274505702046415,
+              "seatedElectronCoefficientMuNPerGeometricMoment": -0.05269689630313559,
+              "protonContributionMuN": 2.79284734463,
+              "seatedElectronContributionMuN": -4.70589010463,
+              "netMomentMuN": -1.9130427599999997,
+              "targetMomentMuN": -1.91304276,
+              "residualMuN": 2.220446049250313e-16,
+              "suppressionRatio": 0.2551153141371532,
+              "protonBasisMoment": -89.30108668183533,
+              "seatedElectronBasisMoment": 89.30108668183534,
+              "phaseOffsetRadians": 0.7853981633974483,
+              "mapping": "proton-form circulation + seated-electron counter-circulation"
+            }
+          },
+          {
+            "unit": 2,
+            "type": "n",
+            "frozenSpeciesMomentMuN": -1.044666211693886,
+            "interactionMomentMuN": -0.025343933001332416,
+            "totalMomentMuN": -1.0700101446952184,
+            "internal": {
+              "classification": "CALIBRATED(1)",
+              "protonBridgeMuNPerGeometricMoment": -0.031274505702046415,
+              "seatedElectronCoefficientMuNPerGeometricMoment": -0.05269689630313559,
+              "protonContributionMuN": 2.79284734463,
+              "seatedElectronContributionMuN": -4.70589010463,
+              "netMomentMuN": -1.9130427599999997,
+              "targetMomentMuN": -1.91304276,
+              "residualMuN": 2.220446049250313e-16,
+              "suppressionRatio": 0.2551153141371532,
+              "protonBasisMoment": -89.30108668183533,
+              "seatedElectronBasisMoment": 89.30108668183534,
+              "phaseOffsetRadians": 0.7853981633974483,
+              "mapping": "proton-form circulation + seated-electron counter-circulation"
+            }
+          }
+        ],
+        "neutronCalibration": {
+          "classification": "CALIBRATED(1)",
+          "protonBridgeMuNPerGeometricMoment": -0.031274505702046415,
+          "seatedElectronCoefficientMuNPerGeometricMoment": -0.05269689630313559,
+          "protonContributionMuN": 2.79284734463,
+          "seatedElectronContributionMuN": -4.70589010463,
+          "netMomentMuN": -1.9130427599999997,
+          "targetMomentMuN": -1.91304276,
+          "residualMuN": 2.220446049250313e-16,
+          "suppressionRatio": 0.2551153141371532,
+          "protonBasisMoment": -89.30108668183533,
+          "seatedElectronBasisMoment": 89.30108668183534,
+          "phaseOffsetRadians": 0.7853981633974483,
+          "mapping": "proton-form circulation + seated-electron counter-circulation"
+        },
+        "deformationLedger": [
+          {
+            "unit": 0,
+            "type": "p",
+            "wakeCompliance": 0.08772857666015625,
+            "throatFraction": 0.10002136230468756,
+            "poloidalFraction": 0.8999786376953125,
+            "incomingPhaseSectors": 4
+          },
+          {
+            "unit": 1,
+            "type": "n",
+            "wakeCompliance": 0.08772857666015625,
+            "throatFraction": 0.10002136230468756,
+            "poloidalFraction": 0.8999786376953125,
+            "incomingPhaseSectors": 4
+          },
+          {
+            "unit": 2,
+            "type": "n",
+            "wakeCompliance": 0.08772857666015625,
+            "throatFraction": 0.10002136230468756,
+            "poloidalFraction": 0.8999786376953125,
+            "incomingPhaseSectors": 4
+          }
+        ],
+        "sectorCorrespondences": 8,
+        "sameSpeciesOverlapRatio": 0,
+        "circuitCount": 12,
+        "closedCircuitCount": 12,
+        "splitResidual": 0,
+        "rejoinResidual": 0,
+        "maximumRelativeDivergence": 2.412016905663985e-15
+      },
+      "magneticRoutes": {
+        "integralMuN": 2.9789624650000173,
+        "farFieldMuN": 2.9902572379179513,
+        "relativeResidual": 0.0037915123304294303,
+        "axial": [
+          2.951804286217313,
+          2.9571274163801466,
+          2.9607172132530355
+        ],
+        "equatorial": [
+          3.033310772509576,
+          3.022837461461272,
+          3.0157462776863646
+        ]
+      },
+      "coefficientBoundsSatisfied": true,
+      "parameterBoundsSatisfied": true,
+      "contactMismatch": false,
+      "neutronNeutronContactExcluded": true,
+      "spinParityDiagnostic": {
+        "fitted": false,
+        "frameReturnRadians": 12.566370614359172,
+        "netHandedness": -1,
+        "status": "PENDING — no native periodicity-to-spin mapping"
+      }
+    },
+    "He3": {
+      "key": "He3",
+      "classification": "CALIBRATED(9)",
+      "parameterCount": 9,
+      "parameters": {
+        "separationRp": 1.750042724609375,
+        "openingRadians": 2.8798252237237247,
+        "tiltRadians": 1.2119886331285206,
+        "toroidalPhase": 2.6132001880293507,
+        "poloidalPhase": 1.5707963267948966,
+        "wakeCompliance": 0.2924862670898437,
+        "splitShift": 0.0000213623046875,
+        "energyBridgeMeVPerOverlap": 0.4813345050694161,
+        "magneticBridgeMuNPerMoment": -0.13518887038973873
+      },
+      "bounds": {
+        "separationRp": [
+          1.4,
+          2.8
+        ],
+        "openingRadians": [
+          2.0943951023931953,
+          3.141592653589793
+        ],
+        "tiltRadians": [
+          0.7853981633974483,
+          2.356194490192345
+        ],
+        "toroidalPhase": [
+          0,
+          6.283185307179586
+        ],
+        "poloidalPhase": [
+          0,
+          6.283185307179586
+        ],
+        "wakeCompliance": [
+          0,
+          0.45
+        ],
+        "splitShift": [
+          -0.35,
+          0.35
+        ],
+        "energyBridge": [
+          0.01,
+          100
+        ],
+        "magneticBridge": [
+          -20,
+          20
+        ]
+      },
+      "targets": {
+        "bindingEnergyMeV": 7.717989649678434,
+        "magneticMomentMuN": -2.1276253498
+      },
+      "model": {
+        "bindingEnergyMeV": 7.717989649678434,
+        "magneticMomentMuN": -2.1276253498000015,
+        "electricQuadrupoleFm2": null
+      },
+      "residuals": {
+        "binding": 0,
+        "magnetic": -6.261758582992175e-16,
+        "quadrupole": null
+      },
+      "poses": [
+        {
+          "type": "n",
+          "centreRp": [
+            0,
+            0,
+            0
+          ],
+          "orientation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": 1,
+          "toroidalPhase": 0,
+          "handedness": -1,
+          "wakeCompliance": 0.2924862670898437,
+          "splitShift": 0.0000213623046875,
+          "internalElectron": true,
+          "centre": [
+            0,
+            0,
+            0
+          ],
+          "phase": 0
+        },
+        {
+          "type": "p",
+          "centreRp": [
+            1.735074516295093,
+            0,
+            0.22839868839718439
+          ],
+          "orientation": [
+            0.03724774874763276,
+            0.5683604063413403,
+            0.8201767626334917,
+            0.05375064420809067
+          ],
+          "scale": 1,
+          "toroidalPhase": 2.6132001880293507,
+          "handedness": 1,
+          "wakeCompliance": 0.2924862670898437,
+          "splitShift": 0.0000213623046875,
+          "internalElectron": false,
+          "centre": [
+            1.4598916980106913,
+            0,
+            0.19217465641739095
+          ],
+          "phase": 2.6132001880293507
+        },
+        {
+          "type": "p",
+          "centreRp": [
+            -1.735074516295093,
+            0,
+            0.22839868839718439
+          ],
+          "orientation": [
+            0.03724774874763276,
+            -0.5683604063413403,
+            -0.8201767626334917,
+            0.05375064420809067
+          ],
+          "scale": 1,
+          "toroidalPhase": -2.6132001880293507,
+          "handedness": 1,
+          "wakeCompliance": 0.2924862670898437,
+          "splitShift": 0.0000213623046875,
+          "internalElectron": false,
+          "centre": [
+            -1.4598916980106913,
+            0,
+            0.19217465641739095
+          ],
+          "phase": -2.6132001880293507
+        }
+      ],
+      "mesh": {
+        "overlap": 16.034565501522433,
+        "pairLedger": [
+          {
+            "i": 0,
+            "j": 1,
+            "coupling": 20.68268673660254,
+            "contactCoupling": 0.770377838226297,
+            "signedAlignment": -20.68268673660254,
+            "minimumDistanceRp": 1.750042724609375,
+            "integration": {
+              "representation": "-integral U_i dot U_j dV",
+              "samples": 175,
+              "volumeElement": 2.854230004254359
+            },
+            "byFamily": {
+              "crown:crown": 0.35691974457141573,
+              "crown:convergent": 0.6510903624056712,
+              "crown:throat": 0.15286174027332233,
+              "crown:poloidal": 0.18146138822849744,
+              "crown:tail": 0.7763013063569355,
+              "crown:skirt": -0.05706617101688198,
+              "crown:exterior": 1.3241948523147251,
+              "convergent:crown": 0.2250636698306805,
+              "convergent:convergent": -0.007396397873748792,
+              "convergent:throat": 0.019885659887092302,
+              "convergent:poloidal": 0.029758098450599544,
+              "convergent:tail": 0.338718127328813,
+              "convergent:skirt": -0.011820616937341478,
+              "convergent:exterior": 1.4829300148559528,
+              "throat:crown": 0.06840219123460725,
+              "throat:convergent": 0.03240489566029569,
+              "throat:throat": 0.009994219204522028,
+              "throat:poloidal": 0.016548129245903688,
+              "throat:tail": 0.05463972449161851,
+              "throat:skirt": -0.005831125017933822,
+              "throat:exterior": 0.3835693034213612,
+              "poloidal:crown": 0.0809486181505906,
+              "poloidal:convergent": 0.034349343197613916,
+              "poloidal:throat": 0.01231129482402762,
+              "poloidal:poloidal": 0.019721989447706444,
+              "poloidal:tail": 0.06962753407291912,
+              "poloidal:skirt": -0.007146953645800104,
+              "poloidal:exterior": 0.4440160612938737,
+              "tail:crown": 0.47251150421716653,
+              "tail:convergent": 0.3453123226477705,
+              "tail:throat": 0.1008398293140478,
+              "tail:poloidal": 0.1484204199658447,
+              "tail:tail": -0.051988939196999304,
+              "tail:skirt": -0.11288298411016114,
+              "tail:exterior": 3.4832595385390874,
+              "skirt:crown": -0.09359480417682187,
+              "skirt:convergent": -0.05018835905596843,
+              "skirt:throat": -0.018815490676719695,
+              "skirt:poloidal": -0.020926535025692725,
+              "skirt:tail": -0.4267860810501216,
+              "skirt:skirt": -0.2744487797207481,
+              "skirt:exterior": 0.5767999378714308,
+              "exterior:crown": 2.089844535714739,
+              "exterior:convergent": 1.7368050749819468,
+              "exterior:throat": 0.33455474003844016,
+              "exterior:poloidal": 0.3771077939150206,
+              "exterior:tail": 4.215797144868942,
+              "exterior:skirt": 1.1782249251640982,
+              "exterior:exterior": -0.003616061879787893
+            }
+          },
+          {
+            "i": 0,
+            "j": 2,
+            "coupling": -3.0449522357864103,
+            "contactCoupling": 1.3391462104853613,
+            "signedAlignment": 3.0449522357864103,
+            "minimumDistanceRp": 1.750042724609375,
+            "integration": {
+              "representation": "-integral U_i dot U_j dV",
+              "samples": 175,
+              "volumeElement": 2.713971889096993
+            },
+            "byFamily": {
+              "crown:crown": -0.5756498172513922,
+              "crown:convergent": -0.3420240429164676,
+              "crown:throat": -0.07203793824830378,
+              "crown:poloidal": -0.08763537664114482,
+              "crown:tail": -0.27900281481677935,
+              "crown:skirt": -0.01707895050380917,
+              "crown:exterior": 0.734747084969883,
+              "convergent:crown": -0.20043271161946952,
+              "convergent:convergent": 0.0889070801633764,
+              "convergent:throat": 0.03656268666266376,
+              "convergent:poloidal": 0.03325243123934774,
+              "convergent:tail": 0.3810583549058011,
+              "convergent:skirt": 0.09190915599446599,
+              "convergent:exterior": -1.7941949752701403,
+              "throat:crown": -0.0354947328259207,
+              "throat:convergent": 0.0307731024701238,
+              "throat:throat": 0.01003827849483938,
+              "throat:poloidal": 0.010243240329323116,
+              "throat:tail": 0.07911552431406732,
+              "throat:skirt": 0.028659699066667762,
+              "throat:exterior": -0.5269348937584263,
+              "poloidal:crown": -0.04256828919689291,
+              "poloidal:convergent": 0.041445527462582725,
+              "poloidal:throat": 0.011648906299980027,
+              "poloidal:poloidal": 0.01245980646058461,
+              "poloidal:tail": 0.09500279357670804,
+              "poloidal:skirt": 0.0349662671571111,
+              "poloidal:exterior": -0.6078401039579842,
+              "tail:crown": -0.012152830140242358,
+              "tail:convergent": 0.41150282749859624,
+              "tail:throat": 0.09614453210292392,
+              "tail:poloidal": 0.11842165925104176,
+              "tail:tail": 0.13780533977267767,
+              "tail:skirt": 0.31488237288160625,
+              "tail:exterior": -4.9345971351383815,
+              "skirt:crown": -0.03164045114550617,
+              "skirt:convergent": 0.09056253293609753,
+              "skirt:throat": 0.02985213750533965,
+              "skirt:poloidal": 0.03484381534435217,
+              "skirt:tail": 0.4698092187006544,
+              "skirt:skirt": -0.30183435993450203,
+              "skirt:exterior": -0.3466877568119266,
+              "exterior:crown": 0.19404828989343267,
+              "exterior:convergent": -1.7066422861310793,
+              "exterior:throat": -0.4705681597715921,
+              "exterior:poloidal": -0.5382892019862281,
+              "exterior:tail": -5.672701057608997,
+              "exterior:skirt": -0.5259222918040624,
+              "exterior:exterior": 12.458315276238586
+            }
+          },
+          {
+            "i": 1,
+            "j": 2,
+            "coupling": -1.6031689992936962,
+            "contactCoupling": 0.765442447438108,
+            "signedAlignment": 1.6031689992936962,
+            "minimumDistanceRp": 3.470149032590186,
+            "integration": {
+              "representation": "-integral U_i dot U_j dV",
+              "samples": 175,
+              "volumeElement": 3.139172519592499
+            },
+            "byFamily": {
+              "crown:crown": 0.2448097606959854,
+              "crown:convergent": -0.08599852252081217,
+              "crown:throat": -0.00612795453408051,
+              "crown:poloidal": -0.006105803571121586,
+              "crown:tail": -0.2373115591519074,
+              "crown:skirt": 0.012603678811147384,
+              "crown:exterior": 0.095443297879495,
+              "convergent:crown": -0.1680489256466832,
+              "convergent:convergent": -0.07597219969146893,
+              "convergent:throat": -0.024407001683091886,
+              "convergent:poloidal": -0.025668729129255,
+              "convergent:tail": -0.43150900605083325,
+              "convergent:skirt": -0.004267529815648699,
+              "convergent:exterior": 0.13681066928766228,
+              "throat:crown": -0.030622704387056505,
+              "throat:convergent": -0.030363440855240464,
+              "throat:throat": -0.007785653774149989,
+              "throat:poloidal": -0.007941828973781267,
+              "throat:tail": -0.15020303658588194,
+              "throat:skirt": -0.0022847146717488685,
+              "throat:exterior": 0.15500194666958989,
+              "poloidal:crown": -0.03905941456957507,
+              "poloidal:convergent": -0.032786284454294254,
+              "poloidal:throat": -0.00863559992440658,
+              "poloidal:poloidal": -0.008631729204147821,
+              "poloidal:tail": -0.17739839005367125,
+              "poloidal:skirt": -0.005812879999372989,
+              "poloidal:exterior": 0.16656541407725417,
+              "tail:crown": -0.3111927079793197,
+              "tail:convergent": -0.4251948675163461,
+              "tail:throat": -0.12903655711696274,
+              "tail:poloidal": -0.14513785713300648,
+              "tail:tail": -2.5158171632976054,
+              "tail:skirt": 0.0664467201229345,
+              "tail:exterior": 2.915223315802363,
+              "skirt:crown": 0.002407000327467648,
+              "skirt:convergent": -0.029220690423278406,
+              "skirt:throat": -0.0024851279108579114,
+              "skirt:poloidal": -0.0013596632959112563,
+              "skirt:tail": 0.1499747899406737,
+              "skirt:skirt": -0.06400848168150543,
+              "skirt:exterior": 0.8527326322959817,
+              "exterior:crown": 1.650522177232087,
+              "exterior:convergent": 0.44025704990961934,
+              "exterior:throat": 0.1863637561656434,
+              "exterior:poloidal": 0.23056069559479528,
+              "exterior:tail": 4.087044836538868,
+              "exterior:skirt": 0.03325313299609077,
+              "exterior:exterior": -7.83879384803833
+            }
+          }
+        ],
+        "familyLedger": {
+          "crown:crown": 0.026079688016008934,
+          "crown:convergent": 0.22306779696839144,
+          "crown:throat": 0.07469584749093805,
+          "crown:poloidal": 0.08772020801623104,
+          "crown:tail": 0.25998693238824877,
+          "crown:skirt": -0.061541442709543766,
+          "crown:exterior": 2.154385235164103,
+          "convergent:crown": -0.14341796743547222,
+          "convergent:convergent": 0.005538482598158673,
+          "convergent:throat": 0.03204134486666418,
+          "convergent:poloidal": 0.03734180056069229,
+          "convergent:tail": 0.28826747618378085,
+          "convergent:skirt": 0.07582100924147582,
+          "convergent:exterior": -0.17445429112652522,
+          "throat:crown": 0.002284754021630045,
+          "throat:convergent": 0.03281455727517903,
+          "throat:throat": 0.01224684392521142,
+          "throat:poloidal": 0.018849540601445537,
+          "throat:tail": -0.016447787780196094,
+          "throat:skirt": 0.02054385937698507,
+          "throat:exterior": 0.0116363563325248,
+          "poloidal:crown": -0.0006790856158773798,
+          "poloidal:convergent": 0.04300858620590238,
+          "poloidal:throat": 0.015324601199601069,
+          "poloidal:poloidal": 0.02355006670414323,
+          "poloidal:tail": -0.0127680624040441,
+          "poloidal:skirt": 0.022006433511938005,
+          "poloidal:exterior": 0.002741371413143734,
+          "tail:crown": 0.14916596609760446,
+          "tail:convergent": 0.3316202826300206,
+          "tail:throat": 0.06794780430000899,
+          "tail:poloidal": 0.12170422208387999,
+          "tail:tail": -2.430000762721927,
+          "tail:skirt": 0.26844610889437964,
+          "tail:exterior": 1.463885719203069,
+          "skirt:crown": -0.1228282549948604,
+          "skirt:convergent": 0.011153483456850695,
+          "skirt:throat": 0.008551518917762043,
+          "skirt:poloidal": 0.01255761702274819,
+          "skirt:tail": 0.1929979275912065,
+          "skirt:skirt": -0.6402916213367555,
+          "skirt:exterior": 1.082844813355486,
+          "exterior:crown": 3.934415002840259,
+          "exterior:convergent": 0.4704198387604869,
+          "exterior:throat": 0.050350336432491455,
+          "exterior:poloidal": 0.06937928752358777,
+          "exterior:tail": 2.6301409237988134,
+          "exterior:skirt": 0.6855557663561266,
+          "exterior:exterior": 4.615905366320469
+        },
+        "signedContributions": [
+          {
+            "unit": 0,
+            "type": "n",
+            "frozenSpeciesMomentMuN": -1.5831434953668788,
+            "interactionMomentMuN": -1.1922127016997275,
+            "totalMomentMuN": -2.775356197066606,
+            "internal": {
+              "classification": "CALIBRATED(1)",
+              "protonBridgeMuNPerGeometricMoment": -0.031274505702046415,
+              "seatedElectronCoefficientMuNPerGeometricMoment": -0.05269689630313559,
+              "protonContributionMuN": 2.79284734463,
+              "seatedElectronContributionMuN": -4.70589010463,
+              "netMomentMuN": -1.9130427599999997,
+              "targetMomentMuN": -1.91304276,
+              "residualMuN": 2.220446049250313e-16,
+              "suppressionRatio": 0.2551153141371532,
+              "protonBasisMoment": -89.30108668183533,
+              "seatedElectronBasisMoment": 89.30108668183534,
+              "phaseOffsetRadians": 0.7853981633974483,
+              "mapping": "proton-form circulation + seated-electron counter-circulation"
+            }
+          },
+          {
+            "unit": 1,
+            "type": "p",
+            "frozenSpeciesMomentMuN": 0.8116064714539859,
+            "interactionMomentMuN": -1.2896692252438833,
+            "totalMomentMuN": -0.4780627537898974,
+            "internal": {
+              "classification": "CALIBRATED free-proton bridge",
+              "protonContributionMuN": 2.79284734463
+            }
+          },
+          {
+            "unit": 2,
+            "type": "p",
+            "frozenSpeciesMomentMuN": 0.8116064714539856,
+            "interactionMomentMuN": 0.3141871296025184,
+            "totalMomentMuN": 1.125793601056504,
+            "internal": {
+              "classification": "CALIBRATED free-proton bridge",
+              "protonContributionMuN": 2.79284734463
+            }
+          }
+        ],
+        "neutronCalibration": {
+          "classification": "CALIBRATED(1)",
+          "protonBridgeMuNPerGeometricMoment": -0.031274505702046415,
+          "seatedElectronCoefficientMuNPerGeometricMoment": -0.05269689630313559,
+          "protonContributionMuN": 2.79284734463,
+          "seatedElectronContributionMuN": -4.70589010463,
+          "netMomentMuN": -1.9130427599999997,
+          "targetMomentMuN": -1.91304276,
+          "residualMuN": 2.220446049250313e-16,
+          "suppressionRatio": 0.2551153141371532,
+          "protonBasisMoment": -89.30108668183533,
+          "seatedElectronBasisMoment": 89.30108668183534,
+          "phaseOffsetRadians": 0.7853981633974483,
+          "mapping": "proton-form circulation + seated-electron counter-circulation"
+        },
+        "deformationLedger": [
+          {
+            "unit": 0,
+            "type": "n",
+            "wakeCompliance": 0.2924862670898437,
+            "throatFraction": 0.45002136230468753,
+            "poloidalFraction": 0.5499786376953125,
+            "incomingPhaseSectors": 4
+          },
+          {
+            "unit": 1,
+            "type": "p",
+            "wakeCompliance": 0.2924862670898437,
+            "throatFraction": 0.45002136230468753,
+            "poloidalFraction": 0.5499786376953125,
+            "incomingPhaseSectors": 4
+          },
+          {
+            "unit": 2,
+            "type": "p",
+            "wakeCompliance": 0.2924862670898437,
+            "throatFraction": 0.45002136230468753,
+            "poloidalFraction": 0.5499786376953125,
+            "incomingPhaseSectors": 4
+          }
+        ],
+        "sectorCorrespondences": 4,
+        "sameSpeciesOverlapRatio": 0,
+        "circuitCount": 12,
+        "closedCircuitCount": 12,
+        "splitResidual": 1.1102230246251565e-16,
+        "rejoinResidual": 1.1102230246251565e-16,
+        "maximumRelativeDivergence": 3.005934145913694e-15
+      },
+      "magneticRoutes": {
+        "integralMuN": -2.1276253498000015,
+        "farFieldMuN": -2.1627216373764977,
+        "relativeResidual": 0.016495520501198797,
+        "axial": [
+          -2.108335875037002,
+          -2.1119508925106065,
+          -2.1144358526604026
+        ],
+        "equatorial": [
+          -2.232261638995716,
+          -2.2115965068672963,
+          -2.197749058187965
+        ]
+      },
+      "coefficientBoundsSatisfied": true,
+      "parameterBoundsSatisfied": true,
+      "contactMismatch": false,
+      "neutronNeutronContactExcluded": true,
+      "spinParityDiagnostic": {
+        "fitted": false,
+        "frameReturnRadians": 12.566370614359172,
+        "netHandedness": 1,
+        "status": "PENDING — no native periodicity-to-spin mapping"
+      }
+    }
+  },
+  "checks": {
+    "instrumentCircularMoment": true,
+    "instrumentTranslationInvariant": true,
+    "instrumentSeparatedZero": true,
+    "deterministic": true,
+    "targetResiduals": true,
+    "conservation": true,
+    "divergence": true,
+    "magneticRoutes": true,
+    "coefficientBounds": true,
+    "fieldCrossTerm": true,
+    "noContactMismatch": true,
+    "neutronNeutronContact": true,
+    "neutronCounterCirculation": true,
+    "frozenNeutronLedger": true,
+    "deformableWake": true,
+    "conservativeRepartition": true,
+    "noDirectNeutronTargetScale": true,
+    "noProximitySurrogate": true
+  },
+  "assessment": "NSEQ17_CALIBRATION_CONSISTENT"
+}

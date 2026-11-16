@@ -1,0 +1,209 @@
+### 06/GOM43_Deterministic_Dynamics_Solver  | status: PRE-REGISTERED · INSTRUMENT NOT YET RUN | words 1014 | code 6 outs 3 verd 1 runlog 1 | gate True prereg True
+Q: Can the validated `sdt::dynamics` koppa N-body kernel and a constrained three-dimensional rigid-link path be exposed through one deterministic, portable case/result contract suitable for native and browser WebAssembly execution? This investigation qualifies a numerical instrument. It does not promote the new rigid-body implement
+G: measured periapsis and apoapsis are within \(2\times10^{-4}\) of their
+G: states agree within \(2\times10^{-4}\) of registered position and velocity
+G: most \(10^{-12}\); L4/L5 distances and \(60^\circ\) geometry agree within
+G: \(T_0=2\pi\sqrt{L/g}\) within \(2\times10^{-3}\).
+G: \(4\sqrt{L/g}K(\sin^2(\theta_0/2))\) within \(3\times10^{-3}\); relative
+V: streaming C ABI and native/WebAssembly paths passed their registered gates.
+V: circular, stable-triangle, figure-eight, invariant and collision gates passed,
+V: three-dimensional rotation and Lagrange-root gates also passed.
+V: The investigation-scope rigid module passed:
+V: - malformed-chain classification.
+FLAGS: MISSING: ; ident:9 ; res pass/fail 0/0 verd pass/fail 0/0
+
+### 06/GOM_DAT1_Cassini_ODF_Structural_Census  | status: PRE-REGISTERED — 2026-08-07. | words 406 | code 1 outs 0 verd 1 runlog 1 | gate True prereg True
+Q: . > **Canon edits:** none. ## 0. Objective Test whether the frozen Cassini SCE1 **Orbit Data File (ODF)** sample can be structurally validated against its paired PDS3 label well enough to justify a later residual reconstruction path — without extracting a delay, Doppler, or theory residual in this loop. This is an instrument/data-path audit, not an SDT empirical adjudication. ## 1. Claims under test | Claim ID | Exact claim | |---|---| | GOM28-C1 | Frozen ODF byte length equals `RECORD_BY
+G: ## 2. Frozen inputs (checksum-gated)
+G: ## 5. Parallel side-gate (same iteration)
+G: ## 6. Next gate if C1–C4 PASS
+V: Fail-closed structural validation of the frozen Cassini SCE1 ODF sample against
+V: | Claim ID | Status |
+V: | GOM28-C1 | **PASS** — `36 × 7616 = 274176` bytes |
+V: | GOM28-C2 | **PASS** — 34 × 8064-byte blocks |
+V: | GOM28-C3 | **PASS** — all label `ODF*A*` header pointers decode to declared keys `{101,107,109,2030,105,-1}`; undeclared = none |
+FLAGS: MISSING: ; IDDUP ; res pass/fail 0/0 verd pass/fail 7/0
+
+### 06/GOM_DAT2_Cassini_ODF_Field_Census  | status: PRE-REGISTERED — 2026-08-08. | words 309 | code 1 outs 0 verd 1 runlog 1 | gate True prereg True
+Q: elds only** from the Orbit Data Group of the frozen SCE1 ODF, using the paired PDS3 label as the sole bit-layout source. Report time coverage, format ID, data-type histogram, and station IDs. This loop does **not** compare observables to any SDT or competitor delay model. ## 1. Claims | ID | Claim | |---|---| | GOM29-C1 | Orbit data records (after header key 109) parse with FORMAT ID = 2 (post-1997 layout). | | GOM29-C2 | Time tags are monotonic non-decreasing and lie within label START_TIME…
+G: | GOM29-C2 | Time tags are monotonic non-decreasing and lie within label START_TIME…STOP_TIME (±1 day tolerance for UTC/encoding edge). |
+G: 1. Hash gate same as GOM28.
+V: | ID | Status |
+V: | GOM29-C1 | **PASS** — FORMAT ID = 2 on all 7447 rows |
+V: | GOM29-C2 | **PASS** — times 2002-06-06T20:41:30.5 … 22:45:36.5 UTC; monotonic; within label window |
+V: | GOM29-C3 | **PASS** — 7447 × type 12 (two-way Doppler); no range types in this sample |
+V: | GOM29-C4 | **PASS** — RX=TX=DSN 25 for all rows |
+FLAGS: MISSING: ; IDDUP ; res pass/fail 0/0 verd pass/fail 4/0
+
+### 06/GOM_DAT3_Cassini_ODF_Observable_Decode  | status: PRE-REGISTERED — 2026-08-08. | words 385 | code 1 outs 0 verd 1 runlog 1 | gate True prereg True
+Q:  1. Decode the Orbit Data Group **observable field** of the frozen K252 ODF into hertz using only the paired PDS3 label scaling. 2. Publish a pre-registered multi-day ODF freeze list from `cumindex.tab` for SCE1 days 157–160 (CORS_0021). 3. Do **not** form an SDT or competitor light-time residual in this loop. ## 1. Claims | ID | Claim | |---|---| | GOM30-C1 | `obs_Hz = obs_int + obs_frac/1e9` yields finite values for all 7447 type-12 rows. | | GOM30-C2 | Reference frequency from Ite
+G: 1. Hash gate identical to GOM28/29.
+V: | ID | Status |
+V: | GOM30-C1 | **PASS** — 7447 finite `obs_Hz` values |
+V: | GOM30-C2 | **PASS** — `f_ref > 0` on all rows; constant `2.116648992×10⁹ Hz` |
+V: | GOM30-C3 | **PASS** — series reported; validity=0 (good) on all rows |
+V: | GOM30-C4 | **PASS** (list); 7/8 were **PENDING_FETCH** at I10 — cleared to HAVE in GOM31 |
+FLAGS: MISSING: ; IDDUP ; res pass/fail 0/0 verd pass/fail 4/0
+
+### 06/GOM_DAT4_Cassini_ODF_Multiday_Decode  | status: PRE-REGISTERED — 2026-08-08. | words 286 | code 1 outs 0 verd 1 runlog 1 | gate True prereg True
+Q: one. ## 0. Objective 1. Decode **all eight** CORS_0021 Orbit Data Files (SCE1 days 157–160, K252 + XMMMV0) into label-scaled `obs_Hz` / `f_ref_Hz` series. 2. Bound each file by its own PDS3 pointers (`^ODF3C_TABLE` … next group). 3. Clear GOM30-C4 `PENDING_FETCH` to local **HAVE**. 4. Do **not** form light-time residuals, γ fits, or `ϟ` fits. ## 1. Claims | ID | Claim | |---|---| | GOM31-C1 | All eight ODF binaries exist under the frozen local volume path. | | GOM31-C2 | For each fi
+G: - Hash gate: report SHA-256 per file; do **not** require the single P0 hash for non-P0 files.
+V: | ID | Status |
+V: | GOM31-C1 | **PASS** — 8/8 ODF+label pairs present |
+V: | GOM31-C2 | **PASS** — every file `rows == label ROWS`; pointer bounds OK |
+V: | GOM31-C3 | **PASS** — all orbit-data rows finite `obs_Hz`, `f_ref > 0` |
+V: | GOM31-C4 | **PASS** — per-file summaries below |
+FLAGS: MISSING: ; IDDUP ; res pass/fail 0/0 verd pass/fail 4/0
+
+### 06/GOM_DAT5_ODF_Observable_Unit_Path  | status: PRE-REGISTERED — 2026-08-08. | words 377 | code 1 outs 0 verd 1 runlog 1 | gate True prereg True
+Q: al **K** = c-boundary radius. In DSN/ODF labels, > `K` means **transponder turnaround ratio** — never equate the two. ## 0. Objective Adjudicate whether Orbit Data Group Items 4–5 (`obs_Hz`) are: - **(A)** Engineering Doppler observable in hertz (count-rate compressed / bias-model form), or - **(B)** Navigation ODP residual (observed − predicted), typically µHz-class in published Cassini solar-conjunction analyses. No light-time residual, no solar **K** fit, no γ fit. ## 1. Claims 
+G: | GOM32-C4 | Magnitude gate: frozen SCE1 type-12 `|obs|` medians are ≥ 1 kHz and ≤ 10 MHz — consistent with ODF engineering Doppler, inconsistent with µHz-class ODP residuals. |
+V: | ID | Status |
+V: | GOM32-C1 | **PASS** — Item 4 defines count-interval Doppler observable equation |
+V: | GOM32-C2 | **PASS** — type 12 = Two-way Doppler; Hertz; FORMAT ID 2 on P0 |
+V: | GOM32-C3 | **PASS** — TRK-2-18: `Doppler[Hz] = Observable + Fbias` (documented) |
+V: | GOM32-C4 | **PASS** — K252 `|obs|` medians 10.7–53.1 kHz ∈ [1e3, 1e7] Hz |
+FLAGS: MISSING: ; ident:1 ; IDDUP ; res pass/fail 0/0 verd pass/fail 5/0
+
+### 06/GOM_DAT6_Predicted_Doppler_Geometry  | status: PRE-REGISTERED — 2026-08-08. | words 326 | code 1 outs 0 verd 1 runlog 1 | gate True prereg True
+Q:  **Notation:** SDT capital **K** = c-boundary radius (frozen from GOM26). > ODF label `K` = turnaround ratio — distinct. ## 0. Objective Build an independent **predicted** two-way Doppler for frozen SCE1 DSS-25 type-12 samples, so `obs_Hz` can later be compared without refitting solar **K**. This loop establishes geometry + classical range-rate prediction and reports order-of-magnitude consistency. It does **not** claim SDT survival or exclusion. ## 1. Claims | ID | Claim | |---|---| | GO
+G: | GOM33-C4 | Magnitude gate: median \|f_geom\| on P0 K252 window is within a factor of 10 of median \|obs_Hz\| (same kHz class). |
+V: | ID | Status |
+V: | GOM33-C1 | **PASS** — Horizons Cassini `@399` vectors for P0 window (volume SPK starts DOY 160; not used) |
+V: | GOM33-C2 | **PASS** — DSS-25 nominal coords recorded; first pass uses **geocenter** LOS |
+V: | GOM33-C3 | **PASS** — `f_geom = -2 (ṙ/c) f_ref` COMPUTED |
+V: | GOM33-C4 | **PASS** — `|f_geom|/|obs|` median ratio = **3.365** ∈ [0.1, 10] |
+FLAGS: MISSING: ; IDDUP ; res pass/fail 0/0 verd pass/fail 6/0
+
+### 06/GOM_DAT7_Station_Doppler_Fidelity  | status: PRE-REGISTERED — 2026-08-08. | words 368 | code 1 outs 0 verd 1 runlog 1 | gate True prereg True
+Q: its:** none. > **Notation:** SDT capital **K** = c-boundary radius (frozen). ODF `K` = turnaround. ## 0. Objective 1. Replace geocenter LOS with **DSS-25–centered** Cassini range-rate from Horizons. 2. Apply band IDs / turnaround from the paired ODF (not fitted). 3. Form a time-series residual `obs_Hz − f_pred` on P0 K252 type-12. 4. Hold solar **K** fixed; do not fit it; do not claim SDT survival/exclusion. ## 1. Claims | ID | Claim | |---|---| | GOM34-C1 | Horizons delivers Cassini
+G: | GOM34-C4 | Fidelity gate: median `\|f_pred_B\| / \|obs\|` is closer to 1 than GOM33’s 3.37 **or** residual median \|obs−f_pred_B\| < residual vs predictor A. |
+V: | ID | Status |
+V: | GOM34-C1 | **PASS** — Horizons Cassini `@DSS-25` range/range-rate (31 samples) |
+V: | GOM34-C2 | **PASS** — bands Ka/Ka/S (3/3/1); turnaround 209/15 |
+V: | GOM34-C3 | **PASS** — predictors A / B1 / B2 computed |
+V: | GOM34-C4 | **FAIL** — DSS-25 does not improve ratio or residual vs geocenter |
+FLAGS: MISSING: ; IDDUP ; res pass/fail 0/0 verd pass/fail 5/1
+
+### 06/GOM_DAT8_ODF_Doppler_Scale_Convention  | status: PRE-REGISTERED — 2026-08-08. | words 344 | code 1 outs 0 verd 1 runlog 1 | gate True prereg True
+Q: **Canon edits:** none. > **Solar K:** frozen; not used; not fitted. ## 0. Objective Identify whether a **pre-registered documented** scale/sign convention brings DSS-25 geometric Doppler into agreement with P0 `obs_Hz` without fitting solar **K** or any free coefficient to the ODF series. ## 1. Predictor base `f0(t) = −2 (ṙ_DSS25(t)/c) f_ref` (same as GOM34 B1; ṙ from frozen Horizons DSS-25 CSV). ## 2. Discrete hypotheses (frozen before run) | ID | Model | Provenance | |---|---|---| | 
+V: | ID | Status |
+V: | GOM35-C1 | **PASS** — frozen DSS-25 RR + P0 ODF |
+V: | GOM35-C2 | **PASS** — H0–H7 table reported |
+V: | GOM35-C3 | **FAIL** — no hypothesis met both gates |
+V: | GOM35-C4 | **SCALE_CONVENTION_UNRESOLVED** |
+FLAGS: MISSING: ; IDDUP ; res pass/fail 0/0 verd pass/fail 5/1
+
+### 06/GOM_DAT9_ODF_Ramp_Fbias_Reconstruction  | status: PRE-REGISTERED — 2026-08-08. | words 230 | code 1 outs 0 verd 1 runlog 1 | gate False prereg True
+Q: T8 SCALE_CONVENTION_UNRESOLVED. > **Canon edits:** none. > **Solar K:** frozen; unused; not fitted. ## 0. Objective Reconstruct TRK-2-18 Doppler as: `Doppler[Hz] = Observable + Fbias` with Case-2 (2-way coherent) `Fbias = ρ · ul_freq`, decode DSS-25 ramp records, and test whether this closes the ~3.4× scale gap vs DSS-25 geometric range-rate — without fitting solar **K**. ## 1. Claims | ID | Claim | |---|---| | DAT9-C1 | Ramp Group 25 present; ≥1 ramp data row decoded (start freq, rate
+V: **Class:** data / reconstruction task
+V: | ID | Status |
+V: | DAT9-C1 | **PASS** — 1× DSS-25 ramp row; sky-level f0 |
+V: | DAT9-C2 | **PASS** — Fbias candidates formed |
+V: | DAT9-C3 | **PASS** — predictors reported |
+FLAGS: MISSING: ; IDDUP ; res pass/fail 0/0 verd pass/fail 6/1
+
+### 06/PSP02_Gradient_Traversal_Radio_Map  | status: PRE-REGISTERED — 2026-08-12. | words 482 | code 1 outs 1 verd 1 runlog 1 | gate False prereg True
+Q: eam:** PSP01 perihelion depth prediction; GOM22 `c_far` / Shapiro spine; > GOM_DAT Cassini radio path (method heritage — different mission). > **Canon edits:** none. > **Ontology:** pressure depth \(z=\Omega/r\); radio = oscillation÷oscillation; > no sunward-force claim in this investigation. ## 0. Objective Map Parker Solar Probe’s **traversal of the solar pressure-depth gradient** to **predicted radio-signal differences**, then compare: 1. **Predicted** depth / \(c_\mathrm{far}\) / 
+G: | PSP02-C1 | Enc-22 (or nominated) perihelion arc ephemeris obtainable; \(r_\min\) within 1% of 9.86 \(R_\odot\). |
+G: | PSP02-C5 | If TNF present: decode Doppler/range; compare obs − geom to C4 prediction class (pre-registered tolerance). |
+V: ## Status
+V: 3. Single-pass SDT depth ledger along the path (\(\Omega\) frozen):
+V: | \(r\) | 9.864 \(R_\odot\) (C1 PASS vs 9.86) |
+FLAGS: MISSING: ; res pass/fail 0/0 verd pass/fail 1/0
+
+### 07/CR03_Transfer_Function_Closure  | status: SPEC (upgrade 2026-06-27). | words 1243 | code 1 outs 1 verd 1 runlog 1 | gate True prereg True
+Q: (unfilled by the 2026-06-27 bulk template upgrade — write the single measurable gap before the next run)* 2. **Why does it matter?** — Stack position / downstream blockers (see `INVESTIGATION_STACK.md`). 3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals. 4. **What would prove us wrong?*
+F: §⑧ falsification tests with numeric triggers. 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN). **Author:** James Christopher Tyndall, Melbourne, Australia **Date:** June 2026 **Status:** SPEC **Depe
+G: 3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
+G: | A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimin
+G: - Post-hoc tolerance widening · coefficient plugs · `atomic::`/GM/G in Phase-1 native chain · Snell/reciprocity-only as Fermat PASS.
+V: # CR03 — Verdict: Transfer Function Closure
+V: ## Dual verdict
+V: **Prompt completion: B — PARTIAL per the prompt's own §4** (f expressed in derivation basis + R_CMB, with R_CMB's X-status isolated as the single bottleneck).
+V: **Physics class: OPEN** (blocked on one class-X scale; the algebra itself is verified and earned).
+V: | 1a: P_eff = m_p²m_e²c⁵/(4παℏ³) vs identity rebuild (W+1 radii) | rel −2.2e-16 | **PASS** (machine precision) |
+FLAGS: MISSING: ; ident:10 ; res pass/fail 0/0 verd pass/fail 3/0
+
+### 07/CR04_Cosmological_Distance_Scale  | status: NOT-RUN / QUALIFIED (header corrected 2026-07-03; was "SPEC" from the  | words 2364 | code 1 outs 1 verd 1 runlog 0 | gate True prereg True
+Q: (unfilled by the 2026-06-27 bulk template upgrade — write the single measurable gap before the next run)* 2. **Why does it matter?** — Stack position / downstream blockers (see `INVESTIGATION_STACK.md`). 3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals. 4. **What would prove us wrong?*
+F: §⑧ falsification tests with numeric triggers. 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN). **Author:** James Christopher Tyndall, Melbourne, Australia **Date:** June 2026 **Status:** INVESTIGATI
+G: 3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
+G: **Success Metric:** BAO scale derived to within 5% of observed 147 Mpc.
+G: **Success Metric:** Prediction within 5% of observed R_CMB ≈ 9.527×10²⁶ m.
+G: - BAO scale derived from lattice resonance to within 5% of observed 147 Mpc
+G: - Phase thresholds (committed before run): 5%, 3%, 10%, 5%, 5%
+V: # CR04 VERDICT: Cosmological Distance Scale Derivation
+V: **Status:** QUALIFIED (Class C-D, pending closure) [PROCESS CORRECTION (HUNTER 2026-07-02): the tool does not compile (`std::puts(std::string)`, missing `<string>`); `cr04_results.txt` is hand-written
+V: **Result:** Three phases PASS with robust physics. One phase PENDING (unresolved pattern). [PROCESS CORRECTION — see note under Status above: PASS/COMPLETE are process labels from a non-compiling tool
+V: | Phase | Verdict | Status | Impact on Transfer Function (CR03) |
+V: | 1: Lattice Resonance | PASS | Complete | BAO scale explains coupled/decoupled transition |
+O: ✓ Phase 1 & 3: Already PASS; no further work needed
+O: Status: READY FOR CR05 PHASE
+O: • CQ39_VERDICT.md
+FLAGS: MISSING:ATOMICUS/rules/On ; ident:18 ; res pass/fail 12/0 verd pass/fail 16/0
+
+### 07/CR05_Spation_Pressure_Tensor_Derivation  | status: RETRACTED-FABRICATED → OPEN (header corrected 2026-07-03; was "SPEC" f | words 2200 | code 1 outs 1 verd 1 runlog 0 | gate True prereg True
+Q: (unfilled by the 2026-06-27 bulk template upgrade — write the single measurable gap before the next run)* 2. **Why does it matter?** — Stack position / downstream blockers (see `INVESTIGATION_STACK.md`). 3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals. 4. **What would prove us wrong?*
+F: §⑧ falsification tests with numeric triggers. 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN). **Investigation Code:** CR05 **Title:** Spation Pressure Tensor Derivation — H₀ Closure and Transfer Fu
+G: 3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
+G: - Phase thresholds (committed before run): 5%, 1%, 3%, 1%, 1%
+G: | A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimin
+G: - Post-hoc tolerance widening · coefficient plugs · `atomic::`/GM/G in Phase-1 native chain · Snell/reciprocity-only as Fermat PASS.
+V: > **Status:** H₀/transfer closure EXCLUDED; pressure and freeze-out mechanisms OPEN
+V: ## Reopening condition
+FLAGS: MISSING:Theory/05_Audit_Spine.md;Theory/05_Audit_Spine.md ; ident:8 ; res pass/fail 1/1 verd pass/fail 0/1
+
+### 07/CR06_Redshift_Emission_Propagation_Split  | status: EXECUTED-honest (header corrected 2026-07-03; was "SPEC" from the bulk | words 1020 | code 1 outs 1 verd 1 runlog 0 | gate True prereg True
+Q: (unfilled by the 2026-06-27 bulk template upgrade — write the single measurable gap before the next run)* 2. **Why does it matter?** — Stack position / downstream blockers (see `INVESTIGATION_STACK.md`). 3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals. 4. **What would prove us wrong?*
+F: §⑧ falsification tests with numeric triggers. 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN). **Author:** J.C. Harvey, Melbourne. **Status:** EXECUTED (data fit complete). **Class:** see VERDICT. #
+G: 3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
+G: - Phase thresholds (committed before run): 0.03 %
+G: | A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimin
+G: - Post-hoc tolerance widening · coefficient plugs · `atomic::`/GM/G in Phase-1 native chain · Snell/reciprocity-only as Fermat PASS.
+V: # CQ-45 VERDICT — SDT redshift laws vs the real Pantheon Hubble diagram
+V: right *gross* shape but not ΛCDM's detailed curvature. **"Resolved on the data" is NOT achieved.**
+V: ## Classification
+V: (failed) *derived* n=4. Deriving n from the pressure/closure evolution is the open theory task.
+V: dataset. If it fails, it fails — and here the *specific* law failed while the *framework* survived, demoted
+FLAGS: MISSING: ; ident:1 ; res pass/fail 0/0 verd pass/fail 0/2
+
+### 07/CR08_Pressure_Gradient_Redshift_and_BAO  | status: EXECUTED; B15 COMPUTED (extension 2026-08-15). | words 1404 | code 1 outs 1 verd 1 runlog 1 | gate True prereg True
+Q: (unfilled by the 2026-06-27 bulk template upgrade — write the single measurable gap before the next run)* 2. **Why does it matter?** — Stack position / downstream blockers (see `INVESTIGATION_STACK.md`). 3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals. 4. **What would prove us wrong?*
+F: §⑧ falsification tests with numeric triggers. 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / FALSIFIED / OPEN). ## DATA REQUIREMENTS | Data | Source | |------|--------| | SDSS/BOSS/eBOSS BAO measurements: D_A(z),
+G: 3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
+G: - [ ] SDT D_A(z) matches BAO measurements within 3%
+G: - [x] BAO ruler reproduced within 3% from the independently derived standing response and relay speed
+G: - Phase thresholds (committed before run): 3%
+G: - Post-hoc tolerance widening · coefficient plugs · `atomic::`/GM/G in Phase-1 native chain · Snell/reciprocity-only as Fermat PASS.
+V: # CR08 — Verdict: Pressure-Gradient Redshift and BAO
+V: **Tool:** `cr08_bao_consistency.cpp` → `results.txt`. Gates and the fixed (no-freedom) SDT law were pre-registered in `RUN_LOG.md`. Data: consolidated BOSS DR12/eBOSS + Planck θ*, memory-transcribed O
+V: ## Dual verdict
+V: **Prompt completion: B** (all three original success criteria evaluated; none passed its registered gate).
+V: **Physics class: FALSIFIED** (static exponential-strain law vs BAO) **/ IDENTITY** (the former target-defined duration).
+FLAGS: MISSING: ; ident:8 ; res pass/fail 0/0 verd pass/fail 0/4
+
+### 07/CR09_Hubble_Tension_and_Dark_Energy  | status: SPEC — investigation NOT yet run · de-preloaded 2026-07-26. | words 4745 | code 1 outs 1 verd 1 runlog 1 | gate True prereg True
+Q: Whether SDT, from ℓ_P + the sphere with no expansion and no dark energy, can account for the raw cosmological sky at all.** None of these have been analysed in the SDT frame: (a) whether the two-component redshift (`z_emit = Ѻ/r` + a path-accumulated squeeze) predicts the *direction and size* of the local-vs-CMB velocity–distanc
+F: §⑧. A mismatch geometry with the *wrong sign*; an SDT `mB(z)` that misses the raw magnitudes beyond their errors; raw BAO or raw CMB peak angles no physical shell can reach; a CMB→ℓ_P linkage that does not close; a line-of-sight temperature effect that is *absent* in the data or *overshoots* the obs
+G: 3. **How will we find out?** — Eight gated Routes (§④), each an **attempt**: *state the target raw observable →
+G: - **Gate:** correct **sign** (near > far) AND magnitude within ~×2 of the observed 8.4%, from geometry. **Kill:**
+G: - **Gate:** raw angles reached, no new knob → NATIVE candidate; else OPEN, cite CR08.
+G: - **Two-sided gate:** the effect must land near the observed ~10⁻⁶ (large-scale) level — at ~10⁻⁴–10⁻³ it would
+G: | T2 | mismatch size | within ~×2 of 8.4%, unfitted | root-1/root-3 (needs a mismatch knob) |
+V: **Classification:** `CR09_ROUTEB_ZERO_KNOB_LAW_SYSTEMATIC_RESIDUAL_LEAD__OTHER_ROUTES_NOT_RUN`<br>
+V: **Run class:** direct. Pre-run commitments in `RUN_LOG.md` (gates fixed before the run). Tool `cr09_routeB_rawmB.py`; output `cr09_routeB_results.txt`. Data `Datasets/cosmology/PantheonPlusSH0ES.dat`,
+V: - T3 outcome per the registered rule: **systematic residual, a lead; not a pass.** The law is monotonically too faint-predicting at low z and too bright at high z by about 0.15 mag across the range.
+V: 4. Route F's hypothesis (the curvature is the z³ / octave structure of the propagation term) is the open question this residual poses; it is not tested. A registered next round would fit the one-param
+V: 5. Routes A (mismatch sign and size), C, D (BAO and CMB angles), E, G, H are not run; no result is claimed on the Hubble tension itself. CR09 stays open.
+FLAGS: MISSING:Engine/repo;Investigations/07;Investigations/01 ; res pass/fail 0/0 verd pass/fail 0/0
+
+### 07/CR14_Ionisation_Balance_and_the_Clearing_Rung  | status:  | words 1000 | code 1 outs 1 verd 1 runlog 0 | gate False prereg True
+Q: under test:** run the ionisation balance with the *vessel's own* density behaviour instead of ΛCDM's, and ask where neutrality onset actually falls. Does it land at N ≈ 1100? ## Why the density is the whole question In ΛCDM the baryon density dilutes with expansion, `n_b(z) = n_b₀(1+z)³`, so at z = 1100 the plasma is ~1.3×10⁹ ti
+G: - **R1 — reproduced.** Branch B returns `N_half` within ±10 % of 1100. The rung is then
+V: **Classification: R2 + R3 fire — [DEGENERATE] on the recombination temperature; the
+V: ## Instrument validation (all gates PASS, §3.2)
+V: | V1 | limits: `x_e → 1` at 10⁵ K, `x_e → 0` at 10³ K | PASS |
+V: | V2 | **known answer** — ΛCDM Saha half-ionisation | **z = 1379.3** vs textbook ≈ 1370 (window 1250–1450) PASS |
+V: | V3 | two-route sensitivity, analytic vs numerical | 0.015492 vs 0.015492, deviation **0.0000 %** PASS |
+FLAGS: MISSING: ; ident:4 ; res pass/fail 4/0 verd pass/fail 4/1

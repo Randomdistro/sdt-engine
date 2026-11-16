@@ -120,12 +120,12 @@ candidate into the first banked SM kill prosecutable without a telescope.
   *convergent* with the standard A^⅓ (4.96% vs 5.00%) — not a discriminator either way.
 - **E46 galaxy rotation** — FAILED, 66% RMS on real SPARC; the "success" was a circular mock; twin-regime
   rides a borrowed MOND crossover.
-- **z³ / cubic-redshift / EdS** — degenerate with expansion; Pantheon prefers ΛCDM by ΔAIC ~90.
+- **z³ / cubic-redshift / EdS** — convergent with expansion on the `(1+z)` scalings, not yet discriminating (relabelled from "degenerate" 2026-10-03); Pantheon prefers ΛCDM by ΔAIC ~90.
 - **E29 deuteron occlusion** (−97%), **E35 Fe-56 peak** — logged NEGATIVE.
 - **E83 lattice resonance** — VOID / unfalsifiable (asserts rival ontology).
 - **E97 seismic velocities** (v_p 11.5%, v_s 28% failed their gate), **E99 tidal** (rides a hardcoded
-  Q=2.31 CALIBRATED), **E104** (δ ~1e-9, below lock-in floor), **E102 near-Sun leg** (explicitly
-  degenerate with GR).
+  Q=2.31 CALIBRATED), **E104** (δ ~1e-9, below lock-in floor), **E102 near-Sun leg** (convergent with GR,
+  not discriminating — relabelled 2026-10-03).
 - **E109 cross-stellar dip laws** (λ∝R^⅓, λ∝ϟ) — VOIDED §11–12 as catastrophic/untested; only the
   exact-number FIR minimum and the 0.03% UV retrodiction survive.
 

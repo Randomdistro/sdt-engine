@@ -1,0 +1,71 @@
+
+== V0 helper validation (known answers) ==
+[PASS] V0    integrate sin over [0, pi] = 2                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 3.331e-16 (tol 1e-13)
+[PASS] V0    integrate x^7 over [0, 1] = 1/8                                                value 1.250000000000e-01 expected 1.250000000000e-01 err 2.220e-15 (tol 1e-14)
+[PASS] V0    integrate exp over [-1, 1] = e - 1/e                                           value 2.350402387288e+00 expected 2.350402387288e+00 err 5.668e-16 (tol 1e-13)
+[PASS] V0    root of cos x - x = 0.739085133215161                                          value 7.390851332152e-01 expected 7.390851332152e-01 err 2.253e-15 (tol 1e-13)
+[PASS] V0    root of x^2 - 2 on [1, 2] = sqrt 2                                             value 1.414213562373e+00 expected 1.414213562373e+00 err 2.983e-15 (tol 1e-13)
+[PASS] V0    compensated sum 1 + 10^6 x 1e-16 = 1 + 1e-10                                   value 1.000000000100e+00 expected 1.000000000100e+00 err 0.000e+00 (tol 1e-15)
+
+== V1 limiting cases of the chain ==
+[PASS] V1    s = 0: after 7 counts all content is at cell +7 moving right
+[PASS] V1    s = 1: the content alternates between cells 0 and -1 and never advances
+
+== V2 eigenvalue formula in the limits ==
+[PASS] V2    s = 0: lambda_+ = exp(+- i kappa) (distance of the pair from {e^{i k}, e^{-i k}}) value 0.000000000000e+00 expected 0.000000000000e+00 err 0.000e+00 (tol 1e-14)
+[PASS] V2    s = 1: lambda = +-1                                                            value 0.000000000000e+00 expected 0.000000000000e+00 err 0.000e+00 (tol 1e-14)
+
+== T1 conservation and positivity (500 counts, isotropic start) ==
+[PASS] T1    total content, s = 0.000000                                                    value 1.000000000000e+00 expected 1.000000000000e+00 err 0.000e+00 (tol 1e-12)
+[PASS] T1    minimum content >= 0, s = 0.000000
+[PASS] T1    total content, s = 0.100000                                                    value 1.000000000000e+00 expected 1.000000000000e+00 err 1.377e-14 (tol 1e-12)
+[PASS] T1    minimum content >= 0, s = 0.100000
+[PASS] T1    total content, s = 0.300000                                                    value 1.000000000000e+00 expected 1.000000000000e+00 err 2.731e-14 (tol 1e-12)
+[PASS] T1    minimum content >= 0, s = 0.300000
+[PASS] T1    total content, s = 0.500000                                                    value 1.000000000000e+00 expected 1.000000000000e+00 err 1.110e-16 (tol 1e-12)
+[PASS] T1    minimum content >= 0, s = 0.500000
+
+== T2 dispersion by direct simulation of plane waves ==
+[PASS] T2    amplitude after 10 counts / lambda^10 - 1, worst over 16 modes                 value 6.318290152586e-13 expected 0.000000000000e+00 err 6.318e-13 (tol 1e-10)
+
+== T3 closed forms of the wave and diffusive branches ==
+[PASS] T3    |lambda|^2 = 1 - 2s on the wave branch, s = 0.100000                           value 1.110223024625e-16 expected 0.000000000000e+00 err 1.110e-16 (tol 1e-14)
+[PASS] T3    cutoff kappa_c separates real from complex eigenvalues, s = 0.100000, kappa_c = 0.111341
+[PASS] T3    v_g(pi/2) closed form vs central difference of phi(kappa), s = 0.100000        value 1.006230589873e+00 expected 1.006230589875e+00 err 2.078e-12 (tol 1e-08)
+       s = 0.1: kappa_c = 0.11134, decay rate per count = 0.111572, maximum group velocity 911305043998619.125000 at kappa = 3.030; v_g(pi/2) = 1.006231; phase speed at pi/2 = 1.000000
+[PASS] T3    group velocity exceeds the hop speed 1 in a band (s = 0.1)
+[PASS] T3    lambda_+ at kappa = 1e-3 vs 1 - D kappa^2, s = 0.100000                        value 1.000017917462e+00 expected 1.000000000000e+00 err 1.792e-05 (tol 1e-03)
+[PASS] T3    |lambda|^2 = 1 - 2s on the wave branch, s = 0.300000                           value 0.000000000000e+00 expected 0.000000000000e+00 err 0.000e+00 (tol 1e-14)
+[PASS] T3    cutoff kappa_c separates real from complex eigenvalues, s = 0.300000, kappa_c = 0.442911
+[PASS] T3    v_g(pi/2) closed form vs central difference of phi(kappa), s = 0.300000        value 1.106797181061e+00 expected 1.106797181059e+00 err 1.660e-12 (tol 1e-08)
+       s = 0.3: kappa_c = 0.44291, decay rate per count = 0.458145, maximum group velocity 3867802509193595.500000 at kappa = 2.699; v_g(pi/2) = 1.106797; phase speed at pi/2 = 1.000000
+[PASS] T3    lambda_+ at kappa = 1e-3 vs 1 - D kappa^2, s = 0.300000                        value 1.000000694442e+00 expected 1.000000000000e+00 err 6.944e-07 (tol 1e-03)
+
+== T4 front: hop-causal support ==
+[PASS] T4    no content beyond cell +-300 after 300 counts, s = 0.000000
+[PASS] T4    content at the front cell vs (1/2)(1-s)^300, s = 0.000000                      value 5.000000000000e-01 expected 5.000000000000e-01 err 0.000e+00 (tol 1e-12)
+[PASS] T4    no content beyond cell +-300 after 300 counts, s = 0.100000
+[FAIL] T4    content at the front cell vs (1/2)(1-s)^300, s = 0.100000                      value 1.041070946603e-14 expected 9.369638519424e-15 err 1.111e-01 (tol 1e-12)
+[PASS] T4    no content beyond cell +-300 after 300 counts, s = 0.500000
+[FAIL] T4    content at the front cell vs (1/2)(1-s)^300, s = 0.500000                      value 4.909093465298e-91 expected 2.454546732649e-91 err 1.000e+00 (tol 1e-12)
+
+== T5 variance and the transport coefficient ==
+[PASS] T5    sigma^2(1000) vs closed form, s = 0.100000                                     value 8.960000000000e+03 expected 8.960000000000e+03 err 2.842e-14 (tol 1e-10)
+       s = 0.1: sigma^2/(2m) = 4.480000 ; D = (1-s)/(2s) = 4.500000
+[PASS] T5    sigma^2/(2m) within 2% of D for s = 0.1                                        value 4.480000000000e+00 expected 4.500000000000e+00 err 4.444e-03 (tol 2e-02)
+[PASS] T5    sigma^2(1000) vs closed form, s = 0.300000                                     value 2.331111111111e+03 expected 2.331111111111e+03 err 5.482e-14 (tol 1e-10)
+       s = 0.3: sigma^2/(2m) = 1.165556 ; D = (1-s)/(2s) = 1.166667
+[PASS] T5    sigma^2(1000) vs closed form, s = 0.500000                                     value 1.000000000000e+03 expected 1.000000000000e+03 err 1.251e-15 (tol 1e-10)
+       s = 0.5: sigma^2/(2m) = 0.500000 ; D = (1-s)/(2s) = 0.500000
+
+== T6 eikonal ray in n(y) = 1/y ==
+[PASS] T6    ray position vs (sin s, cos s), worst deviation to path length 1.2             value 8.956281716412e-14 expected 0.000000000000e+00 err 8.956e-14 (tol 1e-09)
+[PASS] T6    x^2 + y^2 - 1 at the end                                                       value 5.950795411991e-14 expected 0.000000000000e+00 err 5.951e-14 (tol 1e-09)
+
+== T7 engine acoustic relation ==
+[PASS] T7    c_s/c at R = 0 is 1/sqrt3                                                      value 5.773502691896e-01 expected 5.773502691896e-01 err 0.000e+00 (tol 1e-12)
+[PASS] T7    c_s/c at R = 0.6 is 0.4564354646                                               value 4.564354645876e-01 expected 4.564354646000e-01 err 2.708e-11 (tol 1e-09)
+[PASS] T7    c_s/c at R = 3/4 is 1/sqrt(3 x 1.75)                                           value 4.364357804720e-01 expected 4.364357804720e-01 err 0.000e+00 (tol 1e-12)
+[PASS] T7    c_s strictly decreasing in R
+
+CRITERIA NOT MET: 2 failure(s)

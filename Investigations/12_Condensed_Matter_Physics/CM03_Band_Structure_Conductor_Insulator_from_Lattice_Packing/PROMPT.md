@@ -24,7 +24,7 @@
 4. **What would prove us wrong?** — §⑧: three falsifiers with numeric triggers and real failure
    modes — the trichotomy ordering (T1) and the gap-magnitude test (T3) can both come out wrong.
 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class
-   (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN), per phase, with no repainting of a fired test.
+   (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN), per phase, with no repainting of a fired test.
 
 ## Question
 
@@ -127,7 +127,7 @@ Not required for the verdict; this is the payoff of doing it well.
 ```markdown
 ## Pre-Run Commitments — CM03
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: 0 in the trichotomy chain (one O(1) geometric factor for E_g magnitude may be CALIBRATED(1) — must be the SAME factor for all solids)
 - Engine namespaces actually used: law_III (occlusion), law_VI (traction grip / PPT06), bridge; CM02 drift channels
 - Phase thresholds (committed before run):
@@ -145,7 +145,7 @@ Not required for the verdict; this is the payoff of doing it well.
 | P2 E_g ordering inverts (e.g. Ge>Si) | re-derive the traction-grip scale from PPT06; check the lattice-constant input | **OPEN** the gap scale; still A on ordering if P1 holds | retro-fit a per-solid factor and grade A |
 | P2 magnitudes need a different factor per solid | down-grade to **C** (the per-solid factor is the smuggled band parameter) | — | claim A with one factor per solid |
 | P3 dρ/dT sign wrong for Si/Ge | check thermal-throughput coupling (CM04 c_s amplitude) | **OPEN**: report the activation form | fake a linear Arrhenius fit |
-| Rivals (band theory) match but SDT only reproduces | label **DEGENERATE** honestly | — | claim Class A |
+| A rival (band theory) lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 | Upstream dependency missing (CM02/CM04 not run) | **DEFER** the affected phase; cite dependency ID | — | fake the gap |
 
 ### Allowed adjustments
@@ -162,3 +162,15 @@ Not required for the verdict; this is the payoff of doing it well.
 ---
 
 *CM03 · 10× upgrade 2026-06-29 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** The Si gap "recovered 1.300 eV against an input of 1.300 eV (0.00%)" returns its own input, the gap magnitudes are matched with one shared factor f = 0.944 fitted (CALIBRATED(1), minimax) on the same three solids it is scored on, and Sn-grey misses by 11.4×.
+
+**Correction:** Drop the recovered-input row from the tally, fit f on two solids and test the third, and report the Sn-grey miss as a failure.
+
+**Status:** RULE RECORDED — corrected gate or definition applies to the next run; the earlier result is not re-scored and nothing was re-run.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

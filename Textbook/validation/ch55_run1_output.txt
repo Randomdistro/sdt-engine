@@ -1,0 +1,44 @@
+
+== V0 helper validation (known answers) ==
+[PASS] V0    integrate sin over [0, pi] = 2                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 3.331e-16 (tol 1e-13)
+[PASS] V0    integrate x^7 over [0, 1] = 1/8                                                value 1.250000000000e-01 expected 1.250000000000e-01 err 2.220e-15 (tol 1e-14)
+[PASS] V0    integrate exp over [-1, 1] = e - 1/e                                           value 2.350402387288e+00 expected 2.350402387288e+00 err 5.668e-16 (tol 1e-13)
+[PASS] V0    root of cos x - x = 0.739085133215161                                          value 7.390851332152e-01 expected 7.390851332152e-01 err 2.253e-15 (tol 1e-13)
+[PASS] V0    root of x^2 - 2 on [1, 2] = sqrt 2                                             value 1.414213562373e+00 expected 1.414213562373e+00 err 2.983e-15 (tol 1e-13)
+[PASS] V0    compensated sum 1 + 10^6 x 1e-16 = 1 + 1e-10                                   value 1.000000000100e+00 expected 1.000000000100e+00 err 0.000e+00 (tol 1e-15)
+
+== V1 known answers ==
+[PASS] V1    gamma(0.6 c) = 1.25                                                            value 1.250000000000e+00 expected 1.250000000000e+00 err 0.000e+00 (tol 1e-14)
+[PASS] V1    v_circ(v_trans(x)) = x                                                         value 8.993773740000e+07 expected 8.993773740000e+07 err 8.284e-16 (tol 1e-14)
+[PASS] V1    c sqrt(Om/r) = 2 pi r / T                                                      value 2.978893657025e+04 expected 2.978893657025e+04 err 1.221e-16 (tol 1e-14)
+
+== T1 orbital chain, native-first ==
+       Om_Sun = R_Sun/k_Sun^2 = 1477.045948 m (k_Sun = 686.3 stored) ; period at 1 AU = 365.2049 d ; circular speed = 29.7889 km/s
+[PASS] T1    the native period lies in [365.07, 365.44] d
+[PASS] T1    the circular speed lies in [29.7, 29.9] km/s
+       read now: sidereal year 365.256363 d ; relative difference of the native period -1.410e-04
+
+== T2 movement budget ==
+[FAIL] T2    E^2 - (pc)^2 = (m c^2)^2 over 20 speeds (worst relative deviation)             value 4.929390229336e-14 expected 0.000000000000e+00 err 4.929e-14 (tol 1e-14)
+[PASS] T2    photon limit: v_circ = 0 gives v = c                                           value 2.997924580000e+08 expected 2.997924580000e+08 err 0.000e+00 (tol 1e-15)
+[PASS] T2    gamma(0.6 c) = 1.25                                                            value 1.250000000000e+00 expected 1.250000000000e+00 err 0.000e+00 (tol 1e-14)
+
+== T3 the correspondence table ==
+       convention difference at z_e = 0.3: 0.4286 ; at the solar surface: 2.1231e-06 ; source-strength difference (alpha vs 4 protons): 6.8974e-03
+[PASS] T3    relative difference of the redshift conventions at z_e = 0.3                   value 4.285714285714e-01 expected 4.286000000000e-01 err 6.666e-05 (tol 1e-04)
+[PASS] T3    relative difference of the conventions at the solar surface                    value 2.123112094225e-06 expected 2.123100000000e-06 err 5.696e-06 (tol 1e-04)
+[PASS] T3    source-strength difference (alpha vs four protons)                             value 6.897429757415e-03 expected 6.897000000000e-03 err 6.231e-05 (tol 1e-03)
+       observable                     | P | discrimin. | native -> equivalent
+       circular orbit period          | B | none      | T = 2 pi sqrt(r^3/(c^2 Om)), Om = R/k^2 -> T = 2 pi sqrt(r^3/GM) | inputs: Om from surface speed; the source strength is read from ephemeris fits (named shared input) | retained: point source, stationary central response
+       circular speed                 | B | none      | v = c sqrt(Om/r) = c sqrt(z) -> v = sqrt(GM/r) | inputs: same Om (shared input) | retained: circular state
+       energy-momentum                | A | none      | movement budget v_circ^2 + v^2 = c^2 -> gamma, E = gamma m c^2 -> special-relativistic kinematics | inputs: none beyond c (posited budget) | retained: adopted response premises
+       spectral shift between depths  | A | candidate | z_spec = z_e - z_o (A) or (z_e - z_o)/(1 - z_e) (B) -> weak-field redshift (first order) | inputs: depths Om/r (defined geometric ratio) | retained: convention of the transport not derived
+       signal delay, second order     | B | candidate | c_far = c(1-z)^2 profile; delay coefficients -> weak-field delay to first order | inputs: Om_Sun (shared input) | retained: second-order coefficient from the repaired profile
+       composite source strength      | A | candidate | koppa additive in baryon count -> mass-proportional source | inputs: baryon count; B_alpha stored (rounded) | retained: binding not entering the source
+       plate energy amplitude         | C | candidate | mode price a (counting fixes the coefficient per a) -> ideal-plate coefficient for a = 1/2 | inputs: a calibrated | retained: ideal plates, smooth cutoff
+       registration statistics        | A | candidate | threshold accumulate-and-fire: Fano <= 1/(4 mu) -> Poisson counting for an ideal steady source | inputs: none (stand-in rule) | retained: deterministic accumulation
+       rows: (A,none) 1, (B,none) 2, (A,candidate) 3, (B,candidate) 1
+[PASS] T3    every row carries the five descriptive fields
+[PASS] T3    the four combinations of provenance and discrimination are all populated
+
+CRITERIA NOT MET: 1 failure(s)

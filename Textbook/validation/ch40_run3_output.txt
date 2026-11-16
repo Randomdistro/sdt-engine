@@ -1,0 +1,36 @@
+
+== V0 helper validation (known answers) ==
+[PASS] V0    integrate sin over [0, pi] = 2                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 3.331e-16 (tol 1e-13)
+[PASS] V0    integrate x^7 over [0, 1] = 1/8                                                value 1.250000000000e-01 expected 1.250000000000e-01 err 2.220e-15 (tol 1e-14)
+[PASS] V0    integrate exp over [-1, 1] = e - 1/e                                           value 2.350402387288e+00 expected 2.350402387288e+00 err 5.668e-16 (tol 1e-13)
+[PASS] V0    root of cos x - x = 0.739085133215161                                          value 7.390851332152e-01 expected 7.390851332152e-01 err 2.253e-15 (tol 1e-13)
+[PASS] V0    root of x^2 - 2 on [1, 2] = sqrt 2                                             value 1.414213562373e+00 expected 1.414213562373e+00 err 2.983e-15 (tol 1e-13)
+[PASS] V0    compensated sum 1 + 10^6 x 1e-16 = 1 + 1e-10                                   value 1.000000000100e+00 expected 1.000000000100e+00 err 0.000e+00 (tol 1e-15)
+
+== V1 antiderivatives ==
+[PASS] V1    d/dr [r + 2 ln(r-1) - 1/(r-1)] = r^2/(r-1)^2, worst relative                   value 9.785930954465e-09 expected 0.000000000000e+00 err 9.786e-09 (tol 1e-07)
+[PASS] V1    d/d delta [ln delta + delta] = (1 + delta)/delta, worst relative               value 3.614711863165e-10 expected 0.000000000000e+00 err 3.615e-10 (tol 1e-07)
+
+== T1 the circular branch reaches c at r = Om ==
+[PASS] T1    v/c = 1 at r = Om and 2 at r = Om/4, worst deviation                           value 0.000000000000e+00 expected 0.000000000000e+00 err 0.000e+00 (tol 1e-14)
+[PASS] T1    v/c exceeds 1 for r/Om = 0.9, 0.5, 0.1, 0.01
+[PASS] T1    v_bound equals c sqrt(Om/r), worst relative                                    value 2.220446049250e-16 expected 0.000000000000e+00 err 2.220e-16 (tol 1e-14)
+
+== T2 uniform-density interior is regular ==
+[PASS] T2    oscillation period through the centre equals 2 pi/omega                        value 6.283185307189e+00 expected 6.283185307180e+00 err 1.568e-12 (tol 1e-09)
+[PASS] T2    speed at the centre equals omega R                                             value 1.000000000000e+00 expected 1.000000000000e+00 err 9.215e-15 (tol 1e-09)
+[PASS] T2    uniform sphere acceleration at r = 0.01 R over the point-source value = 1e-6   value 1.000000000000e-06 expected 1.000000000000e-06 err 0.000e+00 (tol 1e-12)
+       crossings of the centre in 3 periods: 3 ; the acceleration is finite (zero) at the centre, while the point-source value diverges as 1/r^2
+
+== T3 coordinate arrest and local duration ==
+[PASS] T3    time to reach delta = 1e-3 equals F(1 + d0) - F(1 + 1e-3)                      value 1.010928216197e+03 expected 1.010928216197e+03 err 3.318e-14 (tol 1e-06)
+       delta c t/Om^2 at c t/Om = 1e2, 1e3, 1e4: 1.06594 1.01103 1.00156
+[PASS] T3    delta c t/Om^2 within 5e-3 of 1 at c t/Om = 1e4
+[PASS] T3    local duration to delta = 1e-3 equals G(d0) - G(1e-3)                          value 6.713608209700e+00 expected 6.713608098422e+00 err 1.658e-08 (tol 1e-06)
+[PASS] T3    increment of G per decade of delta at small delta = ln 10                      value 2.302675092994e+00 expected 2.302585092994e+00 err 3.909e-05 (tol 1e-02)
+       local duration to delta = 1e-3: 6.713608 Om/c ; coordinate time 1010.9282 Om/c ; the coordinate time to delta = 1e-6 would be 1.0000e+06 Om/c
+
+== T4 angular-impulse ledger scale (printed) ==
+       h = c Om at r = Om: Sun 4.4281e+11 m^2/s ; Milky Way baryonic total 2.2893e+22 m^2/s (specific angular momentum the continuation would have to transfer)
+
+ALL CRITERIA MET: 0 failure(s)

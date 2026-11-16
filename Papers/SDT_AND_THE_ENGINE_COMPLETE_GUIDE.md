@@ -433,7 +433,7 @@ Everything flows downhill from the derivation basis through four stages. This is
 | | $V_{\text{disp},p}$ | $3m_p\ell_P^3 c^2/\Phi$ | $1.834\times10^{-58}\,\text{m}^3$ | COMPUTED |
 | | $P_{cf}$ | $\rho_{\text{eff}}c^2=P_{\text{conv}}/3$ | identity ✓ | DERIVED |
 
-**The Coulomb identity** $k_e e^2=\alpha\hbar c$ (T9) is *definitional* (Class F): it **defines**
+**The Coulomb identity** $k_e e^2=\alpha\hbar c$ (T9) is *definitional* (class A bridge, label CONSTRUCTION — not class F, which `Theory/05` reserves for pending/failed; corrected 2026-10-03): it **defines**
 $\alpha\equiv k_e e^2/\hbar c$. SDT's coupling is the dimensionless $\alpha$ (in the derivation basis); **$e$ is not** —
 charge is not an SDT entity (it is *occluded influx directionality* — see Part 18), and $e$ figures only as the
 SI unit-bridge from SDT's occlusion magnitude back to the Coulomb number.
@@ -1042,13 +1042,13 @@ intervals as observed stickers with no derived tally. The per-benchmark table be
 | B08 | Earth orbital velocity, $GM_\odot$ | $29783$ m/s; $1.327\times10^{20}$ | DERIVED |
 | B09 | Binary-pulsar $\dot P_b$ | B1913+16 and J0737-3039A/B from timing depth and resistance quadrupole | **DERIVED** (GOM06; no source-mass parameter) |
 | B10 | Mercury precession; light deflection | $42.98''$; $1.7505''$ | DERIVED |
-| B11 | Earth & Jupiter $J_2$ | uniform-fluid estimate | **PENDING** |
+| B11 | Six planets $J_2$ (GOM41 Q1 boundary) | Earth +0.91 %, Jupiter +2.11 %, Saturn +2.87 %; Mars +22.0 %, Uranus +65.5 %, Neptune −18.0 % (three open) | **PENDING** |
 | B12 | Stellar $zk^2=1$ (5 stars) | $=1.0$ across 10 orders | DERIVED |
 | B13 | CMB redshift | $z=1089$ | DERIVED |
-| B14 | Galactic $R_{\text{flat}}\approx2.5R_d$ | 12 % tolerance | COMPUTED |
+| B14 | Galactic $R_{\text{flat}}\approx2.5R_d$ | 12 % tolerance; the ratio 2.5 has no derivation on record | CALIBRATED |
 | B15 | BAO standing-equilibrium ruler | $145.8189$ Mpc vs $147.09$ Mpc | COMPUTED |
 | B16 | Dilute-monatomic transport | Ar $\mu,k,D$ whole-curve RMS 9.71%, 9.67%, 7.81%; exponents 0.5, 0.5, 1.5 | COMPUTED |
-| B17 | Electron g-factor | $g=2(1+\alpha/2\pi)=2.00231930436$ | DERIVED |
+| B17 | Electron g-factor | $g=2(1+\alpha/2\pi)=2.00232$, tolerance 0.01 % ($g=2$ sits 0.116 % away); coefficient owed (PPT12) | **PENDING** |
 | B18 | Proton radius (W+1), He-4 | $R_p=0.84124$ fm (0.08 %); $R_{He}=2R_p$ | DERIVED |
 | B19 | Beta-decay Q-value | $0.782$ MeV | DERIVED |
 | B20 | $zk^2$ universality | $=1.0$ exact | DERIVED |
@@ -1147,7 +1147,7 @@ frame).**
 - **Charge.** **SDT has no charge primitive.** What QM calls charge is *occluded influx directionality* — the
   directional signature of the convergence inflow a vortex occludes — and the electrostatic force is occlusion
   geometry (Law III). The canonical derivation basis contains **$\alpha$, not $e$**, and $k_e e^2=\alpha\hbar c$ is the
-  **definition** of $\alpha$ (Class F). EMC02's "cannot derive $e$" is not a missing derivation — it is the
+  **definition** of $\alpha$ (class A bridge, CONSTRUCTION; corrected 2026-10-03). EMC02's "cannot derive $e$" is not a missing derivation — it is the
   *expected signature of a QM abstraction*: the derivation basis has no current dimension $[\mathrm{A}]$ because the
   ontology has no charge. $e$ appears only as an **SI unit-bridge**.
 - **$\ell_P$ is not a constant — it is a field.** GOM05 derives $\ell_P(r)=\ell_{P,\infty}(1-z)$,

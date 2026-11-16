@@ -9,7 +9,7 @@
 
 ## ⓪ The Golden Rule — five questions (answer before Phase 0)
 
-1. **What don't we know?** — *(unfilled by the 2026-06-27 bulk template upgrade — write the single measurable gap before the next run)*
+1. **What don't we know?** — **Measurable gap (written 2026-10-05 in the audit correction pass, from this prompt's own content; the 2026-06-27 template left it unfilled):** Does the static exponential-strain law with the relay speed reproduce the BAO distance ruler D_A(z) within 3% from a published BAO table, with no fitted parameter?
 2. **Why does it matter?** — Stack position / downstream blockers (see `INVESTIGATION_STACK.md`).
 3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
 4. **What would prove us wrong?** — §⑧ falsification tests with numeric triggers.
@@ -205,3 +205,17 @@ Frozen gates:
    B15 advances only within the existing `3%` gate and is `COMPUTED`, not an
    independent cosmological result, because it inherits FIRAS and
    BBN-deuterium inputs.
+
+---
+
+## Audit correction 2026-10-05 (data / provenance)
+
+**Finding:** The BAO inputs are "memory-transcribed" values for the consolidated BOSS DR12/eBOSS set rather than a sourced table, so the falsification rests on unverifiable numbers.
+
+**Correction:** Replace them with the published BAO table (file and hash in Datasets) and rerun the registered gate.
+
+**Status:** OWED — needs a new run, derivation or data; the corrected requirement is recorded here.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*
+
+**Data correction (2026-10-05):** the BAO comparison values are now the published BOSS DR12 Table 3 numbers in `Datasets/cosmology/BOSS_DR12_BAO_Alam2017_Table3.csv` (source, scaling and limits in `BOSS_DR12_BAO_README.md`). The memory-transcribed values recorded earlier are superseded for any re-run. The eBOSS and DESI rows remain OWED.

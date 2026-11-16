@@ -39,3 +39,15 @@
 First pass is a **resolvability** test: is the frozen-**K** delay large enough
 and is the range product clean enough to test it? A NO is `RANGE_K_UNRESOLVED`,
 not EXCLUDED.
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** Rows C1–C3 are PASS for counting 793 range rows, finiteness and loading Horizons geometry, which are census steps, not gates on the claim.
+
+**Correction:** Label them CENSUS and keep PASS/FAIL for the resolvability comparison.
+
+**Status:** ANNOTATED — label, status or tally corrected in the record; no re-score of earlier runs.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

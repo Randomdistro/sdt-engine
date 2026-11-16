@@ -1,0 +1,51 @@
+
+== V0 helper validation (known answers) ==
+[PASS] V0    integrate sin over [0, pi] = 2                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 3.331e-16 (tol 1e-13)
+[PASS] V0    integrate x^7 over [0, 1] = 1/8                                                value 1.250000000000e-01 expected 1.250000000000e-01 err 2.220e-15 (tol 1e-14)
+[PASS] V0    integrate exp over [-1, 1] = e - 1/e                                           value 2.350402387288e+00 expected 2.350402387288e+00 err 5.668e-16 (tol 1e-13)
+[PASS] V0    root of cos x - x = 0.739085133215161                                          value 7.390851332152e-01 expected 7.390851332152e-01 err 2.253e-15 (tol 1e-13)
+[PASS] V0    root of x^2 - 2 on [1, 2] = sqrt 2                                             value 1.414213562373e+00 expected 1.414213562373e+00 err 2.983e-15 (tol 1e-13)
+[PASS] V0    compensated sum 1 + 10^6 x 1e-16 = 1 + 1e-10                                   value 1.000000000100e+00 expected 1.000000000100e+00 err 0.000e+00 (tol 1e-15)
+
+== V1 known answers ==
+[PASS] V1    Pr = 2/3 for one state                                                         value 6.666666666667e-01 expected 6.666666666667e-01 err 4.996e-16 (tol 1e-14)
+[PASS] V1    Sc = 5/6 for one state                                                         value 8.333333333333e-01 expected 8.333333333333e-01 err 1.332e-16 (tol 1e-14)
+[PASS] V1    Le = 5/4 for one state                                                         value 1.250000000000e+00 expected 1.250000000000e+00 err 3.553e-16 (tol 1e-14)
+[PASS] V1    int dl/(b^2+l^2) over |l| <= 1e4 b equals 2 atan(L/b)/b                        value 1.570696326795e+00 expected 1.570696326795e+00 err 6.927e-15 (tol 1e-09)
+
+== T1 one collision kernel, three transport coefficients ==
+[PASS] T1    Pr = 2/3, Sc = 5/6, Le = 5/4 over 27 states (worst relative deviation)         value 4.440892098501e-16 expected 0.000000000000e+00 err 4.441e-16 (tol 1e-13)
+[PASS] T1    Le = Sc/Pr over 27 states (worst relative deviation)                           value 2.220446049250e-16 expected 0.000000000000e+00 err 2.220e-16 (tol 1e-13)
+[PASS] T1    viscosity slope against T at fixed P                                           value 5.000000000000e-01 expected 5.000000000000e-01 err 2.220e-16 (tol 1e-12)
+[PASS] T1    conductivity slope against T at fixed P                                        value 5.000000000000e-01 expected 5.000000000000e-01 err 2.220e-16 (tol 1e-12)
+[PASS] T1    self-diffusivity slope against T at fixed P                                    value 1.500000000000e+00 expected 1.500000000000e+00 err 1.480e-16 (tol 1e-12)
+[PASS] T1    self-diffusivity slope against P                                               value -1.000000000000e+00 expected -1.000000000000e+00 err 0.000e+00 (tol 1e-12)
+       300 K, 1e5 Pa, b = 1.9e-10 m: eta = 2.3612e-05 Pa s ; kappa = 1.8429e-02 W/(m K) ; D = 1.7692e-05 m^2/s
+
+== T2 freeze the kernel on one observable, predict the others ==
+[PASS] T2    collision measure recovered from the viscosity alone                           value 1.237714285714e-19 expected 1.237714285714e-19 err 0.000e+00 (tol 1e-12)
+[PASS] T2    conductivity predicted from the recovered measure                              value 1.842890076591e-02 expected 1.842890076591e-02 err 0.000e+00 (tol 1e-12)
+[PASS] T2    diffusivity predicted from the recovered measure                               value 1.769174473528e-05 expected 1.769174473528e-05 err 0.000e+00 (tol 1e-12)
+[PASS] T2    conductivity at 1000 K from the 300 K value by T^(1/2)                         value 3.364641553172e-02 expected 3.364641553172e-02 err 0.000e+00 (tol 1e-12)
+
+== T3 optical-hydrodynamic invariant ==
+[PASS] T3    Kn(r_photo) = sigma_ext/sigma_coll for 12 combinations (worst relative deviation) value 2.220446049250e-16 expected 0.000000000000e+00 err 2.220e-16 (tol 1e-12)
+       generic outflow: r_photo = 1.5915e+04 m
+[PASS] T3    r_photo lies in [1.5e4, 1.7e4] m
+[PASS] T3    tangent column by numerical integration equals the finite-L closed form        value 2.499840845057e+00 expected 2.499840845057e+00 err 1.030e-14 (tol 1e-09)
+       tangent / radial column = 3.141393 (pi = 3.141593)
+[PASS] T3    tangent column over radial column is within 2e-4 of pi                         value 3.141392653590e+00 expected 3.141592653590e+00 err 6.366e-05 (tol 2e-04)
+
+== T4 rotation, heat and appearance ==
+       penetration depth delta = 1.890835e-01 m (alpha = 1.30e-06 m^2/s, period 1 day)
+[PASS] T4    the damped travelling solution satisfies the heat equation (worst relative residual) value 1.659679535562e-07 expected 0.000000000000e+00 err 1.660e-07 (tol 1e-06)
+[PASS] T4    omega t_th = 0.1: gain [1 + (omega t)^2]^(-1/2)                                value 9.950371902037e-01 expected 9.950371902100e-01 err 6.356e-12 (tol 1e-06)
+[PASS] T4    omega t_th = 0.1: lag atan(omega t)                                            value 9.966865249091e-02 expected 9.966865249116e-02 err 2.559e-12 (tol 1e-06)
+[PASS] T4    omega t_th = 1: gain [1 + (omega t)^2]^(-1/2)                                  value 7.071067811867e-01 expected 7.071067811865e-01 err 2.135e-13 (tol 1e-06)
+[PASS] T4    omega t_th = 1: lag atan(omega t)                                              value 7.853981633976e-01 expected 7.853981633974e-01 err 2.318e-13 (tol 1e-06)
+[PASS] T4    omega t_th = 10: gain [1 + (omega t)^2]^(-1/2)                                 value 9.950371902164e-02 expected 9.950371902100e-02 err 6.467e-12 (tol 1e-06)
+[PASS] T4    omega t_th = 10: lag atan(omega t)                                             value 1.471127674300e+00 expected 1.471127674304e+00 err 2.435e-12 (tol 1e-06)
+[PASS] T4    at omega t_th = 1 the gain is 2^(-1/2)                                         value 7.071067811865e-01 expected 7.071067811865e-01 err 1.570e-16 (tol 1e-15)
+[PASS] T4    at omega t_th = 1 the lag is pi/4                                              value 7.853981633974e-01 expected 7.853981633974e-01 err 0.000e+00 (tol 1e-15)
+
+ALL CRITERIA MET: 0 failure(s)

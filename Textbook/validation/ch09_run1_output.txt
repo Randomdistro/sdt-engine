@@ -1,0 +1,81 @@
+﻿== Instrument validation ==
+[PASS] V1   oint dOmega = 4 pi                                                     value 1.256637061436e+01 expected 1.256637061436e+01 err 1.456e-14 (tol 1e-12)
+[PASS] V1   oint n_x n_x = 4 pi / 3                                                value 4.188790204786e+00 expected 4.188790204786e+00 err 8.906e-15 (tol 1e-12)
+[PASS] V1   oint n_z n_z = 4 pi / 3                                                value 4.188790204786e+00 expected 4.188790204786e+00 err 6.149e-15 (tol 1e-12)
+[PASS] V1   oint n_x^2 n_y^2 = 4 pi / 15                                           value 8.377580409573e-01 expected 8.377580409573e-01 err 3.313e-15 (tol 1e-12)
+[PASS] V1   oint n_z^4 = 4 pi / 5                                                  value 2.513274122872e+00 expected 2.513274122872e+00 err 3.675e-14 (tol 1e-12)
+[PASS] V2   oint n_i, oint n_i n_j n_k (worst absolute)                            value 3.291570033030e-16 expected 0.000000000000e+00 err 3.292e-16 (tol 1e-12)
+[PASS] V3   hemisphere int mu dOmega = pi                                          value 3.141592653590e+00 expected 3.141592653590e+00 err 3.817e-15 (tol 1e-12)
+[PASS] V3   hemisphere int mu^2 dOmega = 2 pi / 3                                  value 2.094395102393e+00 expected 2.094395102393e+00 err 2.099e-14 (tol 1e-12)
+
+== T1, T2: plane tractions for isotropic incident content, U = 1, q = U/(4 pi) ==
+[PASS] T1   absorbing plane, normal traction / U                                   value 1.666666666667e-01 expected 1.666666666667e-01 err 2.581e-14 (tol 1e-12)
+[PASS] T1   absorbing plane, tangential part (absolute)                            value 4.733878131434e-18 expected 0.000000000000e+00 err 4.734e-18 (tol 1e-14)
+[PASS] T2   specular plane, normal traction / U                                    value 3.333333333333e-01 expected 3.333333333333e-01 err 2.581e-14 (tol 1e-12)
+[PASS] T2   specular traction vs tr(Pi)/3                                          value 3.333333333333e-01 expected 3.333333333333e-01 err 3.497e-15 (tol 1e-12)
+
+== T3: displaced observer, second moment of the exact ray length (kappa = eps = ell = 1) ==
+[PASS] T3   s/R=0.01  (Pi_par - Pi_perp) R/s^2 = 0.066668572  vs 1/15 = 0.066666667  rel 2.857e-05  (limit 3.000e-04)
+[PASS] T3   trace of Pi equals closed-form Phi(s)                                  value 9.999666660000e-01 expected 9.999666660000e-01 err 7.772e-16 (tol 1e-10)
+[PASS] T3   scalar content from the same quadrature equals Phi(s)                  value 9.999666660000e-01 expected 9.999666660000e-01 err 5.551e-16 (tol 1e-10)
+       Pi_par = 0.333326667  Pi_perp = 0.333320000  isotropic share Phi/3 = 0.333322222  anisotropy/Phi = 6.667e-06 (s^2/15R^2 = 6.667e-06)
+[PASS] T3   s/R=0.05  (Pi_par - Pi_perp) R/s^2 = 0.066714345  vs 1/15 = 0.066666667  rel 7.152e-04  (limit 7.500e-03)
+[PASS] T3   trace of Pi equals closed-form Phi(s)                                  value 9.991662495529e-01 expected 9.991662495530e-01 err 3.333e-16 (tol 1e-10)
+[PASS] T3   scalar content from the same quadrature equals Phi(s)                  value 9.991662495530e-01 expected 9.991662495530e-01 err 2.222e-16 (tol 1e-10)
+       Pi_par = 0.333166607  Pi_perp = 0.332999821  isotropic share Phi/3 = 0.333055417  anisotropy/Phi = 1.669e-04 (s^2/15R^2 = 1.667e-04)
+[PASS] T3   s/R=0.10  (Pi_par - Pi_perp) R/s^2 = 0.066858101  vs 1/15 = 0.066666667  rel 2.872e-03  (limit 3.000e-02)
+[PASS] T3   trace of Pi equals closed-form Phi(s)                                  value 9.966599712688e-01 expected 9.966599712688e-01 err 1.114e-16 (tol 1e-10)
+[PASS] T3   scalar content from the same quadrature equals Phi(s)                  value 9.966599712688e-01 expected 9.966599712688e-01 err 0.000e+00 (tol 1e-10)
+       Pi_par = 0.332665711  Pi_perp = 0.331997130  isotropic share Phi/3 = 0.332219990  anisotropy/Phi = 6.708e-04 (s^2/15R^2 = 6.667e-04)
+
+== T4: sphere of radius a in a parallel beam (beam momentum flux 1), surface integration ==
+[PASS] T4   absorbing sphere force / (sigma q_b)                                   value 1.000000000000e+00 expected 1.000000000000e+00 err 3.775e-15 (tol 1e-10)
+[PASS] T4   specular sphere force / (sigma q_b)                                    value 1.000000000000e+00 expected 1.000000000000e+00 err 1.876e-14 (tol 1e-10)
+[PASS] T4   specular sphere transverse part (absolute, / sigma)                    value 1.777847313885e-17 expected 0.000000000000e+00 err 1.778e-17 (tol 1e-12)
+[PASS] T4   Lambertian sphere, albedo rho: force / (sigma q_b) vs 1 + 4 rho / 9    value 1.111111111111e+00 expected 1.111111111111e+00 err 5.995e-15 (tol 1e-10)
+[PASS] T4   Lambertian sphere, albedo rho: force / (sigma q_b) vs 1 + 4 rho / 9    value 1.222222222222e+00 expected 1.222222222222e+00 err 7.994e-15 (tol 1e-10)
+[PASS] T4   Lambertian sphere, albedo rho: force / (sigma q_b) vs 1 + 4 rho / 9    value 1.444444444444e+00 expected 1.444444444444e+00 err 1.045e-14 (tol 1e-10)
+       Lambertian recoil coefficient per unit albedo = 0.444444444444 (4/9 = 0.444444444444); flat-plate value 2/3 = 0.666666666667
+
+== T5: shadow of a sphere of radius R1 at distance r ==
+[PASS] T5   projected cap int mu dOmega vs pi R1^2/r^2                             value 3.141592653590e+00 expected 3.141592653590e+00 err 3.817e-15 (tol 1e-12)
+[PASS] T5   unweighted cap vs 2 pi (1 - sqrt(1 - R1^2/r^2))                        value 6.283185307179e+00 expected 6.283185307180e+00 err 1.456e-14 (tol 1e-12)
+       r/R1 =    1.0  unweighted / projected = 2.000000000
+[PASS] T5   projected cap int mu dOmega vs pi R1^2/r^2                             value 1.396263401595e+00 expected 1.396263401595e+00 err 3.435e-14 (tol 1e-12)
+[PASS] T5   unweighted cap vs 2 pi (1 - sqrt(1 - R1^2/r^2))                        value 1.599975486486e+00 expected 1.599975486486e+00 err 1.749e-14 (tol 1e-12)
+       r/R1 =    1.5  unweighted / projected = 1.145898034
+[PASS] T5   projected cap int mu dOmega vs pi R1^2/r^2                             value 7.853981633974e-01 expected 7.853981633974e-01 err 2.516e-14 (tol 1e-12)
+[PASS] T5   unweighted cap vs 2 pi (1 - sqrt(1 - R1^2/r^2))                        value 8.417872144769e-01 expected 8.417872144769e-01 err 5.012e-15 (tol 1e-12)
+       r/R1 =    2.0  unweighted / projected = 1.071796770
+[PASS] T5   projected cap int mu dOmega vs pi R1^2/r^2                             value 1.256637061436e-01 expected 1.256637061436e-01 err 1.060e-14 (tol 1e-12)
+[PASS] T5   unweighted cap vs 2 pi (1 - sqrt(1 - R1^2/r^2))                        value 1.269461224026e-01 expected 1.269461224026e-01 err 4.591e-15 (tol 1e-12)
+       r/R1 =    5.0  unweighted / projected = 1.010205144
+[PASS] T5   projected cap int mu dOmega vs pi R1^2/r^2                             value 3.141592653590e-02 expected 3.141592653590e-02 err 3.865e-14 (tol 1e-12)
+[PASS] T5   unweighted cap vs 2 pi (1 - sqrt(1 - R1^2/r^2))                        value 3.149486152300e-02 expected 3.149486152300e-02 err 7.491e-15 (tol 1e-12)
+       r/R1 =   10.0  unweighted / projected = 1.002512579
+[PASS] T5   projected cap int mu dOmega vs pi R1^2/r^2                             value 3.141592653589e-04 expected 3.141592653590e-04 err 2.283e-13 (tol 1e-12)
+[PASS] T5   unweighted cap vs 2 pi (1 - sqrt(1 - R1^2/r^2))                        value 3.141671197333e-04 expected 3.141671197333e-04 err 2.606e-14 (tol 1e-12)
+       r/R1 =  100.0  unweighted / projected = 1.000025001
+
+== T6: engine agreement (sdt::laws::law_III) ==
+[PASS] T6   solid_angle_occluded(R, r) vs pi R^2/r^2                               value 3.141592653590e+00 expected 3.141592653590e+00 err 0.000e+00 (tol 1e-12)
+[PASS] T6   solid_angle_cap(R, r) vs 2 pi (1 - sqrt(1 - x))                        value 6.283185307180e+00 expected 6.283185307180e+00 err 0.000e+00 (tol 1e-12)
+[PASS] T6   cap_over_projected(R, r) vs 2(1 - sqrt(1 - x))/x                       value 2.000000000000e+00 expected 2.000000000000e+00 err 0.000e+00 (tol 1e-12)
+[PASS] T6   solid_angle_occluded(R, r) vs pi R^2/r^2                               value 1.396263401595e+00 expected 1.396263401595e+00 err 0.000e+00 (tol 1e-12)
+[PASS] T6   solid_angle_cap(R, r) vs 2 pi (1 - sqrt(1 - x))                        value 1.599975486486e+00 expected 1.599975486486e+00 err 0.000e+00 (tol 1e-12)
+[PASS] T6   cap_over_projected(R, r) vs 2(1 - sqrt(1 - x))/x                       value 1.145898033750e+00 expected 1.145898033750e+00 err 0.000e+00 (tol 1e-12)
+[PASS] T6   solid_angle_occluded(R, r) vs pi R^2/r^2                               value 7.853981633974e-01 expected 7.853981633974e-01 err 0.000e+00 (tol 1e-12)
+[PASS] T6   solid_angle_cap(R, r) vs 2 pi (1 - sqrt(1 - x))                        value 8.417872144769e-01 expected 8.417872144769e-01 err 0.000e+00 (tol 1e-12)
+[PASS] T6   cap_over_projected(R, r) vs 2(1 - sqrt(1 - x))/x                       value 1.071796769724e+00 expected 1.071796769724e+00 err 0.000e+00 (tol 1e-12)
+[PASS] T6   solid_angle_occluded(R, r) vs pi R^2/r^2                               value 1.256637061436e-01 expected 1.256637061436e-01 err 0.000e+00 (tol 1e-12)
+[PASS] T6   solid_angle_cap(R, r) vs 2 pi (1 - sqrt(1 - x))                        value 1.269461224026e-01 expected 1.269461224026e-01 err 0.000e+00 (tol 1e-12)
+[PASS] T6   cap_over_projected(R, r) vs 2(1 - sqrt(1 - x))/x                       value 1.010205144336e+00 expected 1.010205144336e+00 err 2.198e-16 (tol 1e-12)
+[PASS] T6   solid_angle_occluded(R, r) vs pi R^2/r^2                               value 3.141592653590e-02 expected 3.141592653590e-02 err 0.000e+00 (tol 1e-12)
+[PASS] T6   solid_angle_cap(R, r) vs 2 pi (1 - sqrt(1 - x))                        value 3.149486152300e-02 expected 3.149486152300e-02 err 0.000e+00 (tol 1e-12)
+[PASS] T6   cap_over_projected(R, r) vs 2(1 - sqrt(1 - x))/x                       value 1.002512578676e+00 expected 1.002512578676e+00 err 2.215e-16 (tol 1e-12)
+[PASS] T6   solid_angle_occluded(R, r) vs pi R^2/r^2                               value 3.141592653590e-04 expected 3.141592653590e-04 err 0.000e+00 (tol 1e-12)
+[PASS] T6   solid_angle_cap(R, r) vs 2 pi (1 - sqrt(1 - x))                        value 3.141671197333e-04 expected 3.141671197333e-04 err 0.000e+00 (tol 1e-12)
+[PASS] T6   cap_over_projected(R, r) vs 2(1 - sqrt(1 - x))/x                       value 1.000025001250e+00 expected 1.000025001250e+00 err 0.000e+00 (tol 1e-12)
+[PASS] T6   F_occlusion / P_eff vs (pi/4) R1^2 R2^2 / r^2                          value 3.606420138050e+00 expected 3.606420138050e+00 err 2.463e-16 (tol 1e-12)
+
+ALL CRITERIA MET: 0 failure(s)

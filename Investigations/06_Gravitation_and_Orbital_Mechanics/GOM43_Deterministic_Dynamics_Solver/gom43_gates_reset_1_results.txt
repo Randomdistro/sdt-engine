@@ -1,0 +1,29 @@
+K0 parser rejection (each must return invalid_case and execute no step):
+  invalid_json             exit 1 status invalid_case   executed_steps 0 -> met
+  unsupported_version      exit 1 status invalid_case   executed_steps 0 -> met
+  unknown_problem_class    exit 1 status invalid_case   executed_steps 0 -> met
+  nonpositive_timestep     exit 1 status invalid_case   executed_steps 0 -> met
+  fractional_step_count    exit 1 status invalid_case   executed_steps 0 -> met
+  unknown_member           exit 1 status invalid_case   executed_steps 0 -> met
+  duplicate_ids            exit 1 status invalid_case   executed_steps 0 -> met
+  impossible_cadence       exit 1 status invalid_case   executed_steps 0 -> met
+  K0: 8 of 8 met
+
+K1 replay determinism: two runs of the same case give byte-identical output: met (5098 bytes, sha256 0992e5267c2195b5)
+
+K2 provenance: fields present {'laws_sha256': True, 'build_id': True, 'contract_version': True, 'compiler': True, 'floating_point_policy': True} ; laws hash is 64 lowercase hex: True
+   manifest laws_sha256 b421252498795ad4967801dfa479b54df81f26e0d633edba33c19f54fd9e0cc8 ; SHA-256 of the current laws.hpp da72fc92d764cf4221d39714e952b5f864eabc5a3b6aa3567117afdce2024922 -> STALE (the binary was built against an earlier laws.hpp)
+   result provenance: {'input_sha256': '6b2129880a0cb1df062977c8fd0be422ccc4eea30ff7ea106414c58efdcde531', 'laws_sha256': 'b421252498795ad4967801dfa479b54df81f26e0d633edba33c19f54fd9e0cc8'} ; solver {'build_id': 'gom43-solver-1.0.0', 'compiler': 'MSVC-19.44.35223.0', 'floating_point_policy': 'fixed-step; no fast-math; no contraction guarantee'}
+
+K3 C ABI smoke executable: exit 0 ; stdout 0 bytes, begins b''
+
+N1 circular pair: P = 1.210037e+07 s ; dt = P/2000 = 6.050183e+03 s ; steps 200000 ; solver status completed executed_steps 200000
+   records 101 ; max relative separation drift 3.160e-13 (gate 5e-5: met) ; max relative energy drift (independent) 6.293e-14 (gate 5e-6: met) ; solver diagnostic relative_energy_drift 2.436872925670741e-11
+
+R1 point bob at 1 m (link 2 m, centre 1 m from the pivot, inertia 1e-6): status completed executed_steps 16000 ; upward zero crossings 4 ; measured period 2.006724 s
+   simple-pendulum T0 = 2.006409 s (relative difference +1.567e-04 ; gate 2e-3: met) ; uniform-rod physical-pendulum period 2pi sqrt(2L/3g) = 1.638226 s (relative difference +2.249e-01)
+
+control: uniform rod (L = 1 m, inertia 1/12), physical pendulum: status completed executed_steps 16000 ; upward zero crossings 5 ; measured period 1.638482 s
+   simple-pendulum T0 = 2.006409 s (relative difference -1.834e-01 ; gate 2e-3: NOT MET) ; uniform-rod physical-pendulum period 2pi sqrt(2L/3g) = 1.638226 s (relative difference +1.562e-04)
+
+NOT RUN in this pass: N0, N2-N9, R0, R2-R6 (the instrument is not re-qualified by this record).

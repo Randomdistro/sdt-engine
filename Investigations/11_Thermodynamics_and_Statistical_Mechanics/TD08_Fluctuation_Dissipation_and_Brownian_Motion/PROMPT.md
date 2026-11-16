@@ -20,7 +20,7 @@
 3. **How will we find out?** — Gated phases in §④; the Brownian walk and the drag response measured on
    the *same* relay bath, then the FDT spectrum and the FD02 closure.
 4. **What would prove us wrong?** — §⑧ falsification tests with numeric triggers and real failure modes.
-5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN).
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN).
 
 ## Question
 
@@ -95,7 +95,7 @@ disordered throughput), FD09 (drag as occlusion cross-section — the dissipativ
 ```markdown
 ## Pre-Run Commitments — TD08
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: 0 in the FDT ratio (flag the relay correlation-time order-unity factor if needed)
 - Engine namespaces actually used: measured::k_B, TD02 (k_BT scale), TD03 (occlusion kick),
     FD02 (ν / mobility — same relay momentum-flux)
@@ -114,7 +114,7 @@ disordered throughput), FD09 (drag as occlusion cross-section — the dissipativ
 | P2 `D/(µk_BT) ≠ 1` beyond ±2% | confirm kick variance and drag use the **same** bath statistic | **F** — noise and drag are independent ⇒ FDT not one relay statistic | normalise the noise to hit 1 |
 | P3 FDT spectrum off at low ω | check `µ(ω)` linear-response extraction | **OPEN** the spectrum | fit the prefactor to the FDT |
 | P4 Stokes–Einstein off `> 10%` vs FD02 | reconcile FD02's `η` provenance; check `R` definition | **OPEN** the fluid↔thermal closure | retune `η` to close |
-| Rivals match but SDT only reproduces | label **DEGENERATE** honestly | — | Claim Class A |
+| A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 | Upstream missing (FD02 `η` not ready) | **DEFER** P4; cite dependency ID | — | Fake PASS |
 
 ### Allowed adjustments

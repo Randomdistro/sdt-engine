@@ -1,7 +1,7 @@
 # PPT07 — Proton/Electron Displacement-Volume Ratio
 
 > **Author:** J. C. Harvey, Melbourne
-> **Status:** COMPLETE
+> **Status:** COMPLETE as a CONSTRUCTION (shared-input, not an independent prediction). Numeric gate registered 2026-10-05, before any re-run: the declared count N = 6π⁵ must return m_p/m_e = 1836.15 to within 1e-3 as a construction check, and any claim of independence is excluded unless a delete-test removes m_p/m_e from the inputs and the ratio survives.
 > **Engine:** `#include <sdt/laws.hpp>` only
 
 ## Objective
@@ -57,3 +57,15 @@ test the displaced-volume packing construction.
   independently derived.
 
 The final result is recorded directly in `INVESTIGATION.md`.
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** Status COMPLETE with no numeric gate and no pre-registration, and N = 6π⁵ is declared as an input, so the mass ratio is shared-input (as its own status admits).
+
+**Correction:** Register a numeric gate and a delete-test for the 6π⁵ count before counting any pass.
+
+**Status:** RULE RECORDED — corrected gate or definition applies to the next run; the earlier result is not re-scored and nothing was re-run.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

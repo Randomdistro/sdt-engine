@@ -1,0 +1,41 @@
+OP04 — Polarisation as transverse wake orientation (J. C. Harvey, 2026-07-04)
+Machinery only: real time-domain displacement, projection, per-axis lag.
+
+Phase 1 — native transverse states (Ax, Ay, lag)
+  linear@0: circ = 6.123e-17   linear@45: circ = 6.123e-17
+  circular (lag pi/2): circ = 1.000000   elliptical: circ = 0.3950
+  [PASS] P1-states  linear/circular/elliptical all carried by (Ax,Ay,lag) — no further structure needed
+
+Phase 2 — Malus by instant-by-instant projection
+  max |I/I0 - cos^2| over 0..90 deg = 4.552e-15  (gate 1e-3)
+  [PASS] P2-malus  Malus from projection geometry
+  crossed pair floor = 3.749e-33 * I0  (gate 1e-12)
+  [PASS] P2-crossed  extinction at machine zero
+  unpolarised -> P(0)->P(45)->P(90): I/I0 = 0.125176 vs 1/8 = 0.125  (gate +/-1%)
+  [PASS] P2-revival  three-polariser revival, MC ensemble K=2e5
+
+Phase 3 — retarders as single-axis relay lag (anisotropic closure)
+  QWP on linear@45: circularity = 1.000000  (gate >= 0.99)
+  [PASS] P3-qwp  linear -> circular by quarter-tick lag
+  HWP on linear@20deg: output orientation = -20.0000 deg (target -20; rotation 2psi)  (gate 0.1 deg)
+  [PASS] P3-hwp  rotation by 2psi from half-tick lag
+
+Phase 4 — optical activity as handedness-split relay speed (Dn = MEASURED-INPUT)
+  rotation(1 cm) = 3.056027 deg   rotation(2 cm) = 6.112054 deg   ratio = 2.000000 (gate 2 +/- 0.1%)
+  [PASS] P4-linearity  rotation proportional to path length
+  SIGN: which handedness is the slower relay is ASSERTED to map to EMC03 +/-
+  redirection — NOT derived here. Row: OPEN (committed expectation).
+
+HONESTY FLAGS:
+  1. The state (Ax, Ay, lag) with projection + per-axis lag is ALGEBRAICALLY
+     ISOMORPHIC to the Jones calculus. Recovering Malus/QWP/HWP this way is the
+     firewall's own cap: CLASS CONVERGENCE (C), not NATIVE.
+  2. No spin operator was used — but classical polarisation optics never needed
+     one either. The earned content vs classical wave optics is the ONTOLOGY
+     (a real lattice displacement with EMC03 handedness), which these numerics
+     do not test. Said plainly, not dressed up.
+  3. Chiral magnitude Dn is MEASURED-INPUT; predicting it from lattice chirality
+     inherits OP01's OPEN matter-index problem (same root).
+  4. The activity SIGN -> EMC03 mapping is OPEN; flipping it by fiat is forbidden.
+
+OP04 exit: ALL COMMITTED GATES PASS (0 gate failures)

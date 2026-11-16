@@ -21,8 +21,8 @@
 1. **What don't we know?** — **The dimensionless law z_d = h(Θ) mapping the occluded sky-fraction Θ at a position to the depth redshift of light there** — and whether Θ for a bulge/bar/nucleus lands in the **dilute** branch (Θ≪1, h≈h′(0)·Θ, recovers weak-field ϟ/r) or the **saturated** branch (Θ→1, h→h_max, the sungrazer g→2 limit). The prior 0.1% estimate assumed dilute *and* used the wrong (volume/koppa) measure.
 2. **Why does it matter?** — Θ is dimensionless and scale-free, so **the atomic field shift (nucleus's Θ at the electron) and the galactic bulge redshift (bulge's Θ at a star) are the SAME law** — a fishbowl-gate prediction across ~30 orders (§0), calibrated where physics is measured to Hz (King plots) and carried to where it is measured in km/s (cluster gravitational redshift). Confirms mass = occlusion = pressure gradient of space (dark matter dissolved; GD05 verdict).
 3. **How will we find out?** — Compute Θ by direct solid-angle integration with saturation (κ=1−e^{−τ}) at four anchors (nucleus@electron, Sun-surface, sungrazer, bulge@star); derive the *form* of h from the GOM05 closure; read h′,h″ from the field shift + King nonlinearity; extrapolate h(Θ) with **zero fitted parameters**; validate on the cluster. Five gated phases (§④), four spawned children (§SPAWN).
-4. **What would prove us wrong?** — §⑧, each numeric. Chief kills: h that reduces identically to ϟ/r at all Θ (no new physics); a field shift not proportional to δΘ_nuc (bridge dead); a solar anchor that forces a dependency-traced constant back in (Rule 2 violated → the coupling is not geometric); scale-invariance failing nucleus→cluster.
-5. **How will we know we're done?** — **Triple verdict:** prompt completion (A–F) × physics class (NATIVE/CONVERGENCE/DEGENERATE/KILLED/OPEN) × cross-scale grade (SCALE-INVARIANT/SCALE-BROKEN/UNDETERMINED). Class-A NATIVE SCALE-INVARIANT = z_d(bulge) and z_d(cluster) predicted from the King-plot h(Θ) within measured error, no fitted parameter, dilute limit = the Sun's 636 m/s, saturation limit = the sungrazer g→2.
+4. **What would prove us wrong?** — §⑧, each numeric. Chief kills: h that reduces identically to ϟ/r at all Θ (the saturation branch is falsified; the dilute law stands as convergent — wording corrected 2026-10-03); a field shift not proportional to δΘ_nuc (bridge dead); a solar anchor that forces a dependency-traced constant back in (Rule 2 violated → the coupling is not geometric); scale-invariance failing nucleus→cluster.
+5. **How will we know we're done?** — **Triple verdict:** prompt completion (A–F) × physics class (NATIVE/CONVERGENCE/SHARED-INPUT/KILLED/OPEN) × cross-scale grade (SCALE-INVARIANT/SCALE-BROKEN/UNDETERMINED). Class-A NATIVE SCALE-INVARIANT = z_d(bulge) and z_d(cluster) predicted from the King-plot h(Θ) within measured error, no fitted parameter, dilute limit = the Sun's 636 m/s, saturation limit = the sungrazer g→2.
 
 ---
 
@@ -186,3 +186,15 @@ Class A·NATIVE·SCALE-INVARIANT: h(Θ) derived + King-calibrated + both limits 
 > **Prompt completion** [A–F] · **Physics class** [NATIVE/…/OPEN] · **Cross-scale** [SCALE-INVARIANT/BROKEN/UNDETERMINED] · **σ_occ** [GEOMETRIC/DEFERRED-to-EMC01] · **Cascade root** [GD06] · **Children** [XSD-A/B/C/D (+A2/B2/C2/D2)].
 
 *GD06 · rebuilt on the solid-angle instrument 2026-07-13 · occlusion = subtended sky-fraction Θ; depth redshift = h(Θ); one dimensionless angular law, no constants, calibrated on the King plot, anchored on the Sun and the sungrazer, carried 30 orders to the bulge and the cluster; mass and 6π⁵ fall out; the crux and the f-geometrization are DERIVED or honestly DEFERRED, never assumed.*
+
+---
+
+## Audit correction 2026-10-05 (record / status)
+
+**Finding:** Two folders carry the id GD06 (Collective_Displacement_Redshift_Law and Gravitational_Lensing), and the first has verdicts but no tool in the folder (`gd06_run.py` is cited, code count 0).
+
+**Correction:** Rename one folder and add or reference the tool.
+
+**Status:** ANNOTATED — label, status or tally corrected in the record; no re-score of earlier runs.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

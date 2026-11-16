@@ -1,0 +1,586 @@
+﻿╔══════════════════════════════════════════════════════════════╗
+║  APS01 B+++: BLIND PAIRING & MAGNETIC GEAR DISCOVERY       ║
+╚══════════════════════════════════════════════════════════════╝
+
+══ TABLE 1: PAIRING METRICS ══
+
+  ID  Z    OLI   CBI  BP   rho   PS1  NPBP1  PCI1  rough    RWI      MdA     MdB     MdC
+  ──────────────────────────────────────────────────────────────────────────────
+   0  1   1.00  0.00   0 0.750 1.000  0.000 0.750 0.0000 0.0000  ?       CANCEL  CANCEL 
+   1  2   2.21  2.21   1 0.806 0.452  1.213 0.364 0.0000 0.0000  ?       CANCEL  CANCEL 
+   2  3  14.03 14.03   1 0.343 0.071 13.028 0.024 1.1657 0.6126  LOOSE   LOOSE   LOOSE  
+   3  4   1.95  8.45   2 0.293 0.512  0.953 0.150 0.6049 0.1711  CANCEL  CANCEL  CANCEL 
+   4  5   3.03  6.84   3 0.431 0.330  2.031 0.142 0.4302 0.1467  BREACH  BREACH  BREACH 
+   5  6   2.17  6.08   4 0.112 0.462  1.166 0.052 0.3203 0.1707  BREACH  BREACH  BREACH 
+   6  7   2.04  5.64   5 0.164 0.491  1.037 0.080 0.2686 0.1348  BREACH  BREACH  BREACH 
+   7  8   2.58  5.35   6 0.145 0.388  1.579 0.056 0.2532 0.1299  BREACH  BREACH  BREACH 
+   8  9   2.01  5.15   7 0.729 0.498  1.007 0.363 0.2117 0.0115  CANCEL  CANCEL  CANCEL 
+   9 10   1.90  5.00   8 0.771 0.526  0.900 0.406 0.1884 0.0086  CANCEL  CANCEL  CANCEL 
+  10 11   9.20  9.20   1 0.409 0.109  8.201 0.044 0.8138 0.3850  LOOSE   LOOSE   LOOSE  
+  11 12   1.97  5.33   2 0.354 0.509  0.966 0.180 0.2486 0.0642  CANCEL  CANCEL  CANCEL 
+  12 13   3.15  3.15   1 0.525 0.318  2.146 0.167 0.1344 0.0383  ?       RESIDUAL RESIDUAL
+  13 14   2.01  2.05   2 0.096 0.499  1.005 0.048 0.0371 0.0201  ?       SOFT    RESIDUAL
+  14 15   1.89  1.89   1 0.134 0.530  0.885 0.071 0.0220 0.0114  ?       RESIDUAL RESIDUAL
+  15 16   2.25  2.25   1 0.111 0.444  1.253 0.049 0.0484 0.0258  ?       SOFT    RESIDUAL
+  16 17   1.84  1.84   1 0.000 0.545  0.836 0.000 0.0024 0.0015  ?       SOFT    SOFT   
+  17 18   1.75  1.75   1 0.733 0.570  0.753 0.418 0.0176 0.0009  ?       CANCEL  CANCEL 
+  18 19   7.29  7.29   1 0.371 0.137  6.285 0.051 0.6524 0.3283  LOOSE   LOOSE   LOOSE  
+  19 20   1.94  4.29   2 0.308 0.515  0.942 0.158 0.1569 0.0435  CANCEL  CANCEL  CANCEL 
+  20 21   1.95  1.95   1 0.000 0.513  0.951 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  21 22   1.99  2.02   2 0.000 0.503  0.989 0.000 0.0001 0.0000  ?       SOFT    SOFT   
+  22 23   2.17  2.17   1 0.000 0.460  1.173 0.000 0.0017 0.0010  ?       SOFT    SOFT   
+  23 24   2.44  2.44   1 0.000 0.410  1.436 0.000 0.0169 0.0102  ?       SOFT    D-GEAR 
+  24 25   2.10  2.15   2 0.000 0.475  1.104 0.000 0.0001 0.0001  ?       SOFT    SOFT   
+  25 26   2.05  2.05   1 0.000 0.488  1.049 0.000 0.0015 0.0009  ?       SOFT    SOFT   
+  26 27   2.17  2.17   1 0.000 0.461  1.168 0.000 0.0025 0.0015  ?       SOFT    SOFT   
+  27 28   2.38  2.38   1 0.000 0.420  1.378 0.000 0.0105 0.0063  ?       SOFT    D-GEAR 
+  28 29   2.63  2.63   1 0.000 0.381  1.626 0.000 0.0341 0.0205  ?       SOFT    D-GEAR 
+  29 30   1.91  2.21   2 0.000 0.523  0.912 0.000 0.0053 0.0032  ?       SOFT    SOFT   
+  30 31   3.42  3.42   1 0.000 0.292  2.420 0.000 0.1706 0.1024  ?       SOFT    RESIDUAL
+  31 32   2.02  2.15   2 0.000 0.496  1.017 0.000 0.0010 0.0006  ?       SOFT    SOFT   
+  32 33   1.90  1.90   1 0.000 0.527  0.899 0.000 0.0120 0.0072  ?       SOFT    RESIDUAL
+  33 34   2.17  2.17   1 0.000 0.460  1.173 0.000 0.0403 0.0242  ?       SOFT    RESIDUAL
+  34 35   1.83  1.83   1 0.000 0.547  0.828 0.000 0.0021 0.0013  ?       SOFT    SOFT   
+  35 36   1.74  1.74   1 0.000 0.575  0.740 0.000 0.0047 0.0028  ?       SOFT    SOFT   
+  36 37   6.53  6.53   1 0.000 0.153  5.533 0.000 0.0000 0.0000  LOOSE   LOOSE   LOOSE  
+  37 38   1.94  1.94   1 0.000 0.516  0.937 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  38 39   1.97  1.97   1 0.000 0.508  0.969 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  39 40   1.98  1.98   1 0.000 0.505  0.979 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  40 41   2.12  2.12   1 0.000 0.472  1.119 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  41 42   2.28  2.28   1 0.000 0.439  1.279 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  42 43   2.10  2.10   1 0.000 0.477  1.096 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  43 44   2.28  2.28   1 0.000 0.439  1.277 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  44 45   2.42  2.42   1 0.000 0.413  1.424 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  45 46   2.33  2.33   1 0.000 0.429  1.331 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  46 47   2.84  2.84   1 0.000 0.353  1.837 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  47 48   1.88  1.88   1 0.000 0.532  0.880 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  48 49   3.26  3.26   1 0.000 0.307  2.261 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  49 50   1.99  1.99   1 0.000 0.502  0.992 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  50 51   1.92  1.92   1 0.000 0.521  0.920 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  51 52   2.06  2.06   1 0.000 0.484  1.064 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  52 53   1.83  1.83   1 0.000 0.546  0.831 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  53 54   1.73  1.73   1 0.000 0.578  0.729 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  54 55   6.45  6.45   1 0.000 0.155  5.446 0.000 0.0000 0.0000  LOOSE   LOOSE   LOOSE  
+  55 56   1.92  1.92   1 0.000 0.521  0.919 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  56 57   1.98  1.98   1 0.000 0.504  0.983 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  57 58   1.96  1.96   1 0.000 0.511  0.959 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  58 59   1.93  1.93   1 0.000 0.519  0.928 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  59 60   1.94  1.94   1 0.000 0.515  0.942 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  60 61   1.95  1.95   1 0.000 0.512  0.953 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  61 62   1.96  1.96   1 0.000 0.510  0.961 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  62 63   1.98  1.98   1 0.000 0.504  0.983 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  63 64   1.97  1.97   1 0.000 0.509  0.966 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  64 65   1.96  1.96   1 0.000 0.509  0.965 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  65 66   1.96  1.96   1 0.000 0.509  0.965 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  66 67   1.96  1.96   1 0.000 0.510  0.959 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  67 68   1.95  1.95   1 0.000 0.512  0.953 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  68 69   1.95  1.95   1 0.000 0.513  0.949 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  69 70   1.95  1.95   1 0.000 0.514  0.947 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  70 71   2.56  2.56   1 0.000 0.390  1.562 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  71 72   2.18  2.18   1 0.000 0.458  1.183 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  72 73   2.15  2.15   1 0.000 0.466  1.146 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  73 74   2.05  2.05   1 0.000 0.488  1.047 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  74 75   2.12  2.12   1 0.000 0.472  1.119 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  75 76   2.01  2.01   1 0.000 0.496  1.015 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  76 77   1.90  1.90   1 0.000 0.527  0.896 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  77 78   2.07  2.07   1 0.000 0.483  1.072 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  78 79   2.22  2.22   1 0.000 0.450  1.224 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  79 80   1.80  1.80   1 0.000 0.556  0.797 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  80 81   3.34  3.34   1 0.000 0.299  2.344 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  81 82   2.03  2.03   1 0.000 0.493  1.027 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  82 83   2.29  2.29   1 0.000 0.437  1.291 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  83 84   2.31  2.31   1 0.000 0.434  1.306 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  84 85   1.92  1.92   1 0.000 0.521  0.919 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  85 86   1.99  1.99   1 0.000 0.502  0.991 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  86 87   5.50  5.50   1 0.000 0.182  4.500 0.000 0.0000 0.0000  LOOSE   LOOSE   LOOSE  
+  87 88   1.92  1.92   1 0.000 0.520  0.922 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  88 89   2.27  2.27   1 0.000 0.440  1.273 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  89 90   1.82  1.82   1 0.000 0.548  0.823 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  90 91   1.99  1.99   1 0.000 0.503  0.986 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  91 92   1.87  1.87   1 0.000 0.534  0.873 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  92 93   1.84  1.84   1 0.000 0.545  0.835 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  93 94   1.86  1.86   1 0.000 0.538  0.859 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  94 95   1.96  1.96   1 0.000 0.511  0.958 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  95 96   2.07  2.07   1 0.000 0.483  1.070 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  96 97   1.92  1.92   1 0.000 0.521  0.920 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  97 98   1.91  1.91   1 0.000 0.523  0.910 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  98 99   1.90  1.90   1 0.000 0.526  0.900 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  99 100   1.89  1.89   1 0.000 0.528  0.892 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  100 101   1.88  1.88   1 0.000 0.531  0.884 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  101 102   1.88  1.88   1 0.000 0.532  0.880 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  102 103   2.90  2.90   1 0.000 0.344  1.903 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  103 104   2.40  2.40   1 0.000 0.417  1.396 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  104 105   2.12  2.12   1 0.000 0.472  1.119 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  105 106   2.03  2.03   1 0.000 0.494  1.025 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  106 107   2.14  2.14   1 0.000 0.467  1.143 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  107 108   2.24  2.24   1 0.000 0.447  1.237 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  108 109   2.03  2.03   1 0.000 0.491  1.035 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  109 110   1.96  1.96   1 0.000 0.511  0.957 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  110 111   1.85  1.85   1 0.000 0.541  0.850 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  111 112   1.59  1.59   1 0.000 0.630  0.587 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  112 113   2.74  2.74   1 0.000 0.365  1.736 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  113 114   1.97  1.97   1 0.000 0.508  0.967 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  114 115   3.23  3.23   1 0.000 0.310  2.226 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  115 116   2.50  2.50   1 0.000 0.400  1.500 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  116 117   2.21  2.21   1 0.000 0.453  1.208 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+  117 118   2.02  2.02   1 0.000 0.494  1.022 0.000 0.0000 0.0000  ?       SOFT    SOFT   
+
+══ TABLE 2: CLASS COUNTS ══
+
+  Class       MdA  MdB  MdC
+  CANCEL        5    8    8
+  LOOSE         6    6    6
+  RESIDUAL      0    2    7
+  BREACH        4    4    4
+  D-GEAR        0    0    3
+  SOFT          0   98   90
+  ?           103    0    0
+
+══ TABLE 3: NEAREST NEIGHBOURS (Mode C) ══
+
+  # 0(Z= 1) -> # 1 #17 # 9  [H->He,Ar,Ne]
+  # 1(Z= 2) -> #17 # 0 #20  [He->Ar,H,Sc]
+  # 2(Z= 3) -> #10 #18 # 3  [Li->Na,K,Be]
+  # 3(Z= 4) -> # 4 # 5 #18  [Be->B,C,K]
+  # 4(Z= 5) -> # 5 # 6 # 3  [B->C,N,Be]
+  # 5(Z= 6) -> # 4 # 6 # 7  [C->B,N,O]
+  # 6(Z= 7) -> # 7 #30 # 5  [N->O,Ga,C]
+  # 7(Z= 8) -> #30 # 6 # 5  [O->Ga,N,C]
+  # 8(Z= 9) -> # 9 #14 #23  [F->Ne,P,Cr]
+  # 9(Z=10) -> # 8 #17 #14  [Ne->F,Ar,P]
+  #10(Z=11) -> #18 # 3 # 4  [Na->K,Be,B]
+  #11(Z=12) -> #19 #12 #33  [Mg->Ca,Al,Se]
+  #12(Z=13) -> #19 #33 #15  [Al->Ca,Se,S]
+  #13(Z=14) -> #28 #15 #14  [Si->Cu,S,P]
+  #14(Z=15) -> #23 #32 #27  [P->Cr,As,Ni]
+  #15(Z=16) -> #28 #13 #33  [S->Cu,Si,Se]
+  #16(Z=17) -> #25 #26 #20  [Cl->Fe,Co,Sc]
+  #17(Z=18) -> # 1 #34 #25  [Ar->He,Br,Fe]
+  #18(Z=19) -> #10 # 3 # 4  [K->Na,Be,B]
+  #19(Z=20) -> #12 #33 #15  [Ca->Al,Se,S]
+  #20(Z=21) -> #21 #24 #39  [Sc->Ti,Mn,Zr]
+  #21(Z=22) -> #24 #20 #39  [Ti->Mn,Sc,Zr]
+  #22(Z=23) -> #26 #25 #31  [V->Co,Fe,Ge]
+  #23(Z=24) -> #14 #32 #27  [Cr->P,As,Ni]
+  #24(Z=25) -> #21 #39 #40  [Mn->Ti,Zr,Nb]
+  #25(Z=26) -> #22 #26 #21  [Fe->V,Co,Ti]
+  #26(Z=27) -> #22 #25 #34  [Co->V,Fe,Br]
+  #27(Z=28) -> #29 #32 #35  [Ni->Zn,As,Kr]
+  #28(Z=29) -> #15 #13 #33  [Cu->S,Si,Se]
+  #29(Z=30) -> #26 #16 #35  [Zn->Co,Cl,Kr]
+  #30(Z=31) -> # 7 # 6 # 5  [Ga->O,N,C]
+  #31(Z=32) -> #37 #42 #38  [Ge->Sr,Tc,Y]
+  #32(Z=33) -> #23 #27 #14  [As->Cr,Ni,P]
+  #33(Z=34) -> #15 #28 #12  [Se->S,Cu,Al]
+  #34(Z=35) -> #22 #31 #26  [Br->V,Ge,Co]
+  #35(Z=36) -> #29 #34 #26  [Kr->Zn,Br,Co]
+  #36(Z=37) -> #54 #86 #48  [Rb->Cs,Fr,In]
+  #37(Z=38) -> #47 #38 #50  [Sr->Cd,Y,Sb]
+  #38(Z=39) -> #39 #37 #42  [Y->Zr,Sr,Tc]
+  #39(Z=40) -> #38 #42 #40  [Zr->Y,Tc,Nb]
+  #40(Z=41) -> #42 #39 #41  [Nb->Tc,Zr,Mo]
+  #41(Z=42) -> #43 #45 #44  [Mo->Ru,Pd,Rh]
+  #42(Z=43) -> #40 #38 #39  [Tc->Nb,Y,Zr]
+  #43(Z=44) -> #41 #45 #44  [Ru->Mo,Pd,Rh]
+  #44(Z=45) -> #45 #41 #43  [Rh->Pd,Mo,Ru]
+  #45(Z=46) -> #43 #41 #44  [Pd->Ru,Mo,Rh]
+  #46(Z=47) -> #44 #48 #45  [Ag->Rh,In,Pd]
+  #47(Z=48) -> #37 #50 #60  [Cd->Sr,Sb,Pm]
+  #48(Z=49) -> #46 #114 #80  [In->Ag,Mc,Tl]
+  #49(Z=50) -> #57 #59 #61  [Sn->Ce,Nd,Sm]
+  #50(Z=51) -> #60 #58 #59  [Sb->Pm,Pr,Nd]
+  #51(Z=52) -> #77 #73 #81  [Te->Pt,W,Pb]
+  #52(Z=53) -> #58 #50 #59  [I->Pr,Sb,Nd]
+  #53(Z=54) -> #52 #55 #84  [Xe->I,Ba,At]
+  #54(Z=55) -> #36 #86 #80  [Cs->Rb,Fr,Tl]
+  #55(Z=56) -> #68 #67 #64  [Ba->Tm,Er,Tb]
+  #56(Z=57) -> #64 #62 #63  [La->Tb,Eu,Gd]
+  #57(Z=58) -> #61 #59 #62  [Ce->Sm,Nd,Eu]
+  #58(Z=59) -> #59 #50 #60  [Pr->Nd,Sb,Pm]
+  #59(Z=60) -> #58 #57 #49  [Nd->Pr,Ce,Sn]
+  #60(Z=61) -> #50 #58 #59  [Pm->Sb,Pr,Nd]
+  #61(Z=62) -> #57 #62 #49  [Sm->Ce,Eu,Sn]
+  #62(Z=63) -> #61 #56 #57  [Eu->Sm,La,Ce]
+  #63(Z=64) -> #67 #64 #68  [Gd->Er,Tb,Tm]
+  #64(Z=65) -> #68 #63 #56  [Tb->Tm,Gd,La]
+  #65(Z=66) -> #69 #66 #67  [Dy->Yb,Ho,Er]
+  #66(Z=67) -> #67 #65 #63  [Ho->Er,Dy,Gd]
+  #67(Z=68) -> #63 #68 #66  [Er->Gd,Tm,Ho]
+  #68(Z=69) -> #64 #67 #63  [Tm->Tb,Er,Gd]
+  #69(Z=70) -> #65 #66 #84  [Yb->Dy,Ho,At]
+  #70(Z=71) -> #115 #83 #112  [Lu->Lv,Po,Nh]
+  #71(Z=72) -> #72 #78 #74  [Hf->Ta,Au,Re]
+  #72(Z=73) -> #71 #74 #78  [Ta->Hf,Re,Au]
+  #73(Z=74) -> #117 #77 #51  [W->Og,Pt,Te]
+  #74(Z=75) -> #72 #77 #51  [Re->Ta,Pt,Te]
+  #75(Z=76) -> #81 #105 #90  [Os->Pb,Sg,Pa]
+  #76(Z=77) -> #101 #110 #113  [Ir->No,Rg,Fl]
+  #77(Z=78) -> #51 #73 #74  [Pt->Te,W,Re]
+  #78(Z=79) -> #116 #71 #83  [Au->Ts,Hf,Po]
+  #79(Z=80) -> #110 #92 #76  [Hg->Rg,Np,Ir]
+  #80(Z=81) -> #114 #102 #112  [Tl->Mc,Lr,Nh]
+  #81(Z=82) -> #75 #105 #90  [Pb->Os,Sg,Pa]
+  #82(Z=83) -> #116 #78 #83  [Bi->Ts,Au,Po]
+  #83(Z=84) -> #78 #82 #116  [Po->Au,Bi,Ts]
+  #84(Z=85) -> #69 #66 #65  [At->Yb,Ho,Dy]
+  #85(Z=86) -> #94 #87 #95  [Rn->Am,Ra,Cm]
+  #86(Z=87) -> #54 #80 #36  [Fr->Cs,Tl,Rb]
+  #87(Z=88) -> #97 #99 #94  [Ra->Cf,Fm,Am]
+  #88(Z=89) -> #107 #82 #103  [Ac->Hs,Bi,Rf]
+  #89(Z=90) -> #91 #93 #99  [Th->U,Pu,Fm]
+  #90(Z=91) -> #113 #105 #75  [Pa->Fl,Sg,Os]
+  #91(Z=92) -> #93 #99 #89  [U->Pu,Fm,Th]
+  #92(Z=93) -> #110 #100 #101  [Np->Rg,Md,No]
+  #93(Z=94) -> #91 #89 #99  [Pu->U,Th,Fm]
+  #94(Z=95) -> #109 #87 #97  [Am->Ds,Ra,Cf]
+  #95(Z=96) -> #108 #104 #85  [Cm->Mt,Db,Rn]
+  #96(Z=97) -> #98 #109 #100  [Bk->Es,Ds,Md]
+  #97(Z=98) -> #87 #99 #100  [Cf->Ra,Fm,Md]
+  #98(Z=99) -> #96 #101 #100  [Es->Bk,No,Md]
+  #99(Z=100) -> #97 #87 #100  [Fm->Cf,Ra,Md]
+  #100(Z=101) -> #98 #97 #96  [Md->Es,Cf,Bk]
+  #101(Z=102) -> #98 #110 #100  [No->Es,Rg,Md]
+  #102(Z=103) -> #112 #114 #80  [Lr->Nh,Mc,Tl]
+  #103(Z=104) -> #88 #107 #115  [Rf->Ac,Hs,Lv]
+  #104(Z=105) -> #95 #108 #106  [Db->Cm,Mt,Bh]
+  #105(Z=106) -> #75 #81 #108  [Sg->Os,Pb,Mt]
+  #106(Z=107) -> #116 #74 #51  [Bh->Ts,Re,Te]
+  #107(Z=108) -> #88 #104 #103  [Hs->Ac,Db,Rf]
+  #108(Z=109) -> #105 #90 #75  [Mt->Sg,Pa,Os]
+  #109(Z=110) -> #94 #96 #90  [Ds->Am,Bk,Pa]
+  #110(Z=111) -> #101 #92 #98  [Rg->No,Np,Es]
+  #111(Z=112) -> #79 #92 #89  [Cn->Hg,Np,Th]
+  #112(Z=113) -> #115 #102 #70  [Nh->Lv,Lr,Lu]
+  #113(Z=114) -> #90 #75 #105  [Fl->Pa,Os,Sg]
+  #114(Z=115) -> #80 #102 #112  [Mc->Tl,Lr,Nh]
+  #115(Z=116) -> #103 #112 #82  [Lv->Rf,Nh,Bi]
+  #116(Z=117) -> #78 #106 #82  [Ts->Au,Bh,Bi]
+  #117(Z=118) -> #73 #77 #51  [Og->W,Pt,Te]
+
+╔══════════════════════════════════════════════════════════════╗
+║  TABLE 4: REVEAL — Pairing & Magnetic Alignment           ║
+╚══════════════════════════════════════════════════════════════╝
+
+       Z  MdA     MdB     MdC      Mag   Un#  Match?
+  ─────────────────────────────────────────────────────────────
+  H    1  ?       CANCEL  CANCEL   para    1  para NOT open
+  He   2  ?       CANCEL  CANCEL   dia     0  dia→CANCEL ✓
+  Li   3  LOOSE   LOOSE   LOOSE    para    1  para→open ✓
+  Be   4  CANCEL  CANCEL  CANCEL   dia     0  dia→CANCEL ✓
+  B    5  BREACH  BREACH  BREACH   para    1  para→BREACH
+  C    6  BREACH  BREACH  BREACH   para    2  para→BREACH
+  N    7  BREACH  BREACH  BREACH   para    3  para→BREACH
+  O    8  BREACH  BREACH  BREACH   para    2  para→BREACH
+  F    9  CANCEL  CANCEL  CANCEL   para    1  para NOT open
+  Ne  10  CANCEL  CANCEL  CANCEL   dia     0  dia→CANCEL ✓
+  Na  11  LOOSE   LOOSE   LOOSE    para    1  para→open ✓
+  Mg  12  CANCEL  CANCEL  CANCEL   dia     0  dia→CANCEL ✓
+  Al  13  ?       RESIDUAL RESIDUAL  para    1  para→open ✓
+  Si  14  ?       SOFT    RESIDUAL  para    2  para→open ✓
+  P   15  ?       RESIDUAL RESIDUAL  para    3  para→open ✓
+  S   16  ?       SOFT    RESIDUAL  para    2  para→open ✓
+  Cl  17  ?       SOFT    SOFT     para    1  para→open ✓
+  Ar  18  ?       CANCEL  CANCEL   dia     0  dia→CANCEL ✓
+  K   19  LOOSE   LOOSE   LOOSE    para    1  para→open ✓
+  Ca  20  CANCEL  CANCEL  CANCEL   dia     0  dia→CANCEL ✓
+  Sc  21  ?       SOFT    SOFT     para    1  para→open ✓
+  Ti  22  ?       SOFT    SOFT     para    2  para→open ✓
+  V   23  ?       SOFT    SOFT     para    3  para→open ✓
+  Cr  24  ?       SOFT    D-GEAR   para    6  para→open ✓
+  Mn  25  ?       SOFT    SOFT     para    5  para→open ✓
+  Fe  26  ?       SOFT    SOFT     para    4  para→open ✓
+  Co  27  ?       SOFT    SOFT     para    3  para→open ✓
+  Ni  28  ?       SOFT    D-GEAR   para    2  para→open ✓
+  Cu  29  ?       SOFT    D-GEAR   para    1  para→open ✓
+  Zn  30  ?       SOFT    SOFT     dia     0  dia NOT cancel
+  Ga  31  ?       SOFT    RESIDUAL  para    1  para→open ✓
+  Ge  32  ?       SOFT    SOFT     para    2  para→open ✓
+  As  33  ?       SOFT    RESIDUAL  para    3  para→open ✓
+  Se  34  ?       SOFT    RESIDUAL  para    2  para→open ✓
+  Br  35  ?       SOFT    SOFT     para    1  para→open ✓
+  Kr  36  ?       SOFT    SOFT     dia     0  dia NOT cancel
+  Rb  37  LOOSE   LOOSE   LOOSE    para    1  para→open ✓
+  Sr  38  ?       SOFT    SOFT     dia     0  dia NOT cancel
+  Y   39  ?       SOFT    SOFT     para    1  para→open ✓
+  Zr  40  ?       SOFT    SOFT     para    2  para→open ✓
+  Nb  41  ?       SOFT    SOFT     para    5  para→open ✓
+  Mo  42  ?       SOFT    SOFT     para    6  para→open ✓
+  Tc  43  ?       SOFT    SOFT     para    5  para→open ✓
+  Ru  44  ?       SOFT    SOFT     para    4  para→open ✓
+  Rh  45  ?       SOFT    SOFT     para    3  para→open ✓
+  Pd  46  ?       SOFT    SOFT     dia     0  dia NOT cancel
+  Ag  47  ?       SOFT    SOFT     para    1  para→open ✓
+  Cd  48  ?       SOFT    SOFT     dia     0  dia NOT cancel
+  In  49  ?       SOFT    SOFT     para    1  para→open ✓
+  Sn  50  ?       SOFT    SOFT     para    2  para→open ✓
+  Sb  51  ?       SOFT    SOFT     para    3  para→open ✓
+  Te  52  ?       SOFT    SOFT     para    2  para→open ✓
+  I   53  ?       SOFT    SOFT     para    1  para→open ✓
+  Xe  54  ?       SOFT    SOFT     dia     0  dia NOT cancel
+  Cs  55  LOOSE   LOOSE   LOOSE    para    1  para→open ✓
+  Ba  56  ?       SOFT    SOFT     dia     0  dia NOT cancel
+  La  57  ?       SOFT    SOFT     para    1  para→open ✓
+  Ce  58  ?       SOFT    SOFT     para    2  para→open ✓
+  Pr  59  ?       SOFT    SOFT     para    3  para→open ✓
+  Nd  60  ?       SOFT    SOFT     para    4  para→open ✓
+  Pm  61  ?       SOFT    SOFT     para    5  para→open ✓
+  Sm  62  ?       SOFT    SOFT     para    6  para→open ✓
+  Eu  63  ?       SOFT    SOFT     para    7  para→open ✓
+  Gd  64  ?       SOFT    SOFT     para    8  para→open ✓
+  Tb  65  ?       SOFT    SOFT     para    5  para→open ✓
+  Dy  66  ?       SOFT    SOFT     para    4  para→open ✓
+  Ho  67  ?       SOFT    SOFT     para    3  para→open ✓
+  Er  68  ?       SOFT    SOFT     para    2  para→open ✓
+  Tm  69  ?       SOFT    SOFT     para    1  para→open ✓
+  Yb  70  ?       SOFT    SOFT     dia     0  dia NOT cancel
+  Lu  71  ?       SOFT    SOFT     para    1  para→open ✓
+  Hf  72  ?       SOFT    SOFT     para    2  para→open ✓
+  Ta  73  ?       SOFT    SOFT     para    3  para→open ✓
+  W   74  ?       SOFT    SOFT     para    4  para→open ✓
+  Re  75  ?       SOFT    SOFT     para    5  para→open ✓
+  Os  76  ?       SOFT    SOFT     para    4  para→open ✓
+  Ir  77  ?       SOFT    SOFT     para    3  para→open ✓
+  Pt  78  ?       SOFT    SOFT     para    2  para→open ✓
+  Au  79  ?       SOFT    SOFT     para    1  para→open ✓
+  Hg  80  ?       SOFT    SOFT     dia     0  dia NOT cancel
+  Tl  81  ?       SOFT    SOFT     para    1  para→open ✓
+  Pb  82  ?       SOFT    SOFT     para    2  para→open ✓
+  Bi  83  ?       SOFT    SOFT     para    3  para→open ✓
+  Po  84  ?       SOFT    SOFT     para    2  para→open ✓
+  At  85  ?       SOFT    SOFT     para    1  para→open ✓
+  Rn  86  ?       SOFT    SOFT     dia     0  dia NOT cancel
+  Fr  87  LOOSE   LOOSE   LOOSE    para    1  para→open ✓
+  Ra  88  ?       SOFT    SOFT     dia     0  dia NOT cancel
+  Ac  89  ?       SOFT    SOFT     para    1  para→open ✓
+  Th  90  ?       SOFT    SOFT     para    2  para→open ✓
+  Pa  91  ?       SOFT    SOFT     para    3  para→open ✓
+  U   92  ?       SOFT    SOFT     para    4  para→open ✓
+  Np  93  ?       SOFT    SOFT     para    5  para→open ✓
+  Pu  94  ?       SOFT    SOFT     para    6  para→open ✓
+  Am  95  ?       SOFT    SOFT     para    7  para→open ✓
+  Cm  96  ?       SOFT    SOFT     para    8  para→open ✓
+  Bk  97  ?       SOFT    SOFT     para    5  para→open ✓
+  Cf  98  ?       SOFT    SOFT     para    4  para→open ✓
+  Es  99  ?       SOFT    SOFT     para    3  para→open ✓
+  Fm  100  ?       SOFT    SOFT     para    2  para→open ✓
+  Md  101  ?       SOFT    SOFT     para    1  para→open ✓
+  No  102  ?       SOFT    SOFT     dia     0  dia NOT cancel
+  Lr  103  ?       SOFT    SOFT     para    1  para→open ✓
+  Rf  104  ?       SOFT    SOFT     para    2  para→open ✓
+  Db  105  ?       SOFT    SOFT     para    3  para→open ✓
+  Sg  106  ?       SOFT    SOFT     para    4  para→open ✓
+  Bh  107  ?       SOFT    SOFT     para    5  para→open ✓
+  Hs  108  ?       SOFT    SOFT     para    4  para→open ✓
+  Mt  109  ?       SOFT    SOFT     para    3  para→open ✓
+  Ds  110  ?       SOFT    SOFT     para    2  para→open ✓
+  Rg  111  ?       SOFT    SOFT     para    1  para→open ✓
+  Cn  112  ?       SOFT    SOFT     dia     0  dia NOT cancel
+  Nh  113  ?       SOFT    SOFT     para    1  para→open ✓
+  Fl  114  ?       SOFT    SOFT     para    2  para→open ✓
+  Mc  115  ?       SOFT    SOFT     para    3  para→open ✓
+  Lv  116  ?       SOFT    SOFT     para    2  para→open ✓
+  Ts  117  ?       SOFT    SOFT     para    1  para→open ✓
+  Og  118  ?       SOFT    SOFT     dia     0  dia NOT cancel
+
+══ TABLE 5: TRITON GRAMMAR EFFECT ══
+
+       Z   A  n_d n_t  f_t%     RWI    MGE  Mag    MdB→MdC
+  H    1   1    0  -1    0%  0.0000 0.0000  para   CANCEL
+  He   2   4    0   0    0%  0.0000 0.0000  dia    CANCEL
+  Li   3   7    0   1  100%  0.6126 1.2252  para   LOOSE
+  Be   4   9    1   1   50%  0.1711 0.2567  dia    CANCEL
+  B    5  11    2   1   33%  0.1467 0.1957  para   BREACH
+  C    6  12    4   0    0%  0.1707 0.1707  para   BREACH
+  N    7  14    5   0    0%  0.1348 0.1348  para   BREACH
+  O    8  16    6   0    0%  0.1299 0.1299  para   BREACH
+  F    9  19    6   1   14%  0.0115 0.0131  para   CANCEL
+  Ne  10  20    8   0    0%  0.0086 0.0086  dia    CANCEL
+  Na  11  23    8   1   11%  0.3850 0.4278  para   LOOSE
+  Mg  12  24   10   0    0%  0.0642 0.0642  dia    CANCEL
+  Al  13  27   10   1    9%  0.0383 0.0418  para   RESIDUAL
+  Si  14  28   12   0    0%  0.0201 0.0201  para   SOFT -> RESIDUAL
+  P   15  31   12   1    8%  0.0114 0.0123  para   RESIDUAL
+  S   16  32   14   0    0%  0.0258 0.0258  para   SOFT -> RESIDUAL
+  Cl  17  35   14   1    7%  0.0015 0.0016  para   SOFT
+  Ar  18  40   12   4   25%  0.0009 0.0012  dia    CANCEL
+  K   19  39   16   1    6%  0.3283 0.3476  para   LOOSE
+  Ca  20  40   18   0    0%  0.0435 0.0435  dia    CANCEL
+  Sc  21  45   16   3   16%  0.0000 0.0000  para   SOFT
+  Ti  22  48   16   4   20%  0.0000 0.0001  para   SOFT
+  V   23  51   16   5   24%  0.0010 0.0013  para   SOFT
+  Cr  24  52   18   4   18%  0.0102 0.0120  para   SOFT -> D-GEAR
+  Mn  25  55   18   5   22%  0.0001 0.0001  para   SOFT
+  Fe  26  56   20   4   17%  0.0009 0.0011  para   SOFT
+  Co  27  59   20   5   20%  0.0015 0.0018  para   SOFT
+  Ni  28  58   24   2    8%  0.0063 0.0068  para   SOFT -> D-GEAR
+  Cu  29  63   22   5   19%  0.0205 0.0242  para   SOFT -> D-GEAR
+  Zn  30  64   24   4   14%  0.0032 0.0036  dia    SOFT
+  Ga  31  69   22   7   24%  0.1024 0.1271  para   SOFT -> RESIDUAL
+  Ge  32  74   20  10   33%  0.0006 0.0008  para   SOFT
+  As  33  75   22   9   29%  0.0072 0.0093  para   SOFT -> RESIDUAL
+  Se  34  80   20  12   38%  0.0242 0.0332  para   SOFT -> RESIDUAL
+  Br  35  79   24   9   27%  0.0013 0.0016  para   SOFT
+  Kr  36  84   22  12   35%  0.0028 0.0038  dia    SOFT
+  Rb  37  85   24  11   31%  0.0000 0.0000  para   LOOSE
+  Sr  38  88   24  12   33%  0.0000 0.0000  dia    SOFT
+  Y   39  89   26  11   30%  0.0000 0.0000  para   SOFT
+  Zr  40  90   28  10   26%  0.0000 0.0000  para   SOFT
+  Nb  41  93   28  11   28%  0.0000 0.0000  para   SOFT
+  Mo  42  96   28  12   30%  0.0000 0.0000  para   SOFT
+  Tc  43  98   29  12   29%  0.0000 0.0000  para   SOFT
+  Ru  44 101   29  13   31%  0.0000 0.0000  para   SOFT
+  Rh  45 103   30  13   30%  0.0000 0.0000  para   SOFT
+  Pd  46 106   30  14   32%  0.0000 0.0000  dia    SOFT
+  Ag  47 107   32  13   29%  0.0000 0.0000  para   SOFT
+  Cd  48 112   30  16   35%  0.0000 0.0000  dia    SOFT
+  In  49 115   30  17   36%  0.0000 0.0000  para   SOFT
+  Sn  50 120   28  20   42%  0.0000 0.0000  para   SOFT
+  Sb  51 121   30  19   39%  0.0000 0.0000  para   SOFT
+  Te  52 130   24  26   52%  0.0000 0.0000  para   SOFT
+  I   53 127   30  21   41%  0.0000 0.0000  para   SOFT
+  Xe  54 131   29  23   44%  0.0000 0.0000  dia    SOFT
+  Cs  55 133   30  23   43%  0.0000 0.0000  para   LOOSE
+  Ba  56 137   29  25   46%  0.0000 0.0000  dia    SOFT
+  La  57 139   30  25   45%  0.0000 0.0000  para   SOFT
+  Ce  58 140   32  24   43%  0.0000 0.0000  para   SOFT
+  Pr  59 141   34  23   40%  0.0000 0.0000  para   SOFT
+  Nd  60 144   34  24   41%  0.0000 0.0000  para   SOFT
+  Pm  61 145   36  23   39%  0.0000 0.0000  para   SOFT
+  Sm  62 150   34  26   43%  0.0000 0.0000  para   SOFT
+  Eu  63 153   34  27   44%  0.0000 0.0000  para   SOFT
+  Gd  64 157   33  29   47%  0.0000 0.0000  para   SOFT
+  Tb  65 159   34  29   46%  0.0000 0.0000  para   SOFT
+  Dy  66 163   33  31   48%  0.0000 0.0000  para   SOFT
+  Ho  67 165   34  31   48%  0.0000 0.0000  para   SOFT
+  Er  68 167   35  31   47%  0.0000 0.0000  para   SOFT
+  Tm  69 169   36  31   46%  0.0000 0.0000  para   SOFT
+  Yb  70 173   35  33   49%  0.0000 0.0000  dia    SOFT
+  Lu  71 175   36  33   48%  0.0000 0.0000  para   SOFT
+  Hf  72 178   36  34   49%  0.0000 0.0000  para   SOFT
+  Ta  73 181   36  35   49%  0.0000 0.0000  para   SOFT
+  W   74 184   36  36   50%  0.0000 0.0000  para   SOFT
+  Re  75 187   36  37   51%  0.0000 0.0000  para   SOFT
+  Os  76 192   34  40   54%  0.0000 0.0000  para   SOFT
+  Ir  77 193   36  39   52%  0.0000 0.0000  para   SOFT
+  Pt  78 195   37  39   51%  0.0000 0.0000  para   SOFT
+  Au  79 197   38  39   51%  0.0000 0.0000  para   SOFT
+  Hg  80 201   37  41   53%  0.0000 0.0000  dia    SOFT
+  Tl  81 204   37  42   53%  0.0000 0.0000  para   SOFT
+  Pb  82 207   37  43   54%  0.0000 0.0000  para   SOFT
+  Bi  83 209   38  43   53%  0.0000 0.0000  para   SOFT
+  Po  84 209   41  41   50%  0.0000 0.0000  para   SOFT
+  At  85 210   43  40   48%  0.0000 0.0000  para   SOFT
+  Rn  86 222   34  50   60%  0.0000 0.0000  dia    SOFT
+  Fr  87 223   36  49   58%  0.0000 0.0000  para   LOOSE
+  Ra  88 226   36  50   58%  0.0000 0.0000  dia    SOFT
+  Ac  89 227   38  49   56%  0.0000 0.0000  para   SOFT
+  Th  90 232   36  52   59%  0.0000 0.0000  para   SOFT
+  Pa  91 231   40  49   55%  0.0000 0.0000  para   SOFT
+  U   92 238   36  54   60%  0.0000 0.0000  para   SOFT
+  Np  93 237   40  51   56%  0.0000 0.0000  para   SOFT
+  Pu  94 244   36  56   61%  0.0000 0.0000  para   SOFT
+  Am  95 243   40  53   57%  0.0000 0.0000  para   SOFT
+  Cm  96 247   39  55   59%  0.0000 0.0000  para   SOFT
+  Bk  97 247   42  53   56%  0.0000 0.0000  para   SOFT
+  Cf  98 251   41  55   57%  0.0000 0.0000  para   SOFT
+  Es  99 252   43  54   56%  0.0000 0.0000  para   SOFT
+  Fm  100 257   41  57   58%  0.0000 0.0000  para   SOFT
+  Md  101 258   43  56   57%  0.0000 0.0000  para   SOFT
+  No  102 259   45  55   55%  0.0000 0.0000  dia    SOFT
+  Lr  103 266   41  60   59%  0.0000 0.0000  para   SOFT
+  Rf  104 267   43  59   58%  0.0000 0.0000  para   SOFT
+  Db  105 268   45  58   56%  0.0000 0.0000  para   SOFT
+  Sg  106 269   47  57   55%  0.0000 0.0000  para   SOFT
+  Bh  107 270   49  56   53%  0.0000 0.0000  para   SOFT
+  Hs  108 277   45  61   58%  0.0000 0.0000  para   SOFT
+  Mt  109 278   47  60   56%  0.0000 0.0000  para   SOFT
+  Ds  110 281   47  61   56%  0.0000 0.0000  para   SOFT
+  Rg  111 282   49  60   55%  0.0000 0.0000  para   SOFT
+  Cn  112 285   49  61   55%  0.0000 0.0000  dia    SOFT
+  Nh  113 286   51  60   54%  0.0000 0.0000  para   SOFT
+  Fl  114 289   51  61   54%  0.0000 0.0000  para   SOFT
+  Mc  115 290   53  60   53%  0.0000 0.0000  para   SOFT
+  Lv  116 293   53  61   54%  0.0000 0.0000  para   SOFT
+  Ts  117 294   55  60   52%  0.0000 0.0000  para   SOFT
+  Og  118 294   58  58   50%  0.0000 0.0000  dia    SOFT
+
+══ TABLE 6: Cu/Ni/Zn SPECIAL TEST ══
+
+  Ni(Z=28): NN by mode:
+    A[Rf,Rh,Pd] B[Rf,Rh,Pd] C[Zn,As,Kr]
+  Cu(Z=29): NN by mode:
+    A[Lu,Nh,Lv] B[Lu,Nh,Lv] C[S,Si,Se]
+  Zn(Z=30): NN by mode:
+    A[Ge,Si,Ti] B[Ge,Ti,Zr] C[Co,Cl,Kr]
+
+  Cu rho=0.000 vs Ni rho=0.000 vs Zn rho=0.000
+  Cu clusters with open/d-block (Mode C), distinctive from Ni.
+
+══ TABLE 7: WAVELENGTH COUPLING SCAN ══
+
+       Z   E_exc  lam(nm)    lam/a0 lam*Z/a0  lam/kH*re  MdB    
+  H    1   10.20    121.6    2297.0   2297.0   314774.6  CANCEL 
+  He   2   19.82     62.6    1182.1   2364.2   161993.0  CANCEL 
+  Li   3    1.85    670.2   12664.7  37994.0  1735514.1  LOOSE  
+  Be   4    2.73    454.2    8582.3  34329.1  1176081.0  CANCEL 
+  B    5    3.58    346.3    6544.6  32722.9   896843.9  BREACH 
+  C    6    1.26    984.0   18594.9 111569.6  2548175.5  BREACH 
+  N    7    2.38    520.9    9844.4  68910.6  1349034.1  BREACH 
+  O    8    1.97    629.4   11893.2  95145.7  1629797.5  BREACH 
+  F    9   12.70     97.6    1844.9  16603.7   252811.1  CANCEL 
+  Ne  10   16.62     74.6    1409.7  14097.2   193183.0  CANCEL 
+  Na  11    2.10    590.4   11157.0 122726.6  1528905.3  LOOSE  
+  Mg  12    2.71    457.5    8645.6 103747.4  1184760.6  CANCEL 
+  Al  13    3.14    394.9    7461.7  97001.6  1022516.3  RESIDUAL
+  Si  14    0.78   1589.5   30038.0 420531.6  4116283.5  SOFT   
+  P   15    1.41    879.3   16616.8 249251.3  2277093.0  RESIDUAL
+  S   16    1.15   1078.1   20373.6 325977.3  2791914.0  SOFT   
+  Ar  18   11.55    107.3    2028.5  36513.7   277982.8  CANCEL 
+  K   19    1.61    770.1   14552.6 276498.6  1994224.3  LOOSE  
+  Ca  20    1.88    659.5   12462.6 249251.3  1707819.7  CANCEL 
+
+══ CLUSTER RECOVERY BY MODE ══
+
+  Group           MdA    MdB    MdC
+  Ferro(Fe/Co/Ni) 0/6   0/6   2/6
+  d-block(10)     4/90  4/90  15/90
+
+══════════════════════════════════════════════════════════════
+  B+++ FINDINGS
+
+  1. Pairing visibility:
+     Diamagnetic→CANCEL: 6/20 (30%)
+     Paramagnetic→open:  92/98 (94%)
+     Ferromagnetic→gear: 0/0 (0%)
+
+  2. Excitation data role:
+     Mode A→B changes: 103/118 atoms
+     Mode B→C changes: 8/118 atoms (grammar effect)
+
+  3. Nuclear grammar effect:
+     8 atoms reclassified by grammar. Triton modulates gear.
+
+  4. Ferro cluster (Fe/Co/Ni) Mode C: 2/6 mutual links.
+     d-block cluster Mode C: 15/90 mutual links.
+
+  5. Stage C targets:
+     GRANTED: derive loose outer residual wake
+     GRANTED: derive cube cancellation (noble rigidity)
+     EXPLORE: derive triton asymmetry modulation
+
+  6. Failure cases:
+     FAIL: diamagnetic→CANCEL rate too low
+     Zn(Z=30): diamagnetic but classified SOFT
+     Kr(Z=36): diamagnetic but classified SOFT
+     Sr(Z=38): diamagnetic but classified SOFT
+     Pd(Z=46): diamagnetic but classified SOFT
+     Cd(Z=48): diamagnetic but classified SOFT
+     Xe(Z=54): diamagnetic but classified SOFT
+     Ba(Z=56): diamagnetic but classified SOFT
+     Yb(Z=70): diamagnetic but classified SOFT
+     Hg(Z=80): diamagnetic but classified SOFT
+     Rn(Z=86): diamagnetic but classified SOFT
+     Ra(Z=88): diamagnetic but classified SOFT
+     No(Z=102): diamagnetic but classified SOFT
+     Cn(Z=112): diamagnetic but classified SOFT
+     Og(Z=118): diamagnetic but classified SOFT

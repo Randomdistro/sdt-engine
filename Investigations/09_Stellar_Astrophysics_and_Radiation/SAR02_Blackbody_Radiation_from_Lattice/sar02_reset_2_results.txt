@@ -1,0 +1,25 @@
+﻿SAR02 blank-slate run 2 (registered in the tool header, 2026-10-08; amendment after run 1)
+===========================================================================================
+
+R =   3200:
+   mean occupation 0.1: <n> = 0.10000000 ; 1/(e^x - 1) = 0.10018743 ; dev = 1.871e-03 ; dev*R = 5.9864 ; sum P = 0.999999999999 ; validation met
+   mean occupation 1.0: <n> = 1.00000000 ; 1/(e^x - 1) = 1.00046888 ; dev = 4.687e-04 ; dev*R = 1.4997 ; sum P = 1.000000000011 ; validation met
+   mean occupation 5.0: <n> = 5.00000000 ; 1/(e^x - 1) = 5.00171928 ; dev = 3.437e-04 ; dev*R = 1.1000 ; sum P = 0.999999999994 ; validation met
+R =  12800:
+   mean occupation 0.1: <n> = 0.10000000 ; 1/(e^x - 1) = 0.10004687 ; dev = 4.685e-04 ; dev*R = 5.9966 ; sum P = 0.999999999979 ; validation met
+   mean occupation 1.0: <n> = 1.00000000 ; 1/(e^x - 1) = 1.00011720 ; dev = 1.172e-04 ; dev*R = 1.4999 ; sum P = 0.999999999997 ; validation met
+   mean occupation 5.0: <n> = 5.00000000 ; 1/(e^x - 1) = 5.00042972 ; dev = 8.594e-05 ; dev*R = 1.1000 ; sum P = 0.999999999983 ; validation met
+R =  51200:
+   mean occupation 0.1: <n> = 0.10000000 ; 1/(e^x - 1) = 0.10001172 ; dev = 1.172e-04 ; dev*R = 5.9991 ; sum P = 1.000000000033 ; validation met
+   mean occupation 1.0: <n> = 1.00000000 ; 1/(e^x - 1) = 1.00002930 ; dev = 2.930e-05 ; dev*R = 1.5000 ; sum P = 1.000000000212 ; validation met
+   mean occupation 5.0: <n> = 5.00000000 ; 1/(e^x - 1) = 5.00010742 ; dev = 2.148e-05 ; dev*R = 1.1000 ; sum P = 0.999999999363 ; validation met
+R = 204800:
+   mean occupation 0.1: <n> = 0.10000000 ; 1/(e^x - 1) = 0.10000293 ; dev = 2.930e-05 ; dev*R = 5.9998 ; sum P = 0.999999999054 ; validation met
+   mean occupation 1.0: <n> = 1.00000000 ; 1/(e^x - 1) = 1.00000732 ; dev = 7.325e-06 ; dev*R = 1.5002 ; sum P = 0.999999999813 ; validation met
+   mean occupation 5.0: <n> = 5.00000001 ; 1/(e^x - 1) = 5.00002685 ; dev = 5.368e-06 ; dev*R = 1.0993 ; sum P = 1.000000001486 ; validation met
+
+validation (sum P = 1, <n> = M/R): met
+dev*R over R = 12800, 51200, 204800 for mean occupation index 0: 5.9966 5.9991 5.9998 (spread 0.05%)
+dev*R over R = 12800, 51200, 204800 for mean occupation index 1: 1.4999 1.5000 1.5002 (spread 0.02%)
+dev*R over R = 12800, 51200, 204800 for mean occupation index 2: 1.1000 1.1000 1.0993 (spread 0.06%)
+RC3 (deviation <= 1e-3 at the largest R, decreasing in R): met ; dev*R constant to 10%: yes (O(1/R))

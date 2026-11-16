@@ -1,5 +1,7 @@
 # CR14 — Assessment: Ionisation Balance and the Clearing Rung
 
+> **Re-adjudicated 2026-10-03 (origin rule, gateway §3.8):** R2/R4 stand (named inputs); R3 [DEGENERATE] → **non-discriminating (log-insensitive)**, vocabulary only. See `Investigations/ADJUDICATION_REGISTER.md` §R-2026-10-03. Original text below is unchanged.
+
 > **⚠ PARTIAL WITHDRAWAL 2026-07-30 (same day), by `CR15_Ionisation_Trilemma_and_the_Cold_Dense_Past`.**
 > **Branch E is WITHDRAWN.** Branch B assumed `n_b = const` on the reasoning "static space,
 > therefore no dilution". That is the wrong density law: Prop 13 of the SDT cosmological-sector

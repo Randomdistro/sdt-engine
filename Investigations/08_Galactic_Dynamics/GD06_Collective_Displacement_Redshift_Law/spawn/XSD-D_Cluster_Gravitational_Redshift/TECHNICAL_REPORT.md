@@ -1,5 +1,7 @@
 # XSD-D — Technical Report (RUN 1, 2026-07-13)
 
+> **Re-adjudicated 2026-10-03 (origin rule, gateway §3.8):** "DEGENERATE-with-GR" → **CONVERGENT**, not yet discriminating. See `Investigations/ADJUDICATION_REGISTER.md` §R-2026-10-03. Original text below is unchanged.
+
 **Node:** the 30-order validation — cluster gravitational redshift.
 
 ## Result — CONSISTENT with the measurement
@@ -13,7 +15,7 @@ The prediction equals ϟ/r, which is *also* the GR gravitational-redshift value.
 
 **Where a discriminating test would live:** the **dense branch** (z_d → O(1)), i.e. neutron-star surfaces and cluster *cores* if any reach saturation — where occlusion's κ=1−e^{−τ} saturation departs from GR's linear potential. And the **σ_occ geometrization** (XSD-B): if the transparency turns out non-geometric, the whole ladder is a mass-free re-description of GR, not new physics.
 
-**Class:** Prompt completion **B** · Physics class **CONVERGENCE / DEGENERATE-with-GR** · cross-scale **CONSISTENT (not yet discriminating)**. XSD-D2 (break-scale) NOT triggered — no overshoot.
+**Class:** Prompt completion **B** · Physics class **CONVERGENCE / SHARED-INPUT-with-GR** · cross-scale **CONSISTENT (not yet discriminating)**. XSD-D2 (break-scale) NOT triggered — no overshoot.
 
 **Note (5th-gen lead):** the same ϟ/r extended to cosmological Θ should meet the CMB depth (z=1099) and the Hubble emission/propagation split — the honest next scale up, if XSD-B ever geometrizes σ_occ.
 

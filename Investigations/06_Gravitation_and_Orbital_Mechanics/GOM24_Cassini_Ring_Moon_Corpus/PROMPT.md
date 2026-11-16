@@ -261,3 +261,15 @@ surface density in-chain; presenting accretion-degenerate results as NATIVE; any
 
 **Dual verdict reminder:** prompt completion and physics class are reported separately, and the
 per-phase classes are never aggregated into a single headline.
+
+---
+
+## Audit correction 2026-10-05 (data / provenance)
+
+**Finding:** The test needs PDS Cassini ISS frames of the Keeler and Encke gaps, which are not in the repo, and gate G3b is described with a banned modifier instead of a numeric trigger.
+
+**Correction:** Add the PDS frames with provenance to Datasets and state G3b as a number.
+
+**Status:** OWED — model, data or derivation missing; requirement and tolerance recorded, nothing run.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

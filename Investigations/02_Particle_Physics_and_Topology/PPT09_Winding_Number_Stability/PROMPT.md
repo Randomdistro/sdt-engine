@@ -8,11 +8,11 @@
 
 ## ⓪ The Golden Rule — five questions (answer before Phase 0)
 
-1. **What don't we know?** — [PPT09] PPT09: Winding Number Stability and Reconnection Dynamics: *(unfilled by the 2026-06-27 bulk template upgrade — write the single measurable gap before the next run)*
+1. **What don't we know?** — [PPT09] PPT09: Winding Number Stability and Reconnection Dynamics: **Measurable gap (written 2026-10-05 in the audit correction pass, from this prompt's own content; the 2026-06-27 template left it unfilled):** Why do W=2 vortices reconnect while W=1 and the W=3 trefoil persist: what reconnection energy curve, barrier, dissipation law and lifetimes does a full wake/boundary occlusion calculation give for W=2, W=3 and higher windings?
 2. **Why does it matter?** — Stack position / downstream blockers (see `INVESTIGATION_STACK.md`).
 3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
 4. **What would prove us wrong?** — §⑧ falsification tests with numeric triggers.
-5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN).
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN).
 
 ## Investigation Prompt
 
@@ -237,7 +237,7 @@ Prove (2,3) cannot decay via any continuous deformation:
 ```markdown
 ## Pre-Run Commitments — PPT09
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: [0 or list each param — max per §⑤]
 - Engine namespaces: law_VI winding, bridge::k_*, PPT01 equilibrium
 - Phase thresholds (committed before run): 5%
@@ -251,7 +251,7 @@ Prove (2,3) cannot decay via any continuous deformation:
 | Phase 0 sanity check fails | Fix units/engine refs; verify `laws.hpp` symbols | STOP — report blocker | Fit to target |
 | Native mechanism off > committed % | Alternative route in §④; document ADJ-### | **OPEN** or **KILL** hypothesis | RETRO-PASS |
 | `z ≥ 1` in closure formula | Weak-field break (CR10); piecewise or exponential | **OPEN** that regime | Ignore break |
-| Rivals match but SDT doesn't beat | Label **DEGENERATE** honestly | — | Claim Class A |
+| A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 | Upstream dependency missing (FLM10, etc.) | **DEFER** phase; cite dependency ID | — | Fake PASS |
 
 ### Allowed adjustments
@@ -266,3 +266,15 @@ Prove (2,3) cannot decay via any continuous deformation:
 ---
 
 *PPT09 · upgraded 2026-06-27 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*
+
+---
+
+## Audit correction 2026-10-05 (record / status)
+
+**Finding:** The same file carries a "RETRACTED — FABRICATED VERDICT" banner and a RESOLVED / Class A / PASS block, and its question is unfilled.
+
+**Correction:** Strike the superseded block in place with a dated note and record the actual outcome (classification COMPUTED, stability OPEN).
+
+**Status:** ANNOTATED — label, status or tally corrected in the record; no re-score of earlier runs.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

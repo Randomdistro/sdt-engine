@@ -1,0 +1,32 @@
+
+== V1 known answers ==
+[PASS] V1   the record parser returns the run sets {1} and {2, 3}
+[PASS] V1   the classifier returns {instrument defect, numerical} for 'an instrument defect from cancellation'
+[PASS] V1   the classifier returns {registration error, registered statement rejected}
+[PASS] V1   SHA-256('abc') is ba7816bf...
+
+== T1 preservation ==
+       chapters with run outputs: 63 ; run outputs: 117 ; failed runs: 48
+[PASS] T1   at least 110 run outputs are kept
+[PASS] T1   at least 40 failed runs are kept
+[PASS] T1   every failed run is listed in FAILED_RUN_MANIFEST.csv with its digest
+       chapters in which two run outputs share a digest: ['ch59']
+RECORDED REJECTION (run 1 criterion kept): Chapter 59 run 2 repeats run 1 after a comment-only edit, by design
+[PASS] T1   the registered statement (no two run outputs of one chapter share a digest) is rejected: shared in ['ch59']
+[PASS] T1   POST-RUN clause: the only chapter with identical run outputs is ch59 (documented in its chapter)
+
+== T2 every failed run is accounted for ==
+       records found: 52 ; failed runs without a record: []
+[PASS] T2   every failed run is named by a Record of run K section (none unrecorded)
+
+== T3 the last run of each chapter is the run of record ==
+       chapters: 63 ; last run without ALL CRITERIA MET: [('ch63', 3)]
+[PASS] T3   the last run of at least 98 per cent of the chapters says ALL CRITERIA MET
+
+== T4 causes recorded ==
+       records: 52 ; by class: {'instrument defect': 23, 'numerical': 25, 'registration error': 26, 'registered statement rejected': 12, 'launcher failure': 1} ; unclassified: 0 ; only 'registered statement rejected': 2
+       failed runs per chapter (most): [('ch19', 3), ('ch08', 2), ('ch35', 2), ('ch40', 2), ('ch60', 2), ('ch61', 2), ('ch63', 2), ('ch03', 1), ('ch04', 1), ('ch06', 1)]
+[PASS] T4   at least 90 per cent of the records carry at least one class
+[PASS] T4   records with an instrument defect or a registration error outnumber records classified only as a rejected statement
+
+ALL CRITERIA MET: 0 failure(s)

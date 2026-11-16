@@ -1,0 +1,48 @@
+============================================================================
+  QM05 — Bell/EPR & the Throughpole   (seed 11, N=1e6/cell, thresholds in RUN_LOG)
+============================================================================
+  statistical noise: sigma_E = 0.0010, sigma_marginal = 0.0005
+
+  PHASE 1 — honest LOCAL baselines (these ARE derivations; Bell caps them at 2)
+    L1 deterministic sign readout (shared handedness)   S = +2.0000
+    L2 best deterministic strategy (exhaustive 16)      S = +2.0000
+    L3 stochastic Malus readout (independent wings)     S = +1.4148
+    gate P1 (all local S <= 2.004): PASS
+    ceiling saturated by L1/L2 at 2.000; shortfall to QM = 0.828
+
+  PHASE 2 — THROUGHPOLE, sampled outcomes  [CONSTRUCTION: cos^2 weighting IMPORTED]
+    S = +2.8286   (QM/Tsirelson 2*sqrt(2) = 2.8284)
+    no-signalling gate (marginal deviation from 0.500, threshold 4*sigma = 0.0020):
+      (a=  0.0, b= 22.5)  |P(A+)-.5|=0.0004  |P(B+)-.5|=0.0004
+      (a=  0.0, b= 67.5)  |P(A+)-.5|=0.0004  |P(B+)-.5|=0.0004
+      (a= 45.0, b= 22.5)  |P(A+)-.5|=0.0006  |P(B+)-.5|=0.0011
+      (a= 45.0, b= 67.5)  |P(A+)-.5|=0.0005  |P(B+)-.5|=0.0001
+    worst marginal deviation = 0.0011  ->  no-signalling HOLDS
+
+  PHASE 3 — coupling sweep s (is no-signalling structural or fine-tuned?)
+      s      S(s)      worst marginal dev
+    0.00   +2.0006        0.0008
+    0.25   +2.2091        0.0009
+    0.50   +2.4168        0.0009
+    0.75   +2.6223        0.0005
+    1.00   +2.8299        0.0008
+    -> if dev stays < 0.002 at every s, NS is STRUCTURAL for marginal-preserving
+       projection rules (prompt Q4), not a tuned coincidence.
+
+  PHASE 4 — pre-registered Tsirelson probe: different joint rule (sign-copy)
+    S = +4.0000   worst marginal dev = 0.0007   (algebraic max = 4)
+    -> a joint (non-local) readout with intact marginals is NOT Tsirelson-bounded
+       per se. What stops the throughpole at exactly 2.828 is the cos^2 weighting
+       itself — i.e. the SAME residence/Born law QM04 and QM07 owe. One debt.
+
+  VERDICT (as pre-committed):
+  * LOCAL: caps at 2.0000 exactly (saturated) — genuine, Bell-guaranteed. KILLED as
+    a route to 2.828; SDT strictly-local predicts sub-quantum correlations (falsified
+    by loophole-free experiments, S~2.4).
+  * THROUGHPOLE: reaches 2.8284 with measured no-signalling, at every coupling s —
+    but this is CONSTRUCTION: the cos^2 joint weighting is imported, not derived.
+  * NEW (probe): joint readout alone can reach S=4 (PR-box) with marginals intact,
+    so Tsirelson is NOT structural to the throughpole channel. The entire QM-match
+    lives in the cos^2 weighting. The Bell debt REDUCES to the Born/residence debt.
+  * QM05 overall: D / OPEN, as pre-declared. The debt is bounded and named, not paid.
+============================================================================

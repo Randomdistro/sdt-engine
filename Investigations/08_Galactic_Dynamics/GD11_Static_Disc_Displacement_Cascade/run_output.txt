@@ -1,0 +1,86 @@
+﻿=================================================================
+ GD11 STATIC-DISC DISPLACEMENT CASCADE AND MACRO THROUGHPUT
+ positions + baryon counts only ; no velocity, rotation or redshift input
+=================================================================
+l_P = 1.616255e-35 m ; N = 5.8945e+61 shells ; S = 4piN^2 = 4.3662e+124 ; R_CMB = 9.5270e+26 m
+V_p = 1.8327e-58 m^3 ; n_p = V_p/l_P^3 = 4.3406e+46 spations per baryon ; R_excl = 3.5237e-20 m
+sigma_excl = 3.901e-39 m^2 ; sigma_p = 2.223e-30 m^2 ; sigma_int = 7.447e-30 m^2 ; N_Sun = 1.1894e+57 baryons ; P_rad = 1.3916e-14 Pa
+
+== INSTRUMENT VALIDATION ==
+  [PASS] V1 : mass_from_V_disp(V_p) = m_p  (2.220e-16)
+  [PASS] V2a : outside a uniform shell |u| = V N/(4 pi r^2) (0.5%)  (-1.618e-03)
+  [PASS] V2b : inside a uniform shell |u| <= 1% of the surface value  (2.237e-03)
+  [PASS] V3a : flux through r = 2 kpc equals V N (1%)  (-4.499e-04)
+  [PASS] V3b : flux through r = 5 kpc equals V N (1%)  (-5.625e-05)
+  [PASS] V4a : mean column at the ball centre = n a, softening corrected (0.5%)  (-9.448e-04)
+  [PASS] V4b : mean column at d = 0.6 a, closed form, softening corrected (0.5%)  (-1.560e-03)
+      (uncorrected softened sum: -4.81% and -5.57%; analytic bias -(pi/2) eps/a = -4.71%)
+  validation failures so far: 0
+
+inputs: 7 arms ; N bulge 1.974e+67 thick 7.136e+66 thin 4.163e+67 gas 9.634e+66 ; sum 7.8142e+67 ; Sgr A* 4.995e+63 (mass-equivalent)
+
+== S2 DISPLACEMENT CASCADE (spherical-equivalent shells about the Galactic centre) ==
+r              N_enc       V_enc[m^3]  n_d[spations] shift[m]    shift[pitch] shift/r   
+0.01 pc        4.995e+63   9.155e+05   2.168e+110   7.651e-25   4.734e+10    2.48e-39  
+0.1 pc         4.995e+63   9.155e+05   2.168e+110   7.651e-27   4.734e+08    2.48e-42  
+1 pc           4.995e+63   9.155e+05   2.168e+110   7.651e-29   4.734e+06    2.48e-45  
+10 pc          5.073e+63   9.298e+05   2.202e+110   7.771e-31   4.808e+04    2.52e-48  
+100 pc         5.477e+64   1.004e+07   2.377e+111   8.389e-32   5.191e+03    2.72e-50  
+1 kpc          1.024e+67   1.877e+09   4.447e+113   1.569e-31   9.708e+03    5.09e-51  
+2 kpc          2.427e+67   4.448e+09   1.054e+114   9.295e-32   5.751e+03    1.51e-51  
+4 kpc          4.374e+67   8.017e+09   1.899e+114   4.188e-32   2.591e+03    3.39e-52  
+8.15 kpc       6.525e+67   1.196e+10   2.832e+114   1.505e-32   9.310e+02    5.98e-53  
+15 kpc         7.626e+67   1.398e+10   3.310e+114   5.191e-33   3.212e+02    1.12e-53  
+30 kpc         7.815e+67   1.432e+10   3.392e+114   1.330e-33   8.229e+01    1.44e-54  
+86 kpc         7.815e+67   1.432e+10   3.392e+114   1.618e-34   1.001e+01    6.10e-56  
+300 kpc        7.815e+67   1.432e+10   3.392e+114   1.330e-35   8.229e-01    1.44e-57  
+1000 kpc       7.815e+67   1.432e+10   3.392e+114   1.197e-36   7.406e-02    3.88e-59  
+  [PASS] V5 : recursion delta_{k+1} r_{k+1}^2 = delta_k r_k^2 over 40 doublings  (0.000e+00)
+
+displacement horizon r_1 (shift = one pitch): proton 9.499e-13 m ; Sun 3.276e+16 m = 1.06 pc ; Sgr A* alone 6.714e+19 m = 2.18 kpc ; whole Galaxy 8.397e+21 m = 272.1 kpc
+Galaxy: V_enc = 1.4322e+10 m^3 (a cube of 2.43 km) ; n_d = 3.3920e+114 spations ; shift at R_CMB = n_d/S = 7.769e-11 pitch ; fraction of boundary cells = 7.769e-11
+visible disc extent 15 kpc (drawing limit) ; r_1/15 kpc = 18.14 ; r_1/R_CMB = 8.814e-06 ; shells between r_1 and the Clearing ~ 5.894e+61 of N = 5.894e+61
+matter volume fraction phi_V = n_b V_p: local (4.0e+06 baryons/m^3 at 0.1 Msun/pc^3) = 7.42e-52
+
+evaluation points: 10743
+Monte-Carlo noise (two seeds, ridge + Sun + origin + rings): Theta_tilde 1.25% ; |u| 1.90%
+  [PASS] V6a : Theta_tilde at the Sun: particle sum vs ray quadrature (3%)  (1.181e-03)
+  [PASS] V6b : Theta_tilde at the centre: particle sum vs ray quadrature (3%)  (1.440e-02)
+
+== FIELDS (K = 1.32) ==
+Sun      mean column Theta_tilde = 2.168e+26 m^-2 (173.6 Msun/pc^2 equivalent) ; |u| = 1.741e-32 m = 1077.0 pitches ; Theta: excl 8.46e-13  p 4.82e-04  int 1.61e-03 ; bridge Z = 4.171e-07
+centre   mean column Theta_tilde = 6.475e+27 m^-2 (5183.9 Msun/pc^2 equivalent) ; |u| = 6.199e-33 m = 383.6 pitches ; Theta: excl 2.53e-11  p 1.44e-02  int 4.82e-02 ; bridge Z = 1.660e-06
+ratio centre/Sun: Theta_tilde 29.87 ; |u| 0.36 ; bridge Z 3.98  (sigma-free patterns)
+arm overdensity contribution at the Sun: Theta_tilde +4.721% ; |u| -1.321%
+longest in-plane column (Sun or centre, analytic, contrast bound) = 3.928e+28 m^-2 ; tau_max: excl 1.53e-10  p 8.73e-02  int 2.93e-01 -> first-order form NOT valid
+
+S5 pressure at the Sun, delta P / P_ref = -(1-s) Theta ; per bound with s -> 0: excl -8.46e-13  p -4.82e-04  int -1.61e-03 ; macro delta P = P_rad x that = -2.25e-17 Pa (int)
+S4 matter volume fraction at the Sun's neighbourhood phi_V ~ 7.42e-52 ; slow-passage term phi_V (1/s - 1) exceeds the blocking term sigma Theta_tilde only if s < 4.59e-49 (int bound)
+
+== S6 SHEATHS (measured + near-extended ridge nodes, K = 1.32) ==
+arm       nodes   <|u.t|>   <|r.t|>   |diff|     dTheta_ring d|u|_ring  <cos b,d>  bulge-dom  R(ub=ud) 
+3-kpc(N)  7       0.017     0.073     0.056      +1.15e-01  +3.32e-02  0.999      100      % no crossing
+Norma     335     0.127     0.139     0.028      +3.39e-02  -1.10e-02  0.996      31       % 3.941 kpc
+Sct-Cen   490     0.227     0.225     0.032      +3.07e-02  -1.23e-02  0.997      15       % 3.415 kpc
+Sgr-Car   551     0.139     0.130     0.017      +3.41e-02  -1.19e-03  0.998      0        % no crossing
+Local     85      0.201     0.198     0.019      +3.54e-02  +2.75e-02  0.999      0        % no crossing
+Perseus   637     0.164     0.165     0.023      +3.91e-02  +6.15e-03  0.998      0        % no crossing
+Outer     535     0.113     0.112     0.024      +4.55e-02  +6.08e-03  0.998      0        % no crossing
+all arms: <|u.t|> = 0.156 ; <|r.t|> (geometric projection of a radial field) = 0.155 ; difference 0.001
+
+M2 displaced-volume flux carried along the sheath cross-sections (area pi sigma_in sigma_z) against the outward flux V_enc(R):
+  R =  5.0 kpc : 1 ridge crossings ; along-sheath flux 1.290e+05 m^3 ; V_enc 9.290e+09 m^3 ; fraction 1.388e-05
+  R =  8.0 kpc : 4 ridge crossings ; along-sheath flux 1.011e+06 m^3 ; V_enc 1.187e+10 m^3 ; fraction 8.514e-05
+  R = 12.0 kpc : 2 ridge crossings ; along-sheath flux 1.154e+06 m^3 ; V_enc 1.345e+10 m^3 ; fraction 8.577e-05
+
+classification (pre-registered): 'arms are channels for displacement along their length'
+  M1 = 0.156 against geometric 0.155 (|diff| 0.001) ; M2(R = 8 kpc) = 8.51e-05  ->  not supported
+
+== S7 EMISSION AT DEPTH: patterns of the blocked-sky field (z_d = h1 Theta, h1 PENDING) ==
+Theta_tilde relative to the Sun along rings (sigma-free; multiply by sigma_occ for Theta):
+  R kpc :   2.0   4.0   6.0   8.0  10.0  12.0  15.0 
+  ratio :  7.62  3.26  1.80  1.04  0.63  0.41  0.23 
+  bridge Z ratio (same rings):  2.57  1.75  1.31  1.02  0.82  0.68  0.54 
+difference between the two kernels (1/r^2 against 1/r) over these rings is the open h(Theta) of GD06; both route values printed, neither chosen.
+
+wrote gd11_ridge_metrics.csv mw_throughput.js

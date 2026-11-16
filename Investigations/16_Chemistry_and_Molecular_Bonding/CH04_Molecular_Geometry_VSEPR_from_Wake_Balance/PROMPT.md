@@ -12,7 +12,7 @@
 2. **Why does it matter?** — Geometry is just the angular configuration that zeroes the net wake torque, deepening CH01-H3; it feeds CH05 (reaction geometry deformation) and CH06 (residual-wake directions), and proves molecular shape needs no hybrid orbitals at all.
 3. **How will we find out?** — Gated phases in §④: symmetric solids from equal wakes, the lone-pair compression ladder with one ratio, an extended hypervalent + multiple-bond set, then a novel small-angle outlier — running the native minimiser **before** any orbital-symmetry import.
 4. **What would prove us wrong?** — §⑧ numeric triggers: angles unreproducible without hybridisation; the compression needing a second knob; the novel outlier missed.
-5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN).
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN).
 
 ## ⓪⁺ Anti-Tautology Firewall *(the load-bearing constraint)*
 
@@ -117,7 +117,7 @@ period-2 map ([[project_foundational_ontology_influx_monopole]]).
 ```markdown
 ## Pre-Run Commitments — CH04
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: [0 or list each param — max per §⑤]
 - Engine namespaces: EMC04 electropause, CH01 wake balance, no MO/LCAO
 - Phase thresholds (committed before run): P1 symmetric solids 180/120/109.5/90 within <1° for equal wakes · P2 H2O 104.5°/NH3 107°/CH4 109.5° to <=1° with ONE w_lone/w_bond · P3 SF4/ClF3/XeF4/CO2/H2CO within a few ° same ratio · P4 novel outlier (H2S ~92° or PH3 ~93°) within a few °, NOT refit
@@ -131,7 +131,7 @@ period-2 map ([[project_foundational_ontology_influx_monopole]]).
 | Phase 0 sanity check fails | Fix units/engine refs; verify `laws.hpp` symbols | STOP — report blocker | Fit to target |
 | Native mechanism off > committed % | Alternative route in §④; document ADJ-### | **OPEN** or **KILL** hypothesis | RETRO-PASS |
 | Ladder needs a 2nd knob beyond `w_lone/w_bond` | re-derive lone-wake weight from EMC03 (fully-active vs partly-cancelled) | **OPEN/KILL** if irreducible | add per-molecule fudge, claim one-ratio |
-| Rivals match but SDT doesn't beat | Label **DEGENERATE** honestly | — | Claim Class A |
+| A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 | Upstream dependency missing (FLM10, etc.) | **DEFER** phase; cite dependency ID | — | Fake PASS |
 
 ### Allowed adjustments

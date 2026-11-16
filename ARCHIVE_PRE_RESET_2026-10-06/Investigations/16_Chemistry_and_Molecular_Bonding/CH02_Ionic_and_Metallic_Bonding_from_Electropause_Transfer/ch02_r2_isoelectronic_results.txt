@@ -1,0 +1,42 @@
+================================================================================================
+ CH02 RUN 2 Phase A - ISOELECTRONIC FORK.  GATE-A (PROMPT.md R2 A.3, verbatim, committed):
+ hardness RISES and range SHRINKS monotonically with Z at fixed shell, >=2 shells,
+ >=2 independent parameter sources.  Null: Z-shuffle.  FAIL => transmission claim killed.
+ ADJ-R2-1: PASS = CONVERGENCE-class only (rival Z_eff degeneracy declared pre-run).
+================================================================================================
+
+--- S1 (range): Shannon 6-coord radii [A] - radius must FALL strictly with Z ---
+  He-shell  Li+(Z=3):0.76  Be2+(Z=4):0.45  B3+(Z=5):0.27
+           strictly decreasing: YES   exact null P(monotone|shuffle) = 1/3! = 1.67e-01
+  Ne-shell  O2-(Z=8):1.4  F-(Z=9):1.33  Na+(Z=11):1.02  Mg2+(Z=12):0.72  Al3+(Z=13):0.535  Si4+(Z=14):0.4
+           strictly decreasing: YES   exact null P(monotone|shuffle) = 1/6! = 1.39e-03
+  Ar-shell  S2-(Z=16):1.84  Cl-(Z=17):1.81  K+(Z=19):1.38  Ca2+(Z=20):1  Sc3+(Z=21):0.745  Ti4+(Z=22):0.605
+           strictly decreasing: YES   exact null P(monotone|shuffle) = 1/6! = 1.39e-03
+  S1 verdict: MONOTONE in all 3 shells
+
+--- S2 (hardness): measured B0 [GPa], structure-matched rocksalt pairs - B0 must RISE with Z ---
+  Ne/Ne     NaF(Z=11): a0=4.634 A, B0=46.5 GPa   ->   MgO(Z=12): a0=4.212 A, B0=160.0 GPa   ratio x3.44  rise: YES
+  Ar+/Ne-   KF(Z=19): a0=5.347 A, B0=30.5 GPa   ->   CaO(Z=20): a0=4.811 A, B0=113.0 GPa   ratio x3.70  rise: YES
+  Ar/Ar     KCl(Z=19): a0=6.293 A, B0=17.4 GPa   ->   CaS(Z=20): a0=5.689 A, B0=56.0 GPa   ratio x3.22  rise: YES
+  sign-test null: P(3/3 rises | random) = 1/8 = 0.125 ; combined with S1 nulls the joint null is negligible
+  S2 verdict: B0 RISES in all 3 pairs
+
+  caveat row (He+/Ne- (EXCLUDED from gate: BeO is wurtzite, structure mismatch)):
+    LiF(Z=3): B0=66.5 GPa vs BeO(Z=4, wurtzite): B0=224.0 GPa - same direction, NOT scored
+
+--- S3 DIAGNOSTIC (REPORT-ONLY, ADJ-R2-1 disclosure: previewed at design; z^2-deconvolution
+    contaminates the shape with the attraction ledger; both scorings printed) ---
+  Ne/Ne     NaF: n=6.98   MgO: n=4.51   -> exponent FALLS with Z
+  Ar+/Ne-   KF: n=7.96   CaO: n=5.22   -> exponent FALLS with Z
+  Ar/Ar     KCl: n=8.61   CaS: n=5.09   -> exponent FALLS with Z
+
+--- GATE-A scoring (committed form: S1 range + S2 hardness = the two sources) ---
+  S1 range shrinks monotonically, 3/3 shells: PASS
+  S2 hardness rises, 3/3 structure-matched pairs (2 distinct shell-pairs + Ar/Ar): PASS
+  GATE-A: PASS - conjunction holds on 2 sources, >=2 shells
+  Alternate scoring WITH S3 included (per ADJ transparency clause): FAIL on the S3 leg
+
+  CLASS (fixed pre-run): CONVERGENCE - consistent with transmission; rival Z_eff degenerate; NOT native
+  Tension row: the z-deconvolved exponent n FALLS with Z in every pair (7.0->4.5 class);
+  under transmission this reads as the wall's onset moving in (range leg) faster than its
+  power steepens - flagged OPEN for the Phase-B wall derivation to reproduce or kill.

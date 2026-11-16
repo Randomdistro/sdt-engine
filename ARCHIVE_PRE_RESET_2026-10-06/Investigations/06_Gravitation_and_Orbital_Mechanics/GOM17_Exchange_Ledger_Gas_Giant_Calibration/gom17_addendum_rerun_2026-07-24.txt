@@ -1,0 +1,25 @@
+﻿====================================================================================================
+ GOM17 ADDENDUM - H-ENCLOSED vs run-1 rows. Baseline = inner-cluster mean (Me,V,EMB) =
+   kop_sun_clean = 1476.6409 m   (inner-cluster spread 0.12 e-4)
+====================================================================================================
+ planet   measured e4 own-only e4 ENCLOSED e4  resid e4  |A-B| e4
+ Mercury        -0.06       0.000       -0.00     -0.06      0.01
+ Venus           0.06       0.000       -0.02      0.08      0.17
+ EMB             0.00       0.030       -0.01      0.01      0.07
+ Mars            0.27       0.003       -0.09      0.36      0.95
+ Jupiter         8.86       9.547        9.27     -0.40      3.80
+ Saturn          2.10       2.859       15.29    -13.20      4.96
+ Uranus         10.14       0.435       14.02     -3.88      4.59
+ Neptune        12.57       0.515       14.05     -1.49      0.74
+
+ NOTES (honesty):
+ - g(b) truncated at b^6: for Jupiter-inside-Saturn b=0.546, truncation error ~ +0.01 of the
+   factor (~ +0.1 e-4 on Saturn's ENCLOSED value) - direction and size noted, not tuned.
+ - Saturn: 250-yr mean-motion fit absorbs the 883-yr Jupiter-Saturn great inequality;
+   order estimate from the declared 48' longitude amplitude: up to ~9 e-4 on kop -
+   Saturn's residual is INSTRUMENT (named pre-run, noise source 1), adjudicates nothing.
+ - Uranus residual ~1sigma of its |A-B| input noise; Neptune residual ~2sigma of 0.74 e-4;
+   full-ephemeris (a,T) at 8+ s.f. (pre-registered GOM18) decides H-ENCLOSED cleanly.
+ - H-GLOBAL (every row shifted equally) remains dead: inner rows sit at 0 by construction
+   AND agree to 1.2e-5 while carrying no enclosed giants - no global background.
+ done. exit 0

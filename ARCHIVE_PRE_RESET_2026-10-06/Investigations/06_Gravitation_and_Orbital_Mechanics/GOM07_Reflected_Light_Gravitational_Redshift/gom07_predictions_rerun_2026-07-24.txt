@@ -1,0 +1,26 @@
+﻿Solar baseline (Sun surface -> 1 AU)  z*c = 633.35 m/s   (HARPS-LFC Moon 638+-6; GR 633.1)
+
+body      v_surf (m/s)    z=(v/c)^2    z*k^2  climb z*c  SDT (flat)  GR (climb)
+Moon            1680.2    3.141e-11  1.00000     0.0094      633.35      633.36
+Mars            3554.7    1.406e-10  1.00000     0.0421      633.35      633.39
+Venus           7326.7    5.973e-10  1.00000     0.1791      633.35      633.53
+Saturn         25522.0    7.247e-09  1.00000     2.1727      633.35      635.52
+Jupiter        42569.0    2.016e-08  1.00000     6.0446      633.35      639.40
+
+SEAT: z*k^2 = 1 for every body  (z = spectral lambda->lambda shift, k = c/v_surf).
+DECISIVE DIFFERENTIALS (GR gradual-climb adds z*c; SDT adds 0 -> both bodies flat):
+  Jupiter - Moon  = 6.035 m/s under GR-climb ; 0 under SDT
+  Jupiter - Venus = 5.866 m/s under GR-climb ; 0 under SDT
+
+WITHIN-JUPITER (Galilean): GR-climb -> +koppa_J/r (falls with distance); SDT -> 0 (flat):
+  Io        r=4.217e+08 m   koppa_J/r=3.343e-09   GR-climb +1.002 m/s ; SDT +0
+  Europa    r=6.711e+08 m   koppa_J/r=2.100e-09   GR-climb +0.630 m/s ; SDT +0
+  Ganymede  r=1.070e+09 m   koppa_J/r=1.317e-09   GR-climb +0.395 m/s ; SDT +0
+  Callisto  r=1.883e+09 m   koppa_J/r=7.487e-10   GR-climb +0.224 m/s ; SDT +0
+  Io - Callisto     = 0.778 m/s (GR-climb) ; 0 (SDT)
+  Europa - Ganymede = 0.235 m/s (GR-climb) ; 0 (SDT)
+
+GATE: regress (measured_residual - 633) against z*c across {Moon,Venus,Mars,Saturn,Jupiter}.
+  slope 0  -> SDT (emission stamp; reflector silent, flat 633).
+  slope 1  -> GR  (gradual climb; reflector's well adds z*c).
+  (Rigorous cancellation-GR also -> slope 0, degenerate with SDT here.)

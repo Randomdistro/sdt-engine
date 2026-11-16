@@ -1,0 +1,43 @@
+
+== V0 helper validation (known answers) ==
+[PASS] V0    integrate sin over [0, pi] = 2                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 3.331e-16 (tol 1e-13)
+[PASS] V0    integrate x^7 over [0, 1] = 1/8                                                value 1.250000000000e-01 expected 1.250000000000e-01 err 2.220e-15 (tol 1e-14)
+[PASS] V0    integrate exp over [-1, 1] = e - 1/e                                           value 2.350402387288e+00 expected 2.350402387288e+00 err 5.668e-16 (tol 1e-13)
+[PASS] V0    root of cos x - x = 0.739085133215161                                          value 7.390851332152e-01 expected 7.390851332152e-01 err 2.253e-15 (tol 1e-13)
+[PASS] V0    root of x^2 - 2 on [1, 2] = sqrt 2                                             value 1.414213562373e+00 expected 1.414213562373e+00 err 2.983e-15 (tol 1e-13)
+[PASS] V0    compensated sum 1 + 10^6 x 1e-16 = 1 + 1e-10                                   value 1.000000000100e+00 expected 1.000000000100e+00 err 0.000e+00 (tol 1e-15)
+
+== V1 Lane-Emden solver on known solutions ==
+[PASS] V1    n = 0.0: xi_1                                                                  value 2.449489742580e+00 expected 2.449489742783e+00 err 8.290e-11 (tol 1e-04)
+[PASS] V1    n = 0.0: -xi_1^2 theta'(xi_1)                                                  value 4.898890741767e+00 expected 4.898979485566e+00 err 1.811e-05 (tol 1e-04)
+[PASS] V1    n = 1.0: xi_1                                                                  value 3.141592653835e+00 expected 3.141592653590e+00 err 7.820e-11 (tol 1e-06)
+[PASS] V1    n = 1.0: -xi_1^2 theta'(xi_1)                                                  value 3.141592653525e+00 expected 3.141592653590e+00 err 2.077e-11 (tol 1e-06)
+[PASS] V1    n = 1.5: xi_1                                                                  value 3.653753736904e+00 expected 3.653750000000e+00 err 1.023e-06 (tol 1e-05)
+[PASS] V1    n = 1.5: -xi_1^2 theta'(xi_1)                                                  value 2.714055121630e+00 expected 2.714060000000e+00 err 1.797e-06 (tol 1e-05)
+[PASS] V1    n = 3.0: xi_1                                                                  value 6.896848619731e+00 expected 6.896850000000e+00 err 2.001e-07 (tol 1e-05)
+[PASS] V1    n = 3.0: -xi_1^2 theta'(xi_1)                                                  value 2.018235951284e+00 expected 2.018240000000e+00 err 2.006e-06 (tol 1e-05)
+
+== T1 convergence pressure is an energy density, not a power ==
+       P_conv = 2.4608e+48 Pa ; P_conv x 4 pi R_sun^2 = 1.4967e+67 N ; x c = 4.4870e+75 W ; L_sun = 3.8280e+26 W ; ratio 1.172e+49
+[PASS] T1    inserting c into P_conv x area gives more than 1e40 times L_sun
+
+== T2 reference domain radius ==
+[PASS] T2    pressure_domain(L_Sun) equals sqrt(L/(4 pi F_CMB))                             value 3.120209435530e+15 expected 3.120209435530e+15 err 0.000e+00 (tol 1e-12)
+[PASS] T2    stored r_domain_Sun agrees within 2e-3                                         value 3.120000000000e+15 expected 3.120209435530e+15 err 6.712e-05 (tol 2e-03)
+       F_CMB = 3.1289e-06 W/m^2 ; r_domain = 3.12021e+15 m = 20857.3 AU
+
+== T3 reduced stationary structure under the native source-length acceleration ==
+[PASS] T3a   G_eff / (l_P^2 c^3/hbar) = 1/C_g                                               value 9.998046591462e-01 expected 9.998046591462e-01 err 0.000e+00 (tol 1e-14)
+       varpi_sun = 1476.625039 m ; N_b = 1.189030e+57 baryons ; M = N_b m_p = 1.988798e+30 kg (printed, not compared)
+       n = 3 polytrope: mean density 1.4101e+03 kg/m^3 ; central density 7.6400e+04 kg/m^3 ; central pressure 1.2451e+16 Pa (printed, not compared with any solar model)
+[PASS] T3d   dP/dr = -rho g with g = c^2 varpi_enc/r^2 at r/R = 0.3, 0.6, 0.9, worst relative value 2.220446049250e-16 expected 0.000000000000e+00 err 2.220e-16 (tol 1e-05)
+[PASS] T3e   P_c(2R)/P_c(R) = 1/16                                                          value 6.250000000000e-02 expected 6.250000000000e-02 err 2.220e-16 (tol 1e-12)
+[PASS] T3e   P_c(2M)/P_c(M) = 4                                                             value 4.000000000000e+00 expected 4.000000000000e+00 err 0.000e+00 (tol 1e-12)
+
+== T4 energy-chain accounting (anchored on L_sun) ==
+[PASS] T4    solar::nu_rate = 2 L_sun/(26.7 MeV)                                            value 1.789700130115e+38 expected 1.789700130115e+38 err 0.000e+00 (tol 1e-12)
+[PASS] T4    solar::flux_1AU = nu_rate/(4 pi AU^2)                                          value 6.363844828239e+14 expected 6.363844828239e+14 err 0.000e+00 (tol 1e-12)
+       chain rate L/E_chain = 8.9485e+37 per s ; nu rate 1.7897e+38 per s ; flux at 1 AU 6.3638e+14 per m^2 s
+       mass-energy time M c^2/L_sun = 1.4796e+13 yr ; fraction released by one chain per four protons = 0.00711
+
+ALL CRITERIA MET: 0 failure(s)

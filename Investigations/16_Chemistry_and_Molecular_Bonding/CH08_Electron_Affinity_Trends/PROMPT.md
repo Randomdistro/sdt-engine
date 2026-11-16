@@ -31,3 +31,15 @@ APS01 (terrain).
 ## Benchmark linkage
 
 Catalogue row B30 · suite coverage roster · tally on computed number only.
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** The gate "electron-affinity sign ≥ 80% for Z = 1–36" is close to what a trend-only rule gets by chance, and there is no model beyond "mirror of ionisation".
+
+**Correction:** Gate sign at ≥ 95% against a null (random or period-trend baseline) and add a magnitude gate.
+
+**Status:** RULE RECORDED — corrected gate or definition applies to the next run; the earlier result is not re-scored and nothing was re-run.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

@@ -1,3 +1,29 @@
+# GOM41 — Planetary quadrupole from phase resistance (specification rewritten 2026-10-12)
+
+**Author:** J. C. Harvey, Melbourne. Rewritten at Harvey's direction: prompts carry new data, and errors inform the mechanism. The previous specification is kept below the line.
+
+## 1. State after the reset (2026-10-10)
+**G2, not re-run.** The prompt carries its own executed outcome (Q0 RMS 255%; Q1 RMS 28.9%, Earth +0.9%, Jupiter −2.1%; Q2 RMS 30.5%; every model fails gate 6), so no blind re-run is possible. Q2 imports source models (PREM, Lane–Emden, Clairaut/Radau) and is inadmissible as native. The six-body corpus is not cached.
+
+## 2. What the errors and new data teach
+- Q0 and Q1 are native in form (uniform resistance; equator/pole convergence-boundary balance).
+- The named missing dependency, **a native giant-planet phase-resistance profile**, is the same kind of object as the displacement-depth profile Harvey proposes for occlusion (2026-10-11/12). It is depth-dependent engagement inside a body.
+
+## 3. Next round (registered order)
+1. Cache the six-body corpus with provenance: satellite (r, P) per body; polar and equatorial radii; J2 sealed as comparison-only.
+2. Re-run Q0/Q1 on the cached corpus (post-seen; consistency only).
+3. The native phase-resistance profile, stated before J2 is unsealed. Then one blind comparison on a held-out body not in the six (e.g. Uranus or Neptune), with gate committed.
+
+## Prohibitions
+- No census over candidate forms (2026-10-07 rule).
+- No imported source models (PREM, polytropes, quantum-number labelling) as native tests.
+- No G or GM.
+- The word "charge" is not used.
+
+---
+
+## Previous specification (kept as written)
+
 # GOM41 — Planetary Quadrupole from Phase Resistance
 
 **Author:** James Christopher Tyndall, Melbourne  

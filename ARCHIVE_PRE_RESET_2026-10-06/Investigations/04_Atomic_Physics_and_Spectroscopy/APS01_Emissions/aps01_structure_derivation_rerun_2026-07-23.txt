@@ -1,0 +1,482 @@
+﻿╔══════════════════════════════════════════════════════════════╗
+║  APS01 STAGE C: UNAVOIDABLE STRUCTURE DERIVATION           ║
+║  Shell positions emerge from terrain, not inserted.        ║
+╚══════════════════════════════════════════════════════════════╝
+
+══ C0: BLIND BOUNDARY DETECTION ══
+
+  Boundaries detected (threshold=2.0):
+
+  Z= 3(3IE): G1=14.0 G2=1.6 
+  Z= 4(4IE): G1=2.0 G2=8.5 ║ G3=1.4 
+  Z= 5(5IE): G1=3.0 G2=1.5 G3=6.8 ║ G4=1.3 
+  Z= 6(6IE): G1=2.2 G2=2.0 G3=1.3 G4=6.1 ║ G5=1.2 
+  Z= 7(7IE): G1=2.0 G2=1.6 G3=1.6 G4=1.3 G5=5.6 ║ G6=1.2 
+  Z= 8(8IE): G1=2.6 G2=1.6 G3=1.4 G4=1.5 G5=1.2 G6=5.4 ║ G7=1.2 ║ 
+  Z= 9(9IE): G1=2.0 G2=1.8 G3=1.4 G4=1.3 G5=1.4 G6=1.2 G7=5.2 ║ G8=1.2 ║ 
+  Z=10(10IE): G1=1.9 G2=1.5 G3=1.5 G4=1.3 G5=1.3 G6=1.3 G7=1.2 G8=5.0 ║ G9=1.1 ║ 
+  Z=11(3IE): G1=9.2 G2=1.5 
+  Z=12(3IE): G1=2.0 G2=5.3 
+  Z=13(3IE): G1=3.1 G2=1.5 
+  Z=14(4IE): G1=2.0 G2=2.0 G3=1.3 
+  Z=15(5IE): G1=1.9 G2=1.5 G3=1.7 G4=1.3 
+  Z=16(4IE): G1=2.3 G2=1.5 G3=1.4 
+  Z=17(3IE): G1=1.8 G2=1.7 
+  Z=18(8IE): G1=1.8 G2=1.5 G3=1.5 G4=1.3 G5=1.2 G6=1.4 G7=1.2 
+  Z=19(3IE): G1=7.3 G2=1.4 
+  Z=20(3IE): G1=1.9 G2=4.3 
+  Z=21(3IE): G1=2.0 G2=1.9 
+  Z=22(3IE): G1=2.0 G2=2.0 
+  Z=23(3IE): G1=2.2 G2=2.0 
+  Z=24(3IE): G1=2.4 G2=1.9 
+  Z=25(3IE): G1=2.1 G2=2.2 
+  Z=26(3IE): G1=2.0 G2=1.9 
+  Z=27(3IE): G1=2.2 G2=2.0 
+  Z=28(3IE): G1=2.4 G2=1.9 
+  Z=29(3IE): G1=2.6 G2=1.8 
+  Z=30(3IE): G1=1.9 G2=2.2 
+  Z=31(3IE): G1=3.4 G2=1.5 
+  Z=32(3IE): G1=2.0 G2=2.1 
+  Z=33(3IE): G1=1.9 G2=1.5 
+  Z=34(3IE): G1=2.2 G2=1.5 
+  Z=35(3IE): G1=1.8 G2=1.7 
+  Z=36(3IE): G1=1.7 G2=1.5 
+
+══ C1: DERIVED REGIONS (blind) ══
+
+   Z  Reg  [start-end]  size  mean_depth  rough    closure  residual
+  ────────────────────────────────────────────────────────────────
+   3  R0   [0-2]        3         67.8  1.1657    0.033    2.094
+   4  R0   [0-1]        2         13.8  0.0000    0.512    0.488
+   4  R1   [2-3]        2        185.8  0.0000    0.707    0.293
+   5  R0   [0-2]        3         23.8  0.1219    0.294    0.792
+   5  R1   [3-4]        2        299.8  0.0000    0.762    0.238
+   6  R0   [0-3]        4         37.0  0.0419    0.443    0.580
+   6  R1   [4-5]        2        441.0  0.0000    0.800    0.200
+   7  R0   [0-4]        5         53.4  0.0286    0.477    0.538
+   7  R1   [5-6]        2        609.6  0.0000    0.828    0.172
+   8  R0   [0-5]        6         72.2  0.0656    0.364    0.678
+   8  R1   [6-6]        1        739.3  0.0000    0.000    1.000
+   8  R2   [7-7]        1        871.4  0.0000    0.000    1.000
+   9  R0   [0-6]        7         94.1  0.0343    0.482    0.536
+   9  R1   [7-7]        1        953.9  0.0000    0.000    1.000
+   9  R2   [8-8]        1       1103.1  0.0000    0.000    1.000
+  10  R0   [0-7]        8        119.2  0.0244    0.514    0.498
+  10  R1   [8-8]        1       1195.8  0.0000    0.000    1.000
+  10  R2   [9-9]        1       1362.2  0.0000    0.000    1.000
+  11  R0   [0-2]        3         41.3  0.8138    0.060    1.705
+  12  R0   [0-2]        3         34.3  0.2486    0.407    0.740
+  13  R0   [0-2]        3         17.8  0.1344    0.280    0.817
+  14  R0   [0-3]        4         25.8  0.0371    0.481    0.538
+  15  R0   [0-4]        5         35.4  0.0220    0.519    0.492
+  16  R0   [0-3]        4         28.9  0.0484    0.423    0.605
+  17  R0   [0-2]        3         25.5  0.0024    0.543    0.458
+  18  R0   [0-7]        8         72.2  0.0176    0.561    0.447
+  19  R0   [0-2]        3         27.3  0.6524    0.083    1.515
+  20  R0   [0-2]        3         23.0  0.1569    0.445    0.642
+  21  R0   [0-2]        3         14.7  0.0000    0.513    0.487
+  22  R0   [0-2]        3         16.0  0.0001    0.503    0.497
+  23  R0   [0-2]        3         16.9  0.0017    0.459    0.542
+  24  R0   [0-2]        3         18.1  0.0169    0.404    0.606
+  25  R0   [0-2]        3         18.9  0.0001    0.475    0.525
+  26  R0   [0-2]        3         18.2  0.0015    0.487    0.513
+  27  R0   [0-2]        3         19.5  0.0025    0.460    0.541
+  28  R0   [0-2]        3         20.3  0.0105    0.416    0.590
+  29  R0   [0-2]        3         21.6  0.0341    0.368    0.653
+  30  R0   [0-2]        3         22.4  0.0053    0.520    0.482
+  31  R0   [0-2]        3         19.1  0.1706    0.250    0.878
+  32  R0   [0-2]        3         19.4  0.0010    0.495    0.505
+  33  R0   [0-2]        3         18.9  0.0120    0.520    0.485
+  34  R0   [0-2]        3         20.6  0.0403    0.442    0.580
+  35  R0   [0-2]        3         23.1  0.0021    0.546    0.455
+  36  R0   [0-2]        3         25.1  0.0047    0.572    0.430
+
+══ C2: DISCOVERED CAPACITY HISTOGRAM ══
+
+  Capacity  Count  avg_closure  avg_residual  Geometry?
+  ─────────────────────────────────────────────────────
+      1        7      0.000        1.000       (after reveal)
+      2       88      0.487        0.513       (after reveal)
+      3       24      0.399        0.731       (after reveal)
+      4        3      0.449        0.574       (after reveal)
+      5        2      0.498        0.515       (after reveal)
+      6        1      0.364        0.678       (after reveal)
+      7        1      0.482        0.536       (after reveal)
+      8        2      0.537        0.473       (after reveal)
+
+══ C3: PAIR UNIT DISCOVERY ══
+
+  Test whether unit=2 emerges as preferred cancellation size.
+
+  Unit=1: avg_symmetry=1.0000 over 70 groups (trivial=1.0)
+  Unit=2: avg_symmetry=0.6089 over 33 groups 
+  Unit=3: avg_symmetry=0.3138 over 19 groups 
+  Unit=4: avg_symmetry=0.2136 over 15 groups 
+
+  Pairwise extraction symmetry within discovered regions:
+
+  Pair(2) avg symmetry: 0.5683 over 100 pairs
+  Triple(3) avg symmetry: 0.3557 over 57 triples
+  Pair more symmetric? YES — unit=2 preferred ✓
+
+══ C4: THRESHOLD STABILITY ══
+
+  STRICT (thresh=2.5):
+    Z= 4: 2 regions [2,2]
+    Z= 5: 2 regions [3,2]
+    Z= 6: 2 regions [4,2]
+    Z= 7: 2 regions [5,2]
+    Z= 8: 2 regions [6,2]
+    Z= 9: 2 regions [7,2]
+    Z=10: 2 regions [8,2]
+    Z=14: 1 regions [4]
+    Z=15: 1 regions [5]
+    Z=16: 1 regions [4]
+    Z=18: 1 regions [8]
+  NORMAL (thresh=2.0):
+    Z= 4: 2 regions [2,2]
+    Z= 5: 2 regions [3,2]
+    Z= 6: 2 regions [4,2]
+    Z= 7: 2 regions [5,2]
+    Z= 8: 3 regions [6,1,1]
+    Z= 9: 3 regions [7,1,1]
+    Z=10: 3 regions [8,1,1]
+    Z=14: 1 regions [4]
+    Z=15: 1 regions [5]
+    Z=16: 1 regions [4]
+    Z=18: 1 regions [8]
+  LOOSE (thresh=1.5):
+    Z= 4: 2 regions [2,2]
+    Z= 5: 2 regions [3,2]
+    Z= 6: 3 regions [4,1,1]
+    Z= 7: 3 regions [5,1,1]
+    Z= 8: 4 regions [1,5,1,1]
+    Z= 9: 3 regions [7,1,1]
+    Z=10: 3 regions [8,1,1]
+    Z=14: 1 regions [4]
+    Z=15: 1 regions [5]
+    Z=16: 2 regions [1,3]
+    Z=18: 1 regions [8]
+
+╔══════════════════════════════════════════════════════════════╗
+║  C5: REVEAL — Derived Structure vs Conventional Labels     ║
+╚══════════════════════════════════════════════════════════════╝
+
+       Z  regions     derived_caps  pairs res  G_cls G_opn  Mag   Un#  Config               Match?
+  ──────────────────────────────────────────────────────────────────────────────────
+  H    1  1 reg  [1]             0  1   0.000 1.000  para    1  1s1                   ✓
+  He   2  1 reg  [2]             1  0   0.452 0.548  dia     0  1s2                   ✗
+  Li   3  1 reg  [3]             1  1   0.015 0.985  para    1  [He]2s1               ✓
+  Be   4  2 reg  [2,2]           2  0   0.609 0.391  dia     0  [He]2s2               ✓
+  B    5  2 reg  [3,2]           2  1   0.506 0.494  para    1  [He]2s2 2p1           ✓
+  C    6  2 reg  [4,2]           3  0   0.615 0.385  para    2  [He]2s2 2p2           ✗
+  N    7  2 reg  [5,2]           3  1   0.648 0.352  para    3  [He]2s2 2p3           ✗
+  O    8  3 reg  [6,1,1]         4  0   0.120 0.880  para    2  [He]2s2 2p4           ✓
+  F    9  3 reg  [7,1,1]         4  1   0.160 0.840  para    1  [He]2s2 2p5           ✓
+  Ne  10  3 reg  [8,1,1]         5  0   0.171 0.829  dia     0  [He]2s2 2p6           ✗
+  Na  11  1 reg  [3]             1  1   0.034 0.966  para    1  [Ne]3s1               ✓
+  Mg  12  1 reg  [3]             1  1   0.355 0.645  dia     0  [Ne]3s2               ✗
+  Al  13  1 reg  [3]             1  1   0.256 0.744  para    1  [Ne]3s2 3p1           ✓
+  Si  14  1 reg  [4]             2  0   0.472 0.528  para    2  [Ne]3s2 3p2           ✓
+  P   15  1 reg  [5]             2  1   0.514 0.486  para    3  [Ne]3s2 3p3           ✓
+  S   16  1 reg  [4]             2  0   0.412 0.588  para    2  [Ne]3s2 3p4           ✓
+  Cl  17  1 reg  [3]             1  1   0.543 0.457  para    1  [Ne]3s2 3p5           ✓
+  Ar  18  1 reg  [8]             4  0   0.556 0.444  dia     0  [Ne]3s2 3p6           ✓
+  K   19  1 reg  [3]             1  1   0.052 0.948  para    1  [Ar]4s1               ✓
+  Ca  20  1 reg  [3]             1  1   0.409 0.591  dia     0  [Ar]4s2               ✗
+  Sc  21  1 reg  [3]             1  1   0.513 0.487  para    1  [Ar]3d1 4s2           ✓
+  Ti  22  1 reg  [3]             1  1   0.503 0.497  para    2  [Ar]3d2 4s2           ✓
+  V   23  1 reg  [3]             1  1   0.459 0.541  para    3  [Ar]3d3 4s2           ✓
+  Cr  24  1 reg  [3]             1  1   0.400 0.600  para    6  [Ar]3d5 4s1           ✓
+  Mn  25  1 reg  [3]             1  1   0.475 0.525  para    5  [Ar]3d5 4s2           ✓
+  Fe  26  1 reg  [3]             1  1   0.487 0.513  para    4  [Ar]3d6 4s2           ✓
+  Co  27  1 reg  [3]             1  1   0.460 0.540  para    3  [Ar]3d7 4s2           ✓
+  Ni  28  1 reg  [3]             1  1   0.414 0.586  para    2  [Ar]3d8 4s2           ✓
+  Cu  29  1 reg  [3]             1  1   0.360 0.640  para    1  [Ar]3d10 4s1          ✓
+  Zn  30  1 reg  [3]             1  1   0.519 0.481  dia     0  [Ar]3d10 4s2          ✗
+  Ga  31  1 reg  [3]             1  1   0.221 0.779  para    1  [Ar]3d10 4s2 4p1      ✓
+  Ge  32  1 reg  [3]             1  1   0.495 0.505  para    2  [Ar]3d10 4s2 4p2      ✓
+  As  33  1 reg  [3]             1  1   0.517 0.483  para    3  [Ar]3d10 4s2 4p3      ✓
+  Se  34  1 reg  [3]             1  1   0.433 0.567  para    2  [Ar]3d10 4s2 4p4      ✓
+  Br  35  1 reg  [3]             1  1   0.546 0.454  para    1  [Ar]3d10 4s2 4p5      ✓
+  Kr  36  1 reg  [3]             1  1   0.571 0.429  dia     0  [Ar]3d10 4s2 4p6      ✓
+  Rb  37  1 reg  [2]             1  0   0.153 0.847  para    1  [Kr]5s1               ✓
+  Sr  38  1 reg  [2]             1  0   0.516 0.484  dia     0  [Kr]5s2               ✗
+  Y   39  1 reg  [2]             1  0   0.508 0.492  para    1  [Kr]4d1 5s2           ✓
+  Zr  40  1 reg  [2]             1  0   0.505 0.495  para    2  [Kr]4d2 5s2           ✓
+  Nb  41  1 reg  [2]             1  0   0.472 0.528  para    5  [Kr]4d4 5s1           ✓
+  Mo  42  1 reg  [2]             1  0   0.439 0.561  para    6  [Kr]4d5 5s1           ✓
+  Tc  43  1 reg  [2]             1  0   0.477 0.523  para    5  [Kr]4d5 5s2           ✓
+  Ru  44  1 reg  [2]             1  0   0.439 0.561  para    4  [Kr]4d7 5s1           ✓
+  Rh  45  1 reg  [2]             1  0   0.413 0.587  para    3  [Kr]4d8 5s1           ✓
+  Pd  46  1 reg  [2]             1  0   0.429 0.571  dia     0  [Kr]4d10              ✗
+  Ag  47  1 reg  [2]             1  0   0.353 0.647  para    1  [Kr]4d10 5s1          ✓
+  Cd  48  1 reg  [2]             1  0   0.532 0.468  dia     0  [Kr]4d10 5s2          ✗
+  In  49  1 reg  [2]             1  0   0.307 0.693  para    1  [Kr]4d10 5s2 5p1      ✓
+  Sn  50  1 reg  [2]             1  0   0.502 0.498  para    2  [Kr]4d10 5s2 5p2      ✓
+  Sb  51  1 reg  [2]             1  0   0.521 0.479  para    3  [Kr]4d10 5s2 5p3      ✓
+  Te  52  1 reg  [2]             1  0   0.484 0.516  para    2  [Kr]4d10 5s2 5p4      ✓
+  I   53  1 reg  [2]             1  0   0.546 0.454  para    1  [Kr]4d10 5s2 5p5      ✓
+  Xe  54  1 reg  [2]             1  0   0.578 0.422  dia     0  [Kr]4d10 5s2 5p6      ✓
+  Cs  55  1 reg  [2]             1  0   0.155 0.845  para    1  [Xe]6s1               ✓
+  Ba  56  1 reg  [2]             1  0   0.521 0.479  dia     0  [Xe]6s2               ✗
+  La  57  1 reg  [2]             1  0   0.504 0.496  para    1  [Xe]5d1 6s2           ✓
+  Ce  58  1 reg  [2]             1  0   0.511 0.489  para    2  [Xe]4f1 5d1 6s2       ✓
+  Pr  59  1 reg  [2]             1  0   0.519 0.481  para    3  [Xe]4f3 6s2           ✓
+  Nd  60  1 reg  [2]             1  0   0.515 0.485  para    4  [Xe]4f4 6s2           ✓
+  Pm  61  1 reg  [2]             1  0   0.512 0.488  para    5  [Xe]4f5 6s2           ✓
+  Sm  62  1 reg  [2]             1  0   0.510 0.490  para    6  [Xe]4f6 6s2           ✓
+  Eu  63  1 reg  [2]             1  0   0.504 0.496  para    7  [Xe]4f7 6s2           ✓
+  Gd  64  1 reg  [2]             1  0   0.509 0.491  para    8  [Xe]4f7 5d1 6s2       ✓
+  Tb  65  1 reg  [2]             1  0   0.509 0.491  para    5  [Xe]4f9 6s2           ✓
+  Dy  66  1 reg  [2]             1  0   0.509 0.491  para    4  [Xe]4f10 6s2          ✓
+  Ho  67  1 reg  [2]             1  0   0.510 0.490  para    3  [Xe]4f11 6s2          ✓
+  Er  68  1 reg  [2]             1  0   0.512 0.488  para    2  [Xe]4f12 6s2          ✓
+  Tm  69  1 reg  [2]             1  0   0.513 0.487  para    1  [Xe]4f13 6s2          ✓
+  Yb  70  1 reg  [2]             1  0   0.514 0.486  dia     0  [Xe]4f14 6s2          ✗
+  Lu  71  1 reg  [2]             1  0   0.390 0.610  para    1  [Xe]4f14 5d1 6s2      ✓
+  Hf  72  1 reg  [2]             1  0   0.458 0.542  para    2  [Xe]4f14 5d2 6s2      ✓
+  Ta  73  1 reg  [2]             1  0   0.466 0.534  para    3  [Xe]4f14 5d3 6s2      ✓
+  W   74  1 reg  [2]             1  0   0.488 0.512  para    4  [Xe]4f14 5d4 6s2      ✓
+  Re  75  1 reg  [2]             1  0   0.472 0.528  para    5  [Xe]4f14 5d5 6s2      ✓
+  Os  76  1 reg  [2]             1  0   0.496 0.504  para    4  [Xe]4f14 5d6 6s2      ✓
+  Ir  77  1 reg  [2]             1  0   0.527 0.473  para    3  [Xe]4f14 5d7 6s2      ✓
+  Pt  78  1 reg  [2]             1  0   0.483 0.517  para    2  [Xe]4f14 5d9 6s1      ✓
+  Au  79  1 reg  [2]             1  0   0.450 0.550  para    1  [Xe]4f14 5d10 6s1     ✓
+  Hg  80  1 reg  [2]             1  0   0.556 0.444  dia     0  [Xe]4f14 5d10 6s2     ✓
+  Tl  81  1 reg  [2]             1  0   0.299 0.701  para    1  [Xe]4f14 5d10 6s2 6p1  ✓
+  Pb  82  1 reg  [2]             1  0   0.493 0.507  para    2  [Xe]4f14 5d10 6s2 6p2  ✓
+  Bi  83  1 reg  [2]             1  0   0.437 0.563  para    3  [Xe]4f14 5d10 6s2 6p3  ✓
+  Po  84  1 reg  [2]             1  0   0.434 0.566  para    2  [Xe]4f14 5d10 6s2 6p4  ✓
+  At  85  1 reg  [2]             1  0   0.521 0.479  para    1  [Xe]4f14 5d10 6s2 6p5  ✓
+  Rn  86  1 reg  [2]             1  0   0.502 0.498  dia     0  [Xe]4f14 5d10 6s2 6p6  ✗
+  Fr  87  1 reg  [2]             1  0   0.182 0.818  para    1  [Rn]7s1               ✓
+  Ra  88  1 reg  [2]             1  0   0.520 0.480  dia     0  [Rn]7s2               ✗
+  Ac  89  1 reg  [2]             1  0   0.440 0.560  para    1  [Rn]6d1 7s2           ✓
+  Th  90  1 reg  [2]             1  0   0.548 0.452  para    2  [Rn]6d2 7s2           ✓
+  Pa  91  1 reg  [2]             1  0   0.503 0.497  para    3  [Rn]5f2 6d1 7s2       ✓
+  U   92  1 reg  [2]             1  0   0.534 0.466  para    4  [Rn]5f3 6d1 7s2       ✓
+  Np  93  1 reg  [2]             1  0   0.545 0.455  para    5  [Rn]5f4 6d1 7s2       ✓
+  Pu  94  1 reg  [2]             1  0   0.538 0.462  para    6  [Rn]5f6 7s2           ✓
+  Am  95  1 reg  [2]             1  0   0.511 0.489  para    7  [Rn]5f7 7s2           ✓
+  Cm  96  1 reg  [2]             1  0   0.483 0.517  para    8  [Rn]5f7 6d1 7s2       ✓
+  Bk  97  1 reg  [2]             1  0   0.521 0.479  para    5  [Rn]5f9 7s2           ✓
+  Cf  98  1 reg  [2]             1  0   0.523 0.477  para    4  [Rn]5f10 7s2          ✓
+  Es  99  1 reg  [2]             1  0   0.526 0.474  para    3  [Rn]5f11 7s2          ✓
+  Fm  100  1 reg  [2]             1  0   0.528 0.472  para    2  [Rn]5f12 7s2          ✓
+  Md  101  1 reg  [2]             1  0   0.531 0.469  para    1  [Rn]5f13 7s2          ✓
+  No  102  1 reg  [2]             1  0   0.532 0.468  dia     0  [Rn]5f14 7s2          ✗
+  Lr  103  1 reg  [2]             1  0   0.344 0.656  para    1  [Rn]5f14 7s2 7p1      ✓
+  Rf  104  1 reg  [2]             1  0   0.417 0.583  para    2  [Rn]5f14 6d2 7s2      ✓
+  Db  105  1 reg  [2]             1  0   0.472 0.528  para    3  [Rn]5f14 6d3 7s2      ✓
+  Sg  106  1 reg  [2]             1  0   0.494 0.506  para    4  [Rn]5f14 6d4 7s2      ✓
+  Bh  107  1 reg  [2]             1  0   0.467 0.533  para    5  [Rn]5f14 6d5 7s2      ✓
+  Hs  108  1 reg  [2]             1  0   0.447 0.553  para    4  [Rn]5f14 6d6 7s2      ✓
+  Mt  109  1 reg  [2]             1  0   0.491 0.509  para    3  [Rn]5f14 6d7 7s2      ✓
+  Ds  110  1 reg  [2]             1  0   0.511 0.489  para    2  [Rn]5f14 6d8 7s2      ✓
+  Rg  111  1 reg  [2]             1  0   0.541 0.459  para    1  [Rn]5f14 6d9 7s2      ✓
+  Cn  112  1 reg  [2]             1  0   0.630 0.370  dia     0  [Rn]5f14 6d10 7s2     ✓
+  Nh  113  1 reg  [2]             1  0   0.365 0.635  para    1  [Rn]5f14 6d10 7s2 7p1  ✓
+  Fl  114  1 reg  [2]             1  0   0.508 0.492  para    2  [Rn]5f14 6d10 7s2 7p2  ✓
+  Mc  115  1 reg  [2]             1  0   0.310 0.690  para    3  [Rn]5f14 6d10 7s2 7p3  ✓
+  Lv  116  1 reg  [2]             1  0   0.400 0.600  para    2  [Rn]5f14 6d10 7s2 7p4  ✓
+  Ts  117  1 reg  [2]             1  0   0.453 0.547  para    1  [Rn]5f14 6d10 7s2 7p5  ✓
+  Og  118  1 reg  [2]             1  0   0.494 0.506  dia     0  [Rn]5f14 6d10 7s2 7p6  ✗
+
+  Magnetic prediction: 102/118 (86%)
+
+══ C5: NUCLEAR GRAMMAR MODULATION ══
+
+  Test: does triton fraction modulate residual wake after geometry is derived?
+
+       Z  n_d n_t  f_t%  rho   G_cls G_opn  res  Mag    grammar_effect
+  ────────────────────────────────────────────────────────────────
+  H    1   0  -1     0  0.750 0.000 1.000  1    para   stable
+  He   2   0   0     0  0.806 0.452 0.548  0    dia    still wrong
+  Li   3   0   1   100  0.343 0.008 0.992  1    para   stable
+  Be   4   1   1    50  0.293 0.510 0.490  0    dia    BROKE
+  B    5   2   1    33  0.431 0.435 0.565  1    para   stable
+  C    6   4   0     0  0.112 0.615 0.385  0    para   still wrong
+  N    7   5   0     0  0.164 0.648 0.352  1    para   still wrong
+  O    8   6   0     0  0.145 0.120 0.880  0    para   stable
+  F    9   6   1    14  0.729 0.143 0.857  1    para   stable
+  Ne  10   8   0     0  0.771 0.171 0.829  0    dia    still wrong
+  Na  11   8   1    11  0.409 0.031 0.969  1    para   stable
+  Mg  12  10   0     0  0.354 0.355 0.645  1    dia    still wrong
+  Al  13  10   1     9  0.525 0.239 0.761  1    para   stable
+  Si  14  12   0     0  0.096 0.472 0.528  0    para   stable
+  P   15  12   1     8  0.134 0.495 0.505  1    para   stable
+  S   16  14   0     0  0.111 0.412 0.588  0    para   stable
+  Cl  17  14   1     7  0.000 0.527 0.473  1    para   stable
+  Ar  18  12   4    25  0.733 0.501 0.499  0    dia    BROKE
+  K   19  16   1     6  0.371 0.049 0.951  1    para   stable
+  Ca  20  18   0     0  0.308 0.409 0.591  1    dia    still wrong
+  Sc  21  16   3    16  0.000 0.476 0.524  1    para   stable
+  Ti  22  16   4    20  0.000 0.457 0.543  1    para   stable
+  V   23  16   5    24  0.000 0.407 0.593  1    para   stable
+  Cr  24  18   4    18  0.000 0.360 0.640  1    para   stable
+  Mn  25  18   5    22  0.000 0.427 0.573  1    para   stable
+  Fe  26  20   4    17  0.000 0.449 0.551  1    para   stable
+  Co  27  20   5    20  0.000 0.415 0.585  1    para   stable
+  Ni  28  24   2     8  0.000 0.396 0.604  1    para   stable
+  Cu  29  22   5    19  0.000 0.322 0.678  1    para   stable
+  Zn  30  24   4    14  0.000 0.486 0.514  1    dia    still wrong
+  Ga  31  22   7    24  0.000 0.186 0.814  1    para   stable
+  Ge  32  20  10    33  0.000 0.424 0.576  1    para   stable
+  As  33  22   9    29  0.000 0.454 0.546  1    para   stable
+  Se  34  20  12    38  0.000 0.357 0.643  1    para   stable
+  Br  35  24   9    27  0.000 0.485 0.515  1    para   stable
+  Kr  36  22  12    35  0.000 0.496 0.504  1    dia    BROKE
+  Rb  37  24  11    31  0.000 0.121 0.879  0    para   stable
+  Sr  38  24  12    33  0.000 0.445 0.555  0    dia    still wrong
+  Y   39  26  11    30  0.000 0.443 0.557  0    para   stable
+  Zr  40  28  10    26  0.000 0.447 0.553  0    para   stable
+  Nb  41  28  11    28  0.000 0.411 0.589  0    para   stable
+  Mo  42  28  12    30  0.000 0.376 0.624  0    para   stable
+  Tc  43  29  12    29  0.000 0.414 0.586  0    para   stable
+  Ru  44  29  13    31  0.000 0.374 0.626  0    para   stable
+  Rh  45  30  13    30  0.000 0.350 0.650  0    para   stable
+  Pd  46  30  14    32  0.000 0.363 0.637  0    dia    still wrong
+  Ag  47  32  13    29  0.000 0.297 0.703  0    para   stable
+  Cd  48  30  16    35  0.000 0.457 0.543  0    dia    still wrong
+  In  49  30  17    36  0.000 0.245 0.755  0    para   stable
+  Sn  50  28  20    42  0.000 0.416 0.584  0    para   stable
+  Sb  51  30  19    39  0.000 0.439 0.561  0    para   stable
+  Te  52  24  26    52  0.000 0.382 0.618  0    para   stable
+  I   53  30  21    41  0.000 0.460 0.540  0    para   stable
+  Xe  54  29  23    44  0.000 0.487 0.513  0    dia    BROKE
+  Cs  55  30  23    43  0.000 0.114 0.886  0    para   stable
+  Ba  56  29  25    46  0.000 0.426 0.574  0    dia    still wrong
+  La  57  30  25    45  0.000 0.412 0.588  0    para   stable
+  Ce  58  32  24    43  0.000 0.422 0.578  0    para   stable
+  Pr  59  34  23    40  0.000 0.434 0.566  0    para   stable
+  Nd  60  34  24    41  0.000 0.429 0.571  0    para   stable
+  Pm  61  36  23    39  0.000 0.430 0.570  0    para   stable
+  Sm  62  34  26    43  0.000 0.421 0.579  0    para   stable
+  Eu  63  34  27    44  0.000 0.414 0.586  0    para   stable
+  Gd  64  33  29    47  0.000 0.414 0.586  0    para   stable
+  Tb  65  34  29    46  0.000 0.415 0.585  0    para   stable
+  Dy  66  33  31    48  0.000 0.411 0.589  0    para   stable
+  Ho  67  34  31    48  0.000 0.414 0.586  0    para   stable
+  Er  68  35  31    47  0.000 0.417 0.583  0    para   stable
+  Tm  69  36  31    46  0.000 0.419 0.581  0    para   stable
+  Yb  70  35  33    49  0.000 0.416 0.584  0    dia    still wrong
+  Lu  71  36  33    48  0.000 0.302 0.698  0    para   stable
+  Hf  72  36  34    49  0.000 0.363 0.637  0    para   stable
+  Ta  73  36  35    49  0.000 0.369 0.631  0    para   stable
+  W   74  36  36    50  0.000 0.389 0.611  0    para   stable
+  Re  75  36  37    51  0.000 0.372 0.628  0    para   stable
+  Os  76  34  40    54  0.000 0.390 0.610  0    para   stable
+  Ir  77  36  39    52  0.000 0.423 0.577  0    para   stable
+  Pt  78  37  39    51  0.000 0.381 0.619  0    para   stable
+  Au  79  38  39    51  0.000 0.352 0.648  0    para   stable
+  Hg  80  37  41    53  0.000 0.451 0.549  0    dia    BROKE
+  Tl  81  37  42    53  0.000 0.218 0.782  0    para   stable
+  Pb  82  37  43    54  0.000 0.388 0.612  0    para   stable
+  Bi  83  38  43    53  0.000 0.336 0.664  0    para   stable
+  Po  84  41  41    50  0.000 0.338 0.662  0    para   stable
+  At  85  43  40    48  0.000 0.423 0.577  0    para   stable
+  Rn  86  34  50    60  0.000 0.387 0.613  0    dia    still wrong
+  Fr  87  36  49    58  0.000 0.124 0.876  0    para   stable
+  Ra  88  36  50    58  0.000 0.407 0.593  0    dia    still wrong
+  Ac  89  38  49    56  0.000 0.334 0.666  0    para   stable
+  Th  90  36  52    59  0.000 0.433 0.567  0    para   stable
+  Pa  91  40  49    55  0.000 0.395 0.605  0    para   stable
+  U   92  36  54    60  0.000 0.417 0.583  0    para   stable
+  Np  93  40  51    56  0.000 0.434 0.566  0    para   stable
+  Pu  94  36  56    61  0.000 0.420 0.580  0    para   stable
+  Am  95  40  53    57  0.000 0.399 0.601  0    para   stable
+  Cm  96  39  55    59  0.000 0.371 0.629  0    para   stable
+  Bk  97  42  53    56  0.000 0.411 0.589  0    para   stable
+  Cf  98  41  55    57  0.000 0.411 0.589  0    para   stable
+  Es  99  43  54    56  0.000 0.416 0.584  0    para   stable
+  Fm  100  41  57    58  0.000 0.415 0.585  0    para   stable
+  Md  101  43  56    57  0.000 0.419 0.581  0    para   stable
+  No  102  45  55    55  0.000 0.423 0.577  0    dia    still wrong
+  Lr  103  41  60    59  0.000 0.248 0.752  0    para   stable
+  Rf  104  43  59    58  0.000 0.312 0.688  0    para   stable
+  Db  105  45  58    56  0.000 0.364 0.636  0    para   stable
+  Sg  106  47  57    55  0.000 0.386 0.614  0    para   stable
+  Bh  107  49  56    53  0.000 0.363 0.637  0    para   stable
+  Hs  108  45  61    58  0.000 0.339 0.661  0    para   stable
+  Mt  109  47  60    56  0.000 0.382 0.618  0    para   stable
+  Ds  110  47  61    56  0.000 0.401 0.599  0    para   stable
+  Rg  111  49  60    55  0.000 0.431 0.569  0    para   stable
+  Cn  112  49  61    55  0.000 0.523 0.477  0    dia    BROKE
+  Nh  113  51  60    54  0.000 0.272 0.728  0    para   stable
+  Fl  114  51  61    54  0.000 0.401 0.599  0    para   stable
+  Mc  115  53  60    53  0.000 0.227 0.773  0    para   stable
+  Lv  116  53  61    54  0.000 0.303 0.697  0    para   stable
+  Ts  117  55  60    52  0.000 0.352 0.648  0    para   stable
+  Og  118  58  58    50  0.000 0.395 0.605  0    dia    still wrong
+
+══ TABLE 8: FAILURE AUDIT ══
+
+  Atoms where magnetic prediction failed:
+
+       Z  derived_caps  G_cls G_opn  pred   actual  failure_reason
+  ────────────────────────────────────────────────────────────────
+  He   2  [2]           0.452 0.548  para   dia     H: single IE, no region structure for closure score
+  C    6  [4,2]         0.615 0.385  dia    para    unknown
+  N    7  [5,2]         0.648 0.352  dia    para    N: 3 unpaired in 5-region, high closure masks open wake
+  Ne  10  [8,1,1]       0.171 0.829  para   dia     Ne: strict thresh splits core into singletons -> low closure
+  Mg  12  [3]           0.355 0.645  para   dia     Mg: 3 IE only, no inner structure visible
+  Ca  20  [3]           0.409 0.591  para   dia     Ca: 3 IE only, outer dyad not resolved from core
+  Zn  30  [3]           0.519 0.481  para   dia     unknown
+  Sr  38  [2]           0.516 0.484  para   dia     unknown
+  Pd  46  [2]           0.429 0.571  para   dia     unknown
+  Cd  48  [2]           0.532 0.468  para   dia     unknown
+  Ba  56  [2]           0.521 0.479  para   dia     unknown
+  Yb  70  [2]           0.514 0.486  para   dia     unknown
+  Rn  86  [2]           0.502 0.498  para   dia     unknown
+  Ra  88  [2]           0.520 0.480  para   dia     unknown
+  No  102  [2]           0.532 0.468  para   dia     unknown
+  Og  118  [2]           0.494 0.506  para   dia     unknown
+
+══ CAPACITY REVEAL: Do discovered capacities match shell structure? ══
+
+  Discovered capacity -> conventional interpretation (post-reveal only):
+
+  capacity=1  (7 occurrences): single slot (H-like or outer loose)
+  capacity=2  (88 occurrences): dyad (1s2, 2s2, counter-wake pair)
+  capacity=3  (24 occurrences): triangle (partial p-shell or 3-IE partial)
+  capacity=4  (3 occurrences): tetrahedron (half p-shell or s2+p2)
+  capacity=5  (2 occurrences): pentad (5/6 p-shell)
+  capacity=6  (1 occurrences): hexad (full p-shell? or s2+p4)
+  capacity=7  (1 occurrences): ?
+  capacity=8  (2 occurrences): cube (full n=2: s2+p6)
+
+══ HOSTILE-EXAMINER ANSWERS ══
+
+  1. Did shell/slot positions emerge, or were they inserted?
+     EMERGED — recurring capacities found from terrain
+  2. What capacities were discovered before reveal?
+     1(x7) 2(x88) 3(x24) 4(x3) 5(x2) 6(x1) 7(x1) 8(x2) 
+  3. Did pair unit=2 emerge before reveal?
+     YES (pair sym 0.5683 > triple 0.3557)
+  4. Did derived residual exposure predict magnetic category?
+     102/118 (86%) — PARTIALLY DERIVED
+  5. Did triton grammar improve prediction after geometry was derived?
+     Grammar rescued 0 additional predictions
+  6. Which structures failed?
+     He C N Ne Mg Ca Zn Sr Pd Cd Ba Yb Rn Ra No Og 
+  7. Which part is still diagnostic rather than first-principles?
+     IE data is MEASURED INPUT. Boundary detection is DERIVED.
+     Pair unit is DISCOVERED. Grammar modulation is SECONDARY.
+     Forward slot-depth derivation (Stage D) not yet attempted.
+
+══════════════════════════════════════════════════════════════
+  STAGE C VERDICT
+
+  Shell capacities:    STRONGLY SUGGESTED
+  Pair unit=2:         STRONGLY SUGGESTED
+  Magnetic prediction: PARTIALLY DERIVED (102/118)
+  Grammar modulation:  SECONDARY
+  Boundary stability:  check threshold table above
+
+  The derived direction:
+    pressure terrain -> boundary detection -> region capacities
+    -> pair cancellation unit -> residual exposure -> magnetism
+    -> nuclear grammar modulation (secondary)
+
+  No shell labels were inserted. Structure was forced by terrain.

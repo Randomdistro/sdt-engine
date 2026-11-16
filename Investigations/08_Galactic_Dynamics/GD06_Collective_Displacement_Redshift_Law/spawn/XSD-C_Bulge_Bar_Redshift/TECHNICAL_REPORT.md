@@ -1,5 +1,7 @@
 # XSD-C — Technical Report (RUN 1, 2026-07-13)
 
+> **Re-adjudicated 2026-10-03 (origin rule, gateway §3.8):** "DEGENERATE-with-GR (it is ϟ/r)" → **CONVERGENT**, not yet discriminating. See `Investigations/ADJUDICATION_REGISTER.md` §R-2026-10-03. Original text below is unchanged.
+
 **Node:** the dense-vs-dilute crux — where does a bulge sit on the Θ axis?
 
 ## Result — the bulge is DILUTE

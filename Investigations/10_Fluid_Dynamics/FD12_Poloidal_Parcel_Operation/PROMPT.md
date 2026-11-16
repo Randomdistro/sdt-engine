@@ -1,3 +1,37 @@
+# FD12 — The poloidal parcel operation (specification rewritten 2026-10-12)
+
+**Author:** J. C. Harvey, Melbourne. Rewritten at Harvey's direction: prompts carry new data, and errors inform the next step. Harvey's claim and the 2026-07-26 gates are kept below the line. The claim is unchanged; the gates are superseded where stated.
+
+## 1. State after the reset audit (`FD12_RESET_ASSESSMENT_2026-10-10.md`)
+- **P2 is a registration defect, found before any computation: its pass classes are empty under its own sweep.**
+  - The sweep is λ/L ∈ {1/4 … 16} with ℓ_c = λ*/2, so it gives L/ℓ_c ≤ 8.
+  - G2-STRONG needs L/ℓ_c ∈ [24, 96] and G2-ORDER needs [10, 200].
+  - Every outcome would be G2-FAIL. A criterion that cannot pass is not a test.
+- **P1 is blocked on its supplier.** It needs the "FD01-earned relay/NS lattice", and FD01 has not been re-run under the reset protocol. A plain Navier–Stokes solver would not test the relay claim. P1's class is capped at consistency (Lamb dipole).
+
+## 2. What the defect teaches
+The pipe's L/ℓ_c ≈ 48 lies outside any sweep that only spans wavelengths comparable to L. The operation's coherence length must therefore be either:
+- **(i)** much shorter than the wave forcing it, i.e. set by the parcel's own roll and not by the imposed wavelength; or
+- **(ii)** a 3-D spanwise-streak scale, which the 2-D surrogate cannot represent.
+
+Each is a different claim about what sets the roll, and the re-registration must choose one before running.
+
+## 3. Re-registration (round 2; to be fixed before any tool runs)
+- **P2-i (2-D, roll-set):** extend the sweep to λ/L ∈ {1/64 … 16} (log-spaced, 11 values), so that L/ℓ_c reaches 128 and the pass bands [24, 96] and [10, 200] are reachable. Convention ℓ_c = λ*/2, unchanged. Same gates.
+- **P2-ii (3-D, streak-set):** an explicit spanwise-periodic optimum in a 3-D channel. Only if Harvey reads the claim as 3-D; "2D-like" in the claim points to P2-i.
+- **Validation added:** a planted-optimum test on a synthetic response curve. The analysis must recover λ* to one grid step before the physics sweep runs.
+- **P1:** after FD01 is re-run (supplier). Then G1a and G1b as registered, with the diffusion-only control.
+
+## 4. Prohibitions
+- No widening of the bands after a run.
+- No change to the ℓ_c convention after seeing λ*.
+- No fields as primitives.
+- No time-arrow framing: parcels travel, stall, roll and rebound.
+
+---
+
+## Superseded gates and original claim (2026-07-26, kept as written)
+
 # FD12 — The Poloidal Parcel Operation (Harvey 2026-07-26)
 
 > **Author:** J. C. Harvey, Melbourne. **Status:** SPEC, written BEFORE the tool (gates below are

@@ -12,7 +12,7 @@
 2. **Why does it matter?** — The engine already uses occlusion (Law III) for every force; if drag is the same shadow resolved along the flow, gravity, Coulomb, and drag share one law. The `6π` is the sharp test — and the drag crisis is the integration test that ties FD09 to FD06's boundary-layer transition.
 3. **How will we find out?** — Five gated phases (§④). **Two honesty firewalls:** (P2) the `6π` is either DERIVED from the `4πR²` surface + `2πR²` pressure split of a sphere, or it is ADOPTED from the Stokes solution as a CORRELATION (cap C) — the prompt forbids selling an adopted `6π` as derived; (P4) the crisis location/post-crisis `C_D` must be *predicted from the FD06 wake-angle change* and committed before the data are read — a curve hand-built to match Schlichting/Achenbach is circular and scores nothing.
 4. **What would prove us wrong?** — §⑧, five falsifiers with real failure modes: sphere geometry yielding a prefactor ≠ `6π` with no reconciliation; form-regime `C_D` the wrong order of magnitude; no crisis emerging from FD06; crisis location off by >2× AND post-crisis `C_D` out of `[0.07,0.15]`; or terminal velocity off >15%.
-5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN), per phase, no repainting a fired test.
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN), per phase, no repainting a fired test.
 
 **Domain**: Fluid Dynamics (SDT lattice mechanics) · **Status**: SPEC · **Author**: J. C. Harvey, Melbourne
 
@@ -176,7 +176,7 @@ Five phases, each gated. Run in order; a failed checkpoint stops the chain (R4: 
 ```markdown
 ## Pre-Run Commitments — FD09
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: 0 if `6π` is forward-DERIVED (A); IMPORTED `6π` (cap C) if adopted from Stokes — declare which; at most 1 wake-angle scale
 - Engine namespaces actually used: law_III (F_occlusion, solid_angle_occluded), law_I (P_conv), law_V (Re as advection÷diffusion), bridge (g=v²/R for terminal velocity, no G/M); ν from FD02, wake angle from FD06, q=½ρv² from FD08
 - Phase thresholds (committed before run):
@@ -193,7 +193,7 @@ Five phases, each gated. Run in order; a failed checkpoint stops the chain (R4: 
 | P2 forward sphere integral won't close | adopt `6π` from Stokes, label **IMPORTED**, cap C | **OPEN** the forward `6π` derivation | report the adopted `6π` as DERIVED |
 | P4 crisis `Re`/`C_D` need the data to set them | predict from FD06 + the Phase-3 wake-map only; commit before opening data | **OPEN** the crisis coupling | fit a sigmoid to Schlichting/Achenbach |
 | P3 form `C_D` wrong order (≪0.1 or ≫1) | recheck the wake-angle → occluded-fraction map | **KILL** (wake-occlusion map wrong) | tune the map to 0.47 |
-| Rivals match but SDT doesn't beat | Label **DEGENERATE** honestly | — | Claim Class A |
+| A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 | Upstream dependency missing (FD06 transition, FD02 ν) | **DEFER** phase; cite dependency ID | — | Fake PASS |
 
 ### Allowed adjustments

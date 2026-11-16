@@ -1,0 +1,57 @@
+
+== V0 helper validation (known answers) ==
+[PASS] V0    integrate sin over [0, pi] = 2                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 3.331e-16 (tol 1e-13)
+[PASS] V0    integrate x^7 over [0, 1] = 1/8                                                value 1.250000000000e-01 expected 1.250000000000e-01 err 2.220e-15 (tol 1e-14)
+[PASS] V0    integrate exp over [-1, 1] = e - 1/e                                           value 2.350402387288e+00 expected 2.350402387288e+00 err 5.668e-16 (tol 1e-13)
+[PASS] V0    root of cos x - x = 0.739085133215161                                          value 7.390851332152e-01 expected 7.390851332152e-01 err 2.253e-15 (tol 1e-13)
+[PASS] V0    root of x^2 - 2 on [1, 2] = sqrt 2                                             value 1.414213562373e+00 expected 1.414213562373e+00 err 2.983e-15 (tol 1e-13)
+[PASS] V0    compensated sum 1 + 10^6 x 1e-16 = 1 + 1e-10                                   value 1.000000000100e+00 expected 1.000000000100e+00 err 0.000e+00 (tol 1e-15)
+
+== V1 geometry factor ==
+[PASS] V1    q pi^2 R1^2 R2^2 / r^2 = (pi/4) U R1^2 R2^2 / r^2                              value 2.885136110440e+00 expected 2.885136110440e+00 err 0.000e+00 (tol 1e-15)
+
+== V2 slope estimator ==
+[PASS] V2    log-slope of 1/r^2 between r and 10r is -2                                     value -2.000000000000e+00 expected -2.000000000000e+00 err 2.220e-16 (tol 1e-13)
+
+== T1 three forms of P_eff ==
+[PASS] T1    engine P_eff vs m_p^2 m_e^2 c^5 / (4 pi alpha hbar^3)                          value 5.227251568861e+31 expected 5.227251568807e+31 err 1.036e-11 (tol 1e-09)
+[PASS] T1    engine P_eff vs m_e c^2 / V_int                                                value 5.227251568861e+31 expected 5.227251568834e+31 err 5.178e-12 (tol 1e-09)
+[PASS] T1    closed form vs m_e c^2 / V_int                                                 value 5.227251568807e+31 expected 5.227251568834e+31 err 5.178e-12 (tol 1e-09)
+[PASS] T1    P_eff_from_volume / P_eff - 1 inside the engine's 1e-8 bound                   value -5.177858142247e-12 expected 0.000000000000e+00 err 5.178e-12 (tol 1e-08)
+       R_lock = 4 hbar/(m_p c) = 8.412356e-16 m ; r_e = 2.817940e-15 m ; R_int = sqrt(R_lock r_e) = 1.539660e-15 m
+       V_int = (pi/4) R_lock^2 r_e = 1.566235e-45 m^3 ; P_eff = 5.227252e+31 Pa
+
+== T2 Coulomb form ==
+[PASS] T2    F_Coulomb(r) r^2 = alpha hbar c at four separations (worst relative)           value 0.000000000000e+00 expected 0.000000000000e+00 err 0.000e+00 (tol 1e-14)
+[PASS] T2    F_Coulomb = (pi/4) P_eff R_int^4 / r^2 with R_int formed locally (worst relative) value 0.000000000000e+00 expected 0.000000000000e+00 err 0.000e+00 (tol 1e-14)
+[PASS] T2    alpha hbar c vs k_e e^2 of the stored CODATA constants                         value 2.307077550768e-28 expected 2.307077550786e-28 err 7.773e-12 (tol 1e-09)
+       F_Coulomb(a_0) = 8.238723504e-08 N
+
+== T3 inverse-square over six decades ==
+[PASS] T3    log-slope of F_occlusion between r and 10 r, worst deviation from -2 (6 decades, 2 radius pairs) value 4.440892098501e-16 expected 0.000000000000e+00 err 4.441e-16 (tol 1e-12)
+
+== T4 count scaling ==
+[PASS] T4    F_nuc-e(Z, a_0) / F_nuc-e(1, a_0) = Z, worst relative over Z = 1..20           value 4.440892098501e-16 expected 0.000000000000e+00 err 4.441e-16 (tol 1e-14)
+[PASS] T4    F_nuc-e(1, a_0) = F_Coulomb(a_0)                                               value 8.238723503795e-08 expected 8.238723503795e-08 err 0.000e+00 (tol 1e-14)
+       excluded geometry R_nuc = Z R_p: F(Z=2)/F(Z=1) = 4.000000 (Z^2 = 4)
+[PASS] T4    the excluded geometry would give Z^2 (ratio 4 at Z = 2)                        value 4.000000000000e+00 expected 4.000000000000e+00 err 0.000e+00 (tol 1e-14)
+
+== T5 hydrogen balance (CONSTRUCTION) ==
+[PASS] T5    F_Coulomb(a_0) vs m_e (alpha c)^2 / a_0                                        value 8.238723503795e-08 expected 8.238723503752e-08 err 5.178e-12 (tol 1e-09)
+       8.238723504e-08 N against 8.238723504e-08 N
+
+== T6 measured boundary radius against the lock boundary ==
+[PASS] T6    F_occlusion(R_p, r_e, a_0) / F_Coulomb(a_0) = (R_p / R_lock)^2                 value 1.000390796212e+00 expected 1.000390796212e+00 err 4.439e-16 (tol 1e-12)
+       (R_p/R_lock)^2 - 1 = 3.9080e-04 (R_p measured 8.414000e-16 m, R_lock 8.412356e-16 m)
+
+== T7 transfer function ==
+[PASS] T7    f_transfer vs V_disp,e / (3 V_int)                                             value 2.124189491374e-17 expected 2.124189491363e-17 err 5.178e-12 (tol 1e-09)
+
+== Pressure ladder (reported, not criteria) ==
+       u_CMB   = 4.174783e-14 Pa (energy density a_rad T^4)
+       P_rad   = u/3 = 1.391594e-14 Pa
+       P_conv  = N u = 2.460822e+48 Pa
+       P_cf    = P_conv/3 = 8.202739e+47 Pa
+       P_eff   = 5.227252e+31 Pa ; f = P_eff/P_conv = 2.124189e-17
+
+ALL CRITERIA MET: 0 failure(s)

@@ -58,3 +58,15 @@ factor from boundary length to a QED charge radius.
 
 Shadow-union BE reproduction against AME (or sequencer’s own BE column) as a
 **separate** investigation with κ policy pre-registered — not this loop.
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** Rows are scored PASS for "217/217 grammar identities" and a census of frozen rules, which are code and identity checks and not tests of a physical claim.
+
+**Correction:** Label them VERIFICATION and keep PASS/FAIL for gates against measured data.
+
+**Status:** ANNOTATED — label, status or tally corrected in the record; no re-score of earlier runs.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

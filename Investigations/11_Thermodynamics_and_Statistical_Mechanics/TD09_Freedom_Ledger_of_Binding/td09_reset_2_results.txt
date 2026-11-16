@@ -1,0 +1,38 @@
+TD09 Round 2 (registered in TD09_RESET_ASSESSMENT_2026-10-14.md)
+=======================================================================
+
+m_p = 938.272089 MeV, m_e = 0.510999 MeV, m_n (m_p + m_e + 0.782347) = 939.565435 MeV ; eta = 6.130e-10 ; B_old = 2.224573 ; B_native = 1.442246
+
+[V1] old list {p, n, d}: T_flip(X_n/X_p = 1/7) = 0.062445 MeV (prompt 0.062445) ; T_flip(X_n/X_p = 1) = 0.065092 MeV (prompt 0.065) -> met
+
+NATIVE LIST {p, e, d}, convention C1 (free baryons n_B = n_p): T_flip as a function of the input g_d (g_p = g_e = 2):
+  g_d = 1 : T_flip = 0.023817 MeV ; difference from the old value 0.062445 : -61.859%
+  g_d = 2 : T_flip = 0.024108 MeV ; difference from the old value 0.062445 : -61.394%
+  g_d = 3 : T_flip = 0.024281 MeV ; difference from the old value 0.062445 : -61.116%
+  g_d = 4 : T_flip = 0.024406 MeV ; difference from the old value 0.062445 : -60.917%
+  g_d = 6 : T_flip = 0.024583 MeV ; difference from the old value 0.062445 : -60.632%
+  g_d = 8 : T_flip = 0.024711 MeV ; difference from the old value 0.062445 : -60.428%
+  sensitivity dT/dln g_d (between g_d = 3 and 8): 4.384e-04 MeV per nat ; relative 1.805e-02
+
+Sensitivity at g_d = 3 (standard value, for comparison only):
+  eta x 0.5 : T_flip = 0.023699 MeV (-2.398% from the reference 0.024281)
+  eta x 2.0 : T_flip = 0.024893 MeV (+2.522% from the reference 0.024281)
+  B_native -0.001 MeV : T_flip = 0.024263 MeV (-0.073%)
+  B_native +0.001 MeV : T_flip = 0.024299 MeV (+0.073%)
+
+NATIVE LIST {p, e, d}, convention C2 (full count n_B = 3 n_p): T_flip as a function of the input g_d (g_p = g_e = 2):
+  g_d = 1 : T_flip = 0.022942 MeV ; difference from the old value 0.062445 : -63.260%
+  g_d = 2 : T_flip = 0.023211 MeV ; difference from the old value 0.062445 : -62.829%
+  g_d = 3 : T_flip = 0.023371 MeV ; difference from the old value 0.062445 : -62.573%
+  g_d = 4 : T_flip = 0.023486 MeV ; difference from the old value 0.062445 : -62.388%
+  g_d = 6 : T_flip = 0.023651 MeV ; difference from the old value 0.062445 : -62.125%
+  g_d = 8 : T_flip = 0.023769 MeV ; difference from the old value 0.062445 : -61.937%
+  sensitivity dT/dln g_d (between g_d = 3 and 8): 4.050e-04 MeV per nat ; relative 1.733e-02
+
+Sensitivity at g_d = 3 (standard value, for comparison only):
+  eta x 0.5 : T_flip = 0.022833 MeV (-2.305% from the reference 0.023371)
+  eta x 2.0 : T_flip = 0.023937 MeV (+2.420% from the reference 0.023371)
+  B_native -0.001 MeV : T_flip = 0.023354 MeV (-0.073%)
+  B_native +0.001 MeV : T_flip = 0.023388 MeV (+0.073%)
+
+Label: COMPUTED; convergent with equilibrium counting by construction; no gate against the BBN band.

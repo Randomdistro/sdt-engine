@@ -1,3 +1,20 @@
+# GOM_DAT2 — Cassini ODF field census (specification rewritten 2026-10-12)
+
+**Author:** J. C. Harvey, Melbourne. Verification item: its rows are excluded from physics tallies, per the prompt's id alias. The previous specification is kept below the line.
+
+## 1. State after the reset (2026-10-10)
+Format, time window and rows met on the P0 K252 file (supplier: GOM_DAT8 Phase A re-decode). The data-type histogram and the station-ID subset are open.
+
+## 2. Next round
+A fresh one-file decode restating C3 (data-type histogram) and C4 (station IDs), registered with expected values from the PDS label before decoding.
+
+## 3. Note
+These decodes feed the Cassini-based gravity tests. No physics result is drawn from a VERIFICATION row.
+
+---
+
+## Previous specification (kept as written)
+
 # GOM29 — Cassini SCE1 ODF Orbit-Data Field Census
 
 > **Status:** PRE-REGISTERED — 2026-08-08.  
@@ -41,3 +58,17 @@ This loop does **not** compare observables to any SDT or competitor delay model.
 
 A. Synthetic record with known time/type round-trips.  
 B. Header key 109 located at label pointer record 5.
+
+---
+
+## Audit correction 2026-10-05 (record / status)
+
+**Finding:** Claims are numbered GOM29-C1 … while the folder is GOM_DAT2, and all four PASS rows are field-parse checks (FORMAT ID, monotonic times, record counts).
+
+**Correction:** Align the ids and label the rows VERIFICATION.
+
+**Status:** ANNOTATED — label, status or tally corrected in the record; no re-score of earlier runs.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*
+
+**Id alias (2026-10-05):** claim ids written `GOM29-C*` in this folder and its verdict are the claims of `GOM_DAT2`. The rows are VERIFICATION (data-structure, checksum and field-parse checks), not tests of a physical claim, and are excluded from physics PASS/FAIL tallies; earlier text is not rewritten.

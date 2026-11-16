@@ -1,0 +1,50 @@
+FLM01 R2 — hierarchy and dormant scales (pre-registered 2026-10-05)
+====================================================================
+
+[V1] dimension tracker
+     P_eff R^4/r^2            = kg^1 m^1 s^-2       expected force            ok
+     G m1 m2/r^2              = kg^1 m^1 s^-2       expected force            ok
+     INVESTIGATION.md F_G     = kg^1 m^3 s^-2       = force x m^2, NOT a force (flagged)  ok (flagged)
+     tool F_G = P_conv l_P^2  = kg^1 m^1 s^-2       force dimension but r-exponent 0, not -2 (flagged)  ok (flagged)
+
+[V2] comparison side known values
+     alpha_G(p) = G m_p^2/(hbar c) = 5.9061e-39 (published 5.906e-39, tol 0.05%)
+     k_e e^2/(G m_p^2) = 1.23555e+36 (published 1.2355e36, tol 0.1%)  -> PASS
+
+VALIDATIONS: met
+
+[T1] Coulomb/gravity ratio, engine route (G-free) vs comparison column (k_e e^2/(G m_i m_j))
+     koppa_per_baryon = 1.24187e-54 m (bridge); alt (R_p -> 4 hbar/(m_p c)) = 3.10529e-55 m; hbar/(m_p c) = 2.10309e-16 m
+     closed form: alpha (lam_p/l_P)^2 = 1.23555e+36  (p-p, using Compton lam_p)
+     pair |  engine (bridge)  |  engine (alt)     |  comparison (G)   | dev bridge | dev alt
+     p-p  | 1.23579e+36 | 4.94221e+36 | 1.23555e+36 |  +0.0195% | +300.0000%
+     e-p  | 2.26910e+39 | 9.07465e+39 | 2.26866e+39 |  +0.0195% | +300.0000%
+     e-e  | 4.16642e+42 | 1.66624e+43 | 4.16561e+42 |  +0.0195% | +300.0000%
+     pairs within 0.5% (bridge route): 3 of 3 -> G3 (consistent; shared-input: l_P via G)
+     contaminating input: l_P = 1.616255e-35 m -- CODATA, computed from sqrt(hbar G/c^3), measured through G -- enters at laws.hpp:99 and bridge::koppa_per_baryon (laws.hpp:1059)
+     reduction: F_C/F_G(p-p) = alpha (lam_p/l_P)^2 ; lam_p/l_P = 1.30121e+19 is the one number the hierarchy rests on
+
+[T2] candidate scales vs the two normalisations (window: factor 3 = 0.477 decades; K = 6 each)
+     pressure gradient, constant 1e10 Pa/m:
+       S1 P_conv/R_p          2.9247e+63  log10(cand/const) =  +53.47
+       S2 P_conv/r_e          8.7327e+62  log10(cand/const) =  +52.94
+       S3 P_eff/R_p           6.2126e+46  log10(cand/const) =  +36.79
+       S4 P_eff/r_e           1.8550e+46  log10(cand/const) =  +36.27
+       S5 P_conv/(3 R_CMB)    8.6100e+20  log10(cand/const) =  +10.94
+       S6 P_conv/lam_C,e      6.3726e+60  log10(cand/const) =  +50.80
+     energy, constant 1e-20 J:
+       E1 k_B T_CMB           3.7630e-23  log10(cand/const) =   -2.42
+       E2 m_e c^2/4           2.0468e-14  log10(cand/const) =   +6.31
+       E3 alpha^2 m_e c^2     4.3597e-18  log10(cand/const) =   +2.64
+       E4 hbar c/R_p          3.7575e-11  log10(cand/const) =   +9.57
+       E5 hbar c/r_e          1.1219e-11  log10(cand/const) =   +9.05
+       E6 epsilon             1.7626e-118  log10(cand/const) =  -97.75
+     inside window: pressure 0 of 6, energy 0 of 6 (chance coincidence per constant over +-50 decades ~ 5.7%)
+
+[T3] effect size of the normalisations in magnetosphere.hpp's own inputs
+     Earth core   T_5 = 330e9/R_Earth = 5.1797e+04 Pa/m  tanh(T_5/1e10) = 5.180e-06
+     solar wind   T_5 = P_dyn/AU      = 4.4723e-21 Pa/m  tanh(T_5/1e10) = 4.472e-31  (P_dyn = 6.690e-10 Pa)
+     Phi_5 = 0 at every call site (magnetosphere.hpp:105,188,373): phase factor 1 + 0/1e-20 = 1.0 exactly
+     largest effect on E_mutual*(1+gradation): relative 5.18e-06
+
+SUMMARY: validations met; T1 3/3 pairs within 0.5%; T2 windows: pressure 0, energy 0; T3 largest effect 5.18e-06

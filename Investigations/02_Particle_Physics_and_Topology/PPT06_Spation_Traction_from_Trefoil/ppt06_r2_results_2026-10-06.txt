@@ -1,0 +1,49 @@
+PPT06 R2 — traction audit (pre-registered 2026-10-06)
+=====================================================
+
+[V1] k_proton_surface = 0.546431 ; sqrt(R_p/r_e) rel. diff 0.00e+00 ; R_p_lock = 8.41236e-16 m vs measured 8.41400e-16 m (-0.0195%) -> PASS
+[V2] omega_demand/omega_max = 3R/lam_p: worst rel. diff 0.00e+00 ; omega_p/omega_e = 3 mu/alpha^2: rel. diff 6.10e-10 -> PASS
+
+VALIDATIONS: met
+
+[T1] reproduction from engine symbols (record prints: 1.831c, 4.27e24, 3.563e23, 12, 1.03e8)
+     R_p used               R_p [m]      v_ph/c     w_demand     w_max        T        
+     measured (engine)      8.41400e-16  1.83006    4.2765e+24   3.5630e+23   12.0023
+     lock 4*lam_p           8.41236e-16  1.83024    4.2765e+24   3.5637e+23   12.0000
+     CODATA 2022            8.40750e-16  1.83076    4.2765e+24   3.5658e+23   11.9931
+     engine: v_phase_proton_surface/c = 1.83006 ; traction_ratio_proton (literal 3(W+1)) = 12.0 ; gear_ratio_nuclear_atomic = 1.0344e+08
+     record values reproduced to printed precision: yes
+
+[T2] dependence of v_phase/c = sqrt(r_e/R_p) (finite differences, +/-1e-4)
+     engine form (alpha, a_0, R_p independent): d ln v/d ln alpha = +1.0000 ; a_0 = +0.5000 ; R_p = -0.5000
+     a_0 = hbar/(m_e c alpha): d ln v/d ln alpha = +0.5000 ; m_e = -0.5000 ; R_p = -0.5000 ; m_p = 0 (R_p held)
+     'independent of atomic-scale input' rejected (|exponent| > 1e-6 for alpha, a_0 or m_e): YES (rejected)
+     R_p = 4 lam_p: v^2/c^2 = alpha mu/(W+1) = 3.349763 (alpha = 7.297353e-03, mu = 1836.1527) ; r_e/R_p (measured) = 3.349109
+     CODATA 2018 0.8414(19) fm      v^2/c^2 = 3.34911 +/- 0.00756 ; 10/3 = 3.33333 ; deviation +2.1 sigma
+     CODATA 2022 8.4075(64)e-16 m   v^2/c^2 = 3.35170 +/- 0.00255 ; 10/3 = 3.33333 ; deviation +7.2 sigma
+     lock form (no R_p uncertainty; alpha, mu exact in-engine): 3.349763 vs 10/3: +0.493%
+     sqrt(10/3) excluded as the exact form (> 3 sigma both R_p values): no
+
+[T3] T = q (v_T/c)(R_b/R_t), R_b = measured R_p
+     geometry                                     v_T/c     R_t [fm]   R_t/lam   T
+     PPT05 recipe (v_T=c/sqrt3, R_t=lam/sqrt3)    0.5774    0.12142    0.5774    12.0023
+     PPT01 rule A (1,1)                           0.6325    0.33253    1.5811    4.8009
+     PPT01 rule B (2,3)                           0.5547    0.75828    3.6056    1.8465
+     PPT01 rule C (3,2)                           0.7071    0.89227    4.2426    2.0004
+     T spans 1.8465 .. 12.0023 (ratio 6.500) ; 'T = 12 is a property of winding and boundary alone' rejected (spread > 1%): YES (rejected)
+     control W = 1 (PPT05 recipe at q = 1, R_b = 2 lam): T_c = 0.666667 ; integer form 3(W+1) at W = 1 = 6 ; ratio 0.1111 -> control FAILS
+     the factor '3' in 3R_p/lam_p: q = 3 ; q^2/3 = 3.0000 ; coincide at q = 3 only (q = 1: 1.0000 vs 0.3333)
+
+[T4] two demands at R_p: v_phase/c = 1.8301 ; omega_demand R_p/c = 12.0023 ; deficit omega-form (omega_demand - omega_max) R_p/c = 11.0023
+     record 'T = (v_phase/c) x q': q' = T/(v_phase/c) = 6.5585 (record prints 6.55; q = 3 gives 5.4902) ; holds if within 1% at q = 3: NO
+
+[T5] gear ratio: omega_p/omega_e = 1.03443e+08 ; printed '3 (m_p/m_e)(1/alpha)' = 7.54857e+05 ; 3 mu/alpha^2 = 1.03443e+08 ; printed/actual = 0.00730 (= alpha = 0.00730)
+     printed decomposition correct (within 1%): NO
+
+[T6] energy partition of m_p c^2 = 938.272 MeV: PPT06 table toroidal 1/3 = 312.757 MeV, poloidal 2/3 = 625.515 MeV ; laws.hpp law_VI::topology::v_toroidal(2,3): v_T^2/c^2 = 0.4000 -> 375.309 MeV, v_P^2 -> 562.963 MeV ; consistent (1e-6): NO
+
+[T7] report-only: N_contact = 3.4056e+40 ; F_total = N (eps/l_P) T = 4.4577e-42 N ; F_total x N = 2.6276e+20 N ; alpha hbar c/R_p^2 = 3.2588e+02 N ; law_III F (two R_p spheres, r = 2R_p) = 7.2662e+00 N
+     ratios: F_total/Coulomb-form = 1.368e-44 ; F_total x N / Coulomb-form = 8.063e+17 ; F_total x N / law_III = 3.616e+19 (no accumulation rule stated; no criterion)
+
+[T8] v_phase/c over R_p in {measured, lock, CODATA 2022}: 1.83006 .. 1.83076 ; spread 386.5 ppm
+     the 1.83c seat in NP15/NP20/NP27 shares R_p (FLM07); NP15 mu_n and NP20 Q_beta are not recomputed here.

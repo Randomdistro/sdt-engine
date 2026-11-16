@@ -1,0 +1,51 @@
+﻿=================================================================
+ GD09 MILKY WAY BARYON INVENTORY
+ masses OBSERVED (source-stated) ; counts COMPUTED ; 0 fitted
+=================================================================
+koppa_Sun = 1477.0459 m ; koppa_per_baryon = 1.2419e-54 m ; N_Sun = 1.1894e+57 baryons
+
+== INSTRUMENT VALIDATION ==
+  [PASS] V1 : N_Sun engine census vs M_Sun,nominal/m_p (1%, reference only)  (4.804e-04)
+  [PASS] V2 : round trip N -> M -> N  (2.220e-16)
+  [PASS] V3 : low <= central <= high for every row  (0.000e+00)
+  [PASS] V4 : long-bar sum within 1.2x of the stated ~1e10  (1.030e+00)
+  validation failures: 0
+
+== BARYON COUNTS (N = M/M_Sun x N_Sun) ==
+component                                    standing  role             M_lo        M_c       M_hi |      N_lo       N_c      N_hi
+Sgr A* black hole                            KNOWN     reference   4.000e+06  4.200e+06  4.400e+06 |  4.76e+63  5.00e+63  5.23e+63
+Nuclear star cluster                         ESTIMATED nested      1.500e+07  1.800e+07  2.100e+07 |  1.78e+64  2.14e+64  2.50e+64
+Nuclear stellar disc                         ESTIMATED nested      8.000e+08  1.400e+09  2.000e+09 |  9.51e+65  1.67e+66  2.38e+66
+b/p bulge region, stellar (incl. inner-disc stars) ESTIMATED additive    1.400e+10  1.550e+10  1.700e+10 |  1.67e+67  1.84e+67  2.02e+67
+b/p bulge region, dynamical (reference)      ESTIMATED reference   1.770e+10  1.840e+10  1.910e+10 |  2.11e+67  2.19e+67  2.27e+67
+Long bar, thin component                     ESTIMATED nested      6.000e+09  7.000e+09  8.000e+09 |  7.14e+66  8.33e+66  9.51e+66
+Long bar, super-thin component               ESTIMATED nested      3.300e+09  3.300e+09  3.300e+09 |  3.92e+66  3.92e+66  3.92e+66
+Thin disc, stellar                           ESTIMATED additive    2.500e+10  3.500e+10  4.500e+10 |  2.97e+67  4.16e+67  5.35e+67
+Thick disc, stellar                          ESTIMATED additive    3.000e+09  6.000e+09  9.000e+09 |  3.57e+66  7.14e+66  1.07e+67
+Stellar halo (incl. substructure)            ESTIMATED additive    4.000e+08  5.500e+08  7.000e+08 |  4.76e+65  6.54e+65  8.33e+65
+Halo substructure (within the halo row)      ESTIMATED nested      2.000e+08  2.500e+08  3.000e+08 |  2.38e+65  2.97e+65  3.57e+65
+Total stellar mass                           ESTIMATED total       4.000e+10  5.000e+10  6.000e+10 |  4.76e+67  5.95e+67  7.14e+67
+Atomic hydrogen HI (2-19 kpc, hydrogen only) ESTIMATED nested      2.700e+09  4.900e+09  7.100e+09 |  3.21e+66  5.83e+66  8.44e+66
+Molecular hydrogen H2 (2-19 kpc, hydrogen only) ESTIMATED nested      5.500e+08  9.000e+08  1.250e+09 |  6.54e+65  1.07e+66  1.49e+66
+Cold gas incl. helium, disc 2-19 kpc         ESTIMATED additive_gas  3.600e+09  8.100e+09  1.260e+10 |  4.28e+66  9.63e+66  1.50e+67
+Cold gas incl. helium, bulge <2 kpc          ESTIMATED additive_gas  3.000e+08  1.100e+09  1.900e+09 |  3.57e+65  1.31e+66  2.26e+66
+Hot gas corona within r_vir                  SUSPECTED additive_corona  1.500e+10  2.500e+10  3.500e+10 |  1.78e+67  2.97e+67  4.16e+67
+Stars + cold gas                             ESTIMATED total       5.800e+10  6.300e+10  6.800e+10 |  6.90e+67  7.49e+67  8.09e+67
+Total baryonic incl. corona (text value)     SUSPECTED total       7.600e+10  8.800e+10  1.000e+11 |  9.04e+67  1.05e+68  1.19e+68
+Total baryonic incl. corona (sidebar value)  SUSPECTED total       7.200e+10  8.500e+10  9.800e+10 |  8.56e+67  1.01e+68  1.17e+68
+
+== STELLAR PARTITION vs TOTAL STELLAR MASS (criterion |d| <= 1 sigma_combined) ==
+  b/p bulge region, stellar (incl. inner-disc stars)  1.550e+10 +-  1.50e+09
+  Thin disc, stellar                    3.500e+10 +-  1.00e+10
+  Thick disc, stellar                   6.000e+09 +-  3.00e+09
+  Stellar halo (incl. substructure)     5.500e+08 +-  1.50e+08
+  partition sum 5.705e+10 ; source total 5.000e+10 ; difference +7.050e+09 ; sigma_combined 1.454e+10 ; |d|/sigma = 0.49  -> consistent
+  partition N = 6.785e+67 ; total-stellar N = 5.947e+67
+
+== ROLL-UP (additive rows) ==
+stars (partition)     M = 5.705e+10  N = 6.785e+67
+cold gas (disc 2-19 kpc + bulge <2 kpc, helium included) M = 9.200e+09 +- 4.57e+09  N = 1.094e+67
+hot corona            M = 2.500e+10  N = 2.973e+67  [SUSPECTED]
+source total (text)   M = 8.800e+10  N = 1.047e+68 ; sidebar value 8.500e+10 (the source states both)
+
+wrote baryon_inventory.csv, mw_baryons.js

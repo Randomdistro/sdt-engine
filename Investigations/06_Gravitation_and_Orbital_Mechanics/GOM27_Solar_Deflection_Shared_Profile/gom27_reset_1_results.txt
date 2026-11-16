@@ -1,0 +1,31 @@
+GOM27 blank-slate run 1 (registered in GOM27_RESET_ASSESSMENT_2026-10-11.md sections 0-2)
+=======================================================================
+
+[E] tiny K (1e-9 m) at b = 1e9 m: delta = 1.600e-16 (4K/b = 4.000e-18) -> met
+[A] reduced case K/b = 1e-03: delta = 4.015783021e-03, 4K/b = 4.000000000e-03, relative +3.946e-03 (gate 5%) -> met
+[A] reduced case K/b = 1e-04: delta = 4.001571543e-04, 4K/b = 4.000000000e-04, relative +3.929e-04 (gate 5%) -> met
+[B] solar K at b = 5 R_sun: delta = 1.697689995e-06, 4K/b = 1.697687165e-06, relative +1.667e-06 (gate 2%) -> met
+[C] 64 against 128 nodes: relative change 2.89e-11 (gate 1e-3) -> met
+[D] turning identity |n(r0) r0 - b|/b = 0.00e+00 (gate 1e-10) -> met
+
+INSTRUMENT TESTS A-E: met
+
+Second-order coefficient c2 = (delta - 4K/b)/(K/b)^2: 15.7154 at K/b = 1e-4, 15.7830 at K/b = 1e-3 (Schwarzschild 15 pi/4 = 11.7810)
+
+SCAN with the frozen K = 1476.351201 m: b/R_sun, r0/R_sun, delta [rad], delta [arcsec], delta/delta_wf - 1, c2-equivalent
+   1.00  0.999995756 8.488506564e-06 1.750880 +8.334e-06 15.708
+   1.01  1.009995756 8.404461252e-06 1.733545 +8.251e-06 15.708
+   1.05  1.049995756 8.084288759e-06 1.667504 +7.937e-06 15.708
+   1.10  1.099995756 7.716818303e-06 1.591708 +7.576e-06 15.708
+   1.20  1.199995756 7.073745646e-06 1.459065 +6.945e-06 15.708
+   1.50  1.499995756 5.658988656e-06 1.167250 +5.556e-06 15.708
+   2.00  1.999995756 4.244235598e-06 0.875436 +4.167e-06 15.709
+   3.00  2.999995756 2.829486468e-06 0.583623 +2.778e-06 15.708
+   5.00  4.999995756 1.697689995e-06 0.350174 +1.667e-06 15.708
+  10.00  9.999995756 8.488442902e-07 0.175087 +8.336e-07 15.713
+
+Limb (b = R_sun): K = 1476.3512 m: 1.750880 arcsec ; engine koppa_Sun = 1477.0459 m: 1.751704 arcsec ; GOM26 2024 value 1476.8693 m: 1.751495 arcsec
+Reference (information only): the general-relativistic weak-field value for GM_sun/c^2 = 1476.6250 m : 4 GM/(c^2 R) = 1.751190 arcsec
+gamma-equivalent of K = 1476.3512 m: 2K/(GM/c^2) - 1 = 0.99963 (sigma from the K systematic 4e-4: +-0.00080; from 6e-4: +-0.00120) against the VLBA gamma = 0.9998 +- 0.0003 : difference -0.00017 = 0.20 sigma (combined with 0.0003 and 4e-4)
+
+D5 data gate: row-level tables are MODEL-PROCESSED residuals about the GR (gamma = 1) differential bending (D not tabulated); only the global gamma summary is comparable -> PENDING_DATA / UNADJUDICATED; no bin excluded.

@@ -1,0 +1,32 @@
+{
+  "source": "NASA/JPL Horizons API 1.2",
+  "ephemeris": "DE441",
+  "centre": "Solar System Barycenter (0)",
+  "reference_frame": "Ecliptic of J2000.0",
+  "initial_jd_tdb": 2451545.0,
+  "terminal_jd_tdb": 2451545.000694444,
+  "interval_s": 60,
+  "retrieved": "2026-08-17",
+  "queries": {
+    "Sun": "COMMAND='10' CENTER='@0' EPHEM_TYPE='VECTORS' OUT_UNITS='KM-S' VEC_TABLE='2'",
+    "Earth": "COMMAND='399' CENTER='@0' EPHEM_TYPE='VECTORS' OUT_UNITS='KM-S' VEC_TABLE='2'",
+    "Moon": "COMMAND='301' CENTER='@0' EPHEM_TYPE='VECTORS' OUT_UNITS='KM-S' VEC_TABLE='2'"
+  },
+  "terminal_states_si": [
+    {
+      "id": "Sun",
+      "position_m": [-1067706246.626335, -418276041.3044977, 30861807.45371753],
+      "velocity_m_s": [9.312582018048732, -12.82474597083918, -0.1633509701039473]
+    },
+    {
+      "id": "Earth",
+      "position_m": [-27568527577.71176, 144278692582.6525, 30250668.93973202],
+      "velocity_m_s": [-29784.88251102974, -5482.482882222837, 0.0185977915405644]
+    },
+    {
+      "id": "Moon",
+      "position_m": [-27860097346.73617, 144003668984.9769, 66521174.7719571],
+      "velocity_m_s": [-29141.24179273477, -6213.365644039724, -11.5014297296252]
+    }
+  ]
+}

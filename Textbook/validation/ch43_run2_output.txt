@@ -1,0 +1,37 @@
+
+== V0 helper validation (known answers) ==
+[PASS] V0    integrate sin over [0, pi] = 2                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 3.331e-16 (tol 1e-13)
+[PASS] V0    integrate x^7 over [0, 1] = 1/8                                                value 1.250000000000e-01 expected 1.250000000000e-01 err 2.220e-15 (tol 1e-14)
+[PASS] V0    integrate exp over [-1, 1] = e - 1/e                                           value 2.350402387288e+00 expected 2.350402387288e+00 err 5.668e-16 (tol 1e-13)
+[PASS] V0    root of cos x - x = 0.739085133215161                                          value 7.390851332152e-01 expected 7.390851332152e-01 err 2.253e-15 (tol 1e-13)
+[PASS] V0    root of x^2 - 2 on [1, 2] = sqrt 2                                             value 1.414213562373e+00 expected 1.414213562373e+00 err 2.983e-15 (tol 1e-13)
+[PASS] V0    compensated sum 1 + 10^6 x 1e-16 = 1 + 1e-10                                   value 1.000000000100e+00 expected 1.000000000100e+00 err 0.000e+00 (tol 1e-15)
+
+== V1 known answers ==
+[PASS] V1    J_1 = 1/2                                                                      value 5.000000000000e-01 expected 5.000000000000e-01 err 0.000e+00 (tol 1e-12)
+[PASS] V1    lambda = -1/2                                                                  value -5.000000000000e-01 expected -5.000000000000e-01 err 0.000e+00 (tol 1e-12)
+[PASS] V1    F* = 1/4                                                                       value 2.500000000000e-01 expected 2.500000000000e-01 err 0.000e+00 (tol 1e-12)
+[PASS] V1    Jacobi eigenvalues 1, 4, 9, 16 (worst absolute error)                          value 1.776356839400e-15 expected 0.000000000000e+00 err 1.776e-15 (tol 1e-12)
+
+== T1 constrained allocation and its dual variables ==
+[PASS] T1    stationarity residual |grad F + C' lambda|                                     value 2.220446049250e-16 expected 0.000000000000e+00 err 2.220e-16 (tol 1e-12)
+[PASS] T1    constraint residual |C J - b|                                                  value 2.220446049250e-16 expected 0.000000000000e+00 err 2.220e-16 (tol 1e-12)
+       J = (0.210365, 0.511900, -0.023033, 0.300768) ; lambda = (-0.549290, -0.973820) ; F* = 0.15862572
+[PASS] T1    dF*/db_1 (central difference) = -lambda_1                                      value 5.492898272545e-01 expected 5.492898272553e-01 err 1.375e-12 (tol 1e-08)
+[PASS] T1    dF*/db_2 (central difference) = -lambda_2                                      value 9.738195777334e-01 expected 9.738195777351e-01 err 1.767e-12 (tol 1e-08)
+
+== T2 identifiability: rank and conditioning of the sensitivity matrix ==
+       Delta = 1     : singular values 4.323e-03 8.812e-02 6.330e-01 1.883e+00 ; condition number 4.356e+02
+       Delta = 0.1   : singular values 8.060e-06 1.980e-02 6.769e-01 2.258e+00 ; condition number 2.802e+05
+       Delta = 0.01  : singular values 8.490e-09 2.098e-03 7.019e-01 2.330e+00 ; condition number 2.745e+08
+[PASS] T2    the condition number increases as Delta falls through 1, 0.1, 0.01
+[PASS] T2    the condition number at Delta = 0.01 is finite and at least 5 times that at Delta = 0.1
+       Delta = 0 : singular values 5.304e-17 9.060e-17 7.051e-01 2.339e+00
+[PASS] T2    at Delta = 0 the smallest singular value is below 1e-6 of the largest
+
+== T3 which measurement helps (Delta = 0.1) ==
+       condition number: base 2.8023e+05 ; repeated times 2.8023e+05 ; added later times 5.9584e+04 (reduction factor 4.70)
+[PASS] T3    repeating the same times leaves the condition number unchanged                 value 2.802266575296e+05 expected 2.802266575297e+05 err 2.235e-13 (tol 1e-12)
+[PASS] T3    adding samples at t = 4 ... 8.5 reduces the condition number by at least a factor 2
+
+ALL CRITERIA MET: 0 failure(s)

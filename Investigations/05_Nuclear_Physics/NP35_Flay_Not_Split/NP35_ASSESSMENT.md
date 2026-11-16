@@ -39,3 +39,6 @@ This is **not** EMPIRICALLY SURVIVES:
 ## Ontology
 
 The core is not a goo drop. Naive complete-closure unwrap (F1) would leave a 126-core and does not match. Sealed **triton** masonry (T12) with incomplete D42 so T14 unfrozen **does** match the heavy peak. Necked min-cut remains the wrong object.
+
+## Audit re-score (2026-10-05, from the recorded values; no new run)
+G4 was applied to the predicted heavy mass, which is nearly constant by construction (A_H = Z_H + 82), and G3's band [128, 148] was wide. Corrected rules: G4 on the **observed** heavy-peak slope against A*, and G3 as |A_H(pred) − A_H(obs)| < 8 per system. Re-scored on the values recorded above: observed slope −0.197 (|s| < 0.25, PASS); predicted 133–135 against observed 136–140 gives |ΔA_H| of at most 7 (all eight inside 8, PASS). The outcomes are unchanged under the corrected gates; the earlier PASS rested on the wrong quantity and the wrong width, and the spontaneous-fission hold-out (`NP35_SF_HOLDOUT_*`) uses the corrected form.

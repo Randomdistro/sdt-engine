@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Milky Way Arm Topology</title>
+<style>
+  :root { --bg:#0a0e18; --fg:#d3dcec; --dim:#7f8ca6; --line:#26314a; --accent:#f2c14e; }
+  * { box-sizing:border-box; }
+  html,body { margin:0; height:100%; background:var(--bg); color:var(--fg);
+    font:13px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; overflow:hidden; }
+  canvas { display:block; position:fixed; inset:0; touch-action:none; cursor:grab; }
+  canvas:active { cursor:grabbing; }
+  #hud { position:fixed; left:16px; top:14px; max-width:min(420px,calc(100vw - 32px)); pointer-events:none; }
+  #hud h1 { margin:0 0 4px; font-size:15px; font-weight:600; letter-spacing:.02em; }
+  #hud p { margin:0; color:var(--dim); }
+  #panel { position:fixed; left:16px; bottom:14px; right:16px; display:flex; flex-wrap:wrap; gap:6px 18px; align-items:center; }
+  .grp { display:flex; gap:4px; align-items:center; }
+  .grp > span { color:var(--dim); margin-right:4px; }
+  button { background:#121a2b; color:var(--fg); border:1px solid var(--line); border-radius:6px;
+    padding:6px 10px; font:inherit; cursor:pointer; min-height:32px; }
+  button:hover { border-color:#41507a; }
+  button.on { background:#1d2a47; border-color:var(--accent); color:#fff; }
+  #legend { position:fixed; right:16px; top:14px; display:flex; flex-direction:column; gap:3px; }
+  #legend button { display:flex; align-items:center; gap:8px; text-align:left; min-height:28px; padding:4px 10px; }
+  #legend i { width:12px; height:12px; border-radius:3px; display:inline-block; }
+  #legend button.off { opacity:.35; }
+  .lab { position:fixed; left:0; top:0; pointer-events:none; white-space:nowrap; font-size:12px;
+    text-shadow:0 0 4px #000,0 0 2px #000; transform:translate(-50%,-50%); }
+  #err { position:fixed; inset:0; display:none; align-items:center; justify-content:center; text-align:center; padding:24px; color:#f2a0a0; }
+  #depthleg { position:fixed; right:16px; bottom:64px; max-width:min(360px,calc(100vw - 32px)); display:none;
+    background:rgba(10,14,24,.92); border:1px solid var(--line); border-radius:8px; padding:8px 12px; font-size:12px; }
+  #depthleg b { font-weight:600; } #depthleg .bar { height:10px; border-radius:3px; margin:6px 0 2px; }
+  #depthleg .sc { display:flex; justify-content:space-between; color:var(--dim); }
+  #bary { position:fixed; left:16px; top:150px; bottom:64px; width:min(780px,calc(100vw - 32px)); overflow:auto;
+    background:rgba(10,14,24,.96); border:1px solid var(--line); border-radius:8px; padding:12px 14px; display:none; z-index:5; }
+  #bary h2 { margin:0 0 2px; font-size:14px; font-weight:600; }
+  #bary p { margin:0 0 8px; color:var(--dim); font-size:12px; }
+  #bary table { width:100%; border-collapse:collapse; font-size:12px; font-variant-numeric:tabular-nums; }
+  #bary th { text-align:left; color:var(--dim); font-weight:500; padding:4px 6px; border-bottom:1px solid var(--line); position:sticky; top:0; background:#0a0e18; }
+  #bary td { padding:3px 6px; border-bottom:1px solid #151d30; vertical-align:top; }
+  #bary tr.grp td { color:var(--accent); padding-top:9px; border-bottom:none; font-weight:600; }
+  #bary tr.nest td { color:var(--dim); }
+  #bary tr.nest td:first-child { padding-left:20px; }
+  #bary td.n { white-space:nowrap; text-align:right; }
+  #bary .st-KNOWN { color:#81c784; } #bary .st-ESTIMATED { color:var(--fg); } #bary .st-SUSPECTED { color:#f2a0a0; }
+  @media (max-width:640px){ #legend{ top:auto; bottom:96px; right:16px; flex-direction:row; flex-wrap:wrap; max-width:calc(100vw - 32px); } }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="hud">
+  <h1>Milky Way arm topology</h1>
+  <p>Arm centre lines, widths and heights from Reid et al. 2019, Table 2 and §3 (R<sub>0</sub> = 8.15 kpc). Solid core = 1σ, shell = 2σ.
+     Faint = extended beyond the measured azimuth range; fainter still = continued around the far side along the same fitted spiral (unmeasured). Discs and bulge: Bland-Hawthorn &amp; Gerhard 2016; discs drawn
+     at ±1 scale height to 15 kpc (a drawing limit). <span id="exinfo">Vertical scale true.</span></p>
+</div>
+<div id="legend"></div>
+<div id="panel">
+  <div class="grp"><span>View</span><button data-view="top" class="on">Top</button><button data-view="obl">Oblique</button><button data-view="edge">Edge-on</button></div>
+  <div class="grp"><span>Vertical</span><button data-ex="1" class="on">×1</button><button data-ex="5">×5</button><button data-ex="10">×10</button></div>
+  <div class="grp"><span>Show</span><button data-t="shell" class="on">2σ shell</button><button data-t="ext" class="on">Extended</button><button data-t="far" class="on">Far side</button><button data-t="bar" class="on">Bar axis</button><button data-t="discs" class="on">Discs</button><button data-t="bulge" class="on">Bulge</button><button data-t="labels" class="on">Labels</button></div>
+  <div class="grp" id="barygrp" style="display:none"><span>Census</span><button id="barybtn">Baryons</button></div>
+  <div class="grp" id="depthgrp" style="display:none"><span>Depth</span><button id="depthbtn">Map</button></div>
+</div>
+<div id="bary"></div>
+<div id="depthleg"></div>
+<div id="err">The model data (mw_arms_data.js) or three.js did not load.</div>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+<script src="mw_arms_data.js"></script>
+<script src="../GD09_Milky_Way_Baryon_Inventory/mw_baryons.js"></script>
+<script src="../GD10_Milky_Way_Displacement_Field/mw_displacement.js"></script>
+<script src="../GD11_Static_Disc_Displacement_Cascade/mw_throughput.js"></script>
+<script src="../GD12_Displacement_Pressure_by_Volume/mw_pressure.js"></script>
+<script src="../GD13_Layered_Displacement_by_Object/mw_layers.js"></script>
+<script>
+(function () {
+  "use strict";
+  if (!window.THREE || !window.MW_TOPOLOGY) { document.getElementById("err").style.display = "flex"; return; }
+  var D = window.MW_TOPOLOGY, RING = 16;
+  var COL = ["#c9a7ff", "#ff8a65", "#4fc3f7", "#81c784", "#f2c14e", "#f06292", "#80cbc4"];
+
+  var canvas = document.getElementById("c");
+  var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: false });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  renderer.setClearColor(0x0a0e18, 1);
+  var scene = new THREE.Scene();
+  var camera = new THREE.PerspectiveCamera(38, 1, 0.05, 400);
+  camera.up.set(0, 0, 1);
+  scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+  var sun = new THREE.DirectionalLight(0xffffff, 0.45); sun.position.set(-6, -10, 20); scene.add(sun);
+
+  // ---- arm tubes: elliptical section, in-plane semi-axis k*sigma_in, vertical k*sigma_z ----
+  function tube(pts, i0, i1, k) {
+    var n = i1 - i0 + 1, pos = new Float32Array(n * RING * 3), idx = [], q = 0, i, j;
+    for (i = i0; i <= i1; i++) {
+      var a = Math.max(i - 1, 0), b = Math.min(i + 1, pts.length - 1);
+      var tx = pts[b][0] - pts[a][0], ty = pts[b][1] - pts[a][1], tl = Math.hypot(tx, ty) || 1;
+      var nx = -ty / tl, ny = tx / tl;
+      for (j = 0; j < RING; j++) {
+        var ph = 2 * Math.PI * j / RING, c = Math.cos(ph), s = Math.sin(ph);
+        pos[q++] = pts[i][0] + k * pts[i][2] * c * nx;
+        pos[q++] = pts[i][1] + k * pts[i][2] * c * ny;
+        pos[q++] = k * pts[i][3] * s;
+      }
+    }
+    for (i = 0; i < n - 1; i++) for (j = 0; j < RING; j++) {
+      var p = i * RING + j, p2 = i * RING + (j + 1) % RING;
+      idx.push(p, p2, p + RING, p2, p2 + RING, p + RING);
+    }
+    var g = new THREE.BufferGeometry();
+    g.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+    g.setIndex(idx); g.computeVertexNormals();
+    return g;
+  }
+  // contiguous runs of equal measured flag (boundary sample shared so the ridge stays unbroken)
+  function runs(pts) {
+    var out = [], s = 0, i;
+    for (i = 1; i <= pts.length; i++) {
+      if (i === pts.length || pts[i][4] !== pts[s][4]) {
+        out.push({ a: s, b: Math.min(i, pts.length - 1), m: pts[s][4] === 1, t: pts[s][4] });
+        s = i;
+      }
+    }
+    return out;
+  }
+
+  var armGroup = new THREE.Group(); scene.add(armGroup);
+  var arms = [];
+  D.arms.forEach(function (arm, ai) {
+    var col = new THREE.Color(COL[ai % COL.length]), rec = { name: arm.name, color: COL[ai % COL.length], parts: [], visible: true };
+    runs(arm.pts).forEach(function (r) {
+      if (r.b <= r.a) return;
+      var core = new THREE.Mesh(tube(arm.pts, r.a, r.b, 1), new THREE.MeshLambertMaterial({
+        color: col, side: THREE.DoubleSide, transparent: !r.m, opacity: r.m ? 1 : (r.t === 2 ? 0.2 : 0.38), depthWrite: r.m }));
+      var shell = new THREE.Mesh(tube(arm.pts, r.a, r.b, 2), new THREE.MeshLambertMaterial({
+        color: col, side: THREE.DoubleSide, transparent: true, opacity: r.m ? 0.17 : (r.t === 2 ? 0.04 : 0.07), depthWrite: false }));
+      armGroup.add(core); armGroup.add(shell);
+      rec.parts.push({ core: core, shell: shell, measured: r.m, tier: r.t });
+    });
+    // label anchor: middle of the measured run
+    var ms = arm.pts.filter(function (p) { return p[4] === 1; }), mid = ms[Math.floor(ms.length / 2)];
+    var rr = Math.hypot(mid[0], mid[1]) || 1, off = 2 * mid[2] + 0.45;
+    rec.anchor = new THREE.Vector3(mid[0] * (1 + off / rr), mid[1] * (1 + off / rr), 0);
+    arms.push(rec);
+  });
+
+  // ---- context bodies (BH&G 2016): thin / thick disc slabs at +-1 scale height, b/p bulge ellipsoid ----
+  var C = D.ctx, bodies = { discs: [], bulge: null };
+  function slab(R, h, color, op) {
+    var m = new THREE.Mesh(new THREE.CylinderGeometry(R, R, 2 * h, 120, 1, false),
+      new THREE.MeshLambertMaterial({ color: color, transparent: true, opacity: op, depthWrite: false, side: THREE.DoubleSide }));
+    m.rotation.x = Math.PI / 2; armGroup.add(m); bodies.discs.push(m); return m;
+  }
+  slab(C.rmax, C.thick.zd, 0x6b7fb0, 0.05);
+  slab(C.rmax, C.thin.zd, 0x9db4e0, 0.08);
+  var bulge = new THREE.Mesh(new THREE.SphereGeometry(1, 64, 32),
+    new THREE.MeshLambertMaterial({ color: 0xffb74d, transparent: true, opacity: 0.6, depthWrite: false }));
+  bulge.scale.set(C.bulge.a, C.bulge.b, C.bulge.c);
+  bulge.rotation.z = (90 - C.bulge.ang) * Math.PI / 180;   // major axis to 27 deg from the Sun line, near end at +x
+  armGroup.add(bulge); bodies.bulge = bulge;
+
+  // ---- reference frame: centre, Sun, rings, bar axis ----
+  var ref = new THREE.Group(); scene.add(ref);
+  function line(a, b, color, op) {
+    var g = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(a[0], a[1], a[2] || 0), new THREE.Vector3(b[0], b[1], b[2] || 0)]);
+    return new THREE.Line(g, new THREE.LineBasicMaterial({ color: color, transparent: true, opacity: op }));
+  }
+  [5, 10, 15].forEach(function (r) {
+    var pts = [], i;
+    for (i = 0; i <= 180; i++) pts.push(new THREE.Vector3(r * Math.sin(i / 180 * 2 * Math.PI), r * Math.cos(i / 180 * 2 * Math.PI), 0));
+    ref.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), new THREE.LineBasicMaterial({ color: 0x35456b, transparent: true, opacity: 0.55 })));
+  });
+  [[C.thin.Rd, 0x9db4e0], [C.thick.Rd, 0x6b7fb0]].forEach(function (e) {
+    var pts = [], i;
+    for (i = 0; i <= 180; i++) pts.push(new THREE.Vector3(e[0] * Math.sin(i / 180 * 2 * Math.PI), e[0] * Math.cos(i / 180 * 2 * Math.PI), 0));
+    ref.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), new THREE.LineBasicMaterial({ color: e[1], transparent: true, opacity: 0.8 })));
+  });
+  ref.add(line([0, -17], [0, 17], 0x35456b, 0.35)); ref.add(line([-17, 0], [17, 0], 0x35456b, 0.35));
+  function ball(x, y, z, r, c) { var m = new THREE.Mesh(new THREE.SphereGeometry(r, 20, 14), new THREE.MeshBasicMaterial({ color: c })); m.position.set(x, y, z); ref.add(m); }
+  ball(0, 0, 0, 0.22, 0xffb74d); ball(0, D.R0, D.zSun, 0.14, 0xfff176);
+  var barG = new THREE.Group(); scene.add(barG);
+  [[D.bar.angLo, 0.35], [D.bar.angHi, 0.35], [(D.bar.angLo + D.bar.angHi) / 2, 1]].forEach(function (e) {
+    var t = e[0] * Math.PI / 180, h = D.bar.half;
+    barG.add(line([-h * Math.sin(t), -h * Math.cos(t)], [h * Math.sin(t), h * Math.cos(t)], 0xff7043, e[1]));
+  });
+
+  // ---- labels ----
+  var labs = [];
+  function addLab(text, color, v, key) {
+    var el = document.createElement("div"); el.className = "lab"; el.textContent = text; el.style.color = color;
+    document.body.appendChild(el); labs.push({ el: el, v: v, key: key });
+  }
+  arms.forEach(function (a) { addLab(a.name, a.color, a.anchor, "arm"); });
+  addLab("Galactic centre", "#ffb74d", new THREE.Vector3(0.9, -0.7, 0), "ref");
+  addLab("Sun", "#fff176", new THREE.Vector3(-0.9, D.R0 + 0.45, 0), "ref");
+  addLab("bar axis", "#ff7043", new THREE.Vector3(-D.bar.half * Math.sin(0.53) - 0.3, -D.bar.half * Math.cos(0.53) - 0.5, 0), "bar");
+  addLab("bulge", "#ffb74d", new THREE.Vector3(-0.2, 2.5, 0), "bulge");
+  addLab("R_t 2.6", "#9db4e0", new THREE.Vector3(-C.thin.Rd * 0.707 - 0.2, C.thin.Rd * 0.707 + 0.25, 0), "disc");
+  addLab("R_T 2.0", "#6b7fb0", new THREE.Vector3(C.thick.Rd * 0.707 + 0.2, C.thick.Rd * 0.707 - 0.4, 0), "disc");
+  [5, 10, 15].forEach(function (r) { addLab(r + " kpc", "#5d6d93", new THREE.Vector3(r * 0.707, -r * 0.707, 0), "ring"); });
+
+  // ---- legend ----
+  var leg = document.getElementById("legend");
+  arms.forEach(function (a) {
+    var b = document.createElement("button"); b.innerHTML = '<i style="background:' + a.color + '"></i>' + a.name;
+    b.onclick = function () { a.visible = !a.visible; b.classList.toggle("off", !a.visible); applyVis(); };
+    leg.appendChild(b);
+  });
+
+  // ---- state / controls ----
+  var st = { shell: true, ext: true, far: true, bar: true, labels: true, discs: true, bulge: true };
+  function applyVis() {
+    arms.forEach(function (a) { a.parts.forEach(function (p) {
+      var on = a.visible && (p.measured || (p.tier === 2 ? st.far : st.ext));
+      p.core.visible = on; p.shell.visible = on && st.shell;
+    }); });
+    barG.visible = st.bar;
+    bodies.discs.forEach(function (m) { m.visible = st.discs; });
+    bodies.bulge.visible = st.bulge;
+  }
+  applyVis();
+
+  var cam = { az: 0, el: 89.9 * Math.PI / 180, dist: 40, tx: 0, ty: 0 };
+  function place() {
+    var ce = Math.cos(cam.el);
+    camera.position.set(cam.tx + cam.dist * Math.sin(cam.az) * ce, cam.ty - cam.dist * Math.cos(cam.az) * ce, cam.dist * Math.sin(cam.el));
+    camera.lookAt(cam.tx, cam.ty, 0);
+  }
+  var VIEWS = { top: [0, 89.9, 47], obl: [0.35, 48, 47], edge: [0, 2.5, 48] };
+  function setView(k) { var v = VIEWS[k]; cam.az = v[0]; cam.el = v[1] * Math.PI / 180; cam.dist = v[2]; cam.tx = 0; cam.ty = 0; }
+
+  var ptrs = {}, last = 0;
+  canvas.addEventListener("pointerdown", function (e) { canvas.setPointerCapture(e.pointerId); ptrs[e.pointerId] = { x: e.clientX, y: e.clientY }; });
+  canvas.addEventListener("pointerup", function (e) { delete ptrs[e.pointerId]; last = 0; });
+  canvas.addEventListener("pointercancel", function (e) { delete ptrs[e.pointerId]; last = 0; });
+  canvas.addEventListener("pointermove", function (e) {
+    var p = ptrs[e.pointerId]; if (!p) return;
+    var ids = Object.keys(ptrs);
+    if (ids.length === 2) {
+      var o = ptrs[ids[0] == e.pointerId ? ids[1] : ids[0]];
+      var d0 = Math.hypot(p.x - o.x, p.y - o.y); p.x = e.clientX; p.y = e.clientY;
+      var d1 = Math.hypot(p.x - o.x, p.y - o.y); if (d0 > 0) cam.dist = Math.min(120, Math.max(4, cam.dist * d0 / d1));
+      return;
+    }
+    var dx = e.clientX - p.x, dy = e.clientY - p.y; p.x = e.clientX; p.y = e.clientY;
+    if (e.shiftKey || e.buttons === 2) {
+      var s = cam.dist * 0.0016, ca = Math.cos(cam.az), sa = Math.sin(cam.az);
+      cam.tx -= (dx * ca + dy * sa * Math.sin(cam.el)) * s; cam.ty += (dx * sa - dy * ca * Math.sin(cam.el)) * s;
+    } else {
+      cam.az -= dx * 0.006; cam.el = Math.min(89.9 * Math.PI / 180, Math.max(0.02, cam.el + dy * 0.006));
+    }
+  });
+  canvas.addEventListener("wheel", function (e) { e.preventDefault(); cam.dist = Math.min(120, Math.max(4, cam.dist * Math.exp(e.deltaY * 0.0012))); }, { passive: false });
+  canvas.addEventListener("contextmenu", function (e) { e.preventDefault(); });
+
+  function mark(sel, el) { document.querySelectorAll(sel).forEach(function (b) { b.classList.toggle("on", b === el); }); }
+  document.querySelectorAll("[data-view]").forEach(function (b) { b.onclick = function () { setView(b.dataset.view); mark("[data-view]", b); }; });
+  document.querySelectorAll("[data-ex]").forEach(function (b) { b.onclick = function () {
+    var k = +b.dataset.ex; armGroup.scale.z = k; mark("[data-ex]", b);
+    document.getElementById("exinfo").textContent = k === 1 ? "Vertical scale true." : "Vertical scale exaggerated ×" + k + ".";
+  }; });
+  document.querySelectorAll("[data-t]").forEach(function (b) { b.onclick = function () {
+    var k = b.dataset.t; st[k] = !st[k]; b.classList.toggle("on", st[k]); applyVis();
+  }; });
+
+  function resize() { var w = window.innerWidth, h = window.innerHeight; renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); }
+  window.addEventListener("resize", resize); resize();
+
+  var tmp = new THREE.Vector3();
+  function frame() {
+    place(); renderer.render(scene, camera);
+    var w = window.innerWidth, h = window.innerHeight;
+    labs.forEach(function (l) {
+      var show = st.labels && (l.key !== "bar" || st.bar) && (l.key !== "bulge" || st.bulge) && (l.key !== "disc" || st.discs);
+      if (show && l.key === "arm") { var a = arms.filter(function (x) { return x.name === l.el.textContent; })[0]; show = a && a.visible; }
+      if (!show) { l.el.style.display = "none"; return; }
+      tmp.copy(l.v); tmp.z *= armGroup.scale.z; tmp.project(camera);
+      if (tmp.z > 1) { l.el.style.display = "none"; return; }
+      l.el.style.display = ""; l.el.style.left = ((tmp.x + 1) / 2 * w) + "px"; l.el.style.top = ((1 - tmp.y) / 2 * h) + "px";
+    });
+    requestAnimationFrame(frame);
+  }
+  // ---- baryon census panel (data: GD09 mw_baryons.js, counts from the engine census) ----
+  (function () {
+    var B = window.MW_BARYONS, box = document.getElementById("bary");
+    if (!B) return;
+    var sup = { "0": "⁰", "1": "¹", "2": "²", "3": "³", "4": "⁴", "5": "⁵", "6": "⁶", "7": "⁷", "8": "⁸", "9": "⁹", "-": "⁻" };
+    function fmt(x) {
+      var e = Math.floor(Math.log10(x)), m = x / Math.pow(10, e);
+      return m.toFixed(2) + "×10" + String(e).split("").map(function (c) { return sup[c]; }).join("");
+    }
+    var html = "<h2>Baryon census by portion</h2><p>N = M / M☉ × N☉, with N☉ = " + fmt(B.nSun) +
+      " from the engine census (ϟ☉ = " + B.koppaSun.toFixed(1) + " m). Masses are the observed values with their stated ranges; " +
+      "indented grey rows are parts of the row above and are not summed. Dark matter is not a baryon observation and is not listed.</p>" +
+      "<table><thead><tr><th>Component</th><th>Standing</th><th style='text-align:right'>N (central)</th><th style='text-align:right'>range</th><th>Source</th></tr></thead><tbody>";
+    var order = ["Nucleus", "Bulge", "Bar", "Disc", "Halo", "Gas", "Corona", "Totals"];
+    order.forEach(function (g) {
+      html += "<tr class='grp'><td colspan='5'>" + g + "</td></tr>";
+      B.rows.filter(function (r) { return r.group === g; }).forEach(function (r) {
+        var nest = r.role === "nested" || r.role === "reference";
+        html += "<tr class='" + (nest ? "nest" : "") + "'><td title='" + r.note.replace(/'/g, "&#39;") + "'>" + r.label +
+          "</td><td class='st-" + r.standing + "'>" + r.standing.toLowerCase() + "</td><td class='n'>" + fmt(r.n[1]) +
+          "</td><td class='n'>" + fmt(r.n[0]) + " – " + fmt(r.n[2]) + "</td><td>" + r.source + "</td></tr>";
+      });
+    });
+    box.innerHTML = html + "</tbody></table>";
+    document.getElementById("barygrp").style.display = "";
+    document.getElementById("barybtn").onclick = function () {
+      var on = box.style.display !== "block"; box.style.display = on ? "block" : "none"; this.classList.toggle("on", on);
+    };
+  })();
+
+  // ---- field maps on the Galactic plane: GD12 pressure by volume (primary), GD11 static-disc column and displacement, GD10 depth-bridge comparison ----
+  (function () {
+    var P = window.MW_PRESSURE, T = window.MW_THROUGHPUT, Dp = window.MW_DEPTH, L = window.MW_LAYERS; if (!P && !T && !Dp && !L) return;
+    var leg = document.getElementById("depthleg"), STATES = [], M, half;
+    var CATCOL = [[255, 255, 255], [255, 183, 77], [107, 127, 176], [79, 195, 247], [129, 199, 132]];
+    if (P) { M = P.n; half = P.half; P.cases.forEach(function (c, ci) {
+      STATES.push({ name: c.name + " (GD12)", kind: c.kind, unit: c.unit, f: function (i) { return c.v[i]; },
+        note: c.kind === "cat" ? "Meeting surfaces are where two sources carry equal displaced volume per shell volume; pressure there is their sum."
+          : "Displaced volume per shell volume, in pitches shifted: (V_p/ℓ_P) × mean baryon column, plus the uniform ambient term " + P.fAmb.toFixed(0) + " pitches. No cross-section, passage rate or closure constant. Logarithmic over three decades below the maximum." }); }); }
+    if (T) { if (!P) { M = T.n; half = T.half; } T.cases.forEach(function (c) {
+      STATES.push({ name: c.name + " (GD11)", kind: "log", unit: c.unit, f: function (i) { return c.v[i]; },
+        note: "Static disc, positions and baryon counts only; no velocity input. Logarithmic over three decades below the maximum." +
+          (c.unit === "pitches" ? " |u| is zero at the centre by symmetry; the value there is sampling noise." : " Blocked-sky fraction = this column × the occlusion cross-section (open).") }); }); }
+    if (Dp) { if (!P && !T) { M = Dp.n; half = Dp.half; }
+      var cz2z = 1 / 29.9792458;
+      STATES.push({ name: "Depth Z of the ϟ_b bridge route, arm overdensity 1.32 (GD10, comparison route)", kind: "abs", unit: "×10⁻⁷", f: function (i) { return Dp.cases[1].v[i] * cz2z; },
+        note: "Dimensionless depth Σ ϟ_b w / r. Comparison route; its 1/r kernel differs from the 1/r² displaced-volume kernel." }); }
+    if (L) { if (!P && !T && !Dp) { M = L.n; half = L.half; } L.cases.forEach(function (c) {
+      STATES.push({ name: c.name + " (GD13)", kind: c.kind, unit: c.unit, M: L.n, half: L.half, cats: L.cats, colors: L.colors, f: function (i) { return c.v[i]; },
+        note: c.kind === "cat" ? "Layered displacement by object: each object's stars laid on its centreline, 100x that volume added per layer, all objects in lockstep. A cell goes to the object with the largest pressure by volume among those that reach it; transparent outside R < 17 kpc. Reading R1-R7 in the GD13 PROMPT is the assistant's; plate heights are fixed at the Reid heights."
+          : "Pressure by volume of the owning object, in pitches shifted (V_i / (S_i l_P)); S_i is the layer surface of that object at the cell. Logarithmic over three decades below the maximum." }); }); }
+    var M0 = M, N = M * M, cv = document.createElement("canvas"); cv.width = M; cv.height = M; var cx = cv.getContext("2d");
+    var tex = new THREE.CanvasTexture(cv); tex.minFilter = THREE.LinearFilter; tex.magFilter = THREE.LinearFilter;
+    var baseHalf = half, plane = new THREE.Mesh(new THREE.PlaneGeometry(2 * half, 2 * half),
+      new THREE.MeshBasicMaterial({ map: tex, transparent: true, opacity: 0.9, depthWrite: false }));
+    plane.position.z = 0.02; plane.visible = false; scene.add(plane);
+    var SEQ = [[18, 8, 60], [38, 72, 150], [32, 150, 160], [140, 205, 90], [245, 230, 80]];
+    function seq(t) { t = Math.max(0, Math.min(1, t)) * (SEQ.length - 1); var k = Math.min(Math.floor(t), SEQ.length - 2), u = t - k;
+      return [0, 1, 2].map(function (c) { return SEQ[k][c] + (SEQ[k + 1][c] - SEQ[k][c]) * u; }); }
+    function bar() { return "linear-gradient(90deg,rgb(18,8,60),rgb(38,72,150),rgb(32,150,160),rgb(140,205,90),rgb(245,230,80))"; }
+    function fmt(x) { return Math.abs(x) >= 1e4 || (Math.abs(x) < 0.01 && x !== 0) ? x.toExponential(2) : x.toPrecision(3); }
+    var cur = -1;
+    function show(k) {
+      cur = k; if (k < 0) { plane.visible = false; leg.style.display = "none"; return; }
+      var st = STATES[k], i, j, lo = 1e30, hi = -1e30, Mk = st.M || M0, Nk = Mk * Mk;
+      if (cv.width !== Mk) { cv.width = Mk; cv.height = Mk; tex.dispose(); }
+      plane.scale.set((st.half || baseHalf) / baseHalf, (st.half || baseHalf) / baseHalf, 1);
+      var vals = new Float64Array(Nk); M = Mk; N = Nk;
+      for (i = 0; i < N; i++) { vals[i] = st.f(i); lo = Math.min(lo, vals[i]); hi = Math.max(hi, vals[i]); }
+      var img = cx.createImageData(M, M), floor = hi * 1e-3;
+      for (j = 0; j < M; j++) for (i = 0; i < M; i++) {
+        var v = vals[j * M + i], o = ((M - 1 - j) * M + i) * 4, rgb, a = 235;
+        var CC = st.colors || CATCOL;
+        if (st.kind === "cat") { rgb = CC[Math.max(0, Math.min(CC.length - 1, v | 0))]; a = (st.cats && v < 0) ? 0 : 200; }
+        else if (st.kind === "log") rgb = seq((Math.log10(Math.max(v, floor)) - Math.log10(floor)) / 3);
+        else rgb = seq(v / hi);
+        if (st.cats && st.kind !== "cat" && v <= 1e-3) a = 0;
+        img.data[o] = rgb[0]; img.data[o + 1] = rgb[1]; img.data[o + 2] = rgb[2]; img.data[o + 3] = a;
+      }
+      cx.putImageData(img, 0, 0); tex.needsUpdate = true; plane.visible = true; leg.style.display = "block";
+      var body;
+      if (st.kind === "cat") body = "<div style='display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 2px'>" + (st.cats || P.cats).map(function (n, q) {
+        return "<span><i style='display:inline-block;width:10px;height:10px;border-radius:2px;background:rgb(" + (st.colors || CATCOL)[q].join(",") + ");margin-right:4px'></i>" + n + "</span>"; }).join("") + "</div>";
+      else body = "<div class='bar' style='background:" + bar() + "'></div><div class='sc'><span>" + (st.kind === "log" ? fmt(floor) : "0") + " " + st.unit + "</span><span>" +
+        (st.kind === "log" ? "log scale" : "") + "</span><span>" + fmt(hi) + " " + st.unit + "</span></div>";
+      leg.innerHTML = "<b>" + st.name + "</b>" + body + "<div style='color:var(--dim);margin-top:4px'>" + st.note + "</div>";
+    }
+    document.getElementById("depthgrp").style.display = "";
+    var btn = document.getElementById("depthbtn");
+    function setBtn(n) { btn.classList.toggle("on", n >= 0); btn.textContent = n < 0 ? "Map" : "Map " + (n + 1) + "/" + STATES.length; }
+    btn.onclick = function () { var n = cur + 1 >= STATES.length ? -1 : cur + 1; show(n); setBtn(n); };
+    window.__gd10show = function (k) { if (k < STATES.length) { show(k); setBtn(k); } };
+  })();
+
+  var hp = location.hash.slice(1).split(","), hv = VIEWS[hp[0]] ? hp[0] : "top";
+  setView(hv); mark("[data-view]", document.querySelector('[data-view="' + hv + '"]'));
+  if (hp[1] === "5" || hp[1] === "10") document.querySelector('[data-ex="' + hp[1] + '"]').click();
+  if (hp[2] === "b" && window.MW_BARYONS) document.getElementById("barybtn").click();
+  if (/^d\d{1,2}$/.test(hp[3] || "") && window.__gd10show) window.__gd10show(+hp[3].slice(1) - 1);
+  frame();
+})();
+</script>
+</body>
+</html>

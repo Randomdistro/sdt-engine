@@ -1,0 +1,59 @@
+
+== V0 helper validation (known answers) ==
+[PASS] V0    integrate sin over [0, pi] = 2                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 3.331e-16 (tol 1e-13)
+[PASS] V0    integrate x^7 over [0, 1] = 1/8                                                value 1.250000000000e-01 expected 1.250000000000e-01 err 2.220e-15 (tol 1e-14)
+[PASS] V0    integrate exp over [-1, 1] = e - 1/e                                           value 2.350402387288e+00 expected 2.350402387288e+00 err 5.668e-16 (tol 1e-13)
+[PASS] V0    root of cos x - x = 0.739085133215161                                          value 7.390851332152e-01 expected 7.390851332152e-01 err 2.253e-15 (tol 1e-13)
+[PASS] V0    root of x^2 - 2 on [1, 2] = sqrt 2                                             value 1.414213562373e+00 expected 1.414213562373e+00 err 2.983e-15 (tol 1e-13)
+[PASS] V0    compensated sum 1 + 10^6 x 1e-16 = 1 + 1e-10                                   value 1.000000000100e+00 expected 1.000000000100e+00 err 0.000e+00 (tol 1e-15)
+
+== V1 angular integrals ==
+[PASS] V1    oint dOmega = 4 pi                                                             value 1.256637061436e+01 expected 1.256637061436e+01 err 1.272e-15 (tol 1e-13)
+[PASS] V1    oint n_z dOmega = 0 (absolute)                                                 value 9.690415895346e-17 expected 0.000000000000e+00 err 9.690e-17 (tol 1e-13)
+[PASS] V1    oint (v . n) n_z dOmega = 4 pi / 3 for v = 1 along z                           value 4.188790204786e+00 expected 4.188790204786e+00 err 1.060e-15 (tol 1e-13)
+
+== T1 momentum of the content in the exclusion volume under the first-order dipole ==
+[PASS] T1    p / (m_p v), V = V_disp,p                                                      value 1.000000000000e+00 expected 1.000000000000e+00 err 6.661e-15 (tol 1e-12)
+[PASS] T1    p / (m_e v), V = V_disp,e                                                      value 1.000000000000e+00 expected 1.000000000000e+00 err 6.661e-15 (tol 1e-12)
+
+== T2 the dipole of the two forms in the source ==
+[PASS] T2    Eq. 3.1: D/beta -> 1/3                                                         value 3.333333333343e-01 expected 3.333333333333e-01 err 2.804e-12 (tol 1e-03)
+[PASS] T2    Corollary 7.1: D/beta -> 2/3                                                   value 6.666666679961e-01 expected 6.666666666667e-01 err 1.994e-09 (tol 1e-03)
+       D/beta: Eq. 3.1 0.333333333 ; Corollary 7.1 0.666666668 ; ratio 2.000000
+
+== T3 Corollary 7.1 used as in the derivation of Theorem 5 ==
+[PASS] T3    r(beta) -> 2 as beta -> 0 (beta = 1e-3)                                        value 2.000002400004e+00 expected 2.000000000000e+00 err 1.200e-06 (tol 1e-05)
+[PASS] T3    I_1 closed form vs quadrature at beta = 0.1, 0.5, 0.9 (worst relative)         value 4.130029651606e-14 expected 0.000000000000e+00 err 4.130e-14 (tol 1e-12)
+       beta = 0.1: r(beta)/2 = 1.012130 ; gamma = 1.005038 ; ratio 1.007057
+       beta = 0.5: r(beta)/2 = 1.408326 ; gamma = 1.154701 ; ratio 1.219646
+       beta = 0.9: r(beta)/2 = 6.717330 ; gamma = 2.294157 ; ratio 2.928016
+[PASS] T3    at beta = 0.5, r/2 differs from gamma by more than 5%
+
+== T4 relay-lock volumes ==
+[PASS] T4    4 pi int r^2 sqrt(r/b) dr vs locked_engaged_volume_sphere(b)                   value 5.609986881410e+01 expected 5.609986881410e+01 err 8.866e-16 (tol 1e-12)
+[PASS] T4    locked volume = 8 pi b^3 / 7                                                   value 5.609986881410e+01 expected 5.609986881410e+01 err 0.000e+00 (tol 1e-14)
+[PASS] T4    wake volume = 4 pi b^3 / 21                                                    value 9.349978135684e+00 expected 9.349978135684e+00 err 0.000e+00 (tol 1e-14)
+[PASS] T4    locked + wake = (4 pi/3) b^3                                                   value 6.544984694979e+01 expected 6.544984694979e+01 err 0.000e+00 (tol 1e-14)
+[PASS] T4    locked fraction 6/7                                                            value 8.571428571429e-01 expected 8.571428571429e-01 err 1.295e-16 (tol 1e-14)
+
+== T5 convergence floor ==
+[PASS] T5    average_resistance_density = 2 P_conv / (7 c^2)                                value 7.822952538861e+30 expected 7.822952538861e+30 err 0.000e+00 (tol 1e-12)
+[PASS] T5    acceleration(R_CMB) = 7 c^2 / (6 R_CMB)                                        value 1.100606390812e-10 expected 1.100606390812e-10 err 2.349e-16 (tol 1e-12)
+[PASS] T5    cosmological_acceleration = acceleration(R_CMB)                                value 1.100606390812e-10 expected 1.100606390812e-10 err 0.000e+00 (tol 1e-14)
+       floor acceleration 7 c^2 / (6 R_CMB) = 1.100606e-10 m/s^2 (R_CMB is a measured boundary; COMPUTED, not an independent prediction)
+
+== T6 binding as reduced exclusion volume (CONSTRUCTION) ==
+[PASS] T6    deuteron: synchrony_resistance_delta = -B (joules)                             value -3.564148213920e-13 expected -3.564148213918e-13 err 4.513e-13 (tol 1e-09)
+[PASS] T6    deuteron: fractional volume reduction = B/(M c^2)                              value 1.186047658658e-03 expected 1.186047658658e-03 err 4.516e-13 (tol 1e-09)
+       deuteron: V_joint = 3.663488e-58 m^3, V_parts = 3.667833e-58 m^3, reduction 4.345071e-61 m^3 (1.1860e-03 of V_joint)
+[PASS] T6    triton: synchrony_resistance_delta = -B (joules)                               value -1.358933636657e-12 expected -1.358933636657e-12 err 7.698e-14 (tol 1e-09)
+[PASS] T6    triton: fractional volume reduction = B/(M c^2)                                value 3.019592296151e-03 expected 3.019592296150e-03 err 7.698e-14 (tol 1e-09)
+       triton: V_joint = 5.486445e-58 m^3, V_parts = 5.503012e-58 m^3, reduction 1.656683e-60 m^3 (3.0196e-03 of V_joint)
+[PASS] T6    helion: synchrony_resistance_delta = -B (joules)                               value -1.236558267817e-12 expected -1.236558267817e-12 err 9.570e-14 (tol 1e-09)
+[PASS] T6    helion: fractional volume reduction = B/(M c^2)                                value 2.748188542888e-03 expected 2.748188542887e-03 err 9.579e-14 (tol 1e-09)
+       helion: V_joint = 5.485411e-58 m^3, V_parts = 5.500486e-58 m^3, reduction 1.507494e-60 m^3 (2.7482e-03 of V_joint)
+
+== Sensitivity to the numerical factor of Law IV (reported) ==
+       V_disp,p with factor 3: 1.832653e-58 m^3, R_excl 3.523686e-20 m ; with factor 6: 3.665306e-58 m^3, R_excl 4.439566e-20 m (ratio of radii 1.259921)
+
+ALL CRITERIA MET: 0 failure(s)

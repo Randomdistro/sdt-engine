@@ -26,7 +26,7 @@
    including the **anti-tautology** firewall (F3/F4): if the exponential can only be reached via the
    microcanonical→canonical reservoir argument, the derivation is IMPORTED and the grade is capped at C.
 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class
-   (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN), per phase, no repainting a fired test.
+   (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN), per phase, no repainting a fired test.
 
 ## Question
 
@@ -152,7 +152,7 @@ These are not required for the verdict; they are the payoff of doing it well.
 ```markdown
 ## Pre-Run Commitments — TD02
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: 0 (k_B is the only dependency-traced input; list any flagged step)
 - Engine namespaces actually used: measured::k_B, law_I::epsilon, TD01 microstate counting W(E,N)
 - Phase thresholds (committed before run):
@@ -170,7 +170,7 @@ These are not required for the verdict; they are the payoff of doing it well.
 | P3 native `ln W` max does not give an exponential (`R²<0.999`) | try a finer/larger toy lattice; check the throughput-budget constraint | **OPEN** the relay→MB question; grade D | reach for the reservoir and call it derived |
 | P3 native route stalls, reservoir route works | label the Boltzmann factor **IMPORTED**; grade **C** honestly | — | claim A while using `S_res(E−ε)` |
 | P2 a DoF deviates `> 1%` or depends on init | check the mixer for a privileged channel (FLM02 GPI) | **OPEN** an anisotropy fingerprint | average the deviation away |
-| Rivals match but SDT only reproduces | label **DEGENERATE** honestly | — | Claim Class A |
+| A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 | Upstream missing (TD01 toy lattice not ready) | **DEFER**; cite dependency ID | — | Fake PASS |
 
 ### Allowed adjustments
@@ -187,3 +187,15 @@ These are not required for the verdict; they are the payoff of doing it well.
 ---
 
 *TD02 · 10× upgrade 2026-06-29 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** A gate line reads "No h, no Z, no ensemble object in the chain. [PASS by construction]", an absence check that cannot fail.
+
+**Correction:** Replace it with a delete-test (remove the borrowed object and show the result survives) or drop it from the tally.
+
+**Status:** RULE RECORDED — corrected gate or definition applies to the next run; the earlier result is not re-scored and nothing was re-run.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

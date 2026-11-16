@@ -33,4 +33,4 @@ HIGH — requires lattice perturbation theory for muons.
 ## 7. Impact
 
 - **If confirmed**: If SDT resolves the g-2 tension: validates lattice corrections.
-- **If not confirmed**: If SDT prediction matches standard: no new physics from lattice.
+- **If not confirmed**: If the SDT prediction matches the standard value, the lattice route is convergent and this test does not discriminate (wording corrected 2026-10-03: agreement is not "no new physics").

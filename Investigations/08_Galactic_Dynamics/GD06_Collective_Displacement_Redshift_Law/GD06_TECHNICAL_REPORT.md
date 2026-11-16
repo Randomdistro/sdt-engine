@@ -1,4 +1,6 @@
 # GD06 — Technical Report (RUN 1, 2026-07-13)
+
+> **Re-adjudicated 2026-10-03 (origin rule, gateway §3.8):** "DEGENERATE with GR" → **CONVERGENT** with GR at dilute order, not yet discriminating. See `Investigations/ADJUDICATION_REGISTER.md` §R-2026-10-03. Original text below is unchanged.
 ### Occlusion-as-solid-angle ledger, calibrated on the solar census (H6)
 
 > Tool: `gd06_run.py` (standalone Python; no dependency-traced constant enters the *derivation* of Θ — constants used only to convert to OBSERVED SI for comparison). Data: H6 solar census (verified) + standard body parameters. **Triple verdict at foot.**
@@ -32,7 +34,7 @@ N_spa=V_⊙/ℓ_P³=**3.341×10¹³¹**; N_surf=A_⊙/ℓ_P²=**2.328×10⁸⁸*
 - **XSD-D (cluster):** cz=14.3 km/s vs measured Wojtak+2011 ~10 km/s — **CONSISTENT**, a genuine cross-check the mechanism passes. But it equals ϟ/r = the GR value → **DEGENERATE with GR** at this order (not yet a discriminating prediction).
 
 ## 5. Triple verdict
-> **Prompt completion: B** (instrument built + run end-to-end; two children DEFERRED on data). **Physics class: CONVERGENCE/DEGENERATE** at dilute scales (recovers ϟ/r), NATIVE-pending in the dense branch. **Cross-scale: UNDETERMINED** — σ_occ geometrization open, so the 30-order lever is not yet closed. **σ_occ: DEFERRED-to-EMC01.**
+> **Prompt completion: B** (instrument built + run end-to-end; two children DEFERRED on data). **Physics class: CONVERGENCE/SHARED-INPUT** at dilute scales (recovers ϟ/r), NATIVE-pending in the dense branch. **Cross-scale: UNDETERMINED** — σ_occ geometrization open, so the 30-order lever is not yet closed. **σ_occ: DEFERRED-to-EMC01.**
 
 ## 6. What this run earned, honestly
 1. The occlusion instrument is correct and mass-free, and it **recovers the gravitational redshift** across 40 orders of z_d (proton→BH) with one relation.

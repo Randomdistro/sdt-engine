@@ -1,0 +1,78 @@
+﻿=================================================================
+ GD10 MILKY WAY DISPLACEMENT FIELD  (dilute Z = koppa_b sum/r ; H1, H2 labelled)
+=================================================================
+koppa_b = 1.2419e-54 m ; kpc = 3.085678e+19 m ; c = 299792458 m/s
+
+== INSTRUMENT VALIDATION ==
+  [PASS] V1 : point baryon Z = koppa_b N / r  (-5.000e-05)
+  [PASS] V5 : rotation bridge on a point mass  (-1.500e-04)
+  [PASS] V2a : outside a shell Z = koppa_b N / r (0.5%)  (-5.320e-04)
+  [PASS] V2b : inside a shell Z constant = koppa_b N / R (1%)  (9.807e-04)
+  [PASS] V3 : uniform disc on axis  (4.129e-04)
+  [PASS] V4a : lambda->0 is the identity  (0.000e+00)
+  [PASS] V4b : lambda >> sheath length approaches the mean (rel 1e-3)  (5.980e-07)
+  [PASS] V4c : integral of Z ds conserved (1e-9)  (1.202e-13)
+  [PASS] V6 : multiplicative composition identity  (-1.447e-16)
+  validation failures: 0
+
+inputs: 7 arms ; N bulge 1.974e+67 thin 4.163e+67 thick 7.136e+66 gas 9.634e+66 ; sum 7.814e+67
+ridge nodes: 4932 (all tiers)
+
+== BULGE RECURSIVE SHELLS (exponential profile, h = 0.70/0.44/0.18 kpc) ==
+shell  r_edge   N_k         koppa_k[m]  cZ_add[m/s]  cZ_mult[m/s] compounding  dP/P      
+1      0.191    2.999e+65   3.724e+11   18.977       18.977       -2.091e-16   2.532e-07 
+2      0.381    1.320e+66   1.639e+12   51.255       51.255       2.579e-08    6.839e-07 
+3      0.763    4.805e+66   5.967e+12   101.650      101.650      6.718e-08    1.356e-06 
+4      1.144    4.969e+66   6.170e+12   120.173      120.173      1.238e-07    1.603e-06 
+5      1.525    3.691e+66   4.583e+12   119.324      119.324      1.437e-07    1.592e-06 
+6      2.288    3.466e+66   4.305e+12   97.830       97.830       1.275e-07    1.305e-06 
+7      3.813    1.193e+66   1.482e+12   62.474       62.474       8.370e-08    8.336e-07 
+(r_edge = s x (hx hy hz)^(1/3) kpc ; exterior field of each shell koppa_k/r ; compounding = (Z_mult - Z_add)/Z_add)
+
+evaluation points: 21898
+Monte-Carlo noise (two seeds, ridge+Sun+rings): 0.191% of Z ; 0.29 m/s rms
+
+== C1 baryon-only rotation bridge at R0 = 8.15 kpc ==
+reference (Theta0/c)^2 = 6.1970e-07  (Theta0 = 236 +- 7 km/s)
+dilute K=1      : v_c^2/c^2 = 3.8461e-07  v_c = 185.9 km/s  ratio = 0.621
+dilute K=1.32  : v_c^2/c^2 = 3.8474e-07  v_c = 186.0 km/s  ratio = 0.621
+criterion |ratio-1| <= 0.099 (sigma_comb) : inconsistent
+excluded components (stellar halo, hot corona) are not in the sum above
+
+Sun: nearest ridge node (tiers 0-1) is Local at 0.368 kpc (sigma_in 0.321) ; taper g = 0.517
+
+== C2 mechanism: v_c^2/c^2 at R0 by ring finite difference (h = 0.5 kpc) ==
+check: FD vs analytic force, K=1: 3.8496e-07 vs 3.8461e-07 (+0.09%)
+case                   v_c^2/c^2      v_c km/s   ratio      vs criterion  
+dilute K=1 (FD)        3.8496e-07     186.0      0.621      inconsistent
+dilute K=1.32 (FD)     3.8514e-07     186.1      0.621      inconsistent
+equalised A lam=0.5    3.8408e-07     185.8      0.620      inconsistent
+equalised A lam=1.0    3.8324e-07     185.6      0.618      inconsistent
+equalised A lam=2.0    3.8442e-07     185.9      0.620      inconsistent
+equalised A lam=4.0    3.9550e-07     188.5      0.638      inconsistent
+equalised A lam=8.0    4.1988e-07     194.3      0.678      inconsistent
+equalised A lam=16.0   4.4192e-07     199.3      0.713      inconsistent
+equalised A lam=inf    4.5835e-07     203.0      0.740      inconsistent
+
+== C3 emission-depth gradient at R0 ==
+c dZ/dR (dilute, analytic) = -14.15 m/s per kpc = 0.0141 km/s per kpc  (Loeb 2022 theoretical estimate magnitude 0.024 km/s per kpc)
+
+== EMISSION AT DEPTH ==
+Sun depth: cZ = 123.4 m/s (K=1) ; 124.9 m/s (K=1.32) ; dP/P = 4Z = 1.666e-06
+grid centre (Galactic centre): cZ = 498.5 m/s (K=1.32)
+
+Equalisation effect on emitters in the sheaths (tiers 0-1, contrast case): shift of cZ in m/s
+lambda     max|dcZ|   rms dcZ    max up     max down  
+0.5        5.86       0.55       2.74       -5.86     
+1.0        11.36      1.40       5.31       -11.36    
+2.0        20.64      3.23       8.37       -20.64    
+4.0        31.93      6.80       17.87      -31.93    
+8.0        51.31      12.93      34.81      -51.31    
+16.0       66.67      19.55      49.24      -66.67    
+inf        75.55      26.87      57.75      -75.55    
+(Monte-Carlo noise floor 0.29 m/s ; effects below 3x this are not reported as signal)
+arm baryon overdensity K=1.32 alone: sheath cZ shift max 2.12 m/s, rms 1.09 m/s
+sightline emitters: largest change of the pair shift from equalisation = 45.23 m/s
+pair shift of emitters 2-10 kpc from the Sun (contrast case): -70.6 to 371.0 m/s (Gaia RV zero-point scatter ~300 m/s)
+
+wrote gd10_ridge_profiles.csv gd10_sightlines.csv mw_displacement.js

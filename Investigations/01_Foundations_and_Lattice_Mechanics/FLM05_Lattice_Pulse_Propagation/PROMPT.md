@@ -110,3 +110,15 @@ Class A: 1/r² + rotorpause + light-split clean, g₀ pinned from f, three flags
 ---
 
 *FLM05 · §K-deepened 2026-07-13 · 1/r²=d=3 is the earned crown; three flags fixed/logged (charge→boundary radius, redshift endpoint z=ϟ/r not transit-accumulated, rigid-sphere vs reconfigurable-superfluid); g₀-from-f is the live open.*
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** Status is RESOLVED with "15/16 proofs pass (one intentional failure)" while the stated open gap (gap width g0) is not determined and a PREMISE FLAG (rigid spheres vs the superfluid substrate) is unresolved.
+
+**Correction:** Mark RESOLVED only for the 1/r² geometry and carry g0 and the premise flag as OPEN.
+
+**Status:** ANNOTATED — label, status or tally corrected in the record; no re-score of earlier runs.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

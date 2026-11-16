@@ -23,7 +23,7 @@
 4. **What would prove us wrong?** — §⑧, seven falsifiers with numeric triggers and **real failure
    modes** — including the LIGO test (F2) that can genuinely come out the wrong way.
 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class
-   (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN), per phase, no repainting a fired test.
+   (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN), per phase, no repainting a fired test.
 
 ---
 
@@ -278,7 +278,7 @@ These are *not* required for the verdict; they are the point of doing it well.
 ```markdown
 ## Pre-Run Commitments — FD05
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: 0 in the P2 native chain (list any elsewhere)
 - Engine namespaces actually used: law_I (u_CMB; P_rad CROSS-CHECK ONLY), law_V, bridge, lattice_structure.hpp
 - Phase thresholds (committed before run):
@@ -298,7 +298,7 @@ These are *not* required for the verdict; they are the point of doing it well.
 | P4 SDT forces a longitudinal vacuum mode at c/√3 | re-examine the mode taxonomy (transverse-only?) | mark the 0.577c scalar GW **FALSIFIED**, report it | hide the conflict with `c_gw=c` |
 | P5 FLM10 `ω(k)` unavailable | **DEFER** P5 with dependency ID | — | fabricate a dispersion curve |
 | P7 FD05 c_s ≠ BAO c_s | check for a smuggled cosmology input; recompute | **OPEN** the BAO-link; do not claim independence | retro-fit c_s to 147 Mpc |
-| Rivals match but SDT only reproduces | label **DEGENERATE** honestly | — | claim Class A |
+| A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 
 ### Allowed adjustments
 - Finer numerics; phase splits (Na/Nb); filename fix via ADJ entry; alternative **native** isotropy routes (e.g. direct momentum-flux integral vs `⟨cos²θ⟩`).

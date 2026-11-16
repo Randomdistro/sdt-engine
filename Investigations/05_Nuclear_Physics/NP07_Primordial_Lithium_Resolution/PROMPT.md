@@ -8,11 +8,11 @@
 
 ## ⓪ The Golden Rule — five questions (answer before Phase 0)
 
-1. **What don't we know?** — [NP07] NP07: Primordial Lithium Resolution — Data/Prompt: *(unfilled by the 2026-06-27 bulk template upgrade — write the single measurable gap before the next run)*
+1. **What don't we know?** — [NP07] NP07: Primordial Lithium Resolution — Data/Prompt: **Measurable gap (written 2026-10-05 in the audit correction pass, from this prompt's own content; the 2026-06-27 template left it unfilled):** Does the grammar-selection rule plus the EC-electron binding scale identify a Be-7 electron-capture window that lowers the predicted primordial Li-7/H ratio toward the observed value, with no fitted rate?
 2. **Why does it matter?** — Stack position / downstream blockers (see `INVESTIGATION_STACK.md`).
 3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
 4. **What would prove us wrong?** — §⑧ falsification tests with numeric triggers.
-5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN).
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN).
 
 ## DATA REQUIREMENTS
 
@@ -21,8 +21,8 @@
 | BBN predicted Li-7/H ratio | (4.68 ± 0.67) × 10⁻¹⁰ | Cyburt et al. 2016 |
 | Observed Li-7/H ratio (Spite plateau) | (1.58 ± 0.31) × 10⁻¹⁰ | Sbordone et al. 2010 |
 | Discrepancy factor | ~3× (BBN overproduces Li-7) | The "lithium problem" |
-| Li-7 grammar | α + d + t (3 blocks, 1 triton) | ATOMICUS/003_Li7.md |
-| Li-6 grammar | α + d (2 blocks, 0 tritons) | ATOMICUS/003_Li6.md |
+| Li-7 grammar | α + d + t (3 blocks, 1 triton) | ATOMICUS/isotopes/003_Li7.md |
+| Li-6 grammar | α + d (2 blocks, 0 tritons) | ATOMICUS/isotopes/003_Li6.md |
 | Be-7 half-life (EC) | 53.22 d | NNDC |
 | Be-7 grammar | α + d (EC isotope) | ATOMICUS |
 | Be-7 → Li-7 by EC | Grammar correction: Δn_tri = +2, Δn_deu = −3 | SDT EC rules |
@@ -67,7 +67,7 @@ Standard BBN predicts 3× more Li-7 than observed. The primordial Li-7 comes fro
 ```markdown
 ## Pre-Run Commitments — NP07
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: [0 or list each param — max per §⑤]
 - Engine namespaces: NP01 grammar, law_III nuclear occlusion, ATOMICUS rules
 - Phase thresholds (committed before run): [commit per phase in RUN_LOG]
@@ -81,7 +81,7 @@ Standard BBN predicts 3× more Li-7 than observed. The primordial Li-7 comes fro
 | Phase 0 sanity check fails | Fix units/engine refs; verify `laws.hpp` symbols | STOP — report blocker | Fit to target |
 | Native mechanism off > committed % | Alternative route in §④; document ADJ-### | **OPEN** or **KILL** hypothesis | RETRO-PASS |
 | `z ≥ 1` in closure formula | Weak-field break (CR10); piecewise or exponential | **OPEN** that regime | Ignore break |
-| Rivals match but SDT doesn't beat | Label **DEGENERATE** honestly | — | Claim Class A |
+| A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 | Upstream dependency missing (FLM10, etc.) | **DEFER** phase; cite dependency ID | — | Fake PASS |
 
 ### Allowed adjustments
@@ -96,3 +96,15 @@ Standard BBN predicts 3× more Li-7 than observed. The primordial Li-7 comes fro
 ---
 
 *NP07 · upgraded 2026-06-27 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*
+
+---
+
+## Audit correction 2026-10-05 (data / provenance)
+
+**Finding:** The data table cites `ATOMICUS/003_Li6.md` and `ATOMICUS/003_Li7.md`, which do not exist at those paths (the isotope files sit under ATOMICUS/isotopes/ if present).
+
+**Correction:** Correct the paths and record the Li-6/Li-7 inputs with their sources.
+
+**Status:** ANNOTATED — label, status or tally corrected in the record; no re-score of earlier runs.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

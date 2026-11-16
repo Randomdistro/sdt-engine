@@ -12,7 +12,7 @@
 2. **Why does it matter?** — Bernoulli is the most-cited fluid invariant; if it is Law V at continuum scale, the pressure–velocity trade *sign* is forced (`dP/dv = −ρv < 0`) and incompressible flow becomes the `M→0` corner of one ceiling-capped budget. It supplies the streamline pressure field to FD07 (lift) and the stagnation relation to FD09 (drag). This is a **genuine native-derivation candidate**.
 3. **How will we find out?** — Five gated phases (§④): integrate the steady inviscid FD01 balance along `s` (P1) and show the budget identity + forced sign (P2, core gate) before touching Venturi/Pitot; the `ρgz` head must be narrated purely via `g = v_surf²/R` (no G/M).
 4. **What would prove us wrong?** — §⑧, five falsifiers with real failure modes: a surplus/missing leading-order term; the wrong trade sign (`dP/dv > 0`); Venturi/Pitot off; the incompressible form not recovered as `M→0`; or the `ρgz` head obtainable only via G/M (R0 violation).
-5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN), per phase, no repainting a fired test.
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN), per phase, no repainting a fired test.
 
 **Domain**: Fluid Dynamics (SDT lattice mechanics) · **Status**: SPEC · **Author**: J. C. Harvey, Melbourne
 
@@ -182,7 +182,7 @@ Five phases, each gated. Run them in order; a failed checkpoint stops the chain 
 ```markdown
 ## Pre-Run Commitments — FD08
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: 0 in the streamline-integration chain (at most CALIBRATED(1) one fluid scale to *evaluate* Venturi/Pitot, documented)
 - Engine namespaces actually used: law_V (v_circ²+v²=c² budget, ceiling), law_I (P_conv static field), law_III (occlusion→∇P), law_IV (V_disp→ρ), bridge (g_surface=v²/R, koppa, depth z=ϟ/r for the head); c_s from FD05
 - Phase thresholds (committed before run):
@@ -199,7 +199,7 @@ Five phases, each gated. Run them in order; a failed checkpoint stops the chain 
 | P2 `dP/dv > 0` (sign inverted) | recheck the directed/isotropic budget partition | **KILL** (partition mis-mapped) | flip the sign as a tuning knob |
 | P1 surplus/missing leading-order term | re-project the FD01 Euler balance on `ŝ` | **KILL** (Bernoulli not the streamline integral) | drop the surplus term silently |
 | P4 budget unbounded as `v→c` | re-impose the Law-V ceiling in the expansion | **OPEN** the relativistic corner | ignore the ceiling break |
-| Rivals match but SDT doesn't beat | Label **DEGENERATE** honestly | — | Claim Class A |
+| A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 | Upstream dependency missing (FD01 Euler limit, FD05 `c_s`) | **DEFER** phase; cite dependency ID | — | Fake PASS |
 
 ### Allowed adjustments

@@ -1,0 +1,42 @@
+FLM07 R2 — voids, glancing locus, price sign, R_p test (pre-registered 2026-10-05)
+==================================================================================
+
+[V1a] simple cubic: 1 hole class(es); coordination 8; r/R = 0.7320508 (sqrt3-1 = 0.7320508) -> PASS
+[V1b] FCC conventional cell (4 spheres): tetrahedral holes 8 (coord 4, r/R 0.2247449 vs 0.2247449), octahedral holes 4 (coord 6, r/R 0.4142136 vs 0.4142136), other 0 -> PASS
+      per sphere: 2.0 tetrahedral : 1.0 octahedral
+[V2] hbar/(m_p c) = 2.10309e-16 m (2.10309e-16) -> PASS
+
+VALIDATIONS: met
+
+[T1] glancing locus: k(r) = (1/alpha) sqrt(r/a0), v = c/k, theta = arccos k
+     throat  r = 1.0000e-17 m  k = 0.0596 (rec 0.0596)  v = 16.787 c (rec 16.790)  theta = 86.58 deg (rec 86.58)
+     deep    r = 5.5400e-16 m  k = 0.4434 (rec 0.4434)  v = 2.255 c (rec 2.255)  theta = 63.68 deg (rec 63.68)
+     R_p     r = 8.4140e-16 m  k = 0.5464 (rec 0.5464)  v = 1.830 c (rec 1.830)  theta = 56.88 deg (rec 56.88)
+     r_e     r = 2.8179e-15 m  k = 1.0000 (rec 1.0000)  v = 1.000 c (rec 1.000)  theta = 0.00 deg (rec 0.00)
+     k(r_e) = 1.000000000000 (r_e = alpha^2 a0 exactly)
+
+[T2] octahedral/tetrahedral price ratio (q_oct/q_tet = 1.5) for prices ~ r^n q^m
+     n\m |      m=0 |      m=1
+     1   |   1.8430 |   2.7646
+     2   |   3.3968 |   5.0952
+     3   |   6.2604 |   9.3906
+     4   |  11.5382 |  17.3073
+     decreasing prices ~ r^-n q^-m:  n=1,m=0 -> 0.5426 ; n=3,m=1 -> 0.1065
+     recorded: 6.2604 (n=3,m=0) and 9.3906 (n=3,m=1): reproduced as 6.2604 and 9.3906
+     reading: every price increasing in void size selects the tetrahedral void; every price decreasing in void size selects the octahedral. The selection is the sign of the premise.
+
+[T3] R_4 = 4 hbar/(m_p c) = 8.41236e-16 m ; R_6 = 6 hbar/(m_p c) = 1.26185e-15 m ; stored M::R_p = 8.4140e-16 m
+     CODATA 2022              8.4075e-16 +- 6.4e-19  [fetched 2026-10-05 physics.nist.gov]
+       R_4: +0.0578% (+0.76 sigma)   R_6:  +50.087% ( +658.0 sigma)
+     CODATA 2018              8.4140e-16 +- 1.9e-18  [repo (PPT09 text); VERIFY]
+       R_4: -0.0195% (-0.09 sigma)   R_6:  +49.971% ( +221.3 sigma)
+     muonic-H (GOM02 prompt)  8.4087e-16 +- 3.9e-19  [repo (GOM02 prompt); VERIFY]
+       R_4: +0.0435% (+0.94 sigma)   R_6:  +50.065% (+1079.4 sigma)
+     R_4 within 3 sigma of all three: yes ; R_6 beyond 3 sigma of all three: yes
+
+[T4] chance coincidence: R_p/lam_p = 3.99769 (CODATA 2022), distance from nearest integer 0.00231
+     P(random real within that distance of ANY integer) = 2 x 0.00231 = 0.0046
+     P(within that distance of 4 or 6, ratio uniform on [1,8)) = 2 x 2 x 0.00231 / 7 = 0.0013
+     (the integer was identified from this same datum: post-hoc; the mechanism supplies a second, independent selection of q = 4)
+
+SUMMARY: validations met; R_4 within 3 sigma: yes; R_6 excluded: yes

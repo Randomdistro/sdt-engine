@@ -1,0 +1,22 @@
+NP08 blank-slate run 1 (registered in NP08_RESET_ASSESSMENT_2026-10-10.md sections 0-2)
+=======================================================================
+
+[V1] AME2020 rows 3558, experimental 2550 -> met
+[V2] 3 x 4.002603 u = 12.007809 u (table 12.007809) ; Q(3 alpha) = 3 ME(4He) - ME(12C) = 7274.7476 keV (table 7.275 MeV; difference -0.252 keV) -> met
+[V3/grammar] He-4 = alpha + 0d + 0t ; Be-8 = alpha + 2d + 0t ; Be-9 = alpha + 1d + 1t ; C-12 = alpha + 4d + 0t ; O-16 = alpha + 6d + 0t ; -> reconstruction met
+
+VALIDATIONS: met
+
+TARGET ROW (measured anchors; COMPUTED from AME2020, E_H typed OBSERVED):
+  ME(4He) = 2424.915870 keV ; ME(12C) = 0.000000 keV (definition 0) ; ME(8Be) = 4941.672000 keV ; ME(16O) = -4737.002170 keV
+  Q(3 alpha -> 12C) = 7274.7476 keV
+  Be-8 margin ME(8Be) - 2 ME(4He) = +91.8403 keV (positive = unbound)
+  Hoyle offset E_H - Q(3 alpha) = 379.4524 keV with E_H = 7654.2 keV (4.96% of E_H)
+  Q(4He + 12C -> 16O) = 7161.9180 keV
+
+Tolerances implied for a later derivation:
+  5% of the Hoyle offset (audit correction gate) = 19.0 keV ; the run-1 20% gate on E_H = 1531 keV = 4.0 times the offset
+  50% of the Be-8 margin (run-2 gate) = 45.9 keV
+  fractional error of E_H that equals the whole offset: 4.96%
+
+Not run: the point-Coulomb repulsion ledger (imported source model), the lock derivation (blocked), the alignment-cost computation (needs the lock).

@@ -11,6 +11,6 @@ Full gated run of the OP01 prompt: Phases 0–4, long-form article, derivation, 
 | `OP01_DERIVATION.md` | H1–H4 analytic steps |
 | `OP01_VERDICT.md` | Full investigation article (not terse verdict format) |
 
-**Dual verdict:** Prompt completion **C** · Physics **CONVERGENCE/DEGENERATE** (limb) + **OPEN** (matter \(n\)).
+**Dual verdict:** Prompt completion **C** · Physics **CONVERGENCE/SHARED-INPUT** (limb) + **OPEN** (matter \(n\)).
 
 Canonical Claude stub run remains in `Investigations/15_Optics_and_Photonics/OP01_Refraction_and_Dispersion_as_Spation_Gradient_Index/` (`op01_refraction.cpp`, terse `OP01_VERDICT.md`).

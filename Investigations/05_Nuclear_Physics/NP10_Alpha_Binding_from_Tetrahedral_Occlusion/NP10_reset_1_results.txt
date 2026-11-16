@@ -1,0 +1,31 @@
+﻿NP10 reset instrument 1 (2026-10-09)
+====================================
+
+[V1] channel cosines against -1/3: worst 1.1e-16 -> met
+[V2] contact cone half-angle 30.000000000000 deg -> met
+[V3] pair: engagements per nucleon 1 (known 1) -> met
+[V4] synthetic star along 3 channels: 3 (known 3), best worst-angle 0.391 deg -> met
+
+VALIDATIONS: met
+
+[P4] far-field Law III between two R_p_lock boundaries, integrated to contact: 0.0763 MeV ; exact cap / small-angle at contact = 1.0718
+
+cluster        N    E    engaged    per contact  worst-angle all (deg) bound (<= 2)
+pair (d)       2    1          2         2.0000                  0.032 satisfied
+rod-3          3    2          3         1.5000                 35.265 satisfied
+triangle       3    3          6         2.0000                 24.779 satisfied
+square ring    4    4          8         2.0000                  9.790 satisfied
+tetrahedron    4    6          8         1.3333                 35.297 satisfied
+
+R2 (instance satisfies the bound): met
+
+r = (B/E)/B_d   (H-W requires r <= 1)
+  H-3   rod          E = 2 : B/E = 4.2410 MeV, r = 1.9069
+  H-3   triangle     E = 3 : B/E = 2.8273 MeV, r = 1.2713
+  He-3  rod          E = 2 : B/E = 3.8590 MeV, r = 1.7352
+  He-3  triangle     E = 3 : B/E = 2.5727 MeV, r = 1.1568
+  He-4  ring         E = 4 : B/E = 7.0740 MeV, r = 3.1808
+  He-4  tetrahedron  E = 6 : B/E = 4.7160 MeV, r = 2.1205
+R1: triton r > 1 under every admissible graph: yes ; alpha r > 1 under every admissible graph: yes -> H-W EXCLUDED (G1)
+
+R3: 2 R_p_lock = 1.68247 fm ; R_He (measured) = 1.67550 fm ; relative +0.416% -> within 1% (G4)

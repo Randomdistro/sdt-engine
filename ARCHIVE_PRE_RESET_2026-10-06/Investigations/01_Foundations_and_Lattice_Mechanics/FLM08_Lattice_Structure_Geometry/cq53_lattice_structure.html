@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Lattice Structure — FLM08 · Spatial Displacement Theory</title>
+<meta name="description" content="Tetrahedral frustration forces the spation vacuum onto a corner-sharing tetrahedral random network: regular tetrahedra cannot tile space, the kissing shell is frustrated, and the only branch that can be space is the isotropic, ~66%-void, 4-coordinated amorphous network.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ════════════════════════════════════════════════════════════════════════════
+   THE LATTICE STRUCTURE — FLM08
+   Tekne theme inlined (tokens copied verbatim from Release/HTML_SDT_Website/style.css)
+   so this stays a single self-contained file. Light cream/paper, copper accents,
+   Source Serif 4 + Inter + JetBrains Mono. All geometry constants below are EXACT.
+   ════════════════════════════════════════════════════════════════════════════ */
+:root {
+  --cream:#f5f0e8; --cream-warm:#efe8dc; --paper:#faf6ef; --paper-edge:#e8e0d2;
+  --ink:#1e1c18; --ink-soft:#3d3830; --ink-muted:#7a7265; --ink-faint:#a49d92; --ink-whisper:#c8c1b6;
+  --copper:#b07430; --copper-light:#d4a05c; --copper-glow:rgba(176,116,48,0.12);
+  --steel:#4a6d82; --steel-light:#6a95b0; --steel-deep:#2c4454;
+  --sp-xs:0.25rem; --sp-sm:0.5rem; --sp-md:1rem; --sp-lg:1.75rem; --sp-xl:3rem; --sp-2xl:5rem; --sp-3xl:8rem;
+  --fs-xs:0.75rem; --fs-sm:0.8125rem; --fs-base:1.0625rem; --fs-md:1.1875rem; --fs-lg:1.5rem;
+  --fs-xl:2rem; --fs-2xl:2.75rem; --fs-3xl:3.75rem;
+  --content-width:42rem; --wide-width:62rem;
+  --ease-out:cubic-bezier(0.16,1,0.3,1); --dur-fast:0.2s; --dur-med:0.4s; --dur-slow:0.8s;
+}
+*,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; -webkit-font-smoothing:antialiased; scroll-padding-top:4rem; }
+body { font-family:'Inter',-apple-system,sans-serif; font-size:var(--fs-base); line-height:1.75;
+  color:var(--ink); background:var(--cream); overflow-x:hidden; }
+::-webkit-scrollbar { width:6px; }
+::-webkit-scrollbar-track { background:var(--cream); }
+::-webkit-scrollbar-thumb { background:var(--ink-whisper); border-radius:3px; }
+::-webkit-scrollbar-thumb:hover { background:var(--ink-muted); }
+
+/* scroll progress + dot rail */
+.progress { position:fixed; top:0; left:0; height:2px; width:0; z-index:200;
+  background:linear-gradient(90deg,var(--copper-light),var(--copper)); transition:width .1s linear; }
+.rail { position:fixed; right:1.1rem; top:50%; transform:translateY(-50%); z-index:120;
+  display:flex; flex-direction:column; gap:.55rem; }
+.rail a { width:9px; height:9px; border-radius:50%; border:1px solid var(--ink-whisper);
+  background:transparent; transition:all var(--dur-fast); }
+.rail a:hover { border-color:var(--copper); transform:scale(1.3); }
+.rail a.on { background:var(--copper); border-color:var(--copper); }
+@media (max-width:980px){ .rail{ display:none; } }
+
+/* layout */
+section { max-width:var(--content-width); margin:0 auto; padding:var(--sp-2xl) var(--sp-xl); position:relative; }
+.wide { max-width:var(--wide-width); }
+.kicker { font-family:'Source Serif 4',serif; font-style:italic; color:var(--ink-muted);
+  letter-spacing:.04em; margin-bottom:var(--sp-sm); font-size:var(--fs-md); }
+h1 { font-family:'Source Serif 4',serif; font-weight:700; font-size:clamp(2.4rem,6.5vw,4.6rem);
+  line-height:1.04; letter-spacing:-0.02em; color:var(--ink); margin-bottom:var(--sp-md); }
+h1 em { font-style:normal; color:var(--copper); }
+h2 { font-family:'Source Serif 4',serif; font-weight:700; font-size:clamp(1.7rem,4vw,2.6rem);
+  line-height:1.1; letter-spacing:-0.015em; color:var(--ink); margin-bottom:var(--sp-md); }
+h3 { font-family:'Inter',sans-serif; font-weight:600; font-size:var(--fs-xs); letter-spacing:.16em;
+  text-transform:uppercase; color:var(--copper); margin-bottom:var(--sp-sm); }
+p { margin-bottom:var(--sp-md); color:var(--ink-soft); max-width:38rem; }
+.lede { font-size:var(--fs-md); color:var(--ink-soft); max-width:36rem; }
+strong { color:var(--ink); font-weight:600; }
+em { color:var(--ink); }
+.num,.val { font-family:'JetBrains Mono',monospace; color:var(--copper); }
+.eq { font-family:'JetBrains Mono',monospace; font-size:.92rem; background:var(--paper);
+  border:1px solid var(--paper-edge); border-left:3px solid var(--copper); border-radius:6px;
+  padding:var(--sp-md) var(--sp-lg); margin:var(--sp-lg) 0; color:var(--ink-soft); overflow-x:auto; line-height:1.9; }
+.eq b { color:var(--copper); font-weight:500; }
+
+/* hero */
+.hero { min-height:100vh; display:flex; flex-direction:column; justify-content:center; max-width:var(--wide-width); }
+.hero__stage { position:relative; width:100%; height:46vh; min-height:320px; margin-top:var(--sp-lg);
+  border:1px solid var(--paper-edge); border-radius:10px; overflow:hidden;
+  background:radial-gradient(120% 100% at 50% 20%, var(--paper), var(--cream) 60%, var(--cream-warm)); }
+.hero__author { font-size:var(--fs-sm); color:var(--ink-muted); margin-top:var(--sp-md); letter-spacing:.03em; }
+.hero__hint { font-family:'JetBrains Mono',monospace; font-size:var(--fs-xs); color:var(--copper);
+  margin-top:var(--sp-md); letter-spacing:.04em; }
+
+/* figure shell — the canvas stage */
+.fig { margin:var(--sp-lg) 0; border:1px solid var(--paper-edge); border-radius:8px; background:var(--paper); overflow:hidden; }
+.fig__stage { position:relative; width:100%; height:min(58vh,440px); display:block; touch-action:none;
+  background:radial-gradient(120% 120% at 50% 25%, var(--paper), var(--cream)); cursor:grab; }
+.fig__stage:active { cursor:grabbing; }
+.fig__stage canvas { display:block; width:100%; height:100%; }
+.fig__bar { display:flex; align-items:center; justify-content:space-between; gap:var(--sp-md);
+  padding:var(--sp-sm) var(--sp-md); border-top:1px solid var(--paper-edge); background:var(--cream); flex-wrap:wrap; }
+.fig__hint { font-size:var(--fs-xs); color:var(--ink-faint); font-style:italic; }
+.fig__read { font-family:'JetBrains Mono',monospace; font-size:var(--fs-sm); color:var(--ink); }
+.fig__read b { color:var(--copper); font-weight:500; }
+.fig__caption { font-size:var(--fs-sm); color:var(--ink-muted); font-style:italic; margin-top:var(--sp-sm); }
+.fig__fallback { position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  text-align:center; padding:var(--sp-lg); color:var(--ink-muted); font-size:var(--fs-sm); font-style:italic; }
+
+/* number row */
+.facts { display:flex; gap:var(--sp-lg); flex-wrap:wrap; margin:var(--sp-lg) 0; }
+.fact { flex:1; min-width:9rem; border-left:2px solid var(--copper-light); padding-left:var(--sp-md); }
+.fact b { display:block; font-family:'JetBrains Mono',monospace; font-size:var(--fs-lg); color:var(--copper); line-height:1.2; }
+.fact span { font-size:var(--fs-xs); color:var(--ink-muted); text-transform:uppercase; letter-spacing:.06em; }
+
+/* cards */
+.card { background:var(--paper); border:1px solid var(--paper-edge); border-radius:8px;
+  padding:var(--sp-lg); margin:var(--sp-lg) 0; }
+.callout { border:1px solid var(--copper-light); background:var(--copper-glow); border-radius:8px;
+  padding:var(--sp-lg); margin:var(--sp-lg) 0; }
+.callout strong { color:var(--copper); }
+
+/* properties summary table */
+.props { width:100%; border-collapse:collapse; margin:var(--sp-lg) 0; font-size:var(--fs-sm); }
+.props th { text-align:left; font-family:'Source Serif 4',serif; color:var(--ink);
+  padding:.55rem .6rem; border-bottom:2px solid var(--paper-edge); }
+.props td { padding:.55rem .6rem; border-bottom:1px solid var(--paper-edge); color:var(--ink-soft); vertical-align:top; }
+.props td:first-child { font-family:'Source Serif 4',serif; color:var(--ink); font-weight:600; }
+.props .n { font-family:'JetBrains Mono',monospace; color:var(--copper); white-space:nowrap; }
+.props tr:hover td { background:var(--copper-glow); }
+
+.tag { font-family:'JetBrains Mono',monospace; font-size:.62rem; letter-spacing:.08em; text-transform:uppercase;
+  padding:2px 7px; border-radius:3px; vertical-align:middle; }
+.tag--geo { color:var(--steel); background:rgba(74,109,130,.10); }
+.tag--id { color:var(--copper); background:var(--copper-glow); }
+
+.reveal { opacity:0; transform:translateY(22px); transition:opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); }
+.reveal.in { opacity:1; transform:none; }
+
+.footer { max-width:var(--wide-width); margin:0 auto; padding:var(--sp-2xl) var(--sp-xl);
+  border-top:1px solid var(--paper-edge); color:var(--ink-muted); font-size:var(--fs-sm); }
+.footer b { color:var(--copper); }
+.honesty { font-style:italic; color:var(--ink-muted); margin-top:var(--sp-md); }
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+<nav class="rail" id="rail" aria-label="Section navigation"></nav>
+
+<!-- ════════════════ HERO ════════════════ -->
+<section class="hero" id="hero" data-rail="Intro">
+  <div class="reveal in">
+    <div class="kicker">FLM08 · Foundations &amp; Lattice Mechanics</div>
+    <h1>The Lattice <em>Structure</em></h1>
+    <p class="lede">Tetrahedral frustration &rarr; corner-sharing random network. Regular
+    tetrahedra are the tightest local packing of space, yet they <em>cannot tile it</em>.
+    What space does instead — the only branch that can actually <em>be</em> space — is an
+    isotropic, four-coordinated, ~66%-void amorphous network. This is the spation vacuum's
+    geometry.</p>
+    <div class="hero__stage">
+      <canvas data-scene="hero"></canvas>
+      <div class="fig__fallback" hidden>3D view needs WebGL + network access to load Three.js. The geometry stands regardless.</div>
+    </div>
+    <div class="hero__author">J. C. Harvey, Melbourne · 2026-06-24</div>
+    <div class="hero__hint">&darr; scroll · drag any scene to rotate</div>
+  </div>
+</section>
+
+<!-- ════════════════ 1 · THE TETRAHEDRON ════════════════ -->
+<section id="s1" data-rail="The tetrahedron">
+  <div class="reveal">
+    <h3>Scene 1 — The unit cell of frustration</h3>
+    <h2>A single regular tetrahedron</h2>
+    <p>The regular tetrahedron is the densest way four points can sit equidistant — the
+    natural local cluster of a pressure-packed medium. Its <strong>dihedral angle</strong>
+    (the angle between two faces along a shared edge, highlighted in copper) is the seed of
+    everything that follows.</p>
+    <div class="eq">dihedral &delta; = arccos(1/3) = <b>70.528779&deg;</b><br>
+      bond / "methane" angle = arccos(&minus;1/3) = <b>109.471&deg;</b> &nbsp;(supplement of &delta;)</div>
+    <p>The bond angle 109.47&deg; is forced: the four vertex-vectors from the centre sum to
+    zero, so each pair must subtend exactly arccos(&minus;1/3). Nothing here is chosen — it is
+    pure geometry.</p>
+    <div class="fig">
+      <div class="fig__stage"><canvas data-scene="tetra"></canvas>
+        <div class="fig__fallback" hidden>WebGL/Three.js unavailable — &delta; = 70.53&deg; all the same.</div></div>
+      <div class="fig__bar"><span class="fig__hint">drag to rotate</span>
+        <span class="fig__read">dihedral &delta; = <b>70.53&deg;</b></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ 2 · FIVE AROUND AN EDGE ════════════════ -->
+<section id="s2" data-rail="The gap">
+  <div class="reveal">
+    <h3>Scene 2 — Five around an edge</h3>
+    <h2>The gap that will not close</h2>
+    <p>Try to wrap regular tetrahedra around a shared edge. Five fit — almost. Five times the
+    dihedral is <span class="num">5 &times; 70.5288&deg; = 352.6439&deg;</span>, short of a full
+    turn by an <strong>angular deficit</strong> that no amount of rotation can absorb:</p>
+    <div class="eq">&Delta;&#8325; = 2&pi; &minus; 5&delta; = 360&deg; &minus; 352.6439&deg; = <b>7.356103&deg;</b></div>
+    <p>That leftover wedge is the whole story. <strong>Regular tetrahedra cannot tile
+    three-dimensional space.</strong> The medium that wants to pack as tetrahedra is
+    geometrically forbidden from doing so periodically — it is <em>frustrated</em>.</p>
+    <div class="fig">
+      <div class="fig__stage"><canvas data-scene="five"></canvas>
+        <div class="fig__fallback" hidden>WebGL unavailable — the 7.356&deg; deficit is exact.</div></div>
+      <div class="fig__bar"><span class="fig__hint">drag to rotate · the fifth tetra leaves a wedge</span>
+        <span class="fig__read">deficit &Delta;&#8325; = <b>7.356&deg;</b></span></div>
+      <p class="fig__caption">Regular tetrahedra cannot tile space.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ 3 · TETRAHELIX ════════════════ -->
+<section id="s3" data-rail="Tetrahelix">
+  <div class="reveal">
+    <h3>Scene 3 — The Boerdijk–Coxeter helix</h3>
+    <h2>Face-sharing forever, closing never</h2>
+    <p>If tetrahedra cannot ring an edge, they can still chain by sharing faces. Stack them and
+    they spiral into the <strong>Boerdijk&ndash;Coxeter tetrahelix</strong>: each new cell twists
+    by an angle that is an <em>irrational</em> fraction of a full turn, so the helix elongates
+    indefinitely and <strong>never repeats</strong>.</p>
+    <div class="eq">twist &theta; = arccos(&minus;2/3) = <b>131.810315&deg;</b> per cell<br>
+      helix radius R = (3&radic;3/10)&middot;a = <b>0.519615&middot;a</b><br>
+      axial rise h = a/&radic;10 = <b>0.316228&middot;a</b></div>
+    <p>Because <span class="num">131.81&deg;</span> is incommensurable with 360&deg;, no integer
+    number of cells ever brings a vertex back over its start. The chain is aperiodic by
+    construction — the first hint that the vacuum is amorphous, not crystalline.</p>
+    <div class="fig">
+      <div class="fig__stage"><canvas data-scene="helix"></canvas>
+        <div class="fig__fallback" hidden>WebGL unavailable — twist 131.81&deg; never closes.</div></div>
+      <div class="fig__bar"><span class="fig__hint">drag to rotate · cells build up the axis</span>
+        <span class="fig__read">twist/cell = <b>131.81&deg;</b></span></div>
+      <p class="fig__caption">Irrational twist ⇒ never closes, elongates forever.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ 4 · HINGE ════════════════ -->
+<section id="s4" data-rail="The hinge">
+  <div class="reveal">
+    <h3>Scene 4 — Corner-sharing hinge</h3>
+    <h2>Compression is rotation, not squeeze</h2>
+    <p>Once tetrahedra share only a <strong>single vertex</strong> instead of a face, the
+    structure gains a soft mode: the two units can swing about the shared corner like a hinge,
+    with no bond stretched and no tetrahedron deformed. This is a
+    <strong>rigid-unit mode</strong> (RUM).</p>
+    <p>It matters because it tells you how the spation lattice <em>responds to pressure</em>:
+    not by crushing the rigid tetrahedra, but by rotating them about their shared corners. The
+    softness is geometric, and it is large.</p>
+    <div class="callout"><strong>SDT reading:</strong> compression = hinge rotation, not squeeze.
+    This soft corner-sharing mode <em>is</em> the gravitational redshift in SDT — a region under
+    load reorganises its hinge angles, changing the local closure length without compressing the
+    units themselves.</div>
+    <div class="fig">
+      <div class="fig__stage"><canvas data-scene="hinge"></canvas>
+        <div class="fig__fallback" hidden>WebGL unavailable — the hinge is the soft RUM mode.</div></div>
+      <div class="fig__bar"><span class="fig__hint">drag to rotate · watch the hinge flex</span>
+        <span class="fig__read">shared-vertex hinge: <b>rigid-unit mode</b></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ 5 · KISSING SHELL ════════════════ -->
+<section id="s5" data-rail="Kissing shell">
+  <div class="reveal">
+    <h3>Scene 5 — The 12-around-1 kissing shell</h3>
+    <h2>Twelve neighbours, and a gap</h2>
+    <p>The most a single sphere can be kissed by, in 3D, is <strong>twelve</strong>. Place those
+    twelve so their centres sit on a regular icosahedron — the most symmetric arrangement — and
+    each kisses the centre cleanly. But the twelve <em>cannot all kiss each other</em>: the
+    icosahedron's edge is longer than two radii.</p>
+    <div class="eq">icosa circumradius = 2r &nbsp;(centres touch the core)<br>
+      icosa edge = 8r/&radic;(10+2&radic;5) = <b>2.102924&middot;r</b> &gt; 2r<br>
+      surface gap between neighbours = <b>0.102924&middot;r</b></div>
+    <p>So even the best shell is loose by <span class="num">0.103r</span> at every contact — the
+    kissing shell is <strong>frustrated</strong>, the same frustration as the edge gap, now in
+    spherical form. The shell's twelve radial modes decompose cleanly by symmetry:</p>
+    <div class="eq">12 = <b>1</b> (breathing, &ell;=0) + <b>3</b> (translation, &ell;=1)
+      + <b>5</b> (quadrupole, &ell;=2) + <b>3</b> (icosahedral, &ell;=3)</div>
+    <div class="fig">
+      <div class="fig__stage"><canvas data-scene="kiss"></canvas>
+        <div class="fig__fallback" hidden>WebGL unavailable — gap = 0.103r, 12 = 1+3+5+3.</div></div>
+      <div class="fig__bar"><span class="fig__hint">drag to rotate · shell breathes</span>
+        <span class="fig__read">contact gap = <b>0.103 r</b> · modes <b>12 = 1+3+5+3</b></span></div>
+      <p class="fig__caption">12-around-1 icosahedral shell — frustrated, cannot close perfectly.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ 6 · THE CRN ════════════════ -->
+<section id="s6" data-rail="The network">
+  <div class="reveal">
+    <h3>Scene 6 — The corner-sharing random network</h3>
+    <h2>The only branch that can be space</h2>
+    <p>Frustration forecloses the periodic crystal. The escape is to drop coordination: instead
+    of face-sharing into helices or jamming twelve neighbours, each node bonds to just
+    <strong>four</strong> others — coordination 4, the "W+1" of the SDT vortex grammar — sharing
+    only corners. The result is a <strong>continuous random network</strong> (CRN): aperiodic,
+    statistically isotropic, and genuinely space-filling.</p>
+    <div class="eq">coordination = <b>4</b> &nbsp;(corner-sharing tetrahedra)<br>
+      diamond-limit packing fraction &phi; = &pi;&radic;3/16 = <b>0.340087</b><br>
+      void fraction = 1 &minus; &phi; &asymp; <b>0.659913</b> &nbsp;(~66% open void)</div>
+    <p>This is the resolution. The amorphous, four-coordinated network is the <em>only</em>
+    structure that is simultaneously isotropic (no preferred axis, so no broken Lorentz
+    symmetry) and space-filling. A periodic FCC crystal would be space-filling but anisotropic;
+    the icosahedral motif is isotropic but cannot tile. Only the random network is both.</p>
+    <div class="fig">
+      <div class="fig__stage"><canvas data-scene="crn"></canvas>
+        <div class="fig__fallback" hidden>WebGL unavailable — 4-coordinated, ~66% void, isotropic.</div></div>
+      <div class="fig__bar"><span class="fig__hint">drag to rotate · ~66% of it is void</span>
+        <span class="fig__read">coordination <b>4</b> · void <b>~66%</b> · isotropic</span></div>
+      <p class="fig__caption">Isotropic AND space-filling — the only branch that can be space.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ 7 · SCREW CHANNEL ════════════════ -->
+<section id="s7" data-rail="Screw channel">
+  <div class="reveal">
+    <h3>Scene 7 — The screw channel</h3>
+    <h2>Current implies circulation</h2>
+    <p>The void threading the network is not straight — the tetrahelix geometry makes every
+    open channel a <strong>screw</strong>. A disturbance pushed along the axis is inseparably
+    forced to circulate around it, because the channel's own screw partitions any motion into
+    axial and circumferential parts in a fixed ratio:</p>
+    <div class="eq">axial fraction = 1/&radic;10, &nbsp; circumferential = 3/&radic;10<br>
+      torsion : translation = <b>3 : 1</b> &nbsp;&rarr;&nbsp; energy = <b>9 : 1</b></div>
+    <p>This is a <strong>geometric mode ratio, not a coupling constant</strong> — nothing is
+    tuned. But it has a physical consequence: an axial transport (a current) cannot exist
+    without an attendant circulation (a magnetic twist). <strong>Current ⇒ magnetism</strong>
+    falls straight out of the channel shape.</p>
+    <div class="fig">
+      <div class="fig__stage"><canvas data-scene="screw"></canvas>
+        <div class="fig__fallback" hidden>WebGL unavailable — torsion:translation = 3:1.</div></div>
+      <div class="fig__bar"><span class="fig__hint">drag to rotate · axial arrow drags the circulation</span>
+        <span class="fig__read">torsion : translation = <b>3 : 1</b></span></div>
+      <p class="fig__caption">Axial transport implies circulation — current ⇒ magnetism, a geometric mode ratio.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ 8 · CURVATURE REVEAL ════════════════ -->
+<section id="s8" data-rail="Curvature">
+  <div class="reveal">
+    <h3>Scene 8 — The curvature reveal</h3>
+    <h2>The deficit is missing curvature</h2>
+    <p>Where does the 7.356&deg; go? It is real, and it is geometric: in a <em>curved</em>
+    three-sphere (S³), five tetrahedra <strong>do</strong> close. That is the regular polytope
+    <strong>{3,3,5}</strong>, the 600-cell, whose tetrahedra have dihedral exactly
+    <span class="num">72&deg;</span> — and 5 &times; 72&deg; = 360&deg;.</p>
+    <div class="eq">flat-space dihedral = <b>70.5288&deg;</b><br>
+      {3,3,5} 600-cell dihedral = <b>72&deg;</b> &nbsp;&rarr;&nbsp; 5 &times; 72&deg; = 360&deg; (closes)<br>
+      missing per edge = 72&deg; &minus; 70.5288&deg; = 1.4712&deg; &nbsp;&times; 5 = <b>7.356&deg;</b></div>
+    <p>The deficit is exactly the curvature flat space cannot supply: each of the five edges is
+    short by 1.47&deg; of the curvature that S³ provides for free. Flat space, lacking it,
+    leaves the wedge open — and that open wedge is the frustration that forces the random
+    network. The 600-cell shows the frustration is not a flaw; it is flat space's signature.</p>
+    <div class="fig">
+      <div class="fig__stage"><canvas data-scene="curv"></canvas>
+        <div class="fig__fallback" hidden>WebGL unavailable — in S³ five tetrahedra close (72&deg;); flat space is short by 7.356&deg;.</div></div>
+      <div class="fig__bar"><span class="fig__hint">drag to rotate · the highlighted wedge is missing curvature</span>
+        <span class="fig__read">{3,3,5}: 72&deg; closes · flat: <b>short 7.356&deg;</b></span></div>
+      <p class="fig__caption">In curved S³ five tetrahedra close; flat space cannot, and the wedge is the difference.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ PROPERTIES ════════════════ -->
+<section class="wide" id="props" data-rail="Properties">
+  <div class="reveal">
+    <h3>Summary</h3>
+    <h2>Properties of the lattice</h2>
+    <p>Every property below follows from one fact: regular tetrahedra are the tightest local
+    pack of space yet cannot tile it. The frustration cascades into a single resolved structure.</p>
+    <div class="card">
+    <table class="props">
+      <thead><tr><th>Property</th><th>Value</th><th>Where it comes from</th></tr></thead>
+      <tbody>
+        <tr><td>Coordination</td><td class="n">4 (W+1)</td><td>corner-sharing tetrahedra; the only space-filling isotropic branch</td></tr>
+        <tr><td>Void fraction</td><td class="n">~66%</td><td>1 &minus; &pi;&radic;3/16 = 0.659913 (diamond limit)</td></tr>
+        <tr><td>Symmetry</td><td class="n">statistically isotropic</td><td>amorphous random network — no preferred axis</td></tr>
+        <tr><td>Space-filling</td><td class="n">yes</td><td>corner-sharing escapes the tiling obstruction</td></tr>
+        <tr><td>Kissing shell</td><td class="n">frustrated, gap 0.103r</td><td>icosa edge 2.1029r &gt; 2r; 12 cannot close</td></tr>
+        <tr><td>Face-sharing chain</td><td class="n">aperiodic helix</td><td>BC tetrahelix twist 131.81&deg;, irrational ⇒ never repeats</td></tr>
+        <tr><td>Softness</td><td class="n">RUM hinge</td><td>shared-corner rotation; compression = rotation, not squeeze</td></tr>
+        <tr><td>Screw channel</td><td class="n">3 : 1 (energy 9 : 1)</td><td>axial 1/&radic;10, circumferential 3/&radic;10 ⇒ current ⇒ magnetism</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="callout">
+      <p style="margin:0"><span class="tag tag--geo">Geometry</span> &nbsp;The dihedral 70.53&deg;,
+      the deficit 7.356&deg;, the kissing gap 0.103r, the void 66%, the 3:1 screw ratio — these
+      are <strong>exact</strong>, theorem-grade facts of Euclidean geometry. They are not in
+      dispute.</p>
+      <p class="honesty"><span class="tag tag--id">Identification</span> &nbsp;The geometry is exact
+      [GEOMETRY]; that the vacuum <em>is</em> this network is an interpretation [IDENTIFICATION],
+      not proven.</p>
+    </div>
+  </div>
+</section>
+
+<div class="footer">
+  <b>The Lattice Structure — FLM08</b> · Spatial Displacement Theory · all geometric constants
+  exact (regular-tetrahedron dihedral, BC tetrahelix, icosahedral kissing shell, diamond-limit
+  packing). 8 animated Three.js scenes; drag any to rotate.<br>
+  J. C. Harvey, Melbourne · 2026-06-24 ·
+  Investigations/01_Foundations_and_Lattice_Mechanics/CQ53_Lattice_Structure_Geometry
+</div>
+
+<!-- ════════════════ THREE.JS SCENES ════════════════ -->
+<script type="importmap">
+{ "imports": {
+  "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+}}
+</script>
+<script type="module">
+/* ───── progress rail + reveal (runs with or without WebGL) ───── */
+(function(){
+  const secs=[...document.querySelectorAll('section')];
+  const rail=document.getElementById('rail');
+  const prog=document.getElementById('progress');
+  secs.forEach(s=>{
+    const a=document.createElement('a'); a.href='#'+s.id;
+    a.title=s.dataset.rail||s.id; rail.appendChild(a);
+  });
+  const dots=[...rail.children];
+  const io=new IntersectionObserver(es=>es.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.reveal').forEach(r=>r.classList.add('in'));
+      const i=secs.indexOf(e.target);
+      dots.forEach((d,j)=>d.classList.toggle('on',j===i));
+    }
+  }),{threshold:.25});
+  secs.forEach(s=>io.observe(s));
+  addEventListener('scroll',()=>{
+    const h=document.documentElement;
+    prog.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';
+  },{passive:true});
+})();
+
+/* ───── exact geometry constants ───── */
+const DEG = Math.PI/180;
+const DIHEDRAL = Math.acos(1/3);          // 70.528779°
+const BOND     = Math.acos(-1/3);         // 109.471°
+const DEFICIT5 = 2*Math.PI - 5*DIHEDRAL;  // 7.356103°
+const BCTWIST  = Math.acos(-2/3);         // 131.810315° per cell
+
+/* regular tetra vertices (edge length ~ 2*sqrt(2)), centred at origin */
+const TET = [
+  new Float32Array([ 1, 1, 1]),
+  new Float32Array([ 1,-1,-1]),
+  new Float32Array([-1, 1,-1]),
+  new Float32Array([-1,-1, 1]),
+];
+
+let THREE, OrbitControls, hasGL=false;
+try {
+  THREE = await import('three');
+  ({ OrbitControls } = await import('three/addons/controls/OrbitControls.js'));
+  hasGL = true;
+} catch(err){
+  // graceful: reveal fallbacks; geometry text already on the page
+  document.querySelectorAll('.fig__fallback').forEach(f=>f.hidden=false);
+}
+
+if(hasGL){
+  /* palette */
+  const COL = { copper:0xb07430, copperL:0xd4a05c, steel:0x4a6d82, steelL:0x6a95b0,
+                ink:0x1e1c18, faint:0xc8c1b6, paper:0xfaf6ef, glow:0xe8b878 };
+
+  /* ── shared renderer factory; each canvas gets its own scene/camera ── */
+  function makeScene(canvas, camDist, build, animate){
+    const stage = canvas.parentElement;
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 200);
+    camera.position.set(0, camDist*0.25, camDist);
+    const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
+    renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping=true; controls.dampingFactor=0.08; controls.enablePan=false;
+    controls.autoRotate=true; controls.autoRotateSpeed=0.6;
+    controls.minDistance=camDist*0.45; controls.maxDistance=camDist*2.2;
+    scene.add(new THREE.HemisphereLight(0xfffaf0, 0xcfc6b6, 1.05));
+    const dir = new THREE.DirectionalLight(0xffffff, 0.6); dir.position.set(5,9,7); scene.add(dir);
+
+    const ctx = { THREE, scene, camera, renderer, controls, t:0 };
+    build(ctx);
+
+    function resize(){
+      const w = stage.clientWidth, h = stage.clientHeight;
+      if(w===0||h===0) return;
+      renderer.setSize(w,h,false);
+      camera.aspect = w/h; camera.updateProjectionMatrix();
+    }
+    resize(); addEventListener('resize', resize);
+
+    let visible=true;
+    new IntersectionObserver(es=>es.forEach(e=>{visible=e.isIntersecting;}),{threshold:0.05}).observe(stage);
+
+    function loop(){
+      requestAnimationFrame(loop);
+      if(!visible) return;
+      ctx.t += 1/60;
+      controls.update();
+      if(animate) animate(ctx);
+      renderer.render(scene, camera);
+    }
+    loop();
+    return ctx;
+  }
+
+  /* ── helpers ── */
+  function tetMesh(scale, color, opacity){
+    const g = new THREE.BufferGeometry();
+    const v = [];
+    const idx = [[0,1,2],[0,1,3],[0,2,3],[1,2,3]];
+    const pts = TET.map(p=>new THREE.Vector3(p[0],p[1],p[2]).multiplyScalar(scale));
+    idx.forEach(f=>f.forEach(i=>v.push(pts[i].x,pts[i].y,pts[i].z)));
+    g.setAttribute('position', new THREE.Float32BufferAttribute(v,3));
+    g.computeVertexNormals();
+    const m = new THREE.Mesh(g, new THREE.MeshStandardMaterial({
+      color, roughness:0.5, metalness:0.05, transparent:opacity<1, opacity,
+      side:THREE.DoubleSide, flatShading:true }));
+    return { mesh:m, pts };
+  }
+  function edges(scale, color, lw){
+    const pts = TET.map(p=>new THREE.Vector3(p[0],p[1],p[2]).multiplyScalar(scale));
+    const pairs=[[0,1],[0,2],[0,3],[1,2],[1,3],[2,3]];
+    const v=[]; pairs.forEach(([a,b])=>v.push(pts[a].x,pts[a].y,pts[a].z,pts[b].x,pts[b].y,pts[b].z));
+    const g=new THREE.BufferGeometry(); g.setAttribute('position',new THREE.Float32BufferAttribute(v,3));
+    return new THREE.LineSegments(g, new THREE.LineBasicMaterial({color, linewidth:lw||1}));
+  }
+
+  /* ════ SCENE: hero — slowly rotating CRN-ish cluster of corner cells ════ */
+  function buildHero(ctx){
+    const {scene}=ctx; const grp=new THREE.Group(); scene.add(grp); ctx.grp=grp;
+    const rng=mulberry(7);
+    const nodes=[]; const N=26;
+    for(let i=0;i<N;i++){
+      const r=2.0+rng()*3.2, th=rng()*Math.PI*2, ph=Math.acos(2*rng()-1);
+      nodes.push(new THREE.Vector3(r*Math.sin(ph)*Math.cos(th), r*Math.sin(ph)*Math.sin(th)*0.7, r*Math.cos(ph)));
+    }
+    const nGeo=new THREE.SphereGeometry(0.16,12,12);
+    const nMat=new THREE.MeshStandardMaterial({color:COL.steel,roughness:0.4});
+    nodes.forEach(p=>{const m=new THREE.Mesh(nGeo,nMat);m.position.copy(p);grp.add(m);});
+    // connect each node to ~4 nearest (corner-sharing feel)
+    const lv=[];
+    nodes.forEach((p,i)=>{
+      const d=nodes.map((q,j)=>({j,dd:p.distanceTo(q)})).filter(o=>o.j!==i).sort((a,b)=>a.dd-b.dd).slice(0,4);
+      d.forEach(o=>{ if(o.j>i) lv.push(p.x,p.y,p.z,nodes[o.j].x,nodes[o.j].y,nodes[o.j].z); });
+    });
+    const lg=new THREE.BufferGeometry(); lg.setAttribute('position',new THREE.Float32BufferAttribute(lv,3));
+    grp.add(new THREE.LineSegments(lg,new THREE.LineBasicMaterial({color:COL.copperL,transparent:true,opacity:0.55})));
+  }
+
+  /* ════ SCENE 1: single tetra, highlight one dihedral edge ════ */
+  function buildTetra(ctx){
+    const {scene}=ctx;
+    const {mesh}=tetMesh(1.4, COL.steelL, 0.55); scene.add(mesh);
+    scene.add(edges(1.4, COL.ink, 2));
+    // highlight the shared edge between vertices 0 and 1
+    const p0=new THREE.Vector3(...TET[0]).multiplyScalar(1.4);
+    const p1=new THREE.Vector3(...TET[1]).multiplyScalar(1.4);
+    const hv=[p0.x,p0.y,p0.z,p1.x,p1.y,p1.z];
+    const hg=new THREE.BufferGeometry(); hg.setAttribute('position',new THREE.Float32BufferAttribute(hv,3));
+    scene.add(new THREE.LineSegments(hg,new THREE.LineBasicMaterial({color:COL.copper,linewidth:3})));
+    // a little arc spanning the dihedral, drawn near the edge midpoint
+    const mid=p0.clone().add(p1).multiplyScalar(0.5);
+    const sprite=labelSprite('δ = 70.53°');
+    sprite.position.copy(mid.clone().multiplyScalar(1.35)); sprite.position.y+=0.2;
+    scene.add(sprite);
+  }
+
+  /* ════ SCENE 2: five tetra around a shared edge, animate fifth, show gap ════ */
+  function buildFive(ctx){
+    const {scene}=ctx; const grp=new THREE.Group(); scene.add(grp); ctx.grp=grp;
+    // shared edge along the y axis; build a wedge tetra, rotate copies by k*DIHEDRAL
+    ctx.cells=[];
+    for(let k=0;k<5;k++){
+      const cell=wedgeTetra(COL.steelL, k===4?COL.copper:COL.steelL);
+      cell.rotation.y = k*DIHEDRAL;
+      grp.add(cell); ctx.cells.push(cell);
+    }
+    // axis
+    const av=[0,-2.2,0, 0,2.2,0];
+    const ag=new THREE.BufferGeometry(); ag.setAttribute('position',new THREE.Float32BufferAttribute(av,3));
+    grp.add(new THREE.LineSegments(ag,new THREE.LineBasicMaterial({color:COL.ink})));
+    const sp=labelSprite('Δ₅ = 7.356°'); sp.position.set(1.9,1.7,0.4); scene.add(sp); ctx.gapLabel=sp;
+  }
+  function animFive(ctx){
+    // swing the 5th cell across the 7.356° wedge it can never fill, then back
+    const phase=(Math.sin(ctx.t*0.9)*0.5+0.5);          // 0..1
+    ctx.cells[4].rotation.y = 4*DIHEDRAL + phase*DEFICIT5;
+    // pulse the gap label so the deficit reads
+    if(ctx.gapLabel) ctx.gapLabel.material.opacity = 0.55+0.45*phase;
+  }
+
+  /* ════ SCENE 3: BC tetrahelix building up, twisting BCTWIST per cell ════ */
+  function buildHelix(ctx){
+    const {scene}=ctx; const grp=new THREE.Group(); scene.add(grp); ctx.grp=grp;
+    grp.rotation.x = -Math.PI/2*0.0;
+    ctx.cellGroup=grp; ctx.cells=[];
+    const a=1.6;                       // edge proxy
+    const Rh=0.519615*a, rise=0.316228*a;
+    ctx.helixParam={a,Rh,rise};
+    ctx.maxCells=22;
+    for(let n=0;n<ctx.maxCells;n++){
+      const cell=tinyTetra(n%2? COL.steelL: COL.steel);
+      const ang=n*BCTWIST;
+      cell.position.set(Rh*Math.cos(ang), n*rise - ctx.maxCells*rise*0.5, Rh*Math.sin(ang));
+      cell.rotation.y = ang;
+      cell.scale.setScalar(0.0001);    // grow in during anim
+      grp.add(cell); ctx.cells.push(cell);
+    }
+    // helix axis
+    const av=[0,-ctx.maxCells*rise*0.5-0.4,0, 0,ctx.maxCells*rise*0.5+0.4,0];
+    const ag=new THREE.BufferGeometry(); ag.setAttribute('position',new THREE.Float32BufferAttribute(av,3));
+    grp.add(new THREE.LineSegments(ag,new THREE.LineBasicMaterial({color:COL.copper,transparent:true,opacity:0.7})));
+    ctx.grown=0;
+  }
+  function animHelix(ctx){
+    // grow cells in one by one, loop
+    const period=10; // seconds per full build
+    const frac=(ctx.t % period)/period;
+    const want=Math.floor(frac*ctx.maxCells)+1;
+    ctx.cells.forEach((c,i)=>{
+      const target = i<want ? 1 : 0;
+      const s=c.scale.x + (target-c.scale.x)*0.18;
+      c.scale.setScalar(Math.max(0.0001,s));
+    });
+  }
+
+  /* ════ SCENE 4: corner-sharing hinge, two tetra flexing about a vertex ════ */
+  function buildHinge(ctx){
+    const {scene}=ctx; const grp=new THREE.Group(); scene.add(grp); ctx.grp=grp;
+    // shared vertex at origin; tetra A fixed, tetra B hinges
+    const A=tinyTetra(COL.steel); A.position.set(-0.0,0,0);
+    A.rotation.z = -0.5;
+    const pivotShift=new THREE.Vector3(1.05,0,0);
+    A.position.copy(pivotShift.clone().multiplyScalar(-1));
+    grp.add(A);
+    const Bgrp=new THREE.Group(); grp.add(Bgrp);
+    const B=tinyTetra(COL.copperL); B.position.copy(pivotShift); Bgrp.add(B);
+    ctx.Bgrp=Bgrp;
+    // shared corner marker
+    const dot=new THREE.Mesh(new THREE.SphereGeometry(0.13,16,16),new THREE.MeshStandardMaterial({color:COL.copper}));
+    grp.add(dot);
+  }
+  function animHinge(ctx){
+    if(ctx.Bgrp) ctx.Bgrp.rotation.z = Math.sin(ctx.t*1.1)*0.6;
+  }
+
+  /* ════ SCENE 5: 12-around-1 kissing shell with gap + breathing ════ */
+  function buildKiss(ctx){
+    const {scene}=ctx; const grp=new THREE.Group(); scene.add(grp); ctx.grp=grp;
+    const r=0.62;                       // sphere radius
+    const core=new THREE.Mesh(new THREE.SphereGeometry(r,32,32),
+      new THREE.MeshStandardMaterial({color:COL.copper,roughness:0.4}));
+    grp.add(core);
+    // 12 icosahedron vertices, normalised then scaled to circumradius 2r
+    const ico=icosaVerts();
+    ctx.shell=[]; const sMat=new THREE.MeshStandardMaterial({color:COL.steelL,roughness:0.45});
+    ctx.r=r; ctx.icoDir=ico;
+    ico.forEach(d=>{
+      const m=new THREE.Mesh(new THREE.SphereGeometry(r,24,24),sMat.clone());
+      m.userData.dir=d.clone();
+      grp.add(m); ctx.shell.push(m);
+    });
+    const sp=labelSprite('gap 0.103r · 12 = 1+3+5+3'); sp.position.set(0,2.6,0); scene.add(sp);
+  }
+  function animKiss(ctx){
+    const breathe = 1 + Math.sin(ctx.t*1.3)*0.08;     // breathing ℓ=0 mode
+    const circum = 2*ctx.r * breathe;                  // centre distance
+    ctx.shell.forEach(m=>m.position.copy(m.userData.dir).multiplyScalar(circum));
+  }
+
+  /* ════ SCENE 6: continuous random network ════ */
+  function buildCRN(ctx){
+    const {scene}=ctx; const grp=new THREE.Group(); scene.add(grp); ctx.grp=grp;
+    const rng=mulberry(42); const nodes=[]; const N=34;
+    // grow a roughly 4-coordinated cluster by random branching
+    nodes.push(new THREE.Vector3(0,0,0));
+    while(nodes.length<N){
+      const base=nodes[Math.floor(rng()*nodes.length)];
+      const dir=new THREE.Vector3(rng()*2-1,rng()*2-1,rng()*2-1).normalize().multiplyScalar(1.25);
+      const cand=base.clone().add(dir);
+      if(nodes.every(p=>p.distanceTo(cand)>0.9) && cand.length()<4.0) nodes.push(cand);
+      else if(rng()<0.05) nodes.push(cand); // occasional looser placement
+    }
+    const nGeo=new THREE.SphereGeometry(0.13,12,12);
+    const nMat=new THREE.MeshStandardMaterial({color:COL.steel,roughness:0.4});
+    nodes.forEach(p=>{const m=new THREE.Mesh(nGeo,nMat);m.position.copy(p);grp.add(m);});
+    const lv=[];
+    nodes.forEach((p,i)=>{
+      const d=nodes.map((q,j)=>({j,dd:p.distanceTo(q)})).filter(o=>o.j!==i).sort((a,b)=>a.dd-b.dd).slice(0,4);
+      d.forEach(o=>{ if(o.j>i) lv.push(p.x,p.y,p.z,nodes[o.j].x,nodes[o.j].y,nodes[o.j].z); });
+    });
+    const lg=new THREE.BufferGeometry(); lg.setAttribute('position',new THREE.Float32BufferAttribute(lv,3));
+    grp.add(new THREE.LineSegments(lg,new THREE.LineBasicMaterial({color:COL.copperL,transparent:true,opacity:0.6})));
+    ctx.spin=grp;
+  }
+  function animCRN(ctx){ if(ctx.spin) ctx.spin.rotation.y += 0.0; /* OrbitControls autorotate handles spin */ }
+
+  /* ════ SCENE 7: screw channel — axial arrow + circumferential B twist 3:1 ════ */
+  function buildScrew(ctx){
+    const {scene}=ctx; const grp=new THREE.Group(); scene.add(grp); ctx.grp=grp;
+    const R=0.9, turns=3, H=4.0, segs=240;
+    // helical channel path (torsion:translation 3:1 -> 3 turns over the height window)
+    const pts=[];
+    for(let i=0;i<=segs;i++){
+      const u=i/segs; const ang=u*turns*2*Math.PI;
+      pts.push(new THREE.Vector3(R*Math.cos(ang), -H/2 + u*H, R*Math.sin(ang)));
+    }
+    const curve=new THREE.CatmullRomCurve3(pts);
+    const tube=new THREE.Mesh(new THREE.TubeGeometry(curve,segs,0.12,12,false),
+      new THREE.MeshStandardMaterial({color:COL.steelL,roughness:0.5,transparent:true,opacity:0.85}));
+    grp.add(tube);
+    // central axis (the current)
+    const axis=new THREE.ArrowHelper(new THREE.Vector3(0,1,0),new THREE.Vector3(0,-H/2,0),H,COL.copper,0.4,0.28);
+    grp.add(axis);
+    // a moving bead that runs the screw (couples axial + circumferential)
+    ctx.curve=curve;
+    ctx.bead=new THREE.Mesh(new THREE.SphereGeometry(0.16,16,16),new THREE.MeshBasicMaterial({color:COL.copper}));
+    grp.add(ctx.bead);
+    // circumferential B arrow (updated each frame)
+    ctx.barrow=new THREE.ArrowHelper(new THREE.Vector3(1,0,0),new THREE.Vector3(0,0,0),0.9,COL.copperL,0.3,0.2);
+    grp.add(ctx.barrow);
+    const sp=labelSprite('torsion : translation = 3 : 1'); sp.position.set(0,2.6,0); scene.add(sp);
+  }
+  function animScrew(ctx){
+    const u=(ctx.t*0.12)%1;
+    const p=ctx.curve.getPoint(u);
+    ctx.bead.position.copy(p);
+    // circumferential tangent in the xz plane
+    const tang=new THREE.Vector3(-p.z,0,p.x).normalize();
+    ctx.barrow.position.copy(p);
+    ctx.barrow.setDirection(tang);
+  }
+
+  /* ════ SCENE 8: curvature reveal — ring of 5 tetra + missing wedge ════ */
+  function buildCurv(ctx){
+    const {scene}=ctx; const grp=new THREE.Group(); scene.add(grp); ctx.grp=grp;
+    // schematic ring of 5 wedge tetra around an axis with a visible closing wedge
+    for(let k=0;k<5;k++){
+      const cell=wedgeTetra(COL.steelL, COL.steelL);
+      cell.rotation.y=k*DIHEDRAL;
+      grp.add(cell);
+    }
+    // the missing-curvature wedge, drawn as a copper sector fan after the 5th
+    const start=5*DIHEDRAL;
+    const wedge=sectorFan(start, start+DEFICIT5, 2.0, COL.copper);
+    grp.add(wedge);
+    // axis
+    const av=[0,-2.0,0,0,2.0,0];
+    const ag=new THREE.BufferGeometry(); ag.setAttribute('position',new THREE.Float32BufferAttribute(av,3));
+    grp.add(new THREE.LineSegments(ag,new THREE.LineBasicMaterial({color:COL.ink})));
+    const sp=labelSprite('flat short by 7.356°  (S³: 72° closes)'); sp.position.set(0,2.7,0); scene.add(sp);
+    ctx.wedge=wedge;
+  }
+  function animCurv(ctx){ if(ctx.wedge) ctx.wedge.material.opacity=0.45+0.45*(Math.sin(ctx.t*1.4)*0.5+0.5); }
+
+  /* ───── small geometry builders ───── */
+  // a thin "wedge" tetra sharing the vertical axis as an edge (for edge-ring scenes)
+  function wedgeTetra(faceCol, edgeCol){
+    const g=new THREE.Group();
+    // edge along y from -1..1 ; apex out at radius
+    const half=1.0, rad=1.7, halfAng=DIHEDRAL/2;
+    const a=new THREE.Vector3(0,-half,0), b=new THREE.Vector3(0,half,0);
+    const c=new THREE.Vector3(rad*Math.cos(-halfAng),0,rad*Math.sin(-halfAng));
+    const d=new THREE.Vector3(rad*Math.cos(halfAng),0,rad*Math.sin(halfAng));
+    const verts=[a,b,c,a,b,d,a,c,d,b,c,d];
+    const arr=[]; verts.forEach(v=>arr.push(v.x,v.y,v.z));
+    const geo=new THREE.BufferGeometry(); geo.setAttribute('position',new THREE.Float32BufferAttribute(arr,3));
+    geo.computeVertexNormals();
+    g.add(new THREE.Mesh(geo,new THREE.MeshStandardMaterial({color:faceCol,roughness:0.55,metalness:0.05,
+      transparent:true,opacity:0.5,side:THREE.DoubleSide,flatShading:true})));
+    const ev=[a,b,a,c,a,d,b,c,b,d,c,d]; const evarr=[]; ev.forEach(v=>evarr.push(v.x,v.y,v.z));
+    const eg=new THREE.BufferGeometry(); eg.setAttribute('position',new THREE.Float32BufferAttribute(evarr,3));
+    g.add(new THREE.LineSegments(eg,new THREE.LineBasicMaterial({color:edgeCol})));
+    return g;
+  }
+  function tinyTetra(col){
+    const g=new THREE.Group();
+    const {mesh}=tetMesh(0.62, col, 0.6); g.add(mesh);
+    g.add(edges(0.62, COL.ink, 1));
+    return g;
+  }
+  function sectorFan(a0,a1,rad,col){
+    const segs=12; const v=[]; const o=new THREE.Vector3(0,0,0);
+    for(let i=0;i<segs;i++){
+      const t0=a0+(a1-a0)*i/segs, t1=a0+(a1-a0)*(i+1)/segs;
+      const p0=new THREE.Vector3(rad*Math.cos(t0),0,rad*Math.sin(t0));
+      const p1=new THREE.Vector3(rad*Math.cos(t1),0,rad*Math.sin(t1));
+      v.push(o.x,o.y,o.z, p0.x,p0.y,p0.z, p1.x,p1.y,p1.z);
+    }
+    const g=new THREE.BufferGeometry(); g.setAttribute('position',new THREE.Float32BufferAttribute(v,3));
+    g.computeVertexNormals();
+    return new THREE.Mesh(g,new THREE.MeshStandardMaterial({color:col,roughness:0.5,transparent:true,opacity:0.7,
+      side:THREE.DoubleSide}));
+  }
+  function icosaVerts(){
+    const t=(1+Math.sqrt(5))/2;
+    const raw=[[-1,t,0],[1,t,0],[-1,-t,0],[1,-t,0],[0,-1,t],[0,1,t],[0,-1,-t],[0,1,-t],
+               [t,0,-1],[t,0,1],[-t,0,-1],[-t,0,1]];
+    return raw.map(p=>new THREE.Vector3(...p).normalize());
+  }
+  function mulberry(seed){
+    let a=seed>>>0;
+    return function(){ a|=0; a=a+0x6D2B79F5|0; let t=Math.imul(a^a>>>15,1|a);
+      t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; };
+  }
+  // crisp text label as a canvas sprite (kept tiny, drawn in ink/copper)
+  function labelSprite(text){
+    const c=document.createElement('canvas'); const ctx2=c.getContext('2d');
+    const fs=46; ctx2.font=`500 ${fs}px JetBrains Mono, monospace`;
+    const w=ctx2.measureText(text).width+24; c.width=w; c.height=fs+22;
+    ctx2.font=`500 ${fs}px JetBrains Mono, monospace`;
+    ctx2.fillStyle='rgba(250,246,239,0.92)'; roundRect(ctx2,0,0,c.width,c.height,10); ctx2.fill();
+    ctx2.fillStyle='#b07430'; ctx2.textBaseline='middle'; ctx2.fillText(text,12,c.height/2+2);
+    const tex=new THREE.CanvasTexture(c); tex.anisotropy=4;
+    const spr=new THREE.Sprite(new THREE.SpriteMaterial({map:tex,transparent:true,depthTest:false}));
+    const sc=0.0042; spr.scale.set(c.width*sc, c.height*sc, 1);
+    return spr;
+  }
+  function roundRect(ctx,x,y,w,h,r){
+    ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r);
+    ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath();
+  }
+
+  /* ───── wire up each canvas to its scene ───── */
+  const REG = {
+    hero:  [9.5, buildHero,  null],
+    tetra: [6.0, buildTetra, null],
+    five:  [6.5, buildFive,  animFive],
+    helix: [8.0, buildHelix, animHelix],
+    hinge: [6.0, buildHinge, animHinge],
+    kiss:  [6.5, buildKiss,  animKiss],
+    crn:   [9.0, buildCRN,   animCRN],
+    screw: [7.0, buildScrew, animScrew],
+    curv:  [6.8, buildCurv,  animCurv],
+  };
+  document.querySelectorAll('canvas[data-scene]').forEach(cv=>{
+    const key=cv.dataset.scene; const r=REG[key]; if(!r) return;
+    try { makeScene(cv, r[0], r[1], r[2]); }
+    catch(e){ const fb=cv.parentElement.querySelector('.fig__fallback'); if(fb) fb.hidden=false; }
+  });
+
+  /* console sanity — the exact constants */
+  console.log('FLM08 lattice geometry (exact):');
+  console.log('  dihedral δ      =', (DIHEDRAL/DEG).toFixed(6), '°');
+  console.log('  bond angle      =', (BOND/DEG).toFixed(6), '°');
+  console.log('  5-edge deficit  =', (DEFICIT5/DEG).toFixed(6), '°');
+  console.log('  BC twist        =', (BCTWIST/DEG).toFixed(6), '° per cell');
+  console.log('  kissing gap     = 0.102924 r  (icosa edge 2.102924 r > 2 r)');
+  console.log('  diamond void    =', (1 - Math.PI*Math.sqrt(3)/16).toFixed(6));
+}
+</script>
+</body>
+</html>

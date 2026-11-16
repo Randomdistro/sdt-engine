@@ -1,0 +1,20 @@
+GOM07 blank-slate pass (registered in GOM07_RESET_ASSESSMENT_2026-10-13.md)
+=======================================================================
+
+koppa_per_baryon = 1.241873e-54 m ; koppa (m): Sun 1476.3512 (GOM26) / 1477.0459 (engine) ; Jupiter 1.4092 ; Venus 0.00361 ; Earth 0.00443 ; Io 6.632e-05 ; Callisto 7.989e-05
+
+REFLECTION TABLE (m/s): flat stamp (Sun at its surface) 636.192 ; naive-climb additions:
+  Venus  : +0.1790 (own well) -> 636.371
+  Jupiter: +5.9093 (own well) -> 642.102
+  Io (jovian well at its orbit): +1.0018 ; Callisto: +0.2244 ; Io - Callisto = 0.7774 m/s (prompt known answer 0.78: met within 5%)
+  with the moons' own wells added: Io 1.0127, Callisto 0.2343 ; difference 0.7784
+
+P2: Jupiter naive-climb addition 5.909 m/s = 3.94 x the stated floor 1.5 m/s ; Io - Callisto 0.777 m/s = 3.89 x the +-0.2 m/s of a Galilean follow-up (3.9 sigma); Venus addition 0.179 m/s
+
+P3 BENCHMARKS (m/s): stamp S = c z_emit ; observer-term O = c (z_emit - z_obs) ; observer term c z_obs ; S - O
+  B1 solar surface seen from Earth (1 AU)                        S   636.192  O   633.025  c z_obs    3.167  S-O    3.167
+  B2 solar surface seen from 0.046 AU (Parker depth)             S   636.192  O   571.875  c z_obs   64.317  S-O   64.317
+  B3 Jupiter ionosphere emission (R_J, 5.2 AU) seen from Earth   S     6.478  O     3.311  c z_obs    3.167  S-O    3.167
+
+Convergence test (F2): S and O differ by the observer term at every benchmark (3.167, 64.317, 3.167 m/s): the readings do not converge.
+Solar reference from the engine: depth_closure::z_spectral_Sun c = 636.492 m/s ; GOM26 invariant c z = 636.192 m/s ; clock_rate(z_Sun) = 1 - 2.1221e-06

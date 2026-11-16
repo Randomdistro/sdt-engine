@@ -1,0 +1,29 @@
+
+== V0 helper validation (known answers) ==
+[PASS] V0    integrate sin over [0, pi] = 2                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 3.331e-16 (tol 1e-13)
+[PASS] V0    integrate x^7 over [0, 1] = 1/8                                                value 1.250000000000e-01 expected 1.250000000000e-01 err 2.220e-15 (tol 1e-14)
+[PASS] V0    integrate exp over [-1, 1] = e - 1/e                                           value 2.350402387288e+00 expected 2.350402387288e+00 err 5.668e-16 (tol 1e-13)
+[PASS] V0    root of cos x - x = 0.739085133215161                                          value 7.390851332152e-01 expected 7.390851332152e-01 err 2.253e-15 (tol 1e-13)
+[PASS] V0    root of x^2 - 2 on [1, 2] = sqrt 2                                             value 1.414213562373e+00 expected 1.414213562373e+00 err 2.983e-15 (tol 1e-13)
+[PASS] V0    compensated sum 1 + 10^6 x 1e-16 = 1 + 1e-10                                   value 1.000000000100e+00 expected 1.000000000100e+00 err 0.000e+00 (tol 1e-15)
+
+== V1 arithmetic of the comparison formula ==
+[PASS] V1    Ry alpha^2/16 = 4.5283e-5 eV (corrected known answer)                          value 4.528259918743e-05 expected 4.528300000000e-05 err 8.851e-06 (tol 1e-04)
+
+== T1 the engine's fine_structure_eV is a scale ==
+[PASS] T1    fine_structure_eV = Ry alpha^2 Z^4/n^3, worst relative                         value 2.220446049250e-16 expected 0.000000000000e+00 err 2.220e-16 (tol 1e-14)
+       fine_structure_eV(1,2) = 9.0565e-05 eV
+
+== T2 ratio to the l-dependent comparison splitting ==
+[PASS] T2    engine scale / comparison splitting = l(l+1), worst relative                   value 3.330669073875e-16 expected 0.000000000000e+00 err 3.331e-16 (tol 1e-14)
+       n=2 P pair: engine scale 9.0565e-05 eV ; comparison splitting 4.5283e-05 eV ; ratio 2.000000
+
+== T3 separation of orders (hydrogen, n = 1) ==
+       orders relative to the leading ladder: fine 5.325e-05 ; hyperfine order 2.900e-08 ; finite size 2.528e-10
+       energies (eV) with Ry = 13.605693: fine 7.245e-04 ; hyperfine order 3.946e-07 ; finite size 3.440e-09
+[PASS] T3    leading/fine and fine/hyperfine ratios each exceed 1e3
+       RECORDED REJECTION (run 1 criterion kept): hyperfine/finite-size ratio = 114.7, not above 1e3 ; no ordering claimed between them
+[PASS] T3    the hyperfine/finite-size ratio is recorded as below 1e3 (registered rejection of the 1e3 separation)
+       beta^2 = (Z alpha/n)^2: (1,1) 5.325e-05 ; (1,2) 1.331e-05 ; (30,1) 4.793e-02
+
+ALL CRITERIA MET: 0 failure(s)

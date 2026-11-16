@@ -1,0 +1,44 @@
+
+== V0 helper validation (known answers) ==
+[PASS] V0    integrate sin over [0, pi] = 2                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 3.331e-16 (tol 1e-13)
+[PASS] V0    integrate x^7 over [0, 1] = 1/8                                                value 1.250000000000e-01 expected 1.250000000000e-01 err 2.220e-15 (tol 1e-14)
+[PASS] V0    integrate exp over [-1, 1] = e - 1/e                                           value 2.350402387288e+00 expected 2.350402387288e+00 err 5.668e-16 (tol 1e-13)
+[PASS] V0    root of cos x - x = 0.739085133215161                                          value 7.390851332152e-01 expected 7.390851332152e-01 err 2.253e-15 (tol 1e-13)
+[PASS] V0    root of x^2 - 2 on [1, 2] = sqrt 2                                             value 1.414213562373e+00 expected 1.414213562373e+00 err 2.983e-15 (tol 1e-13)
+[PASS] V0    compensated sum 1 + 10^6 x 1e-16 = 1 + 1e-10                                   value 1.000000000100e+00 expected 1.000000000100e+00 err 0.000e+00 (tol 1e-15)
+
+== V1 known answers ==
+[PASS] V1    hbar/(m_p c) = 2.103089e-16 m                                                  value 2.103089100514e-16 expected 2.103089000000e-16 err 4.779e-08 (tol 1e-06)
+[PASS] V1    r_e = alpha^2 a_0 = 2.8179403e-15 m                                            value 2.817940320432e-15 expected 2.817940300000e-15 err 7.251e-09 (tol 1e-07)
+[PASS] V1    RK4: R(1) = 3 e^-1 for r = -1                                                  value 1.103638323514e+00 expected 1.103638323514e+00 err 8.048e-16 (tol 1e-12)
+
+== T1 the lock ratio, computed before the measured radius is read ==
+       Om_H = alpha^2 a_0 = 2.817940320e-15 m ; R_p,lock = 4 hbar/(m_p c) = 8.412356402e-16 m
+       R_lock (direct) = 3.349763355 ; (alpha/4)(m_p/m_e) = 3.349763355
+[PASS] T1    Om_H / R_p,lock equals (alpha/4)(m_p/m_e)                                      value 3.349763354942e+00 expected 3.349763354960e+00 err 5.178e-12 (tol 1e-09)
+[PASS] T1    R_lock = 3.34976                                                               value 3.349763354942e+00 expected 3.349760000000e+00 err 1.002e-06 (tol 1e-05)
+[PASS] T1    trefoil_lock_coordination equals 4
+[PASS] T1    engine R_p_lock equals 4 hbar/(m_p c)                                          value 8.412356402056e-16 expected 8.412356402056e-16 err 0.000e+00 (tol 1e-14)
+       read now: R_p (stored measured) = 8.4140e-16 m ; C_g = R_p/R_p,lock = 1.000195 ; R = Om_H/R_p = 3.349109
+[PASS] T1    |C_g - 1| < 1e-3
+
+== T2 crossing condition ==
+       ln R_lock = 1.208890 ; required log change -1.208890
+[PASS] T2    -ln R_lock lies in [-1.2095, -1.2085]
+       crossing S*: contemporaneous 1.2088897030 ; fixed-coordinate 1.2088897030
+[PASS] T2    contemporaneous crossing equals -ln R_0 / r                                    value 1.208889703026e+00 expected 1.208889703026e+00 err 9.753e-14 (tol 1e-09)
+[PASS] T2    fixed-coordinate crossing equals -ln R_0 / r                                   value 1.208889703026e+00 expected 1.208889703026e+00 err 9.753e-14 (tol 1e-09)
+       end-state R_p / R_p,0: contemporaneous 0.298528551 ; fixed-coordinate 1.000000000
+[PASS] T2    end-state proton boundary radii differ by the factor R_0                       value 3.349763354942e+00 expected 3.349763354942e+00 err 1.233e-14 (tol 1e-09)
+       non-constant net rate r(S) = -1 - S/2: S* = 0.9724667891 (exact 0.9724667891)
+[PASS] T2    non-constant rate crossing equals 2(sqrt(1 + ln R_0) - 1)                      value 9.724667890667e-01 expected 9.724667890667e-01 err 4.384e-14 (tol 1e-09)
+
+== T3 rate and branch ==
+       S*(r = -0.5, -1, -2) = 2.41777941, 1.20888970, 0.60444485
+[PASS] T3    S*(r=-0.5) = 2 S*(r=-1)                                                        value 2.417779406052e+00 expected 2.417779406052e+00 err 0.000e+00 (tol 1e-09)
+[PASS] T3    S*(r=-2) = S*(r=-1)/2                                                          value 6.044448515131e-01 expected 6.044448515131e-01 err 0.000e+00 (tol 1e-09)
+       ln C_g = +1.953599e-04 ; log change required: lock branch -1.208890, measured branch -1.208694
+[PASS] T3    the branches differ in the required log change by ln C_g                       value 1.953599353453e-04 expected 1.953599353454e-04 err 7.817e-13 (tol 1e-09)
+[PASS] T3    |ln C_g| < 1e-3
+
+ALL CRITERIA MET: 0 failure(s)

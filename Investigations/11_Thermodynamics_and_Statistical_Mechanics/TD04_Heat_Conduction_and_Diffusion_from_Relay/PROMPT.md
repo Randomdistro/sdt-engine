@@ -18,7 +18,7 @@
    TD06, TD08.
 3. **How will we find out?** — Gated phases in §④; native relay random-walk before any borrowed `λ_mfp`.
 4. **What would prove us wrong?** — §⑧ falsification tests with numeric triggers and real failure modes.
-5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN).
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN).
 
 ## Question
 
@@ -104,7 +104,7 @@ vs conductive transport), TD08 (`D` and `α` are the same random-walk). **Relate
 ```markdown
 ## Pre-Run Commitments — TD04
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: 0 in the native chain (flag the Lorenz/Wiedemann–Franz channel-count if it needs one)
 - Engine namespaces actually used: measured::k_B, B16 (v_relay∝√T), FD02 (ν=⅓λ_mfp v_relay machinery)
 - Phase thresholds (committed before run):
@@ -122,7 +122,7 @@ vs conductive transport), TD08 (`D` and `α` are the same random-walk). **Relate
 | P2 variance not `∝ t` (sub/super-diffusive) | check the relay update is an unbiased random walk | **OPEN** the anomalous-transport regime | rescale time to force `∝ t` |
 | P3 `k∝√T` slope ≠ 0.5 | confirm `v_relay∝√T` (B16) is the only T-dependence | **OPEN** a second T-law | swap in a fitted exponent |
 | P4 `λ_mfp` must be borrowed un-derived | label that step **PENDING/borrowed**; grade D on the Lorenz claim | — | call a borrowed `λ_mfp` native |
-| Rivals match but SDT only reproduces | label **DEGENERATE** honestly | — | Claim Class A |
+| A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 | Upstream missing (FD02 `ν` not ready) | **DEFER** the closure phase; cite dependency ID | — | Fake PASS |
 
 ### Allowed adjustments

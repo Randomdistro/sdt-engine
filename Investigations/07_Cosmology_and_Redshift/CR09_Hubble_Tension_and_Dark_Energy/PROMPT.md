@@ -64,7 +64,7 @@
    linkage that does not close; a line-of-sight temperature effect that is *absent* in the data or *overshoots*
    the observed CMB uniformity. Each is a direct miss against the raw sky and kills the specific claim.
 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–H run + `RUN_LOG.md`) × physics
-   class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN). The hard falsifiable cores are the **sign+size of
+   class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN). The hard falsifiable cores are the **sign+size of
    the mismatch (A)** and the **raw CMB peak angles + BAO angles from a physical shell (C, D)** — to be derived,
    not assumed.
 
@@ -396,3 +396,15 @@ propagation octaves), no expansion and no dark energy as inputs · every Route i
 observable — raw magnitudes, raw peak angles, raw BAO angles, the CMB→ℓ_P linkage, the line-of-sight temperature
 — checked against the sky, with no rival model, no processed products, and no asserted outcome anywhere in the
 prompt. Execute direct, no agents.*
+
+---
+
+## Audit correction 2026-10-05 (opening premise)
+
+**Finding:** One prompt bundles eight independent routes (mismatch size, magnitudes, BAO, CMB peaks, LOS temperature …), so it cannot receive a single assessment and only Route B was ever run.
+
+**Correction:** Split into one folder per route with its own gate, as done for the loading spec.
+
+**Status:** RULE RECORDED — corrected gate or definition applies to the next run; the earlier result is not re-scored and nothing was re-run.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

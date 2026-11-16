@@ -1,0 +1,58 @@
+﻿Displaced space as the solar prism: formulation round 1 (2026-10-10)
+=====================================================================
+
+[V1] linear fit recovers (959.3, 0.05, 2.0): (959.3000000000, 0.0500000000, 2.0000000000) -> met
+[V2] grid scan recovers wall 143.7 nm: 143.7 nm -> met
+[V3] f sign: long side > 1, short side < 0 -> met
+[V4] evanescent edge 149925.056203 nm against analytic p/sqrt(1+B) = 149925.056203 nm -> met
+
+VALIDATIONS: met
+
+Step 2: gravitational depth z = 2.122e-06 (limb shift 1.477e+03 m) ; law-IV V_disp per baryon = 1.833e-58 m^3, x 1e23 m^-3 = 1.8e-35
+
+F2a (walls at the dips): lambda_U = 158.0 nm, lambda_I = 150000 nm ; R_t = 959.9286 +/- 0.0176 arcsec ; a = 0.08218, b = 3.5836 arcsec ; A = 1.712e-04, B = 7.466e-03 ; chi2/dof = 317.71 (dof 7), AIC = 2229.9 [INADEQUATE]
+          160.0 nm  measured  963.040  form  963.237  resid  -6.55 sigma
+          170.0 nm  measured  961.760  form  960.532  resid +40.93 sigma
+          617.3 nm  measured  959.570  form  960.017  resid -22.33 sigma
+          535.7 nm  measured  959.777  form  960.019  resid  -1.27 sigma
+          607.1 nm  measured  959.862  form  960.017  resid  -0.77 sigma
+          782.2 nm  measured  959.876  form  960.014  resid  -1.40 sigma
+         1025.0 nm  measured  959.832  form  960.013  resid  -0.95 sigma
+      1300000.0 nm  measured  961.100  form  963.643  resid  -1.02 sigma
+      1414000.0 nm  measured  966.500  form  963.635  resid  +1.02 sigma
+      3000000.0 nm  measured  964.100  form  963.603  resid  +0.11 sigma
+   P1 far-IR evanescent band: 149.44e-6 to 150.00e-6 m (width 556.76e-9 m)
+   P3 UV evanescent band: 157.99e-9 to 158.00e-9 m (width 13.53e-12 m)
+   P2 gap 1e-6 to 150e-6 m: minimum apparent radius 98.382 arcsec at 149.44e-6 m (861.546 arcsec below R_t)
+     1.00e-6 m: R_app 960.013 arcsec
+     3.00e-6 m: R_app 960.010 arcsec
+     10.00e-6 m: R_app 959.995 arcsec
+     30.00e-6 m: R_app 959.861 arcsec
+     100.00e-6 m: R_app 957.140 arcsec
+     140.00e-6 m: R_app 935.479 arcsec
+     149.00e-6 m: R_app 640.921 arcsec
+
+F2b scan: best UV wall 141.0 nm (delta-chi2 = 1 range 140.1-141.8 nm)
+F2b (UV wall free): lambda_U = 141.0 nm, lambda_I = 150000 nm ; R_t = 958.5266 +/- 0.0269 arcsec ; a = 1.00849, b = 3.9998 arcsec ; A = 2.104e-03, B = 8.346e-03 ; chi2/dof = 2.92 (dof 6), AIC = 25.5 [adequate]
+          160.0 nm  measured  963.040  form  963.041  resid  -0.03 sigma
+          170.0 nm  measured  961.760  form  961.758  resid  +0.06 sigma
+          617.3 nm  measured  959.570  form  959.591  resid  -1.03 sigma
+          535.7 nm  measured  959.777  form  959.610  resid  +0.88 sigma
+          607.1 nm  measured  959.862  form  959.593  resid  +1.35 sigma
+          782.2 nm  measured  959.876  form  959.569  resid  +3.10 sigma
+         1025.0 nm  measured  959.832  form  959.554  resid  +1.46 sigma
+      1300000.0 nm  measured  961.100  form  963.589  resid  -1.00 sigma
+      1414000.0 nm  measured  966.500  form  963.580  resid  +1.04 sigma
+      3000000.0 nm  measured  964.100  form  963.545  resid  +0.12 sigma
+   P1 far-IR evanescent band: 149.38e-6 to 150.00e-6 m (width 620.74e-9 m)
+   P3 UV evanescent band: 140.85e-9 to 141.00e-9 m (width 148.12e-12 m)
+   P2 gap 1e-6 to 150e-6 m: minimum apparent radius 399.219 arcsec at 149.25e-6 m (559.307 arcsec below R_t)
+     1.00e-6 m: R_app 959.555 arcsec
+     3.00e-6 m: R_app 959.535 arcsec
+     10.00e-6 m: R_app 959.517 arcsec
+     30.00e-6 m: R_app 959.368 arcsec
+     100.00e-6 m: R_app 956.333 arcsec
+     140.00e-6 m: R_app 932.139 arcsec
+     149.00e-6 m: R_app 592.758 arcsec
+
+F3 (round 2, floor only): R_t = 959.589 +/- 0.019, chi2 = 13.80 on 5 points (dof 4), AIC = 15.8 -- different point set; not directly comparable

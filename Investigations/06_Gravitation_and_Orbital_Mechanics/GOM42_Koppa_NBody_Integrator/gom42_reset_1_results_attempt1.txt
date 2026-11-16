@@ -1,0 +1,13 @@
+﻿GOM42 reset instrument 1 (2026-10-10)
+=====================================
+
+[V0] pair symmetry 0.0e+00 ; r doubling scales a by 4.000000000000 (expect 4) -> met
+     dimensions: c^2 koppa_b / (1 m)^2 = 1.116e-37 m/s^2 (one baryon at 1 m)
+[V1] circular 100 periods dt=P/2000: max separation drift 4.93e-06 (<=5e-5), energy drift 2.44e-11 (<=5e-6) -> met
+[V2] convergence: error at 10 periods dt=P/500 1.654e-03, P/1000 4.134e-04, ratio 4.000 (>=3.5) -> met
+[V3] Lagrange triangle 20 periods dt=P/4000: side drift 4.03e+00 (<=1e-4), barycentre drift 7.40e-13 (<=1e-10) -> NOT MET
+[V4] figure-eight one period dt=T/50000: RMS position error 5.33e-08, velocity error 5.47e-08 (each <=2e-5) -> met
+[V5] invariants across V1, V3, V4: max normalised P drift 1.67e-14 (<=1e-11), L drift 9.77e-15 (<=1e-10) -> met
+[V6] head-on pair with contact boundary 0.2: stopped yes at step 21906, separation 0.199922 (>= 0.2) -> NOT MET
+
+ALL GATES: NOT MET

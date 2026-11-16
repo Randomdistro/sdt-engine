@@ -1,0 +1,37 @@
+GOM38 blank-slate run 2, Stage 2 (registered in GOM38_RESET_ASSESSMENT_2026-10-11.md section 4)
+=======================================================================
+
+tables: Earth 397, Cassini 397, Sun(bary) 397 epochs
+DSS-25 ECEF cylindrical: Dxy 5209.63556 km (Horizons 5209.63556), Dz 3669.04057 km (3669.04057)
+[V1] model down-leg light time minus Horizons delta/c over 388 table epochs: rms 0.082 us, max 0.141 us, median +0.056 us (gates: rms < 3, max < 10) -> met
+[V2] wrap arithmetic: worst error 4.38e-13 s (gate 1e-9 for double precision at 1e4 s) -> met
+
+VALIDATIONS: met
+
+used rows (type 37, valid, rx25 tx25): 432
+rows inside the table span: 432
+
+  sample row 0: day 157, f_ref 7205583136.000 Hz, T_obs 1.769957786e-02 s (wrapped), T_model 8344.073017 s, residual (wrapped) +1.547287e-02 s, M 3.566970e-02 s
+  sample row 1: day 157, f_ref 7205583136.000 Hz, T_obs 8.497629624e-03 s (wrapped), T_model 8344.096537 s, residual (wrapped) -1.724952e-02 s, M 3.566970e-02 s
+  sample row 2: day 157, f_ref 7205583136.000 Hz, T_obs 3.496711330e-02 s (wrapped), T_model 8344.120059 s, residual (wrapped) -1.430199e-02 s, M 3.566970e-02 s
+  sample row 3: day 157, f_ref 7205583136.000 Hz, T_obs 2.576892398e-02 s (wrapped), T_model 8344.143583 s, residual (wrapped) -1.135424e-02 s, M 3.566970e-02 s
+
+PER-DAY: n, circular concentration Rbar, circular sd (s), median Shapiro two-way (s), median round trip (s), ratio
+  day 157: n 119  Rbar 0.0080  sigma_c 1.7645e-02 s  dK 1.280783e-04 s  RTLT 8345.472 s  dK/RTLT 1.535e-08  dK/sigma_c 7.259e-03
+  day 158: n 116  Rbar 0.0334  sigma_c 1.4801e-02 s  dK 1.308582e-04 s  RTLT 8352.265 s  dK/RTLT 1.567e-08  dK/sigma_c 8.841e-03
+  day 159: n  79  Rbar 0.1093  sigma_c 1.1944e-02 s  dK 1.336512e-04 s  RTLT 8358.407 s  dK/RTLT 1.599e-08  dK/sigma_c 1.119e-02
+  day 160: n 118  Rbar 0.0222  sigma_c 1.5668e-02 s  dK 1.370819e-04 s  RTLT 8365.133 s  dK/RTLT 1.639e-08  dK/sigma_c 8.749e-03
+
+PER-SEGMENT (consecutive rows of equal reference-frequency pair (Item 18, Item 19), n >= 5): day, Item18, Item19, n, Rbar, mean residual direction (s), sigma_c (s)
+  day 157  429486 3745024  n 46  Rbar 0.0451  mean -7.106084e-03 s  sigma_c 1.4133e-02 s  no closure
+  day 157  429484 3827456  n 73  Rbar 0.0318  mean +8.340857e-03 s  sigma_c 1.4906e-02 s  no closure
+  day 158  429484 4723456  n 25  Rbar 0.0010  mean -7.657368e-03 s  sigma_c 2.1033e-02 s  no closure
+  day 158  429484 8243456  n 33  Rbar 0.1027  mean +4.997257e-03 s  sigma_c 1.2113e-02 s  no closure
+  day 158  429484 3443456  n 51  Rbar 0.0468  mean +1.530398e-02 s  sigma_c 1.4049e-02 s  no closure
+  day 159  429490 15548160  n 10  Rbar 0.2774  mean -1.279346e-03 s  sigma_c 9.0920e-03 s  no closure
+  day 159  429500 1280000  n 61  Rbar 0.0810  mean -9.513720e-03 s  sigma_c 1.2728e-02 s  no closure
+  day 159  429484 3955456  n 6  Rbar 0.6663  mean -8.293930e-03 s  sigma_c 5.1156e-03 s  no closure
+  day 160  429484 6707456  n 117  Rbar 0.0163  mean +1.505511e-02 s  sigma_c 1.6283e-02 s  no closure
+
+segments with n >= 5: 9 ; closing (Rbar >= 0.9): 0
+Status: no segment closes with the row reference frequency: RANGE_K_UNRESOLVED (no RU closure; not an exclusion)

@@ -1,0 +1,209 @@
+# A01: Spallation Product Grammar Audit — Investigation Prompt
+
+> **Author:** J. C. Harvey, Melbourne. **Status:** SPEC (upgrade 2026-06-27).
+> **Inherits:** `PERFECT_PROMPT_TEMPLATE.md` §⓪–§⑩ · `PROMPT_EXECUTION_PROTOCOL.md` · §0 anti-creep (R0–R5).
+> **Engine:** `#include <sdt/laws.hpp>` only — no local constant namespaces.
+> **Run:** Pre-commit thresholds in `RUN_LOG.md` before coding; adjust per pivot table (§⑩).
+---
+
+## ⓪ The Golden Rule — five questions (answer before Phase 0)
+
+1. **What don't we know?** — [A01] A01: Spallation Product Grammar Audit — Investigation Prompt: *(unfilled by the 2026-06-27 bulk template upgrade — write the single measurable gap before the next run)*
+2. **Why does it matter?** — Stack position / downstream blockers (see `INVESTIGATION_STACK.md`).
+3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
+4. **What would prove us wrong?** — §⑧ falsification tests with numeric triggers.
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN).
+
+---
+
+## 1. Objective
+
+Compute the SDT nuclear construction grammar (alpha core, deuteron count,
+triton count, n_tri, n_deu) for EVERY known spallation product and verify:
+
+1. **Grammar validity**: Every spallation product has n_tri ≥ 0 and
+   n_deu ≥ 0 (grammar is valid at every step)
+2. **Neutron budget identity**: For (p,xn) reactions, N(target) = N(endpoint)
+   (extends E20 beyond the 2 known cases)
+3. **Grammar trajectory**: The sequence of grammar states from product
+   through decay chain to stable endpoint follows the known grammar
+   rules (EC: Δn_tri = +2, Δn_deu = −3; β⁻: Δn_tri = **−2**, Δn_deu = **+3**)
+   [CORRECTED 2026-07-13: the former "β⁻: −1/+1" was WRONG — it gives A′=A−1 and
+    Z′=Z, i.e. it loses a nucleon and fails to change Z. Derive from n_t=A−2Z,
+    n_d=3Z−A−2 with Z→Z+1, A fixed. Conservation check: A = 4+2n_d+3n_t.]
+
+---
+
+## 2. Scope
+
+### Tier 1 (Mandatory): All confirmed (p,xn) products
+- Every isotope produced by proton-induced spallation in EXFOR
+- For x = 1 through x = 10 (or maximum measured)
+- Targets: Z = 3 (Li) through Z = 92 (U)
+- Estimated: ~500–1000 unique products
+
+### Tier 2 (Required): All confirmed (α,xn) products  
+- Every isotope produced by alpha-induced spallation
+- More complex: projectile contributes 2p+2n
+- Estimated: ~200–400 unique products
+
+### Tier 3 (If time permits): Heavy-ion products
+- Products of (¹²C, xn), (⁴⁰Ar, xn), etc.
+- Most complex grammar tracking (composite projectile)
+- Estimated: ~100–200 unique products
+
+---
+
+## 3. Methodology
+
+### Step 1: Extract all (p,xn) reactions from EXFOR
+
+Query EXFOR for all entries matching:
+- Projectile: proton
+- Reaction: (p,n), (p,2n), (p,3n), (p,4n), (p,5n), (p,6n), (p,7n),
+  (p,8n), (p,9n), (p,10n)
+- Any target
+- Cross-section measurement type (not just excitation function shape)
+
+For each entry, record:
+- Target: Z_t, A_t, N_t = A_t − Z_t
+- Product: Z_p = Z_t + 1, A_p = A_t − x + 1, N_p = N_t − x
+- (Verify Z_p, A_p against EXFOR product field — some reactions produce
+  different products due to isomeric states or competing channels)
+
+### Step 2: Compute grammar for every isotope
+
+For each isotope encountered (target, product, intermediate, endpoint),
+compute:
+
+**THE CANONICAL FORMULA (corrected 2026-07-13 — the old pseudocode here was
+self-admittedly broken and is deleted). One alpha core, Z ≥ 3 (the grammar
+begins AFTER helium — He is the core, not a construction on it):**
+
+```
+n_tri = A − 2Z   ( ≡ N − Z )
+n_deu = 3Z − A − 2   ( ≡ 2Z − N − 2 )
+
+Grammar VALID  ⟺  n_tri ≥ 0  AND  n_deu ≥ 0
+
+MANDATORY conservation check on EVERY row (this catches all arithmetic slips):
+    A == 4 + 2·n_deu + 3·n_tri
+    Z == 2 + n_deu + n_tri
+Any row failing either identity is a computation error, NOT a finding.
+```
+
+*(Provenance note: the ec_investigations tables were audited 2026-07-13 and
+every n_deu in the light-isotope tables was wrong — all failed the A-identity
+above. Compute n_deu from the formula; never transcribe it.)*
+
+### Step 3: Track decay chains
+
+For each spallation product that is radioactive:
+
+1. Look up the decay mode from NNDC
+2. If EC: apply grammar rule (Z → Z−1, N → N+1, Δn_tri = +2, Δn_deu = −3)
+3. If β⁻: apply grammar rule (Z → Z+1, N → N−1, **Δn_tri = −2, Δn_deu = +3**)
+4. If β⁺: apply grammar rule (same as EC for grammar purposes)
+5. If α: apply grammar rule (Z → Z−2, N → N−2, Δn_deu = −2, Δn_tri = 0)
+   per Triton Overload
+6. Continue until stable endpoint is reached
+
+At EVERY step, verify:
+- n_tri ≥ 0
+- n_deu ≥ 0
+- Grammar rules produce consistent Z, A, N
+
+### Step 4: Neutron budget verification
+
+For each (p,xn) reaction:
+- Record N_target, N_product, N_endpoint
+- Compute: Does N_endpoint = N_target?
+- If not, compute: ΔN = N_endpoint − N_target and identify the source
+  of the discrepancy (competing decay channels? isomeric branching?)
+
+### Step 5: Statistical summary
+
+Compute:
+- Total number of products audited
+- Percentage with valid grammar at every step: should be 100%
+- Percentage satisfying neutron budget identity: should be ~100% for
+  pure (p,xn) chains
+- Any EXCEPTIONS: list them explicitly with full grammar trace
+
+---
+
+## 4. Required Outputs
+
+1. **Master table** (CSV-compatible):
+
+   | Target | Reaction | Product | Product_d | Product_t | Product_n_tri | Product_n_deu | Valid? | Endpoint | Endpoint_d | Endpoint_t | N_target | N_endpoint | N_budget_OK? |
+   |--------|----------|---------|-----------|-----------|---------------|---------------|--------|----------|------------|------------|----------|------------|--------------|
+   | Ga-69 | (p,2n) | Ge-68 | ... | ... | ... | ... | YES | Zn-68 | ... | ... | 38 | 38 | YES |
+   | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... |
+
+2. **Exception report**: Any product or intermediate with invalid grammar
+   (n_tri < 0 or n_deu < 0). If none exist, state "ZERO EXCEPTIONS"
+   prominently.
+
+3. **Summary statistics**:
+   - Products audited: N₁
+   - Grammar valid at all steps: N₂ / N₁ (%)
+   - Neutron budget satisfied: N₃ / N₁ (%)
+   - Average EC chain length by reaction type
+   - Correlation between neutron multiplicity x and EC chain length
+
+4. **Findings narrative**: 1-page summary of what the audit reveals
+   about SDT grammar's universality across spallation products.
+
+---
+
+## 5. Success Criteria
+
+- [ ] ≥500 unique spallation products audited
+- [ ] Grammar validity at every step: 100% (ANY exception is a finding)
+- [ ] Neutron budget identity verified for ≥50 (p,xn) reactions
+- [ ] All grammar computations use the canonical ATOMICUS formula
+- [ ] Master table is machine-readable (CSV or TSV)
+- [ ] Exception report is honest — if any grammar violations exist,
+      they must be reported and analysed, not hidden
+---
+
+## ⑩ Adaptive Execution Protocol
+
+> *It is a bad plan that cannot be altered.* Failures invoke **PIVOT / KILL / OPEN** — never RETRO-PASS or PLUG.
+> See `PROMPT_EXECUTION_PROTOCOL.md`.
+
+### Pre-Run Commitment Block (copy to `RUN_LOG.md` before coding)
+
+```markdown
+## Pre-Run Commitments — A01
+- Prompt completion target: [A|B|C|D]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
+- CALIBRATED budget: [0 or list each param — max per §⑤]
+- Engine namespaces: NP01 grammar, law_III nuclear occlusion, ATOMICUS rules
+- Phase thresholds (committed before run): 100%, 100%, 100%
+- Forbidden retroactive changes: widen tolerances; plug targets; IDENTITY-PASS; local constant namespaces
+```
+
+### Pivot table (minimum — extend for this investigation)
+
+| Trigger | PIVOT (first) | If pivot fails | Forbidden |
+|---------|---------------|----------------|-----------|
+| Phase 0 sanity check fails | Fix units/engine refs; verify `laws.hpp` symbols | STOP — report blocker | Fit to target |
+| Native mechanism off > committed % | Alternative route in §④; document ADJ-### | **OPEN** or **KILL** hypothesis | RETRO-PASS |
+| `z ≥ 1` in closure formula | Weak-field break (CR10); piecewise or exponential | **OPEN** that regime | Ignore break |
+| A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
+| Upstream dependency missing (FLM10, etc.) | **DEFER** phase; cite dependency ID | — | Fake PASS |
+
+### Allowed adjustments
+
+- Finer numerics (mesh, ticks, bracket); phase splits (Na / Nb); filename fix via ADJ entry.
+- Alternative **native** routes already listed in §④ Strategy.
+
+### Disallowed adjustments
+
+- Post-hoc tolerance widening · coefficient plugs · `atomic::`/GM/G in Phase-1 native chain · Snell/reciprocity-only as Fermat PASS.
+
+---
+
+*A01 · upgraded 2026-06-27 · execute with `PROMPT_EXECUTION_PROTOCOL.md`.*

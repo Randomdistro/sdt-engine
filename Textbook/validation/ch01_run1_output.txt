@@ -1,0 +1,88 @@
+
+== V0 helper validation (known answers) ==
+[PASS] V0    integrate sin over [0, pi] = 2                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 3.331e-16 (tol 1e-13)
+[PASS] V0    integrate x^7 over [0, 1] = 1/8                                                value 1.250000000000e-01 expected 1.250000000000e-01 err 2.220e-15 (tol 1e-14)
+[PASS] V0    integrate exp over [-1, 1] = e - 1/e                                           value 2.350402387288e+00 expected 2.350402387288e+00 err 5.668e-16 (tol 1e-13)
+[PASS] V0    root of cos x - x = 0.739085133215161                                          value 7.390851332152e-01 expected 7.390851332152e-01 err 2.253e-15 (tol 1e-13)
+[PASS] V0    root of x^2 - 2 on [1, 2] = sqrt 2                                             value 1.414213562373e+00 expected 1.414213562373e+00 err 2.983e-15 (tol 1e-13)
+[PASS] V0    compensated sum 1 + 10^6 x 1e-16 = 1 + 1e-10                                   value 1.000000000100e+00 expected 1.000000000100e+00 err 0.000e+00 (tol 1e-15)
+
+== V1 polyhedron dihedral routine on known solids ==
+[PASS] V1    cube dihedral = 90 deg                                                         value 9.000000000000e+01 expected 9.000000000000e+01 err 0.000e+00 (tol 1e-09)
+[PASS] V1    octahedron dihedral = arccos(-1/3) = 109.4712206 deg                           value 1.094712206345e+02 expected 1.094712206345e+02 err 1.298e-16 (tol 1e-09)
+[PASS] V1    icosahedron dihedral = 138.1896851 deg                                         value 1.381896851042e+02 expected 1.381896851042e+02 err 0.000e+00 (tol 1e-09)
+
+== V2 breadth-first shell populations (coordination sequences) ==
+[PASS] V2    simple cubic shell populations 4n^2+2, n=1..6
+[PASS] V2    face-centred cubic shell populations 10n^2+2, n=1..6
+[PASS] V2    body-centred cubic shell populations 6n^2+2, n=1..6
+
+== V3 diamond-cubic cell ==
+[PASS] V3    8 atoms per cubic cell
+[PASS] V3    nearest-neighbour count 4
+
+== T1 tetrahedron dihedral from coordinates ==
+[PASS] T1    tetrahedron dihedral vs lattice_structure::dihedral_rad                        value 1.230959417341e+00 expected 1.230959417341e+00 err 2.220e-16 (tol 1e-14)
+[PASS] T1    supplement vs lattice_structure::bond_angle_rad                                value 1.910633236249e+00 expected 1.910633236249e+00 err 0.000e+00 (tol 1e-14)
+       dihedral = 70.528779366 deg; bond angle = 109.471220634 deg
+
+== T2 five tetrahedra about an edge ==
+[PASS] T2    deficit 2 pi - 5 delta vs five_edge_deficit_rad                                value 1.283882204757e-01 expected 1.283882204757e-01 err 8.882e-16 (tol 1e-14)
+[PASS] T2    deficit is positive (five tetrahedra cannot close flat space)
+       deficit = 0.128388220 rad = 7.356103 deg
+
+== T3 twelve spheres about one (icosahedral kissing shell) ==
+[PASS] T3    12 centres, all at distance 2 from the origin
+[PASS] T3    minimum shell-centre separation minus 2 vs icosa_shell_gap_over_r              value 1.029244484765e-01 expected 1.029244484765e-01 err 0.000e+00 (tol 1e-13)
+[PASS] T3    gap is positive (the twelve touching spheres leave the shell unclosed)
+       edge/diameter = 1.051462224; gap = 0.102924448 sphere radii
+
+== T4 Boerdijk-Coxeter helix ==
+[PASS] T4    |P_k - P_{k+j}| = 1 for j = 1, 2, 3 (worst deviation, k = 0..40)               value 4.218847493576e-15 expected 0.000000000000e+00 err 4.219e-15 (tol 1e-13)
+[PASS] T4    |P_k - P_{k+4}| > 1 (the fifth vertex is not an edge neighbour)
+       twist = 131.810315 deg; |P_k - P_{k+4}| minimum = 1.632993162
+       cos(twist) = -2/3 is rational and not 0, +-1/2, +-1, so twist/pi is irrational (Niven): the helix is aperiodic
+
+== T5 diamond-cubic packing ==
+[PASS] T5    8 spheres of radius d_nn/2 per cell vs packing_fraction_diamond                value 3.400873807939e-01 expected 3.400873807939e-01 err 1.632e-16 (tol 1e-14)
+[PASS] T5    void fraction vs void_fraction_diamond                                         value 6.599126192061e-01 expected 6.599126192061e-01 err 0.000e+00 (tol 1e-14)
+       d_nn = 0.433012702 (sqrt(3)/4 = 0.433012702); packing = 0.340087381; void = 0.659912619
+
+== T6 Law IV volume relations and cell counts (engine consistency) ==
+[PASS] T6    V_disp_p vs 3 m_p l_P^3 c^2 / Phi                                              value 1.832653246209e-58 expected 1.832653246209e-58 err 0.000e+00 (tol 1e-12)
+[PASS] T6    V_disp_e vs 3 m_e l_P^3 c^2 / Phi                                              value 9.980941523748e-62 expected 9.980941523748e-62 err 0.000e+00 (tol 1e-12)
+[PASS] T6    V_disp_from_mass(m_p) vs V_disp_p                                              value 1.832653246209e-58 expected 1.832653246209e-58 err 0.000e+00 (tol 1e-12)
+[PASS] T6    R_excl_p vs (3 V_disp_p / 4 pi)^(1/3)                                          value 3.523686238889e-20 expected 3.523686238889e-20 err 0.000e+00 (tol 1e-12)
+[PASS] T6    R_excl_e vs (3 V_disp_e / 4 pi)^(1/3)                                          value 2.877581508051e-21 expected 2.877581508051e-21 err 0.000e+00 (tol 1e-12)
+[PASS] T6    mass_from_V_disp(V_disp_p) vs m_p (CONSTRUCTION: one input on both sides)      value 1.672621925950e-27 expected 1.672621925950e-27 err 2.145e-16 (tol 1e-12)
+[PASS] T6    rho_eff_e c^2 vs P_conv/3 (CONSTRUCTION)                                       value 8.202738958533e+47 expected 8.202738958533e+47 err 0.000e+00 (tol 1e-12)
+       cell volume l_P^3                         = 4.222111e-105 m^3
+       proton boundary volume (4pi/3)R_p^3       = 2.495147e-45 m^3 = 5.9097e+59 cells
+       proton exclusion volume V_disp_p          = 1.832653e-58 m^3 = 4.3406e+46 cells
+       ratio boundary / exclusion volume (proton) = 1.3615e+13
+       electron exclusion volume V_disp_e        = 9.980942e-62 m^3 = 2.3640e+43 cells
+       R_excl_p = 3.523686e-20 m; R_excl_e = 2.877582e-21 m; R_p = 8.414000e-16 m; r_e = 2.817940e-15 m
+       V_disp_p / V_disp_e = 1836.152673 ; m_p / m_e = 1836.152673
+       cells in the causal domain N = R_CMB / l_P = 5.894491e+61 ; shells counted by Phi = N eps
+
+== T7 directional reach of nearest-neighbour relay on regular lattices ==
+[PASS] T7    simple cubic BFS reach along [100] vs n h_P                                    value 1.000000000000e+00 expected 1.000000000000e+00 err 0.000e+00 (tol 1e-12)
+[PASS] T7    simple cubic BFS reach along [110] vs n h_P                                    value 7.071067811865e-01 expected 7.071067811865e-01 err 0.000e+00 (tol 1e-12)
+[PASS] T7    simple cubic BFS reach along [111] vs n h_P                                    value 5.773502691896e-01 expected 5.773502691896e-01 err 0.000e+00 (tol 1e-12)
+[PASS] T7    simple cubic reach ratio max/min over [100],[110],[111]                        value 1.732050807569e+00 expected 1.732050807569e+00 err 1.282e-16 (tol 1e-12)
+       simple cubic: reach per hop along [100] 1.000000, [110] 0.707107, [111] 0.577350
+[PASS] T7    face-centred cubic BFS reach along [100] vs n h_P                              value 7.071067811865e-01 expected 7.071067811865e-01 err 0.000e+00 (tol 1e-12)
+[PASS] T7    face-centred cubic BFS reach along [110] vs n h_P                              value 1.000000000000e+00 expected 1.000000000000e+00 err 0.000e+00 (tol 1e-12)
+[PASS] T7    face-centred cubic BFS reach along [111] vs n h_P                              value 8.164965809277e-01 expected 8.164965809277e-01 err 1.360e-16 (tol 1e-12)
+[PASS] T7    face-centred cubic reach ratio max/min over [100],[110],[111]                  value 1.414213562373e+00 expected 1.414213562373e+00 err 1.570e-16 (tol 1e-12)
+       face-centred cubic: reach per hop along [100] 0.707107, [110] 1.000000, [111] 0.816497
+[PASS] T7    body-centred cubic BFS reach along [100] vs n h_P                              value 5.773502691896e-01 expected 5.773502691896e-01 err 0.000e+00 (tol 1e-12)
+[PASS] T7    body-centred cubic BFS reach along [110] vs n h_P                              value 8.164965809277e-01 expected 8.164965809277e-01 err 1.360e-16 (tol 1e-12)
+[PASS] T7    body-centred cubic BFS reach along [111] vs n h_P                              value 1.000000000000e+00 expected 1.000000000000e+00 err 0.000e+00 (tol 1e-12)
+[PASS] T7    body-centred cubic reach ratio max/min over [100],[110],[111]                  value 1.732050807569e+00 expected 1.732050807569e+00 err 1.282e-16 (tol 1e-12)
+       body-centred cubic: reach per hop along [100] 0.577350, [110] 0.816497, [111] 1.000000
+
+== T8 hop distance on the simple cubic lattice ==
+[PASS] T8    BFS distance = |x|+|y|+|z| for every reached cell, none with |x|+|y|+|z| <= 6 missed
+
+ALL CRITERIA MET: 0 failure(s)

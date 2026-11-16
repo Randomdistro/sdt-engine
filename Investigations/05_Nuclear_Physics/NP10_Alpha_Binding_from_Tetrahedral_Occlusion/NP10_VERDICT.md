@@ -1,5 +1,7 @@
 # NP10 — VERDICT: Alpha Binding from Tetrahedral Geometry (NP17 premise)
 
+> **Re-adjudicated 2026-10-03 (origin rule, gateway §3.8):** G4 DEGENERATE → **CONVERGENT**, not discriminating; zero-point "cap" wording withdrawn. See `Investigations/ADJUDICATION_REGISTER.md` §R-2026-10-03. Original text below is unchanged.
+
 > **Author:** J. C. Harvey, Melbourne. **Run:** 2026-07-03. **Engine:** `sdt/laws.hpp` only.
 > Tool: `np10_alpha_binding.cpp` (MSVC exit 0) → `np10_results.txt` (redirected stdout).
 > Premise: NP09 occlusion route dead (−97.3%); mechanism = NP17 shared-electron Coulomb well.

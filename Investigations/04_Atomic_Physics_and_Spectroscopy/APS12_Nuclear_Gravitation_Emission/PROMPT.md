@@ -416,3 +416,15 @@ Physics class answers: what is the origin of any number that landed? Alignment w
 - H-like success is the spine, not the distinct nuclear-gravitation payload.  
 - The payload is occupancy and construction, frozen before the table.  
 - The assessment is the tables. If the tables are not there, the investigation did not happen.
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** The V0 identity gate (α²a_0 against the typed r_e) was widened from 1e-12 to 1e-11 after a 1.94e-12 miss (ADJ-001) because laws.hpp holds two independent literals for the same length, and the early output still prints "[P0] V0 INSTRUMENT FAIL".
+
+**Correction:** Derive r_e from α²a_0 in the engine (propose-only canon edit) and re-run the gate at 1e-12 instead of widening it.
+
+**Status:** OWED — needs a new run, derivation or data; the corrected requirement is recorded here.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

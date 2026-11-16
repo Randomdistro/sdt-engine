@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.24)
+project(sdt_shape_native_controls LANGUAGES CXX)
+set(CMAKE_CXX_STANDARD 20)
+add_executable(companion_trefoil "C:/Users/Jimmi/Spatial_Displacement_Theory/SDT/Code/trefoil_proton_engine.cpp")
+if(MSVC)
+  target_compile_options(companion_trefoil PRIVATE /W4 /permissive- /fp:strict /utf-8)
+endif()

@@ -1,0 +1,41 @@
+GOM41 — PLANETARY QUADRUPOLE FROM PHASE RESISTANCE
+source depth: timed satellite motion only
+Earth    koppa= 4.47740919e-03 m  baryons= 3.605368e+51  q= 3.42862872e-03  eta= 0.553256  kf= 0.958284
+Mars     koppa= 4.76877399e-04 m  baryons= 3.839985e+50  q= 4.59199836e-03  eta= 0.227058  kf= 1.245115
+Jupiter  koppa= 1.40986761e+00 m  baryons= 1.135275e+54  q= 8.91771023e-02  eta= 1.289868  kf= 0.519818
+Saturn   koppa= 4.22176321e-01 m  baryons= 3.399512e+53  q= 1.57581876e-01  eta= 1.289868  kf= 0.519818
+Uranus   koppa= 6.43067834e-02 m  baryons= 5.178209e+52  q= 2.96083082e-02  eta= 1.886340  kf= 0.286558
+Neptune  koppa= 7.60678793e-02 m  baryons= 6.125253e+52  q= 2.60725390e-02  eta= 1.886340  kf= 0.286558
+
+Q0_UNIFORM
+  Earth    prediction= 1.71431436e-03  observed= 1.08262668e-03  residual= +58.35%
+  Mars     prediction= 2.29599918e-03  observed= 1.96045000e-03  residual= +17.12%
+  Jupiter  prediction= 4.45885511e-02  observed= 1.46964300e-02  residual=+203.40%
+  Saturn   prediction= 7.87909379e-02  observed= 1.62907100e-02  residual=+383.66%
+  Uranus   prediction= 1.48041541e-02  observed= 3.34343000e-03  residual=+342.78%
+  Neptune  prediction= 1.30362695e-02  observed= 3.41100000e-03  residual=+282.18%
+  Earth<=3% FAIL  Jupiter<=3% FAIL  within10%=0/6  RMS=254.75%  MODEL FAIL
+
+Q1_CONVERGENCE_BOUNDARY
+  Earth    prediction= 1.09247667e-03  observed= 1.08262668e-03  residual=  +0.91%
+  Mars     prediction= 2.38812513e-03  observed= 1.96045000e-03  residual= +21.82%
+  Jupiter  prediction= 1.43865211e-02  observed= 1.46964300e-02  residual=  -2.11%
+  Saturn   prediction= 1.60058329e-02  observed= 1.62907100e-02  residual=  -1.75%
+  Uranus   prediction= 5.50944872e-03  observed= 3.34343000e-03  residual= +64.78%
+  Neptune  prediction= 2.79567911e-03  observed= 3.41100000e-03  residual= -18.04%
+  Earth<=3% PASS  Jupiter<=3% PASS  within10%=3/6  RMS= 28.89%  MODEL FAIL
+
+Q2_BOUNDARIES_CLAIRAUT_RADAU
+  Earth    prediction= 1.09519951e-03  observed= 1.08262668e-03  residual=  +1.16%
+  Mars     prediction= 1.90585513e-03  observed= 1.96045000e-03  residual=  -2.78%
+  Jupiter  prediction= 1.54519477e-02  observed= 1.46964300e-02  residual=  +5.14%
+  Saturn   prediction= 2.73046201e-02  observed= 1.62907100e-02  residual= +67.61%
+  Uranus   prediction= 2.82816224e-03  observed= 3.34343000e-03  residual= -15.41%
+  Neptune  prediction= 2.49042835e-03  observed= 3.41100000e-03  residual= -26.99%
+  Earth<=3% PASS  Jupiter<=3% FAIL  within10%=3/6  RMS= 30.47%  MODEL FAIL
+
+NUMERIC GATES
+  zero-spin |J2|= 0.000e+00  spherical leakage= 0.000e+00
+  projection identity max= 3.394e-07  resolution max= 2.443e-04
+  numeric gates PASS; Q2 corpus FAIL
+VERDICT: B11 PENDING — the class-level gas/ice profiles do not close the six-body corpus.

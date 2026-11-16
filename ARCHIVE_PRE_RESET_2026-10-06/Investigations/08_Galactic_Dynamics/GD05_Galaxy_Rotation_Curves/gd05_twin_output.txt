@@ -1,0 +1,88 @@
+================================================================
+ GD05 TWIN-REGIME: spherical bulge (+) occlusion disk (+) gas
+ Real SPARC decomposition  x  SDT galactic.hpp (regime_bulge/disk)
+================================================================
+
+ koppa_Sun = 1477.046 m   (bulge spherical law: koppa == G*M/c^2)
+ Y_disk = 0.50, Y_bul = 0.70 (SPARC 3.6um fiducial)
+
+ a_0 (derived c*H_0/2pi) = 1.042e-10 m/s^2
+
+Galaxy         Npts      Mbar  RMS_M0  RMS_M1  RMS_M2  RMS_M3  RMS_M4   bul
+------------------------------------------------------------------------------
+D631-7           16  4.84e+08    49.7    54.3    62.4    37.4    51.8     -
+DDO064           14  3.59e+08    56.0    67.2    58.7    45.9    15.2     -
+DDO154           12  3.92e+08    56.2    62.8    52.1    46.0    17.7     -
+DDO161           31  2.11e+09    39.2    46.4    41.7    26.6    39.3     -
+DDO168           10  6.45e+08    42.0    47.9    41.5    38.4    27.6     -
+DDO170            8  1.25e+09    50.5    58.9    45.0    46.1    23.2     -
+ESO079-G014      15  3.00e+10    39.5    45.7    84.2    40.8    12.1     -
+ESO116-G012      15  3.59e+09    47.9    50.8    71.0    30.4    11.0     -
+IC4202           32  1.06e+11    51.0    61.8    99.3    45.2    47.5   YES
+NGC0891          18  7.51e+10    19.9    24.2    29.0    31.3    13.0   YES
+NGC2683          11  4.21e+10    37.8    49.5    17.6    30.7     7.3   YES
+NGC2841          50  1.07e+11    44.3    48.2    30.9    15.8    19.9   YES
+NGC4013          36  4.35e+10    37.4    55.2    18.3    25.9     5.8   YES
+NGC4138           7  2.40e+10    34.7    48.9    17.1    11.9     5.6   YES
+NGC4157          17  6.38e+10    28.6    37.1    45.9    51.1    11.4   YES
+NGC4217          19  4.61e+10    49.7    52.1    62.4    48.4    53.1   YES
+NGC5005          18  9.11e+10    12.3    40.4    29.9    39.6     4.7   YES
+NGC5033          22  7.03e+10    39.5    43.6    29.9    16.4     7.2   YES
+NGC5985          33  1.20e+11    47.8    53.1    36.0    36.7    26.9   YES
+NGC6195          23  2.23e+11    13.2    27.6    23.0    19.6    11.7   YES
+NGC6674          15  1.50e+11    47.9    51.5    33.9    16.0    11.3   YES
+NGC6946          58  4.06e+10    25.5    30.3    30.6    33.2     8.2   YES
+NGC7331          36  1.40e+11    24.9    40.5    31.9    21.0     9.0   YES
+NGC7814          18  3.87e+10    34.0    35.3    30.7    16.2    11.0   YES
+UGC02487         17  2.69e+11    48.1    56.2    33.5    26.9    19.3   YES
+UGC02885         19  2.55e+11    39.5    44.5    29.9    18.6     6.9   YES
+UGC02916         43  9.30e+10    20.1    22.8    18.1    14.4    13.0   YES
+UGC02953        115  1.40e+11    31.7    33.3    39.7    24.3    12.8   YES
+UGC03205         48  6.97e+10    32.6    34.2    32.1    14.9    11.4   YES
+UGC03546         30  5.42e+10    25.4    28.2    32.6    11.1    12.2   YES
+UGC03580         47  1.24e+10    34.4    35.5    57.0    17.0    32.7   YES
+UGC05253         73  1.08e+11    22.4    27.4    21.2    18.1     6.7   YES
+UGC06614         13  9.13e+10    32.9    34.4    29.1    10.0    14.4   YES
+UGC06786         45  4.34e+10    37.4    40.6    29.5    22.0    16.4   YES
+UGC06787         71  5.58e+10    33.2    36.9    30.3    25.6    13.8   YES
+UGC06973          9  2.93e+10    25.1    33.5    49.8    18.4    24.2   YES
+UGC08699         41  3.01e+10    31.5    34.6    26.5    14.5     8.9   YES
+UGC09133         68  1.86e+11    33.6    36.0    25.6    15.2     7.3   YES
+UGC11914         65  7.62e+10    18.7    21.8    20.6    12.0    13.1   YES
+------------------------------------------------------------------------------
+
+Galaxies fitted: 135   (with bulge: 31, bulgeless: 104)
+
+=== PER-RADIUS RESIDUALS (all 3014 points) ===
+                                  RMS%     bias%   median|.|%
+M0 Newtonian baryonic:              42.8    +35.2      40.1
+M1 twin bulge+eclipse disk:         51.6    +43.8      48.7
+M2 twin bulge+bidir disk:           75.1     +7.2      32.3
+M3 twin bulge+1/r^3 LINE disk:      34.7    +18.6      24.9
+M4 convergence-FLOOR transition:    23.8     -1.6      10.1
+
+=== by component presence (RMS%, bias%) ===
+               bulge gals           bulgeless
+M1 eclipse:     38.2   +29.1         58.1   +52.4
+M2 bidir:       36.1    +2.2         90.5   +10.2
+M3 1/r^3 line:  24.1    +4.6         39.7   +26.8
+M4 floor:       17.5    +2.0         26.9    -3.8
+
+=== BARYONIC TULLY-FISHER (M_bar ~ v^alpha), 135 galaxies ===
+Observed slope:               3.14
+M0 Newtonian-baryonic:        2.64
+M1 twin (eclipse disk):       2.56
+M2 twin (bidir disk):         2.47
+M3 twin (1/r^3 line disk):    2.26
+M4 floor transition:          3.58
+Literature:                   ~3.5 - 4.0
+
+=== VERDICT ===
+[FAIL] M3 (1/r^3 line)    per-radius RMS < 20%  (got 34.7%)
+[FAIL] M4 (floor)         per-radius RMS < 20%  (got 23.8%)
+[PASS] M4 BTFR slope in [3.5,4.5] (got 3.58)
+
+Bulge regime: spherical SDT law == Newton (koppa=GM/c^2), exact.
+M4 floor law: g_obs = g_bar/(1-exp(-sqrt(g_bar/a_0))), a_0=c*H_0/2pi DERIVED.
+   Deep limit g->sqrt(g_bar*a_0) => v^4=G*M_bar*a_0 => BTFR slope 4. Same
+   convergence-floor crossover as the Sun's r_domain ~ 20860 AU (Oort edge).

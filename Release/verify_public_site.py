@@ -327,29 +327,38 @@ def audit_engine_data() -> list[str]:
 
     results = data.get("results", [])
     summary = data.get("summary", {})
-    earned = [
-        row
-        for row in results
-        if row.get("certification") in {"DERIVED", "COMPUTED", "CALIBRATED"}
-    ]
-    identities = [
-        row for row in results if row.get("certification") == "CONSTRUCTION"
-    ]
-    pending = [row for row in results if row.get("certification") == "PENDING"]
-    if summary.get("earned_total") != len(earned):
-        errors.append("engine data earned_total does not match result rows")
-    if summary.get("earned_passed") != sum(bool(row.get("passed")) for row in earned):
-        errors.append("engine data earned_passed does not match result rows")
-    if summary.get("construction_passed") != sum(
-        bool(row.get("passed")) for row in identities
-    ):
-        errors.append("engine data construction_passed does not match result rows")
-    if summary.get("pending_note_only") != len(pending):
-        errors.append("engine data pending_note_only does not match result rows")
-    if summary.get("genuine_fail") != sum(
-        not bool(row.get("passed")) for row in earned
-    ):
-        errors.append("engine data genuine_fail does not match result rows")
+    # Accounting follows benchmarks_suite.cpp report() (HUNTER repair 2026-07-03, detox 2026-08-09,
+    # restated 2026-10-16): CONSTRUCTION, CALIBRATED and PENDING rows that PASS are shown but
+    # tallied apart from the headline; a failing row of any class stays in the earned
+    # denominator; a failing PENDING row is a flagged open problem (pending_open), any other
+    # failing row is a genuine failure.  The earlier check treated CALIBRATED as earned and every
+    # PENDING row as note-only, which only held while no CALIBRATED or failing PENDING row existed.
+    def cert(row):
+        return row.get("certification")
+
+    def passed(row):
+        return bool(row.get("passed"))
+
+    held_apart = {"CONSTRUCTION", "CALIBRATED", "PENDING"}
+    construction_pass = [r for r in results if cert(r) == "CONSTRUCTION" and passed(r)]
+    calibrated_pass = [r for r in results if cert(r) == "CALIBRATED" and passed(r)]
+    pending_pass = [r for r in results if cert(r) == "PENDING" and passed(r)]
+    pending_open = [r for r in results if cert(r) == "PENDING" and not passed(r)]
+    genuine_fail = [r for r in results if cert(r) != "PENDING" and not passed(r)]
+    earned_total = len(results) - len(construction_pass) - len(calibrated_pass) - len(pending_pass)
+    earned_passed = sum(passed(r) for r in results if cert(r) not in held_apart)
+    expected = {
+        "earned_total": earned_total,
+        "earned_passed": earned_passed,
+        "construction_passed": len(construction_pass),
+        "calibrated_passed": len(calibrated_pass),
+        "pending_note_only": len(pending_pass),
+        "pending_open": len(pending_open),
+        "genuine_fail": len(genuine_fail),
+    }
+    for key, value in expected.items():
+        if summary.get(key) != value:
+            errors.append(f"engine data {key} does not match result rows ({summary.get(key)} != {value})")
     return errors
 
 

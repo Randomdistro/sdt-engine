@@ -1,0 +1,56 @@
+{
+  "date": "2026-08-16",
+  "contract_version": "1.0.0",
+  "solver_build_id": "gom43-solver-1.0.0",
+  "compiler": "MSVC-19.44.35223.0",
+  "configuration": "Release",
+  "laws_sha256": "b421252498795ad4967801dfa479b54df81f26e0d633edba33c19f54fd9e0cc8",
+  "status": "passed",
+  "ctest": {
+    "passed": 3,
+    "failed": 0,
+    "elapsed_s": 26.44
+  },
+  "selected_gates": {
+    "N1_circular_separation_drift": 4.93479008479e-06,
+    "N1_circular_energy_drift": 2.44575470987e-11,
+    "N2_eccentric_energy_drift": 1.67638730897e-06,
+    "N2_eccentric_apsis_error": 2.46740339760e-06,
+    "N3_verlet_convergence_ratio": 3.99979893723,
+    "N3_verlet_rk4_cross_check": 1.96402616619e-05,
+    "N4_triangle_side_drift": 1.23369980276e-06,
+    "N5_figure_eight_combined_closure": 8.76417257027e-08,
+    "N6_rotation_invariance": 1.88681790647e-13,
+    "N7_lagrange_root_residual": 8.29197821517e-16,
+    "N8_momentum_drift": 1.01433200461e-14,
+    "N8_angular_momentum_drift": 5.50985298599e-14,
+    "R1_small_angle_period_error": 2.06176815673e-04,
+    "R2_finite_amplitude_period_error": 4.99095017934e-05,
+    "R2_finite_amplitude_energy_drift": 4.81476364556e-07,
+    "R3_double_position_residual_m": 4.98446874337e-11,
+    "R3_double_velocity_residual_m_s": 4.99070695413e-11,
+    "R4_sectioned_position_residual_m": 4.99889039103e-09,
+    "R4_sectioned_velocity_residual_m_s": 4.99882507307e-09,
+    "R5_timestep_convergence_ratio": 4.19926096077
+  },
+  "examples": {
+    "point_nbody": {
+      "status": "completed",
+      "classification": "VALIDATED",
+      "executed_steps": 100,
+      "trajectory_sha256": "6a91610b3a55b75c899b4dbe35f5de00a81aac938a132556a1da71def592f53e"
+    },
+    "articulated_rigid": {
+      "status": "completed",
+      "classification": "CONDITIONAL",
+      "executed_steps": 8000,
+      "trajectory_sha256": "1f640f0a1950908482a82a7a1014498f663f64945fa6515e022cadf56b0bd4da"
+    }
+  },
+  "wasm": {
+    "status": "not_built",
+    "reason": "emcc was not available in the active environment",
+    "target_provided": true,
+    "toolchain_file_provided": true
+  }
+}

@@ -1,0 +1,37 @@
+﻿====================================================================
+  CH04 - Molecular Geometry from Wake Balance (minimiser output only)
+  Author: J. C. Harvey, Melbourne - 2026-07-05
+====================================================================
+
+P1  EQUAL WAKES (all weights 1) - angles OUT of the minimiser
+    N=2: min angle  180.000  (ideal solid 180.0)  [PASS]
+    N=3: min angle  120.000  (ideal solid 120.0)  [PASS]
+    N=4: min angle  109.471  (ideal solid 109.471)  [PASS]
+    N=5: angle set [90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 120.00, 120.00, 120.00, 180.00]  TBP {90,120,180}: [PASS]
+    N=6: min angle   90.000  (ideal solid 90.0)  [PASS]
+
+P2  LONE-PAIR LADDER - scan the ONE ratio w_L/w_B against NH3 + H2O jointly
+    best single ratio w_L/w_B = 1.24  [CALIBRATED(1)]
+    NH3 bond-bond =  106.79  (measured 106.7-107.0)  err -0.21
+    H2O bond-bond =  104.58  (measured 104.5)        err +0.08
+    committed gate (both within 1 deg, ONE ratio): [PASS]
+    CH4 (AX4, no lone): 109.47 (measured 109.5) - ratio-independent
+
+P3  EXTENDED SET (same ratio 1.24, no refit)
+    SF4 : lone-bond angles ['95.4', '95.4', '118.3', '118.3'] -> seesaw (lone equatorial) [PASS]
+          bond-bond ['87.4', '87.4', '87.4', '87.4', '123.5', '169.1'] (measured: eq-eq 101.6, ax-ax 173)
+    ClF3: lone-lone 119.4, bond-bond ['85.6', '85.6', '171.2'] -> T-shape [PASS] (measured F-Cl-F 87.5)
+    XeF4: lone-lone 94.6 (trans?), bond-bond min 85.4 -> NOT square planar [FAIL]
+    CO2 : O=C=O 180.00 (measured 180) [PASS]
+    H2CO: H-C-H 101.63 (measured 116.5), H-C=O 129.19 (measured 121.8) -> fat-wake opening [PASS]
+
+P4  NOVEL OUTLIERS (same ratio 1.24 - the model has NO central-atom
+    dependence, so H2S/PH3 predict identically to H2O/NH3; committed honesty test)
+    H2S predicted  104.58 vs measured  92.1  -> miss +12.48 deg [FAIL >5deg: fit-only trigger fires]
+    PH3 predicted  106.79 vs measured  93.5  -> miss +13.29 deg [FAIL >5deg: fit-only trigger fires]
+
+====================================================================
+  CH04 SUMMARY
+  committed-gate failures: ['P3-XeF4', 'P4-H2S', 'P4-PH3']
+  Exit: 1
+====================================================================

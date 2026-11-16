@@ -123,3 +123,15 @@ and tested on the deuteron only, ratio OPEN. Outputs: `RUN_LOG.md`, `np06_gear_m
 *NP06 · re-opened 2026-07-23 · the gear frequency is the movement of the binding, not a rival to it;
 the agent kill asked movement to be a substance and was voided. The live question is the
 correspondence, and it has a number: 3.38×10²¹ rad/s.*
+
+---
+
+## Audit correction 2026-10-05 (opening premise)
+
+**Finding:** The mesh Δω has no definition in the repo (laws.hpp says "awaits implementation") and the prompt's own OWED POINTER does not resolve, so P1 cannot be run without inventing the quantity under test.
+
+**Correction:** Locate or state the Δω definition from packing geometry, without E, before any run.
+
+**Status:** OWED — needs a new run, derivation or data; the corrected requirement is recorded here.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

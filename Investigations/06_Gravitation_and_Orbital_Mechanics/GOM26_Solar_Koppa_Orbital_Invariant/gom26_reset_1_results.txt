@@ -1,0 +1,16 @@
+GOM26 blank-slate run 1 (registered in GOM26_RESET_ASSESSMENT_2026-10-10.md sections 0-2)
+=======================================================================
+
+[VA] Kepler mock e = 0.0100: mu recovered 1.000000000000e+20 vs 1.0e+20 (relative -3.33e-16), CV 4.28e-16, pairs usable 349 of 351 -> met
+[VB] Kepler mock e = 0.0167: mu recovered 1.000000000000e+20 vs 1.0e+20 (relative -7.77e-16), CV 4.09e-16, pairs usable 350 of 351 -> met
+VALIDATIONS A, B: met (C, the delete-test, is the order of the prints below)
+
+CALIBRATION (2025, 27 epochs): pairs 351, usable 350 (99.7%) ; mu = 1.326878288e+20 m^3/s^2 ; sigma_mu (N_eff = 27) = 1.879e+16 (relative 1.42e-04) ; sigma_mu (N_eff = usable pairs) = 5.219e+15 (relative 3.93e-05)
+  semi-major axis a = 1.496262e+11 m (1.000189 AU) ; invariant koppa = mu/c^2 = 1476.351201 m ; CV of koppa_i = 1.080e-05 (gate 1e-3: met)
+HELD-OUT (2024, 27 epochs): mu = 1.327343939e+20 ; koppa = 1476.869308 m ; CV 1.020e-05 ; |koppa_hold - koppa_cal|/koppa_cal = 3.509e-04 (gate 1e-3: met)
+  intra-year split (descriptive): odd 1476.384691 m, even 1476.341102 m : relative difference 2.952e-05
+
+SPECTRAL MAP: v_pred = c koppa / R_Sun = 636.1923 m/s (R = 6.9570e+08 m) ; sigma_pred = 0.0901 m/s ; |v_pred - 638| = 1.8077 ; threshold 2 sqrt(sigma_pred^2 + 6^2) = 12.0014 -> COMPATIBLE (UNADJUDICATED)
+  sensitivity R = 695658 km: v_pred = 636.2307 m/s ; with the observer term (GOM25 amendment): v_pred - c koppa/AU = 633.2337 m/s (difference 2.959 m/s)
+
+DESCRIPTIVE (after the print): koppa / bridge::koppa_Sun = 0.999530 ; GOM25 regression constant A/2 = 1.476399 km -> ratio 0.999968 ; instantaneous mean v^2 r/c^2 (GOM25) 1.477262 km -> ratio 0.999383

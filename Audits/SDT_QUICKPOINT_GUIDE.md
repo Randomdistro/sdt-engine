@@ -2,6 +2,8 @@
 
 A dense, faithful map of Spatial Displacement Theory built from a full-corpus read (2026-07-06). For each claim the **class label is the corpus's own** (two-axis A–F, or DERIVED/CALIBRATED/OBSERVED/IDENTITY/OPEN/KILLED/FABRICATED). Use this to write copy or referee without re-deriving from scratch. Companion: `SDT_ADVERSARIAL_REFEREE_REPORT.md`.
 
+> **Correction 2026-10-03 (Harvey's direction; gateway behavioural §3.8).** Several status lines below downgraded SDT results *because they agree with a Standard-Model, GR or textbook form* ("Kepler by construction", "relabelled", "identity", "tautology", "consumes standard aT⁴"). Agreement is convergence, not a demotion; a downgrade must name the contaminating input and its measurement chain. Those lines are struck through and corrected in place below. Withdrawn wording stays visible.
+
 ---
 
 ## 1. Ontology — four primitives / six operators
@@ -27,7 +29,7 @@ Quarks · gluons · virtual particles · **G or M as fundamental** (gravity deri
 
 ## 4. Certification scheme
 
-Legacy: **DERIVED · COMPUTED · CALIBRATED · OBSERVED · PENDING** (+ **IDENTITY** = true by definition, never tallied). Superseded by the **two-axis audit spine** (`05_Provenance_and_Correspondence.md`): `provenance` {SDT-first | calibrated | external-input | unresolved} × `correspondence` {known-match | novel-prediction | internal-only | pending-test} → classes **A–F**. **C = convergence, not plagiarism** (survives the delete-test: delete the comparison and a C result stands; an E result's number vanishes). **F = tautology/identity.**
+Legacy: **DERIVED · COMPUTED · CALIBRATED · OBSERVED · PENDING** (+ **IDENTITY** = true by definition, never tallied). Superseded by the **two-axis audit spine** (`05_Provenance_and_Correspondence.md`): `provenance` {SDT-first | calibrated | external-input | unresolved} × `correspondence` {known-match | novel-prediction | internal-only | pending-test} → classes **A–F**. **C = convergence, not plagiarism** (survives the delete-test: delete the comparison and a C result stands; an E result's number vanishes). ~~**F = tautology/identity.**~~ **F = pending / unverified / failed** (`Theory/05` §2); true-by-construction bridge equations are class A, label CONSTRUCTION *(corrected 2026-10-03)*.
 
 **Benchmark headline (post-repair 2026-07-03/04):** 46/57 earned pass, 0 genuine fail, +11 IDENTITY, +2 CALIBRATED (class E), 11 PENDING (`INVESTIGATION_STACK.md:70-72`). Supersedes stale "62/73" and "54/65".
 
@@ -38,15 +40,17 @@ Legacy: **DERIVED · COMPUTED · CALIBRATED · OBSERVED · PENDING** (+ **IDENTI
 | Law | Claim | Key formula | Honest status |
 |---|---|---|---|
 | **I — Convergent Boundary Pressure** | Every point sits under balanced convergence summed over N shells to the Clearing; matter occludes it → force. | `Φ=Nε`, `P_conv=Φ/ℓ_P³≈2.46e48 Pa`; shell-cancellation `Φ_shell=4πd²·ε/4πd²=ε` | Shell identity = trivially true, **unfalsifiable**. `P_conv` cancels out of results (§ referee 1). N rides on `R_CMB` (class X). |
-| **II — Release Cascade** | CMB is the **operating pressure**, not a relic; stars are pressure-processors. | `P_conv=N·u_CMB` | Reinterpretation, no distinct number; consumes standard `aT⁴`. |
-| **III — Occlusion Force** | One law for Coulomb/gravity/nuclear. | `F=(π/4)P_eff R₁²R₂²/r²`; `P_eff=m_p²m_e²c⁵/(4παℏ³)` | 1/r² **structure class C**; coefficient `P_eff` is **derived (electropause/centripetal, delete-test passes) — NOT fitted**, parameter-free but **α-inherited**; hydrogen match is an identity; Laws-paper 1.65e31 inconsistent with derived 5.23e31 by ~π. Engine's `class E` stamp is too harsh. |
+| **II — Release Cascade** | CMB is the **operating pressure**, not a relic; stars are pressure-processors. | `P_conv=N·u_CMB` | ~~Reinterpretation, no distinct number; consumes standard `aT⁴`.~~ Convergent with `aT⁴` — TD06 derives the blackbody suite from counted lattice modes (4.4 ppm), so `aT⁴` is an SDT output here, not an import; not yet discriminating *(corrected 2026-10-03)*. |
+| **III — Occlusion Force** | One law for Coulomb/gravity/nuclear. | `F=(π/4)P_eff R₁²R₂²/r²`; `P_eff=m_p²m_e²c⁵/(4παℏ³)` | 1/r² **structure class C**; coefficient `P_eff` is **derived (electropause/centripetal, delete-test passes) — NOT fitted**, parameter-free but **α-inherited**; ~~hydrogen match is an identity;~~ hydrogen match is convergent unless a trace shows `R_charge = √(R_p r_e)` was chosen from the target — that trace is open, not assumed *(2026-10-03)*; Laws-paper 1.65e31 inconsistent with derived 5.23e31 by ~π. Engine's `class E` stamp is too harsh. |
 | **IV — Inertial Mass** | Mass = field-resistance / reorganisation cost of the exclusion volume. | `m=Φ·V_disp/(3ℓ_P³c²)`; `m_i=m_g` theorem | `V_disp` **measured-in** (circular); **no mass predicted**; 3× ambiguity between canon sources; FLM12 D1 UNPAID. |
-| **V — Movement Budget** | One velocity resource c, split circ/trans → all of SR. | `v_circ²+v²=c²` → γ, dilation, `E²=(pc)²+(m₀c²)²` | **Posited axiom** ≅ Lorentz γ (hardcoded in engine); needs a **preferred frame** (neo-Lorentzian tension). `z·k²=1` "126 levels" is a **tautology**. |
+| **V — Movement Budget** | One velocity resource c, split circ/trans → all of SR. | `v_circ²+v²=c²` → γ, dilation, `E²=(pc)²+(m₀c²)²` | **Posited axiom** ≅ Lorentz γ (hardcoded in engine); needs a **preferred frame** (neo-Lorentzian tension). ~~`z·k²=1` "126 levels" is a **tautology**.~~ `z·k²=1` is a load-bearing bridge: where z (spectroscopy) and k (orbital dynamics) come from independent measurement chains it earns DERIVED (B39); only rows where z and k are built from one shared v are CONSTRUCTION *(corrected 2026-10-03)*. |
 | **VI — Vortex Topology** | Only solid-torus knots persist; W=1 electron, W=3 proton, W=0 neutrino. | `R_wake=(W+1)ℏ/mc`; `R_p=4ℏ/m_pc=0.8414 fm` | Knot skeleton coherent; **W+1 = conjecture, one-point fit, fails for electron (g=α)**; μ_ν≡0 clean. |
 
-**Koppa** `ϟ = v²R/c² = R/k²` **≡ GM/c²** (identity, stamped everywhere). Gravity without G/M: `g=v²/R`; but every orbital formula is `GM→c²R/ϟ²` relabelled — Kepler by construction. `koppa_per_baryon` smuggles G via ℓ_P.
+~~**Koppa** `ϟ = v²R/c² = R/k²` **≡ GM/c²** (identity, stamped everywhere). Gravity without G/M: `g=v²/R`; but every orbital formula is `GM→c²R/ϟ²` relabelled — Kepler by construction. `koppa_per_baryon` smuggles G via ℓ_P.~~
 
-**The two genuinely-derived numbers in the whole corpus:** deuteron binding **2.200 vs 2.224 MeV** (NP17, no fitted scale) and neutron seat **1.83c to 0.006%** (NP20).
+**Koppa** `Ѻ = R/k²` is measured from `(v, r)` alone; **`GM = c²Ѻ` is an output of the koppa structure**, not an input to it. That every orbital formula agrees with Kepler and GR is the required consistency of a correct account (`AUDITOR_REPORT_ENGINE_STATE.md:55` withdrew the "Kepler relabelled" framing), and the koppa route carries v, R, c at sub-ppm against G's 22 ppm. `koppa_per_baryon = ℓ_P²/(R_p/4)` uses ℓ_P as the input and returns `G = ℓ_P²c³/ℏ` as an output; that is the derivation direction, not smuggling. *(Corrected 2026-10-03.)*
+
+*(2026-10-03: the "only two" count below was made under the alignment test excluded on 2026-07-26 — convergent results such as the koppa orbital chain, B39 solar redshift and TD06 blackbody were not counted. Re-tally owed under the origin rule.)* **Two parameter-free numbers flagged in the 2026-07-06 read:** deuteron binding **2.200 vs 2.224 MeV** (NP17, no fitted scale) and neutron seat **1.83c to 0.006%** (NP20).
 
 ---
 
@@ -97,7 +101,7 @@ Legacy: **DERIVED · COMPUTED · CALIBRATED · OBSERVED · PENDING** (+ **IDENTI
 6. **Input/derivation circularity** — derivation basis contains α, m_p yet claims to derive them; graph not yet published acyclic → "zero free parameters" unproven.
 7. **No-attraction orbit obligation** — full Kepler + precession from pure pushing partially shown.
 8. **Black-hole/strong-field obligation** — has horizon (z=½), no singularity; must still match EHT/ISCO/LIGO.
-9. **Coulomb identity `k_e e²=αℏc`** = class F tautology. **No native angular DOF** (FLM03) → no native Lamb/fine-structure until angular DOF derived (not imported `Y_ℓ^m`).
+9. ~~**Coulomb identity `k_e e²=αℏc`** = class F tautology.~~ **Coulomb bridge `k_e e²=αℏc`** — class A, CONSTRUCTION: it fixes the coulomb unit from α (the hydrogen koppa rung); a load-bearing bridge, not a failure *(corrected 2026-10-03)*. **No native angular DOF** (FLM03) → no native Lamb/fine-structure until angular DOF derived (not imported `Y_ℓ^m`).
 
 ## 8. Fabrication ledger (retracted — do NOT cite as results)
 

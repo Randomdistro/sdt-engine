@@ -1,3 +1,34 @@
+# NP04A — Neutron decay ledger and the tritium keystone (specification rewritten 2026-10-12)
+
+**Author:** J. C. Harvey, Melbourne. Rewritten at Harvey's direction: prompts carry new data; the packing sequencer is understood before grammar work; errors inform the mechanism. The previous specification is kept below the line.
+
+## 1. State after the reset (2026-10-10)
+- Stages A and F withdrawn (occlusion-integral binding).
+- B, E, G, H are constructions (identities of measured masses or engine definitions).
+- C and D open.
+- **The μ_n/μ_p = −2/3 of stage A is the quark-model value** (2.7% from measured −0.685). It is not native until derived from the trefoil.
+
+## 2. What the errors and new data teach
+- **The native neutron is p + one stabled electron (NP14), and its +0.782 MeV is owed** (SCT 2026-07-01 demotion; FLM12).
+- **PPT18:** the proton geometry is undetermined (three windings); the live engine's H1 was built **targeting** μ_p, so any moment ratio on engine geometry is shared-input.
+- Coincidence C-001 (s_n against the A = 3 mirror difference, 2.4% apart) is logged. Stage H's 18.579 keV against 18.591 is that identity in another form.
+
+## 3. Next round (registered order)
+1. Harvey's winding ruling (PPT18), then a native trefoil current ratio for μ_n/μ_p **derived before comparison**. Geometry from canon rules only (PPT18 stage 2a), not the engine's μ_p-targeted constants.
+2. A native unlinking barrier, for τ_n (C; shared with PPT09 and the neutron-lifetime anomaly; see the corpus anomaly list 2026-10-11).
+3. a_p/a_e without back-solving 1836 (D).
+
+## Prohibitions
+- No form chosen to reach anchors (2026-10-07 rule).
+- No census of candidate cells.
+- No QM formalism as scaffolding.
+- No potential-energy bookkeeping for binding.
+- The legacy packer (`pack-nucleus.js`, NSEQ05-CONTROL-3) is not the construction; the live sequencer is `traction-gear-engine.js` (NSEQ18-WEB-1).
+
+---
+
+## Previous specification (kept as written)
+
 # NP04A — Neutron Decay Ledger and Tritium Keystone *(free neutron → β-decay → tritium decay)*
 
 > **Author:** J. C. Harvey, Melbourne. **Status:** SPEC (upgrade 2026-06-27).
@@ -12,7 +43,7 @@
 2. **Why does it matter?** — Stack position / downstream blockers (see `INVESTIGATION_STACK.md`).
 3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
 4. **What would prove us wrong?** — §⑧ falsification tests with numeric triggers.
-5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN).
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN).
 
 This is a **constitutional** investigation: it must touch — and remain consistent with — every load-bearing SDT formulation we have (Law IV mass-as-displacement, the W+1 radius, the trefoil topology, the deuteron–triton grammar, the neutrino receipt, occlusion binding, the Hopf/poloidal electron channel) **without breaking a single one**. Any stage that requires a change to a frozen result (`NP01` grammar, `laws.hpp::winding`, `laws.hpp::law_IV`) is a *failure of that stage*, not a license to edit the engine.
 
@@ -232,7 +263,7 @@ The two "honesty numbers" it must *not* fudge:
 ```markdown
 ## Pre-Run Commitments — NP04A
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: [0 or list each param — max per §⑤]
 - Engine namespaces: NP01 grammar, law_III nuclear occlusion, ATOMICUS rules
 - Phase thresholds (committed before run): 1%, 1.0%, 1%, 1%, 1%
@@ -246,7 +277,7 @@ The two "honesty numbers" it must *not* fudge:
 | Phase 0 sanity check fails | Fix units/engine refs; verify `laws.hpp` symbols | STOP — report blocker | Fit to target |
 | Native mechanism off > committed % | Alternative route in §④; document ADJ-### | **OPEN** or **KILL** hypothesis | RETRO-PASS |
 | `z ≥ 1` in closure formula | Weak-field break (CR10); piecewise or exponential | **OPEN** that regime | Ignore break |
-| Rivals match but SDT doesn't beat | Label **DEGENERATE** honestly | — | Claim Class A |
+| A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 | Upstream dependency missing (FLM10, etc.) | **DEFER** phase; cite dependency ID | — | Fake PASS |
 
 ### Allowed adjustments

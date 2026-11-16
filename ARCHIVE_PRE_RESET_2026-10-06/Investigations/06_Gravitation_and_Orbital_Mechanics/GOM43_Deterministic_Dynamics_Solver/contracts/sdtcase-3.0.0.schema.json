@@ -1,0 +1,178 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sdt-engine.local/contracts/sdtcase-3.0.0.schema.json",
+  "title": "SDT arbitrary-N seven-circle occlusion case 3.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "case_id",
+    "problem_class",
+    "frame",
+    "forces",
+    "bodies",
+    "integrator",
+    "timestep_s",
+    "duration_s",
+    "record_every_steps",
+    "tolerances",
+    "gates"
+  ],
+  "properties": {
+    "contract_version": { "const": "3.0.0" },
+    "case_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$",
+      "maxLength": 96
+    },
+    "problem_class": { "const": "sdt_occlusion_nbody" },
+    "frame": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "units"],
+      "properties": {
+        "type": { "const": "inertial_cartesian" },
+        "units": { "const": "SI" }
+      }
+    },
+    "forces": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["type", "pressure_source", "propagation_speed"],
+        "properties": {
+          "type": { "const": "retarded_seven_circle_occlusion" },
+          "pressure_source": { "const": "sdt_law_I_P_conv" },
+          "propagation_speed": { "const": "c" }
+        }
+      }
+    },
+    "bodies": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 10000,
+      "items": { "$ref": "#/$defs/body" }
+    },
+    "integrator": {
+      "enum": ["velocity_verlet", "fixed_rk4"]
+    },
+    "timestep_s": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "duration_s": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "record_every_steps": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "history_seconds": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "tolerances": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["retarded_time_s", "max_retarded_iterations"],
+      "properties": {
+        "retarded_time_s": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "max_retarded_iterations": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 128
+        }
+      }
+    },
+    "gates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id"],
+        "properties": {
+          "id": {
+            "enum": [
+              "M0", "M1", "M2", "M3", "M4", "M5", "M6",
+              "M7", "M8", "M9", "M10", "M11", "M12"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "vector3": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": { "type": "number" }
+    },
+    "decimal_integer": {
+      "type": "string",
+      "pattern": "^[1-9][0-9]*$"
+    },
+    "displacement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["proton_count", "neutron_count"],
+      "properties": {
+        "proton_count": {
+          "type": "string",
+          "pattern": "^[0-9]+$"
+        },
+        "neutron_count": {
+          "type": "string",
+          "pattern": "^[0-9]+$"
+        },
+        "composition_coverage": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "provenance": { "type": "string" }
+      }
+    },
+    "body": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "baryon_count",
+        "radius_m",
+        "collision_radius_m",
+        "position_m",
+        "velocity_m_s"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+        },
+        "baryon_count": { "$ref": "#/$defs/decimal_integer" },
+        "radius_m": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "collision_radius_m": {
+          "type": "number",
+          "minimum": 0
+        },
+        "position_m": { "$ref": "#/$defs/vector3" },
+        "velocity_m_s": { "$ref": "#/$defs/vector3" },
+        "displacement": { "$ref": "#/$defs/displacement" },
+        "provenance": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      }
+    }
+  }
+}

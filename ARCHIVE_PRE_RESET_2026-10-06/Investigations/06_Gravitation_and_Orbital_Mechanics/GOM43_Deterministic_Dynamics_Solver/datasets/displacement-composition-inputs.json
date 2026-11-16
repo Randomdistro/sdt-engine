@@ -1,0 +1,100 @@
+{
+  "dataset_version": "1.0.0",
+  "classification": "OBSERVED inputs; COMPUTED ledger",
+  "method": "body volume -> bulk-material density -> elemental mass composition -> isotope number composition -> exact proton/neutron counts",
+  "constants": {
+    "atomic_mass_constant_kg": 1.6605390666e-27,
+    "speed_of_light_m_s": 299792458.0,
+    "planck_length_m": 1.616255e-35,
+    "cmb_boundary_radius_m": 9.527e26,
+    "cmb_temperature_k": 2.7255,
+    "radiation_constant_j_m3_k4": 7.5657e-16,
+    "proton_mass_kg": 1.67262192595e-27,
+    "neutron_mass_kg": 1.67492750056e-27,
+    "provenance": {
+      "atomic_mass_constant": "CODATA 2018 value retained by Engine/include/sdt/laws.hpp",
+      "sdt_constants": "Engine/include/sdt/laws.hpp; no values introduced into laws.hpp"
+    }
+  },
+  "isotopes": {
+    "H": {"Z": 1, "fractions": {"1": 0.999885, "2": 0.000115}},
+    "He": {"Z": 2, "fractions": {"3": 0.000166, "4": 0.999834}},
+    "C": {"Z": 6, "fractions": {"12": 0.9893, "13": 0.0107}},
+    "N": {"Z": 7, "fractions": {"14": 0.99636, "15": 0.00364}},
+    "O": {"Z": 8, "fractions": {"16": 0.99757, "17": 0.00038, "18": 0.00205}},
+    "Ne": {"Z": 10, "fractions": {"20": 0.9048, "21": 0.0027, "22": 0.0925}},
+    "Na": {"Z": 11, "fractions": {"23": 1.0}},
+    "Mg": {"Z": 12, "fractions": {"24": 0.7899, "25": 0.1, "26": 0.1101}},
+    "Al": {"Z": 13, "fractions": {"27": 1.0}},
+    "Si": {"Z": 14, "fractions": {"28": 0.92223, "29": 0.04685, "30": 0.03092}},
+    "S": {"Z": 16, "fractions": {"32": 0.9499, "33": 0.0075, "34": 0.0425, "36": 0.0001}},
+    "Ca": {"Z": 20, "fractions": {"40": 0.96941, "42": 0.00647, "43": 0.00135, "44": 0.02086, "46": 0.00004, "48": 0.00187}},
+    "Cr": {"Z": 24, "fractions": {"50": 0.04345, "52": 0.83789, "53": 0.09501, "54": 0.02365}},
+    "Fe": {"Z": 26, "fractions": {"54": 0.05845, "56": 0.91754, "57": 0.02119, "58": 0.00282}},
+    "Ni": {"Z": 28, "fractions": {"58": 0.68077, "60": 0.26223, "61": 0.0114, "62": 0.03634, "64": 0.00926}}
+  },
+  "bodies": [
+    {
+      "id": "Sun",
+      "radius_m": 695700000.0,
+      "bulk_density_kg_m3": 1408.0,
+      "declared_relative_uncertainty": 0.009,
+      "materials": [
+        {
+          "name": "present-day photospheric-composition bulk",
+          "volume_fraction": 1.0,
+          "elements_by_mass": {
+            "H": 0.7438,
+            "He": 0.2423,
+            "O": 0.0057,
+            "C": 0.0024,
+            "Ne": 0.0013,
+            "Fe": 0.0013,
+            "N": 0.0007,
+            "Si": 0.00065,
+            "Mg": 0.00058,
+            "S": 0.0004
+          }
+        }
+      ],
+      "provenance": {
+        "radius_density": "NASA Sun Fact Sheet, volumetric mean radius and mean density",
+        "radius_density_url": "https://radiojove.gsfc.nasa.gov/education/sun/basics/material/sunfacts.htm",
+        "H_He_metals": "Asplund et al. 2021 present-day photospheric X=0.7438, Y=0.2423, Z=0.0139",
+        "composition_url": "https://doi.org/10.1051/0004-6361/202140445",
+        "limitation": "Photospheric composition is applied to the bulk volume; radial solar composition gradients are outside this first ledger."
+      }
+    },
+    {
+      "id": "Earth",
+      "radius_m": 6371000.0,
+      "bulk_density_kg_m3": 5513.0,
+      "declared_relative_uncertainty": 0.012,
+      "materials": [
+        {
+          "name": "bulk-Earth composition",
+          "volume_fraction": 1.0,
+          "elements_by_mass": {
+            "Fe": 0.32,
+            "O": 0.297,
+            "Si": 0.161,
+            "Mg": 0.154,
+            "Ni": 0.0182,
+            "Ca": 0.0171,
+            "Al": 0.0159,
+            "S": 0.0064,
+            "Cr": 0.0047,
+            "Na": 0.0018
+          }
+        }
+      ],
+      "provenance": {
+        "radius_density": "NASA Earth Fact Sheet, volumetric mean radius and mean density",
+        "radius_density_url": "https://web.archive.org/web/20231226062838/nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html",
+        "composition": "McDonough 2003, Table 5 bulk-Earth wt.% values",
+        "composition_url": "https://www.mso.anu.edu.au/PSI/PSI_Meetings/Entries/2007/6/13_The_bulk_composition_of_the_Earth_(1)_files/Treatise%20on%20Geochemistry%202003%20McDonough.pdf",
+        "limitation": "A single bulk material volume is used; core/mantle radial subdivision is deferred and represented by the declared uncertainty."
+      }
+    }
+  ]
+}

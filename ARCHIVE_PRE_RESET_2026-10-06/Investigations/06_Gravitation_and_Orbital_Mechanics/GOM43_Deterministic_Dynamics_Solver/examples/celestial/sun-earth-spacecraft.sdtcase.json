@@ -1,0 +1,77 @@
+{
+  "contract_version": "2.0.0",
+  "case_id": "sun-earth-l1-spacecraft-j2000",
+  "problem_class": "celestial_three_body",
+  "frame": {
+    "type": "inertial_cartesian",
+    "units": "SI",
+    "epoch": "2451545.000000000 TDB",
+    "description": "Barycentric ecliptic J2000 with editable near-L1 runner"
+  },
+  "force": {
+    "type": "retarded_seven_cone_occlusion",
+    "propagation_speed": "c",
+    "pressure_source": "sdt_law_I_P_conv",
+    "enable_eclipse_shielding": true,
+    "comparison_route": "point_koppa"
+  },
+  "bodies": [
+    {
+      "id": "Sun",
+      "baryon_count": "1189137062162891557291581730506889351310699697884370210975",
+      "radius_m": 695700000,
+      "position_m": [-1067706805.380953, -418275271.8194473, 30861817.2547682],
+      "velocity_m_s": [9.312571926520472, -12.82475570794162, -0.1633507186350417],
+      "provenance": {
+        "baryons": "SDT bridge::koppa_Sun / koppa_per_baryon",
+        "radius": "IAU 2015",
+        "state": "NASA/JPL Horizons DE441 target 10"
+      }
+    },
+    {
+      "id": "Earth",
+      "baryon_count": "3569827738726272357060771490791812249059936247963233",
+      "radius_m": 6371010,
+      "position_m": [-27566740482.81145, 144279021520.7299, 30250667.8288132],
+      "velocity_m_s": [-29784.94749851088, -5482.119695478543, 0.01843295986780902],
+      "provenance": {
+        "baryons": "SDT bridge::koppa_Earth / koppa_per_baryon",
+        "radius": "NASA/JPL Horizons mean radius",
+        "state": "NASA/JPL Horizons DE441 target 399"
+      }
+    },
+    {
+      "id": "spacecraft",
+      "baryon_count": "100000000000000000000000000000",
+      "radius_m": 10,
+      "position_m": [-27296532845.399418, 142803559615.88605, 30256899.65011292],
+      "velocity_m_s": [-29784.94749851088, -5482.119695478543, 0.01843295986780902],
+      "provenance": {
+        "baryons": "declared aggregate spacecraft resistance",
+        "radius": "declared collision boundary",
+        "state": "Earth-to-Sun line, 1.5e9 m sunward of Earth"
+      }
+    }
+  ],
+  "integrator": "velocity_verlet",
+  "timestep_s": 300,
+  "max_steps": 288,
+  "record_every_steps": 6,
+  "tolerances": {
+    "retarded_time_s": 1e-9,
+    "channel_closure": 1e-13,
+    "medium_momentum_relative": 1e-11,
+    "lagrange_residual_m_s2": 1e-7,
+    "max_retarded_iterations": 64
+  },
+  "events": {
+    "stop_on_collision": true
+  },
+  "provenance": {
+    "classification": "COMPUTED",
+    "description": "Editable one-day near-L1 demonstration; the spacecraft state is geometric, not a mission ephemeris.",
+    "sources": [
+      "NASA/JPL Horizons API version 1.2, retrieved 2026-08-17"
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+GOM40b blank-slate run 1 (registered in GOM40b_RESET_ASSESSMENT_2026-10-11.md sections 0-2)
+=======================================================================
+
+[VA] Kepler mock e = 0.0167 on the SCE1 sampling (397 epochs x 900 s from M = 152.2 deg, Amendment 1): usable pairs 33198 of 78606, mu recovered 1.000000000e+20 vs 1e20 (relative -1.11e-14) -> met
+[VA2] same mock on a year arc (27 x 14 d): mu relative -3.33e-16
+[VB] K = a/k^2 with k = sqrt(a/K): relative 1.11e-16 -> met (IDENTITY)
+[VC] delay formula against its closed form: met
+VALIDATIONS: met
+
+SCE1 ARC (geocentre, 397 epochs): r from 1.518016e+11 to 1.518800e+11 m (1.014731 to 1.015255 AU) ; pairs 78606, usable (|d(1/r)| > 1e-15) 39355 (50.1%)
+  mu (median) = 8.332460e+19 m^3/s^2 ; K = mu/c^2 = 927.1112 m ; a = 3.531307e+11 m (2.3605 AU) ; CV(K_i) = 1.607e-05
+  C3b: SMA in [1.4, 1.6]e11 m: NO -> ARC_INSUFFICIENT ; C4 (CV < 1e-3): met ; continuity |K - 1476.351|/1476.351 = 3.720e-01 (gate 6e-4: NOT MET)
+  pairwise mu quantiles (usable pairs): 10% 7.344e+19, 25% 7.776e+19, 50% 8.332e+19, 75% 8.896e+19, 90% 9.451e+19 (m^3/s^2) ; the standard value is not used
+
+YEAR ROUTE (C3c; GOM26 estimator, EMB): calibration 2025 (27 epochs): usable 350 of 351 ; K_cal = 1476.351201 m ; a = 1.496262e+11 m ; CV 1.080e-05 (gate 1e-3: met)
+  hold-out 2024: K_hold = 1476.869308 m ; CV 1.020e-05 ; |K_hold - K_cal|/K_cal = 3.509e-04 (gate 1e-3: met)
+
+CONJUNCTION LEDGER (K = K_cal = 1476.351201 m, 391 epochs): first b = 47.20 R_sun, last b = 34.81 R_sun ; Delta t (one-way) first 6.334250e-05 s, last 6.936283e-05 s (rise 6.020e-06 s) ; Delta f = 2F d(Delta t)/dt: first 0.9428 Hz, last 1.2895 Hz, median |Delta f| 1.0901 Hz
+  local k(r) = sqrt(r/K) at the middle epoch: Earth r = 1.0150 AU : k = 10141.49 ; b = 41.02 R_sun : k = 4396.56 ; Cassini r = 7.3772 AU : k = 27341.01 ; z = K/r: 9.723e-09, 5.173e-08, 1.338e-09
+
+Status: no residual-correlation claim (C6); K carried from the year route is not fitted to Doppler or delay.

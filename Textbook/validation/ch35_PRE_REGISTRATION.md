@@ -1,0 +1,40 @@
+# Chapter 35 — pre-registration of the worked-example instrument
+
+Registered 2026-11-10, before `Textbook/examples/ch35_retarded_many_body_occlusion.cpp` was written or run.
+Author: James Christopher Tyndall, Melbourne. Drafted by an LLM session; executed directly (no delegated agents).
+
+Object. The engine's declared numerical boundary model for finite bodies (`sdt::occlusion`, `occlusion.hpp`): seven channels (one central, six outer on a ring of radius $2R/3$), channel weights $1/9$ and $4/27$, and a fixed polar quadrature of a face-on disc (6 Gauss–Legendre radial nodes, 16 azimuth nodes) for apparent solid angle. The chapter checks (a) the geometry and weights of the seven channels as seven circles of radius $R/3$ packed in the target disc, with weights $w_0=1/9$ (its own area fraction) and $w_1=1/9+(2/9)/6=4/27$ (own fraction plus one sixth of the uncovered area $2/9$); (b) the accuracy of the disc quadrature `disc_solid_angle` against the exact axial solid angle $2\pi(1-d/\sqrt{d^2+R^2})$ as a function of $d/R$, and for an observer off the axis against a high-resolution reference; (c) partial occultation: the occluded fraction of the target disc by a half-plane edge, exact (circular segment) against the seven-circle model with exact per-circle segments and against a Boolean visibility model, to show how the model behaves at an edge, where agreement on unshielded orbits says nothing; (d) retardation: the fixed-point iteration $t_{n+1}=t-\lvert D-\beta ct_n\rvert/c$ for a source moving at $\beta c$ contracts at the rate $\beta$, so the number of iterations to a tolerance is $\lceil\ln\mathrm{tol}/\ln\beta\rceil$, large for $\beta\to1$. The model is declared to be a numerical boundary model and not the opaque single-sphere theorem of Chapter 11. No measured data are loaded.
+
+## Instrument validation (must pass before T-results are read)
+
+| id | known answer | tolerance |
+|---|---|---|
+| V0 | the `tb_common.hpp` helpers | as printed |
+| V1 | the stored 6-point Gauss–Legendre nodes and weights: $\sum w=2$, $\sum wx^2=2/3$, $\sum wx^{10}=2/11$ (exact for degree $\le11$); the stored channel weights sum to 1 | $10^{-14}$ |
+
+## Tests on the object
+
+| id | statement | pass criterion | rejection class populated? |
+|---|---|---|---|
+| T1 | geometry of the seven circles ($R=1$, radius $\rho=1/3$): centre-to-ring distance $=2\rho$ (touching); neighbouring ring centres at distance $2\rho$ (touching); every circle inside the unit disc (outer extent $2/3+1/3=1$); total circle area fraction $7/9$; uncovered fraction $2/9$; $w_0=1/9$, $w_1=4/27=1/9+(2/9)/6$; $w_0+6w_1=1$. Also the second moment of the model against the exact disc: reported ($\sum w\,x_k^2$ against $R^2/4$) | exact to $10^{-14}$ | yes |
+| T2 | solid angle. `disc_solid_angle` on axis against `axial_disc_solid_angle`: relative error at $d/R=100,\,10,\,3$ at most $10^{-8}$; at $d/R=1$ at most $10^{-4}$; at $d/R=0.5,0.2,0.1$ reported. Off axis (observer at lateral offset $b=0.5R,\,1.5R$ at $d=2R$): relative error against a reference with 400 radial and 800 azimuth nodes is reported and must be at most $10^{-5}$ for $b=0.5R$ | as stated | yes — an error above the stated limit rejects the quadrature at that range |
+| T3 | partial occultation by the half-plane $x\ge t$. Exact occluded fraction $F(t)=(\arccos t-t\sqrt{1-t^2})/\pi$ for $\lvert t\rvert<1$, $1$ for $t\le-1$, $0$ for $t\ge1$. Seven-circle model: $\sum_kw_kF_k$ with $F_k$ the exact segment fraction of circle $k$; Boolean model: $\sum_kw_k[c_{k,x}\ge t]$. On 4001 values of $t\in[-1.2,1.2]$: the model equals 0 and 1 at the ends ($t\le-1$: $\sum w=1$ requires every circle fully occluded only for $t\le-1$ minus ... ; the registered statement is that for $t\ge1$ the model is 0 and for $t\le-1$ it is 1 to $10^{-12}$); both models are non-increasing in $t$; the maximum absolute error of the seven-circle model is at most $0.1$; the maximum absolute error of the Boolean model exceeds that of the seven-circle model | as stated | yes |
+| T4 | retardation. For $\beta=0.01,0.1,0.5,0.9,0.99$ with $D=1$ (units $c=1$), $t=10$: the iteration from $t_0=t-D/c$ converges to the exact $t_r=(ct-D)/(c(1-\beta))$; the observed error ratio per iteration equals $\beta$ to $10^{-6}$; the number of iterations to reach error $10^{-12}$ equals $\lceil\ln(10^{-12}/e_0)/\ln\beta\rceil$ within 1; printed, with the count for $\beta=0.99$ | as stated | yes |
+
+Reported, not criteria: the quadrature errors at small $d/R$, the model errors, iteration counts.
+
+## Single-pass rule
+
+Every case above is computed in one run with the criteria fixed here. A criterion that needs retuning after the run is itself the finding and is recorded as such. Failed runs are kept with their run number.
+
+## Build line
+
+`powershell -File Textbook\tools\tb_run.ps1 -Stem ch35_retarded_many_body_occlusion`
+
+## Record of run 1; registration error in the T4 configuration (2026-11-10)
+
+A first build failed on `Vec3` having no `operator[]`; no run resulted. Run 1 (`ch35_run1_output.txt`) met V1, T1 (all geometry exact to $3.3\times10^{-16}$; model second moment $0.197531$ against the exact disc value $0.25$, so the weights are not an exact area cubature), T2 (axial errors $7.7\times10^{-13}$, $4.2\times10^{-15}$, $1.9\times10^{-12}$, $6.3\times10^{-8}$ at $d/R=100,10,3,1$ and $1.2\times10^{-5}$, $9.1\times10^{-4}$, $1.5\times10^{-2}$ at $0.5,0.2,0.1$; off axis $3.9\times10^{-7}$ at $b=0.5R$ and $9.1\times10^{-8}$ at $1.5R$) and T3 (seven-circle model maximum error $0.0207$, Boolean model $0.2033$), and passed T4 for $\beta=0.01,0.1$ and failed it for $\beta=0.5,0.9,0.99$. The failure is a registration error, not a property of the iteration: with $D=1$ and $t=10$ the registered exact retarded time $(ct-D)/(c(1-\beta))$ assumes $D-\beta ct_r>0$, i.e. that the source has not yet passed the target, which requires $\beta<D/(ct)=0.1$. For larger $\beta$ the iteration contracts at the same rate $\beta$ but to the other branch of $\lvert D-\beta c\tau\rvert$ ($t_r=(t+D)/(1+\beta)$), so the code compared it with the wrong fixed point. The configuration is redesigned so that the registered branch holds for all $\beta$: target at $D=10$, observation time $t=5$, source on the line $x_s=\beta c\tau$ (extending to negative $\tau$), for which $t-\tau=D-\beta c\tau$ throughout and $\tau_r=(t-D)/(1-\beta)$; the iteration $\tau_{n+1}=t-D+\beta\tau_n$ contracts exactly at $\beta$ from $\tau_0=t-D$. The criteria (error ratio per iteration equals $\beta$ to $10^{-6}$; iteration count within 1 of $\lceil\ln(10^{-12}/e_0)/\ln\beta\rceil$) are unchanged. Run 2 is the run of record.
+
+## Record of run 2; attainability of the T4 tolerance in double precision (2026-11-10)
+
+Run 2 (`ch35_run2_output.txt`) met every clause for $\beta=0.01,0.1,0.5,0.9$ (error ratios $0.010000$, $0.100000$, $0.500000$, $0.900001$; iteration counts $6,12,43,299$ equal to the predicted $6,12,43,299$) and failed both clauses for $\beta=0.99$: the iteration never reached the tolerance $10^{-12}$ in $10^5$ steps, and the measured ratio was $0.990026$. The cause is the double-precision floor. The retarded times are of order $5\times10^2$, so each step carries rounding of about $6\times10^{-14}$; with contraction factor $\beta$ the accumulated floor of the error is of order $\epsilon\lvert\tau\rvert/(1-\beta)\approx6\times10^{-12}$, above the registered $10^{-12}$, and a ratio measured as errors approach that floor is perturbed. This is a defect of the registered tolerance (unattainable at $\beta=0.99$), not a property of the iteration, and is recorded as a limit the chapter reports: for $\beta\to1$ the iteration count diverges as $1/(1-\beta)$ and the attainable accuracy degrades as $\epsilon\lvert\tau\rvert/(1-\beta)$. The measurement is repaired without changing what is tested: the error ratio is measured on the first iteration (errors $e_0\ge0.05$, far above the floor), and the iteration count is evaluated for the tolerance $10^{-9}$ against the predicted $\lceil\ln(10^{-9}/e_0)/\ln\beta\rceil$ (within 1), a tolerance above the floor for every $\beta$ in the list. Run 3 is the run of record.

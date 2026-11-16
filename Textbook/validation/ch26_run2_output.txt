@@ -1,0 +1,35 @@
+
+== V0 helper validation (known answers) ==
+[PASS] V0    integrate sin over [0, pi] = 2                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 3.331e-16 (tol 1e-13)
+[PASS] V0    integrate x^7 over [0, 1] = 1/8                                                value 1.250000000000e-01 expected 1.250000000000e-01 err 2.220e-15 (tol 1e-14)
+[PASS] V0    integrate exp over [-1, 1] = e - 1/e                                           value 2.350402387288e+00 expected 2.350402387288e+00 err 5.668e-16 (tol 1e-13)
+[PASS] V0    root of cos x - x = 0.739085133215161                                          value 7.390851332152e-01 expected 7.390851332152e-01 err 2.253e-15 (tol 1e-13)
+[PASS] V0    root of x^2 - 2 on [1, 2] = sqrt 2                                             value 1.414213562373e+00 expected 1.414213562373e+00 err 2.983e-15 (tol 1e-13)
+[PASS] V0    compensated sum 1 + 10^6 x 1e-16 = 1 + 1e-10                                   value 1.000000000100e+00 expected 1.000000000100e+00 err 0.000e+00 (tol 1e-15)
+
+== V1 root finder ==
+[PASS] V1    p=2, n=3: r = 9                                                                value 9.000000000000e+00 expected 9.000000000000e+00 err 0.000e+00 (tol 1e-12)
+[PASS] V1    p=1, n=4: r = 4                                                                value 4.000000000000e+00 expected 4.000000000000e+00 err 1.110e-16 (tol 1e-12)
+
+== T1 closure algebra ==
+[PASS] T1    r_n / r_1 = n^2, worst relative                                                value 2.220446049250e-16 expected 0.000000000000e+00 err 2.220e-16 (tol 1e-14)
+[PASS] T1    v_n / v_1 = 1/n, worst relative                                                value 1.110223024625e-16 expected 0.000000000000e+00 err 1.110e-16 (tol 1e-14)
+[PASS] T1    m_e v r = n hbar (shared-input), worst relative                                value 5.178080186852e-12 expected 0.000000000000e+00 err 5.178e-12 (tol 1e-09)
+[PASS] T1    (1/2) m_e v^2 = Ry Z^2/n^2 (shared-input), worst relative                      value 1.076172484460e-11 expected 0.000000000000e+00 err 1.076e-11 (tol 1e-09)
+
+== T2 integer closure on a family of kernels ==
+[PASS] T2    radius from J = n equals n^(2/(3-p)), worst relative                           value 1.776356839400e-15 expected 0.000000000000e+00 err 1.776e-15 (tol 1e-12)
+[PASS] T2    kappa^2/omega^2 = 3 - p is positive for the five kernels
+[PASS] T2    p = 3.5: a ladder r_n = n^(-4) exists but kappa^2/omega^2 = -0.5 < 0 (no persistent route)
+       radii for n = 1..4: p=2: 1.0000 4.0000 9.0000 16.0000 ; p=1: 1.0000 2.0000 3.0000 4.0000 ; p=2.9: 1 1.049e+06 3.487e+09 1.1e+12
+
+== T3 transition ledger ==
+[PASS] T3    Ritz combination dE(a->d) = dE(a->b) + dE(b->d), worst relative                value 2.220446049250e-16 expected 0.000000000000e+00 err 2.220e-16 (tol 1e-14)
+[PASS] T3    series limit Ry Z^2/n^2 (n_high = 1e5), worst relative                         value 2.220446049250e-16 expected 0.000000000000e+00 err 2.220e-16 (tol 1e-09)
+[PASS] T3    dE scales as Z^2, worst relative                                               value 2.220446049250e-16 expected 0.000000000000e+00 err 2.220e-16 (tol 1e-14)
+
+== T4 movement-budget limit of the leading-order ladder ==
+       1/alpha = 137.035999 ; largest Z with v < c: 137 ; (Z alpha)^2 at Z = 137: 0.999475
+[PASS] T4    largest Z with Z alpha < 1 is 137
+
+ALL CRITERIA MET: 0 failure(s)

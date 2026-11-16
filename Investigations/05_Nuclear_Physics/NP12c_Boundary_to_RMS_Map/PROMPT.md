@@ -65,3 +65,15 @@ When a native Map freezes:
 - Split: holdout = odd mass number `A` with `A ≥ 16`; calibration diagnostics (if any)
   use even `A` only — **no coefficient update from either half**.  
 - Gate: pre-register `RMS_rel(holdout)` threshold in a new amendment before opening.
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** Gate C1 is scored PASS for a census that found no executable map (a PASS for absence) and C2 passes an analytic √(3/5) identity, so neither tests SDT.
+
+**Correction:** Relabel as FIXTURE/CENSUS and gate on the sealed IAEA RMS comparison with a pre-registered tolerance.
+
+**Status:** ANNOTATED — label, status or tally corrected in the record; no re-score of earlier runs.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

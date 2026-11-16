@@ -313,3 +313,15 @@ Timing sources: Weisberg & Huang, *ApJ* **829** (2016) 55,
 doi:10.3847/0004-637X/829/1/55; Kramer et al., *Physical Review X* **11**
 (2021) 041050, doi:10.1103/PhysRevX.11.041050; MeerKAT timing parameters,
 *A&A* **667** (2022) A149.
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** The chirp-scale gate is ±15% and the output itself states "the PASS is an algebraic identity of the koppa bridge", while the total mass (65 M_sun) fed in is a GR-waveform-derived catalogue value.
+
+**Correction:** Tighten to ≤ 1% for the scale, label the pass IDENTITY/SHARED-INPUT, and gate on the f^(11/3) track against measured chirps.
+
+**Status:** RULE RECORDED — corrected gate or definition applies to the next run; the earlier result is not re-scored and nothing was re-run.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

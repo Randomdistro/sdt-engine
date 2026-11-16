@@ -17,7 +17,7 @@ light speed and clock rate track it:
 
 ```
 z(r) = ϟ/r = 1 − ℓ_P(r)/ℓ_P,∞ = 1 − c_local(r)/c_∞     (one quantity)
-dτ/dt = √(1 − z)                                        (Law V clock rate)
+dτ/dt = 1 − z                                           (Law V clock rate; GOM22 repair, was √(1 − z))
 ```
 
 A **fixed atomic emitter** therefore radiates the *same* intrinsic line, but an

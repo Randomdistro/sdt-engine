@@ -1,0 +1,49 @@
+NP15 — Nuclear Magnetic Moments from Vortex Geometry (J. C. Harvey, 2026-07-03)
+Engine: sdt/laws.hpp | unit mu_N = e hbar/2m_p is BORROWED (comparison only)
+=================================================================
+
+[P0] g_proton = R_p m_p c/hbar = 4.00078  (W+1 rim identity)
+     (2,3) trefoil: v_T = 0.63246 c, v_P = 0.77460 c  (PPT01, class A)
+     anchors (OBSERVED, engine): mu_p=+2.792847 mu_n=-1.913043 mu_d=+0.857421
+                                 mu_t=+2.979  mu_h=-2.128  mu_a=0.0
+
+[P1] mu_p candidates (target +2.792847 mu_N, gate 5%, committed a priori)
+     C1 rim (g_p)              =   4.0008  ( +43.25%)  FAIL(5%)
+     C2 toroidal @R_p          =   2.5303  (  -9.40%)  FAIL(5%)
+     C3 poloidal @R_p          =   3.0990  ( +10.96%)  FAIL(5%)
+     C4 toroidal @R_major      =   1.3930  ( -50.12%)  FAIL(5%)
+     C5 geo-mean [POST-HOC]    =   2.8003  (  +0.27%)  [no-PASS-allowed: numerology ledger only]
+     -> derivable candidates C1-C4: NONE pass -> mu_p OPEN
+     -> C2/C3 bracket the target (-9.40% / +10.96%): the trefoil modes
+        straddle mu_p but no committed single mode lands it.
+     -> C5 look-elsewhere ledger: 5 combinations tried at design time;
+        geo-mean lands +0.27% with NO derivation -> logged [OPEN], not sold.
+
+[P2] mu_n: PROMPT's uncharged-trefoil route PREMISE-DEAD (NP17).
+     NP20 executed the NP17 route: magnitude=IDENTITY, sign assumed -> OPEN.
+     NP15 inherits OPEN; named debt = native flux composition + sign dynamics.
+     No new mu_n number is computed here (re-fishing forbidden by RUN_LOG).
+
+[P3] mu_n/mu_p = -0.68498 (measured). -2/3 = -0.66667 (off +2.67%).
+     No SDT derivation of -2/3 exists (SU(6) is the rival's machinery,
+     inadmissible). Class: OPEN — proximity is unexplained, not evidence.
+
+[P4] Composites — grammar block rules (gate 5% blind; DEGENERACY DECLARED:
+     rules coincide with the rival's impulse approximation / Schmidt limits)
+     d  (p+n aligned)       =  +0.8798  meas  +0.8574  (  +2.61%) PASS(5%)  [engine]
+     t  (p, nn paired)      =  +2.7928  meas  +2.9790  (  -6.25%) FAIL(5%)  [engine]
+     h  (pp paired, n)      =  -1.9130  meas  -2.1280  ( +10.10%) FAIL(5%)  [engine]
+     alpha (all paired)     =  +0.0000  meas  +0.0000  (exact)    PASS — but DEGENERATE (spin-0: every model gives 0)  [engine]
+     Li-7 (a+t, a silent)   =  +2.7928  meas  +3.2564  ( -14.24%) FAIL(5%)  [Stone2019 typed anchor]
+     Be-9 (2a+n, a silent)  =  -1.9130  meas  -1.1778  ( -62.43%) FAIL(5%)  [Stone2019 typed anchor]
+
+=================================================================
+VERDICT (numeric):
+  mu_p from trefoil : OPEN — C1-C4 all FAIL 5%; modes bracket (-9.4%/+11.0%)
+  C5 geo-mean       : +0.27% — [OPEN] numerology ledger, no derivation, NOT a pass
+  mu_n              : OPEN (inherited NP20: IDENTITY magnitude, assumed sign)
+  mu_n/mu_p = -2/3? : OPEN (no SDT derivation; proximity unexplained)
+  d                 : +2.61% PASS(5%) — DEGENERATE (same as rival's additivity)
+  t / h             : -6.25% / +10.10% both FAIL(5%) — block rule under-structures
+  Li-7 / Be-9       : -14.24% / -62.43% — grammar extension FAILS
+  alpha = 0         : consistent (paired cancellation) — DEGENERATE

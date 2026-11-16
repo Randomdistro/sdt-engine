@@ -1,0 +1,23 @@
+================================================================
+  TD01 — Entropy from Lattice Microstate Counting (Phase 1)
+  Author: James Christopher Tyndall, Melbourne
+================================================================
+
+TEST 1: S = k_B ln W exact on toy lattice
+  N= 4: S(10)=7.8089e-23 J/K  S(20)=1.0326e-22 J/K  (extensive in E)
+  N= 8: S(10)=1.3635e-22 J/K  S(20)=1.8910e-22 J/K  (extensive in E)
+  N=12: S(10)=1.7636e-22 J/K  S(20)=2.5203e-22 J/K  (extensive in E)
+  S(E) monotone increasing: [PASS]
+
+TEST 2: Stirling validation (large E,N)
+  ln W exact  = 195.119538
+  ln W Stirling= 199.806612  (err 2.40%) [PASS]
+
+TEST 3: Temperature from 1/T = dS/dE
+  1/T = dS/dE at E=50, N=20 => T_eff = 2.2678e+23 K
+
+================================================================
+  VERDICT: PASS — Class C (QUALIFIED)
+  S=k_B ln W: COMPUTED on toy relay-lattice counting.
+  H-theorem / arrow-of-time: PENDING (Phase 3).
+================================================================

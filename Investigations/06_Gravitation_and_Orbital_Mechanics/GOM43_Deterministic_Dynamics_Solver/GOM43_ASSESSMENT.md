@@ -167,3 +167,7 @@ Only the geometry/response primitives are promoted to
 retarded session, diagnostics and application remain at the
 investigation/release boundary.
 
+
+## Update 2026-10-16 (flyby endpoint vectors)
+
+The equal-radius heliocentric position vectors named above as missing were retrieved (JPL Horizons, `Datasets/external_audit_2026-10-16/raw/horizons_gom44/`, 20 Earth encounters) and the registered endpoint formula was executed in `GOM44_Flyby_Endpoint_Depth_Controls`. Result: inconsistent within the registered tolerance (anomalous class 4/4 and null class 9/9 outside tolerance; Spearman ρ = 0.375). The six literature rows above keep `NOT-EXECUTED` in the shipped Release dataset (mirror parity preserved); the executed record is GOM44. The endpoint branch stays `PENDING` and non-driving.

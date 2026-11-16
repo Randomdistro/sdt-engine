@@ -1,0 +1,42 @@
+== V1, V2 scanner validation ==
+[PASS] V1  token scanner on the fixed test string
+[PASS] V2  range parser on three forms
+
+== C1 Ruleset structure ==
+[PASS] C1  6 operators (found 6)
+[PASS] C1  9 axioms R1-R6, M1-M3 (found ['R1', 'R2', 'R3', 'R4', 'R5', 'R6', 'M1', 'M2', 'M3'])
+[PASS] C1  17 consecutive theorems T1-T17 (found 17)
+
+== C2 engine header banner ==
+[PASS] C2  banner Law I: theorem range (1, 2) (predicted (1, 2))
+[PASS] C2  banner Law II: theorem range None (predicted None)
+[PASS] C2  banner Law III: theorem range (3, 4) (predicted (3, 4))
+[PASS] C2  banner Law IV: theorem range (5, 7) (predicted (5, 7))
+[PASS] C2  banner Law V: theorem range (10, 17) (predicted (10, 17))
+[PASS] C2  banner Law VI: theorem range (18, 18) (predicted (18, 18))
+
+== C3 order of banners and namespaces ==
+[PASS] C3  banner lines [242, 308, 452, 595, 880, 2377] increasing
+[PASS] C3  namespace lines [248, 316, 457, 603, 895, 2395] increasing
+
+== C4 T18 ==
+[PASS] C4  T18 occurs in laws.hpp
+[PASS] C4  T18 absent from the Ruleset theorem table
+
+== C5 T8 and T9 relative to the banner ranges ==
+[PASS] C5  8 not covered, 9 not covered (covered = [1, 2, 3, 4, 5, 6, 7, 10, 11, 12, 13, 14, 15, 16, 17, 18])
+
+== C6 gravitational dilation ==
+[PASS] C6  no function named gravitational_time_dilation in laws.hpp
+[PASS] C6  depth_closure::clock_rate defined
+[PASS] C6  Ruleset T16 row names a square-root form
+
+== Reported (not criteria): Ruleset theorem names ==
+Traceback (most recent call last):
+  File "C:\Users\Jimmi\OneDrive\Desktop\sdt-engine\Textbook\examples\ch05_operator_law_map.py", line 114, in <module>
+    print(f"  {t[0]:<4} {t[1].strip():<34} {t[2].strip()}")
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Jimmi\AppData\Local\Programs\Python\Python313\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u2192' in position 62: character maps to <undefined>

@@ -1,3 +1,29 @@
+# NP16-A06 — Cosmogenic production rates (specification rewritten 2026-10-12)
+
+**Author:** J. C. Harvey, Melbourne. Rewritten at Harvey's direction: prompts carry new data; the packing sequencer is understood before grammar work. The previous specification is kept below the line.
+
+## 1. State after the reset (2026-10-10)
+**G2, PENDING_DATA.** Phases A–B are a conventional baseline (not SDT). Phase C needs SDT cross-sections from A04, whose zero-parameter route is excluded on magnitude.
+
+## 2. New data and what it teaches (2026-10-10 to 2026-10-12)
+- Waits on A04 round 2: the zero-fit geometric baseline, then the displacement-modulated occlusion law (Harvey 2026-10-11/12) for the energy dependence.
+
+## 3. Next round (registered order)
+1. A04 round 2 (supplier).
+2. Cache the AMS-02 spectrum, standard atmosphere and EXFOR/ENDF inputs.
+3. Phase C once, against measured ¹⁰Be, ¹⁴C and ²⁶Al production rates, with gate committed.
+
+## Prohibitions
+- No census over candidate predictors.
+- Grammar counts are not evidence (NP24).
+- No data substitution without a label.
+- Release is read, never edited (proposals only).
+- The word "charge" is not used.
+
+---
+
+## Previous specification (kept as written)
+
 # A06: Cosmogenic Production Rate Prediction — Investigation Prompt
 
 > **Author:** J. C. Harvey, Melbourne. **Status:** SPEC (upgrade 2026-06-27).
@@ -12,7 +38,7 @@
 2. **Why does it matter?** — Stack position / downstream blockers (see `INVESTIGATION_STACK.md`).
 3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
 4. **What would prove us wrong?** — §⑧ falsification tests with numeric triggers.
-5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN).
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN).
 
 ---
 
@@ -226,7 +252,7 @@ Key questions:
 ```markdown
 ## Pre-Run Commitments — A06
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: [0 or list each param — max per §⑤]
 - Engine namespaces: NP01 grammar, law_III nuclear occlusion, ATOMICUS rules
 - Phase thresholds (committed before run): 100%
@@ -240,7 +266,7 @@ Key questions:
 | Phase 0 sanity check fails | Fix units/engine refs; verify `laws.hpp` symbols | STOP — report blocker | Fit to target |
 | Native mechanism off > committed % | Alternative route in §④; document ADJ-### | **OPEN** or **KILL** hypothesis | RETRO-PASS |
 | `z ≥ 1` in closure formula | Weak-field break (CR10); piecewise or exponential | **OPEN** that regime | Ignore break |
-| Rivals match but SDT doesn't beat | Label **DEGENERATE** honestly | — | Claim Class A |
+| A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 | Upstream dependency missing (FLM10, etc.) | **DEFER** phase; cite dependency ID | — | Fake PASS |
 
 ### Allowed adjustments

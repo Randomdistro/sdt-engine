@@ -1,0 +1,76 @@
+﻿=================================================================
+ GD09b BARYON ALLOTMENT PER OBJECT  (arms are objects; no smooth disc carries an allotment)
+=================================================================
+N_Sun = 1.1894e+57 baryons per M_Sun ; Galaxy partition total (Sgr A* + bulge region + thick + thin + gas) = 7.8147e+67
+
+== VALIDATION ==
+  [PASS] V1 : surface-density grid integrates to N (thin 1e-3)  (-6.535e-07)
+  [PASS] V1 : surface-density grid integrates to N (gas 1e-3)  (1.181e-04)
+  [PASS] V1 : surface-density grid integrates to N (thick 1e-3)  (4.162e-07)
+  [PASS] V2 : thin total conserved with overdensity + renormalisation (1e-6)  (-4.374e-14)
+  [PASS] V2 : gas total conserved with overdensity + renormalisation (1e-6)  (5.618e-14)
+  [PASS] V3 : per-arm +-2 sigma footprint: grid vs Monte-Carlo (3%)  (1.564e-02)
+  [PASS] V3 : per-arm +-1 sigma footprint: grid vs Monte-Carlo (3%)  (2.436e-02)
+
+== ALLOTMENT PER OBJECT (N = M/M_Sun x N_Sun) ==
+object                                       group        N baryons      share  relation               source
+Sgr A* (4.2e6 Msun, mass-equivalent)         nucleus      4.995e+63    0.0064%  additive               BH&G 2016 via GD09
+Sgr A* (4.28e6 Msun, Gillessen+2017)         nucleus      5.091e+63    0.0065%  alternative            Gillessen+2017 combined fit
+S star S1 (12.4 Msun)                        S stars      1.475e+58    0.0000%  nested in NSC region   Habibi+2017 Table 2
+S star S2 (13.6 Msun)                        S stars      1.618e+58    0.0000%  nested in NSC region   Habibi+2017 Table 2
+S star S4 (12.2 Msun)                        S stars      1.451e+58    0.0000%  nested in NSC region   Habibi+2017 Table 2
+S star S6 (9.2 Msun)                         S stars      1.094e+58    0.0000%  nested in NSC region   Habibi+2017 Table 2
+S star S7 (8.4 Msun)                         S stars      9.991e+57    0.0000%  nested in NSC region   Habibi+2017 Table 2
+S star S8 (13.2 Msun)                        S stars      1.570e+58    0.0000%  nested in NSC region   Habibi+2017 Table 2
+S star S9 (8.2 Msun)                         S stars      9.753e+57    0.0000%  nested in NSC region   Habibi+2017 Table 2
+S star S12 (7.6 Msun)                        S stars      9.039e+57    0.0000%  nested in NSC region   Habibi+2017 Table 2
+S stars, eight with measured masses (84.8 Msun) S stars      1.009e+59    0.0000%  nested in NSC region   Habibi+2017 Table 2
+S/orbit sample, 40 stars, upper bound 14 Msun each S stars      6.337e+59    0.0000%  bound, nested          Gillessen+2017 count; masses of 32 not measured
+Nuclear star cluster                         nucleus      2.141e+64    0.0274%  nested in bulge region BH&G 2016 via GD09
+Nuclear stellar disc                         nucleus      1.665e+66    2.1308%  nested in bulge region BH&G 2016 via GD09
+Bulge region (stellar + gas)                 bulge        1.974e+67   25.2648%  additive               Portail+2015 via GD09
+Long bar (thin + super-thin)                 bar          1.225e+67   15.6763%  nested in thin-disc pool Wegg+2015 via GD09
+3-kpc(N), +-2 sigma footprint                arm          1.729e+65    0.2212%  nested in thin+gas pool GD08 ridge, GD09 profiles, K = 1.32
+3-kpc(N), +-1 sigma footprint                arm          6.037e+64    0.0772%  within the above       same
+3-kpc(N), overdensity excess                 arm          2.570e+64    0.0329%  within the above       same
+Norma, +-2 sigma footprint                   arm          5.254e+65    0.6723%  nested in thin+gas pool GD08 ridge, GD09 profiles, K = 1.32
+Norma, +-1 sigma footprint                   arm          2.800e+65    0.3583%  within the above       same
+Norma, overdensity excess                    arm          8.742e+64    0.1119%  within the above       same
+Sct-Cen, +-2 sigma footprint                 arm          1.750e+66    2.2397%  nested in thin+gas pool GD08 ridge, GD09 profiles, K = 1.32
+Sct-Cen, +-1 sigma footprint                 arm          9.180e+65    1.1748%  within the above       same
+Sct-Cen, overdensity excess                  arm          2.903e+65    0.3715%  within the above       same
+Sgr-Car, +-2 sigma footprint                 arm          1.614e+66    2.0657%  nested in thin+gas pool GD08 ridge, GD09 profiles, K = 1.32
+Sgr-Car, +-1 sigma footprint                 arm          8.309e+65    1.0632%  within the above       same
+Sgr-Car, overdensity excess                  arm          2.667e+65    0.3412%  within the above       same
+Local, +-2 sigma footprint                   arm          5.684e+65    0.7273%  nested in thin+gas pool GD08 ridge, GD09 profiles, K = 1.32
+Local, +-1 sigma footprint                   arm          2.847e+65    0.3643%  within the above       same
+Local, overdensity excess                    arm          9.208e+64    0.1178%  within the above       same
+Perseus, +-2 sigma footprint                 arm          1.657e+66    2.1199%  nested in thin+gas pool GD08 ridge, GD09 profiles, K = 1.32
+Perseus, +-1 sigma footprint                 arm          8.650e+65    1.1069%  within the above       same
+Perseus, overdensity excess                  arm          2.733e+65    0.3497%  within the above       same
+Outer, +-2 sigma footprint                   arm          1.060e+66    1.3560%  nested in thin+gas pool GD08 ridge, GD09 profiles, K = 1.32
+Outer, +-1 sigma footprint                   arm          5.362e+65    0.6862%  within the above       same
+Outer, overdensity excess                    arm          1.728e+65    0.2212%  within the above       same
+All arms, +-2 sigma footprints               arm          7.347e+66    9.4021%  nested in thin+gas pool sum of the arm rows
+All arms, +-1 sigma footprints               arm          3.775e+66    4.8308%  nested in thin+gas pool sum of the arm rows
+All arms, overdensity excess                 arm          1.208e+66    1.5462%  nested in thin+gas pool sum of the arm rows
+All arms, overdensity excess, thin disc (stellar) only arm          9.376e+65    1.1998%  within the excess above same, thin share
+All arms, K-band luminosity route, 7% of stellar disc arm          3.413e+66    4.3681%  independent route, upper bound (equal M/L) Drimmel & Spergel 2001: arms = 7% of K luminosity
+All arms, K-band luminosity route, 10% of stellar disc arm          4.876e+66    6.2401%  independent route, upper bound (equal M/L) Drimmel & Spergel 2001: 10% if complete over 3/4 of the Galaxy
+   ratio model stellar excess / luminosity route: 0.27 (7%) , 0.19 (10%)
+UNALLOCATED thin + gas, outside every +-2 sigma arm footprint unalloc.     4.391e+67   56.1949%  additive               pool minus arms; not assigned to any object
+UNALLOCATED thin + gas, outside every +-1 sigma arm footprint unalloc.     4.749e+67   60.7662%  alternative            pool minus arms; not assigned to any object
+Thick disc (not an arm member)               unalloc.     7.136e+66    9.1318%  additive               BH&G 2016 via GD09
+
+per-arm geometry (measured + near-extended ridge): length, mean sigma_in, baryons per kpc of ridge (2 sigma), excess share of the footprint
+  3-kpc(N)  length   0.19 kpc (measured  0.19) ; mean sigma_in 0.180 kpc ; 9.334e+65 baryons per kpc ; excess/footprint(2s) = 14.867%
+  Norma     length   3.68 kpc (measured  3.68) ; mean sigma_in 0.125 kpc ; 1.429e+65 baryons per kpc ; excess/footprint(2s) = 16.639%
+  Sct-Cen   length   8.26 kpc (measured  8.26) ; mean sigma_in 0.210 kpc ; 2.118e+65 baryons per kpc ; excess/footprint(2s) = 16.588%
+  Sgr-Car   length  10.19 kpc (measured 10.19) ; mean sigma_in 0.271 kpc ; 1.585e+65 baryons per kpc ; excess/footprint(2s) = 16.519%
+  Local     length   6.10 kpc (measured  6.10) ; mean sigma_in 0.305 kpc ; 9.324e+64 baryons per kpc ; excess/footprint(2s) = 16.200%
+  Perseus   length  21.62 kpc (measured 21.62) ; mean sigma_in 0.349 kpc ; 7.664e+64 baryons per kpc ; excess/footprint(2s) = 16.495%
+  Outer     length  18.03 kpc (measured 18.03) ; mean sigma_in 0.630 kpc ; 5.878e+64 baryons per kpc ; excess/footprint(2s) = 16.312%
+
+thin+gas pool 5.1262e+67 ; arms +-2s 7.3474e+66 (14.33% of pool) ; arms +-1s 3.7751e+66 (7.36%) ; excess 1.2083e+66 (2.357% of pool)
+
+wrote object_allotment_measured.csv

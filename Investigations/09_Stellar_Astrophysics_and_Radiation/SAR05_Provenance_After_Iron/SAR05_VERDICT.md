@@ -1,5 +1,7 @@
 # SAR05 — VERDICT: Provenance After Iron
 
+> **Re-adjudicated 2026-10-03 (origin rule, gateway §3.8):** single-event DEGENERATE → **not discriminating (single event)**, vocabulary only. See `Investigations/ADJUDICATION_REGISTER.md` §R-2026-10-03. Original text below is unchanged.
+
 > **Run class: DIRECT** (main session, no agents), 2026-07-26. Replaces the prior "automated
 > execution" verdict — same tool, re-run and re-checked by hand; the agent-provenance is removed but
 > the result stands because it reproduces. **SPEC:** J. C. Harvey, Melbourne. Tool: `sar05_provenance.py`

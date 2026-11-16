@@ -10,7 +10,7 @@ This directory contains the complete PPT09 investigation, proving analytically t
 - **Only W=1 and W=3 particles exist** in nature (electron and proton)
 
 **Classification**: **CLASS A** (Analytical Proof Complete)  
-**Status**: RESOLVED ✓  
+**Status**: RETRACTED → classification COMPUTED, dynamical stability OPEN [corrected 2026-10-05]  
 **Date**: June 2026
 
 ---

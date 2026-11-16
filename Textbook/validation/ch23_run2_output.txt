@@ -1,0 +1,39 @@
+
+== V0 helper validation (known answers) ==
+[PASS] V0    integrate sin over [0, pi] = 2                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 3.331e-16 (tol 1e-13)
+[PASS] V0    integrate x^7 over [0, 1] = 1/8                                                value 1.250000000000e-01 expected 1.250000000000e-01 err 2.220e-15 (tol 1e-14)
+[PASS] V0    integrate exp over [-1, 1] = e - 1/e                                           value 2.350402387288e+00 expected 2.350402387288e+00 err 5.668e-16 (tol 1e-13)
+[PASS] V0    root of cos x - x = 0.739085133215161                                          value 7.390851332152e-01 expected 7.390851332152e-01 err 2.253e-15 (tol 1e-13)
+[PASS] V0    root of x^2 - 2 on [1, 2] = sqrt 2                                             value 1.414213562373e+00 expected 1.414213562373e+00 err 2.983e-15 (tol 1e-13)
+[PASS] V0    compensated sum 1 + 10^6 x 1e-16 = 1 + 1e-10                                   value 1.000000000100e+00 expected 1.000000000100e+00 err 0.000e+00 (tol 1e-15)
+
+== V1 binding energies from the stored CODATA masses ==
+[PASS] V1    B_d = 2.224566 MeV                                                             value 2.224566341989e+00 expected 2.224566000000e+00 err 1.537e-07 (tol 1e-06)
+[PASS] V1    B_t = 8.481798 MeV                                                             value 8.481796624787e+00 expected 8.481798000000e+00 err 1.621e-07 (tol 1e-06)
+[PASS] V1    B_h equals 2 m_p + m_n - m_h from the stored masses (nuclear-mass form)        value 7.717989649678e+00 expected 7.717989649678e+00 err 0.000e+00 (tol 1e-12)
+       B_alpha from the published nuclear mass: 28.295616 MeV ; stored typed value: 28.296000 MeV ; difference 3.84e-04 MeV (1.4e-05 relative; reported, not a criterion)
+       B_h (nuclear-mass form) = 7.717990 MeV
+
+== T1 registered test of H_c: B = eps E_contacts with one constant eps ==
+       d    : B =   2.2246 MeV ; contacts 1 ; eps = B/E = 2.2246 MeV ; B/A = 1.1123 MeV
+       t    : B =   8.4818 MeV ; contacts 2 ; eps = B/E = 4.2409 MeV ; B/A = 2.8273 MeV
+       3He  : B =   7.7180 MeV ; contacts 2 ; eps = B/E = 3.8590 MeV ; B/A = 2.5727 MeV
+       4He  : B =  28.2960 MeV ; contacts 4 ; eps = B/E = 7.0740 MeV ; B/A = 7.0740 MeV
+       (eps_max - eps_min)/mean = 1.1149 ; acceptance limit 0.10
+[PASS] T1    H_c is rejected (spread exceeds 10%) as registered
+
+== T2 separation energies as finite differences ==
+       S_n(d) = 2.224566 ; S_n(t) = B_t - B_d = 6.257230 ; S_n(4He) = B_a - B_h = 20.578010 ; S_p(4He) = B_a - B_t = 19.814203 ; S_p(3He) = B_h - B_d = 5.493423 MeV
+[PASS] T2    S_n(d): mass form equals B_d                                                   value 2.224566341989e+00 expected 2.224566341989e+00 err 0.000e+00 (tol 1e-12)
+[PASS] T2    S_n(t): mass form equals B_t - B_d                                             value 6.257230282798e+00 expected 6.257230282798e+00 err 1.419e-16 (tol 1e-09)
+[PASS] T2    mirror identity B_t - B_h = (m_n - m_p) c^2 - (m_t - m_h) c^2                  value 7.638069751088e-01 expected 7.638069751086e-01 err 2.634e-13 (tol 1e-09)
+       energy per added contact: d (0 -> 1): 2.2246 ; t from d (1 -> 2): 6.2572 ; 4He from 3He (2 -> 4): 10.2890 MeV per contact
+
+== T3 bulk radius law and the two radius definitions ==
+[PASS] T3    eta = pi/sqrt(18) = 0.7404805                                                  value 7.404804896931e-01 expected 7.404805000000e-01 err 1.392e-08 (tol 1e-07)
+[PASS] T3    R(8A)/R(A) = 2                                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 0.000e+00 (tol 1e-12)
+[PASS] T3    R(1) = R_p eta^(-1/3)                                                          value 9.300321624752e-16 expected 9.300321624752e-16 err 0.000e+00 (tol 1e-12)
+       A=4: bulk-law radius 1.4763 fm ; contact diameter 2 R_p = 1.6828 fm ; stored measured R_He = 1.6755 fm
+       ratios to R_He: bulk 0.8811 ; contact diameter 1.0044
+
+ALL CRITERIA MET: 0 failure(s)

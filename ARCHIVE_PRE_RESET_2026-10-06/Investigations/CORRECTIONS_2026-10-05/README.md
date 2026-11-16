@@ -1,0 +1,10 @@
+# Correction pass, 2026-10-05
+
+Follows `../AUDIT_ALL_INVESTIGATIONS_2026-10-05/ERRORED_INVESTIGATIONS.md` (138 errors). Instruction: correct all of them while staying inside SDT structure (no G, no GM; mass only as baryon count with its spatial resistance; no fields or wavefunctions as primitives).
+
+- `ledger_bulk.csv` and `ledger.csv`: per-folder status and correction. The full table with problem, correction and what was done is in the audit folder (`ERRORED_INVESTIGATIONS.md` / `.csv`).
+- `PROPOSALS_awaiting_approval.md`: renames, canon items and model decisions that need the Operator's word; none was done.
+- Method: (1) each folder received a dated "Audit correction 2026-10-05" block at the end of its `PROMPT.md` stating finding, correction, and a status of ANNOTATED, RULE RECORDED or OWED; (2) where a fix could be done for real it was: new or corrected tools with validation before use (GD06 lensing eikonal integrator, OP01 v2, PM03 evolved pulse, GD03 v2, GD04 v2, PM04 v2 with a portable normal generator), compiled output for CR04, 24 measurable gaps written, data added with provenance (PREM table, BOSS DR12 BAO Table 3), dead paths fixed, statuses and banners reconciled, the NP35 gates re-scored, the NP24 count reproduced, the APS13 prompt restored from git history; (3) two findings of the audit were partly overturned on verification (APS04 withdrawn; GOM_DAT9 and NSEQ15 amended) and the audit entries were corrected.
+- Nothing was deleted, nothing in `Engine/`, `Laws/` or `Release/` was edited, and no earlier result or tool was removed: replaced files stay beside their replacements, labelled superseded in the verdict or prompt. Nothing was committed.
+- Mass inputs: the galactic tools convert catalogue masses to baryon counts at the engine entry (N_b = M/m_p), which is permitted; GOM06 multiplies a koppa length by catalogue masses (SHARED-INPUT, owed: derive the chirp length from measured f(t)).
+- PM04 ensemble (six seeds) finished: the P2 spread across seeds exceeds every gate, so single-run P2 results (the earlier +61.8% FAIL and −6.8% PASS) carry no evidential weight; recorded in `PM04_VERDICT.md`.

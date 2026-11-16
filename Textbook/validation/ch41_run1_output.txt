@@ -1,0 +1,38 @@
+
+== V0 helper validation (known answers) ==
+[PASS] V0    integrate sin over [0, pi] = 2                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 3.331e-16 (tol 1e-13)
+[PASS] V0    integrate x^7 over [0, 1] = 1/8                                                value 1.250000000000e-01 expected 1.250000000000e-01 err 2.220e-15 (tol 1e-14)
+[PASS] V0    integrate exp over [-1, 1] = e - 1/e                                           value 2.350402387288e+00 expected 2.350402387288e+00 err 5.668e-16 (tol 1e-13)
+[PASS] V0    root of cos x - x = 0.739085133215161                                          value 7.390851332152e-01 expected 7.390851332152e-01 err 2.253e-15 (tol 1e-13)
+[PASS] V0    root of x^2 - 2 on [1, 2] = sqrt 2                                             value 1.414213562373e+00 expected 1.414213562373e+00 err 2.983e-15 (tol 1e-13)
+[PASS] V0    compensated sum 1 + 10^6 x 1e-16 = 1 + 1e-10                                   value 1.000000000100e+00 expected 1.000000000100e+00 err 0.000e+00 (tol 1e-15)
+
+== V1 log-derivative known answers ==
+[PASS] V1    d ln e^{2S}/dS = 2                                                             value 2.000000000000e+00 expected 2.000000000000e+00 err 1.471e-13 (tol 1e-08)
+[PASS] V1    d ln S^3/dS at S = 2 is 3/2                                                    value 1.500000000000e+00 expected 1.500000000000e+00 err 1.366e-13 (tol 1e-08)
+
+== T1 reparameterisation: ratios invariant, derivatives transform by 1/f' ==
+[PASS] T1    ratio Q(S)/Q(S0) computed in S' equals the original, worst relative            value 2.220446049250e-16 expected 0.000000000000e+00 err 2.220e-16 (tol 1e-14)
+[PASS] T1    d ln Q/dS' = (d ln Q/dS)/f', worst relative                                    value 5.515143897128e-12 expected 0.000000000000e+00 err 5.515e-12 (tol 1e-07)
+
+== T2 compatibility relations among log-derivatives ==
+[PASS] T2    a_c = a_Pl - a_Pt, worst deviation                                             value 3.145816940275e-13 expected 0.000000000000e+00 err 3.146e-13 (tol 1e-07)
+[PASS] T2    2 a_k = a_r - a_Om, worst deviation                                            value 2.445821323249e-13 expected 0.000000000000e+00 err 2.446e-13 (tol 1e-07)
+[PASS] T2    a_v = a_c - a_k, worst deviation                                               value 3.514966095963e-13 expected 0.000000000000e+00 err 3.515e-13 (tol 1e-07)
+
+== T3 compatibility leaves constitutive freedom ==
+[PASS] T3    routes A and B give the same c = e^{S/2}, worst relative difference            value 3.330669073875e-16 expected 0.000000000000e+00 err 3.331e-16 (tol 1e-14)
+[PASS] T3    a_Pl differs between the routes (1 and 2)                                      value 1.000000000000e+00 expected 1.000000000000e+00 err 8.882e-16 (tol 1e-07)
+
+== T4 charts: logarithm fails at zeros, the signed chart does not add ==
+       logarithmic chart fails at 501 of 1000 points ; sinh^-1 chart finite at 1000
+[PASS] T4    the logarithmic chart fails at some points and the sinh^-1 chart at none
+[PASS] T4    ln(AB) = ln A + ln B, worst deviation                                          value 2.341876692569e-16 expected 0.000000000000e+00 err 2.342e-16 (tol 1e-14)
+       largest violation of additivity for sinh^-1: 1.4884
+[PASS] T4    sinh^-1 additivity is violated by more than 1e-2 somewhere
+
+== T5 Sz spacing is not a law ==
+       coefficient of variation of the log-derivative: in S 3.63e-13 ; in S' = S^2 0.416
+[PASS] T5    constant in S (to 1e-8) and not constant in S' (variation above 0.3)
+
+ALL CRITERIA MET: 0 failure(s)

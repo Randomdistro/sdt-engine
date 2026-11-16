@@ -1,0 +1,40 @@
+
+== V1 elimination routine on small known matrices ==
+[PASS] V1   rank of [[1,2,3],[4,5,6],[7,8,9]] is 2
+[PASS] V1   its null space is spanned by (1,-2,1)
+[PASS] V1   a 3x5 matrix whose third row is the sum of the first two has rank 2 (nullity 3)
+[PASS] V1   a 3x5 matrix of rank 3 has nullity 2
+[PASS] V1   [[1/2,1/3],[1/4,1/6]] has exact rank 1
+       matrix 63 x 107; stored rank 63; stored null basis 44 x 107
+
+== T1 exact rank and nullity ==
+       exact rank 63; nullity 44
+[PASS] T1   exact rank equals the stored rank 63
+[PASS] T1   rank equals the number of rows (63)
+[PASS] T1   nullity is 44
+
+== T2 the stored null basis ==
+[PASS] T2   A B^T = 0 exactly for the stored null basis
+[PASS] T2   the stored null basis has rank 44 (independent rows, spans the null space)
+[PASS] T2   the instrument's own null space has dimension 44
+[PASS] T2   the stored basis and the instrument's basis span the same space
+
+== T3 independence of every relation ==
+       relations whose removal leaves the rank unchanged: 0
+[PASS] T3   removing any one of the 63 relations lowers the rank to 62
+
+== T4 pairwise projections ==
+       non-zero counts: pairwise 5, three or more 58, one 0; max 5
+       rank of the pairwise sub-matrix 5; relations not supplied by pairwise rows: 58
+[PASS] T4   at least one relation has three or more non-zero entries
+[PASS] T4   63 - rank(pairwise) > 0
+
+== T5 adding information ==
+[PASS] T5   appending the sum of two existing rows leaves the rank at 63
+       columns for which x_j = 0 adds information (rank 64): 107 of 107; already determined by the inventory: 0
+       RECORDED REJECTION (run 1 criterion kept): the registered statement that some column is already determined is not found: the unit relation raises the rank for every column
+[PASS] T5   the registered statement (some column is already determined, i.e. 0 < raises < 107) is rejected
+[PASS] T5   no single quantity is determined by the inventory (the rank rises for all 107 columns)
+[PASS] T5   an integer row 1,2,...,7,1,2,... raises the rank to 64
+
+ALL CRITERIA MET: 0 failure(s)

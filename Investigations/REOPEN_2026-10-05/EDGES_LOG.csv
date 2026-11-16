@@ -1,0 +1,27 @@
+supplier,consumer,action,justification_file_line,note,date
+PPT01,NP04A,add,05_Nuclear_Physics/NP04_Neutron_Genesis_to_Tritium/NP04A_Neutron_Decay_Ledger_and_Tritium_Keystone/np04a_decay_ledger.cpp:77,required: knot factor sqrt(q/p) of the (2;3) closure enters m_p/m_e = sqrt(3/2)(a_p/a_e)^3,2026-10-05
+PPT01,NP15,add,05_Nuclear_Physics/NP15_Nuclear_Magnetic_Moments_from_Vortex/np15_magnetic_moments.cpp:31-45,required: v_T and v_P of (2;3) and R/a=sqrt(3/2) set candidates C2 C3 C4,2026-10-05
+PPT01,FLM05,add,01_Foundations_and_Lattice_Mechanics/FLM05_Lattice_Pulse_Propagation/flm05_torus_derives_mass.cpp:85-93,required: (2;3) mode velocities,2026-10-05
+PPT01,PPT02,add,02_Particle_Physics_and_Topology/PPT02_Fine_Structure_from_Topology/ppt02_fine_structure.cpp:9-17,required: (1;1) gives v_P/v_T=1 so alpha is not that ratio,2026-10-05
+PPT01,FLM11,add,01_Foundations_and_Lattice_Mechanics/FLM11_Tape_Measure_and_Ruler_Count/flm11_ruler_count.py:43-44,required: PQ_ELECTRON and PQ_PROTON mode speeds,2026-10-05
+PPT01,PPT09,add,02_Particle_Physics_and_Topology/PPT09_Winding_Number_Stability/PPT09_TREFOIL_STABILITY_PROOF.md:66-73,required: (2;3) mode numbers used in the stability proof,2026-10-05
+FLM01,FLM11,downgrade-to-cross-check,01_Foundations_and_Lattice_Mechanics/FLM11_Tape_Measure_and_Ruler_Count/PROMPT.md,mention only,2026-10-05
+FLM01,(declared consumers beyond FLM11),remove,state28d.hpp:174-180;204-209,constants dormant; no compiled target calls them,2026-10-05
+FLM07,FLM08,add,"FLM08 R2 D2: coordination 4 = W+1 selected independently by FLM07 minimum-engaged-resistance test (laws.hpp Law VI header)",identification-premise edge only; geometry does not depend on it,2026-10-05
+FLM08,FD05,confirm,FD05/PROMPT.md:106;141;216,required: bond directions for discrete <cos^2>,2026-10-05
+FLM08,TD03,confirm,TD03/PROMPT.md:117,required: tetrahedral bond set,2026-10-05
+FLM07(Part A),FLM15-inf(R4),add,FLM15_ASSESSMENT.md R4_LOCKED_WAKE,kernel f_lock=clip(k) V_lock=8 pi r^3/7 derived from FLM07 glancing equality,2026-10-05
+FLM15-inf(R4),FLM07(Part E),add,FLM07/INVESTIGATION.md Part E,sublattice selection priced by the FLM15 kernel: cross-folder loop A->kernel->E; E is entailed by volume monotonicity (FLM07 R2 D1),2026-10-05
+FLM07,PPT06,reclass,FLM07 R2 D7,"PPT06 T=3 R_p/lam_p and v=c/k(R_p) are functions of measured R_p alone; neighbour witnesses NP15/NP20/NP27 not independent of the FLM07 R_p relation",2026-10-05
+PPT01,PPT06,remove,PPT06/PROMPT.md dependency map,PPT06 headline quantities do not use the PPT01 mode partition,2026-10-05
+FLM15-inf,APS03,add,laws.hpp:630-672 convergence_floor,required: 6/7 engaged fraction and 1/3 gradient fraction (B34),2026-10-06
+FLM15-inf,FD02,add,laws.hpp:690-700 monatomic relay-lock transport,required: reduced collision measure (6/7)(2b)^2 (B16),2026-10-06
+FLM02,FLM05,confirm,FLM05/PROMPT.md dependency map,required: Newton I premise restated (node-level exact only on centrosymmetric lattices),2026-10-06
+FLM02,FD01,confirm,FD01/PROMPT.md:Method cites FLM02 GPI,required,2026-10-06
+FLM02,QM01,confirm,QM01/PROMPT.md Upstream FLM02 (GPI),required,2026-10-06
+FLM05,PPT05,add,FLM05 R2 D2,proton trefoil major radius is 8.414e-16 / 3.325e-16 / 1.214e-16 m in FLM05 / PPT01 / laws.hpp confinement: reconcile at PPT05 before use,2026-10-06
+FLM05,PPT17,add,FLM05 R2 D3,V_disp independent of the mass is the registered route (tube-volume conservation); torus volume gives mass 1e11-1e13 too large,2026-10-06
+PPT01,PPT05,downgrade-to-cross-check,PPT05 R2 D1,declared required in the stack; the tool does not use PPT01 closure (partition 1/3:2/3 and R=lam/sqrt3),2026-10-06
+PPT05,QM03,confirm,QM03/PROMPT.md Upstream PPT05 (confinement = barrier wall),required: sigma depends on the chosen R,2026-10-06
+PPT05,PPT06,confirm,PPT06 R2 D1/T3,declared upstream; PPT06 T and 1/3:2/3 partition inherit the PPT05 trefoil geometry (not PPT01 closure),2026-10-06
+PPT01,PPT06,downgrade-to-cross-check,PPT06 R2 T3,PPT06 uses no PPT01 closure; with PPT01 rules T = 1.85-4.80 instead of 12,2026-10-06

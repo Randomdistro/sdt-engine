@@ -1,0 +1,27 @@
+CR09 blank-slate run 1, Route B (pre-registered 2026-10-08)
+===========================================================
+
+[V1] exact recovery of (M, a, b) = (23.7, 0.14, 3.1): (23.7000000000, 0.1400000000, 3.1000000000) -> met
+[V2] shape recovery from synthetic n = 0.66, noise 0.10 mag, 500 points: n = 0.66 -> met
+[V3] rows read: 1701 (expected 1701) ; Hubble-flow selection (IS_CALIBRATOR = 0, zHD > 0.01): 1580 -> met
+
+VALIDATIONS: met
+
+[rule] local subset 0.01 < z < 0.08: N = 606, weighted rms = 0.1591 mag, <mBERR^2>^(1/2) = 0.0438 mag -> sigma_int = 0.1530 mag (fit: M = 23.8691, a = -0.1403, b = 2.7477)
+
+[T1] Hubble-flow sample N = 1580, dof = N - 4 = 1576 (n, M, a, b fitted)
+     best n = 0.98 : chi2 = 1592.22, chi2/dof = 1.0103 ; M = 24.0244, a = -0.1360, b = 2.5754
+     shape scan chi2/dof: n = 0.50: 230.4780 ; n = 0.66: 60.1022 ; n = 1.00: 1.0615 ; n = 2.00: 63.9472 ; n = 4.00: 139.7884 ; 
+     (for the fixed-n entries dof = N - 3)
+
+[T2] binned residuals at the best n (equal counts, 8 bins): z range, N, mean residual [mag], standard error, mean/se
+     z 0.0102 - 0.0224 : N = 197  mean = +0.0632  se = 0.0116  (+5.43 se)
+     z 0.0224 - 0.0327 : N = 198  mean = -0.0157  se = 0.0115  (-1.36 se)
+     z 0.0327 - 0.0744 : N = 197  mean = -0.0118  se = 0.0116  (-1.02 se)
+     z 0.0745 - 0.1852 : N = 198  mean = -0.0075  se = 0.0114  (-0.65 se)
+     z 0.1852 - 0.2586 : N = 197  mean = -0.0257  se = 0.0115  (-2.23 se)
+     z 0.2586 - 0.3382 : N = 198  mean = -0.0148  se = 0.0116  (-1.28 se)
+     z 0.3385 - 0.5102 : N = 197  mean = +0.0027  se = 0.0115  (+0.23 se)
+     z 0.5110 - 2.2614 : N = 198  mean = +0.0106  se = 0.0115  (+0.93 se)
+
+     bins off by more than 3 se: 1 ; registered reading: STRUCTURED RESIDUAL

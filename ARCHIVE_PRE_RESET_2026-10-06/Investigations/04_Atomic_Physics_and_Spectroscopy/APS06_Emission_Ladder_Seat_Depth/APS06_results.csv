@@ -1,0 +1,62 @@
+# SECTION: seat_ladder (P1)
+seat_class,system,s_eV,s_tag,pred_band,obs_band
+molecular (rot/vib),H2O bending / CO stretch (vibrational quantum),1.000000e-01,OBSERVED-ANCHOR,microwave-IR,microwave-IR
+"outer-shell electronic (H, Z=1)","hydrogen n=1 (Lyman limit, deepest neutron-free seat)",1.360569e+01,DERIVED,visible-UV (eV),UV (91 nm Lyman limit)
+"inner-shell electronic (Pb, Z=82)",lead K-shell (n=1) refill - still an ELECTRON seat,9.148468e+04,DERIVED,hard X-ray (keV),hard X-ray (Pb Ka ~ 75-88 keV)
+nuclear,Co-60 nuclear de-excitation (1.332 MeV gamma),1.332000e+06,OBSERVED-ANCHOR,gamma (keV-MeV),gamma (1.173 + 1.332 MeV)
+
+# SECTION: xray_climb (P2)
+Z,elem,E_ceiling_eV,band,requires
+1,H,1.360569e+01,eV (UV),1 proton (H)
+2,He,5.442277e+01,eV (UV),more protons -> (past H) neutrons to bind
+6,C,4.898050e+02,eV (UV),more protons -> (past H) neutrons to bind
+26,Fe,9.197449e+03,keV (X-ray),more protons -> (past H) neutrons to bind
+82,Pb,9.148468e+04,keV (X-ray),more protons -> (past H) neutrons to bind
+
+# SECTION: proton_only_wedge_scan (P2/P3)
+Z,A,N,n_d,n_t,alpha_valid,note
+1,1,0,0,-1,False,H-1: only bound N=0 nuclide; NO nuclear gamma (13.6 eV electronic)
+2,2,0,2,-2,False,He-2 diproton: MEASURED UNBOUND (OBSERVED-ANCHOR)
+3,3,0,4,-3,False,
+4,4,0,6,-4,False,
+5,5,0,8,-5,False,
+6,6,0,10,-6,False,
+7,7,0,12,-7,False,
+8,8,0,14,-8,False,
+9,9,0,16,-9,False,
+10,10,0,18,-10,False,
+
+# SECTION: nuclide_gamma_survey (P3)
+Z,A,N,n_d,n_t,gamma_keV,neutron_present,is_gamma_emitter,counterexample,note,citation
+26,57,31,19,5,14.4129,True,True,False,Fe-57* Mossbauer line (from Co-57 EC),NNDC A=57
+26,57,31,19,5,122.0600,True,True,False,Fe-57* 122 keV (from Co-57 EC source),NNDC A=57
+28,60,32,22,4,1332.5000,True,True,False,Ni-60* 1332.5 (+1173.2) keV (from Co-60),NNDC A=60
+56,137,81,29,25,661.6600,True,True,False,Ba-137* 661.66 keV (from Cs-137 beta-),NNDC A=137
+56,133,77,33,21,356.0100,True,True,False,Ba-133* 356 keV (from Ba-133 EC),NNDC A=133
+10,22,12,6,2,1274.5000,True,True,False,Ne-22* 1274.5 keV (from Na-22 beta+),NNDC A=22
+38,90,52,22,14,0.0000,True,False,False,Sr-90 pure beta- : NO gamma (control),NNDC A=90
+43,99,56,28,13,140.5100,True,True,False,Tc-99m isomeric transition (IT),NNDC A=99
+18,40,22,12,4,1460.8000,True,True,False,Ar-40* 1460.8 keV (from K-40 EC),NNDC A=40
+93,237,144,40,51,59.5400,True,True,False,Np-237* 59.54 keV (from Am-241 alpha),NNDC A=237/241
+54,131,77,29,23,364.4900,True,True,False,Xe-131* 364.5 keV (from I-131 beta-),NNDC A=131
+82,208,126,36,44,2614.5000,True,True,False,Pb-208* 2614.5 keV (from Tl-208 beta-),NNDC A=208
+92,235,143,39,51,185.7000,True,True,False,U-235 185.7 keV (alpha decay + IT),NNDC A=235
+94,239,145,41,51,129.3000,True,True,False,Pu-239 129.3 keV (alpha decay gamma),NNDC A=239
+60,144,84,34,24,696.5000,True,True,False,Nd-144* 696.5 keV (from Pr-144 beta-),NNDC A=144
+12,26,14,8,2,1808.7000,True,True,False,Mg-26* 1808.7 keV (from Al-26 beta+/EC),NNDC A=26
+12,24,12,10,0,1368.6000,True,True,False,Mg-24* 1368.6 keV (from Na-24 beta-),NNDC A=24
+30,68,38,20,8,1077.0000,True,True,False,Zn-68* 1077 keV (from Ga-68 beta+),NNDC A=68
+48,111,63,31,15,171.3000,True,True,False,Cd-111* 171.3 keV (from In-111 EC),NNDC A=111
+
+# SECTION: summary
+R_inf_ppm,1.9460314391045034e-06
+ceiling_eV,13.605693122967756
+ceiling_ppm,1.928890774476339e-06
+wedge_counterexamples,0
+gamma_emitters,18
+neutron_counterexamples,0
+overlap_ratio,1.0037086985839514
+p1_pass,True
+p2_pass,True
+p3_pass,True
+p4_pass,True

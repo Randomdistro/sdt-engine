@@ -1,0 +1,42 @@
+OP02 — Reflection & Fresnel from relay impedance (J. C. Harvey, 2026-07-03)
+Machinery only: displacements, impulse fluxes, arrival-time registers.
+Media are MEASURED-INPUT descriptors: n1=1.0 (air), n2=1.5 (glass)
+
+Phase 1 — normal-incidence amplitude from impulse continuity
+  air->glass  r = -0.2000000000   R = 0.0400000000  (committed gate 0.0400 +/- 0.001)
+  [PASS] P1-R  glass reflectance
+  [PASS] P1-sign-hard  impulse inverts on the denser-closure step (the 'pi flip')
+  glass->air  r = +0.2000000000  (softer closure: no inversion expected)
+  [PASS] P1-sign-soft  no inversion when n2<n1
+  [PASS] P1-stokes  reverse-direction r' = -r emerges from the same system (not imposed)
+
+Phase 2 — oblique s/p from the transverse-projection split (Law V budget)
+  max |r_solved - r_Fresnel| over 0..89.9 deg:  s: 0.000e+00   p: 0.000e+00
+  [PASS] P2-s  solved s-branch vs OBSERVED Fresnel column
+  [PASS] P2-p  solved p-branch vs OBSERVED Fresnel column
+  Brewster (root of solved r_p) = 56.309932 deg   arctan(n2/n1) = 56.309932 deg   |r_p(thB)| = 6.67e-17
+  [PASS] P2-Brewster  true zero at arctan(n2/n1)
+
+Phase 3 — relay-count conservation and quarter-wave AR by explicit path summation
+  max |R+T-1| over all angles, both branches: 4.441e-16  (committed gate 1e-12)
+  [PASS] P3-RT  impulse-flux ledger closes; nothing external smuggled in
+  AR minimum (path sum, 400 bounces): n_c = 1.2245, R_min = 3.998e-08 ;  sqrt(n1*n2) = 1.224745
+  [PASS] P3-AR  quarter-wave null at sqrt(n1 n2), within 1%
+
+Phase 4 — absorbing metal: DEFER (committed). A lossy-closure model is owed;
+  importing a conduction model as mechanism is forbidden by the prompt.
+
+HONESTY FLAGS (pre-declared in RUN_LOG.md):
+  1. The two continuity rows are generic mechanics of ANY relaying medium (a string
+     junction obeys the same algebra). SDT's contribution is the identification
+     Z = Z0*n forced by one-lattice/constant-coupling with variable c_local.
+     CLASS: CONVERGENCE, not NATIVE.
+  2. WHICH displacement/impulse components the lattice hands across the step for
+     the two transverse orientations (the pairing rule) is ASSERTED here, not
+     derived from relay mechanics. A full lattice treatment would add a
+     longitudinal branch and more conditions; its suppression is asserted (GOM06
+     transverse channel), not derived. This is the named missing closure and is
+     what caps OP02 at CONVERGENCE.
+  3. Fresnel forms and arctan(n2/n1) were used ONLY as OBSERVED comparison columns.
+
+OP02 exit: ALL COMMITTED GATES PASS (0 gate failures)

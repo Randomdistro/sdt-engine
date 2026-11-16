@@ -1,0 +1,130 @@
+========================================================================================
+  FLM14 solver - run 2 (rule-form-3).  Gates: RUN_LOG.md (committed; ADJ-4/5/6).
+  One rule (F6): {base, omega_i = OMEGA0*z_i/<z>, g=-1, W, beta-entrainment, T_W}.
+========================================================================================
+========================================================================================
+  PART A - P1-G3 RETEST: rule-form-3 (bond-local windows + entrainment)
+  FLM10-grade CRN, N=1000, 3 glass seeds, 24 directions. Gate <= 1.2 (UNMOVED).
+  Ladder baseline: form-1 x7.47 (KILLED) -> form-2 x2.88 (FAIL) -> form-3 = this.
+========================================================================================
+
+  glass seed 21: N=1000  accepted WWW switches=179  bond length 0.450+-0.049 (crystal 0.433)  z(geom) min/mean/max = 4/4.88/11  [81s]
+    ungeared: anisotropy 0.0313  (24 valid directions)
+    geared beta=0.00: anisotropy 0.0693  ratio  2.21  mean wait 0.108  rechecks 413  (24 dirs)
+    geared beta=0.05: anisotropy 0.0650  ratio  2.08  mean wait 0.111  rechecks 1334  (24 dirs)
+    geared beta=0.10: anisotropy 0.0627  ratio  2.00  mean wait 0.105  rechecks 1446  (24 dirs)
+    geared beta=0.20: anisotropy 0.0570  ratio  1.82  mean wait 0.098  rechecks 1649  (24 dirs)
+    geared beta=0.40: anisotropy 0.0423  ratio  1.35  mean wait 0.073  rechecks 1841  (24 dirs)
+    geared beta=0.80: anisotropy 0.0330  ratio  1.05  mean wait 0.030  rechecks 2692  (24 dirs)
+    geared beta=1.00: anisotropy 0.0313  ratio  1.00  mean wait 0.000  rechecks 0  (24 dirs)
+
+  glass seed 22: N=1000  accepted WWW switches=196  bond length 0.449+-0.049 (crystal 0.433)  z(geom) min/mean/max = 3/4.86/9  [91s]
+    ungeared: anisotropy 0.0317  (24 valid directions)
+    geared beta=0.00: anisotropy 0.0778  ratio  2.46  mean wait 0.099  rechecks 399  (24 dirs)
+    geared beta=0.05: anisotropy 0.0767  ratio  2.42  mean wait 0.094  rechecks 1162  (24 dirs)
+    geared beta=0.10: anisotropy 0.0784  ratio  2.47  mean wait 0.094  rechecks 1300  (24 dirs)
+    geared beta=0.20: anisotropy 0.0772  ratio  2.44  mean wait 0.091  rechecks 1563  (24 dirs)
+    geared beta=0.40: anisotropy 0.0715  ratio  2.26  mean wait 0.076  rechecks 1680  (24 dirs)
+    geared beta=0.80: anisotropy 0.0541  ratio  1.71  mean wait 0.030  rechecks 2659  (24 dirs)
+    geared beta=1.00: anisotropy 0.0317  ratio  1.00  mean wait 0.000  rechecks 0  (24 dirs)
+
+  glass seed 23: N=1000  accepted WWW switches=175  bond length 0.447+-0.051 (crystal 0.433)  z(geom) min/mean/max = 4/4.79/9  [79s]
+    ungeared: anisotropy 0.0210  (24 valid directions)
+    geared beta=0.00: anisotropy 0.0461  ratio  2.20  mean wait 0.098  rechecks 399  (24 dirs)
+    geared beta=0.05: anisotropy 0.0465  ratio  2.22  mean wait 0.101  rechecks 1142  (24 dirs)
+    geared beta=0.10: anisotropy 0.0417  ratio  1.99  mean wait 0.099  rechecks 1223  (24 dirs)
+    geared beta=0.20: anisotropy 0.0409  ratio  1.95  mean wait 0.095  rechecks 1343  (24 dirs)
+    geared beta=0.40: anisotropy 0.0478  ratio  2.28  mean wait 0.081  rechecks 1923  (24 dirs)
+    geared beta=0.80: anisotropy 0.0273  ratio  1.30  mean wait 0.031  rechecks 2735  (24 dirs)
+    geared beta=1.00: anisotropy 0.0210  ratio  1.00  mean wait 0.000  rechecks 0  (24 dirs)
+
+  machinery anchor: beta=1 geared must equal ungeared exactly -> max |t_g - t_u| = 0.00e+00  [OK]
+
+  P1-G3 SUMMARY (ratio geared/ungeared, mean +- std over 3 glass seeds; gate <= 1.2):
+    beta     ratio            mean wait   verdict
+    0.00    2.29 +- 0.12       0.102     [FAIL]  (= form-2 control on this instrument)
+    0.05    2.24 +- 0.14       0.102     [FAIL]
+    0.10    2.15 +- 0.23       0.099     [FAIL]
+    0.20    2.07 +- 0.27       0.095     [FAIL]
+    0.40    1.96 +- 0.43       0.077     [FAIL]
+    0.80    1.35 +- 0.27       0.030     [FAIL]
+    1.00    1.00 +- 0.00       0.000     [PASS]
+
+========================================================================================
+  PART B - P2: STRUCTURED TOUR (seats at varying radii around a heavy defect)
+  dwell-per-visit AND occupancy vs wake amplitude; exponent from the rule alone.
+  R-Born: nothing quadratic inserted. Committed observables/criteria: ADJ-5.
+========================================================================================
+
+  beta=0.02:  p_dwell = undefined                     p_occ = undefined                   
+             drift 0.0044 (gate <0.01: PASS)   coverage 33%   mean |r| occ = nan
+             seed 1: occ fit undefined (only 5 usable seats (<12))
+             seed 1: dwell fit undefined (only 5 usable seats (<12))
+             seed 2: occ fit undefined (only 3 usable seats (<12))
+             seed 2: dwell fit undefined (only 3 usable seats (<12))
+             seed 3: occ fit undefined (only 3 usable seats (<12))
+             seed 3: dwell fit undefined (only 3 usable seats (<12))
+
+  beta=0.05:  p_dwell = undefined                     p_occ = undefined                   
+             drift 0.0014 (gate <0.01: PASS)   coverage 29%   mean |r| occ = nan
+             seed 1: occ fit undefined (only 2 usable seats (<12))
+             seed 1: dwell fit undefined (only 2 usable seats (<12))
+             seed 2: occ fit undefined (only 6 usable seats (<12))
+             seed 2: dwell fit undefined (only 6 usable seats (<12))
+             seed 3: occ fit undefined (only 1 usable seats (<12))
+             seed 3: dwell fit undefined (only 1 usable seats (<12))
+
+  beta=0.10:  p_dwell = undefined                     p_occ = undefined                   
+             drift 0.0008 (gate <0.01: PASS)   coverage 49%   mean |r| occ = nan
+             seed 1: occ fit undefined (only 10 usable seats (<12))
+             seed 1: dwell fit undefined (only 10 usable seats (<12))
+             seed 2: occ fit undefined (only 11 usable seats (<12))
+             seed 2: dwell fit undefined (only 11 usable seats (<12))
+             seed 3: occ fit undefined (only 1 usable seats (<12))
+             seed 3: dwell fit undefined (only 1 usable seats (<12))
+
+  beta=0.20:  p_dwell = undefined                     p_occ = undefined                   
+             drift 0.0006 (gate <0.01: PASS)   coverage 17%   mean |r| occ = nan
+             seed 1: occ fit undefined (only 2 usable seats (<12))
+             seed 1: dwell fit undefined (only 2 usable seats (<12))
+             seed 2: occ fit undefined (only 4 usable seats (<12))
+             seed 2: dwell fit undefined (only 4 usable seats (<12))
+             seed 3: occ fit undefined (only 1 usable seats (<12))
+             seed 3: dwell fit undefined (only 1 usable seats (<12))
+
+  beta=0.40:  p_dwell = undefined                     p_occ = undefined                   
+             drift 0.0062 (gate <0.01: FAIL)   coverage 34%   mean |r| occ = nan
+             seed 1: occ fit undefined (only 8 usable seats (<12))
+             seed 1: dwell fit undefined (only 8 usable seats (<12))
+             seed 2: occ fit undefined (only 2 usable seats (<12))
+             seed 2: dwell fit undefined (only 2 usable seats (<12))
+             seed 3: occ fit undefined (only 2 usable seats (<12))
+             seed 3: dwell fit undefined (only 2 usable seats (<12))
+
+  beta=0.80:  p_dwell = undefined                     p_occ = undefined                   
+             drift 0.0483 (gate <0.01: FAIL)   coverage 71%   mean |r| occ = nan
+             seed 1: occ fit undefined (only 1 usable seats (<12))
+             seed 1: dwell fit undefined (only 1 usable seats (<12))
+             seed 2: occ fit undefined (|r|=0.46 < 0.6 - no exponent defined)
+             seed 2: dwell fit undefined (|r|=0.49 < 0.6 - no exponent defined)
+             seed 3: occ fit undefined (|r|=0.51 < 0.6 - no exponent defined)
+             seed 3: dwell fit undefined (|r|=0.37 < 0.6 - no exponent defined)
+
+  P2-G1 STABLE-REGIME TEST (committed ADJ-5):
+    NO stable regime by the committed rule - reported as such.
+
+  T_W robustness (instrument-constant check at beta=0.20, seed 1):
+    T_W=13.5: p_occ = undefined (only 6 usable seats (<12))
+    T_W=54.0: p_occ = undefined (only 2 usable seats (<12))
+
+  PART C: NOT RUN - no stable P2 regime (committed condition, ADJ-6).
+
+========================================================================================
+  F6 ONE-RULE CROSS-CHECK
+    P1 pass regime (ratio <= 1.2): beta in [1.0]
+    P2 stable regime: none - overlap test moot.
+  P3 (Lamb routes) / P4 (lock ladder): DEFERRED per RUN_LOG pre-commitment -
+  dependencies: P3 needs a radial seat ladder calibrated to koppa rungs (PPT08 table);
+  P4 needs contact-geometry windows (NP10). Neither is licensed until the emergent
+  law survives adversarial replication on a 3-D seat geometry.
+========================================================================================

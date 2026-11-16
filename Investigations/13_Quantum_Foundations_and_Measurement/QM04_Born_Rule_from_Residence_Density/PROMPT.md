@@ -28,7 +28,7 @@
    axiomatic rather than elastic; a histogram that does not track energy density to <1%; normalisation
    or positivity that needs an imposed axiom).
 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class
-   (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN), per phase, no repainting a fired test.
+   (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN), per phase, no repainting a fired test.
 
 ## Question
 
@@ -123,7 +123,7 @@ amplitude→intensity), QM01 fringe contrast, QM07 SG spot weights. *Success:* o
 ```markdown
 ## Pre-Run Commitments — QM04
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: 0 in the native chain (flag the one ergodic/equidistribution assumption if leaned on)
 - Engine namespaces used: Law I/III (relay strain energy), QM01 steering engine — NO ψ, NO Born/probability axiom written into the steering, NO atomic:: in the native chain
 - Phase thresholds (committed before run): P1 cross-term derived (sign+magnitude) · P2 histogram ∝ energy density RMS <1% over ≥10⁴ · P3 ∑P=1, P≥0 with no extra axiom
@@ -139,7 +139,7 @@ amplitude→intensity), QM01 fringe contrast, QM07 SG spot weights. *Success:* o
 | P2 histogram off energy density by >1% | refine the steering integrator / vortex count | **OPEN** the residence∝energy claim; report best RMS | set probability = energy density and call it a measurement |
 | P2 proportionality needs an ergodic assumption | name it explicitly; argue it from lattice equidistribution | accept **C** honestly — postulate traded, not removed | hide the ergodic assumption |
 | P3 normalisation/positivity needs an axiom | derive from count-conservation + energy≥0 | **OPEN**; state the residual axiom | impose ∑P=1 by hand and claim native |
-| Rivals match but SDT only reproduces | label **DEGENERATE** honestly | — | Claim Class A |
+| A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 
 ### Allowed adjustments
 

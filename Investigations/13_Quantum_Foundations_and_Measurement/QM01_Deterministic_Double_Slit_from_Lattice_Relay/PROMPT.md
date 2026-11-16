@@ -27,7 +27,7 @@
    needs the vortex in both slits; decoherence that needs an observer rather than a mechanical
    wake-spoil).
 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class
-   (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN), per phase, no repainting a fired test.
+   (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN), per phase, no repainting a fired test.
 
 ---
 
@@ -222,7 +222,7 @@ These are *not* required for the verdict; they are the point of doing it well.
 ```markdown
 ## Pre-Run Commitments — QM01
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: 0 in the native chain (list any flagged borrow, e.g. the amplitude-square step)
 - Engine namespaces used: measured (h via κ=h/m from FD02), law_V, law_VI/traction (wake) — NO ψ, NO atomic:: in the fringe chain
 - Phase thresholds (committed before run): P1 λ ±1% (h from κ=h/m ±0.02%) · P2 sinc² shape · P3 fringe RMS <1% over ≥10⁴ · P4 V continuous, V²+D²≤1
@@ -239,7 +239,7 @@ These are *not* required for the verdict; they are the point of doing it well.
 | P3 fringe only forms if vortex is in both slits | re-examine the two-channel split (wake width vs slit gap) | **KILL** H1 / mark the both-slits debt | smuggle a delocalised packet and call it the vortex |
 | P4 V²+D²>1, or V needs an observer term | re-derive spoiling as pure wake occlusion | **OPEN**; report the deficit honestly | add a collapse/observer term to force complementarity |
 | Bell route (P5) finds no clean local model | **OPEN** → hand to QM05; do not fabricate | — | claim a local Bell violation (R4 breach) |
-| Rivals match but SDT only reproduces | label **DEGENERATE** honestly | — | Claim Class A |
+| A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 
 ### Allowed adjustments
 

@@ -1,0 +1,46 @@
+================================================================
+ APS04 wake-field solver - REBUILT (spec 2026-07-26, gates committed)
+================================================================
+[UNITS LEDGER 0] R_p = 4*hbar/(m_p c) = 8.412356e-16 m ; a0 = 5.291772e-11 m
+               a0/R_p = 6.2905e+04  (committed window [1e1,1e5]: INSIDE)
+
+--- P0a: point source (analytic r^-1) through the full pipeline ---
+  alpha0 = 1.00000  (gate 1.00 +/- 0.02) -> G0b PASS
+--- P0b/c: circular loop, Biot-Savart (analytic dipole r^-3) ---
+  loop exponent = 2.99815 (gate 3.00 +/- 0.05) ; coeff = 0.494818 vs analytic 0.500000 (1.04%)
+  -> G0a PASS
+  loop m=3 content at r=30a: 9.38e-16 relative (gate <1e-3) -> G0c PASS
+--- P0d: three point sources at 120deg (two-stream on the m=3 machinery) ---
+  m=3 amplitude at r=30d: exact-pipeline 1.3628e-06 vs multipole-pipeline 1.3631e-06 (dev 0.02%)
+  -> G0d PASS (gate <1% on the m=3 machinery two-stream)
+
+--- P2: trefoil (rho=1/4 committed), window r/R_p in [1e1,1e5] ---
+  alpha0 = 1.0000 (gate 1.0+/-0.2) | alpha2 = 0.9252 (gate 3.0+/-0.5) | alpha3 = 4.0005 (gate 4.0+/-0.5, 33 shells)
+  dipole content max = 2.72e-16 relative (gate <1e-3, analytic ZERO)
+  G2e sub-windows: alpha0 1.0000|1.0000  alpha2 0.7421|1.0000 (drift flags if bands split)
+  grid convergence @r=1e3: mono 1.076e-02 vs 1.076e-02 (7.81e-11 rel) ; c2 8.547e-06 vs 2.132e-06 (3.01e+00 rel)
+  G2f rho=0.125 : alpha2 = 0.9421, alpha3 = 4.0011 (exponents must stay in-band)
+  G2f rho=0.500 : alpha2 = 0.9088, alpha3 = 4.0007 (exponents must stay in-band)
+  [report-only ADJ-0] circulation-channel on-axis exponent = 2.9988 (dipole 3 expected)
+
+--- P3: split at a0 (bands committed; coupling committed in P1) ---
+[UNITS LEDGER 3] phibar(a0) [R_p^-1 units, sigma=1] = 1.709806591e-04
+  <delta>_eq = +4.014655e-11   <delta>_pol = -7.551515e-11   diff = +1.156617e-10
+  G3-valid (|delta|<0.1): PASS
+[UNITS LEDGER 3b] m_e(alpha c)^2 = 27.211386 eV ; dE = +3.147315e-09 eV ; nu = +7.610174e-01 MHz
+  G3-sign  (E(s=eq) > E(p=pol) <=> diff>0): PASS
+  G3-order (|nu| in [1e-3,1e5] MHz): PASS
+  G3-fork report (analyst does NOT choose):
+    Fork-B (whole shift 1057.845 MHz): ratio = 7.194e-04
+    Fork-C (nuclear line 0.145 MHz)  : ratio = 5.248e+00
+  two-stream: delta-diff direct 1.157e-10 vs fitted-P2-route -1.417e-03 (sign+order agreement expected)
+
+--- P5: scaling discriminator (powers from the committed coupling) ---
+  predicted muonic/electronic (quad term, m/a^2) = 7.141e+06
+  measured Fork-C ratio (3.7 meV / 0.145 MHz)    = 6.170e+06  -> pred/meas = 1.16
+  measured Fork-B ratio (202 meV / 1057.845 MHz) = 4.617e+04  -> pred/meas = 154.7
+  G5 (Fork-C tracks within factor 3): PASS ; Fork-B: DIES on scaling (as derived)
+
+================================================================
+ grading in APS04_VERDICT_DIRECT (no gate moved after numbers)
+================================================================

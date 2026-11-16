@@ -1,0 +1,56 @@
+{
+  "anchor_classification": "ENGINEERING_ONLY",
+  "audit_date": "2026-08-14",
+  "canonical_depth_rules": {
+    "legacy_square_root_api_present": false,
+    "linear_rate_present": true
+  },
+  "fail_closed": true,
+  "mechanism_classification": "PENDING_MECHANISM",
+  "missing_specification_items": [
+    "signed_composition_equation",
+    "reference_surface",
+    "coordinate_time_and_frames",
+    "eccentric_orbit_treatment",
+    "uncertainty_budget",
+    "direct_clock_series"
+  ],
+  "physical_model_verdict": "UNADJUDICATED",
+  "qualified_direct_observation": false,
+  "required_recovery_ingredients": {
+    "baryon_volume_exclusion": true,
+    "inverse_square_operation": true,
+    "movement_budget": true,
+    "polar_radius_koppa": false,
+    "spation_shell_exclusion": true
+  },
+  "required_recovery_ingredients_complete": false,
+  "source_results": {
+    "gps_interface": {
+      "path": "Datasets/gps_clock_2026-08/raw/is_gps_200n.pdf",
+      "sha256": "54ec544bfe7e6acd97daaa1de0ca248e5abec6b418f23c1a69991e5c7bcf749a"
+    },
+    "nasa_gnss_intro": {
+      "path": "Datasets/gps_clock_2026-08/raw/nasa_2012_gnss_relativity_introduction.pdf",
+      "sha256": "402b87a7193e929ec5316e446ada53aa2d7c9daa60877a6717605034318b109b"
+    },
+    "navstar4_metadata": {
+      "path": "Datasets/gps_clock_2026-08/raw/nasa_1980_navstar4_metadata.json",
+      "sha256": "0255b566bca1011144ed8b76afa94489bdf93842f2de0bc78ad0d643697cb467"
+    },
+    "nist_summary": {
+      "path": "Datasets/gps_clock_2026-08/raw/nist_putting_einstein_to_the_test.html",
+      "sha256": "1ba074908c7261f2f515edd96505c06f8640836ff47ac5f23902a8cf83220baf"
+    }
+  },
+  "specification_checks": {
+    "coordinate_time_and_frames": false,
+    "direct_clock_series": false,
+    "eccentric_orbit_treatment": false,
+    "ground_and_satellite_states": true,
+    "linear_engine_rate_bound": true,
+    "reference_surface": false,
+    "signed_composition_equation": false,
+    "uncertainty_budget": false
+  }
+}

@@ -1,0 +1,226 @@
+### 07/CR15_Ionisation_Trilemma_and_the_Cold_Dense_Past  | status:  | words 873 | code 1 outs 1 verd 1 runlog 0 | gate True prereg False
+Q: d 2026-07-30. Object: *Spation Dynamics Theory — Cosmological Sector, Complete Mathematical Formulation* (Harvey, 2026-07-30), PENDING items (1), (2), (5); Propositions 4, 5, 11, 13; postulates P5, P6. Predecessor: `CR14_Ionisation_Balance_and_the_Clearing_Rung` (R2+R3 fired; Branch E open). ## Why this is not a re-run of CR14 CR14 tested a static vessel with `n_b` **constant** — "no expansion, so no dilution" — and found the vessel optically thin by 62.8×. The document supersedes that assumpt
+F: iable target for PENDING (1). ## Instrument The Saha solver validated in CR14 (V1 limits, V2 known answer z = 1379.3 vs textbook ≈ 1370, V3 analytic-vs-numerical sensitivity agreeing to 0.0000 %). **All three gates are re-run here**; no branch result is reportable if any fails (§3.2). Pure hydrogen;
+G: **Registered:** lands within ±10 % of N = 1100 ⟹ (i) and (ii) are jointly consistent with the
+G: V3 analytic-vs-numerical sensitivity agreeing to 0.0000 %). **All three gates are re-run here**;
+V: **Classification: T2 FAIL · T3 no-ionised-era · T4 CR14 Branch E WITHDRAWN · T1 one arithmetic
+V: Gates: CR14's V1–V3 re-run, all PASS (V2 = z 1379.3 against textbook ≈ 1370).
+V: ## T2 — the trilemma is real (FAIL, 99 % off)
+V: So `z_rec = 1100` remains **CALIBRATED(1)** exactly as CR14 concluded, and this investigation
+V: closes the specific escape route CR14 left open. PENDING (2) as written — "density-triggered
+O: SUMMARY
+O: T2 FAIL - trigger at N = 10.55, not 1100 (factor 104)
+FLAGS: MISSING: ; res pass/fail 4/2 verd pass/fail 1/5
+
+### 07/CR16_Parameter_Ledger_and_P0_Provenance  | status:  | words 519 | code 1 outs 1 verd 1 runlog 0 | gate True prereg False
+Q: smological Sector* (2026-07-30), Part II, P6, Props 1–14, Theorems 4–5. ## Why this investigation replaces the last one's framing CR14/CR15 scored the sector on whether it reproduced `z ≈ 1100` and `T ≈ 3000 K`. Both are ΛCDM outputs, not measurements — `z_*` is a fitted derived parameter of the base-6 fit, and 3000 K is its companion. Testing a rival framework against a rival's *fitted outputs* is the contraband the HUNTER role forbids (§G GATE-CONTRABAND: a kill enforcing a rival's axiom is 
+V: **Classification: P₀ is DERIVED, not calibrated (6.7 sig figs). P6 loses a clause — the sector's
+V: Classification applied identically to both sides. Only **FITTED** — tuned to the data being
+V: | prediction | measured | status |
+V: This is the test that historically excluded classical tired-light: a static-space redshift
+O: fitted number is not a restatement: classical tired-light fails this test, which is
+O: what historically excluded it. This mechanism passes it structurally.
+O: SUMMARY
+FLAGS: MISSING: ; res pass/fail 0/0 verd pass/fail 4/0
+
+### 08/GD01_Eclipse_Saturation_Model  | status: SPEC · §K-DEEPENED 2026-07-13 (300% rule, HUNTER §K.3). | words 1072 | code 1 outs 0 verd 1 runlog 0 | gate True prereg True
+Q: The eclipse-saturation model is referenced (`galactic.hpp`) but never implemented, and the version that WAS tried fails real SPARC (~66%, GD05).** The gap: a *mass-free* occlusion→rotation law with a **natively derived saturation crossover** (not MOND's a₀). 2. **Why does it matter?** — GD05 (the SPARC test) is blocked on this m
+F: §⑧: if v(r) needs GM/M; if the crossover needs an imported a₀; if Ω_disk saturation can't produce flat curves without a fitted screen density. 5. **How will we know we're done?** — Model derived mass-free, crossover named natively, implemented and handed to GD05 for the SPARC run. > ### ⚠ CONSISTENC
+G: | T2 | Σ_crit derived from {c,k,ℓ_P}, not fitted | root-3/root-4 (a₀ contraband) — the gate |
+V: > **⛔ RETRACTED — STALE/NON-REPRODUCIBLE (HUNTER scour 2026-07-02).** The cited tool is absent; the present tool no longer compiles against the engine (Sigma_sat symbols deprecated); the v_flat 'resul
+V: > **Status**: FRAMEWORK RESOLVED (implementation milestone reached)
+V: ### Open Items
+V: ## Verdict
+V: **GD01 FRAMEWORK RESOLVED.** Eclipse saturation model established and running.
+FLAGS: MISSING:Investigations/06;Investigations/08;Investigations/01 ; LOOSE:25 ; Gcode:15 ; res pass/fail 0/0 verd pass/fail 3/0
+
+### 08/GD03_Galactic_Spation_Topology  | status: SPEC (upgrade 2026-06-27). | words 4864 | code 9 outs 9 verd 1 runlog 1 | gate True prereg True
+Q: (unfilled by the 2026-06-27 bulk template upgrade — write the single measurable gap before the next run)* 2. **Why does it matter?** — Stack position / downstream blockers (see `INVESTIGATION_STACK.md`). 3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals. 4. **What would prove us wrong?*
+F: §⑧ falsification tests with numeric triggers. 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN). --- ## 0. GROUND ZERO STATEMENT The spation lattice is the medium. It is a hyperspherical superfluid of
+G: 3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
+G: **Task**: Map the lattice topology through the bulge. The bar is a NON-AXISYMMETRIC displacement structure — a triaxial overdensity rotating as a rigid body within the lattice. Compute the c
+G: 4. Show that the "flat rotation curve" is a natural consequence of the lattice's aggregate displacement structure — not evidence of a separate dark matter component
+G: - Laniakea supercluster: aggregate convergence field of ~10⁵ galaxies
+G: | Stellar | AU → pc | Aggregate drag from ~10⁵⁷ engines creates Ϟ_Sun | Gravity |
+V: # VERDICT — GD03: Galactic Spation Topology
+V: ## Dual verdict
+V: - **Prompt completion: F** (measured against GD03's own PROMPT: Level 3 fails at Sag A*,
+V: Level 4 fails its own anchor points, and the tool's final banner misreports both)
+V: - **Physics class: CIRCULAR (the koppa census) / KILLED (the rotation-curve claims) —
+O: Level 3 (parent invar.): PASS — 8 planets, 5 S-stars converge
+O: Level 4 (convergence profile): PASS — cq20g proves flat rotation
+O: THE TEACUP RIDE: Steady overall rotation
+FLAGS: MISSING: ; Gcode:9 ; ident:24 ; res pass/fail 6/1 verd pass/fail 4/9
+
+### 08/GD04_3D_Volumetric_Integration  | status: SPEC (upgrade 2026-06-27). | words 2076 | code 2 outs 2 verd 1 runlog 1 | gate True prereg True
+Q: (unfilled by the 2026-06-27 bulk template upgrade — write the single measurable gap before the next run)* 2. **Why does it matter?** — Stack position / downstream blockers (see `INVESTIGATION_STACK.md`). 3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals. 4. **What would prove us wrong?*
+F: §⑧ falsification tests with numeric triggers. 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN). ## Pure Geometric Unification of HSB and LSB Galaxy Rotation > **Classification:** SCore Engine Formali
+G: 3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
+G: Because the 2D model had no physical depth, it could not calculate the true occlusion of convergence lines through the galactic body. To bypass this, earlier implementations introduced an em
+G: 1. the empirical $175 M_\odot/\text{pc}^2$ threshold is removed;
+G: 1. any empirical surface-density threshold remains;
+G: \text{Flat rotation curves emerge from integrated 3D eclipse saturation, not from a 2D surface-density threshold.}
+V: # VERDICT — GD04: 3D Volumetric Integration
+V: ## Dual verdict
+V: longer fail" is met only in the letter — they return nonzero velocity — while missing
+V: - **Physics class: KILLED — and the tool's own verdict line is INFLATED**
+V: comment says "Should be ~64 km/s". Any nonzero output passes. UGC 128's 3.7 km/s
+FLAGS: MISSING:Investigations/CQ23_3D_Volumetric_Integration/cq23_3d_volumetric_integration.cpp ; Gcode:4 ; ident:1 ; res pass/fail 0/0 verd pass/fail 0/6
+
+### 08/GD05_Galaxy_Rotation_Curves  | status: RESULTS-ON-FILE (mixed), UN-VERDICTED · §K-DEEPENED 2026-07-13 (300% r | words 1770 | code 7 outs 9 verd 2 runlog 1 | gate True prereg True
+Q: Whether SDT reproduces SPARC rotation curves with ZERO free parameters and a NATIVE (non-MOND) crossover.** *Partly answered on file:* the naive 3D eclipse model **FAILS real SPARC (RMS ~66%)** — the earlier "success" was a **circular mock**; the twin-regime **M4 convergence-floor** law reaches **RMS 23.8%, BTFR 3.58** but its c
+F: §⑧: if only a MOND-borrowed crossover reaches <25% RMS, the native mechanism is unproven (honest OPEN/DEGENERATE); if v_flat needs GM, the model is contraband. 5. **How will we know we're done?** — Dual verdict; RMS on ≥50 real SPARC galaxies with a **named, non-imported** crossover; BTFR slope + no
+G: | T2 | crossover DERIVED, not MOND-borrowed | root-4 (a₀ contraband) — the key gate |
+V: > **Status:** EXECUTED — model **does not pass** on real data (honest negative result)
+V: > **Certification:** CALIBRATED (1 fitted parameter: `kappa_area`); zero-parameter status NOT achieved
+V: The previous GD05 pass reported `[SUCCESS] RMS < 20%`. That result was an artifact, for two independent reasons:
+V: 2. **Deprecated, calibrated 2D path.** The driver called `v_flat()` / `eclipse_fraction()` / `koppa_gal()`, all marked `[[deprecated]]` in `galactic.hpp`, which bake in the empirical `Sigma_sat = 175 
+V: - `kappa_area = 9.1e-29 m²` — **CALIBRATED** to the 175 M☉/pc² threshold (≈1.37·σ_Thomson; the code comment says so explicitly).
+O: [FAIL] M3 (1/r^3 line) per-radius RMS < 20% (got 34.7%)
+O: [FAIL] M4 (floor) per-radius RMS < 20% (got 23.8%)
+O: [PASS] M4 BTFR slope in [3.5,4.5] (got 3.58)
+FLAGS: MISSING:Investigations/06 ; LOOSE:25 ; Gcode:9 ; ident:6 ; res pass/fail 1/2 verd pass/fail 5/3
+
+### 08/GD06_Collective_Displacement_Redshift_Law  | status: ROOT-SPEC · REBUILT ON THE SOLID-ANGLE INSTRUMENT 2026-07-13 (supersed | words 3273 | code 0 outs 0 verd 2 runlog 0 | gate True prereg True
+Q: The dimensionless law z_d = h(Θ) mapping the occluded sky-fraction Θ at a position to the depth redshift of light there** — and whether Θ for a bulge/bar/nucleus lands in the **dilute** branch (Θ≪1, h≈h′(0)·Θ, recovers weak-field ϟ/r) or the **saturated** branch (Θ→1, h→h_max, the sungrazer g→2 limit). The prior 0.1% estimate as
+F: §⑧, each numeric. Chief kills: h that reduces identically to ϟ/r at all Θ (the saturation branch is falsified; the dilute law stands as convergent — wording corrected 2026-10-03); a field shift not proportional to δΘ_nuc (bridge dead); a solar anchor that forces a dependency-traced constant back in 
+G: 2. **Why does it matter?** — Θ is dimensionless and scale-free, so **the atomic field shift (nucleus's Θ at the electron) and the galactic bulge redshift (bulge's Θ at a star) are the SAME l
+G: 3. **How will we find out?** — Compute Θ by direct solid-angle integration with saturation (κ=1−e^{−τ}) at four anchors (nucleus@electron, Sun-surface, sungrazer, bulge@star); derive the *fo
+G: 5. **How will we know we're done?** — **Triple verdict:** prompt completion (A–F) × physics class (NATIVE/CONVERGENCE/SHARED-INPUT/KILLED/OPEN) × cross-scale grade (SCALE-INVARIANT/SCALE-BRO
+G: **Phase 0 — The Θ engine. (spawns XSD-B core)** Build a standalone solid-angle integrator: given a matter distribution n(𝐱′) and a boundary cross-section rule σ_occ, compute Θ(𝐱), 𝐠(𝐱) by di
+G: **Phase 4 — Cluster validation. (spawns XSD-D)** Θ_cluster@galaxy → z_d(R); compare to the measured cluster gravitational redshift (Wojtak+2011 ~10 km/s), **no cluster fit**. *Metric:* withi
+V: ### Occlusion-as-solid-angle ledger, calibrated on the solar census (H6)
+V: > Tool: `gd06_run.py` (standalone Python; no dependency-traced constant enters the *derivation* of Θ — constants used only to convert to OBSERVED SI for comparison). Data: H6 solar census (verified) +
+V: ## 4. Node verdicts (this run)
+V: - **GD06 core (instrument):** the solid-angle instrument recovers ϟ/r in the dilute limit and saturates (g→2, z_d→O(1)) only at contact/neutron-star density. Instrument **CONFIRMED**; it is the right 
+V: - **XSD-B (σ_occ geometrization):** the Sun anchor requires σ_occ=**1.561×10⁻⁵³ m²/baryon** = 7.02×10⁻²⁴ of πR_p². This does **not** match the transfer function f=2.13×10⁻¹⁷ (off by 3×10⁻⁷) nor the en
+FLAGS: MISSING: ; ident:1 ; IDDUP ; res pass/fail 0/0 verd pass/fail 1/0
+
+### 08/GD06_Gravitational_Lensing  | status: SPEC → ACTIVE on first gated run. | words 385 | code 1 outs 1 verd 1 runlog 0 | gate True prereg True
+Q: Does integrating `d/ds(n t̂)=∇n` along a grazing solar ray reproduce 1.750″ and match the closed form to <1%? --- ## ② Framework `n(r) = 1/(1 − ϟ_⊙/r)` for r ≥ R_Sun (weak-field). **Targets:** δ = 1.750″ at b = R_Sun. **Cross-check OP01:** Same n(r) as OP01 Phase 3. --- ## ④ Phases ### Phase 0 (GATE) Print `ϟ`, `k_Sun`, `z_surf`
+F: y:** Integral ≠ 4ϟ/b by >1%; δ off >1% vs 1.750″; OP01 formalism mismatch. 5. **Done:** **B** = integral + closed form agree + limb <1%; **A** = one SLACS-scale lens from measured v,R. --- ## ① Executive Summary **δ(b) = 4ϟ/b** is the small-angle limit. **Question:** Does integrating `d/ds(n t̂)=∇n`
+G: ### Phase 0 (GATE)
+G: ### Phase 1 — Eikonal integral (GATE)
+V: # GD06 — Verdict: Gravitational Lensing
+V: **Classification: CLASS C (CONVERGENCE at solar scale).**
+V: - Solar limb deflection: **1.7517″** vs 1.7500″ (**0.10%**) — PASS
+V: ## OPEN
+V: **Sign-off: PASS (solar), Class C.**
+O: |error| = 0.10% [PASS]
+O: VERDICT: PASS G�� Class C (CONVERGENCE at solar limb)
+FLAGS: MISSING: ; IDDUP ; res pass/fail 2/0 verd pass/fail 2/0
+
+### 09/SAR01_Le_Sage_Thermal_Budget  | status: §K KILL-DEEPEN RE-RUN (old verdict/runlog/results/cpp DELETED 2026-07- | words 1478 | code 1 outs 1 verd 1 runlog 0 | gate True prereg True
+Q: Does the elastic redirection of convergence flux have ANY thermalisation leakage η, and what recharges the redirected flux's isotropy?** (NOT "how much is absorbed" — absorption was a transcription error; see below.) 2. **Why does it matter?** — Le Sage died because its corpuscles must be *absorbed* (a terminus), which melts eve
+F: §⑧: η > 4.4×10⁻¹⁸ exceeds the 47 TW geothermal budget → SDT heating problem. A redirection that is secretly a terminus (no efflux) → Le Sage's death applies to SDT too. 5. **How will we know we're done?** — Dual verdict + the η ceiling on record + the recharge mechanism named (or flagged OPEN as the
+G: 2. **Why does it matter?** — Le Sage died because its corpuscles must be *absorbed* (a terminus), which melts everything. SDT's occlusion is *redirection* (a throughpole) — but only if the l
+G: | T5 | no rival-axiom gate (e.g. "must re-radiate isotropically") smuggled | root-4 (§G contraband) |
+G: | a gate demands isotropic re-radiation | check §G contraband | kill the gate (root-4) | enforce the rival axiom |
+V: # SAR01 — VERDICT: Le Sage Thermal Budget (§K kill-deepen re-run)
+V: > **Run class: DIRECT** (main session, no agents), 2026-07-26. Unanchored per §K.4 — the ceiling
+V: ## Dual verdict
+V: | **Prompt completion** | **A** | All three routes run; η ceiling re-derived clean; recharge honestly OPEN. |
+V: - **THROUGHPOLE** — the convergence flux passes through Earth (in one side, out the other). SDT's
+O: VERDICT: terminus-free (throughpole); heating ceiling eta<4.43e-18 on record;
+FLAGS: MISSING: ; Gcode:2 ; res pass/fail 0/0 verd pass/fail 1/3
+
+### 09/SAR02_Blackbody_Radiation_from_Lattice  | status: SPEC (upgrade 2026-06-27). | words 831 | code 1 outs 1 verd 1 runlog 0 | gate True prereg True
+Q: (unfilled by the 2026-06-27 bulk template upgrade — write the single measurable gap before the next run)* 2. **Why does it matter?** — Stack position / downstream blockers (see `INVESTIGATION_STACK.md`). 3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals. 4. **What would prove us wrong?*
+F: §⑧ falsification tests with numeric triggers. 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN). ## DATA REQUIREMENTS | Data | Value | Source | |------|-------|--------| | Planck spectrum B(ν,T) | Sta
+G: 3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
+G: - Phase thresholds (committed before run): 0.01%
+G: | A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimin
+G: - Post-hoc tolerance widening · coefficient plugs · `atomic::`/GM/G in Phase-1 native chain · Snell/reciprocity-only as Fermat PASS.
+V: # SAR02 — Verdict: Blackbody from Lattice Mode Counting
+V: **Classification: CLASS C (CONVERGENCE).**
+V: **Sign-off: PASS, Class C.**
+O: |error| = 0.07% [PASS]
+O: |error| = 5.49e-10 [PASS]
+O: VERDICT: PASS G�� Class C (CONVERGENCE / LINGUISTIC-BORROW on stats)
+FLAGS: MISSING: ; ident:1 ; res pass/fail 4/0 verd pass/fail 1/0
+
+### 09/SAR03_Solar_Luminosity  | status:  | words 1204 | code 2 outs 1 verd 1 runlog 1 | gate True prereg True
+Q: The **Law-II release-rate law**: the fraction of the convergent throughput passing through the Sun that is engaged (occluded → thermalised → re-released) per unit time. Dimensionally: ε_engage ≡ L_⊙/(4πR_⊙²·P_conv·c). The 2026-07-03 correction recorded the implied value ≈ 8.5×10⁻⁵⁰ as the closure TARGET (not fished). We do not h
+F: §⑧: if the occluded-fraction ledger requires an engagement fraction OUTSIDE any decomposition of known engine gears (f_transfer, Σf_GOM12, koppa ratios) by an unbridgeable margin once the rate law exists; or if the pressure-domain prediction (20,800 AU) is contradicted by Oort structure at decisive 
+G: | r_domain = √(L/4πF_CMB) | law_II T9 | DERIVED | domain gate (20,800 AU) |
+G: 10×-lead rule (within 10× = lead worth naming; exact-form + mechanism = result). The
+G: | a gear-stack decomposition lands within 10× | LOG as lead, name mechanism before any claim | leave as numerology note | promote to result |
+V: # SAR03 — Solar Luminosity from Convergence Recycling · VERDICT (§K rebuild)
+V: > **§K outcome: ROOT-RELOCATED → OPEN, with two live leads and one quantified null.**
+V: > **Prompt completion: B** · **Physics class: OPEN (leads named)** · **CALIBRATED: 0**
+V: ×2.5×10⁴³). Root class: **PROMPT-DEFICIT + DEPENDENCY-MISSING** (the Law-II release-rate
+V: the killed chain. The kill is dissolved as a verdict on the physics.
+FLAGS: MISSING: ; Gcode:1 ; ident:2 ; res pass/fail 0/0 verd pass/fail 0/0
+
+### 09/SAR04_Stellar_Main_Sequence_k_Gradient  | status: SPEC (upgrade 2026-06-27). | words 799 | code 1 outs 1 verd 1 runlog 1 | gate True prereg True
+Q: (unfilled by the 2026-06-27 bulk template upgrade — write the single measurable gap before the next run)* 2. **Why does it matter?** — Stack position / downstream blockers (see `INVESTIGATION_STACK.md`). 3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals. 4. **What would prove us wrong?*
+F: §⑧ falsification tests with numeric triggers. 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN). ## DATA REQUIREMENTS | Data | Source | Content | |------|--------|---------| | GAIA DR3 HR diagram | ES
+G: 3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
+G: | A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimin
+G: - Post-hoc tolerance widening · coefficient plugs · `atomic::`/GM/G in Phase-1 native chain · Snell/reciprocity-only as Fermat PASS.
+V: # SAR04 — Verdict: Stellar Main Sequence from k-Gradient
+V: ## Dual verdict
+V: **Physics class: CONVERGENCE** (ordering) / **KILLED as stated** (L∝M^3.5 emergence claim).
+V: | T1 monotonic k-sequence, Spearman ≥ 0.90 | ρ(k,T_eff) = −0.982 (4 local inversions of 15 steps) | **PASS** (rank-monotonic, not strictly) |
+V: | T2 L(k) power law, R² ≥ 0.90 | L ∝ k^−22.0, R² = 0.936 | PASS — **slope MEASURED, not derived** |
+FLAGS: MISSING: ; ident:4 ; res pass/fail 0/0 verd pass/fail 3/3
+
+### 09/SAR05_Provenance_After_Iron  | status: SPEC. | words 5686 | code 1 outs 1 verd 1 runlog 1 | gate True prereg True
+Q: For every place the framework *reached* for "fed from beyond the CMB," does the source actually resolve to a **LOCAL, finite, formation-time** battery (fission / spallation / photodisintegration / r-process / cosmic rays / accretion / gravity-as-directed-pressure) — and is there a **single decisive, measurable fork after iron** 
+F: §⑧ falsifiers with numeric triggers: a beyond-CMB **at-decay** feed actually **REQUIRED** somewhere (energy/sign won't balance from a local battery) → the surrender was premature, **re-open**; self-consuming and pressure-fed turn out **observationally identical** after iron → the fork is **DEGENERAT
+G: 3. **How will we find out?** — Four gated phases (§④): (P1) **build and classify** the provenance ledger — every reached-for beyond-CMB claim tagged SURRENDERED-to-formation / split-after-ir
+G: This investigation is **mostly discipline, with one sharp falsifiable fork**. The tool exists to make the provenance ledger *mechanical*, the after-iron fork *quantitative*, the z↔T arithmet
+G: **Gate.** No P2 until all four rows are tagged and the boundary is frozen in `RUN_LOG.md`.
+G: 3. **Pre-commit the verdict map:** if the two pictures predict observably different `L_ν(Ṁ)` (or cliff-vs-supply) at a stated, achievable measurement precision → the fork is **LIVE / NATIVE-
+G: **Gate.** No P3 until the fork is either committed LIVE (with the separating observable named) or declared DEGENERATE with reasoning.
+V: # SAR05 — VERDICT: Provenance After Iron
+V: > **Run class: DIRECT** (main session, no agents), 2026-07-26. Replaces the prior "automated
+V: > execution" verdict — same tool, re-run and re-checked by hand; the agent-provenance is removed but
+V: ## Dual verdict
+V: is the cut; a formation-time charge must not masquerade as a decay-time feed (FLM11 caution). **PASS.**
+O: ALL ASSERTIONS PASSED (P3 z~99->273 K; P4 2/5 exact) -- tool exit 0
+FLAGS: MISSING: ; ident:2 ; res pass/fail 5/0 verd pass/fail 3/0
+
+### 09/SAR06_Release_Rate_Law  | status:  | words 668 | code 1 outs 1 verd 1 runlog 1 | gate True prereg True
+Q: :** RELAY ENERGY-COUPLING MICROPHYSICS (STACK §3b) — > the missing tooth named by SAR03, the melt doctrine, and GOM12 alike. > **Engine:** `#include <sdt/laws.hpp>` only. **Execution: DIRECT.** Movement-only discipline. ## ⓪ The five constraints (all zero-fit, all from SAR03 H1–H6 — the corner) | # | constraint | value | source | |---|---|---|---| | C1 | offered budget per baryon (solar density) | 0.918 W = u·c/(ℓ_P·n) | H6 | | C2 | engaged fraction per baryon | 3.5×10⁻³¹ | H6 (L/N_b ÷ C1) | |
+V: # SAR06 — The Release-Rate Law · VERDICT (first cycle)
+V: > **Prompt completion: B** · **Physics class: OPEN — law shape earned, one candidate
+V: > killed honestly, one strong LEAD standing** · **CALIBRATED: 0** · Run 2026-07-13,
+V: span; local plasma does not reset it). Linear variants fail by 10¹² — the square is
+V: 4.84/4.33/3.96/2.73 — q falls with mass; homology structure open).
+O: SUMMARY
+FLAGS: MISSING: ; Gcode:1 ; ident:7 ; res pass/fail 0/0 verd pass/fail 0/1
+
+### 09/SAR07_White_Dwarf_Mass_Radius  | status: OPEN — specification seed (benchmark-coverage alignment 2026-07-29; ca | words 284 | code 0 outs 0 verd 0 runlog 0 | gate True prereg False
+Q: White dwarfs shrink as they gain mass — the inverse mass–radius relation — up to the 1.4 M☉ limit beyond which no white dwarf exists. Measured anchors: Sirius B (1.018 M☉, 0.0084 R☉) and the Gaia white-dwarf sequence. ## SDT footing The support is PRESS: movement that cannot move (L14). A full seat stack answers compression by r
+F: wrong trend sign, Sirius B off beyond tolerance, or a limit far from 1.4 M☉ (the counting could land anywhere — populated). - Anchors: Sirius B; Gaia M–R sequence; the 1.4 M☉ ceiling. - Tolerance: committed before instrumentation. ## Benchmark linkage Catalogue row B90 · depends on the R4 seat-stack
+G: > row B90). **Author:** J. C. Harvey, Melbourne. Gateways binding.
+G: inverse trend, Sirius B within tolerance, and a limit near 1.4 M☉ from the budget cap?
+FLAGS: MISSING: ; res pass/fail 0/0 verd pass/fail 0/0
+
+### 09/SAR08_Pulsar_Timing_Stability  | status: OPEN — specification seed (benchmark-coverage alignment 2026-07-29; ca | words 227 | code 0 outs 0 verd 0 runlog 0 | gate True prereg False
+Q: Millisecond pulsars keep time to one part in 10¹⁵ — rivalling atomic clocks — with slow, smooth spin-down. Measured anchors: PSR J0437−4715 timing residuals; the standard spin-down law P-dot vs P population. ## SDT footing A pulsar is a maximally compressed rotor near the medium's compression floor (NP30 §11 — the same floor tha
+F: predicted noise floor orders above observed, or a braking-law slope inconsistent with the population. - Anchors: J0437−4715 residuals; ATNF P/P-dot catalogue slope. - Tolerance: committed before instrumentation. ## Benchmark linkage Catalogue row B91 · suite coverage roster · tally on computed numbe
+G: > row B91). **Author:** J. C. Harvey, Melbourne. Gateways binding.
+FLAGS: MISSING: ; res pass/fail 0/0 verd pass/fail 0/0
+
+### 09/SAR09_KIC8462852_Redirection_vs_Absorption  | status: OPEN — pre-registered 2026-07-30 BEFORE instrumentation. | words 731 | code 1 outs 1 verd 1 runlog 1 | gate True prereg True
+Q:  > **Data:** `C:\sdt-data\kic8462852\` (see DATA_MANIFEST.md — provenance + stated gaps). ## The question KIC 8462852 presents five simultaneous measured facts: aperiodic dips to 22%; a secular fade on two timescales; CHROMATIC dimming whose colour ratio varies between events; NO infrared excess; an ordinary F3 star with a bound companion. The prevailing account is absorbing dust. The SDT candidate is **redirection**: dimming by dispersive-depth structure in the displacement field along the li
+G: epochs within ±1 d — before any further use. Fail → fix instrument, not data.
+G: match the model within 3σ before W3/W4 are read.
+G: - **Q4 — brightening census (characterisation only, no gate).** Catalogue
+G: excursions above the rotational envelope (threshold +0.1% sustained > 1 day
+V: > Instrument: `sar09_gamut.py`, single pass, whole range. Output: `RUN_LOG.txt`.
+V: ## Instrument validation — all three gates PASS
+V: ## Q1 — the infrared ledger: STEADY-STATE ABSORPTION EXCLUDED
+V: absorption at the measured optical deficit is EXCLUDED.** The surviving
+V: - **Grey occultation is excluded in-data**: every significant pointing is
+O: sustained brightenings (+0.1%, >1 d): 2 — recorded, no verdict attached
+O: ══ Q2: CHROMATIC RATIO VARIABILITY (GTC per-pointing, single pass) ══
+FLAGS: MISSING: ; res pass/fail 4/0 verd pass/fail 2/6
+
+### 09/SAR10_Bulk_Feedback_Stability_and_Escape  | status: SPEC, opened 2026-10-05. Id and placement proposed. Gateways binding;  | words 688 | code 0 outs 0 verd 0 runlog 0 | gate True prereg True
+Q: Whether a population of conversion events feeds back on its own rate (loading → conversion → emission → loading) and whether any stable, runaway or escaping regime follows, with the governing equation absent from the corpus. 2. **Why does it matter?** This is the claim of the parent hypothesis that would make it a physical mecha
+F: (a) The linearised growth rate changes by more than 5% over three refinement levels; (b) the loop energy budget exceeds the available conversion energy by a factor above 1 without a named source; (c) the loop requires a rate multiplier fixed on an observed transient. 5. **How will we know we're done
+G: > **Author:** J. C. Harvey, Melbourne. **Status:** SPEC, opened 2026-10-05. Id and placement proposed. Gateways binding; direct execution only.
+FLAGS: MISSING: ; res pass/fail 0/0 verd pass/fail 0/0

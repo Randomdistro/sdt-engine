@@ -1,0 +1,184 @@
+# SDT Lattice Parameter Inference
+
+> Framework: pressurised hyperfluid lattice.
+> Redshift = ratio signature of medium propagation.
+> d = ln(1+z) / kappa_0.  Objects are where they are.
+> No expansion. No imported cosmology.
+
+---
+
+## 1. The Ratio Signature
+
+```
+Observation: spectral lines in distant objects are
+shifted by the SAME multiplicative factor (1+z).
+
+  Si II 635.5 nm  →  635.5 × (1+z) nm
+  Ca II 396.8 nm  →  396.8 × (1+z) nm
+  H-α   656.3 nm  →  656.3 × (1+z) nm
+
+This is a RATIO, not an additive shift.
+A ratio emerges from multiplicative compounding:
+
+  Each lattice element dl multiplies λ by (1 + κ dl)
+  Over distance d: λ_obs/λ_emit = Π(1 + κ dl) = exp(κd)
+  Therefore: 1 + z = exp(κ₀ d)
+             d = ln(1+z) / κ₀
+
+An additive mechanism (metric stretching) would give:
+  δλ = constant for all λ  →  z = δλ/λ varies by line
+  This is NOT observed.
+```
+
+## 2. Three Flux Hypotheses
+
+```
+All three share: d = ln(1+z)/κ₀
+
+A. Pure inverse-square
+   F = L/(4πd²)
+   Energy-per-wave conserved by lattice relay.
+   d_eff = d
+
+B. Single energy-loss factor
+   F = L/(4πd²) × 1/(1+z)
+   Photon frequency decreases → E = hν decreases.
+   No time-dilation (static lattice).
+   d_eff = d × √(1+z)
+
+C. Full (1+z) import  [expansion relic, for reference]
+   F = L/(4πd²) × 1/(1+z)²
+   Both energy loss and arrival-rate dilation.
+   d_eff = d × (1+z)
+```
+
+## 3. Fit Results (1 free parameter: κ₀)
+
+```
+Model                kappa0(Mpc-1)    H0_eff      chi2  chi2/dof       BIC
+--------------------------------------------------------------------------
+A: pure inv-sq        2.042082e-04     61.22    168.10     11.21    170.88
+B: energy-loss        2.189367e-04     65.64     49.68      3.31     52.45
+C: full (1+z)         2.347274e-04     70.37      2.84      0.19      5.61
+```
+
+**Data selects: C: full (1+z)**
+
+## 4. Residuals (C: full (1+z))
+
+```
+Name               z  mu_obs  mu_mod   resid resid/sig      d(Mpc)       k       zk2
+------------------------------------------------------------------------------------
+2006bh       0.01028  33.279  33.218  +0.061     +0.41        43.6    9.86  1.000000
+1999aa       0.01590  34.166  34.171  -0.005     -0.04        67.2    7.93  1.000000
+1999gp       0.02691  35.269  35.326  -0.057     -0.43       113.1    6.10  1.000000
+2005eq       0.02823  35.506  35.431  +0.075     +0.58       118.6    5.95  1.000000
+2008ar       0.02849  35.437  35.451  -0.014     -0.11       119.7    5.92  1.000000
+2001G        0.03317  35.688  35.786  -0.098     -0.76       139.0    5.49  1.000000
+2000dz       0.04012  36.231  36.207  +0.024     +0.20       167.6    4.99  1.000000
+1999cc       0.05008  36.648  36.698  -0.050     -0.42       208.2    4.47  1.000000
+2002hd       0.06012  37.111  37.105  +0.006     +0.05       248.7    4.08  1.000000
+2001az       0.08012  37.714  37.749  -0.035     -0.29       328.3    3.53  1.000000
+1999aw       0.09012  38.037  38.014  +0.023     +0.19       367.6    3.33  1.000000
+bin_0.1      0.10000  38.200  38.250  -0.050     -0.45       406.0    3.16  1.000000
+bin_0.3      0.30000  40.800  40.811  -0.011     -0.11      1117.7    1.83  1.000000
+bin_0.5      0.50000  42.100  42.067  +0.033     +0.27      1727.4    1.41  1.000000
+bin_0.7      0.70000  43.000  42.923  +0.077     +0.55      2260.6    1.20  1.000000
+bin_1.0      1.00000  44.000  43.856  +0.144     +0.80      2953.0    1.00  1.000000
+```
+
+## 5. Lattice Consistency: Is κ₀ the Same κ?
+
+SDT predicts κ = R × z_surface for any body.
+If the cosmological κ₀ is the same lattice property,
+it should be dimensionally consistent.
+
+```
+Body                    R(m)     z_surface    kappa(m)
+------------------------------------------------------
+Sun                6.957e+08     2.123e-06   1.477e+03
+Earth              6.371e+06     6.969e-10   4.440e-03
+Jupiter            6.991e+07     2.021e-10   1.413e-02
+Proton (H)         5.292e-11     5.325e-05   2.817e-15
+
+Cosmological κ₀:
+  κ₀ = 2.347274e-04 Mpc⁻¹
+     = 7.606997e-27 m⁻¹
+  1/κ₀ = 1.315e+26 m  (lattice coherence length)
+
+NOTE: κ_stellar = R × z (metres) is TOTAL displacement.
+      κ₀ (Mpc⁻¹) is compression PER UNIT DISTANCE.
+      They are dimensionally different: extensive vs intensive.
+      The connection is through the lattice equation of state,
+      not through numerical equality.
+```
+
+## 6. Numerical Curiosity
+
+```
+In the prior (cosplay) analysis, the free-n fit yielded:
+  Best-fit n = 0.8470
+
+Proton charge radius (muonic hydrogen):
+  R_p = 0.8414 fm
+
+  n / R_p = 1.0067
+  Discrepancy: 0.67%
+
+Noted. Not claimed as meaningful without a structural
+argument connecting the free exponent to the proton radius.
+But: the lattice's minimum point module IS the proton.
+The proton charge radius defines the exclusion volume V_disp.
+If the propagation exponent encodes the V_disp geometry,
+this may not be coincidence.
+```
+
+## 7. Per-Datapoint κ Inference
+
+If d = ln(1+z)/κ and μ gives d_eff, we can infer κ
+for each SN independently. If SDT is correct, all
+should yield the same κ₀ (within measurement error).
+
+```
+Name               z      mu  d_eff(Mpc)   kappa_infer  H0_infer    dev(%)
+--------------------------------------------------------------------------
+2006bh       0.01028  33.279        45.3    2.2825e-04     68.43     -2.76
+1999aa       0.01590  34.166        68.1    2.3530e-04     70.54     +0.24
+1999gp       0.02691  35.269       113.2    2.4092e-04     72.23     +2.64
+2005eq       0.02823  35.506       126.2    2.2675e-04     67.98     -3.40
+2008ar       0.02849  35.437       122.3    2.3625e-04     70.83     +0.65
+2001G        0.03317  35.688       137.3    2.4559e-04     73.63     +4.63
+2000dz       0.04012  36.231       176.3    2.3210e-04     69.58     -1.12
+1999cc       0.05008  36.648       213.6    2.4023e-04     72.02     +2.35
+2002hd       0.06012  37.111       264.4    2.3412e-04     70.19     -0.26
+2001az       0.08012  37.714       349.0    2.3854e-04     71.51     +1.63
+1999aw       0.09012  38.037       404.9    2.3229e-04     69.64     -1.04
+bin_0.1      0.10000  38.200       436.5    2.4018e-04     72.00     +2.32
+bin_0.3      0.30000  40.800      1445.4    2.3597e-04     70.74     +0.53
+bin_0.5      0.50000  42.100      2630.3    2.3123e-04     69.32     -1.49
+bin_0.7      0.70000  43.000      3981.1    2.2659e-04     67.93     -3.47
+bin_1.0      1.00000  44.000      6309.6    2.1971e-04     65.87     -6.40
+
+Mean κ₀ = 2.3400e-04 Mpc⁻¹  (H₀ = 70.15 km/s/Mpc)
+Std  κ₀ = 6.3709e-06 Mpc⁻¹
+CV       = 2.72%
+```
+
+κ₀ is CONSISTENT across all redshifts to within 2.7%.
+The lattice compression coefficient is uniform,
+as expected for a homogeneous pressurised medium.
+
+## 8. Summary
+
+```
+FRAMEWORK: Pressurised hyperfluid lattice.
+MECHANISM: Ratio redshift from multiplicative lattice compounding.
+RELATION:  d = ln(1+z) / κ₀
+PARAMETER: κ₀ = 2.347274e-04 Mpc⁻¹
+BRIDGE:    H₀_eff = κ₀ × c = 70.37 km/s/Mpc
+FIT:       chi2 = 2.84 (16 data, 1 param, chi2/dof = 0.189)
+
+No expansion imported. No dark energy. No Omega_m.
+No luminosity distance. No comoving distance.
+One lattice parameter. The numbers above.
+```

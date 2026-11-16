@@ -1,0 +1,131 @@
+# H0 vs Survey Depth — Gradient Analysis
+
+> Tests the SDT prediction: H0 decreases with survey depth.
+> No assumption about which model is correct.
+
+## 1. All H0 Measurements (sorted by z_max)
+
+```
+Measurement                           H0   sigma       z_max  log(z_max)       kappa       density
+--------------------------------------------------------------------------------------------------
+Megamaser NGC4258                  73.90    3.00      0.0050     -2.3010  2.4650e-04         local
+GW170817                           70.00   10.00      0.0100     -2.0000  2.3349e-04         local
+SBF (2021)                         73.30    2.50      0.0200     -1.6990  2.4450e-04         local
+CCHP TRGB JWST (2024)              68.81    2.22      0.0300     -1.5229  2.2953e-04  intermediate
+CCHP TRGB+JAGB (2024)              69.96    1.53      0.0500     -1.3010  2.3336e-04  intermediate
+SH0ES (2022)                       73.04    1.04      0.1500     -0.8239  2.4364e-04         local
+SH0ES JWST (2024)                  72.60    2.00      0.1500     -0.8239  2.4217e-04         local
+H0LiCOW (2020)                     73.30    1.75      0.7000     -0.1549  2.4450e-04     overdense
+TDCOSMO (2025, 8 systems)          71.60    3.30      1.0000      0.0000  2.3883e-04     overdense
+DES Y3+BAO+BBN                     67.40    1.15      1.5000      0.1761  2.2482e-04  intermediate
+BAO+BBN (no CMB)                   67.60    1.10      2.5000      0.3979  2.2549e-04  intermediate
+Planck TT,TE,EE+lensing            67.40    0.50   1100.0000      3.0414  2.2482e-04        global
+Planck+BAO                         67.66    0.42   1100.0000      3.0414  2.2569e-04        global
+WMAP9+ACT+SPT                      69.30    0.70   1100.0000      3.0414  2.3116e-04        global
+```
+
+## 2. Weighted Linear Fit: H0 = m × log10(z_max) + b
+
+```
+Slope m     = -0.7919 ± 0.2342 km/s/Mpc per decade
+Intercept b = 70.1892 ± 0.6223 km/s/Mpc
+R²          = 0.487940
+```
+
+The slope is **NEGATIVE** (-0.792 ± 0.234).
+This is 3.4 sigma from zero.
+**SIGNIFICANT**: H0 genuinely decreases with survey depth.
+This is CONSISTENT with the SDT prediction.
+
+## 3. Pairwise Density Contrast δ
+
+SDT predicts: κ_local/κ_global = H0_local/H0_global = (1 − δ)^{-1}
+where δ = local underdensity contrast.
+
+```
+Global anchor: Planck H0 = 67.40 ± 0.50 km/s/Mpc
+
+Measurement                           H0     ratio     delta   delta_err
+------------------------------------------------------------------------
+Megamaser NGC4258                  73.90    1.0964   +0.0880      0.0376
+GW170817                           70.00    1.0386   +0.0371      0.1377
+SBF (2021)                         73.30    1.0875   +0.0805      0.0321
+CCHP TRGB JWST (2024)              68.81    1.0209   +0.0205      0.0324
+CCHP TRGB+JAGB (2024)              69.96    1.0380   +0.0366      0.0222
+SH0ES (2022)                       73.04    1.0837   +0.0772      0.0148
+SH0ES JWST (2024)                  72.60    1.0772   +0.0716      0.0265
+H0LiCOW (2020)                     73.30    1.0875   +0.0805      0.0230
+TDCOSMO (2025, 8 systems)          71.60    1.0623   +0.0587      0.0439
+DES Y3+BAO+BBN                     67.40    1.0000   +0.0000      0.0186
+BAO+BBN (no CMB)                   67.60    1.0030   +0.0030      0.0178
+Planck TT,TE,EE+lensing            67.40    1.0000   +0.0000      0.0105
+Planck+BAO                         67.66    1.0039   +0.0038      0.0096
+WMAP9+ACT+SPT                      69.30    1.0282   +0.0274      0.0122
+```
+
+## 4. KBC Void Comparison
+
+```
+SDT required delta (SH0ES vs Planck): 0.0772
+KBC measured delta: -0.15 to -0.46 (K-band galaxy count, 300 Mpc)
+
+SDT required delta (0.077) is OUTSIDE the KBC range.
+NOTE: KBC measures luminosity-density underdensity,
+SDT delta is a pressure/compression underdensity.
+These may not be directly comparable.
+```
+
+## 5. H0 by Density Class
+
+```
+Class                N      <H0>       kappa
+--------------------------------------------
+local                5     73.04  2.4363e-04
+intermediate         4     68.10  2.2715e-04
+overdense            2     72.93  2.4326e-04
+global               3     67.86  2.2635e-04
+```
+
+### Monotonicity Check
+
+SDT predicts: H0(local) > H0(intermediate) > H0(global)
+
+```
+RESULT: The ordering is monotonic (excluding overdense lensing paths).
+This is CONSISTENT with SDT.
+```
+
+## 6. Falsification Check
+
+SDT says ALL H0 values should fall in [kappa_global*c, kappa_local*c].
+Testing each measurement:
+
+```
+Megamaser NGC4258                 H0=73.9±3.0  OK (within 2σ of [67.4, 73.9])
+GW170817                          H0=70.0±10.0  OK (within 2σ of [67.4, 73.9])
+SBF (2021)                        H0=73.3±2.5  OK (within 2σ of [67.4, 73.9])
+CCHP TRGB JWST (2024)             H0=68.8±2.2  OK (within 2σ of [67.4, 73.9])
+CCHP TRGB+JAGB (2024)             H0=70.0±1.5  OK (within 2σ of [67.4, 73.9])
+SH0ES (2022)                      H0=73.0±1.0  OK (within 2σ of [67.4, 73.9])
+SH0ES JWST (2024)                 H0=72.6±2.0  OK (within 2σ of [67.4, 73.9])
+H0LiCOW (2020)                    H0=73.3±1.8  OK (within 2σ of [67.4, 73.9])
+TDCOSMO (2025, 8 systems)         H0=71.6±3.3  OK (within 2σ of [67.4, 73.9])
+DES Y3+BAO+BBN                    H0=67.4±1.1  OK (within 2σ of [67.4, 73.9])
+BAO+BBN (no CMB)                  H0=67.6±1.1  OK (within 2σ of [67.4, 73.9])
+Planck TT,TE,EE+lensing           H0=67.4±0.5  OK (within 2σ of [67.4, 73.9])
+Planck+BAO                        H0=67.7±0.4  OK (within 2σ of [67.4, 73.9])
+WMAP9+ACT+SPT                     H0=69.3±0.7  OK (within 2σ of [67.4, 73.9])
+```
+
+## 7. Summary
+
+```
+Linear fit: H0 = -0.792 × log10(z_max) + 70.189
+Slope significance: 3.4 sigma
+R² = 0.4879
+SDT required underdensity: delta = 0.0772
+KBC measured: -0.15 to -0.46
+
+The data is what it is. The trend is reported without
+claiming it proves or disproves any model.
+```

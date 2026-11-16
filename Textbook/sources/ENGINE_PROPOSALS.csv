@@ -1,0 +1,12 @@
+chapter,id,title,text
+6,R6.5,radiation constant digits,"`a_rad` is stored to five digits, $4.4\times10^{-6}$ below the value computed from $k_B$, $h$, $c$; the shift propagates to $\varepsilon$, $\Phi$ and $P_{\rm conv}$ equally. A proposal to store more digits is canon work and waits for approval."
+7,R7.1,the quoted polynomial,"The comment at `laws.hpp:2404` gives the polynomial of $T(2,5)$ for the $(2,3)$ mode. Proposed correction, pending approval: replace it by $t^{-1}-1+t$."
+8,R8.5,`step_locus` near the centre,"The loss of accuracy of Table 8.3, and the proposed half-angle form."
+11,R11.6,a stale comment,The engine's comment at the transfer function gives $2.125\times10^{-17}$; the executed value is $2.1242\times10^{-17}$.
+19,R19.5,the capacity function,"`contact_capacity` exceeds the exact maximum for $\max(Z,N)<3$; proposed correction $\min(3Z,3N,ZN)$, not applied."
+21,R21.4,the engine's capacity function,"`contact_capacity` equals (21.1) except for $(1,1),(1,2),(2,1),(2,2)$ (R19.5; proposal, not applied)."
+44,R44.6,"stored constants (proposal to the author, canon untouched)",`cosmology::wien_peak` carries $2.898\times10^{-3}$ and `a_rad` is rounded to five digits; the computed values above are available if the author chooses to replace them.
+45,R45.5,"engine comment (proposal to the author, canon untouched)",The comment on `z_spectral` states the gravitational redshift as $z_e-z_o$; the second-order difference from (45.1) is not recorded there.
+49,R49.6,"stored alpha binding (proposal to the author, canon untouched)",`B_alpha` is rounded to five digits; the computed value from measured masses is available.
+54,R54.5,"stored scales (proposal to the author, canon untouched)","The comment relating $R_{\rm CMB}$ to $\ln(1+z)/\sigma_0$ is off by $0.76$–$0.90$ per cent, and the stored `age_SDT_Gyr` (48) and $R_{\rm CMB}/c$ (100.7 Gyr) differ by $2.1$; the two could be reconciled or labelled in `cosmology.hpp`."
+57,R57.4,unguarded domains,"`clock_rate`, `depth_from_c_far` and the others in Section 57.2 do not check their domains (proposal to the author, canon untouched)."

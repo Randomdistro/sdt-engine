@@ -87,6 +87,30 @@ does; routes pass, dwell, visit, and ride, and the push along them does the meas
    it is rewritten.
 7. **Corrections are taken, not performed.** When corrected, fix the artifact and continue;
    no ceremony, no self-flagellation, no restatement essays.
+8. **Exclusion discipline — agreement is an outcome, not a target** *(added 2026-10-03 at
+   Harvey's direction)*. An SDT route that lands on the same closed form or the same number
+   as the Standard Model, general relativity, QM or Newtonian mechanics has done what a
+   correct account must do. That agreement is recorded as **convergent** and is never, by
+   itself, a reason to downgrade, cap, demote, or relabel a result. In particular:
+   - "algebraically equivalent / identical to the textbook formula", "reduces to Coulomb /
+     Newton / GR", "a relabelling of Kepler", "nothing new", "ties the rival", "degenerate
+     with GR" are **not admissible reasons** for CONSTRUCTION, shared-input, circular,
+     tautology, class E/F, or any cap. They may appear only as a correspondence note.
+   - A downgrade is admissible only when it **names the contaminating input**: the specific
+     quantity in the SDT chain whose *measured value* already contains the output, traced to
+     its measurement chain (`file:line` for the code path, the dataset or CODATA entry for
+     the measurement). No named trace, no downgrade — an untraced downgrade is void.
+   - **Direction of derivation is fixed.** `GM = c²Ѻ`, `G`, ℏ-forms, the Lorentz factor and
+     the like are **outputs** of the koppa structure and the Six Laws, never inputs to them.
+     Writing an SDT quantity in its textbook form (Ѻ_b as `Gm_p/c²`) and then calling the SDT
+     route circular because `G` appears is the error this rule exists to stop.
+   - SDT's own laws (Law V ⇒ the Lorentz factor; Law III ⇒ the Coulomb and gravity forms)
+     are legal inputs to SDT chains. "Degenerate with SR by construction of Law V" is
+     convergence, not a demotion.
+   - Whether a shared number **discriminates** between frameworks is a separate question
+     from where the result **came from**. Record both: provenance (CONVERGENT / NATIVE /
+     SHARED-INPUT with the named input) and discrimination (discriminating / not yet
+     discriminating). A non-discriminating result is not a lesser result.
 
 ## §4. Development disciplines — calibrated from the cursor rules to this engine
 

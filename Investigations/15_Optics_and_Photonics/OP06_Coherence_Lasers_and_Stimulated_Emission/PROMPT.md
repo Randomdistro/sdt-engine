@@ -27,7 +27,7 @@
    (thermal) within 1%; threshold not sharp (round-trip gain = loss); `Δν_ST` not ∝ 1/P; or coherence
    that only arises once boson bunching is assumed.
 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class
-   (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN), per phase, no repainting a fired test.
+   (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN), per phase, no repainting a fired test.
 
 ### Anti-tautology firewall
 
@@ -140,7 +140,7 @@ quantum-optics reframes, frequency combs, optical clocks. **Framework:** `Theory
 ```markdown
 ## Pre-Run Commitments — OP06
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: 0 in the lock chain (gain-medium level energies/cross-sections = MEASURED-INPUT)
 - Engine namespaces used: CM01 phase-lock order parameter, law_VI:: (excited vortex emitter), depth_closure:: (cavity c_local)
 - Phase thresholds (committed before run):
@@ -160,7 +160,7 @@ quantum-optics reframes, frequency combs, optical clocks. **Framework:** `Theory
 | P3 `Δν_ST` exponent ≠ 1 | re-examine phase-diffusion of the lock (random dumps) | **OPEN** the linewidth | relabel the standard ST formula as derived |
 | P4 lock ≠ CM01 order parameter | check whether the laser needs a distinct mechanism | **OPEN**/report the unification break | force-fit the two to look identical |
 | Single-emitter g⁽²⁾<1 needed | model as single-vortex dead-time (antibunching) | **DEFER** the antibunching case | claim the lock alone explains it if it can't |
-| Rivals match but SDT only reproduces | label **DEGENERATE** honestly | — | claim Class A |
+| A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 
 ### Allowed adjustments
 

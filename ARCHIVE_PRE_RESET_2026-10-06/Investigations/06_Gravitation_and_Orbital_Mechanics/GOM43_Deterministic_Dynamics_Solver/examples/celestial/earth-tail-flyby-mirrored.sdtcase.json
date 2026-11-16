@@ -1,0 +1,138 @@
+{
+  "contract_version": "2.1.0",
+  "case_id": "earth-tail-flyby-mirrored",
+  "problem_class": "celestial_three_body",
+  "frame": {
+    "type": "inertial_cartesian",
+    "units": "SI",
+    "epoch": "controlled-t0",
+    "description": "Controlled heliocentric Earth flyby with an inbound equal-radius endpoint"
+  },
+  "force": {
+    "type": "retarded_seven_cone_occlusion",
+    "propagation_speed": "c",
+    "pressure_source": "sdt_law_I_P_conv",
+    "enable_eclipse_shielding": true,
+    "comparison_route": "point_koppa"
+  },
+  "bodies": [
+    {
+      "id": "Sun",
+      "baryon_count": "1194896189193174351291360199192375496021347264339032202825",
+      "radius_m": 695700000.0,
+      "collision_radius_m": 695700000.0,
+      "position_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "velocity_m_s": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "displacement": {
+        "proton_count": "1042049970841334100215793598798219858998090514867279642967",
+        "neutron_count": "152846218351840251075566600394155637023256749471752559858",
+        "material_volume_coverage": 1.0,
+        "represented_atomic_mass_coverage": 0.99913,
+        "relative_uncertainty": 0.009,
+        "ledger_sha256": "696f9f5954fd6220b32037e83dd0badecb0fda6360330450300a998664064578"
+      },
+      "provenance": {
+        "baryons": "datasets/displacement-ledgers.json exact Np+Nn",
+        "radius": "NASA Sun Fact Sheet",
+        "state": "controlled heliocentric state; transformed for earth-tail-flyby-mirrored"
+      }
+    },
+    {
+      "id": "Earth",
+      "baryon_count": "3582228292763500227915216004597522828715041486074668",
+      "radius_m": 6371000.0,
+      "collision_radius_m": 6371000.0,
+      "position_m": [
+        149597870700.0,
+        0.0,
+        0.0
+      ],
+      "velocity_m_s": [
+        0.0,
+        29780.0,
+        0.0
+      ],
+      "displacement": {
+        "proton_count": "1742443224477061544188882756170500291334431201325526",
+        "neutron_count": "1839785068286438683726333248427022537380610284749142",
+        "material_volume_coverage": 1.0,
+        "represented_atomic_mass_coverage": 0.9961,
+        "relative_uncertainty": 0.012,
+        "ledger_sha256": "696f9f5954fd6220b32037e83dd0badecb0fda6360330450300a998664064578"
+      },
+      "provenance": {
+        "baryons": "datasets/displacement-ledgers.json exact Np+Nn",
+        "radius": "NASA Earth Fact Sheet",
+        "state": "controlled circular-frame initial state; transformed for earth-tail-flyby-mirrored"
+      }
+    },
+    {
+      "id": "spacecraft",
+      "baryon_count": "100000000000000000000000000000",
+      "radius_m": 10.0,
+      "collision_radius_m": 0.0,
+      "position_m": [
+        149585128700.0,
+        -318550000.0,
+        0.0
+      ],
+      "velocity_m_s": [
+        0.0,
+        39780.0,
+        0.0
+      ],
+      "provenance": {
+        "baryons": "declared aggregate spacecraft resistance",
+        "radius": "declared rendering radius; collision disabled",
+        "state": "controlled 10 km/s inbound runner, 2 Earth-radii impact offset; transformed for earth-tail-flyby-mirrored"
+      }
+    }
+  ],
+  "slingshot": {
+    "host_body": "Sun",
+    "flyby_body": "Earth",
+    "runner_body": "spacecraft",
+    "reference_radius_m": 318804738.14546734,
+    "reference_separation_m": 149597870700.0,
+    "flyby_koppa_m": 0.004435,
+    "stage_min": 0,
+    "stage_max": 8,
+    "candidate_terminal_stage": 8,
+    "enable_experimental_tail": true,
+    "equal_radius_tolerance_m": 20000000.0,
+    "provenance": {
+      "endpoint_rule": "position-angle endpoints at equal geocentric radius",
+      "flyby_koppa": "v_surface^2 R/c^2 comparison input",
+      "tail": "PENDING non-driving transported-displacement branch"
+    }
+  },
+  "integrator": "velocity_verlet",
+  "timestep_s": 10.0,
+  "max_steps": 6212,
+  "record_every_steps": 100,
+  "tolerances": {
+    "retarded_time_s": 1e-09,
+    "channel_closure": 1e-13,
+    "medium_momentum_relative": 1e-11,
+    "lagrange_residual_m_s2": 1e-07,
+    "max_retarded_iterations": 64
+  },
+  "events": {
+    "stop_on_collision": true
+  },
+  "provenance": {
+    "classification": "COMPUTED",
+    "description": "Sunward-offset mirror of the controlled transverse flyby.",
+    "sources": [
+      "earth-tail-flyby-controlled.sdtcase.json"
+    ]
+  }
+}

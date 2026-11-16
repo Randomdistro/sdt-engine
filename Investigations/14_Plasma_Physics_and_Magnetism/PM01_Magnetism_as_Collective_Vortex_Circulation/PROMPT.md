@@ -28,7 +28,7 @@
    (wrong Ampère exponent, non-zero `∇·B`, a sign cell that matches experiment only by hand, a moment
    that needs µ_B).
 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class
-   (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN), per phase, no repainting a fired sign cell.
+   (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN), per phase, no repainting a fired sign cell.
 
 ---
 
@@ -200,7 +200,7 @@ Not required for the verdict; this is the payoff of doing PM01 well.
 ```markdown
 ## Pre-Run Commitments — PM01
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: 0 in the native chain (list any in the final SI map)
 - Engine namespaces actually used: law_III, law_V, law_VI (traction/topology), bridge (koppa), magnetosphere.hpp
 - Phase thresholds (committed before run):
@@ -217,7 +217,7 @@ Not required for the verdict; this is the payoff of doing PM01 well.
 | P3 a sign cell only matches by hand | re-derive the EMC03 focus/defocus handedness for that carrier | down-grade to **C** (sign imported, not forced) | hand-flip the cell and claim A |
 | Any moment reachable only in µ_B/µ_N | seek the wake-circulation expression first | **units FAIL** — record it, do not soften | quote the magneton and call it native |
 | P4 magnetosphere needs µ₀-postulate/dynamo axiom | restrict to traction-derivable geometry only | **DEFER** P4; note the missing native piece | import µ₀/dynamo as primitive |
-| Rivals match but SDT only reproduces | label **DEGENERATE** honestly | — | claim Class A |
+| A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 
 ### Allowed adjustments
 

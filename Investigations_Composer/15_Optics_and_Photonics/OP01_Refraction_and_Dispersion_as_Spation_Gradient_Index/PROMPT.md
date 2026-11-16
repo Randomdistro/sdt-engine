@@ -21,7 +21,7 @@
 4. **What would prove us wrong?** Snell not from Fermat; 1.75″ off >1% with native integral; water
    `n` not from bound-vortex `z` to 5%; solar fold absent at predicted λ band.
 5. **How will we know we're done?** Dual verdict: prompt completion ≥ **B** (Phases 1–3 PASS-GATE);
-   physics class **NATIVE** or honest **CONVERGENCE/DEGENERATE** (solar limb may tie GR — say so).
+   physics class **NATIVE** or honest **CONVERGENCE/SHARED-INPUT** (solar limb may tie GR — say so).
 
 ---
 

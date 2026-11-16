@@ -1,0 +1,46 @@
+﻿GOM23 — KOPPA ON A STRAIGHT LINE (direct run, pre-registered gates)
+====================================================================
+
+[P1] pi-audit — every recovery chain and its inputs:
+  I1 scale:            { g_measured, R_E, c }              -> kop = g*R^2/c^2
+  I2 tower:            { dnu/nu, h, r, c }                 -> kop = (dnu/nu)*r^2/h
+  I3 photoionisation:  { E_ion, m_e, a_0, c }              -> kop = a_0*(2E/(m_e c^2))
+  P3 ascent:           { a_proper, a_kinematic, r, c }     -> kop = (a_p - a_k)*r^2/c^2
+  P4 line:             { dv_perp, b, v, c }                -> kop = dv*b*v/(2 c^2)
+  ZERO pi in any chain. The pi-coefficients of the census belong to the
+  sampling geometries, not to the length.  [P1 PASS by enumeration]
+
+[P2] instruments validated on known answers (reaction instruments):
+  I1  standing still IS thrust: the normal force is the instrument.
+      centrifugal content of conventional g0: -0.034 m/s^2 (equator), stated.
+  I1     scale: kop = g0*R^2/c^2 [m]                    got 0.00442889     ref 0.00443414     dev   0.1185%  gate 0.50%  PASS  
+  I2a    tower: kop*h/r^2 vs g*h/c^2                    got 4.91012e-14    ref 4.91012e-14    dev   0.0000%  gate 0.01%  PASS  
+  I2b    tower: vs measured chronometric class          got 4.91012e-14    ref 4.9e-14        dev   0.2065%  gate 2.00%  PASS  
+      finite-proton seat k = 137.0726 (idealisation 137.036) — offset stated.
+  I3     photoionisation: kop_H = a_0/k^2 [m]           got 2.81644e-15    ref 2.81794e-15    dev   0.0534%  gate 0.10%  PASS  
+
+[P3] synthetic powered ascent — recover kop from (a_proper - a_kinematic):
+      10 samples along 400 s ascent, altitude reached 1260.0 km
+  P3     worst-sample recovery ratio (1 = exact)        got 1              ref 1              dev   0.0002%  gate 0.10%  PASS  
+      synthetic pass licenses the EXTRACTION; real telemetry is OWED
+      (DATA_REQUIREMENTS.md).
+
+[P4] straight line at speed v, impact parameter b — lateral bill:
+  P4     numerical vs closed 2c^2*kop/(b*v) [m/s]       got 1251.04        ref 1251.05        dev   0.0000%  gate 0.50%  PASS  
+      inversion check: kop = dv*b*v/(2c^2) = 0.00443414 m (anchor 0.00443414 m)
+
+[P5] closure: straight-line kop vs circular-ladder kop, per rung:
+  P5a    Earth: scale vs bridge::koppa_Earth [m]        got 0.00442889     ref 0.00443414     dev   0.1185%  gate 1.00%  PASS  
+  P5b    Sun: pointwise z*R vs bridge::koppa_Sun [m]    got 1477.05        ref 1477.05        dev   0.0000%  gate 1.00%  PASS  
+  P5c    H: photoionisation vs r_e (circular ladder) [m] got 2.81644e-15    ref 2.81794e-15    dev   0.0534%  gate 1.00%  PASS  
+
+[Appendix A] field-following routes — consistency, NOT straight:
+  sungrazer v at 2R_Sun = c*sqrt(2*kop/r) = 437 km/s (observed class 400-600)
+  surface escape        = 617.8 km/s (standard 617.5)
+  these follow the field's line; they are never cited as the straight-line result.
+
+RESULT: 10 gates PASS, 0 FAIL.
+Shared-form caveat: every recovered number coincides with a GM-derived value;
+the straight-line ledger cannot discriminate the readings. Earned content:
+pi-free provenance, reaction-instrument validation, and the closure of the
+straight-line family onto the circular ladder.

@@ -48,6 +48,12 @@
     deuteronTiers: Object.freeze([6, 12, 12, 20, 30, 42]),
     tritonShellCapacities: Object.freeze([8, 10, 12, 14, 16]),
     shellSchedule,
+    // UNSOURCED PLACEHOLDERS (2026-10-16 audit): the two scales below have no origin in
+    // Engine/include/sdt/laws.hpp and no calibration record. They set contractionScale in
+    // universalShellAllocation(): a post-hoc multiplier on the wake binding and the displayed
+    // positions, linear in the number of full triton shells; the placed geometry is not scaled.
+    // Tier CALIBRATED with no record. NSEQ19 (contact-only collapse) reproduces a triton shell
+    // OPENING and not the CLOSING; these numbers stand in for a rule that is still PENDING.
     tritonOpeningScale: 1.05,
     tritonClosingScale: 0.95,
     observables,

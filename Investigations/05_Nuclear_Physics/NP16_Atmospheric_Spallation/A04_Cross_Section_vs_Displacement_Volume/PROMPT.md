@@ -1,3 +1,32 @@
+# NP16-A04 — Reaction cross-section and the nucleus' size (specification rewritten 2026-10-12)
+
+**Author:** J. C. Harvey, Melbourne. Rewritten at Harvey's direction: prompts carry new data, and errors inform the mechanism. The 2026-06-27 specification is kept below the line, superseded.
+
+## 1. What is established (reset run 2026-10-10, `NP16A04_RESET_ASSESSMENT_2026-10-10.md`)
+- **The zero-parameter law-IV displacement volume is EXCLUDED (G1) as the cross-section scale, short by about 10⁹ at every A** (6–238).
+  - R_disp(proton) = 4.19e-5 R_p: the law-IV displacement radius is ten thousandths of the boundary.
+  - The A^(1/3) **shape** is shared (constant ratio 1.75e-9). Only the scale fails.
+- The old grammar-scaling alternative used **three fitted radii** (r_α, r_d, r_t), which makes it CALIBRATED(3). It also needs a measured dataset (EXFOR/PDG reaction cross-sections) that is not in the repo: **PENDING_DATA**.
+
+## 2. What the error teaches
+- Cross-sections are set by the **boundary** (R_p and the nucleus' contact extent), not by the law-IV displacement volume.
+- This sits directly on Harvey's 2026-10-11/12 proposal: occlusion strength and emission shift share one cause, the displacement, read at the depth where the interaction happens. A projectile at nuclear contact is beyond **hydrogen's** c-boundary (z_H ≈ 1.7 at 2R_p; PPT18) and shallow in each proton's own (z_p ≈ 0.13).
+- A reaction cross-section is therefore the natural observable for the displacement-modulated occlusion law **once that law is derived**.
+
+## 3. Next round (register before computing)
+1. **Data:** fetch measured p + nucleus reaction cross-sections (σ_R across A, at a fixed energy band) with provenance into `Datasets/nuclear/`.
+2. **Baseline (zero-parameter, labelled convergent):** σ = π(R_p + R(A))², with R(A) = R_p (A/η)^(1/3) (NP12 canon law). This shares its form with the standard geometric cross-section and cannot discriminate. It is reported as the zero-fit scale check.
+3. **Native test (after the displacement-occlusion law is registered):** the energy dependence of σ_R. The projectile's movement budget changes its contact depth; the law must predict how σ_R varies with energy, with no fitted radius.
+4. **The old three-radius fit** is reported only as CALIBRATED(3).
+
+## 4. Prohibitions
+- No fitted radii labelled as derived.
+- No law-IV volume as an interaction size.
+
+---
+
+## Superseded specification (2026-06-27, kept as written)
+
 # A04: Cross-Section vs Displacement Volume Scaling — Investigation Prompt
 
 > **Author:** J. C. Harvey, Melbourne. **Status:** SPEC (upgrade 2026-06-27).
@@ -12,7 +41,7 @@
 2. **Why does it matter?** — Stack position / downstream blockers (see `INVESTIGATION_STACK.md`).
 3. **How will we find out?** — Gated phases in §④; native mechanism before `atomic::`/rivals.
 4. **What would prove us wrong?** — §⑧ falsification tests with numeric triggers.
-5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN).
+5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN).
 
 ---
 
@@ -185,7 +214,7 @@ extension.
 ```markdown
 ## Pre-Run Commitments — A04
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: [0 or list each param — max per §⑤]
 - Engine namespaces: NP01 grammar, law_III nuclear occlusion, ATOMICUS rules
 - Phase thresholds (committed before run): [commit per phase in RUN_LOG]
@@ -199,7 +228,7 @@ extension.
 | Phase 0 sanity check fails | Fix units/engine refs; verify `laws.hpp` symbols | STOP — report blocker | Fit to target |
 | Native mechanism off > committed % | Alternative route in §④; document ADJ-### | **OPEN** or **KILL** hypothesis | RETRO-PASS |
 | `z ≥ 1` in closure formula | Weak-field break (CR10); piecewise or exponential | **OPEN** that regime | Ignore break |
-| Rivals match but SDT doesn't beat | Label **DEGENERATE** honestly | — | Claim Class A |
+| A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 | Upstream dependency missing (FLM10, etc.) | **DEFER** phase; cite dependency ID | — | Fake PASS |
 
 ### Allowed adjustments

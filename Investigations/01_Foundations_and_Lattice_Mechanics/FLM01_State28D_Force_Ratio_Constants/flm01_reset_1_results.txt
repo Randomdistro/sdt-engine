@@ -1,0 +1,24 @@
+FLM01 blank-slate pass (registered in FLM01_RESET_ASSESSMENT_2026-10-13.md)
+=======================================================================
+
+epsilon = a_rad T0^4 l_P^3 = 1.7626e-118 J ; N = R_CMB/l_P = 5.8945e+61 ; Phi = N eps = 1.0390e-56 J ; P_conv = Phi/l_P^3 = 2.4608e+48 Pa ; law_III::P_eff = 5.2273e+31 Pa ; R_p_lock = 8.4124e-16 m ; r_e = 2.8179e-15 m ; l_P = 1.6163e-35 m
+
+Prompt Phase 1 as written: P_atom = Phi eps / a_e^3 = 1.8314e-129 [J^2/m^3], T5 = Phi eps / ((a_e - a_p) a_e^3) = 1.8332e-114 [J^2/m^4] ; the target is [Pa/m] = [J/m^4]: units differ by a factor of an energy -> dimensionally invalid (D3)
+Prompt Phase 2: Phi_5 = m_e c^2 / 4 = 2.0468e-14 J (code scale 1e-20 J: ratio 2.047e+06, log10 6.31)
+
+Pressure-gradient candidates [Pa/m] against 1e10 Pa/m:
+  P_eff / R_p_lock = 6.2138e+46 Pa/m : ratio 6.214e+36 (log10 36.79) 
+  P_eff / r_e = 1.8550e+46 Pa/m : ratio 1.855e+36 (log10 36.27) 
+  P_eff / l_P = 3.2342e+66 Pa/m : ratio 3.234e+56 (log10 56.51) 
+  P_conv / R_p_lock = 2.9252e+63 Pa/m : ratio 2.925e+53 (log10 53.47) 
+  P_conv / r_e = 8.7327e+62 Pa/m : ratio 8.733e+52 (log10 52.94) 
+  P_conv / l_P = 1.5225e+83 Pa/m : ratio 1.523e+73 (log10 73.18) 
+Energy candidates [J] against 1e-20 J:
+  m_e c^2 / 4        = 2.0468e-14 J : ratio 2.047e+06 (log10 6.31) 
+  law_III::P_eff law_III::R_p_lock^3 = 3.1119e-14 J : ratio 3.112e+06 (log10 6.49) 
+  epsilon            = 1.7626e-118 J : ratio 1.763e-98 (log10 -97.75) 
+  Phi                = 1.0390e-56 J : ratio 1.039e-36 (log10 -35.98) 
+
+candidates within 20% of their code scale: 0 of 10
+Look-elsewhere: a log-uniform candidate over 30 decades has a chance of 2*log10(1.2/0.8..)=0.006 of landing within 20% of a given scale per candidate; for 10 candidates the expected number inside is about 0.06
+Outcome by the corrected rule: no dimensionally valid candidate within 20% of either scale -> both scales CALIBRATED/OPEN (as the engine header records)

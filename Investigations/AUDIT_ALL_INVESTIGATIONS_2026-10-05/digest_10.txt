@@ -1,0 +1,283 @@
+### 11/TD07_Information_Thermodynamics_and_Landauer  | status: SPEC (upgrade 2026-06-27). | words 1374 | code 1 outs 1 verd 1 runlog 0 | gate True prereg True
+Q: Does the Landauer bound `k_BT ln2` per erased bit follow *literally* from TD01's `S=k_B ln W` (erasing forces `W:2→1`, dumping `k_B ln2` of configurational entropy as heat because relay conserves throughput), and does the same throughput-conservation **close Maxwell's demon** — the demon's relay register must be reset, paying ba
+F: §⑧ falsification tests with numeric triggers and real failure modes. 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN). ## Question Landauer's principle says erasing one bit dissipates at least `k_BT 
+G: 3. **How will we find out?** — Gated phases in §④; the bit-erasure ledger and the demon+reset accounting
+G: | P3 reversible-end cost not `→ 0` | check the gate is genuinely one-to-one (`W` unchanged) | **OPEN** the Bennett limit | call a lossy gate reversible |
+G: | A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimin
+G: that nets positive work · post-hoc tolerance widening · plugging `ln2` · `atomic::`/GM/G in the chain.
+V: # TD07 — Direct re-run verdict (2026-07-26)
+V: > **Run class: DIRECT** (main session, no agents). Agent-era `TD07_VERDICT.md`, `RUN_LOG.md`,
+V: ## Verdict
+V: - **Prompt completion: A** · **Physics class: CONVERGENCE (Class C), native-count route.**
+O: kelvin conversion uses k_B = 1.380649e-23 J/K as the only bridge. [PASS]
+O: TD07 GATES: P1 PASS | P2 PASS | P3 PASS | P4 PASS
+O: VERDICT: PASS - see TD07_VERDICT.md
+FLAGS: MISSING: ; ident:1 ; res pass/fail 13/0 verd pass/fail 0/0
+
+### 11/TD08_Fluctuation_Dissipation_and_Brownian_Motion  | status: SPEC (upgrade 2026-06-27). | words 1396 | code 1 outs 1 verd 1 runlog 0 | gate True prereg True
+Q: Do Brownian motion, the Einstein relation `D=µk_BT`, and the fluctuation–dissipation theorem all follow from **one** relay statistic — the same disordered tick-to-tick throughput that *drags* a moving body also *kicks* a resting one — so that noise and friction are not two independent inputs but two faces of the relay bath, with
+F: §⑧ falsification tests with numeric triggers and real failure modes. 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN). ## Question Brownian motion, the Einstein relation `D = µk_BT`, and the fluctuat
+G: 3. **How will we find out?** — Gated phases in §④; the Brownian walk and the drag response measured on
+G: compare to Phase-1 `D`. *Success:* agreement within the combined ~10% budget — one medium, two suites.
+G: | A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimin
+V: # TD08 — Direct re-run verdict (2026-07-26)
+V: > **Run class: DIRECT** (main session, no agents). Agent-era `TD08_VERDICT.md`, `RUN_LOG.md`,
+V: OPEN, correctly.
+V: - The prompt's τ ~ t_P claim is classed OPEN, not asserted (untestable in the toy).
+V: ## Verdict
+O: ratio = 0.9856 (1 +- 3%; O(m/M) = 1% budget declared) [PASS]
+O: TD08 GATES: P0 PASS | P1 D extracted | P2 PASS | P3 PASS | P4 DEFERRED
+O: VERDICT: PASS - see TD08_VERDICT.md
+FLAGS: MISSING: ; ident:2 ; res pass/fail 9/0 verd pass/fail 0/0
+
+### 11/TD09_Freedom_Ledger_of_Binding  | status: SPEC, written BEFORE the tool (gates below are | words 601 | code 1 outs 1 verd 1 runlog 0 | gate True prereg True
+Q: RECT** (main session, no agents). > **Inherits** R0–R5 anti-creep verbatim. ## The claim (Harvey, verbatim core) Entropy is dead; degrees of freedom is alive. Things move toward greater freedom. Movement causes time; change causes time. Matter demonstrably climbs into higher, more sophisticated arrangements — so the "descent into disorder" narration is wrong even where the counting is right. ## The sharpening that makes it computable S = k_B ln W already IS a freedom count (TD01). The naive 
+F: iable deliverable, decay costume gone. ## Outputs `td09_freedom_ledger.cpp` → `td09_rerun_<date>.txt`, `TD09_VERDICT_DIRECT_<date>.md`. ## Forbidden Widening the G3 band after the number; hiding the Saha convergence; claiming P2 or the narration as evidence; importing any cosmology beyond measured η
+G: **P3 — THE GATE: the flip temperature.** The ledger flips sign when kT approaches E_b divided by
+V: # TD09 — Direct verdict (2026-07-26): the freedom ledger locates the universe's first assembly step
+V: > **Run class: DIRECT** (main session, no agents). PROMPT.md written with pre-committed gates
+V: - **P1 (two-stream identity):** the freedom ledger (bath routes opened E_b/kT minus
+V: - **P2 (why matter climbs):** at 300 K, one deuteron binding opens **8.6e7 nats** in the bath
+V: **G3 PASS** — and not marginally: the number sits inside the measured window itself.
+O: G3 verdict: PASS (ledger locates the universe's first assembly step)
+FLAGS: MISSING: ; Gcode:1 ; ident:4 ; res pass/fail 2/0 verd pass/fail 1/0
+
+### 12/CM01_Superconductivity_as_Phase_Locked_Vortex_Pairs  | status: SPEC (upgrade 2026-06-27). | words 2141 | code 1 outs 1 verd 1 runlog 1 | gate True prereg True
+Q: Is the superconducting "2" in `Φ₀ = h/2e` a *native count of two phase-locked W=1 vortices* (so flux quantisation, zero drag and the isotope effect all follow from one lattice-mediated locking mechanism), or is it only a re-narration that silently imports the BCS gap / Cooper-pair postulate to do the real work? Concretely: can a
+F: §⑧: four falsifiers with numeric triggers and real failure modes — the pair-binding test (T2) and the isotope exponent (T4) can both come out the wrong way. 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED /
+G: 3. **How will we find out?** — Four gated phases (§④): the single-vortex drag (P1) and the
+G: | T3 | `Φ₀ = h/2e` is a native count of TWO vortices | computed flux quantum within <1% of `h/2e = 2.0678×10⁻¹⁵ Wb`; the divisor is exactly 2 (= two locked W=1 vortices), not fitted | if the
+G: | A rival (BCS) lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state dis
+G: - Importing a BCS gap or `Φ₀=h/2e` into the native chain and grading A · post-hoc tolerance widening ·
+V: # CM01 — Verdict: Superconductivity as Phase-Locked Vortex Pairs
+V: ~1/30 of the well scale (window OPEN for all four metals). That answers WHY pairs are possible
+V: vortex has no coherent seat in the pair's combined wake — **argued, not proven; exclusivity OPEN.**
+V: 2-body lock. Not counted as passes. The earned content is the divisor-as-body-count argument.
+V: - η = T_c/θ_D printed OBSERVED, never fitted. CALIBRATED used: 0 of 0.
+O: lambda_L(Nb) = 22.5 nm (anchor 39 nm, gate 2x) PASS
+O: gate -0.500 +/- 0.005: PASS ; anchor Hg 0.50 +/- 0.03 [OBSERVED]
+O: IDENTITY: Phi_0 = h/2e, kappa_pair = h/2m (labelled, not passed).
+FLAGS: MISSING: ; ident:7 ; res pass/fail 7/0 verd pass/fail 0/1
+
+### 12/CM02_Electrical_Conduction_and_Ohms_Law_from_Occlusion_Drag  | status: SPEC → ACTIVE on first gated run. | words 1687 | code 1 outs 1 verd 1 runlog 0 | gate True prereg True
+Q: Does metallic conductivity follow from **occlusion drag on drifting W=1 vortices** — with the scattering time `τ` *derived* from a relay mean free path (`τ = ℓ_mfp/v_drift`, `ℓ_mfp` from an occlusion cross-section of lattice defects) — or can σ only ever be "reproduced" by the circular Drude path that reads `τ` back out of the *
+F: §⑧: τ from geometry off >2× on Cu; ρ(T) not linear above θ_D; σ reproducible *only* with the OBSERVED τ (the circular path). Each has a real failure mode. 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class. Prompt **B** if σ within 2× on Cu/Ag/Al with **D
+G: the drag that CM01 superconductivity drives to zero, the drift channel CM03 bands gate, and the
+G: 3. **How will we find out?** — Phase 0 sanity gate; Phase 1 derives τ from defect cross-section
+G: Prompt **B** if σ within 2× on Cu/Ag/Al with **DERIVED** τ; **A** if the ρ(T) slope is native too;
+G: ### Phase 0 — Sanity (GATE)
+G: Print `R_K`, `m_e`, `e`; verify `h/e²` vs CODATA. **GATE:** rel err < 10⁻⁹.
+V: > ⚠️ **SUPERSEDED — contradicts current PROMPT.md** (claims PASS on the circular τ-from-σ path the
+V: # CM02 — Verdict: Ohm's Law from Occlusion Drag
+V: **Classification: CLASS C (CONVERGENCE).**
+V: - σ(Cu) computed vs measured: **<2%** error — PASS
+V: τ from measured σ: **OBSERVED** (native MFP derivation OPEN).
+O: |error| = 0.47% [PASS]
+O: VERDICT: PASS G�� Class C (CONVERGENCE)
+FLAGS: MISSING: ; ident:14 ; res pass/fail 2/0 verd pass/fail 3/0
+
+### 12/CM03_Band_Structure_Conductor_Insulator_from_Lattice_Packing  | status: SPEC (upgrade 2026-06-27). | words 1713 | code 1 outs 1 verd 1 runlog 1 | gate True prereg True
+Q: Is the conductor / semiconductor / insulator trichotomy — and the *magnitude* of the "band" gap — fixed by **lattice packing geometry alone** (coordination + bond directionality blocking the relay channels of a drifting W=1 vortex), or does any honest account of the gap *scale* secretly require a Bloch-wave / k-space band parame
+F: §⑧: three falsifiers with numeric triggers and real failure modes — the trichotomy ordering (T1) and the gap-magnitude test (T3) can both come out wrong. 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OP
+G: 3. **How will we find out?** — Four gated phases (§④): packing classification (P1) and the
+G: free a gripped vortex (PPT06), to within a fixed O(1) geometric factor.
+G: with magnitudes within 2×.
+G: | T3 | `E_g` from traction grip (PPT06) | ordering `E_g(C 5.5 eV) > E_g(Si 1.12) > E_g(Ge 0.67)` AND magnitudes within 2× from one fixed O(1) geometric factor (same factor for all three) | i
+G: 1. **Is the metal/insulator line a single packing threshold?** Is there one critical
+V: # CM03 — Verdict: Band Structure / Conductor–Insulator from Lattice Packing
+V: **The conduction trichotomy is packing-sorted: 9/9, zero misclassifications, from a 3-rule tree
+V: all inside the committed 2× gate on ONE shared factor f = 0.944 (CALIBRATED(1), minimax,
+V: - **Sn-grey: predicted 0.91 eV vs ~0.08 measured (11.4×).** Classification still lands
+V: ## FAILURE RECOVERY (§D — the Sn-grey / P-black magnitude edge)
+O: ordering C > Si > Ge (f-independent, pure 1/d^2): PASS [DERIVED]
+O: Si: ln(rho) vs 1/T slope -> Eg = 1.300 eV (input 1.300) err 0.00% PASS
+O: drho/dT < 0 across 250-580 K: PASS (metal has opposite sign, P1 chain)
+FLAGS: MISSING: ; ident:2 ; res pass/fail 7/0 verd pass/fail 0/1
+
+### 12/CM04_Crystal_Lattice_and_Phonons_as_Compression_Waves  | status: SPEC (upgrade 2026-06-27). | words 1750 | code 1 outs 1 verd 1 runlog 1 | gate True prereg True
+Q: Can the heat capacity of a crystalline solid — the Dulong–Petit `3R` high-T limit and the Debye `C ∝ T³` low-T law, with `θ_D` set by the FD05 sound speed `c_s` — be reproduced by **counting native lattice compression-wave modes** (FD05 relay waves), with **no phonon field operators and no QM oscillator quantisation imported as 
+F: §⑧: three falsifiers with numeric triggers and real failure modes — the `T³` exponent (T2) and the `θ_D(c_s)` prediction (T3) can both come out wrong. 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN)
+G: 3. **How will we find out?** — Four gated phases (§④): mode counting → 3R (P1) and the Debye `g(ω)∝ω²`
+G: relay wavelength (one lattice spacing) and FD05 `c_s` — predicts θ_D for several solids within ~10%.
+G: lattice spacing → θ_D. *Success:* θ_D for Cu, Al, diamond, NaCl within 10%.
+G: | T1 | 3N mode counting → Dulong–Petit | high-T `C_v → 3R = 24.94 J·mol⁻¹·K⁻¹`, within 2% for ≥4 solids (Cu, Al, Pb, NaCl) | if 3N counting gives a high-T limit ≠ 3R (e.g. 3R/2 or 6R), DOF i
+G: | T3 | `θ_D = ℏc_s(6π²n)^{1/3}/k_B` | θ_D within 10% for Cu (343 K), Al (428), diamond (2230), NaCl (321) using FD05 c_s + measured n, **no per-solid refit** | if θ_D is off by >2× for any o
+V: # CM04 — Verdict: Crystal Lattice and Phonons as Compression Waves
+V: calibrated parameters. No phonon field operator, no oscillator postulate, no ψ appears anywhere in
+V: | P1 mode count → 3R | 3N exact; model limit 0.1%; band [0.95,1.10] ≥4 solids | 3N EXACT (L=2..6); 0.9995; 4/4 in band | **PASS-GATE** |
+V: | P2 g(ω)∝ω² → T³ | slope 2.0±0.1; p=3.0±0.1; firewall first | slope 1.924; p=2.9950; continuum branch: NO T³ | **PASS-GATE**, grade capped C |
+V: | P3 θ_D one-rule | 10% for Cu/Al/diamond/NaCl | −0.4% / −6.7% / +3.3% / **−10.1% FAIL** | 3/4 — OPEN on NaCl |
+O: T = 100 K : C_v(model) = 14.77 C_p(meas) = 16.01 err -7.8% PASS
+O: T = 200 K : C_v(model) = 21.63 C_p(meas) = 22.63 err -4.4% PASS
+O: T = 300 K : C_v(model) = 23.39 C_p(meas) = 24.47 err -4.4% PASS
+FLAGS: MISSING: ; ident:1 ; res pass/fail 10/3 verd pass/fail 2/3
+
+### 12/CM05_Superfluidity_and_BEC_from_Phase_Lock  | status: SPEC (upgrade 2026-06-27). | words 1689 | code 1 outs 1 verd 1 runlog 1 | gate True prereg True
+Q: Can He-4 superfluidity and BEC be reproduced as a **macroscopic phase-locked wake condensate** — every atom's convergence wake locked into one coherent circulation the lattice cannot occlude, circulation quantised in `κ = h/m` (FD02, clean to 0.02%) — with **no BEC wavefunction ψ imported as the mechanism**? Concretely: does a c
+F: §⑧: three falsifiers with numeric triggers and real failure modes — the viscosity drop (T1) and the circulation quantum (T2) can both come out wrong. 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN),
+G: 3. **How will we find out?** — Four gated phases (§④): phase-lock onset (P1) and the zero-viscosity
+G: occlusion threshold). *Success:* `v_c` for He-4 within 2×; two-fluid ρ_s(T)/ρ qualitatively.
+G: | T1 | Wakes phase-lock below T_λ | a sharp viscosity collapse at a transition T of correct order (`T_λ ≈ 2.17 K`, within ~2×), with coherent-wake span `ξ ≫` occlusion scale | if the wake-co
+G: | T2 | `κ = h/m` for ONE atom | circulation quantum = `h/m_He = 9.97×10⁻⁸ m²/s`, within 0.1% (reuses FD02's 0.02%); the divisor is 1 (single atom), **not** the CM01 pair-2 | if the native co
+G: | T3 | `v_c` = excitation-shedding onset | He-4 critical velocity within 2× of the measured roton value (~60 m/s ideal; ~0.1–10 m/s practical) as an occlusion threshold | if SDT gives a `v_c
+V: # CM05 — Verdict: Superfluidity and BEC from Phase Lock
+V: ## The honest FAIL (P1 magnitude)
+V: - Route 1 (wake-crossover, λ_w = spacing): T₁ = 12.52 K → **5.77× high — FAIL**
+V: - Route 2 (lock-energy, CM01 form): T₂ = 0.476 K → **0.22× low — FAIL**
+V: T/T_lock = 0.5; exactly 0 above) — both committed gates PASS. Rotation enters only as quantised
+O: = 9.96930e-08 m^2/s vs 9.97e-8 measured err 0.007% PASS (gate 0.1%)
+FLAGS: MISSING: ; ident:2 ; res pass/fail 3/2 verd pass/fail 1/5
+
+### 12/CM06_Quantum_Hall_and_Josephson_Metrology  | status: SPEC (upgrade 2026-06-27). | words 1763 | code 1 outs 1 verd 1 runlog 1 | gate True prereg True
+Q: Are the two most precise constants in metrology — `R_K = h/e²` (von Klitzing, defines the ohm, E86) and `K_J = 2e/h` (Josephson, defines the volt, E85) — derivable as **native lattice-topology integer counts** (the Hall plateau = an integer count `ν` of occlusion-channel edge states, the Josephson "2" = the two locked vortices o
+F: §⑧: three falsifiers with numeric triggers and real failure modes — the plateau value (T1) and the "2"-is-two-vortices test (T2) can both come out wrong. 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OP
+G: 3. **How will we find out?** — Four gated phases (§④): edge-channel confinement (P1) and the
+G: `R_K`, `K_J` vs SI. *Success:* both within the relay-quantisation floor; consistent with CM02 ohm.
+G: | T3 | Exactness = topological robustness | plateau flatness within the relay-quantisation floor as defect density varies over ≥2 orders | if the SDT plateau drifts continuously with disorde
+G: ohm and volt within SDT. **Related:** E85 (Josephson volt), E86 (quantum-Hall ohm); the
+G: BCS 2e as the Josephson "2"; widen tolerances; plug R_K/K_J; IDENTITY-PASS; local constant namespaces
+V: # CM06 — Verdict: Quantum Hall and Josephson Metrology
+V: definitional, and the prompt's own rule (no identity-pass, no Chern import) was obeyed to the
+V: OPEN there) — one 2π phase slip relays one locked pair: 2e·V = h·f. The single-vortex
+V: (τ-from-σ circularity, the burned verdict of 2026-06). Unblock condition: an honest CM02 re-run
+V: - §G(3) ledger discipline: "e²/h per channel is not native" is a STATUS (conditional on
+O: gates: nu integer-only PASS ; nu constant over 3 orders PASS ;
+O: bulk declines smoothly: 96.5% (gate >30%) PASS
+O: with that flag, not laundered into a pass here).
+FLAGS: MISSING: ; ident:13 ; res pass/fail 3/0 verd pass/fail 0/1
+
+### 12/CM07_Ferromagnetism_as_Aligned_Vortex_Wakes  | status: SPEC (upgrade 2026-06-27). | words 1817 | code 1 outs 2 verd 1 runlog 1 | gate True prereg True
+Q: Can spontaneous magnetisation, the Curie temperature `T_C`, domains, and the hysteresis loop be reproduced from **aligned wake circulation** — the "exchange interaction" being the occlusion energy of neighbouring wakes co-rotating vs opposing — with **everything quoted in native wake-circulation units and NOT a single Bohr magne
+F: §⑧: three falsifiers with numeric triggers and real failure modes — the exchange sign (T1), the `T_C` ordering (T2), and the native-units moment (T3) can each come out wrong. 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARE
+G: 3. **How will we find out?** — Four gated phases (§④): the exchange energy `J` from wake co-rotation
+G: (mean field). *Success:* `T_C` ordering Fe/Co/Ni correct; magnitudes within 2×.
+G: | T2 | `k_B T_C ≈ z J` | `T_C` **ordering** Co(1388 K) > Fe(1043) > Ni(627) recovered; magnitudes within 2×; `M(T) → 0` at `T_C` with mean-field exponent β = ½ ± 0.1 | if the ordering invert
+G: P1 J>0 for Fe/Co/Ni, J<0 for an antiferromagnet · P2 T_C ordering Co>Fe>Ni AND within 2×, β = ½ ± 0.1
+G: | A rival (Heisenberg/mean-field) lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-
+V: # CM07 — Verdict: Ferromagnetism as Aligned Vortex Wakes
+V: CALIBRATED parameters: **zero.** The exchange is the cluster's shared confinement door
+V: tool or output except in this sentence as a negation. Flagged openly (RUN_LOG): the native
+V: - **P1 sign: OPEN, as committed.** |J| is derived; the ferro-vs-antiferro seating criterion is
+V: - **Out-of-scope exhibit, declared pre-run:** Gd (4f, indirect exchange) fails at 7.9× — the
+O: effective beta = 0.2109 (gate 0.5 +/- 0.1) FAIL
+O: remanence M(h=0) = 0.067 of saturation (gate > 0.5) FAIL
+O: coercive field h_c = 0.300 (native units) (gate > 0) PASS
+FLAGS: MISSING: ; ident:1 ; res pass/fail 14/2 verd pass/fail 1/1
+
+### 12/CM08_Material_Koppa_Wake_Flux  | status: PRE-REGISTERED · INSTRUMENT NOT YET RUN | words 490 | code 1 outs 1 verd 1 runlog 1 | gate False prereg True
+Q: What changes, and what must not change, when lithium and uranium spheres are compared at: 1. equal total inertial resistance (the same bulk mass / baryon count), and 2. equal geometric radius (the same volume)? The instrument separates three ledgers: - baryon count and baryon-to-volume density; - the normalized \(r^{-3}\) rotati
+V: The C0–C6 controls passed. The code now keeps three quantities separate:
+V: The normalized rotational kernel passed the \(r^{-3}\) control: doubling the
+O: C5a equal-mass loop-flux control ratio value= 8.926688487e-03 expected= 8.926688487e-03 rel= 0.000e+00 PASS
+O: C5b equal-size loop-flux control ratio value= 1.051993831e+00 expected= 1.051993831e+00 rel= 2.220e-16 PASS
+O: C6 zero-alignment ledger separation wake=0 flux=0 monopole=6.67479e-12 PASS
+FLAGS: MISSING: ; ident:1 ; res pass/fail 10/0 verd pass/fail 0/0
+
+### 13/QM01_Deterministic_Double_Slit_from_Lattice_Relay  | status: SPEC (10× upgrade 2026-06-29). | words 2952 | code 1 outs 0 verd 0 runlog 0 | gate True prereg True
+Q: Can the two-slit fringe, *single-particle build-up*, and the amplitude-square (Born) intensity be produced by a **deterministic** relay model — one hard vortex through exactly one slit, its convergence wake through both — to <1% of `cos²(πd sinθ/λ)`, with λ = h/p emerging as the wake's relay period, **without ever instantiating 
+F: §⑧, four falsifiers each with the numeric outcome that kills the thesis (non-native λ; fringe RMS that cannot reach <1% without a hand-placed cos²; build-up that needs the vortex in both slits; decoherence that needs an observer rather than a mechanical wake-spoil). 5. **How will we know we're done?
+G: 2. **Why does it matter?** — This is debt #1 in `Audits/PARADOX_CENSUS.md` §8.2 and the gate for the whole
+G: 3. **How will we find out?** — Five gated phases (§④). Phase 1 derives λ from tick kinematics
+G: > **This prompt is gold-standard** (the 2026-06-29 10× upgrade — filled §⓪, anti-tautology gate, five gated
+G: ## 5 · Success Criteria (canonical A–F) + anti-tautology gate
+G: - Phase thresholds (committed before run): P1 λ ±1% (h from κ=h/m ±0.02%) · P2 sinc² shape · P3 fringe RMS <1% over ≥10⁴ · P4 V continuous, V²+D²≤1
+FLAGS: MISSING: ; ident:5 ; res pass/fail 0/0 verd pass/fail 0/0
+
+### 13/QM02_Uncertainty_as_Relay_Bandwidth  | status: SPEC (10× upgrade 2026-06-29). | words 1903 | code 1 outs 1 verd 1 runlog 1 | gate True prereg True
+Q: Is `Δx·Δp ≥ ℏ/2` a **classical band-limit theorem** on the convergence wake (the Fourier-duality floor `Δx·Δk ≥ ½` of any real lattice pulse, with ℏ attached via `κ=h/m`), or does the `ℏ/2` *only* appear once the canonical commutator `[x,p]=iℏ` is assumed? The vortex has a definite (x, p) every tick; the open question is whether
+F: §⑧, three falsifiers each with the numeric outcome that kills it (a pulse that beats `½`; an ℏ that must be smuggled rather than traced to `κ=h/m`; a vortex whose per-tick x or p is *itself* spread rather than sharp). 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + 
+G: 3. **How will we find out?** — Four gated phases (§④). Phase 1 derives `Δx·Δk ≥ ½` from discrete
+G: *Success:* product stays within 1% of ℏ/2 while the packet spreads — spreading is real, indeterminacy is not.
+G: **Anti-tautology gate: if the `ℏ/2` only appears because `[x,p]=iℏ` (or an operator-variance
+G: | T2 | coefficient is `ℏ/2` | derived `ℏ/2` within ±1%, h traced to `κ=h/m` (±0.02%) | if `ℏ/2` is off by >1%, or matches only after `[x,p]=iℏ` is assumed, ℏ was smuggled → C, not A |
+G: - Phase thresholds (committed before run): P1 Δx·Δk ≥ ½ exact (Gaussian saturates <1%) · P2 ℏ/2 ±1% · P3 product within 1% of ℏ/2 while spreading · P4 Γ=ℏ/τ reproduced
+V: # QM02 — VERDICT: Uncertainty as Relay Bandwidth
+V: Triangle W=64: 0.5512. Exponential s=16: 0.7133. Gates P1a all PASS as committed. The ½ is
+V: 0.5236). Gate P1b PASS. **Finding: granularity itself enforces the floor at the cutoff —
+V: spectral FWHM·τ = 1.0001 (gate ±2% PASS) → Γ = ℏ/τ for QM06, inheriting exactly one borrow.
+V: ## Determinism claim (T3): PASS
+O: 00 vs 1/tau = 0.005000 ratio = 1.0001 (gate |ratio-1|<=0.02: PASS)
+O: SUMMARY:
+O: any measurement. Honest status: prediction, unfalsifiable at current precision;
+FLAGS: MISSING: ; ident:9 ; res pass/fail 5/0 verd pass/fail 4/0
+
+### 13/QM03_Tunnelling_as_Wake_Leakage  | status: SPEC (10× upgrade 2026-06-29). | words 2047 | code 1 outs 1 verd 1 runlog 1 | gate True prereg True
+Q: Can barrier penetration be reproduced as a **real relay-pressure field leaking through an occlusion wall** — the wake decaying but not vanishing inside the barrier, then re-seeding a vortex landing on the far side — so that `T ≈ e^{−2κd}`, the STM current, and the Geiger–Nuttall α-decay line all follow, **with the decay constant
+F: §⑧, three falsifiers with numeric kill triggers — including the firewall test: if the only route to κ is to write `√(2m(V−E))/ℏ` into the code, the mechanism is IMPORTED (→ C), not native. 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVE
+G: 3. **How will we find out?** — Four gated phases (§④). Phase 1 derives the decay length from
+G: slope within ~10% for a U/Th/Po series.
+G: | T3 | Geiger–Nuttall | log T_½ ∝ Z/√E linear from ∫κ dx; slope within ~10% on a U/Th/Po series | if the slope misses by >10% or the relation is non-linear, the α-core leakage picture fails 
+G: - Phase thresholds (committed before run): P1 κ_native vs WKB <1% (as convergence, not source) · P2 T form + ‑2 traced · P3 STM ~1 decade/Å · P4 Geiger–Nuttall slope ±10%
+G: - Forbidden retroactive changes: write `√(2m(V−E))/ℏ` into Phase 1 then claim native; widen tolerances; plug targets; IDENTITY-PASS; local constant namespaces
+V: # QM03 — VERDICT: Tunnelling as Wake Leakage
+V: (= 2 asinh(√(Ω_c²−ω²)/2), from the same lattice recursion) to 0.13% worst case. Gate P1 PASS.
+V: QM04's Phase 1, machinery). Gates PASS.
+V: Å** (gate [0.5,1.5] PASS).
+V: Gates PASS. (Q,T½ values = standard-table OBSERVED anchors; verify vs ENSDF before publication.)
+O: SUMMARY: exponential leakage + its constant DERIVED from occlusion mechanics
+FLAGS: MISSING: ; ident:2 ; res pass/fail 7/0 verd pass/fail 4/0
+
+### 13/QM04_Born_Rule_from_Residence_Density  | status: SPEC (10× upgrade 2026-06-29). | words 1705 | code 1 outs 1 verd 1 runlog 1 | gate True prereg True
+Q: Why is probability the **square** of the amplitude? Can the Born rule `P(x) ∝ |amp(x)|²` be **derived** as a geometric fact — wake energy density ∝ displacement² (every elastic medium), and least-resistance vortex residence ∝ energy density — so the landing histogram *is* `|amp|²` as a count, with **no Born postulate, no ψ, no m
+F: §⑧, three falsifiers with numeric kill triggers (a square that is axiomatic rather than elastic; a histogram that does not track energy density to <1%; normalisation or positivity that needs an imposed axiom). 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics 
+G: 3. **How will we find out?** — Four gated phases (§④). Phase 1 derives `|A_a+A_b|²` from the relay
+G: - Phase thresholds (committed before run): P1 cross-term derived (sign+magnitude) · P2 histogram ∝ energy density RMS <1% over ≥10⁴ · P3 ∑P=1, P≥0 with no extra axiom
+G: | A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimin
+V: # QM04 — VERDICT: Born Rule from Residence Density
+V: ## Deferred (by scope ruling — not failure, not evasion)
+V: ## HUNTER §D — seven questions (on the deferred/OPEN residence law)
+V: 1. **Why open?** No tick-level mechanism yet maps wake energy density to vortex landing counts;
+V: the naive candidate (gradient steering) measurably fails (215% RMS).
+O: landing histogram vs energy density: RMS = 215.0% of peak (pre-registered expectation >20%: CONFIRMED — naive steering FAILS)
+FLAGS: MISSING: ; ident:4 ; res pass/fail 2/1 verd pass/fail 0/0
+
+### 13/QM05_Bell_EPR_and_the_Throughpole  | status: EXECUTED 2026-07-03 · FARMER-corrected 2026-07-03 — | words 1991 | code 2 outs 2 verd 1 runlog 1 | gate True prereg True
+Q: SDT is local-realist by construction (hard vortices, definite handedness, relay at one tick `c`), so a strictly local relay model **must** obey the CHSH bound `S ≤ 2`, while QM/experiment give `S = 2√2 ≈ 2.828`. The single open question: does the **throughpole** (the never-terminating in/out convergence flow, the only candidate 
+F: §⑧, three falsifiers with numeric triggers — including the marginal-flatness check. **(Amended 2026-07-04, Harvey: the old wording rejected the route for "implying FTL" — that imported Einstein locality, the rival's axiom, as a kill-standard (§B). SDT's forms natively carry v>c CONSTRAINT propagatio
+G: honest gate: marginal flatness ≤0.002 as a comparison to MEASURED Bell marginals. Deviation =
+G: | T2 | throughpole marginal flatness | if S>2, Alice's marginal `P(A given a,b)` equals `P(A given a)` to numerical precision (marginals fixed 50/50, independent of Bob's setting) — an OBSER
+G: - Phase thresholds (committed before run): P1 local S ≤ 2 (pre-declared shortfall) · P2 no-signalling marginal drift < statistical noise · P3 explicit A/C/D/F + OPEN
+G: | P2 throughpole lifts S but marginals deviate from measured Bell data (>0.002) | re-examine the coupling (must be marginal-preserving) | report **data-FAIL** (disagrees with measured margin
+G: - Post-hoc tolerance widening · a fabricated local Bell violation · reporting S>2 without no-signalling ·
+V: # QM05 — VERDICT: Bell / EPR & the Throughpole
+V: counts of a steered vortex pair distribute — QM04's open core; the same law as QM07's sequential
+V: Until that machinery exists, QM05 is **OPEN** and census §8.2 debt #1 **stands, bounded and named**.
+V: ## HUNTER §D — seven questions (verdict is OPEN → mandatory)
+V: the shortfall is 0.4–0.83 in S. The failure is arithmetic, not numerical noise.
+O: VERDICT LINE: gates printed above; class per ADJ-R2-1 (NATIVE-conditional at best,
+O: VERDICT (as pre-committed):
+O: * QM05 overall: D / OPEN, as pre-declared. The debt is bounded and named, not paid.
+FLAGS: MISSING: ; ident:5 ; res pass/fail 5/0 verd pass/fail 7/3
+
+### 13/QM06_Discrete_Spectra_from_Standing_Wakes  | status: SPEC → ACTIVE on first gated run (10× upgrade 2026-06-29). | words 1447 | code 1 outs 1 verd 1 runlog 0 | gate True prereg True
+Q: Whether hydrogen level quantisation is **native relay resonance** (standing wake on a closed orbit) or only Bohr/Rydberg **relabelled** through `atomic::`. 2. **Why does it matter?** Core QM06 claim: no ψ, no action postulate — discreteness from wake survival. Blocks QM07 (fine structure), molecular spectra. 3. **How?** Phase 1:
+F: ication Tests (each has a real failure mode + numeric kill trigger) | ID | Test | SDT prediction | What kills it (numeric) | |----|------|----------------|-------------------------| | T1 | wrap-survival is integer-selective (the NATIVE discriminator) | integer n∈{2,3,4}: A_final/A_init ≥ 0.9 at 10⁴ 
+G: > **Author:** J. C. Harvey, Melbourne. **Status:** SPEC → **ACTIVE** on first gated run (10× upgrade 2026-06-29).
+G: 5. **Done?** Prompt **B** if Phase 1 PASS-GATE + Phase 2–3 compare within 0.1%; Physics **NATIVE** only
+G: ### Phase 0 — Ledger (GATE)
+G: ### Phase 1 — Standing-wake survival (NATIVE — mandatory GATE)
+G: - **Failure >0.1%:** PIVOT emission formula (APS01); do not widen threshold.
+V: > ⚠️ **SUPERSEDED — contradicts current PROMPT.md (PASS on an IDENTITY-PASS wrapper of `atomic::`); DO NOT TRUST; pending honest re-run. — flagged 2026-06-29**
+V: # QM06 — Verdict: Discrete Spectra from Standing Wakes
+V: **Classification: CLASS C (CONVERGENCE).**
+V: - E₁ vs Ry: **exact** (PASS)
+V: - Hα wavelength: **656.112 nm** vs 656.279 nm (**0.025%**) — PASS
+FLAGS: MISSING: ; ident:7 ; res pass/fail 0/0 verd pass/fail 6/0
+
+### 13/QM07_Spin_and_Stern_Gerlach_from_Handedness  | status: SPEC (10× upgrade 2026-06-29). | words 2026 | code 1 outs 1 verd 1 runlog 1 | gate True prereg True
+Q: Can "spin-½" — its strict **two-valuedness**, a magnetic moment, and the **two-spot Stern–Gerlach split with no middle spot** — be reproduced as a vortex's intrinsic circulation handedness (EMC03) interacting with a swirl gradient via **differential occlusion**, *without* a spin operator, a Pauli algebra, or a Hilbert-space `s=½
+F: §⑧, three falsifiers with numeric triggers — a middle spot; sequential-SG that misses cos²(θ/2); a g-factor that can only be matched by importing a number. 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / 
+G: g within ~1% would be a bonus (Class C if it leans on one flagged factor); claiming g from (W+1) is
+G: **Phase 3 — Stern–Gerlach split.** *Goal:* two spots. *Method:* propagate a handed vortex+wake
+G: - Phase thresholds (committed before run): P1 exactly two circulation senses · P2 binary moment native (g number OPEN → B17) · P3 two spots, no middle, ∝ gradient · P4 cos²(θ/2) RMS <2%
+G: - Forbidden retroactive changes: cite g from (W+1) / g_proton=4; import μ_B; widen tolerances; plug; IDENTITY-PASS; local constant namespaces
+G: | A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimin
+V: # QM07 — VERDICT: Spin & Stern–Gerlach from Handedness
+V: Pre-commitments: `RUN_LOG.md` (frozen before coding; no threshold moved; the M1 failure below was
+V: handedness passes. This is the discriminator the prompt asked for, and it is machinery.
+V: RMS vs the OBSERVED cos²(θ/2) = **0.0719 — FAILS the <2% prompt gate.** This is the prompt's T3
+V: ∝ cos(angle to the filter axis) on the passed hemisphere reproduces the observed curve to RMS
+O: M1 (undisturbed vector, native candidate): RMS vs observed = 0.0719 -> prompt gate <2%: FAIL — the triangle law, as pre-declared
+O: M2 (cos-weighted re-preparation, PROBE): RMS vs observed = 0.0002 (gate <0.5%: PASS)
+O: * sequential SG: the undisturbed-vector machinery gives the TRIANGLE law (fails at
+FLAGS: MISSING: ; ident:3 ; res pass/fail 3/1 verd pass/fail 0/1

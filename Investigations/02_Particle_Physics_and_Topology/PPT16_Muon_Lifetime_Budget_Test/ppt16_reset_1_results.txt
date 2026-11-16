@@ -1,0 +1,19 @@
+﻿PPT16 reset instrument 1 (2026-10-10)
+=====================================
+
+[V1] v = 0: ratio 1.000000000000000 -> met
+[V2] beta 0.6: v_circ/c 0.800000000000, ratio 1.250000000000 -> met
+[V3] beta 0.8: v_circ/c 0.600000000000, ratio 1.666666666667 -> met
+[V4] budget v_circ^2 + v^2 = c^2 at ten speeds 0-0.9999c: worst 2.2e-16 -> met
+[V5] law_V ratio 29.300228556593 against sqrt(1 + (pc/mc^2)^2) = 29.300228556593 (rel -1.2e-14) -> met
+
+VALIDATIONS: met
+
+beta = 0.999417421 ; budget ratio c/v_circ = 29.300229 ; tau_pred = 64.3720 +/- 0.0104 us (sigma from pc +/- 0.5 MeV)
+
+  mu+ (Bailey 1977)  64.419 +/- 0.058 us : measured - predicted = +0.0470 us (+0.80 sigma)
+  mu- (Bailey 1977)  64.368 +/- 0.029 us : measured - predicted = -0.0040 us (-0.13 sigma)
+  weighted           64.378 +/- 0.026 us : measured - predicted = +0.0060 us (+0.21 sigma)
+
+rejection criterion (any anchor beyond 2 sigma): not met -> consistent within error
+fractional agreement with weighted anchor: +9.25e-05 (experimental 1-sigma 4.0e-04)

@@ -1,0 +1,52 @@
+
+== V0 helper validation (known answers) ==
+[PASS] V0    integrate sin over [0, pi] = 2                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 3.331e-16 (tol 1e-13)
+[PASS] V0    integrate x^7 over [0, 1] = 1/8                                                value 1.250000000000e-01 expected 1.250000000000e-01 err 2.220e-15 (tol 1e-14)
+[PASS] V0    integrate exp over [-1, 1] = e - 1/e                                           value 2.350402387288e+00 expected 2.350402387288e+00 err 5.668e-16 (tol 1e-13)
+[PASS] V0    root of cos x - x = 0.739085133215161                                          value 7.390851332152e-01 expected 7.390851332152e-01 err 2.253e-15 (tol 1e-13)
+[PASS] V0    root of x^2 - 2 on [1, 2] = sqrt 2                                             value 1.414213562373e+00 expected 1.414213562373e+00 err 2.983e-15 (tol 1e-13)
+[PASS] V0    compensated sum 1 + 10^6 x 1e-16 = 1 + 1e-10                                   value 1.000000000100e+00 expected 1.000000000100e+00 err 0.000e+00 (tol 1e-15)
+
+== V1 max-flow on hand-checkable cases ==
+[PASS] V1    K_{3,3} = 9, (1,5) = 3, (2,2) = 4, (4,1) = 3, (2,7) = 6
+
+== V2 geometric checker on pairs ==
+[PASS] V2    touching unlike pair: 1 unlike, 0 like, 0 overlap
+[PASS] V2    touching like pair: 1 like contact
+[PASS] V2    pair at distance 1.5: 1 overlap
+
+== T1 exact capacity and the graph read back, 1 <= Z, N <= 40 ==
+       1600 cases ; flow value mismatches 0 ; invalid read-back graphs 0
+[PASS] T1    max-flow equals min(3Z, 3N, ZN) in every case
+[PASS] T1    every read-back graph has degrees <= 3, no repeated edge and the stated edge count
+
+== T2 module composition against the capacity ==
+       7140 wedge points (Z = 2..120)
+[PASS] T2    E_int = 4 + n_d + 2 n_t equals N + 2 at every wedge point
+[PASS] T2    E_int does not exceed the exact capacity at any wedge point
+       natural nuclides 284 : slack min 0 (Z=2, A=4) ; max 132 (Z=92, A=234) ; mean 74.33 ; zero-slack count 1
+[PASS] T2    minimum slack over the natural table is 0 and occurs only at He-4
+       He-4    Z= 2 N=  2 : capacity   4 ; E_int   4 ; slack   0 ; free proton slots   2 ; free neutron slots   2
+       C-12    Z= 6 N=  6 : capacity  18 ; E_int   8 ; slack  10 ; free proton slots  10 ; free neutron slots  10
+       O-16    Z= 8 N=  8 : capacity  24 ; E_int  10 ; slack  14 ; free proton slots  14 ; free neutron slots  14
+       Ca-40   Z=20 N= 20 : capacity  60 ; E_int  22 ; slack  38 ; free proton slots  38 ; free neutron slots  38
+       Fe-56   Z=26 N= 30 : capacity  78 ; E_int  32 ; slack  46 ; free proton slots  46 ; free neutron slots  58
+       Pb-208  Z=82 N=126 : capacity 246 ; E_int 128 ; slack 118 ; free proton slots 118 ; free neutron slots 250
+
+== T3 geometry of frozen configurations (unit radius, contact distance 2) ==
+[PASS] T3    alpha ring (square): 4 unlike, 0 like, 0 overlaps
+       alpha ring: like-pair spacing 2.828427 (contact 2)
+[PASS] T3    equal-sphere tetrahedron (2 p, 2 n): 4 unlike and 2 like contacts (invalid)
+[PASS] T3    bent triton: 90 deg valid; 60 deg like contact; 50 deg overlap
+[PASS] T3    four-neighbour star: 4 unlike, 0 like, 0 overlaps, max degree 4 (placeable; excluded only by the cap)
+       star: neighbour spacing 3.265986 (contact 2)
+[PASS] T3    twelve-around-one: 12 unlike contacts, 0 like, 0 overlaps, max degree 12
+[PASS] T3    shell spacing = 2/sin(2 pi/5) = 2.102924                                       value 2.102924448477e+00 expected 2.102924448477e+00 err 0.000e+00 (tol 1e-06)
+       icosahedral shell gap: 0.102924 (in units of the sphere radius)
+
+== T4 the engine's contact_capacity on 1 <= Z, N <= 40 ==
+       unequal cases: 4
+[PASS] T4    engine equals exact if and only if max(Z, N) >= 3
+[PASS] T4    contact_slots is 3 and a twelve-around-one shell exceeds the cap
+
+ALL CRITERIA MET: 0 failure(s)

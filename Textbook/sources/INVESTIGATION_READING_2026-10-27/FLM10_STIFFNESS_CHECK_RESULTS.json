@@ -1,0 +1,170 @@
+{
+  "date": "2026-10-28",
+  "status": "affine diamond control only; no native stiffness selection",
+  "source_hashes": {
+    "4245": {
+      "path": "C:\\Users\\Jimmi\\OneDrive\\Desktop\\sdt-engine\\Projects\\sdt-investigations\\Investigations\\01_Foundations_and_Lattice_Mechanics\\FLM10_Per_Spation_Lattice_Solver\\flm10_network.py",
+      "sha256": "98ac88802386306b0deee34948743202477eca5bc2323215da31387771aef1da"
+    },
+    "4247": {
+      "path": "C:\\Users\\Jimmi\\OneDrive\\Desktop\\sdt-engine\\Projects\\sdt-investigations\\Investigations\\01_Foundations_and_Lattice_Mechanics\\FLM10_Per_Spation_Lattice_Solver\\flm10_phase1_isotropy.py",
+      "sha256": "f7c18141964679de4237995e5b16686173aa42ddaf423e4cb5ddc079fc0f6739"
+    }
+  },
+  "checks": [
+    {
+      "name": "diamond-coordination",
+      "passed": true,
+      "detail": {
+        "bonds": 16,
+        "coordination": [
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4
+        ]
+      }
+    },
+    {
+      "name": "reference-energy",
+      "passed": true
+    },
+    {
+      "name": "isotropic-control",
+      "passed": true,
+      "detail": {
+        "alpha": 1,
+        "beta": 0.5,
+        "h": 0.00005,
+        "diagonal": [
+          2.000000001251782,
+          2.000000001251782,
+          2.0000000012528916,
+          1.0000000001560294,
+          1.0000000001560294,
+          1.0000000001560294
+        ],
+        "C11": 2.000000001251782,
+        "C12": 3.3087224502121107e-16,
+        "C44": 1.0000000001560294,
+        "AU": 0
+      }
+    },
+    {
+      "name": "cubic-control",
+      "passed": true,
+      "detail": [
+        1.3550000008478422,
+        1.3550000008478422,
+        1.355000000848475,
+        0.7850000001224834,
+        0.7850000001224835,
+        0.7850000001224834
+      ]
+    },
+    {
+      "name": "common-scale-invariance",
+      "passed": true,
+      "detail": {
+        "base": 0.12396915810633846,
+        "scaled": 0.12396915810633846
+      }
+    },
+    {
+      "name": "refinement-0.2",
+      "passed": true,
+      "detail": 2.9817739388704467e-9
+    },
+    {
+      "name": "refinement-0.285",
+      "passed": true,
+      "detail": 1.873950440144238e-9
+    },
+    {
+      "name": "refinement-0.5",
+      "passed": true,
+      "detail": 1.8737502648843096e-9
+    },
+    {
+      "name": "refinement-0.8",
+      "passed": true,
+      "detail": 1.8736221757739775e-9
+    }
+  ],
+  "results": [
+    {
+      "alpha": 1,
+      "beta": 0.2,
+      "h": 0.00005,
+      "diagonal": [
+        1.1000000006881454,
+        1.1000000006881454,
+        1.100000000688589,
+        0.7000000001092204,
+        0.7000000001092206,
+        0.7000000001092204
+      ],
+      "C11": 1.1000000006881454,
+      "C12": 0.30000000000059945,
+      "C44": 0.7000000001092204,
+      "AU": 0.385714284719473
+    },
+    {
+      "alpha": 1,
+      "beta": 0.285,
+      "h": 0.00005,
+      "diagonal": [
+        1.3550000008478422,
+        1.3550000008478422,
+        1.355000000848475,
+        0.7850000001224834,
+        0.7850000001224835,
+        0.7850000001224834
+      ],
+      "C11": 1.3550000008478422,
+      "C12": 0.21500000000043065,
+      "C44": 0.7850000001224834,
+      "AU": 0.12396915810633846
+    },
+    {
+      "alpha": 1,
+      "beta": 0.5,
+      "h": 0.00005,
+      "diagonal": [
+        2.000000001251782,
+        2.000000001251782,
+        2.0000000012528916,
+        1.0000000001560294,
+        1.0000000001560294,
+        1.0000000001560294
+      ],
+      "C11": 2.000000001251782,
+      "C12": 3.3087224502121107e-16,
+      "C44": 1.0000000001560294,
+      "AU": 0
+    },
+    {
+      "alpha": 1,
+      "beta": 0.8,
+      "h": 0.00005,
+      "diagonal": [
+        2.900000001815412,
+        2.900000001815412,
+        2.900000001817188,
+        1.3000000002028387,
+        1.300000000202839,
+        1.3000000002028387
+      ],
+      "C11": 2.900000001815412,
+      "C12": -0.30000000000060084,
+      "C44": 1.3000000002028387,
+      "AU": 0.05192307712960531
+    }
+  ],
+  "ratio_cancels": false,
+  "common_scale_cancels": true
+}

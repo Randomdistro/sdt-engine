@@ -193,3 +193,15 @@ order), GOM19 (rung table). Register: CR06 VOID-pending (P4 quarantine tracks it
 
 *GOM01 · upgraded 2026-07-24 · one kernel, four samplings, two owed 2's, and the divergence residue
 stated even if empty. The number is never the prey.*
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** The prompt says "zk² = 1 is an identity, do not gate physics on it", yet "zk² closure 1.0000000000 PASS" is counted in the 27/27 proofs tally.
+
+**Correction:** Remove the identity rows from the proof count and report the Pound–Rebka, Shapiro and bending checks separately.
+
+**Status:** ANNOTATED — label, status or tally corrected in the record; no re-score of earlier runs.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

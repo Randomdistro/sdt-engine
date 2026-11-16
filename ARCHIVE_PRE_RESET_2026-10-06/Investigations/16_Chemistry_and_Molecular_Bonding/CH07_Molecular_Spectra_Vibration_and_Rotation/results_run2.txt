@@ -1,0 +1,130 @@
+==============================================================================
+ CH07 RUN 2 -- k FROM THE ROLLING WALL (ROOT-WALL)
+ J. C. Harvey, Melbourne - 2026-07-06 - tool ch07_r2_rolling_wall.py
+ Gates committed in RUN_LOG.md ADJ-R2-1 BEFORE this file existed.
+ ahc = 14.3996 eV*A = 1.4400 MeV*fm | a0 = 0.529177 A | hbar^2/2m_e = 3.80998 eV*A^2
+ R_p = 0.8414 fm (proton boundary radius) | NP17 bond D = 1.9633 fm
+ Zero fitted parameters. No G/M/GM. Faith-ledger caps (run-1 G.1) travel
+ with every cm-1 conversion below (E = hbar*omega bridge: ASSERTED).
+==============================================================================
+
+CP-1  RUN-1 MACHINERY REPRODUCTION (blocking checkpoint)
+    reused machinery : g* = -4.196152422 at x* = 0.288680
+    run-1 print      : g* = -4.19615 at x* = 0.2887 (5-dp/4-dp print of the
+                       same double from the identical grid loop)
+    analytic identity: 1 - 3*sqrt(3) = -4.196152423 at 1/(2*sqrt(3)) = 0.288675
+    |Delta g*| (grid vs analytic) = 5.535e-10 ; 5-dp round = -4.19615
+    CP-1 (<= 1e-6, matches run-1 record): PASS
+    run-1 row reproduced: d2E/dR2 at Re = -4.751e+03 N/m (run-1: -4.751e+03)
+
+PHASE A  DERIVED-WALL CANDIDATES on the frozen run-1 well (g* reused, CP-1)
+  E_tot(R) = g(x)*ahc/R + W ; joint (R,x) minimisation, D1-replica numerics
+  gates: G-A1 R_min in 0.7414 A +-25% [0.556, 0.927] ; G-A2 k in 575 N/m +-25% [431, 719]
+  W-1  2 seats hb2/s^2 (NP10 D1 fence)   R_min 0.5789 A (  -21.9%) G-A1:PASS | k     2703.1 N/m (  +370.1%) G-A2:FAIL | depth   -45.49 eV (x  9.6 of 4.75)
+  W-2a W-1 / 4 (gearbox W+1=4)           R_min 0.1447 A (  -80.5%) G-A1:FAIL | k   173047.6 N/m (+29995.2%) G-A2:FAIL | depth  -181.94 eV (x 38.3 of 4.75)
+  W-2b W-1 * 4 (gearbox W+1=4)           R_min 2.3153 A ( +212.3%) G-A1:FAIL | k       43.1 N/m (   -92.5%) G-A2:FAIL | depth   -11.37 eV (x  2.4 of 4.75)
+  W-3  e-e interface hb2/(2xR)^2         R_min 0.0728 A (  -90.2%) G-A1:FAIL | k   698173.3 N/m (+121321.4%) G-A2:FAIL | depth  -239.56 eV (x 50.4 of 4.75)
+  W-4  tour circumference (2 pi s)       R_min 0.0580 A (  -92.2%) G-A1:FAIL | k -5266109.4 N/m (-915945.1%) G-A2:FAIL | depth  -873.88 eV (x184.0 of 4.75)  [NOT interior: collapsed to scan edge; k row is an edge artifact]
+  W-5  exp(-R/a0), coeff hb2/a0^2        NO interior minimum (argmin at scan edge R = 0.060 A; collapse)
+       G-A1: FAIL | G-A2: FAIL (no stationary point exists for this form)
+  D1 regression anchor (NP10): R_min 0.5790 A / k 2697 N/m / depth -45.49 eV
+  W-1 reproduces D1: PASS (dR = -0.0001 A, dk = +0.2%)
+  PHASE A VERDICT: G-A1 PASS (best: W-1) ; G-A2 FAIL ; G-A1^G-A2 FAIL for ALL 6 candidates
+
+WELL-DEPTH LEDGER (TRAP-4 -- mandatory print, ADJ-R2-1(d))
+  bare run-1 well at Re: -81.50 eV = x17.2 measured D_e (4.75 eV), x2.55 measured
+  total electronic binding (31.95 eV) -- NP10 G-5 reproduced. The depth ledger
+  is SICK AT CONTACT before any wall is added.
+  DEPTH-PINS-CURVATURE (fixed-x theorem): for any wall B/R^n on this well,
+  k(min) = (n-1)*|g|*ahc/R*^3. A wall landing the minimum EXACTLY at Re with
+  n = 2 (the whole confinement class) gives k = 2376 N/m (+313% vs 575):
+  the x17 depth surplus converts directly into a curvature surplus.
+
+DIAGNOSTIC LOCUS SWEEP (ADJ-R2-1(c) -- NOT a candidate; nothing promoted)
+  scaling theorem: R_min ~ lambda, k ~ lambda^-3, x-hat invariant =>
+  k * R_min^3 is a class invariant. Numerical check (already-computed points):
+    W-1  2 seats hb2/s^2               k*R^3 =   524.27 N/m*A^3
+    W-2a W-1 / 4                       k*R^3 =   524.29 N/m*A^3
+    W-2b W-1 * 4                       k*R^3 =   535.08 N/m*A^3
+  gate box vs locus: the class CLIPS the box corner at per-seat multiplier
+  lambda in [1.555, 1.601]  (R_min 0.900-0.927 A i.e. +21%..+25%; k 658-719 N/m)
+    named constant pi/2     = 1.5708 : INSIDE band
+    named constant 8/5      = 1.6000 : INSIDE band
+    named constant 4^(1/3)  = 1.5874 : INSIDE band
+    named constant phi      = 1.6180 : outside
+    named constant sqrt(e)  = 1.6487 : outside
+  NUMEROLOGY CAVEAT (look-elsewhere): several named constants sit in or near
+  the band; NONE is promoted -- a future run must DERIVE a coefficient, not
+  pick one. And the corner is DEPTH-SICK anyway: E_tot(min) there ~ -29.2 eV
+  = x6.2 the measured 4.75 eV (TRAP-4). A corner pass would be curvature
+  lipstick on a sick depth ledger. => the WELL's depth, not the wall's form,
+  is the root blocker (confirms NP10 G-5).
+
+PHASE B  THREE-FIELD CROSS-CHECK -- W-1 frozen (no re-tune between fields)
+  leg (i) k(H2): 2703 N/m vs 575 (+370%) -> G-B(i) FAIL (= G-A2)
+  leg (ii) NaCl/KCl -- Evjen sum reused: M = 1.747574 (CH02 regression: 1.747574)
+    NaCl base   861.0 (CH02   861.0) | V-ion-A wall -  277.4 ->   583.6 vs  787.0 ( -25.8%) [gate +-5%]
+         V-ion-B (Shannon seat radii) wall -  2793.2 ->  -1932.3  (unphysical: lattice UNBOUND)
+    KCl  base   771.8 (CH02   771.8) | V-ion-A wall -  222.9 ->   548.9 vs  715.0 ( -23.2%) [direction]
+         V-ion-B (Shannon seat radii) wall -  1831.4 ->  -1059.7  (unphysical: lattice UNBOUND)
+    MgO  base  4611.6 (CH02  4611.6) | V-ion-A wall -  497.3 ->  4114.3 vs 3791.0 (  +8.5%) [REPORT]
+         V-ion-B (Shannon seat radii) wall -  5380.0 ->   -768.5  (unphysical: lattice UNBOUND)
+    leg (ii) scoring: NaCl V-ion-A lands OUTSIDE +-5% of 787 (overshoot of the
+    correction ~x3.7); KCl direction CORRECT (binding reduced) but overshoots
+    past 715; V-ion-B unphysical. SIGN is right in V-ion-A everywhere -- the
+    first wall in this program to move the ionic ledger the required way
+    (Face R could not even get the sign). G-B(ii): FAIL
+  leg (iii) nuclear -- Face-T machinery replicated (regression), then D-A4:
+    deuteron (Z-1)!=1 x 2.2004 =  2.200 MeV (meas  2.224, -1.06%) | wall shift +0.00% (<5%) [PASS]
+    triton   (Z-1)!=2 x 4.2785 =  8.557 MeV (meas  8.482, +0.88%) | wall shift +0.00% (<5%) [PASS]
+    alpha    (Z-1)!=6 x 4.4535 = 26.721 MeV (meas 28.296, -5.57%) | wall shift +0.00% (<5%) [PASS]
+    counterfactual (D-A4 removed; W-1 on nuclear seat distances s = D/2):
+    W = 79.1 GeV per nucleus vs B_d = 2.224 MeV -> shift ~ +3.6e+06 %
+    -> the domain rule carries the FULL load (printed so it is seen to be
+       load-bearing, not decorative). G-B(iii): PASS under D-A4 as committed;
+       the x6.35 stays the lock's -- the wall does not double-count it.
+  G-B CONJUNCTION (i)^(ii)^(iii): FAIL  (dies at (i) and (ii))
+
+CH02-R2 SHAPE CONSTRAINT (REPORT row -- required reproduction target)
+  measured: B0 RISES x3.44/x3.70/x3.22 AND deconvolved exponent FALLS
+  6.98->4.51, 7.96->5.22, 8.61->5.09 across isoelectronic pairs.
+    NaF-analog q^2=1: model r* = 1.817 A, B0 =     20.6 GPa (measured 46.5)
+    MgO-analog q^2=4: model r* = 0.454 A, B0 =  21050.3 GPa (measured 160.0)
+    model B0 ratio ~ x1024 vs measured x3.44 ; model wall exponent n = 2,
+    FIXED and Z-BLIND, vs the measured 7->4.5 FALL.
+    SHAPE CONSTRAINT: NOT REPRODUCED -- the class has no Z channel at fixed
+    shell (no nuclear-transmission content) and cannot bend its exponent.
+
+PHASE C  ANHARMONICITY (report-only; SIGN scored; E=hbar*omega cap travels)
+  W-1 at refined minimum R = 0.5788 A: k = 2703 N/m, E''' = -1166.9 eV/A^3
+  sign: E''' < 0 -> stiffer inbound -> w_e x_e > 0 : PASS (pre-committed sign)
+  Morse map: a = 2.306 1/A ; w_e x_e / w_e = 0.0186 (measured 0.0276) [REPORT-ONLY]
+  w_e from DERIVED k: 9542 cm-1 vs 4401.2 (+116.8%) [REPORT-ONLY -- the number
+  run 1 was structurally unable to print; E=hbar*omega cap travels]
+
+PHASE D  ISOTOPE REGRESSION (W mass inventory = {hbar, m_e} ONLY -- no nuclear
+  mass anywhere in W => k isotope-invariant; mass-only transfers rerun):
+    HCl  -> DCl   pred   2145.12 cm-1 meas   2145.16 err  -0.002% (run-1 anchor  -0.002%) [PASS]
+    H2   -> D2    pred   3113.32 cm-1 meas   3115.50 err  -0.070% (run-1 anchor  -0.070%) [PASS]
+    CO   -> 13CO  pred   2121.44 cm-1 meas   2121.42 err  +0.001% (run-1 anchor  +0.001%) [PASS]
+  G-D: PASS (no mass dependence smuggled in by the wall)
+
+==============================================================================
+ CH07 RUN 2 -- GATES SUMMARY (all committed in RUN_LOG.md before coding)
+   candidate                      G-A1 (R_min +-25%)      G-A2 (k +-25%)
+   W-1  2 seats hb2/s^2           PASS (0.5789 A,  -21.9%)   FAIL (  2703.1 N/m,  +370.1%)
+   W-2a W-1 / 4                   FAIL (0.1447 A,  -80.5%)   FAIL (173047.6 N/m, +29995.2%)
+   W-2b W-1 * 4                   FAIL (2.3153 A, +212.3%)   FAIL (    43.1 N/m,   -92.5%)
+   W-3  e-e interface hb2/        FAIL (0.0728 A,  -90.2%)   FAIL (698173.3 N/m, +121321.4%)
+   W-4  tour circumference        FAIL (0.0580 A,  -92.2%)   FAIL (-5266109.4 N/m, -915945.1%)
+   W-5 exp(-R/a0)                 FAIL (no interior min)     FAIL (--)
+   G-A (any candidate lands both): FAIL
+   G-B conjunction: FAIL at (i) and (ii); (iii) holds under committed D-A4
+   G-C sign (w_e x_e > 0): PASS ; ratio 0.0186 vs 0.0276 REPORT-ONLY
+   G-D isotope regression: PASS
+   WELL-DEPTH FINDING: bare well -81.5 eV = x17.2 D_e; depth pins curvature
+   (k -> ~2400-2700 N/m for the whole n=2 class near Re); locus corner exists
+   at lambda ~ 1.55-1.60 but is depth-sick (~-29 eV) => ROOT BLOCKER = the
+   run-1 WELL's depth ledger at contact, not the wall's form (NP10 G-5 sharpened).
+   Exit: 0 (ran to completion; verdicts are the printed lines above)
+==============================================================================

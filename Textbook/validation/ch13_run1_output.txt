@@ -1,0 +1,82 @@
+
+== V0 helper validation (known answers) ==
+[PASS] V0    integrate sin over [0, pi] = 2                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 3.331e-16 (tol 1e-13)
+[PASS] V0    integrate x^7 over [0, 1] = 1/8                                                value 1.250000000000e-01 expected 1.250000000000e-01 err 2.220e-15 (tol 1e-14)
+[PASS] V0    integrate exp over [-1, 1] = e - 1/e                                           value 2.350402387288e+00 expected 2.350402387288e+00 err 5.668e-16 (tol 1e-13)
+[PASS] V0    root of cos x - x = 0.739085133215161                                          value 7.390851332152e-01 expected 7.390851332152e-01 err 2.253e-15 (tol 1e-13)
+[PASS] V0    root of x^2 - 2 on [1, 2] = sqrt 2                                             value 1.414213562373e+00 expected 1.414213562373e+00 err 2.983e-15 (tol 1e-13)
+[PASS] V0    compensated sum 1 + 10^6 x 1e-16 = 1 + 1e-10                                   value 1.000000000100e+00 expected 1.000000000100e+00 err 0.000e+00 (tol 1e-15)
+
+== V1 Pythagorean fixtures (instrument arithmetic) ==
+[PASS] V1    beta = 0.6: chi = 0.8                                                          value 8.000000000000e-01 expected 8.000000000000e-01 err 0.000e+00 (tol 1e-15)
+[PASS] V1    beta = 0.6: gamma = 1.25                                                       value 1.250000000000e+00 expected 1.250000000000e+00 err 0.000e+00 (tol 1e-15)
+[PASS] V1    beta = 0.8: chi = 0.6                                                          value 6.000000000000e-01 expected 6.000000000000e-01 err 0.000e+00 (tol 1e-15)
+[PASS] V1    beta = 0.8: gamma = 5/3                                                        value 1.666666666667e+00 expected 1.666666666667e+00 err 0.000e+00 (tol 1e-15)
+[PASS] V1    beta = 0: chi = 1                                                              value 1.000000000000e+00 expected 1.000000000000e+00 err 0.000e+00 (tol 1e-15)
+
+== V2 central-difference routine ==
+[PASS] V2    d/dx x^3 at 2 = 12                                                             value 1.200000100000e+01 expected 1.200000000000e+01 err 8.333e-08 (tol 1e-06)
+[PASS] V2    d/dx sin at 0.7 = cos 0.7                                                      value 7.648421860096e-01 expected 7.648421872845e-01 err 1.667e-09 (tol 1e-08)
+
+== T1 chi, clock fraction, gamma, energy, momentum, invariant ==
+       beta = 0       chi = 1.000000000000  gamma = 1.0000000000  E/E0 = 1.0000000000  p/(m0 c) = 0.0000000000  invariant residual 0.00e+00
+       beta = 0.1     chi = 0.994987437107  gamma = 1.0050378153  E/E0 = 1.0050378153  p/(m0 c) = 0.1005037815  invariant residual -2.22e-16
+       beta = 0.6     chi = 0.800000000000  gamma = 1.2500000000  E/E0 = 1.2500000000  p/(m0 c) = 0.7500000000  invariant residual -2.22e-16
+       beta = 0.8     chi = 0.600000000000  gamma = 1.6666666667  E/E0 = 1.6666666667  p/(m0 c) = 1.3333333333  invariant residual -3.33e-16
+       beta = 0.99    chi = 0.141067359797  gamma = 7.0888120501  E/E0 = 7.0888120501  p/(m0 c) = 7.0179239296  invariant residual -1.20e-14
+       beta = 0.9999  chi = 0.014141782066  gamma = 70.7124459519  E/E0 = 70.7124459519  p/(m0 c) = 70.7053747073  invariant residual -9.09e-13
+[PASS] T1    v_circ / (chi c) - 1, worst over 6 beta                                        value 3.437250484239e-13 expected 0.000000000000e+00 err 3.437e-13 (tol 1e-10)
+[PASS] T1    time_dilation / chi - 1, worst                                                 value 4.294342659250e-13 expected 0.000000000000e+00 err 4.294e-13 (tol 1e-10)
+[PASS] T1    gamma / (1/chi) - 1, worst                                                     value 4.294342659250e-13 expected 0.000000000000e+00 err 4.294e-13 (tol 1e-10)
+[PASS] T1    total_energy / (gamma E0) - 1, worst                                           value 4.295452882275e-13 expected 0.000000000000e+00 err 4.295e-13 (tol 1e-10)
+[PASS] T1    momentum / (gamma m0 v) - 1, worst (beta > 0)                                  value 4.294342659250e-13 expected 0.000000000000e+00 err 4.294e-13 (tol 1e-10)
+[PASS] T1    (E^2 - c^2 p^2)/E0^2 - 1, worst                                                value 9.088285679582e-13 expected 0.000000000000e+00 err 9.088e-13 (tol 1e-09)
+
+== T2 round-trip closure and longitudinal contraction ==
+[PASS] T2    T_round = 2 L c /(c^2 - v^2) = 2 L gamma^2 / c, worst relative                 value 1.709743457923e-13 expected 0.000000000000e+00 err 1.710e-13 (tol 1e-12)
+[PASS] T2    L from synchronisation vs law_V::length_contraction, worst relative            value 2.220446049250e-16 expected 0.000000000000e+00 err 2.220e-16 (tol 1e-12)
+
+== T3 kinetic energy: cancellation-free form and series ==
+[PASS] T3    (gamma - 1) vs gamma^2 beta^2/(gamma + 1), beta >= 0.01 (worst relative)       value 1.662892046284e-12 expected 0.000000000000e+00 err 1.663e-12 (tol 1e-09)
+[FAIL] T3    series b^2/2 + 3b^4/8 + 5b^6/16 vs K/E0 at beta = 0.01                         value 5.000375031250e-05 expected 5.000375031253e-05 err 5.471e-13 (tol 1e-14)
+       beta = 1e-4: (gamma - 1) = 5.000000191657e-09 ; cancellation-free = 5.000000037500e-09 ; relative difference 3.08e-08
+[PASS] T3    the direct form loses at least 4 digits at beta = 1e-4
+
+== T4 directional response (spherical loci) ==
+[PASS] T4    response magnitude vs A sqrt(chi^6 cos^2 psi + chi^2 sin^2 psi), worst relative over 20 cases value 1.598721155460e-14 expected 0.000000000000e+00 err 1.599e-14 (tol 1e-09)
+[PASS] T4    response heading vs atan2(chi sin psi, chi^3 cos psi), worst over 12 cases (rad) value 4.440892098501e-16 expected 0.000000000000e+00 err 4.441e-16 (tol 1e-09)
+[PASS] T4    parallel factor chi^3 and perpendicular factor chi (worst relative)            value 1.598721155460e-14 expected 0.000000000000e+00 err 1.599e-14 (tol 1e-12)
+[PASS] T4    at v = 0 the acceleration is returned unchanged
+
+== T5 independent derivative of the engine momentum ==
+       beta = 0.10: numerical dp/dv / (m0 gamma^3) = 1.0000000043
+       beta = 0.60: numerical dp/dv / (m0 gamma^3) = 1.0000000048
+       beta = 0.80: numerical dp/dv / (m0 gamma^3) = 1.0000000055
+       beta = 0.99: numerical dp/dv / (m0 gamma^3) = 1.0000000062
+[PASS] T5    dp/dv / (m0 gamma^3) - 1, worst over 4 beta                                    value 6.189263768164e-09 expected 0.000000000000e+00 err 6.189e-09 (tol 2e-06)
+[PASS] T5    d gamma / d beta = beta gamma^3, worst relative over 3 beta                    value 1.646239145003e-09 expected 0.000000000000e+00 err 1.646e-09 (tol 1e-08)
+
+== T6 depth budget compatibility (engine depth relations; the depth is the engine's) ==
+       z = 0.00: clock 1.0000, far-speed factor 1.0000, required squared loading 0.0000; linear branch needs H_h = 1.000000
+       z = 0.01: clock 0.9900, far-speed factor 0.9801, required squared loading 0.0199; linear branch needs H_h = 1.000102
+       z = 0.10: clock 0.9000, far-speed factor 0.8100, required squared loading 0.1900; linear branch needs H_h = 1.012500
+       z = 0.25: clock 0.7500, far-speed factor 0.5625, required squared loading 0.4375; linear branch needs H_h = 1.125000
+       z = 0.50: clock 0.5000, far-speed factor 0.2500, required squared loading 0.7500
+       z = 0.90: clock 0.1000, far-speed factor 0.0100, required squared loading 0.9900
+[PASS] T6    (1-z)^2 + (2z - z^2) = 1, worst over 6 depths                                  value 0.000000000000e+00 expected 0.000000000000e+00 err 0.000e+00 (tol 1e-12)
+[PASS] T6    engine clock_rate and c_far match 1 - z and (1 - z)^2                          value 1.110223024625e-16 expected 0.000000000000e+00 err 1.110e-16 (tol 1e-15)
+
+== T7 variable c at fixed velocity ==
+[PASS] T7    d gamma/dt = -gamma^3 beta^2 (dc/dt)/c at fixed v, worst relative              value 5.495648380816e-10 expected 0.000000000000e+00 err 5.496e-10 (tol 1e-06)
+
+== T8 controlled radiative limit ==
+[PASS] T8    E = E_* for E_0 = E_*/gamma                                                    value 1.000000000000e+00 expected 1.000000000000e+00 err 0.000e+00 (tol 1e-14)
+[PASS] T8    p c / E_* = beta at beta = 1 - 1e-8                                            value 9.999999900000e-01 expected 9.999999900000e-01 err 0.000e+00 (tol 1e-12)
+
+== T9 worked headings ==
+[PASS] T9    beta = 0.8: a_perp/a_par = gamma^2 = 25/9 at psi = 45 deg                      value 2.777777777778e+00 expected 2.777777777778e+00 err 1.599e-16 (tol 1e-14)
+[PASS] T9    response heading (degrees) = 70.2 to the printed digit                         value 7.020000000000e+01 expected 7.020000000000e+01 err 0.000e+00 (tol 1e-12)
+[PASS] T9    beta = 0.6, equal components: tan(psi_a) = 0.8/0.512 = 1.5625                  value 1.562500000000e+00 expected 1.562500000000e+00 err 0.000e+00 (tol 1e-14)
+       beta = 0.8: gamma = 1.6666666667 ; response heading 70.2011 deg
+
+CRITERIA NOT MET: 1 failure(s)

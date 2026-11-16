@@ -1,0 +1,57 @@
+﻿RTM01 — THE THRUST LEDGER AND STRAIGHT-LINE PRICING (direct run)
+=================================================================
+Domain 17, Reactions & Thrust Mechanics — the forced state.
+
+[P1] ledger laws — the price list of straightness ({kop, c, r} only, zero pi):
+  hover price      a(r)    = c^2*kop/r^2      [reaction to stand still]
+  lateral bill     dv_perp = 2*c^2*kop/(b*v)  [reaction to pass straight]
+  per-metre toll   dz/dl   = kop/r^2          [radial component of the line]
+
+  hover, Earth surface :    9.8183 m/s^2
+  hover, Earth +400 km :    8.6925 m/s^2
+  G1    hover Sun: c^2*kop/R^2 vs v_surf^2/R [m/s^2]     got 274.278       ref 274.2         dev  0.02849%  PASS
+
+[P2] budget bookkeeping — the toll ledger along a powered radial line (Earth):
+      r            z = kop/r          hover a [m/s^2]
+      6.371e+06    6.959880e-10       9.81828
+      6.471e+06    6.852325e-10       9.51717
+      6.771e+06    6.548722e-10       8.69251
+      8.371e+06    5.297025e-10       5.68717
+      3.844e+08    1.153522e-11       0.00269702
+  G2    budget identity v^2/c^2 = kop/r at the surface rung got 6.95988e-10   ref 6.95988e-10   dev  0.00000%  PASS
+      on a FORCED path the travel purse is paid by reaction, not by
+      circulation — the toll is billed to the engine, tick by tick.
+
+[P3] propulsion pricing — what refusing the curve costs:
+  hover ledger (Tsiolkovsky), Earth surface, v_ex = 4.5 km/s:
+    mass ratio per DAY of hover = 10^81.9   (per hour: 10^3.41)
+    the number is the point: the curve is free, the line is astronomical.
+
+  straight-pass lateral bill dv_perp = 2*c^2*kop/(b*v)  [m/s]:
+      body    b            v [km/s]   dv_perp
+      Earth   1.274e+07    10         6255.23
+      Earth   6.371e+07    10         1251.05
+      Earth   6.371e+08    10         125.105
+      Sun     6.957e+09    30         1.2721e+06
+      Sun     7.48e+10     30         118317
+      Sun     1.496e+11    30         59158.7
+
+[P4] the decomposition of the deflection 4 — one instrument per factor:
+  slow powered line pays GEOMETRY-2 only:  theta_slow = 2*kop*c^2/(b*v^2)
+  light pays PROFILE-2 x GEOMETRY-2:       theta_light = 4*kop/b
+
+  at the solar limb (b = R_Sun): theta_light = 1.7517 arcsec
+      v [km/s]   theta_slow/theta_light      c^2/(2 v^2)     identity dev
+      10         4.493776e+08                4.493776e+08    1.1e-16
+      30         4.993084e+07                4.993084e+07    0.0e+00
+      100        4.493776e+06                4.493776e+06    2.2e-16
+      300        4.993084e+05                4.993084e+05    0.0e+00
+  G3    ratio law theta_slow/theta_light = c^2/2v^2      got 1             ref 1             dev  0.00000%  PASS
+  -> E110 (specification): fly the null-steered line and time the light past
+     the same b; the thrust telemetry reads the geometric 2 alone, the ray adds
+     the profile 2. First order is shared form (PPN produces the same split);
+     the earned content is the decomposition made OPERATIONAL.
+
+RESULT: 3 gates PASS, 0 FAIL.
+pi-audit: every law above uses {kop, c, r, b, v, v_ex} only — no pi, no G,
+no M, no kilogram. Findings feed the next RTM investigation.

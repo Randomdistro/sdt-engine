@@ -1,3 +1,27 @@
+# OP08 — Faraday rotation (specification rewritten 2026-10-12)
+
+**Author:** J. C. Harvey, Melbourne. Rewritten at Harvey's direction: prompts carry new data, and errors inform the mechanism. The previous specification and its audit blocks are kept below the line.
+
+## 1. State after the reset audit (2026-10-10)
+**G2, open: specification incomplete; no instrument run.** There is no model for handed-speed splitting under imposed circulation, and no tolerance. It depends on the OP01 matter index (open) and OP04.
+
+## 2. What opens it (registered order)
+1. OP01's matter index (supplier).
+2. The handed relay-speed difference in a circulating medium, written natively. It gives the Verdet constant V from the medium's index dispersion.
+3. Comparison on at least 2 media, tolerance committed first.
+
+## 3. New data and links from the 2026-10-07 to 2026-10-12 work
+- Handedness now has a recorded native source candidate (NP30 §5 counter-rotation; PPT15 δ). OP08 and PPT15 should use one definition of hand, not two.
+
+## Prohibitions (all items in this batch)
+- No mechanism or functional form chosen to reach the anchors (2026-10-07 method rule).
+- Tolerances are committed before any value is computed.
+- No QM narration; no G or GM; the word "charge" is not used.
+
+---
+
+## Previous specification (kept as written)
+
 # OP08 — Faraday Rotation: Handed Speeds in a Turned Medium
 
 > **Status:** OPEN — specification seed (benchmark-coverage alignment 2026-07-29; catalogue
@@ -31,3 +55,15 @@ one-criterion family for medium-speed effects).
 ## Benchmark linkage
 
 Catalogue row B97 · suite coverage roster · tally on computed number only.
+
+---
+
+## Audit correction 2026-10-05 (opening premise)
+
+**Finding:** The seed gives no model for how an imposed circulation rotates the polarisation plane and commits no tolerance.
+
+**Correction:** Derive V from the circulation–wake coupling and commit the tolerance for ≥ 2 media.
+
+**Status:** OWED — model, data or derivation missing; requirement and tolerance recorded, nothing run.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

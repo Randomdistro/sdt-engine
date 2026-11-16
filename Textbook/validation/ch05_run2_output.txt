@@ -1,0 +1,105 @@
+== V1, V2 scanner validation ==
+[PASS] V1  token scanner on the fixed test string
+[PASS] V2  range parser on three forms
+
+== C1 Ruleset structure ==
+[PASS] C1  6 operators (found 6)
+[PASS] C1  9 axioms R1-R6, M1-M3 (found ['R1', 'R2', 'R3', 'R4', 'R5', 'R6', 'M1', 'M2', 'M3'])
+[PASS] C1  17 consecutive theorems T1-T17 (found 17)
+
+== C2 engine header banner ==
+[PASS] C2  banner Law I: theorem range (1, 2) (predicted (1, 2))
+[PASS] C2  banner Law II: theorem range None (predicted None)
+[PASS] C2  banner Law III: theorem range (3, 4) (predicted (3, 4))
+[PASS] C2  banner Law IV: theorem range (5, 7) (predicted (5, 7))
+[PASS] C2  banner Law V: theorem range (10, 17) (predicted (10, 17))
+[PASS] C2  banner Law VI: theorem range (18, 18) (predicted (18, 18))
+
+== C3 order of banners and namespaces ==
+[PASS] C3  banner lines [242, 308, 452, 595, 880, 2377] increasing
+[PASS] C3  namespace lines [248, 316, 457, 603, 895, 2395] increasing
+
+== C4 T18 ==
+[PASS] C4  T18 occurs in laws.hpp
+[PASS] C4  T18 absent from the Ruleset theorem table
+
+== C5 T8 and T9 relative to the banner ranges ==
+[PASS] C5  8 not covered, 9 not covered (covered = [1, 2, 3, 4, 5, 6, 7, 10, 11, 12, 13, 14, 15, 16, 17, 18])
+
+== C6 gravitational dilation ==
+[PASS] C6  no function named gravitational_time_dilation in laws.hpp
+[PASS] C6  depth_closure::clock_rate defined
+[PASS] C6  Ruleset T16 row names a square-root form
+
+== Reported (not criteria): Ruleset theorem names ==
+  T1   Shell cancellation identity        Inner shells cancel → only $N$ contributes
+  T2   Convergent throughput              $\Phi = N\varepsilon$, $P_{\text{conv}} = \Phi/\ell_P^3$
+  T3   Occlusion force                    $F = (\pi/4) P_{\text{eff}} R_1^2 R_2^2 / r^2$
+  T4   Force unification                  Same mechanism: Coulomb, gravity, nuclear
+  T5   Inertial mass                      $m = \Phi V_{\text{disp}} / (3\ell_P^3 c^2)$
+  T6   Equivalence principle              $m_{\text{inert}} = m_{\text{grav}}$ (same $V_{\text{disp}}$)
+  T7   Traction                           $\tau = 1/3$ from isotropic tensor projection
+  T8   Charge quantisation                $R_{\text{charge}} = \sqrt{R_p r_e}$
+  T9   Coulomb identity                   $k_e e^2 = \alpha\hbar c$
+  T10  Movement budget                    $v_{\text{circ}}^2 + v^2 = c^2$
+  T11  Time dilation                      $d\tau/dt = \sqrt{1 - v^2/c^2}$
+  T12  Length contraction                 $L = L_0/\gamma$
+  T13  Rest energy                        $E_0 = mc^2$
+  T14  Energy-momentum                    $E^2 = (pc)^2 + (mc^2)^2$
+  T15  Photon limit                       $v_{\text{circ}} = 0 \Rightarrow v = c, m = 0$
+  T16  Gravitational dilation             $d\tau/dt = \sqrt{1 - z R/r}$
+  T17  c-boundary                         $\beth = R/k^2$: where orbital speed = $c$
+
+== Reported: T<n> tokens in laws.hpp by theorem number ==
+  T1     5 tokens, first at line 8
+  T2     4 tokens, first at line 8
+  T3     5 tokens, first at line 10
+  T4     3 tokens, first at line 10
+  T5     3 tokens, first at line 11
+  T6     0 tokens
+  T7     3 tokens, first at line 11
+  T8     8 tokens, first at line 2180
+  T9     0 tokens
+  T10   11 tokens, first at line 12
+  T11    2 tokens, first at line 921
+  T12    2 tokens, first at line 927
+  T13    1 tokens, first at line 932
+  T14    3 tokens, first at line 937
+  T15    1 tokens, first at line 946
+  T16    1 tokens, first at line 2181
+  T17    6 tokens, first at line 12
+  T18    2 tokens, first at line 13
+  tokens by top-level namespace: header:9, measured:2, law_I:2, lock_geometry:2, law_III:5, law_IV:7, law_V:7, bridge:6, atomic:2, nuclear:15, coulomb_identity:1, mass_ratio:2
+
+== Reported: theorem and lemma headings of the Complete Laws paper ==
+  Lemma 1          — Single-Source Contribution
+  Lemma 1.         A single source at depth d contributes to the target:
+  Lemma 2          — Shell Population
+  Lemma 2.         |Sd| = 4πd2 + O(d).
+  Theorem 1        — Shell Cancellation
+  Theorem 1.       The total convergence from all sources at depth d is independent of d:
+  Theorem 2.       The total convergence burden at any interior point is:
+  Theorem 9.       A luminous body of luminosity L dominates the cosmological convergence
+  Theorem 8.       The per-shell content at the present epoch relates to the Clearing-epo
+  Theorem 3.       In an empty lattice, the directional convergence density is isotropic:
+  Corollary 3.1    — Newton’s First Law
+  Corollary 3.2    — Scalar Compression
+  Theorem 4.       Two displacement vortices with occlusion radii R1 and R2 at separation
+  Corollary 4.1    — Newton’s Third Law
+  Corollary 4.2    — The Inverse-Square Law
+  Theorem 5.       A displacement vortex of exclusion volume Vdisp accelerating at a expe
+  Theorem 6.       minert = mgrav.
+  Theorem 7.       No displacement vortex can exceed velocity c.
+  Corollary 7.1    — Relativistic Mass
+  Theorem 10.      For a displacement vortex translating at velocity v through the lattic
+  Theorem 11.      The internal tick rate of a vortex moving at velocity v is:
+  Theorem 12.      A vortex of rest-frame extent L0 along the direction of motion contrac
+  Theorem 13.      The rest energy of a displacement vortex is:
+  Theorem 14.      For a vortex of rest mass m0 at velocity v:
+  Theorem 15.      A lattice deformation with zero internal circulation propagates at exa
+  Theorem 16.      A vortex at rest at radius r in a convergence field with characteristi
+  Theorem 17.      At radius Rc = zR = R/k2 from a central mass, the orbital velocity equ
+  Theorem 5        (Law IV) establishes inertial mass as:
+  Theorem 10       (Law V) asserts vcirc2 + v2 = c2 with equality. The question: why not
+
+ALL CRITERIA MET: 0 failure(s)

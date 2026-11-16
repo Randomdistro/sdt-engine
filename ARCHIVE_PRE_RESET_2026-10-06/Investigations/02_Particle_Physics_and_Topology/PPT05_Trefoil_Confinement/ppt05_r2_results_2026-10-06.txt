@@ -1,0 +1,29 @@
+PPT05 R2 — sigma(R) and census (pre-registered 2026-10-06)
+==========================================================
+
+[V1] lam_p = 0.210309 fm ; hbar c = 0.197327 GeV fm ; m_p c^2 = 0.938272 GeV -> PASS
+[V2] cross-section integral of rho c^2 = m c^2/(2 pi R) for a = 0.1R..2R: worst relative error 1.74e-16 -> PASS
+
+VALIDATIONS: met
+
+[T1] sigma = m_p c^2/(2 pi R)
+     length used                              R [fm]    R/lam_p   sigma [GeV/fm]  vs 0.9 [%]
+     PPT05 (lam_p/sqrt3)                      0.12142   0.5774    1.2298           +36.6
+     PPT01 rule A (1,1)                       0.33253   1.5811    0.4491           -50.1
+     PPT01 rule B (p,q)=(2,3)                 0.75828   3.6056    0.1969           -78.1
+     PPT01 rule C (q,p)=(3,2)                 0.89227   4.2426    0.1674           -81.4
+     FLM05/FLM07 R = R_p                      0.84140   4.0008    0.1775           -80.3
+     sqrt3 lam_p ((1,2) partition, no /q)     0.36427   1.7321    0.4099           -54.5
+     sigma spans 0.1674 .. 1.2298 GeV/fm (factor 7.3)
+     PPT01 rules: R_A = 3.3253e-16, R_B = 7.5828e-16, R_C = 8.9227e-16 m ; a_A = 2.7151e-16, a_B = 7.5828e-16, a_C = 5.9484e-16 m
+
+[T2] PPT05 vs PPT01 (2,3) rule A
+     PPT05 : v_T/c 0.5774  v_P/c 0.8165  R/lam 0.5774  a/lam 0.6124  R/a 0.9428
+     rule A: v_T/c 0.6325  v_P/c 0.7746  R/lam 1.5811  a/lam 1.2910  R/a 1.2247
+     rule A gives v_T^2/c^2 = p/(p+q) = 1/3 for (p,q) = (1,2): v_T = 0.5774 c, v_P = 0.8165 c (PPT05's partition)
+     -> PPT05's partition equals the (1,2) curve's under rule A, applied to a (2,3) geometry
+
+[T3] census: band sigma in [0.88, 1.00] GeV/fm requires R in [0.14933, 0.16969] fm = R/lam_p in [0.7101, 0.8069]
+     distinct candidates sqrt(a/b), a,b in 1..6: 22 ; inside the band: sqrt(3/5)=0.7746
+     count inside band: 1 of 22 (4.5%) ; census criterion (count >= 3: not discriminating): not met
+     PPT05's 1/sqrt3 = 0.5774 is outside the band

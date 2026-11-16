@@ -1,0 +1,42 @@
+Evaluation of the mathematics in the pasted text (2026-10-07)
+==============================================================
+
+[VA] orbit integrator, Newtonian (beta = 0), 20 orbits: precession -1.373e-12 rad/orbit ; relative energy drift 8.09e-13 -> met
+[VB] deflection quadrature (a = 2, grazing the Sun): 8.489860e-06 rad against analytic 8.489860e-06 (relative 1.25e-09) -> met
+
+VALIDATIONS: met
+
+[C1] R0 = 8.40000e-16 m : Omega = 2.4827e-45 m^3 ; N_disp = Omega/((pi/6) l_P^3) = 1.1230e+60 (8 (R0/l_P)^3 = 1.1230e+60) ; R_term = sqrt(R0^3/(3 l_P)) = 3.4963e-06 m
+[C1] R0 = 8.41236e-16 m : Omega = 2.4937e-45 m^3 ; N_disp = Omega/((pi/6) l_P^3) = 1.1280e+60 (8 (R0/l_P)^3 = 1.1280e+60) ; R_term = sqrt(R0^3/(3 l_P)) = 3.5040e-06 m
+     pasted: N ~ 1.1e60, R_term ~ 3.5e-6 m -> arithmetic reproduced
+     cell choice: the pasted count divides by the volume of one sphere, (pi/6) l_P^3 (100% filling); with face-centred close packing each sphere has a cell l_P^3/sqrt2, giving N = sqrt2 Omega/l_P^3 = 8.3159e+59 (x0.7405 of the pasted count); R_term does not depend on this choice
+
+[C1b] R_term(N_b) = R_term(1) sqrt(N_b), R_term(1) = 3.4963e-06 m ; the baryon number at which R_term equals the causal depth R_CMB = 9.5270e+26 m is N_b* = 7.4252e+64 (baryon census; N_b* m_p = 1.2419e+38 kg, about 6.2e+07 solar masses with the IAU value 1.989e30 kg [external, conversion only])
+     bodies with fewer baryons have a displacement field that falls below one l_P per shell inside the causal depth; bodies with more keep it above one l_P per shell out to the boundary
+
+[C2] incompressible source u_r = Omega/(4 pi r^2): worst |div u| / (u/r) = 9.84e-13 (zero to rounding) ; strains at r = 1e-9 m: e_rr = -3.951e-19, e_thth = e_phph = 1.976e-19 (trace 0.0e+00)
+     -> the pasted density statement rho = rho0 (1 - Omega/(4 pi r^3)) is inconsistent with this displacement field; the shear energy density scales as r^-6 and integrates to a finite value from R0
+
+[C3] koppa from the Earth-orbit speed (engine v_surface_Sun = 436762 m/s): 1476.6252 m ; from the Mercury closure: 1476.5989 m ; bridge::koppa_Sun (R/k^2, k = 686.3): 1477.0459 m ; relative differences -1.79e-05, 2.85e-04
+     z k^2 - 1 over r = 1e-3 .. 1e9 m: worst 2.22e-16 (CONSTRUCTION: k = c/v and z = koppa/r are built from one v) ; weak-field gravitational redshift of the Sun z = koppa/R_Sun = 2.12250e-06 (the standard weak-field value GM/(R c^2) with GM from the Earth-orbit speed)
+     hydrogen: v(a_0) = (c/k) sqrt(R/r) with k = 1/alpha, R = a_0 gives 1.000000 alpha c ; the formula as typed in the paste, v = (c k) sqrt(R/r), gives 137.04 c at r = R for k = 1/alpha, so k there must be v/c or the typed product must be c/k
+
+[C4] perihelion advance of Mercury for a = -(c^2 koppa/r^2)(1 + beta koppa/r), koppa = 1476.5989 m (Mercury closure), 40 orbits, RK4, dt = 20 s
+     analytic first-order advance for beta = 6: 6 pi koppa/(a(1-e^2)) = 5.018578e-07 rad/orbit = 42.9800 arcsec/century
+     beta = 0    : -1.396216e-12 rad/orbit = -0.0001 arcsec/century (energy drift 1.3e-12)
+     beta = 3    : 2.509279e-07 rad/orbit = 21.4899 arcsec/century (energy drift 6.0e-13)
+     beta = 6    : 5.018576e-07 rad/orbit = 42.9800 arcsec/century (energy drift 4.2e-13)
+     beta = 12   : 1.003715e-06 rad/orbit = 85.9600 arcsec/century (energy drift 8.2e-13)
+     criterion (beta = 6 reproduces the analytic value to 1e-3): relative difference -3.92e-07 -> met ; linearity in beta: precession(12)/precession(6) = 2.00000 (expected 2)
+
+[C5] circular-orbit speed v^2 = c^2 x (1 + 6 x), x = koppa/r: v = c at x = 0.333333 (r = 3.0000 koppa) ; stability margin 3 - (2 + 18 x)/(1 + 6 x) = 1/(1 + 6x): smallest over x in [1e-6, 50]: 0.0033 (> 0: circular orbits are stable at every radius, no innermost stable orbit)
+     for comparison [B]: GR has a photon circular orbit at r = 3 GM/c^2 and an innermost stable circular orbit at r = 6 GM/c^2
+
+[C6] light in n - 1 = a koppa/r (koppa = 1476.5989 m), grazing the Sun: deflection 2 a koppa/b
+     a = 1 : 4.24493e-06 rad = 0.8756 arcsec (a = 2 corresponds to a coordinate light speed c (1 - 2 koppa/r), to first order c (1 - z)^2) ; delay coefficient (a koppa/c) = 4.9254e-06 s per unit of ln
+     a = 2 : 8.48986e-06 rad = 1.7512 arcsec (a = 2 corresponds to a coordinate light speed c (1 - 2 koppa/r), to first order c (1 - z)^2) ; delay coefficient (a koppa/c) = 9.8508e-06 s per unit of ln
+     the pasted 1911 scalar form c (1 + Phi/c^2) is a = 1 (half the deflection); the full deflection needs a = 2
+
+[C7] engine closure c = k_Sun v_surface = 299795135.79 m/s against measured c = 299792458.00 m/s : +0.00089% (engine comment +0.0009%)
+     c scales as the precession to the power -1/2: a precession uncertainty of +/-0.04 arcsec/century (0.093%) moves c by -0.0465% ; the 0.0009% agreement is therefore below the precision of the input and reflects that 42.98 is the value that general relativity predicts for this formula
+     the coefficient 6 pi in k_from_precession is the general-relativity coefficient entering as an input (engine comment: 'GR-analogue')

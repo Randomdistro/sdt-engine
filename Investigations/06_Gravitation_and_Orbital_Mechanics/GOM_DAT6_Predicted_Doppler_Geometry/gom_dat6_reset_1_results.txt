@@ -1,0 +1,18 @@
+GOM_DAT6 blank-slate run 1 (registered in GOM_DAT6_RESET_ASSESSMENT_2026-10-11.md sections 0-2)
+=======================================================================
+
+[V1] label rows 7447, rows read 7447, increasing time tags yes ; selected 7447 type-12 valid 25/25 records -> met
+[V2] table coverage: Horizons 1654491600 to 1654848000 ; window 1654548090 to 1654555536 ; window - RTLT starts 1654539745 -> met
+[V3] cubic interpolation of the 15-min table at the 5-min epochs: worst relative 8.65e-09 -> met
+[V4] d(delta)/dt from the table against deldot (5-min table): worst relative 2.02e-05 -> met
+VALIDATIONS: met
+
+C2: DSS-25 Earth-fixed coordinates (Horizons site record in the table header): E-lon 243.1246368 deg, lat 35.337612 deg, alt 0.959628 km -> MEASURED-INPUT, provenance the Horizons site database (not a TRK-2-25 station table)
+
+LEVEL (7447 records): median |obs| = 50244.3 Hz ; median |P_lit| = 170408.8 Hz (ratio 3.3916) ; median |P_2w| = 2560414.8 Hz (ratio 50.9593)
+  original gate (ratio in [0.1, 10]): P_lit met, P_2w NOT MET ; corrected gate (|ratio - 1| <= 0.05): P_lit NOT MET, P_2w NOT MET
+CHANGE-BASED, obs on P_2w: slope 0.99994, correlation 1.000000, offset -2510006.5 Hz
+CHANGE-BASED, obs on P_lit: slope -15.01225, correlation -0.999628, offset -2507703.1 Hz
+C5 (reported separately; K = 1476.35 m frozen, not fitted): Delta f = 2F d(delay)/dt over the window: mean 0.9867 Hz, range 0.9837 to 0.9897 Hz
+
+C6: no gamma, no Bertotti residual used. Status: VERIFICATION / COMPUTED; no SDT survival or exclusion claimed.

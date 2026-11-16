@@ -1,0 +1,32 @@
+NP13 blank-slate run 1 (registered in NP13_RESET_ASSESSMENT_2026-10-10.md sections 0-2)
+====================================================================
+
+[V1] AME2020 rows 3558, experimental 2550 ; ME(n) 8071.31806, ME(1H) 7288.971064 keV -> met
+[V2] computed B/A against the file's binding-energy column for 2H, 4He, 56Fe, 62Ni, 208Pb: worst 0.00005 keV -> met
+[V3] NUBASE ground states with IS=: 288 nuclides in 84 elements ; 1H 99.9855, 2H 0.0145 ; worst |sum - 100| over elements 0.0120 (elements beyond 0.5: 0) -> met
+[V4] grammar reconstruction (alpha + n_d d + n_t t = (Z,N)) for every grammar nuclide: met
+
+VALIDATIONS: met
+
+[T1] The pair
+  prompt's table: Fe-56 5a+6d+6t -> Z = 22, N = 28 (stated 26, 30) ; Ni-62 5a+6d+9t -> Z = 25, N = 34 (stated 28, 34)
+  constitutional: Z = 26, A = 56 : n_d = 20, n_t = 4, triton fraction 0.1667, s = 0.6667 ; B/A = 8790.3563 keV ; abundance within element 91.7540 %
+  constitutional: Z = 28, A = 62 : n_d = 20, n_t = 6, triton fraction 0.2308, s = 0.5385 ; B/A = 8794.5555 keV ; abundance within element 3.6345 %
+  top five by B/A (keV): Z=28 A=62 8794.556; Z=26 A=58 8792.253; Z=26 A=56 8790.356; Z=28 A=60 8780.777; Z=24 A=54 8777.967;
+
+[T2] s = |3Z - 2N - 2|/(Z - 2): identity over 2378 grammar nuclides, worst difference 0.00e+00 ; zero at N = (3Z - 2)/2 (N/Z -> 1.5)
+
+[T3] isotopes with abundance, Z = 2..83, inside the grammar: 279 (outside, n_d or n_t < 0: 1)
+  Spearman(s, abundance) = -0.0847 ; Spearman(s, B/A) = +0.5630
+  elements with >= 2 isotopes: 58 ; most abundant = most symmetric (smallest s): 13 (chance 17.26 +- 3.28) ; most abundant = heaviest: 17 ; = lightest: 21
+  reading 'most abundant = most symmetric': NOT supported
+
+[T4] s* (s of the most abundant isotope) at the magic Z, rank among Z-2..Z+2 (1 = smallest s):
+  Z =  2: s* = 0.0000, window values 3, rank 1
+  Z =  8: s* = 1.0000, window values 5, rank 2
+  Z = 20: s* = 1.0000, window values 5, rank 5
+  Z = 28: s* = 0.8462, window values 5, rank 5
+  Z = 50: s* = 0.1667, window values 5, rank 2
+  Z = 82: s* = 0.1000, window values 4, rank 4
+
+[T5] B/A gate (audit correction): OWED, no native B/A model in the prompt (D5)

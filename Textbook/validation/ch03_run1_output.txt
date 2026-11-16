@@ -1,0 +1,72 @@
+
+== V0 helper validation (known answers) ==
+[PASS] V0    integrate sin over [0, pi] = 2                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 3.331e-16 (tol 1e-13)
+[PASS] V0    integrate x^7 over [0, 1] = 1/8                                                value 1.250000000000e-01 expected 1.250000000000e-01 err 2.220e-15 (tol 1e-14)
+[PASS] V0    integrate exp over [-1, 1] = e - 1/e                                           value 2.350402387288e+00 expected 2.350402387288e+00 err 5.668e-16 (tol 1e-13)
+[PASS] V0    root of cos x - x = 0.739085133215161                                          value 7.390851332152e-01 expected 7.390851332152e-01 err 2.253e-15 (tol 1e-13)
+[PASS] V0    root of x^2 - 2 on [1, 2] = sqrt 2                                             value 1.414213562373e+00 expected 1.414213562373e+00 err 2.983e-15 (tol 1e-13)
+[PASS] V0    compensated sum 1 + 10^6 x 1e-16 = 1 + 1e-10                                   value 1.000000000100e+00 expected 1.000000000100e+00 err 0.000e+00 (tol 1e-15)
+
+== V1 quadrature on the straight-ray integral ==
+[PASS] V1    int dl/sqrt(l^2+b^2) = 2 asinh(L/b), L/b = 3.000000                            value 3.636892918464e+00 expected 3.636892918464e+00 err 3.663e-16 (tol 1e-12)
+[PASS] V1    int dl/sqrt(l^2+b^2) = 2 asinh(L/b), L/b = 300.000000                          value 1.279386486596e+01 expected 1.279386486596e+01 err 8.608e-15 (tol 1e-12)
+[FAIL] V1    int dl/sqrt(l^2+b^2) = 2 asinh(L/b), L/b = 30000.000000                        value 2.205304318094e+01 expected 2.200419968296e+01 err 2.220e-03 (tol 1e-12)
+
+== V2 series of the relay-speed deficit ==
+[PASS] V2    [(1-z)^-2 - 1]/(2z) = 1 + 3z/2 + 2z^2 + 5z^3/2 + ... at z = 1e-3               value 1.001502002503e+00 expected 1.001502002500e+00 err 3.036e-12 (tol 1e-11)
+
+== T1 factorisation of the far-frame relay speed ==
+[PASS] T1    c_far = c x closure factor x oscillator-rate factor (worst relative, z = 0..0.9) value 0.000000000000e+00 expected 0.000000000000e+00 err 0.000e+00 (tol 1e-15)
+[PASS] T1    depth_from_c_far(c_far(c, z), c) = z (worst relative, z = 0.1..0.9)            value 2.775557561563e-16 expected 0.000000000000e+00 err 2.776e-16 (tol 1e-14)
+
+== T2 the two spectral forms (exact rational arithmetic) ==
+[PASS] T2    exact identity: ratio form - engine form = z_e (z_e - z_o)/(1 - z_e), z_e = 3/10
+       z_e = 3e-01: engine z_spec = 2.000000e-01 ; difference / z_e^2 = 0.952381 (from the exact form 0.085714/0.085714)
+[PASS] T2    exact identity: ratio form - engine form = z_e (z_e - z_o)/(1 - z_e), z_e = 1/10
+       z_e = 1e-01: engine z_spec = 6.666667e-02 ; difference / z_e^2 = 0.740741 (from the exact form 0.007407/0.007407)
+[PASS] T2    exact identity: ratio form - engine form = z_e (z_e - z_o)/(1 - z_e), z_e = 1/100
+       z_e = 1e-02: engine z_spec = 6.666667e-03 ; difference / z_e^2 = 0.673401 (from the exact form 0.000067/0.000067)
+[PASS] T2    exact identity: ratio form - engine form = z_e (z_e - z_o)/(1 - z_e), z_e = 1/10000
+       z_e = 1e-04: engine z_spec = 6.666667e-05 ; difference / z_e^2 = 0.666733 (from the exact form 0.000000/0.000000)
+[PASS] T2    exact identity: ratio form - engine form = z_e (z_e - z_o)/(1 - z_e), z_e = 1/1000000
+       z_e = 1e-06: engine z_spec = 6.666667e-07 ; difference / z_e^2 = 0.666667 (from the exact form 0.000000/0.000000)
+
+== T3 integrated relay-speed deficit (Earth-Mars grazing geometry) ==
+[PASS] T3a   shapiro_delay vs (2 Om/c)[asinh(l1/b) + asinh(l2/b)]                           value 1.236551831278e-04 expected 1.236551069024e-04 err 6.164e-07 (tol 5e-05)
+[PASS] T3b   shapiro_delay vs quadrature of the exact integrand 1/c_far - 1/c               value 1.236551831278e-04 expected 1.236552052472e-04 err 1.789e-07 (tol 1e-05)
+       Om_Sun = 1477.0459 m ; impact parameter b = R_Sun ; r1 = 1 AU ; r2 = 1.523679 AU
+       one-way excess path count (delay x c / l_P) = 2.293629e+39 relay hops
+       one-way delay 1.236552e-04 (SI seconds, unit bridge); round trip 247.3104 microseconds
+       log form / asinh form - 1 = 6.164e-07 ; exact / log form - 1 = 1.789e-07
+
+== T4 recurrence counts ==
+[PASS] T4    relay intervals per orbit, two routes: hydrogen ground state (r = a0, v = alpha c) value 2.819069548394e+27 expected 2.819069548394e+27 err 1.950e-16 (tol 1e-14)
+[PASS] T4    radians per light-crossing of r = v/c: hydrogen ground state (r = a0, v = alpha c) value 7.297352564300e-03 expected 7.297352564300e-03 err 1.189e-16 (tol 1e-14)
+       hydrogen ground state (r = a0, v = alpha c): k = 137.035999, relay intervals per orbit = 2.819070e+27, rad per light-crossing = 7.297353e-03
+[PASS] T4    relay intervals per orbit, two routes: Earth about the Sun (r = 1 AU, v = (c/k) sqrt(R/r)) value 5.853651182901e+50 expected 5.853651182901e+50 err 2.838e-16 (tol 1e-14)
+[PASS] T4    radians per light-crossing of r = v/c: Earth about the Sun (r = 1 AU, v = (c/k) sqrt(R/r)) value 9.935015742014e-05 expected 9.935015742014e-05 err 0.000e+00 (tol 1e-14)
+       Earth about the Sun (r = 1 AU, v = (c/k) sqrt(R/r)): k = 10065.409316, relay intervals per orbit = 5.853651e+50, rad per light-crossing = 9.935016e-05
+
+== T5 engine consistency of the counts ==
+[PASS] T5    law_I::N vs R_CMB / l_P                                                        value 5.894490658962e+61 expected 5.894490658962e+61 err 0.000e+00 (tol 1e-14)
+[PASS] T5    Om_H = alpha^2 a0 vs r_e (bridge::koppa_hydrogen)                              value 2.817940320432e-15 expected 2.817940320432e-15 err 0.000e+00 (tol 1e-09)
+
+== Table 3.1 hop counts (length / l_P), tabulated, not criteria ==
+       proton boundary R_p          5.2059e+19 hops
+       electron wake radius r_e     1.7435e+20 hops
+       Bohr radius a_0              3.2741e+24 hops
+       one metre                    6.1871e+34 hops
+       Earth radius                 3.9418e+41 hops
+       Sun radius                   4.3044e+43 hops
+       one astronomical unit        9.2558e+45 hops
+       R_CMB (= N hops)             5.8945e+61 hops
+       relay rate c / l_P = 1.854859e+43 per SI second (unit bridge); relay interval l_P / c = 5.391246e-44 SI seconds
+
+== Table 3.2 depth values z = Om / r, tabulated, not criteria ==
+       Sun surface (Om_Sun / R_Sun)           z = 2.123108e-06
+       Sun at 1 AU (Om_Sun / AU)              z = 9.873442e-09
+       z_spec, emitter Sun surface, observer 1 AU = z_e - z_o = 2.113234e-06
+       hydrogen at a0 (Om_H / a0 = alpha^2)   z = 5.325135e-05
+       hydrogen at r = Om_H = r_e             z = 1 (c-boundary; clock rate 1 - z = 0)
+
+CRITERIA NOT MET: 1 failure(s)

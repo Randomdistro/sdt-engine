@@ -1,0 +1,50 @@
+APS08 Zeeman splitting from route orientation
+pre-registration: PROMPT.md (2026-10-03)
+
+INSTRUMENT VALIDATION (known answers; physics rounds not yet run)
+  [ok] V1 Larmor: precession of L about B: 5.0000e-06 at B=1e-5 (expect B/2 = 5e-6), 1.0001e-05 at 2e-5 (expect 1e-5), ratio 2.0002
+  [ok] V2 M_vec zero-field eigenvalues: -1.000000 -1.000000 0.500000 0.500000 0.500000 0.500000 (expect -1 x2, +1/2 x4)
+  [ok] V2 first-order shifts g_J m_J (units wL): J=3/2 -2.0000 -0.6667 0.6667 2.0000; J=1/2 -0.3333 0.3333 (expect +-2, +-2/3; +-1/3)
+  [ok] V3 cluster-and-count on the singlet case returns 3 components (expect 3)
+VALIDATION PASS
+
+ROUND 1 - normal pattern from route orientation (Cd 643.847 nm, singlet)
+Omega_B/2pi per tesla = e/(4 pi m_e) = 13.99624 GHz/T = 0.46686 cm^-1/T; Delta lambda at 643.847 nm = 0.01935 nm/T
+route classes: upper d (m = -2..2, m3 = 3m), lower p (m = -1..1); allowed transitions (dm = 0, +-1): 9
+distinct components (units Omega_B/2pi): -1 +0 +1   -> 3 components, spacing 1 (singlets: no spin term)
+round 1 rejection criterion (count != 3 or V1 fails): not met
+
+ROUND 2 - anomalous pattern on the 8-state s/p route basis (g_s = 2 input; xi = 1, wL = 1e-4 xi)
+
+M_diag (APS04 diagonal route classes, coupling xi m s_z)
+zero-field p manifold: 3 levels at -0.500 +0.000 +0.500  (observed Na: a doublet, 2 + 4 states)
+  cluster 0 (E0 = -0.500): 2 components: -1.0000(I=1.000) +1.0000(I=1.000)
+  cluster 1 (E0 = +0.000): 1 components: +0.0000(I=2.000)
+  cluster 2 (E0 = +0.500): 2 components: -1.0000(I=1.000) +1.0000(I=1.000)
+M_diag: p manifold doublet reproduced: NO; rejection criterion (count wrong or positions off): evaluated against D1 = 4 / D2 = 6 above
+
+M_vec (reference only: rotation-invariant coupling, angular-momentum algebra)
+zero-field p manifold: 2 levels at -1.000 +0.500  (observed Na: a doublet, 2 + 4 states)
+  cluster 0 (E0 = -1.000): 4 components: -1.3333(I=0.667) -0.6667(I=0.333) +0.6667(I=0.333) +1.3333(I=0.667)
+    target D1 (J=1/2): 4 components at -1.3333 -0.6667 +0.6667 +1.3333  -> count match, positions within 1% match
+  cluster 1 (E0 = +0.500): 6 components: -1.6667(I=0.333) -1.0000(I=1.000) -0.3333(I=0.667) +0.3333(I=0.667) +1.0000(I=1.000) +1.6667(I=0.333)
+    target D2 (J=3/2): 6 components at -1.6667 -1.0000 -0.3333 +0.3333 +1.0000 +1.6667  -> count match, positions within 1% match
+
+ROUND 3 - which magnitude rule makes the vector model reproduce the doublets? (g_s = 2)
+state   coupling    g target     R1 integer    dev % R2 shifted 1/2    dev %      R3 q(q+1)    dev %
+2S1/2   -            2.00000        2.00000     0.00        1.87500    -6.25        2.00000     0.00
+2P1/2   anti-alig.   0.66667        0.00000  -100.00        0.87500    31.25        0.66667     0.00
+2P3/2   stretched    1.33333        1.33333     0.00        1.34375     0.78        1.33333     0.00
+2D3/2   anti-alig.   0.80000        0.66667   -16.67        0.84375     5.47        0.80000     0.00
+2D5/2   stretched    1.20000        1.20000     0.00        1.20833     0.69        1.20000     0.00
+2F5/2   anti-alig.   0.85714        0.80000    -6.67        0.87500     2.08        0.85714     0.00
+2F7/2   stretched    1.14286        1.14286     0.00        1.14844     0.49        1.14286     0.00
+
+Na D1 / D2 patterns (units omega_L), target from the standard g values:
+R1 integer      D1: 2 components MISMATCH | D2: 6 components match
+R2 shifted 1/2  D1: 4 components MISMATCH | D2: 6 components MISMATCH
+R3 q(q+1)       D1: 4 components match | D2: 6 components match
+target D1: 4 components, D2: 6 components
+rejection criterion for R1 integer      : MET (rejected)
+rejection criterion for R2 shifted 1/2  : MET (rejected)
+rejection criterion for R3 q(q+1)       : not met (reproduces all registered targets)

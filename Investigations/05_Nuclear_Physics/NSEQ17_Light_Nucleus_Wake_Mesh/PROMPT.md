@@ -1,3 +1,32 @@
+# NSEQ17 — Light-nucleus wake mesh (specification rewritten 2026-10-12)
+
+**Author:** J. C. Harvey, Melbourne. Rewritten at Harvey's direction: prompts carry new data; the packing sequencer is understood before grammar work. The previous specification is kept below the line.
+
+## 1. State after the reset (2026-10-10)
+**Deferred:** a calibrated wake mesh with 8–9 parameters per nucleus against 2–3 observables. A held-out observable per nucleus is required before a re-run means anything.
+
+## 2. New data and what it teaches (2026-10-10 to 2026-10-12)
+- **Confirmed by running the engine (2026-10-10):** `fitLightNucleus` returns CALIBRATED(8) for ²H and CALIBRATED(9) for ³H and ³He, with **zero residuals** on B, μ (and Q for ²H). An exact fit with more parameters than targets carries no information.
+- No derived light nucleus exists anywhere in the construction (NP17 reset). The NP17 round-2 O1 rule is the route to one.
+
+## 3. Next round (registered order)
+1. Re-register with **one held-out observable per nucleus**, not used in the fit:
+   - the radius for ³H and ³He (IAEA: 1.759 and 1.966 fm);
+   - the radius for ²H (2.142 fm), with Q kept out of the fit for ²H.
+2. A fresh calibration, then the held-out comparison once, with cascade bands.
+3. Parameter count reduced to at most the number of fitted observables. Otherwise the result is labelled not identifiable.
+
+## Prohibitions
+- No census over candidate predictors.
+- Grammar counts are not evidence (NP24).
+- No data substitution without a label.
+- Release is read, never edited (proposals only).
+- The word "charge" is not used.
+
+---
+
+## Previous specification (kept as written)
+
 # NSEQ17 — Light-Nucleus Wake-Mesh Calibration
 
 **Author:** James Christopher Tyndall, Melbourne  
@@ -116,3 +145,15 @@ determinism, coefficient-bound, or neutron–neutron criterion is not met.
 All target-matched values are `CALIBRATED(n)`, where `n` is the isotope parameter count
 above. Wake topology and conservation checks are `COMPUTED`. Measured inputs are
 `MEASURED-INPUT` or `OBSERVED` as stated. Spin/parity remains `PENDING`.
+
+---
+
+## Audit correction 2026-10-05 (gating)
+
+**Finding:** Each of H-2, H-3 and He-3 is calibrated with 8–9 parameters to 2–3 observables (binding, moment, quadrupole) and then "reproduces" them to nine digits, which any under-determined fit does, and the prompt has no numeric gate.
+
+**Correction:** Hold out at least one observable per nucleus (for example the quadrupole or radius) and gate the prediction on that.
+
+**Status:** RULE RECORDED — corrected gate or definition applies to the next run; the earlier result is not re-scored and nothing was re-run.
+
+*Standing constraints kept in every correction: no G, no GM, no mass as a primitive (mass is a baryon count N_b with its spatial resistance; a catalogue mass is converted at entry, N_b = M/m_p, and labelled a census input); no fields or wavefunctions as primitives; whole-range single pass; nothing re-scored retroactively.*

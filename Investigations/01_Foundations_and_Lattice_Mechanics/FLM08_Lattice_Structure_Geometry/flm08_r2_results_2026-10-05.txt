@@ -1,0 +1,23 @@
+FLM08 R2 — independent geometry (pre-registered 2026-10-05)
+==========================================================
+
+[V1] dihedral from coordinates: icosahedron 138.189685 (138.189685), dodecahedron 116.565051 (116.565051) -> PASS
+[V2] screw extraction on a known helix: theta 0.700000000000 (0.7)  R 2.000000000000 (2.0)  h 0.500000000000 (0.5) -> PASS
+[V3] 600-cell combinatorics from coordinates: vertices 120 (120), edges 720 (720), degree-12 violations 0, faces 1200 (1200), cells 600 (600), edges not in exactly 5 cells 0 -> PASS
+
+VALIDATIONS: met
+
+[T1] tetrahedron dihedral from face normals: 1.230959417341 rad = 70.528779366 deg ; arccos(1/3) = 1.230959417341 ; |diff| = 0.00e+00 -> PASS
+[T2] face-sharing chain by three-sphere intersection (44 vertices): worst |edge-1| = 6.66e-16 ; twist 131.810314896 deg (start) 131.810314896 (vertex 30) vs 131.810314896 ; R 0.519615242 vs 0.519615242 ; rise 0.316227766 vs 0.316227766 -> PASS
+[T3] 600-cell: 3600 (cell, edge) dihedrals in S^3, min 72.000000000 max 72.000000000 deg (worst |dev from 72| = 2.84e-14) ; 5(72-delta) = 7.356103172 ; 360-5 delta = 7.356103172 -> PASS
+[T4] tight frame: max |sum (n_i.e)^2 / 4 - 1/3| over 1e5 random axes = 3.89e-16 -> PASS  (exact for a perfect tetrahedral node)
+     report only: fixed-orientation ensemble with bond-direction jitter, mean of sum(n_i.e)^2/4 over 2000 nodes (std error)
+       jitter  5.0 deg rms, axis z    : mean 0.332897  (1/3 = 0.333333, dev -4.36e-04, se 6.5e-04)
+       jitter  5.0 deg rms, axis (111): mean 0.333247  (1/3 = 0.333333, dev -8.63e-05, se 3.8e-04)
+       jitter  5.0 deg rms, axis (110): mean 0.333673  (1/3 = 0.333333, dev +3.40e-04, se 4.6e-04)
+       jitter 10.0 deg rms, axis z    : mean 0.336492  (1/3 = 0.333333, dev +3.16e-03, se 1.3e-03)
+       jitter 10.0 deg rms, axis (111): mean 0.331774  (1/3 = 0.333333, dev -1.56e-03, se 7.2e-04)
+       jitter 10.0 deg rms, axis (110): mean 0.333795  (1/3 = 0.333333, dev +4.61e-04, se 8.9e-04)
+     rotation-averaged over axes the value is 1/3 for ANY set of unit directions (<(n.e)^2>_e = 1/3), so node-level disorder cannot move it; only a fixed axis in a fixed-orientation ensemble can.
+
+SUMMARY: validations met; T1 PASS T2 PASS T3 PASS T4 PASS

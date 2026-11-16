@@ -1,0 +1,47 @@
+============================================================================================
+ QM05 RUN 2 - ACTION/REACTION QUADRATURE (ADJ-R2-1). One conserved unit kick, linear
+ projection readout in doubled-angle director space. Gates committed before code.
+============================================================================================
+
+  G-A anchor (run-1 P2 weighting): S = +2.8269  (gate 2.8286 +- 0.005)  worst marginal dev = 0.0010   -> PASS
+
+  vector theorem: |sum of CHSH director combos| = 2.828427  (2*sqrt(2) = 2.828427);  direction = (+2.8284,+0.0000)
+
+  G-1 conserved kick |k|=1, psi scan (S(psi) = k . vec predicted = 2sqrt2 cos psi):
+      psi =   0 deg   S = +2.8282   (predict +2.8284)   marg dev 0.0009
+      psi =  45 deg   S = +1.9994   (predict +2.0000)   marg dev 0.0004
+      psi =  90 deg   S = -0.0001   (predict +0.0000)   marg dev 0.0011
+      psi = 135 deg   S = -1.9996   (predict -2.0000)   marg dev 0.0011
+      psi = 180 deg   S = -2.8273   (predict -2.8284)   marg dev 0.0013
+      psi = 225 deg   S = -1.9987   (predict -2.0000)   marg dev 0.0007
+      psi = 270 deg   S = +0.0014   (predict -0.0000)   marg dev 0.0011
+      psi = 315 deg   S = +2.0007   (predict +2.0000)   marg dev 0.0010
+    max over scan: S = +2.8282 at psi = 0 deg   worst marginal dev 0.0009
+    ceiling gate (max = 2sqrt2 +- 0.005, none above 2.8334): PASS
+    per-pair correlations at optimum (gate |E| = 1/sqrt2 = 0.7071 +- 0.005 each):
+      (a=  0.0, b= 22.5)  E = +0.7076   |dP(A)|=0.0004 |dP(B)|=0.0001
+      (a=  0.0, b= 67.5)  E = -0.7076   |dP(A)|=0.0003 |dP(B)|=0.0001
+      (a= 45.0, b= 22.5)  E = +0.7058   |dP(A)|=0.0003 |dP(B)|=0.0002
+      (a= 45.0, b= 67.5)  E = +0.7077   |dP(A)|=0.0008 |dP(B)|=0.0005
+
+  G-2 control - conservation OFF (per-pair kick renewal; the reaction-free limit):
+      (a=  0.0, b= 22.5)  E = +1.0000   |dP(A)|=0.0001 |dP(B)|=0.0001
+      (a=  0.0, b= 67.5)  E = -1.0000   |dP(A)|=0.0002 |dP(B)|=0.0002
+      (a= 45.0, b= 22.5)  E = +1.0000   |dP(A)|=0.0002 |dP(B)|=0.0002
+      (a= 45.0, b= 67.5)  E = +1.0000   |dP(A)|=0.0003 |dP(B)|=0.0003
+    S = +4.0000  (gate 4.000 +- 0.005)  worst marginal dev = 0.0003   -> PASS
+
+  G-4 the x2 identity (independent Malus vs joint):
+    independent-Malus S = +1.4139 (run-1 L3: +1.4148)   joint S = +2.8282   ratio = 2.0003  (gate 2.000 +- 0.01) -> PASS
+
+  overdraw row (report-only): S = 2sqrt2 * |k|;  |k|=sqrt2 -> S=4 needs per-pair |E|=1 at
+  FOUR pairs of ONE vector: impossible at unit norm (max projection sum = |vec| = 2sqrt2).
+      |k| = 0.5000   S = +1.4146   (predict +1.4142)
+      |k| = 0.7071   S = +2.0008   (predict +2.0000)
+      |k| = 1.0000   S = +2.8286   (predict +2.8284)
+      |k| = 1.4142   S = 4.0000 ALGEBRAIC ONLY - per-pair |E| = 1 at all four pairs of one
+      conserved vector is unrealisable: the PR box is an OVERDRAW (more forward than booked back).
+
+  VERDICT LINE: gates printed above; class per ADJ-R2-1 (NATIVE-conditional at best,
+  CONSTRUCTION if projection-cosine is judged an import); the new falsifiable content is
+  the CONSERVATION <-> CEILING link: |k|=1 -> Tsirelson; kick renewal -> 4; nothing between.

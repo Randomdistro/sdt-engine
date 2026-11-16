@@ -1,0 +1,30 @@
+'use strict';
+const fs=require('fs'),path=require('path'),crypto=require('crypto'),cp=require('child_process');
+const run=__dirname,root=path.resolve(run,'../../..');
+const hash=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+const walk=d=>fs.existsSync(d)?fs.readdirSync(d,{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(path.join(d,e.name)):[path.join(d,e.name)]):[];
+const dirs=['Engine/include','Release/SDT_Celestial_Three_Body_Solver/src','Release/SDT_Celestial_Three_Body_Solver/include','Release/SDT_Celestial_Three_Body_Solver/datasets','Release/HTML_SDT_Website/js','Investigations/05_Nuclear_Physics/NSEQ18_Universal_Interstitial_Sequencer'];
+const files=dirs.flatMap(d=>walk(path.join(root,d))).concat(fs.readdirSync(path.dirname(run),{withFileTypes:true}).filter(e=>e.isFile()&&e.name!=='RUN_LOG.md').map(e=>path.join(path.dirname(run),e.name)));
+const freeze=Object.fromEntries(files.map(p=>[path.relative(root,p).replaceAll('\\','/'),hash(p)]));
+const git=(...args)=>cp.execFileSync('git',['-c','core.excludesFile=',...args],{cwd:root,encoding:'utf8'}).trim();
+const out=path.join(run,'SOURCE_FREEZE.json');
+if(fs.existsSync(out))throw Error('Preserve existing freeze');
+fs.writeFileSync(out,JSON.stringify({head:git('rev-parse','HEAD'),status:git('status','--porcelain','--ignore-submodules=all'),files:freeze,newFitParameters:0},null,2));
+fs.appendFileSync(path.join(path.dirname(run),'RUN_LOG.md'),'\n\n## 2026-10-03 authorised continuation\nOperator instruction `ok run it please`; PRECOMMIT.md records conditional scopes. Node freeze replaces inaccessible Python launcher. Existing source and Phase 0 artifacts preserved.\n');
+const original=fs.writeFileSync;
+fs.writeFileSync=function(p,...args){if(path.basename(String(p))==='nseq18_results.json')p=path.join(run,'nseq18_results.json');return original.call(fs,p,...args);};
+require(path.join(root,'Investigations/05_Nuclear_Physics/NSEQ18_Universal_Interstitial_Sequencer/nseq18_universal_validate.js'));
+fs.writeFileSync=original;
+const gear=global.SDT_TRACTION_GEAR;
+const html=fs.readFileSync(path.join(root,'Release/HTML_SDT_Website/nuclear-packing-sequencer.html'),'utf8');
+const raw=Function('return '+html.match(/const RAW\s*=\s*(\[[\s\S]*?\n\]);/)[1])();
+const rows=[],pairs=[];
+for(const [symbol,Z,A,,stable,binding] of raw){const nd=3*Z-A-2,nt=A-2*Z;if(nd<0||nt<0||!(binding>0))continue;
+ const m=gear.buildNuclide(Z,A,{Rp:0.8414,symbol,skipObservableLedger:true});const degree=Array(A).fill(0);for(const e of m.contacts){degree[e.a]++;degree[e.b]++;}
+ rows.push({symbol,Z,A,nd,nt,maxDegree:Math.max(...degree),aboveThreePorts:degree.filter(d=>d>3).length});
+ if(nd>=3)pairs.push({symbol,A,parentZ:Z,daughterZ:Z-1,parentD:nd,parentT:nt,daughterD:nd-3,daughterT:nt+2,inventoryOnly:true});
+}
+original(path.join(run,'construction_bridge.json'),JSON.stringify({rows,pairs,finitePortInterpretationConditional:true},null,2));
+const changed=Object.entries(freeze).filter(([p,h])=>hash(path.join(root,p))!==h).map(([p])=>p);
+original(path.join(run,'source_integrity.json'),JSON.stringify({protectedFiles:files.length,changed},null,2));
+console.log(JSON.stringify({constructed:rows.length,admissibleECInventoryPairs:pairs.length,maxDegree:Math.max(...rows.map(r=>r.maxDegree)),protectedChanges:changed}));

@@ -24,7 +24,7 @@
 4. **What would prove us wrong?** — §⑧, each falsifier with its killing number (flux not conserved as
    η→0, `v_A` off the form or dispersive, magnetic stress not reducible to traction).
 5. **How will we know we're done?** — **Dual verdict:** prompt completion (A–F) + physics class
-   (NATIVE / CONVERGENCE / DEGENERATE / KILLED / OPEN), per phase.
+   (NATIVE / CONVERGENCE / SHARED-INPUT / KILLED / OPEN), per phase.
 
 ## Question
 
@@ -123,7 +123,7 @@ back-traction), [[PM03_EM_Waves_as_Coupled_Relay_Pulses]] (wave coupling), GOM06
 ```markdown
 ## Pre-Run Commitments — PM07
 - Prompt completion target: [A|B|C|D]
-- Physics class hoped: [NATIVE|CONVERGENCE|DEGENERATE|OPEN]
+- Physics class hoped: [NATIVE|CONVERGENCE|SHARED-INPUT|OPEN]
 - CALIBRATED budget: [0 or list each param — max per §⑤]
 - Engine namespaces actually used: law_III, law_V, bridge; FD01 momentum, PM01 swirl, FD02 diffusion, GOM06 rigidity, PPT06 traction
 - Phase thresholds (committed before run): P1 bijection (0 leftover terms) · P2 flux <0.5% at η→0, slip∝η · P3 v_A <1%, non-dispersive · P4 B²/2µ₀ stress from traction
@@ -139,7 +139,7 @@ back-traction), [[PM03_EM_Waves_as_Coupled_Relay_Pulses]] (wave coupling), GOM06
 | P2 flux drifts > 0.5% at η→0 | refine the co-moving loop integral | **KILL** H1; swirl not wake-advected | average the drift away |
 | P3 `v_A` dispersive or off > 1% | check swirl-tension / lattice-inertia ratio | **OPEN** the Alfvén mode | quote `v_A = B/√(µ₀ρ)` without deriving |
 | P4 stress leaves a residual term | re-project PPT06 traction ⊥/∥ | **OPEN** the Maxwell-stress link | drop the residual silently |
-| Rivals match but SDT only reproduces | label **DEGENERATE** honestly | — | claim Class A |
+| A rival lands on the same number | adjudicate by **origin** (gateway procedural §3.8): SDT-origin route ⇒ **CONVERGENCE**; a *named* contaminating input ⇒ **SHARED-INPUT**; state discrimination separately | — | downgrade a convergent result because a rival formula agrees; claim discrimination the numbers do not show *(row corrected 2026-10-03 — the stamped alignment row was excluded 2026-07-26)* |
 
 ### Allowed adjustments
 

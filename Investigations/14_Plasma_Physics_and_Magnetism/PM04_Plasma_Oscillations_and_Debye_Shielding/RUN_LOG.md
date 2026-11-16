@@ -58,3 +58,21 @@ Same as P2a but with a Langevin thermostat making TD02's thermal ensemble real: 
 bath T = 1e5 K. Gates (committed): profile exponential over [0.5,2.5]λ_D; λ_fit within 15% of λ_D.
 ONE run; PASS or FAIL recorded as-is. If PASS: Debye screening = thermal-ensemble result (TD02 input
 essential); collisionless anomaly logged as generative finding. If FAIL: KILL H2 per pivot.
+
+## Cross-toolchain re-run (2026-10-03, direct; g++ 13.3, -O2) — P2c does not reproduce
+Re-run after relabelling the coulomb bridge string (class F → class-A CONSTRUCTION; no physics
+change). `pm04_results.txt` is left as the original MSVC capture. P1 reproduces
+(ω_meas/ω_p dev +0.005%); P2a/P2b/P2c/P3 do not:
+
+| gate | MSVC capture (run 5) | g++ 13.3 re-run |
+|---|---|---|
+| P2a e-folding / λ_D(T_init) | +61.8% FAIL | −37.8% FAIL |
+| P2b ratio (gate 2.0 ± 15%) | 1.071 FAIL | 4.172 FAIL |
+| **P2c thermostated** | **−6.8%, R² = 0.943 PASS** | **+34.4%, R² = 0.865 FAIL** |
+| P3 C at kλ_D = 0.188 / 0.314 | 2.83 / 4.23 | 2.78 / 3.31 |
+
+Mechanism: the seeds are fixed (`mt19937(7/11/13)`), but `std::normal_distribution` is
+implementation-defined, so MSVC and libstdc++ draw different velocity samples. The P2c PASS is
+therefore sample-dependent at the current N and averaging window — it fails procedural §3.4
+(two-route verification) until it holds across seeds. Open: re-run P2c over an ensemble of seeds on
+both toolchains and report the spread before the PASS is quoted.

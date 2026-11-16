@@ -26,8 +26,14 @@ ACCURATE and CONGRUENT but INCONSISTENT (contradicts another earned result — a
 
 These sit beside the axes and are not replaced by them:
 - **CONVERGENT** — same number as a rival, from an independent SDT theoretical origin (meaningful).
-- **DEGENERATE** — same number with no independent origin (shared input / relabelling only).
-- **DERIVED / CALIBRATED / OBSERVED / IDENTITY / PENDING / OPEN** — provenance labels, as before.
+- **SHARED-INPUT (not independent)** — formerly DEGENERATE: same number with no independent
+  origin, and the contaminating input is NAMED with its measurement chain (gateway procedural
+  §3.8). A one-to-one correspondence with a rival's quantity (Ѻ ↔ GM/c², Law V ↔ γ) is not
+  shared input by itself; agreement with a rival formula is never the reason. *(2026-10-03.)*
+- **DERIVED / CALIBRATED / OBSERVED / CONSTRUCTION / PENDING / OPEN** — provenance labels, as
+  before (CONSTRUCTION replaces IDENTITY, gateway behavioural §1).
+- **Discrimination** is recorded separately from origin: *discriminating* / *not yet
+  discriminating*. A convergent, non-discriminating result is not a lesser result.
 
 ## Legacy → current mapping (for reading historical files)
 
