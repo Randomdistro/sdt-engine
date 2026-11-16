@@ -1,0 +1,89 @@
+================================================================
+B15 - SDT phase-resistance standing-equilibrium closure
+James Christopher Tyndall, Melbourne - 2026-08-15
+================================================================
+  INPUTS BEFORE BAO COMPARISON
+    FIRAS T_CMB                  = 2.7255 K
+    BBN-deuterium eta            = 6.1e-10
+    photon count now             = 4.107268479e+08 m^-3
+    baryon resistance count now  = 2.505433772e-01 m^-3
+  ENERGY-EQUALITY STATE
+    N_eq                         = 902.169741336
+    n_b(N_eq)                    = 1.839702920e+08 m^-3
+    R_eq                         = 3/4
+    c_s(N_eq)                    = 1.308401554e+08 m/s = 0.436436 c
+    phase-resistance escape rate = 1.311573030e-14 s^-1
+    finite-volume escape rate    = 1.311573029e-14 s^-1 (residual 7.813e-11)
+    resolution change 20k->40k   = 2.344e-10
+  OPACITY BRACKETS ACROSS THE PHYSICAL STANDING RADIUS
+    proton-boundary tau          = 2.227330
+    free electron+proton tau     = 27.210242
+    bound-seat tau               = 8.810118e+09
+  REGISTERED CONTROLS (present-equivalent)
+    R=1 depinning endpoint       = 157.517817 Mpc
+    orbital, not escape          = 206.239234 Mpc
+    travelling, not standing     = 291.666322 Mpc
+  SEALED B15 PREDICTION (comparison not yet read)
+    physical standing radius     = 4.987909649e+21 m = 0.161647 Mpc
+    present-equivalent scale     = 4.499941158e+24 m = 145.833161 Mpc
+
+  BAO COMPARISON LOADED AFTER SEAL
+    predicted / observed         = 145.833161 / 147.090000 Mpc
+    residual                     = 0.8545 %
+    instrument/canonical residual= 0.000e+00
+    finite-volume + opacity gate = PASS
+    B15 COMPUTED gate            = PASS
+
+CR08 ΓÇö Pressure-gradient redshift vs BAO (James Christopher Tyndall, 2026-07-03)
+SDT law: d = ln(1+z) c/H0 (static). Ruler = 147.0 Mpc constant (engine bao::scale).
+
+=== H0 anchor = 67.40 km/s/Mpc (OBSERVED, not fitted)  c/H0 = 4448 Mpc ===
+  survey      z      obs          SDT      dev%    LCDM     dev%   (type)
+  SDSS MGS   0.150     4.47+-0.17     4.13    -7.5     4.32   -3.3   (DV/rd)
+  BOSS gal   0.380    10.23+-0.17     9.75    -4.7    10.44   +2.1   (DM/rd)
+  BOSS gal   0.380    25.00+-0.76    21.93   -12.3    24.67   -1.3   (DH/rd)
+  BOSS gal   0.510    13.36+-0.21    12.47    -6.7    13.53   +1.2   (DM/rd)
+  BOSS gal   0.510    22.33+-0.58    20.04   -10.3    22.83   +2.2   (DH/rd)
+  eBOSS LRG  0.698    17.86+-0.33    16.02   -10.3    17.58   -1.6   (DM/rd)
+  eBOSS LRG  0.698    19.78+-0.46    17.82    -9.9    20.36   +3.0   (DH/rd)
+  eBOSS QSO  1.480    30.69+-0.80    27.48   -10.5    30.34   -1.1   (DM/rd)
+  eBOSS QSO  1.480    13.26+-0.55    12.20    -8.0    13.00   -2.0   (DH/rd)
+  eBOSS Lya  2.330    37.60+-1.90    36.40    -3.2    39.37   +4.7   (DM/rd)
+  eBOSS Lya  2.330     8.93+-0.28     9.09    +1.8     8.69   -2.7   (DH/rd)
+  chi2 (11 pts): SDT = 131.7   LCDM(Om=0.31) = 8.2
+  G1 gate: 10/11 points beyond 3%, 8/11 beyond 5% -> FAIL
+  G3 CMB angle: d(1100) = 31153 Mpc (R_CMB engine: 30875 Mpc, 0.9%)
+     theta_SDT = 4.7186 mrad (147 ruler) / 4.6351 mrad (144.4)
+     theta_obs = 10.4109 mrad  ->  SDT/obs = 0.453  (factor 2.21 MISS) -> FAIL
+
+=== H0 anchor = 73.04 km/s/Mpc (OBSERVED, not fitted)  c/H0 = 4104 Mpc ===
+  survey      z      obs          SDT      dev%    LCDM     dev%   (type)
+  SDSS MGS   0.150     4.47+-0.17     3.81   -14.7     3.99  -10.8   (DV/rd)
+  BOSS gal   0.380    10.23+-0.17     8.99   -12.1     9.63   -5.8   (DM/rd)
+  BOSS gal   0.380    25.00+-0.76    20.23   -19.1    22.76   -9.0   (DH/rd)
+  BOSS gal   0.510    13.36+-0.21    11.51   -13.9    12.48   -6.6   (DM/rd)
+  BOSS gal   0.510    22.33+-0.58    18.49   -17.2    21.06   -5.7   (DH/rd)
+  eBOSS LRG  0.698    17.86+-0.33    14.78   -17.2    16.22   -9.2   (DM/rd)
+  eBOSS LRG  0.698    19.78+-0.46    16.44   -16.9    18.79   -5.0   (DH/rd)
+  eBOSS QSO  1.480    30.69+-0.80    25.36   -17.4    28.00   -8.8   (DM/rd)
+  eBOSS QSO  1.480    13.26+-0.55    11.26   -15.1    12.00   -9.5   (DH/rd)
+  eBOSS Lya  2.330    37.60+-1.90    33.59   -10.7    36.33   -3.4   (DM/rd)
+  eBOSS Lya  2.330     8.93+-0.28     8.38    -6.1     8.01  -10.3   (DH/rd)
+  chi2 (11 pts): SDT = 434.3   LCDM(Om=0.31) = 108.2
+  G1 gate: 11/11 points beyond 3%, 11/11 beyond 5% -> FAIL
+  G3 CMB angle: d(1100) = 28748 Mpc (R_CMB engine: 30875 Mpc, -6.9%)
+     theta_SDT = 5.1134 mrad (147 ruler) / 5.0230 mrad (144.4)
+     theta_obs = 10.4109 mrad  ->  SDT/obs = 0.491  (factor 2.04 MISS) -> FAIL
+
+=== G2 audit: 147 Mpc = c_s x t_coupled? ===
+  cosmology.hpp: c_s = c/sqrt(3) = 1.7309e+08 m/s (real content: opacity bound, CR13)
+  t_coupled = BAO_scale / c_s = 2.621e+16 s ΓÇö DEFINED from the 147 Mpc target.
+  IDENTITY as coded: criterion 2 cannot PASS until t_coupled is derived
+  independently (Clearing dynamics). Same root as CR03 Route B.
+
+VERDICT LINES
+  B15: standing-equilibrium scale - COMPUTED (0.8545% residual)
+  G1: survey BAO ΓÇö see per-point table (gates 3%/5%)
+  G2-old: IDENTITY (target-defined duration in cosmology.hpp remains excluded)
+  G3: CMB acoustic angle ΓÇö factor ~2 class miss for the static ln-law
+  G4: no dark energy in SDT chain ΓÇö true but earns nothing while G1/G3 fail

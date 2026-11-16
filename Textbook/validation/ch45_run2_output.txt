@@ -1,0 +1,57 @@
+
+== V0 helper validation (known answers) ==
+[PASS] V0    integrate sin over [0, pi] = 2                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 3.331e-16 (tol 1e-13)
+[PASS] V0    integrate x^7 over [0, 1] = 1/8                                                value 1.250000000000e-01 expected 1.250000000000e-01 err 2.220e-15 (tol 1e-14)
+[PASS] V0    integrate exp over [-1, 1] = e - 1/e                                           value 2.350402387288e+00 expected 2.350402387288e+00 err 5.668e-16 (tol 1e-13)
+[PASS] V0    root of cos x - x = 0.739085133215161                                          value 7.390851332152e-01 expected 7.390851332152e-01 err 2.253e-15 (tol 1e-13)
+[PASS] V0    root of x^2 - 2 on [1, 2] = sqrt 2                                             value 1.414213562373e+00 expected 1.414213562373e+00 err 2.983e-15 (tol 1e-13)
+[PASS] V0    compensated sum 1 + 10^6 x 1e-16 = 1 + 1e-10                                   value 1.000000000100e+00 expected 1.000000000100e+00 err 0.000e+00 (tol 1e-15)
+
+== V1 known answers ==
+[PASS] V1    A(0.5, 0) = 0.5                                                                value 5.000000000000e-01 expected 5.000000000000e-01 err 0.000e+00 (tol 1e-14)
+[PASS] V1    B(0.5, 0) = 1.0                                                                value 1.000000000000e+00 expected 1.000000000000e+00 err 0.000e+00 (tol 1e-14)
+[PASS] V1    A(0.2, 0.1) = 0.1                                                              value 1.000000000000e-01 expected 1.000000000000e-01 err 0.000e+00 (tol 1e-14)
+[PASS] V1    B(0.2, 0.1) = 0.125                                                            value 1.250000000000e-01 expected 1.250000000000e-01 err 0.000e+00 (tol 1e-14)
+[PASS] V1    A(0.3, 0.3) = 0                                                                value 0.000000000000e+00 expected 0.000000000000e+00 err 0.000e+00 (tol 1e-14)
+[PASS] V1    B(0.3, 0.3) = 0                                                                value 0.000000000000e+00 expected 0.000000000000e+00 err 0.000e+00 (tol 1e-14)
+[PASS] V1    clock_rate(0.25) = 0.75                                                        value 7.500000000000e-01 expected 7.500000000000e-01 err 0.000e+00 (tol 1e-14)
+
+== T1 difference between the conventions ==
+[PASS] T1    z_B / z_A = 1/(1 - z_e) for every (z_e, z_o) in the grid (worst |ratio (1-z_e) - 1|) value 2.220446049250e-16 expected 0.000000000000e+00 err 2.220e-16 (tol 1e-12)
+       solar surface: z_e = 2.123108e-06 ; relative difference of the conventions 2.123112e-06 ; absolute difference 4.507595e-12
+[PASS] T1    solar: z_B / z_A = 1/(1 - z_e), i.e. relative difference z_e/(1-z_e)           value 1.000002123112e+00 expected 1.000002123112e+00 err 2.220e-16 (tol 1e-12)
+       floating-point floors: subtraction form of the solar relative difference differs from z_e/(1-z_e) by 6.081e-11 (relative); product form (C_o/C_e - 1) differs from the difference form by 5.634e-12 (relative) at z_e = 1e-6
+[PASS] T1    solar relative difference is below 2.2e-6
+       z_e = 0.3: relative difference 0.4286
+[PASS] T1    at z_e = 0.3 the relative difference exceeds 40 per cent
+
+== T2 composition across an intermediate state ==
+       convention B: multiplicative residual 0.000e+00 ; additive residual -2.922078e-02
+       convention A: additive residual 0.000e+00 ; multiplicative residual 1.800000e-02 (z_AB z_BC = 1.800000e-02)
+[PASS] T2    B: (1+z_AB)(1+z_BC) = 1+z_AC                                                   value 0.000000000000e+00 expected 0.000000000000e+00 err 0.000e+00 (tol 1e-14)
+[PASS] T2    B: the additive residual is nonzero
+[PASS] T2    A: z_AB + z_BC = z_AC                                                          value 0.000000000000e+00 expected 0.000000000000e+00 err 0.000e+00 (tol 1e-14)
+[PASS] T2    A: the multiplicative residual equals z_AB z_BC                                value 1.800000000000e-02 expected 1.800000000000e-02 err 9.637e-16 (tol 1e-12)
+
+== T3 agreement to first order ==
+[PASS] T3    z_B - z_A = (z_e - z_o) z_e/(1-z_e), tested as (z_B/z_A)(1-z_e) = 1            value 1.000000000000e+00 expected 1.000000000000e+00 err 1.110e-16 (tol 1e-12)
+[PASS] T3    z_B - z_A = (z_e - z_o) z_e/(1-z_e), tested as (z_B/z_A)(1-z_e) = 1            value 1.000000000000e+00 expected 1.000000000000e+00 err 1.110e-16 (tol 1e-12)
+[PASS] T3    z_B - z_A = (z_e - z_o) z_e/(1-z_e), tested as (z_B/z_A)(1-z_e) = 1            value 1.000000000000e+00 expected 1.000000000000e+00 err 0.000e+00 (tol 1e-12)
+       relative difference at s = 1e-3, 1e-2, 1e-1: 1.0001e-04 1.0010e-03 1.0101e-02 ; log-log slope 1.00216
+[PASS] T3    the log-log slope lies between 0.99 and 1.02
+
+== T4 matched emitter-route-observer experiment (solar surface to 1 AU) ==
+       z_e = 2.123107587e-06 ; z_o = 9.873442323e-09 ; z_e - z_o = 2.113234144e-06
+[PASS] T4    count bookkeeping: f_e / f_o = C_o / C_e                                       value 1.000002113239e+00 expected 1.000002113239e+00 err 0.000e+00 (tol 1e-12)
+[PASS] T4    a deeper emitter gives a positive shift
+[PASS] T4    an emitter shallower than the observer gives a negative shift
+       velocity-equivalent shifts: convention A 633.531658 m/s ; convention B 633.533004 m/s ; difference 1.345059e-03 m/s
+[PASS] T4    the difference between conventions lies between 1.0e-3 and 2.0e-3 m/s
+       for scale: the difference is 2.123e-06 of the shift
+
+== T5 strong depth ==
+[PASS] T5    A stays at or below 1 for z_e <= 1 (z_o = 0)
+[PASS] T5    B increases monotonically with z_e
+[PASS] T5    B(0.999, 0) = 999                                                              value 9.990000000000e+02 expected 9.990000000000e+02 err 9.104e-16 (tol 1e-09)
+
+ALL CRITERIA MET: 0 failure(s)

@@ -1,0 +1,36 @@
+
+== V0 helper validation (known answers) ==
+[PASS] V0    integrate sin over [0, pi] = 2                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 3.331e-16 (tol 1e-13)
+[PASS] V0    integrate x^7 over [0, 1] = 1/8                                                value 1.250000000000e-01 expected 1.250000000000e-01 err 2.220e-15 (tol 1e-14)
+[PASS] V0    integrate exp over [-1, 1] = e - 1/e                                           value 2.350402387288e+00 expected 2.350402387288e+00 err 5.668e-16 (tol 1e-13)
+[PASS] V0    root of cos x - x = 0.739085133215161                                          value 7.390851332152e-01 expected 7.390851332152e-01 err 2.253e-15 (tol 1e-13)
+[PASS] V0    root of x^2 - 2 on [1, 2] = sqrt 2                                             value 1.414213562373e+00 expected 1.414213562373e+00 err 2.983e-15 (tol 1e-13)
+[PASS] V0    compensated sum 1 + 10^6 x 1e-16 = 1 + 1e-10                                   value 1.000000000100e+00 expected 1.000000000100e+00 err 0.000e+00 (tol 1e-15)
+
+== V1 integrals and the Bouguer deflection on known cases ==
+[PASS] V1    integral of ds/sqrt(b^2+s^2) = asinh(s1/b) + asinh(s2/b)                       value 4.462567220291e+00 expected 4.462567220291e+00 err 1.990e-16 (tol 1e-10)
+[FAIL] V1    constant index: deflection 0                                                   value 1.000000000101e+00 expected 1.000000000000e+00 err 1.011e-10 (tol 1e-10)
+[PASS] V1    n = 1 + eps/r: deflection = 2 eps / b                                          value 1.999957489751e-04 expected 1.999800019998e-04 err 7.874e-05 (tol 1e-03)
+
+== T1 series and delay ==
+[FAIL] T1    (1-z)^-2 differs from 1 + 2z + 3z^2 + 4z^3 by at most 5 z^4
+[PASS] T1    shapiro_delay equals (2 varpi/c) ln(4 r1 r2/b^2)                               value 1.236572588494e-04 expected 1.236572588494e-04 err 0.000e+00 (tol 1e-13)
+[PASS] T1    first-order delay with exact endpoints vs far-endpoint form                    value 1.236571826337e-04 expected 1.236572588494e-04 err 6.163e-07 (tol 1e-06)
+       one-way delay: exact integrand 1.236572810e-04 s ; first order 1.236571826e-04 s ; second-order term 9.8345e-11 s ; remainder 5.908e-15 s ; round trip (first order) 247.314 microseconds
+[PASS] T1    (exact - first order) equals the second-order term 3 varpi^2/c int ds/(b^2+s^2) to 1% value 9.835048143188e-11 expected 9.834457368063e-11 err 6.007e-05 (tol 1e-02)
+
+== T2 bending in the active profile c_far = c (1 - z)^2 ==
+       alpha = c1 x + c2 x^2 + c3 x^3 with x = varpi/b : c1 = 4.0000038 ; c2 = 15.70190 ; c3 = 77.540
+       solar limb: 4 varpi_sun/R_sun = 8.4924e-06 rad = 1.75169 arcsec
+[PASS] T2    c1 = 4 to 4e-5
+
+== T3 branch discrimination ==
+       c1: a=2: 4.000001 ; a=3: 4.000002 ; a=4 (alternative profile): 4.000006
+       c2: a=2: 12.56420 ; a=3: 15.70415 ; a=4: 18.83977 ; active profile (1-z)^-2: 15.70190
+[PASS] T3    c1 = 4 for the alternative profile to 4e-5
+[PASS] T3    c2 is linear in the coefficient a of z^2: (c2(3)-c2(2)) = (c2(4)-c2(3)) to 1%
+[PASS] T3    c2 differs between the active and the alternative branch
+       delta c2 = 3.13787 ; deflection difference at the solar limb = 1.414e-11 rad = 2.917e-06 arcsec
+       second-order delay difference pi varpi^2/(b c) at the solar limb = 3.286e-11 s one way
+
+CRITERIA NOT MET: 2 failure(s)

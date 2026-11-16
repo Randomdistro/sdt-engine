@@ -1,0 +1,81 @@
+
+== V0 helper validation (known answers) ==
+[PASS] V0    integrate sin over [0, pi] = 2                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 3.331e-16 (tol 1e-13)
+[PASS] V0    integrate x^7 over [0, 1] = 1/8                                                value 1.250000000000e-01 expected 1.250000000000e-01 err 2.220e-15 (tol 1e-14)
+[PASS] V0    integrate exp over [-1, 1] = e - 1/e                                           value 2.350402387288e+00 expected 2.350402387288e+00 err 5.668e-16 (tol 1e-13)
+[PASS] V0    root of cos x - x = 0.739085133215161                                          value 7.390851332152e-01 expected 7.390851332152e-01 err 2.253e-15 (tol 1e-13)
+[PASS] V0    root of x^2 - 2 on [1, 2] = sqrt 2                                             value 1.414213562373e+00 expected 1.414213562373e+00 err 2.983e-15 (tol 1e-13)
+[PASS] V0    compensated sum 1 + 10^6 x 1e-16 = 1 + 1e-10                                   value 1.000000000100e+00 expected 1.000000000100e+00 err 0.000e+00 (tol 1e-15)
+
+== V0r rational helper validation (known answers) ==
+[PASS] V0r   rank of the 3x3 identity is 3
+[PASS] V0r   rank of [[1,2,3],[4,5,6],[7,8,9]] is 2
+[PASS] V0r   null space of [[1,2,3],[4,5,6],[7,8,9]] is spanned by (1,-2,1)
+[PASS] V0r   rank-1 matrix [[1,2],[2,4]] has a one-dimensional null space (2,-1)
+[PASS] V0r   1/3 + 1/6 = 1/2 exactly
+[PASS] V0r   no overflow in the validation
+
+== V1 Wien roots and maximiser ==
+[PASS] V1    root of (3-x)e^x = 3                                                           value 2.821439372122e+00 expected 2.821439372122e+00 err 1.417e-15 (tol 1e-12)
+[PASS] V1    root of (5-x)e^x = 5                                                           value 4.965114231744e+00 expected 4.965114231744e+00 err 3.399e-15 (tol 1e-12)
+[PASS] V1    golden-section maximum of x e^-x is 1                                          value 1.000000006808e+00 expected 1.000000000000e+00 err 6.808e-09 (tol 1e-07)
+
+== V2 dimension algebra ==
+[PASS] V2    force = M L T^-2
+[PASS] V2    pressure = M L^-1 T^-2
+[PASS] V2    sqrt(L^2) = L
+[PASS] V2    sqrt(L) is represented as the half-unit exponent L^(1/2)
+[PASS] V2    sqrt of L^(1/2) is refused (a quarter exponent is not represented)
+[PASS] V2    the checker reports L versus T as a mismatch
+
+== V3 Planck integral and the Wien displacement constant ==
+[PASS] V3    int x^3/(e^x-1) dx over [0,80] = pi^4/15                                       value 6.493939402267e+00 expected 6.493939402267e+00 err 2.052e-15 (tol 1e-12)
+[PASS] V3    Wien constant b = hc/(4.965114 k_B) vs 2.897771955e-3 m K                      value 2.897771955185e-03 expected 2.897771955000e-03 err 6.390e-11 (tol 1e-09)
+
+== T1 dimensional homogeneity of the relations of Chapters 1-9 and the seed relations ==
+[PASS] T1    all 32 relations have equal dimensions on both sides
+[PASS] T1    three deliberately wrong relations (F=PR, E=mc, P=Phi/l) are flagged
+
+== T2 dimension matrix of the seed constants: rank and independent dimensionless numbers ==
+[PASS] T2    S1 {l_P, c, hbar, k_B, T_CMB}: rank 4, null space dimension 1
+       dimensionless product: l_P^1 c^-1 hbar^-1 k_B^1 T_CMB^1 = 1.923723e-32
+[PASS] T2    S1 null space spanned by +-(1,-1,-1,1,1)
+[PASS] T2    theta = l_P k_B T_CMB / (hbar c) = 1.9236e-32                                  value 1.923722774162e-32 expected 1.923600000000e-32 err 6.383e-05 (tol 1e-03)
+[PASS] T2    S2 S1 + {R_CMB}: rank 4, null space dimension 2
+       dimensionless product: l_P^1 c^-1 hbar^-1 k_B^1 T_CMB^1 = 1.923723e-32
+       dimensionless product: l_P^-1 R_CMB^1 = 5.894491e+61
+[PASS] T2    S2: N = R_CMB/l_P and theta both lie in the null space
+[PASS] T2    S3 {c, hbar, m_e, l_P, m_p}: rank 3, null space dimension 2
+       dimensionless product: c^1 hbar^-1 m_e^1 l_P^1 = 4.185462e-23
+       dimensionless product: m_e^-1 m_p^1 = 1.836153e+03
+[PASS] T2    S3: m_p/m_e and l_P m_e c/hbar both lie in the null space
+[PASS] T2    m_p/m_e vs 1836.152673426 (CODATA 2022)                                        value 1.836152673422e+03 expected 1.836152673426e+03 err 2.436e-12 (tol 1e-08)
+[PASS] T2    S4 {l_P, c, hbar, k_B, T_CMB, m_e, m_p, R_CMB, a_0, R_p}: rank 4, null space dimension 6
+       dimensionless product: l_P^1 c^-1 hbar^-1 k_B^1 T_CMB^1 = 1.923723e-32
+       dimensionless product: l_P^1 c^1 hbar^-1 m_e^1 = 4.185462e-23
+       dimensionless product: l_P^1 c^1 hbar^-1 m_p^1 = 7.685148e-20
+       dimensionless product: l_P^-1 R_CMB^1 = 5.894491e+61
+       dimensionless product: l_P^-1 a_0^1 = 3.274095e+24
+       dimensionless product: l_P^-1 R_p^1 = 5.205862e+19
+
+== T3 redundancies among the stored constants ==
+[PASS] T3    h = 2 pi hbar                                                                  value 6.626070150000e-34 expected 6.626070150000e-34 err 3.872e-16 (tol 1e-14)
+[PASS] T3    r_e (engine, alpha^2 a_0) vs alpha hbar / (m_e c)                              value 2.817940320432e-15 expected 2.817940320447e-15 err 5.178e-12 (tol 1e-09)
+[PASS] T3    R_inf vs alpha^2 m_e c / (2 h)                                                 value 1.097373156816e+07 expected 1.097373156804e+07 err 1.080e-11 (tol 1e-09)
+[PASS] T3    Ry_eV vs h c R_inf / e                                                         value 1.360569312299e+01 expected 1.360569312299e+01 err 3.773e-14 (tol 1e-09)
+[PASS] T3    k_e e^2 (CODATA) vs alpha hbar c                                               value 2.307077550786e-28 expected 2.307077550768e-28 err 7.773e-12 (tol 1e-09)
+[PASS] T3    a_rad (stored, five digits) vs 8 pi^5 k_B^4 / (15 h^3 c^3)                     value 7.565700000000e-16 expected 7.565733250280e-16 err 4.395e-06 (tol 1e-05)
+       a_rad computed = 7.565733e-16 ; stored = 7.565700e-16 ; relative difference -4.39e-06
+
+== T4 thermal and spectral chain at T_CMB ==
+[PASS] T4    maximiser of x^3/(e^x-1) vs root of V1                                         value 2.821439392240e+00 expected 2.821439372122e+00 err 7.131e-09 (tol 1e-07)
+[PASS] T4    maximiser of x^5/(e^x-1) vs root of V1                                         value 4.965114253339e+00 expected 4.965114231744e+00 err 4.349e-09 (tol 1e-07)
+[PASS] T4    c / (nu_peak lambda_peak) = x5/x3                                              value 1.759780586038e+00 expected 1.759780586038e+00 err 1.262e-16 (tol 1e-12)
+       T = 2.7255 K: lambda_peak = 1.063207e-03 m ; nu_peak = 1.602301e+11 Hz (SI bridge) ; c/nu_peak = 1.871012e-03 m ; ratio 1.7598
+[PASS] T4    u_CMB (engine, a_rad T^4) vs Planck energy density                             value 4.174782572297e-14 expected 4.174800919930e-14 err 4.395e-06 (tol 1e-05)
+       u_CMB = 4.174783e-14 J/m^3 (engine) ; Planck integral 4.174801e-14 ; P_rad = u/3 = 1.391594e-14 Pa ; P_conv = N u = 2.460822e+48 Pa
+
+== T5 coverage of the measured-namespace classification ==
+[PASS] T5    the sets are equal (engine 47 identifiers, table 47)
+
+ALL CRITERIA MET: 0 failure(s)

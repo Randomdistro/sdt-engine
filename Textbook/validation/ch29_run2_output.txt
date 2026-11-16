@@ -1,0 +1,74 @@
+
+== V0 helper validation (known answers) ==
+[PASS] V0    integrate sin over [0, pi] = 2                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 3.331e-16 (tol 1e-13)
+[PASS] V0    integrate x^7 over [0, 1] = 1/8                                                value 1.250000000000e-01 expected 1.250000000000e-01 err 2.220e-15 (tol 1e-14)
+[PASS] V0    integrate exp over [-1, 1] = e - 1/e                                           value 2.350402387288e+00 expected 2.350402387288e+00 err 5.668e-16 (tol 1e-13)
+[PASS] V0    root of cos x - x = 0.739085133215161                                          value 7.390851332152e-01 expected 7.390851332152e-01 err 2.253e-15 (tol 1e-13)
+[PASS] V0    root of x^2 - 2 on [1, 2] = sqrt 2                                             value 1.414213562373e+00 expected 1.414213562373e+00 err 2.983e-15 (tol 1e-13)
+[PASS] V0    compensated sum 1 + 10^6 x 1e-16 = 1 + 1e-10                                   value 1.000000000100e+00 expected 1.000000000100e+00 err 0.000e+00 (tol 1e-15)
+
+== V1 one-electron states ==
+[PASS] V1    r = 1/Z, worst relative                                                        value 9.880984919164e-15 expected 0.000000000000e+00 err 9.881e-15 (tol 1e-09)
+[PASS] V1    E = -Z^2 Ry, worst relative                                                    value 2.220446049250e-16 expected 0.000000000000e+00 err 2.220e-16 (tol 1e-09)
+
+== T1 analytic gradient against finite differences ==
+       360 (Z, N_e, start) combinations
+[PASS] T1    gradient vs finite difference, worst relative to max(1,|E|)                    value 4.993231847280e-07 expected 0.000000000000e+00 err 4.993e-07 (tol 1e-06)
+
+== T2 converged neutral states and independence of the start ==
+       Z= 1 : engine E = -1.00000000 Ry ; lowest independent start -1.00000000 Ry (40 of 40 converged) ; distinct minima 1 ; residual 3.6e-15 ; converged 1
+       Z= 2 : engine E = -5.87755102 Ry ; lowest independent start -5.87755102 Ry (40 of 40 converged) ; distinct minima 1 ; residual 4.2e-16 ; converged 1
+       Z= 3 : engine E = -15.11177308 Ry ; lowest independent start -15.11177308 Ry (40 of 40 converged) ; distinct minima 2 ; residual 8.8e-11 ; converged 1
+       Z= 4 : engine E = -29.46406523 Ry ; lowest independent start -29.46406523 Ry (40 of 40 converged) ; distinct minima 2 ; residual 1.5e-09 ; converged 1
+       Z= 5 : engine E = -49.32608207 Ry ; lowest independent start -49.32608207 Ry (40 of 40 converged) ; distinct minima 2 ; residual 1.2e-12 ; converged 1
+       Z= 6 : engine E = -75.56018764 Ry ; lowest independent start -75.56018764 Ry (40 of 40 converged) ; distinct minima 2 ; residual 1.3e-09 ; converged 1
+       Z= 7 : engine E = -108.87600336 Ry ; lowest independent start -108.87600336 Ry (40 of 40 converged) ; distinct minima 2 ; residual 2.3e-13 ; converged 1
+       Z= 8 : engine E = -149.62774997 Ry ; lowest independent start -149.62774997 Ry (40 of 40 converged) ; distinct minima 2 ; residual 2.2e-15 ; converged 1
+       Z= 9 : engine E = -198.77322831 Ry ; lowest independent start -198.77322831 Ry (40 of 40 converged) ; distinct minima 2 ; residual 6.8e-16 ; converged 1
+       Z=10 : engine E = -257.02040333 Ry ; lowest independent start -257.02040333 Ry (39 of 40 converged) ; distinct minima 2 ; residual 1.6e-14 ; converged 1
+[PASS] T2    at least 5 of 40 independent starts converged for every Z
+[PASS] T2    every neutral state converged with force residual < 1e-8
+[PASS] T2    no independent start reaches an energy below the engine's minimum by more than 1e-7 Ry
+
+== T3 positive-definite Hessian at the minima ==
+       Z= 1 : minors 2.0000e+00 0.0000e+00 0.0000e+00
+       Z= 2 : minors 1.1755e+01 0.0000e+00 0.0000e+00
+       Z= 3 : minors 2.9597e+01 2.3102e+01 0.0000e+00
+       Z= 4 : minors 5.5731e+01 2.1500e+02 0.0000e+00
+       Z= 5 : minors 8.9456e+01 4.5962e+02 7.0628e+02
+       Z= 6 : minors 1.3093e+02 7.9228e+02 4.4453e+03
+       Z= 7 : minors 1.8017e+02 1.1855e+03 1.5541e+04
+       Z= 8 : minors 2.3731e+02 1.6905e+03 3.9739e+04
+       Z= 9 : minors 3.0219e+02 2.1636e+03 8.2162e+04
+       Z=10 : minors 3.7478e+02 2.4538e+03 1.3648e+05
+[PASS] T3    Hessian positive definite at all ten neutral minima
+
+== T4 first ionisation energies (computed values printed before the measured list) ==
+[PASS] T4a   hydrogen: first_ionisation_eV(1) = Ry                                          value 1.360569312299e+01 expected 1.360569312299e+01 err 2.611e-16 (tol 1e-09)
+       COMPUTED (eV): 13.6057 25.5454 5.1304 8.8334 8.2500 11.2791 14.6434 13.5511 17.1657 21.1595
+       H  : computed  13.6057 eV ; measured  13.5984 eV ; residual   +0.05 %
+       He : computed  25.5454 eV ; measured  24.5874 eV ; residual   +3.90 %
+       Li : computed   5.1304 eV ; measured   5.3917 eV ; residual   -4.85 %
+       Be : computed   8.8334 eV ; measured   9.3227 eV ; residual   -5.25 %
+       B  : computed   8.2500 eV ; measured   8.2980 eV ; residual   -0.58 %
+       C  : computed  11.2791 eV ; measured  11.2603 eV ; residual   +0.17 %
+       N  : computed  14.6434 eV ; measured  14.5341 eV ; residual   +0.75 %
+       O  : computed  13.5511 eV ; measured  13.6181 eV ; residual   -0.49 %
+       F  : computed  17.1657 eV ; measured  17.4228 eV ; residual   -1.48 %
+       Ne : computed  21.1595 eV ; measured  21.5645 eV ; residual   -1.88 %
+       mean absolute residual 1.94 % ; worst 5.25 %
+[PASS] T4c   every residual is within 10% (registered window)
+
+== T5 vertical against adiabatic ionisation ==
+       Z= 2 : vertical IE 26.6561 eV ; adiabatic IE 25.5454 eV ; relaxation 1.1107 eV
+       Z= 3 : vertical IE 5.1306 eV ; adiabatic IE 5.1304 eV ; relaxation 0.0001 eV
+       Z= 4 : vertical IE 9.0862 eV ; adiabatic IE 8.8334 eV ; relaxation 0.2528 eV
+       Z= 5 : vertical IE 9.2906 eV ; adiabatic IE 8.2500 eV ; relaxation 1.0405 eV
+       Z= 6 : vertical IE 12.8959 eV ; adiabatic IE 11.2791 eV ; relaxation 1.6168 eV
+       Z= 7 : vertical IE 16.8880 eV ; adiabatic IE 14.6434 eV ; relaxation 2.2446 eV
+       Z= 8 : vertical IE 16.5079 eV ; adiabatic IE 13.5511 eV ; relaxation 2.9568 eV
+       Z= 9 : vertical IE 20.7585 eV ; adiabatic IE 17.1657 eV ; relaxation 3.5928 eV
+       Z=10 : vertical IE 25.6781 eV ; adiabatic IE 21.1595 eV ; relaxation 4.5186 eV
+[PASS] T5    vertical ion energy >= relaxed ion energy for Z = 2..10
+
+ALL CRITERIA MET: 0 failure(s)

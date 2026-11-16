@@ -1,0 +1,71 @@
+
+== V1 known answers ==
+[PASS] V1   the table parser returns two rows with the labels read
+[PASS] V1   W C_x W^T = [[5, 1], [1, 10]] x 1e-6
+[PASS] V1   Phi(-0.6) = 0.27425 from erfc
+[PASS] V1   least squares returns (2, -3)
+
+== T1 the manuscript's input ledgers ==
+       chapters scanned: 61 ; with a parsable ledger: 54 ; without: ['ch02', 'ch05', 'ch08', 'ch09', 'ch10', 'ch13', 'ch14']
+       rows extracted: 292 ; rows without a recognised label token: 53
+       label tokens: {'DERIVED': 61, 'COMPUTED': 80, 'CALIBRATED': 10, 'OBSERVED': 21, 'CONSTRUCTION': 33, 'MEASURED-INPUT': 29, 'stored': 4, 'unit bridge': 1}
+       no token: ch03 | closures (1) and (3) of (3.4) | the exponent of $1-z$ was set by GOM22 so that the
+       no token: ch04 | $T_{\rm CMB}$ | measured (FIRAS), 2.7255 K
+       no token: ch04 | $a$ | 7.5657e-16 J m$^{-3}$ K$^{-4}$
+       no token: ch04 | $R_{\rm CMB}$ | measured Clearing distance, `measured::R_CMB`. The
+       no token: ch04 | $\kappa$ | set to 1 by the engine's definition $\varepsilon =
+       no token: ch04 | $\delta$ | premise P4; bounded by (4.15)
+       no token: ch06 | roles of Table 6.3 | the engine's own labels, quoted
+       no token: ch07 | assignment electron $(1,1)$, proton $(2,3)$, neutr | posited
+       no token: ch07 | the lock $v_T^2:v_P^2=p:q$ | posited
+       no token: ch11 | $Z$ scaling | posited rule (engine, 2026-07-07)
+       no token: ch12 | factor 3 against 6 | reported
+       no token: ch15 | chain region, content | the update rule (15.1 with $S_V=0$)
+       no token: ch15 | chain region, momentum | the scatterer, unspecified (R15.1)
+       no token: ch15 | engine body sums (15.4) | the pair antisymmetry of (15.3)
+       no token: ch15 | patterned emitter | not represented in the engine (R15.2)
+       no token: ch19 | free neutron | 0
+       no token: ch19 | deuteron p–n | 0
+       no token: ch19 | triton n–p–n | 1
+       no token: ch19 | alpha ring p–n–p–n | 1
+       no token: ch19 | contact rule, slot counts | the engine's rule
+       no token: ch22 | pricing rule and onset $n=3$ | the engine's premise (open); $q=4$ from Chapter 18
+       no token: ch22 | NSEQ19 opening and closing results | engine-recorded; not re-run here
+       no token: ch23 | bulk radius law | the engine's law (NP12; zero-fit by its record); a
+       no token: ch25 | engine's 12.5 ppm and 263 ppm figures | engine-recorded; not re-run
+       no token: ch26 | $\hbar$, $\mathrm{Ry}$ identifications | shared-input (CODATA set)
+[FAIL] T1   at least 55 of the drafted chapters have a parsable ledger table
+[FAIL] T1   at least 300 rows are extracted
+       fraction of rows with a recognised label token: 0.8185
+[FAIL] T1   at least 90 per cent of rows carry a recognised label token
+[PASS] T1   PARAMETER_LEDGER.csv is written with one line per row
+
+== T2 covariance of ratios that share a measurement ==
+[PASS] T2   C_y is [[5, 1], [1, 10]] x 1e-6
+       correlation of the two ratios: 0.1414
+[PASS] T2   the correlation is 0.1414
+       variance of y1 - y2: with covariance 1.300e-05; ignoring it 1.500e-05; overstatement 0.1538
+[PASS] T2   the variance of y1 - y2 is 13e-6 with the covariance and 15e-6 without (overstated by 15.4 per cent)
+       Monte Carlo: var y1 4.982e-06, var y2 9.974e-06, cov 1.008e-06, var(y1-y2) 1.294e-05
+[PASS] T2   the Monte Carlo reproduces var y1, var y2 and var(y1 - y2) within 2 per cent
+[PASS] T2   the Monte Carlo covariance is within 5 per cent of 1e-6
+
+== T3 a response that reaches a boundary ==
+       Gaussian mass below zero for m = 0.3, sigma = 0.5: 0.27425
+[PASS] T3   Phi(-0.6) = 0.2743 (1e-3)
+       Monte Carlo mass below zero: 0.27350 ; mean of the admissible draws: 0.52843
+[PASS] T3   the Monte Carlo mass below zero is within 0.005 of 0.2743
+       truncated mean (analytic) 0.52957
+[PASS] T3   the mean of the admissible distribution lies in [0.52, 0.54]
+       f = x^2: actual sd 0.01732; first-order sd 0.01000; ratio 1.732; Monte Carlo sd 0.01726
+[PASS] T3   the first-order standard deviation understates the actual by a factor in [1.6, 1.9]
+[PASS] T3   the Monte Carlo standard deviation agrees with the exact value within 2 per cent
+
+== T4 calibration is not prediction ==
+       degree 5 on 8 points: training RMSE 0.01487, withheld RMSE 0.08676 ; degree 2: withheld RMSE 0.02262
+[PASS] T4   the degree-5 training RMSE is below half its withheld RMSE
+[PASS] T4   the degree-2 withheld RMSE is below the degree-5 withheld RMSE
+       all-data fits: degree 5 RMSE 0.01545; degree 2 RMSE 0.02561
+[PASS] T4   the all-data degree-5 fit has a smaller training RMSE than the degree-2 fit
+
+CRITERIA NOT MET: 3 failure(s)

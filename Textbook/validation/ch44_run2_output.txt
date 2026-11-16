@@ -1,0 +1,63 @@
+
+== V0 helper validation (known answers) ==
+[PASS] V0    integrate sin over [0, pi] = 2                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 3.331e-16 (tol 1e-13)
+[PASS] V0    integrate x^7 over [0, 1] = 1/8                                                value 1.250000000000e-01 expected 1.250000000000e-01 err 2.220e-15 (tol 1e-14)
+[PASS] V0    integrate exp over [-1, 1] = e - 1/e                                           value 2.350402387288e+00 expected 2.350402387288e+00 err 5.668e-16 (tol 1e-13)
+[PASS] V0    root of cos x - x = 0.739085133215161                                          value 7.390851332152e-01 expected 7.390851332152e-01 err 2.253e-15 (tol 1e-13)
+[PASS] V0    root of x^2 - 2 on [1, 2] = sqrt 2                                             value 1.414213562373e+00 expected 1.414213562373e+00 err 2.983e-15 (tol 1e-13)
+[PASS] V0    compensated sum 1 + 10^6 x 1e-16 = 1 + 1e-10                                   value 1.000000000100e+00 expected 1.000000000100e+00 err 0.000e+00 (tol 1e-15)
+
+== V1 known answers ==
+[PASS] V1    int x^3/(e^x-1) dx = pi^4/15                                                   value 6.493939402267e+00 expected 6.493939402267e+00 err 4.103e-16 (tol 1e-10)
+[PASS] V1    int x^2/(e^x-1) dx = 2 zeta(3)                                                 value 2.404113806319e+00 expected 2.404113806319e+00 err 2.956e-15 (tol 1e-10)
+[PASS] V1    root of x = 5(1-e^-x)                                                          value 4.965114231744e+00 expected 4.965114231744e+00 err 1.789e-16 (tol 1e-10)
+[PASS] V1    root of x = 3(1-e^-x)                                                          value 2.821439372122e+00 expected 2.821439372122e+00 err 1.574e-16 (tol 1e-10)
+
+== T1 native constants, then the engine's stored values ==
+       native: b = 2.897771955e-03 m K ; a = 7.565733250e-16 J m^-3 K^-4
+[PASS] T1    b = hc/(k x_lambda) = 2.897771955e-3                                           value 2.897771955185e-03 expected 2.897771955000e-03 err 6.390e-11 (tol 1e-06)
+[PASS] T1    a = pi^2 k^4/(15 hbar^3 c^3) = 7.565733e-16                                    value 7.565733250280e-16 expected 7.565733000000e-16 err 3.308e-08 (tol 1e-06)
+       engine: wien constant 2.898e-3 (in cosmology::wien_peak) ; a_rad = 7.5657e-16
+[PASS] T1    engine Wien constant vs native b                                               value 2.898000000000e-03 expected 2.897771955185e-03 err 7.870e-05 (tol 1e-04)
+[PASS] T1    engine a_rad vs native a                                                       value 7.565700000000e-16 expected 7.565733250280e-16 err 4.395e-06 (tol 1e-05)
+
+== T2 one reading, one temperature for a Planck spectrum ==
+[PASS] T2    T = 2.7255 K: peak-wavelength reading                                          value 2.725500000000e+00 expected 2.725500000000e+00 err 1.629e-16 (tol 1e-08)
+[PASS] T2    T = 2.7255 K: energy-density reading                                           value 2.725500000000e+00 expected 2.725500000000e+00 err 7.332e-14 (tol 1e-08)
+[PASS] T2    T = 2.7255 K: photon-number reading                                            value 2.725499994142e+00 expected 2.725500000000e+00 err 2.149e-09 (tol 1e-08)
+[PASS] T2    T = 2.7255 K: lambda_peak nu_peak / c = x_nu / x_lambda                        value 5.682526605497e-01 expected 5.682526605497e-01 err 0.000e+00 (tol 1e-08)
+       T = 2.7255 K: x_nu/x_lambda = 0.568252661 ; b/(c/nu_peak) is 0.568253 times T
+       T = 2.7255 K: energy reading with the stored a_rad = 2.725502995 (relative bias +1.099e-06, +2.995e-06 K)
+[PASS] T2    T = 3000 K: peak-wavelength reading                                            value 3.000000000000e+03 expected 3.000000000000e+03 err 1.516e-16 (tol 1e-08)
+[PASS] T2    T = 3000 K: energy-density reading                                             value 3.000000000000e+03 expected 3.000000000000e+03 err 1.819e-15 (tol 1e-08)
+[PASS] T2    T = 3000 K: photon-number reading                                              value 3.000000000000e+03 expected 3.000000000000e+03 err 3.941e-15 (tol 1e-08)
+[PASS] T2    T = 3000 K: lambda_peak nu_peak / c = x_nu / x_lambda                          value 5.682526605497e-01 expected 5.682526605497e-01 err 1.954e-16 (tol 1e-08)
+       T = 3000 K: x_nu/x_lambda = 0.568252661 ; b/(c/nu_peak) is 0.568253 times T
+       T = 3000 K: energy reading with the stored a_rad = 3000.003296148 (relative bias +1.099e-06, +3.296e-03 K)
+
+== T3 spectral ancestry: mixtures of Planck spectra ==
+       component energies: 4.174801e-14 and 4.174801e-14 J/m^3 (ratio 1.000000000)
+[PASS] T3    energy reading reproduces the integrated energy                                value 8.349601839858e-14 expected 8.349601839858e-14 err 3.023e-16 (tol 1e-09)
+       readings of the mixture (T1 = 2.7255 K): peak 4.49380, energy 3.24118, number 3.11992 K
+[PASS] T3    the three readings span at least 10 per cent of the energy reading
+       best single-Planck fit: T = 3.85444 K, relative L2 residual 0.16232
+[PASS] T3    best single-Planck fit residual is at least 0.02
+       T2/T1 = 1.01: best-fit T = 2.739094 K, relative residual 3.472e-05
+[PASS] T3    for components 1 per cent apart the best-fit residual is below 1e-3
+
+== T4 octaves ==
+[PASS] T4    T_W(n+1)/T_W(n) = 2 (worst absolute deviation)                                 value 0.000000000000e+00 expected 0.000000000000e+00 err 0.000e+00 (tol 1e-12)
+[PASS] T4    u(n+1)/u(n) = 16 (worst absolute deviation)                                    value 0.000000000000e+00 expected 0.000000000000e+00 err 0.000e+00 (tol 1e-12)
+[PASS] T4    lambda(44) = D 2^-44 = 760 nm                                                  value 7.600000000000e-07 expected 7.600000000000e-07 err 0.000e+00 (tol 1e-12)
+[PASS] T4    T_W(44) = b / 760 nm                                                           value 3.812857835770e+03 expected 3.812857835770e+03 err 0.000e+00 (tol 1e-12)
+       CMB Wien peak 1.063207e-03 m; octaves to 760 nm: 10.4501 ; to 975 nm: 10.0907
+       D_Earth = 2 R_Earth = 1.274200e+07 m ; log2(D_Earth/760 nm) = 43.9306 ; offset from 44 = -0.0694 octave (factor 0.9530 in length)
+[PASS] T4    the nearest integer to log2(D_Earth / 760 nm) is 44
+
+== T5 engine temperature functions ==
+[PASS] T5    T_at_z and z_at_T are inverses                                                 value 1.100000000000e+03 expected 1.100000000000e+03 err 0.000e+00 (tol 1e-12)
+[PASS] T5    T_at_z(1100) = T_CMB * 1101                                                    value 3.000775500000e+03 expected 3.000775500000e+03 err 0.000e+00 (tol 1e-12)
+       T(1100) = 3000.7755 K ; engine Wien peak 9.657504e-07 m ; native 9.656744e-07 m
+[PASS] T5    engine wien_peak at T(1100) vs native b/T                                      value 9.657503535336e-07 expected 9.656743582401e-07 err 7.870e-05 (tol 1e-04)
+
+ALL CRITERIA MET: 0 failure(s)

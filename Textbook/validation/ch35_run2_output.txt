@@ -1,0 +1,57 @@
+
+== V0 helper validation (known answers) ==
+[PASS] V0    integrate sin over [0, pi] = 2                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 3.331e-16 (tol 1e-13)
+[PASS] V0    integrate x^7 over [0, 1] = 1/8                                                value 1.250000000000e-01 expected 1.250000000000e-01 err 2.220e-15 (tol 1e-14)
+[PASS] V0    integrate exp over [-1, 1] = e - 1/e                                           value 2.350402387288e+00 expected 2.350402387288e+00 err 5.668e-16 (tol 1e-13)
+[PASS] V0    root of cos x - x = 0.739085133215161                                          value 7.390851332152e-01 expected 7.390851332152e-01 err 2.253e-15 (tol 1e-13)
+[PASS] V0    root of x^2 - 2 on [1, 2] = sqrt 2                                             value 1.414213562373e+00 expected 1.414213562373e+00 err 2.983e-15 (tol 1e-13)
+[PASS] V0    compensated sum 1 + 10^6 x 1e-16 = 1 + 1e-10                                   value 1.000000000100e+00 expected 1.000000000100e+00 err 0.000e+00 (tol 1e-15)
+
+== V1 quadrature and weights ==
+[PASS] V1    sum w = 2                                                                      value 2.000000000000e+00 expected 2.000000000000e+00 err 0.000e+00 (tol 1e-14)
+[PASS] V1    sum w x^2 = 2/3                                                                value 6.666666666667e-01 expected 6.666666666667e-01 err 3.331e-16 (tol 1e-14)
+[PASS] V1    sum w x^10 = 2/11                                                              value 1.818181818182e-01 expected 1.818181818182e-01 err 4.580e-16 (tol 1e-14)
+[PASS] V1    central + 6 outer channel weights = 1                                          value 1.000000000000e+00 expected 1.000000000000e+00 err 0.000e+00 (tol 1e-14)
+
+== T1 geometry of the seven circles ==
+[PASS] T1    ring centre to central centre = 2 rho (touching), worst deviation              value 1.110223024625e-16 expected 0.000000000000e+00 err 1.110e-16 (tol 1e-14)
+[PASS] T1    neighbouring ring centres at 2 rho (touching), worst deviation                 value 3.330669073875e-16 expected 0.000000000000e+00 err 3.331e-16 (tol 1e-14)
+[PASS] T1    outer extent = R, worst deviation                                              value 2.220446049250e-16 expected 0.000000000000e+00 err 2.220e-16 (tol 1e-14)
+[PASS] T1    total circle area fraction = 7/9                                               value 7.777777777778e-01 expected 7.777777777778e-01 err 0.000e+00 (tol 1e-14)
+[PASS] T1    w0 = 1/9                                                                       value 1.111111111111e-01 expected 1.111111111111e-01 err 0.000e+00 (tol 1e-14)
+[PASS] T1    w1 = 1/9 + (2/9)/6 = 4/27                                                      value 1.481481481481e-01 expected 1.481481481481e-01 err 0.000e+00 (tol 1e-14)
+       second moment: model sum w x^2 = 0.197531 ; exact disc R^2/4 = 0.250000 (the weights are not an exact area cubature)
+
+== T2 disc solid angle quadrature ==
+       axial relative errors: d/R = 100: 7.72e-13 ; 10: 4.22e-15 ; 3: 1.91e-12 ; 1: 6.31e-08 ; 0.5: 1.16e-05 ; 0.2: 9.06e-04 ; 0.1: 1.52e-02
+[PASS] T2    relative error <= 1e-8 at d/R = 100, 10, 3
+[PASS] T2    relative error <= 1e-4 at d/R = 1
+       off axis b = 0.5 R, d = 2 R: quadrature 0.6228560680 ; reference 0.6228563085 ; relative error -3.86e-07
+[PASS] T2    off-axis relative error <= 1e-5 at b = 0.5 R
+       off axis b = 1.5 R, d = 2 R: quadrature 0.3943787694 ; reference 0.3943788052 ; relative error -9.07e-08
+
+== T3 partial occultation by a half-plane edge ==
+       max |error| of the occluded fraction: seven-circle model 0.0207 ; Boolean model 0.2033
+[PASS] T3    model is 0 for t >= 1 and 1 for t <= -1 (to 1e-12)
+[PASS] T3    both models are non-increasing in t
+[PASS] T3    seven-circle model max error <= 0.1
+[PASS] T3    Boolean model max error exceeds the seven-circle model's
+
+== T4 retardation: fixed-point contraction ==
+       beta=0.01: observed ratio 0.010000 ; iterations 6 (predicted 6)
+[PASS] T4    error ratio per iteration equals beta                                          value 9.999994372502e-03 expected 1.000000000000e-02 err 5.627e-07 (tol 1e-06)
+[PASS] T4    iteration count within 1 of ceil(ln(tol/e0)/ln(beta))
+       beta=0.10: observed ratio 0.100000 ; iterations 12 (predicted 12)
+[PASS] T4    error ratio per iteration equals beta                                          value 1.000000000000e-01 expected 1.000000000000e-01 err 0.000e+00 (tol 1e-06)
+[PASS] T4    iteration count within 1 of ceil(ln(tol/e0)/ln(beta))
+       beta=0.50: observed ratio 0.500000 ; iterations 43 (predicted 43)
+[PASS] T4    error ratio per iteration equals beta                                          value 5.000000000000e-01 expected 5.000000000000e-01 err 0.000e+00 (tol 1e-06)
+[PASS] T4    iteration count within 1 of ceil(ln(tol/e0)/ln(beta))
+       beta=0.90: observed ratio 0.900001 ; iterations 299 (predicted 299)
+[PASS] T4    error ratio per iteration equals beta                                          value 9.000006518013e-01 expected 9.000000000000e-01 err 7.242e-07 (tol 1e-06)
+[PASS] T4    iteration count within 1 of ceil(ln(tol/e0)/ln(beta))
+       beta=0.99: observed ratio 0.990026 ; iterations 100000 (predicted 3367)
+[FAIL] T4    error ratio per iteration equals beta                                          value 9.900255029753e-01 expected 9.900000000000e-01 err 2.576e-05 (tol 1e-06)
+[FAIL] T4    iteration count within 1 of ceil(ln(tol/e0)/ln(beta))
+
+CRITERIA NOT MET: 2 failure(s)

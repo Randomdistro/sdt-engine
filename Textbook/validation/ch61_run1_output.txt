@@ -1,0 +1,67 @@
+
+== V0 helper validation (known answers) ==
+[PASS] V0    integrate sin over [0, pi] = 2                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 3.331e-16 (tol 1e-13)
+[PASS] V0    integrate x^7 over [0, 1] = 1/8                                                value 1.250000000000e-01 expected 1.250000000000e-01 err 2.220e-15 (tol 1e-14)
+[PASS] V0    integrate exp over [-1, 1] = e - 1/e                                           value 2.350402387288e+00 expected 2.350402387288e+00 err 5.668e-16 (tol 1e-13)
+[PASS] V0    root of cos x - x = 0.739085133215161                                          value 7.390851332152e-01 expected 7.390851332152e-01 err 2.253e-15 (tol 1e-13)
+[PASS] V0    root of x^2 - 2 on [1, 2] = sqrt 2                                             value 1.414213562373e+00 expected 1.414213562373e+00 err 2.983e-15 (tol 1e-13)
+[PASS] V0    compensated sum 1 + 10^6 x 1e-16 = 1 + 1e-10                                   value 1.000000000100e+00 expected 1.000000000100e+00 err 0.000e+00 (tol 1e-15)
+
+== V1 known answers ==
+[PASS] V1    SHA-256("abc")
+[PASS] V1    least squares recovers c0 = 2                                                  value 2.000000000000e+00 expected 2.000000000000e+00 err 0.000e+00 (tol 1e-12)
+[PASS] V1    least squares recovers c1 = -3                                                 value -3.000000000000e+00 expected -3.000000000000e+00 err 0.000e+00 (tol 1e-12)
+[PASS] V1    RK4: theta(2 pi) = 1 for theta'' = -theta                                      value 1.000000000000e+00 expected 1.000000000000e+00 err 2.998e-15 (tol 1e-10)
+
+== T1 torsion response: the quasistatic relation and its limit ==
+[PASS] T1    r = 0.01: amplitude kappa A / tau0 = 1.000100 (closed form)                    value 1.000099185375e+00 expected 1.000099989995e+00 err 8.045e-07 (tol 1e-05)
+[PASS] T1    r = 0.01: lag = 0.000200 rad (closed form)                                     value 1.997628271245e-04 expected 2.000199993327e-04 err 2.572e-07 (tol 1e-05)
+[PASS] T1    r = 0.03: amplitude kappa A / tau0 = 1.000901 (closed form)                    value 1.000899168906e+00 expected 1.000900630243e+00 err 1.460e-06 (tol 1e-05)
+[PASS] T1    r = 0.03: lag = 0.000601 rad (closed form)                                     value 5.985901834163e-04 expected 6.005404142431e-04 err 1.950e-06 (tol 1e-05)
+[PASS] T1    the quasistatic error at r = 0.03 is below 1e-3
+[FAIL] T1    r = 0.1: amplitude kappa A / tau0 = 1.010099 (closed form)                     value 1.010085250406e+00 expected 1.010098948887e+00 err 1.356e-05 (tol 1e-05)
+[PASS] T1    r = 0.1: lag = 0.002020 rad (closed form)                                      value 2.020851961880e-03 expected 2.020199271915e-03 err 6.527e-07 (tol 1e-05)
+[PASS] T1    the quasistatic error at r = 0.1 lies in [0.0095, 0.0107]
+[FAIL] T1    r = 0.5: amplitude kappa A / tau0 = 1.333215 (closed form)                     value 1.333176679033e+00 expected 1.333214830615e+00 err 2.862e-05 (tol 1e-05)
+[PASS] T1    r = 0.5: lag = 0.013333 rad (closed form)                                      value 1.333968309484e-02 expected 1.333254329415e-02 err 7.140e-06 (tol 1e-05)
+[FAIL] T1    r = 0.9: amplitude kappa A / tau0 = 5.239697 (closed form)                     value 5.239498145034e+00 expected 5.239697095579e+00 err 3.797e-05 (tol 1e-05)
+[FAIL] T1    r = 0.9: lag = 0.094455 rad (closed form)                                      value 9.447984282663e-02 expected 9.445493539505e-02 err 2.491e-05 (tol 1e-05)
+[FAIL] T1    r = 1: amplitude kappa A / tau0 = 50.000000 (closed form)                      value 4.999866192098e+01 expected 5.000000000000e+01 err 2.676e-05 (tol 1e-05)
+[FAIL] T1    r = 1: lag = 1.570796 rad (closed form)                                        value 1.570808735136e+00 expected 1.570796326795e+00 err 1.241e-05 (tol 1e-05)
+[PASS] T1    the resonance amplitude is 50 +/- 0.5
+[PASS] T1    the resonance lag is pi/2                                                      value 1.570808735136e+00 expected 1.570796326795e+00 err 7.899e-06 (tol 1e-04)
+[FAIL] T1    r = 2: amplitude kappa A / tau0 = 0.333304 (closed form)                       value 3.333452594312e-01 expected 3.333037076537e-01 err 1.247e-04 (tol 1e-05)
+[FAIL] T1    r = 2: lag = 3.128260 rad (closed form)                                        value 3.128118477004e+00 expected 3.128260110296e+00 err 1.416e-04 (tol 1e-05)
+
+== T2 harmonic controls over integer turns ==
+       forward: cos2phi 0.700000000, sin2phi 0.249999594 ; reversed: cos2phi 0.700000000, sin2phi 0.350000406
+[PASS] T2    forward projection on cos 2phi is 0.7 (the drift does not leak)                value 7.000000000000e-01 expected 7.000000000000e-01 err 2.220e-15 (tol 1e-06)
+[PASS] T2    forward projection on sin 2phi is 0.3 - 0.05 = 0.25                            value 2.499995938411e-01 expected 2.500000000000e-01 err 1.625e-06 (tol 1e-05)
+[FAIL] T2    reversed run: the sin 2phi coefficient of the geometric signal appears as -0.3 in time order, and the drift leaks with the opposite sign: -(0.3) - ... checked below value 3.500004061589e-01 expected -3.500000000000e-01 err 2.000e+00 (tol 1e-05)
+[FAIL] T2    reversed run in apparatus angle: 0.3 + 0.05 = 0.35                             value -3.500004061589e-01 expected 3.500000000000e-01 err 2.000e+00 (tol 1e-05)
+[FAIL] T2    half the sum recovers the geometric signal 0.3                                 value -5.000040615887e-02 expected 3.000000000000e-01 err 1.167e+00 (tol 1e-05)
+[FAIL] T2    half the difference isolates the drift 0.05                                    value -3.000000000000e-01 expected 5.000000000000e-02 err 7.000e+00 (tol 1e-05)
+       drift projection on cos 2phi over 3.5 turns: -1.181418e-16
+[FAIL] T2    over 3.5 turns the drift projects on cos 2phi by more than 1e-3
+
+== T3 blank runs quantify the apparatus response ==
+       blank runs: standard deviation 0.02379 (sqrt(2/M) = 0.02357) ; mean -4.832e-04 ; registered-signal runs within 5 sigma: 4000 of 4000
+[PASS] T3    the blank standard deviation is within 5 per cent of sqrt(2/M)
+[PASS] T3    the blank mean is within 3 sigma/sqrt(4000) of 0
+[PASS] T3    at least 99 per cent of signal runs lie within 5 sigma of the registered 0.1
+
+== T4 data hashes and the covariance of the fit ==
+[PASS] T4    an unchanged blob has an unchanged digest
+[PASS] T4    a one-byte change changes the digest
+       rho(cos2phi, t) = -2.870e-17 ; rho(sin2phi, t) = 0.0975 ; [(X^T X)^-1]_00 = 5.555556e-04 ; 2/M = 5.555556e-04
+[PASS] T4    the cos 2phi coefficient is uncorrelated with the drift                        value -2.870268811124e-17 expected 0.000000000000e+00 err 2.870e-17 (tol 1e-09)
+[FAIL] T4    the sin 2phi coefficient is correlated with the drift: |rho| in (0.3, 1)
+[PASS] T4    the analytic standard-error factor sqrt(2/M) equals sqrt([(X^T X)^-1]_00)      value 2.357022603955e-02 expected 2.357022603955e-02 err 5.888e-16 (tol 1e-06)
+
+== T5 the repository's apparatus folders ==
+[PASS] T5    GOM13_Occlusion_Altitude_Cavendish exists
+[PASS] T5    FLM15_Casimir_as_Relay_Exclusion exists
+[PASS] T5    they are different directories
+[PASS] T5    gom13_preflight.cpp is in the GOM13 folder
+
+CRITERIA NOT MET: 14 failure(s)

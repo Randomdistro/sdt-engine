@@ -1,0 +1,40 @@
+
+== V0 helper validation (known answers) ==
+[PASS] V0    integrate sin over [0, pi] = 2                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 3.331e-16 (tol 1e-13)
+[PASS] V0    integrate x^7 over [0, 1] = 1/8                                                value 1.250000000000e-01 expected 1.250000000000e-01 err 2.220e-15 (tol 1e-14)
+[PASS] V0    integrate exp over [-1, 1] = e - 1/e                                           value 2.350402387288e+00 expected 2.350402387288e+00 err 5.668e-16 (tol 1e-13)
+[PASS] V0    root of cos x - x = 0.739085133215161                                          value 7.390851332152e-01 expected 7.390851332152e-01 err 2.253e-15 (tol 1e-13)
+[PASS] V0    root of x^2 - 2 on [1, 2] = sqrt 2                                             value 1.414213562373e+00 expected 1.414213562373e+00 err 2.983e-15 (tol 1e-13)
+[PASS] V0    compensated sum 1 + 10^6 x 1e-16 = 1 + 1e-10                                   value 1.000000000100e+00 expected 1.000000000100e+00 err 0.000e+00 (tol 1e-15)
+
+== V1 exact mirror recovered by the similarity fit ==
+[PASS] V1    relative residual of an exact mirror                                           value 1.517856138984e-15 expected 0.000000000000e+00 err 1.518e-15 (tol 1e-12)
+[PASS] V1    recovered scale 2.7                                                            value 2.700000000000e+00 expected 2.700000000000e+00 err 8.224e-16 (tol 1e-12)
+
+== T1 freedom census ==
+       independent 12-point sets, one global similarity: median residual 0.926 ; minimum 0.707 ; fraction within 5%: 0.00%
+[PASS] T1    median residual >= 0.3 and at most 1% of pairs within 5%
+       N =  3 random magnitudes, one global factor: median residual 0.675 ; within 5%: 0.8% ; factor per observable: residual 0 for all
+[PASS] T1    N=3: single-factor median residual >= 0.3 and per-observable residual identically 0
+       N =  6 random magnitudes, one global factor: median residual 0.825 ; within 5%: 0.0% ; factor per observable: residual 0 for all
+[PASS] T1    N=6: single-factor median residual >= 0.3 and per-observable residual identically 0
+       N = 12 random magnitudes, one global factor: median residual 0.855 ; within 5%: 0.0% ; factor per observable: residual 0 for all
+[PASS] T1    N=12: single-factor median residual >= 0.3 and per-observable residual identically 0
+
+== T2 rank content: atomic seat directions against nuclear shells ==
+       T8 (cube)      I1=0.000e+00 I2=5.551e-17 I3=0.000e+00 I4=2.593e-01 I5=0.000e+00 I6=3.951e-01 
+       T12 (icosa)    I1=7.710e-19 I2=8.327e-17 I3=0.000e+00 I4=-7.401e-17 I5=0.000e+00 I6=4.400e-01 
+       T14 (cubocta)  I1=1.133e-18 I2=7.250e-17 I3=5.664e-19 I4=1.323e-03 I5=0.000e+00 I6=2.608e-01 
+[PASS] T2    T8, T12, T14: I1 = I2 = I3 = 0
+       atomic Ne=2    I1=0.000e+00 I2=1.000e+00 I3=0.000e+00 I4=1.000e+00 I5=0.000e+00 I6=1.000e+00 
+       atomic Ne=3    I1=0.000e+00 I2=1.000e+00 I3=3.600e-01 I4=1.000e+00 I5=7.785e-01 I6=1.000e+00 
+       atomic Ne=4    I1=0.000e+00 I2=1.000e+00 I3=0.000e+00 I4=1.000e+00 I5=0.000e+00 I6=1.000e+00 
+       atomic Ne=5    I1=3.731e-17 I2=5.833e-01 I3=2.310e-01 I4=6.108e-01 I5=3.442e-01 I6=4.032e-01 
+       atomic Ne=6    I1=1.906e-17 I2=3.094e-01 I3=1.563e-01 I4=5.778e-01 I5=1.930e-01 I6=2.578e-01 
+       atomic Ne=7    I1=0.000e+00 I2=1.276e-01 I3=1.148e-01 I4=5.360e-01 I5=5.022e-02 I6=2.743e-01 
+       atomic Ne=8    I1=-2.479e-17 I2=7.785e-02 I3=7.745e-02 I4=4.788e-01 I5=1.080e-01 I6=2.113e-01 
+       atomic Ne=9    I1=5.566e-18 I2=4.234e-02 I3=3.014e-02 I4=4.306e-01 I5=7.165e-02 I6=1.647e-01 
+       atomic Ne=10   I1=0.000e+00 I2=1.000e-02 I3=-4.441e-18 I4=3.906e-01 I5=0.000e+00 I6=2.076e-01 
+[PASS] T2    atomic seat directions have I2 > 0 for every N_e = 2..10
+
+ALL CRITERIA MET: 0 failure(s)

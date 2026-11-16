@@ -1,0 +1,41 @@
+
+== V0 helper validation (known answers) ==
+[PASS] V0    integrate sin over [0, pi] = 2                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 3.331e-16 (tol 1e-13)
+[PASS] V0    integrate x^7 over [0, 1] = 1/8                                                value 1.250000000000e-01 expected 1.250000000000e-01 err 2.220e-15 (tol 1e-14)
+[PASS] V0    integrate exp over [-1, 1] = e - 1/e                                           value 2.350402387288e+00 expected 2.350402387288e+00 err 5.668e-16 (tol 1e-13)
+[PASS] V0    root of cos x - x = 0.739085133215161                                          value 7.390851332152e-01 expected 7.390851332152e-01 err 2.253e-15 (tol 1e-13)
+[PASS] V0    root of x^2 - 2 on [1, 2] = sqrt 2                                             value 1.414213562373e+00 expected 1.414213562373e+00 err 2.983e-15 (tol 1e-13)
+[PASS] V0    compensated sum 1 + 10^6 x 1e-16 = 1 + 1e-10                                   value 1.000000000100e+00 expected 1.000000000100e+00 err 0.000e+00 (tol 1e-15)
+
+== V1 reduced-mass factor ==
+[PASS] V1    reduced_mass_factor equals 1/(1 + m_e/m_nuc), worst relative                   value 1.110223024625e-16 expected 0.000000000000e+00 err 1.110e-16 (tol 1e-15)
+[PASS] V1    (1 - factor)/(m_e/m_nuc) = 1/(1 + m_e/m_nuc) for a heavy nucleus (10^3 m_p)    value 9.999994552850e-01 expected 9.999994553833e-01 err 9.828e-11 (tol 1e-08)
+
+== T1 the ladder, the boundary length and the rotation-field function ==
+[PASS] T1    Om_Z = v^2 r/c^2 equals Z r_e over 50 states, worst relative                   value 3.330669073875e-16 expected 0.000000000000e+00 err 3.331e-16 (tol 1e-14)
+[PASS] T1    z = Om/r equals (Z alpha/n)^2, worst relative                                  value 3.330669073875e-16 expected 0.000000000000e+00 err 3.331e-16 (tol 1e-14)
+[PASS] T1    z k^2 = 1 (identity of the definitions), worst deviation                       value 2.220446049250e-16 expected 0.000000000000e+00 err 2.220e-16 (tol 1e-14)
+[PASS] T1    rotation_field_velocity at r_n equals bohr_velocity for Z = 1                  value 1.110223024625e-16 expected 0.000000000000e+00 err 1.110e-16 (tol 1e-14)
+[PASS] T1    for Z > 1 it equals bohr_velocity/sqrt(Z), worst relative                      value 2.220446049250e-16 expected 0.000000000000e+00 err 2.220e-16 (tol 1e-14)
+[PASS] T1    for Z > 1 it differs from bohr_velocity by at least 29% in every state
+       Z=2: ratio rotation_field/bohr = 0.707107 (1/sqrt 2 = 0.707107)
+
+== T2 spectral scale and the two engine routes ==
+[PASS] T2a   R_inf_derived / R_inf = 1 (shared-input)                                       value 1.097373156804e+07 expected 1.097373156816e+07 err 1.080e-11 (tol 1e-09)
+[PASS] T2a   Ry = h c R_inf / e (shared-input)                                              value 1.360569312299e+01 expected 1.360569312299e+01 err 3.773e-14 (tol 1e-09)
+[PASS] T2b   Lyman-alpha: emission_wavelength_m equals hc/(E2 - E1) from level_energy_eV    value 1.215684456186e-07 expected 1.215684456173e-07 err 1.076e-11 (tol 1e-09)
+[PASS] T2b   Balmer-alpha: emission_wavelength_m equals hc/(E3 - E2)                        value 6.564696063403e-07 expected 6.564696063333e-07 err 1.076e-11 (tol 1e-09)
+       leading-order hydrogen (m_nuc = m_p): Lyman-alpha 121.568446 nm ; Balmer-alpha 656.469606 nm (not compared with a measured value)
+[PASS] T2c   lambda_Lya / lambda_Ha = 5/27                                                  value 1.851851851852e-01 expected 1.851851851852e-01 err 0.000e+00 (tol 1e-14)
+
+== T3 isotope shifts from one nuclear response ==
+[PASS] T3    lambda_H/lambda_D = mu_D/mu_H                                                  value 1.000272099179e+00 expected 1.000272099179e+00 err 0.000e+00 (tol 1e-14)
+[PASS] T3    lambda_D/lambda_T = mu_T/mu_D                                                  value 1.000090507239e+00 expected 1.000090507239e+00 err 0.000e+00 (tol 1e-14)
+       Balmer-alpha: lambda_H - lambda_D = 0.17858 nm (fractional 2.7203e-04) ; lambda_H - lambda_T = 0.23797 nm ; lambda_D - lambda_T = 0.05939 nm
+       hydrogen-like helion, n=2->3: 164.057915 nm with the helion mass ; 164.028069 nm for an infinite nucleus ; shift 0.02985 nm
+[PASS] T3    (mu - (1 - m_e/m))/(m_e/m)^2 = 1/(1 + m_e/m): error of the first-order form is second order value 2.269466614635e-09 expected 0.000000000000e+00 err 2.269e-09 (tol 1e-06)
+
+== T4 size of the first omitted correction (reported) ==
+       (Z alpha/n)^2 for Z=1, n=1: 53.25 ppm ; for Z=30, n=1: 47926.22 ppm
+
+ALL CRITERIA MET: 0 failure(s)

@@ -1,0 +1,45 @@
+
+== V0 helper validation (known answers) ==
+[PASS] V0    integrate sin over [0, pi] = 2                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 3.331e-16 (tol 1e-13)
+[PASS] V0    integrate x^7 over [0, 1] = 1/8                                                value 1.250000000000e-01 expected 1.250000000000e-01 err 2.220e-15 (tol 1e-14)
+[PASS] V0    integrate exp over [-1, 1] = e - 1/e                                           value 2.350402387288e+00 expected 2.350402387288e+00 err 5.668e-16 (tol 1e-13)
+[PASS] V0    root of cos x - x = 0.739085133215161                                          value 7.390851332152e-01 expected 7.390851332152e-01 err 2.253e-15 (tol 1e-13)
+[PASS] V0    root of x^2 - 2 on [1, 2] = sqrt 2                                             value 1.414213562373e+00 expected 1.414213562373e+00 err 2.983e-15 (tol 1e-13)
+[PASS] V0    compensated sum 1 + 10^6 x 1e-16 = 1 + 1e-10                                   value 1.000000000100e+00 expected 1.000000000100e+00 err 0.000e+00 (tol 1e-15)
+
+== V1 hand-derived compositions by an independent integer solve ==
+[PASS] V1    six compositions (alpha base) match the hand-derived counts
+[PASS] V1    He-3 on the helion base is (0, 0)
+
+== T1 unimodular inversion, exhaustive ==
+[PASS] T1    matrix determinant is 1 and the integer inverse times the matrix is the identity
+       (n_d, n_t) -> (Z, A) -> (n_d, n_t): 40401 points, 0 mismatches ; (Z, A) -> counts -> (Z, A): 7140 points, 0 mismatches
+[PASS] T1    no mismatch in either direction
+
+== T2 wedge equivalence, exhaustive ==
+       48000 (Z, A) points ; 7140 in the alpha wedge ; mismatches 0 ; helion-base mismatches 0
+[PASS] T2    alpha validity equals the wedge equals Z <= N <= 2Z-2 everywhere
+[PASS] T2    helion-base validity equals its two inequalities everywhere
+
+== T3 the embedded table, recomputed from the raw (Z, A) pairs ==
+       records 287 ; alpha-valid 284 ; alpha-invalid 3 ; sum n_d 7658 ; sum n_t 5228 ; sum floor(n_t/2) 2560 ; odd 108 ; sum (Z-2) 12886
+[PASS] T3    287 records, strictly increasing in (Z, A)
+[PASS] T3    alpha-valid 284 and alpha-invalid 3
+[PASS] T3    invalid set is exactly {H-1, H-2, He-3}; helion base: H-1, H-2 invalid, He-3 valid (0,0)
+[PASS] T3    sum n_d = 7658 and sum n_t = 5228
+[PASS] T3    sum floor(n_t/2) = 2560 and odd count = 108
+[PASS] T3    sum (n_d + n_t) equals sum (Z - 2) over valid records
+[PASS] T3    every valid record satisfies Z <= N <= 2Z - 2
+[PASS] T3    engine basis_stats equals the independent recomputation
+
+== T4 binary rearrangement identities, exhaustive ==
+       splits enumerated: 19427330 (by nu = 0..6: 2786146 2786146 2786146 2782318 2774662 2763352 2748560)
+[PASS] T4    delta D = nu - 2 and delta T = -nu for every split
+[PASS] T4    the snap class equals the class implied by nu alone for every split
+
+== T5 the counts are a unimodular relabelling of (Z, N) ==
+[PASS] T5    determinant of (Z,N) -> (n_d, n_t) is 1
+       7139 wedge points (Z from 3 to 120)
+[PASS] T5    inverse and the six overlay identities hold on every wedge point
+
+ALL CRITERIA MET: 0 failure(s)

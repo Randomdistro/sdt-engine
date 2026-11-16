@@ -1,0 +1,36 @@
+
+== V0 helper validation (known answers) ==
+[PASS] V0    integrate sin over [0, pi] = 2                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 3.331e-16 (tol 1e-13)
+[PASS] V0    integrate x^7 over [0, 1] = 1/8                                                value 1.250000000000e-01 expected 1.250000000000e-01 err 2.220e-15 (tol 1e-14)
+[PASS] V0    integrate exp over [-1, 1] = e - 1/e                                           value 2.350402387288e+00 expected 2.350402387288e+00 err 5.668e-16 (tol 1e-13)
+[PASS] V0    root of cos x - x = 0.739085133215161                                          value 7.390851332152e-01 expected 7.390851332152e-01 err 2.253e-15 (tol 1e-13)
+[PASS] V0    root of x^2 - 2 on [1, 2] = sqrt 2                                             value 1.414213562373e+00 expected 1.414213562373e+00 err 2.983e-15 (tol 1e-13)
+[PASS] V0    compensated sum 1 + 10^6 x 1e-16 = 1 + 1e-10                                   value 1.000000000100e+00 expected 1.000000000100e+00 err 0.000e+00 (tol 1e-15)
+
+== V1 isotropic constants ==
+[PASS] V1    Zener ratio A = 1                                                              value 1.000000000000e+00 expected 1.000000000000e+00 err 0.000e+00 (tol 1e-14)
+[PASS] V1    bulk modulus = lambda + 2G/3                                                   value 2.666666666667e+00 expected 2.666666666667e+00 err 0.000e+00 (tol 1e-14)
+[PASS] V1    G_V = G and G_R = G                                                            value 2.000000000000e+00 expected 2.000000000000e+00 err 0.000e+00 (tol 1e-14)
+
+== T1 elastic stability, wave speeds and anisotropy ==
+       20000 triples ; 7870 stable ; max (G_V - G_R)/G_H = 1.9996
+[PASS] T1a   Cholesky of the Voigt matrix equals the three inequalities for every triple
+[PASS] T1b   every stable triple has a positive smallest Christoffel eigenvalue in 50 directions
+[PASS] T1b   unstable triple (3,1,-1): the [100] shear eigenvalue is -1                     value -1.000000000000e+00 expected -1.000000000000e+00 err 0.000e+00 (tol 1e-12)
+[PASS] T1c   G_R <= G_V for every stable triple
+[PASS] T1c   spread (G_V - G_R)/G_H at A = 1 over 200 isotropic triples                     value 4.438886221242e-16 expected 0.000000000000e+00 err 4.439e-16 (tol 1e-12)
+
+== T2 coexistence slope ==
+       T = 0.900 : P_c = -0.219691 ; dP/dT = 1.907793 ; Delta s = 0.4000 ; Delta v = 0.20967
+       T = 1.100 : P_c = 0.283864 ; dP/dT = 3.199829 ; Delta s = 0.6000 ; Delta v = 0.18751
+[PASS] T2    dP_c/dT = Delta s/Delta v, worst relative over 20 temperatures                 value 9.076184470658e-09 expected 0.000000000000e+00 err 9.076e-09 (tol 1e-06)
+[PASS] T2    dP_c/dT = L/(T Delta v) with L = T Delta s, worst relative                     value 9.076184470658e-09 expected 0.000000000000e+00 err 9.076e-09 (tol 1e-06)
+
+== T3 periodic thermal forcing ==
+       amplitude at x = delta: 0.367762 (e^-1 = 0.367879) ; at 2 delta: 0.135309 (e^-2 = 0.135335) ; phase lag 1.00046, 1.99962 rad
+[PASS] T3    amplitude at x = delta equals e^-1                                             value 3.677621529016e-01 expected 3.678794411714e-01 err 3.188e-04 (tol 3e-03)
+[PASS] T3    amplitude at x = 2 delta equals e^-2                                           value 1.353085665556e-01 expected 1.353352832366e-01 err 1.974e-04 (tol 3e-03)
+[PASS] T3    phase lag at x = delta equals 1 rad                                            value 1.000460646329e+00 expected 1.000000000000e+00 err 4.606e-04 (tol 5e-03)
+[PASS] T3    phase lag at x = 2 delta equals 2 rad                                          value 1.999618604709e+00 expected 2.000000000000e+00 err 3.814e-04 (tol 5e-03)
+
+ALL CRITERIA MET: 0 failure(s)

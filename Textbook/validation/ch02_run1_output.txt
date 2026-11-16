@@ -1,0 +1,92 @@
+
+== V0 helper validation (known answers) ==
+[PASS] V0    integrate sin over [0, pi] = 2                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 3.331e-16 (tol 1e-13)
+[PASS] V0    integrate x^7 over [0, 1] = 1/8                                                value 1.250000000000e-01 expected 1.250000000000e-01 err 2.220e-15 (tol 1e-14)
+[PASS] V0    integrate exp over [-1, 1] = e - 1/e                                           value 2.350402387288e+00 expected 2.350402387288e+00 err 5.668e-16 (tol 1e-13)
+[PASS] V0    root of cos x - x = 0.739085133215161                                          value 7.390851332152e-01 expected 7.390851332152e-01 err 2.253e-15 (tol 1e-13)
+[PASS] V0    root of x^2 - 2 on [1, 2] = sqrt 2                                             value 1.414213562373e+00 expected 1.414213562373e+00 err 2.983e-15 (tol 1e-13)
+[PASS] V0    compensated sum 1 + 10^6 x 1e-16 = 1 + 1e-10                                   value 1.000000000100e+00 expected 1.000000000100e+00 err 0.000e+00 (tol 1e-15)
+
+== V1 octant triangle (known angles and area) ==
+[PASS] V1    side BC = pi/2                                                                 value 1.570796326795e+00 expected 1.570796326795e+00 err 1.414e-16 (tol 1e-14)
+[PASS] V1    side AC = pi/2                                                                 value 1.570796326795e+00 expected 1.570796326795e+00 err 0.000e+00 (tol 1e-14)
+[PASS] V1    side AB = pi/2                                                                 value 1.570796326795e+00 expected 1.570796326795e+00 err 0.000e+00 (tol 1e-14)
+[PASS] V1    angle at A = pi/2 (engine bearings)                                            value 1.570796326795e+00 expected 1.570796326795e+00 err 0.000e+00 (tol 1e-14)
+[PASS] V1    angle at B = pi/2                                                              value 1.570796326795e+00 expected 1.570796326795e+00 err 0.000e+00 (tol 1e-14)
+[PASS] V1    angle at C = pi/2                                                              value 1.570796326795e+00 expected 1.570796326795e+00 err 0.000e+00 (tol 1e-14)
+[PASS] V1    area (spherical excess) = pi/2 sr                                              value 1.570796326795e+00 expected 1.570796326795e+00 err 0.000e+00 (tol 1e-14)
+
+== V2 Locus normalisation and domain ==
+[PASS] V2    theta beyond pi is carried over the pole: theta = pi - 0.3                     value 2.841592653590e+00 expected 2.841592653590e+00 err 0.000e+00 (tol 1e-15)
+[PASS] V2    ...and azimuth turned by pi: phi = 0.5 + pi                                    value 3.641592653590e+00 expected 3.641592653590e+00 err 0.000e+00 (tol 1e-15)
+[PASS] V2    phi = 0 is written as a whole turn 2 pi                                        value 6.283185307180e+00 expected 6.283185307180e+00 err 0.000e+00 (tol 1e-15)
+[PASS] V2    phi = -1 is written 2 pi - 1                                                   value 5.283185307180e+00 expected 5.283185307180e+00 err 0.000e+00 (tol 1e-15)
+[PASS] V2    radius 0 refused
+[PASS] V2    radius -1 refused
+[PASS] V2    radius NaN refused
+[PASS] V2    radius infinity refused
+[PASS] V2    theta NaN refused
+
+== V3 Van Oosterom-Strackee and the pole triangle ==
+[PASS] V3    octant solid angle (Cartesian route) = pi/2                                    value 1.570796326795e+00 expected 1.570796326795e+00 err 0.000e+00 (tol 1e-14)
+[PASS] V3    pole + equator 0 + equator 2pi/3 solid angle = 2pi/3                           value 2.094395102393e+00 expected 2.094395102393e+00 err 0.000e+00 (tol 1e-14)
+[PASS] V3    same triangle by the engine's bearings (excess)                                value 2.094395102393e+00 expected 2.094395102393e+00 err 2.120e-16 (tol 1e-13)
+
+== T1 small separations (pairs on one meridian) ==
+[PASS] T1    engine angular_distance, delta = 0.010000                                      value 1.000000000000e-02 expected 1.000000000000e-02 err 0.000e+00 (tol 1e-14)
+       delta=1e-02  relative error: engine 0.00e+00  haversine 0.00e+00  naive arccos 1.43e-13
+[PASS] T1    engine angular_distance, delta = 0.000100                                      value 9.999999999999e-05 expected 9.999999999999e-05 err 0.000e+00 (tol 1e-14)
+       delta=1e-04  relative error: engine 0.00e+00  haversine 0.00e+00  naive arccos 2.62e-09
+[PASS] T1    engine angular_distance, delta = 0.000001                                      value 9.999999999177e-07 expected 9.999999999177e-07 err 0.000e+00 (tol 1e-14)
+       delta=1e-06  relative error: engine 0.00e+00  haversine 0.00e+00  naive arccos 1.78e-04
+[PASS] T1    engine angular_distance, delta = 0.000000                                      value 9.999999939225e-09 expected 9.999999939225e-09 err 0.000e+00 (tol 1e-14)
+       delta=1e-08  relative error: engine 0.00e+00  haversine 0.00e+00  naive arccos 1.00e+00
+[PASS] T1    naive arccos relative error > 0.1 at delta = 1e-8
+[PASS] T1    engine angular_distance, delta = 0.000000                                      value 1.000000082740e-10 expected 1.000000082740e-10 err 0.000e+00 (tol 1e-14)
+       delta=1e-10  relative error: engine 0.00e+00  haversine 0.00e+00  naive arccos 1.00e+00
+
+== T2 near-antipodal separations (opposite meridian half-planes) ==
+[PASS] T2    engine error <= 50 u / epsilon, epsilon = 0.010000
+       eps=1e-02  relative error in eps: engine 2.22e-14 (budget 5.55e-13)  haversine 6.66e-14  naive arccos 1.11e-13
+[PASS] T2    engine error <= 50 u / epsilon, epsilon = 0.000100
+       eps=1e-04  relative error in eps: engine 2.22e-12 (budget 5.55e-11)  haversine 2.94e-09  naive arccos 2.63e-09
+[PASS] T2    engine error <= 50 u / epsilon, epsilon = 0.000001
+       eps=1e-06  relative error in eps: engine 2.22e-10 (budget 5.55e-09)  haversine 4.44e-05  naive arccos 4.44e-05
+[PASS] T2    engine error <= 50 u / epsilon, epsilon = 0.000000
+       eps=1e-08  relative error in eps: engine 2.22e-08 (budget 5.55e-07)  haversine 1.98e+00  naive arccos 1.00e+00
+[PASS] T2    haversine relative error > 0.1 at epsilon = 1e-8
+[PASS] T2    naive arccos relative error > 0.1 at epsilon = 1e-8
+[PASS] T2    engine error <= 50 u / epsilon, epsilon = 0.000000
+       eps=1e-10  relative error in eps: engine 2.22e-06 (budget 5.55e-05)  haversine 1.00e+00  naive arccos 1.00e+00
+
+== T3 chord conditioning (equal radii, nearly equal directions) ==
+[PASS] T3    distance_to vs 2 r sin(delta/2)                                                value 6.371000527139e-03 expected 6.371000527139e-03 err 0.000e+00 (tol 1e-13)
+[PASS] T3    naive law-of-cosines chord relative error > 0.1
+       r = 6.371e+06 m, delta = 1e-9 rad: chord = 6.371000527e-03 m; engine 6.371000527e-03; naive 0.000000000e+00
+
+== T4 spherical triangle: three routes to the area ==
+[PASS] T4    40 triangles accepted
+[PASS] T4    excess from engine bearings vs Van Oosterom-Strackee (worst of 40)             value 1.332267629550e-15 expected 0.000000000000e+00 err 1.332e-15 (tol 1e-10)
+[PASS] T4    L'Huilier from engine sides vs Van Oosterom-Strackee (worst of 40)             value 1.953992523340e-14 expected 0.000000000000e+00 err 1.954e-14 (tol 1e-10)
+       42 candidate triples drawn
+
+== T5 relative_locus / step_locus round trip ==
+[PASS] T5    distance from the recovered locus to the target (worst of 200)                 value 3.148119064266e-15 expected 0.000000000000e+00 err 3.148e-15 (tol 1e-10)
+
+== T6 dodecardinal set: the 12 icosahedron directions ==
+[PASS] T6    each vertex: 5 at 63.43 deg, 5 at 116.57 deg, 1 at 180 deg, none other
+[PASS] T6    neighbour angle arccos(1/sqrt5), worst deviation over all pairs                value 1.332267629550e-15 expected 0.000000000000e+00 err 1.332e-15 (tol 1e-07)
+[PASS] T6    face-centre to vertex angle = arccos(sqrt((5+2 sqrt5)/15)) = 37.3774 deg       value 6.523581397844e-01 expected 6.523581397844e-01 err 3.404e-16 (tol 1e-12)
+[PASS] T6    face-centre to vertex angle = arccos(sqrt((5+2 sqrt5)/15)) = 37.3774 deg       value 6.523581397844e-01 expected 6.523581397844e-01 err 3.404e-16 (tol 1e-12)
+[PASS] T6    face-centre to vertex angle = arccos(sqrt((5+2 sqrt5)/15)) = 37.3774 deg       value 6.523581397844e-01 expected 6.523581397844e-01 err 3.404e-16 (tol 1e-12)
+[PASS] T6    minimum separation exceeds 2 x 30 deg: caps do not overlap
+[PASS] T6    coverage of twelve 30-degree caps = 6(1 - sqrt3/2)                             value 8.038475772934e-01 expected 8.038475772934e-01 err 0.000e+00 (tol 1e-13)
+       minimum separation 63.434949 deg; cap half-angle 30 deg; coverage 0.803848; open fraction 0.196152
+
+== T7 engine seat geometry (APS14 polar dyad and six-ring) ==
+[PASS] T7    make_seats(10) returns 10 seats
+[PASS] T7    8 distinct directions (2 poles + 6 ring seats)
+[PASS] T7    pair angles: 60 deg x6, 90 deg x12, 120 deg x6, 180 deg x4, none other
+       counts: 60:6 90:12 120:6 180:4 other:0
+
+ALL CRITERIA MET: 0 failure(s)

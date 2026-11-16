@@ -1,0 +1,331 @@
+chapter,id,title,text,tasks,nature
+1,R1.1,the descriptor,What the minimal deformation descriptor $\xi_i$ is for the medium (a scalar is insufficient; the six-component form is the minimum that separates compression from shear) is not fixed by the sources.,,derivation gap
+1,R1.2,independent $V_{\rm disp}$,"A value of the exclusion volume from geometry and dynamics, not from the measured mass.",,
+1,R1.3,identification,"That the vacuum *is* the corner-sharing network (CONDENSA, interpretive identification).",,
+1,R1.4,coordination and winding,Coordination 4 and $W+1=4$ are recorded together; no derivation connects them.,P,derivation gap
+1,R1.5,void fraction and R1,"The diamond-limit node model has void fraction $0.66$; R1 states a gap-free medium. The sources do not reconcile the two, and Chapter 22 returns to the interstitial voids.",,
+1,R1.6,isotropy,"The dispersion relation of the random hinge network, needed to show isotropic propagation at the measured level.",,
+2,R2.1,the term,"*Dodecardinal* is defined only in a superseded Helix header (the 1+12 cuboctahedral set), and the engine applies the word to a different arrangement (the APS14 polar dyad and six-ring). This edition adopts the source definition and describes the engine's arrangement under its own name. Whether the physical medium's twelve contact directions are the cuboctahedral or the icosahedral set is the lattice fork of Chapter 1 and is open.",,
+2,R2.2,the centre crossing,"The continuation of a trajectory through $r<\mathrm{Om}$, and the physical content of the arrest premise, are open (Chapter 53).",B,
+2,R2.3,the pole,All conventions here are chart conventions. Whether a physical axis (a rotation axis) enters a statement is stated where it does; Chapter 58 treats the numerical conditioning at the poles and antipodes.,V,
+3,R3.1,the exponents,"The power of $1-z$ in the oscillator rate and in the closure is set to reproduce measured first-order coefficients (GOM22). A derivation from the contact mechanics is outstanding, and until it exists relations (3.4) are constrained by those measurements and do not predict them.",K,
+3,R3.2,supersession,"`Theory/00_Ruleset.md` lists T16 as $d\tau/dt=\sqrt{1-zR/r}$. The engine's active relation is $C=1-z$ (GOM22: the earlier form gave half the solar shift). The Ruleset text has not been updated, and the canon is edited only on the author's approval; the discrepancy is recorded here and in the supersession ledger.",SV,
+3,R3.3,dispersion,"The medium's $\omega(\kappa)$, and with it the separation of phase, group and front speeds, is open (Chapter 14).",,
+3,R3.4,circulation,Conservation of $\Gamma$ in (3.3) is not established.,P,derivation gap
+3,R3.5,the second-order fork,The engine carries $c_{\rm far}=c(1-z)^2$ and the shared form $c(1-2z)$ as the two candidates; they agree to first order and differ at second order and in where the speed vanishes (Chapter 40).,,
+3,R3.6,the identification $z=\mathrm{Om}/r$,"The engine's convergence-depth block and CONDENSA line 71 set the relay slowing equal to koppa over radius. The author ruled on 2026-11-03 that this is an error to be removed and that $z(r)$ must come out of the model. The canon is edited only on the author's approval, so the engine values (Table 3.3, Section 3.8) are reported as the engine's, not as derived; every later chapter that uses the engine's depth carries this label.",V,
+4,R4.1,the constant $\kappa$,"The value $\kappa = 1$ means the interception cross-section equals $\ell^2$. A cubic cell presents between $\ell^2$ (face-on) and $\sqrt3\,\ell^2$ (corner-on) and $\tfrac32\ell^2$ averaged over orientation. A value of $\kappa$ other than 1 rescales $P_{\rm conv}$ and every quantity downstream of it, including the transfer function $P_{\rm eff}/P_{\rm conv}$. A derivation of $\kappa$ from the geometry of the cell is outstanding. The exponent and the linear dependence on $N$ do not depend on it.",,
+4,R4.2,common or own domain,Section 4.6.,V,
+4,R4.3,fidelity,Bound (4.15) is a requirement on the medium. A derivation that relay in the contact medium is faithful to that precision is outstanding; Chapter 14 returns to it.,,
+4,R4.4,the lattice,The lattice type fixes the $O(1)$ offset in (4.9) and the $O(d)$ term of the shell population; the choice of lattice for the contact medium is open.,N,
+5,R5.1,Ruleset currency,"The Ruleset's table lacks T18 and states the superseded T16. Proposed correction, pending approval: add the T18 row (Law VI, vortex topology quantisation) and replace the T16 expression by $d\tau/dt=1-z$ with its domain, citing the repair.",PV,
+5,R5.2,the numbering of T7–T9,"The Ruleset and the Complete Laws paper assign different statements to 7, 8 and 9. A single numbering has not been chosen.",,
+5,R5.3,the boundary event,"Operator (2) needs an accounting basis (energy, momentum, or both with signs); the engine implements no routine for the partition $\varepsilon\to(\varepsilon_d,\varepsilon_t,\varepsilon_a)$ as such, and Chapter 15 sets up the ledger.",KV,
+5,R5.4,wake formation,"Operator (4) is carried by two laws, and the multipole assignment ($\ell=1$ electric, $\ell=2$ magnetic, $\ell\ge3$ structure) is stated without a derivation in the Ruleset.",K,
+5,R5.5,Law II,The release cascade has no numbered theorem; the statements it supports are corollaries.,C,
+6,R6.1,the stored $\ell_P$,A derivation of the number from the c-boundary per baryon and the proton wake without the Planck-length definition is open; until then every quantity built on $N$ and $P_{\rm conv}$ carries CALIBRATED(1) through $\ell_P$.,CV,
+6,R6.2,$R_{\rm CMB}$,A value of the Clearing distance derived from the Law I chain without the $H_0$ input is open (CONDENSA §7).,C,
+6,R6.3,legacy ballparks,Migration of the downstream tools off `T_rec` and `z_rec` is owed in the engine.,,derivation gap
+6,R6.4,borrowed unit,The moments in `mu_*` need a native ratio (Chapter 24).,,derivation gap
+6,R6.5,radiation constant digits,"`a_rad` is stored to five digits, $4.4\times10^{-6}$ below the value computed from $k_B$, $h$, $c$; the shift propagates to $\varepsilon$, $\Phi$ and $P_{\rm conv}$ equally. A proposal to store more digits is canon work and waits for approval.",CV,proposal
+6,R6.6,the one number of the seed,"The sources do not state whether $\theta=1.9237\times10^{-32}$ is an input, an output of the cosmology, or a relation to $N$.",C,
+7,R7.1,the quoted polynomial,"The comment at `laws.hpp:2404` gives the polynomial of $T(2,5)$ for the $(2,3)$ mode. Proposed correction, pending approval: replace it by $t^{-1}-1+t$.",,proposal
+7,R7.2,the mode lock,"Why $v_T^2:v_P^2=p:q$, equivalently $R/a=\sqrt{q/p}$, is not derived. The open problem asks for a lattice calculation that solves the coupled mode equations and finds the discrete set of self-consistent $(R/a,\alpha)$ (`Theory/03_Open_Problems.md`, problem 1).",N,derivation gap
+7,R7.3,the stability spectrum,"That only $W=1$ and $W=3$ are stable, and the lifetime of $W=2$, need a lattice reconnection calculation that supplies the resistance curve, the barrier and the dissipation law (open problem 2).",CP,
+7,R7.4,the identification,"That the electron is $(1,1)$, the proton $(2,3)$ and the neutrino an open winding is the content of Law VI and is posited here.",PS,
+7,R7.5,the outgoing ledger,The outgoing channels of a reconnection are not modelled.,PV,derivation gap
+8,R8.1,the state,"The relay-response part of (8.1) is not specified by the sources. The descriptor of a cell is open (Chapter 1, R1.1).",,derivation gap
+8,R8.2,existence and uniqueness,The engine's time-stepping routines come with no existence or uniqueness theorem. The relay-lock fraction is not Lipschitz at $r=0$ (Section 8.3).,,derivation gap
+8,R8.3,event rules,"Contact creation and change of winding class have no event rule that gives a unique continuation (Chapter 7, R7.3, R7.5).",BP,
+8,R8.4,the arrest exponents,"No exponent $p$, $m_F$, $a$ or $b$ has been assigned to a physical state; (8.4) is a criterion and not a result (Chapter 53).",B,
+8,R8.5,`step_locus` near the centre,"The loss of accuracy of Table 8.3, and the proposed half-angle form.",,proposal
+9,R9.1,momentum carried by content (P7),"That the content in transit carries momentum $(\text{energy})/c_{\rm relay}$, with the isotropic flux $q=U/4\pi$, is assumed here. It is not derived from the relay premises P1–P6, and the identification of $P_{\rm conv}$ with the density $U$ (rather than with a stress) is part of it. The investigation of 2026-10-27 records that the radiation pressure of the microwave background, $u_{\rm CMB}/3$, is not the same quantity as $P_{\rm conv}=Nu_{\rm CMB}$.",BC,derivation gap
+9,R9.2,the boundary response of matter (P8),"Propositions 9.1 and 9.3 show that the traction and the sphere force depend on how a surface returns the content. For the Law III coefficient $\pi/4$ to be universal across Coulomb, gravity and nuclear forces, the effective response must be the same, absorbing or specular, in all three. A derivation of the response of a persistent form from its structure is outstanding.",BNP,
+9,R9.3,common or own domain,Whether any anisotropy exists (Section 9.5) depends on residual R4.2.,V,
+9,R9.4,which factor Law IV needs,"The engine's resistance law uses $P_{\rm conv}/3$, the specular value (9.6) and the trace share of $\Pi$. The traction on an absorbing boundary of the engaged volume is $P_{\rm conv}/6$. Which of the two, or an intermediate $(1+\rho)/6$, belongs to the boundary of the engaged volume is not fixed by Law IV's premises; Chapter 12 returns to it. The Ruleset's T7 states $\tau=1/3$ as the normal projection of the isotropic tensor, which is (9.4) and (9.6) and not (9.5).",B,derivation gap
+9,R9.5,symbol use,$P_{\rm conv}$ names $\Phi/\ell^3$ in the engine and $\Phi/3\ell^3$ in Corollary 3.2 of the Complete Laws (Section 9.3).,,
+9,R9.6,operator-level account,"The responses of Sections 9.4 and 9.6 borrow the vocabulary of radiation pressure. A statement of the force in operator terms (the relay operator of a spation against the exclusion and circulation of a particle), with no absorption, is outstanding; the coefficients $U/6$, $U/3$, $\pi/4$ are properties of the geometry under the stated responses and survive only as far as such an account reproduces them.",ACKP,
+10,R10.1,the response model,"Proposition 10.1 holds for an absorbing or specular target (Chapter 9, R9.6). A diffusely scattering target changes the coefficient (Chapter 9, Proposition 9.3), and an operator-level account of the response is outstanding.",K,
+10,R10.2,many bodies,The exact pair result does not extend by addition. Overlapping shadows (Section 10.6) and shielding of one pair by a third body need the union measure; the quantitative treatment is Chapter 35.,,derivation gap
+10,R10.3,non-spherical forms,The proton's trefoil and any nucleus are not spheres; the orientation-dependent overlap of (10.4) has not been computed for them.,N,derivation gap
+10,R10.4,the seven-circle model,"The model covers $7/9$ of a body's outline and assigns weights that sum to 1; the relation between the geometry and the weights is a modelling choice, not a derivation.",,
+10,R10.5,contact,"The identity (10.5) is exact to contact for hard spheres. For the boundary radii of atomic and nuclear forms ($R_p$, $r_e$) the separations of interest are many orders of magnitude beyond contact, and what happens at contact for forms whose boundaries are equilibria (Chapter 18) is not settled.",AN,derivation gap
+11,R11.1,the electropause derivation,The route from the balance of EMC04 to (11.3) and the FLM07 premise are not reproduced here; the engine records the form as class C conditional on that premise.,,derivation gap
+11,R11.2,supersession,The Complete Laws paper (Section 4.2) states $Z^2$ scaling for He$^+$; the engine uses $Z$.,,
+11,R11.3,the sign,"The handed redirection that gives repulsion its sign has no derivation in this book, and the engine states a magnitude only.",,derivation gap
+11,R11.4,the gravity class,"The pressure that goes with the per-body-radii form for real boundaries, and the ratio of the gravitational and electric couplings, are not executed here; they enter through the c-boundary in Chapters 33–36.",,derivation gap
+11,R11.5,which radius,"The measured $R_p$ and the lock boundary differ by $0.02\%$, which is $0.04\%$ in the force at the Bohr radius; the scope of each use is stated where it occurs.",,
+11,R11.6,a stale comment,The engine's comment at the transfer function gives $2.125\times10^{-17}$; the executed value is $2.1242\times10^{-17}$.,,proposal
+12,R12.1,momentum of the content,"P7 is assumed (Chapter 9, R9.1); the derivation of (12.2) rests on it.",,
+12,R12.2,two dipoles,"The Complete Laws state the first-order dipole of the arrival twice, with coefficients that differ by a factor 2 (Eq. 3.1 and Corollary 7.1), and the Corollary's distribution does not return $\gamma$. A single statement of the distribution, with its derivation, is outstanding. If the Corollary's dipole were the correct one, every $V_{\rm disp}$ obtained from a measured mass would halve.",,derivation gap
+12,R12.3,an independent exclusion volume,"A $V_{\rm disp}$ from geometry and dynamics without the target mass (Chapter 1, R1.2).",,
+12,R12.4,equivalence,The identity of inertial and gravitational mass needs the shadow of a body to be set by its $V_{\rm disp}$; the two proton volumes of the engine differ by $10^{13}$ (Chapter 49).,,
+12,R12.5,which share,"The share 1/3 against 1/6 for the boundary of the engaged volume (Chapter 9, R9.4) changes every exclusion volume by a factor 2.",,
+12,R12.6,first order,The derivation is first order in $v/c$; the speed limit from the trailing hemisphere extrapolates it to $v=c$.,,
+13,R13.1,scope of orthogonality,The budget equality $v_{\rm circ}^2+v^2=c^2$ is axiom M3 (posited). Pointwise orthogonality of the circulation and translation velocities is not true of every tangent of a general closed path; the mode-averaged form (13.3) needs a derived weight.,P,derivation gap
+13,R13.2,the persistence action,"The derivation of $E$ and $\vec p$ in (13.20)–(13.25) uses constant action per local cycle, a premise additional to the budget.",,
+13,R13.3,transverse extent,Longitudinal contraction follows from round-trip closure; the transverse extent and the density response (13.7) are not derived.,B,derivation gap
+13,R13.4,depth composition,"The identification $z=\mathrm{Om}/r$ (Chapter 3, R3.6) and the rule for composing translation with depth (factorised or additive) are open.",,
+13,R13.5,two sources for $\gamma$,"In this book $\gamma$ is obtained from the budget (13.9); it does not rest on Corollary 7.1 of the Complete Laws, whose distribution does not return $\gamma$ (Chapter 12, R12.2).",,derivation gap
+13,R13.6,the radiative branch,The joint limit (13.51) is a controlled mathematical limit; the conversion dynamics that realise it are not given.,,derivation gap
+13,R13.7,an engine surface,"The optional-locus return of the spherical response cannot distinguish a zero vector, a rejected state and an unavailable result (Section 13.17, item 7).",,
+14,R14.1,the response operator,$K_{ab}$ of the real medium is not known; the chain is a TOY.,K,derivation gap
+14,R14.2,polarisation,"The shear response that would give transverse modes, and their speeds, are not specified.",,derivation gap
+14,R14.3,the reversal fraction,"The physical origin of $s$ in the contact medium, and its value at observed wavenumbers, are open. The chain bounds it from above by the existence of waves at all (Section 14.5).",,
+14,R14.4,energy velocity,The ratio of transported energy flux to stored energy density has not been computed for the chain.,KV,
+14,R14.5,the epoch branch,The lookback and loading branches of the acoustic relation belong to the Spaz chapters.,CZ,
+14,R14.6,the acoustic input,$R_{\rm load}$ enters from outside; the relation is the engine's.,C,
+15,R15.1,the scatterer of the chain,The agent that takes the recoil (15.2) is not specified in the TOY chain.,,derivation gap
+15,R15.2,the medium term for real bodies,"Whether bodies exchange momentum with the relay medium, and how much, is not computed. The engine has no such term, so its closure (15.4) is a statement about the kernel. A computation of the medium's transport that is independent of the requirement of balance is owed.",,derivation gap
+15,R15.3,the pair term of the energy,The engine does not say whether the pair term in (15.4) corresponds to content stored anywhere. Its relation to the energy of Chapter 13 is not derived here.,V,derivation gap
+15,R15.4,one length for source and weight,The equality of the source strength and the weight of $\vec P$ in the engine is the weak-equivalence premise of Chapter 12; it is not derived in this chapter.,,derivation gap
+15,R15.5,contact,The engine refuses a step at contact; the interaction through contact is not given here (Chapters 21 and 22).,,derivation gap
+15,R15.6,circular-orbit test,The registered energy-order test was placed on a symmetric orbit and failed for a reason of symmetry (Section 15.5); the corrected test is on an eccentric orbit. The corrected criterion was fixed before it was coded and is recorded in the pre-registration.,,
+16,R16.1,the limit is of a TOY,The telegraph system is the scaling limit of a chain whose response operator is not that of the real medium (R14.1). The continuity and balance equations of the real medium are owed to a response law.,K,derivation gap
+16,R16.2,uniformity,The limits hold at first order and for $k\varepsilon\ll1$; behaviour near the hop scale is that of the chain.,,
+16,R16.3,relaxation count,The engine's transport kernel gives parabolic coefficients without a relaxation count; the crossover to the hyperbolic regime for the real medium is not given.,,derivation gap
+16,R16.4,the thermal input,$T$ enters through $k_BT$ with $k_B$ a unit bridge; what $T$ measures in the relay medium is not derived here.,C,derivation gap
+16,R16.5,boundary and load from outside,"The mechanical boundary $b$ and the load $m$ enter as inputs. No comparison with measured transport coefficients is made in this chapter; the engine's own comparison is its benchmark B16, and a registered comparison with measured coefficients is owed to the chapters that compare with measurement.",,derivation gap;data gap
+16,R16.6,domain,"The kernel is valid for the dilute monatomic hard-lock domain only, as the engine's header states.",AV,
+16,R16.7,the moments,"The coefficients $\tfrac38,\tfrac5{16},\tfrac{75}{64}$ and the fraction $\tfrac67$ are taken from the engine; a derivation within the book is not given.",,derivation gap
+17,R17.1,the construction operator,"The operator $T[X]$ of the electron construction, its linearisation, $M_{\rm eff}$ and $K_{\rm eff}$ are not supplied by the engine. The stability of the persistent circulation is not established.",KP,derivation gap
+17,R17.2,the effective coordinate,"Which coordinate $q$ carries the small oscillation, and how Law IV's engaged displacement fixes $M_{\rm eff}$ for it, is not computed.",,derivation gap
+17,R17.3,the rung,That $\alpha$ is hydrogen's koppa rung is a premise (derivelist); the identities of Section 17.2 are shared-input and do not test it.,AN,
+17,R17.4,external response,"Polarisation, scattering and transition observables are not computed.",,derivation gap
+17,R17.5,the spectral radius,An operationally inferred spectral radius is not entered: it requires a spectral observable and its inference chain.,A,derivation gap
+17,R17.6,beyond the point kernel,"The route closure at $p=2$ holds for the point-source kernel; finite size, the movement budget (Chapter 13) and the response of the construction can shift it.",,
+18,R18.1,the price law,"That the lock selects the lowest $q\rho^3$ is the engine's FLM07 premise; the geometry of the voids is verified, the pricing is not derived here.",,derivation gap
+18,R18.2,pre-selection,That $q$ was fixed before the comparison with a radius is documented in the engine header and is not independently observable.,,derivation gap
+18,R18.3,the uncertainty,"The stored $R_p$ has no uncertainty, so the engine's falsification clause cannot be evaluated; the operational definitions of the lock radius and the measured radius differ (Section 18.4).",V,
+18,R18.4,response,"Stability, scattering and excitation of the proton are not computed.",V,derivation gap
+18,R18.5,the wake length,The closure (18.5) is an inverse evaluation; the independent determination of $\ell_P$ is owed.,,derivation gap
+18,R18.6,the anisotropy,The rank-four anisotropy (18.2) is a prediction with no measurement.,,data gap
+19,R19.1,barrier and rate,"The barrier, the populations and the transition operator for a conversion are not supplied; no lifetime is computed.",KP,derivation gap
+19,R19.2,spectrum and coupling,The spectrum and coupling rule of the open-winding channel are not supplied; the electron energy distribution within the allowed range is not fixed.,CP,derivation gap
+19,R19.3,the channel's absolute scale,The stored mass values are conventions; their effect on the endpoint is below $10^{-7}Q$.,V,
+19,R19.4,the medium term,"$\Delta p_{\rm medium}=0$ is a decision of the ledger (an isolated complete region); whether the real medium exchanges momentum in a conversion (Chapter 15, R15.2) is not computed.",V,derivation gap
+19,R19.5,the capacity function,"`contact_capacity` exceeds the exact maximum for $\max(Z,N)<3$; proposed correction $\min(3Z,3N,ZN)$, not applied.",,proposal
+19,R19.6,the fate of lost contacts,"Where the energy and momentum of the lost contacts go, and the barrier to re-forming them, are not computed.",,derivation gap
+19,R19.7,embedded final states,The final states available to an embedded conversion depend on its seat; only the contact bookkeeping is executed.,,
+20,R20.1,coordinate versus module,That the module counts correspond to modules that can be built under the contact rule is not shown by the arithmetic; it is the subject of Chapters 21–24.,V,derivation gap
+20,R20.2,stability and table membership,The embedded table lists natural nuclides including radioactive primordial species; membership is not a stability classification.,V,derivation gap
+20,R20.3,fission,The identities (20.4) fix the change in module counts for a given $\nu$; they give no split probability and no mechanism.,KV,
+20,R20.4,the choice of base,The alpha base for $Z\ge2$ and the helion base for helium-3 are conventions of the construction; hydrogen-1 and hydrogen-2 are outside both.,AN,
+20,R20.5,the range,The table ends at $Z=92$; the grammar is stated beyond it but not embedded.,N,
+21,R21.1,the rule's origin,"The cap of three, and the exclusion of like contacts, are stated rules. The four-neighbour star shows the cap does not follow from equal-sphere packing.",S,derivation gap
+21,R21.2,realised contacts,How many of the slack contacts a given nucleus fills is not fixed by capacity.,N,derivation gap
+21,R21.3,orientation,"The checker tests distances only; orientation compatibility, loop-length constraints and circulation are not tested.",CPV,derivation gap
+21,R21.4,the engine's capacity function,"`contact_capacity` equals (21.1) except for $(1,1),(1,2),(2,1),(2,2)$ (R19.5; proposal, not applied).",,proposal
+21,R21.5,rigidity,Solid spheres are assumed; deformable boundaries (Chapter 22) change the geometry checks.,V,
+22,R22.1,the onset,The pricing rule that selects $n=3$ is open; a derivation that does not use the closure list is owed.,,derivation gap
+22,R22.2,polyhedral shells beyond $n=5$,The link counts for $n\ge6$ exceed the polyhedral edge bound; the contact topology of $D_{42}$ and later is unresolved.,NPV,
+22,R22.3,closing contraction,The closing tightening of a triton shell is not reproduced; the missing degrees of freedom are not identified.,BN,derivation gap
+22,R22.4,shared counting,The sequence of closures cannot discriminate from the prevailing account at the counting level.,,
+22,R22.5,the forward value,$N=184$ is a formula extension; no observation is recorded.,,
+23,R23.1,the functional,"No energy functional of the contact law is available; restoring modes, barriers and binding residuals are not computed.",N,derivation gap
+23,R23.2,beyond the contact count,"What fixes the energy per contact (orientation, compression, circulation) is open; the gear-frequency form needs a computed $\Delta\omega$ for the four configurations.",P,
+23,R23.3,repricing,Reorganisation can reprice surviving contacts (the thermal analysis TD05 of the sources gives a warning of this kind); it was not re-run here.,C,derivation gap
+23,R23.4,the typed alpha value,The stored $B_\alpha$ is rounded to five digits ($1.4\times10^{-5}$ relative above the nuclear-mass value).,NV,
+23,R23.5,radius definitions,"The bulk-law radius, the contact diameter and the measured radius are different operational quantities; they are not identified.",,derivation gap
+23,R23.6,engine-recorded results,The NP05 exclusion and the 908-radius comparison are cited from the engine's records and not re-run.,,
+24,R24.1,labels and rule,"No spin, parity or moment label is stored for the 287 records; a prediction needs sourced labels, a frozen configuration and a rule declared beforehand.",V,
+24,R24.2,weights,"The weights of a response moment (which units source the moment, with what strength) are not given by the geometry; the unit weights used here are a CONSTRUCTION.",,derivation gap
+24,R24.3,units,The stored moments are in nuclear magnetons; a native ratio is not available.,NV,derivation gap
+24,R24.4,population,The orientation distribution of a populated total-impulse state is not given.,,derivation gap
+24,R24.5,circulation phase,"Parity needs the phase of the circulation under inversion, which a point set does not carry.",P,derivation gap
+25,R25.1,the rotation-field function,No $Z$ argument; for $Z>1$ it is the ladder speed over $\sqrt Z$. Proposal: $c\alpha\sqrt{Za_0/r}$. Not applied.,N,
+25,R25.2,the line list,The engine's ppm figures are not reproduced; the size of the omitted term at large $Z$ is not reconciled with them.,,derivation gap
+25,R25.3,isotope shifts,The predicted shifts are not compared with measured shifts.,N,derivation gap
+25,R25.4,a native depth,"An independent spectroscopic depth and circulation speed, which would make $zk^2=1$ a test, are not available.",P,derivation gap
+25,R25.5,the stability of the ladder,"Persistence of each rung needs a restoring response (Chapter 17, R17.1); the identities above do not supply it.",,
+26,R26.1,the recurrence seat,The seat $J_1$ is taken from the stored set; deriving it from contact mechanics is owed.,KV,derivation gap
+26,R26.2,stability and selection,Stability of each rung and the exclusion of competing modes are not derived for the electron construction (R17.1); no selection rule or transition operator is supplied.,KP,derivation gap
+26,R26.3,the leading-order domain,Corrections of order $(Z\alpha/n)^2$ are omitted (Chapter 27).,NV,
+26,R26.4,the epoch,The varying-pressure conversion is not executed here.,,derivation gap
+27,R27.1,the $l$-dependence,The operator that converts the scale (27.1) into a state-dependent splitting is not supplied.,K,derivation gap
+27,R27.2,hyperfine coefficient,The coupling $A$ needs the overlap and transfer calculation and a frozen nuclear geometry.,AN,
+27,R27.3,finite-size coefficient,The near-core exposure of each mode is not computed.,,derivation gap
+27,R27.4,ordering,The ordering of hyperfine and finite-size contributions is not determined by power counting (ratio 115).,A,derivation gap
+27,R27.5,measured splittings,No measured line or splitting is loaded; all line residuals are owed.,,derivation gap;data gap
+28,R28.1,selection and coupling,"The overlap and coupling strength of the real circulation, the density of outgoing modes and so the rate of a transition are not derived; the harmonic content above is a classical route property.",P,derivation gap
+28,R28.2,the response kernel,"The causal kernel of the real atom (poles, damping) is not supplied; $\Gamma$ is a parameter here.",,derivation gap
+28,R28.3,the medium term,Reorganisation of the medium in an emission is set to zero in the ledger.,AV,
+28,R28.4,measured widths,"No measured width, lifetime or angular distribution is loaded; the determining test needs line centres, widths, angular emission and excitation dependence from one mode coupling, with instrument broadening specified separately.",APV,data gap
+29,R29.1,range,At most ten electrons; no periodic structure beyond neon.,P,
+29,R29.2,seat order and form,"The seat order, the form (29.1) and the claim that the pair prices are exact geometry are the engine's; they are not derived in this chapter.",,derivation gap
+29,R29.3,multiple minima,The energy has two or more distinct minima for $Z\ge3$; global minimality is established by multi-start search only.,S,
+29,R29.4,sign pattern,The signs of the residuals in Table 29.1 are not explained.,,derivation gap
+29,R29.5,protocol,Relaxed and vertical ionisation differ by up to $4.5$ eV in the executed range; the comparison protocol has to be fixed per observable.,,
+29,R29.6,observables beyond ionisation,"Radii, occupancy and excitation are not compared.",V,derivation gap
+30,R30.1,the map,No map $F$ from nuclear to atomic quantities with derived factors exists; none is proposed here.,AN,
+30,R30.2,isotope structure,Nuclear-structure dependent isotope shifts and moment changes are not predicted; seated configurations and sourced labels for a chain are owed.,NV,derivation gap
+30,R30.3,higher rank,Possible correspondences at rank 4 and above are not tested.,V,derivation gap
+30,R30.4,time scales,Nuclear and electronic degrees of freedom have different time scales; the correspondence of frequencies $s_\nu$ is not addressed.,NP,derivation gap
+30,R30.5,directions only,"The atomic sets were compared by directions with equal weights; the radii of the shells (Chapter 29) and the weights of a response moment (Chapter 24, R24.2) are not included.",AN,derivation gap
+31,R31.1,the bond mechanism,The bond-well functional is not supplied; the CH07 history (inverse well; rolling wall) leaves curvature and depth unclosed.,K,derivation gap
+31,R31.2,a native stiffness,Stiffness and depth must come from one contact law; the engine provides neither for molecules.,,
+31,R31.3,reaction rates,"Mode populations, coupling and transport of released excitation are not computed.",CV,derivation gap
+31,R31.4,measured constants,"No measured equilibrium distance, frequency, isotope shift or dissociation energy is loaded; the determining comparison is owed.",CN,derivation gap;data gap
+32,R32.1,a constitutive law,"No stiffness tensor, equation of state or thermal law follows from the engine's contact law; the material rows are owed.",CK,derivation gap
+32,R32.2,one order variable,The same order variable and energy ledger across a transition have not been specified.,V,
+32,R32.3,dense transport,Closures for dense phases and internal modes are not derived.,,derivation gap
+32,R32.4,rates,"Nucleation, yielding and fracture rates need barriers and mode populations, not computed here.",,derivation gap
+32,R32.5,measured materials,"No measured modulus, latent heat or diffusivity is loaded.",,data gap
+33,R33.1,what the similarity is,"The relations are identities at one point; the empirical content is the constancy of $\mathrm{Om}$ and the agreement of independent determinations, established here to $1.4\times10^{-3}$ (planets) and $1\%$ (Earth).",,
+33,R33.2,joint response law,"Whether a widening $\mathrm{Om}$ slows $v$ depends on the response of $c$, not supplied.",,derivation gap
+33,R33.3,perturbations,"The source lengths of the planets and the Moon, and the processing of the mean elements, are not separated from the spread.",,derivation gap
+33,R33.4,hydrogen,The ladder is shared-input; an independent spectroscopic depth is not available.,A,derivation gap
+33,R33.5,the axis,The transition to vanishing transverse extent is not computed.,,derivation gap
+34,R34.1,the departure,Which departure from the inverse-square source condition the real medium has is not determined here; $\kappa/r^3$ is a stand-in.,,derivation gap
+34,R34.2,extended and moving sources,"The conserved ledger is stated for a point source of fixed strength; extended, moving and history-dependent sources are treated in Chapter 35.",V,
+34,R34.3,measured orbits,No measured trajectory is compared; the apsidal signature is a map for later comparison (Chapter 36).,,data gap
+35,R35.1,the model,"The seven-circle weights are a boundary model, not a derived cubature; why the uncovered area goes to the outer six is a choice of the model.",,
+35,R35.2,near contact,The disc quadrature loses accuracy inside about $0.5R$; the force near contact needs another representation.,V,
+35,R35.3,edge sensitivity,A model error of order $0.02$ in the occluded fraction at an edge is not a limit on the force error for a moving blocker; the full pairwise force near an occultation is not computed.,,derivation gap
+35,R35.4,the implementations,The spherical contract's solver was not executed here; the dependence of results on the channel phase origin under shielding is open.,,derivation gap
+35,R35.5,history and interpolation,The interpolation of the source history and its error were not tested; only the contraction of the iteration was.,BV,derivation gap
+36,R36.1,what the test establishes,The kernel and the integrator reproduce DE441 positions to a few arcseconds in twenty years when given ephemeris inputs; the inputs were not predicted.,,derivation gap
+36,R36.2,the residuals,"The residuals are not attributed: relativistic terms, asteroids, Pluto, the Sun's quadrupole, the Moon's orbit and the satellites of the giants are all omitted; Venus's steady growth and Mercury's oscillation are not decomposed.",S,derivation gap
+36,R36.3,the registered ordering,The ordering by relativistic term size was rejected at 7300 days; the registration named no epoch.,,
+36,R36.4,a native ledger,"A baryon-ledger source strength for each body, with its approximations, has not been compared.",CV,
+36,R36.5,longer baselines and native response,"Intervals beyond twenty years, the retardation and occlusion of Chapter 35, and the movement-budget response (Chapter 13) are not exercised.",,derivation gap
+37,R37.1,the transfer law,No law turns $P_{\rm conv}$ into a luminosity.,S,
+37,R37.2,the closure,"The equation of state, composition, transport and reaction rates are not supplied; the polytrope is a stand-in and its central values depend on $n$.",S,derivation gap
+37,R37.3,the anchor,$L_\odot$ and the Sun's source length are inputs; no luminosity is predicted.,S,
+37,R37.4,G in the source ledger,"$\varpi_b$, $G_{\rm eff}$ and $N_b$ inherit $G$ through the stored $\ell_P$.",V,
+37,R37.5,stability,The feedback sign of a perturbation of the core and its transport is not computed.,,derivation gap
+37,R37.6,neutrino flux,The accounting rate is not compared with a measured flux.,S,derivation gap
+38,R38.1,the response,"What supplies the source length required at large radius (geometry, directional convergence or relay response) is not determined; the flat curve only constrains it.",V,derivation gap
+38,R38.2,baryon geometry,"The bulge, gas and arms are not separated; $M_{\rm bar}$ is the engine's stored value and was not re-derived.",CV,derivation gap
+38,R38.3,fitted inputs,The enhancement exponents and transition scales of the engine's twin regimes are fitted; they are not a native response.,,derivation gap
+38,R38.4,consistency,"Vertical structure, lensing and propagation under the same law were not tested.",V,derivation gap
+38,R38.5,the proposed mechanism,A pressure-dependent handoff mechanism is unregistered; no prediction is made.,K,
+38,R38.6,the table,The sources of the rotation points (several surveys and cluster orbits) were not re-examined.,,derivation gap
+39,R39.1,the branch,The active and alternative strong-depth continuations are not discriminated; the difference at the solar limb is $2.9\times10^{-6}$ arcsec and $33$ ps.,BS,derivation gap
+39,R39.2,measured delay and bending,"No measured delay or deflection (radar ranging, spacecraft tracking, very-long-baseline measurements) is loaded; the engine's header cites such comparisons and they were not re-run.",,derivation gap;data gap
+39,R39.3,non-point sources and plasma,The solar corona's plasma delay and the Sun's finite extent and quadrupole are not included.,S,derivation gap
+39,R39.4,frames,The delay is a far-frame quantity; the local duration measured at the receiver needs the tick-rate ratio $1-z$.,Z,
+39,R39.5,the header comment,The $247.24\ \mu$s of the engine's header differs from the executed $247.314\ \mu$s by $0.03\%$; its origin was not traced.,,derivation gap
+40,R40.1,the interior law,No interior contact law is supplied; the $r^3$ scaling of the enclosed source in Section 40.1 is an assumption.,,
+40,R40.2,stress,Finite stress at the boundary is not shown; only the coordinate-time barrier under the stated propagation law is.,B,derivation gap
+40,R40.3,angular exchange,The partner and mechanism of the angular-impulse transfer are not specified.,K,derivation gap
+40,R40.4,premises,"The radial path, the null-speed propagation and the tick-rate ratio $1-z$ are premises; other trajectories or event laws can give other cycle counts.",VZ,
+40,R40.5,the branch,The result is stated for the active profile; the alternative branch is not treated.,,derivation gap
+40,R40.6,observables,"No observable of a compact object (a shadow, a ringdown, an accretion luminosity) is computed or compared.",BS,
+41,R41.1,the physical coordinate,No calibrated Sz reference with an operational spacing is specified here.,Z,
+41,R41.2,extra coordinates,"Polarisation, anisotropy, phase fractions and memory are not included in a single $S$.",,derivation gap
+41,R41.3,charts,Which overlapping charts an atlas should use across zeros and topology jumps is not specified.,P,derivation gap
+41,R41.4,measured ratios,No measured ratio family is loaded; the compatibility relations are checked on generic functions only.,V,data gap
+42,R42.1,the nonlinear layer,The 28 nonlinear operators and their Jacobian rank changes are not examined.,K,derivation gap
+42,R42.2,provenance of the relations,"Each of the 63 relations rests on a source in the atlas; the matrix was verified as arithmetic, not audited for physical content.",,
+42,R42.3,meaning of the nullity,"The null space mixes unlinked quantities, unit directions and physical freedom; it is not a count of dimensions.",,derivation gap
+42,R42.4,the dimensional matrix,The rescaling directions were not separated.,,derivation gap
+42,R42.5,the integer coincidence,The value 44 of the nullity and the 44 octaves of Chapter 44 are not related by anything here.,,derivation gap
+43,R43.1,the operator,No constitutive operator $F_S$ or correlated map is supplied by the engine or derived here.,K,
+43,R43.2,the functional,"The functional $F(J,X)$ for the physical contact system is not derived; the quadratic form is a stand-in.",K,derivation gap
+43,R43.3,sector coupling,"Which sectors are coupled at an interface, and which couplings vanish, are not computed.",Z,derivation gap
+43,R43.4,measured identifiability,No measured response is loaded; identifiability was assessed for a stand-in model only.,,data gap
+44,R44.1,the reference form,"The Planck spectral form is the calibrated reference relation here. $T(S)$, the mode set, the occupation statistics and the thermometer response have not been derived from the contact mechanism.",AK,
+44,R44.2,thermalization,No redistribution kernel is supplied; the ancestry hypothesis is untested on shape.,CV,
+44,R44.3,the octave origin,The integer 44 and the $4.7$ per cent offset of the Earth-scale diameter are calibration; no derivation of the origin exists here.,,derivation gap
+44,R44.4,the radiation constant branch,$a$ held fixed is a reference branch; its dependence on the medium state is not computed.,C,derivation gap
+44,R44.5,thermometer transfer,"Coupling, relaxation and the material-equilibrium temperature were not examined.",,derivation gap
+44,R44.6,"stored constants (proposal to the author, canon untouched)",`cosmology::wien_peak` carries $2.898\times10^{-3}$ and `a_rad` is rounded to five digits; the computed values above are available if the author chooses to replace them.,CV,proposal
+45,R45.1,the depth to pressure map,No constitutive relation between $\mathrm{Om}/r$ and a pressure or stress is derived.,BK,
+45,R45.2,the transport convention,"Whether the shift is (A), (B) or another function of $(z_e,z_o)$ is not derived; the composition test favours (B) for consistency with the multiplicative CR07 premise and does not decide the mechanism.",K,derivation gap
+45,R45.3,the route,No route term is computed; the CR07 branch sets it to zero for an unobstructed static path and absorption/re-emission paths were not examined.,A,derivation gap
+45,R45.4,observer reference,"The reference transition in the observer's local state, and the detector response, are specified but not computed.",A,derivation gap
+45,R45.5,"engine comment (proposal to the author, canon untouched)",The comment on `z_spectral` states the gravitational redshift as $z_e-z_o$; the second-order difference from (45.1) is not recorded there.,AC,derivation gap;proposal
+46,R46.1,the relative response,"No nonzero relative sector response is measured or derived; the rates $a_\alpha,a_{m_p},a_{m_e},a_{C_g}$ were set for the toy only.",NZ,
+46,R46.2,uncertainty,The covariance of the CODATA inputs and the radius-definition uncertainty were not propagated.,V,derivation gap
+46,R46.3,the progression,"$dS/d\tau$ is not supplied, so no time of crossing is computed.",Z,derivation gap
+46,R46.4,contact,What a crossing does physically (contact of the two boundaries) is not computed.,,derivation gap
+46,R46.5,the proton's own boundary,The poloidal rotation radius of the proton is owed; $\mathcal R$ compares hydrogen's boundary with the proton's lock and measured radii.,AP,derivation gap
+47,R47.1,the landmarks,The loading landmarks and the 1090.8 ratio are stored values; their calibration chain was not re-executed.,V,derivation gap
+47,R47.2,the branch exponent,Linear ($c\propto T^{-1}$) and squared ($c\propto T^{-2}$) forms are both on record; the mechanism that fixes it is not derived here.,K,derivation gap
+47,R47.3,distance,No $d(z)$ relation is supplied; $R_{\rm CMB}$ remains a stored boundary.,CV,
+47,R47.4,gamma ancestry,The optical-depth and reprocessing ledger is not computed.,CV,derivation gap
+47,R47.5,a loading unit,The loading coordinate was used only as a proportionality; its definition and the acoustic quantities of the release were not computed.,C,derivation gap
+48,R48.1,the evolution law,No $F_S$ is derived from contact relaxation; durations were computed for stand-in laws only.,KZ,
+48,R48.2,events,"The physical account of a zero of $C$ or $F_S$ (turning point, arrest, branch change) is not supplied.",B,derivation gap
+48,R48.3,two sound speeds,$c/\sqrt3$ and $c/\sqrt{3(1+3/4)}$ both appear for the coupled epoch; the choice per question is not derived.,,derivation gap
+48,R48.4,the integrated horizon,No time-dependent acoustic speed and no integrated horizon were computed; only the present-equivalent standing scale.,BC,
+48,R48.5,inputs of the standing scale,"The scale depends on $\eta_{\rm BBN}$, on the stored $\ell_P$ and on the measured $R_p$; their covariance was not propagated.",V,derivation gap
+49,R49.1,the coupling,No coupling $g_i$ is calculated for any composition: whether orbital response tracks the total engaged volume (Construction I) or the constituent sum (II) is not derived.,,derivation gap
+49,R49.2,independent materials,The engaged-volume and directional-coupling response for several independently constructed materials is not computed (`materials.hpp` was not used).,,derivation gap
+49,R49.3,source strength,The baryon-count convention of `koppa_from_baryons` against total engaged volume (a $0.69$ per cent difference for the alpha) is not tested against any measured composite source strength.,CNV,derivation gap
+49,R49.4,shielding and state,"Binding, shielding and phase changes were treated through the binding fraction only.",N,
+49,R49.5,the tensor,The tensor $g$ and its axis dynamics for a rotating body are stand-ins.,,
+49,R49.6,"stored alpha binding (proposal to the author, canon untouched)",`B_alpha` is rounded to five digits; the computed value from measured masses is available.,NV,proposal
+50,R50.1,the propagation operator,The amplitudes are those of a stand-in scalar propagation; the constitutional propagation operator and the phase in a varying medium were not used.,K,derivation gap
+50,R50.2,the aperture problem,"The patterns use exact path lengths and a uniform illumination of each slit, not a boundary-value solution of the contact medium with the apertures as boundaries.",,
+50,R50.3,the registration rule,"No detector response was derived from contact mechanics; the threshold rule is a stand-in, and the observed counting statistics and event statistics were not loaded.",AK,derivation gap;data gap
+50,R50.4,energy and event rule,"Detection energy, stored excitation, outgoing channels and the energy export of a registration were not modelled.",V,derivation gap
+50,R50.5,joint variation,"A single model predicting fringe phase, visibility, detection energy and event statistics while aperture geometry and detector state are varied independently is not supplied.",A,derivation gap
+51,R51.1,the joint distribution,"No $p(a,b|x,y)$ is computed from the contact model; the chapter fixes what such a model must supply and what each assumption set allows.",K,
+51,R51.2,the assumptions,"Which of setting independence, locality of the relay, and the completeness of the shared state apply in the contact framework is not decided.",,derivation gap
+51,R51.3,timing in the model,The relay speed role and the event propagation of the contact model were not computed for any apparatus.,K,derivation gap
+51,R51.4,measurement dynamics,Irreversible registration and energy export were not modelled (Chapter 50 supplies a stand-in rule only).,,derivation gap
+51,R51.5,data,"No experimental record (timings, coincidence windows, setting histories) was loaded.",,data gap
+52,R52.1,the amplitude,$a$ is not derived from a contact-response calculation; the counting fixes only the coefficient per unit $a$.,K,derivation gap
+52,R52.2,the cutoff,The transparency cutoff is not derived from the material construction; a derived cutoff would have to predict the sign change and the exponent near $d\sim\lambda$.,,derivation gap
+52,R52.3,real plates,"Finite conductivity, roughness, geometry other than parallel plates and temperature corrections were not computed.",,derivation gap
+52,R52.4,redistribution,No kernel converts a mixed radiation history into a thermal spectrum.,C,derivation gap
+52,R52.5,entropy,Entropy accounting for retained resolution and exported correlations was not computed.,,derivation gap
+52,R52.6,a second observable,"The next step (derive $a$ from a contact calculation, then predict a second observable with $a$ unchanged) is not taken.",,derivation gap
+53,R53.1,the constitutive law,"The mobility, drive, energy and traction exponents are stand-ins; no contact constitutive law supplies them.",BK,
+53,R53.2,the interior,"Contact stress, interior continuation and terminal arrest state in the depth branch are not computed.",B,derivation gap
+53,R53.3,the coupled medium,"The checks were applied to a tracked quantity, not to the coupled medium with its signal response.",V,
+53,R53.4,axial rule,The torque and phase-transfer rule for a degenerating circle is not supplied.,,derivation gap
+53,R53.5,a theorem,"No regularity theorem is proved; the four conditions are necessary checks, not sufficient ones.",BV,
+54,R54.1,a distance relation,No $d(z)$ is derived; the engine records NO-DERIVED-$d(z)$.,C,
+54,R54.2,sizes,The convention for angular sizes (the value of $\eta$) is not decided.,,derivation gap
+54,R54.3,sources,"Source evolution, selection effects and material interception were not modelled.",,derivation gap
+54,R54.4,the background,"The spectrum, the angular structure and the retained source-memory depth were not predicted jointly.",C,derivation gap
+54,R54.5,"stored scales (proposal to the author, canon untouched)","The comment relating $R_{\rm CMB}$ to $\ln(1+z)/\sigma_0$ is off by $0.76$–$0.90$ per cent, and the stored `age_SDT_Gyr` (48) and $R_{\rm CMB}/c$ (100.7 Gyr) differ by $2.1$; the two could be reconciled or labelled in `cosmology.hpp`.",CV,proposal
+54,R54.6,a withheld dataset,No pressure-history model was frozen and no withheld dataset defined.,,
+55,R55.1,the shared input,The source strength read from ephemeris fits enters $k_\odot$; the correspondence for periods and speeds cannot discriminate and is not offered as an independent prediction.,,derivation gap
+55,R55.2,the table's candidates,No measurement at the stated scale was loaded for any candidate row.,,data gap
+55,R55.3,the premises,Whether contact mechanics supplies the movement-budget premises beyond their adoption is not derived here.,K,derivation gap
+55,R55.4,stored $k_\odot$,$k_\odot$ carries four digits; the resulting $2.8\times10^{-4}$ difference in $\mathrm{Om}$ is not a result.,V,derivation gap
+55,R55.5,matched fidelity,The comparison expressions are first-order; a matched-fidelity comparison (same order) for the second-order rows is not made.,,derivation gap
+56,R56.1,the comparison,"No measured transport, Knudsen or modulation record was loaded; the determining test of Section 56.4 is not executed.",,derivation gap;data gap
+56,R56.2,the boundary,The mechanical atomic boundary $b$ is a supplied input; the engine's transport relations do not derive it.,A,
+56,R56.3,the domain,"The kernel is hard-lock, dilute and monatomic; molecular gases, dense states and other domains are outside it.",AV,
+56,R56.4,the outflow model,"Constant speed, constant extinction cross-section and no destruction were assumed; the photosphere location relative to the nucleus and to the survival domain was not checked.",NV,derivation gap
+56,R56.5,heat,A single relaxing reservoir and a semi-infinite slab; the boundary flux and the material functions of real surfaces were not computed.,,derivation gap
+57,R57.1,untracked headers,Two consumed headers are untracked; the revision does not identify them. A commit or a snapshot archive of the 14 files is for the author to decide (nothing was committed).,,derivation gap
+57,R57.2,symbol inventory,No full symbol-and-domain inventory was generated; counts were text counts.,V,
+57,R57.3,citation meaning,Resolution shows existence and non-blankness; agreement of each cited line with the statement citing it was not checked line by line.,V,derivation gap
+57,R57.4,unguarded domains,"`clock_rate`, `depth_from_c_far` and the others in Section 57.2 do not check their domains (proposal to the author, canon untouched).",V,proposal
+57,R57.5,manifests,`Textbook/sources/SOURCE_MANIFEST.md` and `Textbook/equations/EQUATION_REGISTER.md` cover Chapter 9 only; the backfill for the other chapters is owed.,V,derivation gap
+58,R58.1,chart switching,No chart switching is implemented or tested; the regular chart of 58.3 is a specification.,V,
+58,R58.2,other operations,"`offset_direction`, `relative_locus`, `bearing` and the vector operations were not exercised here.",,derivation gap
+58,R58.3,the differential basis,The coordinate differential basis at the poles was not examined.,,derivation gap
+58,R58.4,dimension,Only the three-dimensional spherical frame was treated.,,
+58,R58.5,the header,`sphere_frame.hpp` is untracked (R57.1); the results refer to the snapshot hashed in Chapter 57.,V,
+59,R59.1,the solver,"The GOM43 solver was not run; refusal cases, checkpoint replay and version routing were exercised on a reference validator and toy models.",V,derivation gap
+59,R59.2,cross-platform determinism,Only the same-build replay was tested.,V,
+59,R59.3,bounded history retention,No history-retention limit was derived or tested.,V,
+59,R59.4,the registered numbers,The gate results quoted from the registration were not reproduced here.,,derivation gap
+59,R59.5,unbuilt surfaces,"The WebAssembly build, CLI routing, OpenMP use and the self-test entry for 4.0.0 do not exist.",,
+60,R60.1,the engine's table,No convergence table was computed for the engine's trajectories; each numerical control of the solver was not varied independently.,V,derivation gap
+60,R60.2,the edge floor,"The residual $2.3\times10^{-4}$ with both controls refined was not traced to its source (the radial structure at the ring that first meets the edge, the azimuth midpoint rule, or both).",,derivation gap
+60,R60.3,three-dimensional shielding,The seven-circle channel geometry and the blocker test of the engine were not exercised; a planar edge stood in for them.,,derivation gap
+60,R60.4,history interpolation,The error from interpolating source history was not separated.,,derivation gap
+60,R60.5,fixed-point convergence,The retarded iteration converges at rate $v$ per step for $v<1$; its behaviour near $v\to1$ and for accelerating sources was not examined.,V,derivation gap
+61,R61.1,the registered apparatus,No registered apparatus with a native predicted signal from the same geometry exists in this chapter; the GOM13 occlusion integral and torque were not computed.,,derivation gap
+61,R61.2,the sensor,"The torsion model is a single linear oscillator; nonlinearity, thermal gradients, vibration and drift sources were not modelled.",C,derivation gap
+61,R61.3,the signal,No even-harmonic amplitude predicted by the framework was used; the harmonic amplitudes are constructed.,,
+61,R61.4,the noise,White noise only; coloured noise and correlated systematics change the standard errors.,,
+61,R61.5,publication specification,A specification needs the registered apparatus; none is claimed.,,
+62,R62.1,the labels,53 of 292 ledger rows carry no standard label token; the list is in `ch62_run3_output.txt`. A repair standardises them to the label set of Section 62.1 (a free-text label can be kept after the token).,V,
+62,R62.2,the missing ledgers,"Chapters 2, 5, 8, 9, 10, 13 and 14 have no parsable input-ledger table.",V,
+62,R62.3,"covariance, domain and downstream equations","The extracted ledger records no covariance block, domain or downstream equation per number; only whether the chapter mentions covariance.",V,
+62,R62.4,per number,Ledger rows are per quantity; some rows cover several numbers.,V,
+62,R62.5,nonlinear intervals,The propagation of the full admissible interval was illustrated for one occupancy and one square; no engine quantity was propagated.,,
+63,R63.1,keyword classification,"Classes are assigned from the records' wording by keywords; a record may carry several, and a misreading is possible; the counts are a guide to the pattern, not an audit of each failure.",V,
+63,R63.2,premises behind the rejected statements,"The withdrawn premise and the surviving consequence were named in the records, not tabulated here.",,
+63,R63.3,outputs not covered,Failed runs of instruments outside `Textbook/validation/` (the earlier investigations of the repository) are not in the manifest.,V,derivation gap
+63,R63.4,amendments,The Chapter 4 record is an amendment added after the fact; it carries a dated marker but cannot show when the failure was first understood.,,
+63,R63.5,reproduction from the original premises,The first execution of a repaired premise was not re-run from the original premises for every chapter; the captured outputs are the evidence.,,derivation gap

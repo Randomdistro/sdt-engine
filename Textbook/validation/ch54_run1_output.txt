@@ -1,0 +1,50 @@
+
+== V0 helper validation (known answers) ==
+[PASS] V0    integrate sin over [0, pi] = 2                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 3.331e-16 (tol 1e-13)
+[PASS] V0    integrate x^7 over [0, 1] = 1/8                                                value 1.250000000000e-01 expected 1.250000000000e-01 err 2.220e-15 (tol 1e-14)
+[PASS] V0    integrate exp over [-1, 1] = e - 1/e                                           value 2.350402387288e+00 expected 2.350402387288e+00 err 5.668e-16 (tol 1e-13)
+[PASS] V0    root of cos x - x = 0.739085133215161                                          value 7.390851332152e-01 expected 7.390851332152e-01 err 2.253e-15 (tol 1e-13)
+[PASS] V0    root of x^2 - 2 on [1, 2] = sqrt 2                                             value 1.414213562373e+00 expected 1.414213562373e+00 err 2.983e-15 (tol 1e-13)
+[PASS] V0    compensated sum 1 + 10^6 x 1e-16 = 1 + 1e-10                                   value 1.000000000100e+00 expected 1.000000000100e+00 err 0.000e+00 (tol 1e-15)
+
+== V1 known answers ==
+[PASS] V1    5 log10 2                                                                      value 1.505149978320e+00 expected 1.505150000000e+00 err 1.440e-08 (tol 1e-06)
+[PASS] V1    2.5 log10 2                                                                    value 7.525749891600e-01 expected 7.525750000000e-01 err 1.440e-08 (tol 1e-06)
+[PASS] V1    magnitude difference of a factor 10 in flux is 2.5                             value 2.500000000000e+00 expected 2.500000000000e+00 err 0.000e+00 (tol 1e-12)
+
+== T1 flux factors under declared conventions ==
+[PASS] T1    z = 0.1: hybrid is fainter than branch (a) by 5 log10(1+z) = 0.206963 mag      value 2.069634257911e-01 expected 2.069634257911e-01 err 1.073e-15 (tol 1e-12)
+[FAIL] T1    z = 0.1: branch (b) is brighter than (a) by 2.5 log10(1+z) = 0.103482 mag      value -1.034817128956e-01 expected 1.034817128956e-01 err 2.000e+00 (tol 1e-12)
+[PASS] T1    z = 0.5: hybrid is fainter than branch (a) by 5 log10(1+z) = 0.880456 mag      value 8.804562952784e-01 expected 8.804562952784e-01 err 3.783e-16 (tol 1e-12)
+[FAIL] T1    z = 0.5: branch (b) is brighter than (a) by 2.5 log10(1+z) = 0.440228 mag      value -4.402281476392e-01 expected 4.402281476392e-01 err 2.000e+00 (tol 1e-12)
+[PASS] T1    z = 1.0: hybrid is fainter than branch (a) by 5 log10(1+z) = 1.505150 mag      value 1.505149978320e+00 expected 1.505149978320e+00 err 0.000e+00 (tol 1e-12)
+[FAIL] T1    z = 1.0: branch (b) is brighter than (a) by 2.5 log10(1+z) = 0.752575 mag      value -7.525749891600e-01 expected 7.525749891600e-01 err 2.000e+00 (tol 1e-12)
+[PASS] T1    z = 2.0: hybrid is fainter than branch (a) by 5 log10(1+z) = 2.385606 mag      value 2.385606273598e+00 expected 2.385606273598e+00 err 1.862e-16 (tol 1e-12)
+[FAIL] T1    z = 2.0: branch (b) is brighter than (a) by 2.5 log10(1+z) = 1.192803 mag      value -1.192803136799e+00 expected 1.192803136799e+00 err 2.000e+00 (tol 1e-12)
+
+== T2 reciprocity under two declared size conventions ==
+[PASS] T2    z = 0.1: eta_A = 1/(1+z)                                                       value 9.090909090909e-01 expected 9.090909090909e-01 err 1.221e-16 (tol 1e-12)
+[PASS] T2    z = 0.1: eta_B = 1                                                             value 1.000000000000e+00 expected 1.000000000000e+00 err 0.000e+00 (tol 1e-12)
+[PASS] T2    z = 0.1: relative difference of the conventions z/(1+z) = 0.0909               value 9.090909090909e-02 expected 9.090909090909e-02 err 1.527e-15 (tol 1e-12)
+[PASS] T2    z = 0.5: eta_A = 1/(1+z)                                                       value 6.666666666667e-01 expected 6.666666666667e-01 err 0.000e+00 (tol 1e-12)
+[PASS] T2    z = 0.5: eta_B = 1                                                             value 1.000000000000e+00 expected 1.000000000000e+00 err 0.000e+00 (tol 1e-12)
+[PASS] T2    z = 0.5: relative difference of the conventions z/(1+z) = 0.3333               value 3.333333333333e-01 expected 3.333333333333e-01 err 1.665e-16 (tol 1e-12)
+[PASS] T2    z = 1.0: eta_A = 1/(1+z)                                                       value 5.000000000000e-01 expected 5.000000000000e-01 err 0.000e+00 (tol 1e-12)
+[PASS] T2    z = 1.0: eta_B = 1                                                             value 1.000000000000e+00 expected 1.000000000000e+00 err 0.000e+00 (tol 1e-12)
+[PASS] T2    z = 1.0: relative difference of the conventions z/(1+z) = 0.5000               value 5.000000000000e-01 expected 5.000000000000e-01 err 0.000e+00 (tol 1e-12)
+[PASS] T2    z = 2.0: eta_A = 1/(1+z)                                                       value 3.333333333333e-01 expected 3.333333333333e-01 err 0.000e+00 (tol 1e-12)
+[PASS] T2    z = 2.0: eta_B = 1                                                             value 1.000000000000e+00 expected 1.000000000000e+00 err 0.000e+00 (tol 1e-12)
+[PASS] T2    z = 2.0: relative difference of the conventions z/(1+z) = 0.6667               value 6.666666666667e-01 expected 6.666666666667e-01 err 1.665e-16 (tol 1e-12)
+
+== T3 a single observable can hide a hybrid; a second cannot ==
+[FAIL] T3    z = 0.1: after d' = d/(1+z) the hybrid flux equals the consistent flux         value 3.970232564632e-03 expected 4.803981403205e-03 err 1.736e-01 (tol 1e-12)
+[PASS] T3    z = 0.1: the angular size s/d' exceeds s/d by the factor 1+z                   value 1.100000000000e+00 expected 1.100000000000e+00 err 2.019e-16 (tol 1e-12)
+[FAIL] T3    z = 0.5: after d' = d/(1+z) the hybrid flux equals the consistent flux         value 1.148210863778e-03 expected 2.583474443501e-03 err 5.556e-01 (tol 1e-12)
+[PASS] T3    z = 0.5: the angular size s/d' exceeds s/d by the factor 1+z                   value 1.500000000000e+00 expected 1.500000000000e+00 err 0.000e+00 (tol 1e-12)
+[FAIL] T3    z = 1.0: after d' = d/(1+z) the hybrid flux equals the consistent flux         value 3.633010936174e-04 expected 1.453204374469e-03 err 7.500e-01 (tol 1e-12)
+[PASS] T3    z = 1.0: the angular size s/d' exceeds s/d by the factor 1+z                   value 2.000000000000e+00 expected 2.000000000000e+00 err 0.000e+00 (tol 1e-12)
+[FAIL] T3    z = 2.0: after d' = d/(1+z) the hybrid flux equals the consistent flux         value 7.176317898615e-05 expected 6.458686108753e-04 err 8.889e-01 (tol 1e-12)
+[PASS] T3    z = 2.0: the angular size s/d' exceeds s/d by the factor 1+z                   value 3.000000000000e+00 expected 3.000000000000e+00 err 0.000e+00 (tol 1e-12)
+       ln(1+z) at z = 1: 0.693147
+
+CRITERIA NOT MET: 8 failure(s)

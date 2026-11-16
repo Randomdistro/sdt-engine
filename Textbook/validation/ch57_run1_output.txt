@@ -1,0 +1,63 @@
+
+== V0 helper validation (known answers) ==
+[PASS] V0    integrate sin over [0, pi] = 2                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 3.331e-16 (tol 1e-13)
+[PASS] V0    integrate x^7 over [0, 1] = 1/8                                                value 1.250000000000e-01 expected 1.250000000000e-01 err 2.220e-15 (tol 1e-14)
+[PASS] V0    integrate exp over [-1, 1] = e - 1/e                                           value 2.350402387288e+00 expected 2.350402387288e+00 err 5.668e-16 (tol 1e-13)
+[PASS] V0    root of cos x - x = 0.739085133215161                                          value 7.390851332152e-01 expected 7.390851332152e-01 err 2.253e-15 (tol 1e-13)
+[PASS] V0    root of x^2 - 2 on [1, 2] = sqrt 2                                             value 1.414213562373e+00 expected 1.414213562373e+00 err 2.983e-15 (tol 1e-13)
+[PASS] V0    compensated sum 1 + 10^6 x 1e-16 = 1 + 1e-10                                   value 1.000000000100e+00 expected 1.000000000100e+00 err 0.000e+00 (tol 1e-15)
+
+== V1 known answers ==
+[PASS] V1    SHA-256("abc")
+[PASS] V1    SHA-256("")
+[PASS] V1    SHA-256 of the 56-character message across a block boundary
+[PASS] V1    line counter returns 3 for "a\nb\nc\n"
+
+== T1 hashes of the consumed headers ==
+       cosmology.hpp                 223 lines  874bc6d832843cf9c7b131a3eaa0bcfce9fe0548a662042d41668f2ace46b90b
+       dynamics.hpp                  340 lines  878f6b276050310e43fdf7fee48eec89ac211d2e048a719b74210c122f5027ac
+       galactic.hpp                 1516 lines  051062058c8842ce378b439e2e62118cb3e5ae695023f3fa9bef6b836d757bf0
+       lattice_structure.hpp          74 lines  12f8348a15088de709ec244f65b8a621abfc732252e0dea8f35bb103224a1e99
+       laws.hpp                     2917 lines  2154c01eb01ebab82daf8ea43f66ec842fd0e3377b098e404dcde490fec8f33e
+       magnetosphere.hpp             459 lines  c94a5bd43170234a2447d6de246503a729f30413b55374f0bcdab4fbc5c3fc87
+       materials.hpp                 188 lines  61c104da9c100ba0baf3058480e94232c2f0b8a77db10f90bc12d6de77217582
+       neutrino.hpp                  214 lines  1b288768d34c30652dcd94bea82e62290ba3dbd0bf247cd6f12269382838baf8
+       nuclear.hpp                   795 lines  606f2fdf2e86a05500d9b76d79964e652870eb401fc470da033a6c9b4ce04791
+       occlusion.hpp                 185 lines  8e6db9621ce74be18afdff699692ed93dc62f149e9f6c1874a82eea266510ed7
+       occlusion_sphere.hpp          151 lines  c47882af07b108ebc1ea36f800c1c64881a85d79cc8ec21d54b9aaeae29773e1
+       packing.hpp                   685 lines  aea1faf3521f407be38de92d0f464a8a796ee32bd3c2421952fb08ece1be1994
+       sphere_frame.hpp              217 lines  487e4bb41786658f73f4137dfd513046fb2043cf1f1f98f800305ef84892743b
+       state28d.hpp                  315 lines  552575a8abcfe8839452f9882b6a5fed0943ad7b8cb1e2b98b7e7861cef41935
+[PASS] T1    14 headers hashed
+[PASS] T1    hashing the same file twice gives the same digest
+[PASS] T1    the 14 digests are pairwise distinct
+       repository revision: 7b49eb7
+       working-tree state of Engine/include/sdt (git status --porcelain; empty = clean):
+?? Engine/include/sdt/occlusion_sphere.hpp
+?? Engine/include/sdt/sphere_frame.hpp
+       (end of working-tree listing)
+
+== T2 citations resolve ==
+       citations found: 65 ; unresolved: 0 ; laws.hpp:99 citations: 7 (not on the l_P line: 0)
+[PASS] T2    at least 25 citations are found
+[PASS] T2    every citation resolves to a non-blank line of the named header
+[PASS] T2    every laws.hpp:99 citation lands on the line defining l_P
+
+== T3 function domains ==
+       clock_rate(1.5) = -0.5 ; clock_rate(-0.1) = 1.1 ; gamma(1.1c) = -nan(ind) ; v_circ(1.2c) = -nan(ind)
+[PASS] T3    clock_rate(1.5) is negative (z > 1 is not rejected)
+[PASS] T3    clock_rate(-0.1) exceeds 1 (z < 0 is not rejected)
+[PASS] T3    gamma(1.1 c) is NaN
+[PASS] T3    v_circ(1.2 c) is NaN
+[FAIL] T3    depth_from_c_far(1.5 c, c) is NaN
+[PASS] T3    circular_speed_from_koppa(1, -1) is NaN
+       g_interior at 0.5 m = 0 ; at 2 m = 3.08218e-06 ; the uniform-density value at 0.5 m would be 7.70545e-07
+[PASS] T3    g_interior returns exactly 0 at r = 0.5 m (numerical cutoff below 1 m)
+[PASS] T3    g_interior is nonzero at r = 2 m for the same uniform-density fraction
+[PASS] T3    the value the cutoff replaces at 0.5 m is nonzero (an implementation choice, not an analytic limit)
+
+== T4 inventory of laws.hpp ==
+       laws.hpp: 2917 lines ; 19 top-level namespace names ; [[nodiscard]] occurrences 128 ; inline constexpr double constants 160
+[PASS] T4    each of the 11 principal namespaces is a top-level namespace line of laws.hpp
+
+CRITERIA NOT MET: 1 failure(s)

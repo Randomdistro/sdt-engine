@@ -1,0 +1,50 @@
+
+== V0 helper validation (known answers) ==
+[PASS] V0    integrate sin over [0, pi] = 2                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 3.331e-16 (tol 1e-13)
+[PASS] V0    integrate x^7 over [0, 1] = 1/8                                                value 1.250000000000e-01 expected 1.250000000000e-01 err 2.220e-15 (tol 1e-14)
+[PASS] V0    integrate exp over [-1, 1] = e - 1/e                                           value 2.350402387288e+00 expected 2.350402387288e+00 err 5.668e-16 (tol 1e-13)
+[PASS] V0    root of cos x - x = 0.739085133215161                                          value 7.390851332152e-01 expected 7.390851332152e-01 err 2.253e-15 (tol 1e-13)
+[PASS] V0    root of x^2 - 2 on [1, 2] = sqrt 2                                             value 1.414213562373e+00 expected 1.414213562373e+00 err 2.983e-15 (tol 1e-13)
+[PASS] V0    compensated sum 1 + 10^6 x 1e-16 = 1 + 1e-10                                   value 1.000000000100e+00 expected 1.000000000100e+00 err 0.000e+00 (tol 1e-15)
+
+== V1 polynomial division ==
+[PASS] V1    (t^2-1)/(t-1) = t+1 exactly
+[PASS] V1    (t^6-1)/(t^2-1) = t^4+t^2+1 exactly
+[PASS] V1    (t^5-1)/(t^2-1) has a non-zero remainder and is reported as inexact
+
+== V2 formula against tabulated Alexander polynomials ==
+[PASS] V2    trefoil T(2,3): t^2 - t + 1
+[PASS] V2    cinquefoil T(2,5): t^4 - t^3 + t^2 - t + 1
+[PASS] V2    T(3,4) (8_19): t^6 - t^5 + t^3 - t + 1
+
+== T1 unknot modes (1,q) ==
+[PASS] T1    Delta_{1,q} = 1 for q = 1..12
+
+== T2 the proton mode (2,3) and the engine's quoted polynomial ==
+[PASS] T2    Delta_{2,3} = [1,-1,1] and is not 1
+[PASS] T2    the polynomial quoted in the header equals Delta_{2,5}
+[PASS] T2    the polynomial quoted in the header differs from Delta_{2,3}
+       Delta_{2,3} = [1,-1,1] ; Delta_{2,5} = [1,-1,1,-1,1] ; quoted = [1,-1,1,-1,1]
+
+== T3 structure of Delta_{p,q} for coprime 2 <= p < q <= 12 ==
+[PASS] T3    all 34 coprime pairs: Delta != 1, degree (p-1)(q-1), palindromic, Delta(1) = 1, |Delta(-1)| odd
+
+== T4 crossing change connects trefoil and unknot ==
+[PASS] T4    Conway polynomial 1+z^2 of the trefoil equals Delta_{2,3}(t)/t (worst of 3)    value 4.440892098501e-16 expected 0.000000000000e+00 err 4.441e-16 (tol 1e-13)
+[PASS] T4    skein relation nabla_+ - nabla_- = z nabla_0 for (trefoil, unknot, Hopf) (worst of 3) value 2.220446049250e-16 expected 0.000000000000e+00 err 2.220e-16 (tol 1e-13)
+
+== T5 movement budget over the mode formulas ==
+[PASS] T5    budget residual (v_T^2+v_P^2)/c^2 - 1, worst over 144 modes                    value 2.220446049250e-16 expected 0.000000000000e+00 err 2.220e-16 (tol 1e-15)
+[PASS] T5    mode formulas vs closed forms, worst relative over 144 modes                   value 0.000000000000e+00 expected 0.000000000000e+00 err 0.000e+00 (tol 1e-15)
+[PASS] T5    electron (1,1): v_T = c/sqrt2                                                  value 7.071067811865e-01 expected 7.071067811865e-01 err 1.570e-16 (tol 1e-15)
+[PASS] T5    electron (1,1): v_P = c/sqrt2                                                  value 7.071067811865e-01 expected 7.071067811865e-01 err 1.570e-16 (tol 1e-15)
+[PASS] T5    proton (2,3): v_T / c = 0.632456                                               value 6.324555320337e-01 expected 6.324555320337e-01 err 0.000e+00 (tol 1e-06)
+[PASS] T5    proton (2,3): v_P / c = 0.774597                                               value 7.745966692415e-01 expected 7.745966692415e-01 err 0.000e+00 (tol 1e-06)
+       aspect ratios R/a: electron 1.000000, proton 1.224745
+
+== T6 smoothing rates of the engine ==
+[PASS] T6    omega^2_{0,n}/omega^2_{0,1} = n^2 and omega^2_{m,0}/omega^2_{1,0} = m^2 (worst relative) value 2.220446049250e-16 expected 0.000000000000e+00 err 2.220e-16 (tol 1e-14)
+[PASS] T6    omega^2_{m,n} > 0 for (m,n) != (0,0)
+[PASS] T6    omega^2_{0,0} = 0 (the uniform mode is a symmetry direction)
+
+ALL CRITERIA MET: 0 failure(s)

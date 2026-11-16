@@ -1,0 +1,69 @@
+
+== V0 helper validation (known answers) ==
+[PASS] V0    integrate sin over [0, pi] = 2                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 3.331e-16 (tol 1e-13)
+[PASS] V0    integrate x^7 over [0, 1] = 1/8                                                value 1.250000000000e-01 expected 1.250000000000e-01 err 2.220e-15 (tol 1e-14)
+[PASS] V0    integrate exp over [-1, 1] = e - 1/e                                           value 2.350402387288e+00 expected 2.350402387288e+00 err 5.668e-16 (tol 1e-13)
+[PASS] V0    root of cos x - x = 0.739085133215161                                          value 7.390851332152e-01 expected 7.390851332152e-01 err 2.253e-15 (tol 1e-13)
+[PASS] V0    root of x^2 - 2 on [1, 2] = sqrt 2                                             value 1.414213562373e+00 expected 1.414213562373e+00 err 2.983e-15 (tol 1e-13)
+[PASS] V0    compensated sum 1 + 10^6 x 1e-16 = 1 + 1e-10                                   value 1.000000000100e+00 expected 1.000000000100e+00 err 0.000e+00 (tol 1e-15)
+
+== V1 known answers ==
+[PASS] V1    SHA-256("abc")
+[PASS] V1    two-body acceleration of body 1 = c^2 varpi / r^2                              value 5.931420503671e-03 expected 5.931420503671e-03 err 1.462e-16 (tol 1e-14)
+
+== T1 replay and order ==
+       trajectory hash run 1: 53ff9020183b71f2337b3bbc69051ee94a2095e5267f4863f1124f39a186f875
+       trajectory hash run 2: 53ff9020183b71f2337b3bbc69051ee94a2095e5267f4863f1124f39a186f875
+[PASS] T1    two runs of the same declared state give the same trajectory hash
+       8 bodies, 6 random orders: worst relative difference 1.734e-16 ; components differing in at least one bit: 58 of 144
+[PASS] T1    the accelerations agree to 1e-13 relative in every order
+[PASS] T1    at least one component differs in at least one bit
+
+== T2 checkpoints and source history ==
+       uninterrupted: x = (9.619907449, -9.619907449) ; full-history resume: (9.619907449, -9.619907449) ; latest-only resume: (9.620207246, -9.620207246)
+[PASS] T2    the full-history resume equals the uninterrupted run bitwise
+       position difference of the latest-only checkpoint at step 1000: 5.996e-04
+[PASS] T2    the latest-only checkpoint differs by more than 1e-6 in position
+
+== T3 contract validator and handle routing ==
+       valid case                                   -> accepted
+[PASS] T3    valid case
+       null velocity_locus                          -> accepted
+[PASS] T3    null velocity_locus
+       radius 0                                     -> a locus needs a finite radius greater than nothing
+[PASS] T3    radius 0
+       radius NaN                                   -> a locus needs a finite radius greater than nothing
+[PASS] T3    radius NaN
+       1 body                                       -> fewer than 2 bodies
+[PASS] T3    1 body
+       65 bodies                                    -> more than 64 bodies
+[PASS] T3    65 bodies
+       integrator fixed_rk4                         -> integrator is not velocity_verlet
+[PASS] T3    integrator fixed_rk4
+       contract_version 5.0.0                       -> contract_version is not 4.0.0
+[PASS] T3    contract_version 5.0.0
+       frame.type inertial_cartesian                -> frame.type is not arena_spherical
+[PASS] T3    frame.type inertial_cartesian
+       non-finite polar angle                       -> a locus needs finite angles
+[PASS] T3    non-finite polar angle
+       a body at the arena centre                   -> a locus needs a finite radius greater than nothing
+[PASS] T3    a body at the arena centre
+       velocity_locus of magnitude 0                -> zero velocity must be null, not a vector of magnitude 0
+[PASS] T3    velocity_locus of magnitude 0
+       accepted 2 ; refused 10 ; distinct refusal reasons 8
+[PASS] T3    2 cases accepted and 10 refused
+[PASS] T3    the 10 refusals carry distinct reasons (radius 0 and radius NaN share one; at least 8 distinct)
+[PASS] T3    handle 0x2000000000000001 routes to 4.0.0
+[PASS] T3    handle 0x3fffffffffffffff routes to 4.0.0
+[PASS] T3    handle 0x4000000000000000 routes to 3.0.0
+[PASS] T3    handle 0x4000000000000001 routes to 3.0.0
+[PASS] T3    handle 0x1fffffffffffffff is refused
+
+== T4 recorded scope limitations ==
+       registration text: 14437 bytes ; contract text: 7010 bytes
+[PASS] T4    the registration records E1 (impulse clause 2.34e-9 against 1e-9) as not met
+[PASS] T4    the registration states 'no WebAssembly build' among the limits
+[PASS] T4    the contract states 'No WebAssembly build of 4.0.0 yet'
+[PASS] T4    the contract states 'Integrator `velocity_verlet` only'
+
+ALL CRITERIA MET: 0 failure(s)

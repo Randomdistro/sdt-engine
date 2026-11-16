@@ -1,0 +1,53 @@
+
+== V0 helper validation (known answers) ==
+[PASS] V0    integrate sin over [0, pi] = 2                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 3.331e-16 (tol 1e-13)
+[PASS] V0    integrate x^7 over [0, 1] = 1/8                                                value 1.250000000000e-01 expected 1.250000000000e-01 err 2.220e-15 (tol 1e-14)
+[PASS] V0    integrate exp over [-1, 1] = e - 1/e                                           value 2.350402387288e+00 expected 2.350402387288e+00 err 5.668e-16 (tol 1e-13)
+[PASS] V0    root of cos x - x = 0.739085133215161                                          value 7.390851332152e-01 expected 7.390851332152e-01 err 2.253e-15 (tol 1e-13)
+[PASS] V0    root of x^2 - 2 on [1, 2] = sqrt 2                                             value 1.414213562373e+00 expected 1.414213562373e+00 err 2.983e-15 (tol 1e-13)
+[PASS] V0    compensated sum 1 + 10^6 x 1e-16 = 1 + 1e-10                                   value 1.000000000100e+00 expected 1.000000000100e+00 err 0.000e+00 (tol 1e-15)
+
+== V1 Bessel functions, Wronskian, spherical limit ==
+[PASS] V1    I0(1) = 1.2660658777                                                           value 1.266065877752e+00 expected 1.266065877700e+00 err 4.108e-11 (tol 1e-09)
+[PASS] V1    K0(1) = 0.4210244382                                                           value 4.210244382407e-01 expected 4.210244382000e-01 err 9.669e-11 (tol 1e-09)
+[PASS] V1    I1(1) = 0.5651591040                                                           value 5.651591039925e-01 expected 5.651591040000e-01 err 1.330e-11 (tol 1e-09)
+[PASS] V1    K1(1) = 0.6019072302                                                           value 6.019072301972e-01 expected 6.019072302000e-01 err 4.595e-12 (tol 1e-09)
+[PASS] V1    Wronskian I0 K1 + I1 K0 = 1/x, worst relative                                  value 4.440892098501e-16 expected 0.000000000000e+00 err 4.441e-16 (tol 1e-12)
+[PASS] V1    disc speed^2 x R = 1 + 9/(8 y^2) at R = 200 h_R (spherical limit with its leading correction) value 1.000112552833e+00 expected 1.000112500000e+00 err 5.283e-08 (tol 1e-06)
+
+== T1 source length implied by the observed rotation curve ==
+       r =     5.25 pc : v =  370.0 km/s ; Om_eff = 2.4676e+11 m ; Om_eff/varpi_bar = 0.003
+       r =   200.00 pc : v =  140.0 km/s ; Om_eff = 1.3458e+12 m ; Om_eff/varpi_bar = 0.018
+       r =  1000.00 pc : v =  210.0 km/s ; Om_eff = 1.5141e+13 m ; Om_eff/varpi_bar = 0.198
+       r =  3000.00 pc : v =  235.0 km/s ; Om_eff = 5.6881e+13 m ; Om_eff/varpi_bar = 0.745
+       r =  5000.00 pc : v =  228.0 km/s ; Om_eff = 8.9238e+13 m ; Om_eff/varpi_bar = 1.169
+       r =  9000.00 pc : v =  230.0 km/s ; Om_eff = 1.6346e+14 m ; Om_eff/varpi_bar = 2.141
+       r = 14000.00 pc : v =  225.0 km/s ; Om_eff = 2.4333e+14 m ; Om_eff/varpi_bar = 3.187
+       r = 25000.00 pc : v =  185.0 km/s ; Om_eff = 2.9376e+14 m ; Om_eff/varpi_bar = 3.847
+       varpi_bar = M_bar x koppa_Sun = 7.636328e+13 m ; slope of ln Om_eff against ln r over 5-14 kpc (9 points) = 0.9861 ; Om_eff(8.178 kpc)/varpi_bar = 1.931
+[PASS] T1    slope over 5-14 kpc lies in [0.9, 1.1]
+
+== T2 reconstruction is an identity ==
+[PASS] T2    v_pred = c sqrt(Om_eff/r) against v, table and 200 random curves, worst relative value 2.220446049250e-16 expected 0.000000000000e+00 err 2.220e-16 (tol 1e-14)
+[PASS] T2    zk2_at = 1 at 100 radii, worst deviation                                       value 4.440892098501e-16 expected 0.000000000000e+00 err 4.441e-16 (tol 1e-14)
+
+== T3 extended-source geometry: exponential disc against the scalar enclosed value ==
+       disc/scalar-enclosed speed^2 ratio: R/h=0.5: 0.7578  R/h=1.0: 1.0519  R/h=2.2: 1.3188  R/h=5.0: 1.2474  R/h=10.0: 1.0589  R/h=20.0: 1.0118  
+       maximum ratio 1.3452 at R/h_R = 2.89
+       RECORDED REJECTION (run 1 criterion kept): the registered maximum 1.9-2.3 is not found; the computed maximum is 1.3452 at R/h_R = 2.89
+[PASS] T3    the registered statement (maximum between 1.9 and 2.3) is rejected
+[PASS] T3    the maximum lies between 1.2 and 1.5 at R/h_R between 1.5 and 3.5 (corrected result, recorded)
+[PASS] T3    ratio at R = 20 h_R within 2% of 1
+
+== T4 baryon-only exponential disc against the stored rotation curve ==
+       radius (kpc)   v_disc (km/s)   v_obs (km/s)   ratio
+          5.000          181.2          228.0     0.795
+          8.178          173.2          229.2     0.756
+         11.000          155.6          230.0     0.676
+         16.000          127.0          218.0     0.583
+         25.000           97.3          185.0     0.526
+[PASS] T4    v_disc(8.178)/229 lies in [0.7, 0.9]
+[PASS] T4    v_disc(25)/185 is below 0.6
+[PASS] T4    v_disc(25 kpc) < v_disc(8.178 kpc): the baryon-only curve declines
+
+ALL CRITERIA MET: 0 failure(s)

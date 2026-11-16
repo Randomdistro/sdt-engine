@@ -1,0 +1,48 @@
+
+== V0 helper validation (known answers) ==
+[PASS] V0    integrate sin over [0, pi] = 2                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 3.331e-16 (tol 1e-13)
+[PASS] V0    integrate x^7 over [0, 1] = 1/8                                                value 1.250000000000e-01 expected 1.250000000000e-01 err 2.220e-15 (tol 1e-14)
+[PASS] V0    integrate exp over [-1, 1] = e - 1/e                                           value 2.350402387288e+00 expected 2.350402387288e+00 err 5.668e-16 (tol 1e-13)
+[PASS] V0    root of cos x - x = 0.739085133215161                                          value 7.390851332152e-01 expected 7.390851332152e-01 err 2.253e-15 (tol 1e-13)
+[PASS] V0    root of x^2 - 2 on [1, 2] = sqrt 2                                             value 1.414213562373e+00 expected 1.414213562373e+00 err 2.983e-15 (tol 1e-13)
+[PASS] V0    compensated sum 1 + 10^6 x 1e-16 = 1 + 1e-10                                   value 1.000000000100e+00 expected 1.000000000100e+00 err 0.000e+00 (tol 1e-15)
+
+== V1 circular pair closes after one period (RK4, 4000 steps) ==
+[PASS] V1    position error after one period, relative to d                                 value 6.612492363834e-13 expected 0.000000000000e+00 err 6.612e-13 (tol 1e-06)
+       omega = 5.995849e-04 rad per SI second ; period 1.047923e+04 s (unit bridge)
+
+== T1 chain ledger (TOY relay chain, s = 0.3) ==
+[FAIL] T1    content: DeltaU - (inflow - outflow), worst over 100 counts                    value 1.326716514427e-13 expected 0.000000000000e+00 err 1.327e-13 (tol 1e-14)
+[PASS] T1    momentum with the recoil of the scatterer: residual, worst                     value 1.665334536938e-15 expected 0.000000000000e+00 err 1.665e-15 (tol 1e-14)
+[PASS] T1    momentum without the recoil: |residual| equals |recoil|, worst deviation       value 1.776356839400e-15 expected 0.000000000000e+00 err 1.776e-15 (tol 1e-14)
+[PASS] T1    the omitted recoil is not zero (sum of |recoil| over the run > 0)
+       sum of |recoil| over 100 counts: 10.969474 (units of content x hop)
+
+== T2 engine ledger: bridge kernel, two bodies of unequal source length ==
+[PASS] T2    Verlet: weighted momentum / (varpi_tot v_max), worst over 2000 steps           value 6.768716740372e-16 expected 0.000000000000e+00 err 6.769e-16 (tol 1e-12)
+[PASS] T2    Verlet: weighted angular momentum drift over one orbit                         value 4.838903141008e-15 expected 0.000000000000e+00 err 4.839e-15 (tol 1e-09)
+[PASS] T2    RK4: weighted momentum / (varpi_tot v_max), worst over 2000 steps              value 5.589809205775e-16 expected 0.000000000000e+00 err 5.590e-16 (tol 1e-12)
+[PASS] T2    RK4: weighted angular momentum drift over one orbit                            value 2.618700523369e-14 expected 0.000000000000e+00 err 2.619e-14 (tol 1e-09)
+       energy error after one orbit, N = 200/400/800: Verlet 1.623e-14 5.795e-16 1.159e-15 ; RK4 5.342e-09 1.669e-10 5.213e-12
+       observed order: Verlet 4.807, -1.000 ; RK4 5.000, 5.001
+[FAIL] T2    Verlet observed order in [1.8, 2.2]
+[FAIL] T2    RK4 observed order in [3.7, 4.3]
+
+== T3 Lagrange equilateral configuration, quarter period (RK4) ==
+[PASS] T3    side lengths vs the initial side, worst relative                               value 7.987022399902e-15 expected 0.000000000000e+00 err 7.987e-15 (tol 1e-08)
+[PASS] T3    weighted momentum / scale                                                      value 6.164841433640e-16 expected 0.000000000000e+00 err 6.165e-16 (tol 1e-12)
+
+== T4 contact: refusal of a step ==
+[PASS] T4    the engine returns `collision` at some step
+[PASS] T4    the refused step leaves the state unmodified
+[PASS] T4    the last accepted separation exceeds the contact distance 2e6 m
+       refused at step 15689 ; last accepted separation 2.069003e+06 m ; contact distance 2.000000e+06 m
+
+== T5 dipole emitter recoil ==
+       eps = 0     : net momentum flux = 0.000000000000 (L/c); eps/3 = 0.000000000000
+       eps = 0.001 : net momentum flux = 0.000333333333 (L/c); eps/3 = 0.000333333333
+       eps = 0.5   : net momentum flux = 0.166666666667 (L/c); eps/3 = 0.166666666667
+       eps = 1     : net momentum flux = 0.333333333333 (L/c); eps/3 = 0.333333333333
+[PASS] T5    net momentum flux minus eps/3, worst over 4 patterns (L/c units)               value 5.551115123126e-17 expected 0.000000000000e+00 err 5.551e-17 (tol 1e-13)
+
+CRITERIA NOT MET: 3 failure(s)

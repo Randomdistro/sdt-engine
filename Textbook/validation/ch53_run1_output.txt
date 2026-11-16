@@ -1,0 +1,70 @@
+
+== V0 helper validation (known answers) ==
+[PASS] V0    integrate sin over [0, pi] = 2                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 3.331e-16 (tol 1e-13)
+[PASS] V0    integrate x^7 over [0, 1] = 1/8                                                value 1.250000000000e-01 expected 1.250000000000e-01 err 2.220e-15 (tol 1e-14)
+[PASS] V0    integrate exp over [-1, 1] = e - 1/e                                           value 2.350402387288e+00 expected 2.350402387288e+00 err 5.668e-16 (tol 1e-13)
+[PASS] V0    root of cos x - x = 0.739085133215161                                          value 7.390851332152e-01 expected 7.390851332152e-01 err 2.253e-15 (tol 1e-13)
+[PASS] V0    root of x^2 - 2 on [1, 2] = sqrt 2                                             value 1.414213562373e+00 expected 1.414213562373e+00 err 2.983e-15 (tol 1e-13)
+[PASS] V0    compensated sum 1 + 10^6 x 1e-16 = 1 + 1e-10                                   value 1.000000000100e+00 expected 1.000000000100e+00 err 0.000e+00 (tol 1e-15)
+
+== V1 known answers ==
+[PASS] V1    int_1^1e12 chi^-3 dchi equals the truncated closed form                        value 5.000000000000e-01 expected 5.000000000000e-01 err 9.104e-15 (tol 1e-09)
+[PASS] V1    int_1^1e12 chi^-3 dchi is close to 1/2                                         value 5.000000000000e-01 expected 5.000000000000e-01 err 9.104e-15 (tol 1e-09)
+[PASS] V1    int_1^chimax chi^-1 dchi = ln chimax                                           value 1.381551055796e+01 expected 1.381551055796e+01 err 1.139e-13 (tol 1e-09)
+[PASS] V1    rotation of (0,0,3) about z by 0.7 leaves it unchanged                         value 0.000000000000e+00 expected 0.000000000000e+00 err 0.000e+00 (tol 1e-16)
+[PASS] V1    rotation about x by 0.7 displaces it by 2 s sin(alpha/2)                       value 2.057386844733e+00 expected 2.057386844733e+00 err 0.000e+00 (tol 1e-12)
+
+== T1 arrest and late displacement are separate conditions ==
+[PASS] T1    (m,p,k) = (1,3,1): quadrature equals the closed form at 1e6 and 1e12 (worst relative difference) value 9.103828801926e-15 expected 0.000000000000e+00 err 9.104e-15 (tol 1e-09)
+       v(1e6) = 1.000e-12, v(1e12) = 1.000e-24 ; D(1e6) = 0.500000, D(1e12) = 0.500000, increase 0.0000 ; k+p-m = 3.00
+[PASS] T1    (1,3,1): velocity falls with chi exactly when p > m
+[PASS] T1    (1,3,1): displacement increase below 0.5 exactly when k+p-m > 1 (above 5 otherwise)
+[PASS] T1    (m,p,k) = (1,2,1): quadrature equals the closed form at 1e6 and 1e12 (worst relative difference) value 2.442490654175e-15 expected 0.000000000000e+00 err 2.442e-15 (tol 1e-09)
+       v(1e6) = 1.000e-06, v(1e12) = 1.000e-12 ; D(1e6) = 0.999999, D(1e12) = 1.000000, increase 0.0000 ; k+p-m = 2.00
+[PASS] T1    (1,2,1): velocity falls with chi exactly when p > m
+[PASS] T1    (1,2,1): displacement increase below 0.5 exactly when k+p-m > 1 (above 5 otherwise)
+[PASS] T1    (m,p,k) = (1,1.5,1): quadrature equals the closed form at 1e6 and 1e12 (worst relative difference) value 9.325873406851e-15 expected 0.000000000000e+00 err 9.326e-15 (tol 1e-09)
+       v(1e6) = 1.000e-03, v(1e12) = 1.000e-06 ; D(1e6) = 1.998000, D(1e12) = 1.999998, increase 0.0020 ; k+p-m = 1.50
+[PASS] T1    (1,1.5,1): velocity falls with chi exactly when p > m
+[PASS] T1    (1,1.5,1): displacement increase below 0.5 exactly when k+p-m > 1 (above 5 otherwise)
+[PASS] T1    (m,p,k) = (1,1.2,1): quadrature equals the closed form at 1e6 and 1e12 (worst relative difference) value 2.109423746788e-15 expected 0.000000000000e+00 err 2.109e-15 (tol 1e-09)
+       v(1e6) = 6.310e-02, v(1e12) = 3.981e-03 ; D(1e6) = 4.684521, D(1e12) = 4.980095, increase 0.2956 ; k+p-m = 1.20
+[PASS] T1    (1,1.2,1): velocity falls with chi exactly when p > m
+[PASS] T1    (1,1.2,1): displacement increase below 0.5 exactly when k+p-m > 1 (above 5 otherwise)
+[PASS] T1    (m,p,k) = (2,2.5,0.5): quadrature equals the closed form at 1e6 and 1e12 (worst relative difference) value 1.139088823265e-13 expected 0.000000000000e+00 err 1.139e-13 (tol 1e-09)
+       v(1e6) = 1.000e-03, v(1e12) = 1.000e-06 ; D(1e6) = 13.815511, D(1e12) = 27.631021, increase 13.8155 ; k+p-m = 1.00
+[PASS] T1    (2,2.5,0.5): velocity falls with chi exactly when p > m
+[PASS] T1    (2,2.5,0.5): displacement increase below 0.5 exactly when k+p-m > 1 (above 5 otherwise)
+[PASS] T1    (m,p,k) = (2,1,1): quadrature equals the closed form at 1e6 and 1e12 (worst relative difference) value 4.551914400963e-15 expected 0.000000000000e+00 err 4.552e-15 (tol 1e-09)
+       v(1e6) = 1.000e+06, v(1e12) = 1.000e+12 ; D(1e6) = 999999.000000, D(1e12) = 999999999998.995483, increase 999998999999.9955 ; k+p-m = 0.00
+[PASS] T1    (2,1,1): velocity falls with chi exactly when p > m
+[PASS] T1    (2,1,1): displacement increase below 0.5 exactly when k+p-m > 1 (above 5 otherwise)
+[PASS] T1    (m,p,k) = (0,0,1): quadrature equals the closed form at 1e6 and 1e12 (worst relative difference) value 1.139088823265e-13 expected 0.000000000000e+00 err 1.139e-13 (tol 1e-09)
+       v(1e6) = 1.000e+00, v(1e12) = 1.000e+00 ; D(1e6) = 13.815511, D(1e12) = 27.631021, increase 13.8155 ; k+p-m = 1.00
+[PASS] T1    (0,0,1): velocity falls with chi exactly when p > m
+[PASS] T1    (0,0,1): displacement increase below 0.5 exactly when k+p-m > 1 (above 5 otherwise)
+       arrest without finite displacement: (2,2.5,0.5): D(1e6) = 13.81551, D(1e12) = 27.63102, increase 13.81551 (ln 1e6 = 13.81551)
+[PASS] T1    arrest with divergent displacement: the increase equals ln(1e6)                value 1.381551055796e+01 expected 1.381551055796e+01 err 1.139e-13 (tol 1e-09)
+
+== T2 traction can diverge while the velocity goes to zero ==
+[PASS] T2    (1,3,1): traction chi^m grows with chi exactly when m > 0
+[PASS] T2    (1,2,1): traction chi^m grows with chi exactly when m > 0
+[PASS] T2    (1,1.5,1): traction chi^m grows with chi exactly when m > 0
+[PASS] T2    (1,1.2,1): traction chi^m grows with chi exactly when m > 0
+[PASS] T2    (2,2.5,0.5): traction chi^m grows with chi exactly when m > 0
+[PASS] T2    (2,1,1): traction chi^m grows with chi exactly when m > 0
+[PASS] T2    (0,0,1): traction chi^m grows with chi exactly when m > 0
+[PASS] T2    (1,3,1) arrests (v -> 0) while the traction chi^1 grows without limit
+
+== T3 axial degeneration ==
+[PASS] T3    displacement of axis points under rotation about the axis (worst)              value 0.000000000000e+00 expected 0.000000000000e+00 err 0.000e+00 (tol 1e-16)
+[PASS] T3    displacement under rotation about a transverse axis = 2|s| sin(alpha/2) (worst relative error) value 0.000000000000e+00 expected 0.000000000000e+00 err 0.000e+00 (tol 1e-12)
+[PASS] T3    speed R phidot falls by 1e-4 as R falls from 1 to 1e-4 at fixed phidot         value 1.000000000000e-04 expected 1.000000000000e-04 err 0.000e+00 (tol 1e-12)
+       atan2(0,0) = 0.0 at rho = 0 (library convention; the angle is formally undefined)
+
+== T4 four independent checks over a parameter grid ==
+       grid of 40 models: arrest 25 ; finite displacement 25 ; bounded energy 24 ; bounded traction 24 ; all four 18
+[PASS] T4    the rules agree with the numerical classification at every grid point
+[PASS] T4    the number passing all four is less than the number passing arrest alone
+
+ALL CRITERIA MET: 0 failure(s)

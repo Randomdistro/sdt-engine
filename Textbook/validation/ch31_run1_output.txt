@@ -1,0 +1,40 @@
+
+== V0 helper validation (known answers) ==
+[PASS] V0    integrate sin over [0, pi] = 2                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 3.331e-16 (tol 1e-13)
+[PASS] V0    integrate x^7 over [0, 1] = 1/8                                                value 1.250000000000e-01 expected 1.250000000000e-01 err 2.220e-15 (tol 1e-14)
+[PASS] V0    integrate exp over [-1, 1] = e - 1/e                                           value 2.350402387288e+00 expected 2.350402387288e+00 err 5.668e-16 (tol 1e-13)
+[PASS] V0    root of cos x - x = 0.739085133215161                                          value 7.390851332152e-01 expected 7.390851332152e-01 err 2.253e-15 (tol 1e-13)
+[PASS] V0    root of x^2 - 2 on [1, 2] = sqrt 2                                             value 1.414213562373e+00 expected 1.414213562373e+00 err 2.983e-15 (tol 1e-13)
+[PASS] V0    compensated sum 1 + 10^6 x 1e-16 = 1 + 1e-10                                   value 1.000000000100e+00 expected 1.000000000100e+00 err 0.000e+00 (tol 1e-15)
+
+== V1 Morse derivatives ==
+[PASS] V1    E''(R0) = 2 D a^2 = 9                                                          value 8.999999999996e+00 expected 9.000000000000e+00 err 4.810e-13 (tol 1e-04)
+[PASS] V1    E'''(R0) = -6 D a^3 = -40.5                                                    value -4.049999973081e+01 expected -4.050000000000e+01 err 6.647e-09 (tol 1e-04)
+
+== T1 when is there a bond ==
+[PASS] T1    E = -1/R has E' > 0 on 2000 log-spaced R in [1e-3, 1e3] (no stationary point)
+[PASS] T1    with a wall at R_c = 1 the minimum is on the wall and E'(R_c) = 1 (not a restoring response)
+[PASS] T1    stationary point equals (mB/A)^(1/(m-1)), worst relative                       value 1.110223024625e-16 expected 0.000000000000e+00 err 1.110e-16 (tol 1e-10)
+[PASS] T1    D = (A/R*)(1 - 1/m), worst relative                                            value 2.220446049250e-16 expected 0.000000000000e+00 err 2.220e-16 (tol 1e-10)
+[PASS] T1    k R*^2/D = m, worst relative                                                   value 2.220446049250e-16 expected 0.000000000000e+00 err 2.220e-16 (tol 1e-10)
+[PASS] T1    E'' > 0 at every Mie stationary point (numerical curvature)
+
+== T2 isotope scaling of the small-oscillation frequency ==
+[PASS] T2    omega(H2)/omega(D2) = sqrt(mu_D2/mu_H2) for five families, worst relative      value 1.110223024625e-16 expected 0.000000000000e+00 err 1.110e-16 (tol 1e-12)
+[PASS] T2    omega(H2)/omega(HD) = sqrt(mu_HD/mu_H2), worst relative                        value 2.220446049250e-16 expected 0.000000000000e+00 err 2.220e-16 (tol 1e-12)
+       mu(H2) = 8.363110e-28 kg ; mu(HD) = 1.114897e-27 kg ; mu(D2) = 1.671792e-27 kg ; omega(H2)/omega(D2) = 1.413863
+
+== T3 three observables are absorbed exactly; a fourth discriminates ==
+       1000 triples absorbed ; 55 triples with kR*^2/D <= 1 have no Mie member
+[FAIL] T3    1000 triples: D and R* reproduced to 1e-9 and E'(R*) = 0 to 1e-9 (k reproduced to the finite-difference accuracy)
+       m = 10.0 ; Mie E''' = -279.9992 (formula -280.0000) ; Morse E''' = -134.1641 (formula -134.1641)
+[PASS] T3    Mie E''' = -k (m+4)/R* = -280                                                  value -2.799991981783e+02 expected -2.800000000000e+02 err 2.864e-06 (tol 1e-03)
+[PASS] T3    Morse E''' = -6 D (k/2D)^(3/2) = -134.16                                       value -1.341640742470e+02 expected -1.341640786500e+02 err 3.282e-08 (tol 1e-03)
+[PASS] T3    the two families with identical (R*, k, D) differ in E''' by a factor above 2
+
+== T4 pathway dependence on a TOY surface ==
+       barrier g=0: 1.000000 ; g=0.4: 0.859377 ; endpoint energies 0.000e+00 and -3.655e-22
+[PASS] T4    endpoint energy unchanged by the localised term                                value -3.655149040593e-22 expected 0.000000000000e+00 err 3.655e-22 (tol 1e-12)
+[PASS] T4    barrier lowered by at least 0.1 and at most g = 0.4
+
+CRITERIA NOT MET: 1 failure(s)

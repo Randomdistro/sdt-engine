@@ -1,0 +1,45 @@
+
+== V0 helper validation (known answers) ==
+[PASS] V0    integrate sin over [0, pi] = 2                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 3.331e-16 (tol 1e-13)
+[PASS] V0    integrate x^7 over [0, 1] = 1/8                                                value 1.250000000000e-01 expected 1.250000000000e-01 err 2.220e-15 (tol 1e-14)
+[PASS] V0    integrate exp over [-1, 1] = e - 1/e                                           value 2.350402387288e+00 expected 2.350402387288e+00 err 5.668e-16 (tol 1e-13)
+[PASS] V0    root of cos x - x = 0.739085133215161                                          value 7.390851332152e-01 expected 7.390851332152e-01 err 2.253e-15 (tol 1e-13)
+[PASS] V0    root of x^2 - 2 on [1, 2] = sqrt 2                                             value 1.414213562373e+00 expected 1.414213562373e+00 err 2.983e-15 (tol 1e-13)
+[PASS] V0    compensated sum 1 + 10^6 x 1e-16 = 1 + 1e-10                                   value 1.000000000100e+00 expected 1.000000000100e+00 err 0.000e+00 (tol 1e-15)
+
+== V1 known answers ==
+[PASS] V1    perpendicular unit loci: sqrt 2                                                value 1.414213562373e+00 expected 1.414213562373e+00 err 0.000e+00 (tol 1e-14)
+[PASS] V1    antipodal loci of radii 2 and 3: 5                                             value 5.000000000000e+00 expected 5.000000000000e+00 err 0.000e+00 (tol 1e-14)
+[PASS] V1    one direction, radii 2 and 5: 3                                                value 3.000000000000e+00 expected 3.000000000000e+00 err 0.000e+00 (tol 1e-14)
+
+== T1 stable differences ==
+       psi (stored) = 1.000000083e-09 ; naive d^2 = 0.000e+00 ; distance_to = 1.000000083e-09 ; 2 sin(psi/2) = 1.000000083e-09
+[PASS] T1    the law of cosines returns a value below 1e-17 (true value about 1e-18)
+[PASS] T1    distance_to equals 2 sin(psi_stored/2)                                         value 1.000000082740e-09 expected 1.000000082740e-09 err 0.000e+00 (tol 1e-12)
+[PASS] T1    radii differing by 1e-9 at one direction                                       value 1.000000082740e-09 expected 1.000000082740e-09 err 0.000e+00 (tol 1e-06)
+       near-antipodal: delta (stored) = 1.000000003e-07 ; engine pi - psi = 1.000000003e-07 (relative error 0.000e+00) ; haversine pi - psi = 9.884312124e-08 (relative error 1.157e-02)
+[PASS] T1    the engine's angular distance has a relative error of delta below 1e-8
+[PASS] T1    the haversine value has a relative error of delta above 1e-3
+
+== T2 resolution of the double-precision locus ==
+       one ulp in phi at 1.2345 = 2.2204e-16 rad ; distance between the neighbours at r = 1e7 m = 2.2204e-09 m
+[PASS] T2    neighbouring representable azimuths are separated by 2.0e-9 to 2.4e-9 m
+[PASS] T2    a shift of 0.4 ulp is not representable (same locus)                           value 0.000000000000e+00 expected 0.000000000000e+00 err 0.000e+00 (tol 1e-30)
+       step s = 1e-3 m at r = 1e7 m: maximum relative error over 200 azimuths 8.274e-08 ; median 8.274e-08 ; estimate eps r phi/s = 1.665e-06
+[PASS] T2    the maximum relative error is below 3e-6
+[PASS] T2    the maximum relative error is above 1e-8 (order eps r phi/s)
+
+== T3 a regular centre-crossing chart ==
+       polar-angle deviation 0.000e+00 ; minimum radius 1000.000000 m ; azimuth range 3.121593
+[PASS] T3    polar angle equals pi/2 for every point (worst deviation)                      value 0.000000000000e+00 expected 0.000000000000e+00 err 0.000e+00 (tol 1e-15)
+[PASS] T3    the radius is at least 1000 m for every point
+[PASS] T3    the azimuth range is pi - 2 atan(0.01)                                         value 3.121593320216e+00 expected 3.121593320216e+00 err 1.423e-16 (tol 1e-04)
+[PASS] T3    the origin on the line: the locus at t = 0 (radius 0) is refused
+       near the pole: acos route theta = 0.000e+00 ; atan2 route theta = 1.000e-09 (true 1e-9)
+[PASS] T3    the acos route returns theta = 0 at (1e-9, 0, 1) (error 100 per cent)          value 0.000000000000e+00 expected 0.000000000000e+00 err 0.000e+00 (tol 1e-300)
+[PASS] T3    the atan2 route returns 1e-9                                                   value 1.000000000000e-09 expected 1.000000000000e-09 err 0.000e+00 (tol 1e-12)
+       azimuth path across the cut: raw maximum step 6.2632 ; unwrapped maximum step 0.0200
+[PASS] T3    the raw sequence jumps by more than 6
+[PASS] T3    the unwrapped sequence has a maximum step below 0.1
+
+ALL CRITERIA MET: 0 failure(s)

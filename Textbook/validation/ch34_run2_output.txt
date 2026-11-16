@@ -1,0 +1,42 @@
+
+== V0 helper validation (known answers) ==
+[PASS] V0    integrate sin over [0, pi] = 2                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 3.331e-16 (tol 1e-13)
+[PASS] V0    integrate x^7 over [0, 1] = 1/8                                                value 1.250000000000e-01 expected 1.250000000000e-01 err 2.220e-15 (tol 1e-14)
+[PASS] V0    integrate exp over [-1, 1] = e - 1/e                                           value 2.350402387288e+00 expected 2.350402387288e+00 err 5.668e-16 (tol 1e-13)
+[PASS] V0    root of cos x - x = 0.739085133215161                                          value 7.390851332152e-01 expected 7.390851332152e-01 err 2.253e-15 (tol 1e-13)
+[PASS] V0    root of x^2 - 2 on [1, 2] = sqrt 2                                             value 1.414213562373e+00 expected 1.414213562373e+00 err 2.983e-15 (tol 1e-13)
+[PASS] V0    compensated sum 1 + 10^6 x 1e-16 = 1 + 1e-10                                   value 1.000000000100e+00 expected 1.000000000100e+00 err 0.000e+00 (tol 1e-15)
+
+== V1 elements from apoapsis data ==
+[PASS] V1    energy = -1/2 (a = 1)                                                          value -5.000000000000e-01 expected -5.000000000000e-01 err 0.000e+00 (tol 1e-14)
+[PASS] V1    e = sqrt(1 + 2 eps L^2) = 0.51                                                 value 5.100000000000e-01 expected 5.100000000000e-01 err 4.354e-16 (tol 1e-14)
+
+== T1 eccentric orbits: turning points, period, conservation, radial equation ==
+[PASS] T1    e=0.3: r_min = 1 - e                                                           value 6.999999999999e-01 expected 7.000000000000e-01 err 1.362e-13 (tol 1e-08)
+[PASS] T1    e=0.3: r_max = 1 + e                                                           value 1.300000000000e+00 expected 1.300000000000e+00 err 7.310e-14 (tol 1e-08)
+[PASS] T1    e=0.3: period between apoapsis passages = 2 pi (3 passages)                    value 6.283185307179e+00 expected 6.283185307180e+00 err 1.199e-13 (tol 1e-08)
+[PASS] T1    e=0.3: energy drift 1.3e-13, L drift 7.1e-14 (limit 1e-9)
+[PASS] T1    e=0.3: radial equation residual 1.2e-13 (limit 1e-7)
+[PASS] T1    e=0.6: r_min = 1 - e                                                           value 4.000000000000e-01 expected 4.000000000000e-01 err 6.412e-14 (tol 1e-08)
+[PASS] T1    e=0.6: r_max = 1 + e                                                           value 1.600000000000e+00 expected 1.600000000000e+00 err 1.690e-13 (tol 1e-08)
+[PASS] T1    e=0.6: period between apoapsis passages = 2 pi (2 passages)                    value 6.283185307180e+00 expected 6.283185307180e+00 err 1.197e-13 (tol 1e-08)
+[PASS] T1    e=0.6: energy drift 1.4e-13, L drift 3.5e-14 (limit 1e-9)
+[PASS] T1    e=0.6: radial equation residual 1.9e-13 (limit 1e-7)
+[PASS] T1    e=0.9: r_min = 1 - e                                                           value 1.000000000000e-01 expected 1.000000000000e-01 err 3.941e-14 (tol 1e-08)
+[PASS] T1    e=0.9: r_max = 1 + e                                                           value 1.900000000001e+00 expected 1.900000000000e+00 err 3.833e-13 (tol 1e-08)
+[PASS] T1    e=0.9: period between apoapsis passages = 2 pi (2 passages)                    value 6.283185307182e+00 expected 6.283185307180e+00 err 4.460e-13 (tol 1e-08)
+[PASS] T1    e=0.9: energy drift 5.0e-13, L drift 3.3e-14 (limit 1e-9)
+[PASS] T1    e=0.9: radial equation residual 6.3e-13 (limit 1e-7)
+
+== T2 apsidal motion ==
+       kappa = 0: advance per orbit = -8.260e-14 rad
+[PASS] T2    kappa = 0: advance per orbit is zero                                           value -8.260059303211e-14 expected 0.000000000000e+00 err 8.260e-14 (tol 1e-07)
+       kappa = 0.002: L^2 = 0.910000 ; advance 6.916001e-03 rad ; exact form 6.916001e-03 rad ; relative difference -9.24e-12
+[PASS] T2    kappa = 0.002: advance equals 2 pi (1/sqrt(1 - kappa/L^2) - 1)                 value 6.916001330999e-03 expected 6.916001331063e-03 err 9.243e-12 (tol 2e-04)
+
+== T3 open trajectory: periapsis and deflection ==
+       e = 1.41385996 ; p = 1.000000 ; periapsis 0.4142742392 (p/(1+e) = 0.4142742390) ; deflection 1.57129633 rad (2 arcsin(1/e) = 1.57129658) ; steps 1994043
+[PASS] T3    periapsis radius equals p/(1+e)                                                value 4.142742391725e-01 expected 4.142742390087e-01 err 3.953e-10 (tol 1e-08)
+[PASS] T3    deflection equals 2 arcsin(1/e)                                                value 1.571296326901e+00 expected 1.571296576878e+00 err 2.500e-07 (tol 1e-05)
+
+ALL CRITERIA MET: 0 failure(s)

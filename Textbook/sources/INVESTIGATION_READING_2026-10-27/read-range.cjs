@@ -1,0 +1,11 @@
+'use strict';
+const fs=require('fs'),path=require('path'),crypto=require('crypto');
+const inv=JSON.parse(fs.readFileSync(path.join(__dirname,'inventory.json'),'utf8'));
+const id=+process.argv[2],start=+(process.argv[3]||1),count=+(process.argv[4]||120);
+const r=inv.records.find(r=>r.id===id);if(!r)throw Error('Unknown source id');
+const bytes=fs.readFileSync(r.path),hash=crypto.createHash('sha256').update(bytes).digest('hex');
+if(hash!==r.sha256)throw Error('Source changed: inventory refresh required');
+const lines=bytes.toString('utf8').split('\n'),end=Math.min(lines.length,start+count-1);
+console.log(JSON.stringify({id,path:r.path,sha256:hash,total_lines:lines.length,first_line:start,last_line:end},null,2));
+console.log(lines.slice(start-1,end).map((s,i)=>`${start+i}: ${s}`).join('\n'));
+console.log(`END OF REQUESTED RANGE ${start}-${end}; ${end===lines.length?'EOF':'MORE REMAINS'}`);

@@ -1,0 +1,52 @@
+
+== V0 helper validation (known answers) ==
+[PASS] V0    integrate sin over [0, pi] = 2                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 3.331e-16 (tol 1e-13)
+[PASS] V0    integrate x^7 over [0, 1] = 1/8                                                value 1.250000000000e-01 expected 1.250000000000e-01 err 2.220e-15 (tol 1e-14)
+[PASS] V0    integrate exp over [-1, 1] = e - 1/e                                           value 2.350402387288e+00 expected 2.350402387288e+00 err 5.668e-16 (tol 1e-13)
+[PASS] V0    root of cos x - x = 0.739085133215161                                          value 7.390851332152e-01 expected 7.390851332152e-01 err 2.253e-15 (tol 1e-13)
+[PASS] V0    root of x^2 - 2 on [1, 2] = sqrt 2                                             value 1.414213562373e+00 expected 1.414213562373e+00 err 2.983e-15 (tol 1e-13)
+[PASS] V0    compensated sum 1 + 10^6 x 1e-16 = 1 + 1e-10                                   value 1.000000000100e+00 expected 1.000000000100e+00 err 0.000e+00 (tol 1e-15)
+
+== V1 void-radius routine on the simple-cubic cell ==
+[PASS] V1    simple-cubic void ratio sqrt(3) - 1                                            value 7.320508075689e-01 expected 7.320508075689e-01 err 0.000e+00 (tol 1e-14)
+[PASS] V1    nearest-neighbour distance is the sphere diameter
+
+== T1 void geometry from coordinates ==
+[PASS] T1    tetrahedral and octahedral arrangements are touching (edge 2)
+[PASS] T1    tetrahedral void ratio equals the engine constant                              value 2.247448713916e-01 expected 2.247448713916e-01 err 0.000e+00 (tol 1e-14)
+[PASS] T1    octahedral void ratio equals the engine constant                               value 4.142135623731e-01 expected 4.142135623731e-01 err 0.000e+00 (tol 1e-14)
+[PASS] T1    tetrahedral price 4 rho^3 equals the engine's                                  value 4.540768504860e-02 expected 4.540768504860e-02 err 0.000e+00 (tol 1e-14)
+[PASS] T1    octahedral price 6 rho^3 equals the engine's                                   value 4.264068711929e-01 expected 4.264068711929e-01 err 0.000e+00 (tol 1e-14)
+[PASS] T1    lower price selects coordination 4
+[PASS] T1    coordination equals W_proton + 1 (integers of different origin)
+       void ratios: tetrahedral 0.224744871392 ; octahedral 0.414213562373 ; prices 0.045407685 and 0.426406871 (ratio 9.3906)
+
+== T2 directional moments of the four tetrahedral channels ==
+[PASS] T2    M2 = 1/3 over 20000 directions, worst deviation                                value 2.775557561563e-16 expected 0.000000000000e+00 err 2.776e-16 (tol 1e-14)
+[PASS] T2    M4 channel sum equals the analytic form, worst deviation                       value 3.885780586188e-16 expected 0.000000000000e+00 err 3.886e-16 (tol 1e-14)
+[PASS] T2    M4 on an axis = 1/9                                                            value 1.111111111111e-01 expected 1.111111111111e-01 err 6.245e-16 (tol 1e-15)
+[PASS] T2    M4 on (1,1,1) = 7/27                                                           value 2.592592592593e-01 expected 2.592592592593e-01 err 6.423e-16 (tol 1e-15)
+[PASS] T2    sphere average of M4 = 1/5 (isotropic value)                                   value 2.000000000000e-01 expected 2.000000000000e-01 err 1.665e-15 (tol 1e-13)
+       M4 range [1/9, 7/27] = [0.111111, 0.259259] ; isotropic 1/5 ; (max-min)/(1/5) = 0.7407
+
+== T3 lock length: prediction printed before the stored R_p is read ==
+       PREDICTION  R_p,lock = 4 hbar/(m_p c) = 8.412356402056e-16 m = 0.841235640 fm
+[PASS] T3    engine R_p_lock equals 4 hbar/(m_p c)                                          value 8.412356402056e-16 expected 8.412356402056e-16 err 0.000e+00 (tol 1e-15)
+[PASS] T3    engine R_p_predicted equals R_p_lock                                           value 8.412356402056e-16 expected 8.412356402056e-16 err 0.000e+00 (tol 1e-15)
+       stored R_p = 8.414000e-16 m ; C_g = R_p/R_p,lock = 1.000195 ; W_eff = 3.000782
+[PASS] T3    C_g within 1% of 1                                                             value 1.000195379019e+00 expected 1.000000000000e+00 err 1.954e-04 (tol 1e-02)
+[PASS] T3    W_eff in (2.99, 3.01)
+       offset of R_p m_p c/hbar from 4: 0.00078 ; chance of landing this close to the one pre-selected integer: 0.156% ; to any integer 1..10: 0.17%
+
+== T4 wake closure and its legacy comparison ==
+[PASS] T4    engine koppa_per_baryon = l_P^2/(R_p/4)                                        value 1.241873175671e-54 expected 1.241873175671e-54 err 0.000e+00 (tol 1e-14)
+[PASS] T4    sqrt(koppa_b R_p/4) returns the stored l_P (inverse evaluation)                value 1.616255000000e-35 expected 1.616255000000e-35 err 0.000e+00 (tol 1e-14)
+[PASS] T4    koppa_b(engine)/koppa_b(legacy Compton wake) = 1/C_g                           value 9.998046591462e-01 expected 9.998046591462e-01 err 0.000e+00 (tol 1e-14)
+       koppa_b (engine) = 1.241873176e-54 m ; legacy value l_P^2 m_p c/hbar = 1.242115812e-54 m
+
+== T5 interaction-volume identity ==
+       V_int = 1.566235e-45 m^3 ; P_eff = 5.227252e+31 Pa
+[PASS] T5    P_eff V_int / (m_e c^2) = 1                                                    value 1.000000000005e+00 expected 1.000000000000e+00 err 5.178e-12 (tol 1e-09)
+[PASS] T5    alpha hbar c / (m_e c^2 r_e) = 1 (shared-input)                                value 1.000000000005e+00 expected 1.000000000000e+00 err 5.178e-12 (tol 1e-09)
+
+ALL CRITERIA MET: 0 failure(s)

@@ -1,0 +1,48 @@
+
+== V0 helper validation (known answers) ==
+[PASS] V0    integrate sin over [0, pi] = 2                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 3.331e-16 (tol 1e-13)
+[PASS] V0    integrate x^7 over [0, 1] = 1/8                                                value 1.250000000000e-01 expected 1.250000000000e-01 err 2.220e-15 (tol 1e-14)
+[PASS] V0    integrate exp over [-1, 1] = e - 1/e                                           value 2.350402387288e+00 expected 2.350402387288e+00 err 5.668e-16 (tol 1e-13)
+[PASS] V0    root of cos x - x = 0.739085133215161                                          value 7.390851332152e-01 expected 7.390851332152e-01 err 2.253e-15 (tol 1e-13)
+[PASS] V0    root of x^2 - 2 on [1, 2] = sqrt 2                                             value 1.414213562373e+00 expected 1.414213562373e+00 err 2.983e-15 (tol 1e-13)
+[PASS] V0    compensated sum 1 + 10^6 x 1e-16 = 1 + 1e-10                                   value 1.000000000100e+00 expected 1.000000000100e+00 err 0.000e+00 (tol 1e-15)
+
+== V1 known answers ==
+[PASS] V1    native Wien constant 2.897771955e-3 m K                                        value 2.897771955185e-03 expected 2.897771955000e-03 err 6.390e-11 (tol 1e-09)
+[PASS] V1    wavelength of a 1 MeV photon                                                   value 1.239841984332e-12 expected 1.239841984000e-12 err 2.678e-10 (tol 1e-06)
+
+== T1 landmark conversions ==
+       760 nm -> 3812.8578 K ; 780 nm -> 3715.0923 K ; 975 nm -> 2972.0738 K
+[PASS] T1    760 nm -> 3812.86 K                                                            value 3.812857835770e+03 expected 3.812860000000e+03 err 5.676e-07 (tol 2e-06)
+[PASS] T1    780 nm -> 3715.09 K                                                            value 3.715092250237e+03 expected 3.715090000000e+03 err 6.057e-07 (tol 2e-06)
+       engine T_release = 2970.795000 K ; T_CMB * 1090 = 2970.795000 K
+[PASS] T1    engine T_release = T_CMB * 1090                                                value 2.970795000000e+03 expected 2.970795000000e+03 err 0.000e+00 (tol 1e-12)
+       historical ratio 1090.8 -> 2972.9754 K
+[PASS] T1    historical ratio 1090.8 -> 2972.98 K                                           value 2.972975400000e+03 expected 2.972980000000e+03 err 1.547e-06 (tol 3e-06)
+[PASS] T1    drag-loading consistency T(1)/T(0.6) = 0.6                                     value 6.000006507070e-01 expected 6.000000000000e-01 err 1.085e-06 (tol 3e-06)
+       wavelength equivalent of 1844.15 K: 1571.3320 nm
+[PASS] T1    the wavelength equivalent of 1844.15 K lies in [1570, 1573] nm
+
+== T2 the landmarks are not collapsed ==
+       seven landmark temperatures from 1844.150 K to 3812.858 K ; smallest pairwise relative separation 3.033e-04 ; max/min 2.0675
+[PASS] T2    the seven landmarks are pairwise distinct at 1e-4 relative resolution
+[PASS] T2    the largest landmark exceeds the smallest by a factor of at least 2.0
+
+== T3 distance is a separate closure ==
+       log2(R_CMB/l_P) = 205.1970 ; thermal octaves CMB peak -> 760 nm = 10.4501 ; formal b/R_CMB = 3.0416e-30 K
+[PASS] T3    log2(R_CMB / l_P) lies in [205, 206]
+[PASS] T3    thermal octaves from the CMB peak to 760 nm                                    value 1.045013610486e+01 expected 1.045010000000e+01 err 3.455e-06 (tol 1e-04)
+       RECORDED REJECTION (run 1 criterion kept): the registered bound 1e-30 K was an arithmetic slip; the value is 3.0416e-30 K
+[PASS] T3    the registered statement (b / R_CMB below 1e-30 K) is rejected
+[PASS] T3    POST-RUN clause: the formal value is below 1e-29 K and below 1e-29 T_CMB
+[PASS] T3    N l_P = R_CMB (engine)                                                         value 9.527000000000e+26 expected 9.527000000000e+26 err 1.443e-16 (tol 1e-12)
+
+== T4 hard-gamma extension ==
+[PASS] T4    T_eq increases and c_epoch/c_0 decreases strictly over 1 eV ... 1e15 eV
+[PASS] T4    c_epoch/c_0 stays positive at every energy
+       1 MeV: lambda = 1.239842e-12 m ; T_eq = 2.337211e+09 K ; T0/T_eq = 1.166134e-09 ; (T0/T_eq)^2 = 1.359868e-18 ; bath energy density a T_eq^4 = 2.2576e+22 J/m^3
+[PASS] T4    1 MeV: T_eq in [2.33e9, 2.35e9] K
+[PASS] T4    1 MeV: T0/T_eq in [1.1e-9, 1.2e-9]
+[PASS] T4    1 MeV: (T0/T_eq)^2 in [1.3e-18, 1.4e-18]
+
+ALL CRITERIA MET: 0 failure(s)

@@ -1,0 +1,47 @@
+
+== V0 helper validation (known answers) ==
+[PASS] V0    integrate sin over [0, pi] = 2                                                 value 2.000000000000e+00 expected 2.000000000000e+00 err 3.331e-16 (tol 1e-13)
+[PASS] V0    integrate x^7 over [0, 1] = 1/8                                                value 1.250000000000e-01 expected 1.250000000000e-01 err 2.220e-15 (tol 1e-14)
+[PASS] V0    integrate exp over [-1, 1] = e - 1/e                                           value 2.350402387288e+00 expected 2.350402387288e+00 err 5.668e-16 (tol 1e-13)
+[PASS] V0    root of cos x - x = 0.739085133215161                                          value 7.390851332152e-01 expected 7.390851332152e-01 err 2.253e-15 (tol 1e-13)
+[PASS] V0    root of x^2 - 2 on [1, 2] = sqrt 2                                             value 1.414213562373e+00 expected 1.414213562373e+00 err 2.983e-15 (tol 1e-13)
+[PASS] V0    compensated sum 1 + 10^6 x 1e-16 = 1 + 1e-10                                   value 1.000000000100e+00 expected 1.000000000100e+00 err 0.000e+00 (tol 1e-15)
+
+== V1 known answers ==
+[PASS] V1    Simpson of exp on [0,1], n = 64                                                value 1.718281829028e+00 expected 1.718281828459e+00 err 3.311e-10 (tol 1e-09)
+[FAIL] V1    unit disc area with x < 0.3 (analytic, 96 x 4096 quadrature)                   value 2.161553001115e+00 expected 2.161670741235e+00 err 5.447e-05 (tol 1e-06)
+       analytic area = 2.161670741
+
+== T1 order estimates and where they fail ==
+       Simpson order estimate 3.99789 ; trapezoid order estimate 1.99965
+[PASS] T1    Simpson order estimate in [3.98, 4.02]
+[PASS] T1    trapezoid order estimate in [1.98, 2.02]
+       step integrand, order estimates over 8 triples: 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00
+[FAIL] T1    the step-integrand estimates have a range above 0.5 (no single order)
+       Simpson at n = 2^14..2^16 (differences at rounding level): estimate -0.939
+[PASS] T1    near cancellation the estimate misses 4 by more than 1 (or is not finite)
+
+== T2 independent quadrature controls ==
+       smooth integrand at (6,16): relative error 4.182e-10
+[PASS] T2    the smooth integrand at (6,16) has an error below 1e-7
+       shadow integrand absolute errors: E(6,16) = 4.941e-02 ; E(6,256) = 1.154e-02 ; E(96,16) = 4.589e-04 ; E(96,256) = 2.259e-04
+[PASS] T2    E(6,16) > 1e-3
+[PASS] T2    E(6,256) > 1e-5 (the radial control sets a floor)
+[FAIL] T2    E(96,16) > 1e-3 (the azimuthal control sets a floor)
+[PASS] T2    E(96,256) is below E(6,256) and below E(96,16)
+
+== T3 phase origin of the azimuth grid ==
+       N = 16: smooth spread 0.000e+00 ; shadow spread 9.187e-02
+       N = 64: smooth spread 0.000e+00 ; shadow spread 1.639e-02
+[PASS] T3    the smooth axisymmetric integral varies by less than 1e-13 with the phase
+[PASS] T3    the shadow integral's spread exceeds 1e-4 at N = 16
+[PASS] T3    the spread at N = 64 is at least 3 times smaller
+
+== T4 retardation: smooth regions and a shadow edge ==
+       smooth-only maximum force error: n = 4: 1.3778e-01 ; n = 8: 7.8585e-03 ; ratio 17.532
+       flipped visibility among 200000 samples: n = 4: 16288 ; n = 8: 995 ; ratio 16.370
+[PASS] T4    the smooth-only maximum force error falls by a factor in [12, 20] from n = 4 to n = 8
+[PASS] T4    the fraction of flipped visibilities falls by a factor in [12, 20] from n = 4 to n = 8
+[PASS] T4    a flipped sample's force error is the full force value, independent of n
+
+CRITERIA NOT MET: 3 failure(s)

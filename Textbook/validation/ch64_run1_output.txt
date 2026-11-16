@@ -1,0 +1,41 @@
+
+== V1 known answers ==
+[PASS] V1   the extractor returns (5, 1), 'a title' and 'the rest of it.'
+[PASS] V1   the mapper returns {K} for 'no contact-response operator is derived'
+[PASS] V1   the mapper returns {V} for 'the citations were not checked line by line'
+[PASS] V1   the topological sort of K, T, N, C, P returns that order
+[PASS] V1   the sort rejects a graph with a cycle
+
+== T1 completeness ==
+       chapters: 63 ; with residual ids: 63 ; without: []
+       residuals extracted: 330 ; chapters with irregular ids: []
+       chapters without the phrase 'Not established': []
+[PASS] T1   at least 61 of the 63 chapters have residual ids R(n.k)
+[PASS] T1   at least 250 residuals are extracted
+[PASS] T1   the ids are unique within each chapter (no duplicate or foreign ids)
+[PASS] T1   at least 61 chapters contain the phrase 'Not established'
+
+== T2 mapping to the closure tasks ==
+       residuals mapped to at least one task or V: 185 of 330 (0.561)
+       residuals per task: {'A': 22, 'B': 18, 'C': 33, 'K': 33, 'N': 28, 'P': 25, 'S': 12, 'V': 78, 'Z': 8}
+[FAIL] T2   at least 70 per cent of the residuals map to a task or to V
+[PASS] T2   each of the 8 closure tasks has at least 5 residuals
+
+== T3 the nature of the open items ==
+       nature counts: {'derivation gap': 181, 'data gap': 14, 'proposal': 5}
+       proposal: Ch44 R44.6 stored constants (proposal to the author, canon untouched)
+       proposal: Ch45 R45.5 engine comment (proposal to the author, canon untouched)
+       proposal: Ch49 R49.6 stored alpha binding (proposal to the author, canon untouche
+       proposal: Ch54 R54.5 stored scales (proposal to the author, canon untouched)
+       proposal: Ch57 R57.4 unguarded domains
+[PASS] T3   at least 50 per cent of residuals are derivation gaps by keyword
+[FAIL] T3   at least 10 residuals are proposals to the author and are written to ENGINE_PROPOSALS.csv
+[PASS] T3   RESIDUAL_LEDGER.csv has one line per residual
+
+== T4 the execution order ==
+       topological order: ['K', 'T', 'N', 'C', 'P']
+[PASS] T4   the graph is acyclic
+[PASS] T4   its topological order is K, T, N, C, P
+[PASS] T4   every task other than K has K as a prerequisite
+
+CRITERIA NOT MET: 2 failure(s)
